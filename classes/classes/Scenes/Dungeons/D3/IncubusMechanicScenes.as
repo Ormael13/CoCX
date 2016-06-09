@@ -631,7 +631,7 @@ package classes.Scenes.Dungeons.D3
 				outputText("\n\nThe ring is being forced down your bundled shafts. Below, your dicks remain as they are. Above, they're being merged together into one impressive tool.");
 
 				var allDemon:Boolean = false;
-				if (player.demonCocks() == player.cocks.length) allDemon = true;
+				if (player.countCocksOfType(CockTypesEnum.DEMON) == player.cocks.length) allDemon = true;
 
 				if (!allDemon) outputText(" The skin of your transforming length is darkening to a purplish hue, and in the wake of the magical cock-ring, nodules are slowly emerging, growing into an imitation of the cock you're still suckling.");
 				outputText(" The incubus chuckles, easily pushing the ring the rest of the way down, smiling at the way your demonic tip pulsates and leaks pre-cum. Once it's nestled firmly against your groin, your new master withdraws his hands (and his cock). <b>Your singular, demonic cock is impossibly hard.</b>");
@@ -641,7 +641,7 @@ package classes.Scenes.Dungeons.D3
 				//Single
 				outputText("\n\nThe incubus grabs your [cock] in his hand, holding it steady, not really intending to bring you much pleasure. His touch feels so nice that you piston your [hips] against him anyway, but he holds you firm and steady. A warm tightness, pleasant and unyielding presses down against your [cockHead], so tight that you whimper at the slight touch of pain. You crane your head for a better look, careful not to lose your mouth's grip on its leaking fixation. What you see nearly makes you swoon.");
 				//Has nondemon dick
-				if (player.demonCocks() == 0)
+				if (player.countCocksOfType(CockTypesEnum.DEMON) == 0)
 				{
 					outputText("\n\nThe gleaming ring is sliding down your length, and every inch that passes through it is turning... changing into a purple-hued monstrosity - a pale imitation of the cock currently plugging your hungry lips. It feels... surprisingly good to transform, and the sensation of your dick's nubs growing in is wonderfully divine. You blissfully sigh as the ring touches down against your crotch, <b>completing your transformation into a demon-cocked toy.</b>");
 				}

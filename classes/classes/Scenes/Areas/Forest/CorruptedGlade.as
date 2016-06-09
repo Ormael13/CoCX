@@ -232,7 +232,7 @@ package classes.Scenes.Areas.Forest {
 				}
 				//Rarely change one prick to a vine-like tentacle cock. 
 				if (rand(3) == 0 && player.cocks.length > 0 && player.hairColor == "green") {
-					if (player.tentacleCocks() < player.cockTotal()) {
+					if (player.countCocksOfType(CockTypesEnum.TENTACLE) < player.cockTotal()) {
 						if (player.cocks.length == 1) { //Single cawks
 							outputText("Your feel your " + player.cockDescript(0) + " bending and flexing of its own volition... looking down, you see it morph into a green vine-like shape.  <b>You now have a tentacle cock!</b>  ");
 							//Set primary cock flag

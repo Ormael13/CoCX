@@ -618,7 +618,7 @@ private function peepOnArian():void {
 	clearOutput();
 	outputText(images.showImage("arian-fap"));
 	outputText("Curious, you decide to take a little peek through the lock; you press yourself against it as best you can, looking through into the bedroom beyond.  True to what your ears heard, the sickly albino's health has improved enough for him to focus on more... carnal matters.  Naked from the waist down, he sits on the edge of his bed, groinal slit disgorging a single, average-sized phallus.  Maybe 6 inches long, it's a bright purple-red color, covered in strange lumps");
-	if (player.lizardCocks() > 0) outputText(" just like yours");
+	if (player.countCocksOfType(CockTypesEnum.LIZARD) > 0) outputText(" just like yours");
 	outputText(", though this isn't stopping him from enthusiastically stroking himself off.");
 	
 	outputText("\n\n\"<i>Curse my illness... curse my dreams... oh, [name]... if only you knew....</i>\"  Arian pants and moans, the distinct sound of fapping quite audible from where you are.  He whimpers softly and bites his lip, clearly nearing the brink.  \"<i>Ah! The things you do to me... the things I wish you would do to me... ah....</i>\"  He groans to himself.");

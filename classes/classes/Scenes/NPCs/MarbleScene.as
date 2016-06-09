@@ -1785,7 +1785,7 @@ private function marbleMilkSex(newpage:Boolean = true):void {
 	//(player is male, or a herm)
 	if (player.cockTotal() > 0) {
 		//[player has only human or animal dicks]
-		if (player.cockTotal() == player.horseCocks() + player.dogCocks() + player.normalCocks()) {
+		if (player.cockTotal() == player.countCocksOfType(CockTypesEnum.HORSE) + player.dogCocks() + player.countCocksOfType(CockTypesEnum.HUMAN)) {
 			outputText("Marble seems pleased at the sight of your " + player.multiCockDescriptLight() + " and she pushes you back onto her bed.  She removes her own skirt and stops for a moment at her tail.  Giggling slightly, she uses her ribbon-tied tail to brush at your " + player.multiCockDescriptLight() + " before climbing on top of you and slipping her legs to your sides.\n\n", false);
 		}
 		//[player has at least one of a different kind of dick]

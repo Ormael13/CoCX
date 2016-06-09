@@ -185,7 +185,7 @@ public function edrynBarTalk():void {
 		return;
 	}
 	else if (player.totalCocks() > 0) {
-		if (player.horseCocks() > 0) {
+		if (player.countCocksOfType(CockTypesEnum.HORSE) > 0) {
 			outputText("and the potent female scent makes you feel a bit dizzy and dazed.  ", false);
 			if (player.cocks[0].cockLength > 16) outputText("You barely register the thump of your hardening " + Appearance.cockNoun(CockTypesEnum.HORSE) + " as it smacks into the underside of the table.\n\n", false);
 			else outputText("You squirm uncomfortably, feeling constrained by your " + player.armorName + " as you surge to erectness.\n\n", false);
@@ -292,7 +292,7 @@ private function edrynOffer():void {
 	}
 	else if (player.cockTotal() > 0) {
 		//(HORSE CONT)
-		if (player.horseCocks() > 0) {
+		if (player.countCocksOfType(CockTypesEnum.HORSE) > 0) {
 			//Too bigsies
 			if (player.cockArea(x) > 300) {
 				outputText("\"<i>Wow, that's huge!  Sweetheart, you'll need to be a bit smaller if you want to play with me.  Why not go out and find something to shrink it down to something a horse like me can handle, then maybe we can play, ok?</i>\"\n\n", false);

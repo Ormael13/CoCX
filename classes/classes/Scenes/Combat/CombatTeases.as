@@ -631,7 +631,7 @@ package classes.Scenes.Combat
 					break;
 				//3 cock flash
 				case 3:
-					if (player.isTaur() && player.horseCocks() > 0) {
+					if (player.isTaur() && player.countCocksOfType(CockTypesEnum.HORSE) > 0) {
 						outputText("You let out a bestial whinny and stomp your hooves at your enemy.  They prepare for an attack, but instead you kick your front hooves off the ground, revealing the hefty horsecock hanging beneath your belly.  You let it flop around, quickly getting rigid and to its full erect length.  You buck your hips as if you were fucking a mare in heat, letting your opponent know just what's in store for them if they surrender to pleasure...", false);
 						if (player.findPerk(PerkLib.BulgeArmor) >= 0) damage += 5;
 					}
@@ -866,7 +866,7 @@ package classes.Scenes.Combat
 					break;
 				//23 RUT TEASE
 				case 23:
-					if (player.horseCocks() > 0 && player.longestHorseCockLength() >= 12) {
+					if (player.countCocksOfType(CockTypesEnum.HORSE) > 0 && player.longestHorseCockLength() >= 12) {
 						outputText("You whip out your massive horsecock, and are immediately surrounded by a massive, heady musk.  Your enemy swoons, nearly falling to her knees under your oderous assault.  Grinning, you grab her shoulders and force her to her knees.  Before she can defend herself, you slam your horsecock onto her head, running it up and down on her face, her nose acting like a sexy bump in an onahole.  You fuck her face -- literally -- for a moment before throwing her back and sheathing your cock.", false);
 					}
 					else {

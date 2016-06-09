@@ -963,7 +963,7 @@ use namespace kGAMECLASS;
 				demonCounter++;
 			if (lowerBody == 5 || lowerBody == 6)
 				demonCounter++;
-			if (demonCocks() > 0)
+			if (countCocksOfType(CockTypesEnum.DEMON) > 0)
 				demonCounter++;
 			return demonCounter;
 		}
@@ -984,7 +984,7 @@ use namespace kGAMECLASS;
 				humanCounter++;
 			if (lowerBody == 0)
 				humanCounter++;
-			if (normalCocks() == 1 && totalCocks() == 1)
+			if (countCocksOfType(CockTypesEnum.HUMAN) == 1 && totalCocks() == 1)
 				humanCounter++;
 			if (breastRows.length == 1 && skinType == 0)
 				humanCounter++;
@@ -1009,7 +1009,7 @@ use namespace kGAMECLASS;
 				minoCounter++;
 			if (cocks.length > 0 && minoCounter > 0)
 			{
-				if (horseCocks() > 0)
+				if (countCocksOfType(CockTypesEnum.HORSE) > 0)
 					minoCounter++;
 			}
 			if (vaginas.length > 0)
@@ -1215,7 +1215,7 @@ use namespace kGAMECLASS;
 				catCounter++;
 			if (lowerBody == 9)
 				catCounter++;
-			if (catCocks() > 0)
+			if (countCocksOfType(CockTypesEnum.CAT) > 0)
 				catCounter++;
 			if (breastRows.length > 1 && catCounter > 0)
 				catCounter++;
@@ -1241,7 +1241,7 @@ use namespace kGAMECLASS;
 				lizardCounter++;
 			if (lowerBody == 10)
 				lizardCounter++;
-			if (lizardCocks() > 0)
+			if (countCocksOfType(CockTypesEnum.LIZARD) > 0)
 				lizardCounter++;
 			if (horns > 0 && (hornType == 3 || hornType == 4))
 				lizardCounter++;
@@ -1280,7 +1280,7 @@ use namespace kGAMECLASS;
 				horseCounter++;
 			if (tailType == 1)
 				horseCounter++;
-			if (horseCocks() > 0)
+			if (countCocksOfType(CockTypesEnum.HORSE) > 0)
 				horseCounter++;
 			if (lowerBody == 1 || lowerBody == 4)
 				horseCounter++;
@@ -1353,7 +1353,7 @@ use namespace kGAMECLASS;
 				dragonCounter++;
 			if (tongueType == 3)
 				dragonCounter++;
-			if (dragonCocks() > 0)
+			if (countCocksOfType(CockTypesEnum.DRAGON) > 0)
 				dragonCounter++;
 			if (wingType == 10 || wingType == 11)
 				dragonCounter++;
@@ -1475,7 +1475,7 @@ use namespace kGAMECLASS;
 		public function kangaScore():Number
 		{
 			var kanga:Number = 0;
-			if (kangaCocks() > 0)
+			if (countCocksOfType(CockTypesEnum.KANGAROO) > 0)
 				kanga++;
 			if (earType == 8)
 				kanga++;
@@ -1555,7 +1555,7 @@ use namespace kGAMECLASS;
 				salamanderCounter++;
 			if (tailType == TAIL_TYPE_SALAMANDER)
 				salamanderCounter++;
-			if (lizardCocks() > 0)
+			if (countCocksOfType(CockTypesEnum.LIZARD) > 0)
 				salamanderCounter++;
 			if (findPerk(PerkLib.Lustzerker) >= 0)
 				salamanderCounter++;
@@ -1588,7 +1588,7 @@ use namespace kGAMECLASS;
 				pigCounter++;
 			if (lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED)
 				pigCounter += 2;
-			if (pigCocks() > 0)
+			if (countCocksOfType(CockTypesEnum.PIG) > 0)
 				pigCounter++;
 			return pigCounter;
 		}

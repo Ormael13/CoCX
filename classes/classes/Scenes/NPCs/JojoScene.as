@@ -1412,7 +1412,7 @@ public function jojoFollowerMeditate():void {
 				//Too thick for him
 				if (player.averageCockThickness() > 3 || (player.dogCocks() > 0 && player.averageCockThickness() > 3)) outputText("Jojo is forced to back off of your " + player.cockDescript(0) + " from time to time to come up for air, barely opening his jaw wide enough to take your girth back inside his mouth.  ");
 				//Too long for him
-				if (player.averageCockLength() > 10 || (player.horseCocks() > 0 && player.averageCockLength() > 10)) outputText("He struggles not to gag on your " + player.cockDescript(0) + "'s length, opening his throat as far as he can.  ");
+				if (player.averageCockLength() > 10 || (player.countCocksOfType(CockTypesEnum.HORSE) > 0 && player.averageCockLength() > 10)) outputText("He struggles not to gag on your " + player.cockDescript(0) + "'s length, opening his throat as far as he can.  ");
 				outputText("You rock back and forth on his face as he expertly keeps you on the edge of orgasm.  ");
 				if (player.cumQ() > 25) outputText("Your constant stream of heavy pre practically chokes the poor mouse as he edges you mercilessly, his own equipment drizzling in sympathetic lust.  ");
 				outputText("Jojo presses his paw hard into your ass, squeezing your prostate tightly as his hot muzzle dives deeply over your cock.  You feel the building tightness of your orgasm and pull him tightly against you as the pressure builds.  ");
@@ -1468,20 +1468,20 @@ public function jojoFollowerMeditate():void {
 					//Single Cock
 					if (player.cockTotal() == 1) {
 						//Horsefun!
-						if (player.horseCocks() == 1) outputText("Your " + player.cockDescript(0) + " feels a building pressure, the whole thing pulsating wildly with each of your heartbeats, most noticably the tip, which flares out wildly.  Powerful contractions wrack your sheath and " + player.cockDescript(0) + " as pre practically fountains from it.  ");
+						if (player.countCocksOfType(CockTypesEnum.HORSE) == 1) outputText("Your " + player.cockDescript(0) + " feels a building pressure, the whole thing pulsating wildly with each of your heartbeats, most noticably the tip, which flares out wildly.  Powerful contractions wrack your sheath and " + player.cockDescript(0) + " as pre practically fountains from it.  ");
 						//DogFun!
 						if (player.dogCocks() == 1) outputText("Your " + player.cockDescript(0) + " feels an intense pressure, and begins bulging out obscenely above your sheath.  The knot thickens gratuitiously, filling as it pulses with need.  Cum drips from your pointed tip as it continues to bulge wider, filling you with unbearable pressure.  ");
 						//Else
-						if (player.normalCocks() == 1) outputText("Your " + player.cockDescript(0) + " twitches, muscle contractions slowly working their way up from the base.  ");
+						if (player.countCocksOfType(CockTypesEnum.HUMAN) == 1) outputText("Your " + player.cockDescript(0) + " twitches, muscle contractions slowly working their way up from the base.  ");
 						//CUMSPLOISION
 						if (player.cumQ() < 25) outputText("Your body tenses and cums, spraying spurts of jizz over the mouse.  ");
 						if (player.cumQ() >= 25 && player.cumQ() < 250) {
-							if (player.horseCocks() == 1) outputText(" Your " + player.cockDescript(0) + " flares wildly as musky horse-cum erupts from it, splattering over Jojo.  ");
+							if (player.countCocksOfType(CockTypesEnum.HORSE) == 1) outputText(" Your " + player.cockDescript(0) + " flares wildly as musky horse-cum erupts from it, splattering over Jojo.  ");
 							if (player.dogCocks() == 1) outputText("The terrible pressure in your " + player.cockDescript(0) + " finally relents, in the form of a fountain of doggie-cum, spraying out from your " + player.cockDescript(0) + " in a steady stream that seems to last and last.  ");
 							if (player.cocks[0].cockType == CockTypesEnum.HUMAN || player.cocks[0].cockType.Index > 2) outputText("Your body tenses and cums a thick eruption far beyond what a normal human could produce.  Jojo is splattered with the stuff.  ");
 						}
 						if (player.cumQ() >= 250) {
-							if (player.horseCocks() == 1) outputText("Your " + player.cockDescript(0) + " ripples and bulges with animalistic vigor, horse-cum splattering everywhere with each contraction.  The musky animal-jizz never seems to stop pouring from your equine organ, soaking the mouse from the waist up.  ");
+							if (player.countCocksOfType(CockTypesEnum.HORSE) == 1) outputText("Your " + player.cockDescript(0) + " ripples and bulges with animalistic vigor, horse-cum splattering everywhere with each contraction.  The musky animal-jizz never seems to stop pouring from your equine organ, soaking the mouse from the waist up.  ");
 							if (player.dogCocks() == 1) outputText("Your " + player.cockDescript(0) + " suddenly releases the pressure, a constant stream of doggie-cum spouting from your " + player.cockDescript(0) + " like some kind of cum-hose.  It seems to go on endlessly, covering the mouse from the waist up with thick ribbons of doggie-spooge as your knot slowly shrinks to normal.  ");
 							if (player.cocks[0].cockType == CockTypesEnum.HUMAN || player.cocks[0].cockType.Index > 2) outputText("Your body tenses and cums a thick eruption far beyond what a normal human could produce.  Jojo is splattered with the stuff.  ");
 						}
@@ -1547,7 +1547,7 @@ public function jojoFollowerMeditate():void {
 				if (player.cockTotal() == 1) player.lib = 15;
 				if (player.vaginas.length == 1) player.lib += 10;
 				if (player.cockTotal() > 1) player.lib += 5;
-				if (player.horseCocks() > 0) player.lib += 3;
+				if (player.countCocksOfType(CockTypesEnum.HORSE) > 0) player.lib += 3;
 				if (player.dogCocks() > 0) player.lib += 2;
 				if (player.biggestLactation() >= 1) player.lib += 2;
 				monk = 0;

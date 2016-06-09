@@ -1075,7 +1075,7 @@ package classes.Scenes.Areas.Forest
 			outputText(" slowly proceeding towards your glans and swirling her tongue around it like a tootsie roll.  It isn't long before the plant woman suddenly stops and looks up at you with mischievous eyes.  She raises her eyebrows twice, and then ");
 			
 			//[If cock(s) are tentacle dicks and greater than 24 inches in length, jump to (V and D 1.2tc)]
-			if (player.tentacleCocks() > 0 && (player.tentacleCocks() == player.totalCocks() || rand(2) == 0)) {
+			if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 0 && (player.countCocksOfType(CockTypesEnum.TENTACLE) == player.totalCocks() || rand(2) == 0)) {
 				plantGirlPCWinGetTentacleBJ();
 				return;
 			}

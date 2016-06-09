@@ -1160,66 +1160,6 @@
 			return description;
 		}
 
-		//TODO Give Method a better name
-		/**
-		 * Descripes cocks, either singular ("one of"/"one of your") or each ("each of"/"each of your").
-		 * @param    i_creature Creature type, either Player or Monster
-		 * @param    i_capitalised Capitalised for start of sentence.
-		 * @param    i_singular true = "one of", false = "each"
-		 * @return    Short description of cock(s)
-		 */
-		/* No longer used - replaced by the sMultiCockDesc, SMultiCockDesc, oMultiCockDesc, OMultiCockDesc functions in Creature.as
-		public static function cockMultiDesc(i_creature:Creature, i_capitalised:Boolean, i_singular:Boolean):String
-		{
-			var description:String = "";
-			var notCapitalised:Boolean = false;
-			if (i_creature.totalCocks() > 1) {
-				if (i_singular) {
-					(i_capitalised) ? description += "O" : description += "o";
-					description += "ne of ";
-				}
-				else {
-					(i_capitalised) ? description += "E" : description += "e";
-					description += "ach of ";
-				}
-				notCapitalised = true;
-			}
-
-			(i_capitalised && !(notCapitalised)) ? description += "Y" : description += "y";
-			description += "our ";
-
-			description += cockMultiLDescriptionShort(i_creature);
-			return description;
-		}
-
-		public static function cockMultiLDescriptionShort(i_creature:Creature):String
-		{
-			var description:String = "";
-			if (i_creature.cocks.length < 1) {
-				CoC_Settings.error("<b>ERROR: NO WANGS DETECTED for cockMultiLightDesc()</b>");
-				return "<b>ERROR: NO WANGS DETECTED for cockMultiLightDesc()</b>";
-			}
-			if (i_creature.horseCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.HORSE);
-			else if (i_creature.cocks[0] == CockTypesEnum.BEE) description += cockNoun(CockTypesEnum.BEE);
-			else if (i_creature.dogCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.DOG);
-			else if (i_creature.demonCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.DEMON);
-			else if (i_creature.tentacleCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.TENTACLE);
-			else if (i_creature.catCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.CAT);
-			else if (i_creature.lizardCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.LIZARD);
-			else if (i_creature.anemoneCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.ANEMONE);
-			else if (i_creature.kangaCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.KANGAROO);
-			else if (i_creature.dragonCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.DRAGON);
-			else if (i_creature.displacerCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.DISPLACER);
-			else if (i_creature.foxCocks() == i_creature.totalCocks()) description += cockNoun(CockTypesEnum.FOX);
-			else description += cockNoun(CockTypesEnum.HUMAN);
-			//Add s if plural
-			if (i_creature.cockTotal() > 1) description += "s";
-			//Reset to normal description if singular
-			else description = player.cockDescription(i_creature, 0);
-			return description;
-		}
-		*/
-
 		/**
 		 * Describe creatures balls.
 		 * @param    i_forcedSize    Force a description of the size of the balls

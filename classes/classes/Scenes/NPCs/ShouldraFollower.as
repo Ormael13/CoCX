@@ -1451,7 +1451,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 	//20 (PC knows any spells)
 	if (player.hasSpells()) choices[choices.length] = 20;
 	//21 (PC has anemone dick)
-	if (player.anemoneCocks() > 0) choices[choices.length] = 21;
+	if (player.countCocksOfType(CockTypesEnum.ANEMONE) > 0) choices[choices.length] = 21;
 	//22 (Computer date is within a week before or after Halloween/or on Halloween whichever's easier)
 	if (isHalloween()) choices[choices.length] = 22;
 	
@@ -1466,7 +1466,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 			else if (subSelect == 1) outputText("An uncomfortable stirring in your nether regions has you stop to undo your [armor] and figure out what's the matter.  Your [cock] is wagging enthusiastically.  Shouldra's face quickly sprouts from your shoulder, \"<i>Oh look, he's happy to see you!</i>\" You pay her an irritated glance which she returns with a content snicker.  With your cock under control, you redo your [armor] and continue on your way.");
 			else if (subSelect == 2) outputText("You're distracted as you notice your [cock] snaking its way down your [leg], quickly growing larger.  You make your displeasure obvious, causing it to recoil back to its original size.  Seems as though your ghostly friend is getting restless.");
 			else if (subSelect == 3) outputText("You come to a halt as you suddenly lose control of your arms, forcing you to watch your hands dart down your [armor] to fiercely grab at your [cock].  Though you let out a growl for her to stop, it takes Shouldra a minute to return your arms to you.  She must be getting restless.");
-			else if (subSelect == 4 && player.horseCocks() == 0) outputText("There's a sudden twisting pain in your [cock], forcing you to undo your [armor] and see what's wrong.  To your dismay, a large equine dong is staring back at you, leaking profusely.  \"<i>Just testing out some new transformations, Champ,</i>\" Shouldra snickers.  You yell out again as your dick quickly turns back to normal.");
+			else if (subSelect == 4 && player.countCocksOfType(CockTypesEnum.HORSE) == 0) outputText("There's a sudden twisting pain in your [cock], forcing you to undo your [armor] and see what's wrong.  To your dismay, a large equine dong is staring back at you, leaking profusely.  \"<i>Just testing out some new transformations, Champ,</i>\" Shouldra snickers.  You yell out again as your dick quickly turns back to normal.");
 			else outputText("One of your hands begins playing with your [cock], no doubt spurred on by your paranormal passenger.  \"<i>You know, Champ, I could make you some easy gems.  Just find some know-nothing and introduce them to The Amazing Penis, capable of astounding feats like responding to any vocal coital commands!</i>\"  Playing the part of a sideshow attraction is quite the tangent to your typical daily activities.  Probably best not to think about it.");
 			break;
 		case 2:

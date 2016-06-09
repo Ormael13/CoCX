@@ -1,5 +1,6 @@
 package classes.Scenes.Places.TelAdre {
 	import classes.GlobalFlags.kFLAGS;
+	import classes.CockTypesEnum;
 
 	public class Ifris extends TelAdreAbstractContent {
 public function Ifris(){
@@ -284,25 +285,25 @@ private function ifrisDP():void {
 		outputText("Throughout the massive release, you're softly grunting, held immobile by your animalistic body's instincts as your peckers try their damnedest to impregnate your overly fit mate.  You're still cumming, but your knots are starting to deflate at last.  ", false);
 	}
 	//(Nodule growing, unholy demonocity)
-	else if (player.demonCocks() >= 2) {
+	else if (player.countCocksOfType(CockTypesEnum.DEMON) >= 2) {
 		outputText("Both your demonic cocks explode inside Ifris, the nodules along each shaft swelling out, thickening to stroke and caress your oily lover's inner walls.  A moment later, the tainted tips explode out, spurting demon-spunk into both silky tunnels.  ", false);
 		if (player.cumQ() >= 1000) outputText("She groans and moans as she's filled, her body distending to deal with the unholy amount of seed your cocks can spew.  ", false);
 		outputText("At the same time, your hands squeeze hard on her butt-cheeks and your hips start to jack-hammer against her, slamming into her as if she was a worthless piece of meat for you to impregnate.  You shiver, feeling not entirely in control of yourself, the demonic influence of your tainted members robbing you of control.  ", false);
 	}
 	//Flaring - req's 2 horsecocks!)
-	else if (player.horseCocks() >= 2) {
+	else if (player.countCocksOfType(CockTypesEnum.HORSE) >= 2) {
 		outputText("Both your equine cocks explode inside Ifris, their tips swelling outward into thick flares that plug her stuffed channels.  A moment later, the swollen tips unleash pillars of alabaster cream, painting everything above the flares white.  ", false);
 		if (player.cumQ() >= 1000) outputText("She groans and moans as she's filled, her body distending to deal with the unholy amount of seed your cocks can spew.  ", false);
 		outputText("Your hips begin to rock and thrust, and no matter what you try to do, you cannot seem to still your body, your animal instincts owning your waist as you inseminate your seductive, teasing lover's body.  ", false);
 	}
 	//(Tentacle pistoning + head-mushrooming)
-	else if (player.tentacleCocks() >= 2) {
+	else if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 2) {
 		outputText("Both your plant-like pricks explode inside Ifris, the purplish tips swelling up inside her to disproportionate sizes.  A moment later, the vine-dicks explode out twin pillars of ropey seed, painting her inner walls with spunk.  ", false);
 		if (player.cumQ() >= 1000) outputText("She groans and moans as she's filled, her body distending to deal with the unholy amount of seed your cocks can spew.  ", false);
 		outputText("At the same time, both tentacle-shafts curl and piston, winding around in other in the space between your bodies, curling and thrusting to rub every inch of your sensitive, prehensile shafts against Ifris' pussy-walls.  You shake and shudder, feeling more like a tentacle beast than a " + player.mf("man","woman") + ".  ", false);
 	}
 	//(Anemone - stinging funtimes)
-	else if (player.anemoneCocks() >= 2) {
+	else if (player.countCocksOfType(CockTypesEnum.ANEMONE) >= 2) {
 		outputText("Both your unusual, aquatic cocks explode inside Ifris, their shafts thickening as the prepare for release.  A moment later, they explode out twin pillars of alabaster cum, painting her inner walls with gooey spunk.  ", false);
 		if (player.cumQ() >= 1000) outputText("She groans and moans as she's filled, her body distending to deal with the unholy amount of seed your cocks can spew.  ", false);
 		outputText("At the same time, your stinging cilia go wild, pricking her inside and out, uncontrollably forcing aphrodisiacs into your partner's shuddering, orgasmic body.  The drugs force her to climb to whole new plateaus of pleasure, making her squeal with unrepentant pleasure.  You convulse and get off even more forcefully from using your strange members in such a way.  ", false);

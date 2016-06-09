@@ -6,6 +6,7 @@ package classes.Scenes.Dungeons.D3
 	import classes.PerkLib;
 	import classes.Items.WeaponLib;
 	import classes.PregnancyStore;
+	import classes.CockTypesEnum;
 	
 	public class MinotaurKingScenes extends BaseContent
 	{
@@ -87,7 +88,7 @@ package classes.Scenes.Dungeons.D3
 			clearOutput();
 			outputText("With a dick that big and that hard at your disposal... you could do something that some might consider crazy, something with enough erotic potential that it makes your [cocks] even harder than the fuck-scent in the air and the nude, well-endowed figures before you.");
 			outputText("\n\nThe wildly flaring tip of the Minotaur King’s dick is neatly adorned with a nice, big cumslit, one that’s spread wide by pre-cum even now. It’s big enough to be a pussy. Bigger than some goblins’ pussies, you bet, and twice as wet looking. The three medial rings that stud the length between sheath and tip would make great grips for your hands, the better to hold onto while you literally fuck the exotic minotaur-dick. You briefly wonder if those extra rings make such cocks even more pleasurable to ride than");
-			if (player.horseCocks() > 0)
+			if (player.countCocksOfType(CockTypesEnum.HORSE) > 0)
 			{
 				outputText(" a horse-dick like yours");
 			}
@@ -206,7 +207,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				outputText(" Your knot balloons.");
 			}
-			else if (player.horseCocks() > 0)
+			else if (player.countCocksOfType(CockTypesEnum.HORSE) > 0)
 			{
 				outputText(" Your flare expands right on cue, matching the one pressing back against your tongue.");
 			}

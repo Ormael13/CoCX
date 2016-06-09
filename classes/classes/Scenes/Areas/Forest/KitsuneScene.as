@@ -284,7 +284,7 @@ package classes.Scenes.Areas.Forest
 			kitsuneSprite();
 			outputText("\"<i>We hope you enjoyed the feast we prepared,</i>\" says the one with jet-black hair, as she and her sisters crowd around you in the water, fully nude.  \"<i>Now, it's </i>our<i> turn.</i>\"\n\n");
 			outputText("\"<i>Just relax,</i>\" the redhead whispers into your ear in a warm tone that seems to demolish any vestige of resistance.  \"<i>We'll take care of everything...</i>\"  Up to your waist in the warm water of the hot springs, you can't help but surrender to their will, your worries flowing out of you.  Enveloped on all sides by their unearthly warm flesh, you lean into their arms and sigh blissfully as every touch and caress sends shivers down your spine.\n\n");
-			if (player.tentacleCocks() >= 3) {
+			if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 3) {
 				doNext(tentacleKitsuneWingWangs);
 			}
 			else {
@@ -1076,7 +1076,7 @@ package classes.Scenes.Areas.Forest
 			if (player.hasCock())
 				button = kitsuneButton(button, "Tailjob", tailJobKitsuneWin);
 			//[Tentacles] - requires 3+ tentacles of 30" or longer
-			if (player.tentacleCocks() >= 3)
+			if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 3)
 				button = kitsuneButton(button, "Tentacles...", kitsunesGetBonedBy3PlusTentacles);
 			//Blonde-exclusive
 			if (monster.hairColor == "blonde") {
@@ -1399,7 +1399,7 @@ package classes.Scenes.Areas.Forest
 
 			outputText("Softly, you begin to stroke the fine hairs at the base of her six luxurious tails, chuckling as the pink tone on her cheeks deepens to an intense crimson.  The fur on her tails stands on end with the lightest brush of your fingertips, and small tears well up at the corners of her eyes, her breath becoming labored and quick.  Once she has been satisfactorily reduced to a trembling heap of arousal from your insistent petting, you pull back to strip out of your " + player.armorName + ", working slowly and teasingly to give the coy trickster a taste of her own medicine.\n\n");
 
-			outputText("As your " + num2Text(player.tentacleCocks()) + " writhing tentacles twist free of the confines of your " + player.armorName + ", the kitsune's eyes open wide with desire, her jaw hanging slack and her tongue lolling out of her mouth.  A trail of drool slides down her chin as she hungrily gawks at your slithering tendrils, leaning forward to crawl on her hands and knees toward you.\n\n");
+			outputText("As your " + num2Text(player.countCocksOfType(CockTypesEnum.TENTACLE)) + " writhing tentacles twist free of the confines of your " + player.armorName + ", the kitsune's eyes open wide with desire, her jaw hanging slack and her tongue lolling out of her mouth.  A trail of drool slides down her chin as she hungrily gawks at your slithering tendrils, leaning forward to crawl on her hands and knees toward you.\n\n");
 
 			outputText("\"<i>Tentacles...</i>\" she whispers in an almost reverent tone, reaching up to grasp the largest of them, squeezing it tenderly.  Before you know it, she has her face buried in your crotch, eyes closed and humming happily as her hands glide up and down your wriggling, plantlike shafts.\n\n");
 

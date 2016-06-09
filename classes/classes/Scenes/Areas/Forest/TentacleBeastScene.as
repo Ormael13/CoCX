@@ -245,7 +245,7 @@ internal function tentacleLossRape():void {
 		}
 	}
 	//Horsecock surprise!
-	if (player.horseCocks() > 0 && player.cocks[0].cockLength > 15 && player.cocks[0].cockThickness >= 3) 
+	if (player.countCocksOfType(CockTypesEnum.HORSE) > 0 && player.cocks[0].cockLength > 15 && player.cocks[0].cockThickness >= 3) 
 	{
 		if (player.cor < 75 && player.lust < 100) outputText("It grabs you before you can get away!\n\nWhile you attempt to resist the abomination, its raw muscle mass is too much. ", false);
 		outputText("It pins you to the ground easily. You immediately feel a sharp, horrible pain at the base of your cock. You look down to see the end of a thorny tendril impaled in your pelvic region. Fiery pain courses through your veins as you feel the creature inject you with some sort of liquid. As the pain sears through you, your monstrous equine member immediately becomes fully erect and pre-cum flows freely from your flare.\n\n", false);

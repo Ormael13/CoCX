@@ -1499,7 +1499,7 @@ private function comfortUrtaAfterTellinTruuf():void {
 	outputText("You let Urta know that you understand.  After all, in a world like this monogamy is next to impossible.  There's no shame in what she did with Edryn or your relationship with Marble.  The two of you share a heartfelt hug and resolve to continue your relationship.", false);
 	//(If PC has Edryn (<3) & fits her req's)
 	if (((player.isTaur() && player.totalCocks() > 0) ||
-		player.horseCocks() > 0 ||
+		player.countCocksOfType(CockTypesEnum.HORSE) > 0 ||
 		(player.totalCocks() > 0 && player.cor > 50)) &&
 	  	player.statusEffectv1(StatusEffects.Edryn) >= 4)
 		outputText("  Urta even suggests that the two of you take turns at Edryn sometime.", false);

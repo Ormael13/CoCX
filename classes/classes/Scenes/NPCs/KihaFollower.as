@@ -1017,7 +1017,7 @@ private function kihaSexMenu(display:Boolean = true, allowBack:Boolean = true):v
 			incu = giveKihaIncubusDraft;
 		}
 		else if (display) outputText("\nIf you had an incubi draft, you could have her grow a dick for you to take in the ass, at least for a while.");
-		if (player.tentacleCocks() > 1)
+		if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 1)
 			tent = fuckKihaWithATentacle;
 		//Req: Cock
 		if (player.hasCock()) {
@@ -1062,7 +1062,7 @@ private function boneTheShitOutofKihaHolesWithHorsecock():void {
 	var x:Number = -1;
 	var y:Number = -1;
 	//Find appropriately large horsecock
-	if (player.horseCocks() > 0) {
+	if (player.countCocksOfType(CockTypesEnum.HORSE) > 0) {
 		temp = player.cockTotal();
 		while(temp > 0) {
 			temp--;
@@ -1617,7 +1617,7 @@ private function fuckKihaWithATentacle():void {
 	outputText("You smile warmly and undress yourself, eying your fiery companion with desire and fondness. Kiha doesn't understand at first; she stands there suspiciously as you remove your [armor]: \"<i>Huh? What are you doing, [name]? Is it one of your petty tricks?</i>\"");
 	if (silly()) outputText("  You whisper slowly, \"<i>Shhhh... no tears now.  Only dreams... and tentacles.</i>\"");
 	outputText("  You shake your head, still grinning; a few seconds later, your vegetal-like junk is fully exposed, its long and enormous tentacles wriggling around as they taste the cold air after being contained for too long in your narrow clothing. Kiha appears to be stunned by your abundant and flourishing genitalia.  \"<i>W-what is THAT? What do you think you're going to do with that, [name]? I dare you to approach me with ");
-	if (player.tentacleCocks() > 1) outputText("those monstrous things");
+	if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 1) outputText("those monstrous things");
 	else outputText("that monstrous thing");
 	outputText(".  I fucking dare you!</i>\"");
 	outputText("[pg]Sighing in disappointment, you patiently explain that you want to share a 'special' experience with her. You say you want to please her with your tentacle dicks; you say you thought she would be aroused by the sight of such versitale, talented cocks.");

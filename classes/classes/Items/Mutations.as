@@ -495,7 +495,7 @@
 			}
 			//SEXUAL
 			//Boosts ball size MORE than equinum :D:D:D:D:D:D:
-			if (changes < changeLimit && rand(2) == 0 && player.ballSize <= 5 && player.horseCocks() > 0) {
+			if (changes < changeLimit && rand(2) == 0 && player.ballSize <= 5 && player.countCocksOfType(CockTypesEnum.HORSE) > 0) {
 				//Chance of ball growth if not 3" yet
 				if (player.balls == 0) {
 					player.balls = 2;
@@ -684,7 +684,7 @@
 					player.increaseCock(selectedCockValue, 4);
 					dynStats("lib", 5, "sen", 4, "lus", 35);
 					outputText("<b>  You now have a");
-					if (player.horseCocks() > 1) outputText("nother")
+					if (player.countCocksOfType(CockTypesEnum.HORSE) > 1) outputText("nother")
 					outputText(" horse-penis.</b>", false);
 					changes++;
 				}
@@ -879,7 +879,7 @@
 						//If player has dicks check for horsedicks
 						if (player.cockTotal() > 0) {
 							//If player has horsedicks
-							if (player.horseCocks() > 0) {
+							if (player.countCocksOfType(CockTypesEnum.HORSE) > 0) {
 								outputText("\n\nSoon after you drink the Equinum, a burning sensation fills your chest. You have consumed too much of the potion, and the overdose starts to provoke dramatic changes in your body.  You collapse suddenly, twitching in pain as all the bones and muscles in your body break and reform. Eventually, you pass out from the strain you are put through.\n\nYou wake up after a few minutes. Once you get up on your legs, doubt fills your mind. You rush to a nearby pond and look down, nearly jumping when the reflection of a ", false);
 								if (player.gender == 0 || player.gender == 3) outputText("horse ", false);
 								if (player.gender == 1) outputText("stallion ", false);
@@ -1000,7 +1000,7 @@
 			//MALENESS.
 			if ((player.gender == 1 || player.gender == 3) && rand(1.5) == 0 && changes < changeLimit) {
 				//If cocks that aren't horsified!
-				if ((player.horseCocks() + player.demonCocks()) < player.cocks.length) {
+				if ((player.countCocksOfType(CockTypesEnum.HORSE) + player.countCocksOfType(CockTypesEnum.DEMON)) < player.cocks.length) {
 					//Transform a cock and store it's index value to talk about it.
 					//Single cock
 					if (player.cocks.length == 1) {
@@ -1047,7 +1047,7 @@
 							outputText("FUKKKK ERROR NO COCK XFORMED", true);
 						}
 						//Already have a sheath
-						if (player.horseCocks() > 1 || player.dogCocks() > 0) outputText("  Your sheath tingles and begins growing larger as the cock's base shifts to lie inside it.", false);
+						if (player.countCocksOfType(CockTypesEnum.HORSE) > 1 || player.dogCocks() > 0) outputText("  Your sheath tingles and begins growing larger as the cock's base shifts to lie inside it.", false);
 						else outputText("  You feel a tightness near the base where your skin seems to be bunching up.  A sheath begins forming around your " + player.cockDescript(temp) + "'s root, tightening and pulling your " + player.cockDescript(temp) + " inside its depths.", false);
 						temp2 = player.increaseCock(temp, rand(4) + 4);
 						outputText("  The shaft suddenly explodes with movement, growing longer and developing a thick flared head leaking steady stream of animal-cum.", false);
@@ -1092,7 +1092,7 @@
 					changes++;
 				}
 				//Chance of thickness + daydream
-				if (rand(2) == 0 && changes < changeLimit && player.horseCocks() > 0) {
+				if (rand(2) == 0 && changes < changeLimit && player.countCocksOfType(CockTypesEnum.HORSE) > 0) {
 					temp3 = 0;
 					temp2 = player.cocks.length;
 					while (temp2 > 0) {
@@ -1116,7 +1116,7 @@
 					dynStats("lib", .5, "lus", 10);
 				}
 				//Chance of ball growth if not 3" yet
-				if (rand(2) == 0 && changes < changeLimit && player.ballSize <= 3 && player.horseCocks() > 0) {
+				if (rand(2) == 0 && changes < changeLimit && player.ballSize <= 3 && player.countCocksOfType(CockTypesEnum.HORSE) > 0) {
 					if (player.balls == 0) {
 						player.balls = 2;
 						player.ballSize = 1;
@@ -4823,7 +4823,7 @@
 			//Libido gain
 			if (player.lib < 80 && changes < changeLimit && rand(4) == 0) {
 				//Cat dicked folks
-				if (player.catCocks() > 0) {
+				if (player.countCocksOfType(CockTypesEnum.CAT) > 0) {
 					temp = player.findFirstCockType(CockTypesEnum.CAT);
 					outputText("\n\nYou feel your " + player.cockDescript(temp) + " growing hard, the barbs becoming more sensitive. You gently run your hands down them and imagine the feeling of raking the insides of a cunt as you pull.  The fantasy continues, and after ejaculating and hearing the female yowl with pleasure, you shake your head and try to drive off the image.  ", false);
 					if (player.cor < 33) outputText("You need to control yourself better.", false);
@@ -4902,7 +4902,7 @@
 				if (temp3 > 0) changes++;
 			}
 			//Cat dangly-doo.
-			if (player.cockTotal() > 0 && player.catCocks() < player.cockTotal() && (player.earType == EARS_CAT || rand(3) > 0) && (player.tailType == TAIL_TYPE_CAT || rand(3) > 0) && changes < changeLimit && rand(4) == 0) {
+			if (player.cockTotal() > 0 && player.countCocksOfType(CockTypesEnum.CAT) < player.cockTotal() && (player.earType == EARS_CAT || rand(3) > 0) && (player.tailType == TAIL_TYPE_CAT || rand(3) > 0) && changes < changeLimit && rand(4) == 0) {
 				//loop through and find a non-cat wang.
 				for (var i:Number = 0; i < (player.cockTotal()) && player.cocks[i].cockType == CockTypesEnum.CAT; i++) { }
 				outputText("\n\nYour " + player.cockDescript(i) + " swells up with near-painful arousal and begins to transform.  It turns pink and begins to narrow until the tip is barely wide enough to accommodate your urethra.  Barbs begin to sprout from its flesh, if you can call the small, fleshy nubs barbs. They start out thick around the base of your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " and shrink towards the tip. The smallest are barely visible. <b>Your new feline dong throbs powerfully</b> and spurts a few droplets of cum.  ", false);
@@ -4916,7 +4916,7 @@
 				changes++;
 			}
 			//Cat penorz shrink
-			if (player.catCocks() > 0 && rand(3) == 0 && changes < changeLimit && !flags[kFLAGS.HYPER_HAPPY]) {
+			if (player.countCocksOfType(CockTypesEnum.CAT) > 0 && rand(3) == 0 && changes < changeLimit && !flags[kFLAGS.HYPER_HAPPY]) {
 				//loop through and find a cat wang.
 				temp = 0;
 				for (var j:Number = 0; j < (player.cockTotal()); j++) {
@@ -5121,7 +5121,7 @@
 
 			//Sexual Changes:
 			//-Lizard dick - first one
-			if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
+			if (player.countCocksOfType(CockTypesEnum.LIZARD) == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
 				//Find the first non-lizzy dick
 				for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
 					//Stop loopahn when dick be found
@@ -5150,7 +5150,7 @@
 			}
 			//(CHANGE OTHER DICK)
 			//Requires 1 lizard cock, multiple cocks
-			if (player.cockTotal() > 1 && player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
+			if (player.cockTotal() > 1 && player.countCocksOfType(CockTypesEnum.LIZARD) > 0 && player.cockTotal() > player.countCocksOfType(CockTypesEnum.LIZARD) && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nA familiar tingle starts in your crotch, and before you can miss the show, you pull open your " + player.armorName + ".  As if operating on a cue, ", false);
 				for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
 					//Stop loopahn when dick be found
@@ -5173,7 +5173,7 @@
 				dynStats("lib", 3, "lus", 10);
 			}
 			//-Grows second lizard dick if only 1 dick
-			if (player.lizardCocks() == 1 && player.cocks.length == 1 && rand(4) == 0 && changes < changeLimit) {
+			if (player.countCocksOfType(CockTypesEnum.LIZARD) == 1 && player.cocks.length == 1 && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nA knot of pressure forms in your groin, forcing you off your " + player.feet() + " as you try to endure it.  You examine the affected area and see a lump starting to bulge under your " + player.skinDesc + ", adjacent to your " + player.cockDescript(0) + ".  The flesh darkens, turning purple", false);
 				if (player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_SCALES)
 					outputText(" and shedding " + player.skinDesc, false);
@@ -5188,7 +5188,7 @@
 			}
 			//--Worms leave if 100% lizard dicks?
 			//Require mammals?
-			if (player.lizardCocks() == player.cockTotal() && changes < changeLimit && player.findStatusEffect(StatusEffects.Infested) >= 0) {
+			if (player.countCocksOfType(CockTypesEnum.LIZARD) == player.cockTotal() && changes < changeLimit && player.findStatusEffect(StatusEffects.Infested) >= 0) {
 				outputText("\n\nLike rats from a sinking ship, worms escape from your body in a steady stream.  Surprisingly, the sensation is remarkably pleasant, similar to the pleasure of sexual release in a way.  Though they seem inexhaustible, the tiny, cum-slimed invertebrates slow to a trickle.  The larger worm-kin inside you stirs as if disturbed from a nap, coming loose from whatever moorings it had attached itself to in the interior of your form.  It slowly works its way up your urethra, stretching to an almost painful degree with every lurching motion.  Your dick bloats out around the base, stretched like the ovipositor on a bee-girl in order to handle the parasitic creature, but thankfully, the ordeal is a brief one.", false);
 				if (player.balls > 1) outputText("  The remaining " + num2Text(player.balls - 1) + " slither out the pre-stretched holes with ease, though the last one hangs from your tip for a moment before dropping to the ground.", false);
 				outputText("  The white creature joins its kin on the ground and slowly slithers away.  Perhaps they prefer mammals? In any event, <b>you are no longer infected with worms</b>.", false);
@@ -5506,7 +5506,7 @@
 			}
 			//Sexual Changes:
 			//-Lizard dick - first one
-			if (player.lizardCocks() == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
+			if (player.countCocksOfType(CockTypesEnum.LIZARD) == 0 && player.cockTotal() > 0 && changes < changeLimit && rand(4) == 0) {
 				//Find the first non-lizzy dick
 				for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
 					//Stop loopahn when dick be found
@@ -5535,7 +5535,7 @@
 			}
 			//(CHANGE OTHER DICK)
 			//Requires 1 lizard cock, multiple cocks
-			if (player.cockTotal() > 1 && player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
+			if (player.cockTotal() > 1 && player.countCocksOfType(CockTypesEnum.LIZARD) > 0 && player.cockTotal() > player.countCocksOfType(CockTypesEnum.LIZARD) && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nA familiar tingle starts in your crotch, and before you can miss the show, you pull open your " + player.armorName + ".  As if operating on a cue, ", false);
 				for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
 					//Stop loopahn when dick be found
@@ -6512,7 +6512,7 @@
 					changes++;
 				}
 				//COCK TF!
-				if (player.kangaCocks() < player.cockTotal() && (type == 1 && rand(2) == 0) && changes < changeLimit) {
+				if (player.countCocksOfType(CockTypesEnum.KANGAROO) < player.cockTotal() && (type == 1 && rand(2) == 0) && changes < changeLimit) {
 					outputText("\n\nYou feel a sharp pinch at the end of your penis and whip down your clothes to check.  Before your eyes, the tip of it collapses into a narrow point and the shaft begins to tighten behind it, assuming a conical shape before it retracts into ", false);
 					if (player.hasSheath()) outputText("your sheath", false);
 					else outputText("a sheath that forms at the base of it", false);

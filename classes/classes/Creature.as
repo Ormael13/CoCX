@@ -1817,22 +1817,6 @@ package classes
 			return counter;
 		}
 		
-		public function anemoneCocks():int { //How many anemonecocks?
-			return countCocksOfType(CockTypesEnum.ANEMONE);
-		}
-		
-		public function catCocks():int { //How many catcocks?
-			return countCocksOfType(CockTypesEnum.CAT);
-		}
-		
-		public function demonCocks():int { //How many demoncocks?
-			return countCocksOfType(CockTypesEnum.DEMON);
-		}
-		
-		public function displacerCocks():int { //How many displacerCocks?
-			return countCocksOfType(CockTypesEnum.DISPLACER);
-		}
-		
 		// Note: DogCocks/FoxCocks are functionally identical. They actually change back and forth depending on some
 		// of the PC's attributes, and this is recaluculated every hour spent at camp.
 		// As such, delineating between the two is kind of silly.
@@ -1843,38 +1827,6 @@ package classes
 				if (cocks[x].cockType == CockTypesEnum.DOG || cocks[x].cockType == CockTypesEnum.FOX) counter++;
 			}
 			return counter;
-		}
-		
-		public function dragonCocks():int { //How many dragonCocks?
-			return countCocksOfType(CockTypesEnum.DRAGON);
-		}
-		
-		public function foxCocks():int { //How many foxCocks
-			return dogCocks();
-		}
-		
-		public function horseCocks():int { //How many horsecocks?
-			return countCocksOfType(CockTypesEnum.HORSE);
-		}
-		
-		public function kangaCocks():int { //How many kangawangs?
-			return countCocksOfType(CockTypesEnum.KANGAROO);
-		}
-		
-		public function lizardCocks():int { //How many lizard/snake-cocks?
-			return countCocksOfType(CockTypesEnum.LIZARD);
-		}
-		
-		public function pigCocks():int { //How many lizard/snake-cocks?
-			return countCocksOfType(CockTypesEnum.PIG);
-		}
-		
-		public function normalCocks():int { //How many normalCocks?
-			return countCocksOfType(CockTypesEnum.HUMAN);
-		}
-		
-		public function tentacleCocks():int { //How many tentaclecocks?
-			return countCocksOfType(CockTypesEnum.TENTACLE);
 		}
 		
 		public function findFirstCockType(ctype:CockTypesEnum):Number

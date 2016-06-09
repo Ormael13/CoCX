@@ -1569,7 +1569,7 @@ package classes.Scenes.NPCs
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Gain Dragon Dick
-			if (changes < changeLimit && player.dragonCocks() < player.totalCocks() && rand(3) == 0) {
+			if (changes < changeLimit && player.countCocksOfType(CockTypesEnum.DRAGON) < player.totalCocks() && rand(3) == 0) {
 				temp = 0;
 				var choices:Array = [];
 				var select:int;

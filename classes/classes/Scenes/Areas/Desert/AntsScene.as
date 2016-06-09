@@ -547,9 +547,9 @@ package classes.Scenes.Areas.Desert
 				if (player.cockTotal() > 1) outputText("\n\nOverwhelmed by the sight of ONE of your members, Phylla arguably goes catatonic when she sees all of what your packing.  She probably won't be able to handle the one, let alone all of your " + player.multiCockDescriptLight() + "!");
 				//Tentacle dick check for Dick Size Huge and Massive
 				//One penis longer than 8 feet, or two or more dicks that are 5 feet long:
-				if (player.tentacleCocks() > 0) {
+				if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 0) {
 					outputText("\n\nAt your whim, you command your tentacle dick");
-					if (player.tentacleCocks() > 1) outputText("s");
+					if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 1) outputText("s");
 					outputText(" forward and wrap them tightly around Phylla, taking her hand and tugging her in close.");
 				}
 				//(****See these two options? One is where your dick isn't huge, one is where it is huge.****)
@@ -912,23 +912,23 @@ package classes.Scenes.Areas.Desert
 			else {
 				outputText("\n\n[EachCock] hungers for attention, having been let go by Phylla when you shifted into a scissoring position.  Reaching down to start taking care of yourself; Phylla interrupts you abruptly.  \"<i>Oh, I'm sorry! I mean... I forgot... just feels... so gooood,</i>\" she coos between moans of ecstasy.  After a moment she seems to forget as waves of pleasure wash over her.  You make a playful throat clearing noise and gesture to your " + player.multiCockDescriptLight() + ".  Phylla quickly snaps back into reality and takes hold of ");
 				//Tentacle dick check
-				if (player.tentacleCocks() > 0) {
+				if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 0) {
 					//PC has (a) Tentacle dick(s):
 					outputText("your tentacle dick");
-					if (player.tentacleCocks() > 1) outputText("s");
+					if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 1) outputText("s");
 					outputText(".  Clearly she's never seen anything like it before as she doesn't know what to do.  Laughing, you tell Phylla she doesn't need to do anything except hold still.  You snake your tentacle cock");
-					if (player.tentacleCocks() > 1) outputText("s");
+					if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 1) outputText("s");
 					outputText(" up her body, making sure to caress her most tender places on their way.  She screams out loudly in shock only to realize what happened when she looks down.  \"<i>God, you scared me!</i>\" she yells, embarrassed that she got frightened half to death by your dick");
-					if (player.tentacleCocks() > 1) outputText("s");
+					if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 1) outputText("s");
 					outputText(".  Laughing at her display, you motion to your prick");
-					if (player.tentacleCocks() > 1) outputText("s and wiggle them ");
+					if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 1) outputText("s and wiggle them ");
 					else outputText(" and wiggle it ");
 					outputText("in front of her, like a worm to a bird in her face.  \"<i>Aw, does someone need some attention?</i>\" Phylla teases, taking ");
 					//PC has:
 					//one tentacle dick:
-					if (player.tentacleCocks() == 1) outputText("your cock into her mouth as she continues to rock her hips into yours.");
+					if (player.countCocksOfType(CockTypesEnum.TENTACLE) == 1) outputText("your cock into her mouth as she continues to rock her hips into yours.");
 					//two:
-					else if (player.tentacleCocks() == 2) outputText("your cocks into her mouth and between her breasts as she continues to rock her hips into yours.");
+					else if (player.countCocksOfType(CockTypesEnum.TENTACLE) == 2) outputText("your cocks into her mouth and between her breasts as she continues to rock her hips into yours.");
 					else  outputText("your cocks into her mouth, between her breasts, and along her body.  The ones on her body tightly wrap around her insectile joints, using her muscular curves to get you off.");
 					//End TD check; if TD's are present, ignore non-TD check and, below, and skip to scissoring continuation.
 				}
@@ -1777,12 +1777,12 @@ package classes.Scenes.Areas.Desert
 			outputText("\n\nTaking her \"<i>hint,</i>\" you slam your cock into her pussy, making sure to get as deep as you can. Your initial thrust makes a very loud, squishy noise as your cock enters her soaked canal.  Your mind almost blacks out from the sheer sensual overload you both feel as a shared consciousness, unable to handle both hers and your own.  Phylla's head collapses into her hands as she releases a series of stammering moans.  Her hips twitch slightly with euphoria as she starts to slowly move up and down, her body desperately begging for more cock.");
 
 			//If PC only has the two non TD dicks (greater than 42 inches):
-			if (player.tentacleCocks() == 2) {
+			if (player.countCocksOfType(CockTypesEnum.TENTACLE) == 2) {
 				outputText("\n\nNow content with her efforts, Phylla's body sucks in your long cock as your other is deep inside her. You feel her warm breath escape the seal she's made around the head of your cock when you hit the right spots inside her that cause her to moan.");
 			}
 			//(Transitions to Doggy style Phylla or If PC has TD)
 			//PC has more than two Tentacle dicks (greater than 42 inches):
-			else if (player.tentacleCocks() > 2) {
+			else if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 2) {
 				outputText("\n\nNot content with just a little oral attention, you slither your other tentacle cocks up to her hands and give them a hard smack, soliciting a surprised hum from Phylla.  Seeing her lover's tentacle penile appendages caressing the back of her hand helps to clue her in that she still has some \"<i>capacity</i>\" to service you.  Propping herself upwards with a pillow, Phylla takes to leaning on her elbows as she begins to stroke and tease your cocks, coaxing a small flow of pre-cum in the process.");
 				//(Transitions to Doggy style Phylla)
 			}

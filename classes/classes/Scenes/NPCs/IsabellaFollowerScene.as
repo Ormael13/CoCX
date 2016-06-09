@@ -661,7 +661,7 @@ private function izzyTentacleRapeBool():Boolean {
 	spriteSelect(31);
 	var counter:Number = 0;
 	temp = player.cockTotal();
-	while(counter < player.tentacleCocks() && temp > 0) {
+	while(counter < player.countCocksOfType(CockTypesEnum.TENTACLE) && temp > 0) {
 		temp--;
 		//Does this dick work for it?
 		if (player.cocks[temp].cockType == CockTypesEnum.TENTACLE && player.cocks[temp].cockLength >= 24) {
@@ -691,7 +691,7 @@ private function tentacleBoneFollowerIzzy():void {
 	
 	var counter:Number = 0;
 	temp = player.cocks.length;
-	while(counter < player.tentacleCocks() && temp > 0) {
+	while(counter < player.countCocksOfType(CockTypesEnum.TENTACLE) && temp > 0) {
 		temp--;
 		//Does this dick work for it?
 		if (player.cocks[temp].cockType == CockTypesEnum.TENTACLE && player.cocks[temp].cockLength >= 24) {

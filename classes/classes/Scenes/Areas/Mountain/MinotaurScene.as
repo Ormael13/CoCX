@@ -44,7 +44,7 @@ public function minoVictoryRapeChoices():void {
 		if (player.cockThatFits(80) >= 0) bj = minotaurBlowjob;
 	}
 	if (player.hasCock() && x >= 0) dickRape = bumRapeaMinotaur;
-	if (x >= 0 && player.cockTotal() > 1 && player.tentacleCocks() > 0) tentaRape = rapeMinotaurTentacles;
+	if (x >= 0 && player.cockTotal() > 1 && player.countCocksOfType(CockTypesEnum.TENTACLE) > 0) tentaRape = rapeMinotaurTentacles;
 	if (player.hasVagina()) cuntRape = girlRapeAMinotaur;
 	//Centaurs can't do the herm scene
 	if (player.gender == 3 && x >= 0 && !player.isTaur()) hermRape = minotaurGetsRapedByHerms;
@@ -117,7 +117,7 @@ public function minoVictoryRapeChoices():void {
 private function rapeMinotaurTentacles():void {
 	spriteSelect(44);
 	//multicock but single tentalce rape scene
-	if (player.cocks.length > 1 && player.tentacleCocks() == 1) {
+	if (player.cocks.length > 1 && player.countCocksOfType(CockTypesEnum.TENTACLE) == 1) {
 		rapeMinotaurTentacle();
 		return;
 	}
@@ -146,7 +146,7 @@ private function rapeMinotaurTentacles():void {
 	if (player.cor >= 50 && player.cor < 80) outputText("You roughly grab him, slamming him close to your " + player.multiCockDescript() + " - just how this beast likes it.  ", false);
 	if (player.cor >= 80) outputText("You grin and roughly pull his horns towards your " + player.multiCockDescript() + ", ready to roughly ride this beast.  ", false);
 	//Mixed dix
-	if (player.cockTotal() != player.tentacleCocks()) {
+	if (player.cockTotal() != player.countCocksOfType(CockTypesEnum.TENTACLE)) {
 		mismatched = true;
 		temp = player.cocks.length;
 		temp2 = -1;
@@ -181,8 +181,8 @@ private function rapeMinotaurTentacles():void {
 	//Multivaginas...wtf
 	if (player.vaginas.length > 1 && !mismatched && player.cocks.length > 2) outputText("Your tentacle cocks writhe upon themselves, each turning to an unattended " + player.vaginaDescript(1) + " on your body, and quickly filling up the cavernous depths. You groan in ecstasy at the self-fucking you are receiving as all your pussies start leaking their wonderful fluids.  ", false);
 	//more dicks than available holes
-	if ((player.tentacleCocks() == 2 || player.tentacleCocks() == 3)) outputText("Your next tentacle dick, saddened by not having anything to writhe around, turns to the minotaurs protruding member. It darts out from your crotch, wrapping around his monstrous meat and constricting, like a snake might around its prey. Your tongue lolls out as you feel that cock twist and grab his dick, pulsing with both your blood and the beast's twitching member.  ", false);
-	if (player.tentacleCocks() > 3) outputText("Your remaining tentacle dicks wave around the minotaur, tending to his balls, weaving around his limbs, and generally rubbing and throbbing all over him, spreading pre-cum around and through him, leaving both of you moaning in pleasure.  ", false);
+	if ((player.countCocksOfType(CockTypesEnum.TENTACLE) == 2 || player.countCocksOfType(CockTypesEnum.TENTACLE) == 3)) outputText("Your next tentacle dick, saddened by not having anything to writhe around, turns to the minotaurs protruding member. It darts out from your crotch, wrapping around his monstrous meat and constricting, like a snake might around its prey. Your tongue lolls out as you feel that cock twist and grab his dick, pulsing with both your blood and the beast's twitching member.  ", false);
+	if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 3) outputText("Your remaining tentacle dicks wave around the minotaur, tending to his balls, weaving around his limbs, and generally rubbing and throbbing all over him, spreading pre-cum around and through him, leaving both of you moaning in pleasure.  ", false);
 	//Cum
 	outputText("Your tentacles throb and pulse, quickening in pace as you can feel the cum swelling in your prostate. They wave madly, and then, just as their motion makes you dizzy, you feel them stiffen suddenly, and start spewing their load all in and across the minotaur. You gasp and pause, collapsing on the strong back of the minotaur, basking in the afterglow.", false);
 	player.orgasm();
@@ -208,7 +208,7 @@ private function rapeMinotaurTentacle():void {
 	//Reset for upcoming stuff
 	temp = 0;
 	//if multi with pony dick!
-	if (player.horseCocks() == 1) {
+	if (player.countCocksOfType(CockTypesEnum.HORSE) == 1) {
     	outputText("But it isn't enough for you. You take your pony prick, and with your hands, pull his anus wide. The flare at your tip takes some effort to get in, but once it's inside, you ram right to the hilt, knocking the wind from the minotaur with a solid grunt.  ", false);
 		temp = 1;
 	}

@@ -1100,7 +1100,7 @@ package classes.Scenes.Dungeons
 			}
 			//Tentacle Victory Gangbang
 			//3+ Tentas
-			if (player.tentacleCocks() >= 3) addButton(2,"Tentacles",tentacleVictoryGangbangCumWitch, null, null, null, "Fuck the Cum Witch with your tentacle cocks.");
+			if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 3) addButton(2,"Tentacles",tentacleVictoryGangbangCumWitch, null, null, null, "Fuck the Cum Witch with your tentacle cocks.");
 			//Female Victory Sex
 			if (player.hasVagina()) addButton(3,"Ladysex",ladyVictorySex, null, null, null, "Ride the Cum Witch's cock until she cums!");
 			
@@ -1313,16 +1313,16 @@ package classes.Scenes.Dungeons
 			
 			outputText("\n\nYou pull the throat-plugging prong free of the cum witch's oral cavity and smile down at her, laying the spittle-lubricated cock between the spellcaster's perky tits.  She coughs and gasps around, chest heaving.  In response, her swollen udders jiggle pleasantly around your embedded tool, inadvertently massaging your wiggly plug.  You rock your hips in response to the three layers of pleasure, even though your members can thrust quite adequately without you having to add any motion to the ocean.  It just feels so good to cut loose and truly enjoy the fruits of your blessed form!  You pick up the pace, dicks folding back and lunging forward like snakes, setting every part of the spunk-obsessed witch's body shaking, even her leaky cock.");
 			
-			if (player.tentacleCocks() >= 4) outputText("\n\nYour fourth free prick twines around the enchantress's dusky shaft, frotting and jerking it all at once, the twin cocks oozing a bubbly mess over each others' lengths.  Arching over top of the ebony tool, your dick leans down and smashes its tip against the other, and you shudder at the feeling of pre being swapped back and forth between the cum-slits.  The cum witch's eyes roll back from the bliss she's been forced to experience.  Simultaneously, her mouth dilates, and drool dribbles from her facile mouth, oozing down her chin.  You tighten your coils around the black cock and squeeze a dollop of fresh pre-jism from it, picking up the pace to match the vigorous fucking you're giving.");
+			if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 4) outputText("\n\nYour fourth free prick twines around the enchantress's dusky shaft, frotting and jerking it all at once, the twin cocks oozing a bubbly mess over each others' lengths.  Arching over top of the ebony tool, your dick leans down and smashes its tip against the other, and you shudder at the feeling of pre being swapped back and forth between the cum-slits.  The cum witch's eyes roll back from the bliss she's been forced to experience.  Simultaneously, her mouth dilates, and drool dribbles from her facile mouth, oozing down her chin.  You tighten your coils around the black cock and squeeze a dollop of fresh pre-jism from it, picking up the pace to match the vigorous fucking you're giving.");
 			
 			outputText("\n\nThe ebony beauty's back arches from the raw sexual power of your many-pronged assault, and she cums, as messily as noisily, her voice screeching like a banshee.  A torrent of white bursts from her bulging, pulsating penis");
-			if (player.tentacleCocks() >= 4) outputText(", splatting over your frotting cock-tip in wild abandon");
+			if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 4) outputText(", splatting over your frotting cock-tip in wild abandon");
 			outputText(", more like a firehose than an orgasm.  The alabaster flood rushes across the taut skin of her belly, glazing down your titty-fucking cock and the jiggling underswell of the witch's bust.  Her tight cunt clenches down around you like a vice, with wave-like ripples cycling from your deeply embedded tip all the way to your base.  The tight pucker of the witch's anus contracts likewise, and though it doesn't endeavor to milk your cock like her pussy, the squeezing hot tightness feels utterly divine in its own way.");
 			
 			if (player.balls > 0) outputText("\n\nYour balls begin to tremble with quaking warmth, releasing their thick cargo to pump up [eachCock].");
 			else outputText("\n\nYour body begins to tremble with the quaking warmth, releasing its thick cargo to pump up [eachCock].");
 			outputText("  You shudder and grab the ebony sorceress's tits in your hands, squeezing her bronzed orbs tightly as you release works through you.  Jets of cum well up to plug the witch's pussy and anus simultaneously.  The spit-soaked, cum-splattered vine between her tits quivers meaningfully, and then unloads, squirting a thick wave of jizz onto her face.");
-			if (player.tentacleCocks() >= 4) outputText("  Of course, your fourth prick is not to be outdone, and blasts a gooey coating of cream across the witch's own pulsating prick, wreathing it in drizzles of syrupy white.");
+			if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 4) outputText("  Of course, your fourth prick is not to be outdone, and blasts a gooey coating of cream across the witch's own pulsating prick, wreathing it in drizzles of syrupy white.");
 			if (player.cumQ() >= 500) outputText("  Wave after wave of spunk washes into the tight holes and toned form of your foe, turning her into a complete mess.");
 			if (player.cumQ() >= 1000) outputText("  A few more virile splurts see to her utterly inundated state, bloating her belly into a tightly-stretched dome.");
 			
@@ -2247,7 +2247,7 @@ package classes.Scenes.Dungeons
 			else addButton(0,"StartAttacking",unfriendlyWitchToggle, null, null, null, "Tell the Sand Mother that you want to encounter the Sand Witches again.", "Talk: Start Attacking");
 			if (player.lust >= 33) {
 				if (player.hasVagina()) addButton(1,"Scissor",scissorAndDrink, null, null, null, "Get into some female-on-female action and drink some milk.");
-				if (player.tentacleCocks() >= 5) addButton(2,"TentacleBang",tentacleGangBang, null, null, null, "Fuck the Sand Mother with your tentacle cocks.", "Tentacle Bang");
+				if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 5) addButton(2,"TentacleBang",tentacleGangBang, null, null, null, "Fuck the Sand Mother with your tentacle cocks.", "Tentacle Bang");
 				if (player.hasCock()) {
 					if (player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(3,"Fuck Her",fuckTheSandMothersCunt, "Fuck the Sand Mother's cunt with your cock.");
 				}
@@ -2354,7 +2354,7 @@ package classes.Scenes.Dungeons
 			addButton(0,"TalkHerDown",talkDownTheMother, null, null, null, "Talk the Sand Mother down. Convince her that you're not a demon.", "Talk Her Down");
 			if (player.hasVagina()) addButton(1,"Scissor",scissorAndDrink, null, null, null, "Get into female sex and drink your fill.");
 			if (player.hasCock() && player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(2,"Fuck Her",fuckTheSandMothersCunt, null, null, null, "Fuck the Sand Mother's cunt with your cock.");
-			if (player.tentacleCocks() >= 5) addButton(3,"TentacleFuck",tentacleGangBang, null, null, null, "Fuck the Sand Mother with your tentacle cocks.", "Tentacle Fuck");
+			if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 5) addButton(3,"TentacleFuck",tentacleGangBang, null, null, null, "Fuck the Sand Mother with your tentacle cocks.", "Tentacle Fuck");
 		}
 		public function loseToTheSandMother():void {
 			clearOutput();
@@ -2410,29 +2410,29 @@ package classes.Scenes.Dungeons
 			
 			outputText("\n\nNot to be outdone, your fifth cock crawls down the blonde bitch's back towards the gentle swell of her posterior where it knows the last unviolated hole remains.  It squishes through the cushiony butt-cheeks and kisses past the puckered asshole.  The witch immediately clenches tight, something you can feel in the dicks already double-stuffing her twats.  Your teasing tendril slowly hotdogs its way through the taut anal valley, allowing those tight muscles to relax.  The tip gently circles her anus at the culmination of each stroke, bumping the clenching hole gently as it encourages it to relax.  That resistant hole puts up a valiant fight, but after a minute or so of being fucked in three holes, the Sand Mother's fourth hole begins to relax, first accepting a portion of the tip, then the whole thing with a wet pop.");
 			
-			if (player.tentacleCocks() >= 6) {
+			if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 6) {
 				outputText("\n\nYou still have ");
-				if (player.tentacleCocks() >= 7) outputText("untended serpentine shafts to please");
+				if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 7) outputText("untended serpentine shafts to please");
 				else outputText("an untended serpentine shaft to please");
 				outputText(", but all the holes are full!  You take the ");
-				if (player.tentacleCocks() == 6) outputText("leftover one and thread it");
+				if (player.countCocksOfType(CockTypesEnum.TENTACLE) == 6) outputText("leftover one and thread it");
 				else outputText("leftover ones and thread them");
 				outputText(" through the dick-dominated enchantrix's fingers.  By now, her body has completely and utterly betrayed her, and she grabs hold like a cock-hungry slut, immediately stroking up and down, jacking it like a pro.  A muffled sigh of contentment shivers up your throat-fucking cock, alerting you to your depraved foe's prick-addled state.  You begin to pump your quartette of buried cocks into their respective holes with renewed vigor.  The titty-fucking vine pistons through its curvy path along with them, sending the witch's tits jiggling and squirting wildly.  The only thing");
-				if (player.tentacleCocks() == 6) outputText(" held still is the one getting a hand job, and you only hold it still");
+				if (player.countCocksOfType(CockTypesEnum.TENTACLE) == 6) outputText(" held still is the one getting a hand job, and you only hold it still");
 				else outputText("s held still are the two getting hand jobs, and you only hold them still");
 				outputText(" so that part of you can relax and enjoy your captive Queen's enthusiastic wanking.");
 			}
 			//(10+)
-			if (player.tentacleCocks() >= 10) {
+			if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 10) {
 				outputText("\n\nThat accounts for seven of your myriad members, but you are endowed to the extreme.  Three of your dongs have been lurking in the back, hidden behind their more enthusiastic brothers.  Now that she has become a willing participant, supine in a bed of penis, the Cum Witch is assaulted by those same tentacles.  One thrusts down towards the dick-stuffed anal star and jams itself in beside, doubling the dilation and allowing you to experience bliss - twice the anal sex AND frotting, all at the same time.  The other two penises jump into the orgy with a vengeance, snaking into the pair of cunts alongside their buried brethren.");
 			}
 			outputText("\n\nNow fully enveloped, you lean over your happily gurgling prey, admiring her swollen, milk-engorged bust as you take her in every way imaginable.  You wordlessly command your multitude of dongs to fuck faster, then, lean down for a sip of sweet breast milk.  Drinking happily, you allow your body to whip into a sexual frenzy, pumping and pounding, sliding and squeezing, fucking with the relentless power of a champion-turned-tentacle-beast.  Every ounce of exposed skin and every orifice is liberally slicked with your pre-cum, and as your one man orgy winds to a fever pitch, you let the milky tit pop free and bellow out in bliss, cumming hard.");
 				
 			outputText("\n\nA bevy of bulges work their way up your shafts as you orgasm, dozens of them quickly traveling from base to tip, stretching cunnies and gaping anuses as they go.  When they reach your large, throbbing tips, your cum slits stretch wide and unleash matching waves of white.  Both cunts are creamed from womb to lips.  Your new favorite slut's anus is given an alabaster enema.  All four tits get a frothing jizz-bath.");
-			if (player.tentacleCocks() >= 6) outputText("  Bubbling seed soaks her frantically jerking hands.");
+			if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 6) outputText("  Bubbling seed soaks her frantically jerking hands.");
 			outputText("  That was just the first explosions of relief.  You orgasm drags on as you squirt like a firehose, drenching the poor witch with white from head to toe.  Her belly rounds obscenely, stuffed from her throat, ass, and wombs, filled to absolute capacity until all four of the aforementioned holes are squirting torrents of sticky white man-milk into thick puddles.");
 				
-			outputText("\n\nYou pull out as your pleasure dies down, aiming all " + num2Text(player.tentacleCocks()) + " of your cum-nozzles above her like an obscene shower, and drench her from head to toe again, a salty white wreck of a cumslut.  With her throat free for the first time in a long time, she swallows and whimpers, \"<i>Oooooh... gods.</i>\"  The cum-drunk fuck-slut begins to clean herself the only way she can right now - with her mouth.  She's so fucked out that she couldn't channel her magic if she tried.  You get dressed with a satisfied swagger.");
+			outputText("\n\nYou pull out as your pleasure dies down, aiming all " + num2Text(player.countCocksOfType(CockTypesEnum.TENTACLE)) + " of your cum-nozzles above her like an obscene shower, and drench her from head to toe again, a salty white wreck of a cumslut.  With her throat free for the first time in a long time, she swallows and whimpers, \"<i>Oooooh... gods.</i>\"  The cum-drunk fuck-slut begins to clean herself the only way she can right now - with her mouth.  She's so fucked out that she couldn't channel her magic if she tried.  You get dressed with a satisfied swagger.");
 			if (flags[kFLAGS.SAND_WITCHES_COWED] == 0) {
 				outputText("\n\nThe witches are suitably cowed, but you've ruined any chance at a friendly peace with them.");
 				flags[kFLAGS.SAND_WITCHES_COWED] = 1;
@@ -3415,22 +3415,22 @@ package classes.Scenes.Dungeons
 			var x:int = player.cockThatFits(50);
 			if (x < 0) x = player.smallestCockIndex();
 			//{if player does not have a tentacle cock} 
-			if (player.tentacleCocks() == 0) outputText("You grab the tanned shoulders of the closest pregnant witch and flip her over on to her back, trapping her beneath the weight of her belly and breasts while you grab both of her ankles.  Her dirty blonde, sweat-soaked hair lies in waves around her head on the floor as she pants heavily in sexual desperation.");
+			if (player.countCocksOfType(CockTypesEnum.TENTACLE) == 0) outputText("You grab the tanned shoulders of the closest pregnant witch and flip her over on to her back, trapping her beneath the weight of her belly and breasts while you grab both of her ankles.  Her dirty blonde, sweat-soaked hair lies in waves around her head on the floor as she pants heavily in sexual desperation.");
 			//{else if player has a tentacle cock}
 			else outputText("Your tentacle cock lashes outwards, extending as it goes, and wraps around the ankle of the closest girl. It flips her over on to her back, trapping her own torso beneath the weight of her heavy pregnancy and her own four massive leaking breasts.");
 			//{if player has two tentacle cocks}
-			if (player.tentacleCocks() > 1) outputText("  Another tentacle cock reaches out for the girl's other ankle, and together your cocks spread her tanned legs wide, revealing her large double pussy bloated from her pregnancy.");
+			if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 1) outputText("  Another tentacle cock reaches out for the girl's other ankle, and together your cocks spread her tanned legs wide, revealing her large double pussy bloated from her pregnancy.");
 			else outputText("  You reach forward with a hand to grab her other ankle and with your cock and arm you spread her tanned legs wide to reveal her large double pussy, bloated from her pregnancy.");
 			
 			outputText("\n\nHer dual set of labia are a darker shade than the rest of her tan flesh and enthusiastically drip with her juices.  One set is gaping wide, clearly under pressure from her womb within.  The other set are swollen but eager to be filled with true cock flesh capable of sowing her second womb full of seed.  \"<i>P-please!</i>\" she begs as if she was a wounded animal.  Her multiple breasts and belly jiggle and sway over the rest of her as she tries to angle her pelvis towards you.  The knob of her belly button traces circles in the air as her hips gyrate.");
 			var multi:Boolean = false;
 			//{if player has two tentacle cocks and at least one other cock that will fit her pussy}
-			if (player.tentacleCocks() >= 2 && player.cockTotal() >= 3 && player.cocks[x].cockType != CockTypesEnum.TENTACLE) {
+			if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 2 && player.cockTotal() >= 3 && player.cocks[x].cockType != CockTypesEnum.TENTACLE) {
 				outputText("\n\nYour tentacle cocks release the pregnant witch's ankles and wrap around her thighs instead. You align a third cock at the base of her second pussy with the head gently sliding between her nether's sopping wet lips. With a strong tug your tentacle cocks pull on the girl's tanned thighs and impale her sex upon your manhood.");
 				multi = true;
 			}
 			//else if players without two long tentacle cocks have multiple cocks that fit
-			else if (player.tentacleCocks() >= 2 && player.cocks[x].cockType != CockTypesEnum.TENTACLE && player.cockThatFits2(50) >= 0 && player.cockTotal() >= 4) {
+			else if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 2 && player.cocks[x].cockType != CockTypesEnum.TENTACLE && player.cockThatFits2(50) >= 0 && player.cockTotal() >= 4) {
 				outputText("\n\nReleasing the girl's ankles you align your cocks between the drooling labia of her second pussy.  \"<i>Y-yes!</i>\" she squeals as you start pushing the multiple shafts into her all at once, \"<i>S-so-much c-c-cock!</i>\" she blissfully exclaims as her womanhood is stretched almost painfully beyond what it should be able to take.");
 				multi = true;
 			}
@@ -3519,7 +3519,7 @@ package classes.Scenes.Dungeons
 			var y:int = player.cockThatFits2(50);
 			outputText("These hormonally overwrought witches are each little more than five huge fleshy orbs of tits and bellies, desperately crawling towards you on hands and knees as their stares fixate on your " + player.cockDescript(y) + ".  ");
 			//{if player has two long tentacle cocks} 
-			if (player.tentacleCocks() >= 2) outputText("Almost of their own accord your tentacle cocks lash out, wrapping around the arms of the two closest girls, lifting them to their knees only to roll them backwards and on to their sides with their backs to each other.  ");
+			if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 2) outputText("Almost of their own accord your tentacle cocks lash out, wrapping around the arms of the two closest girls, lifting them to their knees only to roll them backwards and on to their sides with their backs to each other.  ");
 			else outputText("It takes little effort to grab the closest two witches and pull them up only to push them down again and on to their sides with their backs pressed against each other.  ");
 			outputText("The two witches lay before you with their heaving breasts and bellies jutting out to either side while their asses are mashed against each other.  You grab an ankle from each of them and raise their legs up to expose the dual pairs of pussies that they possess.");
 			

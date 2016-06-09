@@ -571,7 +571,7 @@ public function exploreFarm():void {
 	if (explore == 2) {
 		outputText("Your explorations take you to the cow pasture. There's no bull here, so the cows are all placidly grazing, building up milk for Whitney to gather. One turns to face you, and you get the odd feeling that it's trying to tell you something.\n\n", true);
 		//[if have a horse dick and rape-high Lust] 
-		if (player.horseCocks() > 0) {
+		if (player.countCocksOfType(CockTypesEnum.HORSE) > 0) {
 			outputText("Unbidden, the notion that a cow-slit would probably feel pretty good wrapped around your horse-prick flickers through your mind.  ", false);
 			//[if high corruption]
 			if (player.cor > 60) outputText("It makes you smile.", false);

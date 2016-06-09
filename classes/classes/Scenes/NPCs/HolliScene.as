@@ -136,7 +136,7 @@ public function treeMenu(output:Boolean = true):void {
 		else {
 			menu();
 			if (player.hasCock() && player.lust >= 33) addButton(0, "Fuck Holli", holliGetsDickDommed);
-			if (player.tentacleCocks() >= 10 && player.lust >= 33) addButton(1, "TentacleBone", fullOnTentacleTasticGangBangForHolli);
+			if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 10 && player.lust >= 33) addButton(1, "TentacleBone", fullOnTentacleTasticGangBangForHolli);
 			if (player.hasVagina() && player.lust >= 33) addButton(2, "Ride Holli", vaginalDomHollisTentacruels);
 			addButton(3, "Drink Sap", haveAMapleSyrupSnack);
 			if (flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(4, "Eat A Fruit", eatHolliFruit);
@@ -765,7 +765,7 @@ private function eatHolliFruit():void {
 	outputText("Biting into it, sweet juices seem to explode from the flesh, dribbling down your chin.  It tastes like a dessert and you chow down, happily munching away.  In no time flat, you're down to just a core.  You toss it and wipe your [face] clean, then burp.  Damn, that was good! ");
 	player.refillHunger(25);
 	//TF CHANCES
-	if (rand(2) == 0 && player.cockTotal() > player.tentacleCocks()) {
+	if (rand(2) == 0 && player.cockTotal() > player.countCocksOfType(CockTypesEnum.TENTACLE)) {
 		var choices:Array = [];
 		temp = 0;
 		while(temp < player.cockTotal()) {
@@ -774,7 +774,7 @@ private function eatHolliFruit():void {
 		}
 		temp = choices[rand(choices.length)];
 		outputText("\n\nYour " + num2Text2(temp+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your " + player.cockDescript(temp) + " has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a");
-		if (player.tentacleCocks() > 0) outputText("nother");
+		if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 0) outputText("nother");
 		outputText(" tentacle-cock!</b>");
 		player.cocks[temp].cockType = CockTypesEnum.TENTACLE;
 		player.cocks[temp].knotMultiplier = 1.3;
