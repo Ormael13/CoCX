@@ -373,8 +373,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.6b_2";
-			version = ver + " (<b>More HP for monsters and Ezekiel Fruit issue fix</b>)";
+			ver = "1.0.2_mod_Xianxia_0.6c";
+			version = ver + " (<b>Nocello Liqueur, Black Ink, Grey Ink, White Ink, Unicornum, Alicornum, Blade Grass (new TF items) and Moga Hen</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
