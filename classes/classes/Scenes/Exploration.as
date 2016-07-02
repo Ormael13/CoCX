@@ -118,6 +118,7 @@ package classes.Scenes
 				}
 				else {
 					if (rand(10) == 0) { //Two imps clashing, UTG stuff.
+						clearOutput();
 						outputText("A small imp bursts from behind a rock and buzzes towards you. You prepare for a fight, but it stays high and simply flies above you. Suddenly another imp appears from nowhere and attacks the first. In the tussle one of them drops an item, which you handily catch, as the scrapping demons fight their way out of sight. ");
 						switch(rand(3)) {
 							case 0:

@@ -554,10 +554,10 @@ private function doCamp():void { //Only called by playerMenu
 		}
 	}
 	if (model.time.days >= 20) outputText("You've even managed to carve some artwork into the rocks around the camp's perimeter.\n\n", false);
-	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 9) outputText("There's an unfinished wooden structure. As of right now, it's just frames nailed together.\n\n", false)
-	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 10) outputText("There's an unfinished cabin. It's currently missing windows and door.\n\n", false)
-	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 11) outputText("There's a nearly-finished cabin. It looks complete from the outside but inside, it's missing flooring.\n\n", false)
-	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 12) outputText("Your cabin is situated near the edge of camp.\n\n", false)
+	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 7) outputText("There's an unfinished wooden structure. As of right now, it's just frames nailed together.\n\n", false)
+	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 8) outputText("There's an unfinished cabin. It's currently missing windows and door.\n\n", false)
+	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 9) outputText("There's a nearly-finished cabin. It looks complete from the outside but inside, it's missing flooring.\n\n", false)
+	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10) outputText("Your cabin is situated near the edge of camp.\n\n", false)
 	if (flags[kFLAGS.CLARA_IMPRISONED] > 0) 
 	{
 		marblePurification.claraCampAddition();
@@ -746,13 +746,13 @@ private function doCamp():void { //Only called by playerMenu
 			if (flags[kFLAGS.CURRENT_WEATHER] < 2)
 				outputText("The sun is close to the horizon, getting ready to set. ");
 			else
-				outputText("Though you cannot see the sun, the sky began to glow orange. ");
+				outputText("Though you cannot see the sun, the sky near the horizon began to glow orange. ");
 		}
 		if (model.time.hours == 20) {
 			if (flags[kFLAGS.CURRENT_WEATHER] < 2)
 				outputText("The sun has already set below the horizon. The sky glows orange. ");
 			else
-				outputText("Even with the clouds, the sky is glowing bright orange. The sun may have already set at this point. ");
+				outputText("Even with the clouds, the sky near the horizon is glowing bright orange. The sun may have already set at this point. ");
 		}
 		outputText("It's light outside, a good time to explore and forage for supplies with which to fortify your camp.\n");
 
@@ -1337,8 +1337,8 @@ private function campActions():void {
 	else {
 		addButtonDisabled(2, "Watch Sky", "The option to watch sunset is available at 7pm.");
 	}
-	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 12) addButton(3, "Build Cabin", cabinProgress.initiateCabin, null, null, null, "Work on your cabin."); //Work on cabin.
-	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 12 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(3, "Enter Cabin", cabinProgress.initiateCabin, null, null, null, "Enter your cabin."); //Enter cabin for furnish.
+	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 10) addButton(3, "Build Cabin", cabinProgress.initiateCabin, null, null, null, "Work on your cabin."); //Work on cabin.
+	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(3, "Enter Cabin", cabinProgress.initiateCabin, null, null, null, "Enter your cabin."); //Enter cabin for furnish.
 	addButton(4, "Read Codex", codex.accessCodexMenu, null, null, null, "Read any codex entries you have unlocked.");
 	if (player.hasKeyItem("Carpenter's Toolbox") >= 0 && flags[kFLAGS.CAMP_WALL_PROGRESS] < 100 && getCampPopulation() >= 4) addButton(5, "Build Wall", buildCampWallPrompt, null, null, null, "Build a wall around your camp to defend from the imps." + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 20 ? "\n\nProgress: " + (flags[kFLAGS.CAMP_WALL_PROGRESS]/20) + "/5 complete": "") + "");
 	if (player.hasKeyItem("Carpenter's Toolbox") >= 0 && flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 && flags[kFLAGS.CAMP_WALL_GATE] <= 0) addButton(5, "Build Gate", buildCampGatePrompt, null, null, null, "Build a gate to complete your camp defense.");
@@ -1787,7 +1787,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 		}
 		else if (flags[kFLAGS.SLEEP_WITH] == "Ember" && flags[kFLAGS.EMBER_AFFECTION] >= 75 && followerEmber()) {
 			if (flags[kFLAGS.TIMES_SLEPT_WITH_EMBER] > 3) {
-				outputText("You curl up next to Ember, planning to sleep for " + num2Text(timeQ) + " hour. Ember drapes one of " + emberScene.emberMF("his", "her") + " wing over you, keeping you warm.");
+				outputText("You curl up next to Ember, planning to sleep for " + num2Text(timeQ) + " hour. Ember drapes one of " + emberScene.emberMF("his", "her") + " wing over you, keeping you warm. ");
 			}
 			else {
 				emberScene.sleepWithEmber();
@@ -2172,7 +2172,10 @@ public function wakeFromBadEnd():void {
 	inDungeon = false;
 	inRoomedDungeon = false;
 	inRoomedDungeonResume = null;
-	getGame().inCombat = false;
+	if (getGame().inCombat) {
+		player.clearStatuses(false);
+		getGame().inCombat = false;
+	}
 	//Restore stats
 	player.HP = player.maxHP();
 	player.fatigue = 0;
@@ -2655,9 +2658,9 @@ private function promptSaveUpdate():void {
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 10) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 11;
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02108] > 0) {
+		if (flags[kFLAGS.EMBER_SPAR_VICTORIES] > 0) {
 			outputText("Due to the official release of Lethice, you can now fight her again! Be prepared to face Drider Incubus and Minotaur King beforehand!");
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02108] = 0; //Reclaim the flag and display message.
+			flags[kFLAGS.EMBER_SPAR_VICTORIES] = 0; //Reclaim the flag and display message.
 			doNext(doCamp);
 			return;
 		}
@@ -2665,6 +2668,10 @@ private function promptSaveUpdate():void {
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 11) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 12;
 		flags[kFLAGS.KAIZO_MODE] = 0;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 12) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 13;
+		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 5) flags[kFLAGS.CAMP_CABIN_PROGRESS] -= 2; //Decrement by 2 so that values 6 and 7 are used and progress ends at 10, not 12.
 	}
 	doCamp();
 }

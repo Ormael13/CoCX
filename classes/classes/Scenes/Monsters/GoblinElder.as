@@ -196,8 +196,9 @@ package classes.Scenes.Monsters
 			this.gems = rand(15) + 25;
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE, 5).
-					add(consumables.REDUCTO,2).
-					add(jewelries.POWRRNG,1).
+					add(consumables.REDUCTO, 2).
+					add(jewelries.POWRRNG, 1).
+					add(useables.LETHITE, 1).
 					addMany(1,consumables.L_DRAFT,
 							consumables.PINKDYE,
 							consumables.BLUEDYE,

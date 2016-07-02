@@ -1474,8 +1474,8 @@
 				if (button == 9) button++;
 			}
 			//Next and previous page buttons depending on conditions.
-			if (button > 14) addButton(4, "Next", ascensionMenu, page + 1);
-			if (page > 1) addButton(9, "Previous", ascensionMenu, page - 1);
+			if (button > 14) addButton(4, "Next", ascensionPermeryMenu, page + 1);
+			if (page > 1) addButton(9, "Previous", ascensionPermeryMenu, page - 1);
 			addButton(14, "Back", ascensionMenu);
 		}
 		private function permanentizePerk(perk:PerkType):void {

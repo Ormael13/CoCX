@@ -725,6 +725,7 @@ public function creditsScreen():void {
 	outputText("<li> Parth37955 (Pure Jojo anal pitch scene, Behemoth's vaginal catch scene)</li>");
 	outputText("<li> Liadri (Manticore and Dragonne suggestions)</li>");
 	outputText("<li> Warbird Zero (Replacement Ingnam descriptions)</li>");
+	outputText("<li> Matraia (Replacement Cabin construction texts)</li>");
 	outputText("</ul>");
 	outputText("<b>Game Mod Supplementary Events:</b>\n");
 	outputText("<ul>");

@@ -143,7 +143,7 @@ package classes.Scenes.NPCs
 			return flags[kFLAGS.EMBER_AFFECTION];
 		}
 
-		private function emberCorruption(changes:Number = 0):Number
+		public function emberCorruption(changes:Number = 0):Number
 		{
 			flags[kFLAGS.EMBER_COR] += changes;
 			if (flags[kFLAGS.EMBER_COR] > 100) flags[kFLAGS.EMBER_COR] = 100;
@@ -151,6 +151,15 @@ package classes.Scenes.NPCs
 			return flags[kFLAGS.EMBER_COR];
 		}
 
+		public function emberSparIntensity():int
+		{
+			var amount:int = 0;
+			amount += Math.floor(flags[kFLAGS.EMBER_AFFECTION] / 5);
+			amount += flags[kFLAGS.EMBER_SPAR_VICTORIES];
+			if (amount > 100) amount = 100;
+			return amount;
+		}
+		
 		override public function followerEmber():Boolean
 		{
 			return flags[kFLAGS.EMBER_HATCHED] > 0;
@@ -221,7 +230,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.EMBER_MILK] > 0 || (player.hasItem(consumables.LACTAID, 1) && flags[kFLAGS.EMBER_AFFECTION] >= 75)) addButton(3, "Drink Milk", getMilkFromEmber, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to let you drink " + emberMF("his", "her") + " milk." + (flags[kFLAGS.EMBER_MILK] > 0 ? "": "\n\nThis will cost you 1 Lactaid each time you want to suckle milk.") + "");
 			if ((flags[kFLAGS.EMBER_OVIPOSITION] > 0 || (player.hasItem(consumables.OVIELIX, 1) && flags[kFLAGS.EMBER_AFFECTION] >= 75)) && flags[kFLAGS.EMBER_GENDER] >= 2 && !pregnancy.isPregnant) addButton(4, "Get Egg", emberIsAnEggFactory, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to lay an unfertilized egg for you." + (flags[kFLAGS.EMBER_OVIPOSITION] > 0 ? "": "\n\nThis will cost you 1 Ovi Elixir each time you want " + emberMF("him", "her") + " to lay an unfertilized egg.") + "");
 			addButton(5, "Sex", emberSexMenu, null, null, null, "Get into a sex session with Ember.");
-			addButton(6, "Spar", decideToSparEmbra, null, null, null, "Do a quick battle with Ember!");
+			addButton(6, "Spar", decideToSparEmbra, null, null, null, "Do a quick battle with Ember! \n\nCurrent Intensity: " + emberSparIntensity());
 			if (model.time.hours >= 21 || model.time.hours < 5) {
 				if (flags[kFLAGS.EMBER_AFFECTION] < 75) addButton(7, "Sleep With?", sleepWithEmber, null, null, null, "Try to spend the night with Ember.");
 				else addButton(7, "Sleep With", sleepWithEmber, null, null, null, "Spend the night with Ember.");
@@ -298,7 +307,7 @@ package classes.Scenes.NPCs
 			//choices("Catch Anal",catchAnal,"Pitch Anal",pitchAnal,"Blow Ember",blowEmber,"Get Blown",getBlown,"Eat Her Out",eatOut,"Get Eaten Out",getEatenOut,"Penetrate Her",penetrateHer,"Get Penetrated",getPenetrated,"",0,"Leave",emberCampMenu);
 			menu();
 
-			if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) addButton(0, "Catch Anal", catchAnal, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to penetrate your [ass] with that cock of " + emberMF("his", "hers") + ".");
+			if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) addButton(0, "Catch Anal", catchAnal, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to penetrate your " + player.assDescript() + " with that cock of " + emberMF("his", "hers") + ".");
 			if (player.hasCock() && player.lust >= 33) addButton(1, "Pitch Anal", stickItInEmbersButt, null, null, null, "Penetrate Ember anally with your cock.");
 			if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) addButton(2, "Blow Ember", suckEmberCock, null, null, null, "Suck Ember's cock and get a taste of " + emberMF("his", "her") + " cum. " + (flags[kFLAGS.HUNGER_ENABLED] > 0 ? "\n\nAnd get your belly stuffed, of course!" : "") + "");
 			if (player.hasCock() && player.lust >= 33) addButton(3, "Get Blown", stickDickInKnifeDrawer, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to suck you off.");
@@ -2227,13 +2236,13 @@ package classes.Scenes.NPCs
 			clearOutput();
 			outputText("You feel like you could use some practice; just to be ready for whatever you stumble upon when adventuring, and ask Ember how " + emberMF("he", "she") + "'d feel about sparring with you.");
 			//(Low Affection)
-			if (emberAffection() <= 25) {
+			if (emberAffection() <= 25 && emberSparIntensity() <= 5) {
 				outputText("\n\n\"<i>Ha!  You have to be joking.  We both know you'll end up hurting yourself.</i>\"");
 				outputText("\n\nIntent on proving " + emberMF("him", "her") + " wrong, you brandish your [weapon].");
 				outputText("\n\n\"<i>Well, if you're so set on being knocked about...</i>\"  Ember leads you to an isolated clearing on the outskirts of the camp and assumes a battle pose.");
 			}
 			//(Medium Affection)
-			else if (emberAffection() < 75) {
+			else if (emberAffection() < 75 && emberSparIntensity() <= 15) {
 				outputText("\n\n\"<i>Are you sure?  I should have you know that I won't be holding back at all!</i>\" Ember warns you, assuming " + emberMF("his", "her") + " battle stance.");
 				outputText("\n\nThat's exactly what you're expecting of " + emberMF("him", "her") + ".  You need to get strong, and " + emberMF("he", "she") + "'s the best sparring partner you could hope for.");
 				outputText("\n\nEmber smiles at you.  \"<i>Ha!  Flattery won't earn you any mercy!  So get ready!</i>\"");
@@ -2249,6 +2258,7 @@ package classes.Scenes.NPCs
 		public function beatEmberSpar():void
 		{
 			clearOutput();
+			var oldIntensity:int = emberSparIntensity();
 			if (emberAffection() <= 25) {
 				outputText("Ember lies on " + emberMF("his", "her") + " back, while you stand over the defeated dragon triumphantly.  You extend a helping hand, intent on pulling " + emberMF("him", "her") + " up, but " + emberMF("he", "she") + " bats it away, flinching in shame at " + emberMF("his", "her") + " defeat.");
 				outputText("\n\n\"<i>I don't need your help you... you... cheater!</i>\"");
@@ -2278,6 +2288,20 @@ package classes.Scenes.NPCs
 				outputText("\n\n\"<i>Okay... I guess you have some skill, after all,</i>\" Ember admits.  \"<i>Next time I'm beating you up, it's a promise!</i>\"  You smile, knowing just how much pride the dragon had to swallow, and tell " + emberMF("him", "her") + " that you'll see what happens when it happens.");
 				outputText("\n\n\"<i>Okay, let's go back then,</i>\" Ember says, pulling you close and walking back to the camp with you.");
 				emberAffection(5);
+			}
+			flags[kFLAGS.EMBER_SPAR_VICTORIES]++;
+			//Announce changes
+			if (emberSparIntensity() >= 5 && oldIntensity < 5) {
+				outputText("\n\n<b>Ember will now use " + emberMF("his", "her") + " Dragon Breath special attacks in subsequent spar sessions. Damage scales with intensity.</b>");
+			}
+			if (emberSparIntensity() >= 15 && oldIntensity < 15) {
+				outputText("\n\n<b>Ember will now use " + emberMF("his", "her") + " Dragon Force special attacks in subsequent spar sessions. Such attacks may stun you.</b>");
+			}
+			if (emberSparIntensity() >= 30 && oldIntensity < 30) {
+				outputText("\n\n<b>Ember's Dragon Force special attack now has 50% chance to bypass Resolute perk. In addition, Ember's Dragon Force special attack now has cooldown reduced by one turn.</b>");
+			}
+			if (emberSparIntensity() >= 45 && oldIntensity < 45) {
+				outputText("\n\n<b>Ember's Dragon Force special attack now has cooldown reduced by one turn.</b>");
 			}
 			combat.cleanupAfterCombat();
 		}

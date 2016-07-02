@@ -2113,7 +2113,7 @@ public static const TIMES_BAD_ENDED:int                                         
 public static const CONDOMED:int                                                    = 2105; //If you use condom
 public static const HELIA_HERMIFIED:int                                             = 2106; //1 if Helia is made a hermaphrodite.
 public static const IMP_LORD_MALEHERM_PROGRESS:int                                  = 2107; //1 if started, 10 if finished.
-public static const UNKNOWN_FLAG_NUMBER_02108:int                                   = 2108; //MOVED
+public static const EMBER_SPAR_VICTORIES:int                                        = 2108; //Times won against Ember spars.
 public static const PHOENIX_HP_LOSS_COUNTER:int                                     = 2109; //If you lose by HP 4 times in a row, bad end.
 public static const LIZAN_ROGUE_SEX_COUNTER:int                                     = 2110;
 public static const BENOIT_PISTOL_BOUGHT:int                                        = 2111;
@@ -2136,7 +2136,7 @@ public static const INGNAM_RUMORS:int                                           
 public static const INGNAM_FARMER_MET:int                                           = 2128; 
 public static const INGNAM_BLACKMARKET_TALKED:int                                   = 2129;
 public static const INGNAM_ALCHEMIST_TALKED:int                                     = 2130;
-public static const UNKNOWN_FLAG_NUMBER_02131:int                                   = 2131; //Not used for now.
+public static const UNKNOWN_FLAG_NUMBER_02131:int                                   = 2131; //Not used for now. Will be used for Ingnam somehow.
 public static const INGNAM_EARS_FREAKOUT:int                                        = 2132; //Ears freakout
 public static const INGNAM_EARS_LAST_TYPE:int                                       = 2133; 
 public static const INGNAM_TAIL_FREAKOUT:int                                        = 2134; //Tail freakout
@@ -2281,7 +2281,7 @@ public static const CURRENT_WEATHER:int                                         
 public static const WEATHER_CHANGE_COOLDOWN:int                                     = 2273; //4 hours to prevent weather from changing too fast.
 public static const TAMANI_DEFEAT_COUNTER:int                                       = 2274; //If this reaches 4, you can bad-end Tamani.
 public static const TAMANI_BAD_ENDED:int                                            = 2275; //Determines if Tamani is bad-ended. (Killed)
-public static const UNKNOWN_FLAG_NUMBER_02276:int                                   = 2276;
+public static const PHYLLA_STONES_HUNTED_TODAY:int                                  = 2276;
 public static const UNKNOWN_FLAG_NUMBER_02277:int                                   = 2277;
 public static const UNKNOWN_FLAG_NUMBER_02278:int                                   = 2278;
 public static const UNKNOWN_FLAG_NUMBER_02279:int                                   = 2279;

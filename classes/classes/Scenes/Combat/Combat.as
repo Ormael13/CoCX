@@ -973,7 +973,7 @@ package classes.Scenes.Combat
 						else outputText("\n" + monster.capitalA + monster.short + " shiver and get turned on from the whipping.", false);
 						monster.teased(monster.lustVuln * (5 + player.cor / 12));
 					}
-					if (player.weaponName == "succubi whip") {
+					if (player.weapon == weapons.SUCWHIP) {
 						if (player.cor < 60) dynStats("cor", .2);
 						if (player.cor < 90) dynStats("cor", .1);
 						if (!monster.plural) outputText("\n" + monster.capitalA + monster.short + " shivers and moans involuntarily from the whip's touches.", false);
@@ -985,7 +985,7 @@ package classes.Scenes.Combat
 						}
 						
 					}
-					if (player.weaponName == "Lethice's whip") {
+					if (player.weapon == weapons.L_WHIP) {
 						if (player.cor < 60) dynStats("cor", .3);
 						if (player.cor < 90) dynStats("cor", .1);
 						if (!monster.plural) outputText("\n" + monster.capitalA + monster.short + " shivers and moans involuntarily from the flaming whip's touches.", false);

@@ -634,8 +634,10 @@ private function MaraePt2RoundIIIPrizes():void {
 			outputText("The entire time she was speaking, you were trapped in orgasm, milked by her tree with unthinking intensity.\n\n", false);
 
 			outputText("Breathless and panting, you give Marae a nod of thanks as her tentacles lower you back towards your equipment.  They plant you on shaky " + player.feet() + " and uncoil slowly, stroking your body as they depart.  They must like you.  You get dressed in a hurry, but neither Marae nor the tree are paying you any attention any more.   The boat isn't far, and as you're climbing into it the goddess calls out her goodbyes, \"<i>Thanks for visiting and giving my tree so much of your sperm!  Once its fruit is ready I might come plant one at your camp!  Bye now, and don't forget to have lots of sex!</i>\"\n\n", false);
-			player.createPerk(PerkLib.MaraesGiftStud,0,0,0,0);
-			outputText("<b>(New Perk Gained: Marae's Gift - Stud)</b>", false);
+			if (player.findPerk(PerkLib.MaraesGiftStud) < 0) {
+				player.createPerk(PerkLib.MaraesGiftStud, 0, 0, 0, 0);
+				outputText("<b>(New Perk Gained: Marae's Gift - Stud)</b>", false);
+			}
 		}
 		//(HAZ STUD)
 		else if (player.findPerk(PerkLib.MaraesGiftStud) >= 0) {
@@ -644,8 +646,10 @@ private function MaraePt2RoundIIIPrizes():void {
 			outputText("The entire time she was speaking, you were trapped in orgasm, milked by her tree with unthinking intensity.\n\n", false);
 
 			outputText("Breathless and panting, you give Marae a nod of thanks as her tentacles lower you back towards your equipment.  They plant you on shaky " + player.feet() + " and uncoil slowly, stroking your body as they depart.  They must like you.  You get dressed in a hurry, but neither Marae or the tree are paying you any attention any more.   The boat isn't far, and as you're climbing into it the goddess calls out her goodbyes, \"<i>Thanks for visiting and giving my tree so much of your sperm!  Once its fruit is ready I might come plant one at your camp!  Bye now, and don't forget to have lots of sex!</i>\"\n\n", false);
-			player.createPerk(PerkLib.MaraesGiftFertility,0,0,0,0);
-			outputText("<b>(New Perk Gained: Marae's Gift - Fertility)</b>", false);
+			if (player.findPerk(PerkLib.MaraesGiftFertility) < 0) {
+				player.createPerk(PerkLib.MaraesGiftFertility, 0, 0, 0, 0);
+				outputText("<b>(New Perk Gained: Marae's Gift - Fertility)</b>", false);
+			}
 		}
 		//Has both perks
 		else {

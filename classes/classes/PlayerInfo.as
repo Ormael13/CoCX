@@ -352,7 +352,9 @@ package classes
 				
 			if (getGame().emberScene.emberAffection() > 0)
 				interpersonStats += "<b>Ember Affection:</b> " + Math.round(getGame().emberScene.emberAffection()) + "%\n";
-			
+			if (getGame().emberScene.emberSparIntensity() > 0)
+				interpersonStats += "<b>Ember Spar Intensity:</b> " + getGame().emberScene.emberSparIntensity() + "\n";
+				
 			if (getGame().helFollower.helAffection() > 0)
 				interpersonStats += "<b>Helia Affection:</b> " + Math.round(getGame().helFollower.helAffection()) + "%\n";
 			if (getGame().helFollower.helAffection() >= 100)

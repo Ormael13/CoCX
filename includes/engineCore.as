@@ -548,12 +548,11 @@ public function addButton(pos:int, text:String = "", func1:Function = null, arg1
 	if (func1==null) return;
 	var callback:Function;
 
-	/* Let the mainView decide if index is valid
-		if (pos > 14) {
-			trace("INVALID BUTTON");
-			return;
-		}
-	*/
+	//Let the mainView decide if index is valid
+	if (pos > 14) {
+		trace("INVALID BUTTON");
+		return;
+	}
 	//Removes sex-related button in SFW mode.
 	if (flags[kFLAGS.SFW_MODE] > 0) {
 		if (text.indexOf("Sex") != -1 || text.indexOf("Threesome") != -1 ||  text.indexOf("Foursome") != -1 || text == "Watersports" || text == "Make Love" || text == "Use Penis" || text == "Use Vagina" || text.indexOf("Fuck") != -1 || text.indexOf("Ride") != -1 || (text.indexOf("Mount") != -1 && text.indexOf("Mountain") == -1) || text.indexOf("Vagina") != -1) {

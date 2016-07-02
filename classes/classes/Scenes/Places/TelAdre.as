@@ -1827,7 +1827,7 @@ public function carpentryShopInside():void {
 	addButton(6, "Sell Wood", carpentryShopSellWood);
 	addButton(7, "Sell Stones", carpentryShopSellStone);
 	addButton(10, "Toolbox", carpentryShopBuySet);
-	//addButton(11, "NailsChest", carpentryShopBuySet2);
+	addButton(11, "Nail box", carpentryShopBuyNailbox);
 	//addButton(12, "StoneBuildingsGuide", carpentryShopBuySet3);
 	addButton(14, "Leave", telAdreMenu);
 }
@@ -1867,10 +1867,10 @@ private function carpentryShopBuyNailsYes():void {
 		player.addKeyValue("Carpenter's Toolbox", 1, nails);
 		outputText("You hand over " + (nails * 2) + " gems. \"<i>Done,</i>\" he says as he hands over bundle of " + nails +" nails to you.\n\n");
 		//If over the limit
-		if (player.keyItemv1("Carpenter's Toolbox") > camp.cabinProgress.maxNailSupply) {
+		if (player.keyItemv1("Carpenter's Toolbox") > camp.cabinProgress.maxNailSupply()) {
 			outputText("Unfortunately, your toolbox can't hold anymore nails. You notify him and he refunds you the gems.\n\n");
-			player.gems += ((player.keyItemv1("Carpenter's Toolbox") - camp.cabinProgress.maxNailSupply) * 2);
-			player.addKeyValue("Carpenter's Toolbox", 1, -(player.keyItemv1("Carpenter's Toolbox") - camp.cabinProgress.maxNailSupply));
+			player.gems += ((player.keyItemv1("Carpenter's Toolbox") - camp.cabinProgress.maxNailSupply()) * 2);
+			player.addKeyValue("Carpenter's Toolbox", 1, -(player.keyItemv1("Carpenter's Toolbox") - camp.cabinProgress.maxNailSupply()));
 		}
 		camp.cabinProgress.checkMaterials(1);
 	}
@@ -1910,10 +1910,10 @@ private function carpentryShopBuyWoodYes():void {
 		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += wood;
 		outputText("You hand over " + (wood * 10) + " gems. \"<i>I'll have the caravan deliver the wood to your camp as soon as you leave my shop,</i>\" he says.\n\n");
 		//If over the limit
-		if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > camp.cabinProgress.maxWoodSupply) {
+		if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > camp.cabinProgress.maxWoodSupply()) {
 			outputText("Unfortunately, your wood supply seem to be full. You inform him. He refunds you the gems.\n\n");
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - camp.cabinProgress.maxWoodSupply) * 10);
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - camp.cabinProgress.maxWoodSupply);
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - camp.cabinProgress.maxWoodSupply()) * 10);
+			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - camp.cabinProgress.maxWoodSupply());
 		}
 		camp.cabinProgress.checkMaterials(2);
 	}
@@ -1953,10 +1953,10 @@ private function carpentryShopBuyStoneYes():void {
 		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stone;
 		outputText("You hand over " + (stone * 20) + " gems. \"<i>I'll have the caravan deliver the stones to your camp as soon as you leave my shop,</i>\" he says.\n\n");
 		//If over the limit
-		if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 999) {
+		if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > camp.cabinProgress.maxStoneSupply()) {
 			outputText("Unfortunately, your stone seem to be full. You inform him. He refunds you the gems.\n\n");
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - camp.cabinProgress.maxStoneSupply) * 20);
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - camp.cabinProgress.maxStoneSupply);
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - camp.cabinProgress.maxStoneSupply()) * 20);
+			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - camp.cabinProgress.maxStoneSupply());
 		}
 		camp.cabinProgress.checkMaterials(3);
 	}
@@ -2113,7 +2113,40 @@ public function carpentryShopBuySetNo():void {
 	doNext(carpentryShopInside);
 }
 
-//NailsChest
+public function carpentryShopBuyNailbox():void {
+	if (player.hasKeyItem("Carpenter's Nail Box") >= 0) {
+		outputText("<b>You already own a nail box!</b>");
+		doNext(carpentryShopInside);
+		return;
+	}
+	outputText("\n\nYou walk back to where you remember you bought the toolbox. There are nail boxes designed to hold four hundred nails. Certainly, you'll be able to hold more nails and ensure you can keep on building in one trip.");
+	outputText("\"<i>Two hundred gems and it's all yours,</i>\" the shopkeeper says.\n\n");
+	if (player.gems >= 200) {
+		outputText("Do you buy it?");
+		doYesNo(carpentryShopBuyNailboxYes, carpentryShopBuyNailboxNo);
+	}
+	else {
+		outputText("You count out your gems and realize it's beyond your price range.");
+		doNext(carpentryShopInside);
+	}
+}
+
+public function carpentryShopBuyNailboxYes():void {
+	player.gems -= 200;
+	outputText("You hand over two hundred gems to the shopkeeper. ");
+	outputText("\"<i>Here you go,</i>\" he says. Now you can hold more nails for your projects! \n\n");
+	outputText("<b>Gained Key Item: Carpenter's Nail Box!</b>")
+	player.createKeyItem("Carpenter's Nail Box", 400, 0, 0, 0);
+	statScreenRefresh();
+	doNext(carpentryShopInside);
+}
+
+public function carpentryShopBuyNailboxNo():void {
+	clearOutput();
+	outputText("\"<i>No thanks,</i>\" you tell him. \n\n");
+	outputText("\"<i>Suit yourself,</i>\" he says as you put the nail box back where it was.");
+	doNext(carpentryShopInside);
+}
 
 //StoneBuildingsGuide
 

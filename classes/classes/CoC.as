@@ -396,8 +396,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_1.3.23b";
-			version = ver + " (<b>Permable Perks</b>)";
+			ver = "1.0.2_mod_1.3.24";
+			version = ver + " (<b>Ember Spar Intensifies</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

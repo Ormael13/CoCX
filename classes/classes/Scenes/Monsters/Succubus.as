@@ -28,6 +28,14 @@ package classes.Scenes.Monsters
 			combatRoundOver();
 		}
 		
+		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {
+			game.succubusScene.loseToSuccubus();
+		}
+		
+		override public function defeated(hpVictory:Boolean):void {
+			game.succubusScene.winAgainstSuccubus();
+		}
+		
 		public function Succubus() 
 		{
 			this.a = "the ";

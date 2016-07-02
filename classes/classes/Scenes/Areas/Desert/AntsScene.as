@@ -70,6 +70,7 @@ package classes.Scenes.Areas.Desert
 				//The pregnancyStore doesn't handle Phylla's ant eggs because they are continuous. The regular egg production is all handled here.
 				if (flags[kFLAGS.PHYLLA_EGG_LAYING] > 0) flags[kFLAGS.DAYS_PHYLLA_HAS_SPENT_BIRTHING]++;
 				if (flags[kFLAGS.PHYLLA_GEMS_HUNTED_TODAY] > 0) flags[kFLAGS.PHYLLA_GEMS_HUNTED_TODAY] = 0;
+				if (flags[kFLAGS.PHYLLA_STONES_HUNTED_TODAY] > 0) flags[kFLAGS.PHYLLA_STONES_HUNTED_TODAY] = 0;
 				if (phyllaWaifu()) flags[kFLAGS.DAYS_PHYLLA_IN_CAMP]++;
 			}
 			return false;
@@ -2648,27 +2649,47 @@ package classes.Scenes.Areas.Desert
 //[Stones]
 		private function phyllaStones():void {
 			clearOutput();
-			var stones:int = 2 + rand(10);
-			flags[kFLAGS.ACHIEVEMENT_PROGRESS_ANTWORKS] += stones;
-			if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_ANTWORKS] >= 200) awardAchievement("AntWorks", kACHIEVEMENTS.GENERAL_ANTWORKS);
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stones;
-			statScreenRefresh();
-			//If Phylla IS NOT Laying Eggs
-			if (flags[kFLAGS.PHYLLA_EGG_LAYING] == 0) {
-				outputText("You ask Phylla is she's got any spare stones from digging, which you can take.  She nods happily and runs over to a small stone pile and rifles though it.  After a moment, she runs back over to you and holds up all four of her hands.");
-				outputText("\n\n\"<i>I hope... this is enough, I mean... we almost always digging, so there will be more of them soon.</i>\"  You mess up her hair with your hand, laughing. Telling her it's enough, you advise her to keep some of them instead throwing outside.  She gives you a playful salute as you taking the stones from her hands.");
-				outputText("\n\nYou gain " + stones + " stones.");
-				outputText("\n\n\"<i>Is there anything else you wanted to do while you're down here?</i>\"  She asks excitedly.");
+			//Increase amount of stones based on number of kids.
+			var kidsMod:int = 0;
+			if (flags[kFLAGS.ANT_KIDS] > 10) kidsMod++;
+			if (flags[kFLAGS.ANT_KIDS] > 50) kidsMod++;
+			if (flags[kFLAGS.ANT_KIDS] > 150) kidsMod++;
+			if (flags[kFLAGS.ANT_KIDS] > 300) kidsMod++;
+			if (flags[kFLAGS.ANT_KIDS] > 600) kidsMod++;
+			if (flags[kFLAGS.ANT_KIDS] > 1000) kidsMod++;
+			if (flags[kFLAGS.ANT_KIDS] > 2000) kidsMod++;
+			//Success
+			if (flags[kFLAGS.PHYLLA_STONES_HUNTED_TODAY] == 0) {
+				//Determine how much stones gained and increase that amount.
+				var stones:int = 2 + rand(10) + (kidsMod * 2);
+				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stones;
+				//Achievement progression.
+				flags[kFLAGS.ACHIEVEMENT_PROGRESS_ANTWORKS] += stones;
+				if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_ANTWORKS] >= 200) awardAchievement("AntWorks", kACHIEVEMENTS.GENERAL_ANTWORKS);
+				statScreenRefresh();
+				//If Phylla IS NOT Laying Eggs
+				if (flags[kFLAGS.PHYLLA_EGG_LAYING] == 0) {
+					outputText("You ask Phylla is she's got any spare stones from digging, which you can take.  She nods happily and runs over to a small stone pile and rifles though it.  After a moment, she runs back over to you and holds up all four of her hands.");
+					outputText("\n\n\"<i>I hope... this is enough, I mean... we almost always digging, so there will be more of them soon.</i>\"  You mess up her hair with your hand, laughing. Telling her it's enough, you advise her to keep some of them instead throwing outside.  She gives you a playful salute as you taking the stones from her hands.");
+					outputText("\n\nYou gain " + stones + " stones.");
+					outputText("\n\n\"<i>Is there anything else you wanted to do while you're down here?</i>\"  She asks excitedly.");
+				}
+				//If Phylla IS Laying Eggs
+				else {
+					outputText("You ask Phylla if she allows you to take few of the stones that her or her children have gathered while digging.  She nods happily and closes her eyes, tilting her head back slightly.  After a moment one your children scampers in. He runs overs to a stone pile in the corner of Phylla's room and after a moment of gathering walking over to you, he giving you few stones.  You accept them.");
+					//if corruption under 50
+					if (player.cor < 50 || stones >= 10) outputText("\n\nYou pat him on the head for a job well done as he walks deeper into the colony leaving you alone with Phylla.");
+					//If corruption over 50
+					else outputText("\n\nYou count the stones, and give both him and Phylla a look of disappointment.  Sighing heavily, you point decisively at the exit and your child hangs his head in shame as he heads back into the tunnels.  Phylla looks just as depressed and just stares at the ground, unable to really move due to her 'pregnancy.'");
+					outputText("\n\n\"<i>Is there anything else you wanted to do while you're down here?</i>\"");
+					outputText("\n\nYou gain " + stones + " stones.");
+				}
+				flags[kFLAGS.PHYLLA_STONES_HUNTED_TODAY] = 1;
 			}
-			//If Phylla IS Laying Eggs
+			//Failure
 			else {
-				outputText("You ask Phylla if she allows you to take few of the stones that her or her children have gathered while digging.  She nods happily and closes her eyes, tilting her head back slightly.  After a moment one your children scampers in. He runs overs to a stone pile in the corner of Phylla's room and after a moment of gathering walking over to you, he giving you few stones.  You accept them.");
-				//if corruption under 50
-				if (player.cor < 50) outputText("\n\nYou pat him on the head for a job well done as he walks deeper into the colony leaving you alone with Phylla.");
-				//If corruption over 50
-				else outputText("\n\nYou count the stones, and give both him and Phylla a look of disappointment.  Sighing heavily, you point decisively at the exit and your child hangs his head in shame as he heads back into the tunnels.  Phylla looks just as depressed and just stares at the ground, unable to really move due to her 'pregnancy.'");
-				outputText("\n\n\"<i>Is there anything else you wanted to do while you're down here?</i>\"");
-				outputText("\n\nYou gain " + stones + " stones.");
+				outputText("You ask Phylla is she's got any spare stones from digging, which you can take.  She shakes sadly and says, \"<i>Sorry, that's all the stones you'll get for today. Come back tomorrow.</i>\"");
+				outputText("\n\nYou nod and leave.");
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}
