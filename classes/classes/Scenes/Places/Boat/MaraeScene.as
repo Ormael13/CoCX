@@ -658,7 +658,8 @@ private function MaraePt2RoundIIIPrizes():void {
 				player.createPerk(PerkLib.MaraesGiftProfractory,0,0,0,0);
 			}
 			else if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0 && player.findPerk(PerkLib.MaraesGiftButtslut) < 0) {
-				
+				outputText("<b>(New Perk Gained: Marae's Gift – Buttslut)</b>", false);
+				player.createPerk(PerkLib.MaraesGiftButtslut,0,0,0,0);
 			}
 		}
 	}
