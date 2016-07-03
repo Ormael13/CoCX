@@ -396,7 +396,7 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_1.3.24";
+			ver = "1.0.2_mod_1.3.24b";
 			version = ver + " (<b>Ember Spar Intensifies</b>)";
 
 			//Indicates if building for mobile?

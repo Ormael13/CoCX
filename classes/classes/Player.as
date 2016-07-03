@@ -828,10 +828,11 @@ use namespace kGAMECLASS;
 			}
 			if (mutantScore() >= 5 && race == "human")
 				race = "corrupted mutant";
-			if (minoScore() >= 4)
+			if (minoScore() >= 4) {
 				race = "minotaur-morph";
 				if (isTaur())
 					race = "minotaur-taur";
+			}
 			if (cowScore() > 5)
 			{
 				race = "cow-";
