@@ -4581,13 +4581,9 @@
 				player.tailRecharge = 5;
 				changes++;
 			}
-			//Increase height up to 5 feet.
-			if (rand(2) == 0 && changes < changeLimit && player.tallness < 60) {
+			//Increase height up to 4 feet.
+			if (rand(2) == 0 && changes < changeLimit && player.tallness < 48) {
 				temp = rand(5) + 3;
-				//Slow rate of growth near ceiling
-				if (player.tallness > 90) temp = Math.floor(temp / 2);
-				//Never 0
-				if (temp == 0) temp = 1;
 				//Flavor texts.  Flavored like 1950's cigarettes. Yum.
 				if (temp < 5) outputText("\n\nYou shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.", false);
 				if (temp >= 5 && temp < 7) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.", false);
@@ -4595,8 +4591,8 @@
 				player.tallness += temp;
 				changes++;
 			}
-			//Decrease height down to a minimum of 7 feet.
-			if (rand(2) == 0 && changes < changeLimit && player.tallness > 84) {
+			//Decrease height down to a maximum of 8 feet.
+			if (rand(2) == 0 && changes < changeLimit && player.tallness > 96) {
 				outputText("\n\nYour skin crawls, making you close your eyes and shiver.  When you open them again the world seems... different.  After a bit of investigation, you realize you've become shorter!\n", false);
 				player.tallness -= 1 + rand(3);
 				changes++;
