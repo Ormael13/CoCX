@@ -1376,7 +1376,7 @@ package classes.Scenes.Combat
 					addButton(button++, "Web", PCWebAttack, null, null, null, "Attempt to use your abdomen to spray sticky webs at an enemy and greatly slow them down.  Be aware it takes a while for your webbing to build up.  \n\nWeb Amount: " + Math.floor(player.tailVenom) + "/100");
 					break;
 				case TAIL_TYPE_SALAMANDER:
-					addButton(button++, "Tail Slap", tailSlapAttack, null, null, null, "Set ablaze in red-hot flames your tail to whip your foe with it to hurt and burn them!");
+					addButton(button++, "Tail Slap", tailSlapAttack, null, null, null, "Set your tail ablaze in red-hot flames to whip your foe with it to hurt and burn them!");
 					//break;
 				case TAIL_TYPE_SHARK:
 				case TAIL_TYPE_LIZARD:
