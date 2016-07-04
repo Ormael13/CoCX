@@ -66,7 +66,7 @@ package classes.Scenes.Areas
 					inventory.takeItem(weapons.W_STAFF, camp.returnToCampUseOneHour);
 					return;
 				}
-				else if (player.hasKeyItem("Carpenter's Toolbox") >= 0 && player.keyItemv1("Carpenter's Toolbox") < 200 && rand(2) == 0) {
+				else if (player.hasKeyItem("Carpenter's Toolbox") >= 0 && player.keyItemv1("Carpenter's Toolbox") < camp.cabinProgress.maxNailSupply() && rand(2) == 0) {
 					clearOutput();
 					outputText("While exploring the desert, you find the wreckage of a building. Judging from the debris, it's the remains of the library that was destroyed by the fire.\n\n", false);
 					outputText("You circle the wreckage for a good while and you can't seem to find anything to salvage.  Until something shiny catches your eye.  There are exposed nails that look like they can be scavenged.\n\n", false)
@@ -75,8 +75,8 @@ package classes.Scenes.Areas
 					flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCAVENGER] += extractedNail;
 					player.addKeyValue("Carpenter's Toolbox", 1, extractedNail);
 					outputText("After spending nearly an hour scavenging, you've managed to extract " + extractedNail + " nails.\n\n");
-					outputText("Nails: " + player.keyItemv1("Carpenter's Toolbox") + "/200")
-					if (player.keyItemv1("Carpenter's Toolbox") > 200) player.addKeyValue("Carpenter's Toolbox", 1, -(player.keyItemv1("Carpenter's Toolbox") - 200));
+					if (player.keyItemv1("Carpenter's Toolbox") > camp.cabinProgress.maxNailSupply()) player.addKeyValue("Carpenter's Toolbox", 1, -(player.keyItemv1("Carpenter's Toolbox") - camp.cabinProgress.maxNailSupply()));
+					outputText("Nails: " + player.keyItemv1("Carpenter's Toolbox") + "/" + camp.cabinProgress.maxNailSupply());
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
