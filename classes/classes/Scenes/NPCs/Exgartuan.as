@@ -370,7 +370,7 @@ public function exgartuanMasturbation():void {
 			outputText("You shrug off your top eagerly, ready to cooperate with the demon inside your " + player.allBreastsDescript() + " and enjoy a relaxing tit-massage.  You slide the offending material to the side and marvel at the wondrously large orbs on your chest.  Truly any place that can give you such wonderful endowments can't be evil.  You lean back, enjoying the warmth in the air as it flows over every extra-sensitive inch of your mounds, more than ready to get started.\n\n", false);
 		}
 		outputText("Both hands rise unbidden and begin to caress your " + player.breastDescript(0) + ".  They slide over every sensitive inch of ", false);
-		if (player.skinType == SKIN_TYPE_PLAIN || player.skinType >= SKIN_TYPE_UNDEFINED) outputText("flesh", false);
+		if (player.skinType == SKIN_TYPE_PLAIN) outputText("flesh", false);
 		else if (player.skinType == SKIN_TYPE_FUR) outputText("furry-covered flesh", false);
 		else if (player.skinType == SKIN_TYPE_SCALES) outputText("soft scaley flesh", false);
 		else outputText("gooey surface", false);

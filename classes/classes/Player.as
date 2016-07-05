@@ -1272,7 +1272,7 @@ use namespace kGAMECLASS;
 				score--;
 			if (tailType == 5)
 				score += 2;
-			if (skinType > 0 && score > 0)
+			if (skinType != SKIN_TYPE_PLAIN && score > 0)
 				score--;
 			return score;
 		}
@@ -1329,8 +1329,10 @@ use namespace kGAMECLASS;
 			//If the character has fur, scales, or gooey skin, -1
 			if (skinType == SKIN_TYPE_FUR && !InCollection(furColor, KitsuneScene.basicKitsuneFur) && !InCollection(furColor, KitsuneScene.elderKitsuneColors))
 				kitsuneCounter--;
-			if (skinType > SKIN_TYPE_FUR)
-				kitsuneCounter -= skinType; // -2 sor scales, -3 for goo
+			if (skinType == SKIN_TYPE_SCALES)
+				kitsuneCounter -= 2;
+			if (skinType == SKIN_TYPE_GOO)
+				kitsuneCounter -= 3;
 			//If the character has abnormal legs, -1
 			if (lowerBody != LOWER_BODY_TYPE_HUMAN && lowerBody != LOWER_BODY_TYPE_FOX)
 				kitsuneCounter--;
@@ -1519,7 +1521,7 @@ use namespace kGAMECLASS;
 			var mutantCounter:Number = 0;
 			if (faceType > 0)
 				mutantCounter++;
-			if (skinType > 0)
+			if (skinType != SKIN_TYPE_PLAIN)
 				mutantCounter++;
 			if (tailType > 0)
 				mutantCounter++;
