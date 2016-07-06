@@ -770,7 +770,6 @@ use namespace kGAMECLASS;
 			{
 				race = "lizan";
 			}
-			if (dragonScore() >= 6)
 			{
 				race = "dragon-morph";
 				if (faceType == 0)
