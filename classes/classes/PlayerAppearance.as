@@ -408,7 +408,14 @@ package classes
 				else {
 					outputText("  A single horn sprouts from your forehead.  It is conical and resembles a rhino's horn.  You estimate it to be about six inches long.");
 				}
-
+			}
+			if (player.hornType == HORNS_UNICORN)
+			{
+				outputText("  A single sharp nub of a horn sprouts from the center of your forehead.");
+				if (player.horns < 12)
+					outputText("  You estimate it to be about six inches long.");
+				else
+					outputText("  It has developed its own cute little spiral. You estimate it to be about a foot long, two inches thick and very sturdy. A very useful natural weapon.");
 			}
 			//BODY PG HERE
 			outputText("\n\nYou have a humanoid shape with the usual torso, arms, hands, and fingers.", false);
