@@ -5651,6 +5651,25 @@
 				player.earType = EARS_HUMAN;
 				changes++;
 			}
+			//-Skin color change
+			var humanSkinColors:Array = ["light", "fair", "tan", "dark"];
+			if (humanSkinColors.indexOf(player.skinTone) < 0 && changes < changeLimit && rand(4) == 0) {
+				changes++;
+				outputText("\n\nIt takes a while for you to notice, but <b>");
+				if (player.skinType == SKIN_TYPE_FUR) outputText("the skin under your " + player.furColor + " " + player.skinDesc + " has ");
+				else outputText("your " + player.skinDesc + (player.skinDesc.indexOf("scales") != -1 ? " have " : " has "));
+				player.skinTone = randomChoice(humanSkinColors);
+				outputText("changed to become " + player.skinTone + " colored.</b>");
+			}
+			//Change skin to normal
+			if (player.skinType != SKIN_TYPE_PLAIN && player.earType == EARS_HUMAN && rand(3) == 0 && changes < changeLimit) {
+				outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your " + player.skinFurScales());
+				outputText(" " + (player.hasScales() ? "are" : "is") + " falling to the ground, revealing flawless skin below.  <b>You now have normal skin.</b>");
+				player.skinType = SKIN_TYPE_PLAIN;
+				player.skinDesc = "skin";
+				player.skinAdj  = "";
+				changes++;
+			}
 			//Removing gills
 			if (rand(4) == 0 && player.gills && changes < changeLimit) {
 				outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.", false);
