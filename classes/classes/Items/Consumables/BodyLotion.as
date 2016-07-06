@@ -29,56 +29,56 @@ package classes.Items.Consumables
 				case "smooth":
 					switch(Utils.rand(2)) { //Nested switch-and-case FTW!
 						case 0:
-							outputText("smooth liquid");
+							liquidDesc = "smooth liquid";
 							break;
 						case 1:
-							outputText("thick cream");
+							liquidDesc = "thick cream";
 							break;
 						default:
-							outputText("smooth liquid");
+							liquidDesc = "smooth liquid";
 					}
 					break;
 				case "rough":
 					switch(Utils.rand(2)) { 
 						case 0:
-							outputText("abrasive goop");
+							liquidDesc = "abrasive goop";
 							break;
 						case 1:
-							outputText("rough textured goop");
+							liquidDesc = "rough textured goop";
 							break;
 						default:
-							outputText("abrasive goop");
+							liquidDesc = "abrasive goop";
 					}
 					break;
 				case "sexy":
 					switch(Utils.rand(3)) {
 						case 0:
-							outputText("smooth liquid");
+							liquidDesc = "smooth liquid";
 							break;
 						case 1:
-							outputText("attractive cream");
+							liquidDesc = "attractive cream";
 							break;
 						case 2:
-							outputText("beautiful cream");
+							liquidDesc = "beautiful cream";
 							break;
 						default:
-							outputText("smooth liquid");
+							liquidDesc = "smooth liquid";
 					}
 					break;
 				case "clear":
 					switch(Utils.rand(2)) {
 						case 0:
-							outputText("smooth liquid");
+							liquidDesc = "smooth liquid";
 							break;
 						case 1:
-							outputText("thick cream");
+							liquidDesc = "thick cream";
 							break;
 						default:
-							outputText("smooth liquid");
+							liquidDesc = "smooth liquid";
 					}
 					break;
 				default: //Failsafe
-					outputText("cream");
+					liquidDesc = "cream";
 			}
 			return liquidDesc;
 		}
