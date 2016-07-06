@@ -821,10 +821,17 @@ use namespace kGAMECLASS;
 				if (isTaur())
 					race = "centaur-morph";
 				else
-					if (hornType == HORNS_UNICORN)
-						race = "unicorn-morph";
-					else
-						race = "equine-morph";
+					if (hornType == HORNS_UNICORN) {
+						if (wingType == WING_TYPE_FEATHERED_LARGE)
+							race = "alicorn";
+						else
+							race = "unicorn-morph";
+					} else {
+						if (wingType == WING_TYPE_FEATHERED_LARGE)
+							race = "pegasus";
+						else
+							race = "equine-morph";
+					}
 			}
 			if (mutantScore() >= 5 && race == "human")
 				race = "corrupted mutant";
@@ -933,12 +940,25 @@ use namespace kGAMECLASS;
 			//</mod>
 			if (lowerBody == 3)
 				race = "naga";
-				
+
 			if (lowerBody == LOWER_BODY_TYPE_HOOFED && isTaur()) {
-				if (wingType == WING_TYPE_FEATHERED_LARGE) race = "pegataur";
-				else race = "centaur";
+				if (wingType == WING_TYPE_FEATHERED_LARGE) {
+					if (hornType == HORNS_UNICORN)
+						race = "alicorn-taur";
+					else
+						race = "pegataur";
+				} else {
+					if (hornType == HORNS_UNICORN)
+						race = "unicorn-taur";
+					else {
+						if (horseScore() >= 5)
+							race = "equitaur";
+						else
+							race = "centaur";
+					}
+				}
 			}
-			
+
 			if (lowerBody == LOWER_BODY_TYPE_PONY)
 				race = "pony-kin";
 
