@@ -2881,7 +2881,7 @@
 					if (player.skinType == SKIN_TYPE_PLAIN) outputText(" loses its blemishes, becoming flawless smooth skin.", false);
 					if (player.skinType == SKIN_TYPE_FUR) outputText(" falls out in clumps, revealing smooth skin underneath.", false);
 					if (player.skinType == SKIN_TYPE_SCALES) outputText(" begins dropping to the ground in a pile around you, revealing smooth skin underneath.", false);
-					if (player.skinType > SKIN_TYPE_SCALES) outputText(" shifts and changes into flawless smooth skin.", false);
+					if (player.skinType == SKIN_TYPE_GOO) outputText(" shifts and changes into flawless smooth skin.", false);
 					player.skinDesc = "skin";
 					player.skinAdj = "smooth";
 					if (player.skinTone == "rough gray") player.skinTone = "gray";
@@ -2934,7 +2934,7 @@
 					if (player.skinType == SKIN_TYPE_PLAIN) outputText(" loses its blemishes, becoming flawless smooth skin.", false);
 					if (player.skinType == SKIN_TYPE_FUR) outputText(" falls out in clumps, revealing smooth skin underneath.", false);
 					if (player.skinType == SKIN_TYPE_SCALES) outputText(" begins dropping to the ground in a pile around you, revealing smooth skin underneath.", false);
-					if (player.skinType > SKIN_TYPE_SCALES) outputText(" shifts and changes into flawless smooth skin.", false);
+					if (player.skinType == SKIN_TYPE_GOO) outputText(" shifts and changes into flawless smooth skin.", false);
 					player.skinDesc = "skin";
 					player.skinAdj = "smooth";
 					if (player.skinTone == "rough gray") player.skinTone = "gray";
@@ -3771,7 +3771,7 @@
 			if (player.skinType != SKIN_TYPE_PLAIN && changes < changeLimit && rand(4) == 0 && player.faceType == FACE_HUMAN) {
 				if (player.skinType == SKIN_TYPE_FUR) outputText("\n\nYour fur itches incessantly, so you start scratching it.  It starts coming off in big clumps before the whole mess begins sloughing off your body.  In seconds, your skin is nude.  <b>You've lost your fur!</b>", false);
 				if (player.skinType == SKIN_TYPE_SCALES) outputText("\n\nYour scales itch incessantly, so you scratch at them.  They start falling off wholesale, leaving you standing in a pile of scales after only a few moments.  <b>You've lost your scales!</b>", false);
-				if (player.skinType > SKIN_TYPE_SCALES) outputText("\n\nYour " + player.skinDesc + " itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin.  <b>Your skin is once again normal!</b>", false);
+				if (player.skinType == SKIN_TYPE_GOO) outputText("\n\nYour " + player.skinDesc + " itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin.  <b>Your skin is once again normal!</b>", false);
 				player.skinAdj = "";
 				player.skinDesc = "skin";
 				player.skinType = SKIN_TYPE_PLAIN;
@@ -3902,7 +3902,6 @@
 				if (player.skinType == SKIN_TYPE_PLAIN) outputText("\n\nYou sigh, feeling your " + player.armorName + " sink into you as your skin becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!", false);
 				else if (player.skinType == SKIN_TYPE_FUR) outputText("\n\nYou sigh, suddenly feeling your fur become hot and wet.  You look down as your " + player.armorName + " sinks partway into you.  With a start you realize your fur has melted away, melding into the slime-like coating that now serves as your skin.  You've become partly liquid and incredibly gooey!", false);
 				else if (player.skinType == SKIN_TYPE_SCALES) outputText("\n\nYou sigh, feeling slippery wetness over your scales.  You reach to scratch it and come away with a slippery wet coating.  Your scales have transformed into a slimy goop!  Looking closer, you realize your entire body has become far more liquid in nature, and is semi-solid.  Your " + player.armorName + " has even sunk partway into you.", false);
-				else if (player.skinType > SKIN_TYPE_GOO) outputText("\n\nYou sigh, feeling your " + player.armorName + " sink into you as your " + player.skinDesc + " becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!", false);
 				player.skinType = SKIN_TYPE_GOO;
 				player.skinDesc = "skin";
 				player.skinAdj = "slimy";
@@ -5765,7 +5764,7 @@
 				//Libido over 60? FUCK YEAH!
 				else if (player.lib < 80) {
 					outputText("\n\nYou fan your neck and start to pant as your " + player.skinTone + " skin begins to flush red with heat", false);
-					if (player.skinType > SKIN_TYPE_PLAIN) outputText(" through your " + player.skinDesc, false);
+					if (player.skinType != SKIN_TYPE_PLAIN) outputText(" through your " + player.skinDesc, false);
 					outputText(".  ", false);
 					if (player.gender == 1) outputText("Compression tightens down on " + player.sMultiCockDesc() + " as it strains against your " + player.armorName + ".  You struggle to fight down your heightened libido, but it's hard – so very hard.", false);
 					else if (player.gender == 0) outputText("Sexual hunger seems to gnaw at your " + player.assholeDescript() + ", demanding it be filled, but you try to resist your heightened libido.  It's so very, very hard.", false);
@@ -6008,7 +6007,7 @@
 				//Libido over 60? FUCK YEAH!
 				else if (player.lib < 80) {
 					outputText("\n\nYou fan your neck and start to pant as your " + player.skinTone + " skin begins to flush red with heat", false);
-					if (player.skinType > SKIN_TYPE_PLAIN) outputText(" through your " + player.skinDesc, false);
+					if (player.skinType != SKIN_TYPE_PLAIN) outputText(" through your " + player.skinDesc, false);
 					outputText(".  ", false);
 					if (player.gender == 1) outputText("Compression tightens down on " + player.sMultiCockDesc() + " as it strains against your " + player.armorName + ".  You struggle to fight down your heightened libido, but it's hard – so very hard.", false);
 					else if (player.gender == 0) outputText("Sexual hunger seems to gnaw at your " + player.assholeDescript() + ", demanding it be filled, but you try to resist your heightened libido.  It's so very, very hard.", false);
@@ -8941,7 +8940,7 @@
 				//from skinscales
 				if (player.skinType != SKIN_TYPE_FUR) {
 					outputText("\n\nYour " + player.skinFurScales() + " itch");
-					if (player.skinType > SKIN_TYPE_PLAIN) outputText("es");
+					if (player.skinType != SKIN_TYPE_PLAIN) outputText("es");
 					outputText(" all over");
 					if (player.tailType > TAIL_TYPE_NONE) outputText(", except on your tail");
 					outputText(".  Alarmed and suspicious, you tuck in your hands, trying to will yourself not to scratch, but it doesn't make much difference.  Tufts of ");

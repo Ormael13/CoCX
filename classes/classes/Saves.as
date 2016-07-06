@@ -1647,6 +1647,13 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.skinAdj = saveFile.data.skinAdj;
 		player.skinTone = saveFile.data.skinTone;
 		player.skinDesc = saveFile.data.skinDesc;
+		//Silently discard SKIN_TYPE_UNDEFINED
+		if (player.skinType == SKIN_TYPE_UNDEFINED)
+		{
+			player.skinAdj = "";
+			player.skinDesc = "skin";
+			player.skinType = SKIN_TYPE_PLAIN;
+		}
 		//Convert from old skinDesc to new skinAdj + skinDesc!
 		if (player.skinDesc.indexOf("smooth") != -1)
 		{
