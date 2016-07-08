@@ -4,10 +4,8 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Areas.Forest.KitsuneScene;
 
-	public final class Mutations extends BaseContent
+	public final class Mutations extends MutationsHelper
 	{
-		include "../../../includes/appearanceDefs.as";
-
 		public function Mutations()
 		{
 		}
@@ -511,18 +509,8 @@
 				}
 				changes++;
 			}
-			//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_HARPY && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove chitin-arms (copy this for goblin ale, mino blood, equinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SPIDER && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
+			//Restore arms to become human arms again
+			changes += restoreArms(changes, changeLimit);
 			//+hooves
 			if (player.lowerBody != LOWER_BODY_TYPE_HOOFED) {
 				if (changes < changeLimit && rand(3) == 0) {
@@ -973,18 +961,8 @@
 					changes++;
 				}
 			}
-			//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_HARPY && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove chitin-arms (copy this for goblin ale, mino blood, equinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SPIDER && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
+			//Restore arms to become human arms again
+			changes += restoreArms(changes, changeLimit);
 			//-Remove feathery hair (copy for equinum, canine peppers, Labova)
 			if (changes < changeLimit && player.hairType == 1 && rand(4) == 0) {
 				//(long):
@@ -1690,18 +1668,8 @@
 				outputText("dumber.", false);
 				changes++;
 			}
-			//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_HARPY && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove chitin-arms (copy this for goblin ale, mino blood, equinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SPIDER && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
+			//Restore arms to become human arms again
+			changes += restoreArms(changes, changeLimit);
 			//-Remove feathery hair (copy for equinum, canine peppers, Labova)
 			if (changes < changeLimit && player.hairType == 1 && rand(4) == 0) {
 				//(long):
@@ -3679,18 +3647,8 @@
 				outputText("\n\nYou feel like dancing, and stumble as your legs react more quickly than you'd think.  Is the alcohol slowing you down or are you really faster?  You take a step and nearly faceplant as you go off balance.  It's definitely both.", false);
 				changes++;
 			}
-			//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_HARPY && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove chitin-arms (copy this for goblin ale, mino blood, equinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SPIDER && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
+			//Restore arms to become human arms again
+			changes += restoreArms(changes, changeLimit);
 			//SEXYTIEMS
 			//Multidick killa!
 			if (player.cocks.length > 1 && rand(3) == 0 && changes < changeLimit) {
@@ -4459,18 +4417,8 @@
 				player.skinDesc = "skin";
 				changes++;
 			}
-			//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_HARPY && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove chitin-arms (copy this for goblin ale, mino blood, equinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SPIDER && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
+			//Restore arms to become human arms again
+			changes += restoreArms(changes, changeLimit);
 			//-----------------------
 			// MINOR TRANSFORMATIONS
 			//-----------------------
@@ -6390,7 +6338,6 @@
 
 		 Appearance Effects:
 		 -Hip widening funtimes
-		 -Remove feather-arms (copy this for goblin ale, mino blood, equinum, canine pepps, demon items)
 		 -Remove feathery hair (copy for equinum, canine peppers, Labova)
 
 		 Sexual:
@@ -6462,18 +6409,8 @@
 				player.hipRating++;
 				changes++;
 			}
-			//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_HARPY && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove chitin-arms (copy this for goblin ale, mino blood, equinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SPIDER && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
+			//-Restore arms to become human arms again
+			changes += restoreArms(changes, changeLimit);
 			//-Remove feathery hair (copy for equinum, canine peppers, Labova)
 			if (changes < changeLimit && player.hairType == 1 && rand(4) == 0) {
 				//(long):
