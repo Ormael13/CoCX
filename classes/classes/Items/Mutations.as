@@ -963,15 +963,8 @@
 			}
 			//Restore arms to become human arms again
 			changes += restoreArms(changes, changeLimit);
-			//-Remove feathery hair (copy for equinum, canine peppers, Labova)
-			if (changes < changeLimit && player.hairType == 1 && rand(4) == 0) {
-				//(long):
-				if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft feather-hair droops over your eye.  Before you can blow the offending down away, you realize the feather is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer feathery!</b>", false);
-				//(short)
-				else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your feathers.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer feathery!</b>", false);
-				changes++;
-				player.hairType = HAIR_NORMAL;
-			}
+			//Remove feathery hair
+			changes += removeFeatheryHair(changes, changeLimit);
 			//
 			//SEXUAL CHARACTERISTICS
 			//
@@ -1670,15 +1663,8 @@
 			}
 			//Restore arms to become human arms again
 			changes += restoreArms(changes, changeLimit);
-			//-Remove feathery hair (copy for equinum, canine peppers, Labova)
-			if (changes < changeLimit && player.hairType == 1 && rand(4) == 0) {
-				//(long):
-				if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft feather-hair droops over your eye.  Before you can blow the offending down away, you realize the feather is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer feathery!</b>", false);
-				//(short)
-				else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your feathers.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer feathery!</b>", false);
-				changes++;
-				player.hairType = HAIR_NORMAL;
-			}
+			//Remove feathery hair
+			changes += removeFeatheryHair(changes, changeLimit);
 			//if (type != 2 && type != 4 && type != 5) outputText("\n", false);
 			//Double Pepper!
 			//Xforms/grows dicks to make you have two dogcocks
@@ -3201,15 +3187,8 @@
 				dynStats("sen", .5);
 				boobsGrew = true;
 			}
-			//-Remove feathery hair (copy for equinum, canine peppers, Labova)
-			if (changes < changeLimit && player.hairType == 1 && rand(4) == 0) {
-				//(long):
-				if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft feather-hair droops over your eye.  Before you can blow the offending down away, you realize the feather is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer feathery!</b>", false);
-				//(short)
-				else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your feathers.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer feathery!</b>", false);
-				changes++;
-				player.hairType = HAIR_NORMAL;
-			}
+			//Remove feathery hair
+			changes += removeFeatheryHair(changes, changeLimit);
 			//If breasts are D or bigger and are not lactating, they also start lactating:
 			if (player.biggestTitSize() >= 4 && player.breastRows[0].lactationMultiplier < 1 && changes < changeLimit && (rand(3) == 0 || boobsGrew || enhanced)) {
 				outputText("\n\nYou gasp as your " + player.breastDescript(0) + " feel like they are filling up with something.  Within moments, a drop of milk leaks from your " + player.breastDescript(0) + "; <b> you are now lactating</b>.", false);
@@ -4465,15 +4444,8 @@
 				changes++;
 				player.removeStatusEffect(StatusEffects.BlackNipples);
 			}
-			//Remove feathery hair (copy for equinum, canine peppers, Labova)
-			if (changes < changeLimit && player.hairType == HAIR_FEATHER && rand(4) == 0) {
-				//(long):
-				if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft feather-hair droops over your eye.  Before you can blow the offending down away, you realize the feather is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer feathery!</b>", false);
-				//(short)
-				else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your feathers.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer feathery!</b>", false);
-				changes++;
-				player.hairType = HAIR_NORMAL;
-			}
+			//Remove feathery hair
+			changes += removeFeatheryHair(changes, changeLimit);
 			//Remove anemone hair
 			if (changes < changeLimit && player.hairType == HAIR_ANEMONE && rand(3) == 0) {
 				//-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
@@ -6338,7 +6310,7 @@
 
 		 Appearance Effects:
 		 -Hip widening funtimes
-		 -Remove feathery hair (copy for equinum, canine peppers, Labova)
+		 -Remove feathery hair
 
 		 Sexual:
 		 -Shrink balls down to reasonable size (3?)
@@ -6411,15 +6383,8 @@
 			}
 			//-Restore arms to become human arms again
 			changes += restoreArms(changes, changeLimit);
-			//-Remove feathery hair (copy for equinum, canine peppers, Labova)
-			if (changes < changeLimit && player.hairType == 1 && rand(4) == 0) {
-				//(long):
-				if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft feather-hair droops over your eye.  Before you can blow the offending down away, you realize the feather is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer feathery!</b>", false);
-				//(short)
-				else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your feathers.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer feathery!</b>", false);
-				changes++;
-				player.hairType = HAIR_NORMAL;
-			}
+			//-Remove feathery hair
+			changes += removeFeatheryHair(changes, changeLimit);
 			//Remove odd eyes
 			if (changes < changeLimit && rand(5) == 0 && player.eyeType > EYES_HUMAN) {
 				if (player.eyeType == EYES_BLACK_EYES_SAND_TRAP) {

@@ -44,5 +44,21 @@ package classes.Items
 
 			return localChanges;
 		}
+
+		public function removeFeatheryHair(changes:Number, changeLimit:Number):Number
+		{
+			var localChanges:Number = 0;
+
+			if (changes < changeLimit && player.hairType == HAIR_FEATHER && rand(4) == 0) {
+				//(long):
+				if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft feather-hair droops over your eye.  Before you can blow the offending down away, you realize the feather is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer feathery!</b>", false);
+				//(short)
+				else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your feathers.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer feathery!</b>", false);
+				localChanges++;
+				player.hairType = HAIR_NORMAL;
+			}
+
+			return localChanges;
+		}
 	}
 }
