@@ -2299,6 +2299,7 @@
 					[ARM_TYPE_HUMAN, "human"],
 					[ARM_TYPE_HARPY, "harpy"],
 					[ARM_TYPE_SPIDER, "spider"],
+					[ARM_TYPE_PREDATOR, "predator"],
 					[ARM_TYPE_SALAMANDER, "salamander"]
 				]
 		);
