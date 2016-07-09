@@ -373,8 +373,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.6c";
-			version = ver + " (<b>Nocello Liqueur, Black Ink, Grey Ink, White Ink, Unicornum, Alicornum, Blade Grass (new TF items) and Moga Hen</b>)";
+			ver = "1.0.2_mod_Xianxia_0.7a";
+			version = ver + " (<b>Rise of the Monsters, Soul Sprite cultivation stage, Weapons and Armors cost adjustments and all others small changes</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
