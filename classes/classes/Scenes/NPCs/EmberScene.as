@@ -951,7 +951,7 @@ package classes.Scenes.NPCs
 					outputText("\n\nEmber's body is a curvy thing, not rough like you'd expect from a reptilian creature, but rounded and almost soft-looking, with a taut belly and a perfect hourglass figure, giving " + emberMF("him", "her") + " the silhouette of an amazon from your village's histories: beautiful but powerful.  Excepting the wings and horns, of course.");
 				}
 				outputText("\n\nThe dragon scorns clothing and exposes " + emberMF("him", "her") + "self to both you and the elements with equal indifference, claiming " + emberMF("his", "her") + " scales are all the covering " + emberMF("he", "she") + " needs... and yet when you admire " + emberMF("his", "her") + " body, " + emberMF("he", "she") + " is quick to hide it from your wandering gaze.");
-				outputText("\n\n" + emberMF("His", "Her") + " head is reptilian, with sharp teeth fit for a predator and strong ridges on the underside of the jaw.  At the sides of " + emberMF("his", "her") + " head are strange, fin-like growths concealing small holes; you presume these to be the dragon equivalent of ears.  Atop " + emberMF("his", "her") + " head sit a pair of ebony horns that curve backwards elegantly; despite being as tough as steel, their shape is not fit for use in combat, instead it is simply aesthetical, giving Ember a majestic look.  A long tongue occasionally slips out, to lick at " + emberMF("his", "her") + " jaws and teeth.  Prideful, fierce eyes, with slit pupils and burning orange irises, glitter even in the darkness.");
+				outputText("\n\n" + emberMF("His", "Her") + " head is reptilian, with sharp teeth fit for a predator and strong ridges on the underside of the jaw.  At the sides of " + emberMF("his", "her") + " head are strange, fin-like growths concealing small holes; you presume these to be the dragon equivalent of ears.  Atop " + emberMF("his", "her") + " head sit two pairs of ebony horns that curve backwards elegantly; despite being as tough as steel, their shape is not fit for use in combat, instead it is simply aesthetical, giving Ember a majestic look.  A long tongue occasionally slips out, to lick at " + emberMF("his", "her") + " jaws and teeth.  Prideful, fierce eyes, with slit pupils and burning orange irises, glitter even in the darkness.");
 				//(if Ember has any hair)
 				if (flags[kFLAGS.EMBER_HAIR] == 1) {
 					if (flags[kFLAGS.EMBER_GENDER] == 1) outputText("  Short ");
@@ -1762,6 +1762,23 @@ package classes.Scenes.NPCs
 				}
 				changes++;
 			}
+			// <mod name="Predator arms" author="Stadler">
+			//Gain Dragon Arms (Derived from ARM_TYPE_SALAMANDER)
+			if (player.armType != ARM_TYPE_PREDATOR && player.skinType == SKIN_TYPE_SCALES && player.lowerBody == LOWER_BODY_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of some reptilian killer with shield-shaped " + player.skinTone + " scales and powerful, thick curved claws replacing your fingernails.");
+				outputText("\n<b>You now have dragon arms.</b>", false);
+				player.armType = ARM_TYPE_PREDATOR;
+				player.clawType = CLAW_TYPE_DRAGON;
+				changes++
+			}
+			//Claw transition
+			if (player.armType == ARM_TYPE_PREDATOR && player.skinType == SKIN_TYPE_SCALES && player.clawType != CLAW_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYour " + player.claws() + " change  a little to become more dragon-like.");
+				player.clawType = CLAW_TYPE_DRAGON;
+				outputText(" <b>You now have " + player.claws() + ".</b>");
+				changes++
+			}
+			// </mod>
 			//Get Dragon Breath (Tainted version)
 			//Can only be obtained if you are considered a dragon-morph, once you do get it though, it won't just go away even if you aren't a dragon-morph anymore.
 

@@ -108,7 +108,18 @@ public static const ANTENNAE_BEE:int                                            
 public static const ARM_TYPE_HUMAN:int                                              =   0;
 public static const ARM_TYPE_HARPY:int                                              =   1;
 public static const ARM_TYPE_SPIDER:int                                             =   2;
-public static const ARM_TYPE_SALAMANDER:int									           		=   5;
+public static const ARM_TYPE_PREDATOR:int                                           =   4;
+public static const ARM_TYPE_SALAMANDER:int                                         =   5;
+
+// clawType
+public static const CLAW_TYPE_NORMAL:int                                            =   0;
+public static const CLAW_TYPE_LIZARD:int                                            =   1;
+public static const CLAW_TYPE_DRAGON:int                                            =   2;
+public static const CLAW_TYPE_SALAMANDER:int                                        =   3;
+public static const CLAW_TYPE_CAT:int                                               =   4; // NYI! Placeholder for now!! (See http://tiny.cc/coc-revamp-claws)
+public static const CLAW_TYPE_DOG:int                                               =   5; // NYI! Placeholder for now!! (See http://tiny.cc/coc-revamp-claws)
+public static const CLAW_TYPE_RAPTOR:int                                            =   6; // NYI! Placeholder for now!! (See http://tiny.cc/coc-revamp-claws) Giev teh Rapturs :-)
+public static const CLAW_TYPE_MANTIS:int                                            =   7; // NYI! Placeholder for Xianxia mod (See http://tiny.cc/coc-xianxia-mod)
 
 // tailType
 public static const TAIL_TYPE_NONE:int                                              =   0;

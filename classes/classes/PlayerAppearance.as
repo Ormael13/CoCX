@@ -21,7 +21,7 @@ package classes
 			displayHeader("Appearance");
 			if (race != player.startingRace)	outputText("You began your journey as a " + player.startingRace+ ", but gave that up as you explored the dangers of this realm.  ", false);
 			//Height and race.
-			if (flags[kFLAGS.USE_METRICS] > 0) outputText("You are a " + Math.round(100 * (player.tallness * 2.54) / 100) + " centimetre tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
+			if (flags[kFLAGS.USE_METRICS] > 0) outputText("You are a " + (Math.round(player.tallness * 2.54) / 100).toFixed(2) + " metres tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
 			else outputText("You are a " + Math.floor(player.tallness / 12) + " foot " + player.tallness % 12 + " inch tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
 			
 			outputText("  <b>You are currently " + (player.armorDescript() != "gear" ? "wearing your " + player.armorDescript() : "naked") + "" + " and using your " + player.weaponName + " as a weapon.</b>", false);
@@ -444,8 +444,10 @@ package classes
 				outputText("  Feathers hang off your arms from shoulder to wrist, giving them a slightly wing-like look.", false);
 			else if (player.armType == ARM_TYPE_SPIDER) 
 				outputText("  Shining black exoskeleton  covers your arms from the biceps down, resembling a pair of long black gloves from a distance.", false);	
-			else if(player.armType == ARM_TYPE_SALAMANDER)
+			else if (player.armType == ARM_TYPE_SALAMANDER)
 				outputText("  Shining thick, leathery red scales covers your arms from the biceps down and your fingernails are now a short curved claws.", false);
+			else if (player.armType == ARM_TYPE_PREDATOR)
+				outputText("  Your arms are covered by " + player.skinFurScales() + " from the biceps down and your fingernails are now " + player.claws() + ".", false);
 			//Done with head bits. Move on to body stuff
 			//Horse lowerbody, other lowerbody texts appear lower
 			if (player.isTaur()) 
