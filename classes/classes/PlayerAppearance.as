@@ -447,7 +447,7 @@ package classes
 			else if (player.armType == ARM_TYPE_SALAMANDER)
 				outputText("  Shining thick, leathery red scales covers your arms from the biceps down and your fingernails are now a short curved claws.", false);
 			else if (player.armType == ARM_TYPE_PREDATOR)
-				outputText("  Your arms are covered by " + player.skinFurScales() + " from the biceps down and your fingernails are now " + player.claws() + ".", false);
+				outputText("  Your arms are covered by " + player.skinFurScales() + " and your fingernails are now " + player.claws() + ".", false);
 			//Done with head bits. Move on to body stuff
 			//Horse lowerbody, other lowerbody texts appear lower
 			if (player.isTaur()) 
