@@ -3851,6 +3851,7 @@
 					else if (blaht <= 8) player.skinTone = "cerulean";
 					else player.skinTone = "emerald";
 					outputText(player.skinTone + "!");
+					restoreArms(0, 1, [], RESTOREARMS_FROMGOOSKINTF);
 				}
 				return;
 			}
@@ -5305,39 +5306,13 @@
 			if (player.skinType != SKIN_TYPE_SCALES && player.earType == EARS_LIZARD && player.tailType == TAIL_TYPE_LIZARD && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(5) == 0) {
 				//(fur)
 				if (player.skinType == SKIN_TYPE_FUR) {
-					//set new skinTone
-					if (rand(10) == 0) {
-						if (rand(2) == 0) player.skinTone = "purple";
-						else player.skinTone = "silver";
-					}
-					//non rare skinTone
-					else {
-						temp = rand(5);
-						if (temp == 0) player.skinTone = "red";
-						else if (temp == 1) player.skinTone = "green";
-						else if (temp == 2) player.skinTone = "white";
-						else if (temp == 3) player.skinTone = "blue";
-						else player.skinTone = "black";
-					}
+					player.skinTone = newLizardSkinTone();
 					outputText("\n\nYou scratch yourself, and come away with a large clump of " + player.furColor + " fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + player.skinTone + " scales covering most of your body.  The rest of the fur is easy to remove.  <b>You're now covered in scales from head to toe.</b>", false);
 				}
 				//(no fur)
 				else {
 					outputText("\n\nYou idly reach back to scratch yourself and nearly jump out of your " + player.armorName + " when you hit something hard.  A quick glance down reveals that scales are growing out of your " + player.skinTone + " skin with alarming speed.  As you watch, the surface of your skin is covered in smooth scales.  They interlink together so well that they may as well be seamless.  You peel back your " + player.armorName + " and the transformation has already finished on the rest of your body.  <b>You're covered from head to toe in shiny ", false);
-					//set new skinTone
-					if (rand(10) == 0) {
-						if (rand(2) == 0) player.skinTone = "purple";
-						else player.skinTone = "silver";
-					}
-					//non rare skinTone
-					else {
-						temp = rand(5);
-						if (temp == 0) player.skinTone = "red";
-						else if (temp == 1) player.skinTone = "green";
-						else if (temp == 2) player.skinTone = "white";
-						else if (temp == 3) player.skinTone = "blue";
-						else player.skinTone = "black";
-					}
+					player.skinTone = newLizardSkinTone();
 					outputText(player.skinTone + " scales.</b>", false);
 				}
 				player.skinType = SKIN_TYPE_SCALES;
@@ -6268,6 +6243,7 @@
 				outputText("\n\nYou smile impishly as you lick the last bits of the nut from your teeth, but when you go to wipe your mouth, instead of the usual texture of your " + player.skinDesc + " on your lips, you feel feathers! You look on in horror while more of the avian plumage sprouts from your " + player.skinDesc + ", covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.", false);
 				changes++;
 				player.armType = ARM_TYPE_HARPY;
+				player.clawType = CLAW_TYPE_NORMAL;
 			}
 			//-Feathery Hair
 			if (player.hairType != 1 && changes < changeLimit && (type == 1 || player.faceType == FACE_HUMAN) && rand(4) == 0) {
