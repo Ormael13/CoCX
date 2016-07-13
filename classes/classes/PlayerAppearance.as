@@ -375,7 +375,7 @@ package classes
 					outputText("  Two huge horns erupt from your forehead, curving outward at first, then forwards.  The weight of them is heavy, and they end in dangerous looking points.", false);
 			}
 			//Lizard horns
-			if (player.hornType == HORNS_DRACONIC_X2) 
+			if (player.horns > 0 && player.hornType == HORNS_DRACONIC_X2) 
 			{
 				if (flags[kFLAGS.USE_METRICS] > 0) outputText("  A pair of " + num2Text(int(player.horns*2.54)) + " centimetre horns grow from the sides of your head, sweeping backwards and adding to your imposing visage.", false);
 				else outputText("  A pair of " + num2Text(int(player.horns)) + " inch horns grow from the sides of your head, sweeping backwards and adding to your imposing visage.", false);
