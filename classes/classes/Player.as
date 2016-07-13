@@ -1270,7 +1270,9 @@ use namespace kGAMECLASS;
 				lizardCounter++;
 			if (countCocksOfType(CockTypesEnum.LIZARD) > 0)
 				lizardCounter++;
-			if (horns > 0 && (hornType == 3 || hornType == 4))
+			if ((horns > 0 && hornType == HORNS_DRACONIC_X2) || hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
+				lizardCounter++;
+			if (armType == ARM_TYPE_PREDATOR && clawType == CLAW_TYPE_LIZARD)
 				lizardCounter++;
 			if (skinType == 2)
 				lizardCounter++;
@@ -1388,13 +1390,13 @@ use namespace kGAMECLASS;
 				dragonCounter++;
 			if (lowerBody == 18)
 				dragonCounter++;
-			if (horns > 0 && (hornType == 3 || hornType == 4))
-				dragonCounter++;
 			if (skinType == 2 && dragonCounter > 0)
 				dragonCounter++;
-			if (hornType == HORNS_DRACONIC_X4_12_INCH_LONG || hornType == HORNS_DRACONIC_X2)
-				dragonCounter++;
+			if ((horns > 0 && hornType == HORNS_DRACONIC_X2) || hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
+				dragonCounter += 2;
 			if (findPerk(PerkLib.Dragonfire) >= 0)
+				dragonCounter++;
+			if (armType == ARM_TYPE_PREDATOR && clawType == CLAW_TYPE_DRAGON)
 				dragonCounter++;
 			return dragonCounter;
 		}
