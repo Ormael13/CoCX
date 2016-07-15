@@ -3,7 +3,7 @@ package classes.Items
 	import classes.*;
 	
 	/**
-	 * Helper class to get rid of the copy&paste-mess from classes.Items.Mutations
+	 * Helper class to get rid of the copy&paste-mess in classes.Items.Mutations
 	 * @author Stadler76
 	 */
 	public class MutationsHelper extends BaseContent 
@@ -125,5 +125,32 @@ package classes.Items
 
 			return "invalid"; // Will never happen. Suppresses 'Error: Function does not return a value.'
 		}
+
+		public function gainSnakeTongue(changes:Number, changeLimit:Number):Number
+		{
+			var localChanges:Number = 0;
+
+			if (player.tongueType != TONGUE_SNAKE && changes < changeLimit) {
+				if (player.tongueType == TONGUE_HUMAN) {
+					outputText("\n\nYour taste-buds start aching as they swell to an uncomfortably large size. "
+					          +"Trying to understand what in the world could have provoked such a reaction, you bring your hands up to your mouth, "
+					          +"your tongue feeling like it's trying to push its way past your lips.");
+					outputText("  The soreness stops and you stick out your tongue to try and see what would have made it feel the way it did. "
+					          +"As soon as you stick your tongue out you realize that it sticks out much further than it did before, "
+					          +"and now appears to have split at the end, creating a forked tip.");
+					outputText("  <b>The scents in the air are much more noticeable to you with your snake-like tongue.</b>");
+				} else {
+					outputText("\n\nYour inhuman tongue shortens, pulling tight in the very back of your throat.");
+					outputText("  After a moment the bunched-up tongue-flesh begins to flatten out, then extend forwards.");
+					outputText("  By the time the transformation has finished, <b>your tongue has changed into a long, forked snake-tongue.</b>");
+				}
+				player.tongueType = TONGUE_SNAKE;
+				dynStats("sen", 5);
+				localChanges++;
+			}
+
+			return localChanges;
+		}
+
 	}
 }
