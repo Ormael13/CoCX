@@ -527,7 +527,7 @@ private function roxanneFucksYourAssOHGODITSHUGE():void {
 	outputText("\n\n", false);
 	
 	outputText("Roxanne stops and pants lustily, her two-foot prehensile tongue hanging into her cavernous cleavage while she strokes the exposed half of her member.  She traces one of her fingers over the swell of your left cheek, letting her nail leave behind ", false);
-	if (player.skinType == SKIN_TYPE_SCALES) outputText("a roughly-scratched 'X' on your scales", false);
+	if (player.hasScales()) outputText("a roughly-scratched 'X' on your scales", false);
 	else outputText("an irritated, red 'X' on your skin", false);
 	outputText(".  You whimper from the pain and the awkward fullness, but she asks, \"<i>Should we get that tattooed on there?  A nice red 'X' to claim Roxanne Poisontail's favorite treasure... wouldn't that be nice?</i>\"  A submissive mewl escapes your lips while you try to focus on her words, but the alcohol and complete body distention keep your frazzled consciousness from digesting anything but more cock.\n\n", false);
 	

@@ -4,7 +4,8 @@ package classes.Items
 	
 	/**
 	 * Helper class to get rid of the copy&paste-mess in classes.Items.Mutations
-	 * @author Stadler76
+	 * @since July 8, 2016
+	 * @author Stadler
 	 */
 	public class MutationsHelper extends BaseContent 
 	{
@@ -17,9 +18,7 @@ package classes.Items
 		// restoreArms options
 		public static const RESTOREARMS_FROMGOOSKINTF:int = 1;
 
-		public function MutationsHelper() 
-		{
-		}
+		public function MutationsHelper() {}
 
 		public function restoreArms(changes:Number, changeLimit:Number, keepArms:Array = null, options:int = 0):Number
 		{
@@ -41,6 +40,7 @@ package classes.Items
 				if (hasClaws || player.armType == ARM_TYPE_HARPY) outputText("  <b>You have normal human arms again.</b>");
 
 				player.clawType = CLAW_TYPE_NORMAL;
+				player.clawTone = "";
 				player.armType = ARM_TYPE_HUMAN;
 				return 0;
 			}
@@ -84,6 +84,7 @@ package classes.Items
 				}
 				outputText("  <b>You have normal human arms again.</b>");
 				player.clawType = CLAW_TYPE_NORMAL;
+				player.clawTone = "";
 				player.armType = ARM_TYPE_HUMAN;
 				localChanges++;
 			}
