@@ -3851,7 +3851,7 @@
 					else if (blaht <= 8) player.skinTone = "cerulean";
 					else player.skinTone = "emerald";
 					outputText(player.skinTone + "!");
-					restoreArms([], RESTOREARMS_FROMGOOSKINTF);
+					restoreArms(null, RESTOREARMS_FROMGOOSKINTF);
 				}
 				return;
 			}
@@ -4332,34 +4332,7 @@
 			// MAJOR TRANSFORMATIONS
 			//-----------------------
 			//1st priority: Change lower body to bipedal.
-			//(Centaurs -> Normal Human Legs) (copy from elsewhere)
-			if (player.isTaur() && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYour quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of human legs</b>!", false);
-				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-				player.legCount = 2;
-				changes++;
-			}
-			//(Goo -> Normal Human Legs) (copy from elsewhere)
-			if (player.isGoo() && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYour lower body rushes inward, molding into two leg-like shapes that gradually stiffen up.  In moments they solidify into normal-looking legs, complete with regular, human feet.  <b>You now have normal feet!</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-				player.legCount = 2;
-				changes++;
-			}
-			//(Naga -> Normal Human Legs) (copy from elsewhere)
-			if (player.isNaga() && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-				player.legCount = 2;
-				changes++;
-			}
-			//(Non-human -> Normal Human Legs)
-			if (player.isBiped() && player.lowerBody != LOWER_BODY_TYPE_HUMAN && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYou collapse as your legs shift and twist.  By the time the pain subsides, you notice that you have normal legs and normal feet.  <b>You now have normal feet!</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-				player.legCount = 2;
-				changes++;
-			}
+			if (rand(4) == 0) restoreFeet(null, RESTOREFEET_FIXBIPED);
 			//Remove Incorporeality Perk
 			if (player.findPerk(PerkLib.Incorporeality) >= 0 && changes < changeLimit && rand(10) == 0) {
 				outputText("\n\nYou feel a strange sensation in your [legs] as they start to feel more solid. They become more opaque until finally, you can no longer see through your [legs]. \n<b>(Perk Lost: Incorporeality!)</b>", false);
@@ -6737,27 +6710,7 @@
 				player.armType = ARM_TYPE_SPIDER;
 				changes++;
 			}
-			//(Centaurs -> Normal Human Legs) (copy from elsewhere)
-			if (player.isTaur() && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYour quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of human legs</b>!", false);
-				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-				player.legCount = 2;
-				changes++;
-			}
-			//(Goo -> Normal Human Legs) (copy from elsewhere)
-			if (player.isGoo() && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYour lower body rushes inward, molding into two leg-like shapes that gradually stiffen up.  In moments they solidify into normal-looking legs, complete with regular, human feet.  <b>You now have normal feet!</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-				player.legCount = 2;
-				changes++;
-			}
-			//(Naga -> Normal Human Legs) (copy from elsewhere)
-			if (player.isNaga() && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-				player.legCount = 2;
-				changes++;
-			}
+			if (rand(4) == 0) restoreFeet(null, RESTOREFEET_EXCLUDEDRIDER);
 			//Drider butt
 			if (type == 1 && player.findPerk(PerkLib.SpiderOvipositor) < 0 && player.isDrider() && player.tailType == TAIL_TYPE_SPIDER_ADBOMEN && changes < changeLimit && rand(3) == 0 && (player.hasVagina || rand(2) == 0)) {
 				outputText("\n\nAn odd swelling sensation floods your spider half.  Curling your abdomen underneath you for a better look, you gasp in recognition at your new 'equipment'!  Your semi-violent run-ins with the swamp's population have left you <i>intimately</i> familiar with the new appendage.  <b>It's a drider ovipositor!</b>  A few light prods confirm that it's just as sensitive as any of your other sexual organs.  You idly wonder what laying eggs with this thing will feel like...");

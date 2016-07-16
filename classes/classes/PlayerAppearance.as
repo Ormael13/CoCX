@@ -456,11 +456,11 @@ package classes
 					outputText("  From the waist down you have the body of a horse, with all " + num2Text(player.legCount)+ " legs capped by hooves.", false);
 				else if (player.lowerBody == LOWER_BODY_TYPE_PONY) 
 					outputText("  From the waist down you have an incredibly cute and cartoonish parody of a horse's body, with all " + num2Text(player.legCount)+ " legs ending in flat, rounded feet.", false);
-				else if (player.lowerBody == LOWER_BODY_TYPE_DRIDER_LOWER_BODY) 
-					outputText("  Where your legs would normally start you have grown the body of a spider, with " + num2Text(player.legCount)+ " spindly legs that sprout from its sides.", false);
 				else
 					outputText("  Where your legs would normally start you have grown the body of a feral animal, with all " + num2Text(player.legCount)+ " legs.", false);
 			}
+			if (player.isDrider()) 
+				outputText("  Where your legs would normally start you have grown the body of a spider, with " + num2Text(player.legCount) + " spindly legs that sprout from its sides.");
 			//Hip info only displays if you aren't a centaur. 
 			if (!player.isTaur()) 
 			{

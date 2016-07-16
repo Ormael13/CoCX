@@ -18,6 +18,13 @@ package classes.Items
 		// restoreArms options
 		public static const RESTOREARMS_FROMGOOSKINTF:int = 1;
 
+		// restoreFeet options
+		public static const RESTOREFEET_EXCLUDETAUR:int   =  1;
+		public static const RESTOREFEET_EXCLUDEGOO:int    =  2;
+		public static const RESTOREFEET_EXCLUDENAGA:int   =  4;
+		public static const RESTOREFEET_EXCLUDEDRIDER:int =  8;
+		public static const RESTOREFEET_FIXBIPED:int      = 16;
+
 		public var changes:int = 0;
 		public var changeLimit:int = 1;
 
@@ -28,7 +35,7 @@ package classes.Items
 			if (keepArms == null) keepArms = [];
 			if (keepArms.indexOf(player.armType) >= 0) return false; // For future TFs. Tested and working, but I'm not using it so far (Stadler)
 
-			if (options & RESTOREARMS_FROMGOOSKINTF > 0) {
+			if (options & RESTOREARMS_FROMGOOSKINTF) {
 				// skin just turned gooey. Now lets fix unusual arms.
 				var hasClaws:Boolean = player.clawType != CLAW_TYPE_NORMAL;
 
@@ -88,6 +95,61 @@ package classes.Items
 				player.clawType = CLAW_TYPE_NORMAL;
 				player.clawTone = "";
 				player.armType = ARM_TYPE_HUMAN;
+				changes++;
+				return true;
+			}
+
+			return false;
+		}
+
+		public function restoreFeet(keepFeet:Array = null, options:int = 0):Boolean
+		{
+			var doRestore:Boolean = false;
+			
+			if (keepFeet == null) keepFeet = [];
+			if (keepFeet.indexOf(player.lowerBody) >= 0) return false; // For future TFs
+
+			//(Centaurs -> Normal Human Legs)
+			if (!(options & RESTOREFEET_EXCLUDETAUR) && player.isTaur() && changes < changeLimit) {
+				outputText("\n\nYour quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of human legs</b>!");
+				doRestore = true;
+			}
+
+			//(Goo -> Normal Human Legs)
+			if (!(options & RESTOREFEET_EXCLUDEGOO) && player.isGoo() && changes < changeLimit) {
+				outputText("\n\nYour lower body rushes inward, molding into two leg-like shapes that gradually stiffen up.  In moments they solidify into normal-looking legs, complete with regular, human feet.  <b>You now have normal feet!</b>");
+				doRestore = true;
+			}
+
+			//(Naga -> Normal Human Legs)
+			if (!(options & RESTOREFEET_EXCLUDENAGA) && player.isNaga() && changes < changeLimit) {
+				outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>");
+				doRestore = true;
+			}
+
+			//(Drider -> Normal Human Legs)
+			if (!(options & RESTOREFEET_EXCLUDEDRIDER) && player.isDrider() && changes < changeLimit) {
+				outputText("\n\nYour legs buckle under you and you fall, smashing your abdomen on the ground."
+				          +"  Though your control deserts and you cannot see behind you,"
+				          +" still you feel the disgusting sensation of chitin loosening and sloughing off your body,"
+				          +" and the dry breeze on your exposed nerves."
+				          +"  Reflexively, your legs cling together to protect as much of their now-sensitive surface as possible."
+				          +"  When you try to part them, you find you cannot."
+				          +"  Several minutes pass uncomforably until you can again bend your legs,"
+				          +" and when you do, you find that all the legs of a side bend together.");
+				outputText("  <b>You have human legs again.</b>");
+				doRestore = true;
+			}
+
+			//(Non-human -> Normal Human Legs)
+			if ((options & RESTOREFEET_FIXBIPED) && player.isBiped() && player.lowerBody != LOWER_BODY_TYPE_HUMAN && changes < changeLimit) {
+				outputText("\n\nYou collapse as your legs shift and twist.  By the time the pain subsides, you notice that you have normal legs and normal feet.  <b>You now have normal feet!</b>");
+				doRestore = true;
+			}
+
+			if (doRestore) {
+				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
+				player.legCount = 2;
 				changes++;
 				return true;
 			}
