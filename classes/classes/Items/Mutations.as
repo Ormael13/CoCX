@@ -417,9 +417,9 @@
 		{
 			player.slimeFeed();
 			//Changes done
-			var changes:Number = 0;
+			changes = 0;
 			//Change limit
-			var changeLimit:Number = 1;
+			changeLimit = 1;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
@@ -510,7 +510,7 @@
 				changes++;
 			}
 			//Restore arms to become human arms again
-			changes += restoreArms(changes, changeLimit);
+			restoreArms();
 			//+hooves
 			if (player.lowerBody != LOWER_BODY_TYPE_HOOFED) {
 				if (changes < changeLimit && rand(3) == 0) {
@@ -828,9 +828,9 @@
 		{
 			player.slimeFeed();
 			//Changes done
-			var changes:Number = 0;
+			changes = 0;
 			//Change limit
-			var changeLimit:Number = 1;
+			changeLimit = 1;
 			//Temporary storage
 			var temp:Number = 0;
 			var temp2:Number = 0;
@@ -962,9 +962,9 @@
 				}
 			}
 			//Restore arms to become human arms again
-			changes += restoreArms(changes, changeLimit);
+			restoreArms();
 			//Remove feathery hair
-			changes += removeFeatheryHair(changes, changeLimit);
+			removeFeatheryHair();
 			//
 			//SEXUAL CHARACTERISTICS
 			//
@@ -1308,8 +1308,8 @@
 		
 		public function taurinum(player:Player):void 
 		{
-			var changes:Number = 0;
-			var changeLimit:Number = 1;
+			changes = 0;
+			changeLimit = 1;
 			if (rand(3) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
@@ -1576,8 +1576,8 @@
 			var temp3:Number = 0;
 			var crit:Number = 1;
 			//Set up changes and changeLimit
-			var changes:Number = 0;
-			var changeLimit:Number = 1;
+			changes = 0;
+			changeLimit = 1;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
@@ -1662,9 +1662,9 @@
 				changes++;
 			}
 			//Restore arms to become human arms again
-			changes += restoreArms(changes, changeLimit);
+			restoreArms();
 			//Remove feathery hair
-			changes += removeFeatheryHair(changes, changeLimit);
+			removeFeatheryHair();
 			//if (type != 2 && type != 4 && type != 5) outputText("\n", false);
 			//Double Pepper!
 			//Xforms/grows dicks to make you have two dogcocks
@@ -2290,11 +2290,11 @@
 		public function succubisDelight(tainted:Boolean,player:Player):void
 		{
 			player.slimeFeed();
-			var changes:Number = 0;
+			changes = 0;
 			var crit:Number = 1;
 			//Determine crit multiplier (x2 or x3)
 			if (rand(4) == 0) crit += rand(2) + 1;
-			var changeLimit:Number = 1;
+			changeLimit = 1;
 			//Chances to up the max number of changes
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
@@ -2376,11 +2376,11 @@
 		public function succubisDream(player:Player):void
 		{
 			player.slimeFeed();
-			var changes:Number = 0;
+			changes = 0;
 			var crit:Number = 1;
 			//Determine crit multiplier (x2 or x3)
 			crit += rand(2) + 1;
-			var changeLimit:Number = 1;
+			changeLimit = 1;
 			//Chances to up the max number of changes
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
@@ -2479,7 +2479,7 @@
 		public function ovipositionElixer(player:Player):void
 		{
 			player.slimeFeed();
-			var changes:Number = 0;
+			changes = 0;
 			//Females!
 			outputText("You pop the cork and gulp down the thick greenish fluid.  The taste is unusual and unlike anything you've tasted before.", true);
 			if (player.pregnancyType == PregnancyStore.PREGNANCY_GOO_STUFFED) {
@@ -3065,9 +3065,9 @@
 		{
 			player.slimeFeed();
 			//Changes done
-			var changes:Number = 0;
+			changes = 0;
 			//Change limit
-			var changeLimit:Number = 1;
+			changeLimit = 1;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
@@ -3188,7 +3188,7 @@
 				boobsGrew = true;
 			}
 			//Remove feathery hair
-			changes += removeFeatheryHair(changes, changeLimit);
+			removeFeatheryHair();
 			//If breasts are D or bigger and are not lactating, they also start lactating:
 			if (player.biggestTitSize() >= 4 && player.breastRows[0].lactationMultiplier < 1 && changes < changeLimit && (rand(3) == 0 || boobsGrew || enhanced)) {
 				outputText("\n\nYou gasp as your " + player.breastDescript(0) + " feel like they are filling up with something.  Within moments, a drop of milk leaks from your " + player.breastDescript(0) + "; <b> you are now lactating</b>.", false);
@@ -3583,8 +3583,8 @@
 		public function goblinAle(player:Player):void
 		{
 			player.slimeFeed();
-			var changes:Number = 0;
-			var changeLimit:Number = 1;
+			changes = 0;
+			changeLimit = 1;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			if (rand(4) == 0) changeLimit++;
@@ -3627,7 +3627,7 @@
 				changes++;
 			}
 			//Restore arms to become human arms again
-			changes += restoreArms(changes, changeLimit);
+			restoreArms();
 			//SEXYTIEMS
 			//Multidick killa!
 			if (player.cocks.length > 1 && rand(3) == 0 && changes < changeLimit) {
@@ -3851,7 +3851,7 @@
 					else if (blaht <= 8) player.skinTone = "cerulean";
 					else player.skinTone = "emerald";
 					outputText(player.skinTone + "!");
-					restoreArms(0, 1, [], RESTOREARMS_FROMGOOSKINTF);
+					restoreArms([], RESTOREARMS_FROMGOOSKINTF);
 				}
 				return;
 			}
@@ -3911,8 +3911,8 @@
 
 		public function sharkTooth(type:Number,player:Player):void
 		{
-			var changes:Number = 0;
-			var changeLimit:Number = 2;
+			changes = 0;
+			changeLimit = 2;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
@@ -4096,8 +4096,8 @@
 		{
 			player.slimeFeed();
 			clearOutput();
-			var changes:Number = 0;
-			var changeLimit:Number = 1;
+			changes = 0;
+			changeLimit = 1;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
@@ -4127,7 +4127,7 @@
 				changes++;
 			}
 			//9c) II The tongue (sensitivity bonus, stored as a perk?)
-			if (changes == 0 && rand(3) == 0) changes += gainSnakeTongue(changes, changeLimit);
+			if (changes == 0 && rand(3) == 0) gainSnakeTongue();
 			//9c) III The fangs
 			if (changes == 0 && player.tongueType == TONGUE_SNAKE && player.faceType != FACE_SNAKE_FANGS && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\nWithout warning, you feel your canine teeth jump almost an inch in size, clashing on your gums, cutting yourself quite badly. As you attempt to find a new way to close your mouth without dislocating your jaw, you notice that they are dripping with a bitter, khaki liquid.  Watch out, and <b>try not to bite your tongue with your poisonous fangs!</b>", false);
@@ -4313,8 +4313,8 @@
 		{
 			player.slimeFeed();
 			clearOutput();
-			var changes:Number = 0;
-			var changeLimit:Number = 1;
+			changes = 0;
+			changeLimit = 1;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
@@ -4392,7 +4392,7 @@
 				changes++;
 			}
 			//Restore arms to become human arms again
-			changes += restoreArms(changes, changeLimit);
+			restoreArms();
 			//-----------------------
 			// MINOR TRANSFORMATIONS
 			//-----------------------
@@ -4440,7 +4440,7 @@
 				player.removeStatusEffect(StatusEffects.BlackNipples);
 			}
 			//Remove feathery hair
-			changes += removeFeatheryHair(changes, changeLimit);
+			removeFeatheryHair();
 			//Remove anemone hair
 			if (changes < changeLimit && player.hairType == HAIR_ANEMONE && rand(3) == 0) {
 				//-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
@@ -4631,7 +4631,7 @@
 
 		public function coal(player:Player):void
 		{
-			var changes:Number = 0;
+			changes = 0;
 			clearOutput();
 			outputText("You handle the coal rocks experimentally and they crumble to dust in your hands!  You cough as you breathe in the cloud, sputtering and wheezing.  After a minute of terrible coughing, you recover and realize there's no remaining trace of the rocks, not even a sooty stain on your hands!", false);
 			//Try to go into intense heat
@@ -4658,8 +4658,8 @@
 
 		public function catTransformation(player:Player):void
 		{
-			var changes:Number = 0;
-			var changeLimit:Number = 1;
+			changes = 0;
+			changeLimit = 1;
 			var temp2:Number = 0;
 			var temp3:Number = 0;
 			if (rand(2) == 0) changeLimit++;
@@ -4961,8 +4961,8 @@
 		{
 			player.slimeFeed();
 			//init variables
-			var changes:Number = 0;
-			var changeLimit:Number = 1;
+			changes = 0;
+			changeLimit = 1;
 			var temp2:Number = 0;
 			//Randomly choose affects limit
 			if (rand(2) == 0) changeLimit++;
@@ -5325,7 +5325,7 @@
 				player.faceType = FACE_LIZARD;
 			}
 			//-Snake tongue
-			if (player.faceType == FACE_LIZARD && rand(3) == 0) changes += gainSnakeTongue(changes, changeLimit);
+			if (player.faceType == FACE_LIZARD && rand(3) == 0) gainSnakeTongue();
 			//-Remove Gills
 			if (rand(4) == 0 && player.gills && changes < changeLimit) {
 				outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.", false);
@@ -5346,8 +5346,8 @@
 		{
 			player.slimeFeed();
 			//init variables
-			var changes:Number = 0;
-			var changeLimit:Number = 1;
+			changes = 0;
+			changeLimit = 1;
 			var temp2:Number = 0;
 			//Randomly choose affects limit
 			if (rand(2) == 0) changeLimit++;
@@ -5627,8 +5627,8 @@
 
 		public function neonPinkEgg(pregnantChange:Boolean,player:Player):void
 		{
-			var changes:Number = 0;
-			var changeLimit:Number = 1;
+			changes = 0;
+			changeLimit = 1;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
@@ -5969,8 +5969,8 @@
 			//'type' refers to the variety of seed.
 			//0 == standard.
 			//1 == enhanced - increase change limit and no pre-reqs for TF
-			var changes:Number = 0;
-			var changeLimit:Number = 1;
+			changes = 0;
+			changeLimit = 1;
 			if (type == 1) changeLimit += 2;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
@@ -6326,8 +6326,8 @@
 			clearOutput();
 			outputText("You squeeze the pod around the middle, forcing the end open.  Scooping out a handful of the yeasty-smelling seeds, you shovel them in your mouth.  Blech!  Tastes like soggy burnt bread... and yet, you find yourself going for another handful...", false);
 			//Used to track changes and the max
-			var changes:Number = 0;
-			var changeLimit:Number = 1;
+			changes = 0;
+			changeLimit = 1;
 			if (type == 1) changeLimit += 2;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
@@ -6379,9 +6379,9 @@
 				changes++;
 			}
 			//-Restore arms to become human arms again
-			changes += restoreArms(changes, changeLimit);
+			restoreArms();
 			//-Remove feathery hair
-			changes += removeFeatheryHair(changes, changeLimit);
+			removeFeatheryHair();
 			//Remove odd eyes
 			if (changes < changeLimit && rand(5) == 0 && player.eyeType > EYES_HUMAN) {
 				if (player.eyeType == EYES_BLACK_EYES_SAND_TRAP) {
@@ -6544,8 +6544,8 @@
 		public function sweetGossamer(type:Number,player:Player):void
 		{
 			clearOutput();
-			var changes:Number = 0;
-			var changeLimit:Number = 1;
+			changes = 0;
+			changeLimit = 1;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
@@ -7012,8 +7012,8 @@
 			player.slimeFeed();
 			clearOutput();
 			outputText("You grimace and uncork the bottle, doing your best to ignore the unearthly smell drifting up to your nostrils. Steeling yourself, you raise the container to your lips and chug the contents, shivering at the feel of the stuff sliding down your throat.  Its taste, at least, is unexpectedly pleasant.  Almost tastes like oranges.", false);
-			var changes:Number = 0;
-			var changeLimit:Number = 1;
+			changes = 0;
+			changeLimit = 1;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
@@ -7113,8 +7113,8 @@
 		{
 			clearOutput();
 			outputText("You chew on the rubbery tentacle; its texture and taste are somewhat comparable to squid, but the half-dormant nematocysts cause your mouth to tingle sensitively.", false);
-			var changes:Number = 0;
-			var changeLimit:Number = 1;
+			changes = 0;
+			changeLimit = 1;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
@@ -7280,8 +7280,8 @@
 			clearOutput();
 			if (!enhanced) outputText("You examine the berry a bit, rolling the orangish-red fruit in your hand for a moment before you decide to take the plunge and chow down.  It's tart and sweet at the same time, and the flavors seem to burst across your tongue with potent strength.  Juice runs from the corners of your lips as you finish the tasty snack.");
 			else outputText("You pop the cap on the enhanced \"Vixen's Vigor\" and decide to take a swig of it.  Perhaps it will make you as cunning as the crude fox Lumi drew on the front?");
-			var changes:int = 0;
-			var changeLimit:int = 1;
+			changes = 0;
+			changeLimit = 1;
 			if (enhanced) changeLimit += 2;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(2) == 0) changeLimit++;
@@ -7758,8 +7758,8 @@
 		public function foxJewel(mystic:Boolean,player:Player):void
 		{
 			clearOutput();
-			var changes:int = 0;
-			var changeLimit:int = 1;
+			changes = 0;
+			changeLimit = 1;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			if (mystic) changeLimit += 2;
@@ -8233,8 +8233,8 @@
 		public function trapOil(player:Player):void
 		{
 			clearOutput();
-			var changes:int = 0;
-			var changeLimit:int = 1;
+			changes = 0;
+			changeLimit = 1;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
@@ -8547,8 +8547,8 @@
 			//eat it:
 			outputText("You split the fruit and scoop out the pulp, eating it greedily.  It's sweet and slightly gritty with seeds, and you quickly finish both halves.");
 
-			var changes:int = 0;
-			var changeLimit:int = 1;
+			changes = 0;
+			changeLimit = 1;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
@@ -8722,8 +8722,8 @@
 		public function mouseCocoa(player:Player):void
 		{
 			clearOutput();
-			var changes:int = 0;
-			var changeLimit:int = 1;
+			changes = 0;
+			changeLimit = 1;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
@@ -9115,8 +9115,8 @@
 				flags[kFLAGS.FERRET_BAD_END_WARNING] = 0;
 			}
 
-			var changes:int = 0;
-			var changeLimit:int = 1;
+			changes = 0;
+			changeLimit = 1;
 			var temp:int = 0;
 			var x:int = 0;
 			if (rand(2) == 0) changeLimit++;
@@ -9368,8 +9368,8 @@
 		}
 		
 		public function pigTruffle(boar:Boolean, player:Player):void {
-			var changes:int = 0;
-			var changeLimit:int = 1;
+			changes = 0;
+			changeLimit = 1;
 			var temp:int = 0;
 			var x:int = 0;
 			if (rand(2) == 0) changeLimit++;

@@ -18,15 +18,17 @@ package classes.Items
 		// restoreArms options
 		public static const RESTOREARMS_FROMGOOSKINTF:int = 1;
 
+		public var changes:int = 0;
+		public var changeLimit:int = 1;
+
 		public function MutationsHelper() {}
 
-		public function restoreArms(changes:Number, changeLimit:Number, keepArms:Array = null, options:int = 0):Number
+		public function restoreArms(keepArms:Array = null, options:int = 0):Boolean
 		{
-			var localChanges:Number = 0;
 			if (keepArms == null) keepArms = [];
-			if (keepArms.indexOf(player.armType) >= 0) return 0; // For future TFs. Tested and working, but I'm not using it so far (Stadler)
+			if (keepArms.indexOf(player.armType) >= 0) return false; // For future TFs. Tested and working, but I'm not using it so far (Stadler)
 
-			if (options & RESTOREARMS_FROMGOOSKINTF >= 0) {
+			if (options & RESTOREARMS_FROMGOOSKINTF > 0) {
 				// skin just turned gooey. Now lets fix unusual arms.
 				var hasClaws:Boolean = player.clawType != CLAW_TYPE_NORMAL;
 
@@ -42,7 +44,7 @@ package classes.Items
 				player.clawType = CLAW_TYPE_NORMAL;
 				player.clawTone = "";
 				player.armType = ARM_TYPE_HUMAN;
-				return 0;
+				return true;
 			}
 
 
@@ -86,26 +88,26 @@ package classes.Items
 				player.clawType = CLAW_TYPE_NORMAL;
 				player.clawTone = "";
 				player.armType = ARM_TYPE_HUMAN;
-				localChanges++;
+				changes++;
+				return true;
 			}
 
-			return localChanges;
+			return false;
 		}
 
-		public function removeFeatheryHair(changes:Number, changeLimit:Number):Number
+		public function removeFeatheryHair():Boolean
 		{
-			var localChanges:Number = 0;
-
 			if (changes < changeLimit && player.hairType == HAIR_FEATHER && rand(4) == 0) {
 				//(long):
 				if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft feather-hair droops over your eye.  Before you can blow the offending down away, you realize the feather is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer feathery!</b>", false);
 				//(short)
 				else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your feathers.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer feathery!</b>", false);
-				localChanges++;
 				player.hairType = HAIR_NORMAL;
+				changes++;
+				return true;
 			}
 
-			return localChanges;
+			return false;
 		}
 
 		public function newLizardSkinTone():String
@@ -127,10 +129,8 @@ package classes.Items
 			return "invalid"; // Will never happen. Suppresses 'Error: Function does not return a value.'
 		}
 
-		public function gainSnakeTongue(changes:Number, changeLimit:Number):Number
+		public function gainSnakeTongue():Boolean
 		{
-			var localChanges:Number = 0;
-
 			if (player.tongueType != TONGUE_SNAKE && changes < changeLimit) {
 				if (player.tongueType == TONGUE_HUMAN) {
 					outputText("\n\nYour taste-buds start aching as they swell to an uncomfortably large size. "
@@ -147,10 +147,11 @@ package classes.Items
 				}
 				player.tongueType = TONGUE_SNAKE;
 				dynStats("sen", 5);
-				localChanges++;
+				changes++;
+				return true;
 			}
 
-			return localChanges;
+			return false;
 		}
 
 	}
