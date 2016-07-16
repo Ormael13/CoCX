@@ -1285,7 +1285,7 @@ internal function enjoyYourBadEndBIYAAAATCH():void {
 		outputText("The freshly-grown shaft between Holli's legs begins to shrivel, withering and browning like a cut flower.  With an expression of mild disdain, she pulls it from her body and casts it aside, where it crumbles to pieces.");
 		
 		outputText("\n\nThe fluids in your gut begin to mingle, sending a disquieting pinprick sensation through the skin");
-		if (player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_SCALES) outputText(" under your " + player.skinFurScales());
+		if (player.hasFurOrScales()) outputText(" under your " + player.skinFurScales());
 		outputText(".  Panic intensifies as the sensation quickly focuses on your crotch, and when the tendrils holding you push you away from the demon's tree, your curiosity gets the better of you.  You look over your shoulder again, trying to see what's happening.  As you strain to watch, you feel hundreds of tiny, sharp pinches and small vines begin to creep from your body, just below your ass.  The vines merge and thread into thick trunks as they get closer to the ground, pushing deep into the dirt and mooring you to the spot.  Arousal builds in you as they join the web of roots linking the demon Marae and Holli, as does a swelling at your crotch.  Another cluster of thin vines push free from your groin, growing upward in a lattice and lashing your arms into place, ");
 		if (player.biggestTitSize() < 1) outputText("folded atop your chest");
 		else outputText("crooked at your sides with your hands resting atop your [chest]");
@@ -1487,7 +1487,7 @@ private function holliAndGenderlessSittingInATree():void {
 	outputText("The tall, fit traveler steps through the portal, and its swirling colors dissolve to empty air behind him.  The blasted red landscape that welcomes him does so grudgingly, filling his face with a cloud of blown dust that sets him to coughing and sputtering.  Peering through a teary squint, the man looks around for a place that might provide some shelter from the wind and allow him to get his bearings, and a pair of scraggly trees nearby would seem to fill the bill.");
 	
 	outputText("\n\nAs he draws closer, though, it becomes evident that he's not the only one with the idea: two figures are already leaning on the trees.  Both nude, one is a gorgeous woman, albeit green-skinned and with horns, while the other appears to be ");
-	if (player.skinType != SKIN_TYPE_FUR && player.skinType != SKIN_TYPE_SCALES) outputText(player.skinTone + "-colored");
+	if (!player.hasFurOrScales()) outputText(player.skinTone + "-colored");
 	else outputText("covered in " + player.skinFurScales());
 	outputText(" and wrapping its body around the tree in a way that makes determining its sex impossible.  No... it's not wrapping around the tree, but embedded in it up to the hips!");
 	
@@ -1512,7 +1512,7 @@ private function holliAndGenderlessSittingInATree():void {
 	outputText("\n\n\"<i>How principled,</i>\" the traveler mumbles, shedding the last of his clothing.  \"<i>It must get bored often.</i>\"");
 	
 	outputText("\n\n\"<i>Indeed it does,</i>\" Holli agrees.  \"<i>But when you make a choice, you accept the consequences.  Is that not so?</i>\"  The dryad pulls the traveler onto her body, then begins to moan as he caresses her breasts and enters her; the eyes of her mute sentinel follow the lovers to the ground and ");
-	if (player.skinType ==SKIN_TYPE_SCALES ) outputText("a quiver of arousal shakes its scales");
+	if (player.hasScales()) outputText("a quiver of arousal shakes its scales");
 	else if (player.skinType == SKIN_TYPE_FUR) outputText("its fur begins to prick up with arousal");
 	else outputText("a blush of lust colors its " + player.skinFurScales());
 	outputText("...");

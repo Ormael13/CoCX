@@ -1453,7 +1453,7 @@ package classes.Scenes.Places.Bazaar
 				changes++;
 			}
 			//Transformations
-			if (rand(3) == 0 && changes < changeLimit && player.skinType == SKIN_TYPE_SCALES) {
+			if (rand(3) == 0 && changes < changeLimit && player.hasScales()) {
 				outputText("\n\nYou feel an odd rolling sensation as your scales begin to shift, spreading and reforming as they grow and disappear, <b>becoming normal human skin</b>.");
 				player.skinType = SKIN_TYPE_PLAIN;
 				changes++;
@@ -1474,7 +1474,7 @@ package classes.Scenes.Places.Bazaar
 				player.faceType = FACE_HUMAN;
 				changes++;
 			}
-			if (rand(4) == 0 && changes < changeLimit && player.skinType != SKIN_TYPE_SCALES && player.earType != EARS_ELFIN) {
+			if (rand(4) == 0 && changes < changeLimit && !player.hasScales() && player.earType != EARS_ELFIN) {
 				outputText("\n\nYou feel an odd shifting sensation on the side of your head and, reaching up to inspect it, find a <b>pair of fleshy pointed ears</b>. "); 
 				if (player.skinType == SKIN_TYPE_FUR) ("As you examine your new elvish ears you feel fur grow around them, matching the rest of you.");
 				player.earType = EARS_ELFIN;
@@ -1603,6 +1603,7 @@ package classes.Scenes.Places.Bazaar
 						outputText("You feel an itching sensation as your fur beings to fall off in clumps, <b>revealing tough gray skin</b> beneath it.");
 						break;
 					case SKIN_TYPE_SCALES:
+					case SKIN_TYPE_DRACONIC:
 						outputText("You feel an odd rolling sensation as your scales begin to shift, spreading and reforming as they grow and disappear, <b>becoming tough gray skin</b>.");
 						break;
 					case SKIN_TYPE_GOO:

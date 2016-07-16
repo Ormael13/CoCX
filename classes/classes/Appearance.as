@@ -2180,7 +2180,8 @@
 					[SKIN_TYPE_FUR, "fur"],
 					[SKIN_TYPE_SCALES, "scales"],
 					[SKIN_TYPE_GOO, "goo"],
-					[SKIN_TYPE_UNDEFINED, "undefined flesh"]
+					[SKIN_TYPE_UNDEFINED, "undefined flesh"],
+					[SKIN_TYPE_DRACONIC, "scales"]
 				]
 		);
 		public static const DEFAULT_SKIN_DESCS:Object = createMapFromPairs(
@@ -2189,7 +2190,8 @@
 					[SKIN_TYPE_FUR, "fur"],
 					[SKIN_TYPE_SCALES, "scales"],
 					[SKIN_TYPE_GOO, "skin"],
-					[SKIN_TYPE_UNDEFINED, "skin"]
+					[SKIN_TYPE_UNDEFINED, "skin"],
+					[SKIN_TYPE_DRACONIC, "scales"]
 				]
 		);
 		public static const DEFAULT_HAIR_NAMES:Object = createMapFromPairs(

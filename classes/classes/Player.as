@@ -23,7 +23,7 @@ use namespace kGAMECLASS;
 	 * ...
 	 * @author Yoffy
 	 */
-	public class Player extends Character {
+	public class Player extends PlayerHelper {
 		
 		public function Player() {
 			//Item things
@@ -272,7 +272,8 @@ use namespace kGAMECLASS;
 			}
 			//Stacks on top of Thick Skin perk.
 			if (skinType == SKIN_TYPE_FUR) armorDef += 1;
-			if (skinType == SKIN_TYPE_SCALES) armorDef += 3;
+			if (hasScales()) armorDef += 3;
+			//if (skinType == SKIN_TYPE_DRACONIC) armorDef += 3; // maybe later
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorDef += 1;
 			//Bonus defense
@@ -1274,7 +1275,7 @@ use namespace kGAMECLASS;
 				lizardCounter++;
 			if (armType == ARM_TYPE_PREDATOR && clawType == CLAW_TYPE_LIZARD)
 				lizardCounter++;
-			if (skinType == 2)
+			if (hasScales())
 				lizardCounter++;
 			return lizardCounter;
 		}
@@ -1351,7 +1352,7 @@ use namespace kGAMECLASS;
 			//If the character has fur, scales, or gooey skin, -1
 			if (skinType == SKIN_TYPE_FUR && !InCollection(furColor, KitsuneScene.basicKitsuneFur) && !InCollection(furColor, KitsuneScene.elderKitsuneColors))
 				kitsuneCounter--;
-			if (skinType == SKIN_TYPE_SCALES)
+			if (hasScales())
 				kitsuneCounter -= 2;
 			if (skinType == SKIN_TYPE_GOO)
 				kitsuneCounter -= 3;
@@ -1390,7 +1391,7 @@ use namespace kGAMECLASS;
 				dragonCounter++;
 			if (lowerBody == 18)
 				dragonCounter++;
-			if (skinType == 2 && dragonCounter > 0)
+			if (skinType == SKIN_TYPE_DRACONIC && dragonCounter > 0)
 				dragonCounter++;
 			if ((horns > 0 && hornType == HORNS_DRACONIC_X2) || hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
 				dragonCounter += 2;

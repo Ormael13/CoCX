@@ -16,6 +16,7 @@ public static const SKIN_TYPE_FUR:int                                           
 public static const SKIN_TYPE_SCALES:int                                            =    2;
 public static const SKIN_TYPE_GOO:int                                               =    3;
 public static const SKIN_TYPE_UNDEFINED:int                                         =    4; // DEPRECATED, silently discarded upon loading a saved game
+public static const SKIN_TYPE_DRACONIC:int                                          =    5;
 
 // hairType
 public static const HAIR_NORMAL:int                                                =     0;
