@@ -952,6 +952,7 @@ package classes.Scenes.NPCs
 				}
 				outputText("\n\nThe dragon scorns clothing and exposes " + emberMF("him", "her") + "self to both you and the elements with equal indifference, claiming " + emberMF("his", "her") + " scales are all the covering " + emberMF("he", "she") + " needs... and yet when you admire " + emberMF("his", "her") + " body, " + emberMF("he", "she") + " is quick to hide it from your wandering gaze.");
 				outputText("\n\n" + emberMF("His", "Her") + " head is reptilian, with sharp teeth fit for a predator and strong ridges on the underside of the jaw.  At the sides of " + emberMF("his", "her") + " head are strange, fin-like growths concealing small holes; you presume these to be the dragon equivalent of ears.  Atop " + emberMF("his", "her") + " head sit two pairs of ebony horns that curve backwards elegantly; despite being as tough as steel, their shape is not fit for use in combat, instead it is simply aesthetical, giving Ember a majestic look.  A long tongue occasionally slips out, to lick at " + emberMF("his", "her") + " jaws and teeth.  Prideful, fierce eyes, with slit pupils and burning orange irises, glitter even in the darkness.");
+				outputText("  They come with the typical second set of eyelids, allowing " + emberMF("him", "her") + " to blink twice as much as others.");
 				//(if Ember has any hair)
 				if (flags[kFLAGS.EMBER_HAIR] == 1) {
 					if (flags[kFLAGS.EMBER_GENDER] == 1) outputText("  Short ");
@@ -1658,7 +1659,7 @@ package classes.Scenes.NPCs
 						//maxxed out, new row
 						else {
 							//--Next horn growth adds second row and brings length up to 12\"
-							outputText("\n\nA second row of horns erupts under the first, and though they are narrower, they grow nearly as long as your first row before they stop.  A sense of finality settles over you.  <b>You have as many horns as a lizan can grow.</b>", false);
+							outputText("\n\nA second row of horns erupts under the first, and though they are narrower, they grow nearly as long as your first row before they stop.  A sense of finality settles over you.  <b>You have as many horns as a dragon can grow.</b>", false);
 							player.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
 							changes++;
 						}
@@ -1687,6 +1688,22 @@ package classes.Scenes.NPCs
 				player.skinDesc = "scales";
 				//def bonus of scales
 			}
+			//<mod name="Reptile eyes" author="Stadler76">
+			//Gain Dragon Eyes
+			if (player.eyeType != EYES_DRAGON && player.skinType == SKIN_TYPE_DRACONIC && player.earType == EARS_DRAGON && player.hasDragonHorns() && changes < changeLimit && rand(4) == 0) {
+				if (player.hasReptileEyes())
+					outputText("\n\nYour eyes change slightly in their appearance.");
+				else
+				{
+					outputText("\n\nYou feel a sudden surge of pain in your eyes as they begin to reshape. Your pupils begin to elongate becoming vertically slitted and your irises change their color, too.");
+					outputText("\nAs the pain passes, you examine your eyes in a nearby puddle. You look into your new prideful, fierce dragon eyes with vertically slitted pupils and burning orange irises.");
+					outputText("  They glitter even in the darkness. With a few tears remaining, the look is a bit blurry. Wanting to get a clearer look at them, you blink your remaining tears away and suddenly you realize, that you just did that with your second set of eyelids.");
+				}
+				outputText("  <b>You now have fierce dragon eyes.</b>");
+				player.eyeType = EYES_DRAGON;
+				changes++;
+			}
+			//</mod>
 			//Gain Dragon Legs
 			if (player.lowerBody != LOWER_BODY_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
 				//(if drider)

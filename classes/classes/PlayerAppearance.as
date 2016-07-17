@@ -145,8 +145,11 @@ package classes
 					outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your " + player.skinDesc + " is " + player.furColor + ", hiding your " + player.skin(true,false) + " underneath.", false);
 				if (player.hasScales()) 
 					outputText("  Your facial structure blends humanoid features with those of a cat.  A moist nose and whiskers are included, but overlaid with glittering " + player.skinFurScales() + ".", false);
-				if (player.eyeType != EYES_BLACK_EYES_SAND_TRAP) 
-					outputText("  Of course, no feline face would be complete without vertically slit eyes.");
+				if (player.eyeType != EYES_BLACK_EYES_SAND_TRAP)
+				{
+					outputText("  Of course, no feline face would be complete without vertically slit eyes");
+					outputText(!player.hasReptileEyes() ? "." : ", although they come with a second set of eyelids, which is somewhat unusual for a cats face.");
+				}
 			}
 			//Minotaaaauuuur-face
 			if (player.faceType == FACE_COW_MINOTAUR) 
@@ -228,6 +231,16 @@ package classes
 				outputText("  In addition to your primary two eyes, you have a second, smaller pair on your forehead.", false);
 			else if (player.eyeType == EYES_BLACK_EYES_SAND_TRAP) 
 				outputText("  Your eyes are solid spheres of inky, alien darkness.");
+			else if (player.faceType != FACE_CAT && player.hasReptileEyes())
+			{
+				outputText("Your eyes are");
+				switch (player.eyeType)
+				{
+					case EYES_DRAGON: outputText(" prideful, fierce dragon eyes with vertically slitted pupils and burning orange irises. They glitter even in the darkness and they"); break;
+					case EYES_LIZARD: outputText(" those of a lizard with vertically slitted pupils and green-yellowish irises. They"); break;
+				}
+				outputText(" come with the typical second set of eyelids, allowing you to blink twice as much as others.");
+			}
 
 			//Hair
 			//if bald

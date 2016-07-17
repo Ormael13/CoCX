@@ -1261,21 +1261,25 @@ use namespace kGAMECLASS;
 		public function lizardScore():Number
 		{
 			var lizardCounter:Number = 0;
-			if (faceType == 7)
+			if (faceType == FACE_LIZARD)
 				lizardCounter++;
-			if (earType == 6)
+			if (earType == EARS_LIZARD)
 				lizardCounter++;
-			if (tailType == 9)
+			if (tailType == TAIL_TYPE_LIZARD)
 				lizardCounter++;
-			if (lowerBody == 10)
+			if (tongueType == TONGUE_SNAKE)
+				lizardCounter++;
+			if (lowerBody == LOWER_BODY_TYPE_LIZARD)
 				lizardCounter++;
 			if (countCocksOfType(CockTypesEnum.LIZARD) > 0)
 				lizardCounter++;
-			if ((horns > 0 && hornType == HORNS_DRACONIC_X2) || hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
+			if (hasDragonHorns())
 				lizardCounter++;
 			if (armType == ARM_TYPE_PREDATOR && clawType == CLAW_TYPE_LIZARD)
 				lizardCounter++;
 			if (hasScales())
+				lizardCounter++;
+			if (hasReptileEyes() && eyeType != EYES_DRAGON) // Maybe I'll write a different function for that later. e. g. hasLizardEyes() (Stadler76)
 				lizardCounter++;
 			return lizardCounter;
 		}
@@ -1393,11 +1397,13 @@ use namespace kGAMECLASS;
 				dragonCounter++;
 			if (skinType == SKIN_TYPE_DRACONIC && dragonCounter > 0)
 				dragonCounter++;
-			if ((horns > 0 && hornType == HORNS_DRACONIC_X2) || hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
+			if (hasDragonHorns())
 				dragonCounter += 2;
 			if (findPerk(PerkLib.Dragonfire) >= 0)
 				dragonCounter++;
 			if (armType == ARM_TYPE_PREDATOR && clawType == CLAW_TYPE_DRAGON)
+				dragonCounter++;
+			if (eyeType == EYES_DRAGON)
 				dragonCounter++;
 			return dragonCounter;
 		}

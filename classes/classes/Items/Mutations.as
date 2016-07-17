@@ -5251,7 +5251,7 @@
 				changes++;
 			}
 			//Remove odd eyes
-			if (changes < changeLimit && rand(5) == 0 && player.eyeType != EYES_HUMAN) {
+			if (changes < changeLimit && rand(5) == 0 && player.eyeType != EYES_HUMAN && !player.hasReptileEyes()) {
 				if (player.eyeType == EYES_BLACK_EYES_SAND_TRAP) {
 					outputText("\n\nYou feel a twinge in your eyes and you blink.  It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
 				}
@@ -5305,6 +5305,21 @@
 				player.gills = false;
 				changes++;
 			}
+			//<mod name="Reptile eyes" author="Stadler76">
+			//-Lizard eyes
+			if (player.eyeType != EYES_LIZARD && player.faceType == FACE_LIZARD && player.hasScales() && player.earType == EARS_LIZARD && changes < changeLimit && rand(4) == 0) {
+				if (player.hasReptileEyes())
+					outputText("\n\nYour eyes change slightly in their appearance.  ");
+				else
+				{
+					outputText("\n\nYou feel a sudden surge of pain in your eyes as they begin to reshape. Your pupils begin to elongate becoming vertically slitted and your irises change their color, too.");
+					outputText("\nAs the pain passes, you examine your eyes in a nearby puddle. You look into your new eyes with vertically slitted pupils surrounded by green-yellowish irises. With a few tears remaining, the look is a bit blurry. Wanting to get a clearer look at them, you blink your remaining tears away and suddenly you realize, that you just did that with your second set of eyelids.\n");
+				}
+				outputText("<b>You now have lizard eyes.</b>");
+				player.eyeType = EYES_LIZARD;
+				changes++;
+			}
+			//</mod>
 			//FAILSAFE CHANGE
 			if (changes == 0) {
 				outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n", false);
