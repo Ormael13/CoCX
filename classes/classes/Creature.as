@@ -200,7 +200,7 @@ package classes
 		16 - fullmouse*/
 		public var faceType:Number = FACE_HUMAN;
 
-		// <mod name="Predator arms" author="Stadler">
+		// <mod name="Predator arms" author="Stadler76">
 		public var clawTone:String = "";
 		public var clawType:Number = CLAW_TYPE_NORMAL;
 		// </mod>
@@ -2523,7 +2523,7 @@ package classes
 			return skinzilla;
 		}
 
-		// <mod name="Predator arms" author="Stadler">
+		// <mod name="Predator arms" author="Stadler76">
 		public function claws():String
 		{
 			var toneText:String = clawTone == "" ? " " : (", " + clawTone + " ");

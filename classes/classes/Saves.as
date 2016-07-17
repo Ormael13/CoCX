@@ -848,7 +848,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.antennae = player.antennae;
 		saveFile.data.horns = player.horns;
 		saveFile.data.hornType = player.hornType;
-		// <mod name="Predator arms" author="Stadler">
+		// <mod name="Predator arms" author="Stadler76">
 		saveFile.data.clawTone = player.clawTone;
 		saveFile.data.clawType = player.clawType;
 		// </mod>
@@ -1742,7 +1742,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.hornType = saveFile.data.hornType;
 
-		// <mod name="Predator arms" author="Stadler">
+		// <mod name="Predator arms" author="Stadler76">
 		player.clawTone = (saveFile.data.clawTone == undefined) ? ""               : saveFile.data.clawTone;
 		player.clawType = (saveFile.data.clawType == undefined) ? CLAW_TYPE_NORMAL : saveFile.data.clawType;
 		// </mod>

@@ -5,7 +5,7 @@ package classes
 	/**
 	 * This contains some of the helper methods for the player-object I've written
 	 * @since June 29, 2016
-	 * @author Stadler
+	 * @author Stadler76
 	 */
 	public class PlayerHelper extends Character 
 	{
