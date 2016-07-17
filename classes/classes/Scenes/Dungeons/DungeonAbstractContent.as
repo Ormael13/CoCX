@@ -2,7 +2,7 @@ package classes.Scenes.Dungeons
 {
 	import classes.*;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Dungeons.DungeonEngine;
+	import classes.Scenes.Dungeons.DungeonCore;
 	
 	/**
 	 * ...
@@ -10,7 +10,7 @@ package classes.Scenes.Dungeons
 	 */
 	public class DungeonAbstractContent extends BaseContent
 	{
-		protected function get dungeons():DungeonEngine {
+		protected function get dungeons():DungeonCore {
 			return kGAMECLASS.dungeons;
 		}
 		public function DungeonAbstractContent() 

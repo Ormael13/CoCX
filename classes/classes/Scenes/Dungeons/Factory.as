@@ -6,7 +6,7 @@ package classes.Scenes.Dungeons
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.BaseContent;
 	import classes.Scenes.Dungeons.DungeonAbstractContent;
-	import classes.Scenes.Dungeons.DungeonEngine;
+	import classes.Scenes.Dungeons.DungeonCore;
 	import classes.Scenes.Dungeons.Factory.*;
 	
 	import coc.model.GameModel;
@@ -15,6 +15,7 @@ package classes.Scenes.Dungeons
 	
 	public class Factory extends DungeonAbstractContent
 	{
+		/*
 		private static const DUNGEON_FACTORY_FOYER:int				= 0;
 		private static const DUNGEON_FACTORY_PUMP_ROOM:int			= 1;
 		private static const DUNGEON_FACTORY_BREAK_ROOM:int			= 2;
@@ -25,7 +26,7 @@ package classes.Scenes.Dungeons
 		private static const DUNGEON_FACTORY_PUMP_CONTROL:int		= 7;
 		private static const DUNGEON_FACTORY_STORE_ROOM:int			= 8;
 		private static const DUNGEON_FACTORY_BATHROOM:int			= 9;
-		
+		*/
 		public function Factory() {}
 		
 		//EVENTS
@@ -1541,7 +1542,7 @@ package classes.Scenes.Dungeons
 		
 		//ROOMS
 		public function roomLobby():void {
-			kGAMECLASS.dungeonLoc = 0;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_FACTORY_FOYER;
 			outputText("<b><u>The Factory Foyer</u></b>\n", true);
 			outputText("The door swings shut behind you with an ominous 'creeeeeaaaaaaak' followed by a loud 'SLAM'.  Glancing around, you find yourself in some kind of stylish foyer, complete with works of art and a receptionist's desk.  Looking closer at the paintings on the wall quickly reveals their tainted and demonic nature: One appears at first to be a painting of a beautiful smiling woman, except you notice dripping tentacles coiling around the hem of her dress.  Behind the receptionist's desk, the second painting is even less discreet, openly depicting a number of imps gang-raping a vaguely familiar-looking woman.  Luckily, whatever demon is employed as the receptionist is away at the moment.  Behind the desk on the northern wall stands a secure-looking iron door.  On the western wall, is a door. A sign on the door indicates that it leads to the factory restroom.  On the eastern wall is a simple wooden door, though the color of the wood itself is far darker and redder than any of the hard woods from your homeland.  Behind you to the south is the rusty iron entry door.", false);
 			dungeons.setDungeonButtons(checkDoor1, null, roomBathroom, roomBreakRoom);
@@ -1549,7 +1550,7 @@ package classes.Scenes.Dungeons
 		}
 		
 		public function roomBreakRoom():void {
-			kGAMECLASS.dungeonLoc = 1;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_FACTORY_BREAK_ROOM;
 			outputText("<b><u>Break Room</u></b>\n", true);
 			outputText("Stepping through the dark red doorway, you wander into an expansive break room. Tables surrounded by crude wooden chairs fill most of the floor space. Along the far eastern wall sits a small counter, complete with a strange ebony sculpture of a busty woman with 'Mrs. Coffee' printed on the side. Below the sculpture is a pot of steaming hot coffee, giving off an invigoratingly rich smell.", false);
 			dungeons.setDungeonButtons(null, null, roomLobby, null);
@@ -1610,7 +1611,7 @@ package classes.Scenes.Dungeons
 		}
 		
 		public function roomPumpRoom():void {
-			kGAMECLASS.dungeonLoc = 2;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_FACTORY_PUMP_ROOM;
 			outputText("<u><b>Pump Room</b></u>\n", true);
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] < 1) {
 				outputText("As you step through the iron door, a cacophony of thrumming mechanical noise assaults your ears.  Coppery pipes arch overhead, riveted into spiked iron brackets that hang from the ceiling in twisted pairs.  The constant thrum-thrum-thrum of concealed pumps and mechanisms makes it difficult to hear anything, but you swear you can make out the faint sounds of sexual pleasure emanating from the northwest side of the room.  Investigating further, you spot a door along the west wall of the room that appears to be the source of the licentious sounds.  The vibrations of all the machinery are strongest along the east walls, indicating the possible site of this hellish place's power-plant. There is a door on the east wall and a door on the north.  To the south is a solid iron door that leads back to the lobby.", false);
@@ -1620,7 +1621,7 @@ package classes.Scenes.Dungeons
 		}
 		
 		public function roomFurnaceRoom():void {
-			kGAMECLASS.dungeonLoc = 3;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_FACTORY_FURNACE_ROOM;
 			outputText("<b><u>Furnace Room</u></b>\n", true)
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) {
 				outputText("The air inside this room is hot enough to coat your " + player.skinTone + " " + player.skinDesc + " in a fine sheen of sweat.  The eastern side of the chamber is more machine than wall, a solid mass of iron piping covered in small metal blast-doors through which fuel is to be fed.  A small transparent plate is riveted into the wall, allowing you to see some kind of pink crystalline fuel being burned by purple-white fire.  The few visible controls and gauges don't seem to be linked into anything important, and the machinery looks far too durable to damage with what you have.  The only exit is a heavy iron door on the west wall.  ", false);
@@ -1647,7 +1648,7 @@ package classes.Scenes.Dungeons
 		}
 		
 		public function roomRepairCloset():void {
-			kGAMECLASS.dungeonLoc = 4;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_FACTORY_REPAIR_CLOSET;
 			outputText("<b><u>Repair Closet</u></b>\n", true);
 			outputText("As you carefully slip inside the room, you note with some relief that it seems to be an empty storage closet. The room is tiny, barely 6' by 8' and almost entirely empty.  The one piece of furniture inside the closet is a simple wooden cabinet, placed against the far wall.  ", false)
 			dungeons.setDungeonButtons(null, roomPumpRoom, null, null);	
@@ -1670,7 +1671,7 @@ package classes.Scenes.Dungeons
 		}
 		
 		public function roomMainChamber():void {
-			kGAMECLASS.dungeonLoc = 5;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_FACTORY_MAIN_CHAMBER;
 			outputText("<b><u>Main Chamber</u></b>\n", true);
 			dungeons.setDungeonButtons(null, null, null, roomPumpRoom);
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) {
@@ -1689,7 +1690,7 @@ package classes.Scenes.Dungeons
 		}
 		
 		public function roomForemanOffice():void {
-			kGAMECLASS.dungeonLoc = 6;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_FACTORY_FOREMANS_OFFICE;
 			//Foreman's Office
 			outputText("<b><u>Foreman's Office</u></b>\n", true);
 			outputText("This office provides an excellent view of the 'factory floor' through a glass wall along the north side.  Towards the south side of the room is a simple desk with an even simpler chair behind it.  The desk's surface is clear of any paperwork, and only has a small inkwell and quill on top of it.  There are a few statues of women and men posted at the corners of the room.  All are nude and appear to be trapped in mid-orgasm.  You wonder if they're statues or perhaps some kind of perverted petrified art.  The north has a glass door leading back to the factory.  There are two other doors, both made of very solid looking metal.  One is on the east wall and another is on the south, behind the desk.  The one behind the desk is marked 'Premium Storage' (though it appears to be locked).", false);
@@ -1713,7 +1714,7 @@ package classes.Scenes.Dungeons
 		}
 		
 		public function roomControlRoom():void {
-			kGAMECLASS.dungeonLoc = 7;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_FACTORY_PUMP_CONTROL;
 			outputText("<b><u>Pump Control Room</u></b>\n", true);
 			outputText("This room is little more than a closet in reality.  There is a simple set of mechanical controls on a finely crafted terminal against the far wall.  ", false)
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) {
@@ -1736,7 +1737,7 @@ package classes.Scenes.Dungeons
 		}
 		
 		public function roomPremiumStorage():void {
-			kGAMECLASS.dungeonLoc = 8;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_FACTORY_STORE_ROOM;
 			outputText("<b><u>Premium Products</u></b>\n", true);
 			outputText("This store room is filled with a few opened crates, meant to store the various substances in the factory.  It looks as if the current overseer has allowed supplies to run low, as there is not much to be gleaned from this meager stash.\n\n", false);
 			dungeons.setDungeonButtons(roomForemanOffice, null, null, null);
@@ -1763,7 +1764,7 @@ package classes.Scenes.Dungeons
 		}
 		
 		public function roomBathroom():void {
-			kGAMECLASS.dungeonLoc = 9;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_FACTORY_BATHROOM;
 			outputText("<b><u>Washroom</u></b>\n", true);
 			outputText("This room is fairly clean. At one of the walls, there is a row of four sinks. Opposite side, there are few bathroom stalls. Three urinals are mounted against one of the walls. You'd guess even the demons need to use the bathroom.", false);
 			dungeons.setDungeonButtons(null, null, null, roomLobby);

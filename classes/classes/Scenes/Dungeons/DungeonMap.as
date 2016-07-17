@@ -242,7 +242,7 @@ package classes.Scenes.Dungeons {
 					rawOutputText("\n           ");
 				}
 			}
-			else if (kGAMECLASS.dungeonLoc >= 23 && kGAMECLASS.dungeonLoc < 39) {
+			else if (kGAMECLASS.dungeonLoc >= 23 && kGAMECLASS.dungeonLoc < 39) { //Desert Cave
 				rawOutputText("Cave of the Sand Witches");
 				if (kGAMECLASS.dungeonLoc == 23) {
 					rawOutputText("\n        [ ]        ");
@@ -403,6 +403,114 @@ package classes.Scenes.Dungeons {
 					rawOutputText("\n |   |   |       | ");
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[ ]");
 					rawOutputText("\n         |         ");
+				}
+			}
+			else if (kGAMECLASS.dungeonLoc >= 39 && kGAMECLASS.dungeonLoc < 55) { //Anzu's Palace
+				outputText("Anzu's Palace, ");
+				//Floor label
+				if (kGAMECLASS.dungeonLoc >= 39 && kGAMECLASS.dungeonLoc <= 44) outputText("1F");
+				if (kGAMECLASS.dungeonLoc >= 45 && kGAMECLASS.dungeonLoc <= 48) outputText("2F");
+				if (kGAMECLASS.dungeonLoc >= 49 && kGAMECLASS.dungeonLoc <= 51) outputText("3F");
+				if (kGAMECLASS.dungeonLoc == 52) outputText("Roof");
+				if (kGAMECLASS.dungeonLoc == 53 || kGAMECLASS.dungeonLoc == 54) outputText("Basement");
+				//Map display
+				if (kGAMECLASS.dungeonLoc == 39) { //Floor 1
+					rawOutputText("\n[ ]     [ ]");
+					rawOutputText("\n |       | ");
+					rawOutputText("\n[ ]—[S]—[ ]");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [P]    ");
+					rawOutputText("\n     |     ");
+				}
+				else if (kGAMECLASS.dungeonLoc == 40) {
+					rawOutputText("\n[ ]     [ ]");
+					rawOutputText("\n |       | ");
+					rawOutputText("\n[ ]—[P]—[ ]");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+				}
+				else if (kGAMECLASS.dungeonLoc == 41) {
+					rawOutputText("\n[ ]     [ ]");
+					rawOutputText("\n |       | ");
+					rawOutputText("\n[P]—[S]—[ ]");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+				}
+				else if (kGAMECLASS.dungeonLoc == 42) {
+					rawOutputText("\n[P]     [ ]");
+					rawOutputText("\n |       | ");
+					rawOutputText("\n[ ]—[S]—[ ]");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+				}
+				else if (kGAMECLASS.dungeonLoc == 43) {
+					rawOutputText("\n[ ]     [ ]");
+					rawOutputText("\n |       | ");
+					rawOutputText("\n[ ]—[S]—[P]");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+				}
+				else if (kGAMECLASS.dungeonLoc == 44) {
+					rawOutputText("\n[ ]     [P]");
+					rawOutputText("\n |       | ");
+					rawOutputText("\n[ ]—[S]—[ ]");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+				}
+				else if (kGAMECLASS.dungeonLoc == 45) { //Floor 2
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n[ ]—[P]—[ ]");
+				}
+				else if (kGAMECLASS.dungeonLoc == 46) {
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n[P]—[S]—[ ]");
+				}
+				else if (kGAMECLASS.dungeonLoc == 47) {
+					rawOutputText("\n    [P]    ");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n[ ]—[S]—[ ]");
+				}
+				else if (kGAMECLASS.dungeonLoc == 48) {
+					rawOutputText("\n    [ ]    ");
+					rawOutputText("\n     |     ");
+					rawOutputText("\n[ ]—[S]—[P]");
+				}
+				else if (kGAMECLASS.dungeonLoc == 49) { //Floor 3
+					rawOutputText("\n           ");
+					rawOutputText("\n           ");
+					rawOutputText("\n[ ]—[P]—[ ]");
+				}
+				else if (kGAMECLASS.dungeonLoc == 50) { 
+					rawOutputText("\n           ");
+					rawOutputText("\n           ");
+					rawOutputText("\n[P]—[S]—[ ]");
+				}
+				else if (kGAMECLASS.dungeonLoc == 51) { 
+					rawOutputText("\n           ");
+					rawOutputText("\n           ");
+					rawOutputText("\n[ ]—[S]—[P]");
+				}
+				else if (kGAMECLASS.dungeonLoc == 52) { //Roof
+					rawOutputText("\n           ");
+					rawOutputText("\n           ");
+					rawOutputText("\n    [P]    ");
+				}
+				else if (kGAMECLASS.dungeonLoc == 53) { //Basement
+					rawOutputText("\n           ");
+					rawOutputText("\n           ");
+					rawOutputText("\n[ ]—[P]    ");
+				}
+				else if (kGAMECLASS.dungeonLoc == 54) {
+					rawOutputText("\n           ");
+					rawOutputText("\n           ");
+					rawOutputText("\n[P]—[S]    ");
 				}
 			}
 		}

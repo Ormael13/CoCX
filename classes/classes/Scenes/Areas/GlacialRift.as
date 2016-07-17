@@ -43,7 +43,8 @@ package classes.Scenes.Areas
 			if ((flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 || flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] > 0) && flags[kFLAGS.VALARIA_AT_CAMP] == 0 && player.armor != armors.GOOARMR) choice[choice.length] = 3; //Valeria
 			if (rand(3) == 0) choice[choice.length] = 4; //Freebie items!
 			if (rand(15) == 0 && player.hasKeyItem("Camp - Ornate Chest") < 0) choice[choice.length] = 5; //Ornate Chest
-			choice[choice.length] = 6; //Find nothing!
+			if (flags[kFLAGS.ANZU_PALACE_UNLOCKED] < 1) choice[choice.length] = 6; //Find Anzu's palace
+			choice[choice.length] = 99; //Find nothing!
 			
 			//DLC april fools
 			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
@@ -114,6 +115,9 @@ package classes.Scenes.Areas
 					statScreenRefresh();
 					outputText("\n\n<b>You now have " + num2Text(inventory.itemStorageDirectGet().length) + " storage item slots at camp.</b>");
 					doNext(camp.returnToCampUseOneHour);
+					break;
+				case 6: //Find Anzu's Palace!
+					getGame().dungeons.palace.anzuScene.initialPalaceEncounter();
 					break;
 				default:
 					outputText("You spend an hour trudging through the bleak and bitingly cold glaciers but you don’t find anything interesting.", true);

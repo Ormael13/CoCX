@@ -17,7 +17,7 @@ package classes.Scenes
 	import classes.Items.JewelryLib;
 	import classes.Items.ShieldLib;
 	import classes.Items.UndergarmentLib;
-	import classes.Scenes.Dungeons.DungeonEngine;
+	import classes.Scenes.Dungeons.DungeonCore;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
 

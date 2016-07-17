@@ -203,6 +203,7 @@ package classes.GlobalFlags
 		public static const GENERAL_OFF_WITH_HER_HEAD:int		= 172; //Awarded for beheading Lethice.
 		public static const GENERAL_NOOOOOOO:int				= 173; //Insert Darth Vader voice here.
 		public static const GENERAL_KAIZO_TRAP:int				= 174; //Fall victim to Kaizo Trap. NOT USED.
+		public static const GENERAL_SAVE_SCUMMER:int			= 175; //Save scum. NOT USED.
 	}
 
 }

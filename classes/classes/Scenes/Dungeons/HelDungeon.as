@@ -8,7 +8,7 @@ package classes.Scenes.Dungeons
 	import classes.Items.Armor;
 	import classes.BaseContent;
 	import classes.Scenes.Dungeons.DungeonAbstractContent;
-	import classes.Scenes.Dungeons.DungeonEngine;
+	import classes.Scenes.Dungeons.DungeonCore;
 	import classes.Scenes.Dungeons.HelDungeon.*;
 	
 	import classes.Scenes.NPCs.*;
@@ -19,13 +19,14 @@ package classes.Scenes.Dungeons
 	
 	public class HelDungeon extends DungeonAbstractContent
 	{
+		/*
 		private static const DUNGEON_HEL_GUARD_HALL:int		= 17;
 		private static const DUNGEON_HEL_WINE_CELLAR:int	= 18;
 		private static const DUNGEON_HEL_STAIR_WELL:int		= 19;
 		private static const DUNGEON_HEL_DUNGEON:int		= 20;
 		private static const DUNGEON_HEL_MEZZANINE:int		= 21;
 		private static const DUNGEON_HEL_THRONE_ROOM:int	= 22;
-		
+		*/
 		public function HelDungeon() {}
 		
 		//EVENTS
@@ -181,7 +182,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nNow safe from the watchful eyes of flying harpies and their sentries, Hel whispers, \"<i>Okay, so here's the plan.  I'm going to climb up the tower and hit them from the top; you go in through the main gates here,</i>\" she says, pointing to a rotting wooden door that seems to have been in disuse for a decade.  \"<i>Divide and conquer, right?  There are three floors, so... meet in the second, as soon as we can.  Yeah?</i>\"");
 			outputText("\n\nYou nod again, and give Helia a little boost as she starts to scale the high walls of the aging tower.  You, however, steel yourself and make your way through an opening in the main gates."); 
 			//(NEXT)
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_GUARD_HALL;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_HEL_GUARD_HALL;
 			kGAMECLASS.inDungeon = true;
 			doNext(playerMenu);
 		}
@@ -219,7 +220,7 @@ package classes.Scenes.Dungeons
 			outputText(images.showImage("dungeon-entrance-phoenixtower"));
 			outputText("You make your way back to the high mountains. Next, you hike up the narrow ledges and crevices of the high mountains, slowly but steadily climbing toward a snow-capped peak.");
 			outputText("\n\nYou remember where the tower is. You make your way back to the tower.");
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_GUARD_HALL;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_HEL_GUARD_HALL;
 			kGAMECLASS.inDungeon = true;
 			doNext(playerMenu);
 		}
@@ -1201,7 +1202,7 @@ package classes.Scenes.Dungeons
 		}
 		//ROOMS
 		public function roomGuardHall():void {
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_GUARD_HALL;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_HEL_GUARD_HALL;
 			outputText("<b><u>Guard Hall</u></b>\n", true);
 			outputText("You stand in what might have been a guard room once upon a time.  Now it is a ruined, ransacked mess.  It seems not to have been used in years, and the table, chairs, and spears lined up against the wall have all rotted away to almost nothing.");
 			dungeons.setDungeonButtons(roomStairwell, null, null, null);
@@ -1223,7 +1224,7 @@ package classes.Scenes.Dungeons
 
 		}
 		public function roomCellar():void {
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_WINE_CELLAR;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_HEL_WINE_CELLAR;
 			outputText("<b><u>Wine Cellar</u></b>\n", true);
 			dungeons.setDungeonButtons(null, null, null, null);
 			//(Accessed from the Trapdoor button)
@@ -1243,7 +1244,7 @@ package classes.Scenes.Dungeons
 			addButton(5, "Climb Up", roomGuardHall);
 		}
 		public function roomStairwell():void {
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_STAIR_WELL;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_HEL_STAIR_WELL;
 			clearOutput();
 			outputText("<b><u>Stair Well</u></b>\n", true);
 			dungeons.setDungeonButtons(null, roomGuardHall, null, null);
@@ -1275,7 +1276,7 @@ package classes.Scenes.Dungeons
 			}
 		}
 		public function roomDungeon():void {
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_DUNGEON;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_HEL_DUNGEON;
 			outputText("<b><u>Dungeon</u></b>\n", true);
 			dungeons.setDungeonButtons(null, null, null, null);
 			//(Intro -- Before Fight)
@@ -1311,7 +1312,7 @@ package classes.Scenes.Dungeons
 			}
 		}
 		public function roomMezzanine():void {
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_MEZZANINE;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_HEL_MEZZANINE;
 			outputText("<b><u>Mezzanine</u></b>\n", true);
 			dungeons.setDungeonButtons(null, null, null, null);
 			//(Intro; Before Battle)
@@ -1333,7 +1334,7 @@ package classes.Scenes.Dungeons
 			}
 		}
 		public function roomThroneRoom():void {
-			kGAMECLASS.dungeonLoc = DUNGEON_HEL_THRONE_ROOM;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_HEL_THRONE_ROOM;
 			outputText("<b><u>Throne Room</u></b>\n", true);
 			dungeons.setDungeonButtons(null, null, null, null);
 			//Throne Room Descript (Before Combat!)

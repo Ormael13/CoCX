@@ -6,7 +6,7 @@ package classes.Scenes.Dungeons
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.BaseContent;
 	import classes.Scenes.Dungeons.DungeonAbstractContent;
-	import classes.Scenes.Dungeons.DungeonEngine;
+	import classes.Scenes.Dungeons.DungeonCore;
 	import classes.Scenes.Dungeons.DesertCave.*;
 	
 	import classes.Scenes.Areas.Desert.CumWitch;
@@ -15,6 +15,7 @@ package classes.Scenes.Dungeons
 
 	public class DesertCave extends DungeonAbstractContent
 	{
+		/*
 		private static const DUNGEON_WITCH_ENTRANCE_GATEWAY:int		= 23;
 		private static const DUNGEON_WITCH_CAVERNOUS_COMMONS:int	= 24;
 		private static const DUNGEON_WITCH_WEST_WARRENS_MAIN:int	= 25;
@@ -31,7 +32,7 @@ package classes.Scenes.Dungeons
 		private static const DUNGEON_WITCH_CUM_WITCH_OFFICE:int		= 36;
 		private static const DUNGEON_WITCH_SACRIFICIAL_ALTAR:int	= 37;
 		private static const DUNGEON_WITCH_THRONE_ROOM:int			= 38;
-		
+		*/
 		public function DesertCave() {}
 		
 		// SANURA_DISABLED:int = 833;
@@ -4052,7 +4053,7 @@ package classes.Scenes.Dungeons
 		
 		//ROOMS
 		public function roomEntrance():void {
-			kGAMECLASS.dungeonLoc = 23;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_WITCH_ENTRANCE_GATEWAY;
 			outputText("<b><u>Strange Gateway in the Sands</u></b>\n", true);
 			dungeons.setDungeonButtons(roomCaveCommons, null, null, null);
 			if (flags[kFLAGS.SANURA_DISABLED] > 0) {
@@ -4096,7 +4097,7 @@ package classes.Scenes.Dungeons
 			addButton(11, "Leave", exitDungeon);
 		}
 		public function roomCaveCommons():void {
-			kGAMECLASS.dungeonLoc = 24;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_WITCH_CAVERNOUS_COMMONS;
 			outputText("<b><u>Cavernous Commons</u></b>\n", true);
 			outputText("Dancing lights swirl around the roof of the cavern, twirling around each other in patterns too intricate to follow.  Whatever they are, they're clearly magical, and they lend this place an otherworldly ambience unmatched by anything you've seen.  This huge room reminds you of your village commons in a way - it's clearly a communal area.  There's a water-pump in the northwest corner and a blazing purple bonfire in the center of the chamber, heating the cool underground air.  The ground is dirt, rather than sand, and hard-packed as any road.  Various chairs and benches are set up for witches to relax in.  ");
 			dungeons.setDungeonButtons(null, checkExit, roomWestHall1, roomEastHall1)
@@ -4122,19 +4123,19 @@ package classes.Scenes.Dungeons
 			flushOutputTextToGUI();
 		}
 		public function roomWestHall1():void {
-			kGAMECLASS.dungeonLoc = 25;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_WITCH_WEST_WARRENS_MAIN;
 			outputText("<b><u>Western Warrens Main Hall (Eastern Portion)</u></b>\n", true);
 			outputText("The supernatural illumination so prevalent to the east is present here as well, though in smaller quantity and vastly diminished brightness.  Swirls of bluish-white hue slide along the ceiling in slow, measured motions, a stark contrast to the jubilant dancing of the preceding cavern.  The ceiling is almost twelve feet high in places, with the sides of the east-west passage dipping down the lowest.  The floor is sandstone here, as you would expect in a desert cave, though it is liberally obfuscated with an array of woven rugs.  Sand Witches march by on errands, only pausing to give you disinterested glances.  Most of them bear the signs of pregnancy or have young girls in tow.  Whatever the case, there doesn't seem to be any fight in these women.  Along the north and south walls are small, door-sized openings, draped with heavy curtains that easily muffle any noise.  To the west, the tunnel bores on unimpeded.  However, to the east the cave opens up into a much, much larger chamber.");
 			dungeons.setDungeonButtons(roomPlayRoom, roomLustRoom, roomWestHall2, roomCaveCommons);
 		}
 		public function roomPlayRoom():void {
-			kGAMECLASS.dungeonLoc = 26;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_WITCH_CHILDRENS_PLAYROOM;
 			outputText("<b><u>Western Warrens, Eastern Portion, North Side (Children's Play Room)</u></b>\n", true);
 			outputText("Behind the thick curtain is the last thing you would expect to see.  There's nearly a dozen children and three busty, pregnant sand witches watching them.  Toys have been scattered everywhere by the young blonde children.  Their wardens were busy knitting when you intruded, but they glare at you balefully and make shooing gestures.  Unless you had planned to rob children of their toys and beat up pregnant women, there's nothing to be had here.");
 			dungeons.setDungeonButtons(null, roomWestHall1, null, null);
 		}
 		public function roomLustRoom():void {
-			kGAMECLASS.dungeonLoc = 27;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_WITCH_PREGNANT_LUST_ROOM;
 			outputText("<b><u>Western Warrens, Eastern Portion, South Side (Lust Room)</u></b>\n", true);
 			outputText("This room is surprisingly large - big enough to hold the " + num2Text(rand(6) + 5) + " heavily pregnant women inside plus perhaps a dozen more.  Like the outer tunnel, this room is lit by magic, though its contents are equally mundane, if a great deal more... interesting.  There's female sex-toys of every variety on almost every surface.  They sit in piles on the floor, they hang from the walls, and there are even some mounted on the wall, to be fucked in place.  Many such toys have multiple shafts and come in shapes from standard to canine to obscenely equine.  All of the witches are presently engaged in coitus with each other or their 'marital aids', but once you enter, they glance at you with hungry, lust-filled eyes.");
 			if (silly()) outputText("  Clearly, if you wanted to, you could put some extra meat in a sand witch.");
@@ -4144,7 +4145,7 @@ package classes.Scenes.Dungeons
 			}
 		}
 		public function roomWestHall2():void {
-			kGAMECLASS.dungeonLoc = 28;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_WITCH_WEST_WARRENS_WEST;
 			outputText("<b><u>Western Warrens Main Hall (Western Portion)</u></b>\n", true);
 			outputText("The smooth tunnel comes to an end here, blocked by the omnipresent sandstone.  The sapphire light plays beautifully across the rough-hewn stone as you watch, but you don't take the time to give it much thought.  To the east, the arching hallway leads back towards a large common area of a cave.  Along the north and south walls are door-sized openings, blocked with rugs of fine make and thick fabric.  They don't leave enough of a gap for any light or sound to bleed into the hall.  You'll have to take a peek if you want to see what's going on.");
 			dungeons.setDungeonButtons(roomNursery, checkPharmacyDoorUnlocked, null, roomWestHall1);
@@ -4162,13 +4163,13 @@ package classes.Scenes.Dungeons
 			}
 		}
 		public function roomNursery():void {
-			kGAMECLASS.dungeonLoc = 29;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_WITCH_NURSERY;
 			outputText("<b><u>Western Warrens, Western Portion, North Side (Nursery)</u></b>\n", true);
 			outputText("As soon as you clear the curtain, you realize there's nothing of interest to you here.  The room is lit with rose pink globes, and the furniture in the room is filled with sleeping mothers, nursing infants, or older children taking naps.  The room is packed with bodies, and while it smells strongly of femininity, there's nothing worth looking into present here.");
 			dungeons.setDungeonButtons(null, roomWestHall2, null, null);
 		}
 		public function roomPharmacy():void {
-			kGAMECLASS.dungeonLoc = 30;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_WITCH_PHARMACY;
 			outputText("<b><u>Western Warrens, Western Portion, South Side (Pharmacy)</u></b>\n", true);
 			outputText("This room is so tiny it can barely get away with being called that.  If anything, it's more of a small, cozy nook.  There isn't anyone else here, though the room is illuminated by the same omnipresent magics found elsewhere in this little cave of wonders.  Standing silent vigil on the southern wall, a large chest looms over you, stretching most of the way to the ceiling.  It is completely, almost impossibly neat, with every drawer fully and completely closed.  Spurred on by this strangeness, you pop a few of them open.  One drawer has pink pills, another brown.  Searching drawer by drawer until you discover that every single compartment houses the same dual medicines.  You glance about the room and spy a faded parchment on the wall.  It reads \"<i>Tnangerp rof knip, nerrab rof nworb.</i>\"  There is an opening in the wall to the north.");
 			dungeons.setDungeonButtons(roomWestHall2, null, null, null);
@@ -4180,19 +4181,19 @@ package classes.Scenes.Dungeons
 			addButton(2, "Pink Pill", takeFertilePills, null, null, null, "Swallow the pink pill. You suspect that it might make you fertile again.");
 		}
 		public function roomEastHall1():void {
-			kGAMECLASS.dungeonLoc = 31;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_WITCH_EAST_WARRENS_MAIN;
 			outputText("<b><u>Eastern Warrens Main Hall (Western Portion)</u></b>\n", true);
 			outputText("This smooth, sandstone tunnel proceeds in a perfectly straight line from east to west, as if aligned to some titanic, invisible compass buried below the floor.  Flickering white plumes of illumination undulate through the air along the arched ceiling, trailing streamers of pearl incandescence that light the entire chamber with ghostly brightness.  You are at the entrance to the eastern warrens - the commons are still clearly visible to the west, and the pathway to the east goes on a-ways.  Hand woven tapestries adorn the walls, telling the history of this enclave in pictographic form, from its inception to present day.  Further east, you can see a few empty places, ready to be covered with more cloth, once the next chapter of history is ready to be told.  To the north, there is a small opening in the wall, blocked off by plain white curtains.");
 			dungeons.setDungeonButtons(roomSleepingChamber, null, roomCaveCommons, roomEastHall2); 
 		}
 		public function roomSleepingChamber():void {
-			kGAMECLASS.dungeonLoc = 32;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_WITCH_SLEEPING_CHAMBER;
 			outputText("<b><u>Eastern Warrens, Western Portion, North Side (Sleeping Chamber)</u></b>\n", true);
 			outputText("Inside this expansive but cosy chamber are a few dozen beds, arranged in neat patterns marred only by a few cots that dare to be positioned adjacent to one another.  Clearly this is the tribe's primary sleeping area.  The floor is obscured by heavy, hand-woven rugs that ruffle oh so softly against your [feet].  Instead of the usual ghostly lights you've grown to expect, the interior of this dwelling is lit by glass-paneled constructs resembling lanterns.  There is no fuel or wick of course, only flicking phantasmal illumination trapped as if it were a flame.  Shutters allow the lanterns to be dimmed, but as you are alone in here for now, there's no reason to make it harder to see.  There is a door to the east and a curtained off opening to the south.");
 			dungeons.setDungeonButtons(null, roomEastHall1, null, roomBathroom);
 		}
 		public function roomBathroom():void {
-			kGAMECLASS.dungeonLoc = 33;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_WITCH_BATH_ROOM;
 			outputText("<b><u>Eastern Warrens, Eastern Portion, North Side (Bath Room)</u></b>\n", true);
 			outputText("As soon as you step in, you can smell a sweet, dairy-like scent in the air, but as your eyes adjust to the dimmer lighting, you realize you've stumbled into the sand witches' bathroom!  Fluffy towels hang from the wall, ready for use.  There's one giant tub in the center of the room, recessed deep into the floor.  It has a number of seats carved into the side with a small, open hole in the bottom.  Hanging from the ceiling, a long chain dangles down, topped with a plug.");
 			dungeons.setDungeonButtons(null, null, roomSleepingChamber, null);
@@ -4203,19 +4204,19 @@ package classes.Scenes.Dungeons
 			}
 		}
 		public function roomEastHall2():void {
-			kGAMECLASS.dungeonLoc = 34;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_WITCH_EAST_WARRENS_EAST;
 			outputText("<b><u>Eastern Warrens Main Hall (Eastern Portion)</u></b>\n", true);
 			outputText("Coming to an end here, the eastern warrens' main hall ends in little more than a bare, flat stone wall.  The area is well illuminated by the familiar magical lights, giving you a good view of the historical tapestries and blank spaces yet to be filled in.  You can't help but wonder if the Witches will simply stop recording their history once this area is full, or if they will expand in order to give themselves more room.  Looking over the events depicted here, it's clear that this enclave is one of the oldest, roughly two decades old.  There are pictures of a blond haired woman in fluttering, golden robes leaving a town of demons behind and journeying towards the desert.  Could that be how the sand witches began?  You shake your head and look over the rest of the room.  There's a curtained off doorway to the south, and of course, the tunnel leads back to the west.");
 			dungeons.setDungeonButtons(null, roomCumWitchBedroom, roomEastHall1, null);
 		}
 		public function roomCumWitchBedroom():void {
-			kGAMECLASS.dungeonLoc = 35;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_WITCH_CUM_WITCH_BEDROOM;
 			outputText("<b><u>Eastern Warrens, East Portion, South Side (Cum Witch's Bedroom)</u></b>\n", true);
 			outputText("As soon as you brush back the curtain, you're assaulted by a pungent, salty smell.  It almost reminds you of tepid ocean water... or cum.  Regardless, you force your way in and take a look around.  This area has all the furnishings of a small domicile and comes complete with a solid oak bed and mattress.  The mattress and sheets seem to be cared for with immaculate precision, perhaps magically aided.  There is a simple dresser here, and though it looks to have been fashioned by crude tools, the wood looks sturdy and serviceable.  All of the drawers are closed, of course.  A few books sit on a nearby table, but it's obvious they're written in a language beyond your comprehension.  Whoever wrote them either did so in a different tongue or a magical language that would take years to decipher.  A thick curtain walls this chamber off from the eastern warrens' main hall, to the north.  To the west, there is a thinner, gauzy sheet hanging from an opening in the rock - likely leading to a similar room.");
 			dungeons.setDungeonButtons(roomEastHall2, null, roomCumWitchOffice, null); 
 		}
 		public function roomCumWitchOffice():void {
-			kGAMECLASS.dungeonLoc = 36;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_WITCH_CUM_WITCH_OFFICE;
 			outputText("<b><u>Eastern Warrens, West Portion, South Side (Cum Witch's Office)</u></b>\n", true);
 			dungeons.setDungeonButtons(null, null, null, roomCumWitchBedroom);
 			if (flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0) {
@@ -4259,13 +4260,13 @@ package classes.Scenes.Dungeons
 			}
 		}
 		public function roomSacrificalAltar():void {
-			kGAMECLASS.dungeonLoc = 37;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_WITCH_SACRIFICIAL_ALTAR;
 			outputText("<b><u>Sacrificial Altar</u></b>\n", true);
 			outputText("This chamber clearly holds some kind of important significance to the witch coven.  The floor and walls are covered in shining white, reflective tiles, and a large number of carved jugs ring the outer edge of the room.  The entire place smells faintly of milk.  Sniffing, you close in on the source of the aroma.  It's emanating from what looks like a golden well, positioned dead-center before you.  The various containers also smell faintly of the alabaster treat, and oddly, you can't catch even a single whiff of spoilage; it all smells fresh.  There must be some magic at work.  Peeping over the edge of the well, you can barely make out what seems like a sea of milk stored below: white-capped ivory waves sloshing around in a chamber so large you can't see the walls of it.  It must be preserved through magic.\n\nThere is a doorway to the south and one on the north wall.");
 			dungeons.setDungeonButtons(roomSandMotherThrone, roomCaveCommons, null, null);
 		}
 		public function roomSandMotherThrone():void {
-			kGAMECLASS.dungeonLoc = 38;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_WITCH_THRONE_ROOM;
 			outputText("<b><u>Sand Mother's Throne</u></b>\n", true);
 			outputText("This chamber is lit by swirling vortexes of magical colors, each hue dancing around another in coordinated motions.  The walls are made of hewn sandstone inlaid with ivory engravings that appear to depict what must be flowing milk.  Ahead there is a huge, white throne, also made from ivory.  It is a magnificent piece of craftsmanship.  Clearly, you have found the leader's throne room.  There is a robed figure atop it.");
 			dungeons.setDungeonButtons(null, roomSacrificalAltar, null, null);

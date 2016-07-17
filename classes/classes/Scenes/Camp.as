@@ -30,16 +30,6 @@
 		{
 			return kGAMECLASS.inventory.hasItemInStorage(itype);
 		}
-/*
-		protected function hasItemsInStorage():Boolean
-		{
-			return kGAMECLASS.inventory.hasItemsInStorage();
-		}
-		protected function hasItemsInRacks(armor:Boolean = false):Boolean
-		{
-			return kGAMECLASS.inventory.hasItemsInRacks(type);
-		}
-*/
 
 		public function Camp(campInitialize:Function) {
 			campInitialize(doCamp); //Pass the doCamp function up to CoC. This way doCamp is private but the CoC class itself can call it.
@@ -47,16 +37,6 @@
 		
 		public var cabinProgress:CabinProgress = new CabinProgress();
 		public var codex:Codex = new Codex();
-		public var dungeon1:Factory = new Factory();
-		public var dungeon2:DeepCave = new DeepCave();
-		public var dungeonS:DesertCave = new DesertCave();
-		public var dungeonH:HelDungeon = new HelDungeon();
-		
-/* Replaced with calls to playerMenu
-		public function campMenu():void {
-			kGAMECLASS.playerMenu();
-		}
-*/
 		
 		public function returnToCamp(timeUsed:int):void {
 			clearOutput();
@@ -2108,14 +2088,18 @@ private function placesToPage1():void {
 private function dungeons():void {
 	menu();
 	//Turn on dungeon 1
-	if (flags[kFLAGS.FACTORY_FOUND] > 0) addButton(0, "Factory", dungeon1.enterDungeon, null, null, null, "Visit the demonic factory in the mountains." + (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 ? "\n\nYou've managed to shut down the factory." : "The factory is still running. Marae wants you to shut down the factory!") + (kGAMECLASS.dungeons.checkFactoryClear() ? "\n\nCLEARED!" : ""));
+	if (flags[kFLAGS.FACTORY_FOUND] > 0) addButton(0, "Factory", getGame().dungeons.factory.enterDungeon, null, null, null, "Visit the demonic factory in the mountains." + (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 ? "\n\nYou've managed to shut down the factory." : "The factory is still running. Marae wants you to shut down the factory!") + (kGAMECLASS.dungeons.checkFactoryClear() ? "\n\nCLEARED!" : ""));
 	//Turn on dungeon 2
-	if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1, "Deep Cave", dungeon2.enterDungeon, null, null, null, "Visit the cave you've found in the Deepwoods." + (flags[kFLAGS.DEFEATED_ZETAZ] > 0 ? "\n\nYou've defeated Zetaz, your old rival." : "") + (kGAMECLASS.dungeons.checkDeepCaveClear() ? "\n\nCLEARED!" : ""));
+	if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1, "Deep Cave", getGame().dungeons.deepcave.enterDungeon, null, null, null, "Visit the cave you've found in the Deepwoods." + (flags[kFLAGS.DEFEATED_ZETAZ] > 0 ? "\n\nYou've defeated Zetaz, your old rival." : "") + (kGAMECLASS.dungeons.checkDeepCaveClear() ? "\n\nCLEARED!" : ""));
 	//Turn on dungeon 3
 	if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(2, "Stronghold", kGAMECLASS.d3.enterD3, null, null, null, "Visit the stronghold in the high mountains that belongs to Lethice, the demon queen." + (flags[kFLAGS.LETHICE_DEFEATED] > 0 ? "\n\nYou have defeated Lethice and put an end to the demonic threats. Congratulations, you've beaten the main story!" : "") + (kGAMECLASS.dungeons.checkLethiceStrongholdClear() ? "\n\nCLEARED!" : ""));
 	//Side dungeons
-	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5, "Desert Cave", dungeonS.enterDungeon, null, null, null, "Visit the cave you've found in the desert." + (flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0 ? "\n\nFrom what you've known, this is the source of the Sand Witches." : "") + (kGAMECLASS.dungeons.checkSandCaveClear() ? "\n\nCLEARED!" : ""));
-	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) addButton(6, "Phoenix Tower", dungeonH.returnToHeliaDungeon, null, null, null, "Re-visit the tower you went there as part of Helia's quest." + (kGAMECLASS.dungeons.checkPhoenixTowerClear() ? "\n\nYou've helped Helia in the quest and resolved the problems. \n\nCLEARED!" : ""));
+	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5, "Desert Cave", getGame().dungeons.desertcave.enterDungeon, null, null, null, "Visit the cave you've found in the desert." + (flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0 ? "\n\nFrom what you've known, this is the source of the Sand Witches." : "") + (kGAMECLASS.dungeons.checkSandCaveClear() ? "\n\nCLEARED!" : ""));
+	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) addButton(6, "Phoenix Tower", getGame().dungeons.heltower.returnToHeliaDungeon, null, null, null, "Re-visit the tower you went there as part of Helia's quest." + (kGAMECLASS.dungeons.checkPhoenixTowerClear() ? "\n\nYou've helped Helia in the quest and resolved the problems. \n\nCLEARED!" : ""));
+		//Fetish Church?
+		//Hellhound Dungeon?
+	//Non-hostile dungeons
+	if (flags[kFLAGS.ANZU_PALACE_UNLOCKED] > 0) addButton(10, "Anzu's Palace", getGame().dungeons.palace.enterDungeon, null, null, null, "Visit the palace in the Glacial Rift where Anzu the avian deity resides.");
 	addButton(14, "Back", places);
 }
 

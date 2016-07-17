@@ -7,62 +7,82 @@ package classes.Scenes.Dungeons
 	
 	import coc.view.MainView;
 	
-	public class DungeonEngine extends BaseContent
+	public class DungeonCore extends BaseContent
 	{
 		//Dungeon constants
-		private static const DUNGEON_FACTORY_FOYER:int				= 0;
-		private static const DUNGEON_FACTORY_BREAK_ROOM:int			= 1;
-		private static const DUNGEON_FACTORY_PUMP_ROOM:int			= 2;
-		private static const DUNGEON_FACTORY_FURNACE_ROOM:int		= 3;
-		private static const DUNGEON_FACTORY_REPAIR_CLOSET:int		= 4;
-		private static const DUNGEON_FACTORY_MAIN_CHAMBER:int		= 5;
-		private static const DUNGEON_FACTORY_FOREMANS_OFFICE:int	= 6;
-		private static const DUNGEON_FACTORY_PUMP_CONTROL:int		= 7;
-		private static const DUNGEON_FACTORY_STORE_ROOM:int			= 8;
-		private static const DUNGEON_FACTORY_BATHROOM:int			= 9;
+		//Factory
+		public static const DUNGEON_FACTORY_FOYER:int			=  0;
+		public static const DUNGEON_FACTORY_BREAK_ROOM:int		=  1;
+		public static const DUNGEON_FACTORY_PUMP_ROOM:int		=  2;
+		public static const DUNGEON_FACTORY_FURNACE_ROOM:int	=  3;
+		public static const DUNGEON_FACTORY_REPAIR_CLOSET:int	=  4;
+		public static const DUNGEON_FACTORY_MAIN_CHAMBER:int	=  5;
+		public static const DUNGEON_FACTORY_FOREMANS_OFFICE:int	=  6;
+		public static const DUNGEON_FACTORY_PUMP_CONTROL:int	=  7;
+		public static const DUNGEON_FACTORY_STORE_ROOM:int		=  8;
+		public static const DUNGEON_FACTORY_BATHROOM:int		=  9;
+		//Deep Cave
+		public static const DUNGEON_CAVE_ENTRANCE:int			= 10;
+		public static const DUNGEON_CAVE_TUNNEL:int				= 11;
+		public static const DUNGEON_CAVE_GATHERING_HALL:int		= 12;
+		public static const DUNGEON_CAVE_FUNGUS_CAVERN:int		= 13;
+		public static const DUNGEON_CAVE_TORTURE_ROOM:int		= 14;
+		public static const DUNGEON_CAVE_SECRET_TUNNEL:int		= 15;
+		public static const DUNGEON_CAVE_ZETAZ_CHAMBER:int		= 16;
+		//Phoenix Tower
+		public static const DUNGEON_HEL_GUARD_HALL:int			= 17;
+		public static const DUNGEON_HEL_WINE_CELLAR:int			= 18;
+		public static const DUNGEON_HEL_STAIR_WELL:int			= 19;
+		public static const DUNGEON_HEL_DUNGEON:int				= 20;
+		public static const DUNGEON_HEL_MEZZANINE:int			= 21;
+		public static const DUNGEON_HEL_THRONE_ROOM:int			= 22;
+		//Desert Cave
+		public static const DUNGEON_WITCH_ENTRANCE_GATEWAY:int	= 23;
+		public static const DUNGEON_WITCH_CAVERNOUS_COMMONS:int	= 24;
+		public static const DUNGEON_WITCH_WEST_WARRENS_MAIN:int	= 25;
+		public static const DUNGEON_WITCH_CHILDRENS_PLAYROOM:int= 26;
+		public static const DUNGEON_WITCH_PREGNANT_LUST_ROOM:int= 27;
+		public static const DUNGEON_WITCH_WEST_WARRENS_WEST:int	= 28;
+		public static const DUNGEON_WITCH_NURSERY:int			= 29;
+		public static const DUNGEON_WITCH_PHARMACY:int			= 30;
+		public static const DUNGEON_WITCH_EAST_WARRENS_MAIN:int	= 31;
+		public static const DUNGEON_WITCH_SLEEPING_CHAMBER:int	= 32;
+		public static const DUNGEON_WITCH_BATH_ROOM:int			= 33;
+		public static const DUNGEON_WITCH_EAST_WARRENS_EAST:int	= 34;
+		public static const DUNGEON_WITCH_CUM_WITCH_BEDROOM:int	= 35;
+		public static const DUNGEON_WITCH_CUM_WITCH_OFFICE:int	= 36;
+		public static const DUNGEON_WITCH_SACRIFICIAL_ALTAR:int	= 37;
+		public static const DUNGEON_WITCH_THRONE_ROOM:int		= 38;
+		//Anzu's Palace
+		public static const DUNGEON_ANZU_OUTSIDE:int			= 39;
+		public static const DUNGEON_ANZU_HALL_FLOOR1:int 		= 40;
+		public static const DUNGEON_ANZU_LIVING_ROOM:int 		= 41;
+		public static const DUNGEON_ANZU_BATHROOM:int 			= 42;
+		public static const DUNGEON_ANZU_DINING_ROOM:int 		= 43;
+		public static const DUNGEON_ANZU_KITCHEN:int 			= 44;
+		public static const DUNGEON_ANZU_HALL_FLOOR2:int		= 45;
+		public static const DUNGEON_ANZU_BEDROOM:int 			= 46;
+		public static const DUNGEON_ANZU_LIBRARY:int 			= 47;
+		public static const DUNGEON_ANZU_MULTIUSE_ROOM:int 		= 48;
+		public static const DUNGEON_ANZU_HALL_FLOOR3:int 		= 49;
+		public static const DUNGEON_ANZU_PALACE_VAULTS:int 		= 50;
+		public static const DUNGEON_ANZU_ALCHEMY_ROOM:int 		= 51;
+		public static const DUNGEON_ANZU_ROOF:int 				= 52;
+		public static const DUNGEON_ANZU_BASEMENT:int 			= 53;
+		public static const DUNGEON_ANZU_ARMORY:int 			= 54;
 		
-		private static const DUNGEON_CAVE_ENTRANCE:int			= 10;
-		private static const DUNGEON_CAVE_TUNNEL:int			= 11;
-		private static const DUNGEON_CAVE_GATHERING_HALL:int	= 12;
-		private static const DUNGEON_CAVE_FUNGUS_CAVERN:int		= 13;
-		private static const DUNGEON_CAVE_TORTURE_ROOM:int		= 14;
-		private static const DUNGEON_CAVE_SECRET_TUNNEL:int		= 15;
-		private static const DUNGEON_CAVE_ZETAZ_CHAMBER:int		= 16;
-		
-		private static const DUNGEON_HEL_GUARD_HALL:int		= 17;
-		private static const DUNGEON_HEL_WINE_CELLAR:int	= 18;
-		private static const DUNGEON_HEL_STAIR_WELL:int		= 19;
-		private static const DUNGEON_HEL_DUNGEON:int		= 20;
-		private static const DUNGEON_HEL_MEZZANINE:int		= 21;
-		private static const DUNGEON_HEL_THRONE_ROOM:int	= 22;
-		
-		private static const DUNGEON_WITCH_ENTRANCE_GATEWAY:int		= 23;
-		private static const DUNGEON_WITCH_CAVERNOUS_COMMONS:int	= 24;
-		private static const DUNGEON_WITCH_WEST_WARRENS_MAIN:int	= 25;
-		private static const DUNGEON_WITCH_CHILDRENS_PLAYROOM:int	= 26;
-		private static const DUNGEON_WITCH_PREGNANT_LUST_ROOM:int	= 27;
-		private static const DUNGEON_WITCH_WEST_WARRENS_WEST:int	= 28;
-		private static const DUNGEON_WITCH_NURSERY:int				= 29;
-		private static const DUNGEON_WITCH_PHARMACY:int				= 30;
-		private static const DUNGEON_WITCH_EAST_WARRENS_MAIN:int	= 31;
-		private static const DUNGEON_WITCH_SLEEPING_CHAMBER:int		= 32;
-		private static const DUNGEON_WITCH_BATH_ROOM:int			= 33;
-		private static const DUNGEON_WITCH_EAST_WARRENS_EAST:int	= 34;
-		private static const DUNGEON_WITCH_CUM_WITCH_BEDROOM:int	= 35;
-		private static const DUNGEON_WITCH_CUM_WITCH_OFFICE:int		= 36;
-		private static const DUNGEON_WITCH_SACRIFICIAL_ALTAR:int	= 37;
-		private static const DUNGEON_WITCH_THRONE_ROOM:int			= 38;
 		
 		//Register dungeons
 		public var factory:Factory = new Factory;
 		public var deepcave:DeepCave = new DeepCave;
 		public var desertcave:DesertCave = new DesertCave;
 		public var heltower:HelDungeon = new HelDungeon;
+		public var palace:AnzuPalace = new AnzuPalace;
 		public var cabin:YourCabin = new YourCabin;
 		
 		public var map:DungeonMap = new DungeonMap;
 		
-		public function DungeonEngine() {}
+		public function DungeonCore() {}
 		
 		public function checkRoom():void
 		{
@@ -111,6 +131,23 @@ package classes.Scenes.Dungeons
 			if (kGAMECLASS.dungeonLoc == DUNGEON_WITCH_CUM_WITCH_OFFICE) desertcave.roomCumWitchOffice();
 			if (kGAMECLASS.dungeonLoc == DUNGEON_WITCH_SACRIFICIAL_ALTAR) desertcave.roomSacrificalAltar();
 			if (kGAMECLASS.dungeonLoc == DUNGEON_WITCH_THRONE_ROOM) desertcave.roomSandMotherThrone();
+			//Anzu's Palace
+			if (kGAMECLASS.dungeonLoc == DUNGEON_ANZU_OUTSIDE) palace.roomEntrance();
+			if (kGAMECLASS.dungeonLoc == DUNGEON_ANZU_HALL_FLOOR1) palace.roomFoyer();
+			if (kGAMECLASS.dungeonLoc == DUNGEON_ANZU_LIVING_ROOM) palace.roomLivingRoom();
+			if (kGAMECLASS.dungeonLoc == DUNGEON_ANZU_BATHROOM) palace.roomBathroom();
+			if (kGAMECLASS.dungeonLoc == DUNGEON_ANZU_DINING_ROOM) palace.roomDiningRoom();
+			if (kGAMECLASS.dungeonLoc == DUNGEON_ANZU_KITCHEN) palace.roomKitchen();
+			if (kGAMECLASS.dungeonLoc == DUNGEON_ANZU_HALL_FLOOR2) palace.roomHallFloor2();
+			if (kGAMECLASS.dungeonLoc == DUNGEON_ANZU_BEDROOM) palace.roomBedroom();
+			if (kGAMECLASS.dungeonLoc == DUNGEON_ANZU_LIBRARY) palace.roomLibrary();
+			if (kGAMECLASS.dungeonLoc == DUNGEON_ANZU_MULTIUSE_ROOM) palace.roomMultiuse();
+			if (kGAMECLASS.dungeonLoc == DUNGEON_ANZU_HALL_FLOOR3) palace.roomHallFloor3();
+			if (kGAMECLASS.dungeonLoc == DUNGEON_ANZU_PALACE_VAULTS) palace.roomVault();
+			if (kGAMECLASS.dungeonLoc == DUNGEON_ANZU_ALCHEMY_ROOM) palace.roomAlchemyRoom();
+			if (kGAMECLASS.dungeonLoc == DUNGEON_ANZU_ROOF) palace.roomRoof();
+			if (kGAMECLASS.dungeonLoc == DUNGEON_ANZU_BASEMENT) palace.roomBasement();
+			if (kGAMECLASS.dungeonLoc == DUNGEON_ANZU_ARMORY) palace.roomArmory();
 		}
 		
 		public function checkFactoryClear():Boolean {
@@ -134,6 +171,9 @@ package classes.Scenes.Dungeons
 		}
 		public function enterDeepCave():void {
 			deepcave.enterDungeon();
+		}
+		public function enterAnzuPalace():void {
+			palace.enterDungeon();
 		}
 		
 		public function navigateToRoom(room:Function = null, timeToPass:Number = 1/12):void {
@@ -188,9 +228,11 @@ package classes.Scenes.Dungeons
 			if (westFunction != null) addButton(10, "West", navigateToRoom, westFunction);
 			if (eastFunction != null) addButton(12, "East", navigateToRoom, eastFunction);
 			if (player.lust >= 30) addButton(8, "Masturbate", getGame().masturbation.masturbateGo);
+			else addButtonDisabled(8, "Masturbate", "You are not horny enough to do that.");
 			addButton(13, "Inventory", inventory.inventoryMenu, null, null, null, "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 			addButton(14, "Map", map.displayMap, null, null, null, "View the map of this dungeon.");
 			setTopButtons();
+			palace.setAnzuButton();
 		}
 		
 	}

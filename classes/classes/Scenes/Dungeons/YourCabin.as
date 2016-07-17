@@ -5,7 +5,7 @@ package classes.Scenes.Dungeons
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.BaseContent;
 	import classes.Scenes.Dungeons.DungeonAbstractContent;
-	import classes.Scenes.Dungeons.DungeonEngine;
+	import classes.Scenes.Dungeons.DungeonCore;
 	
 	public class YourCabin extends DungeonAbstractContent
 	{

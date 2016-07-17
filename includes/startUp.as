@@ -726,6 +726,7 @@ public function creditsScreen():void {
 	outputText("<li> Liadri (Manticore and Dragonne suggestions)</li>");
 	outputText("<li> Warbird Zero (Replacement Ingnam descriptions)</li>");
 	outputText("<li> Matraia (Replacement Cabin construction texts)</li>");
+	outputText("<li> Stadler76 (New arm types, Code refactoring)</li>");
 	outputText("</ul>");
 	outputText("<b>Game Mod Supplementary Events:</b>\n");
 	outputText("<ul>");
@@ -735,6 +736,7 @@ public function creditsScreen():void {
 	outputText("<li> LukaDoc (Bimbo Jojo)</li>");
 	outputText("<li> Kitteh6660 (Behemoth, Cabin, Ingnam, Pure Jojo sex scenes. Feel free to help me with quality control.)</li>");
 	outputText("<li> Ormael (Salamander TFs)</li>");
+	outputText("<li> Coalsack (Anzu the Avian Deity)</li>");
 	outputText("</ul>");
 	outputText("<b>Game Mod Bug Reporting:</b>\n");
 	outputText("<ul>");

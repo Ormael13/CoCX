@@ -6,7 +6,7 @@ package classes.Scenes.Dungeons
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.BaseContent;
 	import classes.Scenes.Dungeons.DungeonAbstractContent;
-	import classes.Scenes.Dungeons.DungeonEngine;
+	import classes.Scenes.Dungeons.DungeonCore;
 	import classes.Scenes.Dungeons.DeepCave.*;
 	
 	import classes.internals.Utils;
@@ -17,6 +17,7 @@ package classes.Scenes.Dungeons
 	
 	public class DeepCave extends DungeonAbstractContent
 	{
+		/*
 		private static const DUNGEON_CAVE_ENTRANCE:int			= 10;
 		private static const DUNGEON_CAVE_TUNNEL:int			= 11;
 		private static const DUNGEON_CAVE_GATHERING_HALL:int	= 12;
@@ -24,7 +25,7 @@ package classes.Scenes.Dungeons
 		private static const DUNGEON_CAVE_TORTURE_ROOM:int		= 14;
 		private static const DUNGEON_CAVE_SECRET_TUNNEL:int		= 15;
 		private static const DUNGEON_CAVE_ZETAZ_CHAMBER:int		= 16;
-		
+		*/
 		public var vala:ValaScene = new ValaScene();
 		public var shouldraFollower:ShouldraFollower = new ShouldraFollower();
 		
@@ -1029,7 +1030,7 @@ package classes.Scenes.Dungeons
 		}
 		//ROOMS
 		public function roomEntrance():void {
-			kGAMECLASS.dungeonLoc = 10;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_CAVE_ENTRANCE;
 			outputText("<b><u>The Cave Entrance</u></b>\n", true);
 			outputText("The entrance to this cave is far bigger than the cave itself.  It looks to be a totally natural formation.  Outside, to the south, is a veritable jungle of plant-life.  There are massive trees, vines, and ferns everywhere.  The cave grows narrower the further north you go, until it's little more than a claustrophobic tunnel burrowing deep into the earth.", false);
 			dungeons.setDungeonButtons(roomTunnel, null, null, null);
@@ -1048,14 +1049,14 @@ package classes.Scenes.Dungeons
 		}
 		
 		public function roomTunnel():void {
-			kGAMECLASS.dungeonLoc = 11;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_CAVE_TUNNEL;
 			outputText("<b><u>Cave Tunnel</u></b>\n", true);
 			outputText("This cave tunnel slants downwards to the north, and upwards to the south.  You can see sunlight and feel a fresh breeze from the latter direction, though the walls and air around you are damp with moisture.  You realize that the floor of this cave is fairly smooth and even, as if some attempt had been made to level it out.  You can see a bricked up wall along the north end of the tunnel.  It has a crudely fashioned wooden door in the center of it.", false);
 			dungeons.setDungeonButtons(roomGatheringHall, roomEntrance, null, null);
 		}
 		
 		public function roomGatheringHall():void {
-			kGAMECLASS.dungeonLoc = 12;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_CAVE_GATHERING_HALL;
 			outputText("<b><u>Gathering Hall</u></b>\n", true);
 			outputText("This room is clearly some kind of dining or gathering hall.  The chamber's shape has been hewn from the surrounding stone, and judging by the visible tool-marks, it wasn't done with a great deal of care.  Two long wooden tables fill out the room.  They're surprisingly well made, though it appears that part of their legs were hacked off with axes to lower their overall height.  You can't help but wonder where they were stolen from.  The tables haven't been cleaned in ages, as evidenced by their many stains and a number of half-rotten bones that still rest on their battered surfaces.  Two rows of crudely crafted chairs flank their better-made brethren, made to accommodate very short beings.", false);
 			//[Imp Mob Fight]
@@ -1070,7 +1071,7 @@ package classes.Scenes.Dungeons
 		}
 		
 		public function roomFungusCavern():void {
-			kGAMECLASS.dungeonLoc = 13;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_CAVE_FUNGUS_CAVERN;
 			outputText("<b><u>Fungus Cavern</u></b>\n", true);
 			outputText("This cavern is huge!  Though you can see the edge of a large stalactite to the west, the rest of the cave disappears into darkness beyond twenty or thirty feet away.  The floor is covered in spongy, leaf-shaped fungus.  They're huge, shiny, and purple, and they cover the cavern floor for as far as the illumination will reach.  ");
 			if (flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED] == 0) {
@@ -1091,7 +1092,7 @@ package classes.Scenes.Dungeons
 		}
 		
 		public function roomTortureRoom():void {
-			kGAMECLASS.dungeonLoc = 14;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_CAVE_TORTURE_ROOM;
 			outputText("<b><u>Filthy Torture Room</u></b>\n", true);
 			outputText("You step into a dank room, outfitted somewhere between a prison cell and a torture chamber. The ceiling of the sulfur-lined room is hung with an inventive variety of shackles, chains, and devices whose intent are not clear to you. Against the north wall, there appears to be an alchemy lab, laden with a dizzying collection of vials, flasks, and beakers. Against the south, there is a long, sinister-looking wooden rack bearing a sequence of progressively larger and thicker devices, carved to resemble monstrous cocks.  ", false);
 			dungeons.setDungeonButtons(roomSecretPassage, null, roomGatheringHall, null);
@@ -1126,7 +1127,7 @@ package classes.Scenes.Dungeons
 		}
 		
 		public function roomSecretPassage():void {
-			kGAMECLASS.dungeonLoc = 15;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_CAVE_SECRET_TUNNEL;
 			outputText("<b><u>Secret Tunnel</u></b>\n", true);
 			outputText("This passage is the least livable area that you've seen out of the entire cave.  The walls and floor are little more than dirt and rocks, and explosions of dust burst from the ceiling with each tentative movement you make.  For a moment, a wave of claustrophobia threatens to rob you of your nerve, but you blink the pervasive particles from your eyes and focus on why you're here.  ", false);
 			//If zetaz not yet defeated
@@ -1142,7 +1143,7 @@ package classes.Scenes.Dungeons
 		}
 		
 		public function roomZetazChamber():void {
-			kGAMECLASS.dungeonLoc = 16;
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_CAVE_ZETAZ_CHAMBER;
 			outputText("<b><u>Zetaz's Chambers</u></b>\n", true);
 			outputText("You've stepped into the most lavish room in the entire cave system, and marvel at the difference between this magnificent abode and your own crudely constructed campsite.  The stone walls are covered in stolen tapestries that each look to have been liberated from a unique source.  Judging by the variety of depictions and art styles in this one room, you've barely met a fraction of the races that once inhabited the lands of Mareth.  A pair of bright, smokeless lanterns hang from each wall, lit from within by obviously magical spheres of luminescence.  Various pieces of stolen furniture decorate the room, surrounding a four-post bed decorated with masterfully done carvings of various carnal acts.", false);
 			if (flags[kFLAGS.ZETAZ_DOOR_UNLOCKED] == 0) {
