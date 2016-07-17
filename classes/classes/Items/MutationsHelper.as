@@ -5,7 +5,7 @@ package classes.Items
 	/**
 	 * Helper class to get rid of the copy&paste-mess in classes.Items.Mutations
 	 * @since July 8, 2016
-	 * @author Stadler
+	 * @author Stadler76
 	 */
 	public class MutationsHelper extends BaseContent 
 	{
@@ -13,7 +13,6 @@ package classes.Items
 
 		// I tend to use bitfields rather than lots of optional boolean params.
 		// If I consider a method to be finalized and has only one option I'll refactor this to use a boolean value.
-		// I'll add more consts later if needed. This one is just here for the sake of being an example for starters (Stadler)
 
 		// restoreArms options
 		public static const RESTOREARMS_FROMGOOSKINTF:int = 1;
@@ -33,7 +32,7 @@ package classes.Items
 		public function restoreArms(keepArms:Array = null, options:int = 0):Boolean
 		{
 			if (keepArms == null) keepArms = [];
-			if (keepArms.indexOf(player.armType) >= 0) return false; // For future TFs. Tested and working, but I'm not using it so far (Stadler)
+			if (keepArms.indexOf(player.armType) >= 0) return false; // For future TFs. Tested and working, but I'm not using it so far (Stadler76)
 
 			if (options & RESTOREARMS_FROMGOOSKINTF) {
 				// skin just turned gooey. Now lets fix unusual arms.

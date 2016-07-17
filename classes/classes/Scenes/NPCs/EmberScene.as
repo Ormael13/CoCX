@@ -1762,7 +1762,7 @@ package classes.Scenes.NPCs
 				}
 				changes++;
 			}
-			// <mod name="Predator arms" author="Stadler">
+			// <mod name="Predator arms" author="Stadler76">
 			//Gain Dragon Arms (Derived from ARM_TYPE_SALAMANDER)
 			if (player.armType != ARM_TYPE_PREDATOR && player.skinType == SKIN_TYPE_DRACONIC && player.lowerBody == LOWER_BODY_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of some reptilian killer with shield-shaped " + player.skinTone + " scales and powerful, thick curved claws replacing your fingernails.");
