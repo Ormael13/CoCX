@@ -2253,7 +2253,9 @@
 				[
 					[EYES_HUMAN, "human"],
 					[EYES_FOUR_SPIDER_EYES, "4 spider"],
-					[EYES_BLACK_EYES_SAND_TRAP, "sandtrap black"]
+					[EYES_BLACK_EYES_SAND_TRAP, "sandtrap black"],
+					[EYES_LIZARD, "lizard"],
+					[EYES_DRAGON, "dragon"],
 				]
 		);
 		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(

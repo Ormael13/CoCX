@@ -16,10 +16,19 @@ package classes
 			return [SKIN_TYPE_SCALES, SKIN_TYPE_DRACONIC].indexOf(skinType) != -1;
 		}
 
-		// used more than once, so I wrote a helper method for it
 		public function hasFurOrScales():Boolean
 		{
 			return skinType == SKIN_TYPE_FUR || hasScales();
+		}
+
+		public function hasDragonHorns():Boolean
+		{
+			return (horns > 0 && hornType == HORNS_DRACONIC_X2) || hornType == HORNS_DRACONIC_X4_12_INCH_LONG;
+		}
+
+		public function hasReptileEyes():Boolean
+		{
+			return [EYES_LIZARD, EYES_DRAGON, EYES_BASILISK].indexOf(eyeType) != -1;
 		}
 	}
 }

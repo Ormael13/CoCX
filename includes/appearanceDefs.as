@@ -69,6 +69,9 @@ public static const TONGUE_ECHIDNA:int                                          
 public static const EYES_HUMAN:int                                                  =   0;
 public static const EYES_FOUR_SPIDER_EYES:int                                       =   1;
 public static const EYES_BLACK_EYES_SAND_TRAP:int                                   =   2;
+public static const EYES_LIZARD:int                                                 =   3;
+public static const EYES_DRAGON:int                                                 =   4; // Slightly different description/TF and *maybe* in the future(!) grant different perks/combat abilities
+public static const EYES_BASILISK:int                                               =   5; // NYI! Example for now!!! Maybe later and granted from Benoit.
 
 // earType
 public static const EARS_HUMAN:int                                                  =   0;
