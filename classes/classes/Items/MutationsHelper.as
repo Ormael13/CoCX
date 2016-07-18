@@ -17,12 +17,12 @@ package classes.Items
 		// restoreArms options
 		public static const RESTOREARMS_FROMGOOSKINTF:int = 1;
 
-		// restoreFeet options
-		public static const RESTOREFEET_EXCLUDETAUR:int   =  1;
-		public static const RESTOREFEET_EXCLUDEGOO:int    =  2;
-		public static const RESTOREFEET_EXCLUDENAGA:int   =  4;
-		public static const RESTOREFEET_EXCLUDEDRIDER:int =  8;
-		public static const RESTOREFEET_FIXBIPED:int      = 16;
+		// restoreLegs options
+		public static const RESTORELEGS_EXCLUDE_TAUR:int   =  1;
+		public static const RESTORELEGS_EXCLUDE_GOO:int    =  2;
+		public static const RESTORELEGS_EXCLUDE_NAGA:int   =  4;
+		public static const RESTORELEGS_EXCLUDE_DRIDER:int =  8;
+		public static const RESTORELEGS_FIX_BIPED:int      = 16;
 
 		public var changes:int = 0;
 		public var changeLimit:int = 1;
@@ -101,7 +101,7 @@ package classes.Items
 			return false;
 		}
 
-		public function restoreFeet(keepFeet:Array = null, options:int = 0):Boolean
+		public function restoreLegs(keepFeet:Array = null, options:int = 0):Boolean
 		{
 			var doRestore:Boolean = false;
 			
@@ -109,25 +109,25 @@ package classes.Items
 			if (keepFeet.indexOf(player.lowerBody) >= 0) return false; // For future TFs
 
 			//(Centaurs -> Normal Human Legs)
-			if (!(options & RESTOREFEET_EXCLUDETAUR) && player.isTaur() && changes < changeLimit) {
+			if (!(options & RESTORELEGS_EXCLUDE_TAUR) && player.isTaur() && changes < changeLimit) {
 				outputText("\n\nYour quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of human legs</b>!");
 				doRestore = true;
 			}
 
 			//(Goo -> Normal Human Legs)
-			if (!(options & RESTOREFEET_EXCLUDEGOO) && player.isGoo() && changes < changeLimit) {
+			if (!(options & RESTORELEGS_EXCLUDE_GOO) && player.isGoo() && changes < changeLimit) {
 				outputText("\n\nYour lower body rushes inward, molding into two leg-like shapes that gradually stiffen up.  In moments they solidify into normal-looking legs, complete with regular, human feet.  <b>You now have normal feet!</b>");
 				doRestore = true;
 			}
 
 			//(Naga -> Normal Human Legs)
-			if (!(options & RESTOREFEET_EXCLUDENAGA) && player.isNaga() && changes < changeLimit) {
+			if (!(options & RESTORELEGS_EXCLUDE_NAGA) && player.isNaga() && changes < changeLimit) {
 				outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>");
 				doRestore = true;
 			}
 
 			//(Drider -> Normal Human Legs)
-			if (!(options & RESTOREFEET_EXCLUDEDRIDER) && player.isDrider() && changes < changeLimit) {
+			if (!(options & RESTORELEGS_EXCLUDE_DRIDER) && player.isDrider() && changes < changeLimit) {
 				outputText("\n\nYour legs buckle under you and you fall, smashing your abdomen on the ground."
 				          +"  Though your control deserts and you cannot see behind you,"
 				          +" still you feel the disgusting sensation of chitin loosening and sloughing off your body,"
@@ -141,7 +141,7 @@ package classes.Items
 			}
 
 			//(Non-human -> Normal Human Legs)
-			if ((options & RESTOREFEET_FIXBIPED) && player.isBiped() && player.lowerBody != LOWER_BODY_TYPE_HUMAN && changes < changeLimit) {
+			if ((options & RESTORELEGS_FIX_BIPED) && player.isBiped() && player.lowerBody != LOWER_BODY_TYPE_HUMAN && changes < changeLimit) {
 				outputText("\n\nYou collapse as your legs shift and twist.  By the time the pain subsides, you notice that you have normal legs and normal feet.  <b>You now have normal feet!</b>");
 				doRestore = true;
 			}

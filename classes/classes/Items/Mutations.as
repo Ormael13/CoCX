@@ -4332,7 +4332,7 @@
 			// MAJOR TRANSFORMATIONS
 			//-----------------------
 			//1st priority: Change lower body to bipedal.
-			if (rand(4) == 0) restoreFeet(null, RESTOREFEET_FIXBIPED);
+			if (rand(4) == 0) restoreLegs(null, RESTORELEGS_FIX_BIPED);
 			//Remove Incorporeality Perk
 			if (player.findPerk(PerkLib.Incorporeality) >= 0 && changes < changeLimit && rand(10) == 0) {
 				outputText("\n\nYou feel a strange sensation in your [legs] as they start to feel more solid. They become more opaque until finally, you can no longer see through your [legs]. \n<b>(Perk Lost: Incorporeality!)</b>", false);
@@ -6725,7 +6725,7 @@
 				player.armType = ARM_TYPE_SPIDER;
 				changes++;
 			}
-			if (rand(4) == 0) restoreFeet(null, RESTOREFEET_EXCLUDEDRIDER);
+			if (rand(4) == 0) restoreLegs(null, RESTORELEGS_EXCLUDE_DRIDER);
 			//Drider butt
 			if (type == 1 && player.findPerk(PerkLib.SpiderOvipositor) < 0 && player.isDrider() && player.tailType == TAIL_TYPE_SPIDER_ADBOMEN && changes < changeLimit && rand(3) == 0 && (player.hasVagina || rand(2) == 0)) {
 				outputText("\n\nAn odd swelling sensation floods your spider half.  Curling your abdomen underneath you for a better look, you gasp in recognition at your new 'equipment'!  Your semi-violent run-ins with the swamp's population have left you <i>intimately</i> familiar with the new appendage.  <b>It's a drider ovipositor!</b>  A few light prods confirm that it's just as sensitive as any of your other sexual organs.  You idly wonder what laying eggs with this thing will feel like...");
