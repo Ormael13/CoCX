@@ -627,6 +627,17 @@ private function MaraePt2RoundIIIPrizes():void {
 				outputText("<b>New Perk Gained: Marae's Gift - Stud)</b>", false);
 			}
 		}
+		//Has both perks
+		else if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0 && player.findPerk(PerkLib.MaraesGiftStud) >= 0){
+			if (player.findPerk(PerkLib.MaraesGiftStud) >= 0 && player.findPerk(PerkLib.MaraesGiftProfractory) < 0) {
+				outputText("<b>(New Perk Gained: Marae's Gift – Profractory)</b>", false);
+				player.createPerk(PerkLib.MaraesGiftProfractory,0,0,0,0);
+			}
+			else if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0 && player.findPerk(PerkLib.MaraesGiftButtslut) < 0) {
+				outputText("<b>(New Perk Gained: Marae's Gift – Buttslut)</b>", false);
+				player.createPerk(PerkLib.MaraesGiftButtslut,0,0,0,0);
+			}
+		}
 		//(HAZ BREEDER)
 		else if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0) {
 			outputText("I can't believe I didn't think to do this last time!  I mean, I spent so much time making you a great baby-birther that I didn't bother to make you a stud too!  I fixed that this time though – you'll be squirting huge loads that are sure to knock up any of the pretty girls out there.  It'll even punch its way through most birth-controlling herbs.  Aren't I nice?</i>\"  ", false);
@@ -649,17 +660,6 @@ private function MaraePt2RoundIIIPrizes():void {
 			if (player.findPerk(PerkLib.MaraesGiftFertility) < 0) {
 				player.createPerk(PerkLib.MaraesGiftFertility, 0, 0, 0, 0);
 				outputText("<b>(New Perk Gained: Marae's Gift - Fertility)</b>", false);
-			}
-		}
-		//Has both perks
-		else {
-			if (player.findPerk(PerkLib.MaraesGiftStud) >= 0 && player.findPerk(PerkLib.MaraesGiftProfractory) < 0) {
-				outputText("<b>(New Perk Gained: Marae's Gift – Profractory)</b>", false);
-				player.createPerk(PerkLib.MaraesGiftProfractory,0,0,0,0);
-			}
-			else if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0 && player.findPerk(PerkLib.MaraesGiftButtslut) < 0) {
-				outputText("<b>(New Perk Gained: Marae's Gift – Buttslut)</b>", false);
-				player.createPerk(PerkLib.MaraesGiftButtslut,0,0,0,0);
 			}
 		}
 	}
