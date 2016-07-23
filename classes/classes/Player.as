@@ -1385,19 +1385,19 @@ use namespace kGAMECLASS;
 		public function dragonScore():Number
 		{
 			var dragonCounter:Number = 0;
-			if (faceType == 12)
+			if (faceType == FACE_DRAGON)
 				dragonCounter++;
-			if (earType == 10)
+			if (earType == EARS_DRAGON)
 				dragonCounter++;
-			if (tailType == 14)
+			if (tailType == TAIL_TYPE_DRACONIC)
 				dragonCounter++;
-			if (tongueType == 3)
+			if (tongueType == TONGUE_DRACONIC)
 				dragonCounter++;
 			if (dragonCocks() > 0)
 				dragonCounter++;
-			if (wingType == 10 || wingType == 11)
+			if (hasDragonWings())
 				dragonCounter++;
-			if (lowerBody == 18)
+			if (lowerBody == LOWER_BODY_TYPE_DRAGON)
 				dragonCounter++;
 			if (skinType == SKIN_TYPE_DRACONIC && dragonCounter > 0)
 				dragonCounter++;
