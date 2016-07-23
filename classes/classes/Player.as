@@ -1273,7 +1273,7 @@ use namespace kGAMECLASS;
 				lizardCounter++;
 			if (lowerBody == LOWER_BODY_TYPE_LIZARD)
 				lizardCounter++;
-			if (countCocksOfType(CockTypesEnum.LIZARD) > 0)
+			if (lizardCocks() > 0)
 				lizardCounter++;
 			if (hasDragonHorns())
 				lizardCounter++;
@@ -1393,7 +1393,7 @@ use namespace kGAMECLASS;
 				dragonCounter++;
 			if (tongueType == 3)
 				dragonCounter++;
-			if (countCocksOfType(CockTypesEnum.DRAGON) > 0)
+			if (dragonCocks() > 0)
 				dragonCounter++;
 			if (wingType == 10 || wingType == 11)
 				dragonCounter++;
