@@ -30,5 +30,57 @@ package classes
 		{
 			return [EYES_LIZARD, EYES_DRAGON, EYES_BASILISK].indexOf(eyeType) != -1;
 		}
+
+		public function hasReptileFace():Boolean
+		{
+			return [FACE_SNAKE_FANGS, FACE_LIZARD, FACE_DRAGON].indexOf(faceType) != -1;
+		}
+
+		public function hasDragonWings(large:Boolean = false):Boolean
+		{
+			if (large)
+				return wingType == WING_TYPE_DRACONIC_LARGE;
+			else
+				return [WING_TYPE_DRACONIC_SMALL, WING_TYPE_DRACONIC_LARGE].indexOf(wingType) != -1;
+		}
+
+		public function hasBatLikeWings(large:Boolean = false):Boolean
+		{
+			if (large)
+				return wingType == WING_TYPE_BAT_LIKE_LARGE;
+			else
+				return [WING_TYPE_BAT_LIKE_TINY, WING_TYPE_BAT_LIKE_LARGE].indexOf(wingType) != -1;
+		}
+
+		public function hasLeatheryWings(large:Boolean = false):Boolean
+		{
+			return hasDragonWings(large) || hasBatLikeWings(large);
+		}
+
+		// To be honest: I seriously considered naming it drDragonCox() :D
+		public function dragonCocks():int
+		{
+			return countCocksOfType(CockTypesEnum.DRAGON);
+		}
+
+		public function lizardCocks():int
+		{
+			return countCocksOfType(CockTypesEnum.LIZARD);
+		}
+
+		public function hasDragonfire():Boolean
+		{
+			return findPerk(PerkLib.Dragonfire) >= 0;
+		}
+
+		public function hasDragonWingsAndFire():Boolean
+		{
+			return hasDragonWings(true) && hasDragonfire();
+		}
+
+		public function isBasilisk():Boolean
+		{
+			return findPerk(PerkLib.BasiliskWomb) >= 0 /*&& eyeType == EYES_BASILISK*/;
+		}
 	}
 }

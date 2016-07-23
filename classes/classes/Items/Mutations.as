@@ -5298,7 +5298,7 @@
 				player.faceType = FACE_LIZARD;
 			}
 			//-Snake tongue
-			if (player.faceType == FACE_LIZARD && rand(3) == 0) gainSnakeTongue();
+			if (player.hasReptileFace() && rand(3) == 0) gainSnakeTongue();
 			//-Remove Gills
 			if (rand(4) == 0 && player.gills && changes < changeLimit) {
 				outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.", false);

@@ -770,6 +770,8 @@ use namespace kGAMECLASS;
 			if (lizardScore() >= 4)
 			{
 				race = "lizan";
+				if (lizardScore() >= 8)
+					return race; // High lizardScore? always return lizan-race
 			}
 			if (dragonScore() >= 6)
 			{
@@ -1275,6 +1277,8 @@ use namespace kGAMECLASS;
 				lizardCounter++;
 			if (hasDragonHorns())
 				lizardCounter++;
+			if (hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
+				lizardCounter++;
 			if (armType == ARM_TYPE_PREDATOR && clawType == CLAW_TYPE_LIZARD)
 				lizardCounter++;
 			if (hasScales())
@@ -1398,8 +1402,10 @@ use namespace kGAMECLASS;
 			if (skinType == SKIN_TYPE_DRACONIC && dragonCounter > 0)
 				dragonCounter++;
 			if (hasDragonHorns())
-				dragonCounter += 2;
-			if (findPerk(PerkLib.Dragonfire) >= 0)
+				dragonCounter++;
+			if (hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
+				dragonCounter++;
+			if (hasDragonfire())
 				dragonCounter++;
 			if (armType == ARM_TYPE_PREDATOR && clawType == CLAW_TYPE_DRAGON)
 				dragonCounter++;
@@ -1721,11 +1727,11 @@ use namespace kGAMECLASS;
 				dragonneCounter++;
 			if (tongueType == TONGUE_DRACONIC)
 				dragonneCounter++;
-			if (wingType == WING_TYPE_DRACONIC_LARGE || wingType == WING_TYPE_DRACONIC_SMALL)
+			if (hasDragonWings())
 				dragonneCounter++;
 			if (lowerBody == LOWER_BODY_TYPE_CAT)
 				dragonneCounter++;
-			if (skinType == 2 && dragonneCounter > 0)
+			if (hasScales() && dragonneCounter > 0)
 				dragonneCounter++;
 			return dragonneCounter;
 		}
@@ -1743,15 +1749,15 @@ use namespace kGAMECLASS;
 			if (lowerBody == LOWER_BODY_TYPE_CAT)
 				catCounter++;
 			if (catCounter >= 4) {
-				if (hornType == HORNS_DEMON || hornType == HORNS_DRACONIC_X2 || hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
+				if (hornType == HORNS_DEMON || hasDragonHorns())
 					catCounter++;
-				if (wingType == WING_TYPE_BAT_LIKE_TINY || wingType == WING_TYPE_DRACONIC_SMALL)
+				if (hasLeatheryWings())
 					catCounter++;
-				if (wingType == WING_TYPE_BAT_LIKE_LARGE || wingType == WING_TYPE_DRACONIC_LARGE)
-					catCounter += 2;
+				if (hasLeatheryWings(true))
+					catCounter++;
 			}
 			//Fur only counts if some canine features are present
-			if (skinType == 1 && catCounter >= 6)
+			if (skinType == SKIN_TYPE_FUR && catCounter >= 6)
 				catCounter++;
 			return catCounter;
 		}
