@@ -1581,8 +1581,8 @@ package classes.Scenes.NPCs
 //TF messages (Z)
 		public function emberTFs(drakesHeart:Boolean = false):void
 		{
-			var changes:int = 0;
-			var changeLimit:int = 2;
+			changes = 0;
+			changeLimit = 2;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			var tfSource:String = "emberTFs";
@@ -1791,20 +1791,21 @@ package classes.Scenes.NPCs
 			// <mod name="Predator arms" author="Stadler76">
 			//Gain Dragon Arms (Derived from ARM_TYPE_SALAMANDER)
 			if (player.armType != ARM_TYPE_PREDATOR && player.skinType == SKIN_TYPE_DRACONIC && player.lowerBody == LOWER_BODY_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of some reptilian killer with shield-shaped " + player.skinTone + " scales and powerful, thick curved claws replacing your fingernails.");
+				outputText("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of some reptilian killer with shield-shaped " + player.skinTone + " scales and powerful, thick, curved steel-gray claws replacing your fingernails.");
 				outputText("\n<b>You now have dragon arms.</b>", false);
 				player.armType = ARM_TYPE_PREDATOR;
-				player.clawType = CLAW_TYPE_DRAGON;
+				mutations.updateClaws(CLAW_TYPE_DRAGON);
 				changes++
 			}
 			//Claw transition
 			if (player.armType == ARM_TYPE_PREDATOR && player.skinType == SKIN_TYPE_DRACONIC && player.clawType != CLAW_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYour " + player.claws() + " change  a little to become more dragon-like.");
-				player.clawType = CLAW_TYPE_DRAGON;
+				mutations.updateClaws(CLAW_TYPE_DRAGON);
 				outputText(" <b>You now have " + player.claws() + ".</b>");
 				changes++
 			}
 			// </mod>
+			trace("emberTFs changeLimit: ", changeLimit);
 			//Get Dragon Breath (Tainted version)
 			//Can only be obtained if you are considered a dragon-morph, once you do get it though, it won't just go away even if you aren't a dragon-morph anymore.
 
@@ -1840,13 +1841,13 @@ package classes.Scenes.NPCs
 					outputText("rut");
 					
 					player.goIntoRut(false);
-					changes++;
+					changes++; // is this really worth incrementing the changes? It even ignores the changeLimit
 				}
 				else {
 					outputText("heat");
 					
 					player.goIntoHeat(false);
-					changes++;
+					changes++; // is this really worth incrementing the changes? It even ignores the changeLimit
 				}
 				outputText("</b>.");
 			}

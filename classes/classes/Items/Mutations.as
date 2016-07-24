@@ -4259,6 +4259,7 @@
 				outputText("\n\nYou cry out as the world spins around you.  You're aware of your entire body sliding and slipping, changing and morphing, but in the sea of sensation you have no idea exactly what's changing.  You nearly black out, and then it's over.  Maybe you had best have a look at yourself and see what changed?", false);
 			}
 			player.armType = ARM_TYPE_HUMAN;
+			updateClaws();
 			player.eyeType = EYES_HUMAN;
 			player.antennae = ANTENNAE_NONE;
 			player.faceType = FACE_HUMAN;
@@ -4275,7 +4276,6 @@
 			player.skinType = SKIN_TYPE_PLAIN;
 			player.skinDesc = "skin";
 			player.skinAdj = "";
-			player.armType = ARM_TYPE_HUMAN;
 			player.tongueType = TONGUE_HUMAN;
 			player.eyeType = EYES_HUMAN;
 			if (player.fertility > 15) player.fertility = 15;
@@ -5263,16 +5263,16 @@
 			// <mod name="Predator arms" author="Stadler76">
 			//Gain predator arms
 			if (player.armType != ARM_TYPE_PREDATOR && player.hasScales() && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of some reptilian killer with " + player.skinFurScales() + " and short claws replacing your fingernails.");
-				outputText("\n<b>You now have reptilian arms.</b>", false);
 				player.armType = ARM_TYPE_PREDATOR;
-				player.clawType = CLAW_TYPE_LIZARD;
+				updateClaws(CLAW_TYPE_LIZARD);
+				outputText("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of some reptilian killer with " + player.skinFurScales() + " and short " + player.clawTone + " claws replacing your fingernails.");
+				outputText("\n<b>You now have reptilian arms.</b>");
 				changes++
 			}
 			//Claw transition
 			if (player.armType == ARM_TYPE_PREDATOR && player.skinType == SKIN_TYPE_SCALES && player.clawType != CLAW_TYPE_LIZARD && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYour " + player.claws() + " change a little to become reptilian.");
-				player.clawType = CLAW_TYPE_LIZARD;
+				updateClaws(CLAW_TYPE_LIZARD);
 				outputText(" <b>You now have " + player.claws() + ".</b>");
 				changes++
 			}
@@ -5564,7 +5564,7 @@
 			if (player.armType != ARM_TYPE_SALAMANDER && player.lowerBody == LOWER_BODY_TYPE_SALAMANDER && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of salamander one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>", false);
 				player.armType = ARM_TYPE_SALAMANDER;
-				player.clawType = CLAW_TYPE_SALAMANDER;
+				updateClaws(CLAW_TYPE_SALAMANDER);
 				changes++;
 			}
 			//Remove odd eyes
@@ -6275,7 +6275,7 @@
 				outputText("\n\nYou smile impishly as you lick the last bits of the nut from your teeth, but when you go to wipe your mouth, instead of the usual texture of your " + player.skinDesc + " on your lips, you feel feathers! You look on in horror while more of the avian plumage sprouts from your " + player.skinDesc + ", covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.", false);
 				changes++;
 				player.armType = ARM_TYPE_HARPY;
-				player.clawType = CLAW_TYPE_NORMAL;
+				updateClaws();
 			}
 			//-Feathery Hair
 			if (player.hairType != 1 && changes < changeLimit && (type == 1 || player.faceType == FACE_HUMAN) && rand(4) == 0) {
@@ -6769,6 +6769,7 @@
 				if (player.armType == ARM_TYPE_HARPY) outputText("The feathers covering your arms fall away, leaving them to return to a far more human appearance.  ", false);
 				outputText("You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.", false);
 				player.armType = ARM_TYPE_SPIDER;
+				updateClaws();
 				changes++;
 			}
 			if (rand(4) == 0) restoreLegs(null, RESTORELEGS_EXCLUDE_DRIDER);
