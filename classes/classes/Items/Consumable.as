@@ -13,6 +13,8 @@ package classes.Items
 	 */
 	public class Consumable extends Useable
 	{
+		include "../../../includes/appearanceDefs.as";
+
 		protected function get mutations():Mutations { return kGAMECLASS.mutations; }
 		protected function set mutations(val:Mutations):void { kGAMECLASS.mutations = val; }
 		protected function get changes():int { return mutations.changes; }

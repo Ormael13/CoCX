@@ -5,7 +5,6 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.*;
-	import classes.Items.Mutations;
 
 	public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 	{
@@ -58,12 +57,6 @@ package classes.Scenes.NPCs
 // TIMES_EMBER_LUSTY_FUCKED:int = 824;
 
 		public var pregnancy:PregnancyStore;
-		protected function get mutations():Mutations { return kGAMECLASS.mutations; }
-		protected function set mutations(val:Mutations):void { kGAMECLASS.mutations = val; }
-		protected function get changes():int { return mutations.changes; }
-		protected function set changes(val:int):void { mutations.changes = val; }
-		protected function get changeLimit():int { return mutations.changeLimit; }
-		protected function set changeLimit(val:int):void { mutations.changeLimit = val; }
 
 		public function EmberScene()
 		{

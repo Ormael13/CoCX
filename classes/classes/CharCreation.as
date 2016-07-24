@@ -198,6 +198,7 @@
 			player.wingDesc = "non-existant";
 			//Default
 			player.skinTone = "light";
+			player.clawTone = "";
 			player.hairColor = "brown";
 			player.hairType = HAIR_NORMAL;
 			player.beardLength = 0;
@@ -729,6 +730,7 @@
 
 		private function setComplexion(choice:String):void { //And choose hair
 			player.skinTone = choice;
+			player.clawTone = "";
 			clearOutput();
 			outputText("You selected a " + choice + " complexion.\n\nWhat color is your hair?");
 			menu();
