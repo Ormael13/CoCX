@@ -29,18 +29,22 @@ package classes.Items.Consumables
 				game.player.changeFatigue(-10);
 			}
 			else {
-				if (game.player.skinType != 3) game.player.skinTone = _color;
+				if (game.player.skinType != SKIN_TYPE_GOO) {
+					game.player.skinTone = _color;
+					mutations.updateClaws(game.player.clawType);
+				}
 				switch(game.player.skinType) {
-					case 0: //Plain
+					case SKIN_TYPE_PLAIN: //Plain
 						outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the bottle of oil and rubbing", "uncork the bottle of oil and rub") + " the smooth liquid across your body. Even before you’ve covered your arms and [chest] your skin begins to tingle pleasantly all over. After your skin darkens a little, it begins to change until you have " + _color + " skin.");
 						break;
-					case 1: //Fur
+					case SKIN_TYPE_FUR: //Fur
 						outputText("" + game.player.clothedOrNaked("Once you’ve disrobed you take the oil and", "You take the oil and") + " begin massaging it into your skin despite yourself being covered with fur. Once you’ve finished... nothing happens. Then your skin begins to tingle and soon you part your fur to reveal " + _color + " skin.");
 						break;
-					case 2: //Scales
+					case SKIN_TYPE_SCALES: //Scales
+					case SKIN_TYPE_DRACONIC: //Dragon scales
 						outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the bottle of oil and rubbing", "uncork the bottle of oil and rub") + " the smooth liquid across your body. Even before you’ve covered your arms and [chest] your scaly skin begins to tingle pleasantly all over. After your skin darkens a little, it begins to change until you have " + _color + " skin.");
 						break;
-					case 3: //Goo
+					case SKIN_TYPE_GOO: //Goo
 						outputText("You take the oil and pour the contents into your skin. The clear liquid dissolves, leaving your gooey skin unchanged. You do feel a little less thirsty though.");
 						game.player.slimeFeed();
 						break;

@@ -1,6 +1,7 @@
 package classes.Scenes.Places.Bazaar 
 {
 	import classes.GlobalFlags.*;
+	import classes.Items.Mutations;
 	import classes.*;
 	/**
 	 * The Black Cock by Foxxling
@@ -8,12 +9,15 @@ package classes.Scenes.Places.Bazaar
 	 */
 	public class BlackCock extends BazaarAbstractContent
 	{
-		
-		public function BlackCock() 
-		{
-			
-		}
-		
+		protected function get mutations():Mutations { return kGAMECLASS.mutations; } 
+		protected function set mutations(val:Mutations):void { kGAMECLASS.mutations = val; } 
+		protected function get changes():int { return mutations.changes; } 
+		protected function set changes(val:int):void { mutations.changes = val; } 
+		protected function get changeLimit():int { return mutations.changeLimit; } 
+		protected function set changeLimit(val:int):void { mutations.changeLimit = val; } 
+
+		public function BlackCock() {} 
+
 		//Will eventually be used to display sprites.
 		public function displayAnitaSprite():void {
 			//Anita's sprite code goes here
@@ -1616,6 +1620,7 @@ package classes.Scenes.Places.Bazaar
 				player.skinAdj = "tough";
 				player.skinType = SKIN_TYPE_PLAIN;
 				player.skinDesc = "skin";
+				mutations.updateClaws(player.clawType);
 				changes++;
 			}
 			//Arms change to regular
@@ -1630,6 +1635,7 @@ package classes.Scenes.Places.Bazaar
 					default:
 				}
 				player.armType = ARM_TYPE_HUMAN;
+				mutations.updateClaws();
 				changes++;
 			}
 			//Change legs to normal
