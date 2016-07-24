@@ -7778,6 +7778,7 @@
 		public function foxJewel(mystic:Boolean,player:Player):void
 		{
 			var tfSource:String = "foxJewel";
+			if (mystic) tfSource += "-mystic";
 			clearOutput();
 			changes = 0;
 			changeLimit = 1;
