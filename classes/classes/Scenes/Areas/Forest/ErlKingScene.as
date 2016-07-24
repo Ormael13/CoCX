@@ -2,6 +2,8 @@ package classes.Scenes.Areas.Forest
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Items.Mutations;
 
 	public class ErlKingScene extends BaseContent
 	{
@@ -9,6 +11,13 @@ package classes.Scenes.Areas.Forest
 		{
 
 		}
+
+		protected function get mutations():Mutations { return kGAMECLASS.mutations; }
+		protected function set mutations(val:Mutations):void { kGAMECLASS.mutations = val; }
+		protected function get changes():int { return mutations.changes; }
+		protected function set changes(val:int):void { mutations.changes = val; }
+		protected function get changeLimit():int { return mutations.changeLimit; }
+		protected function set changeLimit(val:int):void { mutations.changeLimit = val; }
 
 		public function encounterWildHunt():void
 		{
@@ -974,17 +983,20 @@ package classes.Scenes.Areas.Forest
 			inventory.takeItem(consumables.GLDRIND, camp.returnToCampUseOneHour);
 		}
 		
-		public function deerTFs():void {
-			var changes:int = 0;
-			var changeLimit:int = 2;
+		public function deerTFs():void
+		{
+			var tfSource:String = "deerTFs";
 			var temp:int = 0;
 			var x:int = 0;
+			changes = 0;
+			changeLimit = 2;
 			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			// Main TFs
 			//------------
+			if (rand(5) == 0) mutations.updateOvipositionPerk(tfSource);
 			//Gain deer ears
 			if (rand(3) == 0 && changes < changeLimit && player.earType != EARS_DEER) {
 				if (player.earType == -1) outputText("\n\nTwo painful lumps sprout on the top of your head, forming into tear-drop shaped ears, covered with short fur.  ");
