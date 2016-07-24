@@ -1798,7 +1798,6 @@ package classes.Scenes.NPCs
 				changes++
 			}
 			// </mod>
-			trace("emberTFs changeLimit: ", changeLimit);
 			//Get Dragon Breath (Tainted version)
 			//Can only be obtained if you are considered a dragon-morph, once you do get it though, it won't just go away even if you aren't a dragon-morph anymore.
 
