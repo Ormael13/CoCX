@@ -267,6 +267,7 @@ package classes.Items
 
 				default:
 					if (player.findPerk(PerkLib.Oviposition) < 0) return null;
+					if (player.lizardScore() >= 8) return null; // Still high, so don't remove Oviposition yet!
 					if (tfSource != "superHummus") {
 						outputText("\n\nAnother change in your uterus ripples through your reproductive systems."
 						          +"  Somehow you know you've lost a little bit of reptilian reproductive ability.\n");
