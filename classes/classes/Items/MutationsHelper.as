@@ -231,7 +231,7 @@ package classes.Items
 			// First things first :)
 			if (player.findPerk(PerkLib.BasiliskWomb) >= 0) {
 				if (player.findPerk(PerkLib.Oviposition) >= 0)
-					return null; // we already have it => return null; // no change
+					return null; // we already have it => no change
 
 				// Basilisk Womb but no Oviposition? Fix, whats broken
 				outputText("\n\nDeep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly."
@@ -248,6 +248,7 @@ package classes.Items
 			switch(tfSource) {
 				case "emberTFs":
 				case "snakeOil":
+				case "goldenSeed-HarpyWomb":
 				//case "catTransformation-dragonne": // Keep it? Maybe later.
 				// TFs with minor changes. Just in case, we change our mind or if we intend to upgrade them.
 				case "winterPudding":

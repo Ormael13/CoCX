@@ -6008,6 +6008,7 @@
 		public function goldenSeed(type:Number,player:Player):void
 		{
 			var tfSource:String = "goldenSeed";
+			if (player.findPerk(PerkLib.HarpyWomb) >= 0) tfSource += "-HarpyWomb";
 			//'type' refers to the variety of seed.
 			//0 == standard.
 			//1 == enhanced - increase change limit and no pre-reqs for TF
