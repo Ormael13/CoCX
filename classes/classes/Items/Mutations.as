@@ -4570,23 +4570,30 @@
 			}
 			//Fertility Decrease:
 			if (player.hasVagina() && rand(3) == 0 && changes < changeLimit) {
-				outputText("\n\nThe vague numbness in your skin sinks slowly downwards, and you put a hand on your lower stomach as the sensation centers itself there.  ");
-				dynStats("sen", -2);
-				//High fertility:
-				if (player.fertility >= 30) outputText("It feels like your overcharged reproductive organs have simmered down a bit.");
-				//Average fertility:
-				else if (player.fertility >= 10) outputText("You feel like you have dried up a bit inside; you are left feeling oddly tranquil.");
-				//[Low/No fertility:
-				else {
-					outputText("Although the numbness makes you feel serene, the hummus has no effect upon your ");
-					if (player.fertility > 0) outputText("mostly ");
-					outputText("sterile system.");
-					if (player.cor > 70) outputText("  For some reason the fact that you cannot function as nature intended makes you feel helpless and submissive.  Perhaps the only way to be a useful creature now is to find a dominant, fertile being willing to plow you full of eggs? You shake the alien, yet oddly alluring thought away.");
+				var tempChanges:int = 0;
+				if (player.sens > 10) {
+					outputText("\n\nThe vague numbness in your skin sinks slowly downwards, and you put a hand on your lower stomach as the sensation centers itself there.  ");
+					dynStats("sen", -2);
+					tempChanges = 1;
 				}
-				player.fertility -= 1 + rand(3);
-				if (player.fertility < 10 && player.gender >= 2) player.fertility = 10;
-				if (player.fertility < 5) player.fertility = 5;
-				changes++;
+				if (player.fertility > 10 || (player.fertility > 5 && (player.gender & GENDER_FEMALE) == 0)) {
+					//High fertility:
+					if (player.fertility >= 30) outputText("It feels like your overcharged reproductive organs have simmered down a bit.");
+					//Average fertility:
+					else if (player.fertility >= 10) outputText("You feel like you have dried up a bit inside; you are left feeling oddly tranquil.");
+					//[Low/No fertility:
+					else {
+						outputText("Although the numbness makes you feel serene, the hummus has no effect upon your ");
+						if (player.fertility > 0) outputText("mostly ");
+						outputText("sterile system.");
+						if (player.cor > 70) outputText("  For some reason the fact that you cannot function as nature intended makes you feel helpless and submissive.  Perhaps the only way to be a useful creature now is to find a dominant, fertile being willing to plow you full of eggs? You shake the alien, yet oddly alluring thought away.");
+					}
+					player.fertility -= 1 + rand(3);
+					if (player.fertility < 10 && (player.gender & GENDER_FEMALE) > 0) player.fertility = 10;
+					if (player.fertility < 5) player.fertility = 5;
+					tempChanges = 1;
+				}
+				changes += tempChanges;
 			}
 			//Cum Multiplier Decrease:
 			if (player.hasCock() && player.cumMultiplier > 5 && rand(3) == 0 && changes < changeLimit) {
