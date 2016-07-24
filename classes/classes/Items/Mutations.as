@@ -1547,6 +1547,7 @@
 					if (temp == 3 || temp == 4 || temp == 5) player.skinTone = "purple";
 					if (temp > 5) player.skinTone = "blue";
 					outputText("\n\nA tingling sensation runs across your skin in waves, growing stronger as <b>your skin's tone slowly shifts, darkening to become " + player.skinTone + " in color.</b>", false);
+					updateClaws(player.clawType);
 					if (tainted) dynStats("cor", 1);
 					else dynStats("cor", 0);
 				}
@@ -2260,6 +2261,7 @@
 					if (rand(2) == 0) player.skinTone = "red";
 					else player.skinTone = "orange";
 					outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinTone + ".", false);
+					updateClaws(player.clawType);
 				}
 				return;
 			}
@@ -2276,6 +2278,7 @@
 				if (rand(2) == 0) player.skinTone = "red";
 				else player.skinTone = "orange";
 				outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinTone + ".", false);
+				updateClaws(player.clawType);
 			}
 
 			//Shrinkage!
@@ -2840,6 +2843,7 @@
 					player.skinAdj = "smooth";
 					if (player.skinTone == "rough gray") player.skinTone = "gray";
 					player.skinType = SKIN_TYPE_PLAIN;
+					updateClaws(player.clawType);
 				}
 				//chance of hair change
 				else {
@@ -2893,6 +2897,7 @@
 					player.skinAdj = "smooth";
 					if (player.skinTone == "rough gray") player.skinTone = "gray";
 					player.skinType = SKIN_TYPE_PLAIN;
+					updateClaws(player.clawType);
 				}
 				//chance of hair change
 				else {
@@ -3721,6 +3726,7 @@
 					if (rand(2) == 0) player.skinTone = "pale yellow";
 					else player.skinTone = "grayish-blue";
 				}
+				updateClaws(player.clawType);
 				changes++;
 				outputText("\n\nWhoah, that was weird.  You just hallucinated that your ", false);
 				if (player.skinType == SKIN_TYPE_FUR) outputText("skin", false);
@@ -4042,6 +4048,7 @@
 					player.skinType = SKIN_TYPE_PLAIN;
 					player.skinDesc = "skin";
 					player.skinTone = "rough gray";
+					updateClaws(player.clawType);
 					changes++;
 				}
 				else {
@@ -4049,6 +4056,7 @@
 					player.skinType = SKIN_TYPE_PLAIN;
 					player.skinDesc = "skin";
 					player.skinTone = "orange and black striped";
+					updateClaws(player.clawType);
 					changes++;
 				}
 			}
@@ -4235,6 +4243,7 @@
 				outputText("\n\nYou cry out as the world spins around you.  You're aware of your entire body sliding and slipping, changing and morphing, but in the sea of sensation you have no idea exactly what's changing.  You nearly black out, and then it's over.  Maybe you had best have a look at yourself and see what changed?", false);
 			}
 			player.armType = ARM_TYPE_HUMAN;
+			updateClaws();
 			player.eyeType = EYES_HUMAN;
 			player.antennae = ANTENNAE_NONE;
 			player.faceType = FACE_HUMAN;
@@ -4251,7 +4260,6 @@
 			player.skinType = SKIN_TYPE_PLAIN;
 			player.skinDesc = "skin";
 			player.skinAdj = "";
-			player.armType = ARM_TYPE_HUMAN;
 			player.tongueType = TONGUE_HUMAN;
 			player.eyeType = EYES_HUMAN;
 			if (player.fertility > 15) player.fertility = 15;
@@ -4352,6 +4360,7 @@
 				else if (temp == 2) player.skinTone = "dark";
 				else if (temp == 3) player.skinTone = "light";
 				outputText(player.skinTone + " colored.</b>", false);
+				updateClaws(player.clawType);
 			}
 			//Change skin to normal
 			if (player.skinType != SKIN_TYPE_PLAIN && (player.earType == EARS_HUMAN || player.earType == EARS_ELFIN) && rand(4) == 0 && changes < changeLimit) {
@@ -5234,16 +5243,16 @@
 			// <mod name="Predator arms" author="Stadler76">
 			//Gain predator arms
 			if (player.armType != ARM_TYPE_PREDATOR && player.hasScales() && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of some reptilian killer with " + player.skinFurScales() + " and short claws replacing your fingernails.");
-				outputText("\n<b>You now have reptilian arms.</b>", false);
 				player.armType = ARM_TYPE_PREDATOR;
-				player.clawType = CLAW_TYPE_LIZARD;
+				updateClaws(CLAW_TYPE_LIZARD);
+				outputText("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of some reptilian killer with " + player.skinFurScales() + " and short " + player.clawTone + " claws replacing your fingernails.");
+				outputText("\n<b>You now have reptilian arms.</b>");
 				changes++
 			}
 			//Claw transition
 			if (player.armType == ARM_TYPE_PREDATOR && player.skinType == SKIN_TYPE_SCALES && player.clawType != CLAW_TYPE_LIZARD && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYour " + player.claws() + " change a little to become reptilian.");
-				player.clawType = CLAW_TYPE_LIZARD;
+				updateClaws(CLAW_TYPE_LIZARD);
 				outputText(" <b>You now have " + player.claws() + ".</b>");
 				changes++
 			}
@@ -5281,17 +5290,20 @@
 				//(fur)
 				if (player.skinType == SKIN_TYPE_FUR) {
 					player.skinTone = newLizardSkinTone();
+					updateClaws(player.clawType);
 					outputText("\n\nYou scratch yourself, and come away with a large clump of " + player.furColor + " fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + player.skinTone + " scales covering most of your body.  The rest of the fur is easy to remove.  <b>You're now covered in scales from head to toe.</b>", false);
 				}
 				else if (player.skinType == SKIN_TYPE_DRACONIC) {
 					outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, hoping for relief; and when you look at your hands you notice small fragments of your " + player.skinFurScales() + " hanging from your fingers.  Nevertheless you continue to scratch yourself, and when you're finally done, you look yourself over. New scales have grown to replace your peeled off " + player.skinFurScales() + ".  <b>You're covered from head to toe in shiny ");
 					player.skinTone = newLizardSkinTone();
+					updateClaws(player.clawType);
 					outputText(player.skinTone + " scales.</b>", false);
 				}
 				//(no fur)
 				else {
 					outputText("\n\nYou idly reach back to scratch yourself and nearly jump out of your " + player.armorName + " when you hit something hard.  A quick glance down reveals that scales are growing out of your " + player.skinTone + " skin with alarming speed.  As you watch, the surface of your skin is covered in smooth scales.  They interlink together so well that they may as well be seamless.  You peel back your " + player.armorName + " and the transformation has already finished on the rest of your body.  <b>You're covered from head to toe in shiny ", false);
 					player.skinTone = newLizardSkinTone();
+					updateClaws(player.clawType);
 					outputText(player.skinTone + " scales.</b>", false);
 				}
 				player.skinType = SKIN_TYPE_SCALES;
@@ -5534,7 +5546,7 @@
 			if (player.armType != ARM_TYPE_SALAMANDER && player.lowerBody == LOWER_BODY_TYPE_SALAMANDER && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of salamander one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>", false);
 				player.armType = ARM_TYPE_SALAMANDER;
-				player.clawType = CLAW_TYPE_SALAMANDER;
+				updateClaws(CLAW_TYPE_SALAMANDER);
 				changes++;
 			}
 			//Remove odd eyes
@@ -5570,6 +5582,7 @@
 				if (player.skinType == SKIN_TYPE_FUR) outputText("the skin under your " + player.furColor + " " + player.skinDesc + " has ");
 				else outputText("your " + player.skinDesc + (player.skinDesc.indexOf("scales") != -1 ? " have " : " has "));
 				player.skinTone = randomChoice(humanSkinColors);
+				updateClaws(player.clawType);
 				outputText("changed to become " + player.skinTone + " colored.</b>");
 			}
 			//Change skin to normal
@@ -6153,6 +6166,7 @@
 				else if (temp == 2) player.skinTone = "dark";
 				else if (temp == 3) player.skinTone = "light";
 				outputText(player.skinTone + " colored.</b>", false);
+				updateClaws(player.clawType);
 			}
 			//-Grow hips out if narrow.
 			if (player.hipRating < 10 && changes < changeLimit && rand(3) == 0) {
@@ -6240,7 +6254,7 @@
 				outputText("\n\nYou smile impishly as you lick the last bits of the nut from your teeth, but when you go to wipe your mouth, instead of the usual texture of your " + player.skinDesc + " on your lips, you feel feathers! You look on in horror while more of the avian plumage sprouts from your " + player.skinDesc + ", covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.", false);
 				changes++;
 				player.armType = ARM_TYPE_HARPY;
-				player.clawType = CLAW_TYPE_NORMAL;
+				updateClaws();
 			}
 			//-Feathery Hair
 			if (player.hairType != 1 && changes < changeLimit && (type == 1 || player.faceType == FACE_HUMAN) && rand(4) == 0) {
@@ -6672,6 +6686,7 @@
 				player.skinAdj = "";
 				player.skinType = SKIN_TYPE_PLAIN;
 				player.skinDesc = "skin";
+				updateClaws(player.clawType);
 				changes++;
 			}
 			//(Gain human face)
@@ -6730,6 +6745,7 @@
 				if (player.armType == ARM_TYPE_HARPY) outputText("The feathers covering your arms fall away, leaving them to return to a far more human appearance.  ", false);
 				outputText("You watch, spellbound, while your forearms gradually become shiny.  The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.  You touch the onyx exoskeleton and discover to your delight that you can still feel through it as naturally as your own skin.", false);
 				player.armType = ARM_TYPE_SPIDER;
+				updateClaws();
 				changes++;
 			}
 			if (rand(4) == 0) restoreLegs(null, RESTORELEGS_EXCLUDE_DRIDER);
@@ -7048,6 +7064,7 @@
 					player.skinDesc = "skin";
 					player.skinType = SKIN_TYPE_PLAIN;
 				}
+				updateClaws(player.clawType);
 				changes++;
 			}
 			//Legs
@@ -7156,6 +7173,7 @@
 			if (rand(5) == 0 && changes < changeLimit && player.skinTone != "aphotic blue-black") {
 				outputText("\n\nYou absently bite down on the last of the tentacle, then pull your hand away, wincing in pain.  How did you bite your finger so hard?  Looking down, the answer becomes obvious; <b>your hand, along with the rest of your skin, is now the same aphotic color as the dormant tentacle was!</b>", false);
 				player.skinTone = "aphotic blue-black";
+				updateClaws(player.clawType);
 				changes++;
 			}
 			//-eat more, grow more 'hair':
@@ -7932,6 +7950,7 @@
 				if (!InCollection(player.skinTone, tone)) player.skinTone = randomChoice(tone);
 				outputText(player.skinTone + " complexion.");
 				outputText("  <b>You now have " + player.skin() + "!</b>");
+				updateClaws(player.clawType);
 				changes++;
 			}
 			//Change skin tone if not changed you!
@@ -7939,6 +7958,7 @@
 				outputText("\n\nYou feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  Holding an arm up to your face, you discover that <b>you now have ");
 				player.skinTone = randomChoice(tone);
 				outputText(player.skin() + "!</b>");
+				updateClaws(player.clawType);
 				changes++;
 			}
 			//[Change Skin Color: add "Tattoos"]
@@ -9481,6 +9501,7 @@
 				}
 				outputText("\n\nYour skin tingles ever so slightly as you skin’s color changes before your eyes. As the tingling diminishes, you find that your skin has turned " + skinToBeChosen + ".");
 				player.skinTone = skinToBeChosen;
+				updateClaws(player.clawType);
 				changes++;
 			}
 			if (changes == 0) {

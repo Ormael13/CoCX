@@ -7,6 +7,7 @@ package classes.Scenes.NPCs
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.FollowerInteractions;
 	import classes.Scenes.Places.TelAdre;
+	import classes.Items.Mutations;
 
 	/**
 	 * Contains handy references to scenes and methods
@@ -17,6 +18,14 @@ package classes.Scenes.NPCs
 		{
 
 		}
+
+		protected function get mutations():Mutations { return kGAMECLASS.mutations; }
+		protected function set mutations(val:Mutations):void { kGAMECLASS.mutations = val; }
+		protected function get changes():int { return mutations.changes; }
+		protected function set changes(val:int):void { mutations.changes = val; }
+		protected function get changeLimit():int { return mutations.changeLimit; }
+		protected function set changeLimit(val:int):void { mutations.changeLimit = val; }
+
 		// Common scenes
 		protected function get telAdre():TelAdre
 		{
