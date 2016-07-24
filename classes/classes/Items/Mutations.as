@@ -8010,6 +8010,9 @@
 				player.vaginaType(0);
 				changes++;
 			}
+			// Kitsunes should have normal arms. exspecially skinny arms with claws are somewhat weird (Stadler76).
+			if (player.skinType == SKIN_TYPE_PLAIN) restoreArms();
+
 			if (changes == 0) {
 				outputText("\n\nOdd.  You don't feel any different.");
 			}
