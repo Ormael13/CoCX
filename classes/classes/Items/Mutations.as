@@ -87,7 +87,7 @@
 		/* ITEMZZZZZ FUNCTIONS GO HERE */
 		public function incubiDraft(tainted:Boolean,player:Player):void
 		{
-			
+			var tfSource:String = "incubiDraft";
 			player.slimeFeed();
 			var temp2:Number = 0;
 			var temp3:Number = 0;
@@ -247,6 +247,7 @@
 					player.shrinkTits();
 				}
 			}
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//Demonic changes - higher chance with higher corruption.
 			if (rand(40) + player.cor / 3 > 35 && tainted) demonChanges(player);
 			player.genderCheck();
@@ -415,6 +416,7 @@
 
 		public function minotaurBlood(player:Player):void
 		{
+			var tfSource:String = "minotaurBlood";
 			player.slimeFeed();
 			//Changes done
 			changes = 0;
@@ -509,6 +511,7 @@
 				}
 				changes++;
 			}
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//Restore arms to become human arms again
 			restoreArms();
 			//+hooves
@@ -826,6 +829,7 @@
 		
 		public function equinum(player:Player):void
 		{
+			var tfSource:String = "equinum";
 			player.slimeFeed();
 			//Changes done
 			changes = 0;
@@ -961,6 +965,7 @@
 					changes++;
 				}
 			}
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//Restore arms to become human arms again
 			restoreArms();
 			//Remove feathery hair
@@ -1359,6 +1364,7 @@
 		
 		public function succubiMilk(tainted:Boolean,player:Player):void
 		{
+			var tfSource:String = "succubiMilk";
 			player.slimeFeed();
 			var temp2:Number = 0;
 			var temp3:Number = 0;
@@ -1551,6 +1557,7 @@
 					else dynStats("cor", 0);
 				}
 			}
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//Demonic changes - higher chance with higher corruption.
 			if (rand(40) + player.cor / 3 > 35 && tainted) demonChanges(player);
 			if (tainted) {
@@ -1572,6 +1579,7 @@
 //5-Bulbous Pepper (+ball size or fresh balls)
 		public function caninePepper(type:Number,player:Player):void
 		{
+			var tfSource:String = "caninePepper";
 			var temp2:Number = 0;
 			var temp3:Number = 0;
 			var crit:Number = 1;
@@ -1661,6 +1669,7 @@
 				outputText("dumber.", false);
 				changes++;
 			}
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//Restore arms to become human arms again
 			restoreArms();
 			//Remove feathery hair
@@ -2236,6 +2245,7 @@
 
 		public function impFood(player:Player):void
 		{
+			var tfSource:String = "impFood";
 			clearOutput();
 			if (player.cocks.length > 0) {
 				outputText("The food tastes strange and corrupt - you can't really think of a better word for it, but it's unclean.", false);
@@ -2283,6 +2293,9 @@
 				outputText("\n\nYour skin crawls, making you close your eyes and shiver.  When you open them again the world seems... different.  After a bit of investigation, you realize you've become shorter!", false);
 				player.tallness -= 1 + rand(3);
 			}
+			changes = 0;
+			changeLimit = 1;
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 		}
 	
 		//pureHoney moved to BeeHoney.as
@@ -3063,6 +3076,7 @@
 		 */
 		public function laBova(tainted:Boolean,enhanced:Boolean,player:Player):void
 		{
+			var tfSource:String = "laBova";
 			player.slimeFeed();
 			//Changes done
 			changes = 0;
@@ -3315,6 +3329,7 @@
 					dynStats("lus", 10);
 				}
 			}
+			if (tainted && rand(5) == 0) updateOvipositionPerk(tfSource);
 			//General Appearance (Tail -> Ears -> Paws(fur stripper) -> Face -> Horns
 			//Give the player a bovine tail, same as the minotaur
 			if (tainted && player.tailType != TAIL_TYPE_COW && changes < changeLimit && rand(3) == 0) {
@@ -3582,6 +3597,7 @@
 
 		public function goblinAle(player:Player):void
 		{
+			var tfSource:String = "goblinAle";
 			player.slimeFeed();
 			changes = 0;
 			changeLimit = 1;
@@ -3626,6 +3642,7 @@
 				outputText("\n\nYou feel like dancing, and stumble as your legs react more quickly than you'd think.  Is the alcohol slowing you down or are you really faster?  You take a step and nearly faceplant as you go off balance.  It's definitely both.", false);
 				changes++;
 			}
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//Restore arms to become human arms again
 			restoreArms();
 			//SEXYTIEMS
@@ -3772,6 +3789,7 @@
 
 		public function gooGasmic(player:Player):void
 		{
+			var tfSource:String = "gooGasmic";
 			outputText("You take the wet cloth in hand and rub it over your body, smearing the strange slime over your " + player.skinDesc + " slowly.", true);
 			//Stat changes
 			//libido up to 80
@@ -3796,6 +3814,7 @@
 			 if (player.vaginalCapacity() >= 9000) goopiness++;
 			 }*/
 			//Cosmetic changes based on 'goopyness'
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//Remove wings
 			if (player.wingType > WING_TYPE_NONE) {
 				if (player.wingType == WING_TYPE_SHARK_FIN) outputText("\n\nYou sigh, feeling a hot wet tingling down your back.  It tickles slightly as you feel your fin slowly turn to sludge, dripping to the ground as your body becomes more goo-like.", false);
@@ -3911,6 +3930,7 @@
 
 		public function sharkTooth(type:Number,player:Player):void
 		{
+			var tfSource:String = "sharkTooth";
 			changes = 0;
 			changeLimit = 2;
 			if (rand(2) == 0) changeLimit++;
@@ -3996,6 +4016,7 @@
 				dynStats("lib", 2, "sen", 3, "lus", 10);
 				changes++;
 			}
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//Transformations:
 			//Mouth TF
 			if (player.faceType != FACE_SHARK_TEETH && rand(3) == 0 && changes < changeLimit) {
@@ -4094,6 +4115,7 @@
 
 		public function snakeOil(player:Player):void
 		{
+			var tfSource:String = "snakeOil";
 			player.slimeFeed();
 			clearOutput();
 			changes = 0;
@@ -4113,6 +4135,7 @@
 				if (player.spe < 40) outputText("  Of course, you're nowhere near as fast as that.", false);
 				changes++;
 			}
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//Removes wings
 			if (player.wingType > WING_TYPE_NONE && rand(3) == 0 && changes < changeLimit) {
 				if (player.wingType == WING_TYPE_SHARK_FIN) outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into your spine.  After a moment the pain passes, though your fin is gone!", false);
@@ -4211,6 +4234,7 @@
 
 		public function superHummus(player:Player):void
 		{
+			var tfSource:String = "superHummus";
 			clearOutput();
 			if (debug) {
 				outputText("You're about to eat the humus when you see it has bugs in it. Not wanting to eat bugged humus or try to debug it you throw it into the portal and find something else to eat.", false);
@@ -4306,11 +4330,13 @@
 			player.removeStatusEffect(StatusEffects.Uniball);
 			player.removeStatusEffect(StatusEffects.BlackNipples);
 			player.vaginaType(0);
-		}		
+			updateOvipositionPerk(tfSource);
+		}
 		
 		//Normal hummus
 		public function regularHummus(player:Player):void
 		{
+			var tfSource:String = "regularHummus";
 			player.slimeFeed();
 			clearOutput();
 			changes = 0;
@@ -4333,6 +4359,8 @@
 			//-----------------------
 			//1st priority: Change lower body to bipedal.
 			if (rand(4) == 0) restoreLegs(null, RESTORELEGS_FIX_BIPED);
+			//Remove Oviposition Perk
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//Remove Incorporeality Perk
 			if (player.findPerk(PerkLib.Incorporeality) >= 0 && player.perkv4(PerkLib.Incorporeality) == 0 && changes < changeLimit && rand(10) == 0) {
 				outputText("\n\nYou feel a strange sensation in your [legs] as they start to feel more solid. They become more opaque until finally, you can no longer see through your [legs]. \n<b>(Perk Lost: Incorporeality!)</b>");
@@ -4638,6 +4666,9 @@
 
 		public function catTransformation(player:Player):void
 		{
+			var tfSource:String = "catTransformation";
+			if (player.hasScales() && player.dragonneScore() >= 4)
+				tfSource = "catTransformation-dragonne";
 			changes = 0;
 			changeLimit = 1;
 			var temp2:Number = 0;
@@ -4852,6 +4883,7 @@
 					changes++;
 				}
 			}
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//Body type changes.  Teh rarest of the rare.
 			//DA EARZ
 			if (player.earType != EARS_CAT && rand(5) == 0 && changes < changeLimit) {
@@ -4939,6 +4971,7 @@
 
 		public function reptilum(player:Player):void
 		{
+			var tfSource:String = "reptilum";
 			player.slimeFeed();
 			//init variables
 			changes = 0;
@@ -5135,12 +5168,8 @@
 				}
 			}
 			//-VAGs
-			if (player.hasVagina() && player.findPerk(PerkLib.Oviposition) < 0 && changes < changeLimit && rand(5) == 0 && player.lizardScore() > 3) {
-				outputText("\n\nDeep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly.  Beyond that, you aren't sure exactly what just happened, but you are sure it originated from your womb.\n", false);
-				outputText("(<b>Perk Gained: Oviposition</b>)", false);
-				player.createPerk(PerkLib.Oviposition, 0, 0, 0, 0);
-				changes++;
-			}
+			if (player.hasVagina() && rand(5) == 0 && player.lizardScore() > 3)
+				updateOvipositionPerk(tfSource); // does all the magic, nuff said!
 
 			//Physical changes:
 			//-Existing horns become draconic, max of 4, max length of 1'
@@ -5339,6 +5368,7 @@
 
 		public function salamanderfirewater(player:Player):void
 		{
+			var tfSource:String = "salamanderfirewater";
 			player.slimeFeed();
 			//init variables
 			changes = 0;
@@ -5499,7 +5529,7 @@
 				player.breastRows[player.smallestTitRow()].breastRating++;
 				changes++;
 			}
-			
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//Physical changes:
 			//Tail - 1st gain reptilian tail, 2nd unlocks enhanced with fire tail whip attack
 			if (player.tailType != TAIL_TYPE_LIZARD && player.tailType != TAIL_TYPE_SALAMANDER && changes < changeLimit && rand(3) == 0) {
@@ -5622,6 +5652,7 @@
 
 		public function neonPinkEgg(pregnantChange:Boolean,player:Player):void
 		{
+			var tfSource:String = "neonPinkEgg";
 			changes = 0;
 			changeLimit = 1;
 			if (rand(2) == 0) changeLimit++;
@@ -5777,6 +5808,7 @@
 				outputText("\n\nYou feel strange.  Fertile... somehow.  You don't know how else to think of it, but you know your body is just aching to be pregnant and give birth.", false);
 			}
 			//-VAGs
+			if (rand(4) == 0) updateOvipositionPerk(tfSource);
 			if (player.hasVagina() && player.findPerk(PerkLib.BunnyEggs) < 0 && changes < changeLimit && rand(4) == 0 && player.bunnyScore() > 3) {
 				outputText("\n\nDeep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly.  Beyond that, you aren't sure exactly what just happened, but you are sure it originated from your womb.\n\n", false);
 				outputText("(<b>Perk Gained: Bunny Eggs</b>)", false);
@@ -5957,10 +5989,12 @@
 				}
 			}
 			player.refillHunger(20);
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 
 		public function goldenSeed(type:Number,player:Player):void
 		{
+			var tfSource:String = "goldenSeed";
 			//'type' refers to the variety of seed.
 			//0 == standard.
 			//1 == enhanced - increase change limit and no pre-reqs for TF
@@ -6132,6 +6166,7 @@
 					}
 				}
 			}
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//****************
 			//General Appearance:
 			//****************
@@ -6318,6 +6353,7 @@
 		 -Roo face*/
 		public function kangaFruit(type:Number,player:Player):void
 		{
+			var tfSource:String = "kangaFruit";
 			clearOutput();
 			outputText("You squeeze the pod around the middle, forcing the end open.  Scooping out a handful of the yeasty-smelling seeds, you shovel them in your mouth.  Blech!  Tastes like soggy burnt bread... and yet, you find yourself going for another handful...", false);
 			//Used to track changes and the max
@@ -6438,6 +6474,7 @@
 					changes++;
 				}
 			}
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//****************
 			//Big Kanga Morphs
 			//type 1 ignores normal restrictions
@@ -6538,6 +6575,7 @@
 
 		public function sweetGossamer(type:Number,player:Player):void
 		{
+			var tfSource:String = (type == 1 ? "blackGossamer" : "sweetGossamer");
 			clearOutput();
 			changes = 0;
 			changeLimit = 1;
@@ -6653,6 +6691,7 @@
 				player.buttRating++;
 				changes++;
 			}
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//***************
 			//Appearance Changes
 			//***************
@@ -6984,6 +7023,7 @@
 //Bottle of Ectoplasm Text
 		public function ectoplasm(player:Player):void
 		{
+			var tfSource:String = "ectoplasm";
 			player.slimeFeed();
 			clearOutput();
 			outputText("You grimace and uncork the bottle, doing your best to ignore the unearthly smell drifting up to your nostrils. Steeling yourself, you raise the container to your lips and chug the contents, shivering at the feel of the stuff sliding down your throat.  Its taste, at least, is unexpectedly pleasant.  Almost tastes like oranges.", false);
@@ -7025,6 +7065,7 @@
 					changes++;
 				}
 			}
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//Appearnace Change
 			//Hair
 			if (rand(4) == 0 && changes < changeLimit && player.hairType != 2) {
@@ -7086,6 +7127,7 @@
 //tooltip:
 		public function shriveledTentacle(player:Player):void
 		{
+			var tfSource:String = "shriveledTentacle";
 			clearOutput();
 			outputText("You chew on the rubbery tentacle; its texture and taste are somewhat comparable to squid, but the half-dormant nematocysts cause your mouth to tingle sensitively.", false);
 			changes = 0;
@@ -7117,6 +7159,7 @@
 			//-always increases lust by a function of sensitivity
 			//"The tingling of the tentacle
 
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//physical changes:
 			//- may randomly remove bee abdomen, if present; always checks and does so when any changes to hair might happen
 			if (rand(4) == 0 && changes < changeLimit && player.tailType == TAIL_TYPE_BEE_ABDOMEN) {
@@ -7252,6 +7295,7 @@
 
 		public function foxTF(enhanced:Boolean,player:Player):void
 		{
+			var tfSource:String = "foxTF";
 			clearOutput();
 			if (!enhanced) outputText("You examine the berry a bit, rolling the orangish-red fruit in your hand for a moment before you decide to take the plunge and chow down.  It's tart and sweet at the same time, and the flavors seem to burst across your tongue with potent strength.  Juice runs from the corners of your lips as you finish the tasty snack.");
 			else outputText("You pop the cap on the enhanced \"Vixen's Vigor\" and decide to take a swig of it.  Perhaps it will make you as cunning as the crude fox Lumi drew on the front?");
@@ -7489,6 +7533,7 @@
 						changes++;
 				}
 			}
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//[Grow Fur]
 			//FOURTH
 			if ((enhanced || player.lowerBody == LOWER_BODY_TYPE_FOX) && player.skinType != SKIN_TYPE_FUR && changes < changeLimit && rand(4) == 0) {
@@ -7732,6 +7777,7 @@
 //Consume:
 		public function foxJewel(mystic:Boolean,player:Player):void
 		{
+			var tfSource:String = "foxJewel";
 			clearOutput();
 			changes = 0;
 			changeLimit = 1;
@@ -7854,6 +7900,7 @@
 			//**********************
 			//BIG APPEARANCE CHANGES
 			//**********************
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//[Grow Fox Tail]
 			if (player.tailType != TAIL_TYPE_FOX && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(4) == 0))) {
 				//if PC has no tail
@@ -8207,6 +8254,7 @@
 //Flavour Description: A round, opaque glass vial filled with a clear, viscous fluid.  It has a symbol inscribed on it, a circle with a cross and arrow pointing out of it in opposite directions.  It looks and smells entirely innocuous.
 		public function trapOil(player:Player):void
 		{
+			var tfSource:String = "trapOil";
 			clearOutput();
 			changes = 0;
 			changeLimit = 1;
@@ -8427,6 +8475,7 @@
 					changes++;
 				}
 			}
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//Nipples Turn Black:
 			if (player.findStatusEffect(StatusEffects.BlackNipples) < 0 && rand(6) == 0 && changes < changeLimit) {
 				outputText("\n\nA tickling sensation plucks at your nipples and you cringe, trying not to giggle.  Looking down you are in time to see the last spot of flesh tone disappear from your [nipples].  They have turned an onyx black!");
@@ -8518,6 +8567,7 @@
 
 		public function ringtailFig(player:Player):void
 		{
+			var tfSource:String = "ringtailFig";
 			clearOutput();
 			//eat it:
 			outputText("You split the fruit and scoop out the pulp, eating it greedily.  It's sweet and slightly gritty with seeds, and you quickly finish both halves.");
@@ -8574,6 +8624,7 @@
 				outputText(player.modThickness(80, 2), false);
 				changes++;
 			}
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//bodypart changes:
 			if (player.tailType != TAIL_TYPE_RACCOON && rand(4) == 0 && changes < changeLimit) {
 				//grow da tail
@@ -8696,6 +8747,7 @@
 //Mouse Cocoa/MousCoco (you can change the name if you're saddlesore I guess but I'll make fun of you for having no plausible source of chocolate for your bakery if you do)
 		public function mouseCocoa(player:Player):void
 		{
+			var tfSource:String = "mouseCocoa";
 			clearOutput();
 			changes = 0;
 			changeLimit = 1;
@@ -8790,6 +8842,7 @@
           changes++;
         }
       }
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//bodypart changes:
 			//gain ears
 			if (player.earType != EARS_MOUSE && changes < changeLimit && rand(4) == 0) {
@@ -9055,7 +9108,9 @@
 		}
 		
 		//Ferret Fruit
-		public function ferretTF(player:Player):void {
+		public function ferretTF(player:Player):void
+		{
+			var tfSource:String = "ferretTF";
 			//CoC Ferret TF (Ferret Fruit)
 			//Finding Ferret Fruit
 			//- Ferret Fruit may be randomly found while exploring the plains.
@@ -9227,6 +9282,7 @@
 						changes++;
 				}
 			}
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//Turn ferret mask to full furface.
 			if (player.faceType == FACE_FERRET_MASK && player.skinType == SKIN_TYPE_FUR && player.earType == EARS_FERRET && player.tailType == TAIL_TYPE_FERRET && player.lowerBody == LOWER_BODY_TYPE_FERRET && rand(4) == 0 && changes < changeLimit)
 			{
@@ -9342,7 +9398,9 @@
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 		
-		public function pigTruffle(boar:Boolean, player:Player):void {
+		public function pigTruffle(boar:Boolean, player:Player):void
+		{
+			var tfSource:String = "pigTruffle";
 			changes = 0;
 			changeLimit = 1;
 			var temp:int = 0;
@@ -9406,6 +9464,7 @@
 				player.ballSize++;
 				changes++;
 			}
+			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//-----------------------
 			// TRANSFORMATIONS
 			//-----------------------
@@ -9489,7 +9548,11 @@
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
 		
-		public function winterPudding(player:Player, returnToBakery:Boolean = false):void {
+		public function winterPudding(player:Player, returnToBakery:Boolean = false):void
+		{
+			var tfSource:String = "winterPudding";
+			changes = 0;
+			changeLimit = 2;
 			outputText("You stuff the stodgy pudding down your mouth, the taste of brandy cream sauce and bitter black treacle sugar combining in your mouth.  You can tell by its thick spongy texture that it's far from good for you, so its exclusivity is more than likely for the best.");
 			player.refillHunger(30);
 			if (player.thickness < 100 || player.tone > 0) {
@@ -9507,7 +9570,7 @@
 				//[Player horn type changed to Antlers.]
 				player.hornType = HORNS_ANTLERS;
 				player.horns = 4 + rand(12);
-				flags[kFLAGS.TIMES_TRANSFORMED]++;
+				changes++;
 			}
 			//[Show this description instead if the player already had horns when the transformation occurred.] 
 			else if (player.horns > 0 && player.hornType != HORNS_ANTLERS && rand(2) == 0) {
@@ -9515,8 +9578,10 @@
 				//[Player horn type changed to Antlers.]
 				player.hornType = HORNS_ANTLERS;
 				player.horns = 4 + rand(12);
-				flags[kFLAGS.TIMES_TRANSFORMED]++;
+				changes++;
 			}
+			if (rand(5) == 0) updateOvipositionPerk(tfSource); // I doubt, that winterPudding will ever be affected, but well ... just in case
+			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 			if (returnToBakery) {
 				doNext(kGAMECLASS.telAdre.bakeryScene.bakeryuuuuuu);
 				return;

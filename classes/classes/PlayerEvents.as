@@ -396,13 +396,8 @@ package classes {
 					}
 				}
 			}
-			if (player.findPerk(PerkLib.Oviposition) >= 0 || player.findPerk(PerkLib.BunnyEggs) >= 0) { //Oviposition perk for lizard and bunny folks
-				if ((player.nagaScore() + player.lizardScore() < 3) && player.findPerk(PerkLib.Oviposition) >= 0 && player.findPerk(PerkLib.BasiliskWomb) < 0) { //--Lose Oviposition perk if lizard score gets below 3.
-					outputText("\nAnother change in your uterus ripples through your reproductive systems.  Somehow you know you've lost a little bit of reptilian reproductive ability.\n(<b>Perk Lost: Oviposition</b>)\n");
-					player.removePerk(PerkLib.Oviposition);
-					needNext = true;
-				}
-				else if (player.bunnyScore() < 3 && player.findPerk(PerkLib.BunnyEggs) >= 0) { //--Lose Oviposition perk if bunny score gets below 3.
+			if (player.findPerk(PerkLib.BunnyEggs) >= 0) { //Oviposition perk for bunny folks
+				if (player.bunnyScore() < 3) { //--Lose Oviposition perk if bunny score gets below 3.
 					outputText("\nAnother change in your uterus ripples through your reproductive systems.  Somehow you know you've lost your ability to spontaneously lay eggs.\n(<b>Perk Lost: Bunny Eggs</b>)\n");
 					player.removePerk(PerkLib.BunnyEggs);
 					needNext = true;

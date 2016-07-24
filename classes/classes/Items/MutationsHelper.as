@@ -190,6 +190,58 @@ package classes.Items
 			return "invalid"; // Will never happen. Suppresses 'Error: Function does not return a value.'
 		}
 
+		public function updateOvipositionPerk(tfSource:String):*
+		{
+			trace('called updateOvipositionPerk("' + tfSource + '")');
+			// First things first :)
+			if (player.findPerk(PerkLib.BasiliskWomb) >= 0) {
+				if (player.findPerk(PerkLib.Oviposition) >= 0)
+					return null; // we already have it => return null; // no change
+
+				// Basilisk Womb but no Oviposition? Fix, whats broken
+				outputText("\n\nDeep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly."
+				          +"  Beyond that, you aren't sure exactly what just happened, but you are sure it originated from your basilisk womb.\n");
+				outputText("(<b>Perk Gained: Oviposition</b>)");
+
+				player.createPerk(PerkLib.Oviposition, 0, 0, 0, 0);
+				return true; // true => gained Oviposition Perk
+			}
+
+			if (changes >= changeLimit) return null;
+
+			// Note, that we don't do the score checks anymore. That was just an unly workaround and we don't want to do that again!
+			switch(tfSource) {
+				case "emberTFs":
+				case "snakeOil":
+				//case "catTransformation-dragonne": // Keep it? Maybe later.
+				// TFs with minor changes. Just in case, we change our mind or if we intend to upgrade them.
+				case "winterPudding":
+				case "rizzaRootEffect":
+					return null; // Don't change it. So we're done, yay!
+
+				case "reptilum":
+					if (player.findPerk(PerkLib.Oviposition) >= 0) return null;
+					outputText("\n\nDeep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly."
+					          +"  Beyond that, you aren't sure exactly what just happened, but you are sure it originated from your womb.\n");
+					outputText("(<b>Perk Gained: Oviposition</b>)");
+
+					player.createPerk(PerkLib.Oviposition, 0, 0, 0, 0);
+					changes++;
+					return true; // Gained it
+					break;
+
+				default:
+					if (player.findPerk(PerkLib.Oviposition) < 0) return null;
+					if (tfSource != "superHummus") {
+						outputText("\n\nAnother change in your uterus ripples through your reproductive systems."
+						          +"  Somehow you know you've lost a little bit of reptilian reproductive ability.\n");
+						outputText("(<b>Perk Lost: Oviposition</b>)\n");
+					}
+					player.removePerk(PerkLib.Oviposition);
+					return false; // Lost it
+			}
+		}
+
 		public function gainSnakeTongue():Boolean
 		{
 			if (player.tongueType != TONGUE_SNAKE && changes < changeLimit) {

@@ -3,6 +3,7 @@
  */
 package classes.Items
 {
+	import classes.GlobalFlags.*;
 	import classes.CoC_Settings;
 	import classes.Player;
 
@@ -10,8 +11,15 @@ package classes.Items
 	 * An item, that is consumed by player, and disappears after use. Direct subclasses should override "doEffect" method
 	 * and NOT "useItem" method.
 	 */
-	public class Consumable extends Useable {
-		
+	public class Consumable extends Useable
+	{
+		protected function get mutations():Mutations { return kGAMECLASS.mutations; }
+		protected function set mutations(val:Mutations):void { kGAMECLASS.mutations = val; }
+		protected function get changes():int { return mutations.changes; }
+		protected function set changes(val:int):void { mutations.changes = val; }
+		protected function get changeLimit():int { return mutations.changeLimit; }
+		protected function set changeLimit(val:int):void { mutations.changeLimit = val; }
+
 		public function Consumable(id:String, shortName:String = null, longName:String = null, value:Number = 0, description:String = null) {
 			super(id, shortName, longName, value, description);
 		}

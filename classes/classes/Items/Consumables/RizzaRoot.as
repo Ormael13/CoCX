@@ -12,10 +12,11 @@ package classes.Items.Consumables
 
         private function rizzaRootEffect(player:Player):void
         {
-            clearOutput();
-			var changes:Number = 0;
-			var changeLimit:Number = 1;
+			var tfSource:String = "rizzaRootEffect";
 			var counter:Number = 0;
+			clearOutput();
+			changes = 0;
+			changeLimit = 1;
 			if (Utils.rand(2) == 0) changeLimit++;
 			if (Utils.rand(3) == 0) changeLimit++;
 			if (Utils.rand(4) == 0) changeLimit++;
@@ -38,6 +39,7 @@ package classes.Items.Consumables
 				changes++;
 				outputText("\n\nA weird tingling runs through your scalp as your " + player.hairDescript() + " shifts slightly.  You reach up and your hand bumps against <b>your new pointed elfin ears</b>.  You bet they look cute!");
 			}
+			if (Utils.rand(5) == 0) mutations.updateOvipositionPerk(tfSource); // I doubt, that this will ever be affected, but well ... just in case
 			if ((changes < changeLimit) && (player.tallness < 108)){
 				player.tallness += changeLimit - changes + Utils.rand(2); //Add remaining changes as additional height
 				if (player.tallness > 108) player.tallness = 108;

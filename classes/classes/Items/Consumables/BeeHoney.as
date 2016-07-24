@@ -4,6 +4,7 @@
 package classes.Items.Consumables
 {
 	import classes.GlobalFlags.*;
+	import classes.Items.Mutations;
 	import classes.internals.Utils;
 	import classes.Items.Consumable;
 	import classes.CoC;
@@ -13,12 +14,12 @@ package classes.Items.Consumables
 	import classes.PregnancyStore;
 	import classes.StatusEffects;
 
-    public class BeeHoney extends Consumable
-    {
-        private const PURE_HONEY_VALUE:int = 40;
-        private const SPECIAL_HONEY_VALUE:int = 20;
-		
-        public function BeeHoney(pure:Boolean, special:Boolean) {
+	public class BeeHoney extends Consumable
+	{
+		private const PURE_HONEY_VALUE:int = 40;
+		private const SPECIAL_HONEY_VALUE:int = 20;
+
+		public function BeeHoney(pure:Boolean, special:Boolean) {
 			var honeyName:String;
 			var honeyLong:String;
 			var honeyDesc:String;
@@ -46,12 +47,14 @@ package classes.Items.Consumables
 			return true;
 		}
 		
-		override public function useItem():Boolean {
+		override public function useItem():Boolean
+		{
+			var tfSource:String = "BeeHoney";
 			var player:Player = getGame().player;
 			var pure:Boolean = (value == PURE_HONEY_VALUE);
 			var special:Boolean = (value == SPECIAL_HONEY_VALUE);
-			var changes:Number = 0;
-			var changeLimit:Number = 1;
+			changes = 0;
+			changeLimit = 1;
 			clearOutput();
 			player.slimeFeed();
 			//Chances of boosting the change limit.
@@ -176,7 +179,9 @@ package classes.Items.Consumables
 					player.breastRows[temp].nipplesPerBreast = 1;
 				}
 			}
-			//Gain oviposition!
+			//Lose reptile oviposition!
+			if (Utils.rand(4) == 0) mutations.updateOvipositionPerk(tfSource);
+			//Gain bee oviposition!
 			if (changes < changeLimit && player.findPerk(PerkLib.BeeOvipositor) < 0 && player.tailType == CoC.TAIL_TYPE_BEE_ABDOMEN && Utils.rand(2) == 0) {
 				outputText("\n\nAn odd swelling starts in your insectile abdomen, somewhere along the underside.  Curling around, you reach back to your extended, bulbous bee part and run your fingers along the underside.  You gasp when you feel a tender, yielding slit near the stinger.  As you probe this new orifice, a shock of pleasure runs through you, and a tubular, black, semi-hard appendage drops out, pulsating as heavily as any sexual organ.  <b>The new organ is clearly an ovipositor!</b>  A few gentle prods confirm that it's just as sensitive; you can already feel your internals changing, adjusting to begin the production of unfertilized eggs.  You idly wonder what laying them with your new bee ovipositor will feel like...");
 				outputText("\n\n(<b>Perk Gained:  Bee Ovipositor - Allows you to lay eggs in your foes!</b>)");
