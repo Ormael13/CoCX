@@ -4334,8 +4334,8 @@
 			//1st priority: Change lower body to bipedal.
 			if (rand(4) == 0) restoreLegs(null, RESTORELEGS_FIX_BIPED);
 			//Remove Incorporeality Perk
-			if (player.findPerk(PerkLib.Incorporeality) >= 0 && changes < changeLimit && rand(10) == 0) {
-				outputText("\n\nYou feel a strange sensation in your [legs] as they start to feel more solid. They become more opaque until finally, you can no longer see through your [legs]. \n<b>(Perk Lost: Incorporeality!)</b>", false);
+			if (player.findPerk(PerkLib.Incorporeality) >= 0 && player.perkv4(PerkLib.Incorporeality) == 0 && changes < changeLimit && rand(10) == 0) {
+				outputText("\n\nYou feel a strange sensation in your [legs] as they start to feel more solid. They become more opaque until finally, you can no longer see through your [legs]. \n<b>(Perk Lost: Incorporeality!)</b>");
 				player.removePerk(PerkLib.Incorporeality);
 				changes++;
 			}
