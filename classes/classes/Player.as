@@ -770,6 +770,8 @@ use namespace kGAMECLASS;
 			if (lizardScore() >= 4)
 			{
 				race = "lizan";
+				if (isTaur())
+					race += "-taur";
 				if (lizardScore() >= 9)
 					return race; // High lizardScore? always return lizan-race
 			}
@@ -838,11 +840,8 @@ use namespace kGAMECLASS;
 			}
 			if (mutantScore() >= 5 && race == "human")
 				race = "corrupted mutant";
-			if (minoScore() >= 4) {
+			if (minoScore() >= 4)
 				race = "minotaur-morph";
-				if (isTaur())
-					race = "minotaur-taur";
-			}
 			if (cowScore() > 5)
 			{
 				race = "cow-";
@@ -956,6 +955,8 @@ use namespace kGAMECLASS;
 					else {
 						if (horseScore() >= 5)
 							race = "equitaur";
+						else if (minoScore() >= 4)
+							race = "mino-centaur";
 						else
 							race = "centaur";
 					}
