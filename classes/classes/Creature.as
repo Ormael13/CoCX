@@ -1830,14 +1830,9 @@ package classes
 		// Note: DogCocks/FoxCocks are functionally identical. They actually change back and forth depending on some
 		// of the PC's attributes, and this is recaluculated every hour spent at camp.
 		// As such, delineating between the two is kind of silly.
-		/* TODO: return countCocksOfType(CockTypesEnum.DOG) + countCocksOfType(CockTypesEnum.FOX); and thats it. Copy&paste sux ... (Stadler76) */
 		public function dogCocks():int { //How many dogCocks
 			if (cocks.length == 0) return 0;
-			var counter:int = 0;
-			for (var x:int = 0; x < cocks.length; x++) {
-				if (cocks[x].cockType == CockTypesEnum.DOG || cocks[x].cockType == CockTypesEnum.FOX) counter++;
-			}
-			return counter;
+			return countCocksOfType(CockTypesEnum.DOG) + countCocksOfType(CockTypesEnum.FOX);
 		}
 		
 		public function findFirstCockType(ctype:CockTypesEnum):Number
