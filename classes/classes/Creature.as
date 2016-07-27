@@ -157,6 +157,7 @@ package classes
 			if (skinType == SKIN_TYPE_FUR) return _furColor;
 			else return hairColor;
 		}
+		public function get newFurColor():String { return _furColor; } // alternative getter for the furColor. Ignores the skinType (Stadler76)
 		public function set furColor(value:String):void { _furColor = value; }
 		/*Beardstyle
 		0- normal
