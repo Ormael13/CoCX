@@ -1590,20 +1590,22 @@ use namespace kGAMECLASS;
 		public function salamanderScore():Number
 		{
 			var salamanderCounter:Number = 0;
-			if (faceType == 0)
+			if (armType == ARM_TYPE_SALAMANDER)
 				salamanderCounter++;
-			if (earType == 0)
-				salamanderCounter++;
-			if (armType == 5)
-				salamanderCounter++;
-			if (lowerBody == 25)
+			if (lowerBody == LOWER_BODY_TYPE_SALAMANDER)
 				salamanderCounter++;
 			if (tailType == TAIL_TYPE_SALAMANDER)
 				salamanderCounter++;
-			if (countCocksOfType(CockTypesEnum.LIZARD) > 0)
-				salamanderCounter++;
 			if (findPerk(PerkLib.Lustzerker) >= 0)
 				salamanderCounter++;
+			if (salamanderCounter >= 2) {
+				if (countCocksOfType(CockTypesEnum.LIZARD) > 0)
+					salamanderCounter++;
+				if (faceType == 0)
+					salamanderCounter++;
+				if (earType == 0)
+					salamanderCounter++;
+			}
 			return salamanderCounter;
 		}
 		
