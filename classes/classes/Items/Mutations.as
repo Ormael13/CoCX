@@ -4676,7 +4676,7 @@
 		public function catTransformation(player:Player):void
 		{
 			var tfSource:String = "catTransformation";
-			if (player.hasScales() && player.dragonneScore() >= 4)
+			if (player.hasScales() && player.hasDragonWings() && player.tongueType == TONGUE_DRACONIC)
 				tfSource = "catTransformation-dragonne";
 			changes = 0;
 			changeLimit = 1;
