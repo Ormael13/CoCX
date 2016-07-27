@@ -847,6 +847,9 @@
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
 			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			//Used for random chances
+			// Maybe we should implement new Enums for furcolors and probably other colors and tones?
+			// For example: FurColorsEnum.HORSE, ScaleColorsEnum.LIZARD, SkinTonesEnum.HUMAN, SkinTonesEnum:SALAMANDER, HairColorsEnum.HUMAN and so on (Stadler76)
+			var horseFurColors:Array = ["brown", "chocolate", "auburn", "sandy brown", "caramel", "peach", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "brown and white", "black and white"];
 			//Set up output
 			outputText("You down the potion, grimacing at the strong taste.", true);
 			//CHANCE OF BAD END - 20% if face/tail/skin/cock are appropriate.
@@ -1252,15 +1255,15 @@
 			}
 			//Fur - if has horsetail && ears and not at changelimit
 			if (player.skinType != SKIN_TYPE_FUR && changes < changeLimit && rand(4) == 0 && player.tailType == TAIL_TYPE_HORSE) {
-				if (player.skinType == SKIN_TYPE_PLAIN) outputText("\n\nAn itchy feeling springs up over every inch of your skin.  As you scratch yourself madly, you feel fur grow out of your skin until <b>you have a fine coat of " + player.hairColor + "-colored fur.</b>", false);
+				player.setFurColor(horseFurColors, true);
+				if (player.skinType == SKIN_TYPE_PLAIN) outputText("\n\nAn itchy feeling springs up over every inch of your skin.  As you scratch yourself madly, you feel fur grow out of your skin until <b>you have a fine coat of " + player.newFurColor + "-colored fur.</b>");
 				if (player.hasScales()) {
 					player.skinDesc = "fur";
-					outputText("\n\nYour " + player.skinTone + " scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of " + player.hairColor + " " + player.skinDesc + ".  At last the itching stops as <b>you brush a few more loose scales from your new coat of fur.</b>", false);
+					outputText("\n\nYour " + player.skinTone + " scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of " + player.newFurColor + " " + player.skinDesc + ".  At last the itching stops as <b>you brush a few more loose scales from your new coat of " + player.newFurColor + "-colored fur.</b>");
 				}
 				changes++;
 				player.skinType = SKIN_TYPE_FUR;
 				player.skinDesc = "fur";
-				player.setFurColor(["brown", "chocolate", "auburn", "sandy brown", "caramel", "peach", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "brown and white", "black and white"]);
 			}
 			//Ears - requires tail
 			if (player.earType != EARS_HORSE && player.tailType == TAIL_TYPE_HORSE && changes < changeLimit && rand(3) == 0) {

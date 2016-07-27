@@ -3184,10 +3184,9 @@ use namespace kGAMECLASS;
 			return true;
 		}
 		
-		public function setFurColor(colorArray:Array):void {
-			if (skinType == SKIN_TYPE_FUR) {
-				furColor = colorArray[rand(colorArray.length)];
-			}
+		public function setFurColor(colorArray:Array, ignoreSkinType:Boolean = false):void {
+			if (!ignoreSkinType && skinType != SKIN_TYPE_FUR) return;
+			furColor = colorArray[rand(colorArray.length)];
 		}
 	}
 }
