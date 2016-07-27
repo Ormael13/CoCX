@@ -193,7 +193,7 @@ public static const LOWER_BODY_TYPE_CLOVEN_HOOFED:int                           
 //public static const LOWER_BODY_TYPE_RHINO:int                                       =  22;
 public static const LOWER_BODY_TYPE_ECHIDNA:int                                     =  23;
 public static const LOWER_BODY_TYPE_DEERTAUR:int                                    =  24; // DEPRECATED, use LOWER_BODY_TYPE_CLOVEN_HOOFED and legCount=4
-public static const LOWER_BODY_TYPE_SALAMANDER:int						       			=  25;
+public static const LOWER_BODY_TYPE_SALAMANDER:int                                  =  25;
 
 // piercingtypesNOPEDISABLED
 public static const PIERCING_TYPE_NONE:int                                          =   0;
