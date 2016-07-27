@@ -1015,7 +1015,7 @@ use namespace kGAMECLASS;
 				humanCounter++;
 			if (lowerBody == 0)
 				humanCounter++;
-			if (countCocksOfType(CockTypesEnum.HUMAN) == 1 && totalCocks() == 1)
+			if (countCocksOfType(CockTypesEnum.HUMAN) == 1 && cocks.length == 1)
 				humanCounter++;
 			if (breastRows.length == 1 && skinType == 0)
 				humanCounter++;
@@ -1561,7 +1561,7 @@ use namespace kGAMECLASS;
 				mutantCounter++;
 			if (tailType > 0)
 				mutantCounter++;
-			if (cockTotal() > 1)
+			if (cocks.length > 1)
 				mutantCounter++;
 			if (hasCock() && hasVagina())
 				mutantCounter++;
