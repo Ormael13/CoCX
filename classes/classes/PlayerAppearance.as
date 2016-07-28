@@ -16,8 +16,16 @@ package classes
 		}
 
 		private function num_inches_and_centimetres (in_inches:Number):String {
+
+			// Various special cases.
 			if (in_inches < 1)
 				return inches_and_centimetres(in_inches)
+			else if (in_inches == 12 && !flags[kFLAGS.USE_METRICS])
+				return "a foot";
+			else if (in_inches % 12 == 0 && !flags[kFLAGS.USE_METRICS])
+				return num2Text(in_inches / 12) + " feet";
+
+			// General
 			var value:int = int(in_inches * (flags[kFLAGS.USE_METRICS] ? 2.54 : 1));
 			if (flags[kFLAGS.USE_METRICS])  return "" + num2Text(value) + " centimetre" + (value == 1 ? "" : "s");
 			else                            return "" + num2Text(value) + " inch" +       (value == 1 ? "" : "es");
@@ -409,9 +417,9 @@ package classes
 				if (player.horns == 4) 
 					outputText("  A quartet of prominent horns has broken through your " + player.skinDesc + ".  The back pair are longer, and curve back along your head.  The front pair protrude forward demonically.", false);
 				if (player.horns == 6) 
-					outputText("  Six horns have sprouted through your " + player.skinDesc + ", the back two pairs curve backwards over your head and down towards your neck, while the front two horns stand almost eight inches long upwards and a little forward.", false);
+					outputText("  Six horns have sprouted through your " + player.skinDesc + ", the back two pairs curve backwards over your head and down towards your neck, while the front two horns stand almost "+num_inches_and_centimetres(8)+" long upwards and a little forward.", false);
 				if (player.horns >= 8) 
-					outputText("  A large number of thick demonic horns sprout through your " + player.skinDesc + ", each pair sprouting behind the ones before.  The front jut forwards nearly ten inches while the rest curve back over your head, some of the points ending just below your ears.  You estimate you have a total of " + num2Text(player.horns) + " horns.", false);	
+					outputText("  A large number of thick demonic horns sprout through your " + player.skinDesc + ", each pair sprouting behind the ones before.  The front jut forwards nearly "+num_inches_and_centimetres(10)+" while the rest curve back over your head, some of the points ending just below your ears.  You estimate you have a total of " + num2Text(player.horns) + " horns.", false);	
 			}
 			//Minotaur horns
 			if (player.hornType == HORNS_COW_MINOTAUR) 
@@ -455,19 +463,19 @@ package classes
 						outputText("  A second horn sprouts from your forehead just above the horn on your nose.");
 					else
 						outputText("  A single horn sprouts from your forehead.  It is conical and resembles a rhino's horn.");
-					outputText("You estimate it to be about seven inches long.");
+					outputText("  You estimate it to be about "+num_inches_and_centimetres(7)+" long.");
 				}
 				else {
-					outputText("  A single horn sprouts from your forehead.  It is conical and resembles a rhino's horn.  You estimate it to be about six inches long.");
+					outputText("  A single horn sprouts from your forehead.  It is conical and resembles a rhino's horn.  You estimate it to be about "+num_inches_and_centimetres(6)+" long.");
 				}
 			}
 			if (player.hornType == HORNS_UNICORN)
 			{
 				outputText("  A single sharp nub of a horn sprouts from the center of your forehead.");
 				if (player.horns < 12)
-					outputText("  You estimate it to be about six inches long.");
+					outputText("  You estimate it to be about "+num_inches_and_centimetres(6)+" long.");
 				else
-					outputText("  It has developed its own cute little spiral. You estimate it to be about a foot long, two inches thick and very sturdy. A very useful natural weapon.");
+					outputText("  It has developed its own cute little spiral. You estimate it to be about "+num_inches_and_centimetres(12)+" long, "+num_inches_and_centimetres(2)+" thick and very sturdy. A very useful natural weapon.");
 			}
 			//BODY PG HERE
 			outputText("\n\nYou have a humanoid shape with the usual torso, arms, hands, and fingers.", false);
@@ -1074,7 +1082,7 @@ package classes
 					else if (player.cocks[cock_index].cockType == CockTypesEnum.DRAGON) 
 						outputText("  With its tapered tip, there are few holes you wouldn't be able to get into.  It has a strange, knot-like bulb at its base, but doesn't usually flare during arousal as a dog's knot would.");
 					else if (player.cocks[cock_index].cockType == CockTypesEnum.BEE)
-						outputText("  It's a long, smooth black shaft that's rigid to the touch.  Its base is ringed with a layer of four inch long soft bee hair.  The tip has a much finer layer of short yellow hairs.  The tip is very sensitive, and it hurts constantly if you don’t have bee honey on it.");
+						outputText("  It's a long, smooth black shaft that's rigid to the touch.  Its base is ringed with a layer of " + inch_and_cm(4) + " long soft bee hair.  The tip has a much finer layer of short yellow hairs.  The tip is very sensitive, and it hurts constantly if you don’t have bee honey on it.");
 					else if (player.cocks[cock_index].cockType == CockTypesEnum.PIG)
 						outputText("  It's bright pinkish red, ending in a prominent corkscrew shape at the tip.");
 					else if (player.cocks[cock_index].cockType == CockTypesEnum.AVIAN)
@@ -1143,11 +1151,7 @@ package classes
 					if (player.skinType == SKIN_TYPE_GOO) 
 						outputText("An oozing, semi-solid sack with " + player.ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
 				}
-				outputText("  You estimate each of them to be about " + num2Text(Math.round(player.ballSize)) + " ", false);
-				if (Math.round(player.ballSize) == 1) 
-					outputText("inch", false);
-				else outputText("inches", false);
-				outputText(" across.\n", false);
+				outputText("  You estimate each of them to be about " + num_inches_and_centimetres(player.ballSize) + " across\n");
 			}	
 			//VAGOOZ
 			if (player.vaginas.length > 0) 
