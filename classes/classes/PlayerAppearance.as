@@ -5,7 +5,7 @@ package classes
 	
 	public class PlayerAppearance extends BaseContent {
 
-		private static const var BASE_ORDINALS:Array = ["zeroth", "first", "second",
+		private static const BASE_ORDINALS:Array = ["zeroth", "first", "second",
 			"third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"];
 
 		public function PlayerAppearance() {}
