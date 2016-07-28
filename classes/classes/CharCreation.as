@@ -244,7 +244,6 @@
 			//PLOTZ
 			kGAMECLASS.monk = 0;
 		//Replaced by flag	kGAMECLASS.beeProgress = 0;
-			kGAMECLASS.giacomo = 0;
 			kGAMECLASS.isabellaScene.isabellaOffspringData = []; //CLEAR!
 			//Lets get this bitch started
 			kGAMECLASS.inCombat = false;

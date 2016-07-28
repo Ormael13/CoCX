@@ -315,7 +315,6 @@ the text from being too boring.
 
 		//These plot variables are to be replaced.
 		public var monk:Number;
-		public var giacomo:int;
 
 		public var temp:int;
 		public var args:Array;
@@ -474,7 +473,6 @@ the text from being too boring.
 
 			//Plot variables
 			monk = 0;
-			giacomo = 0;
 //Replaced by flag			beeProgress = 0;
 
 //			itemStorage = [];
