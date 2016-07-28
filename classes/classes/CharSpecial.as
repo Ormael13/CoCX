@@ -1393,7 +1393,7 @@ package classes
 			//flags[kFLAGS.AMILY_FOLLOWER] = 2;
 			
 			// Jojo
-			//kGAMECLASS.monk = 5;
+			//flags[kFLAGS.JOJO_STATUS] = 5;
 			
 			// Bimbo Sophie
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] = 1;

@@ -313,9 +313,6 @@ the text from being too boring.
 		public var time :TimeModel;
 		public var currentText:String;
 
-		//These plot variables are to be replaced.
-		public var monk:Number;
-
 		public var temp:int;
 		public var args:Array;
 		public var funcs:Array;
@@ -472,7 +469,6 @@ the text from being too boring.
 			//{ region PlotVariables
 
 			//Plot variables
-			monk = 0;
 
 //			itemStorage = [];
 //			gearStorage = [];

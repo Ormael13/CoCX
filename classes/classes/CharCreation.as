@@ -243,7 +243,6 @@
 			}
 
 			// Init none-flag plot variables (The few there still are...)
-			kGAMECLASS.monk = 0;
 			kGAMECLASS.isabellaScene.isabellaOffspringData = []; //CLEAR!
 
 			//Lets get this bitch started

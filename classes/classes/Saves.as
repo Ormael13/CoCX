@@ -1042,9 +1042,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.days = model.time.days;
 		saveFile.data.autoSave = player.autoSave;
 		
-		//PLOTZ
-		saveFile.data.monk = getGame().monk;
-		
+		// Save non-flag plot variables.
 		saveFile.data.isabellaOffspringData = [];
 		for (i = 0; i < kGAMECLASS.isabellaScene.isabellaOffspringData.length; i++) {
 			saveFile.data.isabellaOffspringData.push(kGAMECLASS.isabellaScene.isabellaOffspringData[i]);
@@ -2138,7 +2136,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.autoSave = saveFile.data.autoSave;
 		
 		//PLOTZ
-		game.monk = saveFile.data.monk;
+		flags[kFLAGS.JOJO_STATUS]        = (flags[kFLAGS.JOJO_STATUS] || saveFile.data.monk);
 		flags[kFLAGS.SANDWITCH_SERVICED] = (flags[kFLAGS.SANDWITCH_SERVICED] || saveFile.data.sand);
 		flags[kFLAGS.GIACOMO_MET]        = (flags[kFLAGS.GIACOMO_MET] || saveFile.data.giacomo);
 		

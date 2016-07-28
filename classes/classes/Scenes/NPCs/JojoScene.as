@@ -45,10 +45,6 @@
 		}
 		//End of Interface Implementation
 
-	protected function set monk(value:Number):void{
-		kGAMECLASS.monk = value;
-	}
-
 //const TIMES_AMILY_AND_JOJO_PLAYED_TIMES:int = 434;
 //const AMILY_X_JOJO_COOLDOWN:int = 435;
 //const JOJO_MOVE_IN_DISABLED:int = 550;
@@ -87,7 +83,7 @@ public function tentacleJojo():Boolean {
 
 }
 override public function campCorruptJojo():Boolean {
-	return monk >= 5 && player.findStatusEffect(StatusEffects.NoJojo) < 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0;
+	return flags[kFLAGS.JOJO_STATUS] >= 5 && player.findStatusEffect(StatusEffects.NoJojo) < 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0;
 }
 
 private function jojoMutationOffer():void {
@@ -1094,7 +1090,7 @@ public function jojoFollowerMeditate():void {
 		private function postCombatRape():void {
 			jojoSprite();
 			outputText("  You disrobe and prepare to ");
-			if (monk == 5)
+			if (flags[kFLAGS.JOJO_STATUS] == 5)
 				outputText("fuck your violent little slut senseless.  ");
 			else outputText("teach the uppity monk a lesson...\n\n");
 			menu();
@@ -1110,7 +1106,7 @@ public function jojoFollowerMeditate():void {
 			if (player.findStatusEffect(StatusEffects.EverRapedJojo) < 0)
 				player.createStatusEffect(StatusEffects.EverRapedJojo, 1, 0, 0, 0);
 			else player.addStatusValue(StatusEffects.EverRapedJojo, 1, 1);
-			switch (monk) {
+			switch (flags[kFLAGS.JOJO_STATUS]) {
 				case 1:
 					jojosFirstRape();
 					break;
@@ -1143,7 +1139,7 @@ public function jojoFollowerMeditate():void {
 					outputText("With a satisfied sigh, you pull your " + player.cockDescript(0) + " out with an audible 'pop'.  Your cum begins leaking out, pooling under him and mixing with his own.  The little guy must have cum hard; he seems fairly comatose.  As you leave your senseless victim, you realize  you feel more satisfied than you have in a while, almost like you've cum so hard it took some of your libido with it.");
 					player.orgasm();
 					dynStats("lib", -10, "cor", 4);
-					monk+=1;
+					flags[kFLAGS.JOJO_STATUS] += 1;
 				}
 				else 
 				{
@@ -1151,7 +1147,7 @@ public function jojoFollowerMeditate():void {
 					outputText("With a satisfied sigh, you pull your " + player.cockDescript(0) + " out with an audible 'pop'.  Your cum begins leaking out, pooling under him and mixing with his own.  The little guy must have cum hard, he seems fairly comatose.  As you leave your senseless victim, you realize  you feel more satisfied than you have in a while, almost like you've cum so hard it took some of your libido with it.");
 					player.orgasm();
 					dynStats("lib", -10, "cor", 4);
-					monk+=1;
+					flags[kFLAGS.JOJO_STATUS] += 1;
 				}
 			}
 			else if (player.gender == 2) 
@@ -1194,7 +1190,7 @@ public function jojoFollowerMeditate():void {
 				
 				player.orgasm();
 				dynStats("lib", -10, "cor", 4);
-				monk+=1;
+				flags[kFLAGS.JOJO_STATUS] += 1;
 				
 				//Preggers chance!
 				player.knockUp(PregnancyStore.PREGNANCY_JOJO, PregnancyStore.INCUBATION_MOUSE + 82); //Jojo's kids take longer for some reason
@@ -1225,7 +1221,7 @@ public function jojoFollowerMeditate():void {
 					outputText("\n\nWith a satisfied sigh, you pull your " + player.cockDescript(0) + " out with an audible 'pop'.  Your cum begins leaking out, pooling under him and mixing with his own.  The little guy must have cum hard, he seems fairly comatose.  As you leave your senseless victim, you realize  you feel more satisfied than you have in a while, almost like you've cum so hard it took some of your libido with it.");
 					player.orgasm();
 					dynStats("lib", -10, "cor", 4);
-					monk+=1;
+					flags[kFLAGS.JOJO_STATUS] += 1;
 				}
 				else 
 				{
@@ -1248,7 +1244,7 @@ public function jojoFollowerMeditate():void {
 					outputText("\n\nWith a satisfied sigh, you pull your " + player.cockDescript(0) + " out with an audible 'pop'.  Your cum begins leaking out, pooling under him and mixing with his own.  The little guy must have cum hard, he seems fairly comatose.  As you leave your senseless victim, you realize  you feel more satisfied than you have in a while, almost like you've cum so hard it took some of your libido with it.");
 					player.orgasm();
 					dynStats("lib", -10, "cor", 4);
-					monk+=1;
+					flags[kFLAGS.JOJO_STATUS] += 1;
 				}
 			}
 		}
@@ -1256,7 +1252,7 @@ public function jojoFollowerMeditate():void {
 		private function jojosSecondRape():void {
 			clearOutput();
 			outputText("The poor mouse is already hard... his cock is throbbing eagerly as it protrudes through the opening in his robe, looking nearly eight inches long.  You're pretty sure it wasn't that big last time.\n\n");
-			monk+=1;
+			flags[kFLAGS.JOJO_STATUS] += 1;
 			player.orgasm();
 			dynStats("lib", -10, "cor", 4);
 			if (player.gender == 1) {
@@ -1309,7 +1305,7 @@ public function jojoFollowerMeditate():void {
 				player.orgasm();
 				if (player.lib > 60 && player.cor > 40) {
 					outputText("You smile as you hear him begin masturbating in the background.  There can be no doubt, you are tainting him more and more...");
-					monk+=1;
+					flags[kFLAGS.JOJO_STATUS] += 1;
 					dynStats("lib", -10, "cor", 4);
 				}
 				else
@@ -1348,7 +1344,7 @@ public function jojoFollowerMeditate():void {
 				player.orgasm();
 				if (player.lib > 60 && player.cor > 50) {
 					outputText("You lean down and whisper strange un-words as you stroke his cock.  It spasms and grows, cum pumping from it slowly but constantly.  You walk away, leaving him in a growing puddle of what was once his morals.  You don't know where the words came from, but you do know you're getting better at tempting and corrupting.");
-					monk+=1;
+					flags[kFLAGS.JOJO_STATUS] += 1;
 					dynStats("lib", -10, "cor", 4);
 				}
 				else
@@ -1390,7 +1386,7 @@ public function jojoFollowerMeditate():void {
 				player.orgasm();
 				if (player.lib > 60 && player.cor > 50) {
 					outputText("You lean down and whisper strange un-words as you stroke his cock.  It spasms and grows, cum pumping from it slowly but constantly.  You walk away, leaving him in a growing puddle of what was once his morals.  You don't know where the words came from, but you do know you're getting better at tempting and corrupting.");
-					monk+=1;
+					flags[kFLAGS.JOJO_STATUS] += 1;
 					dynStats("lib", -10, "cor", 4);
 				}
 				else {
@@ -1425,7 +1421,7 @@ public function jojoFollowerMeditate():void {
 					outputText("<b>You feel a familiar power growing within you and decide to unleash it.</b>  You grab the prayer beads from his outfit and spit on them, making them slick and wet.  Holding them below your flagging cock, you focus on the demonic visions in your mind, slowly but constantly milking larger and larger dollops of cum onto the once holy beads.  Jojo moans as he comes to understand your intent, and turns around, shaking his lithe mouse-bum at you.  You lean over him, whispering into his ear, \"<i>Each defiled bead I push into you is going to make you more of a willing slut.  More of a willing receptacle for demon cum.  More of a fountain of desire waiting to be tapped by Succubi.  More my toy.</i>\"\n\n");
 					outputText("He whimpers as you slide the first bead in, his eyes growing foggy and his bum wiggling more eagerly.  You push the second bead inside him, and feel his asshole stretch and loosen, welcoming the corruption.  The third bead slips right in, and he moans, \"<i>sluuuut</i>,\" His cock grows longer and thicker throughout the moan, stopping at over a foot long and 3 inches thick, dribbling cum.  You whisper, \"<i>Cum, my Toy,</i>\" and push the remaining beads inside him.  His eyes roll back as his paws frantically milk his " + monster.cockDescriptShort(0) + ", cum spraying from him like a fountain.  Jojo trembles, losing complete control and falling away from you.  You still hold the end of his beads, and smile as they pop out, stained almost as dark as the poor mouse's soul.\n\n");
 					outputText("You walk away, leaving your new pet to explore his outlook on life, and to test your awakened powers.  ");
-					monk+=1;
+					flags[kFLAGS.JOJO_STATUS] += 1;
 					player.orgasm();
 					dynStats("lib", -10, "cor", 10);
 				}
@@ -1509,7 +1505,7 @@ public function jojoFollowerMeditate():void {
 					outputText("\n\n<b>You feel a familiar power growing within you and decide to unleash it.</b>  You grab the prayer beads from his outfit and spit on them, making them slick and wet.  Holding them below his flagging cock, you focus on the demonic visions in your mind, slowly but constantly milking larger and larger dollops of cum onto the once holy beads.  Jojo moans as he comes to understand your intent, and turns around, shaking his lithe mouse-bum at you.  You lean over him, whispering into his ear, \"<i>Each defiled bead I push into you is going to make you more of a willing slut.  More of a willing receptacle for demon cum.  More of a fountain of desire waiting to be tapped by Succubi.  More my toy.</i>\"\n\n");
 					outputText("He whimpers as you slide the first bead in, his eyes growing foggy and his bum wiggling more eagerly.  You push the second bead inside him, and feel his asshole stretch and loosen, welcoming the corruption.  The third bead slips right in, and he moans, \"<i>sluuuut</i>,\" His cock grows longer and thicker throughout the moan, stopping at over a foot long and 3 inches thick, dribbling cum.  You whisper, \"<i>Cum, my Toy,</i>\" and push the remaining beads inside him.  His eyes roll back as his paws frantically milk his " + monster.cockDescriptShort(0) + ", cum spraying from him like a fountain.  Jojo trembles, losing complete control and falling away from you.  You still hold the end of his beads, and smile as they pop out, stained almost as dark as the poor mouse's soul.\n\n");
 					outputText("You walk away, leaving your new pet to explore his outlook on life, and to test your awakened powers.  ");
-					monk+=1;
+					flags[kFLAGS.JOJO_STATUS] += 1;
 					player.orgasm();
 					dynStats("lib", -10, "cor", 10);
 				}
@@ -1536,7 +1532,7 @@ public function jojoFollowerMeditate():void {
 		
 		public function loseToJojo():void {
 			clearOutput();
-			if (monk == 2 || monk == 3) {
+			if (flags[kFLAGS.JOJO_STATUS] == 2 || flags[kFLAGS.JOJO_STATUS] == 3) {
 				outputText("Jojo glares down at you, and begins praying, slowly laying prayer papers all over your battered form.  You feel rage that quickly dissipates, replaced with a calm sense of peace.  You quickly lose consciousness, but are happy he defeated you.\n\nWhen you wake, you discover a note:\n\"<i>The fighting allowed me to exorcise most of your inner demons.  A part of me wanted to seek revenge for what you had done to me, but I know it was the taint on your soul that was responsible.  If we meet again I would be happy to meditate with you.\n\n          -Jojo.</i>\"");
 				player.orgasm();
 				dynStats("lib", -10., "cor", -15);
@@ -1550,7 +1546,7 @@ public function jojoFollowerMeditate():void {
 				if (player.countCocksOfType(CockTypesEnum.HORSE) > 0) player.lib += 3;
 				if (player.dogCocks() > 0) player.lib += 2;
 				if (player.biggestLactation() >= 1) player.lib += 2;
-				monk = 0;
+				flags[kFLAGS.JOJO_STATUS] = 0;
 			}
 			else {
 				outputText("Jojo grins wickedly as he senses your defeat, " + monster.cockDescriptShort(0) + " throbbing hard.  ");
@@ -2302,11 +2298,11 @@ public function lowCorruptionIntro():void
 	menu();
 	addButton(0, "Meditate", meditateInForest); // OH GOD NO SEND HELP
 	addButton(1, "Leave", camp.returnToCampUseOneHour);
-	if (player.cor > 10 && player.lust >= 33 && player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] <= 0 && monk >= 0) addButton(4, "Rape", jojoRape, null, null, null, "Rape the poor monk mouse-morph." + (player.cor < 50 ? "  Why would you do that?": ""));
+	if (player.cor > 10 && player.lust >= 33 && player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] <= 0 && flags[kFLAGS.JOJO_STATUS] >= 0) addButton(4, "Rape", jojoRape, null, null, null, "Rape the poor monk mouse-morph." + (player.cor < 50 ? "  Why would you do that?": ""));
 }
 
 public function highCorruptionJojoEncounter():void {
-	kGAMECLASS.monk = 1;
+	flags[kFLAGS.JOJO_STATUS] = 1;
 	kGAMECLASS.jojoScene.jojoSprite();
 	outputText("While marvelling at the strange trees and vegetation of the forest, the bushes ruffle ominously.  A bush seems to explode into a flurry of swirling leaves and movement.  Before you can react you feel your " + player.feet() + " being swept out from under you, and land hard on your back.\n\n", false);
 	outputText("The angry visage of a lithe white mouse gazes down on your prone form with a look of confusion.", false);
@@ -2316,7 +2312,7 @@ public function highCorruptionJojoEncounter():void {
 	menu();
 	addButton(0, "Accept", getGame().jojoScene.meditateInForest);
 	addButton(1, "Decline", camp.returnToCampUseOneHour);
-	if (player.cor > 10 && player.lust >= 33 && player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] <= 0 && monk >= 0) addButton(2, "Rape", getGame().jojoScene.jojoRape, null, null, null, "Rape the poor monk mouse-morph." + (player.cor < 50 ? "  Why would you do that?": ""));
+	if (player.cor > 10 && player.lust >= 33 && player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] <= 0 && flags[kFLAGS.JOJO_STATUS] >= 0) addButton(2, "Rape", getGame().jojoScene.jojoRape, null, null, null, "Rape the poor monk mouse-morph." + (player.cor < 50 ? "  Why would you do that?": ""));
 }
 
 //Repeat encounter
@@ -2344,10 +2340,10 @@ public function repeatJojoEncounter():void {
 public function corruptJojoEncounter():void {
 	kGAMECLASS.jojoScene.jojoSprite();
 	outputText("You are enjoying a peaceful walk through the woods when Jojo drops out of the trees ahead, ", true);
-	if (kGAMECLASS.monk == 2) outputText("his mousey visage twisted into a ferocious snarl.  \"YOU!\" he screams, launching himself towards you, claws extended.", false);
-	if (kGAMECLASS.monk == 3) outputText("unsteady on his feet, but looking for a fight!", false);
-	if (kGAMECLASS.monk == 4) outputText("visibly tenting his robes, but intent on fighting you.", false);
-	if (kGAMECLASS.monk == 5) outputText("panting and nude, his fur rustling in the breeze, a twitching behemoth of a cock pulsing between his legs.", false);
+	if (flags[kFLAGS.JOJO_STATUS] == 2) outputText("his mousey visage twisted into a ferocious snarl.  \"YOU!\" he screams, launching himself towards you, claws extended.", false);
+	if (flags[kFLAGS.JOJO_STATUS] == 3) outputText("unsteady on his feet, but looking for a fight!", false);
+	if (flags[kFLAGS.JOJO_STATUS] == 4) outputText("visibly tenting his robes, but intent on fighting you.", false);
+	if (flags[kFLAGS.JOJO_STATUS] == 5) outputText("panting and nude, his fur rustling in the breeze, a twitching behemoth of a cock pulsing between his legs.", false);
 	startCombat(new Jojo());
 }
 
@@ -2461,7 +2457,7 @@ public function jojoCamp():void {
 			outputText("You walk up to the boulder where Jojo usually sits, and see him sitting cross legged with his eyes closed.  He seems to be deep in meditation, but when you approach his eyes open suddenly and he gets up appearing slightly distressed, “<i>Uh... [name], I can feel a bit of corruption within you.  It is not much, but I think you should be concerned about it before it gets out of hand and you do something you might regret.  If you want to I'd be happy to meditate with you as you rid yourself of it.</i>” he offers with a concerned look on his face.\n\n");
 		}
 		outputText("Do you accept Jojo's help?\n\n");
-		simpleChoices("Yes", acceptOfferOfHelp, "No", refuseOfferOfHelp, "", null, "", null, "Rape", (player.lust >= 33 && player.gender > 0 && monk >= 0 ? jojoAtCampRape : null));
+		simpleChoices("Yes", acceptOfferOfHelp, "No", refuseOfferOfHelp, "", null, "", null, "Rape", (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.JOJO_STATUS] >= 0 ? jojoAtCampRape : null));
 	}
 	else { //Normal shit
 		if (player.cor > 10)
@@ -2496,7 +2492,7 @@ private function jojoCampMenu():void {
 	addButton(4, jojoDefense, jojoDefenseToggle, null, null, null, (player.findStatusEffect(StatusEffects.JojoNightWatch) >= 0 ? "Request him to stop guarding the camp.": "Request him to guard the camp at night."));
 	if (player.findStatusEffect(StatusEffects.Infested) >= 0) addButton(5, "Purge", wormRemoval, null, null, null, "Request him to purge the worms from your body.");
 	if (player.cor > 10 && player.lust >= 33 && player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] <= 0) addButton(8, "Rape", jojoAtCampRape, null, null, null, "Rape the poor monk mouse-morph." + (player.cor < 25 ? "  Why would you do that?": ""));
-	if (player.lust >= 33 && monk <= -3) addButton(8, "Sex", pureJojoSexMenu, null, null, null, "Initiate sexy time with the mouse-morph.");
+	if (player.lust >= 33 && flags[kFLAGS.JOJO_STATUS] <= -3) addButton(8, "Sex", pureJojoSexMenu, null, null, null, "Initiate sexy time with the mouse-morph.");
 	addButton(14, "Leave", camp.campFollowers);
 }
 
@@ -2537,9 +2533,9 @@ public function talkMenu():void
 		if (flags[kFLAGS.TIMES_TALKED_WITH_JOJO] < 4) addButtonDisabled(9, "Sex?", "You should socialize with Jojo a bit more.");
 		//if (player.findStatusEffect(StatusEffects.EverRapedJojo) >= 0) addButtonDisabled(9, "Sex?". "You've raped Jojo in the past, now you can't ask him out.");
 	}
-	if (player.cor <= 10 && player.lust >= 33 && monk == -1) addButtonDisabled(9, "Sex?", "You need to spend more time with Jojo. \n\nTalk sessions: " + flags[kFLAGS.TIMES_TALKED_WITH_JOJO] + "/6 \nTraining sessions: " + flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] + "/10 \nMeditation sessions: " + player.statusEffectv1(StatusEffects.JojoMeditationCount) + "/10 \nYou must be pure enough and have sufficient lust as well.");
-	if (player.cor <= 10 && player.lust >= 33 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 6 && flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] >= 10 && player.statusEffectv1(StatusEffects.JojoMeditationCount) >= 10 && monk > -3) addButton(9, "Sex?", offerSexFirstTimeHighAffection, null, null, null, "You've spent quite the time with Jojo, maybe you can offer him if he's willing to have sex with you?"); //Will unlock consensual sex scenes.
-	if (monk <= -3) removeButton(9);
+	if (player.cor <= 10 && player.lust >= 33 && flags[kFLAGS.JOJO_STATUS] == -1) addButtonDisabled(9, "Sex?", "You need to spend more time with Jojo. \n\nTalk sessions: " + flags[kFLAGS.TIMES_TALKED_WITH_JOJO] + "/6 \nTraining sessions: " + flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] + "/10 \nMeditation sessions: " + player.statusEffectv1(StatusEffects.JojoMeditationCount) + "/10 \nYou must be pure enough and have sufficient lust as well.");
+	if (player.cor <= 10 && player.lust >= 33 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 6 && flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] >= 10 && player.statusEffectv1(StatusEffects.JojoMeditationCount) >= 10 && flags[kFLAGS.JOJO_STATUS] > -3) addButton(9, "Sex?", offerSexFirstTimeHighAffection, null, null, null, "You've spent quite the time with Jojo, maybe you can offer him if he's willing to have sex with you?"); //Will unlock consensual sex scenes.
+	if (flags[kFLAGS.JOJO_STATUS] <= -3) removeButton(9);
 	addButton(14, "Back", jojoCamp);
 }
 
@@ -3048,7 +3044,7 @@ public function offerSexFirstTime():void {
 	outputText("\n\nBut...? You press. After all, isn't it better for the both of you to turn to each other to slake your lusts then to bottle things up or go to the monsters who roam this land?");
 	outputText("\n\n\"<i>I-I can't... I made a vow of chastity... I can't simply break my vows... please understand, [name]...</i>\" he says gazing at you apologetically, though you detect just the slightest hint of desire in his eyes before he averts his gaze and shakes his head of whatever thoughts could be plaguing it.");
 	outputText("\n\nYou acknowledge his position and excuse yourself, but before you can leave he calls out to you. \"<i>Wait, [name]!</i>\" he says getting up and moving towards you. \"<i>While I can't really have sex with you, that doesn't mean I can't help you. If you want we could meditate to help you... umm... restrain your needs?</i>\" he suggests.");
-	monk = -1;
+	flags[kFLAGS.JOJO_STATUS] = -1;
 	doYesNo(agreeToMeditate, noThanksToMeditate);
 }
 private function agreeToMeditate():void {
@@ -3071,7 +3067,7 @@ public function offerSexFirstTimeHighAffection():void {
 	outputText("You've been spending great time with Jojo. You've meditated with him, you've discussed with him and you've even trained with him! Now's the time to ask him out.");
 	outputText("\n\nYou approach Jojo. \"Yes, [name]? What is it you need?\" Jojo asks. You ask him if he would like to have sex.");
 	outputText("\n\n\"<i>I'm sorry. I still can't break my vows of chastity,</i>\" he says apologetically.");
-	monk = -2;
+	flags[kFLAGS.JOJO_STATUS] = -2;
 	menu();
 	addButton(0, "Meditate", jojoFollowerMeditate);
 	addButton(1, "Drop It", noThanksToMeditate);
@@ -3088,7 +3084,7 @@ public function confrontChastity():void {
 	outputText("\n\n<b>You have unlocked Jojo sex menu!</b>");
 	if (silly()) outputText("<b> Jojo can only learn four moves. Delete a move to learn a new one? Yes. 1... 2... 3... Poof! Jojo has forgot Chastity and learned Sex!</b>");
 	flags[kFLAGS.DISABLED_JOJO_RAPE] = 1;
-	monk = -3;
+	flags[kFLAGS.JOJO_STATUS] = -3;
 	doNext(pureJojoSexMenu);
 }
 

@@ -519,7 +519,7 @@ package classes.Scenes.Combat
 			if (monster.short == "Jojo")
 			{
 				// Not a completely corrupted monkmouse
-				if (kGAMECLASS.monk < 2)
+				if (flags[kFLAGS.JOJO_STATUS] < 2)
 				{
 					outputText("You thrust your palm forward, sending a blast of pure energy towards Jojo. At the last second he sends a blast of his own against yours canceling it out\n\n");
 					flags[kFLAGS.SPELLS_CAST]++;

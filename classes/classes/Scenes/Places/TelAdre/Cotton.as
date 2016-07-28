@@ -354,7 +354,7 @@ private function cottonChat():void {
 	if (flags[kFLAGS.FREED_VALA] != 0)
 		chats[chats.length] = 3;
 	//(Jojo chat)
-	if (kGAMECLASS.monk > 0)
+	if (flags[kFLAGS.JOJO_STATUS] > 0)
 		chats[chats.length] = 4;
 	var choice:Number = chats[rand(chats.length)];
 
@@ -391,12 +391,12 @@ private function cottonChat():void {
 	//(Jojo chat)
 	else if (choice == 5) {
 		//(If Jojo hasn't been corrupted)
-		if (kGAMECLASS.monk == 1) {
+		if (flags[kFLAGS.JOJO_STATUS] == 1) {
 			outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre and beyond. \"<i>Jojo?</i>\" Cotton says, \"<i>You know Jojo too? I met him a while back. He taught me the finer points of meditation, which I incorporate into my yoga. Here, let's try.</i>\" You spend the rest of the workout in meditative poses, and by the time you're done, you feel... lighter somehow.\n\n", false);
 			dynStats("cor", -1);
 		}
 		//(If Jojo has been corrupted)
-		else if (kGAMECLASS.monk > 1) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Jojo?</i>\" Cotton says, \"<i>You know Jojo too? I met him a while back. He taught me the finer points of meditation. I haven't seen him much lately, though. I wonder where he's gone to.</i>\" You smile inwardly, knowing exactly where he's gone to.\n\n", false);
+		else if (flags[kFLAGS.JOJO_STATUS] > 1) outputText("While you're doing your stretches, you find yourself chatting about the folks of Tel'Adre. \"<i>Jojo?</i>\" Cotton says, \"<i>You know Jojo too? I met him a while back. He taught me the finer points of meditation. I haven't seen him much lately, though. I wonder where he's gone to.</i>\" You smile inwardly, knowing exactly where he's gone to.\n\n", false);
 	}
 }
 //(If Leave)
