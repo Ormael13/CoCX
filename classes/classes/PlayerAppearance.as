@@ -1018,203 +1018,99 @@ package classes
 				else outputText(" is ", false);
 				outputText("concealed within a cavity in your tail when not in use, though when the need arises, you can part your concealing slit and reveal your true self.\n", false);
 			}
-			//Cock stuff!
-			temp = 0;
-			if (player.cocks.length == 1) 
-			{
-				if (player.isTaur()) 
-					outputText("\nYour equipment has shifted to lie between your hind legs, like a feral animal.", false);
-				outputText("\nYour " + player.cockDescript(temp) + " is " + inches_and_centimetres(player.cocks[temp].cockLength) + " long and " + inches_and_centimetres(player.cocks[temp].cockThickness) + (player.cocks[temp].cockThickness < 10 ? " thick." : " wide.") );
 
-				//Horsecock flavor
-				if (player.cocks[temp].cockType == CockTypesEnum.HORSE) 
-				{
-					outputText("  It's mottled black and brown in a very animalistic pattern.  The 'head' of your shaft flares proudly, just like a horse's.", false);
-				}
-				//dog cock flavor
-				if (((player.cocks[temp].cockType == CockTypesEnum.DOG) || (player.cocks[temp].cockType == CockTypesEnum.FOX)) || (player.cocks[temp].cockType == CockTypesEnum.FOX)) 
-				{
-					if (player.cocks[temp].knotMultiplier >= 1.8) 
-						outputText("  The obscenely swollen lump of flesh near the base of your " + player.cockDescript(temp) + " looks almost too big for your cock.", false);
-					else if (player.cocks[temp].knotMultiplier >= 1.4) 
-						outputText("  A large bulge of flesh nestles just above the bottom of your " + player.cockDescript(temp) + ", to ensure it stays where it belongs during mating.", false);
-					else if (player.cocks[temp].knotMultiplier > 1) 
-						outputText("  A small knot of thicker flesh is near the base of your " + player.cockDescript(temp) + ", ready to expand to help you lodge it inside a female.", false);
-					//List thickness
-					outputText("  The knot is " + inches_and_centimetres(player.cocks[temp].cockThickness * player.cocks[temp].knotMultiplier) + " wide when at full size.", false);
-				}
-				//Demon cock flavor
-				if (player.cocks[temp].cockType == CockTypesEnum.DEMON) 
-				{
-					outputText("  The crown is ringed with a circle of rubbery protrusions that grow larger as you get more aroused.  The entire thing is shiny and covered with tiny, sensitive nodules that leave no doubt about its demonic origins.", false);
-				}
-				//Tentacle cock flavor
-				if (player.cocks[temp].cockType == CockTypesEnum.TENTACLE) 
-				{
-					outputText("  The entirety of its green surface is covered in perspiring beads of slick moisture.  It frequently shifts and moves of its own volition, the slightly oversized and mushroom-like head shifting in coloration to purplish-red whenever you become aroused.", false);
-				}
-				//Cat cock flavor
-				if (player.cocks[temp].cockType == CockTypesEnum.CAT) 
-				{
-					outputText("  It ends in a single point, much like a spike, and is covered in small, fleshy barbs. The barbs are larger at the base and shrink in size as they get closer to the tip.  Each of the spines is soft and flexible, and shouldn't be painful for any of your partners.", false);
-				}
-				//Snake cock flavor
-				if (player.cocks[temp].cockType == CockTypesEnum.LIZARD) 
-				{
-					outputText("  It's a deep, iridescent purple in color.  Unlike a human penis, the shaft is not smooth, and is instead patterned with multiple bulbous bumps.", false);
-				}
-				//Anemone cock flavor
-				if (player.cocks[temp].cockType == CockTypesEnum.ANEMONE) 
-				{
-					outputText("  The crown is surrounded by tiny tentacles with a venomous, aphrodisiac payload.  At its base a number of similar, longer tentacles have formed, guaranteeing that pleasure will be forced upon your partners.", false);
-				}
-				//Kangawang flavor
-				if (player.cocks[temp].cockType == CockTypesEnum.KANGAROO) 
-				{
-					outputText("  It usually lies coiled inside a sheath, but undulates gently and tapers to a point when erect, somewhat like a taproot.", false);
-				}
-				//Draconic Cawk Flava flav
-				if (player.cocks[temp].cockType == CockTypesEnum.DRAGON) 
-				{
-					outputText("  With its tapered tip, there are few holes you wouldn't be able to get into.  It has a strange, knot-like bulb at its base, but doesn't usually flare during arousal as a dog's knot would.");
-				}
-				//Bee flavor
-				if (player.cocks[temp].cockType == CockTypesEnum.BEE) {
-					outputText("  It's a long, smooth black shaft that's rigid to the touch.  Its base is ringed with a layer of four inch long soft bee hair.  The tip has a much finer layer of short yellow hairs.  The tip is very sensitive, and it hurts constantly if you don’t have bee honey on it.");
-				}
-				//Pig flavor
-				if (player.cocks[temp].cockType == CockTypesEnum.PIG) {
-					outputText("  It's bright pinkish red, ending in a prominent corkscrew shape at the tip.");
-				}
-				//Avian flavor
-				if (player.cocks[temp].cockType == CockTypesEnum.AVIAN) {
-					outputText("  It's a red, tapered cock that ends in a tip.  It rests nicely in a sheath.");
-				}
-				//Rhino flavor
-				if (player.cocks[temp].cockType == CockTypesEnum.RHINO) {
-					outputText("  It's a smooth, tough pink colored and takes on a long and narrow shape with an oval shaped bulge along the center.");
-				}
-				//Echidna flavor
-				if (player.cocks[temp].cockType == CockTypesEnum.ECHIDNA) {
-					outputText("  It is quite a sight to behold, coming well-equiped with four heads.");
-				}
-				//Worm flavor
-				if (player.findStatusEffect(StatusEffects.Infested) >= 0)
-					outputText("  Every now and again a slimy worm coated in spunk slips partway out of your " + player.cockDescript(0) + ", tasting the air like a snake's tongue.", false);		
-				if (player.cocks[temp].sock) 
-					sockDescript(temp);
-				//DONE WITH COCKS, moving on!
-				outputText("\n", false);
-			}
-			if (player.cocks.length > 1) 
-			{
-				temp = 0;
-				rando = rand(3);
-				if (player.isTaur()) 
-					outputText("\nBetween hind legs of your bestial body you have grown " + player.multiCockDescript() + "!\n", false);
-				else outputText("\nWhere a penis would normally be located, you have instead grown " + player.multiCockDescript() + "!\n", false);
-				while(temp < player.cocks.length) {
+			// Cock Descriptions //
+			if (player.hasCock()) {
+				rando = rand(5);
+
+				// Is taur and has multiple cocks?
+				if      (player.isTaur() && player.cockTotal() == 1)
+					outputText("\nYour equipment has shifted to lie between your hind legs, like a feral animal.");
+				else if (player.isTaur())
+					outputText("\nBetween hind legs of your bestial body you have grown " + player.multiCockDescript() + "!\n");
+				else if (player.cockTotal() == 1)
+					outputText("\n");
+				else
+					outputText("\nWhere a penis would normally be located, you have instead grown " + player.multiCockDescript() + "!\n");
+			
+				for (var cock_index = 0; cock_index < player.cocks.length; cock_index++) {
+					rando = ++rando % 5;
 
 					// How to start the sentence?
-					if      (temp  == 0 || rando == 0)  outputText("--The " + ordinal_of(temp+1) + " of your ");
-					else if (rando == 1)  				outputText("--One of your ");
-					else if (rando == 2)  				outputText("--Another of your ");
+					if  (player.cockTotal() == 1)  outputText("Your ");
+					else if (cock_index == 0)      outputText("--Your first ");
+					else if (rando == 0)           outputText("--The " + ordinal_of(cock_index+1) + " of your ");
+					else if (rando == 1)  		   outputText("--One of your ");
+					else if (rando == 2)  		   outputText("--Another of your ");
+					else if (rando == 3)  		   outputText("--The next ");
+					else if (rando == 4)           outputText("--The " + ordinal_of(cock_index+1) + " ");
 
 					// How large?
-					outputText(player.cockDescript(temp) + "s is " + num_inches_and_centimetres(player.cocks[temp].cockLength) + " long and ");
-					outputText(num_inches_and_centimetres(player.cocks[temp].cockThickness));
-					if      (rando == 0)  outputText(" wide.");
-					else if (rando == 1)  outputText(" thick.");
-					else if (rando == 2)  outputText(" in diameter.");
+					outputText(player.cockDescript(cock_index) + (rando >= 3 || cock_index == 0 ? "":"s") +  " is " + num_inches_and_centimetres(player.cocks[cock_index].cockLength) + " long and ");
+					outputText(num_inches_and_centimetres(player.cocks[cock_index].cockThickness));
+					if      (rando % 3 == 0)  outputText(" wide.");
+					else if (rando % 3 == 1)  outputText(" thick.");
+					else if (rando % 3 == 2)  outputText(" in diameter.");
 
-					//horse cock flavor
-					if (player.cocks[temp].cockType == CockTypesEnum.HORSE) 
-					{
-						outputText("  It's mottled black and brown in a very animalistic pattern.  The 'head' of your " + player.cockDescript(temp) + " flares proudly, just like a horse's.", false);
-					}
-					//dog cock flavor
-					if ((player.cocks[temp].cockType == CockTypesEnum.DOG) || (player.cocks[temp].cockType == CockTypesEnum.FOX)) 
-					{
-						outputText("  It is shiny, pointed, and covered in veins, just like a large ");
-						if (player.cocks[temp].cockType == CockTypesEnum.DOG)
-							outputText("dog's cock.");
-						else
-							outputText("fox's cock.");
-					}
-					//Demon cock flavor
-					if (player.cocks[temp].cockType == CockTypesEnum.DEMON) 
-					{
-						outputText("  The crown is ringed with a circle of rubbery protrusions that grow larger as you get more aroused.  The entire thing is shiny and covered with tiny, sensitive nodules that leave no doubt about its demonic origins.", false);
-					}
-					//Tentacle cock flavor
-					if (player.cocks[temp].cockType == CockTypesEnum.TENTACLE) 
-					{
-						outputText("  The entirety of its green surface is covered in perspiring beads of slick moisture.  It frequently shifts and moves of its own volition, the slightly oversized and mushroom-like head shifting in coloration to purplish-red whenever you become aroused.", false);
-					}
-					//Cat cock flavor
-					if (player.cocks[temp].cockType == CockTypesEnum.CAT) 
-					{
-						outputText("  It ends in a single point, much like a spike, and is covered in small, fleshy barbs. The barbs are larger at the base and shrink in size as they get closer to the tip.  Each of the spines is soft and flexible, and shouldn't be painful for any of your partners.", false);
-					}
-					//Snake cock flavor
-					if (player.cocks[temp].cockType == CockTypesEnum.LIZARD) 
-					{
-						outputText("  It's a deep, iridescent purple in color.  Unlike a human penis, the shaft is not smooth, and is instead patterned with multiple bulbous bumps.", false);
-					}
-					//Anemone cock flavor
-					if (player.cocks[temp].cockType == CockTypesEnum.ANEMONE) 
-					{
-						outputText("  The crown is surrounded by tiny tentacles with a venomous, aphrodisiac payload.  At its base a number of similar, longer tentacles have formed, guaranteeing that pleasure will be forced upon your partners.", false);
-					}
-					//Kangwang flavor
-					if (player.cocks[temp].cockType == CockTypesEnum.KANGAROO) 
-					{
-						outputText("  It usually lies coiled inside a sheath, but undulates gently and tapers to a point when erect, somewhat like a taproot.", false);
-					}
-					//Draconic Cawk Flava flav
-					if (player.cocks[temp].cockType == CockTypesEnum.DRAGON) 
-					{
+					// What flavor of cock do you have?
+					if (player.cocks[cock_index].cockType == CockTypesEnum.HORSE) 
+						outputText("  It's mottled black and brown in a very animalistic pattern.  The 'head' of its shaft flares proudly, just like a horse's.");
+					else if (player.cocks[cock_index].cockType == CockTypesEnum.DOG) 
+						outputText("  It is shiny, pointed, and covered in veins, just like a large dog's cock.");
+					else if (player.cocks[cock_index].cockType == CockTypesEnum.FOX) 
+						outputText("  It is shiny, pointed, and covered in veins, just like a large fox's cock.");
+					else if (player.cocks[cock_index].cockType == CockTypesEnum.DEMON) 
+						outputText("  The crown is ringed with a circle of rubbery protrusions that grow larger as you get more aroused.  The entire thing is shiny and covered with tiny, sensitive nodules that leave no doubt about its demonic origins.");
+					else if (player.cocks[cock_index].cockType == CockTypesEnum.TENTACLE) 
+						outputText("  The entirety of its green surface is covered in perspiring beads of slick moisture.  It frequently shifts and moves of its own volition, the slightly oversized and mushroom-like head shifting in coloration to purplish-red whenever you become aroused.");
+					else if (player.cocks[cock_index].cockType == CockTypesEnum.CAT) 
+						outputText("  It ends in a single point, much like a spike, and is covered in small, fleshy barbs. The barbs are larger at the base and shrink in size as they get closer to the tip.  Each of the spines is soft and flexible, and shouldn't be painful for any of your partners.");
+					else if (player.cocks[cock_index].cockType == CockTypesEnum.LIZARD) 
+						outputText("  It's a deep, iridescent purple in color.  Unlike a human penis, the shaft is not smooth, and is instead patterned with multiple bulbous bumps.");
+					else if (player.cocks[cock_index].cockType == CockTypesEnum.ANEMONE) 
+						outputText("  The crown is surrounded by tiny tentacles with a venomous, aphrodisiac payload.  At its base a number of similar, longer tentacles have formed, guaranteeing that pleasure will be forced upon your partners.");
+					else if (player.cocks[cock_index].cockType == CockTypesEnum.KANGAROO) 
+						outputText("  It usually lies coiled inside a sheath, but undulates gently and tapers to a point when erect, somewhat like a taproot.");
+					else if (player.cocks[cock_index].cockType == CockTypesEnum.DRAGON) 
 						outputText("  With its tapered tip, there are few holes you wouldn't be able to get into.  It has a strange, knot-like bulb at its base, but doesn't usually flare during arousal as a dog's knot would.");
-					}
-					//Bee flavor
-					if (player.cocks[temp].cockType == CockTypesEnum.BEE) {
+					else if (player.cocks[cock_index].cockType == CockTypesEnum.BEE)
 						outputText("  It's a long, smooth black shaft that's rigid to the touch.  Its base is ringed with a layer of four inch long soft bee hair.  The tip has a much finer layer of short yellow hairs.  The tip is very sensitive, and it hurts constantly if you don’t have bee honey on it.");
-					}
-					//Pig flavor
-					if (player.cocks[temp].cockType == CockTypesEnum.PIG) {
+					else if (player.cocks[cock_index].cockType == CockTypesEnum.PIG)
 						outputText("  It's bright pinkish red, ending in a prominent corkscrew shape at the tip.");
-					}
-					//Avian flavor
-					if (player.cocks[temp].cockType == CockTypesEnum.AVIAN) {
+					else if (player.cocks[cock_index].cockType == CockTypesEnum.AVIAN)
 						outputText("  It's a red, tapered cock that ends in a tip.  It rests nicely in a sheath.");
+					else if (player.cocks[cock_index].cockType == CockTypesEnum.RHINO)
+						outputText("  It's a smooth, tough pink colored and takes on a long and narrow shape with an oval shaped bulge along the center.");
+					else if (player.cocks[cock_index].cockType == CockTypesEnum.ECHIDNA)
+						outputText("  It is quite a sight to behold, coming well-equiped with four heads.");
+
+					// Knot?
+					if (player.cocks[cock_index].knotMultiplier > 1) {
+						if (player.cocks[cock_index].knotMultiplier >= 1.8) 
+							outputText("  The obscenely swollen lump of flesh near the base of your " + player.cockDescript(cock_index) + " looks almost comically mismatched for your cock.");
+						else if (player.cocks[cock_index].knotMultiplier >= 1.4) 
+							outputText("  A large bulge of flesh nestles just above the bottom of your " + player.cockDescript(cock_index) + ", to ensure it stays where it belongs during mating.");
+						else // knotMultiplier < 1.4
+							outputText("  A small knot of thicker flesh is near the base of your " + player.cockDescript(cock_index) + ", ready to expand to help you lodge it inside a female.");
+						outputText("  The knot is " + inches_and_centimetres(player.cocks[cock_index].cockThickness * player.cocks[cock_index].knotMultiplier) + " thick when at full size.");
 					}
 
-					if (player.cocks[temp].knotMultiplier > 1) {
-						if (player.cocks[temp].knotMultiplier >= 1.8) 
-							outputText("  The obscenely swollen lump of flesh near the base of your " + player.cockDescript(temp) + " looks almost comically mismatched for your " + player.cockDescript(temp) + ".", false);
-						else if (player.cocks[temp].knotMultiplier >= 1.4) 
-							outputText("  A large bulge of flesh nestles just above the bottom of your " + player.cockDescript(temp) + ", to ensure it stays where it belongs during mating.", false);
-						else
-							outputText("  A small knot of thicker flesh is near the base of your " + player.cockDescript(temp) + ", ready to expand to help you lodge your " + player.cockDescript(temp) + " inside a female.", false);
-						//List knot thickness
-						outputText("  The knot is " + Math.floor(player.cocks[temp].cockThickness * player.cocks[temp].knotMultiplier * 10) / 10 + " inches thick when at full size.", false);
+					// Sock Flavor
+					if (player.cocks[cock_index].sock != "" && player.cocks[cock_index].sock != null){
+						// I dunno what was happening, but it looks like .sock is null, as it doesn't exist. I guess this is probably more left over from some of the restucturing.
+						// Anyways, check against null values, and stuff works again.
+						trace("Found a sock description (WTF even is a sock?)", player.cocks[cock_index].sock);
+						sockDescript(cock_index);
 					}
-						
-					if (player.cocks[temp].sock != "" && player.cocks[temp].sock != null)	// I dunno what was happening, but it looks like .sock is null, as it doesn't exist. I guess this is probably more left over from some of the restucturing.
-					{																		// Anyways, check against null values, and stuff works again.
-						trace("Found a sock description (WTF even is a sock?)", player.cocks[temp].sock);
-						sockDescript(temp);
-					}
-					temp++;
-					rando++;
-					outputText("\n", false);
-					if (rando > 3) rando = 0;
+					outputText("\n");
 				}
+
 				//Worm flavor
 				if (player.findStatusEffect(StatusEffects.Infested) >= 0)
-					outputText("Every now and again slimy worms coated in spunk slip partway out of your " + player.multiCockDescriptLight() + ", tasting the air like tongues of snakes.\n", false);
-				//DONE WITH COCKS, moving on!
+					outputText("Every now and again slimy worms coated in spunk slip partway out of your " + player.multiCockDescriptLight() + ", tasting the air like tongues of snakes.\n");
 			}
+
+
 			//Of Balls and Sacks!
 			if (player.balls > 0) 
 			{
