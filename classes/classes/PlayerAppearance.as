@@ -13,13 +13,13 @@ package classes
 		}
 
 		private function num_inches_and_centimetre (in_inches:Number):String {
-			var value = int(in_inches*precision * (flags[kFLAGS.USE_METRICS] ? 2.54 : 1)) / precision;
+			var value:int = int(in_inches * (flags[kFLAGS.USE_METRICS] ? 2.54 : 1));
 			if (flags[kFLAGS.USE_METRICS])  return "" + num2Text(value) + " centimetre" + (value == 1 ? "" : "s");
 			else                            return "" + num2Text(value) + " inch" +       (value == 1 ? "" : "es");
 		}
 
 		private function inches_and_centimetre (in_inches:Number, precision:int = 10):String {
-			var value = Math.round(in_inches*precision * (flags[kFLAGS.USE_METRICS] ? 2.54 : 1)) / precision;
+			var value:Number = Math.round(in_inches*precision * (flags[kFLAGS.USE_METRICS] ? 2.54 : 1)) / precision;
 			if (flags[kFLAGS.USE_METRICS])  return "" + value + " centimetre" + (value == 1 ? "" : "s");
 			else                            return "" + value + " inch" +       (value == 1 ? "" : "es");
 		}
