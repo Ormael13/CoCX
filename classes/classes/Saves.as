@@ -1043,7 +1043,6 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.autoSave = player.autoSave;
 		
 		//PLOTZ
-		saveFile.data.whitney = getGame().whitney;
 		saveFile.data.monk = getGame().monk;
 		saveFile.data.sand = getGame().sand;
 		saveFile.data.giacomo = getGame().giacomo;
@@ -2142,7 +2141,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.autoSave = saveFile.data.autoSave;
 		
 		//PLOTZ
-		game.whitney = saveFile.data.whitney;
 		game.monk = saveFile.data.monk;
 		game.sand = saveFile.data.sand;
 		if (saveFile.data.giacomo == undefined)

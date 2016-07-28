@@ -243,7 +243,6 @@
 			}
 			//PLOTZ
 			kGAMECLASS.monk = 0;
-			kGAMECLASS.whitney = 0;
 			kGAMECLASS.sand = 0;
 		//Replaced by flag	kGAMECLASS.beeProgress = 0;
 			kGAMECLASS.giacomo = 0;

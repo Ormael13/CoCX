@@ -314,7 +314,6 @@ the text from being too boring.
 		public var currentText:String;
 
 		//These plot variables are to be replaced.
-		public var whitney:Number;
 		public var monk:Number;
 		public var sand:Number;
 		public var giacomo:int;
@@ -475,7 +474,6 @@ the text from being too boring.
 			//{ region PlotVariables
 
 			//Plot variables
-			whitney = 0;
 			monk = 0;
 			sand = 0;
 			giacomo = 0;
