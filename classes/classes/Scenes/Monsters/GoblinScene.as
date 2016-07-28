@@ -230,7 +230,7 @@ package classes.Scenes.Monsters
 			//Dick stuff:
 			if (player.hasCock()) {
 				//Corrupt too big scene
-				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity() && player.cor > 80 && kGAMECLASS.monk > 2)
+				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity() && player.cor > 80 && flags[kFLAGS.JOJO_STATUS] > 2)
 					corruptTooBig = rapeAGoblinCorruptTooBig;
 				//Regular too big scene
 				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity())
