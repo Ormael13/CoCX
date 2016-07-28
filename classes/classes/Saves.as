@@ -1034,7 +1034,6 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.exploredForest = player.exploredForest;
 		saveFile.data.exploredDesert = player.exploredDesert;
 		saveFile.data.explored = player.explored;
-		saveFile.data.foundLake = getGame().foundLake;
 		saveFile.data.gameState = gameStateGet();
 		
 		//Time and Items
@@ -2131,7 +2130,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.exploredForest = saveFile.data.exploredForest;
 		player.exploredDesert = saveFile.data.exploredDesert;
 		player.explored = saveFile.data.explored;
-		game.foundLake = saveFile.data.foundLake;
 		
 		//Days
 		//Time and Items
