@@ -12,16 +12,22 @@ package classes
 			else                            return "" + Math.floor(in_inches / 12) + " foot " + in_inches % 12 + " inch";
 		}
 
-		private function num_inches_and_centimetre (in_inches:Number):String {
+		private function num_inches_and_centimetres (in_inches:Number):String {
 			var value:int = int(in_inches * (flags[kFLAGS.USE_METRICS] ? 2.54 : 1));
 			if (flags[kFLAGS.USE_METRICS])  return "" + num2Text(value) + " centimetre" + (value == 1 ? "" : "s");
 			else                            return "" + num2Text(value) + " inch" +       (value == 1 ? "" : "es");
 		}
 
-		private function inches_and_centimetre (in_inches:Number, precision:int = 10):String {
+		private function inches_and_centimetres (in_inches:Number, precision:int = 10):String {
 			var value:Number = Math.round(in_inches*precision * (flags[kFLAGS.USE_METRICS] ? 2.54 : 1)) / precision;
 			if (flags[kFLAGS.USE_METRICS])  return "" + value + " centimetre" + (value == 1 ? "" : "s");
 			else                            return "" + value + " inch" +       (value == 1 ? "" : "es");
+		}
+
+		private function inch_and_cm (in_inches:Number, precision:int = 10):String {
+			var value:Number = Math.round(in_inches*precision * (flags[kFLAGS.USE_METRICS] ? 2.54 : 1)) / precision;
+			if (flags[kFLAGS.USE_METRICS])  return "" + value + "-cm";
+			else                            return "" + value + "-inch";
 		}
 
 		public function appearance():void {
@@ -406,7 +412,7 @@ package classes
 			//Lizard horns
 			if (player.horns > 0 && player.hornType == HORNS_DRACONIC_X2) 
 			{
-				outputText("  A pair of " + num_inches_and_centimetre + " horns grow from the sides of your head, sweeping backwards and adding to your imposing visage.", false);
+				outputText("  A pair of " + num_inches_and_centimetres(player.horns) + " horns grow from the sides of your head, sweeping backwards and adding to your imposing visage.", false);
 			}
 			//Super lizard horns
 			if (player.hornType == HORNS_DRACONIC_X4_12_INCH_LONG) 
@@ -946,8 +952,8 @@ package classes
 			if (player.breastRows.length == 1) 
 			{
 				outputText("You have " + num2Text(player.breastRows[temp].breasts) + " " + player.breastDescript(temp) + ", each supporting ", false);
-				outputText(num2Text(player.breastRows[temp].nipplesPerBreast) + " "); //Number of nipples.
-				outputText(inches_and_centimetre(player.nippleLength) + " ");		  // Length of nipples
+				outputText( player.breastRows[temp].nipplesPerBreast == 1 ? "a" : num2Text(player.breastRows[temp].nipplesPerBreast)); //Number of nipples.
+				outputText(" " + inch_and_cm(player.nippleLength) + " ");		  // Length of nipples
 				outputText(player.nippleDescript(temp) + (player.breastRows[0].nipplesPerBreast == 1 ? "." : "s."), false); //Nipple description and plural
 				if (player.breastRows[0].milkFullness > 75) 
 					outputText("  Your " + player.breastDescript(temp) + " are painful and sensitive from being so stuffed with milk.  You should release the pressure soon.", false);
@@ -973,9 +979,8 @@ package classes
 					if (temp == 4) 
 						outputText("\n--Your fifth and final mammary grouping swells with ", false);
 					outputText(num2Text(player.breastRows[temp].breasts) + " " + player.breastDescript(temp) + " with ", false);
-					outputText(num2Text(player.breastRows[temp].nipplesPerBreast) + " "); //Number of nipples per breast
-					if (flags[kFLAGS.USE_METRICS] > 0 ) outputText(int(player.nippleLength * 2.54 * 10) / 10 + "-cm "); //Centimeter
-					else outputText(int(player.nippleLength * 10) / 10 + "-inch "); //Inches
+					outputText(num2Text(player.breastRows[temp].nipplesPerBreast)); //Number of nipples per breast
+					outputText(" " + inch_and_cm(player.nippleLength) + " ");		// Length of nipples
 					outputText(player.nippleDescript(temp) + (player.breastRows[0].nipplesPerBreast == 1 ? " each." : "s each."), false); //Description and Plural
 					if (player.breastRows[temp].breastRating >= 1) 
 						outputText("  They could easily fill a " + player.breastCup(temp) + " bra.", false);
@@ -1001,7 +1006,7 @@ package classes
 			{
 				if (player.isTaur()) 
 					outputText("\nYour equipment has shifted to lie between your hind legs, like a feral animal.", false);
-				outputText("\nYour " + player.cockDescript(temp) + " is " + inches_and_centimetre(player.cocks[temp].cockLength) + " long and " + inches_and_centimetre(player.cocks[temp].cockThickness) + (player.cocks[temp].cockThickness < 10 ? "thick." : "wide.") );
+				outputText("\nYour " + player.cockDescript(temp) + " is " + inches_and_centimetres(player.cocks[temp].cockLength) + " long and " + inches_and_centimetres(player.cocks[temp].cockThickness) + (player.cocks[temp].cockThickness < 10 ? "thick." : "wide.") );
 
 				//Horsecock flavor
 				if (player.cocks[temp].cockType == CockTypesEnum.HORSE) 
@@ -1287,12 +1292,12 @@ package classes
 					outputText("\nYour womanly parts have shifted to lie between your hind legs, in a rather feral fashion.", false);
 				outputText("\n", false);
 				if (player.vaginas.length == 1) 
-					outputText("You have a " + player.vaginaDescript(0) + ", with a " + inches_and_centimetre(player.clitLength) + " clit");
+					outputText("You have a " + player.vaginaDescript(0) + ", with a " + inches_and_centimetres(player.clitLength) + " clit");
 				if (player.vaginas[0].virgin) 
 					outputText(" and an intact hymen", false); // Wait, won't this fuck up, with multiple vaginas?
 				outputText(".  ", false);
 				if (player.vaginas.length > 1) 
-					outputText("You have " + player.vaginas.length+ " " + player.vaginaDescript(0) + "s, with " + inches_and_centimetre(player.clitLength) + "-centimetre clits each.  ");
+					outputText("You have " + player.vaginas.length+ " " + player.vaginaDescript(0) + "s, with " + inches_and_centimetres(player.clitLength) + "-centimetre clits each.  ");
 				if (player.lib < 50 && player.lust < 50) //not particularly horny
 				
 				{
