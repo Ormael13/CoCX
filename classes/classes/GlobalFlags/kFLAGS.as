@@ -2300,7 +2300,7 @@ public static const UNKNOWN_FLAG_NUMBER_02291:int                               
 public static const UNKNOWN_FLAG_NUMBER_02292:int                                   = 2292;
 public static const UNKNOWN_FLAG_NUMBER_02293:int                                   = 2293;
 public static const UNKNOWN_FLAG_NUMBER_02294:int                                   = 2294;
-public static const UNKNOWN_FLAG_NUMBER_02295:int                                   = 2295;
+public static const SANDWITCH_SERVICED:int                                          = 2295;	// Number of times, the player has serviced a sand witch.
 public static const UNKNOWN_FLAG_NUMBER_02296:int                                   = 2296;
 public static const UNKNOWN_FLAG_NUMBER_02297:int                                   = 2297;
 public static const UNKNOWN_FLAG_NUMBER_02298:int                                   = 2298;

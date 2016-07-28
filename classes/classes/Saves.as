@@ -1044,7 +1044,6 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		
 		//PLOTZ
 		saveFile.data.monk = getGame().monk;
-		saveFile.data.sand = getGame().sand;
 		saveFile.data.giacomo = getGame().giacomo;
 		saveFile.data.beeProgress = 0; //Now saved in a flag. getGame().beeProgress;
 		
@@ -2142,7 +2141,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		
 		//PLOTZ
 		game.monk = saveFile.data.monk;
-		game.sand = saveFile.data.sand;
+		flags[kFLAGS.SANDWITCH_SERVICED] = (flags[kFLAGS.SANDWITCH_SERVICED] || saveFile.data.sand);
 		if (saveFile.data.giacomo == undefined)
 			game.giacomo = 0;
 		else
