@@ -1151,19 +1151,19 @@ package classes.Scenes
 				//Minerva Pregnancy
 				else if (player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA) {
 					if (player.pregnancyIncubation == 216) {
-						outputText("<b>You realize your belly has gotten slightly larger.  Maybe you need to cut back on the strange food.</b>");
+						outputText("<b>You realize your belly has gotten slightly larger.  You could go for some peaches around now.</b>");
 						displayedUpdate = true;
 					}
 					if (player.pregnancyIncubation == 144) {
-						outputText("<b>Your distended belly shows obvious signs of pregnancy.</b>");
+						outputText("<b>Your belly is distended with pregnancy. You wish you could spend all day bathing.</b>");
 						displayedUpdate = true;
 					}
 					if (player.pregnancyIncubation == 72) {
-						outputText("<b>Your belly is getting larger.  You feel like you're housing a twin.</b>");
+						outputText("<b>Your belly has grown enough for it to be twins.  Well, you <em>did</em> want to restore sirens to the world.</b>");
 						displayedUpdate = true;
 					}
 					if (player.pregnancyIncubation == 24) {
-						outputText("<b>Your belly is as big as it can get.  You have a feeling that you'll give birth to a twin soon.</b>");
+						outputText("<b>Your belly is as big as it can get.  Your unborn children shuffle relentlessly, calming only when you try singing lullabys.</b>");
 						displayedUpdate = true;
 					}
 					if (player.pregnancyIncubation == 144 || player.pregnancyIncubation == 72 || player.pregnancyIncubation == 85 || player.pregnancyIncubation == 150) {
@@ -1204,7 +1204,7 @@ package classes.Scenes
 						displayedUpdate = true;
 					}
 					if (player.pregnancyIncubation == 576) {
-						outputText("<b>Your belly has yet to betray the sheer size of your expected offspring, but it's certainly making an attempt. At this rate, you'll need to visit the father more just to keep your strength up.</b>");
+						outputText("<b>Your belly has yet to betray the sheer size of your expected offspring, but it's certainly making an attempt.  At this rate, you'll need to visit the father more just to keep your strength up.</b>");
 						displayedUpdate = true;
 					}
 					if (player.pregnancyIncubation == 288) {
