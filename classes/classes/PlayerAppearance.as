@@ -1021,7 +1021,7 @@ package classes
 
 			// Cock Descriptions //
 			if (player.hasCock()) {
-				rando = rand(5);
+				rando = rand(100);
 
 				// Is taur and has multiple cocks?
 				if      (player.isTaur() && player.cockTotal() == 1)
@@ -1033,20 +1033,20 @@ package classes
 				else
 					outputText("\nWhere a penis would normally be located, you have instead grown " + player.multiCockDescript() + "!\n");
 			
-				for (var cock_index = 0; cock_index < player.cocks.length; cock_index++) {
-					rando = ++rando % 5;
+				for (var cock_index:int = 0; cock_index < player.cocks.length; cock_index++) {
+					rando++;
 
 					// How to start the sentence?
 					if  (player.cockTotal() == 1)  outputText("Your ");
 					else if (cock_index == 0)      outputText("--Your first ");
-					else if (rando == 0)           outputText("--The " + ordinal_of(cock_index+1) + " of your ");
-					else if (rando == 1)  		   outputText("--One of your ");
-					else if (rando == 2)  		   outputText("--Another of your ");
-					else if (rando == 3)  		   outputText("--The next ");
-					else if (rando == 4)           outputText("--The " + ordinal_of(cock_index+1) + " ");
+					else if (rando % 5 == 0)       outputText("--The next ");
+					else if (rando % 5 == 1)       outputText("--The " + ordinal_of(cock_index+1) + " of your ");
+					else if (rando % 5 == 2)       outputText("--One of your ");
+					else if (rando % 5 == 3)       outputText("--The " + ordinal_of(cock_index+1) + " ");
+					else if (rando % 5 == 4)       outputText("--Another of your ");
 
 					// How large?
-					outputText(player.cockDescript(cock_index) + (rando >= 3 || cock_index == 0 ? "":"s") +  " is " + num_inches_and_centimetres(player.cocks[cock_index].cockLength) + " long and ");
+					outputText(player.cockDescript(cock_index) + ((rando % 5) % 3 == 0 || cock_index == 0 ? "":"s") +  " is " + num_inches_and_centimetres(player.cocks[cock_index].cockLength) + " long and ");
 					outputText(num_inches_and_centimetres(player.cocks[cock_index].cockThickness));
 					if      (rando % 3 == 0)  outputText(" wide.");
 					else if (rando % 3 == 1)  outputText(" thick.");
