@@ -482,7 +482,7 @@ package classes.Scenes
 						}
 						else {
 							outputText("\n<b>The unmistakable bulge of pregnancy is visible in your tummy.  It's feeling heavier by the moment.  ", false);
-							if (getGame().monk > 0) {
+							if (flags[kFLAGS.JOJO_STATUS] > 0) {
 								if (player.cor < 40) outputText("You are distressed by your unwanted pregnancy, and your inability to force this thing out of you.</b>", false);
 								if (player.cor >= 40 && player.cor < 75) outputText("Considering the size of the creatures you've fucked, you hope it doesn't hurt when it comes out.</b>", false);
 								if (player.cor >= 75) outputText("You think dreamily about the monstrous cocks that have recently been fucking you, and hope that your offspring inherit such a pleasure tool.</b>", false);
@@ -1870,7 +1870,7 @@ package classes.Scenes
 				}		
 
 				//Main Text here
-				if (player.pregnancyType == PregnancyStore.PREGNANCY_JOJO && (getGame().monk < 0 || flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) && !prison.inPrison) {
+				if (player.pregnancyType == PregnancyStore.PREGNANCY_JOJO && (flags[kFLAGS.JOJO_STATUS] < 0 || flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) && !prison.inPrison) {
 					if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) {
 						kGAMECLASS.joyScene.playerGivesBirthToJoyBabies();
 						return true;

@@ -241,13 +241,10 @@
 				player.nosePShort = "";
 				player.nosePLong = "";
 			}
-			//PLOTZ
-			kGAMECLASS.monk = 0;
-			kGAMECLASS.whitney = 0;
-			kGAMECLASS.sand = 0;
-		//Replaced by flag	kGAMECLASS.beeProgress = 0;
-			kGAMECLASS.giacomo = 0;
+
+			// Init none-flag plot variables (The few there still are...)
 			kGAMECLASS.isabellaScene.isabellaOffspringData = []; //CLEAR!
+
 			//Lets get this bitch started
 			kGAMECLASS.inCombat = false;
 			kGAMECLASS.inDungeon = false;

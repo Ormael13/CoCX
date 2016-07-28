@@ -2570,7 +2570,6 @@ private function promptSaveUpdate():void {
 		flags[kFLAGS.GIACOMO_NOTICES_WORMS] = 0;
 		flags[kFLAGS.PHOENIX_ENCOUNTERED] = 0;
 		flags[kFLAGS.PHOENIX_WANKED_COUNTER] = 0;
-		if (kGAMECLASS.giacomo > 0) flags[kFLAGS.GIACOMO_MET] = 1;
 		flags[kFLAGS.MOD_SAVE_VERSION] = 4;
 		doCamp();
 		return;

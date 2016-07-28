@@ -758,14 +758,14 @@ package classes.Scenes.Areas.Forest
 			clearOutput();
 			spriteSelect(6);
 			//The first time you only get the option to have eggs laid in your bum ;) BEE_GIRL_TALKED
-			if (attitude < BEE_GIRL_TALKED) { //Replaced beeProgress
+			if (attitude < BEE_GIRL_TALKED) {
+				attitude = BEE_GIRL_TALKED;
 				outputText("She stops buzzing, taken aback by your resistance to her wiles.  <i>“Y-you zzzure you don't want to cuddle with me?”</i> she stammers, thrusting her exotic black and yellow breasts forwards enticingly.  With some difficulty you manage to pry your eyes back up to her face and ask her why she is trying to tempt you to embrace her.\n\n");
 				outputText("She buzzes out a giggle, <i>“Well where elzzz would I lay eggzzz?  The coloniezzz alwayzzz need more workerzzz, and as one of the Queen'zzz handmaidenzzz I get zzzooooo full of eggzzz...  I promizzze to make it feel gooood if you come to me.”</i>\n\n");
 				if (player.cor < 33) outputText("You are sure no good can come of this, but your body is ready to say yes.");
 				if (player.cor >= 33 && player.cor <= 66) outputText("Her offer intrigues you, and the arousing sweetness of her scent makes it difficult to resist.");
 				if (player.cor > 66) outputText("Looking at her through lust-tinted eyes, you're sure she can deliver on her offer.  Getting closer to her scent alone would be worth bearing a few eggs...");
 				outputText("\n\nDo you accept her offer?");
-				attitude = BEE_GIRL_TALKED; //Replaced beeProgress
 				doYesNo(beeEncounterClassic, camp.returnToCampUseOneHour);
 			}
 			else {

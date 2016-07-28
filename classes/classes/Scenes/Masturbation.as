@@ -1949,7 +1949,7 @@ package classes.Scenes {
 					//(+sensitivity by 3 & intellect -2 & libido +1	)
 				}
 				//Option Jojo veyeurism?
-				if (getGame().monk >= 5 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
+				if (flags[kFLAGS.JOJO_STATUS] >= 5 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
 					outputText("\n\nAs you stand and try to clean up you manage to spot Jojo off in the woods, ");
 					if (player.findStatusEffect(StatusEffects.TentacleJojo) >= 0)
 						outputText("his tentacles splattering mouse-jizz everywhere as he gets off from your show.");

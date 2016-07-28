@@ -163,9 +163,6 @@ package classes.Scenes.NPCs
 		{
 			return kGAMECLASS.joyScene;
 		}
-		protected function get monk():Number {
-			return kGAMECLASS.monk;
-		}
 		public function campCorruptJojo():Boolean
 		{
 			return kGAMECLASS.jojoScene.campCorruptJojo();
