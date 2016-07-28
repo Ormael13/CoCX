@@ -1200,21 +1200,21 @@ package classes.Scenes
 						displayedUpdate = true;
 					}
 					if (player.pregnancyIncubation == 864) {
-						outputText("<b>Your distended belly shows obvious signs of pregnancy.</b>");
+						outputText("<b>Your distended belly has grown noticably, but you still have a long way to go.</b>");
 						displayedUpdate = true;
 					}
 					if (player.pregnancyIncubation == 576) {
-						outputText("<b>Your belly is getting larger.</b>");
+						outputText("<b>Your belly has yet to betray the sheer size of your expected offspring, but it's certainly making an attempt. At this rate, you'll need to visit the father more just to keep your strength up.</b>");
 						displayedUpdate = true;
 					}
 					if (player.pregnancyIncubation == 288) {
-						outputText("<b>Your belly is as big as it can get.  You have a feeling that you'll give birth to a behemoth soon.</b>");
+						outputText("<b>Your belly can't grow much larger than it already is; you hope you'll give birth soon.</b>");
 						displayedUpdate = true;
 					}
 					if (player.pregnancyIncubation == 1024 || player.pregnancyIncubation == 768 || player.pregnancyIncubation == 512 || player.pregnancyIncubation == 256) {
 						//Increase lactation!
 						if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
-							outputText("\nYour breasts feel swollen with all the extra milk they're accumulating.  You wonder just what kind of creature they're getting ready to feed.\n", false);
+							outputText("\nYour breasts feel swollen with all the extra milk they're accumulating.  You hope it'll be enough for the coming birth.\n", false);
 							player.boostLactation(.5);
 						}
 						if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() > 0 && player.biggestLactation() < 1) {
@@ -1337,7 +1337,7 @@ package classes.Scenes
 						displayedUpdate = true;
 					}
 				}
-				//Sand Tarps in butt pregnancy
+				//Sand Traps in butt pregnancy
 				if (player.buttPregnancyType == PregnancyStore.PREGNANCY_SANDTRAP || player.buttPregnancyType == PregnancyStore.PREGNANCY_SANDTRAP_FERTILE) {
 					if (player.buttPregnancyIncubation == 36) {
 						//(Eggs take 2-3 days to lay)
@@ -1402,7 +1402,7 @@ package classes.Scenes
 				displayedUpdate = true;
 				player.buttKnockUpForce(); //Clear Butt Pregnancy
 			}
-			//Bive birf to dragons
+			//Give birf to dragons
 			if (player.pregnancyIncubation == 1 && player.pregnancyType == PregnancyStore.PREGNANCY_EMBER) {
 				getGame().emberScene.giveBirthToEmberKids();
 				displayedUpdate = true;
