@@ -313,7 +313,6 @@ the text from being too boring.
 		public var time :TimeModel;
 		public var currentText:String;
 
-		public var explored:Boolean;
 		//These plot variables are to be replaced.
 		public var whitney:Number;
 		public var monk:Number;
@@ -476,7 +475,6 @@ the text from being too boring.
 			//{ region PlotVariables
 
 			//Plot variables
-			explored = false;
 			whitney = 0;
 			monk = 0;
 			sand = 0;
