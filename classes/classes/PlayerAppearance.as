@@ -5,18 +5,16 @@ package classes
 	
 	public class PlayerAppearance extends BaseContent {
 
-		private static const BASE_ORDINALS:Array = ["zeroth", "first", "second",
-			"third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"];
-
 		public function PlayerAppearance() {}
 		
+		/*** Internal methods; for outputting text in proper measure system ***/
+
 		private function feet_inch_and_metres (in_inches:Number):String {
 			if (flags[kFLAGS.USE_METRICS])  return "" + (Math.round(in_inches * 2.54) / 100).toFixed(2) + " metres";
 			else                            return "" + Math.floor(in_inches / 12) + " foot " + in_inches % 12 + " inch";
 		}
 
 		private function num_inches_and_centimetres (in_inches:Number):String {
-
 			// Various special cases.
 			if (in_inches < 1)
 				return inches_and_centimetres(in_inches)
@@ -43,18 +41,7 @@ package classes
 			else                            return "" + value + "-inch";
 		}
 
-		private function ordinal_of (nr:int):String {
-			if (nr < BASE_ORDINALS.length)
-				return BASE_ORDINALS[nr];
-			else if (nr % 10 == 1)
-				return nr + "st";
-			else if (nr % 10 == 2)
-				return nr + "nd";
-			else if (nr % 10 == 3)
-				return nr + "rd";
-			else
-				return nr + "th";
-		}
+		/*** Text methods ***/
 
 		public function appearance():void {
 			funcs = new Array();
@@ -1048,9 +1035,9 @@ package classes
 					if  (player.cockTotal() == 1)  outputText("Your ");
 					else if (cock_index == 0)      outputText("--Your first ");
 					else if (rando % 5 == 0)       outputText("--The next ");
-					else if (rando % 5 == 1)       outputText("--The " + ordinal_of(cock_index+1) + " of your ");
+					else if (rando % 5 == 1)       outputText("--The " + num2Text2(cock_index+1) + " of your ");
 					else if (rando % 5 == 2)       outputText("--One of your ");
-					else if (rando % 5 == 3)       outputText("--The " + ordinal_of(cock_index+1) + " ");
+					else if (rando % 5 == 3)       outputText("--The " + num2Text2(cock_index+1) + " ");
 					else if (rando % 5 == 4)       outputText("--Another of your ");
 
 					// How large?
