@@ -473,7 +473,6 @@ the text from being too boring.
 
 			//Plot variables
 			monk = 0;
-//Replaced by flag			beeProgress = 0;
 
 //			itemStorage = [];
 //			gearStorage = [];

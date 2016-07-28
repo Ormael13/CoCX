@@ -1044,7 +1044,6 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		
 		//PLOTZ
 		saveFile.data.monk = getGame().monk;
-		saveFile.data.beeProgress = 0; //Now saved in a flag. getGame().beeProgress;
 		
 		saveFile.data.isabellaOffspringData = [];
 		for (i = 0; i < kGAMECLASS.isabellaScene.isabellaOffspringData.length; i++) {
@@ -2142,8 +2141,9 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		game.monk = saveFile.data.monk;
 		flags[kFLAGS.SANDWITCH_SERVICED] = (flags[kFLAGS.SANDWITCH_SERVICED] || saveFile.data.sand);
 		flags[kFLAGS.GIACOMO_MET]        = (flags[kFLAGS.GIACOMO_MET] || saveFile.data.giacomo);
-		if (saveFile.data.beeProgress != undefined && saveFile.data.beeProgress == 1) game.forest.beeGirlScene.setTalked(); //Bee Progress update is now in a flag
-			//The flag will be zero for any older save that still uses beeProgress and newer saves always store a zero in beeProgress, so we only need to update the flag on a value of one.
+		
+		if (saveFile.data.beeProgress == 1)
+			game.forest.beeGirlScene.setTalked();
 			
 		kGAMECLASS.isabellaScene.isabellaOffspringData = [];
 		if (saveFile.data.isabellaOffspringData == undefined) {
