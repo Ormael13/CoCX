@@ -3,8 +3,11 @@ package classes
 	import classes.*; 
 	import classes.GlobalFlags.*;
 	
-	public class PlayerAppearance extends BaseContent
-	{
+	public class PlayerAppearance extends BaseContent {
+
+		private static const var BASE_ORDINALS:Array = ["zeroth", "first", "second",
+			"third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"];
+
 		public function PlayerAppearance() {}
 		
 		private function feet_inch_and_metres (in_inches:Number):String {
@@ -13,6 +16,8 @@ package classes
 		}
 
 		private function num_inches_and_centimetres (in_inches:Number):String {
+			if (in_inches < 1)
+				return inches_and_centimetres(in_inches)
 			var value:int = int(in_inches * (flags[kFLAGS.USE_METRICS] ? 2.54 : 1));
 			if (flags[kFLAGS.USE_METRICS])  return "" + num2Text(value) + " centimetre" + (value == 1 ? "" : "s");
 			else                            return "" + num2Text(value) + " inch" +       (value == 1 ? "" : "es");
@@ -28,6 +33,19 @@ package classes
 			var value:Number = Math.round(in_inches*precision * (flags[kFLAGS.USE_METRICS] ? 2.54 : 1)) / precision;
 			if (flags[kFLAGS.USE_METRICS])  return "" + value + "-cm";
 			else                            return "" + value + "-inch";
+		}
+
+		private function ordinal_of (nr:int):String {
+			if (nr < BASE_ORDINALS.length)
+				return BASE_ORDINALS[nr];
+			else if (nr % 10 == 1)
+				return nr + "st";
+			else if (nr % 10 == 2)
+				return nr + "nd";
+			else if (nr % 10 == 3)
+				return nr + "rd";
+			else
+				return nr + "th";
 		}
 
 		public function appearance():void {
@@ -1006,7 +1024,7 @@ package classes
 			{
 				if (player.isTaur()) 
 					outputText("\nYour equipment has shifted to lie between your hind legs, like a feral animal.", false);
-				outputText("\nYour " + player.cockDescript(temp) + " is " + inches_and_centimetres(player.cocks[temp].cockLength) + " long and " + inches_and_centimetres(player.cocks[temp].cockThickness) + (player.cocks[temp].cockThickness < 10 ? "thick." : "wide.") );
+				outputText("\nYour " + player.cockDescript(temp) + " is " + inches_and_centimetres(player.cocks[temp].cockLength) + " long and " + inches_and_centimetres(player.cocks[temp].cockThickness) + (player.cocks[temp].cockThickness < 10 ? " thick." : " wide.") );
 
 				//Horsecock flavor
 				if (player.cocks[temp].cockType == CockTypesEnum.HORSE) 
@@ -1023,7 +1041,7 @@ package classes
 					else if (player.cocks[temp].knotMultiplier > 1) 
 						outputText("  A small knot of thicker flesh is near the base of your " + player.cockDescript(temp) + ", ready to expand to help you lodge it inside a female.", false);
 					//List thickness
-					outputText("  The knot is " + Math.round(player.cocks[temp].cockThickness * player.cocks[temp].knotMultiplier * 10)/10 + " inches wide when at full size.", false);
+					outputText("  The knot is " + inches_and_centimetres(player.cocks[temp].cockThickness * player.cocks[temp].knotMultiplier) + " wide when at full size.", false);
 				}
 				//Demon cock flavor
 				if (player.cocks[temp].cockType == CockTypesEnum.DEMON) 
@@ -1091,74 +1109,24 @@ package classes
 			if (player.cocks.length > 1) 
 			{
 				temp = 0;
-				rando = rand(4);
+				rando = rand(3);
 				if (player.isTaur()) 
 					outputText("\nBetween hind legs of your bestial body you have grown " + player.multiCockDescript() + "!\n", false);
 				else outputText("\nWhere a penis would normally be located, you have instead grown " + player.multiCockDescript() + "!\n", false);
-				while(temp < player.cocks.length) 
-				
-				{
-					
-					//middle cock description
-					if (rando == 0) 
-					{
-						if (temp == 0)outputText("--Your first ", false);
-						else outputText("--Your next ", false);
-						outputText(player.cockDescript(temp), false);
-						outputText(" is ", false);
-						outputText(int(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
-						if (Math.floor(player.cocks[temp].cockThickness) >= 2) 
-							outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches wide.", false);
-						else 
-						{
-							if (player.cocks[temp].cockThickness == 1) 
-								outputText("one inch wide.", false);
-							else outputText(Math.round(player.cocks[temp].cockThickness*10)/10 + " inches wide.", false);
-						}
-					}
-					if (rando == 1) 
-					{
-						outputText("--One of your ", false);
-						outputText(player.cockDescript(temp) + "s is " + Math.round(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
-						if (Math.floor(player.cocks[temp].cockThickness) >= 2) 
-							outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches thick.", false);
-						else 
-						{
-							if (player.cocks[temp].cockThickness == 1) 
-								outputText("one inch thick.", false);
-							else outputText(Math.round(player.cocks[temp].cockThickness*10)/10 + " inches thick.", false);
-						}
-					}
-					if (rando == 2) 
-					{
-						if (temp > 0) 
-							outputText("--Another of your ", false);
-						else outputText("--One of your ", false);
-						outputText(player.cockDescript(temp) + "s is " + Math.round(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
-						if (Math.floor(player.cocks[temp].cockThickness) >= 2) 
-							outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches thick.", false);
-						else 
-						{
-							if (player.cocks[temp].cockThickness == 1) 
-								outputText("one inch thick.", false);
-							else outputText(Math.round(player.cocks[temp].cockThickness*10)/10 + " inches thick.", false);
-						}
-					}
-					if (rando == 3) 
-					{
-						if (temp > 0) 
-							outputText("--Your next ", false);
-						else outputText("--Your first ", false);
-						outputText(player.cockDescript(temp) + " is " + Math.round(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
-						if (Math.floor(player.cocks[temp].cockThickness) >= 2) 
-							outputText(num2Text(Math.round(player.cocks[temp].cockThickness * 10)/10) + " inches in diameter.", false);
-						else 
-						{
-							if (Math.round(player.cocks[temp].cockThickness*10)/10 == 1) 
-								outputText("one inch in diameter.", false);
-							else outputText(Math.round(player.cocks[temp].cockThickness*10)/10 + " inches in diameter.", false);
-						}
-					}
+				while(temp < player.cocks.length) {
+
+					// How to start the sentence?
+					if      (temp  == 0 || rando == 0)  outputText("--The " + ordinal_of(temp+1) + " of your ");
+					else if (rando == 1)  				outputText("--One of your ");
+					else if (rando == 2)  				outputText("--Another of your ");
+
+					// How large?
+					outputText(player.cockDescript(temp) + "s is " + num_inches_and_centimetres(player.cocks[temp].cockLength) + " long and ");
+					outputText(num_inches_and_centimetres(player.cocks[temp].cockThickness));
+					if      (rando == 0)  outputText(" wide.");
+					else if (rando == 1)  outputText(" thick.");
+					else if (rando == 2)  outputText(" in diameter.");
+
 					//horse cock flavor
 					if (player.cocks[temp].cockType == CockTypesEnum.HORSE) 
 					{
