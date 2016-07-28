@@ -314,7 +314,6 @@ the text from being too boring.
 		public var currentText:String;
 
 		public var explored:Boolean;
-		public var foundMountain:Boolean;
 		public var foundLake:Boolean;
 		//These plot variables are to be replaced.
 		public var whitney:Number;
@@ -479,7 +478,6 @@ the text from being too boring.
 
 			//Plot variables
 			explored = false;
-			foundMountain = false;
 			foundLake = false;
 			whitney = 0;
 			monk = 0;
