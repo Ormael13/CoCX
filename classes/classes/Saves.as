@@ -1034,10 +1034,6 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.exploredForest = player.exploredForest;
 		saveFile.data.exploredDesert = player.exploredDesert;
 		saveFile.data.explored = player.explored;
-		saveFile.data.foundForest = getGame().foundForest;
-		saveFile.data.foundDesert = getGame().foundDesert;
-		saveFile.data.foundMountain = getGame().foundMountain;
-		saveFile.data.foundLake = getGame().foundLake;
 		saveFile.data.gameState = gameStateGet();
 		
 		//Time and Items
@@ -1046,13 +1042,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.days = model.time.days;
 		saveFile.data.autoSave = player.autoSave;
 		
-		//PLOTZ
-		saveFile.data.whitney = getGame().whitney;
-		saveFile.data.monk = getGame().monk;
-		saveFile.data.sand = getGame().sand;
-		saveFile.data.giacomo = getGame().giacomo;
-		saveFile.data.beeProgress = 0; //Now saved in a flag. getGame().beeProgress;
-		
+		// Save non-flag plot variables.
 		saveFile.data.isabellaOffspringData = [];
 		for (i = 0; i < kGAMECLASS.isabellaScene.isabellaOffspringData.length; i++) {
 			saveFile.data.isabellaOffspringData.push(kGAMECLASS.isabellaScene.isabellaOffspringData[i]);
@@ -2134,10 +2124,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.exploredForest = saveFile.data.exploredForest;
 		player.exploredDesert = saveFile.data.exploredDesert;
 		player.explored = saveFile.data.explored;
-		game.foundForest = saveFile.data.foundForest;
-		game.foundDesert = saveFile.data.foundDesert;
-		game.foundMountain = saveFile.data.foundMountain;
-		game.foundLake = saveFile.data.foundLake;
 		
 		//Days
 		//Time and Items
@@ -2150,15 +2136,12 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.autoSave = saveFile.data.autoSave;
 		
 		//PLOTZ
-		game.whitney = saveFile.data.whitney;
-		game.monk = saveFile.data.monk;
-		game.sand = saveFile.data.sand;
-		if (saveFile.data.giacomo == undefined)
-			game.giacomo = 0;
-		else
-			game.giacomo = saveFile.data.giacomo;
-		if (saveFile.data.beeProgress != undefined && saveFile.data.beeProgress == 1) game.forest.beeGirlScene.setTalked(); //Bee Progress update is now in a flag
-			//The flag will be zero for any older save that still uses beeProgress and newer saves always store a zero in beeProgress, so we only need to update the flag on a value of one.
+		flags[kFLAGS.JOJO_STATUS]        = (flags[kFLAGS.JOJO_STATUS] || saveFile.data.monk);
+		flags[kFLAGS.SANDWITCH_SERVICED] = (flags[kFLAGS.SANDWITCH_SERVICED] || saveFile.data.sand);
+		flags[kFLAGS.GIACOMO_MET]        = (flags[kFLAGS.GIACOMO_MET] || saveFile.data.giacomo);
+		
+		if (saveFile.data.beeProgress == 1)
+			game.forest.beeGirlScene.setTalked();
 			
 		kGAMECLASS.isabellaScene.isabellaOffspringData = [];
 		if (saveFile.data.isabellaOffspringData == undefined) {

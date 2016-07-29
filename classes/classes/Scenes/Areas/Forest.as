@@ -154,8 +154,10 @@ package classes.Scenes.Areas
 			
 			//Build choice list!
 			choice[choice.length] = 0; //General Goblin and Imp Encounters
-			if ((player.findStatusEffect(StatusEffects.PureCampJojo) < 0 && !camp.campCorruptJojo()) && flags[kFLAGS.JOJO_DEAD_OR_GONE] <= 0 && (kGAMECLASS.monk < 2 || rand(2) == 0)) choice[choice.length] = 1; //Jojo
-			if ((player.findStatusEffect(StatusEffects.PureCampJojo) < 0 && !camp.campCorruptJojo()) && flags[kFLAGS.JOJO_DEAD_OR_GONE] <= 0 && player.findPerk(PerkLib.PiercedFurrite) >= 0 && rand(5) == 0 && (player.cor > 25 || kGAMECLASS.monk > 0)) choice[choice.length] = 1; //Extra chance of Jojo encounter.
+			if (player.findStatusEffect(StatusEffects.PureCampJojo) < 0 && !camp.campCorruptJojo() && flags[kFLAGS.JOJO_DEAD_OR_GONE] <= 0 && (flags[kFLAGS.JOJO_STATUS] < 2 || rand(2) == 0))
+				choice[choice.length] = 1; //Jojo
+			if (player.findStatusEffect(StatusEffects.PureCampJojo) < 0 && !camp.campCorruptJojo() && flags[kFLAGS.JOJO_DEAD_OR_GONE] <= 0 && player.findPerk(PerkLib.PiercedFurrite) >= 0 && rand(5) == 0 && (player.cor > 25 || flags[kFLAGS.JOJO_STATUS] > 0))
+				choice[choice.length] = 1; //Extra chance of Jojo encounter.
 			if (player.level >= 2) choice[choice.length] = 2; //Tentacle Beast
 			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100 && rand(100) >= Math.round(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] * 0.75)) choice[choice.length] = 3; //Corrupted Glade
 			choice[choice.length] = 4; //Trip on a root
@@ -219,13 +221,12 @@ package classes.Scenes.Areas
 					break;
 				case 1: //Jojo
 					clearOutput();
-					if (kGAMECLASS.monk == 0 && player.findStatusEffect(StatusEffects.PureCampJojo) < 0) 
-					{	
+					if (flags[kFLAGS.JOJO_STATUS] == 0 && player.findStatusEffect(StatusEffects.PureCampJojo) < 0) {
 						if (player.cor < 25)
 						{
 							if (player.level >= 4)
 							{
-								kGAMECLASS.monk = 1;
+								flags[kFLAGS.JOJO_STATUS] = 1;
 								kGAMECLASS.jojoScene.lowCorruptionJojoEncounter();
 								return;
 							}
@@ -242,12 +243,10 @@ package classes.Scenes.Areas
 							kGAMECLASS.jojoScene.highCorruptionJojoEncounter();
 						}
 						return;
-					}
-					else if (kGAMECLASS.monk == 1 || kGAMECLASS.monk < 0) { //Negative monk value indicates rape is disabled.
-						kGAMECLASS.jojoScene.repeatJojoEncounter();
-					}
-					else if (kGAMECLASS.monk >= 2) { //Angry/Horny Jojo
+					} else if (flags[kFLAGS.JOJO_STATUS] >= 2) { //Angry/Horny Jojo
 						kGAMECLASS.jojoScene.corruptJojoEncounter();
+					} else { // JOJO_STATUS is 1 or Negative (indicates rape is disabled.)
+						kGAMECLASS.jojoScene.repeatJojoEncounter();
 					}
 					break;
 				case 2: //Tentacle Beast

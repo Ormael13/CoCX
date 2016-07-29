@@ -313,17 +313,6 @@ the text from being too boring.
 		public var time :TimeModel;
 		public var currentText:String;
 
-		public var explored:Boolean;
-		public var foundForest:Boolean;
-		public var foundDesert:Boolean;
-		public var foundMountain:Boolean;
-		public var foundLake:Boolean;
-		//These plot variables are to be replaced.
-		public var whitney:Number;
-		public var monk:Number;
-		public var sand:Number;
-		public var giacomo:int;
-
 		public var temp:int;
 		public var args:Array;
 		public var funcs:Array;
@@ -480,16 +469,6 @@ the text from being too boring.
 			//{ region PlotVariables
 
 			//Plot variables
-			explored = false;
-			foundForest = false;
-			foundDesert = false;
-			foundMountain = false;
-			foundLake = false;
-			whitney = 0;
-			monk = 0;
-			sand = 0;
-			giacomo = 0;
-//Replaced by flag			beeProgress = 0;
 
 //			itemStorage = [];
 //			gearStorage = [];
