@@ -1023,11 +1023,11 @@ package classes
 				rando = rand(100);
 
 				// Is taur and has multiple cocks?
-				if      (player.isTaur() && player.cockTotal() == 1)
+				if      (player.isTaur() && player.cocks.length == 1)
 					outputText("\nYour equipment has shifted to lie between your hind legs, like a feral animal.");
 				else if (player.isTaur())
 					outputText("\nBetween hind legs of your bestial body you have grown " + player.multiCockDescript() + "!\n");
-				else if (player.cockTotal() == 1)
+				else if (player.cocks.length == 1)
 					outputText("\n");
 				else
 					outputText("\nWhere a penis would normally be located, you have instead grown " + player.multiCockDescript() + "!\n");
@@ -1036,7 +1036,7 @@ package classes
 					rando++;
 
 					// How to start the sentence?
-					if  (player.cockTotal() == 1)  outputText("Your ");
+					if  (player.cocks.length == 1)  outputText("Your ");
 					else if (cock_index == 0)      outputText("--Your first ");
 					else if (rando % 5 == 0)       outputText("--The next ");
 					else if (rando % 5 == 1)       outputText("--The " + num2Text2(cock_index+1) + " of your ");
