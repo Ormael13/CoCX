@@ -65,7 +65,7 @@
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			game.impScene.loseToAnImpLord();
+			game.impScene.loseToAnImpLord(false);
 		}
 
 		public function ImpLord()
