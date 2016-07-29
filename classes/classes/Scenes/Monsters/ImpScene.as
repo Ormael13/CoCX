@@ -1902,7 +1902,8 @@ package classes.Scenes.Monsters
 			outputText("\n\nYou take the hint and nervously lick the cock clean.  You can taste the corruption, and it sends sparks through your mind.  You almost wish it didn't have to end, but soon the imp is satisfied with your cleaning job, gathers his things and turns to leave you to recover from your ordeal.  Within minutes of him leaving you pass out, collapsing to the ground.  You lay there, in a puddle of sexual fluids for a long time before you wake up.  After gathering your equipment, you begin to make your way back to camp.  Hopefully that green stuff's effects will have worn off once you get back.");
 
 			player.orgasm();
-			dynStats("sen", 2 - overlord, "cor", 1 + overlord);
+			dynStats("sen", overlord ? 1 : 2);
+			dynStats("cor", overlord ? 2 : 1);
 			player.slimeFeed();
 			combat.cleanupAfterCombat();
 		}
@@ -1937,8 +1938,8 @@ package classes.Scenes.Monsters
 
 			// Stats & shit
 			player.orgasm();
-			dynStats("cor", 1 + overlord);
-			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 24 - 24 * overlord);
+			dynStats("cor", overlord ? 2 : 1);
+			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - (overlord ? 48 : 24));
 			player.slimeFeed();
 			combat.cleanupAfterCombat();
 		}
