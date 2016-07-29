@@ -7,14 +7,14 @@ package classes.Scenes.Areas.VolcanicCrag
 	public class Behemoth extends Monster
 	{
 		public function tailWhip():void {
-			outputText("The behemoth charges at you with his spiked tail raised!  ");
+			outputText("The behemoth charges at you, pivoting to swing his spiked tail as his muscles flex.  ");
 			if (player.getEvasionRoll()) {
-				outputText("You manage to dodge in time to avoid his swinging tail!");
+				outputText("Luckily, you leap back in time to dodge and he lets out a low chuckle.  \"Not bad,\" he says, and it's hard not to flush at his husky voice.");
 				combatRoundOver();
 				return;
 			}
 			else {
-				outputText("You weren't aware of that and his tail hits you!  <b>Your defense has been reduced!</b>  ");
+				outputText("You're too slow and the impact leaves you bruised and bleeding, the spines scraping your body.  You're lucky it's not deeper, but that really hurts!  <b>Your defense has been reduced!</b>  ");
 				var damage:int = str + level;
 				damage = player.reduceDamage(damage)
 				player.takeDamage(damage, true);
@@ -25,7 +25,7 @@ package classes.Scenes.Areas.VolcanicCrag
 		}
 		
 		public function tease():void {
-			outputText("The behemoth lifts his loincloth to reveal his large prick and waves his cock left and right.  You blush from looking at his cock.");
+			outputText("\"Want a piece of this?\" the behemoth says, and you avert your eyes as he flips up his loincloth, his huge cock alluring under the red silk and gold chains.");
 			game.dynStats("lus", 10 + (player.cor / 10) + (player.lib / 10));
 			combatRoundOver();
 		}
@@ -48,7 +48,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			this.a = "the ";
 			this.short = "Behemoth";
 			this.imageName = "behemoth";
-			this.long = "The behemoth before you stands nine feet tall and is obviously a male.  His face is fairly cat-like and long horns protrude from his head, pointing forward.  His hair is black with blonde mane that runs across the top and back of his head and the entire length of his tail.  He's purple and muscular all over with spikes protruding from his upper back.  His cock is estimated to be eighteen inches long and 2½ inches thick when erect.  All he's wearing is a silken red loincloth tied together with gilded chains.  He doesn't appear to be wielding any form of weaponry but his claws look deadly.";
+			this.long = "Before you stands a hulking behemoth, about nine feet tall, with a feline face and long forward-pointing horns that leave him looking even larger. The hair on his head is black, though it quickly transitions into a blond mane that follows along his back and to his tail, and the rest of his muscular body is covered with purple fur. Dark spines protrude from his back, and though he carries no weaponry and wears only an elegant red loincloth, his fierce claws leave him plenty intimidating.";
 			// this.plural = false;
 			this.createCock(18, 2.5, CockTypesEnum.HUMAN);
 			this.balls = 2;
