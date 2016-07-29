@@ -31,11 +31,15 @@ package classes.Scenes.Areas.VolcanicCrag
 		public function behemothIntro():void {
 			clearOutput();
 			if (flags[kFLAGS.MET_BEHEMOTH] <= 0) {
-				outputText("As you're exploring the infernal landscape, you are drawn to the sight of a creature you've never seen before: a muscular male bipedal purple-skinned horned creature with spikes on his back. You guess he is sentient as he's wearing a loincloth. Underneath his loincloth is a large cock and a duo of balls; you estimate his cock to be 18 inches long and 2½ inches thick but it's hard for sure as his cock is flaccid. You estimate his balls to be three inches across. You approach the creature and he says to your surprise, \"<i>Hello there. Not many even dared to approach me. Either it's me or it's the landscape.</i>\"");
-				outputText("\n\nYou introduce yourself and the creature says, \"<i>" + player.short + ", eh? I'm the mighty Behemoth. It's good to see someone like you; I was so lonely. So what do you want?</i>\" He smiles.");
+				outputText("As you stop to take a breath, the barren landscape relentlessly hot and devoid of decent shelter, you notice you're not alone. A massive horned creature is on patrol, and you stiffen as his pointy ears prickle, listening.\n\n");
+				outputText("Mareth has made you paranoid, but you've survived this far.\n\n");
+				outputText("\"<em>Howdy, stranger!</em>\" the monster calls, and you get up to greet him.  \"<em>Don't see too many people around here,</em>\" he admits, and you can't exactly say you're surprised.  \"<em>Landscape like this, ain't that many people who want to be friendly, eh?</em>\"\n\n");
+				outputText("Somehow you suspect that's not precisely it, but he likely knows that already.  You try not to stare at his hulking muscles or the spines along his back, both only barely obscured by his purple fur, and you introduce yourself, wanting to match his friendliness.\n\n");
+				outputText("As expected, he's delighted, and he claps you on the back like you're already best friends. \"<em>" + player.short + ", eh?  They call me the Behemoth; least, they did last time I had people to talk to!  What brings you out here?</em>\"\n\n");
+				outputText("Whatever the answer, it probably isn't the giant cock pressing up against his red loincloth.  Right?");
 			}
 			else {
-				outputText("As you're exploring the infernal landscape, you spot the familiar purple-skinned creature. The behemoth approaches you with a smile and says, \"<i>Hello again, " + player.short + ". So feeling up for fighting? Or want to have sex?</i>\"");
+				outputText("As you're exploring the swelting landscape, you spot the familiar face going about his day.  \"<i>Hello again, " + player.short + ",</i>\" he says as he strides up, his deep chest leaving his voice a pleasant rumble.  \"<em>Looking for a spar?  Or ... something else?</em>\" His mouth twitches into what might be a smile, and he flexes his arm, emphasizing both his claws and loincloth.  Looks like he's looking for a good time, no matter what it is.");
 			}
 			flags[kFLAGS.MET_BEHEMOTH]++;
 			behemothMenu();
@@ -51,7 +55,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			addButton(1, "Behemoth", talkAboutBehemoth, null, null, null, "Talk to the behemoth about himself.");
 			if (flags[kFLAGS.BEHEMOTH_TALK_LEVEL] >= 1) addButton(2, "His Past", talkAboutSadStory, null, null, null, "Talk to the behemoth about his past.");
 			else addButtonDisabled(2, "His Past", "Talk to the behemoth at least once to unlock this.");
-			if (timesSexed() >= 2) addButton(3, "His Cum", talkAboutHisCum, null, null, null, "Talk to the behemoth about the special properties of his cum and how he managed to cum that much despite his ball size."); 
+			if (timesSexed() >= 2) addButton(3, "His Cum", talkAboutHisCum, null, null, null, "Talk to the behemoth about the special properties of his cum."); 
 			else addButtonDisabled(3, "His Cum", "Have sex with the behemoth at least twice to unlock this.");
 			if (flags[kFLAGS.BEHEMOTH_CHILDREN] > 0) addButton(4, "Children", talkAboutHisChildren, null, null, null, "Talk to the behemoth about his son" + (flags[kFLAGS.BEHEMOTH_CHILDREN] == 1 ? "" : "s") + ".");
 			else addButtonDisabled(4, "???", "Have at least 1 child with him to unlock this.");
@@ -60,32 +64,31 @@ package classes.Scenes.Areas.VolcanicCrag
 		
 		private function talkAboutYourself():void {
 			clearOutput();
-			outputText("You tell the behemoth about your origins, where you originally lived in, how you've came to be the champion of Ingnam and sent through the portal. ");
-			outputText("\n\n\"<i>Ingnam? That sounds like a nice place. I used to live in another world too and like you, I've went to this world through a portal.</i>\"");
+			outputText("You tell the behemoth about your origins and hometown, and the yearly tradition that led you to be sent through the portal as the champion of Ingnam.  He listens attentively, something complicated in his face, and you wonder how long it's been since he's heard someone speak this much.");
+			outputText("\n\n\"<i>Ingnam sounds nice,</i>\" he says eventually, a bit wistful.  \"<i>I came from a portal from another world, too.</i>\"  He doesn't elaborate, however, leaving you to tell him about your travels.");
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) {
-				outputText("\n\nYou tell the behemoth about how you've managed to shut down the factory. ");
+				outputText("\n\nHe's intrigued as you tell him about Marae's quest for you to shut down the factory, too. ");
 				if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) {
-					outputText("\"<i>Wow, you're quite the hero! I'm glad you've managed to save Marae,</i>\" he smiles.");
+					outputText("\"<i>Wow, you're quite the hero! Well done: we'll need her help if we're to get out of this.</i>\" he says, his tail swishing with pride.");
 				}
 				else if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
-					outputText("\"<i>Don't you think you should have shut down the factory properly? You've only managed to worsen the corruption,</i>\" he says with a bit of worried look.");
+					outputText("\"<i>Sounds like you just made it worse,</i>\" he says frankly, his brow creasing in worry. \"<i>Do you think it'll be okay?</i>\"");
 				}
 			}
 			if (flags[kFLAGS.DEFEATED_ZETAZ] > 0) {
-				outputText("\n\nYou tell the behemoth about how you've managed to find and defeat Zetaz, the original imp who tried to rape you in the first place after you've entered the portal. ");
-				outputText("\n\nThe behemoth remarks and says, \"<i>That's great! I had a similar story. I had a rival who bullied and mocked me from my childhood. Years later, I've finally got my revenge on him and literally ripped him apart with my bare hands.</i>\" Your jaws drop when he mentions being able to rip someone apart with his strength. He says, \"<i>Yes, seriously. I actully did it. After that, I've had his meat." + (silly() ? " Besides, I wouldn't want to traumatize the player reading whatever we're saying or make the player squick.</i>\"": "") + " "); //Fourth wall breaker
-				if (silly()) outputText("Did he just break the fourth wall?");
-			}
-			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) {
-				outputText("\n\nNext, You tell the behemoth about how you've managed to get past the obstacles in Lethice's stronghold and eventually overthrow Lethice, the Queen of the Demons. ");
-				outputText("\n\nThe behemoth smiles and says, \"<i>You have fulfilled your role as a Champion! I'm happy for you!</i>\" ");
-				if (player.armor == armors.LTHCARM) {
-					outputText("The behemoth looks at your strange lethicite armor. \"<i>Wow, Lethice actually managed to harvest enough lethicite to make an armor? Clever use of lethicite. I notice it doesn't cover your groin,</i>\" the Behemoth says. ");
-					if (player.lowerGarment.name == "nothing") outputText("He blushes when he looks at your " + (player.hasCock() ? "[cock] hanging freely from the opening" : "groin") + ".");
-				}
+				outputText("\n\nYou tell the behemoth about how you've managed to take revenge upon Zetaz, the imp who raped you when you first came through the portal. ");
+				outputText("\n\n\"<i>Not bad!</i>\" he says, clapping you on the back. \"<i>I knew this guy once -- wouldn't leave me alone no matter what I did, and I was a lot younger then, you know?  Years later, I got to find him again and tear him apart with these,</i>\" he boasts, wiggling his claws, and you stare at him in disbelief.  \"<i>Yep. Don't think anybody could even find all the pieces afterward, though don't ask me what I did with them.</i>\"");
 			}
 			if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0) {
-				outputText("\n\nNext, you tell the behemoth on how you've slain Marae, the corrupted goddess of Mareth. The behemoth drops his jaws at what you've done. \"<i>You actually KILLED a goddess? Wow, that's quite an amazing feat for a mortal to defeat a deity. You're even stronger than I am! I normally fear the wrath of the gods but you're brave,</i>\" he chuckles.");
+				outputText("\n\nNext, you go back to the story of the factory and tell the behemoth about the clean-up: slaying the corrupted goddess Marae.  He thinks you're joking at first, but you assure him it's true and he whistles. \"<i>You actually KILLED a goddess? Wow, you're even stronger than I am!</i>\" From him, that's quite the admission.");
+			}
+			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) {
+				outputText("\n\nYou do a lot of embellishing as you tell him about taking down the demons in Lethice's stronghold, though the story barely needs it. ");
+				outputText("\n\n\"<i>Holy shit,</i>\" he says, and he offers a hand for a high five. You return it, and both of you beam with pride as you settle back down. \"<i>Guess you did what you came here for,</i>\" he adds, and he's a bit wistful. ");
+				if (player.armor == armors.LTHCARM) {
+					outputText("It doesn't stop him from admiring your lethicite armor, though. \"<i>Wow, Lethice actually managed to harvest enough for that?  Pretty clever, though I notice it doesn't cover your groin.</i>\"");
+					if (player.lowerGarment.name == "nothing") outputText("\n\nHe blushes when he looks " + (player.hasCock() ? "at your [cock] hanging freely " : "") + "through the opening, and you're tempted to tease him.");
+				}
 			}
 			outputText("\n\nAfter chatting for a good while, you and the behemoth part ways and you return to your camp.");
 			doNext(camp.returnToCampUseOneHour);
@@ -93,13 +96,14 @@ package classes.Scenes.Areas.VolcanicCrag
 		private function talkAboutBehemoth():void {
 			clearOutput();
 			outputText("You ask the behemoth about himself. What is he, exactly?");
-			outputText("\n\n\"<i>I don't have an actual name but everybody calls me Behemoth. We were a proud race known for incredible strength, feats, and contests. Here, let me show you something,</i>\" the behemoth says and shows you the codex entry on behemoths.");
+			outputText("\n\n\"<i>Nobody calls me by my old name; just call me the Behemoth and that's good enough, eh?  We're a proud race known for our strength, and we love to prove it, too, but there ain't too much of us around anymore. Here, let me show you something,</i>\" the behemoth says, and he pulls out some books.");
 			if (flags[kFLAGS.CODEX_ENTRY_BEHEMOTH] <= 0) {
 				flags[kFLAGS.CODEX_ENTRY_BEHEMOTH] = 1;
 				outputText("\n\n<b>New codex entry unlocked: Behemoths!</b>");
 			}
-			outputText("\n\n\"<i>I suggest you read the codex entry; it contains detailed information,</i>\" the behemoth says.");
-			outputText("\n\nYou thank him for the codex entry. \"<i>You're always welcome,</i>\" the behemoth says with a smile. His face begins to shift from a happy to a sad look. \"<i>Something wrong?</i>\" you ask. The behemoth replies, \"<i>Well... I had a rough past. I'd rather not talk about it for now. Why not come back later?</i>\" You nod and wrap your arms around the behemoth, giving him a hug before you say farewell and make your way back to camp.");
+			outputText("\n\n\"<i>Check through those; they ought to answer everything you're looking for,</i>\" he says, and you thank him.");
+			outputText("\n\n\"<i>Thank <b>you,</b></i>\" he corrects, and he laughs as he pushes his hair and mane back.  You try asking him what's wrong, but he shakes his head.  \"<i>I don't want to talk about it right now,</i>\" he admits. \"<i>My past ain't the greatest; let's just worry about the now for now, okay?</i>\");
+			outputText("You nod, and you wrap your arms around him to give him a hug, before making your farewells and your way back to camp.");
 			if (flags[kFLAGS.BEHEMOTH_TALK_LEVEL] <= 1) flags[kFLAGS.BEHEMOTH_TALK_LEVEL]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
