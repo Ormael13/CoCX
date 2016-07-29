@@ -3,18 +3,20 @@ package classes
 	import classes.*; 
 	import classes.GlobalFlags.*;
 	
-	public class PlayerAppearance extends BaseContent {
-
+	public class PlayerAppearance extends BaseContent
+	{
 		public function PlayerAppearance() {}
 		
 		/*** Internal methods; for outputting text in proper measure system ***/
 
-		private function feet_inch_and_metres (in_inches:Number):String {
-			if (flags[kFLAGS.USE_METRICS])  return "" + (Math.round(in_inches * 2.54) / 100).toFixed(2) + " metres";
+		private function feet_inch_and_metres(in_inches:Number, precision:int = 2):String
+		{
+			if (flags[kFLAGS.USE_METRICS])  return "" + (Math.round(in_inches * 2.54) / Math.pow(10, precision)).toFixed(precision) + " metres";
 			else                            return "" + Math.floor(in_inches / 12) + " foot " + in_inches % 12 + " inch";
 		}
 
-		private function num_inches_and_centimetres (in_inches:Number):String {
+		private function num_inches_and_centimetres(in_inches:Number):String
+		{
 			// Various special cases.
 			if (in_inches < 1)
 				return inches_and_centimetres(in_inches)
@@ -29,14 +31,16 @@ package classes
 			else                            return "" + num2Text(value) + " inch" +       (value == 1 ? "" : "es");
 		}
 
-		private function inches_and_centimetres (in_inches:Number, precision:int = 10):String {
-			var value:Number = Math.round(in_inches*precision * (flags[kFLAGS.USE_METRICS] ? 2.54 : 1)) / precision;
+		private function inches_and_centimetres(in_inches:Number, precision:int = 1):String
+		{
+			var value:Number = Math.round(in_inches * Math.pow(10, precision) * (flags[kFLAGS.USE_METRICS] ? 2.54 : 1)) / Math.pow(10, precision);
 			if (flags[kFLAGS.USE_METRICS])  return "" + value + " centimetre" + (value == 1 ? "" : "s");
 			else                            return "" + value + " inch" +       (value == 1 ? "" : "es");
 		}
 
-		private function inch_and_cm (in_inches:Number, precision:int = 10):String {
-			var value:Number = Math.round(in_inches*precision * (flags[kFLAGS.USE_METRICS] ? 2.54 : 1)) / precision;
+		private function inch_and_cm(in_inches:Number, precision:int = 1):String
+		{
+			var value:Number = Math.round(in_inches * Math.pow(10, precision) * (flags[kFLAGS.USE_METRICS] ? 2.54 : 1)) / Math.pow(10, precision);
 			if (flags[kFLAGS.USE_METRICS])  return "" + value + "-cm";
 			else                            return "" + value + "-inch";
 		}
