@@ -1012,7 +1012,7 @@ package classes
 			if (player.lowerBody == LOWER_BODY_TYPE_NAGA && player.gender > 0) 
 			{
 				outputText("\nYour sex", false);
-				if (player.gender == 3 || player.totalCocks() > 1) 
+				if (player.gender == 3 || player.cocks.length > 1) 
 					outputText("es are ", false);
 				else outputText(" is ", false);
 				outputText("concealed within a cavity in your tail when not in use, though when the need arises, you can part your concealing slit and reveal your true self.\n", false);
@@ -1120,7 +1120,7 @@ package classes
 					else if (player.skinType == SKIN_TYPE_GOO) 
 						outputText("Your [sack] clings tightly to your groin, dripping and holding " + player.ballsDescript() + " snugly against you.");
 				}
-				else if (player.cockTotal() == 0) 
+				else if (player.cocks.length == 0) 
 				{
 					if (player.skinType == SKIN_TYPE_PLAIN) 
 						outputText("A " + player.sackDescript() + " with " + player.ballsDescript() + " swings heavily under where a penis would normally grow.", false);
@@ -1237,7 +1237,7 @@ package classes
 				outputText("\n", false);
 			}
 			//Genderless lovun'
-			if (player.cockTotal() == 0 && player.vaginas.length == 0) 
+			if (player.cocks.length == 0 && player.vaginas.length == 0) 
 				outputText("\nYou have a curious lack of any sexual endowments.\n", false);
 			
 			
@@ -1262,7 +1262,7 @@ package classes
 				outputText("\nYour " + player.nippleDescript(0) + "s ache and tingle with every step, as your heavy " + player.nipplesPShort + " swings back and forth.", false);
 			else if (player.nipplesPierced > 0) 
 				outputText("\nYour " + player.nippleDescript(0) + "s are pierced with " + player.nipplesPShort + ".", false);
-			if (player.totalCocks() > 0) 
+			if (player.cocks.length > 0) 
 			{
 				if (player.cocks[0].pierced > 0) 
 				{
