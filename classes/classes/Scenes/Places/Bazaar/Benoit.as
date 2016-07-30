@@ -172,7 +172,6 @@ public function benoitOffspring():int
 
 public function benoitBigFamily():Boolean
 {
-	if (flags[kFLAGS.BENOIT_STATUS] == 0) return false;
 	return benoitOffspring() >= 12; // I guess, 12 eggs is a good start (Stadler76)
 }
 
