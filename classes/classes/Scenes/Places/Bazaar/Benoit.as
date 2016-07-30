@@ -656,22 +656,26 @@ private function talkToBenoit():void {
 		benoitAffection(5);
 	}
 	if (benoitBigFamily() && player.inte >= 60 && flags[kFLAGS.BENOIT_EYES_TALK_UNLOCKED] == 0) {
-		outputText("You ask " + benoitMF("Benoit","Benoite") + " if " + benoitMF("he","she") + " has ever thought about granting you the eyes of a basilisk.");
+		// Talk scene written by MissBlackthorne
+		outputText("You ask " + benoitMF("Benoit", "Benoite") + " how the petrifying effect of " + benoitMF("his", "her") + " brethrens gaze works,"
+		          +" is it something their eyes naturally do or type of sight? " + benoitMF("He","She") + " stiffens for a moment before letting out a frustrated sigh.");
 
-		outputText("\n\nThe basilisk is silent for a time, running " + benoitMF("his","her") + " claws along the counter pensively.  \"<i>Yes,</i>\" " + benoitMF("he","she") + " says eventually, in a quiet tone."
-		          +"  \"<i>I 'ave.  Away from ze mountains, I 'ave 'ad time to sink.  I am not ze demons' slave anymore, and I am a funny joke of a basilisk anyway,"
-		          +" so I 'ave often thought about... making certain zacrifices.  If we 'ad just one more of our kind, away from zeir corruption, zen...</i>\" "
-		          + benoitMF("he","she") + " trails off, sighing heavily before smiling ruefully at you.  \"<i>Zose were ze kind of soughts I 'ad before I met you.  Crazy, yes?"
-		          +"  Even more crazy to be still sinking zem when a good " + player.mf("man", "woman") + " is giving me " + player.mf("'is", "'er")
-		          +" love for no reason except through ze kindness of " + player.mf("'is", "'er") + " 'art.  Still... it is so frustrating, being able to sink clearly about zese sings"
-		          +" and not being able to do anysing about it.</i>\"");
-		
-		outputText("\n\nYour mind wanders.  You doubt that even if you wanted to, you could turn your eyes into those of a basilisk.");
-		outputText("\n\nBenoit answers warily.  \"<i>You did so much for my folk, that I may figure out somesing to grant zem to you."
-		          +"  But, [name], tell me you're not going to do somesing so reckless as experiment on your body?</i>\"");
+		outputText("\n\n\"<i>[name], you do know i am blind yes? Zis is not somesing to joke about.</i>\"");
+
+		outputText("\n\nYou hurriedly tell your scaled lover that you didn't mean it in a cruel way, you were merely curious."
+		          +" After all, you've transformed yourself to become more basilisk like for " + benoitMF("him", "her")
+		          +" already, so you're curious if you could get even closer to being a true basilisk.");
+
+		outputText("\n\nAfter a few moments " + benoitMF("Benoit", "Benoite") + " nods slightly.");
+		outputText("\n\"<i>I see...are you sure about zis [name]? It is so reckless to experiment on your body like zis....But I suppose you have done so much for my folk,"
+		          +" zat if you wish to be one of us, i could look into it. Beware though, zey are dangerous, so while i shall do zis to thank you,"
+		          +" I do not wish to risk you becoming like ze others...Ze demons no doubt affected our gaze too, ze perverts...</i>\"");
+
+		outputText("\n\nYou smile at the lizard's concern for you before leaving " + benoitMF("Benoit", "Benoite") + " to find a recipe in peace.");
+
 		//toggle on "Basil. Eyes" from benoit's main menu.
 		flags[kFLAGS.BENOIT_EYES_TALK_UNLOCKED] = 1;
-		outputText("\n\n(<b>Basilisk Eyes option enabled in Benoit's menu!</b>)");
+		outputText("\n\n(<b>Basilisk Eyes option enabled in " + benoitMF("Benoit", "Benoite") + "'s menu!</b>)");
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
