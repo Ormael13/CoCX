@@ -658,7 +658,7 @@ private function talkToBenoit():void {
 	if (benoitBigFamily() && player.inte >= 60 && flags[kFLAGS.BENOIT_EYES_TALK_UNLOCKED] == 0) {
 		outputText("You ask " + benoitMF("Benoit","Benoite") + " if " + benoitMF("he","she") + " has ever thought about granting you the eyes of a basilisk.");
 
-		outputText("\n\nThe basilisk is silent for a time, running his claws along the counter pensively.  \"<i>Yes,</i>\" " + benoitMF("he","she") + " says eventually, in a quiet tone."
+		outputText("\n\nThe basilisk is silent for a time, running " + benoitMF("his","her") + " claws along the counter pensively.  \"<i>Yes,</i>\" " + benoitMF("he","she") + " says eventually, in a quiet tone."
 		          +"  \"<i>I 'ave.  Away from ze mountains, I 'ave 'ad time to sink.  I am not ze demons' slave anymore, and I am a funny joke of a basilisk anyway,"
 		          +" so I 'ave often thought about... making certain zacrifices.  If we 'ad just one more of our kind, away from zeir corruption, zen...</i>\" "
 		          + benoitMF("he","she") + " trails off, sighing heavily before smiling ruefully at you.  \"<i>Zose were ze kind of soughts I 'ad before I met you.  Crazy, yes?"
@@ -666,7 +666,7 @@ private function talkToBenoit():void {
 		          +" love for no reason except through ze kindness of " + player.mf("'is", "'er") + " 'art.  Still... it is so frustrating, being able to sink clearly about zese sings"
 		          +" and not being able to do anysing about it.</i>\"");
 		
-		outputText("\n\nYour mind wanders.  You doubt that even if you wanted to, you could turn into a basilisk proper.");
+		outputText("\n\nYour mind wanders.  You doubt that even if you wanted to, you could turn your eyes into those of a basilisk.");
 		outputText("\n\nBenoit answers warily.  \"<i>You did so much for my folk, that I may figure out somesing to grant zem to you."
 		          +"  But, [name], tell me you're not going to do somesing so reckless as experiment on your body?</i>\"");
 		//toggle on "Basil. Eyes" from benoit's main menu.
