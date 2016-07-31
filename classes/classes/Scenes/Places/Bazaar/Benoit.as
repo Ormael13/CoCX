@@ -1215,24 +1215,39 @@ private function repeatBenoitFuckTakeCharge():void {
 }
 
 //Basilisk Eyes
-private function convertToBassyEyes():void {
+private function convertToBassyEyes():void
+{
 	var eyesGranted:int = flags[kFLAGS.BENOIT_BASIL_EYES_GRANTED] + 1;
 	var benoitE:String = benoitMF("Benoit", "Benoite");
-	var benoitHeShe:String = benoitMF("he", "she");
-	var benoitHisHer:String = benoitMF("his", "her");
-	var benoitHimHer:String = benoitMF("him", "her");
+	var benoit_heshe:String = benoitMF("he", "she");
+	var benoit_HeShe:String = benoitMF("He", "She");
+	var benoit_hisher:String = benoitMF("his", "her");
+	var benoit_himher:String = benoitMF("him", "her");
 	clearOutput();
 	if (eyesGranted <= 1) { // First time
-		outputText("Stubby text summary for starters:\n");
-		outputText("You tell " + benoitE + ", that you've decided, that you want the basilisk eyes and ask "
-		           + benoitMF("him", "her") + ", if " + benoitHeShe + " could grant them to you.");
-		outputText("\n\n" + benoitE + " begins to fetch some ingredients, mixes a solution, adds " + benoitHisHer + " blood"
-		          +" and a freshly shedded tear to it (can reptiles actually shed tears? Naah, whatever, I don't really care about biology, when it adds more fluff to a fantasy game."
-		          +" Whoever writes this: just decide for yourself :) (Stadler76)) and gives the potion/tinture/whatever to you.");
-		outputText("\n\nYou drink it/pour it on your eyes and they become basilisk eyes.");
+		outputText("You tell " + benoitE + " that you've weighed up the pros and cons and that you want to become more of a basilisk. "
+		          + benoit_HeShe + " nods as " + benoit_heshe + " feels " + benoit_hisher + " way across the counter before rummaging about underneath.");
+		outputText("\n\n\"<i>I 'ave found a way to transform your eyes, but I 'ave no idea if it will even work."
+		          +" Ze one oo told me about zis was insistent zat ze recipe relies on you being a basilisk enough already.</i>\"");
+		outputText("\n\nAs the blind basilisk begins to pull out bottle after bottle from under the counter, you wonder what " + benoit_heshe + " means.");
+		outputText("\n\n\"<i> 'Opefully, you 'aving birthed so many will be enough.</i>\" " + benoit_HeShe + " mutters as " + benoit_heshe + " pulls out a large bowl. "
+		          + benoit_HeShe + " begins to sloppily pour several measures from the bottles into the bowl, stirring it now and then with a wooden spoon."
+		          +" The mixture seems to be a flat matte grey when " + benoit_heshe + " stops. Placing " + benoit_hisher + " palm over the bowl "
+		          + benoit_heshe + " cuts it open with a claw, hissing at the pain as droplets of blood fall in with a small splash. "
+		          + benoit_HeShe + " brings a finger to one of " + benoit_hisher + " milky eyes, wiping a tear drop from it before letting that slide down into the mixture too.");
+		outputText("\n\nAs " + benoitE + " goes to fetch a cloth to cover the cut, you watch in awe as the once matte mixture takes on a wet sheen, like an endless grey seeing pool."
+		          +" It reminds you of the eyes of the basilisks in the mountains and flinch away before realising how silly that is.");
+		outputText("\n\n\"<i>Are you going to drink it zen? Or am I to close my shop all day for nuzzing?</i>\" " + benoitE + " says, startling you,"
+		          +" having not noticed the blind basilisk return, being that you were so fixated on the mixture.");
+		outputText("\n\nWith a swift nod you grab the bowl, draining it before realising your non-verbal response. You groan,"
+		          +" the mixture thick on your tongue though not tasting overly foul. Your eyelids feel heavy, like they were made of stone."
+		          +" You tell " + benoitE + " you think you need to rest for a moment, the basilisk now hurrying you to a corner of store room where a pile of fabrics are. "
+		          + benoit_HeShe + " helps you onto them as you lay back and your eyes close.");
+		doNext(convertToBassyEyesPageTwo);
+		return;
 	} else {
-		outputText("You tell " + benoitE + ", that you've lost the basilisk eyes and ask " + benoitHimHer + ", if "
-		           + benoitHeShe + " could grant them to you again.");
+		outputText("You tell " + benoitE + ", that you've lost the basilisk eyes and ask " + benoit_himher + ", if "
+		          + benoit_heshe + " could grant them to you again.");
 		if (eyesGranted == 2) { // Second time
 			outputText("\n\n" + benoitE + " says: \"<i>Oh, you’ve lost zem?"
 			          +" Not what I expected to hear today, but very well [name]. I shall make ze potion...</i>\" ");
@@ -1244,16 +1259,46 @@ private function convertToBassyEyes():void {
 			          +" You should be more careful not to lose zem so often [name]!</i>\" ");
 		}
 		outputText(benoitE + " pads over to the section of the counter, pulling out bottles again");
-		if (eyesGranted >= 6) outputText(", grumbling as " + benoitHeShe + " does");
-		outputText(".\n\"<i>Here we go... For ze " + num2Text2(eyesGranted) + " time</i>\", " + benoitHeShe + " mumbles, though you can tell, " + benoitHeShe + "'s not mad");
+		if (eyesGranted >= 6) outputText(", grumbling as " + benoit_heshe + " does");
+		outputText(".\n\"<i>Here we go... For ze " + num2Text2(eyesGranted) + " time</i>\", " + benoit_heshe + " mumbles, though you can tell, " + benoit_heshe + "'s not mad");
 		outputText(eyesGranted < 6 ? "." : ", simply tired of making the potion so often. Maybe you should be a bit more careful in the future?");
 		outputText("\n\nWithin minutes a bowl is slid to you, a familiar grey mixture sloshing within. You drain the bowl and move to lay down.");
-		outputText("\n\nWhen you wake you open your eyes slowly, waiting to adjust. You thank " + benoitE + " for " + benoitHisHer + " help with a small kiss on the snout"
+		outputText("\n\nWhen you wake you open your eyes slowly, waiting to adjust. You thank " + benoitE + " for " + benoit_hisher + " help with a small kiss on the snout"
 		          +" before leaving, once again feeling the compulsion to look deep into the grey orbs of basilisks fade as you catch your reflection in the mirror.");
 	}
-	outputText("\n\n(<b>Your eyes are now basilisk eyes!</b>)");
+	convertToBassyEyesFinal();
+}
+
+private function convertToBassyEyesPageTwo():void
+{
+	var benoitE:String = benoitMF("Benoit", "Benoite");
+	var benoit_heshe:String = benoitMF("he", "she");
+	var benoit_HeShe:String = benoitMF("He", "She");
+	var benoit_hisher:String = benoitMF("his", "her");
+	var benoit_HisHer:String = benoitMF("His", "Her");
+	var benoit_hishers:String = benoitMF("his", "hers");
+	clearOutput();
+	outputText("When you wake, you open your eyes and cry out, quickly closing them again. Gods it's bright! " + benoitE + " rushes over to you and places a hand on your shoulder.");
+	outputText("\n\n\"<i>What iz it? Did somesing 'appen? You're not 'urt are you?</i>\" " + benoit_HeShe + " says in an increasing worry. You put your hand to "
+	          + benoit_hishers + " and say that you're fine, everything was just a little bright. You open your eyes again, this time slowly, letting your eyes adjust."
+	          +" You ask the basilisk if " + benoit_heshe + " could get you a mirror, curious if the potion has worked. "
+	          + benoit_HeShe + " rushes off with a nod and comes back with a small hand mirror.");
+	outputText("\n\n\"<i>Well?</i>\"");
+	outputText("\n\nYour eyes widen as you look in the mirror, the grey reptilian orbs staring back at you catching you off guard. They're absolutely mesmerising,"
+	          +" the swirling greys and wet sheen parted by a thin black slit of a pupil. While you feel you could look into their depths forever,"
+	          +" you don't feel any kind of compulsion like when you look into other basilisk's eyes. Somehow you think you'll be immune to their gaze from now on,"
+	          +" though it does make sense. After all, why would a basilisk ever try to use their gaze on one another?");
+	outputText("\n\nYou smile and put down the mirror, sharing that it worked and thanking " + benoitE + " with a kiss on the tip of " + benoit_hisher + " scaled snout. "
+	          + benoit_HisHer + " scales colour a deeper grey-green, waving a hand in a nonchalant gesture.");
+	outputText("\n\n\"<i>It was nussing, a gift from me to you, for all you've done.</i>\" " + benoit_HeShe + " says shyly before returning to a more normal business like demeanor."
+	          +" You are subsequently shoo’ed from the store, though not without a sticky but loving lick to the cheek from the basilisk.");
+	convertToBassyEyesFinal();
+}
+
+private function convertToBassyEyesFinal():void
+{
 	player.eyeType = EYES_BASILISK;
-	trace("eyesGranted:", eyesGranted);
+	outputText("\n\n(<b>Your eyes are now basilisk eyes!</b>)");
 	flags[kFLAGS.BENOIT_BASIL_EYES_GRANTED]++
 	doNext(camp.returnToCampUseOneHour);
 }
