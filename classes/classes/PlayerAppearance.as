@@ -280,6 +280,8 @@ package classes
 					case EYES_BASILISK: outputText(" grey basilisk eyes with vertically slitted pupils. They");
 				}
 				outputText(" come with the typical second set of eyelids, allowing you to blink twice as much as others.");
+				if (player.eyeType == EYES_BASILISK)
+					outputText(" Others seem compelled to look into them.");
 			}
 
 			//Hair

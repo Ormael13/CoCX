@@ -1216,35 +1216,44 @@ private function repeatBenoitFuckTakeCharge():void {
 
 //Basilisk Eyes
 private function convertToBassyEyes():void {
-	var eyesGranted:int = flags[kFLAGS.BENOIT_BASIL_EYES_GRANTED];
+	var eyesGranted:int = flags[kFLAGS.BENOIT_BASIL_EYES_GRANTED] + 1;
+	var benoitE:String = benoitMF("Benoit", "Benoite");
+	var benoitHeShe:String = benoitMF("he", "she");
+	var benoitHisHer:String = benoitMF("his", "her");
+	var benoitHimHer:String = benoitMF("him", "her");
 	clearOutput();
-	trace("eyesGranted:", eyesGranted);
-	outputText("Stubby text summaries for starters:\n");
-	if (eyesGranted == 0) { // First time
-		outputText("You tell " + benoitMF("Benoit", "Benoite") + ", that you've decided, that you want the basilisk eyes and ask "
-		           + benoitMF("him", "her") + ", if " + benoitMF("he", "she") + " could grant them to you.");
-		outputText("\n\n" + benoitMF("Benoit", "Benoite") + " begins to fetch some ingredients, mixes a solution, adds " + benoitMF("his", "her") + " blood"
+	if (eyesGranted <= 1) { // First time
+		outputText("Stubby text summary for starters:\n");
+		outputText("You tell " + benoitE + ", that you've decided, that you want the basilisk eyes and ask "
+		           + benoitMF("him", "her") + ", if " + benoitHeShe + " could grant them to you.");
+		outputText("\n\n" + benoitE + " begins to fetch some ingredients, mixes a solution, adds " + benoitHisHer + " blood"
 		          +" and a freshly shedded tear to it (can reptiles actually shed tears? Naah, whatever, I don't really care about biology, when it adds more fluff to a fantasy game."
 		          +" Whoever writes this: just decide for yourself :) (Stadler76)) and gives the potion/tinture/whatever to you.");
 		outputText("\n\nYou drink it/pour it on your eyes and they become basilisk eyes.");
 	} else {
-		outputText("You tell " + benoitMF("Benoit", "Benoite") + ", that you've lost the basilisk eyes and ask " + benoitMF("him", "her") + ", if "
-		           + benoitMF("he", "she") + " could grant them to you again.");
-		if (eyesGranted == 1) { // Second time
-			outputText("\n\n" + benoitMF("Benoit", "Benoite") + " says: \"<i>Oh, you've lost zem? No problem,");
-		} else if (eyesGranted >= 2 && eyesGranted < 5) { // Third time and later
-			outputText("\n\n" + benoitMF("Benoit", "Benoite") + " says: \"<i>Oh, you've lost zem again? 'mm ok...");
-		} else /*if (eyesGranted >= 5)*/ { // Sixth time and later
-			outputText("\n\n" + benoitMF("Benoit", "Benoite") + " sighs: \"<i>You should be more careful not to lose zem so often!</i>\" "
-			          + benoitMF("he", "she") + " grumbles... \"<I>'mm well...");
+		outputText("You tell " + benoitE + ", that you've lost the basilisk eyes and ask " + benoitHimHer + ", if "
+		           + benoitHeShe + " could grant them to you again.");
+		if (eyesGranted == 2) { // Second time
+			outputText("\n\n" + benoitE + " says: \"<i>Oh, you’ve lost zem?"
+			          +" Not what I expected to hear today, but very well [name]. I shall make ze potion...</i>\" ");
+		} else if (eyesGranted >= 3 && eyesGranted < 6) { // Third time and later
+			outputText("\n\n" + benoitE + " says: \"<i>You’ve lost zem again?"
+			          +" Not what I expected to hear today, but very well [name]. I shall make ze potion...</i>\" ");
+		} else /*if (eyesGranted >= 6)*/ { // Sixth time and later
+			outputText("\n\n" + benoitE + " says: \"<i>You’ve lost zem again?"
+			          +" You should be more careful not to lose zem so often [name]!</i>\" ");
 		}
-		outputText(" just give me a moment, zo I can fetch ze ingredienns for you again...</i>\"");
-		outputText("\n\"<i>For ze " + num2Text2(eyesGranted + 1) + " time</i>\", " + benoitMF("he", "she") + " mumbles...");
-		outputText("\n\n" + benoitMF("Benoit", "Benoite") + " fetches the ingedients again and gives the potion/tinture/whatever again to you. You drink it/pour it on your eyes"
-		          +" and they again become basilisk eyes.");
+		outputText(benoitE + " pads over to the section of the counter, pulling out bottles again");
+		if (eyesGranted >= 6) outputText(", grumbling as " + benoitHeShe + " does");
+		outputText(".\n\"<i>Here we go... For ze " + num2Text2(eyesGranted) + " time</i>\", " + benoitHeShe + " mumbles, though you can tell, " + benoitHeShe + "'s not mad");
+		outputText(eyesGranted < 6 ? "." : ", simply tired of making the potion so often. Maybe you should be a bit more careful in the future?");
+		outputText("\n\nWithin minutes a bowl is slid to you, a familiar grey mixture sloshing within. You drain the bowl and move to lay down.");
+		outputText("\n\nWhen you wake you open your eyes slowly, waiting to adjust. You thank " + benoitE + " for " + benoitHisHer + " help with a small kiss on the snout"
+		          +" before leaving, once again feeling the compulsion to look deep into the grey orbs of basilisks fade as you catch your reflection in the mirror.");
 	}
-	outputText("\n\n(<b>You now have basilisk eyes</b>)");
+	outputText("\n\n(<b>Your eyes are now basilisk eyes!</b>)");
 	player.eyeType = EYES_BASILISK;
+	trace("eyesGranted:", eyesGranted);
 	flags[kFLAGS.BENOIT_BASIL_EYES_GRANTED]++
 	doNext(camp.returnToCampUseOneHour);
 }
