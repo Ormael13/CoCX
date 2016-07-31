@@ -225,13 +225,24 @@ package classes.Items
 			return oldClawTone;
 		}
 
-		public function updateOvipositionPerk(tfSource:String):*
+		/**
+		 * Updates the perk Oviposition depending on the class/method stored in tfSource, that called it.
+		 * @param	tfSource	The method- or classname plus additional info seperated by the '-'-character
+		 * @return	-1: lost the perk, 0: no change, 1: gained the perk
+		 * @author	Stadler76
+		 */
+		public function updateOvipositionPerk(tfSource:String):int
+
 		{
 			trace('called updateOvipositionPerk("' + tfSource + '")');
+			var tsParts:Array = tfSource.split("-");
+			if (tsParts.length > 1 && ["goldenSeed", "catTransformation"].indexOf(tsParts[0]) == -1)
+				tfSource = tsParts[0];
+
 			// First things first :)
 			if (player.findPerk(PerkLib.BasiliskWomb) >= 0) {
 				if (player.findPerk(PerkLib.Oviposition) >= 0)
-					return null; // we already have it => no change
+					return 0; // we already have it => no change
 
 				// Basilisk Womb but no Oviposition? Fix, whats broken
 				outputText("\n\nDeep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly."
@@ -239,10 +250,10 @@ package classes.Items
 				outputText("(<b>Perk Gained: Oviposition</b>)");
 
 				player.createPerk(PerkLib.Oviposition, 0, 0, 0, 0);
-				return true; // true => gained Oviposition Perk
+				return 1; // true => gained Oviposition Perk
 			}
 
-			if (changes >= changeLimit) return null;
+			if (changes >= changeLimit) return 0;
 
 			// Note, that we don't do the score checks anymore. That was just an unly workaround and we don't want to do that again!
 			switch(tfSource) {
@@ -253,29 +264,29 @@ package classes.Items
 				// TFs with minor changes. Just in case, we change our mind or if we intend to upgrade them.
 				case "winterPudding":
 				case "rizzaRootEffect":
-					return null; // Don't change it. So we're done, yay!
+					return 0; // Don't change it. So we're done, yay!
 
 				case "reptilum":
-					if (player.findPerk(PerkLib.Oviposition) >= 0) return null;
+					if (player.findPerk(PerkLib.Oviposition) >= 0) return 0;
 					outputText("\n\nDeep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly."
 					          +"  Beyond that, you aren't sure exactly what just happened, but you are sure it originated from your womb.\n");
 					outputText("(<b>Perk Gained: Oviposition</b>)");
 
 					player.createPerk(PerkLib.Oviposition, 0, 0, 0, 0);
 					changes++;
-					return true; // Gained it
+					return 1; // Gained it
 					break;
 
 				default:
-					if (player.findPerk(PerkLib.Oviposition) < 0) return null;
-					if (player.lizardScore() >= 8) return null; // Still high, so don't remove Oviposition yet!
+					if (player.findPerk(PerkLib.Oviposition) < 0) return 0;
+					if (player.lizardScore() >= 8) return 0; // Still high, so don't remove Oviposition yet!
 					if (tfSource != "superHummus") {
 						outputText("\n\nAnother change in your uterus ripples through your reproductive systems."
 						          +"  Somehow you know you've lost a little bit of reptilian reproductive ability.\n");
 						outputText("(<b>Perk Lost: Oviposition</b>)\n");
 					}
 					player.removePerk(PerkLib.Oviposition);
-					return false; // Lost it
+					return -1; // Lost it
 			}
 		}
 

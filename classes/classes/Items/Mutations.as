@@ -88,6 +88,7 @@
 		public function incubiDraft(tainted:Boolean,player:Player):void
 		{
 			var tfSource:String = "incubiDraft";
+			if (!tainted) tfSource += "-purified";
 			player.slimeFeed();
 			var temp2:Number = 0;
 			var temp3:Number = 0;
@@ -1368,6 +1369,7 @@
 		public function succubiMilk(tainted:Boolean,player:Player):void
 		{
 			var tfSource:String = "succubiMilk";
+			if (!tainted) tfSource += "-purified";
 			player.slimeFeed();
 			var temp2:Number = 0;
 			var temp3:Number = 0;
@@ -1584,6 +1586,15 @@
 		public function caninePepper(type:Number,player:Player):void
 		{
 			var tfSource:String = "caninePepper";
+			if (player.findPerk(PerkLib.Hellfire)) tfSource += "-hellfire";
+			switch (type) {
+				case 5:  tfSource += "-bulbous";   break;
+				case 4:  tfSource += "-knotty";    break;
+				case 3:  tfSource += "-black";     break;
+				case 2:  tfSource += "-double";    break;
+				case 1:  tfSource += "-oversized"; break;
+				default: // type == 0 --> Canine Pepper
+			}
 			var temp2:Number = 0;
 			var temp3:Number = 0;
 			var crit:Number = 1;
@@ -6593,7 +6604,8 @@
 
 		public function sweetGossamer(type:Number,player:Player):void
 		{
-			var tfSource:String = (type == 1 ? "blackGossamer" : "sweetGossamer");
+			var tfSource:String = "sweetGossamer";
+			if (type == 1) tfSource += "-drider";
 			clearOutput();
 			changes = 0;
 			changeLimit = 1;
@@ -9429,6 +9441,7 @@
 		public function pigTruffle(boar:Boolean, player:Player):void
 		{
 			var tfSource:String = "pigTruffle";
+			if (boar) tfSource += "-boar";
 			changes = 0;
 			changeLimit = 1;
 			var temp:int = 0;
