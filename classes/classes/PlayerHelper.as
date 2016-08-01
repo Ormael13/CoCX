@@ -85,7 +85,7 @@ package classes
 
 		public function isBasilisk():Boolean
 		{
-			return game.bazaar.benoit.benoitManyEggsProduced() && eyeType == EYES_BASILISK;
+			return game.bazaar.benoit.benoitBigFamily() && eyeType == EYES_BASILISK;
 		}
 	}
 }

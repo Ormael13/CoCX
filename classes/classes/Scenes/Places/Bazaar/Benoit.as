@@ -165,15 +165,15 @@ public function clearBenoitPreggers():void
 	}
 }
 
-public function benoitTotalEggs():int
+public function benoitOffspring():int
 {
 	return flags[kFLAGS.BENOIT_EGGS] + flags[kFLAGS.FEMOIT_EGGS_LAID];
 }
 
-public function benoitManyEggsProduced():Boolean
+public function benoitBigFamily():Boolean
 {
 	if (flags[kFLAGS.BENOIT_STATUS] == 0) return false;
-	return benoitTotalEggs() >= 12; // I guess, 12 eggs is a good start (Stadler76)
+	return benoitOffspring() >= 12; // I guess, 12 eggs is a good start (Stadler76)
 }
 
 
@@ -651,7 +651,7 @@ private function talkToBenoit():void {
 		flags[kFLAGS.BENOIT_TALKED_TODAY] = 1;
 		benoitAffection(5);
 	}
-	if (benoitManyEggsProduced() && player.inte >= 60 && flags[kFLAGS.BENOIT_EYES_TALK_UNLOCKED] == 0) {
+	if (benoitBigFamily() && player.inte >= 60 && flags[kFLAGS.BENOIT_EYES_TALK_UNLOCKED] == 0) {
 		//toggle on "Basil. Eyes" from benoit's main menu.
 		flags[kFLAGS.BENOIT_EYES_TALK_UNLOCKED] = 1;
 		outputText("\n\n(<b>Basilisk Eyes option enabled in Benoit's menu!</b>)");
