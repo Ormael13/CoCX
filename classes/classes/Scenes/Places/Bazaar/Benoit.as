@@ -165,6 +165,18 @@ public function clearBenoitPreggers():void
 	}
 }
 
+public function benoitTotalEggs():int
+{
+	return flags[kFLAGS.BENOIT_EGGS] + flags[kFLAGS.FEMOIT_EGGS_LAID];
+}
+
+public function benoitManyEggsProduced():Boolean
+{
+	if (flags[kFLAGS.BENOIT_STATUS] == 0) return false;
+	return benoitTotalEggs() >= 12; // I guess, 12 eggs is a good start (Stadler76)
+}
+
+
 public function setBenoitShop(setButtonOnly:Boolean = false):void {
 	if (model.time.hours >= 9 && model.time.hours <= 17) {
 		if ((flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] == 1 && this.getGame().model.time.days >= flags[kFLAGS.FEMOIT_NEXTDAY_EVENT]) || flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] != 1)
@@ -304,6 +316,8 @@ public function benoitIntro():void {
 	//Suggest & sex
 	if (flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] > 0 && player.hasVagina() && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) addButton(5, "Suggest", eggySuggest);
 	if (player.hasCock() && flags[kFLAGS.BENOIT_STATUS] > 0 && player.lust >= 33) addButton(6, "Sex", femoitSexIntro);
+	if (flags[kFLAGS.BENOIT_EYES_TALK_UNLOCKED] == 1 && player.eyeType != EYES_BASILISK)
+		addButton(7, "Basil. Eyes", convertToBassyEyes);
 }
 //Buy or Sell First Time, only if prelover/prefem: You ask him what the deal is with his shop.
 private function buyOrSellExplanationFirstTime():void {
@@ -636,6 +650,13 @@ private function talkToBenoit():void {
 	if (flags[kFLAGS.BENOIT_TALKED_TODAY] == 0) {
 		flags[kFLAGS.BENOIT_TALKED_TODAY] = 1;
 		benoitAffection(5);
+	}
+	if (benoitManyEggsProduced() && player.inte >= 60 && flags[kFLAGS.BENOIT_EYES_TALK_UNLOCKED] == 0) {
+		//toggle on "Basil. Eyes" from benoit's main menu.
+		flags[kFLAGS.BENOIT_EYES_TALK_UNLOCKED] = 1;
+		outputText("\n\n(<b>Basilisk Eyes option enabled in Benoit's menu!</b>)");
+		doNext(camp.returnToCampUseOneHour);
+		return;
 	}
 	//Basilisk Womb
 	//Requires: Had sex with Benoit at least twice, have vagina, select talk
@@ -1170,6 +1191,15 @@ private function repeatBenoitFuckTakeCharge():void {
 	benoitAffection(2);
 	flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS]++;
 	player.orgasm();
+	doNext(camp.returnToCampUseOneHour);
+}
+
+//Basilisk Eyes
+private function convertToBassyEyes():void {
+	clearOutput();
+	outputText("\n\n(<b>You now have basilisk eyes</b>)");
+	player.eyeType = EYES_BASILISK;
+	flags[kFLAGS.BENOIT_BASIL_EYES_GRANTED]++
 	doNext(camp.returnToCampUseOneHour);
 }
 

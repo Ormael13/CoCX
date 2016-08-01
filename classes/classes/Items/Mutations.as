@@ -5358,7 +5358,7 @@
 			}
 			//<mod name="Reptile eyes" author="Stadler76">
 			//-Lizard eyes
-			if (player.eyeType != EYES_LIZARD && player.faceType == FACE_LIZARD && player.hasScales() && player.earType == EARS_LIZARD && changes < changeLimit && rand(4) == 0) {
+			if (!player.hasLizardEyes() && player.faceType == FACE_LIZARD && player.hasScales() && player.earType == EARS_LIZARD && changes < changeLimit && rand(4) == 0) {
 				if (player.hasReptileEyes())
 					outputText("\n\nYour eyes change slightly in their appearance.  ");
 				else

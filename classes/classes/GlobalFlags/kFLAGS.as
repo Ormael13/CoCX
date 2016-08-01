@@ -1305,8 +1305,8 @@ public static const UNKNOWN_FLAG_NUMBER_01296:int                               
 public static const UNKNOWN_FLAG_NUMBER_01297:int                                   = 1297;
 public static const UNKNOWN_FLAG_NUMBER_01298:int                                   = 1298;
 public static const UNKNOWN_FLAG_NUMBER_01299:int                                   = 1299;
-public static const UNKNOWN_FLAG_NUMBER_01300:int                                   = 1300;
-public static const UNKNOWN_FLAG_NUMBER_01301:int                                   = 1301;
+public static const BENOIT_EYES_TALK_UNLOCKED:int                                   = 1300;
+public static const BENOIT_BASIL_EYES_GRANTED:int                                   = 1301; // Counter to keep track, how often you gained them
 public static const UNKNOWN_FLAG_NUMBER_01302:int                                   = 1302;
 public static const UNKNOWN_FLAG_NUMBER_01303:int                                   = 1303;
 public static const UNKNOWN_FLAG_NUMBER_01304:int                                   = 1304;
