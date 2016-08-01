@@ -4984,6 +4984,11 @@
 		public function reptilum(player:Player):void
 		{
 			var tfSource:String = "reptilum";
+			if (player.hasDragonWingsAndFire())
+				tfSource += player.isBasilisk() ? "-dracolisk" : "-dragonewt";
+			else
+				tfSource += player.isBasilisk() ? "-basilisk"  : "-lizan";
+			//if (player.isTaur()) tfSource += "-taur";
 			player.slimeFeed();
 			//init variables
 			changes = 0;

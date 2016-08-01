@@ -176,7 +176,6 @@ public function benoitBigFamily():Boolean
 	return benoitOffspring() >= 12; // I guess, 12 eggs is a good start (Stadler76)
 }
 
-
 public function setBenoitShop(setButtonOnly:Boolean = false):void {
 	if (model.time.hours >= 9 && model.time.hours <= 17) {
 		if ((flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] == 1 && this.getGame().model.time.days >= flags[kFLAGS.FEMOIT_NEXTDAY_EVENT]) || flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] != 1)
@@ -309,13 +308,18 @@ public function benoitIntro():void {
 	addButton(2, "Talk", talkToBenoit);
 	addButton(14, "Leave", bazaar.enterTheBazaarAndMenu);
 	//Feminize & Herminize
-	if (flags[kFLAGS.FEMOIT_UNLOCKED] == 1 && flags[kFLAGS.BENOIT_STATUS] == 0) addButton(3, "Feminize", benoitFeminise);
-	if (flags[kFLAGS.BENOIT_STATUS] > 0 && flags[kFLAGS.BENOIT_STATUS] < 3) addButton(3, "Herminize", benoitHerminise);
+	if (flags[kFLAGS.FEMOIT_UNLOCKED] == 1 && flags[kFLAGS.BENOIT_STATUS] == 0)
+		addButton(3, "Feminize", benoitFeminise);
+	if (flags[kFLAGS.BENOIT_STATUS] > 0 && flags[kFLAGS.BENOIT_STATUS] < 3)
+		addButton(3, "Herminize", benoitHerminise);
 	//Basilisk Womb
-	if (flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.findPerk(PerkLib.BasiliskWomb) < 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && [0, 3].indexOf(flags[kFLAGS.BENOIT_STATUS]) >= 0) addButton(4, "Basil. Womb", tryToConvertToBassyWomb);
+	if (flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && player.findPerk(PerkLib.BasiliskWomb) < 0 && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && [0, 3].indexOf(flags[kFLAGS.BENOIT_STATUS]) >= 0)
+		addButton(4, "Basil. Womb", tryToConvertToBassyWomb);
 	//Suggest & sex
-	if (flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] > 0 && player.hasVagina() && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) addButton(5, "Suggest", eggySuggest);
-	if (player.hasCock() && flags[kFLAGS.BENOIT_STATUS] > 0 && player.lust >= 33) addButton(6, "Sex", femoitSexIntro);
+	if (flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] > 0 && player.hasVagina() && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3))
+		addButton(5, "Suggest", eggySuggest);
+	if (player.hasCock() && flags[kFLAGS.BENOIT_STATUS] > 0 && player.lust >= 33)
+		addButton(6, "Sex", femoitSexIntro);
 	if (flags[kFLAGS.BENOIT_EYES_TALK_UNLOCKED] == 1 && player.eyeType != EYES_BASILISK)
 		addButton(7, "Basil. Eyes", convertToBassyEyes);
 }
@@ -652,6 +656,19 @@ private function talkToBenoit():void {
 		benoitAffection(5);
 	}
 	if (benoitBigFamily() && player.inte >= 60 && flags[kFLAGS.BENOIT_EYES_TALK_UNLOCKED] == 0) {
+		outputText("You ask " + benoitMF("Benoit","Benoite") + " if " + benoitMF("he","she") + " has ever thought about granting you the eyes of a basilisk.");
+
+		outputText("\n\nThe basilisk is silent for a time, running his claws along the counter pensively.  \"<i>Yes,</i>\" " + benoitMF("he","she") + " says eventually, in a quiet tone."
+		          +"  \"<i>I 'ave.  Away from ze mountains, I 'ave 'ad time to sink.  I am not ze demons' slave anymore, and I am a funny joke of a basilisk anyway,"
+		          +" so I 'ave often thought about... making certain zacrifices.  If we 'ad just one more of our kind, away from zeir corruption, zen...</i>\" "
+		          + benoitMF("he","she") + " trails off, sighing heavily before smiling ruefully at you.  \"<i>Zose were ze kind of soughts I 'ad before I met you.  Crazy, yes?"
+		          +"  Even more crazy to be still sinking zem when a good " + player.mf("man", "woman") + " is giving me " + player.mf("'is", "'er")
+		          +" love for no reason except through ze kindness of " + player.mf("'is", "'er") + " 'art.  Still... it is so frustrating, being able to sink clearly about zese sings"
+		          +" and not being able to do anysing about it.</i>\"");
+		
+		outputText("\n\nYour mind wanders.  You doubt that even if you wanted to, you could turn into a basilisk proper.");
+		outputText("\n\nBenoit answers warily.  \"<i>You did so much for my folk, that I may figure out somesing to grant zem to you."
+		          +"  But, [name], tell me you're not going to do somesing so reckless as experiment on your body?</i>\"");
 		//toggle on "Basil. Eyes" from benoit's main menu.
 		flags[kFLAGS.BENOIT_EYES_TALK_UNLOCKED] = 1;
 		outputText("\n\n(<b>Basilisk Eyes option enabled in Benoit's menu!</b>)");
@@ -662,7 +679,7 @@ private function talkToBenoit():void {
 	//Requires: Had sex with Benoit at least twice, have vagina, select talk
 	if (((flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] > 2 && player.inte >= 60 && flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 0) || flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 2) && player.hasVagina()) {
 		outputText("You ask " + benoitMF("Benoit","Benoite") + " if " + benoitMF("he","she") + " has ever thought about trying to do something to help his people's plight.");
-		
+
 		outputText("\n\nThe basilisk is silent for a time, running his claws along the counter pensively.  \"<i>Yes,</i>\" " + benoitMF("he","she") + " says eventually, in a quiet tone.  \"<i>I 'ave.  Away from ze mountains, I 'ave 'ad time to sink.  I am not ze demons' slave anymore, and I am a funny joke of a basilisk anyway, so I 'ave often thought about... making certain zacrifices.  If we 'ad just one female, away from zeir corruption, zen...</i>\" " + benoitMF("he","she") + " trails off, sighing heavily before smiling ruefully at you.  \"<i>Zose were ze kind of soughts I 'ad before I met you.  Crazy, yes?  Even more crazy to be still sinking zem when a good woman is giving me 'er love for no reason except through ze kindness of 'er 'art.  Still... it is so frustrating, being able to sink clearly about zese sings and not being able to do anysing about it.</i>\"");
 		
 		if (player.inte >= 60) {

@@ -228,6 +228,10 @@ package classes.Items
 		public function updateOvipositionPerk(tfSource:String):*
 		{
 			trace('called updateOvipositionPerk("' + tfSource + '")');
+			var tsParts:Array = tfSource.split("-");
+			if (tsParts.length > 1 && ["goldenSeed", "catTransformation"].indexOf(tsParts[0]) == -1)
+				tfSource = tsParts[0];
+
 			// First things first :)
 			if (player.findPerk(PerkLib.BasiliskWomb) >= 0) {
 				if (player.findPerk(PerkLib.Oviposition) >= 0)
