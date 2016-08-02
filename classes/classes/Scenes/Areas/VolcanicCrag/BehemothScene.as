@@ -303,48 +303,55 @@ package classes.Scenes.Areas.VolcanicCrag
 			clearOutput();
 			outputText(images.showImage("behemoth-anal-catch"), false);
 			if (player.HP <= 0 || player.lust >= player.maxLust()) {
-				outputText("You have no choice but to accept the fact that the behemoth is going to penetrate you anally. He looks at you with a grin and says, \"<i>Go on, strip for me. I want to see your wonderful butt, " + player.mf("dude", "chick") + ".</i>\"\n\n");
+				outputText("The behemoth looks you over with a friendly leer as your face heats.  \"<i>Turn around,</i>\" he says, and you scramble to obey, too tired to do otherwise. \"<i>That's a nice ass," + player.mf("dude", "lady") + ", but I'd like to see more of it, yeah?</i>\"\n\n");
 			}
 			else {
-				outputText("You definitely want that " + (silly() ? "dig bick": "big dick") + " in your [ass]. ");
+				outputText("You definitely want that " + (silly() ? "dig bick": "big dick") + " in your [ass] and you tell him such.  \"Not in the tent,\" he says with amusement, and he leads you outside.  \n\n");
 			}
-			outputText("" + player.clothedOrNaked("You strip out of your [armor] until you're naked. You make sure to toss your [armor] into a neat pile. ") + "You present your naked body and more importantly, your [butt] to the behemoth. He shifts his loincloth aside to expose his large pecker and says excitedly, \"<i>Now that's some wonderful butt-cheeks you've got there! I'll go gentle on you and make sure you enjoy the experience.</i>\"");
-			if (player.isBiped()) outputText("\n\nYou get down on all fours");
-			else if (player.isTaur()) outputText("\n\nYou adjust your pose so your [butt] is at the right height");
-			else if (player.isNaga()) outputText("\n\nYou shift your body and tail until your [ass] is accessible");
-			else if (player.isGoo()) outputText("\n\nYou shift your gooey body");
-			outputText(" and prepare for whatever he has in store for you. The behemoth walks to you and caress your [butt] gently. He walks around you and sticks his manhood into your mouth. He smiles and says, \"<i>I need them lubed up. I want you to suck it good!</i>\"");
-			outputText("\n\nYou have no choice; you're going to coat his length in saliva. After all, he needs a good lubricant so you can take his monster cock. You can already taste the precum but the behemoth pulls his cock out of your mouth. \"<i>That'll do. I'm going to start now,</i>\" he says as he gets behind you.");
-			outputText("\n\nYou clench your teeth and ready for whatever's coming. You feel the tip of his cock entering your backdoor. As time passes, more and more of his length slides into your [ass].");
+			outputText("" + player.clothedOrNaked("You strip hurriedly, tossing your [armor] into a quick pile, because with claws and strength like that, you don't know how much care he'd take, then glance to make sure your belongings look safe.  ") + "The hot air's pleasant on your body, and your skin prickles as you present your [butt] to the behemoth, turning your head to watch him.  \"<i>Nice ass,</i>\" he says after a whistle, then twists his loincloth to free his massive prick.  \"<i>I'll be gentle, I promise.</i>\"\n\n");
+			outputText("You swallow in trepidation, but he's been good to you so far, and you ");
+			if (player.isBiped()) outputText("bend down on all fours");
+			else if (player.isTaur()) outputText("rest your front legs down");
+			else if (player.isNaga()) outputText("twist your tail to show off your cloaca");
+			else if (player.isGoo()) outputText("shift your malleable body");
+			outputText(" as you wait for him to do what he wants.  You watch him walk up to you, his feline paws silent on the rocks, and you shiver as his firm hands caress your [butt] gently, his claws only the slightest pressure as your breath hitches.\n\n");
+			outputText("He doesn't do more than that, though.  Not yet.  He simply releases your ass then prowls around in front of you, your [eyes] on his cock the whole time, and you don't dare move though your [skin] prickles.  \"<i>I need some lube,</i>\" he says gently, trawling a claw under your jaw, and you open your mouth obediently as he slides his length in, the warmth so much more present than the heat of the crag.\n\n");
+			outputText("You suck on it, hoping your saliva will be enough to take his monster cock, but you're only just getting started when he pulls out, precum beading on the humanoid tip.  \"<i>That'll do,</i>\" he says, though you doubt it, and he moves behind you ");
+			if (player.isBiped()) outputText("lifting your legs and taking most of your weight onto his arms.");
+			else if (player.isTaur()) outputText("lifting your rear legs and raising your ass for easier access.");
+			else if (player.isNaga()) outputText("lifting your whole body as you wind your tail around him.");
+			else if (player.isGoo()) outputText("to pull your gooey ass to the right level.");
+			outputText("\n\nYour jaw clenches, nervous despite his strength, and he eases the tip of his cock into your backdoor as gravity pushes you onto him, his length slowly sliding into your [ass].\n\n");
 			player.buttChange(45, true, true, true);
-			if (isVirgin) outputText("\"<i>Gods, that's tight! It's a good thing you've been saving your virginity for me,</i>\" The behemoth says with a smile.");
-			if (player.looseness(false) < 3) outputText(" It takes a bit of effort for him to slide his cock inside due to your tightness.");
-			else outputText(" He easily slides his entire length into your [ass].");
-			outputText("\n\nEven though his cock is large, you don't feel any sign of discomfort. The behemoth slides his cock back and forth with your [ass] clamping down. ");
-			if (player.hasCock()) outputText("Your " + (player.cocks.length == 1 ? "cock": "cocks") + " springs to full erectness and precum leaks from your " + player.multiCockDescript() + ". ");
-			if (player.hasCock() && player.hasVagina()) outputText("At the same time, ");
-			if (player.hasVagina()) outputText("" + (player.hasCock() ? "femspunk": "Femspunk") + " leaks from your " + player.vaginaDescript() + "."); 
-			outputText("\n\n\"<i>I'm going to pace up a bit,</i>\" the behemoth announces. He gradually increases his thrusting pace. With each thrust, you moan in pleasure and enjoy every moment of being fucked. ");
-			if (flags[kFLAGS.BEHEMOTH_ANAL_CATCH] <= 0) outputText("He says, \"<i>I'm sure you've never known about how much a behemoth can cum. In fact, I'm capable of producing a lot of cum, far beyond what a minotaur can produce. Or even that fox-herm in Tel'Adre! Don't let the size of my balls deceive you,</i>\" he says with a chuckle. You recall his balls being three inches in length.");
-			outputText("\n\nIt seems take forever but all good things must come to an end. \"<i>I'm going to cum!</i>\" The behemoth announces. With a cry of pleasure and glee, he unleashes a huge amount of cum into your bowels. His cum surges through your intestines and up to your belly. By the gods, you feel so full! You look down to notice that your belly definitely got swollen. ");
+			if (isVirgin) outputText("\"<i>You're tight enough for me to be your first,</i>\" he observes, and you shoot him a glare. \"<i>What, really?  What luck!</i>\"  You wonder if he means for him or you, but it's just as true either way.  ");
+			if (player.looseness(false) < 3) outputText("You're tight enough you only move a little at a time, ");
+			else outputText("You've done this enough times for your ass to welcome him with ease, ");
+			outputText("but you're still surprised when you feel his ballsack touch you that he fit in that well painlessly, no matter his size.  He lifts you back up a little faster, leaving only the head in your ass, and you whine from the lack of pressure, eager to be filled and your energy already restoring.  Your [ass] clamps down to keep him from escaping, though the bit of you that can still think doubts he'd want to, and he pushes back in, ");
+			if (player.hasCock()) outputText("your " + (player.cocks.length == 1 ? "cock": "cocks") + " springing to full erectness");
+			if (player.hasCock() && player.hasVagina()) outputText(" and ");
+			if (player.hasVagina()) outputText("femspunk leaking from your " + player.vaginaDescript()); 
+			outputText(".\n\n\"<i>You good so far?</i>\" he asks, and you groan for more as you touch yourself and try to grind down on him, most of your weight already under his control.  He laughs, but he does go faster, his hands squeezing your waist as his claws edge just shy of causing pain and you moan, his obscene length sliding easily through your ass as he thrusts faster, pulling you onto his cock as much as he's pushing into you, and you think you might black out a little.\n\n");
+			if (flags[kFLAGS.BEHEMOTH_ANAL_CATCH] <= 0) outputText("\"<i>Don't let my balls deceive you,</i>\" he says, voice rough with sex, and it's hard to listen to him with how thoroughly he's pounding you.  You can feel their size banging against your ass, and they're definitely large, but ....  \"<i>Behemoths like me, we make a LOT of cum, more than minotaurs or that fox-herm, and I'm gonna give you all of it.</i>\"\n\n");
+			outputText("You feel like you've been his cock sleeve your whole existence and wish it could last forever, but he holds your ass up for a moment and pauses.  \"<i>Bottom's up!</i>\" he announces, and he slams you back down onto his cock as he presses into you and holds it, his cock twitching as it starts spurting and doesn't stop, the amount surging into a cum fountain right into your bowels, filling you up beyond what you think you could take as your belly swells. By the gods, how much can there BE?!\n\n");
 			player.refillHunger(70, false);
-			outputText("His orgasm triggers yours too.\n\n");
+			outputText("His orgasm gives you energy, and you cum as well, feeling rejuvenated as ");
 			if (player.hasCock()) {
-				outputText("You cum, ");
-				if (player.cumQ() < 50) outputText("shooting small ropes of jism all over the ground.");
-				else if (player.cumQ() >= 50 && player.cumQ() < 250) outputText("shooting ropes of jism all over the ground.");
-				else if (player.cumQ() >= 250 && player.cumQ() < 500) outputText("shooting jets of cum all over the ground, forming a small puddle.");
-				else if (player.cumQ() >= 500 && player.cumQ() < 2500) outputText("shooting torrents of cum all over the ground, forming a medium puddle of your seed.");
-				else outputText("shooting waves after waves of your seed that never seem to end. A large puddle of cum forms after you eventually stop cumming.");
+				outputText("your " + (player.cocks.length == 1 ? "cock": "cocks") + "shoot ");
+				if (player.cumQ() < 50) outputText("small ropes of jism all over the ground and yourself.");
+				else if (player.cumQ() >= 50 && player.cumQ() < 250) outputText("ropes of jism all over the ground and yourself.");
+				else if (player.cumQ() >= 250 && player.cumQ() < 500) outputText("jets of cum all over the ground and yourself, puddling on your belly.");
+				else if (player.cumQ() >= 500 && player.cumQ() < 2500) outputText("torrents of cum all over the ground and yourself, puddling on the rocky ground.");
+				else outputText("waves after waves of your seed that never seem to end as you're left completely soaked and your cum pools on the rocks, dribbling down enough everyone will know you had a good time.");
 			}
-			if (player.hasCock() && player.hasVagina()) outputText("At the same time, ");
+			if (player.hasCock() && player.hasVagina()) outputText("  As you watch the show, ");
 			if (player.hasVagina()) {
-				if (player.averageVaginalWetness() < 4) outputText("" + (player.hasCock() ? "femspunk": "Femspunk") + " bursts from your " + player.vaginaDescript() + " and seeps down your [legs].");
-				else outputText("" + (player.hasCock() ? "femspunk": "Femspunk") + " gushes from your " + player.vaginaDescript() + " and splashes onto the ground."); 
+				if (player.averageVaginalWetness() < 4) outputText("femspunk seeps down your [legs]");
+				else outputText("femspunk spurts out of your cunt and splashes onto the ground");
+				outputText(" as your " + player.vaginaDescript() + " clenches relentlessly on your fingers, hard enough to bruise.");  
 			}
-			if (player.gender == 0) outputText("Your entire body rocks from the overwhelming pleasure.");
-			outputText(" You finally recover from your orgasmic high and fall down, exhausted. The behemoth finally slides his cock out of your cum-stuffed [ass] and lays next to you. \"<i>It feels great to have someone to fuck,</i>\" the behemoth says.");
-			outputText("\n\nHe lays on top of you and the two of you rest for a while. You wake up some time later and you give the behemoth a kiss on one of his cheeks and let him know that you'll be going. \"<i>See you later,</i>\" the behemoth says with a smile on his face. You " + player.clothedOrNaked("redress and ") + "walk back to your camp, oddly feeling a bit better.");
+			if (player.gender == 0) outputText("your whole body shakes in overwhelming pleasure.");
+			outputText("  You'd collapse if you were under your own power, but the behemoth carefully lifts you off his cock and spooge floods out of your [ass], coating his legs and the hard ground.  He waits for the dripping to slow before setting you down gently and lying next to you, the two of you sharing the wet spot.  \"<i>I love having someone to fuck,</i>\" he says warmly, his arm over you in claim as you feel his muscles spasm in aftershocks and you rest for a while, sure nothing would pick a fight with him.\n\n");
+			outputText("You wake up some time later and kiss his cheek before letting him know you'll be going.  \"<i>See you later,</i>\" he says as he lets you up, though he doesn't bother getting up. The main thing you remember as " + player.clothedOrNaked("he watches you redress and ") + "you walk back to your camp is his expression of utter contentment, and your mood carries on for the rest of the day.");
 			player.orgasm();
 			player.slimeFeed();
 			HPChange(player.maxHP() / 4, false);
