@@ -4995,6 +4995,11 @@
 		public function reptilum(player:Player):void
 		{
 			var tfSource:String = "reptilum";
+			if (player.hasDragonWingsAndFire())
+				tfSource += player.isBasilisk() ? "-dracolisk" : "-dragonewt";
+			else
+				tfSource += player.isBasilisk() ? "-basilisk"  : "-lizan";
+			//if (player.isTaur()) tfSource += "-taur";
 			player.slimeFeed();
 			//init variables
 			changes = 0;
@@ -5369,7 +5374,7 @@
 			}
 			//<mod name="Reptile eyes" author="Stadler76">
 			//-Lizard eyes
-			if (player.eyeType != EYES_LIZARD && player.faceType == FACE_LIZARD && player.hasScales() && player.earType == EARS_LIZARD && changes < changeLimit && rand(4) == 0) {
+			if (!player.hasLizardEyes() && player.faceType == FACE_LIZARD && player.hasScales() && player.earType == EARS_LIZARD && changes < changeLimit && rand(4) == 0) {
 				if (player.hasReptileEyes())
 					outputText("\n\nYour eyes change slightly in their appearance.  ");
 				else

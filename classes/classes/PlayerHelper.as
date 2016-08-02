@@ -31,6 +31,11 @@ package classes
 			return [EYES_LIZARD, EYES_DRAGON, EYES_BASILISK].indexOf(eyeType) != -1;
 		}
 
+		public function hasLizardEyes():Boolean
+		{
+			return [EYES_LIZARD, EYES_BASILISK].indexOf(eyeType) != -1;
+		}
+
 		public function hasReptileFace():Boolean
 		{
 			return [FACE_SNAKE_FANGS, FACE_LIZARD, FACE_DRAGON].indexOf(faceType) != -1;
@@ -73,14 +78,14 @@ package classes
 			return findPerk(PerkLib.Dragonfire) >= 0;
 		}
 
-		public function hasDragonWingsAndFire():Boolean
+		public function hasDragonWingsAndFire(largeWings:Boolean = true):Boolean
 		{
-			return hasDragonWings(true) && hasDragonfire();
+			return hasDragonWings(largeWings) && hasDragonfire();
 		}
 
 		public function isBasilisk():Boolean
 		{
-			return findPerk(PerkLib.BasiliskWomb) >= 0 /*&& eyeType == EYES_BASILISK*/;
+			return game.bazaar.benoit.benoitBigFamily() && eyeType == EYES_BASILISK;
 		}
 	}
 }

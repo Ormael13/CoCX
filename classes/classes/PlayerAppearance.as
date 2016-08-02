@@ -272,13 +272,16 @@ package classes
 				outputText("  Your eyes are solid spheres of inky, alien darkness.");
 			else if (player.faceType != FACE_CAT && player.hasReptileEyes())
 			{
-				outputText("Your eyes are");
+				outputText("  Your eyes are");
 				switch (player.eyeType)
 				{
 					case EYES_DRAGON: outputText(" prideful, fierce dragon eyes with vertically slitted pupils and burning orange irises. They glitter even in the darkness and they"); break;
 					case EYES_LIZARD: outputText(" those of a lizard with vertically slitted pupils and green-yellowish irises. They"); break;
+					case EYES_BASILISK: outputText(" basilisk eyes, grey reptilian pools with vertically slitted pupils. They");
 				}
 				outputText(" come with the typical second set of eyelids, allowing you to blink twice as much as others.");
+				if (player.eyeType == EYES_BASILISK)
+					outputText(" Others seem compelled to look into them.");
 			}
 
 			//Hair

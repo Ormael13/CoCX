@@ -44,12 +44,13 @@ package classes.internals
 		public static function num2Text2(number:int):String {
 			if (number < 0) return number.toString(); //Can't really have the -10th of something
 			if (number <= 10) return NUMBER_WORDS_POSITIONAL[number];
-			switch (number % 10) {
+			// For (number > 10) the method would return 11st, 12nd, 13rd and so on with the switch-case below (Stadler76)
+			/*switch (number % 10) {
 				case 1: return number.toString() + "st";
 				case 2: return number.toString() + "nd";
 				case 3: return number.toString() + "rd";
 				default:
-			}
+			}*/
 			return number.toString() + "th";
 		}
 		
