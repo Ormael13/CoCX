@@ -43,7 +43,7 @@ package classes.Scenes
 			menu();
 			addButton(0, "Explore", tryDiscover, null, null, null, "Explore to find new regions and visit any discovered regions.");
 			if (player.exploredForest > 0) addButton(1, "Forest", kGAMECLASS.forest.exploreForest, null, null, null, "Visit the lush forest. \n\nRecommended level: 1" + (player.level < 6 ? "\n\nBeware of Tentacle Beasts!" : "") + (debug ? "\n\nTimes explored: " + player.exploredForest : ""));
-			if (player.exploredLake > 0) addButton(2, "Lake", kGAMECLASS.lake.exploreLake, null, null, null, "Visit the lake and explore the beach. \n\nRecommended level: 1" + (debug ? "\n\nTimes explored: " + player.exploredLake : ""));
+			if (flags[kFLAGS.TIMES_EXPLORED_LAKE] > 0) addButton(2, "Lake", kGAMECLASS.lake.exploreLake, null, null, null, "Visit the lake and explore the beach. \n\nRecommended level: 1" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_LAKE] : ""));
 			if (player.exploredDesert > 0) addButton(3, "Desert", kGAMECLASS.desert.exploreDesert, null, null, null, "Visit the dry desert. \n\nRecommended level: 2" + (debug ? "\n\nTimes explored: " + player.exploredDesert : ""));
 
 			if (player.exploredMountain > 0) addButton(5, "Mountain", kGAMECLASS.mountain.exploreMountain, null, null, null, "Visit the mountain. \n\nRecommended level: 5" + (debug ? "\n\nTimes explored: " + player.exploredMountain : ""));
@@ -225,14 +225,14 @@ package classes.Scenes
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
-				if (player.exploredLake <= 0) {
+				if (flags[kFLAGS.TIMES_EXPLORED_LAKE] <= 0) {
 					outputText("Your wanderings take you far and wide across the barren wasteland that surrounds the portal, until the smell of humidity and fresh water alerts you to the nearby lake.  With a few quick strides you find a lake so massive the distant shore cannot be seen.  Grass and a few sparse trees grow all around it.\n\n<b>You've discovered the Lake!</b>", true);
-					player.exploredLake = 1;
+					flags[kFLAGS.TIMES_EXPLORED_LAKE] = 1;
 					player.explored++;
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
-				if (player.exploredLake >= 1 && rand(3) == 0 && player.exploredDesert <= 0) {
+				if (flags[kFLAGS.TIMES_EXPLORED_LAKE] >= 1 && rand(3) == 0 && player.exploredDesert <= 0) {
 					outputText("You stumble as the ground shifts a bit underneath you.  Groaning in frustration, you straighten up and discover the rough feeling of sand ", true);
 					if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("inside your footwear, between your toes", false);
 					if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("in your hooves", false);
