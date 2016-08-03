@@ -206,7 +206,6 @@
 			player.beardStyle = 0;
 			//Exploration
 			player.explored = 0;
-			player.exploredForest = 0;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				//Inventory clear
 				player.itemSlot1.unlocked = true;

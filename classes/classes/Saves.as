@@ -1029,7 +1029,6 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.ass.analLooseness = player.ass.analLooseness;
 		saveFile.data.ass.fullness = player.ass.fullness;
 		//EXPLORED
-		saveFile.data.exploredForest = player.exploredForest;
 		saveFile.data.explored = player.explored;
 		saveFile.data.gameState = gameStateGet();
 		
@@ -2118,7 +2117,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		gameStateSet(saveFile.data.gameState);
 		flags[kFLAGS.TIMES_EXPLORED_LAKE]     = (flags[kFLAGS.TIMES_EXPLORED_LAKE] || saveFile.data.exploredLake);
 		flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] = (flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] || saveFile.data.exploredMountain);
-		player.exploredForest = saveFile.data.exploredForest;
+		flags[kFLAGS.TIMES_EXPLORED_FOREST]   = (flags[kFLAGS.TIMES_EXPLORED_FOREST] || saveFile.data.exploredForest);
 		flags[kFLAGS.TIMES_EXPLORED_DESERT]   = (flags[kFLAGS.TIMES_EXPLORED_DESERT] || saveFile.data.exploredDesert);
 		player.explored = saveFile.data.explored;
 		

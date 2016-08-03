@@ -147,7 +147,7 @@ package classes.Scenes.Areas
 		{
 			clearOutput();
 			//Increment forest exploration counter.
-			player.exploredForest++;
+			flags[kFLAGS.TIMES_EXPLORED_FOREST]++;
 
 			var choice:Array = [];
 			var select:int;
@@ -172,7 +172,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Chance to discover deepwoods
-			if ((player.exploredForest >= 20) && player.findStatusEffect(StatusEffects.ExploredDeepwoods) < 0) {
+			if ((flags[kFLAGS.TIMES_EXPLORED_FOREST] >= 20) && player.findStatusEffect(StatusEffects.ExploredDeepwoods) < 0) {
 				player.createStatusEffect(StatusEffects.ExploredDeepwoods, 0, 0, 0, 0);
 				outputText("After exploring the forest so many times, you decide to really push it, and plunge deeper and deeper into the woods.  The further you go the darker it gets, but you courageously press on.  The plant-life changes too, and you spot more and more lichens and fungi, many of which are luminescent.  Finally, a wall of tree-trunks as wide as houses blocks your progress.  There is a knot-hole like opening in the center, and a small sign marking it as the entrance to the 'Deepwoods'.  You don't press on for now, but you could easily find your way back to explore the Deepwoods.\n\n<b>Deepwoods exploration unlocked!</b>", true);
 				doNext(camp.returnToCampUseOneHour);
@@ -191,7 +191,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Marble randomness
-			if (player.exploredForest % 50 == 0 && player.exploredForest > 0 && player.findStatusEffect(StatusEffects.MarbleRapeAttempted) < 0 && player.findStatusEffect(StatusEffects.NoMoreMarble) < 0 && player.findStatusEffect(StatusEffects.Marble) >= 0 && flags[kFLAGS.MARBLE_WARNING] == 0) {
+			if (flags[kFLAGS.TIMES_EXPLORED_FOREST] % 50 == 0 && flags[kFLAGS.TIMES_EXPLORED_FOREST] > 0 && player.findStatusEffect(StatusEffects.MarbleRapeAttempted) < 0 && player.findStatusEffect(StatusEffects.NoMoreMarble) < 0 && player.findStatusEffect(StatusEffects.Marble) >= 0 && flags[kFLAGS.MARBLE_WARNING] == 0) {
 				//can be triggered one time after Marble has been met, but before the addiction quest starts.
 				clearOutput();
 				outputText("While you're moving through the trees, you suddenly hear yelling ahead, followed by a crash and a scream as an imp comes flying at high speed through the foliage and impacts a nearby tree.  The small demon slowly slides down the tree before landing at the base, still.  A moment later, a familiar-looking cow-girl steps through the bushes brandishing a huge two-handed hammer with an angry look on her face.");
