@@ -79,7 +79,6 @@ use namespace kGAMECLASS;
 		//Number of times explored for new areas
 		public var explored:Number = 0;
 		public var exploredForest:Number = 0;
-		public var exploredDesert:Number = 0;
 
 		//Player pregnancy variables and functions
 		override public function pregnancyUpdate():Boolean {
