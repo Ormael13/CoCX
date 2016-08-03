@@ -2742,7 +2742,7 @@ private function updateAchievements():void {
 	//Zones
 	if (flags[kFLAGS.TIMES_EXPLORED_FOREST] > 0 && flags[kFLAGS.TIMES_EXPLORED_LAKE] > 0 && flags[kFLAGS.TIMES_EXPLORED_DESERT] > 0 && flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] > 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && player.findStatusEffect(StatusEffects.ExploredDeepwoods) >= 0 && flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0 && flags[kFLAGS.BOG_EXPLORED] > 0 && flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) awardAchievement("Explorer", kACHIEVEMENTS.ZONE_EXPLORER);
 	if (placesCount() >= 10) awardAchievement("Sightseer", kACHIEVEMENTS.ZONE_SIGHTSEER);
-	if (player.explored >= 1) awardAchievement("Where am I?", kACHIEVEMENTS.ZONE_WHERE_AM_I);
+	if (flags[kFLAGS.TIMES_EXPLORED] >= 1) awardAchievement("Where am I?", kACHIEVEMENTS.ZONE_WHERE_AM_I);
 	if (flags[kFLAGS.TIMES_EXPLORED_DESERT] >= 100) awardAchievement("Dehydrated", kACHIEVEMENTS.ZONE_DEHYDRATED);
 	if (flags[kFLAGS.TIMES_EXPLORED_FOREST] >= 100) awardAchievement("Forest Ranger", kACHIEVEMENTS.ZONE_FOREST_RANGER);
 	if (flags[kFLAGS.TIMES_EXPLORED_LAKE] >= 100) awardAchievement("Vacationer", kACHIEVEMENTS.ZONE_VACATIONER);

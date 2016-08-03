@@ -76,8 +76,6 @@ use namespace kGAMECLASS;
 		public var tempTou:Number = 0;
 		public var tempSpe:Number = 0;
 		public var tempInt:Number = 0;
-		//Number of times explored for new areas
-		public var explored:Number = 0;
 
 		//Player pregnancy variables and functions
 		override public function pregnancyUpdate():Boolean {
