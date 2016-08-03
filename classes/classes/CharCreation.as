@@ -208,7 +208,6 @@
 			player.explored = 0;
 			player.exploredForest = 0;
 			player.exploredDesert = 0;
-			player.exploredMountain = 0;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				//Inventory clear
 				player.itemSlot1.unlocked = true;
