@@ -12,6 +12,7 @@ package classes
 	public class Bindings 
 	{
 		public function get game():CoC { return kGAMECLASS; }
+		public function get flags():DefaultDict { return game.flags; }
 
 		public function Bindings() {}
 
@@ -24,6 +25,10 @@ package classes
 					game.outputText("Game saved to slot " + slot + "!", true);
 					game.doNext(game.playerMenu);
 				};
+				if (flags[kFLAGS.DISABLE_QUICKSAVE_CONFIRM] != 0) {
+					doQuickSave();
+					return;
+				}
 				game.clearOutput();
 				game.outputText("You are about to quicksave the current game to slot <b>" + slot + "</b>\n\nAre you sure?");
 				game.menu();
@@ -45,7 +50,7 @@ package classes
 					}
 				};
 				if (saveFile.data.exists) {
-					if (game.player.str == 0) {
+					if (game.player.str == 0 || flags[kFLAGS.DISABLE_QUICKLOAD_CONFIRM] != 0) {
 						doQuickLoad();
 						return;
 					}

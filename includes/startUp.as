@@ -537,7 +537,25 @@ public function settingsScreenInterfaceSettings():void {
 		outputText("Measurement: <b>Metric</b>\n Height and cock size will be measured in metres and centimetres.");
 	else
 		outputText("Measurement: <b>Imperial</b>\n Height and cock size will be measured in feet and inches.");
-		
+
+	outputText("\n\n");
+
+	if (flags[kFLAGS.DISABLE_QUICKLOAD_CONFIRM] == 0)
+	{
+		outputText("Confirm Quickload: <font color=\"#008000\"><b>ON</b></font> (Quickload confirmation dialog is enabled).");
+	}
+	else
+		outputText("Confirm Quickload: <font color=\"#800000\"><b>OFF</b></font> (Quickload confirmation dialog is disabled).");
+
+	outputText("\n\n");
+
+	if (flags[kFLAGS.DISABLE_QUICKSAVE_CONFIRM] == 0)
+	{
+		outputText("Confirm Quicksave: <font color=\"#008000\"><b>ON</b></font> (Quicksave confirmation dialog is enabled).");
+	}
+	else
+		outputText("Confirm Quicksave: <font color=\"#800000\"><b>OFF</b></font> (Quicksave confirmation dialog is disabled).");
+
 	menu();
 	addButton(0, "Side Bar Font", toggleFont, null, null, null, "Toggle between old and new font for side bar.");
 	addButton(1, "Main BG", menuMainBackground, null, null, null, "Choose a background for main game interface.");
@@ -547,6 +565,9 @@ public function settingsScreenInterfaceSettings():void {
 	addButton(5, "Toggle Images", toggleImages, null, null, null, "Enable or disable image pack.");
 	addButton(6, "Time Format", toggleTimeFormat, null, null, null, "Toggles between 12-hour and 24-hour format.");
 	addButton(7, "Measurements", toggleMeasurements, null, null, null, "Switch between imperial and metric measurements.  \n\nNOTE: Only applies to your appearance screen.");
+
+	addButton(10, "Confirm Load", toggleQuickLoadConfirm, null, null, null, "Toggles the confirmation dialog for Quickload.", "Confirm Quickload");
+	addButton(11, "Confirm Save", toggleQuickSaveConfirm, null, null, null, "Toggles the confirmation dialog for Quicksave.", "Confirm Quicksave");
 	addButton(14, "Back", settingsScreenMain);
 }
 
@@ -650,6 +671,15 @@ public function toggleTimeFormat():void {
 	settingsScreenInterfaceSettings();
 }
 
+public function toggleQuickLoadConfirm():void {
+	flags[kFLAGS.DISABLE_QUICKLOAD_CONFIRM] ^= 1; // Bitwise XOR. Neat trick to toggle between 0 and 1
+	settingsScreenInterfaceSettings();
+}
+
+public function toggleQuickSaveConfirm():void {
+	flags[kFLAGS.DISABLE_QUICKSAVE_CONFIRM] ^= 1; // Bitwise XOR. Neat trick to toggle between 0 and 1
+	settingsScreenInterfaceSettings();
+}
 public function toggleMeasurements():void {
 	if (flags[kFLAGS.USE_METRICS] < 1) flags[kFLAGS.USE_METRICS] = 1;
 	else flags[kFLAGS.USE_METRICS] = 0;
