@@ -281,7 +281,8 @@ the text from being too boring.
 		
 		public var mainViewManager:MainViewManager = new MainViewManager();
 		//Scenes in includes folder GONE! Huzzah!
-		
+
+		public var bindings:Bindings = new Bindings();
 		/****
 			This is used purely for bodges while we get things cleaned up.
 			Hopefully, anything you stick to this object can be removed eventually.
