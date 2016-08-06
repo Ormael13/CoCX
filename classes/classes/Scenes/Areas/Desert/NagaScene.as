@@ -903,7 +903,7 @@ public function naggaTease():void {
 			if (player.findPerk(PerkLib.HistoryWhore) >= 0) {
 				damage *= 1.15;
 			}
-			monster.teased(damage);
+			monster.teased(monster.lustVuln * damage);
 			combat.combatTeases.teaseXP(1);
 		}
 		//Nuttin honey
