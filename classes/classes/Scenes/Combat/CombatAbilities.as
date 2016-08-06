@@ -689,10 +689,10 @@ package classes.Scenes.Combat
 				addButton(button++, "DragonFire", dragonBreath, null, null, null, "Unleash fire from your mouth. This can only be done once a day. \n\nFatigue Cost: " + player.spellCost(20), "Dragon Fire");
 			}
 			if (player.findPerk(PerkLib.FireLord) >= 0) {
-				addButton(button++,"Fire Breath",fireballuuuuu, null, null, null, "Unleash fire from your mouth. \n\nFatigue Cost: 20", "Fire Breath");
+				addButton(button++, "Terra Fire", fireballuuuuu, null, null, null, "Unleash terrestrial fire from your mouth. \n\nFatigue Cost: 20", "Terra Fire");
 			}
 			if (player.findPerk(PerkLib.Hellfire) >= 0) {
-				addButton(button++,"Hellfire",hellFire, null, null, null, "Unleash fire from your mouth. \n\nFatigue Cost: " + player.spellCost(20));
+				addButton(button++, "Hellfire", hellFire, null, null, null, "Unleash fire from your mouth. \n\nFatigue Cost: " + player.spellCost(20));
 			}
 			//Possess
 			if (player.findPerk(PerkLib.Incorporeality) >= 0) {
