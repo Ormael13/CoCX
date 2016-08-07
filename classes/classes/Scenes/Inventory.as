@@ -650,6 +650,14 @@ package classes.Scenes
 				}
 				foundItem = true;
 			}
+			if (player.hasKeyItem("Feathery hair-pin") >= 0) {
+				if (!countOnly) {
+					var benoitPinDesc:String;
+					benoitPinDesc = "The feathery hair-pin " + getGame().bazaar.benoit.benoitMF("Benoit", "Benoite") + " gave to you as a present.";
+					addButton(button++, "F. Hairpin", getGame().bazaar.benoit.equipUnequipHairPin, null, null, null, benoitPinDesc, "Feathery Hair-pin");
+				}
+				foundItem = true;
+			}
 			if (!countOnly) addButton(14, "Back", inventoryMenu);
 			return foundItem;
 		}
