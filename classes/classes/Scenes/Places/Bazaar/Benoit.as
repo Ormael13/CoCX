@@ -654,6 +654,38 @@ private function talkToBenoit():void {
 		flags[kFLAGS.BENOIT_TALKED_TODAY] = 1;
 		benoitAffection(5);
 	}
+	if (flags[kFLAGS.BENOIT_BASIL_EYES_GRANTED] > 0 && player.hasKeyItem("Feathery hair-pin") < 0) {
+		var hasSolidHair:Boolean = (player.hairType != HAIR_GOO && player.hairLength > 0);
+		// Talk scene written by MissBlackthorne
+		outputText("\"<i>Ah [name]! I 'ad been 'oping to speak wiz you.</i>\" your basilisk lover says with a toothy smile. \"<i>I 'ave a gift for "
+		          +"you... For all you 'ave done.</i>\" You notice the scales on " + benoitMF("Benoit", "Benoite") + "'s face turn a deeper green,"
+		          +" evidently blushing as " + benoitMF("he", "she") + " thrusts out a closed palm, gaze averted like a kid on Valentines Day."
+		          +" You place your hand out and feel something small fall into your palm. It tickles and feels cool."
+		          +" You look down at the trinket you have received, immediately surprised.");
+		outputText("\n\nYou hold a silver hair pin, its shining exterior glittering in the light. Tiny scales are cast into the metal of the pin as"
+		          +" though it were the tail of a reptile, something that must have taken master craftsmanship to form so well. At the end is a ovoid"
+		          +" gemstone, a swirling grey pattern deep within it. You are reminded of the eyes of basilisks in the mountains, though this time,"
+		          +" you look at it because it is beautiful, rather than through compulsion. Under the gem is a plume of three delicate crimson"
+		          +" feathers, their soft fibres tickling your palm. Surely " + benoitMF("Benoit", "Benoite") + " didn't mean to give you such an"
+		          +" expensive looking item?!");
+		outputText("\n\n\"<i>[name], nussing can pay for what you 'ave done for me, for my kind. Such an 'eirloom is paltry to zat.</i>\" "
+		          + benoitMF("Benoit", "Benoite") + " says softly, eyes closed. \"<i>It does not feel warped by ze demons, and I am 'oping it reminds"
+		          +" you of me in your travels.</i>\"");
+		outputText("\n\nYou feel a blush creep across your [face] as you thank the blind basilisk, hugging " + benoitMF("him", "her")
+		          +" to you tight before you leave");
+		// Equip only, if you have hair and if it's not gooey.
+		// However: While it won't be equippable in gooey hair, I'd suggest it to magically stick on your bald head for those, who chose to shave off their hair.
+		if (hasSolidHair) outputText(", slipping the pin into your [hair] as you exit the store");
+		outputText(".");
+		if (hasSolidHair)
+			// value1: hairPinIsEquipped, value2: just (re)equipped, but TF not triggered yet.
+			player.createKeyItem("Feathery hair-pin", 1, 1, 0, 0);
+		else
+			player.createKeyItem("Feathery hair-pin", 0, 0, 0, 0);
+		outputText("\n\n(<b>Gained Key Item: Feathery hair-pin</b>)");
+		doNext(camp.returnToCampUseOneHour);
+		return;
+	}
 	if (benoitBigFamily() && player.inte >= 60 && flags[kFLAGS.BENOIT_EYES_TALK_UNLOCKED] == 0) {
 		// Talk scene written by MissBlackthorne
 		outputText("You ask " + benoitMF("Benoit", "Benoite") + " how the petrifying effect of " + benoitMF("his", "her") + " brethrens gaze works,"
