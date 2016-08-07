@@ -214,7 +214,7 @@ the text from being too boring.
 		public var goblinAssassinScene:GoblinAssassinScene = new GoblinAssassinScene();
 		public var goblinWarriorScene:GoblinWarriorScene = new GoblinWarriorScene();
 		public var goblinShamanScene:GoblinShamanScene = new GoblinShamanScene();
-		public var goblinElderScene:GoblinElderScene = new GoblinElderScene();
+		public var goblinElderScene:PriscillaScene = new PriscillaScene();
 		public var impScene:ImpScene = new ImpScene();
 		public var mimicScene:MimicScene = new MimicScene();
 		public var succubusScene:SuccubusScene = new SuccubusScene();
@@ -387,7 +387,7 @@ the text from being too boring.
 
 			//Version NUMBER
 			ver = "1.0.2_mod_1.4_dev";
-			version = ver + " (<b>Anzu's Palace Test</b>)";
+			version = ver + " (<b>I give up</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

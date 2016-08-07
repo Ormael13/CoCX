@@ -4,7 +4,7 @@ package classes.Scenes.Monsters
 	import classes.internals.*;
 	import classes.GlobalFlags.*;
 	
-	public class GoblinElder extends Goblin
+	public class Priscilla extends Goblin
 	{
 		public var spellCostCharge:int = 6;
 		public var spellCostBlind:int = 8;
@@ -158,7 +158,7 @@ package classes.Scenes.Monsters
 			}
 		}
 		
-		public function GoblinElder() 
+		public function Priscilla() 
 		{
 			this.a = "the ";
 			this.short = "goblin elder";

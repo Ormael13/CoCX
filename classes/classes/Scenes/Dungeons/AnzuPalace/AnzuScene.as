@@ -376,7 +376,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 			outputText("\n\nAbout the non-hostile inhabitants, I don’t know much. There used to be a dwarf mine and a kind of elven court located in the Rift before my arrival, but they’re abandoned now. They probably perished at the hands of the ice demons, but nevertheless, both the court of the mines are good sources of loot.");
 			outputText("\n\nA tribe of reindeer-morphs live not far from here. It seems they feel safer living near the hills around the palace, probably because my presence keeping most of giants and yeti away.</i>\"");
 			outputText("\n\nAnd about your second question");
-			outputText("\n\n\"<i>Calm down (boy/girl), I’m going for parts. You don’t believe I opened the portal to the first world which appeared, right?");
+			outputText("\n\n\"<i>Calm down " + player.mf("boy", "girl") + ", I’m going for parts. You don’t believe I opened the portal to the first world which appeared, right?");
 			outputText("\n\nUsing the astronomical oculus from the temple of Mittani, I was able to see the principal realms. Many of them were uninhabitable, and some others were protected by gods that could make my stance very difficult. Mareth was in a middle of a war, and my arrival was probably unnoticed. Originally, I planned to land in the plains, but, because the war was very close to that land, I opted for the Rift, far from any forces of the factions. And I’ve living there since then.</i>\"");
 			cheatTime(0.25);
 			flags[kFLAGS.ANZU_AFFECTION] += 5;
@@ -433,7 +433,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 			outputText("Anzu said he was aware of the war between Marae and Lethice. After fifteen years in the Rift, he hasn’t been tempted to support one side?");
 			outputText("\n\n\"<i>I’ve said before, [name]. I act for myself. Always have been that way. Even before coming here. Besides, even if I sided with you and helped Marae, her followers probably wouldn’t look well on me.</i>\"");
 			outputText("\n\nWhy? He has proven to be a nice guy, and by helping Marae, that would make clear to everyone that he is on their side.");
-			outputText("\n\n\"<i>(Boy/girl). I’ve never been exactly what you call a moral being. Even on their side, they’ll tend to criticize my methods and the way I spend my free time.</i>\"");
+			outputText("\n\n\"<i>" + player.mf("Boy", "Girl") + ". I’ve never been exactly what you call a moral being. Even on their side, they’ll tend to criticize my methods and the way I spend my free time.</i>\"");
 			outputText("\n\nBut the sex life in Mareth, and the tastes of their inhabitants has been relaxed and open with the years, with the only condition that they don’t involve corruption.");
 			outputText("\n\n\"<i>Corruption isn’t the problem, and I know the new Marethian standards. How to explain it, well, you know how demons boast about orgies and hurting innocent people, but I’ve been doing that for well over two thousand years.</i>\"");
 			outputText("\n\nWhat.");
@@ -479,6 +479,119 @@ package classes.Scenes.Dungeons.AnzuPalace
 		}
 		
 		//Dinner
+		private function dinnerWithAnzu():void {
+			clearOutput();
+			if (model.time.hours < 8) {
+				if (flags[kFLAGS.ANZU_TIMES_DINED_BREAKFAST] == 0) {
+					outputText("Arriving early to his palace, you search for Anzu until you find him in the kitchen, naked except for an apron. He is cooking some eggs in a frying pan, while watching how some pieces of bacon are cooking in another. The avian is so busy with his labour that he doesn’t notice your arrival.");
+					outputText("\n\nYou cough a bit for announcing your presence.");
+					outputText("\n\n“[name]! I wasn’t expecting you came here so early.” He says, a little embarrassed by the fact you found him almost naked. “I woke up only a few minutes ago and, since I was hungry, came here to make me something to eat.”");
+					outputText("\n\nThat’s explain him being naked. But, from where he got the eggs and the meat?");
+					outputText("\n\n“I bought some of my supplies from the reindeer people, and others, while foraging the rift. I manage to find berries, eggs, and some creatures who provide me the meat who I’m cooking now, and I buy bread, flour, milk, nuts, butter, cheese, beer and wine from the reindeers. A wanderer merchant travels around the borders of the Rift, and sells me sugar, salt, pepper and spices. Sometimes I get fish on the frozen lakes between the hills.”");
+					outputText("\n\nDistracted from the food, he lets the eggs burn while he is explaining this. When you try to prevent him, it’s too late.");
+					outputText("\n\n“Damn! No matter, I have more, I’ll cook them later.” He says. “Anyways, I usually eat alone. Maybe, If you want,… you can make me company while I cook, and later, have breakfast with me.” Anzu offers.");
+				}
+				else {
+					outputText("You find Anzu in the kitchen again. The avian is as naked as before, with only his apron put on.  He is cooking some eggs in one pan, and putting some pieces of sliced bread in a plate next to the stove. This time, he notices you as soon as you approach to the door.");
+					outputText("\n\n“Hi, [name]. You caught me making the breakfast. I always wake up hungry in the mornings.”");
+					outputText("\n\nJudging for all the eggs, bacon and bread that he has taken from make his breakfast, he definitely is saying the truth. Then, he looks at you and says:");
+					outputText("\n\n“You see, not all of this is really for me. After your last visit, I was hoping to see you again... and I prepared an extra portion and…”");
+					outputText("\n\nAnd?");
+					outputText("\n\n“Well… do you want to have breakfast with me again?”");
+				}
+				menu();
+				doYesNo(eatFoodWithAnzu, dontEatFoodWithAnzu);
+				flags[kFLAGS.ANZU_TIMES_DINED_BREAKFAST]++;
+			}
+			else if (model.time.hours < 16) {
+				if (flags[kFLAGS.ANZU_TIMES_DINED_LUNCH] == 0) {
+					
+				}
+				flags[kFLAGS.ANZU_TIMES_DINED_LUNCH]++;
+			}
+			else {
+				if (flags[kFLAGS.ANZU_TIMES_DINED_DINNER] == 0) {
+					
+				}
+				flags[kFLAGS.ANZU_TIMES_DINED_DINNER]++;
+			}
+			
+		}
+		
+		private function eatFoodWithAnzu():void {
+			clearOutput();
+			if (model.time.hours < 8) {
+				outputText("You answer giving him a quick peck on his cheek and saying who you’d love to have breakfast with him.");
+				outputText("\n\n“Excellent.” He says “If you want, you could help me to make the food ready”");
+				outputText("\n\nAccepting his offer, you start helping him to do the breakfast. Taking some butter from the cabinets, you take with you the slices of breads in the plate and smear them with the butter, and put them in the stove until the butter on it melts. After that, you put them on a big plate.");
+				outputText("\n\nMeanwhile, Anzu is busy with the eggs. He added a couple more for you after seeing your arrival. After serving the eggs in two plates, he start frying bacon in another pan. What would be a couple of eggs without bacon?");
+				outputText("\n\nWhen the bacon is ready, he put it next to the eggs and spreads salt and pepper on them. After serving the plates with eggs and bacon, he points you some bottles with milk and the cabinet when the glasses are stored.");
+				outputText("\n\nYou fill a jar with milk and put it on a nearby table, where two glasses and the plate with bread is waiting. Anzu leaves the plate with the bread on the dining room, and returns for the jar with milk and the glasses, while you carry the plates with eggs and bacon.");
+				outputText("\n\nWhile eating, you manage to look how he hasn’t bothered to get dressed to the breakfast, and now without his apron, exhibits his naked body to you without shame. The breakfast is quite delicious. Anzu certainly had a lot of practice cooking for himself all that years, you think while savouring the perfectly spiced eggs and the bacon.");
+				outputText("\n\nAfter eating, both of you chat for a while. Anzu tells your more stories of his former world, while he listen some of your adventures in Mareth and about your home back on Ingnam.");
+				if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] >= 4) {
+					if (flags[kFLAGS.ANZU_TIMES_HIGH_REL_BREAKFAST] == 0) outputText("\n\n<b>A </b>");
+				}
+			}
+			else if (model.time.hours < 16) {
+				outputText("");
+				outputText("\n\n");
+				outputText("\n\n");
+				outputText("\n\n");
+				outputText("\n\n");
+				outputText("\n\n");
+			}
+			else {
+				outputText("");
+				outputText("\n\n");
+				outputText("\n\n");
+				outputText("\n\n");
+				outputText("\n\n");
+				outputText("\n\n");
+			}
+			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_ANZU_DINING_ROOM;
+			player.refillHunger(50);
+			doNext(camp.returnToCampUseOneHour);
+		}
+		private function dontEatFoodWithAnzu():void {
+			clearOutput();
+		}
+		
+		private function diningSexGoodness():void {
+			if (model.time.hours < 8) {
+				if (flags[kFLAGS.ANZU_TIMES_HIGH_REL_BREAKFAST] == 0) {
+					outputText("\n\nAfter some talking your throat becomes somewhat dry, and both of you indulge on the milk from the glasses. You wonder, from where he got the milk.");
+					outputText("\n\n“I bought it from the reindeers. They say it was reindeer milk, from their breasts. I wasn’t sure about it, and only bought it after I’d assured myself if it was drinkable.”");
+					outputText("\n\nHmm. If not as tasty as the cow-milk you’ve drunk before, the reindeer milk is indeed tasty. When drinking the last drops of it from the glass, a particularly kinky idea crosses your mind. Maybe the smell of Anzu arouses you, or the breakfast awake another kind of hunger, of simply you woke up particularly horny this morning, but you don’t want to end this meal without a taste of Anzu’s own ‘milk’.");
+					outputText("\n\nPlayfully, you approach him, and putting your arms around him, ask Anzu if he had more milk to spare. Looking how his eyes dart to the jar with milk, seems like he doesn’t understand you very well. You make yourself more clear putting one hand on his crotch, and taking advantage of his naked situation, start caressing his feathered balls.");
+					outputText("\n\n“[name], what are you doi…” Anzu manages to say, blushing red at the sudden touch.");
+					outputText("\n\nWhile your fingers run across his cock, you explain who you had enough of reindeer milk, and now you’re craving a taste of that he has to offer. The flustered avian finally gets your idea.");
+					outputText("\n\n“Oh, you are talking about that ‘milk’. Actually,I don’t know if…”");
+					outputText("\n\nCome on. He said before that he want to share his food with you, and the only thing you want is to give this breakfast a good ending, thanking him for the food at the same time.");
+					outputText("\n\n“Well, if that makes me...you…both of us happy, there isn’t reason for not doing it.”");
+				}
+				else {
+					outputText("\n\nAfter enjoying the reindeer milk, you hug Anzu, and with a hand on his crotch, say who you want to taste another sample of his special ‘milk’.");
+					outputText("\n\n“So, is that how you want to end the breakfast.” He answers, blushing a little “Okay, my friend, go on.”");
+					outputText("\n\nReclining on the soft carpet on the dining room, you bury your nose in his crotch, smelling the sweet scent of violets who emanates from him. After enjoying the soft smell for a little, you pass your " + player.tongueDescript() + " across his feathered balls, licking each corner of the fuzzy orbs. Moving to his cock, you start licking the underside of the huge rod. ");
+					outputText("\n\nWhen you reach his pointed tip, you taste the little bit of pre who is already leaking, and then, put the first few inches of his hot shaft in your mouth. One of your hands keep caressing his balls while the other start pumping the base of his meat.");
+					outputText("\n\nQuickly the thick sausage rises to full erection, and you  engulf more and more inches of it. Sliding in and out of the huge rod, you start tasting his pre dribbling all over your mouth. The hand pumping his meat goes down your  (if cocks>0) [cock], and starts jerking off feverishly (else if vagina>0) slides a pair of digits inside your [vagina], ands starts masturbating (else if genderless) slides two fingers inside your [asshole] stimulating your prostate, while you keep sucking off his rich meat.");
+					outputText("\n\nSoon, it becomes clear how Anzu is close to cumming, and your suspicions are confirmed when he takes his both hands and starts thrusting his avian shaft inside your mouth even more. The sudden entrance of even more inches of cock in your mouth makes you stop masturbating and seek support on his legs. Finally, he hits orgasm and says:");
+					outputText("\n\n“Fuck, [name], here I go.”");
+					outputText("\n\nWith that, he releases the first jet of whiteness on your wanting mouth. You gulp it down with delight, in time to catch the next round. Wave after wave of creamy cum finds its way through your mouth, filling your belly until it start expanding by the excess of fluid. After the eleventh wave, the stream of semen slows down, leaving only a little trickle. Anzu releases your head, dripping the last drops of his cum over your face.");
+					outputText("\n\nHe helps you to stand up, and after giving you a big hug, he says..");
+					outputText("\n\n“Even if that’s not the way I expected the meal to end, I’m happy to see who you liked it.”");
+					outputText("\n\nYou answer him that that was a really tasty and fulfilling breakfast, in all senses. Licking the remaining cum on your face, you say goodbye to Anzu, and after thanking him for the food again, return to your camp.");
+				}
+				flags[kFLAGS.ANZU_TIMES_HIGH_REL_BREAKFAST]++;
+			}
+			else if (model.time.hours < 16) {
+				
+			}
+			else {
+				
+			}
+		}
 		
 		//Bathing
 		
