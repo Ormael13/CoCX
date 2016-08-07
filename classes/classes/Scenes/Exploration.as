@@ -272,7 +272,7 @@ package classes.Scenes
 			} else {
 				// Random Encounter
 
-				var choosey:Number = rand(5 + flags[kFLAGS.FOUND_CATHEDRAL]);
+				var choosey:Number = rand(6 - flags[kFLAGS.FOUND_CATHEDRAL]);
 				//5 (gargoyle) is never chosen once cathedral is discovered.
 
 				if (choosey == 0) {
