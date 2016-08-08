@@ -1,7 +1,8 @@
 package classes 
 {
 	/**
-	 * ...
+	 * Class to replace the old and somewhat outdated output-system, which mostly uses the include-file includes/engineCore.as
+	 * @since  08.08.2016
 	 * @author Stadler76
 	 */
 	public class Output extends BaseContent
