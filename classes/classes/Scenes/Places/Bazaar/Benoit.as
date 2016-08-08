@@ -1266,10 +1266,15 @@ public function equipUnequipHairPin():void
 	} else {
 		// equip it
 		if (player.hairType == HAIR_GOO)
-			outputText("You try to slide the hair pin into your gooey locks, but their semi-liquid state isn't enough to hold it in place. The pin"
-			          +" falls to the ground with a wet splat the moment you let it go. With a sigh you clean it up and then you put it back.");
+			outputText("You try to slide the hair pin into your " + player.hairDescript() + ", but their semi-liquid state isn't enough to hold it in"
+			          +" place. The pin falls to the ground with a wet splat the moment you let it go. With a sigh you clean it up and then you put"
+			          +" it back.");
 		else {
-			if (player.hairLength > 0)
+			if (player.cor >= 55)
+				outputText("You go to slide the hair-pin into your " + player.hairDescript() + ", but the moment it touches your scalp it heats up,"
+			              +" causing you to drop it in shock. Seems it doesn't want you dirty its purity... you pick it up and put it back into your"
+			              +" inventory for now.");
+			else if (player.hairLength > 0)
 				outputText("You slide the hair-pin " + benoitMF("Benoit", "Benoite") + " gave you into your " + player.hairDescript()
 				          +", briefly admiring yourself in a nearby puddle before returning to your adventures.");
 			else
