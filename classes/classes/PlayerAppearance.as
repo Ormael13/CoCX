@@ -6,7 +6,9 @@ package classes
 	public class PlayerAppearance extends BaseContent
 	{
 		public function PlayerAppearance() {}
-		
+
+		public function get output():Output { return kGAMECLASS.output; }
+
 		/*** Internal methods; for outputting text in proper measure system ***/
 
 		private function feet_inch_and_metres(in_inches:Number, precision:int = 2):String
@@ -57,9 +59,8 @@ package classes
 			var race:String = "human";
 			race = player.race();
 			//Discuss race
-			clearOutput();
-			displayHeader("Appearance");
-			if (race != player.startingRace)	outputText("You began your journey as a " + player.startingRace+ ", but gave that up as you explored the dangers of this realm.  ", false);
+			output.clear().header("Appearance");
+			if (race != player.startingRace)	output.text("You began your journey as a " + player.startingRace+ ", but gave that up as you explored the dangers of this realm.  ");
 			//Height and race.
 			outputText("You are a " + feet_inch_and_metres(player.tallness) + " tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".", false);
 			
@@ -1293,7 +1294,7 @@ package classes
 			}
 			menu();
 			doNext(playerMenu);
-			flushOutputTextToGUI();
+			output.flush();
 		}
 
 		public function sockDescript(index:int):void 

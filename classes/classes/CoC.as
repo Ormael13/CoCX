@@ -283,6 +283,9 @@ the text from being too boring.
 		//Scenes in includes folder GONE! Huzzah!
 
 		public var bindings:Bindings = new Bindings();
+		public var output:Output = new Output();
+		public function get currentText():String { return output.currentText; }
+		public function set currentText(text:String):void { output.currentText = text; }
 		/****
 			This is used purely for bodges while we get things cleaned up.
 			Hopefully, anything you stick to this object can be removed eventually.
@@ -310,9 +313,8 @@ the text from being too boring.
 		public var monster:Monster;
 		public var flags:DefaultDict;
 		public var achievements:DefaultDict;
-		private var gameState:int;
+		public var gameState:int; // Had to make this public for now because of these nasty includes. Hopefully I can make this private and readonly again later on. (Stadler76)
 		public var time :TimeModel;
-		public var currentText:String;
 
 		public var temp:int;
 		public var args:Array;
