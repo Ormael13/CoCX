@@ -4,36 +4,18 @@ package classes.Scenes.Monsters
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 
-	public class GoblinElderScene extends BaseContent
+	public class PriscillaScene extends BaseContent
 	{
-		public function GoblinElderScene()
+		public function PriscillaScene()
 		{
 		}
-
-		/*Goblins
-		 Gender: Female
-		 Height: 2-4 feet
-		 Eye Colors:  Red, Violet, Amber, or Pink
-		 Hair Colors: Red, Very Light Blonde, Purple, Pink, White
-		 Skin Colors: Green, though in rare cases gray, blue or yellowish.
-		 Appendages: Their arms and legs look like a human's, although they are scaled down to fit the goblin's smaller frames.
-		 Appearance: Goblins are normally lithe little creatures with somewhat elfin faces.  Their ears are pointed, though their unusual (and very punk rock) haircuts can sometimes hide them.   A goblins age can usually be determined by the size of her bust and hips.  Very young goblins have relatively small chests and hips, though as they age and give birth, their endowments will grow ludicrous sizes.  It is rumored that somewhere there is a goblin Queen who has so many children that she has become immobile.
-
-		 They often dress themselves in tight fitting leather harnesses to display their chests.  A goblin's crotch will ALWAYS be exposed.  They favor piercings in multiple locations, and most have jewelry in their nipples, clit, and both pairs of lips.  
-		 Aging: Goblins do not get 'old' like other races, and do not get lines or wrinkles.  They will not die from age alone, though should a goblin be successful enough to immobilize herself, she may die if she does not have family that keeps her fed.
-		 Sex Life: Goblins are ALWAYS horny and ready to copulate.  They have large juicy vulva that ache for penetration, and despite their small size can take many of the larger members out there (in moderation).  They will always seek to have sex with any willing participant, and in those rare cases where they are too small, they will be sure to take as much cum inside them as possible.  Thanks to the wide array of psychology altering chemicals in their body, goblins get off on the act of giving birth.
-		 Life Cycle: The life of a young goblin is likely to end in the jaws of a hellhound, impaled on a minotaur's dick, or drowned tentacle-cum.  Due to the special properties of their wombs (any pregnancy ALWAYS results in a goblin), they are considered worthless to most monsters and demons, and due to their small size, they often end up dying after an encounter with a minotaur or similar creature. Despite the high fatality rate of young goblins, those who survive beyond their first pregnancy will often live a very long time, and will dedicate themselves to birthing their broods (4+ goblins per pregnancy) and perfecting alchemical recipes they can use to 'seduce' more 'fathers'.
-		 History: Goblins were once the technological leaders of what is now known as the Demon-Realm.  When the demons came, they signed a treaty guaranteeing peace and freedom to the goblin people.  The peace was a lie.  That night, a team of demons tunneled into the goblins water supply and began tainting with ever increasing levels of corruption.  Over the next few days, the goblins spent less and less time working, and more and more time fucking.  
-
-		 Within a week, their greatest minds were spending all their time eating pussies and developing new aphrodisiacs.  Within a month the goblins were permanently turned on by the strongest of drugs and fucking nonstop in the streets of their once-great city.  A few did not partake of the tainted water, and locked themselves inside their dwellings for as long as they dared.  Some gave in to thirst or loneliness.  Others stayed indoors until the demons walked in and easily assumed control.  They put the few sane goblins left to work building the machines that run their empire to this day.  No one has seen those few survivors since, and most goblins don't waste time thinking about them.
-		 Social Structure: Goblins live in groups of 100-300, typically lead by an elder female with a direct bloodline to every goblin under her.
-
-		GOBLIN ELDER ENCOUNTERS
-		Casts spells
-		Uses potions
-		Attacks with sword
-		Increased tease damage
-		 */
+		/*
+			PRISCILLA ENCOUNTERS
+			Casts spells
+			Uses potions
+			Attacks with sword
+			Increased tease damage
+		*/
 		public function goblinElderEncounter():void {
 			clearOutput();
 			//First Time Intro
@@ -68,7 +50,7 @@ package classes.Scenes.Monsters
 			addButton(0, "Fight", startFight);
 			if (flags[kFLAGS.GOBLIN_ELDER_TALK_COUNTER] < 2) addButton(1, "Talk", talkToGoblinElder);
 			if (player.hasCock() && player.lust >= 33 && player.cor < 60 + player.corruptionTolerance()) {
-				monster = new GoblinElder();
+				monster = new Priscilla();
 				if (player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(2, "Fuck Her", gatsGoblinBoners);
 				else outputText("\n\n<b>There is no way you can fit your cock into her cunt!</b>");
 			}
@@ -76,7 +58,7 @@ package classes.Scenes.Monsters
 		}
 		
 		private function startFight():void {
-			startCombat(new GoblinElder());
+			startCombat(new Priscilla());
 			playerMenu();
 		}
 		

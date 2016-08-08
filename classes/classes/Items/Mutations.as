@@ -360,7 +360,7 @@
 				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] < 50) outputText("  It makes you feel dizzy, ditzy, and placid.", false);
 				else outputText("  It makes you feel euphoric, happy, and willing to do ANYTHING to keep feeling this way.", false);
 			}
-			else outputText("  You know that the bottle is purified and you're positive you won't get any addictiction from this bottle.");
+			else outputText("  You know that the bottle is purified and you're positive you won't get any addiction from this bottle.");
 			outputText("  Unbidden, your hand brings the bottle to your lips, and the heady taste fills your mouth as you convulsively swallow the entire bottle.", false);
 			//-Raises lust by 10.
 			//-Raises sensitivity

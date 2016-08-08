@@ -1008,6 +1008,8 @@ package classes.Scenes.Dungeons.D3
 				levelOfFuckedness -= 5;
 			if(player.findStatusEffect(StatusEffects.CampRathazul) >= 0)
 				levelOfFuckedness -= 5;
+			if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0)
+				levelOfFuckedness -= 20;
 			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] >= 100)
 				levelOfFuckedness -= 10;
 			if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10)
@@ -1078,7 +1080,9 @@ package classes.Scenes.Dungeons.D3
 				outputText("\n\nBy necessity, your campaign is brutal. So long as demons yet live, they’ll sow their corruption into those around them, who will in turn carry it inside them, like a plague. But you aren’t alone in this endeavor. Corruption can be cleansed by magic or will, and those fetid abominations that spread it can be killed once and for all.");
 				outputText("\n\nThe campaign wages on for the better part of a year, but inevitably, the demons crumble before your forces. You singlehandedly claimed their fortress, leaving them no strong points save for a few factories - structures that were never really built to stand up to a siege. They could not trick your armies, for you would not make the mistake of negotiating with them, as you learned the goblins did.");
 				outputText("\n\nIn time, peace came to Mareth.");
-				if (flags[kFLAGS.FACTORY_SHUTDOWN] != 2)
+				if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0)
+					outputText(" The demise of Marae by you was a tragic one but it had to be done. Her fall was the biggest blight on your campaign, a sad footnote on an otherwise successful reclamation.");
+				else if (flags[kFLAGS.FACTORY_SHUTDOWN] != 2)
 					outputText(" Marae reclaimed the full network of her roots and single-handedly purged the last holdouts of corruption from the lands, choking it out of her world like weeds from a garden.");
 				else
 					outputText(" Marae fought for a time, but even corrupted goddesses cannot hold back your tide of purity. Her fall was the biggest blight on your campaign, a sad footnote on an otherwise successful reclamation.");
@@ -1089,7 +1093,9 @@ package classes.Scenes.Dungeons.D3
 				outputText("\n\nBy necessity, your campaign is brutal. There are so many demons, and they’re so skilled at sowing their corruption into everything around them that wiping them out seems an impossible task. Even with the return of the rains, this world is still filled with hundreds of festering blights. Yes, you can cleanse corruption with your magic or your will, but there’s so much of it. The world is so infected that the task before you seems almost impossible at times.");
 				outputText("\n\nYou do not let that deter you, not when your campaign drags into its tenth season or even its twentieth. You may have been a champion in name only, but you live up to the title. Again and again, you break the demon’s fortresses and holds. You burn what cannot be purified and wipe clean those few things that can. They run and rebuild, but you chase them, tirelessly scouring them from the face of this warped planet.");
 				outputText("\n\n");
-				if (flags[kFLAGS.FACTORY_SHUTDOWN] != 2)
+				if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0)
+					outputText("With the demise of Marae caused by you in the past, she's no longer an aid to the demons. It would have been much easier if she was still alive and wasn't corrupted but still, you persevere.");
+				else if (flags[kFLAGS.FACTORY_SHUTDOWN] != 2)
 					outputText("Marae is a wonderful aid in your quest, always able to manifest in her newly purified roots and offer words of wisdom or encouragement. Her magical might is a rock you can lean upon when times are tough. You aren’t sure how long you could keep this up without her.");
 				else
 					outputText("Marae is always there, always lending her power to the demons, even when you dig her roots out of the ground with shovels and axes, burning the greasy lumber into nothingness. This task would be so much easier if the goddess was on your side, but still, you persevere.");

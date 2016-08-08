@@ -2291,11 +2291,11 @@ public static const ANZU_TALKED_PALACE:int                                      
 public static const ANZU_TALKED_RIFT:int                                            = 2283;
 public static const ANZU_TALKED_POWERS:int                                          = 2284;
 public static const ANZU_TALKED_GODS:int                                            = 2285;
-public static const ANZU_TIMES_DINED:int                                            = 2286;
-public static const UNKNOWN_FLAG_NUMBER_02287:int                                   = 2287;
-public static const UNKNOWN_FLAG_NUMBER_02288:int                                   = 2288;
-public static const UNKNOWN_FLAG_NUMBER_02289:int                                   = 2289;
-public static const UNKNOWN_FLAG_NUMBER_02290:int                                   = 2290;
+public static const ANZU_TIMES_DINED_BREAKFAST:int                                  = 2286;
+public static const ANZU_TIMES_DINED_LUNCH:int                                      = 2287;
+public static const ANZU_TIMES_DINED_DINNER:int                                     = 2288;
+public static const ANZU_TIMES_HIGH_REL_BREAKFAST:int                               = 2289;
+public static const ANZU_TIMES_DRUNK_SEX:int                                        = 2290;
 public static const UNKNOWN_FLAG_NUMBER_02291:int                                   = 2291;
 public static const UNKNOWN_FLAG_NUMBER_02292:int                                   = 2292;
 public static const UNKNOWN_FLAG_NUMBER_02293:int                                   = 2293;
