@@ -1255,22 +1255,26 @@ public function equipUnequipHairPin():void
 	clearOutput();
 	if (player.keyItemv1("Feathery hair-pin") > 0) {
 		// unequip it
-		if (player.hairLength == 0)
-			outputText("You take the feathery hair-pin " + benoitMF("Benoit", "Benoite") + " gave to you from your bald head and put it back into your inventory.");
+		if (player.hairLength > 0)
+			outputText("You take the feathery hair-pin " + benoitMF("Benoit", "Benoite") + " gave to you out of your " + player.hairDescript() 
+			          +" and put it back into your inventory.");
 		else
-			outputText("You take the feathery hair-pin " + benoitMF("Benoit", "Benoite") + " gave to you out of your " + player.hairDescript() + " and put it back into your inventory.");
+			outputText("You remove the feathery hair-pin " + benoitMF("Benoit", "Benoite") + " gave to you from your bald head and put it back into"
+			          +" your inventory. It was surprisingly easy.");
 		player.keyItems[keyItemNum].value1 = 0; // not equipped
 		player.keyItems[keyItemNum].value2 = 0; // if its not equipped it won't trigger any TF, right? ^^
 	} else {
 		// equip it
-		outputText("You take the feathery hair-pin " + benoitMF("Benoit", "Benoite") + " gave to you out of your inventory");
 		if (player.hairType == HAIR_GOO)
-			outputText(". You try to put it into your gooey hair, but it wont attach to your liquid skin on your head, so you put it back.");
+			outputText("You try to slide the hair pin into your gooey locks, but their semi-liquid state isn't enough to hold it in place. The pin"
+			          +" falls to the ground with a wet splat the moment you let it go. With a sigh you clean it up and then you put it back.");
 		else {
 			if (player.hairLength > 0)
-				outputText(" and then you put it into your " + player.hairDescript() + ".");
+				outputText("You slide the hair-pin " + benoitMF("Benoit", "Benoite") + " gave you into your " + player.hairDescript()
+				          +", briefly admiring yourself in a nearby puddle before returning to your adventures.");
 			else
-				outputText(" and then you put it onto your bald head and it magically sticks to it, as if you actually have hair to put it into.");
+				outputText("You take the feathery hair-pin " + benoitMF("Benoit", "Benoite") + " gave to you out of your inventory and then you press"
+				          +" it onto your bald head. To your surprise it sticks to your head as though you had hair to hold it in place.");
 
 			player.keyItems[keyItemNum].value1 = 1; // equipped
 			player.keyItems[keyItemNum].value2 = 1; // just equipped it, but it didn't trigger the TF(-event) so far
