@@ -71,16 +71,19 @@ package classes
 			return text("<font size=\"36\" face=\"Georgia\"><u>" + string + "</u></font>\n");
 		}
 
-		public function clear():Output
+		public function clear(hideMenuButtons:Boolean = false):Output
 		{
-			forceUpdate();
+			if (hideMenuButtons)
+			{
+				forceUpdate();
+				if (kGAMECLASS.gameState != 3) mainView.hideMenuButton( MainView.MENU_DATA );
+				mainView.hideMenuButton( MainView.MENU_APPEARANCE );
+				mainView.hideMenuButton( MainView.MENU_LEVEL );
+				mainView.hideMenuButton( MainView.MENU_PERKS );
+				mainView.hideMenuButton( MainView.MENU_STATS );
+			}
 			_currentText = "";
 			mainView.clearOutputText();
-			if (kGAMECLASS.gameState != 3) mainView.hideMenuButton( MainView.MENU_DATA );
-			mainView.hideMenuButton( MainView.MENU_APPEARANCE );
-			mainView.hideMenuButton( MainView.MENU_LEVEL );
-			mainView.hideMenuButton( MainView.MENU_PERKS );
-			mainView.hideMenuButton( MainView.MENU_STATS );
 			return this;
 		}
 
