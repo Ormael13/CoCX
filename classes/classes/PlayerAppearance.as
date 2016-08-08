@@ -7,8 +7,6 @@ package classes
 	{
 		public function PlayerAppearance() {}
 
-		public function get output():Output { return kGAMECLASS.output; }
-
 		/*** Internal methods; for outputting text in proper measure system ***/
 
 		private function feet_inch_and_metres(in_inches:Number, precision:int = 2):String

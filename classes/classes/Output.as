@@ -22,10 +22,6 @@ package classes
 
 		private function _addText(text:String, parseAsMarkdown:Boolean = false):Output
 		{
-			// we have to purge the output text BEFORE calling parseText, because if there are scene commands in 
-			// the parsed text, parseText() will write directly to the output
-
-
 			// This is cleaup in case someone hits the Data or new-game button when the event-test window is shown. 
 			// It's needed since those buttons are available even when in the event-tester
 			mainView.hideTestInputPanel();
@@ -64,13 +60,15 @@ package classes
 			{
 				mainView.mainText.setTextFormat(fmt);
 			}
-			if (mainViewManager.mainColorArray[flags[kFLAGS.BACKGROUND_STYLE]] != null) mainView.mainText.textColor = mainViewManager.mainColorArray[flags[kFLAGS.BACKGROUND_STYLE]];
+			if (mainViewManager.mainColorArray[flags[kFLAGS.BACKGROUND_STYLE]] != null)
+			{
+				mainView.mainText.textColor = mainViewManager.mainColorArray[flags[kFLAGS.BACKGROUND_STYLE]];
+			}
 		}
 
 		public function header(string:String):Output
 		{
-			outputText("<font size=\"36\" face=\"Georgia\"><u>" + string + "</u></font>\n");
-			return this;
+			return text("<font size=\"36\" face=\"Georgia\"><u>" + string + "</u></font>\n");
 		}
 
 		public function clear():Output
@@ -88,24 +86,17 @@ package classes
 
 		public function raw(output:String, purgeText:Boolean = false):Output
 		{
-			//OUTPUT!
-			if (purgeText) {
-				//if (!debug) mainText.htmlText = output;
-				//trace("Purging and writing Text", output);
-				clearOutput();
+			if (purgeText)
+			{
+				clear();
 				_currentText = output;
 				mainView.setOutputText( output );
-				// mainText.htmlText = output;
 			}
 			else
 			{
-				//trace("Adding Text");
 				_currentText += output;
 				mainView.appendOutputText( output );
-				// mainText.htmlText += output;
 			}
-			// trace(getCurrentStackTrace())
-			// scrollBar.update();
 
 			return this;
 		}
