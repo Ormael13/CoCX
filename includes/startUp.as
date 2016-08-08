@@ -52,7 +52,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	mainView.appearanceButton.toolTipText = "View your appearance.";
 	mainView.appearanceButton.toolTipHeader = "Appearance";
 	//Sets game state to 3, used for determining back functionality of save/load menu.
-	gameState = 3;
+	_gameState = 3;
 	clearOutput();
 	//outputText("<img src=\"logo\" id=\"coc-logo\" height=\"300\" width=\"400\" />\n");
 	outputText("<b>Corruption of Champions (" + version + ")</b>", false);

@@ -313,7 +313,8 @@ the text from being too boring.
 		public var monster:Monster;
 		public var flags:DefaultDict;
 		public var achievements:DefaultDict;
-		public var gameState:int; // Had to make this public for now because of these nasty includes. Hopefully I can make this private and readonly again later on. (Stadler76)
+		private var _gameState:int;
+		public function get gameState():int { return _gameState; }
 		public var time :TimeModel;
 
 		public var temp:int;
@@ -325,13 +326,13 @@ the text from being too boring.
 		public var kFLAGS_REF:*;
 		public var kACHIEVEMENTS_REF:*;
 		
-		public function get inCombat():Boolean { return gameState == 1; }
+		public function get inCombat():Boolean { return _gameState == 1; }
 		
-		public function set inCombat(value:Boolean):void { gameState = (value ? 1 : 0); }
+		public function set inCombat(value:Boolean):void { _gameState = (value ? 1 : 0); }
 		
-		private function gameStateDirectGet():int { return gameState; }
+		private function gameStateDirectGet():int { return _gameState; }
 		
-		private function gameStateDirectSet(value:int):void { gameState = value; }
+		private function gameStateDirectSet(value:int):void { _gameState = value; }
 		
 		public function rand(max:int):int
 		{
@@ -443,7 +444,7 @@ the text from being too boring.
 			//1 = in combat
 			//2 = in combat in grapple
 			//3 = at start or game over screen
-			gameState = 0;
+			_gameState = 0;
 
 			/**
 			 * Display Variables
