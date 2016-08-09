@@ -84,17 +84,17 @@ package classes
 			return this;
 		}
 
-		public function raw(output:String, purgeText:Boolean = false):Output
+		/**
+		 * Adds raw text to the output without passing it through the parser.
+		 * If you want to clear the output before adding raw text, use clear(true) or just clear()
+		 * The second param `purgeText:Boolean = false` is not supported anymore and will never return.
+		 * @param   text
+		 * @return  The instance of the Class to support the 'Fluent interface' aka method-chaining
+		 */
+		public function raw(text:String):Output
 		{
-			if (purgeText) {
-				clear(true);
-				_currentText = output;
-				mainView.setOutputText(output);
-			} else {
-				_currentText += output;
-				mainView.appendOutputText(output);
-			}
-
+			_currentText += text;
+			mainView.setOutputText(_currentText);
 			return this;
 		}
 
