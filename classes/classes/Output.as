@@ -21,7 +21,7 @@ package classes
 		public function get mainViewManager():MainViewManager { return kGAMECLASS.mainViewManager; }
 		public function forceUpdate():void { kGAMECLASS.forceUpdate();  }
 
-		private function _addText(text:String, parseAsMarkdown:Boolean = false):Output
+		protected function _addText(text:String, parseAsMarkdown:Boolean = false):Output
 		{
 			// This is cleaup in case someone hits the Data or new-game button when the event-test window is shown. 
 			// It's needed since those buttons are available even when in the event-tester
@@ -32,9 +32,7 @@ package classes
 			_currentText += text;
 
 			if (debug) 
-			{
 				mainView.setOutputText(_currentText);
-			}
 
 			return this;
 		}
@@ -53,18 +51,16 @@ package classes
 		{
 			var fmt:TextFormat = mainView.mainText.getTextFormat();
 
-			if (flags[kFLAGS.CUSTOM_FONT_SIZE] != 0) fmt.size = flags[kFLAGS.CUSTOM_FONT_SIZE];
+			if (flags[kFLAGS.CUSTOM_FONT_SIZE] != 0)
+				fmt.size = flags[kFLAGS.CUSTOM_FONT_SIZE];
 
 			mainView.setOutputText(_currentText);
 
 			if (flags[kFLAGS.CUSTOM_FONT_SIZE] != 0)
-			{
 				mainView.mainText.setTextFormat(fmt);
-			}
+
 			if (mainViewManager.mainColorArray[flags[kFLAGS.BACKGROUND_STYLE]] != null)
-			{
 				mainView.mainText.textColor = mainViewManager.mainColorArray[flags[kFLAGS.BACKGROUND_STYLE]];
-			}
 		}
 
 		public function header(string:String):Output
@@ -74,15 +70,15 @@ package classes
 
 		public function clear(hideMenuButtons:Boolean = false):Output
 		{
-			if (hideMenuButtons)
-			{
+			if (hideMenuButtons) {
 				forceUpdate();
-				if (kGAMECLASS.gameState != 3) mainView.hideMenuButton( MainView.MENU_DATA );
-				mainView.hideMenuButton( MainView.MENU_APPEARANCE );
-				mainView.hideMenuButton( MainView.MENU_LEVEL );
-				mainView.hideMenuButton( MainView.MENU_PERKS );
-				mainView.hideMenuButton( MainView.MENU_STATS );
+				if (kGAMECLASS.gameState != 3) mainView.hideMenuButton(MainView.MENU_DATA);
+				mainView.hideMenuButton(MainView.MENU_APPEARANCE);
+				mainView.hideMenuButton(MainView.MENU_LEVEL);
+				mainView.hideMenuButton(MainView.MENU_PERKS);
+				mainView.hideMenuButton(MainView.MENU_STATS);
 			}
+
 			_currentText = "";
 			mainView.clearOutputText();
 			return this;
@@ -90,16 +86,13 @@ package classes
 
 		public function raw(output:String, purgeText:Boolean = false):Output
 		{
-			if (purgeText)
-			{
-				clear();
+			if (purgeText) {
+				clear(true);
 				_currentText = output;
-				mainView.setOutputText( output );
-			}
-			else
-			{
+				mainView.setOutputText(output);
+			} else {
 				_currentText += output;
-				mainView.appendOutputText( output );
+				mainView.appendOutputText(output);
 			}
 
 			return this;
