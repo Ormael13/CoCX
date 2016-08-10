@@ -939,12 +939,49 @@ private function benoitHairPinTalk():void
 	          +" wanting sumsing zat was more complex zan a shiny object. I think it 'as escaped ze taint, simply because of zis. I kept it to sell,"
 	          +" but a better use 'as come for it. Maybe I am just sentimental, but I 'ope it reminds you of all you 'ave done for ze basilisks, and"
 	          +" for me.</i>\"");
-	benoitHairPinTalkTFcheck();
+	benoitHairPinTFCheck();
 }
 
-private function benoitHairPinTalkTFcheck():void
+private function benoitHairPinTFCheck():void
 {
-	//if (player.cor < 30 && player.hairType != HAIR_FEATHER_PLUME && player.featheryHairPinEquipped() && (player.gender & GENDER_FEMALE) != 0)
+	if (player.cor < 30 && player.isFemaleOrHerm() && player.featheryHairPinEquipped() && [HAIR_BASILISK_PLUME, HAIR_GOO].indexOf(player.hairType) == -1)
+	{
+		outputText("\n\nYou feel the hair pin " + benoitMF("Benoit", "Benoite") + " gave you heat up, a gentle warmth suffusing through your body."
+		          +" Something tells you that if you let it, this feminine hair piece will evoke some sort of change.");
+		outputText("\n\nDo you let it?");
+		menu();
+		addButton(0, "No", benoitHairPinTFNo);
+		addButton(1, "Yes", benoitHairPinTFYes);
+		return;
+	}
+
+	benoitHairPinTalkFinal();
+}
+
+private function benoitHairPinTFNo():void
+{
+	outputText("\n\nYou take out the hair pin for a while, the feeling fading as soon as you do so.");
+	benoitHairPinTalkFinal();
+}
+
+private function benoitHairPinTFYes():void
+{
+	outputText("\n\nYou let the feeling be, wondering what it will do. Soon your head begins to tickle and you reach up to scratch at it, only to be"
+	          +" surprised by the softness you feel. It reminds you of the down of baby chickens, velvety soft and slightly fluffy. You look at"
+	          +" yourself in a nearby puddle and gasp, where your hair once was, you now have red feathers, some longer and larger than others."
+	          +" This floppy but soft plume sits daintily on your head, reminding you of a ladies fascinator. You realise soon"
+	          + benoitMF(" that your hair has changed into a plume of feathers that, like legend is told, belongs to a female basilisk!",
+	                     " that you have a plume, like a female basilisk!"));
+
+	if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] != 0)
+		outputText("\n\n<b>Your hair is growing again and is now a plume of short red feathers.</b>");
+	else
+		outputText("\n\n<b>Your hair is now a plume of short red feathers.</b>");
+
+	flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
+	player.hairLength = 2;
+	player.hairColor = "red";
+	player.hairType = HAIR_BASILISK_PLUME;
 	benoitHairPinTalkFinal();
 }
 

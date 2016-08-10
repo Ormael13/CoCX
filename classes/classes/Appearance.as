@@ -78,6 +78,27 @@
 			//
 			// HAIR WORDS
 			//
+			switch (i_creature.hairType) {
+				case HAIR_BASILISK_SPINES:
+					options = [
+						"rubbery spines",
+						"spiny crown",
+						"basilisk spines",
+						"reptilian spines",
+					];
+					return description + randomChoice(options);
+				case HAIR_BASILISK_PLUME:
+					options = [
+						"feathered hair",
+						"fluffy plume",
+						"basilisk plume",
+						"shock of feathers",
+					];
+					return description + randomChoice(options);
+			}
+			// TODO: Fix the spaghetti-code below to use a switch-case-return and it'll be
+			// case HAIR_GOO: return description + "goo-mane";
+			// and so on. (Stadler76)
 			//If furry and longish hair sometimes call it a mane (50%)
 			if (i_creature.skinType == 1 && i_creature.hairLength > 3 && rand(2) == 0) {
 				if (i_creature.hairType == HAIR_FEATHER) description += "feather-";
