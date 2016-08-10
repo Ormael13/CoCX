@@ -828,11 +828,12 @@ package classes {
 					flags[kFLAGS.KAIJU_BAD_END_COUNTER]--;
 					if (flags[kFLAGS.KAIJU_BAD_END_COUNTER] < 0) flags[kFLAGS.KAIJU_BAD_END_COUNTER] = 0;
 				}
-				if (flags[kFLAGS.GILDED_JERKED] > 0) flags[kFLAGS.GILDED_JERKED] = 0;
-				if (flags[kFLAGS.FED_SCYLLA_TODAY] == 1) flags[kFLAGS.FED_SCYLLA_TODAY] = 0;
-				if (flags[kFLAGS.NOT_HELPED_ARIAN_TODAY] != 0) flags[kFLAGS.NOT_HELPED_ARIAN_TODAY] = 0;
+				flags[kFLAGS.GILDED_JERKED] = 0;
+				flags[kFLAGS.FED_SCYLLA_TODAY] = 0;
+				flags[kFLAGS.NOT_HELPED_ARIAN_TODAY] = 0;
 				if (flags[kFLAGS.RUBI_PROSTITUTION] > 0) flags[kFLAGS.RUBI_PROFIT] += 2 + rand(4);
 				flags[kFLAGS.BENOIT_TALKED_TODAY] = 0;
+				flags[kFLAGS.BENOIT_HAIRPIN_TALKED_TODAY] = 0;
 				getGame().bazaar.benoit.updateBenoitInventory();
 				flags[kFLAGS.ROGAR_FUCKED_TODAY] = 0;
 				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285]--; //Reduce lust-stick resistance building

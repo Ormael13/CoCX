@@ -919,10 +919,41 @@ private function talkToBenoit():void {
 
 			outputText("\n\n“<i>Well, of course I can, zilly,</i>” she says teasingly. “<i>When you end up smelling like someone else for several hours, it is a difficult sing to mistake.  It is a memento of you and it reminds me of appiness; I wish I could smell zat way for longer.  My sexy little shaved monkey.</i>”");
 		}
+
+		// Hair pin talk
+		if (player.hasKeyItem("Feathery hair-pin") >= 0 && (debug || flags[kFLAGS.BENOIT_HAIRPIN_TALKED_TODAY] == 0))
+		{
+			doNext(benoitHairPinTalk);
+			return;
+		}
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
 
+private function benoitHairPinTalk():void
+{
+	// On a new page, since it may trigger the hair TF.
+	clearOutput();
+	outputText("You ask " + benoitMF("Benoit", "Benoite") + " about the feathery hair-pin he gave to you.");
+	outputText("\n\n\"<i>Ah, ze pin? It iz a 'eirloom from my mozzers side. I suspect it 'as simply been thrown down through generations, none"
+	          +" wanting sumsing zat was more complex zan a shiny object. I think it 'as escaped ze taint, simply because of zis. I kept it to sell,"
+	          +" but a better use 'as come for it. Maybe I am just sentimental, but I 'ope it reminds you of all you 'ave done for ze basilisks, and"
+	          +" for me.</i>\"");
+	benoitHairPinTalkTFcheck();
+}
+
+private function benoitHairPinTalkTFcheck():void
+{
+	//if (player.cor < 30 && player.hairType != HAIR_FEATHER_PLUME && player.featheryHairPinEquipped() && (player.gender & GENDER_FEMALE) != 0)
+	benoitHairPinTalkFinal();
+}
+
+private function benoitHairPinTalkFinal():void
+{
+	dynStats("cor", -(player.featheryHairPinEquipped() ? 10 : 5));
+	flags[kFLAGS.BENOIT_HAIRPIN_TALKED_TODAY] = 1;
+	doNext(camp.returnToCampUseOneHour);
+}
 
 //Male Benoit x Female PC Interactions
 //First talk
