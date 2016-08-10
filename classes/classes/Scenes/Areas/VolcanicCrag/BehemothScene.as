@@ -210,37 +210,41 @@ package classes.Scenes.Areas.VolcanicCrag
 			statScreenRefresh();
 			kGAMECLASS.inCombat = false;
 			if (doSFWloss()) {
-				outputText("\n\n\"<i>I win and you know what that means? I'll take some of your gems,</i>\" he says and he takes " + gemsLost + " gems from your pouch, \"<i>I'll take care of you while you're recovering.</i>\" You black out...");
+				outputText("\n\n\"<i>Heh, guess I won,</i>\" he says. \"<i>I'll take care of you until you recover, but in exchange ....</i>\"\n\n He rifles through your pouch, taking " + gemsLost + " gems before picking you up.  You black out ....");
 				HPChange(player.maxHP() / 2, false);
 				player.changeFatigue(-50);
 				return;
 			}
 			if (player.HP <= 0) outputText("You collapse from your injuries.");
 			else outputText("You collapse from your overwhelming desires.");
-			outputText("\n\n\"<i>I win and you know what that means? I'll take some of your gems and I get to fuck your ass. Don't you worry, I'll be gentle,</i>\" he says with a grin. He takes " + gemsLost + " gems from your pouch. \"<i>I will give you some of your gems back should you beat me,</i>\" he says.");
+			outputText("\n\n\"<i>Heh, I won,</i>\" he says, grinning. \"<i>I'll give back some of your money if you beat me next time, but either way, I'm gonna fuck your ass.  I'll be gentle, I promise.</i>\"\n\n He rifles through your pouch, taking " + gemsLost + " gems.");
 			doNext(analCatchBehemoth);
 		}
 		
 		public function giveBirthToBehemoth():void {
 			clearOutput();
-			outputText("The pain in your womb is getting unbearable. You realize it's time for you to give birth to the behemoth! You make your way to the behemoth's tent in the volcanic crag to see the behemoth smiling at you.");
-			outputText("\n\n\"<i>I'll help you. Lay on my bed,</i>\" the behemoth says" + player.clothedOrNaked(" as he assists you in removing your [armor]") + ". You lay on the bed and spread your [legs]. The labour is getting intense but you know the behemoth is already excited.");
-			outputText("\n\n\"<i>Push,</i>\" the behemoth instructs. That's your encouragement as you start pushing, taking deep breath between pushes. Eventually, your ordeal is over as the newborn behemoth finally comes out of your womb. \"<i>You've done great!</i>\" the behemoth says, smilingly.");
+			outputText("These cramps are nearly unbearable, and you hurry off to the volcanic crag to find the father of your unborn child! He spots you almost immediately, jittering with excitement. \"<i>What, already?</i>\" he quips, but you're too preoccupied to find much humor in it and he helps you to his tent, his tail up and swishing like a cat's.\n\n")
+			outputText("He's expanded it in preparation, and he deftly lays out a leather blanket for you on his bed before helping you " + player.clothedOrNaked(" out of your [armor] and ") + "onto the bed. Gods, to get this weight out of you!\n\n")
+			outputText("Labor takes agonisingly long, but he's with you the whole time and you're proud to be helping him bring back his race. He massages your [legs] when they get stiff from having to hold you in the right position, and you're tempted to ask for another dose of his energising cum, no matter that it's what got you into this mess. To hell with it: you ask him to fap onto you, and whether or not it works, it's a beautiful distraction, and soon you're schlicking yourself in the hopes an orgasm will get this baby out of you faster.\n\n");
+			if (player.findPerk(PerkLib.BroodMother) > 0) {
+				outputText("You've had many children during your time in Mareth, and you're still grateful for each father decent enough to stay with you and help.  It's nearly novel to be covered in cum during this because you <i>want</i> to be, not because some imp took advantage of you, and you curl up afterwards against his soft fur, his muscles comforting to push up against.\n\n") }
+			outputText("Eventually, you make one final push larger than the rest and a small furry creature pops out of your womb and cunt, thankfully currently devoid of spines. \"<i>Wow,</i>\" the behemoth says, wiping off your new offspring before setting him to your breasts, his infant claws too soft to hurt as he kneads you. \"<i>I love you,</i>\" he says, still mindblown, and you smile at him as he watches you both in utter amazement. ");
 			player.cuntChange(48, true);
+			player.orgasm();
 			flags[kFLAGS.BEHEMOTH_CHILDREN]++;
 			if (flags[kFLAGS.BEHEMOTH_CHILDREN] == 1) {
-				outputText("\n\n\"<i>Look at that. Our first child. I'm finally happy to finally have a family! You're now a mother,</i>\" the behemoth says. You smile at him and you spend some time breastfeeding your newborn.");
+				outputText("\"<i>I can't believe I finally have a family.  Thank you so much.,</i>\"");
 				flags[kFLAGS.BEHEMOTH_CHILD_1_BIRTH_DAY] = model.time.days;
 			}
 			else if (flags[kFLAGS.BEHEMOTH_CHILDREN] == 2) {
-				outputText("\n\n\"<i>My second child! Now my first son won't be lonely!</i>\" the behemoth says smilingly. ");
+				outputText("\"<i>Two kids! Thank you for making sure my son wouldn't be lonely.</i>\"");
 				flags[kFLAGS.BEHEMOTH_CHILD_2_BIRTH_DAY] = model.time.days;
 			}
 			else if (flags[kFLAGS.BEHEMOTH_CHILDREN] == 3) {
-				outputText("\n\n\"<i>My third child! I think I have enough children, thank you. I love you,</i>\" the behemoth says smilingly as he gives you a kiss.");
+				outputText("\n\n\"<i>Three kids is a good number,</i>\" he says drowsily, and he gives you a kiss as you all rest for a while together.");
 				flags[kFLAGS.BEHEMOTH_CHILD_3_BIRTH_DAY] = model.time.days;
 			}
-			outputText("\n\nYou rest for a while and breastfeed your newborn. Eventually, you know you should return to your camp. \"<i>I'll take good care of him,</i>\" the behemoth says. You give him a goodbye and walk back to your camp.");
+			outputText("\n\nEventually, you know you should return to your camp. \"<i>I'll take good care of him, I promise,</i>\" he says as you make your goodbyes, and you walk back to your camp with a goofy smile on your face.");
 			player.knockUpForce(); //Clear!
 			doNext(camp.returnToCampUseOneHour);
 		}
