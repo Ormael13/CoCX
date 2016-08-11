@@ -27,7 +27,7 @@ package classes.Scenes.Areas
 		public function exploreLake():void
 		{
 			//Increment exploration count
-			player.exploredLake++;
+			flags[kFLAGS.TIMES_EXPLORED_LAKE]++;
 			if (kGAMECLASS.aprilFools.poniesYN()) return;
 
 			//Helia monogamy fucks
@@ -35,7 +35,7 @@ package classes.Scenes.Areas
 				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}
-			if (player.exploredLake % 20 == 0 || (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 10 && rand(5) == 0)) {
+			if (flags[kFLAGS.TIMES_EXPLORED_LAKE] % 20 == 0 || (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 10 && rand(5) == 0)) {
 				calluScene.ottahGirl();
 				return;
 			}
@@ -71,7 +71,7 @@ package classes.Scenes.Areas
 			if (player.level >= 2)
 				choice[choice.length] = 4;
 			//Izma
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00230] > 0 && (player.exploredLake >= 10) && (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00233] == 0 || player.findStatusEffect(StatusEffects.Infested) < 0) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] <= 0)
+			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00230] > 0 && (flags[kFLAGS.TIMES_EXPLORED_LAKE] >= 10) && (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00233] == 0 || player.findStatusEffect(StatusEffects.Infested) < 0) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] <= 0)
 				choice[choice.length] = 5;
 			//Rathazul
 			if (player.findStatusEffect(StatusEffects.CampRathazul) < 0)

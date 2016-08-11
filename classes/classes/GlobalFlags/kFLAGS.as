@@ -2302,11 +2302,11 @@ public static const UNKNOWN_FLAG_NUMBER_02293:int                               
 public static const UNKNOWN_FLAG_NUMBER_02294:int                                   = 2294;
 public static const SANDWITCH_SERVICED:int                                          = 2295;	// Number of times, the player has serviced a sand witch.
 public static const JOJO_STATUS:int                                                 = 2296; // Replacement for `CoC.monk` variable.
-public static const UNKNOWN_FLAG_NUMBER_02297:int                                   = 2297;
-public static const UNKNOWN_FLAG_NUMBER_02298:int                                   = 2298;
-public static const UNKNOWN_FLAG_NUMBER_02299:int                                   = 2299;
-public static const UNKNOWN_FLAG_NUMBER_02300:int                                   = 2300;
-public static const UNKNOWN_FLAG_NUMBER_02301:int                                   = 2301;
+public static const TIMES_EXPLORED:int                                              = 2297; // Replaces `player.explored`
+public static const TIMES_EXPLORED_FOREST:int                                       = 2298; // Replaces `player.exploredForest`
+public static const TIMES_EXPLORED_DESERT:int                                       = 2299; // Replaces `player.exploredDesert`
+public static const TIMES_EXPLORED_MOUNTAIN:int                                     = 2300; // Replaces `player.exploredMountain`
+public static const TIMES_EXPLORED_LAKE:int                                         = 2301; // Replaces `player.exploredLake`
 public static const UNKNOWN_FLAG_NUMBER_02302:int                                   = 2302;
 public static const UNKNOWN_FLAG_NUMBER_02303:int                                   = 2303;
 public static const UNKNOWN_FLAG_NUMBER_02304:int                                   = 2304;
