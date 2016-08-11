@@ -229,6 +229,7 @@ package classes.Items
 			trace('called basiliskHairChange("' + tfSource + '")');
 			if (tfSource == "PlayerEvents" && !player.featheryHairPinEquipped()) return 0;
 			if (tfSource != "PlayerEvents" && (changes >= changeLimit || !player.isBasilisk())) return 0;
+			return 0;
 		}
 
 		/**

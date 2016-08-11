@@ -12,8 +12,6 @@ package classes {
 			CoC.timeAwareClassAdd(this);
 		}
 
-		protected function get mutations():Mutations { return kGAMECLASS.mutations; }
-
 		private var checkedTurkey:int; //Make sure we test each of these events just once in timeChangeLarge
 		private var checkedDream:int;
 		private var displayedBeeCock:Boolean;

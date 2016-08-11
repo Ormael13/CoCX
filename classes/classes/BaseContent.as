@@ -66,7 +66,12 @@
 		{
 			return kGAMECLASS.combat;
 		}
-		
+
+		protected function get mutations():Mutations
+		{
+			return kGAMECLASS.mutations;
+		}
+
 		public function goNext(time:Number,defNext:Boolean):Boolean
 		{
 			return kGAMECLASS.goNext(time,defNext);
