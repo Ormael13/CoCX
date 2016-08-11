@@ -1032,13 +1032,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.ass.analWetness = player.ass.analWetness;
 		saveFile.data.ass.analLooseness = player.ass.analLooseness;
 		saveFile.data.ass.fullness = player.ass.fullness;
-		//EXPLORED
-		saveFile.data.exploredLake = player.exploredLake;
-		saveFile.data.exploredMountain = player.exploredMountain;
-		saveFile.data.exploredForest = player.exploredForest;
-		saveFile.data.exploredDesert = player.exploredDesert;
-		saveFile.data.explored = player.explored;
-		saveFile.data.gameState = gameStateGet();
+
+		saveFile.data.gameState = gameStateGet(); // Saving game state?
 		
 		//Time and Items
 		saveFile.data.minutes = model.time.minutes;
@@ -2121,13 +2116,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.ass.analWetness = saveFile.data.ass.analWetness;
 		player.ass.fullness = saveFile.data.ass.fullness;
 		
-		//Shit
-		gameStateSet(saveFile.data.gameState);
-		player.exploredLake = saveFile.data.exploredLake;
-		player.exploredMountain = saveFile.data.exploredMountain;
-		player.exploredForest = saveFile.data.exploredForest;
-		player.exploredDesert = saveFile.data.exploredDesert;
-		player.explored = saveFile.data.explored;
+		gameStateSet(saveFile.data.gameState);  // Loading game state
 		
 		//Days
 		//Time and Items
@@ -2139,7 +2128,13 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.autoSave = saveFile.data.autoSave;
 		
-		//PLOTZ
+		// Fix possible old save for Plot & Exploration
+		flags[kFLAGS.TIMES_EXPLORED_LAKE]     = (flags[kFLAGS.TIMES_EXPLORED_LAKE] || saveFile.data.exploredLake);
+		flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] = (flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] || saveFile.data.exploredMountain);
+		flags[kFLAGS.TIMES_EXPLORED_FOREST]   = (flags[kFLAGS.TIMES_EXPLORED_FOREST] || saveFile.data.exploredForest);
+		flags[kFLAGS.TIMES_EXPLORED_DESERT]   = (flags[kFLAGS.TIMES_EXPLORED_DESERT] || saveFile.data.exploredDesert);
+		flags[kFLAGS.TIMES_EXPLORED]          = (flags[kFLAGS.TIMES_EXPLORED] || saveFile.data.exploredDesert);
+ 
 		flags[kFLAGS.JOJO_STATUS]        = (flags[kFLAGS.JOJO_STATUS] || saveFile.data.monk);
 		flags[kFLAGS.SANDWITCH_SERVICED] = (flags[kFLAGS.SANDWITCH_SERVICED] || saveFile.data.sand);
 		flags[kFLAGS.GIACOMO_MET]        = (flags[kFLAGS.GIACOMO_MET] || saveFile.data.giacomo);

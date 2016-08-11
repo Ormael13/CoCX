@@ -24,16 +24,25 @@ package classes.Scenes
 		//const BOG_EXPLORED:int = 1016;
 		public function doExplore():void
 		{
-			if (player.explored <= 0) {
+			// Clear 
+			clearOutput();
+	
+			// Introductions to exploration //
+			if (flags[kFLAGS.TIMES_EXPLORED] <= 0) {
 				outputText("You tentatively step away from your campsite, alert and scanning the ground and sky for danger.  You walk for the better part of an hour, marking the rocks you pass for a return trip to your camp.  It worries you that the portal has an opening on this side, and it was totally unguarded...\n\n...Wait a second, why is your campsite in front of you? The portal's glow is clearly visible from inside the tall rock formation.   Looking carefully you see your footprints leaving the opposite side of your camp, then disappearing.  You look back the way you came and see your markings vanish before your eyes.  The implications boggle your mind as you do your best to mull over them.  Distance, direction, and geography seem to have little meaning here, yet your campsite remains exactly as you left it.  A few things click into place as you realize you found your way back just as you were mentally picturing the portal!  Perhaps memory influences travel here, just like time, distance, and speed would in the real world!\n\nThis won't help at all with finding new places, but at least you can get back to camp quickly.  You are determined to stay focused the next time you explore and learn how to traverse this gods-forsaken realm.", true);
-				tryDiscover();
+				flags[kFLAGS.TIMES_EXPLORED]++;
+				doNext(camp.returnToCampUseOneHour);
 				return;
-			} else if (player.explored == 1) {
+			} else if (flags[kFLAGS.TIMES_EXPLORED_FOREST] <= 0) {
 				outputText("You walk for quite some time, roaming the hard-packed and pink-tinged earth of the demon-realm.  Rust-red rocks speckle the wasteland, as barren and lifeless as anywhere else you've been.  A cool breeze suddenly brushes against your face, as if gracing you with its presence.  You turn towards it and are confronted by the lush foliage of a very old looking forest.  You smile as the plants look fairly familiar and non-threatening.  Unbidden, you remember your decision to test the properties of this place, and think of your campsite as you walk forward.  Reality seems to shift and blur, making you dizzy, but after a few minutes you're back, and sure you'll be able to return to the forest with similar speed.\n\n<b>You have discovered the Forest!</b>", true);
-				tryDiscover();
-				player.exploredForest++;
+				flags[kFLAGS.TIMES_EXPLORED]++;
+				flags[kFLAGS.TIMES_EXPLORED_FOREST]++;
+				doNext(camp.returnToCampUseOneHour);
 				return;
-			} else if (player.explored > 1) outputText("You can continue to search for new locations, or explore your previously discovered locations.", true);
+			}
+
+			// Exploration Menu //
+			outputText("You can continue to search for new locations, or explore your previously discovered locations.");
 
 			/*if (flags[kFLAGS.EXPLORATION_PAGE] == 2) {
 				explorePageII();
@@ -42,11 +51,11 @@ package classes.Scenes
 			hideMenus();
 			menu();
 			addButton(0, "Explore", tryDiscover, null, null, null, "Explore to find new regions and visit any discovered regions.");
-			if (player.exploredForest > 0) addButton(1, "Forest", kGAMECLASS.forest.exploreForest, null, null, null, "Visit the lush forest. \n\nRecommended level: 1" + (player.level < 6 ? "\n\nBeware of Tentacle Beasts!" : "") + (debug ? "\n\nTimes explored: " + player.exploredForest : ""));
-			if (player.exploredLake > 0) addButton(2, "Lake", kGAMECLASS.lake.exploreLake, null, null, null, "Visit the lake and explore the beach. \n\nRecommended level: 1" + (debug ? "\n\nTimes explored: " + player.exploredLake : ""));
-			if (player.exploredDesert > 0) addButton(3, "Desert", kGAMECLASS.desert.exploreDesert, null, null, null, "Visit the dry desert. \n\nRecommended level: 2" + (debug ? "\n\nTimes explored: " + player.exploredDesert : ""));
+			if (flags[kFLAGS.TIMES_EXPLORED_FOREST] > 0) addButton(1, "Forest", kGAMECLASS.forest.exploreForest, null, null, null, "Visit the lush forest. \n\nRecommended level: 1" + (player.level < 6 ? "\n\nBeware of Tentacle Beasts!" : "") + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_FOREST] : ""));
+			if (flags[kFLAGS.TIMES_EXPLORED_LAKE] > 0) addButton(2, "Lake", kGAMECLASS.lake.exploreLake, null, null, null, "Visit the lake and explore the beach. \n\nRecommended level: 1" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_LAKE] : ""));
+			if (flags[kFLAGS.TIMES_EXPLORED_DESERT] > 0) addButton(3, "Desert", kGAMECLASS.desert.exploreDesert, null, null, null, "Visit the dry desert. \n\nRecommended level: 2" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_DESERT] : ""));
 
-			if (player.exploredMountain > 0) addButton(5, "Mountain", kGAMECLASS.mountain.exploreMountain, null, null, null, "Visit the mountain. \n\nRecommended level: 5" + (debug ? "\n\nTimes explored: " + player.exploredMountain : ""));
+			if (flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] > 0) addButton(5, "Mountain", kGAMECLASS.mountain.exploreMountain, null, null, null, "Visit the mountain. \n\nRecommended level: 5" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] : ""));
 			if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0) addButton(6, "Swamp", kGAMECLASS.swamp.exploreSwamp, null, null, null, "Visit the wet swamplands. \n\nRecommended level: 12" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_SWAMP] : ""));
 			if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0) addButton(7, "Plains", kGAMECLASS.plains.explorePlains, null, null, null, "Visit the plains. \n\nRecommended level: 10" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_PLAINS] : ""));
 			if (player.findStatusEffect(StatusEffects.ExploredDeepwoods) >= 0) addButton(8, "Deepwoods", kGAMECLASS.forest.exploreDeepwoods, null, null, null, "Visit the dark, bioluminescent deepwoods. \n\nRecommended level: 5" + (debug ? "\n\nTimes explored: " + player.statusEffectv1(StatusEffects.ExploredDeepwoods) : ""));
@@ -206,135 +215,84 @@ package classes.Scenes
 		}
 		
 		//Try to find a new location - called from doExplore once the first location is found
-		public function tryDiscover():void
-		{
+		public function tryDiscover():void {
 
-			// kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
-			// return;
-
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helFollower.followerHel()) {
+			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && (player.cocks.length > 0 || player.vaginas.length > 0) && !kGAMECLASS.helFollower.followerHel()) {
 				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}
-			if (player.explored > 1) {
-				
-				if (player.exploredForest <= 0) {
-					outputText("You walk for quite some time, roaming the hard-packed and pink-tinged earth of the demon-realm.  Rust-red rocks speckle the wasteland, as barren and lifeless as anywhere else you've been.  A cool breeze suddenly brushes against your face, as if gracing you with its presence.  You turn towards it and are confronted by the lush foliage of a very old looking forest.  You smile as the plants look fairly familiar and non-threatening.  Unbidden, you remember your decision to test the properties of this place, and think of your campsite as you walk forward.  Reality seems to shift and blur, making you dizzy, but after a few minutes you're back, and sure you'll be able to return to the forest with similar speed.\n\n<b>You've discovered the Forest!</b>", true);
-					player.exploredForest == 1;
-					player.exploredForest++;
-					doNext(camp.returnToCampUseOneHour);
-					return;
-				}
-				if (player.exploredLake <= 0) {
-					outputText("Your wanderings take you far and wide across the barren wasteland that surrounds the portal, until the smell of humidity and fresh water alerts you to the nearby lake.  With a few quick strides you find a lake so massive the distant shore cannot be seen.  Grass and a few sparse trees grow all around it.\n\n<b>You've discovered the Lake!</b>", true);
-					player.exploredLake = 1;
-					player.explored++;
-					doNext(camp.returnToCampUseOneHour);
-					return;
-				}
-				if (player.exploredLake >= 1 && rand(3) == 0 && player.exploredDesert <= 0) {
-					outputText("You stumble as the ground shifts a bit underneath you.  Groaning in frustration, you straighten up and discover the rough feeling of sand ", true);
-					if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("inside your footwear, between your toes", false);
-					if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("in your hooves", false);
-					if (player.lowerBody == LOWER_BODY_TYPE_DOG) outputText("in your paws", false);
-					if (player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("in your scales", false);
-					outputText(".\n\n<b>You've discovered the Desert!</b>", false);
-					player.exploredDesert = 1;
-					player.explored++;
-					doNext(camp.returnToCampUseOneHour);
-					return;
-				}
-				if (player.exploredDesert >= 1 && rand(3) == 0 && player.exploredMountain <= 0) {
-					outputText("Thunder booms overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it.\n\n<b>You've discovered the Mountain!</b>", true);
-					player.explored++;
-					player.exploredMountain = 1;
-					doNext(camp.returnToCampUseOneHour);
-					return;
-				}
-				if (player.exploredMountain >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] <= 0) {
-					flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
-					player.explored++;
-					outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>", true);
-					doNext(camp.returnToCampUseOneHour);
-					return;
-				}
-				//EXPLOOOOOOORE
-				if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] <= 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && rand(3) <= 0) {
-					flags[kFLAGS.TIMES_EXPLORED_SWAMP] = 1;
-					player.explored++;
-					clearOutput();
-					outputText("All things considered, you decide you wouldn't mind a change of scenery.  Gathering up your belongings, you begin a journey into the wasteland.  The journey begins in high spirits, and you whistle a little traveling tune to pass the time.  After an hour of wandering, however, your wanderlust begins to whittle away.  Another half-hour ticks by.  Fed up with the fruitless exploration, you're nearly about to head back to camp when a faint light flits across your vision.  Startled, you whirl about to take in three luminous will-o'-the-wisps, swirling around each other whimsically.  As you watch, the three ghostly lights begin to move off, and though the thought of a trap crosses your mind, you decide to follow.\n\n", false);
-					outputText("Before long, you start to detect traces of change in the environment.  The most immediate difference is the increasingly sweltering heat.  A few minutes pass, then the will-o'-the-wisps plunge into the boundaries of a dark, murky, stagnant swamp; after a steadying breath you follow them into the bog.  Once within, however, the gaseous balls float off in different directions, causing you to lose track of them.  You sigh resignedly and retrace your steps, satisfied with your discovery.  Further exploration can wait.  For now, your camp is waiting.\n\n", false);
-					outputText("<b>You've discovered the Swamp!</b>", false);
-					doNext(camp.returnToCampUseTwoHours);
-					return;
-				}
-				//Discover Glacial Rift!
-				if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] <= 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && rand(4) <= 0 && (player.level >= 10 || model.time.days >= 60) ) {
-					flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] = 1;
-					player.explored++;
-					clearOutput();
-					outputText("You walk for some time, roaming the hard-packed and pink-tinged earth of the demon-realm of Mareth. As you progress, a cool breeze suddenly brushes your cheek, steadily increasing in intensity and power until your clothes are whipping around your body in a frenzy. Every gust of wind seems to steal away part of your strength, the cool breeze having transformed into a veritable arctic gale. You wrap your arms around yourself tightly, shivering fiercely despite yourself as the hard pink dirt slowly turns to white; soon you’re crunching through actual snow, thick enough to make you stumble with every other step. You come to a stop suddenly as the ground before you gives way to a grand ocean, many parts of it frozen in great crystal islands larger than any city.\n\n", false);
-					outputText("<b>You've discovered the Glacial Rift!</b>", false);
-					doNext(camp.returnToCampUseTwoHours);
-					return;
-				}
-				//Discover Volcanic Crag!
-				if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] <= 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && rand(4) <= 0 && (player.level >= 15 || model.time.days >= 90) ) {
-					flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] = 1;
-					player.explored++;
-					clearOutput();
-					outputText("You walk for some time, roaming the hard-packed and pink-tinged earth of the demon-realm of Mareth. As you progress, you can feel the air getting warm. It gets hotter as you progress until you finally stumble across a blackened landscape. You reward yourself with a sight of the endless series of a volcanic landscape. Crags dot the landscape.\n\n", false);
-					outputText("<b>You've discovered the Volcanic Crag!</b>", false);
-					doNext(camp.returnToCampUseTwoHours);
-					return;
-				}
-				//Used for chosing 'repeat' encounters.
-				var choosey:Number = rand(6);
-				//2 (gargoyle) is never chosen once cathedral is discovered.
-				if (choosey == 2 && flags[kFLAGS.FOUND_CATHEDRAL] == 1)
-				{
-					choosey = rand(5);
-					if (choosey >= 2) choosey++;
-				}
-				//Chance of encountering Giacomo!
+
+			clearOutput();
+
+			flags[kFLAGS.TIMES_EXPLORED]++;
+			if (flags[kFLAGS.TIMES_EXPLORED_LAKE] <= 0) {
+				// Discover Lake
+				flags[kFLAGS.TIMES_EXPLORED_LAKE] = 1;
+				outputText("Your wanderings take you far and wide across the barren wasteland that surrounds the portal, until the smell of humidity and fresh water alerts you to the nearby lake.  With a few quick strides you find a lake so massive the distant shore cannot be seen.  Grass and a few sparse trees grow all around it.\n\n<b>You've discovered the Lake!</b>");
+				doNext(camp.returnToCampUseOneHour);
+			} else if (flags[kFLAGS.TIMES_EXPLORED_LAKE] >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_DESERT] <= 0) {
+				// Discover Desert
+				flags[kFLAGS.TIMES_EXPLORED_DESERT] = 1;
+				outputText("You stumble as the ground shifts a bit underneath you.  Groaning in frustration, you straighten up and discover the rough feeling of sand ");
+				if      (player.lowerBody == LOWER_BODY_TYPE_HUMAN)   outputText("inside your footwear, between your toes");
+				else if (player.lowerBody == LOWER_BODY_TYPE_HOOFED)  outputText("in your hooves");
+				else if (player.lowerBody == LOWER_BODY_TYPE_DOG)     outputText("in your paws");
+				else if (player.lowerBody == LOWER_BODY_TYPE_NAGA)    outputText("in your scales");
+				outputText(".\n\n<b>You've discovered the Desert!</b>");
+				doNext(camp.returnToCampUseOneHour);
+			} else if (flags[kFLAGS.TIMES_EXPLORED_DESERT] >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] <= 0) {
+				// Discover Mountain
+				flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] = 1;
+				outputText("Thunder booms overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it.\n\n<b>You've discovered the Mountain!</b>");
+				doNext(camp.returnToCampUseOneHour);
+			} else if (flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] <= 0) {
+				// Discover Plains
+				flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
+				outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>");
+				doNext(camp.returnToCampUseOneHour);
+			} else if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] <= 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && rand(3) <= 0) {
+				// Discover Swamp
+				flags[kFLAGS.TIMES_EXPLORED_SWAMP] = 1;
+				outputText("All things considered, you decide you wouldn't mind a change of scenery.  Gathering up your belongings, you begin a journey into the wasteland.  The journey begins in high spirits, and you whistle a little traveling tune to pass the time.  After an hour of wandering, however, your wanderlust begins to whittle away.  Another half-hour ticks by.  Fed up with the fruitless exploration, you're nearly about to head back to camp when a faint light flits across your vision.  Startled, you whirl about to take in three luminous will-o'-the-wisps, swirling around each other whimsically.  As you watch, the three ghostly lights begin to move off, and though the thought of a trap crosses your mind, you decide to follow.\n\n");
+				outputText("Before long, you start to detect traces of change in the environment.  The most immediate difference is the increasingly sweltering heat.  A few minutes pass, then the will-o'-the-wisps plunge into the boundaries of a dark, murky, stagnant swamp; after a steadying breath you follow them into the bog.  Once within, however, the gaseous balls float off in different directions, causing you to lose track of them.  You sigh resignedly and retrace your steps, satisfied with your discovery.  Further exploration can wait.  For now, your camp is waiting.\n\n");
+				outputText("<b>You've discovered the Swamp!</b>");
+				doNext(camp.returnToCampUseTwoHours);
+			} else if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] <= 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && rand(4) <= 0 && (player.level >= 10 || model.time.days >= 60) ) {
+				// Discover Glacial Rift!
+				flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] = 1;
+				outputText("You walk for some time, roaming the hard-packed and pink-tinged earth of the demon-realm of Mareth. As you progress, a cool breeze suddenly brushes your cheek, steadily increasing in intensity and power until your clothes are whipping around your body in a frenzy. Every gust of wind seems to steal away part of your strength, the cool breeze having transformed into a veritable arctic gale. You wrap your arms around yourself tightly, shivering fiercely despite yourself as the hard pink dirt slowly turns to white; soon you’re crunching through actual snow, thick enough to make you stumble with every other step. You come to a stop suddenly as the ground before you gives way to a grand ocean, many parts of it frozen in great crystal islands larger than any city.\n\n");
+				outputText("<b>You've discovered the Glacial Rift!</b>");
+				doNext(camp.returnToCampUseTwoHours);
+			} else if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] <= 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && rand(4) <= 0 && (player.level >= 15 || model.time.days >= 90) ) {
+				// Discover Volcanic Crag!
+				flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] = 1;
+				outputText("You walk for some time, roaming the hard-packed and pink-tinged earth of the demon-realm of Mareth. As you progress, you can feel the air getting warm. It gets hotter as you progress until you finally stumble across a blackened landscape. You reward yourself with a sight of the endless series of a volcanic landscape. Crags dot the landscape.\n\n");
+				outputText("<b>You've discovered the Volcanic Crag!</b>");
+				doNext(camp.returnToCampUseTwoHours);
+			} else {
+				// Random Encounter
+
+				var choosey:Number = rand(6 - flags[kFLAGS.FOUND_CATHEDRAL]);
+				//5 (gargoyle) is never chosen once cathedral is discovered.
+
 				if (choosey == 0) {
-					player.explored++;
 					kGAMECLASS.giacomoShop.giacomoEncounter();
-					return;
-				}
-				else if (choosey == 1) {
-					player.explored++;
+				} else if (choosey == 1) {
 					kGAMECLASS.lumi.lumiEncounter();
-					return;
-				}
-				else if (choosey == 2) {
-					player.explored++;
-					if (flags[kFLAGS.GAR_NAME] == 0) kGAMECLASS.gargoyle.gargoylesTheShowNowOnWBNetwork();
-					else kGAMECLASS.gargoyle.returnToCathedral();
-					return;
-				}
-				else if (choosey == 3 && flags[kFLAGS.PRISON_CAPTURE_COUNTER] < 1 && rand(4) == 0) {
-					player.explored++;
-					clearOutput();
+				} else if (choosey == 5) {
+					if   (flags[kFLAGS.GAR_NAME] == 0)  kGAMECLASS.gargoyle.gargoylesTheShowNowOnWBNetwork();
+					else                                kGAMECLASS.gargoyle.returnToCathedral();
+				} else if (choosey == 3 && flags[kFLAGS.PRISON_CAPTURE_COUNTER] < 1 && rand(4) == 0) {
 					outputText("Your curiosity draws you towards the smoke of a campfire on the edges of the forest. In the gloom ahead you see what appears to be a cage wagon surrounded by several tents, and hear the sounds of guttural voices engaged in boisterous conversation. Inexplicably you find yourself struck by an unwholesome sense of foreboding. <b>Even from here that cage looks like it is designed to carry people off to somewhere very unpleasant, some place where your life could be turned upside down and the rules you have become accustomed to in this world may no longer apply.</b> You take a long moment to consider turning back. Do you throw caution to the wind and investigate further?");
 					//outputText("\n\n(<b>NOTE:</b> Prisoner mod is currently under development and not all scenes are available.)");
 					doYesNo(kGAMECLASS.prison.goDirectlyToPrisonDoNotPassGoDoNotCollect200Gems, camp.returnToCampUseOneHour);
-					return;
+				} else if (rand(100) < 99) {
+					genericGobImpEncounters(true); //Monster - 50/50 imp/gob split.
+				} else { //Easter egg!
+					outputText("You wander around, fruitlessly searching for new places.");
+					doNext(camp.returnToCampUseOneHour);
 				}
-				//Monster - 50/50 imp/gob split.
-				else if (rand(100) < 99) {
-					player.explored++;
-					genericGobImpEncounters(true);
-					return;
-				}
-				else { //Easter egg!
-					outputText("You wander around, fruitlessly searching for new places.", true);
-				}
-				
 			}
-			player.explored++;
-			doNext(camp.returnToCampUseOneHour);
 		}
 
 

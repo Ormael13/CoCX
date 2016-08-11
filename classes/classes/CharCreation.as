@@ -205,11 +205,6 @@
 			player.beardLength = 0;
 			player.beardStyle = 0;
 			//Exploration
-			player.explored = 0;
-			player.exploredForest = 0;
-			player.exploredDesert = 0;
-			player.exploredMountain = 0;
-			player.exploredLake = 0;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				//Inventory clear
 				player.itemSlot1.unlocked = true;
@@ -396,7 +391,8 @@
 		private function chooseName():void {
 			if (mainView.nameBox.text == "") {
 				//If part of newgame+, don't fully wipe.
-				if (player.XP > 0 && player.explored == 0) {
+				// Isn't this redundant? This is covered in `newGameGo`.
+				if (player.XP > 0) {
 					flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = player.XP;
 					if (flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] == 0) flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP] = 1;
 					while (player.level > 1) {
