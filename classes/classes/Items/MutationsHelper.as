@@ -75,7 +75,6 @@ package classes.Items
 							case SKIN_TYPE_GOO:
 								if (player.clawType != CLAW_TYPE_NORMAL)
 									outputText("\n\nYour gooey claws melt into your fingers. Well, who cares, gooey claws aren't very useful in combat to begin with.");
-									//Gooey claws? Really?!? I'll take a look at goo TF later ...
 								break;
 
 							case SKIN_TYPE_PLAIN:
@@ -225,6 +224,13 @@ package classes.Items
 			return oldClawTone;
 		}
 
+		public function basiliskHairChange(tfSource:String):int
+		{
+			trace('called basiliskHairChange("' + tfSource + '")');
+			if (tfSource == "PlayerEvents" && !player.featheryHairPinEquipped()) return 0;
+			if (tfSource != "PlayerEvents" && (changes >= changeLimit || !player.isBasilisk())) return 0;
+		}
+
 		/**
 		 * Updates the perk Oviposition depending on the class/method stored in tfSource, that called it.
 		 * @param	tfSource	The method- or classname plus additional info seperated by the '-'-character
@@ -232,7 +238,6 @@ package classes.Items
 		 * @author	Stadler76
 		 */
 		public function updateOvipositionPerk(tfSource:String):int
-
 		{
 			trace('called updateOvipositionPerk("' + tfSource + '")');
 			var tsParts:Array = tfSource.split("-");

@@ -7,10 +7,13 @@ package classes {
 	public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//Handles all timeChange events for the player. Needed because player is not unique.
 		
-		public function PlayerEvents():void {
+		public function PlayerEvents():void
+		{
 			CoC.timeAwareClassAdd(this);
 		}
-		
+
+		protected function get mutations():Mutations { return kGAMECLASS.mutations; }
+
 		private var checkedTurkey:int; //Make sure we test each of these events just once in timeChangeLarge
 		private var checkedDream:int;
 		private var displayedBeeCock:Boolean;
@@ -18,6 +21,7 @@ package classes {
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean {
 			var needNext:Boolean = false;
+			var tfSource:String = "PlayerEvents";
 			checkedTurkey = 0;
 			checkedDream = 0;
 			
