@@ -674,11 +674,9 @@ private function talkToBenoit():void {
 		outputText("\n\nYou feel a blush creep across your [face] as you thank the blind basilisk, hugging " + benoitMF("him", "her")
 		          +" to you tight before you leave");
 		// Equip only, if you have hair and if it's not gooey.
-		// However: While it won't be equippable in gooey hair, I'd suggest it to magically stick on your bald head for those, who chose to shave off their hair.
-		if (hasSolidHair) outputText(", slipping the pin into your [hair] as you exit the store");
-		outputText(".");
-		if (hasSolidHair)
-			// value1: hairPinIsEquipped, value2: just (re)equipped, but TF not triggered yet.
+		outputText((hasSolidHair && player.cor < 55) ? ", slipping the pin into your [hair] as you exit the store." : ".");
+		// value1: hairPinIsEquipped, value2: just (re)equipped, but TF not triggered yet.
+		if (hasSolidHair && player.cor < 55)
 			player.createKeyItem("Feathery hair-pin", 1, 1, 0, 0);
 		else
 			player.createKeyItem("Feathery hair-pin", 0, 0, 0, 0);
@@ -1337,12 +1335,12 @@ public function equipUnequipHairPin():void
 			outputText("You try to slide the hair pin into your " + player.hairDescript() + ", but their semi-liquid state isn't enough to hold it in"
 			          +" place. The pin falls to the ground with a wet splat the moment you let it go. With a sigh you clean it up and then you put"
 			          +" it back.");
-		else {
-			if (player.cor >= 55)
+		else if (player.cor >= 55)
 				outputText("You go to slide the hair-pin into your " + player.hairDescript() + ", but the moment it touches your scalp it heats up,"
 			              +" causing you to drop it in shock. Seems it doesn't want you dirty its purity... you pick it up and put it back into your"
 			              +" inventory for now.");
-			else if (player.hairLength > 0)
+		else {
+			if (player.hairLength > 0)
 				outputText("You slide the hair-pin " + benoitMF("Benoit", "Benoite") + " gave you into your " + player.hairDescript()
 				          +", briefly admiring yourself in a nearby puddle before returning to your adventures.");
 			else
@@ -1353,6 +1351,7 @@ public function equipUnequipHairPin():void
 			player.keyItems[keyItemNum].value2 = 1; // just equipped it, but it didn't trigger the TF(-event) so far
 		}
 	}
+	outputText("\n");
 	doNext(inventory.checkKeyItems);
 }
 
