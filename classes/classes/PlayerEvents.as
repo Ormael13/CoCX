@@ -54,7 +54,7 @@ package classes {
 				if (player.findPerk(PerkLib.Lusty) >= 0) dynStats("lus", player.lib * 0.01, "resisted", false); //Double lust rise if lusty.
 			}
 			//Feathery hairpin Effects
-			mutations.lizardHairChange(tfSource);
+			if (player.featheryHairPinEquipped()) mutations.lizardHairChange(tfSource);
 			//Jewelry effect
 			if (player.jewelryEffectId == JewelryLib.CORRUPTION)
 			{

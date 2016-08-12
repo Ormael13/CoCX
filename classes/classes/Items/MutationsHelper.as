@@ -230,25 +230,22 @@ package classes.Items
 			trace('called lizardHairChange("' + tfSource + '")');
 
 			switch (tfSource) {
-				case "PlayerEvents":
-					if (!player.featheryHairPinEquipped()) return 0;
-					// NYI!!!
-					return 0;
-
 				case "reptilum-lizan":
 				case "reptilum-dragonewt":
 					//-Hair stops growing!
 					if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
-						outputText("\n\nYour scalp tingles oddly.  In a panic, you reach up to your " + player.hairDescript() + ", but thankfully it appears unchanged.\n\n");
-						outputText("(<b>Your hair has stopped growing.</b>)");
+						outputText("\n\nYour scalp tingles oddly.  In a panic, you reach up to your " + player.hairDescript() + ", but thankfully it appears unchanged.");
+						outputText("\n\n(<b>Your hair has stopped growing.</b>)");
 						changes++;
 						flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 1;
 						return -1; // --> hair growth stopped
 					}
 					return 0;
 
+				case "PlayerEvents":
 				case "reptilum-basilisk":
 				case "reptilum-dracolisk":
+					if (player.hairType == HAIR_BASILISK_PLUME && player.cor < 65) return 0;
 					// NYI!!!
 					return 0;
 
