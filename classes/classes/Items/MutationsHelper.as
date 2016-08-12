@@ -1,6 +1,7 @@
 package classes.Items 
 {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 	
 	/**
 	 * Helper class to get rid of the copy&paste-mess in classes.Items.Mutations
@@ -224,12 +225,36 @@ package classes.Items
 			return oldClawTone;
 		}
 
-		public function basiliskHairChange(tfSource:String):int
+		public function lizardHairChange(tfSource:String):int
 		{
-			trace('called basiliskHairChange("' + tfSource + '")');
-			if (tfSource == "PlayerEvents" && !player.featheryHairPinEquipped()) return 0;
-			if (tfSource != "PlayerEvents" && (changes >= changeLimit || !player.isBasilisk())) return 0;
-			return 0;
+			trace('called lizardHairChange("' + tfSource + '")');
+
+			switch (tfSource) {
+				case "PlayerEvents":
+					if (!player.featheryHairPinEquipped()) return 0;
+					// NYI!!!
+					return 0;
+
+				case "reptilum-lizan":
+				case "reptilum-dragonewt":
+					//-Hair stops growing!
+					if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
+						outputText("\n\nYour scalp tingles oddly.  In a panic, you reach up to your " + player.hairDescript() + ", but thankfully it appears unchanged.\n\n");
+						outputText("(<b>Your hair has stopped growing.</b>)");
+						changes++;
+						flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 1;
+						return -1; // --> hair growth stopped
+					}
+					return 0;
+
+				case "reptilum-basilisk":
+				case "reptilum-dracolisk":
+					// NYI!!!
+					return 0;
+
+				default:
+					return 0;
+			}
 		}
 
 		/**
