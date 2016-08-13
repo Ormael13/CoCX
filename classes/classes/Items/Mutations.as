@@ -514,7 +514,7 @@
 			}
 			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//Restore arms to become human arms again
-			restoreArms();
+			if (rand(4) == 0) restoreArms(tfSource);
 			//+hooves
 			if (player.lowerBody != LOWER_BODY_TYPE_HOOFED) {
 				if (changes < changeLimit && rand(3) == 0) {
@@ -971,7 +971,7 @@
 			}
 			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//Restore arms to become human arms again
-			restoreArms();
+			if (rand(4) == 0) restoreArms(tfSource);
 			//Remove feathery hair
 			removeFeatheryHair();
 			//
@@ -1686,7 +1686,7 @@
 			}
 			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//Restore arms to become human arms again
-			restoreArms();
+			if (rand(4) == 0) restoreArms(tfSource);
 			//Remove feathery hair
 			removeFeatheryHair();
 			//if (type != 2 && type != 4 && type != 5) outputText("\n", false);
@@ -3663,7 +3663,7 @@
 			}
 			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//Restore arms to become human arms again
-			restoreArms();
+			if (rand(4) == 0) restoreArms(tfSource);
 			//SEXYTIEMS
 			//Multidick killa!
 			if (player.cocks.length > 1 && rand(3) == 0 && changes < changeLimit) {
@@ -3890,7 +3890,7 @@
 					else if (blaht <= 8) player.skinTone = "cerulean";
 					else player.skinTone = "emerald";
 					outputText(player.skinTone + "!");
-					restoreArms(null, RESTOREARMS_FROMGOOSKINTF);
+					if (player.armType != ARM_TYPE_HUMAN || player.clawType != CLAW_TYPE_NORMAL) restoreArms(tfSource);
 				}
 				return;
 			}
@@ -4416,7 +4416,7 @@
 				changes++;
 			}
 			//Restore arms to become human arms again
-			restoreArms();
+			if (rand(4) == 0) restoreArms(tfSource);
 			//-----------------------
 			// MINOR TRANSFORMATIONS
 			//-----------------------
@@ -6444,7 +6444,7 @@
 				changes++;
 			}
 			//-Restore arms to become human arms again
-			restoreArms();
+			if (rand(4) == 0) restoreArms(tfSource);
 			//-Remove feathery hair
 			removeFeatheryHair();
 			//Remove odd eyes
@@ -8053,7 +8053,7 @@
 				changes++;
 			}
 			// Kitsunes should have normal arms. exspecially skinny arms with claws are somewhat weird (Stadler76).
-			if (player.skinType == SKIN_TYPE_PLAIN) restoreArms();
+			if (player.skinType == SKIN_TYPE_PLAIN && rand(4) == 0) restoreArms(tfSource);
 
 			if (changes == 0) {
 				outputText("\n\nOdd.  You don't feel any different.");
