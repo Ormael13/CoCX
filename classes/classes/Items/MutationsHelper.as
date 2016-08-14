@@ -15,9 +15,6 @@ package classes.Items
 		// I tend to use bitfields rather than lots of optional boolean params.
 		// If I consider a method to be finalized and has only one option I'll refactor this to use a boolean value.
 
-		// restoreArms options
-		public static const RESTOREARMS_FROMGOOSKINTF:int = 1;
-
 		// restoreLegs options
 		public static const RESTORELEGS_EXCLUDE_TAUR:int   =  1;
 		public static const RESTORELEGS_EXCLUDE_GOO:int    =  2;
@@ -30,12 +27,11 @@ package classes.Items
 
 		public function MutationsHelper() {}
 
-		public function restoreArms(keepArms:Array = null, options:int = 0):Boolean
+		public function restoreArms(tfSource:String):int
 		{
-			if (keepArms == null) keepArms = [];
-			if (keepArms.indexOf(player.armType) >= 0) return false; // For future TFs. Tested and working, but I'm not using it so far (Stadler76)
+			trace('called restoreArms("' + tfSource + '")');
 
-			if (options & RESTOREARMS_FROMGOOSKINTF) {
+			if (tfSource == "gooGasmic") {
 				// skin just turned gooey. Now lets fix unusual arms.
 				var hasClaws:Boolean = player.clawType != CLAW_TYPE_NORMAL;
 
@@ -50,11 +46,11 @@ package classes.Items
 
 				updateClaws();
 				player.armType = ARM_TYPE_HUMAN;
-				return true;
+				return 1;
 			}
 
 
-			if (changes < changeLimit && player.armType != ARM_TYPE_HUMAN && rand(4) == 0) {
+			if (changes < changeLimit && player.armType != ARM_TYPE_HUMAN) {
 				if ([ARM_TYPE_HARPY, ARM_TYPE_SPIDER, ARM_TYPE_SALAMANDER].indexOf(player.armType) >= 0)
 					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that");
 
@@ -93,10 +89,10 @@ package classes.Items
 				updateClaws();
 				player.armType = ARM_TYPE_HUMAN;
 				changes++;
-				return true;
+				return 1;
 			}
 
-			return false;
+			return 0;
 		}
 
 		public function restoreLegs(keepFeet:Array = null, options:int = 0):Boolean
