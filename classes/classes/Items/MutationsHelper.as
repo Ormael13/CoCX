@@ -335,7 +335,7 @@ package classes.Items
 
 						if (player.featheryHairPinEquipped())
 							outputText("\n\nYou place the hair-pin in your inventory, no longer able to wear it.");
-						else
+						else if (hairPinID >= 0)
 							outputText("\n\nYour thoughts wander to the hair-pin while you adjust to your new [hair]. You probably won't be able to"
 							          +" wear it while you're this tainted.");
 
