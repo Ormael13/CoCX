@@ -43,7 +43,7 @@
 
 		protected function get output():Output
 		{
-			return kGAMECLASS.output;
+			return Output.init();
 		}
 
 		protected function get timeQ():Number

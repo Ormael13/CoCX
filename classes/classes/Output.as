@@ -12,7 +12,17 @@ package classes
 		import classes.GlobalFlags.kFLAGS;
 		import coc.view.MainView;
 
-		public function Output() {}
+		private static var _instance:Output = new Output();
+
+		public function Output()
+		{
+			if (_instance != null)
+			{
+				throw new Error("Output can only be accessed through Output.init()");
+			}
+		}
+
+		public static function init():Output { return _instance; }
 
 		protected var _currentText:String = "";
 		public function get currentText():String { return _currentText; }

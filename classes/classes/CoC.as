@@ -283,7 +283,7 @@ the text from being too boring.
 		//Scenes in includes folder GONE! Huzzah!
 
 		public var bindings:Bindings = new Bindings();
-		public var output:Output = new Output();
+		public var output:Output = Output.init();
 		public function get currentText():String { return output.currentText; }
 		public function set currentText(text:String):void { output.currentText = text; }
 		/****
