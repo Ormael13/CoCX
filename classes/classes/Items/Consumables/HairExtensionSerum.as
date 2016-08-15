@@ -23,7 +23,7 @@ package classes.Items.Consumables
 		override public function useItem():Boolean {
 			outputText("You open the bottle of hair extension serum and follow the directions carefully, massaging it into your scalp and being careful to keep it from getting on any other skin.  You wash off your hands with lakewater just to be sure.");
 			if (game.player.hairType == HAIR_BASILISK_SPINES) {
-				outputText("\n\nYou wait a while, expecting a tingle on your head, but nothing happend. You sigh as you realize, that your "
+				outputText("\n\nYou wait a while, expecting a tingle on your head, but nothing happens. You sigh as you realize, that your "
 				          + game.player.hairColor + " basilisk spines are immune to the serum ...");
 				return false;
 			}
