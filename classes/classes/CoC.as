@@ -283,6 +283,9 @@ the text from being too boring.
 		//Scenes in includes folder GONE! Huzzah!
 
 		public var bindings:Bindings = new Bindings();
+		public var output:Output = Output.init();
+		public function get currentText():String { return output.currentText; }
+		public function set currentText(text:String):void { output.currentText = text; }
 		/****
 			This is used purely for bodges while we get things cleaned up.
 			Hopefully, anything you stick to this object can be removed eventually.
@@ -310,9 +313,9 @@ the text from being too boring.
 		public var monster:Monster;
 		public var flags:DefaultDict;
 		public var achievements:DefaultDict;
-		private var gameState:int;
+		private var _gameState:int;
+		public function get gameState():int { return _gameState; }
 		public var time :TimeModel;
-		public var currentText:String;
 
 		public var temp:int;
 		public var args:Array;
@@ -323,13 +326,13 @@ the text from being too boring.
 		public var kFLAGS_REF:*;
 		public var kACHIEVEMENTS_REF:*;
 		
-		public function get inCombat():Boolean { return gameState == 1; }
+		public function get inCombat():Boolean { return _gameState == 1; }
 		
-		public function set inCombat(value:Boolean):void { gameState = (value ? 1 : 0); }
+		public function set inCombat(value:Boolean):void { _gameState = (value ? 1 : 0); }
 		
-		private function gameStateDirectGet():int { return gameState; }
+		private function gameStateDirectGet():int { return _gameState; }
 		
-		private function gameStateDirectSet(value:int):void { gameState = value; }
+		private function gameStateDirectSet(value:int):void { _gameState = value; }
 		
 		public function rand(max:int):int
 		{
@@ -441,7 +444,7 @@ the text from being too boring.
 			//1 = in combat
 			//2 = in combat in grapple
 			//3 = at start or game over screen
-			gameState = 0;
+			_gameState = 0;
 
 			/**
 			 * Display Variables
