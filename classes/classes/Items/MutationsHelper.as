@@ -12,16 +12,6 @@ package classes.Items
 	{
 		include "../../../includes/appearanceDefs.as";
 
-		// I tend to use bitfields rather than lots of optional boolean params.
-		// If I consider a method to be finalized and has only one option I'll refactor this to use a boolean value.
-
-		// restoreLegs options
-		public static const RESTORELEGS_EXCLUDE_TAUR:int   =  1;
-		public static const RESTORELEGS_EXCLUDE_GOO:int    =  2;
-		public static const RESTORELEGS_EXCLUDE_NAGA:int   =  4;
-		public static const RESTORELEGS_EXCLUDE_DRIDER:int =  8;
-		public static const RESTORELEGS_FIX_BIPED:int      = 16;
-
 		public var changes:int = 0;
 		public var changeLimit:int = 1;
 
@@ -95,33 +85,33 @@ package classes.Items
 			return 0;
 		}
 
-		public function restoreLegs(keepFeet:Array = null, options:int = 0):Boolean
+		public function restoreLegs(tfSource:String):Boolean
 		{
+			trace('called restoreLegs("' + tfSource + '")');
 			var doRestore:Boolean = false;
-			
-			if (keepFeet == null) keepFeet = [];
-			if (keepFeet.indexOf(player.lowerBody) >= 0) return false; // For future TFs
+			var tsParts:Array = tfSource.split("-");
+			tfSource = tsParts[0];
 
 			//(Centaurs -> Normal Human Legs)
-			if (!(options & RESTORELEGS_EXCLUDE_TAUR) && player.isTaur() && changes < changeLimit) {
+			if (player.isTaur()) {
 				outputText("\n\nYour quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of human legs</b>!");
 				doRestore = true;
 			}
 
 			//(Goo -> Normal Human Legs)
-			if (!(options & RESTORELEGS_EXCLUDE_GOO) && player.isGoo() && changes < changeLimit) {
+			if (player.isGoo()) {
 				outputText("\n\nYour lower body rushes inward, molding into two leg-like shapes that gradually stiffen up.  In moments they solidify into normal-looking legs, complete with regular, human feet.  <b>You now have normal feet!</b>");
 				doRestore = true;
 			}
 
 			//(Naga -> Normal Human Legs)
-			if (!(options & RESTORELEGS_EXCLUDE_NAGA) && player.isNaga() && changes < changeLimit) {
+			if (player.isNaga()) {
 				outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>");
 				doRestore = true;
 			}
 
 			//(Drider -> Normal Human Legs)
-			if (!(options & RESTORELEGS_EXCLUDE_DRIDER) && player.isDrider() && changes < changeLimit) {
+			if (tfSource != "sweetGossamer" && player.isDrider()) {
 				outputText("\n\nYour legs buckle under you and you fall, smashing your abdomen on the ground."
 				          +"  Though your control deserts and you cannot see behind you,"
 				          +" still you feel the disgusting sensation of chitin loosening and sloughing off your body,"
@@ -135,7 +125,7 @@ package classes.Items
 			}
 
 			//(Non-human -> Normal Human Legs)
-			if ((options & RESTORELEGS_FIX_BIPED) && player.isBiped() && player.lowerBody != LOWER_BODY_TYPE_HUMAN && changes < changeLimit) {
+			if (tfSource == "regularHummus" && player.isBiped() && player.lowerBody != LOWER_BODY_TYPE_HUMAN) {
 				outputText("\n\nYou collapse as your legs shift and twist.  By the time the pain subsides, you notice that you have normal legs and normal feet.  <b>You now have normal feet!</b>");
 				doRestore = true;
 			}
@@ -442,5 +432,74 @@ package classes.Items
 			return false;
 		}
 
+		public function gainDraconicHorns(tfSource:String):void
+		{
+			trace('called gainDraconicHorns("' + tfSource + '")');
+			var tsParts:Array = tfSource.split("-");
+			var race:String;
+
+			if (tsParts[0] == "emberTFs")
+				race = "dragon";
+			else if (tsParts[0] == "reptilum" && tsParts.length > 1)
+				race = tsParts[1];
+			else
+				throw new Error("Unimplemented tfSource: '" + tfSource + "' used in gainDraconicHorns!");
+
+			//No dragon horns yet.
+			if (player.hornType != HORNS_DRACONIC_X2 && player.hornType != HORNS_DRACONIC_X4_12_INCH_LONG) {
+				//Already have horns
+				if (player.horns > 0) {
+					//High quantity demon horns
+					if (player.hornType == HORNS_DEMON && player.horns > 4) {
+						outputText("\n\nYour horns condense, twisting around each other and merging into larger, pointed protrusions.  By the time they finish you have four draconic-looking horns, each about twelve inches long.");
+						player.horns = 12;
+						player.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
+					}
+					else {
+						outputText("\n\nYou feel your horns changing and warping, and reach back to touch them.  They have a slight curve and a gradual taper.  They must look something like the horns the dragons in your village's legends always had.");
+						player.hornType = HORNS_DRACONIC_X2;
+						if (player.horns > 13) {
+							outputText("  The change seems to have shrunken the horns, they're about a foot long now.");
+							player.horns = 12;
+						}
+
+					}
+					changes++;
+				}
+				//No horns
+				else {
+					//-If no horns, grow a pair
+					outputText("\n\nWith painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns.  They're angled back in such a way as to resemble those you saw on the dragons in your village's legends.  A few inches of horn sprout from your head before stopping.  <b>You have about four inches of dragon-like horn.</b>");
+					player.horns = 4;
+					player.hornType = HORNS_DRACONIC_X2;
+
+					changes++;
+				}
+			}
+			//ALREADY DRAGON
+			else {
+				if (player.hornType == HORNS_DRACONIC_X2) {
+					if (player.horns < 12) {
+						if (rand(2) == 0) {
+							outputText("\n\nYou get a headache as an inch of fresh horn escapes from your pounding skull.");
+							player.horns += 1;
+						}
+						else {
+							outputText("\n\nYour head aches as your horns grow a few inches longer.  They get even thicker about the base, giving you a menacing appearance.");
+							player.horns += 2 + rand(4);
+						}
+						if (player.horns >= 12) outputText("  <b>Your horns settle down quickly, as if they're reached their full size.</b>");
+						changes++;
+					}
+					//maxxed out, new row
+					else {
+						//--Next horn growth adds second row and brings length up to 12\"
+						outputText("\n\nA second row of horns erupts under the first, and though they are narrower, they grow nearly as long as your first row before they stop.  A sense of finality settles over you.  <b>You have as many horns as a " + race + " can grow.</b>");
+						player.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
+						changes++;
+					}
+				}
+			}
+		}
 	}
 }

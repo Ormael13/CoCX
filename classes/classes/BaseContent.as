@@ -41,6 +41,11 @@
 			kGAMECLASS.cheatTime(time, needNext);
 		}
 
+		protected function get output():Output
+		{
+			return kGAMECLASS.output;
+		}
+
 		protected function get timeQ():Number
 		{
 			return kGAMECLASS.timeQ;

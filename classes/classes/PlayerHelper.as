@@ -21,9 +21,9 @@ package classes
 			return skinType == SKIN_TYPE_FUR || hasScales();
 		}
 
-		public function hasDragonHorns():Boolean
+		public function hasDragonHorns(fourHorns:Boolean = false):Boolean
 		{
-			return (horns > 0 && hornType == HORNS_DRACONIC_X2) || hornType == HORNS_DRACONIC_X4_12_INCH_LONG;
+			return (!fourHorns && horns > 0 && hornType == HORNS_DRACONIC_X2) || hornType == HORNS_DRACONIC_X4_12_INCH_LONG;
 		}
 
 		public function hasReptileEyes():Boolean
