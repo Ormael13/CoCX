@@ -16,7 +16,6 @@ package classes.Items
 		include "../../../includes/appearanceDefs.as";
 
 		protected function get mutations():Mutations { return kGAMECLASS.mutations; }
-		protected function set mutations(val:Mutations):void { kGAMECLASS.mutations = val; }
 		protected function get changes():int { return mutations.changes; }
 		protected function set changes(val:int):void { mutations.changes = val; }
 		protected function get changeLimit():int { return mutations.changeLimit; }
