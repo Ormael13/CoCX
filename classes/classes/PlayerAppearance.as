@@ -9,11 +9,6 @@ package classes
 
 		/*** Internal methods; for outputting text in proper measure system ***/
 
-		private function inchToCm(inches:Number):Number
-		{
-			return flags[kFLAGS.USE_METRICS] ? inches * 2.54 : inches;
-		}
-
 		private function footInchOrMetres(inches:Number, precision:int = 2):String
 		{
 			if (flags[kFLAGS.USE_METRICS])
@@ -53,6 +48,11 @@ package classes
 		{
 			var value:Number = Math.round(inchToCm(inches) * Math.pow(10, precision)) / Math.pow(10, precision);
 			return value + (flags[kFLAGS.USE_METRICS] ? "-cm" : "-inch");
+		}
+
+		private function inchToCm(inches:Number):Number
+		{
+			return flags[kFLAGS.USE_METRICS] ? inches * 2.54 : inches;
 		}
 
 		/*** Text methods ***/
