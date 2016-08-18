@@ -9,6 +9,11 @@ package classes
 
 		/*** Internal methods; for outputting text in proper measure system ***/
 
+		private function inchToCm(inches:Number):Number
+		{
+			return flags[kFLAGS.USE_METRICS] ? inches * 2.54 : inches;
+		}
+
 		private function footInchOrMetres(inches:Number, precision:int = 2):String
 		{
 			if (flags[kFLAGS.USE_METRICS])
@@ -23,13 +28,11 @@ package classes
 
 			var value:int = Math.round(inches);
 
-			// General
 			if (flags[kFLAGS.USE_METRICS]) {
 				value = Math.round(inches * 2.54);
 				return num2Text(value) + (value == 1 ? " centimetre" : " centimetres");
 			}
 
-			// Various special cases.
 			if (inches % 12 == 0)
 				return (inches == 12 ? "a foot" : num2Text(inches / 12) + " feet");
 
@@ -38,20 +41,17 @@ package classes
 
 		private function inchesOrCentimetres(inches:Number, precision:int = 1):String
 		{
-			var value:Number = Math.round(inches * Math.pow(10, precision) * (flags[kFLAGS.USE_METRICS] ? 2.54 : 1)) / Math.pow(10, precision);
+			var value:Number = Math.round(inchToCm(inches) * Math.pow(10, precision)) / Math.pow(10, precision);
 			var text:String = value + (flags[kFLAGS.USE_METRICS] ? " centimetre" : " inch");
 
-			if (value != 1) return text;
+			if (value == 1) return text;
 
-			if (flags[kFLAGS.USE_METRICS])
-				return text + "s";
-
-			return text + "es";
+			return text + (flags[kFLAGS.USE_METRICS] ? "s" : "es");
 		}
 
 		private function shortSuffix(inches:Number, precision:int = 1):String
 		{
-			var value:Number = Math.round(inches * Math.pow(10, precision) * (flags[kFLAGS.USE_METRICS] ? 2.54 : 1)) / Math.pow(10, precision);
+			var value:Number = Math.round(inchToCm(inches) * Math.pow(10, precision)) / Math.pow(10, precision);
 			return value + (flags[kFLAGS.USE_METRICS] ? "-cm" : "-inch");
 		}
 
