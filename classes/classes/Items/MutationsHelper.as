@@ -213,8 +213,6 @@ package classes.Items
 
 		public function lizardHairChange(tfSource:String):int
 		{
-			var benoitMF:Function = getGame().bazaar.benoit.benoitMF;
-			var benoitMFText:String = "";
 			var hairPinID:int = player.hasKeyItem("Feathery hair-pin");
 			trace('called lizardHairChange("' + tfSource + '")');
 
@@ -231,23 +229,25 @@ package classes.Items
 					}
 					return 0;
 
-				case "PlayerEvents":
+				case "PlayerEvents-benoitHairPin":
 				case "reptilum-basilisk":
 				case "reptilum-dracolisk":
 					if (player.hairType == HAIR_BASILISK_PLUME && player.cor < 65) return 0;
 
 					if (player.isFemaleOrHerm() && player.cor < 15 && player.featheryHairPinEquipped() && player.isBasilisk()) {
-						benoitMFText = benoitMF(
+						var benoitMFText:String = getGame().bazaar.benoit.benoitMF(
 							" your hair has changed into a plume of feathers that, like legend is told, belongs to a female basilisk!",
-							" you have a plume, like a female basilisk!");
+							" you have a plume, like a female basilisk!"
+						);
+
 						if (player.hairType == HAIR_GOO)
 							outputText("\n\nYour gooey hair begins to fall out in globs, eventually leaving you with a bald head.");
 
 						outputText("\n\nYour head begins to tickle and you reach up to scratch at it, only to be surprised by the softness you feel."
 						          +" It reminds you of the down of baby chickens, velvety soft and slightly fluffy. You look at yourself in a nearby"
-						          +" puddle and gasp, where your hair once was, you now have red feathers, some longer and larger than others. This"
-						          +" floppy but soft plume sits daintily on your head, reminding you of a ladies fascinator. You realise soon that"
-						          + benoitMFText);
+						          +" puddle and gasp, [if (hairlength <= 0) where your hair once was] you now have red feathers,"
+						          +" some longer and larger than others. This floppy but soft plume sits daintily on your head,"
+						          +" reminding you of a ladies fascinator. You realise soon that" + benoitMFText);
 
 						if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] != 0)
 							outputText("\n\n<b>Your hair is growing again and is now a plume of short red feathers.</b>");
@@ -333,7 +333,7 @@ package classes.Items
 							player.keyItems[hairPinID].value1 = 0;
 							player.keyItems[hairPinID].value2 = 0;
 						}
-						if (tfSource == "PlayerEvents") outputText("\n");
+						if (tfSource == "PlayerEvents-benoitHairPin") outputText("\n");
 						return 1;
 					}
 					return 0;

@@ -19,7 +19,6 @@ package classes {
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean {
 			var needNext:Boolean = false;
-			var tfSource:String = "PlayerEvents";
 			checkedTurkey = 0;
 			checkedDream = 0;
 			
@@ -54,7 +53,7 @@ package classes {
 				if (player.findPerk(PerkLib.Lusty) >= 0) dynStats("lus", player.lib * 0.01, "resisted", false); //Double lust rise if lusty.
 			}
 			//Feathery hairpin Effects
-			if (player.featheryHairPinEquipped() && mutations.lizardHairChange(tfSource) != 0)
+			if (player.featheryHairPinEquipped() && mutations.lizardHairChange("PlayerEvents-benoitHairPin") != 0)
 			{
 				needNext = true;
 			}

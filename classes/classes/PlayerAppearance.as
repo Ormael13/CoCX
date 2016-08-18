@@ -67,7 +67,7 @@ package classes
 				// This may be relocated into a method later. Probably something, like player.headAccessory()
 				// Note, that earrings count as piercings, meaning, that head accessories and earrings are to be handled seperately
 				var hairPinText:String = "";
-				hairPinText += "  <b>You have a hair-pin with a single " + player.hairColor + " feather plume";
+				hairPinText += "  <b>You have a hair-pin with a single red feather plume";
 				if (player.hairLength > 0)
 					hairPinText += " in your " + player.hairDescript() + ".</b>";
 				else
