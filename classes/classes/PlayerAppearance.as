@@ -9,40 +9,50 @@ package classes
 
 		/*** Internal methods; for outputting text in proper measure system ***/
 
-		private function feet_inch_and_metres(in_inches:Number, precision:int = 2):String
+		private function footInchOrMetres(inches:Number, precision:int = 2):String
 		{
-			if (flags[kFLAGS.USE_METRICS])  return "" + (Math.round(in_inches * 2.54) / Math.pow(10, precision)).toFixed(precision) + " metres";
-			else                            return "" + Math.floor(in_inches / 12) + " foot " + in_inches % 12 + " inch";
+			if (flags[kFLAGS.USE_METRICS])
+				return (Math.round(inches * 2.54) / Math.pow(10, precision)).toFixed(precision) + " metres";
+
+			return Math.floor(inches / 12) + " foot " + inches % 12 + " inch";
 		}
 
-		private function num_inches_and_centimetres(in_inches:Number):String
+		private function numInchesOrCentimetres(inches:Number):String
 		{
-			// Various special cases.
-			if (in_inches < 1)
-				return inches_and_centimetres(in_inches)
-			else if (in_inches == 12 && !flags[kFLAGS.USE_METRICS])
-				return "a foot";
-			else if (in_inches % 12 == 0 && !flags[kFLAGS.USE_METRICS])
-				return num2Text(in_inches / 12) + " feet";
+			if (inches < 1) return inchesOrCentimetres(inches);
+
+			var value:int = Math.round(inches);
 
 			// General
-			var value:int = int(in_inches * (flags[kFLAGS.USE_METRICS] ? 2.54 : 1));
-			if (flags[kFLAGS.USE_METRICS])  return "" + num2Text(value) + " centimetre" + (value == 1 ? "" : "s");
-			else                            return "" + num2Text(value) + " inch" +       (value == 1 ? "" : "es");
+			if (flags[kFLAGS.USE_METRICS]) {
+				value = Math.round(inches * 2.54);
+				return num2Text(value) + (value == 1 ? " centimetre" : " centimetres");
+			}
+
+			// Various special cases.
+			if (inches % 12 == 0)
+				return (inches == 12 ? "a foot" : num2Text(inches / 12) + " feet");
+
+			return num2Text(value) + (value == 1 ? " inch" : " inches");
 		}
 
-		private function inches_and_centimetres(in_inches:Number, precision:int = 1):String
+		private function inchesOrCentimetres(inches:Number, precision:int = 1):String
 		{
-			var value:Number = Math.round(in_inches * Math.pow(10, precision) * (flags[kFLAGS.USE_METRICS] ? 2.54 : 1)) / Math.pow(10, precision);
-			if (flags[kFLAGS.USE_METRICS])  return "" + value + " centimetre" + (value == 1 ? "" : "s");
-			else                            return "" + value + " inch" +       (value == 1 ? "" : "es");
+			var value:Number = Math.round(inches * Math.pow(10, precision) * (flags[kFLAGS.USE_METRICS] ? 2.54 : 1)) / Math.pow(10, precision);
+			var text:String = value + (flags[kFLAGS.USE_METRICS] ? " centimetre" : " inch");
+
+			if (value != 1) return text;
+
+			if (flags[kFLAGS.USE_METRICS])
+				return text + "s";
+
+			return text + "es";
 		}
 
-		private function inch_and_cm(in_inches:Number, precision:int = 1):String
+		private function shortSuffix(inches:Number, precision:int = 1):String
 		{
-			var value:Number = Math.round(in_inches * Math.pow(10, precision) * (flags[kFLAGS.USE_METRICS] ? 2.54 : 1)) / Math.pow(10, precision);
-			if (flags[kFLAGS.USE_METRICS])  return "" + value + "-cm";
-			else                            return "" + value + "-inch";
+			var value:Number = Math.round(inches * Math.pow(10, precision) * (flags[kFLAGS.USE_METRICS] ? 2.54 : 1)) / Math.pow(10, precision);
+			return value + (flags[kFLAGS.USE_METRICS] ? "-cm" : "-inch");
 		}
 
 		/*** Text methods ***/
@@ -60,11 +70,11 @@ package classes
 			output.clear().header("Appearance");
 			if (race != player.startingRace)	output.text("You began your journey as a " + player.startingRace + ", but gave that up as you explored the dangers of this realm.  ");
 			//Height and race.
-			output.text("You are a " + feet_inch_and_metres(player.tallness) + " tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".");
+			output.text("You are a " + footInchOrMetres(player.tallness) + " tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".");
 			
 			outputText("  <b>You are currently " + (player.armorDescript() != "gear" ? "wearing your " + player.armorDescript() : "naked") + "" + " and using your " + player.weaponName + " as a weapon.</b>", false);
 			if (player.jewelryName != "nothing") 
-				outputText("<b> Girding one of your fingers is " + player.jewelryName + ".</b> ")
+				outputText("  <b>Girding one of your fingers is " + player.jewelryName + ".</b>");
 			//Face
 			if (player.faceType == FACE_HUMAN || player.faceType == FACE_SHARK_TEETH || player.faceType == FACE_BUNNY || player.faceType == FACE_SPIDER_FANGS || player.faceType == FACE_FERRET_MASK) 
 			{
@@ -410,9 +420,9 @@ package classes
 				if (player.horns == 4) 
 					outputText("  A quartet of prominent horns has broken through your " + player.skinDesc + ".  The back pair are longer, and curve back along your head.  The front pair protrude forward demonically.", false);
 				if (player.horns == 6) 
-					outputText("  Six horns have sprouted through your " + player.skinDesc + ", the back two pairs curve backwards over your head and down towards your neck, while the front two horns stand almost "+num_inches_and_centimetres(8)+" long upwards and a little forward.", false);
+					outputText("  Six horns have sprouted through your " + player.skinDesc + ", the back two pairs curve backwards over your head and down towards your neck, while the front two horns stand almost "+numInchesOrCentimetres(8)+" long upwards and a little forward.", false);
 				if (player.horns >= 8) 
-					outputText("  A large number of thick demonic horns sprout through your " + player.skinDesc + ", each pair sprouting behind the ones before.  The front jut forwards nearly "+num_inches_and_centimetres(10)+" while the rest curve back over your head, some of the points ending just below your ears.  You estimate you have a total of " + num2Text(player.horns) + " horns.", false);	
+					outputText("  A large number of thick demonic horns sprout through your " + player.skinDesc + ", each pair sprouting behind the ones before.  The front jut forwards nearly "+numInchesOrCentimetres(10)+" while the rest curve back over your head, some of the points ending just below your ears.  You estimate you have a total of " + num2Text(player.horns) + " horns.", false);	
 			}
 			//Minotaur horns
 			if (player.hornType == HORNS_COW_MINOTAUR) 
@@ -431,7 +441,7 @@ package classes
 			//Lizard horns
 			if (player.horns > 0 && player.hornType == HORNS_DRACONIC_X2) 
 			{
-				outputText("  A pair of " + num_inches_and_centimetres(player.horns) + " horns grow from the sides of your head, sweeping backwards and adding to your imposing visage.", false);
+				outputText("  A pair of " + numInchesOrCentimetres(player.horns) + " horns grow from the sides of your head, sweeping backwards and adding to your imposing visage.", false);
 			}
 			//Super lizard horns
 			if (player.hornType == HORNS_DRACONIC_X4_12_INCH_LONG) 
@@ -456,19 +466,19 @@ package classes
 						outputText("  A second horn sprouts from your forehead just above the horn on your nose.");
 					else
 						outputText("  A single horn sprouts from your forehead.  It is conical and resembles a rhino's horn.");
-					outputText("  You estimate it to be about "+num_inches_and_centimetres(7)+" long.");
+					outputText("  You estimate it to be about "+numInchesOrCentimetres(7)+" long.");
 				}
 				else {
-					outputText("  A single horn sprouts from your forehead.  It is conical and resembles a rhino's horn.  You estimate it to be about "+num_inches_and_centimetres(6)+" long.");
+					outputText("  A single horn sprouts from your forehead.  It is conical and resembles a rhino's horn.  You estimate it to be about "+numInchesOrCentimetres(6)+" long.");
 				}
 			}
 			if (player.hornType == HORNS_UNICORN)
 			{
 				outputText("  A single sharp nub of a horn sprouts from the center of your forehead.");
 				if (player.horns < 12)
-					outputText("  You estimate it to be about "+num_inches_and_centimetres(6)+" long.");
+					outputText("  You estimate it to be about "+numInchesOrCentimetres(6)+" long.");
 				else
-					outputText("  It has developed its own cute little spiral. You estimate it to be about "+num_inches_and_centimetres(12)+" long, "+num_inches_and_centimetres(2)+" thick and very sturdy. A very useful natural weapon.");
+					outputText("  It has developed its own cute little spiral. You estimate it to be about "+numInchesOrCentimetres(12)+" long, "+numInchesOrCentimetres(2)+" thick and very sturdy. A very useful natural weapon.");
 			}
 			//BODY PG HERE
 			outputText("\n\nYou have a humanoid shape with the usual torso, arms, hands, and fingers.", false);
@@ -972,7 +982,7 @@ package classes
 			{
 				outputText("You have " + num2Text(player.breastRows[temp].breasts) + " " + player.breastDescript(temp) + ", each supporting ", false);
 				outputText( player.breastRows[temp].nipplesPerBreast == 1 ? "a" : num2Text(player.breastRows[temp].nipplesPerBreast)); //Number of nipples.
-				outputText(" " + inch_and_cm(player.nippleLength) + " ");		  // Length of nipples
+				outputText(" " + shortSuffix(player.nippleLength) + " ");		  // Length of nipples
 				outputText(player.nippleDescript(temp) + (player.breastRows[0].nipplesPerBreast == 1 ? "." : "s."), false); //Nipple description and plural
 				if (player.breastRows[0].milkFullness > 75) 
 					outputText("  Your " + player.breastDescript(temp) + " are painful and sensitive from being so stuffed with milk.  You should release the pressure soon.", false);
@@ -999,7 +1009,7 @@ package classes
 						outputText("\n--Your fifth and final mammary grouping swells with ", false);
 					outputText(num2Text(player.breastRows[temp].breasts) + " " + player.breastDescript(temp) + " with ", false);
 					outputText(num2Text(player.breastRows[temp].nipplesPerBreast)); //Number of nipples per breast
-					outputText(" " + inch_and_cm(player.nippleLength) + " ");		// Length of nipples
+					outputText(" " + shortSuffix(player.nippleLength) + " ");		// Length of nipples
 					outputText(player.nippleDescript(temp) + (player.breastRows[0].nipplesPerBreast == 1 ? " each." : "s each."), false); //Description and Plural
 					if (player.breastRows[temp].breastRating >= 1) 
 						outputText("  They could easily fill a " + player.breastCup(temp) + " bra.", false);
@@ -1047,8 +1057,8 @@ package classes
 					else if (rando % 5 == 4)       outputText("--Another of your ");
 
 					// How large?
-					outputText(player.cockDescript(cock_index) + ((rando % 5) % 3 == 0 || cock_index == 0 ? "":"s") +  " is " + num_inches_and_centimetres(player.cocks[cock_index].cockLength) + " long and ");
-					outputText(num_inches_and_centimetres(player.cocks[cock_index].cockThickness));
+					outputText(player.cockDescript(cock_index) + ((rando % 5) % 3 == 0 || cock_index == 0 ? "":"s") +  " is " + numInchesOrCentimetres(player.cocks[cock_index].cockLength) + " long and ");
+					outputText(numInchesOrCentimetres(player.cocks[cock_index].cockThickness));
 					if      (rando % 3 == 0)  outputText(" wide.");
 					else if (rando % 3 == 1)  outputText(" thick.");
 					else if (rando % 3 == 2)  outputText(" in diameter.");
@@ -1075,7 +1085,7 @@ package classes
 					else if (player.cocks[cock_index].cockType == CockTypesEnum.DRAGON) 
 						outputText("  With its tapered tip, there are few holes you wouldn't be able to get into.  It has a strange, knot-like bulb at its base, but doesn't usually flare during arousal as a dog's knot would.");
 					else if (player.cocks[cock_index].cockType == CockTypesEnum.BEE)
-						outputText("  It's a long, smooth black shaft that's rigid to the touch.  Its base is ringed with a layer of " + inch_and_cm(4) + " long soft bee hair.  The tip has a much finer layer of short yellow hairs.  The tip is very sensitive, and it hurts constantly if you don’t have bee honey on it.");
+						outputText("  It's a long, smooth black shaft that's rigid to the touch.  Its base is ringed with a layer of " + shortSuffix(4) + " long soft bee hair.  The tip has a much finer layer of short yellow hairs.  The tip is very sensitive, and it hurts constantly if you don’t have bee honey on it.");
 					else if (player.cocks[cock_index].cockType == CockTypesEnum.PIG)
 						outputText("  It's bright pinkish red, ending in a prominent corkscrew shape at the tip.");
 					else if (player.cocks[cock_index].cockType == CockTypesEnum.AVIAN)
@@ -1093,7 +1103,7 @@ package classes
 							outputText("  A large bulge of flesh nestles just above the bottom of your " + player.cockDescript(cock_index) + ", to ensure it stays where it belongs during mating.");
 						else // knotMultiplier < 1.4
 							outputText("  A small knot of thicker flesh is near the base of your " + player.cockDescript(cock_index) + ", ready to expand to help you lodge it inside a female.");
-						outputText("  The knot is " + inches_and_centimetres(player.cocks[cock_index].cockThickness * player.cocks[cock_index].knotMultiplier) + " thick when at full size.");
+						outputText("  The knot is " + inchesOrCentimetres(player.cocks[cock_index].cockThickness * player.cocks[cock_index].knotMultiplier) + " thick when at full size.");
 					}
 
 					// Sock Flavor
@@ -1144,7 +1154,7 @@ package classes
 					if (player.skinType == SKIN_TYPE_GOO) 
 						outputText("An oozing, semi-solid sack with " + player.ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
 				}
-				outputText("  You estimate each of them to be about " + num_inches_and_centimetres(player.ballSize) + " across\n");
+				outputText("  You estimate each of them to be about " + numInchesOrCentimetres(player.ballSize) + " across\n");
 			}	
 			//VAGOOZ
 			if (player.vaginas.length > 0) 
@@ -1153,12 +1163,12 @@ package classes
 					outputText("\nYour womanly parts have shifted to lie between your hind legs, in a rather feral fashion.", false);
 				outputText("\n", false);
 				if (player.vaginas.length == 1) 
-					outputText("You have a " + player.vaginaDescript(0) + ", with a " + inches_and_centimetres(player.clitLength) + " clit");
+					outputText("You have a " + player.vaginaDescript(0) + ", with a " + inchesOrCentimetres(player.clitLength) + " clit");
 				if (player.vaginas[0].virgin) 
 					outputText(" and an intact hymen", false); // Wait, won't this fuck up, with multiple vaginas?
 				outputText(".  ", false);
 				if (player.vaginas.length > 1) 
-					outputText("You have " + player.vaginas.length+ " " + player.vaginaDescript(0) + "s, with " + inches_and_centimetres(player.clitLength) + "-centimetre clits each.  ");
+					outputText("You have " + player.vaginas.length+ " " + player.vaginaDescript(0) + "s, with " + inchesOrCentimetres(player.clitLength) + "-centimetre clits each.  ");
 				if (player.lib < 50 && player.lust < 50) //not particularly horny
 				
 				{
