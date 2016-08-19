@@ -284,6 +284,7 @@ the text from being too boring.
 
 		public var bindings:Bindings = new Bindings();
 		public var output:Output = Output.init();
+		public var measurements:Measurements = Measurements.init();
 		public function get currentText():String { return output.currentText; }
 		public function set currentText(text:String):void { output.currentText = text; }
 		/****

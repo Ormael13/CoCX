@@ -7,55 +7,10 @@ package classes
 	{
 		public function PlayerAppearance() {}
 
-		/*** Internal methods; for outputting text in proper measure system ***/
-
-		private function footInchOrMetres(inches:Number, precision:int = 2):String
-		{
-			if (flags[kFLAGS.USE_METRICS])
-				return (Math.round(inches * 2.54) / Math.pow(10, precision)).toFixed(precision) + " metres";
-
-			return Math.floor(inches / 12) + " foot " + inches % 12 + " inch";
-		}
-
-		private function numInchesOrCentimetres(inches:Number):String
-		{
-			if (inches < 1) return inchesOrCentimetres(inches);
-
-			var value:int = Math.round(inches);
-
-			if (flags[kFLAGS.USE_METRICS]) {
-				value = Math.round(inches * 2.54);
-				return num2Text(value) + (value == 1 ? " centimetre" : " centimetres");
-			}
-
-			if (inches % 12 == 0)
-				return (inches == 12 ? "a foot" : num2Text(inches / 12) + " feet");
-
-			return num2Text(value) + (value == 1 ? " inch" : " inches");
-		}
-
-		private function inchesOrCentimetres(inches:Number, precision:int = 1):String
-		{
-			var value:Number = Math.round(inchToCm(inches) * Math.pow(10, precision)) / Math.pow(10, precision);
-			var text:String = value + (flags[kFLAGS.USE_METRICS] ? " centimetre" : " inch");
-
-			if (value == 1) return text;
-
-			return text + (flags[kFLAGS.USE_METRICS] ? "s" : "es");
-		}
-
-		private function shortSuffix(inches:Number, precision:int = 1):String
-		{
-			var value:Number = Math.round(inchToCm(inches) * Math.pow(10, precision)) / Math.pow(10, precision);
-			return value + (flags[kFLAGS.USE_METRICS] ? "-cm" : "-inch");
-		}
-
-		private function inchToCm(inches:Number):Number
-		{
-			return flags[kFLAGS.USE_METRICS] ? inches * 2.54 : inches;
-		}
-
-		/*** Text methods ***/
+		protected function footInchOrMetres(...args):String { return measurements.footInchOrMetres.apply(null, args); }
+		protected function numInchesOrCentimetres(inches:Number):String { return measurements.numInchesOrCentimetres(inches); }
+		protected function inchesOrCentimetres(...args):String { return measurements.inchesOrCentimetres.apply(null, args); }
+		protected function shortSuffix(...args):String { return measurements.shortSuffix.apply(null, args); }
 
 		public function appearance():void {
 			funcs = new Array();
