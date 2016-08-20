@@ -25,7 +25,7 @@ package classes
 			output.clear().header("Appearance");
 			if (race != player.startingRace)	output.text("You began your journey as a " + player.startingRace + ", but gave that up as you explored the dangers of this realm.  ");
 			//Height and race.
-			output.text("You are a " + footInchOrMetres(player.tallness) + " tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".");
+			output.text("You are a [tallness] tall [malefemaleherm] [race], with [bodytype].");
 			
 			outputText("  <b>You are currently " + (player.armorDescript() != "gear" ? "wearing your " + player.armorDescript() : "naked") + "" + " and using your " + player.weaponName + " as a weapon.</b>", false);
 			if (player.jewelryName != "nothing") 
