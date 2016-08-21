@@ -108,6 +108,11 @@ public static const HORNS_RHINO:int                                             
 public static const ANTENNAE_NONE:int                                               =   0;
 public static const ANTENNAE_BEE:int                                                =   2;
 
+// gillType
+public static const GILLS_NONE:int                                                  =   0;
+public static const GILLS_ANEMONE:int                                               =   1;
+public static const GILLS_FISH:int                                                  =   2; // NYI: For upcoming races
+
 // armType
 public static const ARM_TYPE_HUMAN:int                                              =   0;
 public static const ARM_TYPE_HARPY:int                                              =   1;

@@ -965,7 +965,7 @@ package classes
 				outputText("\n", false);
 			}
 			outputText("\n", false);
-			if (player.gills) 
+			if (player.gillType == GILLS_ANEMONE) 
 				outputText("A pair of feathery gills are growing out just below your neck, spreading out horizontally and draping down your chest.  They allow you to stay in the water for quite a long time.  ", false);
 			//Chesticles..I mean bewbz.
 			if (player.breastRows.length == 1) 

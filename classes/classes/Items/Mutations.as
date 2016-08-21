@@ -800,11 +800,9 @@
 				player.tailType = TAIL_TYPE_COW;
 				changes++;
 			}
-			if (rand(4) == 0 && player.gills && changes < changeLimit) {
-				outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.", false);
-				player.gills = false;
-				changes++;
-			}
+			// Remove gills
+			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+
 			if (changes < changeLimit && rand(4) == 0 && ((player.ass.analWetness > 0 && player.findPerk(PerkLib.MaraesGiftButtslut) < 0) || player.ass.analWetness > 1)) {
 				outputText("\n\nYou feel a tightening up in your colon and your [asshole] sucks into itself.  You feel sharp pain at first but that thankfully fades.  Your ass seems to have dried and tightened up.");
 				player.ass.analWetness--;
@@ -1300,11 +1298,9 @@
 				player.tailRecharge = 0;
 				changes++;
 			}
-			if (rand(4) == 0 && player.gills && changes < changeLimit) {
-				outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.", false);
-				player.gills = false;
-				changes++;
-			}
+			// Remove gills
+			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+
 			if (rand(3) == 0) outputText(player.modTone(60, 1), false);
 			//FAILSAFE CHANGE
 			if (changes == 0) {
@@ -2239,11 +2235,9 @@
 				player.tailType = TAIL_TYPE_DOG;
 				outputText("<b>You now have a dog-tail.</b>", false);
 			}
-			if (rand(4) == 0 && player.gills && changes < changeLimit) {
-				outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.", false);
-				player.gills = false;
-				changes++;
-			}
+			// Remove gills
+			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+
 			if (player.skinType == SKIN_TYPE_FUR && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou become more... solid.  Sinewy.  A memory comes unbidden from your youth of a grizzled wolf you encountered while hunting, covered in scars, yet still moving with an easy grace.  You imagine that must have felt something like this.", false);
 				dynStats("tou", 4, "sen", -3);
@@ -3467,11 +3461,9 @@
 					changes++;
 				}
 			}
-			if (rand(4) == 0 && player.gills && changes < changeLimit) {
-				outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.", false);
-				player.gills = false;
-				changes++;
-			}
+			// Remove gills
+			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+
 			//Increase the size of the player's ass (less likely then hips), if it is not already somewhat big
 			if (rand(2) == 0 && player.buttRating < 13 && changes < changeLimit) {
 				if (!tainted && player.buttRating < 8 || tainted) {
@@ -3776,11 +3768,9 @@
 				changes++;
 				player.earType = EARS_ELFIN;
 			}
-			if (rand(4) == 0 && player.gills && changes < changeLimit) {
-				outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.", false);
-				player.gills = false;
-				changes++;
-			}
+			// Remove gills
+			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+
 			//Nipples Turn Back:
 			if (player.findStatusEffect(StatusEffects.BlackNipples) >= 0 && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nSomething invisible brushes against your " + player.nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
@@ -4197,11 +4187,8 @@
 				player.legCount = 1;
 				changes++;
 			}
-			if (rand(4) == 0 && player.gills && changes < changeLimit) {
-				outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.", false);
-				player.gills = false;
-				changes++;
-			}
+			// Remove gills
+			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
 
 			//9e) Penis
 			/*
@@ -4348,7 +4335,7 @@
 				player.breastRows[0].breastRating = 2;
 			}
 			else player.breastRows[0].breastRating = 0;
-			player.gills = false;
+			player.gillType = GILLS_NONE;
 			player.removeStatusEffect(StatusEffects.Uniball);
 			player.removeStatusEffect(StatusEffects.BlackNipples);
 			player.vaginaType(0);
@@ -4453,11 +4440,7 @@
 				changes++;
 			}
 			//Removes gills
-			if (rand(4) == 0 && player.gills && changes < changeLimit) {
-				outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.", false);
-				player.gills = false;
-				changes++;
-			}
+			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
 			//Nipples Turn Back:
 			if (player.findStatusEffect(StatusEffects.BlackNipples) >= 0 && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nSomething invisible brushes against your " + player.nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
@@ -4972,11 +4955,8 @@
 				player.faceType = FACE_CAT;
 				changes++;
 			}
-			if (rand(4) == 0 && player.gills && changes < changeLimit) {
-				outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.", false);
-				player.gills = false;
-				changes++;
-			}
+			// Remove gills
+			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
 			//FAILSAFE CHANGE
 			if (changes == 0) {
 				outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n", false);
@@ -5313,11 +5293,7 @@
 			//-Snake tongue
 			if (player.hasReptileFace() && rand(3) == 0) gainSnakeTongue();
 			//-Remove Gills
-			if (rand(4) == 0 && player.gills && changes < changeLimit) {
-				outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.", false);
-				player.gills = false;
-				changes++;
-			}
+			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
 			//<mod name="Reptile eyes" author="Stadler76">
 			//-Lizard eyes
 			if (!player.hasLizardEyes() && player.faceType == FACE_LIZARD && player.hasScales() && player.earType == EARS_LIZARD && changes < changeLimit && rand(4) == 0) {
@@ -5590,11 +5566,7 @@
 				changes++;
 			}
 			//Removing gills
-			if (rand(4) == 0 && player.gills && changes < changeLimit) {
-				outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.", false);
-				player.gills = false;
-				changes++;
-			}
+			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
 			//FAILSAFE CHANGE
 			if (changes == 0) {
 				outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n", false);
@@ -5903,11 +5875,8 @@
 				player.tailType = TAIL_TYPE_RABBIT;
 				changes++;
 			}
-			if (rand(4) == 0 && player.gills && changes < changeLimit) {
-				outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.", false);
-				player.gills = false;
-				changes++;
-			}
+			// Remove gills
+			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
 			//Bunny Breeder Perk?
 			//FAILSAAAAFE
 			if (changes == 0) {
@@ -6275,11 +6244,8 @@
 				player.earType = EARS_HUMAN;
 				changes++;
 			}
-			if (rand(4) == 0 && player.gills && changes < changeLimit) {
-				outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.", false);
-				player.gills = false;
-				changes++;
-			}
+			// Remove gills
+			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
 			//SPECIAL:
 			//Harpy Womb – All eggs are automatically upgraded to large, requires legs + tail to be harpy.
 			if (player.findPerk(PerkLib.HarpyWomb) < 0 && player.lowerBody == LOWER_BODY_TYPE_HARPY && player.tailType == TAIL_TYPE_HARPY && rand(4) == 0 && changes < changeLimit) {
@@ -6527,11 +6493,8 @@
 				changes++;
 				//trigger effect: Your body reacts to the influx of nutrition, accelerating your pregnancy. Your belly bulges outward slightly.
 			}
-			if (rand(4) == 0 && player.gills && changes < changeLimit) {
-				outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.", false);
-				player.gills = false;
-				changes++;
-			}
+			// Remove gills
+			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
 			if (changes == 0) {
 				outputText("\n\nIt did not seem to have any effects, but you do feel better rested.", false);
 				player.changeFatigue(-40);
@@ -6797,11 +6760,9 @@
 				player.legCount = 8;
 				changes++;
 			}
-			if (rand(4) == 0 && player.gills && changes < changeLimit) {
-				outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.", false);
-				player.gills = false;
-				changes++;
-			}
+			// Remove gills
+			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
+
 			if (changes == 0) {
 				outputText("\n\nThe sweet silk energizes you, leaving you feeling refreshed.", false);
 				player.changeFatigue(-33);
@@ -7159,7 +7120,7 @@
 				changes++;
 			}
 			//-hair morphs to anemone tentacles, retains color, hair shrinks back to med-short('shaggy') and stops growing, lengthening treatments don't work and goblins won't cut it, but more anemone items can lengthen it one level at a time
-			if (player.gills && player.hairType != 4 && changes < changeLimit && rand(5) == 0) {
+			if (player.gillType == GILLS_ANEMONE && player.hairType != 4 && changes < changeLimit && rand(5) == 0) {
 				outputText("\n\nYour balance slides way off, and you plop down on the ground as mass concentrates on your head.  Reaching up, you give a little shriek as you feel a disturbingly thick, squirming thing where your hair should be.  Pulling it down in front of your eyes, you notice it's still attached to your head; what's more, it's the same color as your hair used to be.  <b>You now have squirming tentacles in place of hair!</b>  As you gaze at it, a gentle heat starts to suffuse your hand.  The tentacles must be developing their characteristic stingers!  You quickly let go; you'll have to take care to keep them from rubbing on your skin at all hours.  On the other hand, they're quite short and you find you can now flex and extend them as you would any other muscle, so that shouldn't be too hard.  You settle on a daring, windswept look for now.", false);
 				player.hairType = 4;
 				player.hairLength = 5;
@@ -7174,11 +7135,8 @@
 				//appearance screen: replace 'hair' with 'tentacle-hair'
 			}
 			//-feathery gills sprout from chest and drape sensually over nipples (cumulative swimming power boost with fin, if swimming is implemented)
-			if (rand(5) == 0 && !player.gills && player.skinTone == "aphotic blue-black" && changes < changeLimit) {
-				outputText("\n\nYou feel a pressure in your lower esophageal region and pull your garments down to check the area.  <b>Before your eyes a pair of feathery gills start to push out of the center of your chest, just below your neckline, parting sideways and draping over your " + player.nippleDescript(0) + "s.</b>  They feel a bit uncomfortable in the open air at first, but soon a thin film of mucus covers them and you hardly notice anything at all.  You redress carefully.", false);
-				player.gills = true;
-				changes++;
-			}
+			if (rand(5) == 0 && player.gillType != GILLS_ANEMONE && player.skinTone == "aphotic blue-black" && changes < changeLimit)
+				updateGills(GILLS_ANEMONE);
 			//-[aphotic] skin tone (blue-black)
 			if (rand(5) == 0 && changes < changeLimit && player.skinTone != "aphotic blue-black") {
 				outputText("\n\nYou absently bite down on the last of the tentacle, then pull your hand away, wincing in pain.  How did you bite your finger so hard?  Looking down, the answer becomes obvious; <b>your hand, along with the rest of your skin, is now the same aphotic color as the dormant tentacle was!</b>", false);
@@ -9236,12 +9194,8 @@
 				changes++;
 			}
 			//If the PC has gills:
-			if (player.gills && rand(4) == 0 && changes < changeLimit)
-			{
-				outputText("\n\nYou grit your teeth as a stinging sensation arises in your gills.  Within moments, the sensation passes, and <b>your gills are gone!</b>");
-				player.gills = false;
-				changes++;
-			}
+			if (player.hasGills() && rand(4) == 0 && changes < changeLimit) updateGills();
+			//	outputText("\n\nYou grit your teeth as a stinging sensation arises in your gills.  Within moments, the sensation passes, and <b>your gills are gone!</b>");
 			//If the PC has tentacle hair:
 			if (player.hairType == HAIR_ANEMONE && rand(4) == 0 && changes < changeLimit)
 			{

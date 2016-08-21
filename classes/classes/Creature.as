@@ -357,8 +357,9 @@ package classes
 		//ArmType
 		public var armType:Number = ARM_TYPE_HUMAN;
 
-		//Gills
-		public var gills:Boolean = false;
+		//GillType
+		public var gillType:int = GILLS_NONE;
+		public function hasGills():Boolean { return gillType != GILLS_NONE; }
 
 		//Sexual Stuff		
 		//MALE STUFF

@@ -211,6 +211,38 @@ package classes.Items
 			return oldClawTone;
 		}
 
+		public function updateGills(newGillType:int = GILLS_NONE):int
+		{
+			trace("Called updateGills(" + newGillType + ")");
+			var oldgillType:int = player.gillType;
+			if (player.gillType == newGillType) return 0; // no change
+
+			player.gillType = newGillType;
+			changes++;
+
+			// for now, we only have anemone gills on the chest
+			switch (newGillType) {
+				case GILLS_NONE:
+					output.text("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin."
+					           +" <b>You no longer have gills!</b>");
+					return -1; // Gills lost
+
+				case GILLS_ANEMONE:
+					output.text("\n\nYou feel a pressure in your lower esophageal region and pull your garments down to check the area."
+					           +"  <b>Before your eyes a pair of feathery gills start to push out of the center of your chest,"
+					           +" just below your neckline, parting sideways and draping over your " + player.nippleDescript(0) + "s.</b>"
+					           +"  They feel a bit uncomfortable in the open air at first, but soon a thin film of mucus covers them and you hardly"
+					           +" notice anything at all.  You redress carefully.");
+					return 1; // Gained gills or gillType changed
+
+				default:
+					player.gillType = oldgillType;
+					changes--;
+					trace("ERROR: Unimplemented new gillType (" + newGillType + ") used");
+					return 0; // failsafe, should hopefully never happen
+			}
+		}
+
 		/**
 		 * Updates the perk Oviposition depending on the class/method stored in tfSource, that called it.
 		 * @param	tfSource	The method- or classname plus additional info seperated by the '-'-character
