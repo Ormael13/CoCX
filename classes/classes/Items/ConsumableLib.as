@@ -193,13 +193,7 @@ package classes.Items
 
 		public const LARGE_EGGS:Array = [L_BLKEG,L_BLUEG,L_BRNEG,L_PNKEG,L_PRPEG,L_WHTEG];
 		public const SMALL_EGGS:Array = [BLACKEG,BLUEEGG,BROWNEG,PINKEGG,PURPLEG,WHITEEG];
-		private var _mutations:Mutations;
-		private function get m():Mutations{
-			if (_mutations == null) {
-				_mutations = new Mutations();
-			}
-			return _mutations;
-		}
+		private function get m():Mutations { return Mutations.init(); }
 
 		/**
 		 * A handy function to create SimpleConsumables (useable by any player, effect is a function accepting player:Player,
