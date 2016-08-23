@@ -3941,6 +3941,7 @@
 		public function sharkTooth(type:Number,player:Player):void
 		{
 			var tfSource:String = "sharkTooth";
+			if (type == 1) tfSource += "-tigershark";
 			changes = 0;
 			changeLimit = 2;
 			if (rand(2) == 0) changeLimit++;
@@ -4037,7 +4038,7 @@
 				changes++;
 			}
 			//Remove odd eyes
-			if (changes < changeLimit && rand(5) == 0 && player.eyeType > EYES_HUMAN) {
+			if (changes < changeLimit && rand(5) == 0 && player.eyeType != EYES_HUMAN) {
 				if (player.eyeType == EYES_BLACK_EYES_SAND_TRAP) {
 					outputText("\n\nYou feel a twinge in your eyes and you blink.  It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
 				}
@@ -4056,6 +4057,9 @@
 				else outputText("\n\nJets of pain shoot down your spine into your tail.  You feel the tail bulging out until it explodes into a large and flexible shark-tail.  You swish it about experimentally, and find it quite easy to control.", false);
 				player.tailType = TAIL_TYPE_SHARK;
 			}
+			//Gills TF
+			if (player.gillType != GILLS_FISH && player.tailType == TAIL_TYPE_SHARK && player.faceType == FACE_SHARK_TEETH && changes < changeLimit && rand(3) == 0)
+				updateGills(GILLS_FISH);
 			//Hair
 			if (player.hairColor != "silver" && rand(4) == 0 && changes < changeLimit) {
 				changes++;

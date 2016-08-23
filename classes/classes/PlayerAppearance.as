@@ -370,6 +370,12 @@ package classes
 				else if (player.earType == EARS_DEER) 
 					outputText("  The " + player.hairDescript() + " on your head parts around a pair of deer-like ears that grow up from your head.", false);
 				//</mod>
+				if (player.gillType == GILLS_FISH) 
+				{
+					output.text("  A set of fish like gills reside on your neck, several small slits that can close flat against your skin."
+					           +" They allow you to stay in the water for quite a long time.");
+				}
+				// GILLS_ANEMONE are handled below
 				if (player.antennae == ANTENNAE_BEE) 
 				{
 					if (player.earType == EARS_BUNNY) 
