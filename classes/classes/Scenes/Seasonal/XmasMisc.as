@@ -449,7 +449,7 @@ package classes.Scenes.Seasonal {
 			statScreenRefresh();
 			outputText("You opt for a slice of the tasty treat - you've only got until the festivities wade away, so you might as well take one now!  Do you eat the treat or save it for later?\n\n");
 			menu();
-			addButton(0, "Eat", consumables.mutations.winterPudding, player, true, null, "Eat the delicious Winter Pudding.");
+			addButton(0, "Eat", mutations.winterPudding, player, true, null, "Eat the delicious Winter Pudding.");
 			addButton(1, "Take", inventory.takeItem, consumables.W_PDDNG, getGame().telAdre.bakeryScene.bakeryuuuuuu, null, "Bring the pudding with you.");
 			//doNext(telAdre.bakeryScene.bakeryuuuuuu);
 		}

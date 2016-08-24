@@ -172,7 +172,7 @@ the text from being too boring.
 		public var playerInfo:PlayerInfo = new PlayerInfo();
 		public var saves:Saves = new Saves(gameStateDirectGet, gameStateDirectSet);
 		// Items/
-		public var mutations:Mutations = new Mutations();
+		public var mutations:Mutations = Mutations.init();
 		public var consumables:ConsumableLib = new ConsumableLib();
 		public var useables:UseableLib;
 		public var weapons:WeaponLib = new WeaponLib();

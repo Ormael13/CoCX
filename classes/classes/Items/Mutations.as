@@ -6,9 +6,17 @@
 
 	public final class Mutations extends MutationsHelper
 	{
+		private static var _instance:Mutations = new Mutations();
+
 		public function Mutations()
 		{
+			if (_instance != null)
+			{
+				throw new Error("Mutations can only be accessed through Mutations.init()");
+			}
 		}
+
+		public static function init():Mutations { return _instance; }
 
 		import classes.GlobalFlags.kGAMECLASS;
 		import classes.GlobalFlags.kACHIEVEMENTS;
