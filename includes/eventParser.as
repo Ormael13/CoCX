@@ -44,14 +44,15 @@ public function gameOver(clear:Boolean = false):void { //Leaves text on screen u
 	outputText("</font>");
 	//Delete save on hardcore.
 	if (flags[kFLAGS.HARDCORE_MODE] > 0) {
-		outputText("\n\n<b>Your save file has been deleted as you are on Hardcore Mode!</b>", false);
+		outputText("\n\n<b>Error deleting save file.</b>");
+		/*outputText("\n\n<b>Your save file has been deleted as you are on Hardcore Mode!</b>", false);
 		flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] = flags[kFLAGS.HARDCORE_SLOT];
 		var test:* = SharedObject.getLocal(flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION], "/");
 		if (test.data.exists)
 		{
 			trace("DELETING SLOT: " + flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION]);
 			test.clear();
-		}
+		}*/
 	}
 	flags[kFLAGS.TIMES_BAD_ENDED]++;
 	awardAchievement("Game Over!", kACHIEVEMENTS.GENERAL_GAME_OVER, true, true);
