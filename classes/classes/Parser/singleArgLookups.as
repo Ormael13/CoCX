@@ -27,6 +27,7 @@
 				"butt"						: function(thisPtr:*):* { return kGAMECLASS.player.buttDescript();},
 				"butthole"					: function(thisPtr:*):* { return kGAMECLASS.player.assholeDescript();},
 				"chest"						: function(thisPtr:*):* { return kGAMECLASS.player.chestDesc(); },
+				"claws"						: function(thisPtr:*):* { return kGAMECLASS.player.claws(); },
 				"clit"						: function(thisPtr:*):* { return kGAMECLASS.player.clitDescript(); },
 				"cock"						: function(thisPtr:*):* { return kGAMECLASS.player.cockDescript(0);},
 				"cockhead"					: function(thisPtr:*):* { return kGAMECLASS.player.cockHead(0);},
