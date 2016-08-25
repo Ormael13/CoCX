@@ -111,7 +111,7 @@ public static const ANTENNAE_BEE:int                                            
 // gillType
 public static const GILLS_NONE:int                                                  =   0;
 public static const GILLS_ANEMONE:int                                               =   1;
-public static const GILLS_FISH:int                                                  =   2; // NYI: For upcoming races
+public static const GILLS_FISH:int                                                  =   2;
 
 // armType
 public static const ARM_TYPE_HUMAN:int                                              =   0;
