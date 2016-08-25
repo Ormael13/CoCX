@@ -221,8 +221,8 @@ package classes.Items
 				case "reptilum-dragonewt":
 					//-Hair stops growing!
 					if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
-						outputText("\n\nYour scalp tingles oddly.  In a panic, you reach up to your " + player.hairDescript() + ", but thankfully it appears unchanged.");
-						outputText("\n\n(<b>Your hair has stopped growing.</b>)");
+						output.text("\n\nYour scalp tingles oddly.  In a panic, you reach up to your [hair], but thankfully it appears unchanged.");
+						output.text("\n\n(<b>Your hair has stopped growing.</b>)");
 						changes++;
 						flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 1;
 						return -1; // --> hair growth stopped
@@ -241,18 +241,18 @@ package classes.Items
 						);
 
 						if (player.hairType == HAIR_GOO)
-							outputText("\n\nYour gooey hair begins to fall out in globs, eventually leaving you with a bald head.");
+							output.text("\n\nYour gooey hair begins to fall out in globs, eventually leaving you with a bald head.");
 
-						outputText("\n\nYour head begins to tickle and you reach up to scratch at it, only to be surprised by the softness you feel."
-						          +" It reminds you of the down of baby chickens, velvety soft and slightly fluffy. You look at yourself in a nearby"
-						          +" puddle and gasp, [if (hairlength <= 0) where your hair once was] you now have red feathers,"
-						          +" some longer and larger than others. This floppy but soft plume sits daintily on your head,"
-						          +" reminding you of a ladies fascinator. You realise soon that" + benoitMFText);
+						output.text("\n\nYour head begins to tickle and you reach up to scratch at it, only to be surprised by the softness you feel."
+						           +" It reminds you of the down of baby chickens, velvety soft and slightly fluffy. You look at yourself in a nearby"
+						           +" puddle and gasp, [if (hairlength <= 0) where your hair once was] you now have red feathers,"
+						           +" some longer and larger than others. This floppy but soft plume sits daintily on your head,"
+						           +" reminding you of a ladies fascinator. You realise soon that" + benoitMFText);
 
 						if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] != 0)
-							outputText("\n\n<b>Your hair is growing again and is now a plume of short red feathers.</b>");
+							output.text("\n\n<b>Your hair is growing again and is now a plume of short red feathers.</b>");
 						else
-							outputText("\n\n<b>Your hair is now a plume of short red feathers.</b>");
+							output.text("\n\n<b>Your hair is now a plume of short red feathers.</b>");
 
 						flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
 						player.hairLength = 2;
@@ -266,53 +266,53 @@ package classes.Items
 					if (player.cor >= 65 && player.hairType != HAIR_BASILISK_SPINES && player.hasLizardScales() && player.hasReptileFace()) {
 						// Corrupted Basilisk
 						if (player.hairLength > 0 && [HAIR_GOO, HAIR_BASILISK_PLUME].indexOf(player.hairType) == -1) {
-							outputText("\n\nYour scalp feels tight and hot, causing you to run a hand through your [hair] to rub at it gingerly.");
+							output.text("\n\nYour scalp feels tight and hot, causing you to run a hand through your [hair] to rub at it gingerly.");
 
 							if (player.featheryHairPinEquipped())
-								outputText("\n\nThe pin in your hair heats up to the point where you have to pull it free and toss it to the ground,"
-								          +" it sizzling against the earth.");
+								output.text("\n\nThe pin in your hair heats up to the point where you have to pull it free and toss it to the ground,"
+								           +" it sizzling against the earth.");
 
-							outputText("\n\nTo your shock a handful of your [hair] comes loose, exposing the [skinFurScales] beneath. You wonder why"
-							          +" this is happening to you but realise it must be the potion, lizards don't tend to have hair after all."
-							          +" You continue to rub at your scalp, the cool air against your slowly revealed skin a welcome relief."
-							          +" After several minutes of this, you're certain you've shed all your hair. When you think it's all over,"
-							          +" you feel an uncomfortable pressure build, your scalp morphing and changing as you grimace."
-							          +" When the sensation finally fades you rush to look at yourself in a puddle. Where you once had hair,"
-							          +" you now have a crown of dull reptilian spines!");
+							output.text("\n\nTo your shock a handful of your [hair] comes loose, exposing the [skinFurScales] beneath. You wonder why"
+							           +" this is happening to you but realise it must be the potion, lizards don't tend to have hair after all."
+							           +" You continue to rub at your scalp, the cool air against your slowly revealed skin a welcome relief."
+							           +" After several minutes of this, you're certain you've shed all your hair. When you think it's all over,"
+							           +" you feel an uncomfortable pressure build, your scalp morphing and changing as you grimace."
+							           +" When the sensation finally fades you rush to look at yourself in a puddle. Where you once had hair,"
+							           +" you now have a crown of dull reptilian spines!");
 
 						}
 
 						// Female Basilisk to Corrupted Basilisk
 						if (player.hairLength > 0 && player.hairType == HAIR_BASILISK_PLUME) {
-							outputText("\n\nA sudden sharp pain drills through your skull, a pressure forming across your scalp."
-							          +" If you didn't know any better you'd think you were being plucked!");
+							output.text("\n\nA sudden sharp pain drills through your skull, a pressure forming across your scalp."
+							           +" If you didn't know any better you'd think you were being plucked!");
 
 							if (player.featheryHairPinEquipped())
-								outputText("\n\nThe pin in your hair heats up to the point where you have to pull it free and toss it to the ground,"
-								          +" it sizzling against the earth.");
+								output.text("\n\nThe pin in your hair heats up to the point where you have to pull it free and toss it to the ground,"
+								           +" it sizzling against the earth.");
 
-							outputText("\n\nYou clutch your head as you feel the feathers on your head push out further, thickening up as they do so."
-							          +" The soft vane seems to fall from the spine of the feathers, stripping them bare as the red fluff falls to"
-							          +" the floor. Soon the tips of the feathers follow, leaving some rather alien looking spines behind. Your head"
-							          +" throbs with dull pain as the transformation seems to end and you go to look at your reflection in a nearby"
-							          +" puddle. Your once magnificent plume has turned into a dull crown of spines, like that of the corrupt"
-							          +" basilisk of the mountains. As you mourn the loss of your feathered hair, you notice your spines move with"
-							          +" your emotions, their sensitive tips picking up on the breeze as they lower closer to your skull.");
+							output.text("\n\nYou clutch your head as you feel the feathers on your head push out further, thickening up as they do so."
+							           +" The soft vane seems to fall from the spine of the feathers, stripping them bare as the red fluff falls to"
+							           +" the floor. Soon the tips of the feathers follow, leaving some rather alien looking spines behind. Your head"
+							           +" throbs with dull pain as the transformation seems to end and you go to look at your reflection in a nearby"
+							           +" puddle. Your once magnificent plume has turned into a dull crown of spines, like that of the corrupt"
+							           +" basilisk of the mountains. As you mourn the loss of your feathered hair, you notice your spines move with"
+							           +" your emotions, their sensitive tips picking up on the breeze as they lower closer to your skull.");
 						}
 
 						// Corrupted basilisk with gooey or no hair (bald)
 						if (player.hairType == HAIR_GOO || player.hairLength <= 0) {
 							if (player.hairType == HAIR_GOO)
-								outputText("\n\nYour gooey hair begins to fall out in globs, eventually leaving you with a bald head.");
+								output.text("\n\nYour gooey hair begins to fall out in globs, eventually leaving you with a bald head.");
 
 							if (player.featheryHairPinEquipped())
-								outputText("\n\nThe pin in your hair heats up to the point where you have to pull it free and toss it to the ground,"
-								          +" it sizzling against the earth.");
+								output.text("\n\nThe pin in your hair heats up to the point where you have to pull it free and toss it to the ground,"
+								           +" it sizzling against the earth.");
 
-							outputText("\n\nYour scalp feels tight, as though the skin is shifting and morphing."
-							          +" You let out groan as you grip your head, praying for the pain to subside quickly. Pressure builds,"
-							          +" your head feeling ready to split. As the sensation fades you're left wondering what just happened and you"
-							          +" run to look at yourself in a nearby puddle.");
+							output.text("\n\nYour scalp feels tight, as though the skin is shifting and morphing."
+							           +" You let out groan as you grip your head, praying for the pain to subside quickly. Pressure builds,"
+							           +" your head feeling ready to split. As the sensation fades you're left wondering what just happened and you"
+							           +" run to look at yourself in a nearby puddle.");
 						}
 
 						// Finalize Corrupted Basilisk TFs
@@ -324,10 +324,10 @@ package classes.Items
 						outputText("\n\n<b>Where your hair would be, you now have a crown of dull reptilian spines!</b>");
 
 						if (player.featheryHairPinEquipped())
-							outputText("\n\nYou place the hair-pin in your inventory, no longer able to wear it.");
+							output.text("\n\nYou place the hair-pin in your inventory, no longer able to wear it.");
 						else if (hairPinID >= 0)
-							outputText("\n\nYour thoughts wander to the hair-pin while you adjust to your new [hair]. You probably won't be able to"
-							          +" wear it while you're this tainted.");
+							output.text("\n\nYour thoughts wander to the hair-pin while you adjust to your new [hair]. You probably won't be able to"
+							           +" wear it while you're this tainted.");
 
 						if (hairPinID >= 0) {                                 // hair-pin set to unequipped
 							player.keyItems[hairPinID].value1 = 0;
