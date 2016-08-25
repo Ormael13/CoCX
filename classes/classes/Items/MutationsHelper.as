@@ -321,7 +321,7 @@ package classes.Items
 						player.hairLength = 2;                                // hairLength set to 2 (inches, displayed as ‘short’)
 						flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0; // Hair growth stops
 						changes++;
-						outputText("\n\n<b>Where your hair would be, you now have a crown of dull reptilian spines!</b>");
+						output.text("\n\n<b>Where your hair would be, you now have a crown of dull reptilian spines!</b>");
 
 						if (player.featheryHairPinEquipped())
 							output.text("\n\nYou place the hair-pin in your inventory, no longer able to wear it.");
@@ -333,7 +333,7 @@ package classes.Items
 							player.keyItems[hairPinID].value1 = 0;
 							player.keyItems[hairPinID].value2 = 0;
 						}
-						if (tfSource == "PlayerEvents-benoitHairPin") outputText("\n");
+						if (tfSource == "PlayerEvents-benoitHairPin") output.text("\n");
 						return 1;
 					}
 					return 0;
