@@ -373,8 +373,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.7a";
-			version = ver + " (<b>Rise of the Monsters, Soul Sprite cultivation stage, Weapons and Armors cost adjustments and all others small changes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.7b";
+			version = ver + " (<b>(Pure) Holli, Mara Fruit (plant TF), He'Xin'Dao (part 2), Libido on lvl-up screen and many minor changes</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
