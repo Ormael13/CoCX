@@ -2,6 +2,7 @@
 {
 
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Scenes.Inventory;
 	import classes.Scenes.Places.TelAdre.Katherine;
 
@@ -634,6 +635,8 @@ public function savePermObject(isFile:Boolean):void {
 				saveFile.data.achievements[i] = achievements[i];
 			}
 		}
+		if (getGame().permObjVersionID != 0)
+			saveFile.data.permObjVersionID = getGame().permObjVersionID;
 	}
 	catch (error:Error)
 	{
@@ -678,6 +681,22 @@ public function loadPermObject():void {
 				if (saveFile.data.achievements[i] != undefined)
 					achievements[i] = saveFile.data.achievements[i];
 			}
+		}
+
+		if (saveFile.data.permObjVersionID != undefined) {
+			getGame().permObjVersionID = saveFile.data.permObjVersionID;
+			trace("Found internal permObjVersionID:", getGame().permObjVersionID);
+		}
+
+		if (getGame().permObjVersionID < 1039900) {
+			// apply fix for issue #337 (Wrong IDs in kACHIEVEMENTS conflicting with other achievements)
+			achievements[kACHIEVEMENTS.ZONE_EXPLORER] = 0;
+			achievements[kACHIEVEMENTS.ZONE_SIGHTSEER] = 0;
+			achievements[kACHIEVEMENTS.GENERAL_PORTAL_DEFENDER] = 0;
+			achievements[kACHIEVEMENTS.GENERAL_BAD_ENDER] = 0;
+			getGame().permObjVersionID = 1039900;
+			savePermObject(false);
+			trace("PermObj internal versionID updated:", getGame().permObjVersionID);
 		}
 	}
 }
@@ -1366,7 +1385,12 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			if (saveFile.data.flags[i] != undefined)
 				flags[i] = saveFile.data.flags[i];
 		}
-		
+
+		if (saveFile.data.versionID != undefined) {
+			game.versionID = saveFile.data.versionID;
+			trace("Found internal versionID:", game.versionID);
+		}
+
 		//PIERCINGS
 		
 		//trace("LOADING PIERCINGS");

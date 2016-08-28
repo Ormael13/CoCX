@@ -17,8 +17,8 @@ package classes.GlobalFlags
 		public static const UNKNOWN_ACHIEVEMENT_009:int			= 009;
 		
 		//Zone Achievements (010-029)
-		public static const ZONE_EXPLORER:int					= 110; //Discover every zone.
-		public static const ZONE_SIGHTSEER:int					= 111; //Discover every place.
+		public static const ZONE_EXPLORER:int					= 010; //Discover every zone.
+		public static const ZONE_SIGHTSEER:int					= 011; //Discover every place.
 		public static const ZONE_WHERE_AM_I:int					= 012; //Explore for the first time.
 		public static const ZONE_FOREST_RANGER:int				= 013; //Explore the forest 100 times.
 		public static const ZONE_VACATIONER:int					= 014; //Explore the lake 100 times.

@@ -306,6 +306,8 @@ the text from being too boring.
 		public var debug:Boolean;
 		public var ver:String;
 		public var version:String;
+		public var versionID:uint = 0;
+		public var permObjVersionID:uint = 0;
 		public var mobile:Boolean;
 		public var images:ImageManager;
 		public var player:Player;
