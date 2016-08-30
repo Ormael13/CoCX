@@ -1683,11 +1683,7 @@ package classes.Scenes.Places.Bazaar
 				changes++;
 			}
 			//Remove gills
-			if (rand(4) == 0 && changes < changeLimit && player.gills) {
-				outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin. <b>You no longer have gills!</b>");
-				player.gills = false;
-				changes++;
-			}
+			if (rand(4) == 0 && changes < changeLimit && player.hasGills()) mutations.updateGills();
 			// Rhino TFs
 			//------------
 			//Change a cock to rhino.
@@ -1865,11 +1861,9 @@ package classes.Scenes.Places.Bazaar
 				player.armType = ARM_TYPE_HUMAN;
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.gills) {
-				outputText("\n\nYou grit your teeth as a stinging sensation arises in your gills. Within moments, the sensation passes, <b>and your gills are gone!</b>");
-				player.gills = false;
-				changes++;
-			}
+			//Remove gills
+			if (rand(3) == 0 && changes < changeLimit && player.hasGills()) mutations.updateGills();
+
 			if (rand(3) == 0 && changes < changeLimit && player.eyeType == EYES_FOUR_SPIDER_EYES) {
 				outputText("\n\nYour two forehead eyes start throbbing painfully, your sight in them eventually going dark. You touch your forehead to inspect your eyes, only to find out that they have disappeared. <b>You only have two eyes now!</b>");
 				player.eyeType == EYES_HUMAN;
