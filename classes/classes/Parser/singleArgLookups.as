@@ -35,6 +35,7 @@
 				"cunt"						: function(thisPtr:*):* { return kGAMECLASS.player.vaginaDescript(); },
 				"eachcock"					: function(thisPtr:*):* { return kGAMECLASS.player.sMultiCockDesc();},
 				"evade"						: function(thisPtr:*):* { return "[Evade]"; },
+				"eyes"						: function(thisPtr:*):* { return kGAMECLASS.player.eyesDescript();},
 				"face"						: function(thisPtr:*):* { return kGAMECLASS.player.face(); },
 				"feet"						: function(thisPtr:*):* { return kGAMECLASS.player.feet(); },
 				"foot"						: function(thisPtr:*):* { return kGAMECLASS.player.foot(); },

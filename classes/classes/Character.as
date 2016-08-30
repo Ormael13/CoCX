@@ -945,7 +945,11 @@ import classes.GlobalFlags.kFLAGS;
 		{
 			return Appearance.wingsDescript(this);
 		}
-		
+
+		public function eyesDescript():String
+		{
+			return Appearance.eyesDescript(this);
+		}
 	}
 
 }

@@ -2023,6 +2023,11 @@
 			return DEFAULT_WING_NAMES[i_creature.wingType] + " wings";
 		}
 
+		public static function eyesDescript(i_creature:Creature):String
+		{
+			return DEFAULT_EYES_NAMES[i_creature.eyeType] + " eyes";
+		}
+
 /* All of these functions have been replaced with direct calls to the appropriate form of cockNoun().
 		private static function humanDescript(cockNum:Number):String
 		{
@@ -2277,6 +2282,7 @@
 					[EYES_BLACK_EYES_SAND_TRAP, "sandtrap black"],
 					[EYES_LIZARD, "lizard"],
 					[EYES_DRAGON, "dragon"],
+					[EYES_BASILISK, "basilisk"],
 				]
 		);
 		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
