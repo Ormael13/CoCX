@@ -63,8 +63,19 @@ package classes
 			output.text("You are a " + feet_inch_and_metres(player.tallness) + " tall " + player.maleFemaleHerm() + " " + race + ", with " + player.bodyType() + ".");
 			
 			outputText("  <b>You are currently " + (player.armorDescript() != "gear" ? "wearing your " + player.armorDescript() : "naked") + "" + " and using your " + player.weaponName + " as a weapon.</b>", false);
+			if (player.featheryHairPinEquipped()) {
+				// This may be relocated into a method later. Probably something, like player.headAccessory()
+				// Note, that earrings count as piercings, meaning, that head accessories and earrings are to be handled seperately
+				var hairPinText:String = "";
+				hairPinText += "  <b>You have a hair-pin with a single red feather plume";
+				if (player.hairLength > 0)
+					hairPinText += " in your " + player.hairDescript() + ".</b>";
+				else
+					hairPinText += " on your head.</b>";
+				outputText(hairPinText);
+			}
 			if (player.jewelryName != "nothing") 
-				outputText("<b> Girding one of your fingers is " + player.jewelryName + ".</b> ")
+				outputText("  <b>Girding one of your fingers is " + player.jewelryName + ".</b>");
 			//Face
 			if (player.faceType == FACE_HUMAN || player.faceType == FACE_SHARK_TEETH || player.faceType == FACE_BUNNY || player.faceType == FACE_SPIDER_FANGS || player.faceType == FACE_FERRET_MASK) 
 			{

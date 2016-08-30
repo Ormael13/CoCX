@@ -87,5 +87,25 @@ package classes
 		{
 			return game.bazaar.benoit.benoitBigFamily() && eyeType == EYES_BASILISK;
 		}
+
+		public function hasLizardScales():Boolean
+		{
+			return skinType == SKIN_TYPE_SCALES;
+		}
+
+		public function featheryHairPinEquipped():Boolean
+		{
+			return hasKeyItem("Feathery hair-pin") >= 0 && keyItemv1("Feathery hair-pin") == 1;
+		}
+
+		public function isMaleOrHerm():Boolean
+		{
+			return (gender & GENDER_MALE) != 0;
+		}
+
+		public function isFemaleOrHerm():Boolean
+		{
+			return (gender & GENDER_FEMALE) != 0;
+		}
 	}
 }

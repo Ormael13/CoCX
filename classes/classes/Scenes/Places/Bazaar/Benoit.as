@@ -654,6 +654,36 @@ private function talkToBenoit():void {
 		flags[kFLAGS.BENOIT_TALKED_TODAY] = 1;
 		benoitAffection(5);
 	}
+	if (flags[kFLAGS.BENOIT_BASIL_EYES_GRANTED] > 0 && player.hasKeyItem("Feathery hair-pin") < 0) {
+		var hasSolidHair:Boolean = (player.hairType != HAIR_GOO && player.hairLength > 0);
+		// Talk scene written by MissBlackthorne
+		outputText("\"<i>Ah [name]! I 'ad been 'oping to speak wiz you.</i>\" your basilisk lover says with a toothy smile. \"<i>I 'ave a gift for "
+		          +"you... For all you 'ave done.</i>\" You notice the scales on " + benoitMF("Benoit", "Benoite") + "'s face turn a deeper green,"
+		          +" evidently blushing as " + benoitMF("he", "she") + " thrusts out a closed palm, gaze averted like a kid on Valentines Day."
+		          +" You place your hand out and feel something small fall into your palm. It tickles and feels cool."
+		          +" You look down at the trinket you have received, immediately surprised.");
+		outputText("\n\nYou hold a silver hair pin, its shining exterior glittering in the light. Tiny scales are cast into the metal of the pin as"
+		          +" though it were the tail of a reptile, something that must have taken master craftsmanship to form so well. At the end is a ovoid"
+		          +" gemstone, a swirling grey pattern deep within it. You are reminded of the eyes of basilisks in the mountains, though this time,"
+		          +" you look at it because it is beautiful, rather than through compulsion. Under the gem is a plume of three delicate crimson"
+		          +" feathers, their soft fibres tickling your palm. Surely " + benoitMF("Benoit", "Benoite") + " didn't mean to give you such an"
+		          +" expensive looking item?!");
+		outputText("\n\n\"<i>[name], nussing can pay for what you 'ave done for me, for my kind. Such an 'eirloom is paltry to zat.</i>\" "
+		          + benoitMF("Benoit", "Benoite") + " says softly, eyes closed. \"<i>It does not feel warped by ze demons, and I am 'oping it reminds"
+		          +" you of me in your travels.</i>\"");
+		outputText("\n\nYou feel a blush creep across your [face] as you thank the blind basilisk, hugging " + benoitMF("him", "her")
+		          +" to you tight before you leave");
+		// Equip only, if you have hair and if it's not gooey.
+		outputText((hasSolidHair && player.cor < 55) ? ", slipping the pin into your [hair] as you exit the store." : ".");
+		// value1: hairPinIsEquipped, value2: just (re)equipped, but TF not triggered yet.
+		if (hasSolidHair && player.cor < 55)
+			player.createKeyItem("Feathery hair-pin", 1, 1, 0, 0);
+		else
+			player.createKeyItem("Feathery hair-pin", 0, 0, 0, 0);
+		outputText("\n\n(<b>Gained Key Item: Feathery hair-pin</b>)");
+		doNext(camp.returnToCampUseOneHour);
+		return;
+	}
 	if (benoitBigFamily() && player.inte >= 60 && flags[kFLAGS.BENOIT_EYES_TALK_UNLOCKED] == 0) {
 		// Talk scene written by MissBlackthorne
 		outputText("You ask " + benoitMF("Benoit", "Benoite") + " how the petrifying effect of " + benoitMF("his", "her") + " brethrens gaze works,"
@@ -887,10 +917,78 @@ private function talkToBenoit():void {
 
 			outputText("\n\n“<i>Well, of course I can, zilly,</i>” she says teasingly. “<i>When you end up smelling like someone else for several hours, it is a difficult sing to mistake.  It is a memento of you and it reminds me of appiness; I wish I could smell zat way for longer.  My sexy little shaved monkey.</i>”");
 		}
+
+		// Hair pin talk
+		if (player.hasKeyItem("Feathery hair-pin") >= 0 && (debug || flags[kFLAGS.BENOIT_HAIRPIN_TALKED_TODAY] == 0))
+		{
+			doNext(benoitHairPinTalk);
+			return;
+		}
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
 
+private function benoitHairPinTalk():void
+{
+	// On a new page, since it may trigger the hair TF.
+	clearOutput();
+	outputText("You ask " + benoitMF("Benoit", "Benoite") + " about the feathery hair-pin he gave to you.");
+	outputText("\n\n\"<i>Ah, ze pin? It iz a 'eirloom from my mozzers side. I suspect it 'as simply been thrown down through generations, none"
+	          +" wanting sumsing zat was more complex zan a shiny object. I think it 'as escaped ze taint, simply because of zis. I kept it to sell,"
+	          +" but a better use 'as come for it. Maybe I am just sentimental, but I 'ope it reminds you of all you 'ave done for ze basilisks, and"
+	          +" for me.</i>\"");
+	benoitHairPinTFCheck();
+}
+
+private function benoitHairPinTFCheck():void
+{
+	if (player.cor < 30 && player.isFemaleOrHerm() && player.featheryHairPinEquipped() && [HAIR_BASILISK_PLUME, HAIR_GOO].indexOf(player.hairType) == -1)
+	{
+		outputText("\n\nYou feel the hair pin " + benoitMF("Benoit", "Benoite") + " gave you heat up, a gentle warmth suffusing through your body."
+		          +" Something tells you that if you let it, this feminine hair piece will evoke some sort of change.");
+		outputText("\n\nDo you let it?");
+		menu();
+		addButton(0, "No", benoitHairPinTFNo);
+		addButton(1, "Yes", benoitHairPinTFYes);
+		return;
+	}
+
+	benoitHairPinTalkFinal();
+}
+
+private function benoitHairPinTFNo():void
+{
+	outputText("\n\nYou take out the hair pin for a while, the feeling fading as soon as you do so.");
+	benoitHairPinTalkFinal();
+}
+
+private function benoitHairPinTFYes():void
+{
+	outputText("\n\nYou let the feeling be, wondering what it will do. Soon your head begins to tickle and you reach up to scratch at it, only to be"
+	          +" surprised by the softness you feel. It reminds you of the down of baby chickens, velvety soft and slightly fluffy. You look at"
+	          +" yourself in a nearby puddle and gasp, where your hair once was, you now have red feathers, some longer and larger than others."
+	          +" This floppy but soft plume sits daintily on your head, reminding you of a ladies fascinator. You realise soon"
+	          + benoitMF(" that your hair has changed into a plume of feathers that, like legend is told, belongs to a female basilisk!",
+	                     " that you have a plume, like a female basilisk!"));
+
+	if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] != 0)
+		outputText("\n\n<b>Your hair is growing again and is now a plume of short red feathers.</b>");
+	else
+		outputText("\n\n<b>Your hair is now a plume of short red feathers.</b>");
+
+	flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
+	player.hairLength = 2;
+	player.hairColor = "red";
+	player.hairType = HAIR_BASILISK_PLUME;
+	benoitHairPinTalkFinal();
+}
+
+private function benoitHairPinTalkFinal():void
+{
+	dynStats("cor", -(player.featheryHairPinEquipped() ? 10 : 5));
+	flags[kFLAGS.BENOIT_HAIRPIN_TALKED_TODAY] = 1;
+	doNext(camp.returnToCampUseOneHour);
+}
 
 //Male Benoit x Female PC Interactions
 //First talk
@@ -1212,6 +1310,49 @@ private function repeatBenoitFuckTakeCharge():void {
 	flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS]++;
 	player.orgasm();
 	doNext(camp.returnToCampUseOneHour);
+}
+
+//Feathery hair-pin
+public function equipUnequipHairPin():void
+{
+	var keyItemNum:int = player.hasKeyItem("Feathery hair-pin");
+	if (keyItemNum < 0) return;
+
+	clearOutput();
+	if (player.keyItemv1("Feathery hair-pin") > 0) {
+		// unequip it
+		if (player.hairLength > 0)
+			outputText("You take the feathery hair-pin " + benoitMF("Benoit", "Benoite") + " gave to you out of your " + player.hairDescript() 
+			          +" and put it back into your inventory.");
+		else
+			outputText("You remove the feathery hair-pin " + benoitMF("Benoit", "Benoite") + " gave to you from your bald head and put it back into"
+			          +" your inventory. It was surprisingly easy.");
+		player.keyItems[keyItemNum].value1 = 0; // not equipped
+		player.keyItems[keyItemNum].value2 = 0; // if its not equipped it won't trigger any TF, right? ^^
+	} else {
+		// equip it
+		if (player.hairType == HAIR_GOO)
+			outputText("You try to slide the hair pin into your " + player.hairDescript() + ", but their semi-liquid state isn't enough to hold it in"
+			          +" place. The pin falls to the ground with a wet splat the moment you let it go. With a sigh you clean it up and then you put"
+			          +" it back.");
+		else if (player.cor >= 55)
+				outputText("You go to slide the hair-pin into your " + player.hairDescript() + ", but the moment it touches your scalp it heats up,"
+			              +" causing you to drop it in shock. Seems it doesn't want you dirty its purity... you pick it up and put it back into your"
+			              +" inventory for now.");
+		else {
+			if (player.hairLength > 0)
+				outputText("You slide the hair-pin " + benoitMF("Benoit", "Benoite") + " gave you into your " + player.hairDescript()
+				          +", briefly admiring yourself in a nearby puddle before returning to your adventures.");
+			else
+				outputText("You take the feathery hair-pin " + benoitMF("Benoit", "Benoite") + " gave to you out of your inventory and then you press"
+				          +" it onto your bald head. To your surprise it sticks to your head as though you had hair to hold it in place.");
+
+			player.keyItems[keyItemNum].value1 = 1; // equipped
+			player.keyItems[keyItemNum].value2 = 1; // just equipped it, but it didn't trigger the TF(-event) so far
+		}
+	}
+	outputText("\n");
+	doNext(inventory.checkKeyItems);
 }
 
 //Basilisk Eyes

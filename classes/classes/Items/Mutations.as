@@ -5212,13 +5212,8 @@
 			//-Existing horns become draconic, max of 4, max length of 1'
 			if (!player.hasDragonHorns(true) && changes < changeLimit && rand(5) == 0)
 				gainDraconicHorns(tfSource);
-			//-Hair stops growing!
-			if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0 && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYour scalp tingles oddly.  In a panic, you reach up to your " + player.hairDescript() + ", but thankfully it appears unchanged.\n\n", false);
-				outputText("(<b>Your hair has stopped growing.</b>)", false);
-				changes++;
-				flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD]++;
-			}
+			//-Hair changes
+			if (changes < changeLimit && rand(4) == 0) lizardHairChange(tfSource);
 			//Remove beard!
 			if (player.hasBeard() && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYour " + player.beardDescript() + " feels looser and looser until finally, your beard falls out.  ");

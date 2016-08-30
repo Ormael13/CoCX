@@ -112,11 +112,11 @@ public function salonPurchaseMenu():void {
 	else if (player.femininity > 0 && player.findPerk(PerkLib.Androgyny) >= 0) sandFacialEnabled = true;
 	
 	menu();
-	if (player.hairLength > 2) addButton(0, "Cut Short", cutShort);
+	if (player.hairType != HAIR_BASILISK_SPINES && player.hairLength > 2) addButton(0, "Cut Short", cutShort);
 	if (player.hairLength > 13) addButton(1, "Cut Medium", cutMedium);
 	if (player.hairLength >= 26) addButton(2, "Cut Long", cutLong);
-	if (player.hairLength < player.tallness) addButton(3, "Lengthen", hairGrow);
-	if (player.hairLength > 0) addButton(4, "Remove Hair", removeHair);
+	if (player.hairType != HAIR_BASILISK_SPINES && player.hairLength < player.tallness) addButton(3, "Lengthen", hairGrow);
+	if (player.hairType != HAIR_BASILISK_SPINES && player.hairLength > 0) addButton(4, "Remove Hair", removeHair);
 	addButton(5, "Buy Products", dyeMenu);
 	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) addButton(6, "Buy MinoCum", buyMinoCum, null, null, null, "Buy a bottle of minotaur cum for 60 gems?");
 	addButton(7, "Beard Options", beardMenu);
