@@ -1,6 +1,7 @@
 package classes.Items 
 {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 	
 	/**
 	 * Helper class to get rid of the copy&paste-mess in classes.Items.Mutations
@@ -218,6 +219,138 @@ package classes.Items
 			return oldClawTone;
 		}
 
+		public function lizardHairChange(tfSource:String):int
+		{
+			var hairPinID:int = player.hasKeyItem("Feathery hair-pin");
+			trace('called lizardHairChange("' + tfSource + '")');
+
+			switch (tfSource) {
+				case "reptilum-lizan":
+				case "reptilum-dragonewt":
+					//-Hair stops growing!
+					if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
+						output.text("\n\nYour scalp tingles oddly.  In a panic, you reach up to your [hair], but thankfully it appears unchanged.");
+						output.text("\n\n(<b>Your hair has stopped growing.</b>)");
+						changes++;
+						flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 1;
+						return -1; // --> hair growth stopped
+					}
+					return 0;
+
+				case "PlayerEvents-benoitHairPin":
+				case "reptilum-basilisk":
+				case "reptilum-dracolisk":
+					if (player.hairType == HAIR_BASILISK_PLUME && player.cor < 65) return 0;
+
+					if (player.isFemaleOrHerm() && player.cor < 15 && player.featheryHairPinEquipped() && player.isBasilisk()) {
+						var benoitMFText:String = getGame().bazaar.benoit.benoitMF(
+							" your hair has changed into a plume of feathers that, like legend is told, belongs to a female basilisk!",
+							" you have a plume, like a female basilisk!"
+						);
+
+						if (player.hairType == HAIR_GOO)
+							output.text("\n\nYour gooey hair begins to fall out in globs, eventually leaving you with a bald head.");
+
+						output.text("\n\nYour head begins to tickle and you reach up to scratch at it, only to be surprised by the softness you feel."
+						           +" It reminds you of the down of baby chickens, velvety soft and slightly fluffy. You look at yourself in a nearby"
+						           +" puddle and gasp, [if (hairlength <= 0) where your hair once was] you now have red feathers,"
+						           +" some longer and larger than others. This floppy but soft plume sits daintily on your head,"
+						           +" reminding you of a ladies fascinator. You realise soon that" + benoitMFText);
+
+						if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] != 0)
+							output.text("\n\n<b>Your hair is growing again and is now a plume of short red feathers.</b>");
+						else
+							output.text("\n\n<b>Your hair is now a plume of short red feathers.</b>");
+
+						flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
+						player.hairLength = 2;
+						player.hairColor = "red";
+						player.hairType = HAIR_BASILISK_PLUME;
+						player.keyItems[hairPinID].value2 = 0;
+						changes++;
+						return 1; // --> gained basilisk hair (plume)
+					}
+
+					if (player.cor >= 65 && player.hairType != HAIR_BASILISK_SPINES && player.hasLizardScales() && player.hasReptileFace()) {
+						// Corrupted Basilisk
+						if (player.hairLength > 0 && [HAIR_GOO, HAIR_BASILISK_PLUME].indexOf(player.hairType) == -1) {
+							output.text("\n\nYour scalp feels tight and hot, causing you to run a hand through your [hair] to rub at it gingerly.");
+
+							if (player.featheryHairPinEquipped())
+								output.text("\n\nThe pin in your hair heats up to the point where you have to pull it free and toss it to the ground,"
+								           +" it sizzling against the earth.");
+
+							output.text("\n\nTo your shock a handful of your [hair] comes loose, exposing the [skinFurScales] beneath. You wonder why"
+							           +" this is happening to you but realise it must be the potion, lizards don't tend to have hair after all."
+							           +" You continue to rub at your scalp, the cool air against your slowly revealed skin a welcome relief."
+							           +" After several minutes of this, you're certain you've shed all your hair. When you think it's all over,"
+							           +" you feel an uncomfortable pressure build, your scalp morphing and changing as you grimace."
+							           +" When the sensation finally fades you rush to look at yourself in a puddle. Where you once had hair,"
+							           +" you now have a crown of dull reptilian spines!");
+
+						}
+
+						// Female Basilisk to Corrupted Basilisk
+						if (player.hairLength > 0 && player.hairType == HAIR_BASILISK_PLUME) {
+							output.text("\n\nA sudden sharp pain drills through your skull, a pressure forming across your scalp."
+							           +" If you didn't know any better you'd think you were being plucked!");
+
+							if (player.featheryHairPinEquipped())
+								output.text("\n\nThe pin in your hair heats up to the point where you have to pull it free and toss it to the ground,"
+								           +" it sizzling against the earth.");
+
+							output.text("\n\nYou clutch your head as you feel the feathers on your head push out further, thickening up as they do so."
+							           +" The soft vane seems to fall from the spine of the feathers, stripping them bare as the red fluff falls to"
+							           +" the floor. Soon the tips of the feathers follow, leaving some rather alien looking spines behind. Your head"
+							           +" throbs with dull pain as the transformation seems to end and you go to look at your reflection in a nearby"
+							           +" puddle. Your once magnificent plume has turned into a dull crown of spines, like that of the corrupt"
+							           +" basilisk of the mountains. As you mourn the loss of your feathered hair, you notice your spines move with"
+							           +" your emotions, their sensitive tips picking up on the breeze as they lower closer to your skull.");
+						}
+
+						// Corrupted basilisk with gooey or no hair (bald)
+						if (player.hairType == HAIR_GOO || player.hairLength <= 0) {
+							if (player.hairType == HAIR_GOO)
+								output.text("\n\nYour gooey hair begins to fall out in globs, eventually leaving you with a bald head.");
+
+							if (player.featheryHairPinEquipped())
+								output.text("\n\nThe pin in your hair heats up to the point where you have to pull it free and toss it to the ground,"
+								           +" it sizzling against the earth.");
+
+							output.text("\n\nYour scalp feels tight, as though the skin is shifting and morphing."
+							           +" You let out groan as you grip your head, praying for the pain to subside quickly. Pressure builds,"
+							           +" your head feeling ready to split. As the sensation fades you're left wondering what just happened and you"
+							           +" run to look at yourself in a nearby puddle.");
+						}
+
+						// Finalize Corrupted Basilisk TFs
+						player.hairColor = player.skinTone;                   // hairColor always set to player.skinTone
+						player.hairType = HAIR_BASILISK_SPINES;               // hairType set to basilisk spines
+						player.hairLength = 2;                                // hairLength set to 2 (inches, displayed as ‘short’)
+						flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0; // Hair growth stops
+						changes++;
+						output.text("\n\n<b>Where your hair would be, you now have a crown of dull reptilian spines!</b>");
+
+						if (player.featheryHairPinEquipped())
+							output.text("\n\nYou place the hair-pin in your inventory, no longer able to wear it.");
+						else if (hairPinID >= 0)
+							output.text("\n\nYour thoughts wander to the hair-pin while you adjust to your new [hair]. You probably won't be able to"
+							           +" wear it while you're this tainted.");
+
+						if (hairPinID >= 0) {                                 // hair-pin set to unequipped
+							player.keyItems[hairPinID].value1 = 0;
+							player.keyItems[hairPinID].value2 = 0;
+						}
+						if (tfSource == "PlayerEvents-benoitHairPin") output.text("\n");
+						return 1;
+					}
+					return 0;
+
+				default:
+					return 0;
+			}
+		}
+
 		/**
 		 * Updates the perk Oviposition depending on the class/method stored in tfSource, that called it.
 		 * @param	tfSource	The method- or classname plus additional info seperated by the '-'-character
@@ -225,7 +358,6 @@ package classes.Items
 		 * @author	Stadler76
 		 */
 		public function updateOvipositionPerk(tfSource:String):int
-
 		{
 			trace('called updateOvipositionPerk("' + tfSource + '")');
 			var tsParts:Array = tfSource.split("-");
@@ -280,6 +412,69 @@ package classes.Items
 					}
 					player.removePerk(PerkLib.Oviposition);
 					return -1; // Lost it
+			}
+		}
+
+		public function updateGills(newGillType:int = GILLS_NONE):int
+		{
+			trace("Called updateGills(" + newGillType + ")");
+			var oldgillType:int = player.gillType;
+			if (player.gillType == newGillType) return 0; // no change
+
+			player.gillType = newGillType;
+			changes++;
+
+			// for now, we only have anemone gills on the chest
+			switch (newGillType) {
+				case GILLS_NONE:
+					if (oldgillType == GILLS_ANEMONE) {
+						output.text("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your"
+						           +" skin.");
+					} else { // losing fish gills
+						output.text("\n\nYou feel your gills tighten, the slits seeming to close all at once. As you let out a choked gasp your"
+						           +" gills shrink into nothingness, leaving only smooth skin behind. Seems you won't be able to stay in the water"
+						           +" quite so long anymore.");
+					}
+					output.text("  <b>You no longer have gills!</b>");
+					return -1; // Gills lost
+
+				case GILLS_ANEMONE:
+					if (oldgillType == GILLS_FISH) {
+						output.text("\n\nYou feel your gills tighten, the slits seeming to close all at once. As you let out a choked gasp your"
+						           +" gills shrink into nothingness, leaving only smooth skin behind. When you think it's over you feel something"
+						           +" emerge from under your neck, flowing down over your chest and brushing your nipples. You look in surprise as"
+						           +" your new feathery gills finish growing out, a film of mucus forming over them shoftly after.");
+					} else { // if no gills
+						output.text("\n\nYou feel a pressure in your lower esophageal region and pull your garments down to check the area."
+						           +" Before your eyes a pair of feathery gills start to push out of the center of your chest,"
+						           +" just below your neckline, parting sideways and draping over your " + player.nippleDescript(0) + "s."
+						           +" They feel a bit uncomfortable in the open air at first, but soon a thin film of mucus covers them and you"
+						           +" hardly notice anything at all. You redress carefully.");
+					}
+					output.text("\n\n<b>You now have feathery gills!</b>");
+					return 1; // Gained gills or gillType changed
+
+				case GILLS_FISH:
+					if (oldgillType == GILLS_ANEMONE) {
+						output.text("\n\nYou feel your gills tingle, a vague numbness registering across thier feathery exterior. You watch in awe as"
+						           +" your gill's feathery folds dry out and fall off like crisp autumn leaves. The slits of your gills then"
+						           +" rearrange themselves, becoming thinner and shorter, as they shift to the sides of your neck. They now close in"
+						           +" a way that makes them almost invisible. As you run a finger over your neck you feel little more than several"
+						           +" small raised lines where they meet your skin.");
+					} else { // if no gills
+						output.text("\n\nYou feel a sudden tingle on your neck. You reach up to it to feel, whats the source of it. When you touch"
+						           +" your neck, you feel that it begins to grow serveral narrow slits which slowly grow longer. After the changes"
+						           +" have stopped you quickly head to a nearby puddle to take a closer look at your neck. You realize,"
+						           +" that your neck has grown gills allowing you to breathe under water as if you were standing on land.");
+					}
+					output.text("\n\n<b>You now have fish like gills!</b>");
+					return 1; // Gained gills or gillType changed
+
+				default:
+					player.gillType = oldgillType;
+					changes--;
+					trace("ERROR: Unimplemented new gillType (" + newGillType + ") used");
+					return 0; // failsafe, should hopefully never happen
 			}
 		}
 

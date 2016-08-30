@@ -817,7 +817,9 @@ import classes.GlobalFlags.kFLAGS;
 		public function growHair(amount:Number = .1):Boolean {
 			//Grow hair!
 			var tempHair:Number = hairLength;
+			if (hairType == HAIR_BASILISK_SPINES) return false;
 			hairLength += amount;
+			if (hairType == HAIR_BASILISK_PLUME && hairLength > 8) hairLength = 8;
 			if (hairLength > 0 && tempHair == 0) {
 				game.outputText("\n<b>You are no longer bald.  You now have " + hairDescript() + " coating your head.\n</b>", false);
 				return true;
@@ -943,7 +945,11 @@ import classes.GlobalFlags.kFLAGS;
 		{
 			return Appearance.wingsDescript(this);
 		}
-		
+
+		public function eyesDescript():String
+		{
+			return Appearance.eyesDescript(this);
+		}
 	}
 
 }

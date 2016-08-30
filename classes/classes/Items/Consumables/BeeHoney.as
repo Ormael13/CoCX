@@ -231,11 +231,9 @@ package classes.Items.Consumables
 				player.wingType = CoC.WING_TYPE_NONE;
 				player.wingDesc = "";
 			}
-			if (Utils.rand(4) == 0 && player.gills && changes < changeLimit) {
-				outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.");
-				player.gills = false;
-				changes++;
-			}
+			//Remove gills!
+			if (Utils.rand(4) == 0 && player.hasGills() && changes < changeLimit) mutations.updateGills();
+
 			if (special) { //All the speical honey effects occur after any normal bee transformations (if the player wasn't a full bee morph)
 				//Cock growth multiplier.
 				var mult:int = 1.0;

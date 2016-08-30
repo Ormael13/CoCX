@@ -25,6 +25,8 @@ public static const HAIR_GHOST:int                                              
 public static const HAIR_GOO:int                                                   =     3;
 public static const HAIR_ANEMONE:int                                               =     4;
 public static const HAIR_QUILL:int                                                 =     5;
+public static const HAIR_BASILISK_SPINES:int                                       =     6;
+public static const HAIR_BASILISK_PLUME:int                                        =     7;
 
 // beardType
 public static const BEARD_NORMAL:int                                               =     0;
@@ -51,12 +53,12 @@ public static const FACE_RACCOON:int                                            
 public static const FACE_BUCKTEETH:int                                              =   15;
 public static const FACE_MOUSE:int                                                  =   16;
 public static const FACE_FERRET_MASK:int                                            =   17;
-public static const FACE_FERRET:int                                            		=   18;
-public static const FACE_PIG:int                                            		=   19;
-public static const FACE_BOAR:int                                            		=   20;
-public static const FACE_RHINO:int                                            		=   21;
-public static const FACE_ECHIDNA:int                                            	=   22;
-public static const FACE_DEER:int                                               	=   23;
+public static const FACE_FERRET:int                                                 =   18;
+public static const FACE_PIG:int                                                    =   19;
+public static const FACE_BOAR:int                                                   =   20;
+public static const FACE_RHINO:int                                                  =   21;
+public static const FACE_ECHIDNA:int                                                =   22;
+public static const FACE_DEER:int                                                   =   23;
 
 // tongueType
 public static const TONGUE_HUMAN:int                                                =   0;
@@ -108,6 +110,11 @@ public static const HORNS_RHINO:int                                             
 public static const ANTENNAE_NONE:int                                               =   0;
 public static const ANTENNAE_BEE:int                                                =   2;
 
+// gillType
+public static const GILLS_NONE:int                                                  =   0;
+public static const GILLS_ANEMONE:int                                               =   1;
+public static const GILLS_FISH:int                                                  =   2;
+
 // armType
 public static const ARM_TYPE_HUMAN:int                                              =   0;
 public static const ARM_TYPE_HARPY:int                                              =   1;
@@ -151,7 +158,7 @@ public static const TAIL_TYPE_GOAT:int                                          
 public static const TAIL_TYPE_RHINO:int                                             =  22;
 public static const TAIL_TYPE_ECHIDNA:int                                           =  23;
 public static const TAIL_TYPE_DEER:int                                              =  24;
-public static const TAIL_TYPE_SALAMANDER:int						             			=  25;
+public static const TAIL_TYPE_SALAMANDER:int                                        =  25;
 
 // wingType
 public static const WING_TYPE_NONE:int                                              =   0;
