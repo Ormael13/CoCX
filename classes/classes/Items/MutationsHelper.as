@@ -20,19 +20,22 @@ package classes.Items
 		public function restoreArms(tfSource:String):int
 		{
 			trace('called restoreArms("' + tfSource + '")');
+			var message:String = "";
 
 			if (tfSource == "gooGasmic") {
 				// skin just turned gooey. Now lets fix unusual arms.
 				var hasClaws:Boolean = player.clawType != CLAW_TYPE_NORMAL;
 
-				if (hasClaws || player.armType == ARM_TYPE_HARPY) outputText("\n\n");
+				message = "\n\n";
 				if (player.armType == ARM_TYPE_HARPY) {
-					outputText("The feathers on your arms melt back into your now gooey skin.");
-					if (hasClaws) outputText(" Additionally your ");
-				} else if (hasClaws) outputText("Your ");
+					message += "The feathers on your arms melt back into your now gooey skin.";
+					if (hasClaws) message += " Additionally your now gooey claws melt back into your fingers.";
+				} else if (hasClaws) {
+					message += "Your now gooey claws melt back into your fingers.";
+				}
 
-				if (hasClaws) outputText("now gooey claws melt back into your fingers. Well, who cares, gooey claws aren't very useful in combat to begin with.");
-				if (hasClaws || player.armType == ARM_TYPE_HARPY) outputText("  <b>You have normal human arms again.</b>");
+				if (hasClaws) message += " Well, who cares, gooey claws aren't very useful in combat to begin with.";
+				if (hasClaws || player.armType == ARM_TYPE_HARPY) output.text(message + "  <b>You have normal human arms again.</b>");
 
 				updateClaws();
 				player.armType = ARM_TYPE_HUMAN;
@@ -42,40 +45,45 @@ package classes.Items
 
 			if (changes < changeLimit && player.armType != ARM_TYPE_HUMAN) {
 				if ([ARM_TYPE_HARPY, ARM_TYPE_SPIDER, ARM_TYPE_SALAMANDER].indexOf(player.armType) >= 0)
-					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that");
+					message += "\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.";
 
 				switch (player.armType) {
 					case ARM_TYPE_HARPY:
-						outputText(" your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving " + player.skinFurScales() + " behind.");
+						message += "  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating."
+						          +"  The wing-like shape your arms once had is gone in a matter of moments, leaving [skinfurscales] behind.";
 						break;
 
 					case ARM_TYPE_SPIDER:
-						outputText(" your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving " + player.skinFurScales() + " behind.");
+						message += "  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away."
+						          +"  The glossy black coating is soon gone, leaving [skinfurscales] behind.";
 						break;
 
 					case ARM_TYPE_SALAMANDER:
-						outputText(" your once scaly arms are shedding their scales and that your claws become normal human fingernails again.");
+						message += "  Glancing down in irritation, you discover that your once scaly arms are shedding their scales and that"
+						          +" your claws become normal human fingernails again.";
 						break;
 
 					case ARM_TYPE_PREDATOR:
 						switch (player.skinType) {
 							case SKIN_TYPE_GOO:
 								if (player.clawType != CLAW_TYPE_NORMAL)
-									outputText("\n\nYour gooey claws melt into your fingers. Well, who cares, gooey claws aren't very useful in combat to begin with.");
+									message += "\n\nYour gooey claws melt into your fingers."
+									          +" Well, who cares, gooey claws aren't very useful in combat to begin with.";
 								break;
 
 							case SKIN_TYPE_PLAIN:
 							case SKIN_TYPE_FUR:
 							case SKIN_TYPE_SCALES:
-								outputText("\n\nYou feel a sudden tingle in your " + player.claws() + " and then you realize, that they have become normal human fingernails again.");
+								message += "\n\nYou feel a sudden tingle in your [claws] and then you realize,"
+								          +" that they have become normal human fingernails again.";
 								break;
 						}
 						break;
 
 					default:
-						outputText(" your unusual arms change more and more until they are normal human arms, leaving " + player.skinFurScales() + " behind.");
+						message += "\n\nYour unusual arms change more and more until they are normal human arms, leaving [skinfurscales] behind.";
 				}
-				outputText("  <b>You have normal human arms again.</b>");
+				output.text(message + "  <b>You have normal human arms again.</b>");
 				updateClaws();
 				player.armType = ARM_TYPE_HUMAN;
 				changes++;
