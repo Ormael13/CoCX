@@ -605,6 +605,13 @@ private function doCamp():void { //Only called by playerMenu
 			if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("There is currently one skull.  ");
 			else outputText("There are currently " + num2Text(flags[kFLAGS.CAMP_WALL_SKULLS]) + " skulls.  ");
 		}
+		if (flags[kFLAGS.CAMP_WALL_STATUES] > 0) {
+			var message:String = "Dotted around and on the wall that surrounds your camp you spy ";
+			if (flags[kFLAGS.CAMP_WALL_STATUES] == 1)
+				output.text(message + "a single marble imp statue.  ");
+			else
+				output.text(message + num2Text(flags[kFLAGS.CAMP_WALL_STATUES]) + " marble imp statues.  ");
+		}
 		outputText("\n\n");
 	}
 	else outputText("You have a number of traps surrounding your makeshift home, but they are fairly simple and may not do much to deter a demon.  ");

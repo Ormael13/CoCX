@@ -34,11 +34,8 @@ package classes.Scenes.Monsters
 			}
 			else {
 				outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses and begins masturbating feverishly.", true);
-				if (monster.HP <= 0) {
-					addButton(0, "Kill Him", killImp);
-					addButton(4, "Leave", combat.cleanupAfterCombat);
-				}
-				else combat.cleanupAfterCombat();
+				addKillPetrifyButtons();
+				addButton(4, "Leave", combat.cleanupAfterCombat);
 				return;
 			}
 			if (player.lust > 33) {
@@ -65,7 +62,7 @@ package classes.Scenes.Monsters
 			if (canFeed) addButton(3, "Breastfeed", areImpsLactoseIntolerant);
 			if (canBikiniTits) addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 			if (maleRape == rapeImpWithDick && player.hasItem(useables.CONDOM)) addButton(5, "Use Condom", rapeImpWithDick, true);
-			addButton(6, "Kill Him", killImp);
+			addKillPetrifyButtons(6);
 			if (player.canOvipositBee()) addButton(8, "Oviposit", putBeeEggsInAnImpYouMonster);
 			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
@@ -1544,7 +1541,7 @@ package classes.Scenes.Monsters
 			clearOutput();
 			if (monster.HP < 1) {
 				outputText("The greater imp falls to the ground panting and growling in anger.  He quickly submits however, the thoroughness of his defeat obvious.  You walk towards the imp who gives one last defiant snarl before slipping into unconsciousness.");
-				if (monster.short != "imp overlord") addButton(0, "Kill Him", killImp);
+				if (monster.short != "imp overlord") addKillPetrifyButtons();
 				else {
 					combat.cleanupAfterCombat();
 					return;
@@ -1556,6 +1553,7 @@ package classes.Scenes.Monsters
 				//Leave // Rape]
 				menu();
 				if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) addButton(0, "Sex", sexAnImpLord);
+				if (monster.short != "imp overlord") addKillPetrifyButtons(1);
 				addButton(4, "Leave", combat.cleanupAfterCombat);
 			}
 		}
@@ -2002,7 +2000,153 @@ package classes.Scenes.Monsters
 			player.dumpEggs();
 			combat.cleanupAfterCombat();
 		}
-				
+
+		private function addKillPetrifyButtons(killButtonPos:Number = NaN, petriButtonPos:Number = NaN):void
+		{
+			if (isNaN(killButtonPos)) killButtonPos = 0;
+			if (isNaN(petriButtonPos)) petriButtonPos = killButtonPos + 1;
+			if (killButtonPos >= 0) addButton(killButtonPos, "Kill Him", killImp);
+			if (player.isBasilisk() && flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) {
+				addButton(petriButtonPos, "Petrify Him", petrifyImp);
+			}
+		}
+
+		private function petrifyImp():void
+		{
+			var winText:String = "";
+			var winText2:String = "";
+			var skullText:String = "";
+			var benoitE:String = getGame().bazaar.benoit.benoitMF("Benoit", "Benoite");
+
+			output.clear();
+			if (flags[kFLAGS.IMPS_PETRIFIED] <= 0) { // First time
+				flags[kFLAGS.IMPS_PETRIFIED] = 0; // Failsafe
+
+				if (monster.HP < 1) {
+					winText = "the beaten and bruised creature cowering teary-eyed,";
+					winText2 = "";
+				} else { // won by lust texts
+					winText = "the pathetically masturbating creature too focused on his blighted cock,";
+					winText2 = "though his hand remains on his prick,";
+				}
+				if (flags[kFLAGS.CAMP_WALL_SKULLS] > 0)
+					skullText = "heedless of the clear warning your wall presents.";
+				else
+					skullText = "no matter how many you beat.";
+
+				output.text("As you look at the imp before you, " + winText + " you feel disgusted. These vermin keep trying to invade your camp and"
+				           +" fuck you senseless " + skullText)
+				      .text("\n\nYou think back to your explorations in the high mountains, the dangers of the peaks keeping these creatures far"
+				           +" away. Even you have been deterred by the shrill harpies with their talons and the treacherous basilisks petrification."
+				           +" You then smirk, a brilliant [if (corruption >= 30) malicious] idea coming to mind. Thanks to " + benoitE
+				           +" you have basilisk eyes, surely the petrification you suffered at their hands before would deter these corrupt spawn as"
+				           +" it has you.")
+				      .text("\n\nYou blink slowly and ready yourself, grabbing the imp by the scruff of his neck. He seems confused " + winText2
+				           +" as you align him with your gaze. As you make direct eye contact he flinches and freezes, mesmerised by your gaze."
+				           +" You feel a link form from the edge of your mind to the imps, like a slowly flowing waterfall, it crashing into him"
+				           +" full force.")
+				      .text("\n\nYou remember how the basilisks used this compulsion to keep your gaze while your body slowly turned to stone,"
+				           +" the soothing feeling and the hushed and raspy whisper swaddling you as the stone did. You start to feed your thoughts"
+				           +" over to the imp, calming him with your words, telling him to keep looking into your eyes and to let all his worries"
+				           +" just fade away. To embrace the feeling of being cocooned and the warmth your gaze brings from the cold he feels."
+				           +" You watch somewhat surprised as he shudders when he tries to look away,"
+				           +" as if a bitter winter wind had rushed against him.")
+				      .text("\n\nYou see his eyes start to become glassy and know it is time. You blink once, the small loss of eye contact making"
+				           +" him whine pitifully. As you meet his eyes again, a layer of marble starting to form at his feet. You let go of him and"
+				           +" he remains in front of you, as if supported by puppet strings, and you are the stage master. The stone continues to"
+				           +" creep up his frame, his limbs hardening into place as it does."
+				           +" Soon his legs are covered and his midsection follows swiftly.")
+				      .text("\n\nYou shut the link between you with a smirk, watching as his dazed expression fades. When he groggily looks down he"
+				           +" begins to shout, trying to free himself with all his might, though with his legs completely turned and the stone"
+				           +" rapidly rising you know he has no chance. The stone has almost formed up to his shoulders now, his arms feeling leaden"
+				           +" as he struggles fruitlessly. You watch in fascination as the imp is consumed by the stone, his cursing fading into"
+				           +" nothingness, while his expression of rage and terror is trapped on his face for eternity.")
+				      .text("\n\nOnce you are sure the imp is truly transfigured you reach out to touch the statue. Your fingers are met with smooth,"
+				           +" cool stone and as you push it gently, you realise the statue is quite solid.");
+			} else {
+				output.text("You decide to teach this imp and his buddies a lesson that won't be forgotten. You grab the imp roughly, making sure you"
+				           +" have his attention as you make eye contact. The imp struggles in your grasp but as you slowly blink, your gaze now"
+				           +" fully on him, you feel him stiffen. He becomes sluggish and finds it hard to resist as your mind reaches into his. As"
+				           +" you soothe the imp with nonsense you see his will to fight begin to ebb away. Your calming speech washes over him as"
+				           +" his gaze becomes unfocused, his eyes not leaving yours out of imagined consequences.")
+				      .text("\n\nYou blink and let your gaze reach its full power, the imp making a pathetic whimper as you leave its mind silent for"
+				           +" that split second. A layer of marble starts to engulf his feet, crawling up his frame the longer he looks into those"
+				           +" glossy eyes of yours. You see the stone begin to harden as it creeps over his legs and let the link to his mind go"
+				           +" with a sudden jolt. He comes back around as the stone begins to coat his midsection, startled into a panic by the sight"
+				           +" of his now solidified lower body.")
+				      .text("\n\nNo matter how much he struggles against the stone, it won't budge, his eyes wide as he look at you. He curses and"
+				           +" rants at you before lapsing into begging, pleading with you to let him go. His pleas fall upon deaf ears of course, a"
+				           +" champion would never give perverted vermin mercy when they would never offer it back. As the stone reaches his neck you"
+				           +" simply watch, curious of what expression the statue will have when it's all over. As your gaze finishes petrifying the"
+				           +" imp you ready yourself for the [if (strength < 90) long] trip back.");
+			}
+			flags[kFLAGS.IMPS_PETRIFIED]++;
+			flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 10;
+			//if (player.cor < 25) dynStats("cor", -0.5);
+			menu();
+			var toolTipText:String = "Carry the statue back to your camp to place it on or in front of your wall";
+			var toolTipHeader:String = "Carry the statue to the camp";
+			addButton(0, "Take Statue", takeStatue, null, null, null, toolTipText, toolTipHeader);
+			addButton(1, "Leave", combat.cleanupAfterCombat);
+		}
+
+		private function takeStatue():void
+		{
+			var timeToReturn:int = 1;
+			if (player.str < 90) timeToReturn++;
+			if (player.str < 70) timeToReturn++;
+			if (player.str < 40) timeToReturn++;
+			trace("player.str:", player.str);
+			trace("timeToReturn:", timeToReturn);
+
+			var timeText:String = "";
+			timeText = timeToReturn > 1 ? num2Text(timeToReturn) + " hours" : "hour";
+
+			if (false && flags[kFLAGS.IMPS_PETRIFIED] <= 1) {
+				switch (timeToReturn) {
+					case 1: // str 90+ --> 1 hour
+						output.text("\n\nYou heft the statue onto your shoulder with a practised ease, as it is as light as a small wooden log for"
+						           +" you. As you spend the next hour carrying it back to camp, you feel frustrated at the land for making your"
+						           +" journey so long. You put the statue down near your camp wall as you wonder how effective it will be at keeping"
+						           +" these pests away.");
+						break;
+
+					case 2: // str 70-89 --> 2 hours
+						output.text("\n\nYou heft the statue onto your back with a practised ease, though maneuvering with the bulky thing is harder"
+						           +" than you expected. For something so small, it sure is heavy. As you spend the next couple of hours carrying it"
+						           +" back to camp, you feel frustrated at the land for making your journey so long. You put the statue down near"
+						           +" your camp wall, stretching and rubbing at the sore spots on your back and shoulders as you wonder how"
+						           +" effective it will be at keeping these pests away.");
+						break;
+
+					case 3: // str 40-69 --> 3 hours, 25 fatigue
+					case 4: // str < 40  --> 4 hours, 50 fatigue
+						output.text("\n\nYou try to lift the statue, but are simply unable to. You huff angrily as you pace around it, trying to"
+						           +" figure out how you can get it back to camp. You look through your belongings and around the area for something"
+						           +" to help you move the damned thing. After 20 minutes of searching you manage to find enough resources to make a"
+						           +" small sled that you can pull along with some rope. You position it behind the statue and kick the statue over,"
+						           +" smiling a little as you let out some of that anger. With the statue soon secured in place you begin the long"
+						           +" trek home, dragging the statue behind you. By the time you reach the camp you are exhausted, your arms and"
+						           +" legs burning in protest of the excessive labour transporting this thing took. Panting, you untie the statue"
+						           +" and drag it up to lean against the camp wall, hoping the damned thing was worth dragging here.");
+					// default: // there is no default. All possible cases are handled ...
+				}
+			} else {
+				output.text("\n\nIn the " + timeText + " it takes to [if (strength >= 70) carry|drag] the statue back to camp, you don't encounter"
+				           +" any further trouble, though you're sure the sight of the statue, which you now place around your wall,"
+				           +" helped with that. Maybe it'll help here too.");
+			}
+			flags[kFLAGS.CAMP_WALL_STATUES]++;
+			if (flags[kFLAGS.CAMP_WALL_STATUES] == 1) {
+				output.text("\n\n<b>You now have a marble imp statue at camp!</b>");
+			} else {
+				output.text("\n\n<b>You now have " + num2Text(flags[kFLAGS.CAMP_WALL_STATUES]) + " marble imp statues at camp!</b>");
+			}
+			if (timeToReturn >= 3) player.changeFatigue(25);
+			if (timeToReturn >= 4) player.changeFatigue(25);
+			combat.cleanupAfterCombat(curry(camp.returnToCamp, timeToReturn));
+		}
+
 		private function killImp():void {
 			clearOutput();
 			flags[kFLAGS.IMPS_KILLED]++;

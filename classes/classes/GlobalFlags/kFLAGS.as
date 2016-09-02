@@ -1308,8 +1308,8 @@ public static const DISABLE_QUICKSAVE_CONFIRM:int                               
 public static const BENOIT_EYES_TALK_UNLOCKED:int                                   = 1300; // Player has talked to Benoit(e) about basilisk eyes
 public static const BENOIT_BASIL_EYES_GRANTED:int                                   = 1301; // Counter to keep track, how often you gained them
 public static const BENOIT_HAIRPIN_TALKED_TODAY:int                                 = 1302; // Talked to Benoit(e) about the hairpin today
-public static const UNKNOWN_FLAG_NUMBER_01303:int                                   = 1303;
-public static const UNKNOWN_FLAG_NUMBER_01304:int                                   = 1304;
+public static const IMPS_PETRIFIED:int                                              = 1303; // Total imps petrified
+public static const CAMP_WALL_STATUES:int                                           = 1304; // Total imp statues at camp wall
 public static const UNKNOWN_FLAG_NUMBER_01305:int                                   = 1305;
 public static const UNKNOWN_FLAG_NUMBER_01306:int                                   = 1306;
 public static const UNKNOWN_FLAG_NUMBER_01307:int                                   = 1307;
