@@ -2086,7 +2086,7 @@ package classes.Scenes.Monsters
 			menu();
 			var toolTipText:String = "Carry the statue back to your camp to place it on or in front of your wall";
 			var toolTipHeader:String = "Carry the statue to the camp";
-			addButton(0, "Take Statue", takeStatue, null, null, null, toolTipText, toolTipHeader);
+			addButton(0, "Take Statue", curry(combat.cleanupAfterCombat, takeStatue), null, null, null, toolTipText, toolTipHeader);
 			addButton(1, "Leave", combat.cleanupAfterCombat);
 		}
 
@@ -2102,26 +2102,27 @@ package classes.Scenes.Monsters
 			var timeText:String = "";
 			timeText = timeToReturn > 1 ? num2Text(timeToReturn) + " hours" : "hour";
 
-			if (false && flags[kFLAGS.IMPS_PETRIFIED] <= 1) {
+			output.clear();
+			if (flags[kFLAGS.IMPS_PETRIFIED] <= 1) {
 				switch (timeToReturn) {
 					case 1: // str 90+ --> 1 hour
-						output.text("\n\nYou heft the statue onto your shoulder with a practised ease, as it is as light as a small wooden log for"
+						output.text("You heft the statue onto your shoulder with a practised ease, as it is as light as a small wooden log for"
 						           +" you. As you spend the next hour carrying it back to camp, you feel frustrated at the land for making your"
-						           +" journey so long. You put the statue down near your camp wall as you wonder how effective it will be at keeping"
+						           +" trip so long. You put the statue down near your camp wall as you wonder how effective it will be at keeping"
 						           +" these pests away.");
 						break;
 
 					case 2: // str 70-89 --> 2 hours
-						output.text("\n\nYou heft the statue onto your back with a practised ease, though maneuvering with the bulky thing is harder"
+						output.text("You heft the statue onto your back with a practised ease, though maneuvering with the bulky thing is harder"
 						           +" than you expected. For something so small, it sure is heavy. As you spend the next couple of hours carrying it"
 						           +" back to camp, you feel frustrated at the land for making your journey so long. You put the statue down near"
 						           +" your camp wall, stretching and rubbing at the sore spots on your back and shoulders as you wonder how"
 						           +" effective it will be at keeping these pests away.");
 						break;
 
-					case 3: // str 40-69 --> 3 hours, 25 fatigue
-					case 4: // str < 40  --> 4 hours, 50 fatigue
-						output.text("\n\nYou try to lift the statue, but are simply unable to. You huff angrily as you pace around it, trying to"
+					case 3: // str 40-69 --> 3 hours, 10 fatigue
+					case 4: // str < 40  --> 4 hours, 20 fatigue
+						output.text("You try to lift the statue, but are simply unable to. You huff angrily as you pace around it, trying to"
 						           +" figure out how you can get it back to camp. You look through your belongings and around the area for something"
 						           +" to help you move the damned thing. After 20 minutes of searching you manage to find enough resources to make a"
 						           +" small sled that you can pull along with some rope. You position it behind the statue and kick the statue over,"
@@ -2132,7 +2133,7 @@ package classes.Scenes.Monsters
 					// default: // there is no default. All possible cases are handled ...
 				}
 			} else {
-				output.text("\n\nIn the " + timeText + " it takes to [if (strength >= 70) carry|drag] the statue back to camp, you don't encounter"
+				output.text("In the " + timeText + " it takes to [if (strength >= 70) carry|drag] the statue back to camp, you don't encounter"
 				           +" any further trouble, though you're sure the sight of the statue, which you now place around your wall,"
 				           +" helped with that. Maybe it'll help here too.");
 			}
@@ -2142,9 +2143,9 @@ package classes.Scenes.Monsters
 			} else {
 				output.text("\n\n<b>You now have " + num2Text(flags[kFLAGS.CAMP_WALL_STATUES]) + " marble imp statues at camp!</b>");
 			}
-			if (timeToReturn >= 3) player.changeFatigue(25);
-			if (timeToReturn >= 4) player.changeFatigue(25);
-			combat.cleanupAfterCombat(curry(camp.returnToCamp, timeToReturn));
+			if (timeToReturn >= 3) player.changeFatigue(10);
+			if (timeToReturn >= 4) player.changeFatigue(10);
+			doNext(curry(camp.returnToCamp, timeToReturn));
 		}
 
 		private function killImp():void {

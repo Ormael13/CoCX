@@ -159,7 +159,7 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 		if (vapula.vapulaSlave()) temp += 7;
 		//Reduce chance
 		var scarePercent:Number = 0;
-		scarePercent += flags[kFLAGS.CAMP_WALL_SKULLS] + flags[kFLAGS.CAMP_WALL_STATUES] * 2;
+		scarePercent += flags[kFLAGS.CAMP_WALL_SKULLS] + flags[kFLAGS.CAMP_WALL_STATUES] * 4;
 		if (scarePercent > 100) scarePercent = 100;
 		if (flags[kFLAGS.CAMP_WALL_PROGRESS] > 0) temp /= 1 + (flags[kFLAGS.CAMP_WALL_PROGRESS] / 100);
 		if (flags[kFLAGS.CAMP_WALL_GATE] > 0) temp /= 2;
