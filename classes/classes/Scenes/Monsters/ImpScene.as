@@ -2103,7 +2103,8 @@ package classes.Scenes.Monsters
 			timeText = timeToReturn > 1 ? num2Text(timeToReturn) + " hours" : "hour";
 
 			output.clear();
-			if (flags[kFLAGS.IMPS_PETRIFIED] <= 1) {
+			if (flags[kFLAGS.CAMP_WALL_STATUES] <= 0) { // First time carrying it back
+				flags[kFLAGS.CAMP_WALL_STATUES] = 0; // Failsafe
 				switch (timeToReturn) {
 					case 1: // str 90+ --> 1 hour
 						output.text("You heft the statue onto your shoulder with a practised ease, as it is as light as a small wooden log for"
