@@ -34,8 +34,9 @@ package classes.Scenes.Monsters
 			}
 			else {
 				outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses and begins masturbating feverishly.", true);
-				addKillPetrifyButtons();
-				addButton(4, "Leave", combat.cleanupAfterCombat);
+				if (addKillPetrifyButtons())
+					addButton(4, "Leave", combat.cleanupAfterCombat);
+				else combat.cleanupAfterCombat();
 				return;
 			}
 			if (player.lust > 33) {
@@ -1541,8 +1542,7 @@ package classes.Scenes.Monsters
 			clearOutput();
 			if (monster.HP < 1) {
 				outputText("The greater imp falls to the ground panting and growling in anger.  He quickly submits however, the thoroughness of his defeat obvious.  You walk towards the imp who gives one last defiant snarl before slipping into unconsciousness.");
-				if (monster.short != "imp overlord") addKillPetrifyButtons();
-				else {
+				if (!addKillPetrifyButtons()) {
 					combat.cleanupAfterCombat();
 					return;
 				}
@@ -1553,7 +1553,7 @@ package classes.Scenes.Monsters
 				//Leave // Rape]
 				menu();
 				if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) addButton(0, "Sex", sexAnImpLord);
-				if (monster.short != "imp overlord") addKillPetrifyButtons(1);
+				addKillPetrifyButtons(1);
 				addButton(4, "Leave", combat.cleanupAfterCombat);
 			}
 		}
@@ -2001,14 +2001,30 @@ package classes.Scenes.Monsters
 			combat.cleanupAfterCombat();
 		}
 
-		private function addKillPetrifyButtons(killButtonPos:Number = NaN, petriButtonPos:Number = NaN):void
+		private function impPetrifyable():Boolean
 		{
+			return player.isBasilisk() && flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100;
+		}
+
+		private function addKillPetrifyButtons(killButtonPos:Number = NaN, petriButtonPos:Number = NaN):Boolean
+		{
+			var buttonCount:int = 0;
+
+			if (monster.short == "imp overlord") return false;
+
 			if (isNaN(killButtonPos)) killButtonPos = 0;
-			if (isNaN(petriButtonPos)) petriButtonPos = killButtonPos + 1;
-			if (killButtonPos >= 0) addButton(killButtonPos, "Kill Him", killImp);
-			if (player.isBasilisk() && flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) {
-				addButton(petriButtonPos, "Petrify Him", petrifyImp);
+			if (killButtonPos >= 0 && monster.HP < 1) {
+				addButton(killButtonPos, "Kill Him", killImp);
+				buttonCount++;
 			}
+
+			if (isNaN(petriButtonPos)) petriButtonPos = killButtonPos + 1;
+			if (impPetrifyable()) {
+				addButton(petriButtonPos, "Petrify Him", petrifyImp);
+				buttonCount++;
+			}
+
+			return buttonCount > 0;
 		}
 
 		private function petrifyImp():void
