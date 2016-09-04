@@ -2035,6 +2035,15 @@ package classes.Scenes.Monsters
 			var benoitE:String = getGame().bazaar.benoit.benoitMF("Benoit", "Benoite");
 
 			output.clear();
+			if (monster.HP >= 1 && (50 + 50 * (1 - monster.HPRatio())) < rand(100)) {
+				output.text("You decide to teach this imp and his buddies a lesson that won't be forgotten. You grab the imp roughly, making sure you"
+				           +" have his attention as you make eye contact. The imp struggles in your grasp and manages to struggle himself free.");
+				output.text("\n\nPerhaps your should have beaten him down a little" + (monster.HPRatio() < 1 ? " more" : "") 
+				           +", before you've attempted the turn him into a statue?");
+				doNext(combat.cleanupAfterCombat);
+				return;
+			}
+
 			if (flags[kFLAGS.IMPS_PETRIFIED] <= 0) { // First time
 				flags[kFLAGS.IMPS_PETRIFIED] = 0; // Failsafe
 
