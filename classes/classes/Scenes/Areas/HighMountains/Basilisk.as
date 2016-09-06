@@ -32,7 +32,7 @@ package classes.Scenes.Areas.HighMountains
 			//Success:
 			if (player.inte / 5 + rand(20) < 24 + player.newGamePlusMod() * 5) {
 				//Immune to Basilisk?
-				if (player.findPerk(PerkLib.BasiliskResistance) >= 0) {
+				if (player.findPerk(PerkLib.BasiliskResistance) >= 0 || player.canCombatStare()) {
 					outputText("You can't help yourself... you glimpse the reptile's grey, slit eyes. However, no matter how much you look into the eyes, you do not see anything wrong. All you can see is the basilisk. The basilisk curses as he finds out that you're immune!", false);
 				}
 				else {
@@ -105,11 +105,15 @@ package classes.Scenes.Areas.HighMountains
 			this.hipRating = HIP_RATING_SLENDER+1;
 			this.buttRating = BUTT_RATING_AVERAGE;
 			this.lowerBody = LOWER_BODY_TYPE_LIZARD;
-			this.skinTone = "gray";
+			this.faceType = FACE_LIZARD;
+			this.earType = EARS_LIZARD;
+			this.eyeType = EYES_BASILISK;
+			this.hairType = HAIR_BASILISK_SPINES;
+			this.skinTone = "grey-green";
 			this.skinType = SKIN_TYPE_SCALES;
 			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_SCALES];
-			this.hairColor = "none";
-			this.hairLength = 0;
+			this.hairColor = "grey-green";
+			this.hairLength = 2;
 			initStrTouSpeInte(85, 70, 35, 70);
 			initLibSensCor(50, 35, 60);
 			this.weaponName = "claws";
@@ -126,8 +130,9 @@ package classes.Scenes.Areas.HighMountains
 			this.level = 12;
 			this.gems = rand(10) + 10;
 			this.drop = new ChainedDrop().add(consumables.REPTLUM,0.9);
-			this.tailType = TAIL_TYPE_COW;
+			this.tailType = TAIL_TYPE_LIZARD;
 			this.tailRecharge = 0;
+			this.createPerk(PerkLib.BasiliskResistance, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

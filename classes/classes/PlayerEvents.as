@@ -218,7 +218,7 @@ package classes {
 				}
 			}*/
 			if (flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] >= 100 && player.findPerk(PerkLib.BasiliskResistance) < 0) {
-				outputText("\nYou notice that you feel a bit stiff and your skin is a bit harder.  Something clicks in your mind as you finally unlock the potential to protect yourself from the goddamn basilisks! \n\n(<b>Gained Perk: Basilisk Resistance - Your maximum speed is permanently decreased but you are now immune to the basilisk's gaze!</b>)\n");
+				outputText("\nYou notice that you feel a bit stiff and your skin is a bit harder.  Something clicks in your mind as you finally unlock the potential to protect yourself from the goddamn basilisks! \n\n(<b>Gained Perk: Basilisk Resistance - Your maximum speed is permanently decreased unless you are a basilisk, but you are now immune to the basilisk's gaze!</b>)\n");
 				player.createPerk(PerkLib.BasiliskResistance, 0, 0, 0, 0);
 				needNext = true;
 			}

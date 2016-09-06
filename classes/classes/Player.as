@@ -2447,7 +2447,7 @@ use namespace kGAMECLASS;
 				if (maxSpe < 50) maxSpe = 50;
 			}
 			//Perks ahoy
-			if (findPerk(PerkLib.BasiliskResistance) >= 0)
+			if (findPerk(PerkLib.BasiliskResistance) >= 0 && !isBasilisk())
 			{
 				maxSpe -= 5;
 			}
@@ -2476,6 +2476,11 @@ use namespace kGAMECLASS;
 			}
 			if (lizardScore() >= 4) {
 				maxInt += 10;
+				if (isBasilisk()) {
+					// Needs more balancing, especially other races, since dracolisks are quite OP right now!
+					maxTou += 5;
+					maxInt += 5;
+				}
 			}
 			if (dragonScore() >= 4) {
 				maxStr += 5;

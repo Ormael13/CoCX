@@ -98,11 +98,14 @@ package classes.Scenes.Dungeons.D3
 			hipRating = HIP_RATING_AVERAGE;
 			buttRating = BUTT_RATING_AVERAGE;
 			lowerBody = LOWER_BODY_TYPE_LIZARD;
+			tailType = TAIL_TYPE_LIZARD;
 			skinDesc = "green-purple mottled hide";
 			initStrTouSpeInte(80, 100, 80, 60);
 			initLibSensCor(40, 40, 80);
 			faceType = FACE_LIZARD;
-			
+			earType = EARS_LIZARD;
+			eyeType = EYES_BASILISK;
+
 			weaponName = "cutlass";
 			weaponVerb = "slash";
 			weaponAttack = 20;
@@ -117,7 +120,9 @@ package classes.Scenes.Dungeons.D3
 			gems = 300 + rand(55);
 			
 			this.drop = NO_DROP;
-			
+
+			this.createPerk(PerkLib.BasiliskResistance, 0, 0, 0, 0);
+
 			checkMonster();
 		}
 		
