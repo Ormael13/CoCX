@@ -2447,7 +2447,7 @@ use namespace kGAMECLASS;
 				if (maxSpe < 50) maxSpe = 50;
 			}
 			//Perks ahoy
-			if (findPerk(PerkLib.BasiliskResistance) >= 0 && !isBasilisk())
+			if (findPerk(PerkLib.BasiliskResistance) >= 0 && !canUseStare())
 			{
 				maxSpe -= 5;
 			}

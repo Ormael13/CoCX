@@ -1985,7 +1985,7 @@ package classes
 
 		}
 
-		public function canCombatStare():Boolean
+		public function canUseStare():Boolean
 		{
 			return eyeType == EYES_BASILISK;
 		}

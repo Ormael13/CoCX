@@ -32,7 +32,7 @@ package classes.Scenes.Areas.HighMountains
 			//Success:
 			if (player.inte / 5 + rand(20) < 24 + player.newGamePlusMod() * 5) {
 				//Immune to Basilisk?
-				if (player.findPerk(PerkLib.BasiliskResistance) >= 0 || player.canCombatStare()) {
+				if (player.findPerk(PerkLib.BasiliskResistance) >= 0 || player.canUseStare()) {
 					outputText("You can't help yourself... you glimpse the reptile's grey, slit eyes. However, no matter how much you look into the eyes, you do not see anything wrong. All you can see is the basilisk. The basilisk curses as he finds out that you're immune!", false);
 				}
 				else {

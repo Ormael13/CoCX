@@ -711,6 +711,9 @@ package classes.Scenes.Combat
 				addButton(button++, "FoxFire", foxFire, null, null, null, "Unleash an ethereal blue flame at your opponent for high damage. More effective against corrupted enemies. \n\nFatigue Cost: " + player.spellCost(35));
 				addButton(button++, "Illusion", kitsuneIllusion, null, null, null, "Warp the reality around your opponent, lowering their speed. The more you cast this in a battle, the lesser effective it becomes. \n\nFatigue Cost: " + player.spellCost(25));
 			}
+			if (player.canUseStare()) {
+				addButton(button++, "Stare", paralyzingStare, null, null, null, "Focus your gaze at your opponent, lowering their speed. The more you use this in a battle, the lesser effective it becomes. \n\nFatigue Cost: " + player.spellCost(20));
+			}
 			if (player.hasKeyItem("Arian's Charged Talisman") >= 0) {
 				if (player.keyItemv1("Arian's Charged Talisman") == 1) addButton(button++, "Dispel", dispellingSpell);
 				if (player.keyItemv1("Arian's Charged Talisman") == 2) addButton(button++, "Healing", healingSpell);
@@ -1308,7 +1311,58 @@ package classes.Scenes.Combat
 			}
 			monster.doAI();
 		}
-		
+		//Stare
+		public function paralyzingStare():void
+		{
+			output.clear();
+			//Fatigue Cost: 20
+			if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + player.spellCost(20) > player.maxFatigue()) {
+				output.text("You are too tired to use this ability.");
+				doNext(magicalSpecials);
+				return;
+			}
+			if (player.findStatusEffect(StatusEffects.ThroatPunch) >= 0 || player.findStatusEffect(StatusEffects.WebSilence) >= 0) {
+				output.text("You cannot talk to keep up the compulsion while you're having so much difficulty breathing.");
+				doNext(magicalSpecials);
+				return;
+			}
+			if (monster.short == "pod" || monster.inte == 0) {
+				output.text("In the tight confines of this pod, there's no use making such an attack!\n\n");
+				player.changeFatigue(1);
+				monster.doAI();
+				return;
+			}
+			player.changeFatigue(20, 1);
+			if (monster.findStatusEffect(StatusEffects.Shell) >= 0) {
+				output.text("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
+				monster.doAI();
+				return;
+			}
+			output.text("The world begins to twist and distort around you as reality bends to your will, " + monster.a + monster.short + "'s mind blanketed in the thick fog of your illusions.");
+
+			if (flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] > 100)
+				flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] = 100;
+
+			var stareTraining:Number = flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] / 100;
+			var slowEffect:Number = monster.statusEffectv1(StatusEffects.BasiliskSlow);
+			if (slowEffect < 3 && (monster.inte / 2 + 55 - stareTraining * 20 + monster.statusEffectv1(StatusEffects.BasiliskSlow) * 10 - player.inte / 2 < rand(100))) {
+			//Reduce speed down to -24 (no training) or -36 (full training).
+				output.text("  They stumble humorously to and fro, unable to keep pace with the shifting illusions that cloud their perceptions.\n\n");
+				if (slowEffect > 0)
+					monster.addStatusValue(StatusEffects.BasiliskSlow, 1, 1);
+				else
+					monster.createStatusEffect(StatusEffects.BasiliskSlow, 1, 0, 0, 0);
+				slowEffect++;
+				if (monster.spe > 1) monster.spe -= 16 + stareTraining * 8 - slowEffect * (4 + stareTraining * 2);
+				if (monster.spe < 1) monster.spe = 1;
+				flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 4;
+			} else {
+				output.text("  Like the snapping of a rubber band, reality falls back into its rightful place as " + monster.a + monster.short + " resists your compulsion.\n\n");
+				flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
+			}
+			monster.doAI();
+		}
+
 		//------------
 		// P. SPECIALS
 		//------------
