@@ -1345,7 +1345,7 @@ package classes.Scenes.Combat
 
 			var stareTraining:Number = flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] / 100;
 			var slowEffect:Number = monster.statusEffectv1(StatusEffects.BasiliskSlow);
-			if (slowEffect < 3 && (monster.inte / 2 + 55 - stareTraining * 20 + monster.statusEffectv1(StatusEffects.BasiliskSlow) * 10 - player.inte / 2 < rand(100))) {
+			if (slowEffect < 3 && (monster.inte + 110 - stareTraining * 30 + slowEffect * 10 - player.inte < rand(100))) {
 			//Reduce speed down to -24 (no training) or -36 (full training).
 				output.text("  They stumble humorously to and fro, unable to keep pace with the shifting illusions that cloud their perceptions.\n\n");
 				if (slowEffect > 0)
