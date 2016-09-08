@@ -1338,7 +1338,10 @@ package classes.Scenes.Combat
 				monster.doAI();
 				return;
 			}
-			output.text("The world begins to twist and distort around you as reality bends to your will, " + monster.a + monster.short + "'s mind blanketed in the thick fog of your illusions.");
+			var theMonster:String = monster.a + monster.short;
+			output.text("You open your mouth and, staring at " + theMonster + ", uttering calming words to soothe " + monster.pronoun3 + " mind."
+			           +"  The sounds bore into " + theMonster + "'s mind, working and buzzing at the edges of " + monster.pronoun3 + " resolve,"
+			           +" suggesting, compelling, then demanding " + monster.pronoun2 + " to look into your eyes.  ");
 
 			if (flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] > 100)
 				flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] = 100;
@@ -1350,7 +1353,12 @@ package classes.Scenes.Combat
 			var message:String = "";
 			if (slowEffect < 3 && (monster.inte + 110 - stareTraining * 30 + slowEffect * 10 - player.inte < rand(100))) {
 			//Reduce speed down to -24 (no training) or -36 (full training).
-				message = "  They stumble humorously to and fro, unable to keep pace with the shifting illusions that cloud their perceptions. ";
+				message = monster.Pronoun1 + " can't help " + monster.pronoun2 + "self... " + monster.pronoun1 + " glimpses your eyes. "
+				        + monster.Pronoun1 + " looks away quickly, but " + monster.pronoun1 + " can picture them in " + monster.pronoun3
+				        + " mind's eye, staring in at " + monster.pronoun3 + " thoughts, making " + monster.pronoun2 + " feel sluggish and unable to"
+				        + " coordinate. Something about the helplessness of it feels so good... " + monster.pronoun1 + " can't banish the feeling"
+				        + " that really, " + monster.pronoun1 + " wants to look into your eyes forever, for you to have total control over "
+				        + monster.pronoun2 + ". ";
 				if (slowEffect > 0)
 					monster.addStatusValue(StatusEffects.BasiliskSlow, 1, 1);
 				else
@@ -1362,7 +1370,7 @@ package classes.Scenes.Combat
 				speedDiff = Math.round(oldSpeed - monster.spe);
 				output.text(message + combat.getDamageText(speedDiff) + "\n\n");
 			} else {
-				output.text("  Like the snapping of a rubber band, reality falls back into its rightful place as " + monster.a + monster.short + " resists your compulsion.\n\n");
+				output.text("Like the snapping of a rubber band, reality falls back into its rightful place as " + monster.a + monster.short + " escapes your gaze.\n\n");
 				flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
 			}
 			monster.doAI();
