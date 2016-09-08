@@ -1345,9 +1345,12 @@ package classes.Scenes.Combat
 
 			var stareTraining:Number = flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] / 100;
 			var slowEffect:Number = monster.statusEffectv1(StatusEffects.BasiliskSlow);
+			var oldSpeed:Number = monster.spe;
+			var speedDiff:int = 0;
+			var message:String = "";
 			if (slowEffect < 3 && (monster.inte + 110 - stareTraining * 30 + slowEffect * 10 - player.inte < rand(100))) {
 			//Reduce speed down to -24 (no training) or -36 (full training).
-				output.text("  They stumble humorously to and fro, unable to keep pace with the shifting illusions that cloud their perceptions.\n\n");
+				message = "  They stumble humorously to and fro, unable to keep pace with the shifting illusions that cloud their perceptions. ";
 				if (slowEffect > 0)
 					monster.addStatusValue(StatusEffects.BasiliskSlow, 1, 1);
 				else
@@ -1356,6 +1359,8 @@ package classes.Scenes.Combat
 				if (monster.spe > 1) monster.spe -= 16 + stareTraining * 8 - slowEffect * (4 + stareTraining * 2);
 				if (monster.spe < 1) monster.spe = 1;
 				flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 4;
+				speedDiff = Math.round(oldSpeed - monster.spe);
+				output.text(message + combat.getDamageText(speedDiff) + "\n\n");
 			} else {
 				output.text("  Like the snapping of a rubber band, reality falls back into its rightful place as " + monster.a + monster.short + " resists your compulsion.\n\n");
 				flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;

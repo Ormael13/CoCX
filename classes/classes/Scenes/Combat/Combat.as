@@ -1137,11 +1137,7 @@ package classes.Scenes.Combat
 			
 			if (damage < 0) damage = 1;
 			if (apply) monster.HP -= damage;
-			if (display) {
-				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
-				else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
-				else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
-			}
+			if (display) output.text(getDamageText(damage));
 			//Isabella gets mad
 			if (monster.short == "Isabella") {
 				flags[kFLAGS.ISABELLA_AFFECTION]--;
@@ -1157,6 +1153,15 @@ package classes.Scenes.Combat
 
 		public function takeDamage(damage:Number, display:Boolean = false):Number {
 			return player.takeDamage(damage, display);
+		}
+
+		public function getDamageText(damage:Number):String
+		{
+			var color:String;
+			if (damage > 0)  color = "#800000";
+			if (damage == 0) color = "#000080";
+			if (damage < 0)  color = "#008000";
+			return "<b>(<font color=\"" + color + "\">" + damage + "</font>)</b>";
 		}
 
 		public function finishCombat():void
