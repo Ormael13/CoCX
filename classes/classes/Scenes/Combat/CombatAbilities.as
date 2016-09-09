@@ -3,8 +3,10 @@ package classes.Scenes.Combat
 	import classes.*;
 	import classes.GlobalFlags.*;
 	import classes.Items.*;
+	import classes.Scenes.Areas.Forest.TentacleBeast;
 	import classes.Scenes.Areas.GlacialRift.FrostGiant;
 	import classes.Scenes.Dungeons.D3.*;
+	import classes.Scenes.Dungeons.DeepCave.*;
 	import classes.Scenes.Dungeons.HelDungeon.*;
 	import classes.Scenes.NPCs.*;
 	import classes.Scenes.Places.TelAdre.UmasShop;
@@ -1314,6 +1316,15 @@ package classes.Scenes.Combat
 		//Stare
 		public function paralyzingStare():void
 		{
+			var theMonster:String = monster.a + monster.short;
+			var TheMonster:String = monster.capitalA + monster.short;
+			var stareTraining:Number = flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] / 100;
+			var slowEffect:Number = monster.statusEffectv1(StatusEffects.BasiliskSlow);
+			var oldSpeed:Number = monster.spe;
+			var speedDiff:int = 0;
+			var message:String = "";
+			if (stareTraining > 1) stareTraining = 1;
+
 			output.clear();
 			//Fatigue Cost: 20
 			if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + player.spellCost(20) > player.maxFatigue()) {
@@ -1326,39 +1337,44 @@ package classes.Scenes.Combat
 				doNext(magicalSpecials);
 				return;
 			}
-			if (monster.short == "pod" || monster.inte == 0) {
+			if (monster is EncapsulationPod || monster.inte == 0) {
 				output.text("In the tight confines of this pod, there's no use making such an attack!\n\n");
 				player.changeFatigue(1);
 				monster.doAI();
 				return;
 			}
-			player.changeFatigue(20, 1);
-			if (monster.findStatusEffect(StatusEffects.Shell) >= 0) {
-				output.text("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
+			if (monster is TentacleBeast) {
+				output.text("You try to find the beast's eyes to stare at them, but you soon realize, that it has none at all!\n\n");
+				player.changeFatigue(1);
 				monster.doAI();
 				return;
 			}
-			var theMonster:String = monster.a + monster.short;
+			if (monster.findPerk(PerkLib.BasiliskResistance) >= 0) {
+				output.text("You attempt to apply your paralyzing stare at " + theMonster + ", but you soon realize, that " + monster.pronoun1
+				           +" is immune to your eyes, so you quickly back up.\n\n");
+				player.changeFatigue(10, 1);
+				monster.doAI();
+				return;
+			}
+			player.changeFatigue(20, 1);
+			if (monster.findStatusEffect(StatusEffects.Shell) >= 0) {
+				output.text("As soon as your magic touches the multicolored shell around " + theMonster + ", it sizzles and fades to nothing."
+				           +"  Whatever that thing is, it completely blocks your magic!\n\n");
+				monster.doAI();
+				return;
+			}
+
 			output.text("You open your mouth and, staring at " + theMonster + ", uttering calming words to soothe " + monster.pronoun3 + " mind."
 			           +"  The sounds bore into " + theMonster + "'s mind, working and buzzing at the edges of " + monster.pronoun3 + " resolve,"
 			           +" suggesting, compelling, then demanding " + monster.pronoun2 + " to look into your eyes.  ");
 
-			if (flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] > 100)
-				flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] = 100;
-
-			var stareTraining:Number = flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] / 100;
-			var slowEffect:Number = monster.statusEffectv1(StatusEffects.BasiliskSlow);
-			var oldSpeed:Number = monster.spe;
-			var speedDiff:int = 0;
-			var message:String = "";
 			if (slowEffect < 3 && (monster.inte + 110 - stareTraining * 30 + slowEffect * 10 - player.inte < rand(100))) {
 			//Reduce speed down to -24 (no training) or -36 (full training).
-				message = monster.Pronoun1 + " can't help " + monster.pronoun2 + "self... " + monster.pronoun1 + " glimpses your eyes. "
-				        + monster.Pronoun1 + " looks away quickly, but " + monster.pronoun1 + " can picture them in " + monster.pronoun3
-				        + " mind's eye, staring in at " + monster.pronoun3 + " thoughts, making " + monster.pronoun2 + " feel sluggish and unable to"
-				        + " coordinate. Something about the helplessness of it feels so good... " + monster.pronoun1 + " can't banish the feeling"
-				        + " that really, " + monster.pronoun1 + " wants to look into your eyes forever, for you to have total control over "
-				        + monster.pronoun2 + ". ";
+				message = TheMonster + " can't help " + monster.pronoun2 + "self... " + monster.pronoun1 + " glimpses your eyes. " + monster.Pronoun1
+				        + " looks away quickly, but " + monster.pronoun1 + " can picture them in " + monster.pronoun3 + " mind's eye, staring in at "
+				        + monster.pronoun3 + " thoughts, making " + monster.pronoun2 + " feel sluggish and unable to coordinate. Something about the"
+				        + " helplessness of it feels so good... " + monster.pronoun1 + " can't banish the feeling that really, " + monster.pronoun1
+				        + " wants to look into your eyes forever, for you to have total control over " + monster.pronoun2 + ". ";
 				if (slowEffect > 0)
 					monster.addStatusValue(StatusEffects.BasiliskSlow, 1, 1);
 				else
