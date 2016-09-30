@@ -373,8 +373,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.7b";
-			version = ver + " (<b>(Pure) Holli, Mara Fruit (plant TF), He'Xin'Dao (part 2), Libido on lvl-up screen and many minor changes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.7c";
+			version = ver + " (<b>Ascension rework (part 1), Fenrir TF, Winter Wolf enc</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
