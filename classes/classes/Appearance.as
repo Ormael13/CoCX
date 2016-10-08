@@ -2227,7 +2227,9 @@
 					[HAIR_GHOST, "transparent"],
 					[HAIR_GOO, "goopy"],
 					[HAIR_ANEMONE, "tentacle"],
-					[HAIR_QUILL, "quill"]
+					[HAIR_QUILL, "quill"],
+					[HAIR_BASILISK_SPINES, "spiny basilisk"],
+					[HAIR_BASILISK_PLUME, "feathery plume"],
 				]
 		);
 		public static const DEFAULT_BEARD_NAMES:Object = createMapFromPairs(

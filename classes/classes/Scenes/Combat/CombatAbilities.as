@@ -3,8 +3,10 @@ package classes.Scenes.Combat
 	import classes.*;
 	import classes.GlobalFlags.*;
 	import classes.Items.*;
+	import classes.Scenes.Areas.Forest.TentacleBeast;
 	import classes.Scenes.Areas.GlacialRift.FrostGiant;
 	import classes.Scenes.Dungeons.D3.*;
+	import classes.Scenes.Dungeons.DeepCave.*;
 	import classes.Scenes.Dungeons.HelDungeon.*;
 	import classes.Scenes.NPCs.*;
 	import classes.Scenes.Places.TelAdre.UmasShop;
@@ -711,6 +713,9 @@ package classes.Scenes.Combat
 				addButton(button++, "FoxFire", foxFire, null, null, null, "Unleash an ethereal blue flame at your opponent for high damage. More effective against corrupted enemies. \n\nFatigue Cost: " + player.spellCost(35));
 				addButton(button++, "Illusion", kitsuneIllusion, null, null, null, "Warp the reality around your opponent, lowering their speed. The more you cast this in a battle, the lesser effective it becomes. \n\nFatigue Cost: " + player.spellCost(25));
 			}
+			if (player.canUseStare()) {
+				addButton(button++, "Stare", paralyzingStare, null, null, null, "Focus your gaze at your opponent, lowering their speed. The more you use this in a battle, the lesser effective it becomes. \n\nFatigue Cost: " + player.spellCost(20));
+			}
 			if (player.hasKeyItem("Arian's Charged Talisman") >= 0) {
 				if (player.keyItemv1("Arian's Charged Talisman") == 1) addButton(button++, "Dispel", dispellingSpell);
 				if (player.keyItemv1("Arian's Charged Talisman") == 2) addButton(button++, "Healing", healingSpell);
@@ -1308,7 +1313,85 @@ package classes.Scenes.Combat
 			}
 			monster.doAI();
 		}
-		
+		//Stare
+		public function paralyzingStare():void
+		{
+			var theMonster:String = monster.a + monster.short;
+			var TheMonster:String = monster.capitalA + monster.short;
+			var stareTraining:Number = flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] / 100;
+			var slowEffect:Number = monster.statusEffectv1(StatusEffects.BasiliskSlow);
+			var oldSpeed:Number = monster.spe;
+			var speedDiff:int = 0;
+			var message:String = "";
+			if (stareTraining > 1) stareTraining = 1;
+
+			output.clear();
+			//Fatigue Cost: 20
+			if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + player.spellCost(20) > player.maxFatigue()) {
+				output.text("You are too tired to use this ability.");
+				doNext(magicalSpecials);
+				return;
+			}
+			if (player.findStatusEffect(StatusEffects.ThroatPunch) >= 0 || player.findStatusEffect(StatusEffects.WebSilence) >= 0) {
+				output.text("You cannot talk to keep up the compulsion while you're having so much difficulty breathing.");
+				doNext(magicalSpecials);
+				return;
+			}
+			if (monster is EncapsulationPod || monster.inte == 0) {
+				output.text("In the tight confines of this pod, there's no use making such an attack!\n\n");
+				player.changeFatigue(1);
+				monster.doAI();
+				return;
+			}
+			if (monster is TentacleBeast) {
+				output.text("You try to find the beast's eyes to stare at them, but you soon realize, that it has none at all!\n\n");
+				player.changeFatigue(1);
+				monster.doAI();
+				return;
+			}
+			if (monster.findPerk(PerkLib.BasiliskResistance) >= 0) {
+				output.text("You attempt to apply your paralyzing stare at " + theMonster + ", but you soon realize, that " + monster.pronoun1
+				           +" is immune to your eyes, so you quickly back up.\n\n");
+				player.changeFatigue(10, 1);
+				monster.doAI();
+				return;
+			}
+			player.changeFatigue(20, 1);
+			if (monster.findStatusEffect(StatusEffects.Shell) >= 0) {
+				output.text("As soon as your magic touches the multicolored shell around " + theMonster + ", it sizzles and fades to nothing."
+				           +"  Whatever that thing is, it completely blocks your magic!\n\n");
+				monster.doAI();
+				return;
+			}
+
+			output.text("You open your mouth and, staring at " + theMonster + ", uttering calming words to soothe " + monster.pronoun3 + " mind."
+			           +"  The sounds bore into " + theMonster + "'s mind, working and buzzing at the edges of " + monster.pronoun3 + " resolve,"
+			           +" suggesting, compelling, then demanding " + monster.pronoun2 + " to look into your eyes.  ");
+
+			if (slowEffect < 3 && (monster.inte + 110 - stareTraining * 30 + slowEffect * 10 - player.inte < rand(100))) {
+			//Reduce speed down to -24 (no training) or -36 (full training).
+				message = TheMonster + " can't help " + monster.pronoun2 + "self... " + monster.pronoun1 + " glimpses your eyes. " + monster.Pronoun1
+				        + " looks away quickly, but " + monster.pronoun1 + " can picture them in " + monster.pronoun3 + " mind's eye, staring in at "
+				        + monster.pronoun3 + " thoughts, making " + monster.pronoun2 + " feel sluggish and unable to coordinate. Something about the"
+				        + " helplessness of it feels so good... " + monster.pronoun1 + " can't banish the feeling that really, " + monster.pronoun1
+				        + " wants to look into your eyes forever, for you to have total control over " + monster.pronoun2 + ". ";
+				if (slowEffect > 0)
+					monster.addStatusValue(StatusEffects.BasiliskSlow, 1, 1);
+				else
+					monster.createStatusEffect(StatusEffects.BasiliskSlow, 1, 0, 0, 0);
+				slowEffect++;
+				if (monster.spe > 1) monster.spe -= 16 + stareTraining * 8 - slowEffect * (4 + stareTraining * 2);
+				if (monster.spe < 1) monster.spe = 1;
+				flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 4;
+				speedDiff = Math.round(oldSpeed - monster.spe);
+				output.text(message + combat.getDamageText(speedDiff) + "\n\n");
+			} else {
+				output.text("Like the snapping of a rubber band, reality falls back into its rightful place as " + monster.a + monster.short + " escapes your gaze.\n\n");
+				flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
+			}
+			monster.doAI();
+		}
+
 		//------------
 		// P. SPECIALS
 		//------------

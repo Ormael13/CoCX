@@ -1984,7 +1984,12 @@ package classes
 			return _wingType == 2 || _wingType == 7 || _wingType == 9 || _wingType == 11 || _wingType == 12;
 
 		}
-		
+
+		public function canUseStare():Boolean
+		{
+			return eyeType == EYES_BASILISK;
+		}
+
 		//check for vagoo
 		public function hasVagina():Boolean
 		{

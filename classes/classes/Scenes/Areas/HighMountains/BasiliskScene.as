@@ -234,7 +234,7 @@ package classes.Scenes.Areas.HighMountains
 			}
 			dynStats("spe", player.findPerk(PerkLib.BasiliskResistance) < 0 ? 3 : 1, "lus", 399);
 			//Bad end
-			if (player.spe < 5 && player.findPerk(PerkLib.BasiliskResistance) < 0) {
+			if (player.spe < 5 && player.findPerk(PerkLib.BasiliskResistance) < 0 && !player.canUseStare()) {
 				basiliskBadEnd();
 				return;
 			}
