@@ -352,7 +352,7 @@ package classes.Scenes.Dungeons.D3
 		
 		public function afterDriderbuttFight():void
 		{
-			combat.cleanupAfterCombat(getGame().d3.resumeFromFight);
+			combat.cleanupAfterCombat(getGame().dungeons.resumeFromFight);
 		}
 		
 		public function killDrider():void

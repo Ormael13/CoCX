@@ -42,9 +42,9 @@ package classes
 		public var initializedThirdRow:Boolean = false;
 		public var initializedGradients:Boolean = false;
 		
-		public const textColorArray:Array = [null, null, null, 0xFFFFFF, 0xFFFFFF, null, null, null, null, null];
-		public const mainColorArray:Array = [null, null, null, null, 0xFFFFFF, null, null, null, null, null];
-		public const barAlphaArray:Array = [0.4, 0.4, 0.5, 1, 1, 1, 1, 1, 1, 1];
+		public const textColorArray:Array = [null, null, null, 0xC0C0C0, 0xC0C0C0, null, null, null, null, null];
+		public const mainColorArray:Array = [null, null, null, null, 0xC0C0C0, null, null, null, null, null];
+		public const barAlphaArray:Array = [0.4, 0.4, 0.5, 1, 1, 1, 1, 1, 1, 0.4];
 		
 		public var statsHidden:Boolean = false;
 		public var buttonsTweened:Boolean = false;

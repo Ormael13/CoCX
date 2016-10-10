@@ -511,7 +511,7 @@ public function heliaFollowerMenu(display:Boolean = true):void {
 			addButton(2,"Threesomes",heliaThreesomes, null, null, null, "Invite someone for threesomes activity with Helia!");
 		}
 		addButton(4,"Talk",heliaOptions, null, null, null, "Discuss with Helia about various topics.");
-		if (!kGAMECLASS.helScene.pregnancy.isPregnant) addButton(5,"Spar",sparWithHeliaFirebuttsAreHot, null, null, null, "Do some quick fight sessions!");
+		if (!kGAMECLASS.helScene.pregnancy.isPregnant) addButton(5,"Spar",sparWithHeliaFirebuttsAreHot, null, null, null, "Do a quick fight session with Helia! \n\nCurrent Intensity: " + getGame().helScene.heliaSparIntensity());
 		else outputText("\n\n<b>Helia will not spar or box while pregnant.</b>");
 		if (!kGAMECLASS.helScene.pregnancy.isPregnant) addButton(6,"Box",boxWithInCampHel, null, null, null, "Box with Helia and train your strength and toughness.");
 		if (flags[kFLAGS.HEL_LOVE] == 1 || flags[kFLAGS.HEL_LOVE] == -1) {
@@ -625,7 +625,7 @@ internal function PCBeatsUpSalamanderSparring():void {
 	if (monster.HP < 1) outputText("<i>\"Kick my ass a little harder, why don't you?\"</i>");
 	else outputText("<i>\"Turn me on till I can't think straight, why don't you?\"</i>");
 	outputText("  You chuckle and offer her a hand up. The blushing Salamander takes it as you pull her into a tight embrace.  The cool wetness between her thighs a potent reminder of how much your lover seems to get off on violence.  Since she's so turned on, you could easily turn this into some rough loving.");
-	
+	flags[kFLAGS.HELIA_SPAR_VICTORIES]++;
 	//[Display "Rough" sex options]
 	heliaRoughSex(false);
 	//cleanupAfterCombat();

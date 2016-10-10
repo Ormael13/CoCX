@@ -150,6 +150,9 @@
 		{
 			//Base HP
 			var temp:Number = 50 + this.bonusHP;
+			if (flags[kFLAGS.KAIZO_MODE] > 0) {
+				temp = (15 * level) + this.bonusHP;
+			}
 			temp += (this.tou * 2);
 			//Apply perks
 			if (findPerk(PerkLib.Tank) >= 0) temp += 50;

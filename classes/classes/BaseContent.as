@@ -198,10 +198,6 @@
 			return kGAMECLASS.doSFWloss();
 		}
 		
-		protected function showCredits():void {
-			kGAMECLASS.creditsScreen();
-		}
-		
 		/**
 		 * Start a new combat.
 		 * @param	monster_ The new monster to be initialized.

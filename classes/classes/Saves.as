@@ -373,7 +373,7 @@ public function saveLoad(e:MouseEvent = null):void
 		return;
 	}
 	if (player.str == 0) {
-		addButton(14, "Back", kGAMECLASS.mainMenu);
+		addButton(14, "Back", kGAMECLASS.mainMenu.mainMenu);
 		return;
 	}
 	if (inDungeon) {
@@ -384,7 +384,7 @@ public function saveLoad(e:MouseEvent = null):void
 		addButton(0, "Save", saveScreen);
 		addButton(5, "Save to File", saveToFile);
 		addButton(3, "AutoSave: " + autoSaveSuffix, autosaveToggle);
-		addButton(14, "Back", kGAMECLASS.mainMenu);
+		addButton(14, "Back", kGAMECLASS.mainMenu.mainMenu);
 	}
 	else
 	{
@@ -608,6 +608,7 @@ public function savePermObject(isFile:Boolean):void {
 			}			
 		}
 		saveFile.data.flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] = flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM];
+		saveFile.data.flags[kFLAGS.KAIZO_BACKGROUND_UNLOCKED] = flags[kFLAGS.KAIZO_BACKGROUND_UNLOCKED];
 		
 		saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG] = flags[kFLAGS.SHOW_SPRITES_FLAG];
 		saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
@@ -615,7 +616,7 @@ public function savePermObject(isFile:Boolean):void {
 		
 		saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE] = flags[kFLAGS.USE_OLD_INTERFACE];
 		saveFile.data.flags[kFLAGS.USE_OLD_FONT] = flags[kFLAGS.USE_OLD_FONT];
-		saveFile.data.flags[kFLAGS.BACKGROUND_STYLE] = flags[kFLAGS.BACKGROUND_STYLE];
+		if (flags[kFLAGS.KAIZO_MODE] == 0 && flags[kFLAGS.KAIZO_BACKGROUND_UNLOCKED] == 0) saveFile.data.flags[kFLAGS.BACKGROUND_STYLE] = flags[kFLAGS.BACKGROUND_STYLE];
 		saveFile.data.flags[kFLAGS.IMAGEPACK_OFF] = flags[kFLAGS.IMAGEPACK_OFF];
 		saveFile.data.flags[kFLAGS.SPRITE_STYLE] = flags[kFLAGS.SPRITE_STYLE];
 		saveFile.data.flags[kFLAGS.SFW_MODE] = flags[kFLAGS.SFW_MODE];
@@ -625,6 +626,7 @@ public function savePermObject(isFile:Boolean):void {
 		saveFile.data.flags[kFLAGS.USE_METRICS] = flags[kFLAGS.USE_METRICS];
 		saveFile.data.flags[kFLAGS.DISABLE_QUICKLOAD_CONFIRM] = flags[kFLAGS.DISABLE_QUICKLOAD_CONFIRM];
 		saveFile.data.flags[kFLAGS.DISABLE_QUICKSAVE_CONFIRM] = flags[kFLAGS.DISABLE_QUICKSAVE_CONFIRM];
+		
 		//achievements
 		saveFile.data.achievements = [];
 		for (i = 0; i < achievements.length; i++)
@@ -657,6 +659,7 @@ public function loadPermObject():void {
 		//Load saved flags.
 		if (saveFile.data.flags) {
 			if (saveFile.data.flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] != undefined) flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] = saveFile.data.flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM];
+			if (saveFile.data.flags[kFLAGS.KAIZO_BACKGROUND_UNLOCKED] != undefined) flags[kFLAGS.KAIZO_BACKGROUND_UNLOCKED] = saveFile.data.flags[kFLAGS.KAIZO_BACKGROUND_UNLOCKED];
 			
 			if (saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG] != undefined) flags[kFLAGS.SHOW_SPRITES_FLAG] = saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG];
 			if (saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] != undefined) flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
@@ -673,6 +676,10 @@ public function loadPermObject():void {
 			if (saveFile.data.flags[kFLAGS.USE_METRICS] != undefined) flags[kFLAGS.USE_METRICS] = saveFile.data.flags[kFLAGS.USE_METRICS];
 			if (saveFile.data.flags[kFLAGS.DISABLE_QUICKLOAD_CONFIRM] != undefined) flags[kFLAGS.DISABLE_QUICKLOAD_CONFIRM] = saveFile.data.flags[kFLAGS.DISABLE_QUICKLOAD_CONFIRM];
 			if (saveFile.data.flags[kFLAGS.DISABLE_QUICKSAVE_CONFIRM] != undefined) flags[kFLAGS.DISABLE_QUICKSAVE_CONFIRM] = saveFile.data.flags[kFLAGS.DISABLE_QUICKSAVE_CONFIRM];
+		}
+		//Kaizo
+		if (flags[kFLAGS.KAIZO_MODE] > 0 && flags[kFLAGS.KAIZO_BACKGROUND_UNLOCKED] == 0) {
+			flags[kFLAGS.BACKGROUND_STYLE] = 9;
 		}
 		//achievements, will check if achievement exists.
 		if (saveFile.data.achievements) {
@@ -2517,6 +2524,13 @@ public function unFuckSave():void
 			if (player.cocks[i].cockLength > 499.9) player.cocks[i].cockLength = 499.9;
 			if (player.cocks[i].cockThickness > 99.9) player.cocks[i].cockThickness = 99.9;
 		}
+	}
+	//Set to Kaizo if doing kaizo unless locked
+	if (flags[kFLAGS.KAIZO_MODE] > 0) {
+		if (flags[kFLAGS.KAIZO_BACKGROUND_UNLOCKED] == 0) {
+			flags[kFLAGS.BACKGROUND_STYLE] = 9;
+		}
+		getGame().inRoomedDungeon = true;
 	}
 	//Unstick shift key flag
 	flags[kFLAGS.SHIFT_KEY_DOWN] = 0;

@@ -41,7 +41,7 @@
 					lust += 15;
 			}
 			
-			if (lust >= 100) {
+			if (lust >= eMaxLust()) {
 				doNext(game.combat.endLustVictory);
 				return;
 			}

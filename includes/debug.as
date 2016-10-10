@@ -36,7 +36,7 @@ public function debugPane():void {
 	menu();
 	addButton(0, "Test Input", eventTester);
 	addButton(1, "Parser Tests", doThatTestingThang);
-	addButton(4, "Back", mainMenu);
+	addButton(4, "Back", mainMenu.mainMenu);
 }
 
 public function doThatTestingThang():void

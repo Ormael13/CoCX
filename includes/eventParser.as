@@ -14,20 +14,21 @@ public function playerMenu():void {
 	if (!inCombat) spriteSelect(-1);
 	mainView.setMenuButton(MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameGo);
 	mainView.nameBox.visible = false;
+	showStats();
 	if (_gameState == 1 || _gameState == 2) {
 		kGAMECLASS.combat.combatMenu();
 		return;
 	}
-	//Clear restriction on item overlaps if not in combat
-	combat.plotFight = false;
+	combat.plotFight = false; //Clear restriction on item overlaps if not in combat
 	if (inDungeon) {
-		//dungeonMenu();
 		kGAMECLASS.dungeons.checkRoom();
 		return;
 	}
 	else if (inRoomedDungeon) {
-		if (inRoomedDungeonResume != null) inRoomedDungeonResume();
-		return;
+		if (inRoomedDungeonResume != null) {
+			inRoomedDungeonResume();
+			return;
+		}
 	}
 	flags[kFLAGS.PLAYER_PREGGO_WITH_WORMS] = 0;
 	doCamp();

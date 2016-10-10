@@ -46,7 +46,7 @@ inputManager.AddBindableControl(
 	function():void {
 		if (mainView.menuButtonIsVisible(MainView.MENU_NEW_MAIN) && mainView.menuButtonHasLabel(MainView.MENU_NEW_MAIN, "Main Menu"))
 		{
-			mainMenu(undefined);
+			kGAMECLASS.mainMenu.mainMenu();
 		}
 	});
 

@@ -24,7 +24,7 @@
 			if (player.findPerk(PerkLib.BasiliskResistance) >= 0) {
 				outputText("\n\nDespite your naked eyes gazing into a dozen basilisk eyes, they have no effect on you! You " + (player.canFly() ? "fly" : "run") + " as fast as you can, being careless of glancing over the basilisk eyes thanks to your immunity. In no time, you manage to open the door and lock it as soon as you enter! You laugh as you hear the basilisks cursing about.");
 				menu();
-				addButton(0, "Next", d3.move, "antechamber");
+				addButton(0, "Next", getGame().dungeons.move, "antechamber");
 			}
 			else {
 				outputText("\n\nA horrible leaden weight settles upon your bones as your naked eyes gaze into a dozen basilisk eyes, your body turning into rapidly solidifying cement. You reach for your [weapon], but it’s as if it were a continent away, and the lizards press into you, grabbing your hands and [hips], forcing you to stare deeper and deeper into the ocean of depthless grey which surrounds you on all sides, and encompasses you, and where you were and what you were doing no longer matters, because the grey permeates your body and soul, and you are just an atom in a sky of peaceful, dove coloured submission, and whether you’re up or down or sideways or down doesn’t matter...");
@@ -89,7 +89,7 @@
 					outputText("\n\nYou’re free to continue- but you will have to find an alternative route if you want to go back, unless you’re crazy enough to unlock the door and try the catwalk dash again.");
 					
 					menu();
-					addButton(0, "Next", d3.move, "magpiehalln");
+					addButton(0, "Next", getGame().dungeons.move, "magpiehalln");
 				}
 			}
 		}
@@ -208,7 +208,7 @@
 			
 			flags[kFLAGS.D3_BASILISKS_REMOVED_FROM_MAGPIE_HALL] = 1;
 			
-			combat.cleanupAfterCombat(d3.resumeFromFight);
+			combat.cleanupAfterCombat(getGame().dungeons.resumeFromFight);
 			
 		}
 		

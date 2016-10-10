@@ -120,8 +120,15 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 		if (flags[kFLAGS.NIAMH_STATUS] == 2) outputText("\n\nThe sounds of voices raised in song and girlish laughter makes it obvious where Niamh is holding a perpetual party.");
 		addButton(9, "Niamh", getGame().telAdre.niamh.bazaarNiamh);
 	}
-	addButton(14,"Leave",camp.returnToCampUseOneHour);
+	addButton(14, "Leave", camp.returnToCampUseOneHour);
+	if (flags[kFLAGS.KAIZO_MODE] > 0) addButton(14, "Leave", leaveBazaarKaizo);
 }
+
+		public function leaveBazaarKaizo():void {
+			inRoomedDungeonResume = getGame().dungeons.resumeFromFight;
+			getGame().dungeons._currentRoom = "plains";
+			getGame().dungeons.move(getGame().dungeons._currentRoom);
+		}
 
 private function shopMenu():void {
 	menu();

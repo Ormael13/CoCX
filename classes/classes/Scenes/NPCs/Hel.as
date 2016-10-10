@@ -90,7 +90,7 @@ package classes.Scenes.NPCs
 				return;
 			}
 			//Determine damage - str modified by enemy toughness!
-			damage = int((str) - rand(player.tou) - player.armorDef);
+			damage = int((str + game.helScene.heliaSparIntensity()) - rand(player.tou) - player.armorDef);
 			//No damage
 			if (damage <= 0) {
 				damage = 0;
@@ -120,7 +120,7 @@ package classes.Scenes.NPCs
 			//Attack 3 – Lust – Cleavage (Failure)
 			else {
 				outputText("To your surprise, the salamander suddenly yanks up her top, letting her hefty breasts hang free in the air; her small, bright pink nipples quickly harden from either arousal or temperature.  Before you can take your eyes off her impressive rack, she jumps at you.  One of her scaled arms encircles your waist, and the other forcefully shoves your face into her cleavage.  She jiggles her tits around your face for a moment before you're able to break free, though you can feel a distinct heat rising in your loins.  As quickly as they were revealed, the breasts are concealed again and your opponent is ready for more combat!", false);
-				var lust:Number = 20 + rand(10) + player.sens/10 + rand(player.lib/20) * (1 + (player.newGamePlusMod() * 0.2));
+				var lust:Number = 20 + rand(10) + player.sens/10 + rand(game.helScene.heliaSparIntensity() / 10) + rand(player.lib/20) * (1 + (player.newGamePlusMod() * 0.2));
 				game.dynStats("lus", lust);
 				//Apply resistance
 				lust *= player.lustPercent() / 100;
@@ -188,6 +188,8 @@ package classes.Scenes.NPCs
 			this.skinTone = "dusky";
 			this.hairColor = "red";
 			this.hairLength = 13;
+			this.tailType = TAIL_TYPE_SALAMANDER;
+			this.tailRecharge = 0;
 			initStrTouSpeInte(80, 70, 75, 60);
 			initLibSensCor(65, 25, 30);
 			this.weaponName = "sword";
@@ -207,9 +209,22 @@ package classes.Scenes.NPCs
 					add(armors.CHBIKNI,1/20).
 					add(weapons.SCIMITR,1/20).
 					add(consumables.SALAMFW,0.7);
-			this.tailType = TAIL_TYPE_SALAMANDER;
-			this.tailRecharge = 0;
-			this.createStatusEffect(StatusEffects.Keen,0,0,0,0);
+			this.createStatusEffect(StatusEffects.Keen, 0, 0, 0, 0);
+			if (game.helScene.heliaSparIntensity() < 100) {
+				bonusHP += game.helScene.heliaSparIntensity() * 15;
+				bonusLust += game.helScene.heliaSparIntensity() * 2;
+				weaponAttack += game.helScene.heliaSparIntensity() * 2;
+				if (game.helScene.heliaSparIntensity() < 50)
+					level += Math.floor(game.helScene.heliaSparIntensity() / 5);
+				else
+					level += 10 + Math.floor((game.helScene.heliaSparIntensity()-50) / 10);
+			}
+			else {
+				bonusHP += 1500;
+				bonusLust += 200;
+				weaponAttack += 200;
+				level += 15;
+			}
 			checkMonster();
 		}
 		

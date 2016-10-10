@@ -364,6 +364,8 @@ package classes
 				interpersonStats += "<b>Helia Affection:</b> " + Math.round(getGame().helFollower.helAffection()) + "%\n";
 			if (getGame().helFollower.helAffection() >= 100)
 				interpersonStats += "<b>Helia Bonus Points:</b> " + Math.round(flags[kFLAGS.HEL_BONUS_POINTS]) + "\n";
+			if (getGame().helFollower.followerHel())
+				interpersonStats += "<b>Helia Spar Intensity:</b> " + getGame().helScene.heliaSparIntensity() + "\n";
 			
 			if (flags[kFLAGS.ISABELLA_AFFECTION] > 0) {
 				interpersonStats += "<b>Isabella Affection:</b> ";

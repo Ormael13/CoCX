@@ -187,7 +187,7 @@
 			outputText("\n\n<b>(Key Item Acquired: Laybans!)</b>");
 			flags[kFLAGS.D3_MIRRORS_SHATTERED] = 1;
 			player.orgasm();
-			combat.cleanupAfterCombat(d3.resumeFromFight);
+			combat.cleanupAfterCombat(getGame().dungeons.resumeFromFight);
 		}
 		
 		public function killYourself():void
@@ -197,7 +197,7 @@
 			flags[kFLAGS.D3_MIRRORS_SHATTERED] = 1;
 			combat.cleanupAfterCombat();
 			menu();
-			combat.cleanupAfterCombat(d3.resumeFromFight);
+			combat.cleanupAfterCombat(getGame().dungeons.resumeFromFight);
 		}
 		
 		public function inSovietCoCSelfFucksYou():void

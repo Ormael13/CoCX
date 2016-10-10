@@ -212,7 +212,7 @@ package classes.Scenes.NPCs
 				bonusHP += 2000;
 				bonusLust += 100;
 				weaponAttack += 200;
-				level += 10;
+				level += 15;
 			}
 			checkMonster();
 		}

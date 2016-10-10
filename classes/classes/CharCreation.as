@@ -1229,18 +1229,25 @@
 		}
 			
 		public function arrival():void {
+			showStats();
 			statScreenRefresh();
 			model.time.hours = 11;
 			clearOutput();
+			if (flags[kFLAGS.KAIZO_MODE] > 0) {
+				outputText("You are prepared for what is to come. Most of the last year has been spent honing your body and mind to prepare for the challenges ahead. You are the Champion of Ingnam. The one who will journey to the demon realm and guarantee the safety of your friends and family, even though you'll never see them again. You wipe away a tear as you enter the courtyard and see Elder... Wait a minute...\n\n");
+				outputText("Something is not right. Elder Nomur is already dead. Ingnam has been mysteriously pulled into the demon realm and the surroundings look much worse than you've expected. A ruined portal frame stands in the courtyard, obviously no longer functional and instead serves as a grim reminder on the now-ceased tradition of annual sacrifice of Champions. Wooden palisades surround the town of Ingnam and outside the walls, spears are set out and angled as a mean to make the defenses more intimidating. As if that wasn't enough, some of the spears have demonic skulls impaled on them.");
+				flags[kFLAGS.IN_INGNAM] = 1;
+				doNext(playerMenu);
+				return;
+			}
 			outputText("You are prepared for what is to come.  Most of the last year has been spent honing your body and mind to prepare for the challenges ahead.  You are the Champion of Ingnam.  The one who will journey to the demon realm and guarantee the safety of your friends and family, even though you'll never see them again.  You wipe away a tear as you enter the courtyard and see Elder Nomur waiting for you.  You are ready.\n\n");
-			outputText("The walk to the tainted cave is long and silent.  Elder Nomur does not speak.  There is nothing left to say.  The two of you journey in companionable silence.  Slowly the black rock of Mount Ilgast looms closer and closer, and the temperature of the air drops.   You shiver and glance at the Elder, noticing he doesn't betray any sign of the cold.  Despite his age of nearly 80, he maintains the vigor of a man half his age.  You're glad for his strength, as assisting him across this distance would be draining, and you must save your energy for the trials ahead.\n\n");
+			outputText("The walk to the tainted cave is long and silent.  Elder Nomur does not speak.  There is nothing left to say.  The two of you journey in companionable silence.  Slowly the black rock of Mount Ilgast looms closer and closer, and the temperature of the air drops.  You shiver and glance at the Elder, noticing he doesn't betray any sign of the cold.  Despite his age of nearly 80, he maintains the vigor of a man half his age.  You're glad for his strength, as assisting him across this distance would be draining, and you must save your energy for the trials ahead.\n\n");
 			outputText("The entrance of the cave gapes open, sharp stalactites hanging over the entrance, giving it the appearance of a monstrous mouth.  Elder Nomur stops and nods to you, gesturing for you to proceed alone.\n\n");
 			outputText("The cave is unusually warm and damp, ");
 			if (player.gender == GENDER_FEMALE)
 				outputText("and your body seems to feel the same way, flushing as you feel a warmth and dampness between your thighs. ");
 			else outputText("and your body reacts with a sense of growing warmth focusing in your groin, your manhood hardening for no apparent reason. ");
 			outputText("You were warned of this and press forward, ignoring your body's growing needs.  A glowing purple-pink portal swirls and flares with demonic light along the back wall.  Cringing, you press forward, keenly aware that your body seems to be anticipating coming in contact with the tainted magical construct.  Closing your eyes, you gather your resolve and leap forwards.  Vertigo overwhelms you and you black out...");
-			showStats();
 			dynStats("lus", 15);
 			doNext(arrivalPartTwo);
 		}
@@ -1304,7 +1311,7 @@
 			flags[kFLAGS.GAME_DIFFICULTY] = 0;
 			player.hunger = 80;
 			doNext(startTheGame);
-		}	
+		}
 
 		private function chooseModeHardcore():void {
 			outputText("You have chosen Hardcore Mode. In this mode, hunger is enabled so you have to eat periodically. In addition, the game forces autosave and if you encounter a Bad End, your save file is <b>DELETED</b>! \n\nDebug Mode and Easy Mode are disabled in this game mode. \n\nPlease choose a slot to save in. You may not make multiple copies of saves. \n\n<b>Difficulty is locked to hard.</b>", true)
@@ -1330,14 +1337,25 @@
 				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, (i + 1));
 			}
 			addButton(14, "Back", chooseGameModes);
-		}	
+		}
 
 		//Choose Hardcore slot.
 		private function chooseSlotHardcore(num:int):void {
 			flags[kFLAGS.HARDCORE_SLOT] = "CoC_" + num;
 			startTheGame();
-		}	
+		}
 
+		//KAIZO!
+		private function chooseModeKaizo():void {
+			outputText("You have chosen Kaizo Mode. This will drastically alter gameplay and there will be a lot of new obstacles. Enemies are beefed up and the game will be much darker and edgier with plenty of environment changes. Is this what you choose?", true);
+			flags[kFLAGS.KAIZO_MODE] = 1;
+			flags[kFLAGS.HUNGER_ENABLED] = 1;
+			flags[kFLAGS.GAME_DIFFICULTY] = 3;
+			if (flags[kFLAGS.KAIZO_BACKGROUND_UNLOCKED] == 0) flags[kFLAGS.BACKGROUND_STYLE] = 9;
+			player.hunger = 80;
+			doNext(startTheGame);
+		}	
+		
 		//Choose the game mode when called!
 		private function chooseGameModes():void {
 			outputText("Choose a game mode.\n\n", true);
@@ -1346,10 +1364,8 @@
 			outputText("<b>Realistic mode:</b> You get hungry from time to time and cum production is capped. In addition, it's a bad idea to have oversized parts. \n", false);
 			outputText("<b>Hardcore mode:</b> In addition to Realistic mode, the game forces save and if you get a Bad End, your save file is deleted. For the veteran CoC players only.\n", false);
 			outputText("<b>Brutal Hardcore mode:</b> Like hardcore mode, but the difficulty is locked to extreme! How long can you survive?\n", false);
-			//outputText("<b>Kaizo mode:</b> The ABSOLUTELY HARDEST game mode ever. Lots of things are changed and Lethice has sent out her minions to wall the borders and put up a lot of puzzles. Can you defeat her in this mode in as few bad ends as possible?\n", false);
 			
 			simpleChoices("Normal", chooseModeNormal, "Survival", chooseModeSurvival, "Realistic", chooseModeRealistic, "Hardcore", chooseModeHardcore, "Brutal HC", chooseModeBrutalHardcore);
-			//addButton(12, "KAIZO", chooseModeKaizo);
 		}
 
 		private function startTheGame():void {
@@ -1357,6 +1373,9 @@
 			if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 				trace("Hardcore save file " + flags[kFLAGS.HARDCORE_SLOT] + " created.")
 				getGame().saves.saveGame(flags[kFLAGS.HARDCORE_SLOT])
+			}
+			if (flags[kFLAGS.KAIZO_MODE] > 0) {
+				flags[kFLAGS.BACKGROUND_STYLE] = 9;
 			}
 			kGAMECLASS.saves.loadPermObject();
 			flags[kFLAGS.MOD_SAVE_VERSION] = kGAMECLASS.modSaveVersion;
@@ -1370,6 +1389,10 @@
 				if (player.femininity >= 55) player.setUndergarment(undergarments.C_PANTY);
 				else player.setUndergarment(undergarments.C_LOIN);
 				if (player.biggestTitSize() >= 2) player.setUndergarment(undergarments.C_BRA);
+			}
+			if (flags[kFLAGS.KAIZO_MODE] > 0) {
+				arrival();
+				return;
 			}
 			clearOutput();
 			outputText("Would you like to play through the 3-day prologue in Ingnam or just skip?");

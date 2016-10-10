@@ -79,7 +79,7 @@ package classes.Scenes.Dungeons.D3
 			flags[kFLAGS.MINOTAURKING_KILLED] = 1;
 			clearOutput();
 			outputText("You make it quick, then straighten to stare Lethice in the eye. You’ll purge every single ounce of corruption from this world by any means necessary.");
-			combat.cleanupAfterCombat(getGame().d3.resumeFromFight);
+			combat.cleanupAfterCombat(getGame().dungeons.resumeFromFight);
 		}
 		
 		private function dockucocku(cockIdx:int):void
@@ -128,7 +128,7 @@ package classes.Scenes.Dungeons.D3
 				outputText("\n\nSatisfied at last, you pull out with lurid ‘schliiiick’ sound. A few of the assembled demons clap and catcall, but most surprising of all is the monarch’s own roar of bliss, followed shortly after by his powerful hips lifting up off the floor. The well-fucked horse-cock erupts like a long-dormant volcano, spraying jizz from its sloppy, stretched slit until minotaur spunk is raining over the assembled crowd. Many of the demons immediately fall into fucking one another, but you have the good sense to avoid the bulk of it.");
 				outputText("\n\nAgain and again, those powerful, shaggy hips lift, and each time, more cow-cream explodes into the air, mixed with something else. Something better. Champion cum. Excellia is revitalized by erotic monsoon and manages to climb on top before he finishes, riding him like the bucking bronco that he is.");
 				outputText("\n\nNeither of them will be standing in your way any time soon. Time to deal with Lethice.");
-				combat.cleanupAfterCombat(getGame().d3.resumeFromFight);
+				combat.cleanupAfterCombat(getGame().dungeons.resumeFromFight);
 			}
 			else
 			{
@@ -242,7 +242,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nThe beaten brute squirms and writhes long after you both of you finish cumming, lost in barely understood pleasure. You pull out before his over-eager motions carry you with him, noisily licking his residue from your lips and preparing to get on with your business. The taste might be keeping you hard, but you feel more than sated enough to take on a demon queen.");
 			player.orgasm();
 			dynStats("lus",10);
-			combat.cleanupAfterCombat(getGame().d3.resumeFromFight);
+			combat.cleanupAfterCombat(getGame().dungeons.resumeFromFight);
 		}	
 		
 		private function mechanicalbullhue():void
@@ -410,7 +410,7 @@ package classes.Scenes.Dungeons.D3
 			flags[kFLAGS.MINOTAURKINGS_TOUCH] = 1;
 			player.minoCumAddiction(20);
 			player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR - 48);
-			combat.cleanupAfterCombat(getGame().d3.resumeFromFight);
+			combat.cleanupAfterCombat(getGame().dungeons.resumeFromFight);
 		}
 		
 		private function titfuckCowslut():void
@@ -449,7 +449,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nRegrettably, you’ve got work to do. You extricate yourself from the cum-and-milk splattered cow-girl and stand up, regarding the awaiting demoness.");
 			player.orgasm();
 			player.HP = player.maxHP();
-			combat.cleanupAfterCombat(getGame().d3.resumeFromFight);
+			combat.cleanupAfterCombat(getGame().dungeons.resumeFromFight);
 		}
 		
 		private function sloppySeconds():void
@@ -544,7 +544,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nYou aren’t sure how many more times you give it to her, but by the time you finally manage to extract yourself from her wanton lips, the Minotaur King has been dragged into the crowd.");
 			outputText("\n\nLethice looks bored, drumming her fingers on the edge of her throne. Time to deal with her.");
 			player.orgasm();
-			combat.cleanupAfterCombat(getGame().d3.resumeFromFight);
+			combat.cleanupAfterCombat(getGame().dungeons.resumeFromFight);
 		}
 		
 		public function hailToTheKingBaby(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -653,7 +653,7 @@ package classes.Scenes.Dungeons.D3
 				outputText("Not all of us are as enslaved by our desires as you.");
 			}
 			outputText("”</i>");
-			combat.cleanupAfterCombat(getGame().d3.resumeFromFight);
+			combat.cleanupAfterCombat(getGame().dungeons.resumeFromFight);
 		}
 	}
 }

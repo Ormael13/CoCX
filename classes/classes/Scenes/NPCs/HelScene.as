@@ -87,6 +87,15 @@ package classes.Scenes.NPCs{
 	public function fuckBuddyHel():Boolean {
 		return (flags[kFLAGS.HEL_FUCKBUDDY] == 1);
 	}
+	
+	public function heliaSparIntensity():int
+	{
+		var amount:int = 0;
+		amount += Math.floor((flags[kFLAGS.HEL_BONUS_POINTS]) / 5);
+		amount += flags[kFLAGS.HELIA_SPAR_VICTORIES];
+		if (amount > 100) amount = 100;
+		return amount;
+	}
 //VARS
 //const HEL_TALKED_ABOUT_BERSERKING:int = 390;
 //const HEL_TALKED_ABOUT_HER:int = 391;

@@ -1585,7 +1585,7 @@ package classes.Scenes.Combat
 			outputText("\n\n", false);
 		 	combat.checkAchievementDamage(damage);
 			//Kick back to main if no damage occured!
-			if (monster.HP > 0 && monster.lust < 100) {
+			if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
 				monster.doAI();
 			}
 			else {
@@ -2024,7 +2024,7 @@ package classes.Scenes.Combat
 		 	combat.checkAchievementDamage(damage);
 			flags[kFLAGS.LAST_ATTACK_TYPE] = 0;
 			//Victory ORRRRR enemy turn.
-			if (monster.HP > 0 && monster.lust < 100) monster.doAI();
+			if (monster.HP > 0 && monster.lust < monster.eMaxLust()) monster.doAI();
 			else {
 				if (monster.HP <= 0) doNext(combat.endHpVictory);
 				if (monster.lust >= monster.eMaxLust()) doNext(combat.endLustVictory);
@@ -2112,7 +2112,7 @@ package classes.Scenes.Combat
 			flags[kFLAGS.LAST_ATTACK_TYPE] = 0;
 		 	combat.checkAchievementDamage(damage);
 			//Victory ORRRRR enemy turn.
-			if (monster.HP > 0 && monster.lust < 100) monster.doAI();
+			if (monster.HP > 0 && monster.lust < monster.eMaxLust()) monster.doAI();
 			else {
 				if (monster.HP <= 0) doNext(combat.endHpVictory);
 				if (monster.lust >= monster.eMaxLust()) doNext(combat.endLustVictory);
@@ -2171,7 +2171,7 @@ package classes.Scenes.Combat
 			//Use tail mp
 			player.tailVenom -= 25;
 			//Kick back to main if no damage occured!
-			if (monster.HP > 0 && monster.lust < 100) monster.doAI();
+			if (monster.HP > 0 && monster.lust < monster.eMaxLust()) monster.doAI();
 			else doNext(combat.endLustVictory);
 		}
 		

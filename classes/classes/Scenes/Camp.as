@@ -75,35 +75,18 @@ private function doCamp():void { //Only called by playerMenu
 	}
 	//make sure gameState is cleared if coming from combat or giacomo
 	getGame().inCombat = false;
-	if (ingnam.inIngnam) { //Ingnam
-		kGAMECLASS.ingnam.menuIngnam();
-		return;
-	}
-	if (prison.inPrison) { //Prison
-		kGAMECLASS.prison.prisonRoom(true);
-		return;
-	}
-	//trace("Current fertility: " + player.totalFertility());
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
+	//Prioritize clearing before setting room
 	if (player.findStatusEffect(StatusEffects.PostAkbalSubmission) >= 0) {
 		player.removeStatusEffect(StatusEffects.PostAkbalSubmission);
-		kGAMECLASS.forest.akbalScene.akbalSubmissionFollowup();
+		getGame().forest.akbalScene.akbalSubmissionFollowup();
 		return;
 	}
 	if (player.findStatusEffect(StatusEffects.PostAnemoneBeatdown) >= 0) {
 		HPChange(Math.round(player.maxHP()/2),false);
 		player.removeStatusEffect(StatusEffects.PostAnemoneBeatdown);
 	}
-/* Can't happen - playerMenu will call dungeon appropriate menu instead of doCamp while inDungeon is true
-	if (kGAMECLASS.inDungeon) {
-		mainView.showMenuButton( MainView.MENU_DATA );
-		mainView.showMenuButton( MainView.MENU_APPEARANCE );
-		kGAMECLASS.playerMenu();
-		return;
-	}
-*/
-	//Clear out Izma's saved loot status
-	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "";
+	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = ""; //Clear out Izma's saved loot status
 	//History perk backup
 	if (flags[kFLAGS.HISTORY_PERK_SELECTED] == 0) {
 		flags[kFLAGS.HISTORY_PERK_SELECTED] = 2;
@@ -113,6 +96,31 @@ private function doCamp():void { //Only called by playerMenu
 		return;
 	}
 	fixFlags();
+	//Update saves
+	if (flags[kFLAGS.ERLKING_CANE_OBTAINED] == 0 && player.hasKeyItem("Golden Antlers") >= 0) {
+		clearOutput();
+		outputText("Out of nowhere, a cane appears on your " + bedDesc() + ". It looks like it once belonged to the Erlking. Perhaps the cane has been introduced into the game and you've committed a revenge on the Erlking? Regardless, you take it anyway. ");
+		flags[kFLAGS.ERLKING_CANE_OBTAINED] = 1;
+		inventory.takeItem(weapons.HNTCANE, doCamp);
+		return;
+	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] < kGAMECLASS.modSaveVersion) {
+		promptSaveUpdate();
+		return;
+	}
+	//Put player back in Ingnam, prison, or specific zones
+	if (ingnam.inIngnam) { //Ingnam
+		getGame().ingnam.menuIngnam();
+		return;
+	}
+	if (prison.inPrison) { //Prison
+		getGame().prison.prisonRoom(true);
+		return;
+	}
+	if (flags[kFLAGS.KAIZO_MODE] > 0) {
+		getGame().dungeons.move(getGame().dungeons._currentRoom);
+		return;
+	}
 	if (!marbleScene.marbleFollower())
 	{
 		if (flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 1 && player.cor <= 40)
@@ -500,7 +508,7 @@ private function doCamp():void { //Only called by playerMenu
 	mainView.showMenuButton( MainView.MENU_DATA );
 	showStats();
 	//Change settings of new game buttons to go to main menu
-	mainView.setMenuButton( MainView.MENU_NEW_MAIN, "Main Menu", kGAMECLASS.mainMenu );
+	mainView.setMenuButton( MainView.MENU_NEW_MAIN, "Main Menu", kGAMECLASS.mainMenu.mainMenu );
 	mainView.newGameButton.toolTipText = "Return to main menu.";
 	mainView.newGameButton.toolTipHeader = "Main Menu";
 	//clear up/down arrows
@@ -802,18 +810,6 @@ private function doCamp():void { //Only called by playerMenu
 	if (player.lust >= player.maxLust() && canFap) {
 		removeButton(0); //Explore
 		removeButton(1); //Places
-	}
-	//Update saves
-	if (flags[kFLAGS.ERLKING_CANE_OBTAINED] == 0 && player.hasKeyItem("Golden Antlers") >= 0) {
-		clearOutput();
-		outputText("Out of nowhere, a cane appears on your " + bedDesc() + ". It looks like it once belonged to the Erlking. Perhaps the cane has been introduced into the game and you've committed a revenge on the Erlking? Regardless, you take it anyway. ");
-		flags[kFLAGS.ERLKING_CANE_OBTAINED] = 1;
-		inventory.takeItem(weapons.HNTCANE, doCamp);
-		return;
-	}
-	if (flags[kFLAGS.MOD_SAVE_VERSION] < kGAMECLASS.modSaveVersion) {
-		promptSaveUpdate();
-		return;
 	}
 	//Massive Balls Bad End (Realistic Mode only)
 	if (flags[kFLAGS.HUNGER_ENABLED] >= 1 && player.ballSize > (18 + (player.str / 2) + (player.tallness / 4))) {

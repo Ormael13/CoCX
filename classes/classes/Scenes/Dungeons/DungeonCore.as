@@ -4,11 +4,15 @@ package classes.Scenes.Dungeons
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.Dungeons.D3.D3;
 	
 	import coc.view.MainView;
 	
 	public class DungeonCore extends BaseContent
 	{
+		public var rooms:Object = {};
+		public var _currentRoom:String; // I don't think we'll need to save/load this, as we're not gonna allow saving in the dungeon, and it'll be overwritten by calling enterD3();
+		
 		//Dungeon constants
 		//Factory
 		public static const DUNGEON_FACTORY_FOYER:int			=  0;
@@ -71,18 +75,18 @@ package classes.Scenes.Dungeons
 		public static const DUNGEON_ANZU_BASEMENT:int 			= 53;
 		public static const DUNGEON_ANZU_ARMORY:int 			= 54;
 		
+		public function DungeonCore() {}
 		
 		//Register dungeons
 		public var factory:Factory = new Factory;
 		public var deepcave:DeepCave = new DeepCave;
+		
 		public var desertcave:DesertCave = new DesertCave;
 		public var heltower:HelDungeon = new HelDungeon;
 		public var palace:AnzuPalace = new AnzuPalace;
 		public var cabin:YourCabin = new YourCabin;
 		
 		public var map:DungeonMap = new DungeonMap;
-		
-		public function DungeonCore() {}
 		
 		public function checkRoom():void
 		{
@@ -185,10 +189,12 @@ package classes.Scenes.Dungeons
 		 * Set the top buttons for use while in dungeons.
 		 */
 		public function setTopButtons():void { //Set top buttons.
+			mainView.setMenuButton( MainView.MENU_NEW_MAIN, "Main Menu", kGAMECLASS.mainMenu.mainMenu );
 			mainView.showMenuButton( MainView.MENU_APPEARANCE );
 			mainView.showMenuButton( MainView.MENU_PERKS );
 			mainView.showMenuButton( MainView.MENU_STATS );
 			mainView.hideMenuButton( MainView.MENU_DATA );
+			mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 			if ((player.XP >= (player.level) * 100 && player.level < kGAMECLASS.levelCap) || player.perkPoints > 0 || player.statPoints > 0) {
 				if (player.XP < player.level * 100 || player.level >= kGAMECLASS.levelCap)
 				{
@@ -235,6 +241,87 @@ package classes.Scenes.Dungeons
 			palace.setAnzuButton();
 		}
 		
+		//Dungeon 3 & Kaizo Stuff
+		public function resumeFromFight():void
+		{
+			move(_currentRoom);
+		}
+		
+		public function generateRoomMenu(tRoom:room):void
+		{
+			statScreenRefresh();
+			hideUpDown();
+			spriteSelect(-1);
+			setTopButtons();
+			if (tRoom.NorthExit != null && tRoom.NorthExit.length > 0)
+			{
+				if (tRoom.NorthExitCondition == null || tRoom.NorthExitCondition())
+				{
+					addButton(6, "North", move, tRoom.NorthExit, 1/12);
+				}
+			}
+			
+			if (tRoom.EastExit != null && tRoom.EastExit.length > 0)
+			{
+				if (tRoom.EastExitCondition == null || tRoom.EastExitCondition())
+				{
+					addButton(12, "East", move, tRoom.EastExit, 1/12);
+				}
+			}
+			
+			if (tRoom.SouthExit != null && tRoom.SouthExit.length > 0)
+			{
+				if (tRoom.SouthExitCondition == null || tRoom.SouthExitCondition())
+				{
+					addButton(11, "South", move, tRoom.SouthExit, 1/12);
+				}
+			}
+			
+			if (tRoom.WestExit != null && tRoom.WestExit.length > 0)
+			{
+				if (tRoom.WestExitCondition == null || tRoom.WestExitCondition())
+				{
+					addButton(10, "West", move, tRoom.WestExit, 1/12);
+				}
+			}
+			
+			addButton(13, "Inventory", inventory.inventoryMenu);
+			addButton(14, "Map", kGAMECLASS.dungeons.map.displayMap);
+			if (player.lust >= 30) addButton(8, "Masturbate", getGame().masturbation.masturbateGo);
+			else addButtonDisabled(8, "Masturbate", "You are not horny enough to consider that.");
+		}
+		
+		public function move(roomName:String, timeToPass:Number = 0):void
+		{
+			trace("Entering room", roomName);
+			cheatTime(timeToPass);
+			clearOutput();
+			
+			if (rooms[roomName] == undefined)
+			{
+				clearOutput();
+				outputText("Error: Couldn't find the room indexed as: " + roomName);
+				menu();
+				return;
+			}
+			
+			var tRoom:room = rooms[roomName];
+			
+			if (tRoom.RoomFunction == null)
+			{
+				outputText("Error: Room entry function for room indexed as '" + roomName + "' was not set.");
+				return;
+			}
+			
+			menu();
+			
+			if (!tRoom.RoomFunction())
+			{
+				generateRoomMenu(tRoom);
+			}
+			
+			_currentRoom = roomName;
+		}
 	}
 
 }

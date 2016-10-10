@@ -882,7 +882,7 @@ package classes.Scenes.Combat
 						outputText("You stare into her hangdog expression and lose most of the killing intensity you had summoned up for your attack, stopping a few feet short of hitting her.\n", false);
 						damage = 0;
 						//Kick back to main if no damage occured!
-						if (monster.HP > 0 && monster.lust < 100) {
+						if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
 							if (player.findStatusEffect(StatusEffects.FirstAttack) >= 0) {
 								attack();
 								return;
@@ -1057,7 +1057,7 @@ package classes.Scenes.Combat
 			if (player.weaponName.indexOf("staff") != -1 && player.findPerk(PerkLib.StaffChanneling) >= 0) flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 			checkAchievementDamage(damage);
 			//Kick back to main if no damage occured!
-			if (monster.HP >= 1 && monster.lust <= 99) {
+			if (monster.HP >= 1 && monster.lust < monster.eMaxLust()) {
 				if (player.findStatusEffect(StatusEffects.FirstAttack) >= 0) {
 					attack();
 					return;
@@ -1704,7 +1704,7 @@ package classes.Scenes.Combat
 			monster.inte += 25 * player.newGamePlusMod();
 			monster.level += 30 * player.newGamePlusMod();
 			if (flags[kFLAGS.KAIZO_MODE] > 0) {
-				monster.level = Math.round(monster.level ^ 1.4);
+				monster.level = Math.round(Math.pow(monster.level, 1.4));
 			}
 			//Adjust lust vulnerability in New Game+.
 			if (player.newGamePlusMod() == 1) monster.lustVuln *= 0.8;
