@@ -373,8 +373,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.7c";
-			version = ver + " (<b>Ascension rework (part 1), Fenrir TF, Winter Wolf enc</b>)";
+			ver = "1.0.2_mod_Xianxia_0.7d";
+			version = ver + " (<b>Bug fixing, Evangeline X-pack 1: Recovery Begins, Archery Rework (part 0 aka small teaser for now)</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
