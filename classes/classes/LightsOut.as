@@ -14,9 +14,9 @@ package classes
 		public function startLightsOut(victoryFunction:Function = null, failureFunction:Function = null):void
 		{
 			clearOutput();
-			if (victoryFunction == null) victoryFunction = accessDebugMenu;
+			if (victoryFunction == null) victoryFunction = getGame().debugMenu.accessDebugMenu;
 			lightsOutVictoryFunction = victoryFunction;
-			if (failureFunction == null) failureFunction = accessDebugMenu;
+			if (failureFunction == null) failureFunction = getGame().debugMenu.accessDebugMenu;
 			lightsOutFailureFunction = failureFunction;
 			
 			menu();
@@ -44,7 +44,7 @@ package classes
 			clearOutput();
 			outputText("A winner is you! A horsecock for your butt as tribute!");
 			menu();
-			addButton(0, "Next", accessDebugMenu);
+			addButton(0, "Next", getGame().debugMenu.accessDebugMenu);
 		}
 
 		public function testFailureFunc():void
@@ -53,7 +53,7 @@ package classes
 			outputText("You failed. Try again?");
 			menu();
 			addButton(0, "Yes", startLightsOut, testVictoryFunc, testFailureFunc);
-			addButton(1, "No", accessDebugMenu);
+			addButton(1, "No", getGame().debugMenu.accessDebugMenu);
 		}
 		
 		public function toggleSlot(slot:int):void

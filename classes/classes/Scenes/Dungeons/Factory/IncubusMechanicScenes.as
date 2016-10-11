@@ -73,7 +73,7 @@ package classes.Scenes.Dungeons.Factory
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
 			player.removeKeyItem("Hentai Comic");
 			flags[kFLAGS.FACTORY_INCUBUS_BRIBED] = 1;
-			doNext(roomFurnaceRoom);
+			doNext(getGame().dungeons.factory.roomFurnaceRoom);
 		}
 		
 		private function doFightIncubus():void {

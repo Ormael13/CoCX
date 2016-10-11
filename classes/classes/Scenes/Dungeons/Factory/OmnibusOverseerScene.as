@@ -1,7 +1,11 @@
 package classes.Scenes.Dungeons.Factory 
 {
 	import classes.BaseContent;
-
+	import classes.GlobalFlags.kFLAGS;
+	import classes.StatusEffects;
+	import classes.PerkLib;
+	import classes.CockTypesEnum;
+	
 	public class OmnibusOverseerScene extends BaseContent
 	{
 		

@@ -1,13 +1,18 @@
 package classes.Scenes.Dungeons.Factory 
 {
 	import classes.BaseContent;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.Appearance;
+	import classes.StatusEffects;
+	import classes.PerkLib;
+	import classes.CockTypesEnum;
 
 	public class SecretarialSuccubusScene extends BaseContent
 	{
 		
 		public function SecretarialSuccubusScene() {}
 		
-		private function encounterSuccubus():void {
+		public function encounterSuccubus():void {
 			spriteSelect(55);
 			outputText("\n\nStanding next to the coffeemaker is a blue-skinned woman holding a mug of coffee.  As she takes a sip, oblivious to your presence, you see the mug has '#1 Dad' written on it.  Dressed in a tiny vest, short skirt, and sheer stockings, she looks every bit an air-headed secretarial ditz.  Her two horns are little more than nubs, mostly covered by her flowing blond hair, and if it wasn't for her blue skin and the tip of a spaded tail peeking out from under her skirt, you'd never know what she was.\n\n", false);
 			menu();
@@ -39,7 +44,7 @@ package classes.Scenes.Dungeons.Factory
 					flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
 					outputText("<b>New codex entry unlocked: Succubus!</b>\n\n")
 				}
-				simpleChoices("Fight", doFightSuccubus, "It's Me!", talkSuccubusItsMe, "Leave", roomLobby, "", null, "", null);
+				simpleChoices("Fight", doFightSuccubus, "It's Me!", talkSuccubusItsMe, "Leave", getGame().dungeons.factory.roomLobby, "", null, "", null);
 			}
 			else {
 				outputText("The busty succubus turns, her barely contained breasts jiggling obscenely as she notices you, \"<i>Oh, like hi there ", false);
@@ -50,7 +55,7 @@ package classes.Scenes.Dungeons.Factory
 					flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
 					outputText("<b>New codex entry unlocked: Succubus!</b>\n\n")
 				}
-				simpleChoices("Fight", doFightSuccubus, "Talk", talkSuccubus, "Run", roomLobby, "", null, "", null);
+				simpleChoices("Fight", doFightSuccubus, "Talk", talkSuccubus, "Run", getGame().dungeons.factory.roomLobby, "", null, "", null);
 			}
 		}
 		
@@ -214,6 +219,14 @@ package classes.Scenes.Dungeons.Factory
 			player.orgasm();
 			dynStats("str", 2,"tou", 2, "spe", 2, "int", 2, "lib", 2, "sen", 2, "cor", 100);
 			doNext(doBadEndDemon);
+		}
+		
+		private function doBadEndDemon():void {
+			clearOutput();
+			if (player.gender == 1) outputText("As a demon, you rapidly moved up the ranks, eventually taking command of the factory and its inhabitants.  The previous commander was reduced to a willing cock-sleeve, ever-eager to obey your slightest order.  By the time the next year has come around, you've managed to earn the coveted honor of collecting the next champion.", false);
+			else if (player.gender == 2) outputText("Now a full-fledged demon, you leave the factory, setting off on your own.  Over the next year you capture many foolish mortals, and even convince more than a few of them to give up their souls.  With your rapid gain in power, it's easy to rise in the demonic ranks, and in no time flat your power far exceeds that of the succubus that 'turned' you.  You live in luxury, surrounded by a harem of slaves, waiting in your camp for the next victim to step through...", false);
+			else outputText("As a demon, you rapidly moved up the ranks, eventually taking command of the factory and its inhabitants.  The previous commander was reduced to a willing cock-sleeve, ever-eager to obey your slightest order.  By the time the next year has come around, you've managed to earn the coveted honor of collecting the next champion. It should be quite satisfying...", false);
+			getGame().gameOver();
 		}
 		
 		private function doFightSuccubus():void {
