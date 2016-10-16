@@ -234,10 +234,6 @@
 			kGAMECLASS.currentText = "";
 			kGAMECLASS.mainView.clearOutputText();
 		}
-		
-		protected function flushOutputTextToGUI():void {
-			kGAMECLASS.flushOutputTextToGUI();
-		}
 
 		protected function doNext(eventNo:Function):void //Now typesafe
 		{

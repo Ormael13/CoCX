@@ -578,7 +578,7 @@ package classes.Scenes
 					outputText(" x" + player.prisonItemSlots[(i*2) +1]);
 				}
 			}
-			flushOutputTextToGUI();
+			output.flush();
 		}
 		
 		private function eventTriggerMenu():void {

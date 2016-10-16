@@ -314,7 +314,7 @@ public function eventTesterGo():void {
 	outputText(temp, true, true);
 
 	addButton(14, "Back", eventTester);
-	flushOutputTextToGUI();
+	output.flush();
 }
 
 public function eventTesterExit():void {

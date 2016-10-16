@@ -476,8 +476,8 @@
 				outputText("\n\nThis character have pre-defined history.");
 			else
 				outputText("\n\nThis character have no pre-defined history.");
-				
-			flushOutputTextToGUI();	
+
+			output.flush();
 			mainView.nameBox.text = ComboBox(event.target).selectedItem.data[0];
 		}
 		
