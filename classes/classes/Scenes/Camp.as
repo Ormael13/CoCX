@@ -2266,7 +2266,7 @@ private function buildCampWall():void {
 	}
 	if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) {
 		outputText("\n\n<b>Well done! You have finished the wall! You can build a gate and decorate wall with imp skulls to further deter whoever might try to come and rape you.</b>");
-		flushOutputTextToGUI();
+		output.flush();
 	}
 }
 

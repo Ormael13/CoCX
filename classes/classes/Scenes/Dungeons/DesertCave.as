@@ -4120,7 +4120,7 @@ package classes.Scenes.Dungeons
 				outputText("\n\nAn open doorway opens up to the north.  You can faintly see some kind of altar beyond it.");
 				addButton(6, "North", roomSacrificalAltar);
 			}
-			flushOutputTextToGUI();
+			output.flush();
 		}
 		public function roomWestHall1():void {
 			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_WITCH_WEST_WARRENS_MAIN;

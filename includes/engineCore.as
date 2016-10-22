@@ -202,21 +202,6 @@ public function outputText(output:String,
 
 }
 
-public function flushOutputTextToGUI():void
-{
-	var fmt:TextFormat = mainView.mainText.getTextFormat();
-	
-	if (flags[kFLAGS.CUSTOM_FONT_SIZE] != 0) fmt.size = flags[kFLAGS.CUSTOM_FONT_SIZE];
-	
-	mainView.setOutputText(currentText);
-	
-	if (flags[kFLAGS.CUSTOM_FONT_SIZE] != 0)
-	{
-		mainView.mainText.setTextFormat(fmt);
-	}
-	if (mainViewManager.mainColorArray[flags[kFLAGS.BACKGROUND_STYLE]] != null) mainView.mainText.textColor = mainViewManager.mainColorArray[flags[kFLAGS.BACKGROUND_STYLE]];
-}
-
 public function displayHeader(string:String):void {
 	outputText("<font size=\"36\" face=\"Georgia\"><u>" + string + "</u></font>\n");
 }
@@ -567,7 +552,7 @@ public function addButton(pos:int, text:String = "", func1:Function = null, arg1
 	mainView.bottomButtons[pos].alpha = 1; // failsafe to avoid possible problems with dirty hack
 	mainView.showBottomButton(pos, text, callback, toolTipText, toolTipHeader);
 	//mainView.setOutputText( currentText );
-	flushOutputTextToGUI();
+	output.flush();
 }
 
 public function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):void {
@@ -582,7 +567,7 @@ public function addButtonDisabled(pos:int, text:String = "", toolTipText:String 
 	if (toolTipText == "") toolTipText = getButtonToolTipText(text);
 	if (toolTipHeader == "") toolTipHeader = getButtonToolTipHeader(text);
 	mainView.showBottomButtonDisabled(pos, text, toolTipText, toolTipHeader);
-	flushOutputTextToGUI();
+	output.flush();
 }
 
 public function setButtonTooltip(index:int, toolTipHeader:String = "", toolTipText:String = ""):void {
@@ -620,7 +605,7 @@ public function menu():void { //The newer, simpler menu - blanks all buttons so 
 		mainView.hideBottomButton(i);
 		mainView.bottomButtons[i].alpha = 1; // Dirty hack.
 	}
-	flushOutputTextToGUI();
+	output.flush();
 }
 
 /**
@@ -708,7 +693,7 @@ public function choices(text1:String, butt1:Function,
 	// funcs = new Array();
 	// args = new Array();
 	//mainView.setOutputText( currentText );
-	flushOutputTextToGUI();
+	output.flush();
 */
 }
 

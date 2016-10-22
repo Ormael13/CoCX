@@ -1663,7 +1663,7 @@ public function benoitFeminise():void
 	{
 		outputText("You don't have the necessary ingredients to attempt this yet.");
 		outputText("\n\n<b>(Requires 2x Purified Succubus Milk, 1x Large Pink Egg, 1x Ovi Elixir, 1x Reptilium.)</b>");
-		this.getGame().flushOutputTextToGUI();
+		output.flush();
 	}
 	else
 	{
@@ -2017,7 +2017,7 @@ public function femoitSexIntro():void
 		{
 			outputText("You don't have the necessary ingredients to attempt this yet.");
 			outputText("\n\n<b>(Requires 2x Purified Incubi Draft, 1x Purified Succubi's Delight, 1x Reptilium.)</b>");
-			this.getGame().flushOutputTextToGUI();
+			output.flush();
 		}
 		else
 		{
