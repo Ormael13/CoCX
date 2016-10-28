@@ -5287,7 +5287,7 @@
 					updateClaws(player.clawType);
 					outputText(player.skinTone + " scales.</b>", false);
 				}
-				player.skinType = SKIN_TYPE_SCALES;
+				player.skinType = SKIN_TYPE_LIZARD_SCALES;
 				player.skinAdj = "";
 				player.skinDesc = "scales";
 				changes++;

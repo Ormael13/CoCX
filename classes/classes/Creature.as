@@ -2404,7 +2404,7 @@ package classes
 
 		public function hasReptileScales():Boolean
 		{
-			return [SKIN_TYPE_SCALES, SKIN_TYPE_DRAGON_SCALES].indexOf(skinType) != -1;
+			return [SKIN_TYPE_LIZARD_SCALES, SKIN_TYPE_DRAGON_SCALES].indexOf(skinType) != -1;
 		}
 
 		public function hasDragonScales():Boolean
@@ -2414,7 +2414,7 @@ package classes
 
 		public function hasLizardScales():Boolean
 		{
-			return skinType == SKIN_TYPE_SCALES;
+			return skinType == SKIN_TYPE_LIZARD_SCALES;
 		}
 
 		public function hasFurOrScales():Boolean

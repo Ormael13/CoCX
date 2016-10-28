@@ -2204,7 +2204,7 @@
 				[
 					[SKIN_TYPE_PLAIN, "skin"],
 					[SKIN_TYPE_FUR, "fur"],
-					[SKIN_TYPE_SCALES, "scales"],
+					[SKIN_TYPE_LIZARD_SCALES, "scales"],
 					[SKIN_TYPE_GOO, "goo"],
 					[SKIN_TYPE_UNDEFINED, "undefined flesh"],
 					[SKIN_TYPE_DRAGON_SCALES, "scales"]
@@ -2214,7 +2214,7 @@
 				[
 					[SKIN_TYPE_PLAIN, "skin"],
 					[SKIN_TYPE_FUR, "fur"],
-					[SKIN_TYPE_SCALES, "scales"],
+					[SKIN_TYPE_LIZARD_SCALES, "scales"],
 					[SKIN_TYPE_GOO, "skin"],
 					[SKIN_TYPE_UNDEFINED, "skin"],
 					[SKIN_TYPE_DRAGON_SCALES, "scales"]

@@ -1863,7 +1863,7 @@ package classes
 				player.skinType = SKIN_TYPE_FUR; // fur, 30%
 				player.skinDesc = "fur";}
 			else if (skin < 95){
-				player.skinType = SKIN_TYPE_SCALES; // scales, 15%
+				player.skinType = SKIN_TYPE_LIZARD_SCALES; // scales, 15%
 				player.skinDesc = "scales";}
 			else{
 				player.skinType = SKIN_TYPE_GOO; // goo, 5%

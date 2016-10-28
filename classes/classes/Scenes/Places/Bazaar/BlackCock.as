@@ -1611,7 +1611,7 @@ package classes.Scenes.Places.Bazaar
 					case SKIN_TYPE_FUR:
 						outputText("You feel an itching sensation as your fur beings to fall off in clumps, <b>revealing tough gray skin</b> beneath it.");
 						break;
-					case SKIN_TYPE_SCALES:
+					case SKIN_TYPE_LIZARD_SCALES:
 					case SKIN_TYPE_DRAGON_SCALES:
 						outputText("You feel an odd rolling sensation as your scales begin to shift, spreading and reforming as they grow and disappear, <b>becoming tough gray skin</b>.");
 						break;

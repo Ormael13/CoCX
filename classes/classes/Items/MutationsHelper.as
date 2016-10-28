@@ -73,7 +73,7 @@ package classes.Items
 
 							case SKIN_TYPE_PLAIN:
 							case SKIN_TYPE_FUR:
-							case SKIN_TYPE_SCALES:
+							case SKIN_TYPE_LIZARD_SCALES:
 								message += "\n\nYou feel a sudden tingle in your [claws] and then you realize,"
 								          +" that they have become normal human fingernails again.";
 								break;

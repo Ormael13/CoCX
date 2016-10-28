@@ -132,7 +132,7 @@ package classes.Items.Consumables
 								outputText("<b>This text should not happen. Please let Kitteh6660 know.</b>");
 						}
 						break;
-					case SKIN_TYPE_SCALES: //Scales
+					case SKIN_TYPE_LIZARD_SCALES: //Scales
 						outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the flask of lotion and rubbing", "uncork the flask of lotion and rub") + " the " + liquidDesc() + " across your body. As you rub the mixture into your arms and [chest], your whole body begins to tingle pleasantly.");
 						switch(_adj) {
 							case "smooth":
