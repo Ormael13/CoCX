@@ -266,7 +266,7 @@ use namespace kGAMECLASS;
 			}
 			//Stacks on top of Thick Skin perk.
 			if (skinType == SKIN_TYPE_FUR) armorDef += 1;
-			if (hasScales()) armorDef += 3;
+			if (hasReptileScales()) armorDef += 3;
 			//if (skinType == SKIN_TYPE_DRACONIC) armorDef += 3; // maybe later
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorDef += 1;
@@ -1276,7 +1276,7 @@ use namespace kGAMECLASS;
 				lizardCounter++;
 			if (armType == ARM_TYPE_PREDATOR && clawType == CLAW_TYPE_LIZARD)
 				lizardCounter++;
-			if (hasScales())
+			if (hasReptileScales())
 				lizardCounter++;
 			if (eyeType == EYES_LIZARD)
 				lizardCounter++;
@@ -1357,7 +1357,7 @@ use namespace kGAMECLASS;
 			//If the character has fur, scales, or gooey skin, -1
 			if (skinType == SKIN_TYPE_FUR && !InCollection(furColor, KitsuneScene.basicKitsuneFur) && !InCollection(furColor, KitsuneScene.elderKitsuneColors))
 				kitsuneCounter--;
-			if (hasScales())
+			if (hasReptileScales())
 				kitsuneCounter -= 2;
 			if (skinType == SKIN_TYPE_GOO)
 				kitsuneCounter -= 3;
@@ -1730,7 +1730,7 @@ use namespace kGAMECLASS;
 				dragonneCounter++;
 			if (lowerBody == LOWER_BODY_TYPE_CAT)
 				dragonneCounter++;
-			if (hasScales() && dragonneCounter > 0)
+			if (hasReptileScales() && dragonneCounter > 0)
 				dragonneCounter++;
 			return dragonneCounter;
 		}

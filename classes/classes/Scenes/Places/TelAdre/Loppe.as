@@ -1593,7 +1593,7 @@ private function getAssFuckedByLoppeAsACentaur():void {
 	if (player.hasVagina()) outputText("  Your vagina contracts, trying to grip at a phantom member as you spill your fluids on the carpet beneath you.");
 
 	outputText("\n\nThe scent of your orgasm and the feeling of your sphincter clenching around her cock as tightly as it can is too much for Loppe, who roughly slams into you one last time and whinnies with glee as she floods your ass with cum.  She continues to thrust and rut and buck as she fills you with splurt after gush of hot, thick herm spunk.  The liquid warmth of Loppe's orgasm only enhances your afterglow, and slowly you feel yourself filled until you");
-	if (!player.hasScales()) outputText(" have goosebumps all over your body");
+	if (!player.hasReptileScales()) outputText(" have goosebumps all over your body");
 	else outputText("r scales are practically standing on end");
 	outputText(".");
 

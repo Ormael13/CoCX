@@ -11,14 +11,14 @@ package classes
 	{
 		public function PlayerHelper() {}
 		
-		public function hasScales():Boolean
+		public function hasReptileScales():Boolean
 		{
 			return [SKIN_TYPE_SCALES, SKIN_TYPE_DRACONIC].indexOf(skinType) != -1;
 		}
 
 		public function hasFurOrScales():Boolean
 		{
-			return skinType == SKIN_TYPE_FUR || hasScales();
+			return skinType == SKIN_TYPE_FUR || hasReptileScales();
 		}
 
 		public function hasDragonHorns(fourHorns:Boolean = false):Boolean

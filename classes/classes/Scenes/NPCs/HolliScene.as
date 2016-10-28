@@ -1512,7 +1512,7 @@ private function holliAndGenderlessSittingInATree():void {
 	outputText("\n\n\"<i>How principled,</i>\" the traveler mumbles, shedding the last of his clothing.  \"<i>It must get bored often.</i>\"");
 	
 	outputText("\n\n\"<i>Indeed it does,</i>\" Holli agrees.  \"<i>But when you make a choice, you accept the consequences.  Is that not so?</i>\"  The dryad pulls the traveler onto her body, then begins to moan as he caresses her breasts and enters her; the eyes of her mute sentinel follow the lovers to the ground and ");
-	if (player.hasScales()) outputText("a quiver of arousal shakes its scales");
+	if (player.hasReptileScales()) outputText("a quiver of arousal shakes its scales");
 	else if (player.skinType == SKIN_TYPE_FUR) outputText("its fur begins to prick up with arousal");
 	else outputText("a blush of lust colors its " + player.skinFurScales());
 	outputText("...");
