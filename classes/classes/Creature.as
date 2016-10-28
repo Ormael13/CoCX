@@ -2404,12 +2404,12 @@ package classes
 
 		public function hasReptileScales():Boolean
 		{
-			return [SKIN_TYPE_SCALES, SKIN_TYPE_DRACONIC].indexOf(skinType) != -1;
+			return [SKIN_TYPE_SCALES, SKIN_TYPE_DRAGON_SCALES].indexOf(skinType) != -1;
 		}
 
 		public function hasDragonScales():Boolean
 		{
-			return skinType == SKIN_TYPE_DRACONIC;
+			return skinType == SKIN_TYPE_DRAGON_SCALES;
 		}
 
 		public function hasLizardScales():Boolean

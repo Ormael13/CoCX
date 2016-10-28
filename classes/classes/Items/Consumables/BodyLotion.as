@@ -89,7 +89,7 @@ package classes.Items.Consumables
 				game.HPChange(10, true);
 			}
 			else {
-				if ([SKIN_TYPE_GOO, SKIN_TYPE_DRACONIC].indexOf(game.player.skinType) == -1) { //If skin is goo or dragon scales, don't change.
+				if ([SKIN_TYPE_GOO, SKIN_TYPE_DRAGON_SCALES].indexOf(game.player.skinType) == -1) { //If skin is goo or dragon scales, don't change.
 					if (_adj != "clear") game.player.skinAdj = _adj;
 					else game.player.skinAdj = "";
 				}
@@ -155,7 +155,7 @@ package classes.Items.Consumables
 						outputText("You take the lotion and pour the " + liquidDesc() + " into yourself. The concoction dissolves, leaving your gooey epidermis unchanged. As a matter of fact nothing happens at all.");
 						//No changes due to gooey skin.
 						break;
-					case SKIN_TYPE_DRACONIC: //Dragon scales
+					case SKIN_TYPE_DRAGON_SCALES: //Dragon scales
 						outputText("You take the lotion and pour the " + liquidDesc() + " on your scales. The concoction dissolves, leaving your dragon scales unchanged. As a matter of fact nothing happens at all.");
 						//No changes due to dragon scales.
 						break;
