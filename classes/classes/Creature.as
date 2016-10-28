@@ -2407,14 +2407,19 @@ package classes
 			return [SKIN_TYPE_SCALES, SKIN_TYPE_DRACONIC].indexOf(skinType) != -1;
 		}
 
-		public function hasFurOrScales():Boolean
+		public function hasDragonScales():Boolean
 		{
-			return skinType == SKIN_TYPE_FUR || hasReptileScales();
+			return skinType == SKIN_TYPE_DRACONIC;
 		}
 
 		public function hasLizardScales():Boolean
 		{
 			return skinType == SKIN_TYPE_SCALES;
+		}
+
+		public function hasFurOrScales():Boolean
+		{
+			return skinType == SKIN_TYPE_FUR || hasReptileScales();
 		}
 
 		public function isBiped():Boolean
@@ -2538,7 +2543,7 @@ package classes
 			//haircolor
 			if (_skinType == 1)
 				skinzilla += furColor + " ";
-			else if (_skinType == SKIN_TYPE_DRACONIC)
+			else if (hasDragonScales())
 				skinzilla += "iron-like, " + _skinTone + " shield-shaped ";
 			else
 				skinzilla += _skinTone + " ";

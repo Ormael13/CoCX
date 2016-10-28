@@ -267,7 +267,7 @@ use namespace kGAMECLASS;
 			//Stacks on top of Thick Skin perk.
 			if (skinType == SKIN_TYPE_FUR) armorDef += 1;
 			if (hasReptileScales()) armorDef += 3;
-			//if (skinType == SKIN_TYPE_DRACONIC) armorDef += 3; // maybe later
+			//if (hasDragonScales()) armorDef += 3; // maybe later
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorDef += 1;
 			//Bonus defense
@@ -1396,7 +1396,7 @@ use namespace kGAMECLASS;
 				dragonCounter++;
 			if (lowerBody == LOWER_BODY_TYPE_DRAGON)
 				dragonCounter++;
-			if (skinType == SKIN_TYPE_DRACONIC && dragonCounter > 0)
+			if (hasDragonScales() && dragonCounter > 0)
 				dragonCounter++;
 			if (hasDragonHorns())
 				dragonCounter++;

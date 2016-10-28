@@ -5274,7 +5274,7 @@
 					updateClaws(player.clawType);
 					outputText("\n\nYou scratch yourself, and come away with a large clump of " + player.furColor + " fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + player.skinTone + " scales covering most of your body.  The rest of the fur is easy to remove.  <b>You're now covered in scales from head to toe.</b>", false);
 				}
-				else if (player.skinType == SKIN_TYPE_DRACONIC) {
+				else if (player.hasDragonScales()) {
 					outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, hoping for relief; and when you look at your hands you notice small fragments of your " + player.skinFurScales() + " hanging from your fingers.  Nevertheless you continue to scratch yourself, and when you're finally done, you look yourself over. New scales have grown to replace your peeled off " + player.skinFurScales() + ".  <b>You're covered from head to toe in shiny ");
 					player.skinTone = newLizardSkinTone();
 					updateClaws(player.clawType);
