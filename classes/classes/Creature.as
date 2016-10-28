@@ -2402,6 +2402,21 @@ package classes
 			return (bonusFertility() + fertility);
 		}
 
+		public function hasReptileScales():Boolean
+		{
+			return [SKIN_TYPE_SCALES, SKIN_TYPE_DRACONIC].indexOf(skinType) != -1;
+		}
+
+		public function hasFurOrScales():Boolean
+		{
+			return skinType == SKIN_TYPE_FUR || hasReptileScales();
+		}
+
+		public function hasLizardScales():Boolean
+		{
+			return skinType == SKIN_TYPE_SCALES;
+		}
+
 		public function isBiped():Boolean
 		{
 			return legCount == 2;
