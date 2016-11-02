@@ -1357,7 +1357,7 @@ use namespace kGAMECLASS;
 			//If the character has fur, scales, or gooey skin, -1
 			if (skinType == SKIN_TYPE_FUR && !InCollection(furColor, KitsuneScene.basicKitsuneFur) && !InCollection(furColor, KitsuneScene.elderKitsuneColors))
 				kitsuneCounter--;
-			if (hasReptileScales())
+			if (hasScales())
 				kitsuneCounter -= 2;
 			if (skinType == SKIN_TYPE_GOO)
 				kitsuneCounter -= 3;

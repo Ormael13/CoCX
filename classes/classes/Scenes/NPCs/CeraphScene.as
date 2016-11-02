@@ -867,7 +867,7 @@ package classes.Scenes.NPCs
 			else outputText("and you stifle a laugh at the ridiculous thought, ignoring your fingers while they scratch at the itch under your gear.", false);
 			outputText("  Your ", false);
 			if ([SKIN_TYPE_PLAIN, SKIN_TYPE_FUR].indexOf(player.skinType) >= 0) outputText("skin burns", false);
-			else if (player.hasReptileScales()) outputText("scales burn", false);
+			else if (player.hasScales()) outputText("scales burn", false);
 			else outputText(player.skinDesc + " burns", false);
 			outputText(" hot, raging from fetish-enhanced lust and daydreams, but you shake your head in time to see a pair of inky black orbs rising from behind a nearby boulder.\n\n", false);
 

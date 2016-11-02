@@ -1459,7 +1459,7 @@ package classes.Scenes.Places.Bazaar
 			//Transformations
 			if (rand(5) == 0) mutations.updateOvipositionPerk(tfSource);
 
-			if (rand(3) == 0 && changes < changeLimit && player.hasReptileScales()) {
+			if (rand(3) == 0 && changes < changeLimit && player.hasScales()) {
 				outputText("\n\nYou feel an odd rolling sensation as your scales begin to shift, spreading and reforming as they grow and disappear, <b>becoming normal human skin</b>.");
 				player.skinType = SKIN_TYPE_PLAIN;
 				changes++;
@@ -1480,7 +1480,7 @@ package classes.Scenes.Places.Bazaar
 				player.faceType = FACE_HUMAN;
 				changes++;
 			}
-			if (rand(4) == 0 && changes < changeLimit && !player.hasReptileScales() && player.earType != EARS_ELFIN) {
+			if (rand(4) == 0 && changes < changeLimit && !player.hasScales() && player.earType != EARS_ELFIN) {
 				outputText("\n\nYou feel an odd shifting sensation on the side of your head and, reaching up to inspect it, find a <b>pair of fleshy pointed ears</b>. "); 
 				if (player.skinType == SKIN_TYPE_FUR) ("As you examine your new elvish ears you feel fur grow around them, matching the rest of you.");
 				player.earType = EARS_ELFIN;
@@ -1613,6 +1613,7 @@ package classes.Scenes.Places.Bazaar
 						break;
 					case SKIN_TYPE_LIZARD_SCALES:
 					case SKIN_TYPE_DRAGON_SCALES:
+					case SKIN_TYPE_FISH_SCALES:
 						outputText("You feel an odd rolling sensation as your scales begin to shift, spreading and reforming as they grow and disappear, <b>becoming tough gray skin</b>.");
 						break;
 					case SKIN_TYPE_GOO:

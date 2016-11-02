@@ -2402,6 +2402,11 @@ package classes
 			return (bonusFertility() + fertility);
 		}
 
+		public function hasScales():Boolean
+		{
+			return [SKIN_TYPE_LIZARD_SCALES, SKIN_TYPE_DRAGON_SCALES, SKIN_TYPE_FISH_SCALES].indexOf(skinType) != -1;
+		}
+
 		public function hasReptileScales():Boolean
 		{
 			return [SKIN_TYPE_LIZARD_SCALES, SKIN_TYPE_DRAGON_SCALES].indexOf(skinType) != -1;
@@ -2415,6 +2420,11 @@ package classes
 		public function hasLizardScales():Boolean
 		{
 			return skinType == SKIN_TYPE_LIZARD_SCALES;
+		}
+
+		public function hasNonLizardScales():Boolean
+		{
+			return hasScales() && !hasLizardScales();
 		}
 
 		public function hasFurOrScales():Boolean

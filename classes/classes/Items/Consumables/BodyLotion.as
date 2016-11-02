@@ -133,19 +133,20 @@ package classes.Items.Consumables
 						}
 						break;
 					case SKIN_TYPE_LIZARD_SCALES: //Scales
+					case SKIN_TYPE_FISH_SCALES: //Scales
 						outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the flask of lotion and rubbing", "uncork the flask of lotion and rub") + " the " + liquidDesc() + " across your body. As you rub the mixture into your arms and [chest], your whole body begins to tingle pleasantly.");
 						switch(_adj) {
 							case "smooth":
-								outputText("Soon you part your fur to reveal smooth skin that still appears natural.");
+								outputText("Soon your scales are smoother but in a natural healthy way.");
 								break;
 							case "rough":
-								outputText("Soon you part your fur to reveal rough skin that still appears natural.");
+								outputText("Soon your scales are rougher as if you’ve just finished a long day’s work.");
 								break;
 							case "sexy":
-								outputText("Soon you part your fur to reveal sexy skin that makes you want to kiss yourself.");
+								outputText("Soon your scales are so sexy you find it hard to keep your hands off yourself.");
 								break;
 							case "clear":
-								outputText("Soon you part your fur to reveal the natural beauty of your " + game.player.skinFurScales() + " skin.");
+								outputText("Soon the natural beauty of your " + game.player.skinFurScales() + " is revealed without anything extra or unnecessary.");
 								break;
 							default: //Failsafe
 								outputText("<b>This text should not happen. Please let Kitteh6660 know.</b>");
