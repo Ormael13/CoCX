@@ -373,8 +373,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.7e2";
-			version = ver + " (<b>Etna, Manticore Venom, Archery Rework (part 2), QoL changes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.7e3";
+			version = ver + " (<b>Archery Rework (part 3), Many small changes and fix for tail feed bug</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
