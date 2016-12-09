@@ -7,10 +7,10 @@ package classes.Items.Consumables
 	import classes.internals.Utils;
 	import classes.Items.Consumable;
 
-	public class OvipositionElixir extends Consumable {
+	public class OvipositionMax extends Consumable {
 		
-		public function OvipositionElixir() {
-			super("OviElix", "Ovi Elixir", "a hexagonal crystal bottle tagged with an image of an egg", 30, "This hexagonal crystal bottle is filled with a strange green fluid. A tag with a picture of an egg is tied to the neck of the bottle, indicating it is somehow connected to egg-laying.");
+		public function OvipositionMax() {
+			super("Ovi Max", "Ovi Max", "an enhanced hexagonal crystal bottle tagged with an image of an egg", 75, "This hexagonal crystal bottle is filled with a strange yellow fluid. A tag with a picture of a glowing egg is tied to the neck of the bottle, indicating it is somehow connected to egg-laying and you know it will be more potent.");
 		}
 		
 		override public function canUse():Boolean {
@@ -45,7 +45,7 @@ package classes.Items.Consumables
 			if (game.player.pregnancyIncubation == 0) { //If the player is not pregnant, get preggers with eggs!
 				outputText("\n\nThe elixir has an immediate effect on your belly, causing it to swell out slightly as if pregnant.  You guess you'll be laying eggs sometime soon!");
 				game.player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS, 1, 1);
-				game.player.createStatusEffect(StatusEffects.Eggs, Utils.rand(6), 0, Utils.rand(3) + 5, 0);
+				game.player.createStatusEffect(StatusEffects.Eggs, Utils.rand(6), Utils.rand(2), Utils.rand(4) + 6, 0);
 				return(false);
 			}
 			var changeOccurred:Boolean = false;
@@ -63,14 +63,14 @@ package classes.Items.Consumables
 					//Chance of quantity increase!
 					if (Utils.rand(2) == 0) {
 						outputText("\n\nA rumble radiates from your uterus as it shifts uncomfortably and your belly gets a bit larger.");
-						game.player.addStatusValue(StatusEffects.Eggs,3, Utils.rand(4) + 1);
+						game.player.addStatusValue(StatusEffects.Eggs,3, Utils.rand(5) + 2);
 						changeOccurred = true;
 					}
 				}
 			}
-			if (!changeOccurred && game.player.pregnancyIncubation > 20 && game.player.pregnancyType != PregnancyStore.PREGNANCY_BUNNY) { //If no changes, speed up pregnancy.
+			if (!changeOccurred && game.player.pregnancyIncubation > 20) { //If no changes, speed up pregnancy.
 				outputText("\n\nYou gasp as your pregnancy suddenly leaps forwards, your belly bulging outward a few inches as it gets closer to time for birthing.");
-				var newIncubation:int = game.player.pregnancyIncubation - int(game.player.pregnancyIncubation * 0.3 + 10);
+				var newIncubation:int = game.player.pregnancyIncubation - int(game.player.pregnancyIncubation * 0.5 + 15);
 				if (newIncubation < 2) newIncubation = 2;
 				game.player.knockUpForce(game.player.pregnancyType, newIncubation);
 				trace("Pregger Count New total:" + game.player.pregnancyIncubation);

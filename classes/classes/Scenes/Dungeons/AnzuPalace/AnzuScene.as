@@ -1036,27 +1036,39 @@ Sure, you answer him, but for now, you have to let them rest for a bit. After sa
 					outputText("\n\nAnd?");
 					outputText("\n\n“Well… do you want to have breakfast with me again?”");
 				}
-				menu();
 				doYesNo(eatFoodWithAnzu, dontEatFoodWithAnzu);
-				flags[kFLAGS.ANZU_TIMES_DINED_BREAKFAST]++;
 			}
 			else if (model.time.hours < 16) {
 				if (flags[kFLAGS.ANZU_TIMES_DINED_LUNCH] == 0) {
+					outputText("When you arrive to the palace a smell of meat cooking attracts your attention. The smell leads you to the kitchen, and when your enter, you find Anzu taking some roasted steaks from a grill. Looks like this time he has left behind his robes and now he’s wearing a white apron over his set of shirt and pants. When putting the steaks on a plate, he manages to look you and says.");
+					outputText("\n\n“[name]. You’re here! Looks like you’ve arrived just in time. As you see, I’m cooking the meal.” He says, pointing the tables around him.");
+					outputText("\n\nOn the tables near the stove are many slices of what once were a huge cheese, some pieces of bread, with some bunches of grapes on the left. Isn’t too much for a midday lunch?");
+					outputText("\n\n“You see, I usually eat much more food at noon than in the dinner. Since I’ve almost finished with the main dish, you could help me, and then we could eat together. If you want, of course.”");
+				}
+				else {
 					
 				}
-				flags[kFLAGS.ANZU_TIMES_DINED_LUNCH]++;
+				doYesNo(eatFoodWithAnzu, dontEatFoodWithAnzu);
 			}
 			else {
 				if (flags[kFLAGS.ANZU_TIMES_DINED_DINNER] == 0) {
+					outputText("");
+				}
+				else {
 					
 				}
-				flags[kFLAGS.ANZU_TIMES_DINED_DINNER]++;
+				doYesNo(eatFoodWithAnzu, dontEatFoodWithAnzu);
 			}
 			
 		}
 		
 		private function eatFoodWithAnzu():void {
 			clearOutput();
+			//Determine amount to refill hunger
+			var hungerRefillAmount:int = 50;
+			hungerRefillAmount -= Math.floor(player.hunger / 4);
+			if (hungerRefillAmount < 20) hungerRefillAmount = 20;
+			//Scene GO!
 			if (model.time.hours < 8) {
 				outputText("You answer giving him a quick peck on his cheek and saying who you’d love to have breakfast with him.");
 				outputText("\n\n“Excellent.” He says “If you want, you could help me to make the food ready”");
@@ -1065,10 +1077,12 @@ Sure, you answer him, but for now, you have to let them rest for a bit. After sa
 				outputText("\n\nWhen the bacon is ready, he put it next to the eggs and spreads salt and pepper on them. After serving the plates with eggs and bacon, he points you some bottles with milk and the cabinet when the glasses are stored.");
 				outputText("\n\nYou fill a jar with milk and put it on a nearby table, where two glasses and the plate with bread is waiting. Anzu leaves the plate with the bread on the dining room, and returns for the jar with milk and the glasses, while you carry the plates with eggs and bacon.");
 				outputText("\n\nWhile eating, you manage to look how he hasn’t bothered to get dressed to the breakfast, and now without his apron, exhibits his naked body to you without shame. The breakfast is quite delicious. Anzu certainly had a lot of practice cooking for himself all that years, you think while savouring the perfectly spiced eggs and the bacon.");
+				player.refillHunger(hungerRefillAmount);
 				outputText("\n\nAfter eating, both of you chat for a while. Anzu tells your more stories of his former world, while he listen some of your adventures in Mareth and about your home back on Ingnam.");
 				if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] >= 4) {
 					if (flags[kFLAGS.ANZU_TIMES_HIGH_REL_BREAKFAST] == 0) outputText("\n\n<b>A </b>");
 				}
+				flags[kFLAGS.ANZU_TIMES_DINED_BREAKFAST]++;
 			}
 			else if (model.time.hours < 16) {
 				outputText("");
@@ -1077,6 +1091,7 @@ Sure, you answer him, but for now, you have to let them rest for a bit. After sa
 				outputText("\n\n");
 				outputText("\n\n");
 				outputText("\n\n");
+				flags[kFLAGS.ANZU_TIMES_DINED_LUNCH]++;
 			}
 			else {
 				outputText("");
@@ -1085,12 +1100,30 @@ Sure, you answer him, but for now, you have to let them rest for a bit. After sa
 				outputText("\n\n");
 				outputText("\n\n");
 				outputText("\n\n");
+				flags[kFLAGS.ANZU_TIMES_DINED_DINNER]++;
 			}
 			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_ANZU_DINING_ROOM;
-			player.refillHunger(50);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		private function dontEatFoodWithAnzu():void {
+			clearOutput();
+			//Scene GO!
+			if (model.time.hours < 8) {
+				outputText("You thank him for his offer, but state how you already had your breakfast.");
+				outputText("\n\n“Oh, it’s okay” he says, a little disappointed. “Well, if you change your mind, you know where find me on the mornings.”");
+				outputText("\n\nLeaving the cooking avian to his own matters, you return to your camp.");
+			}
+			else if (model.time.hours < 16) {
+				outputText("Excusing yourself, you tell him that you don’t have much time now. Maybe in another opportunity.");
+				outputText("\n\n“No matter, friend. If you change your mind and want to eat with me, come here tomorrow, or another day.” He says, pointing the empty dining room. “I have more than enough room for us”");
+				outputText("\n\nYou’ll see. After waving bye to Anzu, you come back to your camp.");
+
+			}
+			else {
+				outputText("");
+				outputText("\n\n");
+
+			}
 			clearOutput();
 		}
 		

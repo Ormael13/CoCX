@@ -1080,8 +1080,9 @@ package classes.Scenes.Combat
 		}
 		public function combatCritical():Boolean {
 			var critChance:int = 4;
-			if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) critChance += (player.inte - 50) / 50;
+			if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) critChance += (player.inte - 50) / 10;
 			if (player.findPerk(PerkLib.Blademaster) >= 0 && (player.weaponVerb == "slash" || player.weaponVerb == "cleave" || player.weaponVerb == "keen cut")) critChance += 5;
+			if (player.jewelry.effectId == JewelryLib.MODIFIER_CRITICAL) critChance += player.jewelry.effectMagnitude;
 			return rand(100) <= critChance;
 		}
 
@@ -1645,6 +1646,7 @@ package classes.Scenes.Combat
 
 		public function regeneration(combat:Boolean = true):void {
 			var healingPercent:Number = 0;
+			var healingBonus:Number = 0;
 			if (combat) {
 				//Regeneration
 				healingPercent = 0;
@@ -1653,11 +1655,12 @@ package classes.Scenes.Combat
 					if (player.findPerk(PerkLib.Regeneration) >= 0) healingPercent += 1;
 					if (player.findPerk(PerkLib.Regeneration2) >= 0) healingPercent += 1;
 				}
-				if (player.armor.name == "skimpy nurse's outfit") healingPercent += 1;
-				if (player.armor == armors.GOOARMR) healingPercent += (getGame().valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
 				if (player.findPerk(PerkLib.LustyRegeneration) >= 0) healingPercent += 1;
+				if (player.armor == armors.NURSECL) healingPercent += 1;
+				if (player.armor == armors.GOOARMR) healingPercent += (getGame().valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
+				if (player.jewelry.effectId == JewelryLib.MODIFIER_REGENERATION) healingBonus += player.jewelry.effectMagnitude;
 				if (healingPercent > 5) healingPercent = 5;
-				HPChange(Math.round(player.maxHP() * healingPercent / 100), false);
+				HPChange(Math.round(player.maxHP() * healingPercent / 100) + healingBonus, false);
 			}
 			else {
 				//Regeneration

@@ -49,15 +49,13 @@ package classes.Scenes
 				addButton(1, "Change Stats", statChangeMenu, null, null, null, "Change your core stats.");
 				addButton(2, "Flag Editor", flagEditor, null, null, null, "Edit any flag. \n\nCaution: This might screw up your save!");
 				addButton(3, "Reset NPC", resetNPCMenu, null, null, null, "Choose a NPC to reset.");
-				//addButton(5, "Event Trigger", eventTriggerMenu);
-				//addButton(6, "MeaninglessCorr", toggleMeaninglessCorruption, null, null, null, "Toggles the Meaningless Corruption flag. If enabled, all corruption requirements are disabled for scenes.");
 				if (player.isPregnant()) addButton(4, "Abort Preg", abortPregnancy);
 				addButton(7, "HACK STUFFZ", styleHackMenu, null, null, null, "H4X0RZ");
 				addButton(14, "Exit", playerMenu);
 			}
 			if (getGame().inCombat) {
 				clearOutput();
-				outputText("You raise the wand but nothing happens. Seems like it only works when you're not in the middle of a battle.");
+				outputText("You raise the wand and give it a twirl but nothing happens. Seems like it only works when you're not in the middle of a battle.");
 				doNext(playerMenu);
 			}
 		}
@@ -210,12 +208,13 @@ package classes.Scenes
 			consumableArray.push(consumables.NUMBOIL);
 			consumableArray.push(consumables.NUMBROX);
 			consumableArray.push(consumables.OVIELIX);
+			consumableArray.push(consumables.OVI_MAX);
 			consumableArray.push(consumables.PEPPWHT);
 			consumableArray.push(consumables.PPHILTR);
 			consumableArray.push(consumables.PRNPKR);
 			consumableArray.push(consumables.PROMEAD);
-			consumableArray.push(consumables.REDUCTO);
 			//Page 3
+			consumableArray.push(consumables.REDUCTO);
 			consumableArray.push(consumables.SENSDRF);
 			consumableArray.push(consumables.SMART_T);
 			consumableArray.push(consumables.VITAL_T);
@@ -227,8 +226,8 @@ package classes.Scenes
 			consumableArray.push(consumables.C_BREAD);
 			consumableArray.push(consumables.CCUPCAK);
 			consumableArray.push(consumables.FISHFIL);
-			consumableArray.push(consumables.FR_BEER);
 			//Page 4
+			consumableArray.push(consumables.FR_BEER);
 			consumableArray.push(consumables.GODMEAD);
 			consumableArray.push(consumables.H_BISCU);
 			consumableArray.push(consumables.IZYMILK);
@@ -240,8 +239,8 @@ package classes.Scenes
 			consumableArray.push(consumables.SHEEPMK);
 			consumableArray.push(consumables.S_WATER);
 			consumableArray.push(consumables.NPNKEGG);
-			consumableArray.push(consumables.DRGNEGG);
 			//Page 5
+			consumableArray.push(consumables.DRGNEGG);
 			consumableArray.push(consumables.W_PDDNG);
 			consumableArray.push(consumables.TRAILMX);
 			consumableArray.push(consumables.URTACUM);
@@ -435,18 +434,57 @@ package classes.Scenes
 			// Accessories
 			//------------
 			//Page 1
-			accessoryArray.push(jewelries.CRIMRNG);
-			accessoryArray.push(jewelries.FERTRNG);
-			accessoryArray.push(jewelries.ICE_RNG);
-			accessoryArray.push(jewelries.LIFERNG);
-			accessoryArray.push(jewelries.MYSTRNG);
-			accessoryArray.push(jewelries.POWRRNG);
-			accessoryArray.push(jewelries.PURERNG);
-			accessoryArray.push(jewelries.DIAMRNG);
-			accessoryArray.push(jewelries.GOLDRNG);
-			accessoryArray.push(jewelries.LTHCRNG);
-			accessoryArray.push(jewelries.PLATRNG);
 			accessoryArray.push(jewelries.SILVRNG);
+			accessoryArray.push(jewelries.GOLDRNG);
+			accessoryArray.push(jewelries.PLATRNG);
+			accessoryArray.push(jewelries.DIAMRNG);
+			accessoryArray.push(jewelries.LTHCRNG);
+			accessoryArray.push(jewelries.PURERNG);
+			accessoryArray.push(null);
+			accessoryArray.push(null);
+			accessoryArray.push(null);
+			accessoryArray.push(null);
+			accessoryArray.push(null);
+			accessoryArray.push(null);
+			//Page 2
+			accessoryArray.push(jewelries.CRIMRN1);
+			accessoryArray.push(jewelries.FERTRN1);
+			accessoryArray.push(jewelries.ICE_RN1);
+			accessoryArray.push(jewelries.CRITRN1);
+			accessoryArray.push(jewelries.REGNRN1);
+			accessoryArray.push(jewelries.LIFERN1);
+			accessoryArray.push(jewelries.MYSTRN1);
+			accessoryArray.push(jewelries.POWRRN1);
+			accessoryArray.push(null);
+			accessoryArray.push(null);
+			accessoryArray.push(null);
+			accessoryArray.push(null);
+			//Page 3
+			accessoryArray.push(jewelries.CRIMRN2);
+			accessoryArray.push(jewelries.FERTRN2);
+			accessoryArray.push(jewelries.ICE_RN2);
+			accessoryArray.push(jewelries.CRITRN2);
+			accessoryArray.push(jewelries.REGNRN2);
+			accessoryArray.push(jewelries.LIFERN2);
+			accessoryArray.push(jewelries.MYSTRN2);
+			accessoryArray.push(jewelries.POWRRN2);
+			accessoryArray.push(null);
+			accessoryArray.push(null);
+			accessoryArray.push(null);
+			accessoryArray.push(null);
+			//Page 4
+			accessoryArray.push(jewelries.CRIMRN3);
+			accessoryArray.push(jewelries.FERTRN3);
+			accessoryArray.push(jewelries.ICE_RN3);
+			accessoryArray.push(jewelries.CRITRN3);
+			accessoryArray.push(jewelries.REGNRN3);
+			accessoryArray.push(jewelries.LIFERN3);
+			accessoryArray.push(jewelries.MYSTRN3);
+			accessoryArray.push(jewelries.POWRRN3);
+			accessoryArray.push(null);
+			accessoryArray.push(null);
+			accessoryArray.push(null);
+			accessoryArray.push(null);
 			setArrays = true;
 		}
 		
@@ -455,13 +493,13 @@ package classes.Scenes
 		private function statChangeMenu():void {
 			outputText("Which attribute would you like to alter?", true);
 			menu();
-			addButton(0, "Strength", statChangeAttributeMenu, "str")
-			addButton(1, "Toughness", statChangeAttributeMenu, "tou")
-			addButton(2, "Speed", statChangeAttributeMenu, "spe")
-			addButton(3, "Intelligence", statChangeAttributeMenu, "int")
-			addButton(5, "Libido", statChangeAttributeMenu, "lib")
-			addButton(6, "Sensitivity", statChangeAttributeMenu, "sen")
-			addButton(7, "Corruption", statChangeAttributeMenu, "cor")
+			addButton(0, "Strength", statChangeAttributeMenu, "str");
+			addButton(1, "Toughness", statChangeAttributeMenu, "tou");
+			addButton(2, "Speed", statChangeAttributeMenu, "spe");
+			addButton(3, "Intelligence", statChangeAttributeMenu, "int");
+			addButton(5, "Libido", statChangeAttributeMenu, "lib");
+			addButton(6, "Sensitivity", statChangeAttributeMenu, "sen");
+			addButton(7, "Corruption", statChangeAttributeMenu, "cor");
 			addButton(14, "Back", accessDebugMenu);
 		}
 		
@@ -496,8 +534,6 @@ package classes.Scenes
 			addButton(3, "Be Dragonne", getDragonneKit, null, null, null, "Gain everything needed to become a Dragonne-morph.");
 			addButton(4, "Debug Prison", debugPrison);
 			addButton(5, "Tooltips Ahoy", kGAMECLASS.doNothing, null, null, null, "Ahoy! I'm a tooltip! I will show up a lot in future updates!", "Tooltip 2.0");
-			addButton(6, "Lights Out", kGAMECLASS.lightsOut.startLightsOut, kGAMECLASS.lightsOut.testVictoryFunc, kGAMECLASS.lightsOut.testFailureFunc, null, "Test the lights out puzzle, fresh off TiTS!");
-			addButton(7, "Isabella Birth", kGAMECLASS.isabellaFollowerScene.isabellaGivesBirth, null, null, null, "Test Isabella giving birth for debugging purposes.", "Trigger Isabella Giving Birth");
 			addButton(14, "Back", accessDebugMenu);
 		}
 		
@@ -580,17 +616,7 @@ package classes.Scenes
 			}
 			output.flush();
 		}
-		
-		private function eventTriggerMenu():void {
-			menu();
-			addButton(0, "Anemone", kGAMECLASS.anemoneScene.anemoneKidBirthPtII);
-			//addButton(0, "Marae Purify", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByMarae);
-			//addButton(1, "Jojo Purify", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByJojoPart1);
-			//addButton(2, "Rathazul Purify", kGAMECLASS.highMountains.minervaScene.minervaPurification.purificationByRathazul);
-			
-			addButton(14, "Back", accessDebugMenu);
-		}
-		
+
 		private function toggleMeaninglessCorruption():void {
 			clearOutput();
 			if (flags[kFLAGS.MEANINGLESS_CORRUPTION] == 0) {

@@ -21,6 +21,7 @@ package classes.Scenes.Camp
 			this.short = "scarred blade";
 			this.plural = false;
 			this.createBreastRow();
+			this.initedGenitals = true;
 			this.balls = 0;
 			this.ballSize = 0;
 			this.tallness = 36;

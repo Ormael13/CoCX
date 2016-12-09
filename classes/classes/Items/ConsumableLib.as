@@ -131,6 +131,7 @@ package classes.Items
 		public const NUMBOIL:SimpleConsumable = mk("NumbOil","Numb Oil", "a bottle of numbing oil", m.numbingOil, "This bottle feels a bit warm to the touch. From the look of the label on the bottle of oil, you suspect this will make you less sensitive.", 100);
 		public const NUMBROX:SimpleConsumable = mk("NumbRox","Numb Rox", "a strange packet of candy called 'Numb Rocks'", m.numbRocks, "This packet of innocuous looking 'candy' guarantees to reduce troublesome sensations and taste delicious.", 15);
 		public const OVIELIX:OvipositionElixir = new OvipositionElixir();
+		public const OVI_MAX:OvipositionMax = new OvipositionMax();
 		public const PEPPWHT:SimpleConsumable = mk("PeppWht","PeppWht", "a vial of peppermint white", function(player:Player):void{getGame().xmas.xmasMisc.peppermintWhite(player)}, "This tightly corked glass bottle gives of a pepperminty smell and reminds you of the winter holidays.  How odd.", 120);
 		public const PPHILTR:SimpleConsumable = mk("PPhiltr","P.Philter", "a vial of purity philter", m.purityPhilter, "This silver vial feels cool to the touch. In fact, it feels a bit cold. Given the label, you suspect this will help to erase corruption.", 100);
 		public const PRNPKR :SimpleConsumable  = mk("PrnsPkr", "P.Pucker", "a vial of pinkish fluid", m.princessPucker, "A vial filled with a viscous pink liquid. A label reads \"Princess Pucker\".");

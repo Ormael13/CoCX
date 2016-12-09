@@ -197,7 +197,7 @@ package classes.Scenes.Monsters
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE, 5).
 					add(consumables.REDUCTO, 2).
-					add(jewelries.POWRRNG, 1).
+					add(jewelries.POWRRN1, 1).
 					add(useables.LETHITE, 1).
 					addMany(1,consumables.L_DRAFT,
 							consumables.PINKDYE,

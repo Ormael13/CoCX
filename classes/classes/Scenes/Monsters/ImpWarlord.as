@@ -102,7 +102,7 @@ package classes.Scenes.Monsters
 					add(consumables.LABOVA_,2).
 					add(consumables.INCUBID,12).
 					add(consumables.SUCMILK,12).
-					add(jewelries.POWRRNG,1);
+					add(jewelries.POWRRN1,1);
 			this.wingType = WING_TYPE_IMP;
 			this.special1 = lustMagicAttack;
 			this.special2 = clawAttack;

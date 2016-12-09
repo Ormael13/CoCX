@@ -1701,6 +1701,7 @@ private function forgeScarredBladeEnd():void {
 	outputText("Closer examination reveals the veracity of his claim: all the numerous scratches and flaws on the blade have their origins right above the tang, from the smith's abortive attempts at decoration.  Yet though several ugly gashes stop just short of the edge, none of them actually break the perfect arc, as if cutting were all the blade cared about.\n\n")
 	outputText("\"<i>Damnedest thing,</i>\" he repeats, breaking your train of thought.  \"<i>Every time the blade slipped, it would twist toward my hands.  It's as if it's alive and eager to find flesh.  Truth be told... I was debating whether to turn it over to the Covenant and tell you the crystal couldn't be used.  But you're here, so take it and go.\"  Giving you barely enough time to sheathe the blade again, he places a strong hand against your back and all-but-pushes you out to the street.\n\n")
 	inventory.takeItem(weapons.SCARBLD, weaponShop);
+	flags[kFLAGS.SHEILA_LETHICITE_FORGE_DAY] = -1;
 }
 
 //-----------------
@@ -1719,38 +1720,69 @@ public function jewelShopInside():void {
 	outputText("<i>So what will it be?</i>", false);
 	menu();
 	addButton(0, "Normal rings", jewelShopPageI);
-	addButton(1, "Enchanted rings", jewelShopPageII);
-	addButton(4, "Jewelry box", jewelShopBuyBox);
+	addButton(1, "Special rings", jewelShopPageII);
+	addButton(2, "Tier 1 rings", jewelShopPageTier1);
+	if (player.level >= 10 || model.time.days >= 100) addButton(3, "Tier 2 rings", jewelShopPageTier2);
+	if (player.level >= 20 || model.time.days >= 200) addButton(4, "Tier 3 rings", jewelShopPageTier3);
+	addButton(5, "Jewelry box", jewelShopBuyBox);
 	addButton(14, "Leave", telAdreMenu);
 }
 
 public function jewelShopPageI():void {
-	choices(jewelries.SILVRNG.shortName, createCallBackFunction(jewelBuy, jewelries.SILVRNG),
-			jewelries.GOLDRNG.shortName, createCallBackFunction(jewelBuy, jewelries.GOLDRNG),
-			jewelries.PLATRNG.shortName, createCallBackFunction(jewelBuy, jewelries.PLATRNG),
-			jewelries.DIAMRNG.shortName, createCallBackFunction(jewelBuy, jewelries.DIAMRNG),
-			jewelries.LTHCRNG.shortName, createCallBackFunction(jewelBuy, jewelries.LTHCRNG),
-			"", null,
-			"", null,
-			"", null,
-			"", null,
-			"", null);
+	menu();
+	var button:int = 0;
+	addButton(button++, jewelries.SILVRNG.shortName, jewelBuy, jewelries.SILVRNG);
+	addButton(button++, jewelries.GOLDRNG.shortName, jewelBuy, jewelries.GOLDRNG);
+	addButton(button++, jewelries.PLATRNG.shortName, jewelBuy, jewelries.PLATRNG);
+	addButton(button++, jewelries.DIAMRNG.shortName, jewelBuy, jewelries.DIAMRNG);
 	addButton(14, "Back", jewelShopInside);
-}	
+}
 public function jewelShopPageII():void {
-	choices(jewelries.CRIMRNG.shortName, createCallBackFunction(jewelBuy, jewelries.CRIMRNG),
-			jewelries.ICE_RNG.shortName, createCallBackFunction(jewelBuy, jewelries.ICE_RNG),
-			jewelries.FERTRNG.shortName, createCallBackFunction(jewelBuy, jewelries.FERTRNG),
-			jewelries.LIFERNG.shortName, createCallBackFunction(jewelBuy, jewelries.LIFERNG),
-			jewelries.POWRRNG.shortName, createCallBackFunction(jewelBuy, jewelries.POWRRNG),
-			jewelries.PURERNG.shortName, createCallBackFunction(jewelBuy, jewelries.PURERNG),
-			jewelries.MYSTRNG.shortName, createCallBackFunction(jewelBuy, jewelries.MYSTRNG),
-			"", null,
-			"", null,
-			"", null);
+	menu();
+	var button:int = 0;
+	addButton(button++, jewelries.LTHCRNG.shortName, jewelBuy, jewelries.LTHCRNG);
+	addButton(button++, jewelries.PURERNG.shortName, jewelBuy, jewelries.PURERNG);
 	addButton(14, "Back", jewelShopInside);
-}	
-
+}
+public function jewelShopPageTier1():void {
+	menu();
+	var button:int = 0;
+	addButton(button++, jewelries.CRIMRN1.shortName, jewelBuy, jewelries.CRIMRN1);
+	addButton(button++, jewelries.FERTRN1.shortName, jewelBuy, jewelries.FERTRN1);
+	addButton(button++, jewelries.ICE_RN1.shortName, jewelBuy, jewelries.ICE_RN1);
+	addButton(button++, jewelries.CRITRN1.shortName, jewelBuy, jewelries.CRITRN1);
+	addButton(button++, jewelries.REGNRN1.shortName, jewelBuy, jewelries.REGNRN1);
+	addButton(button++, jewelries.LIFERN1.shortName, jewelBuy, jewelries.LIFERN1);
+	addButton(button++, jewelries.MYSTRN1.shortName, jewelBuy, jewelries.MYSTRN1);
+	addButton(button++, jewelries.POWRRN1.shortName, jewelBuy, jewelries.POWRRN1);
+	addButton(14, "Back", jewelShopInside);
+}
+public function jewelShopPageTier2():void {
+	menu();
+	var button:int = 0;
+	addButton(button++, jewelries.CRIMRN2.shortName, jewelBuy, jewelries.CRIMRN2);
+	addButton(button++, jewelries.FERTRN2.shortName, jewelBuy, jewelries.FERTRN2);
+	addButton(button++, jewelries.ICE_RN2.shortName, jewelBuy, jewelries.ICE_RN2);
+	addButton(button++, jewelries.CRITRN2.shortName, jewelBuy, jewelries.CRITRN2);
+	addButton(button++, jewelries.REGNRN2.shortName, jewelBuy, jewelries.REGNRN2);
+	addButton(button++, jewelries.LIFERN2.shortName, jewelBuy, jewelries.LIFERN2);
+	addButton(button++, jewelries.MYSTRN2.shortName, jewelBuy, jewelries.MYSTRN2);
+	addButton(button++, jewelries.POWRRN2.shortName, jewelBuy, jewelries.POWRRN2);
+	addButton(14, "Back", jewelShopInside);
+}
+public function jewelShopPageTier3():void {
+	menu();
+	var button:int = 0;
+	addButton(button++, jewelries.CRIMRN3.shortName, jewelBuy, jewelries.CRIMRN3);
+	addButton(button++, jewelries.FERTRN3.shortName, jewelBuy, jewelries.FERTRN3);
+	addButton(button++, jewelries.ICE_RN3.shortName, jewelBuy, jewelries.ICE_RN3);
+	addButton(button++, jewelries.CRITRN3.shortName, jewelBuy, jewelries.CRITRN3);
+	addButton(button++, jewelries.REGNRN3.shortName, jewelBuy, jewelries.REGNRN3);
+	addButton(button++, jewelries.LIFERN3.shortName, jewelBuy, jewelries.LIFERN3);
+	addButton(button++, jewelries.MYSTRN3.shortName, jewelBuy, jewelries.MYSTRN3);
+	addButton(button++, jewelries.POWRRN3.shortName, jewelBuy, jewelries.POWRRN3);
+	addButton(14, "Back", jewelShopInside);
+}
 public function jewelShopBuyBox():void {
 	clearOutput();
 	if (player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0)

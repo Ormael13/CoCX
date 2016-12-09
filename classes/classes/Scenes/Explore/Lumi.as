@@ -127,8 +127,8 @@ public function lumiEnhance(justCheck:Boolean = false):Boolean {
 	if (player.hasItem(consumables.SDELITE))
 		succuDelight = lumiEnhanceSDelight;
 	var oviElix:Function =null;
-	//if (player.hasItem(consumables.OVIELIX))
-	//	oviElix = lumiEnhanceOviElix;
+	if (player.hasItem(consumables.OVIELIX))
+		oviElix = lumiEnhanceOviElix;
 	var lustDraft:Function =null;
 	if (player.hasItem(consumables.L_DRAFT))
 		lustDraft = lumiEnhanceDraft;
@@ -221,9 +221,9 @@ private function lumiEnhanceGo(itype:ItemType):void
 	else if (itype == consumables.SDELITE) {
 		nextItem = consumables.S_DREAM;
 	}
-	/*else if (itype == consumables.OVIELIX) {
-		nextItem = consumables.OVIMAX_;
-	} */
+	else if (itype == consumables.OVIELIX) {
+		nextItem = consumables.OVI_MAX;
+	}
 	else if (itype == consumables.L_DRAFT) {
 		nextItem = consumables.F_DRAFT;
 	}

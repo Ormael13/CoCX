@@ -29,7 +29,26 @@ package classes.Scenes.NPCs
 			outputText("\n\n“<i>Duuuuude,</i>” he groans, staggering to his feet again.  The transformation complete, you get up yourself and take a slow circuit around the shark morph, admiring your handiwork.  The brobrew has not gifted Izma with a massive amount of beefcake - it has instead given her a champion swimmer’s body, incredibly tight muscle dipping and rippling across his sleek frame, from his subtle abs down to his pert behind.  It is an irresistible target- you give it a light tap.  It barely even moves; you doubt there’s more than a gram of fat on his entire body.  He doesn’t even seem to have noticed you touching him.  His hands and attention are still entirely upon the monstrous thing between his legs.");
 			outputText("\n\n“<i>Will you look at this thing?</i>” he says, his tone somewhere between horror and awe.  “<i>How am I going to even do anything without thinking about… all I can think about is…</i>” his expression goes vacant and his dick begins to harden, bulging with need as it becomes erect - You can practically hear the cum churning in his balls from where you are.  You suppress the urge to laugh.  Your plan has worked perfectly.  The tiger shark can no longer think beyond the dick which was so damn important to him in his previous life; in possession of more testicles than brain cells, he has become a living flesh dildo for you to manipulate as you will.");
 			outputText("\n\nEventually he comes back to himself and finally notices you are standing next to him.");
+			outputText("\n\n“<i>Hey, alpha " + player.mf("dude", "chick") + "!</i>” he says with a happy grin. “<i>I didn’t notice you standing there, what with…</i>” his expression goes vacant again. You cough deliberately, and he shakes his head and goes back to you. “<i>Sorry. Listen " + player.mf("dude", "girl") + ", I gotta get serious for a moment here, I hope it doesn’t get too heavy.</i>”");
+			if (player.biggestTitSize() >= 3) outputText("He places a hand on your shoulder and looks into your eyes with deep gravity.   Or at least he tries to - his attention keeps drifting to your " + player.breastDescript() + ".");
+			else outputText("He places a hand on your shoulder and looks into your eyes with deep gravity.");
+			outputText("Izma was pretty about ten minutes ago; now the shark morph is possessed of a wide, amiable handsomeness.");
+			if (player.mf("m", "f") == "m") {
+				outputText("\n\n");
+				outputText("\n\n");
+				outputText("\n\n");
+				outputText("\n\n");
+
+			}
+			else {
+				outputText("");
+				outputText("\n\n");
+				outputText("\n\n");
+				outputText("\n\n");
+				outputText("\n\n");
+			}
 			flags[kFLAGS.IZMA_BROFIED] = 1;
+			dynStats("cor", 10);
 		}
 		
 	}
