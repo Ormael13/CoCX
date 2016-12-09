@@ -48,6 +48,10 @@ public function encounterRathazul():void {
 		marblePurification.visitRathazulToPurifyMarbleAfterLaBovaStopsWorkin();
 		return;
 	}
+	if(flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] > 0) {
+		collectRathazulArmor();
+		return;
+	}
 	var offered:Boolean;
 	//Rat is definitely not sexy!
 	if(player.lust > 30) dynStats("lus", -10);
@@ -232,7 +236,7 @@ private function rathazulWorkOffer():Boolean {
 		reductos = buyReducto;
 	}
 	//SPOIDAH
-	if (player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
+	if (player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
 		showArmorMenu = true;
 		spoken = true;
 		totalOffers++;
@@ -415,7 +419,7 @@ public function rathazulArmorMenu():void {
 	var gelArmor:Function = (player.hasItem(useables.GREENGL, 5) ? craftOozeArmor : null);
 	var silk:Function = null;
 	outputText("Which armor project would you like to pursue with Rathazul?");
-	if (player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
+	if (player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
 		silk = craftSilkArmor;
 	}
 	simpleChoices("BeeArmor", beeArmor, "GelArmor", gelArmor, "SpiderSilk", silk, "", null, "Back", returnToRathazulMenu);
@@ -467,7 +471,11 @@ private function declineSilkArmorCommish():void {
 
 public function chooseArmorOrRobes(robeType:int):void {
 	spriteSelect(49);
-	outputText("Rathazul grunts in response and goes back to work.  You turn back to the center of your camp, wondering if the old rodent will actually deliver the wondrous item that he's promised you.", true);
+	clearOutput();
+	outputText("Rathazul grunts in response and goes back to work.  "); 
+	if (player.findStatusAffect(StatusAffects.CampRathazul) >= 0) outputText("You turn back to the center of your camp");
+	else outputText("You " + (player.isNaga() ? "slither" : "walk") + " back to your camp");
+	outputText(", wondering if the old rodent will actually deliver the wondrous item that he's promised you.");
 	doNext(camp.returnToCampUseOneHour);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = robeType;
 	flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] = 24;
@@ -498,6 +506,7 @@ private function collectRathazulArmor():void {
 	//Reset counters
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
 	flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] = 0;
+	player.addStatusValue(StatusAffects.MetRathazul,2,1);
 	inventory.takeItem(itype, returnToRathazulMenu);
 }
 

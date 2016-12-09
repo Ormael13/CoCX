@@ -632,6 +632,22 @@ private function doCamp():void { //Only called by playerMenu
 		}
 		else outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  The alchemist Rathazul looks to be hard at work on the silken equipment you've commissioned him to craft.\n\n", false);
 	}
+	else { //Reminder to get the spider silk armor from Rathazul at the lake.
+		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] > 0 && flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] <= 1) {
+			outputText("There is a note on your bedroll. It reads: \"<i>Come see me at the lake. I've finished your spider-silk ");
+			switch(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275]) {
+				case 1: 
+					outputText("armor");
+					break;
+				case 2: 
+					outputText("robes");
+					break;
+				default:
+					outputText("armor");
+			}
+			outputText(". -Rathazul</i>\"\n\n");
+		}
+	}
 	//MOUSEBITCH
 	if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1) {
 		if(flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4) outputText("Amily has relocated her grass bedding to the opposite side of the camp from the strange tree; every now and then, she gives it a suspicious glance, as if deciding whether to move even further.");
