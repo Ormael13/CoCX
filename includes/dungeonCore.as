@@ -35,6 +35,7 @@ private function dungeonMenu():void {
 	//Display Proper Buttons
 	mainView.showMenuButton(MainView.MENU_APPEARANCE);
 	mainView.showMenuButton(MainView.MENU_PERKS);
+	mainView.showMenuButton(MainView.MENU_STATS);
 	mainView.hideMenuButton(MainView.MENU_DATA);
 	
 	//clear up/down arrows

@@ -269,15 +269,17 @@ public function levelUpGo(e:MouseEvent = null):void {
 	mainView.hideMenuButton( MainView.MENU_NEW_MAIN );
 	//Level up
 	if (player.XP >= (player.level) * 100) {
+		player.XP -= (player.level) * 100;
 		player.level++;
 		player.perkPoints++;
-		outputText("<b>You are now level " + player.level + "!</b>\n\nYou may now apply +5 to one attribute.  Which will you choose?");
-		player.XP -= (player.level - 1) * 100;
+		player.statPoints += 5;
+		outputText("<b>You are now level " + num2Text(player.level) + "!</b>\n\nYou have gained five attribute points and one perk point!", true);
 		menu();
-		addButton(0, "Strength", levelUpStatStrength);
-		addButton(1, "Toughness", levelUpStatToughness);
-		addButton(2, "Speed", levelUpStatSpeed);
-		addButton(3, "Intelligence", levelUpStatIntelligence);
+		doNext(attributeMenu);
+	}
+	//Spend attribute points
+	else if(player.statPoints > 0) {
+		attributeMenu();
 	}
 	//Spend perk points
 	else if (player.perkPoints > 0) {
@@ -289,34 +291,144 @@ public function levelUpGo(e:MouseEvent = null):void {
 	}
 }
 
-private function levelUpStatStrength():void {
-	dynStats("str", 5); //Gain +5 Str due to level
+
+//Attribute menu
+private function attributeMenu():void {
 	clearOutput();
-	outputText("Your muscles feel significantly stronger from your time adventuring.");
-	doNext(perkBuyMenu);
+	outputText("You have <b>" + (player.statPoints) + "</b> left to spend.\n\n");
+	
+	outputText("Strength: ");
+	if (player.str < 100) outputText("" + Math.floor(player.str) + " + <b>" + player.tempStr + "</b> → " + Math.floor(player.str + player.tempStr) + "\n");
+	else outputText("" + Math.floor(player.str) + " (Maximum)\n");
+	
+	outputText("Toughness: ");
+	if (player.tou < 100) outputText("" + Math.floor(player.tou) + " + <b>" + player.tempTou + "</b> → " + Math.floor(player.tou + player.tempTou) + "\n");
+	else outputText("" + Math.floor(player.tou) + " (Maximum)\n");
+	
+	outputText("Speed: ");
+	if (player.spe < 100) outputText("" + Math.floor(player.spe) + " + <b>" + player.tempSpe + "</b> → " + Math.floor(player.spe + player.tempSpe) + "\n");
+	else outputText("" + Math.floor(player.spe) + " (Maximum)\n");
+	
+	outputText("Intelligence: ");
+	if (player.inte < 100) outputText("" + Math.floor(player.inte) + " + <b>" + player.tempInt + "</b> → " + Math.floor(player.inte + player.tempInt) + "\n");
+	else outputText("" + Math.floor(player.inte) + " (Maximum)\n");
+
+	menu();
+	//Add
+	if (player.statPoints > 0) {
+		if ((player.str + player.tempStr) < 100) addButton(0, "Add STR", addAttribute, "str");
+		if ((player.tou + player.tempTou) < 100) addButton(1, "Add TOU", addAttribute, "tou");
+		if ((player.spe + player.tempSpe) < 100) addButton(2, "Add SPE", addAttribute, "spe");
+		if ((player.inte + player.tempInt) < 100) addButton(3, "Add INT", addAttribute, "int");
+	}
+	//Subtract
+	if (player.tempStr > 0) addButton(5, "Sub STR", subtractAttribute, "str");
+	if (player.tempTou > 0) addButton(6, "Sub TOU", subtractAttribute, "tou");
+	if (player.tempSpe > 0) addButton(7, "Sub SPE", subtractAttribute, "spe");
+	if (player.tempInt > 0) addButton(8, "Sub INT", subtractAttribute, "int");
+	
+	addButton(4, "Reset", resetAttributes);
+	addButton(9, "Done", finishAttributes);
+	
+	//Tooltip Awesomeness!
+	mainView.bottomButtons[0].toolTipText = "Add 1 point to Strength.";
+	mainView.bottomButtons[1].toolTipText = "Add 1 point to Toughness.";
+	mainView.bottomButtons[2].toolTipText = "Add 1 point to Speed.";
+	mainView.bottomButtons[3].toolTipText = "Add 1 point to Intelligence.";
+	mainView.bottomButtons[4].toolTipText = "Reset all stats points being currently allocated.";
+	mainView.bottomButtons[5].toolTipText = "Subtract 1 point from Strength.";
+	mainView.bottomButtons[6].toolTipText = "Subtract 1 point from Toughness.";
+	mainView.bottomButtons[7].toolTipText = "Subtract 1 point from Speed.";
+	mainView.bottomButtons[8].toolTipText = "Subtract 1 point from Intelligence.";
 }
 
-private function levelUpStatToughness():void {
-	dynStats("tou", 5); //Gain +5 Toughness due to level
-	trace("HP: " + player.HP + " MAX HP: " + maxHP());
-	statScreenRefresh();
-	clearOutput();
-	outputText("You feel tougher from all the fights you have endured.");
-	doNext(perkBuyMenu);
+private function addAttribute(attribute:String):void {
+	switch(attribute) {
+		case "str":
+			player.tempStr++;
+			break;
+		case "tou":
+			player.tempTou++;
+			break;
+		case "spe":
+			player.tempSpe++;
+			break;
+		case "int":
+			player.tempInt++;
+			break;
+		default:
+			player.statPoints++; //Failsafe
+	}
+	player.statPoints--;
+	attributeMenu();
 }
-
-private function levelUpStatSpeed():void {
-	dynStats("spe", 5); //Gain +5 speed due to level
-	clearOutput();
-	outputText("Your time in combat has driven you to move faster.");
-	doNext(perkBuyMenu);
+private function subtractAttribute(attribute:String):void {
+	switch(attribute) {
+		case "str":
+			player.tempStr--;
+			break;
+		case "tou":
+			player.tempTou--;
+			break;
+		case "spe":
+			player.tempSpe--;
+			break;
+		case "int":
+			player.tempInt--;
+			break;
+		default:
+			player.statPoints--; //Failsafe
+	}
+	player.statPoints++;
+	attributeMenu();
 }
-
-private function levelUpStatIntelligence():void {
-	dynStats("int", 5); //Gain +5 Intelligence due to level
-	clearOutput();
-	outputText("Your time spent fighting the creatures of this realm has sharpened your wit.");
-	doNext(perkBuyMenu);
+private function resetAttributes():void {
+	//Increment unspent attribute points.
+	player.statPoints += player.tempStr;
+	player.statPoints += player.tempTou;
+	player.statPoints += player.tempSpe;
+	player.statPoints += player.tempInt;
+	//Reset temporary attributes to 0.
+	player.tempStr = 0;
+	player.tempTou = 0;
+	player.tempSpe = 0;
+	player.tempInt = 0;
+	//DONE!
+	attributeMenu();
+}
+private function finishAttributes():void {
+	clearOutput()
+	if (player.tempStr > 0)
+	{
+		if (player.tempStr >= 3) outputText("Your muscles feel significantly stronger from your time adventuring.\n");
+		else outputText("Your muscles feel slightly stronger from your time adventuring.\n");
+	}
+	if (player.tempTou > 0)
+	{
+		if (player.tempTou >= 3) outputText("You feel tougher from all the fights you have endured.\n");
+		else outputText("You feel slightly tougher from all the fights you have endured.\n");
+	}
+	if (player.tempSpe > 0)
+	{
+		if (player.tempSpe >= 3) outputText("Your time in combat has driven you to move faster.\n");
+		else outputText("Your time in combat has driven you to move slightly faster.\n");
+	}
+	if (player.tempInt > 0)
+	{
+		if (player.tempInt >= 3) outputText("Your time spent fighting the creatures of this realm has sharpened your wit.\n");
+		else outputText("Your time spent fighting the creatures of this realm has sharpened your wit slightly.\n");
+	}
+	if (player.tempStr + player.tempTou + player.tempSpe + player.tempInt <= 0 || player.statPoints > 0)
+	{
+		outputText("\nYou may allocate your remaining stat points later.", false);
+	}
+	dynStats("str", player.tempStr, "tou", player.tempTou, "spe", player.tempSpe, "int", player.tempInt, "noBimbo", true); //Ignores bro/bimbo perks.
+	player.tempStr = 0;
+	player.tempTou = 0;
+	player.tempSpe = 0;
+	player.tempInt = 0;
+	if (player.perkPoints > 0) doNext(perkBuyMenu);
+	else doNext(playerMenu);
 }
 
 private function perkBuyMenu():void {
@@ -1791,8 +1903,14 @@ public function displayStats(e:MouseEvent = null):void
 	if (statEffects != "")
 		outputText("\n<b><u>Ongoing Status Effects</u></b>\n" + statEffects, false);
 	// End Ongoing Stat Effects
-	
-	doNext(playerMenu);
+	menu();
+	if(player.statPoints > 0) {
+		outputText("\n<b>You have " + num2Text(player.statPoints) + " attribute point", false);
+		if(player.statPoints > 1) outputText("s", false);
+		outputText(" to spend.</b>", false);
+		addButton(1, "Stat Up", attributeMenu);
+	}
+	addButton(0, "Next", playerMenu);
 }
 
 public function lustPercent():Number {
