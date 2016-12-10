@@ -8,8 +8,6 @@ private static const DUNGEON_FACTORY_FOREMANS_OFFICE:int	= 6;
 private static const DUNGEON_FACTORY_PUMP_CONTROL:int		= 7;
 private static const DUNGEON_FACTORY_STORE_ROOM:int			= 8;
 
-public function get inDungeon():Boolean { return dungeonLoc != 0; }
-
 private function dungeonMenu():void {
 /*	//Dungeon Choices!
 	var choice1:* = 0;
@@ -1092,13 +1090,13 @@ private function dungeonEnterRoom(room:int):void {
 }
 
 private function actuallyEnterFactory():void {
-//	inDungeon = true;
+	inDungeon = true;
 	dungeonLoc = DUNGEON_FACTORY_FOYER;
 	playerMenu();
 }
 
 public function leaveFactory():void {
-//	inDungeon = false;
+	inDungeon = false;
 	dungeonLoc = 0;
 	clearOutput();
 	outputText("You slip out the door and disappear, heading back towards your camp, leaving the hellish factory behind.");

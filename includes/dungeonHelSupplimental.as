@@ -158,7 +158,7 @@ public function goToHeliaDungeon2():void {
 	outputText("\n\nNow safe from the watchful eyes of flying harpies and their sentries, Hel whispers, \"<i>Okay, so here's the plan.  I'm going to climb up the tower and hit them from the top; you go in through the main gates here,</i>\" she says, pointing to a rotting wooden door that seems to have been in disuse for a decade.  \"<i>Divide and conquer, right?  There are three floors, so... meet in the second, as soon as we can.  Yeah?</i>\"");
 	outputText("\n\nYou nod again, and give Helia a little boost as she starts to scale the high walls of the aging tower.  You, however, steel yourself and make your way through an opening in the main gates."); 
 	//(NEXT)
-//	inDungeon = true;
+	inDungeon = true;
 	dungeonEnterRoom(DUNGEON_HEL_GUARD_HALL);
 //	dungeonLoc = 17;
 //	doNext(camp.campMenu);
@@ -1280,6 +1280,6 @@ public function towerOutro():void {
 	kGAMECLASS.dungeonLoc = 0;
 	//(PC returns to Camp)
 	//(If PC has Valeria: add \"<i>Valeria</i>\" to Followers menu)
-//	inDungeon = false;
+	inDungeon = false;
 	doNext(camp.returnToCampUseTwoHours);
 }

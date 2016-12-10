@@ -25,6 +25,9 @@ package classes.Scenes.Dungeons.D3
 		public var livingStatue:LivingStatueScenes = new LivingStatueScenes();
 		public var succubusGardener:SuccubusGardenerScenes = new SuccubusGardenerScenes();
 		public var hermCentaur:HermCentaurScenes = new HermCentaurScenes();
+		public var driderIncubus:DriderIncubusScenes = new DriderIncubusScenes();
+		public var minotaurKing:MinotaurKingScenes = new MinotaurKingScenes();
+		public var lethice:LethiceScenes = new LethiceScenes();
 		
 		public function D3() 
 		{
@@ -161,6 +164,8 @@ package classes.Scenes.Dungeons.D3
 			tRoom.RoomName = "northcourtyard";
 			tRoom.EastExit = "northeastcourtyard";
 			tRoom.WestExit = "northwestcourtyard";
+			tRoom.NorthExit = "throneroom";
+			tRoom.NorthExitCondition = unlockedThroneRoom;
 			tRoom.RoomFunction = northcourtyardRoomFunc;
 			rooms[tRoom.RoomName] = tRoom;
 			
@@ -219,6 +224,13 @@ package classes.Scenes.Dungeons.D3
 			tRoom.RoomName = "greatlift";
 			tRoom.NorthExit = "southeastcourtyard";
 			tRoom.RoomFunction = greatliftRoomFunc;
+			rooms[tRoom.RoomName] = tRoom;
+			
+			//FINAL ROOM: Throne Room
+			tRoom = new room();
+			tRoom.RoomName = "throneroom";
+			tRoom.SouthExit = "northcourtyard";
+			tRoom.RoomFunction = throneRoomFunc;
 			rooms[tRoom.RoomName] = tRoom;
 		}
 		
@@ -607,9 +619,16 @@ package classes.Scenes.Dungeons.D3
 			return false;
 		}
 		
-		private function northcourtyardRoomFunc():Boolean
+		public function northcourtyardRoomFunc():Boolean
 		{
-			outputText("You stand before what can only be the entrance to Lethice’s throne room. It is unlabelled, but the immense door is unlike any you’ve seen in this world or the last. Constructed from some kind of pink-tinged metal and polished to a mirror sheen, this portal has had a lifetime of care poured into it. What’s more, intricate locking mechanisms overlap the edges of it, each one culminating in an intricately worked seal. Fortunately, each of the seals has been left over. Security must not be much of a concern for the demon queen at this point in time. If only the door would open. For some reason, it’s still sealed closed. You can still move east and west through the courtyard, if you like.");
+			outputText("<b><u>North Courtyard</u></b>\n");
+			outputText("You stand before what can only be the entrance to Lethice’s throne room. It is unlabelled, but the immense door is unlike any you’ve seen in this world or the last. Constructed from some kind of pink-tinged metal and polished to a mirror sheen, this portal has had a lifetime of care poured into it. What’s more, intricate locking mechanisms overlap the edges of it, each one culminating in an intricately worked seal. Fortunately, each of the seals has been left over. Security must not be much of a concern for the demon queen at this point in time. ") 
+			if (flags[kFLAGS.D3_GARDENER_DEFEATED] > 0 && flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0 && flags[kFLAGS.D3_STATUE_DEFEATED] > 0) {
+				outputText("The seal appears to be broken. You could move north and attempt to defeat Lethice for once and for all. Or you can move east and west through the courtyard, if you like.");
+			}
+			else {
+				outputText("If only the door would open. For some reason, it’s still sealed closed. You can still move east and west through the courtyard, if you like.");
+			}
 			return false;
 		}
 		
@@ -679,6 +698,33 @@ package classes.Scenes.Dungeons.D3
 			incubusMechanic.meetAtElevator();
 			
 			return false;
+		}
+		
+		public function throneRoomFunc():Boolean 
+		{
+			if (flags[kFLAGS.DRIDERINCUBUS_DEFEATED] == 0) {
+				driderIncubus.encounterDriderIncbutt();
+				return true;
+			}
+			if (flags[kFLAGS.MINOTAURKING_DEFEATED] == 0) {
+				minotaurKing.encounterMinotaurKing();
+				return true;
+			}
+			if (flags[kFLAGS.LETHICE_DEFEATED] == 0) {
+				lethice.encounterLethice();
+				return true;
+			}
+			else
+			{
+				outputText("<b><u>Throne Room</u></b>\n");
+				outputText("The throne room is intricately designed. Purple carpet with red highlights line the floor from the door to the throne. The throne appears to be carved in marble and dotted with lethicite. Along the way, there are beautifully carved marble columns and cum fountains. You blush just by looking at the fountains. ");
+			}
+			return false;
+		}
+		
+		public function unlockedThroneRoom():Boolean
+		{
+			return (flags[kFLAGS.D3_GARDENER_DEFEATED] > 0 && flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0 && flags[kFLAGS.D3_STATUE_DEFEATED] > 0);
 		}
 	}
 }

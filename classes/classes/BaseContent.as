@@ -95,12 +95,10 @@
 		{
 			return kGAMECLASS.inDungeon;
 		}
-/* inDungeon is now read only
 		protected function set inDungeon(v:Boolean):void
 		{
 			kGAMECLASS.inDungeon = v;
 		}
-*/
 		
 		protected function get inRoomedDungeon():Boolean
 		{

@@ -21,14 +21,14 @@ private static const DUNGEON_CAVE_ZETAZ_CHAMBER:int		= 16;
 // TIMES_VAPULA_AND_GIANT_VALA:int = 768;
 
 public function enterZetazsLair():void {
-//	inDungeon = true;
+	inDungeon = true;
 	dungeonEnterRoom(DUNGEON_CAVE_ENTRANCE);
 //	dungeonLoc = 10;
 //	eventParser(1);
 }
 
 public function leaveZetazsLair():void {
-//	inDungeon = false;
+	inDungeon = false;
 	dungeonLoc = 0;
 	clearOutput();
 	outputText("You leave the cave behind and take off through the deepwoods back towards camp.");

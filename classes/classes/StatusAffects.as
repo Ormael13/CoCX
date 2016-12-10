@@ -208,6 +208,7 @@ package classes
 		public static const MinotaurEntangled:StatusAffectType = mk("Minotaur Entangled");
 		public static const MissFirstRound:StatusAffectType = mk("miss first round");
 		public static const NoLoot:StatusAffectType = mk("No Loot");
+		public static const OnFire:StatusAffectType = mk("On Fire");
 		public static const PCTailTangle:StatusAffectType = mk("PCTailTangle");
 		public static const PeachLootLoss:StatusAffectType = mk("Peach Loot Loss");
 		// @aimozg i don't know and do not fucking care if these two should be merged
@@ -251,6 +252,7 @@ package classes
 		public static const Confusion:CombatStatusAffect = mk2("Confusion");
 		public static const DemonSeed:CombatStatusAffect = mk2("DemonSeed");
 		public static const Disarmed:CombatStatusAffect = mk2("Disarmed");
+		public static const DriderIncubusVenom:CombatStatusAffect = mk2("Drider Incubus Venom");
 		public static const DriderKiss:CombatStatusAffect = mk2("Drider Kiss");
 		public static const FirstAttack:CombatStatusAffect = mk2("FirstAttack");
 		public static const GnollSpear:CombatStatusAffect = mk2("Gnoll Spear");
@@ -298,7 +300,15 @@ package classes
 		public static const ShowerDotEffect:CombatStatusAffect = mk2("Shower Dot Effect");
 		public static const GardenerSapSpeed:CombatStatusAffect = mk2("Sap Speed");
 		public static const VineHealUsed:CombatStatusAffect = mk2("Vine Heal Used");
-
+		
+		public static const PurpleHaze:StatusAffectType = mk("PurpleHaze");
+		public static const TaintedMind:StatusAffectType = mk("Tainted Mind");
+		public static const MinotaurKingMusk:StatusAffectType = mk("Minotaur King Musk");
+		public static const MinotaurKingsTouch:StatusAffectType = mk("Minotaur Kings Touch");
+		public static const LethicesRapeTentacles:StatusAffectType = mk("Lethices Rape Tentacles");
+		public static const PigbysHands:StatusAffectType = mk("Pigbys Hands");
+		public static const WhipSilence:CombatStatusAffect = mk2("Whip-Silence");
+		
 		/**
 		 * Creates non-combat status affect
 		 */

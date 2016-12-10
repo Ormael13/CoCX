@@ -319,7 +319,7 @@ use namespace kGAMECLASS;
 			return damage;
 		}
 
-		public function takeDamage(damage:Number):Number{
+		public function takeDamage(damage:Number, display:Boolean = false):Number{
 			//Round
 			damage = Math.round(damage);
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
@@ -327,6 +327,7 @@ use namespace kGAMECLASS;
 			if (damage>0){
 				HP -= damage;
 				game.mainView.statsView.showStatDown('hp');
+				if (display) game.outputText("(" + damage + ")");
 				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
 					game.dynStats("lus", int(damage / 2));
 				}
@@ -335,6 +336,9 @@ use namespace kGAMECLASS;
 					HP = 0;
 					//This call did nothing. There is no event 5010: if (game.inCombat) game.doNext(5010);
 				}
+			}
+			if (display) {
+				
 			}
 			return returnDamage;
 		}
@@ -1776,13 +1780,24 @@ use namespace kGAMECLASS;
 			if (findStatusAffect(StatusAffects.Tentagrappled) >= 0) removeStatusAffect(StatusAffects.Tentagrappled);
 			if (findStatusAffect(StatusAffects.TentagrappleCooldown) >= 0) removeStatusAffect(StatusAffects.TentagrappleCooldown);
 			if (findStatusAffect(StatusAffects.ShowerDotEffect) >= 0) removeStatusAffect(StatusAffects.ShowerDotEffect);
+			if (findStatusAffect(StatusAffects.VineHealUsed) >= 0) removeStatusAffect(StatusAffects.VineHealUsed);
 			if (findStatusAffect(StatusAffects.GardenerSapSpeed) >= 0)
 			{
 				spe += statusAffectv1(StatusAffects.GardenerSapSpeed);
 				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
 				removeStatusAffect(StatusAffects.GardenerSapSpeed);
 			}
-			if (findStatusAffect(StatusAffects.VineHealUsed) >= 0) removeStatusAffect(StatusAffects.VineHealUsed);
+			if (findStatusAffect(StatusAffects.DriderIncubusVenom) >= 0) {
+				str += statusAffectv1(StatusAffects.DriderIncubusVenom);
+				kGAMECLASS.mainView.statsView.showStatUp('str');
+				removeStatusAffect(StatusAffects.DriderIncubusVenom);
+			}
+			if (findStatusAffect(StatusAffects.PurpleHaze) >= 0) removeStatusAffect(StatusAffects.PurpleHaze);
+			if (findStatusAffect(StatusAffects.TaintedMind) >= 0) removeStatusAffect(StatusAffects.TaintedMind);
+			if (findStatusAffect(StatusAffects.MinotaurKingMusk) >= 0) removeStatusAffect(StatusAffects.MinotaurKingMusk);
+			if (findStatusAffect(StatusAffects.MinotaurKingsTouch) >= 0) removeStatusAffect(StatusAffects.MinotaurKingsTouch);
+			if (findStatusAffect(StatusAffects.PigbysHands) >= 0) removeStatusAffect(StatusAffects.PigbysHands);
+			if (findStatusAffect(StatusAffects.WhipSilence) >= 0) removeStatusAffect(StatusAffects.WhipSilence);
 		}
 
 		public function consumeItem(itype:ItemType, amount:int = 1):Boolean {

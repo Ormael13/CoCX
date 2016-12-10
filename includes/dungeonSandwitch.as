@@ -41,14 +41,14 @@ private static const DUNGEON_WITCH_SACRIFICIAL_ALTAR:int	= 37;
 private static const DUNGEON_WITCH_THRONE_ROOM:int			= 38;
 
 public function enterBoobsDungeon():void {
-//	inDungeon = true;
+	inDungeon = true;
 	dungeonEnterRoom(DUNGEON_WITCH_ENTRANCE_GATEWAY);
 //	dungeonLoc = 23;
 //	eventParser(1);
 }
 
 public function leaveBoobsDungeon():void {
-//	inDungeon = false;
+	inDungeon = false;
 	dungeonLoc = 0;
 	clearOutput();
 	outputText("You leave the door behind and take off through the desert back towards camp.");
@@ -163,7 +163,8 @@ public function getMockedForSmallDongBySammitchMob():void {
 	//[if for fun]
 	if(flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0) {
 		outputText("\n\nYou wake up hours later outside the dungeon with all your belongs and surprisingly not missing any gems.");
-		dungeonLoc = 0; //Replaces		inDungeon = false;
+		dungeonLoc = 0;
+		inDungeon = false;
 		player.orgasm();
 		dynStats("lib", 1, "sen", -1);
 		cleanupAfterCombat();
@@ -255,7 +256,8 @@ public function femaleGirlsLoseToSammitches():void {
 public function sandWitchMobNotBadEnd():void {
 	clearOutput();
 	outputText("You wake up hours later outside the dungeon with all your belongings, surprisingly not missing any gems.");
-	dungeonLoc = 0; //Replaces	inDungeon = false;
+	dungeonLoc = 0;
+	inDungeon = false;
 	player.orgasm();
 	dynStats("lib", 1, "sen", -1);
 	cleanupAfterCombat();
@@ -1739,7 +1741,8 @@ public function lionpaws(skipped:Boolean = false):void {
 	dynStats("sen", -2);
 	menu();
 	if (skipped) {
-		dungeonLoc = 0; //Replaces inDungeon = false;
+		dungeonLoc = 0;
+		inDungeon = false;
 		addButton(0, "Next", camp.returnToCampUseOneHour);
 	}
 	else {
@@ -2090,7 +2093,8 @@ public function getBlown(submit:Boolean = false):void {
 	player.orgasm();
 	menu();
 	if (submit) {
-		dungeonLoc = 0; //Replaces inDungeon = false;
+		dungeonLoc = 0;
+		inDungeon = false;
 		addButton(0, "Next", camp.returnToCampUseOneHour);
 	}
 	else {
@@ -2304,7 +2308,8 @@ public function fenPutsHisShittyFetishInYoSphinx():void {
 	outputText("\n\nYou collapse in a well-fucked heap while Sanura's extra addition fades away.  She lays down next to you, fanning her face with her wings as you try to recover.  Her arm rubs one of your cheeks, still sensitive from whatever magic was in her balls, and she says, \"<i>That was great fun.  Let's do it again sometime?</i>\"");
 	outputText("\n\nYou muster the strength for a thumbs up, a dopey smile still painted on your face.");
 	player.orgasm();
-	dungeonLoc = 0; //Replaces inDungeon = false;
+	dungeonLoc = 0;
+	inDungeon = false;
 	menu();
 	addButton(0, "Next", camp.returnToCampUseOneHour);
 }
@@ -2446,6 +2451,7 @@ private function BuyHer():void {
 	outputText("\n\nYou thank the Sand Mother for her understanding, and the kindness she's shown your milky friend.  She nods, a wry smile on her dusky lips as you steady the milkmaid, helping her out of the room she's called home for gods know how long, and out into the desert sands - to camp.  To her new home.");
 
 	dungeonLoc = 0; //After buying her the player leaves the dungeon and returns to camp
+	inDungeon = false;
 	//[Next] (To Arriving At Camp)
 	menu();
 	addButton(0, "Next", milkWaifu.arriveWithLacticWaifuAtCamp);

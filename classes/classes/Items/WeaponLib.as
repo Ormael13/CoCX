@@ -22,6 +22,7 @@ package classes.Items
 		public const L__AXE:Weapon = new Weapon("L. Axe ","L. Axe ","large axe","an axe large enough for a minotaur","cleave",15,100,"This massive axe once belonged to a minotaur.  It'd be hard for anyone smaller than a giant to wield effectively.  The axe is double-bladed and deadly-looking.  (ATK: +15) (Cost: 100)","Large");
 		public const L_DAGGR:Weapon = new Weapon("L.Daggr","L.Daggr","lust-enchanted dagger","an aphrodisiac-coated dagger","stab",3,150,"A dagger with a short blade in a wavy pattern.  Its edge seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.","Aphrodisiac Weapon");
 		public const L_HAMMR:LargeHammer = new LargeHammer();
+		public const L_WHIP :Weapon = new Weapon("L. Whip", "L. Whip", "flaming whip", "a flaming whip once belonged to Lethice", "whip-crack", 16, 2000, "This whip once belonged to Lethice who was defeated at your hands. It gives off flames when you crack this whip.");
 		public const PIPE   :Weapon = new Weapon("Pipe   ","Pipe   ","pipe","a pipe","smash",5,25,"This is a simple rusted pipe of unknown origins.  It's hefty and could probably be used as an effective bludgeoning tool. (ATK: +5) (Cost: 25)");
 		public const RIDINGC:Weapon = new Weapon("RidingC","RidingC","riding crop","a riding crop","whip-crack",5,50,"This riding crop appears to be made of black leather, and could be quite a painful (or exciting) weapon.  (ATK: +5) (Cost: 50)");
 		public const RRAPIER:RaphaelsRapier = new RaphaelsRapier();

@@ -999,6 +999,16 @@ public function attack():void {
 					dynStats("lus", 1);
 				}
 			}
+			if(player.weaponName == "flaming whip") {
+				monster.lust += monster.lustVuln * (25 + player.cor/10);
+				if(player.cor < 90) dynStats("cor", .4);
+				if(!monster.plural) outputText("\n" + monster.capitalA + monster.short + " shivers and moans involuntarily from the flaming whip's touches.", false);
+				else outputText("\n" + monster.capitalA + monster.short + " shiver and moan involuntarily from the whip's touches.", false);
+				if(rand(2) == 0) {
+					outputText("  You get a sexual thrill from it.", false);
+					dynStats("lus", 1);
+				}
+			}
 		}
 		//Weapon Procs!
 		if(player.weaponName == "huge warhammer" || player.weaponName == "spiked gauntlet" || player.weaponName == "hooked gauntlets") {
