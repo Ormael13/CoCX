@@ -29,7 +29,7 @@ package classes.Items.Consumables
 				game.player.changeFatigue(-10);
 			}
 			else {
-				if (game.player.skinType != SKIN_TYPE_GOO) {
+				if (!game.player.hasGooSkin()) {
 					game.player.skinTone = _color;
 					mutations.updateClaws(game.player.clawType);
 				}

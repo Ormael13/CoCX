@@ -2437,6 +2437,11 @@ package classes
 			return hasFur() || hasScales();
 		}
 
+		public function hasGooSkin():Boolean
+		{
+			return skinType == SKIN_TYPE_GOO;
+		}
+
 		public function isBiped():Boolean
 		{
 			return legCount == 2;

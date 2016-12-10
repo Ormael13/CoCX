@@ -1690,7 +1690,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				player.skinDesc = "fur";
 			if (player.hasScales())
 				player.skinDesc = "scales";
-			if (player.skinType == SKIN_TYPE_GOO)
+			if (player.hasGooSkin())
 				player.skinDesc = "goo";
 		}
 		if (player.skinDesc.indexOf("thick") != -1)
@@ -1702,7 +1702,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				player.skinDesc = "fur";
 			if (player.hasScales())
 				player.skinDesc = "scales";
-			if (player.skinType == SKIN_TYPE_GOO)
+			if (player.hasGooSkin())
 				player.skinDesc = "goo";
 		}
 		if (player.skinDesc.indexOf("rubber") != -1)
@@ -1714,7 +1714,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				player.skinDesc = "fur";
 			if (player.hasScales())
 				player.skinDesc = "scales";
-			if (player.skinType == SKIN_TYPE_GOO)
+			if (player.hasGooSkin())
 				player.skinDesc = "goo";
 		}
 		if (player.skinDesc.indexOf("latex") != -1)
@@ -1726,7 +1726,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				player.skinDesc = "fur";
 			if (player.hasScales())
 				player.skinDesc = "scales";
-			if (player.skinType == SKIN_TYPE_GOO)
+			if (player.hasGooSkin())
 				player.skinDesc = "goo";
 		}
 		if (player.skinDesc.indexOf("slimey") != -1)
@@ -1738,7 +1738,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				player.skinDesc = "fur";
 			if (player.hasScales())
 				player.skinDesc = "scales";
-			if (player.skinType == SKIN_TYPE_GOO)
+			if (player.hasGooSkin())
 				player.skinDesc = "goo";
 		}
 		player.faceType = saveFile.data.faceType;

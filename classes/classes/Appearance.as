@@ -334,7 +334,7 @@
 				else description += "pierced ";
 				haveDescription = true;
 			}
-			if (!haveDescription && i_creature.skinType == 3) {
+			if (!haveDescription && i_creature.hasGooSkin()) {
 				options = ["slime-slick ",
 					"goopy ",
 					"slippery "];
@@ -808,7 +808,7 @@
 				description += randomChoice(options);
 			}
 			//Goo - 1/4 chance
-			else if (i_creature.skinType == 3 && rand(4) == 0) {
+			else if (i_creature.hasGooSkin() && rand(4) == 0) {
 				options = ["goopey",
 					"gooey",
 					"slimy"];
@@ -1314,7 +1314,7 @@
 
 			}
 			//Slimy skin
-			if (i_creature.skinType == 3) {
+			if (i_creature.hasGooSkin()) {
 				if (description) description += " ";
 				options = ["goopey",
 					"gooey",
@@ -1438,7 +1438,7 @@
 				if (description != "") description += ", ";
 				description += "pierced";
 			}
-			if (description == "" && i_creature.skinType == 3) {
+			if (description == "" && i_creature.hasGooSkin()) {
 				if (description != "")
 					description += ", ";
 				if (rand(2) == 0)

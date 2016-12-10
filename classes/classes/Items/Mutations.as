@@ -2867,7 +2867,7 @@
 					if (player.skinType == SKIN_TYPE_PLAIN) outputText(" loses its blemishes, becoming flawless smooth skin.", false);
 					if (player.hasFur()) outputText(" falls out in clumps, revealing smooth skin underneath.", false);
 					if (player.hasScales()) outputText(" begins dropping to the ground in a pile around you, revealing smooth skin underneath.", false);
-					if (player.skinType == SKIN_TYPE_GOO) outputText(" shifts and changes into flawless smooth skin.", false);
+					if (player.hasGooSkin()) outputText(" shifts and changes into flawless smooth skin.", false);
 					player.skinDesc = "skin";
 					player.skinAdj = "smooth";
 					if (player.skinTone == "rough gray") player.skinTone = "gray";
@@ -2921,7 +2921,7 @@
 					if (player.skinType == SKIN_TYPE_PLAIN) outputText(" loses its blemishes, becoming flawless smooth skin.", false);
 					if (player.hasFur()) outputText(" falls out in clumps, revealing smooth skin underneath.", false);
 					if (player.hasScales()) outputText(" begins dropping to the ground in a pile around you, revealing smooth skin underneath.", false);
-					if (player.skinType == SKIN_TYPE_GOO) outputText(" shifts and changes into flawless smooth skin.", false);
+					if (player.hasGooSkin()) outputText(" shifts and changes into flawless smooth skin.", false);
 					player.skinDesc = "skin";
 					player.skinAdj = "smooth";
 					if (player.skinTone == "rough gray") player.skinTone = "gray";
@@ -3744,7 +3744,7 @@
 			if (player.skinType != SKIN_TYPE_PLAIN && changes < changeLimit && rand(4) == 0 && player.faceType == FACE_HUMAN) {
 				if (player.hasFur()) outputText("\n\nYour fur itches incessantly, so you start scratching it.  It starts coming off in big clumps before the whole mess begins sloughing off your body.  In seconds, your skin is nude.  <b>You've lost your fur!</b>", false);
 				if (player.hasScales()) outputText("\n\nYour scales itch incessantly, so you scratch at them.  They start falling off wholesale, leaving you standing in a pile of scales after only a few moments.  <b>You've lost your scales!</b>", false);
-				if (player.skinType == SKIN_TYPE_GOO) outputText("\n\nYour " + player.skinDesc + " itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin.  <b>Your skin is once again normal!</b>", false);
+				if (player.hasGooSkin()) outputText("\n\nYour " + player.skinDesc + " itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin.  <b>Your skin is once again normal!</b>", false);
 				player.skinAdj = "";
 				player.skinDesc = "skin";
 				player.skinType = SKIN_TYPE_PLAIN;
@@ -3826,7 +3826,7 @@
 			}
 			/*Calculate goopiness
 			 var goopiness:Number = 0;
-			 if (player.skinType == SKIN_TYPE_GOO) goopiness+=2;
+			 if (player.hasGooSkin()) goopiness+=2;
 			 if (player.hair.indexOf("gooey") != -1) goopiness++;
 			 if (player.hasVagina()) {
 			 if (player.vaginalCapacity() >= 9000) goopiness++;
@@ -4078,7 +4078,7 @@
 			if (((player.skinTone != "rough gray" && player.skinTone != "orange and black striped") || player.skinType != SKIN_TYPE_PLAIN) && rand(7) == 0 && changes < changeLimit) {
 				outputText("\n\n", false);
 				if (player.hasFurOrScales()) outputText("Your " + player.skinDesc + " falls out, collecting on the floor and exposing your supple skin underneath.  ", false);
-				else if (player.skinType == SKIN_TYPE_GOO) outputText("Your gooey skin solidifies, thickening up as your body starts to solidy into a more normal form. ", false);
+				else if (player.hasGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidy into a more normal form. ", false);
 				else if (type == 0) outputText("Your skin itches and tingles becoming slightly rougher and turning gray.  ", false);
 				if (type == 0) {
 					outputText("You abruptly stop moving and gasp sharply as a shudder goes up your entire frame. Your skin begins to shift and morph, growing slightly thicker and changing into a shiny grey color. Your skin now feels oddly rough too, comparable to that of a marine mammal. You smile and run your hands across your new shark skin.", false);
@@ -8656,7 +8656,7 @@
 					}
 					outputText("Shaking your head a bit, you wait for your energy to return, then examine your appearance.  ");
 					//(if player skinTone = ebony/black/ebony with tats and no fur/scales or if black/midnight fur or if black scales
-					if (((player.skinTone == "ebony" || player.skinTone == "black") && (player.skinType == SKIN_TYPE_PLAIN || player.skinType == SKIN_TYPE_GOO)) || ((player.hairColor == "black" || player.hairColor == "midnight") && player.hasFurOrScales())) {
+					if (((player.skinTone == "ebony" || player.skinTone == "black") && (player.skinType == SKIN_TYPE_PLAIN || player.hasGooSkin())) || ((player.hairColor == "black" || player.hairColor == "midnight") && player.hasFurOrScales())) {
 						outputText("Nothing seems different at first.  Strange... you look closer and discover a darker, mask-line outline on your already inky visage.  <b>You now have a barely-visible raccoon mask.</b>");
 					}
 					else outputText("A dark, almost black mask shades the " + player.skinFurScales() + " around your eyes and over the topmost portion of your nose, lending you a criminal air!  <b>You now have a raccoon mask!</b>");
@@ -8666,7 +8666,7 @@
 					outputText("\n\nA sudden migraine sweeps over you and you clutch your head in agony as your nose collapses back to human dimensions.  A worrying numb spot grows around your eyes, and you entertain several horrible premonitions until it passes as suddenly as it came.  Checking your reflection in your water barrel, you find ");
 					//[(if black/midnight fur or if black scales)
 					if (((player.hairColor == "black" || player.hairColor == "midnight") && player.hasFurOrScales())) outputText("your face apparently returned to normal shape, albeit still covered in " + player.skinFurScales() + ".  You look closer and discover a darker, mask-line outline on your already inky visage.  <b>You now have a barely-visible raccoon mask on your otherwise normal human face.</b>");
-					else if ((player.skinTone == "ebony" || player.skinTone == "black") && (player.skinType == SKIN_TYPE_PLAIN || player.skinType == SKIN_TYPE_GOO)) outputText("your face apparently returned to normal shape.  You look closer and discover a darker, mask-line outline on your already inky visage.  <b>You now have a barely-visible raccoon mask on your normal human face.</b>");
+					else if ((player.skinTone == "ebony" || player.skinTone == "black") && (player.skinType == SKIN_TYPE_PLAIN || player.hasGooSkin())) outputText("your face apparently returned to normal shape.  You look closer and discover a darker, mask-line outline on your already inky visage.  <b>You now have a barely-visible raccoon mask on your normal human face.</b>");
 					else outputText("your face returned to human dimensions, but shaded by a black mask around the eyes and over the nose!  <b>You now have a humanoid face with a raccoon mask!</b>");
 				}
 				player.faceType = FACE_RACCOON_MASK;

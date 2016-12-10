@@ -28,7 +28,7 @@ package classes.Items.Consumables
 					outputText("\n\nYour fur itches incessantly, so you start scratching it.  It starts coming off in big clumps before the whole mess begins sloughing off your body.  In seconds, your skin is hairless, or nearly so. <b>You've lost your fur!</b>");
 				else if (player.hasScales())
 					outputText("\n\nYour scales itch incessantly, so you scratch at them.  They start falling off wholesale, leaving you standing in a pile of scales after only a few moments. <b>You've lost your scales!</b>");
-				else if (player.skinType == 3)
+				else if (player.hasGooSkin())
 					outputText("\n\nYour " + player.skinDesc + " itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin. <b>Your skin is once again normal!</b>");
 				player.skinDesc = "skin";
 				player.skinType = 0;

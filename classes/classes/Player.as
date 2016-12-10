@@ -1359,7 +1359,7 @@ use namespace kGAMECLASS;
 				kitsuneCounter--;
 			if (hasScales())
 				kitsuneCounter -= 2;
-			if (skinType == SKIN_TYPE_GOO)
+			if (hasGooSkin())
 				kitsuneCounter -= 3;
 			//If the character has abnormal legs, -1
 			if (lowerBody != LOWER_BODY_TYPE_HUMAN && lowerBody != LOWER_BODY_TYPE_FOX)
