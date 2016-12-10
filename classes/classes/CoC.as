@@ -94,11 +94,6 @@
 		include "../../includes/combat.as";
 //No longer needed. This file has been chopped up and spread throughout the codebase:		include "../../includes/doEvent.as";
 		include "../../includes/eventParser.as";
-		
-
-		include "../../includes/eventTest.as";
-		
-		
 		include "../../includes/transform.as";
 		
 		include "../../includes/engineCore.as";

@@ -76,56 +76,50 @@ public function mainMenu(e:MouseEvent = undefined):void
 	}
 }
 
-public function startupScreenBody():void
-{
+	public function startupScreenBody():void {
+			// NO FUCKING DECENT MULTI-LINE STRING LITERALS BECAUSE FUCKING STUPID
+			// WTF ACTIONSCRIPT YOUR DEV'S ARE ON CRACK
+			// Fixed. No more markdown. :)
+			outputText("\n(Formerly Unnamed Text Game)");
+			//Brief credits
+			outputText("\n\n<b>Created by:</b> Fenoxo"); //The Original Creator
+			outputText("\n\n<b>Edited by:</b> "); //Edited By
+			outputText("\n\tAshi, SoS, Prisoner416, Zeikfried, et al");
+			outputText("\n\n<b>Open-source contributions by:</b> "); //Contributions
+			outputText("\n\taimozg, Amygdala, Cmacleod42, Enterprise2001, Fake-Name, Gedan, Yoffy, et al");
+			//Github for Original
+			outputText("\n\n<b><u>Original Game Github</u></b>");
+			outputText("\n<b>Source Code:</b> <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>");
+			outputText("\n<b>Bug Tracker:</b> <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/issues'>https://github.com/herp-a-derp/Corruption-of-Champions/issues</a></u>");
+			outputText("\n(requires an account, unfortunately)");
+			//Disclaimer
+			outputText("\n\n<b><u>DISCLAIMER</u></b>");
+			outputText("<li>There are many strange and odd fetishes contained in this flash.  Peruse at own risk.</li>");
+			outputText("<li>Please be 18 or the legal age to view porn before playing.</li>");
+			outputText("<li>Try to keep your keyboard clean.  Think of the children!</li>");
+			//Other Info
+			outputText("\n\nFor more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>. ")
+			outputText("\n\nCheck out Trials in Tainted Space as well!");
+			outputText("\n\nAlso go play <u>Nimin</u> by Xadera on furaffinity.");
 
-	// NO FUCKING DECENT MULTI-LINE STRING LITERALS BECAUSE FUCKING STUPID
-	// WTF ACTIONSCRIPT YOUR DEV'S ARE ON CRACK
+			if (debug)
+				outputText("\n\n<b>DEBUG MODE ENABLED: ITEMS WILL NOT BE CONSUMED BY USE.</b>");
+			if (flags[kFLAGS.SHOW_SPRITES_FLAG])
+				outputText("\n\n<b>Sprites disabled.</b>");
+			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG])
+				outputText("\n\n<b>Easy Mode On: Bad-ends can be ignored.</b>");
+			if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
+				outputText("\n\n<b>SILLY MODE ENGAGED: Crazy, nonsensical, and possibly hilarious things may occur.</b>");
+			if (flags[kFLAGS.ITS_EVERY_DAY])
+				outputText("\n\n<b>Eternal holiday enabled.</b>");
+			if (kGAMECLASS.isEaster())
+				outputText("\n\n<b>It's Easter! Enjoy the eggs!</b>");
+			if (kGAMECLASS.isValentine())
+				outputText("\n\n<b>It's Valentine's!</b>");
+			if (kGAMECLASS.helFollower.isHeliaBirthday())
+				outputText("\n\n<b>It's Helia's Birthday Month!</b>");
 
-	outputText(<![CDATA[
-<br>(Formerly Unnamed Text Game)  
-<u>Created by: Fenoxo</u>
-
-Edited By:<br>
-&nbsp; &nbsp; &nbsp; Ashi, SoS, Prisoner416, Zeikfried, et al
-
-Open-source contributions by:<br>
-&nbsp; &nbsp; &nbsp; aimozg, Amygdala, Cmacleod42, Enterprise2001, Fake-Name, Gedan, Yoffy, et al
-
-Source Code: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>
-
-Bug Tracker: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/issues'>https://github.com/herp-a-derp/Corruption-of-Champions/issues</a></u>  
-(requires an account, unfortunately)
-
-**<u>DISCLAIMER</u>**
-<br>- **There are many strange and odd fetishes contained in this flash.  Peruse at own risk.**
-<br>- **Please be 18 or the legal age to view porn before playing.**
-<br>- **Try to keep your keyboard clean.  Think of the children!**
-
-
-For more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>.
-
-Also go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u> by Xadera on furaffinity.
-
-	]]>, false, true);
-
-	if(debug)
-		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>");
-	if(flags[kFLAGS.SHOW_SPRITES_FLAG])
-		outputText("\n\n<b>Sprites disabled.</b>");
-	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG])
-		outputText("\n\n<b>Easy Mode On:  Bad-ends can be ignored.</b>");
-	if(flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
-		outputText("\n\n<b>SILLY MODE ENGAGED: Crazy, nonsensical, and possibly hilarious things may occur.</b>");
-	if(isEaster())
-		outputText("\n\n<b>It's Easter!  Enjoy the eggs!</b>");
-	if(isValentine())
-		outputText("\n\n<b>It's Valentine's!</b>");
-	if(helFollower.isHeliaBirthday())
-		outputText("\n\n<b>It's Helia's Birthday Month!</b>");
-
-
-}
+		}
 
 public function settingsScreen():void
 {
