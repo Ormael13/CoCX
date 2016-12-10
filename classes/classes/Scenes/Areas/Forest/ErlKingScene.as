@@ -516,7 +516,7 @@ package classes.Scenes.Areas.Forest
 
 			outputText("The words rumble through you, and you feel a warm heat building in your stomach.  Something about your arms and legs feel... off... but you can’t take your eyes away from the Erlking’s, not even when pain lances through your body, your muscles swelling, your [armor] tearing and falling away.  The Erlking releases his hold on you and you look down immediately at your body.\n\n");
 
-			if (player.skinType == SKIN_TYPE_FUR) outputText("Your fur turns jet black.");
+			if (player.hasFur()) outputText("Your fur turns jet black.");
 			else outputText("Black fur runs down your body like a tide coming in.");
 			outputText("  Your muscles bulge and swell beneath the midnight coat.");
 			if (player.hasBreasts()) outputText("  Your chest first flattens out, then swells, as");
@@ -1034,7 +1034,7 @@ package classes.Scenes.Areas.Forest
 				changes++;
 			}
 			//Gain fur
-			if (rand(4) == 0 && changes < changeLimit && player.horns > 0 && player.skinType != SKIN_TYPE_FUR) {
+			if (rand(4) == 0 && changes < changeLimit && player.horns > 0 && !player.hasFur()) {
 				outputText("\n\nFor a moment, it looks like a ray of sunlight has shimmered through the canopy. You blink and realize that your fur has become dappled, with lighter, sun-speckled spots highlighting it.");
 				player.skinType = SKIN_TYPE_FUR;
 				player.skinAdj = "";
@@ -1049,13 +1049,13 @@ package classes.Scenes.Areas.Forest
 				changes++;
 			}
 			//Gain deer face
-			if (rand(4) == 0 && changes < changeLimit && player.skinType == SKIN_TYPE_FUR && player.earType == EARS_DEER && player.tailType == TAIL_TYPE_DEER && player.faceType != FACE_DEER) {
+			if (rand(4) == 0 && changes < changeLimit && player.hasFur() && player.earType == EARS_DEER && player.tailType == TAIL_TYPE_DEER && player.faceType != FACE_DEER) {
 				outputText("\n\nYou feel a grinding noise from your jaw, and a massive pressure in your sinuses, as your cheeks pinch in, followed immediately by a pointing of the lower half of your face.  You frantically (and gently) feel your face, discovering, to your surprise, that you’ve <b>gained the delicate facial features of a deer.</b>");
 				player.faceType = FACE_DEER;
 				changes++;
 			}
 			//Change legs to cloven hooves
-			if (rand(4) == 0 && changes < changeLimit && player.earType == EARS_DEER && player.tailType == TAIL_TYPE_DEER && player.skinType == SKIN_TYPE_FUR && (player.lowerBody != LOWER_BODY_TYPE_DEERTAUR && player.lowerBody != LOWER_BODY_TYPE_CLOVEN_HOOFED)) {
+			if (rand(4) == 0 && changes < changeLimit && player.earType == EARS_DEER && player.tailType == TAIL_TYPE_DEER && player.hasFur() && (player.lowerBody != LOWER_BODY_TYPE_DEERTAUR && player.lowerBody != LOWER_BODY_TYPE_CLOVEN_HOOFED)) {
 				if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) {
 					outputText("\n\nYou feel a sharp stinging sensation from your hooves, accompanied by a loud CRACK.  You look down in alarm, prancing from one hooved foot to another, realizing that your solid, heavy hooves have been replaced with delicate, cloven hooves.  You squint, also noting a subtle thinness across your legs in general--if you had to guess, you’d hazard that you’re looking <b>more deer-like than horse-like</b>.");
 				}

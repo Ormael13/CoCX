@@ -2335,11 +2335,11 @@ package classes.Scenes.Areas.Forest
 					
 					// Nine tail kitsunes have their fur/hair color golden, silver or pure white
 					if (!InCollection(player.hairColor, elderKitsuneColors)) // wrong hair color
-						if (player.skinType == SKIN_TYPE_FUR && InCollection(player.furColor, elderKitsuneColors)) { // right fur color
+						if (player.hasFur() && InCollection(player.furColor, elderKitsuneColors)) { // right fur color
 							player.hairColor = player.furColor;
 							if (player.hairLength > 0) outputText("\n\nNow you have " + player.hairColor + " hair matching your fur, like true kitsune elder. You look really regal!");
 						}
-						else if (player.skinType == SKIN_TYPE_FUR) { // wrong fur color
+						else if (player.hasFur()) { // wrong fur color
 							player.hairColor = randomChoice(elderKitsuneColors);
 							player.furColor = player.hairColor;
 							if (player.hairLength > 0) outputText("\n\Now you have " + player.hairColor + " fur and hair, like true kitsune elder. You look really regal!");
@@ -2351,7 +2351,7 @@ package classes.Scenes.Areas.Forest
 							if (player.hairLength > 0) outputText("\n\Now you have " + player.hairColor + " hair, like true kitsune elder.");
 						}
 					else // right hair color
-						if (player.skinType == SKIN_TYPE_FUR && !InCollection(player.furColor, elderKitsuneColors)) { // wrong fur color
+						if (player.hasFur() && !InCollection(player.furColor, elderKitsuneColors)) { // wrong fur color
 							player.furColor = player.hairColor;
 							outputText("\n\Now you have " + player.furColor + " fur matching your hair, like true kitsune elder. You look really regal!");
 						}

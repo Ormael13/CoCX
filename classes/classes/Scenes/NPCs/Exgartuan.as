@@ -371,7 +371,7 @@ public function exgartuanMasturbation():void {
 		}
 		outputText("Both hands rise unbidden and begin to caress your " + player.breastDescript(0) + ".  They slide over every sensitive inch of ", false);
 		if (player.skinType == SKIN_TYPE_PLAIN) outputText("flesh", false);
-		else if (player.skinType == SKIN_TYPE_FUR) outputText("furry-covered flesh", false);
+		else if (player.hasFur()) outputText("furry-covered flesh", false);
 		else if (player.hasScales()) outputText("soft scaly flesh", false);
 		else outputText("gooey surface", false);
 		outputText(", pausing to gently squeeze and caress any particularly sensitive spots.  Soft sighs escape your lips from the self-imposed pleasure-assault.  Your body relaxes totally, slouching down against a rock while you continue to happily play with your " + player.allBreastsDescript() + ".  The entire time your hands never touch one of your " + player.nippleDescript(0) + "s, merely circling them from time to time, making you arch your back in need.\n\n", false);

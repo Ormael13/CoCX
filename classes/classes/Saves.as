@@ -1686,7 +1686,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.skinAdj = "smooth";
 			if (player.skinType == SKIN_TYPE_PLAIN)
 				player.skinDesc = "skin";
-			if (player.skinType == SKIN_TYPE_FUR)
+			if (player.hasFur())
 				player.skinDesc = "fur";
 			if (player.hasScales())
 				player.skinDesc = "scales";
@@ -1698,7 +1698,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.skinAdj = "thick";
 			if (player.skinType == SKIN_TYPE_PLAIN)
 				player.skinDesc = "skin";
-			if (player.skinType == SKIN_TYPE_FUR)
+			if (player.hasFur())
 				player.skinDesc = "fur";
 			if (player.hasScales())
 				player.skinDesc = "scales";
@@ -1710,7 +1710,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.skinAdj = "rubber";
 			if (player.skinType == SKIN_TYPE_PLAIN)
 				player.skinDesc = "skin";
-			if (player.skinType == SKIN_TYPE_FUR)
+			if (player.hasFur())
 				player.skinDesc = "fur";
 			if (player.hasScales())
 				player.skinDesc = "scales";
@@ -1722,7 +1722,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.skinAdj = "latex";
 			if (player.skinType == SKIN_TYPE_PLAIN)
 				player.skinDesc = "skin";
-			if (player.skinType == SKIN_TYPE_FUR)
+			if (player.hasFur())
 				player.skinDesc = "fur";
 			if (player.hasScales())
 				player.skinDesc = "scales";
@@ -1734,7 +1734,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.skinAdj = "slimey";
 			if (player.skinType == SKIN_TYPE_PLAIN)
 				player.skinDesc = "skin";
-			if (player.skinType == SKIN_TYPE_FUR)
+			if (player.hasFur())
 				player.skinDesc = "fur";
 			if (player.hasScales())
 				player.skinDesc = "scales";

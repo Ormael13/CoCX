@@ -154,7 +154,7 @@ package classes
 		
 		private var _furColor:String = "no"; //Fur colour!
 		public function get furColor():String {
-			if (skinType == SKIN_TYPE_FUR) return _furColor;
+			if (hasFur()) return _furColor;
 			else return hairColor;
 		}
 		public function get newFurColor():String { return _furColor; } // alternative getter for the furColor. Ignores the skinType (Stadler76)
@@ -2427,9 +2427,14 @@ package classes
 			return hasScales() && !hasLizardScales();
 		}
 
+		public function hasFur():Boolean
+		{
+			return skinType == SKIN_TYPE_FUR;
+		}
+
 		public function hasFurOrScales():Boolean
 		{
-			return skinType == SKIN_TYPE_FUR || hasReptileScales();
+			return hasFur() || hasScales();
 		}
 
 		public function isBiped():Boolean
@@ -2551,7 +2556,7 @@ package classes
 				skinzilla += skinAdj + ", ";
 			//Fur handled a little differently since it uses
 			//haircolor
-			if (_skinType == 1)
+			if (hasFur())
 				skinzilla += furColor + " ";
 			else if (hasDragonScales())
 				skinzilla += "iron-like, " + _skinTone + " shield-shaped ";
