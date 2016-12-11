@@ -185,7 +185,7 @@ public function telAdreMenu():void {
 				return;
 			}
 	}
-	if(flags[kFLAGS.ARIAN_PARK] == 0 && player.level >= 4 && rand(10) == 0 && flags[kFLAGS.NOT_HELPED_ARIAN_TODAY] == 0) {
+	if(flags[kFLAGS.ARIAN_PARK] == 0 && (player.level >= 4 || model.time.days >= 30) && rand(10) == 0 && flags[kFLAGS.NOT_HELPED_ARIAN_TODAY] == 0) {
 		kGAMECLASS.arianScene.meetArian();
 		return;
 	}

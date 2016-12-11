@@ -25,7 +25,7 @@ package classes.Scenes.Areas
 		public function exploreDesert():void
 		{
 			player.exploredDesert++;
-			if (player.level >= 4 && player.exploredDesert % 15 == 0 && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] == 0) {
+			if ((player.level >= 4 || model.time.days >= 30) && player.exploredDesert % 15 == 0 && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] == 0) {
 				kGAMECLASS.enterBoobsDungeon();
 //				kGAMECLASS.inDungeon = true;
 //				kGAMECLASS.dungeonLoc = 23;
