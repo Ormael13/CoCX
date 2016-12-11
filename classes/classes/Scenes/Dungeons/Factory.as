@@ -78,14 +78,7 @@ package classes.Scenes.Dungeons
 			else roomPremiumStorage();
 		}
 		private function checkStairs():Boolean {
-			if (flags[kFLAGS.KAIZO_MODE] > 0 && flags[kFLAGS.KAIZO_FACTORY_DOOR_UNLOCKED] == 0) {
-				outputText("The door is locked with a padlock! A close examination reveals that there are fifteen buttons with some glowing. It looks like you will have to solve the puzzle to unlock.");
-				menu();
-				addButton(0, "Do Puzzle", getGame().lightsOut.startLightsOut, unlockDoor, unlockDoor, null, "Attempt to unlock the door.");
-				addButton(1, "Nevermind", roomMainChamber);
-				return false;
-			}
-			else if (flags[kFLAGS.KAIZO_MODE] == 0 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && (flags[kFLAGS.FACTORY_INCUBUS_DEFEATED] + flags[kFLAGS.FACTORY_INCUBUS_BRIBED] <= 0)) {
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && (flags[kFLAGS.FACTORY_INCUBUS_DEFEATED] + flags[kFLAGS.FACTORY_INCUBUS_BRIBED] <= 0)) {
 				outputText("The glass door is locked! You have a feeling you should confront the incubus first.", true);
 				if (silly()) outputText("\n\nNo, you can't break it down! Locked doors are indestructible!");
 				doNext(roomMainChamber);
