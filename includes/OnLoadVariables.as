@@ -36,18 +36,4 @@ public var inRoomedDungeonResume:Function = null;
 public var plotFight:Boolean = false;
 public var timeQ:Number = 0;
 public var campQ:Boolean = false;
-
-//Possibly redundant, not used anywhere else.
-//Input vars
-/* Yup, not used at all
-public var button0Choice:Number = 0;
-public var button1Choice:Number = 0;
-public var button2Choice:Number = 0;
-public var button3Choice:Number = 0;
-public var button4Choice:Number = 0;
-public var button5Choice:Number = 0;
-public var button6Choice:Number = 0;
-public var button7Choice:Number = 0;
-public var button8Choice:Number = 0;
-public var button9Choice:Number = 0;
-*/
+public var levelCap:int = 40;

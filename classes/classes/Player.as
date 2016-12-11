@@ -2191,5 +2191,10 @@ use namespace kGAMECLASS;
 			
 			return true;
 		}
+		
+		public function requiredXP():Number {
+			if (level < 100) return level * 100;
+			else return 9999;
+		}
 	}
 }

@@ -813,13 +813,23 @@ import classes.Scenes.Places.TelAdre.UmasShop;
 			if (findPerk(PerkLib.Tank) >= 0) max += 50;
 			if (findPerk(PerkLib.Tank2) >= 0) max += Math.round(tou);
 			if (findPerk(PerkLib.ChiReflowDefense) >= 0) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
-			if (level <= 20) max += level * 15;
-			else max += 20 * 15;
+			max += level * 15;
 			max = Math.round(max);
+			if (max < 50) max = 50;
 			if (max > 999) max = 999;
 			return max;
 		}
-
+		
+		public function maxLust():Number
+		{
+			return 100;
+		}
+		
+		public function maxFatigue():Number
+		{
+			return 100;
+		}
+		
 		public function buttDescript():String
 		{
 			return Appearance.buttDescription(this);

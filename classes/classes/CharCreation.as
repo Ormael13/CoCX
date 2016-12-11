@@ -2175,15 +2175,6 @@
 			// Vapula
 			flags[kFLAGS.VAPULA_FOLLOWER] = 1;
 			
-			// Amily
-			flags[kFLAGS.AMILY_FOLLOWER] = 2;
-			
-			// Jojo
-			kGAMECLASS.monk = 5;
-			
-			// Bimbo Sophie
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] = 1;
-			
 			// Isabella
 			flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] = 1;
 			

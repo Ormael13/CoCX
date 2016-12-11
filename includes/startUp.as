@@ -27,6 +27,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	mainView.eventTestInput.x = -10207.5;
 	mainView.eventTestInput.y = -1055.1;
 	hideStats();
+	mainView.statsView.visible = true;
 	//Reset newgame buttons
 	mainView.setMenuButton( MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameGo );
 	mainView.hideAllMenuButtons();
@@ -47,27 +48,21 @@ public function mainMenu(e:MouseEvent = undefined):void
 
 	startupScreenBody();
 
-	var resume:Function = null;
-	if (player.str > 0)  //we're in a game, allow resume.
-		resume = playerMenu;
-
-
 	// I really wanted to only have the "imageCreditsScreen" button if images were found, but it turns out
 	// that if you check if any images were found immediately when this screen is shown, you get 0
 	// since the images haven't loaded yet.
 	// Therefore, the imageCreditScreen will just have to say "No image pack" if you don't have any images
 
-	choices("", null,
-			"Image Credits", imageCreditsScreen,
-			"Credits", creditsScreen,
-			"", null,
-			"Instructions", howToPlay,
-			"Debug Info", debugPane,
-			"", null,
-			"", null,
-			"Settings", settingsScreen,
-			"Resume", resume);
-
+	menu();
+	if (player.str > 0) addButton(0, "Resume", playerMenu); //we're in a game, allow resume.
+	addButton(1, "Instructions", howToPlay);
+	addButton(2, "Settings", settingsScreen);
+	addButton(5, "Debug Info", debugPane);
+	addButton(6, "Credits", creditsScreen);
+	addButton(7, "Image Credits", imageCreditsScreen);
+			
+	mainViewManager.startUpButtons();
+			
 	if (false)  // Conditionally jump into chaosmonkey IMMEDIATELY
 	{
 		this.monkey.throwOnSyntaxError = true;

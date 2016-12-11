@@ -129,6 +129,7 @@
 		private var _perkLib:PerkLib = new PerkLib();// to init the static
 		private var _statusAffects:StatusAffects = new StatusAffects();// to init the static
 		public var charCreation:CharCreation = new CharCreation();
+		public var mainViewManager:MainViewManager = new MainViewManager();
 		public var saves:Saves = new Saves(gameStateDirectGet, gameStateDirectSet);
 		// Items/
 		public var mutations:Mutations = new Mutations();
@@ -253,6 +254,7 @@
 		// Declare the various global variables as class variables.
 		// Note that they're set up in the constructor, not here.
 		public var debug:Boolean;
+		public var shiftKeyDown:Boolean = false;
 		public var ver:String;
 		public var version:String;
 		public var mobile:Boolean;
@@ -333,7 +335,7 @@
 			this.parser = new Parser(this, CoC_Settings);
 
 			this.model = new GameModel();
-			this.mainView = new MainView( this.model );
+			this.mainView = new MainView();
 			this.mainView.name = "mainView";
 			this.stage.addChild( this.mainView );
 
@@ -565,6 +567,8 @@
 
 			//Hide sprites
 			mainView.hideSprite();
+			mainView.background.gotoAndStop(1);
+			mainView.sideBarBG.gotoAndStop(1);
 			//Hide up/down arrows
 			mainView.statsView.hideUpDown();
 

@@ -58,6 +58,17 @@ package classes.internals
 			return number.toString();
 		}
 		
+		public static function addComma(num:int):String{
+			var str:String = "";
+			if (num <= 0) return "0";
+			while (num>0){
+				var tmp:uint = num % 1000;
+				str = ( num > 999 ?"," + (tmp < 100 ? ( tmp < 10 ? "00": "0"): ""): "") + tmp + str;
+				num = num / 1000;
+			}
+			return str;
+		}
+		
 		// Basically, you pass an arbitrary-length list of arguments, and it returns one of them at random.
 		// Accepts any type.
 		// Can also accept a *single* array of items, in which case it picks from the array instead.

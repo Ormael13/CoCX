@@ -1100,16 +1100,9 @@ public function removeButton(arg:*):void {
 }
 
 public function menu():void { //The newer, simpler menu - blanks all buttons so addButton can be used
-	mainView.hideBottomButton(0);
-	mainView.hideBottomButton(1);
-	mainView.hideBottomButton(2);
-	mainView.hideBottomButton(3);
-	mainView.hideBottomButton(4);
-	mainView.hideBottomButton(5);
-	mainView.hideBottomButton(6);
-	mainView.hideBottomButton(7);
-	mainView.hideBottomButton(8);
-	mainView.hideBottomButton(9);
+	for (var i:int = 0; i < 15; i++) {
+		mainView.hideBottomButton(i);
+	}
 	flushOutputTextToGUI();
 }
 
@@ -1457,15 +1450,16 @@ public function invertGo():void{
 
 //Used to update the display of statistics
 public function statScreenRefresh():void {
-	mainView.statsView.show(); // show() method refreshes.
+	mainViewManager.tweenInStats();
+	mainViewManager.refreshStats(); // show() method refreshes.
 }
 
 public function showStats():void {
-	mainView.statsView.show();
+	mainViewManager.tweenInStats();
 }
 
 public function hideStats():void {
-	mainView.statsView.hide();
+	mainViewManager.tweenOutStats();
 }
 
 public function hideMenus():void {
@@ -2219,8 +2213,32 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	if(player.lust < 0) player.lust = 0;
 
 	//Refresh the stat pane with updated values
-	mainView.statsView.showUpDown();
+	showUpDown();
 	statScreenRefresh();
+}
+public function showUpDown():void { //Moved from StatsView.
+	function _oldStatNameFor(statName:String):String {
+		return 'old' + statName.charAt(0).toUpperCase() + statName.substr(1);
+	}
+
+	var statName:String,
+		oldStatName:String,
+		allStats:Array;
+
+	mainView.statsView.upDownsContainer.visible = true;
+
+	allStats = ["str", "tou", "spe", "inte", "lib", "sens", "cor", "HP", "lust", "fatigue"];
+
+	for each(statName in allStats) {
+		oldStatName = _oldStatNameFor(statName);
+
+		if (player[statName] > oldStats[oldStatName]) {
+			mainView.statsView.showStatUp(statName);
+		}
+		if (player[statName] < oldStats[oldStatName]) {
+			mainView.statsView.showStatDown(statName);
+		}
+	}
 }
 public function range(min:Number, max:Number, round:Boolean = false):Number 
 {
