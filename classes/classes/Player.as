@@ -982,7 +982,7 @@ use namespace kGAMECLASS;
 				demonCounter++;
 			if (wingType == 6 || wingType == 7)
 				demonCounter++;
-			if (skinType == 0 && cor > 50)
+			if (hasPlainSkin() && cor > 50)
 				demonCounter++;
 			if (faceType == 0 && cor > 50)
 				demonCounter++;
@@ -1300,7 +1300,7 @@ use namespace kGAMECLASS;
 				score--;
 			if (tailType == 5)
 				score += 2;
-			if (skinType != SKIN_TYPE_PLAIN && score > 0)
+			if (!hasPlainSkin() && score > 0)
 				score--;
 			return score;
 		}
@@ -1481,7 +1481,7 @@ use namespace kGAMECLASS;
 			if (balls > 2 && bunnyCounter > 0)
 				bunnyCounter--;
 			//Human skin on bunmorph adds
-			if (skinType == 0 && bunnyCounter > 1)
+			if (hasPlainSkin() && bunnyCounter > 1)
 				bunnyCounter++;
 			//No wings and antennae a plus
 			if (bunnyCounter > 0 && antennae == 0)
@@ -1542,7 +1542,7 @@ use namespace kGAMECLASS;
 			if (tailType == 7)
 				sharkCounter++;
 			//skin counting only if PC got any other shark traits
-			if (skinType == 0 && sharkCounter > 0)
+			if (hasPlainSkin() && sharkCounter > 0)
 				sharkCounter++;
 			return sharkCounter;
 		}
@@ -1553,7 +1553,7 @@ use namespace kGAMECLASS;
 			var mutantCounter:Number = 0;
 			if (faceType > 0)
 				mutantCounter++;
-			if (skinType != SKIN_TYPE_PLAIN)
+			if (hasPlainSkin())
 				mutantCounter++;
 			if (tailType > 0)
 				mutantCounter++;

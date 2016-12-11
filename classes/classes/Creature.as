@@ -2442,6 +2442,11 @@ package classes
 			return skinType == SKIN_TYPE_GOO;
 		}
 
+		public function hasPlainSkin():Boolean
+		{
+			return skinType == SKIN_TYPE_PLAIN;
+		}
+
 		public function isBiped():Boolean
 		{
 			return legCount == 2;

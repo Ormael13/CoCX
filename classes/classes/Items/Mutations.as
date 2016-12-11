@@ -1263,7 +1263,7 @@
 			//Fur - if has horsetail && ears and not at changelimit
 			if (!player.hasFur() && changes < changeLimit && rand(4) == 0 && player.tailType == TAIL_TYPE_HORSE) {
 				player.setFurColor(horseFurColors, true);
-				if (player.skinType == SKIN_TYPE_PLAIN) outputText("\n\nAn itchy feeling springs up over every inch of your skin.  As you scratch yourself madly, you feel fur grow out of your skin until <b>you have a fine coat of " + player.newFurColor + "-colored fur.</b>");
+				if (player.hasPlainSkin()) outputText("\n\nAn itchy feeling springs up over every inch of your skin.  As you scratch yourself madly, you feel fur grow out of your skin until <b>you have a fine coat of " + player.newFurColor + "-colored fur.</b>");
 				if (player.hasScales()) {
 					player.skinDesc = "fur";
 					outputText("\n\nYour " + player.skinTone + " scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of " + player.newFurColor + " " + player.skinDesc + ".  At last the itching stops as <b>you brush a few more loose scales from your new coat of " + player.newFurColor + "-colored fur.</b>");
@@ -2203,7 +2203,7 @@
 			}
 			//Become furred - requires paws and tail
 			if (rand(4) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_DOG && player.tailType == TAIL_TYPE_DOG && !player.hasFur()) {
-				if (player.skinType == SKIN_TYPE_PLAIN) outputText("\n\nYour skin itches intensely.  You gaze down as more and more hairs break forth from your skin, quickly transforming into a soft coat of fur.  <b>You are now covered in " + player.furColor + " fur from head to toe.</b>", false);
+				if (player.hasPlainSkin()) outputText("\n\nYour skin itches intensely.  You gaze down as more and more hairs break forth from your skin, quickly transforming into a soft coat of fur.  <b>You are now covered in " + player.furColor + " fur from head to toe.</b>", false);
 				if (player.hasScales()) outputText("\n\nYour scales itch incessantly.  You scratch, feeling them flake off to reveal a coat of " + player.furColor + " fur growing out from below!  <b>You are now covered in " + player.furColor + " fur from head to toe.</b>", false);
 				player.skinType = SKIN_TYPE_FUR;
 				player.skinDesc = "fur";
@@ -2864,7 +2864,7 @@
 				//Change skin to normal if not flawless!
 				if ((player.skinAdj != "smooth" && player.skinAdj != "latex" && player.skinAdj != "rubber") || player.skinDesc != "skin") {
 					outputText("\n\nYour " + player.skinDesc + " tingles delightfully as it ", false);
-					if (player.skinType == SKIN_TYPE_PLAIN) outputText(" loses its blemishes, becoming flawless smooth skin.", false);
+					if (player.hasPlainSkin()) outputText(" loses its blemishes, becoming flawless smooth skin.", false);
 					if (player.hasFur()) outputText(" falls out in clumps, revealing smooth skin underneath.", false);
 					if (player.hasScales()) outputText(" begins dropping to the ground in a pile around you, revealing smooth skin underneath.", false);
 					if (player.hasGooSkin()) outputText(" shifts and changes into flawless smooth skin.", false);
@@ -2918,7 +2918,7 @@
 				//Change skin to normal if not flawless!
 				if ((player.skinAdj != "smooth" && player.skinAdj != "latex" && player.skinAdj != "rubber") || player.skinDesc != "skin") {
 					outputText("\n\nYour " + player.skinDesc + " tingles delightfully as it ", false);
-					if (player.skinType == SKIN_TYPE_PLAIN) outputText(" loses its blemishes, becoming flawless smooth skin.", false);
+					if (player.hasPlainSkin()) outputText(" loses its blemishes, becoming flawless smooth skin.", false);
 					if (player.hasFur()) outputText(" falls out in clumps, revealing smooth skin underneath.", false);
 					if (player.hasScales()) outputText(" begins dropping to the ground in a pile around you, revealing smooth skin underneath.", false);
 					if (player.hasGooSkin()) outputText(" shifts and changes into flawless smooth skin.", false);
@@ -3741,7 +3741,7 @@
 				player.removeBreastRow(player.breastRows.length - 1, 1);
 			}
 			//Skin/fur
-			if (player.skinType != SKIN_TYPE_PLAIN && changes < changeLimit && rand(4) == 0 && player.faceType == FACE_HUMAN) {
+			if (!player.hasPlainSkin() && changes < changeLimit && rand(4) == 0 && player.faceType == FACE_HUMAN) {
 				if (player.hasFur()) outputText("\n\nYour fur itches incessantly, so you start scratching it.  It starts coming off in big clumps before the whole mess begins sloughing off your body.  In seconds, your skin is nude.  <b>You've lost your fur!</b>", false);
 				if (player.hasScales()) outputText("\n\nYour scales itch incessantly, so you scratch at them.  They start falling off wholesale, leaving you standing in a pile of scales after only a few moments.  <b>You've lost your scales!</b>", false);
 				if (player.hasGooSkin()) outputText("\n\nYour " + player.skinDesc + " itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin.  <b>Your skin is once again normal!</b>", false);
@@ -3873,7 +3873,7 @@
 			}
 			//1.Goopy skin
 			if (player.hairType == 3 && (player.skinDesc != "skin" || player.skinAdj != "slimy")) {
-				if (player.skinType == SKIN_TYPE_PLAIN) outputText("\n\nYou sigh, feeling your " + player.armorName + " sink into you as your skin becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!", false);
+				if (player.hasPlainSkin()) outputText("\n\nYou sigh, feeling your " + player.armorName + " sink into you as your skin becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!", false);
 				else if (player.hasFur()) outputText("\n\nYou sigh, suddenly feeling your fur become hot and wet.  You look down as your " + player.armorName + " sinks partway into you.  With a start you realize your fur has melted away, melding into the slime-like coating that now serves as your skin.  You've become partly liquid and incredibly gooey!", false);
 				else if (player.hasScales()) outputText("\n\nYou sigh, feeling slippery wetness over your scales.  You reach to scratch it and come away with a slippery wet coating.  Your scales have transformed into a slimy goop!  Looking closer, you realize your entire body has become far more liquid in nature, and is semi-solid.  Your " + player.armorName + " has even sunk partway into you.", false);
 				player.skinType = SKIN_TYPE_GOO;
@@ -4075,7 +4075,7 @@
 				player.hairColor = "silver";
 			}
 			//Skin
-			if (((player.skinTone != "rough gray" && player.skinTone != "orange and black striped") || player.skinType != SKIN_TYPE_PLAIN) && rand(7) == 0 && changes < changeLimit) {
+			if (((player.skinTone != "rough gray" && player.skinTone != "orange and black striped") || !player.hasPlainSkin()) && rand(7) == 0 && changes < changeLimit) {
 				outputText("\n\n", false);
 				if (player.hasFurOrScales()) outputText("Your " + player.skinDesc + " falls out, collecting on the floor and exposing your supple skin underneath.  ", false);
 				else if (player.hasGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidy into a more normal form. ", false);
@@ -4404,7 +4404,7 @@
 				updateClaws(player.clawType);
 			}
 			//Change skin to normal
-			if (player.skinType != SKIN_TYPE_PLAIN && (player.earType == EARS_HUMAN || player.earType == EARS_ELFIN) && rand(4) == 0 && changes < changeLimit) {
+			if (!player.hasPlainSkin() && (player.earType == EARS_HUMAN || player.earType == EARS_ELFIN) && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your " + player.skinFurScales() + " ", false);
 				if (player.hasScales()) outputText("are", false);
 				else outputText("is", false);
@@ -5564,7 +5564,7 @@
 				outputText("changed to become " + player.skinTone + " colored.</b>");
 			}
 			//Change skin to normal
-			if (player.skinType != SKIN_TYPE_PLAIN && player.earType == EARS_HUMAN && rand(3) == 0 && changes < changeLimit) {
+			if (!player.hasPlainSkin() && player.earType == EARS_HUMAN && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your " + player.skinFurScales());
 				outputText(" " + (player.hasScales() ? "are" : "is") + " falling to the ground, revealing flawless skin below.  <b>You now have normal skin.</b>");
 				player.skinType = SKIN_TYPE_PLAIN;
@@ -5682,7 +5682,7 @@
 				//Libido over 60? FUCK YEAH!
 				else if (player.lib < 80) {
 					outputText("\n\nYou fan your neck and start to pant as your " + player.skinTone + " skin begins to flush red with heat", false);
-					if (player.skinType != SKIN_TYPE_PLAIN) outputText(" through your " + player.skinDesc, false);
+					if (!player.hasPlainSkin()) outputText(" through your " + player.skinDesc, false);
 					outputText(".  ", false);
 					if (player.gender == 1) outputText("Compression tightens down on " + player.sMultiCockDesc() + " as it strains against your " + player.armorName + ".  You struggle to fight down your heightened libido, but it's hard – so very hard.", false);
 					else if (player.gender == 0) outputText("Sexual hunger seems to gnaw at your " + player.assholeDescript() + ", demanding it be filled, but you try to resist your heightened libido.  It's so very, very hard.", false);
@@ -5923,7 +5923,7 @@
 				//Libido over 60? FUCK YEAH!
 				else if (player.lib < 80) {
 					outputText("\n\nYou fan your neck and start to pant as your " + player.skinTone + " skin begins to flush red with heat", false);
-					if (player.skinType != SKIN_TYPE_PLAIN) outputText(" through your " + player.skinDesc, false);
+					if (!player.hasPlainSkin()) outputText(" through your " + player.skinDesc, false);
 					outputText(".  ", false);
 					if (player.gender == 1) outputText("Compression tightens down on " + player.sMultiCockDesc() + " as it strains against your " + player.armorName + ".  You struggle to fight down your heightened libido, but it's hard – so very hard.", false);
 					else if (player.gender == 0) outputText("Sexual hunger seems to gnaw at your " + player.assholeDescript() + ", demanding it be filled, but you try to resist your heightened libido.  It's so very, very hard.", false);
@@ -6653,7 +6653,7 @@
 				changes++;
 			}
 			//(Fur/Scales fall out)
-			if (player.skinType != SKIN_TYPE_PLAIN && (player.earType == EARS_HUMAN || player.earType == EARS_ELFIN) && rand(4) == 0 && changes < changeLimit) {
+			if (!player.hasPlainSkin() && (player.earType == EARS_HUMAN || player.earType == EARS_ELFIN) && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your " + player.skinFurScales() + " ", false);
 				if (player.hasScales()) outputText("are", false);
 				else outputText("is", false);
@@ -6666,7 +6666,7 @@
 				changes++;
 			}
 			//(Gain human face)
-			if (player.skinType == SKIN_TYPE_PLAIN && (player.faceType != FACE_SPIDER_FANGS && player.faceType != FACE_HUMAN) && changes < changeLimit && rand(4) == 0) {
+			if (player.hasPlainSkin() && (player.faceType != FACE_SPIDER_FANGS && player.faceType != FACE_HUMAN) && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nWracked by pain, your face slowly reforms into a perfect human shape.  Awed by the transformation, you run your fingers delicately over the new face, marvelling at the change.  <b>You have a human face again!</b>", false);
 				player.faceType = FACE_HUMAN;
 				changes++;
@@ -6702,14 +6702,14 @@
 				changes++;
 			}
 			//eyes!
-			if (player.skinType == SKIN_TYPE_PLAIN && (player.faceType != FACE_SPIDER_FANGS || player.faceType != FACE_HUMAN) && player.eyeType == EYES_HUMAN && rand(4) == 0 && changes < changeLimit) {
+			if (player.hasPlainSkin() && (player.faceType != FACE_SPIDER_FANGS || player.faceType != FACE_HUMAN) && player.eyeType == EYES_HUMAN && rand(4) == 0 && changes < changeLimit) {
 				player.eyeType = EYES_FOUR_SPIDER_EYES;
 				changes++;
 				outputText("\n\nYou suddenly get the strangest case of double vision.  Stumbling and blinking around, you clutch at your face, but you draw your hands back when you poke yourself in the eye.  Wait, those fingers were on your forehead!  You tentatively run your fingertips across your forehead, not quite believing what you felt.  <b>There's a pair of eyes on your forehead, positioned just above your normal ones!</b>  This will take some getting used to!", false);
 				dynStats("int", 5);
 			}
 			//(Gain spider fangs)
-			if (player.faceType == FACE_HUMAN && player.skinType == SKIN_TYPE_PLAIN && changes < changeLimit && rand(4) == 0) {
+			if (player.faceType == FACE_HUMAN && player.hasPlainSkin() && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nTension builds within your upper gum, just above your canines.  You open your mouth and prod at the affected area, pricking your finger on the sharpening tooth.  It slides down while you're touching it, lengthening into a needle-like fang.  You check the other side and confirm your suspicions.  <b>You now have a pair of pointy spider-fangs, complete with their own venom!</b>", false);
 				player.faceType = FACE_SPIDER_FANGS;
 				changes++;
@@ -7204,7 +7204,7 @@
 			}
 			if (player.findPerk(PerkLib.ThickSkin) < 0 && player.sens < 30 && rand(4) == 0) {
 				outputText("Slowly, ", false);
-				if (player.skinType == SKIN_TYPE_PLAIN) outputText("your skin", false);
+				if (player.hasPlainSkin()) outputText("your skin", false);
 				else outputText("the skin under your " + player.skinDesc, false);
 				outputText(" begins to feel duller, almost... thicker.  You pinch yourself and find that your epidermis feels more resistant to damage, almost like natural armor!\n<b>(Thick Skin - Perk Gained!)</b>", false);
 				player.createPerk(PerkLib.ThickSkin, 0, 0, 0, 0);
@@ -7964,7 +7964,7 @@
 				changes++;
 			}
 			// Kitsunes should have normal arms. exspecially skinny arms with claws are somewhat weird (Stadler76).
-			if (player.skinType == SKIN_TYPE_PLAIN && rand(4) == 0) restoreArms(tfSource);
+			if (player.hasPlainSkin() && rand(4) == 0) restoreArms(tfSource);
 
 			if (changes == 0) {
 				outputText("\n\nOdd.  You don't feel any different.");
@@ -8656,7 +8656,7 @@
 					}
 					outputText("Shaking your head a bit, you wait for your energy to return, then examine your appearance.  ");
 					//(if player skinTone = ebony/black/ebony with tats and no fur/scales or if black/midnight fur or if black scales
-					if (((player.skinTone == "ebony" || player.skinTone == "black") && (player.skinType == SKIN_TYPE_PLAIN || player.hasGooSkin())) || ((player.hairColor == "black" || player.hairColor == "midnight") && player.hasFurOrScales())) {
+					if (((player.skinTone == "ebony" || player.skinTone == "black") && (player.hasPlainSkin() || player.hasGooSkin())) || ((player.hairColor == "black" || player.hairColor == "midnight") && player.hasFurOrScales())) {
 						outputText("Nothing seems different at first.  Strange... you look closer and discover a darker, mask-line outline on your already inky visage.  <b>You now have a barely-visible raccoon mask.</b>");
 					}
 					else outputText("A dark, almost black mask shades the " + player.skinFurScales() + " around your eyes and over the topmost portion of your nose, lending you a criminal air!  <b>You now have a raccoon mask!</b>");
@@ -8666,7 +8666,7 @@
 					outputText("\n\nA sudden migraine sweeps over you and you clutch your head in agony as your nose collapses back to human dimensions.  A worrying numb spot grows around your eyes, and you entertain several horrible premonitions until it passes as suddenly as it came.  Checking your reflection in your water barrel, you find ");
 					//[(if black/midnight fur or if black scales)
 					if (((player.hairColor == "black" || player.hairColor == "midnight") && player.hasFurOrScales())) outputText("your face apparently returned to normal shape, albeit still covered in " + player.skinFurScales() + ".  You look closer and discover a darker, mask-line outline on your already inky visage.  <b>You now have a barely-visible raccoon mask on your otherwise normal human face.</b>");
-					else if ((player.skinTone == "ebony" || player.skinTone == "black") && (player.skinType == SKIN_TYPE_PLAIN || player.hasGooSkin())) outputText("your face apparently returned to normal shape.  You look closer and discover a darker, mask-line outline on your already inky visage.  <b>You now have a barely-visible raccoon mask on your normal human face.</b>");
+					else if ((player.skinTone == "ebony" || player.skinTone == "black") && (player.hasPlainSkin() || player.hasGooSkin())) outputText("your face apparently returned to normal shape.  You look closer and discover a darker, mask-line outline on your already inky visage.  <b>You now have a barely-visible raccoon mask on your normal human face.</b>");
 					else outputText("your face returned to human dimensions, but shaded by a black mask around the eyes and over the nose!  <b>You now have a humanoid face with a raccoon mask!</b>");
 				}
 				player.faceType = FACE_RACCOON_MASK;
@@ -8842,7 +8842,7 @@
 				//from skinscales
 				if (!player.hasFur()) {
 					outputText("\n\nYour " + player.skinFurScales() + " itch");
-					if (player.skinType != SKIN_TYPE_PLAIN) outputText("es");
+					if (!player.hasPlainSkin()) outputText("es");
 					outputText(" all over");
 					if (player.tailType > TAIL_TYPE_NONE) outputText(", except on your tail");
 					outputText(".  Alarmed and suspicious, you tuck in your hands, trying to will yourself not to scratch, but it doesn't make much difference.  Tufts of ");
@@ -8937,7 +8937,7 @@
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
 			//remove fur
-			if ((player.faceType != FACE_HUMAN || player.skinType != SKIN_TYPE_PLAIN) && rand(3) == 0) {
+			if ((player.faceType != FACE_HUMAN || !player.hasPlainSkin()) && rand(3) == 0) {
 				//Remove face before fur!
 				if (player.faceType != FACE_HUMAN) {
 					outputText("\n\n", false);
@@ -8945,7 +8945,7 @@
 					player.faceType = FACE_HUMAN;
 				}
 				//De-fur
-				else if (player.skinType != SKIN_TYPE_PLAIN) {
+				else if (!player.hasPlainSkin()) {
 					outputText("\n\n", false);
 					if (player.hasFur()) outputText("Your skin suddenly feels itchy as your fur begins falling out in clumps, <b>revealing inhumanly smooth skin</b> underneath.", false);
 					if (player.hasScales()) outputText("Your scales begin to itch as they begin falling out in droves, <b>revealing your inhumanly smooth " + player.skinTone + " skin</b> underneath.", false);
@@ -8961,7 +8961,7 @@
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
 			//foot changes - requires furless
-			if (player.skinType == SKIN_TYPE_PLAIN && rand(4) == 0) {
+			if (player.hasPlainSkin() && rand(4) == 0) {
 				//Males/genderless get clawed feet
 				if (player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
 					if (player.lowerBody != LOWER_BODY_TYPE_DEMONIC_CLAWS) {

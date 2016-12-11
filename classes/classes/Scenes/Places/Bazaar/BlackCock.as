@@ -1602,7 +1602,7 @@ package classes.Scenes.Places.Bazaar
 				changes++;
 			}
 			//Fur/scales fall out
-			if (rand(4) == 0 && changes < changeLimit && (player.skinType != SKIN_TYPE_PLAIN || player.skinTone != "gray" || player.skinAdj != "tough")) {
+			if (rand(4) == 0 && changes < changeLimit && (!player.hasPlainSkin() || player.skinTone != "gray" || player.skinAdj != "tough")) {
 				outputText("\n\n");
 				switch(player.skinType) {
 					case SKIN_TYPE_PLAIN:
