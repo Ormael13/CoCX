@@ -2,6 +2,9 @@ import classes.GlobalFlags.kGAMECLASS;
 
 use namespace kGAMECLASS;
 
+mainView.stage.addEventListener(KeyboardEvent.KEY_DOWN, mainViewManager.keyPressed);
+mainView.stage.addEventListener(KeyboardEvent.KEY_UP, mainViewManager.keyReleased);
+
 inputManager.AddBindableControl(
 	"Show Stats",
 	"Show the stats pane when available",
@@ -479,7 +482,7 @@ inputManager.AddBindableControl(
 		}
 	},
 	InputManager.CHEATCONTROL);
-
+	
 // Insert the default bindings
 inputManager.BindKeyToControl(83, "Show Stats");
 inputManager.BindKeyToControl(76, "Level Up");

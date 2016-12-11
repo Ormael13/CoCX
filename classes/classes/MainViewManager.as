@@ -201,15 +201,7 @@ package classes
 			}
 		}
 		
-		//Allows shift key.
-		public function registerShiftKeys():void {
-			if (!registeredShiftKey) {
-				mainView.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyPressed);
-				mainView.stage.addEventListener(KeyboardEvent.KEY_UP, keyReleased);
-				registeredShiftKey = true;
-			}
-		}
-		
+		//Shift key registration. This might be moved to a better place. Maybe.
 		public function keyPressed(event:KeyboardEvent):void {
 			if (event.keyCode == Keyboard.SHIFT) {
 				getGame().shiftKeyDown = true;

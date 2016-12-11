@@ -1074,9 +1074,10 @@ public function campFollowers():void {
 
 private function rest():void {
 	campQ = true;
-	if(timeQ == 0) {
-		outputText("You lie down to rest for four hours.\n", true);
-		timeQ = 4;
+	if (timeQ == 0) {
+		if (getGame().shiftKeyDown) timeQ = 21 - model.time.hours;
+		else timeQ = 4;
+		outputText("You lie down to rest for " + num2Text(timeQ) + " hours.\n", true);
 		//Marble withdrawl
 		if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
 			outputText("\nYour rest is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
@@ -1104,9 +1105,10 @@ private function rest():void {
 private function doWait():void {
 	campQ = true;
 	outputText("", true);
-	if(timeQ == 0) {
-		outputText("You wait four hours...\n", false);
-		timeQ = 4;
+	if (timeQ == 0) {
+		if (getGame().shiftKeyDown) timeQ = 21 - model.time.hours;
+		else timeQ = 4;
+		outputText("You wait " + num2Text(timeQ) + " hours...\n", false);
 		//Marble withdrawl
 		if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
 			outputText("\nYour time spent waiting is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);

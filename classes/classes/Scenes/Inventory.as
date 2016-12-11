@@ -101,7 +101,7 @@ package classes.Scenes
 				getGame().enemyAI();
 				return;
 			}
-			outputText("\nWhich item will you use?");
+			outputText("\nWhich item will you use? To discard, hold Shift then click on an item.");
 			if (getGame().inCombat)
 				addButton(9, "Back", kGAMECLASS.combatMenu, false); //Player returns to the combat menu on cancel
 			else addButton(9, "Back", playerMenu);
@@ -270,6 +270,10 @@ package classes.Scenes
 			clearOutput();
 			if (player.itemSlots[slotNum].itype is Useable) {
 				var item:Useable = player.itemSlots[slotNum].itype as Useable;
+				if (getGame().shiftKeyDown) {
+					deleteItemPrompt(item, slotNum);
+					return;
+				}
 				if (item.canUse()) { //If an item cannot be used then canUse should provide a description of why the item cannot be used
 					if (!debug) player.itemSlots[slotNum].removeOneItem();
 					useItem(item, player.itemSlots[slotNum]);
@@ -279,16 +283,7 @@ package classes.Scenes
 			else {
 				outputText("You cannot use " + player.itemSlots[slotNum].itype.longName + "!\n\n");
 			}
-			itemGoNext(); //Normally returns to the inventory menu. In combat it goes to the inventoryCombatHandler function
-/* menuLoc is no longer needed, after enemyAI game will always move to the next round			
-			else if (menuLoc == 1) {
-				menuLoc = 0;
-				if (!combatRoundOver()) {
-					outputText("\n\n");
-					enemyAI();
-				}
-			}
-*/
+			itemGoNext();
 		}
 		
 		private function inventoryCombatHandler():void {
@@ -321,6 +316,22 @@ package classes.Scenes
 					//and for the Kitsune Gift (which may show a sub-menu if the player has a full inventory)
 //				if (!item.hasSubMenu()) itemGoNext(); //Don't call itemGoNext if there's a sub menu, otherwise it would never be displayed
 			}
+		}
+		
+		private function deleteItemPrompt(item:Useable, slotNum:int):void {
+			clearOutput();
+			outputText("Are you sure you want to destroy " + player.itemSlots[slotNum].quantity + "x " + item.shortName + "?  You won't be able to retrieve " + (player.itemSlots[slotNum].quantity == 1 ? "it": "them") + "!");
+			menu();
+			addButton(0, "Yes", createCallBackFunction2(deleteItem, item, slotNum));
+			addButton(1, "No", inventoryMenu);
+			//doYesNo(deleteItem, inventoryMenu);
+		}
+		
+		private function deleteItem(item:Useable, slotNum:int):void {
+			clearOutput();
+			outputText(player.itemSlots[slotNum].quantity + "x " + item.shortName + " " + (player.itemSlots[slotNum].quantity == 1 ? "has": "have") + " been destroyed.");
+			player.destroyItems(item, player.itemSlots[slotNum].quantity);
+			doNext(inventoryMenu);
 		}
 		
 		private function takeItemFull(itype:ItemType, showUseNow:Boolean, source:ItemSlotClass):void {
