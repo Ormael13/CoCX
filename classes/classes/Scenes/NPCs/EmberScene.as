@@ -1557,14 +1557,14 @@ package classes.Scenes.NPCs
 			if (emberAffection() < 75) {
 				outputText("You decide to continue drinking Ember's blood; intent on acquiring all the power it can bring out from within you.");
 				//check for TFs and output appropriate text from below
-				getGame().consumables.EMBERBL.useItem();
+				consumables.EMBERBL.useItem();
 				outputText("\n\n\"<i>Ugh... you drank too much... I feel woozy,</i>\" the dragon gripes.");
 				outputText("\n\nYou offer " + emberMF("him", "her") + " a helping hand.  Ember, surprisingly, accepts your help.  \"<i>Thanks.  I guess no more work for today... I need some food and a nap.</i>\"");
 			}
 			else {
 				outputText("You decide to continue drinking Ember's blood; intent on acquiring all the power it can bring out from within you.");
 				//output tf from below
-				getGame().consumables.EMBERBL.useItem();
+				consumables.EMBERBL.useItem();
 				outputText("\n\nAs you break the kiss; Ember leans over, supporting " + emberMF("him", "her") + "self on your shoulders.  \"<i>Ugh... I guess we overdid it... I feel woozy.</i>\"");
 				outputText("\n\nYou quickly offer " + emberMF("him", "her") + " a helping hand, inquiring if " + emberMF("he", "she") + " is all right.  Ember accepts your help, using your hand to balance " + emberMF("him", "her") + "self.  \"<i>I-I'll be fine... just, no more sharing for the day...</i>\"");
 			}
