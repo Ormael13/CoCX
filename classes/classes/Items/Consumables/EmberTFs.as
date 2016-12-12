@@ -3,6 +3,7 @@ package classes.Items.Consumables
 	import classes.GlobalFlags.*;
 	import classes.internals.Utils;
 	import classes.Items.Consumable;
+	import classes.Scenes.Camp;
 	import classes.DefaultDict;
 	import classes.CockTypesEnum;
 	import classes.PerkLib;
@@ -18,6 +19,8 @@ package classes.Items.Consumables
 		protected function get output():Output { return kGAMECLASS.output; }
 		protected function get player():Player { return kGAMECLASS.player; }
 		protected function get flags():DefaultDict { return kGAMECLASS.flags; }
+		protected function get camp():Camp { return kGAMECLASS.camp; }
+		protected function doNext(eventNo:Function):void { kGAMECLASS.doNext(eventNo); }
 
 		public function EmberTFs(drakesHeart:Boolean = false):void 
 		{
