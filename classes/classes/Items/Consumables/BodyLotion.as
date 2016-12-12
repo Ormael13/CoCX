@@ -89,7 +89,7 @@ package classes.Items.Consumables
 				game.HPChange(10, true);
 			}
 			else {
-				if ([SKIN_TYPE_GOO, SKIN_TYPE_DRACONIC].indexOf(game.player.skinType) == -1) { //If skin is goo or dragon scales, don't change.
+				if ([SKIN_TYPE_GOO, SKIN_TYPE_DRAGON_SCALES].indexOf(game.player.skinType) == -1) { //If skin is goo or dragon scales, don't change.
 					if (_adj != "clear") game.player.skinAdj = _adj;
 					else game.player.skinAdj = "";
 				}
@@ -132,20 +132,21 @@ package classes.Items.Consumables
 								outputText("<b>This text should not happen. Please let Kitteh6660 know.</b>");
 						}
 						break;
-					case SKIN_TYPE_SCALES: //Scales
+					case SKIN_TYPE_LIZARD_SCALES: //Scales
+					case SKIN_TYPE_FISH_SCALES: //Scales
 						outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the flask of lotion and rubbing", "uncork the flask of lotion and rub") + " the " + liquidDesc() + " across your body. As you rub the mixture into your arms and [chest], your whole body begins to tingle pleasantly.");
 						switch(_adj) {
 							case "smooth":
-								outputText("Soon you part your fur to reveal smooth skin that still appears natural.");
+								outputText("Soon your scales are smoother but in a natural healthy way.");
 								break;
 							case "rough":
-								outputText("Soon you part your fur to reveal rough skin that still appears natural.");
+								outputText("Soon your scales are rougher as if you’ve just finished a long day’s work.");
 								break;
 							case "sexy":
-								outputText("Soon you part your fur to reveal sexy skin that makes you want to kiss yourself.");
+								outputText("Soon your scales are so sexy you find it hard to keep your hands off yourself.");
 								break;
 							case "clear":
-								outputText("Soon you part your fur to reveal the natural beauty of your " + game.player.skinFurScales() + " skin.");
+								outputText("Soon the natural beauty of your " + game.player.skinFurScales() + " is revealed without anything extra or unnecessary.");
 								break;
 							default: //Failsafe
 								outputText("<b>This text should not happen. Please let Kitteh6660 know.</b>");
@@ -155,7 +156,7 @@ package classes.Items.Consumables
 						outputText("You take the lotion and pour the " + liquidDesc() + " into yourself. The concoction dissolves, leaving your gooey epidermis unchanged. As a matter of fact nothing happens at all.");
 						//No changes due to gooey skin.
 						break;
-					case SKIN_TYPE_DRACONIC: //Dragon scales
+					case SKIN_TYPE_DRAGON_SCALES: //Dragon scales
 						outputText("You take the lotion and pour the " + liquidDesc() + " on your scales. The concoction dissolves, leaving your dragon scales unchanged. As a matter of fact nothing happens at all.");
 						//No changes due to dragon scales.
 						break;

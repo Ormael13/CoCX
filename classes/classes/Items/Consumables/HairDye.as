@@ -37,7 +37,7 @@ package classes.Items.Consumables
 				game.addButtonDisabled(0, "Hair", "You are bald!");
 			}
 			
-			if (game.player.skinType == 1) {
+			if (game.player.hasFur()) {
 				outputText("\n\nYou have " + game.player.furColor + " fur.");
 				if (game.player.furColor != _color) game.addButton(1, "Fur", dyeFur);
 				else game.addButtonDisabled(1, "Fur", "Your already have " + _color + " fur!");

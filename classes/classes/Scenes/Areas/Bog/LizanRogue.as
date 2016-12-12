@@ -97,7 +97,7 @@ package classes.Scenes.Areas.Bog
 		{
 			var skinToneAdj:String = randomChoice(SKIN_VARIATIONS);
 			this.skinTone = skinToneAdj;
-			this.skinType = SKIN_TYPE_SCALES;
+			this.skinType = SKIN_TYPE_LIZARD_SCALES;
 			this.a = "the ";
 			this.short = "lizan rogue";
 			this.imageName = "lizanrogue";

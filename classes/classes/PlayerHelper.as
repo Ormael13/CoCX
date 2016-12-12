@@ -10,16 +10,6 @@ package classes
 	public class PlayerHelper extends Character 
 	{
 		public function PlayerHelper() {}
-		
-		public function hasScales():Boolean
-		{
-			return [SKIN_TYPE_SCALES, SKIN_TYPE_DRACONIC].indexOf(skinType) != -1;
-		}
-
-		public function hasFurOrScales():Boolean
-		{
-			return skinType == SKIN_TYPE_FUR || hasScales();
-		}
 
 		public function hasDragonHorns(fourHorns:Boolean = false):Boolean
 		{
@@ -86,11 +76,6 @@ package classes
 		public function isBasilisk():Boolean
 		{
 			return game.bazaar.benoit.benoitBigFamily() && eyeType == EYES_BASILISK;
-		}
-
-		public function hasLizardScales():Boolean
-		{
-			return skinType == SKIN_TYPE_SCALES;
 		}
 
 		public function featheryHairPinEquipped():Boolean

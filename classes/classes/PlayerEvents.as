@@ -209,7 +209,7 @@ package classes {
 			}
 			//Reset bad end warning
 			if (flags[kFLAGS.FOX_BAD_END_WARNING] == 1) {
-				if (player.faceType != FACE_FOX || player.tailType != TAIL_TYPE_FOX || player.earType != EARS_FOX || player.lowerBody != LOWER_BODY_TYPE_FOX || player.skinType != SKIN_TYPE_FUR) {
+				if (player.faceType != FACE_FOX || player.tailType != TAIL_TYPE_FOX || player.earType != EARS_FOX || player.lowerBody != LOWER_BODY_TYPE_FOX || !player.hasFur()) {
 					flags[kFLAGS.FOX_BAD_END_WARNING] = 0;
 				}
 			}

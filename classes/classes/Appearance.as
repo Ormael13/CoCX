@@ -26,7 +26,7 @@
 
 		public static function hairOrFur(i_creature:Creature):String
 		{
-			if (i_creature.skinType == 1)
+			if (i_creature.hasFur())
 				return "fur";
 			else
 				return "hair";
@@ -100,7 +100,7 @@
 			// case HAIR_GOO: return description + "goo-mane";
 			// and so on. (Stadler76)
 			//If furry and longish hair sometimes call it a mane (50%)
-			if (i_creature.skinType == 1 && i_creature.hairLength > 3 && rand(2) == 0) {
+			if (i_creature.hasFur() && i_creature.hairLength > 3 && rand(2) == 0) {
 				if (i_creature.hairType == HAIR_FEATHER) description += "feather-";
 				else if (i_creature.hairType == HAIR_GHOST) description += "transparent ";
 				else if (i_creature.hairType == HAIR_GOO) description += "goo-";
@@ -334,7 +334,7 @@
 				else description += "pierced ";
 				haveDescription = true;
 			}
-			if (!haveDescription && i_creature.skinType == 3) {
+			if (!haveDescription && i_creature.hasGooSkin()) {
 				options = ["slime-slick ",
 					"goopy ",
 					"slippery "];
@@ -808,7 +808,7 @@
 				description += randomChoice(options);
 			}
 			//Goo - 1/4 chance
-			else if (i_creature.skinType == 3 && rand(4) == 0) {
+			else if (i_creature.hasGooSkin() && rand(4) == 0) {
 				options = ["goopey",
 					"gooey",
 					"slimy"];
@@ -1314,7 +1314,7 @@
 
 			}
 			//Slimy skin
-			if (i_creature.skinType == 3) {
+			if (i_creature.hasGooSkin()) {
 				if (description) description += " ";
 				options = ["goopey",
 					"gooey",
@@ -1438,7 +1438,7 @@
 				if (description != "") description += ", ";
 				description += "pierced";
 			}
-			if (description == "" && i_creature.skinType == 3) {
+			if (description == "" && i_creature.hasGooSkin()) {
 				if (description != "")
 					description += ", ";
 				if (rand(2) == 0)
@@ -1529,12 +1529,12 @@
 			if (rand(2) == 0) {
 				//Doggie descriptors - 50%
 				//TODO Conditionals don't make sense, need to introduce a class variable to keep of "something" or move race or Creature/Character
-				if (i_creature.skinType == 1 > 2 && !haveDescription && rand(2) == 0) {
+				if (i_creature.hasFur() > 2 && !haveDescription && rand(2) == 0) {
 					description += "bitch-";
 					haveDescription = true;
 				}
 				/*Horse descriptors - 50%
-				 if (creature.skinType == 1 > 2 && !descripted && rand(2) == 0) {
+				 if (creature.hasFur() > 2 && !descripted && rand(2) == 0) {
 				 descripted = true;
 				 descript += "mare-";
 				 }*/
@@ -2204,20 +2204,22 @@
 				[
 					[SKIN_TYPE_PLAIN, "skin"],
 					[SKIN_TYPE_FUR, "fur"],
-					[SKIN_TYPE_SCALES, "scales"],
+					[SKIN_TYPE_LIZARD_SCALES, "scales"],
 					[SKIN_TYPE_GOO, "goo"],
 					[SKIN_TYPE_UNDEFINED, "undefined flesh"],
-					[SKIN_TYPE_DRACONIC, "scales"]
+					[SKIN_TYPE_DRAGON_SCALES, "scales"],
+					[SKIN_TYPE_FISH_SCALES, "scales"],
 				]
 		);
 		public static const DEFAULT_SKIN_DESCS:Object = createMapFromPairs(
 				[
 					[SKIN_TYPE_PLAIN, "skin"],
 					[SKIN_TYPE_FUR, "fur"],
-					[SKIN_TYPE_SCALES, "scales"],
+					[SKIN_TYPE_LIZARD_SCALES, "scales"],
 					[SKIN_TYPE_GOO, "skin"],
 					[SKIN_TYPE_UNDEFINED, "skin"],
-					[SKIN_TYPE_DRACONIC, "scales"]
+					[SKIN_TYPE_DRAGON_SCALES, "scales"],
+					[SKIN_TYPE_FISH_SCALES, "scales"],
 				]
 		);
 		public static const DEFAULT_HAIR_NAMES:Object = createMapFromPairs(

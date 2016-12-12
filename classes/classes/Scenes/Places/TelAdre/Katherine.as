@@ -5633,9 +5633,9 @@ private function bathTimePenetrated():void {
 
 		outputText("Kath presses herself against you and the feeling of her ");
 		if (furry)
-			outputText("slick fur rubbing against your " + (player.skinType == SKIN_TYPE_FUR ? "own" : "skin"));
+			outputText("slick fur rubbing against your " + (player.hasFur() ? "own" : "skin"));
 		else
-			outputText("wet skin " + (player.skinType == SKIN_TYPE_FUR ? "rubbing against your fur" : "sliding over your body"));
+			outputText("wet skin " + (player.hasFur() ? "rubbing against your fur" : "sliding over your body"));
 		outputText(" overloads your senses.  " + (player.cor < 75 ? "You close your eyes and lose yourself in the sensual feelings, the icy water forgotten." : "Your ability to fight back drains away and you curse your lack of planning - you’re so aroused that you can’t take advantage of Kath.  In fact she’s the one taking the lead!") + "\n\n");
 
 		outputText("For a while you and Kath just enjoy the feeling of the water lazily drifting past and the slow and steady grinding.  When every part of you seems infused with desire you feel your asshole begin to loosen, your body begging for something to fill your needy hole.\n\n");

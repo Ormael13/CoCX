@@ -112,16 +112,16 @@ package classes.Items.Consumables
 			}
 			//(Pending Tongue Masturbation Variants; if we ever get around to doing that.)
 			//Gain Dragon Scales
-			if (player.skinType != SKIN_TYPE_DRACONIC && changes < changeLimit && Utils.rand(3) == 0) {
+			if (!player.hasDragonScales() && changes < changeLimit && Utils.rand(3) == 0) {
 				output.text("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, hoping for relief; and when you look at your hands you notice small fragments of your " + player.skinFurScales() + " hanging from your fingers.  Nevertheless you continue to scratch yourself, and when you're finally done, you look yourself over. New shield-like scales have grown to replace your peeled off " + player.skinFurScales() + ".  They are smooth and look nearly as tough as iron. <b>Your body is now covered in shield-shaped dragon scales.</b>");
-				player.skinType = SKIN_TYPE_DRACONIC;
+				player.skinType = SKIN_TYPE_DRAGON_SCALES;
 				player.skinAdj = "tough";
 				player.skinDesc = "scales";
 				//def bonus of scales
 			}
 			//<mod name="Reptile eyes" author="Stadler76">
 			//Gain Dragon Eyes
-			if (player.eyeType != EYES_DRAGON && player.skinType == SKIN_TYPE_DRACONIC && player.earType == EARS_DRAGON && player.hasDragonHorns() && changes < changeLimit && Utils.rand(4) == 0) {
+			if (player.eyeType != EYES_DRAGON && player.hasDragonScales() && player.earType == EARS_DRAGON && player.hasDragonHorns() && changes < changeLimit && Utils.rand(4) == 0) {
 				if (player.hasReptileEyes())
 					output.text("\n\nYour eyes change slightly in their appearance.");
 				else
@@ -212,7 +212,7 @@ package classes.Items.Consumables
 			}
 			// <mod name="Predator arms" author="Stadler76">
 			//Gain Dragon Arms (Derived from ARM_TYPE_SALAMANDER)
-			if (player.armType != ARM_TYPE_PREDATOR && player.skinType == SKIN_TYPE_DRACONIC && player.lowerBody == LOWER_BODY_TYPE_DRAGON && changes < changeLimit && Utils.rand(3) == 0) {
+			if (player.armType != ARM_TYPE_PREDATOR && player.hasDragonScales() && player.lowerBody == LOWER_BODY_TYPE_DRAGON && changes < changeLimit && Utils.rand(3) == 0) {
 				output.text("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of some reptilian killer with shield-shaped " + player.skinTone + " scales and powerful, thick, curved steel-gray claws replacing your fingernails.");
 				output.text("\n<b>You now have dragon arms.</b>");
 				player.armType = ARM_TYPE_PREDATOR;
@@ -220,7 +220,7 @@ package classes.Items.Consumables
 				changes++
 			}
 			//Claw transition
-			if (player.armType == ARM_TYPE_PREDATOR && player.skinType == SKIN_TYPE_DRACONIC && player.clawType != CLAW_TYPE_DRAGON && changes < changeLimit && Utils.rand(3) == 0) {
+			if (player.armType == ARM_TYPE_PREDATOR && player.hasDragonScales() && player.clawType != CLAW_TYPE_DRAGON && changes < changeLimit && Utils.rand(3) == 0) {
 				output.text("\n\nYour " + player.claws() + " change  a little to become more dragon-like.");
 				mutations.updateClaws(CLAW_TYPE_DRAGON);
 				output.text(" <b>You now have " + player.claws() + ".</b>");

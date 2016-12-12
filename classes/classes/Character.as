@@ -315,7 +315,7 @@ import classes.GlobalFlags.kFLAGS;
 				skinzilla += skinTone + " ";
 			//Fur handled a little differently since it uses
 			//haircolor
-			if (skinType == 1)
+			if (hasFur())
 				skinzilla += "skin";
 			else
 				skinzilla += skinDesc;

@@ -155,7 +155,7 @@
 			//[Round 2 Description]
 			else if (statusEffectv1(StatusEffects.Round) == 2) {
 				_long = "You're still trapped inside the pod!  By now the walls are totally soaked with some kind of viscous slime.  The smell of it is unbearably sweet and you have to put a hand against the wall to steady yourself.  Warm tentacles are curling and twisting underneath your armor, caressing every ";
-				if (player.skinType == SKIN_TYPE_FUR) _long += "furry ";
+				if (player.hasFur()) _long += "furry ";
 				if (player.hasScales()) _long += "scaley ";
 				_long += "inch of your " + player.legs() + ", crotch, and " + game.player.assDescript() + ".";
 			}
