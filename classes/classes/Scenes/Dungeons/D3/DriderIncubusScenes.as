@@ -97,7 +97,7 @@ package classes.Scenes.Dungeons.D3
 		{
 			clearOutput();
 			outputText("Your bindings are cut from you by something short and sharp, the point pressing hard enough that you worry it will score your [skin]");
-			if (player.skinType != 0)
+			if (!player.hasPlainSkin())
 			{
 				outputText(" through your [skinFurScales]");
 			}

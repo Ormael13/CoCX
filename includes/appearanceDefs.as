@@ -13,10 +13,11 @@ public static const GENDER_HERM:int                                             
 // skinType
 public static const SKIN_TYPE_PLAIN:int                                             =    0;
 public static const SKIN_TYPE_FUR:int                                               =    1;
-public static const SKIN_TYPE_SCALES:int                                            =    2;
+public static const SKIN_TYPE_LIZARD_SCALES:int                                     =    2;
 public static const SKIN_TYPE_GOO:int                                               =    3;
 public static const SKIN_TYPE_UNDEFINED:int                                         =    4; // DEPRECATED, silently discarded upon loading a saved game
-public static const SKIN_TYPE_DRACONIC:int                                          =    5;
+public static const SKIN_TYPE_DRAGON_SCALES:int                                     =    5;
+public static const SKIN_TYPE_FISH_SCALES:int                                       =    6; // NYI, for future use
 
 // hairType
 public static const HAIR_NORMAL:int                                                =     0;

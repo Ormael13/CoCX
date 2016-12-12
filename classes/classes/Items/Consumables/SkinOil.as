@@ -29,7 +29,7 @@ package classes.Items.Consumables
 				game.player.changeFatigue(-10);
 			}
 			else {
-				if (game.player.skinType != SKIN_TYPE_GOO) {
+				if (!game.player.hasGooSkin()) {
 					game.player.skinTone = _color;
 					mutations.updateClaws(game.player.clawType);
 				}
@@ -40,8 +40,9 @@ package classes.Items.Consumables
 					case SKIN_TYPE_FUR: //Fur
 						outputText("" + game.player.clothedOrNaked("Once you’ve disrobed you take the oil and", "You take the oil and") + " begin massaging it into your skin despite yourself being covered with fur. Once you’ve finished... nothing happens. Then your skin begins to tingle and soon you part your fur to reveal " + _color + " skin.");
 						break;
-					case SKIN_TYPE_SCALES: //Scales
-					case SKIN_TYPE_DRACONIC: //Dragon scales
+					case SKIN_TYPE_LIZARD_SCALES: //Lizard scales
+					case SKIN_TYPE_DRAGON_SCALES: //Dragon scales
+					case SKIN_TYPE_FISH_SCALES:   //Fish scales
 						outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the bottle of oil and rubbing", "uncork the bottle of oil and rub") + " the smooth liquid across your body. Even before you’ve covered your arms and [chest] your scaly skin begins to tingle pleasantly all over. After your skin darkens a little, it begins to change until you have " + _color + " skin.");
 						break;
 					case SKIN_TYPE_GOO: //Goo

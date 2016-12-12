@@ -110,8 +110,8 @@ package classes.Scenes.Areas.HighMountains
 			this.eyeType = EYES_BASILISK;
 			this.hairType = HAIR_BASILISK_SPINES;
 			this.skinTone = "grey-green";
-			this.skinType = SKIN_TYPE_SCALES;
-			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_SCALES];
+			this.skinType = SKIN_TYPE_LIZARD_SCALES;
+			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_LIZARD_SCALES];
 			this.hairColor = "grey-green";
 			this.hairLength = 2;
 			initStrTouSpeInte(85, 70, 35, 70);

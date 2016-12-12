@@ -227,7 +227,7 @@ package classes.Scenes.Dungeons.Factory
 				player.breastRows[0].fuckable = false;
 				temp++;
 			}
-			if (player.skinType != SKIN_TYPE_PLAIN) {
+			if (!player.hasPlainSkin()) {
 				outputText("The skin on your body itches intensely as it sheds it's " + player.skinDesc + ", revealing " + player.skinTone + " skin.  ", false);
 				player.skinDesc = "skin";
 				player.skinType = SKIN_TYPE_PLAIN;

@@ -2624,7 +2624,7 @@ private function promptSaveUpdate():void {
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 8) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 9;
-		if (player.skinType != SKIN_TYPE_FUR) {
+		if (!player.hasFur()) {
 			doCamp();
 			return; //No fur? Return to camp.
 		}
