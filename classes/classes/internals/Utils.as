@@ -36,6 +36,10 @@ package classes.internals
 			return concat + " and " + stringList[stringList.length - 1];
 		}
 		
+		public static function capitalize(string:String):String {
+			return (string.substr(0, 1).toUpperCase() + string.substr(1));
+		}
+		
 		public static function num2Text(number:int):String {
 			if (number >= 0 && number <= 10) return NUMBER_WORDS_NORMAL[number];
 			return number.toString();

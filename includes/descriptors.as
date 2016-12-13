@@ -102,6 +102,10 @@ public function breastDescript(rowNum:Number):String
 	return player.breastDescript(rowNum);
 }
 
+public function capitalize(string:String):String {
+	return Utils.capitalize(string);
+}
+
 public function num2Text(number:int):String {
 	return Utils.num2Text(number);
 }

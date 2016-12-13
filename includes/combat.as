@@ -1781,9 +1781,9 @@ public function display():void {
 		outputText("<B>/!\\BUG! Monster is not correctly initialized! <u>"+
 				monster.checkError+"</u></b>\n");
 	}
-	var percent:String = "";
 	var math:Number = monster.HPRatio();
-	percent = "(<b>" + String(int(math * 1000) / 10) + "% HP</b>)";
+	var hpDisplay:String = Math.floor(monster.HP) + " / " + monster.eMaxHP() + " (" + (int(math * 1000) / 10) + "%)";
+	var lustDisplay:String = Math.floor(monster.lust) + " / " + monster.eMaxLust();
 
 	//trace("trying to show monster image!");
 	if (monster.imageName != "")
@@ -1795,8 +1795,14 @@ public function display():void {
 //	if(gameState == 2) outputText("<b>You are grappling with:\n</b>", false);
 //	else
 	outputText("<b>You are fighting ", false);
-	outputText(monster.a + monster.short + ":</b> (Level: " + monster.level + ")\n");
-	if(player.findStatusAffect(StatusAffects.Blind) >= 0) outputText("It's impossible to see anything!\n");
+	outputText(monster.a + monster.short + "</b>\n");
+	if (player.findStatusAffect(StatusAffects.Blind) >= 0) {
+		outputText("It's impossible to see anything!");
+		outputText("\n\n<b><u>" + capitalize(monster.short) + "'s Stats</u></b>\n");
+		outputText("Level: " + monster.level + "\n");
+		outputText("HP: ???\n");
+		outputText("Lust: ???\n");
+	}
 	else {
 		outputText(monster.long + "\n", false);
 		//Bonus sand trap stuff
@@ -1825,8 +1831,11 @@ public function display():void {
 			else if(math > .25) outputText("You see " + monster.pronoun1 + " is seriously hurt.", false);
 			else outputText("You see " + monster.pronoun1 + " is unsteady and close to death.", false);
 		}
-		outputText("  " + percent + "\n", false);
 		showMonsterLust();
+		outputText("\n\n<b><u>" + capitalize(monster.short) + "'s Stats</u></b>\n");
+		outputText("Level: " + monster.level + "\n");
+		outputText("HP: " + hpDisplay + "\n");
+		outputText("Lust: " + lustDisplay + "\n");
 	}
 	if (debug){
 		outputText("\n----------------------------\n");
