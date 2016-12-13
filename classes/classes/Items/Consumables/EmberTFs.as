@@ -12,7 +12,7 @@ package classes.Items.Consumables
 	 */
 	public class EmberTFs extends Consumable 
 	{
-		public function EmberTFs(drakesHeart:Boolean = false):void 
+		public function EmberTFs(type:int = 0):void 
 		{
 			var id:String;
 			var shortName:String;
@@ -20,18 +20,21 @@ package classes.Items.Consumables
 			var description:String;
 			var value:int;
 
-			if (drakesHeart) {
-				id = "DrakHrt";
-				shortName = "DrakeHeart";
-				longName = "a drake's heart's flower";
-				description = "A rare, beautiful flower.  It could make an exquisite perfume.  According to a legend, dragons give this flower to the ones they intend to court.";
-				value = 50;
-			} else {
-				id = "EmberBl";
-				shortName = "EmberBlood";
-				longName = "Embers's blood";
-				description = "Ember's dragon blood.  Can't be bought or sold. Immediately consumed. >>>Should not see me.<<<";
-				value = 0;
+			switch (type) {
+				case 1:
+					id = "DrakHrt";
+					shortName = "DrakeHeart";
+					longName = "a drake's heart's flower";
+					description = "A rare, beautiful flower.  It could make an exquisite perfume.  According to a legend, dragons give this flower to the ones they intend to court.";
+					value = 50;
+					break;
+
+				default:
+					id = "EmberBl";
+					shortName = "EmberBlood";
+					longName = "Embers's blood";
+					description = "Ember's dragon blood.  Can't be bought or sold. Immediately consumed. >>>Should not see me.<<<";
+					value = 0;
 			}
 
 			super(id, shortName, longName, value, description);
