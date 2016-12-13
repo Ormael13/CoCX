@@ -53,7 +53,7 @@ public var airFile:File;
 public var file:FileReference;
 public var loader:URLLoader;
 
-public var saveFileNames:Array = ["CoC_1", "CoC_2", "CoC_3", "CoC_4", "CoC_5", "CoC_6", "CoC_7", "CoC_8", "CoC_9"];
+public var saveFileNames:Array = ["CoC_1", "CoC_2", "CoC_3", "CoC_4", "CoC_5", "CoC_6", "CoC_7", "CoC_8", "CoC_9", "CoC_10", "CoC_11", "CoC_12", "CoC_13", "CoC_14"];
 public var versionProperties:Object = { "legacy" : 100, "0.8.3f7" : 124, "0.8.3f8" : 125, "0.8.4.3":119, "latest" : 119 };
 public var savedGameDir:String = "data/com.fenoxo.coc";
 
@@ -129,7 +129,7 @@ public function loadScreenAIR():void
 		return;		
 	}
 	outputText("<b><u>Slot: Sex,  Game Days Played</u></b>\r", true);
-	
+	menu();
 	var i:uint = 0;
 	for (var fileCount:uint = 0; fileCount < fileList.length; fileCount++)
 	{
@@ -160,6 +160,7 @@ public function loadScreenAIR():void
 					doNext(playerMenu);
 				}
 			})(i);
+			addButton(i, "Slot " + (i + 1), loadGameObject, gameObjects[i]);
 		}
 		else
 		{
@@ -167,17 +168,7 @@ public function loadScreenAIR():void
 		}
 		i++;
 	}
-	
-	choices("Slot 1", slots[0], 
-	"Slot 2", slots[1], 
-	"Slot 3", slots[2], 
-	"Slot 4", slots[3], 
-	"Slot 5", slots[4], 
-	"Slot 6", slots[5], 
-	"Slot 7", slots[6],
-	"Slot 8", slots[7], 
-	"Slot 9", slots[8], 
-	"Back", returnToSaveMenu);
+	addButton(14, "Back", returnToSaveMenu);
 }
 
 public function getGameObjectFromFile(aFile:File):Object
@@ -205,7 +196,7 @@ public function loadScreen():void
 	var slots:Array = new Array(saveFileNames.length);
 		
 	outputText("<b><u>Slot: Sex,  Game Days Played</u></b>\r", true);
-	
+	menu();
 	for (var i:int = 0; i < saveFileNames.length; i += 1)
 	{
 		var test:Object = SharedObject.getLocal(saveFileNames[i], "/");
@@ -227,23 +218,14 @@ public function loadScreen():void
 					}
 				}
 			})(i);
+			addButton(i, "Slot " + (i + 1), loadGame, saveFileNames[i]);
 		}
 		else
 		{
 			slots[i] = null;		// You have to set the parameter to 0 to disable the button
 		}
 	}
-	
-	choices("Slot 1", slots[0], 
-	"Slot 2", slots[1], 
-	"Slot 3", slots[2], 
-	"Slot 4", slots[3], 
-	"Slot 5", slots[4], 
-	"Slot 6", slots[5], 
-	"Slot 7", slots[6],
-	"Slot 8", slots[7], 
-	"Slot 9", slots[8], 
-	"Back", returnToSaveMenu);
+	addButton(14, "Back", returnToSaveMenu);
 }
 
 public function saveScreen():void
@@ -263,7 +245,7 @@ public function saveScreen():void
 	
 	var saveFuncs:Array = [];
 	
-	
+	menu();
 	for (var i:int = 0; i < saveFileNames.length; i += 1)
 	{
 		var test:Object = SharedObject.getLocal(saveFileNames[i], "/");
@@ -277,7 +259,7 @@ public function saveScreen():void
 				saveGame(saveFileNames[i]);
 			}
 		})(i);
-		
+		addButton(i, "Slot " + (i + 1), saveGame, saveFileNames[i]);
 	}
 	
 
@@ -285,16 +267,7 @@ public function saveScreen():void
 		outputText("\r\r", false);
 	
 	outputText("<b>Leave the notes box blank if you don't wish to change notes.\r<u>NOTES:</u></b>", false);
-	choices("Slot 1", saveFuncs[0], 
-	"Slot 2", saveFuncs[1], 
-	"Slot 3", saveFuncs[2], 
-	"Slot 4", saveFuncs[3], 
-	"Slot 5", saveFuncs[4], 
-	"Slot 6", saveFuncs[5], 
-	"Slot 7", saveFuncs[6], 
-	"Slot 8", saveFuncs[7], 
-	"Slot 9", saveFuncs[8], 
-	"Back", returnToSaveMenu);
+	addButton(14, "Back", returnToSaveMenu);
 }
 
 public function saveLoad(e:MouseEvent = null):void
@@ -315,66 +288,18 @@ public function saveLoad(e:MouseEvent = null):void
 	outputText("<b>Why does the Save File and Load File option not work?</b>\n");
 	outputText("<i>Save File and Load File are limited by the security settings imposed upon CoC by Flash. These options will only work if you have downloaded the game from the website, and are running it from your HDD. Additionally, they can only correctly save files to and load files from the directory where you have the game saved.</i>");
 	//This is to clear the 'game over' block from stopping simpleChoices from working.  Loading games supercede's game over.
-	if (mainView.getButtonText( 0 ) == "Game Over")
-	{
-		temp = 777;
-		mainView.setButtonText( 0, "save/load" );
+	menu();
+	if (player.str > 0 && !inDungeon) {
+		addButton(0, "Save", saveScreen);
+		addButton(5, "Save to File", saveToFile);
 	}
-	if (temp == 777)
-	{
-		menu();
-		addButton(1, "Load", loadScreen);
-		addButton(2, "Load File", loadFromFile);
-		addButton(3, "Delete", deleteScreen);
-		addButton(4, "Back", kGAMECLASS.gameOver, true);
-		return;
-	}
-	if (player.str == 0)
-	{
-		simpleChoices("", null, "Load", loadScreen, "Load File", loadFromFile, "Delete", deleteScreen, "Back", kGAMECLASS.mainMenu);
-		return;
-	}
-	if (inDungeon)
-	{
-		simpleChoices("", null, "Load", loadScreen, "Load File", loadFromFile, "Delete", deleteScreen, "Back", kGAMECLASS.playerMenu);
-		return;
-	}
-	if (gameStateGet() == 3)
-		choices("Save",            saveScreen,
-				"Load",            loadScreen,
-				"Load File",       loadFromFile,
-				"Delete",          deleteScreen,
-				"Back",            null,
-				"Save to File",    saveToFile,
-				"Load File",       loadFromFile,
-				"",                null,
-				"",                null,
-				"",                null);
-	else
-	{
-		if (player.autoSave)
-			choices("Save",           saveScreen,
-					"Load",           loadScreen,
-					"AutoSav: ON",    autosaveToggle,
-					"Delete",         deleteScreen,
-					"",               null,
-					"Save to File",   saveToFile,
-					"Load File",      loadFromFile,
-					"",               null,
-					"",               null,
-					"Back",           kGAMECLASS.playerMenu);
-		else
-			choices("Save",           saveScreen,
-					"Load",           loadScreen,
-					"AutoSav: OFF",   autosaveToggle,
-					"Delete",         deleteScreen,
-					"",               null,
-					"Save to File",   saveToFile,
-					"Load File",      loadFromFile,
-					"",               null,
-					"",               null,
-					"Back",           kGAMECLASS.playerMenu);
-	}
+	addButton(1, "Load", loadScreen);
+	addButton(6, "Load File", loadFromFile);
+	
+	addButton(3, "Delete", deleteScreen);
+	addButton(4, "AutoSave: " + (player.autoSave ? "ON" : "OFF"), autosaveToggle);
+	
+	addButton(9, "Back", player.str == 0 ? kGAMECLASS.mainMenu : kGAMECLASS.playerMenu);
 }
 
 private function saveToFile():void {
@@ -399,7 +324,7 @@ public function deleteScreen():void
 
 	var delFuncs:Array = [];
 	
-	
+	menu();
 	for (var i:int = 0; i < saveFileNames.length; i += 1)
 	{
 		var test:Object = SharedObject.getLocal(saveFileNames[i], "/");
@@ -417,22 +342,14 @@ public function deleteScreen():void
 							confirmDelete();	
 				}
 			})(i);
+			addButton(i, "Slot " + (i + 1), delFuncs[i]);
 		}
 		else
 			delFuncs[i] = null;	//disable buttons for empty slots
 	}
 	
 	outputText("\n<b>ONCE DELETED, YOUR SAVE IS GONE FOREVER.</b>", false);
-	choices("Slot 1", delFuncs[0], 
-			"Slot 2", delFuncs[1], 
-			"Slot 3", delFuncs[2], 
-			"Slot 4", delFuncs[3], 
-			"Slot 5", delFuncs[4], 
-			"Slot 6", delFuncs[5], 
-			"Slot 7", delFuncs[6], 
-			"Slot 8", delFuncs[7], 
-			"Slot 9", delFuncs[8], 
-			"Back", returnToSaveMenu);
+	addButton(14, "Back", returnToSaveMenu);
 }
 
 public function confirmDelete():void
