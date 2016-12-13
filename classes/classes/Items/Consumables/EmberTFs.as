@@ -1,7 +1,6 @@
 package classes.Items.Consumables 
 {
 	import classes.GlobalFlags.*;
-	import classes.internals.Utils;
 	import classes.Items.Consumable;
 	import classes.CockTypesEnum;
 	import classes.PerkLib;
@@ -55,7 +54,7 @@ package classes.Items.Consumables
 			}
 
 			//Gain Dragon Dick
-			if (changes < changeLimit && player.countCocksOfType(CockTypesEnum.DRAGON) < player.totalCocks() && Utils.rand(3) == 0) {
+			if (changes < changeLimit && player.countCocksOfType(CockTypesEnum.DRAGON) < player.totalCocks() && rand(3) == 0) {
 				temp = 0;
 				var choices:Array = [];
 				var select:int;
@@ -66,7 +65,7 @@ package classes.Items.Consumables
 					if (player.cocks[temp].cockType != CockTypesEnum.DRAGON) choices[choices.length] = temp;
 				}
 				//Randomly choose one of those locations
-				select = choices[Utils.rand(choices.length)];
+				select = choices[rand(choices.length)];
 				output.text("\n\nYour " + player.cockDescript(select) + " tingles as pins and needles sweep across it.  You pull open your [armor] to watch as it changes; the tip elongates and tapers, like a spear; a series of ridges form along the shaft, giving it an almost segmented look, and a prominent knot swells at its base.  You can't resist stroking it, until it begins dripping pre; ");
 				if (player.sens >= 50) output.text("however, it's not until you press on your new, sensitive knot that you manage to blow your load and enjoy the last few spasms of pleasure as it finally finishes changing.");
 				else output.text("but you sternly rein in your hands and tuck them into your armpits as the arousing changes run their course.");
@@ -78,24 +77,24 @@ package classes.Items.Consumables
 				player.cocks[select].cockType = CockTypesEnum.DRAGON;
 				player.cocks[select].knotMultiplier = 1.3;
 			}
-			if (Utils.rand(5) == 0) mutations.updateOvipositionPerk(tfSource);
+			if (rand(5) == 0) mutations.updateOvipositionPerk(tfSource);
 			//Gain Dragon Head
-			if (changes < changeLimit && Utils.rand(3) == 0 && player.faceType != FACE_DRAGON && flags[kFLAGS.EMBER_ROUNDFACE] == 0) {
+			if (changes < changeLimit && rand(3) == 0 && player.faceType != FACE_DRAGON && flags[kFLAGS.EMBER_ROUNDFACE] == 0) {
 				output.text("\n\nYou scream as your face is suddenly twisted; your facial bones begin rearranging themselves under your skin, restructuring into a long, narrow muzzle.  Spikes of agony rip through your jaws as your teeth are brutally forced from your gums, giving you new rows of fangs - long, narrow and sharp.  Your jawline begins to sprout strange growths; small spikes grow along the underside of your muzzle, giving you an increasingly inhuman visage.\n\nFinally, the pain dies down, and you look for a convenient puddle to examine your changed appearance.\n\nYour head has turned into a reptilian muzzle, with small barbs on the underside of the jaw.  <b>You now have a dragon's face.</b>");
 				player.faceType = FACE_DRAGON;
 				changes++;
 			}
 			//-Existing horns become draconic, max of 4, max length of 1'
-			if (!player.hasDragonHorns(true) && changes < changeLimit && Utils.rand(5) == 0)
+			if (!player.hasDragonHorns(true) && changes < changeLimit && rand(5) == 0)
 				mutations.gainDraconicHorns(tfSource);
 			//Gain Dragon Ears
-			if (changes < changeLimit && Utils.rand(3) == 0 && player.earType != EARS_DRAGON) {
+			if (changes < changeLimit && rand(3) == 0 && player.earType != EARS_DRAGON) {
 				player.earType = EARS_DRAGON;
 				output.text("\n\nA prickling sensation suddenly fills your ears; unpleasant, but hardly painful.  It grows and grows until you can't stand it any more, and reach up to scratch at them.  To your surprise, you find them melting away like overheated candles.  You panic as they fade into nothingness, leaving you momentarily deaf and dazed, stumbling around in confusion.  Then, all of a sudden, hearing returns to you.  Gratefully investigating, you find you now have a pair of reptilian ear-holes, one on either side of your head.  A sudden pain strikes your temples, and you feel bony spikes bursting through the sides of your head, three on either side, which are quickly sheathed in folds of skin to resemble fins.  With a little patience, you begin to adjust these fins just like ears to aid your hearing.  <b>You now have dragon ears!</b>");
 				changes++;
 			}
 			//Gain Dragon Tongue
-			if (changes < changeLimit && Utils.rand(3) == 0 && player.tongueType != TONGUE_DRACONIC) {
+			if (changes < changeLimit && rand(3) == 0 && player.tongueType != TONGUE_DRACONIC) {
 				output.text("\n\nYour tongue suddenly falls out of your mouth and begins undulating as it grows longer.  For a moment it swings wildly, completely out of control; but then settles down and you find you can control it at will, almost like a limb.  You're able to stretch it to nearly 4 feet and retract it back into your mouth to the point it looks like a normal human tongue.  <b>You now have a draconic tongue.</b>");
 				player.tongueType = TONGUE_DRACONIC;
 				changes++;
@@ -103,7 +102,7 @@ package classes.Items.Consumables
 			}
 			//(Pending Tongue Masturbation Variants; if we ever get around to doing that.)
 			//Gain Dragon Scales
-			if (!player.hasDragonScales() && changes < changeLimit && Utils.rand(3) == 0) {
+			if (!player.hasDragonScales() && changes < changeLimit && rand(3) == 0) {
 				output.text("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, hoping for relief; and when you look at your hands you notice small fragments of your " + player.skinFurScales() + " hanging from your fingers.  Nevertheless you continue to scratch yourself, and when you're finally done, you look yourself over. New shield-like scales have grown to replace your peeled off " + player.skinFurScales() + ".  They are smooth and look nearly as tough as iron. <b>Your body is now covered in shield-shaped dragon scales.</b>");
 				player.skinType = SKIN_TYPE_DRAGON_SCALES;
 				player.skinAdj = "tough";
@@ -112,7 +111,7 @@ package classes.Items.Consumables
 			}
 			//<mod name="Reptile eyes" author="Stadler76">
 			//Gain Dragon Eyes
-			if (player.eyeType != EYES_DRAGON && player.hasDragonScales() && player.earType == EARS_DRAGON && player.hasDragonHorns() && changes < changeLimit && Utils.rand(4) == 0) {
+			if (player.eyeType != EYES_DRAGON && player.hasDragonScales() && player.earType == EARS_DRAGON && player.hasDragonHorns() && changes < changeLimit && rand(4) == 0) {
 				if (player.hasReptileEyes())
 					output.text("\n\nYour eyes change slightly in their appearance.");
 				else
@@ -127,7 +126,7 @@ package classes.Items.Consumables
 			}
 			//</mod>
 			//Gain Dragon Legs
-			if (player.lowerBody != LOWER_BODY_TYPE_DRAGON && changes < changeLimit && Utils.rand(3) == 0) {
+			if (player.lowerBody != LOWER_BODY_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
 				//(if drider)
 				if (player.lowerBody == LOWER_BODY_TYPE_DRIDER_LOWER_BODY)
 					output.text("\n\nA disquieting feeling ripples through your arachnid abdomen, and you find yourself losing control of your body from the waist down.  Your spidery legs flail madly as your abdomen visibly swells, chitin cracking ominously as the pressure builds up inside of you... and then explodes!  You wipe the gore from your face in disgust, wondering why you feel no pain.  Rolling over, you see that, caked with spider-slime, you now have a new pair of legs, human-like save for the scales and the bestial paws that serve as feet.  <b>You now have dragon feet.</b>");
@@ -156,7 +155,7 @@ package classes.Items.Consumables
 				changes++;
 			}
 			//Gain Dragon Tail
-			if (player.tailType != TAIL_TYPE_DRACONIC && changes < changeLimit && Utils.rand(3) == 0) {
+			if (player.tailType != TAIL_TYPE_DRACONIC && changes < changeLimit && rand(3) == 0) {
 				//(If no tail)
 				if (player.tailType == TAIL_TYPE_NONE) output.text("\n\nA sudden dull, throbbing pain in your " + player.buttDescript() + " forces your hands to it; you can feel an ominous lump over your tail bone, swelling bigger and bigger with every heartbeat.  All of a sudden, it seems to explode, jutting out and around until it hovers near your ankles, the skin under your flesh hard and scaly.  <b>You now have a dragon tail flicking at your back, flexible as a whip.</b>");
 				//(If tail)
@@ -176,7 +175,7 @@ package classes.Items.Consumables
 			 Miss: Unfortunately, you lose your sense of depth as you whirl, and the tip swings harmlessly through the air in front of your target.
 			 */
 			//Grow Dragon Wings
-			if (player.wingType != WING_TYPE_DRACONIC_LARGE && changes < changeLimit && Utils.rand(3) == 0) {
+			if (player.wingType != WING_TYPE_DRACONIC_LARGE && changes < changeLimit && rand(3) == 0) {
 				if (player.wingType == WING_TYPE_NONE) {
 					output.text("\n\nYou double over as waves of pain suddenly fill your shoulderblades; your back feels like it's swelling, flesh and muscles ballooning.  A sudden sound of tearing brings with it relief and you straighten up.  Upon your back now sit small, leathery wings, not unlike a bat's. <b>You now have small dragon wings.  They're not big enough to fly with, but they look adorable.</b>");
 					player.wingType = WING_TYPE_DRACONIC_SMALL;
@@ -203,7 +202,7 @@ package classes.Items.Consumables
 			}
 			// <mod name="Predator arms" author="Stadler76">
 			//Gain Dragon Arms (Derived from ARM_TYPE_SALAMANDER)
-			if (player.armType != ARM_TYPE_PREDATOR && player.hasDragonScales() && player.lowerBody == LOWER_BODY_TYPE_DRAGON && changes < changeLimit && Utils.rand(3) == 0) {
+			if (player.armType != ARM_TYPE_PREDATOR && player.hasDragonScales() && player.lowerBody == LOWER_BODY_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
 				output.text("\n\nYou scratch your biceps absentmindedly, but no matter how much you scratch, you can't get rid of the itch.  After a longer moment of ignoring it you finally glance down in irritation, only to discover that your arms former appearance has changed into those of some reptilian killer with shield-shaped " + player.skinTone + " scales and powerful, thick, curved steel-gray claws replacing your fingernails.");
 				output.text("\n<b>You now have dragon arms.</b>");
 				player.armType = ARM_TYPE_PREDATOR;
@@ -211,7 +210,7 @@ package classes.Items.Consumables
 				changes++
 			}
 			//Claw transition
-			if (player.armType == ARM_TYPE_PREDATOR && player.hasDragonScales() && player.clawType != CLAW_TYPE_DRAGON && changes < changeLimit && Utils.rand(3) == 0) {
+			if (player.armType == ARM_TYPE_PREDATOR && player.hasDragonScales() && player.clawType != CLAW_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
 				output.text("\n\nYour " + player.claws() + " change  a little to become more dragon-like.");
 				mutations.updateClaws(CLAW_TYPE_DRAGON);
 				output.text(" <b>You now have " + player.claws() + ".</b>");
@@ -228,7 +227,7 @@ package classes.Items.Consumables
 				if (getGame().emberScene.emberAffection() >= 75 && !drakesHeart) output.text("\n\nEmber immediately dives back in to soothe your battered throat and mouth with another kiss.");
 				changes++;
 			}
-			if (player.dragonScore() >= 4 && Utils.rand(3) == 0 && player.gender > 0) {
+			if (player.dragonScore() >= 4 && rand(3) == 0 && player.gender > 0) {
 				output.text("\n\nA sudden swell of lust races through your ");
 				if (player.hasCock()) {
 					output.text(player.cockDescript(0));
@@ -249,7 +248,7 @@ package classes.Items.Consumables
 					output.text("taking that hard, spurting cock inside your own " + player.vaginaDescript(0));
 				}
 				output.text("... too late, you realize that <b>" + (drakesHeart ? "the flower" : "Ember's blood") + " has sent your draconic body into ");
-				if (player.hasCock() && (flags[kFLAGS.EMBER_GENDER] >= 2 || drakesHeart) && (Utils.rand(2) == 0 || !player.hasVagina())) { //If hermaphrodite, the chance is 50/50.
+				if (player.hasCock() && (flags[kFLAGS.EMBER_GENDER] >= 2 || drakesHeart) && (rand(2) == 0 || !player.hasVagina())) { //If hermaphrodite, the chance is 50/50.
 					output.text("rut");
 					
 					player.goIntoRut(false);
