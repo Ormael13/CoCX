@@ -1,4 +1,5 @@
 import classes.GlobalFlags.kGAMECLASS;
+import flash.ui.Keyboard;
 
 use namespace kGAMECLASS;
 
@@ -428,6 +429,61 @@ inputManager.AddBindableControl(
 			executeButtonClick(9);
 		}
 	});
+	
+inputManager.AddBindableControl(
+	"Button 11",
+	"Activate button 11",
+	function():void {
+		if (mainView.buttonIsVisible(10))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(10);
+		}
+	});
+	
+inputManager.AddBindableControl(
+	"Button 12",
+	"Activate button 12",
+	function():void {
+		if (mainView.buttonIsVisible(11))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(11);
+		}
+	});
+	
+inputManager.AddBindableControl(
+	"Button 13",
+	"Activate button 13",
+	function():void {
+		if (mainView.buttonIsVisible(12))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(12);
+		}
+	});
+	
+inputManager.AddBindableControl(
+	"Button 14",
+	"Activate button 14",
+	function():void {
+		if (mainView.buttonIsVisible(13))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(13);
+		}
+	});
+	
+inputManager.AddBindableControl(
+	"Button 15",
+	"Activate button 15",
+	function():void {
+		if (mainView.buttonIsVisible(14))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(14);
+		}
+	});
 
 inputManager.AddBindableControl(
 	"Cheat! Give Hummus",
@@ -485,40 +541,45 @@ inputManager.AddBindableControl(
 	
 // Insert the default bindings
 inputManager.BindKeyToControl(83, "Show Stats");
-inputManager.BindKeyToControl(76, "Level Up");
-inputManager.BindKeyToControl(112, "Quicksave 1");
-inputManager.BindKeyToControl(113, "Quicksave 2");
-inputManager.BindKeyToControl(114, "Quicksave 3");
-inputManager.BindKeyToControl(115, "Quicksave 4");
-inputManager.BindKeyToControl(116, "Quicksave 5");
-inputManager.BindKeyToControl(117, "Quickload 1");
-inputManager.BindKeyToControl(118, "Quickload 2");
-inputManager.BindKeyToControl(119, "Quickload 3");
-inputManager.BindKeyToControl(120, "Quickload 4");
-inputManager.BindKeyToControl(121, "Quickload 5");
+inputManager.BindKeyToControl(Keyboard.L, "Level Up");
+inputManager.BindKeyToControl(Keyboard.F1, "Quicksave 1");
+inputManager.BindKeyToControl(Keyboard.F2, "Quicksave 2");
+inputManager.BindKeyToControl(Keyboard.F3, "Quicksave 3");
+inputManager.BindKeyToControl(Keyboard.F4, "Quicksave 4");
+inputManager.BindKeyToControl(Keyboard.F5, "Quicksave 5");
+inputManager.BindKeyToControl(Keyboard.F6, "Quickload 1");
+inputManager.BindKeyToControl(Keyboard.F7, "Quickload 2");
+inputManager.BindKeyToControl(Keyboard.F8, "Quickload 3");
+inputManager.BindKeyToControl(Keyboard.F9, "Quickload 4");
+inputManager.BindKeyToControl(Keyboard.F10, "Quickload 5");
 inputManager.BindKeyToControl(8, "Show Menu");
 inputManager.BindKeyToControl(68, "Data Menu");
 inputManager.BindKeyToControl(65, "Appearance Page");
-inputManager.BindKeyToControl(78, "No");
-inputManager.BindKeyToControl(89, "Yes");
-inputManager.BindKeyToControl(80, "Show Perks");
-inputManager.BindKeyToControl(13, "Continue");
-inputManager.BindKeyToControl(32, "Continue", InputManager.SECONDARYKEY);
-inputManager.BindKeyToControl(36, "Cycle Background");
-inputManager.BindKeyToControl(49, "Button 1");
-inputManager.BindKeyToControl(50, "Button 2");
-inputManager.BindKeyToControl(51, "Button 3");
-inputManager.BindKeyToControl(52, "Button 4");
-inputManager.BindKeyToControl(53, "Button 5");
-inputManager.BindKeyToControl(54, "Button 6");
-inputManager.BindKeyToControl(55, "Button 7");
-inputManager.BindKeyToControl(56, "Button 8");
-inputManager.BindKeyToControl(57, "Button 9");
-inputManager.BindKeyToControl(48, "Button 10");
-inputManager.BindKeyToControl(81, "Button 6", InputManager.SECONDARYKEY);
-inputManager.BindKeyToControl(87, "Button 7", InputManager.SECONDARYKEY);
-inputManager.BindKeyToControl(69, "Button 8", InputManager.SECONDARYKEY);
-inputManager.BindKeyToControl(82, "Button 9", InputManager.SECONDARYKEY);
-inputManager.BindKeyToControl(84, "Button 10", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.N, "No");
+inputManager.BindKeyToControl(Keyboard.Y, "Yes");
+inputManager.BindKeyToControl(Keyboard.P, "Show Perks");
+inputManager.BindKeyToControl(Keyboard.ENTER, "Continue");
+inputManager.BindKeyToControl(Keyboard.SPACE, "Continue", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.HOME, "Cycle Background");
+inputManager.BindKeyToControl(Keyboard.NUMBER_1, "Button 1");
+inputManager.BindKeyToControl(Keyboard.NUMBER_2, "Button 2");
+inputManager.BindKeyToControl(Keyboard.NUMBER_3, "Button 3");
+inputManager.BindKeyToControl(Keyboard.NUMBER_4, "Button 4");
+inputManager.BindKeyToControl(Keyboard.NUMBER_5, "Button 5");
+inputManager.BindKeyToControl(Keyboard.NUMBER_6, "Button 6");
+inputManager.BindKeyToControl(Keyboard.NUMBER_7, "Button 7");
+inputManager.BindKeyToControl(Keyboard.NUMBER_8, "Button 8");
+inputManager.BindKeyToControl(Keyboard.NUMBER_9, "Button 9");
+inputManager.BindKeyToControl(Keyboard.NUMBER_0, "Button 10");
+inputManager.BindKeyToControl(Keyboard.A, "Button 11");
+inputManager.BindKeyToControl(Keyboard.S, "Button 12");
+inputManager.BindKeyToControl(Keyboard.D, "Button 13");
+inputManager.BindKeyToControl(Keyboard.F, "Button 14");
+inputManager.BindKeyToControl(Keyboard.G, "Button 15");
+inputManager.BindKeyToControl(Keyboard.Q, "Button 6", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.W, "Button 7", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.E, "Button 8", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.R, "Button 9", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.T, "Button 10", InputManager.SECONDARYKEY);
 
 inputManager.RegisterDefaults();
