@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Places.Boat
+package classes.Scenes.Places.Boat
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
@@ -128,7 +128,9 @@ public function encounterMarae():void {
 				outputText("You gasp at the change she has gone through, getting more than a little turned on yourself.  Thinking that a once chaste goddess has been reduced to a horny slut makes you wonder how you stand any chance of victory.  Marae keeps up her show, \"<i>It's so good.  Come join me in it.  I gave in to the pleasure already.  If you look behind me, you can see what's left of my soul.  I could feel it dripping out through my cunny a little bit each time I came.  After a while it flowed together and started to crystalize.  I think the demons call it lethicite, but I just wish I still had a soul so I could do it all over again.  Come fuck me, I want to watch you go mad while you cum out your soul.</i>\"\n\n", false);
 				outputText("It sounds like a very pleasant offer, but it would mean the total abandonment of your reasons for coming here.   You could probably get away if you were to run, she doesn't seem to be nearly as powerful.  Or you could risk trying to steal the lethicite before making your getaway, but it wouldn't be hard for her to catch you that close.", false);
 				simpleChoices("Run", runFromPervertedGoddess, "Lethicite", maraeStealLethicite, "Accept", maraeBadEnd, "", null, "", null);
-				addButton(3, "FIGHT!", promptFightMarae, encounterMarae);
+				addButton(3, "Prank", maraeStealLethicite, true, null, null, "Play a practical joke on the corrupted goddess and pretend to steal her Lethicite. Why would you do this?","Practical Joke");
+				addButton(4, "FIGHT!", promptFightMarae, encounterMarae);
+
 			}
 			//Repeat corrupt meeting
 			else {
@@ -281,11 +283,11 @@ private function maraeBadEnd():void {
 	getGame().gameOver();
 }
 
-private function maraeStealLethicite():void {
+private function maraeStealLethicite( deliberate:Boolean = false ):void {
 	spriteSelect(40);
 	clearOutput();
 	//(SUCCESS)
-	if ((player.spe > 35 && (rand(player.spe/3 + 30) > 20)) || (player.spe > 35 && player.findPerk(PerkLib.Evade) >= 0 && rand(3) < 2))
+	if ((player.spe > 35 && (rand(player.spe/3 + 30) > 20)) || (player.spe > 35 && player.findPerk(PerkLib.Evade) >= 0 && rand(3) < 2) && !deliberate)
 	{
 		outputText("You dart to the side, diving into a roll that brings you up behind the tree.  You evade the gauntlet of grabbing tentacles that hang from the branches, snatch the large gem in both arms and run for the beach.  You do not hear the sounds of pursuit, only a disappointed sigh.", false);
 		player.createKeyItem("Marae's Lethicite", 3, 0, 0, 0);
@@ -295,9 +297,10 @@ private function maraeStealLethicite():void {
 	else {
 		player.slimeFeed();
 		player.orgasm();
-		outputText("You dart to the side, diving into a roll that brings you up behind the tree.  You try to slip by the gauntlet of grabbing tentacles, but fail, getting tripped and ensnared in them like a fly in a spider's web.  You are pulled up and lifted to the other side of the tree, where you are slammed against it.  The tentacles pull your arms and legs wide, exposing you totally and locking you into a spread-eagle position.  You cringe as Marae strides around, free from the confines of her tree.\n\n", false);
+		if(!deliberate)outputText("You dart to the side, diving into a roll that brings you up behind the tree.  You try to slip by the gauntlet of grabbing tentacles, but fail, getting tripped and ensnared in them like a fly in a spider's web.  You are pulled up and lifted to the other side of the tree, where you are slammed against it.  The tentacles pull your arms and legs wide, exposing you totally and locking you into a spread-eagle position.  You cringe as Marae strides around, free from the confines of her tree.\n\n", false);
+		else outputText("A mischievous idea reaches you, and you decide to play a prank on the corrupted goddess. You dart to the side, diving into a roll that bring you up behind the tree, aiming for her lethicite. You try to make your robbery attempt look real, and succeed; perhaps too well. Caught by surprise by her honest hostile reaction, you're ensnared by several tentacles like a fly in a spider's web. You are pulled up and lifted to the other side of the tree, where you are slammed against it.  The tentacles pull your arms and legs wide, exposing you totally and locking you into a spread-eagle position.  You cringe as Marae strides around, free from the confines of her tree. This was most definitely a bad idea.\n\n", false);
 		outputText("\"<i>Awwww, what a nasty deceitful little " + player.mf("boy", "girl"), false);
-		outputText("you are.  You turn me into a steaming hot sex-pot, then have the nerve to come here and try to walk off with my lethicite, all WITHOUT fucking me?  Tsk tsk tsk,</i>\" she scolds, \"<i>I appreciate your ambition, but I can't just let a mortal walk all over me like that.  I'll be taking that,</i>\" she says as she grabs the crystal, and lugs it to the tree underneath you.  She strokes the wood surface lovingly, and a knot dilates until it forms a hole large enough to contain the lethicite.  Marae shoves it inside, and strokes the wood like a pet creature, humming while the bark flows closed, totally concealing the crystal.\n\n", false);
+		outputText(" you are.  You turn me into a steaming hot sex-pot, then have the nerve to come here and try to walk off with my lethicite, all WITHOUT fucking me?  Tsk tsk tsk,</i>\" she scolds, \"<i>I appreciate your ambition, but I can't just let a mortal walk all over me like that.  I'll be taking that,</i>\" she says as she grabs the crystal, and lugs it to the tree underneath you.  She strokes the wood surface lovingly, and a knot dilates until it forms a hole large enough to contain the lethicite.  Marae shoves it inside, and strokes the wood like a pet creature, humming while the bark flows closed, totally concealing the crystal.\n\n", false);
 		outputText("\"<i>Now, that should keep it safe from swift little play-toys like yourself.  What you tried was a bold move, and I respect that; initiative is to be rewarded.   So I'll let you go, just like that,</i>\" she says, snapping her fingers for emphasis.\n\n", false);
 		outputText("The tentacles lower you to the ground, but do not release you from their tight embrace.\n\n", false);
 		outputText("Marae steps closer, playing her fingers softly up your thigh, \"<i>BUT, you'll leave with a little something extra.  A gift from the new goddess of fertile unions...</i>\"\n\n", false);
