@@ -137,7 +137,6 @@
 		public var useables:UseableLib;
 		public var weapons:WeaponLib = new WeaponLib();
 		public var armors:ArmorLib = new ArmorLib();
-		public var miscItems:MiscItemLib = new MiscItemLib();
 		// Scenes/
 		public var camp:Camp = new Camp(campInitialize);
 		public var exploration:Exploration = new Exploration();

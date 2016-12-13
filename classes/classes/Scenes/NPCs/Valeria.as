@@ -42,6 +42,7 @@ public function valeriaFollower():void {
 	if(player.lust > 33) sex = followersValeriaSex;
 	//(Display Options: [Appearance] [Spar] [Sex] [Talk])
 	choices("Appearance", valeriaAppearance, "Spar", valeriaSpar, "Sex", sex, "Talk", talkWithValeria, "Take", takeValeria, "", null, "", null, "", null, "", null, "Back", camp.campFollowers);
+	mainView.bottomButtons[4].toolTipText = armors.GOOARMR.description;
 }
 
 //[Valeria] -- [Appearance]

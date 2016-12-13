@@ -29,6 +29,10 @@ package classes.Items
 		
 		public function get name():String { return _name; }
 		
+		override public function get description():String {
+			return this._description + "\n\nAttack: " + this.attack + "\nValue: " + this.value;
+		}
+		
 		override public function useText():void {
 			outputText("You equip " + longName + ".  ");
 		}

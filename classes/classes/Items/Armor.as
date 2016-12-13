@@ -31,6 +31,10 @@ package classes.Items
 		public function get supportsBulge():Boolean { return _supportsBulge && game.player.modArmorName == ""; }
 			//For most clothes if the modArmorName is set then it's Exgartuan's doing. The comfortable clothes are the exception, they override this function.
 		
+		override public function get description():String {
+			return this._description + "\n\nDefense: " + this.def + "\nValue: " + this.value;
+		}
+			
 		override public function useText():void {
 			outputText("You equip " + longName + ".  ");
 		}

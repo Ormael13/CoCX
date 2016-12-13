@@ -16,6 +16,9 @@ package classes.Items
 			super(id, shortName, longName, value, description);
 		}
 		
+		override public function get description():String {
+			return this._description + "\n\nValue: " + this.value;
+		}
 /*
 		public function canUse(player:Player,output:Boolean):Boolean
 		{
