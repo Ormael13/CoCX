@@ -83,16 +83,6 @@ package classes
 				marker.y = mainView[barsToDecorate[i]].y + 18;
 				mainView.statsView.addChildAt(marker, mainView.statsView.numChildren);
 			}
-			
-			mainView.hungerBar.visible = false;
-			mainView.esteemBar.visible = false;
-			mainView.willBar.visible = false;
-			mainView.obeyBar.visible = false;
-			
-			mainView.hungerNum.visible = false;
-			mainView.esteemNum.visible = false;
-			mainView.willNum.visible = false;
-			mainView.obeyNum.visible = false;
 		}
 		
 		//------------

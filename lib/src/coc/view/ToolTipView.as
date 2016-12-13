@@ -1,22 +1,16 @@
-package coc.view {
+﻿package coc.view {
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.display.DisplayObject;
 	import flash.text.TextField;
 	import flash.text.TextFieldType;
 
-	import coc.model.GameModel;
-
 	public class ToolTipView extends Sprite {
 		public var
 			bg :Sprite,
 			tf :TextField;
 
-		protected var model :GameModel;
-
-		public function ToolTipView( mainView :MovieClip, model :GameModel ) :void {
-			this.model = model;
-
+		public function ToolTipView( mainView :MovieClip ) :void {
 			this.bg = mainView.getChildByName( "popUpBG" ) as Sprite;
 			this.tf = mainView.getChildByName( "mouseOverText" ) as TextField;
 
@@ -36,17 +30,10 @@ package coc.view {
 			var bx = button.x,
 				by = button.y;
 
-			// TODO: Should we try to remove some of these numbers?
-			if( this.model.mobile ) {
-				bx = (bx >= 410 ? 405 : bx);
-				this.x = bx + 98;
-				this.y = by - 347;
-			}
-			else {
-				bx = (bx >= 708 ? 700 : bx);
-				this.x = bx - 13;
-				this.y = by - 232;
-			}
+			bx = (bx >= 688 ? 680: bx);
+			this.x = bx - 13;
+			this.y = by - 232;
+			if (this.y < 0) this.y = by + 40;
 
 			this.visible = true;
 		};

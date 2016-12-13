@@ -571,7 +571,8 @@
 			mainView.sideBarBG.gotoAndStop(1);
 			//Hide up/down arrows
 			mainView.statsView.hideUpDown();
-
+			mainView.statsView.alpha = 0;
+			mainView.statsView.visible = true;
 			this.addFrameScript( 0, this.run );
 		}
 
