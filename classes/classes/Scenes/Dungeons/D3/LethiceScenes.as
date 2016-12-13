@@ -100,10 +100,10 @@ package classes.Scenes.Dungeons.D3
 			var hasLethicite:Boolean = player.hasKeyItem("Sheila's Lethicite") > 0 || player.hasKeyItem("Stone Statue Lethicite") > 0;
 			if(hasLethicite && player.findStatusAffect(StatusAffects.MetMarae) >= 0 && player.findStatusAffect(StatusAffects.FactoryOverload) < 0)
 			{
-				addButton(5,"Redemption",this.redemption,hpVictory);
+				addButton(3,"Redemption",this.redemption,hpVictory);
 			}
-			addButton(14, "Skip Out", theChoiceDunDunDun);
-			mainView.bottomButtons[14].toolTipText = "Screw this! Skip out and make the choice.";
+			addButton(4, "Skip Out", theChoiceDunDunDun);
+			mainView.bottomButtons[4].toolTipText = "Screw this! Skip out and make the choice.";
 		}
 		
 		private function plowHer():void
