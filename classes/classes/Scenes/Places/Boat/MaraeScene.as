@@ -467,7 +467,6 @@ private function MaraeIIStageII():void {
 
 		outputText("The tentacle on her right arm convulses, then splits open along four joints.  The tip folds open to reveal a pink, wriggling interior that promises pleasures mortal minds weren't meant to comprehend.  Meanwhile, while you're distracted by the eager plant-hole, the other tentacle slips behind you and climbs up your " + player.leg() + ", leaving a trail of slime in its wake.   It slides between your cheeks and prods at your " + player.assholeDescript() + ".  You jerk forwards in surprise, but Marae pushes your " + player.hipDescript() + " back, allowing it to work its way inside.", false);
 		player.buttChange(12,true,true,false);
-		if(player.findStatusEffect(StatusEffects.ParasiteSlugReproduction) >= 0) player.changeStatusValue(StatusEffects.ParasiteSlugReproduction, 1, 1); //This pleases your parasite overlord
 		outputText("  The open plant-hole dives for your groin while you're distracted, hits your " + player.cockDescript(0) + " and devours it with a greedy sluuuuurp.", false);
 		if (player.cockTotal() == 2) outputText("  Another vine that may as well be the first's twin snakes from between the goddess' legs and jumps onto your " + player.cockDescript(1) + ".", false);
 		else if (player.cockTotal() > 2) outputText("  More 'open' vines shimmy forth from between Marae's legs and jump up onto your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + "s.", false);
