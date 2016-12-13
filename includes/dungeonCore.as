@@ -39,9 +39,13 @@ private function dungeonMenu():void {
 	//clear up/down arrows
 	hideUpDown();
 	//Level junk
-	if (player.XP >= (player.level) * 100) {
+	if (player.XP >= (player.level) * 100 && player.level < levelCap) {
 		mainView.showMenuButton( MainView.MENU_LEVEL );
 		mainView.statsView.showLevelUp();
+		if (flags[kFLAGS.AUTO_LEVEL] > 0) {
+			levelUpGo();
+			return;
+		}
 	}
 	menu();
 	//Entry Room

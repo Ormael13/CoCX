@@ -2988,8 +2988,8 @@ public static const UNKNOWN_FLAG_NUMBER_02979:int                               
 public static const UNKNOWN_FLAG_NUMBER_02980:int                                   = 2980;
 public static const UNKNOWN_FLAG_NUMBER_02981:int                                   = 2981;
 public static const UNKNOWN_FLAG_NUMBER_02982:int                                   = 2982;
-public static const UNKNOWN_FLAG_NUMBER_02983:int                                   = 2983;
-public static const UNKNOWN_FLAG_NUMBER_02984:int                                   = 2984;
+public static const SPRITE_STYLE:int                                                = 2983; // 1 if old sprites are used.
+public static const AUTO_LEVEL:int                                                  = 2984; // 1 if automatic leveling is enabled.
 public static const UNKNOWN_FLAG_NUMBER_02985:int                                   = 2985;
 public static const UNKNOWN_FLAG_NUMBER_02986:int                                   = 2986;
 public static const UNKNOWN_FLAG_NUMBER_02987:int                                   = 2987;

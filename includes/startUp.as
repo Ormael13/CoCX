@@ -77,6 +77,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 			outputText("\n(Formerly Unnamed Text Game)");
 			//Brief credits
 			outputText("\n\n<b>Created by:</b> Fenoxo"); //The Original Creator
+			outputText("\n\n<b>Modded by:</b> Kitteh6660"); //The Modder
 			outputText("\n\n<b>Edited by:</b> "); //Edited By
 			outputText("\n\tAshi, SoS, Prisoner416, Zeikfried, et al");
 			outputText("\n\n<b>Open-source contributions by:</b> "); //Contributions
@@ -130,7 +131,7 @@ public function settingsScreen():void
 	outputText("\n\n");
 
 	if(flags[kFLAGS.SHOW_SPRITES_FLAG] == 0)
-		outputText("Sprites enabled: <b>Yes</b>.\n	You like to look at pretty pictures.");
+		outputText("Sprites enabled: <b>Yes</b>.\n	You like to look at pretty pictures. Sprites are currently set to <b>" + (flags[kFLAGS.SPRITE_STYLE] == 1 ? "old" : "new") + "</b>.");
 	else
 		outputText("Sprites enabled: <b>No</b>.\n	There are only words. Nothing else.");
 
@@ -172,46 +173,56 @@ public function settingsScreen():void
 	else
 		outputText("Hyper Happy mode <b>Off</b>\n	Male enhancement potions shrink female endowments, and vice versa.");
 
-	choices("Toggle Debug", toggleDebug,
-			"Sprite Toggle", toggleSpritesFlag,
-			"EZ Mode", toggleEasyModeFlag,
-			"Larger Font", incFontSize,
-			"Controls", displayControls,
-			"Hyper Happy", toggleHyperHappy,
-			"Low Standards", toggleStandards,
-			"Silly Toggle", toggleSillyFlag,
-			"Smaller Font", decFontSize,
-			"Back", mainMenu);
+	if(flags[kFLAGS.AUTO_LEVEL])
+		outputText("Auto-Level: <b>On</b>\n	Levelling up is done automatically when you accumulate enough XP.");
+	else
+		outputText("Auto-Level: <b>Off</b>\n	Levelling is done manually by pressing Level Up button.");
+
+		
+	menu();
+	addButton(0, "Toggle Debug", toggleDebug);
+	addButton(1, "Easy Mode", toggleEasyModeFlag);
+	addButton(2, "Sprite Style", spriteSettings);
+	addButton(3, "Font Size", fontSizeSettings);
+	addButton(4, "Controls", displayControls);
+	addButton(5, "Hyper Happy", toggleHyperHappy);
+	addButton(6, "Low Standards", toggleStandards);
+	addButton(7, "Silly Toggle", toggleSillyFlag);
+	addButton(8, "Auto Level", toggleAutoLevel);
+	addButton(9, "Back", mainMenu);
+}
+
+public function fontSizeSettings():void {
+	menu();
+	addButton(0, "Bigger", incFontSize);
+	addButton(1, "Smaller", decFontSize);
+	addButton(2, "Reset", resetFontSize);
+	addButton(4, "Back", settingsScreen);
 }
 
 public function incFontSize():void
 {
 	var fmt:TextFormat = mainView.mainText.getTextFormat();
-	
 	if (fmt.size == null) fmt.size = 20;
-	
 	fmt.size = (fmt.size as Number) + 1;
-	
 	if ((fmt.size as Number) > 32) fmt.size = 32;
-	
 	trace("Font size set to: " + (fmt.size as Number));
 	mainView.mainText.setTextFormat(fmt);
 	flags[kFLAGS.CUSTOM_FONT_SIZE] = fmt.size;
 }
-
 public function decFontSize():void
 {
 	var fmt:TextFormat = mainView.mainText.getTextFormat();
-	
 	if (fmt.size == null) fmt.size = 20;
-	
 	fmt.size = (fmt.size as Number) - 1;
-	
 	if ((fmt.size as Number) < 14) fmt.size = 14;
-	
 	trace("Font size set to: " + (fmt.size as Number));
 	mainView.mainText.setTextFormat(fmt);
 	flags[kFLAGS.CUSTOM_FONT_SIZE] = fmt.size;
+}
+public function resetFontSize():void {
+	flags[kFLAGS.CUSTOM_FONT_SIZE] = null;
+	fontSizeSettings();
 }
 
 public function toggleStandards():void
@@ -261,14 +272,30 @@ public function toggleEasyModeFlag():void
 	return;
 }
 
-public function toggleSpritesFlag():void
+public function spriteSettings():void {
+	menu();
+	addButton(0, "Off", setSprites, 0);
+	addButton(1, "Old", setSprites, 1);
+	addButton(2, "New", setSprites, 2);
+	addButton(4, "Back", settingsScreen);
+}
+
+public function setSprites(settings:int):void
 {
-	if(flags[kFLAGS.SHOW_SPRITES_FLAG])
-		flags[kFLAGS.SHOW_SPRITES_FLAG] = false;
-	else
-		flags[kFLAGS.SHOW_SPRITES_FLAG] = true;
+	switch(settings) {
+		case 0:
+			flags[kFLAGS.SHOW_SPRITES_FLAG] = true; //I dunno why it's inverted.
+			break;
+		case 1:
+			flags[kFLAGS.SHOW_SPRITES_FLAG] = false;
+			flags[kFLAGS.SPRITE_STYLE] = 1;
+			break;
+		case 2:
+			flags[kFLAGS.SHOW_SPRITES_FLAG] = false;
+			flags[kFLAGS.SPRITE_STYLE] = 0;
+			break;
+	}
 	settingsScreen();
-	return;
 }
 
 public function toggleSillyFlag():void
@@ -283,6 +310,17 @@ public function toggleSillyFlag():void
 
 }
 
+public function toggleAutoLevel():void
+{
+
+	if(flags[kFLAGS.AUTO_LEVEL])
+		flags[kFLAGS.AUTO_LEVEL] = false;
+	else
+		flags[kFLAGS.AUTO_LEVEL] = true;
+	settingsScreen();
+	return;
+
+}
 
 public function creditsScreen():void {
 	outputText("<b>Coding and Main Events:</b>\n", true);

@@ -461,15 +461,20 @@ private function doCamp():void { //Only called by playerMenu
 	//clear up/down arrows
 	hideUpDown();
 	//Level junk
-	if(player.XP >= (player.level) * 100 || player.statPoints > 0 || player.perkPoints > 0) {
-		if (player.XP < player.level * 100) {
+	if((player.XP >= (player.level) * 100 && player.level < kGAMECLASS.levelCap) || player.statPoints > 0 || player.perkPoints > 0) {
+		if (player.XP < player.level * 100 && player.level < kGAMECLASS.levelCap) {
 			if (player.statPoints > 0)
 				mainView.setMenuButton( MainView.MENU_LEVEL, "Stat Up" );
 			else
 				mainView.setMenuButton( MainView.MENU_LEVEL, "Perk Up" );
 		}
-		else
+		else {
 			mainView.setMenuButton( MainView.MENU_LEVEL, "Level Up" );
+			if (flags[kFLAGS.AUTO_LEVEL] > 0) {
+				kGAMECLASS.levelUpGo();
+				return;
+			}
+		}
 		mainView.showMenuButton( MainView.MENU_LEVEL );
 		mainView.statsView.showLevelUp();
 	}

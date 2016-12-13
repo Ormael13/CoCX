@@ -2287,7 +2287,7 @@ public function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):voi
 public function spriteSelect(choice:Number = 0):void {
 	if (flags[kFLAGS.SHOW_SPRITES_FLAG] == 0)
 	{
-		mainView.selectSprite( choice );
+		mainView.selectSprite(choice, flags[kFLAGS.SPRITE_STYLE]);
 	}
 	else
 	{
