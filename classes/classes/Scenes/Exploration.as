@@ -36,40 +36,21 @@ package classes.Scenes
 				return;
 			} else if (player.explored > 1) outputText("You can continue to search for new locations, or explore your previously discovered locations.", true);
 
-			if (flags[kFLAGS.EXPLORATION_PAGE] == 2) {
-				explorePageII();
-				return;
-			}
 			menu();
 			addButton(0, "Explore", tryDiscover);
 			if (player.exploredDesert > 0) addButton(1, "Desert", kGAMECLASS.desert.exploreDesert);
 			if (player.exploredForest > 0) addButton(2, "Forest", kGAMECLASS.forest.exploreForest);
 			if (player.exploredLake > 0) addButton(3, "Lake", kGAMECLASS.lake.exploreLake);
-			addButton(4, "Next", explorePageII);
+			
 			if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0) addButton(5, "Plains", kGAMECLASS.plains.explorePlains);
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] > 0) addButton(6, "Swamp", kGAMECLASS.swamp.exploreSwamp);
 			if (player.findStatusAffect(StatusAffects.ExploredDeepwoods) >= 0) addButton(7, "Deepwoods", kGAMECLASS.forest.exploreDeepwoods);
 			if (player.exploredMountain > 0) addButton(8, "Mountain", kGAMECLASS.mountain.exploreMountain);
-			addButton(9, "Back", playerMenu);
+			
+			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(10, "High Mountain", kGAMECLASS.highMountains.exploreHighMountain);
+			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(11, "Bog", kGAMECLASS.bog.exploreBog);
+			addButton(14, "Back", playerMenu);
 		}
-
-		private function explorePageII():void
-		{
-			flags[kFLAGS.EXPLORATION_PAGE] = 2;
-			menu();
-			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(0, "High Mountain", kGAMECLASS.highMountains.exploreHighMountain);
-			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(1, "Bog", kGAMECLASS.bog.exploreBog);
-			addButton(4, "Previous", goBackToPageI);
-			if (debug) addButton(8, "Debug", exploreDebug.doExploreDebug);
-			addButton(9, "Back", playerMenu);
-		}
-
-		private function goBackToPageI():void
-		{
-			flags[kFLAGS.EXPLORATION_PAGE] = 1;
-			doExplore();
-		}
-
 
 		//Try to find a new location - called from doExplore once the first location is found
 		public function tryDiscover():void

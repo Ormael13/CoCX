@@ -2030,7 +2030,7 @@ private function giveKatherineAnItem():void {
 	if (hasJob && !hasClothing(KBIT_CLOTHES_TUBETOP) && player.hasItem(armors.TUBETOP)) addButton(button++, "Tube Top", giveKatClothesTubeTop);
 	if (hasJob && player.hasItem(consumables.W_FRUIT)) addButton(button++, "W. Fruit", giveKatWhiskerFruit);
 	if (hasJob && hairColor != "snow white" && player.hasItem(consumables.WHITEDY)) addButton(button++, "White Dye", giveKatDyeWhite);
-	addButton(9, "Back", katherineMenu);
+	addButton(14, "Back", katherineMenu);
 }
 
 //Reducto

@@ -163,6 +163,10 @@ public function goToHeliaDungeon2():void {
 //	dungeonLoc = 17;
 //	doNext(camp.campMenu);
 }
+public function goToHeliaDungeonPostQuest():void {
+	inDungeon = true;
+	dungeonEnterRoom(DUNGEON_HEL_GUARD_HALL);
+}
 
 public function takeGodsMead():void {
 	inventory.takeItem(consumables.GODMEAD, playerMenu);

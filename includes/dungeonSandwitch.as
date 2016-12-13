@@ -1992,7 +1992,7 @@ public function answerCorrect():void {
 		outputText("\n\nWhat do you do?");
 		//(Display Options: [Fuck Her] [Door] [Leave])
 		menu();
-		addButton(0, "North Door", openZeDoorToParadize);
+		addButton(6, "North Door", openZeDoorToParadize);
 		addButton(1, "Fuck Her", fuckDatSphinx);
 		addButton(4, "Leave", leaveBoobsDungeon);
 	}

@@ -57,9 +57,9 @@ private function dungeonMenu():void {
 //		text2 = "East";
 //		choice7 = leaveFactory;
 //		text7 = "South";
-		addButton(0, "North", openFactoryDoor);
-		addButton(1, "East", dungeonEnterRoom, DUNGEON_FACTORY_BREAK_ROOM);
-		addButton(6, "South", leaveFactory);
+		addButton(6, "North", openFactoryDoor);
+		addButton(12, "East", dungeonEnterRoom, DUNGEON_FACTORY_BREAK_ROOM);
+		addButton(11, "South", leaveFactory);
 	}
 	//Pump Room
 	if(dungeonLoc == DUNGEON_FACTORY_PUMP_ROOM) {
@@ -75,10 +75,10 @@ private function dungeonMenu():void {
 //		text7 = "South";
 //		choice6 = 11005;
 //		text6 = "West";
-		addButton(0, "North", dungeonEnterRoom, DUNGEON_FACTORY_REPAIR_CLOSET);
-		addButton(1, "East", dungeonEnterRoom, DUNGEON_FACTORY_FURNACE_ROOM);
-		addButton(5, "West", dungeonEnterRoom, DUNGEON_FACTORY_MAIN_CHAMBER);
-		addButton(6, "South", dungeonEnterRoom, DUNGEON_FACTORY_FOYER);
+		addButton(6, "North", dungeonEnterRoom, DUNGEON_FACTORY_REPAIR_CLOSET);
+		addButton(12, "East", dungeonEnterRoom, DUNGEON_FACTORY_FURNACE_ROOM);
+		addButton(10, "West", dungeonEnterRoom, DUNGEON_FACTORY_MAIN_CHAMBER);
+		addButton(11, "South", dungeonEnterRoom, DUNGEON_FACTORY_FOYER);
 	}
 	//Break Room
 	if(dungeonLoc == DUNGEON_FACTORY_BREAK_ROOM) {
@@ -99,7 +99,7 @@ private function dungeonMenu():void {
 //			text5 = "Coffee";
 //			choice5 = drinkCoffee;
 			addButton(4, "Coffee", drinkCoffee);
-			addButton(5, "West", dungeonEnterRoom, DUNGEON_FACTORY_FOYER);
+			addButton(10, "West", dungeonEnterRoom, DUNGEON_FACTORY_FOYER);
 		}
 		else {
 			spriteSelect(55);
@@ -181,7 +181,7 @@ private function dungeonMenu():void {
 		if (player.findStatusAffect(StatusAffects.FactoryIncubusDefeated) >= 0 || flags[kFLAGS.D3_DISCOVERED] == 1) {
 //			text6 = "West";
 //			choice6 = 11001;
-			addButton(5, "West", openFactoryDoor);
+			addButton(10, "West", openFactoryDoor);
 		}
 		//Incubus is ALLLLIVE
 		else {
@@ -193,7 +193,7 @@ private function dungeonMenu():void {
 //				text6 = "West";
 //				choice6 = 11001;
 				addButton(1, "Fight", startIncubusFight);
-				addButton(5, "West", openFactoryDoor);
+				addButton(10, "West", openFactoryDoor);
 			}
 			else {
 				outputText("\n\nA demonic mechanic lounges against the hot machinery, unperturbed by the high temperatures of the room.  He wears cut-off denim overalls, stained with grease in a few places.  They don't seem to be in good repair, and have a fair-sized hole at his groin, where a floppy foot-long member hangs free.  His skin is light purple and unblemished, as you would expect from a sexual demon.  He has a rugged handsome face and black hair tied back in a simple ponytail.  Two large curving horns protrude from his forehead, curving back along his skull and giving him a dangerous appearance.  A narrow goatee grows from his chin, about 3 inches long and braided skillfully.  He looks up and smiles, amused at your appearance.", false);
@@ -234,7 +234,7 @@ private function dungeonMenu():void {
 //		text7 = "South";
 //		choice7 = 11001;
 		outputText("The only exit is back to the south.", false);
-		addButton(6, "South", openFactoryDoor);
+		addButton(11, "South", openFactoryDoor);
 	}
 	//Main Chamber
 	if(dungeonLoc == DUNGEON_FACTORY_MAIN_CHAMBER) {
@@ -257,8 +257,8 @@ private function dungeonMenu():void {
 //		choice2 = 11001;
 //		text7 = "South(Up)";
 //		choice7 = 11006;
-		addButton(1, "East", openFactoryDoor);
-		addButton(6, "South(Up)", dungeonEnterRoom, DUNGEON_FACTORY_FOREMANS_OFFICE);
+		addButton(12, "East", openFactoryDoor);
+		addButton(11, "South(Up)", dungeonEnterRoom, DUNGEON_FACTORY_FOREMANS_OFFICE);
 	}
 	//Foreman's Office
 	if(dungeonLoc == DUNGEON_FACTORY_FOREMANS_OFFICE) {
@@ -283,9 +283,9 @@ private function dungeonMenu():void {
 //			text2 = "East";
 //			choice7 = 11008;
 //			text7 = "South";
-			addButton(1, "East", dungeonEnterRoom, DUNGEON_FACTORY_PUMP_CONTROL);
+			addButton(12, "East", dungeonEnterRoom, DUNGEON_FACTORY_PUMP_CONTROL);
 			addButton(5, "North(Down)", dungeonEnterRoom, DUNGEON_FACTORY_MAIN_CHAMBER);
-			addButton(6, "South", openPumpRoom);
+			addButton(11, "South", openPumpRoom);
 			if (player.hasKeyItem("Supervisor's Key") < 0) {
 //				choice3 = takeSupervisorsKey;
 //				text3 = "Desk";
@@ -317,14 +317,14 @@ private function dungeonMenu():void {
 		}
 //		choice6 = 11006;
 //		text6 = "West";
-		addButton(5, "West", dungeonEnterRoom, DUNGEON_FACTORY_FOREMANS_OFFICE);
+		addButton(10, "West", dungeonEnterRoom, DUNGEON_FACTORY_FOREMANS_OFFICE);
 	}
 	//Premium Products
 	if(dungeonLoc == DUNGEON_FACTORY_STORE_ROOM) {
 		outputText("<b><u>Premium Products</u></b>\nThis store room is filled with a few opened crates, meant to store the various substances in the factory.  It looks as if the current overseer has allowed supplies to run low, as there is not much to be gleaned from this meager stash.\n\n", true);
 //		text1 = "North";
 //		choice1 = 11006;
-		addButton(0, "North", dungeonEnterRoom, DUNGEON_FACTORY_FOREMANS_OFFICE);
+		addButton(6, "North", dungeonEnterRoom, DUNGEON_FACTORY_FOREMANS_OFFICE);
 		if (player.findStatusAffect(StatusAffects.TakenLactaid) >= 0) {
 			if (player.statusAffectv1(StatusAffects.TakenLactaid) > 0) {
 				outputText("There is a crate with " + num2Text(player.statusAffectv1(StatusAffects.TakenLactaid)) + " bottles of something called 'Lactaid' inside.\n\n", false);
@@ -363,8 +363,8 @@ private function dungeonMenu():void {
 //		text1 = "North";
 //		choice6 = leaveZetazsLair;
 //		text6 = "Leave";
-		addButton(0, "North", dungeonEnterRoom, DUNGEON_CAVE_TUNNEL);
-		addButton(5, "Leave", leaveZetazsLair);
+		addButton(6, "North", dungeonEnterRoom, DUNGEON_CAVE_TUNNEL);
+		addButton(11, "Leave", leaveZetazsLair);
 		//Zetaz gone?  Alchemist shits!
 		if (flags[kFLAGS.DEFEATED_ZETAZ] > 0) {
 			if (flags[kFLAGS.ZETAZ_LAIR_DEMON_VENDOR_PRESENT] == 0) {
@@ -389,8 +389,8 @@ private function dungeonMenu():void {
 //		choice7 = 11066;
 //		text1 = "North";
 //		choice1 = 11068;
-		addButton(0, "North", dungeonEnterRoom, DUNGEON_CAVE_GATHERING_HALL);
-		addButton(6, "South", dungeonEnterRoom, DUNGEON_CAVE_ENTRANCE);
+		addButton(6, "North", dungeonEnterRoom, DUNGEON_CAVE_GATHERING_HALL);
+		addButton(11, "South", dungeonEnterRoom, DUNGEON_CAVE_ENTRANCE);
 	}
 	//D2: [GATHERING HALL]
 	if(dungeonLoc == DUNGEON_CAVE_GATHERING_HALL) {
@@ -412,10 +412,10 @@ private function dungeonMenu():void {
 //			choice6 = 11069;
 //			text7 = "South";
 //			choice7 = 11067;
-			addButton(0, "North", enterZetazsRoomFromTheSouth);
-			addButton(1, "East", dungeonEnterRoom, DUNGEON_CAVE_TORTURE_ROOM);
-			addButton(5, "West", dungeonEnterRoom, DUNGEON_CAVE_FUNGUS_CAVERN);
-			addButton(6, "South", dungeonEnterRoom, DUNGEON_CAVE_TUNNEL);
+			addButton(6, "North", enterZetazsRoomFromTheSouth);
+			addButton(12, "East", dungeonEnterRoom, DUNGEON_CAVE_TORTURE_ROOM);
+			addButton(10, "West", dungeonEnterRoom, DUNGEON_CAVE_FUNGUS_CAVERN);
+			addButton(11, "South", dungeonEnterRoom, DUNGEON_CAVE_TUNNEL);
 		}
 	}
 	if(dungeonLoc == DUNGEON_CAVE_FUNGUS_CAVERN) {
@@ -440,7 +440,7 @@ private function dungeonMenu():void {
 //			choice2 = 11068;
 			outputText("This cavern is huge!  Though you can see the edge of a large stalactite to the west, the rest of the cave disappears into darkness beyond twenty or thirty feet away.  The floor is covered in spongy, leaf-shaped fungus.  They're huge, shiny, and purple, and they cover the cavern floor for as far as the illumination will reach.  The familiar, sweet smell of them hangs in the cavern's humid air, but you're fairly certain they won't trouble you again.", false);
 		}
-		addButton(1, "East", dungeonEnterRoom, DUNGEON_CAVE_GATHERING_HALL);
+		addButton(12, "East", dungeonEnterRoom, DUNGEON_CAVE_GATHERING_HALL);
 	}
 	//Vala's bitch room
 	if(dungeonLoc == DUNGEON_CAVE_TORTURE_ROOM) {
@@ -490,8 +490,8 @@ private function dungeonMenu():void {
 //		choice1 = 11071;
 //		text6 = "West";
 //		choice6 = 11068;
-		addButton(0, "North", dungeonEnterRoom, DUNGEON_CAVE_SECRET_TUNNEL);
-		addButton(5, "West", dungeonEnterRoom, DUNGEON_CAVE_GATHERING_HALL);
+		addButton(6, "North", dungeonEnterRoom, DUNGEON_CAVE_SECRET_TUNNEL);
+		addButton(10, "West", dungeonEnterRoom, DUNGEON_CAVE_GATHERING_HALL);
 	}
 	//Backdoor Banditos!
 	if(dungeonLoc == DUNGEON_CAVE_SECRET_TUNNEL) {
@@ -513,8 +513,8 @@ private function dungeonMenu():void {
 //		choice6 = 11072;
 //		text7 = "South";
 //		choice7 = 11070;
-		addButton(5, "West", dungeonEnterRoom, DUNGEON_CAVE_ZETAZ_CHAMBER);
-		addButton(6, "South", dungeonEnterRoom, DUNGEON_CAVE_TORTURE_ROOM);
+		addButton(10, "West", dungeonEnterRoom, DUNGEON_CAVE_ZETAZ_CHAMBER);
+		addButton(11, "South", dungeonEnterRoom, DUNGEON_CAVE_TORTURE_ROOM);
 	}
 	//Zetaz' Lair!
 	if(dungeonLoc == DUNGEON_CAVE_ZETAZ_CHAMBER) {
@@ -537,8 +537,8 @@ private function dungeonMenu():void {
 //			choice7 = 11068;
 //			text2 = "East";
 //			choice2 = 11071;
-			addButton(1, "East", dungeonEnterRoom, DUNGEON_CAVE_SECRET_TUNNEL);
-			addButton(6, "South", dungeonEnterRoom, DUNGEON_CAVE_GATHERING_HALL);
+			addButton(12, "East", dungeonEnterRoom, DUNGEON_CAVE_SECRET_TUNNEL);
+			addButton(11, "South", dungeonEnterRoom, DUNGEON_CAVE_GATHERING_HALL);
 		}
 	}
 	//HELIA DUNGEONNNNNOOOO 1
@@ -560,7 +560,7 @@ private function dungeonMenu():void {
 //		choice1 = 11086;
 //		text3 = "Trapdoor";
 //		choice3 = 11085;
-		addButton(0, "North Door", dungeonEnterRoom, DUNGEON_HEL_STAIR_WELL);
+		addButton(6, "North Door", dungeonEnterRoom, DUNGEON_HEL_STAIR_WELL);
 		addButton(2, "Trapdoor", dungeonEnterRoom, DUNGEON_HEL_WINE_CELLAR);
 	}
 	if(dungeonLoc == DUNGEON_HEL_WINE_CELLAR) {
@@ -646,12 +646,12 @@ private function dungeonMenu():void {
 			if (flags[kFLAGS.HEL_PC_TALKED_WITH_HAKON] == 0) {
 				outputText("on which the salamander prisoner lies");
 //				text4 = "Prisoner";
-				addButton(3, "Prisoner", helDungeonPrisonerTalk);
+				addButton(0, "Prisoner", helDungeonPrisonerTalk);
 			}
 			else {
 				outputText("on which Hakon lies");
 //				text4 = "Hakon";
-				addButton(3, "Hakon", helDungeonPrisonerTalk);
+				addButton(0, "Hakon", helDungeonPrisonerTalk);
 			}
 			outputText(".");
 			if (player.hasKeyItem("Harpy Key A") >= 0 && player.hasKeyItem("Harpy Key B") >= 0) outputText("\n\n<b>You have the keys to release the prisoner, but you may want to make sure you have everything from this place that you want before you make your escape.  You doubt you'll be able to return in the future.</b>");
@@ -662,8 +662,9 @@ private function dungeonMenu():void {
 //			choice4 = helDungeonPrisonerTalk;
 //			text5 = "Torture Gear";
 //			choice5 = tortureGear;
-			addButton(2, "Upstairs", dungeonEnterRoom, DUNGEON_HEL_STAIR_WELL);
-			addButton(4, "Torture Gear", tortureGear);
+			
+			addButton(1, "Torture Gear", tortureGear);
+			addButton(5, "Upstairs", dungeonEnterRoom, DUNGEON_HEL_STAIR_WELL);
 		}
 	}
 	if(dungeonLoc == DUNGEON_HEL_MEZZANINE) {
@@ -685,8 +686,8 @@ private function dungeonMenu():void {
 //			text4 = "Phoenixes";
 //			choice4 = checkOutDemBirdBitches;
 			//(Go Downstairs returns you to the Stairwell; Go Up takes you to the throne room)
-			addButton(2, "Upstairs", dungeonEnterRoom, DUNGEON_HEL_THRONE_ROOM);
-			addButton(3, "Phoenixes", checkOutDemBirdBitches);
+			addButton(5, "Upstairs", dungeonEnterRoom, DUNGEON_HEL_THRONE_ROOM);
+			addButton(0, "Phoenixes", checkOutDemBirdBitches);
 			addButton(7, "Downstairs", dungeonEnterRoom, DUNGEON_HEL_STAIR_WELL);
 		}
 	}
@@ -727,8 +728,8 @@ private function dungeonMenu():void {
 //				text5 = "Harpy Queen";
 //				choice5 = harpyQueenAdvantage;
 				outputText("  The Harpy Queen slumps in her throne, insensate.");
-				addButton(3, "Helia", HeliaThroneRoom);
-				addButton(4, "Harpy Queen", harpyQueenAdvantage);
+				addButton(0, "Helia", HeliaThroneRoom);
+				addButton(1, "Harpy Queen", harpyQueenAdvantage);
 			}
 			else if (flags[kFLAGS.TOOK_QUEEN_STAFF] == 0) addButton(4, "Take Staff", takeQueensStaff);
 			//(Display Options: [Helia] [Harpy Queen] [Go Downstairs])
@@ -756,7 +757,7 @@ private function dungeonMenu():void {
 //			choice1 = openZeDoorToParadize;
 //			text5 = "Leave";
 //			choice5 = leaveBoobsDungeon;
-			addButton(0, "North", openZeDoorToParadize);
+			addButton(6, "North", openZeDoorToParadize);
 		}
 		else if (flags[kFLAGS.MET_SANURA] == 0) {
 			flags[kFLAGS.MET_SANURA] = 1;
@@ -775,8 +776,8 @@ private function dungeonMenu():void {
 //			choice4 = fuckItAttack;
 //			text5 = "Leave";
 //			choice5 = leaveBoobsDungeon;
-			addButton(2, "Riddle Game", riddleGameGo);
-			addButton(3, "Uh, FIGHT!", fuckItAttack);
+			addButton(0, "Riddle Game", riddleGameGo);
+			addButton(1, "Uh, FIGHT!", fuckItAttack);
 		}
 		else {
 			if (flags[kFLAGS.TIMES_SUBMITTED_TO_SANURA] + flags[kFLAGS.TIMES_WINFUCKED_SANURA] > 0) {
@@ -789,19 +790,19 @@ private function dungeonMenu():void {
 			}
 //			text3 = "Riddle Game";
 //			choice3 = riddleGameGo;
-			addButton(2, "Riddle Game", riddleGameGo);
+			addButton(0, "Riddle Game", riddleGameGo);
 			if (flags[kFLAGS.BEATEN_SANURA_COUNT] > 0) {
 //				text1 = "North";
 //				choice1 = openZeDoorToParadize;
 //				text4 = "Fuck";
 //				choice4 = fuckDatSphinx;
-				addButton(0, "North", openZeDoorToParadize);
-				addButton(3, "Fuck", fuckDatSphinx);
+				addButton(6, "North", openZeDoorToParadize);
+				addButton(1, "Fuck", fuckDatSphinx);
 			}
 //			text5 = "Leave";
 //			choice5 = leaveBoobsDungeon;
 		}
-		addButton(4, "Leave", leaveBoobsDungeon);
+		addButton(11, "Leave", leaveBoobsDungeon);
 	}
 	if(dungeonLoc == DUNGEON_WITCH_CAVERNOUS_COMMONS) {
 		clearOutput();
@@ -822,7 +823,7 @@ private function dungeonMenu():void {
 			outputText("\n\nAn open doorway opens up to the north.  You can faintly see some kind of altar beyond it.");
 //			text1 = "North";
 //			choice1 = 11147;
-			addButton(0, "North", dungeonEnterRoom, DUNGEON_WITCH_SACRIFICIAL_ALTAR);
+			addButton(6, "North", dungeonEnterRoom, DUNGEON_WITCH_SACRIFICIAL_ALTAR);
 		}
 //		text7 = "South";
 //		choice7 = 11133;
@@ -830,9 +831,9 @@ private function dungeonMenu():void {
 //		choice2 = 11141;
 //		text6 = "West";
 //		choice6 = 11135;
-		addButton(1, "East", dungeonEnterRoom, DUNGEON_WITCH_EAST_WARRENS_MAIN);
-		addButton(5, "West", dungeonEnterRoom, DUNGEON_WITCH_WEST_WARRENS_MAIN);
-		addButton(6, "South", dungeonEnterRoom, DUNGEON_WITCH_ENTRANCE_GATEWAY);
+		addButton(12, "East", dungeonEnterRoom, DUNGEON_WITCH_EAST_WARRENS_MAIN);
+		addButton(10, "West", dungeonEnterRoom, DUNGEON_WITCH_WEST_WARRENS_MAIN);
+		addButton(11, "South", dungeonEnterRoom, DUNGEON_WITCH_ENTRANCE_GATEWAY);
 	}
 	if(dungeonLoc == DUNGEON_WITCH_WEST_WARRENS_MAIN) {
 		clearOutput();
@@ -846,10 +847,10 @@ private function dungeonMenu():void {
 //		choice2 = 11134;
 //		text6 = "West";
 //		choice6 = 11138;
-		addButton(0, "North", dungeonEnterRoom, DUNGEON_WITCH_CHILDRENS_PLAYROOM);
-		addButton(1, "East", dungeonEnterRoom, DUNGEON_WITCH_CAVERNOUS_COMMONS);
-		addButton(5, "West", dungeonEnterRoom, DUNGEON_WITCH_WEST_WARRENS_WEST);
-		addButton(6, "South", dungeonEnterRoom, DUNGEON_WITCH_PREGNANT_LUST_ROOM);
+		addButton(6, "North", dungeonEnterRoom, DUNGEON_WITCH_CHILDRENS_PLAYROOM);
+		addButton(12, "East", dungeonEnterRoom, DUNGEON_WITCH_CAVERNOUS_COMMONS);
+		addButton(10, "West", dungeonEnterRoom, DUNGEON_WITCH_WEST_WARRENS_WEST);
+		addButton(11, "South", dungeonEnterRoom, DUNGEON_WITCH_PREGNANT_LUST_ROOM);
 	}
 	if(dungeonLoc == DUNGEON_WITCH_CHILDRENS_PLAYROOM) {
 		clearOutput();
@@ -857,7 +858,7 @@ private function dungeonMenu():void {
 		outputText("Behind the thick curtain is the last thing you would expect to see.  There's nearly a dozen children and three busty, pregnant sand witches watching them.  Toys have been scattered everywhere by the young blonde children.  Their wardens were busy knitting when you intruded, but they glare at you balefully and make shooing gestures.  Unless you had planned to rob children of their toys and beat up pregnant women, there's nothing to be had here.");
 //		text7 = "South";
 //		choice7 = 11135;
-		addButton(6, "South", dungeonEnterRoom, DUNGEON_WITCH_WEST_WARRENS_MAIN);
+		addButton(11, "South", dungeonEnterRoom, DUNGEON_WITCH_WEST_WARRENS_MAIN);
 	}
 	if(dungeonLoc == DUNGEON_WITCH_PREGNANT_LUST_ROOM) {
 		clearOutput();
@@ -866,11 +867,11 @@ private function dungeonMenu():void {
 		if (silly()) outputText("  Clearly, if you wanted to, you could put some extra meat in a sand witch.");
 //		text1 = "North";
 //		choice1 = 11135;
-		addButton(1, "North", dungeonEnterRoom, DUNGEON_WITCH_WEST_WARRENS_MAIN);
+		addButton(6, "North", dungeonEnterRoom, DUNGEON_WITCH_WEST_WARRENS_MAIN);
 		if (player.hasCock() && player.lust >= 33) {
 //			text3 = "FuckWitches";
 //			choice3 = knockUpSomeDoubleStuffedSandWitches;
-			addButton(2, "FuckWitches", knockUpSomeDoubleStuffedSandWitches);
+			addButton(0, "FuckWitches", knockUpSomeDoubleStuffedSandWitches);
 		}
 	}
 	if(dungeonLoc == DUNGEON_WITCH_WEST_WARRENS_WEST) {
@@ -888,7 +889,7 @@ private function dungeonMenu():void {
 			outputText("\n\nQuite an unusual sight awaits you in this chamber.  Sitting in an oversized pot is what looks to be the overly busty, plant girl you encountered earlier, Essrayle.  She's changed quite a bit since you last saw her, however.  While her inhumanly smooth, elfin face seems to be unchanged, the rest of her verdant body seems to have been warped into a hyper-sexual parody of a fertility idol, with features that echo the nomadic sand witch tribe.");
 //			text3 = "Essrayle";
 //			choice3 = forest.essrayle.approachTrappedEssy;
-			addButton(2, "Essrayle", forest.essrayle.approachTrappedEssy);
+			addButton(0, "Essrayle", forest.essrayle.approachTrappedEssy);
 		}
 //		text1 = "North";
 //		choice1 = 11139;
@@ -896,9 +897,9 @@ private function dungeonMenu():void {
 //		choice7 = 11140;
 //		text2 = "East";
 //		choice2 = 11135;
-		addButton(0, "North", dungeonEnterRoom, DUNGEON_WITCH_NURSERY);
-		addButton(1, "East", dungeonEnterRoom, DUNGEON_WITCH_WEST_WARRENS_MAIN);
-		addButton(6, "South", dungeonEnterRoom, DUNGEON_WITCH_PHARMACY);
+		addButton(6, "North", dungeonEnterRoom, DUNGEON_WITCH_NURSERY);
+		addButton(12, "East", dungeonEnterRoom, DUNGEON_WITCH_WEST_WARRENS_MAIN);
+		addButton(11, "South", dungeonEnterRoom, DUNGEON_WITCH_PHARMACY);
 	}
 	if(dungeonLoc == DUNGEON_WITCH_NURSERY) {
 		clearOutput();
@@ -906,7 +907,7 @@ private function dungeonMenu():void {
 		outputText("As soon as you clear the curtain, you realize there's nothing of interest to you here.  The room is lit with rose pink globes, and the furniture in the room is filled with sleeping mothers, nursing infants, or older children taking naps.  The room is packed with bodies, and while it smells strongly of femininity, there's nothing worth looking into present here.");
 //		text7 = "South";
 //		choice7 = 11138;
-		addButton(6, "South", dungeonEnterRoom, DUNGEON_WITCH_WEST_WARRENS_WEST);
+		addButton(11, "South", dungeonEnterRoom, DUNGEON_WITCH_WEST_WARRENS_WEST);
 	}
 	if(dungeonLoc == DUNGEON_WITCH_PHARMACY) {
 		clearOutput();
@@ -916,7 +917,7 @@ private function dungeonMenu():void {
 			outputText("\n\nThere is also a lever on the floor.  Looking closely at it, it appears that it connects with machinery that leads to the east...");
 //			text2 = "Pull Lever";
 //			choice2 = pullLever;
-			addButton(1, "Pull Lever", pullLever);
+			addButton(2, "Pull Lever", pullLever);
 		}
 //		text3 = "Brown Pill";
 //		choice3 = takeBarrenPills;
@@ -924,9 +925,9 @@ private function dungeonMenu():void {
 //		choice4 = takeFertilePills;
 //		text1 = "North";
 //		choice1 = 11138;
-		addButton(0, "North", dungeonEnterRoom, DUNGEON_WITCH_WEST_WARRENS_WEST);
-		addButton(2, "Brown Pill", takeBarrenPills);
-		addButton(3, "Pink Pill", takeFertilePills);
+		addButton(6, "North", dungeonEnterRoom, DUNGEON_WITCH_WEST_WARRENS_WEST);
+		addButton(0, "Brown Pill", takeBarrenPills);
+		addButton(1, "Pink Pill", takeFertilePills);
 	}
 	if(dungeonLoc == DUNGEON_WITCH_EAST_WARRENS_MAIN) {
 		clearOutput();
@@ -940,9 +941,9 @@ private function dungeonMenu():void {
 //		choice2 = 11144;
 //		text6 = "West";
 //		choice6 = 11134;
-		addButton(0, "North", dungeonEnterRoom, DUNGEON_WITCH_SLEEPING_CHAMBER);
-		addButton(1, "East", dungeonEnterRoom, DUNGEON_WITCH_EAST_WARRENS_EAST);
-		addButton(5, "West", dungeonEnterRoom, DUNGEON_WITCH_CAVERNOUS_COMMONS);
+		addButton(6, "North", dungeonEnterRoom, DUNGEON_WITCH_SLEEPING_CHAMBER);
+		addButton(12, "East", dungeonEnterRoom, DUNGEON_WITCH_EAST_WARRENS_EAST);
+		addButton(10, "West", dungeonEnterRoom, DUNGEON_WITCH_CAVERNOUS_COMMONS);
 	}
 	if(dungeonLoc == DUNGEON_WITCH_SLEEPING_CHAMBER) {
 		clearOutput();
@@ -952,8 +953,8 @@ private function dungeonMenu():void {
 //		choice2 = 11143;
 //		text7 = "South";
 //		choice7 = 11141;
-		addButton(1, "East", dungeonEnterRoom, DUNGEON_WITCH_BATH_ROOM);
-		addButton(6, "South", dungeonEnterRoom, DUNGEON_WITCH_EAST_WARRENS_MAIN);
+		addButton(12, "East", dungeonEnterRoom, DUNGEON_WITCH_BATH_ROOM);
+		addButton(11, "South", dungeonEnterRoom, DUNGEON_WITCH_EAST_WARRENS_MAIN);
 	}
 	if(dungeonLoc == DUNGEON_WITCH_BATH_ROOM) {
 		clearOutput();
@@ -964,11 +965,11 @@ private function dungeonMenu():void {
 			outputText("  There are no faucets or water sources that you can see, but your unasked questions are answered when a heavy, liquid sloshing sound emanates from the corner.  The source of the noise reveals itself to be a tit-encumbered, black-skinned human girl.  She drags her milk-swollen mammaries up to the edge of the tub and asks in a breathy, excited voice, \"<i>Bath time?</i>\"  Whoever she was, the witches seem to have broken her utterly - she's interested in nothing but being milked or lounging in her corner.  The way out lies west.");
 //			text3 = "Bath Time";
 //			choice3 = milkBathsAhoy;
-			addButton(2, "Bath Time", milkBathsAhoy);
+			addButton(0, "Bath Time", milkBathsAhoy);
 		}
 //		text6 = "West";
 //		choice6 = 11142;
-		addButton(5, "West", dungeonEnterRoom, DUNGEON_WITCH_SLEEPING_CHAMBER);
+		addButton(10, "West", dungeonEnterRoom, DUNGEON_WITCH_SLEEPING_CHAMBER);
 	}
 	if(dungeonLoc == DUNGEON_WITCH_EAST_WARRENS_EAST) {
 		clearOutput();
@@ -982,8 +983,8 @@ private function dungeonMenu():void {
 		//choice2 = 11142;
 //		text6 = "West";
 //		choice6 = 11141;
-		addButton(5, "West", dungeonEnterRoom, DUNGEON_WITCH_EAST_WARRENS_MAIN);
-		addButton(6, "South", dungeonEnterRoom, DUNGEON_WITCH_CUM_WITCH_BEDROOM);
+		addButton(10, "West", dungeonEnterRoom, DUNGEON_WITCH_EAST_WARRENS_MAIN);
+		addButton(11, "South", dungeonEnterRoom, DUNGEON_WITCH_CUM_WITCH_BEDROOM);
 	}
 	if(dungeonLoc == DUNGEON_WITCH_CUM_WITCH_BEDROOM) {
 		clearOutput();
@@ -993,8 +994,8 @@ private function dungeonMenu():void {
 //		choice1 = 11144;
 //		text6 = "West";
 //		choice6 = 11146;
-		addButton(0, "North", dungeonEnterRoom, DUNGEON_WITCH_EAST_WARRENS_EAST);
-		addButton(5, "West", dungeonEnterRoom, DUNGEON_WITCH_CUM_WITCH_OFFICE);
+		addButton(6, "North", dungeonEnterRoom, DUNGEON_WITCH_EAST_WARRENS_EAST);
+		addButton(10, "West", dungeonEnterRoom, DUNGEON_WITCH_CUM_WITCH_OFFICE);
 	}
 	if(dungeonLoc == DUNGEON_WITCH_CUM_WITCH_OFFICE) {
 		clearOutput();
@@ -1006,7 +1007,7 @@ private function dungeonMenu():void {
 			if (flags[kFLAGS.BEEN_BLESSED_BY_CUM_WITCH] == 0) {
 //				text3 = "Blessing";
 //				choice3 = friendlyCumWitchBlessing;
-				addButton(2, "Blessing", friendlyCumWitchBlessing);
+				addButton(0, "Blessing", friendlyCumWitchBlessing);
 			}
 		}
 		else {
@@ -1034,13 +1035,13 @@ private function dungeonMenu():void {
 					//lust win menu.
 //					text3 = "Sex";
 //					choice3 = cumWitchDefeated;
-					addButton(2, "Sex", cumWitchDefeated);
+					addButton(0, "Sex", cumWitchDefeated);
 				}
 			}
 		}
 //		text2 = "East";
 //		choice2 = 11145;
-		addButton(1, "East", dungeonEnterRoom, DUNGEON_WITCH_CUM_WITCH_BEDROOM);
+		addButton(12, "East", dungeonEnterRoom, DUNGEON_WITCH_CUM_WITCH_BEDROOM);
 	}
 	if(dungeonLoc == DUNGEON_WITCH_SACRIFICIAL_ALTAR) {
 		clearOutput();
@@ -1050,8 +1051,8 @@ private function dungeonMenu():void {
 //		choice1 = 11148;
 //		text7 = "South";
 //		choice7 = 11134;
-		addButton(0, "North", dungeonEnterRoom, DUNGEON_WITCH_THRONE_ROOM);
-		addButton(6, "South", dungeonEnterRoom, DUNGEON_WITCH_CAVERNOUS_COMMONS);
+		addButton(6, "North", dungeonEnterRoom, DUNGEON_WITCH_THRONE_ROOM);
+		addButton(11, "South", dungeonEnterRoom, DUNGEON_WITCH_CAVERNOUS_COMMONS);
 	}
 	if(dungeonLoc == DUNGEON_WITCH_THRONE_ROOM) {
 		clearOutput();
@@ -1062,10 +1063,11 @@ private function dungeonMenu():void {
 //		text7 = "South";
 //		choice7 = 11147;
 		addButton(2, "Approach", sandMotherStuffGOA);
-		addButton(6, "South", dungeonEnterRoom, DUNGEON_WITCH_SACRIFICIAL_ALTAR);
+		addButton(11, "South", dungeonEnterRoom, DUNGEON_WITCH_SACRIFICIAL_ALTAR);
 	}
-	addButton(8, "Items", inventory.inventoryMenu);
 	addButton(9, "Masturbate", masturbation.masturbateMenu);
+	addButton(13, "Inventory", inventory.inventoryMenu);
+	//addButton(14, "Map", showMap);
 	//Display menu
 //	choices(text1,choice1,text2,choice2,text3,choice3,text4,choice4,text5,choice5,text6,choice6,text7,choice7,text8,choice8,"Items",itemMenu,"Masturbate",masturbateMenu);
 }

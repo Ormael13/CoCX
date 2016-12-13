@@ -132,6 +132,8 @@ package classes
 			else mainView.xpNum.text = "MAX";
 			mainView.gemsNum.text = addComma(Math.floor(player.gems)) + "";
 			
+			mainView.nameText.htmlText = "<b>Name: " + player.short + "</b>";
+			
 			//Time display
 			//var minutesDisplay:String = "";
 			//if (model.time.minutes < 10) minutesDisplay = "0" + model.time.minutes;

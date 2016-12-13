@@ -281,7 +281,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				if (tRoom.NorthExitCondition == null || tRoom.NorthExitCondition())
 				{
-					addButton(0, "North", move, tRoom.NorthExit);
+					addButton(6, "North", move, tRoom.NorthExit);
 				}
 			}
 			
@@ -289,7 +289,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				if (tRoom.EastExitCondition == null || tRoom.EastExitCondition())
 				{
-					addButton(1, "East", move, tRoom.EastExit);
+					addButton(12, "East", move, tRoom.EastExit);
 				}
 			}
 			
@@ -297,7 +297,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				if (tRoom.SouthExitCondition == null || tRoom.SouthExitCondition())
 				{
-					addButton(6, "South", move, tRoom.SouthExit);
+					addButton(11, "South", move, tRoom.SouthExit);
 				}
 			}
 			
@@ -305,17 +305,17 @@ package classes.Scenes.Dungeons.D3
 			{
 				if (tRoom.WestExitCondition == null || tRoom.WestExitCondition())
 				{
-					addButton(5, "West", move, tRoom.WestExit);
+					addButton(10, "West", move, tRoom.WestExit);
 				}
 			}
 			
 			if (tRoom.RoomName == "entrance")
 			{
-				addButton(5, "Exit", exitD3);
+				addButton(10, "Exit", exitD3);
 			}
-			
-			addButton(8, "Items", inventory.inventoryMenu);
-			addButton(9, "Masturbate", getGame().masturbation.masturbateGo);
+			addButton(8, "Masturbate", getGame().masturbation.masturbateGo);
+			addButton(13, "Inventory", inventory.inventoryMenu);
+			//addButton(14, "Map", showMap);
 		}
 		
 		public function move(roomName:String):void

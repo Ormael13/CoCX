@@ -231,7 +231,6 @@ public function telAdreMenuShow():void { //Just displays the normal Tel'Adre men
 	if (flags[kFLAGS.ARIAN_PARK] > 0 && flags[kFLAGS.ARIAN_PARK] < 4) addButton(5, "Park", kGAMECLASS.arianScene.visitThePark);
 	addButton(6, "Pawn", oswaldPawn);
 	addButton(7, "Tower", library.visitZeMagesTower);
-	addButton(8, "Weapons", weaponShop);
 	addButton(9, "Leave", camp.returnToCampUseOneHour);
 }
 
@@ -240,13 +239,14 @@ private function armorShops():void {
 	addButton(0,"Blacksmith",armorShop);
 	addButton(1,"Piercing",piercingStudio);
 	addButton(2, "Tailor", tailorShoppe);
+	addButton(3, "Weapons", weaponShop);
 
 	if (flags[kFLAGS.LOPPE_PC_MET_UMA] == 1)
 	{
-		addButton(3, "Clinic", umasShop.enterClinic);
+		addButton(4, "Clinic", umasShop.enterClinic);
 	}
 
-	addButton(4,"Back",telAdreMenu);
+	addButton(9,"Back",telAdreMenu);
 }
 
 public function houses():void {

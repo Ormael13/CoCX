@@ -462,7 +462,7 @@ private function doCamp():void { //Only called by playerMenu
 	hideUpDown();
 	//Level junk
 	if((player.XP >= (player.level) * 100 && player.level < kGAMECLASS.levelCap) || player.statPoints > 0 || player.perkPoints > 0) {
-		if (player.XP < player.level * 100 && player.level < kGAMECLASS.levelCap) {
+		if (player.XP < player.level * 100 || player.level >= kGAMECLASS.levelCap) {
 			if (player.statPoints > 0)
 				mainView.setMenuButton( MainView.MENU_LEVEL, "Stat Up" );
 			else
@@ -1299,6 +1299,7 @@ private function dungeonFound():Boolean { //Returns true as soon as any known du
 	if (player.findStatusAffect(StatusAffects.FoundFactory) >= 0) return true;
 	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) return true;
 	if (flags[kFLAGS.D3_DISCOVERED] > 0) return true;
+	//if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0) return true;
 	return false;
 }
 
@@ -1327,10 +1328,6 @@ private function placesKnown():Boolean { //Returns true as soon as any known pla
 
 //Places menu
 private function places():void { //Displays a menu for all known places
-	if (flags[kFLAGS.PLACES_PAGE] != 0) {
-		placesPage2();
-		return;
-	}
 	menu();
 	if (flags[kFLAGS.BAZAAR_ENTERED] > 0) addButton(0, "Bazaar", getGame().bazaar.enterTheBazaar);
 	if (player.findStatusAffect(StatusAffects.BoatDiscovery) >= 0) addButton(1, "Boat", getGame().boat.boatExplore);
@@ -1340,36 +1337,25 @@ private function places():void { //Displays a menu for all known places
 		else addButton(2, "Cathedral", getGame().gargoyle.returnToCathedral);
 	}
 	if (dungeonFound()) addButton(3, "Dungeons", dungeons);
-	addButton(4, "Next", placesPage2);
+	
 	if (farmFound()) addButton(5, "Farm", getGame().farm.farmExploreEncounter);
 	if (flags[kFLAGS.OWCA_UNLOCKED] == 1) addButton(6, "Owca", getGame().owca.gangbangVillageStuff);
 	if (player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) addButton(7, "Salon", getGame().mountain.salon.salonGreeting);
 	if (player.statusAffectv1(StatusAffects.TelAdre) >= 1) addButton(8, "Tel'Adre", getGame().telAdre.telAdreMenu);
-	addButton(9, "Back", playerMenu);
-}
-
-private function placesPage2():void {
-	menu();
-	flags[kFLAGS.PLACES_PAGE] = 1;
-	//turn on ruins
-	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(0, "TownRuins", amilyScene.exploreVillageRuin);
-	if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(1, "Oasis Tower", getGame().highMountains.minervaScene.encounterMinerva);
-	addButton(4, "Previous", placesToPage1);
-	addButton(9, "Back", playerMenu);
-}
-
-private function placesToPage1():void {
-	flags[kFLAGS.PLACES_PAGE] = 0;
-	places();
+	
+	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(10, "TownRuins", amilyScene.exploreVillageRuin);
+	if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(11, "Oasis Tower", getGame().highMountains.minervaScene.encounterMinerva);
+	addButton(14, "Back", playerMenu);
 }
 
 private function dungeons():void {
 	menu();
 	//Turn on dungeons
-	if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(0, "Deep Cave", kGAMECLASS.enterZetazsLair);
-	if (player.findStatusAffect(StatusAffects.FoundFactory) >= 0) addButton(1, "Factory", kGAMECLASS.enterFactory);
-	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(2, "Desert Cave", kGAMECLASS.enterBoobsDungeon);
-	if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(3, "Stronghold", kGAMECLASS.d3.enterD3);
+	if (player.findStatusAffect(StatusAffects.FoundFactory) >= 0) addButton(0, "Factory", kGAMECLASS.enterFactory);
+	if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1, "Deep Cave", kGAMECLASS.enterZetazsLair);
+	if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(2, "Stronghold", kGAMECLASS.d3.enterD3);
+	if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5, "Desert Cave", kGAMECLASS.enterBoobsDungeon);
+	//if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0) addButton(6, "Phoenix Tower", kGAMECLASS.goToHeliaDungeonPostQuest);
 	addButton(9, "Back", places);
 }
 
