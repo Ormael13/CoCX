@@ -520,6 +520,22 @@ package classes
 			}
 		}
 
+		public function newGamePlusMod():int
+		{
+			//Constrains value between 0 and 4.
+			return Math.max(0, Math.min(4, flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+		}
+
+		public function ascensionFactor(multiplier:Number = 25):Number
+		{
+			return newGamePlusMod() * multiplier;
+		}
+
+		public function ngPlus(value:Number, multiplier:Number = 25):Number
+		{
+			return value + ascensionFactor(multiplier);
+		}
+
 		//Create a perk
 		public function createPerk(ptype:PerkType, value1:Number, value2:Number, value3:Number, value4:Number):void
 		{

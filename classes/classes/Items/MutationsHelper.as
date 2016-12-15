@@ -551,13 +551,13 @@ package classes.Items
 			else {
 				if (player.hornType == HORNS_DRACONIC_X2) {
 					if (player.horns < 12) {
-						if (rand(2) == 0) {
+						if (rand(3) == 0) {
 							outputText("\n\nYou get a headache as an inch of fresh horn escapes from your pounding skull.");
 							player.horns += 1;
 						}
 						else {
 							outputText("\n\nYour head aches as your horns grow a few inches longer.  They get even thicker about the base, giving you a menacing appearance.");
-							player.horns += 2 + rand(4);
+							player.horns += 3 + rand(3);
 						}
 						if (player.horns >= 12) outputText("  <b>Your horns settle down quickly, as if they're reached their full size.</b>");
 						changes++;
