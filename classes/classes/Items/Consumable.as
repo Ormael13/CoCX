@@ -5,6 +5,10 @@ package classes.Items
 {
 	import classes.GlobalFlags.*;
 	import classes.CoC_Settings;
+	import classes.Scenes.Camp;
+	import classes.Scenes.Places.Prison;
+	import classes.DefaultDict;
+	import classes.Output;
 	import classes.Player;
 
 /**
@@ -20,6 +24,13 @@ package classes.Items
 		protected function set changes(val:int):void { mutations.changes = val; }
 		protected function get changeLimit():int { return mutations.changeLimit; }
 		protected function set changeLimit(val:int):void { mutations.changeLimit = val; }
+
+		protected function get output():Output { return kGAMECLASS.output; }
+		protected function get player():Player { return kGAMECLASS.player; }
+		protected function get prison():Prison { return kGAMECLASS.prison; }
+		protected function get flags():DefaultDict { return kGAMECLASS.flags; }
+		protected function get camp():Camp { return kGAMECLASS.camp; }
+		protected function doNext(eventNo:Function):void { kGAMECLASS.doNext(eventNo); }
 
 		public function Consumable(id:String, shortName:String = null, longName:String = null, value:Number = 0, description:String = null) {
 			super(id, shortName, longName, value, description);

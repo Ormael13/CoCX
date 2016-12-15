@@ -382,7 +382,7 @@ package classes.Items
 
 			// Note, that we don't do the score checks anymore. That was just an unly workaround and we don't want to do that again!
 			switch(tfSource) {
-				case "emberTFs":
+				case "EmberTFs":
 				case "snakeOil":
 				case "goldenSeed-HarpyWomb":
 				//case "catTransformation-dragonne": // Keep it? Maybe later.
@@ -509,7 +509,7 @@ package classes.Items
 			var tsParts:Array = tfSource.split("-");
 			var race:String;
 
-			if (tsParts[0] == "emberTFs")
+			if (tsParts[0] == "EmberTFs")
 				race = "dragon";
 			else if (tsParts[0] == "reptilum" && tsParts.length > 1)
 				race = tsParts[1];
