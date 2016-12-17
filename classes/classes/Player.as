@@ -1890,15 +1890,7 @@ use namespace kGAMECLASS;
 			if (flags[kFLAGS.MEANINGLESS_CORRUPTION] > 0) temp += 100;
 			return temp;
 		}
-		
-		public function newGamePlusMod():int {
-			var temp:int = flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			//Constrains value between 0 and 4.
-			if (temp < 0) temp = 0;
-			if (temp > 4) temp = 4;
-			return temp;
-		}
-		
+
 		public function buttChangeDisplay():void
 		{	//Allows the test for stretching and the text output to be separated
 			if (ass.analLooseness == 5) outputText("<b>Your " + Appearance.assholeDescript(this) + " is stretched even wider, capable of taking even the largest of demons and beasts.</b>");
@@ -2575,10 +2567,10 @@ use namespace kGAMECLASS;
 			if (isNaga()) maxSpe += 10;
 			if (isTaur() || isDrider()) maxSpe += 20;
 			//Apply New Game+
-			maxStr += 25 * newGamePlusMod();
-			maxTou += 25 * newGamePlusMod();
-			maxSpe += 25 * newGamePlusMod();
-			maxInt += 25 * newGamePlusMod();
+			maxStr += ascensionFactor();
+			maxTou += ascensionFactor();
+			maxSpe += ascensionFactor();
+			maxInt += ascensionFactor();
 			//Might
 			if (findStatusEffect(StatusEffects.Might) >= 0) {
 				maxStr += statusEffectv1(StatusEffects.Might);
