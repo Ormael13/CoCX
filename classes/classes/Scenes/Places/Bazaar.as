@@ -349,7 +349,7 @@ private function joeysMassageWifNoExtraJizz():void {
 		outputText("  Joey turns and prances away, saying, \"<i>There's a shower if you need to clean up, and be sure and visit me the next time you need help to squeeze out all that tension!</i>\"  You barely hear his words, so focused are you on his cum-darkened, distended thong.  You can see it bulging between his legs, and while his pert butt sways out the door, you can see that his cum-filled thong is designed to redirect all that fluid over his taint and into his backdoor. Kinky.", false);
 	}
 	//(reduces libido significantly if very high, reduces lust, and reduces sensitivity to 40)
-	player.orgasm();
+	player.orgasmGeneric();
 	if (player.lib > 20) dynStats("lib", -.5);
 	if (player.lib > 80) dynStats("lib", -1);
 	if (player.lib > 60) dynStats("lib", -1);
@@ -401,7 +401,7 @@ private function joeysMassageWithEXTRASpooge():void {
 	
 	outputText("Joey leaves, his poofy tail bobbing back and forth.  You can see his thong is distended, virtually packed with his own still-pumping spooge, and you marvel at his perverse ingenuity when you realize his thong is waterproofed and shaped to guide all the jizz between his thighs and into his back-door.  Kinky.", false);
 	player.cumMultiplier += 2;
-	player.orgasm();
+	player.orgasmDick();
 	if (player.lib > 20) dynStats("lib", -.5);
 	if (player.lib > 80) dynStats("lib", -1);
 	if (player.lib > 60) dynStats("lib", -1);
@@ -986,7 +986,7 @@ private function eggsInButt(eggButt:Boolean = false):void {
 	outputText("\n\nJoey sets the headrest back up, pats you on the head and says, \"<i>Take as long as you want to recover, you sweet thing, you.  There's a towel on the table, and a shower in the back!  Come back ANY time, [name].  I'd love to give you another 'dessert.'</i>\"");
 	
 	outputText("\n\nJoey leaves, his rabbit tail bobbing to and fro.  You see his thong is distended, practically packed to the brim with more of his still-drooling chocolatey cum.  As usual, the waterproof thong seems to be pumping it all between his soft thighs and right into his already egg-filled asshole.  He really does like feeling full back there.  Kinky.");
-	player.orgasm();
+	player.orgasmLips();
 	dynStats("lib", -2, "sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1241,7 +1241,7 @@ private function finalGayFinallee(road:int = 0):void {
 			if (player.gems < 0) player.gems = 0;
 		}
 		outputText(".  You redress yourself before realizing something.  You have acquired something extra: a lust draft potion with an orange ribbon tied to it.  A note at the end reads: \"<i>Thanks for bailing me out of buying booze.  Your ass was amazing even after that orc had it.</i>\"  There's no name on the note but you have a good idea who left it for you, judging by the drawn tiger paw print in the corner.  You pocket the lust draft and leave the tent to head back to the bazaar in the morning light.\n\n");
-		player.orgasm();
+		player.orgasmAnal();
 		dynStats("sen", 5);
 		model.time.days++;
 		model.time.hours = 6;
@@ -1273,7 +1273,7 @@ private function finalGayFinallee(road:int = 0):void {
 			if (player.gems < 0) player.gems = 0;
 		}
 		outputText(".  You redress yourself before realizing something.  You have acquired something extra: A lust draft potion with an brown ribbon tied to it.  A note at the end reads: \"<i>I'll always remember the face you made trying to wrap your cute lips around my giant dick.</i>\"  There's no name on the note but you have a good idea who left it for you, judging by the drawn bear paw print in the corner.  You pocket the lust draft and leave the tent to head back to the bazaar in the morning light.\n\n");
-		player.orgasm();
+		player.orgasmAnal();
 		dynStats("sen", 5);
 		model.time.days++;
 		model.time.hours = 6;
@@ -1304,7 +1304,7 @@ private function finalGayFinallee(road:int = 0):void {
 		//Lust sated
 		//Gained 1 Bimbo brew, lost a few gems(9 or so?)
 		//Time set to morning
-		player.orgasm();
+		player.orgasmGeneric();
 		dynStats("sen", 5);
 		model.time.days++;
 		

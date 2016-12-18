@@ -116,7 +116,7 @@
 			if (player.cumQ() >= 15000) outputText(", practically dragging her gut on the stones as she runs");
 			outputText(".  Well, she might have gotten away, but she won't be able to stop you from getting to Lethice.  Indeed, it seems she was running for the exit.");
 
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("cor+", 5);
 
 			combat.cleanupAfterCombat(getGame().dungeons.resumeFromFight)
@@ -244,7 +244,7 @@
 				outputText("\n\nYou nervelessly slide off the pole into the ground, earning a fresh bukkake of creamy cum to plaster your " + player.skinFurScales() + ".  While you recover, your demonic lover's bulk shifts away, and you soon here the telltale clopping of her moving away.  It sounds like she's heading towards the south - the exit.  You missed your chance to do anything about that demon...");
 			}
 
-			player.orgasm();
+			player.orgasmVaginal();
 			dynStats("cor+", 5);
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			menu();

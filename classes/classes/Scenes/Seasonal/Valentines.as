@@ -275,7 +275,7 @@
 			clearOutput();
 			//{The PC titfucks Scylla again, and then gets her to suck them off, resulting in two quick orgasm and a big nice load of food for Scylla. How far can you fall to get off? On such a nice day, too!}
 			outputText("You feed Scylla what feels like a gallon of jizz!");
-			player.orgasm();
+			player.orgasmDick();
 			outputText("\n\n(<b>You have gained the One Track Mind perk.</b>");
 			player.createPerk(PerkLib.OneTrackMind,0,0,0,0);
 			doNext(camp.returnToCampUseTwoHours);
@@ -362,7 +362,7 @@
 				player.createPerk(PerkLib.SensualLover,0,0,0,0);
 			}
 			
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("sen", -3);
 			doNext(camp.returnToCampUseTwoHours);
 		}
@@ -520,7 +520,7 @@
 			
 			outputText("\n\n(<b>You have gained the One Track Mind perk!</b>)");
 			player.createPerk(PerkLib.OneTrackMind,0,0,0,0);
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("sen", -2);
 			doNext(camp.returnToCampUseTwoHours);
 		}
@@ -556,7 +556,7 @@
 			// (You have gained the One Track Mind perk!)
 			outputText("\n\n(<b>You have gained the One Track Mind perk!</b>)");
 			player.createPerk(PerkLib.OneTrackMind,0,0,0,0);
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("sen", -2);
 			doNext(camp.returnToCampUseTwoHours);
 		}
@@ -593,7 +593,7 @@
 				player.createPerk(PerkLib.SensualLover, 0, 0, 0, 0);
 			}
 			
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("sen", -2);
 			doNext(camp.returnToCampUseTwoHours);
 		}

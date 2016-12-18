@@ -1741,7 +1741,7 @@ private function giveArianAnal():void {
 			else outputText("out of [Arian eir] tent.");
 		}
 	}
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1829,7 +1829,7 @@ private function getBlownByArian():void {
 	outputText("\n\n\"<i>Thanks, [name].</i>\"  Arian yawns once more and closes [Arian eir] eyes.  You smile and give the sleeping lizan an affectionate pat on the head; then dress yourself and make your way");
 	if (!arianFollower()) outputText(" back to camp, stopping only to notify Laika and Boon that Arian is sleeping.");
 	else outputText(" out of Arian's tent.");
-	player.orgasm();
+	player.orgasmDick();
 	flags[kFLAGS.ARIAN_HAS_BLOWN]++;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1953,7 +1953,7 @@ private function penetrateArian():void {
 	outputText("\n\nYou take [Arian eir] free hand in your own and tell [Arian em] that, if [Arian ey] wants you to, you can stay for at least a little while longer.  \"<i>I'd like that... just a while.</i>\"  Arian does [Arian em] best to nuzzle you.  With no compelling reason not to, you nuzzle [Arian em] back and content yourself with laying there, enjoying the mutual afterglow.");
 	
 	outputText("\n\nEventually, though, you announce that you should probably get going.  As nice as it is to stay here with [Arian em], you have duties to attend to.  Arian smiles at you, and gives you a little peck on the lips.  \"<i>I understand, but come see me again soon, please.</i>\"  You promise [Arian em] you will and extract yourself from the affectionate lizan's embrace.  You quickly find your clothes and get dressed, then leave.");
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2093,7 +2093,7 @@ private function getButtWreckedByArian():void {
 		outputText("\n\nYou contemplate it...");
 		//(if PC has a cock){
 		if (player.hasCock()) {
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("sen", 2);
 			player.slimeFeed();
 			//[Yes: Play the \"<i>PC fucks Arian's ass</i>\" scene]
@@ -2111,7 +2111,7 @@ private function getButtWreckedByArian():void {
 		outputText("\n\n\"<i>I guess I need a nap now.  Care to join me?</i>\" [Arian ey] asks, yawning widely.  You tell him the offer is tempting, but you really need to get going and attend to other things.  You stroke [Arian eir] cheek and tell [Arian em] to get some rest to build [Arian eir] strength back up - after all, it wasn't really that long ago that [Arian ey] was so sick.  Arian nods.  \"<i>Okay, see you soon?</i>\"");
 		outputText("\n\nYou promise [Arian ey] will, and plant a quick kiss on [Arian eir] brow.  As the lizan settles down to rest, you quietly redress yourself and leave [Arian em] to [Arian eir] slumbers.");
 	}
-	player.orgasm();
+	player.orgasmAnal();
 	dynStats("sen", 2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2365,7 +2365,7 @@ private function getPenetratedByArianAndHisHitlerMustache():void {
 	outputText("\n\nYou decide to drop the subject for the moment and tell [Arian em] that as enjoyable as it was to spend time with [Arian em], you must return to your duties now.  Arian simply nods, wearing [Arian eir] best stoic expression.  \"<i>I understand... but, please, come back when you can, all right?</i>\"  You smile and tell [Arian em] you will, caressing [Arian eir] scaly cheek, then with a cheeky grin, let [Arian em] know that next time you expect at least four more performances from [Arian em].  Arian's eyes bulge at your suggestion, half in fear and half in lust.  \"<i>I... I can't possibly do that!  I mean, I don't have the energy,</i>\"  [Arian Ey] declares, swallowing audibly and averting [Arian eir] eyes.");
 	
 	outputText("\n\nGrinning, you pull [Arian em] into a final kiss, telling [Arian em] this is just something for [Arian em] to think about.  Having said that, you quickly redress and excuse yourself, leaving one flustered lizan behind to rest.");
-	player.orgasm();
+	player.orgasmVaginal();
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2503,7 +2503,7 @@ private function doublePenetrateArian():void {
 		else outputText("tent");
 		outputText(".");
 	}
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2606,7 +2606,7 @@ private function arianDocking():void {
 	outputText("\n\nYou tell [Arian em] the sex is nice, but there's other things in [Arian eir] favor too.  Then, you kiss [Arian em] again before [Arian ey] can ask what those are.  While [Arian ey]'s left reeling, blissed out and goofy from the sexual overwhelm, you quietly slip out of [Arian eir] bed, pull your clothes back on and slip away, blowing [Arian em] a kiss before you depart.");
 	
 	//Player returns to camp
-	player.orgasm();
+	player.orgasmGeneric();
 	dynStats("sen", 1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -3676,7 +3676,7 @@ private function TeaseHighAnalXPArian():void {
 		outputText("\n\nAlready hot and bothered, you don't need much more encouragement.  A few final thrusts, brutal in your eagerness, and you give yourself over to climax, cumming as long and hard as you can into Arian's greedy little butt.");
 		outputText("\n\nYou cum as hard as you can, but find yourself unable to cum as much you're used to, due to the fact you're still half-asleep.  \"<i>Hmm, no... more stuffing.  I need it for my muffins...</i>\"  You try your best, but just can't dredge up anything more of note, and tell Arian that [Arian ey]'ll need to get some sleep and you'll stuff [Arian em] in the morning.  Arian whimpers, but seems to calm down for the time being... now maybe you can get some proper sleep.");
 		outputText("\n\nYou try to pull out of the lizan's trained ass, but find yourself unable to.  Well, this is not exactly how you saw yourself spending the night today, but you're too tired to put much of an effort extracting your [cock smallest] from the lizan's greedy butthole.  You get as comfortable as you can, given your current position, and close your eyes...");
-		player.orgasm();
+		player.orgasmDick();
 	}
 	else {
 		outputText("\n\nPity you don't have the necessary parts to play with [Arian em], though.  Still, maybe if you do something a little special for him, [Arian ey]'ll calm down and let you get some sleep...?");
@@ -3807,7 +3807,7 @@ public function wakeUpAfterArianSleep():void {
 			outputText("\n\n\"<i>Hmm... please do...</i>\"  Arian's mouth opens in a wide yawn.  \"<i>Still a bit sleepy.  I think I'll take a nap now, if you'll excuse me.</i>\"");
 			outputText("\n\nYou chuckle and tell Arian [Arian ey]'s such a lazy little lizard, stroking [Arian eir] head affectionately before getting dressed and leaving to start your day.");
 		}
-		player.orgasm();
+		player.orgasmDick();
 	}
 	else { //PC has no cock
 		//These do not link to a sex scene. No cocks, no sex in the morning, sorry girls/genderless.
@@ -4125,7 +4125,7 @@ private function arianDildoFun():void {
 	
 	outputText("\n\nYou heave a sigh of contentment and authoritatively drag your little lizan slut into your arms, wrapping yourself around [Arian em] in a cuddle and making it quite clear you don't intend to let [Arian em] go anywhere any time soon.  Fortunately, [Arian ey] seems quite eager to be there, and so you shut your eyes and allow yourself to slowly drift off to sleep.  Before you fully embrace unconsciousness, though, you place a gentle hand on Arian's pussy, stroking [Arian em] softly - not to arouse [Arian em] yet again, but just to let [Arian em] feel a loving touch there, in the place that brings you both such pleasures....");
 
-	player.orgasm();
+	player.orgasmVaginal();
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }

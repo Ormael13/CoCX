@@ -139,7 +139,7 @@ package classes.Scenes.Dungeons
 			
 			doNext(playerMenu);
 			//(Decrease Player Lust to minimum, increase HP to maximum, etc. etc. You're sleeping, but also fucking. Figure it out.)
-			if (flags[kFLAGS.TIMES_ORGASMED] > 0) player.orgasm(); //Never calls if you never orgasmed before.
+			if (flags[kFLAGS.TIMES_ORGASMED] > 0) player.orgasmGeneric(); //Never calls if you never orgasmed before.
 		}
 			
 		public function morningAfterHeliaDungeonAgreements():void {
@@ -336,7 +336,7 @@ package classes.Scenes.Dungeons
 			}
 			//(PC regains HP)
 			HPChange(1000,false);
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("lib", 1, "sen", 3);
 			combat.cleanupAfterCombat();
 			doNext(playerMenu);
@@ -570,7 +570,7 @@ package classes.Scenes.Dungeons
 			outputText(".  With a scream of delight, Kiri clamps down on your [cock " + y + "] and climaxes too, leaking a pool of fem-spunk onto the ground.  She starts to bounce on your cock, riding out her anal orgasm until she's exhausted and you're deflated inside her.");
 
 			outputText("\n\nYou pull out with a POP, letting a stream of cum leak out her butt.  You clean your cock off and stick it back in your [armor].");
-			player.orgasm();
+			player.orgasmDick();
 			cheatTime(1/3, true);
 			doNext(playerMenu);
 		}
@@ -586,7 +586,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nYou begin to grind your slit into her face as she eats you out, rubbing your cunt along her nose and forehead to the beat of her tongue's skillful ministrations.  She makes a slow, steady progression inward, slipping her long tongue further and further into your cunny until you can feel her flicking around your cervix.");
 			outputText("\n\nYou cannot resist her skillful tongue-fuck for long.  Grabbing Kiri's head, you force her face into your crotch, getting every last bit of her tongue inside you as you can as you climax, spraying your fem-cum all across her face.");
 			outputText("\n\nUtterly satisfied, you stagger back from Kiri, letting her whip her head around to flick off your fem-cum.  You clean yourself off and suit up again.");
-			player.orgasm();
+			player.orgasmGeneric();
 			cheatTime(1/3, true);
 			doNext(playerMenu);
 		}
@@ -761,7 +761,7 @@ package classes.Scenes.Dungeons
 			if (player.cockTotal() > 1) outputText("s");
 			outputText(" and gather your gear.");
 			//(Return to Mezzanine main menu)
-			player.orgasm();
+			player.orgasmDick();
 			doNext(playerMenu);
 		}
 
@@ -781,7 +781,7 @@ package classes.Scenes.Dungeons
 
 			outputText("\n\nYour [cock " + y + "] explodes, pumping a thick load into the shocked phoenix's mouth.  She gags on your cum, finally swallowing it as the last of your sperm drips into her mouth.  With a grin, you tell her what a good job she did as you withdraw your [cock " + y + "]  from her grip.  With little rivulets of cum dripping down her face, the half-breed collapses onto her back, rapidly fingering herself.");
 			//(Return to Mezzanine main menu)
-			player.orgasm();
+			player.orgasmDick();
 			doNext(playerMenu);
 		}
 			
@@ -811,7 +811,7 @@ package classes.Scenes.Dungeons
 
 			outputText("\n\nWhen you come to your senses a few minutes later, the phoenix-girl is asleep, still holding you tight.  You pull her deflated lizard dick out of your ass and shudder as a torrent of her sizzling hot spunk dribbles out onto her thighs and hips.  You wriggle out of her tight embrace and give her a little kiss on the cheek before collecting your [armor] and heading out.");
 			//(Return to Mezzanine main menu)
-			player.orgasm();
+			player.orgasmAnal();
 			doNext(playerMenu);
 		}
 
@@ -848,7 +848,7 @@ package classes.Scenes.Dungeons
 			//v3 = quantity
 			player.createStatusEffect(StatusEffects.Eggs,rand(6),0,(5+rand(3)),0);
 			//(Return to Mezzanine main menu)
-			player.orgasm();
+			player.orgasmVaginal();
 			doNext(playerMenu);
 		}
 
@@ -1094,7 +1094,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nShe squeezes down so hard on your cock you feel like it's ready to burst.  Instead, though, you feel a sudden surge in your loins.  You have only enough time to sink your hands into the queen's cheeks and let out a powerful roar of pleasure as you cum, shooting a great big rope of hot cum right up her ass.  The queen screeches as you unload inside her, and the sudden motion of the queen's mouth sets Hel right off.  The salamander grabs the queen's head and crushes it against her hips, burying the harpy's nose inside her snatch as she cums over the bitch's face.");
 			outputText("\n\nSpent, you pull out of the broodmother's now-gaping asshole.  Her huge asscheeks, however, bottle up your load inside her, preventing it from pooling out.  Laughing, you squeeze her squishy ass one last time before Hel rolls her over and pins her again.");
 			//(Return to normal room menu)
-			player.orgasm();
+			player.orgasmDick();
 			cheatTime(1/3, true);
 			doNext(playerMenu);
 		}
@@ -1128,7 +1128,7 @@ package classes.Scenes.Dungeons
 				outputText(" hollow and empty.  You and Hel slowly withdraw, causing some of your semen to leak out of the harpy's massive canal, leaving your cock and Hel's tail a spunk-and-juice-covered mess.");
 			}
 			outputText("\n\nAfter a fuck like that, the broodmother will be laying a clutch of your eggs in no time.");
-			player.orgasm();
+			player.orgasmGeneric();
 			cheatTime(1/3, true);
 			doNext(playerMenu);
 		}

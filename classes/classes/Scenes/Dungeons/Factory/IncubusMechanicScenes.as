@@ -112,7 +112,7 @@ package classes.Scenes.Dungeons.Factory
 				else outputText("splattering your tits with escaped sexual fluids.\n\n", false);
 				outputText("The demon tenses, pulling your head forwards and burying your nose against his belly.  The dick in your mouth slides down your throat, hanging just above your belly as it begins to fill your gut with bursts of demonic warmth.  Black cum erupts from your nipples as his orgasm overwhelms their meager storage capacity, soaking your tits in his corruptive essence as the pleasure finally breaks your mind.  Your eyes roll back into your head as you begin cumming... and cumming... and cumming. The orgasm drags on and on as more and more cum pours into your body.  Like a passenger in a car you see what's happening but have no control.  Your body is used and abused for hours before you finally drift off to sleep.", false);
 				player.refillHunger(100);
-				player.orgasm();
+				player.orgasmNipples();
 				dynStats("cor", 20);
 				if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("\n\n\"<i>You're lucky I've decided to let you go since you've overthrown Lethice,</i>\" the incubus grumbles.");
 				if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) doNext(getGame().dungeons.factory.doBadEndGeneric);
@@ -160,7 +160,7 @@ package classes.Scenes.Dungeons.Factory
 					if (player.cor >= 80) outputText("You cum more times than you are able to count, each time causing a tightening of your fuckholes, which increases the rubbing against the demonic nodules and sends another wave of pleasure to your dazed brain.  You begin to drool freely, reveling in this most unholy mating.  ", false);
 					outputText("The prick in your mouth surges forward, sliding deep into your throat.  The coils around your neck tighten in response, choking your neck into a tight cock-sleeve as you feel bulges of cum moving along its length.  In moments you feel your belly starting to grow full, sloshing with cum as you become desperate to breathe.  The tentacles lodged in your " + player.assholeDescript() + " and " + player.vaginaDescript(0) + " react in similar fashion, stretching you wide as they begin pumping your body full of vast quantities of spunk.  A few free tentacles begin spurting gobs of the white stuff onto your " + player.skinDesc + ", soaking you in the stuff as you black out from a combination of oxygen deprivation and pleasure.", false);
 					player.refillHunger(100);
-					player.orgasm();
+					player.orgasmVaginal();
 					dynStats("cor", 25);
 					player.buttChange(monster.cockArea(0), true);
 					if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("\n\n\"<i>You're lucky I've decided to let you go since you've overthrown Lethice,</i>\" the incubus grumbles.");
@@ -195,7 +195,7 @@ package classes.Scenes.Dungeons.Factory
 					outputText("You black out just as you feel the cock-tentacle in your throat retracting. You dully feel your body drop to the ground, your pregnant-looking belly sloshing with demon jizz.", false);
 					player.refillHunger(100);
 					player.buttChange(monster.cockArea(0), true);
-					player.orgasm();
+					player.orgasmAnal();
 					if (flags[kFLAGS.LETHICE_DEFEATED] > 0) outputText("\n\n\"<i>You're lucky I've decided to let you go since you've overthrown Lethice,</i>\" the incubus grumbles.");
 					dynStats("cor", 25);
 					if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) doNext(getGame().dungeons.factory.doBadEndGeneric);
@@ -211,7 +211,7 @@ package classes.Scenes.Dungeons.Factory
 			outputText("You awaken moments later beside a sleeping, limp, and drained incubus. You have definitely come out on top from the encounter. Though you feel stretched, sticky and a little sore, for the moment at least the burning desire to fill your " + player.assholeDescript() + " is satisfied.", false);
 			player.buttChange(monster.cockArea(0), true);
 			player.slimeFeed();
-			player.orgasm();
+			player.orgasmAnal();
 			dynStats("cor", 2);
 			combat.cleanupAfterCombat();
 			//doNext(roomFurnaceRoom);
@@ -250,7 +250,7 @@ package classes.Scenes.Dungeons.Factory
 				if (player.cumQ() >= 50 && player.cumQ() < 400) outputText("Thick jets of cum pump into the demon's plump backside, soon building up a wave of pressure that pushes back against you.  Y", false);
 				if (player.cumQ() >= 400) outputText("A massive cock-distending bulge of cum works through your shaft, splashing into the demon's rectum in an explosive burst of pleasure. Unfortunately for your victim, it is only the first of many such cum-blasts. In no time flat, jism is spurting from his overfilled rectum while his belly looks a few months pregnant. You feel weak from discharging so much fluid, and y", false);
 				outputText("ou fall back, the fluid of your orgasm dripping from your " + player.cockDescript(0) + " and the gaping asshole of your latest conquest.\n\nYou turn to gather your " + player.armorName + ", and when you look back the demon is gone, leaving only a small puddle of male fluids in his wake.", false);
-				player.orgasm();
+				player.orgasmDick();
 				combat.cleanupAfterCombat();
 				//doNext(roomFurnaceRoom);
 			}
@@ -278,7 +278,7 @@ package classes.Scenes.Dungeons.Factory
 				outputText("You gasp and moan like a cheap whore, disgusted by yourself and yet so turned on by the total loss of self-control.  The incubus is leering up at you, having regained some of his lost confidence.  Despite the lust, desire and pleasure burning through the hot pole buried in your abdomen, you work up enough rage to grip his neck with your left hand and practically choke him out.  You work your hips quickly as you feel his pre start to drip into your canal, spreading tingling warmth in the deepest parts of your passage and into your cervix.  You tighten your grip as you forcibly take your pleasure, barking in displeasure at the demon, \"<i>Don't look like you're enjoying this too much bitch, or I'll take it out of your hide.</i>\"  Satisfied at the renewed look of fear in his eyes, you return to using his magnificent tool as a masturbation aid.\n\n", false);
 				outputText("Unable to contain your body's desires due to either the demon's aura or his wonderful penis, you slam your " + player.vaginaDescript(0) + " onto his member with impunity, twitching and squeezing involuntarily.  His tainted pre-cum begins seeping deep inside your uterus and you cry out with orgasmic intensity.  Your entire body clenches down, even the hand clamped on the incubus' windpipe. You feel his demon-cock swell up inside you in response to his stress, stretching your cunt taut.  His skin darkens from the lack of oxygen as he begins cumming HARD inside you.  Your womb immediately fills with his demon-seed, leaving ribbons of spunk to drip from your tightly-stretched cunt.  You sigh in delight as your muscles slowly stop quivering.  With a pleasured gasp, you rise off the distended demon-prick, and realize that you've choked your foe into unconsciousness. Still, you did let him cum, so maybe he won't mind too much when he wakes.  Feeling sensual and sated, you redress and prepare to explore the rest of the factory. ", false);
 				player.cuntChange(player.vaginalCapacity()*.8, true);
-				player.orgasm();
+				player.orgasmVaginal();
 				dynStats("cor", 2);
 				combat.cleanupAfterCombat();
 				//doNext(roomFurnaceRoom);
@@ -604,7 +604,7 @@ package classes.Scenes.Dungeons.Factory
 
 			outputText("\n\nYou wipe your " + player.cockDescript(x) + " off on his practically glowing bottom before turning to re-dress. When you turn back, he's gone, though a trail of white drops indicates the direction of his flight. It looks like he fled towards the cliff, perhaps growing wings. Oh well, that's one less obstacle between you and Lethice.");
 
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("cor+", 5);
 
 			combat.cleanupAfterCombat(getGame().dungeons.resumeFromFight);
@@ -788,7 +788,7 @@ package classes.Scenes.Dungeons.Factory
 
 			outputText("\n\nShaking your head, you clear away the errant thoughts and focus on the battles to come.");
 
-			player.orgasm();
+			player.orgasmVaginal();
 			dynStats("cor+", 5);
 
 			combat.cleanupAfterCombat(getGame().dungeons.resumeFromFight);

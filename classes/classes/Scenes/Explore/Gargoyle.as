@@ -344,7 +344,7 @@ private function gargoyleAnal():void {
 		
 		outputText("\n\nUtterly sated, you gently push " + flags[kFLAGS.GAR_NAME] + " off your cock.  She collapses on the floor, insensate, and soon is surrounded by a pool of your spooge leaking from her ass.  With a grin, you pat her on the head and collect your [armor] before heading back to camp.");
 	}
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -376,7 +376,7 @@ private function gargoyleCoochiiGetsPlowed():void {
 	outputText("\n\n\"<i>Thank you, Master,</i>\" she says, running a hand through your " + player.hairDescript() + ".  \"<i>That was wonderful.</i>\"");
 	
 	outputText("\n\nYou give her a pat on the head and head on back to camp.");
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -403,7 +403,7 @@ private function titFuckTheGargoyle():void {
 	outputText("\n\n\"<i>Was that... pleasing, Master?</i>\" she asks innocently.");
 	
 	outputText("\n\nYou give her a little pat on the head and tell her it was more than pleasing.  Gratified, the little gargoyle sets to slurping up your cum as your clean yourself up and head back to camp.");
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -443,7 +443,7 @@ private function strapOnGargoyle():void {
 		
 		outputText("\n\nStill panting from the ordeal, you slowly drag yourself off of " + flags[kFLAGS.GAR_NAME] + "'s cock and roll onto your back, exhausted. By the time you've recovered enough to stumble to your feet, " + flags[kFLAGS.GAR_NAME] + " is fast asleep beside you, snoring cutely, her metal cock still standing straight up in the air.  You give her a gentle pat on the thigh and get dressed, leaving the gargoyle snoozing peacefully as you head back to camp.");
 	}
-	player.orgasm();
+	if (player.hasVagina()) player.orgasmVaginal(); else  player.orgasmAnal();
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -472,7 +472,7 @@ private function tailFuckGargoyleScene():void {
 	outputText(".");
 	
 	outputText("\n\nYou rub her head and tell her that oh, yes you were. You leave her with a gratified smile on her thin lips.");
-	player.orgasm();
+	player.orgasmVaginal();
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -489,7 +489,7 @@ private function useGargoyleMaleHerm():void {
 	outputText("\n\n\"<i>M-Master?</i>\" " + flags[kFLAGS.GAR_NAME] + " gasps, giving a full-body shudder as you slowly pull out from inside her.  Your cum drools out of her snatch and pools beneath her.  Playfully, you jam your fingers up between her legs, damming your sperm inside her.  To your glee, this simple act sends " + flags[kFLAGS.GAR_NAME] + " right over the edge: convulsing, she collapses on the floor with a heavy THUNK!");
 	
 	outputText("\n\nYou give the gargoyle a little pat on the head for a job well done before heading on out.");
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -506,7 +506,7 @@ private function useHerGargoyleFemale():void {
 	outputText("\n\nYou're pleased to note that the gargoyle's tail is now dark and wet thanks to the liberal streams of lubricant pouring from your [vagina].  Now you're practically sliding on " + flags[kFLAGS.GAR_NAME] + "'s tail, riding toward inevitable orgasm.  You cum at the apex of a bounce, slamming yourself down hard upon " + flags[kFLAGS.GAR_NAME] + "'s tail until her tip breaches the entrance to your womb.  You scream in ecstasy, squirting your girl-cum freely onto the gargoyle's tail, back, and legs until you're completely and utterly spent.");
 	
 	outputText("\n\nContented, you spend a few minutes recovering before slowly dressing back up into your [armor]. You head on out, making sure to give " + flags[kFLAGS.GAR_NAME] + " a little pat on the head on your way out.");
-	player.orgasm();
+	player.orgasmVaginal();
 	doNext(camp.returnToCampUseOneHour);
 }
 

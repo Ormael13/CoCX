@@ -223,6 +223,7 @@ internal function loseToSalamander():void {
 		outputText(".  She gasps at the sensation and grabs your hips as another shot goes off inside her.  Panting, she gives you one massive, final thrust and cums herself, squeezing your " + player.cockDescript(x) + " hard inside her and screaming as brutal a scream as any warcry to the heavens.", false);
 
 		outputText("She collapses atop you, panting heavily.  \"<i>That.  Was.  Awesome,</i>\" she laughs, reaching up to give your nipple a pinch as she nestles her head on you.  Your cock begins to deflate inside her as trickles of spooge spill out around your girth, but she doesn't seem intent on leaving any time soon, and you have to admit, the warmth of her against you is more than nice.  The salamander gives you one last grin and withdraws her tail from your lips.  A moment later, she slides it under your head like a pillow, and closes her eyes, exhausted.  Soon, you, too, fall into a peaceful sleep.\n\n", false);
+		player.orgasmDick();
 	}
 	//Player Loss – Rape – Female
 	else if (player.hasVagina()) {
@@ -245,6 +246,7 @@ internal function loseToSalamander():void {
 		outputText(".\n\n", false);
 
 		outputText("Before your mind has settled, your new friend has collapsed on top of you, resting her cheek on your " + player.chestDesc() + ".  Her breath is ragged, not unlike yours, and her eyelids seem suddenly heavy.  Smiling, she slowly withdraws her cum-soaked tail from your " + player.vaginaDescript(0) + " and slips it under your head like a pillow, soft and warm, if not a little moist.  Seeing as she doesn't seem intent on going anywhere, you, too, close your eyes and drift off to a peaceful sleep.", false);
+		player.orgasmVaginal();
 	}
 	//Player Loss – Rape – Genderless & Male >85 cockarea
 	else {
@@ -268,8 +270,10 @@ internal function loseToSalamander():void {
 		outputText("All good things must come to an end, however, and soon the salamander's hot cunt contracts around your tongue as she cums, squirting girl-juice all over your face and neck.  You give her a last good tongue-fucking, picking up the pace and bringing her to a screaming, shuddering climax.  The power of her orgasm has a welcome side effect, as her tail begins to thrash wildly within you, battering your ass and bringing you, too, to a massive, mind-numbing climax.\n\n", false);
 
 		outputText("Before your mind has settled, your new friend has collapsed on top of you, resting her cheek on your " + player.chestDesc() + ".  Her breath is ragged, not unlike yours, and her eyelids seem suddenly heavy.  Smiling, she slowly withdraws her tail from your " + player.assholeDescript() + " and slips it under your head like a pillow, soft and warm, if not a little moist.  Seeing as she doesn't seem intent on going anywhere, you, too, close your eyes and drift off to a peaceful sleep.", false);
+		
+		player.orgasmAnal();
+		
 	}
-	player.orgasm();
 	dynStats("sen", 1);
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]++;
@@ -476,7 +480,7 @@ internal function beatUpHelAndStealHerWalletFromHerVagina():void {
 	outputText(".  You run your hands through her hair as you shoot strings of jism again and again into her mouth until her cheeks start to bulge.  When you're through, she makes a loud gulp and licks her lips, grinning at you wide enough that a tiny amount of your cum leaks from her cheeks.\n\n", false);
 
 	outputText("Exhausted, you can't help but collapse into her cleavage, your cheek coming to rest between her soft breasts.  You smile at her, and cup one of them even as she begins to stroke your cheek, smiling.  Your eyes feel heavy, and exhaustion begins to overtake you.  Slowly, you drift off into a peaceful sleep in the embrace of your lover.", false);
-	player.orgasm();
+	player.orgasmGeneric();
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
@@ -513,7 +517,7 @@ internal function fuckHelsAss():void {
 
 	outputText("She strokes your cheek as you drift off into a nice, peaceful sleep.", false);
 	//(reduce lust, increment Helgate flag by 1)
-	player.orgasm();
+	player.orgasmDick();
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
@@ -543,7 +547,7 @@ internal function helBlowsYou():void {
 
 	outputText("Exhausted, you collapse onto her soft tits.  Smiling at you, she strokes your cheeks as you drift off into a peaceful sleep.", false);
 	//(reduce lust, increment Helgate flag by 1)
-	player.orgasm();
+	player.orgasmDick();
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
@@ -577,7 +581,7 @@ internal function dpHel():void {
 
 	outputText("\"<i>Hot damn,</i>\" the salamander finally says, grinning from ear to ear as she begins to stroke your cheeks.  \"<i>Oh, damn, two cocks are the fucking BEST.</i>\"  She laughs to herself as you nestle your cheek on her soft breasts, slowly drifting off to a pleasant, peaceful sleep.", false);
 	//(reduce lust, increment Helgate flag by 1)
-	player.orgasm();
+	player.orgasmDick();
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]++;
 	flags[kFLAGS.TIMES_HELIA_DOUBLE_DONGED]++;
@@ -608,7 +612,7 @@ internal function getLickedByHel():void {
 
 	outputText("She gives a little laugh and strokes your cheek as you drift off into a contented, peaceful sleep.", false);
 	//(reduce lust, increment Helgate flag by 1)
-	player.orgasm();
+	player.orgasmVaginal();
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
@@ -638,7 +642,7 @@ internal function helTailWanksYourDickBecauseSheLovesYouDesuDesuHoraHora():void 
 
 	outputText("When she releases you, you cannot help but collapse onto her lap.  Only vaguely are you aware as she withdraws her tail from around you.  With a clawed finger, she scrapes a pool of cum from her pillowy breast and slips it into her mouth.  \"<i>Mmm, salty and delicious; just how I like it, lover,</i>\" she laughs, scooping up more of your seed into her hungry mouth.  You, however, drift off to sleep, content and at peace.\n\n", false);
 	//(reduce lust, increment Helgate flag by 1)
-	player.orgasm();
+	player.orgasmDick();
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
@@ -677,7 +681,7 @@ internal function helTailPegging(loss:Boolean = false):void {
 
 	outputText("Seeing you collapsed in a writhing mess of your own pleasure must evoke some tenderness in the berserker.  A moment later she lifts you up off the ground and nestles your head between her pillowy breasts, stroking your cheek and smiling lovingly at you. Contented, you drift off into a deep, peaceful sleep.", false);
 	//(reduce lust, increment Helgate flag by 1)
-	player.orgasm();
+	player.orgasmAnal();
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
@@ -720,7 +724,7 @@ private function nagaCoilsUpHel():void {
 	if (flags[kFLAGS.HEL_FUCKBUDDY] == 0) outputText("battle and ", false);
 	outputText("massive orgasm, you collapse onto your back and release your salamander lover from your grasp.  She crawls up to you and nuzzles into your " + player.chestDesc() + ", wrapping her own tail around you in return.  Soon, you drift off into a calm, peaceful sleep.", false);
 	//(reduce lust, increment Helgate flag by 1)
-	player.orgasm();
+	player.orgasmGeneric();
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
@@ -752,7 +756,7 @@ private function nagaCoilsUpAnalNaga():void {
 
 	outputText("When you come to your senses, you're lying on your back, panting and gasping for breath.  Slowly, you salamander lover drags herself to her feet, only to collapse on top of you a second later.  Seemingly content, she nuzzles into your " + player.chestDesc() + " and strokes your cheek.  No less than exhausted yourself, you soon drift off into a peaceful sleep.", false);
 	//(reduce lust, increment Helgate flag by 1)
-	player.orgasm();
+	player.orgasmAnal();
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
@@ -802,7 +806,7 @@ private function mountHel():void {
 	
 	outputText("Chuckling, you assure her you'll be back when you can, and soon, you've both drifted off into a contented, restful sleep beneath the lone tree amidst the plains.", false);
 	//(reduce lust, increment Helgate flag by 1)
-	player.orgasm();
+	player.orgasmDick();
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
@@ -855,7 +859,7 @@ private function helVaginaTaur69():void {
 
 	outputText("It takes a minute for your body to calm down; when it has, your salamander lover slips out from her harness and collapses on the ground, soaked in a mixture of your cum and hers.  Exhausted beyond the efforts of willpower, you drop to the ground beside her and drift off to a restive, bruised sleep.\n\n", false);
 	//(reduce lust, reduce HP?, increment Helgate flag by 1)
-	player.orgasm();
+	player.orgasmVaginal();
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
@@ -913,7 +917,7 @@ private function helPossessionShitPoopCock():void {
 
 	outputText("You laugh, and let out a long, contented yawn.  At the salamander's invitation, you find a secluded clearing in the grass not far away, and snuggle up to nap off the post-sex fatigue.", false);
 	//(reduce lust, increment Helgate flag by 1)
-	player.orgasm();
+	player.orgasmGeneric();
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
@@ -951,7 +955,7 @@ private function rapingHelsAssMeansYourCorruptCauseAnalIsEvil():void {
 
 	outputText("You yank yourself out of her in one quick pull; she collapses onto her side without you to support her, and shudders when another wave of her protracted orgasm hits her as she absently fingers herself.  The sight turns you on a bit, but you decide to leave her there and head back to camp, though you're sure to snatch her coinpurse before you go.", false);
 	//(reduce lust, decrement Helgate flag by 1 to a minimum of 0)
-	player.orgasm();
+	player.orgasmDick();
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]--;
 	//Bump down follower tracking affection too
@@ -981,7 +985,7 @@ private function receiveCorruptRimjobsFromHel():void {
 
 	outputText("Wide-eyed and panting, you struggle to your feet and, sure to grab a few gems from her supine form, stagger back to camp to recover from your fucking.", false);
 	//(reduce lust, decrement Helgate flag by 1 to a minimum of 0)
-	player.orgasm();
+	player.orgasmAnal();
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]--;
 	//Bump up follower tracking affection too
@@ -1052,7 +1056,7 @@ private function fuckHerAss():void {
 
 	outputText("She bursts out laughing at the sight of the 'taur wandering off with a fistful of his own jism coating his fur.  \"<i>Oh, poor guy,</i>\" she laughs, \"<i>wandered a bit too far from home and ran into me.  Just like someone else I know.</i>\"  To your surprise, she rolls over atop you and plants a long kiss on your lips, eyes closed and tail wagging softly behind her.", false);
 	//(reduce PC lust)
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", -2);
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
@@ -1085,7 +1089,7 @@ private function helMinoThreeSomeLickItsDick():void {
 
 	outputText("Finally, your orgasm ends, and you roll off the minotaur.  Shakily, he staggers to his hooves, throws a handful of gems onto the prone salamander, and stumbles off to recover.  You look up from your collapsed state, and see your friend wallowing in a thick pool of cum – hers, yours, the 'taurs – panting heavily.  A huge stream of it is pouring from her cunt like a waterfall, a half-dozen backed-up minotaur orgasms unleashed at once.  Seeing you stare, your friend chuckles and stands, walking over to you and cuddling up, her head rested on your chest for just a moment before she leans up and plants a surprisingly tender kiss on your lips.\n\n", false);
 	//(reduce lust)
-	player.orgasm();
+	player.orgasmVaginalAnal();
 	dynStats("sen", -2);
 	flags[kFLAGS.HEL_AFFECTION]++;
 	//Bump up follower tracking affection too
@@ -1636,7 +1640,7 @@ private function stuffIzzyAndSalamanderWithDicks():void {
 
 		outputText("Unfortunately, fucking with four cocks at once soon drives you over the edge.  Screaming so loud the ground seems to shake, you unload into them, filling their cunts and asses so full of cum it begins to leak out around your pricks.  Utterly satisfied, you collapse onto your back, panting heavily.", false);
 	}
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", -3);
 	//(Scene End)
 	//Bump up follower tracking affection too
@@ -1695,7 +1699,7 @@ private function izzySallyThreeSomeVagoozlaz():void {
 
 	outputText("\"<i>Yeah.  Resting is... resting is good,</i>\" Hel says, trying and failing to suppress a yawn of her own.  Smiling, you wrap your arms around your two beautiful, busty redheads and let sleep overcome you.", false);
 	//(Either return PC to camp or advance to the next day, if in plains or camp, respectively)
-	player.orgasm();
+	player.orgasmVaginal();
 	dynStats("sen", -3);
 	//Bump up follower tracking affection too
 	isabellaFollowerScene.isabellaAffection(4);
@@ -1777,7 +1781,7 @@ internal function foxyFluffsFoursomeAsMale():void {
 	outputText("The twins cum as one, both letting out a wail of pleasure as their knots expand dramatically for an instant.  Foxcream sprays everywhere, filling Hel and Miko's wombs before spurting back out of their cunts and coating the sisters with their own spunk.  With the sudden knotting inside her, Hel throws her head back and screams, riding out her own orgasm.  You manage a few last, desperate thrusts into Mai's spasming channel before you, too, blow your load, dumping thick, hot ropes of jizz into the fox-girl's waiting womb.\n\n", false);
 
 	outputText("You can only shudder and gasp as pleasure overtakes you.  You bury your face into Mai's neck, biting her as the last of your cum explodes deep inside her.  Mai bucks her hips back at you and squeezes your cock, milking you of every last drop until your shaft is utterly spent.  Moaning, you withdraw from inside her, dragging a waterfall of hot white cum out of her as you do so.", false);
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", -1);
 	doNext(foxyFluffOutro);
 }
@@ -1810,7 +1814,7 @@ internal function foxyFluffGirlsFuckSex():void {
 	outputText("Not wanting to be left behind, you grab Mai and throw her onto the bed, putting you on top with her knot buried all the way inside you.  You grab her soft, firm breasts for support as you start to grind your hips against hers, making the girl moan like a whore as you assault her thick prick.  Mai can only lean over and grab her sister's hand, much as you had taken Hel's.  The twins hold on to each other as you and Hel ride them raw, soon turning the fox-girls into a pair of panting, squirming animals that buck their hips wildly into you, slamming more doggy cock inside you than you ever thought possible.  Grinning at you, Hel slips her tail around your waist, hugging you tightly as the girls come ever closer to orgasm -- and so do you.\n\n", false); 
 
 	outputText("Suddenly, Miko lets out a sharp cry and slams her hips into Hel's.  You can only see the looks on both her face and Hel's as they cum in unison, white fox-spunk dribbling out of the slamander's hot snatch.  \"<i>Gonna... Gonna cum...</i>\" Mai whimpers, giving you only a moment to prepare before she grabs your arms and pulls you down onto her chest, burying your face between her heavy tits.  She jackhammers your now-exposed cunt.  ramming her knot in and out of you until you can't think straight.  You cum, your " + player.vaginaDescript() + " clamping down on her doggy cock.  Waves of explosive pleasure shoot through you, making you spasm in the fox-herm's arms, only barely aware of her shooting her load deep inside you, coating your walls with thick, hot spunk.  You ride out the orgasm buried in Mai's chest, shuddering and gasping as she kisses you over and over, letting her thick knot deflate inside you until her own cum leaks out, staining her smooth thighs and legs.", false);
-	player.orgasm();
+	player.orgasmVaginal();
 	dynStats("sen", -1);
 	doNext(foxyFluffOutro);
 }

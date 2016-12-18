@@ -154,7 +154,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText("In your last conscious moment before you pass out from the hit, you hear the harpy sisters cackling above you.", false);
 			}
 			combat.cleanupAfterCombat();
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("lib", 1);
 		}
 
@@ -280,7 +280,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("After a few hours, when you wake, every muscle in your body is aching as though you've just run a marathon. Looking down at your " + player.legs() + " in a weary haze, you see signs that even after you'd blacked out, your body had continued to be abused by the three lust-crazed harpies.", false);
 			player.changeFatigue(20);
 			combat.cleanupAfterCombat();
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("str", -1, "tou", -1, "lib", 1, "sen", 2);
 		}
 
@@ -357,7 +357,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("Once your flow of seed subsides, you pull free of the fat-reared harpy.  She collapses into an orgasm-wracked pile on the ground, her plump ass and tender thighs waving in the air for whomever comes along after you.  You wipe yourself down and continue on your way, pleased with the brutal fuck and looking forward to your NEXT encounter...", false);
 
 			combat.cleanupAfterCombat();
-			player.orgasm();
+			player.orgasmDick();
 		}
 
 		private function winAndRapeHarpyAnally():void
@@ -414,7 +414,7 @@ package classes.Scenes.Areas.HighMountains
 
 			outputText("Still leaking seed, you pull free of her gaping ass, and dump the worthless bird-slut on the floor in a heap. Passed out and woefully exposed, her lush holes await whatever horny beast or demon will come alone after you.", false);
 			combat.cleanupAfterCombat();
-			player.orgasm();
+			player.orgasmDick();
 		}
 
 
@@ -518,7 +518,7 @@ package classes.Scenes.Areas.HighMountains
 			player.lust = player.maxLust();
 			flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 			combat.cleanupAfterCombat();
-			player.orgasm();
+			player.orgasmLips();
 			dynStats("lib", 1);
 		}
 
@@ -580,7 +580,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nEventually, your body too drained to continue, you stop and release the harpy's cheeks, letting her ass drop back down onto the drenched rock.  You pant heavily, lying back and giving yourself a few minutes to recover before disentangling from her body.  Your strength slowly returns to you and you start to don your armor once more, readying yourself for the trip back to camp.  You're glad you didn't leave your [armor] too close, considering how wet the floor managed to become during your interlude.  It seems as though it'll still get drenched though, considering how your thighs are soaked and your pussy[if (isHerm = true)  and your slightly sore cock] still oozes copiously from the ridiculously energetic session, but apparently it was all too much for the harpy who has now curled up and started snoring gently on the rocky ground.  Her lower body is utterly soaked, the feathers matted together with your shared juices, and her rear still has bright red handprints where you were holding her as you rode out your climax.[if (isHerm = true)   Her tits are also covered with fluid, white jizz starting to drip its way down her body towards the already overwhelming puddle of femspunk on the floor.]  You even catch a glimpse of her pussy between her thick thighs, smirking at how it continues to quiver and leak slightly, still enjoying the aftershocks of her last climax.");
 
 			outputText("\n\nYou smile to yourself as you grab a few gems from the slumbering girl, making a mental note to visit the mountains again sometime.");
-			player.orgasm();
+			player.orgasmVaginal();
 			combat.cleanupAfterCombat();
 		}
 
@@ -643,7 +643,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nFinally relieved of your uncountable eggs, you pull out of your surrogate, ovipositor retracting, and watch as she slowly slides down the boulder face; she comes to rest on her knees, feathered arms wrapping around her swollen midsection.  The harpy looks back at you, her eyelids drooping as her breathing slows, and you lean in to give her a quick kiss on the cheek before you suit up and head back to camp.");
 
 			player.dumpEggs();
-			player.orgasm();
+			player.orgasmOvi();
 			combat.cleanupAfterCombat();
 		}
 
@@ -683,12 +683,12 @@ package classes.Scenes.Areas.HighMountains
 				player.lust = player.maxLust();
 				flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 				combat.cleanupAfterCombat();
-				player.orgasm();
+				player.orgasmVaginal();
 				dynStats("lib", .5, "sen", -1);
 			}
 			else {
 				outputText(" the harpy's eyes close, and she slips into unconsciousness.  You give her round bottom a little pat before you depart, still shivering from the cascades of pleasure it brought you.");
-				player.orgasm();
+				player.orgasmVaginal();
 				dynStats("sen", -1);
 				combat.cleanupAfterCombat();
 			}

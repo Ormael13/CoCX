@@ -283,7 +283,7 @@ public function valeriaGetFucked():void {
 	}
 	outputText("and looms over you.  \"<i>That was fun, partner,</i>\" she says, leaning down to give you a wet peck on the cheek. \"<i>Let's do that again soon, all right?</i>\"");
 
-	player.orgasm();
+	player.orgasmVaginalAnal();
 	dynStats("sen", -1);
 	HPChange(25 + (player.newGamePlusMod() * 15),false);
 	doNext(camp.returnToCampUseOneHour);
@@ -314,7 +314,7 @@ public function gooFlation(clearText:Boolean = true):void {
 		outputText("\n\nYou collapse, goop flowing freely from your abused body.  Laughing, Valeria pours out of your lap, ");
 		if (player.gender > 0) outputText("patting her belly full of your juices, ");
 		outputText("and looms over you.  \"<i>That was fun, partner,</i>\" she says, leaning down to give you a wet peck on the cheek. \"<i>Let's do that again soon, alright?</i>\"");
-		player.orgasm();
+		player.orgasmGeneric();
 		dynStats("sen", 1);
 		HPChange(25 + (player.newGamePlusMod() * 15),false);
 		doNext(camp.returnToCampUseOneHour);
@@ -340,7 +340,7 @@ public function penetrateValeria():void {
 	outputText("\n\nWith a relieved, exhausted sigh, you collapse backwards, popping out of Valeria's body with a wet squelch.  As you lie on your back, panting from the rough sex, you notice Valeria reconstituting her body into her normal human form, a mist of cum rolling happily in her full belly.  She makes a show of rubbing her tummy before coming over and plopping down on top of you, her gropable bum pressing lightly on your gut.");
 	outputText("\n\n\"<i>That was fun, partner,</i>\" she laughs.  \"<i>Tasty, too,</i>\" she adds, reaching into her belly to pull out a strand of your cum.  She slurps it back down, giving you a little wink.");
 	outputText("\n\nYou run your hand along her curves as she digests her meal, but eventually you know you need to get on with your duties.  You roll Valeria off of you and start to redress.");
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", 1);
 	HPChange(25 + (player.newGamePlusMod() * 15), false);
 	feedValeria(Math.sqrt(player.cumQ()) + 5);
@@ -406,7 +406,7 @@ public function valeriaSexDominated(offCamp:Boolean = false):void {
 	}
 	HPChange(25 + (player.newGamePlusMod() * 15), false);
 	feedValeria(Math.sqrt(player.cumQ()) + 5 + (player.averageVaginalWetness() * 5));
-	player.orgasm();
+	player.orgasmGeneric();
 	dynStats("sen", 1);
 	if (offCamp || !getGame().inCombat)
 		doNext(camp.returnToCampUseOneHour);
@@ -660,6 +660,7 @@ private function valeriaGooRapeII():void {
 			player.breastRows[x].breastRating += 3 + rand(3);
 		}
 		outputText(" Your tits have grown much larger, " + player.breastCup(0) + "-cups at least.");
+		player.orgasmTits(false);
 	}
 	if (player.hasCock() && player.balls > 0) {
 		player.ballSize += 3 + rand(2);
@@ -677,7 +678,7 @@ private function valeriaGooRapeII():void {
 	//Prevent pregnancy if has a vagina when it happens.
 	//Be sure to track what holes get filled, as body parts may change before birth!
 	flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED]++;
-	player.orgasm();
+	player.orgasmAnal();
 	//v1 = time till birth.
 	//v2 = cock fill = 1, balls fill = 2
 	//v3 = cunt fill?

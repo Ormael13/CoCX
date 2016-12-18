@@ -435,7 +435,7 @@ private function fuckEdrynTaur():void {
 	else outputText("\n\nShe sighs contentedly and says, \"<i>Mmm, never stop visiting, okay?</i>\"", false);
 	outputText("\n\nThe two of you wipe up as best you can, redress, and head back out to the bar.  You're consciously aware of how strongly your groin reeks of centaur-slut.  Your body, happy with the scent and scrutiny of the bar's patrons, refuses to go soft, providing a wonderful view of your cum-slicked member.  Giggles and laughter break out around you as you leave, though more than a few of those taking notice have hard nipples or tents of their own.", false);
 	if (player.statusEffectv1(StatusEffects.Edryn) >= 4) edrynPregChance();
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", -3);
 	if (player.lust < 30) player.lust = 30;
 	doNext(camp.returnToCampUseOneHour);
@@ -492,7 +492,7 @@ private function fuckEdrynNonTaur():void {
 	else outputText("She sighs contentedly and says, \"<i>Mmm, never stop visiting ok?</i>\"\n\n", false);
 	outputText("The two of you clean up as best you can, redress, and head back out to the bar.  You're consciously aware of how strongly you reek of centaur-slut.  Your body, happy with the scent and the scrutiny of the bar's patrons, refuses to go soft, providing a more-than-ample tent.  Giggles and laughter break out around you as you leave, though more than a few of those taking notice have hard nipples or tents of their own.", false);
 	if (player.statusEffectv1(StatusEffects.Edryn) >= 4) edrynPregChance();
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", -3);
 	if (player.lust < 30) player.lust = 30;
 	doNext(camp.returnToCampUseOneHour);
@@ -645,7 +645,7 @@ private function threesomeEdrynAndHel():void {
 	outputText("When you're satisfied, you stumble and collapse against her horsebody, barely fighting off an intense urge to sleep.  The centauress moans contentedly, \"<i>Mmm, we should do this again sometime. You two were amazing.</i>\"\n\n", false);
 
 	outputText("\"<i>Oh yeah. We... We gotta go again sometime,</i>\" Hel agrees, nearly falling off Edryn's back.  You give each of the girls a long kiss before collecting your " + player.armorName + " and walking off back to camp.\n\n", false);
-	player.orgasm();
+	player.orgasmDick();
 	kGAMECLASS.helFollower.helAffection(5);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -926,7 +926,7 @@ public function fuckPregEdryn():void {
 
 		outputText("After you both get a chance to stagger up to your feet and get dressed, Edryn thanks you, \"<i>That was wonderful dear.  I'll probably be horny and dripping again in a few minutes, so please come back soon.  I think I'm going to be a sopping wet mess until our child is born.</i>\"\n\n", false);
 	}
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", -.5);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -991,7 +991,7 @@ private function jizzFromEatingPregdrynOut():void {
 	outputText("You nod and give her milk-dripping teat a squeeze.  A squirt of the white stuff escapes before Edryn pushes you away.  You chuckle and get dressed while she does the same, but before you can escape her room, she lifts her shirt, squeezes a teat, and catches you in the face with her milk.\n\n", false);
 
 	outputText("\"<i>Turn-about is fair play!</i>\" she exclaims. You leave, unable to dispute the logic.", false);
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("lib", 1, "sen", 2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1163,7 +1163,7 @@ public function eatEdrynPussyLikeABawss():void {
 	//[Next]
 	menu();
 	addButton(0,"Next",postEdrynEatOutRut);
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("lib", .25, "sen", -3);
 }
 

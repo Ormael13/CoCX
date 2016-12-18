@@ -120,6 +120,7 @@ private function plantsForMe():void {
 
 private function plantsForMe2(BE:int = 0):void {
 	clearOutput();
+	var x:int = 0;
 	//Yes
 	if (BE == 1) outputText("Essy grins, nodding.  \"<i>Precisely.  I don't doubt they'll be even more fun given enough exposure here.</i>\"\n\n");
 	 //If No= 
@@ -170,6 +171,7 @@ private function plantsForMe2(BE:int = 0):void {
 		outputText("\n\nYour breasts bounce and quiver wildly as you bounce up and down, held tightly by those tentacles, Essy dining happily down below.  Those opaque coverings ripple and squeeze hard about your breasts, pumping them for ");
 		if (player.lactationQ() >= 400) outputText("your milk and ");
 		outputText("your pleasure.  In time, their pumping increases in force and tempo just as her lips and tongue do.");
+		if (rand(2) == 0) x = 1;
 	}
 	
 	outputText("\n\nAnother tentacle momentarily rubs over her breast, growing slimy with the sap before it moves around behind you and abruptly shoves into your [asshole].  Like a professional, she takes it slow to start, letting you adjust to the unique girth and contours of the tentacle as it plunges in deep.  It smoothly pulls nearly out only to pump in deeply once more.");
@@ -211,12 +213,14 @@ private function plantsForMe2(BE:int = 0):void {
 		player.growTits(7,player.bRows(),false,2);
 		player.boostLactation(player.bRows());
         outputText("\n\nYou sit there for the next hour or two, milking your bloated bosom and giving the flora a generous watering in the process.  When all is taken care of, you stumble back upright with a brief struggle and don your gear once more.  The smell of fresh-cut flowers seems to linger on your [armor] as you depart.");
+		x = 1;
 	}
 	if (player.hasBreasts() && player.isLactating()) {
         player.milked();
         player.boostLactation(0.01);
     }
-	player.orgasm();
+	if (x == 1) player.orgasmTits();
+	else 		player.orgasmGeneric();
 	dynStats("lib", 1);
 	//Slimefeed!
 	player.slimeFeed();
@@ -298,7 +302,7 @@ private function hasCockFeedEssy(newPage:Boolean = true):void {
 	outputText("\n\nIt doesn't take long before the gushing, milky embrace of Essy's flowering breasts coaxes you to paint the green girl's emerald flesh white with your ivory seed.  As you cum, her shuddering udders seem to experience their own release, massive teats bulging between your fingers as they swell with a tremendous, liquid weight.  Then, in a strangely synchronized discharge, surging gouts of milky sap shower out in pressured geysers that rain down around the two of you in a sticky deluge of rich passion.  The floor teems with sprouting undergrowth while the plant girl's shapely ass jiggles with orgasmic delight as the soil she's planted in turns a deep black, instantly enriched by her fertile cream.");
 	
 	outputText("\n\nExhausted anew, Essy reclines in her pot, already dozing with an expression of happy contentment.  Though she's still imprisoned, you've at least set her at ease.  While you might like to move her somewhere more private, the sheer weight of her pot is more than enough to frustrate any attempt you might make.  Best to just leave her and check in later.");
-	player.orgasm();
+	player.orgasmDick();
 	doNext(playerMenu);
 }
 
@@ -318,7 +322,7 @@ private function hasPussyFeedEssy(newPage:Boolean = true):void {
 	outputText("\n\nYour lewd, tit-humping labor swells to a fever pitch as her over-stimulated udder plumps inside you, fattening with her blossoming lust.  The cock-like knob inside you becomes swollen with milk, ballooning longer and thicker until your suckling inner walls strain to bear the girl's bloated nipple.  Feeling the trembling clench of your orgasm building, you tighten your grip and thrust yourself as deeply as you can on the cunny-stuffing mammary.  Her breast, unable to resist your peaking squeeze, gushes with pressurized jets of fertile sap, flooding your pussy with a warmth a bit too fluid to be cum, but still thick enough to send a shiver of fulfillment down your spine.  You watch your tummy grow pudgy, then plump, and finally obese as your womb is flooded with her tingling, fertile milk.  The two of you cry out in orgasmic bliss and, positively swollen with the plant-girl's bounty, you collapsing into her very soaked cleavage, still gripping her lactating nipples.  You lay there, panting softly with her for a time, just soaking in the stimulating thrill of your ponderous belly, giving Essy's tits a tender squeeze now and then just to hear her moo with delight.");
 	
 	outputText("\n\nIt takes you a while, but you extricate yourself and clean off the best you can, leaving her with a friendly kiss on the cheek before you head on your way once more.  With visitors like you, she hardly seems like she'll mind being trapped in the enchanted flower pot.");
-	player.orgasm();
+	player.orgasmVaginal();
 	if (player.fertility < 50) player.fertility++;
 	doNext(playerMenu);
 }

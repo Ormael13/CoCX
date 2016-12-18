@@ -790,7 +790,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\n<i>“As for you,”</i> Mistress adds, tugging your leash as she reclines back in her throne, <i>“I expect you to make me cum even harder. Right now.”</i>");
 			outputText("\n\nYou bark eagerly and lunge up into her lap, burying your face between your loving Mistress’s thighs as the doors slam closed behind you, sealing the Champion of Ingnam’s fate...");
 			dynStats("cor", 70);
-			player.orgasm();
+			player.orgasmGeneric();
 			getGame().gameOver();
 			removeButton(1);
 		}

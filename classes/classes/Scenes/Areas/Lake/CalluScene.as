@@ -179,7 +179,7 @@ package classes.Scenes.Areas.Lake
 			outputText("\n\nFrom the same bag she pulls out a delicious smelling piece of cooked fish, wrapped in a large green leaf.  She hands it to you, saying simply, \"<i>Fish and a fuck, darlin'.  I got mine and you get yours.</i>\"  You nod absently, taking the piece of wrapped fish.  Callu gives your rapidly limpening cock a little pat on the head, before gathering up her things and heading off down the beach, leaving behind a trail of cum and other love juices.");
 
 			outputText("\n\nYou take a minute to recover before doing the same.  ");
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("sen", -1);
 			inventory.takeItem(consumables.FISHFIL, camp.returnToCampUseOneHour);
 		}
@@ -238,7 +238,7 @@ package classes.Scenes.Areas.Lake
 
 			outputText("\n\nYou take several minutes to recover before doing the same.  ");
 
-			player.orgasm();
+			player.orgasmVaginal();
 			dynStats("sen", -1);
 			inventory.takeItem(consumables.FISHFIL, camp.returnToCampUseOneHour);
 		}

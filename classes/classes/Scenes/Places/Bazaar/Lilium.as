@@ -146,7 +146,7 @@ private function buttFuckTongueJeorb():void {
 	
 	outputText("After you both recover, you get up to don your " + player.armorName + ", thanking Lilium and beginning the trip back to camp.  Maybe you'll take a bath too...", false);
 	
-	player.orgasm();
+	player.orgasmLips();
 	dynStats("cor", 1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -200,7 +200,7 @@ private function liliumDickRidah():void {
 
 	outputText("After a moment of recovery time you get up to get dressed before starting your journey back to camp.  \"<i>Don't be a stranger, now,</i>\" calls the voice over your shoulder. A slight smile appears on your face.\n\n", false);
 
-	player.orgasm();
+	player.orgasmVaginal();
 	dynStats("cor", 1);
 	//(imp preg check)
 	player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 61); //Lilium causes faster pregnancies
@@ -261,7 +261,7 @@ private function liliumNippleFuck():void {
 	outputText(" and soaked sock, you brush a wayward strand of hair from her face.  Her eyes make their way up to meet yours and you give her a wink as you both smile lasciviously.\n\n", false);
 
 	outputText("You get dressed again and begin to leave; as you look back over shoulder, Lilium - still seated and leaning against the wall - blows you a kiss.", false);
-	player.orgasm();
+	player.orgasmDick();
 	doNext(camp.returnToCampUseOneHour);
 }
 }

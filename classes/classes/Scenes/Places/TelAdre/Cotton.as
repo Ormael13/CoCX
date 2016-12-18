@@ -448,7 +448,7 @@ private function cottonFirstTimeFuckHer():void {
 
 	outputText("Your 'post-workout stretch' and shower done, the two of you dry off, redress and leave the gym. Cotton takes you by the arm and says, \"<i>That was great, pet. Come by the gym anytime. I'll be waiting.</i>\"  Then, she heads back home.  With a little grin on your face, you do the same.\n\n", false);
 	pregCottonChance();
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -479,7 +479,7 @@ private function cottonFucksYou():void {
 		outputText("The two of you slip down onto the floor, right into your puddle of cum, letting the water rinse you off for the time being. After a minute, Cotton pulls her now flaccid (but still impressive) cock from your rear, which gapes open for several minutes afterward, and proceeds to clean the both of you up.\n\n", false);
 
 		outputText("Your 'post-workout stretch' and shower done, the two of you dry off, redress and leave the gym. Cotton takes you by the arm and says, \"<i>That was great, little pet. Come by the gym anytime. I'll be waiting.</i>\"  Then, she heads back home.  With a little grin on your face, you do the same.\n\n", false);
-		player.orgasm();
+		player.orgasmAnal();
 		dynStats("sen", 2);
 	}
 	//(Get fucked, as Female)
@@ -501,7 +501,7 @@ private function cottonFucksYou():void {
 		outputText("The two of you slip down onto the floor, letting the water rinse you off for the time being. After a minute, Cotton pulls her now flaccid (but still impressive) cock from your folds, which gapes open for several minutes afterward, and proceeds to clean the both of you up.\n\n", false);
 
 		outputText("Your 'post-workout stretch' and shower done, the two of you dry off, redress and leave the gym. Cotton takes you by the arm and says, \"<i>That was great, little pet. Come by the gym anytime. I'll be waiting.</i>\"  Then, she heads back home.  With a little grin on your face, you do the same.", false);
-		player.orgasm();
+		player.orgasmVaginal();
 		dynStats("sen", -1);
 		cottonPregPCChance();
 	}
@@ -524,7 +524,7 @@ private function cottonFucksYou():void {
 		outputText("The two of you slip down onto the floor, letting the water rinse you off for the time being. After a minute, Cotton pulls her now flaccid (but still impressive) cock from your folds, which gapes open for several minutes afterward, and proceeds to clean the both of you up.\n\n", false);
 
 		outputText("Your 'post-workout stretch' and shower done, the two of you dry off, redress and leave the gym. Cotton takes you by the arm and says, \"<i>That was great, little pet. Come by the gym anytime. I'll be waiting.</i>\"  Then, she heads back home.  With a little grin on your face, you do the same.\n\n", false);
-		player.orgasm();
+		player.orgasmVaginal();
 		dynStats("sen", -1);
 		cottonPregPCChance();
 	}
@@ -812,7 +812,7 @@ private function fuckCottonInShowerRepeat():void {
 		outputText("You both bask in the afterglow for a few moments before you stand up to an upright position and help Cotton up. You return to the task of cleaning yourselves, sensually washing each other's private areas. Yoga, sex and cleanup done, you get dressed and leave the gym, giving Cotton's hand a final squeeze before departing.", false);
 	}
 	pregCottonChance();
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -835,7 +835,7 @@ private function cottonFucksYouInShowerRepeat():void {
 		outputText("  You take turns kissing each other's necks and nibbling each other's ears while she thrusts in and out. And after several minutes neither of you can take much more. She gives one last thrust, pulling you down further onto her cock as it explodes within you. Your whole body shudders with orgasmic energy and you bury your head into her neck, stifling a scream.\n\n", false);
 
 		outputText("After a moment, Cotton pulls you up, letting her shrinking member flop to the floor, and sets you down. Only now you notice your flaccid cock also came at some point, covering both your bodies in seed. You share a deep kiss again and wash each other up before redressing and leaving the gym.\n\n", false);
-		player.orgasm();
+		player.orgasmAnal();
 		dynStats("sen", 1);
 	}
 	//(Shower Sex, Get Fucked as Female)
@@ -849,7 +849,7 @@ private function cottonFucksYouInShowerRepeat():void {
 		outputText("At this angle she can't quite get her entire girth into you, but that doesn't matter, as it feels absolutely exquisite. You take turns kissing each other's necks and nibbling each other's ears while she thrusts in and out. And after several minutes neither of you can take much more. She gives one last thrust, pulling you down further onto her cock as it explodes within you. Your whole body shudders with orgasmic energy and you bury your head into her neck, stifling a scream.\n\n", false);
 
 		outputText("After a moment, Cotton pulls you up, letting her shrinking member flop to the floor, and sets you down. You share a deep kiss again and wash each other up before redressing and leaving the gym.", false);
-		player.orgasm();
+		player.orgasmVaginal();
 		dynStats("sen", -1);
 	}*/
 	//(Repeat get fucked, for centaurs)
@@ -982,7 +982,7 @@ private function cottonFucksYouInShowerRepeat():void {
 		outputText("Exhausted, Cotton sets you down on the shower floor under the spray of water, though cum leaks from your abused hole and your " + player.legs() + " quivering so much you nearly collapse. Your partner steadies you, however, and you regain your footing quickly. You return to the task of cleaning yourselves, sensually washing each other's most intimate areas. Yoga, sex and cleanup done, you get dressed and leave the gym, giving Cotton's hand a final squeeze before departing.", false);
 	}
 	if (player.hasVagina()) cottonPregPCChance();
-	player.orgasm();
+	player.orgasmGeneric();
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1081,7 +1081,7 @@ public function cottonTantricSex():void {
 	outputText("Then in a flash, it's gone. The lightning subsided, you both collapse sideways onto the floor, panting. The tantric link is apparently gone, and you suddenly feel very alone. Cotton, seemingly sensing this, pulls out and curls up next to you, cuddling you until the sudden feeling of loss dissipates.\n\n", false);
 
 	outputText("After a few minutes, you feel your strength ebbing back into you and you get up. Cotton does the same, and you both spend the time to clean the mat of the results of your escapades, before retreating to the showers to clean each other up. Once that's over, you both leave the gym hand-in-hand, with Cotton giving your hand a final squeeze before you depart to your camp.", false);
-	player.orgasm();
+	player.orgasmGeneric();
 	dynStats("tou", .25, "spe", .25, "lib", -.25, "sen", -.25);
 	if (player.hasVagina()) cottonPregPCChance();
 	doNext(camp.returnToCampUseOneHour);

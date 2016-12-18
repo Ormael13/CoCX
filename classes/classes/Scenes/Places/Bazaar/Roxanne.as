@@ -303,7 +303,7 @@ private function roxanneGivesABlowjob():void {
 	if (player.cumQ() >= 1500) outputText(" and body", false);
 	outputText(".  \"<i>Jeeze, pent up much?</i>\" she laughs, struggling to stand while giggling at her own supposed cleverness.  Happy with how the contest worked out, you slip " + player.sMultiCockDesc() + " into your " + player.armorName + " and wobble off back to camp.", false);
 	//(-100 lust, -1 int)
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("int", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -349,7 +349,7 @@ private function roxanneCunnilingus():void {
 	
 	outputText("You smirk back, slowly putting your clothes back on.  Roxanne can do little to prevent you from noting the massive, unmistakable cock-outline in her pre-cum-soaked pants.  She gives you a smoky glare filled with lust and aggression, but she won't be getting her prize this time!", false);
 	//(-100 lust, -1 int)
-	player.orgasm();
+	player.orgasmVaginal();
 	dynStats("int", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -402,7 +402,7 @@ private function roxanneRimjob():void {
 	
 	outputText("Completely finished, you can do naught but tremble while Roxanne disentangles her tongue from your rectum, popping from your backside with a noisy slurp.  She immediately falls over and giggles, completely drunk, but she somehow staggers back up to give your ass a smack.  You follow her example and pull yourself to your feet, tired from the anal orgasm but feeling quite relaxed.  Once you've readied yourself, you realize that Roxanne's crew are arranged in a semi-circle around you.  You note a number of demons are on the prowl beyond that protective ring, though they seem to be dispersing now that the act has finished.  You make your way back to check on camp once it looks safe.", false);
 	//(-100 lust, -1 int
-	player.orgasm();
+	player.orgasmAnal();
 	dynStats("int", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -483,7 +483,7 @@ private function roxanneReamsYouNormal():void {
 	outputText("<b>LATER...</b>\n", false);
 	outputText("You wake in the lizan's bed<b> with a nasty hangover</b>, her arm curled around your gurgling belly.  From how sore your rear feels, she kept 'winning' at least two or three more times.  Your head is pounding, your " + player.legs() + " are weak, and you dribble cum with every movement.  It takes some doing to extricate yourself from Roxanne's slumbering form, but you find your equipment and leave, hanging your head in shame under the leering eyes of the caravan-goers.", false);
 	//(-100 lust, -1 int, hangover effect)
-	player.orgasm();
+	player.orgasmAnal();
 	dynStats("int", -1);
 	applyHangover();
 	doNext(camp.returnToCampUseFourHours);
@@ -547,7 +547,7 @@ private function roxanneFucksYourAssOHGODITSHUGE():void {
 	outputText(".", false);
 	outputText("  <b>You'll wake and head back to camp with a massive hangover.</b>", false);
 	//(-100 lust, -1 int, hangover effect)
-	player.orgasm();
+	player.orgasmAnal();
 	dynStats("int", -1);
 	applyHangover();
 	doNext(camp.returnToCampUseFourHours);
@@ -637,7 +637,7 @@ private function bigBootyRoxanneContestLoss():void {
 	outputText("\n\n<b>LATER...</b>\n");
 	outputText("You wake in the lizan's bed, her arm curled around your gurgling belly.  From how sore your rear feels, she probably kept 'winning' at least two or three more times.  Your head is pounding, your " + player.legs() + " are weak, and you dribble cum from your ass with every movement.  It takes some doing to extricate yourself from Roxanne's slumbering form, but you find your equipment and leave, hanging your head in shame under the leering eyes of the caravan-goers.");
 	//(-100 lust, -1 int, hangover effect)
-	player.orgasm();
+	player.orgasmAnal();
 	dynStats("int", -1);
 	applyHangover();
 	doNext(camp.returnToCampUseFourHours);

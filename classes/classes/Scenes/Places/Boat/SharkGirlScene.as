@@ -128,7 +128,7 @@ private function sharkgirlDickFuck():void {
 		outputText("The shark girl cries out in orgasm, her pussy tightening as the feelers wrap around your cock. The pleasure drives you over the edge, and you pump your load of cum into her needy pussy, the feelers milking you for every drop you have. You pull out, satisfied, and as you turn to leave you see the shark girl rubbing cum into her cunt and winking at you.", false);
 	}
 	combat.cleanupAfterCombat();
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", -1);
 	if (player.cor < 33) dynStats("cor", 1);
 }
@@ -165,7 +165,7 @@ private function sharkgirlSixtyNine():void {
 		outputText("Thoroughly satisfied, you leave the shark girl on the ground covered in your fluids and depart for your camp.", false);
 	}
 	combat.cleanupAfterCombat();
-	player.orgasm();
+	player.orgasmLips();
 	dynStats("sen", -1);
 	if (player.cor < 33) dynStats("cor", 1);
 }
@@ -320,7 +320,7 @@ internal function sharkLossRape():void {
 		outputText("The shark girl eventually sighs happily and relaxes her grip on your hair, pulling your head away a few inches. \"<i>Not bad bitch, not bad. Now get on your back.</i>\" You obey your mistress's command and flop onto your back. A sense of joy fills you as she positions her crotch in front of your face and moves her own head between your legs. You quickly resume eating her out, and this time she joins in the feast. It's not too long before the two of you orgasm, spraying girl-cum onto each other's faces.\n\n", false);
 		outputText("The shark girl stands to leave and winks at you before diving back into the water. You eventually pass out from the exertion.", false);
 		//(Corruption +2, Intelligence -4)
-		player.orgasm();
+		player.orgasmVaginal();
 		if (player.cor < 30) dynStats("cor", 1);
 		combat.cleanupAfterCombat();
 		return;
@@ -339,7 +339,7 @@ internal function sharkLossRape():void {
 		outputText("The shark girl has no such qualms and rides you like a mechanical bull, hammering up and down your " + player.cockDescript(0) + " with incredible speed. It certainly feels nice, but the rough nature of the ride also certainly hurts. You'll be walking funny for a while after this, that's for sure.\n\n", false);
 		
 		outputText("Eventually, her vagina clamps down on your cock and she cries out in orgasm. You grunt loudly and cum a few seconds after, pumping your seed into her womb. The shark girl leans over and plants a tiny kiss on your lips. \"<i>Good boy. I'll be sure to see you again</i>\". She gets up again and you watch her re-enter the water before you pass out.", false);
-		player.orgasm();
+		player.orgasmDick();
 		dynStats("sen", 1);
 		if (player.cor < 30) dynStats("cor", 1);
 		combat.cleanupAfterCombat();

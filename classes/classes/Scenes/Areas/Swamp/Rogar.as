@@ -615,7 +615,7 @@ private function loseButtGinity():void {
 		outputText("With exhausted panting the only sound from both Ro'gar and yourself, you take a few moments to catch your breath.  Ro'gar affectionately nuzzles you before letting you get to your feet, holding you until he's sure you can stand easily.  The pair of you share a knowing look and Ro'gar grins at you.  \"<i>You're amazin', " + player.short + ".  You're welcome anytime ya like.</i>\"  He gives you a tender embrace as you collect your things and walk on wobbly legs toward the door, still feeling cum running down your legs" + (player.armorDescript() != "gear" ? " beneath your garments" : "") + ".  The orc sees you off with a wave and a toothy grin.\n\n", false);
 		//<Lust sated, slimefeed>
 	}
-	player.orgasm();
+	player.orgasmAnal();
 	dynStats("sen", 2);
 	player.slimeFeed();
 	doNext(camp.returnToCampUseOneHour);
@@ -689,7 +689,7 @@ private function fuckRogarsButtPussyBoyCuntManMoundSissySlitQueerQuim():void {
 	//((Combine too big, and right size paths))
 	outputText("Ro'gar's cum-coated body lies panting under you.  You slowly soften and lay limp against his olive skin, then pull away and clean yourself off.  Ro'gar stirs slowly, only rising to a seated position" + (player.armorDescript() != "gear" ? " by the time you are dressed" : "") + ".  \"<i>That was really... something.  I don't really know what got inta ya, " + player.short + ", but ya really know how ta surprise a feller.</i>\"  With a sly smirk you intone that he had it coming" + (player.armorDescript() != "gear" ? " and finish putting on your clothes" : "") + ", then walk over to smack Ro'gar's cum-covered ass with your hand.  The giant orc looks stunned a moment before giving a playful grin.  \"<i>Frisky, aren't'cha?</i>\"  He snickers low in his rumbling chest, then gets up to wave you off, but you're already out the door and heading back into the city with a spritely skip added to your step.", false);
 	//<Lust sated>
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -807,7 +807,7 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 			player.removePerk(PerkLib.Feeder);
 		}
 	}
-	player.orgasm();
+	player.orgasmDick();
 	player.slimeFeed();
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -832,7 +832,7 @@ private function frotWithRogar():void {
 	//(( Paths combine here))
 	outputText("The pair of you pant as you lean against the wall.  You manage to pick your head up to smile at the orc and rub Ro'gar's cum-covered chest, smearing your own spooge with your finger; the orc does the same with his cum on your chest.  You dip your cum-coated finger into his mouth as he mirrors the action with you, before falling into a lust-driven make-out session flavored with cum and saliva.  As you break the sloppy kiss, you can feel your slick, cum-covered, flaccid cocks pressing against each other.  With a laugh, you break the embrace.  Pleased grins flash back and forth as you get dressed and ready to leave.  Ro'gar remains nude and waves you off from the doorway, still covered in cum.", false);
 	//lose 100 lust, gain a little back, slimefeed?
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("lus", 20);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -890,7 +890,7 @@ private function kinkyWithDaOrc():void {
 	else if (player.ass.analLooseness < 5) outputText("\"<i>Time fer yer proper breedin', boy!</i>\"  His voice makes his chest rumble as he pants hot breath that caresses your face.  The sound of smacking skin rings in your ears, and you briefly note that your " + player.buttDescript() + " feels red and sore from Ro'gar's hips beating against them before closing your eyes to another pleasurable thrust.  With a harsh snarl his jaw bites down on your shoulder possessively as his swollen sack tightens.  Soon your lower body is flooded with a warmth you've grew to adore.  Ro'gar's seed fills you completely as the musky load coats and stains your hole.  A pressure builds within you, the wet spunk spurting from your rim to drip down your upturned ass cheeks.  Ro'gar's huffs exit through his clenched teeth as he rides out his orgasm, pumping into you a few more times until he's deposited every last drop from his heavy balls.\n\n", false);
 		
 	outputText("With a sigh of exhaustion his jaw unlatches from your shoulder and he lies on the bed next to you.  The pair of you take a moment to catch your breath.  The only sounds you hear are the sounds of labored exhalation until Ro'gar sits up.  With exhausted panting the only sound from both Ro'gar and yourself, you take a few moments to catch your breath.  Ro'gar affectionately nuzzles you before letting you get to your feet, holding you until he's sure you can stand easily.  The pair of you share a knowing look and Ro'gar grins at you.  \"<i>You're amazin', " + player.short + ".  You're welcome anytime ya like.</i>\"  He gives you a tender embrace as you collect your things and walk on wobbly legs toward the door, still feeling cum running down your legs" + (player.armorDescript() != "gear" ? " beneath your garments" : "") + ".  The orc sees you off with a wave and a toothy grin.\n\n", false);
-	player.orgasm();
+	player.orgasmAnal();
 	dynStats("sen", 2);
 	player.slimeFeed();
 	doNext(camp.returnToCampUseOneHour);
@@ -925,7 +925,7 @@ private function sexyOrcPitsAreSexy():void {
 	outputText("\"<i>" + player.short + " you are just... too much...</i>\" Ro'gar is left almost speechless as you drag your tongue up along his fat, green shaft. Without missing a beat you wrap your lips around his needly cockhead, the drooling precum hot against your tongue as you drink his seed right from the tap. Your orc lover lays out on the bed, his legs spread wide, his loins bare to your relentless teasing touches. Soon you head is bobbing along Ro'gar orc cock, a second finger slipping into Ro'gar asshole. You time your mouth movements to the bobbing of your head. The length hilting into your mouth as you deepthroat the orcish manhood, your free hand massages Ro'gar's balls as you force a third finger to thrust in Ro'gar's pucker.\n\n", false);
 	outputText("\"<i>Raaa..</i>\" Ro'gar strains his face, you can tell why as you feel his heavy balls clench. Swiftly you pull your head back and brace yourself as you get your generous tip. Ro'gar roars out in pleasure as his fat dick pumps your mouth full of his hot orc spunk. The thick load gushing out of his cockhead splashing and filling your mouth making it burst from your lips despite your attempts to keep up. You can feel the orc spunk dribble down your chin as you gulp down the creamy seed. You continue to suckle on Ro'gar massive orc dick as it softens, cleaning the thick cum clinging to it until it's flaccid and spent.\n\n", false);
 	outputText("\"<i>Come here you..</i>\" Ro'gar bends forward to tug you into his warm embrace. \"<i>You are too good at that... couldn't last long at all. Y'all put my endurance ta shame " + player.short + ".</i>\" he purrs as you wraps you in his arms. You chuckle and smile as you rest against his warm body, the pair of you laying out over the soft bed sheets. He seems to hold you very tight, almost unwilling to let you go even if you wiggle. You decide to just lay with your orc lover as you rest your eyes. Ro'gar rumbling snore makes you blink open your eyes and snicker. How very like him to get so worked up that he crashes shortly after. His arms holding you close and snuggling with you as if you were his treasured plush toy probably relaxed him until he drifted off... the oils might have helped too. With a yawn you decide to rest yourself, closing your eyes and drifting off surrounded by the warm affection of your orcish lover like a blanket.\n\n", false);
-        player.orgasm();
+        player.orgasmGeneric();
         dynStats("sen", 2);
 	player.slimeFeed();
 	//end
@@ -942,7 +942,7 @@ private function lickSomeMoreOrcButNoPits():void {
 	outputText("\"<i>" + player.short + " you are just... too much...</i>\" Ro'gar is left almost speechless as you drag your tongue up along his fat, green shaft. Without missing a beat you wrap your lips around his needly cockhead, the drooling precum hot against your tongue as you drink his seed right from the tap. Your orc lover lays out on the bed, his legs spread wide, his loins bare to your relentless teasing touches. Soon you head is bobbing along Ro'gar orc cock, a second finger slipping into Ro'gar asshole. You time your mouth movements to the bobbing of your head. The length hilting into your mouth as you deepthroat the orcish manhood, your free hand massages Ro'gar's balls as you force a third finger to thrust in Ro'gar's pucker.\n\n", false);
 	outputText("\"<i>Raaa..</i>\" Ro'gar strains his face, you can tell why as you feel his heavy balls clench. Swiftly you pull your head back and brace yourself as you get your generous tip. Ro'gar roars out in pleasure as his fat dick pumps your mouth full of his hot orc spunk. The thick load gushing out of his cockhead splashing and filling your mouth making it burst from your lips despite your attempts to keep up. You can feel the orc spunk dribble down your chin as you gulp down the creamy seed. You continue to suckle on Ro'gar massive orc dick as it softens, cleaning the thick cum clinging to it until it's flaccid and spent.\n\n", false);
 	outputText("\"<i>Come here you..</i>\" Ro'gar bends forward to tug you into his warm embrace. \"<i>You are too good at that... couldn't last long at all. Y'all put my endurance ta shame " + player.short + ".</i>\" he purrs as you wraps you in his arms. You chuckle and smile as you rest against his warm body, the pair of you laying out over the soft bed sheets. He seems to hold you very tight, almost unwilling to let you go even if you wiggle. You decide to just lay with your orc lover as you rest your eyes. Ro'gar rumbling snore makes you blink open your eyes and snicker. How very like him to get so worked up that he crashes shortly after. His arms holding you close and snuggling with you as if you were his treasured plush toy probably relaxed him until he drifted off... the oils might have helped too. With a yawn you decide to rest yourself, closing your eyes and drifting off surrounded by the warm affection of your orcish lover like a blanket.\n\n", false);
-	player.orgasm();
+	player.orgasmGeneric();
 	dynStats("sen", 2);
 	player.slimeFeed();
 	//end

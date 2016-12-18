@@ -282,7 +282,7 @@ package classes.Scenes.Seasonal {
 			outputText("\n\nThankfully, you're out of that mess and heading for camp. That slut is cold.");
 			//[End of event. Possible expansions include finding her as a difficult combat encounter, or raping her while she sleeps.]
 			flags[kFLAGS.GATS_ANGEL_DISABLED] = 1;
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("cor", 10);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -368,7 +368,7 @@ package classes.Scenes.Seasonal {
 			//IF MASTURBATED: 
 			if (player.lust >= player.maxLust()) {
 				outputText("\n\nYou take the opportunity to do up your [armor] before either of them notices.");
-				player.orgasm();
+				player.orgasmGeneric();
 			}
 			//[Next]
 			menu();

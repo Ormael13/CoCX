@@ -179,7 +179,7 @@ package classes.Items.Consumables
 						game.player.inte = 21 + boost;
 					}
 				}
-				game.player.orgasm();
+				game.player.orgasmVaginal();
 				game.dynStats("int", -1, "lib", 4, "sen", 25);
 				//FULL ON BITCHFACE
 				game.player.modFem(100, 100);

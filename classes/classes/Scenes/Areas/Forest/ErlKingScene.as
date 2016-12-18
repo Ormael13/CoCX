@@ -418,7 +418,7 @@ package classes.Scenes.Areas.Forest
 			inventory.takeItem(consumables.CANINEP, camp.returnToCampUseOneHour);
 			dynStats("sen-", 2, "lib+", 2, "cor+", 1, "lus=", 0);
 			player.changeFatigue(10);
-			player.orgasm();
+			player.orgasmGeneric();
 			player.slimeFeed();
 		}
 
@@ -702,7 +702,7 @@ package classes.Scenes.Areas.Forest
 			//[+10 Fatigue, +1 Toughness / +1 Strength, 100 hp healed]			
 			if (player.tou < player.str) dynStats("toughness+", 1, "fatigue+", 10, "health+", 100, "lust=", 0);
 			else (dynStats("strength+", 1, "fatigue+", 10, "health+", 100, "lust=", 0));
-			player.orgasm();
+			player.orgasmGeneric();
 			player.slimeFeed();
 
 			menu();
@@ -784,7 +784,7 @@ package classes.Scenes.Areas.Forest
 			}
 
 			player.createKeyItem("Golden Antlers", 0, 0, 0, 0);
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("lust=", 0);
 			if (flags[kFLAGS.ERLKING_CANE_OBTAINED] == 0) {
 				inventory.takeItem(weapons.HNTCANE, camp.returnToCampUseOneHour);
@@ -865,7 +865,7 @@ package classes.Scenes.Areas.Forest
 
 			//[Libido + 2]
 			dynStats("lib+", 2, "lus=", 0);
-			player.orgasm();
+			player.orgasmDick();
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);
@@ -891,7 +891,7 @@ package classes.Scenes.Areas.Forest
 
 			//[Sensitivity -2]
 			dynStats("sen-", 2, "lus=", 0);
-			player.orgasm();
+			player.orgasmDick();
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);
@@ -917,7 +917,7 @@ package classes.Scenes.Areas.Forest
 
 			//[Sensitivity -2, Libido +2]
 			dynStats("sen-", 2, "lib+", 2, "lus=", 0);
-			player.orgasm();
+			player.orgasmDick();
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);

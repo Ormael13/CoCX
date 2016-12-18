@@ -345,7 +345,7 @@ private function acceptFellatrixOral():void {
 			outputText("She crosses the room to return to you, resting a hand on your chest.  \"<i>I want my freedom back, and I do not care anymore what I have to destroy to get it.  Help me.</i>\"", false);
 			simpleChoices("Agree", agreeWithDominika, "Ehhh", ehhhhDominika, "Disagree", disagreeDominika, "", null, "", null);
 		}
-		player.orgasm();
+		player.orgasmGeneric();
 		dynStats("lib", -1, "sen", 1);
 		return;
 	}
@@ -563,7 +563,7 @@ private function acceptFellatrixOral():void {
 		}
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00152]++;
 	}
-	player.orgasm();
+	player.orgasmGeneric();
 	dynStats("lib", -1, "sen", 1);
 
 	if (timesFellatrixSucked() >= 4 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00175] == 0) doNext(dominidrama);
@@ -849,7 +849,7 @@ private function dominikaBlowjobs():void {
 
 		outputText("Her hand trails over your belly, down to your crotch. \"<i><b>Again.</b></i>\"\n\n", false);
 	}
-	player.orgasm();
+	player.orgasmGeneric();
 	dynStats("lib", 5, "sen", -15);
 	//[Next]
 	doNext(dominikaBlowjobs2);

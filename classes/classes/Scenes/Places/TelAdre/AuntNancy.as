@@ -447,7 +447,7 @@ private function auntNancyPoonPartIV():void {
 	outputText("<b>Two passionate, sticky hours pass...</b>\n\n", false);
 	
 	//[70 % for Toughness, Strength to increase 2-6 points]
-	player.orgasm();
+	player.orgasmGeneric();
 	dynStats("str", .3,"tou", .3);
 	//[+35 Fatigue]
 	player.changeFatigue(35);

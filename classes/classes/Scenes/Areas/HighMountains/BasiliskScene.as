@@ -128,7 +128,7 @@ package classes.Scenes.Areas.HighMountains
 		
 				outputText("You look beatifically down at him and notice that despite himself the basilisk has got more than a bit turned on by your fairly callous treatment of it; the creature is finding it difficult to kneel properly with his long, purple erection poking against the ground. His tongue flops weakly out of his girl-cum-spattered mouth, evidently too weak to even curl back up, and you grin as you imagine how much it must ache from the workout you gave him. \"<i>That's a good look for you. We really must do this again,</i>\" you say breezily as you loosen his blindfold just a little before taking your leave, shaking the weariness out of your knees as you go. You chance a look back; the creature is staggering in the opposite direction, wiping his face with a claw and trying not to bump his cock into anything, looking very dazed indeed. You grin and make your way back to camp.", false);
 			}
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("lib-", 1);
 			combat.cleanupAfterCombat();
 		}
@@ -203,7 +203,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText(" You continue to fuck the creature as you ejaculate, forcing your jizz deep inside him, glorying in how the spurting lubricant allows you to fuck his hole even better. Eventually, after a series of orgasms which feel like the sky is falling, you finally pull out of the basilisk's used anus with a deeply satisfied sigh. Your cum dribbles out of the creature's gaping butt; the only regret you feel is starting the whole thing in the first place. At least he did learn a lesson not to mess with you.\n\n", false);
 				outputText("You are shaken out of him by an urgent, rasping moan from the basilisk. You sense movement overhead and look up. The lizard has seen in the water's reflection what you can take in with your own eyes; several harpies circling overhead like vultures, waiting patiently for you to leave. The smiles which plaster their faces are possibly the least kindly you have ever seen. From your hunch, you suspect he'll get back up in a minute and scare off the harpies. You get up" + player.clothedOrNakedLower(", dress yourself,") + " and leave. A pitiful frown slowly spreads across your face as behind you, you already feel the footsteps of the basilisk slowly retreating.", false);
 			}
-			player.orgasm();
+			player.orgasmDick();
 			if (corrupt) dynStats("cor", 1);
 			combat.cleanupAfterCombat();
 		}
@@ -268,7 +268,7 @@ package classes.Scenes.Areas.HighMountains
 			else if (scene == 3) basiliskAdvantageGoblin();
 			else basiliskAdvantageMinotaur();
 			//INSERT OPTIONAL OTHER MONSTER FINDINGS!
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("sen", 1);
 			combat.cleanupAfterCombat();
 		}
@@ -316,7 +316,7 @@ package classes.Scenes.Areas.HighMountains
 			}
 			//Eggs fertilised (Ovi Potion/Oviposition only. Eggs take a few days 
 			//longer to be laid than usual): 
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("sen", 1);
 			combat.cleanupAfterCombat();
 		}
@@ -384,7 +384,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText("A sudden shift in the weight of your pregnant belly staggers you, dropping you to your knees. You realize something is about to be birthed, and you shed your " + player.armorName + " before it can be ruined by what's coming. A contraction pushes violently through your midsection, stretching your " + player.vaginaDescript() + " painfully, the lips opening wide as something begins sliding down your passage. A burst of green slime soaks the ground below as the birthing begins in earnest, and the rounded surface of a strangely colored egg peaks between your lips. You push hard and the large egg pops free at last, making you sigh with relief as it drops into the pool of slime.", false);
 				player.cuntChange(20,true,true,false);
 				outputText(" The experience definitely turns you on, and you feel your clit growing free of its hood as another big egg starts working its way down your birth canal, rubbing your sensitive vaginal walls pleasurably. You pant and moan as the contractions stretch you tightly around the next, slowly forcing it out between your nether-lips. The sound of a gasp startles you as it pops free, until you realize it was your own voice responding to the sudden pressure and pleasure. Aroused beyond reasonable measure, you begin to masturbate your clit, stroking it up and down between your slime-lubed thumb and fore-finger. It twitches and pulses with your heartbeats, the incredible sensitivity of it overloading your fragile mind with waves of pleasure. You cum hard, the big eggs each making your cunt gape wide just before popping free. You slump down, nervous and barely conscious from the force of the orgasm.\n\n", false);
-				player.orgasm();
+				player.orgasmVaginal();
 				dynStats("sen", 2);
 			
 				outputText("You slowly drag yourself into a sitting position, mind still simmering with bliss, and take in the clutch that you have laid. They seem taller and more oblong than other eggs you've seen and they are a strange color: a mottled grey-green. Where have you seen that shade of green before...? A memory rises unbidden to you and you put your hand to your mouth. At the same moment as realization takes hold, a thin papercut line appears in the largest of your eggs. You hunch yourself up and watch in wonder as the cracks spread until, with a final, insistent push, a tiny reptilian face pops out of the shell. It blinks albumen from its rheumy eyes and then, with an infant's awkward industriousness, begins to peel and push its way out of its shell. It trails slime as it crawls forward like a salamander, blinking its big, wide eyes uncertainly, attempting to take in the very large world it has found itself in. Behind it a small cacophony of cracking and wet splintering fills the air as your other children begin to tentatively push their way into existence.\n\n", false);
@@ -479,7 +479,7 @@ package classes.Scenes.Areas.HighMountains
 				//(add harpy lipstick effect, add 20 fatigue and lose 100 lust if M/H, or add 100 lust if F/U)
 				player.changeFatigue(20);
 				kGAMECLASS.sophieScene.luststickApplication(20);
-				player.orgasm();
+				player.orgasmDick();
 			}
 			//Female: 
 			else if (player.hasVagina()) {
@@ -540,7 +540,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText("\"<i>That was good for a first effort, stud,</i>\" the goblin's giggling voice reaches your ears. \"<i>But you've got lots more man sauce locked up inside of you, don't you? Yes you do. And you're going to give me it all.</i>\" As the insatiable little green monster picks up the pace, her juices mingling with yours as they trickle onto the ground beneath you, you feel the erotic mental backwash build again, and you go comatose under the overwhelming, uncontrolled rush of sexual sensation...\n\n", false);
 		
 				outputText("Eventually, after what seems like hours of forcible ejaculation, you notice that your dick is no longer trapped in sucking wet. You come out of your daze you find that the goblin has left, leaving your petrified form in a mingled pool of her juices and your own jizz. After another ten or twenty minutes of being forced to lie there and marinate in your own shameful memories, you find with great relief you can begin to move your fingers again. Eventually with some effort you manage to work power into each corner of your body and finally shake free of the basilisk's curse; quickly, you pick yourself up and redress before anything else finds you and woozily begin to make your way back down the mountain. The smell of horny goblin on you is a lingering reminder of what just happened to you.", false);
-				player.orgasm();
+				player.orgasmDick();
 			}
 			//Unsexed: 
 			else if (!player.hasVagina()) {
@@ -567,7 +567,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText("\n\n", false);
 				
 				outputText("Eventually, after another thirty or so minutes of being forced to stand there and savor the cum trickling down your legs, you find with great relief you can begin to move your fingers again. With some effort you manage to work power into each corner of your body and finally shake free of the basilisk's curse; quickly, you shake the aching out of your " + player.legs() + " and re-dress before anything else finds you and woozily begin to make your way back down the mountain, trying to ignore the feeling of ooze dripping out of you.", false);
-				player.orgasm();
+				player.orgasmAnal();
 				player.slimeFeed();
 			}
 			//Female: 
@@ -588,7 +588,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText("After cumming over and over again in tandem with the dominant little slut she eventually takes mercy upon you, leaving you lying in a pool of mingled girl cum, dazed by the hypnotic backwash and the drugs which have left you so hazy and sensitive. After another ten or twenty minutes of being forced to lie there and marinate in your own shameful memories, you find with great relief you can begin to move your fingers again. Eventually with some effort you manage to work power into each corner of your body and finally shake free of the basilisk's curse; quickly, you pick yourself up and redress before anything else finds you and woozily begin to make your way back down the mountain. The smell of horny goblin on you is a lingering reminder of what just happened to you.\n\n", false);
 		
 				//(lose 100 lust, stretch vagina according to d.dildo rules if F, stretch anus according to minotaur and increment addiction if U)
-				player.orgasm();
+				player.orgasmVaginal();
 			}
 		}
 		//Defeated, Taken Advantage of: minotaur
@@ -620,7 +620,7 @@ package classes.Scenes.Areas.HighMountains
 		
 			outputText("Eventually, after another thirty or so minutes of being forced to stand there and savor the cum trickling down your legs, you find with great relief you can begin to move your fingers again. With some effort you manage to work power into each corner of your body and finally shake free of the basilisk's curse; quickly, you shake the aching out of your knees and redress before anything else finds you and woozily begin to make your way back down the mountain, trying to ignore the feeling of ooze dripping out of you.", false);
 			//(lose 100 lust, stretch anus according to minotaur, increment mino addiction)*/
-			player.orgasm();
+			player.orgasmAnal();
 			player.minoCumAddiction(10);
 			player.slimeFeed();
 		}
@@ -671,7 +671,7 @@ package classes.Scenes.Areas.HighMountains
 			if (player.cor >= 50) outputText(" before heading off towards your camp. The harpies will probably free him from your webs... eventually.");
 			else outputText(". You reach up and slice him free from the webbing, carefully placing him on the ground below. The blindfold stays, though. You're kind, not stupid. With your good deed for the day complete, you gather yourself up and head back to camp.");
 			player.dumpEggs();
-			player.orgasm();
+			player.orgasmOvi();
 			combat.cleanupAfterCombat();
 		}
 		
@@ -731,7 +731,7 @@ package classes.Scenes.Areas.HighMountains
 			}
 			outputText("\n\nAs you remove your depleted appendage from the violated basilisk's ass, he falls to the side, no longer able to keep himself upright. Laying like this, you can see the beast's horribly-distended stomach, almost able to make out the outline of each individual egg but for the scales in the way. You nod approvingly and bend down to give to the lizard a quick kiss on the cheek for being such a good sport about the whole thing - though, not being an idiot, you don't untie him. After that, you buzz away contentedly, idly thinking about returning the next time you'll need a receptacle for your eggs.");
 			player.dumpEggs();
-			player.orgasm();
+			player.orgasmOvi();
 			combat.cleanupAfterCombat();
 		}
 	}

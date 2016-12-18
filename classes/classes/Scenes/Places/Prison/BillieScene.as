@@ -223,7 +223,7 @@ package classes.Scenes.Places.Prison
 					outputText("(Placeholder) Mistress Elly seems to accept her offering and walks over to where you and Billie sit locked together at the hips. She then takes a firm grasp on each of your heads, shoves her cock between your mouths, and begins to use your faces to pleasure herself. This sends Billie into a state of ecstasy, and she begins to fuck at your [vagOrAss] like a jackrabbit, quickly pulling you into a similiar state. Before long Mistress Elly begins to squirt between your lips, and as she paints the two of you white Billie erupts within you, dragging you through a series of messy orgasms as well.\n\n");
 				}
 				prisonCaptorBillieHappinessSet(0);
-				player.orgasm();
+				player.orgasmVaginalAnal();
 			}
 			else if (branchChoice == "2")
 			{
@@ -286,16 +286,17 @@ package classes.Scenes.Places.Prison
 			{
 				prisonCaptorBillieHappinessChange(2);
 				outputText("(Placeholder) Choose happy and you go and assist in blowing your [captorTitle], then are instructed to 69 with you on the bottom. Billie teases you by giving you excellent head but preventing you from coming, and fucks your throat savagely while doing so. Once she gets going, [captorTitle] [captorName] takes a turn in your mouth for extra lubrication, then begins to fuck her ass directly above your [face]. [captorTitle] [captorName] comes in her ass several times, and after each time she takes a turn at plowing your throat to clean her cock before it returns to Billie's eager asshole. All the while, cum drips down from Billie's ass, over her tiny balls, and all over your nose, cheeks, and brow. Finally [captorTitle] [captorName] withdraws and tells Billie to make you come, and as you explode she finally does as well, pumping your stomach full of her seed. The muscle spasms from her orgasm force more of [captorTitle] [captorName]'s cum out of her ass, soaking your [hair]. She then turns around and gives you a long passionate kiss, and if you have a dick, feeds you the cum she ingested from your orgasm.\n\n");
+				player.orgasmLips();
 			}
 			else if (branchChoice == "sad")
 			{
 				prisonCaptorBillieHappinessChange(-2);
 				outputText("(Placeholder) Choose sad and you don't go to help with the BJ. Once [captorTitle] [captorName] sees your hesitation, she quickly pins you on your back. Before you know it your hands are bound above your head and fastened to an eyelet in the floor, and your calves are bound to your thighs. Restrained in this way, your legs are naturally raised and spread leaving your crotch and ass exposed. She then instructs Billie to begin fucking your ass. She does so gently at first with a pouty look on her face, until [captorTitle] [captorName] admonishes her for not teaching you your lesson properly. At that she begins pounding you with ferocity, and her face becomes a mask of passion. Assuming you have a cock or a cunt, though, she uses her hands to skillfully arouse you so that you are quickly moaning uncontrollably with every stroke. Once you are lost in pleasure, [captorTitle] [captorName] smothers your [face] with her cunt and instructs you to service her, which you do without complaint. If you have large enough tits, she wraps them around her dick and fucks them while you bury your tongue in her slit. [captorTitle] [captorName] and Billie each come several times, but don't stop using your body until you lose all control and beg repeatedly for release through the folds of her lower lips.\n\n");
 				player.buttChange(24, true, true, false);
+				player.orgasmAnal();
 			}
 			menu();
 			prison.changeObey(1, prison.inPrison);
-			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
 		

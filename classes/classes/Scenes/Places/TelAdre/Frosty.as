@@ -302,7 +302,7 @@ public function frostysHandsAreColdHolyShitWhyDontYouWarmTHoseMitsUp():void
 	frostyPoints(-5);
 	//[Player is back at camp]
 	dynStats("sen", -1);
-	player.orgasm();
+	player.orgasmGeneric();
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -378,7 +378,7 @@ public function useFrostysMouth():void
 	frostyPoints(-15);
 	//[Player is back at camp]
 	dynStats("sen", -1);
-	player.orgasm();
+	player.orgasmGeneric();
 	doNext(camp.returnToCampUseOneHour);
 }
 

@@ -217,7 +217,7 @@ package classes.Scenes.Areas.Lake
 			}
 			//After any zealot rape
 			//Reduce intelligence, set lust to zero, then add some lust based on libido and corruption
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("int", -1, "cor", 2);
 			//Trigger bad end if player's intelligence is less than 10 after being drained.
 			if (player.inte < 10 && rand(2) == 0) {
@@ -291,7 +291,7 @@ package classes.Scenes.Areas.Lake
 				outputText("Your lusts sated for now, you rise up off of him and put your " + player.armorName + " back on.  You decide to leave him lying there, still coughing from the blow to his stomach.  ", false);
 				player.cuntChange(monster.cockArea(0), true);
 			}
-			player.orgasm();
+			player.orgasmGeneric();
 			combat.cleanupAfterCombat();
 		}
 	}

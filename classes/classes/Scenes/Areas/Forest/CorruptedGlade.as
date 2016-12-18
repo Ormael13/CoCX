@@ -105,7 +105,7 @@ package classes.Scenes.Areas.Forest {
 					outputText("As you depart, you note the plants' stalks bulging obscenely, bits of your seed dripping from the flowers' opening.");
 				else outputText("As you depart, you note the plants' stalks bulging out obscenely, looking like overfull balloons.  They're stretched so thin as to be transparent, your cum sloshing about inside them as they attempt to digest their meals.  Steady streams of your jism leak from the flowers' lips, unable to keep it all inside.");
 				//Stat changes!
-				player.orgasm();
+				player.orgasmDick();
 				dynStats("sen", 2);
 				var booster:int = 1;
 				if (player.balls == 0)
@@ -124,7 +124,7 @@ package classes.Scenes.Areas.Forest {
 				
 				outputText("You walk away, your lips and tongue feeling slightly puffy and sensitive, but none the worse for the wear.");
 				player.slimeFeed();
-				player.orgasm();
+				player.orgasmLips();
 				dynStats("sen", 4, "cor", 1);
 			}
 			doNext(camp.returnToCampUseOneHour);
@@ -185,7 +185,7 @@ package classes.Scenes.Areas.Forest {
 
 				outputText("An hour or two later, you wake feeling very sore, but satisfied.  The vine must have popped free at some point and the bulb now rests on your pussy lips.  You go to brush it off and nearly orgasm from touching your nether-lips, still sensitive and parted from the overlarge tentacle they so recently took.  A rush of white goop escapes from between your thighs as you stand, soaking back into the soil immediately.   A quick stretch later, you don your gear and head back to camp with a smile.\n\n");
 				//Normal stat changes
-				player.orgasm();
+				player.orgasmVaginal();
 				dynStats("sen", 5, "cor", 2);
 				//Xforms
 				if (rand(3) == 0 && player.hairColor != "green") { //Change hair to green sometimes

@@ -1927,7 +1927,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\n“<i>Whew. Sorry I wasn’t very good at that, [master],</i>” she says. “<i>I’m sure one of your other servants would do a much better job of it.</i>” You tell her not to be silly - she shows great promise. However there are plenty of things she will need to remember, like the need for a slut to clean a dick she’s been working on after she’s done. The dog girl “oh!”s and quickly bends over your pleasantly aching, semi-turgid [cock biggest] again. After she’s finished the enjoyable task of licking your oozing head clean, you send her on her way.");
 
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("sen-", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1965,7 +1965,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\n“<i>Alright [master], I’ll tr- I will!</i>”");
 
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("sen-", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2122,7 +2122,7 @@ package classes.Scenes.Places.Farm
 				outputText(". There’s an eagerness on display here which you don’t think was there before as she laps at your cock [headplural], and you think she even stifles a disappointed whine when she’s finished. Smiling softly, you get up, dress and send her on her way.");
 			}
 
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("sen-", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2182,7 +2182,7 @@ package classes.Scenes.Places.Farm
 				outputText("\n\n“<i>I, I understand master. The next time will be the best yet!</i>”");
 			}
 
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("sen-", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2327,7 +2327,7 @@ package classes.Scenes.Places.Farm
 			outputText("\n\n“<i>Think I’ve got it,</i>” she whispers, grinning back at you woozily, red throbbing deep in the brown pools of her eyes. You rub her behind the ear and tell her she almost has; there’s one last lesson she has to learn. You grip her tight, hot body for a few moments more and then send her on her unsteady way.");
 			}
 
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("sen-", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2478,7 +2478,7 @@ package classes.Scenes.Places.Farm
 				outputText("\n\n“<i>I...</i>“ she whispers, licking her succulent black lips. “<i>I think I’ve got it now, mistress.</i>” You beam at her proudly, and then silently send your taskmistress slut on her woozy, staggering way with a rub behind the ear and a pat on the tush.");
 			}
 
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("sen-", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2604,7 +2604,7 @@ package classes.Scenes.Places.Farm
 				outputText("\n\n“<i>Thank you, [master].</i>” your task-slut whispers, licking her succulent black lips as she stares adoringly into your eyes. You give her a fond rub behind a floppy ear and then send her away with a pat on her tight ass, avoiding the considerable damp patch on her skirt as you do.");
 			}
 
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("sen-", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2640,7 +2640,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\nYou tell her not to be silly - she shows great promise. However there are plenty of things she will have to remember, like the need for a slut to clean a pussy she’s been working on after she’s done. The dog girl “oh!”s and quickly bends over your pleasantly aching, puffy sex again. After she’s finished the enjoyable task of licking your dampened crotch clean, you send her on her way.");
 
-			player.orgasm();
+			player.orgasmVaginal();
 			dynStats("sen-", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2670,7 +2670,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\n“<i>Alright mistress, I’ll tr... I will!</i>”");
 
-			player.orgasm();
+			player.orgasmVaginal();
 			dynStats("sen-", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2737,7 +2737,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\nYou rub behind her floppy ear and tell her she’s getting better, but - and you say this pointedly - she’s still quite forgetful. You watch her closely as she mumbles an apology and then sets about cleaning you, sending her tongue slicking deliciously around your sopping vagina and the soft undersides of your [hips], licking up every trace of your musk and sweat that she finds. There’s an eagerness on display here which you don’t think was there before as she laps at your gently aching clit, and you think she even stifles a disappointed whine when she’s finished. Smiling softly, you get up and send her on her way.");
 
-			player.orgasm();
+			player.orgasmVaginal();
 			dynStats("sen-", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2775,7 +2775,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\n“<i>I, I understand mistress. The next time will be the best yet!</i>”");
 
-			player.orgasm();
+			player.orgasmVaginal();
 			dynStats("sen-", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2826,7 +2826,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\nYou rub her behind the ear and tell her she almost has; there’s one last lesson she has to learn. You grip her tight, hot body for a few moments more and then send her on her unsteady way.");
 
-			player.orgasm();
+			player.orgasmVaginal();
 			dynStats("sen-", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2895,7 +2895,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\nYou beam at her proudly, and then silently send your taskmistress slut on her woozy, staggering way with a rub behind the ear and a pat on the tush.");
 
-			player.orgasm();
+			player.orgasmVaginal();
 			dynStats("sen-", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2955,7 +2955,7 @@ package classes.Scenes.Places.Farm
 			outputText("\n\n“<i>Thank you, milady.</i>” your task-slut whispers, licking her succulent black lips as she stares adoringly into your eyes. You give her a fond rub behind a floppy ear and then send her away with a pat on her tight ass, avoiding the considerable damp patch on her skirt.");
 
 			// (Vaginal and Anal Wetness set to max for a day
-			player.orgasm();
+			player.orgasmVaginal();
 			dynStats("sen-", 1);
 			if (player.wetness() < 5 && rand(4) == 0) player.vaginas[0].vaginalWetness++;
 			doNext(camp.returnToCampUseOneHour);
@@ -3129,7 +3129,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\n“<i>I hope you feel suitably relaxed, [master],</i>” she says. “<i>Ready to take on the world and bring it to your heel? Me an’ this room will always be here when you need to get in touch with your true self.</i>”");
 
-			player.orgasm();
+			player.orgasmGeneric();
 
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -3255,7 +3255,7 @@ package classes.Scenes.Places.Farm
 
 			outputText("\n\n“<i>I hope you feel suitably relaxed, [master],</i>” she says. “<i>Ready to take on the world and bring it to your heel? Me an’ this room will always be here when you need to get in touch with your true self.</i>”");
 
-			player.orgasm();
+			player.orgasmVaginalAnal();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -3388,7 +3388,7 @@ package classes.Scenes.Places.Farm
 
 				outputText("\n\n“<i>I hope you feel suitably relaxed, [master],” she says. “<i>Ready to take on the world and bring it to your heel? Me an’ this room will always be here when you need to get in touch with your true self.</i>”");
 				
-				player.orgasm();
+				player.orgasmDick();
 			}
 
 			doNext(camp.returnToCampUseOneHour);
@@ -6538,7 +6538,7 @@ package classes.Scenes.Places.Farm
 
 			// [Whether happy ending taken or not PC gets +10% exp and +10% crit chance for 24 hours after massage]
 			flags[kFLAGS.MASSAGE_HAPPY_ENDINGS]++;
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("sen-", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}

@@ -140,7 +140,7 @@ package classes.Scenes.Areas.Mountain
 		public function infestOrgasm():void {
 			spriteSelect(76);
 			outputText("The ceaseless squirming of your uninvited guests send your body into paroxysms. Collapsing to your knees, you immediately begin pushing gouts of dick milk out of your body. You feel tremendous pressure in your pelvis and in your cock as you realize that you are pushing worms out with each torrent of cum! Stream upon stream of cum breaks free from the prison of your body, carrying some of the worms inside you with it. Once the orgasm passes, you collapse to the ground, totally spent. Before you pass out, you feel the unfortunate presence of the fat worm still in your body.", true);
-			player.orgasm();
+			player.orgasmGeneric();
 			//Check infestation and update it
 			if (player.findStatusEffect(StatusEffects.Infested) >= 0) {
 				//Increment infestation number

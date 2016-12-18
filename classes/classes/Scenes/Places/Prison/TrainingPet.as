@@ -981,7 +981,7 @@ package classes.Scenes.Places.Prison
 		{
 			var behaviorCounter:int = undefined;
 			outputText("(Placeholder) (Training Crate Masturbate) Overwhelmed with desire, you sheepishly masturbate, staining your bedding with your fluids.\n\n");
-			player.orgasm();
+			player.orgasmGeneric();
 			behaviorCounter = player.statusEffectv3(StatusEffects.PrisonCaptorEllyStatus) - 2;
 			outputText("(Placeholder) new behavior value is " + behaviorCounter + "\n\n");
 			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3,behaviorCounter);
@@ -1103,7 +1103,7 @@ package classes.Scenes.Places.Prison
 					behaviorCounter = player.statusEffectv3(StatusEffects.PrisonCaptorEllyStatus) + 1;
 					outputText("(Placeholder) new behavior value is " + behaviorCounter + "\n\n");
 					player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3,behaviorCounter);
-					player.orgasm();
+					player.orgasmGeneric();
 					corChange = -0.25;
 					dynStats("cor", corChange);
 				}
@@ -1476,7 +1476,7 @@ package classes.Scenes.Places.Prison
 				prison.changeWill(10);
 				player.refillHunger(40);
 				prisonCaptorPetScoreChange(2);
-				player.orgasm();
+				player.orgasmLips();
 				prisonCaptorPetTierUpdate();
 				shortName = consumables.C_BREAD;
 			}

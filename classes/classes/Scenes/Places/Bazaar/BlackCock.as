@@ -424,7 +424,7 @@ package classes.Scenes.Places.Bazaar
 				outputText("\n\nThe two of your circle each other, wordlessly worshiping the other's cunnilingal skills while admiring the other's form. She jokes about you growing a dick for her and you return with a quip that makes her giggle.");
 			}
 			outputText("\n\nChuckling to yourself you aim yourself at Anita's heels. After you retrieve your [armor] from the ground and pull it on you begin to walk away. Anita whistles to get your attention; as you wave with a grin, and she yells, \"<i>Now ya'll cum back now ya hear?</i>\" You can't help smiling at her. Still feeling good about the flight you decide to take the scenic route to camp. With a few flaps of your [wings] you take to the sky again, enjoying this beautiful gift of flight that you've been given.");
-			player.orgasm();
+			player.orgasmGeneric();
 			flags[kFLAGS.BLACK_COCK_ANITA_SEX_COUNTER]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -482,7 +482,7 @@ package classes.Scenes.Places.Bazaar
 					outputText("\n\nAfter a few seconds of blissful rest you begin the process of disengaging your coils from the dozing harpy lady. [if (cumExtreme) \"<i>As you do, you notice a large amount of your own jism leaking from her slightly distended snatch, her pussy unable to soak it up. Looking down you see a huge puddle of mixed cum around the two of you, most of it yours.</i>\"] Once you've managed to release her the married woman stands on visibly wobbly legs and leaves you after saying, \"<i>You cum back here anytime, darlin'…</i>\" and with a smile you slither back to camp.");
 				//}
 			}
-			player.orgasm();
+			player.orgasmDick();
 			flags[kFLAGS.BLACK_COCK_ANITA_SEX_COUNTER]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -533,7 +533,7 @@ package classes.Scenes.Places.Bazaar
 				outputText("\n\n\"<i>Darlin', you are a gem,</i>\" Anita says, breasts rising and falling as she heaves. You smile at the complement. Without words the two of you kiss and you push her own sweet release into her mouth.</i>\"");
 			}
 			outputText("\n\nYours and Anita's breaths come out in ragged huffs as you both come down from your respective oral-induced highs. After a few seconds your breaths have quieted and the two of you rise, smiling at each other. In the midst of that post-orgasmic glow the two of you chat a little before pulling your respective outfits back on and departing each other's company with a final quick peck on the lips.");
-			player.orgasm();
+			player.orgasmLips();
 			flags[kFLAGS.BLACK_COCK_ANITA_SEX_COUNTER]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -710,7 +710,7 @@ package classes.Scenes.Places.Bazaar
 				}
 			}
 			outputText("\n\nAndy helps you to your feet, and gives you a quick embrace, \"<i>Gotta get back to work.</i>\" He says before grabbing his shirt and leaving you to redress.");
-			player.orgasm();
+			player.orgasmGeneric();
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -801,7 +801,7 @@ package classes.Scenes.Places.Bazaar
 			if (player.cumQ() >= 1000 && player.cumQ() < 2500) outputText("\n\nWith his lips corked by your spasming [cock] the satyr's trim muscular stomach swells until he looks pregnant.");
 			else if (player.cumQ() >= 2500) outputText("\n\nWith his lips corked by your spasming [cock] the satyr's belly floods with your baby batter, expanding his stomach until he looks like he's about to give birth to a litter of your babies.");
 			outputText("\n\nFeeling spent you give the satyr a pat on the head and stand. He sits there licking his lips and rubbing his face. [if (cock > 12) \"He makes a show of rubbing his throat and belly as well.\"] You tell him you're leaving and he tells you, \"<i>Until next time.</i>\" his breath reeking of your jizz as you leave him to nurse his belly full of cum.");
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("sens", -1);
 			flags[kFLAGS.BLACK_COCK_ANDY_ORAL_GIVEN]++;
 			doNext(camp.returnToCampUseOneHour);
@@ -821,7 +821,7 @@ package classes.Scenes.Places.Bazaar
 				outputText("\n\nThe heated caress of his lips pulling at your [vagina] as he sucks at your [clit] sends a hoarse call trembling up into the air. Wet lips tug and nibble at the sensitive love button with the fevered need of a desperate man. Soft hands rub your [ass] as you grind your [pussy] back against those lips. He hums and you find yourself screaming as you push back with greater need. You convulse as his tongue begins tracing the tender contours of your feminine opening.");
 			}
 			outputText("\n\n\"<i>So good.</i>\" he says as he begins slurping your [pussy], \"<i>You taste like heaven, I love it.</i>\" He rubs his face into you, bathing his chin hairs in your wet opening before his tongue laps at you again and again before stretching lips suck the juices from your cunt like some natural cup full of his favorite beverage.");
-			player.orgasm();
+			player.orgasmVaginal();
 			flags[kFLAGS.BLACK_COCK_ANDY_ORAL_GIVEN]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -852,7 +852,7 @@ package classes.Scenes.Places.Bazaar
 			outputText("\n\n\"<i>So how was it?</i>\" Andy asks, a smile on his face.");
 			outputText("\n\nYou hold up a finger, asking for a moment as you wait for your body to calm down. Once you're relaxed enough to answer you tell him how much you liked having his big wet tongue inside your [ass].");
 			outputText("\n\nHe smiles big, \"<i>Good, we should do this again.</i>\" With that the two of you say your goodbyes and you leave The Black Cock.");
-			player.orgasm();
+			player.orgasmAnal();
 			dynStats("sens", 1);
 			flags[kFLAGS.BLACK_COCK_ANDY_ORAL_GIVEN]++;
 			doNext(camp.returnToCampUseOneHour);
@@ -965,7 +965,7 @@ package classes.Scenes.Places.Bazaar
 					outputText("Andy Mathis looks up at you with a lazy smile as he holds his hand up, asking for a high five. With a chuckle and a shake of your head you give it to him before tugging your [cock], out of his cum greased backside. Feeling a little tired and sweaty you look down at your cum covered and lightly dozing fuck buddy, watching his chest rise and fall before you gather your [armor] and exit the building out the back door, headed back for camp now that you’ve had your fill.");
 				}
 			}
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("sens", -1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1089,7 +1089,7 @@ package classes.Scenes.Places.Bazaar
 			if (player.hasVagina()) player.knockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR, 50); //2x chance of pregnancy
 			else player.buttKnockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR, 50);
 			player.slimeFeed();
-			player.orgasm();
+			player.orgasmVaginalAnal();
 			dynStats("sens", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1207,7 +1207,7 @@ package classes.Scenes.Places.Bazaar
 			}
 			outputText("\n\nAs he helps you clean up he tells you how much he likes your ass. After chatting for a little bit he tells you he has to get back to work. As you walk out the tent flap all eyes are on you. After a few moments one of the satyrs sticks his fingers to his lips and gives a high pitched wolf whistle. Some of the tables with people in them erupt in stomping and clapping. Harry's harpy wife catches your eye and gives you a conspiratorial wink, rubbing her pussy through her tight little cut off pants as she watches you leave.");
 			flags[kFLAGS.BLACK_COCK_HARRY_SEX_COUNTER]++;
-			player.orgasm();
+			player.orgasmAnal();
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1384,7 +1384,7 @@ package classes.Scenes.Places.Bazaar
 				}
 				outputText("\n\nFinally exhausted, you slump on one of the satyrs, embracing his warm body. The rest of the satyrs are finally spent as well. When you've finally recovered from the ordeal, you get yourself cleaned up" + player.clothedOrNaked(", redress yourself") + " and return to your camp.");
 			}
-			player.orgasm();
+			player.orgasmVaginalAnal();
 			player.changeFatigue(25);
 			dynStats("lib", 1, "sens", 2, "cor", 1);
 			if (player.hasVagina()) player.knockUp(PregnancyStore.PREGNANCY_SATYR, PregnancyStore.INCUBATION_SATYR);
@@ -1453,7 +1453,7 @@ package classes.Scenes.Places.Bazaar
 				outputText("Without warning your body begins to tremble as just below [eachCock] you feel a warm trickling sensation of fluid sliding down your body. Before you can check it, the sensation becomes ovewhelming as [eachCock] grows hard and ejaculates " + player.clothedOrNaked("into your [armor]", "all over the ground") + ". Once you've recovered from your intense orgasm you " + player.clothedOrNakedLower("remove your [armor] to ") + "clean yourself and find a <b>new pair of balls</b> hanging just below [eachCock].");
 				player.balls = 2;
 				player.ballSize = 1;
-				player.orgasm();
+				player.orgasmGeneric();
 				changes++;
 			}
 			//Transformations

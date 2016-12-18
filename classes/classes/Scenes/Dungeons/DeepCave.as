@@ -361,7 +361,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\n", false);
 			
 			outputText("Satisfied, you redress and prepare to continue with your exploration of the cave.", false);
-			player.orgasm();
+			player.orgasmDick();
 			combat.cleanupAfterCombat();
 		}
 		public function impGangGetsRapedByFemale():void {
@@ -383,7 +383,7 @@ package classes.Scenes.Dungeons
 			
 			outputText("Sated for now, you rise up, your body dripping gooey whiteness.  Though in retrospect it isn't nearly as much as was pumped into your womb.", false);
 			if (player.pregnancyIncubation == 0) outputText("  You'll probably get pregnant.", false);
-			player.orgasm();
+			player.orgasmVaginal();
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 50);
 			combat.cleanupAfterCombat();
 		}
@@ -491,7 +491,7 @@ package classes.Scenes.Dungeons
 			outputText("The desire to protect your village drips out between your legs, and thoughts of your independence are fucked away into nothing.  It feels good to cum, and your eyes cross when you see the bulge at your master's crotch, indicative of how well you're pleasing him.  It feels so good to obey!  Zetaz suddenly kisses you, and you enthusiastically respond in between orgasms.\n\n", false);
 			
 			outputText("You gladly live out the rest of your life, fucking and birthing imps over and over as their live-in broodmother.", false);
-			player.orgasm();
+			player.orgasmVaginal();
 			player.HP += 100;
 			//GAME OVER NERD
 			getGame().gameOver();
@@ -733,7 +733,7 @@ package classes.Scenes.Dungeons
 			outputText("Zetaz grunts and bottoms out, punching his tip into your cervix and blasting a thick rope of seed into your empty, ready womb.  You climax immediately from the act, and moan into the dog-cock that fills your mouth, using it like a ballgag.  There wasn't any natural buildup, just spunk hitting your womb and then a climax strong enough to make you see white.  Your " + player.vaginaDescript(0) + " clenches tightly, hugging and squeezing Zetaz's potent prick as it dumps more and more of his corrupt demon-spoo into your fertile breeding grounds.  The thick goop tingles in a way that makes you sure you'll be giving him a litter of horny little sons before long.  Maybe they'll fuck you like they do Vala?\n\n", false);
 			
 			outputText("The knot in your mouth pops out, and your belly gurgles, feeling very full.  The second imp must have come while his master was fertilizing your pussy.  You sigh and sag against your restraints as Zetaz steps away and lines begin to form.  In a few seconds, you've got a rubbery, spined cat-cock twitching inside your cunt, and are wrapping your sensitive lips around a horse-cock.  This must be what nirvana feels like.", false);
-			player.orgasm();
+			player.orgasmVaginal();
 			dynStats("cor", 50);
 			
 			//[Epilogue]
@@ -819,7 +819,7 @@ package classes.Scenes.Dungeons
 			outputText("Glancing down at him, you remark that the little bastard is quite handsome for an imp.  With his perfect jawline and marvelous cock, you find yourself hard-pressed to justify resisting him so long ago.    How did you resist his charms?  His cock feels soooo fucking good inside you.  With an explosive burst, " + player.sMultiCockDesc() + " erupts again, squirting thick arousal and submission into the milker while your " + player.vaginaDescript(0) + " wrings Zetaz's nodule-ringed cock incessantly.  His turgid member bulges obscenely, and he starts to cum inside you, squirting master's thick seed into your breeding hole.  Breeding hole?  Why would you call your slutty fuck-hole a breeding hole?  Something seems off about that last thought, but you can't place it.\n\n", false);
 			
 			outputText("Your master finishes squirting inside you and withdraws, pawing at your milk-leaking teats for a moment as you continue to shudder and cum like a good bitch.  Wow, you really are a good bitch aren't you?  Pride wells in your breast as the imp's chanting reaches a crescendo and a relaxed smile forms on your " + player.face() + ".  Yes, you're a good, breeding bitch.   Master is smiling up at you and you know you've made him feel very happy.  Hopefully he'll come back soon and fuck you some more.  Your pussy feels so empty without him.", false);
-			player.orgasm();
+			player.orgasmVaginal();
 			dynStats("cor", 50);
 			doNext(zetazBadEndEpilogue);
 		}
@@ -943,7 +943,7 @@ package classes.Scenes.Dungeons
 				outputText("Over the next minute your head clears and your strength returns.  You push yourself up on something hard, then glance down and realize you washed up next to the skeleton!  The bleached bone leers up at you knowingly, and everything you can see is covered in a thick layer of your spooge.  " + player.SMultiCockDesc() + " is still dripping more spunk.  Clearly your ruined orgasm didn't pump it ALL out.  You look down at the rapier and pick it up out of your mess, examining it.  The blade shines keenly, and the sword is balanced to perfection.  Though you succumbed to the same fate as its owner, your warped body saved you from sharing his fate.  Thankfully potential pods that carpet the floor don't even twitch at you.  Perhaps your orgasm was enough to sate them all?  Or maybe they've learned their lesson.", false);
 				//(switch from loss to victory, sword loot)
 				monster.lust = 100;
-				player.orgasm();
+				player.orgasmDick();
 			}
 			//[OPTIONAL MILK ESCAPE]
 			else if (player.lactationQ() > 3500 || (player.lactationQ() + player.cumQ() > 4500)) {
@@ -952,7 +952,7 @@ package classes.Scenes.Dungeons
 				outputText("Over the next minute your head clears and your strength returns.  You push yourself up on something hard, then glance down and realize you washed up next to the skeleton!  The bleached bone leers up at you knowingly, and everything you can see is covered in a thick layer of slime and milk.  Your " + player.breastDescript(0) + " are still pouring out milk.  Clearly you weren't even close to done with your pleasure-induced lactation.  You look down at the rapier and pick it up out of your mess, examining it.  The blade shines keenly, and the sword is balanced to perfection.  Though you succumbed to the same fate as its owner, your warped body saved you from sharing his fate.  Thankfully potential pods that carpet the floor don't even twitch at you.  Perhaps your milk was enough to sate them all?  Or maybe they've learned their lesson.", false);
 				//(switch from loss to victory, sword loot)
 				monster.lust = 100;
-				player.orgasm();
+				player.orgasmTits();
 			}
 			//(GENDERLESS)
 			else if (player.gender == 0) {
@@ -963,7 +963,7 @@ package classes.Scenes.Dungeons
 				outputText("You walk over to the skeleton and get a good look at it.  The bleached bone leers up at you knowingly, and its jaw is locked in a rictus grin.  Looking down at the rapier, you decide to pick it up out of your mess and examine it.  The blade shines keenly, and the sword is balanced to perfection.  Though you succumbed to the same fate as its owner, your genderless body must have saved you from sharing his fate.  The potential pods that carpet the floor don't even twitch at you, and you breathe a silent prayer of thanks while a dark part of you curses.", false);
 				monster.lust = 100;
 				monster.XP = 1;
-				player.orgasm();
+				player.orgasmAnal();
 			}
 			//Done if escaped
 			if (monster.lust == 100) {
@@ -1024,7 +1024,7 @@ package classes.Scenes.Dungeons
 				
 				outputText("After a few months the champion started to become acclimated to her new life, and began birthing imps in larger broods with shorter gestations.  She had become the ideal broodmother, and her worldview shrank down to two powerful priorities: acquiring cum, and birthing.", false);
 			}
-			player.orgasm();
+			player.orgasmGeneric();
 			player.HP += 150;
 			getGame().gameOver();
 		}

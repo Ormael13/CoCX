@@ -600,7 +600,7 @@ private function bazaarSex():void {
 		outputText("\n\nAfter several minutes of tit-fucking your brainless beer-girl, you feel an orgasm welling up inside your [balls].  You pick up the pace, hammering your hips into her tits as hard as you can until she cries out, fizz leaking down her chin, and soon mixing with the first thick streams of your ejaculate. You roar and cum, giving the bimbo a creamy pearl necklace as it jets out from between her thick tits.");
 		outputText("\n\nGiggling drunkenly, the girl slurps up the little extras that stain her chin and cheeks, her long cat-tongue flicking bits of spooge around mindlessly as you wind down, now just dribbling a little lake between her breasts.");
 		outputText("\n\n\"<i>Thash was - HIC - shuper shexy, [name],</i>\" the drunken keg-girl giggles, staggering to her feet and stumbling toward the Bazaar.  \"<i>Like, we shud do thish again shoon!</i>\" she adds, prancing out with her new pearl necklace on full display.");
-		player.orgasm();
+		player.orgasmDick();
 		dynStats("int", -.5, "sen", -2);
 	}
 	else if (flags[kFLAGS.NIAMH_STATUS] == 1)	// Succubi Milk
@@ -905,7 +905,7 @@ private function barBeerOrgyTits():void {
 		}
 		player.growTits(2, player.bRows(), false, 2);
 	}
-	player.orgasm();
+	player.orgasmTits();
 	doNext(camp.returnToCampUseOneHour);
 }
 

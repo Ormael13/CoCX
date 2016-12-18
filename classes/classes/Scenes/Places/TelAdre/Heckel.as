@@ -167,7 +167,7 @@ private function heckelOrallyFixated():void {
 		outputText("Heckel pulls herself slowly from your throat, her dick finally coming free with a loud POP.  You moan as its girth leaves you, your throat feeling strangely empty without it. A strand of semen drips from her tip as she stands above you, but you greedily move your head to catch it and swallow the salty treat down. Heckel snickers at this before falling down on the bench, looking you over appreciatively.\n\n", false);
 	
 		outputText("\"<i>By Marae, " + player.short + ", you've got quite the mouth. I'm impressed, and that doesn't happen often.</i>\" She brings a paw to her chin as if thinking, before finally reaching it out and ruffling your hair. \"<i>You know, you aren't half bad to be around, and not just for the sex. Don't be a stranger around here, alright?</i>\" With that she stands and heads back into the showers, giving you time to clean up and head back to camp.", false);
-		player.orgasm();
+		player.orgasmLips();
 		dynStats("sen", 4);
 		doNext(camp.returnToCampUseOneHour);
 	}
@@ -280,7 +280,7 @@ private function heckelLovesAnal2():void {
 	outputText("You lay on the bench for a few moments as Heckel ruffles your hair again. \"<i>Not bad, partner. You're the best fuck I've had in years, you know that? Not to mention the best workout!</i>\"\n\n", false);
 	
 	outputText("She laughs as she stands and heads for the shower, letting you clean yourself up and head back to camp.", false);
-	player.orgasm();
+	player.orgasmAnal();
 	dynStats("sen", 4);
 	doNext(camp.returnToCampUseFourHours);
 }
@@ -399,7 +399,7 @@ private function dominateHeckelConclusion():void {
 		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) outputText(", then give Lottie a high five");
 		outputText(".  You really love bacon.");
 	}
-	player.orgasm();
+	player.orgasmGeneric();
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }

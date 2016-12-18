@@ -541,7 +541,7 @@ private function malesHelpOutWithEaster():void {
 	outputText("  It's about all you can do to get to the floor before passing out.  So much for helping.  In the back of your mind you picture the minotaur with a smug grin as your consciousness fades.");
 	outputText("\n\n<b>Later...</b>");
 	outputText("\nYou stumble back to camp, still somewhat out of it from your experience.");
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("lib", 1);
 	player.cumMultiplier += 2;
 	doNext(camp.returnToCampUseOneHour);

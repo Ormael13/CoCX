@@ -660,7 +660,7 @@ package classes.Scenes.Explore {
 					//[Mechanics: Corruption increase same as male counterpart. No hit point recover for that night. When fatigue model is implemented, no fatigue recovery and add 25 points]
 			}
 			player.changeFatigue(20);
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("lib", .5);
 			doNext(ceruleanSuccubusEncounterPart4);
 		}
@@ -739,7 +739,7 @@ package classes.Scenes.Explore {
 				doNext(playerMenu);
 				return;
 			}
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("cor", 2);
 			if (player.gender == 1) {
 				if (player.cor < 66) {
@@ -818,7 +818,7 @@ package classes.Scenes.Explore {
 				}
 			}
 			outputText("\n", false);
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("str", rand(2),"tou", rand(2), "spe", rand(2), "int", rand(2), "cor", 1);
 			inventory.takeItem(consumables.CERUL_P, playerMenu);
 		}

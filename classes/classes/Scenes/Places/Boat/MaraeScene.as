@@ -296,7 +296,7 @@ private function maraeStealLethicite( deliberate:Boolean = false ):void {
 	//(FAIL)
 	else {
 		player.slimeFeed();
-		player.orgasm();
+		player.orgasmGeneric();
 		if(!deliberate)outputText("You dart to the side, diving into a roll that brings you up behind the tree.  You try to slip by the gauntlet of grabbing tentacles, but fail, getting tripped and ensnared in them like a fly in a spider's web.  You are pulled up and lifted to the other side of the tree, where you are slammed against it.  The tentacles pull your arms and legs wide, exposing you totally and locking you into a spread-eagle position.  You cringe as Marae strides around, free from the confines of her tree.\n\n", false);
 		else outputText("A mischievous idea reaches you, and you decide to play a prank on the corrupted goddess. You dart to the side, diving into a roll that bring you up behind the tree, aiming for her lethicite. You try to make your robbery attempt look real, and succeed; perhaps too well. Caught by surprise by her honest hostile reaction, you're ensnared by several tentacles like a fly in a spider's web. You are pulled up and lifted to the other side of the tree, where you are slammed against it.  The tentacles pull your arms and legs wide, exposing you totally and locking you into a spread-eagle position.  You cringe as Marae strides around, free from the confines of her tree. This was most definitely a bad idea.\n\n", false);
 		outputText("\"<i>Awwww, what a nasty deceitful little " + player.mf("boy", "girl"), false);
@@ -666,7 +666,7 @@ private function MaraePt2RoundIIIPrizes():void {
 			}
 		}
 	}
-	player.orgasm();
+	player.orgasmGeneric();
 	doNext(camp.returnToCampUseTwoHours);
 }
 

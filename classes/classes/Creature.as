@@ -535,6 +535,63 @@ package classes
 		{
 			return value + ascensionFactor(multiplier);
 		}
+		public function orgasmVaginal(real:Boolean = true):void
+		{
+			flags[kFLAGS.TIMES_ORGASM_VAGINAL]++;
+			if (real) orgasm();
+		}
+		public function orgasmVaginalAnal(real:Boolean = true):void 
+		{
+			if 	(hasVagina()) orgasmVaginal(real);
+			else orgasmAnal(real); 
+		}
+		public function orgasmAnal(real:Boolean = true):void 
+		{
+			flags[kFLAGS.TIMES_ORGASM_ANAL]++;
+			if (real) orgasm();
+		}
+		public function orgasmDick(real:Boolean = true):void
+		{
+			flags[kFLAGS.TIMES_ORGASM_DICK]++;
+			if (real) orgasm();
+		}
+		public function orgasmLips(real:Boolean = true):void 
+		{
+			flags[kFLAGS.TIMES_ORGASM_LIPS]++;
+			if (real) orgasm();
+		}
+		public function orgasmDickAnal(real:Boolean = true): void 
+		{
+			if (rand(2) == 0) orgasmAnal(real);
+			else orgasmDick(real);
+		}
+		public function orgasmGeneric(real:Boolean = true):void 
+		{
+			if (hasVagina() && hasCock()) {
+				if (rand(2) == 0) orgasmVaginal(real); 
+				else orgasmDick(real);
+			}
+			else if (hasVagina()) {
+				orgasmVaginal(real);
+			}
+			else {
+				orgasmDick(real);
+			}
+		}
+		public function orgasmTits(real:Boolean = true):void 
+		{
+			flags[kFLAGS.TIMES_ORGASM_TITS]++;
+			if (real) orgasm();
+		}
+		public function orgasmNipples(real:Boolean = true ) : void 
+		{
+			flags[kFLAGS.TIMES_ORGASM_NIPPLES]++;
+			if (real) orgasm();
+		}
+		public function orgasmOvi(real:Boolean = true) : void 
+		{
+			if (real) orgasm();
+		}
 
 		//Create a perk
 		public function createPerk(ptype:PerkType, value1:Number, value2:Number, value3:Number, value4:Number):void

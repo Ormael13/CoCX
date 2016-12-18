@@ -240,7 +240,7 @@ package classes.Scenes.Dungeons.D3
 				outputText(".");
 			}
 			outputText("\n\nThe beaten brute squirms and writhes long after you both of you finish cumming, lost in barely understood pleasure. You pull out before his over-eager motions carry you with him, noisily licking his residue from your lips and preparing to get on with your business. The taste might be keeping you hard, but you feel more than sated enough to take on a demon queen.");
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("lus",10);
 			combat.cleanupAfterCombat(getGame().dungeons.resumeFromFight);
 		}	
@@ -404,7 +404,7 @@ package classes.Scenes.Dungeons.D3
 			}
 			outputText(". The artificial euphoria this has brought you makes it difficult not to crawl over to the nearest incubus and offer your body up, but you still have to deal with Lethice. Maybe you can make her lick the drippings from your slit after you take her down.");
 			outputText("\n\nWith that fantasy firmly in mind, you stand up and fix your [armor]. You can still do this, right?");
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("lus",5,"resisted",false);
 			player.createStatusEffect(StatusEffects.MinotaurKingsTouch,0,0,0,0);
 			flags[kFLAGS.MINOTAURKINGS_TOUCH] = 1;
@@ -447,7 +447,7 @@ package classes.Scenes.Dungeons.D3
 				}
 			}
 			outputText("\n\nRegrettably, you’ve got work to do. You extricate yourself from the cum-and-milk splattered cow-girl and stand up, regarding the awaiting demoness.");
-			player.orgasm();
+			player.orgasmDick();
 			player.HP = player.maxHP();
 			combat.cleanupAfterCombat(getGame().dungeons.resumeFromFight);
 		}
@@ -543,7 +543,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nPivoting on your prick, dragging her velvety dicksleeve in a delightful 180 on your length, Excellia crawls atop you, still shaking. Her pussy is still squeezing and clenching down around your [cock " + x + "], keeping your attention focused solely on the itch between your thighs. Your overstimulated crotch has no choice but to climax once more, orgasming to the insatiable mynx’s demands. There’s not much to left to give her, but that doesn’t stop you from writhing in ecstasy, or groping her tits in wild excitement.");
 			outputText("\n\nYou aren’t sure how many more times you give it to her, but by the time you finally manage to extract yourself from her wanton lips, the Minotaur King has been dragged into the crowd.");
 			outputText("\n\nLethice looks bored, drumming her fingers on the edge of her throne. Time to deal with her.");
-			player.orgasm();
+			player.orgasmDick();
 			combat.cleanupAfterCombat(getGame().dungeons.resumeFromFight);
 		}
 		

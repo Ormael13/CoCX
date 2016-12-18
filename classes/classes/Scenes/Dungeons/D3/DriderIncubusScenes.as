@@ -977,7 +977,7 @@ package classes.Scenes.Dungeons.D3
 			}
 			flags[kFLAGS.DRIDERINCUBUS_FUCKED] = 1;
 			getGame().dynStats("cor+",20);
-			player.orgasm();
+			player.orgasmVaginal();
 			player.knockUp(PregnancyStore.PREGNANCY_IMP,PregnancyStore.INCUBATION_IMP);
 			driderDefeatMenu();
 		}
@@ -1078,7 +1078,7 @@ package classes.Scenes.Dungeons.D3
 				outputText(" You can\'t wait to see how the Demon Queen feels when she\'s skewered on your rod!");
 			}
 			getGame().dynStats("cor+",20);
-			player.orgasm();
+			player.orgasmDick();
 			player.knockUp(PregnancyStore.PREGNANCY_IMP,PregnancyStore.INCUBATION_IMP);
 			driderDefeatMenu();
 		}

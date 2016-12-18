@@ -220,7 +220,7 @@ package classes.Scenes.Seasonal {
 				
 				outputText("\n\nThe happy girl suddenly hugs you as you're in the process of putting your prick back into your [armor].  The silvery glow around her pale skin looks stronger now, so strong that you're almost sure you can see it.  \"<i>Oh, thank you!</i>\" she starts, but quickly composes herself.  \"<i>For, um, helping me.  Up.</i>\"  She lets go and backs away from you.  \"<i>I've gotta be going though, see you around!  Enjoy the weather!</i>\"  With that, she wings off into the skies.  She lands atop a nearby tree, arms outstretched in an odd pose.  The silvery glow surrounding her is still visible, even at a distance.  You shake your head and return to camp, wondering who in the world that was.  Not long after you return, the air warms once more and the snow melts, leaving the ground a slushy mess in spots.");
 			}
-			player.orgasm();
+			player.orgasmDick();
 			doNext(playerMenu);
 		}
 
@@ -231,7 +231,7 @@ package classes.Scenes.Seasonal {
 			outputText("\n\nThe harpy gets the message and attacks your needy cunt with an almost-violent intensity.  A yelp escapes you despite yourself, but she holds you close and keeps it up unrelentingly.  Your vision nearly fogs with lusty sensation.  You roll your head back and close your eyes, drifting away on the sea of arousal building inside of your body.  At the pace she's going and with her expert technique, it's not long before that sea overflows into orgasm.  Your thoughts blank as the muscles of your [cunt] clench, your juices spraying into the mouth of the harpy.  She drinks them thirstily, tongue still lapping away as you slowly come down from your climax.  You finally let the woman go, and she removes herself from between your legs almost reluctantly while you bathe in the afterglow.");
 			outputText("\n\nShe suddenly embraces you as you readjust your [armor].  The silvery glow around her pale skin looks stronger now, so strong that you're almost sure you can see it.  \"<i>Oh, thank you!</i>\" she starts, but quickly composes herself.  \"<i>For, um, helping me.  Up.</i>\"  She lets go and backs away from you.  \"<i>I've gotta be going though, see you around!  Enjoy the weather!</i>\"  With that, she wings off into the skies.  She lands atop a nearby tree, arms outstretched in an odd pose.  The silvery glow surrounding her is still visible, even at a distance.  You shake your head and return to camp, wondering who in the world that was.  Not long after you return, the air warms once more and the snow melts, leaving the ground a slushy mess in spots.");
 			//(end female)
-			player.orgasm();
+			player.orgasmDick();
 			doNext(playerMenu);
 		}
 
@@ -354,7 +354,7 @@ package classes.Scenes.Seasonal {
 			outputText("\n\n\Replacing your clothes, you give Kami one last glance over before you leave.  She's lying happily encumbered on the floor, covered in a combination of your fluids.  She'll probably be good to head home later - that is, if she can still walk.");
 			//[Player heads back to camp, An hour passes, Lust is reduced to zero and KamiEnc = 1]
 			flags[kFLAGS.KAMI_ENCOUNTER] = 1;
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("sen", -2);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -390,7 +390,7 @@ package classes.Scenes.Seasonal {
 			
 			outputText("\n\nKami, on the other hand, needs a tad more encouragement.  She desperately diddles her unused slit for as long as she can take it, her own belated orgasm finally erupting messily into your asshole moments later.  \"<i>Oh doll, I - ungh - needed that more than anything.  If you come back before the end of winter, we should definitely try this again.</i>\"  You give a thumbs up in approval of Kami's idea, turning around to head back to camp. Before you go, however, you take the opportunity to get a good squeeze of her ample tits, quickly taking off with complete satisfaction.");
 			//[Player heads back to camp, An hour passes, Asshole tightness is reduced, Lust is reduced to zero and KamiEnc = 1]
-			player.orgasm();
+			player.orgasmAnal();
 			dynStats("sen", 1);
 			doNext(camp.returnToCampUseOneHour);
 			flags[kFLAGS.KAMI_ENCOUNTER] = 1;
@@ -430,7 +430,7 @@ package classes.Scenes.Seasonal {
 			
 			outputText("\n\nYou gather your thoughts for a second, exhausted from the actual ordeal.  You slowly put back your [armor] while sharing an appreciative farewell to the now-satiated waitress - of who is panting so profusely she can't even return the gesture.");
 			//[Player heads back to camp, An hour passes, Lust is reduced to zero and KamiEnc = 1]
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("sen", -3);
 			flags[kFLAGS.KAMI_ENCOUNTER] = 1;
 			doNext(camp.returnToCampUseOneHour);
@@ -524,7 +524,7 @@ package classes.Scenes.Seasonal {
 			//Lust sated
 			//end encounter
 			//Receive \"<i>Peppermint White</i>\"
-			player.orgasm();
+			player.orgasmAnal();
 			inventory.takeItem(consumables.PEPPWHT, camp.returnToCampUseOneHour);
 		}
 
@@ -1050,7 +1050,7 @@ package classes.Scenes.Seasonal {
 			outputText("\n\nExhausted, you slump backwards, splaying out in the snow.  You leave your anatomy to work itself out for now, just savoring the afterglow and catching your breath as much as you can.  Nieve, however, seems to have other things in mind.  She pulls away from you, twists around, and gets on her hands and knees between your legs.");
 			
 			outputText("\n\n\"<i>So messy, [Master],</i>\" she notes with a smile.  \"<i>Allow me to clean you up.</i>\"  Her cool mouth descends on your member, licking and sucking away all of your juices and hers, leaving you spotless.  She seems to delight in the flavor, and once she's done, she leans in and gives you a big, sloppy kiss that tastes more like mint than anything else.  She then cuddles up next to you, her cold body somehow comforting, until you've recuperated enough to head back to the camp proper.");
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("sen", -2);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1114,7 +1114,7 @@ package classes.Scenes.Seasonal {
 			outputText(".");
 			
 			outputText("\n\nYou both rest in that position, Nieve still trickling cum into you even though he stopped moving minutes ago.  You turn your head to look at him and notice his face a few inches from yours.  It's clear that at the moment he's barely conscious, and you shift a bit to kiss him, thanking him for a job well done.  After a little while you both recover, redress, and silently go back to business.  Looking back at him as you leave, you know you want to do it again real soon.");
-			player.orgasm();
+			player.orgasmAnal();
 			dynStats("sen", -2);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1145,7 +1145,7 @@ package classes.Scenes.Seasonal {
 			outputText("\n\nYou come to your senses after what seems a couple of hours, Nieve resting peacefully on and still connected. He seems to have passed out and is pleasantly resting his head on your [chest].  You lay there, still flushed and warm from your recent activity despite the ice cold body on you.  You feel comfortable enough to doze off again.");
 			
 			outputText("\n\nAnother hour passes and you wake up clean and dressed, laying next to Nieve.  You noticed he's probably been watching you for the last several minutes.  You get up, pat yourself off, then with one hand tussle his snow-white hair, while uttering the words, \"<i>Good boy.</i>\"");
-			player.orgasm();
+			player.orgasmVaginal();
 			dynStats("sen", -2);
 			doNext(camp.returnToCampUseOneHour);
 		}

@@ -230,7 +230,7 @@ package classes.Scenes.Areas.VolcanicCrag
 				outputText("You've had many children during your time in Mareth, and you're still grateful for each father decent enough to stay with you and help.  It's nearly novel to be covered in cum during this because you <i>want</i> to be, not because some imp took advantage of you, and you curl up afterwards against his soft fur, his muscles comforting to push up against.\n\n") }
 			outputText("Eventually, you make one final push larger than the rest and a small furry creature pops out of your womb and cunt, thankfully currently devoid of spines. \"<i>Wow,</i>\" the behemoth says, wiping off your new offspring before setting him to your breasts, his infant claws too soft to hurt as he kneads you. \"<i>I love you,</i>\" he says, still mindblown, and you smile at him as he watches you both in utter amazement. ");
 			player.cuntChange(48, true);
-			player.orgasm();
+			player.orgasmVaginal();
 			flags[kFLAGS.BEHEMOTH_CHILDREN]++;
 			if (flags[kFLAGS.BEHEMOTH_CHILDREN] == 1) {
 				outputText("\"<i>I can't believe I finally have a family.  Thank you so much.,</i>\"");
@@ -296,7 +296,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			outputText(".");
 			outputText("The behemoth shoots huge torrents of cum, far more than his balls could possibly hold. You watch him cumming and cumming, never seeming to stop. He does stop and by the time he finished cumming, he has created quite the pool! With the two of you exhausted from the ordeal, you lay on top of him and rest for a while.");
 			outputText("\n\nYou give him a kiss on one of his cheeks and let him know that you'll be going. \"<i>See you later,</i>\" the behemoth says with a smile on his face. You redress and leave back to your camp.");
-			player.orgasm();
+			player.orgasmDick();
 			flags[kFLAGS.BEHEMOTH_ANAL_PITCH]++;
 			if (kGAMECLASS.inCombat) combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
@@ -356,7 +356,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			if (player.gender == 0) outputText("your whole body shakes in overwhelming pleasure.");
 			outputText("  You'd collapse if you were under your own power, but the behemoth carefully lifts you off his cock and spooge floods out of your [ass], coating his legs and the hard ground.  He waits for the dripping to slow before setting you down gently and lying next to you, the two of you sharing the wet spot.  \"<i>I love having someone to fuck,</i>\" he says warmly, his arm over you in claim as you feel his muscles spasm in aftershocks and you rest for a while, sure nothing would pick a fight with him.\n\n");
 			outputText("You wake up some time later and kiss his cheek before letting him know you'll be going.  \"<i>See you later,</i>\" he says as he lets you up, though he doesn't bother getting up. The main thing you remember as " + player.clothedOrNaked("he watches you redress and ") + "you walk back to your camp is his expression of utter contentment, and your mood carries on for the rest of the day.");
-			player.orgasm();
+			player.orgasmAnal();
 			player.slimeFeed();
 			HPChange(player.maxHP() / 4, false);
 			flags[kFLAGS.BEHEMOTH_ANAL_CATCH]++;
@@ -385,7 +385,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			outputText("\n\nSpent, the behemoth lays next to you and says, \"<i>I love you, " + player.mf("dude", "chick") + "." + (flags[kFLAGS.BEHEMOTH_VAGINAL_CATCH] == 0 ? " If you ever get pregnant, I want to let you know that pregnancy lasts <b>two months</b>. My cum won't fertilize your womb if you're not pure enough." : "") + "</i>\" You smile at him while rubbing your cum-filled belly and fall into a nice nap.");
 			outputText("\n\n<b>Some time later...</b>");
 			outputText("\n\nYou wake up from your nap refreshed and invigorated and give the Behemoth a kiss before you " + player.clothedOrNaked("redress yourself in your [armor], and ") + "make your way back to your camp.");
-			player.orgasm();
+			player.orgasmVaginal();
 			player.slimeFeed();
 			if (flags[kFLAGS.BEHEMOTH_CHILDREN] < 3 && player.cor < 25 + player.corruptionTolerance()) player.knockUp(PregnancyStore.PREGNANCY_BEHEMOTH, PregnancyStore.INCUBATION_BEHEMOTH, 50 + (flags[kFLAGS.BEHEMOTH_CHILDREN] * 15) + player.cor);
 			flags[kFLAGS.BEHEMOTH_VAGINAL_CATCH]++;

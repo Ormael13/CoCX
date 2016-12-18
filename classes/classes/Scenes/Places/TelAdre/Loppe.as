@@ -1102,7 +1102,7 @@ private function loppeRidesPCCockFinal():void {
 	//[(Exhibitionist)
 	if (flags[kFLAGS.PC_FETISH] > 0) outputText("; it gives you something of a thrill, though nowhere near as much as taking them off for her in the first place did");
 	outputText(".  Finished, you depart.");
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("tou", .5, "lib", .5, "sen", -4);
 	flags[kFLAGS.LOPPE_TIMES_SEXED]++;
 	//3 hours pass.
@@ -1193,7 +1193,7 @@ private function loppeWorshipsDicks():void {
 	outputText("\n\n<b>Two hours later...</b>");
 
 	outputText("\n\nA familiar feeling emanates from your crotch... a distinct sucking and bobbing feeling.  Your eyes open and you awaken with a gasp as you blast a fresh batch of cum into Loppe's eager mouth.  She withdraws with a slurp and smiles gleefully at you.  \"<i>Morning, sleepyhead!  Rest well?  Want me to wake you up some more?</i>\" she asks, licking her lips.  \"<i>I placed your stuff on the chair over there.  And don't worry, it's all cleaned too.  See you later on?  For more 'appreciation', of course...</i>\"");
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("tou", .5, "lib", .5, "sen", -4);
 	flags[kFLAGS.LOPPE_TIMES_SEXED]++;
 	doNext(camp.returnToCampUseFourHours);
@@ -1348,7 +1348,7 @@ private function getFuckedInYerTwatYaCunt():void {
 	//3 hours pass.
 	player.slimeFeed();
 	flags[kFLAGS.LOPPE_TIMES_SEXED]++;
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("tou", .5, "lib", .5, "sen", -4);
 	doNext(camp.returnToCampUseFourHours);
 }
@@ -1514,7 +1514,7 @@ private function getButtFuckedNonHoarseByLoppe():void {
 	player.slimeFeed();
 	flags[kFLAGS.LOPPE_TIMES_SEXED]++;
 	//3 hours pass
-	player.orgasm();
+	player.orgasmAnal();
 	dynStats("tou", .5, "lib", .5, "sen", -4);
 	doNext(camp.returnToCampUseFourHours);
 }
@@ -1659,7 +1659,7 @@ private function getAssFuckedByLoppeAsACentaur():void {
 
 	outputText("\n\nYou nod and head to her room to fetch your [armor].");
 
-	player.orgasm();
+	player.orgasmAnal();
 	dynStats("tou", .5, "lib", .5, "sen", -4);
 	flags[kFLAGS.LOPPE_TIMES_SEXED]++;
 	player.slimeFeed();
@@ -1928,7 +1928,7 @@ private function boobjobLoppe():void {
 
 	flags[kFLAGS.LOPPE_TIMES_SEXED]++;
 	player.slimeFeed();
-	player.orgasm();
+	player.orgasmTits();
 	dynStats("tou", .5, "lib", .5, "sen", -4);
 	doNext(camp.returnToCampUseFourHours);
 }

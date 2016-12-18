@@ -75,7 +75,7 @@ package classes.Scenes.Areas.Mountain
 			//(after either of them)
 			//(Lose player anal virginity; if player has vagina, lose vaginal virginity)
 			player.buttChange(monster.cockArea(0), true);
-			player.orgasm();
+			player.orgasmAnal();
 			//[if not corrupt]
 			if (player.cor < 40) dynStats("tou", -2, "cor", 1);
 			//[if corrupt]
@@ -97,7 +97,7 @@ package classes.Scenes.Areas.Mountain
 			if (player.cocks.length > 1) outputText("One of the heads eagerly starts licking your " + player.cockDescript(0) + " while the other starts to work on your " + player.cockDescript(1) + ". The large, flat tongues give you a rather unusual feeling, but it is definitely effective.   As you approach your peak, the heads quickly take your " + player.cockDescript(0) + " and " + player.cockDescript(1) + " into their mouths. The pleasure from this new arrangement quickly overwhelms you, leaving you dazed.  When your senses return to you, you look up to see the hellhound's tongues running all over their mouths, clearly very happy.  With a pair of happy barks, the hellhound turns and runs away.", false);
 			//[if player has no endowments] 
 			if (player.gender == 0) outputText("The two heads stare at your lack of sexual endowments for a few seconds before looking up at you sadly.  With a whine, the hellhound wanders off.  Feeling rather unsatisfied, you think that you should probably fix your lack of sexual 'parts'...", false);
-			else player.orgasm();
+			else player.orgasmGeneric();
 			combat.cleanupAfterCombat();
 		}
 
@@ -295,7 +295,7 @@ package classes.Scenes.Areas.Mountain
 			outputText("You feel inclined to agree at the wonderful feeling of your new body, and the incredible amount of power you feel rushing through you.  You move one of your hands so that you can play with both your dicks and your cunts, relishing in the feeling of them and the flames that lie within.  You gasp for a moment, and open your mouth as a rush of heat rises up from your chest and a burst of flame emerges from your mouth.\n\n", false);
 
 			outputText("A powerful demon steps out in front of you, and picks up the crystal.  You can feel a strong connection with him, and you know this is your master.  \"<i>Well now, I think you need a new name now in commemoration of being the first three headed hellhound, and for being the one who will give me the world.</i>\"  He unceremoniously puts the crystal in his mouth and swallows it.  \"<i>Your new name is Cerberus, and you're my greatest pet.</i>\"  He steps closer and looks into your center head's eyes for a moment.  \"<i>That's much better than being a champion ever was, isn't it?</i>\"  You can't help but eagerly nod in agreement.", false);
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("lib", 50, "cor", 100);
 			getGame().gameOver();
 
@@ -369,7 +369,7 @@ package classes.Scenes.Areas.Mountain
 
 				outputText("Finally having finished, you relax your anal sphincter and allow his member to leave your anus. His members rise from the feel of the incredible amount of cum his quadruple balls pumped into your holes squirting back out to wash over them. The hellhound curls up, spent, his tail covering his privates. His rods look a little red from the intense fuck, and you're sure that in spite of his fiery nature he is experiencing a little more than a burning sensation.", false);
 				//--> increases corruption, usual post coital procedure
-				player.orgasm();
+				player.orgasmGeneric();
 				//[if not corrupt]
 				if (player.cor < 40) dynStats("tou", -2, "cor", 1);
 				//[if corrupt]

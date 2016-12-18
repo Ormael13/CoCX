@@ -216,7 +216,7 @@ package classes.Scenes.Dungeons.Factory
 				outputText(" demon-cock for a few more orgasms.", false);
 				outputText("  Before you get into that, you spy a small piece of pink crystal on the floor between your legs.  You snatch it and devour it before the succubus has a chance and eat it, turning part of your soul into new-found demonic strength before you return to a long night of sex...", false);
 			}
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("str", 2,"tou", 2, "spe", 2, "int", 2, "lib", 2, "sen", 2, "cor", 100);
 			doNext(doBadEndDemon);
 		}
@@ -301,7 +301,7 @@ package classes.Scenes.Dungeons.Factory
 					outputText("\n\nYou pant with exertion and pull back, only to have your " + player.cockDescript(0) + " plunge right back in. Beginning another rough fucking session, your hips force-fuck her beyond your control.  Exhausted, you lean over her, figuring you may as well enjoy your double's wondrous breasts until your demonic cock has finally sated itself.  You just hope you don't black out from the waves of pleasure each of your new nubs radiates.\n\n\nHours later you pull away, sated.  For now.", false); 
 				}
 				outputText("\n\nThe succubus licks her fingers clean, looking totally recovered.  In the blink of an eye, she dashes out the door, disappearing.", false);
-				player.orgasm();
+				player.orgasmDick();
 				dynStats("cor", 5);
 				combat.cleanupAfterCombat();
 			}
@@ -325,7 +325,7 @@ package classes.Scenes.Dungeons.Factory
 			if (player.clitLength >= 3) outputText("You groan with wanton desire as your " + player.clitDescript() + " continues to grow and grow until reaching full size and slipping inside the defeated slut's sloppy pleasure-hole.  ", false);
 			outputText("It takes only a few seconds to get the succubus' juices really flowing, the sounds of your grinding hips dissolving into a cacophony of liquid squelches.  The gooey corrupt fem-cum tingles, spreading warmth through every patch of skin it touches.  Your locked hips writhe and twist with her's, eliciting pants and squeals from the both of you.  In no time flat, you find yourself cumming and feel your " + player.vaginaDescript(0) + "'s muscles clench hungrily with an unquenchable desire to be filled.  The succubus shivers in pleasure, probably feeding off your orgasm.  You back off, fingering your " + player.vaginaDescript(0) + " languidly and denying her a full meal.  Pouting, the succubus dips her fingers back in, determined to cum.", false);
 			outputText("\n\nYou turn away with a bemused sigh.  When you glance back, she has vanished!", false);
-			player.orgasm();
+			player.orgasmVaginal();
 			dynStats("cor", 1);
 			combat.cleanupAfterCombat();
 			//doNext(roomBreakRoom);
@@ -431,7 +431,7 @@ package classes.Scenes.Dungeons.Factory
 				if (player.cumQ() > 400) outputText("Freed at last, your body clenches powerfully as a massive eruption of cum launches from your " + player.cockDescript(0) + " onto her waiting foot.  The succubus looks on incredulously as her entire foot is soaked with your sticky whiteness, forgetting to move as the second wave of cum drenches her to the ankle and rains down over your stomach.  She giggles and moves it back to your cock, massaging your slick spooge into your cock with her foot, wringing an even bigger explosion of cum from your tortured body.  Flopping back, she gets her other foot in on the action, milking you between her feet as you soak yourself completely with bigger and bigger eruptions until at last your orgasm begins to wane.  She slides forwards, rubbing against you and smearing the mess over herself with a blissful expression.", false);
 				outputText("\n\n\"<i>Good boy,</i>\" she croons, mopping the cum up as it seems to wick into her stockings, \"<i>You'll do well once we get you on the line.</i>\"  You don't have time to ponder the significance of that as you lose consciousness.", false);
 				//ONWARD TO BAD-END-IA!
-				player.orgasm();
+				player.orgasmDick();
 				doNext(getGame().dungeons.factory.doBadEndGeneric);
 			}
 			else {
@@ -454,7 +454,7 @@ package classes.Scenes.Dungeons.Factory
 				player.cocks[0].cockLength = 16;
 				player.cocks[0].cockThickness = 1.5;
 				//[[[[To bad end!]]]
-				player.orgasm();
+				player.orgasmVaginal();
 				doNext(getGame().dungeons.factory.doBadEndGeneric);
 			}
 		}

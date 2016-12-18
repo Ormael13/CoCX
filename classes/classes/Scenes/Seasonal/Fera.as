@@ -76,7 +76,7 @@
 			}
 			if (player.cumQ() < 1000) {
 				outputText("\n\nAll too soon, you finish and step away, satisfied.  The pumpkin's pussy seals closed slowly, cutting off the worst of the slime-flow.  You get dressed, but the plant's tendrils no longer bother you.  They lie still and flat, and even the perverse sweating comes to an end.  Whatever fel magic was behind this, it seems to have settled after the salty snack you gave it.  You get dressed and walk back to camp with a spring in your step.");
-				player.orgasm();
+				player.orgasmDick();
 				dynStats("cor", 2);
 				doNext(camp.returnToCampUseOneHour);
 			}
@@ -88,7 +88,7 @@
 				else outputText("picking up your [weapon]");
 				outputText(" as if it would somehow protect your nude body.");
 				doNext(pumpkinFuckPartII);
-				player.orgasm();
+				player.orgasmDick();
 				dynStats("cor", 2);
 			}
 		}
@@ -122,7 +122,7 @@
 			outputText("\n\nFera giggles at your expression and puts her finger in your mouth, laughing uproariously when you immediately suck it, flicking your tongue about its circumference.  Those slow, pumping tendrils have utterly fucked your mind, and there's nothing you could have done about it.  It's hellishly good, a torture of sinful, unadulterated pleasure potent enough to keep your [cock] throbbing and aching to release, even though it just did.  You would mind, if it wasn't like every single other part of you was orgasming on its own, ecstatically twitching in the firm bindings as you give yourself wholly to Fera's minions.");
 			outputText("\n\nHow long it goes on you can't say.  Somewhere along the lines your memory went dark, repurposed by your coiled masters to allow you to feel even greater heights of bliss.  There's faint flashes of you thrashing, but giant-sized labia keep you pinned in place, your limbs devoured in vaginal restraint.  With a triumphant surge, bulges stretch your abused noise-holes and work deep into your skull.  Your world goes white, an orgasmic soup of delight that washes any vestiges of thought from you and leaves behind only dripping obedience to pleasure.  Your cock fires weakly, offering tribute Fera in sympathy, yet the real thing is in your cum-bathed brain.  Runny tentacle-spooge drips from your nose as you gurgle in bliss, then black out.");
 			hideUpDown();
-			player.orgasm();
+			player.orgasmDick();
 			doNext(pumpkinFuckPartIII);
 		}
 
@@ -186,7 +186,7 @@
 				
 				doNext(pumpkinMountingLevelII);
 			}
-			player.orgasm();
+			player.orgasmVaginal();
 			dynStats("cor", 1);
 		}
 
@@ -421,7 +421,7 @@
 					player.cocks[x].cockThickness = player.cocks[x].cockLength/5;
 				}
 			}
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("lib", 10, "cor", 5);
 			player.createPerk(PerkLib.FerasBoonSeeder,0,0,0,0);
 			menu();
@@ -515,7 +515,7 @@
 			if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLICK) player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
 			if (player.vaginas[0].vaginalLooseness < VAGINA_LOOSENESS_GAPING_WIDE) player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING_WIDE;
 			//Add five corruption.
-			player.orgasm();
+			player.orgasmVaginal();
 			dynStats("cor", 3);
 			//[Next]
 			menu();
@@ -563,7 +563,7 @@
 			outputText("\n\nYou cum, and you cum... and you cum some more.  Each orgasm comes closer on the heels of the one before, wetter, hotter, and more powerful than the last.  Despite the commands to relax, your body shakes and quivers like a leaf caught up in a tornado, helplessly tossed about on disastrously strong winds of ecstasy.  Your [legs] clench around the penetrating stalk, increasingly painted with the onyx hue of your floral lover's distilled love, and you give yourself over to the passion, screaming and crying and moaning until your voice goes hoarse and Fera's gentle whispers shush you into silence.");
 			outputText("\n\nYou have no choice but to obey as you lose consciousness to the pleasure, your mind left as open to Fera's instructions as your pussy is to that ever-thrusting, continually-cumming vine-cock.");
 			//(cum!)
-			player.orgasm();
+			player.orgasmVaginal();
 			dynStats("lib", 5, "sen", 20, "cor", 3);
 			//Maximum size to 2
 			player.createPerk(PerkLib.FerasBoonMilkingTwat,0,0,0,0);
@@ -601,7 +601,7 @@
 			outputText("\n\nThe stalk above your crotch has bulged out significantly, distended with a thicker, concealed shape for the first eight inches of its length, and there are slow bulges traversing up and away from you, each timed to a particularly, bliss-loaded pulse from the new, concealed organ.  Every single, little, wriggling nub inside that hollow tube is stroking and squeezing down on your miraculous new cock, and a pillar of liquid-hot lust is boiling up and out the very middle of it while the spike sits, lodged inside and pumping something else back inside, keeping your orgasm going.");
 			outputText("\n\nYou're crying with sublime ecstasy as you let the pleasure consume you, simply feeling yourself constantly erupting, constantly swelling... constantly blissful.  Your eyes roll back, and Fera is whispering into your ear, but the words don't need to be understood, only heard, only left to burrow deeply into your psyche and embed themselves there, right where they can stay and take root.  You slip from consciousness to the feel of your new cock expanding past nine inches in length...");
 			//(cum!)
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("lib", 10, "sen", 10, "cor", 3);
 			//Grow a 10" human or tentacle dick! RANDOM!
 			player.createCock();

@@ -577,7 +577,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 			outputText("\n\n");
 			outputText("\n\n");
 			
-			player.orgasm();
+			player.orgasmAnal();
 			flags[kFLAGS.ANZU_AFFECTION] += 5;
 			flags[kFLAGS.ANZU_ANAL_CATCH_COUNTER]++;
 			doNext(camp.returnToCampUseOneHour);

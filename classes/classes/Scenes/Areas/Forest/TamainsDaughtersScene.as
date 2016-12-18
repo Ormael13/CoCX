@@ -346,7 +346,7 @@ private function fuckYoDaughtersHomie():void {
 			dynStats("tou", -.75, "int", -1, "lib", .5);
 		}
 	}
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("lib", 1, "cor", 1);
 	//Knock the bitches up, boost libido, corruption
 	if (tamaniPresent) kGAMECLASS.forest.tamaniScene.tamaniKnockUp(); //If she wasn't pregnant she will be now
@@ -701,7 +701,7 @@ private function legTamanisDaughtersRAEPYou():void {
 		}
 	}
 	//knock bitches up, slight libido gain, slight strength/toughness loss.
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("str", -.5,"int", -.5, "lib", 1, "cor", 1);
 	if (tamaniPresent) kGAMECLASS.forest.tamaniScene.tamaniKnockUp(); //If she wasn't pregnant she will be now
 	knockUpDaughters();
@@ -846,7 +846,7 @@ private function tamaniDaughtersCombatLossDrain():void {
 	//boost cum production slightly.
 	player.cumMultiplier += .3;
 	//increase libido, slight corruption, minus stregth and speed.
-	player.orgasm();
+	player.orgasmGeneric();
 	dynStats("str", -.5,"int", -.5, "lib", 1, "cor", 1);
 }
 
@@ -1016,7 +1016,7 @@ private function loseToDaughtersWithTamaniThere():void {
 	kGAMECLASS.forest.tamaniScene.tamaniKnockUp();
 	flags[kFLAGS.TAMANI_TIMES_HYPNOTISED]++;
 	//daughter countdown reset. 
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("str", -.5,"int", -.5, "lib", 1, "sen", 1, "cor", 1);
 	if (getGame().inCombat) combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
@@ -1070,7 +1070,7 @@ internal function loseToDaughters():void {
 		if (player.findStatusEffect(StatusEffects.Infested) >= 0) {
 			kGAMECLASS.mountain.wormsScene.infestOrgasm();
 			outputText("\n\nThe goblins sigh and say, \"<i>Dad, that's just gross.  Don't get me wrong, we're still gonna have you knock us up, but I hate the feeling of those worms inside me.</i>\"", false);
-			player.orgasm();
+			player.orgasmDick();
 		}
 		outputText("\n\nYou give up, you're just too turned on by the sea of sexually charged deviants to resist them anymore.  You're ready to fuck them all.", false);
 		if (player.cockTotal() == 0) {

@@ -256,6 +256,7 @@ private function gloryholeImp():void {
 		outputText("You immediately dive forwards, relishing the idea of taking in another load of demonic cum.  Your groin tingles as your lips make their way down the oddly textured shaft, engulphing nearly 10 inches of demon-cock, feeling it press down your throat.  You curl your tongue around and begin sliding back and forth, immediately rewarded with a thick dribble of pre-cum.  The imp on the other end loses it immediately, blasting waves of cum directly into your belly as you shove forwards, taking him into the hilt.  You feel him pulsing and pull back in time to take the last few loads in your mouth, saving your payment for the goblins.\n\n", false);
 		dynStats("lus", 45, "cor", 2);
 	}
+	player.orgasmLips(false);
 	player.refillHunger(25);
 	outputText("Abruptly, the demon-dong slips through your grasp and out the hole.  You hear a loud thump as something lands on the ground. Poor thing.\n\n", false);
 	doNext(hairDressingMainMenu);
@@ -279,6 +280,7 @@ private function gloryholeDoggie():void {
 		outputText("You throw yourself onto the swollen dog-cock and easily engulf the whole thing, spreading your lips wide around the thick knot.  You can feel it bouncing the uvula in your throat around but you manage to supress your gag reflex like a good slut while you work the sweaty dick, giving it a thorough tongue bath.  You wrap your lips around the base of the knot, feeling it start to stretch your jaws apart.  You pull back before it can lock you like that, and squeeze the knot in your hands.  It cums, unloading thick wads of gooey cum into your mouth.\n\n", false);
 		dynStats("lus", 30, "cor", .3);
 	}
+	player.orgasmLips(false);
 	player.refillHunger(10);
 	outputText("A young goblin comes by with a bowl for you to make your payment into.  You spit out the gunk and wipe your mouth, as the goblin carries the seed away.  You notice a trail of clear drops on the ground behind her.  She must be anticipating something...", false);
 	doNext(hairDressingMainMenu);
@@ -298,6 +300,7 @@ private function gloryholeIncubus():void {
 		player.lust = 99;
 		
 	}
+	player.orgasmLips(false);
 	player.refillHunger(35);
 	statScreenRefresh();
 	doNext(hairDressingMainMenu);
@@ -313,6 +316,7 @@ private function gloryholeMinotaur(): void {
 	outputText("your [chest] as cum rains down upon you. By the time his orgasm stops and his dick goes limp, your face and [chest] are covered in a thick layer of spooge.\n\n", false);
 	outputText("Your head spins from the minotaur's musk, and you idly mop up and swallow the cum on your " + player.face() + ". A goblin aide comes in with a bowl, and gently scrapes the cum off your tits with a smooth, flat rock. Once you're cleaned up and you're dressed, the aide leads you back to Lynnette.\n\n", false);
 	dynStats("lus", 33, "cor", 1);
+	player.orgasmLips(false);
 	player.refillHunger(30);
 	player.minoCumAddiction(10);
 	doNext(hairDressingMainMenu);
@@ -360,7 +364,7 @@ private function goblinHairDresserFacefuck():void {
 	if (player.cumQ() >= 250) outputText(" She can't hold it all and suddenly starts swallowing as runnels of it escape her nose and a wave of it rolls down her lips.", false);
 	outputText("  In time it ends, and she pops back, spitting most of the cum into a funnel.  It washes down a pipe and you have to wonder if there's some horny goblin girl at the other end with her cunt spread wide.", false);
 	outputText("\n\nThe hair-dressing goblin matron sputters a bit before licking her lips clean and beaming a happy smile at you.\n\n", false);
-	player.orgasm();
+	player.orgasmDick();
 	hairDressingMainMenu();
 }
 private function hairDressingMainMenu():void {
@@ -620,7 +624,8 @@ private function minotaurCumBukkakeInSalon():void {
 	
 	outputText("The strength goes completely out of your " + player.legs() + ", but you manage to hold yourself up long enough for your stud to flex his cock inside you and fill up your backdoor with more potent addiction.  You slide off, nerveless and still orgasming as jizz rains on your back from the abandoned cock, rolling off you to add to the ever-widening puddle of fluids on the floor.  Smiling vacantly and addled on more minotaur-cum than any one person has reason to handle, you stumble up on all fours and crawl to the next one.  More...", false);
 	//[NEXT]
-	player.orgasm();
+	player.orgasmLips(false);
+	player.orgasmAnal();
 	dynStats("lib", 2, "sen", 2, "cor", 2);
 	doNext(minotaurSalonFollowUp);
 }
@@ -824,7 +829,7 @@ private function fuckLynnette():void {
 		lynnetteApproval(25);
 	}
 	flags[kFLAGS.LYNNETTE_FUCK_COUNTER]++;
-	player.orgasm();
+	player.orgasmDick();
 	flags[kFLAGS.LYNNETTE_CARRYING_COUNT] = 3 + rand(3);
 	if (player.cumQ() >= 1000) flags[kFLAGS.LYNNETTE_CARRYING_COUNT] += 1 + rand(3);
 	if (player.cumQ() >= 2000) flags[kFLAGS.LYNNETTE_CARRYING_COUNT] += 1 + rand(3);

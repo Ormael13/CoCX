@@ -200,7 +200,7 @@
 			//(Go to followup for fucking scene)
 			//[Next]
 			doNext(xmasFuckFollowup);
-			player.orgasm();
+			player.orgasmDick();
 		}
 
 		//[FEMALE SCENE]	
@@ -230,7 +230,7 @@
 
 			outputText("You black out to the following words: \"<i>Good girl.  Keep cumming, let out all those naughty thoughts.  I can't wait to see you next year!</i>\"", false);
 			doNext(xmasFuckFollowupFems);
-			player.orgasm();
+			player.orgasmVaginal();
 		}
 			
 		//MANTASTIC FOLLOWUP:

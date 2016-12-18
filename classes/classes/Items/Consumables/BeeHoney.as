@@ -249,7 +249,7 @@ package classes.Items.Consumables
 					player.createCock();
 					player.cocks[0].cockLength = Utils.rand(3) + 8;
 					player.cocks[0].cockThickness = 2;
-					player.orgasm();
+					player.orgasmDick();
 					getGame().dynStats("sen", 10);
 				}
 				else if (player.cocks.length > 1) {
@@ -258,7 +258,7 @@ package classes.Items.Consumables
 					player.cocks[0].cockLength		+= 5 * Math.sqrt(0.2 * player.cocks[biggest].cArea());
 					player.cocks[0].cockThickness	+= Math.sqrt(0.2 * player.cocks[biggest].cArea());
 					player.removeCock(biggest, 1);
-					player.orgasm();
+					player.orgasmDick();
 					getGame().dynStats("sen", 5);
 				}
 				else if (player.cocks[0].cArea() < 100) {

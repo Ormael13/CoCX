@@ -395,6 +395,7 @@ private function keltBlowjobRequirementShamefully(newl:Boolean = true):void {
 	outputText("It may be unhealthy, to keep going back to him.  Of course, you could always say no, right?  He is a good teacher.  And... and would it be so bad to suck him off a few more times?  That wouldn't be so bad... would it?\r\r", false);
 	//(Blowjob Off, but activated.)
 	//(+7 Submissiveness)
+	player.orgasmLips(false);
 	player.addStatusValue(StatusEffects.Kelt,2,7);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -424,6 +425,7 @@ private function keltBlowjobRequirementEagerly(newl:Boolean = true):void {
 	outputText("He leaves, obviously quite pleased with himself, and your legs give out from under you, weak from your experience.  Even so, you frantically masturbate, knowing true bliss as you lie within a small pool of his spunk.  The smell of it clings to you, even after you push yourself upright and begin hobbling back to camp, arms clutched around your swollen stomach.  This is what happiness feels like... used and full of sperm.\r\r", false);
 	outputText("Still, part of you feels unsteady about this whole thing.  Are you becoming a little too dependent on Kelt?  It may be unhealthy to keep going back to him.  And there are others out there, right?  But... but you can't get the centaur out of your head.  It feels right to kneel at his feet; to be his slutty little cumdump.  It is becoming hard to remember why you came here in the first place...\r\r", false);
 	//(Blowjob On.)
+	player.orgasmLips(false);
 	player.createStatusEffect(StatusEffects.BlowjobOn,0,0,0,0);
 	//(+15 Submissiveness)
 	player.addStatusValue(StatusEffects.Kelt,2,15);
@@ -594,7 +596,7 @@ private function keltMainEncounter3():void {
 			outputText("Some time later, Kelt's enormous cock softens enough to slip out of your abused cunt, a virtual torrent of cum flowing out afterwards.  You lay on the bale of hay, panting tiredly, hands pressed to your full belly.  Kelt looks down at you, and snorts.\r\r", false);
 			outputText("\"<i>That's a good look for you.  Come back tomorrow if it doesn't take, slut.  I'll be glad to do the job again.</i>\"\r\r", false);
 			player.slimeFeed();
-			player.orgasm();
+			player.orgasmVaginal();
 			outputText("He leaves you without another word.", false);
 			//(+5 Submissive)
 			player.addStatusValue(StatusEffects.Kelt,2,5);
@@ -729,7 +731,7 @@ private function keltMainEncounterPostBlowjob():void {
 			//(+10 Submissiveness)
 			if (player.buttChange(70,true)) outputText("\r\r", false);
 			player.addStatusValue(StatusEffects.Kelt,2,10);
-			player.orgasm();
+			player.orgasmAnal();
 			dynStats("cor", 1);
 			return;
 		}
@@ -1055,7 +1057,7 @@ private function fuckKeltsShitUp():void {
 		outputText("Taking pity on him, you turn and release the rope, shoving his exhausted body over.  He hits the ground hard and his tightly bound cock bounces in the dirt underneath him.  You gingerly untie the bulging centaur-shaft, noting how massively bloated it is with pent up arousal.  As each layer of rope is peeled off, cum starts to leak from him in greater and greater quantities.  With the release of the last knot, he begins spurting helplessly.  You pat his flank and say, \"<i>Good bitch.  Now why don't you go find some succubus milk so you can look the part?</i>\"\r\r", false);
 		outputText("You redress before the comatose centaur gets a chance to come to his senses, and wonder if he'll recover enough of his pride to face you again.", false);
 	}
-	player.orgasm();
+	player.orgasmGeneric();
 	dynStats("int", 2, "cor", 4);
 	player.createStatusEffect(StatusEffects.KeltOff,0,0,0,0);
 	doNext(camp.returnToCampUseOneHour);

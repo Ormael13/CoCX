@@ -510,7 +510,7 @@ private function fuckHelAndKitsunesAsUrta():void {
 
 	outputText("\n\nYou wake alone, and as the sun rises, you realize it's time to leave the city on your quest...");
 	flags[kFLAGS.URTA_FUCKED_HEL] = 1;
-	player.orgasm();
+	player.orgasmGeneric();
 	model.time.days++;
 	//Advance to next day, jump to leaving text
 	//{Resume UrtaQUEST!}
@@ -621,7 +621,7 @@ private function urtaPutsHerDickInPCsWithDicks(truth:Boolean):void {
 	else outputText(", but the");
 	outputText(" semen-inundated fabric quickly begins to dry as the parched, wasteland dirt reclaims the moisture.");
 	outputText("\n\n" + player2.short + " pulls you down for another kiss, and you lose yourself to it, never going completely soft - as if you could in " + player2.mf("his","her") + " presence.  You close your eyes and let sleep claim you, cuddled together, basking in the heady smell of your combined pleasure.");
-	player.orgasm();
+	player.orgasmAnal();
 	dynStats("sen", -2);
 	menu();
 	//To morning after fuck departure
@@ -662,7 +662,7 @@ private function pcBlowsUrtasDong(truth:Boolean):void {
 	outputText("\n\n\"<i>I can think of better ways to have a bath,<i>\" you answer primly... then realize your treacherous leg is kicking with pleasure at the belly rub, and you have to concentrate hard to force it to stop.  \"<i>Besides, I thought I was supposed to be giving you a feeding, not myself a bath?</i>\"  You laugh.  " + player2.short + " looks pensive for a moment, but ultimately, " + player2.mf("he","she") + " just shrugs and redoubles " + player2.mf("his","her") + " effort, rubbing your belly even harder to get you to kick your leg a bit more.  \"<i>S-stop that!</i>\"  You blurt, trying to keep the fact that this does feel good out of your voice even as you wriggle at the ticklish sensation.  Of course, maybe a belly-rub on top of a decent bellyful of cum isn't such a good idea; you feel queasy for a moment, then can't hold back a loud burp.  This shocks your mischievous lover into loosening " + player2.mf("his","her") + " grip, and you promptly seize advantage of that; you surge forward and swiftly overpower " + player2.mf("him","her") + ", wrestling " + player2.mf("him","her") + " to the floor and then giving " + player2.mf("him","her") + " a wet, sloppy, deep-throating, tongue-filled kiss.  You noisily make out with your lover for a couple of minutes, then let " + player2.mf("him","her") + " go.  \"<i>See what bad " + player2.mf("boys","girl") + " get?<i>\"  You chuckle.  " + player2.short + " just grins innocently at you.");
 
 	outputText("\n\nYou yawn loudly, feeling tired now.  You promptly make yourself comfortable lying on " + player2.short + "'s belly, and kiss " + player2.mf("him","her") + " on the nose.  \"<i>Night, " + player2.short + "; sleep well.</i>\"  You say, then close your eyes and allow yourself to drift off to sleep, happily using " + player2.mf("him","her") + " as a full-body pillow.");
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", -2);
 	menu();
 	addButton(0,"Next",morningAfterCampVisitEmbark, truth);
@@ -752,7 +752,7 @@ private function putAPCDickInUrtaCoochies(truth:Boolean):void {
 		if (player2.cumQ() >= 1000) outputText(" not to mention the weight of your overstuffed belly");
 		outputText(" you don't really feel inclined to move, either.  Instead, you yawn loudly, make yourself comfortable upon your lover's stomach, and allow yourself to drift off to sleep - already, you can hear the quiet breathing of " + player2.short + " as " + player2.mf("he","she") + " does the same thing.");
 	}
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", -2);
 	menu();
 	addButton(0,"Next",morningAfterCampVisitEmbark, truth);
@@ -849,7 +849,7 @@ private function putUrtasWangInPCsCunt(truth:Boolean):void {
 		player2.vaginas[0].virgin = false;
 		outputText("\n\n<b>You took " + player2.short + "'s virginity!</b>");
 	}
-	player.orgasm();
+	player.orgasmVaginal();
 	dynStats("sen", -2);
 	menu();
 	addButton(0,"Next",morningAfterCampVisitEmbark, truth);
@@ -971,7 +971,7 @@ public function winFuckAGoblinBroodmotherAsUrta():void {
 	outputText("\n\n\"<i>I shoot nothing but blanks and nobody can fix that.</i>\"  You taunt the goblin, deliberately not mentioning that there is a cure and that's what you're after; you want to make kits with " + player2.short + ", not more green sluts.  You turn and start walking away as the goblin stares after you, dumbfounded.  \"<i>You- you - bitch!  You - </i>\" A loud belch cuts into her ranting, but by the time she's recovered, you're too far away to hear any more.");
 
 	outputText("\n\nStupid goblin.  This whole fight was pointless.  Now that she's defeated, you focus on following the trinket again; you've got to find that shrine.");
-	player.orgasm();
+	player.orgasmDick();
 	menu();
 	addButton(0,"Next",nagaPleaseNagaStoleMyDick);
 }
@@ -1026,7 +1026,7 @@ public function urtaLosesToGoblin():void {
 
 	outputText("\n\nEven though your bodies finally start to calm down, the cum hungry matron is not nearly done with you. Bucking her wide hips against you, she shoves you back, fully intending to ride you this time and wring every last drop from those over-productive balls of yours.");
 
-	player.orgasm();
+	player.orgasmDick();
 	//[next]
 	menu();
 	addButton(0,"Next",loseToGoblinsPartIIAsUrta);
@@ -1664,7 +1664,7 @@ private function fuckSiriusRadioII():void {
 	outputText("\n\nThe only response you get is a snore and a gurgling wet belch; he's out cold.  You can't resist chuckling to yourself; he might have been nicer than you thought, but he's no " + player2.short + ".  He just can't keep up with you.  You give the sleeping naga an affectionate pat on the cheek as a thank you, wipe the resultant cum-smear off of your hand onto the grass, get redressed, and leave.");
 
 	outputText("\n\nAs you walk away, following the pendant once again, you hope that " + player2.short + " will understand why you fucked a stranger like that... maybe if you promise to give " + player2.mf("him","her") + " oral with as much enthusiasm as that naga gave you, " + player2.mf("he","she") + "'ll be more understanding?  Mmm... you kind of hope " + player2.mf("he","she") + " agrees, actually; you can already taste " + player2.mf("him","her") + " on your tongue...");
-	player.orgasm();
+	player.orgasmDick();
 	menu();
 	addButton(0,"Next",gnollAlphaBitchIntro);
 }
@@ -1830,7 +1830,7 @@ public function winRapeHyenaPrincess():void {
 	outputText("\n\nThe gnoll's eyes cross as you slide her off your spent shaft, and a fountain of cum erupts from her twat, sliding down the length of her bitch-cock towards the dirt.  With your lust sated and your dick slowly drooping downward, you feel a little ashamed of what you did.  You deflowered this poor girl, and worse, you loved every second of it.  Picking a nearby thistle bloom, you tuck it into her hair.  Then, before you grab your skirt and leave, you give her unresisting mouth a slow smooch.  \"<i>I'm sorry,</i>\" you whisper as you depart, cutting her free of her bonds.");
 
 	outputText("\n\nThe only answer you get is a blissful, \"<i>Oooohhhhhh...</i>\"");
-	player.orgasm();
+	player.orgasmDick();
 	menu();
 	addButton(0,"Next",urtaNightSleep);
 }
@@ -1900,7 +1900,7 @@ public function useSuccubiMilkOnGnollPrincesses():void {
 
 	outputText("\n\nThe gnoll's eyes cross as you slide her off your spent shaft, and a fountain of cum erupts from her ass, sliding down the length of her bitch-cock towards the dirt.  With your lust sated and your dick slowly drooping downward, you feel a little ashamed of what you did.  You deflowered this poor girl's asshole, and worse, you loved every second of it.  Picking a nearby thistle bloom, you tuck it into her hair.  Then, before you grab your skirt and leave, you give her unresisting lips a slow smooch.  \"<i>I'm sorry,</i>\" you whisper as you depart, leaving her wallowing in a sea of seed.  The only answer you get is a blissful, \"<i>Oooohhhhhh...</i>\"");
 
-	player.orgasm();
+	player.orgasmDick();
 	menu();
 	addButton(0,"Next",urtaNightSleep);
 }
@@ -1939,7 +1939,7 @@ public function loseToGnollPrincessAndGetGangBanged():void {
 		outputText("\n\nYour dick arches up on its own as more and more blood rushes into it, rhythmically clenching hidden muscles in ways that milky dollops of pre ooze out of your tip one after another.  \"<i>Cum,</i>\" the savanna princess commands, and this time you obey without thinking.  Your nipples pucker, hard as diamonds, and your cunt spasms around a phantom intruder, glazing the backside of your balls with tangy girl-cum.  That same taut sack, swollen and stretched by your aching balls, gradually diminishes in size, passing its cargo into your urethra, which stretches wide, bulging out into the plump pads. The gnoll curls a toe in front of your spurting slit, turning the long ropes you've begun to spray into high-pressure squirts of thick semen.  It soaks her foot-fur, your belly, your tits, your face, and your aggressor's lower body.  You cum and cum, releasing seemingly endless torrents of alabaster spooge to your foe's controlling toes, your body growing weaker and more exhausted with each passing burst of jism.");
 
 		outputText("\n\nThe gnoll's voice praises you again, \"<i>Good girl.</i>\"  Not minding how sinfully sticky you've become, you pass into a exhausted yet pleasant slumber, so deep you don't even feel yourself being moved.");
-		player.orgasm();
+		player.orgasmDick();
 	}
 	//Lose Via HP✓
 	else {
@@ -2032,7 +2032,7 @@ private function loseToGnollAsUrtaEpilogue():void {
 	outputText("\n\nYou fucking love this!  Your head is swimming, your body is lost to pleasure, and you're getting so much cum!  The fem-boy above gets off, but like clockwork, he's replaced by another slave.  One of them starts to climax in one of your orifices, but you're too doped up to even recognize where it is.  Sperm is soaking you from head to toe, gnoll boys are rubbing their nuts on you, and you're getting thoroughly glazed.  It's so... so... warm...");
 
 	outputText("\n\nConscious thought ceases completely.  Pleasure, orgasm, and getting more jizz for your womb become your only concerns.");
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("lib", 20, "sen", 100, "cor", 20);
 	//[Next]
 	menu();
@@ -2099,7 +2099,7 @@ private function urtaSleepsArmored():void {
 	//{Recover less HP/fatigue or something}
 	HPChange(.5 * player.maxHP(),false);
 	player.changeFatigue(-50);
-	player.orgasm();
+	player.orgasmDick();
 	menu();
 	addButton(0,"Next",introSuccubiAndMinotaur);
 }
@@ -2176,7 +2176,7 @@ private function urtaFinishesWithBigOrange():void {
 	outputText("\n\nYou black out from the onslaught of pleasure - it's too much for your mere mortal brain to handle, and your mind shuts down.  It doesn't stop you from dreaming of sex for hours more, or from waking up a dripping wreck in the morning, soaked with vine-sperm and drained dry.  Amazingly, your vagina (and hips) have closed back up.  Guiltily, you press your digits into your vagina.  It hugs them tightly, and you sigh in relief.  You look down to pull them out, and realize you've fisted yourself up to your elbow.  Shit.  This won't be easy to explain to " + player2.short + ", but maybe " + player2.mf("he","she") + " will like having someone who can combine tightness and an accommodating capacity.");
 	flags[kFLAGS.URTA_TENTACLE_GAPED] = 1;
 	flags[kFLAGS.URTA_TENTACLE_RAPED] = 1;
-	player.orgasm();
+	player.orgasmAnal();
 	dynStats("lib", 1, "sen", 2);
 	menu();
 	addButton(0,"Next",introSuccubiAndMinotaur);
@@ -2190,7 +2190,7 @@ private function urtaFinishesWithTentacles():void {
 	outputText("\n\nYou tug two mouths back onto your sore breasts and press them onto your abused nipples.  They suck at once, even though your milk has long been exhausted.  The aphrodisiacs inside you morph the pain and pleasure into a syrup of ecstasy for your brain to drown in, and as tentacle after tentacle begins to erupt, you climax.   The cilia girding your maleness go crazy, which causes your jism to wrench free of your body with such force that your [hips] pop from your straining muscles and your horse-cock feels about to explode.  The interior floods with your dick-milk, traveling away through the vine in fat bulges.  Again and again you pulse, filling the vine with the same orgasmic squelching that the other tentacles use to fill your holes.  Seedy spunk slops onto your tits, into your pits, over your elbows, onto your knees, and drenches your feet.  Your whole body is a dripping, jizz-drenched wreck.  Your cunny is spasming, clenching, and sucking.  You scream as the tentacle withdraws from your mouth, suddenly muffled when it splatters you with a fat deposit of alabaster cream.");
 	outputText("\n\nYou black out from the onslaught of pleasure - it's too much for your mere mortal brain to handle, and your mind shuts down.  It doesn't stop you from dreaming of sex for hours more, or from waking up a dripping wreck in the morning, soaked with vine-sperm and drained dry.");
 	flags[kFLAGS.URTA_TENTACLE_RAPED] = 1;
-	player.orgasm();
+	player.orgasmLips();
 	dynStats("lib", 1, "sen", 1);
 	menu();
 	addButton(0,"Next",introSuccubiAndMinotaur);
@@ -2303,7 +2303,7 @@ private function submissiveMinoUrtaBadEndPtII():void {
 	outputText("\n\n\"<i>Your first taste, huh?  Get used to it.</i>\"");
 
 	outputText("\n\nThe minotaur tosses you back into the puddle, making sure you land on your side at the shallow edge.  Gasping for breath, you inhale more and more of that wonderful aroma, dreamingly sighing as more of it drips from your well-used gash.  The entrance to your vagina is permanently stretched, gaped wide just like 'Fido' would want it.  You dip your lips to drink of his bounty, crying a single tear when the word '" + player2.short + "' comes to mind and hoping you'll forget.");
-	player.orgasm();
+	player.orgasmLips();
 
 	//[Next]
 	menu();
@@ -2390,7 +2390,7 @@ public function winRapeAMinoLordAsUrta():void {
 	outputText("\n\nYou hurriedly re-dress and turn to the succubus, who has finished masturbating, and you get your first real chance to properly inspect her...");
 	flags[kFLAGS.URTA_RAPED_MINO_LORD] = 1;
 	//[End combat, queue post encounter]
-	player.orgasm();
+	player.orgasmDick();
 	menu();
 	addButton(0,"Next",beatMinoLordOnToSuccubi);
 }
@@ -2435,7 +2435,7 @@ public function urtaLosesToMinotaurRoughVersion():void {
 	outputText("\n\nFor well over a few minutes you continue to cum with the fallen minotaur.   Roughly pulling your still-spurting column from the beastman's mouth, you grab hold of your twin dicks and pump them hard, masterbating to soak him in your alabaster spunk.  Finally, the tremendous orgasm ends, the fallen lord painted completely white with your seed, his once-muscular stomach completely rounded by the sheer amount of sperm you stuffed him with.");
 
 	outputText("\n\nLicking your chops with hunger, you look up at the succubus you had been watching, your sexual appetite still not satisfied.  Letting out a growl, you lock your eyes on the succu-cow.  \"<i>Urta wants to <b>BREED</b>!</i>\" you howl before stepping toward your next target.");
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("lib", 50, "sen", 50);
 	flags[kFLAGS.URTA_IS_VULQUINE_MENACE] = 1;
 	menu();
@@ -2456,7 +2456,7 @@ private function urtaSheHulkPartII():void {
 	outputText("\n\nFinally, after what feels like the longest orgasm you've ever felt, it finally ends, your lover's body filled to bursting and soaked to the bone in your sperm, the drug filled spunk seeping into every pore and cell of her body.  It replaces that nasty addiction to minotaur seed with a craving for your own.  As you sit to rest for a moment, you realize you already want more.  You want to fuck another willing (or unwilling) body with your potent seed.  Your primal mind is taken from its fantasies when the succubus suddenly convulses, transforming before your very eyes into a far more dangerous form.  From how drenched she is, you can't tell precisely what's becoming of her, her body seeming more vulpine in appearance with every passing second, while her hips and breasts stay the same.  A new addition grows on her body, sprouting from between her loins.  A great, bitch-taming, equine cock sprouts from between her legs along with a pair of huge balls, swelling to the size of cantaloupes.");
 	outputText("\n\nBy the time it's over, you realize the demon has become a miniature version of yourself...  The only difference besides size is that a long, thin spaded tail protrudes from her lower back.  Despite this, your feral mind cares little for the implications of such a transformation, hungering only for food and another good, hard fuck.  Turning your attention to the minotaur from before, you find that he too has transformed, a good couple feet smaller then he was before.  He is now a she, albeit with a huge stallion-prick jutting from between <b>HER</b> voluptuous hips.  Like the demon, this body looks to be a smaller version of yours, the difference on this one being a pair of horns growing from her sticky, spunk-soaked head.");
 	outputText("\n\nShaking off any higher inquiries, you set your gaze upon the two herms, your pricks aching to be sheathed within their tight, warm bodies.  As if sensing your hunger, the two perk up, eagerly coming to your side to worship your cocks and balls with their tongues, anxious to get at the hyper-addictive sperm within your already swelling sack.  Somewhere deep in the recesses of your mind, a tiny voice cries out at the terrible fate you have met.");
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("lib", 50, "sen", 50);
 	menu();
 	addButton(0,"Next",urtaGameOver);
@@ -2597,7 +2597,7 @@ private function fuckTheCowCubi():void {
 	outputText("\n\n...Not a chance, you think to yourself.  But, from that familiar warmth burning in your dick and the clenching of your balls, things are about to finish, one way or another... You cry out as you cum for the second time, flooding the demon's loose cunt with your jizz.  \"<i>Ahh!  Fox milk!  Give me all your seed!  Make me pop a new litter of imps!</i>\" she screams, her cunt quivering with an orgasm of her own, milking your shaft as well as it can after being ruined by her pet minotaur.");
 
 	outputText("\n\nYou empty the bulk of your cum into the demonic slut, then pull out, spraying her ass and legs with the last few spurts of jizz.  \"<i>Hah!  Is that it?</i>\"  The demon crows, but gets no further; you grab your halberd and bring it crashing down, blunt-end first, into the back of her skull, leaving her unconscious.");
-	player.orgasm();
+	player.orgasmDick();
 	outputText("\n\nYou look at her, sprawled there, and your face falls, shame burning in your belly.  What kind of woman are you?  Bad enough to sleep around on your lover, but with a demon?  Are you really that incapable of controlling yourself?  Feeling miserable, trying to justify your actions and vowing that Taoth will be removed from you if it's the last thing you do, you pull your clothes back on and start heading into the shrine, anxious to be free of him at last.");
 	menu();
 	addButton(0,"Move On",enteringTaothsShrine);
@@ -2797,7 +2797,7 @@ private function knockUpUrtaWithGodChild():void {
 	outputText("\n\n\"<i>Mmmm, not done yet, are you, love?  I'm still horny!</i>\" Urta proudly declares, even while her dick is drooling a thin flow of leftover cum across your chest, slapping against your middle again and again with her bounces.  An invigorating tingle tickles through your [balls], and you realize you've only just begun to fertilize her...");
 
 	outputText("\n\nUrta rides you through at least three more orgasms, though you soon lose count, conscious only of the increasingly urgent motions she makes atop you.  Eventually, even the sex can't keep your beleaguered body awake, and you slump into unconsciousness, your only company the 'squish-squish-squish' of your joined genitals.");
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", -2);
 	menu();
 	addButton(0,"Next",postFuckUrtaUp);

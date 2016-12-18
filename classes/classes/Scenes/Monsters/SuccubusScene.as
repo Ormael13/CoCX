@@ -53,7 +53,7 @@ package classes.Scenes.Monsters
 				if (player.cockTotal() > 1) outputText("She only wears herself out trying to wriggle away from you, and you use the chance to carefully cram another of your cocks into her. You can feel her getting stretched out. ", false);
 				outputText("With the glint of a pervert in your eye, you look down on her, drinking in the anguish in her face as you rape her slowly this time. She gets increasingly wet as you keep fucking her, and you mock her openly for supposedly enjoying this. You lick the tears rolling down her face and continue for some time. When you decide she's ben broken, you decide to finish and change suddenly to much faster strokes. The succubus howls, ruffling your hair as you cum all over her insides yet again. Satisfied, you pull out and leave her there panting and wasted, evidence of the incursion leaking from her snatch. ", false);
 			}
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("lib", -2, "cor", 3);
 			combat.cleanupAfterCombat();
 		}
@@ -71,7 +71,7 @@ package classes.Scenes.Monsters
 				outputText("\n\nWhen it's finally over she leaves you wordlessly. Suddenly on the ground there's a bottle that wasn't there before. You pick it up and examine it. It's a viscous white fluid labeled '<i>Incubus Draft</i>'.");
 				inventory.takeItem(consumables.INCUBID, combat.cleanupAfterCombat); //it's Incubus Draft
 			}
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("lib", -2, "cor", 3);
 			if (fromBattle)
 				combat.cleanupAfterCombat();

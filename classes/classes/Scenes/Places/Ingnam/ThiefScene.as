@@ -65,7 +65,7 @@ package classes.Scenes.Places.Ingnam
 			outputText("\n\nYou " + (player.armor != ArmorLib.NOTHING || player.lowerGarment != UndergarmentLib.NOTHING ? "remove your " + player.armorName + ", " : "") + "get the thief into position and you slowly slide your " + player.cockDescript(x) + " into his rear hole. Despite the thief's protestations, he seems to find pleasure.");
 			outputText("\n\n\"<i>Yes, fuck me! Please fuck me!</i>\" The thief yells. That's the only encouragement you need as you thrust back and forth, abusing his ass. You grab his shoulders to get more leverage and you continue to pound with reckless abandon.");
 			outputText("\n\nEventually, you can hold back no more and you unload your seed into his depths. The thief achieves orgasm as well, cumming all over the ground before falling on ground, dazed. You slide your " + player.cockDescript(x) + " out with a pop" + player.clothedOrNaked(", redress yourself") + " and leave the ravaged thief to recover.");
-			player.orgasm();
+			player.orgasmDick();
 			combat.cleanupAfterCombat();
 		}
 		
@@ -76,7 +76,7 @@ package classes.Scenes.Places.Ingnam
 			outputText("\n\nEventually, you can hold back no more and your [pussy] spasms, launching femcum");
 			if (player.hasCock()) outputText(" while your [cock] fires ropes of jism");
 			outputText(" all over his face. Still disoriented, the thief collapses back on the ground. You " + player.clothedOrNaked("redress yourself") + " and make a hasty exit while the thief is recovering from his ordeal.");
-			player.orgasm();
+			player.orgasmVaginal();
 			combat.cleanupAfterCombat();
 		}
 		

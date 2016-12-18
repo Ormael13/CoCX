@@ -424,7 +424,7 @@ package classes.Scenes.Monsters
 				//if you didnt get swallowed earlier, get swallowed now
 				if (mimicAppearance == 2 || mimicAppearance == 3) outputText("\n\nJust before you black out, you look up to see yourself being lifted towards the beast’s suddenly huge, gaping maw. ");
 			}
-			player.orgasm();
+			player.orgasmGeneric();
 			doNext(mimicTentacleEnd);
 		}
 

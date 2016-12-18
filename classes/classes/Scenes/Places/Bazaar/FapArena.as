@@ -407,19 +407,19 @@ private function fapResults(place:Number = 3):void {
 				break;
 		}
 		flags[kFLAGS.FAP_ARENA_VICTORIES]++;
-		player.orgasm();
+		player.orgasmDick();
 		inventory.takeItem(itype, camp.returnToCampUseOneHour);
 	}
 	//[if you didn't win]
 	else if (place == 2) {
 		outputText("You awkwardly remove the dick from your ass and start dressing yourself.  Before you go, the cute little referee waves at you, her coy smile and nude body somehow awakening " + player.sMultiCockDesc() + " again.  Ye Gods, it never ends.  \"<i>I hope you enjoyed this session. Better luck next time...</i>\"", false);
-		player.orgasm();
+		player.orgasmAnal();
 		doNext(camp.returnToCampUseOneHour);
 	}
 	//[if you lost]
 	else {
 		outputText("You awkwardly remove the dick from your ass, start cleaning yourself from all the dirt and cum before leaving the tent.  Before you go, the nude referee approaches you and gently squeezes your " + player.cockDescript(x) + "; you still wince from the pounding it took earlier.  \"<i>Awww, looks like you had a rough time, didn't you?  Well, it happens sometimes.  Hopefully you will get better at this.  See you next game!</i>\"", false);
-		player.orgasm();
+		player.orgasmAnal();
 		doNext(camp.returnToCampUseOneHour);
 	}
 	

@@ -2905,13 +2905,15 @@ public static const UNKNOWN_FLAG_NUMBER_02896:int                               
 public static const UNKNOWN_FLAG_NUMBER_02897:int                                   = 2897;
 public static const UNKNOWN_FLAG_NUMBER_02898:int                                   = 2898;
 public static const UNKNOWN_FLAG_NUMBER_02899:int                                   = 2899;
-public static const UNKNOWN_FLAG_NUMBER_02900:int                                   = 2900;
-public static const UNKNOWN_FLAG_NUMBER_02901:int                                   = 2901;
-public static const UNKNOWN_FLAG_NUMBER_02902:int                                   = 2902;
-public static const UNKNOWN_FLAG_NUMBER_02903:int                                   = 2903;
-public static const UNKNOWN_FLAG_NUMBER_02904:int                                   = 2904;
-public static const UNKNOWN_FLAG_NUMBER_02905:int                                   = 2905;
-public static const UNKNOWN_FLAG_NUMBER_02906:int                                   = 2906;
+//
+public static const TIMES_ORGASM_VAGINAL:int 	 									= 2900; // 
+public static const TIMES_ORGASM_ANAL:int 											= 2901;
+public static const TIMES_ORGASM_DICK:int											= 2902;
+public static const TIMES_ORGASM_TITS:int                                           = 2903;
+public static const TIMES_ORGASM_NIPPLES:int                                        = 2904;
+public static const TIMES_ORGASM_LIPS:int                                        	= 2905;
+public static const BIMBOSKIRT_MINIMUM_LUST:int          							= 2906;
+//
 public static const UNKNOWN_FLAG_NUMBER_02907:int                                   = 2907;
 public static const UNKNOWN_FLAG_NUMBER_02908:int                                   = 2908;
 public static const UNKNOWN_FLAG_NUMBER_02909:int                                   = 2909;

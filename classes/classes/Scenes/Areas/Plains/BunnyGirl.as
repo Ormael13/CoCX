@@ -243,7 +243,7 @@ private function bunbunFucksYourVag():void {
 	else {
 		player.knockUp(PregnancyStore.PREGNANCY_BUNNY, PregnancyStore.INCUBATION_BUNNY_BABY, 60);
 	}
-	player.orgasm();
+	player.orgasmVaginal();
 	dynStats("lib", 1, "sen", -3);
 	doNext(camp.returnToCampUseEightHours);
 }
@@ -332,7 +332,7 @@ private function bunbunFucksPCInAss():void {
 	outputText("She walks away, her puffy tail twitching with the breeze while your eyes drift closed.", false);
 	//(Easter ass-preg + 8 hours pass)
 	player.buttKnockUp(PregnancyStore.PREGNANCY_BUNNY, PregnancyStore.INCUBATION_BUNNY_EGGS, 1, 1);
-	player.orgasm();
+	player.orgasmAnal();
 	dynStats("lib", 1, "sen", 1);
 	doNext(camp.returnToCampUseEightHours);
 }
@@ -414,7 +414,7 @@ private function bunbunGetsFucked():void {
 	
 	outputText("You shrug and pick up one of her eggs, noticing that it's turned neon pink in color.  The bunny mumbles, \"<i>Have it, iz good for youuuu...</i>\" before she starts to snore and murmur out a sexual dream.\n\n", false);
 	
-	player.orgasm();
+	player.orgasmDick();
 
 	dynStats("lib", 1, "sen", 1);
 	inventory.takeItem(consumables.NPNKEGG, camp.returnToCampUseOneHour);
@@ -438,7 +438,7 @@ private function bunbun69():void {
 			outputText("Before you can return with a witty remark, the bunny has hopped off, leaving you alone in the field with your face in your palm.\n\n", false); 
 			//- Intelligence
 			//+ Lust
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("int", -2);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -455,7 +455,7 @@ private function bunbun69():void {
 
 			outputText("You wipe off what you can of the sticky goop and trot off with a scowl, leaving the hysterical rabbit to calm herself down.\n\n", false);
 			//- Intelligence
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("int", -2);
 			//+ Lust
 			//+ Pink Egg 
@@ -516,7 +516,7 @@ private function bunbun69():void {
 			player.tailType = TAIL_TYPE_RABBIT;
 			player.earType = EARS_BUNNY;
 			doNext(camp.returnToCampUseOneHour);
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("lib", 1, "sen", 1);
 		}
 		//REGULAR SHOW
@@ -572,7 +572,7 @@ private function bunbun69():void {
 			player.tailType = TAIL_TYPE_RABBIT;
 			player.earType = EARS_BUNNY;
 			doNext(camp.returnToCampUseOneHour);
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("lib", 1, "sen", 1);
 		}
 	}
@@ -612,7 +612,7 @@ private function bunbun69():void {
 		player.tailType = TAIL_TYPE_RABBIT;
 		player.earType = EARS_BUNNY;
 		doNext(camp.returnToCampUseOneHour);
-		player.orgasm();
+		player.orgasmVaginal();
 		dynStats("lib", 1, "sen", 1);
 	}
 }
@@ -664,7 +664,7 @@ public function layEggsInBunbuns():void {
 	}
 	outputText("\n\nFinally you find you no longer have any to give to the egg-obsessed rabbit girl and the ovipositor retracts into its slit.  Tired but blissful, she curls up to slumber, and you leave her to deal with having a stomach chock full of eggs 'n honey, returning to camp until you once again need a warm body to play host.");
 	player.dumpEggs();
-	player.orgasm();
+	player.orgasmOvi();
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -715,7 +715,7 @@ public function ovipositBunnyEaster():void {
 	outputText("\n\nThe hare goes limp after that, her eyes drifting shut as her tongue idly licks her spent seed from her face.  It looks like she got more eggs than she reckoned for.");
 	//ITS OVER
 	player.dumpEggs();
-	player.orgasm();
+	player.orgasmOvi();
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -856,7 +856,7 @@ private function fuckTheEggBoundBun():void {
 	else outputText("growing larger and larger as cum splatters in thick streams from her saturated pussy. Your seemingly endless gallons of flooding cum wash the remnants of her previous partners away, immersing the caramel woman in the fluid wealth of your liquid possession.");
 	outputText("  No sooner has your spunk taken root inside her, than the bunny's already colossal testes tremble anew.  Before your eyes, they balloon even larger, fattening with the profit of your claim.  You remain inside her a moment longer to marvel at the impossible bulk of her egg-stuffed body, before withdrawing and stepping back to clean yourself off.  Bulbous dollops of spunk bubble from her cunny as she impotently grinds her shaft against the mammoth bulk of her stoppered balls.  Satisfied, you head back to camp, leaving the bunny to the mercies of the next rescuer.");
 	//[End Encounter, corruption up]
-	player.orgasm();
+	player.orgasmGeneric();
 	dynStats("cor", 2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -968,7 +968,7 @@ private function getEggflated():void {
 	}
 	outputText(player.modThickness(100,3));
 	outputText(player.modTone(0,3));
-	player.orgasm();
+	player.orgasmVaginal();
 	dynStats("lib", 1, "sen", -3);
 	doNext(camp.returnToCampUseEightHours);
 }

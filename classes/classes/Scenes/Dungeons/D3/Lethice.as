@@ -635,7 +635,7 @@ package classes.Scenes.Dungeons.D3
 				outputText("You disregard the demons’ demands, instead focusing on grinding your hips on the omnibus’s face, slathering her chin and cheeks with slick feminine excitement. She moans in appreciation, wrapping a hand around her over-sized doggy-cock and stroking it furiously to the same rhythm of her tongue’s exploration of your [cunt]. With such single-minded intention, it doesn’t take the demon slut long at all to bring you to a well-deserved climax - and herself as well, spraying a thick, musky rope of cum across your [feet] while you smear her face with orgasmic juices.");
 				outputText("\n\nSated, you give the well-used omnibus a shove back into the demon fuck-pile and ready your [weapon]. Confident in your readiness, you advance on Lethice.");
 			}
-			player.orgasm();
+			player.orgasmGeneric();
 			beginPhase3(true);
 		}
 		
@@ -675,7 +675,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("! You give her a reproachful look, still grinding your hips as the aftershocks of orgasm pass.");
 			outputText("\n\n<i>“Not sorry,”</i> she giggles, running a finger around her cum-smeared twat and pushing every spare droplet back in as you pull out. <i>“Mmm, that’ll make for a lovely brood of imps, </i>Champion<i>!”</i>");
 			outputText("\n\nShuddering at the thought, you grab your gear and stagger up and away, leaving the demons to finish each other off. Confident in your readiness, you advance on Lethice.");
-			player.orgasm();
+			player.orgasmGeneric();
 			beginPhase3(true);
 		}
 		
@@ -708,7 +708,7 @@ package classes.Scenes.Dungeons.D3
 			outputText(". You only barely keep your wits about you enough to push her back down before she can force her knot inside you, though you’re treated to a veritable waterfall of white spunk pouring out of your well-bred hole instead.");
 			outputText("\n\n<i>“I can see why they call you ‘Champion,’”</i> the demon purrs as her spunk-slathered red prick flops against her belly. <i>“Maybe after our queen beats you down, I’ll come visit you in the breaking tanks... I could always use another eager little broodmare.”</i>");
 			outputText("\n\nYou shove the demoness away, suddenly reminded of her true nature. At least for now, you’re sated. Confident in your readiness, you advance on Lethice.");
-			player.orgasm();
+			if (player.hasVagina()) player.orgasmVaginal(); else player.orgasmAnal();
 			beginPhase3(true);
 		}
 		

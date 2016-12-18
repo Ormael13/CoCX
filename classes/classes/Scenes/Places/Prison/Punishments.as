@@ -93,7 +93,7 @@ package classes.Scenes.Places.Prison
 					player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 					player.slimeFeed();
 					player.refillHunger(25);
-					player.orgasm();
+					player.orgasmVaginalAnal();
 					prison.changeEsteem(-3,prison.inPrison);
 					prison.changeObey(1,prison.inPrison);
 					break;
@@ -417,7 +417,7 @@ package classes.Scenes.Places.Prison
 			{
 				player.buttChange(1.7 * newVal,true,true,false);
 			}
-			player.orgasm();
+			player.orgasmVaginalAnal();
 			prison.changeEsteem(-5,prison.inPrison);
 			prison.changeObey(2,prison.inPrison);
 			doNext(camp.returnToCampUseOneHour);

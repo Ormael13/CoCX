@@ -2675,6 +2675,7 @@ package classes.Scenes.Places
 						outputText(" abdomen is wracked with spasms of pleasure as a fountain of clear, viscous fluid erupts from your [cunt] and coats your Mistress' head and torso. She allows herself to indulge in a moment of ecstasy, rubbing your juices into her firm, shapely tits with her left hand while using them to massage her dick with her right. Despite being lost in your own pleasure, you cannot help but feel gratifed watching her face, eyes closed, head tilted back, mouth agape, fiery red bangs haphazardly scattered across her face in sticky strands. Then the moment passes, and she speaks.");
 					}
 					outputText("\"<i>Do you understand now, slave? Your body craves my abuse. Embrace it -- once you do, your life will become an unending river of pleasure</i>\"");
+					player.orgasmGeneric();
 					//buttChange(12,true,true,false); //Doesn't count as it would be a waste of virginity.
 					break;
 				case 3:
@@ -2688,6 +2689,7 @@ package classes.Scenes.Places
 						outputText("(Placeholder) \"<i>You're going to get a special treat today, [boy], but first you need to beg me to put a baby in your dirty [cunt].</i>\" After a brief hesitation, you do so. She makes you present yourself like a bitch in heat while continuing to beg. Finally she gives you want you want, and fills your womb with her potent seed.\n\n");
 						player.knockUp(PregnancyStore.PREGNANCY_IMP, 350, 50);
 						player.cuntChange(32,true,true,false);
+						player.orgasmVaginal();
 						break;
 					}
 				case 7:
@@ -2710,10 +2712,10 @@ package classes.Scenes.Places
 					
 					outputText(" to make you spurt. Your body wants to be used by my dick and filled with my seed. You are a cocksucking, anal loving, cum-slut. Accept it.</i>\"");
 					player.buttChange(32,true,true,false);
+					player.orgasmAnal();
 			}
 			player.slimeFeed();
 			changeObey(1,inPrison);
-			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -2752,11 +2754,13 @@ package classes.Scenes.Places
 					{
 						outputText("With four fingers in your bum and you teetering on the agonizing edge of orgasm, she decides to give you a second chance. She gives you a chance to beg her for her cock, and you take it. She then stands between your legs, replaces the fingers in your ass with the tip of her enormous cock. However, instead of fucking you, she tells you that you will need to show your contrition and fuck yourself. Overwhelmed by lust, you immediately respond, clumsily shifting your weight forward and backward until you find your self swinging wildly, stuffing yourself brutally with her fleshy shaft. Before long your exertion pays off and you orgasm.\n\n");
 						player.buttChange(32,true,true,false);
+						player.orgasmAnal();
 					}
 					else
 					{
 						outputText("Eventually she squeezes her entire hand inside. She holds it still, and begins to push your body back and forth so that the swinging motion forces her fist in and out of your sphincter, all the while continuing to expertly hold you at the edge of orgasm. Only after minutes of this agonizing treatment does she allow you to orgasm.");
 						//buttChange(20,true,true,false); //Must have phallus for anal virginity! Therefore this doesn't count.
+						player.orgasmGeneric();
 					}
 					if (player.hasCock())
 					{
@@ -2793,6 +2797,7 @@ package classes.Scenes.Places
 						}
 						player.cuntChange(32,true,true,false);
 						player.knockUp(PregnancyStore.PREGNANCY_IMP, 350, 70);
+						player.orgasmVaginal();
 						break;
 					}
 				case 7:
@@ -2815,11 +2820,11 @@ package classes.Scenes.Places
 					
 					outputText(" to make you spurt. Your body wants to be used by my dick and filled with my seed. You are a cocksucking, anal loving, cum-slut. Accept it.</i>\"");
 					player.buttChange(32,true,true,false);
+					player.orgasmAnal();
 			}
 			outputText("(Placeholder) Afterwards, " + prisonCaptor.captorPronoun1 + " leaves you hogtied to help you remember to obey in the future. ",false);
 			player.slimeFeed();
 			player.changeStatusValue(StatusEffects.PrisonRestraints,2,2);
-			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
 		

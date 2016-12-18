@@ -47,7 +47,7 @@ package classes.Scenes.Dungeons.DeepCave
 			clearOutput();
 			hideUpDown();
 			player.changeFatigue(5,0);
-			player.orgasm();
+			player.orgasmGeneric();
 			//(Male)
 			if (player.gender == 1) {
 				outputText("Before the fairy can get any tighter, you figure it's time to loosen her back up. Grabbing fistfuls of her violet hair, you thrust forward, violently, slamming the chained fairy's head against the stone wall. \"<i>Fuck!</i>\" She shrieks in delight. \"<i>More, more!</i>\" All too happy to comply, you begin screwing her harder, the crushing pressure of her swollen labia milking your cock with every motion. The giant fairy seems to feed on your rough treatment, and begins to slap her ass back into you, in time with your thrusts, giggling aimlessly between her disjointed pleas for your cum. You grab her wobbling chest, figuring it'll be the best handhold you're going to find on the malnourished girl, and are rewarded with an orgasmic cry from the fairy. She clenches down on your " + player.cockDescript(0) + " as she clasps your hardness, her pulsing depths making you dig your fingers deeper into her supple flesh. Rocking against her at a painful pace, you grit your teeth and tighten your grip on her teats, their fluid depths yielding to your passionate throes. Her nipples swell and burst with milk, white cream spraying at your feet with each thrust, and you slide your hands down to pull at the lactating pink nubs, each burst of pale alabaster filling your lust to bursting.\n\n", false);
@@ -168,7 +168,7 @@ package classes.Scenes.Dungeons.DeepCave
 			spriteSelect(85);
 			clearOutput();
 			hideUpDown();
-			player.orgasm();
+			player.orgasmGeneric();
 			player.changeFatigue(5,0);
 			if (player.cockTotal() > 0) {
 				var x:Number = player.cockThatFits(60);
@@ -352,7 +352,7 @@ package classes.Scenes.Dungeons.DeepCave
 				outputText("You clutch your " + player.allBreastsDescript() + " and squeeze your " + player.nippleDescript(0) + " until they hurt, the agony giving you strength to drive the dildo back into the fairy, but it's a losing battle. Vala cums before you do, her pulsing walls locking down and driving the dildo out, inch by painful inch, deeper into your body until the base is so far against your gut that it is pushed into your womb with a toe-curling pop. You silently scream in ecstasy and agony, unable to believe that the frail fairy managed to fuck your womb with your own toy. Your strength redoubles and you thrust back, your " + player.cockDescript(0) + " penetrating her spongy, well-used cervix, her womb sucking you inside it. You release the knotted tension, spraying your spunk deep inside her. You slap your " + player.buttDescript() + " against hers with each pulsing load, your " + player.vaginaDescript(0) + " clenching at the dildo stuffing it even as your empty your seed into the chained slave.  You try to go limp, but the double penetrated girl keeps you from pulling out, both of Vala's milking holes pining you against her until every last drop of your sperm has filled her greedy womb. Fairy cum drips down your length, while the flared tip deep inside her large intestine keeps your pussy twitching against her posterior. You jill your " + player.clitDescript() + " for a few minutes afterward, just enjoying the afterglow as your strength returns and the fairy's body unclenches, releasing you from your breeder's embrace, the minotaur dildo still halfway up her ass. You give your fairy girl's rump a slap on the way out- a reward for her brood mother-sized hips.\n\n", false);
 			}
 			//DAH END
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("cor", 1);
 			doNext(playerMenu);
 		}
@@ -434,7 +434,7 @@ package classes.Scenes.Dungeons.DeepCave
 				outputText("When your orgasm subsides, you finally manage to switch off the imp pump in your " + player.vaginaDescript(0) + " and pull it out, tenderly. Your abdomen has been filled enough to leave a paunch of infernal cream below your belly. You press down on it, demonic ichor spilling out of your swollen vagina and splashing between your " + player.hipDescript() + ". You sigh and hope the seed doesn't take hold. Speaking of taking hold, you switch off the gushing monster pump and carefully pull your " + player.multiCockDescriptLight() + " out of the fairy, making sure the metal dildo remains fixed in place to hold the cum inside. You slide out from between her legs and rise unsteadily to look at your handiwork. The fairy has been filled, top to bottom, all three gallons you sprayed in her bowl gone down her thirsty gullet. The jizz you packed into her womb bloats her even further, the girl's belly nearly four times larger than it was when you found her. She wriggles on the ground, lost to the cummy heaven her mindless body has been plunged into. You're not sure what kind of fucked up child that little exchange would give her, but if anybody had the vagina to pass a monster, it'd be Vala. You probably won't get to find out, though. Who knows what kind of incubation period the chimera-kid will have?", false);
 			}
 			//[End Encounter]
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("cor", 1);
 			flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
 			doNext(playerMenu);
@@ -539,7 +539,7 @@ package classes.Scenes.Dungeons.DeepCave
 
 				outputText("When your orgasm subsides, you finally manage to switch off the imp pump in your " + player.vaginaDescript(0) + " and pull it out, tenderly. Your abdomen has been filled enough to leave a paunch of infernal cream below your belly. You press down on it, demonic ichor spilling out of your swollen vagina and splashing between your thighs. You sigh and hope the seed doesn't take hold. Speaking of taking hold, you switch off the gushing monster pump and carefully pull your " + player.cockDescript(0) + " out of the fairy, making sure the metal dildo remains fixed in place to hold the cum inside. You slide out from between her legs and rise unsteadily to look at your handiwork. The fairy has been filled, top to bottom, all three gallons you sprayed in her bowl gone down her thirsty gullet. The jizz you packed into her womb bloats her even further, her belly nearly four times larger than it was when you found her. She wriggles on the ground, lost to the cummy heaven her mindless body has been plunged into. That should keep her occupied while you root out the imps.", false);
 			}
-			player.orgasm();
+			player.orgasmGeneric();
 			//[End Encounter]
 			flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON]++;
 			//Mark as defeated in combat
@@ -688,7 +688,7 @@ package classes.Scenes.Dungeons.DeepCave
 				}
 			}
 			doNext(cleansedValaFuckHerBrainsOutPtII);
-			player.orgasm();
+			player.orgasmGeneric();
 		}
 
 		//Part 2
@@ -804,7 +804,7 @@ package classes.Scenes.Dungeons.DeepCave
 
 			outputText("\"<i>You see?</i>\" Vala asks, holding the organic device aloft with a mischievous smile. \"<i>They don't last forever, but while they do, these little toys give us a very intimate connection to loved ones. This way, I can go all week with a reminder of you inside me.</i>\" She gives you a kiss on the lips and the fairies give you a tiny chorus of applause for the entertaining show. It's good that her little friends aren't around more often, you pant to yourself, or you'd be a drooling vegetable in no time.\n\n", false);
 			cheatTime(1);
-			player.orgasm();
+			player.orgasmDick();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -823,7 +823,7 @@ package classes.Scenes.Dungeons.DeepCave
 
 			outputText("\"<i>You see?</i>\" Vala asks, holding the organic device aloft with a mischievous smile. \"<i>They don't last forever, but while they do, these little toys give us a very intimate connection to loved ones. This way, I can go about all week with a reminder of you inside me.</i>\" She gives you a kiss on the lips and the fairies give you a tiny chorus of applause for the entertaining show. It's good that her little friends aren't around more often, you gasp to yourself, or you'd be a drooling vegetable in no time.", false);
 			cheatTime(1);
-			player.orgasm();
+			player.orgasmVaginal();
 			doNext(camp.returnToCampUseOneHour);
 		}
 		//[Cum Bath]
@@ -887,7 +887,7 @@ package classes.Scenes.Dungeons.DeepCave
 			player.cumMultiplier += 2;
 			if (player.balls > 0) player.ballSize += .3;
 			flags[kFLAGS.VALA_CUMBATH_TIMES]++;
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("lib", -1.5);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -975,7 +975,7 @@ package classes.Scenes.Dungeons.DeepCave
 			outputText("\n\nWhile you stand there, dripping sexual juices, Vala gradually starts to diminish in size.  Sadly, her breasts seem to return to normal faster than the rest, which leaves her disproportional while she journeys towards her normal shape.  She's still locked in climax, leaking an ever-shrinking amount of fluid.  The smaller she gets, the faster her change progresses.  Then, with an alarming abruptness, she flops down in the lake of lady-spunk she left behind, moaning pleasantly.");
 			outputText("\n\nYou lift her up out of the mess and carry her to the stream where you both clean up.  Vala murmurs, \"<i>My hero...</i>\" as you wash her, too wiped out to do it herself.  Vala recovers by the time you're getting re-dressed, and she gives you a surprisingly chaste, blushing kiss before she gets ready to depart.  The faerie seems to have some degree of magical affinity, as she's able to knit her dress back together with a bit of mental effort, and then she's fluttering away, calling out her goodbyes to you as she journeys back to Tel'Adre.");
 			player.slimeFeed();
-			player.orgasm();
+			player.orgasmGeneric();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1028,7 +1028,7 @@ package classes.Scenes.Dungeons.DeepCave
 			
 			outputText("\n\nYou lift her up out of the mess and carry her to the stream where you both clean up.  Vala murmurs, \"<i>My hero...</i>\" as you wash her, too wiped out to do it herself.  Vala recovers by the time you're getting re-dressed, and she gives you a surprisingly chaste, blushing kiss before she gets ready to depart.  The faerie seems to have some degree of magical affinity, as she's able to knit her dress and your [armor] back together with a bit of mental effort, and then she's fluttering away, calling out her goodbyes to you as she journeys back to Tel'Adre.");
 			
-			player.orgasm();
+			player.orgasmDick();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1091,7 +1091,7 @@ package classes.Scenes.Dungeons.DeepCave
 			}
 			outputText("\n\nVala climaxes, pulling you both out as a river of fem-spunk gushes out behind you, and you and your lust-locked demoness drag across the faerie's enhanced pleasure-buzzer, smearing her lusty juices across her pulsating, sensitive organ while you thoroughly feed your demoness's insatiable cum-hunger.");
 			outputText("\n\nEventually, you're dropped to the ground, panting for your breath while Vapula's tongue slowly withdraws.  You separate, realizing that during the lengthy cum Shouldra returned to you, and Vala is rapidly dwindling behind you.  The three of you have a playful swim in the stream to get cleaned up before Vala mends her clothing and goes on her way, thanking you for having the chance to feel what it's like to be in charge.");
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("cor", 1);
 			player.slimeFeed();
 			doNext(camp.returnToCampUseOneHour);
@@ -1124,7 +1124,7 @@ package classes.Scenes.Dungeons.DeepCave
 			else outputText("[cock smallest]");
 			outputText(", ensuring that every single drop is passed into her ravenous gash.");
 			outputText("\n\nYou aren't sure how long you stay like that, but eventually, Vala finishes with her own pleasure and sets the pair of you down on the ground, still joined together, groin-to-groin.  You're so sensitive from your recent orgasm that separation is almost painful.  Only after you're free do you realize that Shouldra slipped back into you, and Vala is shrinking down behind you.  The three of you bathe and get dressed together, Vala using some strange magic to repair her dress before she goes.");
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("cor", 1);
 			player.slimeFeed();
 			doNext(camp.returnToCampUseOneHour);
@@ -1208,7 +1208,7 @@ package classes.Scenes.Dungeons.DeepCave
 			else outputText("\n\nYour eyes roll up, your mouth hangs open, and you grunt long and hard as your seed floods Vala’s tight, squeezing cunt like a frothy flood.  Wave after wave of your thick, creamy spunk forces its way through her convulsing cunt and right into her eager, waiting womb.  Your little lover wraps her legs around you, squeezing herself against you to get as much of your hot seed inside her body as she can.  Geysers of spunk force their way into her womb, filling it fuller and fuller until her belly swells.  Her once tight, flat tummy rounds out into a healthy, round cumbaby, your thick, yogurt-like spunk overflowing from her over-stuffed snatch in sticky streams.");
 			
 			outputText("\n\nThe sweet relief of your orgasm washes over you, the blissful afterglow turning your arms and [legs] to jelly as you settle over your small panting lover.  Vala’s body is sweaty and hot from the passionate sex.  Her arms wrap around you, hugging her body against yours as she whispers to you and snuggles against you.  \"<i>Ohhh... that was... you are amazing...</i>\" she says blissfully as she nuzzles her face against your body, her cunt clenching hard around you as she cuddles up against you.  As you lay there holding her, you can hear her whisper softly to herself, muttering sweet nothings into the air to you.  Her fingers run over your [chest], drawing little shapes and hearts over your skin as she hums.  Smiling to yourself, you stroke her head and hold onto her, cuddling up with your tender fairy.  Leaning in, you plant a tender kiss in her hair before you settle in for the night with the oversized fairy.");
-			player.orgasm();
+			player.orgasmGeneric();
 			dynStats("lib", -1, "sen", -2);
 			menu();
 			addButton(0,"Next",valaPartIIWaifuLove)

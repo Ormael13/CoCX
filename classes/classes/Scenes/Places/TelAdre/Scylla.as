@@ -167,7 +167,7 @@ private function helpScylla():void {
 	outputText("and your mind shatters. You grab onto the two horns growing out of her head like they're safety bars and crush her lips and face against your abdomen as you buck into her head. Your shaft swells with the pressure of your load and Scylla's already taxed throat balloons outward. You can see the cum pumping into her with every heartbeat as her belly stretches, fills, and expands to accommodate the milk of your loins. As the cum flows into her, Scylla's breasts begin to respond to the nutrition and they expand nearly as much as her stomach, easily tearing through her shift of a robe.  She swells until her tits " + (player.balls > 0 ? "equal" : "are nearly") + " the size of " + (player.balls > 0 ? "your balls" : "barrels") + ". They, along with the bloated cum-dump of her belly, pin her to the ground. Cum starts spurting in goopy strands out of her nose as it overflows her stomach and is locked in by her pussy-tight mouth.\n\n", false);
 
 	outputText("Eventually, even your impossibly " + (player.balls > 0 ? "swollen testicles" : "potent reserves") + " empty and you immediately pass out, Scylla's dick-sucking lips still suckling at the base of your shaft, your dick still hard and crammed down her throat. When you awaken, your " + (player.balls > 0 ? "balls have shrunk back to almost normal- they've kept a bit of the increased size Scylla's thirst gave them. Scylla's body appears to have metabolized your cum already, as her belly and breasts have receded enough to allow her to stand. She still looks 9 months pregnant and her lips have been permanently transformed into a cock-sucking ring, but her horns have gone down to nubs and that familiar look of shy innocence has returned to the languid pools of her eyes. \"<i>I can't thank you enough,</i>\" she gushes. \"<i>I'm finally full! And I'm still a virgin,</i>\" she adds, giving you a wet kiss on the forehead.  \"<i>Now I can go back to my mission of relieving those who suffer,</i>\" she happily announces, wiping drool from her mouth with a pinkie. You have a pretty good idea how she'll do the relieving in the" : "body seems to have returned more or less to normal- though you get the feeling Scylla's thirst may have left some lingering effects to help you sate her in the future. Scylla's body appears to have metabolized your cum already, as her belly and breasts have receded enough to allow her to stand. She still looks 9 months pregnant and her lips have been permanently transformed into a cock-sucking ring, but her horns have gone down to nubs and that familiar look of shy innocence has returned to the languid pools of her eyes. \"<i>I can't thank you enough,</i>\" she gushes. \"<i>I'm finally full! And I'm still a virgin,</i>\" she adds, giving you a wet kiss on the forehead.  \"<i>Now I can go back to my mission of relieving those who suffer,</i>\" she happily announces, wiping drool from her mouth with a pinkie. You have a pretty good idea how she'll do the relieving in the") + " future...", false);
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("lib", 4, "sen", 3, "cor", 2);
 	player.cumMultiplier += 2;
 	doNext(camp.returnToCampUseOneHour);
@@ -246,7 +246,7 @@ private function scyllaRoundIIPartIII():void {
 		outputText("Summoning all of your strength, you roll over, pinning her beneath you and giving you free reign to fuck her face with abandon as your cock keeps pumping its overflowing seed into her stretching belly. You can feel her body squirming under the overwrought weight of your sweating body as she siphons cream into her frail, hungering form. Gradually, the weight of your loins is transferred into her stomach, ballooning with elastic tension. Her tits swell in time with her belly, spilling out to pin her arms at her sides and wrapping around her throat so that they jiggle every time a load rushes down your cock. Daylight spills into the room by the time your orgasm has finished and the nun before you is little more than lips, tits, and a belly full of your spunk, with hands and feet wriggling happily under the bulk. \"<i>T-thank you...</i>\" she manages to get out before she passes out, exhausted sleep taking her immediately. You don't even have the strength to get back into your clothes, so you wrap a bed sheet around your sweat-soaked body and you stumble downstairs. Taking a heavy seat at a table, you motion for one of the surprised barmaids to bring you something- anything- to eat.\n\n", false);
 	}
 
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("lib", 4, "sen", 3, "cor", 2);
 	player.cumMultiplier += 2;
 	if (model.time.hours > 5) model.time.days++;
@@ -371,7 +371,7 @@ private function scyllaLevelIIIRoundIIIFIGHT():void {
 		outputText("You're still cumming, but it's too much for your body and you collapse, unconscious.", false);
 	}
 	//[Ending]-
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("lib", 4, "sen", 3, "cor", 2);
 	player.cumMultiplier += 2;
 	if (player.balls > 0) player.ballSize += 2;
@@ -497,7 +497,7 @@ private function scyllaPtIVKissPtI():void {
 private function scyllaPtIVKissPtII():void {
 	scyllaSprite();
 	hideUpDown();
-	player.orgasm();
+	player.orgasmDick();
 	var x:Number = player.biggestCockIndex();
 	clearOutput();
 	outputText("When you break your second kiss, tummy full of Scylla's cream, you find yourself entrapped by her mammoth chest. The stimulation of your nursing seems to have caused her tits to overcompensate, inflating with milk far in excess to what your small stomach could drain. You are literally encased between her breasts, the pliant but firm flesh engulfing everything from your shoulders down in her snug cleavage. You shift uncomfortably for a moment, until you realize not all of your body has shrunk. You shift, no longer able to resist your erection's pressure, and shed your " + player.armorName + ". With your shrunken body's child-like dimensions, " + player.sMultiCockDesc() + " is virtually as thick as your torso. The weight would knock you flat on your back if Scylla's tits weren't wrapped around you in their tight embrace.  " + player.SMultiCockDesc() + " strains just under her nose, pulsing at the tightness around you.\n\n", false);
@@ -518,7 +518,7 @@ private function scyllaPtIVKissPtII():void {
 private function scyllaPtIVKissPtIII():void {
 	scyllaSprite();
 	hideUpDown();
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("lib", 1, "sen", 1);
 	clearOutput();
 	var x:Number = player.biggestCockIndex();
@@ -719,7 +719,7 @@ private function scyllaVTakeAdvantageWithExgartuan3():void {
 	}
 
 	outputText("Long past the point where you should've run out of cum, or indeed any fluid in your body, you're still pumping out your gooey loads. Abby coughs, choking, and her eyes tear up as she opens her mouth to complain, but instead of her nasally voice, your slimy spooge dribbles out in pearl globs that roll down her chin and splat on the floor like gluey raindrops. She finally gives up, collapsing on the ground, her ass pierced by your cock-spear, your thrusting hips rubbing her limp face in the cum puddle spilling out of her mouth. Scylla digested your first dozen loads quickly enough, but even her obscene metabolism can't handle your infernal orgasm. Your cum inflates the poor nun past the limits of her robe, tearing it at her bust, her belly, and her hips, exposing pale skin that practically shimmers from her protein-filled liquid nourishment. Her tit lips are swollen to an almost purple shade, sore from her fist fucking and oozing creamy cum-thick milk, slowly staining the lower half of her body white. Pastie has been entirely plastered, inside and out, cum seeping into her every hole. She grinds harder with every spurt, cumming as her tiny box is blasted with fresh seed, her womb bulging her skin outward, pelvis jiggling like jelly with every motion.\n\n", false);
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("lib", 1, "sen", 1);
 	//[Next]
 	doNext(scyllaVTakeAdvantageWithExgartuan4);
@@ -921,7 +921,7 @@ private function scyllaPtVCumIV():void {
 	outputText("Abylon's leg lock keeps her rooted on your shaft for a brief while, but the pressure of your too-plentiful cum inside her too-small body breaks even her mighty hold and the goblin is launched off of your " + player.cockDescript(x) + ". She tumbles through the air before landing in a roll, her tongue waggling from her mouth at the rocket ride you gave her. Her eyes roll in her head and she giggles aimlessly. You feel utterly spent - exhaustion and pain return in full force, and you lay on your back, trying to catch your breath. Scylla digs her fingers into her nipple mouths, masturbating the sensitive flesh through the velvet fabric of her black robe, wet stains spilling down her chest and between her legs. She crawls toward your face, gives you an affectionate kiss on the forehead, and moves to Abby's side.\n\n", false);
 
 	outputText("\"<i>You've defeated the terrible minotaur and rescued the virgin. Please, let me reward you,</i>\" the nun murmurs as she lowers herself down, between Abby's twitching legs. The nun sticks out her tongue, and the long, prehensile organ glides through the air, toward the goblin's pulsing, overflowing cunt. Its tip traces the curves of her vulva, lapping up your seed as it spills out and wrapping around the goblin's small, pert clit. Scylla licks downward and her tongue penetrates Abby's box, making the other girl squeal. The nun presses her puffy, whorish lips against the green lips that had been riding you so hard, and she seals the two with a long, wet kiss, her writhing tongue exploring the goblin's fuck-stretched depths as her lips and throat greedily suck your cum from the other girl's distended womb.\n\n", false);
-	player.orgasm();
+	player.orgasmDick();
 	//[Next]
 	doNext(scyllaPtVCumV);
 }
@@ -992,7 +992,7 @@ private function scyllaPtVSexIII():void {
 		outputText("Scylla releases the vacuum-like suction of her scarlet-lacquored lips and rises to nurse the last few loads out of you, suckling serenely, satisfied at the restraint you and Abby showed. The goblin merely laughs her ass off at Pastie's plastered form, writhing on the table, soaked inside and out, sloppy like a used condom. Abyon slaps the nun on the back and chuckles, \"<i>Gotta give it to ya, fatty, ya know a good time.</i>\" Scylla fills her cheeks with your final load and spins around, grabbing the goblin's shoulders and pressing a deep kiss onto her, bulbous lips sealing around the lower half of the green girl's face. Abby tries to speak and Scylla empties her cheeks, snowballing your cum and her saliva into the unsuspecting goblin's mouth. Surprised, she swallows reflexively and almost chokes on the volume of gooey cum that pours down her throat. The nun ends the kiss with a wet \"<i>muah!</i>\" and smiles.\n\n", false);
 	}
 	outputText("\"<i>Please stop calling me fat,</i>\" she asks, innocently. \"<i>You know, if that's all right with you.</i>\"\n\n", false);
-	player.orgasm();
+	player.orgasmDick();
 	//[Next]
 	doNext(scyllaPtVSexIV);
 }
@@ -1064,7 +1064,7 @@ private function addictionScyllaTakeAdvantageDicksIII():void {
 	}
 	outputText("Your " + player.cockDescript(2) + " pulses, unsatisfied, and you stoop to grab the inebriated, encapsulated fairy from the ground. You try to shake her loose, but the drunk seems to have finished off half a bottle of goblin ale and her belly is overburdened with the liquid weight. Her lower torso slides out of the neck of the glass, but her bloated belly gets stuck in the neck, pinning the girl in place. Shrugging, you position the trapped girl over your cockhead and push at the tiny slit between her delicate legs. To your considerable surprise, she slides open, fairy pussy stretching like elastic around the tip of your " + player.cockDescript(2) + ". Apparently her overdose of Goblin Ale has made her considerably deeper and wider than her fey frame would suggest. The fairy is yelling something, but the glass drowns out her voice, so you go ahead and push deeper, delighting in the feel of Pastie's pussy sucking down inch after inch of your cock. Her body distorts wildly until she's little more than a flesh-colored condom from the neck down. She's just too tight to hold on long, however, and your " + player.cockDescript(2) + " erupts inside her, seed overflowing even the renewed elastic capacity of her womb. The pressure pops the girl back into the bottle and you jam your cockhead into the neck of the glass as your spunk splatters over the trapped, semen-stuffed girl. Before long, your shuddering orgasm has begun to fill the bottle and Pastie floats to the narrow top, buoyed by her liquid-fat body. When your ejaculate slows to a trickle, you let the bottle drop, the sperm-bubble of a fairy utterly blitzed and swimming helplessly inside the sea of spunk.\n\n", false);
 	//[Next]
-	player.orgasm();
+	player.orgasmDick();
 	doNext(addictionScyllaTakeAdvantageDicksBonusAndEpilogue);
 }
 
@@ -1265,7 +1265,7 @@ private function Scylla6MilkyWaitII():void {
 	player.boostLactation(1);
 
 	outputText("When your orgasmic tunnel vision recedes, you glance over to where Scylla is being dangled. Her tits are swollen from the stimulation of the other cats, the nun's mouths puffy and throbbing. There is a cat nursing at either tit, drinking as quickly as they can. Lying around them are the cat-morphs who suckled first- a half-dozen men and women lying in ecstatic stupor, their bellies swollen to a fat paunch with the intoxicating cream. The aphrodisiac has turned their restraint to putty and it seems your orgasm was just one of many in the alley. The women are using their flexible tails to tease swollen clits and a few are even pumping their cunts energetically with the furry appendages, purring so rapidly that their bodies are vibrating against each other. The men are jacking themselves off, watching the women with hungry stares, their cream-laden weight keeping them from pouncing on the wanton pussies. You can't see the nun's face under the vast milk factory her chest has become, but her bound hands press against her robe, trying to cover the wetness dripping from between her legs, down her belly, and coating her tits in a glistening oil of the girl's cum.\n\n", false);
-	player.orgasm();
+	player.orgasmTits();
 	dynStats("sen", 2);
 	//[Next]
 	doNext(Scylla6MilkyWaitIII);
@@ -1378,7 +1378,7 @@ private function Scylla6NoMilkSubmitIII():void {
 		else outputText("The nun's belly bulges with sperm and she slurps at your shaft, trying to keep your cum inside her. The seeping drool leaving sticky webs of leaking sperm between her forehead and your groin, however, tell you that even Scylla's profane digestion isn't fast enough to keep all of your seed in the swelling stomach. She lets out a pitiful whimper and you feel some deep, dark part of your mind rouse itself. With inhuman focus, you concentrate on the nun's soft, surrendering body and feel her horns growing, answering your will. The nub-like bone grows, looping around her ears and under her jaw, slowly curling like an anaconda surrounding its prey. Gradually, the horns tighten until you've sculpted a collar of bone around the subjugated girl's throat. She lets out a choked gurgle and you hear her nipple mouths let out a deep gasp. With its escape cut off, your cum begins to inflate Scylla's stomach much more rapidly and she coos in appreciation, her tongue spiraling around your shaft and milking your orgasm with renewed enthusiasm.", false);
 	}
 	doNext(Scylla6NoMilkSubmitIV);
-	player.orgasm();
+	player.orgasmDick();
 }
 //ALL - [Next]
 private function Scylla6NoMilkSubmitIV():void {
@@ -1433,7 +1433,7 @@ private function Scylla6NoMilkRapeIII():void {
 
 	if (player.balls > 0) outputText("When your sack finally empties and your hardness begins to slacken, you slide your dick out of the black-furred herm. You smile as you notice that everyone around you looks like they've been knocked up by a pack of pent-up minotaurs. Your seed spills out of the cat girl's ass, mixing with the jizz of her still-squirting cunt. Her abdomen hangs over Scylla's head and she tries weakly to pull free, but her knot is as large as a melon after the prostate-fucking you gave her. The nun's throat is stuffed in a way you've only ever seen in snakes after meals larger than their heads. Scylla's tummy has a happy paunch, but her tits are absolutely monstrous- each larger than any of the cats around her, lurid flesh vibrant and heaving, her crimson nipple lips panting with moist satisfaction. The other eleven cat-morphs are little more than milk balloons, their limbs limply hanging at their sides as they roll uselessly on inflated stomachs, recumbent and dazed. They look a bit like giant, used cat-skin condoms, you chuckle to yourself.\n\n", false);
 	else outputText("When your body finally empties and your hardness begins to slacken, you slide your dick out of the black-furred herm. You smile as you notice that everyone around you looks like they've been knocked up by a pack of pent-up minotaurs. Your seed spills out of the cat girl's ass, mixing with the jizz of her still-squirting cunt. Her abdomen hangs over Scylla's head and she tries weakly to pull free, but her knot is as large as a melon after the prostate-fucking you gave her. The nun's throat is stuffed in a way you've only ever seen in snakes after meals larger than their heads. Scylla's tummy has a happy paunch, but her tits are absolutely monstrous- each larger than any of the cats around her, lurid flesh vibrant and heaving, her crimson nipple lips panting with moist satisfaction. The other eleven cat-morphs are little more than milk balloons, their limbs limply hanging at their sides as they roll uselessly on inflated stomachs, recumbent and dazed. They look a bit like giant, used cat-skin condoms, you chuckle to yourself.\n\n", false);
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("lib", 1, "sen", -1);
 	//[Next]
 	doNext(Scylla6NoMilkRapeIV);
@@ -1541,7 +1541,7 @@ private function shareTentaclesWithScylla3():void {
 
 	//[Six cocks:
 	if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 6) outputText("\n\nThe cock swallowing Pastie's upper body pulses with cum, hot jizz flooding the plugged crest of your shaft.  The sudden deluge of sticky spoo causes the little fairy to spasm in drunken nirvana as she gulps down as much as she can, opening her throat to let the spunk flow uninhibited down her throat.  The weight of your orgasm, however, is too great and liquid pressure forces your cock to slip off the girl's torso in an alabaster fountain, leaving her coated in bloated ivory globs of sperm.  Still up to her hips in the other cock, the sprite reclines, exulting in the lewd bounty coating her, licking her fingers as she rubs the drug-like spoo into her skin.  The tentacle binding her lower body, meanwhile, bloats with its own surplus.  Tidal spouts of seed well up at her feet, rushing between her legs and swell at the pixie's miniscule pussy and teensy ass.  Her eyes go wide as the rushing jism is forced up inside her, gushing into her small body like it were a winged condom.  Your sticky issue distends her lean torso, the fey girl's belly ballooning as both holes are flooded with the deluge of your passion.  \"<i>Urgh.  Too... much...</i>\" she burps as her petite form inflates with your semen.  Trying to keep her mouth closed, Pastie's throat bulges, her jaw trembles, and her cheeks puff out, a frothy lather bubbling in her nostrils.  Then, like an ivory oil derrick, the strain overwhelms her and a foaming jet of cum spurts from her maw, cascades into the air, and rains down over her seed-saturated body like a pale silver fountain.   The spunk-stuffed pixie gurgles, overwhelmed, and the force of your stream gradually pushes her hips and legs out of your cock.  Her wings manage a few half-hearted flaps, softening her descent, but the jizz-gorged fairy plops on the floor with a sticky splat, your spoo trickling out of her pussy, ass, mouth, and nose.  She wallows in the liquid weight, lost in cum-drunken rapture.");
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", -2, "cor", .5);
 	menu();
 	addButton(0,"Next",shareTentaclesWithScylla4);
@@ -1635,7 +1635,7 @@ private function feedScyllaSomeJizzDatJunkieNeedsIt():void {
 
 		outputText("\n\nA thick lump of pre-cum gushes down your shaft and spurts into the nun's waiting maw.  The flood of thick passion takes the girl all the way to the back of her throat, the volume flooding back into her mouth.  With a cough, cheeks bloating, twin streams of crystal pre-jism arc out of Scylla's nostrils, bursting across the underside of your cock.  The warm, slimy fluid drips down to splatter her flushed face.  She takes a deep swallow, trying to open the passage to her stomach, but another tide of semen floods into her jaw and follows the first, sticky strands fountaining from her nose and lacquering the nun's visage with a glistening web of spunk.  She gurgles in happy laughter but the thirst inside of her is dissatisfied by the waste, her habit falling from her head as the tainted woman's demonic horns grow outward in curling spirals.");
 	}
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("sen", -1);
 	//[Next]
 	menu();
@@ -1685,7 +1685,7 @@ private function feedingScyllaCumStepTwo():void {
 		//[Balls:
 		if (player.balls > 0) outputText("  Discharging their pressurized bounty in an unbound release, your over-inflated balls finally cease their incapacitating growth and begin to deflate by inches at a time.");
 	}
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("lib", .5, "sen", -1);
 	//[Next]
  	addButton(0,"Next",cumFeedScyllaShesACoolGirl);
@@ -1852,7 +1852,7 @@ public function openTheDoorToFoursomeWivScyllaAndFurries():void
 	outputText("\n\n<i>“Oh gosh! Mercy above!”</i> Scylla cries with each tit-expanding spurt, folding her hands into a prayer, her elbows resting upon the sloshing, tainted mounds. Her horns are receding, perhaps in response to receiving a feeding, perhaps reacting to her invocation of the divine. In either case, she begins praying, sometimes interrupted by her own moans.");
 	outputText("\n\nA look of sublime relief spreads across Winter’s face with each every audible squirt. In time, she releases her jiggling breasts from her self-imposed torment, mouthing, <i>“Thank you.”</i>");
 	//[Next]
-	player.orgasm();
+	player.orgasmDick();
 	dynStats("lib", .5, "sen", -1);
 	doNext(scyllaFurryFoursomePartDues);
 }

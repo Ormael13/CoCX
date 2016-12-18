@@ -181,7 +181,7 @@ package classes.Scenes.Monsters
 				outputText("\n\nYour eyes roll back, not that they had anything to look at besides curvy veridian buttocks, and your tongue goes absolutely nuts, whipping back and forth through the curtains of slime that drool down into your open, moaning maw.  The goblin grinds atop you, moaning loudly as she reaches her own peak, barely caring about your pleasure.  Thankfully, with the latest injection, your [vagina] has grown so sensitive that every whisper of air over your red, swollen folds feels like an individual tongue.  You squirm, complete, irressistable need controlling your body from the waist down.  The torrent of lady-jizz that suddenly fills your mouth startles you for a moment, and then you too are cumming, your [vagina] climaxing from nothing more than faint air currents.");
 				outputText("\n\nPassing out in a puddle of mixed juices, you barely notice the goblin’s departure.");
 			}
-			player.orgasm();
+			player.orgasmGeneric();
 			combat.cleanupAfterCombat();
 		}
 
@@ -290,7 +290,7 @@ package classes.Scenes.Monsters
 			outputText("The tight confines of the goblin's asshole prove too much for you. Your body convulses wildly as you unload a massive load in her. Spent, you throw the little whore onto the ground; you have no further use for her at the moment.\n\n", false);
 			outputText("As you pick up your " + player.armorName + " and begin to get dressed, you glance at the goblin. Her hands began to dig in her now stretched out anus, desperately trying to gather up the cum you deposited in her. Smirking, you walk away nonchalantly, quite pleased with yourself.", false);
 			combat.cleanupAfterCombat();
-			player.orgasm();
+			player.orgasmDick();
 		}
 
 //[FEMSAUCE]
@@ -318,7 +318,7 @@ package classes.Scenes.Monsters
 
 				outputText("You casually dress, ignoring the pants and moans from the blissed-out goblin, and prepare to leave. Taking one last look over your shoulder, you realize her fluids have made a puddle bigger than her. She'll probably have a hell of a hangover when she wakes up. You sigh and trot off, feeling a bit guilty about overdoing it.", false);
 				combat.cleanupAfterCombat();
-				player.orgasm();
+				player.orgasmGeneric();
 			}
 			//Goblin victory rape, female naga:
 			else if (player.isNaga()) {
@@ -365,7 +365,7 @@ package classes.Scenes.Monsters
 
 				outputText("Thoroughly confused about what just happened, you decide not to test fate by sticking around near the heavily drugged creature and make for camp as soon as you've grabbed your things.", false);
 				combat.cleanupAfterCombat();
-				player.orgasm();
+				player.orgasmGeneric();
 			}
 			else {
 				outputText(images.showImage("goblinelder-win-female-rapedfem"));
@@ -398,7 +398,7 @@ package classes.Scenes.Monsters
 				if (player.cor < 50) outputText("a bit guilty about overdoing it.", false);
 				else outputText("thoroughly satisfied with your revenge.", false);
 				combat.cleanupAfterCombat();
-				player.orgasm();
+				player.orgasmVaginal();
 			}
 		}
 
@@ -476,7 +476,7 @@ package classes.Scenes.Monsters
 			outputText("You stand and prepare to leave, looking down at the goblin slut you just finished with.\n\n", false);
 			outputText("\"<i>I hope my daughters are a better fuck than their bitch mother,</i>\" you say. \"<i>Tell'em to find me if they want to get split like a log too.</i>\"", false);
 			outputText("\n\nShe absolutely will.", false);
-			player.orgasm();
+			player.orgasmDick();
 			dynStats("cor", 1);
 			combat.cleanupAfterCombat();
 		}
@@ -514,7 +514,7 @@ package classes.Scenes.Monsters
 			else outputText("soaking her and leaving her in a thick puddle of seed. ", false);
 			outputText("The green slut seems to handle it pretty well, even going so far as to scoop up your spunk and rub it into her cunt as she masturbates.  She licks her lips as she watches you redress, a sultry smile on her cum-painted face, \"<i>You tasted as good as I thought stud!  Maybe shrink that bad-boy down and come visit me for a better visit next time ok?  Hopefully by then all this baby batter I'm cramming into my box will give me a nice belly for you to rub!</i>\"\n\n", false);
 			outputText("You shake your head and leave, somewhat drained and relieved by the experience.", false);
-			player.orgasm();
+			player.orgasmDick();
 			combat.cleanupAfterCombat();
 		}
 
@@ -595,7 +595,7 @@ package classes.Scenes.Monsters
 				outputText(", you make your way back to camp, satisfied.", false);
 			}
 			combat.cleanupAfterCombat();
-			player.orgasm();
+			player.orgasmDick();
 		}
 
 
@@ -635,7 +635,7 @@ package classes.Scenes.Monsters
 				outputText("You politely inform her that latex is strong and effective at preventing pregnancy. You laugh and wish her luck trying to get it out as you gather your clothes and walk away. So full of cum and yet unable to get any of it into her womb, the goblin girl moans helplessly, fingering herself in desperation, as if her orgasm could dislodge the treasure you've left inside of her.", false);				
 			}
 
-			player.orgasm();
+			player.orgasmDick();
 			combat.cleanupAfterCombat();
 		}
 
@@ -714,7 +714,7 @@ package classes.Scenes.Monsters
 
 			}
 
-			player.orgasm();
+			player.orgasmDick();
 			combat.cleanupAfterCombat();
 		}
 
@@ -761,7 +761,7 @@ package classes.Scenes.Monsters
 
 			outputText("\n\nLaying her down in the shade, you put your clothes back on, glad to be free of the extra weight and ready to continue your adventure.");
 			player.dumpEggs();
-			player.orgasm();
+			player.orgasmOvi();
 			combat.cleanupAfterCombat();
 		}
 		
