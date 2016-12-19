@@ -992,7 +992,7 @@ package classes.Scenes {
 				//Special extras if lactating
 				if (player.biggestLactation() > 1 && player.biggestLactation() < 2)
 					outputText("Droplets of milk dribble from each nipple, spattering milk onto your " + player.legs() + " and crotch.  ");
-				else if (player.biggestLactation() < 3)
+				else if (player.biggestLactation() < 3 && player.biggestLactation() >= 2)
 					outputText("Thin squirts of milk spray from each nipple, spattering milk onto your " + player.legs() + " and crotch.  ");
 				else if (player.biggestLactation() >= 3) outputText("A constant stream of milk drizzles from each teat, soaking your " + player.legs() + " and crotch.  ");
 			}
@@ -1675,7 +1675,9 @@ package classes.Scenes {
 		//ORGASM COOOOAD
 		private function orgazmo(selfSucking:Boolean, nippleFuck:Boolean):void {
 			outputText("\n\n");
+			var cumType:int = 0;
 			if (player.cocks.length > 0) {
+				cumType = 1;
 				if (player.cocks.length == 1) {
 					outputText("The sensations prove too much for you, and you feel the tightness building in your ");
 					if (player.countCocksOfType(CockTypesEnum.HUMAN) == 1)
@@ -1795,6 +1797,7 @@ package classes.Scenes {
 			}
 			//Vaginal CUMMING
 			if (player.vaginas.length > 0) {
+				cumType = 2;
 				//Single vagina!
 				if (player.vaginas.length == 1) {
 					outputText("Your ");
@@ -1818,6 +1821,7 @@ package classes.Scenes {
 			if (player.averageLactation() >= 2 || player.hasFuckableNipples()) {
 				//FUCK ANOTHER SHODDILY WRITTEN FUNCTION TO DEBUG/PORT
 				//WHYYYYY
+				cumType = 3;
 				titCum(player.cumQ());
 			}
 			if (player.armor == armors.GOOARMR) {
@@ -1836,7 +1840,15 @@ package classes.Scenes {
 				if (valeriaFluids > 0) outputText("\"<i>Thanks for the fluids!</i>\" Valeria says.  ");
 			}
 			//DONE!
-			player.orgasm();
+			if 	(cumType == 1) {
+				player.orgasmDick(); 
+			}
+			else if (cumType == 2) {
+				player.orgasmVaginal();
+			}
+			else if (cumType == 3) {
+				player.orgasmTits();
+			}
 			flags[kFLAGS.TIMES_MASTURBATED]++;
 			dynStats("sen", (-0.5));
 		}
