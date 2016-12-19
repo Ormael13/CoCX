@@ -992,7 +992,7 @@ package classes.Scenes {
 				//Special extras if lactating
 				if (player.biggestLactation() > 1 && player.biggestLactation() < 2)
 					outputText("Droplets of milk dribble from each nipple, spattering milk onto your " + player.legs() + " and crotch.  ");
-				else if (player.biggestLactation() < 3)
+				else if (player.biggestLactation() >= 2 && player.biggestLactation() < 3)
 					outputText("Thin squirts of milk spray from each nipple, spattering milk onto your " + player.legs() + " and crotch.  ");
 				else if (player.biggestLactation() >= 3) outputText("A constant stream of milk drizzles from each teat, soaking your " + player.legs() + " and crotch.  ");
 			}
@@ -1819,6 +1819,7 @@ package classes.Scenes {
 				//FUCK ANOTHER SHODDILY WRITTEN FUNCTION TO DEBUG/PORT
 				//WHYYYYY
 				titCum(player.cumQ());
+				titDrink();
 			}
 			if (player.armor == armors.GOOARMR) {
 				var valeriaFluids:int = 0;
@@ -1880,6 +1881,30 @@ package classes.Scenes {
 				if (player.armor == armors.GOOARMR) outputText("into the blue goo covering your body.  ");
 				else outputText("everywhere.  ");
 			}
+			
+		}
+		public  function titDrink():void {
+			if (player.biggestTitSize() > 5 && player.averageLactation() > 1) {
+				if (player.biggestLactation() > 3) {
+					outputText(" You lift one of your " + player.breastDescript(0) + " to your lips and gulp greedily from the torrent of precious milk. It splatters all over your face, as you nearly gag.\n");
+					player.refillHunger(50);
+					player.boostLactation(.05);
+					player.milked();
+				}
+				else if (player.biggestLactation() > 2) {
+					outputText(" You lift one of your " + player.breastDescript(0) + " to your lips and drink deeply of your bounty.  It floods your cheeks with its creamy flavor, and you greedily gulp it down.\n");
+					player.refillHunger( (player.biggestLactation() - 2) * 30 + 20);
+					player.boostLactation(.05);
+					player.milked();
+				}
+				else if (player.biggestLactation() > 1) {
+					outputText(" You lift one of your " + player.breastDescript(0) + " to your lips and suck your bounty. You are gulping most of your milk feeling sweet creamy flavor.\n");
+					player.refillHunger( (player.biggestLactation() - 1) * 20);
+					player.boostLactation(.05);
+					player.milked();
+				}
+			}
+		
 		}
 		
 		//(D. Dildo) – a floppy pink dildo with aphrodisiac reservoir
