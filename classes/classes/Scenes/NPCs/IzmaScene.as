@@ -1821,7 +1821,7 @@ private function izmaSexMenu():void {
 	var sixty:Function = null;
 	if (player.gender > 0) sixty = followerIzmaTakesIt69;
 	var kids:String = "";
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00249] == 1) kids = "NoKidsPlease";
+	if (flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1) kids = "NoKidsPlease";
 	else kids = "Have Kids?";
 	var analCatch:Function = null;
 	var assDom:Function = null;
@@ -1914,7 +1914,7 @@ private function followerIzmaMountsPC(lastHalf:Boolean = false):void {
 private function izmaPreg():void {
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) return;
 	//PREGGO CHANCES
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00249] == 1 && !pregnancy.isPregnant && rand(100) < (10 + Math.round(player.cumQ() / 100))) {
+	if (flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1 && !pregnancy.isPregnant && rand(100) < (10 + Math.round(player.cumQ() / 100))) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_IZMA);
 	}
 }
@@ -2475,7 +2475,7 @@ private function childToggle():void {
 	spriteSelect(32);
 	//This scene is only available for one time; once it has been played through, the "Children" button is replaced by the No Kids/Make Kids button, as appropriate/ (This scene could be cut to save a flag, if necessary. Though, you have thousands, don't you? -Z)
 	clearOutput();
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00248] == 0) {
+	if (flags[kFLAGS.IZMA_PREGNANCY_DISCUSSED] == 0) {
 		outputText("You ask Izma if she's ever thought about the two of you having children together.\n\n", false);
 	 
 		outputText("Izma looks a little sheepish, but then her expression settles into a determined one.  \"<i>Yes, I have.  I'd like us to start a family, but if you don't think you're ready yet, I'll keep taking my herbs.</i>\"\n\n", false);
@@ -2483,19 +2483,19 @@ private function childToggle():void {
 		outputText("Do you tell her to stop taking her contraceptives?", false);
 		//Yes - call this function again
 		doYesNo(childToggle,firstTimeDeclineIzmasKdiddlezlijfhdjkfhslkfbsjkhfbs);
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00248]++;
+		flags[kFLAGS.IZMA_PREGNANCY_DISCUSSED]++;
 		return;
 	}
 	//Turn it off
- 	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00249] == 1) {
+ 	else if (flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1) {
 		//Sex Menu Button: No Kids
 		outputText("You tell Izma that you've been thinking, and that the two of you should put making children together on hold, at least for a while.  Izma looks a little upset, but she nods her head.  \"<i>By your command, alpha,</i>\"  she tells you.  She ambles slowly away from you, her hips and ass swaying side to side in a very enticing manner; you think maybe she's trying to tempt you into changing your mind.  When you don't speak up, though, she reaches into and rummages through her chest for one of her contraceptive herbs, turning towards you and making sure you can see her taking it.\n\n", false);
 		///Return to Sex Menu options/
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00249] = 0;
+		flags[kFLAGS.IZMA_PREGNANCY_ENABLED] = 0;
 	}
 	//[=Yes=] (TURN ON KID-MODE
 	else {
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00249] = 1;
+		flags[kFLAGS.IZMA_PREGNANCY_ENABLED] = 1;
 		//Make kids and has said yes before.
 		if (totalIzmaChildren() > 0) {
 			outputText("You tell Izma that you're ready to start trying for children again.  She grins with delight and suddenly pounces at you, giving you a kiss that leaves you breathless.  Then, while you're recovering from that, she races off and drinks down a slug of that potion - you figure it must be some kind of 'antidote' to the contraceptives already in her system.  From the gleam in her eye as she stalks back towards you, it looks like she intends to start making babies right now...\n\n", false);
@@ -2844,7 +2844,7 @@ private function inCampRideIzmasDickDongTheWitchIsDead():void {
 	outputText("Finally, you are tired and sexually sated enough that you tell Izma you're fulfilled. The tigershark merely groans and you have to help her get into the stream to restore her strength. Still, seven orgasms in only an hour is pretty impressive, and you give her a pat on her shapely derierre before you leave, calling over her shoulder that you'll be back again sometime.\n\n", false);
  
 	outputText("Izma waves at you and smirks as you go to leave, and you have to wonder if Izma was only acting helpless in order to get off...", false);
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00249] > 0) {
+	if (flags[kFLAGS.IZMA_PREGNANCY_ENABLED] > 0) {
 		player.knockUp(PregnancyStore.PREGNANCY_IZMA, PregnancyStore.INCUBATION_IZMA);
 	}
 	player.slimeFeed();
