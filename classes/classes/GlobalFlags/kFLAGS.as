@@ -253,8 +253,8 @@ public static const COTTON_UNUSUAL_YOGA_BOOK_TRACKER:int                        
 public static const COTTON_BREAKFAST_CLUB:int                                       =  245; // Cotton Breakfast Club
 public static const UNKNOWN_FLAG_NUMBER_00246:int                                   =  246; // Tiger Tooth Countdown
 public static const UNKNOWN_FLAG_NUMBER_00247:int                                   =  247; // Genderless centaur madness
-public static const UNKNOWN_FLAG_NUMBER_00248:int                                   =  248; // Izma Preggers Discussion
-public static const UNKNOWN_FLAG_NUMBER_00249:int                                   =  249; // Pregnancy Enabled (1 = yes)
+public static const IZMA_PREGNANCY_DISCUSSED:int                                    =  248; // Izma Preggers Discussion
+public static const IZMA_PREGNANCY_ENABLED:int                                      =  249; // Pregnancy Enabled (1 = yes)
 public static const IZMA_INCUBATION:int                                             =  250; // Izma's Incubation timer
 public static const IZMA_CHILDREN_SHARKGIRLS:int                                    =  251; // Izma sharkgirls
 public static const IZMA_CHILDREN_TIGERSHARKS:int                                   =  252; // Izma tigersharks
@@ -2317,7 +2317,7 @@ public static const UNKNOWN_FLAG_NUMBER_02308:int                               
 public static const UNKNOWN_FLAG_NUMBER_02309:int                                   = 2309; // Reserved for additional sparrable partner.
 public static const KAIZO_BACKGROUND_UNLOCKED:int                                   = 2310; // Reserved for Kaizo.
 public static const KAIZO_FACTORY_DOOR_UNLOCKED:int                                 = 2311;
-public static const UNKNOWN_FLAG_NUMBER_02312:int                                   = 2312;
+public static const IZMA_BROFIED:int                                                = 2312;
 public static const UNKNOWN_FLAG_NUMBER_02313:int                                   = 2313;
 public static const UNKNOWN_FLAG_NUMBER_02314:int                                   = 2314;
 public static const UNKNOWN_FLAG_NUMBER_02315:int                                   = 2315;
