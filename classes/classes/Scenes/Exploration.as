@@ -25,16 +25,16 @@ package classes.Scenes
 			// Clear 
 			clearOutput();
 	
-			// Introductions to exploration //			
-			if (int(flags[kFLAGS.TIMES_EXPLORED]) <= 0) {
+			// Introductions to exploration //
+			if (flags[kFLAGS.TIMES_EXPLORED] <= 0) {
 				outputText("You tentatively step away from your campsite, alert and scanning the ground and sky for danger.  You walk for the better part of an hour, marking the rocks you pass for a return trip to your camp.  It worries you that the portal has an opening on this side, and it was totally unguarded...\n\n...Wait a second, why is your campsite in front of you? The portal's glow is clearly visible from inside the tall rock formation.   Looking carefully you see your footprints leaving the opposite side of your camp, then disappearing.  You look back the way you came and see your markings vanish before your eyes.  The implications boggle your mind as you do your best to mull over them.  Distance, direction, and geography seem to have little meaning here, yet your campsite remains exactly as you left it.  A few things click into place as you realize you found your way back just as you were mentally picturing the portal!  Perhaps memory influences travel here, just like time, distance, and speed would in the real world!\n\nThis won't help at all with finding new places, but at least you can get back to camp quickly.  You are determined to stay focused the next time you explore and learn how to traverse this gods-forsaken realm.", true);
-				flags[kFLAGS.TIMES_EXPLORED] = int(flags[kFLAGS.TIMES_EXPLORED]) + 1; // just trust me on this one
+				flags[kFLAGS.TIMES_EXPLORED]++;
 				doNext(camp.returnToCampUseOneHour);
 				return;
-			} else if (int(flags[kFLAGS.TIMES_EXPLORED_FOREST]) <= 0) {
+			} else if (flags[kFLAGS.TIMES_EXPLORED_FOREST] <= 0) {
 				outputText("You walk for quite some time, roaming the hard-packed and pink-tinged earth of the demon-realm.  Rust-red rocks speckle the wasteland, as barren and lifeless as anywhere else you've been.  A cool breeze suddenly brushes against your face, as if gracing you with its presence.  You turn towards it and are confronted by the lush foliage of a very old looking forest.  You smile as the plants look fairly familiar and non-threatening.  Unbidden, you remember your decision to test the properties of this place, and think of your campsite as you walk forward.  Reality seems to shift and blur, making you dizzy, but after a few minutes you're back, and sure you'll be able to return to the forest with similar speed.\n\n<b>You have discovered the Forest!</b>", true);
-				flags[kFLAGS.TIMES_EXPLORED] = int(flags[kFLAGS.TIMES_EXPLORED]) + 1;
-				flags[kFLAGS.TIMES_EXPLORED_FOREST] = int(flags[kFLAGS.TIMES_EXPLORED_FOREST]) + 1;
+				flags[kFLAGS.TIMES_EXPLORED]++;
+				flags[kFLAGS.TIMES_EXPLORED_FOREST]++;
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
@@ -49,11 +49,11 @@ package classes.Scenes
 			hideMenus();
 			menu();
 			addButton(0, "Explore", tryDiscover, null, null, null, "Explore to find new regions and visit any discovered regions.");
-			if (int(flags[kFLAGS.TIMES_EXPLORED_FOREST]) > 0) addButton(1, "Forest", kGAMECLASS.forest.exploreForest, null, null, null, "Visit the lush forest. \n\nRecommended level: 1" + (player.level < 6 ? "\n\nBeware of Tentacle Beasts!" : "") + (debug ? "\n\nTimes explored: " + int(flags[kFLAGS.TIMES_EXPLORED_FOREST]) : ""));
-			if (int(flags[kFLAGS.TIMES_EXPLORED_LAKE]) > 0) addButton(2, "Lake", kGAMECLASS.lake.exploreLake, null, null, null, "Visit the lake and explore the beach. \n\nRecommended level: 1" + (debug ? "\n\nTimes explored: " + int(flags[kFLAGS.TIMES_EXPLORED_LAKE]) : ""));
-			if (int(flags[kFLAGS.TIMES_EXPLORED_DESERT]) > 0) addButton(3, "Desert", kGAMECLASS.desert.exploreDesert, null, null, null, "Visit the dry desert. \n\nRecommended level: 2" + (debug ? "\n\nTimes explored: " + int(flags[kFLAGS.TIMES_EXPLORED_DESERT]) : ""));
+			if (flags[kFLAGS.TIMES_EXPLORED_FOREST] > 0) addButton(1, "Forest", kGAMECLASS.forest.exploreForest, null, null, null, "Visit the lush forest. \n\nRecommended level: 1" + (player.level < 6 ? "\n\nBeware of Tentacle Beasts!" : "") + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_FOREST] : ""));
+			if (flags[kFLAGS.TIMES_EXPLORED_LAKE] > 0) addButton(2, "Lake", kGAMECLASS.lake.exploreLake, null, null, null, "Visit the lake and explore the beach. \n\nRecommended level: 1" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_LAKE] : ""));
+			if (flags[kFLAGS.TIMES_EXPLORED_DESERT] > 0) addButton(3, "Desert", kGAMECLASS.desert.exploreDesert, null, null, null, "Visit the dry desert. \n\nRecommended level: 2" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_DESERT] : ""));
 
-			if (int(flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN]) > 0) addButton(5, "Mountain", kGAMECLASS.mountain.exploreMountain, null, null, null, "Visit the mountain. \n\nRecommended level: 5" + (debug ? "\n\nTimes explored: " + int(flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN]) : ""));
+			if (flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] > 0) addButton(5, "Mountain", kGAMECLASS.mountain.exploreMountain, null, null, null, "Visit the mountain. \n\nRecommended level: 5" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] : ""));
 			if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0) addButton(6, "Swamp", kGAMECLASS.swamp.exploreSwamp, null, null, null, "Visit the wet swamplands. \n\nRecommended level: 12" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_SWAMP] : ""));
 			if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0) addButton(7, "Plains", kGAMECLASS.plains.explorePlains, null, null, null, "Visit the plains. \n\nRecommended level: 10" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_PLAINS] : ""));
 			if (player.findStatusEffect(StatusEffects.ExploredDeepwoods) >= 0) addButton(8, "Deepwoods", kGAMECLASS.forest.exploreDeepwoods, null, null, null, "Visit the dark, bioluminescent deepwoods. \n\nRecommended level: 5" + (debug ? "\n\nTimes explored: " + player.statusEffectv1(StatusEffects.ExploredDeepwoods) : ""));
@@ -224,13 +224,13 @@ package classes.Scenes
 				return;
 			}
 			clearOutput();
-			flags[kFLAGS.TIMES_EXPLORED] = int(flags[kFLAGS.TIMES_EXPLORED]) + 1;
-			if (int(flags[kFLAGS.TIMES_EXPLORED_LAKE]) <= 0) {
+			flags[kFLAGS.TIMES_EXPLORED]++;
+			if (flags[kFLAGS.TIMES_EXPLORED_LAKE] <= 0) {
 				// Discover Lake
 				flags[kFLAGS.TIMES_EXPLORED_LAKE] = 1;
 				outputText("Your wanderings take you far and wide across the barren wasteland that surrounds the portal, until the smell of humidity and fresh water alerts you to the nearby lake.  With a few quick strides you find a lake so massive the distant shore cannot be seen.  Grass and a few sparse trees grow all around it.\n\n<b>You've discovered the Lake!</b>");
 				doNext(camp.returnToCampUseOneHour);
-			} else if (int(flags[kFLAGS.TIMES_EXPLORED_LAKE]) >= 1 && rand(3) == 0 && int(flags[kFLAGS.TIMES_EXPLORED_DESERT]) <= 0) {
+			} else if (flags[kFLAGS.TIMES_EXPLORED_LAKE] >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_DESERT] <= 0) {
 				// Discover Desert
 				flags[kFLAGS.TIMES_EXPLORED_DESERT] = 1;
 				outputText("You stumble as the ground shifts a bit underneath you.  Groaning in frustration, you straighten up and discover the rough feeling of sand ");
@@ -240,12 +240,12 @@ package classes.Scenes
 				else if (player.lowerBody == LOWER_BODY_TYPE_NAGA)    outputText("in your scales");
 				outputText(".\n\n<b>You've discovered the Desert!</b>");
 				doNext(camp.returnToCampUseOneHour);
-			} else if (int(flags[kFLAGS.TIMES_EXPLORED_DESERT]) >= 1 && rand(3) == 0 && int(flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN]) <= 0) {
+			} else if (flags[kFLAGS.TIMES_EXPLORED_DESERT] >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] <= 0) {
 				// Discover Mountain
 				flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] = 1;
 				outputText("Thunder booms overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it.\n\n<b>You've discovered the Mountain!</b>");
 				doNext(camp.returnToCampUseOneHour);
-			} else if (int(flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN]) >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] <= 0) {
+			} else if (flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] <= 0) {
 				// Discover Plains
 				flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
 				outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>");

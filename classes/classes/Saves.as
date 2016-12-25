@@ -2162,15 +2162,15 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.autoSave = saveFile.data.autoSave;
 		
 		// Fix possible old save for Plot & Exploration
-		flags[kFLAGS.TIMES_EXPLORED_LAKE]     = (flags[kFLAGS.TIMES_EXPLORED_LAKE] || saveFile.data.exploredLake);
-		flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] = (flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] || saveFile.data.exploredMountain);
-		flags[kFLAGS.TIMES_EXPLORED_FOREST]   = (flags[kFLAGS.TIMES_EXPLORED_FOREST] || saveFile.data.exploredForest);
-		flags[kFLAGS.TIMES_EXPLORED_DESERT]   = (flags[kFLAGS.TIMES_EXPLORED_DESERT] || saveFile.data.exploredDesert);
-		flags[kFLAGS.TIMES_EXPLORED]          = (flags[kFLAGS.TIMES_EXPLORED] || saveFile.data.exploredDesert);
+		flags[kFLAGS.TIMES_EXPLORED_LAKE]     = (flags[kFLAGS.TIMES_EXPLORED_LAKE] || saveFile.data.exploredLake || 0);
+		flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] = (flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] || saveFile.data.exploredMountain || 0);
+		flags[kFLAGS.TIMES_EXPLORED_FOREST]   = (flags[kFLAGS.TIMES_EXPLORED_FOREST] || saveFile.data.exploredForest || 0);
+		flags[kFLAGS.TIMES_EXPLORED_DESERT]   = (flags[kFLAGS.TIMES_EXPLORED_DESERT] || saveFile.data.exploredDesert || 0);
+		flags[kFLAGS.TIMES_EXPLORED]          = (flags[kFLAGS.TIMES_EXPLORED] || saveFile.data.explored || 0);
  
-		flags[kFLAGS.JOJO_STATUS]        = (flags[kFLAGS.JOJO_STATUS] || saveFile.data.monk);
-		flags[kFLAGS.SANDWITCH_SERVICED] = (flags[kFLAGS.SANDWITCH_SERVICED] || saveFile.data.sand);
-		flags[kFLAGS.GIACOMO_MET]        = (flags[kFLAGS.GIACOMO_MET] || saveFile.data.giacomo);
+		flags[kFLAGS.JOJO_STATUS]        = (flags[kFLAGS.JOJO_STATUS] || saveFile.data.monk || 0);
+		flags[kFLAGS.SANDWITCH_SERVICED] = (flags[kFLAGS.SANDWITCH_SERVICED] || saveFile.data.sand || 0);
+		flags[kFLAGS.GIACOMO_MET]        = (flags[kFLAGS.GIACOMO_MET] || saveFile.data.giacomo || 0);
 		
 		if (saveFile.data.beeProgress == 1)
 			game.forest.beeGirlScene.setTalked();
