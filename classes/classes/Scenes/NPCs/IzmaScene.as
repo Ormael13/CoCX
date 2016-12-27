@@ -45,7 +45,7 @@
 			if (izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.IZMA_FEEDING_VALERIA] == 1 && flags[kFLAGS.VALARIA_AT_CAMP] > 0) {
 				flags[kFLAGS.VALERIA_FLUIDS] = 100;
 			}
-			if (model.time.hours > 23 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00246] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00246] = 0;
+			if (model.time.hours > 23 && flags[kFLAGS.IZMA_TIGERSHARK_TOOTH_COUNTDOWN] > 0) flags[kFLAGS.IZMA_TIGERSHARK_TOOTH_COUNTDOWN] = 0;
 			return false;
 		}
 	
@@ -1778,13 +1778,13 @@ private function backToCamp():void
 public function gatASharkTooth():void {
 	spriteSelect(32);
 	clearOutput();
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00246] > 1) {
+	if (flags[kFLAGS.IZMA_TIGERSHARK_TOOTH_COUNTDOWN] > 1) {
 		outputText("Izma smiles apologetically and says, \"<i>I'm sorry, but I won't be able to get my hands on one of those until tomorrow.</i>\"");
 		doNext(izmaFollowerMenu);
 	}
 	else {
 		outputText("Izma smiles as she pulls a tooth from her chest.  She hands it to you with a pleased expression.  \"<i>Anything for you, my Alpha.</i>\"  ");
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00246]++;
+		flags[kFLAGS.IZMA_TIGERSHARK_TOOTH_COUNTDOWN]++;
 		inventory.takeItem(consumables.TSTOOTH, playerMenu);
 	}
 }
@@ -2576,7 +2576,7 @@ public function pcPopsOutASharkTot():void {
 		outputText("Finally, she's out; you quiver weakly as she crawls over to you and it takes all your effort to lift your " + player.armorName + " and expose your " + player.nippleDescript(0) + "s to her.  As she sucks greedily at them, the haze begins to clear from your vision.  For the first time, you can actually make out distinct features on your new daughter; she's a ", false);
 		if (rand(100) <= 59) {
 			outputText("shark-girl", false);
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00412]++;
+			flags[kFLAGS.IZMA_KIDS_IN_WILD]++;
 		}
 		else outputText("tigershark", false);
 		outputText(", quickly growing and filling out as she takes in milk.  She finishes up, looking rather like a pre-teen already, and glances around nervously.  The amniotic fluid is evaporating rapidly, and she's scratching idly at her gills as more and more of her skin is exposed directly to the dry air.\n\n", false);
@@ -2920,7 +2920,7 @@ public function findLostIzmaKids():void {
 	outputText("\"<i>...Mom?</i>\"", false);
 	//(Next)
 	doNext(findLostIzmaKidsII);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00412]--;
+	flags[kFLAGS.IZMA_KIDS_IN_WILD]--;
 }
 private function findLostIzmaKidsII():void {
 	clearOutput();

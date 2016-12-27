@@ -14,13 +14,13 @@ public function Maddie(){
 //[Bakery One Off – Madeleine's Creation]
 internal function procMaddieOneIntro():void {
 	clearOutput();
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00240] == 0) {
+	if (flags[kFLAGS.MINO_CHEF_INTRO] == 0) {
 		outputText("You enter the bakery, savoring the sweet smells of sugar and baked goods.  A burly, hairy figure steps up beside you and places a strong hand on your shoulder.   The gravelly voice of the stranger says, \"<i>You ain't from around here.  Come.  I need your help.  Show you something.</i>\"  You turn to look, and are quite surprised when you see the horned visage of a minotaur ", false);
 		if (player.tallness < 72) outputText("looking down at", false);
 		else if (player.tallness < 100) outputText("staring levelly at", false);
 		else outputText("glaring up at", false);
 		outputText(" you. It releases your shoulder and starts walking towards an 'employees only' door.  Do you follow?\n\n", false);
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00240] = 1;
+		flags[kFLAGS.MINO_CHEF_INTRO] = 1;
 	}
 	//(REPEAT) 
 	else {
@@ -32,7 +32,7 @@ internal function procMaddieOneIntro():void {
 private function followMinotaurIntoBackroom():void {
 	clearOutput();
 	//	(Not yet explained) 
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00241] == 0) {
+	if (flags[kFLAGS.MINO_CHEF_EXPLAINED_INGREDIENTS] == 0) {
 		outputText("You follow the burly beast through the door, turning several times as he leads you through the blisteringly hot ovens.  The minotaur is sweating heavily by the time you reach his destination, and for that matter so are you.  With all the musk boiling off of him, you find yourself wondering if he was just setting up an elaborate ruse to lure you into a sexual situation.  He grabs a white, fluffy hat and drops it on his head, firmly dispelling that notion as he tries to explain in as few words as possible, \"<i>I am cook.  I make great éclairs, but making masterpiece now.  Need special ingredients.  You get to leave city.  Bring me lust draft and honey.  Not pure stuff, too strong. Go.</i>\"\n\n", false);
 		outputText("You get a chance to look over his work station, noting the many bowls of batter, hundreds of massive eclairs, and the largest onahole you've ever seen.  ", false);
 		if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0) outputText("You lick your lips when you realize you're meeting the source of the 'special' éclairs.", false);
@@ -41,7 +41,7 @@ private function followMinotaurIntoBackroom():void {
 		if (player.hasItem(consumables.BEEHONY) && player.hasItem(consumables.L_DRAFT))
 			simpleChoices("Give Them", handOverIngredientsItBeBakingTimeYo, "", null, "", null, "", null, "Leave", nopeAintGotNoneODemSpeculIngredimathings);
 		else simpleChoices("", null, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00241] = 1;
+		flags[kFLAGS.MINO_CHEF_EXPLAINED_INGREDIENTS] = 1;
 	}
 	//(Explained) 
 	else {
@@ -89,7 +89,7 @@ private function sneakAwayFromMaddie():void {
 	clearOutput();
 	outputText("You get out before he can find you again.  Whatever he's making is nothing you ever want to taste.", false);
 	//(No more mino chef)
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] = -2;
+	flags[kFLAGS.MADDIE_STATUS] = -2;
 	doNext(camp.returnToCampUseOneHour);
 }
 //[Wait/Next]
@@ -122,14 +122,14 @@ private function runAwayFromMaddiiiieee():void {
 	spriteSelect(39);
 	clearOutput();
 	outputText("You turn tail to run, evacuating the room before that culinary catastrophe can have her way with you.  A high-pitched whine chases you away as the cupcake-girl cries, \"<i>Nooooo... come back!  I'm making so much filling for you!</i>\"  Her words lend you even greater speed, and you vacate the city in record time.\n\n", false);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] = -1;
+	flags[kFLAGS.MADDIE_STATUS] = -1;
 	doNext(camp.returnToCampUseOneHour);
 }
 //[Followup to run away]
 public function runAwayMaddieFollowup():void {
 	spriteSelect(39);
 	clearOutput();
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] = -2;
+	flags[kFLAGS.MADDIE_STATUS] = -2;
 	outputText("You return to a strange sight indeed.  Urta and Edryn are leading a procession of over thirty city guards, arranged in a loose circle around the cupcake-girl.  Her comparatively tiny, tin-foil fez is gone, along with most of her blue-iced 'armor'.  She looks weak, pathetic, and beaten as she's prodded with spears and escorted from the city, never to return again.  Vanilla-scented tears stain the pavement behind her, leaving a trail the whole way back to the bakery.\n\n", false);
 	doNext(telAdre.telAdreMenu);
 }
@@ -229,7 +229,7 @@ private function talkToMaddie():void {
 		outputText(player.modThickness(100,10), false);
 		outputText(player.modTone(0,10), false);  
 	}
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] = 3;
+	flags[kFLAGS.MADDIE_STATUS] = 3;
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -239,7 +239,7 @@ internal function bakeryEpilogue():void {
 	outputText("As soon as you enter the bakery, one of the waitresses pulls you aside.  She positively beams as she hands you a note and says, \"<i>One of our chefs wanted me to give you this.  I didn't even know he could write!  I mean, where does a minotaur learn to handle a pen?</i>\"  You smirk, waving her away before you open up the minotaur's note.\n\n", false);  
 	outputText("\"<i>Thanks.  Figured out what went wrong with Maddie's help.  Made masterpiece.  Buy giant cupcake sometime.  Delicious!  Promise it's safe and non-addictive.  Expensive though.  Ingredients rare.\n\n", false);
 	outputText("-X</i>\"", false);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] = 4;
+	flags[kFLAGS.MADDIE_STATUS] = 4;
 	doNext(telAdre.bakeryScene.bakeryuuuuuu);
 }
 }

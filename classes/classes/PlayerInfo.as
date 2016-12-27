@@ -170,8 +170,8 @@ package classes
 				childStats += "<b>Children With Urta:</b> " + getGame().urtaPregs.urtaKids() + "\n";
 				
 			//Mino sons
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] > 0)
-				childStats += "<b>Number of Adult Minotaur Offspring:</b> " + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + "\n";
+			if (flags[kFLAGS.ADULT_MINOTAUR_OFFSPRINGS] > 0)
+				childStats += "<b>Number of Adult Minotaur Offspring:</b> " + flags[kFLAGS.ADULT_MINOTAUR_OFFSPRINGS] + "\n";
 			
 			if (childStats != "")
 				outputText("\n<b><u>Children</u></b>\n" + childStats, false);
@@ -319,7 +319,7 @@ package classes
 			}
 			
 			// Mino Cum Addiction
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00340] > 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || player.findPerk(PerkLib.MinotaurCumResistance) >= 0) {
+			if (flags[kFLAGS.MINOTAUR_CUM_INTAKE_COUNT] > 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || player.findPerk(PerkLib.MinotaurCumResistance) >= 0) {
 				if (player.findPerk(PerkLib.MinotaurCumAddict) < 0)
 					addictStats += "<b>Minotaur Cum:</b> " + Math.round(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] * 10)/10 + "%\n";
 				else if (player.findPerk(PerkLib.MinotaurCumResistance) >= 0)
@@ -352,8 +352,8 @@ package classes
 			if (flags[kFLAGS.BROOKE_MET] > 0)
 				interpersonStats += "<b>Brooke Affection:</b> " + Math.round(getGame().telAdre.brooke.brookeAffection()) + "\n";
 				
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220] > 0)
-				interpersonStats += "<b>Body Parts Taken By Ceraph:</b> " + (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220]) + "\n";
+			if (flags[kFLAGS.CERAPH_DICKS_OWNED] + flags[kFLAGS.CERAPH_PUSSIES_OWNED] + flags[kFLAGS.CERAPH_TITS_OWNED] > 0)
+				interpersonStats += "<b>Body Parts Taken By Ceraph:</b> " + (flags[kFLAGS.CERAPH_DICKS_OWNED] + flags[kFLAGS.CERAPH_PUSSIES_OWNED] + flags[kFLAGS.CERAPH_TITS_OWNED]) + "\n";
 				
 			if (getGame().emberScene.emberAffection() > 0)
 				interpersonStats += "<b>Ember Affection:</b> " + Math.round(getGame().emberScene.emberAffection()) + "%\n";
@@ -404,7 +404,7 @@ package classes
 					interpersonStats += "<b>Kiha Affection:</b> " + Math.round(flags[kFLAGS.KIHA_AFFECTION]) + "%\n";
 			}
 			//Lottie stuff
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0)
+			if (flags[kFLAGS.LOTTIE_ENCOUNTER_COUNTER] > 0)
 				interpersonStats += "<b>Lottie's Encouragement:</b> " + getGame().telAdre.lottie.lottieMorale() + " (higher is better)\n" + "<b>Lottie's Figure:</b> " + getGame().telAdre.lottie.lottieTone() + " (higher is better)\n";
 			
 			if (getGame().mountain.salon.lynnetteApproval() != 0)

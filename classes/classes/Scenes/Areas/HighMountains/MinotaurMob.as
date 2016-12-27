@@ -110,7 +110,7 @@ package classes.Scenes.Areas.HighMountains
 		}
 		//Waste  a turn
 		private function minotaurGangWaste():void {
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] = 1;
+			flags[kFLAGS.MINOTAUR_SONS_WASTED_TURN] = 1;
 			game.spriteSelect(94);
 			outputText("\"<i>Oh man I can't wait to go hilt-deep in that pussy... I'm going to wreck " + player.mf("him", "her") + ",</i>\" promises one bull to his brother.  The other laughs and snorts, telling him how he'll have to do the deed during sloppy seconds.  It quickly escalates, and soon, every single one of the beast-men is taunting the others, bickering over how and when they'll get to have you.  While they're wasting their time, it's your chance to act!", false);
 			combatRoundOver();
@@ -119,7 +119,7 @@ package classes.Scenes.Areas.HighMountains
 		override public function doAI():void
 		{
 			game.spriteSelect(94);
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] = 0;
+			flags[kFLAGS.MINOTAUR_SONS_WASTED_TURN] = 0;
 			var select:Number = rand(7);
 			if (select <= 2) precumTease();
 			else if (select <= 4) minotaurGangGropeAttack();
@@ -146,12 +146,12 @@ package classes.Scenes.Areas.HighMountains
 		public function MinotaurMob()
 		{
 			this.a = "the ";
-			if (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] < 20)
+			if (game.flags[kFLAGS.ADULT_MINOTAUR_OFFSPRINGS] < 20)
 				this.short = "minotaur gang";
 			else
 				this.short = "minotaur tribe";
 			this.imageName = "minotaurmob";
-			this.long = Num2Text(game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear."+(game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 20?"  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.":"");
+			this.long = Num2Text(game.flags[kFLAGS.ADULT_MINOTAUR_OFFSPRINGS]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear."+(game.flags[kFLAGS.ADULT_MINOTAUR_OFFSPRINGS] >= 20?"  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.":"");
 			this.plural = true;
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";
@@ -180,15 +180,15 @@ package classes.Scenes.Areas.HighMountains
 			this.weaponName = "fists";
 			this.weaponVerb="punches";
 			this.armorName = "thick fur";
-			var bonusHP:Number = 340 + 50 * (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3);
+			var bonusHP:Number = 340 + 50 * (game.flags[kFLAGS.ADULT_MINOTAUR_OFFSPRINGS] - 3);
 			var lustVuln:Number = 0.45;
-			if ((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 2 > 13) lustVuln = .3;
-			else lustVuln -= (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 0.02;
+			if ((game.flags[kFLAGS.ADULT_MINOTAUR_OFFSPRINGS] - 3) * 2 > 13) lustVuln = .3;
+			else lustVuln -= (game.flags[kFLAGS.ADULT_MINOTAUR_OFFSPRINGS] - 3) * 0.02;
 			this.bonusHP = bonusHP;
 			this.lust = 30;
 			this.lustVuln = lustVuln;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			var level:int = 11 + Math.round((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
+			var level:int = 11 + Math.round((game.flags[kFLAGS.ADULT_MINOTAUR_OFFSPRINGS] - 3)/2);
 			if (level > 14) level = 14;
 			this.level = level;
 			this.gems = rand(15) + 45;

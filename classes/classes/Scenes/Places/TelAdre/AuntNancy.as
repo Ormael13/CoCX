@@ -16,11 +16,11 @@ public function auntNancy(display:Boolean = true):Boolean {
 		if (display) {
 			outputText("\n\nYou see a rather buxom woman with short, white hair in a neck- and sleeve-less black dress cleaning glasses with her bar towel.  She makes the task look simple, moreso because she has two pairs of arms, wrapped in what look like shiny black gloves.", false);
 			//[If MetNancy = 0]
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00263] == 0) outputText("  She", false);
+			if (flags[kFLAGS.NANCY_MET] == 0) outputText("  She", false);
 			else outputText("  Aunt Nancy", false);
 			outputText(" glances up at you and smiles as you enter", false);
 			//[(if unmet)
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00263] == 0) outputText(", and you see that she has additional red eyes spread across her forehead", false);
+			if (flags[kFLAGS.NANCY_MET] == 0) outputText(", and you see that she has additional red eyes spread across her forehead", false);
 			outputText(".", false);
 		}
 		return true;
@@ -32,7 +32,7 @@ public function interactWithAuntNancy():void {
 	clearOutput();
 	//[Interaction 2]
 	//[If Time = 1400, Relationship with Aunt Nancy >= 30, and PillowTalk= 0]
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00264] >= 30 && model.time.hours == 14 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00266] == 0) {
+	if (flags[kFLAGS.NANCY_RELATIONSHIP_LEVEL] >= 30 && model.time.hours == 14 && flags[kFLAGS.NANCY_TIMES_BONED] == 0) {
 		outputText("As you enter the bar, looking forward to spending some time with Aunt Nancy, you see that she is cleaning up and getting ready to leave.  She spots you with one of her eyes and smiles, waving you closer with a single hand as the other three set glasses under the bar.\n\n", false);
 
 		outputText("\"<i>Afternoon, friend!</i>\" she says, cheerily.  \"<i>You've certainly been coming in a lot, and I can't say I don't appreciate your company.</i>\"  Aunt Nancy looks you over a little, smiling a little more wistfully and melancholically now.  \"<i>You remind me a little of my husband,</i>\" she admits, finishing up and skittering out from behind the bar on her many legs as the afternoon shift bartender takes her place.  \"<i>It's... nothing I can put my finger on.  Just, you have a certain... <b>quality</b> to you.</i>\"\n\n", false);
@@ -43,7 +43,7 @@ public function interactWithAuntNancy():void {
 		simpleChoices("Agree", timeForAuntNancySpiderCooch, "Decline", declineAuntNancyMassage, "", null, "", null, "", null);
 	}
 	//[If Time >= 1400 - (100*(Relationship with Aunt Nancy/30), Relationship with Aunt Nancy >= 30, and PillowTalk= 1]
-	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00264] >= 30 && model.time.hours >= (14 - (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00264]/30)) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00266] > 0) {
+	else if (flags[kFLAGS.NANCY_RELATIONSHIP_LEVEL] >= 30 && model.time.hours >= (14 - (flags[kFLAGS.NANCY_RELATIONSHIP_LEVEL]/30)) && flags[kFLAGS.NANCY_TIMES_BONED] > 0) {
 		outputText("Aunt Nancy looks up as you walk over to her, and her eyes light up.  Happily, she greets you with a prim little hand atop yours, a bit of evidence of the intimacy you've shared.\n\n", false);
 
 		outputText("\"<i>Couldn't stay away, could you friend?</i>\" she asks, quietly, a sexy smile on her lovely face.  \"<i>What'll it be? Do you want a drink...</i>\"  The spider-lady leans her white-haired head next to your ear conspiratorially, and whispers, \"<i>Or, do you want me to get off early and give you a little... massage?</i>\"  You shiver at her words.\n\n", false);
@@ -57,7 +57,7 @@ public function interactWithAuntNancy():void {
 
 		outputText("\"<i>Welcome to the Wet Bitch.  My name's Aunt Nancy, and I'll be your server this morning.</i>\"  She smiles.  \"<i>Well, what'll it be, friend?</i>\" the bartender asks, her voice rich and velvety rather than cute as she leans on the bar, giving you a good look at her cleavage.  \"<i>Bit early in the day for the strong stuff, I reckon.</i>\"\n\n", false);
 		//[If MetNancy < 1, MetNancy += 1]
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00263] < 1) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00263] = 1;
+		if (flags[kFLAGS.NANCY_MET] < 1) flags[kFLAGS.NANCY_MET] = 1;
 		//[Choice: Strong, Light]
 		simpleChoices("Strong", strongStuff, "Light", lightStuff, "", null, "", null, "Leave", telAdre.barTelAdre);
 	}
@@ -86,13 +86,13 @@ private function strongStuff():void {
 	if (player.tou >= 30) {
 		outputText("It was good, but it seems to have gone straight to your head with surprising speed, giving you a pleasant buzz after only one glass. It might be a prudent idea to walk it off before you get another.  You thank Aunt Nancy for the drink, before climbing to your " + player.feet() + " and leaving.  She eyes you respectfully as you go.", false);
 		//[+10 Relationship with Aunt Nancy]
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00264] += 10;
+		flags[kFLAGS.NANCY_RELATIONSHIP_LEVEL] += 10;
 	}
 	//[Else]
 	else {
 		outputText("Wow, that one took it out of you.  You're pretty sure you don't want to try to have another.  Feeling a little wobbly, you thank the bartender for the drink, and unsteadily stagger out of the shop.  As you leave, you hear Aunt Nancy giggling, and out of the corner of your eye, you see her bunched up, one hand over her mouth as she chuckles, amused at your inability to hold your liquor.", false);
 		//[+5 Relationship with Aunt Nancy]
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00264] += 5;
+		flags[kFLAGS.NANCY_RELATIONSHIP_LEVEL] += 5;
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -116,8 +116,8 @@ private function lightStuff():void {
 	outputText("Once she gives you the drink, you take a tentative sip, and find it very sweet and refreshing, without seeming very strong or alcoholic.  It's very good, and you quickly have another.", false);
 	
 	//[If FirstTalkNancy = 0]
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00265] == 0) {
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00265]++;
+	if (flags[kFLAGS.NANCY_TIMES_TALKED] == 0) {
+		flags[kFLAGS.NANCY_TIMES_TALKED]++;
 		outputText("\"<i>So,</i>\" she says, settling one set of arms on the bar and supporting her head with the other, \"<i>what's your story, friend?  You have a certain...</i>\" Aunt Nancy waves with a hand. \"<i>look about you.  Like my late husband, Marae send him to his reward.  You're an... adventurer, I take it?  You live off the land, fighting monsters for gems, scavenging all your equipment off what you can find or put together yourself?</i>\"\n\n", false);
 
 		outputText("You nod, hesitantly, remembering that here, at least, you're in no danger from demons.\n\n", false);
@@ -153,14 +153,14 @@ private function lightStuff():void {
 	
 		//[50% chance to gain 1-2 Intelligence, +20 Relationship with Aunt Nancy, FirstTalkNancy += 1]
 		if (rand(2) == 0) dynStats("int", 1+rand(2));
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00264] += 20;
+		flags[kFLAGS.NANCY_RELATIONSHIP_LEVEL] += 20;
 	}
 	//[Else:]
 	else {
 		outputText("As you sip your drink, you and Nancy swap adventuring stories for a while, enjoying one another's company in the fairly quiet bar.  The older spider-lady is a good conversationalist, and you feel a little closer for having shared some time with her.", false);
 		//[50% chance to gain 1-2 Intelligence, +10 Relationship with Aunt Nancy]
 		if (rand(2) == 0) dynStats("int", 1+rand(2));
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00264] += 20;
+		flags[kFLAGS.NANCY_RELATIONSHIP_LEVEL] += 20;
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -201,7 +201,7 @@ private function auntNancyPoonPartII():void {
 	outputText("With her other three hands, the spider-lady lights a match and ignites a little lantern, which she raises to hang from the wall.  In the little area it illuminates, you can see that Aunt Nancy has removed her neck-less black dress, letting her impressive bosom bounce modestly as she works, and catch a glimpse of her unusual genitals before she turns to face you again.\n\n", false);
 
 	//[If PillowTalk = 0]
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00266] == 0) outputText("\"<i>It's... been a long, long time,</i>\" murmurs Aunt Nancy, her throaty voice washing over you, as two of her hands rest on your " + player.chestDesc() + " and the other two wrap carefully around your shoulders and neck, gently rubbing you in the promised massage.  She's crawling along the web, her many feet easily avoiding the sticky parts, and her face is mere inches from yours.  You can smell her sweet, slightly alcohol-scented breath as her many eyes look down at you.  \"<i>I haven't... been with anyone since I lost my husband, and... well... I... I need this.  Will you please be with me, if only for a little while?</i>\"\n\n", false);
+	if (flags[kFLAGS.NANCY_TIMES_BONED] == 0) outputText("\"<i>It's... been a long, long time,</i>\" murmurs Aunt Nancy, her throaty voice washing over you, as two of her hands rest on your " + player.chestDesc() + " and the other two wrap carefully around your shoulders and neck, gently rubbing you in the promised massage.  She's crawling along the web, her many feet easily avoiding the sticky parts, and her face is mere inches from yours.  You can smell her sweet, slightly alcohol-scented breath as her many eyes look down at you.  \"<i>I haven't... been with anyone since I lost my husband, and... well... I... I need this.  Will you please be with me, if only for a little while?</i>\"\n\n", false);
 	else outputText("\"<i>Are you ready for me, friend?</i>\" murmurs Aunt Nancy, her throaty voice washing over you, as two of her hands rest on your " + player.chestDesc() + " and the other two wrap carefully around your neck and shoulders, gently rubbing you in the promised massage. She's crawling along the web, her many feet easily avoiding the sticky parts, and her face is mere inches from yours. You can smell her sweet, slightly alcohol-scented breath as her many eyes look down at you.  \"<i>I certainly am, little fly.</i>\"\n\n", false);
 
 	outputText("Quietly, mesmerized by her needy red eyes, you nod.  Aunt Nancy smiles demurely.  \"<i>Good,</i>\" she purrs, and lowers her lips to yours.  You weren't quite sure what to expect, but her lips are soft and gentle as she presses them on you.  Her tongue gently snakes into your mouth, wrapping around yours with ease, and her sweet-tasting saliva is soon sliding down your throat.  Instantly, you feel your body loosening up, and ", false);
@@ -452,10 +452,10 @@ private function auntNancyPoonPartIV():void {
 	//[+35 Fatigue]
 	player.changeFatigue(35);
 	//[+20 Relationship with Aunt Nancy, PillowTalk += 1]
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00264] += 20;
+	flags[kFLAGS.NANCY_RELATIONSHIP_LEVEL] += 20;
 	
 	//[Next Page, If PillowTalk = 0]
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00266] == 0) {
+	if (flags[kFLAGS.NANCY_TIMES_BONED] == 0) {
 		outputText("You awaken on Aunt Nancy's \"<i>bed,</i>\" an unbelievably comfortable pile of discarded, non-sticky webbing, your head still resting on her comfortable, pillowy bosom.  Slowly, you manage to sit up, tenderly massaging your aching body, especially your ", false);
 		if (player.gender > 0) outputText("genitals", false);
 		else outputText("jaw", false);
@@ -476,7 +476,7 @@ private function auntNancyPoonPartIV():void {
 		outputText("Worn out and sticky, you awaken in the spider-lady's arms in her bed.  You share a kiss and tender moment with the widow, before leaving Aunt Nancy to rest as you go to get cleaned up and leave, tired and worn out but also feeling stronger from your exercise.  As you leave, she tells you to come by when next you can...", false);
 	}
 	//Increment times boned!
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00266] += 1;
+	flags[kFLAGS.NANCY_TIMES_BONED] += 1;
 	doNext(camp.returnToCampUseTwoHours);
 }
 }

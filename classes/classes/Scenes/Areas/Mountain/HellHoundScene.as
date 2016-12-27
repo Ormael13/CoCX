@@ -108,12 +108,12 @@ package classes.Scenes.Areas.Mountain
 			clearOutput();
 			//Initial encounter (A)
 			//Requires canine face, [either two dog dicks, or a vag and pregnant with a hellhound], at least two other hellhound features (black fur, dog legs, dog tail), and corruption >=60.
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141] == 0) {
+			if (flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] == 0) {
 				outputText("As you're wandering the mountains, you feel an odd presence in the back of your mind.  It calls out to you with promise of power and safety, but part of you feels a bit apprehensive at the prospect of giving yourself over to it.  Do you let the presence take over?", false);
 				//Player chooses yes/no - no -> (B), yes -> (C)
 				doYesNo(acceptCrazyPresences, declineCrazyPresences);
 			}
-			else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141] == 1) {
+			else if (flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] == 1) {
 				//Second Encounter (D)
 				//can be triggered if the PC still has the required canine traits, and has a piece of Lethicite.
 				outputText("As you're wandering the mountains, you once again feel an odd presence in the back of your mind.  You're sure it is the hellhound master once again.  You look at the pink crystal in your possession, and wonder if you should exchange it for the promissed hellfire.  Do you let the presence take over and give away the Lethicite?", false);
@@ -157,7 +157,7 @@ package classes.Scenes.Areas.Mountain
 
 			if (player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemv2("Marae's Lethicite") < 3) outputText(" You extract Marae's lethicite from your pack, and wonder if you really want to trade it for the hellfire he offered.", false);
 			//advance to repeat version
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141] = 1;
+			flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] = 1;
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -218,7 +218,7 @@ package classes.Scenes.Areas.Mountain
 			//player gains hellfire perk.  Hellfire deals physical damage to completely pure foes, lust damage to completely corrupt foes, and a mix for those in between.  Its power is based on the PC's corruption and level.  Appearance is slightly changed to mention that the PC's eyes and mouth occasionally show flicks of fire from within them, text could possibly vary based on corruption.
 			if (player.findPerk(PerkLib.Hellfire) < 0) player.createPerk(PerkLib.Hellfire, 0, 0, 0, 0);
 			//Hellhounds no longer encounterable.
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141]++;
+			flags[kFLAGS.HELLHOUND_MASTER_PROGRESS]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
 

@@ -2033,8 +2033,8 @@ package classes.Scenes.Combat
 				addButton(0, "Next", combatMenu, false);
 				return;
 			}
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] == 1 && (monster.short == "minotaur gang" || monster.short == "minotaur tribe")) {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] = 0;
+			if (flags[kFLAGS.MINOTAUR_SONS_WASTED_TURN] == 1 && (monster.short == "minotaur gang" || monster.short == "minotaur tribe")) {
+				flags[kFLAGS.MINOTAUR_SONS_WASTED_TURN] = 0;
 				//(Free run away) 
 				outputText("You slink away while the pack of brutes is arguing.  Once they finish that argument, they'll be sorely disappointed!", true);
 				inCombat = false;

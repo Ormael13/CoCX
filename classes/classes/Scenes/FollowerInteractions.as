@@ -569,7 +569,7 @@ private function askAboutAmilyPt2():void {
 	//Progress to next stage!
 	flags[kFLAGS.AMILY_VISITING_URTA] = 2;
 	//Tag that Urta needs to freak out!
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00350] = 1;
+	flags[kFLAGS.URTA_AMILY_FOLLOWUP_NEEDED] = 1;
 }
 private function cheatingSloots():void {
 	clearOutput();
@@ -669,7 +669,7 @@ private function smileAndNodToAmilyXUrta():void {
 //Amily Option - Urta
 //This option should probably only appear when Urta is actually at the Wet Bitch
 public function amilyUrtaSex():void {
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00350] = 2;
+	flags[kFLAGS.URTA_AMILY_FOLLOWUP_NEEDED] = 2;
 	clearOutput();
 	outputText("With a knowing smirk, you ask how Amily would feel about going to see Urta and maybe having a little fun with her.  The mouse-girl flushes with embarrassment, but you can see the eagerness in her body language.  \"<i>Okay, sure; I kind of like going to the city... besides, between you and me?  I think Urta needs all the friends she can get... never thought I'd feel sorry for a hermaphrodite.</i>\"  She mumbles this last part to herself, but you can still hear her.", false);
 	if (player.cor > 50 && flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("  Privately, you note that it's bullshit; she's nothing <b>but</b> self-pity.", false);

@@ -60,7 +60,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Chance of threesomes!
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00256] != 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00257] != 0 && flags[kFLAGS.HEL_FUCKBUDDY] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00260] == 0 && !kGAMECLASS.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.TIMES_EXPLORED_PLAINS] % 21 == 0 && !(player.tallness > 78 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00258] == 0)) {
+			if (flags[kFLAGS.ISABELLA_CAMP_APPROACHED] != 0 && flags[kFLAGS.ISABELLA_MET] != 0 && flags[kFLAGS.HEL_FUCKBUDDY] == 1 && flags[kFLAGS.ISABELLA_ANGRY_AT_PC_COUNTER] == 0 && !kGAMECLASS.isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.TIMES_EXPLORED_PLAINS] % 21 == 0 && !(player.tallness > 78 && flags[kFLAGS.ISABELLA_OKAY_WITH_TALL_FOLKS] == 0)) {
 				//Hell/Izzy threesome intro
 				if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) {
 					kGAMECLASS.helScene.salamanderXIsabellaPlainsIntro();

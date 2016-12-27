@@ -2030,7 +2030,7 @@ private function kellyBJsAhoy():void {
 				if (pregnancy.isPregnant) outputText(", milk laden");
 				outputText(" breasts whilst slavishly polishing the [balls] of the " + player.mf("man","woman") + " who made her into, well, a ball-licking bitch.");
 				//[Dominika dreams:
-				if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0) outputText("  You are gripped by a sudden but thrilling velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
+				if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[kFLAGS.DOMINIKA_STAGE] > 0) outputText("  You are gripped by a sudden but thrilling velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
 			}
 		}
 		//Vagina:
@@ -2057,7 +2057,7 @@ private function kellyBJsAhoy():void {
 				if (pregnancy.isPregnant) outputText(", milk laden");
 				outputText(" breasts whilst slavishly polishing the [balls] of the " + player.mf("man","woman") + " who made her into, well, a ball-licking bitch.");
 				//Dominika dreams:
-				if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0) outputText("  You are gripped by a sudden but thrilling, velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
+				if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[kFLAGS.DOMINIKA_STAGE] > 0) outputText("  You are gripped by a sudden but thrilling, velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
 			}			
 		}
 		//[merge]
@@ -2116,7 +2116,7 @@ private function kellyBJsAhoy():void {
 				outputText(", then back to the first one, a slow and sensual repetition.  The warm air is punctuated with desperate 'ahh, ahn, ahh's as she surrenders herself to the deep, shameful lust of the act, supporting her soft");
 				if (pregnancy.isPregnant) outputText(", milk laden");
 				outputText(" breasts whilst slavishly polishing the [balls] of the centaur who made her into, well, a ball-licking bitch.");
-				if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0) outputText("  You are gripped by a sudden but thrilling, velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
+				if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[kFLAGS.DOMINIKA_STAGE] > 0) outputText("  You are gripped by a sudden but thrilling, velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
 			}
 		}
 		//Vagina: 
@@ -2142,7 +2142,7 @@ private function kellyBJsAhoy():void {
 				outputText(", then back to the first one, a slow and sensual repetition.  The warm air is punctuated with desperate 'ahh, ahn, ahh's as she surrenders herself to the deep, shameful lust of the act, supporting her soft");
 				if (pregnancy.isPregnant) outputText(", milk-laden");
 				outputText(" breasts whilst slavishly polishing the [balls] of the centaur who made her into, well, a ball-licking bitch.");
-				if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0) outputText("  You are gripped by a sudden but thrilling, velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
+				if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[kFLAGS.DOMINIKA_STAGE] > 0) outputText("  You are gripped by a sudden but thrilling, velvet-edged sense of déjà vu.  Has this scene not repeated somewhere else?");
 			}
 		}
 		//[merge]

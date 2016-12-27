@@ -38,7 +38,7 @@ package classes.Scenes.Places
 				if (player.inte > 40) outputText("You realize what it smells like – sex.  ", false);
 			}
 			//3% chance of finding lost daughters
-			if (rand(100) <= 3 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00412] > 0 && kGAMECLASS.izmaScene.izmaFollower()) {
+			if (rand(100) <= 3 && flags[kFLAGS.IZMA_KIDS_IN_WILD] > 0 && kGAMECLASS.izmaScene.izmaFollower()) {
 				kGAMECLASS.izmaScene.findLostIzmaKids();
 				return;
 			}
