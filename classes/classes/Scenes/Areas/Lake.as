@@ -71,7 +71,7 @@ package classes.Scenes.Areas
 			if (player.level >= 2)
 				choice[choice.length] = 4;
 			//Izma
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00230] > 0 && (flags[kFLAGS.TIMES_EXPLORED_LAKE] >= 10) && (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00233] == 0 || player.findStatusEffect(StatusEffects.Infested) < 0) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] <= 0)
+			if (flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0 && (flags[kFLAGS.TIMES_EXPLORED_LAKE] >= 10) && (flags[kFLAGS.IZMA_WORMS_SCARED] == 0 || player.findStatusEffect(StatusEffects.Infested) < 0) && flags[kFLAGS.IZMA_FOLLOWER_STATUS] <= 0)
 				choice[choice.length] = 5;
 			//Rathazul
 			if (player.findStatusEffect(StatusEffects.CampRathazul) < 0)

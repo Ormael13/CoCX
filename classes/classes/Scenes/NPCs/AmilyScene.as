@@ -1547,8 +1547,8 @@ package classes.Scenes.NPCs
 			}
 			else flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 2;
 			//if Izma is there, tag for freekout!
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00236] = 1;
+			if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) {
+				flags[kFLAGS.IZMA_AMILY_FREAKOUT_STATUS] = 1;
 			}
 			//Disable amily encounters in the village!
 			flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;

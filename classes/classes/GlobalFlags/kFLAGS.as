@@ -235,16 +235,16 @@ public static const UNKNOWN_FLAG_NUMBER_00226:int                               
 public static const UNKNOWN_FLAG_NUMBER_00227:int                                   =  227; // -Drinking Contest Bonus Score
 public static const UNKNOWN_FLAG_NUMBER_00228:int                                   =  228; // Diapause fluid store
 public static const UNKNOWN_FLAG_NUMBER_00229:int                                   =  229; // Diapause gain need displayed?
-public static const UNKNOWN_FLAG_NUMBER_00230:int                                   =  230; // Sharkgirls met? (Izma counter)
+public static const IZMA_ENCOUNTER_COUNTER:int                                      =  230; // Sharkgirls met? (Izma counter)
 public static const IZMA_TIMES_FOUGHT_AND_WON:int                                   =  231; // Izma fight
-public static const UNKNOWN_FLAG_NUMBER_00232:int                                   =  232; // Times Talked At shark pussy
-public static const UNKNOWN_FLAG_NUMBER_00233:int                                   =  233; // Izma worm scare (1 = Izma has been scared off by worms)
+public static const IZMA_TALKED_AT_LAKE:int                                         =  232; // Times Talked At shark pussy
+public static const IZMA_WORMS_SCARED:int                                           =  233; // Izma worm scare (1 = Izma has been scared off by worms)
 public static const BONUS_ITEM_AFTER_COMBAT_ID:int                                  =  234; // Izma loot storage - Izma saved loot status
-public static const UNKNOWN_FLAG_NUMBER_00235:int                                   =  235; // Taken Izma gloves
-public static const UNKNOWN_FLAG_NUMBER_00236:int                                   =  236; // Izma + Amily Freakout Status = (-1 = done, 0 = nothing yet, 1 = queued for camp prog)
-public static const UNKNOWN_FLAG_NUMBER_00237:int                                   =  237; // Izma + Marble Freakout Status = (Above)
-public static const UNKNOWN_FLAG_NUMBER_00238:int                                   =  238; // Izma Follower Toggle (-1 = stay at lake, 0 = neutral, 1 = live in camp)
-public static const UNKNOWN_FLAG_NUMBER_00239:int                                   =  239; // Izma Talk level
+public static const IZMA_GLOVES_TAKEN:int                                           =  235; // Taken Izma gloves
+public static const IZMA_AMILY_FREAKOUT_STATUS:int                                  =  236; // Izma + Amily Freakout Status = (-1 = done, 0 = nothing yet, 1 = queued for camp prog)
+public static const IZMA_MARBLE_FREAKOUT_STATUS:int                                 =  237; // Izma + Marble Freakout Status = (Above)
+public static const IZMA_FOLLOWER_STATUS:int                                        =  238; // Izma Follower Toggle (-1 = stay at lake, 0 = neutral, 1 = live in camp)
+public static const IZMA_TALK_LEVEL:int                                             =  239; // Izma Talk level
 public static const UNKNOWN_FLAG_NUMBER_00240:int                                   =  240; // Mino Chef First Meeting Happen?
 public static const UNKNOWN_FLAG_NUMBER_00241:int                                   =  241; // mino explained what he needs yet?
 public static const UNKNOWN_FLAG_NUMBER_00242:int                                   =  242; // , 3 =stayed, 4 = epilogue'ed

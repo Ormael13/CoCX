@@ -237,8 +237,8 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 						}
 						else flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 1;
 						//if Izma is there, tag for freakout!
-						if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
-							flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00237] = 1;
+						if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
+							flags[kFLAGS.IZMA_MARBLE_FREAKOUT_STATUS] = 1;
 						}
 						player.createStatusEffect(StatusEffects.NoMoreMarble,0,0,0,0);
 					}
@@ -279,8 +279,8 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 						}
 						else flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 1;
 						//if Izma is there, tag for freakout!
-						if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
-							flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00237] = 1;
+						if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
+							flags[kFLAGS.IZMA_MARBLE_FREAKOUT_STATUS] = 1;
 						}
 						player.createStatusEffect(StatusEffects.NoMoreMarble,0,0,0,0);
 					}
@@ -345,8 +345,8 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 						}
 						else flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 1;
 						//if Izma is there, tag for freakout!
-						if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
-							flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00237] = 1;
+						if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
+							flags[kFLAGS.IZMA_MARBLE_FREAKOUT_STATUS] = 1;
 						}
 					}
 				}
@@ -384,8 +384,8 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 						}
 						else flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 1;
 						//if Izma is there, tag for freakout!
-						if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
-							flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00237] = 1;
+						if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
+							flags[kFLAGS.IZMA_MARBLE_FREAKOUT_STATUS] = 1;
 						}
 					}
 				}
