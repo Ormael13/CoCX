@@ -1850,8 +1850,6 @@ package classes.Scenes.Places.Bazaar
 			
 			// Normal TFs
 			//------------
-			if (rand(5) == 0) mutations.updateOvipositionPerk(tfSource);
-
 			if (rand(4) == 0 && changes < changeLimit && player.hairType != HAIR_NORMAL && player.hairType != HAIR_QUILL) {
 				outputText("\n\nYour scalp feels really strange, but the sensation is brief. You feel your hair, and you immediately notice the change. <b>It would seem that your hair is normal again!</b>");
 				player.hairType = HAIR_NORMAL;
@@ -2064,10 +2062,7 @@ package classes.Scenes.Places.Bazaar
 				changes++;
 			}
 			if (rand(4) == 0 && changes < changeLimit && player.echidnaScore() >= 3 && player.hasVagina() && player.findPerk(PerkLib.Oviposition) < 0) {
-				outputText("\n\nDeep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly.  Beyond that, you aren't sure exactly what just happened, but you are sure it originated from your womb.\n");
-				outputText("(<b>Perk Gained: Oviposition</b>)");
-				player.createPerk(PerkLib.Oviposition, 0, 0, 0, 0);
-				changes++;
+				mutations.updateOvipositionPerk(tfSource);
 			}
 			if (rand(3) == 0 && (rand(2) == 0 || !player.inHeat) && player.hasVagina() && player.statusEffectv2(StatusEffects.Heat) < 30) {
 				player.goIntoHeat(true);

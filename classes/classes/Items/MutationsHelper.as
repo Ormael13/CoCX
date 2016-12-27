@@ -380,7 +380,7 @@ package classes.Items
 
 			if (changes >= changeLimit) return 0;
 
-			// Note, that we don't do the score checks anymore. That was just an unly workaround and we don't want to do that again!
+			// Note, that we don't do the score checks anymore. That was just an ugly workaround and we don't want to do that again!
 			switch(tfSource) {
 				case "EmberTFs":
 				case "snakeOil":
@@ -392,6 +392,7 @@ package classes.Items
 					return 0; // Don't change it. So we're done, yay!
 
 				case "reptilum":
+				case "echidnaTFs":
 					if (player.findPerk(PerkLib.Oviposition) >= 0) return 0;
 					outputText("\n\nDeep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly."
 					          +"  Beyond that, you aren't sure exactly what just happened, but you are sure it originated from your womb.\n");
