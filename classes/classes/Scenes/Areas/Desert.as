@@ -24,8 +24,8 @@ package classes.Scenes.Areas
 		//Explore desert
 		public function exploreDesert():void
 		{
-			flags[kFLAGS.TIMES_EXPLORED_DESERT] = int(flags[kFLAGS.TIMES_EXPLORED_DESERT]) + 1;
-			if ((player.level >= 4 || int(flags[kFLAGS.TIMES_EXPLORED_DESERT]) > 45) && int(flags[kFLAGS.TIMES_EXPLORED_DESERT]) % 15 == 0 && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] == 0) {
+			flags[kFLAGS.TIMES_EXPLORED_DESERT]++;
+			if ((player.level >= 4 || flags[kFLAGS.TIMES_EXPLORED_DESERT] > 45) && flags[kFLAGS.TIMES_EXPLORED_DESERT] % 15 == 0 && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] == 0) {
 				kGAMECLASS.dungeons.desertcave.enterDungeon();
 //				kGAMECLASS.inDungeon = true;
 //				kGAMECLASS.dungeonLoc = 23;
@@ -41,7 +41,7 @@ package classes.Scenes.Areas
 				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}
-			if ((int(flags[kFLAGS.TIMES_EXPLORED_DESERT]) == 20 && player.findStatusEffect(StatusEffects.TelAdre) < 0) || (rand(20) == 0 && player.statusEffectv1(StatusEffects.TelAdre) == 0)) {
+			if ((flags[kFLAGS.TIMES_EXPLORED_DESERT] == 20 && player.findStatusEffect(StatusEffects.TelAdre) < 0) || (rand(20) == 0 && player.statusEffectv1(StatusEffects.TelAdre) == 0)) {
 				kGAMECLASS.telAdre.discoverTelAdre();
 				return;
 			}
@@ -51,7 +51,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Ant colony debug chances
-			if (player.level >= 5 && flags[kFLAGS.ANT_WAIFU] == 0 && (int(flags[kFLAGS.TIMES_EXPLORED_DESERT]) % 8 == 0) && flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] == 0 && flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] == 0) {
+			if (player.level >= 5 && flags[kFLAGS.ANT_WAIFU] == 0 && (flags[kFLAGS.TIMES_EXPLORED_DESERT] % 8 == 0) && flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] == 0 && flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] == 0) {
 				antsScene.antColonyEncounter();
 				return;
 			}
