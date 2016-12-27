@@ -2915,7 +2915,7 @@ private function updateAchievements():void {
 /*
 private function fixHistory():void {
 	outputText("<b>New history perks are available during creation.  Since this character was created before they were available, you may choose one now!</b>", true);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] = 2;
+	flags[kFLAGS.HISTORY_PERK_SELECTED] = 2;
 	menu();
 	doNext(10036);
 }
