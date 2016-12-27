@@ -16,7 +16,7 @@ public function exploreShowers():void {
 		statScreenRefresh();
 	}*/
 	hideUpDown();
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00182] <= 1 && flags[kFLAGS.DISABLED_SEX_MACHINE] <= 0) {
+	if (flags[kFLAGS.GYM_MACHINE_STATUS] <= 1 && flags[kFLAGS.DISABLED_SEX_MACHINE] <= 0) {
 		outputText("Having worked your body to a pleasant soreness as well as coating your " + player.skinDesc + " in a thin sheen of sweat and pheromones, you decide to hit up the showers to wash off and relax in the hot water.  ", false);
 		outputText("You walk into the back halls of the gym, quickly realizing you aren't quite sure where you're headed.  You turn a couple corners, walking down the halls looking for someone, and are about to turn back when you see a goblin round the corner up ahead.\n\n", false);
 	
@@ -27,7 +27,7 @@ public function exploreShowers():void {
 		outputText("Do you use it or not?", false);
 		doYesNo(useTheSexMachine, leaveShowers);
 		addButton(2, "No way!", disableMachineForGood);
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00182] = 1;
+		flags[kFLAGS.GYM_MACHINE_STATUS] = 1;
 	}
 	//Go directly to sex if you know what's in store!
 	else {
@@ -54,7 +54,7 @@ private function disableMachineForGood():void {
 
 private function useTheSexMachine():void {
 	clearOutput();
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00182] = 2;
+	flags[kFLAGS.GYM_MACHINE_STATUS] = 2;
 	//[If you decide to mess with the machine: Male]
 	if (player.gender == 1) {
 		if (flags[kFLAGS.TIMES_USED_SEX_MACHINE_AS_MALE] == 0) {

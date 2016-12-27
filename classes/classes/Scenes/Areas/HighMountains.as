@@ -55,7 +55,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//25% minotaur sons!
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 3 && rand(4) == 0 && player.hasVagina()) {
+			if (flags[kFLAGS.ADULT_MINOTAUR_OFFSPRINGS] >= 3 && rand(4) == 0 && player.hasVagina()) {
 				spriteSelect(44);
 				minotaurMobScene.meetMinotaurSons();
 				return;
@@ -112,7 +112,7 @@ package classes.Scenes.Areas
 			}
 			//Sophie
 			if (chooser == 2) {
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || kGAMECLASS.sophieFollowerScene.sophieFollower()) {
+				if (flags[kFLAGS.SOPHIE_BIMBO] > 0 || flags[kFLAGS.SOPHIE_DISABLED_FOREVER] > 0 || kGAMECLASS.sophieFollowerScene.sophieFollower()) {
 					outputText("A harpy wings out of the sky and attacks!", true);
 					startCombat(new Harpy());
 					spriteSelect(26);

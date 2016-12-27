@@ -1253,7 +1253,7 @@ package classes
 					outputText("\nLooking positively perverse, a " + player.cocks[0].pShortDesc + " adorns your " + player.cockDescript(0) + ".", false);
 				}
 			}
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00286] == 1) 
+			if (flags[kFLAGS.CERAPH_BELLYBUTTON_PIERCING] == 1) 
 				outputText("\nA magical, ruby-studded bar pierces your belly button, allowing you to summon Ceraph on a whim.", false);
 			if (player.hasVagina()) 
 			{

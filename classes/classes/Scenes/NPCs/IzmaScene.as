@@ -45,7 +45,7 @@
 			if (izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.IZMA_FEEDING_VALERIA] == 1 && flags[kFLAGS.VALARIA_AT_CAMP] > 0) {
 				flags[kFLAGS.VALERIA_FLUIDS] = 100;
 			}
-			if (model.time.hours > 23 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00246] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00246] = 0;
+			if (model.time.hours > 23 && flags[kFLAGS.IZMA_TIGERSHARK_TOOTH_COUNTDOWN] > 0) flags[kFLAGS.IZMA_TIGERSHARK_TOOTH_COUNTDOWN] = 0;
 			return false;
 		}
 	
@@ -1778,13 +1778,13 @@ private function backToCamp():void
 public function gatASharkTooth():void {
 	spriteSelect(32);
 	clearOutput();
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00246] > 1) {
+	if (flags[kFLAGS.IZMA_TIGERSHARK_TOOTH_COUNTDOWN] > 1) {
 		outputText("Izma smiles apologetically and says, \"<i>I'm sorry, but I won't be able to get my hands on one of those until tomorrow.</i>\"");
 		doNext(izmaFollowerMenu);
 	}
 	else {
 		outputText("Izma smiles as she pulls a tooth from her chest.  She hands it to you with a pleased expression.  \"<i>Anything for you, my Alpha.</i>\"  ");
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00246]++;
+		flags[kFLAGS.IZMA_TIGERSHARK_TOOTH_COUNTDOWN]++;
 		inventory.takeItem(consumables.TSTOOTH, playerMenu);
 	}
 }

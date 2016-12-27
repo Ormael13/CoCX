@@ -21,7 +21,7 @@ public function visitZeMagesTower():void {
 	menu();
 	if (flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == 0 || model.time.hours <= 17)  {
 		addButton(1,"You Okay?",youOkayBuddy);
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00175] > 0) addButton(2,"Mali",talkToMali);
+		if (flags[kFLAGS.DOMINIKA_DRAMA] > 0) addButton(2,"Mali",talkToMali);
 	}
 	if (flags[kFLAGS.TIMES_VISITED_MALI] > 0) addButton(2,"Mali",talkToMali);
 	addButton(0,"Study",studyInTA);

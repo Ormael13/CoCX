@@ -48,9 +48,9 @@ WIN:
 		public function timeChange():Boolean
 		{
 			//Increase Roxanne's growing dick size...
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225]++;
+			flags[kFLAGS.ROXANNE_TIME_WITHOUT_SEX]++;
 			//Reset if she finds someone to take it (random at high values)
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] >= 300 && model.time.hours == 1 && rand(5) == 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] = 1;
+			if (flags[kFLAGS.ROXANNE_TIME_WITHOUT_SEX] >= 300 && model.time.hours == 1 && rand(5) == 0) flags[kFLAGS.ROXANNE_TIME_WITHOUT_SEX] = 1;
 			//hangover status stuff
 			if (player.findStatusEffect(StatusEffects.Hangover) >= 0) {
 			//Countdown
@@ -67,7 +67,7 @@ WIN:
 					return true;
 				}
 			}
-			if (model.time.hours > 23 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00227] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00227]--; //Reduce drinking contest bonus
+			if (model.time.hours > 23 && flags[kFLAGS.ROXANNE_DRINKING_CONTEST_BONUS_SCORE] > 0) flags[kFLAGS.ROXANNE_DRINKING_CONTEST_BONUS_SCORE]--; //Reduce drinking contest bonus
 			return false;
 		}
 	
@@ -81,7 +81,7 @@ public function RoxanneAppearance():void {
 	//When she there?
 	if (model.time.hours > 12 && model.time.hours < 19) {
 		//(Not Met) 
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00221] == 0) outputText("\n\nThere's a table with a half-dozen oddly-dressed lizans not too far from the fire.  A keg is set up a few feet away and they seem to be having a good time.", false);
+		if (flags[kFLAGS.ROXANNE_MET] == 0) outputText("\n\nThere's a table with a half-dozen oddly-dressed lizans not too far from the fire.  A keg is set up a few feet away and they seem to be having a good time.", false);
 		//Met) 
 		else outputText("\n\nRoxanne and her usual crew are sitting at a table, drinking and telling bawdy stories near the fire.", false);
 	}
@@ -105,8 +105,8 @@ public function Roxanne1stApproach():void {
 public function RoxanneChooseApproachOrRepeat():void {
 	spriteSelect(78);
 	clearOutput();
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00221] == 0) {
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00221]++;
+	if (flags[kFLAGS.ROXANNE_MET] == 0) {
+		flags[kFLAGS.ROXANNE_MET]++;
 		outputText("You walk up and take an empty chair, getting a better look at the lizans while their leader does the same to you.  The others seem to ignore you, moving towards the table's far edge to converse in hushed tones.   The well-endowed girl leans over, sliding you a mug as she introduces herself.  \"<i>The name's Roxanne Poisontail.  Once a famed pirate, now another soul trapped in this twisted realm.  You can just call me Cap'n Poisontail or Roxanne - what's your story?</i>\"\n\n", false);
 		outputText("Her eyes slide up and down your body, half-listening as you introduce yourself and explain your role as a champion of Ingnam, sent here to protect it from demonic incursion.\n\n", false);
 		outputText("\"<i>Huh.  I didn't think anyone would ever come to this place on purpose.  Well, maybe a pervert.  I mean you can't take two steps without stumbling into some sex around here, if you don't mind slowly losing your mind to corruption that is.  All this gorgeous demon-tail around... and I can't even fuck one of them without slowly losing myself.  It's maddening!</i>\" exclaims Poisontail, her lip curling back to show rows of pointed teeth.  Her desperate, lusty eyes fix on you, lighting up with sudden inspiration.\n\n", false);
@@ -122,12 +122,12 @@ public function RoxanneChooseApproachOrRepeat():void {
 		outputText("Do you engage her in a drinking competition?", false);
 	}
 	//[Approach – met but not drank yet]
-	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00222] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00223] <= 0) {
+	else if (flags[kFLAGS.ROXANNE_DRINING_CONTEST_WON] + flags[kFLAGS.ROXANNE_DRINING_CONTEST_LOST] <= 0) {
 		outputText("\"<i>I see you've come back again " + player.short + ".   Did you come back for the free drinks, or... ?</i>\" Roxanne trails off, wiggling her tongue at you.  She pats the huge, barely concealed bulge and asks, \"<i>Or did you want to lose?  Remember, if I win I get to plug your ass with this beast.  If you win, I'll give you oral service that only a lizard can.  Now come on, let's drink until we forget this wretched place.</i>\"\n\n", false);
 		outputText("Do you engage Captain Poisontail in a drinking contest?", false);
 	}
 	//[Approach – lost last contest and she's huge]
-	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00224] == 2 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] >= 200) {
+	else if (flags[kFLAGS.ROXANNE_DRINKING_CONTEST_LAST_WINNER] == 2 && flags[kFLAGS.ROXANNE_TIME_WITHOUT_SEX] >= 200) {
 		outputText("\"<i>Oooh, praise the sea god Ulrun, you've returned.  " + player.short + ", it's been a while, and I've gotten sooooo big,</i>\" cheers an ecstatic Roxanne.  To emphasize her point she shows the seam-splitting bulge in her pants, rubbing it from the base all the way down to the tip, which rests next to her knee.  She's so big, and a damp spot appears at her pant-leg's knee while the huge cock-sausage visibly inflates.  Captain Poisontail asks, \"<i>So, can I count on you to get sauced and help me take care of this beast again, or do you actually think you have a chance of winning now?</i>\"\n\n", false);
 		outputText("It looks like she wants to engage you in another drinking contest.  If you lose ", false);
 		if (player.analCapacity() >= 100) outputText("she's going to keep you stretched and gaping", false);
@@ -135,24 +135,24 @@ public function RoxanneChooseApproachOrRepeat():void {
 		outputText(".  Do you enter a drinking contest with Roxanne?", false);
 	}
 	//[Approach – lost last contest and she's not big]
-	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00224] == 2 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] < 200) {
+	else if (flags[kFLAGS.ROXANNE_DRINKING_CONTEST_LAST_WINNER] == 2 && flags[kFLAGS.ROXANNE_TIME_WITHOUT_SEX] < 200) {
 		outputText("\"<i>Welcome back " + player.short + ".  Did you miss my touch badly enough that you came back for more?</i>\" asks Roxanne.  She pats an empty chair and spreads her legs, shifting her position to get more comfortable while reminding you of your recent 'defeat'.  Thankfully it looks like she's had sex recently and her dick is a far more normal size.  The lizan asks, \"<i>So, ready for another drinking contest?  Standard rules – I win; I plug your sweet ass full.  You win; I lick you to climax.</i>\"\n\n", false);
 		outputText("Do you drink with Roxanne again?", false);
 	}
 	//[Approach Roxanne and won last time – small Roxanne]
-	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00224] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] < 200) {
+	else if (flags[kFLAGS.ROXANNE_DRINKING_CONTEST_LAST_WINNER] == 1 && flags[kFLAGS.ROXANNE_TIME_WITHOUT_SEX] < 200) {
 		outputText("Roxanne glares at you as you approach, throwing back a mug of ale before she greets you.  \"<i>Welcome back.  Well, I suppose I'm not too big right now anyway.  Still, getting it back down would make walking around a little easier.  What do you say, how about another drinking contest?  Same rules – I win; you get reamed.  You win, and I'll give you a sloppy oral tongue-bath that's sure to make you squirm.</i>\"\n\n", false);
 		outputText("Roxanne slides an empty mug your way.  Do you try to drink her under the table again?", false);
 	}
 	//[Approach Roxanne and won last time – HUEG Roxanne]
-	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00224] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] >= 200) {
+	else if (flags[kFLAGS.ROXANNE_DRINKING_CONTEST_LAST_WINNER] == 1 && flags[kFLAGS.ROXANNE_TIME_WITHOUT_SEX] >= 200) {
 		outputText("Roxanne winces when you come back, idling rubbing the massive bulge in her trouser.  Beads of pre run down the fabric, darkening it noticeably.  She grunts, \"<i>You came back huh?  I've been practicing and I NEED release.  Let's have another drinking contest!  The rules are unchanged, and this time I'll win and fuck you 'til you gape!</i>\"  She looks desperate and horny, clearly aching for release.\n\n", false);
 		outputText("Do you accept her offer to partake in the drinking contest?", false);
 		
 	}
 	else outputText("If you're reading this, something broke.", false);
 	//Clear the 'are you losing the contest intionally flag'
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00226] = 0; //In case if lizans codex entry didn't unlock.
+	flags[kFLAGS.ROXANNE_DRINKING_CONTEST_LOSE_ON_PURPOSE] = 0; //In case if lizans codex entry didn't unlock.
 	if (flags[kFLAGS.CODEX_ENTRY_LIZANS] <= 0) {
 		flags[kFLAGS.CODEX_ENTRY_LIZANS] = 1;
 		outputText("\n\n<b>New codex entry unlocked: Lizans!</b>")
@@ -172,7 +172,7 @@ private function roxanneDrinkingContestNo():void {
 }
 
 private function roxanneDrinkingContestLoseDeliberately():void {
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00226] = 1;
+	flags[kFLAGS.ROXANNE_DRINKING_CONTEST_LOSE_ON_PURPOSE] = 1;
 	roxanneDrinkingContest();
 }
 
@@ -180,36 +180,36 @@ private function roxanneDrinkingContest():void {
 	spriteSelect(78);
 	clearOutput();
 	outputText("Roxanne ", false);
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] >= 200) outputText("stumbles over her huge manhood, working towards", false);
+	if (flags[kFLAGS.ROXANNE_TIME_WITHOUT_SEX] >= 200) outputText("stumbles over her huge manhood, working towards", false);
 	else outputText("saunters over to", false);
 	outputText(" the demonic-looking deer-taur working the tap and gives him a weighty gem-pouch, covering the cost of the contest and her mates' drinking in advance.  She lets the keg-keep top off the mug and throws it back, easily draining it with a few practiced swallows.  Her tail slaps the table in front of you as she teases, \"<i>Are you going to check me out all day or get smashed?  Come on!</i>\"\n\n", false);
 	outputText("You take the mug and hand it to the tainted 'taur working the tap.  ", false);
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00222] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00223] <= 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00224] == 2) {
+	if (flags[kFLAGS.ROXANNE_DRINING_CONTEST_WON] + flags[kFLAGS.ROXANNE_DRINING_CONTEST_LOST] <= 0 || flags[kFLAGS.ROXANNE_DRINKING_CONTEST_LAST_WINNER] == 2) {
 		outputText("He smirks at you as he fills it, radiating amusement at your attempt to out-drink Roxanne Poisontail.  It seems the locals don't believe you can win", false);
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00224] == 2) outputText(" after your last humiliation.", false);
+		if (flags[kFLAGS.ROXANNE_DRINKING_CONTEST_LAST_WINNER] == 2) outputText(" after your last humiliation.", false);
 		else outputText(" against such a renowned foe.", false);
 	}
 	else outputText("He leers at Roxanne as he fills your mug, remembering her last defeat and likely wishing he could feel her tongue as you did.", false);
 	outputText("  You ", false);
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00222] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00223] < 3) outputText("hesitantly sniff at the brew, taking in its dark color and heady, hoppy aroma before", false);
+	if (flags[kFLAGS.ROXANNE_DRINING_CONTEST_WON] + flags[kFLAGS.ROXANNE_DRINING_CONTEST_LOST] < 3) outputText("hesitantly sniff at the brew, taking in its dark color and heady, hoppy aroma before", false);
 	else outputText("smile and lick your lips, inhaling the hoppy aroma before", false);
 	outputText(" you slam the dark beer back and swallow.\n\n", false);
 		
 	//(FIRST TIME) 
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00222] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00223] <= 0) outputText("\"<i>You call that drinking?  Watch and learn, " + player.mf("brother","sister") + "!</i>\" shouts Roxanne triumphantly as she holds her mug aloft overhead.  The frothy beverage begins to pour out, an amber waterfall of intoxicant raining down towards the lizan's face, but the canny pirate is ready for it.  She opens her jaw and extends her tongue, over two feet of the pink-hued organ, catching the alcoholic downpour and funneling it past her smiling lips.  Finished, she belches loudly and pumps her hips at you rudely.  \"<i>I hope you're ready to get fucked!</i>\"\n\n", false);
+	if (flags[kFLAGS.ROXANNE_DRINING_CONTEST_WON] + flags[kFLAGS.ROXANNE_DRINING_CONTEST_LOST] <= 0) outputText("\"<i>You call that drinking?  Watch and learn, " + player.mf("brother","sister") + "!</i>\" shouts Roxanne triumphantly as she holds her mug aloft overhead.  The frothy beverage begins to pour out, an amber waterfall of intoxicant raining down towards the lizan's face, but the canny pirate is ready for it.  She opens her jaw and extends her tongue, over two feet of the pink-hued organ, catching the alcoholic downpour and funneling it past her smiling lips.  Finished, she belches loudly and pumps her hips at you rudely.  \"<i>I hope you're ready to get fucked!</i>\"\n\n", false);
 	//(REPEAT: PC HAS NOT YET WON) 
-	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00222] == 0) outputText("\"<i>You still drink like an amateur.  Still, it doesn't surprise me that you came back to old Captain Poisontail for a bout with my little manhood,</i>\" teases the lizan pirate as she wraps her tongue around the handle and lifts it to her lips, gulping the entire thing in one huge, throat-relaxing chug.  Roxanne belches loudly and pumps her hips at you as she says, \"<i>Ready for another fucking?</i>\"\n\n", false);
+	else if (flags[kFLAGS.ROXANNE_DRINING_CONTEST_WON] == 0) outputText("\"<i>You still drink like an amateur.  Still, it doesn't surprise me that you came back to old Captain Poisontail for a bout with my little manhood,</i>\" teases the lizan pirate as she wraps her tongue around the handle and lifts it to her lips, gulping the entire thing in one huge, throat-relaxing chug.  Roxanne belches loudly and pumps her hips at you as she says, \"<i>Ready for another fucking?</i>\"\n\n", false);
 	//(REPEAT: PC HAS WON AND NEVER LOST)
-	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00222] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00223] <= 0) outputText("\"<i>Last time I wasn't ready!  Well, I guess it's on!  This time I won't lose, and you can bet I'm gonna ride you twice as hard for payback!</i>\" Roxanne shouts with a feigned air of confidence.  She downs her drink quickly, foam frothing at the corners of her draconian muzzle in her hurry not to be outdone by you.  As you watch, she licks her lips and shivers, fidgeting uncomfortably while her cursed cock gets a bit harder in her pants.\n\n", false);
+	else if (flags[kFLAGS.ROXANNE_DRINING_CONTEST_WON] > 0 && flags[kFLAGS.ROXANNE_DRINING_CONTEST_LOST] <= 0) outputText("\"<i>Last time I wasn't ready!  Well, I guess it's on!  This time I won't lose, and you can bet I'm gonna ride you twice as hard for payback!</i>\" Roxanne shouts with a feigned air of confidence.  She downs her drink quickly, foam frothing at the corners of her draconian muzzle in her hurry not to be outdone by you.  As you watch, she licks her lips and shivers, fidgeting uncomfortably while her cursed cock gets a bit harder in her pants.\n\n", false);
 	//(REPEAT: PC HAS LOST BEFORE BUT WON LAST TIME)
-	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00223] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00224] == 1) outputText("\"<i>Don't get cocky, pup.  Roxanne Poisontail has defeated and claimed bigger sailors than you in her lifetime.  That last time was a fluke,</i>\" she proclaims.  The determined lizan swishes her full mug around for a moment before downing it in one huge, throat-bulging gulp.   Her prehensile tail slaps your " + player.buttDescript() + " without warning, and she chuckles when you nearly lurch out of your seat in surprise.  \"<i>That's just a warm-up.</i>\"\n\n", false);
+	else if (flags[kFLAGS.ROXANNE_DRINING_CONTEST_LOST] > 0 && flags[kFLAGS.ROXANNE_DRINKING_CONTEST_LAST_WINNER] == 1) outputText("\"<i>Don't get cocky, pup.  Roxanne Poisontail has defeated and claimed bigger sailors than you in her lifetime.  That last time was a fluke,</i>\" she proclaims.  The determined lizan swishes her full mug around for a moment before downing it in one huge, throat-bulging gulp.   Her prehensile tail slaps your " + player.buttDescript() + " without warning, and she chuckles when you nearly lurch out of your seat in surprise.  \"<i>That's just a warm-up.</i>\"\n\n", false);
 	//(REPEAT: PC HAS WON BEFORE BUT LOST LAST TIME) 
 	else outputText("\"<i>Don't you realize any previous victory was a fluke?  Watch and learn pup,</i>\" taunts Roxanne as she devours her mug in a single, throat-bulging swallow.  You chuckle, an involuntary burp interrupting your mirth as the piratical lizan pumps her hips at you rudely, her bulging manhood clearly outlined in the suddenly-tight trousers.  \"<i>I can't wait to bury this thing inside your ass again!</i>\"\n\n", false);
 
 	//[DRINKING CONTEST CONTINUES – not losing intentionally]
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00226] == 0) {
+	if (flags[kFLAGS.ROXANNE_DRINKING_CONTEST_LOSE_ON_PURPOSE] == 0) {
 		outputText("The 'taur at the tap quickly grows bored with the constant bantering between the scaly swashbuckler and yourself, only bothering to look your way when the two of you walk back for a refill.  The gluttonous chugging that started the contest gives way to a more languid pace as you and Roxanne become increasingly intoxicated, slowing down in hopes that the other will be judged unfit first.  It does get a little hard to focus with the way she's constantly eyeballing you, and her curvy figure and ", false);
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] >= 200) outputText("massive, seam-ripping bulge", false);
+		if (flags[kFLAGS.ROXANNE_TIME_WITHOUT_SEX] >= 200) outputText("massive, seam-ripping bulge", false);
 		else outputText("hard-to-hide bulge", false);
 		outputText(" give you more than an eyeful every time you return her leer.  Still, the scaly shemale must be feeling the same way, judging by the large damp spot her cock is making.\n\n", false);
 		dynStats("lus", 25);
@@ -220,37 +220,37 @@ private function roxanneDrinkingContest():void {
 	}
 	var score:Number = 0;
 	//Calculate score if not 
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00226] == 0) score = (player.tallness * ((player.thickness + 100)/200) * (player.tou/100)) + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00227];
+	if (flags[kFLAGS.ROXANNE_DRINKING_CONTEST_LOSE_ON_PURPOSE] == 0) score = (player.tallness * ((player.thickness + 100)/200) * (player.tou/100)) + flags[kFLAGS.ROXANNE_DRINKING_CONTEST_BONUS_SCORE];
 	//If score is less than 30-50 (Strahza is inconsistant!)
 	//[Lose!] 
 	if (score < (45 + rand(20))) {
 		//Increment loss count!
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00223]++;
+		flags[kFLAGS.ROXANNE_DRINING_CONTEST_LOST]++;
 		//Set who won contast last
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00224] = 2;
+		flags[kFLAGS.ROXANNE_DRINKING_CONTEST_LAST_WINNER] = 2;
 		//Gain big bonus
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00227] += 10;
+		flags[kFLAGS.ROXANNE_DRINKING_CONTEST_BONUS_SCORE] += 10;
 		outputText("Giggling and nearly tripping up on your own " + player.feet() + ", you stumble up to the corrupted deer-taur.  He looks at your wobbling stance, nearly-vacant eyes, and dopey grin before he shakes his head from side to side and says, \"<i>No.</i>\"  ", false);
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00226] == 0) outputText("Nooooo! You're cut off! That means Roxanne won...", false);
+		if (flags[kFLAGS.ROXANNE_DRINKING_CONTEST_LOSE_ON_PURPOSE] == 0) outputText("Nooooo! You're cut off! That means Roxanne won...", false);
 		else outputText("Yessss!  You finally got so drunk that Roxanne has no excuse not to pack your drunk ass full of lizan-spoo!", false);
 		outputText("  A scaled hand slaps your " + player.buttDescript() + " spinning you around to fall drunkenly into the pirate's soft, cushy chest.  \"<i>Don't worry, I'll be gentle,</i>\" she whispers, hooking an arm around your sagging frame.", false);
 		//CHOOSE SEX SCENE
 		//Chance of big booty butt loss!
-		if (player.buttRating > 12 && player.tone <= 50 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00223] > 1 && rand(2) == 0) doNext(bigBootyRoxanneContestLoss);
+		if (player.buttRating > 12 && player.tone <= 50 && flags[kFLAGS.ROXANNE_DRINING_CONTEST_LOST] > 1 && rand(2) == 0) doNext(bigBootyRoxanneContestLoss);
 		//TO huge or regular anal
-		else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] >= 200) doNext(roxanneFucksYourAssOHGODITSHUGE);
+		else if (flags[kFLAGS.ROXANNE_TIME_WITHOUT_SEX] >= 200) doNext(roxanneFucksYourAssOHGODITSHUGE);
 		else doNext(roxanneReamsYouNormal);
 		//Reset roxanne's cock
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] = 1;
+		flags[kFLAGS.ROXANNE_TIME_WITHOUT_SEX] = 1;
 	}
 	//[WIN]
 	else {
 		//Increment win count!
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00222]++;
+		flags[kFLAGS.ROXANNE_DRINING_CONTEST_WON]++;
 		//Set who won contest last
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00224] = 1;
+		flags[kFLAGS.ROXANNE_DRINKING_CONTEST_LAST_WINNER] = 1;
 		//Gain small bonus
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00227] += 4;
+		flags[kFLAGS.ROXANNE_DRINKING_CONTEST_BONUS_SCORE] += 4;
 		outputText("Laughing uproariously, you watch with a bemused expression while Roxanne tries to stumble up to the tap, tripping over her tail three times before she finally manages to ask for another mug.  The partly-corrupted deer-taur shakes his head and folds his arms across his chest.  She's been cut off!  You win!  The lecherous lizan stamps her heeled boot in the dirt before tramping back over to you, hips swaying drunkenly.  She trips on her tail again, this time falling face-first into your lap.  Hiccuping drunkenly, Roxanne slurs, \"<i>Well at leasht I don't havta go far to give you your winningshh, huh?</i>\"\n\n", false);
 		outputText("The other lizans are looking at you with a watchful eye.  It looks like you'll have to stick by the terms of the contest.  What manner of oral service do you make her provide?", false);
 		//[Fellatio] [Cunnilingus] [Rimming]
@@ -416,7 +416,7 @@ private function roxanneReamsYouNormal():void {
 	outputText("You giggle underneath the lizan, your face mopping up the frothy brew that spilled during the previous bout of binge drinking.  Lapping it up, you forget about your predicament as you adjust to the warm, scaled body overtop you.  Roxanne leaves you to your distractions while she wiggles out of her pants, her tail swaying to counterbalance the now-freed bulk of her member.  The sodden shaft rises to bump your butt, dripping with pre-cum as it wiggles between your cheeks.  It prods your " + player.assholeDescript() + ", rousing you from your drunken stupor and earning a look back, but the pirate begins to tongue the edge of your ear, making you giggle and relax into sexy, alcohol-lubricated acquiescence.\n\n", false);
 	
 	outputText("With a slow, steady push, Captain Poisontail forces her drippy tip through your liquor-loosened ring and into your innards.  You grunt in discomfort from the sudden straightening of your colon, unable to take such a beast in silence.  It's enough to stir you from your semi-conscious silence, and you try to ask her to go slower, slobbering and slurring your protests through numbed lips.  \"<i>Relax, my helpless prey.  Don't fight.  Just lie there and take what's coming to you,</i>\" orders the still somewhat-sober lizan while she leers at you with an expression that borders on malice.  Her words ring true, you're drunk and helpless to resist the inches of thick shemale cock sliding into your stretched pucker.", false);
-	player.buttChange(Math.floor(30+(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225]/4)),true,true,false);
+	player.buttChange(Math.floor(30+(flags[kFLAGS.ROXANNE_TIME_WITHOUT_SEX]/4)),true,true,false);
 	outputText("\n\n", false);
 	
 	outputText("Too intoxicated to control yourself, your sphincter clenches repeatedly, drawing in a few more inches of Roxanne's thickness.  It packs you completely, filling you in a way that centers all of your limited thoughts on the feel of that bulbous mass inside your anus.  While the lizan is scaled from head to toe, her penis clearly isn't.  You judge by the shape stuffing you that her cock is like that of a human,  a long veiny shaft capped with a rounded crown.  Her balls slap ", false);
@@ -523,7 +523,7 @@ private function roxanneFucksYourAssOHGODITSHUGE():void {
 	outputText("-slicked ass to accept ever-greater quantities of cock.  Sharp fingernails drag over your " + player.hipDescript(), false);
 	if (player.hasPlainSkin()) outputText(", leaving red lines in your unblemished skin", false);
 	outputText(" while your hips visibly spread, somehow accepting something a normal human body never could.", false);
-	player.buttChange(Math.floor(30+(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225]/4)),true,true,false);
+	player.buttChange(Math.floor(30+(flags[kFLAGS.ROXANNE_TIME_WITHOUT_SEX]/4)),true,true,false);
 	outputText("\n\n", false);
 	
 	outputText("Roxanne stops and pants lustily, her two-foot prehensile tongue hanging into her cavernous cleavage while she strokes the exposed half of her member.  She traces one of her fingers over the swell of your left cheek, letting her nail leave behind ", false);
@@ -621,7 +621,7 @@ private function bigBootyRoxanneContestLoss():void {
 	outputText("\n\nDrops of liquid lizan love spatter across your asscheeks when Roxanne pulls herself back, and she comments, \"<i>You've got a beautiful ass, [name].  So thick, soft, and... shiny.</i>\"  Narrow, reptilian fingers slide through your ass-cleavage, smearing the pirate's natural lubricants everywhere and circling your [asshole] with slow strokes.  You clench at the first touch, an instinctive reaction to the probing, but the newhalf's insistent caresses slowly win your drunken, pleasure-hungry mind (and hole) over.  \"<i>Atta " + player.mf("boy","girl") + "!</i>\" the lizard exclaims encouragingly.");
 	outputText("\n\nAfter all that alcohol, kissing, and sensuous groping, you feel eager and ready to go, suddenly hungry for the pending, plus-sized violation that your lizan lover has been saving up for you.  You sigh into your pillow as Roxanne's bulbous cock-tip lines up with your [asshole], the muscles of your sphincter quivering in anticipation.  Slurring drunkenly, you beg, \"<i>Put it... put it in already... I'm ssho fukkin' horny!</i>\"");
 	outputText("\n\nRoxanne gleefully slaps your [butt] and counters, \"<i>I'm getting ready, ya greedy butt-slut!</i>\"  She groans, and you feel some of her syrupy pre slipping through your well-lubed ring.  Despite her words, she's ready to go and just as ready to blow.  She edges her fluid-dribbling invader past your gate and suddenly thrusts, forcing you open and battering her way into your rectum with one hard push.  As big as she is, only her tip and the first few inches get in, but you feel as if you're about to be split in half.  The pulsating, fleshy spear twitches happily from the warmth of your innards and the squeezing of your big, rounded booty.");
-	player.buttChange(Math.floor(30+(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225]/4)),true,true,false);
+	player.buttChange(Math.floor(30+(flags[kFLAGS.ROXANNE_TIME_WITHOUT_SEX]/4)),true,true,false);
 	outputText("\n\n[if (hasCock = true) \"[EachCock] twitches, only half-hard and yet trembling from the light bumps your poor prostate receives.  You moan and give a saucy wiggle as your ass caresses the bulbous invader, pulling it deeper to rub up against your anal G-spot.  A tiny jet of pre squirts on the bed sheets, foreshadowing the fun to come.\"]");
 	if (player.hasCock() && player.hasVagina()) outputText("  ");
 	outputText("[if (hasVagina = true) \"Meanwhile, your [vagina] gets slicker and slicker, your lust permeating the air with potent female musk.  Oh, if only Roxanne would fuck you there too!\"]");

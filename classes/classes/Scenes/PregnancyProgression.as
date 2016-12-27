@@ -1822,13 +1822,13 @@ package classes.Scenes
 				//326 Number of sons grown
 				//327 Number of sons pending
 				//328 growup countdown
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00327]++;
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00328] == 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00328] = 150;		
+				flags[kFLAGS.MINOTAUR_SONS_PENDING]++;
+				if (flags[kFLAGS.MINOTAUR_SONS_GROWUP_COUNTER] == 0) flags[kFLAGS.MINOTAUR_SONS_GROWUP_COUNTER] = 150;		
 			}
 			//Amily failsafe - converts PC with pure babies to mouse babies if Amily is corrupted
 			if (player.pregnancyIncubation == 1 && player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) 
 			{
-				if (flags[kFLAGS.AMILY_FOLLOWER] == 2 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] > 0) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
+				if (flags[kFLAGS.AMILY_FOLLOWER] == 2 || flags[kFLAGS.AMILY_CORRUPTION] > 0) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
 			}
 			//Amily failsafe - converts PC with pure babies to mouse babies if Amily is with Urta
 			if (player.pregnancyIncubation == 1 && player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) 
