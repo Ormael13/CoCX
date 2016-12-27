@@ -27,7 +27,7 @@ package classes.Scenes.Areas
 		//Explore Mountain
 		public function exploreMountain():void
 		{
-			flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] = int(flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN]) + 1;
+			flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN]++;
 			var chooser:Number = rand(5);
 			if (chooser == 5 && player.level < 3 && model.time.days < 20) //Disable mimic if requirements not met (Can still be encountered in level 1 run)
 				chooser = rand(4);
@@ -37,7 +37,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Discover 'high mountain' at level 5 or 40 explores of mountain
-			if ((player.level >= 5 || int(flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN]) >= 40) && flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] == 0) {
+			if ((player.level >= 5 || flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] >= 40) && flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] == 0) {
 				outputText("While exploring the mountain, you come across a relatively safe way to get at its higher reaches.  You judge that with this route you'll be able to get about two thirds of the way up the mountain.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>High Mountain exploration location unlocked!</b>)", true);
 				flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
 				doNext(camp.returnToCampUseOneHour);
@@ -75,12 +75,12 @@ package classes.Scenes.Areas
 			}
 			//Rarer 'nice' Ceraph encounter
 			//Overlaps half the old encounters once pierced.
-			if (!kGAMECLASS.ceraphFollowerScene.ceraphIsFollower() && player.level > 2 && (int(flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN]) % 30 == 0) && flags[kFLAGS.PC_FETISH] > 0) {
+			if (!kGAMECLASS.ceraphFollowerScene.ceraphIsFollower() && player.level > 2 && (flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] % 30 == 0) && flags[kFLAGS.PC_FETISH] > 0) {
 				kGAMECLASS.ceraphScene.friendlyNeighborhoodSpiderManCeraph();
 				return;
 			}
 			//15% chance of Ceraph
-			if (!kGAMECLASS.ceraphFollowerScene.ceraphIsFollower() && player.level > 2 && (int(flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN]) % 15 == 0) && flags[kFLAGS.PC_FETISH] != 1) {
+			if (!kGAMECLASS.ceraphFollowerScene.ceraphIsFollower() && player.level > 2 && (flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] % 15 == 0) && flags[kFLAGS.PC_FETISH] != 1) {
 				kGAMECLASS.ceraphScene.encounterCeraph();
 				return;
 			}
@@ -105,7 +105,7 @@ package classes.Scenes.Areas
 				chooser = 1;
 			}
 			//Every 16 explorations chance at mino bad-end!
-			if (int(flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN]) % 16 == 0 && player.findPerk(PerkLib.MinotaurCumAddict) >= 0 && rand(3) == 0) {
+			if (flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] % 16 == 0 && player.findPerk(PerkLib.MinotaurCumAddict) >= 0 && rand(3) == 0) {
 				spriteSelect(44);
 				minotaurScene.minoAddictionBadEndEncounter();
 				return;
