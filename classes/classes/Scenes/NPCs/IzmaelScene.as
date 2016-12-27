@@ -53,12 +53,15 @@ package classes.Scenes.NPCs
 		public function izmaelMenu():void {
 			menu();
 			addButton(0, "Appearance", izmaelAppearance, null, null, null, "Examine Izmael's appearance.");
-			addButton(1, "Talk", izmaelTalk, null, null, null, "Talk to Izmael about some stuff.");
-			if (player.lust >= 33) addButton(2, "Sex", izmaelSexMenu, null, null, null, "Do some romp with the tigershark!");
-			else addButtonDisabled(2, "Sex", "You are not horny enough to consider that.");
-			addButton(3, "Toggle Herb", toggleIzmaelVirility, null, null, null, flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 0 ? "Tell Izmael to stop taking the herbs so he can impregnate you vaginally.\n\nCurrently: ON" : "Tell Izmael to start taking the herbs so he can't impregnate you.\n\nCurrently: OFF");
-			if (player.hasItem(consumables.BIMBOLQ) && player.hasItem(consumables.DEBIMBO)) addButton(4, "Turn Back", revertIzmaelPrompt, null, null, null, "Turn Izmael back to Izma? This is an irreversible process and you then won't be able to remove her dick afterwards.");
-			else addButtonDisabled(4, "Turn Back", "You need 1 Bimbo Liqueur and 1 Debimbo to turn Izmael back into Izma.");
+			addButton(1, "Books", getGame().izmaScene.IzmaCampBooks);
+			if (getGame().izmaScene.totalIzmaChildren() > 0) addButton(2, "Children", getGame().izmaScene.izmaKidsPlaytime);
+			if (player.lust >= 33) addButton(3, "Sex", izmaelSexMenu, null, null, null, "Do some romp with the tigershark!");
+			else addButtonDisabled(3, "Sex", "You are not horny enough to consider that.");
+			addButton(4, "Talk", izmaelTalk, null, null, null, "Talk to Izmael about some stuff.");
+			addButton(5, "Tooth", getGame().izmaScene.gatASharkTooth);
+			addButton(6, "Toggle Herb", toggleIzmaelVirility, null, null, null, flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 0 ? "Tell Izmael to stop taking the herbs so he can impregnate you vaginally.\n\nCurrently: ON" : "Tell Izmael to start taking the herbs so he can't impregnate you.\n\nCurrently: OFF");
+			if (player.hasItem(consumables.BIMBOLQ) && player.hasItem(consumables.DEBIMBO)) addButton(7, "Turn Back", revertIzmaelPrompt, null, null, null, "Turn Izmael back to Izma? This is an irreversible process and you then won't be able to remove her dick afterwards.");
+			else addButtonDisabled(7, "Turn Back", "You need 1 Bimbo Liqueur and 1 Debimbo to turn Izmael back into Izma.");
 			addButton(14, "Back", camp.campLoversMenu);
 		}
 		
@@ -409,7 +412,17 @@ The succubus looks disappointed to see her new sperm feeder running away, but yo
 		// REVERSING
 		//------------
 		private function revertIzmaelPrompt():void {
-			
+			clearOutput();
+			outputText("This will revert Izmael back to Izma. This process cannot be undone and afterwards, you will no longer be able to remove her dick.");
+			outputText("\n\nAre you sure you want to do this?");
+			doYesNo(revertIzmael, izmaelMenu);
+		}
+		
+		private function revertImael():void {
+			clearOutput();
+			output("(Placeholder) You give Izmael the bimbo liqueur and the debimbo. Izmael is now back to Izma. You won't be able to remove her dick.");
+			flags[kFLAGS.IZMA_BROFIED] = -1;
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 

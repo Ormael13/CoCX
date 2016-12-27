@@ -61,7 +61,7 @@ package classes.Scenes.NPCs {
 		else outputText("bovine");
 	 	outputText(" head still in her hands, and sighs loudly. <i>\"I’m sorry, sweetie, I just... I’ve tried to ignore it, but I just don’t feel comfortable here.\"</i>");
 	 	outputText("\n\nYou ask her what’s wrong; doesn’t she like being with you?");
-		if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt() || followerKiha() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1)
+		if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt() || followerKiha() || flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1)
 		{
 		 	outputText("  ...Has she been fighting with ");
 			if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) outputText("Amily");
@@ -323,7 +323,7 @@ package classes.Scenes.NPCs {
 			}
 			//if (Izma is in camp)
 			//Izma’s response to being asked to have tea
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1)
+			if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1)
 			{
 			 	outputText("\n\nYou take a short walk over to the stream that Izma likes to bathe in and call her over.  She asks you what’s up and you let her know what Clara’s got brewing.  The tigershark snorts. \"<i>No thank you; I don’t trust anything that might have milk in it from one of those damn cows,</i>\" she snaps, showing her teeth in a predatory expression of disdain. You try to argue that she’s being rude and distrustful of Marble’s sister, but the tigershark won’t listen, instead pointedly pushing away from the shore and diving into the depths - such as they are - of the stream.");
 			 	outputText("\n\nYou wait for several minutes, but she doesn’t resurface; deciding that there’s no point in asking any more, you leave her to sulk on the riverbed.");

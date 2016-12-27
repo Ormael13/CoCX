@@ -355,7 +355,7 @@ private function milkBathTime():void {
 	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1 || player.armor == armors.GOOARMR) count++;
 	if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) count++;
 	if (helScene.followerHel()) count++;
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) count++;
+	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) count++;
 	if (emberScene.followerEmber()) count++;
 	if (kihaFollower.followerKiha()) count++;
 	if (count >= 3) {
@@ -409,7 +409,7 @@ private function communalBath():void {
 	if (helScene.followerHel()) outputText("\n\nWith a gleeful shout, Hel rushes the pool.  In one swift motion, she tosses her scale bikini aside and cannon-balls in, splashing everyone with a creamy tidal wave.  Chuckling, you clear your eyes - just in time for her bikini bottom to land on your face.");
 	
 	//If PC has Izma: 
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n\nYou didn't even notice Izma getting into the pool.  The first sign of her is the sudden appearance of a bright red fin sticking above the water, closing in on you.  She breaches at the last moment, laughing gaily as she gives her alpha a kiss.");
+	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) outputText("\n\nYou didn't even notice Izma getting into the pool.  The first sign of her is the sudden appearance of a bright red fin sticking above the water, closing in on you.  She breaches at the last moment, laughing gaily as she gives her alpha a kiss.");
 	
 	//{If PC has Ember:
 	if (emberScene.followerEmber()) outputText("\n\nEmber approaches the pool, reptilian tail swishing eagerly.  " + emberScene.emberMF("He","She") + " lowers " + emberScene.emberMF("himself","herself") + " in with ease, sighing contentedly as milk washes over " + emberScene.emberMF("his","her") + " scaled body.  \"<i>Is this how you humans bathe normally?</i>\"  " + emberScene.emberMF("He","She") + " muses.  \"<i>How bizarre.</i>\"");

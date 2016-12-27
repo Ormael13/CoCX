@@ -155,7 +155,7 @@ package classes.Scenes.Seasonal {
 				return;
 			}
 			//Izma
-			else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1 && flags[kFLAGS.JACK_FROST_PROGRESS] <= 3) {
+			else if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.JACK_FROST_PROGRESS] <= 3) {
 				outputText("You wonder where Izma is; as a shark, maybe she doesn't like the cold?  Even as the thought crosses your mind, you note a surprisingly large pile of snow sitting not too far - with a very suspicious striped fin jutting out of it.  You rush over, calling for Izma and asking if she's all right.");
 				outputText("\n\nThe mound snow suddenly explodes as Izma pounces you, knocking you on your back and pinning you against the snowy ground.  \"<i>Gotcha!</i>\"  At once she notices who it is she's pounced upon.  \"<i>Hi there, [name].</i>\"");
 				outputText("\n\nYou tell her she's a bold one indeed to do something like that to you - isn't she supposed to be your beta?");
