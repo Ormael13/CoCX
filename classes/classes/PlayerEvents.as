@@ -81,7 +81,7 @@ package classes {
 				var multiplier:Number = 1.0
 				if (player.findPerk(PerkLib.Survivalist) >= 0) multiplier -= 0.2;
 				if (player.findPerk(PerkLib.Survivalist2) >= 0) multiplier -= 0.2;
-				if (flags[kFLAGS.KAIZO_MODE] > 0) multiplier *= 2;
+				if (flags[kFLAGS.GRIMDARK_MODE] > 0) multiplier *= 2;
 				//Hunger drain rate. If above 50, 1.5 per hour. Between 25 and 50, 1 per hour. Below 25, 0.5 per hour.
 				//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger. Can be increased to 125 then 166 hours with Survivalist perks.
 				if (prison.inPrison) {

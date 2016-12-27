@@ -121,10 +121,10 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 		addButton(9, "Niamh", getGame().telAdre.niamh.bazaarNiamh);
 	}
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
-	if (flags[kFLAGS.KAIZO_MODE] > 0) addButton(14, "Leave", leaveBazaarKaizo);
+	if (flags[kFLAGS.GRIMDARK_MODE] > 0) addButton(14, "Leave", leaveBazaarGrimdark);
 }
 
-		public function leaveBazaarKaizo():void {
+		public function leaveBazaarGrimdark():void {
 			inRoomedDungeonResume = getGame().dungeons.resumeFromFight;
 			getGame().dungeons._currentRoom = "plains";
 			getGame().dungeons.move(getGame().dungeons._currentRoom);

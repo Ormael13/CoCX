@@ -170,6 +170,7 @@ the text from being too boring.
 		public var shields:ShieldLib = new ShieldLib();
 		public var miscItems:MiscItemLib = new MiscItemLib();
 		// Scenes/
+		public var achievementList:Achievements = new Achievements();
 		public var camp:Camp = new Camp(campInitialize);
 		public var dreams:Dreams = new Dreams();
 		public var dungeons:DungeonCore = new DungeonCore();

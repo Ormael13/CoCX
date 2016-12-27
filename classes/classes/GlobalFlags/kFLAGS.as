@@ -2315,8 +2315,8 @@ public static const MINERVA_SPAR_VICTORIES:int                                  
 public static const VALERIA_SPAR_VICTORIES:int                                      = 2307;
 public static const UNKNOWN_FLAG_NUMBER_02308:int                                   = 2308; // Reserved for additional sparrable partner.
 public static const UNKNOWN_FLAG_NUMBER_02309:int                                   = 2309; // Reserved for additional sparrable partner.
-public static const KAIZO_BACKGROUND_UNLOCKED:int                                   = 2310; // Reserved for Kaizo.
-public static const KAIZO_FACTORY_DOOR_UNLOCKED:int                                 = 2311;
+public static const GRIMDARK_BACKGROUND_UNLOCKED:int                                = 2310; // Reserved for Grimdark.
+public static const GRIMDARK_FACTORY_DOOR_UNLOCKED:int                              = 2311;
 public static const IZMA_BROFIED:int                                                = 2312;
 public static const UNKNOWN_FLAG_NUMBER_02313:int                                   = 2313;
 public static const UNKNOWN_FLAG_NUMBER_02314:int                                   = 2314;
@@ -3004,6 +3004,6 @@ public static const MEANINGLESS_CORRUPTION:int                                  
 public static const ITS_EVERY_DAY:int                                               = 2996; // all special calender events occur every day!
 public static const LOW_STANDARDS_FOR_ALL:int                                       = 2997;
 public static const HYPER_HAPPY:int                                                 = 2998;
-public static const KAIZO_MODE:int                                                  = 2999; // Kaizo CoC! Do you wanna have a bad time?
+public static const GRIMDARK_MODE:int                                               = 2999; // Grimdark CoC! Do you wanna have a bad time?
 	}    
 }

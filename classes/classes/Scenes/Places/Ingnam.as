@@ -29,13 +29,13 @@ package classes.Scenes.Places
 				getGame().saves.saveGame(player.slotName);
 			}
 			//Banished to Mareth.
-			if (model.time.days >= 0 && flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] <= 0 && flags[kFLAGS.KAIZO_MODE] < 1) {
+			if (model.time.days >= 0 && flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] <= 0 && flags[kFLAGS.GRIMDARK_MODE] < 1) {
 				getBanishedToMareth();
 				return;
 			}
 			clearOutput();
 			outputText(images.showImage("location-ingnam"));
-			if (flags[kFLAGS.KAIZO_MODE] > 0) {
+			if (flags[kFLAGS.GRIMDARK_MODE] > 0) {
 				outputText("Ingnam is a village well-defended against the tides of monsters outside. There is already a well-established array of shops though some of them seem to be abandoned and there's barely any activity. The temple sits within view of the patrons sitting at tables at the tavern which serves as a hub for people near and far to drink and dance. On the road leading out of the plaza that sits before the temple is a trail that meanders its way to a large farm in the distance.");
 				outputText("\n\nLooming ominously in the distance is a mountain known by the locals as Mount Ilgast.");
 			}
@@ -56,7 +56,7 @@ package classes.Scenes.Places
 			if (camp.setLevelButton()) return;
 			hideUpDown();
 			menu();
-			if (flags[kFLAGS.KAIZO_MODE] == 0) {
+			if (flags[kFLAGS.GRIMDARK_MODE] == 0) {
 				addButton(0, "Explore", exploreIngnam);
 				addButton(1, "Shops", menuShops);
 			}
@@ -85,8 +85,8 @@ package classes.Scenes.Places
 				removeButton(4);
 				addButton(9, "Sleep", getGame().camp.doSleep);
 			}
-			if (flags[kFLAGS.KAIZO_MODE] > 0) {
-				addButton(14, "Leave", leaveIngnamKaizo);
+			if (flags[kFLAGS.GRIMDARK_MODE] > 0) {
+				addButton(14, "Leave", leaveIngnamGrimdark);
 			}
 		}
 		
@@ -138,7 +138,7 @@ package classes.Scenes.Places
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
-		public function leaveIngnamKaizo():void {
+		public function leaveIngnamGrimdark():void {
 			inRoomedDungeonResume = getGame().dungeons.resumeFromFight;
 			getGame().dungeons._currentRoom = "wasteland";
 			getGame().dungeons.move(getGame().dungeons._currentRoom);
