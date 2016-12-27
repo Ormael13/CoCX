@@ -275,7 +275,7 @@ package classes.Scenes.Dungeons.D3
 		{
 			inRoomedDungeon = false;
 			inRoomedDungeonResume = null;
-			if (flags[kFLAGS.KAIZO_MODE] > 0) {
+			if (flags[kFLAGS.GRIMDARK_MODE] > 0) {
 				inRoomedDungeonResume = getGame().exploration.highmountainZoneFunc;
 			}
 			camp.returnToCampUseOneHour();

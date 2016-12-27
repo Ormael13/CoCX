@@ -117,7 +117,7 @@ private function doCamp():void { //Only called by playerMenu
 		getGame().prison.prisonRoom(true);
 		return;
 	}
-	if (flags[kFLAGS.KAIZO_MODE] > 0) {
+	if (flags[kFLAGS.GRIMDARK_MODE] > 0) {
 		getGame().dungeons.move(getGame().dungeons._currentRoom);
 		return;
 	}
@@ -2651,7 +2651,7 @@ private function promptSaveUpdate():void {
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 11) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 12;
-		flags[kFLAGS.KAIZO_MODE] = 0;
+		flags[kFLAGS.GRIMDARK_MODE] = 0;
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 12) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 13;

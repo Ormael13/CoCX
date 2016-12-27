@@ -241,7 +241,7 @@ package classes.Scenes.Dungeons
 			palace.setAnzuButton();
 		}
 		
-		//Dungeon 3 & Kaizo Stuff
+		//Dungeon 3 & Grimdark Stuff
 		public function resumeFromFight():void
 		{
 			move(_currentRoom);

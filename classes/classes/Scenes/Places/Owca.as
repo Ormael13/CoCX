@@ -590,10 +590,10 @@ private function owcaMainScreenOn():void {
 	}
 	//[Pit][Herds][Rebecc][Tavern]
 	simpleChoices("Pit", pit, "Herds", herd, "Rebecc", rebeccMenu, "Tavern", tavern, "Leave", camp.returnToCampUseOneHour);
-	if (flags[kFLAGS.KAIZO_MODE] > 0) addButton(4, "Leave", leaveOwcaKaizo);
+	if (flags[kFLAGS.GRIMDARK_MODE] > 0) addButton(4, "Leave", leaveOwcaGrimdark);
 }
 
-		public function leaveOwcaKaizo():void {
+		public function leaveOwcaGrimdark():void {
 			inRoomedDungeonResume = getGame().dungeons.resumeFromFight;
 			getGame().dungeons._currentRoom = "plains";
 			getGame().dungeons.move(getGame().dungeons._currentRoom);

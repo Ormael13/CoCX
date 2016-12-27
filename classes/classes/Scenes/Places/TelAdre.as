@@ -242,10 +242,10 @@ public function telAdreMenuShow():void { //Just displays the normal Tel'Adre men
 	addButton(6, "Pawn", oswaldPawn);
 	addButton(7, "Tower", library.visitZeMagesTower);
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
-	if (flags[kFLAGS.KAIZO_MODE] > 0) addButton(14, "Leave", leaveTelAdreKaizo);
+	if (flags[kFLAGS.GRIMDARK_MODE] > 0) addButton(14, "Leave", leaveTelAdreGrimdark);
 }
 
-		public function leaveTelAdreKaizo():void {
+		public function leaveTelAdreGrimdark():void {
 			inRoomedDungeonResume = getGame().dungeons.resumeFromFight;
 			getGame().dungeons._currentRoom = "desert";
 			getGame().dungeons.move(getGame().dungeons._currentRoom);
