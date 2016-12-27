@@ -1080,7 +1080,7 @@ package classes.Scenes.NPCs
 
 			outputText("\"<i>One last touch,</i>\" she moans as her whole frame begins to jostle about.  With a shake, her entire body leaps up a couple inches in height, and another, and another until she's roughly the same size as that familiar cowgirl.", false);
 
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00295] == 1) doNext(postUdderChoice);
+			if (flags[kFLAGS.CERAPH_SWEETIE_NO_RP_UTTER_MOO_DISABLED] == 1) doNext(postUdderChoice);
 			else {
 				outputText("  \"<i>Now then, " + player.mf("Master", "Mistress") + "... or, should I say, Sweetie,</i>\" she breathes, her sultry tones smoothing into an earthy, slightly drawn-out accent, \"<i>there's one more detail that she - sorry, I - don't have; would you like me to have... an udder?</i>\"\n\n", false);
 				outputText("The question strikes you as a curious one.  Do you want your make-believe Marble to make an udder, or is she better off without?", false);
@@ -1094,7 +1094,7 @@ package classes.Scenes.NPCs
 		{
 			clearOutput();
 			spriteSelect(41);
-			if (perm) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00295] = 1;
+			if (perm) flags[kFLAGS.CERAPH_SWEETIE_NO_RP_UTTER_MOO_DISABLED] = 1;
 			outputText("A sharp head-shake is the only declination she needs.  \"<i>Of course, Sweetie, that wouldn't be very... Marble-like, would it?</i>\"\n\n", false);
 			flags[kFLAGS.CERAPH_SWEETIE_NO_RP_UTTER_MOO_DISABLED] = 0;
 			postUdderChoice();
