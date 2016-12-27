@@ -44,7 +44,7 @@ package classes.Scenes.Areas.Swamp
 				return;
 			}
 			//*Greeting Event (1st time):
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00270] == 0) {
+			if (flags[kFLAGS.TIMES_ENCOUNTERED_FEMALE_SPIDERMORPHS] == 0) {
 				outputText("You go exploring into the swamp, doing your best to ignore the oppressive heat and moisture of the place.  Insects buzz and flit about you constantly in an attempt to drive you mad with their incessant buzzing.  You swat a particularly noisy one from your " + player.face() + " before you realize you're no longer alone.\n\n", false);
 
 				outputText("A strange, naked female stands before you, hands on her hips as she eyes you up and down.  She's completely unclothed, revealing the paleness of her glistening skin to the humid swamp air, and though her legs and arms are both wreathed in some kind of shiny black covering, it only seems to enhance her nudity rather than conceal it.  Bobbing behind her is a sizable, black sphere with a few small protrusions that you can only assume are spinnerets. She's clearly a spider-girl, and now that you look closer, that black material is her exoskeleton!  The monster-girl flashes her needle-like fangs at you in a smile as she approaches.\n\n", false);
@@ -55,7 +55,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("What do you do?", false);
 			simpleChoices("Fight", fightFSpiderMorph, "Try to Talk", talkToFSpiderMorph, "", null, "", null, "Leave", runFromFSpiderMorph);
 			//Incremement 'times encountered spider-girls'
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00270]++;
+			flags[kFLAGS.TIMES_ENCOUNTERED_FEMALE_SPIDERMORPHS]++;
 			if (flags[kFLAGS.CODEX_ENTRY_ARACHNES] <= 0) {
 				flags[kFLAGS.CODEX_ENTRY_ARACHNES] = 1;
 				outputText("\n\n<b>New codex entry unlocked: Arachnes, Spider-Morphs, and Driders!</b>")
