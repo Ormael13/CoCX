@@ -417,7 +417,7 @@ public static const ROGAR_DIRT:int                                              
 public static const ROGAR_WARNING:int                                               =  409; // 
 public static const ROGAR_DISABLED:int                                              =  410; // 
 public static const ROGAR_FUCKED_TODAY:int                                          =  411; // 
-public static const UNKNOWN_FLAG_NUMBER_00412:int                                   =  412; // IZMA_KIDS_IN_THE_WILD
+public static const IZMA_KIDS_IN_WILD:int                                           =  412; // IZMA_KIDS_IN_THE_WILD
 public static const EXGARTUAN_TIGHTPANTS_MASTURBATE_COUNT:int                       =  413; // 
 public static const BOOBGARTUAN_SURPRISE_COUNT:int                                  =  414; // 
 public static const GOTTEN_INQUISITOR_ARMOR:int                                     =  415; // 
