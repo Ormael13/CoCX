@@ -1,6 +1,7 @@
 ﻿//CoC Creature.as
 package classes
 {
+	import classes.BodyParts.Skin;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.PerkType;
@@ -172,14 +173,15 @@ package classes
 		1 - furry
 		2 - scaley
 		3 - goopey*/
-		private var _skinType:Number = SKIN_TYPE_PLAIN;
-		public function get skinType():Number { return _skinType; }
-		public function set skinType(value:Number):void { _skinType = value; }
-		private var _skinTone:String = "albino";
-		public function get skinTone():String { return _skinTone; }
-		public function set skinTone(value:String):void { _skinTone = value; }
-		public var skinDesc:String = "skin";
-		public var skinAdj:String = "";
+		public var skinData:Skin = new Skin();
+		public function get skinType():Number { return skinData.type; }
+		public function set skinType(value:Number):void { skinData.type = value; }
+		public function get skinTone():String { return skinData.tone; }
+		public function set skinTone(value:String):void { skinData.tone = value; }
+		public function get skinDesc():String { return skinData.desc; }
+		public function set skinDesc(value:String):void { skinData.desc = value; }
+		public function get skinAdj():String { return skinData.adj; }
+		public function set skinAdj(value:String):void { skinData.adj = value; }
 		
 /*		Facetype:
 		0 - human
@@ -2584,10 +2586,8 @@ package classes
 			//haircolor
 			if (hasFur())
 				skinzilla += furColor + " ";
-			else if (hasDragonScales())
-				skinzilla += "iron-like, " + _skinTone + " shield-shaped ";
 			else
-				skinzilla += _skinTone + " ";
+				skinzilla += skinTone + " ";
 			skinzilla += skinDesc;
 			return skinzilla;
 		}
