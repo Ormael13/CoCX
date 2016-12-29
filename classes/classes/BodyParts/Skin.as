@@ -16,10 +16,10 @@ package classes.BodyParts
 
 		public function Skin() {}
 
-		public function restore():Skin
+		public function restore(keepTone:Boolean = false):Skin
 		{
 			type = SKIN_TYPE_PLAIN;
-			tone = "albino";
+			if (!keepTone) tone = "albino";
 			desc = "skin";
 			adj  = "";
 
@@ -36,9 +36,9 @@ package classes.BodyParts
 			return this;
 		}
 
-		public function setAllProps(p:Object):Skin
+		public function setAllProps(p:Object, keepTone:Boolean = false):Skin
 		{
-			restore();
+			restore(keepTone);
 			setProps(p);
 			return this;
 		}
