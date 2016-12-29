@@ -10,9 +10,12 @@ For example many TFs reset the players skin by setting all of their values to th
 // Restore everything to its default
 player.rearBody.restore(false);
 
-// Restore everything except the skintone to its default (the default)
+// Restore everything except the skintone to its default
 player.skinData.restore();
 ```
+
+Most methods return the object itself (`return this;`) to support method-chaining aka [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface).<br>
+However: In most cases, method-chaining isn't needed. So unless anyone gives me a few good examples, where method-chaining is useful, chances are that this feature is being removed in the future.
 
 General methods
 ---------------
@@ -62,7 +65,28 @@ BodyParts
 ---------
 
 ### Skin
-placeholder
+#### Property table
+| Property | Old (aliased)<br>Property | Access example         | Description / Examples                                                                                         |
+|----------|---------------------------|------------------------|----------------------------------------------------------------------------------------------------------------|
+| type     | `skinType`                | `player.skinData.type` | The type.<br>`player.skinData.type = SKIN_TYPE_FUR;`                                                           |
+| tone     | `skinTone`                | `player.skinData.tone` | The color.<br>`tone: "green-yellow"` → "You have **green-yellow** skin."                                       |
+| desc     | `skinDesc`                | `player.skinData.desc` | The description.<br>`desc: "dragon scales"` → "You have red **dragon scales**."                                |
+| adj      | `skinAdj`                 | `player.skinData.adj`  | The adjective, that can be changed with body lotions.<br>`adj: "smooth"` → "You have **smooth**, green scales" |
+
+#### Note
+I've added the optional param `keepTone` to the methods `restore()` and `setAllProps()` which defaults to true.
+Method headers:
+```as3
+public function restore(keepTone:Boolean = true):Skin {}
+public function setAllProps(p:Object, keepTone:Boolean = true):Skin {}
+```
+As the params name suggests, it leaves the skintone untouched, if its been set to true which is the default.
+
+Example:
+```as3
+player.skinData.restore();      // Restores all values except the skin tone
+player.skinData.restore(false); // Restores all values including the skin tone
+```
 
 ### RearBody
 placeholder
