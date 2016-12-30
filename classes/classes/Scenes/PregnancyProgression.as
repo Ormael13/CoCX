@@ -16,7 +16,7 @@ package classes.Scenes
 			else {
 				player.addStatusValue(StatusEffects.Birthed,1,1);
 				if (player.findPerk(PerkLib.BroodMother) < 0 && player.statusEffectv1(StatusEffects.Birthed) >= 10) {
-					outputText("\n<b>You have gained the Brood Mother perk</b> (Pregnancies progress twice as fast as a normal woman's).\n", false);
+					output.text("\n<b>You have gained the Brood Mother perk</b> (Pregnancies progress twice as fast as a normal woman's).\n");
 					player.createPerk(PerkLib.BroodMother,0,0,0,0);
 				}
 			}
