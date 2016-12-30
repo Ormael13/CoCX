@@ -153,13 +153,9 @@ package classes
 		public var hairColor:String = "no";
 		public var hairLength:Number = 0;
 		
-		private var _furColor:String = "no"; //Fur colour!
-		public function get furColor():String {
-			if (hasFur()) return _furColor;
-			else return hairColor;
-		}
-		public function get newFurColor():String { return _furColor; } // alternative getter for the furColor. Ignores the skinType (Stadler76)
-		public function set furColor(value:String):void { _furColor = value; }
+		public function get furColor():String { return skinData.furColor; }
+		public function get newFurColor():String { return skinData.newFurColor; }
+		public function set furColor(value:String):void { skinData.furColor = value; }
 		/*Beardstyle
 		0- normal
 		1- goatee
@@ -173,7 +169,7 @@ package classes
 		1 - furry
 		2 - scaley
 		3 - goopey*/
-		public var skinData:Skin = new Skin();
+		public var skinData:Skin;
 		public function get skinType():Number { return skinData.type; }
 		public function set skinType(value:Number):void { skinData.type = value; }
 		public function get skinTone():String { return skinData.tone; }
@@ -496,6 +492,7 @@ package classes
 		//Constructor
 		public function Creature()
 		{
+			skinData = new Skin(this);
 			//cocks = new Array();
 			//The world isn't ready for typed Arrays just yet.
 			cocks = [];
@@ -2576,21 +2573,7 @@ package classes
 			return "legs";
 		}
 
-		public function skinFurScales():String
-		{
-			var skinzilla:String = "";
-			//Adjectives first!
-			if (skinAdj != "")
-				skinzilla += skinAdj + ", ";
-			//Fur handled a little differently since it uses
-			//haircolor
-			if (hasFur())
-				skinzilla += furColor + " ";
-			else
-				skinzilla += skinTone + " ";
-			skinzilla += skinDesc;
-			return skinzilla;
-		}
+		public function skinFurScales():String { return skinData.skinFurScales(); }
 
 		// <mod name="Predator arms" author="Stadler76">
 		public function claws():String
