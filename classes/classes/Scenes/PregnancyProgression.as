@@ -6,8 +6,24 @@ package classes.Scenes
 	public class PregnancyProgression extends BaseContent
 	{
 		public function PregnancyProgression() {}
-		
-		public function updatePregnancy():Boolean {
+
+		private function giveBirth():void
+		{
+			if (player.fertility < 15) player.fertility++;
+			if (player.fertility < 25) player.fertility++;
+			if (player.fertility < 40) player.fertility++;
+			if (player.findStatusEffect(StatusEffects.Birthed) < 0) player.createStatusEffect(StatusEffects.Birthed,1,0,0,0);
+			else {
+				player.addStatusValue(StatusEffects.Birthed,1,1);
+				if (player.findPerk(PerkLib.BroodMother) < 0 && player.statusEffectv1(StatusEffects.Birthed) >= 10) {
+					outputText("\n<b>You have gained the Brood Mother perk</b> (Pregnancies progress twice as fast as a normal woman's).\n", false);
+					player.createPerk(PerkLib.BroodMother,0,0,0,0);
+				}
+			}
+		}
+
+		public function updatePregnancy():Boolean
+		{
 			var displayedUpdate:Boolean = false;
 			var pregText:String = "";
 			if ((player.pregnancyIncubation <= 0 && player.buttPregnancyIncubation <= 0) ||
@@ -24,19 +40,8 @@ package classes.Scenes
 				player.removeStatusEffect(StatusEffects.Heat);
 				displayedUpdate = true;
 			}
-			if (player.pregnancyIncubation == 1) {
-				if (player.fertility < 15) player.fertility++;
-				if (player.fertility < 25) player.fertility++;
-				if (player.fertility < 40) player.fertility++;
-				if (player.findStatusEffect(StatusEffects.Birthed) < 0) player.createStatusEffect(StatusEffects.Birthed,1,0,0,0);
-				else {
-					player.addStatusValue(StatusEffects.Birthed,1,1);
-					if (player.findPerk(PerkLib.BroodMother) < 0 && player.statusEffectv1(StatusEffects.Birthed) >= 10) {
-						outputText("\n<b>You have gained the Brood Mother perk</b> (Pregnancies progress twice as fast as a normal woman's).\n", false);
-						player.createPerk(PerkLib.BroodMother,0,0,0,0);
-					}
-				}
-			}
+			if (player.pregnancyIncubation == 1 && player.pregnancyType != PregnancyStore.PREGNANCY_BENOIT) giveBirth();
+
 			if (player.pregnancyIncubation > 0 && player.pregnancyIncubation < 2) player.knockUpForce(player.pregnancyType, 1);
 			//IF INCUBATION IS VAGINAL
 			if (player.pregnancyIncubation > 1) {
@@ -1523,6 +1528,7 @@ package classes.Scenes
 				else {
 					player.knockUpForce(); //Clear Pregnancy
 					displayedUpdate = true;
+					giveBirth();
 					getGame().bazaar.benoit.popOutBenoitEggs();
 				}
 			}
@@ -2085,7 +2091,8 @@ package classes.Scenes
 			return displayedUpdate;
 		}
 
-		public function eggDescript(plural:Boolean = true):String {
+		public function eggDescript(plural:Boolean = true):String
+		{
 			var descript:String = "";
 			if (player.findStatusEffect(StatusEffects.Eggs) >= 0) {
 				descript += num2Text(player.statusEffectv3(StatusEffects.Eggs)) + " ";
