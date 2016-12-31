@@ -19,7 +19,7 @@ package classes.BodyParts
 		private var _creature:Creature;
 
 		private var _furColor:String = "no";
-		public function get furColor():String { return _creature.hasFur() ? _furColor : _creature.hairColor; }
+		public function get furColor():String { return hasFur() ? _furColor : _creature.hairColor; }
 		public function get newFurColor():String { return _furColor; } // alternative getter for the furColor. Ignores the skinType (Stadler76)
 		public function set furColor(value:String):void { _furColor = value; }
 
@@ -36,7 +36,7 @@ package classes.BodyParts
 				skinzilla += adj + ", ";
 
 			//Fur handled a little differently since it uses haircolor
-			skinzilla += _creature.hasFur() ? furColor : tone;
+			skinzilla += hasFur() ? furColor : tone;
 
 			return skinzilla + " " + desc;
 		}
@@ -52,9 +52,14 @@ package classes.BodyParts
 				skinzilla += tone + " ";
 
 			//Fur handled a little differently since it uses haircolor
-			skinzilla += _creature.hasFur() ? "skin" : desc;
+			skinzilla += hasFur() ? "skin" : desc;
 
 			return skinzilla;
+		}
+
+		public function hasFur():Boolean
+		{
+			return type == SKIN_TYPE_FUR;
 		}
 
 		public function restore(keepTone:Boolean = true):Skin
@@ -63,6 +68,7 @@ package classes.BodyParts
 			if (!keepTone) tone = "albino";
 			desc = "skin";
 			adj  = "";
+			_furColor = "no";
 
 			return this;
 		}
@@ -73,6 +79,7 @@ package classes.BodyParts
 			if (p.hasOwnProperty('tone')) tone = p.tone;
 			if (p.hasOwnProperty('desc')) desc = p.desc;
 			if (p.hasOwnProperty('adj'))  adj  = p.adj;
+			if (p.hasOwnProperty('furColor')) _furColor = p.furColor;
 
 			return this;
 		}

@@ -2444,7 +2444,7 @@ package classes
 
 		public function hasFur():Boolean
 		{
-			return skinType == SKIN_TYPE_FUR;
+			return skinData.hasFur();
 		}
 
 		public function hasFurOrScales():Boolean
