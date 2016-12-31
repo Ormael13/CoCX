@@ -373,8 +373,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.7f";
-			version = ver + " (<b>Kitsune changes, Ayane, lots of other smaller or bigger changes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.7g";
+			version = ver + " (<b>Return of UrtaQuest, small QoL changes</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
