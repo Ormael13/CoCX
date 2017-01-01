@@ -187,18 +187,18 @@ public function callForFollowerIsabella():void {
 		else outputText("\n\n“<i>Hello [name]. What can Isabella help you with?</i>”");
 	}
 	
-	var accent:Function = null;
-	if(flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] < 100) accent = isabellasAccentCoaching;
-	var milk:Function = null;
-	if(flags[kFLAGS.ISABELLA_MILKED_YET] < 0) milk = getMilk;
-	var pro:Function = null;
-	if(player.hasItem(consumables.PROBOVA) && player.gender > 0) {
-		pro = isabellaBurps;
+	menu();
+	if (flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] < 100) addButton(0, "Accent Coach", isabellasAccentCoaching);
+	else addButton(0, "Accent Uncoach", isabellaAccentUncoaching);
+	if (flags[kFLAGS.ISABELLA_MILKED_YET] < 0) addButton(1, "Get Milk", getMilk);
+	if (player.hasItem(consumables.PROBOVA) && player.gender > 0) {
 		outputText("\n\n<b>Isabella would probably drink a bottle of Pro Bova if you gave it to her.</b>", false);
+		addButton(2, "GiveProBova", isabellaBurps);
 	}
-	choices("Accent Coach", accent, "Get Milk", milk, "GiveProBova", pro, "Sex", campIzzySexMenu, "Spar", isabellaSparMenu,
-		"", null, "", null, "", null, "", null, "Back", camp.campLoversMenu);
-	
+	addButton(3, "Sex", campIzzySexMenu);
+	addButton(4, "Spar", isabellaSparMenu);
+	addButton(9, "Back", camp.campLoversMenu);
+
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(5, "Farm Work", sendToFarm);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 1) addButton(5, "Go Camp", backToCamp);
 	
@@ -349,6 +349,15 @@ private function isabellasAccentCoaching():void {
 	//4 to 12 hour cooldown
 	flags[kFLAGS.ISABELLA_ACCENT_TRAINING_COOLDOWN] = 4 + rand(13);
 	doNext(camp.returnToCampUseOneHour);
+}
+
+//Reverse Isabella's accent back to her normal accent.
+private function isabellaAccentUncoaching():void {
+	clearOutput();
+	outputText("You tell Isabella that she can go back to her old accent however she likes. Her eyes widen and says, \"<i>Zank you, " + player.short + "!</i>\"\n\n", true)
+	outputText("<b>Isabella's accent is now reverted. You'll have to coach her all over again if you ever change your mind.</b>", false)
+	flags[kFLAGS.ISABELLA_ACCENT_TRAINING_PERCENT] = 0;
+	doNext(callForFollowerIsabella);
 }
 
 //Morning Wakeup Call 
