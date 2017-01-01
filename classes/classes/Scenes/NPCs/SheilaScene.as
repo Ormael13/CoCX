@@ -1536,7 +1536,7 @@ private function fuckBuddySheilaMeetingChatKids():void {
 		if(player.femininity > 50) {
 			outputText("I don't know how he'll react when he sees a pretty face like yours, though; he doesn't know that I'm-");
 			//[(PC is herm, fem)
-			if(player.gender >= 2) {
+			if(player.gender >= 2 && player.mf("m", "f") == "f") {
 				outputText("</i>\"\n\n\"<i>A lesbian?  Attracted to women?  A clam diver?</i>\"");
 			}
 			//(else PC is male or unsex)
