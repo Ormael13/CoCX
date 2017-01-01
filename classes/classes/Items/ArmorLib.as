@@ -24,7 +24,7 @@ package classes.Items
 		public const CLSSYCL:Armor = new Armor("ClssyCl","Suitclothes","classy suitclothes","a set of classy suit-clothes",1,400,"A set of classy suitclothes.","Light");
 		public const FULLCHN:Armor = new Armor("FullChn","Full Chain","full-body chainmail","a full suit of chainmail armor",8,150,"This full suit of chainmail armor covers its wearer from head to toe in protective steel rings.","Medium", true);
 		public const FULLPLT:Armor = new Armor("FullPlt","Full Plate","full platemail","a suit of full-plate armor",21,250,"A highly protective suit of steel platemail.  It would be hard to find better physical protection than this.", "", true);
-//Not used in game:		public const FURLOIN:Armor = new FurLoincloth();
+		public const FURLOIN:Armor = new FurLoincloth();
 		public const GELARMR:Armor = new Armor("GelArmr","GelArmr","glistening gel-armor plates","a suit of gel armor",10,150,"This suit of interlocking plates is made from a strange green material.  It feels spongy to the touch but is amazingly resiliant.", "", true);
 		public const GOOARMR:GooArmor = new GooArmor();
 		public const I_CORST:InquisitorsCorset = new InquisitorsCorset();

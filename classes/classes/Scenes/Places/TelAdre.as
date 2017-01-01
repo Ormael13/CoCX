@@ -1446,7 +1446,8 @@ public function tailorShoppe():void {
 			armors.T_BSUIT.shortName, createCallBackFunction(buyClothes,armors.T_BSUIT),
 			armors.M_ROBES.shortName, createCallBackFunction(buyClothes,armors.M_ROBES),
 			armors.LTHRPNT.shortName, createCallBackFunction(buyClothes,armors.LTHRPNT),
-			"Leave",telAdreMenu);
+			armors.FURLOIN.shortName, createCallBackFunction(buyClothes, armors.FURLOIN));
+	addButton(14, "Leave", telAdreMenu);
 }
 
 
