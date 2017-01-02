@@ -1250,6 +1250,51 @@ package classes.Scenes.Combat
 				if (temp == 12) itype = consumables.L_BLKEG;
 				flags[kFLAGS.ACHIEVEMENT_PROGRESS_EGG_HUNTER]++;
 			}
+			//Ring drops!
+			if (!plotFight && rand(200) <= 0 + Math.min(6, Math.floor(monster.level / 10))) { //Ring drops!
+				var ringDropTable:Array = [];
+				ringDropTable.push(jewelries.SILVRNG);
+				if (monster.level < 10) ringDropTable.push(jewelries.SILVRNG);
+				if (monster.level < 15 && rand(2) == 0) ringDropTable.push(jewelries.SILVRNG);
+				ringDropTable.push(jewelries.GOLDRNG);
+				if (monster.level < 20) ringDropTable.push(jewelries.GOLDRNG);
+				ringDropTable.push(jewelries.PLATRNG);
+				if (rand(2) == 0) ringDropTable.push(jewelries.DIAMRNG);
+				if (monster.level >= 15 && rand(4) == 0) ringDropTable.push(jewelries.LTHCRNG);
+				if (monster.level >= 25 && rand(3) == 0) ringDropTable.push(jewelries.LTHCRNG);
+				if (monster.level >= 1 && monster.level < 15) {
+					ringDropTable.push(jewelries.CRIMRN1);
+					ringDropTable.push(jewelries.FERTRN1);
+					ringDropTable.push(jewelries.ICE_RN1);
+					ringDropTable.push(jewelries.CRITRN1);
+					ringDropTable.push(jewelries.REGNRN1);
+					ringDropTable.push(jewelries.LIFERN1);
+					ringDropTable.push(jewelries.MYSTRN1);
+					ringDropTable.push(jewelries.POWRRN1);
+				}
+				if (monster.level >= 11 && monster.level < 25) {
+					ringDropTable.push(jewelries.CRIMRN2);
+					ringDropTable.push(jewelries.FERTRN2);
+					ringDropTable.push(jewelries.ICE_RN2);
+					ringDropTable.push(jewelries.CRITRN2);
+					ringDropTable.push(jewelries.REGNRN2);
+					ringDropTable.push(jewelries.LIFERN2);
+					ringDropTable.push(jewelries.MYSTRN2);
+					ringDropTable.push(jewelries.POWRRN2);
+				}
+				if (monster.level >= 21) {
+					ringDropTable.push(jewelries.CRIMRN3);
+					ringDropTable.push(jewelries.FERTRN3);
+					ringDropTable.push(jewelries.ICE_RN3);
+					ringDropTable.push(jewelries.CRITRN3);
+					ringDropTable.push(jewelries.REGNRN3);
+					ringDropTable.push(jewelries.LIFERN3);
+					ringDropTable.push(jewelries.MYSTRN3);
+					ringDropTable.push(jewelries.POWRRN3);
+				}
+				
+
+			}
 			//Bonus loot overrides others
 			if (flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] != "") {
 				itype = ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]);
