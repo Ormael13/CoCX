@@ -491,14 +491,12 @@ private function fireBow():void {
 	clearOutput();
 	if (player.fatigue + physicalCost(25) > 100) {
 		outputText("You're too fatigued to fire the bow!");
-		menu();
-		addButton(0, "Next", combatMenu, false);
+		doNext(physicalSpecials);
 		return;
 	}
 	if (monster.findStatusAffect(StatusAffects.BowDisabled) >= 0) {
 		outputText("You can't use your bow right now!");
-		menu();
-		addButton(0, "Next", combatMenu, false);
+		doNext(physicalSpecials);
 		return;
 	}
 	fatigue(25, 2);
@@ -1091,8 +1089,7 @@ public function goreAttack():void {
 	}
 	if(player.fatigue + physicalCost(15) > 100) {
 		outputText("You're too fatigued to use a charge attack!");
-		menu();
-		addButton(0, "Next", combatMenu, false);
+		doNext(physicalSpecials);
 		return;
 	}
 	fatigue(15,2);
@@ -3937,8 +3934,7 @@ public function kick():void {
 	outputText("", true);
 	if(player.fatigue + physicalCost(15) > 100) {
 		outputText("You're too fatigued to use a charge attack!", true);
-		menu();
-		addButton(0, "Next", combatMenu, false);
+		doNext(physicalSpecials);
 		return;
 	}
 	fatigue(15,2);
@@ -4149,10 +4145,7 @@ public function spiderBiteAttack():void {
 	//FATIIIIGUE
 	if(player.fatigue + physicalCost(10) > 100) {
 		outputText("You just don't have the energy to bite something right now...", true);
-//Pass false to combatMenu instead:		menuLoc = 1;
-//		doNext(combatMenu);
-		menu();
-		addButton(0, "Next", combatMenu, false);
+		doNext(physicalSpecials);
 		return;
 	}
 	fatigue(10,2);
@@ -4202,12 +4195,12 @@ public function superWhisperAttack():void {
 	if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(10) > 100)
 	{
 		outputText("You are too tired to focus this ability.", true);
-		doNext(combatMenu);
+		doNext(magicalSpecials);
 		return;
 	}
 	if(player.findStatusAffect(StatusAffects.ThroatPunch) >= 0 || player.findStatusAffect(StatusAffects.WebSilence) >= 0) {
 		outputText("You cannot focus to reach the enemy's mind while you're having so much difficult breathing.", true);
-		doNext(combatMenu);
+		doNext(magicalSpecials);
 		return;
 	}
 	if(monster.short == "pod" || monster.inte == 0) {
@@ -4263,13 +4256,13 @@ public function dragonBreath():void {
 	if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(20) > 100)
 	{
 		outputText("You are too tired to breathe fire.", true);
-		doNext(combatMenu);
+		doNext(magicalSpecials);
 		return;
 	}
 	//Not Ready Yet:
 	if(player.findStatusAffect(StatusAffects.DragonBreathCooldown) >= 0) {
 		outputText("You try to tap into the power within you, but your burning throat reminds you that you're not yet ready to unleash it again...");
-		doNext(combatMenu);
+		doNext(magicalSpecials);
 		return;
 	}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
@@ -4355,7 +4348,7 @@ public function fireballuuuuu():void {
 	outputText("", true);
 	if(player.fatigue + 20 > 100) {
 		outputText("You are too tired to breathe fire.", true);
-		doNext(combatMenu);
+		doNext(magicalSpecials);
 		return;
 	}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
@@ -4449,7 +4442,6 @@ public function fireballuuuuu():void {
 public function kissAttack():void {
 	if(player.findStatusAffect(StatusAffects.Blind) >= 0) {
 		outputText("There's no way you'd be able to find their lips while you're blind!", true);
-//Pass false to combatMenu instead:		menuLoc = 3;
 		doNext(physicalSpecials);
 		return;
 	}
