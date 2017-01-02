@@ -17,6 +17,7 @@ public function Bazaar(){
 }
 
 		public var benoit:Benoit = new Benoit();
+		public var blackCock:BlackCock = new BlackCock();
 		public var cinnabar:Cinnabar = new Cinnabar();
 		public var fapArena:FapArena = new FapArena();
 		public var lilium:Lilium = new Lilium();
@@ -81,10 +82,14 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 			addButton(0, flags[kFLAGS.TIMES_IN_BENOITS] == 0 ? "MarketStall" : benoit.benoitMF("Benoit", "Benoite"), benoit.benoitIntro);
 		}
 	}
-	addButton(1, "Greta's", gretasGarments);
-	addButton(2, "S. Squeeze", theSlipperySqueeze);
+	if (debug) {
+		blackCock.blackCockDescription();
+		addButton(1, "Black Cock", blackCock.enterTheBlackCock);
+	}
+	addButton(2, "Greta's", gretasGarments);
+	addButton(3, "S. Squeeze", theSlipperySqueeze);
 	fapArena.fapAppearance();
-	addButton(3, "Tent", fapArena.fapArenaGOOOO);
+	addButton(4, "Tent", fapArena.fapArenaGOOOO);
 	//NPCs
 	addButton(5, flags[kFLAGS.CINNABAR_NUMBER_ENCOUNTERS] > 0 ? "Cinnabar" : "Rat", cinnabar.cinnabarAppearance(false));
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00292] == 0 && rand(4) == 0 && demons) {

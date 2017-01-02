@@ -8869,5 +8869,13 @@
 				fatigue(-10);
 			}
 		}
+		
+		public function frothyBeer(player:Player):void {
+			outputText("Feeling parched, you twist the metal cap from the clear green bottle and chug it down. ");
+			dynStats("lus", 15);
+			//player.refillHunger(10, false);
+			if (player.tone < 70) player.modTone(70, rand(3));
+			if (player.femininity > 30) player.modFem(30, rand(3));
+		}
 	}
 }

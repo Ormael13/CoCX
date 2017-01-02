@@ -588,6 +588,42 @@ use namespace kGAMECLASS;
 				else
 					race = "mouse-morph";
 			}
+			//<mod>
+			if (pigScore() >= 4) 
+			{
+				race = "pig-morph";
+				if (faceType == 0)
+					race = "pig-" + mf("boy", "girl");
+				if (faceType == 20)
+					race = "boar-morph";
+			}
+			if (satyrScore() >= 4)
+			{
+				race = "satyr";
+			}
+			if (rhinoScore() >= 4)
+			{
+				race = "rhino-morph";
+				if (faceType == 0) race = "rhino-" + mf("man", "girl");
+			}
+			if (echidnaScore() >= 4)
+			{
+				race = "echidna-morph";
+				if (faceType == 0) race = "echidna-" + mf("boy", "girl");
+			}
+			if (deerScore() >= 4)
+			{
+				if (isTaur()) race = "deer-taur";
+				else {
+					race = "deer-morph";
+					if (faceType == 0) race = "deer-" + mf("morph", "girl");
+				}
+			}
+			if (sirenScore() >= 4)
+			{
+				race = "siren";
+			}
+			//</mod>
 			if (lowerBody == 3)
 				race = "naga";
 			if (lowerBody == 4)
@@ -1190,6 +1226,112 @@ use namespace kGAMECLASS;
 			return mutantCounter--;
 		}
 
+		public function sirenScore():Number 
+		{
+			var sirenCounter:Number = 0;
+			if (faceType == 4 && tailType == 7 && wingType == WING_TYPE_FEATHERED_LARGE && armType == ARM_TYPE_HARPY)
+				sirenCounter+= 4;
+			if (hasVagina()) 
+				sirenCounter++;
+			//if (hasCock() && findFirstCockType(CockTypesEnum.ANEMONE) >= 0)
+			//	sirenCounter++;
+			return sirenCounter++;
+		}
+		
+		public function pigScore():Number
+		{
+			var pigCounter:Number = 0;
+			if (earType == EARS_PIG)
+				pigCounter++;
+			if (tailType == TAIL_TYPE_PIG)
+				pigCounter++;
+			if (faceType == FACE_PIG || FACE_BOAR)
+				pigCounter++;
+			if (lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED)
+				pigCounter += 2;
+			if (countCocksOfType(CockTypesEnum.PIG) > 0)
+				pigCounter++;
+			return pigCounter;
+		}
+		
+		public function satyrScore():Number
+		{
+			var satyrCounter:Number = 0;
+			if (lowerBody == LOWER_BODY_TYPE_HOOFED)
+				satyrCounter++;
+			if (tailType == TAIL_TYPE_GOAT)
+				satyrCounter++;
+			if (satyrCounter >= 2) {
+				if (earType == EARS_ELFIN)
+					satyrCounter++;
+				if (faceType == FACE_HUMAN)
+					satyrCounter++;
+				if (countCocksOfType(CockTypesEnum.HUMAN) > 0)
+					satyrCounter++;
+				if (balls > 0 && ballSize >= 3)
+					satyrCounter++;
+			}
+			return satyrCounter;
+		}
+		
+		public function rhinoScore():Number
+		{
+			var rhinoCounter:Number = 0;
+			if (earType == EARS_RHINO)
+				rhinoCounter++;
+			if (tailType == TAIL_TYPE_RHINO)
+				rhinoCounter++;
+			if (faceType == FACE_RHINO)
+				rhinoCounter++;
+			if (hornType == HORNS_RHINO)
+				rhinoCounter++;
+			if (rhinoCounter >= 2 && skinTone == "gray")
+				rhinoCounter++;
+			if (rhinoCounter >= 2 && hasCock() && countCocksOfType(CockTypesEnum.RHINO) > 0)
+				rhinoCounter++;
+			return rhinoCounter;
+		}
+		
+		public function echidnaScore():Number
+		{
+			var echidnaCounter:Number = 0;
+			if (earType == EARS_ECHIDNA)
+				echidnaCounter++;
+			if (tailType == TAIL_TYPE_ECHIDNA)
+				echidnaCounter++;
+			if (faceType == FACE_ECHIDNA)
+				echidnaCounter++;
+			if (tongueType == TONGUE_ECHIDNA)
+				echidnaCounter++;
+			if (lowerBody == LOWER_BODY_TYPE_ECHIDNA)
+				echidnaCounter++;
+			if (echidnaCounter >= 2 && skinType == SKIN_TYPE_FUR)
+				echidnaCounter++;
+			if (echidnaCounter >= 2 && countCocksOfType(CockTypesEnum.ECHIDNA) > 0)
+				echidnaCounter++;
+			return echidnaCounter;
+		}
+		
+		public function deerScore():Number
+		{
+			var deerCounter:Number = 0;
+			if (earType == EARS_DEER)
+				deerCounter++;
+			if (tailType == TAIL_TYPE_DEER)
+				deerCounter++;
+			if (faceType == FACE_DEER)
+				deerCounter++;
+			if (lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED || lowerBody == LOWER_BODY_TYPE_DEERTAUR)
+				deerCounter++;
+			if (hornType == HORNS_ANTLERS && horns >= 4)
+				deerCounter++;
+			if (deerCounter >= 2 && skinType == SKIN_TYPE_FUR)
+				deerCounter++;
+			if (deerCounter >= 3 && countCocksOfType(CockTypesEnum.HORSE) > 0)
+				deerCounter++;
+			return deerCounter;
+		}
+		
 		public function lactationQ():Number
 		{
 			if (biggestLactation() < 1)

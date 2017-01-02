@@ -23,6 +23,7 @@ public static const HAIR_FEATHER:int                                            
 public static const HAIR_GHOST:int                                                 =     2;
 public static const HAIR_GOO:int                                                   =     3;
 public static const HAIR_ANEMONE:int                                               =     4;
+public static const HAIR_QUILL:int                                                 =     5;
 
 // faceType
 public static const FACE_HUMAN:int                                                  =    0;
@@ -44,12 +45,18 @@ public static const FACE_BUCKTEETH:int                                          
 public static const FACE_MOUSE:int                                                  =   16;
 public static const FACE_FERRET_MASK:int                                            =   17;
 public static const FACE_FERRET:int                                            		=   18;
+public static const FACE_PIG:int                                                    =   19;
+public static const FACE_BOAR:int                                                   =   20;
+public static const FACE_RHINO:int                                                  =   21;
+public static const FACE_ECHIDNA:int                                                =   22;
+public static const FACE_DEER:int                                                   =   23;
 
 // tongueType
 public static const TONUGE_HUMAN:int                                                =   0;
 public static const TONUGE_SNAKE:int                                                =   1;
 public static const TONUGE_DEMONIC:int                                              =   2;
 public static const TONUGE_DRACONIC:int                                             =   3;
+public static const TONGUE_ECHIDNA:int                                              =   4; //Literally unplayable. The other tongues are spelled incorrectly in code.
 
 // eyeType
 public static const EYES_HUMAN:int                                                  =   0;
@@ -71,6 +78,10 @@ public static const EARS_DRAGON:int                                             
 public static const EARS_RACCOON:int                                                =  11;
 public static const EARS_MOUSE:int                                                  =  12;
 public static const EARS_FERRET:int                                                 =  13;
+public static const EARS_PIG:int                                                    =  14;
+public static const EARS_RHINO:int                                                  =  15;
+public static const EARS_ECHIDNA:int                                                =  16;
+public static const EARS_DEER:int                                                   =  17;
 
 // hornType
 public static const HORNS_NONE:int                                                  =   0;
@@ -79,6 +90,9 @@ public static const HORNS_COW_MINOTAUR:int                                      
 public static const HORNS_DRACONIC_X2:int                                           =   3;
 public static const HORNS_DRACONIC_X4_12_INCH_LONG:int                              =   4;
 public static const HORNS_ANTLERS:int                                               =   5;
+public static const HORNS_GOAT:int                                                  =   6;
+public static const HORNS_UNICORN:int                                               =   7;
+public static const HORNS_RHINO:int                                                 =   8;
 
 // antennae
 public static const ANTENNAE_NONE:int                                               =   0;
@@ -108,6 +122,14 @@ public static const TAIL_TYPE_DRACONIC:int                                      
 public static const TAIL_TYPE_RACCOON:int                                           =  15;
 public static const TAIL_TYPE_MOUSE:int                                             =  16;
 public static const TAIL_TYPE_FERRET:int                                            =  17;
+//public static const TAIL_TYPE_BEHEMOTH:int                                          =  18; //Mod only
+public static const TAIL_TYPE_PIG:int                                               =  19;
+//public static const TAIL_TYPE_SCORPION:int                                          =  20; //Mod only
+public static const TAIL_TYPE_GOAT:int                                              =  21;
+public static const TAIL_TYPE_RHINO:int                                             =  22;
+public static const TAIL_TYPE_ECHIDNA:int                                           =  23;
+public static const TAIL_TYPE_DEER:int                                              =  24;
+//public static const TAIL_TYPE_SALAMANDER:int                                        =  25; //Mod only
 
 //breast size
 public static const BREAST_CUP_FLAT:int												=   0;
@@ -247,6 +269,10 @@ public static const LOWER_BODY_TYPE_FOX:int                                     
 public static const LOWER_BODY_TYPE_DRAGON:int                                      =  18;
 public static const LOWER_BODY_TYPE_RACCOON:int                                     =  19;
 public static const LOWER_BODY_FERRET:int                                           =  20;
+public static const LOWER_BODY_TYPE_CLOVEN_HOOFED:int                               =  21;
+//public static const LOWER_BODY_TYPE_RHINO:int                                       =  22; //Not used
+public static const LOWER_BODY_TYPE_ECHIDNA:int                                     =  23;
+public static const LOWER_BODY_TYPE_DEERTAUR:int                                    =  24;
 
 // piercingtypesNOPEDISABLED
 public static const PIERCING_TYPE_NONE:int                                          =   0;

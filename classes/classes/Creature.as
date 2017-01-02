@@ -2385,7 +2385,7 @@ import classes.PerkType;
 
 		public function isTaur():Boolean
 		{
-			if (lowerBody == LOWER_BODY_TYPE_CENTAUR || lowerBody == LOWER_BODY_TYPE_PONY)
+			if (lowerBody == LOWER_BODY_TYPE_CENTAUR || lowerBody == LOWER_BODY_TYPE_PONY || lowerBody == LOWER_BODY_TYPE_DEERTAUR)
 				return true;
 			return false;
 		}

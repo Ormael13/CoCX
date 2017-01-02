@@ -10,6 +10,7 @@ package classes
 	{
 		// Non-combat player perks
 		public static const AllNaturalOnaholeUsed:StatusAffectType = mk("all-natural onahole used");
+		public static const AndysSmoke:StatusAffectType = mk("AndysSmoke");
 		public static const AteEgg:StatusAffectType = mk("ateEgg");
 		public static const AnemoneArousal:StatusAffectType = mk("Anemone Arousal");
 		public static const BimboChampagne:StatusAffectType = mk("Bimbo Champagne");
@@ -62,6 +63,7 @@ package classes
 		public static const FetishOn:StatusAffectType = mk("fetishON");
 		public static const FoundFactory:StatusAffectType = mk("Found Factory");
 		public static const FuckedMarble:StatusAffectType = mk("FuckedMarble");
+		public static const Fullness:StatusAffectType = mk("Fullness");
 		public static const Goojob:StatusAffectType = mk("GOOJOB");
 		public static const GooStuffed:StatusAffectType = mk("gooStuffed");
 		public static const Groundpound:StatusAffectType = mk("Groundpound");

@@ -669,6 +669,43 @@
 					"star-capped tool",
 					"knotted erection");
 			}
+			else if (cockType == CockTypesEnum.PIG) {
+				return randomChoice("pig cock",
+					"pig dick",
+					"pig penis",
+					"pig-like cock",
+					"pig-like dick",
+					"swine cock",
+					"swine penis",
+					"corkscrew-tipped cock",
+					"hoggish cock",
+					"pink pig-cock",
+					"pink pecker");
+			}
+			else if (cockType == CockTypesEnum.RHINO) {
+				return randomChoice("oblong cock",
+					"oblong dick",
+					"oblong prick",
+					"rhino cock",
+					"rhino dick",
+					"rhino penis",
+					"rhino pecker",
+					"rhino prick",
+					"bulged rhino cock",
+					"bulged rhino dick");
+			}
+			else if (cockType == CockTypesEnum.ECHIDNA) {
+				return randomChoice("strange echidna dick",
+					"strange echidna cock",
+					"echidna dick",
+					"echidna penis",
+					"echidna cock",
+					"exotic endowment",
+					"four-headed prick",
+					"four-headed penis",
+					"four-headed cock",
+					"four-headed dick");
+			}
 			return randomChoice("cock",
 				"prick",
 				"pecker",
@@ -1102,6 +1139,18 @@
 					"reptilian shaft",
 					"snake-shaft",
 					"snake dick"];
+				description += randomChoice(options);
+			}
+			else if (cockType == CockTypesEnum.RHINO) {
+				options = ["oblong cock",
+					"rhino dick",
+					"rhino cock",
+					"bulged rhino cock",
+					"rhino penis",
+					"rhink dong",
+					"oblong penis",
+					"oblong dong",
+					"oblong dick"];
 				description += randomChoice(options);
 			}
 			else {
@@ -2171,7 +2220,8 @@
 					[HAIR_FEATHER, "feather"],
 					[HAIR_GHOST, "transparent"],
 					[HAIR_GOO, "goopy"],
-					[HAIR_ANEMONE, "tentacle"]
+					[HAIR_ANEMONE, "tentacle"],
+					[HAIR_QUILL, "quill"]
 				]
 		);
 		public static const DEFAULT_FACE_NAMES:Object = createMapFromPairs(

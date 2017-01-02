@@ -212,6 +212,45 @@
 		else outputText("covered with " + player.skinFurScales(), false);
 		outputText(" and shaped like that of a kangaroo, somewhat rabbit-like except for the extreme length of your odd visage.", false);
 	}
+	if (player.faceType == FACE_PIG)
+	{
+		outputText("  Your face is like that of a pig, with " + player.skinTone + " skin, complete with a snout that is always wiggling.");
+	}
+	if (player.faceType == FACE_BOAR)
+	{
+		outputText("  Your face is like that of a boar, ");
+		if (player.skinType == SKIN_TYPE_FUR) 
+			outputText("with " + player.skinTone + " skin underneath your " + player.hairColor + " fur"); 
+		outputText(", complete with tusks and a snout that is always wiggling.");
+	}
+	if (player.faceType == FACE_RHINO)
+	{
+		outputText("  Your face is like that of a rhino");
+		if (player.skinType == SKIN_TYPE_PLAIN)
+			outputText(", with " + player.skin() + ", complete with a long muzzle and a horn on your nose.");
+		else
+			outputText(" with a long muzzle and a horn on your nose.  Oddly, your face is also covered in " + player.skinFurScales() + ".");
+	}
+	if (player.faceType == FACE_ECHIDNA)
+	{
+		outputText("  Your odd visage consists of a long, thin echidna snout.");
+		if (player.skinType == SKIN_TYPE_PLAIN)
+			outputText("  The " + player.skin() + " that is revealed by your lack of fur looks quite unusual.");
+		else if (player.skinType == SKIN_TYPE_FUR)
+			outputText("  It's covered in " + player.skinFurScales() + ".");
+		else if (player.skinType == SKIN_TYPE_SCALES)
+			outputText("  It's covered in " + player.skinFurScales() + ", making your face even more unusual.");
+	}
+	if (player.faceType == FACE_DEER)
+	{
+		outputText("  Your face is like that of a deer, with a nose at the end of your muzzle.");
+		if (player.skinType == SKIN_TYPE_PLAIN)
+			outputText("  The " + player.skin() + " that is revealed by your lack of fur looks quite unusual.");
+		else if (player.skinType == SKIN_TYPE_FUR)
+			outputText("  It's covered in " + player.skinFurScales() + " that covers your " + player.skinTone + " skin underneath.");
+		else if (player.skinType == SKIN_TYPE_SCALES)
+			outputText("  It's covered in " + player.skinFurScales() + ", making your face looks more unusual.");
+	}
 	//M/F stuff!
 	outputText("  It has " + player.faceDesc() + ".", false);
 	//Eyes
@@ -251,6 +290,14 @@
 			outputText("  A pair of vaguely egg-shaped, furry raccoon ears adorns your head.");
 		else if(player.earType == EARS_MOUSE) 
 			outputText("  A pair of large, dish-shaped mouse ears tops your head.");
+		else if (player.earType == EARS_PIG) 
+			outputText("  A pair of pointy, floppy pig ears have sprouted from the top of your head.");
+		else if (player.earType == EARS_RHINO) 
+			outputText("  A pair of open tubular rhino ears protrude from your head.");
+		else if (player.earType == EARS_ECHIDNA)
+			outputText("  A pair of small rounded openings appear on your head that are your ears.");
+		else if (player.earType == EARS_DEER) 
+			outputText("  A pair of deer-like ears rise up from the top of your head.");
 		if(player.antennae == ANTENNAE_BEE) 
 			outputText("  Floppy antennae also appear on your skull, bouncing and swaying in the breeze.", false);
 	}
@@ -285,6 +332,14 @@
 			outputText("  The " + hairDescript() + " on your head parts around a pair of egg-shaped, furry raccoon ears.");
 		else if(player.earType == EARS_MOUSE) 
 			outputText("  The " + hairDescript() + " atop your head is funneled between and around a pair of large, dish-shaped mouse ears that stick up prominently.");
+		else if (player.earType == EARS_PIG) 
+			outputText("  The " + player.hairDescript() + " on your head is parted by a pair of pointy, floppy pig ears. They often flick about when you’re not thinking about it.");
+		else if (player.earType == EARS_RHINO) 
+			outputText("  The " + player.hairDescript() + " on your head is parted by a pair of tubular rhino ears.");
+		else if (player.earType == EARS_ECHIDNA) 
+			outputText("  Your " + player.hairDescript() + " makes it near-impossible to see the small, rounded openings that are your ears.");
+		else if (player.earType == EARS_DEER) 
+			outputText("  The " + player.hairDescript() + " on your head parts around a pair of deer-like ears that grow up from your head.");
 		if(player.antennae == ANTENNAE_BEE) 
 		{
 			if(player.earType == EARS_BUNNY) 
@@ -341,6 +396,34 @@
 		if(player.horns > 0) 
 			outputText("  Two antlers, forking into " + num2Text(player.horns) + " points, have sprouted from the top of your head, forming a spiky, regal crown of bone.");
 	}
+	if (player.hornType == HORNS_GOAT)
+	{
+		if (player.horns == 1) 
+			outputText("  A pair of stubby goat horns sprout from the sides of your head.");
+		else
+			outputText("  A pair of tall-standing goat horns sprout from the sides of your head.  They are curved and patterned with ridges.");
+	}
+	if (player.hornType == HORNS_RHINO)
+	{
+		if (player.horns >= 2) {
+			if (player.faceType == FACE_RHINO)
+				outputText("  A second horn sprouts from your forehead just above the horn on your nose.");
+			else
+				outputText("  A single horn sprouts from your forehead.  It is conical and resembles a rhino's horn.");
+			outputText("  You estimate it to be about " + num2Text(7) + " inches long.");
+		}
+		else {
+			outputText("  A single horn sprouts from your forehead.  It is conical and resembles a rhino's horn.  You estimate it to be about " + num2Text(6) + " long.");
+		}
+	}
+	if (player.hornType == HORNS_UNICORN)
+	{
+		outputText("  A single sharp nub of a horn sprouts from the center of your forehead.");
+		if (player.horns < 12)
+			outputText("  You estimate it to be about " + num2Text(player.horns) + " inches long.");
+		else
+			outputText("  It has developed its own cute little spiral. You estimate it to be about " + num2Text(player.horns) + " inches long, " + num2Text(2) + " thick and very sturdy. A very useful natural weapon.");
+	}
 	//BODY PG HERE
 	outputText("\n\nYou have a humanoid shape with the usual torso, arms, hands, and fingers.", false);
 	//WINGS!
@@ -372,8 +455,14 @@
 	//Horse lowerbody, other lowerbody texts appear lower
 	if(player.lowerBody == LOWER_BODY_TYPE_PONY) 
 		outputText("  From the waist down you have an incredibly cute and cartoonish parody of a horse's body, with all four legs ending in flat, rounded feet.", false);
-	else if(player.isTaur()) 
-		outputText("  From the waist down you have the body of a horse, with all four legs capped by hooves.", false);
+	else if (player.isTaur()) {
+		if (player.lowerBody == LOWER_BODY_TYPE_DEERTAUR)
+			outputText("  From the waist down you have the body of a deer, with all four legs capped by cloven hooves.", false);
+		else
+			outputText("  From the waist down you have the body of a horse, with all four legs capped by hooves.", false);
+	}
+	
+		
 	//Hip info only displays if you aren't a centaur. 
 	if(!player.isTaur()) 
 	{
@@ -600,6 +689,26 @@
 	{
 		//appearance
 		outputText("  A naked, " + player.skinTone + " mouse tail pokes from your butt, dragging on the ground and twitching occasionally.");
+	}
+	else if (player.tailType == TAIL_TYPE_PIG) 
+	{
+		outputText("  A short, curly pig tail sprouts from just above your butt.");
+	}
+	else if (player.tailType == TAIL_TYPE_GOAT) 
+	{
+		outputText("  A very short, stubby goat tail sprouts from just above your butt.");
+	}
+	else if (player.tailType == TAIL_TYPE_RHINO) 
+	{
+		outputText("  A ropey rhino tail sprouts from just above your butt, swishing from time to time.");
+	}
+	else if (player.tailType == TAIL_TYPE_ECHIDNA) 
+	{
+		outputText("  A stumpy echidna tail forms just about your [ass].");
+	}
+	else if (player.tailType == TAIL_TYPE_DEER) 
+	{
+		outputText("  A very short, stubby deer tail sprouts from just above your butt.");
 	}
 	//LOWERBODY SPECIAL
 	if(player.lowerBody == LOWER_BODY_TYPE_HUMAN) 
@@ -848,6 +957,8 @@
 	{
 		if(player.lowerBody==LOWER_BODY_TYPE_CENTAUR) 
 			outputText("\nEver since becoming a centaur, your equipment has shifted to lie between your rear legs, like a horse.", false);
+		else if(player.lowerBody==LOWER_BODY_TYPE_DEERTAUR) 
+			outputText("\nEver since becoming a deertaur, your equipment has shifted to lie between your rear legs, like a deer.", false);
 		outputText("\nYour " + player.cockDescript(temp) + " is " + int(10*player.cocks[temp].cockLength)/10 + " inches long and ", false);
 		if(Math.round(10*player.cocks[temp].cockThickness)/10 < 2) 
 		{

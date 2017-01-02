@@ -241,7 +241,7 @@ package classes {
 				}
 			}
 			if (player.findPerk(PerkLib.Oviposition) >= 0 || player.findPerk(PerkLib.BunnyEggs) >= 0) { //Oviposition perk for lizard and bunny folks
-				if ((player.nagaScore() + player.lizardScore() < 3) && player.findPerk(PerkLib.Oviposition) >= 0 && player.findPerk(PerkLib.BasiliskWomb) < 0) { //--Lose Oviposition perk if lizard score gets below 3.
+				if ((player.nagaScore() + player.lizardScore() + player.echidnaScore() < 3) && player.findPerk(PerkLib.Oviposition) >= 0 && player.findPerk(PerkLib.BasiliskWomb) < 0) { //--Lose Oviposition perk if lizard score gets below 3.
 					outputText("\nAnother change in your uterus ripples through your reproductive systems.  Somehow you know you've lost a little bit of reptilian reproductive ability.\n(<b>Perk Lost: Oviposition</b>)\n");
 					player.removePerk(PerkLib.Oviposition);
 					needNext = true;
@@ -493,6 +493,24 @@ package classes {
 					needNext = true;
 				}
 				else player.addStatusValue(StatusAffects.Dysfunction, 1, -1);
+			}
+			if (player.findStatusAffect(StatusAffects.Fullness) >= 0) {
+				if (player.statusAffectv1(StatusAffects.Fullness) > 0) {
+					player.addStatusValue(StatusAffects.Fullness, 1, -1);
+				}
+				else player.removeStatusAffect(StatusAffects.Fullness);
+			}
+			if (player.findStatusAffect(StatusAffects.AndysSmoke) >= 0) {
+				player.addStatusValue(StatusAffects.AndysSmoke, 1, -1);
+				if (player.statusAffectv1(StatusAffects.AndysSmoke) <= 0) {
+					outputText("\n<b>The change in your mental prowess confirms that the effects of Nepenthe must have worn off.</b>\n");
+					var tempSpe:int = player.statusAffectv2(StatusAffects.AndysSmoke);
+					var tempInt:int = player.statusAffectv3(StatusAffects.AndysSmoke);
+					player.removeStatusAffect(StatusAffects.AndysSmoke);
+					dynStats("spe", -tempSpe); //Properly revert speed and intelligence.
+					dynStats("inte", -tempInt);
+					needNext = true;
+				}
 			}
 			if (player.findStatusAffect(StatusAffects.LactationReduction) < 0) { //Lactation reduction
 				if (player.biggestLactation() > 0) player.createStatusAffect(StatusAffects.LactationReduction, 0, 0, 0, 0);
