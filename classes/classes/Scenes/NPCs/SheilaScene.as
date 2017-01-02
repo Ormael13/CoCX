@@ -2009,7 +2009,7 @@ private function consentacleVagSexForKangarooSlutBitches():void {
 		//(if vag)
 		if(player.balls == 0 && player.hasVagina()) outputText("Your cunt twitches and drools a bit of fluid on the furry intruder.  ");
 	}
-	outputText("You fuck harder, stuffing Sheila with such force that her ");
+	outputText("\n\nYou fuck harder, stuffing Sheila with such force that her ");
 	if(sheilaCorruption() < 30) outputText("perky, erect nipples trace long arcs against your skin");
 	else outputText("jiggly tits nearly slap into her face");
 	outputText(".  \"<i>Ohhh,</i>\" she moans, \"<i>YES!</i>\"  At that moment you feel her vagina clamp around your [cockFit 32], wringing it frantically as she reaches her climax.  You continue pumping as best you're able, but you can't stand up to the siege of her spasming pussy for long; ");
@@ -2028,7 +2028,7 @@ private function consentacleVagSexForKangarooSlutBitches():void {
 	}
 	//(PC corruption < sheila corruption)
 	else if(player.cor < flags[kFLAGS.SHEILA_CORRUPTION]) {
-		outputText("your resistance is condemned to die in failure as Sheila lets out a quavering scream of pleasure and wraps her arms and legs around you, pinning you inside.  Her vagina convulses around your cock powerfully; you could swear you feel yourself stretching longer and longer as her rippling pussy pulls you deeper in.  Just when you think that your dick must be a mile long, her whole body tenses up and her fingernails dig into your back.  Wearing a madwoman's expression, Sheila stares open-mouthed at you as her muscles lock and her pussy quivers out its fitful orgasm; even her ");
+		outputText("your resistance is condemned to die in failure as Sheila lets out a quavering scream of pleasure and wraps her arms and legs around you, pinning you inside.  \n\nHer vagina convulses around your cock powerfully; you could swear you feel yourself stretching longer and longer as her rippling pussy pulls you deeper in.  Just when you think that your dick must be a mile long, her whole body tenses up and her fingernails dig into your back.  Wearing a madwoman's expression, Sheila stares open-mouthed at you as her muscles lock and her pussy quivers out its fitful orgasm; even her ");
 		if(sheilaCorruption() < 30) outputText("perky");
 		else outputText("pillowy");
 		outputText(" breasts seem to be held taut, compressed and motionless.  Suddenly she rams her hips into yours violently and throws her head back, and before you can issue a word of protest, her cunt wrings your " + cockDescript(x) + " one last time with almost supernatural heat; your mind clouds over and a wracking orgasm shoots to the base of your spine, echoing back with the first wave of your ejaculation.");

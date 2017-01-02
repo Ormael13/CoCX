@@ -183,7 +183,7 @@
 		private function endHer():void
 		{
 			clearOutput();
-			outputText("You circle behind her an put and end to her evil while she is busy with her pet, then turn to walk away. When you look back over your shoulder, her body is gone. Nothing remains but an empty pathway.");
+			outputText("You circle behind her and put an end to her life while she is busy with her pet, then turn to walk away. When you look back over your shoulder, her body is gone. Nothing remains but an empty pathway.");
 
 			flags[kFLAGS.D3_GARDENER_DEFEATED] = GARDENER_KILLED;
 
