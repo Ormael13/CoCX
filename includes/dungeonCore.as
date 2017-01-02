@@ -245,7 +245,7 @@ private function dungeonMenu():void {
 		//Dungeon shut down.
 		else {
 			outputText("The chamber is significantly emptier since you've shut down this factory.  Roughly half the girls appear to have left.  The rest seem to be pre-occupied by fucking each other in a massive orgy.  A few enterprising ladies have found leather outfits and appear to be helping to manually administer the chemical cocktails to those engaged in rampant sexual exploits.  It seems some of them preferred a life of near-constant orgasm to their freedom.  There is a door to the east marked as 'EXIT', and a stairwell along the south wall that leads to an overseer's office.", true);
-			outputText("\n\nOne of the leather-clad ladies steps over and offers, 'Would you like a dose?  You look like you need to relieve some tension...", false);
+			outputText("\n\nOne of the leather-clad ladies steps over and offers, \"<i>Would you like a dose?  You look like you need to relieve some tension...</i>\"", false);
 //			choice3 = relieveTension;
 //			text3 = "Tension";
 			addButton(2, "Tension", relieveTension);

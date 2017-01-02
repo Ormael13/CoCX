@@ -4280,7 +4280,7 @@ private function lickOutUrtaAtHome():void {
 	outputText("\n\nThe cum-balloon is so heavy that it's resting between Urta's tits, bigger than either, and the shuddering, post-orgasmic fox abruptly slumps down, weak beneath you.  You lean down to kiss her on the lips, and meet her lidded gaze to say, \"<i>");
 	if(player.cor < 66) outputText("You're wonderful");
 	else outputText("You're the most amazing fuck");
-	outputText("</i>\"");
+	outputText(".</i>\"");
 
 	outputText("\n\nUrta gives you a dazzling smile, and you resume your hard fucking, teasing, \"<i>Are you ready for a creampie, my little vixen?</i>\"  She smiles wider and nods.  At the same time, she begins to work her muscles again, her exhausted pussy trying its damnedest to milk your dick.  The furry hussy's cock slowly sags inside its latex cocoon.  Shrinking faster than the rest, the flare receeds until it is barely any wider than the rest of her length, and some of the cum begins to leak out around her semi-turgid shaft, pooling in her sheath and on the sagging skin between her spent orbs.");
 
@@ -4848,7 +4848,7 @@ private function doggyStyle():void {
 	else outputText("cunt");
 	outputText(" in such a way that it tingles powerfully, fueling your impending orgasm even more.  Locked in this cadence, she pounds your ass for what seems like hours.  The air grows damp and sweat drips from the two of you, only adding to your desire.  It's not long after until your nostrils are assaulted by the salty scent of sex.  Your ");
 	if(player.hasCock()) outputText("[cock] slaps against your belly roughly with every passing second, smearing thick globules of precum which drip down your belly, tickling your flesh like little balls of distilled pleasure");
-	if(player.gender == 0) outputText(", while your");
+	if(player.hasCock() && player.hasVagina()) outputText(", while your");
 	if(player.hasVagina()) outputText(" unused pussy aches to be filled or touched, its lips puffy and red, sensitive to every hard slap of your foxy lover's balls");
 	outputText(".");
 

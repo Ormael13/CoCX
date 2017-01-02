@@ -6,7 +6,9 @@
 	import classes.Items.ConsumableLib;
 	import classes.Items.UseableLib;
 	import classes.Items.WeaponLib;
+	import classes.Scenes.Dungeons.DeepCave.ImpHorde;
 	import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
+	import classes.Scenes.Dungeons.HelDungeon.HarpyMob;
 	import classes.Scenes.NPCs.Kiha;
 	import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
 	import classes.internals.ChainedDrop;
@@ -684,8 +686,9 @@
 			//Determine if evaded
 			if (!(this is Kiha) && player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'");
-				if (!plural) outputText("s");
-				outputText(" attack.\n", false);
+				if ((!plural) || (this is HarpyMob) || (this is ImpHorde)) outputText("s");
+				if (plural) outputText(" attacks.\n", false);
+				else outputText(" attack.\n", false);
 				return true;
 			}
 			//("Misdirection"
