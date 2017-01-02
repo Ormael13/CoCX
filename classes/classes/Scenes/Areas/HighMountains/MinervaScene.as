@@ -1325,44 +1325,46 @@ internal function beatUpDatSharpie():void {
 
 //Item/oasis interactions
 //Purity/Corruption Peach
-private function eatSomethingYouCunt():void {
+public function eatSomethingYouCunt():void {
 	clearOutput();
 	spriteSelect(95);
-	//Acquiring: 
+	outputText("You take a good look at Minerva's \"garden\". Fruit trees surround the spring, each bearing what appears to be a fruit. Strange herbs grow around the spring. You ponder over what you would like to take.");
+	menu();
+	addButton(0, "PurPeac", getPurePeach);
+	addButton(1, "C. Mint", getMint);
+}
+private function getPurePeach():void {
+	clearOutput();
 	outputText("You walk over to the fruit trees surrounding the spring, examining the strange treats.  You decide that one ripe fruit, one resembling a peach, is the best choice, and pluck it from the tree.  Thanking Minerva for letting you have it, you stow it away safely and head back to camp.\n\n");
 	inventory.takeItem(consumables.PURPEAC, camp.returnToCampUseOneHour);
 }
+private function getMint():void {
+	clearOutput();
+	outputText("There are many strange herbs growing around the spring, fed by whatever power resides in the water.  Finally, you locate a sprig of something that resembles mint, but silver in color, and decide to pluck it.  Stowing it carefully amongst your belongings, you thank Minerva for sharing the contents of her 'garden' with you and then head back to camp.", true)
+	inventory.takeItem(consumables.C__MINT, camp.returnToCampUseOneHour);
+}
 
-/*
-Calming Mint
-Acquiring: There are many strange herbs growing around the spring, fed by whatever power resides in the water.  Finally, you locate a sprig of something that resembles mint, but silver in color, and decide to pluck it.  Stowing it carefully amongst your belongings, you thank Minerva for sharing the contents of her 'garden' with you and then head back to camp.
-C. Mint - Inventory
-This is a sprig of silver-colored mint.  Its strong scent makes you feel calmer and less lustful.
-Sell value 3
-Using
-C. Mint - Eating the sprig of raw mint is a bit of a stretch, but you manage to gulp it down.  As the strong minty flavor overwhelms your taste buds, your mind feels calmer, and a relaxed sensation spreads through your body.
-// -3 Libido, -10 Lust, intelligence +2
-*/
 //Spring Water
-private function getADrinkYouBitch():void {
+public function getADrinkYouBitch():void {
 	clearOutput();
 	spriteSelect(95);
-	outputText("You ask Minerva if she's okay with allowing you to drink from her spring.  She replies with a nod, a smile and a casual wave towards the pool.  Making it quite clear that you can drink your fill.");
+	outputText("You ask Minerva if she's okay with allowing you to drink from her spring.  She replies with a nod, a smile and a casual wave towards the pool. Making it quite clear that you can drink your fill.");
 	//[Bottle] [Drink]
-	//[Drink]
-	outputText("\n\nApproaching the pristine pond, you kneel on the shore and dip your hands into the water, cupping them together and lifting them out to scoop up a decent drink.  The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body.");
-	dynStats("lus", -25, "cor", -.5, "resisted", false);
-	if(player.cor > 50) dynStats("cor", -1);
-	if(player.cor > 75) dynStats("cor", -1);
-	doNext(camp.returnToCampUseOneHour);
+	menu();
+	addButton(0, "Drink", drinkDirectly);
+	addButton(1, "Bottle", getBottle);
 }
-/*
-[Bottle] Pulling out a small waterskin, you dip it into the crystal clear water, filling the container with the cool, clean spring water before placing it in your pack
-Spring Water - Inventory
-A waterskin full of purified water from Minerva's spring.  It's clean and clear, with a faint sweet scent to it.  You're sure it would be a very refreshing drink.
-Using
-The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body.
-// Corruption - 3 to 4, lower fatigue by 5 or 10, heal health by 20 per level.
-*/
+private function drinkDirectly():void {
+	outputText("Approaching the pristine pond, you kneel on the shore and dip your hands into the water, cupping them together and lifting them out to scoop up a decent drink. The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body.");
+	dynStats("lus", -25, "cor", -.5, "resisted", false);
+	if (player.cor > 50) dynStats("cor", -1);
+	if (player.cor > 75) dynStats("cor", -1);
+	doNext(camp.returnToCampUseOneHour);	
+}
+private function getBottle():void {
+	outputText("Pulling out a small waterskin, you dip it into the crystal clear water, filling the container with the cool, clean spring water before placing it in your pack.");
+	inventory.takeItem(consumables.S_WATER, camp.returnToCampUseOneHour);
+}
+
 }
 }

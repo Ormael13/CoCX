@@ -8020,6 +8020,25 @@
 			HPChange(Math.round(player.maxHP() * 0.25), false);
 		}
 
+		public function springWater(player:Player):void
+		{
+			player.slimeFeed();
+			outputText("The water is cool and sweet to the taste, and every swallow makes you feel calmer, cleaner, and refreshed.  You drink until your thirst is quenched, feeling purer in both mind and body. ", true);
+			//-30 fatigue, -2 libido, -10 lust]
+			fatigue(-10);
+			dynStats("lus", -25, "cor", (-3 - rand(2)), "resisted", false);
+			HPChange(20 + (5 * player.level) + rand(5 * player.level), true);
+			//player.refillHunger(10);
+			if (player.cor > 50) dynStats("cor", -1);
+			if (player.cor > 75) dynStats("cor", -1);
+		}
+		
+		public function calmMint(player:Player):void
+		{
+			outputText("Eating the sprig of raw mint is a bit of a stretch, but you manage to gulp it down.  As the strong minty flavor overwhelms your taste buds, your mind feels calmer, and a relaxed sensation spreads through your body.", true);
+			dynStats("lib", -1, "lust", -10, "inte", 0.5, "resisted", false);
+			//player.refillHunger(5);
+		}
 //New Item: "Purple Fruit"
 //This sweet-smelling produce looks like an eggplant but feels almost squishy, and rubbery to the touch. Holding it to your ear, you think you can hear some fluid sloshing around inside.
 
