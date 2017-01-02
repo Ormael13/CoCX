@@ -1828,6 +1828,7 @@ public function display():void {
 			else if(math > .25) outputText("You see " + monster.pronoun1 + " is seriously hurt.", false);
 			else outputText("You see " + monster.pronoun1 + " is unsteady and close to death.", false);
 		}
+		outputText("  ");
 		showMonsterLust();
 		outputText("\n\n<b><u>" + capitalize(monster.short) + "'s Stats</u></b>\n");
 		outputText("Level: " + monster.level + "\n");
