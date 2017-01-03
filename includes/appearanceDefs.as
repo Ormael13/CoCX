@@ -203,6 +203,10 @@ public static const LOWER_BODY_TYPE_ECHIDNA:int                                 
 public static const LOWER_BODY_TYPE_DEERTAUR:int                                    =  24; // DEPRECATED, use LOWER_BODY_TYPE_CLOVEN_HOOFED and legCount=4
 public static const LOWER_BODY_TYPE_SALAMANDER:int                                  =  25;
 
+// underBody
+public static const UNDER_BODY_TYPE_NONE:int                                        =   0;
+public static const UNDER_BODY_TYPE_LIZARD:int                                      =   1;
+
 // piercingtypesNOPEDISABLED
 public static const PIERCING_TYPE_NONE:int                                          =   0;
 public static const PIERCING_TYPE_STUD:int                                          =   1;

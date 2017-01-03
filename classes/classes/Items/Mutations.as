@@ -1263,10 +1263,10 @@
 			//Fur - if has horsetail && ears and not at changelimit
 			if (!player.hasFur() && changes < changeLimit && rand(4) == 0 && player.tailType == TAIL_TYPE_HORSE) {
 				player.setFurColor(horseFurColors, true);
-				if (player.hasPlainSkin()) outputText("\n\nAn itchy feeling springs up over every inch of your skin.  As you scratch yourself madly, you feel fur grow out of your skin until <b>you have a fine coat of " + player.newFurColor + "-colored fur.</b>");
+				if (player.hasPlainSkin()) outputText("\n\nAn itchy feeling springs up over every inch of your skin.  As you scratch yourself madly, you feel fur grow out of your skin until <b>you have a fine coat of " + player.furColor + "-colored fur.</b>");
 				if (player.hasScales()) {
 					player.skinDesc = "fur";
-					outputText("\n\nYour " + player.skinTone + " scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of " + player.newFurColor + " " + player.skinDesc + ".  At last the itching stops as <b>you brush a few more loose scales from your new coat of " + player.newFurColor + "-colored fur.</b>");
+					outputText("\n\nYour " + player.skinTone + " scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of " + player.furColor + " " + player.skinDesc + ".  At last the itching stops as <b>you brush a few more loose scales from your new coat of " + player.furColor + "-colored fur.</b>");
 				}
 				changes++;
 				player.skinType = SKIN_TYPE_FUR;
@@ -5291,6 +5291,27 @@
 					adj: "",
 					desc: "scales"
 				});
+				player.underBody.setAllProps({
+					type: UNDER_BODY_TYPE_LIZARD,
+					skin: {
+						type: SKIN_TYPE_LIZARD_SCALES,
+						tone: "yellowgreen",
+						adj:  "",
+						desc: "ventral scales"
+					}
+				});
+				/*
+				player.underBody.type = UNDER_BODY_TYPE_LIZARD;
+				player.underBody.skin.type = SKIN_TYPE_FUR;
+				player.underBody.skin.tone = "yelllowgreen";
+				player.underBody.skin.adj  = "shiny";
+				player.underBody.skin.desc = "fur";
+				player.underBody.skin.furColor = "orange";
+				--> player.underBody.skinDescription(): shiny, yelllowgreen skin
+				--> player.underBody.skinFurScales(): shiny, orange fur
+				*/
+				trace("player.underBody.skinDescription():", player.underBody.skinDescription());
+				trace("player.underBody.skinFurScales():", player.underBody.skinFurScales());
 				changes++;
 			}
 			//-Lizard-like face.

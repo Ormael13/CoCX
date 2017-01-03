@@ -295,7 +295,7 @@ import classes.GlobalFlags.kFLAGS;
 			}
 		}
 
-		public function skin(...args):String { return skinData.skinDescript.apply(null, args); }
+		public function skin(...args):String { return skinData.description.apply(null, args); }
 
 		public function hasMuzzle():Boolean
 		{
