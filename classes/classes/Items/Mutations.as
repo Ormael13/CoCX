@@ -4297,6 +4297,7 @@
 			player.skinType = SKIN_TYPE_PLAIN;
 			player.skinDesc = "skin";
 			player.skinAdj = "";
+			player.underBody.restore();
 			player.tongueType = TONGUE_HUMAN;
 			player.eyeType = EYES_HUMAN;
 			if (player.fertility > 15) player.fertility = 15;
@@ -4411,6 +4412,7 @@
 				outputText(" falling to the ground, revealing flawless skin below.  <b>You now have normal skin.</b>", false);
 
 				player.skinData.restore();
+				player.underBody.restore();
 				changes++;
 			}
 			//Restore arms to become human arms again
@@ -5291,27 +5293,9 @@
 					adj: "",
 					desc: "scales"
 				});
-				player.underBody.setAllProps({
-					type: UNDER_BODY_TYPE_LIZARD,
-					skin: {
-						type: SKIN_TYPE_LIZARD_SCALES,
-						tone: "yellowgreen",
-						adj:  "",
-						desc: "ventral scales"
-					}
-				});
-				/*
 				player.underBody.type = UNDER_BODY_TYPE_LIZARD;
-				player.underBody.skin.type = SKIN_TYPE_FUR;
-				player.underBody.skin.tone = "yelllowgreen";
-				player.underBody.skin.adj  = "shiny";
-				player.underBody.skin.desc = "fur";
-				player.underBody.skin.furColor = "orange";
-				--> player.underBody.skinDescription(): shiny, yelllowgreen skin
-				--> player.underBody.skinFurScales(): shiny, orange fur
-				*/
-				trace("player.underBody.skinDescription():", player.underBody.skinDescription());
-				trace("player.underBody.skinFurScales():", player.underBody.skinFurScales());
+				player.underBody.skin.setProps(player.skinData); // copy the main skin props to the underBody skin ...
+				player.underBody.skin.desc = "ventral scales";   // ... and only override the desc
 				changes++;
 			}
 			//-Lizard-like face.

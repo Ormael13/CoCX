@@ -206,6 +206,7 @@ public static const LOWER_BODY_TYPE_SALAMANDER:int                              
 // underBody
 public static const UNDER_BODY_TYPE_NONE:int                                        =   0;
 public static const UNDER_BODY_TYPE_LIZARD:int                                      =   1;
+public static const UNDER_BODY_TYPE_DRAGON:int                                      =   2;
 
 // piercingtypesNOPEDISABLED
 public static const PIERCING_TYPE_NONE:int                                          =   0;
