@@ -66,12 +66,13 @@ BodyParts
 
 ### Skin
 #### Property table
-| Property | Old (aliased)<br>Property | Access example         | Description / Examples                                                                                         |
-|----------|---------------------------|------------------------|----------------------------------------------------------------------------------------------------------------|
-| type     | `skinType`                | `player.skinData.type` | The type.<br>`player.skinData.type = SKIN_TYPE_FUR;`                                                           |
-| tone     | `skinTone`                | `player.skinData.tone` | The color.<br>`tone: "green-yellow"` → "You have **green-yellow** skin."                                       |
-| desc     | `skinDesc`                | `player.skinData.desc` | The description.<br>`desc: "dragon scales"` → "You have red **dragon scales**."                                |
-| adj      | `skinAdj`                 | `player.skinData.adj`  | The adjective, that can be changed with body lotions.<br>`adj: "smooth"` → "You have **smooth**, green scales" |
+| Property   | Old (aliased)<br>Property | Access example              | Description / Examples                                                                                         |
+|------------|---------------------------|-----------------------------|----------------------------------------------------------------------------------------------------------------|
+| `type`     | `skinType`                | `player.skinData.type`      | The type.<br>`player.skinData.type = SKIN_TYPE_FUR;`                                                           |
+| `tone`     | `skinTone`                | `player.skinData.tone`      | The color.<br>`tone: "green-yellow"` → "You have **green-yellow** skin."                                       |
+| `desc`     | `skinDesc`                | `player.skinData.desc`      | The description.<br>`desc: "dragon scales"` → "You have red **dragon scales**."                                |
+| `adj`      | `skinAdj`                 | `player.skinData.adj`       | The adjective, that can be changed with body lotions.<br>`adj: "smooth"` → "You have **smooth**, green scales" |
+| `furColor` | `furColor`                | `player.skinData.furColor`  | The furColor.<br>`player.skinData.furColor = "brown";`                                                         |
 
 #### Note
 I've added the optional param `keepTone` to the methods `restore()` and `setAllProps()` which defaults to true.
