@@ -106,7 +106,7 @@ package classes
 			else if (player.faceType == FACE_BUCKTEETH) 
 			{
 				//appearance
-				outputText("  Your face is generally human in shape and structure, with [skin]""
+				outputText("  Your face is generally human in shape and structure, with [skin]"
 				          + (player.hasFur() ? " under your [skinFurScales]" : "") + " and mousey buckteeth.");
 			}
 			else if (player.faceType == FACE_MOUSE) 
