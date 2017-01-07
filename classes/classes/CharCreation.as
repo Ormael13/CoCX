@@ -160,6 +160,7 @@
 			player.HP = player.maxHP();
 			player.hairLength = 5;
 			player.skinType = SKIN_TYPE_PLAIN;
+			player.underBody.restore();
 			player.faceType = FACE_HUMAN;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) player.tailType = TAIL_TYPE_NONE;
 			player.tongueType = TONGUE_HUMAN;

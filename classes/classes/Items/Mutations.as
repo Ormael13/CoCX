@@ -1262,7 +1262,7 @@
 			}
 			//Fur - if has horsetail && ears and not at changelimit
 			if (!player.hasFur() && changes < changeLimit && rand(4) == 0 && player.tailType == TAIL_TYPE_HORSE) {
-				player.setFurColor(horseFurColors, true);
+				player.setFurColor(horseFurColors);
 				if (player.hasPlainSkin()) outputText("\n\nAn itchy feeling springs up over every inch of your skin.  As you scratch yourself madly, you feel fur grow out of your skin until <b>you have a fine coat of " + player.furColor + "-colored fur.</b>");
 				if (player.hasScales()) {
 					player.skinDesc = "fur";
@@ -2192,22 +2192,36 @@
 				player.faceType = FACE_DOG;
 				changes++;
 			}
-			if (type == 3 && player.hairColor != "midnight black") {
-				if (player.hasFur()) outputText("<b>\n\nYour fur and hair tingles, growing in thicker than ever as darkness begins to spread from the roots, turning it midnight black.</b>", false);
-				else outputText("<b>\n\nYour " + player.skinDesc + " itches like crazy as fur grows out from it, coating your body.  It's incredibly dense and black as the middle of a moonless night.</b>", false);
+
+			// break things, so it'll be fixed below ;-)
+			if (type == 3 && !player.hasFur() && player.furColor == "midnight black") player.furColor = "no";
+
+			if (type == 3 && (player.hairColor != "midnight black" || player.furColor != "midnight black")) {
+				var furHairText:String;
+				if (!player.hasFur())
+					outputText("<b>\n\nYour " + player.skinDesc + " itches like crazy as fur grows out from it, coating your body.  It's incredibly dense and black as the middle of a moonless night.</b>");
+				else {
+					if (player.hairColor != "midnight black" && player.furColor != "midnight black")
+						furHairText = "fur and hair";
+					else 
+						furHairText = (player.furColor != "midnight black") ? "fur" : "hair";
+					outputText("<b>\n\nYour " + furHairText + " tingles, growing in thicker than ever as darkness begins to spread from the roots, turning it midnight black.</b>");
+				}
 				player.skinType = SKIN_TYPE_FUR;
 				player.skinAdj = "thick";
 				player.skinDesc = "fur";
 				player.hairColor = "midnight black";
 				player.furColor = player.hairColor;
+				player.underBody.restore(); // Restore the underbody for now
 			}
 			//Become furred - requires paws and tail
 			if (rand(4) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_DOG && player.tailType == TAIL_TYPE_DOG && !player.hasFur()) {
+				player.setFurColor(["brown", "chocolate", "auburn", "caramel", "orange", "black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white"]);
 				if (player.hasPlainSkin()) outputText("\n\nYour skin itches intensely.  You gaze down as more and more hairs break forth from your skin, quickly transforming into a soft coat of fur.  <b>You are now covered in " + player.furColor + " fur from head to toe.</b>", false);
 				if (player.hasScales()) outputText("\n\nYour scales itch incessantly.  You scratch, feeling them flake off to reveal a coat of " + player.furColor + " fur growing out from below!  <b>You are now covered in " + player.furColor + " fur from head to toe.</b>", false);
 				player.skinType = SKIN_TYPE_FUR;
 				player.skinDesc = "fur";
-				player.setFurColor(["brown", "chocolate", "auburn", "caramel", "orange", "black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white"]);
+				player.underBody.restore(); // Restore the underbody for now
 				changes++;
 			}
 			//Change to paws - requires tail and ears
@@ -4954,6 +4968,7 @@
 				player.skinType = SKIN_TYPE_FUR;
 				player.skinDesc = "fur";
 				player.setFurColor(["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"]);
+				player.underBody.restore(); // Restore the underbody for now
 				outputText("You reach down to scratch your arm absent-mindedly and pull your fingers away to find strands of " + player.furColor + " fur. Wait, fur?  What just happened?! You spend a moment examining yourself and discover that <b>you are now covered in glossy, soft fur.</b>");
 				changes++;
 			}
@@ -7511,6 +7526,7 @@
 				else
 					player.furColor = randomChoice("orange and white", "orange and white", "orange and white", "red and white", "black and white", "white", "tan", "brown");
 				changes++;
+				player.underBody.restore(); // Restore the underbody for now
 			}
 			//[Grow Fox Legs]
 			//THIRD
