@@ -479,6 +479,10 @@ package classes
 			else if (player.armType == ARM_TYPE_PREDATOR)
 				outputText("  Your arms are covered by [skinFurScales] and your fingernails are now " + player.claws() + ".");
 			//Done with head bits. Move on to body stuff
+			// <mod name="BodyParts.UnderBody" author="Stadler76">
+			if (player.underBody.type != UNDER_BODY_TYPE_NONE)
+				outputText("  While most of your body is covered by [skinFurScales] you have [underBody.skinFurScales] covering your belly.");
+			// </mod>
 			//Horse lowerbody, other lowerbody texts appear lower
 			if (player.isTaur()) 
 			{

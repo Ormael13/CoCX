@@ -79,6 +79,7 @@
 				"skinfurscales"				: function(thisPtr:*):* { return kGAMECLASS.player.skinFurScales(); },
 				"tallness"					: function(thisPtr:*):* { return kGAMECLASS.measurements.footInchOrMetres(kGAMECLASS.player.tallness); },
 				"tongue"					: function(thisPtr:*):* { return kGAMECLASS.player.tongueDescript(); },
+				"underbody.skinfurscales"	: function(thisPtr:*):* { return kGAMECLASS.player.underBody.skinFurScales(); } ,
 				"uppergarment"				: function(thisPtr:*):* { return kGAMECLASS.player.upperGarmentName; },
 				"vag"						: function(thisPtr:*):* { return kGAMECLASS.player.vaginaDescript(); },
 				"vagina"					: function(thisPtr:*):* { return kGAMECLASS.player.vaginaDescript(); },
