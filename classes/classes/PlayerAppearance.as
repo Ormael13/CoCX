@@ -34,7 +34,7 @@ package classes
 				var hairPinText:String = "";
 				hairPinText += "  <b>You have a hair-pin with a single red feather plume";
 				if (player.hairLength > 0)
-					hairPinText += " in your " + player.hairDescript() + ".</b>";
+					hairPinText += " in your [hair].</b>";
 				else
 					hairPinText += " on your head.</b>";
 				outputText(hairPinText);
@@ -304,42 +304,42 @@ package classes
 			else 
 			{
 				if (player.earType == EARS_HUMAN) 
-					outputText("  Your " + player.hairDescript() + " looks good on you, accentuating your features well.");
+					outputText("  Your [hair] looks good on you, accentuating your features well.");
 				else if (player.earType == EARS_FERRET) 
-					outputText("  A pair of small, rounded ferret ears burst through the top of your " + player.hairDescript() + ".");
+					outputText("  A pair of small, rounded ferret ears burst through the top of your [hair].");
 				else if (player.earType == EARS_HORSE) 
-					outputText("  The " + player.hairDescript() + " on your head parts around a pair of very horse-like ears that grow up from your head.");
+					outputText("  The [hair] on your head parts around a pair of very horse-like ears that grow up from your head.");
 				else if (player.earType == EARS_DOG) 
-					outputText("  The " + player.hairDescript() + " on your head is overlapped by a pair of pointed dog ears.");
+					outputText("  The [hair] on your head is overlapped by a pair of pointed dog ears.");
 				else if (player.earType == EARS_COW) 
-					outputText("  The " + player.hairDescript() + " on your head is parted by a pair of rounded cow ears that stick out sideways.");
+					outputText("  The [hair] on your head is parted by a pair of rounded cow ears that stick out sideways.");
 				else if (player.earType == EARS_ELFIN) 
-					outputText("  The " + player.hairDescript() + " on your head is parted by a pair of cute pointed ears, bigger than your old human ones.");
+					outputText("  The [hair] on your head is parted by a pair of cute pointed ears, bigger than your old human ones.");
 				else if (player.earType == EARS_CAT) 
-					outputText("  The " + player.hairDescript() + " on your head is parted by a pair of cute, fuzzy cat ears, sprouting from atop your head and pivoting towards any sudden noises.");
+					outputText("  The [hair] on your head is parted by a pair of cute, fuzzy cat ears, sprouting from atop your head and pivoting towards any sudden noises.");
 				else if (player.earType == EARS_LIZARD) 
-					outputText("  The " + player.hairDescript() + " atop your head makes it nigh-impossible to notice the two small rounded openings that are your ears.");
+					outputText("  The [hair] atop your head makes it nigh-impossible to notice the two small rounded openings that are your ears.");
 				else if (player.earType == EARS_BUNNY) 
-					outputText("  A pair of floppy rabbit ears stick up out of your " + player.hairDescript() + ", bouncing around as you walk.");
+					outputText("  A pair of floppy rabbit ears stick up out of your [hair], bouncing around as you walk.");
 				else if (player.earType == EARS_KANGAROO) 
-					outputText("  The " + player.hairDescript() + " atop your head is parted by a pair of long, furred kangaroo ears that stick out at an angle.");
+					outputText("  The [hair] atop your head is parted by a pair of long, furred kangaroo ears that stick out at an angle.");
 				else if (player.earType == EARS_FOX) 
-					outputText("  The " + player.hairDescript() + " atop your head is parted by a pair of large, adept fox ears that always seem to be listening.");
+					outputText("  The [hair] atop your head is parted by a pair of large, adept fox ears that always seem to be listening.");
 				else if (player.earType == EARS_DRAGON) 
-					outputText("  The " + player.hairDescript() + " atop your head is parted by a pair of rounded protrusions with small holes on the sides of your head serve as your ears.  Bony fins sprout behind them.");
+					outputText("  The [hair] atop your head is parted by a pair of rounded protrusions with small holes on the sides of your head serve as your ears.  Bony fins sprout behind them.");
 				else if (player.earType == EARS_RACCOON) 
-					outputText("  The " + player.hairDescript() + " on your head parts around a pair of egg-shaped, furry raccoon ears.");
+					outputText("  The [hair] on your head parts around a pair of egg-shaped, furry raccoon ears.");
 				else if (player.earType == EARS_MOUSE) 
-					outputText("  The " + player.hairDescript() + " atop your head is funneled between and around a pair of large, dish-shaped mouse ears that stick up prominently.");
+					outputText("  The [hair] atop your head is funneled between and around a pair of large, dish-shaped mouse ears that stick up prominently.");
 				//<mod> Mod-added ears
 				else if (player.earType == EARS_PIG) 
-					outputText("  The " + player.hairDescript() + " on your head is parted by a pair of pointy, floppy pig ears. They often flick about when you’re not thinking about it.");
+					outputText("  The [hair] on your head is parted by a pair of pointy, floppy pig ears. They often flick about when you’re not thinking about it.");
 				else if (player.earType == EARS_RHINO) 
-					outputText("  The " + player.hairDescript() + " on your head is parted by a pair of tubular rhino ears.");
+					outputText("  The [hair] on your head is parted by a pair of tubular rhino ears.");
 				else if (player.earType == EARS_ECHIDNA) 
-					outputText("  Your " + player.hairDescript() + " makes it near-impossible to see the small, rounded openings that are your ears.");
+					outputText("  Your [hair] makes it near-impossible to see the small, rounded openings that are your ears.");
 				else if (player.earType == EARS_DEER) 
-					outputText("  The " + player.hairDescript() + " on your head parts around a pair of deer-like ears that grow up from your head.");
+					outputText("  The [hair] on your head parts around a pair of deer-like ears that grow up from your head.");
 				//</mod>
 				if (player.gillType == GILLS_FISH) 
 				{
