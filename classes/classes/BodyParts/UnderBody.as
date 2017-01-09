@@ -1,7 +1,5 @@
 package classes.BodyParts 
 {
-	import classes.Creature;
-
 	/**
 	 * Container class for the players underbody
 	 * @since December 31, 2016
@@ -13,8 +11,6 @@ package classes.BodyParts
 
 		public var type:Number = UNDER_BODY_TYPE_NONE;
 		public var skin:Skin = new Skin();
-
-		private var _creature:Creature;
 
 		public function UnderBody() {}
 

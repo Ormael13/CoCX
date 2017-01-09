@@ -1,7 +1,5 @@
 package classes.BodyParts 
 {
-	import classes.Creature;
-
 	/**
 	 * Container class for the players skin
 	 * @since December 27, 2016
