@@ -1271,6 +1271,7 @@
 				changes++;
 				player.skinType = SKIN_TYPE_FUR;
 				player.skinDesc = "fur";
+				player.underBody.restore(); // Restore the underbody for now
 			}
 			//Ears - requires tail
 			if (player.earType != EARS_HORSE && player.tailType == TAIL_TYPE_HORSE && changes < changeLimit && rand(3) == 0) {
@@ -2886,6 +2887,7 @@
 					player.skinAdj = "smooth";
 					if (player.skinTone == "rough gray") player.skinTone = "gray";
 					player.skinType = SKIN_TYPE_PLAIN;
+					player.underBody.restore();
 					updateClaws(player.clawType);
 				}
 				//chance of hair change
@@ -2940,6 +2942,7 @@
 					player.skinAdj = "smooth";
 					if (player.skinTone == "rough gray") player.skinTone = "gray";
 					player.skinType = SKIN_TYPE_PLAIN;
+					player.underBody.restore();
 					updateClaws(player.clawType);
 				}
 				//chance of hair change
@@ -3433,6 +3436,7 @@
 				player.skinType = SKIN_TYPE_FUR;
 				player.hairColor = "black and white spotted";
 				player.furColor = player.hairColor;
+				player.underBody.restore(); // Restore the underbody for now
 			}
 			//if enhanced to probova give a shitty cow face
 			else if (enhanced && player.faceType != FACE_COW_MINOTAUR) {
@@ -3762,6 +3766,7 @@
 				player.skinAdj = "";
 				player.skinDesc = "skin";
 				player.skinType = SKIN_TYPE_PLAIN;
+				player.underBody.restore();
 				changes++;
 			}
 			//skinTone
@@ -3893,6 +3898,7 @@
 				player.skinType = SKIN_TYPE_GOO;
 				player.skinDesc = "skin";
 				player.skinAdj = "slimy";
+				player.underBody.restore();
 				if (player.skinTone != "green" && player.skinTone != "purple" && player.skinTone != "blue" && player.skinTone != "cerulean" && player.skinTone != "emerald") {
 					outputText("  Stranger still, your skintone changes to ");
 					var blaht:int = rand(10);
@@ -4099,6 +4105,7 @@
 					player.skinType = SKIN_TYPE_PLAIN;
 					player.skinDesc = "skin";
 					player.skinTone = "rough gray";
+					player.underBody.restore();
 					updateClaws(player.clawType);
 					changes++;
 				}
@@ -4107,6 +4114,7 @@
 					player.skinType = SKIN_TYPE_PLAIN;
 					player.skinDesc = "skin";
 					player.skinTone = "orange and black striped";
+					player.underBody.restore();
 					updateClaws(player.clawType);
 					changes++;
 				}
@@ -5591,6 +5599,7 @@
 				player.skinType = SKIN_TYPE_PLAIN;
 				player.skinDesc = "skin";
 				player.skinAdj  = "";
+				player.underBody.restore();
 				changes++;
 			}
 			//Removing gills
@@ -6469,6 +6478,7 @@
 				player.skinType = SKIN_TYPE_FUR;
 				player.skinDesc = "fur";
 				player.furColor = "brown";
+				player.underBody.restore(); // Restore the underbody for now
 				outputText("As you pull your hands in, you notice " + player.furColor + " fur growing on the backs of them.  All over your body the scene is repeated, covering you in the stuff.  <b>You now have fur!</b>");
 			}
 			//-Roo footsies (Req: Tail)
@@ -6683,6 +6693,7 @@
 				player.skinAdj = "";
 				player.skinType = SKIN_TYPE_PLAIN;
 				player.skinDesc = "skin";
+				player.underBody.restore();
 				updateClaws(player.clawType);
 				changes++;
 			}
@@ -7061,6 +7072,7 @@
 					player.skinDesc = "skin";
 					player.skinType = SKIN_TYPE_PLAIN;
 				}
+				player.underBody.restore();
 				updateClaws(player.clawType);
 				changes++;
 			}
@@ -7525,8 +7537,8 @@
 							player.furColor = randomChoice(KitsuneScene.basicKitsuneFur);
 				else
 					player.furColor = randomChoice("orange and white", "orange and white", "orange and white", "red and white", "black and white", "white", "tan", "brown");
-				changes++;
 				player.underBody.restore(); // Restore the underbody for now
+				changes++;
 			}
 			//[Grow Fox Legs]
 			//THIRD
@@ -7949,6 +7961,7 @@
 				player.skinType = SKIN_TYPE_PLAIN;
 				player.skinAdj = "";
 				player.skinDesc = "skin";
+				player.underBody.restore();
 				if (!InCollection(player.skinTone, tone)) player.skinTone = randomChoice(tone);
 				outputText(player.skinTone + " complexion.");
 				outputText("  <b>You now have " + player.skin() + "!</b>");
@@ -8624,6 +8637,7 @@
 				player.skinAdj = "";
 				player.skinDesc = "fur";
 				player.furColor = "gray";
+				player.underBody.restore(); // Restore the underbody for now
 				outputText("<b>You now have a warm coat of " + player.furColor + " raccoon fur!</b>");
 				changes++;
 			}
@@ -8898,6 +8912,7 @@
 				player.skinAdj = "";
 				player.skinDesc = "fur";
 				player.skinType = SKIN_TYPE_FUR;
+				player.underBody.restore(); // Restore the underbody for now
 				changes++;
 			}
 			player.refillHunger(10);
@@ -8973,6 +8988,7 @@
 					if (player.hasScales()) outputText("Your scales begin to itch as they begin falling out in droves, <b>revealing your inhumanly smooth " + player.skinTone + " skin</b> underneath.", false);
 					player.skinType = SKIN_TYPE_PLAIN;
 					player.skinDesc = "skin";
+					player.underBody.restore();
 				}
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
@@ -9294,6 +9310,7 @@
 				}
 				player.skinType = SKIN_TYPE_FUR;
 				player.furColor = player.hairColor;
+				player.underBody.restore(); // Restore the underbody for now
 				outputText("  <b>You now have " + player.furColor + " fur!</b>");
 				changes++;
 			}

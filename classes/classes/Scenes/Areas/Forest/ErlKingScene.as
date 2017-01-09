@@ -1040,6 +1040,7 @@ package classes.Scenes.Areas.Forest
 				player.skinAdj = "";
 				player.skinDesc = "fur";
 				player.furColor = "brown";
+				player.underBody.restore(); // Restore the underbody for now
 				changes++;
 			}
 			//Change face to normal

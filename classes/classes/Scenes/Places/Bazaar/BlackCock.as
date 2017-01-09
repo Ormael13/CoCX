@@ -1462,6 +1462,7 @@ package classes.Scenes.Places.Bazaar
 			if (rand(3) == 0 && changes < changeLimit && player.hasScales()) {
 				outputText("\n\nYou feel an odd rolling sensation as your scales begin to shift, spreading and reforming as they grow and disappear, <b>becoming normal human skin</b>.");
 				player.skinType = SKIN_TYPE_PLAIN;
+				player.underBody.restore();
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.armType != ARM_TYPE_HUMAN) {
@@ -1626,6 +1627,7 @@ package classes.Scenes.Places.Bazaar
 				player.skinAdj = "tough";
 				player.skinType = SKIN_TYPE_PLAIN;
 				player.skinDesc = "skin";
+				player.underBody.restore();
 				mutations.updateClaws(player.clawType);
 				changes++;
 			}
@@ -1886,6 +1888,7 @@ package classes.Scenes.Places.Bazaar
 				player.skinDesc = "fur";
 				player.skinType = SKIN_TYPE_FUR;
 				player.furColor = "brown";
+				player.underBody.restore(); // Restore the underbody for now
 				changes++;
 			}
 			//Gain Echidna ears
