@@ -75,7 +75,7 @@ BodyParts
 | `furColor` | `furColor`                | `player.skinData.furColor`  | **The fur color**<br>`player.skinData.furColor = "brown";`                                                                   |
 
 #### Additional mehods
-##### `public function description(noAdj:Boolean = false, noTone:Boolean = false):String`
+##### public function description(noAdj:Boolean = false, noTone:Boolean = false):String
 Always returns the players skin description, even if its hidden behind fur. Setting `noAdj` to `true` skips the adjective and setting `noTone` to `true` additionally skips the skin tone.
 
 ###### Usage table:
@@ -130,7 +130,60 @@ player.skinData.restore(false); // Restores all values including the skin tone
 ```
 
 ### UnderBody
-placeholder
+#### Property table
+| Property | Access example          | Description / Examples                                                 |
+|----------|-------------------------|------------------------------------------------------------------------|
+| `type`   | `player.underBody.type` | **The type**<br>`player.underBody.type = UNDER_BODY_TYPE_DRAGON;`      |
+| `skin`   | `player.underBody.skin` | **The skin on the underbody**<br>`player.underBody.skin = new Skin();` |
+
+#### Additional methods
+##### skinDescription
+Alias of `skin.description()` (Same as above, but for the skin on the underbody)
+
+##### skinFurScales
+Alias of `skin.skinFurScales()` (Same as above, but for the skin on the underbody)
+
+Parser tag: `[underbody.skinfurscales]` (case insensitive)
+
+#### Examples
+##### From lizard scales TF:
+```as3
+player.skinData.setProps({
+	type: SKIN_TYPE_LIZARD_SCALES,
+	adj: "",
+	desc: "scales"
+});
+player.underBody.type = UNDER_BODY_TYPE_LIZARD;
+player.underBody.skin.setProps(player.skinData); // copy the main skin props to the underBody skin ...
+player.underBody.skin.desc = "ventral scales";   // ... and only override the desc
+```
+
+##### Another example:
+Let's say, we intend to have some kind of turtle girl TF in CoC, the TF code *could* go this way (Not suggesting anything here, its just an example!):
+
+```as3
+// First step: The player grows lizard scales on his/her skin and/or underbody
+if ((!player.hasLizardScales() || [UNDER_BODY_TYPE_LIZARD, UNDER_BODY_TYPE_TURTLE].indexOf(player.underBody.type) == -1) && player.lowerBody == LOWER_BODY_TYPE_TURTLE /* && ... */) {
+	outputText("... You grow " + player.skinData.tone + " scales on your skin!");
+	player.skinData.setProps({
+		type: SKIN_TYPE_LIZARD_SCALES,
+		adj: "",
+		desc: "scales"
+	});
+	player.underBody.type = UNDER_BODY_TYPE_LIZARD;
+	player.underBody.skin.setProps(player.skinData); // copy the main skin props to the underBody skin ...
+	player.underBody.skin.desc = "ventral scales";   // ... and only override the desc
+	changes++;
+}
+
+// Second step: The player grows the signature turtle shell on his/her belly
+if (player.hasLizardScales() && player.underBody.type == UNDER_BODY_TYPE_LIZARD && player.lowerBody == LOWER_BODY_TYPE_TURTLE /* && ... */) {
+	outputText("... The [underBody.skinFurScales] on your belly start to harden to become a sturdy frontal shell to protect your body as a natural armor");
+	player.underBody.type = UNDER_BODY_TYPE_TURTLE; // We're done, yay!
+	changes++;
+}
+```
+
 
 ### RearBody
 placeholder
