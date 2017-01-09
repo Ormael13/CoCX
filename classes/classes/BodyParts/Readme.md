@@ -74,6 +74,46 @@ BodyParts
 | `adj`      | `skinAdj`                 | `player.skinData.adj`       | **The adjective** (changed with body lotions)<br>`player.skinData.adj = "smooth";`<br> → "You have **smooth**, green scales" |
 | `furColor` | `furColor`                | `player.skinData.furColor`  | **The fur color**<br>`player.skinData.furColor = "brown";`                                                                   |
 
+#### Additional mehods
+##### `public function description(noAdj:Boolean = false, noTone:Boolean = false):String`
+Always returns the players skin description, even if its hidden behind fur. Setting `noAdj` to `true` skips the adjective and setting `noTone` to `true` additionally skips the skin tone.
+
+###### Usage table:
+| Example call                              |   Parser tag   | Example result                       |
+|-------------------------------------------|----------------|--------------------------------------|
+| `player.skinData.description()`           | `[skin]`       | "You have **smooth, green scales**." |
+| `player.skinData.description(true)`       | `[skin.noadj]` | "You have **green scales**."         |
+| `player.skinData.description(true, true)` | `――――――――――――` | "You have **scales**."               |
+
+
+`Character.skin()` is now an alias of `BodyParts.Skin.description()`<br>
+In other words (for example):
+```as3
+outputText(player.skin(true, true));
+// is the same as calling
+outputText(player.skinData.description(true, true));
+```
+
+##### public function skinFurScales():String
+Moved from and aliased to `Creature.skinFurScales()`<br>
+Parser tag: `[skinfurscales]` (case insensitive)
+
+###### Example:
+```as3
+outputText("You have " + player.skinData.skinFurScales() + "!"); // and
+outputText("You have [skinFurScales]!");
+// both return: "You have soft, orange fur!"
+```
+Assuming that:
+- `type` is set to `SKIN_TYPE_FUR`
+- `adj` is set to "soft"
+- `furColor` is set to "orange"
+- `desc` is set to "fur"
+
+##### public function hasFur():Boolean
+Moved from and aliased to `Creature.hasFur()`<br>
+Returns true if the player has fur (aka `player.skinData.type == SKIN_TYPE_FUR`). Nuff said.
+
 #### Note
 I've added the optional param `keepTone` to the methods `restore()` and `setAllProps()` which defaults to true.
 Method headers:
@@ -89,10 +129,10 @@ player.skinData.restore();      // Restores all values except the skin tone
 player.skinData.restore(false); // Restores all values including the skin tone
 ```
 
-### RearBody
+### UnderBody
 placeholder
 
-### UnderBody
+### RearBody
 placeholder
 
 ### Neck
