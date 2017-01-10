@@ -4424,6 +4424,7 @@
 				else if (temp == 2) player.skinTone = "dark";
 				else if (temp == 3) player.skinTone = "light";
 				outputText(player.skinTone + " colored.</b>", false);
+				player.underBody.skin.tone = player.skinData.tone;
 				updateClaws(player.clawType);
 			}
 			//Change skin to normal
