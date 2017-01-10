@@ -51,33 +51,28 @@ package classes.BodyParts
 			return type == SKIN_TYPE_FUR;
 		}
 
-		public function restore(keepTone:Boolean = true):Skin
+		public function restore(keepTone:Boolean = true):void
 		{
 			type = SKIN_TYPE_PLAIN;
 			if (!keepTone) tone = "albino";
 			desc = "skin";
 			adj  = "";
 			furColor = "no";
-
-			return this;
 		}
 
-		public function setProps(p:Object):Skin
+		public function setProps(p:Object):void
 		{
 			if (p.hasOwnProperty('type')) type = p.type;
 			if (p.hasOwnProperty('tone')) tone = p.tone;
 			if (p.hasOwnProperty('desc')) desc = p.desc;
 			if (p.hasOwnProperty('adj'))  adj  = p.adj;
 			if (p.hasOwnProperty('furColor')) furColor = p.furColor;
-
-			return this;
 		}
 
-		public function setAllProps(p:Object, keepTone:Boolean = true):Skin
+		public function setAllProps(p:Object, keepTone:Boolean = true):void
 		{
 			restore(keepTone);
 			setProps(p);
-			return this;
 		}
 	}
 }
