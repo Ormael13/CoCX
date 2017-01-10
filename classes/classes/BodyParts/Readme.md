@@ -14,9 +14,6 @@ player.rearBody.restore(false);
 player.skinData.restore();
 ```
 
-Most methods return the object itself (`return this;`) to support method-chaining aka [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface).<br>
-However: In most cases, method-chaining isn't needed. So unless anyone gives me a few good examples, where method-chaining is useful, chances are that this feature is being removed in the future.
-
 General methods
 ---------------
 
