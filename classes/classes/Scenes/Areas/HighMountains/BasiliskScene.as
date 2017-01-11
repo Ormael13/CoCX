@@ -29,7 +29,7 @@ package classes.Scenes.Areas.HighMountains
 			spriteSelect(75);
 			clearOutput();
 			//First encounter: 
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00276] == 0) {
+			if (flags[kFLAGS.TIMES_ENCOUNTERED_BASILISK] == 0) {
 				outputText("You are carefully trailblazing up a steep pass in the jagged mountain peaks when a furious screech from high above you makes you start.\n\n", false);
 		
 				outputText("\"<i>Thiieeeeeeeeef, filthy thieeeeeeeeef!</i>\" A harpy flaps into view over the ridge, her face a picture of rage. You hastily assume a fighting stance- but the harpy completely ignores you, her gaze sliding over you and onto the rock wall behind you. \"<i>You can hide but you can't run, sneak thiieeeeeeeef! When I find you, I'm going to tear your naaaaaaaaasty little eyes out!</i>\" She flies on, screaming with anger, her head moving back and forth in jerky movements, scrying the landscape. You stare blankly in bafflement at this display, but are glad that a harpy's attention is on someone else for a change. Marveling at your fortune, you decide to press on.\n\n", false);
@@ -40,7 +40,7 @@ package classes.Scenes.Areas.HighMountains
 				var basilisk:Basilisk = new Basilisk();
 				//(spd loss)
 				Basilisk.basiliskSpeed(player,5);
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00276]++;
+				flags[kFLAGS.TIMES_ENCOUNTERED_BASILISK]++;
 				startCombat(basilisk);
 			}
 			//Standard encounter:
@@ -48,10 +48,10 @@ package classes.Scenes.Areas.HighMountains
 				outputText("You notice a large boulder ahead. There is something curiously shaped about it. A small, wet grey shape on it catches your eye...\n\n", false);
 		
 				outputText("You look away in the nick of time, and ready yourself to fight as the basilisk slides from his hiding place and advances upon you, his deadly eyes and sharp claws glinting coldly in the sunlight.\n\n", false);
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00276]++;
+				flags[kFLAGS.TIMES_ENCOUNTERED_BASILISK]++;
 				startCombat(new Basilisk());
 			}
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00276]++;
+			flags[kFLAGS.TIMES_ENCOUNTERED_BASILISK]++;
 			spriteSelect(75);
 		}
 		

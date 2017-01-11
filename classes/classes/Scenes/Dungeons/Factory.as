@@ -104,7 +104,7 @@ package classes.Scenes.Dungeons
 		private function unlockDoor():void {
 			clearOutput();
 			outputText("With a click, the padlock disengages and the door is now unlocked! Do you proceed?");
-			flags[kFLAGS.KAIZO_FACTORY_DOOR_UNLOCKED] = 1;
+			flags[kFLAGS.GRIMDARK_FACTORY_DOOR_UNLOCKED] = 1;
 			doYesNo(roomForemanOffice, roomMainChamber);
 		}
 		
@@ -115,7 +115,7 @@ package classes.Scenes.Dungeons
 		}
 		
 		private function takeSupervisorKey():void {
-			if (flags[kFLAGS.KAIZO_MODE] == 0) {
+			if (flags[kFLAGS.GRIMDARK_MODE] == 0) {
 				outputText("You search the desk and find a silver key labelled 'Supervisor'.\n\nYou take the <b>Supervisor Key</b> to keep with your other important items.", true);
 			}
 			else {

@@ -6,8 +6,24 @@ package classes.Scenes
 	public class PregnancyProgression extends BaseContent
 	{
 		public function PregnancyProgression() {}
-		
-		public function updatePregnancy():Boolean {
+
+		private function giveBirth():void
+		{
+			if (player.fertility < 15) player.fertility++;
+			if (player.fertility < 25) player.fertility++;
+			if (player.fertility < 40) player.fertility++;
+			if (player.findStatusEffect(StatusEffects.Birthed) < 0) player.createStatusEffect(StatusEffects.Birthed,1,0,0,0);
+			else {
+				player.addStatusValue(StatusEffects.Birthed,1,1);
+				if (player.findPerk(PerkLib.BroodMother) < 0 && player.statusEffectv1(StatusEffects.Birthed) >= 10) {
+					output.text("\n<b>You have gained the Brood Mother perk</b> (Pregnancies progress twice as fast as a normal woman's).\n");
+					player.createPerk(PerkLib.BroodMother,0,0,0,0);
+				}
+			}
+		}
+
+		public function updatePregnancy():Boolean
+		{
 			var displayedUpdate:Boolean = false;
 			var pregText:String = "";
 			if ((player.pregnancyIncubation <= 0 && player.buttPregnancyIncubation <= 0) ||
@@ -24,19 +40,8 @@ package classes.Scenes
 				player.removeStatusEffect(StatusEffects.Heat);
 				displayedUpdate = true;
 			}
-			if (player.pregnancyIncubation == 1) {
-				if (player.fertility < 15) player.fertility++;
-				if (player.fertility < 25) player.fertility++;
-				if (player.fertility < 40) player.fertility++;
-				if (player.findStatusEffect(StatusEffects.Birthed) < 0) player.createStatusEffect(StatusEffects.Birthed,1,0,0,0);
-				else {
-					player.addStatusValue(StatusEffects.Birthed,1,1);
-					if (player.findPerk(PerkLib.BroodMother) < 0 && player.statusEffectv1(StatusEffects.Birthed) >= 10) {
-						outputText("\n<b>You have gained the Brood Mother perk</b> (Pregnancies progress twice as fast as a normal woman's).\n", false);
-						player.createPerk(PerkLib.BroodMother,0,0,0,0);
-					}
-				}
-			}
+			if (player.pregnancyIncubation == 1 && player.pregnancyType != PregnancyStore.PREGNANCY_BENOIT) giveBirth();
+
 			if (player.pregnancyIncubation > 0 && player.pregnancyIncubation < 2) player.knockUpForce(player.pregnancyType, 1);
 			//IF INCUBATION IS VAGINAL
 			if (player.pregnancyIncubation > 1) {
@@ -640,7 +645,7 @@ package classes.Scenes
 				//Shark Pregnancy!
 				if (player.pregnancyType == PregnancyStore.PREGNANCY_IZMA) {
 					if (player.pregnancyIncubation == 275) {
-						if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>You wake up feeling kind of nauseous.  Izma insists that you stay in bed and won't hear a word otherwise, tending to you in your sickened state.  When you finally feel better, she helps you up.  \"<i>You know, " + player.short + "... I think you might be pregnant.</i>\" Izma says, sounding very pleased at the idea. You have to admit, you do seem to have gained some weight...</b>\n", false);
+						if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) outputText("\n<b>You wake up feeling kind of nauseous.  Izma insists that you stay in bed and won't hear a word otherwise, tending to you in your sickened state.  When you finally feel better, she helps you up.  \"<i>You know, " + player.short + "... I think you might be pregnant.</i>\" Izma says, sounding very pleased at the idea. You have to admit, you do seem to have gained some weight...</b>\n", false);
 						else outputText("\n<b>You wake up feeling bloated, and your belly is actually looking a little puffy. At the same time, though, you have the oddest cravings... you could really go for some fish.</b>\n", false);
 						displayedUpdate = true;
 					}
@@ -649,7 +654,7 @@ package classes.Scenes
 						displayedUpdate = true;	
 					}
 					if (player.pregnancyIncubation == 216) {
-						if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>Your stomach is undeniably swollen now, and you feel thirsty all the time. Izma is always there to bring you water, even anticipating your thirst before you recognize it yourself. She smiles all the time now, and seems to be very pleased with herself.", false);
+						if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) outputText("\n<b>Your stomach is undeniably swollen now, and you feel thirsty all the time. Izma is always there to bring you water, even anticipating your thirst before you recognize it yourself. She smiles all the time now, and seems to be very pleased with herself.", false);
 						else outputText("\n<b>There is no question you're pregnant; your belly is getting bigger and for some reason, you feel thirsty ALL the time.", false);
 						outputText("</b>", false);
 						outputText("\n", false);
@@ -657,18 +662,18 @@ package classes.Scenes
 						displayedUpdate = true;
 					}
 					if (player.pregnancyIncubation == 180) {
-						if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>There is no denying your pregnancy, and Izma is head-over-heels with your 'beautifully bountiful new body', as she puts it. She is forever finding an excuse to touch your bulging stomach, and does her best to coax you to rest against her. However, when you do sit against her, she invariably starts getting hard underneath you.</b>\n", false);
+						if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) outputText("\n<b>There is no denying your pregnancy, and Izma is head-over-heels with your 'beautifully bountiful new body', as she puts it. She is forever finding an excuse to touch your bulging stomach, and does her best to coax you to rest against her. However, when you do sit against her, she invariably starts getting hard underneath you.</b>\n", false);
 						else outputText("\n<b>There is no denying your pregnancy.  Your belly bulges and occasionally squirms as your growing offspring shifts position.</b>\n", false);
 						displayedUpdate = true;				
 					}
 					if (player.pregnancyIncubation == 120) {
-						if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>Your stomach is swollen and gravid; you can feel the baby inside you kicking and wriggling. Izma is always on hand now, it seems, and she won't dream of you fetching your own food or picking up anything you've dropped. She's always dropping hints about how you should try going around naked for comfort's sake. While you are unwilling to do so, you find yourself dreaming about sinking into cool, clean water, and take many baths and swims. Whatever is inside you always seems to like it; they get so much more active when you're in the water.</b>\n", false);
+						if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) outputText("\n<b>Your stomach is swollen and gravid; you can feel the baby inside you kicking and wriggling. Izma is always on hand now, it seems, and she won't dream of you fetching your own food or picking up anything you've dropped. She's always dropping hints about how you should try going around naked for comfort's sake. While you are unwilling to do so, you find yourself dreaming about sinking into cool, clean water, and take many baths and swims. Whatever is inside you always seems to like it; they get so much more active when you're in the water.</b>\n", false);
 						else outputText("\n<b>Your stomach is swollen and gravid; you can feel the baby inside you kicking and wriggling.  You find yourself dreaming about sinking into cool, clean water, and take many baths and swims. Whatever is inside you always seems to like it; they get so much more active when you're in the water.</b>\n", false);
 						dynStats("spe", -2, "lib", 1, "sen", 1, "lus", 4);
 						displayedUpdate = true;
 					}
 					if (player.pregnancyIncubation == 72) {
-						if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>You dream of the water, of a life under the waves, where it's cool and wet and you are free. You spend as much time in the river as possible now, the baby inside you kicking and squirming impatiently, eager to be free of the confines of your womb and have much greater depths to swim and play in. Izma makes no secret of her pleasure and informs you that you should deliver soon.</b>\n", false);
+						if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) outputText("\n<b>You dream of the water, of a life under the waves, where it's cool and wet and you are free. You spend as much time in the river as possible now, the baby inside you kicking and squirming impatiently, eager to be free of the confines of your womb and have much greater depths to swim and play in. Izma makes no secret of her pleasure and informs you that you should deliver soon.</b>\n", false);
 						else outputText("\n<b>You dream of the water, of a life under the waves, where it's cool and wet and you are free. You spend as much time in the river as possible now, the baby inside you kicking and squirming impatiently, eager to be free of the confines of your womb and have much greater depths to swim and play in.  The time for delivery will probably come soon.</b>\n", false);
 						displayedUpdate = true;
 					}
@@ -1523,6 +1528,7 @@ package classes.Scenes
 				else {
 					player.knockUpForce(); //Clear Pregnancy
 					displayedUpdate = true;
+					giveBirth();
 					getGame().bazaar.benoit.popOutBenoitEggs();
 				}
 			}
@@ -1822,13 +1828,13 @@ package classes.Scenes
 				//326 Number of sons grown
 				//327 Number of sons pending
 				//328 growup countdown
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00327]++;
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00328] == 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00328] = 150;		
+				flags[kFLAGS.MINOTAUR_SONS_PENDING]++;
+				if (flags[kFLAGS.MINOTAUR_SONS_GROWUP_COUNTER] == 0) flags[kFLAGS.MINOTAUR_SONS_GROWUP_COUNTER] = 150;		
 			}
 			//Amily failsafe - converts PC with pure babies to mouse babies if Amily is corrupted
 			if (player.pregnancyIncubation == 1 && player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) 
 			{
-				if (flags[kFLAGS.AMILY_FOLLOWER] == 2 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] > 0) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
+				if (flags[kFLAGS.AMILY_FOLLOWER] == 2 || flags[kFLAGS.AMILY_CORRUPTION] > 0) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
 			}
 			//Amily failsafe - converts PC with pure babies to mouse babies if Amily is with Urta
 			if (player.pregnancyIncubation == 1 && player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) 
@@ -2085,7 +2091,8 @@ package classes.Scenes
 			return displayedUpdate;
 		}
 
-		public function eggDescript(plural:Boolean = true):String {
+		public function eggDescript(plural:Boolean = true):String
+		{
 			var descript:String = "";
 			if (player.findStatusEffect(StatusEffects.Eggs) >= 0) {
 				descript += num2Text(player.statusEffectv3(StatusEffects.Eggs)) + " ";

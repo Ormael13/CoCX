@@ -208,7 +208,7 @@ public function telAdreMenu():void {
 		kGAMECLASS.urtaPregs.urtaSpecialDeliveries();
 		return;
 	}
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] == -1) {
+	if (flags[kFLAGS.MADDIE_STATUS] == -1) {
 		maddie.runAwayMaddieFollowup();
 		return;
 	}
@@ -242,10 +242,10 @@ public function telAdreMenuShow():void { //Just displays the normal Tel'Adre men
 	addButton(6, "Pawn", oswaldPawn);
 	addButton(7, "Tower", library.visitZeMagesTower);
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
-	if (flags[kFLAGS.KAIZO_MODE] > 0) addButton(14, "Leave", leaveTelAdreKaizo);
+	if (flags[kFLAGS.GRIMDARK_MODE] > 0) addButton(14, "Leave", leaveTelAdreGrimdark);
 }
 
-		public function leaveTelAdreKaizo():void {
+		public function leaveTelAdreGrimdark():void {
 			inRoomedDungeonResume = getGame().dungeons.resumeFromFight;
 			getGame().dungeons._currentRoom = "desert";
 			getGame().dungeons.move(getGame().dungeons._currentRoom);
@@ -1142,7 +1142,7 @@ public function barTelAdre():void {
 		button = anotherButton(button,"Ask4Amily",kGAMECLASS.followerInteractions.askAboutAmily);
 	}
 	//DOMINIKA
-	if (model.time.hours > 17 && model.time.hours < 20 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] != -1) {
+	if (model.time.hours > 17 && model.time.hours < 20 && flags[kFLAGS.DOMINIKA_STAGE] != -1) {
 		button = anotherButton(button,"Dominika",dominika.fellatrixBarApproach);
 	}
 	//EDRYN!
@@ -1202,7 +1202,7 @@ public function barTelAdre():void {
 	//NANCY
 	if (auntNancy.auntNancy(false)) {
 		auntNancy.auntNancy(true);
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00263] > 0) button = anotherButton(button,"Nancy",auntNancy.interactWithAuntNancy);
+		if (flags[kFLAGS.NANCY_MET] > 0) button = anotherButton(button,"Nancy",auntNancy.interactWithAuntNancy);
 		else button = anotherButton(button,"Barkeep",auntNancy.interactWithAuntNancy);
 	}
 	else outputText("\n\nIt doesn't look like there's a bartender working at the moment.", false);
@@ -1270,7 +1270,7 @@ public function barTelAdre():void {
 		}
 		//Urta X Scylla threesome
 		if (scylla.action == Scylla.SCYLLA_ACTION_FUCKING_URTA) {
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] == 0)
+			if (flags[kFLAGS.TIMES_CAUGHT_URTA_WITH_SCYLLA] == 0)
 				outputText("\n\n<b>Though Urta would normally be here getting sloshed, her usual spot is completely vacant.  You ask around but all you get are shrugs and giggles.  Something isn't quite right here.  You see an empty bottle of one of her favorite brands of whiskey still rolling on her table, so she can't have been gone long.  Maybe she had guard business, or had to head to the back rooms for something?</b>");
 			else
 				outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank mug of something potent and alcoholic.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...");
@@ -1411,12 +1411,12 @@ private function oldbarTelAdre():void {
 	if (!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] != 1 && model.time.hours < 15) {
 		//Scylla + Urta sitting in a tree
 		// SOME COMFORT     FUCKED URTA      NOT PISSED      DRUNK TIME    SCYLLA TO LV4    RANDOM CHANCE  HAS THIS HAPPENED BEFORE? SCYLLA REQS ->
-		if (flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] == 0 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 2 && flags[kFLAGS.TIMES_FUCKED_URTA] > 0 && flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] < 1 && (kGAMECLASS.urta.urtaDrunk() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0) && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 3 && rand(3) == 0 && (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] == 0 || (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] > 0)) && ((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0 && !kGAMECLASS.urta.urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && misc1Name != "Scylla") {
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0) {
+		if (flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] == 0 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 2 && flags[kFLAGS.TIMES_FUCKED_URTA] > 0 && flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] < 1 && (kGAMECLASS.urta.urtaDrunk() || flags[kFLAGS.TIMES_CAUGHT_URTA_WITH_SCYLLA] > 0) && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 3 && rand(3) == 0 && (flags[kFLAGS.TIMES_CAUGHT_URTA_WITH_SCYLLA] == 0 || (flags[kFLAGS.URTA_BANNED_FROM_SCYLLA] == 0 && flags[kFLAGS.URTA_CONFRONTED_SCYLLA] > 0)) && ((flags[kFLAGS.TIMES_CAUGHT_URTA_WITH_SCYLLA] > 0 && !kGAMECLASS.urta.urtaDrunk()) || player.balls > 0) && player.totalCocks() > 0 && misc1Name != "Scylla") {
+			if (flags[kFLAGS.TIMES_CAUGHT_URTA_WITH_SCYLLA] > 0) {
 				outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank glass of water.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...", false);
 			}
 			else {
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] == 0) {
+				if (flags[kFLAGS.TIMES_CAUGHT_URTA_WITH_SCYLLA] == 0) {
 					outputText("\n\n<b>Though Urta would normally be here getting sloshed, her usual spot is completely vacant.  You ask around but all you get are shrugs and giggles.  Something isn't quite right here.  You see an empty bottle of one of her favorite brands of whiskey still rolling on her table, so she can't have been gone long.  Maybe she had guard business, or had to head to the back rooms for something?</b>", false);
 				}
 				else {
@@ -1444,7 +1444,7 @@ private function oldbarTelAdre():void {
 		backroomT = "Ask4Amily";
 	}
 	var dominika2:Number = 0;
-	if (model.time.hours > 17 && model.time.hours < 20 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] != -1) {
+	if (model.time.hours > 17 && model.time.hours < 20 && flags[kFLAGS.DOMINIKA_STAGE] != -1) {
 		dominika2 = 2739;
 		dominika.fellatrixBarAppearance();
 	}
@@ -1453,7 +1453,7 @@ private function oldbarTelAdre():void {
 	var nancyText:String = "Barkeep";
 	if (auntNancy.auntNancy(false)) {
 		auntNancy.auntNancy(true);
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00263] > 0) nancyText = "Nancy";
+		if (flags[kFLAGS.NANCY_MET] > 0) nancyText = "Nancy";
 		nancy = auntNancy.interactWithAuntNancy;
 	}
 	else outputText("\n\nIt doesn't look like there's a bartender working at the moment.", false);
@@ -2264,7 +2264,7 @@ private function gymMenu():void {
 	var lottie2:Function = lottie.lottieAppearance(false);
 	var lottieB:String = "Pig-Lady";
 	var loppe2:Function =null;
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0)
+	if (flags[kFLAGS.LOTTIE_ENCOUNTER_COUNTER] > 0)
 		lottieB = "Lottie";
 	if (ifris.ifrisIntro())
 		ifris2 = ifris.approachIfris;

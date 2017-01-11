@@ -1910,15 +1910,15 @@ use namespace kGAMECLASS;
 				}
 			}
 			if (findPerk(PerkLib.Diapause) >= 0) {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] += 3 + rand(3);
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 1;
+				flags[kFLAGS.DIAPAUSE_FLUID_AMOUNT] += 3 + rand(3);
+				flags[kFLAGS.DIAPAUSE_NEEDS_DISPLAYING] = 1;
 			}
 
 		}
 
 		public function minoCumAddiction(raw:Number = 10):void {
 			//Increment minotaur cum intake count
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00340]++;
+			flags[kFLAGS.MINOTAUR_CUM_INTAKE_COUNT]++;
 			//Fix if variables go out of range.
 			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0;
 			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] = 0;

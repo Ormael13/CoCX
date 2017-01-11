@@ -150,15 +150,15 @@ public function urtaAtBar():Boolean { //Is Urta physically at the Wet Bitch?
 public function urtaDrunk():Boolean {
 	//Preg = no drinking!
 	if (pregnancy.isPregnant) return false;
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] == -1) return false;
-	if (model.time.hours > 12 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] < 1) return true;
-	if (model.time.hours > 8 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] >= 1) return true;
+	if (flags[kFLAGS.URTA_DRINK_FREQUENCY] == -1) return false;
+	if (model.time.hours > 12 && flags[kFLAGS.URTA_DRINK_FREQUENCY] < 1) return true;
+	if (model.time.hours > 8 && flags[kFLAGS.URTA_DRINK_FREQUENCY] >= 1) return true;
 	else return false;
 }
 
 private function urtaOpenAboutEdryn():Boolean {
 	//Did it come out from the scylla threesome?
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] > 0) return true;
+	if (flags[kFLAGS.URTA_CONFRONTED_SCYLLA] > 0) return true;
 	//Did it come out from marble?
 	if (flags[kFLAGS.URTA_KNOWS_PC_HAS_MARBLE_FOLLOWER] > 0) return true;
 	//Did it come out from discussions?
@@ -203,11 +203,11 @@ public function urtaBarDescript():Boolean {
 		return true;
 	}
 	//Raphael betrayed reward
-	if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00148] == 0) {
+	if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -1 && flags[kFLAGS.URTA_PAID_OUT_RAPHAELS_BOUNTY] == 0) {
 		outputText("Urta has an ecstatic grin plastered across her muzzle, and it only gets wider when she sees you.  Perhaps you should see what all the fuss is about?", false);
 		return true;
 	}
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00350] == 1) {
+	if (flags[kFLAGS.URTA_AMILY_FOLLOWUP_NEEDED] == 1) {
 		outputText("Urta is sitting at her usual table, holding her head in her hands.  She doesn't even seem to notice you.", false);
 		return true;
 	}
@@ -217,7 +217,7 @@ public function urtaBarDescript():Boolean {
 		return true;
 	}
 	//Post Scylla Appearance
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0) {
+	if (flags[kFLAGS.URTA_CONFRONTED_SCYLLA] == 0 && flags[kFLAGS.TIMES_CAUGHT_URTA_WITH_SCYLLA] > 0) {
 		outputText("Urta's at her normal table, nursing a glass of water with nary a bottle of alcohol around.  She's fidgety and constantly glancing your way, but she never meets your eyes or acknowledges that she saw you.  Something is eating away at her.", false);
 		return true;
 	}
@@ -247,7 +247,7 @@ public function urtaBarDescript():Boolean {
 	}
 	//[Love Urta Bar Appearance]
 	if (flags[kFLAGS.URTA_PC_LOVE_COUNTER] == 1) {
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] == -1 || !urtaDrunk()) outputText("Urta is sitting at her usual table, sipping a glass of wine and wearing a form-fitting evening gown of shimmering black.  She looks up at you, happiness filling her eyes when she notices you entering the bar.", false);
+		if (flags[kFLAGS.URTA_DRINK_FREQUENCY] == -1 || !urtaDrunk()) outputText("Urta is sitting at her usual table, sipping a glass of wine and wearing a form-fitting evening gown of shimmering black.  She looks up at you, happiness filling her eyes when she notices you entering the bar.", false);
 		//(DRUNK)
 		else outputText("Urta is sitting at her usual table wearing a shimmering black dress.  She's pretty clearly sloshed judging by her bleary gaze as she looks up at you.  The front of her dress visibly tents, and she waves you over with a lecherous grin.", false);
 		return true;
@@ -279,8 +279,8 @@ public function urtaBarApproach():void {
 	if ((player.hasCock() && player.cockThatFits(urtaCapacity()) >= 0) || player.hasKeyItem("Deluxe Dildo") >= 0) spank = spankTheShitOutOfUrtaAndMakeHerCreamHerselfFromProstateStimulationAloneLikeTheHornyDrunkenSlutSheReallyIs;
 	clearOutput();
 	//Raphael Reward
-	if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00148] == 0) {
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00148] = 1;
+	if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -1 && flags[kFLAGS.URTA_PAID_OUT_RAPHAELS_BOUNTY] == 0) {
+		flags[kFLAGS.URTA_PAID_OUT_RAPHAELS_BOUNTY] = 1;
 		player.gems += 1000;
 		statScreenRefresh();
 		outputText(images.showImage("urta-bar"), false);
@@ -297,7 +297,7 @@ public function urtaBarApproach():void {
 		return;
 	}
 	//Post Amily Sad Shit
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00350] == 1) {
+	if (flags[kFLAGS.URTA_AMILY_FOLLOWUP_NEEDED] == 1) {
 		amilyXUrtaUrtaFallout();
 		return;
 	}
@@ -313,8 +313,8 @@ public function urtaBarApproach():void {
 		return;
 	}
 	//Post Scylla discussion
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0) {
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] = 1;
+	if (flags[kFLAGS.URTA_CONFRONTED_SCYLLA] == 0 && flags[kFLAGS.TIMES_CAUGHT_URTA_WITH_SCYLLA] > 0) {
+		flags[kFLAGS.URTA_CONFRONTED_SCYLLA] = 1;
 		outputText("The apprehensive fox-morph's gaze lurches up at the sound of your approach, eyes going wide with nervousness.  Clearly she remembers her inebriated encounter with Scylla and is a little worried about the implications.  You sidle up to the table and look her in the eye questioningly – she must have something to say.\n\n", false);
 
 		outputText("\"<i>I... I want to apologize for the other night.  ", false);
@@ -381,7 +381,7 @@ public function urtaBarApproach():void {
 	if (flags[kFLAGS.URTA_PC_LOVE_COUNTER] == 1)
 	{
 		//Sworn off drinking, up till noon, or up to 8 if 'drink more'
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] == -1 || !urtaDrunk()) {
+		if (flags[kFLAGS.URTA_DRINK_FREQUENCY] == -1 || !urtaDrunk()) {
 			outputText(images.showImage("urta-bar-drunk"), false);
 			outputText("You walk up to Urta and you see her pivot herself to the side.  Her dress visibly tents at the sight of you, and you smirk as you realize she shifted in position to avoid slamming her hardening cock into the bottom of the table.  You cuddle close and wrap an arm around your lover, giving her a quick kiss on the lips and fondling her through her dress.  The tent immediately darkens as a rush of pre soaks into the material, and Urta half-pants, half-asks, \"<i>Oooh, lover, what do you have in mind today?</i>\"\n\n", false);
 			outputText("You could go back to her place, suck her off under the table, or eat her out under the table.", false);
@@ -439,7 +439,7 @@ public function urtaBarApproach():void {
 	//[URTA FRIEND APPROACH]
 
 	//[URTA DRUNK AND NOT TAKING NO FOR AN ANSWER] You approach Urta, but as you get closer you can smell the alcohol cloying the air around her.  Sizing you up with bleary eyes, Urta reaches out and grabs you, pulling you down onto her lap.  You can feel her heartbeat through her 'addition' as it hardens and your butt-cheek.
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] != -1 && urtaDrunk()) {
+	if (flags[kFLAGS.URTA_DRINK_FREQUENCY] != -1 && urtaDrunk()) {
 		outputText(images.showImage("urta-bar-drunk"), false);
 		outputText("The drunken fox roughly gropes you and whispers in your ear, \"<i>I NEED a good fuck right now, and it feels like someone wants a piece of Urta.  I can guess just which piece you're wanting too.  The only question is do I ", false);
 		//CUT FOR NOW outputText("throw you over the table and fuck you,", false);
@@ -2194,7 +2194,7 @@ public function scyllaAndUrtaSittingInATree():void {
 	urtaSprite();
 	clearOutput();
 	//Increment 'times caught with Scylla'
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143]++;
+	flags[kFLAGS.TIMES_CAUGHT_URTA_WITH_SCYLLA]++;
 
 
 	if (!urtaDrunk()) {
@@ -2204,7 +2204,7 @@ public function scyllaAndUrtaSittingInATree():void {
 
 	menu();
 
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] > 0)
+	if (flags[kFLAGS.URTA_BANNED_FROM_SCYLLA] == 0 && flags[kFLAGS.URTA_CONFRONTED_SCYLLA] > 0)
 	{
 		outputText("You meander towards the back-rooms and a canine waitress springs forward with a key clutched in her paw.  She blushes furiously and explains that she was tipped generously to hand it to you if you arrived.  You accept the proffered tool and smile.  It must be cheaper to pay someone to wait with a key than to fix the door each time the three of you meet up!  You snicker to yourself as you plunge the key into the lock's waiting receptacle, turn it, and push your way inside.  The scene in front of you is as arousing as it is familiar.\n\n", false);
 
@@ -2505,7 +2505,7 @@ private function watchTwoHotBitchesAndJerkIt():void {
 	outputText("Finally spent, you slump back and smile.\n\n", false);
 
 	outputText("Scylla looks shocked, as if she's seeing you for the first time, but her nose twitches and she starts to shovel your seed into her mouth with greedy abandon.  Even so, her body rapidly 'digests' the fluid intake, and the nun starts to slim up before your eyes.  Urta wobbles up onto shaky legs and stumbles into you, giving you a wet kiss that tastes faintly of your salty leavings and then passionately hugs you.  She breaks the embrace and slurs, ", false);
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] == 1) outputText("\"<i>We need to do thish again!</i>\"", false);
+	if (flags[kFLAGS.TIMES_CAUGHT_URTA_WITH_SCYLLA] == 1) outputText("\"<i>We need to do thish again!</i>\"", false);
 	else outputText("\"<i>You're the besht " + player.mf("man","woman") + " a girl could ashk for.</i>\"", false);
 	outputText("  Before you can answer, she gives your ass a slap and finds a water barrel to wash up in.  Scylla finishes her 'meal' and looks up at you, her alabaster skin turning completely crimson before she too runs off to clean up.\n\n", false);
 	outputText("You smile happily and pick up your " + player.armorName + ".  It's past time you checked up on your camp.", false);
@@ -2579,7 +2579,7 @@ private function makeUrtaSitOnYourLapWithScylla():void {
 	else if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] < 11) outputText("a nervous smile on her face, but gives you a quick peck all the same.", false);
 	else outputText("a satisfied smile on her face, and crushes her lips against yours in a passionate kiss.", false);
 	outputText("  She says, \"<i>I think I'll need to help Scylla to her room... somehow whatever she did to me must have pulled all the alcohol out of me and into my cum.  Don't worry, I'll ", false);
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] <= 1) outputText("pay for the door and ", false);
+	if (flags[kFLAGS.TIMES_CAUGHT_URTA_WITH_SCYLLA] <= 1) outputText("pay for the door and ", false);
 	outputText("make sure she's ok.</i>\"\n\n", false);
 
 	outputText("Did her cock just twitch?  No, you scold yourself; it couldn't have, not after two orgasms like that.  Urta hooks her arm around the giggling nun's midsection and pulls the stumbling sister towards the doorway.  Scylla looks back at you and half-giggles, half-slurs, \"<i>Tee-hee, thish ish so much fun!  I love you guysh!</i>\"\n\n", false);
@@ -2603,7 +2603,7 @@ private function makeUrtaSitOnYourLapWithScylla():void {
 private function tellUrtaNoMoreScylla():void {
 	urtaSprite();
 	clearOutput();
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] = 1;
+	flags[kFLAGS.URTA_BANNED_FROM_SCYLLA] = 1;
 	outputText("You let Urta know that you're willing to overlook this, but that Scylla is a slippery slope that's best avoided.  She nods, a sober expression on her vulpine face.  Once you finish, she replies, \"<i>I understand, but you need to know – when 'it' gets too much for me to handle... if you aren't around to help I'm going to see Edryn.  S-she helps... if it wasn't for her I probably would've given up and done something stupid a long time ago.  What we have is more important, but unless we can get together every couple days I'll NEED to visit her.  ", false);
 	if (urtaLove()) outputText("Just please, don't doubt my love for you.  ", false);
 	outputText("Do I need to stop drinking too?", false);
@@ -2646,7 +2646,7 @@ private function tellUrtaToBeADrunkenHussy():void {
 	outputText(" and explain that when she gets drunk, lets her guard down, and gets a little more aggressive... you like it.  A lot.  Her ears perk up at your words, though her expression is a little uncertain while you explain it.  By the time you finish, something warm brushes by your " + player.leg() + " and gently 'thunks' the table.  Clearly she's as into the idea as you.\n\n", false);
 
 	outputText("Urta smiles, lewdly at first, though it carries a bit of a predatory glint as she waves down a waitress and orders a full bottle of Barkardi 151.  You give her a rueful smile, a stroke under the table, and a kiss just bursting with tongue before you conclude the conversation.  Urta's going to be a lot of fun from now on...", false);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] = 1;
+	flags[kFLAGS.URTA_DRINK_FREQUENCY] = 1;
 	dynStats("lus", 5);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2655,7 +2655,7 @@ private function tellUrtaToStopBeingALush():void {
 	urtaSprite();
 	clearOutput();
 	outputText("You sigh and explain that her alcoholism isn't helping anyone – not her and certainly not her relationships with others.  She nods with a knowing, sober look on her face as you recount how much harder her drinking has made your relationship.  She promises you that she won't ever get that drunk again, though she warns that it will be hard to swear off alcohol entirely.  A look of resolve enters her eyes, and she leans over the table to kiss you on the lips.  The two of you wrap up the conversation knowing that you've probably seen the last of drunken Urta.\n\n", false);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] = -1;
+	flags[kFLAGS.URTA_DRINK_FREQUENCY] = -1;
 	doNext(camp.returnToCampUseOneHour);
 }
 //[Don't Change]
@@ -2672,7 +2672,7 @@ private function tellUrtaToStayTheSame():void {
 }
 
 private function amilyXUrtaUrtaFallout(): void {
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00350] = 2;
+	flags[kFLAGS.URTA_AMILY_FOLLOWUP_NEEDED] = 2;
 	urtaSprite();
 	clearOutput();
 	outputText("You ", false);
@@ -2952,7 +2952,7 @@ private function urtaDiscussesTheWatch():void {
 private function urtaDiscussesAlcholism():void {
 	clearOutput();
 	urtaSprite();
-	if (flags[kFLAGS.DISCUSSED_URTA_ALCOHOLISM] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] == 0) {
+	if (flags[kFLAGS.DISCUSSED_URTA_ALCOHOLISM] == 0 && flags[kFLAGS.URTA_CONFRONTED_SCYLLA] == 0) {
 		outputText("You quietly inform Urta that you and she need to talk about her drinking habit.  She swallows nervously and insists, \"<i>I - I only drink to try and keep my cock under control.</i>\"");
 		outputText("\n\nYou point out that her actions clearly belie that statement - she would never ask you to jerk her off in public or let her fuck your ass in the middle of the bar when sober.  Urta flinches at your words, ");
 		if (player.cor < 33)
@@ -2982,10 +2982,10 @@ private function urtaDiscussesAlcholism():void {
 	}
 	else {
 		outputText("You tell Urta that you want to discuss her newfound drinking habits.  The grey-furred fox-morph meets your gaze calmly.  \"<i>Really?  What more do you have in mind?</i>\" she asks.");
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] == 1)
+		if (flags[kFLAGS.URTA_DRINK_FREQUENCY] == 1)
 			outputText("  \"<i>I can't drink any more than I already do - I'm kind of pushing the laws to drink as much as I do already.</i>\"  She burps loudly, then starts on another bottle.");
 		else
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] == 0)
+			if (flags[kFLAGS.URTA_DRINK_FREQUENCY] == 0)
 				outputText("  \"<i>You said you didn't mind me drinking as much as I do... are you going to ask me to cut down?</i>\" she asks, calmly and clearly assuming that's what you intend.");
 			else
 				outputText("  \"<i>I said it before, I'll say it again, I'm not going to stop drinking entirely - there's nothing wrong with a few cold ones to take the edge off.  I don't drink myself stupid any more; that should be enough for you,</i>\" she replies, defensively.");
@@ -3006,7 +3006,7 @@ private function urtaDiscussAlcoholDrinkMore():void {
 	}
 	//{clear Urta sex cooldown}
 	//{Boozehound Urta tag flagged}
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] = 1;
+	flags[kFLAGS.URTA_DRINK_FREQUENCY] = 1;
 	flags[kFLAGS.DISCUSSED_URTA_ALCOHOLISM] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -3020,7 +3020,7 @@ private function urtaDiscussAlcoholDrinkLess():void {
 	}
 	outputText(".  Her eyes glitter with steely resolve, and she leans over the table to kiss you on the lips.  The two of you wrap up the conversation, with you hoping that you've seen the last of drunken Urta.");
 	//{Sober Urta tag flagged}
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] = -1;
+	flags[kFLAGS.URTA_DRINK_FREQUENCY] = -1;
 	flags[kFLAGS.DISCUSSED_URTA_ALCOHOLISM] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -3034,7 +3034,7 @@ private function urtaDiscussAlcoholNoChange():void {
 	if (flags[kFLAGS.DISCUSSED_URTA_ALCOHOLISM] == 0) urtaLove(1);
 	flags[kFLAGS.DISCUSSED_URTA_ALCOHOLISM] = 1;
 	//{No new tags flagged}
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] = 0;
+	flags[kFLAGS.URTA_DRINK_FREQUENCY] = 0;
 	doNext(camp.returnToCampUseOneHour);
 }
 

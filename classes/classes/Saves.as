@@ -561,6 +561,7 @@ public function loadGame(slot:String):void
 		clearOutput();
 
 		loadGameObject(saveFile, slot);
+		loadPermObject();
 		outputText("Game Loaded");
 		temp = 0;
 		
@@ -569,7 +570,6 @@ public function loadGame(slot:String):void
 			trace("Setting in-use save slot to: " + slot);
 			player.slotName = slot;
 		}
-		loadPermObject();
 		statScreenRefresh();
 		doNext(playerMenu);
 	}
@@ -608,7 +608,7 @@ public function savePermObject(isFile:Boolean):void {
 			}			
 		}
 		saveFile.data.flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] = flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM];
-		saveFile.data.flags[kFLAGS.KAIZO_BACKGROUND_UNLOCKED] = flags[kFLAGS.KAIZO_BACKGROUND_UNLOCKED];
+		saveFile.data.flags[kFLAGS.GRIMDARK_BACKGROUND_UNLOCKED] = flags[kFLAGS.GRIMDARK_BACKGROUND_UNLOCKED];
 		
 		saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG] = flags[kFLAGS.SHOW_SPRITES_FLAG];
 		saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
@@ -616,7 +616,7 @@ public function savePermObject(isFile:Boolean):void {
 		
 		saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE] = flags[kFLAGS.USE_OLD_INTERFACE];
 		saveFile.data.flags[kFLAGS.USE_OLD_FONT] = flags[kFLAGS.USE_OLD_FONT];
-		if (flags[kFLAGS.KAIZO_MODE] == 0 && flags[kFLAGS.KAIZO_BACKGROUND_UNLOCKED] == 0) saveFile.data.flags[kFLAGS.BACKGROUND_STYLE] = flags[kFLAGS.BACKGROUND_STYLE];
+		if ((flags[kFLAGS.GRIMDARK_MODE] == 0 && flags[kFLAGS.GRIMDARK_BACKGROUND_UNLOCKED] == 0) || (flags[kFLAGS.GRIMDARK_MODE] == 1 && flags[kFLAGS.GRIMDARK_BACKGROUND_UNLOCKED] == 1)) saveFile.data.flags[kFLAGS.BACKGROUND_STYLE] = flags[kFLAGS.BACKGROUND_STYLE];
 		saveFile.data.flags[kFLAGS.IMAGEPACK_OFF] = flags[kFLAGS.IMAGEPACK_OFF];
 		saveFile.data.flags[kFLAGS.SPRITE_STYLE] = flags[kFLAGS.SPRITE_STYLE];
 		saveFile.data.flags[kFLAGS.SFW_MODE] = flags[kFLAGS.SFW_MODE];
@@ -659,14 +659,16 @@ public function loadPermObject():void {
 		//Load saved flags.
 		if (saveFile.data.flags) {
 			if (saveFile.data.flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] != undefined) flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] = saveFile.data.flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM];
-			if (saveFile.data.flags[kFLAGS.KAIZO_BACKGROUND_UNLOCKED] != undefined) flags[kFLAGS.KAIZO_BACKGROUND_UNLOCKED] = saveFile.data.flags[kFLAGS.KAIZO_BACKGROUND_UNLOCKED];
+			if (saveFile.data.flags[kFLAGS.GRIMDARK_BACKGROUND_UNLOCKED] != undefined) flags[kFLAGS.GRIMDARK_BACKGROUND_UNLOCKED] = saveFile.data.flags[kFLAGS.GRIMDARK_BACKGROUND_UNLOCKED];
 			
 			if (saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG] != undefined) flags[kFLAGS.SHOW_SPRITES_FLAG] = saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG];
 			if (saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] != undefined) flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
 			
 			if (saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE] != undefined) flags[kFLAGS.USE_OLD_INTERFACE] = saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE];
 			if (saveFile.data.flags[kFLAGS.USE_OLD_FONT] != undefined) flags[kFLAGS.USE_OLD_FONT] = saveFile.data.flags[kFLAGS.USE_OLD_FONT];
-			if (saveFile.data.flags[kFLAGS.BACKGROUND_STYLE] != undefined) flags[kFLAGS.BACKGROUND_STYLE] = saveFile.data.flags[kFLAGS.BACKGROUND_STYLE];
+			if (saveFile.data.flags[kFLAGS.BACKGROUND_STYLE] != undefined) {
+				flags[kFLAGS.BACKGROUND_STYLE] = saveFile.data.flags[kFLAGS.BACKGROUND_STYLE];
+			}
 			if (saveFile.data.flags[kFLAGS.IMAGEPACK_OFF] != undefined) flags[kFLAGS.IMAGEPACK_OFF] = saveFile.data.flags[kFLAGS.IMAGEPACK_OFF];
 			if (saveFile.data.flags[kFLAGS.SPRITE_STYLE] != undefined) flags[kFLAGS.SPRITE_STYLE] = saveFile.data.flags[kFLAGS.SPRITE_STYLE];
 			if (saveFile.data.flags[kFLAGS.SFW_MODE] != undefined) flags[kFLAGS.SFW_MODE] = saveFile.data.flags[kFLAGS.SFW_MODE];
@@ -677,8 +679,8 @@ public function loadPermObject():void {
 			if (saveFile.data.flags[kFLAGS.DISABLE_QUICKLOAD_CONFIRM] != undefined) flags[kFLAGS.DISABLE_QUICKLOAD_CONFIRM] = saveFile.data.flags[kFLAGS.DISABLE_QUICKLOAD_CONFIRM];
 			if (saveFile.data.flags[kFLAGS.DISABLE_QUICKSAVE_CONFIRM] != undefined) flags[kFLAGS.DISABLE_QUICKSAVE_CONFIRM] = saveFile.data.flags[kFLAGS.DISABLE_QUICKSAVE_CONFIRM];
 		}
-		//Kaizo
-		if (flags[kFLAGS.KAIZO_MODE] > 0 && flags[kFLAGS.KAIZO_BACKGROUND_UNLOCKED] == 0) {
+		//Grimdark
+		if (flags[kFLAGS.GRIMDARK_MODE] >= 1 && saveFile.data.flags[kFLAGS.GRIMDARK_BACKGROUND_UNLOCKED] == 0) {
 			flags[kFLAGS.BACKGROUND_STYLE] = 9;
 		}
 		//achievements, will check if achievement exists.
@@ -2162,15 +2164,15 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.autoSave = saveFile.data.autoSave;
 		
 		// Fix possible old save for Plot & Exploration
-		flags[kFLAGS.TIMES_EXPLORED_LAKE]     = (flags[kFLAGS.TIMES_EXPLORED_LAKE] || saveFile.data.exploredLake);
-		flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] = (flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] || saveFile.data.exploredMountain);
-		flags[kFLAGS.TIMES_EXPLORED_FOREST]   = (flags[kFLAGS.TIMES_EXPLORED_FOREST] || saveFile.data.exploredForest);
-		flags[kFLAGS.TIMES_EXPLORED_DESERT]   = (flags[kFLAGS.TIMES_EXPLORED_DESERT] || saveFile.data.exploredDesert);
-		flags[kFLAGS.TIMES_EXPLORED]          = (flags[kFLAGS.TIMES_EXPLORED] || saveFile.data.exploredDesert);
+		flags[kFLAGS.TIMES_EXPLORED_LAKE]     = (flags[kFLAGS.TIMES_EXPLORED_LAKE] || saveFile.data.exploredLake || 0);
+		flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] = (flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] || saveFile.data.exploredMountain || 0);
+		flags[kFLAGS.TIMES_EXPLORED_FOREST]   = (flags[kFLAGS.TIMES_EXPLORED_FOREST] || saveFile.data.exploredForest || 0);
+		flags[kFLAGS.TIMES_EXPLORED_DESERT]   = (flags[kFLAGS.TIMES_EXPLORED_DESERT] || saveFile.data.exploredDesert || 0);
+		flags[kFLAGS.TIMES_EXPLORED]          = (flags[kFLAGS.TIMES_EXPLORED] || saveFile.data.explored || 0);
  
-		flags[kFLAGS.JOJO_STATUS]        = (flags[kFLAGS.JOJO_STATUS] || saveFile.data.monk);
-		flags[kFLAGS.SANDWITCH_SERVICED] = (flags[kFLAGS.SANDWITCH_SERVICED] || saveFile.data.sand);
-		flags[kFLAGS.GIACOMO_MET]        = (flags[kFLAGS.GIACOMO_MET] || saveFile.data.giacomo);
+		flags[kFLAGS.JOJO_STATUS]        = (flags[kFLAGS.JOJO_STATUS] || saveFile.data.monk || 0);
+		flags[kFLAGS.SANDWITCH_SERVICED] = (flags[kFLAGS.SANDWITCH_SERVICED] || saveFile.data.sand || 0);
+		flags[kFLAGS.GIACOMO_MET]        = (flags[kFLAGS.GIACOMO_MET] || saveFile.data.giacomo || 0);
 		
 		if (saveFile.data.beeProgress == 1)
 			game.forest.beeGirlScene.setTalked();
@@ -2525,9 +2527,11 @@ public function unFuckSave():void
 			if (player.cocks[i].cockThickness > 99.9) player.cocks[i].cockThickness = 99.9;
 		}
 	}
-	//Set to Kaizo if doing kaizo unless locked
-	if (flags[kFLAGS.KAIZO_MODE] > 0) {
-		if (flags[kFLAGS.KAIZO_BACKGROUND_UNLOCKED] == 0) {
+	//If converting from vanilla, set Grimdark flag to 0.
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 0 || flags[kFLAGS.GRIMDARK_MODE] == 3) flags[kFLAGS.GRIMDARK_MODE] = 0;
+	//Set to Grimdark if doing kaizo unless locked
+	if (flags[kFLAGS.GRIMDARK_MODE] > 0) {
+		if (flags[kFLAGS.GRIMDARK_BACKGROUND_UNLOCKED] == 0) {
 			flags[kFLAGS.BACKGROUND_STYLE] = 9;
 		}
 		getGame().inRoomedDungeon = true;

@@ -219,7 +219,7 @@ package classes.Scenes
 				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}
-			if (flags[kFLAGS.KAIZO_MODE] > 0) {
+			if (flags[kFLAGS.GRIMDARK_MODE] > 0) {
 				randomEncounter();
 				return;
 			}
@@ -279,7 +279,7 @@ package classes.Scenes
 			var choosey:Number = rand(5);
 			if (flags[kFLAGS.FOUND_CATHEDRAL] > 0 && choosey == 3) choosey ++;
 			if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0 && choosey == 2 && rand(4) > 0) choosey += 2;
-			if (flags[kFLAGS.KAIZO_MODE] > 0) choosey = 666;
+			if (flags[kFLAGS.GRIMDARK_MODE] > 0) choosey = 666;
 			
 			switch(choosey) {
 				case 0:
@@ -439,7 +439,7 @@ package classes.Scenes
 		}
 		
 		//------------
-		// KAIZO DESC
+		// GRIMDARK DESC
 		//------------
 		public function wastelandZoneFunc():Boolean {
 			clearOutput();

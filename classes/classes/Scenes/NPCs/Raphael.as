@@ -867,7 +867,7 @@ private function RaphaelPostFenceSex():void {
 
 private function postRaphaelCoitus():void {
 	clearOutput();
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00149] = 1;
+	flags[kFLAGS.RAPHAEL_BONED] = 1;
 	outputText("When you wake up on a bed of soft moss, Raphael has disappeared completely.\n\n", false); 
 
 	//({When player had reached the SPE fencing apex}
@@ -1160,7 +1160,7 @@ private function quiksilverFawkesEndGame():void {
 		outputText("You're immediately confused and you ask him what's going on, but the fox is out of breath.  What's more, a similar howl now calls out from the opposite direction too!  Whatever these sounds are or this fog is, they have the camp surrounded!\n\n", false);
 	}
 	//({If player had an INT or SPE ending with him earlier}
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00149] == 1) {
+	if (flags[kFLAGS.RAPHAEL_BONED] == 1) {
 		outputText("You're a bit miffed at the fox.  You haven't heard from him for more than a week after he slept with you, and now he only shows up because he's looking for help.  The fox however, is out of breath.  What's more; a similar howl now calls out from the opposite direction too!  Whatever these sounds are or this fog is, they have the camp surrounded!\n\n", false); 
 	}
 	

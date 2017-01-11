@@ -471,13 +471,13 @@ private function gossipWithLoppe():void {
 	//Scylla (Must have helped her enough times to know she needs cum to survive.)
 	if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0) addButton(1,"Scylla",gossipWithLoppeAboutScylla);
 	//Jasun
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179] > 0) addButton(2,"Jasun",gossipWithLoppeAboutJasun);
+	if (flags[kFLAGS.JASUN_MET] > 0) addButton(2,"Jasun",gossipWithLoppeAboutJasun);
 	//Heckel
 	if (flags[kFLAGS.MET_HECKEL] > 0) addButton(3,"Heckel",gossipWithLoppeAboutHeckel);
 	//Edryn
 	addButton(4,"Edryn",gossipWithLoppeAboutEdryn);
 	//Lottie
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) addButton(5,"Lottie",gossipWithLoppeAboutLottie);
+	if (flags[kFLAGS.LOTTIE_ENCOUNTER_COUNTER] > 0) addButton(5,"Lottie",gossipWithLoppeAboutLottie);
 	//Cotton
 	if (flags[kFLAGS.COTTON_MET_FUCKED] > 0) addButton(6,"Cotton",gossipWithLoppeAboutCotton);
 	//Back (spacebar default)
@@ -647,11 +647,11 @@ private function gossipWithLoppeAboutLottie():void {
 	clearOutput();
 	outputText("\"<i>That pig-girl that started hanging around the gym in the evenings?  I heard about her... I believe she wants to get fit,</i>\" Loppe comments conversationally.");
 	//(if PC's training Lottie)
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00299] == 1) {
+	if (flags[kFLAGS.LOTTIE_TRAINER] == 1) {
 		outputText("\n\n\"<i>Seems like she found a gym buddy.  That's great; poor thing could really use some help with that.  She tries hard in short bursts, but she needs to actually stick with it and eat a proper diet.  Ah, I suppose I should hide the carrot cake before saying that, huh?</i>\"");
 	}
 	//(else if PC's met Lottie)
-	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) {
+	else if (flags[kFLAGS.LOTTIE_ENCOUNTER_COUNTER] > 0) {
 		outputText("\n\n\"<i>Poor girl hasn't found a real partner to help her yet.  Maybe you could give her a little attention if you're going to be around?  I bet she'd be grateful.</i>\"");
 	}
 	else {

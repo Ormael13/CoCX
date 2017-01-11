@@ -117,7 +117,7 @@ private function doCamp():void { //Only called by playerMenu
 		getGame().prison.prisonRoom(true);
 		return;
 	}
-	if (flags[kFLAGS.KAIZO_MODE] > 0) {
+	if (flags[kFLAGS.GRIMDARK_MODE] > 0) {
 		getGame().dungeons.move(getGame().dungeons._currentRoom);
 		return;
 	}
@@ -411,7 +411,7 @@ private function doCamp():void { //Only called by playerMenu
 		return;
 	}
 	//Amily + Urta freakout!
-	if (!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 0 && rand(10) == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] >= 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[kFLAGS.AMILY_NEED_TO_FREAK_ABOUT_URTA] == 1 && amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && !amilyScene.pregnancy.isPregnant) {
+	if (!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 0 && rand(10) == 0 && flags[kFLAGS.URTA_DRINK_FREQUENCY] >= 0 && flags[kFLAGS.URTA_BANNED_FROM_SCYLLA] == 0 && flags[kFLAGS.AMILY_NEED_TO_FREAK_ABOUT_URTA] == 1 && amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && !amilyScene.pregnancy.isPregnant) {
 		finter.amilyUrtaReaction();
 		hideMenus();
 		return;
@@ -446,13 +446,13 @@ private function doCamp():void { //Only called by playerMenu
 		return;
 	}
 	//Izma/Marble freakout - marble moves in
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00237] == 1) {
+	if (flags[kFLAGS.IZMA_MARBLE_FREAKOUT_STATUS] == 1) {
 		izmaScene.newMarbleMeetsIzma();
 		hideMenus();
 		return;
 	}
 	//Izma/Amily freakout - Amily moves in
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00236] == 1) {
+	if (flags[kFLAGS.IZMA_AMILY_FREAKOUT_STATUS] == 1) {
 		izmaScene.newAmilyMeetsIzma();
 		hideMenus();
 		return;
@@ -872,7 +872,7 @@ public function loversCount():Number {
 	if (arianScene.arianFollower()) counter++;
 	if (followerHel()) counter++;
 	//Izma!
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
+	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
 	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
 	if (player.findStatusEffect(StatusEffects.CampMarble) >= 0 && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
 	if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
@@ -967,7 +967,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				izzyCreeps[izzyCreeps.length] = 2;
 			if (amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0)
 				izzyCreeps[izzyCreeps.length] = 3;
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0)
+			if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0)
 				izzyCreeps[izzyCreeps.length] = 4;
 			//Base choice - book
 			izzyCreeps[izzyCreeps.length] = 5;
@@ -1211,7 +1211,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 		else if (rand(4) == 0) outputText("Sophie is sitting in her nest, idly brushing out her feathers.  Occasionally, she looks up from her work to give you a sultry wink and a come-hither gaze.\n\n");
 		else if (rand(3) == 0) outputText("Sophie is fussing around in her nest, straightening bits of straw and grass, trying to make it more comfortable.  After a few minutes, she flops down in the middle and reclines, apparently satisfied for the moment.\n\n");
 		else if (rand(2) == 0 || flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 0) {
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("Your platinum-blonde harpy, Sophie, is currently reading a book - a marked change from her bimbo-era behavior.  Occasionally, though, she glances up from the page and gives you a lusty look.  Some things never change....\n\n");
+			if (flags[kFLAGS.SOPHIE_BIMBO] > 0) outputText("Your platinum-blonde harpy, Sophie, is currently reading a book - a marked change from her bimbo-era behavior.  Occasionally, though, she glances up from the page and gives you a lusty look.  Some things never change....\n\n");
 			else outputText("Your pink harpy, Sophie, is currently reading a book.  She seems utterly absorbed in it, though you question how she obtained it.  Occasionally, though, she'll glance up from the pages to shoot you a lusty look.\n\n");
 		}
 		else {
@@ -1270,7 +1270,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("bed inside your cabin.");
 			else outputText("bedroll");
 			outputText(". It reads: \"<i>Come see me at the lake. I've finished your spider-silk ");
-			switch(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275]) {
+			switch(flags[kFLAGS.RATHAZUL_SILK_ARMOR_TYPE]) {
 				case 1: 
 					outputText("armor");
 					break;
@@ -2606,10 +2606,8 @@ private function promptSaveUpdate():void {
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 6) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 7;
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 6) {
-			flags[kFLAGS.D1_OMNIBUS_KILLED] = flags[kFLAGS.CORRUPTED_GLADES_DESTROYED];
-			flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] = 0; //Reclaimed
-		}
+		flags[kFLAGS.D1_OMNIBUS_KILLED] = flags[kFLAGS.CORRUPTED_GLADES_DESTROYED];
+		flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] = 0; //Reclaimed
 		if (player.armor == armors.GOOARMR) flags[kFLAGS.VALERIA_FLUIDS] = 100;
 		doCamp();
 		return;
@@ -2653,7 +2651,7 @@ private function promptSaveUpdate():void {
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 11) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 12;
-		flags[kFLAGS.KAIZO_MODE] = 0;
+		flags[kFLAGS.GRIMDARK_MODE] = 0;
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 12) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 13;
@@ -2917,7 +2915,7 @@ private function updateAchievements():void {
 /*
 private function fixHistory():void {
 	outputText("<b>New history perks are available during creation.  Since this character was created before they were available, you may choose one now!</b>", true);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] = 2;
+	flags[kFLAGS.HISTORY_PERK_SELECTED] = 2;
 	menu();
 	doNext(10036);
 }

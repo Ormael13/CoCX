@@ -56,17 +56,17 @@ package classes.Scenes.Areas
 			}
 			//8% chance of hellhoundsplosions if appropriate
 			if (rand(100) <= 77) {
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141] < 3) {
+				if (flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] < 3) {
 					trace("CHANCE AT HELLHOUND GAO");
 					//Requires canine face, [either two dog dicks, or a vag and pregnant with a hellhound], at least two other hellhound features (black fur, dog legs, dog tail), and corruption >=60.
 					if (player.faceType == FACE_DOG && (player.dogCocks() >= 2 || (player.hasVagina() && player.pregnancyType == PregnancyStore.PREGNANCY_HELL_HOUND)) && player.cor >= 60 && player.tailType == TAIL_TYPE_DOG && (player.lowerBody == LOWER_BODY_TYPE_DOG || player.hairColor == "midnight black")) {
 						trace("PASS BODYCHECK");
-						if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141] == 0) {
+						if (flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] == 0) {
 							hellHoundScene.HellHoundMasterEncounter();
 							return;
 						}
 						//Level 2 requires lethecite
-						else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141] == 1 && player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemv2("Marae's Lethicite") < 3) {
+						else if (flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] == 1 && player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemv2("Marae's Lethicite") < 3) {
 							hellHoundScene.HellHoundMasterEncounter();
 							return;
 						}

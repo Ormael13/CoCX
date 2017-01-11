@@ -44,12 +44,12 @@ Chance of waking the PC by whispering how much they need to fuck her in their sl
 Bimbo harpy pussy apparently tastes tangy with an undertone of sweet, almost peach-like flavor.
 */
 internal function sophieSprite():void {
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] == 0) spriteSelect(83);
+	if (flags[kFLAGS.SOPHIE_BIMBO] > 0 && flags[kFLAGS.SOPHIE_DISABLED_FOREVER] == 0) spriteSelect(83);
 	else spriteSelect(53);
 }
 
 override public function bimboSophie():Boolean {
-	return (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] == 0 && flags[kFLAGS.SOPHIE_DEBIMBOED] == 0);
+	return (flags[kFLAGS.SOPHIE_BIMBO] > 0 && flags[kFLAGS.SOPHIE_DISABLED_FOREVER] == 0 && flags[kFLAGS.SOPHIE_DEBIMBOED] == 0);
 }
 
 public function sophieIsInSeason():Boolean {
@@ -123,7 +123,7 @@ internal function bimbotizeMeCaptainSophie():void {
 	
 private function declineBimboSophie():void {
 	sophieSprite();
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] = 1;
+	flags[kFLAGS.SOPHIE_DISABLED_FOREVER] = 1;
 	clearOutput();
 	outputText("You turn and flee the mountain, before she can compel you to take her to camp and fuck like bunnies.  Who knows when you'd have time to explore with a lust-crazed bird-woman like that around.  She'll find a mate soon enough, you're sure of that.\n\n", false);
 	combat.cleanupAfterCombat();
@@ -132,7 +132,7 @@ private function declineBimboSophie():void {
 private function acceptBimboSophie():void {
 	sophieSprite();
 	clearOutput();
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] = 1;
+	flags[kFLAGS.SOPHIE_BIMBO] = 1;
 	//If she's already pregnant then convert the incubation from her wild 48 + rand(48) [95 to 0] to her follower incubation [168 to 0]. Your first daughter may already be on the way.
 	if (pregnancy.isPregnant) pregnancy.knockUpForce(pregnancy.type, int(pregnancy.incubation * 1.75));
 	outputText("You nod, and Sophie springs forward on her powerful legs, the strength undiminished by the effects of her bimbo transformation.  She tackles you in a bear-hug, kissing your " + player.chestDesc() + " over and over as her momentum carries you both off the side of the mountain.  You tumble in the air, screaming as you fall", false);
@@ -151,7 +151,7 @@ private function acceptBimboSophie():void {
 	{
 		outputText("  Afterwards, she offers to suck Rathazul's cock.  The old rat looked about ready to have a heart attack, but he managed to decline her offer with some amount of dignity, after a few moments of stammering.", false);
 	}
-	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1)
+	else if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1)
 	{
 		outputText("  Afterwards, she offers to suck Izma's cock.  Izma looks at you for a moment before shaking her head, no.  Her skirt rises visibly in spite of her negative response.  Maybe she'll like having someone lower on the food chain to boss around?", false);
 	}
@@ -308,16 +308,16 @@ public function approachBimboSophieInCamp(output:Boolean = true):void {
 private function sophieBimboAppearance():void {
 	clearOutput();
 	outputText("Sophie is a big, buxom harpy, no two ways about her.  She has ");
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("very ");
+	if (flags[kFLAGS.SOPHIE_BIMBO] > 0) outputText("very ");
 	outputText("long ");
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("platinum-blond");
+	if (flags[kFLAGS.SOPHIE_BIMBO] > 0) outputText("platinum-blond");
 	else outputText("pink");
 	outputText(" 'hair' that dangles off her shoulders, like a bird's plumage.  She wears a thick layer of golden lipstick over her plump");
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText(", super-sized");
+	if (flags[kFLAGS.SOPHIE_BIMBO] > 0) outputText(", super-sized");
 	outputText(" lips at all times, like most of her kind, the gloss capable of giving her voice a compelling quality or inducing arousal on contact with males or herms.  Her face lacks the youthful quality found among many of her sisters, though you don't see any of the lines that would indicate age.");
 	
 	outputText("\n\nSophie's breasts are ");
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("so immense they would drag her to the ground if she tried to fly, a sexy, lingering aftereffect of the draft you gave her.  The wobbly bimbo-tits look to be about F-cups.");
+	if (flags[kFLAGS.SOPHIE_BIMBO] > 0) outputText("so immense they would drag her to the ground if she tried to fly, a sexy, lingering aftereffect of the draft you gave her.  The wobbly bimbo-tits look to be about F-cups.");
 	else outputText("unusually large.  The buxom harpy does seem slightly encumbered by them, but still capable of flight.  Her breasts look to be about DD-cups, nice and big enough for a soft squeeze or rough tit-fuck.");
 	
 	outputText("\n\nShe has a glittering, moist pussy concealed between her thick thighs, both of which start the feathery covering that reaches all the way to her bird-like, taloned feet.  Her jiggly backside wobbles slightly with every exaggerated step she takes, with her long tailfeathers fanning above it.  You're sure there's a tight butthole located between them, where it belongs, but you can't really get a look at it with all the plump ass surrounding it.");
@@ -1705,7 +1705,7 @@ public function sophiesEggHatches():void {
 	if (prison.inPrison) {
 		outputText("\nYou somehow have a feeling that the egg Sophie laid should have hatched by now.\n");
 		flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] = 336; //Wouldn't make sense to witness egg-hatching scene while in prison!
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) {
+		if (flags[kFLAGS.SOPHIE_BIMBO] > 0) {
 			if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 0) flags[kFLAGS.DAUGHTER_ONE_BIMBO] = 1;
 			if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 1) flags[kFLAGS.DAUGHTER_TWO_BIMBO] = 1;
 			if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 2) flags[kFLAGS.DAUGHTER_THREE_BIMBO] = 1;
@@ -1732,10 +1732,10 @@ public function sophiesEggHatches():void {
 		//-Pink plumage, big tits and (sensitive) lips, normal harpy hips. (blue eyes)
 		if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 0) {
 			outputText("\n\nThe first thing that comes to mind when you see your newborn - or is that new-hatched? - daughter is... 'fluffy.'  She's covered in adorably soft, pink down, with big blue eyes that peer around curiously.  She looks cute as hell");
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText(", though her lips are a little larger than you'd think was normal - maybe she inherited it from her mom?");
+			if (flags[kFLAGS.SOPHIE_BIMBO] > 0) outputText(", though her lips are a little larger than you'd think was normal - maybe she inherited it from her mom?");
 			else outputText(".");
 			outputText("  The harpy chick is actually about as big as a four or five year old, and she looks up at Sophie curiously.");
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0)  {
+			if (flags[kFLAGS.SOPHIE_BIMBO] > 0)  {
 				flags[kFLAGS.DAUGHTER_ONE_BIMBO] = 1;
 			}
 		}
@@ -1746,7 +1746,7 @@ public function sophiesEggHatches():void {
 			outputText("\n\nYou'd think that since this is the second time you've seen one of Sophie's eggs hatch, you'd be a little more used to this, but the sight still awes you");
 			if (player.cor > 66) outputText(" a little bit");
 			outputText(".  The newly hatched chick looks about as old as the other - four or five years old.  Unlike the first one, her face is fairly normal, though you think with her features she's sure to be a beauty when she matures.  She's a bit bigger in the butt and hips than her elder sister, and her eyes are violet while her plumage matches her mothers - ");
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0)  {
+			if (flags[kFLAGS.SOPHIE_BIMBO] > 0)  {
 				outputText("platinum blonde");
 				flags[kFLAGS.DAUGHTER_TWO_BIMBO] = 1;
 			}
@@ -1757,15 +1757,15 @@ public function sophiesEggHatches():void {
 		//-Not that curvy, but has human feet and purple feathers. (violet eyes)
 		else if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 2) {
 			outputText("\n\nOnce again, you get to watch another harpy experience the first few moments of her memorable life.  This one has perfect, normal-looking proportions, and though she clearly has the wide hips indicative of her race they're nowhere near as big as her big-butted sister's.  Most surprisingly of all, she lacks the talons that her mom and sisters share.  Instead, she has normal, human feet.  Sophie's brow furrows with worry, but you can't help but think that it's about damned time something in this place took after you for a change.  Her eyes are piercing violet, though her feathers are a deep purple in color.");
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) flags[kFLAGS.DAUGHTER_THREE_BIMBO] = 1;
+			if (flags[kFLAGS.SOPHIE_BIMBO] > 0) flags[kFLAGS.DAUGHTER_THREE_BIMBO] = 1;
 		}
 		//Fourth Harpy:
 		//-Curvy like Sophie, but with well-developed wings and extra-soft feathers (WINGJOBS).  Pink plumage.  (blue eyes)
 		else {
 			outputText("\n\nYour fourth child seems to take after her mom in just about every way.  She has blue eyes like Sophie, pink feathers");
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText(" like her mother used to have before her bimbofication");
+			if (flags[kFLAGS.SOPHIE_BIMBO] > 0) outputText(" like her mother used to have before her bimbofication");
 			outputText(", and a shape that seems to indicate that maturity will be VERY generous to her.  She looks around in wonder, already flapping wings that seem a touch more developed than her sisters were at that age.  You've got to wonder just how big they'll get with age.");
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) flags[kFLAGS.DAUGHTER_FOUR_BIMBO] = 1;
+			if (flags[kFLAGS.SOPHIE_BIMBO] > 0) flags[kFLAGS.DAUGHTER_FOUR_BIMBO] = 1;
 		}
 		
 		//ALL FIRST FOUR END WITH THIS: 
@@ -1778,7 +1778,7 @@ public function sophiesEggHatches():void {
 		outputText("\n\nYou never get tired of watching this, the young harpy bursting from her egg, shards of shell landing all around the nest as the fluffy little harpy emerges. The ");
 		if (rand(2) == 0) outputText("pink");
 		else {
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("blonde");
+			if (flags[kFLAGS.SOPHIE_BIMBO] > 0) outputText("blonde");
 			else outputText("white");
 		}
 		outputText(" girl coos as she shields her ");
@@ -1839,12 +1839,12 @@ public function sophieKidMaturation():void {
 	//Fifth+ daughter
 	else {
 		outputText("\n\nHer flesh ripples as her hips and ass swell into wide, broodmotherly hips with a round, ripe ass to match that just begs to be spanked and grabbed.  Her once-humble breasts spill forth in a flood of supple tit-flesh. The growing orbs engorge to around nearly the same size as Sophie's big, ");
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("bimbo ");
+		if (flags[kFLAGS.SOPHIE_BIMBO] > 0) outputText("bimbo ");
 		outputText("breasts - just as high, round and perky, yet big and yielding to the touch, like the softest pillow.");
 	}
 	//ALL CONTINUE HERE
 	outputText("  The newly embodied harpy lets out a sigh of relief now that the changes have stopped, clearly surprised by what happened and glad it's over. Moving to get a better view of your daughter, you take in the sight of her new body. Your once petite harpy girl looks more like a stacked ");
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("bimbo");
+	if (flags[kFLAGS.SOPHIE_BIMBO] > 0) outputText("bimbo");
 	else outputText("bombshell");
 	outputText(", just like her mother.");
 	if (bimboSophie()) outputText("  From the inquisitive look on her face and spark of intelligence in her eyes, it seems that she hasn't lost her mind to her inner bimbo.");

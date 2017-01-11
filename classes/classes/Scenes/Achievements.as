@@ -11,12 +11,9 @@ package classes.Scenes
 		public var achievementsEarned:int = 0;
 		public var achievementsTotal:int = 0;
 		
-		public function Achievements() 
-		{
-			
-		}
+		public function Achievements() {}
 		
-		public function addAchievement(title:String, achievement:*, descLocked:String, descUnlocked:String = "", isShadow:Boolean = false):void {
+		private function addAchievement(title:String, achievement:*, descLocked:String, descUnlocked:String = "", isShadow:Boolean = false):void {
 			//If not specified, default to the locked description.
 			if (descUnlocked == "") descUnlocked = descLocked;
 			if (isShadow && achievements[achievement] <= 0) return;
@@ -32,7 +29,7 @@ package classes.Scenes
 			achievementsTotal++;
 		}
 		
-		public function titleAchievementSection(title:String):void {
+		private function titleAchievementSection(title:String):void {
 			outputText("\n<b><u>" + title + "</u></b>\n");
 		}
 		
