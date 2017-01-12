@@ -31,6 +31,11 @@ package classes
 			return [FACE_SNAKE_FANGS, FACE_LIZARD, FACE_DRAGON].indexOf(faceType) != -1;
 		}
 
+		public function hasReptileUnderBody():Boolean
+		{
+			return [UNDER_BODY_TYPE_LIZARD, UNDER_BODY_TYPE_DRAGON].indexOf(underBody.type) != -1;
+		}
+
 		public function hasDragonWings(large:Boolean = false):Boolean
 		{
 			if (large)

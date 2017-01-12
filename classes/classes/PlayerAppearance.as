@@ -177,12 +177,18 @@ package classes
 					outputText("  You have a face resembling that of a lizard, and with your toothy maw, you have quite a fearsome visage.  The reptilian visage does look a little odd with just [skin].");
 				if (player.hasFur()) 
 					outputText("  You have a face resembling that of a lizard.  Between the toothy maw, pointed snout, and the layer of [skinFurScales] covering your face, you have quite the fearsome visage.");
-				if (player.hasScales()) 
-					outputText("  Your face is that of a lizard, complete with a toothy maw and pointed snout.  Reflective [skinFurScales] complete the look, making you look quite fearsome.");
+				if (player.hasScales()) {
+					outputText("  Your face is that of a lizard, complete with a toothy maw and pointed snout.");
+					if (!player.hasReptileUnderBody())
+						outputText("  Reflective [skinFurScales] complete the look, making you look quite fearsome.");
+					else
+						outputText("  Reflective [skinFurScales] on your upper jaw and head and [underBody.skinFurScales] on your lower jaw complete the look, making you look quite fearsome.");
+				}
 			}
 			if (player.faceType == FACE_DRAGON) 
 			{
-				outputText("  Your face is a narrow, reptilian muzzle.  It looks like a predatory lizard's, at first glance, but with an unusual array of spikes along the under-jaw.  It gives you a regal but fierce visage.  Opening your mouth reveals several rows of dagger-like sharp teeth.  The fearsome visage is decorated by [skinFurScales].");
+				outputText("  Your face is a narrow, reptilian muzzle.  It looks like a predatory lizard's, at first glance, but with an unusual array of spikes along the under-jaw.  It gives you a regal but fierce visage.  Opening your mouth reveals several rows of dagger-like sharp teeth.  The fearsome visage is decorated by [skinFurScales]");
+				outputText(player.hasReptileUnderBody() ? " on your upper jaw and head and [underBody.skinFurScales] on your lower jaw." : ".");
 			}
 			if (player.faceType == FACE_KANGAROO) 
 			{
