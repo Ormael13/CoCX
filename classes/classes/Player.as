@@ -1770,10 +1770,17 @@ use namespace kGAMECLASS;
 			//(Small – 0.01 mLs – Size 1 + 1 Multi)
 			//(Large – 0.8 - Size 10 + 4 Multi)
 			//(HUGE – 2.4 - Size 12 + 5 Multi + 4 tits)
-			var total:Number;
+			
+			var total:Number = 0;
 			if (findStatusEffect(StatusEffects.LactationEndurance) < 0)
 				createStatusEffect(StatusEffects.LactationEndurance, 1, 0, 0, 0);
-			total = biggestTitSize() * 10 * averageLactation() * statusEffectv1(StatusEffects.LactationEndurance) * totalBreasts();
+			
+			var counter:Number = breastRows.length;
+			while (counter > 0) {
+				counter--;
+				total += 10 * breastRows[counter].breastRating * breastRows[counter].lactationMultiplier * breastRows[counter].breasts * statusEffectv1(StatusEffects.LactationEndurance);
+				
+			}
 			if (findPerk(PerkLib.MilkMaid) >= 0)
 				total += 200 + (perkv1(PerkLib.MilkMaid) * 100);
 			if (statusEffectv1(StatusEffects.LactationReduction) >= 48)
