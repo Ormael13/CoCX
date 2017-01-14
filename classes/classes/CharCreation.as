@@ -577,6 +577,8 @@
 			player.tone = 45;
 			
 			//Genetalia
+			player.balls = 2;
+			player.ballSize = 1;
 			player.createVagina();
 			player.clitLength = .5;
 			player.createCock();
