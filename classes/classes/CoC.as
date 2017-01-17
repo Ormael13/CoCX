@@ -373,8 +373,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.7g";
-			version = ver + " (<b>Return of UrtaQuest, small QoL changes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8a";
+			version = ver + " (<b>Race rebalancing (part 1), Metamorph (part 0)</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
