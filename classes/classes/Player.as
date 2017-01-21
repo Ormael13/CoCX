@@ -1770,10 +1770,17 @@ use namespace kGAMECLASS;
 			//(Small – 0.01 mLs – Size 1 + 1 Multi)
 			//(Large – 0.8 - Size 10 + 4 Multi)
 			//(HUGE – 2.4 - Size 12 + 5 Multi + 4 tits)
-			var total:Number;
+			
+			var total:Number = 0;
 			if (findStatusEffect(StatusEffects.LactationEndurance) < 0)
 				createStatusEffect(StatusEffects.LactationEndurance, 1, 0, 0, 0);
-			total = biggestTitSize() * 10 * averageLactation() * statusEffectv1(StatusEffects.LactationEndurance) * totalBreasts();
+			
+			var counter:Number = breastRows.length;
+			while (counter > 0) {
+				counter--;
+				total += 10 * breastRows[counter].breastRating * breastRows[counter].lactationMultiplier * breastRows[counter].breasts * statusEffectv1(StatusEffects.LactationEndurance);
+				
+			}
 			if (findPerk(PerkLib.MilkMaid) >= 0)
 				total += 200 + (perkv1(PerkLib.MilkMaid) * 100);
 			if (statusEffectv1(StatusEffects.LactationReduction) >= 48)
@@ -2267,26 +2274,7 @@ use namespace kGAMECLASS;
 						if (breastRows.length > 1) outputText("You drop to your knees from a massive change in your body's center of gravity.  Your " + breastDescript(0) + " tingle strongly, growing disturbingly large.", false);
 						if (breastRows.length == 1) outputText("You drop to your knees from a massive change in your center of gravity.  The tingling in your " + breastDescript(0) + " intensifies as they continue to grow at an obscene rate.", false);
 					}
-					if (biggestTitSize() >= 8.5 && nippleLength < 2)
-					{
-						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
-						nippleLength = 2;
-					}
-					if (biggestTitSize() >= 7 && nippleLength < 1)
-					{
-						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
-						nippleLength = 1;
-					}
-					if (biggestTitSize() >= 5 && nippleLength < .75)
-					{
-						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
-						nippleLength = .75;
-					}
-					if (biggestTitSize() >= 3 && nippleLength < .5)
-					{
-						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
-						nippleLength = .5;
-					}
+
 				}
 				else
 				{
@@ -2302,23 +2290,28 @@ use namespace kGAMECLASS;
 						if (breastRows.length > 1) outputText("You drop to your knees from a massive change in your body's center of gravity.  Your top row of " + breastDescript(0) + " tingle strongly, growing disturbingly large.", false);
 						if (breastRows.length == 1) outputText("You drop to your knees from a massive change in your center of gravity.  The tingling in your " + breastDescript(0) + " intensifies as they continue to grow at an obscene rate.", false);
 					}
-					if (biggestTitSize() >= 8.5 && nippleLength < 2) {
-						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
-						nippleLength = 2;
-					}
-					if (biggestTitSize() >= 7 && nippleLength < 1) {
-						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
-						nippleLength = 1;
-					}
-					if (biggestTitSize() >= 5 && nippleLength < .75) {
-						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
-						nippleLength = .75;
-					}
-					if (biggestTitSize() >= 3 && nippleLength < .5) {
-						outputText("  A tender ache starts at your " + nippleDescript(0) + "s as they grow to match your burgeoning breast-flesh.", false);
-						nippleLength = .5;
-					}
 				}
+			}
+			// Nipples
+			if (biggestTitSize() >= 8.5 && nippleLength < 2) 
+			{
+				if (display) outputText("  A tender ache starts at your [nipples] as they grow to match your burgeoning breast-flesh.", false);
+				nippleLength = 2;
+			}
+			if (biggestTitSize() >= 7 && nippleLength < 1)
+			{
+				if (display) outputText("  A tender ache starts at your [nipples] as they grow to match your burgeoning breast-flesh.", false);
+				nippleLength = 1;
+			}
+			if (biggestTitSize() >= 5 && nippleLength < .75)
+			{
+				if (display) outputText("  A tender ache starts at your [nipples] as they grow to match your burgeoning breast-flesh.", false);
+				nippleLength = .75;
+			}
+			if (biggestTitSize() >= 3 && nippleLength < .5)
+			{
+				if (display) outputText("  A tender ache starts at your [nipples] as they grow to match your burgeoning breast-flesh.", false);
+				nippleLength = .5;
 			}
 		}
 

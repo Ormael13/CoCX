@@ -124,6 +124,7 @@
 			"rubi"		: rubiLookups,
 			"arian"		: arianLookups,
 			"ember"		: emberLookups,
+			"benoit"	: benoitLookups,
 			
 			// PC Attributes:
 
