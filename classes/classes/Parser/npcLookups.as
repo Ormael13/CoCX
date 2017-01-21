@@ -63,3 +63,15 @@
 		// rubiMF("boy","girl")
 		// rubiMF("demon","demoness")
 		// rubiMF("gentleman","lady")
+
+		public var benoitLookups:Object = // For subject: "benoit"
+		{
+			"man"		: function(thisPtr:CoC):String {return kGAMECLASS.bazaar.benoit.benoitMF("man", "woman")},
+			"name"		: function(thisPtr:CoC):String {return kGAMECLASS.bazaar.benoit.benoitMF("Benoit", "Benoite")},
+
+			"ey"		: function(thisPtr:CoC):String {return kGAMECLASS.bazaar.benoit.benoitMF("he", "she")},
+			"em"		: function(thisPtr:CoC):String {return kGAMECLASS.bazaar.benoit.benoitMF("him", "her")},
+			"eir"		: function(thisPtr:CoC):String {return kGAMECLASS.bazaar.benoit.benoitMF("his", "her")},
+			"eirs"		: function(thisPtr:CoC):String {return kGAMECLASS.bazaar.benoit.benoitMF("his", "hers")},
+			"emself"	: function(thisPtr:CoC):String {return kGAMECLASS.bazaar.benoit.benoitMF("himself", "herself")}
+		}
