@@ -41,6 +41,10 @@ package classes.Scenes.Combat
 		public var plotFight:Boolean = false; //Used to restrict random drops from overlapping uniques
 		public var combatRound:int = 0;
 		
+		//Used to display image of the enemy while fighting
+		//Set once during beginCombat() to prevent it from changing every combat turn
+		private var imageText:String = "";
+		
 		public function get inCombat():Boolean {
 			return getGame().inCombat;
 		}
@@ -77,6 +81,10 @@ package classes.Scenes.Combat
 			if (inCombat) {
 				//clear status
 				clearStatuses(false);
+				
+				//reset the stored image for next monster
+				imageText = "";
+				
 				//Clear itemswapping in case it hung somehow
 		//No longer used:		itemSwapping = false;
 				//Player won
@@ -1735,6 +1743,14 @@ package classes.Scenes.Combat
 			//Flag the game as being "in combat"
 			inCombat = true;
 			monster = monster_;
+			
+			//Set image once, at the beginning of combat
+			if (monster.imageName != "")
+			{
+				var monsterName:String = "monster-" + monster.imageName;
+				imageText = images.showImage(monsterName);
+			} else imageText = "";
+			
 			//Reduce enemy def if player has precision!
 			if (player.findPerk(PerkLib.Precision) >= 0 && player.inte >= 25) {
 				if (monster.armorDef <= 10) monster.armorDef = 0;
@@ -1790,13 +1806,9 @@ package classes.Scenes.Combat
 			hpDisplay = Math.floor(monster.HP) + " / " + monster.eMaxHP() + " (" + (int(math * 1000) / 10) + "%)";
 			lustDisplay = Math.floor(monster.lust) + " / " + monster.eMaxLust();;
 
-			//trace("trying to show monster image!");
-			if (monster.imageName != "")
-			{
-				var monsterName:String = "monster-" + monster.imageName;
-				//trace("Monster name = ", monsterName);
-				outputText(images.showImage(monsterName), false,false);
-			}
+			//imageText set in beginCombat()
+			outputText(imageText, false,false);
+			
 			outputText("<b>You are fighting ", false);
 			outputText(monster.a + monster.short + ":</b> \n");
 			if (player.findStatusEffect(StatusEffects.Blind) >= 0) {
