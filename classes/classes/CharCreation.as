@@ -407,7 +407,7 @@
 				return;
 			}
 			clearOutput();
-			boxNames.visible = false;
+			if (boxNames != null) boxNames.visible = false;
 			mainView.nameBox.visible = false;
 			player.short = mainView.nameBox.text;
 			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) { //Dirty checking as the NG+ flag is incremented after reincarnating.

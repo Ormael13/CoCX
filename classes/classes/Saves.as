@@ -282,6 +282,7 @@ public function saveScreen():void
 	mainView.nameBox.y = 620;
 	mainView.nameBox.width = 550;
 	mainView.nameBox.text = "";
+	mainView.nameBox.maxChars = 54;
 	mainView.nameBox.visible = true;
 	
 	// var test; // Disabling this variable because it seems to be unused.
