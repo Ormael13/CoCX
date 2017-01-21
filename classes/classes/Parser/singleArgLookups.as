@@ -18,6 +18,8 @@
 				// Note: all key strings MUST be ENTIRELY lowercase.
 
 				"agility"					: function(thisPtr:*):* { return "[Agility]"; },
+				"allbreasts"				: function(thisPtr:*):* { return kGAMECLASS.player.allBreastsDescript(); },
+				"alltits"				    : function(thisPtr:*):* { return kGAMECLASS.player.allBreastsDescript(); },
 				"armor"						: function(thisPtr:*):* { return kGAMECLASS.player.armorName;},
 				"armorname"					: function(thisPtr:*):* { return kGAMECLASS.player.armorName;},
 				"ass"						: function(thisPtr:*):* { return kGAMECLASS.player.buttDescript();},
@@ -25,6 +27,7 @@
 				"balls"						: function(thisPtr:*):* { return kGAMECLASS.player.ballsDescriptLight(); },
 				"bodytype"					: function(thisPtr:*):* { return kGAMECLASS.player.bodyType(); },
 				"boyfriend"					: function(thisPtr:*):* { return kGAMECLASS.player.mf("boyfriend", "girlfriend"); },
+				"breasts"					: function(thisPtr:*):* { return kGAMECLASS.player.breastDescript(0); },
 				"butt"						: function(thisPtr:*):* { return kGAMECLASS.player.buttDescript();},
 				"butthole"					: function(thisPtr:*):* { return kGAMECLASS.player.assholeDescript();},
 				"chest"						: function(thisPtr:*):* { return kGAMECLASS.player.chestDesc(); },
@@ -77,6 +80,7 @@
 				"skin"						: function(thisPtr:*):* { return kGAMECLASS.player.skin(); },
 				"skinfurscales"				: function(thisPtr:*):* { return kGAMECLASS.player.skinFurScales(); },
 				"tallness"					: function(thisPtr:*):* { return kGAMECLASS.measurements.footInchOrMetres(kGAMECLASS.player.tallness); },
+				"tits"						: function(thisPtr:*):* { return kGAMECLASS.player.breastDescript(0); },
 				"tongue"					: function(thisPtr:*):* { return kGAMECLASS.player.tongueDescript(); },
 				"uppergarment"				: function(thisPtr:*):* { return kGAMECLASS.player.upperGarmentName; },
 				"vag"						: function(thisPtr:*):* { return kGAMECLASS.player.vaginaDescript(); },

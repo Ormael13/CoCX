@@ -681,9 +681,13 @@ package classes {
 					if (player.biggestLactation() < 1 && player.findStatusEffect(StatusEffects.LactationReduc3) < 0) {
 						player.createStatusEffect(StatusEffects.LactationReduc3, 0, 0, 0, 0);
 						outputText("\n<b>Your body no longer produces any milk.</b>\n");
+						needNext = true;
+					}
+					if (player.biggestLactation() == 0 && player.findStatusEffect(StatusEffects.LactationReduc3) >= 0) {
 						player.removeStatusEffect(StatusEffects.LactationReduction);
 						needNext = true;
 					}
+					
 				}
 			}
 			if (player.findStatusEffect(StatusEffects.CuntStretched) >= 0) { //Cunt stretching stuff
