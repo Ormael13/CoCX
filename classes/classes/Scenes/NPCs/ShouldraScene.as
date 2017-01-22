@@ -87,7 +87,7 @@
 		//End of Interface Implementation
 
 //Intro
-internal function shouldraGreeting():void {
+public function shouldraGreeting():void {
 	spriteSelect(66);
 	clearOutput();
 	if (silly() && flags[kFLAGS.SHOULDRA_PALADIN_MAIDEN_COUNTER] == 0) {

@@ -253,6 +253,7 @@ the text from being too boring.
 		public var telAdre:TelAdre = new TelAdre();
 		public var ingnam:Ingnam = new Ingnam();
 		public var prison:Prison = new Prison();
+		public var townRuins:TownRuins = new TownRuins();
 		// Scenes/Seasonal/
 		public var aprilFools:AprilFools = new AprilFools();
 		public var fera:Fera = new Fera();
