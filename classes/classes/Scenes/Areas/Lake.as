@@ -111,7 +111,7 @@ package classes.Scenes.Areas
 			//==============================
 			//Pre-emptive chance of discovering Amily the stupidshit mouse
 			if (select == 9) {
-				kGAMECLASS.amilyScene.discoverAmilyVillage();
+				kGAMECLASS.townRuins.discoverAmilyVillage();
 			}
 			//Pre-emptive chance of discovering the Beautiful Sword
 			else if (select == 10) {

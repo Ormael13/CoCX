@@ -228,7 +228,7 @@ package classes.Scenes.Camp
 		private function startThinkingOfMaterials():void {
 			outputText("Your site is nice and leveled now. Time to think about what you’ll make the cabin out of. The easiest thing would be wood. There isn’t a lot of fieldstone around here and there are plenty of trees. Wood would be the obvious choice.\n\n");
 			//Tool check!
-			if (player.hasKeyItem("Carpenter's Toolbox")) {
+			if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
 				outputText("Luckily, you found that carpenter’s shop in Tel’Adre and picked up a tool kit. That has an axe, an adze, and a spud, and a bunch of other tools. Everything you need to turn logs into basic beams for a cabin. It’s quite a heavy kit, but you did manage to lug it back across the desert to your campsite. You might as well put it to good use!");
 			}
 			else if (player.hasItem(weapons.L__AXE) || player.weapon == weapons.L__AXE) {
@@ -247,17 +247,16 @@ package classes.Scenes.Camp
 		}
 		
 		private function checkToolbox():void {
-			if (player.hasKeyItem("Carpenter's Toolbox") >= 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] == 4)
-			{
-				outputText("You should be able to work on your cabin as you have toolbox. \n\n");
+			if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
+				outputText("You should be able to work on your cabin as you have the toolbox. \n\n");
 				outputText("You take out the book included in your toolbox. It's titled \"Carpenter's Guide\" and you open the book. There are hundreds of pages, most of them have illustrations on how to use tools and how to build projects. You read through the book, page by page. \n\n");
 				dynStats("int", 1);
 				flags[kFLAGS.CAMP_CABIN_PROGRESS] = 5;
 			}
-			else
-			{
+			else {
 				outputText("You are missing a toolbox. Maybe one of the shops sell these? \n\n");
 			}
+			doNext(playerMenu);
 		}	
 		
 		private function noThanks():void {
@@ -272,7 +271,7 @@ package classes.Scenes.Camp
 		//STAGE 5 - Draw plans for your cabin.
 		private function drawCabinPlans():void {
 			outputText("Now that you’ve harvested some trees, you can now make some plans. You start with taking some of the inner bark of the trees you’ve harvested and pounding it flat. It makes primitive but useful paper. A chunk of charcoal from your campfire and a few moments with a blade make a nice point. Now you can draw up some plans for your cabin.\n\n");
-			outputText("You cast your mind back to the homes in Ingnam, trying to remember all the details you can about how they looked and how they were put together.");
+			outputText("You cast your mind back to the homes in Ingnam, trying to remember all the details you can about how they looked and how they were put together. ");
 			if (player.inte >= 60)
 				outputText("Fortunately, your early training in carpentry hasn’t been forgotten. It only takes a brief time before you have a complete set of plans.");
 			else

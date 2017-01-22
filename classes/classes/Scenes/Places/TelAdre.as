@@ -1,8 +1,6 @@
 ﻿package classes.Scenes.Places {
 	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
+	import classes.GlobalFlags.*;
 	import classes.Items.Armor;
 	import classes.Scenes.Dungeons.DeepCave.ValaScene;
 	import classes.Scenes.Places.TelAdre.*;
