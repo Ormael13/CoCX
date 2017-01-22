@@ -247,6 +247,18 @@ public function doThatTestingThang():void
 * \[arian Eirs\] - [arian Eirs]
 * \[arian Emself\] - [arian Emself]
 
+**Benoit**
+
+* \[benoit name\] - [benoit name]
+* \[benoit ey\] - [benoit ey]
+* \[benoit eir\] - [benoit eir]
+* \[benoit eirs\] - [benoit eirs]
+* \[benoit emself\] - [benoit emself]
+* \[benoit Ey\] - [benoit Ey]
+* \[benoit Eir\] - [benoit Eir]
+* \[benoit Eirs\] - [benoit Eirs]
+* \[benoit Emself\] - [benoit Emself]
+
 **NPC Aspect tests**
 
 * \[arian chest\] - [arian chest]
