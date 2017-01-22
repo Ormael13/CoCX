@@ -75,6 +75,11 @@ private function doCamp():void { //Only called by playerMenu
 	}
 	//make sure gameState is cleared if coming from combat or giacomo
 	getGame().inCombat = false;
+	
+	//There were some problems with buttons not being overwritten and bleeding into other scenes
+	//No scenes should involve a button from a previous scene with a camp scene in the middle
+	mainView.clearBottomButtons();
+	
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 	//Prioritize clearing before setting room
 	if (player.findStatusEffect(StatusEffects.PostAkbalSubmission) >= 0) {
