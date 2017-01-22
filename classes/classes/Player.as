@@ -1640,7 +1640,7 @@ use namespace kGAMECLASS;
 		public function satyrScore():Number
 		{
 			var satyrCounter:Number = 0;
-			if (lowerBody == LOWER_BODY_TYPE_HOOFED)
+			if (lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED)
 				satyrCounter++;
 			if (tailType == TAIL_TYPE_GOAT)
 				satyrCounter++;
