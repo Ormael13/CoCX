@@ -1807,15 +1807,15 @@ package classes.Scenes.Combat
 			lustDisplay = Math.floor(monster.lust) + " / " + monster.eMaxLust();;
 
 			//imageText set in beginCombat()
-			outputText(imageText, false,false);
+			outputText(imageText);
 			
-			outputText("<b>You are fighting ", false);
+			outputText("<b>You are fighting ");
 			outputText(monster.a + monster.short + ":</b> \n");
 			if (player.findStatusEffect(StatusEffects.Blind) >= 0) {
 				outputText("It's impossible to see anything!\n");
 			}
 			else {
-				outputText(monster.long + "\n\n", false);
+				outputText(monster.long + "\n\n");
 				//Bonus sand trap stuff
 				if (monster.findStatusEffect(StatusEffects.Level) >= 0) {
 					temp = monster.statusEffectv1(StatusEffects.Level);
@@ -1828,24 +1828,24 @@ package classes.Scenes.Combat
 					outputText("\n\n");
 				}
 				if (monster.plural) {
-					if (math >= 1) outputText("You see " + monster.pronoun1 + " are in perfect health.  ", false);
-					else if (math > .75) outputText("You see " + monster.pronoun1 + " aren't very hurt.  ", false);
-					else if (math > .5) outputText("You see " + monster.pronoun1 + " are slightly wounded.  ", false);
-					else if (math > .25) outputText("You see " + monster.pronoun1 + " are seriously hurt.  ", false);
-					else outputText("You see " + monster.pronoun1 + " are unsteady and close to death.  ", false);
+					if (math >= 1) outputText("You see " + monster.pronoun1 + " are in perfect health.  ");
+					else if (math > .75) outputText("You see " + monster.pronoun1 + " aren't very hurt.  ");
+					else if (math > .5) outputText("You see " + monster.pronoun1 + " are slightly wounded.  ");
+					else if (math > .25) outputText("You see " + monster.pronoun1 + " are seriously hurt.  ");
+					else outputText("You see " + monster.pronoun1 + " are unsteady and close to death.  ");
 				}
 				else {
-					if (math >= 1) outputText("You see " + monster.pronoun1 + " is in perfect health.  ", false);
-					else if (math > .75) outputText("You see " + monster.pronoun1 + " isn't very hurt.  ", false);
-					else if (math > .5) outputText("You see " + monster.pronoun1 + " is slightly wounded.  ", false);
-					else if (math > .25) outputText("You see " + monster.pronoun1 + " is seriously hurt.  ", false);
-					else outputText("You see " + monster.pronoun1 + " is unsteady and close to death.  ", false);
+					if (math >= 1) outputText("You see " + monster.pronoun1 + " is in perfect health.  ");
+					else if (math > .75) outputText("You see " + monster.pronoun1 + " isn't very hurt.  ");
+					else if (math > .5) outputText("You see " + monster.pronoun1 + " is slightly wounded.  ");
+					else if (math > .25) outputText("You see " + monster.pronoun1 + " is seriously hurt.  ");
+					else outputText("You see " + monster.pronoun1 + " is unsteady and close to death.  ");
 				}
 				showMonsterLust();
 				outputText("\n\n<b><u>" + capitalizeFirstLetter(monster.short) + "'s Stats</u></b>\n")
-				outputText("Level: " + monster.level + "\n", false);
-				outputText("HP: " + hpDisplay + "\n", false);
-				outputText("Lust: " + lustDisplay + "\n", false);
+				outputText("Level: " + monster.level + "\n");
+				outputText("HP: " + hpDisplay + "\n");
+				outputText("Lust: " + lustDisplay + "\n");
 			}
 			if (debug){
 				outputText("\n----------------------------\n");
