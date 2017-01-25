@@ -117,7 +117,7 @@ package classes.Scenes.Places
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
-			if (flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] > 0) getGame().amilyScene.encounterAmily();
+			if (flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] != 1) getGame().amilyScene.encounterAmily();
 			else scavengeTownRuinsOption();
 		}
 		
