@@ -182,7 +182,7 @@ package classes.Scenes.Places
 			var nails:int = 0;
 			var wood:int = 0;
 			var stones:int = 0;
-			var resourceGainText:Array;
+			var resourceGainText:Array = [];
 			outputText("\n\n");
 			//No toolbox? Cancel!
 			if (player.hasKeyItem("Carpenter's Toolbox") < 0) {
