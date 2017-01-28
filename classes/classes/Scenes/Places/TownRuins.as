@@ -235,7 +235,7 @@ package classes.Scenes.Places
 			}
 			else if (flags[progress] == 2) {
 				outputText("With the interior of the building hollow and the roof removed you can begin dismantling the frame. Taking out your hammer and chisel you begin to chip away at the mortar keeping the stone wall together, slowly weakening the structure with each strike. Once you reach the end you look back at your progress, piles of chipped mortar line the floor next to the wall. Taking one last look at it, you take a place inside the hollow structure and push the wall outwards, sending it crashing down, upon impact with the ground it breaks into debris that consists of stone and left-over mortar. Repeating this process for the other sides you get a good look at the wooden studs that have been freed from the surrounding stone; it takes " + (player.str < 80 ? "great" : "a bit of") + " effort, but you manage to pluck them from the ground and arrange them in a neat pile to be hauled off back to camp.");
-				player.changeFatigue(40 - Math.floor(player.str / 5));
+				player.changeFatigue(Math.max(10, 40 - Math.floor(player.str / 5)));
 				wood = 10 + rand(10) + Math.floor(rand((player.str + player.inte) / 8));
 				stones = 5 + rand(5) + Math.floor(rand((player.str + player.inte) / 20));
 			}
