@@ -2318,9 +2318,9 @@ public static const UNKNOWN_FLAG_NUMBER_02309:int                               
 public static const GRIMDARK_BACKGROUND_UNLOCKED:int                                = 2310; // Reserved for Grimdark.
 public static const GRIMDARK_FACTORY_DOOR_UNLOCKED:int                              = 2311;
 public static const IZMA_BROFIED:int                                                = 2312;
-public static const UNKNOWN_FLAG_NUMBER_02313:int                                   = 2313;
-public static const UNKNOWN_FLAG_NUMBER_02314:int                                   = 2314;
-public static const UNKNOWN_FLAG_NUMBER_02315:int                                   = 2315;
+public static const IZMAEL_ANAL_PENETRATED:int                                      = 2313;
+public static const IZMAEL_FRENZIED:int                                             = 2314;
+public static const IZMAEL_ENTRAPPED:int                                            = 2315;
 public static const UNKNOWN_FLAG_NUMBER_02316:int                                   = 2316;
 public static const UNKNOWN_FLAG_NUMBER_02317:int                                   = 2317;
 public static const UNKNOWN_FLAG_NUMBER_02318:int                                   = 2318;

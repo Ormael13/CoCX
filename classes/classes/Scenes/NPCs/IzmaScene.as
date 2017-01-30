@@ -19,7 +19,8 @@
   //creates Izmacounter and sets value to 1 if it doesn't exist)
   
 		public var pregnancy:PregnancyStore;
-
+		public var izmaelScene:IzmaelScene = new IzmaelScene();
+		
 		public function IzmaScene()
 		{
 			pregnancy = new PregnancyStore(kFLAGS.IZMA_PREGNANCY_TYPE, kFLAGS.IZMA_INCUBATION, 0, 0);
@@ -1707,6 +1708,10 @@ public function izmaFollowerMenu():void {
 
 		outputText("\n\n“<i>What can I do for you, Alpha?</i>”");
 	}
+	if (flags[kFLAGS.IZMA_BROFIED] > 0) {
+		izmaelScene.izmaelMenu();
+		return;
+	}
 	if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] <= 0) {
 		flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] = 1;
 		outputText("<b>New codex entry unlocked: Shark-girls & Tigershark-girls!</b>\n\n")
@@ -1738,6 +1743,7 @@ public function izmaFollowerMenu():void {
 		if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0 && !pregnancy.isPregnant) addButton(8, "Farm Work", sendToFarm);
 		if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] != 0) addButton(8, "Go Camp", backToCamp);
 	}
+	if (player.hasItem(consumables.BROBREW) && flags[kFLAGS.IZMA_BROFIED] == 0) addButton(9, "Brotize", izmaelScene.brotizeIzma);
 	addButton(14, "Back", camp.campLoversMenu);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 1) addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
 }
@@ -2652,7 +2658,7 @@ public function pcPopsOutASharkTot():void {
 
 //Children Interaction Sequences: (increment childcounters only for births after Izma joins)
 //Children
-private function izmaKidsPlaytime():void {
+public function izmaKidsPlaytime():void {
 	spriteSelect(32);
 	clearOutput();
 	var choices:Array = [];
