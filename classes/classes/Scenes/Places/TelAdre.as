@@ -1012,22 +1012,25 @@ public function oswaldPawn():void {
 	}
 	else {
 		outputText("You see Oswald fiddling with a top hat as you approach his stand again.  He looks up and smiles, padding up to you and rubbing his furry hands together.  He asks, \"<i>Have any merchandise for me " + player.mf("sir","dear") + "?</i>\"\n\n", false);
-		outputText("(You can sell an item here, but Oswald will not let you buy them back, so be sure of your sales.  You can shift-click to sell all items in a selected stack.)", false);
 	}
-	if (player.hasKeyItem("Carrot") < 0 && flags[kFLAGS.NIEVE_STAGE] == 3)
-	{
+	menu();
+	addButton(0, "Buy", oswaldBuyMenu);
+	addButton(1, "Sell", oswaldPawnMenu);
+	switch (flags[kFLAGS.KATHERINE_UNLOCKED]) {
+		case 1:
+		case 2: addButton(2, "Kath's Alley", katherine.visitKatherine); break;
+		case 3: addButton(2, "Safehouse", katherineEmployment.katherineTrainingWithUrta); break;
+		case 4: addButton(2, "Kath's Alley", katherineEmployment.postTrainingAlleyDescription); //Appears until Kath gives you her housekeys
+		default:
+	}
+	if (player.hasKeyItem("Carrot") < 0 && flags[kFLAGS.NIEVE_STAGE] == 3) {
 		outputText("\n\nIn passing, you mention that you're looking for a carrot.\n\nOswald's tophat tips precariously as his ears perk up, and he gladly announces, \"<i>I happen to have come across one recently - something of a rarity in these dark times, you see.  I could let it go for 500 gems, if you're interested.</i>\"");
-		if (player.gems < 500) {
+		if (player.gems < 500)
 			outputText("\n\n<b>You can't afford that!</b>");
-			oswaldPawnMenu(); //eventParser(1065);
-		}
-		else {
-			menu();
-			addButton(0, "Sell", oswaldPawnMenu);
-			addButton(1, "BuyCarrot", buyCarrotFromOswald);
-		}
+		else
+			addButton(3, "Buy Carrot", buyCarrotFromOswald);
 	}
-	else oswaldPawnMenu(); //eventParser(1065);
+	addButton(4, "Leave", telAdreMenu);
 }
 
 private function buyCarrotFromOswald():void {
@@ -1040,8 +1043,44 @@ private function buyCarrotFromOswald():void {
 	addButton(0,"Next",oswaldPawn);
 }
 
-private function oswaldPawnMenu():void { //Moved here from Inventory.as
+private function oswaldBuyMenu():void {
+	clearOutput();
+	var buyMod:Number = 2;
+	outputText("You ask if Oswald has anything to sell. He nods and says, \"<i>Certainly. If you don't see anything that interests you, come back tomorrow. We get new stocks of merchandise all the time.</i>\"");
+	outputText("\n\n<b><u>Oswald's Prices</u></b>");
+	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).value));
+	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).value));
+	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).value));
+	menu();
+	addButton(0, flags[kFLAGS.BENOIT_1], oswaldTransactBuy, 1);
+	addButton(1, flags[kFLAGS.BENOIT_2], oswaldTransactBuy, 2);
+	addButton(2, flags[kFLAGS.BENOIT_3], oswaldTransactBuy, 3);
+	addButton(4, "Back", oswaldPawn);
+}
+
+private function oswaldTransactBuy(slot:int = 1):void {
+	clearOutput();
+	var itype:ItemType;
+	var buyMod:Number = 2;	
+	if (slot == 1) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_1]);
+	else if (slot == 2) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_2]);
+	else itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_3]);
+	if (player.gems < int(buyMod * itype.value)) {
+		outputText("You consider making a purchase, but you lack the gems to go through with it.");
+		doNext(oswaldBuyMenu);
+		return;
+	}
+	outputText("After examining what you've picked out with his fingers, Oswald hands it over, names the price and accepts your gems with a curt nod.\n\n");
+	player.gems -= int(buyMod * itype.value);
+	statScreenRefresh();
+	inventory.takeItem(itype, oswaldBuyMenu);
+}
+	
+private function oswaldPawnMenu(returnFromSelling:Boolean = false):void { //Moved here from Inventory.as
+	clearOutput();
 	spriteSelect(47);
+	outputText("You see Oswald fiddling with a top hat as you approach his stand again.  He looks up and smiles, padding up to you and rubbing his furry hands together.  He asks, \"<i>Have any merchandise for me " + player.mf("sir","dear") + "?</i>\"\n\n");
+	outputText("(You can sell an item here, but Oswald will not let you buy them back, so be sure of your sales.  You can shift-click to sell all items in a selected stack.)", false);
 	outputText("\n\n<b><u>Oswald's Estimates</u></b>");
 	menu();
 	var totalItems:int = 0;
@@ -1053,14 +1092,7 @@ private function oswaldPawnMenu():void { //Moved here from Inventory.as
 		}
 	}
 	if (totalItems > 1) addButton(12, "Sell All", oswaldPawnSellAll);
-	switch (flags[kFLAGS.KATHERINE_UNLOCKED]) {
-		case 1:
-		case 2: addButton(10, "Kath's Alley", katherine.visitKatherine); break;
-		case 3: addButton(10, "Safehouse", katherineEmployment.katherineTrainingWithUrta); break;
-		case 4: addButton(10, "Kath's Alley", katherineEmployment.postTrainingAlleyDescription); //Appears until Kath gives you her housekeys
-		default:
-	}
-	addButton(14, "Back", telAdreMenu);
+	addButton(14, "Back", oswaldPawn);
 }
 
 private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
@@ -1084,7 +1116,7 @@ private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
 		player.gems += itemValue;
 	}
 	statScreenRefresh();
-	doNext(oswaldPawn);
+	doNext(createCallBackFunction(oswaldPawnMenu, true));
 }
 
 private function oswaldPawnSellAll():void {
@@ -1100,7 +1132,7 @@ private function oswaldPawnSellAll():void {
 	outputText("You lay out all the items you're carrying on the counter in front of Oswald.  He examines them all and nods.  Nervously, he pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
 	player.gems += itemValue;
 	statScreenRefresh();
-	doNext(oswaldPawn);
+	doNext(createCallBackFunction(oswaldPawnMenu, true));
 }
 
 private function anotherButton(button:int, nam:String, func:Function, arg:* = -9000):int {
