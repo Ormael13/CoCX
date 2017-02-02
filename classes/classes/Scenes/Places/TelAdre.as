@@ -29,6 +29,7 @@
 		public var lottie:Lottie = new Lottie();
 		public var maddie:Maddie = new Maddie();
 		public var niamh:Niamh = new Niamh();
+		public var pablo:PabloScene = new PabloScene();
 		public var rubi:Rubi = new Rubi();
 		public var scylla:Scylla = new Scylla();
 		public var sexMachine:SexMachine = new SexMachine();
@@ -2246,54 +2247,31 @@ public function gymDesc():void {
 	if (flags[kFLAGS.LOPPE_MET] > 0 && flags[kFLAGS.LOPPE_DISABLED] == 0) {
 		outputText("\n\nYou spot Loppe the laquine wandering around, towel slung over her shoulder.  When she sees you, she smiles and waves to you and you wave back.");
 	}
-	if (model.time.hours > 9 && model.time.hours < 14) heckel.heckelAppearance();
+	if (model.time.hours > 9 && model.time.hours <= 15) heckel.heckelAppearance();
 	gymMenu();
 }
 
 private function gymMenu():void {
-
-	var membership:Function =null;
-	var cotton2:Function =null;
-	var cottonB:String = "Horsegirl";
-	var hyena:Function =null;
-	var hyenaB:String = "Hyena";
-	var ifris2:Function =null;
-	var ifrisB:String = "Girl";
-	var lottie2:Function = lottie.lottieAppearance(false);
-	var lottieB:String = "Pig-Lady";
-	var loppe2:Function =null;
-	if (flags[kFLAGS.LOTTIE_ENCOUNTER_COUNTER] > 0)
-		lottieB = "Lottie";
-	if (ifris.ifrisIntro())
-		ifris2 = ifris.approachIfris;
-	if (flags[kFLAGS.MET_IFRIS] > 0)
-		ifrisB = "Ifris";
-	if (model.time.hours > 9 && model.time.hours <= 15) {
-		hyena = heckel.greetHeckel;
-		if (flags[kFLAGS.MET_HECKEL] > 0)
-			hyenaB = "Heckel";
-	}
+	menu();
+	//Core gym interactions
+	addButton(0, "ChangeRoom", jasun.changingRoom);
+	addButton(1, "Jog", goJogging);
+	addButton(2, "LiftWeights", weightLifting);
+	//addButton(3, "Go Swimming", goSwimming);
 	if (flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0 && player.gems >= 500)
-		membership = buyGymLifeTimeMembership;
-	if (flags[kFLAGS.PC_IS_A_DEADBEAT_COTTON_DAD] == 0) {
-		if (cotton.cottonsIntro())
-			cotton2 = cotton.cottonGreeting;
-	}
-	if (flags[kFLAGS.COTTON_MET_FUCKED] > 0)
-		cottonB = "Cotton";
-	if (flags[kFLAGS.LOPPE_MET] > 0 && flags[kFLAGS.LOPPE_DISABLED] == 0)
-		loppe2 = loppe.loppeGenericMeetings;
-
-	choices("ChangeRoom",jasun.changingRoom,
-			cottonB,cotton2,
-			hyenaB,hyena,
-			ifrisB,ifris2,
-			"Jog",goJogging,
-			"LiftWeights",weightLifting,
-			"Life Member",membership,
-			lottieB,lottie2,
-			"Loppe",loppe2,
-			"Leave",telAdreMenu);
+		addButton(4, "Life Member", buyGymLifeTimeMembership, null, null, null, "Buy lifetime membership for 500 gems? It could save you gems in the long run.", "Lifetime Membership");
+	else if (flags[kFLAGS.LIFETIME_GYM_MEMBER] > 0)
+		addButtonDisabled(4, "Life Member", "You already have the lifetime membership. So go ahead and use the facilities.", "Lifetime Membership");
+	else
+		addButtonDisabled(4, "Life Member", "You cannot afford to purchase the lifetime membership for the gym. You need 500 gems.", "Lifetime Membership");
+	//NPCs
+	if (flags[kFLAGS.PC_IS_A_DEADBEAT_COTTON_DAD] == 0 && cotton.cottonsIntro()) addButton(5, flags[kFLAGS.COTTON_MET_FUCKED] > 0 ? "Cotton" : "Horsegirl", cotton.cottonGreeting);
+	if (model.time.hours > 9 && model.time.hours <= 15) addButton(6, flags[kFLAGS.MET_HECKEL] > 0 ? "Heckel" : "Hyena", heckel.greetHeckel);
+	if (ifris.ifrisIntro()) addButton(7, flags[kFLAGS.MET_IFRIS] > 0 ? "Ifris" : "Demon-Girl", ifris.approachIfris);
+	if (flags[kFLAGS.LOTTIE_ENCOUNTER_COUNTER] > 0) addButton(8, flags[kFLAGS.LOTTIE_ENCOUNTER_COUNTER] > 0 ? "Lottie" : "Pig-Girl", lottie.lottieAppearance(false));
+	if (flags[kFLAGS.LOPPE_MET] > 0 && flags[kFLAGS.LOPPE_DISABLED] == 0) addButton(9, "Loppe", loppe.loppeGenericMeetings);
+	if (pablo.pabloIntro() && flags[kFLAGS.PABLO_FREAKED_OUT_OVER_WORMS] != 1) addButton(10, flags[kFLAGS.PABLO_MET] > 0 ? "Pablo" : "Imp?", pablo.approachPablo);
+	addButton(14, "Leave", telAdreMenu);
 }
 
 private function buyGymLifeTimeMembership():void {
