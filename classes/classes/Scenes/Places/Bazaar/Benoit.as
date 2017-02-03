@@ -172,7 +172,16 @@ public function benoitOffspring():int
 
 public function benoitBigFamily():Boolean
 {
-	return benoitOffspring() >= 12; // I guess, 12 eggs is a good start (Stadler76)
+	// You need a bassy womb, ...
+	if (player.findPerk(PerkLib.BasiliskWomb) < 0)
+		return false;
+
+	// ... have laid at least 8 eggs by yourself ...
+	if (flags[kFLAGS.BENOIT_EGGS] < 8)
+		return false;
+
+	// ... and at least 15 eggs produced in total (You and/or Benoite)
+	return benoitOffspring() >= 15;
 }
 
 public function setBenoitShop(setButtonOnly:Boolean = false):void {
