@@ -475,6 +475,7 @@ public function updateBenoitInventory():void
 		consumables.SMART_T.id,
 		consumables.VITAL_T.id,
 		consumables.DBLPEPP.id,
+		consumables.REPTLUM.id,
 	];
 	benoitSlot1Items.push(rand(3) == 0 ? consumables.PURHONY.id : consumables.BEEHONY.id);
 	flags[kFLAGS.BENOIT_1] = randomChoice(benoitSlot1Items);
