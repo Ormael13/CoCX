@@ -1310,7 +1310,7 @@ public static const BENOIT_BASIL_EYES_GRANTED:int                               
 public static const BENOIT_HAIRPIN_TALKED_TODAY:int                                 = 1302; // Talked to Benoit(e) about the hairpin today
 public static const IMPS_PETRIFIED:int                                              = 1303; // Total imps petrified
 public static const CAMP_WALL_STATUES:int                                           = 1304; // Total imp statues at camp wall
-public static const UNKNOWN_FLAG_NUMBER_01305:int                                   = 1305;
+public static const CODEX_ENTRY_BASILISKS:int                                       = 1305;
 public static const UNKNOWN_FLAG_NUMBER_01306:int                                   = 1306;
 public static const UNKNOWN_FLAG_NUMBER_01307:int                                   = 1307;
 public static const UNKNOWN_FLAG_NUMBER_01308:int                                   = 1308;
