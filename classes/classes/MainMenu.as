@@ -172,7 +172,7 @@ package classes
 			outputText("</ul>");
 			outputText("<b>Game Mod Supplementary Events:</b>\n");
 			outputText("<ul>");
-			outputText("<li> worldofdrakan (Pigtail Truffles & Pig/Boar TFs)</li>");
+			outputText("<li> worldofdrakan (Pablo the Pseudo-Imp, Pigtail Truffles & Pig/Boar TFs)</li>");
 			outputText("<li> FeiFongWong (Prisoner Mod)</li>");
 			outputText("<li> Foxxling (Lizan Rogue, Skin Oils & Body Lotions, Black Cock)</li>");
 			outputText("<li> LukaDoc (Bimbo Jojo)</li>");

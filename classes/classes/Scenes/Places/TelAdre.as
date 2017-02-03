@@ -29,6 +29,7 @@
 		public var lottie:Lottie = new Lottie();
 		public var maddie:Maddie = new Maddie();
 		public var niamh:Niamh = new Niamh();
+		public var pablo:PabloScene = new PabloScene();
 		public var rubi:Rubi = new Rubi();
 		public var scylla:Scylla = new Scylla();
 		public var sexMachine:SexMachine = new SexMachine();
@@ -1011,22 +1012,25 @@ public function oswaldPawn():void {
 	}
 	else {
 		outputText("You see Oswald fiddling with a top hat as you approach his stand again.  He looks up and smiles, padding up to you and rubbing his furry hands together.  He asks, \"<i>Have any merchandise for me " + player.mf("sir","dear") + "?</i>\"\n\n", false);
-		outputText("(You can sell an item here, but Oswald will not let you buy them back, so be sure of your sales.  You can shift-click to sell all items in a selected stack.)", false);
 	}
-	if (player.hasKeyItem("Carrot") < 0 && flags[kFLAGS.NIEVE_STAGE] == 3)
-	{
+	menu();
+	addButton(0, "Buy", oswaldBuyMenu);
+	addButton(1, "Sell", oswaldPawnMenu);
+	switch (flags[kFLAGS.KATHERINE_UNLOCKED]) {
+		case 1:
+		case 2: addButton(2, "Kath's Alley", katherine.visitKatherine); break;
+		case 3: addButton(2, "Safehouse", katherineEmployment.katherineTrainingWithUrta); break;
+		case 4: addButton(2, "Kath's Alley", katherineEmployment.postTrainingAlleyDescription); //Appears until Kath gives you her housekeys
+		default:
+	}
+	if (player.hasKeyItem("Carrot") < 0 && flags[kFLAGS.NIEVE_STAGE] == 3) {
 		outputText("\n\nIn passing, you mention that you're looking for a carrot.\n\nOswald's tophat tips precariously as his ears perk up, and he gladly announces, \"<i>I happen to have come across one recently - something of a rarity in these dark times, you see.  I could let it go for 500 gems, if you're interested.</i>\"");
-		if (player.gems < 500) {
+		if (player.gems < 500)
 			outputText("\n\n<b>You can't afford that!</b>");
-			oswaldPawnMenu(); //eventParser(1065);
-		}
-		else {
-			menu();
-			addButton(0, "Sell", oswaldPawnMenu);
-			addButton(1, "BuyCarrot", buyCarrotFromOswald);
-		}
+		else
+			addButton(3, "Buy Carrot", buyCarrotFromOswald);
 	}
-	else oswaldPawnMenu(); //eventParser(1065);
+	addButton(4, "Leave", telAdreMenu);
 }
 
 private function buyCarrotFromOswald():void {
@@ -1039,8 +1043,44 @@ private function buyCarrotFromOswald():void {
 	addButton(0,"Next",oswaldPawn);
 }
 
-private function oswaldPawnMenu():void { //Moved here from Inventory.as
+private function oswaldBuyMenu():void {
+	clearOutput();
+	var buyMod:Number = 2;
+	outputText("You ask if Oswald has anything to sell. He nods and says, \"<i>Certainly. If you don't see anything that interests you, come back tomorrow. We get new stocks of merchandise all the time.</i>\"");
+	outputText("\n\n<b><u>Oswald's Prices</u></b>");
+	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).value));
+	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).value));
+	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).value));
+	menu();
+	addButton(0, flags[kFLAGS.BENOIT_1], oswaldTransactBuy, 1);
+	addButton(1, flags[kFLAGS.BENOIT_2], oswaldTransactBuy, 2);
+	addButton(2, flags[kFLAGS.BENOIT_3], oswaldTransactBuy, 3);
+	addButton(4, "Back", oswaldPawn);
+}
+
+private function oswaldTransactBuy(slot:int = 1):void {
+	clearOutput();
+	var itype:ItemType;
+	var buyMod:Number = 2;	
+	if (slot == 1) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_1]);
+	else if (slot == 2) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_2]);
+	else itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_3]);
+	if (player.gems < int(buyMod * itype.value)) {
+		outputText("You consider making a purchase, but you lack the gems to go through with it.");
+		doNext(oswaldBuyMenu);
+		return;
+	}
+	outputText("After examining what you've picked out with his fingers, Oswald hands it over, names the price and accepts your gems with a curt nod.\n\n");
+	player.gems -= int(buyMod * itype.value);
+	statScreenRefresh();
+	inventory.takeItem(itype, oswaldBuyMenu);
+}
+	
+private function oswaldPawnMenu(returnFromSelling:Boolean = false):void { //Moved here from Inventory.as
+	clearOutput();
 	spriteSelect(47);
+	outputText("You see Oswald fiddling with a top hat as you approach his stand again.  He looks up and smiles, padding up to you and rubbing his furry hands together.  He asks, \"<i>Have any merchandise for me " + player.mf("sir","dear") + "?</i>\"\n\n");
+	outputText("(You can sell an item here, but Oswald will not let you buy them back, so be sure of your sales.  You can shift-click to sell all items in a selected stack.)", false);
 	outputText("\n\n<b><u>Oswald's Estimates</u></b>");
 	menu();
 	var totalItems:int = 0;
@@ -1052,14 +1092,7 @@ private function oswaldPawnMenu():void { //Moved here from Inventory.as
 		}
 	}
 	if (totalItems > 1) addButton(12, "Sell All", oswaldPawnSellAll);
-	switch (flags[kFLAGS.KATHERINE_UNLOCKED]) {
-		case 1:
-		case 2: addButton(10, "Kath's Alley", katherine.visitKatherine); break;
-		case 3: addButton(10, "Safehouse", katherineEmployment.katherineTrainingWithUrta); break;
-		case 4: addButton(10, "Kath's Alley", katherineEmployment.postTrainingAlleyDescription); //Appears until Kath gives you her housekeys
-		default:
-	}
-	addButton(14, "Back", telAdreMenu);
+	addButton(14, "Back", oswaldPawn);
 }
 
 private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
@@ -1083,7 +1116,7 @@ private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
 		player.gems += itemValue;
 	}
 	statScreenRefresh();
-	doNext(oswaldPawn);
+	doNext(createCallBackFunction(oswaldPawnMenu, true));
 }
 
 private function oswaldPawnSellAll():void {
@@ -1099,7 +1132,7 @@ private function oswaldPawnSellAll():void {
 	outputText("You lay out all the items you're carrying on the counter in front of Oswald.  He examines them all and nods.  Nervously, he pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
 	player.gems += itemValue;
 	statScreenRefresh();
-	doNext(oswaldPawn);
+	doNext(createCallBackFunction(oswaldPawnMenu, true));
 }
 
 private function anotherButton(button:int, nam:String, func:Function, arg:* = -9000):int {
@@ -2246,54 +2279,31 @@ public function gymDesc():void {
 	if (flags[kFLAGS.LOPPE_MET] > 0 && flags[kFLAGS.LOPPE_DISABLED] == 0) {
 		outputText("\n\nYou spot Loppe the laquine wandering around, towel slung over her shoulder.  When she sees you, she smiles and waves to you and you wave back.");
 	}
-	if (model.time.hours > 9 && model.time.hours < 14) heckel.heckelAppearance();
+	if (model.time.hours > 9 && model.time.hours <= 15) heckel.heckelAppearance();
 	gymMenu();
 }
 
 private function gymMenu():void {
-
-	var membership:Function =null;
-	var cotton2:Function =null;
-	var cottonB:String = "Horsegirl";
-	var hyena:Function =null;
-	var hyenaB:String = "Hyena";
-	var ifris2:Function =null;
-	var ifrisB:String = "Girl";
-	var lottie2:Function = lottie.lottieAppearance(false);
-	var lottieB:String = "Pig-Lady";
-	var loppe2:Function =null;
-	if (flags[kFLAGS.LOTTIE_ENCOUNTER_COUNTER] > 0)
-		lottieB = "Lottie";
-	if (ifris.ifrisIntro())
-		ifris2 = ifris.approachIfris;
-	if (flags[kFLAGS.MET_IFRIS] > 0)
-		ifrisB = "Ifris";
-	if (model.time.hours > 9 && model.time.hours <= 15) {
-		hyena = heckel.greetHeckel;
-		if (flags[kFLAGS.MET_HECKEL] > 0)
-			hyenaB = "Heckel";
-	}
+	menu();
+	//Core gym interactions
+	addButton(0, "ChangeRoom", jasun.changingRoom);
+	addButton(1, "Jog", goJogging);
+	addButton(2, "LiftWeights", weightLifting);
+	//addButton(3, "Go Swimming", goSwimming);
 	if (flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0 && player.gems >= 500)
-		membership = buyGymLifeTimeMembership;
-	if (flags[kFLAGS.PC_IS_A_DEADBEAT_COTTON_DAD] == 0) {
-		if (cotton.cottonsIntro())
-			cotton2 = cotton.cottonGreeting;
-	}
-	if (flags[kFLAGS.COTTON_MET_FUCKED] > 0)
-		cottonB = "Cotton";
-	if (flags[kFLAGS.LOPPE_MET] > 0 && flags[kFLAGS.LOPPE_DISABLED] == 0)
-		loppe2 = loppe.loppeGenericMeetings;
-
-	choices("ChangeRoom",jasun.changingRoom,
-			cottonB,cotton2,
-			hyenaB,hyena,
-			ifrisB,ifris2,
-			"Jog",goJogging,
-			"LiftWeights",weightLifting,
-			"Life Member",membership,
-			lottieB,lottie2,
-			"Loppe",loppe2,
-			"Leave",telAdreMenu);
+		addButton(4, "Life Member", buyGymLifeTimeMembership, null, null, null, "Buy lifetime membership for 500 gems? It could save you gems in the long run.", "Lifetime Membership");
+	else if (flags[kFLAGS.LIFETIME_GYM_MEMBER] > 0)
+		addButtonDisabled(4, "Life Member", "You already have the lifetime membership. So go ahead and use the facilities.", "Lifetime Membership");
+	else
+		addButtonDisabled(4, "Life Member", "You cannot afford to purchase the lifetime membership for the gym. You need 500 gems.", "Lifetime Membership");
+	//NPCs
+	if (flags[kFLAGS.PC_IS_A_DEADBEAT_COTTON_DAD] == 0 && cotton.cottonsIntro()) addButton(5, flags[kFLAGS.COTTON_MET_FUCKED] > 0 ? "Cotton" : "Horsegirl", cotton.cottonGreeting);
+	if (model.time.hours > 9 && model.time.hours <= 15) addButton(6, flags[kFLAGS.MET_HECKEL] > 0 ? "Heckel" : "Hyena", heckel.greetHeckel);
+	if (ifris.ifrisIntro()) addButton(7, flags[kFLAGS.MET_IFRIS] > 0 ? "Ifris" : "Demon-Girl", ifris.approachIfris);
+	if (flags[kFLAGS.LOTTIE_ENCOUNTER_COUNTER] > 0) addButton(8, flags[kFLAGS.LOTTIE_ENCOUNTER_COUNTER] > 0 ? "Lottie" : "Pig-Girl", lottie.lottieAppearance(false));
+	if (flags[kFLAGS.LOPPE_MET] > 0 && flags[kFLAGS.LOPPE_DISABLED] == 0) addButton(9, "Loppe", loppe.loppeGenericMeetings);
+	if (pablo.pabloIntro() && flags[kFLAGS.PABLO_FREAKED_OUT_OVER_WORMS] != 1) addButton(10, flags[kFLAGS.PABLO_MET] > 0 ? "Pablo" : "Imp?", pablo.approachPablo);
+	addButton(14, "Leave", telAdreMenu);
 }
 
 private function buyGymLifeTimeMembership():void {
