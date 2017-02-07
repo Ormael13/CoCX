@@ -2310,7 +2310,7 @@ public function unFuckSave():void
 	if (isNaN(model.time.hours)) model.time.hours = 0;
 	if (isNaN(model.time.days)) model.time.days = 0;
 
-	if (player.gems < 0) player.gems = 0; //Force fix gems
+	if (player.gems < 0 || player.gems == undefined || isNaN(player.gems)) player.gems = 0; //Force fix gems
 	
 	if (player.findStatusEffect(StatusEffects.SlimeCraving) >= 0 && player.statusEffectv4(StatusEffects.SlimeCraving) == 1) {
 		player.changeStatusValue(StatusEffects.SlimeCraving, 3, player.statusEffectv2(StatusEffects.SlimeCraving)); //Duplicate old combined strength/speed value
