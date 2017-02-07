@@ -565,31 +565,36 @@ package classes.Scenes
 			outputText("Which would you like to unequip?\n\n");
 			menu();
 			if (player.weapon != WeaponLib.FISTS)
-			{
 				addButton(0, "Weapon", unequipWeapon, null, null, null, player.weapon.description, capitalizeFirstLetter(player.weapon.name));
-			}
+			else 
+				addButtonDisabled(0, "Weapon");
+				
 			if (player.shield != ShieldLib.NOTHING)
-			{
 				addButton(1, "Shield", unequipShield, null, null, null, player.shield.description, capitalizeFirstLetter(player.shield.name));
-			}
+			else
+				addButtonDisabled(1, "Shield");
+				
 			if (player.jewelry != JewelryLib.NOTHING)
-			{
 				addButton(2, "Accessory", unequipJewel, null, null, null, player.jewelry.description, capitalizeFirstLetter(player.jewelry.name));
-			}
+			else 
+				addButtonDisabled(2, "Accessory");
+				
 			if (player.armor != ArmorLib.NOTHING)
-			{
 				addButton(5, "Armour", unequipArmor, null, null, null, player.armor.description, capitalizeFirstLetter(player.armor.name));
-			}
+			else 
+				addButtonDisabled(5, "Armour");
+				
 			if (player.upperGarment != UndergarmentLib.NOTHING)
-			{
 				addButton(6, "Upperwear", unequipUpperwear, null, null, null, player.upperGarment.description, capitalizeFirstLetter(player.upperGarment.name));
-			}
+			else 
+				addButtonDisabled(6, "Upperwear");
+				
 			if (player.lowerGarment != UndergarmentLib.NOTHING)
-			{
 				addButton(7, "Lowerwear", unequipLowerwear, null, null, null, player.lowerGarment.description, capitalizeFirstLetter(player.lowerGarment.name));
-			}			
+			else 
+				addButtonDisabled(7, "Lowerwear");
+				
 			addButton(14, "Back", inventoryMenu);
-			
 		}
 		//Unequip!
 		private function unequipWeapon():void {
