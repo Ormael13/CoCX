@@ -850,7 +850,7 @@ public function companionsCount():Number {
 public function followersCount():Number {
 	var counter:Number = 0;
 	if (emberScene.followerEmber()) counter++;
-	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
+	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1 || player.armor == armors.GOOARMR) counter++;
 	if (player.findStatusEffect(StatusEffects.PureCampJojo) >= 0) counter++;
 	if (player.findStatusEffect(StatusEffects.CampRathazul) >= 0) counter++;
 	if (followerShouldra()) counter++;
@@ -1315,6 +1315,9 @@ public function campFollowers(descOnly:Boolean = false):void {
 	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) {
 		addButton(6, "Valeria", valeria.valeriaFollower, null, null, null, "Visit Valeria the goo-girl. You can even take and wear her as goo armor if you like.");
 	}
+	if (player.armor == armors.GOOARMR) {
+		addButtonDisabled(6, "Valeria", "You are currently wearing Valeria. Unequip from your Inventory menu if you want to interact with her.");
+	}
 	addButton(14,"Back",playerMenu);
 }
 
@@ -1379,7 +1382,7 @@ private function swimInStream():void {
 		heliaJoinsStream = true;
 	}
 	//Marble!
-	if (rand(2) == 0 && camp.marbleFollower())
+	if (rand(2) == 0 && camp.marbleFollower() && flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 4)
 	{
 		outputText("\n\nYour cow-girl lover Marble strips herself naked and joins you. \"<i>Sweetie, you enjoy swimming, don't you?</i>\" she says.", false);
 		marbleJoinsStream = true;

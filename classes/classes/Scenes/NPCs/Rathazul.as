@@ -455,11 +455,12 @@ public function chooseArmorOrRobes(robeType:int):void {
 	spriteSelect(49);
 	if (robeType == 1 || robeType == 2) { //Armor or robes
 		player.destroyItems(useables.T_SSILK, 5);
+		player.gems -= 500;
 	}
 	else { //Undergarments
 		player.destroyItems(useables.T_SSILK, 2);
+		player.gems -= 200;
 	}
-	player.gems -= 500;
 	statScreenRefresh();
 	outputText("Rathazul grunts in response and goes back to work.  ", true);
 	if (player.findStatusEffect(StatusEffects.CampRathazul) >= 0)

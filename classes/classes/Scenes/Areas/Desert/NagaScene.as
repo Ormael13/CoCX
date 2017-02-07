@@ -775,7 +775,7 @@ public function nagaPlayerConstrict():void {
 
 public function naggaSqueeze():void {
 	clearOutput();
-	if (player.fatigue + player.physicalCost(20) > player.maxFatigue()) {
+	if (player.fatigue + player.physicalCost(10) > player.maxFatigue()) {
 		outputText("You are too tired to squeeze " + monster.a + " " + monster.short + ".");
 		addButton(0, "Next", combat.combatMenu, false);
 		return;
@@ -784,7 +784,7 @@ public function naggaSqueeze():void {
 	outputText("Your coils wrap tighter around your prey, leaving " + monster.pronoun2 + " short of breath. You can feel it in your tail as " + monster.pronoun3 + " struggles are briefly intensified. ", false);
 	var damage:int = monster.eMaxHP() * (.10 + rand(15) / 100);
 	combat.doDamage(damage, true, true);
-	player.changeFatigue(20, 2);
+	player.changeFatigue(10, 2);
 	//Enemy faints -
 	if (monster.HP < 1) {
 		outputText("You can feel " + monster.a + monster.short + "'s life signs beginning to fade, and before you crush all the life from " + monster.pronoun2 + ", you let go, dropping " +monster.pronoun2 + " to the floor, unconscious but alive.  In no time, " + monster.pronoun3 + "'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ", false);
