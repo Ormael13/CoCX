@@ -172,7 +172,16 @@ public function benoitOffspring():int
 
 public function benoitBigFamily():Boolean
 {
-	return benoitOffspring() >= 12; // I guess, 12 eggs is a good start (Stadler76)
+	// You need a bassy womb, ...
+	if (player.findPerk(PerkLib.BasiliskWomb) < 0)
+		return false;
+
+	// ... have laid at least 8 eggs by yourself ...
+	if (flags[kFLAGS.BENOIT_EGGS] < 8)
+		return false;
+
+	// ... and at least 15 eggs produced in total (You and/or Benoite)
+	return benoitOffspring() >= 15;
 }
 
 public function setBenoitShop(setButtonOnly:Boolean = false):void {
@@ -299,6 +308,11 @@ public function benoitIntro():void {
 	}
 
 	flags[kFLAGS.TIMES_IN_BENOITS]++;
+
+	if (flags[kFLAGS.CODEX_ENTRY_BASILISKS] <= 0) {
+		flags[kFLAGS.CODEX_ENTRY_BASILISKS] = 1;
+		outputText("\n\n<b>New codex entry unlocked: Basilisks!</b>")
+	}
 
 	menu();
 	//Core buttons
@@ -461,6 +475,7 @@ public function updateBenoitInventory():void
 		consumables.SMART_T.id,
 		consumables.VITAL_T.id,
 		consumables.DBLPEPP.id,
+		consumables.REPTLUM.id,
 	];
 	benoitSlot1Items.push(rand(3) == 0 ? consumables.PURHONY.id : consumables.BEEHONY.id);
 	flags[kFLAGS.BENOIT_1] = randomChoice(benoitSlot1Items);

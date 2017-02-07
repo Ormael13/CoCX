@@ -141,6 +141,9 @@ package classes.Scenes
 			if (flags[kFLAGS.CODEX_ENTRY_ZEBRAS] > 0) {
 				num++;
 			}
+			if (flags[kFLAGS.CODEX_ENTRY_BASILISKS] > 0) {
+				num++;
+			}
 			//Factions
 			if (flags[kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS] > 0) {
 				num++;
@@ -152,7 +155,7 @@ package classes.Scenes
 			if (flags[kFLAGS.CODEX_ENTRY_MAGIC] > 0) {
 				num++;
 			}
-			if (num >= 24) awardAchievement("Scholar", kACHIEVEMENTS.GENERAL_SCHOLAR);
+			if (num >= 25) awardAchievement("Scholar", kACHIEVEMENTS.GENERAL_SCHOLAR);
 			return num;
 		}
 		
@@ -163,7 +166,7 @@ package classes.Scenes
 			menu();
 			flags[kFLAGS.CODEX_CURRENT_ENTRY] = 0
 			outputText("You open your codex. Which topic would you like to read?\n\n");
-			outputText("Codex entries unlocked: " + checkUnlocked() + "/24");
+			outputText("Codex entries unlocked: " + checkUnlocked() + "/25");
 			addButton(0, "Races", menuRaces);
 			addButton(1, "Cults", menuFactions);
 			addButton(2, "Others", menuItems);
@@ -196,20 +199,20 @@ package classes.Scenes
 			//1st row
 			addCodexButton("Anemones", "Anemone", codexEntryAnemone, kFLAGS.CODEX_ENTRY_ANEMONES);
 			addCodexButton("Arachnes", "Arachne", codexEntrySpiders, kFLAGS.CODEX_ENTRY_ARACHNES);
+			addCodexButton("Basilisks", "Basilisks", codexEntryBasilisks, kFLAGS.CODEX_ENTRY_BASILISKS);
 			addCodexButton("Behemoth", "Behemoth", codexEntryBehemoth, kFLAGS.CODEX_ENTRY_BEHEMOTH);
-			addCodexButton("Echidnas", "Echidnas", codexEntryEchidnas, kFLAGS.CODEX_ENTRY_ECHIDNAS);
 			
 			//2nd row
+			addCodexButton("Echidnas", "Echidnas", codexEntryEchidnas, kFLAGS.CODEX_ENTRY_ECHIDNAS);
 			addCodexButton("Giant Bees", "GiantBees", codexEntryBees, kFLAGS.CODEX_ENTRY_GIANTBEES);
 			addCodexButton("Goblins", "Goblins", codexEntryGoblins, kFLAGS.CODEX_ENTRY_GOBLINS);
 			addCodexButton("Goo Girls", "GooGirls", codexEntryGooGirls, kFLAGS.CODEX_ENTRY_GOOGIRLS);
-			addCodexButton("Harpies", "Harpies", codexEntryHarpies, kFLAGS.CODEX_ENTRY_HARPIES);
 			
 			//3rd row
+			addCodexButton("Harpies", "Harpies", codexEntryHarpies, kFLAGS.CODEX_ENTRY_HARPIES);
 			addCodexButton("Hellhounds", "Hellhounds", codexEntryHellhounds, kFLAGS.CODEX_ENTRY_HELLHOUNDS);
 			addCodexButton("Imps", "Imps", codexEntryImps, kFLAGS.CODEX_ENTRY_IMPS);
 			addCodexButton("LaBovines", "Labovines", codexEntryLaBovines, kFLAGS.CODEX_ENTRY_LABOVINES);
-			addCodexButton("Lizans", "Lizans", codexEntryLizans, kFLAGS.CODEX_ENTRY_LIZANS);
 			
 			addButton(4, "Next", menuRacesII);
 			//addButton(9, "Previous", menuRaces);
@@ -219,18 +222,19 @@ package classes.Scenes
 			menu();
 			flags[kFLAGS.CODEX_CURRENT_PAGE] = PAGE_RACES_2;
 			//1st row
+			addCodexButton("Lizans", "Lizans", codexEntryLizans, kFLAGS.CODEX_ENTRY_LIZANS);
 			addCodexButton("Minotaurs", "Minotaurs", codexEntryMinotaurs, kFLAGS.CODEX_ENTRY_MINOTAURS);
 			addCodexButton("Nagas", "Nagas", codexEntryNagas, kFLAGS.CODEX_ENTRY_NAGAS);
 			addCodexButton("Orcs", "Orcs", codexEntryOrcs, kFLAGS.CODEX_ENTRY_ORCS);
-			addCodexButton("Rhinoceros", "Rhinos", codexEntryRhinos, kFLAGS.CODEX_ENTRY_RHINOS);
 			
 			//2nd row
+			addCodexButton("Rhinoceros", "Rhinos", codexEntryRhinos, kFLAGS.CODEX_ENTRY_RHINOS);
 			addCodexButton("Salamanders", "Salamanders", codexEntrySalamanders, kFLAGS.CODEX_ENTRY_SALAMANDERS);
 			addCodexButton("Satyrs", "Satyrs", codexEntrySatyrs, kFLAGS.CODEX_ENTRY_SATYRS);
 			addCodexButton("Succubus", "Succubus", codexEntrySuccubus, kFLAGS.CODEX_ENTRY_SUCCUBUS);
-			addCodexButton("Shark Girls", "SharkGirls", codexEntrySharkGirls, kFLAGS.CODEX_ENTRY_SHARKGIRLS);
 			
 			//3rd row
+			addCodexButton("Shark Girls", "SharkGirls", codexEntrySharkGirls, kFLAGS.CODEX_ENTRY_SHARKGIRLS);
 			addCodexButton("Zebras", "Zebras", codexEntryZebras, kFLAGS.CODEX_ENTRY_ZEBRAS);
 			
 			//addButton(4, "Next", menuRacesIII);
@@ -809,5 +813,67 @@ package classes.Scenes
 			outputText("\n\n(Written by: Rycharde) ")
 			setCodexMenusAfterDisplay();
 		}
+
+		private function codexEntryBasilisks():void
+		{
+			flags[kFLAGS.CODEX_CURRENT_ENTRY] = "Basilisks";
+			clearOutput();
+			headerMain("Basilisks");
+			outputText("<b>Genders:</b> Male, though rumours of female and herm basilisks re-emerging are spreading.\n");
+			outputText("<b>Height:</b> Basilisk tend to grow up to 6 foot 8, with rare basilisks being to be taller. Around the 6 foot 2 mark is"
+			          +" where they grow to on average.\n");
+			outputText("<b>Build:</b> Basilisks tend to have thin and wiry frames, taut with muscles. These powerful and lean predators,have slender"
+			          +" hips and average behinds. It is rumoured females have much wider hips, plump behinds and overall softer frames, though still"
+			          +" remain quite thin, though none have been seen in so long it is hard to verify.\n");
+			outputText("<b>Hair:</b> In place of hair Basilisks have a crown of dull spines. Their rubbery texture and darker coloured tips makes"
+			          +" them stand out, but with little effort a basilisk may flatten them to his skull. They tend to raise and flatten based on"
+			          +" emotions, possibly a technique evolved to help with communication of visual cues when hunting. The now missing females had a"
+			          +" plume of crimson feathers instead of spines, the floppy feathers looking similar to a ladies fascinator.\n");
+			outputText("<b>Skin:</b> Basilisks have scales which tend to be a grey-green color, while their underbelly is a yellow color. However"
+			          +" other scale colors do occur. Green and purple is a combination that high ranking basilisks tend to have.\n");
+			outputText("<b>Facial structure:</b> Basilisks have a reptilian face with somewhat blunt snout. Their eyes tend to be grey, though higher"
+			          +" ranking basilisk may have a yellow glow to their eyes, but this may be due to the power they wield rather than an actual"
+			          +" colour change. Their features tend to seem cruel and powerful like a reptilian ruler.\n");
+			headerSub("Appearance");
+			outputText("Basilisks look similar to Lizans, but instead have thin and muscular frames with green-grey scales, sharp sickle like claws"
+			          +" and long whip like tails. Their most notable feature are their eyes, grey with slit pupils and seeming ever wet, more like a"
+			          +" shimmering pool than an eye. Their gaze is powerful, both allowing a psychic link to be made with the one they make eye"
+			          +" contact with, but also if they desire, the ability to petrify others. They have a crown of spines or a plume of feathers in"
+			          +" place of hair, depending on gender. Females have wider hips than males and have small, usually up to B-Cup, ornamental"
+			          +" breasts. Males have a long, thin purple lizard cock which hides in a genital slit when not aroused. Both sexes have long"
+			          +" sticky tongues with a bulbous tip.");
+			headerSub("Reproduction");
+			outputText("Basilisks do not tend to breed often, usually only breeding for survival. To breed, due to being only male, they must force"
+			          +" themselves on egg laying races, most notably harpies. However when a foe is in heat or with clutch a basilisk will mate with"
+			          +" them readily. Basilisks use their gaze to paralyse their victims before fucking them, using their compulsion to make the"
+			          +" body yield as it is needed while the individual is unable to escape. When basilisks breed with harpies, most of the time the"
+			          +" children will be basilisks, while sometimes they will be harpies. However rarely a hybrid creature known as a cockatrice is"
+			          +" born. A female basilisk would become laden with eggs once a month, during which she would be able to become fertilised for"
+			          +" 3 days. If mated and the male was virile enough, the eggs would remain, growing larger for a week before being laid. If the"
+			          +" female wasn’t fertilised, the eggs would pass on the 4th day, laid but unfertilized. Clutches tended to vary based on the"
+			          +" female's fertility but between 4 and 12 eggs was an average clutch size.");
+			headerSub("History");
+			outputText("Despised by lizard and bird races for their proclivity for egg stealing, the basilisks chose to ally themselves with the"
+			          +" demons of the High Mountain out of desperation. Within a generation the demons successfully increased the power of their"
+			          +" paralysing stare, whilst forcing them into becoming an entirely male race.They are triply useful to the demons in their"
+			          +" current state: they provide a fearsome reputation for the High Mountains, they can literally petrify interlopers to provide"
+			          +" amusing statues, and they keep the hostile harpy population down. Since then there have been no female basilisks born due to"
+			          +" the corruption, though rumour states that a modified womb of a pure enough creature may be able to birth females.");
+			headerSub("Petrification");
+			outputText("Before the demons, basilisks could only paralyse others with their gaze. But once the demons had had their way, the gaze of a"
+			          +" basilisk could now turn others to stone. While basilisks use their petrifying gaze on those they defeat, they tend to use a"
+			          +" version of similar strength to their old paralysis. Whether this is for their amusement or some other reason is unknown, but"
+			          +" the same power is also used when they rape a target, suggesting they enjoy others feeling helpless. When petrified the"
+			          +" individual can only move as the basilisk wills with their compulsion, making them a very effective fucktoy until the effect"
+			          +" wears off. At first their gaze simply makes the individual feel sluggish and have difficulty moving, but the longer they"
+			          +" remain in eye contact the more extreme it becomes. Eye contact is gained through a mind based compulsion, similar to"
+			          +" hypnotism or a charm effect on the victim. When a basilisk uses its gaze to turn an individual to stone, it is often one who"
+			          +" has become a nuisance to the demons, and the resulting statue is gifted to them as a offering to ensure they do not further"
+			          +" screw over the species. Both abilities are referred to as petrification.");
+			outputText("\n\n(Written by MissBlackthorne)")
+			setCodexMenusAfterDisplay();
+		}
+		
+
 	}
 }

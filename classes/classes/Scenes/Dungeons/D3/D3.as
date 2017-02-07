@@ -355,7 +355,12 @@ package classes.Scenes.Dungeons.D3
 					if (player.hasKeyItem("Laybans") < 0) outputText("  Are you going to try this?");
 					else outputText("  You take the Laybans out of your pocket, turning them around in your hands as you consider. Are you going to try this?");
 				}
-				
+
+				if (flags[kFLAGS.CODEX_ENTRY_BASILISKS] <= 0) {
+					flags[kFLAGS.CODEX_ENTRY_BASILISKS] = 1;
+					outputText("\n\n<b>New codex entry unlocked: Basilisks!</b>")
+				}
+
 				menu();
 				addButton(0, "Go!", jeanClaude.gogoFuckTheseBasilisks);
 				addButton(1, "Fall Back", fallbackFromMagpieHallS);
