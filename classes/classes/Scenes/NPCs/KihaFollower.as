@@ -102,6 +102,7 @@ override public function followerKiha():Boolean {
 }
 private function kihaAffection(changes:Number = 0):Boolean {
 	if (flags[kFLAGS.KIHA_AFFECTION_LEVEL] == 2) flags[kFLAGS.KIHA_AFFECTION] += changes;
+	if (flags[kFLAGS.KIHA_AFFECTION] < 0) flags[kFLAGS.KIHA_AFFECTION] = 0;
 	if (flags[kFLAGS.KIHA_AFFECTION] > 100) flags[kFLAGS.KIHA_AFFECTION] = 100;
 	return flags[kFLAGS.KIHA_AFFECTION];
 }
