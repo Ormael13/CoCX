@@ -397,7 +397,7 @@ package classes
 			if (flags[kFLAGS.ANEMONE_KID] > 0)
 				interpersonStats += "<b>Kid A's Confidence:</b> " + getGame().anemoneScene.kidAXP() + "%\n";
 
-			if (flags[kFLAGS.KIHA_AFFECTION_LEVEL] == 2) {
+			if (flags[kFLAGS.KIHA_AFFECTION_LEVEL] >= 2 || getGame().kihaFollower.followerKiha()) {
 				if (getGame().kihaFollower.followerKiha())
 					interpersonStats += "<b>Kiha's Affection:</b> " + 100 + "%\n";
 				else

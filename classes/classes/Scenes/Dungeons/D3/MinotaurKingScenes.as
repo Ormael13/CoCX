@@ -57,13 +57,9 @@ package classes.Scenes.Dungeons.D3
 			}
 			menu();
 			addButton(0,"Kill Them",this.murderhobo);
-			var smallCockIdx:int = player.smallestCockIndex();
-			if (smallCockIdx != -1)
-			{
-				addButton(1,"Docking",this.dockucocku,smallCockIdx);
-			}
 			if (player.hasCock())
 			{
+				if (player.smallestCockIndex()) addButton(1, "Docking", this.dockucocku, player.smallestCockIndex());
 				if (player.cockThatFits(200) >= 0) addButton(2,"Buttfuck",this.buttufucku);
 				addButton(3,"Titfuck",this.titfuckCowslut);
 				addButton(4,"SloppySeconds",this.sloppySeconds);
