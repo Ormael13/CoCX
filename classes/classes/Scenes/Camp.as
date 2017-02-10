@@ -75,6 +75,11 @@ private function doCamp():void { //Only called by playerMenu
 	}
 	//make sure gameState is cleared if coming from combat or giacomo
 	getGame().inCombat = false;
+	
+	//There were some problems with buttons not being overwritten and bleeding into other scenes
+	//No scenes should involve a button from a previous scene with a camp scene in the middle
+	mainView.clearBottomButtons();
+	
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 	//Prioritize clearing before setting room
 	if (player.findStatusEffect(StatusEffects.PostAkbalSubmission) >= 0) {
@@ -845,7 +850,7 @@ public function companionsCount():Number {
 public function followersCount():Number {
 	var counter:Number = 0;
 	if (emberScene.followerEmber()) counter++;
-	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
+	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1 || player.armor == armors.GOOARMR) counter++;
 	if (player.findStatusEffect(StatusEffects.PureCampJojo) >= 0) counter++;
 	if (player.findStatusEffect(StatusEffects.CampRathazul) >= 0) counter++;
 	if (followerShouldra()) counter++;
@@ -1018,16 +1023,27 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	}
 	//Izma
 	if (izmaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
-		outputText("Neatly laid near the base of your own is a worn bedroll belonging to Izma, your tigershark lover. It's a snug fit for her toned body, though it has some noticeable cuts and tears in the fabric. Close to her bed is her old trunk, almost as if she wants to have it at arms length if anyone tries to rob her in her sleep.\n\n", false);
-		temp = rand(3);
-		//Text 1} I
-		if (temp == 0) outputText("Izma's lazily sitting on the trunk beside her bedroll, reading one of the many books from inside it.  She smiles happily when your eyes linger on her, and you know full well she's only half-interested in it.", false);
-		//Text 2
-		else if (temp == 1) outputText("You notice Izma isn't around right now.  She's probably gone off to the nearby stream to get some water.  Never mind, she comes around from behind a rock, still dripping wet.", false);
-		//Text 3 
-		else outputText("Izma is lying on her back near her bedroll.  You wonder at first just why she isn't using her bed, but as you look closer you notice all the water pooled beneath her and the few droplets running down her arm, evidence that she's just returned from the stream.", false);
-		outputText("\n\n");
-		addButton(4, "Izma", izmaScene.izmaFollowerMenu);
+		if (flags[kFLAGS.IZMA_BROFIED] > 0) {
+			if (rand(6) == 0 && camp.vapulaSlave() && flags[kFLAGS.VAPULA_HAREM_FUCK] > 0) outputText("Izmael is standing a short distance away with an expression of unadulterated joy on his face, Vapula knelt in front of him and fellating him with noisy enthusiasm.  The shark morph dreamily opens his eyes to catch you staring, and proceeds to give you a huge grin and two solid thumbs up.");
+			else if (model.time.hours >= 6 && model.time.hours <= 12) outputText("You keep hearing the sound of objects hitting water followed by peals of male laughter coming from the stream. It sounds as if Izmael is throwing large rocks into the stream and finding immense gratification from the results. In fact, you’re pretty sure that’s exactly what he’s doing.");
+			else if (model.time.hours <= 16) outputText("Izmael is a short distance away doing squat thrusts, his body working like a piston, gleaming with sweat. He keeps bobbing his head up to see if anybody is watching him.");
+			else if (model.time.hours <= 19) outputText("Izmael is sat against his book chest, masturbating furiously without a care in the world. Eyes closed, both hands pumping his immense shaft, there is an expression of pure, childish joy on his face.");
+			else if (model.time.hours <= 22) outputText("Izmael has built a fire and is flopped down next to it. You can’t help but notice that he’s used several of his books for kindling. His eyes are locked on the flames, mesmerized by the dancing light and heat.");
+			else outputText("Izmael is currently on his bedroll, sleeping for the night.");
+			outputText("\n\n");
+			addButton(4, "Izmael", izmaScene.izmaelScene.izmaelMenu);
+		}
+		else {
+			outputText("Neatly laid near the base of your own is a worn bedroll belonging to Izma, your tigershark lover. It's a snug fit for her toned body, though it has some noticeable cuts and tears in the fabric. Close to her bed is her old trunk, almost as if she wants to have it at arms length if anyone tries to rob her in her sleep.\n\n");
+			switch(rand(3)) {
+				case 0: outputText("Izma's lazily sitting on the trunk beside her bedroll, reading one of the many books from inside it. She smiles happily when your eyes linger on her, and you know full well she's only half-interested in it."); break;
+				case 1: outputText("You notice Izma isn't around right now. She's probably gone off to the nearby stream to get some water. Never mind, she comes around from behind a rock, still dripping wet."); break;
+				case 2: outputText("Izma is lying on her back near her bedroll. You wonder at first just why she isn't using her bed, but as you look closer you notice all the water pooled beneath her and the few droplets running down her arm, evidence that she's just returned from the stream."); break;
+			}
+			outputText("\n\n");
+			addButton(4, "Izma", izmaScene.izmaFollowerMenu);
+		}
+
 	}
 	//Kiha!
 	if (followerKiha()) {
@@ -1299,6 +1315,9 @@ public function campFollowers(descOnly:Boolean = false):void {
 	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) {
 		addButton(6, "Valeria", valeria.valeriaFollower, null, null, null, "Visit Valeria the goo-girl. You can even take and wear her as goo armor if you like.");
 	}
+	if (player.armor == armors.GOOARMR) {
+		addButtonDisabled(6, "Valeria", "You are currently wearing Valeria. Unequip from your Inventory menu if you want to interact with her.");
+	}
 	addButton(14,"Back",playerMenu);
 }
 
@@ -1363,7 +1382,7 @@ private function swimInStream():void {
 		heliaJoinsStream = true;
 	}
 	//Marble!
-	if (rand(2) == 0 && camp.marbleFollower())
+	if (rand(2) == 0 && camp.marbleFollower() && flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 4)
 	{
 		outputText("\n\nYour cow-girl lover Marble strips herself naked and joins you. \"<i>Sweetie, you enjoy swimming, don't you?</i>\" she says.", false);
 		marbleJoinsStream = true;

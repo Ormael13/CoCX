@@ -414,7 +414,12 @@ private function craftSilkArmor():void {
 			outputText("The old rat shakes his head and adds, \"<i>Well, now that I think about it, the venom of a red widow might be able to transform you until you are a spider to the core, but I have absolutely no idea what that would do to you.  If you ever try such a dangerous, reckless idea, let me know.  I want to have my notebooks handy, for SCIENCE!</i>\"\n\n", false);
 		}
 		if (player.hasItem(useables.T_SSILK, 2)) {
-			outputText("\"<i>But this should be enough for undergarments if you want,</i>\" Rathazul adds.");
+			outputText("\"<i>But this should be enough for undergarments if you want and I will need 500 gems up front,</i>\" Rathazul adds.");
+			if (player.gems < 500) {
+				outputText("  <b>Wait... you don't even have 500 gems.  Damn.</b>", false);
+				doNext(returnToRathazulMenu);
+				return;
+			}
 			doYesNo(commissionSilkArmorForReal,declineSilkArmorCommish);
 			return;
 		}

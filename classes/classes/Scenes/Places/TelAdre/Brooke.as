@@ -94,6 +94,20 @@ public function meetBrookeFirstTime():void {
 
 public function repeatChooseShower():void {
 	clearOutput();
+	if (flags[kFLAGS.PABLO_AFFECTION] >= 60 && telAdre.pablo.pabloIntro(false) && rand(2) == 0) {
+		if (flags[kFLAGS.PABLO_SECRET_LEARNED] == 0) {
+			telAdre.pablo.pabloSecret();
+			return;
+		}
+		else if (flags[kFLAGS.PABLO_AFFECTION] >= 100) {
+			telAdre.pablo.pabloShowerSexIntro();
+			return;
+		}
+		if (flags[kFLAGS.PABLO_FREAKED_OUT_OVER_WORMS] > 0 && player.findStatusEffect(StatusEffects.Infested) < 0) {
+			telAdre.pablo.pabloComesBackAfterWormCure();
+			return;
+		}
+	}
 	if (model.time.hours < 16 || model.time.hours > 18 || player.tone < 30) {
 		//Before 16:00/after 18:00, affection <= 19
 		if (brookeAffection() <= 19) {

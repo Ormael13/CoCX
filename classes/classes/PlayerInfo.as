@@ -336,7 +336,7 @@ package classes
 			var interpersonStats:String = "";
 			
 			if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] > 0) {
-				interpersonStats += "<b>Anzu Affection:</b> " + flags[kFLAGS.ANZU_AFFECTION] + "%\n";
+				interpersonStats += "<b>Anzu's Affection:</b> " + flags[kFLAGS.ANZU_AFFECTION] + "%\n";
 				interpersonStats += "<b>Anzu's Relationship Level:</b> " + (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 1 ? "Acquaintances" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 2 ? "Friend" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 3 ? "Close Friend" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 4 ? "Lover" : "Undefined") + "\n";
 			}
 			
@@ -350,25 +350,25 @@ package classes
 				interpersonStats += "<b>" + getGame().bazaar.benoit.benoitMF("Benoit", "Benoite") + " Affection:</b> " + Math.round(getGame().bazaar.benoit.benoitAffection()) + "%\n";
 			
 			if (flags[kFLAGS.BROOKE_MET] > 0)
-				interpersonStats += "<b>Brooke Affection:</b> " + Math.round(getGame().telAdre.brooke.brookeAffection()) + "\n";
+				interpersonStats += "<b>Brooke's Affection:</b> " + Math.round(getGame().telAdre.brooke.brookeAffection()) + "\n";
 				
 			if (flags[kFLAGS.CERAPH_DICKS_OWNED] + flags[kFLAGS.CERAPH_PUSSIES_OWNED] + flags[kFLAGS.CERAPH_TITS_OWNED] > 0)
 				interpersonStats += "<b>Body Parts Taken By Ceraph:</b> " + (flags[kFLAGS.CERAPH_DICKS_OWNED] + flags[kFLAGS.CERAPH_PUSSIES_OWNED] + flags[kFLAGS.CERAPH_TITS_OWNED]) + "\n";
 				
 			if (getGame().emberScene.emberAffection() > 0)
-				interpersonStats += "<b>Ember Affection:</b> " + Math.round(getGame().emberScene.emberAffection()) + "%\n";
+				interpersonStats += "<b>Ember's Affection:</b> " + Math.round(getGame().emberScene.emberAffection()) + "%\n";
 			if (getGame().emberScene.emberSparIntensity() > 0)
 				interpersonStats += "<b>Ember Spar Intensity:</b> " + getGame().emberScene.emberSparIntensity() + "\n";
 				
 			if (getGame().helFollower.helAffection() > 0)
-				interpersonStats += "<b>Helia Affection:</b> " + Math.round(getGame().helFollower.helAffection()) + "%\n";
+				interpersonStats += "<b>Helia's Affection:</b> " + Math.round(getGame().helFollower.helAffection()) + "%\n";
 			if (getGame().helFollower.helAffection() >= 100)
 				interpersonStats += "<b>Helia Bonus Points:</b> " + Math.round(flags[kFLAGS.HEL_BONUS_POINTS]) + "\n";
 			if (getGame().helFollower.followerHel())
 				interpersonStats += "<b>Helia Spar Intensity:</b> " + getGame().helScene.heliaSparIntensity() + "\n";
 			
 			if (flags[kFLAGS.ISABELLA_AFFECTION] > 0) {
-				interpersonStats += "<b>Isabella Affection:</b> ";
+				interpersonStats += "<b>Isabella's Affection:</b> ";
 				
 				if (!getGame().isabellaFollowerScene.isabellaFollower())
 					interpersonStats += Math.round(flags[kFLAGS.ISABELLA_AFFECTION]) + "%\n", false;
@@ -383,7 +383,7 @@ package classes
 			}
 			
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 4) {
-				interpersonStats += "<b>Katherine Submissiveness:</b> " + getGame().telAdre.katherine.submissiveness() + "\n";
+				interpersonStats += "<b>Katherine's Submissiveness:</b> " + getGame().telAdre.katherine.submissiveness() + "\n";
 			}
 
 			if (player.findStatusEffect(StatusEffects.Kelt) >= 0 && flags[kFLAGS.KELT_BREAK_LEVEL] == 0 && flags[kFLAGS.KELT_KILLED] == 0) {
@@ -397,11 +397,11 @@ package classes
 			if (flags[kFLAGS.ANEMONE_KID] > 0)
 				interpersonStats += "<b>Kid A's Confidence:</b> " + getGame().anemoneScene.kidAXP() + "%\n";
 
-			if (flags[kFLAGS.KIHA_AFFECTION_LEVEL] == 2) {
+			if (flags[kFLAGS.KIHA_AFFECTION_LEVEL] >= 2 || getGame().kihaFollower.followerKiha()) {
 				if (getGame().kihaFollower.followerKiha())
-					interpersonStats += "<b>Kiha Affection:</b> " + 100 + "%\n";
+					interpersonStats += "<b>Kiha's Affection:</b> " + 100 + "%\n";
 				else
-					interpersonStats += "<b>Kiha Affection:</b> " + Math.round(flags[kFLAGS.KIHA_AFFECTION]) + "%\n";
+					interpersonStats += "<b>Kiha's Affection:</b> " + Math.round(flags[kFLAGS.KIHA_AFFECTION]) + "%\n";
 			}
 			//Lottie stuff
 			if (flags[kFLAGS.LOTTIE_ENCOUNTER_COUNTER] > 0)
@@ -409,9 +409,15 @@ package classes
 			
 			if (getGame().mountain.salon.lynnetteApproval() != 0)
 				interpersonStats += "<b>Lynnette's Approval:</b> " + getGame().mountain.salon.lynnetteApproval() + "\n";
+			
+			if (player.statusEffectv1(StatusEffects.Marble) > 0)
+				interpersonStats += "<b>Marble's Affection:</b>" + player.statusEffectv1(StatusEffects.Marble) + "%\n";
 				
 			if (flags[kFLAGS.OWCAS_ATTITUDE] > 0)
 				interpersonStats += "<b>Owca's Attitude:</b> " + flags[kFLAGS.OWCAS_ATTITUDE] + "\n";
+
+			if (getGame().telAdre.pablo.pabloAffection() > 0)
+				interpersonStats += "<b>Pablo's Affection:</b> " + flags[kFLAGS.PABLO_AFFECTION] + "%\n";
 				
 			if (getGame().telAdre.rubi.rubiAffection() > 0)
 				interpersonStats += "<b>Rubi's Affection:</b> " + Math.round(getGame().telAdre.rubi.rubiAffection()) + "%\n" + "<b>Rubi's Orifice Capacity:</b> " + Math.round(getGame().telAdre.rubi.rubiCapacity()) + "%\n";
@@ -429,16 +435,16 @@ package classes
 			
 			if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] != 0) {
 				if (getGame().urta.urtaLove()) {
-					if (flags[kFLAGS.URTA_QUEST_STATUS] == -1) interpersonStats += "<b>Urta Status:</b> <font color=\"#800000\">Gone</font>\n";
-					if (flags[kFLAGS.URTA_QUEST_STATUS] == 0) interpersonStats += "<b>Urta Status:</b> Lover\n";
-					if (flags[kFLAGS.URTA_QUEST_STATUS] == 1) interpersonStats += "<b>Urta Status:</b> <font color=\"#008000\">Lover+</font>\n";
+					if (flags[kFLAGS.URTA_QUEST_STATUS] == -1) interpersonStats += "<b>Urta's Status:</b> <font color=\"#800000\">Gone</font>\n";
+					if (flags[kFLAGS.URTA_QUEST_STATUS] == 0) interpersonStats += "<b>Urta's Status:</b> Lover\n";
+					if (flags[kFLAGS.URTA_QUEST_STATUS] == 1) interpersonStats += "<b>Urta's Status:</b> <font color=\"#008000\">Lover+</font>\n";
 				}
 				else if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] == -1)
-					interpersonStats += "<b>Urta Status:</b> Ashamed\n";
+					interpersonStats += "<b>Urta's Status:</b> Ashamed\n";
 				else if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] < 30)
 					interpersonStats += "<b>Urta's Affection:</b> " + Math.round(flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] * 3.3333) + "%\n";
 				else
-					interpersonStats += "<b>Urta Status:</b> Ready To Confess Love\n";
+					interpersonStats += "<b>Urta's Status:</b> Ready To Confess Love\n";
 			}
 			
 			if (interpersonStats != "")
