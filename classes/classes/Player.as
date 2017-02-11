@@ -1580,7 +1580,7 @@ use namespace kGAMECLASS;
 				if (tailType == 2)
 					mutantCounter--;
 			}
-			return mutantCounter--;
+			return mutantCounter;
 		}
 		
 		//Salamander score
@@ -1618,7 +1618,7 @@ use namespace kGAMECLASS;
 				sirenCounter++;
 			//if (hasCock() && findFirstCockType(CockTypesEnum.ANEMONE) >= 0)
 			//	sirenCounter++;
-			return sirenCounter++;
+			return sirenCounter;
 		}
 		
 		public function pigScore():Number
