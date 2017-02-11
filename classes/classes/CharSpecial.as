@@ -1218,7 +1218,7 @@ package classes
 			player.clitLength = 0.25;
 			//has a self-repairing hymen in her cunt"	"Angel
 			//(means feathered wings on her back)
-			player.wingType = WING_TYPE_HARPY;
+			player.wingType = WING_TYPE_FEATHERED_LARGE;
 			//Halo (Flaming)
 			//D-cups
 			player.createBreastRow();
