@@ -240,7 +240,7 @@ package classes.Scenes.Places
 				stones = 5 + rand(5) + Math.floor(rand((player.str + player.inte) / 20));
 			}
 			else if (flags[progress] == 3) {
-				outputText("With the [building] now reduced to a pile of debris, you can focus on grabbing anything of use. The stone bricks are in a decent condition, even after all the trauma they could still be reclaimed for use in your construction projects. You take out your chisel and strike it with your hammer to chip away at the remaining mortar. It doesn’t take a lot of effort as the bricks easily fall apart into usable pieces. You sort the stone bricks into a neat pile on a pallet; the process taking you the better half of an hour. You tie the bricks together to secure them and take a final look at what was once a [building], now completely stripped down to the foundation. You leave behind the barren plot and haul the pile of stone bricks to your camp.");
+				outputText("With the " + buildingDesc + " now reduced to a pile of debris, you can focus on grabbing anything of use. The stone bricks are in a decent condition, even after all the trauma they could still be reclaimed for use in your construction projects. You take out your chisel and strike it with your hammer to chip away at the remaining mortar. It doesn’t take a lot of effort as the bricks easily fall apart into usable pieces. You sort the stone bricks into a neat pile on a pallet; the process taking you the better half of an hour. You tie the bricks together to secure them and take a final look at what was once a " + buildingDesc + ", now completely stripped down to the foundation. You leave behind the barren plot and haul the pile of stone bricks to your camp.");
 				stones = 5 + rand(5) + Math.floor(rand((player.str + player.inte) / 12));
 			}
 			//Add to resources and display text.
@@ -248,15 +248,15 @@ package classes.Scenes.Places
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += wood;
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stones;
 			
-			if (nails > 0) resourceGainText.push(nails + (nails == 1 ? "nail" : "nails"));
-			if (wood > 0) resourceGainText.push(wood + "wood");
-			if (stones > 0) resourceGainText.push(nails + (nails == 1 ? "stones" : "stones"));
+			if (nails > 0) resourceGainText.push(nails + (nails == 1 ? " nail" : " nails"));
+			if (wood > 0) resourceGainText.push(wood + " wood");
+			if (stones > 0) resourceGainText.push(stones + (stones == 1 ? " stone" : " stones"));
 			
-			if (nails + wood + stones > 0) outputText("<b>You have scavenged " + formatStringArray(resourceGainText) + "!</b>");
+			if (nails + wood + stones > 0) outputText("\n\n<b>You have scavenged " + formatStringArray(resourceGainText) + "!</b>");
 			//Increment progress and clear furniture found variable, if any.
 			flags[progress]++;
 			if (progress == 4) {
-				outputText(" <b>The [building] you had been focusing on dismantling and scavenging has been completely stripped down to the foundation.</b>");
+				outputText("\n\n<b>The " + buildingDesc + " you had been focusing on dismantling and scavenging has been completely stripped down to the foundation.</b>");
 			}
 			if (progress == kFLAGS.TOWN_RUINS_HOUSE_SCAVENGE_PROGRESS && flags[kFLAGS.TOWN_RUINS_HOUSES_DISMANTLED] < 10 && flags[progress] >= 4) {
 				flags[progress] = 0;
