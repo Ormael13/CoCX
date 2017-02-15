@@ -881,7 +881,7 @@ use namespace kGAMECLASS;
 			if (salamanderScore() >= 4)
 			{
 				if (isTaur()) race = "salamander-taur";
-				else race = "salamander-morph";
+				else race = "salamander-" + mf("boy", "girl");
 			}
 			//<mod>
 			if (pigScore() >= 4) 
