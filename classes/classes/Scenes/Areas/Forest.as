@@ -46,7 +46,7 @@ package classes.Scenes.Areas
 			choice[choice.length] = 3; //Akbal
 			choice[choice.length] = 4; //Kitsunes
 			if (flags[kFLAGS.TAMANI_TIME_OUT] == 0 && player.gender > 0 && flags[kFLAGS.TAMANI_BAD_ENDED] == 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) choice[choice.length] = 5; //Tamani
-			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < 100 && rand(2) == 0) choice[choice.length] = 6; //Gather woods
+			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < camp.cabinProgress.maxWoodSupply() && rand(2) == 0) choice[choice.length] = 6; //Gather woods
 			
 			//Every tenth exploration finds a pumpkin if eligible!
 			if (player.statusEffectv1(StatusEffects.ExploredDeepwoods) % 10 == 0 && isHalloween()) {
@@ -163,7 +163,7 @@ package classes.Scenes.Areas
 			choice[choice.length] = 4; //Trip on a root
 			if (rand(2) == 0) choice[choice.length] = 5; //Bee-girl encounter
 			if (rand(2) == 0) choice[choice.length] = 6; //Pigtail Truffle or Healing Pill
-			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < 100 && rand(2) == 0) choice[choice.length] = 7; //Gather woods
+			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < camp.cabinProgress.maxWoodSupply() && rand(2) == 0) choice[choice.length] = 7; //Gather woods
 			if (player.level >= 3 || model.time.days >= 20) choice[choice.length] = 8; //Mimic or Succubus (UTG)
 			choice[choice.length] = 9; //Peaceful walk in woods
 			//Helia monogamy fucks
