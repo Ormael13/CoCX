@@ -163,6 +163,39 @@ package classes.Items
 			return false;
 		}
 
+		public function removeBassyHair():Boolean
+		{
+			// Failsafe, duh
+			if ([HAIR_BASILISK_PLUME, HAIR_BASILISK_SPINES].indexOf(player.hairType) == -1) return false;
+
+			if (player.hairType == HAIR_BASILISK_PLUME) {
+				// TF blurb derived from losing feathery hair
+				//(long):
+				if (player.hairLength >= 5)
+					outputText("\n\nA lock of your feathery plume droops over your eye.  Before you can blow the offending down away,"
+					          +" you realize the feather is collapsing in on itself."
+					          +" It continues to curl inward until all that remains is a normal strand of hair.");
+				//(short)
+				else
+					outputText("\n\nYou run your fingers through your feathery plume while you await the effects of the item you just ingested."
+					          +" While your hand is up there, it detects a change in the texture of your feathers.  They're completely disappearing,"
+					          +" merging down into strands of regular hair.");
+
+					outputText("\n\n<b>Your hair is no longer feathery!</b>");
+			} else {
+				outputText("\n\nYou feel a tingling on your scalp. You reach up to your basilisk spines to find out what is happening. The moment"
+					          +" your hand touches a spine, it comes loose and falls in front of you. One after another the other spines fall out,"
+					          +" until all the spines that once decorated your head now lay around you, leaving you with a bald head.");
+
+				outputText("\n\n<b>You realize, that you'll grow normal human hair again!</b>");
+				flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
+				player.hairLength = 0;
+			}
+			player.hairType = HAIR_NORMAL;
+			changes++;
+			return true;
+		}
+
 		public function newLizardSkinTone():String
 		{
 			if (rand(10) == 0) {
@@ -327,7 +360,7 @@ package classes.Items
 						player.hairColor = player.skinTone;                   // hairColor always set to player.skinTone
 						player.hairType = HAIR_BASILISK_SPINES;               // hairType set to basilisk spines
 						player.hairLength = 2;                                // hairLength set to 2 (inches, displayed as ‘short’)
-						flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0; // Hair growth stops
+						flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 1; // Hair growth stops
 						changes++;
 						output.text("\n\n<b>Where your hair would be, you now have a crown of dull reptilian spines!</b>");
 

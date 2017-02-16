@@ -4499,6 +4499,9 @@
 				player.hairType = HAIR_NORMAL;
 				changes++;
 			}
+			//Remove bassy hair
+			if ([HAIR_BASILISK_PLUME, HAIR_BASILISK_SPINES].indexOf(player.hairType) != -1 && changes < changeLimit && rand(4) == 0)
+				removeBassyHair();
 			//Restart hair growth
 			if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] > 0 && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou feel an itching sensation in your scalp as you realize the change. <b>Your hair is growing normally again!</b>");

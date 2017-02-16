@@ -1622,16 +1622,31 @@ package classes.Scenes.Combat
 				if (monster.short == "demons") outputText("You look at the crowd for a moment, wondering which of their number you should bite. Your glance lands upon the leader of the group, easily spotted due to his snakeskin cloak. You quickly dart through the demon crowd as it closes in around you and lunge towards the broad form of the leader. You catch the demon off guard and sink your needle-like fangs deep into his flesh. You quickly release your venom and retreat before he, or the rest of the group manage to react.", false);
 				//(Otherwise) 
 				else outputText("You lunge at the foe headfirst, fangs bared. You manage to catch " + monster.a + monster.short + " off guard, your needle-like fangs penetrating deep into " + monster.pronoun3 + " body. You quickly release your venom, and retreat before " + monster.pronoun1 + " manages to react.", false);
-		        //The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
-		        monster.str -= 5 + rand(5);
+				//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
+				var oldMonsterStrength:Number = monster.str;
+				var oldMonsterSpeed:Number = monster.spe;
+				var effectTexts:Array = [];
+				var strengthDiff:Number = 0;
+				var speedDiff:Number = 0;
+
+				monster.str -= 5 + rand(5);
 				monster.spe -= 5 + rand(5);
 				if (monster.str < 1) monster.str = 1;
 				if (monster.spe < 1) monster.spe = 1;
+
+				strengthDiff = oldMonsterStrength - monster.str;
+				speedDiff    = oldMonsterSpeed    - monster.spe;
+				if (strengthDiff > 0)
+					effectTexts.push(monster.pronoun3 + " strength by <b><font color=\"#800000\">" + strengthDiff + "</font></b>"); 
+				if (speedDiff > 0)
+					effectTexts.push(monster.pronoun3 + " speed by <b><font color=\"#800000\">" + speedDiff + "</font></b>"); 
+				if (effectTexts.length > 0)
+					outputText("\n\nThe poison reduced " + formatStringArray(effectTexts) + "!");
+
 				if (monster.findStatusEffect(StatusEffects.NagaVenom) >= 0)
-				{
 					monster.addStatusValue(StatusEffects.NagaVenom,1,1);
-				}
-				else monster.createStatusEffect(StatusEffects.NagaVenom,1,0,0,0);
+				else
+					monster.createStatusEffect(StatusEffects.NagaVenom,1,0,0,0);
 			}
 			else {
 		       outputText("You lunge headfirst, fangs bared. Your attempt fails horrendously, as " + monster.a + monster.short + " manages to counter your lunge, knocking your head away with enough force to make your ears ring.", false);

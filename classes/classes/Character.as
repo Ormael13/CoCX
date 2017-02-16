@@ -799,35 +799,16 @@ import classes.GlobalFlags.kFLAGS;
 				game.outputText("\n<b>You are no longer bald.  You now have " + hairDescript() + " coating your head.\n</b>", false);
 				return true;
 			}
-			else if (hairLength >= 1 && tempHair < 1) {
-				game.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
-				return true;
-			}
-			else if (hairLength >= 3 && tempHair < 3) {
-				game.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
-				return true;
-			}
-			else if (hairLength >= 6 && tempHair < 6) {
-				game.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
-				return true;
-			}
-			else if (hairLength >= 10 && tempHair < 10) {
-				game.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
-				return true;
-			}
-			else if (hairLength >= 16 && tempHair < 16) {
-				game.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
-				return true;
-			}
-			else if (hairLength >= 26 && tempHair < 26) {
-				game.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
-				return true;
-			}
-			else if (hairLength >= 40 && tempHair < 40) {
-				game.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
-				return true;
-			}
-			else if (hairLength >= 40 && hairLength >= tallness && tempHair < tallness) {
+			else if (
+				(hairLength >= 1 && tempHair < 1) ||
+				(hairLength >= 3 && tempHair < 3) ||
+				(hairLength >= 6 && tempHair < 6) ||
+				(hairLength >= 10 && tempHair < 10) ||
+				(hairLength >= 16 && tempHair < 16) ||
+				(hairLength >= 26 && tempHair < 26) ||
+				(hairLength >= 40 && tempHair < 40) ||
+				(hairLength >= 40 && hairLength >= tallness && tempHair < tallness)
+			) {
 				game.outputText("\n<b>Your hair's growth has reached a new threshhold, giving you " + hairDescript() + ".\n</b>", false);
 				return true;
 			}
