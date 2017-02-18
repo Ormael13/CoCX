@@ -2047,14 +2047,22 @@ package classes
 				return false;
 			return (cocks[0].cockLength >= 20);
 		}
-		
+
+		public static const canFlyWings:Array = [
+			WING_TYPE_BEE_LIKE_LARGE,
+			WING_TYPE_BAT_LIKE_LARGE,
+			WING_TYPE_FEATHERED_LARGE,
+			WING_TYPE_DRACONIC_LARGE,
+			WING_TYPE_GIANT_DRAGONFLY,
+		];
+
 		//PC can fly?
 		public function canFly():Boolean
 		{
 			//web also makes false!
 			if (findStatusEffect(StatusEffects.Web) >= 0)
 				return false;
-			return _wingType == 2 || _wingType == 7 || _wingType == 9 || _wingType == 11 || _wingType == 12;
+			return canFlyWings.indexOf(_wingType) != -1;
 
 		}
 

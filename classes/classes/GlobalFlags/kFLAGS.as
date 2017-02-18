@@ -2321,7 +2321,7 @@ public static const IZMA_BROFIED:int                                            
 public static const IZMAEL_ANAL_PENETRATED:int                                      = 2313;
 public static const IZMAEL_FRENZIED:int                                             = 2314;
 public static const IZMAEL_ENTRAPPED:int                                            = 2315;
-public static const UNKNOWN_FLAG_NUMBER_02316:int                                   = 2316;
+public static const IZMAEL_BATHTIME_COUNTER:int                                     = 2316;
 public static const UNKNOWN_FLAG_NUMBER_02317:int                                   = 2317;
 public static const UNKNOWN_FLAG_NUMBER_02318:int                                   = 2318;
 public static const TOWN_RUINS_SCAVENGE_CONSIDERED:int                              = 2319;
