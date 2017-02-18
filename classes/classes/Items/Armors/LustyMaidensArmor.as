@@ -134,7 +134,7 @@ package classes.Items.Armors
 			if (player.hasVirginVagina()) game.dynStats("cor", -1);
 			//If minotaur, increase addiction slightly.
 			if (monster is Minotaur || monster is MinotaurMob) player.minoCumAddiction(3);
-			if (monster.short == "Ceraph") game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291]++;
+			if (monster.short == "Ceraph") game.flags[kFLAGS.CERAPH_BEATEN_AND_RAPED_COUNTER]++;
 			//Usable on: Imps, Minotaurs, Satyrs, Incubus Mechanic, Anemones, Spider Guys, Akbal, Drider, Fetish Zealot, Sand Trap, Very Corrupt Jojo (Maybe slight decorruption to him), Ceraph, Red Kitsune if cock out.
 			if (game.inCombat)
 				game.combat.cleanupAfterCombat();

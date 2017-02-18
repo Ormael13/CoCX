@@ -198,17 +198,17 @@ private function talkWhitney():void {
 			outputText(" You are uncomfortably aware of the number of them which are labelled ‘[name]’, and a charged memory of strong suction on your [nipples] comes back to you.");
 		}
 
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331] > 0 && flags[kFLAGS.ISABELLA_MILKED_YET] != -1)
+		if (flags[kFLAGS.JOJO_COCK_MILKING_COUNTER] > 0 && flags[kFLAGS.ISABELLA_MILKED_YET] != -1)
 		{
 			// Jojo only
 			outputText(" At the far end there is a small alabaster cluster labelled ‘Jojo’.");
 		}
-		else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331] == 0 && flags[kFLAGS.ISABELLA_MILKED_YET] == -1)
+		else if (flags[kFLAGS.JOJO_COCK_MILKING_COUNTER] == 0 && flags[kFLAGS.ISABELLA_MILKED_YET] == -1)
 		{
 			// Isabella Only
 			outputText(" At the far end there is a small alabaster cluster labelled ‘Isabella’.");
 		}
-		else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331] > 0 && flags[kFLAGS.ISABELLA_MILKED_YET] == -1)
+		else if (flags[kFLAGS.JOJO_COCK_MILKING_COUNTER] > 0 && flags[kFLAGS.ISABELLA_MILKED_YET] == -1)
 		{
 			// Both
 			outputText(" At the far end there is one alabaster cluster labelled ‘Jojo’, another labelled ‘Isabella’.");
@@ -1010,7 +1010,7 @@ public function cockPumping():void {
 		return;
 	}
 	flags[kFLAGS.USED_MILKER_TODAY]++;
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00333]++;
+	flags[kFLAGS.PC_COCK_MILKED_COUNTER]++;
 	//ORGAZMO
 	if (cumQ < 10) {
 		if (player.cockTotal() == 1) outputText("The orgasm rolls over you, shutting down your thoughts as your body spasms in its straps, boiling out tiny squirts of spunk.  Wriggling cilia convulse around you, licking your " + player.cockHead() + " as it flares wide, filling with blood and dripping out a little cum.  You moan and scream with delight, babbling happily as you watch your insignificant amount of cum wick up the clear tube and into the machinery in the wall.  All too soon the pleasure comes to an end, and your cock starts to soften inside its squishy prison.  The harness slowly loosens, lowering you to the ground and releasing you.\n\n", false);

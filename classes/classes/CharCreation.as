@@ -407,7 +407,7 @@
 				return;
 			}
 			clearOutput();
-			boxNames.visible = false;
+			if (boxNames != null) boxNames.visible = false;
 			mainView.nameBox.visible = false;
 			player.short = mainView.nameBox.text;
 			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) { //Dirty checking as the NG+ flag is incremented after reincarnating.
@@ -577,6 +577,8 @@
 			player.tone = 45;
 			
 			//Genetalia
+			player.balls = 2;
+			player.ballSize = 1;
 			player.createVagina();
 			player.clitLength = .5;
 			player.createCock();
@@ -1233,7 +1235,7 @@
 			statScreenRefresh();
 			model.time.hours = 11;
 			clearOutput();
-			if (flags[kFLAGS.KAIZO_MODE] > 0) {
+			if (flags[kFLAGS.GRIMDARK_MODE] > 0) {
 				outputText("You are prepared for what is to come. Most of the last year has been spent honing your body and mind to prepare for the challenges ahead. You are the Champion of Ingnam. The one who will journey to the demon realm and guarantee the safety of your friends and family, even though you'll never see them again. You wipe away a tear as you enter the courtyard and see Elder... Wait a minute...\n\n");
 				outputText("Something is not right. Elder Nomur is already dead. Ingnam has been mysteriously pulled into the demon realm and the surroundings look much worse than you've expected. A ruined portal frame stands in the courtyard, obviously no longer functional and instead serves as a grim reminder on the now-ceased tradition of annual sacrifice of Champions. Wooden palisades surround the town of Ingnam and outside the walls, spears are set out and angled as a mean to make the defenses more intimidating. As if that wasn't enough, some of the spears have demonic skulls impaled on them.");
 				flags[kFLAGS.IN_INGNAM] = 1;
@@ -1345,13 +1347,13 @@
 			startTheGame();
 		}
 
-		//KAIZO!
-		private function chooseModeKaizo():void {
-			outputText("You have chosen Kaizo Mode. This will drastically alter gameplay and there will be a lot of new obstacles. Enemies are beefed up and the game will be much darker and edgier with plenty of environment changes. Is this what you choose?", true);
-			flags[kFLAGS.KAIZO_MODE] = 1;
+		//GRIMDARK!
+		private function chooseModeGrimdark():void {
+			outputText("You have chosen Grimdark Mode. This will drastically alter gameplay and there will be a lot of new obstacles. Enemies are beefed up and the game will be much darker and edgier with plenty of environment changes. Is this what you choose?", true);
+			flags[kFLAGS.GRIMDARK_MODE] = 1;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 3;
-			if (flags[kFLAGS.KAIZO_BACKGROUND_UNLOCKED] == 0) flags[kFLAGS.BACKGROUND_STYLE] = 9;
+			if (flags[kFLAGS.GRIMDARK_BACKGROUND_UNLOCKED] == 0) flags[kFLAGS.BACKGROUND_STYLE] = 9;
 			player.hunger = 80;
 			doNext(startTheGame);
 		}	
@@ -1367,7 +1369,7 @@
 			if (debug) outputText("<b>Grimdark mode:</b> (In dev) In the grimdark future, there are only rape and corruptions. Lots of things are changed and Lethice has sent out her minions to wall the borders and put up a lot of puzzles. Can you defeat her in this mode in as few bad ends as possible?\n", false);
 			
 			simpleChoices("Normal", chooseModeNormal, "Survival", chooseModeSurvival, "Realistic", chooseModeRealistic, "Hardcore", chooseModeHardcore, "Brutal HC", chooseModeBrutalHardcore);
-			if (debug) addButton(12, "Grimdark", chooseModeKaizo);
+			if (debug) addButton(12, "Grimdark", chooseModeGrimdark);
 		}
 
 		private function startTheGame():void {
@@ -1376,7 +1378,7 @@
 				trace("Hardcore save file " + flags[kFLAGS.HARDCORE_SLOT] + " created.")
 				getGame().saves.saveGame(flags[kFLAGS.HARDCORE_SLOT])
 			}
-			if (flags[kFLAGS.KAIZO_MODE] > 0) {
+			if (flags[kFLAGS.GRIMDARK_MODE] > 0) {
 				flags[kFLAGS.BACKGROUND_STYLE] = 9;
 			}
 			kGAMECLASS.saves.loadPermObject();
@@ -1392,7 +1394,7 @@
 				else player.setUndergarment(undergarments.C_LOIN);
 				if (player.biggestTitSize() >= 2) player.setUndergarment(undergarments.C_BRA);
 			}
-			if (flags[kFLAGS.KAIZO_MODE] > 0) {
+			if (flags[kFLAGS.GRIMDARK_MODE] > 0) {
 				arrival();
 				return;
 			}

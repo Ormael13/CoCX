@@ -184,7 +184,7 @@ public function corruptCampJojo():void {
 	if (player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") >= 0) {
 		if (flags[kFLAGS.JOJO_COCK_MILKING_COOLDOWN] > 0) outputText("\n\n<b>Jojo is still drained from his last visit to the milkers - you should wait a few hours before taking him back.</b>", false);
 		//First time:
-		else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331] != 0) {
+		else if (flags[kFLAGS.JOJO_COCK_MILKING_COUNTER] != 0) {
 			milkHim = repeatMilkJojo;
 			if (tentacleJojo()) tentaMilk = createCallBackFunction(repeatMilkJojo, true);
 		} else milkHim = milkJojoFirst;
@@ -669,7 +669,7 @@ private function jojoMilkPay(tentacle:Boolean = false):void {
 		player.gems += payout;
 		flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] += payout;
 		statScreenRefresh();
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331]++;
+		flags[kFLAGS.JOJO_COCK_MILKING_COUNTER]++;
 		if (payout == 1) outputText(Num2Text(payout) + " gem rolls out into a collection plate.  Whitney really put a lot of work into this!  You pocket the gem and g", false);
 		else outputText(Num2Text(payout) + " gems roll out into a collection plate.  Whitney really put a lot of work into this!  You pocket the gems and g", false);
 	}
@@ -678,9 +678,9 @@ private function jojoMilkPay(tentacle:Boolean = false):void {
 public function jojoCumQ():Number {
 	var cumQ:Number = 0;
 	cumQ = 400;
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331] < 4) cumQ += flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331] * 200;
-	else cumQ += flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331] * 100;
-	if (tentacleJojo()) cumQ += 500 + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331] * 100;
+	if (flags[kFLAGS.JOJO_COCK_MILKING_COUNTER] < 4) cumQ += flags[kFLAGS.JOJO_COCK_MILKING_COUNTER] * 200;
+	else cumQ += flags[kFLAGS.JOJO_COCK_MILKING_COUNTER] * 100;
+	if (tentacleJojo()) cumQ += 500 + flags[kFLAGS.JOJO_COCK_MILKING_COUNTER] * 100;
 	if (flags[kFLAGS.JOJO_BLOWJOB_XP] < 10) cumQ += flags[kFLAGS.JOJO_BLOWJOB_XP] * 50;
 	else cumQ += 500;
 	if (flags[kFLAGS.JOJO_SEX_COUNTER] < 10) cumQ += flags[kFLAGS.JOJO_SEX_COUNTER] * 25;
@@ -703,7 +703,7 @@ private function milkJojoFirst():void {
 	outputText("Looming over the next hill, you can see the large, well-maintained roof of Whitney's farm.  She does a fantastic job of keeping everything running considering it seems to be primarily a one-woman show.  Whatever the case, it doesn't look like she's near the barn right now.  It's the perfect time to introduce two of your favorite toys to one another!  Tugging on Jojo's ear, you start dragging him down the hillside towards the empty barn.  He doesn't fight at all, moaning and dripping behind you as if he knows what's coming.  Perhaps he learned a little about 'milking' from somewhere before you broke him?\n\n", false);
 	
 	outputText("Sliding easily, the barn door barely creaks as you push it open and send Jojo inside.  You glance around furtively, making sure you weren't seen, and then you close the door behind you.  Jojo has slumped down into some straw and started masturbating again, yanking on his corruption-bloated cock as if it's the only thing in the room that matters.  Slapping his balls to get his attention, you lead him towards your stall.  It's empty and clean as always", false);
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00333] > 0) outputText(", even though it reeks of the spunk you've spilled into the milker's mechanical embrace", false);
+	if (flags[kFLAGS.PC_COCK_MILKED_COUNTER] > 0) outputText(", even though it reeks of the spunk you've spilled into the milker's mechanical embrace", false);
 	outputText(".  Jojo shrugs and whines at you, pleading to be allowed to touch himself again.\n\n", false);
 	
 	outputText("You smirk and push him inside, tangling him up in the dangling milk-harness.  The surprised mouse struggles and looks back at you with a mix of confusion and lust warring in his pliant, submissive eyes.  Placing a reassuring fingertip on his nose, you make calming, shushing noises at him as you strap him in properly.  Thankfully the harness is quite adjustable, and you're able to give the corrupt fuck-beast a proper fitting before you milk him.  Each time you cinch one of the bands tight, you make sure to give his balls or his a cock a gentle squeeze.  The extra attention keeps Jojo calm as he is increasingly immobilized.  Only one fitting remains to be tightened, and knowing all too well what will happen, you give it a tug.\n\n", false);
@@ -721,7 +721,7 @@ private function milkJojoFirst():void {
 		//(Cock - too big!)	
 		if (x < 0) {
 			x = player.biggestCockIndex();
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00333] > 0) outputText("You know from experience that machine usually takes an hour before it will allow release", false);
+			if (flags[kFLAGS.PC_COCK_MILKED_COUNTER] > 0) outputText("You know from experience that machine usually takes an hour before it will allow release", false);
 			else outputText("You figure the machine will probably pump him for quite a while before it allows release", false);
 			outputText(", and you're getting quite turned on from the show.  You shuck your " + player.armorName + " and pull out " + player.oMultiCockDesc() + ", feeling ", false);
 			if (player.lust < 50) outputText("it stiffen in your hand", false);
@@ -730,7 +730,7 @@ private function milkJojoFirst():void {
 		}
 		//(Cock - butt rape!)
 		else {
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00333] > 0) outputText("You know from experience that machine usually takes an hour before it will allow release", false);
+			if (flags[kFLAGS.PC_COCK_MILKED_COUNTER] > 0) outputText("You know from experience that machine usually takes an hour before it will allow release", false);
 			else outputText("You figure the machine will probably pump him for quite a while before it allows release", false);
 			outputText(", and you're getting quite turned on from the show.  You shuck your " + player.armorName + " and pull out " + player.oMultiCockDesc() + ", feeling ", false);
 			if (player.lust < 50) outputText("it stiffen in your hand", false);
@@ -741,7 +741,7 @@ private function milkJojoFirst():void {
 	}
 	//(Vagoozle!)
 	else if (player.hasVagina()) {
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00333] > 0) outputText("You know from experience that machine usually takes an hour before it will allow release", false);
+		if (flags[kFLAGS.PC_COCK_MILKED_COUNTER] > 0) outputText("You know from experience that machine usually takes an hour before it will allow release", false);
 		else outputText("You figure the machine will probably pump him for quite a while before it allows release", false);
 		outputText(", and you're getting quite turned on from the show.  You shuck your " + player.armorName + " and reveal your " + player.vaginaDescript() + ", feeling your " + player.clitDescript() + " grow firm and hard.  For his part, Jojo doesn't even notice.  He just moans, squirms, and twitches any time he's brought particularly close to orgasm.  Seating yourself down below him, you let your fingers play across your now-wet folds, caressing your labia before you slide a few digits inside.  You brush your thumb against your clitoral hood and shudder from pleasure, enjoying watching your pet get milked as much as he's enjoying the milking.  ", false);
 		if (player.clitLength > 3) outputText("Your other hand grabs your penis-sized 'button' and begins to jack it, the action sending tremors of sensation through your " + player.hipDescript() + ".  ", false);
@@ -750,7 +750,7 @@ private function milkJojoFirst():void {
 	}
 	//(NEITHER!)
 	else {
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00333] > 0) outputText("You know from experience that machine usually takes an hour before it will allow release", false);
+		if (flags[kFLAGS.PC_COCK_MILKED_COUNTER] > 0) outputText("You know from experience that machine usually takes an hour before it will allow release", false);
 		else outputText("You figure the machine will probably pump him for quite a while before it allows release", false);
 		outputText(", and while you're getting quite turned on from the show, you lack the equipment to take care of your lusts in a satisfactory way.  Meanwhile, Jojo is just moaning, squirming, and twitching each time he's brought close to orgasm.  You sit down and watch the machinery take your mouse-toy to task, wishing you had similar endowments you could be taking care of right now.\n\n", false);
 		dynStats("lus", 50);
@@ -3001,7 +3001,7 @@ public function apparantlyJojoDOESlift():void
 		if (kGAMECLASS.emberScene.followerEmber()) enlightenedBlurbs.push("You can hear Ember cleaning" + emberScene.emberMF("his", "her") + "scales.");
 		if (player.findStatusEffect(StatusEffects.CampRathazul) >= 0) enlightenedBlurbs.push("You can hear Rathazul experimenting with surprisingly nimble fingers.");
 		if (sophieFollower()) enlightenedBlurbs.push("You can hear Sophie breathing as she sleeps.");
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] > 0) enlightenedBlurbs.push("You can hear Izma flipping through the pages of a book."); // TODO: (if Izmael gets put in) you can hear Izmael doing push ups to stay fit.
+		if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] > 0) enlightenedBlurbs.push("You can hear Izma flipping through the pages of a book."); // TODO: (if Izmael gets put in) you can hear Izmael doing push ups to stay fit.
 		if (kGAMECLASS.helScene.followerHel()) enlightenedBlurbs.push("You can hear Helia throwing her fists at nothing.");
 
 		outputText(enlightenedBlurbs[rand(enlightenedBlurbs.length)] + "\n\n");
@@ -3096,8 +3096,7 @@ private function pureJojoSexMenu():void {
 	if (flags[kFLAGS.JOJO_ANAL_XP] < 10) capacity += (flags[kFLAGS.JOJO_ANAL_XP] * 3);
 	else capacity += 30; //Caps at 70.
 	//Call for the purpose of cock size.
-	startCombat(new Jojo());
-	kGAMECLASS.inCombat = false;
+	monster = new Jojo();
 	//Begin
 	jojoSprite();
 	clearOutput();
@@ -3198,7 +3197,7 @@ private function getAnallyFuckedByMouseYouSlut():void {
 	outputText("You finally make up your mind; you want his mouse-cock in your [ass]. " + player.clothedOrNaked("You remove your [armor] and ") + "Jojo " + (flags[kFLAGS.JOJO_SEX_COUNTER] < 4 ? "hesitantly " : "") + "strips out of his robe, revealing his naked form.");
 	outputText("\n\n\"<i>Get down on all fours and I can begin,</i>\" Jojo instructs. You nod and get down on all fours, presenting your [butt] to Jojo. His cock grows to full erection. \"<i>I'm going to need to get this lubricated first,</i>\" Jojo says. He spits on his hands and applies the saliva evenly across his cock.");
 	outputText("\n\nJojo gently massages your [butt] to assure you that he's going to go gentle. \"<i>Here I come,</i>\" Jojo announces as he slowly slides his cock right into your [ass].");
-	player.buttChange(monster.cocks[0].cockThickness, true);
+	player.buttChange(monster.biggestCockArea(), true);
 	if (isVirgin) outputText(" \"<i>That's really tight; I'm going to enjoy your tightness while it lasts,</i>\" Jojo remarks. ");
 	else if (player.looseness(false) < 2) outputText(" \"<i>That's tight,</i>\" Jojo says. ");
 	else outputText(" \"<i>That's nice,</i>\" Jojo remarks. ");
@@ -3226,7 +3225,7 @@ private function getVagFuckedByMouse():void {
 	if (flags[kFLAGS.JOJO_VAGINAL_CATCH_COUNTER] == 0) {
 		outputText("\n\nYou see that Jojo’s uncomfortable, so you lean back on your legs and pull open the lips of your [vagina], showing him your wet, hot insides. Jojo’s jaw drops and his cock gets fully erect. You tease Jojo by telling him to hurry up or you’ll go find some imps. Jojo’s snaps his jaws shut and says, \"<i>No. I promised to help you deal with your lust, so you can avoid corrupted creature. It’s just... well this is my first time.</i>\" You’re surprised, considering that virginity was impossible in a land like Mareth. You tell him you’d be honored if he gave you his virginity. Jojo looks at you for a second and nods. \"<i>You’re the only one who I can trust it with... I’m ready now.</i>\"");
 		outputText("\n\nJojo hesitates at the entrance of your [vagina] and suddenly with a single stroke jams his dick deep into you. ");
-		player.cuntChange(monster.cocks[0].cockThickness, true);
+		player.cuntChange(monster.biggestCockArea(), true);
 		outputText("Taken aback with his suddenness, you clench your muscles so tight that Jojo’s dick becomes stuck inside you. Jojo howls in pain and pleasure. You scold Jojo for his reckless action, but secretly you’re pleased that he took the initiative. You instruct Jojo to start slow and to go faster over time. Jojo nods and smiles nervously. You say don’t worry, you’ll guide him.");
 		outputText("\n\nYou relax and let Jojo gently work his pace. His erect cock slides in and out out of your [vagina] smoothly. So far, so good. Jojo starts picking up the pace. You can’t stop the moans of ecstasy from coming out of your mouth and that seemed to encourage Jojo to further exertions. He started ramming your cervix as if he wanted to invade your womb. You didn’t bother trying anymore, you let loose screams of pleasure. Jojo seemed to be near the end of his stamina because he started to slow down. He shouts, \"<i>I’m going to cum!</i>\" You hook your legs behind Jojo’s back to lock him in place. Jojo’s cock was right next to the entrance of your womb. When Jojo cummed, the force of his ejaculation pierces your womb and stuffs it full of hot mouse cum. " + (jojoCumQ() >= 750 ? "His orgasm seems to never end and he continues to stuff your womb. " + (jojoCumQ() >= 900 ? "Excessive mouse-spunk spills out of your [pussy]. Gods, that was intense!" : "") : ""));
 		outputText("\n\nYou orgasm at the same time, spraying girlcum all over Jojo" + (player.hasCock() ? "; [eachCock] let loose a cum shower, drenching your belly and thighs" : "") + ". Losing strength in your limbs, you release Jojo. Jojo falls back on the grass, panting. \"<i>That was… That was amazing… We are going to do this again, aren’t we?</i>\" You smile at him and nod, thinking privately that if he’s this good as a virgin, how good he’ll be when you’re through with him.");
@@ -3234,13 +3233,13 @@ private function getVagFuckedByMouse():void {
 	else if (flags[kFLAGS.JOJO_VAGINAL_CATCH_COUNTER] == 1) {
 		outputText("\n\nYou see that Jojo’s still a little uncomfortable, so you lean back on your legs and pull open the lips of your [vagina], showing him your wet, hot insides. Jojo’s cock gets fully erect. With just a little hesitation, he gets into position in front of you. You’re impressed by Jojo’s growth. Soon he’ll be able to fuck you with no hesitation whatsoever. While you were musing the change in Jojo, he had dipped his head down and started licking your [clit] with his warm, soft tongue. You shiver, brought almost to the edge of orgasming. ");
 		outputText("\n\nEmbarrassed, you ask him where he learned that. He replies \"<i>I heard about something called foreplay. Apparently I have to make you wet enough before I stick it in you or it will hurt you.</i>\" Impressed, you relax and let him continue his ministrations. After a while Jojo says \"<i>I think it’s wet enough now, so there shouldn’t be any pain this time.</i>\" and with that, he penetrates your [vagina] with a single stroke. ");
-		player.cuntChange(monster.cocks[0].cockThickness, true);
+		player.cuntChange(monster.biggestCockArea(), true);
 		outputText("\n\nJojo starts out slow, rocking his hips and gyrating to simulate you as much as possible. It’s hard to imagine that he was a virgin not too long ago. Gradually he speeds up, reaching further and further into you. You can’t stop the moans of ecstasy from coming out of your mouth and that seemed to encourage Jojo to further exertions. He started ramming your cervix as if he wanted to break your womb. You didn’t bother trying anymore, you let loose screams of pleasure. Jojo seemed to be near the end of his stamina because he started to slow down. He shouts, \"<i>I’m going to cum!</i>\" You hook your legs behind Jojo’s back to lock him in place. Jojo’s cock was right next to the entrance of your womb. When Jojo cummed, the force of his ejaculation pierces your womb and stuffs it full of hot mouse cum. " + (jojoCumQ() >= 750 ? "His orgasm seems to never end and he continues to stuff your womb. " + (jojoCumQ() >= 900 ? "Excessive mouse-spunk spills out of your [pussy]. Gods, that was intense!" : "") : ""));
 		outputText("\n\nYou orgasm at the same time, spraying girlcum all over Jojo" + (player.hasCock() ? "; [eachCock] let loose a cum shower, drenching your belly and thighs" : "") + ". Losing strength in your limbs, you release Jojo. Jojo falls back on the grass, panting. \"<i>How’d I do?</i>\" You smile at him and say that if he kept fucking you like that, you might just avoid imps all together. He smiles, obviously happy to hear that.");
 	}
 	else if (flags[kFLAGS.JOJO_VAGINAL_CATCH_COUNTER] >= 2) {
 		outputText("\n\nThere was no need to excite him now; Jojo’s cock was already fully erect. With no hesitation, he gets into position in front of you. You’re impressed by Jojo’s growth. While you were musing the change in Jojo, he had dipped his head down and started licking your [clit] with his warm, soft tongue. You shiver, brought almost to the edge of orgasming. Jojo’s gotten pretty good with using that tongue of his. You’ll have to be careful or you’ll end up cumming before he does. After a while Jojo sticks his hand into your [vagina] and finding it wet enough says, \"<i>I’m sticking it in now,</i>\" and with a single stroke, penetrates your vagina. ");
-		player.cuntChange(monster.cocks[0].cockThickness, true);
+		player.cuntChange(monster.biggestCockArea(), true);
 		outputText("\n\nJojo starts out slow, rocking his hips and gyrating to simulate you as much as possible. It’s hard to imagine that he was a virgin not too long ago. Gradually he speeds up, reaching further and further into you. You can’t stop the moans of ecstasy from coming out of your mouth and that seemed to encourage Jojo to further exertions. He started ramming your cervix as if he wanted to breach open. You didn’t bother trying anymore, you let loose screams of pleasure. Jojo just kept pounding you as if in a rut. His meager stamina was gone; he was a fucking machine now. Just when you were about to orgasm, he shouts, \"<i>I’m going to cum!</i>\" You hook your legs behind Jojo’s back to lock him in place. Jojo’s cock was right next to the entrance of your womb. When Jojo cummed, the force of his ejaculation pierces your womb and stuffs it full of hot mouse cum. ");
 		outputText("\n\nYou orgasm at the same time, spraying girlcum all over Jojo" + (player.hasCock() ? "; [eachCock] let loose a cum shower, drenching your belly and thighs" : "") + ". Losing strength in your limbs, you release Jojo. Jojo falls back on the grass, panting. \"<i>I can’t wait to do that again.</i>\" You laugh and tease him by saying that this was supposed to be about satiating your lust, not his. Jojo blushes. You smile and tell him that you would let him fuck you anytime. He smiles, obviously happy to hear that. " + (flags[kFLAGS.JOJO_SEX_COUNTER] >= 4 ? "You give Jojo a lingering kiss." : ""));
 	}

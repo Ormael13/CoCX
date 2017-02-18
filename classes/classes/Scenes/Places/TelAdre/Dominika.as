@@ -13,14 +13,14 @@ public function Dominika(){
 //const DOMINIKAS_SWORD_GIVEN:int = 416;
 
 public function fellatrixBarAppearance():void {
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] == 0) outputText("\n\nYou spot a face you haven't seen before – or rather, eyes you haven't seen before. A woman sits at a table in the back, most of her features hidden beneath a white cloth wrapped around her head to form a turban and veil. The rest of her dress seems equally modest but loose, efficient for desert travel. She idly runs her finger and its accompanying black-painted fingernail over the top of an empty cup, staring off into the distance and thinking about some unknown detail. What skin you can see is pale but perhaps most notably for Tel'Adre, human. Blue eyes glance over and meet your own, and you are reminded of your village back home. Her reaction to your look is unreadable thanks to her veil, but she watches you for a few moments longer before turning away again.", false);
-	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00151] != -1) outputText("\n\nYou notice Dominika speaking to a city guard at one of the tables. You can't hear the conversation, but the guard leaves shortly after you arrive, and Dominika rests her chin on her hand, staring into the distance.", false);
+	if (flags[kFLAGS.DOMINIKA_STAGE] == 0) outputText("\n\nYou spot a face you haven't seen before – or rather, eyes you haven't seen before. A woman sits at a table in the back, most of her features hidden beneath a white cloth wrapped around her head to form a turban and veil. The rest of her dress seems equally modest but loose, efficient for desert travel. She idly runs her finger and its accompanying black-painted fingernail over the top of an empty cup, staring off into the distance and thinking about some unknown detail. What skin you can see is pale but perhaps most notably for Tel'Adre, human. Blue eyes glance over and meet your own, and you are reminded of your village back home. Her reaction to your look is unreadable thanks to her veil, but she watches you for a few moments longer before turning away again.", false);
+	else if (flags[kFLAGS.DOMINIKA_SUCKED_OFF_LARGE_COCKS] != -1) outputText("\n\nYou notice Dominika speaking to a city guard at one of the tables. You can't hear the conversation, but the guard leaves shortly after you arrive, and Dominika rests her chin on her hand, staring into the distance.", false);
 }
 public function fellatrixSucked():Boolean {
 	return timesFellatrixSucked() > 0;
 }
 private function timesFellatrixSucked():Number {
-	return (flags[kFLAGS.DOMINIKA_TIMES_HYPNO_BJ] + flags[kFLAGS.DOMINIKA_TIMES_MULTICOCK_SLOBBERED] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00156] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00151] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00152] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00153] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00174]);
+	return (flags[kFLAGS.DOMINIKA_TIMES_HYPNO_BJ] + flags[kFLAGS.DOMINIKA_TIMES_MULTICOCK_SLOBBERED] + flags[kFLAGS.DOMINIKA_SUCKED_OFF_DOGCOCKS] + flags[kFLAGS.DOMINIKA_SUCKED_OFF_LARGE_COCKS] + flags[kFLAGS.DOMINIKA_SUCKED_OFF_SMALL_COCKS] + flags[kFLAGS.DOMINIKA_VAGINAL_ORAL_RECEIVED] + flags[kFLAGS.DOMINIKA_SUCKED_OFF_HORSECOCKS]);
 }
 public function fellatrixBarApproach():void {
 	spriteSelect(10);
@@ -28,7 +28,7 @@ public function fellatrixBarApproach():void {
 	outputText(images.showImage("dominika-first-meeting-at-bar"));
 	//Get the emporerors new groove (sword)
 	//Req's d2 finished
-	if (fellatrixSucked() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0 && player.hasKeyItem("Zetaz's Map") >= 0 && flags[kFLAGS.DOMINIKAS_SWORD_GIVEN] == 0) {
+	if (fellatrixSucked() && flags[kFLAGS.DOMINIKA_STAGE] > 0 && player.hasKeyItem("Zetaz's Map") >= 0 && flags[kFLAGS.DOMINIKAS_SWORD_GIVEN] == 0) {
 		dominikaSpellblade();
 		return;
 	}
@@ -45,7 +45,7 @@ public function fellatrixBarApproach():void {
 		return;
 	}
 	//[First encounter]
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] == 0) {
+	if (flags[kFLAGS.DOMINIKA_STAGE] == 0) {
 		outputText("You approach the woman, delivering a polite greeting. She glances back at you and you think she might be smirking beneath the veil, but can't tell. \"<i>Hello to you as well,</i>\" she replies, with a low and husky voice, gesturing to a seat across from her. \"<i>You're a new face, no?</i>\"\n\n", false);
 
 		outputText("You accept the seat and begin to make small talk with her. \"<i>I'm Dominika,</i>\" she adds after a chuckle at a joke. \"<i>Just Dominika now, I'm afraid.</i>\" You introduce yourself as well. \"<i>If I'm not mistaken, you'd be from... Ingnam, yes?</i>\" You nod, and ask if she's familiar with your homeland. \"<i>I'm afraid not,</i>\" she replies, \"<i>But I do my best to learn about the world. Ingnam has sent a champion every year for about... oh goodness, longer than I know. I've spoken with another during my time here, and you've both got a very distinctive accent.</i>\"  She can't help but chuckle again when she sees your reaction. \"<i>Oh, don't worry, it's not that thick.</i>\"\n\n", false);
@@ -56,18 +56,18 @@ public function fellatrixBarApproach():void {
 
 		outputText("After a bit more conversation she glances outside and says she should go. \"<i>It has been nice, though,</i>\" she adds, \"<i>I would enjoy speaking with you again.</i>\" She rests a hand on your shoulder as she leaves. Her eyes tell you she's smiling at you before she goes.", false);
 		doNext(camp.returnToCampUseOneHour);
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150]++;
+		flags[kFLAGS.DOMINIKA_STAGE]++;
 		return;
 	}
 	//[Second encounter, player has naga tail/centaur body/slime body]
 	else if (!player.isBiped()) {
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] == 1) {
+		if (flags[kFLAGS.DOMINIKA_STAGE] == 1) {
 			outputText("You make your way over to Dominika's table again, saying hello once more. The two of you talk about your exploits for a time, before you ask her what she has been up to. \"<i>Research, mostly,</i>\" she explains. \"<i>I try to document what this land has, in the hopes that it may be useful to someone one day. I do consider myself somewhat of a learned woman which... seems to be something of a rarity here, so there are few qualified to do the job.</i>\"\n\n", false);
 
 			outputText("Intrigued, you ask her to elaborate on what she's learned. \"<i>Well, goodness, that could take a while,</i>\" she laughs. \"<i>Mm. Free tip though. Stay away from minotaur cum. That stuff will get you. There's a merchant out there who has some of my work, if you can find him. Other than that I mean, teaching requires a more intimate setting than 'the Wet Bitch'.</i>\" She rolls her eyes slightly at the name. \"<i>I'd be surprised if there's a single college on this entire continent though. Ah well.</i>\"\n\n", false);
 
 			outputText("\"<i>Although...</i>\" she seems to think about something, glancing over at you for a few seconds, then waves her hand dismissively. \"<i>No, no. That wouldn't work. Don't worry about it.</i>\" She seems to sigh slightly, and though you continue talking, you can tell she's become less invested in the conversation. After a few minutes you excuse yourself.", false);
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150]++;
+			flags[kFLAGS.DOMINIKA_STAGE]++;
 		}//[Follow-up encounters, player has naga tail/centaur body/slime body]
 		else {
 			outputText("You make your way over to Dominika's table and start up a conversation with the modestly dressed woman. You share exploits and knowledge, but can't help but feel like she's being somewhat distant. She glances out to the distance more than once, and drums her fingers on the table. You make conversation for a little while longer, but realize that it's not really going to go anywhere, and excuse yourself.", false);
@@ -77,7 +77,7 @@ public function fellatrixBarApproach():void {
 		return;
 	}
 	//Second encounter]
-	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] == 1) {
+	else if (flags[kFLAGS.DOMINIKA_STAGE] == 1) {
 		outputText("You make your way over to Dominika's table again, saying hello once more. The two of you talk about your exploits for a time, before you ask her what she has been up to. \"<i>Research, mostly,</i>\" she explains. \"<i>I try to document what this land has, in the hopes that it may be useful to someone one day. I do consider myself somewhat of a learned woman which... seems to be something of a rarity here, so there are few qualified to do the job.</i>\"\n\n", false);
 
 		outputText("Intrigued, you ask her to elaborate on what she's learned. \"<i>Well, goodness, that could take a while,</i>\" she laughs. \"<i>Mm. Free tip though. Stay away from minotaur cum. That stuff will get you. There's a merchant out there who has some of my work, if you can find him. Other than that I mean, teaching requires a more intimate setting than 'the Wet Bitch'.</i>\" She rolls her eyes slightly at the name. \"<i>I'd be surprised if there's a single college on this entire continent though. Ah well.</i>\"\n\n", false);
@@ -109,8 +109,8 @@ private function acceptDominikasKnowledge():void {
 	spriteSelect(58);
 	clearOutput();
 	//Set that PC has received oral offer (its coming further down for sure)
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150]++;
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] == 2) {
+	flags[kFLAGS.DOMINIKA_STAGE]++;
+	if (flags[kFLAGS.DOMINIKA_STAGE] == 2) {
 		outputText("Dominika smiles with her eyes again. She leaves some payment on the table, then escorts you out into the desert city. \"<i>It's not far,</i>\" she says, \"<i>We'll be there in just a few minutes.</i>\"\n\n", false);
 
 		outputText("True to her word, she ducks into an alley just a few blocks down, climbing a ladder leading up to a balcony. \"<i>This city has been co-opted a bit haphazardly,</i>\" she observes as she leads you up, \"<i>So apologies for the irregular front door.</i>\" Glancing up as you climb, you see her pale bare legs, and a glint of metal between them. She helps you onto the balcony, turning and opening the door to her home.\n\n", false);
@@ -131,14 +131,14 @@ private function acceptDominikasKnowledge():void {
 	}
 
 	//If no dominika cooldown up
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00155] == 0) {
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00155] = 7 + rand(3);
+	if (flags[kFLAGS.DOMINIKA_LEARNING_COOLDOWN] == 0) {
+		flags[kFLAGS.DOMINIKA_LEARNING_COOLDOWN] = 7 + rand(3);
 		outputText("\"<i>Now then,</i>\" she says. Her hands glow with a brief sense of power, and many of the tattoos shine with equal illumination. She gestures with her hand and the lamps all acquire an unearthly light, as green glowing circles appear interlinked on the floor. \"<i>How much do you know about magic?</i>\"\n\n", false);
 
 		//[If player knows all spells]
 		if (player.spellCount() == 6) {
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00154] == 0) {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00154]++;
+			if (flags[kFLAGS.DOMINIKA_EMBARRASSED_ABOUT_MAGIC] == 0) {
+				flags[kFLAGS.DOMINIKA_EMBARRASSED_ABOUT_MAGIC]++;
 				outputText("You blink, then casually mention that you actually know quite a bit about magic. Dominika listens to you explain your skill in white and black magic, then coughs awkwardly and glances to the side. \"<i>O-oh,</i>\" she says, \"<i>Well. Uhm. I guess we can talk about magical theory, maybe?</i>\"\n\n", false);
 			}
 			else outputText("You blink, then casually mention that you actually know quite a bit about magic. Dominika smiles, curling those glistening black lips into an even more erotic shape as she replies, \"<i>Oh I know sweety.  Why don't we discuss the theory behind it all?</i>\"\n\n", false);
@@ -222,7 +222,7 @@ private function fellatrixSexWarmup():void {
 	spriteSelect(58);
 	clearOutput();
 	//Cooldown ongoing!
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00155] > 0) {
+	if (flags[kFLAGS.DOMINIKA_LEARNING_COOLDOWN] > 0) {
 		outputText("Dominika glances out the window nervously and says, \"<i>I don't think you're ready to learn more yet – your mind still needs time to absorb the knowledge from our last meeting.</i>\"  Her tongue slowly slides over the glistening black surface of her lower lip and her voice becomes a little more husky as she offers, \"<i>Why don't we talk about something else?</i>\"\n\n", false);
 	}
 	//No cooldown, knowledge get epilogue
@@ -234,7 +234,7 @@ private function fellatrixSexWarmup():void {
 	//(If breasts)
 	if (player.biggestTitSize() >= 1) outputText("They briefly run down to the top of your " + player.breastDescript(0) + " before returning to your collar.  ", false);
 	//First time
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] == 2)	outputText("\"<i>I have not been unaffected by this land. I have certain... dietary needs.</i>\" She coughs slightly, glancing aside and looking as though she's doing her very best not to blush.\n\n", false);
+	if (flags[kFLAGS.DOMINIKA_STAGE] == 2)	outputText("\"<i>I have not been unaffected by this land. I have certain... dietary needs.</i>\" She coughs slightly, glancing aside and looking as though she's doing her very best not to blush.\n\n", false);
 	//Repeat
 	else outputText("\"<i>You know what I need,</i>\" She coughs slightly, glancing aside and looking as though she's doing her very best not to blush.\n\n", false);
 
@@ -294,7 +294,7 @@ private function declineFellatrixOralSUPERHARDCORE():void {
 
 	outputText("You let yourself out.", false);
 	//(Dominika does not appear again.)
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] = -1;
+	flags[kFLAGS.DOMINIKA_STAGE] = -1;
 	cheatTime(1);
 	doNext(telAdre.barTelAdre);
 }
@@ -312,7 +312,7 @@ private function acceptFellatrixOral():void {
 		return;
 	}
 	//After 3+ blowjobs
-	if (timesFellatrixSucked() >= 3 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00157] == 0) {
+	if (timesFellatrixSucked() >= 3 && flags[kFLAGS.DOMINIKA_SPECIAL_FOLLOWUP] == 0) {
 		if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0) {
 			outputText("The familiar slick and slurping brutality is enacted by Dominika's mouth upon you. Those lips engulf you, devour you, inhale you, and in the haze of pleasure you love every single moment. They shine in your mind, glamorized, an immaculate altar to which you can only cum, and cum, and cum, and...\n\n", false);
 
@@ -352,7 +352,7 @@ private function acceptFellatrixOral():void {
 	if (x < 0) x = 0;
 	//[If \"<i>Yes</i>\" and vagina]
 	if (player.hasVagina() && (player.gender == 2 || rand(2) == 0)) {
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00153] == 0) {
+		if (flags[kFLAGS.DOMINIKA_VAGINAL_ORAL_RECEIVED] == 0) {
 			outputText("Dominika's dark lips curve up in a wicked grin and she leads you by the hand to another room. Within is a bed that looks to be more comfortable than any piece of furniture you've seen since leaving your village. You are more than happy to sit upon it when she gestures. The pale mage removes the bottom of your " + player.armorName + " and claps her hands together in a giggling laugh when she sees your vagina. \"<i>Oh my goodness!</i>\" she grins, \"<i>You actually have a cute little vagina! That's SO HARD TO FIND here!</i>\" Climbing onto the bed with you she gives a surprising embrace, planting her ebony lips on your cheek. \"<i>Here, lay back,</i>\" she insists, leaning on your shoulders to have you lay down.\n\n", false);
 			outputText("She straddles your belly, looking down at you with a mischievous grin. Curiously you feel metal rubbing against your bare skin, much like you saw between her legs earlier. Is she wearing a chastity belt? The tattooed teacher leans down and drags her darkened lips sensually over your own, sucking on your lower lip. The connection of flesh is almost electric in its stimulation – you quickly have to admit to yourself that her lips feel pretty damn good. Her tongue flicks out over the curves on your face and though you try to catch it her body is already sliding down your own. Her bare breasts tease your flesh as her nipples bump and catch against your skin.\n\n", false);
 			outputText("Those succulent soft lips slip along your belly, teasing you with their moisture. Her hands run along your thighs and guide them further apart as she goes. Your bare slit feels her breasts slide along it as she comes ever closer to the promised cunnilingus. One last push on both your thighs spreads your legs yet further, and as she lifts her head to look at your body you cannot help but feel prostrated before her on display. Your eyes wander down to the lips that have traced her path down your body. It was not intentional – they were simply the first thing to catch your eye, even though she was gazing back at you. Their fullness arouses you even more now that you have felt their touch.\n\n", false);
@@ -378,7 +378,7 @@ private function acceptFellatrixOral():void {
 			outputText("You cannot resist for long after she takes over your spot once again, grinding against it and forcing you to arc your back. Pleasure surrounds you as effortlessly as her lips surround your " + player.clitDescript() + ", and you find yourself cumming hard against her. She drinks everything you give her, sucking on your " + player.vaginaDescript(0) + " to ensure as little as possible escapes. You feel as though the orgasm could last forever, but settle slowly as she gently kisses your lips, stroking along your belly.\n\n", false);
 			outputText("\"<i>As always, delicious,</i>\" she smiles, cuddling with you in the afterglow of her meal. She caresses you until you regain your strength, and then politely helps you re-dress and sends you on your way, giving you a kiss to remember her. Those black lips linger in your mind as you walk the streets of Tel'Adre on your way back to camp.", false);
 		}
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00153]++;
+		flags[kFLAGS.DOMINIKA_VAGINAL_ORAL_RECEIVED]++;
 	}
 	//MULTICAWWWWK
 	else if (player.cockTotal() >= 2 && rand(2) == 0) {
@@ -425,7 +425,7 @@ private function acceptFellatrixOral():void {
 		//Dogcock suck
 		if (player.hasKnot(x)) {
 			// - first time dogsuck
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00156] == 0) {
+			if (flags[kFLAGS.DOMINIKA_SUCKED_OFF_DOGCOCKS] == 0) {
 				outputText("A confident chuckle comes from Dominika's throat as she takes your hand and leads you to another room. \"<i>Come then, sit down,</i>\" she smiles, patting the surprisingly luxurious bed within. \"<i>Make yourself comfortable, dear, as you'll not be standing up.</i>\" You quirk her head, but the nearly carnivorous way she licks those dark lips suggests that her 'certain dietary needs' are ones she pursues with some passion, and sitting down seems like a good idea. She in turn paces calmly around to face you, resting her hand on your shoulder as she does. A single, appraising glance is given you before she kneels and removes the bottom portion of your " + player.armorName + ".\n\n", false);
 
 				outputText("You were not prepared for the brief laugh that escapes her inky lips. \"<i>Ah, sorry, sorry,</i>\" she quickly explains, though she still smirks, \"<i>Just... mmm, fan of spicy food, I take it?</i>\" She brushes her hands over your " + player.cockDescript(x) + " and briefly rubs your knot with two fingers. \"<i>As long as you give me my food we shouldn't have any problems.</i>\" Those dark lips turn once more into a grin both confident and wicked. Leaning forward, her plump lower lip rests against the shaft of your " + player.cockDescript(x) + " before dragging slowly upwards, leaving behind a trail of subtle saliva. Her top lip curls over your tip as she arrives, giving the first small suck of your meat – one that feels incredible. The heat and warmth of her mouth is only teased at but you desire far more, to say little of the soft sensation from her curving pillows. The single action is capped off by her tongue flicking across your very tip, leaving behind the warm trail of her spit.\n\n", false);
@@ -460,12 +460,12 @@ private function acceptFellatrixOral():void {
 
 				outputText("\"<i>As always, delicious,</i>\" she smiles, relaxing with you in the afterglow of her meal. She caresses you until you regain your strength, and then politely helps you re-dress and sends you on your way, giving you a kiss to remember her. Those black lips linger in your mind as you walk the streets of Tel'Adre.", false);
 			}
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00156]++;
+			flags[kFLAGS.DOMINIKA_SUCKED_OFF_DOGCOCKS]++;
 		}
 		//Horsecock suck
 		else if (player.cocks[x].cockType == CockTypesEnum.HORSE) {
 			// - first time horsesuck
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00174] == 0) {
+			if (flags[kFLAGS.DOMINIKA_SUCKED_OFF_HORSECOCKS] == 0) {
 				outputText("The smile that spreads across her face might have looked sinister on someone else. She takes your hand and guides you to the other room, licking her lips. Within rests an extraordinarily comfortable-looking bed, featuring a level of finery you had nearly forgotten existed. The cabalist leads you to it, and helps you sit down. \"<i>Yeah,</i>\" she smirks, \"<i>I figured you might say yes.</i>\" She reaches down to remove the bottom of your " + player.armorName + ", before chuckling lightly at the sight of your " + player.cockDescript(x) + ". \"<i>Oh yeah?</i>\" she says, \"<i>Do they call you the Icathian Stallion?</i>\"\n\n", false);
 
 				outputText("You blink in confusion at her. \"<i>...You know, like... it's a nickname from... you know what, never mind.</i>\" She waves her hand dismissively and smiles. \"<i>I'm sure no matter how uninformed you are, you still blow a load.</i>\" Her hands reach down to slowly rub against the stiffening " + player.cockDescript(x) + ", eager to have its fun with the topless arcanist standing before it. There's a comfortable softness to her thumb as it plays over your flared tip. She settles down to kneel before you, continuing to stroke your " + player.cockDescript(x) + " and entice it into a much fuller form. Even just this close you can begin to feel her breath emanating from between those luscious, deeply-coloured lips. The warmth of the sensation is seductive, carrying promises of what is yet to come. Your " + player.cockDescript(x) + " practically leans towards her in anticipation.\n\n", false);
@@ -504,12 +504,12 @@ private function acceptFellatrixOral():void {
 
 				outputText("\"<i>As always, delicious,</i>\" she smiles, relaxing with you in the afterglow of her meal. She caresses you until you regain your strength, and then politely helps you re-dress and sends you on your way, giving you a kiss to remember her. Those black lips linger in your mind as you walk the streets of Tel'Adre.", false);
 			}
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00174]++;
+			flags[kFLAGS.DOMINIKA_SUCKED_OFF_HORSECOCKS]++;
 		}
 		//Human/fallback wang
 		else {
 			// - first time wangsuck
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00151] == 0) {
+			if (flags[kFLAGS.DOMINIKA_SUCKED_OFF_LARGE_COCKS] == 0) {
 				outputText("Dominika smiles, taking your hand and leading you to another room. Within is a surprisingly rich-looking bed, and she encourages you to sit down. \"<i>Thank you,</i>\" she says, and immediately follows it up with a truly wicked grin. \"<i>Now to make you realize you should be thanking me.</i>\"\n\n", false);
 				outputText("She removes the bottom of your " + player.armorName + " and kneels in front of you. Taking your " + player.cockDescript(x) + " into her hands, her fingers begin a slow and steady massage along the length. She leans down and brings her lips to a soft kiss right on the tip of your " + player.cockDescript(x) + ". The glistening moisture you saw on them before feels almost unnatural, as though her lips are oiled up – but given what you've experienced in this land, such an idea does not startle you in the slightest. Her equally slick tongue slips out to press against the underside of your head and then flicks up, leaving saliva behind. The gentle touch of her palm presses against the spit and begins to spread it around. She swirls it slowly around your sensitive tip, enticing your erection further.  The ball of her thumb in particular works into the curve of your head, sliding against where it meets your shaft.\n\n", false);
 				//(if player has balls)
@@ -532,13 +532,13 @@ private function acceptFellatrixOral():void {
 				outputText("You don't speak as it continues, merely grunting and gasping in the rapture that at that moment it seems only her mouth can bring. You try to push your " + player.cockDescript(x) + " deeper and deeper into her throat, trying to fuck as much of her face as humanly possible. Eventually your bucking hips seize and tremble as the first sticky load flings itself into her waiting maw. As before her mouth buries itself into your lap as she drinks of your spunk, swallowing everything you give her and not letting a single drop through her plump, moist lips. You cum until you can't cum anymore, and even then your orgasm persists until she delicately kisses your lips.\n\n", false);
 				outputText("\"<i>As always, delicious,</i>\" she smiles, cuddling with you in the afterglow of her meal. She caresses you until you regain your strength, and then politely helps you re-dress and sends you on your way, giving you a kiss to remember her. Those black lips linger in your mind as you walk the streets of Tel'dre on your way back to camp.", false);
 			}
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00151]++;
+			flags[kFLAGS.DOMINIKA_SUCKED_OFF_LARGE_COCKS]++;
 		}
 	}
 	//[If \"<i>Yes</i>\" and penis too big to suck]
 	else {
 		// - first time wangsuck
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00152] == 0) {
+		if (flags[kFLAGS.DOMINIKA_SUCKED_OFF_SMALL_COCKS] == 0) {
 			outputText("A surprisingly big grin spreads across Dominika's face and she takes your hand, leading you to a side room. Within is a very comfortable looking bed, and she encourages you to sit down upon the covers. \"<i>Excellent,</i>\" she says, before grinning just a little wickedly, \"<i>Now to break you upon my knee and leave you gasping for more.</i>\" You don't have words for that one. At least she's confident.\n\n", false);
 			outputText("She removes the bottom of your " + player.armorName + ", then blinks in surprise. Curiously she leans forward, running her hand over your head, then lifting your " + player.cockDescript(x) + " to look closer at it. Almost adorably she opens her mouth and leans forward, apparently comparing the two, before looking back up at you. \"<i>So in retrospect I probably should have noticed that you were barely keeping this contained, but uhm...</i>\" She lets out an awkward light cough, then glances back at your dick. There's an intake of breath as she figures out how precisely she wants to say whatever she's about to say. \"<i>I don't think I can fit this in my mouth...</i>\" Tilting her head in thought as she strokes slowly along you, she eventually smirks and shrugs. \"<i>Well I mean, not that I need to.</i>\"\n\n", false);
 			outputText("Her dark lips press forward, wetly moving against your cumslit in a slow kiss. That first contact is electric – their ebony curves are exactly as soft and slick as you could have wished for. Her tongue teases the hole briefly as she flicks across it. \"<i>Mm, the taste is not... undesirable,</i>\" she muses, winking at you. The slippery appendage slips out beneath your head to run along your glans, slipping between your foreskin and your flesh. You can't help but give an appreciative groan as her mouth begins its work. Her devilishly black pillows glide down the underside of your head to curl around your foreskin, pulling on it slightly before gently tugging it back. They circle slowly around the loose flesh, her chin and cheeks sliding against your " + player.cockDescript(x) + " in the process. Every last inch of foreskin finds itself gently lifted from your head, pulled away by a full, soft lip – clinging to the dark surface as it is almost adoringly. The fullness of your erection soon makes such play impossible, standing tall and proud before the tattooed acolyte.\n\n", false);
@@ -561,12 +561,12 @@ private function acceptFellatrixOral():void {
 			outputText("Your bucking hips seize and tremble as the first sticky load flings itself into her waiting maw. Her hands grip you with a possessive tightness, stroking along your " + player.cockDescript(x) + " as though coaxing every last drop out – and indeed, you give her every last drop you can, cumming until you can't anymore. Even then the orgasmic pleasure lingers in your mind, and you can't stop rocking your hips forward in a desire to let it continue. She slips away from your prick, finally rising up to kiss you on the lips. The touch of those dark puckers relaxes you, and you come down from the pleasure with a low, happy groan.\n\n", false);
 			outputText("\"<i>As always, delicious,</i>\" she smiles, cuddling with you in the afterglow of her meal. She caresses you until you regain your strength, and then politely helps you re-dress and sends you on your way, giving you a kiss to remember her. Those black lips linger in your mind as you walk the streets of Tel'Adre on your way back to camp.", false);
 		}
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00152]++;
+		flags[kFLAGS.DOMINIKA_SUCKED_OFF_SMALL_COCKS]++;
 	}
 	player.orgasmGeneric();
 	dynStats("lib", -1, "sen", 1);
 
-	if (timesFellatrixSucked() >= 4 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00175] == 0) doNext(dominidrama);
+	if (timesFellatrixSucked() >= 4 && flags[kFLAGS.DOMINIKA_DRAMA] == 0) doNext(dominidrama);
 	else doNext(camp.returnToCampUseTwoHours);
 }
 
@@ -604,7 +604,7 @@ private function agreeWithDominika():void {
 		outputText("You think about her lips on the streets of Tel'adre.", false);
 	}
 	dynStats("lus", 25);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00157] = 1;
+	flags[kFLAGS.DOMINIKA_SPECIAL_FOLLOWUP] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -617,7 +617,7 @@ private function ehhhhDominika():void {
 	outputText("On the streets of Tel'Adre, you think on what she said. It was not exactly what you had expected to come from that inky pout. You had shown up for a blowjob, not... whatever that was. Was that how Dominika felt? Was she hiding this from people? What did she mean by the Covenant keeping her chained? You have trouble deciding if these are questions worth answering, or if you should simply wash your hands of the entire business.\n\n", false);
 
 	outputText("Still, that was some magnificent oral. You idly recall the sensations of those dark lips as you walk through Tel'Adre.\n\n", false);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00157] = 2;
+	flags[kFLAGS.DOMINIKA_SPECIAL_FOLLOWUP] = 2;
 	doNext(camp.returnToCampUseOneHour);
 }
 //[Disagree with her]
@@ -626,7 +626,7 @@ private function disagreeDominika():void {
 	clearOutput();
 	//(Corruption decrease)
 	dynStats("cor", -2);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00157] = 3;
+	flags[kFLAGS.DOMINIKA_SPECIAL_FOLLOWUP] = 3;
 	if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0) {
 		outputText("That seems like a ridiculous thing to say, and you tell her so. Her nose wrinkles slightly and she seems to hold herself a little higher. \"<i>Well, it's the sort of thing you ponder,</i>\" she says after a short wait. \"<i>The city has... many who don't pull their weight.</i>\" She offers a half-smile, then turns back to her mirror, fixing her hair once more. You get the sense that she's not interested in pursuing the conversation.\n\n", false);
 
@@ -646,7 +646,7 @@ private function disagreeDominika():void {
 //[Dream after above scene]
 public function fellatrixDream():void {
 	spriteSelect(58);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00157] += 3;
+	flags[kFLAGS.DOMINIKA_SPECIAL_FOLLOWUP] += 3;
 	outputText("Breathing heavily, you cut through foliage so dark it seems as though you're splitting the night itself. Only the blinking of stars above betrays that you have not stepped directly into the sky. You feel cold, nude, and alone. There is no one for you this far into the woods, no parent to lift you up and carry you to safety, no lover to hold you within her embrace when you are scared. There is only you and the darkness, your enemy and your only companion.\n\n", false);
 
 	outputText("Dominika inhales, and parts the bushes between you. Though blindfolded, she extends her hand to you, bidding you across the new path. Your eyes wander to the space between her legs, dripping the night and hiding her crotch in treacherous wisps. \"<i>Cum to me</i>,\" she says with lips blacker than the sky. Part of your body rebels, says you have needed no one so far, but the flesh insists. You take a staggering, heavy step towards her.\n\n", false);
@@ -689,7 +689,7 @@ private function dominidramaYes():void {
 	outputText("She sighs lightly. \"<i>And as an aside, it would probably be for the best that you not visit this woman again.</i>\" Asa looks down the street and then smiles, pats your shoulder, and leaves. You feel a strange tension in your body, as though something upsetting has happened but you cannot name what it is. Glancing up you notice a dark-feathered crow seeming to watch you from a nearby roof, but you cannot decide whether you are being paranoid in thinking it is watching you or not. You then ask yourself what a crow would possibly be doing in a desert.\n\n", false);
 
 	outputText("Weary, you continue on your way out of Tel'Adre.", false);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00175] = 1;
+	flags[kFLAGS.DOMINIKA_DRAMA] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
 //[No]
@@ -703,7 +703,7 @@ private function dominidramaNo():void {
 
 	outputText("You feel warm inside, filled with a confidence that seemed to come out of nowhere. You can imagine Dominika's dark lips in your mind smiling, opening and curving as if to say \"<i>Good work.</i>\" The thought empowers you. It feels good to protect her, you think to yourself. You stride confidently out of the city.", false);
 	dynStats("lus", 10, "cor", 1);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00175] = 2;
+	flags[kFLAGS.DOMINIKA_DRAMA] = 2;
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -861,7 +861,7 @@ private function dominikaBlowjobs2():void {
 	outputText("Groaning, you roll over, sitting up in your bedroll.  The rays of the sun hitting your face feel particularly unwelcome.  You're not sure what you drank last night, but given your hangover you must have done so.\n\n", false);
 	outputText("After a lot of water, you feel a little better.  Something nags at the back of your mind, an itch you can't quite scratch but persistently remains.  You feel as though you've forgotten something important, and perhaps even essential, but cannot think of any clues as to what.  ", false);
 	//[Agreed with Dominika]
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00157] == 1 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00157] == 4) outputText("At the same time, you get the sense that perhaps it's for the best you did so.", false);
+	if (flags[kFLAGS.DOMINIKA_SPECIAL_FOLLOWUP] == 1 || flags[kFLAGS.DOMINIKA_SPECIAL_FOLLOWUP] == 4) outputText("At the same time, you get the sense that perhaps it's for the best you did so.", false);
 	//[Disagreed/Neutral with Dominika]
 	else outputText("It deeply bothers you, leaving a sense of anxiety behind that you don't know how to deal with. You'll have to just hope something comes along that reminds you.", false);
 	outputText("\n\nEither way, it's another day.", false);

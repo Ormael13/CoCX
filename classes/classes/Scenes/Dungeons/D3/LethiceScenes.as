@@ -503,13 +503,14 @@ package classes.Scenes.Dungeons.D3
 		{
 			clearOutput();
 			outputText("What name do you give the new woman you and Marae have made?");
+			menu();
+			addButton(0,"Next",redemptionIIIGoName);
 			mainView.nameBox.text = "";
 			mainView.nameBox.visible = true;
 			mainView.nameBox.width = 165;
 			mainView.nameBox.x = mainView.mainText.x + 5;
 			mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
-			menu();
-			addButton(0,"Next",redemptionIIIGoName);
+
 		}
 		
 		private function redemptionIIIGoName():void

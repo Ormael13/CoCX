@@ -36,7 +36,7 @@
 			if (player.gender == 0 && flags[kFLAGS.CERULEAN_POTION_NEUTER_ATTEMPTED] > 0) {
 				outputText("You take another sip of the Cerulean Potion.  You find it soothing and become very excited about the possibility of another visit from the succubus.", true);
 			}
-			else if (player.gender == 3 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00111] > 0) {
+			else if (player.gender == 3 && flags[kFLAGS.CERULEAN_SUCCUBUS_HERM_COUNTER] > 0) {
 				outputText("With anticipation, you chug down another bottle of the Cerulean Potion. A warm sensation radiates out from your stomach as you feel the potion course through your body.", true);
 			}
 			//All else

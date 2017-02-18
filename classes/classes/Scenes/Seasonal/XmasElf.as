@@ -41,7 +41,7 @@
 			}
 			awardAchievement("Naughty or Nice", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_I);
 			outputText("You wonder out loud, \"<i>So this... present is mine?</i>\"\n\n", false);
-			if (player.cor >= 90 || flags[kFLAGS.JOJO_STATUS] >= 5 || player.findStatusEffect(StatusEffects.Exgartuan) >= 0 || getGame().amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0)
+			if (player.cor >= 90 || flags[kFLAGS.JOJO_STATUS] >= 5 || player.findStatusEffect(StatusEffects.Exgartuan) >= 0 || getGame().amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED_FOREVER] > 0 || flags[kFLAGS.SOPHIE_BIMBO] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0)
 			{
 				outputText("She nods, bouncing up and down in excitement and flushing slightly, \"<i>Yup, just tear the lid off and get your gift!</i>\"\n\n", false);
 				if (flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] > 0) outputText("Here we go again...\n\n");
@@ -75,7 +75,7 @@
 			spriteSelect(9);
 			clearOutput();
 			outputText("You easily rip through the ribbons holding the box together and pull off the top.   You gasp in ", false);
-			if (player.cor >= 90 || flags[kFLAGS.JOJO_STATUS] >= 5 || player.findStatusEffect(StatusEffects.Exgartuan) >= 0 || getGame().amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
+			if (player.cor >= 90 || flags[kFLAGS.JOJO_STATUS] >= 5 || player.findStatusEffect(StatusEffects.Exgartuan) >= 0 || getGame().amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED_FOREVER] > 0 || flags[kFLAGS.SOPHIE_BIMBO] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
 				//[Bad Present]
 				outputText("shock at the box's contents – a nine inch cock with damn near a dozen buzzing, elliptical devices taped to it.  A pair of coal lumps rattles around underneath it, positioned as if they were the dick's testicles.\n\n", false);
 				

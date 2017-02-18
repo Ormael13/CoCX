@@ -81,7 +81,7 @@ package classes {
 				var multiplier:Number = 1.0
 				if (player.findPerk(PerkLib.Survivalist) >= 0) multiplier -= 0.2;
 				if (player.findPerk(PerkLib.Survivalist2) >= 0) multiplier -= 0.2;
-				if (flags[kFLAGS.KAIZO_MODE] > 0) multiplier *= 2;
+				if (flags[kFLAGS.GRIMDARK_MODE] > 0) multiplier *= 2;
 				//Hunger drain rate. If above 50, 1.5 per hour. Between 25 and 50, 1 per hour. Below 25, 0.5 per hour.
 				//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger. Can be increased to 125 then 166 hours with Survivalist perks.
 				if (prison.inPrison) {
@@ -326,7 +326,7 @@ package classes {
 					needNext = true;
 				}
 			}
-			if (player.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285] >= 50 && player.findPerk(PerkLib.LuststickAdapted) < 0) { //Luststick resistance unlock
+			if (player.flags[kFLAGS.LUSTSTICK_RESISTANCE_PROGRESS] >= 50 && player.findPerk(PerkLib.LuststickAdapted) < 0) { //Luststick resistance unlock
 				getGame().sophieBimbo.unlockResistance();
 				if (player.findStatusEffect(StatusEffects.Luststick) >= 0) player.removeStatusEffect(StatusEffects.Luststick);
 				needNext = true;
@@ -471,7 +471,7 @@ package classes {
 			if (getGame().mountain.minotaurScene.minoCumUpdate()) {
 				needNext = true;
 			}
-			else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 2 && getGame().model.time.hours % 13 == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330] == 0) { //Repeated warnings!
+			else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 2 && getGame().model.time.hours % 13 == 0 && flags[kFLAGS.MINOTAUR_SONS_CUM_REPEAT_COOLDOWN] == 0) { //Repeated warnings!
 				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2)
 					outputText("\n<b>You shiver, feeling a little cold.  Maybe you ought to get some more minotaur cum?  You just don't feel right without that pleasant buzz in the back of your mind.</b>\n");
 				else if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3)
@@ -479,8 +479,8 @@ package classes {
 				needNext = true;
 			}
 			//Decrement mino withdrawal symptoms display cooldown
-			//flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330] prevents PC getting two of the same notices overnite
-			else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330]--;
+			//flags[kFLAGS.MINOTAUR_SONS_CUM_REPEAT_COOLDOWN] prevents PC getting two of the same notices overnite
+			else if (flags[kFLAGS.MINOTAUR_SONS_CUM_REPEAT_COOLDOWN] > 0) flags[kFLAGS.MINOTAUR_SONS_CUM_REPEAT_COOLDOWN]--;
 			if (player.findPerk(PerkLib.FutaForm) >= 0) { //Futa checks
 				if (!player.hasCock()) { //(Dick regrowth)
 					player.createCock();
@@ -681,9 +681,13 @@ package classes {
 					if (player.biggestLactation() < 1 && player.findStatusEffect(StatusEffects.LactationReduc3) < 0) {
 						player.createStatusEffect(StatusEffects.LactationReduc3, 0, 0, 0, 0);
 						outputText("\n<b>Your body no longer produces any milk.</b>\n");
+						needNext = true;
+					}
+					if (player.biggestLactation() == 0 && player.findStatusEffect(StatusEffects.LactationReduc3) >= 0) {
 						player.removeStatusEffect(StatusEffects.LactationReduction);
 						needNext = true;
 					}
+					
 				}
 			}
 			if (player.findStatusEffect(StatusEffects.CuntStretched) >= 0) { //Cunt stretching stuff
@@ -845,10 +849,10 @@ package classes {
 				flags[kFLAGS.BENOIT_HAIRPIN_TALKED_TODAY] = 0;
 				getGame().bazaar.benoit.updateBenoitInventory();
 				flags[kFLAGS.ROGAR_FUCKED_TODAY] = 0;
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285]--; //Reduce lust-stick resistance building
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00155] > 0) { //Dominika fellatrix countdown
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00155]--;
-					if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00155] < 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00155] = 0;
+				if (flags[kFLAGS.LUSTSTICK_RESISTANCE_PROGRESS] > 0) flags[kFLAGS.LUSTSTICK_RESISTANCE_PROGRESS]--; //Reduce lust-stick resistance building
+				if (flags[kFLAGS.DOMINIKA_LEARNING_COOLDOWN] > 0) { //Dominika fellatrix countdown
+					flags[kFLAGS.DOMINIKA_LEARNING_COOLDOWN]--;
+					if (flags[kFLAGS.DOMINIKA_LEARNING_COOLDOWN] < 0) flags[kFLAGS.DOMINIKA_LEARNING_COOLDOWN] = 0;
 				}
 				if (flags[kFLAGS.LOPPE_DENIAL_COUNTER] > 0) { //Loppe denial counter
 					flags[kFLAGS.LOPPE_DENIAL_COUNTER]--;
@@ -982,7 +986,7 @@ package classes {
 					return true;
 				}
 				var ceraph:int; //Ceraph's dreams - overlaps normal night-time dreams.
-				switch (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220]) {
+				switch (flags[kFLAGS.CERAPH_DICKS_OWNED] + flags[kFLAGS.CERAPH_PUSSIES_OWNED] + flags[kFLAGS.CERAPH_TITS_OWNED]) {
 					case  0: ceraph =  0; break; //If you've given her no body parts then Ceraph will not cause any dreams
 					case  1: ceraph = 10; break; //Once every 10 days if 1, once every 7 days if 2, once every 5 days if 3
 					case  2: ceraph =  7; break;
@@ -994,7 +998,7 @@ package classes {
 					getGame().ceraphScene.ceraphBodyPartDreams();
 					return true;
 				}
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00157] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00157] < 4) { //Dominika Dream
+				if (flags[kFLAGS.DOMINIKA_SPECIAL_FOLLOWUP] > 0 && flags[kFLAGS.DOMINIKA_SPECIAL_FOLLOWUP] < 4) { //Dominika Dream
 					outputText("\n<b>Your rest is somewhat troubled with odd dreams...</b>\n");
 					getGame().telAdre.dominika.fellatrixDream();
 					return true;

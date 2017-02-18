@@ -41,6 +41,10 @@ package classes.Scenes.Combat
 		public var plotFight:Boolean = false; //Used to restrict random drops from overlapping uniques
 		public var combatRound:int = 0;
 		
+		//Used to display image of the enemy while fighting
+		//Set once during beginCombat() to prevent it from changing every combat turn
+		private var imageText:String = "";
+		
 		public function get inCombat():Boolean {
 			return getGame().inCombat;
 		}
@@ -77,6 +81,10 @@ package classes.Scenes.Combat
 			if (inCombat) {
 				//clear status
 				clearStatuses(false);
+				
+				//reset the stored image for next monster
+				imageText = "";
+				
 				//Clear itemswapping in case it hung somehow
 		//No longer used:		itemSwapping = false;
 				//Player won
@@ -1250,6 +1258,51 @@ package classes.Scenes.Combat
 				if (temp == 12) itype = consumables.L_BLKEG;
 				flags[kFLAGS.ACHIEVEMENT_PROGRESS_EGG_HUNTER]++;
 			}
+			//Ring drops!
+			if (!plotFight && rand(200) <= 0 + Math.min(6, Math.floor(monster.level / 10))) { //Ring drops!
+				var ringDropTable:Array = [];
+				ringDropTable.push(jewelries.SILVRNG);
+				if (monster.level < 10) ringDropTable.push(jewelries.SILVRNG);
+				if (monster.level < 15 && rand(2) == 0) ringDropTable.push(jewelries.SILVRNG);
+				ringDropTable.push(jewelries.GOLDRNG);
+				if (monster.level < 20) ringDropTable.push(jewelries.GOLDRNG);
+				ringDropTable.push(jewelries.PLATRNG);
+				if (rand(2) == 0) ringDropTable.push(jewelries.DIAMRNG);
+				if (monster.level >= 15 && rand(4) == 0) ringDropTable.push(jewelries.LTHCRNG);
+				if (monster.level >= 25 && rand(3) == 0) ringDropTable.push(jewelries.LTHCRNG);
+				if (monster.level >= 1 && monster.level < 15) {
+					ringDropTable.push(jewelries.CRIMRN1);
+					ringDropTable.push(jewelries.FERTRN1);
+					ringDropTable.push(jewelries.ICE_RN1);
+					ringDropTable.push(jewelries.CRITRN1);
+					ringDropTable.push(jewelries.REGNRN1);
+					ringDropTable.push(jewelries.LIFERN1);
+					ringDropTable.push(jewelries.MYSTRN1);
+					ringDropTable.push(jewelries.POWRRN1);
+				}
+				if (monster.level >= 11 && monster.level < 25) {
+					ringDropTable.push(jewelries.CRIMRN2);
+					ringDropTable.push(jewelries.FERTRN2);
+					ringDropTable.push(jewelries.ICE_RN2);
+					ringDropTable.push(jewelries.CRITRN2);
+					ringDropTable.push(jewelries.REGNRN2);
+					ringDropTable.push(jewelries.LIFERN2);
+					ringDropTable.push(jewelries.MYSTRN2);
+					ringDropTable.push(jewelries.POWRRN2);
+				}
+				if (monster.level >= 21) {
+					ringDropTable.push(jewelries.CRIMRN3);
+					ringDropTable.push(jewelries.FERTRN3);
+					ringDropTable.push(jewelries.ICE_RN3);
+					ringDropTable.push(jewelries.CRITRN3);
+					ringDropTable.push(jewelries.REGNRN3);
+					ringDropTable.push(jewelries.LIFERN3);
+					ringDropTable.push(jewelries.MYSTRN3);
+					ringDropTable.push(jewelries.POWRRN3);
+				}
+				
+
+			}
 			//Bonus loot overrides others
 			if (flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] != "") {
 				itype = ItemType.lookupItem(flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID]);
@@ -1690,6 +1743,14 @@ package classes.Scenes.Combat
 			//Flag the game as being "in combat"
 			inCombat = true;
 			monster = monster_;
+			
+			//Set image once, at the beginning of combat
+			if (monster.imageName != "")
+			{
+				var monsterName:String = "monster-" + monster.imageName;
+				imageText = images.showImage(monsterName);
+			} else imageText = "";
+			
 			//Reduce enemy def if player has precision!
 			if (player.findPerk(PerkLib.Precision) >= 0 && player.inte >= 25) {
 				if (monster.armorDef <= 10) monster.armorDef = 0;
@@ -1706,7 +1767,7 @@ package classes.Scenes.Combat
 			monster.spe += 25 * player.newGamePlusMod();
 			monster.inte += 25 * player.newGamePlusMod();
 			monster.level += 30 * player.newGamePlusMod();
-			if (flags[kFLAGS.KAIZO_MODE] > 0) {
+			if (flags[kFLAGS.GRIMDARK_MODE] > 0) {
 				monster.level = Math.round(Math.pow(monster.level, 1.4));
 			}
 			//Adjust lust vulnerability in New Game+.
@@ -1745,20 +1806,16 @@ package classes.Scenes.Combat
 			hpDisplay = Math.floor(monster.HP) + " / " + monster.eMaxHP() + " (" + (int(math * 1000) / 10) + "%)";
 			lustDisplay = Math.floor(monster.lust) + " / " + monster.eMaxLust();;
 
-			//trace("trying to show monster image!");
-			if (monster.imageName != "")
-			{
-				var monsterName:String = "monster-" + monster.imageName;
-				//trace("Monster name = ", monsterName);
-				outputText(images.showImage(monsterName), false,false);
-			}
-			outputText("<b>You are fighting ", false);
+			//imageText set in beginCombat()
+			outputText(imageText);
+			
+			outputText("<b>You are fighting ");
 			outputText(monster.a + monster.short + ":</b> \n");
 			if (player.findStatusEffect(StatusEffects.Blind) >= 0) {
 				outputText("It's impossible to see anything!\n");
 			}
 			else {
-				outputText(monster.long + "\n\n", false);
+				outputText(monster.long + "\n\n");
 				//Bonus sand trap stuff
 				if (monster.findStatusEffect(StatusEffects.Level) >= 0) {
 					temp = monster.statusEffectv1(StatusEffects.Level);
@@ -1771,24 +1828,24 @@ package classes.Scenes.Combat
 					outputText("\n\n");
 				}
 				if (monster.plural) {
-					if (math >= 1) outputText("You see " + monster.pronoun1 + " are in perfect health.  ", false);
-					else if (math > .75) outputText("You see " + monster.pronoun1 + " aren't very hurt.  ", false);
-					else if (math > .5) outputText("You see " + monster.pronoun1 + " are slightly wounded.  ", false);
-					else if (math > .25) outputText("You see " + monster.pronoun1 + " are seriously hurt.  ", false);
-					else outputText("You see " + monster.pronoun1 + " are unsteady and close to death.  ", false);
+					if (math >= 1) outputText("You see " + monster.pronoun1 + " are in perfect health.  ");
+					else if (math > .75) outputText("You see " + monster.pronoun1 + " aren't very hurt.  ");
+					else if (math > .5) outputText("You see " + monster.pronoun1 + " are slightly wounded.  ");
+					else if (math > .25) outputText("You see " + monster.pronoun1 + " are seriously hurt.  ");
+					else outputText("You see " + monster.pronoun1 + " are unsteady and close to death.  ");
 				}
 				else {
-					if (math >= 1) outputText("You see " + monster.pronoun1 + " is in perfect health.  ", false);
-					else if (math > .75) outputText("You see " + monster.pronoun1 + " isn't very hurt.  ", false);
-					else if (math > .5) outputText("You see " + monster.pronoun1 + " is slightly wounded.  ", false);
-					else if (math > .25) outputText("You see " + monster.pronoun1 + " is seriously hurt.  ", false);
-					else outputText("You see " + monster.pronoun1 + " is unsteady and close to death.  ", false);
+					if (math >= 1) outputText("You see " + monster.pronoun1 + " is in perfect health.  ");
+					else if (math > .75) outputText("You see " + monster.pronoun1 + " isn't very hurt.  ");
+					else if (math > .5) outputText("You see " + monster.pronoun1 + " is slightly wounded.  ");
+					else if (math > .25) outputText("You see " + monster.pronoun1 + " is seriously hurt.  ");
+					else outputText("You see " + monster.pronoun1 + " is unsteady and close to death.  ");
 				}
 				showMonsterLust();
 				outputText("\n\n<b><u>" + capitalizeFirstLetter(monster.short) + "'s Stats</u></b>\n")
-				outputText("Level: " + monster.level + "\n", false);
-				outputText("HP: " + hpDisplay + "\n", false);
-				outputText("Lust: " + lustDisplay + "\n", false);
+				outputText("Level: " + monster.level + "\n");
+				outputText("HP: " + hpDisplay + "\n");
+				outputText("Lust: " + lustDisplay + "\n");
 			}
 			if (debug){
 				outputText("\n----------------------------\n");
@@ -2033,8 +2090,8 @@ package classes.Scenes.Combat
 				addButton(0, "Next", combatMenu, false);
 				return;
 			}
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] == 1 && (monster.short == "minotaur gang" || monster.short == "minotaur tribe")) {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] = 0;
+			if (flags[kFLAGS.MINOTAUR_SONS_WASTED_TURN] == 1 && (monster.short == "minotaur gang" || monster.short == "minotaur tribe")) {
+				flags[kFLAGS.MINOTAUR_SONS_WASTED_TURN] = 0;
 				//(Free run away) 
 				outputText("You slink away while the pack of brutes is arguing.  Once they finish that argument, they'll be sorely disappointed!", true);
 				inCombat = false;

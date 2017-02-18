@@ -182,8 +182,8 @@ package classes.Scenes.Areas.Mountain
 				player.changeFatigue(40,2);
 				outputText("With a great squeeze, you will your body to push out a load of semen filled with worms.  Izma's eyes widen in shock as she dives and rolls away from the torrent.  \"<i>What the fuck!</i>\" she yells. \"<i>Is that what that smell was?  That's disgusting!  Get away from me " + player.short + ", I DON'T want what you've got.  Don't talk to me again while you've got those nasty things!</i>\"  Izma grabs her locker between her hands and wades into the lake, swimming away by means of her tail while holding the books out of the water.", true);
 				//(set Izmacounter to 0)
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00230] = 0;
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00233] = 1;
+				flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] = 0;
+				flags[kFLAGS.IZMA_WORMS_SCARED] = 1;
 				//clear status
 				kGAMECLASS.inCombat = false;
 				kGAMECLASS.combat.clearStatuses(false);

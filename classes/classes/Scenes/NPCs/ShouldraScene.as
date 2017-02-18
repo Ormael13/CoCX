@@ -71,12 +71,12 @@
 				return true;
 			}
 			//Ghostgirl madness
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] > 0) {
+			if (flags[kFLAGS.SHOULDRA_PALADIN_MAIDEN_COUNTDOWN] > 0) {
 				if (player.cockTotal() > 1 || player.faceType != FACE_HUMAN || player.lowerBody != LOWER_BODY_TYPE_HUMAN || player.tailType > TAIL_TYPE_NONE || player.horns > 0 || player.cor > 15 || player.longestCockLength() > 10 || player.tallness < 65 || player.tallness > 78 || player.hasVagina())
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] = 0;
+					flags[kFLAGS.SHOULDRA_PALADIN_MAIDEN_COUNTDOWN] = 0;
 				else {
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365]--;
-					if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] == 0) {
+					flags[kFLAGS.SHOULDRA_PALADIN_MAIDEN_COUNTDOWN]--;
+					if (flags[kFLAGS.SHOULDRA_PALADIN_MAIDEN_COUNTDOWN] == 0) {
 						paladinModeFollowup();
 						return true;
 					}
@@ -87,10 +87,10 @@
 		//End of Interface Implementation
 
 //Intro
-internal function shouldraGreeting():void {
+public function shouldraGreeting():void {
 	spriteSelect(66);
 	clearOutput();
-	if (silly() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00366] == 0) {
+	if (silly() && flags[kFLAGS.SHOULDRA_PALADIN_MAIDEN_COUNTER] == 0) {
 		//NO MUTANTS ALLOWED
 		if (player.cockTotal() > 1 || player.faceType != FACE_HUMAN || player.lowerBody != LOWER_BODY_TYPE_HUMAN || player.tailType > TAIL_TYPE_NONE || player.horns > 0 || player.cor > 15 || player.longestCockLength() > 10 || player.tallness < 65 || player.tallness > 78 || player.hasVagina()) {}
 		else {
@@ -217,7 +217,7 @@ private function littlePigLittlePigLetMeIn():void {
 	
 	//CHOICES HURRAH
 	var lake:Function = null;
-	if (player.gender > 0 && ((player.findStatusEffect(StatusEffects.BoatDiscovery) >= 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00230] > 0) || flags[kFLAGS.TIMES_MET_OOZE] > 0)) {
+	if (player.gender > 0 && ((player.findStatusEffect(StatusEffects.BoatDiscovery) >= 0 && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0) || flags[kFLAGS.TIMES_MET_OOZE] > 0)) {
 		outputText("You could take her to the lake to find someone to play with...\n\n", false);
 		lake = nowOnVickiLake;
 	}
@@ -243,7 +243,7 @@ private function nowOnVickiLake():void {
 	//SHARK-GIRL - REQUIRES BOAT AND MET SHARKGIRL
 	//SLIME - REQUIRES MET SLIME
 	var shark:Function = null;
-	if (player.findStatusEffect(StatusEffects.BoatDiscovery) >= 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00230] > 0)
+	if (player.findStatusEffect(StatusEffects.BoatDiscovery) >= 0 && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0)
 		shark = sharkbustersVictory;
 	var ooze:Function = null;
 	if (flags[kFLAGS.TIMES_MET_OOZE] > 0) ooze = ghostGooGurlzDuckfaces;
@@ -1165,7 +1165,7 @@ private function superCoolPaladinSexStuffDudeGasmJizzMonkies():void {
 	outputText("While she speaks, you cannot help but notice how pure her body is in appearance; her loose-fitting tunic flows very modestly down to her thighs, preserving her frame from the lecherous eyes of any devious creatures that may be lurking about. Her leather leggings, while form-fitting, are done so in a stylish and innocent way, and you take little offense. You inform her of your ecclesiastical quest to rid the world of all taint, and she nods with what you assume to be admiration. On impulse, you take the hand of the lady before you and raise it to your lips, then inquire on her marital status. It takes her a moment to get over the shock of such a blunt question, but she composes herself quite quickly. \"<i>I am quite single,</i>\" she assures you, a smirk beginning to play across her face. \"<i>Is this a remarkably subtle attempt to court me?</i>\"\n\n", false);
 	
 	outputText("You look up to gaze into her moderately attractive face. Is it?", false);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00366]++;
+	flags[kFLAGS.SHOULDRA_PALADIN_MAIDEN_COUNTER]++;
 	doYesNo(courtCrazyGirlsDotCom,noCourtingYouFag);
 }
 //(no)
@@ -1180,7 +1180,7 @@ private function courtCrazyGirlsDotCom():void {
 	spriteSelect(66);
 	clearOutput();
 	outputText("Her smile widens as she regards your venerable visage. \"<i>Is that so?</i>\" she says softly. \"<i>Interesting. I'll be back in a moment.</i>\" She returns to her \"<i>house,</i>\" rummaging around for some time before returning to you, hands hidden behind her. \"<i>If I am to be sought by a paladin, we must do things right,</i>\" she explains, handing you a small silk handkerchief. The white fabric slides around your fingers like a sacrosanct flow of holy water, and you reverently tuck her gift into your " + player.armorName + ", laying it over your heart. \"<i>Come back in two days' time, please,</i>\" she asks softly. Your eyes meet for a long moment, and it appears as if she's struggling to say something. She instead breaks away and starts back towards her shelter. \"<i>Be safe,</i>\" she advises, and with a smile and a wave, she's gone. For moments you stand silently, then you turn and start away with long, saintly strides. There's more work to do.\n\n", false);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] = 48;
+	flags[kFLAGS.SHOULDRA_PALADIN_MAIDEN_COUNTDOWN] = 48;
 	doNext(camp.returnToCampUseOneHour);
 }
 

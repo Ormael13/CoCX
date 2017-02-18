@@ -793,14 +793,14 @@ public function minoCumUpdate():Boolean {
 		if (flags[kFLAGS.TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM] >= 24 && flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 1) {
 			flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] = 2;
 			output = true;
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330] = 12;
+			flags[kFLAGS.MINOTAUR_SONS_CUM_REPEAT_COOLDOWN] = 12;
 			outputText("\n<b>You shiver, feeling a little cold.  Maybe you ought to get some more minotaur cum?  You just don't feel right without that pleasant buzz in the back of your mind.</b>\n", false);
 		}
 		//Go into 'withdrawal' if its time.
 		if (flags[kFLAGS.TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM] >= 48 && flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) {
 			flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] = 3;
 			output = true;
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00330] = 12;
+			flags[kFLAGS.MINOTAUR_SONS_CUM_REPEAT_COOLDOWN] = 12;
 			outputText("\n<b>A steady fire of lust slowly grows within you as you shiver and grab at your head.  You're in withdrawal after having gone so long without a dose of minotaur love.  You just know you're going to be horny and achy until you get some.</b>\n", false);
 		}
 		//UBER ADDICTION MESSAGE

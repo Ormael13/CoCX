@@ -264,9 +264,9 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 			}
 		}
 		//Diapause!
-		else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] > 0 && (player.pregnancyIncubation > 0 || player.buttPregnancyIncubation > 0)) {
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] == 1) {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 0;
+		else if (flags[kFLAGS.DIAPAUSE_FLUID_AMOUNT] > 0 && (player.pregnancyIncubation > 0 || player.buttPregnancyIncubation > 0)) {
+			if (flags[kFLAGS.DIAPAUSE_NEEDS_DISPLAYING] == 1) {
+				flags[kFLAGS.DIAPAUSE_NEEDS_DISPLAYING] = 0;
 				outputText("\n\nYour body reacts to the influx of nutrition, accelerating your pregnancy. Your belly bulges outward slightly.", false);
 				needNext = true;
 			}
@@ -274,7 +274,7 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 				flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
 				return true;
 			}
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228]--;
+			flags[kFLAGS.DIAPAUSE_FLUID_AMOUNT]--;
 			if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
 			if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
 				flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;

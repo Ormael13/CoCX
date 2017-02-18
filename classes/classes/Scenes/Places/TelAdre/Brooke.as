@@ -94,6 +94,20 @@ public function meetBrookeFirstTime():void {
 
 public function repeatChooseShower():void {
 	clearOutput();
+	if (flags[kFLAGS.PABLO_AFFECTION] >= 60 && telAdre.pablo.pabloIntro(false) && rand(2) == 0) {
+		if (flags[kFLAGS.PABLO_SECRET_LEARNED] == 0) {
+			telAdre.pablo.pabloSecret();
+			return;
+		}
+		else if (flags[kFLAGS.PABLO_AFFECTION] >= 100) {
+			telAdre.pablo.pabloShowerSexIntro();
+			return;
+		}
+		if (flags[kFLAGS.PABLO_FREAKED_OUT_OVER_WORMS] > 0 && player.findStatusEffect(StatusEffects.Infested) < 0) {
+			telAdre.pablo.pabloComesBackAfterWormCure();
+			return;
+		}
+	}
 	if (model.time.hours < 16 || model.time.hours > 18 || player.tone < 30) {
 		//Before 16:00/after 18:00, affection <= 19
 		if (brookeAffection() <= 19) {
@@ -346,13 +360,13 @@ public function talkToBrookeAboutGymFolks():void {
 	//[if {met Ifris}]
 	if (flags[kFLAGS.MET_IFRIS] > 0) outputText("\n\nIfris is a creeper.  Just hangs around the gym, watching everyone lift some weights or doing some laps or whatever.  She finds a cutie hard at work, then she makes 'em feel real good with all her sweet-talk, and then <b>bam!</b>  Getting laid on the benchpress.  I love when people notice my body, but the way she stalks like a predator around the gym just kind of gives me the creeps.");
 	//[if {met Jasun}
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179] > 0) outputText("\n\nYou know Jasun, the shark guy?  Hard as a rock, in every place, if you know what I mean.  Huge narcissist, if you ask me, which puts me off.  Big difference between admiring yourself and others admiring you.  I'm not a big fan of zero-percent-body-fat types, either – being fit and healthy and solid is great and a big turn-on, but being all muscle and all business is no fun, you know?  Kind of tough cuddling with a rock.  Besides, not a big fan of the taste of fish anyway.");
+	if (flags[kFLAGS.JASUN_MET] > 0) outputText("\n\nYou know Jasun, the shark guy?  Hard as a rock, in every place, if you know what I mean.  Huge narcissist, if you ask me, which puts me off.  Big difference between admiring yourself and others admiring you.  I'm not a big fan of zero-percent-body-fat types, either – being fit and healthy and solid is great and a big turn-on, but being all muscle and all business is no fun, you know?  Kind of tough cuddling with a rock.  Besides, not a big fan of the taste of fish anyway.");
 	//[if {met Loppe}]
 	if (flags[kFLAGS.LOPPE_MET] > 0) {
 		outputText("\n\nI've seen that bunny-girl show up a whole lot lately.  She's a pretty nice gal, all in all – lives and looks after her mom and wants to take up the family business, or something.  Whatever; she's got a smoking hot body and a face cute enough to give me cavities.  She fucks like a truck and cums like a geyser, too, which is always fun.");
 	}
 	//[if {met Lottie}]
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0) {
+	if (flags[kFLAGS.LOTTIE_ENCOUNTER_COUNTER] > 0) {
 		outputText("\n\nAs for Lottie, that little piglet chick... not the first of her 'body-type' to wander into the gym, and won't be the last.  Love seeing guys and gals like her – success stories in motion.  If you got the drive, you got the will, then you'll get the results.  She works for it, she works hard, but she's really indecisive and easy to put-off in front of company.  With the right push I can see a girl like her being the hottest thing on the block.");
 	}
 	outputText("\n\nAnd, uh... that's all the members, off the top of my head.\"</i>  She thinks to herself for a moment, humming, before her eyes light up.  <i>\"Oh wait,\"</i> she says softly, smiling, crooking her right index finger at you, gesturing you to approach the stall wall.  You oblige. <i>\"I forgot one.\"</i>  With deliberate slowness, she hooks her arm around your neck and pulls you to her.  She plants a long, lasting kiss on your lips, leaning into you, pressing herself against the wall.  She doesn't open her mouth, but her lips are nonetheless very active as she gets into it, letting her hands roam around your shoulders and upper back.  You lovingly reciprocate her every action.  Too soon, she pulls away, saying <i>\"there's my opinion of you, sweet thing.\"</i>");

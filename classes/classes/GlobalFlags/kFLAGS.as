@@ -63,7 +63,7 @@ public static const NUMBER_OF_TIMES_MET_SCYLLA:int                              
 public static const TIMES_ENCOUNTED_TAMANIS_DAUGHTERS:int                           =   55; // Times encountered Tamani's Daughters
 public static const TAMANI_TIMES_HYPNOTISED:int                                     =   56; // Tamani Hypno Level" Description="increases by 1 for each hypno event.  1-3 slight lust raises, 4-9 medium lust raises, 10-19 super high lust raises, 20+ high chance of autorape with special scene.
 public static const TAMANI_DAUGHTER_PREGGO_COUNTDOWN:int                            =   57; // Daughter Pregnancy Counter" Description="they will not return until this countdown timer is 0.  Same length as Tamani's incubation &#x2014; approx 1 week.
-public static const UNKNOWN_FLAG_NUMBER_00058:int                                   =   58; // Times In Goblin Daughter 'CHAIR'
+public static const TAMANI_DAUGHTER_CHAIR_COUNTER:int                               =   58; // Times In Goblin Daughter 'CHAIR'
 public static const TIMES_FUCKED_TAMANIS_DAUGHTERS:int                              =   59; // TimeSleptWithDaughters
 public static const UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR:int                        =   60; // Fail Masturbation As Centaur?
 public static const CERULEAN_POTION_BAD_END_FUTA_COUNTER:int                        =   61; // Cerulean Potion Bad-End Futa Count
@@ -116,14 +116,14 @@ public static const SCYLLA_TIMES_SHARED_IN_ADDICT_GROUP:int                     
 public static const SCYLLA_MILK_THERAPY_TIMES:int                                   =  108; // SCYLLA: Milk therapy times
 public static const SCYLLA_CUM_THERAPY_TIMES:int                                    =  109; // SCYLLA: Cum therapy times
 public static const SCYLLA_SEX_THERAPY_TIMES:int                                    =  110; // SCYLLA: Sex therapy times
-public static const UNKNOWN_FLAG_NUMBER_00111:int                                   =  111; // Cerulean Succubus: Herm times used
+public static const CERULEAN_SUCCUBUS_HERM_COUNTER:int                              =  111; // Cerulean Succubus: Herm times used
 public static const USED_MILKER_TODAY:int                                           =  112; // Used milkers today?
 public static const DISCOVERED_DUNGEON_2_ZETAZ:int                                  =  113; // Discovered Dungeon 2 (Zetaz's Lair)
 public static const DEFEATED_ZETAZ:int                                              =  114; // Zetaz Defeated
 public static const ZETAZ_DOOR_UNLOCKED:int                                         =  115; // Zetaz' Door unlocked
 public static const ZETAZ_IMP_HORDE_DEFEATED:int                                    =  116; // Imp Horde Defooted
 public static const ZETAZ_FUNGUS_ROOM_DEFEATED:int                                  =  117; // Fungus Room Defeated (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00118:int                                   =  118; // PONIES?!?!?!
+public static const SILLY_MODE_PONIES:int                                           =  118; // PONIES?!?!?!
 public static const FREED_VALA:int                                                  =  119; // Vala Released?
 public static const WEEKLY_FAIRY_ORGY_COUNTDOWN:int                                 =  120; // Weekly Faerie Orgy Countdown
 public static const ENCOUNTERED_VALA_AT_BAR:int                                     =  121; // Vala Met At Bar?
@@ -146,23 +146,23 @@ public static const RAPHAEL_RAPIER_TRANING:int                                  
 public static const RAPHAEL_INTELLIGENCE_TRAINING:int                               =  138; // Raphael Intelligence Training
 public static const RAPHAEL_DISGUSTED_BY_PC_APPEARANCE:int                          =  139; // Raphael Disgusted by PC appearance
 public static const RAPHAEL_SECOND_DATE:int                                         =  140; // Raphael 2nd Date Happen?
-public static const UNKNOWN_FLAG_NUMBER_00141:int                                   =  141; // Hellhound Progression
-public static const UNKNOWN_FLAG_NUMBER_00142:int                                   =  142; // Can buy minotaur cum from goblins?
-public static const UNKNOWN_FLAG_NUMBER_00143:int                                   =  143; // How Many Times Have You Caught Urta + Scylla?
-public static const UNKNOWN_FLAG_NUMBER_00144:int                                   =  144; // Multitake Scylla meeting take advantage ever done?
-public static const UNKNOWN_FLAG_NUMBER_00145:int                                   =  145; // Urta confrontation about Scylla ever done?
-public static const UNKNOWN_FLAG_NUMBER_00146:int                                   =  146; // Urta drink toggle = 0 is same, 1 is more, -1 is less.
-public static const UNKNOWN_FLAG_NUMBER_00147:int                                   =  147; // Is Urta banned from Scylla?  1 = yes.
-public static const UNKNOWN_FLAG_NUMBER_00148:int                                   =  148; // Has Urta paid out Raphael's Bounty? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00149:int                                   =  149; // Did you bone Raphael?
-public static const UNKNOWN_FLAG_NUMBER_00150:int                                   =  150; // Dominika Stage - 0=unknown, 1=met, 2=received, -1=blocked
-public static const UNKNOWN_FLAG_NUMBER_00151:int                                   =  151; // Times Dominika Sucked off Smaller dicks
-public static const UNKNOWN_FLAG_NUMBER_00152:int                                   =  152; // Times Dominika sucked off bigger dicks
-public static const UNKNOWN_FLAG_NUMBER_00153:int                                   =  153; // Times received vaginal oral from fellatrix
-public static const UNKNOWN_FLAG_NUMBER_00154:int                                   =  154; // Has fellatrix been embarassed about your magic knowledge yet?
-public static const UNKNOWN_FLAG_NUMBER_00155:int                                   =  155; // Dominika learning cooldown
-public static const UNKNOWN_FLAG_NUMBER_00156:int                                   =  156; // Fellatrix - times sucked dogcock
-public static const UNKNOWN_FLAG_NUMBER_00157:int                                   =  157; // Fellatrix - Special followup happen? (1 = agree, 2 = eh, 3 disagree, add 3 for post-dream)
+public static const HELLHOUND_MASTER_PROGRESS:int                                   =  141; // Hellhound Progression
+public static const SALON_MINOCUM_UNLOCKED:int                                      =  142; // Can buy minotaur cum from goblins?
+public static const TIMES_CAUGHT_URTA_WITH_SCYLLA:int                               =  143; // How Many Times Have You Caught Urta + Scylla?
+public static const TIMES_ADVANTAGED_SCYLLA_MULTICOCKS:int                          =  144; // Multitake Scylla meeting take advantage ever done?
+public static const URTA_CONFRONTED_SCYLLA:int                                      =  145; // Urta confrontation about Scylla ever done?
+public static const URTA_DRINK_FREQUENCY:int                                        =  146; // Urta drink toggle = 0 is same, 1 is more, -1 is less.
+public static const URTA_BANNED_FROM_SCYLLA:int                                     =  147; // Is Urta banned from Scylla?  1 = yes.
+public static const URTA_PAID_OUT_RAPHAELS_BOUNTY:int                               =  148; // Has Urta paid out Raphael's Bounty? (1 = yes)
+public static const RAPHAEL_BONED:int                                               =  149; // Did you bone Raphael?
+public static const DOMINIKA_STAGE:int                                              =  150; // Dominika Stage - 0=unknown, 1=met, 2=received, -1=blocked
+public static const DOMINIKA_SUCKED_OFF_LARGE_COCKS:int                             =  151; // Times Dominika Sucked off Smaller dicks
+public static const DOMINIKA_SUCKED_OFF_SMALL_COCKS:int                             =  152; // Times Dominika sucked off bigger dicks
+public static const DOMINIKA_VAGINAL_ORAL_RECEIVED:int                              =  153; // Times received vaginal oral from fellatrix
+public static const DOMINIKA_EMBARRASSED_ABOUT_MAGIC:int                            =  154; // Has fellatrix been embarassed about your magic knowledge yet?
+public static const DOMINIKA_LEARNING_COOLDOWN:int                                  =  155; // Dominika learning cooldown
+public static const DOMINIKA_SUCKED_OFF_DOGCOCKS:int                                =  156; // Fellatrix - times sucked dogcock
+public static const DOMINIKA_SPECIAL_FOLLOWUP:int                                   =  157; // Fellatrix - Special followup happen? (1 = agree, 2 = eh, 3 disagree, add 3 for post-dream)
 public static const AMILY_MET_AS:int                                                =  158; // Amily remembers PC's gender at first meeting. Amily_Met_As:Int=158;
 public static const AMILY_CONFESSED_LESBIAN:int                                     =  159; //  1=yes,2=and accepted1=Yes,2=And Accepted
 public static const AMILY_TIMES_FUCKED_FEMPC:int                                    =  160; // 
@@ -174,20 +174,20 @@ public static const AMILY_HERM_QUEST:int                                        
 public static const AMILY_ALLOWS_FERTILITY:int                                      =  166; // 
 public static const LIFETIME_GYM_MEMBER:int                                         =  167; // Permanent Gym Membership? (1 = yes)
 public static const AMILY_CORRUPT_FLIPOUT:int                                       =  168; // Amily flip out about corruption yet?
-public static const UNKNOWN_FLAG_NUMBER_00169:int                                   =  169; // Times cooked Amily's Drug
-public static const UNKNOWN_FLAG_NUMBER_00170:int                                   =  170; // Amily's Corruption Value
+public static const AMILY_DRUG_MADE_COUNTER:int                                     =  169; // Times cooked Amily's Drug
+public static const AMILY_CORRUPTION:int                                            =  170; // Amily's Corruption Value
 public static const AMILY_HAS_BALLS_AND_SIZE:int                                    =  171; // Amily's Balls: 1 = yes, higher numbers = bigger balls.
 public static const AMILY_VAGINAL_WETNESS:int                                       =  172; // Amily's Wetness
-public static const UNKNOWN_FLAG_NUMBER_00173:int                                   =  173; // In camp amily warns you!  DUN DUN DUN! - Amily Freaked out about your corruption.    0=Not freaked out, 1=Freaked out
-public static const UNKNOWN_FLAG_NUMBER_00174:int                                   =  174; // Times Dominika Sucked off horsecocks
-public static const UNKNOWN_FLAG_NUMBER_00175:int                                   =  175; // Dominidrama - 1 = yes, 2 = no
+public static const AMILY_CAMP_CORRUPTION_FREAKED:int                               =  173; // In camp amily warns you!  DUN DUN DUN! - Amily Freaked out about your corruption.    0=Not freaked out, 1=Freaked out
+public static const DOMINIKA_SUCKED_OFF_HORSECOCKS:int                              =  174; // Times Dominika Sucked off horsecocks
+public static const DOMINIKA_DRAMA:int                                              =  175; // Dominidrama - 1 = yes, 2 = no
 public static const TIMES_HAD_YOGA:int                                              =  176; // Cotton - TIMES HAD YOGA
 public static const COTTON_MET_FUCKED:int                                           =  177; // FUCKED - 0 = never met.  1 = met but not fucked. 2 = fucked
-public static const UNKNOWN_FLAG_NUMBER_00178:int                                   =  178; // Gym paid fees today?
-public static const UNKNOWN_FLAG_NUMBER_00179:int                                   =  179; // Met Jasun
-public static const UNKNOWN_FLAG_NUMBER_00180:int                                   =  180; // Times fucked Jasun
-public static const UNKNOWN_FLAG_NUMBER_00181:int                                   =  181; // Jasun name learned
-public static const UNKNOWN_FLAG_NUMBER_00182:int                                   =  182; // Gym Sex Machine Status (0 - not encountered, 1 = encountered, 2 = used.
+public static const GYM_FEES_PAID_TODAY:int                                         =  178; // Gym paid fees today?
+public static const JASUN_MET:int                                                   =  179; // Met Jasun
+public static const JASUN_FUCKED_COUNTER:int                                        =  180; // Times fucked Jasun
+public static const JASUN_NAME_LEARNED:int                                          =  181; // Jasun name learned
+public static const GYM_MACHINE_STATUS:int                                          =  182; // Gym Sex Machine Status (0 - not encountered, 1 = encountered, 2 = used.
 public static const TIMES_USED_SEX_MACHINE_AS_MALE:int                              =  183; //  Times Used Sex Machine As Male
 public static const TIMES_USED_SEX_MACHINE_AS_FEMALE:int                            =  184; //  Times Used Sex Machine As Female
 public static const TIMES_USED_SEX_MACHINE_AS_EUNUCH:int                            =  185; //  Times Used Sex Machine As Genderless
@@ -222,130 +222,130 @@ public static const CINNABAR_HOUSE_VISITED:int                                  
 public static const CINNABAR_NUMBER_ENCOUNTERS:int                                  =  214; //  -CINNABAR Introduced?
 public static const CINNABAR_NUMBER_TIMES_FUCKED:int                                =  215; //  -CINNABAR Times Fucked
 public static const CINNABAR_FUCKED_CORRUPT_PREVIOUSLY:int                          =  216; //  -CINNABARWas last fuck corrupt fuck? - Cinnabar Hard Fucked.    0=No, 1=Yes
-public static const UNKNOWN_FLAG_NUMBER_00217:int                                   =  217; // Ceraph's genital stealing choice is stored here between functions
-public static const UNKNOWN_FLAG_NUMBER_00218:int                                   =  218; // Number of Dicks Ceraph owns
-public static const UNKNOWN_FLAG_NUMBER_00219:int                                   =  219; // Number of Pussies Ceraph owns
-public static const UNKNOWN_FLAG_NUMBER_00220:int                                   =  220; // Number of Tit's Ceraph owns
-public static const UNKNOWN_FLAG_NUMBER_00221:int                                   =  221; // -Met her?
-public static const UNKNOWN_FLAG_NUMBER_00222:int                                   =  222; // -Times Won Contest
-public static const UNKNOWN_FLAG_NUMBER_00223:int                                   =  223; // -Times Lost Contest
-public static const UNKNOWN_FLAG_NUMBER_00224:int                                   =  224; // -Who won contest last? (1 = pc, 2 = strahza)
-public static const UNKNOWN_FLAG_NUMBER_00225:int                                   =  225; // -How long has Strahza gone without sex?
-public static const UNKNOWN_FLAG_NUMBER_00226:int                                   =  226; // -Is PC losing the Roxanne's drinking contest intentionally?
-public static const UNKNOWN_FLAG_NUMBER_00227:int                                   =  227; // -Drinking Contest Bonus Score
-public static const UNKNOWN_FLAG_NUMBER_00228:int                                   =  228; // Diapause fluid store
-public static const UNKNOWN_FLAG_NUMBER_00229:int                                   =  229; // Diapause gain need displayed?
-public static const UNKNOWN_FLAG_NUMBER_00230:int                                   =  230; // Sharkgirls met? (Izma counter)
+public static const CERAPH_GENITAL_STEAL_CHOICE:int                                 =  217; // Ceraph's genital stealing choice is stored here between functions
+public static const CERAPH_DICKS_OWNED:int                                          =  218; // Number of Dicks Ceraph owns
+public static const CERAPH_PUSSIES_OWNED:int                                        =  219; // Number of Pussies Ceraph owns
+public static const CERAPH_TITS_OWNED:int                                           =  220; // Number of Tit's Ceraph owns
+public static const ROXANNE_MET:int                                                 =  221; // -Met her?
+public static const ROXANNE_DRINING_CONTEST_WON:int                                 =  222; // -Times Won Contest
+public static const ROXANNE_DRINING_CONTEST_LOST:int                                =  223; // -Times Lost Contest
+public static const ROXANNE_DRINKING_CONTEST_LAST_WINNER:int                        =  224; // -Who won contest last? (1 = pc, 2 = strahza)
+public static const ROXANNE_TIME_WITHOUT_SEX:int                                    =  225; // -How long has Strahza gone without sex? Reducto will probably reduce this.
+public static const ROXANNE_DRINKING_CONTEST_LOSE_ON_PURPOSE:int                    =  226; // -Is PC losing the Roxanne's drinking contest intentionally?
+public static const ROXANNE_DRINKING_CONTEST_BONUS_SCORE:int                        =  227; // -Drinking Contest Bonus Score
+public static const DIAPAUSE_FLUID_AMOUNT:int                                       =  228; // Diapause fluid store
+public static const DIAPAUSE_NEEDS_DISPLAYING:int                                   =  229; // Diapause gain need displayed?
+public static const IZMA_ENCOUNTER_COUNTER:int                                      =  230; // Sharkgirls met? (Izma counter)
 public static const IZMA_TIMES_FOUGHT_AND_WON:int                                   =  231; // Izma fight
-public static const UNKNOWN_FLAG_NUMBER_00232:int                                   =  232; // Times Talked At shark pussy
-public static const UNKNOWN_FLAG_NUMBER_00233:int                                   =  233; // Izma worm scare (1 = Izma has been scared off by worms)
+public static const IZMA_TALKED_AT_LAKE:int                                         =  232; // Times Talked At shark pussy
+public static const IZMA_WORMS_SCARED:int                                           =  233; // Izma worm scare (1 = Izma has been scared off by worms)
 public static const BONUS_ITEM_AFTER_COMBAT_ID:int                                  =  234; // Izma loot storage - Izma saved loot status
-public static const UNKNOWN_FLAG_NUMBER_00235:int                                   =  235; // Taken Izma gloves
-public static const UNKNOWN_FLAG_NUMBER_00236:int                                   =  236; // Izma + Amily Freakout Status = (-1 = done, 0 = nothing yet, 1 = queued for camp prog)
-public static const UNKNOWN_FLAG_NUMBER_00237:int                                   =  237; // Izma + Marble Freakout Status = (Above)
-public static const UNKNOWN_FLAG_NUMBER_00238:int                                   =  238; // Izma Follower Toggle (-1 = stay at lake, 0 = neutral, 1 = live in camp)
-public static const UNKNOWN_FLAG_NUMBER_00239:int                                   =  239; // Izma Talk level
-public static const UNKNOWN_FLAG_NUMBER_00240:int                                   =  240; // Mino Chef First Meeting Happen?
-public static const UNKNOWN_FLAG_NUMBER_00241:int                                   =  241; // mino explained what he needs yet?
-public static const UNKNOWN_FLAG_NUMBER_00242:int                                   =  242; // , 3 =stayed, 4 = epilogue'ed
-public static const UNKNOWN_FLAG_NUMBER_00243:int                                   =  243; // Counter for minotaur chef baker procs - Maddie present at bakery.    Mod%8=0, present
+public static const IZMA_GLOVES_TAKEN:int                                           =  235; // Taken Izma gloves
+public static const IZMA_AMILY_FREAKOUT_STATUS:int                                  =  236; // Izma + Amily Freakout Status = (-1 = done, 0 = nothing yet, 1 = queued for camp prog)
+public static const IZMA_MARBLE_FREAKOUT_STATUS:int                                 =  237; // Izma + Marble Freakout Status = (Above)
+public static const IZMA_FOLLOWER_STATUS:int                                        =  238; // Izma Follower Toggle (-1 = stay at lake, 0 = neutral, 1 = live in camp)
+public static const IZMA_TALK_LEVEL:int                                             =  239; // Izma Talk level
+public static const MINO_CHEF_INTRO:int                                             =  240; // Mino Chef First Meeting Happen?
+public static const MINO_CHEF_EXPLAINED_INGREDIENTS:int                             =  241; // mino explained what he needs yet?
+public static const MADDIE_STATUS:int                                               =  242; // , 3 =stayed, 4 = epilogue'ed
+public static const MINO_CHEF_BAKERY_PROC_COUNTER:int                               =  243; // Counter for minotaur chef baker procs - Maddie present at bakery.    Mod%8=0, present
 public static const COTTON_UNUSUAL_YOGA_BOOK_TRACKER:int                            =  244; // Cotton Unusual Yoga Guidebook tracker
 public static const COTTON_BREAKFAST_CLUB:int                                       =  245; // Cotton Breakfast Club
-public static const UNKNOWN_FLAG_NUMBER_00246:int                                   =  246; // Tiger Tooth Countdown
-public static const UNKNOWN_FLAG_NUMBER_00247:int                                   =  247; // Genderless centaur madness
-public static const UNKNOWN_FLAG_NUMBER_00248:int                                   =  248; // Izma Preggers Discussion
-public static const UNKNOWN_FLAG_NUMBER_00249:int                                   =  249; // Pregnancy Enabled (1 = yes)
+public static const IZMA_TIGERSHARK_TOOTH_COUNTDOWN:int                             =  246; // Tiger Tooth Countdown
+public static const GENDERLESS_CENTAUR_MADNESS:int                                  =  247; // Genderless centaur madness
+public static const IZMA_PREGNANCY_DISCUSSED:int                                    =  248; // Izma Preggers Discussion
+public static const IZMA_PREGNANCY_ENABLED:int                                      =  249; // Pregnancy Enabled (1 = yes)
 public static const IZMA_INCUBATION:int                                             =  250; // Izma's Incubation timer
 public static const IZMA_CHILDREN_SHARKGIRLS:int                                    =  251; // Izma sharkgirls
 public static const IZMA_CHILDREN_TIGERSHARKS:int                                   =  252; // Izma tigersharks
 public static const IZMA_TIME_TILL_NEW_BOOK_AVAILABLE:int                           =  253; // Izma Nu Book Countdown
-public static const UNKNOWN_FLAG_NUMBER_00254:int                                   =  254; // Weapon Rack owned? (1 = yes) (NO LONGER USED)
-public static const UNKNOWN_FLAG_NUMBER_00255:int                                   =  255; // Armor Rack owned? (2 = yes) (NO LONGER USED)
-public static const UNKNOWN_FLAG_NUMBER_00256:int                                   =  256; // PC decided to approach Isabella's camp yet? 1
-public static const UNKNOWN_FLAG_NUMBER_00257:int                                   =  257; // Met Isabella?
-public static const UNKNOWN_FLAG_NUMBER_00258:int                                   =  258; // Is Isabella okay with tall folks?
-public static const UNKNOWN_FLAG_NUMBER_00259:int                                   =  259; // Has Isabella ever met the PC while PC is short?
-public static const UNKNOWN_FLAG_NUMBER_00260:int                                   =  260; // Isabella angry counter
-public static const UNKNOWN_FLAG_NUMBER_00261:int                                   =  261; // Isabella Sleep rape counter
-public static const UNKNOWN_FLAG_NUMBER_00262:int                                   =  262; // TImes talked with Isabella
-public static const UNKNOWN_FLAG_NUMBER_00263:int                                   =  263; // Met nancy
-public static const UNKNOWN_FLAG_NUMBER_00264:int                                   =  264; // Nancy relationship level
-public static const UNKNOWN_FLAG_NUMBER_00265:int                                   =  265; // Talk Nancy
-public static const UNKNOWN_FLAG_NUMBER_00266:int                                   =  266; // Times boned
-public static const UNKNOWN_FLAG_NUMBER_00267:int                                   =  267; // Lilium Timed Boned
+public static const TAKEN_WEAPON_RACK_DEPRECATED:int                                =  254; // Weapon Rack owned? (1 = yes) (NO LONGER USED)
+public static const TAKEN_ARMOUR_RACK_DEPRECATED:int                                =  255; // Armor Rack owned? (2 = yes) (NO LONGER USED)
+public static const ISABELLA_CAMP_APPROACHED:int                                    =  256; // PC decided to approach Isabella's camp yet? 1
+public static const ISABELLA_MET:int                                                =  257; // Met Isabella?
+public static const ISABELLA_OKAY_WITH_TALL_FOLKS:int                               =  258; // Is Isabella okay with tall folks?
+public static const ISABELLA_MET_SHORT_PC:int                                       =  259; // Has Isabella ever met the PC while PC is short?
+public static const ISABELLA_ANGRY_AT_PC_COUNTER:int                                =  260; // Isabella angry counter
+public static const ISABELLA_SLEEP_RAPE_COUNTER:int                                 =  261; // Isabella Sleep rape counter
+public static const ISABELLA_TIMES_TALKED:int                                       =  262; // TImes talked with Isabella
+public static const NANCY_MET:int                                                   =  263; // Met nancy
+public static const NANCY_RELATIONSHIP_LEVEL:int                                    =  264; // Nancy relationship level
+public static const NANCY_TIMES_TALKED:int                                          =  265; // Talk Nancy
+public static const NANCY_TIMES_BONED:int                                           =  266; // Times boned
+public static const LILIUM_TIMES_TALKED:int                                         =  267; // Lilium Timed Boned
 public static const PLAYER_DISARMED_WEAPON_ID:int                                   =  268; // weapon storage
 public static const PLAYER_DISARMED_WEAPON_ATTACK:int                               =  269; // weapon damage
-public static const UNKNOWN_FLAG_NUMBER_00270:int                                   =  270; // Times encountered spiderbitches
+public static const TIMES_ENCOUNTERED_FEMALE_SPIDERMORPHS:int                                   =  270; // Times encountered spiderbitches
 public static const FEMALE_SPIDERMORPH_PREGNANCY_INCUBATION:int                     =  271; // Spider Preggo Timer
 public static const TIMES_EXPLORED_SWAMP:int                                        =  272; // Times Explored Swamp
 public static const SHOW_SPRITES_FLAG:int                                           =  273; // Sprites off? toggle
 public static const RATHAZUL_SILK_ARMOR_COUNTDOWN:int                               =  274; // Rathazul silk armor queue - 1 = armor done!
-public static const UNKNOWN_FLAG_NUMBER_00275:int                                   =  275; // Rathazul armor type selector - 1=armor, 2=robes (3=bra, 4=panties, 5=loincloth)
-public static const UNKNOWN_FLAG_NUMBER_00276:int                                   =  276; // Times Encountered Basilisk
-public static const UNKNOWN_FLAG_NUMBER_00277:int                                   =  277; // Times Encountered Drider
-public static const UNKNOWN_FLAG_NUMBER_00278:int                                   =  278; // LOTTIE DISABLED (1+ = YUS)
-public static const UNKNOWN_FLAG_NUMBER_00279:int                                   =  279; // LOTTIE FIGURE (HIGHER = SLIMMER)
-public static const UNKNOWN_FLAG_NUMBER_00280:int                                   =  280; // LOTTIE CONFIDENCE (HIGHER = AWESOMER)
-public static const UNKNOWN_FLAG_NUMBER_00281:int                                   =  281; // TIMES ENCOUNTERED LOTTIE
-public static const UNKNOWN_FLAG_NUMBER_00282:int                                   =  282; // Sophie Bimbo Follower?
-public static const UNKNOWN_FLAG_NUMBER_00283:int                                   =  283; // Sophie Disabled Forever
+public static const RATHAZUL_SILK_ARMOR_TYPE:int                                    =  275; // Rathazul armor type selector - 1=armor, 2=robes (3=bra, 4=panties, 5=loincloth)
+public static const TIMES_ENCOUNTERED_BASILISK:int                                  =  276; // Times Encountered Basilisk
+public static const TIMES_ENCOUNTERED_DRIDER:int                                    =  277; // Times Encountered Drider
+public static const LOTTIE_DISABLED:int                                             =  278; // LOTTIE DISABLED (1+ = YUS)
+public static const LOTTIE_FIGURE:int                                               =  279; // LOTTIE FIGURE (HIGHER = SLIMMER)
+public static const LOTTIE_CONFIDENCE:int                                           =  280; // LOTTIE CONFIDENCE (HIGHER = AWESOMER)
+public static const LOTTIE_ENCOUNTER_COUNTER:int                                    =  281; // TIMES ENCOUNTERED LOTTIE
+public static const SOPHIE_BIMBO:int                                                =  282; // Sophie Bimbo Follower?
+public static const SOPHIE_DISABLED_FOREVER:int                                     =  283; // Sophie Disabled Forever
 public static const TIMES_SOPHIE_HAS_DRUNK_OVI_ELIXIR:int                           =  284; // Has Ovi Event Procced?
-public static const UNKNOWN_FLAG_NUMBER_00285:int                                   =  285; // Luststick Resistance builder - decrements by 1 every day, incremented by 1 for every 2 hours of luststick
-public static const UNKNOWN_FLAG_NUMBER_00286:int                                   =  286; // Have Ceraph's belly-button piercing
-public static const UNKNOWN_FLAG_NUMBER_00287:int                                   =  287; // Carrying Careph's token?
+public static const LUSTSTICK_RESISTANCE_PROGRESS:int                               =  285; // Luststick Resistance builder - decrements by 1 every day, incremented by 1 for every 2 hours of luststick
+public static const CERAPH_BELLYBUTTON_PIERCING:int                                 =  286; // Have Ceraph's belly-button piercing
+public static const CERAPH_TOKEN:int                                                =  287; // Carrying Careph's token?
 public static const CERAPH_HIDING_DICK:int                                          =  288; // Ceraph Cock Hidden (1 = yes, 0 = cock floppin') - Ceraph's Demon Dong status 0=Visible, 1=Not visible
-public static const UNKNOWN_FLAG_NUMBER_00289:int                                   =  289; // Times Ceraph Licked You Out
-public static const UNKNOWN_FLAG_NUMBER_00290:int                                   =  290; // Punished Ceraph?
-public static const UNKNOWN_FLAG_NUMBER_00291:int                                   =  291; // Times Beaten Ceraph And Raped Her Without Losing
-public static const UNKNOWN_FLAG_NUMBER_00292:int                                   =  292; // Times listened in on demons
-public static const UNKNOWN_FLAG_NUMBER_00293:int                                   =  293; // Disabled Ceraph Faux Corruption - Ceraph Corruption Scene
-public static const UNKNOWN_FLAG_NUMBER_00294:int                                   =  294; // Times Done 'SWEETIE NO!' Ceraph Marble RP
-public static const UNKNOWN_FLAG_NUMBER_00295:int                                   =  295; // In Ceraph's SWEETIE NO!, is Utter Moo disabled?
-public static const UNKNOWN_FLAG_NUMBER_00296:int                                   =  296; // Ceraph Udder on or off? - Ceraph Has Udders.    0=No, 1=Yes
-public static const UNKNOWN_FLAG_NUMBER_00297:int                                   =  297; // Lottie love her bodY? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00298:int                                   =  298; // Lottie porked count? (1+ = yes)
-public static const UNKNOWN_FLAG_NUMBER_00299:int                                   =  299; // Lotties Trainer? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00300:int                                   =  300; // LOTTIE: Last encouragement state
-public static const UNKNOWN_FLAG_NUMBER_00301:int                                   =  301; // LOTTIE: encouragement go from 31-&gt;30 yet? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00302:int                                   =  302; // LOTTIE: Encouragement moved from 30 to 31 yet? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00303:int                                   =  303; // LOTTIE: Encouragement moved from 80 to 79 yet? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00304:int                                   =  304; // LOTTIE: Encouragement moved from 79 to 80 yet? (1=yes)
+public static const CERAPH_LICKED_YOU_OUT:int                                       =  289; // Times Ceraph Licked You Out
+public static const CERAPH_PUNISHED:int                                             =  290; // Punished Ceraph?
+public static const CERAPH_BEATEN_AND_RAPED_COUNTER:int                             =  291; // Times Beaten Ceraph And Raped Her Without Losing
+public static const BAZAAR_DEMONS_LISTENED_IN:int                                   =  292; // Times listened in on demons
+public static const CERAPH_FAUX_CORRUPTION_DISABLED:int                             =  293; // Disabled Ceraph Faux Corruption - Ceraph Corruption Scene
+public static const CERAPH_SWEETIE_NO_RP_DONE:int                                   =  294; // Times Done 'SWEETIE NO!' Ceraph Marble RP
+public static const CERAPH_SWEETIE_NO_RP_UTTER_MOO_DISABLED:int                     =  295; // In Ceraph's SWEETIE NO!, is Utter Moo disabled?
+public static const CERAPH_UDDERS:int                                               =  296; // Ceraph Udder on or off? - Ceraph Has Udders.    0=No, 1=Yes
+public static const LOTTIE_LOVES_HER_BODY:int                                       =  297; // Lottie love her bodY? (1 = yes)
+public static const LOTTIE_PORKED_COUNT:int                                         =  298; // Lottie porked count? (1+ = yes)
+public static const LOTTIE_TRAINER:int                                              =  299; // Lotties Trainer? (1 = yes)
+public static const LOTTIE_LAST_ENCOURAGEMENT_STATE:int                             =  300; // LOTTIE: Last encouragement state
+public static const LOTTIE_ENCOURAGEMENT_THRESHOLD_31_30_DOWN:int                   =  301; // LOTTIE: encouragement go from 31-&gt;30 yet? (1 = yes)
+public static const LOTTIE_ENCOURAGEMENT_THRESHOLD_30_31_UP:int                     =  302; // LOTTIE: Encouragement moved from 30 to 31 yet? (1 = yes)
+public static const LOTTIE_ENCOURAGEMENT_THRESHOLD_80_79_DOWN:int                   =  303; // LOTTIE: Encouragement moved from 80 to 79 yet? (1 = yes)
+public static const LOTTIE_ENCOURAGEMENT_THRESHOLD_79_80_UP:int                     =  304; // LOTTIE: Encouragement moved from 79 to 80 yet? (1=yes)
 public static const SILLY_MODE_ENABLE_FLAG:int                                      =  305; // SILLY MODE ON?
-public static const UNKNOWN_FLAG_NUMBER_00306:int                                   =  306; // LOTTIE: Need to talk about Oral?
-public static const UNKNOWN_FLAG_NUMBER_00307:int                                   =  307; // LOTTIE: Need to talk about Anal?
-public static const UNKNOWN_FLAG_NUMBER_00308:int                                   =  308; // LOTTIE: WEIGHT AT CONCLUSION OF LAST TALK EVENT
-public static const UNKNOWN_FLAG_NUMBER_00309:int                                   =  309; // LOTTIE: FATASS LOW SELF-ESTEEM SPECIAL EVENT TRIGGER YET? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00310:int                                   =  310; // LOTTIE: DOGGYSTYLE UNLOCKED? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00311:int                                   =  311; // LOTTIE: WALKIES UNLOCKED? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00312:int                                   =  312; // LOTTIE: LOVING FAT BITCH 1TIME EVENT TRIGGER? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00313:int                                   =  313; // LOTTIE: COWGIRL UNLOCKED? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00314:int                                   =  314; // LOTTIE: QUICKIE UNLOCKED (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00315:int                                   =  315; // LOTTIE: CHARLOTTES WEB 1TIME HAPPEN (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00316:int                                   =  316; // LOTTIE: THREESOME UNLOCKED (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00317:int                                   =  317; // LOTTIE: ELLE NTR UNLOCKED (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00318:int                                   =  318; // LOTTIE: MAX GOALS AND MAX LOVE REACHED (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00319:int                                   =  319; // LOTTIE: FEMDOM UNLOCKED (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00320:int                                   =  320; // LOTTIE: REVERSE COWGIRL UNLOCKED (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00321:int                                   =  321; // LOTTIE: TImes given item
-public static const UNKNOWN_FLAG_NUMBER_00322:int                                   =  322; // LOTTIE: LA BOVA COUNTDOWN - counts down to 1 before she'll use it again.  Also used to track if LaBova has ever been used
-public static const UNKNOWN_FLAG_NUMBER_00323:int                                   =  323; // LOTTIE: HAS SHE USED REDUCTO?
-public static const UNKNOWN_FLAG_NUMBER_00324:int                                   =  324; // LOTTIE: HAM SAMMICH
-public static const UNKNOWN_FLAG_NUMBER_00325:int                                   =  325; // Times met minotaur mob
-public static const UNKNOWN_FLAG_NUMBER_00326:int                                   =  326; // Number of grown up minotaur offspring - TRIBE SIZE
-public static const UNKNOWN_FLAG_NUMBER_00327:int                                   =  327; // Number of minotaur sons pending growing up
-public static const UNKNOWN_FLAG_NUMBER_00328:int                                   =  328; // Grow up countdown
-public static const UNKNOWN_FLAG_NUMBER_00329:int                                   =  329; // Minos wasting a turn? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00330:int                                   =  330; // Cooldown on minotaur cum repeat messages
-public static const UNKNOWN_FLAG_NUMBER_00331:int                                   =  331; // Times Jojo Milked
+public static const LOTTIE_NEEDS_TO_TALK_ORAL:int                                   =  306; // LOTTIE: Need to talk about Oral?
+public static const LOTTIE_NEEDS_TO_TALK_ANAL:int                                   =  307; // LOTTIE: Need to talk about Anal?
+public static const LOTTIE_WEIGHT_CONCLUSION:int                                    =  308; // LOTTIE: WEIGHT AT CONCLUSION OF LAST TALK EVENT
+public static const LOTTIE_FATASS_LOW_ESTEEM:int                                    =  309; // LOTTIE: FATASS LOW SELF-ESTEEM SPECIAL EVENT TRIGGER YET? (1 = yes)
+public static const LOTTIE_DOGGYSTYLE_UNLOCKED:int                                  =  310; // LOTTIE: DOGGYSTYLE UNLOCKED? (1 = yes)
+public static const LOTTIE_WALKIE_UNLOCKED:int                                      =  311; // LOTTIE: WALKIES UNLOCKED? (1 = yes)
+public static const LOTTIE_LOVING_FAT_BITCH_EVENT:int                               =  312; // LOTTIE: LOVING FAT BITCH 1TIME EVENT TRIGGER? (1 = yes)
+public static const LOTTIE_COWGIRL_UNLOCKED:int                                     =  313; // LOTTIE: COWGIRL UNLOCKED? (1 = yes)
+public static const LOTTIE_QUICKIE_UNLOCKED:int                                     =  314; // LOTTIE: QUICKIE UNLOCKED (1 = yes)
+public static const LOTTIE_CHARLOTTES_WEB_EVENT:int                                 =  315; // LOTTIE: CHARLOTTES WEB 1TIME HAPPEN (1 = yes)
+public static const LOTTIE_THREESOME_UNLOCKED:int                                   =  316; // LOTTIE: THREESOME UNLOCKED (1 = yes)
+public static const LOTTIE_ELLE_NTR_UNLOCKED:int                                    =  317; // LOTTIE: ELLE NTR UNLOCKED (1 = yes)
+public static const LOTTIE_MAX_GOAL_LOVE_REACHED:int                                =  318; // LOTTIE: MAX GOALS AND MAX LOVE REACHED (1 = yes)
+public static const LOTTIE_FEMDOM_UNLOCKED:int                                      =  319; // LOTTIE: FEMDOM UNLOCKED (1 = yes)
+public static const LOTTIE_REVERSE_COWGIRL_UNLOCKED:int                             =  320; // LOTTIE: REVERSE COWGIRL UNLOCKED (1 = yes)
+public static const LOTTIE_TIMES_GIVEN_ITEMS:int                                    =  321; // LOTTIE: TImes given item
+public static const LOTTIE_LABOVA_COUNTDOWN:int                                     =  322; // LOTTIE: LA BOVA COUNTDOWN - counts down to 1 before she'll use it again.  Also used to track if LaBova has ever been used
+public static const LOTTIE_REDUCTO_USED:int                                         =  323; // LOTTIE: HAS SHE USED REDUCTO?
+public static const LOTTIE_HAM_SAMMICH:int                                          =  324; // LOTTIE: HAM SAMMICH
+public static const TIMES_ENCOUNTERED_MINOTAUR_MOB:int                              =  325; // Times met minotaur mob
+public static const ADULT_MINOTAUR_OFFSPRINGS:int                                   =  326; // Number of grown up minotaur offspring - TRIBE SIZE
+public static const MINOTAUR_SONS_PENDING:int                                       =  327; // Number of minotaur sons pending growing up
+public static const MINOTAUR_SONS_GROWUP_COUNTER:int                                =  328; // Grow up countdown
+public static const MINOTAUR_SONS_WASTED_TURN:int                                   =  329; // Minos wasting a turn? (1 = yes)
+public static const MINOTAUR_SONS_CUM_REPEAT_COOLDOWN:int                           =  330; // Cooldown on minotaur cum repeat messages
+public static const JOJO_COCK_MILKING_COUNTER:int                                   =  331; // Times Jojo Milked
 public static const JOJO_COCK_MILKING_COOLDOWN:int                                  =  332; // Jojo milk cooldown 4 hours
-public static const UNKNOWN_FLAG_NUMBER_00333:int                                   =  333; // Times PC been cock milked
+public static const PC_COCK_MILKED_COUNTER:int                                      =  333; // Times PC been cock milked
 public static const FAP_ARENA_SESSIONS:int                                          =  334; // Times fap arena'ed
 public static const FAP_ARENA_VICTORIES:int                                         =  335; // Fap Arena victories
 public static const AMILY_OFFERED_DEFURRY:int                                       =  336; //  1 = Offered to defurry Amily
 public static const AMILY_NOT_FURRY:int                                             =  337; //  1 = Amily is no longer a flea-ridden furry who stinks up your carpet.
 public static const AMILY_IS_BATMAN:int                                             =  338; //  1 = You turned Amily into a human and then pissed all over her happy thoughts.  She now stalks you from rooftops while buying graphite helmets, utility belts, and a sweet, jetpowered car in the theme of a rat.
 public static const FAP_ARENA_RULES_EXPLAINED:int                                   =  339; // Fap Arena - rules been explaned?
-public static const UNKNOWN_FLAG_NUMBER_00340:int                                   =  340; // came in with minotaur cum
+public static const MINOTAUR_CUM_INTAKE_COUNT:int                                   =  340; // came in with minotaur cum
 public static const KIHA_TOLL:int                                                   =  341; // 
 public static const KIHA_TOLL_DURATION:int                                          =  342; // 
 public static const TIMES_MET_KIHA:int                                              =  343; // 
@@ -353,9 +353,9 @@ public static const KIHA_TALK_STAGE:int                                         
 public static const PC_WIN_LAST_KIHA_FIGHT:int                                      =  345; // 
 public static const AMILY_VISITING_URTA:int                                         =  346; // AMILY_VISITING_URTA (1 = amily is gone, 2 = they fucked), (3 = DICK MODE) (4 = THREESOME MODE)
 public static const AMILY_NEED_TO_FREAK_ABOUT_URTA:int                              =  347; // AMILY_NEED_TO_FREAK_ABOUT_URTA (1= yes)
-public static const UNKNOWN_FLAG_NUMBER_00348:int                                   =  348; // Joey Big balls counter
-public static const UNKNOWN_FLAG_NUMBER_00349:int                                   =  349; // Times told joey to masturbate his big balls.
-public static const UNKNOWN_FLAG_NUMBER_00350:int                                   =  350; // Urta x Amily Urta followup needed?  (1 = cue Urta angst, 2 = done)
+public static const JOEY_BIG_BALLS_COUNTER:int                                      =  348; // Joey Big balls counter
+public static const JOEY_TOLD_TO_MASTURBATE_COUNTER:int                             =  349; // Times told joey to masturbate his big balls.
+public static const URTA_AMILY_FOLLOWUP_NEEDED:int                                  =  350; // Urta x Amily Urta followup needed?  (1 = cue Urta angst, 2 = done)
 public static const TIMES_MET_SHOULDRA:int                                          =  351; // 
 public static const TIMES_BEATEN_SHOULDRA:int                                       =  352; // 
 public static const TIMES_POSSESSED_BY_SHOULDRA:int                                 =  353; // 
@@ -370,8 +370,8 @@ public static const SHOULDRA_VAGINAL_POSSESSIONS:int                            
 public static const SHOULDRA_HERMSEX_COUNT:int                                      =  362; // 
 public static const SHOULDRA_USES_YOUR_GIANT_COCK_COUNT:int                         =  363; // 
 public static const TIMES_MET_OOZE:int                                              =  364; // 
-public static const UNKNOWN_FLAG_NUMBER_00365:int                                   =  365; // COUNTDOWN TILL MAIDEN FOLLOWUP
-public static const UNKNOWN_FLAG_NUMBER_00366:int                                   =  366; // TIMES MET GHOSTGIRL MAIDEN
+public static const SHOULDRA_PALADIN_MAIDEN_COUNTDOWN:int                           =  365; // COUNTDOWN TILL MAIDEN FOLLOWUP
+public static const SHOULDRA_PALADIN_MAIDEN_COUNTER:int                             =  366; // TIMES MET GHOSTGIRL MAIDEN
 public static const ISABELLA_TIMES_OFFERED_FOLLOWER:int                             =  367; // 
 public static const ISABELLA_AFFECTION:int                                          =  368; // 
 public static const ISABELLA_FOLLOWER_ACCEPTED:int                                  =  369; // 
@@ -417,7 +417,7 @@ public static const ROGAR_DIRT:int                                              
 public static const ROGAR_WARNING:int                                               =  409; // 
 public static const ROGAR_DISABLED:int                                              =  410; // 
 public static const ROGAR_FUCKED_TODAY:int                                          =  411; // 
-public static const UNKNOWN_FLAG_NUMBER_00412:int                                   =  412; // IZMA_KIDS_IN_THE_WILD
+public static const IZMA_KIDS_IN_WILD:int                                           =  412; // IZMA_KIDS_IN_THE_WILD
 public static const EXGARTUAN_TIGHTPANTS_MASTURBATE_COUNT:int                       =  413; // 
 public static const BOOBGARTUAN_SURPRISE_COUNT:int                                  =  414; // 
 public static const GOTTEN_INQUISITOR_ARMOR:int                                     =  415; // 
@@ -1310,7 +1310,7 @@ public static const BENOIT_BASIL_EYES_GRANTED:int                               
 public static const BENOIT_HAIRPIN_TALKED_TODAY:int                                 = 1302; // Talked to Benoit(e) about the hairpin today
 public static const IMPS_PETRIFIED:int                                              = 1303; // Total imps petrified
 public static const CAMP_WALL_STATUES:int                                           = 1304; // Total imp statues at camp wall
-public static const UNKNOWN_FLAG_NUMBER_01305:int                                   = 1305;
+public static const CODEX_ENTRY_BASILISKS:int                                       = 1305;
 public static const UNKNOWN_FLAG_NUMBER_01306:int                                   = 1306;
 public static const UNKNOWN_FLAG_NUMBER_01307:int                                   = 1307;
 public static const UNKNOWN_FLAG_NUMBER_01308:int                                   = 1308;
@@ -2315,33 +2315,33 @@ public static const MINERVA_SPAR_VICTORIES:int                                  
 public static const VALERIA_SPAR_VICTORIES:int                                      = 2307;
 public static const UNKNOWN_FLAG_NUMBER_02308:int                                   = 2308; // Reserved for additional sparrable partner.
 public static const UNKNOWN_FLAG_NUMBER_02309:int                                   = 2309; // Reserved for additional sparrable partner.
-public static const KAIZO_BACKGROUND_UNLOCKED:int                                   = 2310; // Reserved for Kaizo.
-public static const KAIZO_FACTORY_DOOR_UNLOCKED:int                                 = 2311;
-public static const UNKNOWN_FLAG_NUMBER_02312:int                                   = 2312;
-public static const UNKNOWN_FLAG_NUMBER_02313:int                                   = 2313;
-public static const UNKNOWN_FLAG_NUMBER_02314:int                                   = 2314;
-public static const UNKNOWN_FLAG_NUMBER_02315:int                                   = 2315;
+public static const GRIMDARK_BACKGROUND_UNLOCKED:int                                = 2310; // Reserved for Grimdark.
+public static const GRIMDARK_FACTORY_DOOR_UNLOCKED:int                              = 2311;
+public static const IZMA_BROFIED:int                                                = 2312;
+public static const IZMAEL_ANAL_PENETRATED:int                                      = 2313;
+public static const IZMAEL_FRENZIED:int                                             = 2314;
+public static const IZMAEL_ENTRAPPED:int                                            = 2315;
 public static const UNKNOWN_FLAG_NUMBER_02316:int                                   = 2316;
 public static const UNKNOWN_FLAG_NUMBER_02317:int                                   = 2317;
 public static const UNKNOWN_FLAG_NUMBER_02318:int                                   = 2318;
-public static const UNKNOWN_FLAG_NUMBER_02319:int                                   = 2319;
-public static const UNKNOWN_FLAG_NUMBER_02320:int                                   = 2320;
-public static const UNKNOWN_FLAG_NUMBER_02321:int                                   = 2321;
-public static const UNKNOWN_FLAG_NUMBER_02322:int                                   = 2322;
-public static const UNKNOWN_FLAG_NUMBER_02323:int                                   = 2323;
-public static const UNKNOWN_FLAG_NUMBER_02324:int                                   = 2324;
-public static const UNKNOWN_FLAG_NUMBER_02325:int                                   = 2325;
-public static const UNKNOWN_FLAG_NUMBER_02326:int                                   = 2326;
-public static const UNKNOWN_FLAG_NUMBER_02327:int                                   = 2327;
-public static const UNKNOWN_FLAG_NUMBER_02328:int                                   = 2328;
-public static const UNKNOWN_FLAG_NUMBER_02329:int                                   = 2329;
-public static const UNKNOWN_FLAG_NUMBER_02330:int                                   = 2330;
-public static const UNKNOWN_FLAG_NUMBER_02331:int                                   = 2331;
-public static const UNKNOWN_FLAG_NUMBER_02332:int                                   = 2332;
-public static const UNKNOWN_FLAG_NUMBER_02333:int                                   = 2333;
-public static const UNKNOWN_FLAG_NUMBER_02334:int                                   = 2334;
-public static const UNKNOWN_FLAG_NUMBER_02335:int                                   = 2335;
-public static const UNKNOWN_FLAG_NUMBER_02336:int                                   = 2336;
+public static const TOWN_RUINS_SCAVENGE_CONSIDERED:int                              = 2319;
+public static const TOWN_RUINS_HOUSES_DISMANTLED:int                                = 2320;
+public static const TOWN_RUINS_HOUSE_SCAVENGE_PROGRESS:int                          = 2321;
+public static const TOWN_RUINS_TOWNHALL_SCAVENGE_PROGRESS:int                       = 2322;
+public static const TOWN_RUINS_SHOP_SCAVENGE_PROGRESS:int                           = 2323;
+public static const TOWN_RUINS_HOUSE_FURNITURE_FOUND:int                            = 2324;
+public static const TOWN_RUINS_TOWNHALL_FURNITURE_FOUND:int                         = 2325;
+public static const TOWN_RUINS_SHOP_FURNITURE_FOUND:int                             = 2326;
+public static const PABLO_MET:int                                                   = 2327;
+public static const PABLO_AFFECTION:int                                             = 2328;
+public static const PABLO_WORKOUT_COUNTER:int                                       = 2329;
+public static const PABLO_SECRET_LEARNED:int                                        = 2330;
+public static const PABLO_SEX_UNLOCKED:int                                          = 2331;
+public static const PABLO_GOT_DICKED_VAGINALLY:int                                  = 2332;
+public static const PABLO_GOT_DICKED_ANALLY:int                                     = 2333;
+public static const PABLO_USED_YOUR_PUSSY:int                                       = 2334;
+public static const PABLO_USED_YOUR_ASS:int                                         = 2335;
+public static const PABLO_FREAKED_OUT_OVER_WORMS:int                                = 2336;
 public static const UNKNOWN_FLAG_NUMBER_02337:int                                   = 2337;
 public static const UNKNOWN_FLAG_NUMBER_02338:int                                   = 2338;
 public static const UNKNOWN_FLAG_NUMBER_02339:int                                   = 2339;
@@ -3006,6 +3006,6 @@ public static const MEANINGLESS_CORRUPTION:int                                  
 public static const ITS_EVERY_DAY:int                                               = 2996; // all special calender events occur every day!
 public static const LOW_STANDARDS_FOR_ALL:int                                       = 2997;
 public static const HYPER_HAPPY:int                                                 = 2998;
-public static const KAIZO_MODE:int                                                  = 2999; // Kaizo CoC! Do you wanna have a bad time?
+public static const GRIMDARK_MODE:int                                               = 2999; // Grimdark CoC! Do you wanna have a bad time?
 	}    
 }

@@ -100,31 +100,31 @@ public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	//Cinnabar
 	if (model.time.hours >= 15 && model.time.hours <= 20) addButton(5, (flags[kFLAGS.CINNABAR_NUMBER_ENCOUNTERS] > 0 ? "Cinnabar" : "Rat"), cinnabar.cinnabarAppearance(false));
 	//Griping Demons
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00292] == 0 && rand(4) == 0 && demons) {
+	if (flags[kFLAGS.BAZAAR_DEMONS_LISTENED_IN] == 0 && rand(4) == 0 && demons) {
 		overHearDemonsAboutSyrena();
 		return;
 	}
-	if ((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00292] == 1 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00292] == 2) && demons && rand(10) == 0) {
+	if ((flags[kFLAGS.BAZAAR_DEMONS_LISTENED_IN] == 1 || flags[kFLAGS.BAZAAR_DEMONS_LISTENED_IN] == 2) && demons && rand(10) == 0) {
 		//[Repeat Variant]
 		outputText("\n\n<b>The familiar sounds of the two griping demons can be heard nearby.  Do you listen in again?</b>", false);
 		addButton(6, "GripingDemons", overHearDemonsAboutSyrena, null, null, null, "Overhear the conversation of the two griping demons.", "Griping Demons");
 	}
 	//Lilium
 	if (lilium.LiliumText(false) != null) {
-		addButton(7, (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00267] > 0 ? "Lilium" : "Demon"), lilium.LiliumText(false));
+		addButton(7, (flags[kFLAGS.LILIUM_TIMES_TALKED] > 0 ? "Lilium" : "Demon"), lilium.LiliumText(false));
 	}
 	//Roxanne
-	addButton(8, (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00221] > 0 ? "Roxanne" : "Lizans"), (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00221] > 0 ? roxanne.RoxanneChooseApproachOrRepeat : roxanne.Roxanne1stApproach));
+	addButton(8, (flags[kFLAGS.ROXANNE_MET] > 0 ? "Roxanne" : "Lizans"), (flags[kFLAGS.ROXANNE_MET] > 0 ? roxanne.RoxanneChooseApproachOrRepeat : roxanne.Roxanne1stApproach));
 	//Bimbo Niamh
 	if (flags[kFLAGS.NIAMH_STATUS] > 0 && flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == -1) {
 		if (flags[kFLAGS.NIAMH_STATUS] == 2) outputText("\n\nThe sounds of voices raised in song and girlish laughter makes it obvious where Niamh is holding a perpetual party.");
 		addButton(9, "Niamh", getGame().telAdre.niamh.bazaarNiamh);
 	}
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
-	if (flags[kFLAGS.KAIZO_MODE] > 0) addButton(14, "Leave", leaveBazaarKaizo);
+	if (flags[kFLAGS.GRIMDARK_MODE] > 0) addButton(14, "Leave", leaveBazaarGrimdark);
 }
 
-		public function leaveBazaarKaizo():void {
+		public function leaveBazaarGrimdark():void {
 			inRoomedDungeonResume = getGame().dungeons.resumeFromFight;
 			getGame().dungeons._currentRoom = "plains";
 			getGame().dungeons.move(getGame().dungeons._currentRoom);
@@ -411,7 +411,7 @@ private function joeysMassageWithEXTRASpooge():void {
 private function joeyBigBalls():void {
 	clearOutput();
 	//(FIRST TIME) 
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00348] == 0) {
+	if (flags[kFLAGS.JOEY_BIG_BALLS_COUNTER] == 0) {
 		outputText("Before you can even clear the door-frame, Joey the bunny-boy masseuse launches himself into you, his hands clutching wildly at your " + player.armorName + ".  You look down at him, and his wide, open eyes stare back with panic; namely, the look of someone in over their head with no idea how to save themselves.  Worse still, his trademark thong is bulging out obscenely, cum spilling down the sides while his immensely swollen gonads threaten to burst free of the garment's fraying threads.  Joey babbles, \"<i>Help!  I was testing the potions, and-and-and... I dunno what went wrong, b-b-but my balls are backing up faster than it dribbles out.  They feel like they're going to burst!!  Help meeeeee!</i>\"\n\n", false);
 		outputText("You push the panicked lagomorph back a pace so that you can breathe and appraise the situation.  Joey's legs are drenched, soaked with sloppy spooge.  His thong is on the verge of bursting.  Most notable, his bloated balls look more like cantaloupes than testicles, and these melons are ripening to an unseen Demeter's power, swelling ever-so-slightly larger with each passing second.  You estimate that there's precious little time.\n\n", false);
 		
@@ -429,18 +429,18 @@ private function joeyBigBalls():void {
 		//[SuckCumOut] [MasturbateOut]
 		simpleChoices("SuckCumOut", suckOffJoeysGardenHose, "MasturbateOut", joeyWanksItOut, "", null, "", null, "", null);
 	}
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00348]++;	
+	flags[kFLAGS.JOEY_BIG_BALLS_COUNTER]++;	
 }
 
 //Masturbate It Out (work it out on the floor)
 private function joeyWanksItOut():void {
 	clearOutput();
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00349] == 0) {
+	if (flags[kFLAGS.JOEY_TOLD_TO_MASTURBATE_COUNTER] == 0) {
 		outputText("You tell Joey that if he masturbates to erectness, his body should be able to shoot it out faster.  He smacks his forehead and runs into a back room, his thong disintegrating around his growing testes as he runs. The door slams, leaving you in peace.  A little freaked out, you head back to camp for now.", false);
 		doNext(camp.returnToCampUseOneHour);
 	}
 	else camp.returnToCampUseOneHour();
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00349]++;
+	flags[kFLAGS.JOEY_TOLD_TO_MASTURBATE_COUNTER]++;
 }
 //Suck Cum Out (not your garden-variety hoes)
 private function suckOffJoeysGardenHose():void {
@@ -480,7 +480,7 @@ private function suckOffJoeysGardenHose():void {
 
 private function overHearDemonsAboutSyrena():void {
 	clearOutput();
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00292] == 0) {
+	if (flags[kFLAGS.BAZAAR_DEMONS_LISTENED_IN] == 0) {
 		outputText("A whisper of conversation catches your ear while you're wandering the bazaar, and overcome by curiosity, you veer towards it.\n\n", false);
 		outputText("As you're closing in on the voices, the dialogue grows clear enough to understand.\n\n", false);
 		outputText("\"<i>-old him if he doesn't finish this week's experiments, she's going to drop him into a submission tank instead of the champion!</i>\" exclaims the first voice, sounding quite feminine.\n\n", false);
@@ -492,7 +492,7 @@ private function overHearDemonsAboutSyrena():void {
 		outputText("Well, that explains a lot.  The demons seem to have an active research department, though the one called Syrena does not seem to please her underlings very much.  Then again, you doubt any demonic servants are pleased with their bosses.  You can't wait to put a stop to their labors, but for now, there's nothing to do but use the bazaar or go home.\n\n", false);
 	}
 	//[Listen in repeat]
-	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00292] == 1) {
+	else if (flags[kFLAGS.BAZAAR_DEMONS_LISTENED_IN] == 1) {
 		outputText("Just as before, you spot the collar-popping incubus and his lab coat-clad lover complaining about their boss.\n\n", false);
 		outputText("\"<i>-still sore!  I can't believe she did that to me!</i>\" groans the male.\n\n", false);
 		outputText("Smiling cruelly, the slick-pussied succubus says, \"<i>You deserved it.  Honestly, you turned in cum-stained reports to your boss, and you're surprised that she took your ass for a ride as punishment?  If you ask me, you planned all this.  Who do you think had to clean up the huge mess you left on the floor?</i>\"\n\n", false);
@@ -501,7 +501,7 @@ private function overHearDemonsAboutSyrena():void {
 		outputText("\"<i>Babe, you're sliming everywhere again.  Why don't we go blow off some steam?</i>\"  The two horny demons run off and disappear.\n\n", false);
 	}
 	//[Listen in Repeat 2]  
-	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00292] >= 2) {
+	else if (flags[kFLAGS.BAZAAR_DEMONS_LISTENED_IN] >= 2) {
 		outputText("This time, the two chatty demons are seated near the fire, and the reason for their altered location seems clear.  The succubus' belly is gravid to an unusual degree, utterly packed with some kind of corrupted offspring.  She's rubbing both her hands over the stretched skin-dome and moaning in discomfort, the packed womb squirming beneath her touches.\n\n", false);
 		outputText("Meanwhile, the male incubus is knocking back a beer, grumbling, \"<i>Could you take it down a notch?  It isn't like this is the first time you've had to lug around a load of imps - don't be so melodramatic.</i>\"\n\n", false);
 		outputText("His pregnant companion growls and tugs at her undersized labcoat, failing to conceal the blueberry-colored bulge of her belly from him as she retorts, \"<i>You didn't have to get all these fucked into you, now did you?  Hell, she even shot me up with fertility-plus first!  It feels like there's two dozen of the little bastards packed in there!  I figure in another day or two I won't even be able to walk.</i>\"\n\n", false);
@@ -512,7 +512,7 @@ private function overHearDemonsAboutSyrena():void {
 	}
 	//enterTheBazaarAndMenu(false);
 	doNext(enterTheBazaar);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00292]++;
+	flags[kFLAGS.BAZAAR_DEMONS_LISTENED_IN]++;
 }
 
 //"Greta's Garments" - Interior

@@ -29,29 +29,37 @@ package classes.Scenes.Areas.HighMountains
 			spriteSelect(75);
 			clearOutput();
 			//First encounter: 
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00276] == 0) {
-				outputText("You are carefully trailblazing up a steep pass in the jagged mountain peaks when a furious screech from high above you makes you start.\n\n", false);
+			if (flags[kFLAGS.TIMES_ENCOUNTERED_BASILISK] == 0) {
+				outputText("You are carefully trailblazing up a steep pass in the jagged mountain peaks when a furious screech from high above you makes you start.\n\n");
 		
-				outputText("\"<i>Thiieeeeeeeeef, filthy thieeeeeeeeef!</i>\" A harpy flaps into view over the ridge, her face a picture of rage. You hastily assume a fighting stance- but the harpy completely ignores you, her gaze sliding over you and onto the rock wall behind you. \"<i>You can hide but you can't run, sneak thiieeeeeeeef! When I find you, I'm going to tear your naaaaaaaaasty little eyes out!</i>\" She flies on, screaming with anger, her head moving back and forth in jerky movements, scrying the landscape. You stare blankly in bafflement at this display, but are glad that a harpy's attention is on someone else for a change. Marveling at your fortune, you decide to press on.\n\n", false);
+				outputText("\"<i>Thiieeeeeeeeef, filthy thieeeeeeeeef!</i>\" A harpy flaps into view over the ridge, her face a picture of rage. You hastily assume a fighting stance- but the harpy completely ignores you, her gaze sliding over you and onto the rock wall behind you. \"<i>You can hide but you can't run, sneak thiieeeeeeeef! When I find you, I'm going to tear your naaaaaaaaasty little eyes out!</i>\" She flies on, screaming with anger, her head moving back and forth in jerky movements, scrying the landscape. You stare blankly in bafflement at this display, but are glad that a harpy's attention is on someone else for a change. Marveling at your fortune, you decide to press on.\n\n");
 		
-				outputText("At the top of the pass you take a moment to catch your breath, and notice something white lying on the ground, sheltered by a rock formation. Is that a harpy egg? What is it doing away from a nest? Something on the rocks catches your eye: a tiny pool of grey, split by a vertical black slit. You look closer at it to try to make sense of it. It's part of something bigger... but that's not important. What is important is that you keep staring into that depthless pool of grey. If you keep looking into it, you are quite sure you will be able to see forever; like two mirrors held up against each other, it's just a case of looking hard enough. Is there even anything outside of the grey pool? You don't think there is, and why would you even want to find out? Everything to be seen and known is there, in those bottomless depths...\n\n", false);
+				outputText("At the top of the pass you take a moment to catch your breath, and notice something white lying on the ground, sheltered by a rock formation. Is that a harpy egg? What is it doing away from a nest? Something on the rocks catches your eye: a tiny pool of grey, split by a vertical black slit. You look closer at it to try to make sense of it. It's part of something bigger... but that's not important. What is important is that you keep staring into that depthless pool of grey. If you keep looking into it, you are quite sure you will be able to see forever; like two mirrors held up against each other, it's just a case of looking hard enough. Is there even anything outside of the grey pool? You don't think there is, and why would you even want to find out? Everything to be seen and known is there, in those bottomless depths...\n\n");
 		
-				outputText("Using every vestige of your willpower, you tear your gaze away from the terrible, paralyzing sight. Panting and feeling groggy, you desperately hold the rock formation in the corner of your eye. A tall, thin bipedal shape disengages from the stone against which it had been camouflaging itself, and stalks predatorily towards you. With small, quick glances you glean fleeting impressions of grey-green scales, a tightly muscled yellow underbelly, cruelly curved index claws, a whip like tail. The creature moves its snub head towards yours suddenly, trying to catch your gaze with its deadly grey eyes again. You recoil and ready yourself to fight it as best you can.\n\n", false);
+				outputText("Using every vestige of your willpower, you tear your gaze away from the terrible, paralyzing sight. Panting and feeling groggy, you desperately hold the rock formation in the corner of your eye. A tall, thin bipedal shape disengages from the stone against which it had been camouflaging itself, and stalks predatorily towards you. With small, quick glances you glean fleeting impressions of grey-green scales, a tightly muscled yellow underbelly, cruelly curved index claws, a whip like tail. The creature moves its snub head towards yours suddenly, trying to catch your gaze with its deadly grey eyes again. You recoil and ready yourself to fight it as best you can.");
+				if (flags[kFLAGS.CODEX_ENTRY_BASILISKS] <= 0) {
+					flags[kFLAGS.CODEX_ENTRY_BASILISKS] = 1;
+					outputText("\n\n<b>New codex entry unlocked: Basilisks!</b>")
+				}
 				var basilisk:Basilisk = new Basilisk();
 				//(spd loss)
 				Basilisk.basiliskSpeed(player,5);
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00276]++;
+				flags[kFLAGS.TIMES_ENCOUNTERED_BASILISK]++;
 				startCombat(basilisk);
 			}
 			//Standard encounter:
 			else {
-				outputText("You notice a large boulder ahead. There is something curiously shaped about it. A small, wet grey shape on it catches your eye...\n\n", false);
+				outputText("You notice a large boulder ahead. There is something curiously shaped about it. A small, wet grey shape on it catches your eye...\n\n");
 		
-				outputText("You look away in the nick of time, and ready yourself to fight as the basilisk slides from his hiding place and advances upon you, his deadly eyes and sharp claws glinting coldly in the sunlight.\n\n", false);
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00276]++;
+				outputText("You look away in the nick of time, and ready yourself to fight as the basilisk slides from his hiding place and advances upon you, his deadly eyes and sharp claws glinting coldly in the sunlight.");
+				if (flags[kFLAGS.CODEX_ENTRY_BASILISKS] <= 0) {
+					flags[kFLAGS.CODEX_ENTRY_BASILISKS] = 1;
+					outputText("\n\n<b>New codex entry unlocked: Basilisks!</b>")
+				}
+				flags[kFLAGS.TIMES_ENCOUNTERED_BASILISK]++;
 				startCombat(new Basilisk());
 			}
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00276]++;
+			flags[kFLAGS.TIMES_ENCOUNTERED_BASILISK]++;
 			spriteSelect(75);
 		}
 		

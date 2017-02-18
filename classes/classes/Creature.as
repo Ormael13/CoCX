@@ -3458,8 +3458,8 @@ package classes
 		}
 		
 		public function damageToughnessModifier(displayMode:Boolean = false):Number {
-			//Return 0 if Kaizo
-			if (flags[kFLAGS.KAIZO_MODE] > 0) return 0;
+			//Return 0 if Grimdark
+			if (flags[kFLAGS.GRIMDARK_MODE] > 0) return 0;
 			//Calculate
 			var temp:Number = 0;
 			if (tou < 25) temp = (tou * 0.4);

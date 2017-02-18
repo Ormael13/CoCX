@@ -62,15 +62,8 @@ package classes
 				outputText(" Debug Build");
 			else
 				outputText(" Release Build");
-			//doThatTestingThang();
 
 			startupScreenBody();
-
-			var resume:Function = null;
-			if (player.str > 0)  //we're in a game, allow resume.
-				resume = playerMenu;
-
-			var achievements:Achievements = new Achievements();
 
 			// I really wanted to only have the "imageCreditsScreen" button if images were found, but it turns out
 			// that if you check if any images were found immediately when this screen is shown, you get 0
@@ -78,11 +71,11 @@ package classes
 			// Therefore, the imageCreditScreen will just have to say "No image pack" if you don't have any images
 
 			menu();
-			if (resume != null) addButton(0, "Resume", resume, null, null, null, "Get back to gameplay?");
+			if (player.str > 0) addButton(0, "Resume", playerMenu, null, null, null, "Get back to gameplay?");
 			else addButtonDisabled(0, "Resume", "Please start or load a game first.");
 			addButton(1, "Settings", kGAMECLASS.gameSettings.settingsScreenMain, null, null, null, "Configure game settings and enable cheats.");
 			addButton(2, "Instructions", howToPlay, null, null, null, "How to play.  Starting tips.  And hotkeys for easy left-handed play...");
-			addButton(3, "Achievements", achievements.achievementsScreen, null, null, null, "View all achievements you have unlocked so far.");
+			addButton(3, "Achievements", kGAMECLASS.achievementList.achievementsScreen, null, null, null, "View all achievements you have unlocked so far.");
 			addButton(4, "Mod Thread", openURL, "https://forum.fenoxo.com/threads/coc-revamp-mod-v1-3-25-for-coc-1-0-2.3/", null, null, "Check the official mod thread on Fenoxo's forum.");
 				
 			addButton(5, "Credits", creditsScreen, null, null, null, "See a list of all the cool people who have contributed to content for this game!");
@@ -179,13 +172,14 @@ package classes
 			outputText("</ul>");
 			outputText("<b>Game Mod Supplementary Events:</b>\n");
 			outputText("<ul>");
-			outputText("<li> worldofdrakan (Pigtail Truffles & Pig/Boar TFs)</li>");
+			outputText("<li> worldofdrakan (Pablo the Pseudo-Imp, Pigtail Truffles & Pig/Boar TFs)</li>");
 			outputText("<li> FeiFongWong (Prisoner Mod)</li>");
 			outputText("<li> Foxxling (Lizan Rogue, Skin Oils & Body Lotions, Black Cock)</li>");
 			outputText("<li> LukaDoc (Bimbo Jojo)</li>");
 			outputText("<li> Kitteh6660 (Behemoth, Cabin, Ingnam, Pure Jojo sex scenes. Feel free to help me with quality control.)</li>");
 			outputText("<li> Ormael (Salamander TFs)</li>");
 			outputText("<li> Coalsack (Anzu the Avian Deity)</li>");
+			outputText("<li> Nonesuch (Izmael)</li>");
 			outputText("</ul>");
 			outputText("<b>Game Mod Bug Reporting:</b>\n");
 			outputText("<ul>");

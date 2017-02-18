@@ -100,7 +100,7 @@ public function campRathazul():void {
 		marblePurification.visitRathazulToPurifyMarbleAfterLaBovaStopsWorkin();
 		return;
 	}
-	if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] > 0) {
+	if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1 && flags[kFLAGS.RATHAZUL_SILK_ARMOR_TYPE] > 0) {
 		collectSilkArmor();
 		return;
 	}
@@ -158,7 +158,7 @@ private function rathazulWorkOffer():Boolean {
 	var debimbo:Boolean = false;
 	var reductos:Boolean = false;
 	var lethiciteDefense:Function = null;
-	if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] > 0) {
+	if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1 && flags[kFLAGS.RATHAZUL_SILK_ARMOR_TYPE] > 0) {
 		collectSilkArmor();
 		return true;
 	}
@@ -197,7 +197,7 @@ private function rathazulWorkOffer():Boolean {
 		}
 		outputText("\n\n");
 	}
-	if (player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) { //SPOIDAH
+	if (player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] + flags[kFLAGS.RATHAZUL_SILK_ARMOR_TYPE] == 0) { //SPOIDAH
 		showArmorMenu = true;
 		spoken = true;
 		totalOffers++;
@@ -360,7 +360,7 @@ public function rathazulArmorMenu():void {
 	if (player.hasItem(useables.B_CHITN, 5)) {
 		addButton(1, "BeeArmor", craftCarapace);
 	}
-	if (player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 0) {
+	if (player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] + flags[kFLAGS.RATHAZUL_SILK_ARMOR_TYPE] == 0) {
 		addButton(2, "SpiderSilk", craftSilkArmor);
 	}
 	if (player.hasItem(useables.D_SCALE, 2)) {
@@ -414,7 +414,12 @@ private function craftSilkArmor():void {
 			outputText("The old rat shakes his head and adds, \"<i>Well, now that I think about it, the venom of a red widow might be able to transform you until you are a spider to the core, but I have absolutely no idea what that would do to you.  If you ever try such a dangerous, reckless idea, let me know.  I want to have my notebooks handy, for SCIENCE!</i>\"\n\n", false);
 		}
 		if (player.hasItem(useables.T_SSILK, 2)) {
-			outputText("\"<i>But this should be enough for undergarments if you want,</i>\" Rathazul adds.");
+			outputText("\"<i>But this should be enough for undergarments if you want and I will need 500 gems up front,</i>\" Rathazul adds.");
+			if (player.gems < 500) {
+				outputText("  <b>Wait... you don't even have 500 gems.  Damn.</b>", false);
+				doNext(returnToRathazulMenu);
+				return;
+			}
 			doYesNo(commissionSilkArmorForReal,declineSilkArmorCommish);
 			return;
 		}
@@ -471,7 +476,7 @@ public function chooseArmorOrRobes(robeType:int):void {
 		outputText("You head back to your camp", false);
 	}
 	outputText(", wondering if the old rodent will actually deliver the wondrous item that he's promised you.", false);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = robeType;
+	flags[kFLAGS.RATHAZUL_SILK_ARMOR_TYPE] = robeType;
 	flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] = 24;
 	trace("274: " + flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN]);
 	doNext(camp.returnToCampUseOneHour);
@@ -481,13 +486,13 @@ private function collectSilkArmor():void {
 	clearOutput();
 	
 	outputText("Rathazul beams and ejaculates, \"<i>Good news everyone!  Your ", false);
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 1) outputText("armor", false);
-	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] == 2) outputText("robe", false);
+	if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_TYPE] == 1) outputText("armor", false);
+	else if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_TYPE] == 2) outputText("robe", false);
 	else outputText("undergarment", false);
 	outputText(" is finished!</i>\"\n\n", false);
 	
 	var itype:ItemType;
-	switch(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275]) {
+	switch(flags[kFLAGS.RATHAZUL_SILK_ARMOR_TYPE]) {
 		case 1: //Armor
 			outputText(images.showImage("rathazul-craft-silkarmor"));
 			outputText("A glittering white suit of armor sits atop a crude armor rack, reflecting the light that plays across its surface beautifully.  You definitely didn't expect anything like this!  It looks nearly identical to a set of light platemail, though instead of having a cold metal surface, the armor feels slightly spongy, with just a little bit of give in it.\n\n", false);
@@ -524,7 +529,7 @@ private function collectSilkArmor():void {
 	}
 	//Reset counters
 	player.addStatusValue(StatusEffects.MetRathazul,2,1);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
+	flags[kFLAGS.RATHAZUL_SILK_ARMOR_TYPE] = 0;
 	flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] = 0;
 	inventory.takeItem(itype, returnToRathazulMenu);
 }

@@ -749,7 +749,7 @@ private function tamaniDaughtersCombatLossDrain():void {
 	}
 	
 	outputText("A goblin with lustrous blue hair pulls a lever on the side of the chair, shifting your position to further expose you.  She assures, ", false);
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00058] == 0) outputText("\"<i>Stop worrying.  I invented this while I was waiting on mom to bring me back more of your cum, just in case we ever got our hands on you.  I promise, after you've had a taste of my chair you'll never want to leave.</i>\"\n\n", false);
+	if (flags[kFLAGS.TAMANI_DAUGHTER_CHAIR_COUNTER] == 0) outputText("\"<i>Stop worrying.  I invented this while I was waiting on mom to bring me back more of your cum, just in case we ever got our hands on you.  I promise, after you've had a taste of my chair you'll never want to leave.</i>\"\n\n", false);
 	else outputText("\"<i>Stop worrying!  We both know you love my little love-seat.  Just lie back and you'll be cumming too hard to care before long.</i>\"\n\n", false);
 	
 	
@@ -778,7 +778,7 @@ private function tamaniDaughtersCombatLossDrain():void {
 	outputText("Unable to fight back in any way, you shrug and begin suckling the purplish nipple, tasting the creamy goblin milk as it easily fills your mouth.  You gulp it down, slowly relaxing between the mechanized cock-sucking and gentle breast-feeding.  Your daughter was right, it's almost like paradise. Unfortunately, the pleasure is interrupted by something probing at your backside.  Unable to look with your mouth full of delicious tit, you can only gurgle and dribble in protest as a lubricated tube is inserted into your " + player.assholeDescript() + ".\n\n", false);
 	
 	outputText("The familiar voice of the machine's inventor whispers, \"<i>", false);
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00058] == 0) outputText("Time for your medicine!  We need you to cum enough for each of us, and maybe have a little left over to play with, so suck up the medicine, okay?  Just relax and let it fill you so that you give us all that yummy cummy!</i>\"\n\n", false);
+	if (flags[kFLAGS.TAMANI_DAUGHTER_CHAIR_COUNTER] == 0) outputText("Time for your medicine!  We need you to cum enough for each of us, and maybe have a little left over to play with, so suck up the medicine, okay?  Just relax and let it fill you so that you give us all that yummy cummy!</i>\"\n\n", false);
 	else outputText("Relax Dad, we're just giving you your cummy medicine.  I know you're a sexy, virile " + player.mf("stud","slut") + "and all, but take your medicine and you'll have more than enough cum for us!</i>\"\n\n", false);
 	
 	outputText("You blush, ", false);
@@ -816,11 +816,11 @@ private function tamaniDaughtersCombatLossDrain():void {
 	outputText("Trapped in a constant orgasm by cruel machinery and a steady flow of specially tailored drugs, you start to smile uncontrollably.  True, you're utterly incapable of thinking by this point, but your body and mind are too pleased with the situation not to grin.  The situation in the corner of the scene repeats over and over as your daughters enjoy your 'milk'.  After they've had their fill they fall on each other, filling the room with orgiastic moans as any sense of order is blown away by a tide of female lust.\n\n", false);
 	
 	//// Chance of tamani saving you
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00058] < 4) {
+	if (flags[kFLAGS.TAMANI_DAUGHTER_CHAIR_COUNTER] < 4) {
 		outputText("You lose consciousness a few hours into the ordeal, still cumming with no sign of stopping, your body sustained by the fluids pouring into your backside.  The dreams are a constant barrage of sexual situations, flitting between various incongruous orgasmic acts.  Were you capable of comprehending your situation, you probably wouldn't even want to wake up.  Alas, the pleasure does end, and you settle into a deeper slumber.  A gentle rocking and the exhaustion of your crotch keep you snoring soundly for hours.\n\n", false);
 		
 		outputText("When you do wake, you find yourself alone in a forest clearing, with a note taped to your face:\n\n", false);
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00058] == 0) {
+		if (flags[kFLAGS.TAMANI_DAUGHTER_CHAIR_COUNTER] == 0) {
 			outputText("<i>   " + player.mf("Husband","Baby") + ",\n", false);
 			outputText("      Do you have any idea how hard it is for Tamani to drag you out here all by herself?  If you weren't my favorite breeder, I would've let my daughters keep you.  Next time stand up to the little twats or Tamani might look the other way while you're being milked!\n\n", false);
 			outputText("   Hugs & cums,\n", false);
@@ -840,7 +840,7 @@ private function tamaniDaughtersCombatLossDrain():void {
 		doNext(tamaniDaughtersBadEndChoice);
 	}
 	//Needz variable to track how many times PC has been 'chaired'
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00058]++;
+	flags[kFLAGS.TAMANI_DAUGHTER_CHAIR_COUNTER]++;
 	//moar daughters, increment 'times milked' by the daughters.
 	knockUpDaughters();
 	//boost cum production slightly.

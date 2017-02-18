@@ -86,7 +86,7 @@ package classes.Scenes.NPCs
 //Ceraph's fluids boost PC libido and sensitivity massively either way.
 		internal function maleFuckCeraphsPussy():void
 		{
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291]++;
+			flags[kFLAGS.CERAPH_BEATEN_AND_RAPED_COUNTER]++;
 			spriteSelect(7);
 			clearOutput();
 			//UBER-Fullbodypenetration
@@ -201,7 +201,7 @@ package classes.Scenes.NPCs
 //[Female] Ride 'Dat Cawk
 		internal function rideCeraphsCockLikeaBAWSSexclamation11eleven():void
 		{
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291]++;
+			flags[kFLAGS.CERAPH_BEATEN_AND_RAPED_COUNTER]++;
 			player.slimeFeed();
 			spriteSelect(7);
 			clearOutput();
@@ -644,7 +644,7 @@ package classes.Scenes.NPCs
 				monster.HP = 2;
 				if (player.lust < 34) player.lust = 34;
 			}
-			else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291] >= 4) {
+			else if (flags[kFLAGS.CERAPH_BEATEN_AND_RAPED_COUNTER] >= 4) {
 				ceraphFollowerScene.submissiveCeraphOffer();
 				return;
 			}
@@ -686,7 +686,7 @@ package classes.Scenes.NPCs
 		public function loseFUCKME():void
 		{
 			//Reset rape count if lost
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291] = 0;
+			flags[kFLAGS.CERAPH_BEATEN_AND_RAPED_COUNTER] = 0;
 			spriteSelect(7);
 			if (flags[kFLAGS.PC_FETISH] == 0) loseToCeraphAndGetPiercingsInEarsOrSomethingSomehow();
 			else if (flags[kFLAGS.PC_FETISH] == 1) loseToCeraphAnGetPierced2();
@@ -746,7 +746,7 @@ package classes.Scenes.NPCs
 //(REQ's – HUGE WANG, Exgartuan or Jojo corruption, and !centaur)
 		private function hugeCorruptionForceFuckCeraph():void
 		{
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291] += 2;
+			flags[kFLAGS.CERAPH_BEATEN_AND_RAPED_COUNTER] += 2;
 			clearOutput();
 			spriteSelect(7);
 			var x:Number = player.biggestCockIndex();
@@ -1069,7 +1069,7 @@ package classes.Scenes.NPCs
 			outputText("of those.  Now just hold still.</i>\"\n\n", false);
 
 			outputText("Do you let her take it?", false);
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00217] = choice;
+			flags[kFLAGS.CERAPH_GENITAL_STEAL_CHOICE] = choice;
 			doYesNo(giveUpYourBallsOrWhateverForLessFetishes, bailBeforeCeraphYoinksYourNads);
 		}
 
@@ -1090,7 +1090,7 @@ package classes.Scenes.NPCs
 			var x:Number = 0;
 			outputText("You hold still, dreading this moment but knowing all-too well that you'd have to give something up to get her touch out of your mind.  ", false);
 			//(Cock)
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00217] == 1) {
+			if (flags[kFLAGS.CERAPH_GENITAL_STEAL_CHOICE] == 1) {
 				//Pick a dick at random!
 				x = rand(player.cockTotal());
 				outputText("Ceraph's fingers feel unexpectedly hot as they brush your " + player.cockDescript(x) + ", as if she had just come out of a heated tub.  You don't have long to ponder that little detail as they pinch into a tight ring", false);
@@ -1112,11 +1112,11 @@ package classes.Scenes.NPCs
 				player.removeCock(x, 1);
 				//(-fetish, +cock-toy status +1)
 				flags[kFLAGS.PC_FETISH]--;
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218]++;
+				flags[kFLAGS.CERAPH_DICKS_OWNED]++;
 				dynStats("lib", -2, "sen", -2, "cor", 5);
 			}
 			//(Pussy)
-			else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00217] == 2) {
+			else if (flags[kFLAGS.CERAPH_GENITAL_STEAL_CHOICE] == 2) {
 				outputText("Ceraph's fingernails stab at your " + player.skinDesc + " painfully, dragging them in a circular motion around your vulva.  The pain of the action fades to a gentle, throbbing heat while her fingers go deeper, corkscrewing through your flesh.  A second later she pulls back, a featureless pillar of flesh wrapped in skin and sitting in her hand, topped with your " + player.vaginaDescript() + ".  The other end is capped with a strange, arcane mark, seemingly tattooed into the skin.  You glance down, expecting to find your groin ruined, but the spot your vagina once occupied is replaced with bare, unmarked skin.\n\n", false);
 
 				outputText("The demon slips a finger into her hand-held pussy, and you inexplicably moan, still feeling every sensation with perfect clarity.  She plays with it for a few more seconds, the gentle 'schlick-schlick-schlick' of her fingers carrying through the mountain air before she seems to tire of teasing you.\n\n", false);
@@ -1129,16 +1129,16 @@ package classes.Scenes.NPCs
 				player.orgasmGeneric();
 				dynStats("cor", 5);
 				flags[kFLAGS.PC_FETISH]--;
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219]++;
+				flags[kFLAGS.CERAPH_PUSSIES_OWNED]++;
 			}
 			//(Tits) 
 			else {
 				//Take da biggest titz!
 				x = player.biggestTitRow();
 				//Store nipplecuntz or milks
-				if (player.breastRows[x].fuckable) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00217] = 4;
-				else if (player.lactationQ() >= 100) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00217] = 5;
-				else flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00217] = 3;
+				if (player.breastRows[x].fuckable) flags[kFLAGS.CERAPH_GENITAL_STEAL_CHOICE] = 4;
+				else if (player.lactationQ() >= 100) flags[kFLAGS.CERAPH_GENITAL_STEAL_CHOICE] = 5;
+				else flags[kFLAGS.CERAPH_GENITAL_STEAL_CHOICE] = 3;
 				outputText("Ceraph bounces your " + player.breastDescript(x) + " in her hands, playing with them for just a few seconds before she digs her nails in and pulls.  Your tits stretch for a moment, pulled tight while Ceraph giggles cruelly.  Heat blooms inside your chest, vivid tingles radiating from Ceraph's fingertips deep inside you.  At last it peaks and with a deep 'POMF', your tit-flesh separates from your body.  You look closely at the departing bosom – where it once joined with your body, it's covered in healthy pink skin and intricate, arcane tattoos.  Meanwhile, ", false);
 				//More than 1 set of tits and not on bottom row?
 				if (x < player.breastRows.length - 1 && player.breastRows.length > 1) {
@@ -1168,8 +1168,8 @@ package classes.Scenes.NPCs
 				outputText("\n\n", false);
 
 				outputText("You gasp when Ceraph ", false);
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00217] == 3) outputText("rolls the nipples in her hands", false);
-				else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00217] == 4) outputText("pushes her fingertips inside the leaky nipple-cunts", false);
+				if (flags[kFLAGS.CERAPH_GENITAL_STEAL_CHOICE] == 3) outputText("rolls the nipples in her hands", false);
+				else if (flags[kFLAGS.CERAPH_GENITAL_STEAL_CHOICE] == 4) outputText("pushes her fingertips inside the leaky nipple-cunts", false);
 				else outputText("squeezes out a squirt of milk", false);
 				outputText(", going a little weak in the knees.  Ceraph laughs and lowers the bouncy orbs down between her legs, and you can feel every little bump and nodule of her corrupted cock as she tit-fucks herself on your disembodied breasts.\n\n", false);
 
@@ -1179,7 +1179,7 @@ package classes.Scenes.NPCs
 				//(-1 fetish, +1 tit toy status)
 				dynStats("lus", 20, "cor", 5);
 				flags[kFLAGS.PC_FETISH]--;
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220]++;
+				flags[kFLAGS.CERAPH_TITS_OWNED]++;
 			}
 			//Fix any gender mixmatches
 			player.genderCheck();
@@ -1204,18 +1204,18 @@ package classes.Scenes.NPCs
 			var choice:Number = 0;
 			var subChoice:Number = 0;
 			//dicks
-			temp = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218];
+			temp = flags[kFLAGS.CERAPH_DICKS_OWNED];
 			while (temp > 0) {
 				temp--;
 				choices[choices.length] = 1;
 			}
 			//pussies
-			temp = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219];
+			temp = flags[kFLAGS.CERAPH_PUSSIES_OWNED];
 			while (temp > 0) {
 				temp--;
 				choices[choices.length] = 2;
 			}
-			temp = flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220];
+			temp = flags[kFLAGS.CERAPH_TITS_OWNED];
 			while (temp > 0) {
 				temp--;
 				choices[choices.length] = 3;
@@ -1401,7 +1401,7 @@ package classes.Scenes.NPCs
 
 		internal function buttRapeCeraph():void
 		{
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291]++;
+			flags[kFLAGS.CERAPH_BEATEN_AND_RAPED_COUNTER]++;
 			spriteSelect(7);
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = 0;

@@ -17,19 +17,19 @@ public function bakeryuuuuuu():void {
 		easterBakeSale();
 		return;
 	}
-	if (rand(10) <= 1 && kGAMECLASS.shouldraFollower.followerShouldra() && player.gender > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] == 4) {
+	if (rand(10) <= 1 && kGAMECLASS.shouldraFollower.followerShouldra() && player.gender > 0 && flags[kFLAGS.MADDIE_STATUS] == 4) {
 		kGAMECLASS.shouldraFollower.shouldraBakeryIntro();
 		return;
 	}
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00243]++;
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00243] = Math.round(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00243]);
+	flags[kFLAGS.MINO_CHEF_BAKERY_PROC_COUNTER]++;
+	flags[kFLAGS.MINO_CHEF_BAKERY_PROC_COUNTER] = Math.round(flags[kFLAGS.MINO_CHEF_BAKERY_PROC_COUNTER]);
 	//Chef meetings
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00243] % 8 == 0) {
+	if (flags[kFLAGS.MADDIE_STATUS] == 0 && flags[kFLAGS.MINO_CHEF_BAKERY_PROC_COUNTER] % 8 == 0) {
 		telAdre.maddie.procMaddieOneIntro();
 		return;
 	}
 	//Maddie Epilogue trigger!
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] == 3) {
+	if (flags[kFLAGS.MADDIE_STATUS] == 3) {
 		telAdre.maddie.bakeryEpilogue();
 		return;
 	}
@@ -97,7 +97,7 @@ private function checkBakeryMenu():void {
 		addButton(8, "SpecialEclair", nomnomnom, "eclair", 10);
 	}
 	//Giant Cupcake
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] >= 4) {
+	if (flags[kFLAGS.MADDIE_STATUS] >= 4) {
 		outputText("Giant Chocolate Cupcake - 500 gems.\n", false);
 		addButton(9, "GiantCupcake", buySlutCake);
 	}
@@ -133,7 +133,7 @@ private function talkToBaker():void {
 	clearOutput();
 	outputText("The minotaur snorts as you approach him, but waves you into the kitchen.  \"<i>What?</i>\" he asks, patiently watching you.  \"<i>Want to hear about baking?");
 	//(Maddie 1 completed)
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] >= 4) outputText("  Or you want special order?");
+	if (flags[kFLAGS.MADDIE_STATUS] >= 4) outputText("  Or you want special order?");
 	outputText("</i>\"");
 	outputText("\n\nDespite his unrefined appearance and poor language ability, he seems eager to talk about his job.");
 

@@ -172,7 +172,16 @@ public function benoitOffspring():int
 
 public function benoitBigFamily():Boolean
 {
-	return benoitOffspring() >= 12; // I guess, 12 eggs is a good start (Stadler76)
+	// You need a bassy womb, ...
+	if (player.findPerk(PerkLib.BasiliskWomb) < 0)
+		return false;
+
+	// ... have laid at least 8 eggs by yourself ...
+	if (flags[kFLAGS.BENOIT_EGGS] < 8)
+		return false;
+
+	// ... and at least 15 eggs produced in total (You and/or Benoite)
+	return benoitOffspring() >= 15;
 }
 
 public function setBenoitShop(setButtonOnly:Boolean = false):void {
@@ -300,6 +309,11 @@ public function benoitIntro():void {
 
 	flags[kFLAGS.TIMES_IN_BENOITS]++;
 
+	if (flags[kFLAGS.CODEX_ENTRY_BASILISKS] <= 0) {
+		flags[kFLAGS.CODEX_ENTRY_BASILISKS] = 1;
+		outputText("\n\n<b>New codex entry unlocked: Basilisks!</b>")
+	}
+
 	menu();
 	//Core buttons
 	addButton(0, "Buy", benoitsBuyMenu);
@@ -347,10 +361,10 @@ public function benoitsBuyMenu():void {
 	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).value));
 	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).value));
 	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).value));
-	simpleChoices(flags[kFLAGS.BENOIT_1],createCallBackFunction(benoitTransactBuy,1),
-			flags[kFLAGS.BENOIT_2],createCallBackFunction(benoitTransactBuy,2),
-			flags[kFLAGS.BENOIT_3],createCallBackFunction(benoitTransactBuy,3),
-			"", null, "", null);
+	menu();
+	addButton(0, flags[kFLAGS.BENOIT_1], benoitTransactBuy, 1);
+	addButton(1, flags[kFLAGS.BENOIT_2], benoitTransactBuy, 2);
+	addButton(2, flags[kFLAGS.BENOIT_3], benoitTransactBuy, 3);
 	if (player.keyItemv1("Backpack") < 5) addButton(5, "Backpack", buyBackpack, null, null, null, "This backpack will allow you to carry more items.");
 	if (flags[kFLAGS.BENOIT_PISTOL_BOUGHT] <= 0) addButton(6, "Flintlock", buyFlintlock);
 	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0) addButton(7, "Alarm Clock", buyAlarmClock, null, null, null, "This mechanical clock looks like it was originally constructed by the Goblins before the corruption spreaded throughout Mareth.");
@@ -446,117 +460,76 @@ private function benoitSellAllTransact(totalItems:int, sellMod:int):void {
 }
 
 //All slots are reset each day.  Benoit buys items at 66% the rate Oswald does.  
-public function updateBenoitInventory():void {
+public function updateBenoitInventory():void
+{
+	var benoitSlot1Items:Array = [];
+	var benoitSlot2Items:Array = [];
+	var benoitSlot3Items:Array = [];
 	//Slot 1 Any one of the following: Incubus Draft, Minotaur Blood, Minotaur Cum, Equinuum, Black Pepper, Vitalitea, Scholar's Tea, Double Pepper
-	switch(rand(9)) {
-		case 0:
-			flags[kFLAGS.BENOIT_1] = consumables.INCUBID.id;
-			break;
-		case 1:
-			flags[kFLAGS.BENOIT_1] = consumables.MINOBLO.id;
-			break;
-		case 2:
-			flags[kFLAGS.BENOIT_1] = consumables.MINOCUM.id;
-			break;
-		case 3:
-			flags[kFLAGS.BENOIT_1] = consumables.EQUINUM.id;
-			break;
-		case 4:
-			flags[kFLAGS.BENOIT_1] = consumables.BLACKPP.id;
-			break;
-		case 5:
-			flags[kFLAGS.BENOIT_1] = consumables.SMART_T.id;
-			break;
-		case 6:
-			flags[kFLAGS.BENOIT_1] = consumables.VITAL_T.id;
-			break;
-		case 7:
-			flags[kFLAGS.BENOIT_1] = consumables.DBLPEPP.id;
-			break;
-		case 8:
-			if (rand(3) == 0) flags[kFLAGS.BENOIT_1] = consumables.PURHONY.id;
-			else flags[kFLAGS.BENOIT_1] = consumables.BEEHONY.id;
-			break;
-		default:
-	}
+	benoitSlot1Items = [
+		consumables.INCUBID.id,
+		consumables.MINOBLO.id,
+		consumables.MINOCUM.id,
+		consumables.EQUINUM.id,
+		consumables.BLACKPP.id,
+		consumables.SMART_T.id,
+		consumables.VITAL_T.id,
+		consumables.DBLPEPP.id,
+		consumables.REPTLUM.id,
+	];
+	benoitSlot1Items.push(rand(3) == 0 ? consumables.PURHONY.id : consumables.BEEHONY.id);
+	flags[kFLAGS.BENOIT_1] = randomChoice(benoitSlot1Items);
+
 	//If the player discarded a unique item, the first time they arrive at the Salvage Shop after a week has passed it will appear in Slot 1.
 	if (rand(10) == 0) {
 		flags[kFLAGS.BENOIT_1] = consumables.GODMEAD.id;
 	}
-	
-	//Slot 2 Any one of the following: Succubus Milk, Whisker Fruit, Wet Cloth, Golden Seed, LaBova, Snake Oil, Pink Gossamer, Black Gossamer
-	switch(rand(10)) {
-		case 0:
-			flags[kFLAGS.BENOIT_2] = consumables.SUCMILK.id;
-			break;
-		case 1:
-			flags[kFLAGS.BENOIT_2] = consumables.W_FRUIT.id;
-			break;
-		case 2:
-			flags[kFLAGS.BENOIT_2] = consumables.WETCLTH.id;
-			break;
-		case 3:
-			flags[kFLAGS.BENOIT_2] = consumables.GLDSEED.id;
-			break;
-		case 4:
-			flags[kFLAGS.BENOIT_2] = consumables.LABOVA_.id;
-			break;
-		case 5:
-			flags[kFLAGS.BENOIT_2] = consumables.SNAKOIL.id;
-			break;
-		case 6:
-			flags[kFLAGS.BENOIT_2] = consumables.S_GOSSR.id;
-			break;
-		case 7:
-			flags[kFLAGS.BENOIT_2] = consumables.HUMMUS_.id;
-			break;
-		case 8:
-			flags[kFLAGS.BENOIT_2] = consumables.PIGTRUF.id;
-			break;
-		case 9:
-			flags[kFLAGS.BENOIT_2] = consumables.B_GOSSR.id;
-			break;
-		default:
-	}
-	if (rand(100) < 4) {
+
+	if (rand(100) >= 4) {
+		//Slot 2 Any one of the following: Succubus Milk, Whisker Fruit, Wet Cloth, Golden Seed, LaBova, Snake Oil, Pink Gossamer, Black Gossamer
+		benoitSlot2Items = [
+			consumables.SUCMILK.id,
+			consumables.W_FRUIT.id,
+			consumables.WETCLTH.id,
+			consumables.GLDSEED.id,
+			consumables.LABOVA_.id,
+			consumables.SNAKOIL.id,
+			consumables.S_GOSSR.id,
+			consumables.HUMMUS_.id,
+			consumables.PIGTRUF.id,
+			consumables.B_GOSSR.id,
+		];
+	} else {
 		//There is a 4% chance the following items will appear in Slot 2: Bimbo Liqueur, Large Pink Egg, Large Blue Egg, Bro Brew, T. Shark Tooth.
-		temp = rand(5);
-		if (temp == 0) flags[kFLAGS.BENOIT_2] = consumables.BIMBOLQ.id;
-		else if (temp == 1) flags[kFLAGS.BENOIT_2] = consumables.L_PNKEG.id;
-		else if (temp == 2) flags[kFLAGS.BENOIT_2] = consumables.L_BLUEG.id;
-		else if (temp == 3) flags[kFLAGS.BENOIT_2] = consumables.BROBREW.id;
-		else flags[kFLAGS.BENOIT_2] = consumables.TSTOOTH.id;
+		benoitSlot2Items = [
+			consumables.BIMBOLQ.id,
+			consumables.L_PNKEG.id,
+			consumables.L_BLUEG.id,
+			consumables.BROBREW.id,
+			consumables.TSTOOTH.id,
+		];
 	}
+	flags[kFLAGS.BENOIT_2] = randomChoice(benoitSlot2Items);
 	
-	//Slot 3 Any one of the following: Maid's Clothes, Wizard Robes, Tough Silk, Slutty Swimwear, Goo Chunk, Chitin Plate
-	switch(rand(6)) {
-		case 0:
-			flags[kFLAGS.BENOIT_3] = armors.W_ROBES.id;
-			break;
-		case 1:
-			flags[kFLAGS.BENOIT_3] = armors.S_SWMWR.id;
-			break;
-		case 2:
-			flags[kFLAGS.BENOIT_3] = useables.GREENGL.id;
-			break;
-		case 3:
-			flags[kFLAGS.BENOIT_3] = useables.B_CHITN.id;
-			break;
-		case 4:
-			flags[kFLAGS.BENOIT_3] = useables.T_SSILK.id;
-			break;
-		case 5:
-			flags[kFLAGS.BENOIT_3] = useables.D_SCALE.id;
-			break;
-		default:
-	}
-	if (rand(100) < 10) {
+	if (rand(100) >= 10) {
+		//Slot 3 Any one of the following: Maid's Clothes, Wizard Robes, Tough Silk, Slutty Swimwear, Goo Chunk, Chitin Plate
+		benoitSlot3Items = [
+			armors.W_ROBES.id,
+			armors.S_SWMWR.id,
+			useables.GREENGL.id,
+			useables.B_CHITN.id,
+			useables.T_SSILK.id,
+			useables.D_SCALE.id,
+		];
+	} else {
 		//There is a 10% chance the following items will appear in Slot 3: Bondage Straps, Nurse Outfit, Red Party Dress
-		temp = rand(3);
-		if (temp == 0) flags[kFLAGS.BENOIT_3] = armors.BONSTRP.id;
-		else if (temp == 1) flags[kFLAGS.BENOIT_3] = consumables.W_PDDNG.id;
-		else flags[kFLAGS.BENOIT_3] = armors.NURSECL.id;
+		benoitSlot3Items = [
+			armors.BONSTRP.id,
+			armors.NURSECL.id,
+			consumables.W_PDDNG.id,
+		];
 	}
+	flags[kFLAGS.BENOIT_3] = randomChoice(benoitSlot3Items);
 	//Slot 4 Herbal Contraceptive - 30 gems.  Only becomes available through PC fem path.  Reduces fertility by 90% for a week if taken.
 }
 
@@ -1359,52 +1332,47 @@ public function equipUnequipHairPin():void
 private function convertToBassyEyes():void
 {
 	var eyesGranted:int = flags[kFLAGS.BENOIT_BASIL_EYES_GRANTED] + 1;
-	var benoitE:String = benoitMF("Benoit", "Benoite");
-	var benoit_heshe:String = benoitMF("he", "she");
-	var benoit_HeShe:String = benoitMF("He", "She");
-	var benoit_hisher:String = benoitMF("his", "her");
-	var benoit_himher:String = benoitMF("him", "her");
 	clearOutput();
 	if (eyesGranted <= 1) { // First time
-		outputText("You tell " + benoitE + " that you've weighed up the pros and cons and that you want to become more of a basilisk. "
-		          + benoit_HeShe + " nods as " + benoit_heshe + " feels " + benoit_hisher + " way across the counter before rummaging about underneath.");
+		outputText("You tell [benoit name] that you've weighed up the pros and cons and that you want to become more of a basilisk. [benoit Ey]"
+		          +" nods as [benoit ey] feels [benoit eir] way across the counter before rummaging about underneath.");
 		outputText("\n\n\"<i>I 'ave found a way to transform your eyes, but I 'ave no idea if it will even work."
 		          +" Ze one oo told me about zis was insistent zat ze recipe relies on you being a basilisk enough already.</i>\"");
-		outputText("\n\nAs the blind basilisk begins to pull out bottle after bottle from under the counter, you wonder what " + benoit_heshe + " means.");
-		outputText("\n\n\"<i> 'Opefully, you 'aving birthed so many will be enough.</i>\" " + benoit_HeShe + " mutters as " + benoit_heshe + " pulls out a large bowl. "
-		          + benoit_HeShe + " begins to sloppily pour several measures from the bottles into the bowl, stirring it now and then with a wooden spoon."
-		          +" The mixture seems to be a flat matte grey when " + benoit_heshe + " stops. Placing " + benoit_hisher + " palm over the bowl "
-		          + benoit_heshe + " cuts it open with a claw, hissing at the pain as droplets of blood fall in with a small splash. "
-		          + benoit_HeShe + " brings a finger to one of " + benoit_hisher + " milky eyes, wiping a tear drop from it before letting that slide down into the mixture too.");
-		outputText("\n\nAs " + benoitE + " goes to fetch a cloth to cover the cut, you watch in awe as the once matte mixture takes on a wet sheen, like an endless grey seeing pool."
+		outputText("\n\nAs the blind basilisk begins to pull out bottle after bottle from under the counter, you wonder what [benoit ey] means.");
+		outputText("\n\n\"<i> 'Opefully, you 'aving birthed so many will be enough.</i>\" [benoit ey] mutters as [benoit ey] pulls out a large bowl. "
+		          +"[benoit Ey] begins to sloppily pour several measures from the bottles into the bowl, stirring it now and then with a wooden spoon."
+		          +" The mixture seems to be a flat matte grey when [benoit ey] stops. Placing [benoit eir] palm over the bowl "
+		          +"[benoit ey] cuts it open with a claw, hissing at the pain as droplets of blood fall in with a small splash. "
+		          +"[benoit Ey] brings a finger to one of [benoit eir] milky eyes, wiping a tear drop from it before letting that slide down into the mixture too.");
+		outputText("\n\nAs [benoit name] goes to fetch a cloth to cover the cut, you watch in awe as the once matte mixture takes on a wet sheen, like an endless grey seeing pool."
 		          +" It reminds you of the eyes of the basilisks in the mountains and flinch away before realising how silly that is.");
-		outputText("\n\n\"<i>Are you going to drink it zen? Or am I to close my shop all day for nuzzing?</i>\" " + benoitE + " says, startling you,"
+		outputText("\n\n\"<i>Are you going to drink it zen? Or am I to close my shop all day for nuzzing?</i>\" [benoit name] says, startling you,"
 		          +" having not noticed the blind basilisk return, being that you were so fixated on the mixture.");
 		outputText("\n\nWith a swift nod you grab the bowl, draining it before realising your non-verbal response. You groan,"
 		          +" the mixture thick on your tongue though not tasting overly foul. Your eyelids feel heavy, like they were made of stone."
-		          +" You tell " + benoitE + " you think you need to rest for a moment, the basilisk now hurrying you to a corner of store room where a pile of fabrics are. "
-		          + benoit_HeShe + " helps you onto them as you lay back and your eyes close.");
+		          +" You tell [benoit name] you think you need to rest for a moment, the basilisk now hurrying you to a corner of store room where a pile of fabrics are. "
+		          +"[benoit Ey] helps you onto them as you lay back and your eyes close.");
 		doNext(convertToBassyEyesPageTwo);
 		return;
 	} else {
-		outputText("You tell " + benoitE + ", that you've lost the basilisk eyes and ask " + benoit_himher + ", if "
-		          + benoit_heshe + " could grant them to you again.");
+		outputText("You tell [benoit name], that you've lost the basilisk eyes and ask [benoit em], if "
+		          +"[benoit ey] could grant them to you again.");
 		if (eyesGranted == 2) { // Second time
-			outputText("\n\n" + benoitE + " says: \"<i>Oh, you’ve lost zem?"
+			outputText("\n\n[benoit name] says: \"<i>Oh, you’ve lost zem?"
 			          +" Not what I expected to hear today, but very well [name]. I shall make ze potion...</i>\" ");
 		} else if (eyesGranted >= 3 && eyesGranted < 6) { // Third time and later
-			outputText("\n\n" + benoitE + " says: \"<i>You’ve lost zem again?"
+			outputText("\n\n[benoit name] says: \"<i>You’ve lost zem again?"
 			          +" Not what I expected to hear today, but very well [name]. I shall make ze potion...</i>\" ");
 		} else /*if (eyesGranted >= 6)*/ { // Sixth time and later
-			outputText("\n\n" + benoitE + " says: \"<i>You’ve lost zem again?"
+			outputText("\n\n[benoit name] says: \"<i>You’ve lost zem again?"
 			          +" You should be more careful not to lose zem so often [name]!</i>\" ");
 		}
-		outputText(benoitE + " pads over to the section of the counter, pulling out bottles again");
-		if (eyesGranted >= 6) outputText(", grumbling as " + benoit_heshe + " does");
-		outputText(".\n\"<i>Here we go... For ze " + num2Text2(eyesGranted) + " time</i>\", " + benoit_heshe + " mumbles, though you can tell, " + benoit_heshe + "'s not mad");
+		outputText("[benoit name] pads over to the section of the counter, pulling out bottles again");
+		if (eyesGranted >= 6) outputText(", grumbling as [benoit ey] does");
+		outputText(".\n\"<i>Here we go... For ze " + num2Text2(eyesGranted) + " time</i>\", [benoit ey] mumbles, though you can tell, [benoit ey]'s not mad");
 		outputText(eyesGranted < 6 ? "." : ", simply tired of making the potion so often. Maybe you should be a bit more careful in the future?");
 		outputText("\n\nWithin minutes a bowl is slid to you, a familiar grey mixture sloshing within. You drain the bowl and move to lay down.");
-		outputText("\n\nWhen you wake you open your eyes slowly, waiting to adjust. You thank " + benoitE + " for " + benoit_hisher + " help with a small kiss on the snout"
+		outputText("\n\nWhen you wake you open your eyes slowly, waiting to adjust. You thank [benoit name] for [benoit eir] help with a small kiss on the snout"
 		          +" before leaving, once again feeling the compulsion to look deep into the grey orbs of basilisks fade as you catch your reflection in the mirror.");
 	}
 	convertToBassyEyesFinal();
@@ -1412,26 +1380,20 @@ private function convertToBassyEyes():void
 
 private function convertToBassyEyesPageTwo():void
 {
-	var benoitE:String = benoitMF("Benoit", "Benoite");
-	var benoit_heshe:String = benoitMF("he", "she");
-	var benoit_HeShe:String = benoitMF("He", "She");
-	var benoit_hisher:String = benoitMF("his", "her");
-	var benoit_HisHer:String = benoitMF("His", "Her");
-	var benoit_hishers:String = benoitMF("his", "hers");
 	clearOutput();
-	outputText("When you wake, you open your eyes and cry out, quickly closing them again. Gods it's bright! " + benoitE + " rushes over to you and places a hand on your shoulder.");
-	outputText("\n\n\"<i>What iz it? Did somesing 'appen? You're not 'urt are you?</i>\" " + benoit_HeShe + " says in an increasing worry. You put your hand to "
-	          + benoit_hishers + " and say that you're fine, everything was just a little bright. You open your eyes again, this time slowly, letting your eyes adjust."
-	          +" You ask the basilisk if " + benoit_heshe + " could get you a mirror, curious if the potion has worked. "
-	          + benoit_HeShe + " rushes off with a nod and comes back with a small hand mirror.");
+	outputText("When you wake, you open your eyes and cry out, quickly closing them again. Gods it's bright! [benoit name] rushes over to you and places a hand on your shoulder.");
+	outputText("\n\n\"<i>What iz it? Did somesing 'appen? You're not 'urt are you?</i>\" [benoit ey] says in an increasing worry. You put your hand to "
+	          +"[benoit eirs] and say that you're fine, everything was just a little bright. You open your eyes again, this time slowly, letting your eyes adjust."
+	          +" You ask the basilisk if [benoit ey] could get you a mirror, curious if the potion has worked. "
+	          +"[benoit Ey] rushes off with a nod and comes back with a small hand mirror.");
 	outputText("\n\n\"<i>Well?</i>\"");
 	outputText("\n\nYour eyes widen as you look in the mirror, the grey reptilian orbs staring back at you catching you off guard. They're absolutely mesmerising,"
 	          +" the swirling greys and wet sheen parted by a thin black slit of a pupil. While you feel you could look into their depths forever,"
 	          +" you don't feel any kind of compulsion like when you look into other basilisk's eyes. Somehow you think you'll be immune to their gaze from now on,"
 	          +" though it does make sense. After all, why would a basilisk ever try to use their gaze on one another?");
-	outputText("\n\nYou smile and put down the mirror, sharing that it worked and thanking " + benoitE + " with a kiss on the tip of " + benoit_hisher + " scaled snout. "
-	          + benoit_HisHer + " scales colour a deeper grey-green, waving a hand in a nonchalant gesture.");
-	outputText("\n\n\"<i>It was nussing, a gift from me to you, for all you've done.</i>\" " + benoit_HeShe + " says shyly before returning to a more normal business like demeanor."
+	outputText("\n\nYou smile and put down the mirror, sharing that it worked and thanking [benoit name] with a kiss on the tip of [benoit eir] scaled snout. "
+	          +"[benoit Eir] scales colour a deeper grey-green, waving a hand in a nonchalant gesture.");
+	outputText("\n\n\"<i>It was nussing, a gift from me to you, for all you've done.</i>\" [benoit ey] says shyly before returning to a more normal business like demeanor."
 	          +" You are subsequently shoo’ed from the store, though not without a sticky but loving lick to the cheek from the basilisk.");
 	convertToBassyEyesFinal();
 }

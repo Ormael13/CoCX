@@ -2735,7 +2735,7 @@ private function forcedSheilaOral(dick:Boolean = true):void {
 		
 		outputText("\n\n\"<i>You are awful at this,</i>\" you gripe, sitting heavily on her head.  A muffled complaint comes from under you, but you pay it no mind.  \"<i>No boy parts, tail too stubby to insert... and now no oral skills either.  Seriously, what are you good for except taking the dick and making babies?  Why don't you just stay home with your legs open and hold out a begging bowl?");
 		//[(PC has met hellhound master)
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141] > 0) outputText("  I know a nice boy in the mountains who keeps dogs, and I'm sure he'd love to have a womb like yours for their seed.  By this time tomorrow, you could have a cock in both holes, filling you with hellhound babies since you can't please a person.");
+		if (flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] > 0) outputText("  I know a nice boy in the mountains who keeps dogs, and I'm sure he'd love to have a womb like yours for their seed.  By this time tomorrow, you could have a cock in both holes, filling you with hellhound babies since you can't please a person.");
 		outputText("</i>\"");
 		
 		outputText("\n\nYou can feel her face heating up under your [butt] as she flushes with shame; seems like you struck a nerve.  You ");

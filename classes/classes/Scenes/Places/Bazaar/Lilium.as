@@ -24,7 +24,7 @@
 public function LiliumText(output:Boolean = false):Function {
 	if (output) {
 		//Before paying:
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00267] == 0) outputText("\n\nYou can see a pale, scantily clad demon woman leaning casually against the wall of a building.", false);
+		if (flags[kFLAGS.LILIUM_TIMES_TALKED] == 0) outputText("\n\nYou can see a pale, scantily clad demon woman leaning casually against the wall of a building.", false);
 		//After paying:
 		else outputText("\n\nYou can see Lilium standing in her usual spot.", false);
 	}
@@ -37,7 +37,7 @@ private function approachLilium():void {
 	spriteSelect(93);
 	var pay:Function = null;
 	//#########FIRST TIME INTRODUCTION#########
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00267] == 0) {
+	if (flags[kFLAGS.LILIUM_TIMES_TALKED] == 0) {
 		outputText("As you approach the demon woman, her gaze shifts to you, and she runs her eyes down your body, scrutinizing you.  You respond in kind, taking in her form.  Two nearly foot-long horns grow up and out of her forehead, one of which is adorned with a shiny, silver band.  Her dark hair spills across her bare shoulders in loose coils and her black lipstick and heavy eyeshadow contrast with the paleness of her skin.  A black underbust corset wraps around her waist, leaving her breasts exposed, and long black gloves adorn her arms up to the shoulder.  She also wears a crinoline skirt with an opening at the front which reveals her smooth bare legs, a tail which wraps around her thigh like a garter, and her crotch, which sports an average cock curiously clad in a lacy sock in spite of her otherwise brazen exposure.\n\n", false);
 
 		outputText("Her assessment of you seems to be positive, as a smile crosses her face and she says, \"<i>You look like you've got more than a few gems to rub together; looking for a little fun?</i>\"\n\n", false);
@@ -74,7 +74,7 @@ private function payForLilium():void {
 		return;
 	}
 	//First time - Pay: 
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00267] == 0) {
+	if (flags[kFLAGS.LILIUM_TIMES_TALKED] == 0) {
 		outputText("\"<i>Sounds good,</i>\" you answer while fishing for your gem stash.\n\n", false);
 	
 		outputText("\"<i>I'm Lilium, by the way,</i>\" she states, as you give the woman your name and your payment in return.\n\n", false);
@@ -87,7 +87,7 @@ private function payForLilium():void {
 	else {
 		outputText("You toss the gems to the hooker and while she counts them, you wonder just what you want her to do this time.", false);
 	}	
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00267]++;
+	flags[kFLAGS.LILIUM_TIMES_TALKED]++;
 	player.gems -= 200;
 	statScreenRefresh();
 	//Sex Menu here
@@ -104,7 +104,7 @@ private function payForLilium():void {
 private function leaveLilium():void {
 	clearOutput();
 	spriteSelect(93);
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00267] == 0) outputText("\"<i>I'm deathly allergic to fun, unfortunately,</i>\" you reply before moving on to examine more of the bazaar.", false);
+	if (flags[kFLAGS.LILIUM_TIMES_TALKED] == 0) outputText("\"<i>I'm deathly allergic to fun, unfortunately,</i>\" you reply before moving on to examine more of the bazaar.", false);
 	else outputText("\"<i>Just passing through, and I thought I'd see how you were doing,</i>\" you reply, and leave Lilium alone at her post.", false);
 	doNext(bazaar.enterTheBazaar);
 }

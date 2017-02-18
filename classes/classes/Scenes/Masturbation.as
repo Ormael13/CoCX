@@ -992,7 +992,7 @@ package classes.Scenes {
 				//Special extras if lactating
 				if (player.biggestLactation() > 1 && player.biggestLactation() < 2)
 					outputText("Droplets of milk dribble from each nipple, spattering milk onto your " + player.legs() + " and crotch.  ");
-				else if (player.biggestLactation() < 3 && player.biggestLactation() >= 2)
+				else if (player.biggestLactation() >= 2 && player.biggestLactation() < 3)
 					outputText("Thin squirts of milk spray from each nipple, spattering milk onto your " + player.legs() + " and crotch.  ");
 				else if (player.biggestLactation() >= 3) outputText("A constant stream of milk drizzles from each teat, soaking your " + player.legs() + " and crotch.  ");
 			}
@@ -1823,6 +1823,7 @@ package classes.Scenes {
 				//WHYYYYY
 				cumType = 3;
 				titCum(player.cumQ());
+				titDrink();
 			}
 			if (player.armor == armors.GOOARMR) {
 				var valeriaFluids:int = 0;
@@ -1892,6 +1893,30 @@ package classes.Scenes {
 				if (player.armor == armors.GOOARMR) outputText("into the blue goo covering your body.  ");
 				else outputText("everywhere.  ");
 			}
+			
+		}
+		public  function titDrink():void {
+			if (player.biggestTitSize() > 5 && player.averageLactation() > 1) {
+				if (player.biggestLactation() > 3) {
+					outputText(" You lift one of your " + player.breastDescript(0) + " to your lips and gulp greedily from the torrent of precious milk. It splatters all over your face, as you nearly gag.\n");
+					player.refillHunger(50);
+					player.boostLactation(.05);
+					player.milked();
+				}
+				else if (player.biggestLactation() > 2) {
+					outputText(" You lift one of your " + player.breastDescript(0) + " to your lips and drink deeply of your bounty.  It floods your cheeks with its creamy flavor, and you greedily gulp it down.\n");
+					player.refillHunger( (player.biggestLactation() - 2) * 30 + 20);
+					player.boostLactation(.05);
+					player.milked();
+				}
+				else if (player.biggestLactation() > 1) {
+					outputText(" You lift one of your " + player.breastDescript(0) + " to your lips and suck your bounty. You are gulping most of your milk feeling sweet creamy flavor.\n");
+					player.refillHunger( (player.biggestLactation() - 1) * 20);
+					player.boostLactation(.05);
+					player.milked();
+				}
+			}
+		
 		}
 		
 		//(D. Dildo) – a floppy pink dildo with aphrodisiac reservoir
@@ -2210,6 +2235,7 @@ package classes.Scenes {
 			}
 			//[Repeatable]
 			else {
+				flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY]++;
 				outputText("You quickly undress from your " + player.armorName + ", both of your mouths drooling in anticipation for one another. You're going to do some stretches so you can be more nimble with your tongue work. You stand straight and spread your leg apart before leaning back and sticking your " + player.vaginaDescript() + " out in front of you. After holding for a moment, you change positions, leaning your " + player.allBreastsDescript() + " forward and sticking your " + player.assDescript() + " out for all to see.  You alternate leaning back and forth; it looks like you're teasingly thrusting at some unknown creature in the wilds, letting them know you're ready to get fucked. Soon, your spine is nice and limber - working on your legs is next. You stand up straight again, then lift and hold one knee up to your chest, pressing it against your " + player.allBreastsDescript() + ". This loosens it up a bit, but you know you can be more flexible than that. You support the underside of the leg with your hands and then lift the rest of your leg up, pointing your toes at the sky. You slowly take your hands off your leg, and are astonished that you're able to hold it up by itself.  Being naked in this position has allowed your funhole to be exposed to the elements, and you feel a cool breeze blow past your dripping wet sex.  It shakes and quivers, causing you to coo and moan at the sensation. Your leg feels as limber as your spine, so you switch to the other leg.  You immediately launch the other leg up next to your head, not needing the support of your hands to get your ankle behind your ear. You hold the pose for a few minutes, your cunt now drooling with pussy juice and eagerly waiting for you to kiss it. You soon put the leg down; now your back, legs and even your aching sluthole is stretched. You do some quick jaw stretches as you lay down on your bedroll.  Throwing one leg over your head, you easily bend your head down to your other pair of lips.\n\n");
 				
 				outputText("Your " + player.vaginaDescript() + " is now right in front of your face, and you can't help but give it a lick with your tongue. The feeling is amazing as you flick your tongue across your swollen " + player.clitDescript() + ". Juices leak from your moist hole, filling your mouth with the sweet taste of girlcum. You can feel you entire sex pulsing and throbbing around your tongue as you plumb the depths of your " + player.vaginaDescript() + ".  The vibrations from your moans and screams of pleasure cause the intense feelings to increase, making you a slave to your own needs. Your juices flow down your chin as you try to swallow every last drop. You crane your neck, giving you deeper access to your wanting honey pot. You can feel yourself tightening around your tongue as it rams into your pussy and soaking up all the juices as you slowly reach your peak. You lick and suck hard around your " + player.clitDescript() + ", using both your hands to spread your cunt farther open. You move your head in an up and down motion just like a cat when they groom themselves. Your lapping and tongue play continues until you can feel your body tense up, ready to cum.\n\n");

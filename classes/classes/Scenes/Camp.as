@@ -75,6 +75,11 @@ private function doCamp():void { //Only called by playerMenu
 	}
 	//make sure gameState is cleared if coming from combat or giacomo
 	getGame().inCombat = false;
+	
+	//There were some problems with buttons not being overwritten and bleeding into other scenes
+	//No scenes should involve a button from a previous scene with a camp scene in the middle
+	mainView.clearBottomButtons();
+	
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
 	//Prioritize clearing before setting room
 	if (player.findStatusEffect(StatusEffects.PostAkbalSubmission) >= 0) {
@@ -117,7 +122,7 @@ private function doCamp():void { //Only called by playerMenu
 		getGame().prison.prisonRoom(true);
 		return;
 	}
-	if (flags[kFLAGS.KAIZO_MODE] > 0) {
+	if (flags[kFLAGS.GRIMDARK_MODE] > 0) {
 		getGame().dungeons.move(getGame().dungeons._currentRoom);
 		return;
 	}
@@ -411,7 +416,7 @@ private function doCamp():void { //Only called by playerMenu
 		return;
 	}
 	//Amily + Urta freakout!
-	if (!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 0 && rand(10) == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] >= 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[kFLAGS.AMILY_NEED_TO_FREAK_ABOUT_URTA] == 1 && amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && !amilyScene.pregnancy.isPregnant) {
+	if (!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 0 && rand(10) == 0 && flags[kFLAGS.URTA_DRINK_FREQUENCY] >= 0 && flags[kFLAGS.URTA_BANNED_FROM_SCYLLA] == 0 && flags[kFLAGS.AMILY_NEED_TO_FREAK_ABOUT_URTA] == 1 && amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && !amilyScene.pregnancy.isPregnant) {
 		finter.amilyUrtaReaction();
 		hideMenus();
 		return;
@@ -446,13 +451,13 @@ private function doCamp():void { //Only called by playerMenu
 		return;
 	}
 	//Izma/Marble freakout - marble moves in
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00237] == 1) {
+	if (flags[kFLAGS.IZMA_MARBLE_FREAKOUT_STATUS] == 1) {
 		izmaScene.newMarbleMeetsIzma();
 		hideMenus();
 		return;
 	}
 	//Izma/Amily freakout - Amily moves in
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00236] == 1) {
+	if (flags[kFLAGS.IZMA_AMILY_FREAKOUT_STATUS] == 1) {
 		izmaScene.newAmilyMeetsIzma();
 		hideMenus();
 		return;
@@ -845,7 +850,7 @@ public function companionsCount():Number {
 public function followersCount():Number {
 	var counter:Number = 0;
 	if (emberScene.followerEmber()) counter++;
-	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
+	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1 || player.armor == armors.GOOARMR) counter++;
 	if (player.findStatusEffect(StatusEffects.PureCampJojo) >= 0) counter++;
 	if (player.findStatusEffect(StatusEffects.CampRathazul) >= 0) counter++;
 	if (followerShouldra()) counter++;
@@ -872,7 +877,7 @@ public function loversCount():Number {
 	if (arianScene.arianFollower()) counter++;
 	if (followerHel()) counter++;
 	//Izma!
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
+	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
 	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
 	if (player.findStatusEffect(StatusEffects.CampMarble) >= 0 && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
 	if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
@@ -967,7 +972,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 				izzyCreeps[izzyCreeps.length] = 2;
 			if (amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 2 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0)
 				izzyCreeps[izzyCreeps.length] = 3;
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0)
+			if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0)
 				izzyCreeps[izzyCreeps.length] = 4;
 			//Base choice - book
 			izzyCreeps[izzyCreeps.length] = 5;
@@ -1018,16 +1023,27 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 	}
 	//Izma
 	if (izmaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
-		outputText("Neatly laid near the base of your own is a worn bedroll belonging to Izma, your tigershark lover. It's a snug fit for her toned body, though it has some noticeable cuts and tears in the fabric. Close to her bed is her old trunk, almost as if she wants to have it at arms length if anyone tries to rob her in her sleep.\n\n", false);
-		temp = rand(3);
-		//Text 1} I
-		if (temp == 0) outputText("Izma's lazily sitting on the trunk beside her bedroll, reading one of the many books from inside it.  She smiles happily when your eyes linger on her, and you know full well she's only half-interested in it.", false);
-		//Text 2
-		else if (temp == 1) outputText("You notice Izma isn't around right now.  She's probably gone off to the nearby stream to get some water.  Never mind, she comes around from behind a rock, still dripping wet.", false);
-		//Text 3 
-		else outputText("Izma is lying on her back near her bedroll.  You wonder at first just why she isn't using her bed, but as you look closer you notice all the water pooled beneath her and the few droplets running down her arm, evidence that she's just returned from the stream.", false);
-		outputText("\n\n");
-		addButton(4, "Izma", izmaScene.izmaFollowerMenu);
+		if (flags[kFLAGS.IZMA_BROFIED] > 0) {
+			if (rand(6) == 0 && camp.vapulaSlave() && flags[kFLAGS.VAPULA_HAREM_FUCK] > 0) outputText("Izmael is standing a short distance away with an expression of unadulterated joy on his face, Vapula knelt in front of him and fellating him with noisy enthusiasm.  The shark morph dreamily opens his eyes to catch you staring, and proceeds to give you a huge grin and two solid thumbs up.");
+			else if (model.time.hours >= 6 && model.time.hours <= 12) outputText("You keep hearing the sound of objects hitting water followed by peals of male laughter coming from the stream. It sounds as if Izmael is throwing large rocks into the stream and finding immense gratification from the results. In fact, you’re pretty sure that’s exactly what he’s doing.");
+			else if (model.time.hours <= 16) outputText("Izmael is a short distance away doing squat thrusts, his body working like a piston, gleaming with sweat. He keeps bobbing his head up to see if anybody is watching him.");
+			else if (model.time.hours <= 19) outputText("Izmael is sat against his book chest, masturbating furiously without a care in the world. Eyes closed, both hands pumping his immense shaft, there is an expression of pure, childish joy on his face.");
+			else if (model.time.hours <= 22) outputText("Izmael has built a fire and is flopped down next to it. You can’t help but notice that he’s used several of his books for kindling. His eyes are locked on the flames, mesmerized by the dancing light and heat.");
+			else outputText("Izmael is currently on his bedroll, sleeping for the night.");
+			outputText("\n\n");
+			addButton(4, "Izmael", izmaScene.izmaelScene.izmaelMenu);
+		}
+		else {
+			outputText("Neatly laid near the base of your own is a worn bedroll belonging to Izma, your tigershark lover. It's a snug fit for her toned body, though it has some noticeable cuts and tears in the fabric. Close to her bed is her old trunk, almost as if she wants to have it at arms length if anyone tries to rob her in her sleep.\n\n");
+			switch(rand(3)) {
+				case 0: outputText("Izma's lazily sitting on the trunk beside her bedroll, reading one of the many books from inside it. She smiles happily when your eyes linger on her, and you know full well she's only half-interested in it."); break;
+				case 1: outputText("You notice Izma isn't around right now. She's probably gone off to the nearby stream to get some water. Never mind, she comes around from behind a rock, still dripping wet."); break;
+				case 2: outputText("Izma is lying on her back near her bedroll. You wonder at first just why she isn't using her bed, but as you look closer you notice all the water pooled beneath her and the few droplets running down her arm, evidence that she's just returned from the stream."); break;
+			}
+			outputText("\n\n");
+			addButton(4, "Izma", izmaScene.izmaFollowerMenu);
+		}
+
 	}
 	//Kiha!
 	if (followerKiha()) {
@@ -1211,7 +1227,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 		else if (rand(4) == 0) outputText("Sophie is sitting in her nest, idly brushing out her feathers.  Occasionally, she looks up from her work to give you a sultry wink and a come-hither gaze.\n\n");
 		else if (rand(3) == 0) outputText("Sophie is fussing around in her nest, straightening bits of straw and grass, trying to make it more comfortable.  After a few minutes, she flops down in the middle and reclines, apparently satisfied for the moment.\n\n");
 		else if (rand(2) == 0 || flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 0) {
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("Your platinum-blonde harpy, Sophie, is currently reading a book - a marked change from her bimbo-era behavior.  Occasionally, though, she glances up from the page and gives you a lusty look.  Some things never change....\n\n");
+			if (flags[kFLAGS.SOPHIE_BIMBO] > 0) outputText("Your platinum-blonde harpy, Sophie, is currently reading a book - a marked change from her bimbo-era behavior.  Occasionally, though, she glances up from the page and gives you a lusty look.  Some things never change....\n\n");
 			else outputText("Your pink harpy, Sophie, is currently reading a book.  She seems utterly absorbed in it, though you question how she obtained it.  Occasionally, though, she'll glance up from the pages to shoot you a lusty look.\n\n");
 		}
 		else {
@@ -1270,7 +1286,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("bed inside your cabin.");
 			else outputText("bedroll");
 			outputText(". It reads: \"<i>Come see me at the lake. I've finished your spider-silk ");
-			switch(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275]) {
+			switch(flags[kFLAGS.RATHAZUL_SILK_ARMOR_TYPE]) {
 				case 1: 
 					outputText("armor");
 					break;
@@ -1298,6 +1314,9 @@ public function campFollowers(descOnly:Boolean = false):void {
 	//Valeria
 	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1) {
 		addButton(6, "Valeria", valeria.valeriaFollower, null, null, null, "Visit Valeria the goo-girl. You can even take and wear her as goo armor if you like.");
+	}
+	if (player.armor == armors.GOOARMR) {
+		addButtonDisabled(6, "Valeria", "You are currently wearing Valeria. Unequip from your Inventory menu if you want to interact with her.");
 	}
 	addButton(14,"Back",playerMenu);
 }
@@ -1363,7 +1382,7 @@ private function swimInStream():void {
 		heliaJoinsStream = true;
 	}
 	//Marble!
-	if (rand(2) == 0 && camp.marbleFollower())
+	if (rand(2) == 0 && camp.marbleFollower() && flags[kFLAGS.MARBLE_PURIFICATION_STAGE] != 4)
 	{
 		outputText("\n\nYour cow-girl lover Marble strips herself naked and joins you. \"<i>Sweetie, you enjoy swimming, don't you?</i>\" she says.", false);
 		marbleJoinsStream = true;
@@ -2067,7 +2086,7 @@ public function places():Boolean {
 	if (player.findStatusEffect(StatusEffects.HairdresserMeeting) >= 0) addButton(8, "Salon", kGAMECLASS.mountain.salon.salonGreeting, null, null, null, "Visit the salon for hair services.");
 	
 	if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) addButton(10, "Tel'Adre", kGAMECLASS.telAdre.telAdreMenu, null, null, null, "Visit the city of Tel'Adre in desert, easily recognized by the massive tower.");
-	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(11, "Town Ruins", kGAMECLASS.amilyScene.exploreVillageRuin, null, null, null, "Visit the village ruins.");
+	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(11, "Town Ruins", kGAMECLASS.townRuins.exploreVillageRuin, null, null, null, "Visit the village ruins.");
 	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) addButton(12, "Prison", kGAMECLASS.prison.prisonIntro, false, null, null, "Return to the prison and continue your life as Elly's slave.");
 	if (debug) addButton(13, "Ingnam", kGAMECLASS.ingnam.returnToIngnam, null, null, null, "Return to Ingnam for debugging purposes. Night-time event weirdness might occur. You have been warned!");
 	
@@ -2606,10 +2625,8 @@ private function promptSaveUpdate():void {
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 6) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 7;
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 6) {
-			flags[kFLAGS.D1_OMNIBUS_KILLED] = flags[kFLAGS.CORRUPTED_GLADES_DESTROYED];
-			flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] = 0; //Reclaimed
-		}
+		flags[kFLAGS.D1_OMNIBUS_KILLED] = flags[kFLAGS.CORRUPTED_GLADES_DESTROYED];
+		flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] = 0; //Reclaimed
 		if (player.armor == armors.GOOARMR) flags[kFLAGS.VALERIA_FLUIDS] = 100;
 		doCamp();
 		return;
@@ -2653,7 +2670,7 @@ private function promptSaveUpdate():void {
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 11) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 12;
-		flags[kFLAGS.KAIZO_MODE] = 0;
+		flags[kFLAGS.GRIMDARK_MODE] = 0;
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 12) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 13;
@@ -2917,7 +2934,7 @@ private function updateAchievements():void {
 /*
 private function fixHistory():void {
 	outputText("<b>New history perks are available during creation.  Since this character was created before they were available, you may choose one now!</b>", true);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00418] = 2;
+	flags[kFLAGS.HISTORY_PERK_SELECTED] = 2;
 	menu();
 	doNext(10036);
 }

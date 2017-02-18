@@ -97,7 +97,7 @@ package classes.Scenes.Areas
 					faerie.encounterFaerie();
 					break;
 				case 1: //Tentacle beasts
-					if (player.gender > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00247] = 0;
+					if (player.gender > 0) flags[kFLAGS.GENDERLESS_CENTAUR_MADNESS] = 0;
 					//Tentacle avoidance chance due to dangerous plants
 					if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
 						trace("TENTACLE'S AVOIDED DUE TO BOOK!");

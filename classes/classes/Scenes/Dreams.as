@@ -82,7 +82,7 @@
 				choices[choices.length] = 11;
 			}
 			//Dom + Scylla
-			if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0) {
+			if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && flags[kFLAGS.DOMINIKA_STAGE] > 0) {
 				choices[choices.length] = 12;
 				choices[choices.length] = 12;
 				choices[choices.length] = 12;

@@ -78,18 +78,18 @@ public function scyllaBarSelectAction():void {
 		}
 		//All the following conditions are needed to see if she's fucking Urta
 		if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] < 3) return; //Minimum Scylla meetings for Urta to fuck her
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] == 1) return; //Together these are the 'No more Scylla' flag
+		if (flags[kFLAGS.URTA_BANNED_FROM_SCYLLA] == 1 && flags[kFLAGS.URTA_CONFRONTED_SCYLLA] == 1) return; //Together these are the 'No more Scylla' flag
 		if (!getGame().urta.urtaAtBar() || flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] > 0) return;
 		if (flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] > 0 || flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] <= 2 || flags[kFLAGS.TIMES_FUCKED_URTA] == 0) return;
 			//She only fucks Scylla if she's horny and you've fucked her enough to make her comfortable
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] == 0) { //Never fucked Scylla before
+		if (flags[kFLAGS.TIMES_CAUGHT_URTA_WITH_SCYLLA] == 0) { //Never fucked Scylla before
 			if (!getGame().urta.urtaDrunk()) return; //So she has to be drunk
 		}
 		else if (getGame().urta.urtaDrunk() && player.balls == 0) return; //Otherwise she has to be sober and you need to have balls (I'm not sure why, but it is so)
 		if (telAdre.katherine.needIntroductionFromScylla()) return;
 		if (rand(3) == 0) scyllaAction = SCYLLA_ACTION_FUCKING_URTA; //And after all that there's still just a 1/3 chance it will happen
 		//Yay, Foursomes! - unless you're Scylla special
-		if (rand(2) == 0 && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 3 && player.hasKeyItem("Opal Ring") < 0 && kGAMECLASS.urta.urtaAtBar() && player.longestCockLength() >= 8 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0) scyllaAction = SCYLLA_ACTION_FURRY_FOURSOME;
+		if (rand(2) == 0 && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 3 && player.hasKeyItem("Opal Ring") < 0 && kGAMECLASS.urta.urtaAtBar() && player.longestCockLength() >= 8 && flags[kFLAGS.TIMES_CAUGHT_URTA_WITH_SCYLLA] > 0) scyllaAction = SCYLLA_ACTION_FURRY_FOURSOME;
 	}
 }
 
@@ -1013,8 +1013,8 @@ private function addictionAdvantageMultiDickGreatTimeParty():void {
 	outputText(images.showImage("scylla-help-round-five-multi-cock-one"), false);
 	scyllaSprite();
 	//[First time]
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00144] == 0) {
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00144]++;
+	if (flags[kFLAGS.TIMES_ADVANTAGED_SCYLLA_MULTICOCKS] == 0) {
+		flags[kFLAGS.TIMES_ADVANTAGED_SCYLLA_MULTICOCKS]++;
 		outputText("You decide this is too good to pass by, so you step up to the ladies' room and knock crisply. Scylla opens the door curiously and smiles when she sees you. \"<i>Oh, " + player.short + ", what a pleasant surprise! We were just in the middle of a... the middle of...</i>\" she trails off, noticing the look of wicked relish on your face and you push the seven-foot girl aside, stepping inside confidently. Her eyes drop to your crotch and her stomach rumbles loudly as she stares at the over-stuffed mass of cocks straining against your " + player.armorName + ". Licking her lips without realizing it, the nun keeps trying to stay focused. \"<i>This... um... what was I...</i>?\" she mutters, unable to keep her thoughts together. Abylon regards you distrustfully but she bites her lips and rubs her legs together through her armor when your musk hits her. Pastie is too drunk to notice the sudden pressure in the room.\n\n", false);
 
 		outputText("No sense in playing coy when you're the drug in a room full of addicts. You use both hands to pull out your fleshy sheath of monstrous organs, letting them hang in the open air, twitching under the surveillance of three sets of horny eyes. \"<i>I brought enough for the whole class,</i>\" you grin, by way of invitation. The nun shakes her head, trying to clear her mind and failing, giggling involuntarily. The goblin trembles, her fists balled into pale knuckles.  \"<i>Can't fight nature,</i>\" she sneers, through clenched teeth. \"<i>Like mother, like daughter.</i>\" Pastie hiccups, trying to figure out what's happening.\n\n", false);

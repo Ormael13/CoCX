@@ -142,9 +142,9 @@ package classes
 				flags[kFLAGS.HYPER_HAPPY] = 0;
 				flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = 0;
 			}
-			if (flags[kFLAGS.KAIZO_MODE] > 0) {
-				addButtonDisabled(0, "Debug", "Nuh-uh. No cheating in Kaizo Mode!");
-				addButtonDisabled(1, "Difficulty", "You cannot change difficulty in Kaizo Mode. It's meant to be the hardest game mode ever.");
+			if (flags[kFLAGS.GRIMDARK_MODE] > 0) {
+				addButtonDisabled(0, "Debug", "Nuh-uh. No cheating in Grimdark Mode!");
+				addButtonDisabled(1, "Difficulty", "You cannot change difficulty in Grimdark Mode. It's meant to be the hardest game mode ever.");
 				debug = false;
 				flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
 				flags[kFLAGS.GAME_DIFFICULTY] = 3;
@@ -244,20 +244,17 @@ package classes
 		}
 
 		public function toggleSFW():void {
-			if (flags[kFLAGS.SFW_MODE] < 1) flags[kFLAGS.SFW_MODE] = 1;
-			else flags[kFLAGS.SFW_MODE] = 0;
+			flags[kFLAGS.SFW_MODE] ^= 1;
 			settingsScreenGameSettings();
 		}
 
 		public function toggleWatersports():void {
-			if (flags[kFLAGS.WATERSPORTS_ENABLED] < 1) flags[kFLAGS.WATERSPORTS_ENABLED] = 1;
-			else flags[kFLAGS.WATERSPORTS_ENABLED] = 0;
+			flags[kFLAGS.WATERSPORTS_ENABLED] ^= 1;
 			settingsScreenGameSettings();
 		}
 
 		public function toggleAutoLevel():void {
-			if (flags[kFLAGS.AUTO_LEVEL] < 1) flags[kFLAGS.AUTO_LEVEL] = 1;
-			else flags[kFLAGS.AUTO_LEVEL] = 0;
+			flags[kFLAGS.AUTO_LEVEL] ^= 1;
 			settingsScreenGameSettings();	
 		}
 
@@ -407,8 +404,8 @@ package classes
 			addButton(2, "Marble", setMainBackground, 2);
 			addButton(3, "Obsidian", setMainBackground, 3);
 			addButton(4, "Night Mode", setMainBackground, 4, null, null, "Good if you're playing at night to make the game easier on your eyes.");
-			if (flags[kFLAGS.KAIZO_BACKGROUND_UNLOCKED] > 0) addButton(5, "Kaizo", setMainBackground, 9);
-			else addButtonDisabled(5, "Kaizo", "Defeat Lethice once in Kaizo mode to unlock this background!");
+			if (flags[kFLAGS.GRIMDARK_BACKGROUND_UNLOCKED] > 0) addButton(5, "Grimdark", setMainBackground, 9);
+			else addButtonDisabled(5, "Grimdark", "Defeat Lethice once in Grimdark mode to unlock this background!");
 			addButton(14, "Back", settingsScreenInterfaceSettings);
 		}
 
@@ -507,8 +504,7 @@ package classes
 			settingsScreenInterfaceSettings();
 		}
 		public function toggleMeasurements():void {
-			if (flags[kFLAGS.USE_METRICS] < 1) flags[kFLAGS.USE_METRICS] = 1;
-			else flags[kFLAGS.USE_METRICS] = 0;
+			flags[kFLAGS.USE_METRICS] ^= 1;
 			settingsScreenInterfaceSettings();
 		}
 
