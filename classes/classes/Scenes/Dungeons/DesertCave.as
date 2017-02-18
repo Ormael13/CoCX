@@ -1914,7 +1914,7 @@ package classes.Scenes.Dungeons
 			
 			outputText("\n\nYou collapse as the dildos fade into nothing inside you, leaving you feeling empty to your very core.  \"<i>Enjoy yourself?</i>\" the spunk-covered leonine girl asks, dropping to her knees beside you, a hand resting on your heaving chest.  You give her a weak thumbs-up, and stagger to your [feet].");
 			//(DIsplay Options: Leave, Enter)
-			if (player.hasVagina()) player.orgasmVaginal(); else player.orgasmAnal();
+			player.orgasmVaginalAnal();
 			menu();
 			addButton(0,"Enter",openZeDoorToParadize);
 			addButton(4,"Leave",exitDungeon);
@@ -2649,7 +2649,7 @@ package classes.Scenes.Dungeons
 			if (!player.hasVagina()) outputText("[butt]");
 			else outputText("uterus");
 			outputText(".  She gives a contented sigh and slides out, followed by a noisily-spurting torrents of her virile seed.  Gods, even though she fucks you like this all the time, it feels as good as the first time she stuffed you full.  You're so lucky she's willing to give you so much after sharing with the coven all day!  You cradle your pregnant-feeling middle and giggle out a thank you, slumping back into the puddling spooge.  With heavy eyelids, you bid farewell to wakefulness, slumbering fitfully after your ordeal.");
-			if (!player.hasVagina()) player.orgasmAnal(); else player.orgasmVaginal();
+			player.orgasmVaginalAnal();
 			//[Next]
 			menu();
 			addButton(0,"Next",menLoseToQueenMotherVolI);

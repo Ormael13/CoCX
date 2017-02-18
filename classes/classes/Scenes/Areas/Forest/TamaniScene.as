@@ -437,12 +437,12 @@ internal function tamaniSexLetHer():void {
 			if (getGame().inCombat) {
 				outputText("You black out, exhausted from the ordeal.", false);
 				combat.cleanupAfterCombat();
-				if (player.hasVagina()) player.orgasmVaginal() else player.orgasmAnal(); 
+				player.orgasmVaginalAnal();
 			}
 			//(Noncombat end: 
 			else {
 				outputText("You lie there, recovering from the intense sex.  After a little while you manage to get up and redress, but the scent of horny goblin stays with you for hours.", false);
-				if (player.hasVagina()) player.orgasmVaginal() else player.orgasmAnal(); 
+				player.orgasmVaginalAnal();
 				dynStats("lus", +10);
 				doNext(camp.returnToCampUseOneHour);
 			}

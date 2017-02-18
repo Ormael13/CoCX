@@ -443,7 +443,7 @@ private function strapOnGargoyle():void {
 		
 		outputText("\n\nStill panting from the ordeal, you slowly drag yourself off of " + flags[kFLAGS.GAR_NAME] + "'s cock and roll onto your back, exhausted. By the time you've recovered enough to stumble to your feet, " + flags[kFLAGS.GAR_NAME] + " is fast asleep beside you, snoring cutely, her metal cock still standing straight up in the air.  You give her a gentle pat on the thigh and get dressed, leaving the gargoyle snoozing peacefully as you head back to camp.");
 	}
-	if (player.hasVagina()) player.orgasmVaginal(); else  player.orgasmAnal();
+	player.orgasmVaginalAnal();
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }

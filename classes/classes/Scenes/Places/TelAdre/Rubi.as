@@ -2502,7 +2502,7 @@ private function getFuckedByRubi():void {
 	outputText("Rubi doesn't stop there, however; [rubi ey] continues to assail your [vagOrAss], bringing you to several more miniature, body-shaking orgasms, until [rubi ey] just can't handle any more, and [rubi ey] pulls out, [rubi eir] cock still rather erect and looking cozy in its jacket-like foreskin.");
 
 	outputText("\n\nYou waggle a finger at [rubi em] hazily, and [rubi ey] climbs up onto the bed next to you.  You wrap your arms around [rubi em] and kiss [rubi em] passionately before pulling [rubi em] into a cuddling hug.  The two of you drift off into a short nap, contentedly wrapped up in each other's arms.");
-	if (!player.hasVagina()) player.orgasmAnal(); else player.orgasmVaginal();
+	player.orgasmVaginalAnal();
 	dynStats("sen", 2);
 	doNext(camp.returnToCampUseOneHour);
 }

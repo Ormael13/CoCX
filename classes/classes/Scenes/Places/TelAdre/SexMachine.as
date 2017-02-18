@@ -268,7 +268,7 @@ private function useTheSexMachine():void {
 		}
 	}
 	player.changeFatigue(10);
-	if (player.hasVagina()) player.orgasmVaginal(); else player.orgasmAnal();
+	player.orgasmVaginalAnal();
 	doNext(camp.returnToCampUseOneHour);
 }
 	}

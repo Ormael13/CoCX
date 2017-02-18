@@ -238,7 +238,7 @@ internal function loseToSatyr():void {
 	//reduce lust, slimefeed, pregnatize me cap'n
 	player.slimeFeed();
 	satyrPreggo();
-	if (player.hasVagina()) player.orgasmVaginal(); else player.orgasmAnal();
+	player.orgasmVaginalAnal();
 	dynStats("sen", 3);
 	if (player.cor < 50) dynStats("cor", 1);
 	combat.cleanupAfterCombat();
@@ -413,7 +413,7 @@ private function willinglyBoneSatyr():void {
 	outputText("\n\nYou watch him as he goes, then manage to force yourself back to your feet and stagger off, lest something far less hospitable find you here.");
 	//slimefeed, reduce lust, impregnational geographic
 	player.slimeFeed();
-	if (!player.hasVagina()) player.orgasmAnal(); else player.orgasmVaginal();
+	player.orgasmVaginalAnal();
 	satyrPreggo();
 	doNext(camp.returnToCampUseOneHour);
 }

@@ -708,7 +708,7 @@ package classes.Scenes.Dungeons.D3
 			outputText(". You only barely keep your wits about you enough to push her back down before she can force her knot inside you, though you’re treated to a veritable waterfall of white spunk pouring out of your well-bred hole instead.");
 			outputText("\n\n<i>“I can see why they call you ‘Champion,’”</i> the demon purrs as her spunk-slathered red prick flops against her belly. <i>“Maybe after our queen beats you down, I’ll come visit you in the breaking tanks... I could always use another eager little broodmare.”</i>");
 			outputText("\n\nYou shove the demoness away, suddenly reminded of her true nature. At least for now, you’re sated. Confident in your readiness, you advance on Lethice.");
-			if (player.hasVagina()) player.orgasmVaginal(); else player.orgasmAnal();
+			player.orgasmVaginalAnal();
 			beginPhase3(true);
 		}
 		
