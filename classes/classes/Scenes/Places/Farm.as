@@ -850,7 +850,6 @@ public function getMilked():void {
 	if (player.statusEffectv1(StatusEffects.LactationEndurance) < 1.5) player.addStatusValue(StatusEffects.LactationEndurance,1,.05);
 	player.addStatusValue(StatusEffects.LactationEndurance,1,.05);
 	player.createStatusEffect(StatusEffects.Milked,8,0,0,0);
-	player.orgasmTits(false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1129,7 +1128,7 @@ public function cockPumping():void {
 		outputText("\n\nYou go", false);
 	}
 	outputText(" on your way, whistling happily and feeling like taking a nap.", false);
-	player.orgasmDick();
+	player.orgasm();
 	doNext(camp.returnToCampUseOneHour);
 }
 

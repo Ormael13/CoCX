@@ -186,7 +186,7 @@
 			
 			outputText("\n\n<b>(Key Item Acquired: Laybans!)</b>");
 			flags[kFLAGS.D3_MIRRORS_SHATTERED] = 1;
-			player.orgasmGeneric();
+			player.orgasm();
 			combat.cleanupAfterCombat(getGame().dungeons.resumeFromFight);
 		}
 		

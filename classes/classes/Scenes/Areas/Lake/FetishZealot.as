@@ -133,7 +133,7 @@
 		{
 			if (pcCameWorms){
 				outputText("\n\nThe fetish cultist ignores the perverse display and continues on as if nothing had happened...", false);
-				player.orgasmGeneric();
+				player.orgasm();
 				doNext(game.lake.fetishZealotScene.zealotLossRape);
 			} else {
 				game.lake.fetishZealotScene.zealotLossRape();

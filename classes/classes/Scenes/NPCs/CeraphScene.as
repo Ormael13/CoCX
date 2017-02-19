@@ -191,7 +191,7 @@ package classes.Scenes.NPCs
 
 				outputText("As you leave, you don't bother to spare a glance at the confused omnibus; she isn't worth your time.", false);
 			}
-			player.orgasmDick();
+			player.orgasm();
 			dynStats("lib", 3, "sen", 3, "cor", 1);
 			if (getGame().inCombat)
 				combat.cleanupAfterCombat();
@@ -247,7 +247,7 @@ package classes.Scenes.NPCs
 			else outputText("You bend over and rub your belly while whispering in her ear, \"<i>Like mother, like child.</i>\"\n\n", false);
 			outputText("As you leave, you don't bother to spare a glance at the confused omnibus; she isn't worth your time.\n\n", false);
 			player.cuntChange(monster.cockArea(0), true);
-			player.orgasmVaginal();
+			player.orgasm();
 			dynStats("lib", 3, "sen", 3,"cor", 1);
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
 			if (getGame().inCombat)
@@ -807,7 +807,7 @@ package classes.Scenes.NPCs
 			outputText("Ceraph gasps, \"<i>Ohhhhkay.  That felt goooooooood.</i>\"  She gathers some of your sperm from her space and swallows it with a smile before she offers, \"<i>You've shown me a good time, mortal.", false);
 			if (!getGame().inCombat) {
 				outputText("</i>\"", false);
-				player.orgasmGeneric();
+				player.orgasm();
 				dynStats("lib", 3, "sen", 3, "cor", 1);
 				doNext(camp.returnToCampUseOneHour);
 				return;
@@ -824,7 +824,7 @@ package classes.Scenes.NPCs
 			outputText("(Do you accept Ceraph's Offer?)", false);
 			//Y/N – remove 1 fetish level or +10 gems
 			doYesNo(ceraphsNiceOffer, combat.cleanupAfterCombat);
-			player.orgasmGeneric();
+			player.orgasm();
 			dynStats("lib", 3, "sen", 3, "cor", 1);
 		}
 
@@ -1126,7 +1126,7 @@ package classes.Scenes.NPCs
 				outputText("You work your jaw in consternation, trying to dredge up a response or stop her, but before you can do anything, she pushes your old " + player.vaginaDescript(0) + " down on her throbbing demon-shaft.  It knocks the strength out of your " + player.legs() + ", and you lie there moaning while Ceraph prances off, masturbating herself with your disembodied pussy.  Eventually you cum to the feeling of demon-cum spurting inside you, but it's a strange, empty orgasm.", false);
 				player.removeVagina(0, 1);
 				//(-100 lust, -1 fetish, +1 vagina toy status)
-				player.orgasmGeneric();
+				player.orgasm();
 				dynStats("cor", 5);
 				flags[kFLAGS.PC_FETISH]--;
 				flags[kFLAGS.CERAPH_PUSSIES_OWNED]++;
@@ -1256,7 +1256,7 @@ package classes.Scenes.NPCs
 
 					outputText("Sudden warmth plasters your feet and ankles, drenching them with the inhumanly warm jizm of Ceraph's pleasure.  She sighs, relaxing her grip on your ankles while you pump away, dutifully milking every ounce of demonic juice onto your willing soles.  \"<i>Gooood pet... yes, good girl,</i>\" coos the still blissful dominatrix before she suddenly yanks the pump from your groin without warning.  Your poor pussy jiggles with pain and pleasure, orgasming hard enough to squirt all over your cock-sized clitty.  Thankfully, the swelling of your genitals immediately fades, leaving them larger but less freakish.  Ceraph presses her still-hard cock against your lips, but the mental link starts to fade as she does so, leaving you to return to your normal dreams...", false);
 					//(-3 sens, -100 lust)
-					player.orgasmVaginal();
+					player.orgasm();
 					dynStats("sen", -3);
 				}
 				//PUSSY FLESHLIGHT
@@ -1272,7 +1272,7 @@ package classes.Scenes.NPCs
 
 					outputText("The vision and feelings slowly fade, letting you out of their grip and leaving faint after-images of Ceraph cleaning you with her tongue.", false);
 					//(-100 lust, +2 sens, +1 cor)
-					player.orgasmVaginal();
+					player.orgasm();
 					dynStats("sen", 2, "cor", 1);
 				}
 				else {
@@ -1286,7 +1286,7 @@ package classes.Scenes.NPCs
 					outputText("\n\nA quim-stained crotch smacks into your lips, and explosions of warmth begin detonating deep inside your depths, the blooms of liquid heat bringing you to a cunt-clenching climax of epic proportions.  Your muscles lock and your [butt] rises from your resting place, cheeks clenched in tight pleasure.  A scream of bliss tears through the night as you cum.  Jizz froths from your entrance as you're overfilled, spilling out to roll to the ground.  It feels so good, so goddamn good.  Your wails slowly trail off to whimpers, aftershocks of enjoyment causing your body to twitch wildly beneath the blankets until the cream-spurting cock is finally removed from your jizz-glazed cavern.");
 					outputText("\n\n\"<i>I suppose I should thank [name] for giving me such an excellent fuck-toy,</i>\" the mysterious-yet-familiar voice comments.  Wait... Ceraph!");
 					outputText("\n\nYou jolt awake, sweating buckets and shivering.  Somewhere, the demoness just blew a load in your old pussy.  The thought would keep you awake, if that orgasm hadn't been so goddamn satisfying.");
-					player.orgasmVaginal();
+					player.orgasm();
 					dynStats("sen", 2, "cor", 1);
 				}
 			}
@@ -1298,7 +1298,6 @@ package classes.Scenes.NPCs
 					outputText("\n\nIn a panic, you wriggle your tit-tail, propelling yourself around the confines of your small chamber.  The door is locked, as always, but you press your tight, hard nipples against it anyhow.  Mistress has kept you pent up for so long, trapped away in this little box.  You regret everything!  You'll never doubt her again!  She was so right... nipples can feel so wonderfully, exquisitely pleasureable, but you can't take it any longer.  Every movement, every sinuous slide, they feel so good.  You can cum just from pacing about, but you know you'll just wind up a twisted, curling mass of squirming nipple-flesh, your tail half-tied in knots as it tries to rub each pair of breasts against another. You know because you've done it countless times already.");
 					outputText("\n\nA spiral of pain twists through your pleasure-wounded psyche, and you remember yourself, not the demon-enslaved naga.  Still, conjoined as your minds are, you're able to recognize that one of those many breasts used to be yours.  Ceraph has put it to good use.  The realization jars you to wakefulness, and you're forced to try and go to sleep with the knowledge that somewhere, your breasts are being used to break a naga.  Sleep does not return easily.");
 					dynStats("lus", 5 + player.lib / 5);
-					player.orgasmTits(false);
 				}
 				//Milk Dispenser
 				else if (subChoice == 1) {
@@ -1306,7 +1305,6 @@ package classes.Scenes.NPCs
 					outputText("\n\nSuddenly, from out of nowhere, you hear a voice in the silence, \"<i>Well, I can't thank [name] enough for these.  No shortage of milk here!</i>\"  Then, there is brightness.  The appearance of light reveals a strange, disembodied view of a demon standing next to a tank. It's Ceraph!  She holds a cup of coffee, and as she pulls a lever, creamy breast milk flows into the mocha-colored beverage, lightening it significantly. Your tits, hooked up to some kind of odd machinery, tremble and shake as fluids are fed into them by transparent cables.  The speed of the milking increases, gallons gushing from your tender teats in mere seconds.  Faster and faster the liquids flow, a veritable waterfall of lactic cream.");
 					outputText("\n\nErotic energy sizzles through your nipples as the milking goes faster and faster, the pleasure unbearable.  Sadly, just when you feel on the cusp of orgasm, the machine shuts down, and the vision fades.  There will be no relief for you tonight.");
 					dynStats("lus", 5 + player.lib / 5);
-					player.orgasmTits(false);
 				}
 				//Tit Volleyball
 				else {
@@ -1326,7 +1324,6 @@ package classes.Scenes.NPCs
 					if (silly()) outputText(" and what possible ramifications it has for your mental health");
 					outputText(", until you dismiss it as corruption and toss over, entering a peaceful, dreamless sleep.");
 					dynStats("lus", 5 + player.lib / 5);
-					player.orgasmTits(false);
 				}
 			}
 			//COCKUUUU
@@ -1364,7 +1361,7 @@ package classes.Scenes.NPCs
 
 					outputText("With the sensation and scenario fading, your confused dreams shift before resuming a more normal flow.  You've no doubt you'll feel sated in the morning, but the lingering echoes of Ceraph's pet in your mind wishes you'd go submit to her.", false);
 					//(-100 lust, +1 corruption)
-					player.orgasmDick();
+					player.orgasm();
 					dynStats("cor", 1);
 				}
 				//FEATHER TORTURE
@@ -1452,7 +1449,7 @@ package classes.Scenes.NPCs
 			outputText(" asshole leaks spunk everywhere. Disgusted with her", false);
 			if (player.cor < 33) outputText(" and a little bit by yourself", false);
 			outputText(", you drop her like a discarded rag.  She moans and begins masturbating, half-insensate from the rough treatment.  You ignore her, get dressed, and get out of there before the mountain's beasts show up.  Ceraph is in for a wild night!", false);
-			player.orgasmDick();
+			player.orgasm();
 			if (getGame().inCombat)
 				combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);

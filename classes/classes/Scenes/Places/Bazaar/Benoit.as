@@ -1095,7 +1095,7 @@ private function eggySuggest():void {
 	}
 	outputText("\n\nEventually, the two of you part, dripping your mixed fluids as you step back.  \"<i>Phew!</i>\" " + benoitMF("Benoit","Benoite") + " says after " + benoitMF("he","she") + "'s managed to catch " + benoitMF("his","her") + " breath.  \"<i>That was... somesing.  Mademoiselle, you are... amazing.</i>\"  You find yourself laughing at " + benoitMF("his","her") + " slightly shell-shocked expression, and the light, happy sound seems to bring " + benoitMF("him","her") + " around a bit.  " + benoitMF("He","She") + " brushes your shoulder as " + benoitMF("he","she") + " walks past you, feeling around the stock room until " + benoitMF("he","she") + " finds a chest of drawers.  " + benoitMF("He","She") + " opens a compartment and withdraws a small woollen bag, stuffed with pungent green leaves.");
 	outputText("\n\n\"<i>Ze shark ladies are always coming up from ze lake to sell me zis,</i>\" " + benoitMF("he","she") + " says. \"<i>It is a very effective, 'ow you say, 'counter septic'?");
-	player.orgasmGeneric();
+	player.orgasm();
 	if ((player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.findPerk(PerkLib.HarpyWomb) >= 0 || player.findPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
 		outputText("  I would not inflict my children upon you.  Ere, take as much as you like.</i>\"");
 		simpleChoices("Take It", takeBenoitsContraceptives, "", null, "", null, "", null, "Leave", dontTakeEggtraceptives);
@@ -1197,7 +1197,7 @@ private function repeatSexWithBenoitLetHim():void {
 	flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS]++;
 	benoitKnocksUpPCCheck();
 	benoitAffection(2);
-	player.orgasmVaginal();
+	player.orgasm();
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1281,7 +1281,7 @@ private function repeatBenoitFuckTakeCharge():void {
 	benoitKnocksUpPCCheck();
 	benoitAffection(2);
 	flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS]++;
-	player.orgasmVaginal();
+	player.orgasm();
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1517,7 +1517,7 @@ private function suggestSexAfterBasiWombed(later:Boolean = true):void {
 	}
 	if (player.pregnancyType == PregnancyStore.PREGNANCY_BASILISK) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
 	doNext(camp.returnToCampUseOneHour);
-	player.orgasmVaginal();
+	player.orgasm();
 	dynStats("sen", -2);
 }
 
@@ -1569,7 +1569,7 @@ public function popOutBenoitEggs():void {
 	else {
 		outputText("\n\nBenoit smiles proudly.  \"<i>I cannot zank you enough for zis.  Do not worry, I shall keep zem as safe as I ave ze ozzeir clutches.</i>\"\n");
 	}
-	player.orgasmVaginal();
+	player.orgasm();
 	player.knockUpForce(); //Clear Pregnancy
 	flags[kFLAGS.BENOIT_EGGS] += Math.floor(player.totalFertility() / 10);
 	//doNext(1);
@@ -1737,7 +1737,7 @@ public function femoitFirstTimeYes():void
 
 	outputText("\n\n\"<i>Sank you for zat, [name],</i>\" she says huskily. \"<i>Of course, I will need you to do zat again if it doesn't take.  And again, once ze first clutch is done.  Basically we will be doing zis a lot.  Purely for ze purpose of procreation, you understand.</i>\"  Grinning, you lead her back inside the shop and after squeezing her hand, take your leave.");
 
-	player.orgasmDick();
+	player.orgasm();
 	menu();
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1777,7 +1777,7 @@ public function femoitSexIntro():void
 		outputText("\n\n\"<i>Big, zilly stud,</i>\" she says fondly, as she moves her hands, painting a picture of you in this moment she can hold on the walls of her mind for days to come.  Eventually, you get up, redress and quietly take your leave.  In your haze you manage to feel glad that she didn't leave quite so many claw marks on your back this time.");
 		
 		benoitKnockUp();
-		player.orgasmDick();
+		player.orgasm();
 	}
 	else if (benoitRegularPreggers() && (!player.isTaur() || (player.isTaur() && (player.tallness * (5/6) < player.cocks[player.longestCock()].cockLength))))
 	{
@@ -1812,7 +1812,7 @@ public function femoitSexIntro():void
 		outputText("\n\nBenoite stirs first.  \"<i>Mmm... I guess being so pregnant is not such a bad sing if it means we can have sex like zis...</i>\" she murmurs, though it's quite obvious she intends for you to hear her. With a groan of effort, she heaves herself back upright.  \"<i>Come back and see me any time, lover-"+ player.mf("boy","girl") +",</i>\" she tells you.  \"<i>But don't sink zat you need me to be pregnant to give me a good time, okay?</i>\"  Benoite smirks, striding across the floor and giving you a hand up before delicately flicking her tongue across your lips in a reptilian kiss.");
 
 		outputText("\n\nYou redress yourself, give the trader a hand getting back to the front of the shop without knocking anything over - she may be familiar with her shop, but her distended belly still gives her problems - and then head back to camp.");
-		player.orgasmDick();
+		player.orgasm();
 	}
 	else if (benoitVeryHeavyPreggers() || benoitExtremePreggers())
 	{
@@ -1868,7 +1868,7 @@ public function femoitSexIntro():void
 
 			outputText("\n\nIn the end, it doesn't come to that, but it takes you quite a while to help Benoite get up, clean her off, tidy up the mess you made, and otherwise get her presentable again.  She gives you one of her reptilian kisses in appreciation, and sends you home again. ");
 
-			player.orgasmDick();
+			player.orgasm();
 		}
 	}
 

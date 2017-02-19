@@ -780,7 +780,7 @@ package classes.Scenes.Places.Prison
 			player.refillHunger(5);
 			prison.changeEsteem(-4,prison.inPrison);
 			prison.changeObey(2,prison.inPrison);
-			player.orgasmGeneric();
+			player.orgasm();
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
 			if (flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && player.obey > 45 + rand(6) - (flags[kFLAGS.PRISON_TRAINING_LEVEL] * 2))
 			{
@@ -803,7 +803,7 @@ package classes.Scenes.Places.Prison
 			player.refillHunger(15, true);
 			prison.changeEsteem(-6,prison.inPrison);
 			prison.changeObey(2.5,prison.inPrison);
-			player.orgasmLips();
+			player.orgasm();
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
 			if (flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && player.obey > 45 + rand(3) - (flags[kFLAGS.PRISON_TRAINING_LEVEL] * 2))
 			{
@@ -827,7 +827,7 @@ package classes.Scenes.Places.Prison
 			player.slimeFeed();
 			prison.changeEsteem(-5,prison.inPrison);
 			prison.changeObey(2.5,prison.inPrison);
-			player.orgasmAnal();
+			player.orgasm();
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
 			if (flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && player.obey > 70 + rand(6) - (flags[kFLAGS.PRISON_TRAINING_LEVEL] * 2))
 			{
@@ -852,8 +852,7 @@ package classes.Scenes.Places.Prison
 			player.refillHunger(5);
 			prison.changeEsteem(-7,prison.inPrison);
 			prison.changeObey(3,prison.inPrison);
-			player.orgasmAnal();
-			player.orgasmLips(false);
+			player.orgasm();
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
 			if (flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && player.obey > 70 + rand(3) - (flags[kFLAGS.PRISON_TRAINING_LEVEL] * 2))
 			{
@@ -3872,8 +3871,7 @@ package classes.Scenes.Places.Prison
 			prisonCaptorFeedingQuestTrainingSelect();
 			player.slimeFeed();
 			player.refillHunger(15);
-			player.orgasmAnal();
-			player.orgasmLips(false);
+			player.orgasm();
 			doNext(prisonCaptorFeedingQuestTrainingAccept);
 		}
 		
