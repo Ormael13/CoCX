@@ -1,0 +1,33 @@
+<project name="Flex Ant Tasks Build Script" default="build">
+ <property name="SRC_DIR" value="${basedir}/classes"/>
+ <property name="LIBS_DIR" value="${basedir}/lib"/>
+ <property name="DEPLOY_DIR" value="${basedir}/target"/>
+ 
+   <!-- load configuration properties file -->
+   <!-- set the property FLEX_HOME in here -->
+   <!-- example:  FLEX_HOME=C:/Program Files/flex_sdk_4_6 -->
+   <property file="build.properties" />
+                              
+   <taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar"/> 
+                              
+   <!-- delete and create the DEPLOY dir again -->
+   <target name="init">
+      <delete dir="${DEPLOY_DIR}" />
+      <mkdir dir="${DEPLOY_DIR}" />       
+   </target>
+                              
+   <!-- build the swf-->
+   <target name="build" depends="init" description="build the project">
+      <mxmlc file="${SRC_DIR}/classes/CoC.as" output="${DEPLOY_DIR}/CoC.swf" static-rsls="true">
+         <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+         <source-path path-element="${FLEX_HOME}/frameworks"/>
+		 <source-path path-element="${SRC_DIR}/"/>
+         <compiler.debug>true</compiler.debug>
+        <library-path dir="${LIBS_DIR}/bin" includes="*.swc" append="true"/>
+		<define name="CONFIG::release" value="false"/>
+		<define name="CONFIG::debug" value="true"/>
+		<define name="CONFIG::AIR" value="false"/>
+		<define name="CONFIG::STANDALONE" value="true"/>
+      </mxmlc>
+   </target>
+</project>
