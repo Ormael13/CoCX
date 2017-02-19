@@ -39,38 +39,27 @@
 			//
 			// LENGTH ADJECTIVE!
 			//
-			if (i_creature.hairLength == 0) {
-				options = ["shaved",
-					"bald",
-					"smooth",
-					"hairless",
-					"glabrous"];
-				description = randomChoice(options) + " head";
-				return description;
-			}
-			if (i_creature.hairLength < 1) {
-				options = ["close-cropped, ",
-					"trim, ",
-					"very short, "];
-				description += randomChoice(options);
-			}
-			if (i_creature.hairLength >= 1 && i_creature.hairLength < 3) description += "short, ";
-			if (i_creature.hairLength >= 3 && i_creature.hairLength < 6) description += "shaggy, ";
-			if (i_creature.hairLength >= 6 && i_creature.hairLength < 10) description += "moderately long, ";
-			if (i_creature.hairLength >= 10 && i_creature.hairLength < 16) {
-				if (rand(2) == 0) description += "long, ";
-				else description += "shoulder-length, ";
-			}
-			if (i_creature.hairLength >= 16 && i_creature.hairLength < 26) {
-				if (rand(2) == 0) description += "very long, ";
-				else description += "flowing locks of ";
-			}
-			if (i_creature.hairLength >= 26 && i_creature.hairLength < 40) description += "ass-length, ";
-			if (i_creature.hairLength >= 40 && i_creature.hairLength < i_creature.tallness) description += "obscenely long, ";
-			else if (i_creature.hairLength >= i_creature.tallness) {
-				if (rand(2) == 0) description += "floor-length, ";
-				else description += "floor-dragging, ";
-			}
+			if (i_creature.hairLength == 0)
+				return randomChoice(["shaved", "bald", "smooth", "hairless", "glabrous"]) + " head";
+
+			if (i_creature.hairLength < 1)
+				description += randomChoice(["close-cropped, ", "trim, ", "very short, "]);
+			else if (i_creature.hairLength < 3)
+				description += "short, ";
+			else if (i_creature.hairLength < 6)
+				description += "shaggy, ";
+			else if (i_creature.hairLength < 10)
+				description += "moderately long, ";
+			else if (i_creature.hairLength < 16)
+				description += randomChoice(["long, ", "shoulder-length, "]);
+			else if (i_creature.hairLength < 26)
+				description += randomChoice(["very long, ", "flowing locks of "]);
+			else if (i_creature.hairLength < 40)
+				description += "ass-length, ";
+			else if (i_creature.hairLength < i_creature.tallness)
+				description += "obscenely long, ";
+			else // if (i_creature.hairLength >= i_creature.tallness)
+				description += randomChoice(["floor-length, ", "floor-dragging, "]);
 			//
 			// COLORS
 			//
