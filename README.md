@@ -16,3 +16,18 @@ Everything is copyright Fenoxo (fenoxo.com).
 Latest builds (e.g. an actual, playable version of the game) are generally available in the CoC-Alpha repo:  
 https://github.com/herp-a-derp/CoC-Alpha  
 Note that these are alpha-quality builds, and likely may have bugs and other fun easter-eggs.
+
+# Building with ant
+## Prerequisites
+- Java JRE installed
+- Ant installed
+- Environment variable FLEX_HOME set to the flex SDK path
+
+## Building
+To build run:
+
+`ant`
+
+If you want to skip the tests (not recommended):
+
+`ant release` or `ant debug`
