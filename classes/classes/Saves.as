@@ -1772,7 +1772,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.hornType = saveFile.data.hornType;
 
 		// <mod name="BodyParts.Skin and UnderBody" author="Stadler76">
-		if (saveFile.data.underBody is UnderBody)
+		if (saveFile.data.underBody is Object)
 			player.underBody.setAllProps(saveFile.data.underBody);
 		// </mod>
 		// <mod name="Predator arms" author="Stadler76">
