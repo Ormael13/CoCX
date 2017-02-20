@@ -5,9 +5,11 @@
  <property name="FLEX_HOME" location="${env.FLEX_HOME}" />
  
  <property name="main.src.dir" value="${basedir}/classes"/>
+ <property name="test.src.dir" value="${basedir}/test"/>
  <property name="lib.dir" value="${basedir}/lib/bin"/>
  <property name="build.dir" value="${basedir}/target"/>
  <property name="report.dir" value="${build.dir}/report"/>
+ <property name="test.file" value="${build.dir}/CoC-test.swf"/>
  
 	<!-- Setup Flex and FlexUnit ant tasks -->
 	<!-- You can set this directly so mxmlc will work correctly, or set FLEX_HOME as an environment variable and use as below -->
@@ -42,18 +44,34 @@
       </mxmlc>
    </target>
    
-   	<target name="test" depends="build">
+   <!-- build the swf for tests -->
+   <target name="build-test" depends="init" description="build the project">
+      <mxmlc file="${test.src.dir}/TestRunner.mxml" output="${test.file}" static-rsls="true">
+         <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+         <source-path path-element="${FLEX_HOME}/frameworks"/>
+		 <source-path path-element="${main.src.dir}/"/>
+		 <source-path path-element="${test.src.dir}"/>
+		
+        <compiler.debug>true</compiler.debug>
+        <library-path dir="${lib.dir}" includes="*.swc" append="true"/>
+		<library-path dir="${lib.dir}/flexunit" includes="*.swc" append="true"/>
+		<define name="CONFIG::release" value="false"/>
+		<define name="CONFIG::debug" value="true"/>
+		<define name="CONFIG::AIR" value="false"/>
+		<define name="CONFIG::STANDALONE" value="true"/>
+      </mxmlc>
+   </target>
+   
+   	<target name="test" depends="build-test">
 		<!-- Execute FlexUnit tests and publish reports -->
 		<flexunit 
 		    workingDir="${build.dir}"
 		    toDir="${report.dir}" 
 			haltonfailure="false" 
-			verbose="true" 
+			verbose="true"
+			swf="${test.file}"
 			localTrusted="true">
-	      <source dir="${main.src.dir}/classes/" />
-	      <testSource dir="${basedir}/test/">
-	         <include name="**/*Test.as" />
-	      </testSource>
+	      <source dir="${main.src.dir}/" />
 	      <library dir="${lib.dir}" />
 	   </flexunit>
 
