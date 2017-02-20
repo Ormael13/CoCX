@@ -85,7 +85,7 @@
 		<flexunit 
 		    workingDir="${build.dir}"
 		    toDir="${report.dir}" 
-			haltonfailure="false" 
+			haltonfailure="true" 
 			verbose="true"
 			swf="${test.file}"
 			localTrusted="true">
