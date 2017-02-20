@@ -21,3 +21,6 @@ CoC-AIR.airi
 
 # Machine specific ant properties
 build.properties
+
+# build directory
+target/
