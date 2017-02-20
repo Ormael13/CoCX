@@ -1,17 +1,16 @@
 <project name="Flex Ant Tasks Build Script" default="test">
+
+ <!-- Create a environment variable FLEX_HOME that points to the flex SDK -->
+ <property environment="env" />
+ <property name="FLEX_HOME" location="${env.FLEX_HOME}" />
+ 
  <property name="main.src.dir" value="${basedir}/classes"/>
  <property name="lib.dir" value="${basedir}/lib/bin"/>
  <property name="build.dir" value="${basedir}/target"/>
  <property name="report.dir" value="${build.dir}/report"/>
  
-   <!-- load configuration properties file -->
-   <!-- set the property FLEX_HOME in here -->
-   <!-- example:  FLEX_HOME=C:/Program Files/flex_sdk_4_6 -->
-   <property file="build.properties" />
-                                        
 	<!-- Setup Flex and FlexUnit ant tasks -->
 	<!-- You can set this directly so mxmlc will work correctly, or set FLEX_HOME as an environment variable and use as below -->
-	<!--<property name="FLEX_HOME" location="${env.FLEX_HOME}" /> -->
 	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
 	<taskdef resource="flexUnitTasks.tasks">
 	   <classpath>

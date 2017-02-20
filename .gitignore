@@ -19,8 +19,5 @@ Corruption-of-Champions.as3proj
 CoC-AIR-app.xml
 CoC-AIR.airi
 
-# Machine specific ant properties
-build.properties
-
 # build directory
 target/
