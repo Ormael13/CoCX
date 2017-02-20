@@ -85,7 +85,8 @@
 		<flexunit 
 		    workingDir="${build.dir}"
 		    toDir="${report.dir}" 
-			haltonfailure="true" 
+			haltonfailure="false"
+			failureproperty="flexunit.failure"			
 			verbose="true"
 			swf="${test.file}"
 			localTrusted="true">
@@ -100,5 +101,9 @@
 			</fileset>
 			<report format="frames" todir="${report.dir}/html" />
 		</junitreport>
+		
+		<!-- Fail the build while still generating a report -->
+		<!-- From http://blog.yoz.sk/2012/04/quick-tip-flexunit-and-junitreport-and-haltonfailure/-->
+		<fail if="flexunit.failure" message="Unit test(s) failed. See reports!"/>
 	</target>
 </project>
