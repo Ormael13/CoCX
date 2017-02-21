@@ -13,6 +13,7 @@
          import org.flexunit.listeners.UIListener;
          import org.flexunit.runner.FlexUnitCore;
 		 import AllTestsSuit;
+		 import classes.helper.StageLocator;
          
          public function runTests() : void {
 				var core : FlexUnitCore = new FlexUnitCore();
@@ -20,7 +21,7 @@
 				/**If you don't need graphical test results, comment out the line below and the MXML declaring 
 				the TestRunnerBase. **/
 				core.addListener(new CIListener());
-				
+				new StageLocator(systemManager.stage);
 				/**If you would like to see text output in verbose mode, umcomment either of the follow listeners **/
 				//core.addListener( new TraceListener() ); - For AS3 Projects
 				//core.addListener( TextListener.getDefaultTextListener( LogEventLevel.DEBUG ) ); - For Flex Projects
