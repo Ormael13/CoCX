@@ -1,6 +1,7 @@
 package {
 
 import classes.CreatureTest;
+import classes.CoCTest;
 import classes.HelperSuit;
 
 [Suite]
@@ -8,6 +9,7 @@ import classes.HelperSuit;
 	public class ClassesSuit
 	{
 		 public var creaturTest:CreatureTest;
+		 public var coCTest:CoCTest;
 		 public var helperSuit:HelperSuit
 	}
 }
