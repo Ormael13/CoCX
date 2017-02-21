@@ -1295,42 +1295,6 @@ public function showUpDown():void { //Moved from StatsView.
 	}
 }
 
-public function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):void {
-	//Virginity check
-	if (player.vaginas[vIndex].virgin) {
-		if (display) outputText("\nYour " + player.vaginaDescript(vIndex) + " loses its virginity!", false);
-		player.vaginas[vIndex].virgin = false;
-	}        
-	//If cock is bigger than unmodified vagina can hold - 100% stretch!
-	if (player.vaginas[vIndex].capacity() <= monster.cocks[cIndex].cArea()) {
-		if (player.vaginas[vIndex] < 5) {
-			trace("CUNT STRETCHED: By cock larger than it's total capacity.");
-			if (display) {
-				if (player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + player.vaginaDescript(0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ", false);
-				if (player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + player.vaginaDescript(0) + " painfully stretches, gaping wide-open.</b>  ", false);
-				if (player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + player.vaginaDescript(0) + " is now very loose.</b>  ", false);
-				if (player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + player.vaginaDescript(0) + " is now loose.</b>  ", false);
-				if (player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + player.vaginaDescript(0) + " loses its virgin-like tightness.</b>  ", false);
-			}
-			player.vaginas[vIndex].vaginalLooseness++;
-		}
-	}
-	//If cock is within 75% of max, streeeeetch 33% of the time
-	if (player.vaginas[vIndex].capacity() * .75 <= monster.cocks[cIndex].cArea()) {
-		if (player.vaginas[vIndex] < 5) {
-			trace("CUNT STRETCHED: By cock @ 75% of capacity.");
-			if (display) {
-				if (player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + player.vaginaDescript(0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ", false);
-				if (player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING) outputText("<b>Your " + player.vaginaDescript(0) + " painfully stretches, gaping wide-open.</b>  ", false);
-				if (player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_LOOSE) outputText("<b>Your " + player.vaginaDescript(0) + " is now very loose.</b>  ", false);
-				if (player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_NORMAL) outputText("<b>Your " + player.vaginaDescript(0) + " is now loose.</b>  ", false);
-				if (player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_TIGHT) outputText("<b>Your " + player.vaginaDescript(0) + " loses its virgin-like tightness.</b>  ", false);
-			}
-			player.vaginas[vIndex].vaginalLooseness++;
-		}
-	}
-}
-
 //Updates the player's gender
 public function genderCheck():void {
 	if (player.cocks.length > 0) {
