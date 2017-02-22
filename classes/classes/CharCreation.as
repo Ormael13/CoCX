@@ -1657,7 +1657,7 @@
 			player.genderCheck();
 			player.breastRows = [];
 			player.cocks = [];
-			player.vaginas = [];
+			player.vaginas = new Vector.<VaginaClass>();
 			doNext(routeToGenderChoiceReincarnation);
 		}
 		
