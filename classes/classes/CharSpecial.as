@@ -1617,7 +1617,7 @@ package classes
 			player.createVagina();
 			player.vaginas[0].vaginalLooseness = 0;
 			player.vaginas[0].vaginalWetness = 2; // wet
-			player.vaginas[0].virgin = 0;			
+			player.vaginas[0].virgin = false;
 			player.createStatusEffect(StatusEffects.BonusVCapacity, 8000, 0, 0, 0); // Vag of Holding kitsune trait
 			player.clitLength = 0.3;
 			player.fertility = 5;
@@ -1753,7 +1753,7 @@ package classes
 			player.createVagina();
 			player.vaginas[0].vaginalLooseness = rand(4); // from tight to gaping
 			player.vaginas[0].vaginalWetness = rand(4)+1; // from normal to slavering
-			player.vaginas[0].virgin = 0;
+			player.vaginas[0].virgin = false;
 			
 			player.clitLength = rand(3) == 0 ? (rand(10)+1)*0.25 : 0.25; // from 0.25 to 2.5
 			player.fertility = (rand(5)+1)*5; // from 5 to 25 with 5 step
