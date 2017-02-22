@@ -1617,7 +1617,8 @@
 			outputText("Would you like to reincarnate and start a new life as a Champion?");
 			doYesNo(reincarnate, ascensionMenu);
 		}
-		private function reincarnate():void {
+		
+		protected function reincarnate():void {
 			flags[kFLAGS.NEW_GAME_PLUS_LEVEL]++;
 			customPlayerProfile = null;
 			newGameGo();
@@ -1656,7 +1657,7 @@
 			player.genderCheck();
 			player.breastRows = [];
 			player.cocks = [];
-			player.vaginas = [];
+			player.vaginas = new Vector.<VaginaClass>();
 			doNext(routeToGenderChoiceReincarnation);
 		}
 		

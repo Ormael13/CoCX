@@ -7,6 +7,7 @@ package classes
 	import classes.StatusEffectType;
 	import classes.Items.JewelryLib;
 	import classes.internals.Utils;
+	import classes.VaginaClass;
 	import classes.Scenes.Places.TelAdre.UmasShop;
 	import flash.display.InteractiveObject;
 
@@ -383,7 +384,7 @@ package classes
 		
 		//FEMALE STUFF
 		//TODO: Box into Female genital class?
-		public var vaginas:Array;
+		public var vaginas:Vector.<VaginaClass>;
 		//Fertility is a % out of 100. 
 		public var fertility:Number = 10;
 		public var clitLength:Number = .5;
@@ -497,8 +498,7 @@ package classes
 			//cocks = new Array();
 			//The world isn't ready for typed Arrays just yet.
 			cocks = [];
-			vaginas = [];
-			//vaginas: Vector.<Vagina> = new Vector.<Vagina>();
+			vaginas = new Vector.<VaginaClass>();
 			breastRows = [];
 			_perks = [];
 			statusEffects = [];
