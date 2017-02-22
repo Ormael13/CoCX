@@ -6,7 +6,11 @@ package classes{
 	import org.hamcrest.object.*;
 	import org.hamcrest.text.*;
 	
+	import classes.helper.StageLocator;
+	
+	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Creature;
+	import classes.CoC;
      
     public class CreatureTest {
 		include "../../includes/appearanceDefs.as";
@@ -25,7 +29,17 @@ package classes{
 		
 		private function createMaxVaginas():void {
 			createVaginas(MAX_SUPPORTED_VAGINAS);
-		}  
+		}
+		
+		[BeforeClass]
+		public static function setUpClass():void {
+		 /* Hidden dependencies on global variables can cause tests to fail spectacularly.
+		  * 
+		  * Seriously people, DONT use global variables.
+		  */
+		  
+			kGAMECLASS = new CoC(StageLocator.stage);
+		}
          
         [Before]
         public function setUp():void {  
