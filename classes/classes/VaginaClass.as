@@ -4,12 +4,15 @@
 
 	public class VaginaClass
 	{
+		public static const DEFAULT_CLIT_LENGTH:Number = 0.5;
+		
 		//constructor
-		public function VaginaClass(vaginalWetness:Number = 1, vaginalLooseness:Number = 0, virgin:Boolean = false)
+		public function VaginaClass(vaginalWetness:Number = 1, vaginalLooseness:Number = 0, virgin:Boolean = false, clitLength:Number = DEFAULT_CLIT_LENGTH)
 		{
 			this.virgin=virgin;
 			this.vaginalWetness=vaginalWetness;
 			this.vaginalLooseness=vaginalLooseness;
+			this.clitLength = clitLength;
 		}
 		//data
 		//Vag wetness
@@ -35,13 +38,14 @@
 		public var clitPierced:Number = 0;
 		public var clitPShort:String = "";
 		public var clitPLong:String = "";
+		public var clitLength:Number;
 
 		public function validate():String
 		{
 			var error:String = "";
 			error += Utils.validateNonNegativeNumberFields(this, "VaginaClass.validate", [
 				"vaginalWetness", "vaginalLooseness", "type",
-				"fullness", "labiaPierced", "clitPierced"
+				"fullness", "labiaPierced", "clitPierced", "clitLength"
 			]);
 			if (labiaPierced) {
 				if (labiaPShort == "") error += "Labia pierced but labiaPShort = ''. ";
