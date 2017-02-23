@@ -16,6 +16,8 @@ package classes{
 		include "../../includes/appearanceDefs.as";
 		
 		private const MAX_SUPPORTED_VAGINAS:Number = 2;
+		private const DEFAULT_CLIT_LENGTH:Number = 0.5;
+		private const TEST_CLIT_LENGTH:Number = 3;
 		
         private var cut:Creature;
 		
@@ -343,6 +345,99 @@ package classes{
 			createMaxVaginas();
 			
 			assertThat(cut.allVaginaDescript(), endsWith("s"));
-        }	
+        }
+		
+		[Test] 
+        public function testClitLengthNoVagina():void {
+			assertThat(cut.hasVagina(), equalTo(false)); //guard assert
+			
+			assertThat(cut.clitLength, equalTo(DEFAULT_CLIT_LENGTH));
+        }
+		
+		[Test] 
+        public function testClitLengthWithVagina():void {
+			assertThat(cut.createVagina(), equalTo(true));
+			
+			assertThat(cut.clitLength, equalTo(DEFAULT_CLIT_LENGTH));
+        }
+		
+		[Test] 
+        public function testClitLengthUpdateNoVagina():void {
+			assertThat(cut.hasVagina(), equalTo(false)); //guard assert
+			
+			cut.clitLength = TEST_CLIT_LENGTH;
+
+			assertThat(cut.clitLength, equalTo(TEST_CLIT_LENGTH));
+        }
+		
+		[Test] 
+        public function testClitLengthUpdateWithVagina():void {
+			assertThat(cut.createVagina(), equalTo(true));
+			
+			cut.clitLength = TEST_CLIT_LENGTH;
+
+			assertThat(cut.clitLength, equalTo(TEST_CLIT_LENGTH));
+        }
+		
+				
+		[Test] 
+        public function testClitLengthIncrementNoVagina():void {
+			assertThat(cut.hasVagina(), equalTo(false)); //guard assert
+			
+			cut.clitLength = TEST_CLIT_LENGTH;
+			cut.clitLength++;
+
+			assertThat(cut.clitLength, equalTo(TEST_CLIT_LENGTH + 1));
+        }
+		
+		[Test] 
+        public function testClitLengthIncrementWithVagina():void {
+			assertThat(cut.createVagina(), equalTo(true));
+			
+			cut.clitLength = TEST_CLIT_LENGTH;
+			cut.clitLength++;
+
+			assertThat(cut.clitLength, equalTo(TEST_CLIT_LENGTH + 1));
+        }
+		
+		[Test] 
+        public function testClitLengthAdditionAssignmentNoVagina():void {
+			assertThat(cut.hasVagina(), equalTo(false)); //guard assert
+			
+			cut.clitLength = TEST_CLIT_LENGTH;
+			cut.clitLength += 1;
+
+			assertThat(cut.clitLength, equalTo(TEST_CLIT_LENGTH + 1));
+        }
+		
+		[Test] 
+        public function testClitLengthAdditionAssignmentWithVagina():void {
+			assertThat(cut.createVagina(), equalTo(true));
+			
+			cut.clitLength = TEST_CLIT_LENGTH;
+			cut.clitLength += 1;
+
+			assertThat(cut.clitLength, equalTo(TEST_CLIT_LENGTH + 1));
+        }
+		
+		[Test] 
+        public function testClitLengthDivisionAssignmentNoVagina():void {
+			assertThat(cut.hasVagina(), equalTo(false)); //guard assert
+			
+			cut.clitLength = TEST_CLIT_LENGTH;
+			cut.clitLength /= TEST_CLIT_LENGTH;
+
+			assertThat(cut.clitLength, equalTo(1));
+        }
+		
+		[Test] 
+        public function testClitLengthDivisionAssignmentWithVagina():void {
+			assertThat(cut.createVagina(), equalTo(true));
+			
+			cut.clitLength = TEST_CLIT_LENGTH;
+			cut.clitLength /= TEST_CLIT_LENGTH;
+
+			assertThat(cut.clitLength, equalTo(1));
+        }
     }
 }
