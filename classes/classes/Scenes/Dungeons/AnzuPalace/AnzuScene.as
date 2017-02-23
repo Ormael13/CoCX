@@ -5,6 +5,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 	import classes.GlobalFlags.*;
 	import classes.StatusEffects;
 	import classes.Scenes.Dungeons.DungeonCore;
+	import classes.Items.*;
 	/**
 	 * Anzu the Avian Deity by Coalsack
 	 * @author Kitteh6660
@@ -1163,9 +1164,199 @@ Sure, you answer him, but for now, you have to let them rest for a bit. After sa
 			}
 		}
 		
-		//Bathing
+		//------------
+		// BATHING (2PM)
+		//------------
+		public function anzuBathTimeBeginning():void {
+			clearOutput();
+			outputText("Wandering again across the halls of the palace, you notice than Anzu isn't in his usual spot at this time of the day, reading a book in the tranquility of his living room. Actually, he isn’t in the kitchen either. A little confused about his whereabouts you search him across the palace, a task a bit difficult given its dimensions and the quantity of rooms.");
+			outputText("\n\nAfter an infructuous search you end looking at the window of the third floor, thinking that he may be gone outside, until you realize that you haven’t searched in one of the most obvious places: his bedroom. Joining action to the thought, you return downstairs to the first floor, and opening the gate to the opulent room, you find it empty. Seems like the bird doesn’t want to be found today.");
+			outputText("\n\nJust when you’re about to return to the camp, you manage to hear a low whistle coming from the end of hall, behind the large portion of the floor occupied by Anzu’s room. Soon you remember that this must be the bathroom, and that would explain the avian’s absence. Upon getting closer to the door, your nose is assaulted by an fragrance even more exquisite than the sweet scent of violets that perfumes the rooms.");
+			outputText("\n\nAs you push the door open, you spot the avian relaxing in his bath, or rather a pool from the look of its size. ");
+			outputText("\n\nFilled with a water so crystalline that you can see its bottom, despite some bubbles and soap here and there, the pool is big enough to give Anzu room to stretch his arms and legs easily, and even to have a couple of partner. Hell, this thing is big enough to gather most of your lovers inside. Scattered on a near table are a few flasks containing which must be aromatic oils from the scent you recognize some kinds of aromatic woods, and lavender.");
+			outputText("\n\nWhile you’re busy appreciating the scents, your giant lover notices your presence on the door and waves you over");
+			outputText("\n\n“Hey, [name]! Seems like you couldn’t resist the temptation of seeing me naked again, huh?” the avian says, greeting you with a playful grin.");
+			outputText("\n\nYou explain that you were looking for him, and since you didn’t found him in any room, you came here, thinking that he could be here, and just as you thought, here it is, the bird on his bath.");
+			outputText("\n\n“Well, you found me. I usually take a bath at this time of day to relax. The warm water does wonders to the muscles you know, and, for the way that you keep smelling the room, seems like you appreciate the lavender oil that I’ve poured on the bath.”");
+			outputText("\n\nYeah, it’s a pretty pleasant and calm smell.");
+			outputText("\n\n“Hmm, I could use a little of company, [name]. Besides, there’s plenty of space inside.”  Anzu offers.");
+			outputText("\n\nSeems like the bird want to take his bath with you, but knowing him, you’ll probably end a bit sticky throughout your bath. What do you say?");
+			doYesNo(anzuBathTimeAccept, anzuBathTimeDecline);
+		}
 		
-		//Sleeping
+		private function anzuBathTimeAccept():void {
+			clearOutput();
+			outputText("Well, a warm bath sounds nice at this time of the day, and Anzu seems to be enjoying it, so, why not?(if wearing clothes) Leaving your [armor] (if underwear) and [underwear] aside, on a nearby table, you get in the pool, not without making sure that Anzu gets a good view of your naked body when entering on it. (if naked) You get in the pool, not without making sure that Anzu gets a good view of your naked body when entering on it. When you return the look, you manage to see his avian manhood under the water, hanging limp and lazy between his legs. Even on it's unaroused state, it remains quite impressive. Under it, a pair of huge, feather-covered, nuts lie, moving slightly with the water.");
+			outputText("\n\n\"<i>Ehh, you…you look pretty nice today, [name]</i>\"  the avian says, interrupting your ogling of his privates, while blushing deeply without keeping his eyes away of your body and (if male or herm) hanging [cock] that swings playfully as you descend upon the pool (if female) your exposed nether lips as your descend upon the pool.");
+			outputText("\n\nYou place yourself on the pool as gingerly as you can, (if height>120) sitting (else) standing on the tiles no too far away from him. The water itself is pleasantly warm, and the relaxing scents of oils mixed with the soap perfumed scent soon get to your body,as you start feeling your mind calmer and your body more relaxed.");
+			outputText("\n\n\"<i>It's quite nice, right?</i>\" Anzu says, standing to get closer to you. \"<i>I'm not a fan of taking baths on frozen lakes, and I'm pretty sure that in the worst areas of Mareth, having a bath or even water is even a luxury, so I thought, that, me having this bath, and you, having to stand the driest deserts and worse things, I’ll be good for you taking a break and relax, and I guessed that I’ll be good for both of us if we two...em...share this bath together, and...</i>\" Anzu continues, blushing in a bit of embarrassment as he talks.");
+			outputText("\n\nSeeing the giant and usually confident bird so flustered and nervous when talking to you is quite a cute sight. You reassure him telling that you're very grateful that he decide to share his bath with you.");
+			outputText("\n\n\"<i>No, seriously, it was nothing. Being alone all the time isn't fun, so every moment that I can spend with you is special. And everything that I have, is here to be shared with my special someone.</i>\" Anzu says, blushing as red as a tomato when saying this least.");
+			outputText("\n\nStaring at the pool of teal that are his eyes, you don't realize when, but soon you feel your (if height> 120) frame embraced (else if height <120 and >80) smaller frame surrounded (else if height <80) much smaller frame surrounded but his strong arms. The feeling of his wet feathers tickles your damp [skin] and you giggle at the sensation, and soon your lifted a little by his arms, as he envelopes you in a strong hug. His hand caress your back, and he whispers on your ear lovingly:");
+			outputText("\n\n\"<i>Thanks, [name]. For taking your time to get this forgotten place on the middle of the snow. Thanks for spending your time visiting this lonely and exiled god. But above everything, thanks for staying with me and being the most wonderful companion that I could be asked</i>\".");
+			outputText("\n\nThe two of you keep the hug for a while, until the avian notices that some time has passed and, still blushing, breaks the hug.");
+			outputText("\n\n\"<i>Heh, sorry. I got too cheesy for a moment.</i>\" Anzu says, sitting again to your side. \"<i>Anyways, the idea is that we take a bath together, and since you're my guest, I sould being take care of you...of course, if you wish</i>\"");
+			outputText("\n\nSince he’s been nothing but nice, how you could refuse his offer?, you tell him playfully. When he hear this, he smiles at you and takes one of the aromatic soaps that are on a plate on his side of the pool.");
+			outputText("\n\nLooking at your smaller body at his side, he suggests: (if height<120) \"<i>I'll be more comfortable for you if you sit down while I take care of you, (else) \"<i>Well, I'll be better if I go closer to take care of you, and...if you're okay with it...you could sit on my lap...while I...you know.</i>\" Anzu says nervously.");
+			outputText("\n\nSeeming no harm on his offering you sit on his lap, and he, faithful to his word, starts scrubbing softly your body with the soap, then massaging your back and shoulders working tenderly each sore muscle. While you enjoy his ministrations, you sit better, resting your legs over their own while he carefully rubs the soap on your [skin], (if height>100 and <132) aided for his larger frame (else if height < 100) aided by his towering frame. As he does that, you realize that your butt is resting pretty close of the avian crotch, and that your close contact is making the big avian more than a bit flustered, if his erect cock is proof of anything.");
+			outputText("\n\nWell, given how hot and bothered Anzu is getting from rubbing naked against your body, you could take this as an invitation for a more...intimate intercourse with the bathing bird, given that you’ll probably end a bit dirty (and quite filled) in the end. On the other side, you could simply leave your kinkyness aside for a while and simply enjoy the bath with him.");
+			dynStats("lus", 30);
+			menu();
+			addButton(0, "Sexy times", anzuBathTimeSex);
+			addButton(1, "Just relax", anzuBathTimeRelax);
+		}
+		
+		private function anzuBathTimeSex():void {
+			clearOutput();
+			outputText("You take the initiative, rubbing your backside against Anzu’s maleness, who stands proudly erect, now smearing your back with avian pre, that is quickly washed away by the water.");
+			outputText("\n\n“Heh, seems like a got a bit...., you know...[name]” Anzu says with a soft laugh, yet a bit embarrassed, after seeing his raging erection over your back. “And, having you so close, it’s no wonder that I eventually got a bit excited.”  he admits.");
+			outputText("\n\nHmm, seems like it can’t be helped, at least with someone that gets aroused so quickly like him, you remark.");
+			outputText("\n\nReclining your body against his, and rubbing your backside against his penis, you enjoy for a second the slimy sensation of his pre on your " + player.skinDesc + " while your upper body rests over his belly, the feeling of his wet and soapy feathers being and odd but quite pleasant sensation.");
+			outputText("\n\nAfter some more rubbing, you start grinding your " + player.assDescript() + " against his iron hard erection, one of your hands going down to knead softly his hefty sack. A look back reveals to you that your teasing had the desired effect, as Anzu face is blushing red, his breaths turning to half-measured pants, as the horny avian does useless efforts to hide his overexcited state.");
+			outputText("\n\nSoon, he gives up, and realizing that you aren’t being exactly a nice visitor, leaving him on that state, you finally ask him:");
+			outputText("\n\n\"<i>So, do you want to...relieve some pressure while we bath?</i>\"");
+			player.changeFatigue(-30);
+			anzuSexMenu(false);
+		}
+		
+		private function anzuBathTimeRelax():void {
+			clearOutput();
+			outputText("As fun as it could be, you decided to take a bath for cleanse your body, no for making it dirtier, so you attention diverges from Anzu's rod. ");
+			outputText("\n\nNow focusing on having all stressful thing that plague Mareth of your mind, you let your [legs] rest on the tiled bottom of the indoor pool, while your body enjoys the warm feeling of water on your [skin/fur/scales]. Your mind diverges to peaceful thoughts, away from this cursed place, reminiscences of your home on Ingnam, your village, and about all the good things that you have found that this land, that despite its cursed nature, has allowed to survive fills your mind and calm your troubled body.");
+			outputText("\n\nAfter a while, a tickling sensations distracts you from those musings, and you turn back your head to find Anzu pouring a small receptacle containing a pearlish pink, oily liquid over your back and shoulders and rubbing it softly over your [skin/fur/scales]. It’s floral and pleasant smells tells your quickly that it must be a kind of aromatic soap.");
+			outputText("\n\n“Rose’s essence, quite good for relieving tension and calming the mind and soul, at least, that’s what people says ” Anzu confirms, at the time that pours a bit more on your head and gives it the same treatment.");
+			outputText("\n\nWith, your body thoroughly covered in a layer of pinkish soap, he starts giving your arms and back a massage, having care to tend to your most weary muscles. He turns being quite good at that, all the tension on your body dissapearing, aided without a doubt for the calming water surrounding you.");
+			outputText("\n\nAfter he’s assured that every bit on your body has been thoroughly massaged and cleaned, he takes some clean water and start pouring it over you, wiping away the soap from your [skin/fur/scales], carefully cleaning with his fingers every bit of you.");
+			outputText("\n\nFeeling in the mood to return the favor, you ask Anzu to turn back, so you can help the avian to get himself clean too.");
+			outputText("\n\n\"<i>Oh, that’s not necessary, [name]. I’m doing this as a favor to you.</i>\"");
+			outputText("\n\nThen, you chastise him, he should allow you to bathe him, as a favor.");
+			dynStats("lus", 20);
+			player.changeFatigue(-30);
+			doNext(camp.returnToCampUseOneHour);
+		}
+		private function anzuBathTimeDecline():void {
+			clearOutput();
+			outputText("Not in the mood of getting your " + player.skinDesc + " wet (and sticky) at this time of day, you thanks him for his offer but explain that you’re not exactly in the mood to get wet. Bidding him farewell, you leave him to his own matters and return to your camp.");
+			kGAMECLASS.inDungeon = false;
+			kGAMECLASS.dungeonLoc = -1;
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		//------------
+		// SLEEPING (8PM)
+		//------------
+		public function sleepWithAnzuInvitation():void {
+			clearOutput();
+			outputText("Satisfied in many senses, you feel a bit drowsy after all that cooking, eating and fucking, you let out a loud yawn and extend your body on one of the comfy couches in the living room.");
+			outputText("\n\n“Hey there, little friend” Anzu salutes you, as he returns too from the kitchen. “Feeling a bit tired after all that…exercise” he jokes.");
+			outputText("\n\nDespite how wonderful his cooking is, and how a pleasant experience are the romps on his company, the body gets exhausted eventually, you point him.");
+			outputText("\n\n“Yeah, [name]. I’m feeling a bit tired too.” Anzu answers, giving a yawn even louder that your last one. “You’ll see, even gods need to sleep, and I was heading to my room right now. I presume that you were about to leave to that camp of yours? ”");
+			outputText("\n\nYes, he’s not wrong. You were taking a quick rest before departing.");
+			outputText("\n\n“I see.” He says, sitting next to you. The sudden increase of weight makes the couch shift a little, and your are draft into the avian feathered arms, with his scaled hands caressing your [skin] “Since you’re a bit tired, right now the better thing would be to rest, preferably in a comfy and cozy place, don’t you? And, as I said, I’m going to my room, so if you like, you could sleep here tonight. I’m pretty sure that (if alone in camp) the portal can handle itself for a night (if followers) the portal can handle itself for a night, and if not, you companions can take care of it. ”");
+			outputText("\n\nWell, the truth is that your camp isn’t the major target of the demon forces, and since your arrival there hasn’t been anything interesting around it besides the random imp or goblin. Maybe you should consider Anzu’s offer and spend a relaxed night in love and luxury instead of a night on the wastelands. What do you say?");
+			doYesNo(acceptSleepingWithAnzu, declineSleepingWithAnzu);
+		}
+		
+		private function declineSleepingWithAnzu():void {
+			clearOutput();
+			outputText("Tired as you are, a task is a task. You answer the avian that sadly, you have to keep guard tonight on the portal, so it will be on another time. Though a bit disappointed, the avian quickly cheers up an nuzzles your neck playfully, then he hugs you again and helps you to stand up. Gathering your things, you make it to the door, not without getting another playful nibble as you leave.");
+			outputText("\n\n“Be careful on your way to the camp, little friend” he says from the door while waving you. Waving him back you cross the Rift and return to your camp.");
+			kGAMECLASS.inDungeon = false;
+			kGAMECLASS.dungeonLoc = -1;
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		private function acceptSleepingWithAnzu():void {
+			clearOutput();
+ 			outputText("Well, with him as company, who wouldn’t want to stay in the palace for the night, you answer. The avian, overjoyed, despite being almost as tired as you, hugs you even tighter and proceeds to carry you on his arms, a (if height>120) a simple task, given his strength (else) a very easy task, given his strength and much larger frame.");
+			outputText("\n\nSuddenly lifted from the ground by a couple of softly feathered arms, you let your body relax as  you let out a loud yawn. While on his arms you can feel his strong muscles embracing you, and you rest you head on his shoulder, (if hair) while he ruffles your hair lovingly (else) rubs your neck, as he walks to his room.");
+			outputText("\n\nAfter going upstairs, he finally arrives to the door, opening it with a soft push. The now familiar and perfumed scent of the bedroom greets you once more, as you're carefully placed on the gargantuan bed.");
+			outputText("\n\nClosing the door after him, the avian proceeds to remove some bed’s cover and puts you in a more comfortable position. (if not naked and wearing underwear) After he takes off his clothes and put them in a nearby drawer, you realize that you’re so tired that mustering the effort of taking your own is almost impossible. A bit sheepishly, you call Anzu over.");
+			outputText("\n\n“Hey, [name].” sitting on the bed next to you, naked except for his undies. “Do you plan to sleep in your [armor] tonight?”");
+			outputText("\n\nActually, you were about to ask him to a little help with that….");
+			outputText("\n\n“So tired for even undressing, huh? I’ll have to try to not tire out so much on our romps, then, don’t you?”");
+			outputText("\n\nNah, it's okay, you reply. Most of you drowsiness comes from the accumulated nights of worry guarding the portal and your camp. Now that you have quite the comfy bed at your disposal, you have to enjoy it as much as you can, but seems like your body got the signal to rest way's faster than your mind.");
+			outputText("\n\n“Seems like it can’t be helped, then” he says with a smile “Being a Champion is quite harder than i though. But since you asked, I’ll be more than happy to aid you with that.”");
+			outputText("\n\nSoon, you feel the avian scaled hands over your [armor], taking it from your body, and then, carefully folding it and placing on the drawer too. Then you’re left on your underwear, over the soft sheets of the bed.");
+			outputText("\n\nYou lie almost naked on the bed clothing, and the cushiony feeling of the sheets makes your body and mind even more ready to sleep, to the point that you barely recognize Anzu’s form coming closing to you to take your underwear from you.");
+			if (player.armor == ArmorLib.NOTHING) { //Not wearing clothes/armour?
+				if (player.lowerGarment != UndergarmentLib.NOTHING || player.upperGarment != UndergarmentLib.NOTHING) //Wearing underwear only
+					outputText("\n\nLuckily, you decided to came to the Rift with light clothing, and with that you mean only with your underwear. Why in Mareth you decided to came to this cold place almost naked is beyond your own understanding, but somehow you managed to get to the Palace without getting frozen, and now, you haven’t to do the seemingly herculean work of taking off your armor to sleep.");
+				else //Naked
+					outputText("\n\nLuckily, you decided to came to the Rift with light clothing, and with that you mean absolutely naked. Why in Mareth you decided to came to this cold place naked is beyond your own understanding, but somehow you managed to get to the Palace without getting frozen, and now, you haven’t to do the seemingly herculean work of taking off your armor to sleep.");
+			}
+			outputText("\n\nAlready half-asleep, you feel some sheets being pulled to cover your body. Shortly after, Anzu gets on the bed next to you and hugs you a last time on the day before turning off the lights with what seems to be a kind of mechanical artifact on the side of the bed. Anyways, is not like if you’re putting too much attention, tired as you are.");
+			outputText("\n\n“Good night, [name]” you manage to hear from him before closing your eyes.");
+			outputText("\n\nSoon enough, you mind slips away, carried by many days of fatigue, as you fall asleep on bed, with your feathered companion at your side...");
+			doNext(sleepingWithAnzuPart2);
+		}
+		
+		private function sleepingWithAnzuPart2():void {
+			clearOutput();
+			outputText("<b>At some moment, near midnight…</b>");
+			outputText("\n\nYaaaawn.");
+			outputText("\n\nWhat time of the night is? You can’t say the exact hour without a moon on the night sky that you manage to see through the window, but if your inner clock works well, you are pretty sure that it’s barely past midnight.");
+			outputText("\n\nExtending your arms and flexing your [legs] on the soft linen sheet, you realize that you're lying next to Anzu, who has your head resting on his shoulder as his two left wings cover your back as a kind of feathered cloak. The warmth of his body as he hugs your smaller frame proving to be a pleasant sensation. You rest your head on the feathers of his chest, feeling his strong muscles and the soft pulse of his heartbeat as you try to get asleep again.");
+			outputText("\n\nAfter a couple of minutes trying to get back to sleep, you find yourself failing after many attempts of returning to the dreamland. A sudden rumble on your belly distracts you from it, as you realize that a midnight snack would be pleasant, and with some luck, your body will be more prompt to rest after it. As you think about what you could get as a snack on the Palace, you remember that there’s still some leftovers of your last dinner together on the kitchen. Anzu surely wouldn’t mind if you take of bit of them.");
+			outputText("\n\nDo you attempt to get some midnight 'snack' or just go back to sleep?");
+			doYesNo(sleepingWithAnzuBlowjob, sleepingWithAnzuNoBJ);
+		}
+	
+		private function sleepingWithAnzuBlowjob():void {
+			clearOutput();
+			outputText("Softy disentangling yourself from the avian’s embrace, you try to get off from the unsurprisingly tall bed, without luck, as your [foot/tail (if naga)] get stuck with something as you climb down the bed. Then, a familiar wetness near the area where your [leg] got stuck, reinforced with a tugging from the thing that refrains you from leaving, makes you turn back, only to found that the thing entangled with your [foot/tail] is nothing less than the avian’s underwear.");
+			outputText("\n\nSofty disentangling yourself from the avian’s embrace, you try to get off from the unsurprisingly tall bed, without luck, as your [foot/tail (if naga)] get stuck with something as you climb down the bed. Then, a familiar wetness near the area where your [leg] got stuck, reinforced with a tugging from the thing that refrains you from leaving, makes you turn back, only to found that the thing entangled with your [foot/tail] is nothing less than the avian’s underwear.");
+			outputText("\n\nWhat a…curious way to get stuck. Adjusting yourself to get your [foot/tail] free, you end in an even more uncomfortable position, as you end up with your [face/snout/muzzle/beak] on Anzu’s crotch, and your /[legs] resting on /(if naga) tail swishing /over the huge avian’s lower belly. In this position, you get a much closer look to the avian’s underwear, and realize that it's cloth is tented and with a wet spot on the top. This, added to the subtle noises and moves that he makes from time to time, is a clear signal that the avian is having a…rather naughty dream.");
+			outputText("\n\nDistracted as you were from your task of going down to eat something, and a bit horny for the close contact and avian musk from you are subject, you come up with an idea. Why not get off the bird while you get a snack at the same time?");
+			outputText("\n\nWith this thought on mind, your start to take away his underwear, slow enough to not awake him, you reveal the prize under it: his gigantic manhood. This will do it nicely, you think to yourself, and, in the end,... isn’t like he won’t enjoy it, right? You’re pretty sure that he’ll have pleasant dreams tonight, if the happy rumbles coming from his beak as you touch him were proof of anything.");
+			outputText("\n\nTaking his meat on hand, your realize that, aroused by his naughty dream, the avian’s penis is hard and throbbing, some pre leaking from it and wetting its tip. You rub your [nose/snout/beak] along its length, enjoying the arousing scent of avian musk. Not wanting to waste any time, you proceed to lick the pre pouring from his cumslit, tasting again his exciting and sinful essence.");
+			outputText("\n\nOnce all his pre has been licked from the hard rod, you proceed to give slobbery licks along all its surface with your (if snake/dragon/demon) [forked] (else) tongue, the salty taste of his exhilarating your body, your (if female) pussy (else) hard [penis] leaking over his lower belly.");
+			outputText("\n\nSeems like the big bird liked your attentions, as his pants and moans, and more exactly, his rocking hard erection says. Back to business, you take the tip of his huge penis on your /(if avian face) [beak] having care to not apply to much pressure, as you would awake him/ (else) [lips] having care to not awake him.");
+			outputText("\n\nBit by bit you engulf more and more inches of bird meat on your [mouth/snout/muzzle], (if height>120) and despite having some problems with the final inches, manage to get most of it on your [mouth/snout/muzzle] on your throat. (else if height <120 and >60) and having troubles past fifteen inches, as its tip touches the back of your throat, you decide to stop at this point (else if height <60) the tip itself being a mouthful, you struggle to get past a few inches though your throat. Nevertheless, you try to make the most of it and take as much of his dick as you can.");
+			outputText("\n\nWith the monster penis deep throat on you, you start sucking, pumping with your hands the (height>120) few inches (height 120-60) rest (height<60) most of his penis  that was left out of your mouth. After a few pump and some vigorous sucks, the aroused moans from the sleeping avian are clear signals about that he’s gonna cum soon. Not waiting to want a second more, you increase the pace of your deepthroating, and your efforts are quickly rewarded");
+			outputText("\n\n“Gahh!” the still asleep Anzu shout, releasing with that a torrent of white and creamy goodness right to your gullet. ");
+			outputText("\n\nThe cummy effluvia from his orgasm starts flooding your stomach your belly /(height>120) extending a bit (height 120-60) getting overfilled and rounded (height 60) quickly inflated and distended/ by the sheer amount of cum produced by the avian. Cum that overflows his belly reaches your gullet and mouth and soon, it becomes too much for your overwhelmed throat to handle, so you pull his, now half-flaccid dick, off of your mouth, the final jets of cum splattering all over your face and chest, and some even falling over your still open [mouth/snout/muzzle/beak]. ");
+			player.refillHunger(80);
+			outputText("\n\nThe scent and the feeling of his cum over and inside you proves soon to be too much for you, and you end creaming yourself, as your (female) girlcum leaks over Anzu’s belly feathers (else) cums splatters and stain Anzu’s belly feathers.");
+			outputText("\n\nEven with that, you manage you take his dick in your hands and catch the last one in your mouth, and despite being the last and weakest, it's still manages to overfill your mouth and cheeks, so much that cum leaks again of the corners of your [mouth/snout/muzzle/beak]. But soon, a noise distracts your from enjoying this too much.");
+			outputText("\n\n“Huh, wha...what time is it?” Anzu awakes, a bit confused. The he sees you, lying over his belly with your hands on his dick and your cheeks filled with a mouthful of his cum, some of it leaking from your [mouth/beak/muzzle]. ");
+			outputText("\n\nA bit embarrassed, you flash a cum-bathed smile back to the avian, some cum escaping from the corners of the mouth in the process, and explain that, while you wanted a snack, you fell over him, and got to the idea of getting him off and having a treat at the same same, and that you hope that he doesn’t get too upset by that.");
+			outputText("\n\nThe avian simply laughs and takes your cum-filled form in his arms, and after giving your smaller body a loving squeeze, he says");
+			outputText("\n\n“Upset? For a blowjob from my lover? Why? If anything, I should thank you. But, if you were so hungry and horny, you simply could be asked. I’m your host tonight, after all , and I’ll be more than happy to give you a cummy meal.”");
+			outputText("\n\nAnzu states, playfully poking your cum-inflated stomach. Both of you laugh for a bit and soon, thanks to the vigorous exercise and the hearty lunch in the middle of the night, you catch your sleep again, cuddled on the bigger frame of your avian friend, that falls asleep not much later.");
+			dynStats("lus", 20);
+			doNext(sleepWithAnzuProcess);
+		}
+		
+		private function sleepingWithAnzuNoBJ():void {
+			clearOutput();
+			outputText("You shake your head and close your eyes. It takes quite a while but eventually, you succeed in catching your sleep again and make your way back to the dreamland.");
+			doNext(sleepWithAnzuProcess);
+		}
+		
+		private function sleepWithAnzuProcess():void {
+			clearOutput();
+			kGAMECLASS.timeQ = 10;
+			goNext(timeQ, true);
+			wakeUpWithAnzuGoodMorningBirdie();
+		}
+		private function sleepWithAnzuHeal():void {
+			kGAMECLASS.timeQ = 10;
+			camp.sleepRecovery(true);
+			kGAMECLASS.timeQ = 0;
+		}
+		
+		private function wakeUpWithAnzuGoodMorningBirdie():void {
+			outputText("Reinvigorated by the refreshing sleep, you get up in the first hours of the morning, still cuddled with Anzu, that wakes up between yawns.");
+			outputText("\n\nGetting off the bed with his aid, both you get dressed, not without some frisky grope from each other in the process, and after eating the breakfast that Anzu cooks for you in the early morning, you give the avian a deep kiss, and bid him farewell, returning to the camp with a smile on your face.");
+			if (player.hunger < player.maxHunger() - 20) player.refillHunger(30);
+			else player.refillHunger(player.maxHunger() + 10 - player.hunger);
+			sleepWithAnzuHeal();
+			kGAMECLASS.inDungeon = false;
+			kGAMECLASS.dungeonLoc = -1;
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
 	}
 
 }
