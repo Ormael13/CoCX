@@ -7,6 +7,7 @@ package {
 	import classes.CharSpecialTest;
 	import classes.CharCreationTest;
 	import classes.MonsterTest;
+	import classes.VaginaClassTest;
 
 [Suite]
 [RunWith("org.flexunit.runners.Suite")]
@@ -20,5 +21,6 @@ package {
 		 public var charCreationTest:CharCreationTest; 
 		 public var monsterTest:MonsterTest;
 		 public var creaturTest:CreatureTest;
+		 public var vaginaClass:VaginaClassTest;
 	}
 }

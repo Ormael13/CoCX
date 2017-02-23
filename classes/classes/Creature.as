@@ -387,10 +387,30 @@ package classes
 		public var vaginas:Vector.<VaginaClass>;
 		//Fertility is a % out of 100. 
 		public var fertility:Number = 10;
-		public var clitLength:Number = .5;
+		private var legacyClitLength:Number = VaginaClass.DEFAULT_CLIT_LENGTH;
 		public var nippleLength:Number = .25;
 		public var breastRows:Array;
 		public var ass:AssClass = new AssClass();
+		
+		public function get clitLength():Number {
+			if(!hasVagina()) {
+				//TODO throw a error in the future
+				trace("Error: legacy get clit length without a vagina!");
+				return legacyClitLength;
+			}else{
+				return vaginas[0].clitLength;
+			}
+		}
+		
+		public function set clitLength(clitLength:Number):void {
+			if(!hasVagina()) {
+				 //TODO throw a error in the future
+				 trace("Error: legacy set clit length without a vagina!");
+				 legacyClitLength = clitLength;
+			}else{
+			 	vaginas[0].clitLength = clitLength;
+			}
+		}
 		
 		private var _femininity:Number = 50;
 		public function get femininity():Number {
