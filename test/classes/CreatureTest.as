@@ -19,6 +19,7 @@ package classes{
 		private const MAX_SUPPORTED_VAGINAS:Number = 2;
 		private const DEFAULT_CLIT_LENGTH:Number = 0.5;
 		private const TEST_CLIT_LENGTH:Number = 3;
+		private const CUNT_CHANGE_VALUE:Number = 5;
 		
         private var cut:Creature;
 		
@@ -133,7 +134,7 @@ package classes{
 		[Test] 
         public function testVaginalCapacityWithVaginaAfterStrech():void {
 			assertThat(cut.createVagina(), equalTo(true));
-			cut.cuntChangeNoDisplay(5)
+			cut.cuntChangeNoDisplay(CUNT_CHANGE_VALUE)
 			
 			assertThat(cut.vaginalCapacity(), equalTo(8.8));
         }
@@ -217,7 +218,7 @@ package classes{
 			
 			cut.removeVagina(-2);
 			
-			assertThat(cut.vaginas, arrayWithSize(2));
+			assertThat(cut.vaginas, arrayWithSize(MAX_SUPPORTED_VAGINAS));
         }
 		
 		[Test] 
@@ -226,7 +227,7 @@ package classes{
 			
 			cut.removeVagina(0, -1);
 			
-			assertThat(cut.vaginas, arrayWithSize(2));
+			assertThat(cut.vaginas, arrayWithSize(MAX_SUPPORTED_VAGINAS));
         }
 		
 		[Test] 
@@ -235,7 +236,7 @@ package classes{
 			
 			cut.removeVagina(MAX_SUPPORTED_VAGINAS + 1);
 			
-			assertThat(cut.vaginas, arrayWithSize(2));
+			assertThat(cut.vaginas, arrayWithSize(MAX_SUPPORTED_VAGINAS));
         }
 		
 		[Test] 
@@ -275,7 +276,7 @@ package classes{
 			assertThat(cut.createVagina(), equalTo(true));
 			assertThat(cut.looseness(), equalTo(0)); // guard assert
 			
-			cut.cuntChangeNoDisplay(2);
+			cut.cuntChangeNoDisplay(CUNT_CHANGE_VALUE);
 			
 			assertThat(cut.looseness(), equalTo(1));
         }
@@ -284,28 +285,28 @@ package classes{
         public function testCuntChangeNoDisplayIsStretched():void {
 			assertThat(cut.createVagina(), equalTo(true));
 			
-			assertThat(cut.cuntChangeNoDisplay(2), equalTo(true)); 
+			assertThat(cut.cuntChangeNoDisplay(CUNT_CHANGE_VALUE), equalTo(true)); 
         }
 		
 		[Test] 
         public function testCuntChangeNoDisplayLooseVaginaNotStretched():void {
 			assertThat(cut.createVagina(true,1,4), equalTo(true));
 			
-			assertThat(cut.cuntChangeNoDisplay(2), equalTo(false)); 
+			assertThat(cut.cuntChangeNoDisplay(CUNT_CHANGE_VALUE), equalTo(false)); 
         }
 		
 		[Test] 
         public function testCuntChangeNoDisplayLoseVirginity():void {
 			assertThat(cut.createVagina(), equalTo(true));
 			
-			cut.cuntChangeNoDisplay(2);
+			cut.cuntChangeNoDisplay(CUNT_CHANGE_VALUE);
 			
 			assertThat(cut.hasVirginVagina(), equalTo(false));
         }
 		
 		[Test] 
         public function testCuntChangeNoDisplayWithNoVagina():void {
-			assertThat(cut.cuntChangeNoDisplay(5), equalTo(false));
+			assertThat(cut.cuntChangeNoDisplay(CUNT_CHANGE_VALUE), equalTo(false));
         }
 		
 		[Test] 
