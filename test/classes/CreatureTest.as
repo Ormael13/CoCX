@@ -12,6 +12,7 @@ package classes{
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Creature;
 	import classes.CoC;
+	import classes.PerkLib;
      
     public class CreatureTest {
 		include "../../includes/appearanceDefs.as";
@@ -20,6 +21,8 @@ package classes{
 		private const DEFAULT_CLIT_LENGTH:Number = 0.5;
 		private const TEST_CLIT_LENGTH:Number = 3;
 		private const CUNT_CHANGE_VALUE:Number = 5;
+		private const VAGINAL_CAPCITY_OFFSET:Number = 2;
+		private const VAGINAL_CAPCITY_TEST_DELTA:Number = 2;
 		
         private var cut:Creature;
 		private var noVagina:Creature;
@@ -36,6 +39,10 @@ package classes{
 		
 		private function createMaxVaginas(instance:Creature):void {
 			createVaginas(MAX_SUPPORTED_VAGINAS, instance);
+		}
+		
+		private function createPerk(perk:PerkType, instance:Creature): void {
+			instance.createPerk(perk, 1, 1, 1, 1);
 		}
 		
 		[BeforeClass]
@@ -134,6 +141,87 @@ package classes{
         public function testVaginalCapacityWithVagina():void {
 			assertThat(oneVagina.vaginalCapacity(), equalTo(0));
         }
+		
+		[Test]
+		public function testVaginalCapacityTaurBodyBonus():void {
+			oneVagina.legCount = 4;
+			assertThat(oneVagina.isTaur(), equalTo(true)); //guard assert
+			
+			assertThat(oneVagina.vaginalCapacity(), closeTo(55, 0.001));
+		}
+		
+		[Test]
+		public function testVaginalCapacityNagaBodyBonus():void {
+			oneVagina.lowerBody = LOWER_BODY_TYPE_NAGA;
+			assertThat(oneVagina.isNaga(), equalTo(true)); //guard assert
+			
+			assertThat(oneVagina.vaginalCapacity(), equalTo(22));
+		}
+		
+		[Test]
+		public function testVaginalCapacityWetPussyPerkBonus():void {
+			oneVagina.createPerk(PerkLib.WetPussy, 1, 1, 1, 1);
+			
+			assertThat(oneVagina.vaginalCapacity(), equalTo(22));
+		}
+		
+		[Test]
+		public function testVaginalCapacityHistorySlutPerkBonus():void {
+			oneVagina.createPerk(PerkLib.HistorySlut, 1, 1, 1, 1);
+			
+			assertThat(oneVagina.vaginalCapacity(), equalTo(22));
+		}
+		
+		[Test]
+		public function testVaginalCapacityOneTrackMindPerkBonus():void {
+			oneVagina.createPerk(PerkLib.OneTrackMind, 1, 1, 1, 1);
+			
+			assertThat(oneVagina.vaginalCapacity(), closeTo(10 + VAGINAL_CAPCITY_OFFSET, VAGINAL_CAPCITY_TEST_DELTA));
+		}
+		
+		
+		[Test]
+		public function testVaginalCapacityCornucopiaPerkBonus():void {
+			oneVagina.createPerk(PerkLib.Cornucopia, 1, 1, 1, 1);
+			
+			assertThat(oneVagina.vaginalCapacity(), closeTo(30 + VAGINAL_CAPCITY_OFFSET, VAGINAL_CAPCITY_TEST_DELTA));
+		}
+		
+		[Test]
+		public function testVaginalCapacityFerasBoonWideOpenPerkBonus():void {
+			oneVagina.createPerk(PerkLib.FerasBoonWideOpen, 1, 1, 1, 1);
+			
+			assertThat(oneVagina.vaginalCapacity(), closeTo(25 + VAGINAL_CAPCITY_OFFSET, VAGINAL_CAPCITY_TEST_DELTA));
+		}
+		
+		[Test]
+		public function testVaginalCapacityFerasBoonMilkingTwatPerkBonus():void {
+			oneVagina.createPerk(PerkLib.FerasBoonMilkingTwat, 1, 1, 1, 1);
+			
+			assertThat(oneVagina.vaginalCapacity(), closeTo(40 + VAGINAL_CAPCITY_OFFSET, VAGINAL_CAPCITY_TEST_DELTA));
+		}
+		
+		[Test]
+		public function testVaginalCapacityBonusVCapacityStatusEffect():void {
+			noVagina.createVagina(true, 1, 4);
+			noVagina.createStatusEffect(StatusEffects.BonusVCapacity, 1, 1, 1, 1);
+			
+			assertThat(noVagina.vaginalCapacity(), equalTo(141.9));
+		}
+		
+		[Test]
+		public function testVaginalCapacityBasedOnLooseness():void {
+			noVagina.createVagina(true, 0, 4);
+			
+			assertThat(noVagina.vaginalCapacity(), equalTo(128));
+		}
+		
+		[Test]
+		public function testVaginalCapacityBasedOnWetness():void {
+			noVagina.createVagina(true, 4, 1);
+			
+			assertThat(noVagina.vaginalCapacity(), equalTo(11.2));
+		}
 		
 		[Test] 
         public function testVaginalCapacityWithVaginaAfterStrech():void {
