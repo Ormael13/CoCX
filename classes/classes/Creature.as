@@ -1515,20 +1515,24 @@ package classes
 			}
 		}
 		
-		public function vaginalCapacity():Number
-		{
-			//If the player has no vaginas
-			if (vaginas.length == 0)
-				return 0;
-			var total:Number;
+		/**
+		 * Get the vaginal capacity bonus based on body type, perks and the bonus capacity status.
+		 * 
+		 * @return the vaginal capacity bonus for this creature
+		 */
+		private function vaginalCapacityBonus():Number {
 			var bonus:Number = 0;
-			//Centaurs = +50 capacity
-			if (isTaur())
-				bonus = 50;
-			//Naga = +20 capacity
-			else if (lowerBody == 3)
-				bonus = 20;
-			//Wet pussy provides 20 point boost
+			
+			if (!hasVagina()) {
+				return 0;
+			}
+
+			if (isTaur()){
+				bonus += 50;
+			}else if (lowerBody == LOWER_BODY_TYPE_NAGA){
+				bonus += 20;
+			}
+
 			if (findPerk(PerkLib.WetPussy) >= 0)
 				bonus += 20;
 			if (findPerk(PerkLib.HistorySlut) >= 0)
@@ -1541,8 +1545,20 @@ package classes
 				bonus += 25;
 			if (findPerk(PerkLib.FerasBoonMilkingTwat) >= 0)
 				bonus += 40;
-			total = (bonus + statusEffectv1(StatusEffects.BonusVCapacity) + 8 * vaginas[0].vaginalLooseness * vaginas[0].vaginalLooseness) * (1 + vaginas[0].vaginalWetness / 10);
-			return total;
+				
+			bonus += statusEffectv1(StatusEffects.BonusVCapacity);	
+				
+			return bonus;
+		}
+		
+		public function vaginalCapacity():Number
+		{
+			if (!hasVagina()) {
+				return 0;
+			}
+				
+			var bonus:Number = vaginalCapacityBonus();
+			return (bonus + 8 * vaginas[0].vaginalLooseness * vaginas[0].vaginalLooseness) * (1 + vaginas[0].vaginalWetness / 10);
 		}
 		
 		public function analCapacity():Number
