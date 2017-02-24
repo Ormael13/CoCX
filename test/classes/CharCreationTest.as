@@ -5,6 +5,7 @@ package classes{
 	import org.hamcrest.number.*;
 	import org.hamcrest.object.*;
 	import org.hamcrest.text.*;
+	import org.hamcrest.collection.*;
 	
 	import classes.CharSpecial;
 	import classes.CoC;
@@ -38,7 +39,7 @@ package classes{
         public function testReincarnateCreatesVaginaStoreZeroLength():void {
 			cut.testReincarnate();
 			
-			assertThat(kGAMECLASS.player.vaginas.length, equalTo(0));
+			assertThat(kGAMECLASS.player.vaginas, emptyArray());
         }
     }
 }

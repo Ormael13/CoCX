@@ -5,6 +5,7 @@ package classes{
 	import org.hamcrest.number.*;
 	import org.hamcrest.object.*;
 	import org.hamcrest.text.*;
+	import org.hamcrest.collection.*;
 	
 	import classes.helper.StageLocator;
 	
@@ -207,7 +208,7 @@ package classes{
         public function testCreateVaginaMaxVaginasArraySize():void {
 			createVaginas(MAX_SUPPORTED_VAGINAS + 1);
 			
-			assertThat(cut.vaginas.length, equalTo(MAX_SUPPORTED_VAGINAS));
+			assertThat(cut.vaginas, arrayWithSize(MAX_SUPPORTED_VAGINAS));
         }
 
 		[Test] 
@@ -216,7 +217,7 @@ package classes{
 			
 			cut.removeVagina(-2);
 			
-			assertThat(cut.vaginas.length, equalTo(2));
+			assertThat(cut.vaginas, arrayWithSize(2));
         }
 		
 		[Test] 
@@ -225,7 +226,7 @@ package classes{
 			
 			cut.removeVagina(0, -1);
 			
-			assertThat(cut.vaginas.length, equalTo(2));
+			assertThat(cut.vaginas, arrayWithSize(2));
         }
 		
 		[Test] 
@@ -234,7 +235,7 @@ package classes{
 			
 			cut.removeVagina(MAX_SUPPORTED_VAGINAS + 1);
 			
-			assertThat(cut.vaginas.length, equalTo(2));
+			assertThat(cut.vaginas, arrayWithSize(2));
         }
 		
 		[Test] 
@@ -255,7 +256,7 @@ package classes{
 			cut.removeVagina(-1);
 			
 			assertThat(cut.looseness(), equalTo(2));
-			assertThat(cut.vaginas.length, equalTo(1));
+			assertThat(cut.vaginas, arrayWithSize(1));
         }
 		
 		[Test] 
@@ -266,7 +267,7 @@ package classes{
 			cut.removeVagina(1);
 			
 			assertThat(cut.looseness(), equalTo(2));
-			assertThat(cut.vaginas.length, equalTo(1));
+			assertThat(cut.vaginas, arrayWithSize(1));
         }
 		
 		[Test] 

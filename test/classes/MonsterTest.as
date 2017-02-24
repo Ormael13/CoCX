@@ -5,6 +5,7 @@ package classes{
 	import org.hamcrest.number.*;
 	import org.hamcrest.object.*;
 	import org.hamcrest.text.*;
+	import org.hamcrest.collection.*;
 	
 	import classes.Monster;
      
@@ -23,7 +24,7 @@ package classes{
 		
 		[Test(description="Check that the array or vector for vaginas is correctly initialised")] 
         public function testVaginasStoreLengthIsZero():void {
-        	assertThat(cut.vaginas.length, equalTo(0));
+        	assertThat(cut.vaginas, emptyArray());
 		}
 		
 		[Test(description="Check that the array or vector for vaginas is correctly initialised")] 
