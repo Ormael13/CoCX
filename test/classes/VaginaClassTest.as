@@ -35,5 +35,19 @@ package classes{
 			
 			assertThat(cut.validate(), not(containsString("clitLength")));
         }
+		
+		[Test] 
+        public function testWetnessFactorZero():void {
+			cut.vaginalWetness = 0;
+			
+			assertThat(cut.wetnessFactor(), equalTo(1));
+        }
+		
+		[Test] 
+        public function testWetnessFactorFive():void {
+			cut.vaginalWetness = 5;
+			
+			assertThat(cut.wetnessFactor(), equalTo(1.5));
+        }
     }
 }

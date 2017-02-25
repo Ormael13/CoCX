@@ -64,14 +64,13 @@
 			return error;
 		}
 		
+		/**
+		 * Wetness factor used for calculating capacity.
+		 * 
+		 * @return wetness factor based on wetness
+		 */
 		public function wetnessFactor():Number {
-			if (vaginalWetness == 0) return 1.25;
-			if (vaginalWetness == 1) return 1;
-			if (vaginalWetness == 2) return 0.8;
-			if (vaginalWetness == 3) return 0.7;
-			if (vaginalWetness == 4) return 0.6;
-			if (vaginalWetness == 5) return 0.5;
-			return .5;
+			return 1 + vaginalWetness / 10;
 		}
 		public function capacity():Number {
 			if (vaginalLooseness == 0) return 8;
