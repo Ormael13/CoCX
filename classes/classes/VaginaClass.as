@@ -4,6 +4,7 @@
 
 	public class VaginaClass
 	{
+		include "../../includes/appearanceDefs.as";
 		public static const DEFAULT_CLIT_LENGTH:Number = 0.5;
 		
 		//constructor
@@ -85,6 +86,45 @@
 		 */
 		public function capacity(bonusCapacity:Number = 0):Number {
 			return baseCapacity(bonusCapacity) * wetnessFactor();
+		}
+		
+		/**
+		 * Try to stretch the vagina with the given cock area.
+		 * 
+		 * @param cArea the area of the cock doing the stretching
+		 * @param hasFeraMilkingTwat true if the player has the given Perk
+		 * @return true if the vagina was stretched
+		 */
+		public function stretch(cArea:Number, hasFeraMilkingTwat:Boolean = false):Boolean {
+			var stretched:Boolean = false;
+			if (hasFeraMilkingTwat || vaginalLooseness <= VAGINA_LOOSENESS_NORMAL) {
+			//cArea > capacity = autostreeeeetch.
+			if (cArea >= capacity()) {
+				if (vaginalLooseness >= VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) {}
+				else vaginalLooseness++;
+				stretched = true;
+			}
+			//If within top 10% of capacity, 50% stretch
+			else if (cArea >= .9 * capacity() && Utils.rand(2) == 0) {
+				vaginalLooseness++;
+				stretched = true;
+			}
+			//if within 75th to 90th percentile, 25% stretch
+			else if (cArea >= .75 * capacity() && Utils.rand(4) == 0) {
+				vaginalLooseness++;
+				stretched = true;
+				}
+			}
+
+			if (virgin) {
+				virgin = false;
+			}
+			
+			if (stretched) {
+				trace("CUNT STRETCHED TO " + (vaginalLooseness) + ".");
+			}
+			
+			return stretched;
 		}
 	}
 }
