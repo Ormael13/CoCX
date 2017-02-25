@@ -21,6 +21,7 @@ package classes{
 		private const DEFAULT_CLIT_LENGTH:Number = 0.5;
 		private const TEST_CLIT_LENGTH:Number = 3;
 		private const CUNT_CHANGE_VALUE:Number = 5;
+		private const VAGINAL_LOOSENESS_VALUE:Number = VAGINA_LOOSENESS_LOOSE;
 		private const VAGINAL_CAPCITY_OFFSET:Number = 2;
 		private const VAGINAL_CAPCITY_TEST_DELTA:Number = 2;
 		
@@ -365,6 +366,40 @@ package classes{
         }
 		
 		[Test] 
+        public function testCuntChangeNoDisplayWithFeraMilkingTwatAndAboveNormalLooseness():void {
+			oneVagina.vaginas[0].vaginalLooseness = VAGINAL_LOOSENESS_VALUE;
+			oneVagina.createPerk(PerkLib.FerasBoonMilkingTwat, 1, 1, 1, 1);
+			
+			assertThat(oneVagina.cuntChangeNoDisplay(Number.MAX_VALUE), equalTo(false));
+        }
+			
+		[Test] 
+        public function testCuntChangeNoDisplayWithNoFeraMilkingTwatAndAboveNormalLooseness():void {
+			oneVagina.vaginas[0].vaginalLooseness = VAGINAL_LOOSENESS_VALUE;
+			
+			assertThat(oneVagina.cuntChangeNoDisplay(Number.MAX_VALUE), equalTo(true));
+        }
+		
+		[Test] 
+        public function testCuntChangeNoDisplayWithFeraMilkingTwatAndNormalLooseness():void {
+			oneVagina.createPerk(PerkLib.FerasBoonMilkingTwat, 1, 1, 1, 1);
+			
+			assertThat(oneVagina.cuntChangeNoDisplay(Number.MAX_VALUE), equalTo(true));
+        }
+		
+		[Test] 
+        public function testCuntChangeNoDisplayWithNoFeraMilkingTwatAndNormalLooseness():void {
+			assertThat(oneVagina.cuntChangeNoDisplay(Number.MAX_VALUE), equalTo(true));
+        }
+				
+		[Test] 
+        public function testFeraMilkingTwatPerkCheck():void {
+			oneVagina.createPerk(PerkLib.FerasBoonMilkingTwat, 1, 1, 1, 1);
+			
+			assertThat(oneVagina.findPerk(PerkLib.FerasBoonMilkingTwat), equalTo(0));
+        }
+		
+		[Test] 
         public function testCuntChangeNoDisplayLooseVaginaNotStretched():void {
 			assertThat(noVagina.createVagina(true,1,4), equalTo(true));
 			
@@ -381,6 +416,29 @@ package classes{
 		[Test] 
         public function testCuntChangeNoDisplayWithNoVagina():void {
 			assertThat(noVagina.cuntChangeNoDisplay(CUNT_CHANGE_VALUE), equalTo(false));
+        }
+		
+		[Test] 
+        public function testCuntChangeNoDisplayCuntStretchedStatusEffectOnStretch():void {
+			oneVagina.cuntChangeNoDisplay(Number.MAX_VALUE);
+			
+			assertThat(oneVagina.findStatusEffect(StatusEffects.CuntStretched), equalTo(0));
+        }
+		
+		[Test] 
+        public function testCuntChangeNoDisplayNoCuntStretchedStatusEffectOnNoStretch():void {
+			oneVagina.cuntChangeNoDisplay(0);
+			
+			assertThat(oneVagina.findStatusEffect(StatusEffects.CuntStretched), not(equalTo(0)));
+        }
+		
+		[Test] 
+        public function testCuntChangeNoDisplayCuntStretchedStatusEffectOnReStretch():void {
+			oneVagina.createStatusEffect(StatusEffects.CuntStretched,1,0,0,0);
+			
+			oneVagina.cuntChangeNoDisplay(Number.MAX_VALUE);
+			
+			assertThat(oneVagina.statusEffect(oneVagina.findStatusEffect(StatusEffects.CuntStretched)).value1, equalTo(0));
         }
 		
 		[Test] 
