@@ -55,7 +55,7 @@ public var file:FileReference;
 public var loader:URLLoader;
 
 public var saveFileNames:Array = ["CoC_1", "CoC_2", "CoC_3", "CoC_4", "CoC_5", "CoC_6", "CoC_7", "CoC_8", "CoC_9", "CoC_10", "CoC_11", "CoC_12", "CoC_13", "CoC_14"];
-public var versionProperties:Object = { "legacy" : 100, "0.8.3f7" : 124, "0.8.3f8" : 125, "0.8.4.3":119, "latest" : 119 };
+public var versionProperties:Object = {"test" : 0, "legacy" : 100, "0.8.3f7" : 124, "0.8.3f8" : 125, "0.8.4.3":119, "latest" : 119};
 public var savedGameDir:String = "data/com.fenoxo.coc";
 
 public var notes:String = "";
@@ -960,6 +960,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			saveFile.data.vaginas[i].clitPierced = player.vaginas[i].clitPierced;
 			saveFile.data.vaginas[i].clitPShort = player.vaginas[i].clitPShort;
 			saveFile.data.vaginas[i].clitPLong = player.vaginas[i].clitPLong;
+			saveFile.data.vaginas[i].clitLength = player.vaginas[i].clitLength;
 		}
 		//NIPPLES
 		saveFile.data.nippleLength = player.nippleLength;
@@ -1883,6 +1884,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				player.vaginas[i].clitPierced = 0;
 				player.vaginas[i].clitPShort = "";
 				player.vaginas[i].clitPLong = "";
+				player.vaginas[i].clitLength = VaginaClass.DEFAULT_CLIT_LENGTH;
 			}
 			else
 			{
@@ -1892,6 +1894,12 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				player.vaginas[i].clitPierced = saveFile.data.vaginas[i].clitPierced;
 				player.vaginas[i].clitPShort = saveFile.data.vaginas[i].clitPShort;
 				player.vaginas[i].clitPLong = saveFile.data.vaginas[i].clitPLong;
+				player.vaginas[i].clitLength = saveFile.data.vaginas[i].clitLength;
+				
+				if(saveFile.data.vaginas[i].clitLength == undefined) {
+					player.vaginas[i].clitLength = VaginaClass.DEFAULT_CLIT_LENGTH;
+					trace("Clit length was not loaded, setting to default.");
+				}
 			}
 				//trace("LoadOne Vagina i(" + i + ")");
 		}
