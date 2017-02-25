@@ -72,14 +72,19 @@
 		public function wetnessFactor():Number {
 			return 1 + vaginalWetness / 10;
 		}
-		public function capacity():Number {
-			if (vaginalLooseness == 0) return 8;
-			if (vaginalLooseness == 1) return 16;
-			if (vaginalLooseness == 2) return 24;
-			if (vaginalLooseness == 3) return 36;
-			if (vaginalLooseness == 4) return 56;
-			if (vaginalLooseness == 5) return 100;
-			return 10000;
+		
+		private function baseCapacity(bonusCapacity:Number):Number {
+			return bonusCapacity + 8 * vaginalLooseness * vaginalLooseness;
+		}
+		
+		/**
+		 * The capacity of the vagina, calculated using looseness and wetness.
+		 * 
+		 * @param bonusCapacity extra space to add
+		 * @return the total capacity, with all factors considered.
+		 */
+		public function capacity(bonusCapacity:Number = 0):Number {
+			return baseCapacity(bonusCapacity) * wetnessFactor();
 		}
 	}
 }

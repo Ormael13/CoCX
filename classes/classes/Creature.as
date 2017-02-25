@@ -1558,7 +1558,7 @@ package classes
 			}
 				
 			var bonus:Number = vaginalCapacityBonus();
-			return (bonus + 8 * vaginas[0].vaginalLooseness * vaginas[0].vaginalLooseness) * vaginas[0].wetnessFactor();
+			return vaginas[0].capacity(bonus);
 		}
 		
 		public function analCapacity():Number
