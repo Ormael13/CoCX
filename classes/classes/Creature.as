@@ -2428,41 +2428,19 @@ package classes
 			return stretched;
 		}
 
-		public function cuntChangeNoDisplay(cArea:Number):Boolean{
+		public function cuntChangeNoDisplay(cArea : Number) : Boolean {
 			if (vaginas.length == 0) return false;
-			var stretched:Boolean = false;
-			if (findPerk(PerkLib.FerasBoonMilkingTwat) < 0 || vaginas[0].vaginalLooseness <= VAGINA_LOOSENESS_NORMAL) {
-			//cArea > capacity = autostreeeeetch.
-			if (cArea >= vaginalCapacity()) {
-				if (vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) {}
-				else vaginas[0].vaginalLooseness++;
-				stretched = true;
-			}
-			//If within top 10% of capacity, 50% stretch
-			else if (cArea >= .9 * vaginalCapacity() && rand(2) == 0) {
-				vaginas[0].vaginalLooseness++;
-				stretched = true;
-			}
-			//if within 75th to 90th percentile, 25% stretch
-			else if (cArea >= .75 * vaginalCapacity() && rand(4) == 0) {
-				vaginas[0].vaginalLooseness++;
-				stretched = true;
-				}
-			}
-			//If virgin
-			if (vaginas[0].virgin) {
-				vaginas[0].virgin = false;
-			}
-			//Delay anti-stretching
+			var stretched : Boolean = vaginas[0].stretch(cArea, findPerk(PerkLib.FerasBoonMilkingTwat) < 0);
+			
+			//TODO use vagina attribute instead of status effect
+			// Delay anti-stretching
 			if (cArea >= .5 * vaginalCapacity()) {
-				//Cunt Stretched used to determine how long since last enlargement
-				if (findStatusEffect(StatusEffects.CuntStretched) < 0) createStatusEffect(StatusEffects.CuntStretched,0,0,0,0);
-				//Reset the timer on it to 0 when restretched.
-				else changeStatusValue(StatusEffects.CuntStretched,1,0);
+				// Cunt Stretched used to determine how long since last enlargement
+				if (findStatusEffect(StatusEffects.CuntStretched) < 0) createStatusEffect(StatusEffects.CuntStretched, 0, 0, 0, 0);
+				// Reset the timer on it to 0 when restretched.
+				else changeStatusValue(StatusEffects.CuntStretched, 1, 0);
 			}
-			if (stretched) {
-				trace("CUNT STRETCHED TO " + (vaginas[0].vaginalLooseness) + ".");
-			}
+			
 			return stretched;
 		}
 		
