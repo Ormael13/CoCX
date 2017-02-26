@@ -14,6 +14,7 @@
 			this.vaginalWetness=vaginalWetness;
 			this.vaginalLooseness=vaginalLooseness;
 			this.clitLength = clitLength;
+			this.recoveryProgress = 0;
 		}
 		//data
 		//Vag wetness
@@ -40,13 +41,14 @@
 		public var clitPShort:String = "";
 		public var clitPLong:String = "";
 		public var clitLength:Number;
+		public var recoveryProgress:int;
 
 		public function validate():String
 		{
 			var error:String = "";
 			error += Utils.validateNonNegativeNumberFields(this, "VaginaClass.validate", [
 				"vaginalWetness", "vaginalLooseness", "type",
-				"fullness", "labiaPierced", "clitPierced", "clitLength"
+				"fullness", "labiaPierced", "clitPierced", "clitLength", "recoveryProgress"
 			]);
 			if (labiaPierced) {
 				if (labiaPShort == "") error += "Labia pierced but labiaPShort = ''. ";
@@ -86,6 +88,15 @@
 		 */
 		public function capacity(bonusCapacity:Number = 0):Number {
 			return baseCapacity(bonusCapacity) * wetnessFactor();
+		}
+		
+		//TODO call this in the setter? With new value > old value check?
+		/**
+		 * Resets the recovery counter.
+		 * The counter is used for looseness recovery over time, a reset usualy occurs when the looseness increases.
+		 */
+		public function resetRecoveryProgress():void {
+			this.recoveryProgress = 0;
 		}
 		
 		/**

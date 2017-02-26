@@ -2432,13 +2432,9 @@ package classes
 			if (vaginas.length == 0) return false;
 			var stretched : Boolean = vaginas[0].stretch(cArea, findPerk(PerkLib.FerasBoonMilkingTwat) < 0);
 			
-			//TODO use vagina attribute instead of status effect
-			// Delay anti-stretching
+			// Delay stretch recovery
 			if (cArea >= .5 * vaginalCapacity()) {
-				// Cunt Stretched used to determine how long since last enlargement
-				if (findStatusEffect(StatusEffects.CuntStretched) < 0) createStatusEffect(StatusEffects.CuntStretched, 0, 0, 0, 0);
-				// Reset the timer on it to 0 when restretched.
-				else changeStatusValue(StatusEffects.CuntStretched, 1, 0);
+				vaginas[0].resetRecoveryProgress();
 			}
 			
 			return stretched;

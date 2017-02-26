@@ -1,6 +1,7 @@
 package {
 	import classes.HelperSuit;
 	import classes.ScenesSuit;
+	import classes.ItemsSuit;
 
 	import classes.CreatureTest;
 	import classes.CoCTest;
@@ -9,6 +10,8 @@ package {
 	import classes.MonsterTest;
 	import classes.VaginaClassTest;
 	import classes.SavesTest;
+	import classes.PlayerEventsTest;
+	import classes.PlayerEventsVaginaLoosenessRecoveryTest;
 
 [Suite]
 [RunWith("org.flexunit.runners.Suite")]
@@ -16,6 +19,7 @@ package {
 	{
 		 public var helperSuit:HelperSuit;
 		 public var scenesSuit:ScenesSuit;
+		 public var itemsSuit:ItemsSuit;
 		
 		 public var coCTest:CoCTest;
 		 public var charSpecialTest:CharSpecialTest;
@@ -24,5 +28,7 @@ package {
 		 public var creaturTest:CreatureTest;
 		 public var vaginaClass:VaginaClassTest;
 		 public var savesTest:SavesTest;
+		 public var playerEventsTest:PlayerEventsTest;
+		 public var playerEventsVaginaLoosenessRecoveryTest:PlayerEventsVaginaLoosenessRecoveryTest;
 	}
 }

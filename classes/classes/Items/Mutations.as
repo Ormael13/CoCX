@@ -3341,10 +3341,7 @@
 				if (player.vaginas[0].vaginalLooseness < VAGINA_LOOSENESS_LOOSE && changes < changeLimit && rand(2) == 0) {
 					outputText("\n\nYou feel a relaxing sensation in your groin.  On further inspection you discover your " + player.vaginaDescript(0) + " has somehow relaxed, permanently loosening.", false);
 					player.vaginas[0].vaginalLooseness++;
-					//Cunt Stretched used to determine how long since last enlargement
-					if (player.findStatusEffect(StatusEffects.CuntStretched) < 0) player.createStatusEffect(StatusEffects.CuntStretched, 0, 0, 0, 0);
-					//Reset the timer on it to 0 when restretched.
-					else player.changeStatusValue(StatusEffects.CuntStretched, 1, 0);
+					player.vaginas[0].resetRecoveryProgress();
 					player.vaginas[0].vaginalLooseness++;
 					changes++;
 					dynStats("lus", 10);

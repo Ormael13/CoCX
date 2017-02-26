@@ -24,6 +24,7 @@ package classes{
 		private const VAGINAL_LOOSENESS_VALUE:Number = VAGINA_LOOSENESS_LOOSE;
 		private const VAGINAL_CAPCITY_OFFSET:Number = 2;
 		private const VAGINAL_CAPCITY_TEST_DELTA:Number = 2;
+		private const RECOVERY_COUNT:Number = 5;
 		
         private var cut:Creature;
 		private var noVagina:Creature;
@@ -62,9 +63,14 @@ package classes{
 			
 			oneVagina = new Creature();
 			oneVagina.createVagina();
+			oneVagina.vaginas[0].recoveryProgress = RECOVERY_COUNT;
 			
 			maxVagina = new Creature();
 			createMaxVaginas(maxVagina);
+
+			for each (var vag:VaginaClass in maxVagina.vaginas){
+				vag.recoveryProgress = RECOVERY_COUNT;		
+			}
 			
 			// verify created test instances
 			assertThat(noVagina.hasVagina(), equalTo(false));
@@ -419,26 +425,18 @@ package classes{
         }
 		
 		[Test] 
-        public function testCuntChangeNoDisplayCuntStretchedStatusEffectOnStretch():void {
+        public function testCuntChangeNoDisplayCuntStretchedRecoveryProgress():void {
 			oneVagina.cuntChangeNoDisplay(Number.MAX_VALUE);
 			
-			assertThat(oneVagina.findStatusEffect(StatusEffects.CuntStretched), equalTo(0));
+			assertThat(oneVagina.vaginas[0].recoveryProgress, equalTo(0));
         }
 		
 		[Test] 
-        public function testCuntChangeNoDisplayNoCuntStretchedStatusEffectOnNoStretch():void {
+
+        public function testCuntChangeNoDisplayNoRecoveryProgressIncrease():void {
 			oneVagina.cuntChangeNoDisplay(0);
 			
-			assertThat(oneVagina.findStatusEffect(StatusEffects.CuntStretched), not(equalTo(0)));
-        }
-		
-		[Test] 
-        public function testCuntChangeNoDisplayCuntStretchedStatusEffectOnReStretch():void {
-			oneVagina.createStatusEffect(StatusEffects.CuntStretched,1,0,0,0);
-			
-			oneVagina.cuntChangeNoDisplay(Number.MAX_VALUE);
-			
-			assertThat(oneVagina.statusEffect(oneVagina.findStatusEffect(StatusEffects.CuntStretched)).value1, equalTo(0));
+			assertThat(oneVagina.vaginas[0].recoveryProgress, equalTo(RECOVERY_COUNT));
         }
 		
 		[Test] 
