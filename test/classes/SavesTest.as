@@ -17,7 +17,9 @@ package classes{
     public class SavesTest {
 		private static const TEST_VERSION:String = "test";
 		private static const TEST_SAVE_GAME:String = "test";
+		
 		private static const CLIT_LENGTH:Number = 5;
+		private static const VAGINA_RECOVERY_PROGRESS:int = 6;
 		
 		private var player:Player;
         private var cut:Saves;
@@ -48,6 +50,18 @@ package classes{
 			cut.loadGame(TEST_SAVE_GAME);
 			
 			assertThat(kGAMECLASS.player.vaginas[0].clitLength, equalTo(CLIT_LENGTH));
+        }
+		  
+		[Test] 
+        public function testRecoveryProgressSaved():void {
+			player.createVagina();
+			player.vaginas[0].recoveryProgress = VAGINA_RECOVERY_PROGRESS;
+            cut.saveGame(TEST_SAVE_GAME, false);
+			player.vaginas[0].resetRecoveryProgress();
+			
+			cut.loadGame(TEST_SAVE_GAME);
+			
+			assertThat(kGAMECLASS.player.vaginas[0].recoveryProgress, equalTo(VAGINA_RECOVERY_PROGRESS));
         }
     }
 }

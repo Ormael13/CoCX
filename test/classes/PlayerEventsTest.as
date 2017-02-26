@@ -34,14 +34,11 @@ package classes{
 			cut = new PlayerEvents();
 			
 			player.createVagina(false, 1, LOOSENESS);
-			player.createStatusEffect(StatusEffects.CuntStretched, Number.MAX_VALUE, 0, 0, 0);
+			player.vaginas[0].recoveryProgress = Number.MAX_VALUE;
         }
 		
-		private function setVaginaSize(size:Number):void {
-			player.removeVagina();
-			player.createVagina(false, 1, size);  
-		}
-		     
+		// most of the recovery tests are performed with a parametrized tests
+		
         [Test] 
         public function testVaginaLoosenessChangeWithNoVagina():void {
 			player.removeVagina();
@@ -53,7 +50,7 @@ package classes{
 		
 		[Test] 
         public function testVaginaLoosenessChangeWithoutStatus():void {
-			player.removeStatusEffect(StatusEffects.CuntStretched);
+			player.vaginas[0].resetRecoveryProgress();
 						
 			cut.timeChange();
 			

@@ -961,6 +961,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			saveFile.data.vaginas[i].clitPShort = player.vaginas[i].clitPShort;
 			saveFile.data.vaginas[i].clitPLong = player.vaginas[i].clitPLong;
 			saveFile.data.vaginas[i].clitLength = player.vaginas[i].clitLength;
+			saveFile.data.vaginas[i].recoveryProgress = player.vaginas[i].recoveryProgress;
 		}
 		//NIPPLES
 		saveFile.data.nippleLength = player.nippleLength;
@@ -1885,6 +1886,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				player.vaginas[i].clitPShort = "";
 				player.vaginas[i].clitPLong = "";
 				player.vaginas[i].clitLength = VaginaClass.DEFAULT_CLIT_LENGTH;
+				player.vaginas[i].recoveryProgress = 0;
 			}
 			else
 			{
@@ -1895,10 +1897,19 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				player.vaginas[i].clitPShort = saveFile.data.vaginas[i].clitPShort;
 				player.vaginas[i].clitPLong = saveFile.data.vaginas[i].clitPLong;
 				player.vaginas[i].clitLength = saveFile.data.vaginas[i].clitLength;
+				player.vaginas[i].recoveryProgress = saveFile.data.vaginas[i].recoveryProgress;
 				
+				
+				// backwards compatibility
+				//TODO is there a better way to do this?
 				if(saveFile.data.vaginas[i].clitLength == undefined) {
 					player.vaginas[i].clitLength = VaginaClass.DEFAULT_CLIT_LENGTH;
 					trace("Clit length was not loaded, setting to default.");
+				}
+				
+				if(saveFile.data.vaginas[i].recoveryProgress == undefined) {
+					player.vaginas[i].recoveryProgress = 0;
+					trace("Stretch counter was not loaded, setting to 0.");
 				}
 			}
 				//trace("LoadOne Vagina i(" + i + ")");

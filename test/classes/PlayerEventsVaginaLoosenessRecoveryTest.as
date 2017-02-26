@@ -40,23 +40,19 @@ package classes{
 			player = new Player();
 			kGAMECLASS.player = player;
 			cut = new PlayerEvents();
-			
-			player.createVagina(false, 1, LOOSENESS);
-			player.createStatusEffect(StatusEffects.CuntStretched, Number.MAX_VALUE, 0, 0, 0);
         }
 		
 		private function setVaginaSize(size:Number):void {
 			player.removeVagina();
-			player.createVagina(false, 1, size);  
+			player.createVagina(false, 1, size);
 		}
 		
 		/**
 		 * Sets 'cuntStretched' status to the give value - 1.
 		 * The - 1 is required to counteract the code adding 1 to the value prior to checking.
 		 */
-		private function setVaginaStretchStatus(value:Number):void {
-			player.removeStatusEffect(StatusEffects.CuntStretched);
-			player.createStatusEffect(StatusEffects.CuntStretched, value - 1, 0, 0, 0);
+		private function setVaginaRecoveryProgress(value:Number):void {
+			player.vaginas[0].recoveryProgress = value - 1;
 		}
      
 	 
@@ -83,7 +79,7 @@ package classes{
         public function testAffectedByFerasBoon():void {
 			player.createPerk(PerkLib.FerasBoonWideOpen, 1, 1, 1, 1);
 			setVaginaSize(looseness);
-			setVaginaStretchStatus(Number.MAX_VALUE);
+			setVaginaRecoveryProgress(int.MAX_VALUE);
 		
 			cut.timeChange();
 			
@@ -93,17 +89,17 @@ package classes{
 		[Test]
         public function testStatusEffectReset():void {
 			setVaginaSize(looseness);
-			setVaginaStretchStatus(threshold);
+			setVaginaRecoveryProgress(threshold);
 		
 			cut.timeChange();
 			
-			assertThat(player.statusEffectv1(StatusEffects.CuntStretched), equalTo(0));
+			assertThat(player.vaginas[0].recoveryProgress, equalTo(0));
         }
 		
 		[Test]
         public function testVaginaLoosenessChangeThreshold_above():void {
 			setVaginaSize(looseness);
-			setVaginaStretchStatus(threshold + 1);
+			setVaginaRecoveryProgress(threshold + 1);
 					
 			cut.timeChange();
 			
@@ -113,7 +109,7 @@ package classes{
 		[Test]
         public function testVaginaLoosenessChangeThreshold_at():void {
 			setVaginaSize(looseness);
-			setVaginaStretchStatus(threshold);
+			setVaginaRecoveryProgress(threshold);
 		
 			cut.timeChange();
 			
@@ -123,7 +119,7 @@ package classes{
 		[Test]
         public function testVaginaLoosenessChangeThreshold_below():void {
 			setVaginaSize(looseness);
-			setVaginaStretchStatus(threshold - 1);
+			setVaginaRecoveryProgress(threshold - 1);
 
 			cut.timeChange();
 			

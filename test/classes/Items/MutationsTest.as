@@ -15,6 +15,8 @@ package classes.Items {
 	import classes.StatusEffects;
 	
     public class MutationsTest {
+		private static const RECOVERY_PROGRESS:int = 5;
+		
 		private var player:Player;
 		private var femalePlayer:Player;
         private var cut:Mutations;   
@@ -32,6 +34,7 @@ package classes.Items {
 			femalePlayer = new Player();
 			femalePlayer.createBreastRow(2);
 			femalePlayer.createVagina();
+			femalePlayer.vaginas[0].recoveryProgress = RECOVERY_PROGRESS;
 
 			// guard asserts			
 			assertThat(player.hasVagina(), equalTo(false)); 
@@ -41,6 +44,7 @@ package classes.Items {
 			assertThat(femalePlayer.hasVagina(), equalTo(true)); 
 			assertThat(femalePlayer.hasBreasts(), equalTo(true));
 			assertThat(femalePlayer.hasCock(), equalTo(false));
+			assertThat(femalePlayer.vaginas[0].recoveryProgress, equalTo(RECOVERY_PROGRESS));
         }
 		
 		private function drinkBova(count:int, tainted : Boolean, enhanced : Boolean, player : Player):void {
@@ -56,22 +60,10 @@ package classes.Items {
         }
 		
 		[Test]
-		public function testLaBovaAddsStatusEffect():void {
-            assertThat(femalePlayer.findStatusEffect(StatusEffects.CuntStretched), not(equalTo(0))) //guard assert
-            
+		public function testLaBovaResetsRecoveryProgress():void {
 			drinkBova(100, true, false, femalePlayer);
 			
-			assertThat(femalePlayer.findStatusEffect(StatusEffects.CuntStretched), equalTo(0))
-        }
-		
-		[Test]
-		public function testLaBovaUpdatedStatusEffect():void {
-            femalePlayer.createStatusEffect(StatusEffects.CuntStretched, int.MAX_VALUE, 0, 0, 0)
-            assertThat(femalePlayer.statusEffect(femalePlayer.findStatusEffect(StatusEffects.CuntStretched)).value1, equalTo(int.MAX_VALUE))
-			
-			drinkBova(100, true, false, femalePlayer);
-			
-			assertThat(femalePlayer.statusEffect(femalePlayer.findStatusEffect(StatusEffects.CuntStretched)).value1, equalTo(0))
+			assertThat(femalePlayer.vaginas[0].recoveryProgress, equalTo(0))
         }
     }
 }
