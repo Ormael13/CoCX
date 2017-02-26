@@ -2300,8 +2300,8 @@ public static const ANZU_ANAL_CATCH_COUNTER:int                                 
 public static const ANZU_VAGINAL_CATCH_COUNTER:int                                  = 2292;
 public static const ANZU_BLOWN_YOU_COUNTER:int                                      = 2293;
 public static const ANZU_SUCKED_OFF_COUNTER:int                                     = 2294;
-public static const SANDWITCH_SERVICED:int                                          = 2295;	// Number of times, the player has serviced a sand witch.
-public static const JOJO_STATUS:int                                                 = 2296; // Replacement for `CoC.monk` variable.
+public static const ANZU_ANAL_PITCH_COUNTER:int                                     = 2295;	
+public static const ANZU_FED_COUNTER:int                                            = 2296; 
 public static const TIMES_EXPLORED:int                                              = 2297; // Replaces `player.explored`
 public static const TIMES_EXPLORED_FOREST:int                                       = 2298; // Replaces `player.exploredForest`
 public static const TIMES_EXPLORED_DESERT:int                                       = 2299; // Replaces `player.exploredDesert`
@@ -2315,8 +2315,8 @@ public static const MINERVA_SPAR_VICTORIES:int                                  
 public static const VALERIA_SPAR_VICTORIES:int                                      = 2307;
 public static const UNKNOWN_FLAG_NUMBER_02308:int                                   = 2308; // Reserved for additional sparrable partner.
 public static const UNKNOWN_FLAG_NUMBER_02309:int                                   = 2309; // Reserved for additional sparrable partner.
-public static const GRIMDARK_BACKGROUND_UNLOCKED:int                                = 2310; // Reserved for Grimdark.
-public static const GRIMDARK_FACTORY_DOOR_UNLOCKED:int                              = 2311;
+public static const SANDWITCH_SERVICED:int                                          = 2310; // Number of times, the player has serviced a sand witch.
+public static const JOJO_STATUS:int                                                 = 2311; // Replacement for `CoC.monk` variable.
 public static const IZMA_BROFIED:int                                                = 2312;
 public static const IZMAEL_ANAL_PENETRATED:int                                      = 2313;
 public static const IZMAEL_FRENZIED:int                                             = 2314;
@@ -2915,8 +2915,8 @@ public static const BIMBOSKIRT_MINIMUM_LUST:int                                 
 public static const UNKNOWN_FLAG_NUMBER_02907:int                                   = 2907;
 public static const UNKNOWN_FLAG_NUMBER_02908:int                                   = 2908;
 public static const UNKNOWN_FLAG_NUMBER_02909:int                                   = 2909;
-public static const UNKNOWN_FLAG_NUMBER_02910:int                                   = 2910;
-public static const UNKNOWN_FLAG_NUMBER_02911:int                                   = 2911;
+public static const GRIMDARK_BACKGROUND_UNLOCKED:int                                = 2910; //2910-2949 possibly reserved for Grimdark Mode.
+public static const GRIMDARK_FACTORY_DOOR_UNLOCKED:int                              = 2911;
 public static const UNKNOWN_FLAG_NUMBER_02912:int                                   = 2912;
 public static const UNKNOWN_FLAG_NUMBER_02913:int                                   = 2913;
 public static const UNKNOWN_FLAG_NUMBER_02914:int                                   = 2914;

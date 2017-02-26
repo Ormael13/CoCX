@@ -1553,13 +1553,13 @@
 			if (perk == PerkLib.MaraesGiftFertility) return true;
 			if (perk == PerkLib.MaraesGiftProfractory) return true;
 			if (perk == PerkLib.MaraesGiftStud) return true;
+			if (perk == PerkLib.PurityBlessing) return true;
 			//Fire Breath Perks
 			if (perk == PerkLib.Hellfire) return true;
 			if (perk == PerkLib.FireLord) return true;
 			if (perk == PerkLib.Dragonfire) return true;
 			//Other Perks
 			if (perk == PerkLib.Androgyny) return true;
-			if (perk == PerkLib.PurityBlessing) return true;
 			if (perk == PerkLib.MagicalFertility) return true;
 			if (perk == PerkLib.MagicalVirility) return true;
 			if (perk == PerkLib.MilkMaid) return true;

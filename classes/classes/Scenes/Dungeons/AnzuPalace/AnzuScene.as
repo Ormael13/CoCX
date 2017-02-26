@@ -3,6 +3,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 	import classes.BaseContent;
 	import classes.TimeAwareInterface;
 	import classes.GlobalFlags.*;
+	import classes.PerkLib;
 	import classes.StatusEffects;
 	import classes.Scenes.Dungeons.DungeonCore;
 	import classes.Items.*;
@@ -268,9 +269,8 @@ package classes.Scenes.Dungeons.AnzuPalace
 			menu();
 			addButton(0, "Appearance", anzuAppearance, null, null, null, "Take a closer look at the avian deity.");
 			addButton(1, "Talk", anzuTalkMenu, null, null, null, "Get to know Anzu better.");
-			//if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] >= 3) addButton(2, "Sex", anzuSexMenu, null, null, null, "Have some sexy times with the sexy avian deity.");
-			//else addButtonDisabled(2, "Sex", "Maybe if Anzu likes you better, he will let you do that.");
-			addButtonDisabled(2, "Sex", "Coming Soon!");
+			if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] >= 3) addButton(2, "Sex", anzuSexMenu, null, null, null, "Have some sexy times with the sexy avian deity.");
+			else addButtonDisabled(2, "Sex", "Maybe if Anzu likes you better, he will let you do that.");
 			if (kGAMECLASS.dungeonLoc == DungeonCore.DUNGEON_ANZU_ROOF) {
 				if (player.canFly()) {
 					if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] >= 4) addButton(3, "Race Him", null, null, null, null, "Challenge Anzu to a race and have some fun!");
@@ -326,7 +326,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 			outputText("\n\nThe portal left me in the Rift, and luckily both the urns and the chariot were in good shape. I wandered for days across the hills before I found this place. When I came here it was inhabited by a group of winged women: valkyries which I later learnt they’re called. Though weakened, I was still a god, and throwing them out was easy enough. After that, I reconditioned the place to fit my image. Besides killing the occasional giant that comes here to prove his courage, I’ve lived in peace here for fifteen years.</i>\"");
 			outputText("\n\nYou thank Anzu for his explanation.");
 			cheatTime(0.25);
-			flags[kFLAGS.ANZU_AFFECTION] += 5;
+			anzuAffection(5);
 			flags[kFLAGS.ANZU_TALKED_PAST] = 1;
 			doNext(anzuTalkMenu);
 		}
@@ -369,7 +369,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 			}
 			outputText("\n\nBack in the living room, you thank him for having showed his palace to you.");			
 			cheatTime(0.25);
-			flags[kFLAGS.ANZU_AFFECTION] += 5;
+			anzuAffection(5);
 			flags[kFLAGS.ANZU_TALKED_PALACE] = 1;
 			doNext(anzuTalkMenu);
 		}
@@ -385,7 +385,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 			outputText("\n\n\"<i>Calm down " + player.mf("boy", "girl") + ", I’m going for parts. You don’t believe I opened the portal to the first world which appeared, right?");
 			outputText("\n\nUsing the astronomical oculus from the temple of Mittani, I was able to see the principal realms. Many of them were uninhabitable, and some others were protected by gods that could make my stance very difficult. Mareth was in a middle of a war, and my arrival was probably unnoticed. Originally, I planned to land in the plains, but, because the war was very close to that land, I opted for the Rift, far from any forces of the factions. And I’ve living there since then.</i>\"");
 			cheatTime(0.25);
-			flags[kFLAGS.ANZU_AFFECTION] += 5;
+			anzuAffection(5);
 			flags[kFLAGS.ANZU_TALKED_RIFT] = 1;
 			doNext(anzuTalkMenu);
 		}
@@ -430,7 +430,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 			outputText("\n\n\"<i>Well, my physical abilities remain intact, but I can’t fight for weeks without a rest like in the past. I can use most of the my fire abilities, and the electric fire too. In theory, I could create storms, but the lack of humidity makes it impossible for me. Before, I could make my own water, and make rain, but now I can’t. I have no problems with the growth, but trying to make an expansive wave is probably out of my capacity. I retain my immortality at least. That, and some minor powers here and there, are the only things that make me more than a demigod.</i>\"");
 			outputText("\n\nSo...no explosive wave? That’s sad...and a relief, at the same time.");
 			cheatTime(0.25);
-			flags[kFLAGS.ANZU_AFFECTION] += 5;
+			anzuAffection(5);
 			flags[kFLAGS.ANZU_TALKED_POWERS] = 1;
 			doNext(anzuTalkMenu);
 		}
@@ -464,16 +464,15 @@ package classes.Scenes.Dungeons.AnzuPalace
 			outputText("\n\nWell, he has a point. Both sides have defects. And while is sad, the fact that he won’t help Marae in the war, it’s a relief that both of you share the same idea about Lethice.");
 			outputText("\n\n\"<i>Maybe, if her forces organize better, and she respects my position as an equal in this land, I’ll think about helping her against the demons, but for now, I’m not joining the war.</i>\"");
 			cheatTime(0.25);
-			flags[kFLAGS.ANZU_AFFECTION] += 5;
+			anzuAffection(5);
 			flags[kFLAGS.ANZU_TALKED_GODS] = 1;
 			doNext(anzuTalkMenu);
 		}
 		
 		//Sex
-		private function anzuSexMenu(clear:Boolean = true):void {
+		private function anzuSexMenu(clear:Boolean = true, fromScene:Boolean = false):void {
 			if (clear) clearOutput();
-			outputText("Still coming soon.");
-			/*if (flags[kFLAGS.ANZU_TIMES_SEXED] == 0) {
+			if (flags[kFLAGS.ANZU_TIMES_SEXED] == 0) {
 				outputText("You ask Anzu if he is up to a little fun in his bedroom.");
 				outputText("\n\n“Uh, maybe” he says doubtfully.");
 				outputText("\n\nWhy so shy suddenly? Based on the stuff he has told you, he certainly had some experience in what refers to sex when he was living in Mittani.");
@@ -494,12 +493,16 @@ package classes.Scenes.Dungeons.AnzuPalace
 				outputText("\n\n“Well, you got me here, what do you want to do?” he asks.");
 			}
 			menu();
-			addButton(0, "Anal Catch", catchAnal);
-			addButton(1, "Vaginal Catch", catchVaginal);
-			addButton(2, "Get Sucked", getBlown);
-			addButton(3, "Blow Him", suckOffDeitysCock);
-			addButton(4, "Fuck Him", fuckGodlyBirdButt);
-			addButton(5, "Feed Him", feedAnzu);*/
+			addButton(0, "Anal Catch", catchAnal, null, null, null, "Have Anzu stuff you anally. \n\nNOTE: This is a REALLY long scene.");
+			if (player.hasVagina()) addButton(1, "Vaginal Catch", catchVaginal, null, null, null, "Have Anzu fill you vaginally to the brim.");
+			else addButtonDisabled(1, "Vaginal Catch", "You need a cooter for that.");
+			if (player.hasCock()) addButton(2, "Get Sucked", getBlown, null, null, null, "Have Anzu suck you off? Though his beak can prove to be a challenge.");
+			else addButtonDisabled(2, "Get Sucked", "You need to have a cock for that.");
+			addButton(3, "Blow Him", suckOffDeitysCock, null, null, null, "Suck off that big cock. You have the hunch that it will get your belly stuffed.");
+			if (player.hasCock()) addButton(4, "Fuck Him", fuckGodlyBirdButt, null, null, null, "Put that cock of yours to a good use and fuck that divine ass!");
+			else addButtonDisabled(4, "Fuck Him", "You need to have a cock to fuck that divine butt.");
+			if (player.lactationQ() >= 100 || player.findPerk(PerkLib.Feeder) >= 0) addButton(5, "Feed Him", feedAnzu, null, null, null, "Anzu is certainly thirsty. Put those breasts of yours to a good use.");
+			else addButtonDisabled(5, "Feed Him", "This option is only available if you have lactating breasts.");
 			addButton(14, "Back", anzuMenus);
 		}
 		
@@ -526,7 +529,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 				outputText("Looking again for another ride in Anzu’s huge rod, you climb over him and ask if the is in the mood for another round on the bed. This time, the avian answer is a huge grin.");
 				outputText("\n\n“Seems like you can’t get enough of my cock, little friend.” he says, giving your [butt] a playful grope. “Well, since if that’s what you want, I think that can be arranged.”  ");
 				outputText("\n\nAfter tossing his robes and other clothes to the armchair, he starts undressing you. Far from his nervous initial state, the aroused avian is clearly happy to share his bed with you again. His hands eagerly take of the upper and lower parts of your [armour] and start caressing your [skin]. You display your almost naked form on the bed, and shake your (if tails<1) [butt] in the air (else if tails=1) wagging your tail (else if tails>1) wagging your tails for entice him.  Your reaction isn’t left unnoticed, as he gropes your (if player has balls) [balls], (else if cocks>1) cock (else) nipples when he takes of your underwear, leaving your nude body to his sight. Finally, he removes his underwear too, dropping it in the floor and leaving his huge avian manhood exposed.");
-				outputText("\n\n“That’s enough teasing for now, little (boy/girl). Prepare yourself for the real action.” He whispers on your ear.");
+				outputText("\n\n“That’s enough teasing for now, little " + player.mf("boy", "girl") + ". Prepare yourself for the real action.” He whispers on your ear.");
 				outputText("\n\nClimbing on the bed, he hugs your (if player height>96), in comparison, (else if player height<50 and>50) small (else if player height<50) tiny frame on his strong arms. While he embraces you, the feeling of his hardening cock teases your backside. Seems like the avian has gotten much more confidence, and by the look that he’s giving to you, he’ll surely enjoy to be on the dominant position again. He relaxes his body on the bed, flexing his arms and legs, and leaving your face a few inches of his meaty rod.");
 				outputText("\n\n“Well, [name]. I think who you’ll know what to do.” Anzu says you” And, after all, we’ll need some lube before get started, don’t you?”");
 				outputText("\n\nYou can’t agree more. With his cock in front of you, ready for be lubed, and your body screaming to be taken, there’s not much more to say.");
@@ -537,7 +540,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		private function catchAnalPart2():void {
 			clearOutput();
 			var wasVirgin:Boolean = player.ass.virgin;
-			outputText("Climbing over him, you (if snake, dragon or demon tongue) wrap your nimble tongue around (else) start caressing and licking the sides of  his partially hard avian meat. After a bit of licking across its length, you switch you attentions to his tip, taking the point of the tapered penis on your mouth and sliding playfully your tongue on his cumslit. Soon, the forty-inch rod rises to full erection, and the first droplets of pre dribble from his tip and land in your tongue. You remove your mouth and take some of his leaking pre in your hand, smearing it carefully across your soon-to-be ravaged [asshole]. Despite being already lubed by your saliva, you take some more pre and use it for lube every corner of Anzu’s semi-hard maleness.");
+			outputText("Climbing over him, you " + (player.hasLongTongue() ? "wrap your nimble tongue around" : "start caressing and licking the sides of") + " his partially hard avian meat. After a bit of licking across its length, you switch you attentions to his tip, taking the point of the tapered penis on your mouth and sliding playfully your tongue on his cumslit. Soon, the forty-inch rod rises to full erection, and the first droplets of pre dribble from his tip and land in your tongue. You remove your mouth and take some of his leaking pre in your hand, smearing it carefully across your soon-to-be ravaged [asshole]. Despite being already lubed by your saliva, you take some more pre and use it for lube every corner of Anzu’s semi-hard maleness.");
 			outputText("\n\nThe avian seems to be enjoying this treatment, given how his erection twitches, staining your hands with his dribbling pre. When you are sure that both your [asshole] and his cock are thoroughly lubed, you let him take control.");
 			if (flags[kFLAGS.ANZU_ANAL_CATCH_COUNTER] == 0) outputText("\n\n”Since it’ll be hard to get in anyway, how about...well…we can make the task easier if you simply sit on my…” the avian says, shyly pointing his penis (else) ");
 			else outputText("\n\n“Now, for a good start, how about making this easier for you, my friend.” He says, stroking his avian erection “A nice and slow ride.”");
@@ -570,444 +573,278 @@ package classes.Scenes.Dungeons.AnzuPalace
 			outputText("\n\nYour birdy friend reaches his own orgasm a moment later, and with a powerful avian screech, he releases himself inside you. Soon the first jets of avian semen explode inside your [asshole], swelling your belly more and more with each wave. Already dazed by the blissful sensation of your own orgasm, you take a little to notice the beautiful sensation of his creamy cum flowing inside you, but the feeling of his hot seed, combined by the warmness of your bodies makes you feel like you were in paradise. In fact, the idea of spend the rest of your life here…living in luxury and desire on Anzu’s palace quarters, spending your nights speared on his cock and your mornings eating with him, plus his bed jumping by hot and lustful sex every afternoon, when you think about it, the idea sounds quite appealing.");
 			outputText("\n\nThe weight on your now cum-filled belly makes you jump back to the reality. You feel a wet sensation on your neck, and when you turn to see it, you manage to see who Anzu is licking you lovingly.  While doing that, he caresses you inflated belly with one hand while (if cock>0) taking some of your cum (else if vagina>0) looking at the girlcum on your fingers (else) caressing your nipples with the other. (if naga) Your coils (else) Your [legs] remain limp over his belly, stained by the avian seed who escaped from your [asshole].");
 			if (flags[kFLAGS.ANZU_ANAL_CATCH_COUNTER] == 0) outputText("\n\n”Are…are you okay, [name]?” says a preoccupied avian. After answering him with a pleased nod he relaxes, and surrounds your body on his embrace. “Great, you leave me for a moment and I started to get nervous. By the way, that was the best time who I had on centuries, and I’m happy to see that you enjoyed it too. But, since you worked yourself pretty hard, you should rest for a while before doing anything else.”");
-			else outputText("\n\n”Whoa, little (boy/girl), seems like you enjoyed yourself pretty well.” The avian says, at the time that he embraces your cum filled body. “But [name], you’d better rest for a while. After all, you took it like a real Champion.”");
-			outputText("\n\n");
-			outputText("\n\n");
-			outputText("\n\n");
-			outputText("\n\n");
-			outputText("\n\n");
-			outputText("\n\n");
-			
+			else outputText("\n\n\"<i>Whoa, little " + player.mf("boy", "girl") + ", seems like you enjoyed yourself pretty well.</i>\" The avian says, at the time that he embraces your cum filled body. “But [name], you’d better rest for a while. After all, you took it like a real Champion.”");
+			outputText("\n\nFollowing his advice, you proceed to rest over his impressive frame, with Anzu’s deflated cock still filling your butt, and some of his thick cum leaking from your [asshole]. After some time, you feel a familiar sensation inside you. The avian’s penis is getting hard again! When you’re still surprised by the sudden feeling, Anzu’s hands embrace your chest, as he says.");
+			if (flags[kFLAGS.ANZU_ANAL_CATCH_COUNTER] == 0) {
+				outputText("\n\n“Looks like I’m aroused again, [name], and if you don’t mind, I think that we could, you know, have another round at it and all” a nervous Anzu suggests “If you don’t want you only need to say it…”");
+				outputText("\n\nSeems like the nervous bird is finally breaking the shell…How you can say no to him? Turning around, your kiss his cheek and answer him who you’d love to have another go with him.");
+			}
+			else {
+				outputText("\n\n“Hey, [name], seems like I’m still horny, little " + player.mf("boy", "girl") + "” Anzu says, giving your butt a grope and a playful slap “And given that I have enough energy for another round, what do you say if I fuck you like you deserve?.”");
+				outputText("\n\nRemembering how energetic was your last romp with him, and what he has in store for you, you can’t help but agree and nod energetically. Maybe is the sight of his magnificent body, or, more probably, his cock still filling your ass, but you can’t resist the idea of having him ravaging your already gaped anus again.");
+			}
+			outputText("\n\nGrabbing you by the chest and removing your body from his partially hard cock, Anzu stands up from the bed, flexing his arms as he prepares to take you. You’re left on the bed, wondering about what he plans to do with you.");
+			if (flags[kFLAGS.ANZU_ANAL_CATCH_COUNTER] == 0)
+				outputText("\n\n”Maybe we could try another position?...If you are okay with that” he says, as his avian penis arises proudly again.");
+			else
+				outputText("\n\n“How about trying something different this time?” he finally says, as his avian penis arises proudly again.");
+			outputText("\n\nAnzu motions you to turn around. Bending over the bed, you’re left with your [butt] on the air, and your recently creamed backside dripping cum over your legs. The avian approaches, and, after giving you cheeks another slap, he inserts one of his digits on your [asshole]. Sliding in easily given the quantities of cum dripping from it, the finger teases your insides for a while, until Anzu gets bored of it, and removes it.");
+			outputText("\n\n“Luckily, seems like we don’t need much preparations this time.” The avian says, seeing his fingers covered on the fresh semen which leaks from your [asshole].");
+			outputText("\n\nLooks like the avian wants to take you in doggy style, and your idea proves true as you feel his towering frame covering your vulnerable body. Soon his head past yours and your body is completely surrounded by his. Even his wings expand to the sides, covering almost all your view from the exterior. In any other moment, you’d feel unnerved at the thought of having your body totally covered under a huge being, but now, you can’t imagine a better place to be. Letting out a moan at the feeling of the weight of his penis resting over your buttcheeks again, you’re surprised by a wet sensation of your face. When you turn to see what is making it, you face with a happy Anzu, his head turned upside down from your point of view, with his tongue extended and licking your face affectionately. When you stare him, he simply moves his head from side to side in a bird-like way, after that, both of you start laughing at his strange antics.");
+			outputText("\n\nThat done, the avian hands start fondling your nipples, caressing the soft [skin] between them. (if cocks>0) One of his hands slides down to your crotch, playing with your [cock], that is still dripping with the cum from your last orgasm. (else if vagina>1) One of his hands slides down to your crotch, when a playful finger slides into your [vagina] and teases his insides again. (else) One of his hands goes to your butt, caressing your cheeks and slapping them playfully. It’s amazing how with his huge size he can manage to reach each corner of your body. Now his nimble fingers are on your belly, and after some caresses, he starts ticking it mercilessly, earning uncontrolled laughs from you. Finished with his foreplay, he prepares to the main part, stroking his dick, and teasing you again, sliding only the tip of it in your needy [asshole]");
+			outputText("\n\nThen, without warning, you feel almost eleven inches of pure avian meat invading your [asshole] in a single thrust. Yelping at the sudden intrusion, you’re given a few seconds to rest as the thick penis slides out, before Anzu rams his cock inside again, this time a few inches deeper. You moan like a whore each time that the monster makes its way on your [asshole]");
+			outputText("\n\n“Feeling okay, little (guy/girl)?” Anzu asks, somewhat worried about your state. You nod in response, earning another grin and a loving lick from the avian. “Great, because I want to be sure that you’re enjoying this as much as I.”");
+			outputText("\n\nTruth to his word, he combines the energetic pounding that he’s giving to your butt, with an equally vigorous (if cocks>0) handjob that he’s giving to your [cock], which has gotten erect under his anal stimulation, pumping its length until your pre starts dripping from it (else if vagina>1) fingering that he’s giving to your [vagina], playing with his insides with his fingers prompting some girlcum to leak from it (else) massage that he’s doing to your [nipples], as he caress the soft [skin] of your chest. Your entire body is hot under his ministrations, at the time that his thrusts slide his avian manhood inside your ravaged [asshole]. Anzu softly nips you neck with his beak, helping you to keep in position as his erection pistons in and out of your [asshole].");
+			outputText("\n\nWith each thrust more and more inches of the huge tool invade your ass. The copious pre that it dribbles mixes with some cum from his last load, leaving your backside sticky with it. Not that you have time to think about it, because almost thirty inches of cock are making its way inside you. For a second you’re worried about him trying to ram his entire cock inside, but your friend seems to recognize the logic limits of your body, and stops at this rate. Not that his vigor diminishes, as he compensates this increasing the speed and strength of his already energetic thrusts. (if cocks>0) Your poor prostate is thoroughly smashed by his invading dick, while your nipples get as hard as diamonds by your overstimulated state.");
+			outputText("\n\nHis huge nuts (if player has balls and cocks>0) slap against your body, hitting your own in each thrust (else if cocks>0) hit the underside of your [cock] in each thrust (else) slap against your body. With each hit you can feel the liquid weight of his prodigious load churning inside them, a reminder of what he has stored for you.");
+			outputText("\n\nA familiar heat overcomes your bodies as Anzu increase his pace even more. Drop of sweat fall from your body, as the heat between you increases and your breathing becomes heavy, making clear that both of you will climax really soon.");
+			outputText("\n\n(first time) [name], friend…I won’t be able…to hold…much longer…” (next time) “[name]…this time…is a really big one…get ready, my friend.” It’s the only thing that Anzu manages to say between pants.");
+			outputText("\n\nThen both of you hit orgasm. (if not genderless) You came first, (if cocks>0) when your cock twitches wildly, releasing your load over the sheets (if cum output>1000), with enough force to cover most of them and stain the [skin] of your [legs] (else if cock>1 and vagina>0) when your cock twitches wildly, releasing your load over the sheets (if cum output>1000), with enough force to cover most of them and stain the [skin] of your [legs], while your [vagina] moistens your tights with girlcum. (else if vagina>1) when your [vagina] moistens your tights with girlcum.Your entire body quivers as you reach climax, and even when it passes, you’re left panting heavily.");
+			outputText("\n\nAfter your orgasm you feel so weak that you fall over the sheets (if cocks>1) staining your face and chest on your own load. Your [butt] still raised, with Anzu’s cock firmly buried inside and the strength of his thrust serving as support for your backside. Then, you realize that your avian friend is about to climax too. As expected, with another screech of ecstasy, Anzu releases his load inside you. Your anus is creamed again as his cumslit unleasehs a torrent of semen, that soon overfill your insides with enough force to make your belly tremble as the seemingly unending waves of cum flow in.");
+			outputText("\n\nLooking mesmerized how your already expanded belly expands to the point that you’ll easily pass for a nine-months pregnant woman, you can still feeling the las jets of Anzu’s seed overfilling you even more. When his orgasm subsides, he slides out his deflating cock, prompting some of the cum pumped inside you leak from your gaped orifice. Tired after the…energetic…experience, Anzu falls to your side, panting, and with his arms surround your cum-inflated form. Licking again your face the bird gives you a loving look and says");
+			outputText("\n\n“Well, I hope that I fulfilled my promise. do you feel like you never been before?”");
+			outputText("\n\n(if player has been fucked by a minotaur, Loppe, or a big cocked NPC) Maybe he can't boast of having the most impressive libido on this land, but he surely know how plow an ass, (else) Of course, and your (if anal cap<150) gaped anus if proof of it. In the end, you got even more than you expected, you answer him. Laughing softly, the avian surrounds your body on his embrace, protecting your (if player height>96) comparatively (else (if player height<96 and>50) small (else) tiny frame on his wings. His  strong hands caress your semen-filled belly as you drift to sleep on his protective embrace.");
+			outputText("\n\nAfter a couple of hours, (if goo) you slimy body gradually process the prodigious load deposited into you. As it does that, you feel thoroughly sated by the creamy gift from the avian. (else) your body manages to process the gigantic load inside you in some way. When you try to stand up, your legs tremble weakened after the ravaging of your ass suffered. Dammit, Anzu! After such a pounding, you’ll be walking funny for a while.");
 			player.orgasm();
-			flags[kFLAGS.ANZU_AFFECTION] += 5;
+			player.slimeFeed();
+			anzuAffection(5);
 			flags[kFLAGS.ANZU_ANAL_CATCH_COUNTER]++;
 			doNext(camp.returnToCampUseOneHour);
-			/*
-
-
-Following his advice, you proceed to rest over his impressive frame, with Anzu’s deflated cock still filling your butt, and some of his thick cum leaking from your [asshole]. After some time, you feel a familiar sensation inside you. The avian’s penis is getting hard again! When you’re still surprised by the sudden feeling, Anzu’s hands embrace your chest, as he says.
-(first time) “Looks like I’m aroused again, [name], and if you don’t mind, I think that we could, you know, have another round at it and all” a nervous Anzu suggests “If you don’t want you only need to say it…”
- 
-Seems like the nervous bird is finally breaking the shell…How you can say no to him? Turning around, your kiss his cheek and answer him who you’d love to have another go with him.
- 
-(repeat) “Hey, [name], seems like I’m still horny, little (boy/girl)” Anzu says, giving your butt a grope and a playful slap “And given that I have enough energy for another round, what do you say if I fuck you like you deserve?.”
- 
-Remembering how energetic was your last romp with him, and what he has in store for you, you can’t help but agree and nod energetically. Maybe is the sight of his magnificent body, or, more probably, his cock still filling your ass, but you can’t resist the idea of having him ravaging your already gaped anus again.
- 
-Grabbing you by the chest and removing your body from his partially hard cock, Anzu stands up from the bed, flexing his arms as he prepares to take you. You’re left on the bed, wondering about what he plans to do with you.
- 
-(first time) ”Maybe we could try another position?...If you are okay with that” he says, as his avian penis arises proudly again (next time)“How about trying something different this time?” he finally says, as his avian penis arises proudly again.
- 
-Anzu motions you to turn around. Bending over the bed, you’re left with your [butt] on the air, and your recently creamed backside dripping cum over your legs. The avian approaches, and, after giving you cheeks another slap, he inserts one of his digits on your [asshole]. Sliding in easily given the quantities of cum dripping from it, the finger teases your insides for a while, until Anzu gets bored of it, and removes it.
- 
-“Luckily, seems like we don’t need much preparations this time.” The avian says, seeing his fingers covered on the fresh semen who leaks from your [asshole]
- 
-Looks like the avian wants to take you in doggy style, and your idea proves true as you feel his towering frame covering your vulnerable body. Soon his head past yours and your body is completely surrounded by his. Even his wings expand to the sides, covering almost all your view from the exterior. In any other moment, you’d feel unnerved at the thought of having your body totally covered under a huge being, but now, you can’t imagine a better place to be. Letting out a moan at the feeling of the weight of his penis resting over your buttcheeks again, you’re surprised by a wet sensation of your face. When you turn to see what is making it, you face with a happy Anzu, his head turned upside down from your point of view, with his tongue extended and licking your face affectionately. When you stare him, he simply moves his head from side to side in a bird-like way, after that, both of you start laughing at his strange antics.
- 
-That done, the avian hands start fondling your nipples, caressing the soft [skin] between them. (if cocks>0) One of his hands slides down to your crotch, playing with your [cock], that is still dripping with the cum from your last orgasm. (else if vagina>1) One of his hands slides down to your crotch, when a playful finger slides into your [vagina] and teases his insides again. (else) One of his hands goes to your butt, caressing your cheeks and slapping them playfully. It’s amazing how with his huge size he can manage to reach each corner of your body. Now his nimble fingers are on your belly, and after some caresses, he starts ticking it mercilessly, earning uncontrolled laughs from you. Finished with his foreplay, he prepares to the main part, stroking his dick, and teasing you again, sliding only the tip of it in your needy [asshole]
- 
-Then, without warning, you feel almost eleven inches of pure avian meat invading your [asshole] in a single thrust. Yelping at the sudden intrusion, you’re given a few seconds to rest as the thick penis slides out, before Anzu rams his cock inside again, this time a few inches deeper. You moan like a whore each time that the monster makes its way on your [asshole]
- 
-“Feeling okay, little (guy/girl)?” Anzu asks, somewhat worried about your state. You nod in response, earning another grin and a loving lick from the avian. “Great, because I want to be sure that you’re enjoying this as much as I.”
- 
-Truth to his word, he combines the energetic pounding that he’s giving to your butt, with an equally vigorous (if cocks>0) handjob that he’s giving to your [cock], which has gotten erect under his anal stimulation, pumping its length until your pre starts dripping from it (else if vagina>1) fingering that he’s giving to your [vagina], playing with his insides with his fingers prompting some girlcum to leak from it (else) massage that he’s doing to your [nipples], as he caress the soft [skin] of your chest. Your entire body is hot under his ministrations, at the time that his thrusts slide his avian manhood inside your ravaged [asshole]. Anzu softly nips you neck with his beak, helping you to keep in position as his erection pistons in and out of your [asshole].
- 
-With each thrust more and more inches of the huge tool invade your ass. The copious pre that it dribbles mixes with some cum from his last load, leaving your backside sticky with it. Not that you have time to think about it, because almost thirty inches of cock are making its way inside you. For a second you’re worried about him trying to ram his entire cock inside, but your friend seems to recognize the logic limits of your body, and stops at this rate. Not that his vigor diminishes, as he compensates this increasing the speed and strength of his already energetic thrusts. (if cocks>0) Your poor prostate is thoroughly smashed by his invading dick, while your nipples get as hard as diamonds by your overstimulated state.
-
-His huge nuts (if player has balls and cocks>0) slap against your body, hitting your own in each thrust (else if cocks>0) hit the underside of your [cock] in each thrust (else) slap against your body. With each hit you can feel the liquid weight of his prodigious load churning inside them, a reminder of what he has stored for you.
-A familiar heat overcomes your bodies as Anzu increase his pace even more. Drop of sweat fall from your body, as the heat between you increases and your breathing becomes heavy, making clear that both of you will climax really soon.
- 
-(first time) [name], friend…I won’t be able…to hold…much longer…” (next time) “[name]…this time…is a really big one…get ready, my friend.” It’s the only thing that Anzu manages to say between pants.
- 
-Then both of you hit orgasm. (if not genderless) You came first, (if cocks>0) when your cock twitches wildly, releasing your load over the sheets (if cum output>1000), with enough force to cover most of them and stain the [skin] of your [legs] (else if cock>1 and vagina>0) when your cock twitches wildly, releasing your load over the sheets (if cum output>1000), with enough force to cover most of them and stain the [skin] of your [legs], while your [vagina] moistens your tights with girlcum. (else if vagina>1) when your [vagina] moistens your tights with girlcum.Your entire body quivers as you reach climax, and even when it passes, you’re left panting heavily.
- 
-After your orgasm you feel so weak that you fall over the sheets (if cocks>1) staining your face and chest on your own load. Your [butt] still raised, with Anzu’s cock firmly buried inside and the strength of his thrust serving as support for your backside. Then, you realize that your avian friend is about to climax too. As expected, with another screech of ecstasy, Anzu releases his load inside you. Your anus is creamed again as his cumslit unleasehs a torrent of semen, that soon overfill your insides with enough force to make your belly tremble as the seemingly unending waves of cum flow in.
- 
-Looking mesmerized how your already expanded belly expands to the point that you’ll easily pass for a nine-months pregnant woman, you can still feeling the las jets of Anzu’s seed overfilling you even more. When his orgasm subsides, he slides out his deflating cock, prompting some of the cum pumped inside you leak from your gaped orifice. Tired after the…energetic…experience, Anzu falls to your side, panting, and with his arms surround your cum-inflated form. Licking again your face the bird gives you a loving look and says
- 
-“Well, I hope that I fulfilled my promise. do you feel like you never been before?”
- 
-(if player has been fucked by a minotaur, Loppe, or a big cocked NPC) Maybe he can't boast of having the most impressive libido on this land, but he surely know how plow an ass, (else) Of course, and your (if anal cap<150) gaped anus if proof of it. In the end, you got even more than you expected, you answer him. Laughing softly, the avian surrounds your body on his embrace, protecting your (if player height>96) comparatively (else (if player height<96 and>50) small (else) tiny frame on his wings. His  strong hands caress your semen-filled belly as you drift to sleep on his protective embrace.
- 
-After a couple of hours, (if goo) you slimy body gradually process the prodigious load deposited into you. As it does that, you feel thoroughly sated by the creamy gift from the avian. (else) your body manages to process the gigantic load inside you in some way. When you try to stand up, your legs tremble weakened after the ravaging of your ass suffered. Dammit, Anzu! After such a pounding, you’ll be walking funny for a while.
-
-			
-			*/
 		}
 		
 		private function catchVaginal():void {
-			/*
-			(first time)
- 
-Finding yourself on Anzu’s embrace, this time you wonder if the avian would like the idea to get intimate with you, in the most traditional way. The idea of enticing your avian friend on sliding that monster inside your vagina, while he pounds you with enough force to make you scream and finally, having his thick load flooding your womb is something that you can’t resist,  With that on mind, you slip down one of your hands to his crotch, and sliding down his underwear, start grabbing at the girthy meat who lies within. The avian lets out a moan at your sudden touch, but don’t removes your hand.
- 
-“Heh...what are you doing, (boy/girl)?” he question you, his face blushing red under his autumn colored feathers.
- 
-Only giving him a little motivation, you answer. After all, you came to his bed to have a little romp together. You suggest him that he should take off his clothes, so you could take care of him better. Nodding eagerly, probably due your touch, Anzu removes his fancy garments, and later, his underclothes (if player isn’t naked), while you do the same with your [armor]. This finished, you return to your task, sliding your fingers across the avian meat and his feathered balls While you fondle his genitals, the avian, between moans of pleasure, asks you what you want to do with him. Seeing your opportunity, you climb to his shoulder and whisper to his ear that you’d love to have him taking your pussy and mating you like a beast. Both of your eyes dart to his tapered penis, now half hard after your enthusiastic handjob, and the avian gives you a loving smile, but with a hint of worry on it. Surprised by that last thing, you ask him if he has a problem with it.
- 
-“I don’t know, [name]. Don’t get me wrong, I’d love to do it with you, but look at it,,,” the avian answers, pointing the gigantic and half hard cock between his legs. “If you’re not careful you could get hurt...and I don’t want to see that happening.(if player height<50) Only, look at you...and me.”
- 
-Caressing tenderly the fluffy and colorful feathers of his chest. you state that it (if vaginal capacity<500) shouldn’t (else) won’t be a problem. You’re in Mareth after all! Big-cocked monsters are things of everyday, and some of the friends who you’ve made are pretty hung too. (if virgin) Overall, you even managed to keep your virginity until now. Why not losing it with someone who you really care, instead of with a random monster in the wilderness? With someone as affective and kind as him on bed, you shouldn’t be worried about anything. (if not virgin) Now that you are a little experienced on that matter, it only require a little effort to make the experience pleasurable for both of you, and with someone as affective and kind as him on bed, you shouldn’t be worried about anything.
- 
-“Really, [name]? I’m a little flustered...about you thinking of me in such a way.” the avian answers.
-
-
-“Well, if you want it too…” he says, almost whispering this last word. “I suppose than I could do it for you.”
- 
-(next time, repeat)
- 
-Finding yourself on Anzu’s embrace again, you wonder if he will want to take you again in the most traditional way. The idea of enticing your avian friend on sliding that monster inside your vagina, while he pounds you with enough force to make you scream and finally, having his thick load flooding your womb is something that you can’t resist. With that on mind, you slip down one of your hands to his crotch, and sliding on his underwear, start grabbing the girthy meat who lies within. Anzu gives you a smile as he notices what you’re trying to do, as his cock hardens at you playful grope.
- 
-“So, you want another round with me, (boy/girl). Looks like I’m not that bad when is time of take care of my mate.”
- 
-Of course not. Actually, he was pretty good the last time, and you won’t mind repeating the experience, you answer him, while your hands keep fondling his tapered penis and his soft balls. Soon, his avian manhood is half hard. At that point you stop your handjob and ask him about taking off his clothes, so you can take care of him better.
- 
-He does it with no hesitations, taking off his fancy garments and tossing the to the floor, doing the same with his underclothes few seconds later, leaving his nude beauty exposed to your eyes. Quickly you follow his example and strip yourself from your [armor]. You take a moment to contemplate your (if relatlvl=3) friend’s (else if relatlvl=4) lover’s form while he stands next to the bed, looking the lovely pattern that his colorful feathers take across his body, and his equally colorful wings. Complemented by that gigantic monster that hangs from his legs and his strong complexion, Anzu is all and more than you could ask from an avian. The soft light from the bed and the scent of violets which emanates from his body, make his toned form even more alluring. But, while you admire his body, some time has passed, and somewhat confused by your continuous staring, Anzu coughs to get your attention again. You state that with a body as attractive as his, you can’t help but ogle at it. His face blushes red behind his feathers at your flattering, as he only says a shy ‘thanks’ as an answer. A little surprised by how quick he undressed, you say him that, given his initial doubts, he’s becoming quite eager each time that you have a romp together.
- 
-“Hey, it’s your fault, [name]” “You’ll end making me a horny beast in no time.” he answers, while his half hard cock add weight to his statement.
- 
-Hmm, that wouldn’t be bad either. Anzu ravaging your body as an unleashed monster, taking you how he wants...but if you wanted that, they are plenty of monsters on the wilderness. You like him as he is, and if he wants to go wild while you’re on bed, go on.
- 
-“So you want me going crazy when we’re doing it? How about like this?.” He says as he playfully mimics the pose of a bird of prey, with his wings fully opened and his face contorted awkwardly in some that pretends to be a menacing visage. Both of you start laughing at his obviously fake attempts to look intimidating.
- 
-“Jokes aside, [name]. I promise you that I’ll take you like anyone before...except me, of course.”
- 
-If he’s so sure about that, what are you waiting? nodding, he motions you to go to the center of the bed, and while you lay there, he strokes his now flaccid dick until it reaches full erection..
- 
-//Scene continues
- 
-Ready for start, you lean over the bed, with your body resting on the soft mattress and the huge frame of Anzu over you. He lets his hard cock fall over the entrance of your nether lips, leaking some pre over them and giving you a sight about that going to come.
- 
-(first time) ”Hey, [name]. You know, we need something to lube up my penis, because if we don’t, well...it probably will hurt you when we get started. Then I thought that you could use my pre as lube...if you want to do it, of course.”(repeat) “Uh, (boy/girl). If you really want to get it, without being split in half, you’d better start to get some lube.” the avian says, pointing the dripping tip of his avian manhood.
- 
-Nodding, you grab the tip of his penis, and taking some of his copious pre on your hands, you smear it across your nether lips, until they’re slick and lubed. Finished with them, you work with the avian’s cock, smearing the dribbling pre across all its length. After a few layers of pre, its left thoroughly lubed, and ready to pound your body.
- 
-(if virgin) “[name], you’re nice and tight down, here (boy/girl). How many times...you know, had taken something there?”
- 
-You say him that you managed to remain virgin until now, despite the constant dangers of this land.
- 
-“And you were allowing me to be the first one that could take you...properly?” says Anzu, blushing as you answer this last question with a nod. “Well, then the less that I can do is assure that your first time would be unforgettable, nice and slow at the start, and strong and passionate at the end”
- 
-Then you feel his cock touching the entrance to your pussy. You enjoy the wonderful sensation of the tapered tip of his penis sliding on your [vagina], opening your internal walls as his length finds its way inside you. (if virgin) [Your hymen has been torn, robbing you from your virginity].
- 
-Anzu gently slides in and out the first few inches, making himself sure that he’s not being too rough with you. The smell of his feathers and the wet feeling of his pre staining the insides of your pussy, combined with the delicious sensation of his penis on you excites your body in a way that you don’t knew possible before. Before you can realize it, both of you are moaning, as the desire starts getting a hold on your bodies. Anzu puts a hand on your [chest], caressing your nipples as he pumps his meat inside your cunt with a steady rhythm. You lose yourself in the blissful sensation as he pounds you with an increasing pace. Then, he suddenly stops. You glance up at him with a puzzled look, and he answers.
- 
-“Hey, you said before that you’d like to see me go wild. And I’m in the mood for that!” he says with a huge grin, giving your neck a loving lick.
- 
-Oh well, it's not like you haven’t asked for it. Supporting your arms on his neck, you brace yourself, and just in time, as he rams almost half of his pulsating rod into your pussy. “E-easy,  big boy” it's all that you manage to say before he shoves his manhood inside you again. Your entire body trembles at the strength of his poundings. Soon you are panting heavily, doing your best for take the vigorous ravaging that Anzu is giving you. After a particularly strong thrust, he manages to shove most of his cock on your [vagina]. You almost can feel his tapered glans tickling you cervix. Unable to endure more, you collapse on the bed, letting him take totally the reins (if cocks>0) Your [cock], left unattended for a while, arises hard and ready after the intense stimulation that your body is receiving, Anzu takes it with one of his hands and starts jerking it playfully. Moaning like a whore, you beg him to take you, to rut with your body like a wild beast, and seems like your words trigger something inside Anzu, because as soon as he hear that, the force of his thrust becomes even bigger, his avian manhood sliding in and out of your pussy his entire man meat while your legs quiver under the vigorous pounding. The heat that emanate from his body says you that he’ll reach his climax soon, and the same could be said about you.
- 
-With a scream of pleasure, you hit orgasm, painting Anzu’s manhood with your girlcum (if cocks>0) as your cock releases your load over his belly, staining his hand in the process. Shortly after you, he climax too, his cumslit releasing flooding waves of spung inside your pussy. You hand caresses your belly as it swells thanks to the generous load that Anzu’s balls are pumping into you, until his load finally ceases and you're left with a belly proper of a nine-months pregnant mother. The wonderful feeling of his fresh cum filling you makes your body feel like it was on paradise, and the sheets under you, and the sweet scent of the air only make the atmosphere better. While you’re daydreaming about this, you feel a wet sensation. By now, you easily recognize it. Anzu is playfully licking your neck and giving it soft nips. Climbing to his side, you give his cheek a peck.
- 
-“So, that’s when you get wild” you say. “I think that I like it.”
- 
-“If that so, what about trying it again sometime?” the avian asks with a smile.
- 
-Sure, you answer, but for now, you’ll need some rest.
- 
-“Right. I’m tired too, and since we’re on bed already, how about if you snuggle with me until you’re rested?” Anzu suggests.
- 
-That sound like a great idea. removing his cum dripping penis from your [vagina], you climb on his chest, resting on it like if he were a huge mattress. Anzu laughs at that sight and proceeds to surround you with his arms, as his winds cover your sides. Completely surrounded by his body, you drift to sleep with his semen still dripping from your abused pussy.
-
-			*/
+			clearOutput();
+			if (flags[kFLAGS.ANZU_VAGINAL_CATCH_COUNTER] == 0) {
+				outputText("Finding yourself on Anzu’s embrace, this time you wonder if the avian would like the idea to get intimate with you, in the most traditional way. The idea of enticing your avian friend on sliding that monster inside your vagina, while he pounds you with enough force to make you scream and finally, having his thick load flooding your womb is something that you can’t resist,  With that on mind, you slip down one of your hands to his crotch, and sliding down his underwear, start grabbing at the girthy meat who lies within. The avian lets out a moan at your sudden touch, but don’t removes your hand.");
+				outputText("\n\n“Heh...what are you doing, " + player.mf("boy", "girl") + "?” he question you, his face blushing red under his autumn colored feathers.");
+				outputText("\n\nOnly giving him a little motivation, you answer. After all, you came to his bed to have a little romp together. You suggest him that he should take off his clothes, so you could take care of him better. Nodding eagerly, probably due your touch, Anzu removes his fancy garments, and later, his underclothes" + player.clothedOrNaked(", while you do the same with your [armor]") + ". This finished, you return to your task, sliding your fingers across the avian meat and his feathered balls While you fondle his genitals, the avian, between moans of pleasure, asks you what you want to do with him. Seeing your opportunity, you climb to his shoulder and whisper to his ear that you’d love to have him taking your pussy and mating you like a beast. Both of your eyes dart to his tapered penis, now half hard after your enthusiastic handjob, and the avian gives you a loving smile, but with a hint of worry on it. Surprised by that last thing, you ask him if he has a problem with it.");
+				outputText("\n\n“I don’t know, [name]. Don’t get me wrong, I’d love to do it with you, but look at it,,,” the avian answers, pointing the gigantic and half hard cock between his legs. “If you’re not careful you could get hurt...and I don’t want to see that happening.(if player height<50) Only, look at you...and me.”");
+				outputText("\n\nCaressing tenderly the fluffy and colorful feathers of his chest. you state that it (if vaginal capacity<500) shouldn’t (else) won’t be a problem. You’re in Mareth after all! Big-cocked monsters are things of everyday, and some of the friends who you’ve made are pretty hung too. (if virgin) Overall, you even managed to keep your virginity until now. Why not losing it with someone who you really care, instead of with a random monster in the wilderness? With someone as affective and kind as him on bed, you shouldn’t be worried about anything. (if not virgin) Now that you are a little experienced on that matter, it only require a little effort to make the experience pleasurable for both of you, and with someone as affective and kind as him on bed, you shouldn’t be worried about anything.");
+				outputText("\n\n“Really, [name]? I’m a little flustered...about you thinking of me in such a way.” the avian answers.");
+				outputText("\n\n“Well, if you want it too…” he says, almost whispering this last word. “I suppose than I could do it for you.”");
+			}
+			else {
+				outputText("Finding yourself on Anzu’s embrace again, you wonder if he will want to take you again in the most traditional way. The idea of enticing your avian friend on sliding that monster inside your vagina, while he pounds you with enough force to make you scream and finally, having his thick load flooding your womb is something that you can’t resist. With that on mind, you slip down one of your hands to his crotch, and sliding on his underwear, start grabbing the girthy meat who lies within. Anzu gives you a smile as he notices what you’re trying to do, as his cock hardens at you playful grope.");
+				outputText("\n\n“So, you want another round with me, " + player.mf("boy", "girl") + ". Looks like I’m not that bad when is time of take care of my mate.”");
+				outputText("\n\nOf course not. Actually, he was pretty good the last time, and you won’t mind repeating the experience, you answer him, while your hands keep fondling his tapered penis and his soft balls. Soon, his avian manhood is half hard. At that point you stop your handjob and ask him about taking off his clothes, so you can take care of him better.");
+				outputText("\n\nHe does it with no hesitations, taking off his fancy garments and tossing the to the floor, doing the same with his underclothes few seconds later, leaving his nude beauty exposed to your eyes. Quickly you follow his example and strip yourself from your [armor]. You take a moment to contemplate your (if relatlvl=3) friend’s (else if relatlvl=4) lover’s form while he stands next to the bed, looking the lovely pattern that his colorful feathers take across his body, and his equally colorful wings. Complemented by that gigantic monster that hangs from his legs and his strong complexion, Anzu is all and more than you could ask from an avian. The soft light from the bed and the scent of violets which emanates from his body, make his toned form even more alluring. But, while you admire his body, some time has passed, and somewhat confused by your continuous staring, Anzu coughs to get your attention again. You state that with a body as attractive as his, you can’t help but ogle at it. His face blushes red behind his feathers at your flattering, as he only says a shy ‘thanks’ as an answer. A little surprised by how quick he undressed, you say him that, given his initial doubts, he’s becoming quite eager each time that you have a romp together.");
+				outputText("\n\n“Hey, it’s your fault, [name]” “You’ll end making me a horny beast in no time.” he answers, while his half hard cock add weight to his statement.");
+				outputText("\n\nHmm, that wouldn’t be bad either. Anzu ravaging your body as an unleashed monster, taking you how he wants...but if you wanted that, they are plenty of monsters on the wilderness. You like him as he is, and if he wants to go wild while you’re on bed, go on.");
+				outputText("\n\n“So you want me going crazy when we’re doing it? How about like this?.” He says as he playfully mimics the pose of a bird of prey, with his wings fully opened and his face contorted awkwardly in some that pretends to be a menacing visage. Both of you start laughing at his obviously fake attempts to look intimidating.");
+				outputText("\n\n“Jokes aside, [name]. I promise you that I’ll take you like anyone before...except me, of course.”");
+				outputText("\n\nIf he’s so sure about that, what are you waiting? nodding, he motions you to go to the center of the bed, and while you lay there, he strokes his now flaccid dick until it reaches full erection..");
+			}
+			outputText("\n\nReady for start, you lean over the bed, with your body resting on the soft mattress and the huge frame of Anzu over you. He lets his hard cock fall over the entrance of your nether lips, leaking some pre over them and giving you a sight about that going to come.");
+			outputText("\n\n(first time) ”Hey, [name]. You know, we need something to lube up my penis, because if we don’t, well...it probably will hurt you when we get started. Then I thought that you could use my pre as lube...if you want to do it, of course.”(repeat) “Uh, " + player.mf("boy", "girl") + ". If you really want to get it, without being split in half, you’d better start to get some lube.” the avian says, pointing the dripping tip of his avian manhood.");
+			outputText("\n\nNodding, you grab the tip of his penis, and taking some of his copious pre on your hands, you smear it across your nether lips, until they’re slick and lubed. Finished with them, you work with the avian’s cock, smearing the dribbling pre across all its length. After a few layers of pre, its left thoroughly lubed, and ready to pound your body.");
+			if (player.hasVirginVagina()) {
+				outputText("\n\n“[name], you’re nice and tight down, here " + player.mf("boy", "girl") + ". How many times...you know, had taken something there?”");
+				outputText("\n\nYou say him that you managed to remain virgin until now, despite the constant dangers of this land.");
+				outputText("\n\n“And you were allowing me to be the first one that could take you...properly?” says Anzu, blushing as you answer this last question with a nod. “Well, then the less that I can do is assure that your first time would be unforgettable, nice and slow at the start, and strong and passionate at the end”");
+			}
+			outputText("\n\nThen you feel his cock touching the entrance to your pussy. You enjoy the wonderful sensation of the tapered tip of his penis sliding on your [vagina], opening your internal walls as his length finds its way inside you.");
+			player.cuntChange(182.4, true);
+			outputText("\n\nAnzu gently slides in and out the first few inches, making himself sure that he’s not being too rough with you. The smell of his feathers and the wet feeling of his pre staining the insides of your pussy, combined with the delicious sensation of his penis on you excites your body in a way that you don’t knew possible before. Before you can realize it, both of you are moaning, as the desire starts getting a hold on your bodies. Anzu puts a hand on your [chest], caressing your nipples as he pumps his meat inside your cunt with a steady rhythm. You lose yourself in the blissful sensation as he pounds you with an increasing pace. Then, he suddenly stops. You glance up at him with a puzzled look, and he answers.");
+			outputText("\n\n“Hey, you said before that you’d like to see me go wild. And I’m in the mood for that!” he says with a huge grin, giving your neck a loving lick.");
+			outputText("\n\nOh well, it's not like you haven’t asked for it. Supporting your arms on his neck, you brace yourself, and just in time, as he rams almost half of his pulsating rod into your pussy. “E-easy,  big boy” it's all that you manage to say before he shoves his manhood inside you again. Your entire body trembles at the strength of his poundings. Soon you are panting heavily, doing your best for take the vigorous ravaging that Anzu is giving you. After a particularly strong thrust, he manages to shove most of his cock on your [vagina]. You almost can feel his tapered glans tickling you cervix. Unable to endure more, you collapse on the bed, letting him take totally the reins (if cocks>0) Your [cock], left unattended for a while, arises hard and ready after the intense stimulation that your body is receiving, Anzu takes it with one of his hands and starts jerking it playfully. Moaning like a whore, you beg him to take you, to rut with your body like a wild beast, and seems like your words trigger something inside Anzu, because as soon as he hear that, the force of his thrust becomes even bigger, his avian manhood sliding in and out of your pussy his entire man meat while your legs quiver under the vigorous pounding. The heat that emanate from his body says you that he’ll reach his climax soon, and the same could be said about you.");
+			outputText("\n\nWith a scream of pleasure, you hit orgasm, painting Anzu’s manhood with your girlcum (if cocks>0) as your cock releases your load over his belly, staining his hand in the process. Shortly after you, he climax too, his cumslit releasing flooding waves of spung inside your pussy. You hand caresses your belly as it swells thanks to the generous load that Anzu’s balls are pumping into you, until his load finally ceases and you're left with a belly proper of a nine-months pregnant mother. The wonderful feeling of his fresh cum filling you makes your body feel like it was on paradise, and the sheets under you, and the sweet scent of the air only make the atmosphere better. While you’re daydreaming about this, you feel a wet sensation. By now, you easily recognize it. Anzu is playfully licking your neck and giving it soft nips. Climbing to his side, you give his cheek a peck.");
+			outputText("\n\n“So, that’s when you get wild” you say. “I think that I like it.”");
+			outputText("\n\n“If that so, what about trying it again sometime?” the avian asks with a smile.");
+			outputText("\n\nSure, you answer, but for now, you’ll need some rest.");
+			outputText("\n\n“Right. I’m tired too, and since we’re on bed already, how about if you snuggle with me until you’re rested?” Anzu suggests.");
+			outputText("\n\nThat sound like a great idea. removing his cum dripping penis from your [vagina], you climb on his chest, resting on it like if he were a huge mattress. Anzu laughs at that sight and proceeds to surround you with his arms, as his winds cover your sides. Completely surrounded by his body, you drift to sleep with his semen still dripping from your abused pussy.");
+			player.orgasm();
+			player.slimeFeed();
+			anzuAffection(5);
+			flags[kFLAGS.ANZU_VAGINAL_CATCH_COUNTER]++;
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		private function getBlown():void {
-			/*
-			(first time)
- 
-Deciding to take the initiative, you tell him that you have an uncomfortable pressure (if player has balls) in your balls (else) on your loins, and if he was kind enough to help you with….
- 
-On a second thought, you look again at Anzu’s predatory beak, and imagine several circumstances who would be able to kill the mood or worst, result on a painful nightmare. The avian notices how quickly you interrupted you teasing, and proceeds to ask you.
- 
-“Something happened? Knowing you, I was sure of you were asking me to give you a…”
- 
-Well, this is now a little uncomfortable. You don’t want to make Anzu feel bad, but in the other hand you neither want to have an otherwise pleasant experience turned into a painful one and…
- 
-“Hey? [name]? Are you still on this world? Why you stopped your suggestion? Suddenly you realized who you don’t want a blowjob or…Oh, I know what is the problem.” He says, pointing his beak.
- 
-Not knowing what else to say, you simply nod.
- 
-“Yeah, I supposed it. Most of people runs scared at the thought of me servicing them orally, so I’m not offended. With me having a beak instead of lips, is easy to make misconceptions. But, despite the fact I’m a kind of predatory bird, my beak isn’t sharp enough to tear skin, and, even if you’re not comfortable with that, I have this.”
- 
-Anzu lets out his tongue, surprisingly large. Not as long as the one of a demon, a dragon or a lizan (if player has one of those tongues) or your own, but with the length and slickness right to give a pleasant trip to any cock lucky enough to be lavished on its attentions. Suddenly, the idea of getting a blowjob from him is appealing once more. But for being sure, you make him promise to be careful with the sharpest edges of his beak.
- 
-“Okay, okay, [name], don’t worry. The last thing in the world who I want now is hurt you. You should know that by now.”
- 
-Saying him that you feel adventurous enough to endure a beakjob from your avian friend, you accept his offer.
- 
-(next time, repeat)
- 
-“So, my friend, what you have in store for me today?” Anzu asks you on the bed.
- 
-Now that he asked, you tell him that you have an uncomfortable pressure (if player has balls) on your balls (else) on your loins and this time you’re on the mood for having some oral attention again, if he is okay with that.
- 
-“You already lost the fear to mi beak, or my last tongue work was good enough to leave you wanting another blowjob?”
- 
-A mix of the two. The last beakjob wasn’t painful in any way, and you feel adventurous enough to repeat the experience today. Of course, if he keep his promise to make sure of your skin will be intact at the time who you finish. Pleased by your answer, Anzu lets out his long tongue and licks your cheek with it, and, after fondling your crotch teasingly, says.
- 
-“Then, get ready, my friend.”
- 
-//Scene continues
- 
-While you rest your back on the comfortable mattress, Anzu approaches you and, putting one hand on your crotch, carefully removes the lower part of your [armor], tossing it on the floor next to the bed and leaving your underwear exposed. Soon, his hands take it away too, leaving your [cock] (if tentacle) wriggling (else) flopping free on the air.
- 
-Judging for the hungry look of the avian is giving you, the real action will start soon, and your thought proven true, as you feel a wet sensation over the tip of your [cock], quickly seeing that it's Anzu’s tongue undulating across the tip of your penis. The slicked appendage teases your cumslit, and after a while, switches to the sides of your [cock]. The avian’s tongue licks them in a way who has nothing to envy to the best blowjobs given to you in this realm, and proof of it is who in less of a minute, your cock is hard and throbbing.
- 
-Anzu is getting hot too, and while he doesn’t stop his tongue work over your [cock], one of his hands slips down to his crotch and start pumping his huge penis. You haven’t much time to notice this, but just after he starts doing that, his other hand starts (if player has balls) fondling your [balls] (else) teasing your nipples.
- 
-With the additional stimulation, your arousal increases even more, to the point of pre starts leaking of your tip. Anzu licks it happily taking it away with his nimble tongue before you can even notice it. The avian’s own erection is so hard who is leaking pre too, but in much more quantities than yours.
- 
-A naughty idea hits the avian’s mind in that moment, and when you see him slicking his fingers with the copious amount of his own pre, you don’t need much imagination for guessing what he has planned for you. Soon, the delicious feeling of (if anus stretching<2) his finger gently prodding your [asshole] (else if anus stretching>2) his fingers teasing the insides of your [asshole].
- 
-Your misconceptions about getting a blowjob from him quickly prove themselves wrong at the wonderful feeling of his tongue worshipping every inch of your [cock], leaving it thoroughly slicked and covered on his saliva. At the same time his digits keep teasing your ass, and finally, finding their way to your prostate, prodding it gently.
- 
-Soon, the (if player has balls) pressure on your [balls] become unbearable (if cum output>1000) You almost can hear them groaning for the painful effort to keep the cum inside them (else) lust in you grows enough to the point who you can't resist longer. With your cock lavished by the avian’s tongue and your prostate teased by his fingers, you finally hit orgasm, letting out your (if cumoutput>1000) copious load with enough force to stain most of his face on a single wave. Anzu quickly wraps his tongue around your cumslit, (in cum output>1000) managing to catch most of your cum in his beak (else) catching all of it on his tongue. With a pleased smile smile on his beak, he proceeds to lick the remaining cum from his face.
- 
-With a relieved sigh, you let yourself fall on the bed. Anzu is yet busy, licking your cock clean from any drop of cum who you could've left. That done, your he joins your on the bed. (if cum output>1000) Now who you can look him closer, you notice how your impressive load managed to make his belly swell a little, despite his impressive frame. While he hugs you tight, you poke playfully his cum-filled belly, earning a blush from the avian. (else) Taking you on his arm, you snuggle on the bed for a while.
- 
-Eventually both of you fall asleep for a while. By the time who you’re awake, you find your clothes carefully folded next to your side to the bed, and a still naked Anzu flexing his arms and legs in front of you.
- 
-“So, you’re finally awake, huh? And, how was my little tongue work?” He asks with a smirk “Not as bad as you’ve though, right?”
- 
-Well, that was an interesting, and quite pleasant experience. You don’t mind repeating it sometimes. Thanking him again for his, surprisingly, amazing beakjob, you wave goodbye to him, and after getting dressed, return to the peacefulness of your camp.
-
-			*/
+			clearOutput();
+			if (flags[kFLAGS.ANZU_BLOWN_YOU_COUNTER] == 0) {
+				outputText("Deciding to take the initiative, you tell him that you have an uncomfortable pressure (if player has balls) in your balls (else) on your loins, and if he was kind enough to help you with….");
+				outputText("\n\nOn a second thought, you look again at Anzu’s predatory beak, and imagine several circumstances who would be able to kill the mood or worst, result on a painful nightmare. The avian notices how quickly you interrupted you teasing, and proceeds to ask you.");
+				outputText("\n\n“Something happened? Knowing you, I was sure of you were asking me to give you a…”");
+				outputText("\n\nWell, this is now a little uncomfortable. You don’t want to make Anzu feel bad, but in the other hand you neither want to have an otherwise pleasant experience turned into a painful one and…");
+				outputText("\n\n“Hey? [name]? Are you still on this world? Why you stopped your suggestion? Suddenly you realized who you don’t want a blowjob or…Oh, I know what is the problem.” He says, pointing his beak.");
+				outputText("\n\nNot knowing what else to say, you simply nod.");
+				outputText("\n\n“Yeah, I supposed it. Most of people runs scared at the thought of me servicing them orally, so I’m not offended. With me having a beak instead of lips, is easy to make misconceptions. But, despite the fact I’m a kind of predatory bird, my beak isn’t sharp enough to tear skin, and, even if you’re not comfortable with that, I have this.”");
+				outputText("\n\nAnzu lets out his tongue, surprisingly large. Not as long as the one of a demon, a dragon or a lizan (if player has one of those tongues) or your own, but with the length and slickness right to give a pleasant trip to any cock lucky enough to be lavished on its attentions. Suddenly, the idea of getting a blowjob from him is appealing once more. But for being sure, you make him promise to be careful with the sharpest edges of his beak.");
+				outputText("\n\n“Okay, okay, [name], don’t worry. The last thing in the world who I want now is hurt you. You should know that by now.”");
+				outputText("\n\nSaying him that you feel adventurous enough to endure a beakjob from your avian friend, you accept his offer.");
+			}
+			else {
+				outputText("“So, my friend, what you have in store for me today?” Anzu asks you on the bed.");
+				outputText("\n\nNow that he asked, you tell him that you have an uncomfortable pressure (if player has balls) on your balls (else) on your loins and this time you’re on the mood for having some oral attention again, if he is okay with that.");
+				outputText("\n\n“You already lost the fear to my beak, or my last tongue work was good enough to leave you wanting another blowjob?”");
+				outputText("\n\nA mix of the two. The last beakjob wasn’t painful in any way, and you feel adventurous enough to repeat the experience today. Of course, if he keep his promise to make sure of your skin will be intact at the time who you finish. Pleased by your answer, Anzu lets out his long tongue and licks your cheek with it, and, after fondling your crotch teasingly, says.");
+				outputText("\n\n“Then, get ready, my friend.”");
+			}
+			outputText("\n\nWhile you rest your back on the comfortable mattress, Anzu approaches you and, putting one hand on your crotch, carefully removes the lower part of your [armor], tossing it on the floor next to the bed and leaving your underwear exposed. Soon, his hands take it away too, leaving your [cock] (if tentacle) wriggling (else) flopping free on the air.");
+			outputText("\n\nJudging for the hungry look of the avian is giving you, the real action will start soon, and your thought proven true, as you feel a wet sensation over the tip of your [cock], quickly seeing that it's Anzu’s tongue undulating across the tip of your penis. The slicked appendage teases your cumslit, and after a while, switches to the sides of your [cock]. The avian’s tongue licks them in a way who has nothing to envy to the best blowjobs given to you in this realm, and proof of it is who in less of a minute, your cock is hard and throbbing.");
+			outputText("\n\nAnzu is getting hot too, and while he doesn’t stop his tongue work over your [cock], one of his hands slips down to his crotch and start pumping his huge penis. You haven’t much time to notice this, but just after he starts doing that, his other hand starts (if player has balls) fondling your [balls] (else) teasing your nipples.");
+			outputText("\n\nWith the additional stimulation, your arousal increases even more, to the point of pre starts leaking of your tip. Anzu licks it happily taking it away with his nimble tongue before you can even notice it. The avian’s own erection is so hard who is leaking pre too, but in much more quantities than yours.");
+			outputText("\n\nA naughty idea hits the avian’s mind in that moment, and when you see him slicking his fingers with the copious amount of his own pre, you don’t need much imagination for guessing what he has planned for you. Soon, the delicious feeling of (if anus stretching<2) his finger gently prodding your [asshole] (else if anus stretching>2) his fingers teasing the insides of your [asshole].");
+			outputText("\n\nYour misconceptions about getting a blowjob from him quickly prove themselves wrong at the wonderful feeling of his tongue worshipping every inch of your [cock], leaving it thoroughly slicked and covered on his saliva. At the same time his digits keep teasing your ass, and finally, finding their way to your prostate, prodding it gently.");
+			outputText("\n\nSoon, the (if player has balls) pressure on your [balls] become unbearable (if cum output>1000) You almost can hear them groaning for the painful effort to keep the cum inside them (else) lust in you grows enough to the point who you can't resist longer. With your cock lavished by the avian’s tongue and your prostate teased by his fingers, you finally hit orgasm, letting out your (if cumoutput>1000) copious load with enough force to stain most of his face on a single wave. Anzu quickly wraps his tongue around your cumslit, (in cum output>1000) managing to catch most of your cum in his beak (else) catching all of it on his tongue. With a pleased smile smile on his beak, he proceeds to lick the remaining cum from his face.");
+			outputText("\n\nWith a relieved sigh, you let yourself fall on the bed. Anzu is yet busy, licking your cock clean from any drop of cum who you could've left. That done, your he joins your on the bed. (if cum output>1000) Now who you can look him closer, you notice how your impressive load managed to make his belly swell a little, despite his impressive frame. While he hugs you tight, you poke playfully his cum-filled belly, earning a blush from the avian. (else) Taking you on his arm, you snuggle on the bed for a while.");
+			outputText("\n\nEventually both of you fall asleep for a while. By the time who you’re awake, you find your clothes carefully folded next to your side to the bed, and a still naked Anzu flexing his arms and legs in front of you.");
+			outputText("\n\n“So, you’re finally awake, huh? And, how was my little tongue work?” He asks with a smirk “Not as bad as you’ve though, right?”");
+			outputText("\n\nWell, that was an interesting, and quite pleasant experience. You don’t mind repeating it sometimes. Thanking him again for his, surprisingly, amazing beakjob, you wave goodbye to him, and after getting dressed, return to the peacefulness of your camp.");
+			player.orgasm();
+			anzuAffection(5);
+			flags[kFLAGS.ANZU_BLOWN_YOU_COUNTER]++;
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		private function suckOffDeitysCock():void {
-			/*
-			(first time)
- 
-Now that you’ve played a bit on the bed, it time to get into business. The perfumed scent of the avian has been driving you crazy for a while, and now that you have a full sight of his athletic form, you attention goes down to his crotch. The thought of the hefty package inside his pants makes your mouth water. You then say Anzu that if he is stressed you’ll be more than happy to help him relieve pressure.
- 
-“¿Relieve pressure?”...He asks doubtfully.
- 
-Putting your hand on the bulge between his legs, you make yourself very clear about what kind of pressure are you talking about.
- 
-“Oh, you mean that... “ the avian says with a shy smile ”Well, I use to give myself relief from time to time, but has passed a time, and lately I feel a little…”
- 
-By the flushed look on his face when he’s saying this and the tone of his voice, sound like the big bird don’t mind having his nuts emptied. Despite that, Anzu seems a bit shy about that. Seeing how he’ll need a little more motivation, you slip a hand through his underwear.
- 
-“So, you feel a little pent, up big boy?” you tease him, fondling his balls.
- 
-“Y-yes…” the avian answers, shuddering in delight at you touch.
- 
-You keep teasing him, asking him if he’d like having your tongue wrapped around his meat while you suck and suck until he blows his load inside you mouth. That seems to give results, because his cock hardens at that thought. Finally, despite his nervousness, he accepts you offer.  Well, you couldn’t help him with his clothes put on, right? you say him.
- 
-“I think not…”.
- 
-You decide to take initiative this time and start undressing him. Luckily for you, he already has tossed away his robe, so you start with his shirt, which you leave on the floor, your hand caress the perfectly defined muscles on Anzu’s chest, going down until you reach to his pants. Taking them off too, you leave them on a heap over his shirt.The almost naked avian blushes red as you stare his magnificent body. With only his underwear getting between you and your prize, your take it off, leaving the forty inches of avian maleness exposed to your lustful desires. (if not naked) You take off your [armor], leaving both of you naked and ready for action.
- 
-(next time, repeatable)
- 
-Now that you’ve played a bit on the bed, it time to get into business. The perfumed scent of the avian has been driving you crazy for a while, and now that you have a full sight of his athletic form, you attention goes down to his crotch. The thought of the hefty package inside his pants makes your mouth water. Resting over Anzu’s chest, you ask to your avian friend if he wants to “relieve some pressure” again, reinforcing your offer with a playful grope to his crotch
- 
-”Well, how could say I no to such an offer?” He says, with a little laugh.
- 
-Looks like the big parrot has grown fond of your oral attention, you say him with a grin. You slip a hand on his underwear and start fondling him. His tongue rolls out of his mouth in delight at your handjobs, before he answers.
- 
-“And you are getting attached to the taste of my cum.” he jokes, grabbing his manhood for emphasis. “Luckily for you, I’m here to please”
- 
-Then what are you doing dressed? You ask him seductively
- 
-“Well, since you’re so eager to get me, why you not come here and take them off by yourself?” he says playfully
- 
-You jump to his side of the bed. His fancy robe has been tossed away a while ago, so you start with his shirt, which you leave on the floor, your hand caress the perfectly defined muscles on Anzu’s chest, going down until you reach to his pants. Taking them off too, you leave them on a heap over his shirt.The almost naked avian blushes red as you stare his magnificent body. With only his underwear getting between you and your prize, your take it off, leaving the forty inches of avian maleness exposed to your lustful desires. (if not naked) You take off your [armor], leaving both of you naked and ready for action.
- 
-//Scene continues
- 
-Anzu reclines on his bed, in all his naked glory. ou take a moment to contemplate his impressive frame, the rainbow patterned colours of his plumage, that, added to the golden tones of his hair, give him a handsome and regal appearance. You delight your view on the tones and strong muscles of his chest, partially hidden beneath a layer of fluffy feathers. On his crotch, his half hard manhood and the pair of avian nuts that hang beneath capt your attention. Putting one finger on his belly, and circling his bellybutton with it, you ask Anzu if he’s ready to be worshipped like a god deserves.
- 
-(first time) “S-sure” he answers, flushed at your kinky proposal. (next time, repeat) “Well, show me what you have on mind then” the avian answers.
- 
-You playfully pass fingers over his belly a moment, caressing it softly. The smell of Anzu feathers, a smell of violets and snow hits your nose when you approach more to his body. The perfumed scent is so wonderful that you bury your face on the feathers of his lower belly. Then, a musky scent attracts you, spurring you to go lower, until you realize that your [face] is just over the avian’s crotch. You start your task licking them, sucking around the heavy orbs, while the feathers that cover them tickle your tongue. The musky scent of them, combined with the soft perfume of his body overwhelms your senses, and before you can notice it, your (if cocks>0) [cock] is quickly hardening (else) your [pussy] moistens and your body is getting infused by lust.
- 
-“So...this is how you worship a god.” Anzu laughs, somewhat flustered “It’s a weird way to do it, but I have to admit that I like it.”
- 
-Smiling at his approval, you ignore your own lust and return to your main task. You keep worshipping his king sized balls, warm to your touch, while you can hear the cum inside them churning. Continuing your task, you slowly make your way to your prize: his cock. When you finally reach it, you start licking its sides. Almost forty inches of pure avian meat, and it’s all for you. Taking its tapered glans on your hands, you give it a lick, eliciting a moan from the avian. One of his hands goes down your head, lovingly caressing your hair (if bald) [skin]. You get a whiff of the musky and delicious scent of the thick tool before continuing.
- 
-This time your tongue goes to his tip. Beads of pre leak from his cumslit and your tongue eagerly delights on then, enjoying as the salty flavour inundates your tastebuds. Soon, the desire is too much, and your start sinking the meaty rod on your eager mouth. Having a long way to the end, you decide to start safely, and, bobbing down on it with pleasure, you engulf in your mouth on the first inches of his length, as your hand wraps around the base of Anzu’s manhood.
- 
-Pulling out his cock, you look up to Anzu with a mischievous smile and, in the mood for a bit more of foreplay, you start sliding his cock in and out, while your tongue dances across its surface, as his pre drips from the corners of your mouth.
- 
-(if player height>50 and not naga) One of your hands start caressing his balls and finds its way to his anus, where you prod a finger inside a massage his prostate from the insides (else if naga) Taking some of the pre that leaks from his erection mixed with your saliva, you smear it on your tail tip and after making sure that it is well lubed, you slip it on his asshole, wriggling its way to his prostate. (else, if player height<50) You try to reach his anus, but due his impressive frame, looks like you won’t reach much far. Instead, you cup his huge nuts and squeeze them gently. Taken for the desire, Anzu lets out a moan of delight, putting his hands on your head and pushing his cock deeper inside your mouth. You gasp as several inches of the monster are forced on your mouth at once. Seeing your discomfort, he releases your head and lets you take control.
- 
-After taking some air, you return to main task. The pointed tip of the avian manhood makes your task easier, but, nevertheless, is a huge way to the end.
-
-“Be sure you’re not biting off more of what you can chew” Anzu jokes lovingly, caressing your scruff.
-
-Pre slides down your throat as you bury more and more of his meat in your mouth, until the pointed tip of his cock reaches the back of your throat. Seeing how you can’t fit more of his titanic cock into your mouth, you focus on enjoying the filling sensation. Your (if cocks>0) cock is rock hard, while the rest of your (else if vagina>0) vagina is drooling girlcum, while the rest of your (else) entire body is shuddering in heat, excited by the delicious taste of Anzu’s pre.
- 
-Taking out his cock a little, you let its tip rest on the back of your tongue and guzzle the dribbling pre leaking on your mouth,  anxious for taste your creamy reward soon. You mouth drools all over his penis, and you lose yourself on the desire for a second, until the salty taste of his meat returns your mind to the job again.
- 
-(if player height>50 and not naga) Your hand slips out off his anus and starts pumping the base of his cock, (if player height>50 and naga) Taking your tip tail out of his anus, you use it to pump the base of his cock, (else if player height<50) You take your hands off of his balls and use them to pump the base of his cock, while you continue servicing his meat, bobbing down and forth across every inch of his avian penis.(if snake, demon or dragon tongue) Your nimble tongue easily wraps around his throbbing meat and skillfully inserting the forked tip on his cumslit, you manage to take the last drops of pre. Between your  sucking and the teasing that the avian is enduring, he must be on the brink of orgasm. Confirming your suspicions, Anzu, blushing red, manages to say between moans:
-
-“[name], (boy/girl) here it comes”
-
-With that his cumslit releases his load on your mouth. The first flood of semen inundates your mouth, with a strangely creamy and sweet taste that makes you want more. Wave after wave fill your throat, but determined to don’t let it waste, you keep drinking. You don’t care when the size of his load start to distend your stomach, the only thing that you want on this moment is more and more of his delicious seed.
- 
-(if not genderless) While his load fills you, the excitement of having his hot seed on your mouth drags you to climax (if cocks>0) spilling your load on the sheets (else if vagina>0) creaming your pussy on delight.
- 
-After the seventh wave, the flow of semen distends your belly to the point that you look several months pregnant. You caress your now gravid stomach unthinkingly, as the last tides of cum finish to flood your gullet. When his orgasm subsides, Anzu lets his cock slide out of your mouth bathing your face and chest and staining heavily your [skin] with the leaking cum. Spent, the avian mutters:
- 
-“Thanks, [name]. I really needed that. But seems like I overfilled you this time. Do you want to rest with me?”
- 
-You agree, jumping to his side with difficulty due the weight of his cum in your belly. Seeing your predicament, he help you to stand up, and then embraces your body with both arms, surrounding it with his feathered wings. Soon, you are sleeping peacefully with his cum swirling in your belly and a satisfied look on both of your faces.
- 
-After a relaxing nap, and a thoroughly fulfilling meal, you bid farewell to your avian friend and return to your camp.
-
-			*/
+			clearOutput();
+			if (flags[kFLAGS.ANZU_SUCKED_OFF_COUNTER] == 0) {
+				outputText("Now that you’ve played a bit on the bed, it time to get into business. The perfumed scent of the avian has been driving you crazy for a while, and now that you have a full sight of his athletic form, you attention goes down to his crotch. The thought of the hefty package inside his pants makes your mouth water. You then say Anzu that if he is stressed you’ll be more than happy to help him relieve pressure.");
+				outputText("\n\n“Relieve pressure?”...He asks doubtfully.");
+				outputText("\n\nPutting your hand on the bulge between his legs, you make yourself very clear about what kind of pressure are you talking about.");
+				outputText("\n\n“Oh, you mean that... “ the avian says with a shy smile ”Well, I use to give myself relief from time to time, but has passed a time, and lately I feel a little…”");
+				outputText("\n\nBy the flushed look on his face when he’s saying this and the tone of his voice, sound like the big bird don’t mind having his nuts emptied. Despite that, Anzu seems a bit shy about that. Seeing how he’ll need a little more motivation, you slip a hand through his underwear.");
+				outputText("\n\n“So, you feel a little pent, up big boy?” you tease him, fondling his balls.");
+				outputText("\n\n“Y-yes…” the avian answers, shuddering in delight at you touch.");
+				outputText("\n\nYou keep teasing him, asking him if he’d like having your tongue wrapped around his meat while you suck and suck until he blows his load inside you mouth. That seems to give results, because his cock hardens at that thought. Finally, despite his nervousness, he accepts you offer.  Well, you couldn’t help him with his clothes put on, right? you say him.");
+				outputText("\n\n“I think not…”.");
+				outputText("\n\nYou decide to take initiative this time and start undressing him. Luckily for you, he already has tossed away his robe, so you start with his shirt, which you leave on the floor, your hand caress the perfectly defined muscles on Anzu’s chest, going down until you reach to his pants. Taking them off too, you leave them on a heap over his shirt.The almost naked avian blushes red as you stare his magnificent body. With only his underwear getting between you and your prize, your take it off, leaving the forty inches of avian maleness exposed to your lustful desires. (if not naked) You take off your [armor], leaving both of you naked and ready for action.");
+			}
+			else {
+				outputText("Now that you’ve played a bit on the bed, it time to get into business. The perfumed scent of the avian has been driving you crazy for a while, and now that you have a full sight of his athletic form, you attention goes down to his crotch. The thought of the hefty package inside his pants makes your mouth water. Resting over Anzu’s chest, you ask to your avian friend if he wants to “relieve some pressure” again, reinforcing your offer with a playful grope to his crotch");
+				outputText("\n\n”Well, how could say I no to such an offer?” He says, with a little laugh.");
+				outputText("\n\nLooks like the big parrot has grown fond of your oral attention, you say him with a grin. You slip a hand on his underwear and start fondling him. His tongue rolls out of his mouth in delight at your handjobs, before he answers.");
+				outputText("\n\n“And you are getting attached to the taste of my cum.” he jokes, grabbing his manhood for emphasis. “Luckily for you, I’m here to please”");
+				outputText("\n\nThen what are you doing dressed? You ask him seductively");
+				outputText("\n\n“Well, since you’re so eager to get me, why you not come here and take them off by yourself?” he says playfully");
+				outputText("\n\nYou jump to his side of the bed. His fancy robe has been tossed away a while ago, so you start with his shirt, which you leave on the floor, your hand caress the perfectly defined muscles on Anzu’s chest, going down until you reach to his pants. Taking them off too, you leave them on a heap over his shirt.The almost naked avian blushes red as you stare his magnificent body. With only his underwear getting between you and your prize, your take it off, leaving the forty inches of avian maleness exposed to your lustful desires. (if not naked) You take off your [armor], leaving both of you naked and ready for action.");
+			}
+			outputText("\n\nAnzu reclines on his bed, in all his naked glory. ou take a moment to contemplate his impressive frame, the rainbow patterned colours of his plumage, that, added to the golden tones of his hair, give him a handsome and regal appearance. You delight your view on the tones and strong muscles of his chest, partially hidden beneath a layer of fluffy feathers. On his crotch, his half hard manhood and the pair of avian nuts that hang beneath capt your attention. Putting one finger on his belly, and circling his bellybutton with it, you ask Anzu if he’s ready to be worshipped like a god deserves.");
+			outputText("\n\n(first time) “S-sure” he answers, flushed at your kinky proposal. (next time, repeat) “Well, show me what you have on mind then” the avian answers.");
+			outputText("\n\nYou playfully pass fingers over his belly a moment, caressing it softly. The smell of Anzu feathers, a smell of violets and snow hits your nose when you approach more to his body. The perfumed scent is so wonderful that you bury your face on the feathers of his lower belly. Then, a musky scent attracts you, spurring you to go lower, until you realize that your [face] is just over the avian’s crotch. You start your task licking them, sucking around the heavy orbs, while the feathers that cover them tickle your tongue. The musky scent of them, combined with the soft perfume of his body overwhelms your senses, and before you can notice it, your (if cocks>0) [cock] is quickly hardening (else) your [pussy] moistens and your body is getting infused by lust.");
+			outputText("\n\n“So...this is how you worship a god.” Anzu laughs, somewhat flustered “It’s a weird way to do it, but I have to admit that I like it.”");
+			outputText("\n\nSmiling at his approval, you ignore your own lust and return to your main task. You keep worshipping his king sized balls, warm to your touch, while you can hear the cum inside them churning. Continuing your task, you slowly make your way to your prize: his cock. When you finally reach it, you start licking its sides. Almost forty inches of pure avian meat, and it’s all for you. Taking its tapered glans on your hands, you give it a lick, eliciting a moan from the avian. One of his hands goes down your head, lovingly caressing your hair (if bald) [skin]. You get a whiff of the musky and delicious scent of the thick tool before continuing.");
+			outputText("\n\nThis time your tongue goes to his tip. Beads of pre leak from his cumslit and your tongue eagerly delights on then, enjoying as the salty flavour inundates your tastebuds. Soon, the desire is too much, and your start sinking the meaty rod on your eager mouth. Having a long way to the end, you decide to start safely, and, bobbing down on it with pleasure, you engulf in your mouth on the first inches of his length, as your hand wraps around the base of Anzu’s manhood.");
+			outputText("\n\nPulling out his cock, you look up to Anzu with a mischievous smile and, in the mood for a bit more of foreplay, you start sliding his cock in and out, while your tongue dances across its surface, as his pre drips from the corners of your mouth.");
+			outputText("\n\n(if player height>50 and not naga) One of your hands start caressing his balls and finds its way to his anus, where you prod a finger inside a massage his prostate from the insides (else if naga) Taking some of the pre that leaks from his erection mixed with your saliva, you smear it on your tail tip and after making sure that it is well lubed, you slip it on his asshole, wriggling its way to his prostate. (else, if player height<50) You try to reach his anus, but due his impressive frame, looks like you won’t reach much far. Instead, you cup his huge nuts and squeeze them gently. Taken for the desire, Anzu lets out a moan of delight, putting his hands on your head and pushing his cock deeper inside your mouth. You gasp as several inches of the monster are forced on your mouth at once. Seeing your discomfort, he releases your head and lets you take control.");
+			outputText("\n\nAfter taking some air, you return to main task. The pointed tip of the avian manhood makes your task easier, but, nevertheless, is a huge way to the end.");
+			outputText("\n\n“Be sure you’re not biting off more of what you can chew” Anzu jokes lovingly, caressing your scruff.");
+			outputText("\n\nPre slides down your throat as you bury more and more of his meat in your mouth, until the pointed tip of his cock reaches the back of your throat. Seeing how you can’t fit more of his titanic cock into your mouth, you focus on enjoying the filling sensation. Your (if cocks>0) cock is rock hard, while the rest of your (else if vagina>0) vagina is drooling girlcum, while the rest of your (else) entire body is shuddering in heat, excited by the delicious taste of Anzu’s pre.");
+			outputText("\n\nTaking out his cock a little, you let its tip rest on the back of your tongue and guzzle the dribbling pre leaking on your mouth,  anxious for taste your creamy reward soon. You mouth drools all over his penis, and you lose yourself on the desire for a second, until the salty taste of his meat returns your mind to the job again.");
+			outputText("\n\n(if player height>50 and not naga) Your hand slips out off his anus and starts pumping the base of his cock, (if player height>50 and naga) Taking your tip tail out of his anus, you use it to pump the base of his cock, (else if player height<50) You take your hands off of his balls and use them to pump the base of his cock, while you continue servicing his meat, bobbing down and forth across every inch of his avian penis.(if snake, demon or dragon tongue) Your nimble tongue easily wraps around his throbbing meat and skillfully inserting the forked tip on his cumslit, you manage to take the last drops of pre. Between your  sucking and the teasing that the avian is enduring, he must be on the brink of orgasm. Confirming your suspicions, Anzu, blushing red, manages to say between moans:");
+			outputText("\n\n“[name], " + player.mf("boy", "girl") + " here it comes”");
+			outputText("\n\nWith that his cumslit releases his load on your mouth. The first flood of semen inundates your mouth, with a strangely creamy and sweet taste that makes you want more. Wave after wave fill your throat, but determined to don’t let it waste, you keep drinking. You don’t care when the size of his load start to distend your stomach, the only thing that you want on this moment is more and more of his delicious seed.");
+			player.refillHunger(80);
+			outputText("\n\n(if not genderless) While his load fills you, the excitement of having his hot seed on your mouth drags you to climax (if cocks>0) spilling your load on the sheets (else if vagina>0) creaming your pussy on delight.");
+			outputText("\n\nAfter the seventh wave, the flow of semen distends your belly to the point that you look several months pregnant. You caress your now gravid stomach unthinkingly, as the last tides of cum finish to flood your gullet. When his orgasm subsides, Anzu lets his cock slide out of your mouth bathing your face and chest and staining heavily your [skin] with the leaking cum. Spent, the avian mutters:");
+			outputText("\n\n“Thanks, [name]. I really needed that. But seems like I overfilled you this time. Do you want to rest with me?”");
+			outputText("\n\nYou agree, jumping to his side with difficulty due the weight of his cum in your belly. Seeing your predicament, he help you to stand up, and then embraces your body with both arms, surrounding it with his feathered wings. Soon, you are sleeping peacefully with his cum swirling in your belly and a satisfied look on both of your faces.");
+			outputText("\n\nAfter a relaxing nap, and a thoroughly fulfilling meal, you bid farewell to your avian friend and return to your camp.");
+			dynStats("lus", 30);
+			anzuAffection(5);
+			flags[kFLAGS.ANZU_SUCKED_OFF_COUNTER]++;
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		private function fuckGodlyBirdButt():void {
-			/*
-			In the mood for some bird butt, you tell Anzu that you’d like a turn on his ass.
- 
-(first time)
- 
-“Well, you see, being, that I am…I never, well, had anything, or anyone, you know…back there…and…”
+			clearOutput();
+			outputText("In the mood for some bird butt, you tell Anzu that you'd like a turn on his ass.");
+			if (flags[kFLAGS.ANZU_ANAL_PITCH_COUNTER] == 0) {
+				outputText("\n\n“Well, you see, being, that I am…I never, well, had anything, or anyone, you know…back there…and…”");
+				outputText("\n\nOh, It’s that. Well there is a first time for everything. And you’ll make it a pleasant experience for both of you.");
+				outputText("\n\n“If you say that...[name]. I think that I’ll trust in you.”");
+				outputText("\n\nYou take off his robes and let them fall to the floor. He strips from his vest and pants, dropping them in the armchair(if not naked), while you remove your [armor]. This done, you remove his underwear, leaving his avian cock bounce free in the air.");
+				outputText("\n\nThen, you instruct him to lean on the bed, while you open his legs and caress the softness of his feathered buttcheeks. You prod one of your fingers inside his tight anus and find your way to his prostate while other caress his balls. The big bird blushes red under your ministrations.");
+				outputText("\n\n“[name],...what are you doing?”");
+				outputText("\n\nOnly assuring than his first time will be pleasant.");
+			}
+			else {
+				outputText("\n\n“Okay [name]. I’m starting to like it” Anzu answers, blushing a bit");
+				outputText("\n\nSure? He is a little too eager to only ‘start’ to liking it.");
+				outputText("\n\n“Right, right. I really like it.” he admits. “But it’s your fault after all!”");
+				outputText("\n\nWhile you remove your [armor]. He eagerly strips himself, dropping his robes and other clothes in a nearby armchair, and leaving his avian cock bounce free in the air.");
+				outputText("\n\nHe leans on the soft mattress of his bed, while you open his legs and caress the softness of his feathered buttcheeks. You prod one of your fingers inside his tight anus and find your way to his prostate while other caress his balls. The big bird blushes red under your ministrations.");
+			}
+			outputText("\n\nYou tell him to relax, while you take care of him. Soon, your efforts start to give result,  when his huge cock arises. After a little more stimulation, pre starts to leak copiously from his avian maleness. Taking some in your hands, you start smearing it on his asshole (if player isn’t a centaur) , and then in your [cock].");
+			outputText("\n\nYou decide to tease him for a bit, hotdogging your cock between his buttcheeks, moistening his butt feathers with your pre.");
+			outputText("\n\nThen your cock meet the entrance of his rosebud, then, you start to penetrating him, slowly at the start, inch by inch, and then you increase your pace, until half of you cock is buried inside. A moan of delight escapes from Anzu’s mouth while you thrust inside him. If the hardness of his cock proof anything, he must be really enjoying this.")
+			outputText("\n\nSeeing how you’ve had enough foreplay, you shove the rest of your cock at once. With the amount of pre covering, it slip inside easily. Anzu gasps at the sudden intrusion, but quickly relaxes at the feeling of you cock sliding inside and outside his anus.");
+			outputText("\n\nYou increase the rhythm of your thrusts until you’re close to climax. Your avian companion, close too, tries to jerk off, but he is too overstimulated to do that. After a few attempts, he lets you take enterally the charge of the situation, letting his tongue roll outside his beak, while enjoying the feeling of your cock in his anus.");
+			if (player.cumQ() < 1000) {
+				outputText("\n\nFinally, you release your load inside him, filling his insides with your cum. Seeing how he hasn’t got his release yet, you grab his cock and start jerking him.");
+			}
+			else {
+				outputText("\n\nYou stuff the bird so full of cum, that of Anzu’s belly, despite his size, manage to gain a considerable bulge. (if player has knot) Some of your cum tries to escape, but your knot prevents any drop to waste, inflating even more the poor avian’s belly. (else) Even some of your cum overflows his hole, painting his butt feathers white. Seeing how he hasn’t got his release yet, you grab his cock and start jerking him");
+			}
 
-Oh, It’s that. Well there is a first time for everything. And you’ll make it a pleasant experience for both of you.
- 
-“If you say that...[name]. I think that I’ll trust in you.”
- 
-You take off his robes and let them fall to the floor. He strips from his vest and pants, dropping them in the armchair(if not naked), while you remove your [armor]. This done, you remove his underwear, leaving his avian cock bounce free in the air.
- 
-Then, you instruct him to lean on the bed, while you open his legs and caress the softness of his feathered buttcheeks. You prod one of your fingers inside his tight anus and find your way to his prostate while other caress his balls. The big bird blushes red under your ministrations.
- 
-“[name],...what are you doing?”
-
-Only assuring than his first time will be pleasant.
- 
-(next time, repeating scene)
-
-“Okay [name]. I’m starting to like it” Anzu answers, blushing a bit
-
-Sure? He is a little too eager to only ‘start’ to liking it.
-
-“Right, right. I really like it.” he admits. “But it’s your fault after all!”
- 
-While you remove your [armor]. He eagerly strips himself, dropping his robes and other clothes in a nearby armchair, and leaving his avian cock bounce free in the air.
- 
-He leans on the soft mattress of his bed, while you open his legs and caress the softness of his feathered buttcheeks. You prod one of your fingers inside his tight anus and find your way to his prostate while other caress his balls. The big bird blushes red under your ministrations.
-//Scene continues.
- 
-You tell him to relax, while you take care of him. Soon, your efforts start to give result,  when his huge cock arises. After a little more stimulation, pre starts to leak copiously from his avian maleness. Taking some in your hands, you start smearing it on his asshole (if player isn’t a centaur) , and then in your [cock].
- 
-You decide to tease him for a bit, hotdogging your cock between his buttcheeks, moistening his butt feathers with your pre.
- 
-Then your cock meet the entrance of his rosebud, then, you start to penetrating him, slowly at the start, inch by inch, and then you increase your pace, until half of you cock is buried inside. A moan of delight escapes from Anzu’s mouth while you thrust inside him. If the hardness of his cock proof anything, he must be really enjoying this.
- 
-Seeing how you’ve had enough foreplay, you shove the rest of your cock at once. With the amount of pre covering, it slip inside easily. Anzu gasps at the sudden intrusion, but quickly relaxes at the feeling of you cock sliding inside and outside his anus.
- 
-You increase the rhythm of your thrusts until you’re close to climax. Your avian companion, close too, tries to jerk off, but he is too overstimulated to do that. After a few attempts, he lets you take enterally the charge of the situation, letting his tongue roll outside his beak, while enjoying the feeling of your cock in his anus.
- 
-(if cum output<1000)
-
-Finally, you release your load inside him, filling his insides with your cum. Seeing how he hasn’t got his release yet, you grab his cock and start jerking him..
-
-(else, if cumOutput>1000)
-
-You stuff the bird so full of cum, that of Anzu’s belly, despite his size, manage to gain a considerable bulge. (if player has knot) Some of your cum tries to escape, but your knot prevents any drop to waste, inflating even more the poor avian’s belly. (else) Even some of your cum overflows his hole, painting his butt feathers white. Seeing how he hasn’t got his release yet, you grab his cock and start jerking him
- 
-A few seconds later, Anzu cums too. Most of his cum lands on his face and belly, leaving him a sticky mess, but some of it manage to hit you in the face. While he licks clean his face with his long tongue, you (if player has a dragon, snake or demon tongue) lick his cum from your face (else) use the feathers of his tail to whip his cum from your face.
- 
-You remove your cock, letting a little of your flow from his asshole. Then, you recline over him, licking his cum off his chest. The feeling of his feathers tickles your tongue. Anzu then hugs you with both arms, and says, blushing:
- 
-“[name], that was...great. I haven’t had so much fun in a while” he admits.
- 
-You tell him that you had a great time too.
- 
-Tired, you fall asleep over him, using his body as a huge pillow. He covers you with his wings, while both of you take a nap.
-			*/
+			outputText("\n\nA few seconds later, Anzu cums too. Most of his cum lands on his face and belly, leaving him a sticky mess, but some of it manage to hit you in the face. While he licks clean his face with his long tongue, you (if player has a dragon, snake or demon tongue) lick his cum from your face (else) use the feathers of his tail to whip his cum from your face.");
+			outputText("\n\nYou remove your cock, letting a little of your flow from his asshole. Then, you recline over him, licking his cum off his chest. The feeling of his feathers tickles your tongue. Anzu then hugs you with both arms, and says, blushing:");
+			outputText("\n\n“[name], that was...great. I haven’t had so much fun in a while” he admits.");
+			outputText("\n\nYou tell him that you had a great time too.");
+			outputText("\n\nTired, you fall asleep over him, using his body as a huge pillow. He covers you with his wings, while both of you take a nap.");
+			player.orgasm();
+			flags[kFLAGS.ANZU_ANAL_PITCH_COUNTER]++;
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		private function feedAnzu():void {
-			/*
-			While resting with him on the bed, you feel a familiar weight on your breasts. Sensing the milky gift barely contained by your [chest], why not share a little of it with your avian (if relatlvl=3) friend? (else if relatlvl=4) lover?
-
-Your ask Anzu if he suddenly felt thirsty. He don’t seem to understand what exactly you’re offering him, as he asks:
-
-“Thirsty, hmm?... Not so much, but if you want something I can go to the kitchen and…”
-
-Making the things more clear, you explain that you’re offering to sate his thirst with your milk, cupping your filled breasts while you do so. (if player cocks>1) his eyes darts to your crotch, focusing on your [cock] but, you dispel his misguided idea, jiggling your tits again to entice him. 
-(else) The avian seems unsure at the idea.
-
-“Well, this is a bit, how to say it, weird. You know, I left to be a little kid some thousands years ago, and the idea that someone catching me doing this is, embarrassing”
-
-(if no quests are completed)
-
-And how much people he can see hanging around the palace now? Besides, it’s nothing to be ashamed. You only want to share a very intimate moment with him, if he is okay with that.
-
-“Well, if you put it in that way, I suppose that I haven’t any reason to say no?”
-
-(if quest 1 is done)
-
-Maybe you have in home some guests by now, but who are them to judge him, anyways? Besides, for the way that he regards them, he doesn’t seems like the kind if guy that gets worried about everyone’s opinion about him.
-
-“Heh, it’s hard to don’t notice it, right?”  he answers, with a soft laugh “Alright, you win. I’ll give it a try.”
-
-Putting one of his hand of your breasts shyly, he starts cupping them, caressing the soft orbs with his huge but surprisingly nimble fingers. Taking a little more confidence, he teases one of your nipples with the point of one of his short claws, prompting a jet of milk squirt off, with enough force and aim to hit him on the face.
-
-The surprised avian blushes as he see your milk dripping from his face. Somewhat nervous, he takes some of it and licks it with his tongue.
-
-(next time, repeat)
-
-While resting with him on the bed, you feel a familiar weight on your breasts. Sensing the milky gift barely contained by your [chest], why not share a little of it with your avian (if relatlvl=3) friend? (else if relatlvl=4) lover?
-Your ask Anzu if he suddenly felt thirsty. This time he agrees without too much hesitation. (if cocks>0) Darting his sight to your crotch, he tries to slip a hand inside the lower part of your [armor]. Taking his misguided hand and putting in on your breasts, you make clear what you want to do.
-
-“Oh, you mean that milk…well, it may not be as tasty as the other” he answers, his eyes remaining on the bulge of your clothes.  “But, well, I’m up to it.”
-
-(else) You take his hand and put it on your breasts, letting him fondle them. He caresses the soft orbs with his huge but surprisingly nimble fingers. Having lost his initial doubts, he soon is teasing your nipples, making some of your milk drips from them.
-
-//Scene continues
-
-He keeps caressing the soft [skin] of your breasts, prompting more drops of milk dribble from your nipples.
-
-You suddenly feel how he removes his hands from your breasts, but, before you can protest, he grabs your chest again, and now with his tongue, he teases your nipples, licking them clean from the milk that started leaking.
-
-Opening wide his beak, he fondles your breasts, forcing more milk out. You leave the milky goodness fall on his tongue. He drinks it all with a pleased gesture, that makes you think that, despite his initial protests, he really likes it. Soon, his tongue focuses again on your nipples licking the rich milk as it comes out.
-
-You motion him for he lays on his back while you feed him. Somewhat confused, he does so. Luckily for you, he is much less heavy than you expected and most of his weight is carried by the bed under you.
-
-It’s kind of cute, though. Anzu laying on your chest, happily drinking your milk like a little child, only that this little child is (if player height>96) way larger (else) many times larger than you. His tongue coils gently around your nipples, making them ooze streaks of white that are quickly cleaned by the eager avian.
-
-“So, the little baby is liking his meal?” you tease him.
-
-“Hey, I’m not a baby!” He protests, only to be hit by a streak of white on the face, that is quickly cleaned by his nimble tongue.
-
-“Okay, big boy, but you are clearly enjoying yourself.” You answer him, after realizing the noticeable erection between his legs.
-
-“Heh, sorry, it's only that…” he says, his cheeks blushing red. “Well, being so close of you, makes me feel a little flustered.”
-
-Well, seems like he is really enjoying it, after all. After the pleasant treatment that you breasts are receiving, the soon let out the real flow, that is quickly swallowed by the big bird. You let him rest his head on your breast while he sucks your milk.
-
-(if milk output is <500) After a while, your breast found themselves depleted again until Anzu’s playful ministrations. Giving the avian a look, you can see him licking the white spots of milk that dribbled to the sides of his beak. When he realizes that you are looking at him, he blushes and says.
-
-(else if milk output Is > 500) Your prodigious bounty keep producing milk for a long time, making the task of drinking it all increasingly difficult for your avian friend. When the flow of milk finally ends, his belly has swelled a bit despite the size of his owner. You give it a playful poke, earning a blush from the overfilled avian.
-
-(first time)
-
-“Huh, that was…nice.”
-
-You say that you’re glad that he liked his drink, and despite his embarrassment, he managed to even enjoy it. Anzu answers with a soft laugh, and giving your breast a look, he asks you.
-
-“So, i'd likei’dyou’d like to repeat it again, when your breasts feel to full again…Well  if you don’t’ mind”
-
-Of course, but for now, they’re quite empty. You’ll return to the camp for rest and return to him when you’re in the mood to give him milk again. After saying your goodbyes to the avian, you find your way through the Rift and return safely to your camp.
-
-(next time, repeat)
-
-“Tasty, as always, [name]. Thanks again, for letting me have a drink.” Anzu says, hugging your upper body in the soft embrace of his warm feathers.
- 
-You stay this for a while, with the heat of the avian breath on you neck, and his feathers tickling your [skin]. After some more cuddling, you stand up and redress yourself, not without giving Anzu a last view of your bare chest. The avian then asks:
-
-“You’ll return here again when your breasts feel too full, right?” He asks, looking at you with his cheeks somewhat red in mild embarrassment ”I’ve grown a taste for your milk…”
-
-Sure, you answer him, but for now, you have to let them rest for a bit. After saying your goodbyes to the avian, you find your way through the Rift and return safely to your camp.
-			*/
+			clearOutput();
+			if (flags[kFLAGS.ANZU_FED_COUNTER] == 0) {
+				outputText("While resting with him on the bed, you feel a familiar weight on your breasts. Sensing the milky gift barely contained by your [chest], why not share a little of it with your avian " + (anzuRelationshipLevel() >= 4 ? "lover" : "friend") + "?");
+				outputText("\n\nYour ask Anzu if he suddenly felt thirsty. He don’t seem to understand what exactly you’re offering him, as he asks:");
+				outputText("\n\n“Thirsty, hmm?... Not so much, but if you want something I can go to the kitchen and…”");
+				outputText("\n\nMaking the things more clear, you explain that you’re offering to sate his thirst with your milk, cupping your filled breasts while you do so. (if player cocks>1) his eyes darts to your crotch, focusing on your [cock] but, you dispel his misguided idea, jiggling your tits again to entice him. ");
+				outputText("\n\n(else) The avian seems unsure at the idea.");
+				outputText("\n\n“Well, this is a bit, how to say it, weird. You know, I left to be a little kid some thousands years ago, and the idea that someone catching me doing this is, embarrassing”");
+				//Will need to put a check for quest completion here
+				if (true) {
+					outputText("\n\nAnd how much people he can see hanging around the palace now? Besides, it’s nothing to be ashamed. You only want to share a very intimate moment with him, if he is okay with that.");
+					outputText("\n\n“Well, if you put it in that way, I suppose that I haven’t any reason to say no?”");
+				}
+				else { // 9999
+					outputText("\n\nMaybe you have in home some guests by now, but who are them to judge him, anyways? Besides, for the way that he regards them, he doesn’t seems like the kind if guy that gets worried about everyone’s opinion about him.");
+					outputText("\n\n“Heh, it’s hard to don’t notice it, right?”  he answers, with a soft laugh “Alright, you win. I’ll give it a try.”");
+					outputText("\n\nPutting one of his hand of your breasts shyly, he starts cupping them, caressing the soft orbs with his huge but surprisingly nimble fingers. Taking a little more confidence, he teases one of your nipples with the point of one of his short claws, prompting a jet of milk squirt off, with enough force and aim to hit him on the face.");
+					outputText("\n\nThe surprised avian blushes as he see your milk dripping from his face. Somewhat nervous, he takes some of it and licks it with his tongue.");
+				}
+			}
+			else {
+				outputText("\n\nWhile resting with him on the bed, you feel a familiar weight on your breasts. Sensing the milky gift barely contained by your [chest], why not share a little of it with your avian (if relatlvl=3) friend? (else if relatlvl=4) lover?");
+				outputText("\n\nYour ask Anzu if he suddenly felt thirsty. This time he agrees without too much hesitation. (if cocks>0) Darting his sight to your crotch, he tries to slip a hand inside the lower part of your [armor]. Taking his misguided hand and putting in on your breasts, you make clear what you want to do.");
+				outputText("\n\n“Oh, you mean that milk…well, it may not be as tasty as the other” he answers, his eyes remaining on the bulge of your clothes.  “But, well, I’m up to it.”");
+				outputText("\n\n(else) You take his hand and put it on your breasts, letting him fondle them. He caresses the soft orbs with his huge but surprisingly nimble fingers. Having lost his initial doubts, he soon is teasing your nipples, making some of your milk drips from them.");
+			}
+			outputText("\n\nHe keeps caressing the soft [skin] of your breasts, prompting more drops of milk dribble from your nipples.");
+			outputText("\n\nYou suddenly feel how he removes his hands from your breasts, but, before you can protest, he grabs your chest again, and now with his tongue, he teases your nipples, licking them clean from the milk that started leaking.");
+			outputText("\n\nOpening wide his beak, he fondles your breasts, forcing more milk out. You leave the milky goodness fall on his tongue. He drinks it all with a pleased gesture, that makes you think that, despite his initial protests, he really likes it. Soon, his tongue focuses again on your nipples licking the rich milk as it comes out.");
+			outputText("\n\nYou motion him for he lays on his back while you feed him. Somewhat confused, he does so. Luckily for you, he is much less heavy than you expected and most of his weight is carried by the bed under you.");
+			outputText("\n\nIt’s kind of cute, though. Anzu laying on your chest, happily drinking your milk like a little child, only that this little child is (if player height>96) way larger (else) many times larger than you. His tongue coils gently around your nipples, making them ooze streaks of white that are quickly cleaned by the eager avian.");
+			outputText("\n\n“So, the little baby is liking his meal?” you tease him.");
+			outputText("\n\n“Hey, I’m not a baby!” He protests, only to be hit by a streak of white on the face, that is quickly cleaned by his nimble tongue.");
+			outputText("\n\n“Okay, big boy, but you are clearly enjoying yourself.” You answer him, after realizing the noticeable erection between his legs.");
+			outputText("\n\n“Heh, sorry, it's only that…” he says, his cheeks blushing red. “Well, being so close of you, makes me feel a little flustered.”");
+			outputText("\n\nWell, seems like he is really enjoying it, after all. After the pleasant treatment that you breasts are receiving, the soon let out the real flow, that is quickly swallowed by the big bird. You let him rest his head on your breast while he sucks your milk.");
+			if (player.lactationQ() < 500) outputText("\n\nAfter a while, your breast found themselves depleted again until Anzu’s playful ministrations. Giving the avian a look, you can see him licking the white spots of milk that dribbled to the sides of his beak. When he realizes that you are looking at him, he blushes and says.");
+			else outputText("\n\nYour prodigious bounty keep producing milk for a long time, making the task of drinking it all increasingly difficult for your avian friend. When the flow of milk finally ends, his belly has swelled a bit despite the size of his owner. You give it a playful poke, earning a blush from the overfilled avian.");
+			if (flags[kFLAGS.ANZU_FED_COUNTER] == 0) {
+				outputText("\n\n“Huh, that was…nice.”");
+				outputText("\n\nYou say that you’re glad that he liked his drink, and despite his embarrassment, he managed to even enjoy it. Anzu answers with a soft laugh, and giving your breast a look, he asks you.");
+				outputText("\n\n“So, i'd likei’dyou’d like to repeat it again, when your breasts feel to full again…Well  if you don’t’ mind”");
+				outputText("\n\nOf course, but for now, they’re quite empty. You’ll return to the camp for rest and return to him when you’re in the mood to give him milk again. After saying your goodbyes to the avian, you find your way through the Rift and return safely to your camp.");
+			}
+			else {
+				outputText("\n\n“Tasty, as always, [name]. Thanks again, for letting me have a drink.” Anzu says, hugging your upper body in the soft embrace of his warm feathers.");
+				outputText("\n\nYou stay this for a while, with the heat of the avian breath on you neck, and his feathers tickling your [skin]. After some more cuddling, you stand up and redress yourself, not without giving Anzu a last view of your bare chest. The avian then asks:");
+				outputText("\n\n“You’ll return here again when your breasts feel too full, right?” He asks, looking at you with his cheeks somewhat red in mild embarrassment ”I’ve grown a taste for your milk…”");
+				outputText("\n\nSure, you answer him, but for now, you have to let them rest for a bit. After saying your goodbyes to the avian, you find your way through the Rift and return safely to your camp.");
+			}
+			dynStats("lus", 20, "sen", -1);
+			player.milked();
+			flags[kFLAGS.ANZU_FEEDING_COUNTER]++;
+			doNext(camp.returnToCampUseOneHour);
 		}
-		
 		
 		//Racing
 		private function racingWithAnzu():void {
