@@ -814,6 +814,11 @@ import classes.GlobalFlags.kFLAGS;
 			return max;
 		}
 		
+		public function maxHunger():Number
+		{
+			return 100;
+		}
+		
 		public function growHair(amount:Number = .1):Boolean {
 			//Grow hair!
 			var tempHair:Number = hairLength;

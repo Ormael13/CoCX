@@ -506,7 +506,7 @@ package classes
 		}
 
 		//Functions			
-		public function orgasm():void
+		public function orgasmReal():void
 		{
 			game.dynStats("lus=", 0, "res", false);
 			hoursSinceCum = 0;
@@ -518,6 +518,46 @@ package classes
 				game.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>\n\n" );
 				gems += bonusGems;
 			}
+		}
+		public function orgasm(type:String = 'Default', real:Boolean = true):void
+		{
+			switch (type) {
+				// Start with that, whats easy
+				case 'Vaginal': flags[kFLAGS.TIMES_ORGASM_VAGINAL]++; break;
+				case 'Anal':    flags[kFLAGS.TIMES_ORGASM_ANAL]++;    break;
+				case 'Dick':    flags[kFLAGS.TIMES_ORGASM_DICK]++;    break;
+				case 'Lips':    flags[kFLAGS.TIMES_ORGASM_LIPS]++;    break;
+				case 'Tits':    flags[kFLAGS.TIMES_ORGASM_TITS]++;    break;
+				case 'Nipples': flags[kFLAGS.TIMES_ORGASM_NIPPLES]++; break;
+				case 'Ovi':     break;
+
+				// Now to the more complex types
+				case 'VaginalAnal':
+					orgasm((hasVagina() ? 'Vaginal' : 'Anal'), real);
+					return; // Prevent calling orgasmReal() twice
+
+				case 'DickAnal':
+					orgasm((rand(2) == 0 ? 'Dick' : 'Anal'), real);
+					return;
+
+				case 'Default':
+				case 'Generic':
+				default:
+					if (!hasVagina() && !hasCock()) {
+						orgasm('Anal'); // Failsafe for genderless PCs
+						return;
+					}
+
+					if (hasVagina() && hasCock()) {
+						orgasm((rand(2) == 0 ? 'Vaginal' : 'Dick'), real);
+						return;
+					}
+
+					orgasm((hasVagina() ? 'Vaginal' : 'Dick'), real);
+					return;
+			}
+
+			if (real) orgasmReal();
 		}
 
 		public function newGamePlusMod():int

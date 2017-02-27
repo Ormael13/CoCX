@@ -1,0 +1,109 @@
+<project name="Corruption of Champions Build Script" default="testAndRelease">
+
+ <!-- Create a environment variable FLEX_HOME that points to the flex SDK -->
+ <property environment="env" />
+ <property name="FLEX_HOME" location="${env.FLEX_HOME}" />
+ 
+ <property name="main.src.dir" value="${basedir}/classes"/>
+ <property name="test.src.dir" value="${basedir}/test"/>
+ <property name="lib.dir" value="${basedir}/lib/bin"/>
+ <property name="build.dir" value="${basedir}/target"/>
+ <property name="report.dir" value="${build.dir}/report"/>
+ <property name="test.file" value="${build.dir}/CoC-test.swf"/>
+ 
+	<!-- Setup Flex and FlexUnit ant tasks -->
+	<!-- You can set this directly so mxmlc will work correctly, or set FLEX_HOME as an environment variable and use as below -->
+	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
+	<taskdef resource="flexUnitTasks.tasks">
+	   <classpath>
+	      <fileset dir="${lib.dir}/flexunit">
+	         <include name="flexUnitTasks*.jar" />
+	      </fileset>
+	   </classpath>
+	</taskdef>
+               
+   <!-- delete and create the DEPLOY dir again -->
+   <target name="init">
+      <delete dir="${build.dir}" />
+      <mkdir dir="${build.dir}" />
+	  <mkdir dir="${report.dir}" />       
+   </target>
+   
+   <target name="release" depends="init" description="Build with release flags">
+      <mxmlc file="${main.src.dir}/classes/CoC.as" output="${build.dir}/CoC-release.swf" static-rsls="true">
+         <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+         <source-path path-element="${FLEX_HOME}/frameworks"/>
+		 <source-path path-element="${main.src.dir}/"/>
+         <compiler.debug>false</compiler.debug>
+        <library-path dir="${lib.dir}" includes="*.swc" append="true"/>
+		<define name="CONFIG::release" value="true"/>
+		<define name="CONFIG::debug" value="false"/>
+		<define name="CONFIG::AIR" value="false"/>
+		<define name="CONFIG::STANDALONE" value="true"/>
+      </mxmlc>
+   </target>
+   
+   <target name="debug" depends="init" description="Build with debug flags">
+      <mxmlc file="${main.src.dir}/classes/CoC.as" output="${build.dir}/CoC-debug.swf" static-rsls="true">
+         <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+         <source-path path-element="${FLEX_HOME}/frameworks"/>
+		 <source-path path-element="${main.src.dir}/"/>
+         <compiler.debug>true</compiler.debug>
+        <library-path dir="${lib.dir}" includes="*.swc" append="true"/>
+		<define name="CONFIG::release" value="false"/>
+		<define name="CONFIG::debug" value="true"/>
+		<define name="CONFIG::AIR" value="false"/>
+		<define name="CONFIG::STANDALONE" value="true"/>
+      </mxmlc>
+   </target>
+   
+   <target name="test-build" depends="init" description="Build the swf with test libraries">
+      <mxmlc file="${test.src.dir}/TestRunner.mxml" output="${test.file}" static-rsls="true">
+         <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+         <source-path path-element="${FLEX_HOME}/frameworks"/>
+		 <source-path path-element="${main.src.dir}/"/>
+		 <source-path path-element="${test.src.dir}"/>
+		
+        <compiler.debug>true</compiler.debug>
+        <library-path dir="${lib.dir}" includes="*.swc" append="true"/>
+		<library-path dir="${lib.dir}/flexunit" includes="*.swc" append="true"/>
+		<define name="CONFIG::release" value="false"/>
+		<define name="CONFIG::debug" value="true"/>
+		<define name="CONFIG::AIR" value="false"/>
+		<define name="CONFIG::STANDALONE" value="true"/>
+      </mxmlc>
+   </target>
+   
+   <target name="all" depends="init,release,debug,test" description="Build all swf versions">
+   </target>
+   
+   <target name="testAndRelease" depends="init,test,release" description="Run tests and build release">
+   </target>
+   
+   	<target name="test" depends="test-build" description="Run the unit tests and create a HTML report">
+		<!-- Execute FlexUnit tests and publish reports -->
+		<flexunit 
+		    workingDir="${build.dir}"
+		    toDir="${report.dir}" 
+			haltonfailure="false"
+			failureproperty="flexunit.failure"			
+			verbose="true"
+			swf="${test.file}"
+			localTrusted="true">
+	      <source dir="${main.src.dir}/" />
+	      <library dir="${lib.dir}" />
+	   </flexunit>
+
+		<!-- Generate readable JUnit-style reports -->
+		<junitreport todir="${report.dir}">
+			<fileset dir="${report.dir}">
+				<include name="TEST-*.xml" />
+			</fileset>
+			<report format="frames" todir="${report.dir}/html" />
+		</junitreport>
+		
+		<!-- Fail the build while still generating a report -->
+		<!-- From http://blog.yoz.sk/2012/04/quick-tip-flexunit-and-junitreport-and-haltonfailure/-->
+		<fail if="flexunit.failure" message="Unit test(s) failed. See reports!"/>
+	</target>
+</project>

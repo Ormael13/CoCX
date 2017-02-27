@@ -13,8 +13,10 @@ Corruption-of-Champions.as3proj
 .idea/workspace.xml
 .idea/copyright/profiles_settings.xml
 *.sol
-*.swc
 /out
 /tmp
 CoC-AIR-app.xml
 CoC-AIR.airi
+
+# build directory
+target/
