@@ -2676,6 +2676,13 @@ private function promptSaveUpdate():void {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 13;
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 5) flags[kFLAGS.CAMP_CABIN_PROGRESS] -= 2; //Decrement by 2 so that values 6 and 7 are used and progress ends at 10, not 12.
 	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 13) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 14;
+		flags[kFLAGS.SANDWITCH_SERVICED] = flags[2295];
+		flags[kFLAGS.JOJO_STATUS] = flags[2296];
+		flags[2295] = 0;
+		flags[2296] = 0;
+	}
 	doCamp();
 }
 
