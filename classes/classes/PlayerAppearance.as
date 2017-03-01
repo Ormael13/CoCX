@@ -1029,8 +1029,8 @@ package classes
 					else if (rando % 5 == 4)       outputText("--Another of your ");
 
 					// How large?
-					outputText(player.cockDescript(cock_index) + ((rando % 5) % 3 == 0 || cock_index == 0 ? "":"s") +  " is " + numInchesOrCentimetres(player.cocks[cock_index].cockLength) + " long and ");
-					outputText(numInchesOrCentimetres(player.cocks[cock_index].cockThickness));
+					outputText(player.cockDescript(cock_index) + ((rando % 5) % 3 == 0 || cock_index == 0 ? "":"s") +  " is " + inchesOrCentimetres(player.cocks[cock_index].cockLength) + " long and ");
+					outputText(inchesOrCentimetres(player.cocks[cock_index].cockThickness));
 					if      (rando % 3 == 0)  outputText(" wide.");
 					else if (rando % 3 == 1)  outputText(" thick.");
 					else if (rando % 3 == 2)  outputText(" in diameter.");
