@@ -1265,7 +1265,7 @@ use namespace kGAMECLASS;
 				lizardCounter++;
 			if (tailType == TAIL_TYPE_LIZARD)
 				lizardCounter++;
-			if (tongueType == TONGUE_SNAKE)
+			if ([TONGUE_LIZARD, TONGUE_SNAKE].indexOf(tongueType) != -1)
 				lizardCounter++;
 			if (lowerBody == LOWER_BODY_TYPE_LIZARD)
 				lizardCounter++;

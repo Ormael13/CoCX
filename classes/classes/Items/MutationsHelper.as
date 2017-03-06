@@ -537,6 +537,56 @@ package classes.Items
 			return false;
 		}
 
+		public function gainLizardTongue():Boolean
+		{
+			if (player.tongueType != TONGUE_LIZARD) {
+				outputText("\n\nYour tongue goes numb, making your surprised noise little more than a gurgle as your tongue flops comically. ");
+				switch (player.tongueType) {
+					case TONGUE_SNAKE:
+						outputText("\nSlowly your tongue swells, thickening up until it's about as thick as your thumb, while staying quite "
+					              +" flexible. You drool, your tongue lolling out of your mouth as you slowly begin to regain control of your forked"
+					              +" organ. When you retract your tongue however, you are shocked to find it is much longer than it used to be,"
+					              +" now a foot long. As you cram your newly shifted appendage back in your mouth, you feel a sudden SNAP,"
+					              +" and on inspection, find you've snapped off your fangs! Well, you suppose you needed the room anyway.");
+						break;
+
+					case TONGUE_DEMONIC:
+						outputText("\nYour tongue gently shrinks down, the thick appendage remaining flexible but getting much smaller. There's"
+					              +" little you can do but endure the weird pinching feeling as your tongue eventually settles at being a foot long."
+					              +" The pinching sensation continues as the tip of your tongue morphs, becoming a distinctly forked shape."
+					              +" As you inspect your tongue you slowly regain control, retracting it into your mouth, the forked tips picking up"
+					              +" on things you couldn't taste before.");
+						break;
+
+					case TONGUE_DRACONIC:
+						outputText("\nYour tongue rapidly shrinks down, the thick appendage remaining flexible but getting much smaller. There's"
+					              +" little you can do but endure the weird pinching feeling as your tongue eventually settles at being a foot long."
+					              +" The pinching sensation continues as the tip of your tongue morphs, becoming a distinctly forked shape."
+					              +" As you inspect your tongue you slowly regain control, retracting it into your mouth, the forked tips picking up"
+					              +" on things you couldn't taste before.");
+						break;
+
+					case TONGUE_ECHIDNA:
+						outputText("\nSlowly your tongue swells, thickening up until it’s about as thick as your thumb, while staying long."
+					              +" The tip pinches making you wince, morphing into a distinctly forked shape. As you inspect your tongue you slowly"
+					              +" regain control, retracting it into your mouth, the forked tips picking up on things you couldn't taste before.");
+						break;
+
+					default:
+						outputText("\nSlowly your tongue swells, thickening up until it’s about as thick as your thumb, filling your mouth as you"
+					              +" splutter. It begins lengthening afterwards, continuing until it hangs out your mouth, settling at 1 foot long."
+					              +" The tip pinches making you wince, morphing into a distinctly forked shape. As you inspect your tongue you slowly"
+					              +" regain control, retracting it into your mouth, the forked tips picking up on things you couldn't taste before.");
+				}
+				outputText("\n\n<b>You now have a lizard tongue!</b>");
+				player.tongueType = TONGUE_LIZARD;
+				dynStats("sen", 5); // Sensitivy gain since its forked
+				changes++;
+			}
+
+			return false;
+		}
+
 		public function gainDraconicHorns(tfSource:String):void
 		{
 			trace('called gainDraconicHorns("' + tfSource + '")');

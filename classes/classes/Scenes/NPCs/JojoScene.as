@@ -1694,7 +1694,7 @@ public function jojoFollowerMeditate():void {
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
-		private function corruptJojoVaginalSmother():void {
+		protected function corruptJojoVaginalSmother():void {
 			jojoSprite();
 			clearOutput();
 			outputText("You feel the need to gain a little sexual relief and a mischievous idea comes to your mind, making you grin wickedly. You slip off into the jungle to seek out your monk mouse fuck toy, and when you find him, you practically pounce atop him, pinning him to his back. He struggles in surprise until he realizes that it is you, at which point he blushes and tries to look away, unable to help the erection that you are sitting against as you straddle him.  ");

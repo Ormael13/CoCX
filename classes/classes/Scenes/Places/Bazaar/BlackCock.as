@@ -1146,7 +1146,7 @@ package classes.Scenes.Places.Bazaar
 			addButton(1, "Nevermind", nevermindToHarrySex);
 		}
 		
-		private function haveHarryFuckYou():void {
+		protected function haveHarryFuckYou():void {
 			clearOutput();
 			outputText(images.showImage("harry-sex-getfucked"));
 			const HARRY_COCK_AREA:int = 18 * 3; //54

@@ -175,10 +175,11 @@
 		 */
 		public static function tongueDescription(i_character:Character):String
 		{
-			if (i_character.tongueType == 1) return "serpentine tongue";
-			else if (i_character.tongueType == 2) return "demonic tongue";
-			else if (i_character.tongueType == 3) return "draconic tongue";
-			else return "tongue";
+			// fallback for tongueTypes not fully implemented yet
+			if (i_character.tongueType == TONGUE_HUMAN || !DEFAULT_TONGUE_NAMES.hasOwnProperty(i_character.tongueType))
+				return "tongue";
+
+			return DEFAULT_TONGUE_NAMES[i_character.tongueType] + " tongue";
 		}
 
 		public static function nippleDescription(i_creature:Creature, i_rowNum:Number):String
@@ -2262,10 +2263,11 @@
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
 				[
 					[TONGUE_HUMAN, "human"],
-					[TONGUE_SNAKE, "snake"],
+					[TONGUE_SNAKE, "serpentine"],
 					[TONGUE_DEMONIC, "demonic"],
 					[TONGUE_DRACONIC, "draconic"],
-					[TONGUE_ECHIDNA, "echidna"]
+					[TONGUE_ECHIDNA, "echidna"],
+					[TONGUE_LIZARD, "lizard"],
 				]
 		);
 		public static const DEFAULT_EYES_NAMES:Object = createMapFromPairs(
