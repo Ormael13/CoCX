@@ -7,6 +7,7 @@ package classes
 	import classes.StatusEffectType;
 	import classes.Items.JewelryLib;
 	import classes.internals.Utils;
+	import classes.VaginaClass;
 	import classes.Scenes.Places.TelAdre.UmasShop;
 	import flash.display.InteractiveObject;
 
@@ -383,13 +384,33 @@ package classes
 		
 		//FEMALE STUFF
 		//TODO: Box into Female genital class?
-		public var vaginas:Array;
+		public var vaginas:Vector.<VaginaClass>;
 		//Fertility is a % out of 100. 
 		public var fertility:Number = 10;
-		public var clitLength:Number = .5;
+		private var legacyClitLength:Number = VaginaClass.DEFAULT_CLIT_LENGTH;
 		public var nippleLength:Number = .25;
 		public var breastRows:Array;
 		public var ass:AssClass = new AssClass();
+		
+		public function get clitLength():Number {
+			if(!hasVagina()) {
+				//TODO throw a error in the future
+				trace("Error: legacy get clit length without a vagina!");
+				return legacyClitLength;
+			}else{
+				return vaginas[0].clitLength;
+			}
+		}
+		
+		public function set clitLength(clitLength:Number):void {
+			if(!hasVagina()) {
+				 //TODO throw a error in the future
+				 trace("Error: legacy set clit length without a vagina!");
+				 legacyClitLength = clitLength;
+			}else{
+			 	vaginas[0].clitLength = clitLength;
+			}
+		}
 		
 		private var _femininity:Number = 50;
 		public function get femininity():Number {
@@ -497,8 +518,7 @@ package classes
 			//cocks = new Array();
 			//The world isn't ready for typed Arrays just yet.
 			cocks = [];
-			vaginas = [];
-			//vaginas: Vector.<Vagina> = new Vector.<Vagina>();
+			vaginas = new Vector.<VaginaClass>();
 			breastRows = [];
 			_perks = [];
 			statusEffects = [];
@@ -1495,20 +1515,24 @@ package classes
 			}
 		}
 		
-		public function vaginalCapacity():Number
-		{
-			//If the player has no vaginas
-			if (vaginas.length == 0)
-				return 0;
-			var total:Number;
+		/**
+		 * Get the vaginal capacity bonus based on body type, perks and the bonus capacity status.
+		 * 
+		 * @return the vaginal capacity bonus for this creature
+		 */
+		private function vaginalCapacityBonus():Number {
 			var bonus:Number = 0;
-			//Centaurs = +50 capacity
-			if (isTaur())
-				bonus = 50;
-			//Naga = +20 capacity
-			else if (lowerBody == 3)
-				bonus = 20;
-			//Wet pussy provides 20 point boost
+			
+			if (!hasVagina()) {
+				return 0;
+			}
+
+			if (isTaur()){
+				bonus += 50;
+			}else if (lowerBody == LOWER_BODY_TYPE_NAGA){
+				bonus += 20;
+			}
+
 			if (findPerk(PerkLib.WetPussy) >= 0)
 				bonus += 20;
 			if (findPerk(PerkLib.HistorySlut) >= 0)
@@ -1521,8 +1545,20 @@ package classes
 				bonus += 25;
 			if (findPerk(PerkLib.FerasBoonMilkingTwat) >= 0)
 				bonus += 40;
-			total = (bonus + statusEffectv1(StatusEffects.BonusVCapacity) + 8 * vaginas[0].vaginalLooseness * vaginas[0].vaginalLooseness) * (1 + vaginas[0].vaginalWetness / 10);
-			return total;
+				
+			bonus += statusEffectv1(StatusEffects.BonusVCapacity);	
+				
+			return bonus;
+		}
+		
+		public function vaginalCapacity():Number
+		{
+			if (!hasVagina()) {
+				return 0;
+			}
+				
+			var bonus:Number = vaginalCapacityBonus();
+			return vaginas[0].capacity(bonus);
 		}
 		
 		public function analCapacity():Number
@@ -2392,41 +2428,15 @@ package classes
 			return stretched;
 		}
 
-		public function cuntChangeNoDisplay(cArea:Number):Boolean{
+		public function cuntChangeNoDisplay(cArea : Number) : Boolean {
 			if (vaginas.length == 0) return false;
-			var stretched:Boolean = false;
-			if (findPerk(PerkLib.FerasBoonMilkingTwat) < 0 || vaginas[0].vaginalLooseness <= VAGINA_LOOSENESS_NORMAL) {
-			//cArea > capacity = autostreeeeetch.
-			if (cArea >= vaginalCapacity()) {
-				if (vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) {}
-				else vaginas[0].vaginalLooseness++;
-				stretched = true;
-			}
-			//If within top 10% of capacity, 50% stretch
-			else if (cArea >= .9 * vaginalCapacity() && rand(2) == 0) {
-				vaginas[0].vaginalLooseness++;
-				stretched = true;
-			}
-			//if within 75th to 90th percentile, 25% stretch
-			else if (cArea >= .75 * vaginalCapacity() && rand(4) == 0) {
-				vaginas[0].vaginalLooseness++;
-				stretched = true;
-				}
-			}
-			//If virgin
-			if (vaginas[0].virgin) {
-				vaginas[0].virgin = false;
-			}
-			//Delay anti-stretching
+			var stretched : Boolean = vaginas[0].stretch(cArea, findPerk(PerkLib.FerasBoonMilkingTwat) < 0);
+			
+			// Delay stretch recovery
 			if (cArea >= .5 * vaginalCapacity()) {
-				//Cunt Stretched used to determine how long since last enlargement
-				if (findStatusEffect(StatusEffects.CuntStretched) < 0) createStatusEffect(StatusEffects.CuntStretched,0,0,0,0);
-				//Reset the timer on it to 0 when restretched.
-				else changeStatusValue(StatusEffects.CuntStretched,1,0);
+				vaginas[0].resetRecoveryProgress();
 			}
-			if (stretched) {
-				trace("CUNT STRETCHED TO " + (vaginas[0].vaginalLooseness) + ".");
-			}
+			
 			return stretched;
 		}
 		

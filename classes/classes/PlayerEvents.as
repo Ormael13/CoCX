@@ -7,6 +7,11 @@ package classes {
 	public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//Handles all timeChange events for the player. Needed because player is not unique.
 		
+		public static const VAGINA_RECOVER_THRESHOLD_LOOSE:Number = 200;
+		public static const VAGINA_RECOVER_THRESHOLD_GAPING:Number = 100;
+		public static const VAGINA_RECOVER_THRESHOLD_GAPING_WIDE:Number = 70;
+		public static const VAGINA_RECOVER_THRESHOLD_CLOWN_CAR:Number = 50;
+		
 		public function PlayerEvents():void
 		{
 			CoC.timeAwareClassAdd(this);
@@ -690,37 +695,40 @@ package classes {
 					
 				}
 			}
-			if (player.findStatusEffect(StatusEffects.CuntStretched) >= 0) { //Cunt stretching stuff
-				player.addStatusValue(StatusEffects.CuntStretched, 1, 1);
-				if (player.vaginas.length > 0) {
-					if (player.findPerk(PerkLib.FerasBoonWideOpen) < 0) {
-						if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LOOSE && player.statusEffectv1(StatusEffects.CuntStretched) >= 200) {
-							outputText("\nYour " + player.vaginaDescript(0) + " recovers from your ordeals, tightening up a bit.\n");
-							player.vaginas[0].vaginalLooseness--;
-							player.changeStatusValue(StatusEffects.CuntStretched, 1, 0);
-							needNext = true;
-						}
-						if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING && player.statusEffectv1(StatusEffects.CuntStretched) >= 100) {
-							outputText("\nYour " + player.vaginaDescript(0) + " recovers from your ordeals, tightening up a bit.\n");
-							player.vaginas[0].vaginalLooseness--;
-							player.changeStatusValue(StatusEffects.CuntStretched, 1, 0);
-							needNext = true;
-						}
-						if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE && player.statusEffectv1(StatusEffects.CuntStretched) >= 70) {
-							outputText("\nYour " + player.vaginaDescript(0) + " recovers from your ordeals and becomes tighter.\n");
-							player.vaginas[0].vaginalLooseness--;
-							player.changeStatusValue(StatusEffects.CuntStretched, 1, 0);
-							needNext = true;
-						}
-					}
-					if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LEVEL_CLOWN_CAR && player.statusEffectv1(StatusEffects.CuntStretched) >= 50) {
-						outputText("\nYour " + player.vaginaDescript(0) + " recovers from the brutal stretching it has received and tightens up a little bit, but not much.\n");
+			
+			
+			if (player.vaginas.length > 0) {
+				player.vaginas[0].recoveryProgress++;
+				var recoveryProgress:int = player.vaginas[0].recoveryProgress;
+				
+				if (player.findPerk(PerkLib.FerasBoonWideOpen) < 0) {
+					if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LOOSE && recoveryProgress >= VAGINA_RECOVER_THRESHOLD_LOOSE) {
+						outputText("\nYour " + player.vaginaDescript(0) + " recovers from your ordeals, tightening up a bit.\n");
 						player.vaginas[0].vaginalLooseness--;
-						player.changeStatusValue(StatusEffects.CuntStretched, 1, 0);
+						player.vaginas[0].resetRecoveryProgress();
+						needNext = true;
+					}
+					if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING && recoveryProgress >= VAGINA_RECOVER_THRESHOLD_GAPING) {
+						outputText("\nYour " + player.vaginaDescript(0) + " recovers from your ordeals, tightening up a bit.\n");
+						player.vaginas[0].vaginalLooseness--;
+						player.vaginas[0].resetRecoveryProgress();
+						needNext = true;
+					}
+					if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE && recoveryProgress >= VAGINA_RECOVER_THRESHOLD_GAPING_WIDE) {
+						outputText("\nYour " + player.vaginaDescript(0) + " recovers from your ordeals and becomes tighter.\n");
+						player.vaginas[0].vaginalLooseness--;
+						player.vaginas[0].resetRecoveryProgress();
 						needNext = true;
 					}
 				}
+				if (player.vaginas[0].vaginalLooseness == VAGINA_LOOSENESS_LEVEL_CLOWN_CAR && recoveryProgress >= VAGINA_RECOVER_THRESHOLD_CLOWN_CAR) {
+					outputText("\nYour " + player.vaginaDescript(0) + " recovers from the brutal stretching it has received and tightens up a little bit, but not much.\n");
+					player.vaginas[0].vaginalLooseness--;
+					player.vaginas[0].resetRecoveryProgress();
+					needNext = true;
+				}
 			}
+			
 			if (player.findStatusEffect(StatusEffects.ButtStretched) >= 0) { //Butt stretching stuff
 				player.addStatusValue(StatusEffects.ButtStretched, 1, 1);
 				if (player.ass.analLooseness == 2 && player.statusEffectv1(StatusEffects.ButtStretched) >= 72) {
