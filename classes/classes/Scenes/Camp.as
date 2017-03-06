@@ -2680,7 +2680,7 @@ private function promptSaveUpdate():void {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 14;
 		flags[kFLAGS.SANDWITCH_SERVICED] = flags[2295];
 		flags[kFLAGS.JOJO_STATUS] = flags[2296];
-		flags[2295] = 0;
+		flags[2295] = 0; //Reclaim those flags
 		flags[2296] = 0;
 	}
 	doCamp();

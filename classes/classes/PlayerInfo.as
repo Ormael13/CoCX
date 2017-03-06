@@ -335,7 +335,7 @@ package classes
 			// Begin Interpersonal Stats
 			var interpersonStats:String = "";
 			
-			if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] > 0) {
+			if (getGame().dungeons.palace.anzuScene.anzuRelationshipLevel() > 0) {
 				interpersonStats += "<b>Anzu's Affection:</b> " + flags[kFLAGS.ANZU_AFFECTION] + "%\n";
 				interpersonStats += "<b>Anzu's Relationship Level:</b> " + (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 1 ? "Acquaintances" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 2 ? "Friend" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 3 ? "Close Friend" : flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 4 ? "Lover" : "Undefined") + "\n";
 			}

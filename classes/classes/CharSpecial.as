@@ -1396,7 +1396,7 @@ package classes
 			//flags[kFLAGS.JOJO_STATUS] = 5;
 			
 			// Bimbo Sophie
-			flags[kFLAGS.SOPHIE_BIMBO] = 1;
+			//flags[kFLAGS.SOPHIE_BIMBO] = 1;
 			
 			// Isabella
 			flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] = 1;
