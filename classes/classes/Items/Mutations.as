@@ -5301,8 +5301,12 @@
 				outputText("\n\nTerrible agony wracks your " + player.face() + " as bones crack and shift.  Your jawbone rearranges while your cranium shortens.  The changes seem to last forever; once they've finished, no time seems to have passed.  Your fingers brush against your toothy snout as you get used to your new face.  It seems <b>you have a toothy, reptilian visage now.</b>", false);
 				player.faceType = FACE_LIZARD;
 			}
-			//-Snake tongue
-			if (player.hasReptileFace() && rand(3) == 0) gainSnakeTongue();
+			//-Lizard tongue
+			if (player.tongueType == TONGUE_SNAKE && changes < changeLimit && rand(10) < 6) // Higher (60%) chance to be 'fixed' if old variant
+				gainLizardTongue();
+
+			if ([TONGUE_LIZARD, TONGUE_SNAKE].indexOf(player.tongueType) == -1 && player.hasReptileFace() && changes < changeLimit && rand(3) == 0)
+				gainLizardTongue();
 			//-Remove Gills
 			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
 			//<mod name="Reptile eyes" author="Stadler76">

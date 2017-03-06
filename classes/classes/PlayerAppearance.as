@@ -383,6 +383,9 @@ package classes
 				outputText("  Your mouth contains a thick, fleshy tongue that, if you so desire, can telescope to a distance of about four feet.  It has sufficient manual dexterity that you can use it almost like a third arm.");
 			else if (player.tongueType == TONGUE_ECHIDNA)
 				outputText("  A thin echidna tongue, at least a foot long, occasionally flits out from between your lips.");
+			else if (player.tongueType == TONGUE_LIZARD)
+				outputText("  Your mouth contains a thick, fleshy lizard tongue, bringing to mind the tongue of large predatory reptiles."
+				          +" It can reach up to one foot, its forked tips tasting the air as they flick at the end of each movement.");
 			//Horns
 			//Demonic horns
 			if (player.hornType == HORNS_DEMON) 
