@@ -406,8 +406,8 @@ the text from being too boring.
 			 * Debug, Version, etc
 			 */
 			debug = false; //DEBUG, used all over the place
-			ver = "1.0.2_mod_1.4_dev"; //Version NUMBER
-			version = ver + " (<b>I give up</b>)"; //Version TEXT
+			ver = "1.0.2_mod_snapshot_20170305"; //Version NUMBER
+			version = ver + " (<b>Nearly There...</b>)"; //Version TEXT
 
 			//Indicates if building for mobile?
 			mobile = false;
