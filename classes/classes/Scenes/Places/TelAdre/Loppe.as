@@ -916,7 +916,7 @@ private function loppeRidesCocks():void {
 	outputText(" nice and slick.  You gasp in pleasure and surprise as you feel Loppe's erect cock sidle up to yours, helping lube you with its leaking pre. Raising up your hips, you clumsily try to ");
 	if (y < 0) outputText("slide your shaft against her");
 	else outputText("pinion her shaft between your");
-	outputText(" own, shivering from the sensation of your sensitive " + player.skin() + " against her proud horseflesh, already drooling even though you can plainly feel that it's only half-erect.");
+	outputText(" own, shivering from the sensation of your sensitive [skin] against her proud horseflesh, already drooling even though you can plainly feel that it's only half-erect.");
 	if (player.balls > 0) outputText("  Your [balls] gently brush and rub against her own swollen cum-factories, and you can't wait to empty your overfilled sac into her waiting womb.");
 
 	outputText("\n\n\"<i>Okay, that's enough foreplay!</i>\" Loppe announces suddenly, eyeing your " + player.cockDescript(x) + " with a hunger that you never expected to see on her face.  Loppe quickly straddles you, aligning it with her pussy");
@@ -1075,7 +1075,7 @@ private function loppeRidesPCCockFinal():void {
 
 	outputText("\n\n<b>One hour and several orgasms later...</b>");
 
-	outputText("\n\n\"<i>Thanks, sugar.  You're the best!  I feel completely satisfied!</i>\" Loppe says, happily smiling and hugging you tightly.  As she snuggles up to you, you can feel the distinct bump of her gravid-looking belly rubbing against your " + player.skin() + "; the cum-filled flesh deforms as the pressure pushes some of the skin-stretching load out of her nethers and further smears the proof of your pleasure on your entwined lower halves, but even so she still looks ready to pop with three or four kids.  You consider answering her, but find that you lack the will to do so... in fact, you lack the energy to do anything at all, Loppe having fucked you until you were shooting blanks");
+	outputText("\n\n\"<i>Thanks, sugar.  You're the best!  I feel completely satisfied!</i>\" Loppe says, happily smiling and hugging you tightly.  As she snuggles up to you, you can feel the distinct bump of her gravid-looking belly rubbing against your [skin]; the cum-filled flesh deforms as the pressure pushes some of the skin-stretching load out of her nethers and further smears the proof of your pleasure on your entwined lower halves, but even so she still looks ready to pop with three or four kids.  You consider answering her, but find that you lack the will to do so... in fact, you lack the energy to do anything at all, Loppe having fucked you until you were shooting blanks");
 	//[(if high cum amount)]
 	if (player.cumQ() >= 500) outputText(" despite your usually messy orgasms");
 	outputText(".");
@@ -1851,7 +1851,7 @@ private function boobjobLoppe():void {
 
 	outputText("\n\nLoppe can't resist humping you slightly.  \"<i>Sugar, you're so soft...</i>\"  Smiling wanly, you grab your [chest] and do your best to wrap around her horse-dick, pinning the shaft inside.  \"<i>I love it!  Don't stop!</i>\" the girl moans in pleasure.");
 
-	outputText("\n\nEmboldened, you clasp your breasts firmer together and start to rise and fall, slowly scraping your " + player.skin() + " up and down the half-breed's prick.  It feels so hot and firm against your chest, growing increasingly damp as Loppe oozes gouts as voluminous as the cumshots of ordinary men, making your breasts and her prick alike equally slippery and enabling you to stroke her faster and faster. \"<i>K-keep that up and I'm gonna shoot anytime,</i>\" Loppe groans, trying to hump into your cleavage.");
+	outputText("\n\nEmboldened, you clasp your breasts firmer together and start to rise and fall, slowly scraping your [skin] up and down the half-breed's prick.  It feels so hot and firm against your chest, growing increasingly damp as Loppe oozes gouts as voluminous as the cumshots of ordinary men, making your breasts and her prick alike equally slippery and enabling you to stroke her faster and faster. \"<i>K-keep that up and I'm gonna shoot anytime,</i>\" Loppe groans, trying to hump into your cleavage.");
 
 	//[(Normal/Naga tongue)
 	if (!player.hasLongTongue()) outputText("\n\nYou bend your head and lean down, letting your tongue flick out of your lips and slide gently across the flared head of Loppe's horse-prick, seductively tasting the sweet-salty flavor of her pre.  \"<i>Ah!  Hmm... I seriously hope you like the taste, because you're getting a faceful anytime now!</i>\"  Loppe moans.");

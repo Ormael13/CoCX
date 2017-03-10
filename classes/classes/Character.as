@@ -295,8 +295,6 @@ import classes.GlobalFlags.kFLAGS;
 			}
 		}
 
-		public function skin(...args):String { return skinData.description.apply(null, args); }
-
 		public function hasMuzzle():Boolean
 		{
 			if (faceType == FACE_HORSE || faceType == FACE_DOG || faceType == FACE_CAT || faceType == FACE_LIZARD || faceType == FACE_KANGAROO || faceType == FACE_FOX || faceType == FACE_DRAGON || faceType == FACE_RHINO || faceType == FACE_ECHIDNA || faceType == FACE_DEER)
