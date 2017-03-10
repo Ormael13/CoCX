@@ -155,8 +155,8 @@ package classes
 		public var hairColor:String = "no";
 		public var hairLength:Number = 0;
 		
-		public function get furColor():String { return skinData.furColor; }
-		public function set furColor(value:String):void { skinData.furColor = value; }
+		public function get furColor():String { return skin.furColor; }
+		public function set furColor(value:String):void { skin.furColor = value; }
 		/*Beardstyle
 		0- normal
 		1- goatee
@@ -170,15 +170,15 @@ package classes
 		1 - furry
 		2 - scaley
 		3 - goopey*/
-		public var skinData:Skin = new Skin();
-		public function get skinType():Number { return skinData.type; }
-		public function set skinType(value:Number):void { skinData.type = value; }
-		public function get skinTone():String { return skinData.tone; }
-		public function set skinTone(value:String):void { skinData.tone = value; }
-		public function get skinDesc():String { return skinData.desc; }
-		public function set skinDesc(value:String):void { skinData.desc = value; }
-		public function get skinAdj():String { return skinData.adj; }
-		public function set skinAdj(value:String):void { skinData.adj = value; }
+		public var skin:Skin = new Skin();
+		public function get skinType():Number { return skin.type; }
+		public function set skinType(value:Number):void { skin.type = value; }
+		public function get skinTone():String { return skin.tone; }
+		public function set skinTone(value:String):void { skin.tone = value; }
+		public function get skinDesc():String { return skin.desc; }
+		public function set skinDesc(value:String):void { skin.desc = value; }
+		public function get skinAdj():String { return skin.adj; }
+		public function set skinAdj(value:String):void { skin.adj = value; }
 		
 /*		Facetype:
 		0 - human
@@ -2502,7 +2502,7 @@ package classes
 
 		public function hasFur():Boolean
 		{
-			return skinData.hasFur();
+			return skin.hasFur();
 		}
 
 		public function hasFurOrScales():Boolean
@@ -2631,9 +2631,9 @@ package classes
 			return "legs";
 		}
 
-		public function skinDescript(...args):String { return skinData.description.apply(null, args); }
+		public function skinDescript(...args):String { return skin.description.apply(null, args); }
 
-		public function skinFurScales():String { return skinData.skinFurScales(); }
+		public function skinFurScales():String { return skin.skinFurScales(); }
 
 		// <mod name="Predator arms" author="Stadler76">
 		public function claws():String
