@@ -255,7 +255,12 @@ public function meetSophie():void {
 	else if (player.cor < 66) outputText("Barely remembering your manners, ", false);
 	else outputText("Desiring to spread your name throughout all of this land, ", false);
 	outputText("you wrench your gaze away from her breasts and introduce yourself.  It's hard to stay focused on introduction while she's wrapping her wing-like arms around her tits and squeezing them together, amplifying her cleavage.  The matronly harpy is looking at you expectantly, and it occurs to you that she's still waiting on an answer to her question.  Why did you come here?\n\n", false);
-	
+
+	if (flags[kFLAGS.CODEX_ENTRY_HARPIES] <= 0) {
+		flags[kFLAGS.CODEX_ENTRY_HARPIES] = 1;
+		outputText("\n\n<b>New codex entry unlocked: Harpies!</b>")
+	}
+
 	//[Looking for Demons] [Sex] [Got Lost] [Foraging]
 	simpleChoices("Foraging", tellSophieYoureForagingForStuff, "Got Lost", sophieMeetingGotLost, "Look4Demons", sophieLookingForDemons, "Sex", sophieMeetingChoseSex, "", null);
 }

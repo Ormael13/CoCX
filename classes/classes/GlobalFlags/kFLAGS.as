@@ -2291,11 +2291,11 @@ public static const ANZU_TALKED_PALACE:int                                      
 public static const ANZU_TALKED_RIFT:int                                            = 2283;
 public static const ANZU_TALKED_POWERS:int                                          = 2284;
 public static const ANZU_TALKED_GODS:int                                            = 2285;
-public static const ANZU_TIMES_DINED_BREAKFAST:int                                  = 2286;
+public static const ANZU_TIMES_DINED_BREAKFAST:int                                  = 2286; // 0 if haven't done, 1 if started, 2 if high relationship
 public static const ANZU_TIMES_DINED_LUNCH:int                                      = 2287;
 public static const ANZU_TIMES_DINED_DINNER:int                                     = 2288;
-public static const ANZU_TIMES_HIGH_REL_BREAKFAST:int                               = 2289;
-public static const ANZU_TIMES_DRUNK_SEX:int                                        = 2290;
+public static const ANZU_TIMES_DRUNK_SEX:int                                        = 2289;
+public static const ANZU_TIMES_RACED:int                                            = 2290;
 public static const ANZU_ANAL_CATCH_COUNTER:int                                     = 2291;
 public static const ANZU_VAGINAL_CATCH_COUNTER:int                                  = 2292;
 public static const ANZU_BLOWN_YOU_COUNTER:int                                      = 2293;

@@ -26,6 +26,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 			return flags[kFLAGS.ANZU_AFFECTION];
 		}
 		public function anzuRelationshipLevel():int {
+			if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] < 1 && flags[kFLAGS.ANZU_PALACE_UNLOCKED] > 0) flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] = 1;
 			return flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL];
 		}
 		public function anzuSexCounter():int {
@@ -112,7 +113,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 				outputText("\n\nYou thank him for letting you in, but explain that it’s time for you to go back to your camp.");
 				outputText("\n\n\"<i>[name], it was good to have company for the first time in… years. If you get caught in another snowstorm in the Rift, or simply want to talk, come here again.</i>\"");
 			}
-			outputText("<b>Anzu's Palace is now accessible from Places menu.</b>");
+			outputText("\n\n<b>Anzu's Palace is now accessible from Dungeons submenu under Places menu.</b>");
 			flags[kFLAGS.ANZU_PALACE_UNLOCKED] = 1;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -724,7 +725,12 @@ package classes.Scenes.Dungeons.AnzuPalace
 				outputText("\n\nYou jump to his side of the bed. His fancy robe has been tossed away a while ago, so you start with his shirt, which you leave on the floor, your hand caress the perfectly defined muscles on Anzu’s chest, going down until you reach to his pants. Taking them off too, you leave them on a heap over his shirt.The almost naked avian blushes red as you stare his magnificent body. With only his underwear getting between you and your prize, your take it off, leaving the forty inches of avian maleness exposed to your lustful desires. (if not naked) You take off your [armor], leaving both of you naked and ready for action.");
 			}
 			outputText("\n\nAnzu reclines on his bed, in all his naked glory. ou take a moment to contemplate his impressive frame, the rainbow patterned colours of his plumage, that, added to the golden tones of his hair, give him a handsome and regal appearance. You delight your view on the tones and strong muscles of his chest, partially hidden beneath a layer of fluffy feathers. On his crotch, his half hard manhood and the pair of avian nuts that hang beneath capt your attention. Putting one finger on his belly, and circling his bellybutton with it, you ask Anzu if he’s ready to be worshipped like a god deserves.");
-			outputText("\n\n(first time) \"<i>S-sure</i>\" he answers, flushed at your kinky proposal. (next time, repeat) \"<i>Well, show me what you have on mind then</i>\" the avian answers.");
+			if (flags[kFLAGS.ANZU_BLOWN_YOU_COUNTER] == 0) {
+				outputText("\n\n\"<i>S-sure</i>\" he answers, flushed at your kinky proposal.");
+			}
+			else {
+				outputText("\n\n\"<i>Well, show me what you have on mind then</i>\" the avian answers.");				
+			}
 			outputText("\n\nYou playfully pass fingers over his belly a moment, caressing it softly. The smell of Anzu feathers, a smell of violets and snow hits your nose when you approach more to his body. The perfumed scent is so wonderful that you bury your face on the feathers of his lower belly. Then, a musky scent attracts you, spurring you to go lower, until you realize that your [face] is just over the avian’s crotch. You start your task licking them, sucking around the heavy orbs, while the feathers that cover them tickle your tongue. The musky scent of them, combined with the soft perfume of his body overwhelms your senses, and before you can notice it, your (if cocks>0) [cock] is quickly hardening (else) your [pussy] moistens and your body is getting infused by lust.");
 			outputText("\n\n\"<i>So...this is how you worship a god.</i>\" Anzu laughs, somewhat flustered \"<i>It’s a weird way to do it, but I have to admit that I like it.</i>\"");
 			outputText("\n\nSmiling at his approval, you ignore your own lust and return to your main task. You keep worshipping his king sized balls, warm to your touch, while you can hear the cum inside them churning. Continuing your task, you slowly make your way to your prize: his cock. When you finally reach it, you start licking its sides. Almost forty inches of pure avian meat, and it’s all for you. Taking its tapered glans on your hands, you give it a lick, eliciting a moan from the avian. One of his hands goes down your head, lovingly caressing your hair (if bald) [skin]. You get a whiff of the musky and delicious scent of the thick tool before continuing.");
@@ -851,8 +857,48 @@ package classes.Scenes.Dungeons.AnzuPalace
 		//Racing
 		private function racingWithAnzu():void {
 			clearOutput();
-			outputText("Coming Soon...");
+			if (flags[kFLAGS.ANZU_TIMES_RACED] == 0) {
+				outputText("Standing on the roof, you see Anzu again, looking thoughtfully at the snowed hills that surround the place. Judging by the way he flexes his quartet of wings, he is about to depart, probably to exercise his otherwise idle wings. While at a first though he seems oblivious at your arrival, when you get a bit closer, he turns back and greets you with a friendly smile.");
+				outputText("\n\n“Hey, little friend. You caught me just in time. I was about to go out on a little trip across the Rift. Being stuck in a single place every day ends up being a bit… stressing. Besides, the exercise helps me to keep these on good shape” He says, pointing at the four huge appendages.");
+				outputText("\n\nActually, that isn’t hard to understand. After you’d grown your own pair of wings, you’ve had the necessity of flying around as an exercise to keep them healthy and ready to fly when the situation calls.");
+				outputText("\n\n“Oh, that reminded me. You got yourself a pair after arriving at this place.” Anzu says, while looking at your [wings].  “If you want, you could keep me company. Traveling across the Rift is nice and relaxing, but after hours of wandering the skies, I feel a bit… lonely”");
+				outputText("\n\nSeems like your avian companion is asking you for a trip across the Rift.");
+				flags[kFLAGS.ANZU_TIMES_RACED] = 0.5;
+			}
+			else {
+				outputText("\n\nClimbing again to the roof, you find Anzu in the usual spot at the border of the roof. As always at this hour of the day, he is warming his muscles before flying across the Rift. He quickly turns to greet you as soon he notices your presence.");
+			}
+			
 			doNext(anzuMenus);
+		}
+		
+		private function racingWithAnzuDecline():void {
+			clearOutput();
+			outputText("Letting him know that you’re pretty tired now, you tell him that you’ll have to pass this time. Next time maybe, with a little luck.");
+			outputText("\n\n“No problem. I understand. Flying tired isn’t exactly a relaxing activity ,”Anzu answers “Maybe, when you feel alright you could came here again...if you want, of course.” he continues “I usually fly at this hour almost every day.”");
+			outputText("\n\nAnswering him that you’ll think about it one of these days, you leave him to his exercise routine, while you return to the safety of your camp.");
+			
+		}
+		private function racingWithAnzuAccept():void {
+			clearOutput();
+			outputText("Well, a bit of extra exercise would certainly help your body. Telling Anzu that you agree on his offer, you stand next to him on the border of the roof. Thankfully, it seems like he keeps the place where you’re standing clear of snow, otherwise you’ll probably trip and end up falling from the—now you realize, somewhat frightening—height of the palace.");
+			outputText("\n\nFocusing again on the thought of flying, you give a nod to the avian, saying that you’re ready to start.");
+			outputText("\n\nSeeing you ready, Anzu spreads his wings wide, forcing you to stand away a couple of feet, and soon he launches himself to the sky. The wind propelled by the beating of his wings almost makes you stumble, but you manage to keep yourself on your feet.");
+			outputText("\n\n“Sorry for that” Anzu yell from above. “Seems like I miscalculated the force of my takeoff.”");
+			outputText("\n\nAfter telling him that you’re fine, you spread your [wings] and fly next to him. Even in the air, where the wind makes it less potent, the stream generated by his wings is somewhat noticeable. For a while, you hover above the palace and the snowed hill surrounding it.");
+			outputText("\n\n“So, where do you usually go?” you ask him.");
+			outputText("\n\n“Well, [name]. I have a couple of places that I’d like to show you” Anzu says, motioning you to follow him.");
+			outputText("\n\n<b>A long good while later...</b>");
+			outputText("\n\nWell... isn't he supposed to take you someplace interesting?");
+			outputText("\n\n\"<i>Unfortunately, my writer hasn't even added places for me to show you. Sorry.</i>\"");
+			outputText("\n\nYou sigh dejectedly and have to accept the fact.");
+			outputText("\n\nThe two of you spend time flying above the rift before eventually returning to the palace.");
+			outputText("\n\n\"<i>That was fun. It's great to have you fly with me. We can do it again,</i>\" Anzu says.");
+			outputText("\n\nYou nod in agreement and keep that in mind, waving Anzu goodbye before you leave towards your camp.");
+			anzuAffection(5);
+			if (flags[kFLAGS.ANZU_TIMES_RACED] < 1)
+			flags[kFLAGS.ANZU_TIMES_RACED]++;
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		//Dinner
@@ -892,10 +938,23 @@ package classes.Scenes.Dungeons.AnzuPalace
 			}
 			else {
 				if (flags[kFLAGS.ANZU_TIMES_DINED_DINNER] == 0) {
-					outputText("");
+					outputText("The noises of someone moving things is heard even from the hall. When you approach to the kitchen, you manage to hear the voice of an irritated Anzu. Dressed only in his usual set of shirt and pants, covered with an apron instead of his robes, he goes around the kitchen searching for something desperately.");
+					outputText("\n\n“Where in hell I put those damn blueberries?! Raspberries, strawberries, cloudberries, but no trace of blueberries!”");
+					outputText("\n\nWhat could be doing Anzu with blueberries? Whatever that is, the fact of he can’t find them don’t makes him happy. Maybe this isn’t the best time for showing yourself. Your feelings are proven right when a dish flies over your head, smashing to pieces in a nearby wall. You’re about to leave when he stops you.");
+					outputText("\n\n“[name], excuse me. I’m a little frustrated.”");
+					outputText("\n\nHis frustration has something to do with blueberries?");
+					outputText("\n\n“Yeah. Actually, I was trying to cook a cheesecake with blueberries for dinner, but I can’t find the damn fruits anywhere.”");
+					outputText("\n\nTrying to calm him down, you tell that you’ll help him to find the blueberries. Looking around the kitchen with attention, after a short inspection, you manage to find them on the table where Anzu has put some eggs and flour, partially hidden by the other ingredients. You let out a little laugh at your discover, and then reveal him where the blueberries were all the time.");
+					outputText("\n\n“Oh, they are there!” He says, visibly embarrassed. “I probably was too busy looking in the cabinets who I don’t realize that I already had put them with the rest of the ingredients.”  “Now, since you’re here, maybe you could help me to finish this faster. I’ve lost many time searching for those fruits.");
+					outputText("\n\nSeeing how he is a little stressed, the best of you can do is leave him for a while, because it could turn into a dangerous situation if he can’t find another ingredient.");
+					outputText("\n\n“No, no. Sorry, my friend. I have all the remaining ingredients there.” He says, pointing to the table, where sugar, butter and a bottle of milk lies. “I promise to not get mad with you, even if you burn half of the kitchen.”");
+					outputText("\n\nLooks like he’s asking you for help to finish the cake, and have a nice dinner after that.");
 				}
 				else {
-					
+					outputText("Coming again to the kitchen, a much calmer Anzu is mixing the ingredients for another cake. Like the last time, he’s using the usual apron over his shirt and pants.");
+					outputText("\n\nYou ask him if he lose the blueberries again.");
+					outputText("\n\n“No, I’m not losing the damn fruits again.” He says, pointing a quite visible and labeled flash with one hand. “Just when you arrived, I was preparing myself to make a cake with some of them. Do you want to join me?");
+					outputText("\n\nLooks like he’s asking you for help to finish the cake, and have a nice dinner after that.");
 				}
 				doYesNo(eatFoodWithAnzu, dontEatFoodWithAnzu);
 			}
@@ -919,27 +978,59 @@ package classes.Scenes.Dungeons.AnzuPalace
 				outputText("\n\nWhile eating, you manage to look how he hasn’t bothered to get dressed to the breakfast, and now without his apron, exhibits his naked body to you without shame. The breakfast is quite delicious. Anzu certainly had a lot of practice cooking for himself all that years, you think while savouring the perfectly spiced eggs and the bacon.");
 				player.refillHunger(hungerRefillAmount);
 				outputText("\n\nAfter eating, both of you chat for a while. Anzu tells your more stories of his former world, while he listen some of your adventures in Mareth and about your home back on Ingnam.");
-				if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] >= 4) {
+				/*if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] >= 4) {
 					if (flags[kFLAGS.ANZU_TIMES_HIGH_REL_BREAKFAST] == 0) outputText("\n\n<b>A </b>");
-				}
+				}*/
 				flags[kFLAGS.ANZU_TIMES_DINED_BREAKFAST]++;
 			}
 			else if (model.time.hours < 16) {
-				outputText("");
-				outputText("\n\n");
-				outputText("\n\n");
-				outputText("\n\n");
-				outputText("\n\n");
-				outputText("\n\n");
+				outputText("With your appetite open by the wonderful smell of the steaks, you accept Anzu’s offer.");
+				outputText("\n\n“We must start now, then. There are some dishes that still need be finished.”");
+				outputText("\n\nAsking him about what you should do, he instructs you about how make the second dish. Taking a pot from one cabinet, you shred the chunks of cheese inside it, and mix them. After that, you place the pot on a burner until all the cheese on it melts. You put the pot with the burner on a plate next to a bowl with some pieces of bread and two large forks. It’s a little difficult to carry those things to the dining room, specially with the melted cheese, but you manage to arrive to the table with the food safe.");
+				outputText("\n\nMeanwhile, Anzu has already left the plates with the roasted steaks on the table and now he’s busy washing the grapes in the sink, and after assuring that all of them are clean, he puts them on a bowl. He proceeds lo leave them in the dining room with the rest of the dishes, and hurries to the cellar. A few minutes after, he comes back with a two glasses and a bottle of wine.");
+				outputText("\n\n“Hope you like the white wine. It’s the only one that the reindeers have to sell me.”");
+				outputText("\n\nSure. A glass of wine is a luxury which, even on Ingnam, you rarely had. He serves one glass for you and another of him.");
+				outputText("\n\nWhile you dip the bread in the cheese, you start finding increasingly amusing the way of Anzu and you spend your time. There has been a while since your had another opportunity to make a decent homemade meal. But for now you have things more important to attend, like the roasted steak in front of who is making your mouth water. After both of you finish your food, you chat with Anzu for a while. ");
+				player.refillHunger(hungerRefillAmount);
+				outputText("\n\n“And [name], what’s going on that city in the desert. Tolk, no Toll, Tel’Adre was its name, right? “ he asks “I’ve had few opportunities to going beyond the Rift limits, let alone exploring a zone so far as the desert, and for the things you’ve said me, I wonder how big it is, how they keep themselves safe, and things like that .”");
+				outputText("\n\nHmm, how to start. You explain him that the city is protected by a kind of magical barrier who prevent demons to find it. The city itself if pretty big, as far as compared to the rest of settlements of you’ve found in Mareth. Great part of the city are formed by the housing complexes, most of them are unoccupied, though, and in the center the city the principal building are the bakery, the bar, the gym, the shops on the market, a mostly abandoned park, the mage’s tower and the Watch headquarters.");
+				outputText("\n\nYou give him more details about the bakery and its particular workers, especially its chef. The gym isn’t less strange either, especially with the additional exercise programs who some trainers are willing to teach. The mage’s tower is the heavily protected plate where most mages reside, keeping the barrier stable. Not much is what can you say about the park, little more than a patch of neglected dirt and grass between the city’s blocks. In the center are some restaurants too, while the market has a pawn shop, and some others specialized in selling construction materials, weapons, armours, clothes. An acupuncture treatment clinic and a tattoo parlor have their places on the market too. Finally, you explain all you know about the Watch and how the protect the city from both the inside as from the outside menaces.");
+				//if (anzuRelationshipLevel() < 3) {
+					outputText("After chatting about this this and that with Anzu for some time, you thank him for the meal, say your goodbyes and return to your camp.");
+				/*}
+				else {
+					outputText("\n\n“And how about the bar?” Anzu asks “You’ve mentioned a bar before. Is there some good wine there?”");
+					outputText("\n\nOh, the Wet Bitch, how you could forget it!");
+					outputText("\n\n“Wet Bitch, what a name. It’s only me or that’s a little unimaginative. At least, I know what I could find inside with only reading its name on the front.”");
+					outputText("\n\nNot exactly. Well, not at all. Besides its name, it has most of the things who a normal bar has. Chairs, tables, drinks, people chatting and laughing, and given the uninhibited air from Mareth, people having sex in the back rooms or even in front of all.");
+					outputText("\n\n“You must know that by experience, Am I right?”");
+					outputText("\n\nYou admit that you’ve had your romps here and there.");
+					outputText("\n\n");
+					outputText("\n\n");
+					outputText("\n\n");
+					outputText("\n\n");
+				}
+				*/
 				flags[kFLAGS.ANZU_TIMES_DINED_LUNCH]++;
 			}
 			else {
-				outputText("");
-				outputText("\n\n");
-				outputText("\n\n");
-				outputText("\n\n");
-				outputText("\n\n");
-				outputText("\n\n");
+				outputText("Nothing like a good dinner to end a good day, you tell him.");
+				outputText("\n\nHappy to have your help, Anzu explains you the process to make the cake. While you heat the oven following his instructions, he makes the base mixing some biscuit crumbs and butter on a large, round tin putting it on the oven. After that, he points you the blueberries and motions you to work with them.");
+				outputText("\n\nHe starts whisking up the creamy cheese with some eggs, sugar and flour. Meanwhile, you're busy with the blueberries, putting them on a pan with some sugar and water and mixing them until the contents of the pan becomes sauce.");
+				outputText("\n\nAnzu, who already has finished with the cheesecake mixture, pours some of it over the biscuit base and the you spoon most of the blueberry sauce with the cheese mix. Then, he covers it with the remaining cheesecake mix and softens the surface with a spoon. Finally, he lets you drizzle the remaining blueberry sauce over the cake and ripple it over the cake.");
+				outputText("\n\nBoth of you put the cake on the oven and let it cook for some minutes. When it’s ready, Anzu takes the cake out of the tin and cut it in slices.");
+				outputText("\n\nHe goes to the dining room with the cake and two dishes, while you follow him with the milk and the glasses.");
+				//if (anzuRelationshipLevel() < 3) {
+					outputText("\n\nEnjoying the sweet taste of the cheesecake with your friend, both of you talk a little about your adventures. While talking, both of you indulge in more slices of the delicious cake. Soon enough the plate with the cake is empty.");
+					player.refillHunger(hungerRefillAmount);
+					outputText("\n\n“I think the cake for tonight was a total success.” Anzu says proudly.");
+					outputText("\n\nYou can’t agree more. But, seeing how late is, the better is that you return to your camp. After thanking the avian for the dinner, you wave off and return to your camp.");
+				/*}
+				else {
+					outputText("\n\n");
+					outputText("\n\n");
+					outputText("\n\n");
+				}*/
 				flags[kFLAGS.ANZU_TIMES_DINED_DINNER]++;
 			}
 			kGAMECLASS.dungeonLoc = DungeonCore.DUNGEON_ANZU_DINING_ROOM;
@@ -960,14 +1051,14 @@ package classes.Scenes.Dungeons.AnzuPalace
 
 			}
 			else {
-				outputText("");
-				outputText("\n\n");
-
+				outputText("Telling him that, for the moment, you don’t want to have dinner, you thank him anyways.");
+				outputText("\n\n“Well, friend, I’ll be here is you change your mind” he answers.");
+				outputText("\n\nLeaving Anzu with the cake, you wave off him and return to your camp.");
 			}
 			clearOutput();
 		}
 		
-		private function diningSexGoodness():void {
+		/*private function diningSexGoodness():void {
 			if (model.time.hours < 8) {
 				if (flags[kFLAGS.ANZU_TIMES_HIGH_REL_BREAKFAST] == 0) {
 					outputText("\n\nAfter some talking your throat becomes somewhat dry, and both of you indulge on the milk from the glasses. You wonder, from where he got the milk.");
@@ -1001,7 +1092,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 			else {
 				
 			}
-		}
+		}*/
 		
 		//------------
 		// BATHING (2PM)

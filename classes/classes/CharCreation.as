@@ -31,6 +31,34 @@
 		
 		private var boxNames:ComboBox;
 		
+		private var permeablePerks:Array = [
+			//Transformation Perks
+			PerkLib.Flexibility,
+			PerkLib.Incorporeality,
+			PerkLib.SatyrSexuality,
+			PerkLib.Lustzerker,
+			PerkLib.CorruptedNinetails,
+			PerkLib.EnlightenedNinetails,
+			//Marae's Perks
+			PerkLib.MaraesGiftButtslut,
+			PerkLib.MaraesGiftFertility,
+			PerkLib.MaraesGiftProfractory,
+			PerkLib.MaraesGiftStud,
+			PerkLib.PurityBlessing,
+			//Fire Breath Perks
+			PerkLib.Hellfire,
+			PerkLib.FireLord,
+			PerkLib.Dragonfire,
+			//Other Perks
+			PerkLib.Androgyny,
+			PerkLib.MagicalFertility,
+			PerkLib.MagicalVirility,
+			PerkLib.MilkMaid,
+			PerkLib.Misdirection,
+			PerkLib.RapierTraining,
+			PerkLib.ThickSkin,
+		];
+
 		public function CharCreation() {}
 		
 		public function newGameFromScratch():void {
@@ -1513,59 +1541,14 @@
 		}
 		private function permanentizeCost():int {
 			var count:int = 1;
-			//Transformation Perks
-			if (player.perkv4(PerkLib.Flexibility) > 0) count++;
-			if (player.perkv4(PerkLib.Incorporeality) > 0) count++;
-			if (player.perkv4(PerkLib.SatyrSexuality) > 0) count++;
-			if (player.perkv4(PerkLib.Lustzerker) > 0) count++;
-			if (player.perkv4(PerkLib.CorruptedNinetails) > 0) count++;
-			if (player.perkv4(PerkLib.EnlightenedNinetails) > 0) count++;
-			//Marae's Perks
-			if (player.perkv4(PerkLib.MaraesGiftButtslut) > 0) count++;
-			if (player.perkv4(PerkLib.MaraesGiftFertility) > 0) count++;
-			if (player.perkv4(PerkLib.MaraesGiftProfractory) > 0) count++;
-			if (player.perkv4(PerkLib.MaraesGiftStud) > 0) count++;
-			if (player.perkv4(PerkLib.PurityBlessing) > 0) count++;
-			//Fire Breath Perks
-			if (player.perkv4(PerkLib.Hellfire) > 0) count++;
-			if (player.perkv4(PerkLib.FireLord) > 0) count++;
-			if (player.perkv4(PerkLib.Dragonfire) > 0) count++;
-			//Other Perks
-			if (player.perkv4(PerkLib.Androgyny) > 0) count++;
-			if (player.perkv4(PerkLib.MagicalFertility) > 0) count++;
-			if (player.perkv4(PerkLib.MagicalVirility) > 0) count++;
-			if (player.perkv4(PerkLib.MilkMaid) > 0) count++;
-			if (player.perkv4(PerkLib.Misdirection) > 0) count++;
-			if (player.perkv4(PerkLib.RapierTraining) > 0) count++;
-			if (player.perkv4(PerkLib.ThickSkin) > 0) count++;
+
+			for each (var perk:PerkType in permeablePerks)
+				if (player.perkv4(perk) > 0) count++;
+
 			return count;
 		}
 		private function isPermable(perk:PerkType):Boolean {
-			//Transformation Perks
-			if (perk == PerkLib.Flexibility) return true;
-			if (perk == PerkLib.Incorporeality) return true;
-			if (perk == PerkLib.SatyrSexuality) return true;
-			if (perk == PerkLib.Lustzerker) return true;
-			if (perk == PerkLib.CorruptedNinetails) return true;
-			if (perk == PerkLib.EnlightenedNinetails) return true;
-			//Marae's Perks
-			if (perk == PerkLib.MaraesGiftButtslut) return true;
-			if (perk == PerkLib.MaraesGiftFertility) return true;
-			if (perk == PerkLib.MaraesGiftProfractory) return true;
-			if (perk == PerkLib.MaraesGiftStud) return true;
-			if (perk == PerkLib.PurityBlessing) return true;
-			//Fire Breath Perks
-			if (perk == PerkLib.Hellfire) return true;
-			if (perk == PerkLib.FireLord) return true;
-			if (perk == PerkLib.Dragonfire) return true;
-			//Other Perks
-			if (perk == PerkLib.Androgyny) return true;
-			if (perk == PerkLib.MagicalFertility) return true;
-			if (perk == PerkLib.MagicalVirility) return true;
-			if (perk == PerkLib.MilkMaid) return true;
-			if (perk == PerkLib.Misdirection) return true;
-			if (perk == PerkLib.ThickSkin) return true;
-			return false;
+			return permeablePerks.indexOf(perk) != -1;
 		}
 		//Respec
 		private function respecLevelPerks():void {
@@ -1617,7 +1600,8 @@
 			outputText("Would you like to reincarnate and start a new life as a Champion?");
 			doYesNo(reincarnate, ascensionMenu);
 		}
-		private function reincarnate():void {
+		
+		protected function reincarnate():void {
 			flags[kFLAGS.NEW_GAME_PLUS_LEVEL]++;
 			customPlayerProfile = null;
 			newGameGo();
@@ -1656,7 +1640,7 @@
 			player.genderCheck();
 			player.breastRows = [];
 			player.cocks = [];
-			player.vaginas = [];
+			player.vaginas = new Vector.<VaginaClass>();
 			doNext(routeToGenderChoiceReincarnation);
 		}
 		

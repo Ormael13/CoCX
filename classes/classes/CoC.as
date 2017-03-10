@@ -93,6 +93,7 @@ the text from being too boring.
 	import fl.data.DataProvider;
 	import flash.display.Loader;
 	import flash.display.MovieClip;
+	import flash.display.Stage;
 	import flash.events.*
 	import flash.net.FileReference;
 	import flash.net.navigateToURL;
@@ -347,8 +348,22 @@ the text from being too boring.
 		public var timeQ:Number = 0;
 		public var campQ:Boolean = false;
 		
-		public function CoC()
+		/**
+		 * Create the main game instance.
+		 * If a stage is injected it will be use instead of the one from the superclass.
+		 * 
+		 * @param injectedStage if not null, it will be used instead of this.stage
+		 */
+		public function CoC(injectedStage:Stage = null)
 		{
+			var stageToUse:Stage;
+			
+			if (injectedStage != null) {
+				stageToUse = injectedStage;
+			}else{
+				stageToUse = this.stage;
+			}
+		
 			// Cheatmode.
 			kGAMECLASS = this;
 			
@@ -364,7 +379,7 @@ the text from being too boring.
 			this.model = new GameModel();
 			this.mainView = new MainView(/*this.model*/);
 			this.mainView.name = "mainView";
-			this.stage.addChild( this.mainView );
+			stageToUse.addChild( this.mainView );
 
 			// Hooking things to MainView.
 			this.mainView.onNewGameClick = charCreation.newGameGo;
@@ -391,15 +406,15 @@ the text from being too boring.
 			 * Debug, Version, etc
 			 */
 			debug = false; //DEBUG, used all over the place
-			ver = "1.0.2_mod_1.4_dev"; //Version NUMBER
-			version = ver + " (<b>I give up</b>)"; //Version TEXT
+			ver = "1.0.2_mod_snapshot_20170305"; //Version NUMBER
+			version = ver + " (<b>Nearly There...</b>)"; //Version TEXT
 
 			//Indicates if building for mobile?
 			mobile = false;
 			model.mobile = mobile;
 
-			this.images = new ImageManager(stage);
-			this.inputManager = new InputManager(stage, false);
+			this.images = new ImageManager(stageToUse);
+			this.inputManager = new InputManager(stageToUse, false);
 			include "../../includes/ControlBindings.as";
 			
 			//} endregion

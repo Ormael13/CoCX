@@ -383,6 +383,9 @@ package classes
 				outputText("  Your mouth contains a thick, fleshy tongue that, if you so desire, can telescope to a distance of about four feet.  It has sufficient manual dexterity that you can use it almost like a third arm.");
 			else if (player.tongueType == TONGUE_ECHIDNA)
 				outputText("  A thin echidna tongue, at least a foot long, occasionally flits out from between your lips.");
+			else if (player.tongueType == TONGUE_LIZARD)
+				outputText("  Your mouth contains a thick, fleshy lizard tongue, bringing to mind the tongue of large predatory reptiles."
+				          +" It can reach up to one foot, its forked tips tasting the air as they flick at the end of each movement.");
 			//Horns
 			//Demonic horns
 			if (player.hornType == HORNS_DEMON) 
@@ -1029,8 +1032,8 @@ package classes
 					else if (rando % 5 == 4)       outputText("--Another of your ");
 
 					// How large?
-					outputText(player.cockDescript(cock_index) + ((rando % 5) % 3 == 0 || cock_index == 0 ? "":"s") +  " is " + numInchesOrCentimetres(player.cocks[cock_index].cockLength) + " long and ");
-					outputText(numInchesOrCentimetres(player.cocks[cock_index].cockThickness));
+					outputText(player.cockDescript(cock_index) + ((rando % 5) % 3 == 0 || cock_index == 0 ? "":"s") +  " is " + inchesOrCentimetres(player.cocks[cock_index].cockLength) + " long and ");
+					outputText(inchesOrCentimetres(player.cocks[cock_index].cockThickness));
 					if      (rando % 3 == 0)  outputText(" wide.");
 					else if (rando % 3 == 1)  outputText(" thick.");
 					else if (rando % 3 == 2)  outputText(" in diameter.");
