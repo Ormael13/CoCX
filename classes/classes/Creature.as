@@ -2631,7 +2631,7 @@ package classes
 			return "legs";
 		}
 
-		public function skin(...args):String { return skinData.description.apply(null, args); }
+		public function skinDescript(...args):String { return skinData.description.apply(null, args); }
 
 		public function skinFurScales():String { return skinData.skinFurScales(); }
 
