@@ -179,6 +179,8 @@ the text from being too boring.
 		public var inventory:Inventory = new Inventory(saves);
 		public var masturbation:Masturbation = new Masturbation();
 		public var pregnancyProgress:PregnancyProgression = new PregnancyProgression();
+		public var bimboProgress:BimboProgression = new BimboProgression();
+		
 		// Scenes/Areas/
 		public var bog:Bog = new Bog();
 		public var desert:Desert = new Desert();
