@@ -583,8 +583,9 @@ package classes.Scenes
 			player.skinDesc = "shield-shaped dragon scales";
 			player.furColor = player.hairColor;
 			player.underBody.type = UNDER_BODY_TYPE_DRAGON;
-			player.underBody.skin.setProps(player.skin);      // copy the main skin props to the underBody skin ...
-			player.underBody.skin.desc = "ventral dragon scales"; // ... and only override the desc
+			player.underBody.copySkin({        // copy the main skin props to the underBody skin ...
+				desc: "ventral dragon scales"  // ... and only override the desc
+			});
 			player.tongueType = TONGUE_DRACONIC;
 			player.hornType = HORNS_DRACONIC_X2;
 			player.horns = 4;

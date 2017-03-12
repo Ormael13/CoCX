@@ -204,7 +204,7 @@ package classes
 		public var clawTone:String = "";
 		public var clawType:Number = CLAW_TYPE_NORMAL;
 		// </mod>
-		public var underBody:UnderBody = new UnderBody();
+		public var underBody:UnderBody;
 
 		/*EarType
 		-1 - none!
@@ -522,6 +522,7 @@ package classes
 			_perks = [];
 			statusEffects = [];
 			//keyItems = new Array();
+			underBody = new UnderBody(this);
 		}
 
 		//Functions			

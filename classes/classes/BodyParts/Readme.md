@@ -142,6 +142,13 @@ Alias of `skin.skinFurScales()` (Same as above, but for the skin on the underbod
 
 Parser tag: `[underbody.skinfurscales]` (case insensitive)
 
+##### copySkin(p:Object = null)
+This is mainly a wrapper around
+```as3
+player.underBody.skin.setProps(player.skin);
+```
+The param `p:Object = null` can optionally be used to override certain skin propertys after copying them (See in the examples below)
+
 #### Examples
 ##### From lizard scales TF:
 ```as3
@@ -151,7 +158,20 @@ player.skin.setProps({
 	desc: "scales"
 });
 player.underBody.type = UNDER_BODY_TYPE_LIZARD;
-player.underBody.skin.setProps(player.skin); // copy the main skin props to the underBody skin ...
+player.underBody.copySkin({ // copy the main skin props to the underBody skin ...
+	desc: "ventral scales"  // ... and only override the desc
+});
+```
+
+You can always set the propertys to be overridden manually after copying the skin-propertys:
+```as3
+player.skin.setProps({
+	type: SKIN_TYPE_LIZARD_SCALES,
+	adj: "",
+	desc: "scales"
+});
+player.underBody.type = UNDER_BODY_TYPE_LIZARD;
+player.underBody.copySkin();                     // copy the main skin props to the underBody skin ...
 player.underBody.skin.desc = "ventral scales";   // ... and only override the desc
 ```
 
@@ -168,8 +188,9 @@ if ((!player.hasLizardScales() || [UNDER_BODY_TYPE_LIZARD, UNDER_BODY_TYPE_TURTL
 		desc: "scales"
 	});
 	player.underBody.type = UNDER_BODY_TYPE_LIZARD;
-	player.underBody.skin.setProps(player.skin); // copy the main skin props to the underBody skin ...
-	player.underBody.skin.desc = "ventral scales";   // ... and only override the desc
+	player.underBody.copySkin({ // copy the main skin props to the underBody skin ...
+		desc: "ventral scales"  // ... and only override the desc
+	});
 	changes++;
 }
 

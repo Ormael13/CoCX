@@ -5318,8 +5318,9 @@
 					desc: "scales"
 				});
 				player.underBody.type = UNDER_BODY_TYPE_LIZARD;
-				player.underBody.skin.setProps(player.skin); // copy the main skin props to the underBody skin ...
-				player.underBody.skin.desc = "ventral scales";   // ... and only override the desc
+				player.underBody.copySkin({ // copy the main skin props to the underBody skin ...
+					desc: "ventral scales"  // ... and only override the desc
+				});
 				changes++;
 			}
 			//-Lizard-like face.

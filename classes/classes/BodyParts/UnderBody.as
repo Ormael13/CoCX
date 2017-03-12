@@ -1,5 +1,7 @@
 package classes.BodyParts 
 {
+	import classes.Creature;
+
 	/**
 	 * Container class for the players underbody
 	 * @since December 31, 2016
@@ -12,10 +14,21 @@ package classes.BodyParts
 		public var type:Number = UNDER_BODY_TYPE_NONE;
 		public var skin:Skin = new Skin();
 
-		public function UnderBody() {}
+		private var _creature:Creature;
+
+		public function UnderBody(creature:Creature = null)
+		{
+			_creature = creature;
+		}
 
 		public function skinDescription(...args):String { return skin.description.apply(null, args); }
 		public function skinFurScales(...args):String { return skin.skinFurScales.apply(null, args); }
+
+		public function copySkin(p:Object = null):void
+		{
+			skin.setProps(_creature.skin);
+			if (p != null) skin.setProps(p);
+		}
 
 		public function restore(keepTone:Boolean = true):void
 		{

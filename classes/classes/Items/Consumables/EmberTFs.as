@@ -110,8 +110,9 @@ package classes.Items.Consumables
 				player.skin.setProps({type: SKIN_TYPE_DRAGON_SCALES, adj: "tough", desc: "shield-shaped dragon scales"});
 				//def bonus of scales
 				player.underBody.type = UNDER_BODY_TYPE_DRAGON;
-				player.underBody.skin.setProps(player.skin);      // copy the main skin props to the underBody skin ...
-				player.underBody.skin.desc = "ventral dragon scales"; // ... and only override the desc
+				player.underBody.copySkin({        // copy the main skin props to the underBody skin ...
+					desc: "ventral dragon scales"  // ... and only override the desc
+				});
 			}
 			//<mod name="Reptile eyes" author="Stadler76">
 			//Gain Dragon Eyes
