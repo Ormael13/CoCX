@@ -5313,21 +5313,22 @@
 			//-Scales – color changes to red, green, white, blue, or black.  Rarely: purple or silver.
 			if (!player.hasLizardScales() && player.earType == EARS_LIZARD && player.tailType == TAIL_TYPE_LIZARD && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(5) == 0) {
 				//(fur)
+				var newSkinTones:Array = newLizardSkinTone();
 				if (player.hasFur()) {
-					player.skin.tone = newLizardSkinTone();
+					player.skin.tone = newSkinTones[0];
 					updateClaws(player.clawType);
 					outputText("\n\nYou scratch yourself, and come away with a large clump of " + player.furColor + " fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + player.skinTone + " scales covering most of your body.  The rest of the fur is easy to remove.  <b>You're now covered in scales from head to toe.</b>", false);
 				}
 				else if (player.hasNonLizardScales()) {
 					outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, hoping for relief; and when you look at your hands you notice small fragments of your " + player.skinFurScales() + " hanging from your fingers.  Nevertheless you continue to scratch yourself, and when you're finally done, you look yourself over. New scales have grown to replace your peeled off " + player.skinFurScales() + ".  <b>You're covered from head to toe in shiny ");
-					player.skin.tone = newLizardSkinTone();
+					player.skin.tone = newSkinTones[0];
 					updateClaws(player.clawType);
 					outputText(player.skinTone + " scales.</b>", false);
 				}
 				//(no fur)
 				else {
 					outputText("\n\nYou idly reach back to scratch yourself and nearly jump out of your " + player.armorName + " when you hit something hard.  A quick glance down reveals that scales are growing out of your " + player.skinTone + " skin with alarming speed.  As you watch, the surface of your skin is covered in smooth scales.  They interlink together so well that they may as well be seamless.  You peel back your " + player.armorName + " and the transformation has already finished on the rest of your body.  <b>You're covered from head to toe in shiny ", false);
-					player.skin.tone = newLizardSkinTone();
+					player.skin.tone = newSkinTones[0];
 					updateClaws(player.clawType);
 					outputText(player.skinTone + " scales.</b>", false);
 				}
@@ -5338,7 +5339,8 @@
 				});
 				player.underBody.type = UNDER_BODY_TYPE_LIZARD;
 				player.underBody.copySkin({ // copy the main skin props to the underBody skin ...
-					desc: "ventral scales"  // ... and only override the desc
+					desc: "ventral scales", // ... and only override the desc
+					tone: newSkinTones[1]   // ... and the color (tone)
 				});
 				changes++;
 			}
