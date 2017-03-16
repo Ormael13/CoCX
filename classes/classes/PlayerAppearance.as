@@ -150,8 +150,11 @@ package classes
 			{
 				if (player.hasPlainSkin() || player.hasGooSkin()) 
 					outputText("  You have a cat-like face, complete with a cute, moist nose and whiskers.  The [skin] that is revealed by your lack of fur looks quite unusual on so feline a face.");
-				if (player.hasFur()) 
-					outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your " + player.skinDesc + " is " + player.furColor + ", hiding your [skin.noadj] underneath.");
+				if (player.hasFur())
+					if (player.hasDifferentUnderBody())
+						outputText("  You have a cat-like face, complete with moist nose and whiskers.  You have [skinFurScales] on your upper jaw and head, while your lower jaw is decorated by [underBody.skinFurScales], hiding your [skin.noadj] underneath.");
+					else
+						outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your " + player.skinDesc + " is " + player.furColor + ", hiding your [skin.noadj] underneath.");
 				if (player.hasScales()) 
 					outputText("  Your facial structure blends humanoid features with those of a cat.  A moist nose and whiskers are included, but overlaid with glittering [skinFurScales].");
 				if (player.eyeType != EYES_BLACK_EYES_SAND_TRAP)
@@ -489,7 +492,7 @@ package classes
 				outputText("  Your arms are covered by [skinFurScales] and your fingernails are now " + player.claws() + ".");
 			//Done with head bits. Move on to body stuff
 			// <mod name="BodyParts.UnderBody" author="Stadler76">
-			if (player.underBody.type != UNDER_BODY_TYPE_NONE)
+			if (player.hasDifferentUnderBody())
 				outputText("  While most of your body is covered by [skinFurScales] you have [underBody.skinFurScales] covering your belly.");
 			// </mod>
 			//Horse lowerbody, other lowerbody texts appear lower
