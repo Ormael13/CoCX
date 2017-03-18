@@ -7547,6 +7547,17 @@
 			//[Grow Fur]
 			//FOURTH
 			if ((enhanced || player.lowerBody == LOWER_BODY_TYPE_FOX) && !player.hasFur() && changes < changeLimit && rand(4) == 0) {
+				var colorChoices:Array = ["invalid color"]; // Failsafe ... should hopefully not happen (Stadler76)
+				var foxFurColors:Array = [
+					["orange", "white"],
+					["orange", "white"],
+					["orange", "white"],
+					["red", "white"],
+					["black", "white"],
+					"white",
+					"tan",
+					"brown"
+				];
 				//from scales
 				if (player.hasScales()) outputText("\n\nYour skin shifts and every scale stands on end, sending you into a mild panic.  No matter how you tense, you can't seem to flatten them again.  The uncomfortable sensation continues for some minutes until, as one, every scale falls from your body and a fine coat of fur pushes out.  You briefly consider collecting them, but when you pick one up, it's already as dry and brittle as if it were hundreds of years old.  <b>Oh well; at least you won't need to sun yourself as much with your new fur.</b>");
 				//from skin
@@ -7555,16 +7566,16 @@
 				player.skinAdj = "";
 				player.skinDesc = "fur";
 				if (player.kitsuneScore() >= 4)
-					if (InCollection(player.hairColor, KitsuneScene.basicKitsuneFur) || InCollection(player.hairColor, KitsuneScene.elderKitsuneColors))
-						player.furColor = player.hairColor;
+					if (InCollection(player.hairColor, convertMixedToStringArray(KitsuneScene.basicKitsuneFur)) || InCollection(player.hairColor, KitsuneScene.elderKitsuneColors))
+						colorChoices = [player.hairColor];
 					else
 						if (player.tailType == TAIL_TYPE_FOX && player.tailVenom == 9)
-							player.furColor = randomChoice(KitsuneScene.elderKitsuneColors);
+							colorChoices = KitsuneScene.elderKitsuneColors;
 						else
-							player.furColor = randomChoice(KitsuneScene.basicKitsuneFur);
+							colorChoices = KitsuneScene.basicKitsuneFur;
 				else
-					player.furColor = randomChoice("orange and white", "orange and white", "orange and white", "red and white", "black and white", "white", "tan", "brown");
-				player.underBody.restore(); // Restore the underbody for now
+					colorChoices = foxFurColors;
+				player.setFurColor(colorChoices, {type: UNDER_BODY_TYPE_FUR}, true);
 				changes++;
 			}
 			//[Grow Fox Legs]
@@ -7975,10 +7986,14 @@
 			}
 			var tone:Array = mystic ? ["dark", "ebony", "ashen", "sable", "milky white"] : ["tan", "olive", "light"];
 			//[Change Skin Type: remove fur or scales, change skin to Tan, Olive, or Light]
+			var theFurColor:String = player.furColor;
+			if (player.hasFur() && player.underBody.type == UNDER_BODY_TYPE_FUR && player.furColor != player.underBody.skin.furColor)
+				theFurColor = player.furColor + " and " + player.underBody.skin.furColor;
+
 			if ((player.hasFur() 
-					&& !InCollection(player.furColor, KitsuneScene.basicKitsuneFur)
-					&& !InCollection(player.furColor, KitsuneScene.elderKitsuneColors)
-					&& !InCollection(player.furColor, ["orange and white", "black and white", "red and white", "tan", "brown"])
+					&& !InCollection(theFurColor, convertMixedToStringArray(KitsuneScene.basicKitsuneFur))
+					&& !InCollection(theFurColor, KitsuneScene.elderKitsuneColors)
+					&& !InCollection(theFurColor, ["orange and white", "black and white", "red and white", "tan", "brown"])
 					)
 				|| player.hasScales() && ((mystic) || (!mystic && rand(2) == 0))) {
 				outputText("\n\nYou begin to tingle all over your [skin], starting as a cool, pleasant sensation but gradually worsening until you are furiously itching all over.");

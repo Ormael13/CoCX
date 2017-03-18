@@ -98,8 +98,11 @@ package classes
 				outputText("  You have a tapered, shrewd-looking vulpine face with a speckling of downward-curved whiskers just behind the nose.");
 				if (player.hasPlainSkin()) 
 					outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skinFurScales]."); 
-				else if (player.hasFur()) 
-					outputText("  A coat of [skinFurScales] decorates your muzzle.");
+				else if (player.hasFur())
+					if (player.hasDifferentUnderBody())
+						outputText("  Your muzzle is decorated with [skinFurScales] on your upper jaw and head and with [underBody.skinFurScales] on your lower jaw.");
+					else
+						outputText("  A coat of [skinFurScales] decorates your muzzle.");
 				else if (player.hasScales()) 
 					outputText("  Strangely, [skinFurScales] adorn every inch of your animalistic visage.");
 			}

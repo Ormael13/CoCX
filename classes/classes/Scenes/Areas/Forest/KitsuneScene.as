@@ -2308,7 +2308,7 @@ package classes.Scenes.Areas.Forest
 		}
 
 		public static var basicKitsuneHair:Array = ["white", "black", "black", "black", "red", "red", "red"];
-		public static var basicKitsuneFur:Array = ["orange and white", "black", "black and white", "red", "red and white", "white"];
+		public static var basicKitsuneFur:Array = [["orange", "white"], "black", ["black", "white"], "red", ["red", "white"], "white"];
 		public static var elderKitsuneColors:Array = ["metallic golden", "golden blonde", "metallic silver", "silver blonde", "snow white", "iridescent gray"];
 		
 		//[Meditate]
