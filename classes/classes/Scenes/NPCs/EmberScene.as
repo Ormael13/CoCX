@@ -1157,7 +1157,12 @@ package classes.Scenes.NPCs
 				else if (subChoice == 5) outputText("this two-headed dog-morph loping around; it spotted an imp, dropped to all fours, then gave chase. Managed to catch the ugly little demon, whereupon it ass-raped it, then ate it.");
 			}
 			else if (choice == 1) { //Forest
-				subChoice = rand(5);
+				if (flags[kFLAGS.TAMANI_BAD_ENDED] <= 0)
+					subChoice = rand(5);
+				else { // Skip Tamani, if shes been bad ended
+					subChoice = rand(4);
+					if (subChoice == 3) subChoice++;
+				}
 				outputText("\n\n\"<i>In my travels, I found a forest; I must confess I stayed out of the deepest parts, but there was plenty of game to be found.  Deer, boar, rabbits, quail, and a host of other things too... not all of it nice. Let's see, there was ");
 				if (subChoice == 0) outputText("a whole tribe of imps, just lounging around in a glade, jerking themselves off or squabbling over food.  Nasty little things, but easily dispatched.");
 				else if (subChoice == 1) outputText("a  goblin with a huge pregnant belly, laughing to herself and swilling down that ale they brew, slopping it all over herself.  Little hedonists.");
