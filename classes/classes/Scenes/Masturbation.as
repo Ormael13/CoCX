@@ -310,6 +310,25 @@ package classes.Scenes {
 			doStripCheck();
 			//Tit foreplay
 			titForeplay();
+			
+			if (player.hasCock() && getGame().bimboProgress.ableToProgress())  {
+				
+				var craving:int = getGame().bimboProgress.analCraving(); 
+				if 		(craving >= 3 && player.hasKeyItem("Deluxe Dildo") >= 0 ) deluxeDildoAnal();
+				else if	(craving >= 2 && player.hasKeyItem("Dildo") >= 0) dildoButts();
+				else if (craving >= 1) {
+					fingerFuck();
+				}
+				
+				if (craving >= 1) {
+					player.orgasm('Anal');
+					dynStats("sen", (0.5));
+					flags[kFLAGS.TIMES_MASTURBATED]++;
+					doNext(camp.returnToCampUseOneHour);
+					return;				
+				}
+				
+			}
 			//Touch our various junks
 			if (player.cocks.length > 0) {
 				if (player.cocks[0].cockType == CockTypesEnum.BEE && (player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY) || player.hasItem(consumables.SPHONEY))) {
@@ -906,7 +925,7 @@ package classes.Scenes {
 			}
 		}
 		
-		private function titForeplay():void {
+		public  function titForeplay():void {
 			//Ok lets touch our boobies if we haz them and they are big enough
 			if (player.breastRows.length == 1 && player.biggestTitSize() > 3) {
 				if (player.lib < 45)
@@ -1675,7 +1694,9 @@ package classes.Scenes {
 		//ORGASM COOOOAD
 		private function orgazmo(selfSucking:Boolean, nippleFuck:Boolean):void {
 			outputText("\n\n");
+			var cumType:int = 0;
 			if (player.cocks.length > 0) {
+				cumType = 1;
 				if (player.cocks.length == 1) {
 					outputText("The sensations prove too much for you, and you feel the tightness building in your ");
 					if (player.countCocksOfType(CockTypesEnum.HUMAN) == 1)
@@ -1795,6 +1816,7 @@ package classes.Scenes {
 			}
 			//Vaginal CUMMING
 			if (player.vaginas.length > 0) {
+				cumType = 2;
 				//Single vagina!
 				if (player.vaginas.length == 1) {
 					outputText("Your ");
@@ -1818,6 +1840,7 @@ package classes.Scenes {
 			if (player.averageLactation() >= 2 || player.hasFuckableNipples()) {
 				//FUCK ANOTHER SHODDILY WRITTEN FUNCTION TO DEBUG/PORT
 				//WHYYYYY
+				cumType = 3;
 				titCum(player.cumQ());
 				titDrink();
 			}
@@ -1837,12 +1860,21 @@ package classes.Scenes {
 				if (valeriaFluids > 0) outputText("\"<i>Thanks for the fluids!</i>\" Valeria says.  ");
 			}
 			//DONE!
-			player.orgasm();
+			if 	(cumType == 1) {
+				player.orgasm('Dick'); 
+			}
+			else if (cumType == 2) {
+				player.orgasm('Vaginal');
+			}
+			else if (cumType == 3) {
+				player.orgasm('Tits');
+			}
 			flags[kFLAGS.TIMES_MASTURBATED]++;
-			dynStats("sen", (-0.5));
+			if (getGame().bimboProgress.ableToProgress())  dynStats("sen", (0.1));
+			dynStats("sen", ( -0.5));
 		}
 		
-		private function titCum(cumQuantity:Number = 3):void {
+		public function titCum(cumQuantity:Number = 3):void {
 			//var tempSize:Number = Math.round((nippleLength + baseCockLength/2)*100)/100;
 			//var nippleCockDescript:String = nippleCockDescript(tempSize);
 			//Normal Tits, only if lactating at at least level 2
@@ -1986,6 +2018,72 @@ package classes.Scenes {
 				outputText("\n");
 				player.cuntChange(player.vaginalCapacity() * 0.9, true);
 			}
+		}
+		
+		private function deluxeDildoAnal():void {
+			player.slimeFeed();
+			clearOutput();
+			//(highcor)
+			if (player.cor > 66)
+				outputText("You retrieve the floppy pink dildo from your possessions and strip down in the middle of your camp, shivering with the sexual thrill of your exhibitionism.");
+			//(medcor)
+			else if (player.cor > 33)
+				outputText("You retrieve your floppy dildo and sigh happily as you squeeze it, feeling the spongy surface give a little bit.  Glancing around furtively, you find a secluded spot and strip down.");
+			//(lowcor)
+			else outputText("You blush feverishly as you grab your pink dildo.  It flops about lewdly as you run off behind some rocks and strip down to use it.  You feel like such a pervert.");
+			outputText("\n\n");
+			
+			//(low cor)
+			if (player.cor < 50)
+				outputText("You hold the fake dong away from you, aroused but still somewhat disgusted by its lewd shape.");
+			//high cor
+			else outputText("You hold the fake dong, squeezing it and giggling at the realistic texture.  You can't wait to try it out.");
+			outputText("  A drop of pink aphrodisiac leaks from the tip, offering you a hint of the pleasure you're in for.   You make sure to catch it on your crotch, letting the fluid seep into your [ass].  Warmth radiates outwards, spreading to your thighs.");
+			outputText(".  You ");
+			if (player.cor > 50) outputText("don't ");
+			outputText("hesitate ");
+			if (player.cor < 50)
+				outputText("before slowly working it inside you, gasping at the enhanced sensitivity of your " + player.buttDescript() + ".");
+			else outputText("ramming it deep inside you, moaning as it rubs your now over-sensitive walls.");
+			outputText("  You splay your " + player.legs() + " and lie there with it inside you, feeling it respond to your arousal, becoming more and more turned on by the second.\n\n");
+		
+			//(Kinda dry)
+			if (player.ass.analWetness < ANAL_WETNESS_SLIMY)
+				outputText("The thickness of the toy gradually increases, filling you more and more effectively as it reacts to your heat.  You grab it two-handed and start slamming it into your [asshole], vigorously fucking yourself with the swelling dong.  The sensations just keep getting better and better as more and more of the goblin's sex-drug leaks into you.\n\n"); 
+			//(Pretty wet)
+			else if (player.ass.analWetness < ANAL_WETNESS_SLIME_DROOLING) {
+				outputText("The toy's girth seems to pulse and swell within you, spreading you wide open as it sops up your unnatural wetness and grows larger.  You grab it in a two-handed grip and begin working it in and out of your [asshole], gasping and twitching as every ridge and feature of the dildo rubs you just right.  Every inch of your [ass] tingles with a desire to be touched, rubbed, and squeezed. ");
+				if (player.cocks.length > 0) {
+					outputText("Even your " + player.multiCockDescript() + " ache");
+					if (player.totalCocks() == 1) outputText("s");
+					outputText(" and pulse");
+					if (player.totalCocks() == 1) outputText("s");
+					outputText(", bouncing on your belly.  ");
+				}
+				outputText("You answer that need by pistoning the fat juicy dick even harder into your tightly stretched box, cooing as tiny squirts of fluid erupt with every thrust.\n\n");
+			}
+			//(Soaked)
+			else outputText("You can feel the dildo growing inside you, reacting to gushing anal fluids by stretching your [ass] wide.  It doesn't seem to stop when you start fucking yourself with it.  If anything, it only seems to get thicker and thicker until there is barely room for your juices to squirt around it and your hips feel sore.  However, the tingling hotness of the dildo's aphrodisiac cum overwhelms the discomfort of the fattening fuck-tool, and you work it harder and harder, reveling in being stretched beyond your normal capacity.\n\n");
+			
+			//Sensitivity based orgasms.
+			//(Low sensitivity) 
+			if (player.sens < 80) {
+				outputText("Practically brutalizing your [ass] with the swollen puss-plug, you bring yourself to orgasm.  Your " + player.hipDescript() + " leap off the ground, quivering in the air against your hands as you ram the toy into yourself as far as it will go.  You can feel it spurting inside you, just like a real man.  You wiggle and moan as the muscle spasms work their way through your " + player.legs() + ", leaving you drained and exhausted.  The pink dildo suddenly shrinks back to its original size and flops free, leaving your [asshole] stretched open to drool a puddle of pink cum.");
+				//(+sensitivity by 5)
+				dynStats("sen", 5);
+			}
+			//High sensitivity (80+)
+			else {
+				outputText("Brutalizing your stretched [asshole] the bloated toy, you manage to get yourself off.   Your body quakes and spasms while your " + player.hipDescript() + " buck into the air, fucking an imaginary lover.  The dildo sinks into your core, your arms instinctively fulfilling your desire for complete penetration.  A warm wetness suddenly soaks your belly as the fuck-stick erupts, filling you.  Just like that the orgasm you had seems like foreplay.  Your eyes roll back into your head and you begin convulsing, practically having a pleasure-seizure from the drugs and your already oversensitive butt.   You sprawl there, wiggling and cumming your brains out for what feels like an eternity, but it does eventually end, and when it does the dildo is back to its normal size, lying in a puddle of aphrodisiacs and cum.");
+				//(+sensitivity by 3 & intellect -2 & libido +1	)
+			}
+			//Option Jojo veyeurism?
+			player.orgasm('Anal');
+			flags[kFLAGS.TIMES_MASTURBATED]++;
+			doNext(camp.returnToCampUseOneHour);
+			outputText("\n");
+			player.buttChange(player.analCapacity() * 0.9, true);
+
 		}
 		
 		//onaHole use - game should already have checked if player has a cock! CHECK BEFORE CALLING
@@ -3492,6 +3590,88 @@ package classes.Scenes {
 					outputText("as multiple streams of semen erupt from your dong, creating an impressive mess about you. Soaked in your own fluids, you take a moment to clean yourself up before replacing the toy in your bag and going to sleep, happy to be relieved of your urges.");
 				}
 			}
+		}
+
+		private function fingerFuck() : void {
+			
+			//All times as a genderless person (possibly written for all genders perhaps not herm (not enough hands)) - 
+			outputText("Your " + player.assholeDescript() + " begins to twitch. It's practically crying out for attention.\n\n");
+			outputText("You lay down on your side and reach gingerly behind yourself.  The palm of your hand comes to rest on your " + player.buttDescript() + ".  You slide your finger into your crack and find your " + player.assholeDescript() + ".  You run your finger slowly around the sensitive ring of your hole and feel a tingle emanating from it. A smile creeps across your lips as you begin to imagine what is about to happen.\n\n");
+			//For all parts of scene penetration type changes based on anus size '''any (if you do not want to do more than one variable) or virgin pucker or tight/normal/loose/gaping'''-
+			//If no BioLube perk - 
+			if (player.ass.analWetness < 2) {
+				outputText("Bringing your hand up to your mouth, you coat your ");
+				if (player.ass.analLooseness <= 2)
+					outputText("middle finger");
+				else if (player.ass.analLooseness == 3)
+					outputText("first two fingers");
+				else outputText("hand");
+				outputText(" in a generous helping of saliva and head back for your " + player.assholeDescript() + ".\n\n");
+			}
+			//If BioLube or continuing from no biolube - 
+			else {
+				outputText("The lubrication you have created allows you to easily sink your finger");
+				if (player.ass.analLooseness >= 3) outputText("s"); 
+				outputText(" into your asshole. A shiver runs up your spine as you plunge ");
+				if (player.ass.analLooseness <= 2)
+					outputText("in all the way to your knuckle");
+				else if (player.ass.analLooseness == 3)
+					outputText("all the way to the first two knuckles");
+				else if (player.ass.analLooseness == 4)
+					outputText("your three knuckles");
+				else outputText("your four fingers in deep");
+				outputText(". Slowly you begin to push and pull your finger");
+				if (player.ass.analLooseness >= 3) outputText("s");
+				outputText(" in and out of your anus. A slight moan escapes you as you begin to pick up pace.\n\n");
+			}
+			//If gaping - 
+			if (player.ass.analLooseness == 5) {
+				outputText("A devilish thought crosses your mind. You have taken into yourself all manner of beasts and beings. There is only one real way to achieve the pleasure you have gotten from them on your own. You slowly force your whole hand into your " + player.assholeDescript() + " and are greeted with a fullness that you never thought you would achieve without assistance. As you move in and out you begin to slowly close your hand into a fist and open it up again over and over.\n\n");
+			}
+			//All scene types - 
+			outputText("Pleasure begins to fill your body with warmth. You deliberately start to twist your hand as you pump your pleasure hole with a deep desire. Your asshole begins to violently open and close around your invading ");
+			if (player.ass.analLooseness <= 2)
+				outputText("digit");
+			else if (player.ass.analLooseness < 5)
+				outputText("digits");
+			else outputText("hand");
+			outputText(" as your toes curl and an orgasm wracks your body.");
+			//If BioLube perk - 
+			if (player.ass.analWetness >= 2) {
+				outputText("  You withdraw your ");
+				if (player.ass.analLooseness <= 2)
+					outputText("finger");
+				else if (player.ass.analLooseness < 5)
+					outputText("fingers");
+				else outputText("hand");
+				outputText(" and see it coated in the warm lube you produce. The scent and ecstasy you are in drive you over the edge and you begin to lick what once was inside you clean. Another orgasm drills through you and your body shakes for several seconds.");
+				//Still Horny - 
+				if (player.lib >= 75)
+					outputText("\n\nRolling over, you fall to sleep while your hole drips and twitches, ensuring your dreams to be filled with the most erotic of thoughts.");
+				else outputText("\n\nRolling over, you are completely spent and fall to sleep while your well-worked hole drips.");
+			}
+			//No BioLube perk -
+			else {
+				outputText("  You withdraw your ");
+				if (player.ass.analLooseness <= 2)
+					outputText("finger");
+				else if (player.ass.analLooseness < 5)
+					outputText("fingers");
+				else outputText("hand");
+				outputText(" and dry ");
+				if (player.ass.analLooseness <= 2)
+					outputText("it");
+				else if (player.ass.analLooseness < 5)
+					outputText("them");
+				else outputText("it");
+				outputText(" off.");
+				//Still Horny - 
+				if (player.lib > 75)
+					outputText("  Satisfied, you roll over and drift off to sleep. Your hole remains warm, ready for another round.");
+				else outputText("  Satisfied, you roll over and drift off to sleep.");
+			}
+
+			player.buttChange(4 + player.ass.analLooseness * 2, true);
 		}
 	}
 }
