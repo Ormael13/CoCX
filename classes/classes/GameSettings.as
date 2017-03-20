@@ -168,6 +168,7 @@ package classes
 		public function difficultySelectionMenu():void {
 			clearOutput();
 			outputText("You can choose a difficulty to set how hard battles will be.\n");
+			//outputText("\n<b>Peaceful:</b> Same as Easy but encounters can be avoided or skipped.");
 			outputText("\n<b>Easy:</b> -50% damage, can ignore bad-ends.");
 			outputText("\n<b>Normal:</b> No stats changes.");
 			outputText("\n<b>Hard:</b> +25% HP, +15% damage.");
@@ -175,18 +176,19 @@ package classes
 			outputText("\n<b>Extreme:</b> +100% HP, +50% damage.");
 			//outputText("\n<b>Up to Eleven:</b> +150% HP, +75% damage. This is the most cruel difficulty of all.");
 			menu();
-			addButton(0, "Easy", chooseDifficulty, -1);
-			addButton(1, "Normal", chooseDifficulty, 0);
-			addButton(2, "Hard", chooseDifficulty, 1);
-			addButton(3, "Nightmare", chooseDifficulty, 2);
-			addButton(4, "EXTREME", chooseDifficulty, 3);
-			//addButton(5, "Up to Eleven", chooseDifficulty, 4);
+			//addButton(0, "Peaceful", chooseDifficulty, -2);
+			addButton(1, "Easy", chooseDifficulty, -1);
+			addButton(2, "Normal", chooseDifficulty, 0);
+			addButton(5, "Hard", chooseDifficulty, 1);
+			addButton(6, "Nightmare", chooseDifficulty, 2);
+			addButton(7, "EXTREME", chooseDifficulty, 3);
+			//addButton(8, "Up to Eleven", chooseDifficulty, 4);
 			addButton(14, "Back", settingsScreenGameSettings);
 		}
 
 		public function chooseDifficulty(difficulty:int = 0):void {
 			if (difficulty <= -1) {
-				flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 1;
+				flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = -difficulty;
 				flags[kFLAGS.GAME_DIFFICULTY] = 0;
 			}
 			else {
