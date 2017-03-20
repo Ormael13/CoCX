@@ -295,6 +295,21 @@ package classes
 			
 			if (flags[kFLAGS.TIMES_ORGASMED] > 0)
 				miscStats += "<b>Times Orgasmed:</b> " + flags[kFLAGS.TIMES_ORGASMED] + "\n";
+				
+			if (getGame().bimboProgress.ableToProgress()) {
+				if (flags[kFLAGS.TIMES_ORGASM_DICK] > 0) 
+					miscStats += "<i>Dick tension:</i> " + flags[kFLAGS.TIMES_ORGASM_DICK] + "\n";
+				if (flags[kFLAGS.TIMES_ORGASM_ANAL] > 0) 
+					miscStats += "<i>Butt tension:</i> " + flags[kFLAGS.TIMES_ORGASM_ANAL] + "\n";
+				if (flags[kFLAGS.TIMES_ORGASM_VAGINAL] > 0) 
+					miscStats += "<i>Pussy tension:</i> " + flags[kFLAGS.TIMES_ORGASM_VAGINAL] + "\n";
+				if (flags[kFLAGS.TIMES_ORGASM_TITS] > 0) 
+					miscStats += "<i>Tits tension:</i> " + flags[kFLAGS.TIMES_ORGASM_TITS] + "\n";
+				if (flags[kFLAGS.TIMES_ORGASM_LIPS] > 0) 
+					miscStats += "<i>Lips tension:</i> " + flags[kFLAGS.TIMES_ORGASM_LIPS] + "\n";
+				miscStats += "<i>Bimbo score:</i> " + Math.round(player.bimboScore() * 10) + "\n";
+			}
+
 			
 			if (miscStats != "")
 				outputText("\n<b><u>Miscellaneous Stats</u></b>\n" + miscStats);

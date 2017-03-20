@@ -181,6 +181,8 @@ the text from being too boring.
 		public var inventory:Inventory = new Inventory(saves);
 		public var masturbation:Masturbation = new Masturbation();
 		public var pregnancyProgress:PregnancyProgression = new PregnancyProgression();
+		public var bimboProgress:BimboProgression = new BimboProgression();
+		
 		// Scenes/Areas/
 		public var bog:Bog = new Bog();
 		public var desert:Desert = new Desert();
@@ -408,8 +410,8 @@ the text from being too boring.
 			 * Debug, Version, etc
 			 */
 			debug = false; //DEBUG, used all over the place
-			ver = "1.0.2_mod_snapshot_20170305"; //Version NUMBER
-			version = ver + " (<b>Nearly There...</b>)"; //Version TEXT
+			ver = "1.0.2_mod_1.4_pre1"; //Version NUMBER
+			version = ver + " (<b>The Fabulous Update</b>)"; //Version TEXT
 
 			//Indicates if building for mobile?
 			mobile = false;

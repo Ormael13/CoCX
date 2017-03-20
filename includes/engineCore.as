@@ -1326,6 +1326,10 @@ public function doSFWloss():Boolean {
 	else return false;
 }
 
+public function isPeaceful():Boolean {
+	return flags[kFLAGS.EASY_MODE_ENABLE_FLAG] <= -2;
+}
+
 public function doNothing():void {
 	//This literally does nothing.
 }

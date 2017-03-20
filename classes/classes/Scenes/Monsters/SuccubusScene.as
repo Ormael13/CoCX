@@ -43,7 +43,7 @@ package classes.Scenes.Monsters
 		
 		public function winAgainstSuccubusRape():void {
 			clearOutput();
-			outputText("Seeing the succubus in such a vulnerable state \n\n");
+			outputText("Seeing the succubus in such a vulnerable state, you move over to her" + player.clothedOrNakedLower(", stripping out of your " + player.armorDescript() + ", exposing your " + player.cockDescript() + "", " while your " + player.cockDescript() + " swings freely") + ".\n\n");
 			outputText("Lost in the moment, you grind your pelvic region into hers, feeling around for her fuckhole with your erect member", false);
 			//Has cocks
 			if (player.hasCock()) {
@@ -51,7 +51,7 @@ package classes.Scenes.Monsters
 				else outputText(" When you feel yourself sink in a bit, you thrust in her hard. The succubus screams at you, obviously violated. But that only serves to drive you on further, fucking her faster and harder.\n\n", false);
 				outputText("Her tight cunt, combined with your crazed lust, has you shooting a huge load into her deepest reaches. But just once isn't enough right now. You keep going, staying hard the whole time.", false);
 				if (player.cockTotal() > 1) outputText("She only wears herself out trying to wriggle away from you, and you use the chance to carefully cram another of your cocks into her. You can feel her getting stretched out. ", false);
-				outputText("With the glint of a pervert in your eye, you look down on her, drinking in the anguish in her face as you rape her slowly this time. She gets increasingly wet as you keep fucking her, and you mock her openly for supposedly enjoying this. You lick the tears rolling down her face and continue for some time. When you decide she's ben broken, you decide to finish and change suddenly to much faster strokes. The succubus howls, ruffling your hair as you cum all over her insides yet again. Satisfied, you pull out and leave her there panting and wasted, evidence of the incursion leaking from her snatch. ", false);
+				outputText("With the glint of a pervert in your eye, you look down on her, drinking in the anguish in her face as you rape her slowly this time. She gets increasingly wet as you keep fucking her, and you mock her openly for supposedly enjoying this. You lick the tears rolling down her face and continue for some time. When you decide she's been broken, you decide to finish and change suddenly to much faster strokes. The succubus howls, ruffling your hair as you cum all over her insides yet again. Satisfied, you pull out and leave her there panting and wasted, evidence of the incursion leaking from her snatch. ", false);
 			}
 			player.orgasm();
 			dynStats("lib", -2, "cor", 3);

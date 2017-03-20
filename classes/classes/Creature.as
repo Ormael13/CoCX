@@ -543,12 +543,12 @@ package classes
 		{
 			switch (type) {
 				// Start with that, whats easy
-				case 'Vaginal': flags[kFLAGS.TIMES_ORGASM_VAGINAL]++; break;
-				case 'Anal':    flags[kFLAGS.TIMES_ORGASM_ANAL]++;    break;
-				case 'Dick':    flags[kFLAGS.TIMES_ORGASM_DICK]++;    break;
-				case 'Lips':    flags[kFLAGS.TIMES_ORGASM_LIPS]++;    break;
-				case 'Tits':    flags[kFLAGS.TIMES_ORGASM_TITS]++;    break;
-				case 'Nipples': flags[kFLAGS.TIMES_ORGASM_NIPPLES]++; break;
+				case 'Vaginal': if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_VAGINAL] < 10) flags[kFLAGS.TIMES_ORGASM_VAGINAL]++; break;
+				case 'Anal':    if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_ANAL]    < 10) flags[kFLAGS.TIMES_ORGASM_ANAL]++;    break;
+				case 'Dick':    if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_DICK]    < 10) flags[kFLAGS.TIMES_ORGASM_DICK]++;    break;
+				case 'Lips':    if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_LIPS]    < 10) flags[kFLAGS.TIMES_ORGASM_LIPS]++;    break;
+				case 'Tits':    if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_TITS]    < 10) flags[kFLAGS.TIMES_ORGASM_TITS]++;    break;
+				case 'Nipples': if (kGAMECLASS.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_NIPPLES] < 10) flags[kFLAGS.TIMES_ORGASM_NIPPLES]++; break;
 				case 'Ovi':     break;
 
 				// Now to the more complex types

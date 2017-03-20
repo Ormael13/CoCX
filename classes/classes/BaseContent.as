@@ -198,6 +198,10 @@
 			return kGAMECLASS.doSFWloss();
 		}
 		
+		protected function isPeaceful():Boolean {
+			return kGAMECLASS.isPeaceful();
+		}
+		
 		/**
 		 * Start a new combat.
 		 * @param	monster_ The new monster to be initialized.
