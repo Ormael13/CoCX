@@ -2342,7 +2342,7 @@ public static const PABLO_GOT_DICKED_ANALLY:int                                 
 public static const PABLO_USED_YOUR_PUSSY:int                                       = 2334;
 public static const PABLO_USED_YOUR_ASS:int                                         = 2335;
 public static const PABLO_FREAKED_OUT_OVER_WORMS:int                                = 2336;
-public static const UNKNOWN_FLAG_NUMBER_02337:int                                   = 2337;
+public static const TIMES_MINO_MUTUAL:int                                   	    = 2337; //How many times the Minotaur's "minoMutual" scene been accessed
 public static const UNKNOWN_FLAG_NUMBER_02338:int                                   = 2338;
 public static const UNKNOWN_FLAG_NUMBER_02339:int                                   = 2339;
 public static const UNKNOWN_FLAG_NUMBER_02340:int                                   = 2340;
