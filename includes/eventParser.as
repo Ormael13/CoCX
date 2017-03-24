@@ -41,12 +41,12 @@ public function gameOver(clear:Boolean = false):void { //Leaves text on screen u
 	if (textChoices == 0) outputText("<b>GAME OVER</b>");
 	if (textChoices == 1) outputText("<b>Game over, man! Game over!</b>");
 	if (textChoices == 2) outputText("<b>You just got Bad-Ended!</b>");
-	if (textChoices == 3) outputText("<b>Your adventures have came to an end...</b>");
+	if (textChoices == 3) outputText("<b>Your adventures have come to an end...</b>");
 	outputText("</font>");
 	//Delete save on hardcore.
 	if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 		outputText("\n\n<b>Error deleting save file.</b>");
-		/*outputText("\n\n<b>Your save file has been deleted as you are on Hardcore Mode!</b>", false);
+		/*outputText("\n\n<b>Your save file has been deleted, as you are on Hardcore Mode!</b>", false);
 		flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION] = flags[kFLAGS.HARDCORE_SLOT];
 		var test:* = SharedObject.getLocal(flags[kFLAGS.TEMP_STORAGE_SAVE_DELETION], "/");
 		if (test.data.exists)
@@ -197,7 +197,7 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 					needNext = true;
 				}
 				else if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "") && (player.inte / 5) >= rand(15)) {
-					outputText("\n<b>Your sleep is momentarily disturbed by the sound of imp hands banging against your cabin door. Fortunately, you've locked the door before you've went to sleep.</b>\n");
+					outputText("\n<b>Your sleep is momentarily disturbed by the sound of imp hands banging against your cabin door. Fortunately, you locked the door before yo went to sleep.</b>\n");
 					needNext = true;
 				}
 			}
