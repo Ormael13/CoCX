@@ -395,6 +395,7 @@ private function keltBlowjobRequirementShamefully(newl:Boolean = true):void {
 	outputText("It may be unhealthy, to keep going back to him.  Of course, you could always say no, right?  He is a good teacher.  And... and would it be so bad to suck him off a few more times?  That wouldn't be so bad... would it?\r\r", false);
 	//(Blowjob Off, but activated.)
 	//(+7 Submissiveness)
+	player.orgasm('Lips',false);
 	player.addStatusValue(StatusEffects.Kelt,2,7);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -424,6 +425,7 @@ private function keltBlowjobRequirementEagerly(newl:Boolean = true):void {
 	outputText("He leaves, obviously quite pleased with himself, and your legs give out from under you, weak from your experience.  Even so, you frantically masturbate, knowing true bliss as you lie within a small pool of his spunk.  The smell of it clings to you, even after you push yourself upright and begin hobbling back to camp, arms clutched around your swollen stomach.  This is what happiness feels like... used and full of sperm.\r\r", false);
 	outputText("Still, part of you feels unsteady about this whole thing.  Are you becoming a little too dependent on Kelt?  It may be unhealthy to keep going back to him.  And there are others out there, right?  But... but you can't get the centaur out of your head.  It feels right to kneel at his feet; to be his slutty little cumdump.  It is becoming hard to remember why you came here in the first place...\r\r", false);
 	//(Blowjob On.)
+	player.orgasm('Lips',false);
 	player.createStatusEffect(StatusEffects.BlowjobOn,0,0,0,0);
 	//(+15 Submissiveness)
 	player.addStatusValue(StatusEffects.Kelt,2,15);
