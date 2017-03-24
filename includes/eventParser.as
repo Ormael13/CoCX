@@ -197,7 +197,7 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 					needNext = true;
 				}
 				else if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "") && (player.inte / 5) >= rand(15)) {
-					outputText("\n<b>Your sleep is momentarily disturbed by the sound of imp hands banging against your cabin door. Fortunately, you locked the door before yo went to sleep.</b>\n");
+					outputText("\n<b>Your sleep is momentarily disturbed by the sound of imp hands banging against your cabin door. Fortunately, you locked the door before you went to sleep.</b>\n");
 					needNext = true;
 				}
 			}
