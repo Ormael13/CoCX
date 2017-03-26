@@ -240,7 +240,11 @@ package classes
 				if (player.hasPlainSkin())
 					outputText("  The [skin] that is revealed by your lack of fur looks quite unusual.");
 				else if (player.hasFur())
-					outputText("  It's covered in [skinFurScales] that covers your " + player.skinTone + " skin underneath.");
+					if (player.hasDifferentUnderBody())
+						outputText("  It's covered in [skinFurScales] on your upper jaw and head and [underBody.skinFurScales]"
+						          +" on your lower jaw that covers your [skin.noadj] underneath.");
+					else
+						outputText("  It's covered in [skinFurScales] that covers your [skin.noadj] underneath.");
 				else if (player.hasScales())
 					outputText("  It's covered in [skinFurScales], making your face looks more unusual.");
 			}
