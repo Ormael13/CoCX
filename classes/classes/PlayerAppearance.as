@@ -707,7 +707,15 @@ package classes
 			}
 			if (player.tailType == TAIL_TYPE_LIZARD) 
 			{
-				outputText("  A tapered tail hangs down from just above your " + player.assDescript() + ".  It sways back and forth, assisting you with keeping your balance.");
+				if (player.hasDifferentUnderBody())
+				{
+					outputText("  A tapered tail, covered in [skinFurScales] with [underBody.skinFurScales] along its underside hangs down from just"
+					          +" above your [ass].  It sways back and forth, assisting you with keeping your balance.");
+				}
+				else
+				{
+					outputText("  A tapered tail hangs down from just above your [ass].  It sways back and forth, assisting you with keeping your balance.");
+				}
 			}
 			if(player.tailType == TAIL_TYPE_SALAMANDER) 
 			{
@@ -733,7 +741,16 @@ package classes
 			}
 			else if (player.tailType == TAIL_TYPE_DRACONIC) 
 			{
-				outputText("  A thin, scaly, prehensile reptilian tail, almost as long as you are tall, swings behind you like a living bullwhip.  Its tip menaces with spikes of bone, meant to deliver painful blows.");		
+				if (player.hasDifferentUnderBody())
+				{
+					outputText("  A thin, prehensile reptilian tail, covered in [skinFurScales] with [underBody.skinFurScales] along its underside"
+					          +" and almost as long as you are tall, swings behind you like a living bullwhip. Its tip menaces with spikes of bone,"
+					          +" meant to deliver painful blows.");
+				}
+				else
+				{
+					outputText("  A thin, scaly, prehensile reptilian tail, almost as long as you are tall, swings behind you like a living bullwhip.  Its tip menaces with spikes of bone, meant to deliver painful blows.");
+				}
 			}
 			//appearance
 			else if (player.tailType == TAIL_TYPE_RACCOON) 
