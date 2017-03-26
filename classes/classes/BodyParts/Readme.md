@@ -208,3 +208,81 @@ placeholder
 
 ### Neck
 placeholder
+
+Changed or new related methods
+------------------------------
+
+Syntax: ClassName.methodName
+
+### Player.setFurColor
+Set the new furColor or furColors randomly and, if wanted: set the new underBody as well.
+
+#### Param `colorArray:Array`
+The method still accepts a list of strings to randomly choose from as the new furColor for BC, but in addition to that it now accepts a mixed list of strings and arrays with two strings.
+
+##### Example
+```as3
+player.setFurColor([ 
+	"orange", 
+	"brown", 
+	"black", 
+	"gray", 
+	"white", 
+	["orange", "white"], 
+	["brown", "white"], 
+	["black", "white"], 
+	["gray", "white"], 
+]);
+```
+If the randomizer chooses one of the first five options, only the main furColor aka `player.furColor` is being set (old behaviour still works),
+but for the last four options, the array specifies the main furColor and the furColor on the underBody.
+
+So, if the choice is `["orange", "white"]` for example, it would be the same as:
+```as3
+player.furColor = "orange";
+player.underBody.furColor = "white";
+```
+
+#### Param `underBodyProps:Object = null`
+In addition to setting the furColor(s) you may want to override a few or all underBody-props, too. You can do that here. (See the example below)
+
+#### Param `doCopySkin:Boolean = false`
+Set this to true, if you want to copy the skin-props to the underBody before overriding the underBody.skin. (See the example below)
+
+#### Param `restoreUnderBody:Boolean = true`
+If set to true (the default), the underBody is restored before setting the other values. In most, if not all cases, its not needed to set this to false and its always a good idea to clean up the underBody first (or in case the creature has no inhuman underBody)
+
+##### Example
+```as3
+player.setFurColor(catFurColors, {type: UNDER_BODY_TYPE_FUR}, true);
+```
+See the example above for potential `catFurColors`
+
+### Player.setSkinTone
+Same as `Player.setFurColor` but for the skinTone(s). Currently not used.
+
+### PlayerHelper.hasDifferentUnderBody
+Returns true, if the main skin and the underBody-skin differs somehow and false otherwise.
+The furColor is only compared, if both the main skin and the underBody skin are furry of course.
+If the player has no inhuman underBody it returns false. And certain underBody-types, like naga underBody are handled differently, hence it returns false with these, too.
+
+### Character.nagaLowerBodyColor2
+Like I stated above: Naga underBody is handled differently and since it has two colors at least (one for the underside and one for the rest), this method returns the secondary (underside) color depending on the primary naga lower body color (`player.underBody.skin.tone` here).
+Actually, this is a wrapper around `Appearance.nagaLowerBodyColor2`
+
+### Utils.convertMixedToStringArray(list:Array):Array
+In order to get the mixed color lists (string vs. arrays of strings, see `Player.setFurColor` above) to play nicely with `Utils.InCollection` the array needs to be altered to contain strings only.
+
+##### Example
+```as3
+var colorList:Array = [
+	"blue",
+	"green",
+	["black", "white", "gray"],
+	["red", "orange"],
+	"blue"
+];
+
+convertMixedToStringArray(colorList);
+// returns ["blue", "green", "black, white and gray", "red and orange", "blue"]
+```
