@@ -2018,6 +2018,14 @@
 			return DEFAULT_EYES_NAMES[i_creature.eyeType] + " eyes";
 		}
 
+		public static function nagaLowerBodyColor2(i_creature:Creature):String
+		{
+			if (i_creature.underBody.skin.tone in NAGA_LOWER_BODY_COLORS)
+				return NAGA_LOWER_BODY_COLORS[i_creature.underBody.skin.tone];
+
+			return i_creature.underBody.skin.tone;
+		}
+
 /* All of these functions have been replaced with direct calls to the appropriate form of cockNoun().
 		private static function humanDescript(cockNum:Number):String
 		{
@@ -2182,6 +2190,28 @@
 			return result;
 		}
 
+		public static const NAGA_LOWER_BODY_COLORS:Object = createMapFromPairs(
+				[
+					["red",          "orange"],
+					["orange",       "yellow"],
+					["yellow",       "yellowgreen"],
+					["yellowgreen",  "yellow"],
+					["green",        "light green"],
+					["spring green", "cyan"],
+					["cyan",         "ocean blue"],
+					["ocean blue",   "light blue"],
+					["blue",         "light blue"],
+					["purple",       "light purple"],
+					["magenta",      "blue"],
+					["deep pink",    "pink"],
+					["black",        "dark gray"],
+					["white",        "light gray"],
+					["gray",         "light gray"],
+					["light gray",   "white"],
+					["dark gray",    "gray"],
+					["pink",         "pale pink"],
+				]
+		);
 		public static const DEFAULT_GENDER_NAMES:Object = createMapFromPairs(
 				[
 					[GENDER_NONE, "genderless"],

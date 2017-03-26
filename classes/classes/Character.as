@@ -909,6 +909,11 @@ import classes.GlobalFlags.kFLAGS;
 		{
 			return Appearance.eyesDescript(this);
 		}
+
+		public function nagaLowerBodyColor2():String
+		{
+			return Appearance.nagaLowerBodyColor2(this);
+		}
 	}
 
 }

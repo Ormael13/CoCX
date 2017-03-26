@@ -4216,6 +4216,15 @@
 				outputText("  But then, scales start to form on the surface of your skin, slowly becoming visible, recoloring all of your body from the waist down in a snake-like pattern. The feeling is... not that bad actually, kind of like callous, except on your whole lower body. The transformation complete, you get up, standing on your newly formed snake tail. You can't help feeling proud of this majestic new body of yours.", false);
 				player.lowerBody = LOWER_BODY_TYPE_NAGA;
 				player.legCount = 1;
+				player.underBody.setProps({
+					type: UNDER_BODY_TYPE_NAGA,
+					skin: {
+						type: SKIN_TYPE_LIZARD_SCALES,
+						tone: "green",
+						adj:  "",
+						desc: "scales"
+					}
+				});
 				changes++;
 			}
 			// Remove gills

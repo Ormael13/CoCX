@@ -785,7 +785,12 @@ package classes
 			else if (player.lowerBody == LOWER_BODY_TYPE_DOG) 
 				outputText("  " + Num2Text(player.legCount)+ " digitigrade legs grow downwards from your waist, ending in dog-like hind-paws.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_NAGA) 
-				outputText("  Below your waist your flesh is fused together into a very long snake-like tail.");
+				if (player.underBody.type == UNDER_BODY_TYPE_NAGA)
+					outputText("  Below your waist, in place of where your legs would be, your body transitions into a long snake like tail."
+					          +" Your snake-like lower body is covered by " + player.underBody.skin.tone + " color scales,"
+					          +" with " + player.nagaLowerBodyColor2() + " color ventral scales along your underside.");
+				else
+					outputText("  Below your waist your flesh is fused together into a very long snake-like tail.");
 			//Horse body is placed higher for readability purposes
 			else if (player.lowerBody == LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS) 
 				outputText("  Your " + num2Text(player.legCount)+ " perfect lissome legs end in mostly human feet, apart from the horn protruding straight down from the heel that forces you to walk with a sexy, swaying gait.");

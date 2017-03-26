@@ -13,7 +13,7 @@ package classes
 
 		public function hasDifferentUnderBody():Boolean
 		{
-			if (underBody.type == UNDER_BODY_TYPE_NONE)
+			if ([UNDER_BODY_TYPE_NONE, UNDER_BODY_TYPE_NAGA].indexOf(underBody.type) != -1)
 				return false;
 
 			/* // Example for later use
