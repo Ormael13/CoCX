@@ -850,6 +850,7 @@ public function getMilked():void {
 	if (player.statusEffectv1(StatusEffects.LactationEndurance) < 1.5) player.addStatusValue(StatusEffects.LactationEndurance,1,.05);
 	player.addStatusValue(StatusEffects.LactationEndurance,1,.05);
 	player.createStatusEffect(StatusEffects.Milked,8,0,0,0);
+	player.orgasm('Tits',false);
 	doNext(camp.returnToCampUseOneHour);
 }
 

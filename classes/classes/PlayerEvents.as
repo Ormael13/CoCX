@@ -667,7 +667,10 @@ package classes {
 				if (player.statusEffectv1(StatusEffects.LactationReduction) >= 48) {
 					if (player.findStatusEffect(StatusEffects.LactationReduc0) < 0) {
 						player.createStatusEffect(StatusEffects.LactationReduc0, 0, 0, 0, 0);
-						if (player.biggestLactation() >= 1) outputText("\n<b>Your " + player.nippleDescript(0) + "s feel swollen and bloated, needing to be milked.</b>\n");
+						if (player.biggestLactation() >= 1) {
+							outputText("\n<b>Your " + player.nippleDescript(0) + "s feel swollen and bloated, needing to be milked.</b>\n");
+							player.orgasm('Tits',false);
+						}
 						if (player.biggestLactation() <= 2) player.createStatusEffect(StatusEffects.LactationReduc1, 0, 0, 0, 0);
 						if (player.biggestLactation() <= 1) player.createStatusEffect(StatusEffects.LactationReduc2, 0, 0, 0, 0);
 						needNext = true;

@@ -65,16 +65,19 @@
 					player.breastRows[0].breasts = 2;
 					player.breastRows[0].breastRating = 3;
 					if (player.breastRows[0].nipplesPerBreast < 1) player.breastRows[0].nipplesPerBreast = 1;
+					player.orgasm('Tits',false);
 					dynStats("sen", 2, "lus", 1);
 				}
 				if (player.biggestTitSize() >= 1 && player.biggestTitSize() <= 2) {
 					outputText("Your breasts suddenly balloon outwards, stopping as they reach a perfectly rounded C-cup.  ", false);
 					player.breastRows[0].breastRating = 3;
+					player.orgasm('Tits',false);
 					dynStats("sen", 1, "lus", 1);
 				}
 				if (player.breastRows[0].nipplesPerBreast < 1) {
 					outputText("Two dark spots appear on your chest, rapidly forming into sensitive nipples.  ", false);
 					player.breastRows[0].nipplesPerBreast = 1;
+					player.orgasm('Tits',false);
 					dynStats("sen", 2, "lus", 1);
 				}
 				if (player.biggestLactation() > 0) {
@@ -92,11 +95,13 @@
 						outputText("Your breasts feel fuller... riper... like your next milking could be even bigger.  ", false);
 					}
 					dynStats("lib", 1, "sen", 4, "lus", 15);
+					player.orgasm('Tits',false);
 				}
 				if (player.biggestLactation() == 0) {
 					outputText("A pleasurable release suddenly erupts from your nipples!  Streams of milk are spraying from your breasts, soaking into the sand immediately.  It stops all too soon, though the witch assures you that you can lactate quite often now.  ", false);
 					player.boostLactation(1);
 					dynStats("lib", .5, "sen", 1, "lus", 10);
+					player.orgasm('Tits',false);
 				}
 				outputText("The sand-witch smiles and thanks you for your offering.  You notice her dress is damp in four spots on the front.  ", false);
 				if (flags[kFLAGS.SANDWITCH_SERVICED] == 0) {
@@ -129,6 +134,7 @@ internal function sandwitchRape():void {
 	player.clearStatuses(false);
 	//LUST DEFEAT
 	if (player.lust >= player.maxLust()) {
+		var titsOrgasm:Boolean = false;
 		//BAD END START
 		if (player.biggestTitSize() >= 9 && player.biggestLactation() >= 3 && player.cor >= 25) {
 			outputText("Overwhelmed by the intense pleasure caused by the vibrating sphere inside your body, you fall to your knees.\n\nYou whimper pathetically, desperate to cum, as the Sand Witch steps nearer to you and gently strokes your face. She smiles cruelly and lets her hands drop down to your chest, then tears your top away, letting your huge breasts bounce free. The mysterious woman firmly rubs and kneads them, making you gasp and writhe, until she starts lightly flicking your painfully hard nipples. You edge closer and closer to orgasm, panting like a whore while the witch teases you with her hands and magic.\n\n", true);
@@ -136,7 +142,6 @@ internal function sandwitchRape():void {
 			doNext(sandWitchBadEnd);
 			return;
 		}
-		player.orgasm();
 		outputText("Your wobbly legs give out underneath you as your body's will to fight evaporates.\n\n", true);
 		if (player.hairColor.indexOf("sandy blonde") != -1) {
 			outputText("The Sand Witch smiles wickedly and intones, \"<i>Tresed eht retaw llahs klim ruoy.</i>\"\n\n", false); 
@@ -176,6 +181,7 @@ internal function sandwitchRape():void {
 					outputText("Your breasts feel fuller... riper... like your next milking could be even bigger.  ", false);
 				}
 				dynStats("lib", 1, "sen", 4, "lus", 15);
+				titsOrgasm = true;
 			}
 			if (player.biggestLactation() == 0) {
 				outputText("A pleasurable release suddenly erupts from your nipples!  Twin streams of milk are spraying from your breasts, soaking into the sand immediately.  It stops all too soon, though the witch assures you that you can lactate quite often now.  ", false);
@@ -191,6 +197,8 @@ internal function sandwitchRape():void {
 		}
 		//RAEP
 		outputText("  You hear the soft impact of her robe upon the sands and cannot resist a peek at your captor.  You turn to behold a curvy, dark-skinned beauty, whose form is dominated by a quartet of lactating breasts.  Somewhere in your lust fogged mind you register the top two as something close to double-D's, and her lower pair to be about C's.  She smiles and leans over you, pushing you to the ground violently.\n\nShe turns over you and drops down, planting her slick honey-pot firmly against your mouth.  Her scent is strong, overpowering in its intensity.  Your tongue darts out for a taste and finds a treasure trove of sticky sweetness.  Instinctively you tongue-fuck her, greedily devouring her cunny-juice, shoving your tongue in as far as possible before suckling at her clit.  Dimly you feel the milk spattering over you, splashing off you and into the warm desert sands.  Everywhere the milk touches feels silky smooth and sensitive, and your hands begin stroking your body, rubbing it in as the witch sprays more and more of it.  You lose track of time, orgasming many times, slick and sticky with sexual fluids.", false);
+		if (titsOrgasm) 	player.orgasm('Tits');
+		else 				player.orgasm();
 		player.slimeFeed();
 		dynStats("lib", 1, "sen", 5);
 

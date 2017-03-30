@@ -937,6 +937,7 @@ private function minotaurDrinksMilkNewsAtEleven():void {
 	//set lust to 0, increase sensitivity slightly
 	dynStats("lib", .2, "lus", -50);
 	//You've now been milked, reset the timer for that
+	player.orgasm('Tits',false);
 	player.addStatusValue(StatusEffects.Feeder,1,1);
 	player.changeStatusValue(StatusEffects.Feeder,2,0);
 	combat.cleanupAfterCombat();

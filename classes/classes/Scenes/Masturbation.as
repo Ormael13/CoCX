@@ -1871,7 +1871,7 @@ package classes.Scenes {
 			}
 			flags[kFLAGS.TIMES_MASTURBATED]++;
 			if (getGame().bimboProgress.ableToProgress())  dynStats("sen", (0.1));
-			dynStats("sen", ( -0.5));
+			else dynStats("sen", ( -0.5));
 		}
 		
 		public function titCum(cumQuantity:Number = 3):void {

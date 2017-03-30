@@ -596,6 +596,7 @@ package classes.Scenes.Monsters
 		public function impGangabangaEXPLOSIONS(loss:Boolean = false):void {
 			player.slimeFeed();
 			spriteSelect(18);
+			var titsOrgasm:Boolean = false;
 			//Set imp monster values
 			//Clear arrays in preparation
 			monster = new ImpGang();
@@ -656,6 +657,7 @@ package classes.Scenes.Monsters
 						//Grow tits!
 						player.growTits(2, player.breastRows.length, false, 1);
 						player.boostLactation(.3);
+						titsOrgasm = true;
 					}
 					outputText("Dimly through your haze of lust and pain you see a large imp step forward from the mob. Four feet tall and broader and stronger looking than any imp you've seen before, with a face as much bull as imp, this new imp has mottled grey skin, broad purple demon wings, two curving bull-horns on his head, and a " + Appearance.cockNoun(CockTypesEnum.HORSE) + " big enough to choke a minotaur. The mushroom-like head of it bobs just below his mouth, and his snake-tongue darts out to flick a bit of pre-cum off the head and onto your face. You shudder as the hot fluid stings the sensitive skin of your lips. His " +  monster.ballsDescriptLight() + " are each the size of your fist and slick with sweat. He slaps his sweaty cock-head against your cheek, nearly scalding you with the heat.  ", false);
 					//(Low corruption)
@@ -774,7 +776,8 @@ package classes.Scenes.Monsters
 					if (player.cor < 50) outputText("Your last coherent thought is to find a way to better hide your camp, so this never happens again.", false);
 					//(High corruption)
 					else outputText("Your last coherent thought is to find a way to make your own mutated master imp, maybe even a stable full of them...", false);
-					player.orgasm();
+					if (titsOrgasm) player.orgasm('Tits'); 
+                    else 			player.orgasm();
 					dynStats("lib", 2, "cor", 3);
 					player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14); //Bigger imp means faster pregnancy
 				}
@@ -1364,6 +1367,7 @@ package classes.Scenes.Monsters
 						dynStats("lus", 20, "cor", 2);
 						combat.cleanupAfterCombat();
 						player.slimeFeed();
+						player.orgasm('Lips',false);
 						return;					
 					}
 					else {
