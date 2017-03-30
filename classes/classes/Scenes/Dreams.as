@@ -9,6 +9,9 @@
 		
 		//Returns true if needs to END SHIT
 		public function dreamSelect():Boolean {
+			var inBimbo:Boolean = false;
+			if (getGame().bimboProgress.ableToProgress()) inBimbo = true;
+				
 			var daydream:Number = 0;
 			var choices:Array = new Array();
 			//dream quantity
@@ -116,6 +119,14 @@
 				choices[choices.length] = 17;
 				choices[choices.length] = 17;
 			}
+			if (player.bimboScore() > 0 && inBimbo) {
+				temp = player.bimboScore();
+				while (temp > 0) {
+					choices[choices.length] = 18;
+					temp--;
+				}
+			}
+			
 			//INTRODUCTIONS
 			if (dreamtemp <= 5) outputText("\nYour rest is somewhat troubled with dirty dreams.\n", false);
 			else if (dreamtemp < 15) outputText("\nYou have trouble relaxing as your mind wanders, dreaming of ", false);
@@ -145,17 +156,22 @@
 						else {
 							outputText("beautiful nude ", false);
 							if (player.gender <= 1 || (player.gender == 3 && rand(2) == 0)) outputText("women ", false);
-							else outputText("men ", false);
+							else {
+								outputText("men ", false);
+								if (inBimbo) player.orgasm('Vaginal',false);
+							}
 							outputText("massaging you, slowly moving their hands over your most intimate places.  ", false);
 						}
 					}
 					if (player.cor > 33 && player.cor <= 66) {
 						outputText("being violently raped and used by demons.  ", false);
+						if (inBimbo) bimboWetDreamOrgasm();
 					}
 					if (player.cor > 66) {
 						dreamtemp = rand(5);
 						if (dreamtemp <= 3) outputText("giving yourself to the demons fully, allowing yourself to be tied down and owned as your body is warped for their twisted pleasures.  ", false);
 						else outputText("being captured and taken to a rusted building with dark smokestacks that belch sweet purplish smoke.  Inside are rows of multi-dicked, huge breasted humans, approximately thirty of them.  Each is shackled with their legs spread and torso bent over, and each has tight fitting suction tubes fitting over their tits and cocks.  Every set of tubes is pulsing with suction, drawing rivers of sticky white fluids from its slave's over-endowed breasts and balls.  You shudder in horror and arousal as you realize the victims seem to be arranged by age, ending with an empty machine next to the youngest slut-cow.  The inhuman strength of your captors easily overpowers your struggles as you are forced into your shackles, the metal locks clicking with finality.  A funnel is forced into your mouth, force-feeding you slick corrupted fluids that taste like sex and make your head swim.  Your vision fades as you feel heat in your chest and groin, making you swoon from the drugged cocktail and pleasure of your new best friends – the suction tubes. All you can hear is your own desperate moans... no, wait... that was a dream... but it was so twisted and hot that you're still panting with lust.  ", false);
+						if (inBimbo) bimboWetDreamOrgasm();
 					}
 				}
 				//canine
@@ -176,6 +192,7 @@
 						{
 							outputText("being in heat, your cunt sopping wet with moisture and desire, intense pheromones pouring off you to make all the males rigid and ready.  ", false);
 						}
+						if (inBimbo) player.orgasm('Vaginal',false);
 					}
 				}
 				//horse
@@ -187,12 +204,15 @@
 				else if (daydream == 3) {
 					if ((player.gender == 1 && player.biggestTitSize() >= 5) || (player.gender == 3 && rand(2) == 0)) {
 						outputText("having full and lactating breasts, searching for the right person to give your milk to.  You come across a pretty human girl and invite her to your breast.  She eagerly jumps into your arms and starts to suckle from your ample bosom.  You then guide your erect " + player.cockDescript(0) + " into her waiting lower lips.  The two of you stand there in eternal bliss as she suckles on your chest and you thrust into her womanhood, until you wake from the dream.  ", false);
+						if (inBimbo) player.orgasm('Tits',false);
 					}
 					else if (player.gender >= 2) {
 						outputText("wandering through the forest, cradling your full and lactating breasts, searching for the right person to give your milk to.  You come across a cute human boy and invite him to your breast.  He eagerly jumps into your arms and starts to suckle from your ample bosom.  You then guide his erect cock into your " + player.vaginaDescript(0) + " and engulf him.  The two of you stand there in eternal bliss as he suckles on your chest and thrusts into your womanhood, until you wake from the dream.  ", false);
+						if (inBimbo) player.orgasm('Tits',false);
 					}
 					else if (player.gender == 0) {
 						outputText("wandering the forest, carrying full and lactating breasts.  You spot a creature of the forest looking down at you, but you feel no fear, only contentedness as you invite the creature to suckle from your breasts.  It eagerly jumps out of its hiding place to lick and suck at your full breast, before soon running back off into the woods.  You continue your wonderings, and meet many more creatures.  Each one you meet comes to you and begs you for its daily milk.  It fills you with great satisfaction to feed them all, and you feel that they would do anything for you if you asked them to.  It is a state of eternal bliss, until you wake from the dream.  ", false);
+						if (inBimbo) player.orgasm('Tits',false);
 					}
 					else outputText("roaming the mountain-sides while you hunt for a mate, your turgid shaft and swelling balls aching with the need for release.  ", false);
 				}
@@ -220,6 +240,7 @@
 					outputText("You realize, at last, the bestial intelligence in the minotaurs.  They did not simply take you, though you were unarmed and outnumbered.  Instead, they let your own weakness doom you - a willing slave to the ecstasy of their loins.  As you grasp at the melon-sized balls churning all around you, begging for ever more of their nectar, a distant, fading voice begs you to hold out, to escape.  That final thought is driven away as the sublime arms of your masters lift their freshly broken cum-dump high into the air.  They crowd so tightly that they seem to be holding you over a sea of straining phalluses, spunk still bubbling from their engorged tips.  The palpable need to breed you ignites the bodies of your animalistic tyrants with smoldering heat.  Then, as time seems to slow down around you, they thrust your tamed body down, jamming endless inches of minotaur cock deep inside the latest of their submissive cock-sleeves...\n\n", false);
 					outputText("You awaken from the vivid dream at the sensation of penetration, lurid images slowly fading in the morning light.  Yet, somehow, you can still just barely smell the blissful odor of minotaur spunk.", false);
 					outputText("\n", false);
+					if (inBimbo) bimboWetDreamOrgasm();
 				}
 				else if (daydream == 7) {
 					outputText("grinding your rear into his thick cock, your hand reaching behind you to caress Akbal's cheek.  Having his prick between your ass is almost too distracting, but you know you have a duty to perform.  You raise your hands and address the acolytes before you, kneeling and observing.\n\n", false);
@@ -233,6 +254,7 @@
 					outputText("\"<i>Glory unto Akbal,</i>\" Buttslut whispers.\n\n", false);
 
 					outputText("You awake with a start, grumbling slightly before turning over and trying to get back to sleep.  Your asshole twitches.", false);
+					if (inBimbo) player.orgasm('Anal',false);
 				}
 				//Exgartuboobs
 				else if (daydream == 8) {
@@ -328,6 +350,7 @@
 							if (player.hasCock()) outputText("  [EachCock] is fully erect and throbbing.");
 							else if (player.hasVagina()) outputText("  Your [vagina] dripping wet with need.");
 							outputText("  You shudder as you recall the erotic dream you were just having, a hand caressing your aching loins.");
+							if (inBimbo) bimboWetDreamOrgasm();
 							//end dream
 							//lust increase
 						}
@@ -362,6 +385,9 @@
 							outputText("Things blur for a moment, and you find yourself laying on the bed with your hands wrapped around your heavily pregnant belly.  The product of your fertility and the virility of your great mate, and soon to be added to the great brood you've already brought into the world...\n", false);
 						}
 					}
+				}
+				else if (daydream == 18) {
+					bimboDream();
 				}
 				doNext(playerMenu);
 				return true;
@@ -482,7 +508,7 @@
 			
 			outputText("\n\nA soft \"sssht\" noise comes from behind you, that hole in the metal cave opening up once more.  Curious, you twist around so that you and your alien lover are butt-to-butt, and trot towards the doorway, dragging her along with you, though she's too blissed out to care.");
 			outputText("\n\nAs you pass through the doorway, your vision suddenly goes white... and you wake up with a start.");
-			player.orgasm();
+			player.orgasm('Dick');
 			dynStats("lib", 2, "sen", 2);
 			menu();
 			addButton(0,"Next",displacerDreamIII);
@@ -506,6 +532,157 @@
 				}
 			}
 			doNext(playerMenu);
+		}
+		
+		public function bimboDream() : void {
+			
+			getGame().dynStats("lus", rand(20) + rand(player.sens / 2));
+			
+			var dreamType:Number  = rand(5);
+			var bimboScore:Number = player.bimboScore();
+			var intensity:Number = 0;
+			if 		(bimboScore >= 8) intensity = 2;
+			else if (bimboScore >= 6 && rand(2) == 0) intensity = 2;
+			else if (bimboScore >= 4  && rand(4) == 0) intensity = 2;
+			else if (bimboScore >= 4) intensity = 1;
+			else if (bimboScore >= 2  && rand(2) == 0) intensity = 1;
+			else if (bimboScore >= 0  && rand(4) == 0) intensity = 1;
+			
+			// dreaming of "
+			if (dreamType == 0) { // Lips
+				
+				if (intensity == 0) {
+					outputText(" something very sexual. As you wake up, you still feel something tingly on your lips, as if your dream involved tasting something extremely delicious.\n\n");
+				}
+				else if (intensity == 1) {
+					if (rand(2) == 0) {
+						outputText("standing before the mirror. You look at your " +player.faceDesc() + ", your gaze is fixed at your lips. You take your lipstick and apply it very thoroughly. You make an O and it's perfect. Your lips are full and pink, glistening with moisture. You are so proud of yourself, ready for the main course.  You walk out and see four doors. You know that there is a treat behind each door, something very delicious, and you lick your lips in anticipation. You pause for a moment, indecisive, feeling how waves of pleasure run through you veins and make your face tingle. Finally you make up you mind and approach the third door. You know very well what you'll see there, and gulp nervously. You turn the handle, and suddenly wake up.  You close your eyes, imagining to be there again, to feel the moisture on your lips, to sense that delicious smell, to suck and gulp that creamy substance, but all in vain. ", false);
+					}
+					else {
+						outputText("walking in the forest. You wander into a damp patch overgrown with beautiful flowers. Mesmerized by strange shapes, colors and smells, you take a deep breath, inhaling a lungful of sweet sent. You want to take the flower with you and grab it to tug away, but your hand feels a vine with a mushroom-like head. You touch a vine gently, musing at its slippery texture. The tip of the head is leaking something gooey and white. Strange thougths run through your head, as you wander what would that substance taste like. You lick your fingers, savoring wonderful musky and sweet taste. You bend on your knees and bring the vine to your lips in anticipation, but then you wake up in disappointment, your heart pounding.  ", false);
+					}
+				}
+				else {
+					outputText(" approaching a strange door. You feel familiar tingling all over your face, and you lick your lips as you turn the door knob. You enter a salloon and your eyes are immediately fixed on a huge minotaur cock. It's so gorgeous and tasty! Your feel strong pulsation in your groin as you approach it and instinctively kneel down. From your position on your knees, it looks very massive; it's over two feet long, and has three rings of prepuce spaced around its length. You can just barely span your entire hand around its thickness.\n\n", false);
+					outputText("You open your mouth wide and lean forward, taking the thick, spongy head into your mouth. The taste was incredibly strong, and its musk was as thick as the minotaur's dick itself. You moan in pleasure, and start bobbing your head back and forth, taking more and more of the dick into your mouth. You stroke the rest of the cock in time with your sucking. As you work your mouth around the first ring, you opened up the top section of your " + player.armorName + ", freeing up your " + player.breastDescript(0) + ". With each pass, you were able to take more and more of the bull dick down your throat. You caress your " + player.breastDescript(0) + " while moaning around the dick. When you get your mouth around the second ring, the minotaur's cock throbbed sharply, and his cum exploded in your mouth. Your eyes bulged in shock, and you pulled off the cock as quickly as you could, swallowing the first several shots of thick, rich minotaur cum, while the rest shoots all over your face and " + player.breastDescript(0) + ". You wake up in a heat, still feeling strong taste on your mouth.\n\n", false);
+				}
+				player.orgasm('Lips',false);
+			}
+			if (dreamType == 1) { // Anal
+				
+				if 		(intensity == 0) {
+					outputText(" something very sexual. As you wake up, you feel tingling sensation around your [asshole], and think of how strangely empty it feels.\n\n");
+				}
+				else if (intensity == 1) {
+					outputText("finding yourself tied to a strange contraption. Your hands are behind your back, and your ass is totally exposed. You feel someone lifting up your skirt and slapping your [ass]. <i>Just look at that slut!</i> You feel how strong hand spreads cheeks of your ass and shudder at the sound of spit. Immediately you feel something cool and gooey on your asshole, you try to turn your head, but it is fixed, and your mouth is gagged. You feel another spit, and numbness start to spread around your [asshole], at the same time making your heart pound faster, as you contemplate what is going to happen. You feel fingers spread the lubricant around, and then sensation changes as something big and hot start pressing the entrance of your [asshole]. You try to scream, but only muffled sound escapes your mouth, and with that sound you wake up. You pant, fully awake, your [ass] clenches. That was only a dream.\n\n");
+				}
+				else {
+					outputText("fighting with Minotaur in a mountain cave. You deflect one blow after the other but your strength fades, and finally you fall on the dirt, too exhausted to fight. On your knees, you mubmle <i>Please</i> in a barely audible gasp, as a monster is towering above you, its massive bull-cock hard. The beastmen hauls you by the neck, quickly strips you of your [armor], baring more and more of your naked flesh. You can hear the slurping of the Minotaur's tongue crossing his lips as he eyes up your [butt], and his free hand quickly reaches out to maul one of your fat, squishy cheeks.  His fingers sink in to the tender, jiggly buttcheek, drawing the surface of it inward as his hand makes a print, and you can physically feel his fingers digging around and playing with the sensitive, slutty flank.\n\n");
+					outputText("You bite back a moan and find yourself pressing your hips against his grip, when the Minotaur haul you further up by the hips  bringing your [butt] to his face. The minotaur's broad tongue licks and laps at your [butthole] as you writhe and moan, each lick twice as pleasant as the last, and you feel your [vagorass] clenching and unclenching as your entire hips try to push against the Minotaur's searching tongue. Your body starts to shiver, your asshole quite slick with his saliva as he lets out a approving, rumbling moo - and then he stops, withdrawing his muzzle from your [butt] and its oversized cheeks - which slap wetly back together, your crack still wet with his spit.  A moment later you're hauled back down again, the minotaur's hand wrapping once more around your waist, and it isn't long before his flared head starts to push against the crack between your cheeks, the thick cock demanding entry.\n\n");
+					outputText("You can feel his cock pressing deeper and deeper into you.  Any second now he'll hit your [asshole], and you'll be wrapping your insides around that monster cock of his, moaning like a whore for him.  You feel a gush of his pre splatter all over the flesh at the 'bottom' of your ass-crack, dripping onto your asshole, and you bite your lip in preparation. With one swift movement he impales you onto his shaft, forcing himself as far into you as he can manage.  You cry out, and you feel your stomach distending to accommodate his incredible size. Grabbing your ass, he begins to violently pound your backside with his massive member. You can feel he's ready to cum. His thrusts become shorter and faster, and just when you think you can't stand it anymore he starts shooting his sperm into you. Your stomach begins to round out from the sheer amount of bull seed being pumped into your belly. The bull-man relaxes for a moment, then shoves you off of him and to the cold ground. You wake up feeling a strange sense of euphoria washes over your [butt].\n\n");
+				}
+				player.orgasm('Anal',false);
+
+			}
+			if (dreamType == 2) { // Pussy
+				
+				if (player.hasVagina()) {
+					if (intensity == 0) {
+						outputText("something very sexual. As you wake up, you feel tingling sensation in your [vagina], and think of how empty it feels.\n\n");
+					}
+					else if (intensity == 1) {
+						outputText("having sex with a beautiful young man back in Ingnam. You lay on your back, your legs spread wide, your [vagina] utterly exposed. As he approaches, you quiver, imagining the immense pleasure of being penetrated by his cock. You close your eyes, feeling how wetness escapes your [vagina]. You utter a stiffled cry as he touches the lips of your entrance. The movement of his fingers sends you in a whirlpool of immense pleasure, you are feeling pulsation in your belly, a desire to be filled. Your [hips] starts to shiver, as he starts to lick your pussy. Your thoughts in disarray, your attention is absorbed by waves of pure extasy, spreading through you body. You hear your own moans, as your [pussy] clenches and your [ass] trembles. You desperately want him inside, and almost cry, saying <i>Please, please, fuck me</i>, but at the same time your own voice makes you wake up. You realize that it was just a dream, somewhat disappointed.\n\n");
+						
+					}
+					else {
+						outputText(" being pregnant with a strange creature. You feel a sudden ache of need radiating from your massive stomach. Your belly is so heavy that you can't even get off the ground... you simply lie on your side, panting with desire, as the convulsions start. You don't feel much pain, just a steady, rhythmic compulsion that directs you to breathe steadily and spread your legs as wide as possible. You hardly have to push at all, as the child - no, your child, begins pressing against the walls of your womb, searching for escape. It finds it, and begins the arduous task of squeezing through your cervix, making you gasp with barely concealed pleasure.  It doesn't even hurt; there's only a dull little whisper of happiness followed by a tide of satisfaction.\n\n", false);
+						outputText("The head comes first, and your first thought is relief as you see the face of a small, elfin child.  She's slick with afterbirth and pushing her way free. But the greater part is to come.  She pulls her body free, easily twice as large as her human torso. Soft downy fur with long, spindly legs and a bristly tail... she is a centaur! You help as best as you can, proud of your achievement,  exhausted by the ordeal. Knowing her needs, you reveal a breast to her, and she nickers affectionately before latching on, drinking hungrily from your heavily lactating teat. Time pass in quiet, motherly bliss as she drains your breastmilk first from one breast, then the other. Her little stomach bulges slightly, but she does not stop, and you do not want her to. Even with the strange, soothing effect of the pregnancy wearing off, you feel nothing but affection for this child. She plants a sweet kiss on your cheek and you wake up.\n\n", false);
+						
+					}
+
+				}
+				else {
+					if 		(intensity == 0) {
+					outputText(" something very sexual. As you wake up, you feel tingling sensation around your [hips], and think of how strangely empty it feels.\n\n");
+						
+					}
+					else if (intensity == 1) {
+						outputText("fucking a whore back in Ignam. She is laying naked on a bed, her legs spread wide, eyes half-open. She is waiting for you to enter, and you gaze on her wet and inviting pussy. Feeling the sudden urge to touch it, you kneel down and start stroking its lips. You feel how slut pants, her flesh shivers as you move your finger around the clit. Pussy lips gape slightly, the cunt is filled with slicky girl cum. You lower your head and start licking it. The taste of her juice is amazing. She gasps in pleasure as you lick and suck her clit, her pussy clenches. You can feel how her cunt controls her every movement, bringing so much pure joy that she totally lose herself, begging you to fuck her. Her life as cum-dump must be so much pleasurable than yours, so much enjoyable... You wake up, still feeling her sweet taste, and a strange a kind of envy.\n\n");
+					}
+					else {
+						
+						outputText("laying on a soft bed in Ingnam. You are naked, your skin very sensitive, and you feel that something is wrong. You reach down and realize that there is a pussy between your legs. You touch it gently, and immediately feel aroused. With other hand you start teasing your " + player.breastDescript(0) + ", feeling how you body start to tingle. You spread your legs involuntary, exposing your pussy even more. Suddenly your hear noises outside the room, the door opens, and young men enters. He is totally naked, and his big cock start reacting to your pussy. As he approaches, you quiver, imagining the immense pleasure of being penetrated. You know that if he knock you up, you'll never recover your manhood again but the thought of being filled with cum make you wet. Your [hips] starts to shiver, as he starts to lick your pussy. Your thoughts in disarray, your attention is absorbed by waves of pure extasy, spreading through you body. You hear your own moans, as your pussy clenches and your [ass] trembles. You desperately want him inside, and almost cry, saying <i>Please, please, fuck me</i>, and he replies <i>Ok, slut.</i>\n\n");
+						outputText("With one strong move, he turns you over on your knees, hold you [hips] and start searching your cunt with his cock. Desire drives you mad, as you arch your back, craving for his dick inside. He pushes lips of you pussy apart, and shoves his dick inside, and you cry in mind-melting pleasure, squirting. He pulls out, teasing you, and then pushes in, even deeper than before, and then begin fucking your cunt energetically. You realize that very soon he may cum, and think in horror of the consequenses, but your whorish body betrays you, your [hips] are moving on their own. You moan <i>Please, don't cum...inside..</i>, but he starts holding you even tighter, fucking even harder and deeper. Your heart hammering in your chest, you are terrified about what is going to happen, as you hear how he breath in and with one final thrust push his member as deep inside you as he can. Your whole body shakes, as you feel the liquid warmth fill your womb, his cock pumped so much of it that some even escapes your pussy. With realization your mind halts, and you give in to your lust, screaming as mind-shattering orgasm drawn you in pleasure. He pulls out and goes away, leaving you in a mess on a bed. You lie there, with tears on your eyes, and cum dripping from your pussy, until you realize that it is just a dream. You wake up, and reach down - you don't have pussy. You exhale with relief. What a strange dream..\n\n");
+					}
+				}
+				
+			}
+			if (dreamType == 3) { // Tits
+				if 		(intensity == 0) {
+					outputText(" something very sexual. As you wake up, you feel tingling sensation around your [nipples] and feel pressure in your sensitive " + player.breastDescript(0) + ".\n\n");
+				}
+				else if (intensity == 1) {
+					if (player.hasVagina() ) {
+						outputText("wandering through the forest, cradling your full and lactating breasts, searching for the right person to give your milk to.  You come across a cute human boy and invite him to your breast.  He eagerly jumps into your arms and starts to suckle from your ample bosom.  You then guide his erect cock into your " + player.vaginaDescript(0) + " and engulf him.  The two of you stand there in eternal bliss as he suckles on your chest and thrusts into your womanhood, until you wake from the dream.  ", false);
+					}
+					else {
+						outputText("wandering the forest, carrying full and lactating breasts.  You spot a creature of the forest looking down at you, but you feel no fear, only contentedness as you invite the creature to suckle from your breasts.  It eagerly jumps out of its hiding place to lick and suck at your full breast, before soon running back off into the woods.  You continue your wonderings, and meet many more creatures.  Each one you meet comes to you and begs you for its daily milk.  It fills you with great satisfaction to feed them all, and you feel that they would do anything for you if you asked them to.  It is a state of eternal bliss, until you wake from the dream.  ", false);
+					}
+				}
+				else {
+					if (player.findStatusEffect(StatusEffects.BreastsMilked) < 0) {
+						outputText("walking into a large barn, filled with the smells of earth, wood, and grease. A bank of machinery along the wall thrums and pulses as if it's a living creature. A harness hangs limply in the stall, there to hold the occupant in place while they are milked of every last drop.  You exhale slowly and force yourself to step into it.  As you puzzle out the straps, it gets easier and easier to get the rest of the harness into place.  As you snap the last one into position, machinery whirs and pulls it tight, lifting you off the ground and suspending you, facedown.  The breast milk pumps pulse and vibrate on a tray below you, twitching slightly as you hear the machinery activate.\n\n", false);
+					}
+					else {
+						outputText("walking into Whitney's barn.  Your [nipples] are engorged and ready to be taken care of. You see a familiar machinery along the wall easily attach the harnesses and lift up into position, hearing the machinery activate automatically.\n\n", false);
+					}
+					outputText("In spite of the tightness of your harness, you collect the suction cups and bring them up to your [nipples], letting the machine pull them into the tight cups with agonizing slowness. The machine sucks you inside, the tightness serving only to arouse you further.  The suction pulls the walls of the nipple-tubes tight against your nipples, turning them purple as they swell up like dicks.  Your [nipples] twitch and pulse for but a moment, then unleash a torrent of milk, filling the tubes.  The machinery lurches, struggling to keep up as you flood the tubes.   An alarm starts blaring as milk begins leaking out around the edges.  You can hear footsteps in the barn, and a pair of soft hands hold the cups against your chest. The machinery is shut down, but another pair of hands begins massaging your whorish tits, pumping wave after wave of milk through the tubes, unaided by the machinery.  You practically cream yourself from the attentions of your mysterious helper as the milking continues, so hot and horny that you try and wriggle in your harness to press against them.   After an hour of non-stop squeezing and spurting, your milking is over, and the hands release you.  The cups fall to the ground, and the harness lowers you to the ground.  You wake up, yur [nipples] feel very sore.\n\n", false);
+				}
+				
+			}
+			if (dreamType == 4) { // BimboLiqueur
+				
+
+				
+				if 	   (intensity == 0) {
+					outputText("something very sexual. As you wake up, you feel waves of pleasure running through your body. You quite enjoy yourself.\n\n");
+				}
+				else if (intensity == 1) {
+					
+					outputText("getting lost in mountains. You climbing up and down, your muscles sore, your mouth dry. You desperately want to drink something, otherwise you'll die of thirst. As you make your way round a large rock, you see a little pond, filled by a stream from above. You run to it, kneel down and start drink water with greedy gulps. It has refreshing taste, and you feel how your strength returns, and with it your whole body starts to tingle from passion. You quickly remove your " + player.armorDescript() + " and bend lower, plunging your face into the liquid, and drinking. You arc your back as your ass is totally exposed, and you are feeling how it becomes bigger, wider. You are feeling the touch of the stone with your nipples, the added weight to your expanded breasts. Your thirst is quenched, and you start washing your body with the water from the pond, feeling how your skin becomes very sensitive. You enjoy your new bigger tits, you fuller ass and rounder hips, until finally you wake up.\n\n");
+					
+				}
+				else {
+					outputText(" celebrating your victory. You pour glittering liquid in your glass, and drink, enjoying a spiced scent that paints visions of a slutty slave-girl's slightly-spread folds. You take bottle from the table, open wide and guzzle it down, feeling the fire of alcohol burning a path to your belly.  The burning quickly fades to a pleasant warmth that makes you light-headed and giggly. Everyone stares at you, as you grab a lock of the silken strands and watch open-mouthed while streaks so blonde they're almost white flow down the " + player.hairColor + " hair. It goes faster and faster until your hair has changed into perfectly bimbo-blonde, flowing locks.\n\n");
+					outputText("You raise, and begin to sway your hips from side to side, putting on a show for everyone here. You just feel so... sexy.  Too sexy to hide it. Your body aches to show itself and feel the gaze of strangers.  Mmmm, it makes you so wet!  Wait!?  Wet?  You touch yourself between the " + player.legs() + " and groan when your fingers sink into a sloppy, wet cunt. You sigh and run one hand over your " + player.nippleDescript(0) + "s, admiring how sensitive they're getting.  The big breasts start getting bigger and bigger, soft chest-flesh practically oozing out between your fingers as the squishy mammaries sprout like weeds, expanding well beyond any hand's ability to contain them.  The supple boobs still manage to sit high on your chest, almost gravity defying in their ability to generate cleavage.  You pinch a nipple with one hand while the other toys with the juicy entrance of your folds.  Mmmm, it, like, feels too good not to touch yourself, and after your worries, you just need to relax. Sex is so easy and natural!  You lean back and start grunting as you plunge four fingers inside yourself, plowing your wet vagina like no tomorrow. Your clit is throbbing, and you give it an experimental caress that makes your " + player.legs() + " give out as you cum, splattering female fluids as you convulse nervelessly on the ground. You wake up in sweat, you hand on your groins.");
+				}
+				getGame().dynStats("lus", rand(10) + rand(player.sens / 4));
+			}
+			
+			bimboWetDreamOrgasm(dreamType);
+			
+		}
+
+		private function bimboWetDreamOrgasm(dreamType: Number = 4):void {
+			if (dreamType == 4) dreamType = rand(4);
+
+			switch (dreamType) {
+			case 0: 
+				player.orgasm('Lips',false);
+				break;
+			case 1:
+				player.orgasm('Anal',false);
+				break;
+			case 2:
+				player.orgasm('Vaginal',false);
+				break;
+			case 3:
+				player.orgasm('Tits',false);
+				break;
+			default:
+				player.orgasm('VaginalAnal',false);
+			}
+			
 		}
 	}
 }

@@ -853,6 +853,7 @@ package classes.Scenes.Places.Prison
 			prison.changeEsteem(-7,prison.inPrison);
 			prison.changeObey(3,prison.inPrison);
 			player.orgasm();
+			player.orgasm('Lips',false);
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
 			if (flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && player.obey > 70 + rand(3) - (flags[kFLAGS.PRISON_TRAINING_LEVEL] * 2))
 			{
@@ -3872,6 +3873,7 @@ package classes.Scenes.Places.Prison
 			player.slimeFeed();
 			player.refillHunger(15);
 			player.orgasm();
+			player.orgasm('Lips',false);
 			doNext(prisonCaptorFeedingQuestTrainingAccept);
 		}
 		

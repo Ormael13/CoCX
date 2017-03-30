@@ -120,6 +120,7 @@ private function plantsForMe():void {
 
 private function plantsForMe2(BE:int = 0):void {
 	clearOutput();
+	var titsOrgasm:Boolean = false;
 	//Yes
 	if (BE == 1) outputText("Essy grins, nodding.  \"<i>Precisely.  I don't doubt they'll be even more fun given enough exposure here.</i>\"\n\n");
 	 //If No= 
@@ -170,6 +171,7 @@ private function plantsForMe2(BE:int = 0):void {
 		outputText("\n\nYour breasts bounce and quiver wildly as you bounce up and down, held tightly by those tentacles, Essy dining happily down below.  Those opaque coverings ripple and squeeze hard about your breasts, pumping them for ");
 		if (player.lactationQ() >= 400) outputText("your milk and ");
 		outputText("your pleasure.  In time, their pumping increases in force and tempo just as her lips and tongue do.");
+		titsOrgasm = (rand(2) == 0);
 	}
 	
 	outputText("\n\nAnother tentacle momentarily rubs over her breast, growing slimy with the sap before it moves around behind you and abruptly shoves into your [asshole].  Like a professional, she takes it slow to start, letting you adjust to the unique girth and contours of the tentacle as it plunges in deep.  It smoothly pulls nearly out only to pump in deeply once more.");
@@ -211,12 +213,14 @@ private function plantsForMe2(BE:int = 0):void {
 		player.growTits(7,player.bRows(),false,2);
 		player.boostLactation(player.bRows());
         outputText("\n\nYou sit there for the next hour or two, milking your bloated bosom and giving the flora a generous watering in the process.  When all is taken care of, you stumble back upright with a brief struggle and don your gear once more.  The smell of fresh-cut flowers seems to linger on your [armor] as you depart.");
+		titsOrgasm = true;
 	}
 	if (player.hasBreasts() && player.isLactating()) {
         player.milked();
         player.boostLactation(0.01);
     }
-	player.orgasm();
+	if (titsOrgasm) player.orgasm('Tits');
+	else 			player.orgasm();
 	dynStats("lib", 1);
 	//Slimefeed!
 	player.slimeFeed();

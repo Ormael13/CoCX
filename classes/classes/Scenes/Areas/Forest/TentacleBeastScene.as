@@ -536,7 +536,6 @@ internal function tentacleLossRape():void {
 }
 
 private function tentacleRapeContinuation():void {
-	player.orgasm();
 	dynStats("tou", 1, "int", -.5, "lib", 2, "sen", 1, "cor", .5);
 	clearOutput();
 	spriteSelect(100);
@@ -552,6 +551,8 @@ private function tentacleRapeContinuation():void {
 			outputText(player.multiCockDescriptLight() + " and ass and in a very short time, your phallus explodes, launching stream upon stream of hot, thick cum into the horror. Your hips and pelvis buck violently with each thrust as the creature masterfully strokes your " + player.multiCockDescriptLight() + "  and milks your prostate of your fluids. You cry with each orgasm, prompting the thing to milk you harder. After an eternity of successive ejaculations, the creature withdraws its unholy arms and leaves you in a bruised, lacerated, overfucked heap on the ground, discarded like a person throws away a corn cob after a meal.", false);
 		else
 			outputText(player.multiCockDescriptLight() + " and ass and in a very short time, your dicks explode, launching stream upon stream upon stream of hot, thick cum into the horror.  Your hips and pelvis buck violently with each thrust as the creature masterfully strokes your " + player.multiCockDescriptLight() + " and milks your prostate of your fluids.  You cry with each orgasm, prompting the thing to milk you harder. After an eternity of successive ejaculations, the creature withdraws its unholy arms and leaves you in a bruised, lacerated, overfucked heap on the ground, discarded like a person throws away a corn cob after a meal.", false);
+		if (rand(2) == 0) player.orgasm('Anal');
+		else player.orgasm('Dick');
 	}
 	else if (player.gender == 2) {
 		outputText("The beast rears up to reveal a beak-like maw. It opens its massive jaws to reveal ");
@@ -579,6 +580,8 @@ private function tentacleRapeContinuation():void {
 		player.slimeFeed();
 		//lactate more from the encounter.
 		player.boostLactation(.3);
+		if (rand(2) == 0) player.orgasm('Anal');
+		else player.orgasm('Vaginal');
 		return;
 	}
 	else if (player.gender == 3) {
@@ -603,6 +606,7 @@ private function tentacleRapeContinuation():void {
 		player.slimeFeed();
 		//lactate more from the encounter.
 		player.boostLactation(.3);
+		player.orgasm();
 	}
 	if (getGame().inCombat)
 		combat.cleanupAfterCombat();
