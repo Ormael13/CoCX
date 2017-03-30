@@ -111,8 +111,7 @@
 			if (hasFeraMilkingTwat || vaginalLooseness <= VAGINA_LOOSENESS_NORMAL) {
 			//cArea > capacity = autostreeeeetch.
 			if (cArea >= capacity()) {
-				if (vaginalLooseness >= VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) {}
-				else vaginalLooseness++;
+				vaginalLooseness++;
 				stretched = true;
 			}
 			//If within top 10% of capacity, 50% stretch
@@ -126,6 +125,7 @@
 				stretched = true;
 				}
 			}
+			if (vaginalLooseness > VAGINA_LOOSENESS_LEVEL_CLOWN_CAR) vaginalLooseness = VAGINA_LOOSENESS_LEVEL_CLOWN_CAR;
 
 			if (virgin) {
 				virgin = false;
