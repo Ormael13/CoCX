@@ -33,7 +33,7 @@ private function shouldraSleeping(changes:int = 0, reset:Boolean = false):Boolea
 		flags[kFLAGS.SHOULDRA_SLEEP_TIMER] = changes;
 	}
 	else flags[kFLAGS.SHOULDRA_SLEEP_TIMER] += changes;
-	if (flags[kFLAGS.SHOULDRA_SLEEP_TIMER] < 0) flags[kFLAGS.SHOULDRA_SLEEP_TIMER] = 0;
+	if (flags[kFLAGS.SHOULDRA_SLEEP_TIMER] < -216) flags[kFLAGS.SHOULDRA_SLEEP_TIMER] = -216;
 	if (flags[kFLAGS.SHOULDRA_SLEEP_TIMER] > 48) flags[kFLAGS.SHOULDRA_SLEEP_TIMER] = 48;
 	//Is she sleeping?
 	if (flags[kFLAGS.SHOULDRA_SLEEP_TIMER] > 0) return true;
