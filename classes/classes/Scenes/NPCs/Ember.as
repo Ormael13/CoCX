@@ -182,6 +182,7 @@ package classes.Scenes.NPCs
 			this.hairLength = 15;
 			this.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
 			this.horns = 4;
+			this.wingType = WING_TYPE_DRACONIC_LARGE;
 			this.tailType = TAIL_TYPE_DRACONIC;
 			initStrTouSpeInte(75 + Math.floor(game.emberScene.emberSparIntensity() / 3), 75 + Math.floor(game.emberScene.emberSparIntensity() / 3), 75 + Math.floor(game.emberScene.emberSparIntensity() / 3), 75 + Math.floor(game.emberScene.emberSparIntensity() / 3));
 			initLibSensCor(50, 35, game.flags[kFLAGS.EMBER_COR]);

@@ -9,14 +9,14 @@ package classes.Scenes
 	{
 		public function BimboProgression() {}
 			
-		public 	function ableToProgress() : Boolean {
+		public 	function ableToProgress():Boolean {
 			if ( (player.findPerk(PerkLib.BimboBrains) >= 0) && (player.findPerk(PerkLib.BimboBody) >= 0) ) return false;
 			if (player.lowerGarment != UndergarmentLib.NOTHING) return false;
-			if (player.armorName == "bimbo skirt") return true;
+			if (player.armorName == "bimbo skirt" && flags[kFLAGS.BIMBO_MINISKIRT_PROGRESS_DISABLED] == 0) return true;
 			return false;
 		}
 		
-		public 	function readyToProgress() : Boolean {
+		public 	function readyToProgress():Boolean {
 			if (player.lowerGarment != UndergarmentLib.NOTHING) return false;
 			
 			if (player.lust >= player.maxLust() ) return true;
@@ -30,7 +30,7 @@ package classes.Scenes
 			return false; 
 		}
 		
-		private function debugProgress   () : void { 
+		private function debugProgress():void { 
 			clearOutput();
 			
 			outputText("<b>Bimbo score:</b> " + Math.round(player.bimboScore() * 10) + "\n");
@@ -68,7 +68,12 @@ package classes.Scenes
 
 		}
 		
-		public 	function bimboDoProgress () : Boolean {
+		public function toggleProgress():void {
+			flags[kFLAGS.USE_OLD_INTERFACE] ^= 1;
+			getGame().inventory.inventoryMenu();
+		}
+		
+		public 	function bimboDoProgress():Boolean {
 			
 			if (debug) { 
 				debugProgress();
@@ -137,7 +142,7 @@ package classes.Scenes
 		
 		//-----------------------------------
 		
-		public 	function vaginalRelieve() : Boolean {
+		public 	function vaginalRelieve():Boolean {
 			
 			outputText("\n");
 			if (flags[kFLAGS.TIMES_ORGASM_VAGINAL] > 10) {
@@ -190,7 +195,7 @@ package classes.Scenes
 			}
 		}
 		
-		public 	function vaginalOrgasm () : void {
+		public 	function vaginalOrgasm():void {
 			
 			var removeCock:Boolean = false;
 			var titPlay:Boolean = false;
@@ -450,7 +455,7 @@ package classes.Scenes
 			postOrgasm();
 		}
 		
-		public 	function titsRelieve   () : Boolean { 
+		public 	function titsRelieve():Boolean { 
 			outputText("\n");
 			if (flags[kFLAGS.TIMES_ORGASM_TITS] > 10) {
 				if (rand(2) == 0) getGame().dynStats("lus", rand(30) + rand(player.sens) );
@@ -500,7 +505,7 @@ package classes.Scenes
 			
 		}
 		
-		public 	function titsOrgasm () : void { 
+		public 	function titsOrgasm():void { 
 			
 			var titPlay:Boolean = false;
 			var growTits:Boolean = false;
@@ -708,7 +713,7 @@ package classes.Scenes
 			postOrgasm();
 		}
 		
-		public 	function analRelieve() : Boolean {
+		public 	function analRelieve():Boolean {
 			outputText("\n");
 			
 			if (flags[kFLAGS.TIMES_ORGASM_ANAL] > 10) {
@@ -747,7 +752,7 @@ package classes.Scenes
 					
 		}
 		
-		public 	function analOrgasm () : void {
+		public 	function analOrgasm():void {
 			
 			var removeCock:Boolean = false;
 			var craving:int = analCraving();
@@ -916,7 +921,7 @@ package classes.Scenes
 			postOrgasm();
 		}
 		
-		public 	function lipRelieve() : Boolean {
+		public 	function lipRelieve():Boolean {
 			
 			getGame().dynStats("lus", rand(flags[2*kFLAGS.TIMES_ORGASM_LIPS] + 5) + rand(player.sens / 2));
 			if (flags[kFLAGS.TIMES_ORGASM_LIPS] > 60) flags[kFLAGS.TIMES_ORGASM_LIPS] = 60;
@@ -946,7 +951,7 @@ package classes.Scenes
 			}
 		}
 		
-		public 	function lipOrgasm () : void {
+		public 	function lipOrgasm():void {
 			
 			var craving:int = lipCraving();
 			var reduceDick:Boolean = false;
@@ -1151,13 +1156,13 @@ package classes.Scenes
 		
 		//-----------------------------------
 		
-		public  function postOrgasm() : void {
+		public  function postOrgasm():void {
 			
 			doNext(playerMenu);
 			
 		}
 		
-		public 	function bimbifyMe () : void {
+		public 	function bimbifyMe():void {
 			
 			if (flags[kFLAGS.BIMBOSKIRT_MINIMUM_LUST] <= 50) return; 
 			flags[kFLAGS.BIMBOSKIRT_MINIMUM_LUST] = 50;
@@ -1235,7 +1240,7 @@ package classes.Scenes
 			
 		}
 		
-		public 	function debimbifyMe() : void {
+		public 	function debimbifyMe():void {
 			
 			outputText("\nYour mind wanders off recaling your recent hussles, but you keep focus on your quest.\n");
 			
@@ -1247,7 +1252,7 @@ package classes.Scenes
 			if (flags[kFLAGS.TIMES_ORGASM_DICK]>0) flags[kFLAGS.TIMES_ORGASM_DICK]--;
 		}
 		
-		public 	function shrinkCock() : void {
+		public 	function shrinkCock():void {
 			var temp:Number  = 0;
 			var temp2:Number = player.cocks.length;
 			var temp3:Number = 0;
@@ -1307,7 +1312,7 @@ package classes.Scenes
 				
 		}
 		
-		public 	function growVagina() : void {
+		public 	function growVagina():void {
 			player.createVagina();
 			player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_TIGHT;
 			player.vaginas[0].vaginalWetness = VAGINA_WETNESS_NORMAL;
@@ -1318,7 +1323,7 @@ package classes.Scenes
 			getGame().dynStats("lus", 10);
 		}
 		
-		public 	function titDrink() : void {
+		public 	function titDrink():void {
 			if (player.biggestTitSize() > 5 && player.averageLactation() > 1) {
 				if (player.biggestLactation() > 3) {
 					
@@ -1351,7 +1356,7 @@ package classes.Scenes
 		}
 	
 		// 0 = not wearing a bimbo dress, 1 = minimal transformation, 2 = intermediate, 3 = high, 4 = already a bimbo
-		public function bimboRating() : int {
+		public function bimboRating():int {
 			if ((player.findPerk(PerkLib.BimboBrains) >= 0) && (player.findPerk(PerkLib.BimboBody) >= 0) ) return 4;
 			
 			if (ableToProgress()) {
@@ -1371,7 +1376,7 @@ package classes.Scenes
 		}
 		
 		// 0 = not want anal sex, 1 = want buttfuck, 2 = want regular dildo, 3 = want anal madness
-		public function analCraving() : int {
+		public function analCraving():int {
 			
 			// 3 - big ones
 			var craving:int = 0;
@@ -1399,7 +1404,7 @@ package classes.Scenes
 		}
 		
 		// 1 - small, 2 - modest, 3 - maddening
-		public function lipCraving() : int {
+		public function lipCraving():int {
 			
 			if (flags[kFLAGS.TIMES_ORGASM_LIPS] > 50) return 3;
 			else if (flags[kFLAGS.TIMES_ORGASM_LIPS] > 40 && rand(4) <  3)  return 3;

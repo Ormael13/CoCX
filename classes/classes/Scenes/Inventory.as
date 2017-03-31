@@ -91,6 +91,9 @@ package classes.Scenes
 				addButton(12, "Key Items", checkKeyItems);
 				foundItem = true;
 			}
+			if (!getGame().inCombat && player.armor == armors.BIMBOSK) {
+				addButton(13, (flags[kFLAGS.BIMBO_MINISKIRT_PROGRESS_DISABLED] == 0 ? "Disable Bimbo" : "Enable Bimbo"), getGame().bimboProgress.toggleProgress, null, null, null, (flags[kFLAGS.BIMBO_MINISKIRT_PROGRESS_DISABLED] == 0 ? "Disable bimbo progression from Bimbo Miniskirt." : "Enable bimbo progression from Bimbo Miniskirt."));
+			}
 			if (!foundItem) {
 				outputText("\nYou have no usable items.");
 				doNext(playerMenu);

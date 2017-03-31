@@ -31,7 +31,7 @@ package classes.Scenes.Monsters
 		
 		public function winAgainstSuccubus():void {
 			clearOutput();
-			outputText("The succubus falls to her knees, too badly " + (monster.HP <= 0 ? "beaten" : "aroused") + "beaten to continue fighting.");
+			outputText("The succubus falls to her knees, too badly " + (monster.HP <= 0 ? "beaten" : "aroused") + " to continue fighting.");
 			if (player.hasCock() && player.lust >= 33) { //Cocks only at the moment.
 				outputText("\n\nSadly, your desires have not been met. Of course, you can always rape the poor thing. Do you?");
 				doYesNo(winAgainstSuccubusRape, combat.cleanupAfterCombat);
