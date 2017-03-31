@@ -175,6 +175,7 @@ public static const WING_TYPE_FEATHERED_LARGE:int                               
 public static const WING_TYPE_DRACONIC_SMALL:int                                    =  10;
 public static const WING_TYPE_DRACONIC_LARGE:int                                    =  11;
 public static const WING_TYPE_GIANT_DRAGONFLY:int                                   =  12;
+public static const WING_TYPE_IMP_LARGE:int                                         =  13;
 
 // lowerBody
 public static const LOWER_BODY_TYPE_HUMAN:int                                       =   0;

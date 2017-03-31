@@ -56,6 +56,7 @@ package classes.Scenes.Dungeons.D3
 			this.createPerk(PerkLib.Tank, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Tank2, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
+			this.wingType = WING_TYPE_DRACONIC_LARGE;
 			this.checkMonster();
 		}
 		
