@@ -2040,10 +2040,8 @@ package classes.Scenes.Monsters
 
 			output.clear();
 			if (monster.HP >= 1 && (50 + 50 * (1 - monster.HPRatio())) < rand(100)) {
-				output.text("You decide to teach this imp and his buddies a lesson that won't be forgotten. You grab the imp roughly, making sure you"
-				           +" have his attention as you make eye contact. The imp struggles in your grasp and manages to struggle himself free.");
-				output.text("\n\nPerhaps your should have beaten him down a little" + (monster.HPRatio() < 1 ? " more" : "") 
-				           +", before you've attempted the turn him into a statue?");
+				outputText("You decide to teach this imp and his buddies a lesson that won't be forgotten. You grab the imp roughly, making sure you have his attention as you make eye contact. The imp struggles in your grasp and manages to struggle himself free.");
+				outputText("\n\nPerhaps your should have beaten him down a little" + (monster.HPRatio() < 1 ? " more" : "") + ", before you've attempted the turn him into a statue?");
 				doNext(combat.cleanupAfterCombat);
 				return;
 			}
@@ -2063,51 +2061,17 @@ package classes.Scenes.Monsters
 				else
 					skullText = "no matter how many you beat.";
 
-				output.text("As you look at the imp before you, " + winText + " you feel disgusted. These vermin keep trying to invade your camp and"
-				           +" fuck you senseless " + skullText)
-				      .text("\n\nYou think back to your explorations in the high mountains, the dangers of the peaks keeping these creatures far"
-				           +" away. Even you have been deterred by the shrill harpies with their talons and the treacherous basilisks petrification."
-				           +" You then smirk, a brilliant [if (corruption >= 30) malicious] idea coming to mind. Thanks to " + benoitE
-				           +" you have basilisk eyes, surely the petrification you suffered at their hands before would deter these corrupt spawn as"
-				           +" it has you.")
-				      .text("\n\nYou blink slowly and ready yourself, grabbing the imp by the scruff of his neck. He seems confused " + winText2
-				           +" as you align him with your gaze. As you make direct eye contact he flinches and freezes, mesmerised by your gaze."
-				           +" You feel a link form from the edge of your mind to the imps, like a slowly flowing waterfall, it crashing into him"
-				           +" full force.")
-				      .text("\n\nYou remember how the basilisks used this compulsion to keep your gaze while your body slowly turned to stone,"
-				           +" the soothing feeling and the hushed and raspy whisper swaddling you as the stone did. You start to feed your thoughts"
-				           +" over to the imp, calming him with your words, telling him to keep looking into your eyes and to let all his worries"
-				           +" just fade away. To embrace the feeling of being cocooned and the warmth your gaze brings from the cold he feels."
-				           +" You watch somewhat surprised as he shudders when he tries to look away,"
-				           +" as if a bitter winter wind had rushed against him.")
-				      .text("\n\nYou see his eyes start to become glassy and know it is time. You blink once, the small loss of eye contact making"
-				           +" him whine pitifully. As you meet his eyes again, a layer of marble starting to form at his feet. You let go of him and"
-				           +" he remains in front of you, as if supported by puppet strings, and you are the stage master. The stone continues to"
-				           +" creep up his frame, his limbs hardening into place as it does."
-				           +" Soon his legs are covered and his midsection follows swiftly.")
-				      .text("\n\nYou shut the link between you with a smirk, watching as his dazed expression fades. When he groggily looks down he"
-				           +" begins to shout, trying to free himself with all his might, though with his legs completely turned and the stone"
-				           +" rapidly rising you know he has no chance. The stone has almost formed up to his shoulders now, his arms feeling leaden"
-				           +" as he struggles fruitlessly. You watch in fascination as the imp is consumed by the stone, his cursing fading into"
-				           +" nothingness, while his expression of rage and terror is trapped on his face for eternity.")
-				      .text("\n\nOnce you are sure the imp is truly transfigured you reach out to touch the statue. Your fingers are met with smooth,"
-				           +" cool stone and as you push it gently, you realise the statue is quite solid.");
+				outputText("As you look at the imp before you, " + winText + " you feel disgusted. These vermin keep trying to invade your camp and fuck you senseless " + skullText)
+				outputText("\n\nYou think back to your explorations in the high mountains, the dangers of the peaks keeping these creatures far away. Even you have been deterred by the shrill harpies with their talons and the treacherous basilisks petrification. You then smirk, a brilliant [if (corruption >= 30) malicious] idea coming to mind. Thanks to " + benoitE + " you have basilisk eyes, surely the petrification you suffered at their hands before would deter these corrupt spawn as it has you.")
+				outputText("\n\nYou blink slowly and ready yourself, grabbing the imp by the scruff of his neck. He seems confused " + winText2 + " as you align him with your gaze. As you make direct eye contact he flinches and freezes, mesmerised by your gaze. You feel a link form from the edge of your mind to the imps, like a slowly flowing waterfall, it crashing into him full force.")
+				outputText("\n\nYou remember how the basilisks used this compulsion to keep your gaze while your body slowly turned to stone, the soothing feeling and the hushed and raspy whisper swaddling you as the stone did. You start to feed your thoughts over to the imp, calming him with your words, telling him to keep looking into your eyes and to let all his worries just fade away. To embrace the feeling of being cocooned and the warmth your gaze brings from the cold he feels. You watch somewhat surprised as he shudders when he tries to look away, as if a bitter winter wind had rushed against him.")
+				outputText("\n\nYou see his eyes start to become glassy and know it is time. You blink once, the small loss of eye contact making him whine pitifully. As you meet his eyes again, a layer of marble starting to form at his feet. You let go of him and he remains in front of you, as if supported by puppet strings, and you are the stage master. The stone continues to creep up his frame, his limbs hardening into place as it does. Soon his legs are covered and his midsection follows swiftly.")
+				outputText("\n\nYou shut the link between you with a smirk, watching as his dazed expression fades. When he groggily looks down he begins to shout, trying to free himself with all his might, though with his legs completely turned and the stone rapidly rising you know he has no chance. The stone has almost formed up to his shoulders now, his arms feeling leaden as he struggles fruitlessly. You watch in fascination as the imp is consumed by the stone, his cursing fading into nothingness, while his expression of rage and terror is trapped on his face for eternity.")
+				outputText("\n\nOnce you are sure the imp is truly transfigured you reach out to touch the statue. Your fingers are met with smooth, cool stone and as you push it gently, you realise the statue is quite solid.");
 			} else {
-				output.text("You decide to teach this imp and his buddies a lesson that won't be forgotten. You grab the imp roughly, making sure you"
-				           +" have his attention as you make eye contact. The imp struggles in your grasp but as you slowly blink, your gaze now"
-				           +" fully on him, you feel him stiffen. He becomes sluggish and finds it hard to resist as your mind reaches into his. As"
-				           +" you soothe the imp with nonsense you see his will to fight begin to ebb away. Your calming speech washes over him as"
-				           +" his gaze becomes unfocused, his eyes not leaving yours out of imagined consequences.")
-				      .text("\n\nYou blink and let your gaze reach its full power, the imp making a pathetic whimper as you leave its mind silent for"
-				           +" that split second. A layer of marble starts to engulf his feet, crawling up his frame the longer he looks into those"
-				           +" glossy eyes of yours. You see the stone begin to harden as it creeps over his legs and let the link to his mind go"
-				           +" with a sudden jolt. He comes back around as the stone begins to coat his midsection, startled into a panic by the sight"
-				           +" of his now solidified lower body.")
-				      .text("\n\nNo matter how much he struggles against the stone, it won't budge, his eyes wide as he look at you. He curses and"
-				           +" rants at you before lapsing into begging, pleading with you to let him go. His pleas fall upon deaf ears of course, a"
-				           +" champion would never give perverted vermin mercy when they would never offer it back. As the stone reaches his neck you"
-				           +" simply watch, curious of what expression the statue will have when it's all over. As your gaze finishes petrifying the"
-				           +" imp you ready yourself for the [if (strength < 90) long] trip back.");
+				outputText("You decide to teach this imp and his buddies a lesson that won't be forgotten. You grab the imp roughly, making sure you have his attention as you make eye contact. The imp struggles in your grasp but as you slowly blink, your gaze now fully on him, you feel him stiffen. He becomes sluggish and finds it hard to resist as your mind reaches into his. As you soothe the imp with nonsense you see his will to fight begin to ebb away. Your calming speech washes over him as his gaze becomes unfocused, his eyes not leaving yours out of imagined consequences.")
+				outputText("\n\nYou blink and let your gaze reach its full power, the imp making a pathetic whimper as you leave its mind silent for that split second. A layer of marble starts to engulf his feet, crawling up his frame the longer he looks into those glossy eyes of yours. You see the stone begin to harden as it creeps over his legs and let the link to his mind go with a sudden jolt. He comes back around as the stone begins to coat his midsection, startled into a panic by the sight of his now solidified lower body.")
+				outputText("\n\nNo matter how much he struggles against the stone, it won't budge, his eyes wide as he look at you. He curses and rants at you before lapsing into begging, pleading with you to let him go. His pleas fall upon deaf ears of course, a champion would never give perverted vermin mercy when they would never offer it back. As the stone reaches his neck you simply watch, curious of what expression the statue will have when it's all over. As your gaze finishes petrifying the imp you ready yourself for the [if (strength < 90) long] trip back.");
 			}
 			flags[kFLAGS.IMPS_PETRIFIED]++;
 			flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 10;
@@ -2131,41 +2095,23 @@ package classes.Scenes.Monsters
 			var timeText:String = "";
 			timeText = timeToReturn > 1 ? num2Text(timeToReturn) + " hours" : "hour";
 
-			output.clear();
+			clearOutput();
 			if (flags[kFLAGS.CAMP_WALL_STATUES] <= 0) { // First time carrying it back
 				flags[kFLAGS.CAMP_WALL_STATUES] = 0; // Failsafe
 				switch (timeToReturn) {
 					case 1: // str 90+ --> 1 hour
-						output.text("You heft the statue onto your shoulder with a practised ease, as it is as light as a small wooden log for"
-						           +" you. As you spend the next hour carrying it back to camp, you feel frustrated at the land for making your"
-						           +" trip so long. You put the statue down near your camp wall as you wonder how effective it will be at keeping"
-						           +" these pests away.");
+						outputText("You heft the statue onto your shoulder with a practised ease, as it is as light as a small wooden log for you. As you spend the next hour carrying it back to camp, you feel frustrated at the land for making your trip so long. You put the statue down near your camp wall as you wonder how effective it will be at keeping these pests away.");
 						break;
-
 					case 2: // str 70-89 --> 2 hours
-						output.text("You heft the statue onto your back with a practised ease, though maneuvering with the bulky thing is harder"
-						           +" than you expected. For something so small, it sure is heavy. As you spend the next couple of hours carrying it"
-						           +" back to camp, you feel frustrated at the land for making your journey so long. You put the statue down near"
-						           +" your camp wall, stretching and rubbing at the sore spots on your back and shoulders as you wonder how"
-						           +" effective it will be at keeping these pests away.");
+						outputText("You heft the statue onto your back with a practised ease, though maneuvering with the bulky thing is harder than you expected. For something so small, it sure is heavy. As you spend the next couple of hours carrying it back to camp, you feel frustrated at the land for making your journey so long. You put the statue down near your camp wall, stretching and rubbing at the sore spots on your back and shoulders as you wonder how effective it will be at keeping these pests away.");
 						break;
-
 					case 3: // str 40-69 --> 3 hours, 10 fatigue
 					case 4: // str < 40  --> 4 hours, 20 fatigue
-						output.text("You try to lift the statue, but are simply unable to. You huff angrily as you pace around it, trying to"
-						           +" figure out how you can get it back to camp. You look through your belongings and around the area for something"
-						           +" to help you move the damned thing. After 20 minutes of searching you manage to find enough resources to make a"
-						           +" small sled that you can pull along with some rope. You position it behind the statue and kick the statue over,"
-						           +" smiling a little as you let out some of that anger. With the statue soon secured in place you begin the long"
-						           +" trek home, dragging the statue behind you. By the time you reach the camp you are exhausted, your arms and"
-						           +" legs burning in protest of the excessive labour transporting this thing took. Panting, you untie the statue"
-						           +" and drag it up to lean against the camp wall, hoping the damned thing was worth dragging here.");
+						outputText("You try to lift the statue, but are simply unable to. You huff angrily as you pace around it, trying to figure out how you can get it back to camp. You look through your belongings and around the area for something to help you move the damned thing. After 20 minutes of searching you manage to find enough resources to make a small sled that you can pull along with some rope. You position it behind the statue and kick the statue over, smiling a little as you let out some of that anger. With the statue soon secured in place you begin the long trek home, dragging the statue behind you. By the time you reach the camp you are exhausted, your arms and " + player.legs() + " burning in protest of the excessive labour transporting this thing took. Panting, you untie the statue and drag it up to lean against the camp wall, hoping the damned thing was worth dragging here.");
 					// default: // there is no default. All possible cases are handled ...
 				}
 			} else {
-				output.text("In the " + timeText + " it takes to [if (strength >= 70) carry|drag] the statue back to camp, you don't encounter"
-				           +" any further trouble, though you're sure the sight of the statue, which you now place around your wall,"
-				           +" helped with that. Maybe it'll help here too.");
+				outputText("In the " + timeText + " it takes to [if (strength >= 70) carry|drag] the statue back to camp, you don't encounter any further trouble, though you're sure the sight of the statue, which you now place around your wall, helped with that. Maybe it'll help here too.");
 			}
 			flags[kFLAGS.CAMP_WALL_STATUES]++;
 			if (flags[kFLAGS.CAMP_WALL_STATUES] == 1) {

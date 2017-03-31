@@ -36,12 +36,20 @@ public function playerMenu():void {
 
 public function gameOver(clear:Boolean = false):void { //Leaves text on screen unless clear is set to true
 	var textChoices:Number = rand(4);
+	if (silly && rand(5) == 0 && flags[kFLAGS.HARDCORE_MODE] == 0) textChoices += 4 + rand(5); //20% chance of humourous bad end texts.
 	if (clear) clearOutput();
-	outputText("\n\n<font color=\"#800000\">")
+	outputText("\n\n<font color=\"#800000\">");
+	//Standard
 	if (textChoices == 0) outputText("<b>GAME OVER</b>");
 	if (textChoices == 1) outputText("<b>Game over, man! Game over!</b>");
 	if (textChoices == 2) outputText("<b>You just got Bad-Ended!</b>");
 	if (textChoices == 3) outputText("<b>Your adventures have come to an end...</b>");
+	//Silly Mode
+	if (textChoices == 4) outputText("<b>Don't lose hope... " + player.short + "! Stay determined!</b>"); //Undertale
+	if (textChoices == 5) outputText("<b>Wasted</b>"); //Grand Theft Auto V
+	if (textChoices == 6) outputText("<b>Ya dun goofed</b>"); //One of the memes
+	if (textChoices == 7) outputText("<b>Git gud</b>");	//One of the memes
+	if (textChoices == 8) outputText("<b>Oh dear, you are bad-ended!</b>");	//Runescape
 	outputText("</font>");
 	//Delete save on hardcore.
 	if (flags[kFLAGS.HARDCORE_MODE] > 0) {

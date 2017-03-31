@@ -221,8 +221,10 @@ package classes.Scenes.Places.TelAdre
 			outputText("How shall your dick be used? Do you take charge or let him lead? And would you do it vaginally or anally?");
 			menu();
 			addButton(0, "TakeCharge(Vag)", pabloDickingTime, true, false, null, "You'll take charge and give him vaginally.", "Take Charge (Vaginal)");
+			addButtonDisabled(1, "TakeCharge(Anal)", "Unfortunately this scene has not been written yet. Y U NO write that scene, worldofdrakan?", "Take Charge (Anal)");
 			//addButton(1, "TakeCharge(Anal)", pabloDickingTime, true, true, null, "You'll take charge but do it anally.", "Take Charge (Anal)");
 			addButton(2, "PabloLeads(Vag)", pabloDickingTime, false, false, null, "You'll let Pablo lead and he'll take your dick vaginally.", "Pablo Leads (Vaginal)");
+			addButtonDisabled(3, "PabloLeads(Anal)", "Unfortunately this scene has not been written yet. Y U NO write that scene, worldofdrakan?", "Take Charge (Anal)");
 			//addButton(3, "PabloLeads(Anal)", pabloDickingTime, false, true, null, "You'll let Pablo lead and he'll ride your dick anally.", "Pablo Leads (Anal)");
 		}
 		private function pabloDickingTime(inCharge:Boolean = false, anal:Boolean = false):void {
@@ -310,8 +312,8 @@ package classes.Scenes.Places.TelAdre
 			clearOutput();
 			outputText("How shall your " + player.vaginaDescript() + " be used? Do you take charge or let him lead?");
 			menu();
-			addButton(0, "Take Charge", pabloPussPuss, true, null, null, "You'll take charge and give him vaginally.", "Take Charge");
-			addButton(1, "Pablo Leads", pabloPussPuss, false, null, null, "You'll let Pablo lead and he'll take your dick vaginally.", "Pablo Leads");
+			addButton(0, "Take Charge", pabloPussPuss, true, null, null, "You'll take charge and receive vaginally.", "Take Charge");
+			addButton(1, "Pablo Leads", pabloPussPuss, false, null, null, "You'll let Pablo lead and he'll put his dick to a good use.", "Pablo Leads");
 		}
 		private function pabloPussPuss(inCharge:Boolean = false):void {
 			clearOutput();
