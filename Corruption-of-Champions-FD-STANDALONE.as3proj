@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="CoC-STANDALONE.swf" />
+    <movie path="..\CoC_Xianxia_0.8c.swf" />
     <movie fps="24" />
     <movie width="1000" />
     <movie height="800" />
@@ -86,7 +86,7 @@
   <postBuildCommand alwaysRun="False" />
   <!-- Other project options -->
   <options>
-    <option showHiddenPaths="False" />
+    <option showHiddenPaths="True" />
     <option testMovie="Default" />
     <option testMovieCommand="" />
   </options>
