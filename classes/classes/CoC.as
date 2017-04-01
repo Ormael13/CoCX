@@ -373,8 +373,8 @@
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8b";
-			version = ver + " (<b>Metamorph (part 1), Kindra (part 0.5)</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8c";
+			version = ver + " (<b>Race rebalancing (part 2), Archery Rework (part 4), Kindra (part 1), SimCamp (part 2), Yeti Cum (yeti TF), Soul Exalt cultivation stage (Redemption Edition)</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
