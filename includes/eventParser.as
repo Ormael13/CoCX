@@ -20,6 +20,7 @@ public function playerMenu():void {
 		return;
 	}
 	combat.plotFight = false; //Clear restriction on item overlaps if not in combat
+	flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = ""; //Clear item if stuck
 	if (inDungeon) {
 		kGAMECLASS.dungeons.checkRoom();
 		return;

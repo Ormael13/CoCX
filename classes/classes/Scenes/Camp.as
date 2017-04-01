@@ -2402,6 +2402,29 @@ private function promptAscend():void {
 	outputText("\n\n<b>Proceed?</b>");
 	doYesNo(ascendForReal, campActions);
 }
+private function totalChildrenForAscension():int { //Sorted alphabetically
+	var amount:int = 0;
+	amount += flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]; //Amily
+	amount += flags[kFLAGS.BEHEMOTH_CHILDREN]; //Behemoth
+	amount += flags[kFLAGS.BENOIT_EGGS] + flags[kFLAGS.FEMOIT_EGGS_LAID]; //Benoit(e)
+	amount += flags[kFLAGS.COTTON_KID_COUNT]; //Cotton
+	amount += flags[kFLAGS.EDRYN_NUMBER_OF_KIDS]; //Edryn
+	amount += emberScene.emberChildren(); //Ember
+	amount += isabellaScene.totalIsabellaChildren(); //Isabella
+	amount += izmaScene.totalIzmaChildren(); //Izma
+	amount += joyScene.getTotalLitters(); //Jojo/Joy
+	amount += flags[kFLAGS.KELLY_KIDS]; //Kelly
+	amount += kihaFollower.totalKihaChildren(); //Kiha
+	amount += flags[kFLAGS.LOPPE_KIDS]; //Loppe
+	amount += flags[kFLAGS.LYNNETTE_BABY_COUNT]; //Lynnette
+	amount += flags[kFLAGS.MARBLE_KIDS]; //Marble
+	amount += flags[kFLAGS.MINERVA_CHILDREN]; //Minerva
+	amount += flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]; //Sheila
+	amount += sophieBimbo.sophieChildren(); //Sophie
+	amount += (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4); //Tamani
+	amount += urtaPregs.urtaKids(); //Urta
+	return amount;
+}
 private function ascendForReal():void {
 	//Check performance!
 	var performancePoints:int = 0;
@@ -2420,9 +2443,7 @@ private function ascendForReal():void {
 	if (player.findPerk(PerkLib.Enlightened) >= 0) performancePoints += 1;
 	if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0 || flags[kFLAGS.PURE_MARAE_ENDGAME] >= 2) performancePoints += 1;
 	//Children
-	var childPerformance:int = 0;
-	childPerformance += (flags[kFLAGS.MINERVA_CHILDREN] + flags[kFLAGS.BEHEMOTH_CHILDREN] + flags[kFLAGS.MARBLE_KIDS] + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + izmaScene.totalIzmaChildren() + isabellaScene.totalIsabellaChildren() + kihaFollower.totalKihaChildren() + emberScene.emberChildren() + urtaPregs.urtaKids() + sophieBimbo.sophieChildren() + (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4));
-	performancePoints += Math.sqrt(childPerformance);
+	performancePoints += Math.sqrt(totalChildrenForAscension());
 	//Sum up ascension perk points!
 	player.ascensionPerkPoints += performancePoints;
 	player.knockUpForce(); //Clear pregnancy
