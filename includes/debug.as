@@ -193,6 +193,15 @@ public function doThatTestingThang():void
 * 26 [if (player.isBiped) IS A BIPEDDDDD | not a biped. Wat?]
 * 27 \[if (player.isBipd) IS A BIPEDDDDD | not a biped. Wat?\]
 * 27 [if (player.isBipd) IS A BIPEDDDDD | not a biped. Wat?]
+* 28 \[if (player.tailType != 0)wagging your \[tail\]\]
+* 28 [if (player.tailType != 0)wagging your [tail]]
+* 29 \[if (player.tailType != 0)wagging your \[tail\]|\[butt\] in the air\]
+* 29 [if (player.tailType != 0)wagging your [tail]|[butt] in the air]
+* 30 \[if (tallness >= 100)tall|not very tall\]
+* 30 [if (tallness >= 100)tall|not very tall]
+* 31 you feel your \[if (tallness >= 120)frame|\[if (tallness >= 80)smaller frame|much smaller frame\]\] surrounded 
+* 31 you feel your [if (tallness >= 120)frame|[if (tallness >= 80)smaller frame|much smaller frame]] surrounded 
+
 
 
 
