@@ -37,7 +37,7 @@ public function playerMenu():void {
 
 public function gameOver(clear:Boolean = false):void { //Leaves text on screen unless clear is set to true
 	var textChoices:Number = rand(4);
-	if (silly && rand(5) == 0 && flags[kFLAGS.HARDCORE_MODE] == 0) textChoices += 4 + rand(5); //20% chance of humourous bad end texts.
+	if (silly && rand(5) == 0 && flags[kFLAGS.HARDCORE_MODE] == 0) textChoices = 4 + rand(5); //20% chance of humourous bad end texts.
 	if (clear) clearOutput();
 	outputText("\n\n<font color=\"#800000\">");
 	//Standard
