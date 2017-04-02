@@ -964,6 +964,7 @@ package classes.Scenes.Areas.HighMountains
 		protected function surrenderFemaleNonExhibitionVariant():void
 		{
 			clearOutput();
+			var titsOrgasm:Boolean = false;
 
 			outputText("You squirm desperately, the feeling of a dozen pairs of eyes leering at you making you feel decidedly uncomfortable.  Izumi apparently notices your distress, however, as a few seconds later you hear a thunderous crack as she reaches out to a nearby outcropping of jagged rock, snapping it off with one massive hand.\n\n");
 
@@ -1061,9 +1062,10 @@ package classes.Scenes.Areas.HighMountains
 				outputText("You open your mouth to gasp for air, Izumi’s head darts forwards and she locks her lips to yours, pulling you into a sudden french kiss.  Her tongue wraps around your own, bizarrely flexible as it invades your mouth, forcing you to surrender to her embrace.  She runs her hands over your body and you can only moan feebly into her mouth as your orgasm begins to rise within you, suffusing your entire being as you flex and strain inside Izumi’s iron grip.  You squirm and buck your hips desperately and Izumi pins you down, riding out your orgasm as she strums away at your desperate nethers, your juices splattering wetly across the cave floor.\n\n");
 
 				outputText("Izumi releases you, a trail of saliva hanging between your exhausted mouths for a moment before she gives you an indulgent pat on the behind and rises to her feet, licking suggestively at her fingers.  You shakily pull your clothes towards you and redress, while Izumi settles back down to take a long drag from her pipe, eyeing you with clear amusement as you attempt to cover yourself.  You decide to make your escape before the big woman decides to rope you into another, more strenuous round of sexual wrestling...\n\n");
+				titsOrgasm = true;
 			}
 
-			player.orgasm();
+			player.orgasm(titsOrgasm ? 'Tits' : 'Vaginal');
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);

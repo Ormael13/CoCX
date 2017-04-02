@@ -1298,6 +1298,7 @@ package classes.Scenes.NPCs
 					outputText("\n\nIn a panic, you wriggle your tit-tail, propelling yourself around the confines of your small chamber.  The door is locked, as always, but you press your tight, hard nipples against it anyhow.  Mistress has kept you pent up for so long, trapped away in this little box.  You regret everything!  You'll never doubt her again!  She was so right... nipples can feel so wonderfully, exquisitely pleasureable, but you can't take it any longer.  Every movement, every sinuous slide, they feel so good.  You can cum just from pacing about, but you know you'll just wind up a twisted, curling mass of squirming nipple-flesh, your tail half-tied in knots as it tries to rub each pair of breasts against another. You know because you've done it countless times already.");
 					outputText("\n\nA spiral of pain twists through your pleasure-wounded psyche, and you remember yourself, not the demon-enslaved naga.  Still, conjoined as your minds are, you're able to recognize that one of those many breasts used to be yours.  Ceraph has put it to good use.  The realization jars you to wakefulness, and you're forced to try and go to sleep with the knowledge that somewhere, your breasts are being used to break a naga.  Sleep does not return easily.");
 					dynStats("lus", 5 + player.lib / 5);
+					player.orgasm('Tits',false);
 				}
 				//Milk Dispenser
 				else if (subChoice == 1) {
@@ -1305,6 +1306,7 @@ package classes.Scenes.NPCs
 					outputText("\n\nSuddenly, from out of nowhere, you hear a voice in the silence, \"<i>Well, I can't thank [name] enough for these.  No shortage of milk here!</i>\"  Then, there is brightness.  The appearance of light reveals a strange, disembodied view of a demon standing next to a tank. It's Ceraph!  She holds a cup of coffee, and as she pulls a lever, creamy breast milk flows into the mocha-colored beverage, lightening it significantly. Your tits, hooked up to some kind of odd machinery, tremble and shake as fluids are fed into them by transparent cables.  The speed of the milking increases, gallons gushing from your tender teats in mere seconds.  Faster and faster the liquids flow, a veritable waterfall of lactic cream.");
 					outputText("\n\nErotic energy sizzles through your nipples as the milking goes faster and faster, the pleasure unbearable.  Sadly, just when you feel on the cusp of orgasm, the machine shuts down, and the vision fades.  There will be no relief for you tonight.");
 					dynStats("lus", 5 + player.lib / 5);
+					player.orgasm('Tits',false);
 				}
 				//Tit Volleyball
 				else {
@@ -1324,6 +1326,7 @@ package classes.Scenes.NPCs
 					if (silly()) outputText(" and what possible ramifications it has for your mental health");
 					outputText(", until you dismiss it as corruption and toss over, entering a peaceful, dreamless sleep.");
 					dynStats("lus", 5 + player.lib / 5);
+					player.orgasm('Tits',false);
 				}
 			}
 			//COCKUUUU
