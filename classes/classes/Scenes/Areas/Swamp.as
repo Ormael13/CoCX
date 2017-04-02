@@ -7,6 +7,8 @@ package classes.Scenes.Areas
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.Swamp.*;
+	import classes.Scenes.NPCs.Etna;
+	import classes.Scenes.NPCs.EtnaFollower;
 
 	use namespace kGAMECLASS;
 
@@ -16,19 +18,20 @@ package classes.Scenes.Areas
 		public var femaleSpiderMorphScene:FemaleSpiderMorphScene = new FemaleSpiderMorphScene();
 		public var maleSpiderMorphScene:MaleSpiderMorphScene = new MaleSpiderMorphScene();
 		public var rogar:Rogar = new Rogar();
+		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public function Swamp()
 		{
 		}
 		public function exploreSwamp():void
 		{
 			//Discover 'Bog' at after 25 explores of swamp
-			if ((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] >= 25) && flags[kFLAGS.BOG_EXPLORED] == 0) {
-				outputText("While exploring the swamps, you find yourself into a particularly dark, humid area of this already fetid biome.  You judge that you could find your way back here pretty easily in the future, if you wanted to.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>Bog exploration location unlocked! (Page 2)</b>)", true);
+			if ((flags[kFLAGS.TIMES_EXPLORED_SWAMP] >= 25) && flags[kFLAGS.BOG_EXPLORED] == 0) {
+				outputText("While exploring the swamps, you find yourself into a particularly dark, humid area of this already fetid biome.  You judge that you could find your way back here pretty easily in the future, if you wanted to.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>Bog exploration location unlocked!</b>)", true);
 				flags[kFLAGS.BOG_EXPLORED]++;
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272]++;
+			flags[kFLAGS.TIMES_EXPLORED_SWAMP]++;
 			/*  SPECIAL SCENE OVERWRITES */
 			//KIHA X HEL THREESOME!
 			if (!kGAMECLASS.kihaFollower.followerKiha() && player.cor < 60 && flags[kFLAGS.KIHA_AFFECTION_LEVEL] >= 1 && flags[kFLAGS.HEL_FUCKBUDDY] > 0 && player.hasCock() && flags[kFLAGS.KIHA_AND_HEL_WHOOPIE] == 0) {
@@ -40,7 +43,12 @@ package classes.Scenes.Areas
 				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}
-			if (flags[kFLAGS.TOOK_EMBER_EGG] == 0 && flags[kFLAGS.EGG_BROKEN] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] > 0 && (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] % 40 == 0)) {
+			//Etna
+			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
+				etnaScene.repeatYandereEnc();
+				return;
+			}
+			if (flags[kFLAGS.TOOK_EMBER_EGG] == 0 && flags[kFLAGS.EGG_BROKEN] == 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && (flags[kFLAGS.TIMES_EXPLORED_SWAMP] % 40 == 0)) {
 				kGAMECLASS.emberScene.findEmbersEgg();
 				return;
 			}

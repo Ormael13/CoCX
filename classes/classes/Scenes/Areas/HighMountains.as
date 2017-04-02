@@ -7,6 +7,8 @@ package classes.Scenes.Areas
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.HighMountains.*;
+	import classes.Scenes.NPCs.Etna;
+	import classes.Scenes.NPCs.EtnaFollower;
 
 	use namespace kGAMECLASS;
 
@@ -17,6 +19,9 @@ package classes.Scenes.Areas
 		public var minervaScene:MinervaScene = new MinervaScene();
 		public var minotaurMobScene:MinotaurMobScene = new MinotaurMobScene();
 		public var izumiScenes:IzumiScene = new IzumiScene();
+		public var phoenixScene:PhoenixScene = new PhoenixScene();
+		public var etnaScene:EtnaFollower = new EtnaFollower();
+		public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
 		
 		public function HighMountains()
 		{
@@ -49,10 +54,24 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Minerva
-			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] % 8 == 0 && flags[kFLAGS.MET_MINERVA] < 4) {
-				minervaScene.encounterMinerva();
+			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] % 8 == 0) {
+				if (flags[kFLAGS.MET_MINERVA] < 4)
+				{
+					minervaScene.encounterMinerva();
+					return;
+				}
+			}
+			//Etna
+			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && rand(3) == 0 && player.level >= 25) {
+				if (flags[kFLAGS.ETNA_AFFECTION] < 5) etnaScene.firstEnc();
+				else etnaScene.repeatEnc();
 				return;
 			}
+			//Temple of the Divine
+	//		if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] < 1 && rand(4) == 0) {
+	//			templeofdivine.firstvisitintro();
+	//			return;
+	//		}
 			//25% minotaur sons!
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 3 && rand(4) == 0 && player.hasVagina()) {
 				spriteSelect(44);
@@ -60,7 +79,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Harpy odds!
-			if (player.hasItem(consumables.OVIELIX)) {
+			if (player.hasItem(consumables.OVIELIX) || flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] <= 0) {
 				if (player.hasItem(consumables.OVIELIX, 2)) {
 					if (rand(4) == 0) {
 						chickenHarpy();
@@ -73,6 +92,10 @@ package classes.Scenes.Areas
 						return;
 					}
 				}
+			}
+			if (kGAMECLASS.dungeons.checkPhoenixTowerClear() && rand(4) == 0) {
+				phoenixScene.encounterPhoenix1();
+				return;
 			}
 			//10% chance to mino encounter rate if addicted
 			if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0 && rand(10) == 0) {
@@ -92,6 +115,10 @@ package classes.Scenes.Areas
 			//Generic harpy
 			if (chooser == 0) {
 				outputText("A harpy wings out of the sky and attacks!", true);
+				if (flags[kFLAGS.CODEX_ENTRY_HARPIES] <= 0) {
+					flags[kFLAGS.CODEX_ENTRY_HARPIES] = 1;
+					outputText("\n\n<b>New codex entry unlocked: Harpies!</b>")
+				}
 				startCombat(new Harpy());
 				spriteSelect(26);
 				return;

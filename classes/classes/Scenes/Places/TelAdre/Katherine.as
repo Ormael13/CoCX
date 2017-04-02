@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Places.TelAdre {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.GlobalFlags.kGAMECLASS;
 
 	public class Katherine extends TelAdreAbstractContent implements TimeAwareInterface {
 
@@ -101,7 +102,11 @@
 			CoC.saveAwareClassAdd(_breasts);
 			CoC.timeAwareClassAdd(this);
 		}
-
+		
+		//Answers the simpler question 'Is Vala at the bar right now' rather than 'can Vala have sex with you right now'
+		public function isValaAtBar():Boolean {
+			return (flags[kFLAGS.FREED_VALA] != 0 && model.time.hours >= 12 && model.time.hours <= 21); 
+		}
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
@@ -543,13 +548,21 @@
 			return model.time.hours > 8 && model.time.hours < 18 && player.hasKeyItem("Silver Kitty-Bell") >= 0;
 		}
 		
+		public function katherineSprite(naked:Boolean = false):void {
+			if (naked) {
+				spriteSelect(127);
+				return;
+			}
+			spriteSelect(128); //Currently returns this sprite.
+		}
+		
 //If player has Silver Bell key item and is at Wet Bitch when Scylla is not busy with her Addicts Anonymous group
 public function catMorphIntr():void {
 	outputText("\n\nThe cum-drinking nun Scylla is here, apparently resting up between one of her missions.  Recalling the last 'mission' you went on, your hand unthinkingly touches the silver bell you received from that strange herm cat-morph.  Scylla could probably help you find her again.");
 }
 
 public function katherineGreeting():void {
-	outputText("", true);
+	clearOutput();
 	//[If Player chooses 'Scylla' button]
 	outputText("Scylla smiles when she sees you approaching, and politely greets you.  “<i>Why, hello, " + player.short + "; it's good to see you.  Do you need something?</i>”\n\n", false);
 
@@ -593,6 +606,7 @@ public function katherineGreeting():void {
 //Seeing Katherine
 public function visitKatherine():void {
 	clearOutput();
+	katherineSprite();
 	outputText(images.showImage("katherine-visit-alley"));
 	if (flags[kFLAGS.KATHERINE_UNLOCKED] == 1) {
 		if (telAdre.katherineEmployment.initiateTraining()) return;
@@ -636,6 +650,7 @@ public function visitAtHome():void { //You go to Kath's place alone - she may or
 	clearOutput();
 	if (isAt(KLOC_KATHS_APT)) {
 		if (flags[kFLAGS.KATHERINE_URTA_AFFECTION] == 31) { //Special event that happens only once
+			katherineSprite();
 			outputText("When you open the door to Kath’s place you see Kath and Urta both sitting together on the bed.  As soon as they spot you Kath crooks her finger and scoots over, leaving a space between her and Urta.\n\n");
 			outputText("Once you’re seated Urta laughs and says, “<i>so your big plan worked.  You got us fucking, " + (flags[kFLAGS.KATHERINE_URTA_DATE] == KDATE_LOTS ? "hell you encouraged us to fuck every chance we got!  So" : "so") + " it should be no surprise that we’ve become close.</i>”\n\n");
 			outputText("“<i>Really close,</i>” says Katherine, grinding her hip up against yours.\n\n");
@@ -651,6 +666,7 @@ public function visitAtHome():void { //You go to Kath's place alone - she may or
 			if (player.hasCock() || player.hasVagina()) addButton(button++, "Spitr Kath", telAdre.katherineThreesome.spitroastKath);
 		}
 		else {
+			katherineSprite();
 			outputText("It looks like Kath heard you coming.  You find her waiting in her bedroom with a sexy smile that suggests she’s up for anything.");
 			clothes();
 			outputText("\n\nShe stands next to her bed, waiting for you to " + (playerMaster() ? "tell her what to do." : "make the first move."));
@@ -713,7 +729,7 @@ public function katherineAtUrtas():void {
 				break;
 			default:
 				outputText("house.  You step inside and find Kath sitting on the floor with ");
-				var kids:int = getGame().urtaPregs.urtaKids();
+				var kids:int = kGAMECLASS.urtaPregs.urtaKids();
 				if (kids == 1)
 					outputText("your child.  " + (flags[kFLAGS.URTA_FIRSTBORN_GENDER] == 1 ? "He" : "She") + "'s sitting in Katherine's lap, head mashed against her breasts like " + (flags[kFLAGS.URTA_FIRSTBORN_GENDER] == 1 ? "he" : "she") + " hasn't got a care in the world.\n\n");
 				else outputText((kids > 5 ? "a few of your kids" : "a pile of your children") + ".  They're lying all over Kath, playing with her ears and tail while she scratches their heads and gives them little kisses.");
@@ -745,7 +761,7 @@ private function urtaPlusKathCuddle():void {
 			outputText("yank her knot right out of me.</i>”\n\n");
 		else outputText("dig her " + catGirl("nails", "claws") + " in.</i>”\n\n");
 		outputText("Kath looks sheepish and says, “<i>Sorry, sorry, I thought it was ");
-		if (getGame().urtaPregs.urtaKids() == 1) 
+		if (kGAMECLASS.urtaPregs.urtaKids() == 1) 
 			outputText(flags[kFLAGS.URTA_FIRSTBORN_GENDER] == 1 ? "your son" : "your daughter");
 		else outputText("one of your kids");
 		outputText(",</i>” while gently stroking Urta's ears.\n\n");
@@ -818,6 +834,7 @@ public function barDescription():void {
 
 public function barApproach():void {
 	clearOutput(); 
+	katherineSprite();
 	outputText("Kath sits up as you approach, preening herself and " + clothesChoice("adjusting her blouse", "stretching to show off the bodysuit", "adjusting her dress", "adjusting the spider silk robe", "smothing out the tube top", "adjusting her cute nurse’s hat") + " as you navigate your way to her table." + (isMilky() ? "  Her hands subconsciously move to her breasts and you note the damp spots over her nipples." : "") + "\n\n");
 	outputText("When you sit down Kath asks you what you want to do and takes a sip of her drink.");
 	katherineMenu();
@@ -1372,8 +1389,8 @@ private function playerLovers():int {
 	if (flags[kFLAGS.AMILY_FOLLOWER] == 1) loverSet |= KBIT_LOVER_AMILY; //Not > 0; probably don’t want to admit having corrupt Amily follower to Katherine
 	if (flags[kFLAGS.COTTON_MET_FUCKED] >= 2) loverSet |= KBIT_LOVER_COTTON;
 	if ((flags[kFLAGS.EDRYN_NEVER_SEE_AGAIN] == 0) && (player.statusAffectv1(StatusAffects.Edryn) > 3)) loverSet |= KBIT_LOVER_EDRYN;
-	if ((flags[kFLAGS.HELIA_FOLLOWER_DISABLED] != 1) && getGame().helScene.followerHel()) loverSet |= KBIT_LOVER_HELIA;
-	if (getGame().urta.urtaFuckbuddy()) loverSet |= KBIT_LOVER_URTA;
+	if ((flags[kFLAGS.HELIA_FOLLOWER_DISABLED] != 1) && kGAMECLASS.helScene.followerHel()) loverSet |= KBIT_LOVER_HELIA;
+	if (kGAMECLASS.urta.urtaFuckbuddy()) loverSet |= KBIT_LOVER_URTA;
 	if (flags[kFLAGS.VALA_TIMES_CONSENSUAL_SEX] > 0) loverSet |= KBIT_LOVER_VALA;
 	return loverSet;
 }
@@ -1478,7 +1495,7 @@ private function talkLoversHelia():void {
 private function talkLoversUrta():void {
 	clearOutput();
 	if (flags[kFLAGS.KATHERINE_URTA_AFFECTION] == 0) { //She doesn’t know about you and Urta
-		var urtaKids:int = getGame().urtaPregs.urtaKids();
+		var urtaKids:int = kGAMECLASS.urtaPregs.urtaKids();
 		outputText("You decide to tell Katherine about Urta.  It’s amazing it hasn’t come up since they work together.  After you explain things Katherine " + (knownLovers() > 2 ? "laughs and says, “<i>You took Urta as a lover too?  You are one busy champion.  Don’t worry about it, I’m certainly not going to leave you.</i>”" : "gives you a worried look and asks what this means for the two of you.  When you tell her you have no intention of leaving she jumps into your arms and squeezes most of the air out of your lungs.") + "\n\n");
 		outputText("You tell Kath the story of how Urta met you coming into Tel’Adre that first day and how later on the two of you ‘met’ in the alley behind this bar.  Once she’s heard the story Kath says, “<i>I know how she felt.  It really hurts when you think no one wants you.</i>”");
 		if (urtaKids > 0)
@@ -1536,7 +1553,7 @@ private function talkLoversVala():void {
 		if (isAt(KLOC_KATHS_APT))
 			outputText("lies back on her bed and stares off into space for a while");
 		else
-			outputText("takes another sip of her drink and looks to see if Vala’s around somewhere" + (getGame().isValaAtBar() ? ".  Vala catches her looking and comes over to see if Kath needs another drink.  Kath, embarrassed at getting caught, orders another one" : "") );
+			outputText("takes another sip of her drink and looks to see if Vala’s around somewhere" + (isValaAtBar() ? ".  Vala catches her looking and comes over to see if Kath needs another drink.  Kath, embarrassed at getting caught, orders another one" : "") );
 		outputText(".\n\nAfter a long silence Kath says, “<i>So she’s new to town, she’s dealing with all sorts of issues and she probably doesn’t know many people here.  It’s a good thing no one took advantage of her.</i>”\n\n");
 		if (flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON] > 0) outputText("You decide it would be best not to mention " + (flags[kFLAGS.TIMES_FUCKED_VALA_IN_DUNGEON] == 1 ? "that time" : "those times") + " you took advantage of Vala, back when she was mindfucked and tied up.\n\n");
 		if (isAt(KLOC_KATHS_APT))
@@ -2001,36 +2018,40 @@ private function giveKatherineAnItem():void {
 	var pinkEgg:Boolean = player.hasItem(consumables.PINKEGG) || player.hasItem(consumables.L_PNKEG);
 	var button:int = 0;
 	menu();
-	if (hasJob && hairColor != "rich auburn" && player.hasItem(consumables.AUBURND)) addButton(button++, "Auburn Dye", giveKatDyeAuburn);
-	if (hasJob && hairColor != "jet black" && player.hasItem(consumables.BLACK_D)) addButton(button++, "Black Dye", giveKatDyeBlack);
-	if (hasJob && hairColor != "light blonde" && player.hasItem(consumables.BLOND_D)) addButton(button++, "Blonde Dye", giveKatDyeBlonde);
-	if (hasJob && hairColor != "bright blue" && player.hasItem(consumables.BLUEDYE)) addButton(button++, "Blue Dye", giveKatDyeBlue);
+	//Clothes
 	if (hasJob && !hasClothing(KBIT_CLOTHES_BODYSUIT) && player.hasItem(armors.T_BSUIT)) addButton(button++, "Bodysuit", giveKatClothesBodysuit);
+	if (hasJob && !hasClothing(KBIT_CLOTHES_B_DRESS) && player.hasItem(armors.B_DRESS)) addButton(button++, "Long Dress", giveKatClothesLongDress);
+	if (hasJob && !hasClothing(KBIT_CLOTHES_NURSECL) && player.hasItem(armors.NURSECL)) addButton(button++, "NurseClothes", giveKatClothesNurseOutfit);
+	if (hasJob && !hasClothing(KBIT_CLOTHES_SS_ROBE) && player.hasItem(armors.SS_ROBE)) addButton(button++, "Silk Robe", giveKatClothesSilkRobe);
+	if (hasJob && !hasClothing(KBIT_CLOTHES_TUBETOP) && player.hasItem(armors.TUBETOP)) addButton(button++, "Tube Top", giveKatClothesTubeTop);
+	//Transformatives
 	if (player.hasItem(consumables.BULBYPP)) addButton(button++, "BulbPepper", giveKatABulbousPepper);
 	if (player.hasItem(consumables.CANINEP)) addButton(button++, "Canine Pep", giveKatACaninePepper);
 	if (hasJob && furry && blackEgg && player.hasItem(consumables.P_S_MLK) && player.hasItem(consumables.GLDSEED)) addButton(button++, "Defur", giveKatDefurFormula);
 	if (player.hasItem(consumables.DBLPEPP)) addButton(button++, "DblPeppr", giveKatADoublePepper);
 	if (hasJob && player.hasItem(consumables.KNOTTYP)) addButton(button++, "KnotPepp", giveKatAKnottyPepper);
-	if (player.hasItem(consumables.LARGEPP)) addButton(button++, "LrgPepp", giveKatAOverlyLargePepper);
 	if (hasJob && player.hasItem(consumables.LACTAID)) addButton(button++, "Lactaid", giveKatTheGiftOFMilk);
-	if (hasJob && !hasClothing(KBIT_CLOTHES_B_DRESS) && player.hasItem(armors.B_DRESS)) addButton(button++, "Long Dress", giveKatClothesLongDress);
-	if (hasJob && !hasClothing(KBIT_CLOTHES_NURSECL) && player.hasItem(armors.NURSECL)) addButton(button++, "NurseClothes", giveKatClothesNurseOutfit);
-	if (hasJob && hairColor != "vibrant orange" && player.hasItem(consumables.ORANGDY)) addButton(button++, "Orange Dye", giveKatDyeOrange);
-	if (hasJob && hairColor != "neon pink" && player.hasItem(consumables.PINKDYE)) addButton(button++, "Pink Dye", giveKatDyePink);
+	if (player.hasItem(consumables.LARGEPP)) addButton(button++, "LrgPepp", giveKatAOverlyLargePepper);
 	if (hasJob && hasCock() && pinkEgg) addButton(button++, "Pink Egg", usePinkEggOnKath);
 	if (hasJob && player.hasItem(consumables.P_DRAFT)) addButton(button++, (hasCock() ? consumables.P_DRAFT.shortName : "Grow Cock"), useIncubiDraftOnKath);
 	if (hasJob && hasCock() && player.hasItem(consumables.PSDELIT)) addButton(button++, "P. Suc Delight", giveKatPureSuccubusDelight);
 	if (hasJob && player.hasItem(consumables.P_S_MLK)) addButton(button++, "P. Suc Milk", giveKatPureSuccubusMilk);
-	if (hasJob && hairColor != "deep purple" && player.hasItem(consumables.PURPDYE)) addButton(button++, "Purple Dye", giveKatDyePurple);
-	if (hasJob && hairColor != "flaming red" && player.hasItem(consumables.RED_DYE)) addButton(button++, "Red Dye", giveKatDyeRed);
 	if (player.hasItem(consumables.REDUCTO)) addButton(button++, "Reducto", useReductoOnKat);
 	if (hasJob && !furry && honey && player.hasItem(consumables.W_FRUIT) && player.hasItem(consumables.EXTSERM)) addButton(button++, "Refuzz", giveKatRefuzzFormula);
 	if (hasJob && hasCock() && ballSize == 1 && pinkEgg && player.hasItem(consumables.REDUCTO)) addButton(button++, "Rem Balls", useReductoAndPinkEgg);
-	if (hasJob && !hasClothing(KBIT_CLOTHES_SS_ROBE) && player.hasItem(armors.SS_ROBE)) addButton(button++, "Silk Robe", giveKatClothesSilkRobe);
-	if (hasJob && !hasClothing(KBIT_CLOTHES_TUBETOP) && player.hasItem(armors.TUBETOP)) addButton(button++, "Tube Top", giveKatClothesTubeTop);
 	if (hasJob && player.hasItem(consumables.W_FRUIT)) addButton(button++, "W. Fruit", giveKatWhiskerFruit);
+	//Dyes
+	if (hasJob && hairColor != "rich auburn" && player.hasItem(consumables.AUBURND)) addButton(button++, "Auburn Dye", giveKatDyeAuburn);
+	if (hasJob && hairColor != "jet black" && player.hasItem(consumables.BLACK_D)) addButton(button++, "Black Dye", giveKatDyeBlack);
+	if (hasJob && hairColor != "light blonde" && player.hasItem(consumables.BLOND_D)) addButton(button++, "Blonde Dye", giveKatDyeBlonde);
+	if (hasJob && hairColor != "bright blue" && player.hasItem(consumables.BLUEDYE)) addButton(button++, "Blue Dye", giveKatDyeBlue);
+	if (hasJob && hairColor != "lime green" && player.hasItem(consumables.GREEN_D)) addButton(button++, "Green Dye", giveKatDyeGreen);
+	if (hasJob && hairColor != "vibrant orange" && player.hasItem(consumables.ORANGDY)) addButton(button++, "Orange Dye", giveKatDyeOrange);
+	if (hasJob && hairColor != "neon pink" && player.hasItem(consumables.PINKDYE)) addButton(button++, "Pink Dye", giveKatDyePink);
+	if (hasJob && hairColor != "deep purple" && player.hasItem(consumables.PURPDYE)) addButton(button++, "Purple Dye", giveKatDyePurple);
+	if (hasJob && hairColor != "flaming red" && player.hasItem(consumables.RED_DYE)) addButton(button++, "Red Dye", giveKatDyeRed);
 	if (hasJob && hairColor != "snow white" && player.hasItem(consumables.WHITEDY)) addButton(button++, "White Dye", giveKatDyeWhite);
-	addButton(9, "Back", katherineMenu);
+	addButton(14, "Back", katherineMenu);
 }
 
 //Reducto
@@ -2375,7 +2396,7 @@ private function giveKatAOverlyLargePepper():void {
 	else if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 4) {
 		outputText("She looks at the pepper eagerly, then visibly reins herself in.  “<i>I'm sorry...  I really would like to eat it, but I have to be practical.  I'm nearly a foot and a half long already!  Momma didn't raise me to be a size queen, and I’m almost as long as Urta.  I mean I like Urta, I just don’t think I need a cock quite that big,</i>” she says.\n\n");
 		outputText("“<i>It is nice to know you’re thinking of me,</i>” she adds, quickly trying to make nice with you.");
-		if (getGame().urta.urtaFuckbuddy()) outputText("She did hesitate for a second... if you convince Kath to do a few other things she's unsure of she might be willing to munch on another pepper.");
+		if (kGAMECLASS.urta.urtaFuckbuddy()) outputText("She did hesitate for a second... if you convince Kath to do a few other things she's unsure of she might be willing to munch on another pepper.");
 		katherineMenu();
 	}
 	else {
@@ -3237,6 +3258,13 @@ private function giveKatDyeWhite():void {
 	giveKatDyeEnd();
 }
 
+private function giveKatDyeGreen():void {
+	giveKatDyeBegin("lime green");
+	player.consumeItem(consumables.GREEN_D);
+	outputText(".\n\nKath takes a look in the mirror and runs her fingers through her hair.  “<i>That's something unique! There are no other cat" + catGirl("-girl", "") + " with green hair in whole Tel'Adre, and it looks great with my green eyes!</i>”\n\n");
+	giveKatDyeEnd();
+}
+
 //Sex
 public function katherineSex():void {
 	clearOutput();
@@ -3256,6 +3284,7 @@ public function katherineSex():void {
 }
 
 private function katSexMenu():void {
+	katherineSprite(true);
 	var penetrate:Function = null;
 	var getPen:Function = null;
 	var helix:Function = null;
@@ -3287,16 +3316,16 @@ private function katSexMenu():void {
 		var backOpt:Function = katherineMenu;
 		if (isAt(KLOC_BAR)) { //Check to see if her partners are comfortable fucking her sober
 			if (flags[kFLAGS.KATHERINE_URTA_AFFECTION] > 10 && getGame().urta.urtaAtBar() && getGame().urta.urtaAvailableForSex()) seeUrta = katherineSeeUrta;
-			if (flags[kFLAGS.KATHERINE_VALA_AFFECTION] > 10 && getGame().isValaAtBar()) seeVala = katherineSeeVala;
+			if (flags[kFLAGS.KATHERINE_VALA_AFFECTION] > 10 && isValaAtBar()) seeVala = katherineSeeVala;
 		}
 		else if (isAt(KLOC_BAR_DRUNK)) {
 			suckle = null; //If she's drunk she wants sex, not suckling
 			if (getGame().urta.urtaAtBar() && getGame().urta.urtaAvailableForSex() && !getGame().urta.drainedByKath) seeUrta = katherineDrunkSeeUrta; //Different conversation if Kath is sloshed
-			if (getGame().isValaAtBar() && !getGame().urta.drainedByKath) seeVala = katherineSeeVala;
+			if (isValaAtBar() && !getGame().urta.drainedByKath) seeVala = katherineSeeVala;
 			backOpt = null; //Kath won't take no for an answer if she's sauced
 		}
 		else if (isAt(KLOC_BAR_URTA_REFUSED)) {
-			if (getGame().isValaAtBar()) seeVala = katherineSeeVala;
+			if (isValaAtBar()) seeVala = katherineSeeVala;
 			backOpt = null; //Kath won't take no for an answer if she's sauced
 		}
 		choices("Penetration", penetrate, "Oral", oralKatherineChoices, "Handjob", handjobbiesFurrDemCatFurries, "See Urta", seeUrta, "See Vala", seeVala,
@@ -3348,7 +3377,7 @@ private function katherineDrunkSeeUrta():void {
 
 private function katherineSeeUrta():void {
 	clearOutput();
-	if (getGame().urta.urtaDrunk()) {
+	if (kGAMECLASS.urta.urtaDrunk()) {
 		outputText("Katherine looks over at Urta’s table and sees that the captain is obviously sloshed.  She finishes off her drink and whispers, “<i>Now " + playerText() + ", I think we both know that if I go over there Urta is going to pound me into the floor.</i>”\n\n");
 		outputText("You smile and say, “<i>Only if you ask nicely.</i>”\n\n");
 		outputText("Kath stands up and offers you her hand.  “<i>I guess I’d better bring you along.  I might need help and besides, you always have some fun ideas.</i>”\n\n");
@@ -3659,7 +3688,7 @@ public function pcPenetratesKatDoubly():void {
 				simpleChoices("Squeeze", pcPenetratesKatDoublyHighCumCorrupt, "Cuddle", pcPenetratesKatDoublyNormalEnd, "", null, "", null, "", null);
 				return;
 			}
-			if (player.cor >= 75) { //First time you have to be corrupt
+			if (player.cor >= 75 || (player.findPerk(PerkLib.Pervert) >= 0 && player.cor >= 33) || player.findPerk(PerkLib.Sadist) >= 0) { //First time you have to be corrupt
 				outputText("your perverse mind comes up with a way to ‘help’ her.");
 				simpleChoices("Help", pcPenetratesKatDoublyHighCumCorrupt, "Cuddle", pcPenetratesKatDoublyNormalEnd, "", null, "", null, "", null);
 				return;
@@ -3738,7 +3767,11 @@ private function pcPenetratesKatDoublyHighCumCorrupt():void {
 
 		outputText("You smile to yourself and begin tracing your fingers seductively " + catGirl("over her silky skin", "through her soft fur") + ", telling Kath that if she keeps talking like that she’ll get an encore for sure.  She purrs in reply - you can’t tell if she’s asking for another helping or just enjoying what your fingers are doing.");
 	}
-	outputText("\n\nWhen your cocks finally go completely soft you pull out and get dressed, waiting for your bloated cum dump to recover");
+	outputText("\n\nWhen your cocks finally go completely soft you pull out and get dressed, waiting for your bloated ");
+	if (player.cor < 25) outputText("mate");
+	else if (player.cor < 75) outputText("partner");
+	else outputText("cum dump");
+	outputText(" to recover");
 	if (isAt(KLOC_LAKE)) {
 		outputText(", which takes far longer than you’d like.\n\n");
 
@@ -4284,14 +4317,14 @@ public function giveKatOralPenisWingWang():void {
 		if (player.tongueType == TONUGE_SNAKE)
 			outputText((hasBalls() ? "The hand that was so far fingering her pushes her balls to the side, as you slowly move down and down her erection.  You" : "You slowly move your tongue down and down her erection and") + " gently hum into it before going nearly all the way down to the base, Katherine's eyes opening wide.  Your long, flexible forked tongue slips out and down" + (hasBalls() ? ", sliding along the side of her left testicle" : "") + " before finding your target: the cat-girl's clitoris.  Your other hand starts to gently tease her lower lips as you slowly move it, mostly pleasing her with your throat muscles and long, flexible tongue.\n\n");
 		// [Demonic tongue]
-		else if (player.tongueType == TONUGE_DEMONIC)
+		else if (player.hasLongTongue())
 			outputText((hasBalls() ? "The hand that was so far fingering her pushes her balls to the side, as you slowly move down and down her erection.  Stopping just before the place" : "You slowly move your tongue down and down her erection.  When it reaches the spot") + " where her knot usually pops out, you decide to give the girl a treat.  Slowly, your incredibly long flexible tongue moves towards your kittenish partner's pussy, giving it a long, sloppy lick.  Katherine's hips shiver and she only barely stops herself from pushing them forward.  Rewarding that show of self-control, you move your tongue up to wrap it around the very base of her penis just as the entire length of your inhuman muscle slips from your mouth; you manage to get the tip of it down, then brush it against the cat-girl's vagina.  Katherine just stares at you wide-eyed as you slip your demonic appendage inside her pussy, effectively pleasing nearly all of her lower's body erogenous zones at once.\n\n");
 		//([Normal tongue]
 		else outputText("Your hand remains in her pussy, however, adding to the multiple ways with which you please your lover.\n\n");
 
 		outputText("After a while of slurping on her cock and ");
 		if (player.tongueType == TONUGE_SNAKE) outputText("molesting her clit with your tongue");
-		else if (player.tongueType == TONUGE_DEMONIC) outputText("penetrating her with your tongue as you give her head");
+		else if (player.hasLongTongue()) outputText("penetrating her with your tongue as you give her head");
 		else outputText("fingering her");
 		if (!hasBalls())
 			outputText(", you pull away for a moment and");
@@ -4303,7 +4336,7 @@ public function giveKatOralPenisWingWang():void {
 				outputText("You attend to the cat-girl's member while teasing the insides of her pussy with your inhuman tongue, all the while slurping on her testicles.  Katherine has a look of bliss on her face - you think it may be too cruel not to push her to orgasm a bit more quickly than planned.\n\n");
 			}
 			//[Demon Tongue]
-			else if (player.tongueType == TONUGE_DEMONIC) {
+			else if (player.hasLongTongue()) {
 				outputText("You can feel Katherine shiver with helpless desire once she feels your excessively long tongue sliding over her balls.  You slide it upwards, teasing the knot area of her member, and then back down, oozing it over the poor kitten's clitoris and completely smothering it with your tongue.  Finally, you slip it inside as Katherine releases a loud scream of pleasure, then bites her own hand to silence herself.\n\n");
 
 				outputText("You attend to the cat-girl's member while teasing the insides of her pussy with your inhuman tongue, all the while slurping on her testicles.  Katherine has a look of bliss on her face - you think it may be too cruel not to push her to orgasm a bit more quickly than planned.\n\n");
@@ -4344,8 +4377,8 @@ public function giveKatOralPenisWingWang():void {
 			outputText("  Slowly, you pull her cock out of your mouth while Katherine smiles at you and purrs gratefully.");
 		}
 		//(Demon tongue)
-		else if (player.tongueType == TONUGE_DEMONIC) {
-			outputText("You separate the place where the knot should appear with your own fingers and dive down her shaft.  You're going to pleasure most of her anyway, as you repeat your trick, wrapping your demonic appendage around the base of her cock with your other hand as your long tongue slides out to lick and play with her " + (hasBalls() ? "balls.  Sliding it along her testicles" : "clit.  That") + " seems to start igniting her orgasm - the bulge of her knot gets bigger, although it looks like you have a few moments.  You slide down further, " + (hasBalls() ? "rolling her balls and then lifting them to push" : "pushing") + " the tip of your tongue inside her pussy.  You can taste her feminine juices dripping out as her vagina starts to clench, her inner walls twitching and her knot bulging to full size");
+		else if (player.hasLongTongue()) {
+			outputText("You separate the place where the knot should appear with your own fingers and dive down her shaft.  You're going to pleasure most of her anyway, as you repeat your trick, wrapping your " + (player.tongueType == TONUGE_DEMONIC ? "demonic" : "unhumanly long") + " appendage around the base of her cock with your other hand as your long tongue slides out to lick and play with her " + (hasBalls() ? "balls.  Sliding it along her testicles" : "clit.  That") + " seems to start igniting her orgasm - the bulge of her knot gets bigger, although it looks like you have a few moments.  You slide down further, " + (hasBalls() ? "rolling her balls and then lifting them to push" : "pushing") + " the tip of your tongue inside her pussy.  You can taste her feminine juices dripping out as her vagina starts to clench, her inner walls twitching and her knot bulging to full size");
 			//([If 6 inches knot]
 			if (knotSize >= 6) outputText(", even making it hard for you to keep your tongue buried all the way inside");
 			outputText(".\n\n");
@@ -4372,20 +4405,20 @@ public function giveKatOralPenisWingWang():void {
 		outputText("Seeing one of her cocks bob and twitch as your face gets closer you decide to reward the eagerness and start with it.  You open your lips and lick the tip before slowly sliding down her crown and then lower, onto the shaft and down to the base.  Then, you pull your lips up, assaulting her with your tongue all along the way.  Her " + cockType() + " cock leaves your mouth with a loud slurp and you quickly go down the other one.  Katherine strokes your " + hairDescript() + ", very gently helping push you down her shaft.\n\n");
 
 		outputText("Her hands are actually in the way of what you have planned; with a glare you quickly tell her to let you do it your way.  Katherine mewls apologetically as you grab her erections with both hands and rub them up, down, and together, licking the touching tips with your tongue.");
-		if (player.tongueType == TONUGE_SNAKE || player.tongueType == TONUGE_DEMONIC) outputText("  Said tongue wraps around one erection and then the other, stroking gently with its long, flexible length.");
+		if (player.tongueType == TONUGE_SNAKE || player.hasLongTongue()) outputText("  Said tongue wraps around one erection and then the other, stroking gently with its long, flexible length.");
 		outputText("\n\n");
 
 		outputText("Next you move down from her erections, ");
 		if (hasBalls()) {
 			outputText("giving her balls a teasing lick before sucking one of them inside your mouth.");
-			if (player.tongueType == TONUGE_SNAKE || player.tongueType == TONUGE_DEMONIC) outputText("  Your long, flexible tongue once again slides out as you gently lift her testes up, easily dipping inside her wet pussy and stroking her inner walls as you suck.");
+			if (player.tongueType == TONUGE_SNAKE || player.hasLongTongue()) outputText("  Your long, flexible tongue once again slides out as you gently lift her testes up, easily dipping inside her wet pussy and stroking her inner walls as you suck.");
 			outputText("  You continue to minister to her balls, wrapping your fingers around her straining cocks, jerking them off slowly before nudging the balls up and diving into her wet pussy.\n\nYour");
 		}
 		else outputText("your");
 		outputText(" work here starts with soft kisses on her lower lips, and then slowly moves up to her clit.  Katherine's thighs gently bend as her feet rest on your shoulders, egging you on to give more attention to her drenched pussy.  You humor her, tongue sliding inside her as you suck on her clit while slowly jerking off both of her erections.  Her feminine juices start flowing even more freely - you find yourself suffused with almost as much taste as sound from her soft panting and moaning.\n\n");
 
 		//([Demon tongue]
-		if (player.tongueType == TONUGE_DEMONIC) outputText("The opportunity for some extra service doesn't escape you; you suck her clit in with your lips as the long, prehensile organ you house in your mouth slides up against " + (hasBalls() ? "her balls, rolling them and assaulting " : "") + "the base of one of her erections, slowly wrapping around it.  After getting a good tongue-grip on it, you slither further around and past it to do the same to her other cock.  Then, slowly, you start to stroke the twin canine penises with the wet muscle, causing Katherine to shake with helpless pleasure.  Continuing to suck on her clit meanwhile, your large flexible tongue also gives her twin penises a dream jerk-off.\n\n");
+		if (player.hasLongTongue()) outputText("The opportunity for some extra service doesn't escape you; you suck her clit in with your lips as the long, prehensile organ you house in your mouth slides up against " + (hasBalls() ? "her balls, rolling them and assaulting " : "") + "the base of one of her erections, slowly wrapping around it.  After getting a good tongue-grip on it, you slither further around and past it to do the same to her other cock.  Then, slowly, you start to stroke the twin canine penises with the wet muscle, causing Katherine to shake with helpless pleasure.  Continuing to suck on her clit meanwhile, your large flexible tongue also gives her twin penises a dream jerk-off.\n\n");
 
 		outputText("Slowly, you draw away from her, admiring your handiwork.  Katherine's erections are leaking pre-cum generously, while her pussy is drenching her seat and trickling copious fluid onto " + (hasBalls() ? "the underside of her balls.  Her thighs" : "her thighs.  Those") + " are gently shaking and her stare lacks focus.\n\n");
 
@@ -4396,7 +4429,7 @@ public function giveKatOralPenisWingWang():void {
 		outputText("She pants and whimpers at the lost stimulation, hands barely restrained from grabbing the reins herself and capping your efforts.  “<i>P... please!  I'm almost there!</i>”  Not willing to make her suffer, you decide to finish the job and make your kitten cum.\n\n");
 
 		//([Normal/Naga Tongue]
-		if (player.tongueType != TONUGE_DEMONIC) {
+		if (!player.hasLongTongue()) {
 			outputText("You wrap both your hands around her members just above the knot and start stroking her off, aiming them both at your mouth as you lick the tips.  Her knots swell to full size as she starts panting.");
 			//([If the character has a naga lower body or a demon tail]
 			if (player.isNaga() || player.tailType == TAIL_TYPE_DEMONIC) outputText("  Wanting to grant her maximum stimulation and complete release, you slip the tip of your tail inside the cat-girl, feeling her pussy gratefully squeeze it.");
@@ -4415,7 +4448,7 @@ public function giveKatOralPenisWingWang():void {
 	// All scenes (both single and double cock) end here
 	outputText("\n\nThe deed done, you straighten your back and wink at the cat-girl.  Katherine purrs as she jumps down next to you and pulls you in for a kiss.\n\n");
 	outputText("“<i>You were amazing!</i>” she exclaims, still short on breath.  ");
-	if (player.tongueType == TONUGE_DEMONIC) outputText("She runs her fingers along your lips.  “<i>I think I might be falling in love with the monster inside that pretty cave.</i>”\n\n");
+	if (player.hasLongTongue()) outputText("She runs her fingers along your lips.  “<i>I think I might be falling in love with the monster inside that pretty cave.</i>”\n\n");
 	else outputText("“<i>I hope that if I ever get to repay the favor, I can do as well as you.</i>”\n\n");
 
 	outputText("She kisses you again, her hands running down your back.  You worry that if this keeps going you may end up going another round immediately; separating yourself from the cat-herm with a kiss, " + (isAt(KLOC_DESERT) ? "you pack up the supplies and prepare for the trip back to Tel’Adre." : "you go your separate ways."));
@@ -4463,10 +4496,8 @@ public function giveKatOralPussyLicking():void { //This version assumes Kath has
 
 	outputText("She mewls again, clearly doing her best to resist and prolong the pleasure.  You decide it's time to get somewhat more serious.\n\n");
 
-	if (player.tongueType == TONUGE_SNAKE)
-		outputText("You finally make full use of your long, flexible forked tongue.  You tighten the abnormal muscles given to you by your transformation and slip it all the way in, the forked tip bumping against the back of her vagina even as the base of your tongue undulates against the underside of her clit.\n\n");
-	else if (player.tongueType == TONUGE_DEMONIC)
-		outputText("You finally make full use of your long and flexible demonic tongue.  You tighten the abnormal muscles given to you by your transformation and slip it all the way in, the tip bumping against the back of her vagina even as the base of your tongue undulates against the underside of her clit.\n\n");
+	if (player.tongueType == TONUGE_SNAKE || player.hasLongTongue())
+		outputText("You finally make full use of your long, flexible tongue.  You tighten the abnormal muscles given to you by your transformation and slip it all the way in, the forked tip bumping against the back of her vagina even as the base of your tongue undulates against the underside of her clit.\n\n");
 	else outputText("You press your tongue against the underside of her clit and rock it from side to side, your tastebuds dragging against her most sensitive flesh.\n\n");
 
 	outputText("After molesting her clit with your tongue you pull away for a moment and announce that the cat-girl is very welcome to cum soon, as you're happy to do this to her again and again.\n\n");
@@ -4479,7 +4510,7 @@ public function giveKatOralPussyLicking():void { //This version assumes Kath has
 
 	outputText("\n\nThe deed done, you straighten your back and wink at the cat-girl.  Katherine purrs as she jumps down next to you and pulls you in for a kiss.\n\n");
 	outputText("“<i>You were amazing!</i>” she exclaims, still short on breath.  ");
-	if (player.tongueType == TONUGE_DEMONIC) outputText("She runs her fingers along your lips.  “<i>I think I might be falling in love with the monster inside that pretty cave.</i>”\n\n");
+	if (player.hasLongTongue()) outputText("She runs her fingers along your lips.  “<i>I think I might be falling in love with the monster inside that pretty cave.</i>”\n\n");
 	else outputText("“<i>I hope that if I ever get to repay the favor, I can do as well as you.</i>”\n\n");
 
 	outputText("She kisses you again, her hands running down your back.  You worry that if this keeps going you may end up going another round immediately; separating yourself from the cat-herm with a kiss, " + (isAt(KLOC_DESERT) ? "you pack up the supplies and prepare for the trip back to Tel’Adre." : "you go your separate ways."));
@@ -4678,7 +4709,7 @@ private function katDoubleHelixCraziness():void {
 	outputText("You simply lie back and enjoy her attentions; while pleasurable, they aren't as sexual as her previous efforts, and you find the experience more soothing than arousing. It takes a while, but finally with one last lick on ");
 	if(player.isNaga() || player.tailType == TAIL_TYPE_DEMONIC) outputText("the tip of your tail");
 	else outputText("your " + buttDescript());
-	outputText(", she finishes.  Katherine grins and happily declares, “<i>There you go, you're clean now!" + (hasAlready(KBIT_TRIED_DOUBLE_HELIX) ? "" : "Sorry for breaking my promise and knotting you.") + "</i>”\n\n");
+	outputText(", she finishes.  Katherine grins and happily declares, “<i>There you go, you're clean now!" + (hasAlready(KBIT_TRIED_DOUBLE_HELIX) ? "" : " Sorry for breaking my promise and knotting you.") + "</i>”\n\n");
 
 	outputText("Sitting up, you can't resist reaching over and ruffling her ears in a way that the cats you've met always liked, telling her that if this is how she'll apologize for " + (hasAlready(KBIT_TRIED_DOUBLE_HELIX) ? "knotting you, you don't mind her doing so again and again" : "it, you don't mind her doing so again") + ".\n\n");
 
@@ -4769,6 +4800,7 @@ private function suckleFromKath():void {
 		else {
 			outputText("coaxing them to relax and release their thick, creamy treasure.  You keep drinking and drinking, trying to enjoy every drop Katherine can produce.");
 		}
+		if (breasts.lactationLevel >= BreastStore.LACTATION_LIGHT) player.refillHunger(breasts.lactationLevel * 15);
 		outputText("\n\nFor her part Kath just purrs and enjoys your ministrations, oblivious to the world around her.\n\n");
 	}
 	else if (player.cor < 75) {
@@ -4784,6 +4816,7 @@ private function suckleFromKath():void {
 		else {
 			outputText(" and suck vigorously, keen to draw out every bit of her creamy goodness.  Katherine's heavy teats give you all you desire and you use your tongue to show your appreciation.");
 		}
+		if (breasts.lactationLevel >= BreastStore.LACTATION_LIGHT) player.refillHunger(breasts.lactationLevel * 15);
 		outputText("\n\nFor her part Kath just lets out little 'Oh's and 'Ah's when you're less gentle.  She's definitely enjoying herself and seems oblivious to the world around her.\n\n");
 	}
 	else {
@@ -4808,6 +4841,7 @@ private function suckleFromKath():void {
 			outputText("You cup her breasts and give them a squeeze to get things moving.  A few drops of kitty cream appear on the tips of her nipples which you lick off with your tongue.  Katherine sighs contentedly, so you give her nipples a good hard pinch to remind her who she's dealing with.  She lets out a cute little mewl and you latch onto her " + (rand(2) == 0 ? "left" : "right") + " nipple, ready to begin your feast in earnest.\n\n");
 			outputText("You kneed her " + breasts.adj() + " mammaries to force the creamy goodness into your mouth and Kath's succulent nipples do not disappoint.");
 		}
+		if (breasts.lactationLevel >= BreastStore.LACTATION_LIGHT) player.refillHunger(breasts.lactationLevel * 15);
 		outputText("\n\nKath squirms and mewls plaintively, but you won't slow down.  She needs to learn her place and besides, you know that feelings of pain and pleasure are intertwined.  After a while Kath relaxes and the tone of her mewls shifts down an octave.  You submissive kitten is finally enjoying herself, so you nibble on her teat to show your approval.\n\n");
 	}
 	var wasntLactating:Boolean = breasts.lactationLevel == BreastStore.LACTATION_NONE;
@@ -5683,7 +5717,7 @@ private function bathTimePenetrated():void {
 
 		outputText("With your hand in the way her cock can go no deeper.  You try to make it up to her by flexing your muscles, gently milking her " + cockAdj() + "erection.  Katherine throws her head back and starts to beg.  “<i>Oh please " + playerText() + "!  Please let me go, let me fuck you.  I need to go deeper.</i>”  Her cock" + cockMultiple(" is", "s are") + " throbbing and leaking globs of warm pre into your cunt" + cockMultiple(".", " and the stream."));
 		
-		if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 4 && (player.cor >= 75 || doneSubmissive(KBIT_SUB_ORGASM_DENIAL))) {
+		if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 4 && (player.cor >= 75 || (player.findPerk(PerkLib.Pervert) >= 0 && player.cor >= 33) || player.findPerk(PerkLib.Sadist) >= 0 || doneSubmissive(KBIT_SUB_ORGASM_DENIAL))) {
 			outputText("\n\nYou lick your lips.  Your poor little slut is so horny she can’t even move.  She’s so close to cumming, but she can’t make it there on her own.  You could hold her like this for hours and probably drive her out of her mind.  Or you could pull away and give her a nasty case of blue balls.");
 			simpleChoices("Let Her Cum", bathTimePenetratedNormalEnd, "Denial", bathTimePenetratedDenial, "", null, "", null, "", null);
 		}
@@ -6032,7 +6066,7 @@ private function drunkFuck():void {
 
 			outputText("She looks back, perhaps wondering if you’re about to tell her you were just kidding.  Instead you explain, “<i>Give them a show, strip like you’re doing this for money.</i>”\n\n");
 
-			outputText("Kath gulps but turns back to the crowd and " + clothesChoice("starts unbuttoning her blouse slowly", "starts unlacing her bodysuit", "starts unlacing her long dress", "starts untying the knot of her robe", "starts running her fingers under the bottom edge of her tube top", "pulls the front of her nurse’s top open again") + ".  The crowd loves it and Kath, perhaps feeling a little bold thanks to the booze still in her system, starts to get into it and starts to sway back and forth, her cat-like flexibility allowing her hips to move through a hypnotic pattern that silences the crowd." + (getGame().isValaAtBar() ? "  You even see a certain faerie waitress paused mid-flight with a tray of drinks.  You see her eyes following every move that Kath’s hips make." : ""));
+			outputText("Kath gulps but turns back to the crowd and " + clothesChoice("starts unbuttoning her blouse slowly", "starts unlacing her bodysuit", "starts unlacing her long dress", "starts untying the knot of her robe", "starts running her fingers under the bottom edge of her tube top", "pulls the front of her nurse’s top open again") + ".  The crowd loves it and Kath, perhaps feeling a little bold thanks to the booze still in her system, starts to get into it and starts to sway back and forth, her cat-like flexibility allowing her hips to move through a hypnotic pattern that silences the crowd." + (isValaAtBar() ? "  You even see a certain faerie waitress paused mid-flight with a tray of drinks.  You see her eyes following every move that Kath’s hips make." : ""));
 
 			outputText("\n\nYou have to smile watching Katherine dancing in front of all these people.  This is something she would never have done before you met her.  As her hips gyrate Kath " + clothesChoice("pulls off her blouse and starts to play with her breasts.  After a few cheers and cries of “<i>More!</i>” she removes the bra as well", "pulls her shoulders out of the unlaced top of her bodysuit.  Without missing a beat she gets her arms free and pushes the silky fabric down until the bodysuit covers only her legs, ass and belly", "finishes unlacing the dress and pulls her arms free, letting the top of the dress fall away.  She starts to play with her breasts and after a few cheers and cries of “<i>More!</i>” she removes the bra as well", "undoes the knot and opens the front of her robe, giving the audience a lovely view of her bra and panties", "pulls the tube top over her head and starts to play with her breasts.  After a few cheers and cries of “<i>More!</i>” she removes the bra as well", "slips out of the nurse’s top and starts to play with her breasts.  After a few cheers and cries of “<i>More!</i>” she removes the bra as well") + ".\n\n");
 
@@ -6041,7 +6075,7 @@ private function drunkFuck():void {
 			outputText("With Katherine nude and distracted you sneak up behind her and grab " + cockMultiple("her cock with both hands", "both her cocks") + ".  She lets out a surprised meow as you fondle her member" + (hasBalls() ? ", her balls" : "") + " and her dripping pussy.\n\n");
 
 			outputText("The crowd starts to cheer as you smear Kath’s cock" + cockMultiple("", "s") + " with her own pussy juice.");
-			if (getGame().isValaAtBar())
+			if (isValaAtBar())
 				outputText("   You notice Vala has put down her tray.  One of her hands is under her skirt and she has a zoned out happy look on her face as she watches you molest your " + catGirl("cat girl.", "feline lover."));
 			outputText("  Katherine starts playing with her own breasts and grins at her audience" + (breasts.lactating() ? ".  Every time she gives them a little squeeze some cream leaks out and dribbles down her front.  She" : ".  Then she") + " closes her eyes and leans back against you, losing herself in the feeling of her fingers and yours as they pleasure the most sensitive areas of her body.\n\n");
 
@@ -6049,7 +6083,7 @@ private function drunkFuck():void {
 
 			outputText("You’re sure everyone in the bar appreciated that show but you don’t intend to leave a naked and near comatose Katherine in their hands.  You step out of the room and tell Kath you’ll see her later.  She makes a happy gurgling noise that you assume was an “<i>Okay!</i>” and then you close the door, making sure to slam it so the locking bar drops down on the inside.\n\n");
 
-			outputText("You stride out of the bar" + (getGame().isValaAtBar() ? ", pausing only to pull Vala into your arms to quickly kiss her and grope her ass. She sighs, winks and tells you to come back later. You" : " and") + " head for home, knowing you’ve " + (doneSubmissive(KBIT_SUB_PUBLIC_EXHIBITION) ? "once again helped Kath see how much fun showing off can be." : "opened Kath up to some new possibilities."));
+			outputText("You stride out of the bar" + (isValaAtBar() ? ", pausing only to pull Vala into your arms to quickly kiss her and grope her ass. She sighs, winks and tells you to come back later. You" : " and") + " head for home, knowing you’ve " + (doneSubmissive(KBIT_SUB_PUBLIC_EXHIBITION) ? "once again helped Kath see how much fun showing off can be." : "opened Kath up to some new possibilities."));
 			addSubmissive(KBIT_SUB_PUBLIC_EXHIBITION);
 		}
 	}

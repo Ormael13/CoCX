@@ -2,9 +2,14 @@ package classes.Scenes.Dungeons.Factory
 {
 	import classes.*;
 	import classes.Scenes.Monsters.AbstractSuccubus;
+	import classes.Scenes.Dungeons.Factory;
 	import classes.internals.*;
+	import classes.GlobalFlags.kFLAGS;
 
-	public class SecretarialSuccubus extends AbstractSuccubus {
+	public class SecretarialSuccubus extends AbstractSuccubus 
+	{
+		public var factory:Factory = new Factory()
+		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (player.gender > 0) {
@@ -13,16 +18,18 @@ package classes.Scenes.Dungeons.Factory
 				if (hpVictory) {
 					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  Now would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you rape her?", true);
 					game.dynStats("lus", 1);
-					game.simpleChoices("Yes", game.succubusVictoryRape, "Dildo Rape", dildo, "", null, "", null, "No", game.cleanupAfterCombat);
-				} else if (player.lust >= 33){
+					game.simpleChoices("Yes", factory.doRapeSuccubus, "", null, "", null, "", null, "No", factory.doLeaveSuccubus);
+					if (player.hasKeyItem("Deluxe Dildo") >= 0) game.addButton(1, "Dildo Rape", factory.dildoSuccubus);
+				} else if (player.lust>=33){
 					outputText("You smile in satisfaction as the " + short + " gives up on fighting you and starts masturbating, begging for you to fuck her.  Now would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you fuck her?", true);
 					game.dynStats("lus", 1);
-					game.simpleChoices("Yes", game.succubusVictoryRape, "Dildo Rape", dildo, "", null, "", null, "No", game.cleanupAfterCombat);
+					game.simpleChoices("Yes", factory.doRapeSuccubus, "", null, "", null, "", null, "No", factory.doLeaveSuccubus);
+					if (player.hasKeyItem("Deluxe Dildo") >= 0) game.addButton(1, "Dildo Rape", factory.dildoSuccubus);
 				} else {
-					game.finishCombat();
+					doNext(factory.doLeaveSuccubus);
 				}
 			} else {
-				game.finishCombat();
+				doNext(factory.doLeaveSuccubus);
 			}
 		}
 
@@ -32,7 +39,7 @@ package classes.Scenes.Dungeons.Factory
 				outputText("\n\nYour foe doesn't seem to care...");
 				doNext(game.endLustLoss);
 			} else {
-				game.succubusLossRape();
+				doNext(factory.doLossSuccubus);
 			}
 		}
 
@@ -54,21 +61,22 @@ package classes.Scenes.Dungeons.Factory
 			this.skinTone = "blue";
 			this.hairColor = "blond";
 			this.hairLength = 13;
-			initStrTouSpeInte(50, 40, 75, 35);
+			initStrTouSpeInte(60, 50, 85, 35);
 			initLibSensCor(80, 70, 80);
 			this.weaponName = "claws";
 			this.weaponVerb="slap";
-			this.weaponAttack = 10;
+			this.weaponAttack = 12 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
-			this.armorDef = 4;
-			this.bonusHP = 100;
+			this.armorDef = 6 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusHP = 200;
+			this.bonusLust = 40;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 7;
-			this.gems = rand(25)+10;
-			this.additionalXP = 50;
+			this.level = 12;
+			this.gems = rand(25) + 20;
+			this.additionalXP = 75;
 			this.drop = new WeightedDrop(consumables.LACTAID, 1);
 			this.wingType = WING_TYPE_BAT_LIKE_TINY;
 			this.wingDesc = "tiny hidden";
@@ -76,6 +84,13 @@ package classes.Scenes.Dungeons.Factory
 			this.special1 = kissAttack;
 			this.special2 = seduceAttack;
 			this.special3 = whipAttack;
+			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
+			this.str += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 1240;
 			checkMonster();
 		}
 

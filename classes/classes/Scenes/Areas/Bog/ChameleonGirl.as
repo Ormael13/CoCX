@@ -1,6 +1,7 @@
 package classes.Scenes.Areas.Bog
 {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class ChameleonGirl extends Monster
 	{
@@ -26,13 +27,14 @@ package classes.Scenes.Areas.Bog
 				outputText(capitalA + short + " completely misses you with a blind claw-attack!\n", false);
 			}
 			//Evade:
-			else if (game.combatMiss() || game.combatEvade() || game.combatFlexibility() || game.combatMisdirect()) outputText("The chameleon girl's claws slash towards you, but you lean away from them and they fly by in a harmless blur.");
+			else if (player.getEvasionRoll()) outputText("The chameleon girl's claws slash towards you, but you lean away from them and they fly by in a harmless blur.");
 			//Get hit
 			else {
 				var damage:Number = int((str + weaponAttack) - rand(player.tou));
 				if (damage > 0) {
-					damage = player.takeDamage(damage);
-					outputText("The chameleon swings her arm at you, catching you with her claws.  You wince as they scratch your skin, leaving thin cuts in their wake. (" + damage + ")");
+					
+					outputText("The chameleon swings her arm at you, catching you with her claws.  You wince as they scratch your skin, leaving thin cuts in their wake. ");
+					damage = player.takeDamage(damage, true);
 				}
 				else outputText("The chameleon swings her arm at you, catching you with her claws.  You defend against the razor sharp attack.");
 			}
@@ -47,18 +49,19 @@ package classes.Scenes.Areas.Bog
 				outputText(capitalA + short + " completely misses you with a blind roll-kick!\n", false);
 			}
 			//Evade:
-			else if (game.combatMiss() || game.combatEvade() || game.combatFlexibility() || game.combatMisdirect()) {
+			else if (player.getEvasionRoll()) {
 				var damage2:Number = 1 + rand(10);
-				damage2 = game.doDamage(damage2);
-				outputText("The chameleon girl leaps in your direction, rolls, and kicks at you.  You sidestep her flying charge and give her a push from below to ensure she lands face-first in the bog. (" + damage2 + ")");
-
+				outputText("The chameleon girl leaps in your direction, rolls, and kicks at you.  You sidestep her flying charge and give her a push from below to ensure she lands face-first in the bog. ");
+				damage2 = game.doDamage(damage2, true);
+				outputText("<b>(<font color=\"#800000\">" + damage2 + "</font>)</b>");
 			}
 			//Get hit
 			else {
 				var damage:Number = int((str + weaponAttack) - rand(player.tou) - player.armorDef) + 25;
 				if (damage > 0) {
-					damage = player.takeDamage(damage);
-					outputText("The chameleon leaps in your direction, rolls, and kicks you square in the shoulder as she ascends, sending you reeling.  You grunt in pain as a set of sharp claws rake across your chest. (" + damage + ")");
+					
+					outputText("The chameleon leaps in your direction, rolls, and kicks you square in the shoulder as she ascends, sending you reeling.  You grunt in pain as a set of sharp claws rake across your chest. ");
+					damage = player.takeDamage(damage, true);
 				}
 				else outputText("The chameleon rolls in your direction and kicks up at your chest, but you knock her aside without taking any damage..");
 			}
@@ -101,7 +104,7 @@ package classes.Scenes.Areas.Bog
 			if (damage <= 0) {
 				outputText("The Chameleon Girl lashes out with her tongue, but you deflect the sticky projectile off your arm, successfully defending against it.  She doesn't look happy about it when she slurps the muscle back into her mouth.");
 			} else {
-				outputText("The chameleon whips her head forward and sends her tongue flying at you.  It catches you in the gut, the incredible force behind it staggering you.  The pink blur flies back into her mouth as quickly as it came at you, and she laughs mockingly as you recover your footing. (" + damage + ")");
+				outputText("The chameleon whips her head forward and sends her tongue flying at you.  It catches you in the gut, the incredible force behind it staggering you.  The pink blur flies back into her mouth as quickly as it came at you, and she laughs mockingly as you recover your footing. <b>(<font color=\"#000080\">" + damage + "</font>)</b>");
 			}
 		}
 
@@ -138,20 +141,27 @@ package classes.Scenes.Areas.Bog
 			this.skinAdj = skinToneAdj[1];
 			this.hairColor = "black";
 			this.hairLength = 15;
-			initStrTouSpeInte(65, 65, 95, 85);
-			initLibSensCor(50, 45, 50);
+			initStrTouSpeInte(120, 120, 105, 95);
+			initLibSensCor(60, 45, 50);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 30;
+			this.weaponAttack = 40 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "skin";
-			this.armorDef = 20;
+			this.armorDef = 30 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = 350;
+			this.bonusLust = 10;
 			this.lust = 30;
 			this.lustVuln = .25;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 14;
-			this.gems = 10 + rand(50);
+			this.level = 28;
+			this.gems = 50 + rand(60);
 			this.drop = NO_DROP;
+			this.str += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 31 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 28 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 4470;
 			checkMonster();
 		}
 

@@ -19,7 +19,7 @@ package classes.Scenes.Areas.HighMountains
 //*If genderless, rape options are Finger Her*
 		public function harpyVictoryuuuuu():void
 		{
-			outputText("", true);
+			clearOutput();
 			//(Enemy defeated by damage) 
 			if (monster.HP < 1) outputText("The harpy screams out in one last, pained cry before her wings give way, the feathered woman collapsing into a weary heap.", true);
 			//(Enemy defeated by lust)
@@ -29,27 +29,22 @@ package classes.Scenes.Areas.HighMountains
 				cleanupAfterCombat();
 				return;
 			}
-			var eggs:Function =null;
-			if (player.canOvipositSpider() && (player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS)) eggs = spoidahsLegEggsInHarpeis;
-			var anal:Function =null;
-			var pussy:Function =null;
-			var scissor:Function =null;
-			var clitFuck:Function =null;
-
-			if (player.hasVagina() && player.clitLength >= 3.5) clitFuck = clitFuckAHarpy;
-			if (player.hasVagina()) {
-				if (player.isNaga()) outputText("  If you weren't a naga, you could scissor her.");
-				else scissor = harpyScissorSurprise;
-			}
-			if (player.cockThatFits(monster.vaginalCapacity()) >= 0) pussy = victoryHarpyGetsHerPussyRaped;
-			if (player.cockThatFits(monster.analCapacity()) >= 0) anal = winAndRapeHarpyAnally;
-
 			//Rape options
-			if (player.lust >= 33) {
+			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  What do you do to her?", false);
-
-				choices("Anal", anal, "Oral", WinOnHarpyAndOralRape, "Pussy", pussy, "Scissor", scissor, "Lay Eggs", eggs,
-					"Clit Fuck", clitFuck, "", null, "", null, "", null, "Nothing", cleanupAfterCombat);
+				menu();
+				if (player.hasCock()) {
+					if (player.cockThatFits(monster.analCapacity()) >= 0) addButton(0, "Anal", winAndRapeHarpyAnally, null, null, null, "Put your cock to a good use and take the harpy from behind.");
+					if (player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(1, "Pussy", victoryHarpyGetsHerPussyRaped, null, null, null, "That harpy's pussy looks inviting...");
+				}
+				addButton(2, "Oral", WinOnHarpyAndOralRape);
+				if (player.hasVagina()) {
+					if (player.isNaga()) outputText("  If you weren't a naga, you could scissor her.");
+					else addButton(3, "Scissor", harpyScissorSurprise, null, null, null, "Get into some girl-on-girl activity with the harpy.");
+					if (player.clitLength >= 3.5) addButton(4, "Clit Fuck", clitFuckAHarpy, null, null, null, "Fuck the harpy with your big clit.");
+				}
+				if (player.canOvipositSpider() && (player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS)) addButton(5, "Lay Eggs", spoidahsLegEggsInHarpeis, null, null, null, "Use your ovipositor to lay the eggs into harpy.");
+				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			//Not horny?  Iz over
 			else cleanupAfterCombat();
@@ -57,6 +52,7 @@ package classes.Scenes.Areas.HighMountains
 
 		public function harpyLossU():void
 		{
+			if (doSFWloss()) return; //No rape in SFW mode.
 			//NO MALE RAPE IF DICK TOO BIG
 			var x:Number = -1;
 			if (player.hasCock()) x = player.cockThatFits(monster.vaginalCapacity());
@@ -68,7 +64,7 @@ package classes.Scenes.Areas.HighMountains
 			}
 			//Dick that fits or has cunt
 			if (x >= 0 || player.hasVagina()) {
-				if (player.lust > 99) harpyLossLust();
+				if (player.lust >= player.maxLust()) harpyLossLust();
 				else harpyDamageLoss();
 			}
 			//No fitu
@@ -80,7 +76,8 @@ package classes.Scenes.Areas.HighMountains
 
 		private function harpyGooGenderlessLoss():void
 		{
-			outputText("", true);
+			if (doSFWloss()) return; //No rape in SFW mode.
+			clearOutput();
 			outputText("The triumphant harpy looks down at your goopy form, ready to take you.  She seems a little confused though, and begins poking at your gelatinous body.\n\n", false);
 
 			outputText("\"<i>Penis?</i>\" she eventually asks.\n\n", false);
@@ -103,7 +100,8 @@ package classes.Scenes.Areas.HighMountains
 //Requires pussy or cock small enough for harpy!
 		private function harpyLossLust():void
 		{
-			outputText("", true);
+			if (doSFWloss()) return; //No rape in SFW mode.
+			clearOutput();
 			//Merauder wroted.
 			var x:Number = -1;
 			if (player.hasCock()) x = player.cockThatFits(monster.vaginalCapacity());
@@ -163,7 +161,8 @@ package classes.Scenes.Areas.HighMountains
 //No genderless folks.
 		private function harpyDamageLoss():void
 		{
-			outputText("", true);
+			if (doSFWloss()) return; //No rape in SFW mode.
+			clearOutput();
 
 			var x:Number = -1;
 			if (player.hasCock()) x = player.cockThatFits(monster.vaginalCapacity());
@@ -298,7 +297,7 @@ package classes.Scenes.Areas.HighMountains
 				else y--;
 			}
 
-			outputText("", true);
+			clearOutput();
 			outputText("You step over the now-submissive feathered beauty and grin, your " + hipDescript() + " swaying from side to side idly as you eye up the sweet curves of your latest conquest. Stripping off your " + player.armorName + " and tossing it aside carelessly, you waste no time with words, pushing her roughly down to the ground face-down and rubbing your " + multiCockDescriptLight() + " in anticipation. She raises her magnificently-plumed head and turns it, looking at you pathetically with a glint of fear in her eye, squawking and crooning as if pleading with you. This passes unnoticed to you, however, as the sight of her thick, fluffy ass and meaty thighs has captured your attention FAR more effectively.\n\n", false);
 
 			outputText("Wrapping your arms around those immense, motherly hips, you drag her rump up so that it sways and jiggles in the air, forcing the big-butted bird-girl into the doggy position. Her cheeks burn red with embarrassment, but the way she is jiggling and shaking her blubbery bottom at you tells you she wants it just as much as you do. Finally getting a really good view of it, your eyes widen as you run your hands over every inch of her bouncy rear - it's more like standing behind a horse than a harpy! An ass this fine isn't to be wasted, and so you lean down and bury your " + player.face() + " between those luxurious orbs, planting your mouth firmly over her drooling pussy and tasting her sweet juices, suckling and kissing around her beautifully-formed clit and breathing her intoxicating feminine scent in with enjoyment, letting it fill your lungs as your expert ministrations coax a plethora of moans and subtle squawks from your partner.\n\n", false);
@@ -363,7 +362,7 @@ package classes.Scenes.Areas.HighMountains
 
 		private function winAndRapeHarpyAnally():void
 		{
-			outputText("", true);
+			clearOutput();
 			var x:Number = -1;
 			if (player.hasCock()) x = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = 0;
@@ -421,7 +420,7 @@ package classes.Scenes.Areas.HighMountains
 
 		private function WinOnHarpyAndOralRape():void
 		{
-			outputText("", true);
+			clearOutput();
 			var x:Number = -1;
 			if (player.hasCock()) x = player.cockThatFits(monster.analCapacity());
 			var y:Number = x + 1;
@@ -516,7 +515,7 @@ package classes.Scenes.Areas.HighMountains
 			}
 			monster.lust = 98;
 			monster.HP = 2;
-			player.lust = 100;
+			player.lust = player.maxLust();
 			flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 			cleanupAfterCombat();
 			player.orgasm();
@@ -550,10 +549,10 @@ package classes.Scenes.Areas.HighMountains
 			outputText("\n\nYou close your eyes, getting lost in the sensation of the harpy's deceptively skilled tongue.  Slipping a hand under your still-clothed upper body, you start to play with your tits as the harpy stops tongue-fucking your opening and instead starts to move higher, with almost no direction from yourself.  You tweak your nipple as the girl flicks her tongue over your throbbing clit, the double-pronged attack on your senses making you go weak from the waist down.  She continues to ravish your engorged button, sucking it, flicking it and even occasionally nipping at it gently, and it takes almost everything you have not to collapse down on your [legs] and slam her face as hard as you can into your cunt.  It seems like she's trying her hardest to get you off quickly, so that she can escape before you doing anything else to her.");
 
 			outputText("\n\nShe finally brings her mouth forwards, her lips meeting yours in an obscene parody of a kiss.  Her tongue starts sliding up and down your slit as she starts to play with your dripping sex.  She nibbles your lips, trying to do anything she can to make you cum, but you're able to hold yourself back - barely.  After a few moments, her efforts wane somewhat and you hear a slight whimpering from the submissive girl.  Pulling her head away from your crotch, you prepare to admonish her for slowing down when you were so close.  However, you see that the horny bitch has started to play with herself");
-			if (monster.lust > 99) outputText(" again");
+			if (monster.lust >= monster.eMaxLust()) outputText(" again");
 			outputText(", her fingers firmly stuffed down between her plush thighs and frantically toying with her pussy. Seeing her get off to your treatment almost makes you climax right then and there, but you manage to hold yourself back, reasoning that she hasn't quite paid enough just yet for deciding to attack you.");
 			doNext(harpyScissorSurprisePtII);
-			dynStats("lus=", 100);
+			dynStats("lus=", player.maxLust());
 		}
 
 //{New page}
@@ -653,7 +652,7 @@ package classes.Scenes.Areas.HighMountains
 		{
 			clearOutput();
 			outputText("Eyeing the hapless bird-woman up and down, you feel your lusts kindling.  Moisture seeps from your [vagina] as you watch the harpy ");
-			if (monster.lust > 99) outputText("moan and masturbate, dipping her fingers into her honey-pot with wild abandon.");
+			if (monster.lust >= monster.eMaxLust()) outputText("moan and masturbate, dipping her fingers into her honey-pot with wild abandon.");
 			else outputText("moan and struggle to rise, jiggling in the cutest way each time she slumps down, defeated.");
 			outputText("  You wrench her thick thighs apart to get a better view of her avian snatch.  Her lips are shrouded in a downy, feathery fuzz, but you can easily make out the heavy, lust-glossed labia.  The thought of tasting her dripping honey makes your mouth water and inside your [armor], your [clit] has emerged from its hood, straining as blood rushes to your loins.   The sensitive organ is so swollen that it's more lady-cock than joy-buzzer, the thick hood resembling an animal's sheath more than a natural flesh fold.");
 			outputText("\n\nThe harpy stops her struggles when she sees you smiling at her.  \"<i>Are you gonna make me lick your pussy or somethin',</i>\" she quips, folding her arms across her modest, barely B-cup breasts.  Her eyebrows knit together while she glowers in your direction, one leg still pulled into the air by your rushing passions.");
@@ -681,7 +680,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText(" your endurance gives out, and you slip into unconsciousness.  This time it seems you met your sexual match.");
 				monster.lust = 98;
 				monster.HP = 2;
-				player.lust = 100;
+				player.lust = player.maxLust();
 				flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 				cleanupAfterCombat();
 				player.orgasm();

@@ -66,6 +66,10 @@ public function hairDescript():String {
 	return Appearance.hairDescription(player);
 }
 
+public function beardDescript():String {
+	return Appearance.beardDescription(player);
+}
+
 public function hairOrFur():String {
 	return Appearance.hairOrFur(player);
 }
@@ -112,4 +116,12 @@ public function num2Text2(number:int):String {
 
 public function Num2Text(number:int):String {
 	return Utils.Num2Text(number);
+}
+
+public function addComma(number:int):String {
+	return Utils.addComma(number);
+}
+
+public function capitalizeFirstLetter(string:String):String {
+	return Utils.capitalizeFirstLetter(string);
 }

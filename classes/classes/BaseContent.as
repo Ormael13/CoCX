@@ -3,6 +3,8 @@
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.*;
 	import classes.Scenes.Camp;
+	import classes.Scenes.Places.Ingnam;
+	import classes.Scenes.Places.Prison;
 	import classes.Scenes.Dungeons.D3.D3;
 	import classes.Scenes.Inventory;
 	import classes.internals.Utils;
@@ -32,10 +34,14 @@
 			return kGAMECLASS;
 		}
 
-		protected function cheatTime(time:Number):void
+		protected function cheatTime(time:Number, needNext:Boolean = false):void
 		{
-			kGAMECLASS.cheatTime(time);
+			kGAMECLASS.cheatTime(time, needNext);
 		}
+		/*protected function incrementDay(time:Number):void
+		{
+			kGAMECLASS.incrementDay(time);
+		}*/
 		protected function get timeQ():Number
 		{
 			return kGAMECLASS.timeQ;
@@ -43,6 +49,14 @@
 
 		protected function get camp():Camp {
 			return kGAMECLASS.camp;
+		}
+		
+		protected function get ingnam():Ingnam {
+			return kGAMECLASS.ingnam;
+		}
+		
+		protected function get prison():Prison {
+			return kGAMECLASS.prison;
 		}
 		
 		protected function get d3():D3 {
@@ -53,7 +67,12 @@
 		{
 			return kGAMECLASS.goNext(time,defNext);
 		}
-
+		
+		protected function awardAchievement(title:String, achievement:*, display:Boolean = true, nl:Boolean = false, nl2:Boolean = true):void
+		{
+			return kGAMECLASS.awardAchievement(title, achievement, display, nl, nl2);
+		}
+		
 		protected function isHalloween():Boolean
 		{
 			return kGAMECLASS.isHalloween();
@@ -79,6 +98,11 @@
 			return kGAMECLASS.isThanksgiving();
 		}
 
+		protected function isAprilFools():Boolean
+		{
+			return kGAMECLASS.isAprilFools();
+		}
+		
 		protected function get date():Date
 		{
 			return kGAMECLASS.date;
@@ -90,7 +114,7 @@
 			return kGAMECLASS.inCombat();
 		}
 */
-
+		//Curse you, CoC updates!
 		protected function get inDungeon():Boolean
 		{
 			return kGAMECLASS.inDungeon;
@@ -205,6 +229,15 @@
 		protected function startCombat(monster_:Monster,plotFight_:Boolean=false):void{
 			kGAMECLASS.startCombat(monster_,plotFight_);
 		}
+
+		protected function doSFWloss():Boolean {
+			return kGAMECLASS.doSFWloss();
+		}
+		
+		protected function showCredits():void {
+			kGAMECLASS.creditsScreen();
+		}
+		
 		protected function startCombatImmediate(monster:Monster, _plotFight:Boolean = false):void
 		{
 			kGAMECLASS.startCombatImmediate(monster, _plotFight);
@@ -228,6 +261,10 @@
 			kGAMECLASS.mainView.clearOutputText();
 		}
 		
+		protected function flushOutputTextToGUI():void {
+			kGAMECLASS.flushOutputTextToGUI();
+		}
+
 		protected function doNext(eventNo:Function):void //Now typesafe
 		{
 			kGAMECLASS.doNext(eventNo);
@@ -242,6 +279,8 @@
 		{
 			kGAMECLASS.hideMenus();
 		}
+		
+		//To be phased out
 		protected function choices(text1:String, butt1:Function,
 								text2:String, butt2:Function,
 								text3:String, butt3:Function,
@@ -266,6 +305,7 @@
 			);
 		}
 
+		//To be phased out
 		protected function simpleChoices(text1:String, butt1:Function,
 								text2:String, butt2:Function,
 								text3:String, butt3:Function,
@@ -282,9 +322,19 @@
 			kGAMECLASS.doYesNo(eventYes, eventNo);
 		}
 
-		protected function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000):void
+		protected function addButton(pos:int, text:String = "", func1:Function = null, arg1:* = -9000, arg2:* = -9000, arg3:* = -9000, toolTipText:String = "", toolTipHeader:String = ""):void
 		{
-			kGAMECLASS.addButton(pos, text, func1, arg1);
+			kGAMECLASS.addButton(pos, text, func1, arg1, arg2, arg3, toolTipText, toolTipHeader);
+		}
+		
+		protected function addButtonDisabled(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):void
+		{
+			kGAMECLASS.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
+		}
+		
+		protected function removeButton(arg:*):void
+		{
+			kGAMECLASS.removeButton(arg);
 		}
 
 		protected function hasButton(arg:*):Boolean
@@ -305,6 +355,10 @@
 			return kGAMECLASS.outputList();
 		}
 */
+		
+		protected function openURL(url:String):void{
+			return kGAMECLASS.openURL(url);
+		}
 		
 		protected function sackDescript():String
 		{
@@ -522,6 +576,11 @@
 			return kGAMECLASS.hairDescript();
 		}
 		
+		protected function beardDescript():String
+		{
+			return kGAMECLASS.beardDescript();
+		}
+		
 		protected function hairOrFur():String
 		{
 			return kGAMECLASS.hairOrFur();
@@ -671,8 +730,20 @@
 		protected function get weapons():WeaponLib{
 			return kGAMECLASS.weapons;
 		}
+		protected function get weaponsrange():WeaponRangeLib{
+			return kGAMECLASS.weaponsrange;
+		}
 		protected function get armors():ArmorLib{
 			return kGAMECLASS.armors;
+		}
+		protected function get jewelries():JewelryLib{
+			return kGAMECLASS.jewelries;
+		}
+		protected function get shields():ShieldLib{
+			return kGAMECLASS.shields;
+		}
+		protected function get undergarments():UndergarmentLib{
+			return kGAMECLASS.undergarments;
 		}
 		protected function get inventory():Inventory{
 			return kGAMECLASS.inventory;
@@ -788,7 +859,7 @@
 			return kGAMECLASS.mainView;
 		}
 		
-		protected function set mainView(val:MainView):void
+		protected function set mainView(val:*):void
 		{
 			kGAMECLASS.mainView = val;
 		}
@@ -813,6 +884,16 @@
 			kGAMECLASS.flags = val;
 		}
 		
+		protected function get achievements():DefaultDict
+		{
+			return kGAMECLASS.achievements;
+		}
+		
+		protected function set achievements(val:DefaultDict):void
+		{
+			kGAMECLASS.achievements = val;
+		}
+		
 		protected function showStatDown(arg:String):void
 		{
 			kGAMECLASS.mainView.statsView.showStatDown(arg);
@@ -823,6 +904,22 @@
 			kGAMECLASS.mainView.statsView.showStatUp(arg);
 		}
 		
+		protected function buttonTextIsOneOf(index:int, possibleLabels:Array):Boolean {
+			return kGAMECLASS.buttonTextIsOneOf(index, possibleLabels);
+		}		
+		
+		protected function getButtonText(index:int):String {
+			return kGAMECLASS.getButtonText(index);
+		}
+		
+		protected function buttonIsVisible(index:int):Boolean {
+			return kGAMECLASS.buttonIsVisible(index);
+		}
+		
+		protected function levelUpGo():void {
+			return kGAMECLASS.levelUpGo();
+		}
+				
 		/**
 		 * PRIMO BULLSHIT FUNCTION ACCESS
 		 */

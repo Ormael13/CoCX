@@ -2,6 +2,7 @@
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class FetishZealot extends Monster
 	{
@@ -160,24 +161,31 @@
 			this.skinTone = "tan";
 			this.hairColor = "black";
 			this.hairLength = 4;
-			initStrTouSpeInte(35, 35, 30, 1);
+			initStrTouSpeInte(45, 55, 40, 1);
 			initLibSensCor(75, 80, 90);
 			this.weaponName = "wavy dagger";
 			this.weaponVerb="stab";
-			this.weaponAttack = 3;
+			this.weaponAttack = 12 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = RELIGIOUS_CLOTHES;
-			this.armorDef = 5;
+			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusLust = 20;
 			this.lust = 25;
 			this.lustVuln = 0.75;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 5;
-			this.gems = 5+rand(10);
+			this.level = 8;
+			this.gems = 10+rand(15);
 			this.drop = new WeightedDrop().add(armors.C_CLOTH,1)
 					.add(consumables.L_DRAFT,4)
 					.add(weapons.L_DAGGR,1)
 					.add(null,4);
 			this.special1 = zealotSpecial1;
 			this.special2 = zealotSpecial2;
+			this.str += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 440;
 			checkMonster();
 		}
 

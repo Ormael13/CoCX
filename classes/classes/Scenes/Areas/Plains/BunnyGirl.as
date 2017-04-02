@@ -13,7 +13,7 @@
 //Egg preg changes – Bunny Ears, Bunny Tail, Bunny Legs?, Hot pink nose & whiskers?
 
 public function bunnbunbunMeet():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(13);
 	if(flags[kFLAGS.MET_BUNBUN] == 0) {
 		outputText("A ", false);
@@ -83,7 +83,7 @@ public function bunnbunbunMeet():void {
 private function talkToBunnyBunBun():void {
 	spriteSelect(13);
 	flags[kFLAGS.MET_BUNBUN]++;
-	outputText("", true);
+	clearOutput();
 	outputText("You slowly introduce yourself, and let the bunny-girl know that you mean her no harm. She doesn't move until you finish, but as you conclude she visibly relaxes and nods.  It doesn't stop her tail from twitching, and if anything, her nose joins it in twitching, but she asks, \"<i>How is it you can see me?  I've got a lot of eggs to hide and normally no one sees me.</i>\"\n\n", false);
 	
 	outputText("A shrug of your shoulders is the only answer you've got.  Does she think she's some kind of invisible bunny?  How crazy is that!\n\n", false);
@@ -121,7 +121,7 @@ private function talkToBunnyBunBun():void {
 //[Rape Her]
 private function rapeBunBun():void {
 	spriteSelect(13);
-	outputText("", true);
+	clearOutput();
 	if(player.spe < 60) {
 		outputText("You lunge forward off your " + player.feet() + ", trying to tackle and pin the poor girl, but at the first sign of movement from you, she bounds off in the other direction!  She's hopping so fast there's no way you could possibly catch her, and in a matter of seconds you're left totally alone.  Well, perhaps not TOTALLY alone – there's one small egg nestled in the grass.  It fell from the bunny's basket in her haste to flee!", false);
 		//(pick and loot random egg)
@@ -166,7 +166,7 @@ private function rapeBunBun():void {
 //[Take Dick in Vag Fukked]
 private function bunbunFucksYourVag():void {
 	spriteSelect(13);
-	outputText("", true);
+	clearOutput();
 	outputText("A anticipatory grin widens across your " + player.face() + " as you speedily disrobe, discarding your " + player.armorName, false);
 	
 	if(player.weaponName != "fists") outputText(" and " + player.weaponName, false);
@@ -251,7 +251,7 @@ private function bunbunFucksYourVag():void {
 //[Take Dick In A] 
 private function bunbunFucksPCInAss():void {
 	spriteSelect(13);
-	outputText("", true);
+	clearOutput();
 	outputText("You get a very naughty idea and silently discard your " + player.armorName + ", tossing it aside as you turn around and present your " + assDescript() + " to the bunny-girl.  With a lewd shake, you tease her and give her a good view of your " + assholeDescript() + " while it lowers closer and closer to the turgid bunny-cock, just inches away.  Drops of clear pre-cum roll down her shaft as it twitches eagerly, and the girl watches you through a gleam of sexual excitement while her shaft gets closer and closer to your rear entrance.  You let your " + player.legs() + " relax a little until it's pressing tightly against your sphincter, feeling it slather pre-cum in preparation for the coming penetration.\n\n", false);
 	
 	outputText("Looking over your shoulder at the bunny's beet-red face, you let a little of your weight down and start to spread around the bunny-herm's cock.  It slides inside you easily, aided by her copious drops of pre-cum, but ", false);
@@ -340,7 +340,7 @@ private function bunbunFucksPCInAss():void {
 //FUCK DAT BUNNYBUNBUNBUN.
 private function bunbunGetsFucked():void {
 	spriteSelect(13);
-	outputText("", true);
+	clearOutput();
 	//Requires wang that fits
 	var x:Number = player.cockThatFits(40);
 	//Second wang that fits for DP
@@ -422,7 +422,7 @@ private function bunbunGetsFucked():void {
 
 private function bunbun69():void {
 	spriteSelect(13);
-	outputText("", true);
+	clearOutput();
 	//Centaur
 	if(player.isTaur()) {
 		if(rand(2) == 0) {
@@ -493,6 +493,7 @@ private function bunbun69():void {
 			outputText(" until your orgasm overpowers your saccharine-fat daze and you peak, egg-bloated body spurting in creaming jets of pale seed to paint the brown bunny's insides white.\n\n", false);
 			
 			outputText("Her second egg forces its way down your throat with gushing shudders and you can feel your hips straining against the weight of your overburdened stomach. You're a little afraid of what the second one will do to you as it slides out of the flared tip of the bunny's fourteen inches. Maybe it's the milking motion of the bunny's head bobbing in happy hops on your cock or maybe it's the swelling of the second egg, but your body begins to feel hot and your flesh tingles at your scalp and butt. You clench your eyes, willing yourself to digest the bunny's candy eggs and, to your surprise, your belly slows its expansion, gradually shrinking as the eggs burst in your stomach, unloading their gooey candy filling.", false);
+			player.refillHunger(60);
 			if(player.tailType != TAIL_TYPE_RABBIT) {
 				//[No Tail: 
 				if(player.tailType == TAIL_TYPE_NONE) outputText("  The heat around your lower back clutches at your tail bone and you feel a fluffy explosion swell around your butt cheeks as <b>a fluffy bunny's tail pops out of your back</b>, twitching excitedly!", false);
@@ -546,7 +547,7 @@ private function bunbun69():void {
 			outputText(" until your orgasm overpowers your bunny-fucked daze and you peak, your egg-bloated body spurting in gushing jets of pale seed to paint the olive girl's insides white.\n\n", false);
 			
 			outputText("Her second egg forces its way down your throat with pulsing shudders and you can feel your hips straining against the weight of your overburdened stomach. You're a little afraid of what the second one will do to you as it slides out of the flared tip of the bunny's fourteen inches. Maybe it's the milking motion of the bunny's head bobbing in happy hops on your cock or maybe it's the swelling numbness of the eggs, but your body begins to feel hot and your flesh tingles at your scalp and butt. You clench your eyes, grunting through the heat of the bunny's eggs and, to your surprise, your belly begins to feel like it's emptying.", false);
-			
+			player.refillHunger(60);
 			if(player.tailType != TAIL_TYPE_RABBIT) {
 				//[No Tail: 
 				if(player.tailType == TAIL_TYPE_NONE) outputText("  The heat around your lower back clutches at your tail bone and you feel a fluffy explosion swell around your butt cheeks as a fluffy bunny's tail pops out of your back, twitching excitedly!", false);
@@ -759,7 +760,7 @@ private function adjathaEggsplosions():void {
 		if(player.cockThatFits(40) >= 0) addButton(2,"Fuck Her",fuckTheEggBoundBun);
 		else outputText("  <b>You're too big to fuck her!</b>");
 	}
-	addButton(9,"Leave",camp.returnToCampUseOneHour);
+	addButton(14,"Leave",camp.returnToCampUseOneHour);
 }
  
 //[Free Her] (Any gender)

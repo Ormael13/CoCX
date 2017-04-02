@@ -4,6 +4,9 @@
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.WeaponLib;
 	import classes.Scenes.Places.Owca.*;
+	import classes.Scenes.NPCs.Kindra;
+	
+	use namespace kGAMECLASS;
 
 	public class Owca extends BaseContent{
 
@@ -216,12 +219,14 @@ private function intoTheDemonPit(sacrifice:Boolean = true):void {
 		else outputText("\n\nThe chains binding you aren't very tight or of the finest craftsmanship, but they're sufficient to hold you more or less in place; though you can probably twist to avoid a few attacks, you won't be able to make any of your own if you decide to resist... at least, not physically.");
 		outputText("  You're once again feeling regret over letting the villagers hold your equipment, but there's nothing for it now.");
 	}
+	if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] <= 0) {
+		flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
+		outputText("\n\n<b>New codex entry unlocked: Succubus!</b>")
+	}
 	flags[kFLAGS.TIMES_IN_DEMON_PIT]++;
 	flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS] = 0;
-	if (sacrifice) simpleChoices("Submit",loseOrSubmitToVapula,
-			"Fight", createCallBackFunction(fightZeDemons, true), "", null, "", null, "", null);
-	else simpleChoices("Submit",loseOrSubmitToVapula,
-			"Fight", createCallBackFunction(fightZeDemons, false), "", null, "", null, "", null);
+	if(sacrifice) simpleChoices("Fight",createCallBackFunction(fightZeDemons,true),"Submit",loseOrSubmitToVapula, "", null, "", null, "", null);
+	else simpleChoices("Fight",createCallBackFunction(fightZeDemons,false),"Submit",loseOrSubmitToVapula, "", null, "", null, "", null);
 }
 //Submit/Fight
 private function fightZeDemons(sacrifice:Boolean = true):void {
@@ -371,8 +376,8 @@ public function defeetVapulasHorde():void {
 		//[if won by Lust]
 		else outputText("You grin wickedly as the demons give up the fight, too turned on to care about you.  One even has hopeful desperation glinting in her eyes as she attempts to entice you with her long, thick nipples and enormous, dripping gash.");
 	}
-	//[(requires genitals and and corr >60)
-	if(player.cor > 60 && player.gender > 0) {
+	//[(requires genitals and and corr > 65)
+	if((player.cor > (65 - player.corruptionTolerance()) || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1) && player.gender > 0) {
 		outputText("\n\nDo you take advantage of them?");
 		doYesNo(rapeZeVapula,noVapulaSex);
 	}
@@ -548,6 +553,7 @@ private function owcaMainScreenOn():void {
 		doYesNo(createCallBackFunction2(acceptRebeccsPlea,false, true),declineRebeccsPlea);
 		return;
 	}
+	outputText(images.showImage("location-owca"));
 	//[if attitude > 80]
 	if(flags[kFLAGS.OWCAS_ATTITUDE] > 80) outputText("Villagers greet you as you arrive, praising your courage and your heroism.  People shake your hands or ask you to kiss them, as if they hoped your nobility were somehow contagious.  Once they're done complimenting and flattering you in every way possible, they leave you to your business.");
 	//[if 60<=attitude<80]
@@ -585,12 +591,66 @@ private function owcaMainScreenOn():void {
 		//Option: Tavern. Leads to the Tavern, needs 10 attitude
 		tavern = owcaTavern;
 	}
-	//[Pit][Herds][Rebecc][Tavern]
-	simpleChoices("Pit",pit,"Herds",herd,"Rebecc",rebeccMenu,"Tavern",tavern,"Leave",camp.returnToCampUseOneHour);
+	//[Pit][Herds][Rebecc][Tavern][Kindra][Leave]
+	menu();
+	if(model.time.hours >= 16) addButton(0, "Pit", zePit, null, null, null, "Guard the Pit tonight.");
+	addButton(1, "Herds", herds, null, null, null, "Help herders with a sheeps.");
+	addButton(2, "Rebecc", rebeccMenu, null, null, null, "Visit Rebecc.");
+	addButton(3, "Tavern", owcaTavern, null, null, null, "Visit local tavern.");
+	if(flags[kFLAGS.KINDRA_FOLLOWER] < 1) addButton(10, "LookAround", meetKindra, null, null, null, "Wander around the village.");
+	addButton(14, "Leave", leaveOwca, null, null, null, "Leave Owca.");
 }
+public function leaveOwca():void {
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function meetKindra():void {
+	clearOutput();
+	if (flags[kFLAGS.KINDRA_LVL_UP] == 6) outputText("As you wander the plains near Owca you stumble upon a warning sign again this time its right in front of an old cabin and you can clearly see the sheep girl waiting for you teeth bared. This is likely the final limit to her territory and entering it will force you to fight her. You can feel a powerful barrier made of soul force delimiting this area.");
+	else if (flags[kFLAGS.KINDRA_LVL_UP] >= 2 && flags[kFLAGS.KINDRA_LVL_UP] < 6) outputText("As you wander the plains near Owca borders you find a warning sign again. It's obviously the feral sheep girl territory. You can either enter and fight her or leave.");
+	else outputText("As you explore the plains near Owca borders you come upon a peculiar signpost with an area delimited by a line of burnt grass. The message is crudely written but somewhat clear ‘DO NOT ENTER’. You can either ignore the warning or leave what will you do?");
+	menu();
+	addButton(0, "Continue", fightKindra);
+	addButton(1, "Return", returnToOwcaVillage);
+}
+
+public function returnToOwcaVillage():void {
+	clearOutput();
+	if (flags[kFLAGS.KINDRA_LVL_UP] == 6) outputText("You don’t see a reason to annoy the sheep in front of her own house and decide to simply leave before she indeed start shooting arrows at you.");
+	else if (flags[kFLAGS.KINDRA_LVL_UP] >= 2 && flags[kFLAGS.KINDRA_LVL_UP] < 6) outputText("You have no desire to engage the sheep archer right now and decide to simply head back to village.\n\n");
+	else {
+		outputText("You decide to leave. Whatever has made this area its territory is likely not going to appreciate you lingering here.\n\n");
+		outputText("You head back to village.");
+	}
+	doNext(owcaMainScreenOn);
+}
+public function fightKindra():void {
+	clearOutput();
+	if (flags[kFLAGS.KINDRA_LVL_UP] < 1) flags[kFLAGS.KINDRA_LVL_UP] = 1;
+	if (flags[kFLAGS.KINDRA_LVL_UP] == 1) {
+		outputText("You ignore the warning sign and step right through. The plains suddenly becomes eerily quiet as every sound seems to dies out. A low growl warns you a few second ahead as an arrow miss your head by a few inches! You turn over to face your assailant which seems to be a feral looking sheep girl! She’s readying another arrow taking aim.");
+		startCombat(new Kindra());
+	}
+	if (flags[kFLAGS.KINDRA_LVL_UP] >= 2 && flags[kFLAGS.KINDRA_LVL_UP] < 6) {
+		outputText("You ignore the warning again and dodge just in time as an arrow come out of nowhere. Shes there in front of you and she look quite angry.");
+		startCombat(new Kindra());
+	}
+	if (flags[kFLAGS.KINDRA_LVL_UP] == 6) {
+		if(player.findPerk(PerkLib.SoulApprentice) < 0) {
+			outputText("You attempt to enter but the barrier holds you out. You will likely need to master soulforce in order to pierce this final defence.");
+			doNext(owcaMainScreenOn);
+		}
+		else {
+			outputText("You enter determined to confront the sheep woman. Due to your training the barrier is unable to prevent your intrusion. The sheep bare her teeth in anger and draw her bow for one last stand.");
+			startCombat(new Kindra());
+		}
+	}
+}
+
 //Tavern (Z)
 public function owcaTavern():void {
 	clearOutput();
+	outputText(images.showImage("location-owca-tavern"));
 	outputText("The tavern is nice and cozy; there are a few tables and chairs scattered around in no ordered pattern, and most clients here appear to belong to the same species.  By the crude wooden bar, you see a list of all the current drinks on sale:\n<i>");
 	//SheepMk
 	var milk:Function = createCallBackFunction(owcaBuySetup,consumables.SHEEPMK);
@@ -800,7 +860,7 @@ public function beatUpOwca():void {
 	outputText("The last of the villagers drops his improvised weapon.  They are all lying defenseless before you.  At last, you notice Rebecc, the only one still conscious, curled up as she weeps uncontrollably.  She is clearly oblivious of her surroundings, undoubtedly shocked by the violent fight.  Even if she calls herself your friend, you don't think you'd be able to reason with her after pummeling her kin.  What do you do?");
 	//Rape Rebbecc/Torch Village (needs Akbal's fire or Whitefire)/Leave
 	var torch:Function = null;
-	if(player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0)
+	if(player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.DragonIceBreath) >= 0)
 		torch = torchOwcaMotherFuckers;
 	var rape:Function = null;
 	if(player.cor >= 60 && player.gender > 0 && player.lust >= 33) rape = createCallBackFunction(rapeRebecc,true);
@@ -817,6 +877,7 @@ private function leaveOwcaAfterWhupping():void {
 private function torchOwcaMotherFuckers():void {
 	clearOutput();
 	outputText("These ignorant folks deserve to be punished for trying to take you by force.  You muster your strength and release a wave of magical flame.  The raw heat and energy is enough to set entire thatched roofs ablaze.  You ignite house after house, the poor constructions unable to withstand your fiery might, until there are enough burning that the wind can carry the flames to all other buildings nearby.  A few minutes later, the entire village is ablaze; hovels are crumbling under their own weight and the crude roads are being littered with fallen debris.  You watch Owca burn silently, arms crossed.  Finally, when the last building has been thoroughly reduced to a pile of rubble and ashes, you quickly search for any valuables among the villagers' belongings.  Fortunately their gems haven't been melted; you pack a substantial amount of them away before leaving.  You cast a thoughtful glance at the remains of what used to be a peaceful village; ironically enough, the only structure you preserved was the pole in the pit, an ultimate mockery of their futile struggles against forces that ridiculously outmatch them.");
+	player.gems += 900 + rand(150);
 	flags[kFLAGS.OWCA_UNLOCKED] = -1;
 	dynStats("cor", 15);
 	if(player.cor >= 60 && player.gender > 0 && player.lust >= 33) {
@@ -832,7 +893,6 @@ private function torchUpVillagersAndLeave():void {
 	clearOutput();
 	outputText("You don't think you're going to see these villagers again, and you don't really want to.");
 	//Corruption +15 (plus extra for rape), ~ 1000 gems, fatigue set to 100
-	player.gems += 900 + rand(150);
 	fatigue(100);
 	statScreenRefresh();
 	cleanupAfterCombat();
@@ -957,9 +1017,9 @@ private function subdueVapula():void {
 	outputText("\n\nBy now, you've completely broken the back of the rapacious demon horde.  Their leader is starting to get used to her repeated defeats; it's time for you to make a decision... what do you do?");
 	//choices: [Disband the horde]/[Enslave Vapula(requires cock or non-centaur vagina, D2 completion, libido >= 60, and corr >= 70)]
 	var fuck:Function = null;
-	if(player.gender > 0 && player.lust >= 33) fuck = rapeZeVapula;
+	if(player.gender > 0 && (player.lust >= 33 - player.corruptionTolerance())) fuck = rapeZeVapula;
 	var enslave:Function = null;
-	if(player.gender > 0 && player.cor >= 66) enslave = enslaveVapulaWithYourWang;
+	if(player.gender > 0 && (player.cor >= 66 - player.corruptionTolerance())) enslave = enslaveVapulaWithYourWang;
 	simpleChoices("Disband", disbandHorde, "EnslaveVapula", enslave, "JustFuckEm", fuck, "", null, "Skip Out", cleanupAfterCombat);
 }
 //Option: Disband (Z)

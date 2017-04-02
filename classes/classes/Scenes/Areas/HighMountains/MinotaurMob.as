@@ -58,7 +58,7 @@ package classes.Scenes.Areas.HighMountains
 			//(Low damage taken)
 			if(damage <= 8) {
 				outputText("Though your body is tingling from the show the horny beasts are giving you, it doesn't effect you as much as it could have.", false);
-				if(player.lust > 99) outputText("  Still, you're too horny to fight any longer.", false);
+				if(player.lust >= player.maxLust()) outputText("  Still, you're too horny to fight any longer.", false);
 			}
 			//(Medium damage taken)
 			else if(damage <= 14) {
@@ -66,7 +66,7 @@ package classes.Scenes.Areas.HighMountains
 				if(player.lust > 70) outputText(", though you didn't think such a thing was possible", false);
 				else outputText(", feeling like two bullets scraping along the inside of your " + player.armorName, false);
 				outputText(", but it... it could have been worse.  You shudder as a little fantasy of letting them dribble it all over your body works through your mind.", false);
-				if(player.lust > 99) outputText("  Fuck it, they smell so good.  You want, no, NEED more.", false);
+				if(player.lust >= player.maxLust()) outputText("  Fuck it, they smell so good.  You want, no, NEED more.", false);
 				else outputText("  A growing part of you wants to experience that.", false);
 			}
 			//(high damage taken)
@@ -112,7 +112,7 @@ package classes.Scenes.Areas.HighMountains
 		private function minotaurGangWaste():void {
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] = 1;
 			game.spriteSelect(94);
-			outputText("\"<i>Oh man I can't wait to go hilt-deep in that pussy... I'm going to wreck her,</i>\" promises one bull to his brother.  The other laughs and snorts, telling him how he'll have to do the deed during sloppy seconds.  It quickly escalates, and soon, every single one of the beast-men is taunting the others, bickering over how and when they'll get to have you.  While they're wasting their time, it's your chance to act!", false);
+			outputText("\"<i>Oh man I can't wait to go hilt-deep in that pussy... I'm going to wreck " + player.mf("him", "her") + ",</i>\" promises one bull to his brother.  The other laughs and snorts, telling him how he'll have to do the deed during sloppy seconds.  It quickly escalates, and soon, every single one of the beast-men is taunting the others, bickering over how and when they'll get to have you.  While they're wasting their time, it's your chance to act!", false);
 			combatRoundOver();
 		}
 
@@ -175,26 +175,36 @@ package classes.Scenes.Areas.HighMountains
 			this.hairColor = randomChoice("black","brown");
 			this.hairLength = 3;
 			this.faceType = FACE_COW_MINOTAUR;
-			initStrTouSpeInte(65, 60, 30, 20);
-			initLibSensCor(40, 15, 35);
+			initStrTouSpeInte(80, 110, 30, 20);
+			initLibSensCor(100, 15, 35);
 			this.weaponName = "fists";
 			this.weaponVerb="punches";
+			this.weaponAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "thick fur";
-			var bonusHP:Number = 340 + 50 * (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3);
+			this.armorDef = 30 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			var bonusHP:Number = 600 + 50 * (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3);
 			var lustVuln:Number = 0.45;
 			if((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 2 > 13) lustVuln = .3;
 			else lustVuln -= (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 0.02;
 			this.bonusHP = bonusHP;
+			this.bonusLust = 20 * Math.round((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
 			this.lust = 30;
 			this.lustVuln = lustVuln;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			var level:int = 11 + Math.round((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
-			if(level > 14) level = 14;
+			var level:int = 26 + Math.round((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
+			if(level > 29) level = 29;
 			this.level = level;
-			this.gems = rand(15) + 45;
+			this.gems = rand(50) + 100;
 			this.tailType = TAIL_TYPE_COW;
 			this.special1 = game.mountain.minotaurScene.minoPheromones;
 			this.drop = NO_DROP;
+			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.str += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 2040;
 			checkMonster();
 		}
 	}

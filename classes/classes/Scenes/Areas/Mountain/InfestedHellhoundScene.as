@@ -16,12 +16,16 @@ package classes.Scenes.Areas.Mountain
 		//turned on and over level 2]
 		public function infestedHellhoundEncounter():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("A low snarl vibrates through your body, ", false);
 			if (player.lowerBody == LOWER_BODY_TYPE_GOO) outputText("making your jello-like body jiggle", false);
 			else outputText("rattling your teeth", false);
 			outputText(".  Peeking fearfully over your shoulder, you see the black-furred form of a hell-hound emerging from behind a rock.  Its eyes narrow as its gaze locks onto your " + player.assholeOrPussy() + ", a pair of black, shiny dog-cocks emerge underneath him, dangling freely.  His balls look bloated and distended, the skin around them crawling and wriggling.  A few worms drip from its over-sized peckers, crawling on the ground under the infested beast.\n\n", false);
 			outputText("Somehow you know this thing isn't going to let you just walk away.", false);
+			if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Hellhounds!</b>")
+			}
 			startCombat(new InfestedHellhound());
 			spriteSelect(27);
 		}
@@ -29,11 +33,16 @@ package classes.Scenes.Areas.Mountain
 
 		public function infestedHellhoundLossRape():void
 		{
-			outputText("", true);
+			if (flags[kFLAGS.SFW_MODE] > 0 && getGame().inCombat) { //No rape in SFW mode.
+				clearOutput();
+				cleanupAfterCombat();
+				return;
+			}
+			clearOutput();
 			//[BOTH INFESTED]
 			if (player.totalCocks() > 0 && player.findStatusAffect(StatusAffects.Infested) >= 0) {
 				//(LUST)
-				if (player.lust > 99) {
+				if (player.lust >= player.maxLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ", false);
 					if (player.cor < 33) outputText("In spite of your revulsion ", false);
 					else if (player.cor < 66) outputText("In spite of your better sense ", false);
@@ -54,7 +63,7 @@ package classes.Scenes.Areas.Mountain
 			//[PLAYER'S COCKS ARE BIG ENOUGH TO BE INFECTED]
 			else if (player.findStatusAffect(StatusAffects.Infested) < 0 && player.biggestCockArea() >= 40 && player.hasCock()) {
 				//(LUST)
-				if (player.lust > 99) {
+				if (player.lust >= player.maxLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ", false);
 					if (player.cor < 33) outputText("In spite of your revulsion ", false);
 					else if (player.cor < 66) outputText("In spite of your better sense ", false);
@@ -111,7 +120,7 @@ package classes.Scenes.Areas.Mountain
 			//[HAS PUSSY AND NO DICK BIG ENOUGH TO BE INFECTED]
 			else if (player.hasVagina() && player.biggestCockArea() < 40 && player.lowerBody != LOWER_BODY_TYPE_NAGA) {
 				//(LUST) 
-				if (player.lust > 99) {
+				if (player.lust >= player.maxLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ", false);
 					if (player.cor < 33) outputText("In spite of your revulsion ", false);
 					else if (player.cor < 66) outputText("In spite of your better sense ", false);
@@ -154,7 +163,7 @@ package classes.Scenes.Areas.Mountain
 			//[GENDERLESS OR MALE WITH DICK TOO SMALL]
 			else {
 				//(LUST) 
-				if (player.lust > 99) {
+				if (player.lust >= player.maxLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ", false);
 					if (player.cor < 33) outputText("In spite of your revulsion ", false);
 					else if (player.cor < 66) outputText("In spite of your better sense ", false);

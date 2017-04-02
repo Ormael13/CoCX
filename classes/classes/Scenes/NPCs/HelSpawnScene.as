@@ -68,6 +68,7 @@ override public function helPregnant():Boolean {
 internal function heliasAppearanceScreen():void {
 	clearOutput();
 	spriteSelect(68);
+	outputText(images.showImage("monster-hel"));
 	outputText("Hel the salamander stands seven feet tall, with pale skin and thick, bright-red scales covering her arms and legs, though she has a normal human torso and face.  A fiery tail swishes gaily behind her, blazing with a ");
 	if(flags[kFLAGS.HEL_BONUS_POINTS] < 150) outputText("bright orange glow");
 	else outputText("bright white glow");
@@ -610,6 +611,10 @@ private function helsLifestyle():void {
 
 //IT'S TIME! (Play the morning of the 15th Day of Helia's pregnancy)
 public function heliaBirthtime():void {
+	if (prison.inPrison) {
+		prison.prisonLetter.letterFromHelia1();
+		return;
+	}
 	clearOutput();
 	spriteSelect(68);
 	outputText("The morning dawns like any other, though as you're getting dressed, you can't help but notice Hel waddling back from the edge of camp, both hands firmly gripping her positively massive belly.  You walk over just in time to hear her groan, \"<i>Oh fuck me sideways and call me a harpy, this shit sucks.</i>\"  You put an arm around her to steady the sickened salamander, but she barely notices you as she flops down beside her still, nearly grabbing a glass before stopping herself.  \"<i>Fucking shit fuck I am so done with this.  I - oh god,</i>\" she doubles over, squeezing her belly.  \"<i>Ow ow oh god ow.</i>\"");
@@ -718,7 +723,7 @@ private function applyHelspawnName():void {
 }
 
 //NOTE: HelSpawn's personality meter & Growing Up
-private function helSpawnsSetup():void {
+public function helSpawnsSetup():void {
 	//HelspawnChaste and HelspawnSlutty are the new Variabls for Helspawn, indicating the ways you can morph her personality, whichever is higher at the end of the Teenage years indicates whether she gets to be a proud, chaste warrior girl fit for Paladinhood or a slutty, filthy whore of a berzerker like mom. 
 	//Depending on who her daddy was, she gets a bonus to one or the other stat:
 	//>If Mai is the daddy: +10 HelspawnSlutty
@@ -1027,6 +1032,10 @@ private function dasBarbarimander():void {
 //Event: Helspawn's a Little Slut Like Mommy
 //{Play at night, while sleeping.}
 public function helspawnIsASlut():void {
+	if (prison.inPrison) { //No choices for you in prison!
+		prison.prisonLetter.noControlOverHelspawn();
+		return;
+	}
 	spriteSelect(68);
 	flags[kFLAGS.HELSPAWN_FUCK_INTERRUPTUS] = 1;
 	outputText("\nSomething's moving in your camp.");
@@ -1139,7 +1148,7 @@ public function helspawnsMainMenu():void {
 	//[Sex] {?}
 	//[Appearance]
 	addButton(8,"Appearance",helSpawnsAppearanceScreen);
-	addButton(9,"Back",camp.campFollowers);
+	addButton(14,"Back",camp.campFollowers);
 }
 
 //Hug
@@ -1187,7 +1196,8 @@ private function talkToHelspawn():void {
 		menu();
 		addButton(0,"Stop Fucking",dontFuckAlex);
 		addButton(1,"Her Boyfriend",helSpawnBoyfriend);
-		addButton(2,"Incest",incestWithHelspawn);		
+		addButton(2,"Incest",incestWithHelspawn);
+		//if (silly() && flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50) addButton(3, "Both", whyNotBoth, null, null, null, "Why don't we have both?")
 	}
 	//Talk 2
 	//{Kiha must be at camp}
@@ -1326,15 +1336,34 @@ private function ohGodEwKihaAndHelspawnSuckAtCooking():void {
 	outputText("\n\nKiha gives you an incredulous look, but takes a tentative sip anyway.  Her eyes brighten as she takes a second, and then a third gulp, soon shoveling it in greedily.  \"<i>Told ya, doofus!</i>\" she gloats, putting down the empty bowl.  \"<i>Nothing beats aunt Kiha's special recipe!</i>\"");
 	
 	outputText("\n\nYou just shake your head and grab a bowl, sitting down with the scaly ladies as you enjoy your lunch, trying to ignore the little shit-eating grin " + flags[kFLAGS.HELSPAWN_NAME] + "'s sporting all the while.");
+	player.refillHunger(25);
 	doNext(camp.returnToCampUseOneHour);
 }
 private function umYum():void {
 	clearOutput();
 	outputText("Um, yum?");
-	
-	outputText("\n\nCringing, you set the offered bowl back down, squeaking out that it's delicious, thank you very much, but you have something to take care of right now; maybe you can have more later.  Kiha rolls her eyes and shoos you off before she and " + flags[kFLAGS.HELSPAWN_NAME] + " spoon out their lunch.");
-	
-	outputText("\n\nAs you're wandering off looking for somewhere to hurl, you hear the tell-tale groans and gagging of a pair of scaly ladies who've just realized what kind of abomination they've created.");
+	if (player.hunger > 25)
+	{
+		outputText("\n\nCringing, you set the offered bowl back down, squeaking out that it's delicious, thank you very much, but you have something to take care of right now; maybe you can have more later.  Kiha rolls her eyes and shoos you off before she and " + flags[kFLAGS.HELSPAWN_NAME] + " spoon out their lunch. \n\nAs you're wandering off looking for somewhere to hurl, ");
+		player.refillHunger(5);
+	}
+	else
+	{
+		outputText("\n\nCringing, you are about to set the offered bowl back down but you are reminded by your growling stomach. You have no choice but to cover your nose and just gulp down the contents of the stew. ", false)
+		player.refillHunger(25);
+		outputText("\nYou feel a bit nauseous. That stew surely is strange.", false)
+		if (rand(3) == 0)
+		{
+			//Player vomits. Poor player. Damages hunger by 15-25.
+			outputText("\n\nGasp! You feel like you're going to throw up. You get up and rush behind the bushes. You suddenly bend over and spew the contents of your stomach from your mouth onto the ground. It takes a while but you eventually recover and you get up. ", false)
+			player.takeDamage(player.maxHP() / 4);
+			player.damageHunger(rand(10) + 15);
+			dynStats("lib", -10);
+			dynStats("lust", -100, "resisted", false);
+		}
+		outputText("You set the finished bowl down and ")
+	}
+	outputText("you hear the tell-tale groans and gagging of a pair of scaly ladies who've just realized what kind of abomination they've created.");
 	
 	outputText("\n\nMaybe you ought to start doing the cooking around here...");
 	doNext(camp.returnToCampUseOneHour);
@@ -1387,7 +1416,7 @@ internal function loseSparringToDaughter():void {
 	//if Sluttymander:
 	if(flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50) {
 		outputText("As you stumble back, ");
-		if(player.lust > 99) outputText("succumbing to your own lusts");
+		if(player.lust >= player.maxLust()) outputText("succumbing to your own lusts");
 		else outputText("unable to withstand her unending hail of attacks");
 		outputText(", " + flags[kFLAGS.HELSPAWN_NAME] + " quickly sweeps your [legs] out from under you, dropping you right on your ass.  You collapse with a grunt, ");
 		if(player.weaponName != "fists") outputText("weapon tumbling out of hand");
@@ -1403,7 +1432,7 @@ internal function loseSparringToDaughter():void {
 	//Else If Chastemander:
 	else {
 		outputText("As you stumble back, ");
-		if(player.lust > 99) outputText("succumbing to your own lusts");
+		if(player.lust >= player.maxLust()) outputText("succumbing to your own lusts");
 		else outputText("unable to withstand her unending hail of attacks");
 		outputText(", " + flags[kFLAGS.HELSPAWN_NAME] + " grabs your arm, catching you before you can fall.  \"<i>Easy there, " + championRef() + ", I got you,</i>\" she says, pulling you into a quick hug.");
 		
@@ -1420,7 +1449,7 @@ internal function loseSparringToDaughter():void {
 internal function beatUpYourDaughter():void {
 	clearOutput();
 	//{If Sluttymander loses to lust (you monster)}:
-	if(flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50 && monster.lust > 99) {
+	if(flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50 && monster.lust >= monster.eMaxLust()) {
 		outputText("\"<i>N-no more...</i>\" the slutty little salamander moans, slumping down to the ground, arms wrapping around herself.  \"<i>Fuck, you're sexy... so horny...</i>\" she groans, hands slipping down to her soaked bikini bottom.");
 		
 		outputText("\n\nShaking your head, you give her a little push, flopping her onto her back.  She just lets out a little whimper and finally tears her panties away, giving her unrestricted access to her sodden box.  \"<i>Hey, d-don't just leave me like this,</i>\" she whines, but to no avail.");

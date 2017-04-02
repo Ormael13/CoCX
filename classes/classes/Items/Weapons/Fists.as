@@ -10,7 +10,7 @@ package classes.Items.Weapons
 	public class Fists extends Weapon {
 		
 		public function Fists() {
-			super("Fists  ", "Fists", "fists", "fists", "punch", 0);
+			super("Fists  ", "Fists", "fists", "fists \n\nType: Weapon (Unarmed) \nAttack: 0 \nBase value: N/A", "punch", 0);
 		}
 		
 		override public function useText():void {} //No text for equipping fists
@@ -19,15 +19,5 @@ package classes.Items.Weapons
 			return null;
 		}
 		
-/*
-		override public function unequip(player:Player, returnToInventory:Boolean, output:Boolean = false):void
-		{
-		}
-
-		override protected function unequipReturnItem(player:Player, output:Boolean):ItemType
-		{
-			return null;
-		}
-*/
 	}
 }

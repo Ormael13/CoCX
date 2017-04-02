@@ -84,7 +84,7 @@ package classes.Scenes.Dungeons.DeepCave
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.fightValaVictory();
+			game.dungeons.deepcave.fightValaVictory();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -93,7 +93,7 @@ package classes.Scenes.Dungeons.DeepCave
 				outputText("\n\nYour foe doesn't seem put off enough to leave...");
 				doNext(game.endLustLoss);
 			} else {
-				game.loseToVala();
+				game.dungeons.deepcave.loseToVala();
 			}
 		}
 
@@ -116,24 +116,27 @@ package classes.Scenes.Dungeons.DeepCave
 			this.skinTone = "fair";
 			this.hairColor = "purple";
 			this.hairLength = 22;
-			initStrTouSpeInte(40, 50, 50, 60);
+			initStrTouSpeInte(75, 90, 90, 90);
 			initLibSensCor(55, 35, 50);
 			this.weaponName = "fists";
 			this.weaponVerb="caresses";
+			this.weaponAttack = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "skin";
+			this.armorDef = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			var lustVuln:Number = .5;
 			if(game.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 0) lustVuln += .25;
 			if(game.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 2) lustVuln += .5;
 			var lust:Number = 30 + game.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] * 10;
 			if(lust > 80) lust = 80;
-			this.bonusHP = 350;
+			this.bonusHP = 500;
+			this.bonusLust = 20;
 			this.lust = lust;
 			this.lustVuln = lustVuln;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 11;
+			this.level = 26;
 			this.gems = 1;
-			this.additionalXP = 50;
-			if(game.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 0) this.XP = 5;
+			this.additionalXP = 100;
+			if(game.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 0) this.XP = 10;
 			if(game.flags[kFLAGS.TIMES_PC_DEFEATED_VALA] > 2) this.XP = 1;
 			this.special1 = special1;
 			this.special2 = special2;
@@ -143,6 +146,13 @@ package classes.Scenes.Dungeons.DeepCave
 			else this.drop = NO_DROP;
 			this.wingType = WING_TYPE_BEE_LIKE_LARGE;
 			this.wingDesc = wingDesc;
+			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
+			this.str += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 3570;
 			checkMonster();
 		}
 		

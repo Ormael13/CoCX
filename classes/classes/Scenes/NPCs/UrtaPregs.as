@@ -62,6 +62,7 @@ private function urtaSexMenu():void {
 			if(flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] >= 5) addButton(1,"Suck Off",urta.slurpFawkesCocksForFunAndInflation);
 			else addButton(1,"Suck Off",urta.blowUrtaUnderTheTableLuv);
 			addButton(2,"Eat Out",urta.eatUrtaOutNomNomPussy);
+			addButton(4,"Leave",telAdre.barTelAdre);
 		}
 		//FRIEND
 		else {
@@ -84,7 +85,7 @@ private function urtaSexMenu():void {
 			if(flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -2 && RaphaelLikes() && flags[kFLAGS.URTA_X_RAPHAEL_HAPPENED] == 0) {
 				addButton(8, "3SomeSurprise", urta.urtaAndRaphaelSurprise);
 			}
-			addButton(9, "Leave", telAdre.barTelAdre);
+			addButton(14, "Leave", telAdre.barTelAdre);
 		}
 		//FRIEND
 		else {
@@ -96,7 +97,7 @@ private function urtaSexMenu():void {
 			if(flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -2 && RaphaelLikes() && flags[kFLAGS.URTA_X_RAPHAEL_HAPPENED] == 0) {
 				addButton(8, "3SomeSurprise", urta.urtaAndRaphaelSurprise);
 			}
-			addButton(9, "Leave", telAdre.barTelAdre);
+			addButton(14, "Leave", telAdre.barTelAdre);
 		}
 	}
 }
@@ -135,7 +136,7 @@ internal function urtaPreggoApproached():void {
 					//Display Urta Sexings or Urta Talking as appropriate
 					addButton(0,"Talk",urta.urtaDialogueMenu);
 				}
-				addButton(9,"Leave",telAdre.barTelAdre);
+				addButton(14,"Leave",telAdre.barTelAdre);
 				break;
 		case 2: 
 		case 3: if (rand(2) == 0) outputText("Urta's sitting side-saddled in her usual seat, dress bulging in a way that makes it clear she's at least half-erect already, a small paunch of a belly stretching out her dress.  She gives you a somewhat embarrassed smile when she sees you looking at it.  \"<i>I just feel horny all the time now,</i>\" she professes.  \"<i>I think it might be something to do with the hormones, though if you'd rather talk instead, I'd be happy to do that.</i>\"");
@@ -144,7 +145,7 @@ internal function urtaPreggoApproached():void {
 				//Display both Urta Sex Options and Urta Talk Options
 				addButton(0,"Sex",urtaSexMenu);
 				addButton(1,"Talk",urta.urtaDialogueMenu);
-				addButton(9,"Leave",telAdre.barTelAdre);
+				addButton(14,"Leave",telAdre.barTelAdre);
 				break;
 		case 4: outputText("Urta's moved from her usual table to a private booth, luxuriating in the high-backed chairs and the cushions padding seat and back alike.  The reason for this is obvious; she's quite obviously pregnant now, with her belly visibly rounded and swollen, bulging out into her lap but not truly big enough to interfere with her movements yet.  She rubs her belly and gives you a proudly self-satisfied smirk.  \"<i>We did it, [name]; we're going to have a baby.  After all these years... it's so wonderful.</i>\"  She visibly pats the bump stretching her dress; she's big, but not so big as to need a change of clothes yet. ");
 				if (flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] == 0) outputText("\n\nHer dress stretches even more as her cock swells out of its sheath, precum already darkening the fabric.  \"<i>Wanna fuck, lover?  Because I sure do...</i>\" She licks her lips at the prospect.");
@@ -153,7 +154,7 @@ internal function urtaPreggoApproached():void {
 				//Pregnant Sex options should probably start displaying either here or in the next stage.
 				addButton(0,"Sex",preggoUrtaSmexOrSomething);
 				addButton(1,"Talk",urta.urtaDialogueMenu);
-				addButton(9,"Leave",telAdre.barTelAdre);
+				addButton(14,"Leave",telAdre.barTelAdre);
 				break;
 		case 5:
 				outputText("Urta's still in the private booth she's moved to, and for a good, reason, too - her pregnancy is so obvious you'd have to be blind to miss it, adding what easily has to be around ten inches to her waistline - and straight out, at that.  The black dress she wears is stretching to its limit around her distended belly, pulled tight across the spherical bulge.  She is tucking away eagerly into a glass of fizzy, sweet-smelling orange drink, a picked-clean plate resting before her.  She spots you and nods even as she continues to drink.");
@@ -162,7 +163,7 @@ internal function urtaPreggoApproached():void {
 				else outputText("She places the glass down and licks her lips.  \"<i>Mmm... that stuff tastes a lot better than you think, especially when you're pregnant.  So, sexy, what brings you here?  Wanted to check up on us?</i>\"  She pats her belly with a smile.  \"<i>Or did you maybe want to talk?  ...Or perhaps <b>talk</b> a little?</i>\"  She grins wickedly.");
 				addButton(0,"Sex",preggoUrtaSmexOrSomething);
 				addButton(1,"Talk",urta.urtaDialogueMenu);
-				addButton(9,"Leave",telAdre.barTelAdre);
+				addButton(14,"Leave",telAdre.barTelAdre);
 				break;
 		case 6:
 				outputText("The pregnant fox's normal skimpy black dress has given up the ghost; her belly's just too big for her to squeeze into it without tearing it apart.  Instead, she's adopted a much more casual look; a knee-length pleated skirt and a midriff-baring t-shirt that has wispy strands of fishnet trailing under it and resting on the gray-furred expanse of her belly.  The shirt itself looks a little on the damp side where her nipples are; the milk must be coming in.  She rubs her stomach and smiles triumphantly at you.  \"<i>Look at me, lover; I'm really starting to get big now.  This just feels so wonderful; you don't know how long I've been dreaming about this happening to me.</i>\"");
@@ -171,14 +172,14 @@ internal function urtaPreggoApproached():void {
 				else outputText("\n\nShe's got a few glasses of milk next to her, but when she sees you, her expression turns a trifle embarrassed.  \"<i>Hey, [name].  You just missed me tending to my hormones,</i>\" she admits, more than a little sheepishly while pointing at the half-dozen glasses.  Your eyes widen when you realize just what the \"milk\" is.  Urta smirks, a little cockiness showing as she asks, \"<i>So did you want to talk, or see if we can fill up a few more?</i>\"");
 				addButton(0,"Sex",preggoUrtaSmexOrSomething);
 				addButton(1,"Talk",urta.urtaDialogueMenu);
-				addButton(9,"Leave",telAdre.barTelAdre);
+				addButton(14,"Leave",telAdre.barTelAdre);
 				break;
 		case 7: 
 				outputText("Urta's belly just keeps getting bigger and bigger; not that she seems to care. Indeed, she proudly flaunts her growing belly, and she's forever rubbing and stroking it.  You can see the occasional bulge or ripple as your child kicks in her womb, growing strong and healthy.  Damp spots have grown on her t-shirt from her budding milk supply, though Urta seems oblivious to it as of yet.  Her pleated skirt has risen high enough to fall back onto itself, leaving her groin totally immodest and undoubtedly aroused.");
 				outputText("\n\nMore pre drips from her length, and she notices you with a start, \"<i>Oh, [name]!  I was just thinking of you!  I never knew pregnancy could make me feel so... sexual.  Being so full of life just seems to make my male half want to make even more, if you know what I mean.  Please, tell me you're here for a quickie?</i>\"  She fidgets.  \"<i>I guess we could talk too... if you want.</i>\"");
 				addButton(0,"Sex",preggoUrtaSmexOrSomething);
 				addButton(1,"Talk",urta.urtaDialogueMenu);
-				addButton(9,"Leave",telAdre.barTelAdre);
+				addButton(14,"Leave",telAdre.barTelAdre);
 				break;
 		case 8:
 				outputText("Urta's finally outgrown even her booth, her belly now looking like she swallowed a prize-winning watermelon whole.  She's taken to sitting in a shapeless, very well-stuffed couch in an out-of-the-way nook of the bar.  Her hands stroke her gut and her erect dick at more or less the same time, precum dripping noisily into a bucket positioned under her erection.  She sees you coming and her cock bounces eagerly, belching another spurt of precum into the bucket from a surge in arousal.");
@@ -422,7 +423,9 @@ private function wakeUpWithUrtaAfterStaying():void {
 	statScreenRefresh();
 	player.orgasm();
 	camp.sleepRecovery(false);
+	HPChange(player.maxHP(), true);
 	//PC Wakes with Urta
+	awardAchievement("Getaway", kACHIEVEMENTS.GENERAL_GETAWAY);
 	outputText("As the morning sun shines on the blinds, you open your eyes.  Then you remember the events of the last day.  You spent the whole day with Urta, not having sex, just walking together and buying stuff for your newborn ");
 	if(flags[kFLAGS.URTA_KIDS_MALES] == 1) outputText("son");
 	else outputText("daughter");
@@ -505,7 +508,7 @@ private function drinkSomeUrtaPostBirthTitMilk():void {
 	outputText(" crib.  \"<i>Now then... I believe someone else wanted a taste...?</i>\"  She croons as she sashays over towards you, swollen breasts arched out and waiting for your touch.  You lift Urta's breasts, testing their weight and yield, then lick your lips and begin licking around her nipple, teasing the little erect nub.  \"<i>Oh, yeah, that feels nice... but please, be gentle, they're sensitive.</i>\"  Urta moans to you.");
 	
 	outputText("\n\nYou take Urta's nipple into your mouth and begin gently suckling, careful to not let your teeth graze the sensitive flesh, it takes only a moment before you're rewarded with a slow, but steady, trickle of vixen milk.  She growls with pleasure, reaching around your neck to cuddle you closer to her body.  You close your eyes and just enjoy the closeness, as well as the nutritious milk.  All too soon the trickle begins waning, and you know Urta must not have much left... yet you don't stop your nursing... even when she actually runs out of milk.  \"<i>Mmm... that feels nice, [name], but we both know you're just teasing me now... and that mightn't be such a good idea, unless you want to try some of my other milk..</i>.\"");
-	
+	player.refillHunger(20);
 	outputText("\n\nYou feel the tip of Urta's shaft jabbing you, and notice the tip seems to be gathering some pre.  Perhaps it is time to call it quits.  You let go of Urta's breast with some disappointment, smiling at her.  \"<i>Full now, [name]?</i>\"  She asks you.  When you reply that you are, she grins and then suddenly grabs you in a hug, putting your head over her shoulder.  \"<i>Time to get burped, then!</i>\"  She giggles, one hand rhythmically thumping into the small of your back.  You can't resist and eventually you let out a small burp, then step away, smiling sheepishly.");
 	
 	outputText("\n\nShe laughs and pats your cheek.  \"<i>Take care out there, [name]; we have ");
@@ -549,7 +552,7 @@ public function urtaPregooUpdates():Boolean {
 	}
 	//4: 
 	else if(player.pregnancyIncubation == 288) {
-		outputText("\nYou sit down near your tent to get some rest.  You're getting pretty heavy... and lugging this little guy around is starting to affect your performance while adventuring.  You decide to sit back and enjoy the cool breeze on this sunny day, when you spot the visage of a familiar vixen in the distance.");
+		outputText("\nYou sit down near your " + camp.homeDesc() + " to get some rest.  You're getting pretty heavy... and lugging this little guy around is starting to affect your performance while adventuring.  You decide to sit back and enjoy the cool breeze on this sunny day, when you spot the visage of a familiar vixen in the distance.");
 		
 		outputText("\n\nUrta smiles at you and gives you a friendly wave as she walks up.  \"<i>Hi, lover; how's the baby?</i>\"  She asks, already looking at your swollen stomach.  You take a deep breath and begin telling Urta about the burdens you're facing. The vixen gives you a sympathetic expression as you complain, timidly advancing closer to you as you speak, then gently reaching out with one hand, stopping before she fully touches your belly, looking at you with an obvious nonverbal request for permission.  You simply smile and nod your head.");
 		
@@ -592,7 +595,7 @@ public function urtaPregooUpdates():Boolean {
 		return true;
 	}
 	else if(player.pregnancyIncubation == 72) {
-		outputText("\nYou lay down on your tent to take a short nap, but when you're nearly dozing off, you spot a shadow on the outside of your tent.  Recognizing its vulpine form, you greet Urta as she approaches.");
+		outputText("\nYou lay down on your " + camp.homeDesc() + " to take a short nap, but when you're nearly dozing off, you spot a shadow on the outside of your " + camp.homeDesc() + ".  Recognizing its vulpine form, you greet Urta as she approaches.");
 		outputText("\n\n\"<i>Are you feeling okay, [name]?</i>\"  Urta suddenly blurts out with no preamble.  You nod your head, explaining that you're just tired, and you hope this baby will be out of you soon, you can't stand carrying it around anymore.  \"<i>Well, I don't think you'll have long to worry... I mean, have you taken a look at yourself recently, lover?  I don't mean to be rude, but you're huge!  You're going to pop any day now!</i>\"  She replies, staring anxiously at your midriff.");
 		outputText("\n\nYeah... you're pretty big, you admit.  \"<i>You really should come to Tel'adre, you know, [name].  I don't know any doctors who'll make housecalls all the way out here, not in the state the world is in.</i>\"  Urta tells you, blatant worry in her eyes.");
 		outputText("\n\nYou nod, considering her words.  But ultimately you don't think you need to go there right away. If you start feeling like you're going to go into labor, then you'll go to Tel'Adre.  Urta really doesn't look convinced, but sighs and nods.  \"<i>All right, [name], I know I can't make you change your mind.  Just... please try to be careful, all right?  You're at your most delicate state, you know?</i>\"  She doesn't give you time to answer, instead enveloping you in a gently possessive hug.  You hug her back and promise to be careful.");
@@ -635,7 +638,7 @@ private function getAnUrtaMassageWhenPreggo():void {
 	clearOutput();
 	outputText("You tell her that a backrub sounds fine, but you'd rather not lie down.  It could hurt the baby.  \"<i>Right, sorry, what was I thinking?  Well, I think I can be flexible...</i>\"  Urta grins, cracking her fingers. \"<i>Now, let's just find somewhere comfortable to put you first...</i>\"");
 	
-	outputText("\n\nYou suggest that perhaps the bedroll in your tent might suffice... or she could just give you a backrub while you're sitting.  \"<i>Well, let's give you that backrub, then; otherwise we might end up forgetting about the massage,</i>\" Urta laughs, trying to joke at her libido.  \"<i>Right, now, let's see, how does this work...</i>\"  She trails off.  Despite her offer, it's pretty obvious she's not exactly a professional masseuse.  At times she's too rough, and you have to warn her she's hurting your back, while other times she tickles you and you end up laughing.  In the end it's not as relaxing as you would have liked, though she did nail some knots and you do feel at least a bit more relaxed now.");
+	outputText("\n\nYou suggest that perhaps the bedroll in your " + camp.homeDesc() + " might suffice... or she could just give you a backrub while you're sitting.  \"<i>Well, let's give you that backrub, then; otherwise we might end up forgetting about the massage,</i>\" Urta laughs, trying to joke at her libido.  \"<i>Right, now, let's see, how does this work...</i>\"  She trails off.  Despite her offer, it's pretty obvious she's not exactly a professional masseuse.  At times she's too rough, and you have to warn her she's hurting your back, while other times she tickles you and you end up laughing.  In the end it's not as relaxing as you would have liked, though she did nail some knots and you do feel at least a bit more relaxed now.");
 	
 	outputText("\n\n\"<i>Sorry, [name], I don't really have a lot of experience with this,</i>\" Urta apologizes, looking depressed at her apparent failure to help you.");
 	
@@ -665,8 +668,8 @@ private function acceptUrtaLevelSixPreggoHelps():void {
 	clearOutput();
 	outputText("You're feeling really tired right now, and besides, spending a whole day with Urta would be nice, so you gladly accept her offer.");
 	
-	outputText("\n\nUrta smiles and throws her arms around you in a loving embrace.  \"<i>All right, [name], now let's get you back to your tent to lie down; you're getting too big to be up and about at all hours of the day now...</i>\"");
-	outputText("\n\nThere's no need for her to be so worried, you're feeling fine... but you go along with what she's planning anyway.  The day is quite a blissful one for you; you get to spend it doing nothing but lounging around and enjoying yourself while Urta waits on you hand and foot, cooks meals, does the laundry, and otherwise handles everything that needs to be done.  When night comes, she insistently parks her furry butt right in your bedroll alongside you and won't be budged, so you have little choice but to cuddle with her for the night.  The next morning, you wake to a cooked breakfast, with Urta hand-feeding you more than half of it before she kisses you, says her goodbyes, and heads off again.");
+	outputText("\n\nUrta smiles and throws her arms around you in a loving embrace.  \"<i>All right, [name], now let's get you back to your " + camp.homeDesc() + " to lie down; you're getting too big to be up and about at all hours of the day now...</i>\"");
+	outputText("\n\nThere's no need for her to be so worried, you're feeling fine... but you go along with what she's planning anyway.  The day is quite a blissful one for you; you get to spend it doing nothing but lounging around and enjoying yourself while Urta waits on you hand and foot, cooks meals, does the laundry, and otherwise handles everything that needs to be done.  When night comes, she insistently parks her furry butt right in your " + camp.bedDesc() + " alongside you and won't be budged, so you have little choice but to cuddle with her for the night.  The next morning, you wake to a cooked breakfast, with Urta hand-feeding you more than half of it before she kisses you, says her goodbyes, and heads off again.");
 	camp.sleepRecovery(false);
 	model.time.days++;
 	model.time.hours = 6;
@@ -683,7 +686,7 @@ public function PCGivesBirf():void {
 		player.createVagina();
 		player.genderCheck();
 	}
-	outputText("You double over in pain as you feel a rush of fluids escape your [pussy].  Looks like your water broke.  You recall promising Urta that you'd go to the hospital before actually going into labor, but right now there's nothing you can do.  It hurts and you know you won't make it there in time, so you rush to your tent and lay down on your bedroll, silently praying that Urta will swing by to assist you.");
+	outputText("You double over in pain as you feel a rush of fluids escape your [pussy].  Looks like your water broke.  You recall promising Urta that you'd go to the hospital before actually going into labor, but right now there's nothing you can do.  It hurts and you know you won't make it there in time, so you rush to your " + camp.homeDesc() + " and lay down on your " + camp.bedDesc() + ", silently praying that Urta will swing by to assist you.");
 	//1st Time:
 	if(flags[kFLAGS.URTA_TIMES_PC_BIRTHED] == 0) {
 		outputText("\n\n\"<i>[name]?  Oh, I just knew this would happen!</i>\"  Urta cries as she suddenly emerges from the undergrowth, racing over to your side.  Well, it looks like her little stalking habit is going to pay off for the two of you... well, for the three of you, rather: you, her and the baby.");
@@ -1522,9 +1525,9 @@ private function urtaRaepsJoo():void {
 	
 	outputText("\n\nYou swallow audibly, still trying to remove the top of your [armor].  \"<i>Now it's my turn to play, lover...</i>\" Urta chides, then strips down herself - the skirt comes off effortlessly, having been held on by a loose side fastener, and she easily shucks the shirt up and over her head, standing before you in all her naked, fluffy, pregnant, erect glory.  With a yip of glee she suddenly charges at you, knocking you firmly to the ground and rolling you around so that you are laying on your front, more or less, with your ass up in the air.  You start getting suspicions of what the pregnant herm has in mind when you feel her wide-tipped cock rubbing against your [butt], smearing wet precum in a slimy stain across your bottoms.");
 
-	outputText("\n\nYou tell her to get a hold of herself, she's never going to get anything done like this.  If she wants to do anything, first of all, she could at least let you strip.  Urta growls as she tightens her grip on your upper arms, pressing her breasts and bulging belly into your back.  \"<i>And let you have another chance to try and run out on me?  No way!</i>\"  She suddenly nips the back of your neck, not hard enough to actually hurt you, but definitely hard enough for you to realize what she just did.  \"<i>'Sides, all I need is to get these underthings of yours off...</i>\"");
+	outputText("\n\nYou tell her to get a hold of herself, she's never going to get anything done like this.  If she wants to do anything, first of all, she could at least let you strip.  Urta growls as she tightens her grip on your upper arms, pressing her breasts and bulging belly into your back.  \"<i>And let you have another chance to try and run out on me?  No way!</i>\"  She suddenly nips the back of your neck, not hard enough to actually hurt you, but definitely hard enough for you to realize what she just did.  " + player.clothedOrNakedLower("\"<i>'Sides, all I need is to get these underthings of yours off...</i>\""));
 	
-	outputText("\n\nBefore you can protest, she attacks the lower half of your clothes, practically ripping it apart in her desire to expose your hindquarters.  You can feel her tearing off your underwear with her teeth, and definitely hear her growling and shaking it madly in her mouth like a dog with a rat before she spits it away with disdain.  \"<i>Oooh... yeah.</i>\"  She croons, running her nimble, supple fingers over each curving cheek of your [butt].  \"<i>You got such a sexy ass.</i>\"  She informs you, rubbing her belly up over the swell of your ass into the small of your back so she can then position the flared tip of her equine dick against your [asshole].  She rubs and thrusts against you, crudely lubing you up with the copious amounts of herm precum flowing from her she-cock.  Finally deeming you satisfactorily wet, she positions the tip of her dick so that it's pressing insistently against your back passage...");
+	outputText("\n\n" + player.clothedOrNaked("Before you can protest, she attacks the lower half of your clothes, practically ripping it apart in her desire to expose your hindquarters.  " + (player.lowerGarmentName != "nothing" ? "You can feel her tearing off your underwear with her teeth, and definitely hear her growling and shaking it madly in her mouth like a dog with a rat before she spits it away with disdain." : "")) + "  \"<i>Oooh... yeah.</i>\"  She croons, running her nimble, supple fingers over each curving cheek of your [butt].  \"<i>You got such a sexy ass.</i>\"  She informs you, rubbing her belly up over the swell of your ass into the small of your back so she can then position the flared tip of her equine dick against your [asshole].  She rubs and thrusts against you, crudely lubing you up with the copious amounts of herm precum flowing from her she-cock.  Finally deeming you satisfactorily wet, she positions the tip of her dick so that it's pressing insistently against your back passage...");
 	
 	outputText("\n\n\"<i>Are you ready for this, baby-daddy?</i>\"  She moans lewdly in your ears.  Then, with what you're certain is a wicked grin, she answers herself.  \"<i>Doesn't matter, because I sure am!</i>\"  With that, she promptly jams her swollen phallus right in, forcing herself in to the balls in one single fierce thrust!");
 	player.buttChange(60,true,true,false);
@@ -1606,7 +1609,7 @@ private function urtaRaepsJoo():void {
 private function partTwoOfUrtaBoning():void {
 	clearOutput();
 	outputText("You open your eyes and gaze at the smiling face of Urta.  \"<i>Good morning, lover.  Sleep well?</i>\"  She playfully teases you.  You smile at her, stretching yourself and finally becoming aware of the rest of your body.  You wince in pain as your abused ass screams a protest at your motions, a strange weight emanating from your midriff.  Your belly is visibly rounded out, filled with what you imagine is the result of many loads from your foxy lover.  Urta gives your belly a gentle rub and seems to seriously study your bulging gut and hers.  \"<i>I think mine is still bigger,</i>\" she says, with a slightly embarrassed giggle.");
-	
+	player.refillHunger(100);
 	if(player.cockTotal() > 1) {
 		outputText("\n\n[EachCock] is fully erect, painfully pointing at Urta's opening.");
 		if(!player.isTaur()) outputText("  So close that you can almost feel its heat against your [cockHead].");
@@ -1888,7 +1891,7 @@ private function stayToPlay():void {
 		if(urtaKids() > 1) outputText("ren");
 		outputText("?  \"<i>No, of course not!</i>\"  She says, heartbreak and outrage warring in her tone.  \"<i>Lianna normally does the cooking, though... oh, [name], I'm so sorry!</i>\"  She sobs.  Lianna coughs and both you and Urta look at her.  \"<i>Sorry to interrupt, but the food is getting cold.</i>\"  Urta stares at her blankly, then nods.  \"<i>Please go and fetch it, Lianna,</i>\" she says, a little coldly.");
 		outputText("\n\nCompared to Urta's cooking, Lianna's is heavenly.  This is far from what you expected from the strange skunk alchemist.  It seems that despite her mostly crazy ideas regarding alchemy, she at least follows good cooking practices.  You can't hide the smile that comes over your face as you eat gleefully.");
-		
+		player.refillHunger(65);		
 		outputText("\n\nUrta gives a quiet, dismissive huff; she's quite obviously jealous of how much better her nanny's cooking is than hers.");
 		
 		outputText("\n\nYou finish eating and get up to take your dish to kitchen, when Lianna stops you from doing so.  \"<i>I got this,</i>\"  She states, taking your dish from your hands and proceeding to do the same for everyone else.  You thank Urta for the invitation, kissing her before telling her you should be going.  \"<i>Thank you, lover.</i>\"");
@@ -2264,7 +2267,9 @@ private function takeTheKidsForWalk():void {
 	outputText(" don't bother waiting or savouring their ice cream and neither do you, it's damned hot walking around this desert.  There's less cause for mischief too, " + urtaKidsText("his","her","their") + " face");
 	if(urtaKids() == 1) outputText("buried in cone");
 	else outputText("s buried in their cones");
-	outputText(" along with your own, greedily licking up melting droplets.  There's just a bit of cone left as you return to Urta's house, and you quickly polish that off, upon entering.  \"<i>Oh, hey.  You're back.</i>\"  Lianna greets you in her usual inexpressive fashion.");
+	outputText(" along with your own, greedily licking up melting droplets.  ")
+	player.refillHunger(20, false);
+	outputText("  There's just a bit of cone left as you return to Urta's house, and you quickly polish that off, upon entering.  \"<i>Oh, hey.  You're back.</i>\"  Lianna greets you in her usual inexpressive fashion.");
 	
 	outputText("\n\n\"<i>How did it go?</i>\"");
 	
@@ -2347,7 +2352,7 @@ public function visitTheHouse():void {
 	addButton(2,"Sex",sexWithLianna);
 	addButton(4,"Kids",pickKidSceneHere);
 	
-	addButton(9,"Back",telAdre.telAdreMenu);
+	addButton(14,"Back",telAdre.telAdreMenu);
 }
 
 //Lianna
@@ -2357,7 +2362,7 @@ private function liannasAppearance():void {
 	outputText("Lianna is a healthy looking young anthro, a skunk-morph covered in sleek, shiny black fur, with white adorning her swishing, fluffy-looking tail.  Her hair is pure black with streaks of white, tied out of the way into a short ponytail, and her green eyes glitter behind round, silver-rimmed glasses that perch atop her nose.  She wears a conservative short-sleeved blouse, and pants that, while slightly baggy, still manage to show off her nice legs.  They're certainly tight enough that you can tell she's all girl; no hidden surprises here.  She goes without shoes, exposing her paw-like feet.  She has a very nicely rounded, generous handful of an ass, and womanly hips; up top, she is no less stacked, with what are easily E-cup breasts making her even bustier than her employer is; despite all that, she tries to tone them down with her style of dress.");
 	//(Display Options)
 	menu();
-	addButton(9,"Back",visitTheHouse);
+	addButton(14,"Back",visitTheHouse);
 }
 
 private function talkToLiana(output:Boolean = true):void {
@@ -2370,7 +2375,7 @@ private function talkToLiana(output:Boolean = true):void {
 	addButton(1,"HerResearch",talkToLianaAboutHerResearch);
 	if(flags[kFLAGS.LIANNA_HAVESTED_MALES] + flags[kFLAGS.LIANNA_HAVESTED_LADIES] > 0) addButton(2,"Her Spray",talkAboutLiannasLubeSpray);
 	if(flags[kFLAGS.DISCUSSED_LUBE_SPRAY] > 0) addButton(3,"Side Effect",lubeSpraySideEffects);
-	addButton(9,"Back",visitTheHouse);
+	addButton(14,"Back",visitTheHouse);
 }
 
 //Her Job

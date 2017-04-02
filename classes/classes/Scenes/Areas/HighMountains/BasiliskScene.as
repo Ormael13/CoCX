@@ -27,7 +27,7 @@ package classes.Scenes.Areas.HighMountains
 		//Intros and Fight Texts. 
 		public function basiliskGreeting():void {
 			spriteSelect(75);
-			outputText("", true);
+			clearOutput();
 			//First encounter: 
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00276] == 0) {
 				outputText("You are carefully trailblazing up a steep pass in the jagged mountain peaks when a furious screech from high above you makes you start.\n\n", false);
@@ -60,19 +60,19 @@ package classes.Scenes.Areas.HighMountains
 		//wins
 		public function defeatBasilisk():void {
 			spriteSelect(75);
-			outputText("", true);
+			clearOutput();
 			var evil:Function =null;
 			var eggs:Function =null;
 			if(player.canOvipositSpider()) eggs = driderPCEggLaysBasilisk;
 			if(player.canOvipositBee() && player.gender > 0) eggs = layBeeEggsInABasilisk;
-			if(player.cockThatFits(monster.analCapacity()) >= 0 && player.cor >= 66) evil = defeatBasiliskAndAnal;
+			if(player.cockThatFits(monster.analCapacity()) >= 0 && (player.cor >= 66 - player.corruptionTolerance() || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1)) evil = defeatBasiliskAndAnal;
 			//Player HP victory: 
 			if(monster.HP < 1) outputText("Unable to stand anymore, the basilisk shakily sinks down on one knee, drops its head and looks at the ground, evidently demonstrating submission.", false);
 			//Player Lust victory: 
 			else outputText("No longer able to control its raging erection, the basilisk closes its eyes and sinks to one knee.  It would probably be attempting to signal its submission to you if it weren't furiously masturbating its long, purple cock, which has emerged straining from the creature's genital slit.", false);
 		
 			//If victory and Player Lust above 30: 
-			if(player.lust >= 33 && player.gender > 0) {
+			if(player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  Certain that the creature won't dare try and turn its eyes on you again, you take your time to look the tall reptile over directly for the first time.  Perhaps you could use it to satisfy your baser urges. If so, what part of it do you choose?", false);
 				//[Tongue][Ass]
 				simpleChoices("Tongue", tongueBasiliskSmex, "Ass", evil, "", null, "Lay Eggs", eggs, "Leave", cleanupAfterCombat);
@@ -84,7 +84,7 @@ package classes.Scenes.Areas.HighMountains
 		// "<i>Tongue"<i>
 		private function tongueBasiliskSmex():void {
 			spriteSelect(75);
-			outputText("", true);
+			clearOutput();
 			outputText("You tap your jaw as you stare down at the defeated reptile, smiling at its oddly formal gesture of surrender.  You'd very much like to take some satisfaction from the basilisk, extract a bit of pleasurable payment for what it tried to do to you: but the more you get to look at it properly, the more difficult doing that seems. The tall, thin creature is all angles, tough scales and pointed edges. You don't like the thought of putting your genitals anywhere near its sickle claws or curved fangs.\n\n", false);
 		
 			outputText("It is as you are taking in this latter article that the basilisk swallows nervously, and you get a glimpse inside its mouth at a long, sticky, pale purple tongue, another gift of its reptilian ancestors. It's the only part you've seen of it so far which looks... soft.  Pliable.  Your smile widens and you step forward, slowly loosening your " + player.armorName + ".\n\n", false);
@@ -129,7 +129,7 @@ package classes.Scenes.Areas.HighMountains
 		//basilisk Defeat: Anal 
 		private function defeatBasiliskAndAnal():void {
 			spriteSelect(75);
-			outputText("", true);
+			clearOutput();
 			//Requires: Corruption 70 or more, cock (for now) 
 			//Prelude: 
 			outputText("You stand over the kneeling basilisk, your mind boiling with lust and anger.  You want to really punish this loathsome lizard for daring to mess with you, for daring to try to force its unsettling, paralyzing magic on you.  As you weigh up your options, the tall reptile slides an eye open and chances a look upwards.  Whatever it sees in your face causes it to flinch and immediately close it again, but even this tiny show of defiance enrages you.  \"<i>Open them again and I will close them.  Permanently,</i>\" you snarl.  The creature has given you a stroke of inspiration, though.  If only there was something... you look around you, and a gleam of light catches your eye; a somewhat clear, still pool of water lies about two dozen yards away.  A cruel grin splits your face: <i>providence</i>.\n\n", false);
@@ -174,7 +174,7 @@ package classes.Scenes.Areas.HighMountains
 		//Player Defeated:
 		public function loseToBasilisk():void {
 			spriteSelect(75);
-			outputText("", true);
+			clearOutput();
 			//Speed 0 loss: 
 			if(player.spe <= 1) {
 				outputText("Moving has become intensely difficult.  You cannot explain why something that came naturally to you ten minutes ago is now like wading neck deep through quicksand, but that is what moving your limbs now feels like. With a huge, straining amount of effort, you desperately raise your arms and crane your neck away from the basilisk as it approaches you, but with a pathetic amount of ease the creature slides through your guard, grabs you by the chin and looks directly into your eyes.  Your reactions are so slow your mind's screaming order for your eyelids to close takes several seconds for your nerves to compute, by which time it is far too late.\n\n", false);
@@ -195,9 +195,9 @@ package classes.Scenes.Areas.HighMountains
 				// speDown.visible = false;
 				player.removeStatusAffect(StatusAffects.BasiliskSlow);
 			}
-			dynStats("spe", -3, "lus", 399);
+			dynStats("spe", player.findPerk(PerkLib.BasiliskResistance) < 0 ? 3 : 1, "lus", 399);
 			//Bad end
-			if(player.spe < 5) {
+			if(player.spe < 5 && player.findPerk(PerkLib.BasiliskResistance) < 0) {
 				basiliskBadEnd();
 				return;
 			}
@@ -367,7 +367,7 @@ package classes.Scenes.Areas.HighMountains
 		//Requires: Lose to basilisk when Speed is less than 5 (changed from 15 to prevent level 1 gameover -Z)
 		private function basiliskBadEnd():void {
 			spriteSelect(75);
-			outputText("", true);
+			clearOutput();
 			outputText("Moving has become intensely difficult.  You cannot explain why something that came naturally to you ten minutes ago is now like wading neck deep through quicksand, but that is what moving your limbs now feels like.  With a huge, straining amount of effort, you desperately raise your arms and crane your neck away from the basilisk as it now approaches you, but with a pathetic amount of ease the creature slides through your guard, grabs you by the chin and looks directly into your eyes.  Your reactions are so slow your mind's screaming order for your eyelids to close takes several seconds for your nerves to compute, by which time it is far too late.\n\n", false);
 		
 			outputText("You stare deep into the creature's eyes.  There really is an infinity in there, a grey fractal abyss which spirals upwards and downwards forever.  You want nothing more than to spend the rest of your life following it... you fall into that endless abyss for what seems like years, decades, uncharted aeons.  You lose all sense of yourself, your situation, your purpose; you do not feel the tips of your fingers slowly turning cold and grey, rivulets of the texture advancing slowly up your hand, any more than you notice the turn of a planet a thousand light years away.  There is only the wet grey, and you, an infinitesimally tiny speck lost in a universe, a universe that knows, sees, and controls.  When the basilisk's pupils dilate, and you feel its hypnotic compulsion press upon your mind, you can no sooner resist it than a tadpole can an endless, grey waterfall.  When it demands that you be horny, you cannot disobey it any more than you can disobey gravity.  You are submerged in a sea of sex.", false);
@@ -458,7 +458,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText("The harpy manages to cum twice on your hand, gobbling with excitement as she spatters your arm with her juices.  During this time you are forced to ride the potent cocktail of hypnotic sexual compulsion and the pheromone lipstick again and again, until you feel you would have collapsed in a pool of steaming sex long ago if your knees allowed it.  Once she is finished with you the harpy clambers down, taking care to wipe her leaking twat on your naked front as she does so, before flapping off with a winsome smirk, entirely ignoring your own achingly deprived sex.\n\n", false); 
 		
 				outputText("After another ten or twenty minutes of being forced to stand still and savor your own shameful memories, you find with great relief you can begin to move your fingers again. Eventually with some effort you manage to work power into each corner of your body and finally shake free of the basilisk's curse; quickly, you redress before anything else finds you and, still reeking of harpy sex, you begin to make your way back down the mountain. You think woozily that maybe you should consider yourself lucky that nothing actually fucked you whilst you were in your helpless state, but your body thinks the exact opposite, and you really, really need to get back to camp and sort yourself out.", false);
-				dynStats("lus=", 100);
+				dynStats("lus=", player.maxLust());
 			}
 			//Genderless: 
 			else {
@@ -473,7 +473,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText("The harpy manages to cum twice on your hand, gobbling with excitement as she spatters your arm with her juices.  During this time you are forced to ride the potent cocktail of hypnotic sexual compulsion and the harpy's golden lipstick again and again, until you feel you would have collapsed in a pool of steaming sex long ago if your knees would only allow it.  Once she is finished with you the harpy clambers down, taking care to wipe her leaking twat on your naked front as she does so, before flapping off with a winsome smirk, entirely ignoring your own plight.\n\n", false);
 		
 				outputText("After another ten or twenty minutes of being forced to stand still and savor your own shameful memories, you find with great relief you can begin to move your fingers again.  Eventually with some effort you manage to work power into each corner of your body and finally shake free of the basilisk's curse; quickly, you redress before anything else finds you and, still reeking of harpy sex, you begin to make your way back down the mountain.  You think woozily that maybe you should consider yourself lucky that nothing actually fucked you whilst you were in your helpless state, but your body thinks the exact opposite, and you really, really need to get back to camp and sort yourself out.", false);
-				dynStats("lus=", 100);
+				dynStats("lus=", player.maxLust());
 			}
 		}
 		//Defeated, Taken Advantage of: goblin

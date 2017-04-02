@@ -90,7 +90,7 @@ package classes.Scenes.Areas.Forest
 				doNext(createCallBackFunction(followTheWillOWisp, true));
 			}//PC did NOT see through glamour
 			//With Religious BG:
-			else if (player.findPerk(PerkLib.HistoryReligious) >= 0) {
+			else if (player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) {
 				outputText("The instant she touches you, she recoils with a yelp, a brilliant flash temporarily blinding you both.\n\n");
 				outputText("\"<i>Ow, ow, ow!</i>\"\n\n");
 				outputText("When the spots clear from your eyes, the kitsune's glamour has been dispelled, revealing her for what she truly is.  A pair of large triangular fox ears poke up from her ");
@@ -153,7 +153,7 @@ package classes.Scenes.Areas.Forest
 				//+15 Lust
 				dynStats("lus", 15);
 			}
-			if ((player.lust >= 100 || player.inte < 20) && !firstTime) {
+			if ((player.lust >= player.maxLust() || player.inte < 20) && !firstTime) {
 				mansion(false, false);
 			}
 			//Else:
@@ -634,10 +634,10 @@ package classes.Scenes.Areas.Forest
 			fatigue(15);
 			kitsuneSprite();
 			dynStats("tou", -2);
-			if (player.fatigue > 80 && player.fatigue < 100) {
+			if (player.fatigue > (player.maxFatigue() -20) && player.fatigue < player.maxFatigue()) {
 				outputText("\n\nYour dreams are haunted by visions of yourself wandering through the halls of an impressive manor, searching desperately for a way out.  No matter where you turn, the twisting hallways all seem to turn back on each other.  You are trapped, forever doomed to wander the halls of this manor, being toyed with at the whims of your three beautiful mistresses.");
 			}
-			if (player.fatigue >= 100) {
+			if (player.fatigue >= player.maxFatigue()) {
 				//mansionBadEnd();
 				doNext(mansionBadEnd);
 			}
@@ -661,6 +661,11 @@ package classes.Scenes.Areas.Forest
 					}
 					outputText("production has been enhanced.</b>");
 				}
+				if (player.findPerk(PerkLib.SoulSense) >= 0 && flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] < 4) flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION]++;
+				if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] == 4) {
+					flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION]++;
+					outputText("\n\n<b>You have been in mansion enough times to be able to find it in the future when using soul sense. (Removes Kitsunes from deepwoods explore encounters pool!)</b>", false);
+				}
 				model.time.hours = 6;
 				model.time.days++;
 				if (!getGame().inCombat)
@@ -674,7 +679,7 @@ package classes.Scenes.Areas.Forest
 			clearOutput();
 			kitsuneSprite();
 			// Kitsune's Thrall Bad End
-			outputText("Your dreams are cut short as you awaken with a start, launching yourself bolt upright.  You are drenched in a frigid sweat, panting from an unexplained sense of dread that still has you in a panic.  The dread only worsens when you take stock of your surroundings.  For a moment you think you are back in Ingnam, but the unfamiliar surroundings push the notion from your mind as soon as it forms.  Neither are you in your bedroll in camp, however.  Gradually, you piece together the events of the previous night through the miserable pounding in your skull.\n\n");
+			outputText("Your dreams are cut short as you awaken with a start, launching yourself bolt upright.  You are drenched in a frigid sweat, panting from an unexplained sense of dread that still has you in a panic.  The dread only worsens when you take stock of your surroundings.  For a moment you think you are back in Ingnam, but the unfamiliar surroundings push the notion from your mind as soon as it forms.  Neither are you in your " + camp.bedDesc() + " in camp, however.  Gradually, you piece together the events of the previous night through the miserable pounding in your skull.\n\n");
 			outputText("\n\nThe realization hits you like a bag full of rocks, and you spring to " + ((player.isBiped()) ? "your feet" : "action" ) + " immediately, leaping off the comfortable bed.  Your " + player.armorName + " are gone, replaced by exotic robes woven of fine silk.  What's more, you have no weapon to speak of!  Still reeling a bit from your hangover, you stumble out into the hallway, looking for a way out before the mansion's mysterious owners get wind of your egress.\n\n");
 			outputText("Your muscles are filled with fatigue and soreness from the night's activities, and it feels as though you are carrying a rucksack full of lead on your shoulders.  Just how long were the three of them at it after you passed out?  By the throbbing pain you feel in your hips, it feels like must have kept going all night long.\n\n");
 			outputText("You wander the meandering hallways of the manor for what feels like ages, searching for any sign of an exit.  At last, you find yourself in a familiar area, vaguely recalling passing through this room on the way to the banquet that the sisters had prepared for you.  Only now can you truly appreciate what a terribly foolish idea it was to accept food from the three mischief-makers.\n\n");
@@ -739,6 +744,8 @@ package classes.Scenes.Areas.Forest
 
 		public function loseToKitsunes():void
 		{
+			clearOutput();
+			if (doSFWloss()) return; //No rape in SFW mode.
 			var scene:Array = [];
 			//[LOSE FIGHT]
 			//Shared Scenes
@@ -1138,7 +1145,19 @@ package classes.Scenes.Areas.Forest
 			//[Feeder]
 			if (player.findPerk(PerkLib.Feeder) >= 0)
 				button = kitsuneButton(button, "Breastfeed", feederTheKitsunes);
-			addButton(9, "Leave", leaveKitsune);
+			//Remove buttons in SFW mode. No rapes!
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				removeButton(0);
+				removeButton(1);
+				removeButton(2);
+				removeButton(3);
+				removeButton(4);
+				removeButton(5);
+				removeButton(6);
+				removeButton(7);
+				removeButton(8);
+			}
+			addButton(14, "Leave", leaveKitsune);
 		}
 
 		private function kitsuneButton(button:int, nam:String, func:Function):int
@@ -2241,29 +2260,246 @@ package classes.Scenes.Areas.Forest
 		public function kitsuneShrine():void
 		{
 			clearOutput();
-			if (flags[kFLAGS.KITSUNE_SHRINE_VISIT] == 0) {
+			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] == 0) {
+				if (flags[kFLAGS.KITSUNE_SHRINE_VISIT] > 0 && player.earType == EARS_FOX && player.tailVenom >= 2) {
+					outputText("As you wander the woods you spot a floating blue flame yet again. Being a kitsune yourself you’ve grown wise to that tactic, and go straight for the trickster herself. Surprisingly, it’s not one of the kitsune sisters you were expecting, but a different person. She wears a formal kimono and has hair as white as snow. When she notices you, she starts by giving you the classic \"<i>Hello adventurer would you like to...</i>\" line until she realises you also have a pair of fox ears and multiple tails. There is an awkward silence as she sizes you up, then sighs.\n\n");
+					outputText("\"<i>My apologies, I heard there was a human wandering the woods as of late, and I couldn’t stop myself from thinking of a potential meal. My name is Ayane. I don’t recall meeting you within the region, are you new?</i>\"\n\n");
+					outputText("You decide to play fair and admit you actually are a former human and that you have been looking for a way to become a kitsune yourself.\n\n");
+					outputText("\"<i>Oh, so you are interested in becoming one of the blessed children of Taoth? I guess that can be arranged, it’s not like you are the first person to try, and I see you have already begun the conversion on your own initiative. Still, if you truly wish to reach enlightenment and become one of us, simply taking transformatives won’t suffice. You must also commit yourself to him truly. I can help you with that. Anytime you wish to further your transformation, visit the shrine. I will be there for you and perhaps, if you're lucky enough, the trickster god will see you worthy of his blessings.</i>\" Having finished talking she vanishes, leaving you alone in the woods.\n\n");
+					outputText("<b>You can now visit the forest shrine at will.</b>");
+					flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED]++;
+					doNext(camp.returnToCampUseOneHour);
+					return;
+				}
+				else outputText("You find your way to the abandoned kitsune shrine again.  The place is full of rotten timber, but it has a bookcase stuffed with well-maintained tomes.  The remains of a camp are in here as well, though the owner is curiously absent.  Judging by the layer of dust on everything, whoever lived here hasn't been around in quite some time.  You're sure they wouldn't mind if you helped yourself to some of those books - you might just learn a thing or two.");
+			}
+			else if (flags[kFLAGS.KITSUNE_SHRINE_VISIT] == 0) {
 				outputText("Your travels take you down a winding path through the forest today, deep in the heart of the woods.  Each step you take makes it feel even more like the dense foliage is creeping in even closer, the rough-hewn dirt path dwindling down to almost nothing up ahead.  Whatever the trail was used for long ago, it is in the late stages of being reclaimed by the wilderness now.\n\n");
-
 				outputText("While you are mindful of this land's dangers, you are curious what secrets this part of the forest might hold.  You press on, trudging through the weed-choked trail, doing your best to keep your wits about you as you march onwards.\n\n");
-
 				outputText("You emerge from the dense foliage into a large clearing.  Your eye is immediately drawn to an absurdly large tree in the center, its weathered trunk covered in knots and gnarls.  Odd-looking paper talismans hang from some of the branches, swaying eerily in a nonexistent breeze.  Worn down flagstones wind around the ancient-looking tree to a small, run-down wooden building that looks like it could comfortably accommodate a single person if it wasn't in such a dilapidated state.\n\n");
-
 				outputText("You call out, but the place seems to be abandoned.  Shrugging, you decide to take a look around the building, hefting a rotten timber out of the way of the door and creeping inside carefully, just in case you aren't really alone.\n\n");
-
 				outputText("It takes a moment for your eyes to adjust to the dim light inside the musty shed, but you eventually start to piece together the makings of a simple dwelling.  An old bedroll lies in one corner, assorted cooking implements hung with care over a small fire pit.  In the rear of the one-room building is enshrined a small pedestal, atop of which stands a small gold statue of an androgynous figure with nine tails.  A short distance away stands a bookcase filled with musty tomes and scrolls of all shapes and sizes.\n\n");
-
 				outputText("Judging by the layer of dust on everything, whoever lived here hasn't been around in quite some time.  You're sure they wouldn't mind if you helped yourself to some of those books - you might just learn a thing or two.  That gold statue is pretty tempting too, but on the other hand it seems to have some sort of spiritual significance - stealing it from its rightful place might not be the wisest idea.  Of course, you could always try praying to it.");
 			}
 			else {
-				outputText("You find your way to the abandoned kitsune shrine again.  The place is full of rotten timber, but it has a bookcase stuffed with well-maintained tomes.  The remains of a camp are in here as well, though the owner is curiously absent.  Judging by the layer of dust on everything, whoever lived here hasn't been around in quite some time.  You're sure they wouldn't mind if you helped yourself to some of those books - you might just learn a thing or two.");
+				outputText("You find your way to the abandoned kitsune shrine again.  The place is full of rotten timber, but it has a bookcase stuffed with well-maintained tomes.  The remains of a camp are in here as well, though the owner is curiously absent.  Judging by the layer of dust on everything, whoever lived here hasn't been around in quite some time.  You're sure they wouldn't mind if you helped yourself to some of those books - you might just learn a thing or two.\n\n");
+				if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 1) outputText("Ayane is meditating on a rock next to the shrine.\n\n");
+				if (rand(3) == 0) outputText("A few kitsunes seem to be here to meditate today.\n\n");
+				outputText("");
 			}
 			flags[kFLAGS.KITSUNE_SHRINE_VISIT]++;
 			//[Read Books] [Meditate] [Steal Statue] - [Leave]
 			menu();
 			addButton(0, "Read Books", readKitsuneBooks);
 			if (flags[kFLAGS.TOOK_KITSUNE_STATUE] == 0) addButton(1, "Meditate", meditateLikeAKitsuneEhQuestionMark);
-			if (player.hasItem(useables.GLDSTAT) || flags[kFLAGS.TOOK_KITSUNE_STATUE] == 0) addButton(2, "Statue", stealAStatue);
+			if ((player.hasItem(useables.GLDSTAT) || flags[kFLAGS.TOOK_KITSUNE_STATUE] == 0) && flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] < 1) addButton(2, "Statue", stealAStatue);
+			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 2) addButton(2, "Ayane", ayaneAtShrine);
+			if (player.findPerk(PerkLib.StarSphereMastery) > 0 && player.perkv1(PerkLib.StarSphereMastery) < 10 && player.gems >= 1000) addButton(3, "Offering", offeringToTaoth);
 			addButton(4, "Leave", camp.returnToCampUseOneHour);
+			if (flags[kFLAGS.AYANE_FOLLOWER] == 1) {
+				addButton(5, "Servant", AyaneServant);
+			}
+			if (player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.inte >= 100 && player.cor >= 50) addButton(6, "Slave", AyaneSlave);
+		}
+
+//[Ayane Shop at Shrine]
+		private function ayaneAtShrine():void
+		{
+			clearOutput();
+			outputText("Ayane gives you a mischievous grin as you approach the shrine's shop stall.\n\n");
+			outputText("\"<i>You want to buy some nice clothes and gear to look the part and do better tricks? Sure, I’ve got a few useful items I can spare, for you that is. What do you need?</i>\"");
+			menu();
+			addButton(0, "WhiteKimono", sellWhiteKimono);
+			addButton(1, "RedKimono", sellRedKimono);
+			addButton(2, "BlueKimino", sellBlueKimono);
+			addButton(3, "PurpleKimono", sellPurpleKimono);
+			addButton(4, "ArcaneBangles", sellArcaneBangles);
+			addButton(5, "SpiritFocus", sellSpiritFocus);
+			addButton(6, "Fox Hairin", sellFoxHairpin);
+			addButton(7, "Fox Jewel", sellFoxJewel);
+			addButton(8, "Scholar Tea", sellScholarTea);
+			addButton(9, "Vixen Tea", sellVixenTea);
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
+		}
+		private function sellWhiteKimono():void {
+			clearOutput();
+			outputText("\"<i>To look the part, you will have to dress the part. This magical clothing is made for a kitsune, and to be honest I think <b>200 gems</b> is somewhat cheap for an enchanted garment like this.</i>\"");
+			doYesNo(buyWhiteKimono, ayaneAtShrine);
+		}
+		private function buyWhiteKimono():void {
+			if (player.gems < 200) {
+				clearOutput();
+				outputText("\n\nAyane shakes her head, indicating you need " + String(200 - player.gems) + " more gems to purchase this item.");
+				doNext(ayaneAtShrine);
+			}
+			else {
+				outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
+				player.gems -= 200;
+				inventory.takeItem(armors.WKIMONO, ayaneAtShrine);
+				statScreenRefresh();
+			}
+		}
+		private function sellRedKimono():void {
+			clearOutput();
+			outputText("\"<i>To look the part, you will have to dress the part. This magical clothing is made for a kitsune, and to be honest I think <b>200 gems</b> is somewhat cheap for an enchanted garment like this.</i>\"");
+			doYesNo(buyRedKimono, ayaneAtShrine);
+		}
+		private function buyRedKimono():void {
+			if (player.gems < 200) {
+				clearOutput();
+				outputText("\n\nAyane shakes her head, indicating you need " + String(200 - player.gems) + " more gems to purchase this item.");
+				doNext(ayaneAtShrine);
+			}
+			else {
+				outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
+				player.gems -= 200;
+				inventory.takeItem(armors.RKIMONO, ayaneAtShrine);
+				statScreenRefresh();
+			}
+		}
+		private function sellBlueKimono():void {
+			clearOutput();
+			outputText("\"<i>To look the part, you will have to dress the part. This magical clothing is made for a kitsune, and to be honest I think <b>200 gems</b> is somewhat cheap for an enchanted garment like this.</i>\"");
+			doYesNo(buyBlueKimono, ayaneAtShrine);
+		}
+		private function buyBlueKimono():void {
+			if (player.gems < 200) {
+				clearOutput();
+				outputText("\n\nAyane shakes her head, indicating you need " + String(200 - player.gems) + " more gems to purchase this item.");
+				doNext(ayaneAtShrine);
+			}
+			else {
+				outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
+				player.gems -= 200;
+				inventory.takeItem(armors.BKIMONO, ayaneAtShrine);
+				statScreenRefresh();
+			}
+		}
+		private function sellPurpleKimono():void {
+			clearOutput();
+			outputText("\"<i>To look the part, you will have to dress the part. This magical clothing is made for a kitsune, and to be honest I think <b>200 gems</b> is somewhat cheap for an enchanted garment like this.</i>\"");
+			doYesNo(buyPurpleKimono, ayaneAtShrine);
+		}
+		private function buyPurpleKimono():void {
+			if (player.gems < 200) {
+				clearOutput();
+				outputText("\n\nAyane shakes her head, indicating you need " + String(200 - player.gems) + " more gems to purchase this item.");
+				doNext(ayaneAtShrine);
+			}
+			else {
+				outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
+				player.gems -= 200;
+				inventory.takeItem(armors.PKIMONO, ayaneAtShrine);
+				statScreenRefresh();
+			}
+		}
+		private function sellArcaneBangles():void {
+			clearOutput();
+			outputText("\"<i>To look the part, you will have to dress the part. This is magical clothing made for a kitsune, and to be honest I think <b>150 gems</b> gems is somewhat cheap for it.</i>\"");
+			doYesNo(buyArcaneBangles, ayaneAtShrine);
+		}
+		private function buyArcaneBangles():void {
+			if (player.gems < 150) {
+				clearOutput();
+				outputText("\n\nAyane shakes her head, indicating you need " + String(150 - player.gems) + " more gems to purchase this item.");
+				doNext(ayaneAtShrine);
+			}
+			else {
+				outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
+				player.gems -= 150;
+				inventory.takeItem(armors.ARCBANG, ayaneAtShrine);
+				statScreenRefresh();
+			}
+		}
+		private function sellSpiritFocus():void {
+			clearOutput();
+			outputText("\"<i>This little icon is a very powerful spellcasting tool. It helps empower a kitsune’s magic. I don't get the use of shields; it’s so pointless. I can sell you one for <b>800 gems</b>.</i>\"");
+			doYesNo(buySpiritFocus, ayaneAtShrine);
+		}
+		private function buySpiritFocus():void {
+			if (player.gems < 800) {
+				clearOutput();
+				outputText("\n\nAyane shakes her head, indicating you need " + String(800 - player.gems) + " more gems to purchase this item.");
+				doNext(ayaneAtShrine);
+			}
+			else {
+				outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
+				player.gems -= 800;
+				inventory.takeItem(shields.SPI_FOC, ayaneAtShrine);
+				statScreenRefresh();
+			}
+		}
+		private function sellFoxHairpin():void {
+			clearOutput();
+			outputText("\"<i>This might appear to be just an accessory, but I personally blessed it in the name of Taoth. Should you wear it, this hairpin is likely to improve your ability to focus soul magic. This item wasn’t easy to make, which is why I can’t sell it to you for less than <b>800 gems</b>.</i>\"");
+			doYesNo(buyFoxHairpin, ayaneAtShrine);
+		}
+		private function buyFoxHairpin():void {
+			if (player.gems < 800) {
+				clearOutput();
+				outputText("\n\nAyane shakes her head, indicating you need " + String(800 - player.gems) + " more gems to purchase this item.");
+				doNext(ayaneAtShrine);
+			}
+			else {
+				outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
+				player.gems -= 800;
+				inventory.takeItem(jewelries.FOXHAIR, ayaneAtShrine);
+				statScreenRefresh();
+			}
+		}
+		private function sellFoxJewel():void {
+			clearOutput();
+			outputText("\"<i>Don’t worry, these jewels are not actually that precious. One could say it’s concentrated kitsune energy crystallized into a gem. It’s not much, but it will help you grow your powers. I can sell you one for <b>50 gems</b>.</i>\"");
+			doYesNo(buyFoxJewel, ayaneAtShrine);
+		}
+		private function buyFoxJewel():void {
+			if (player.gems < 50) {
+				clearOutput();
+				outputText("\n\nAyane shakes her head, indicating you need " + String(50 - player.gems) + " more gems to purchase this item.");
+				doNext(ayaneAtShrine);
+			}
+			else {
+				outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
+				player.gems -= 50;
+				inventory.takeItem(consumables.FOXJEWL, ayaneAtShrine);
+				statScreenRefresh();
+			}
+		}
+		private function sellScholarTea():void {
+			clearOutput();
+			outputText("\"<i>Kitsune's wits are their primary weapon. Since you weren't born one of us, you will need to learn true trickery. Drinking this tea can help you sharpen your dull human wits. I think <b>15 gems</b> is not too steep a price for the gift of intelligence.</i>\"");
+			doYesNo(buyScholarTea, ayaneAtShrine);
+		}
+		private function buyScholarTea():void {
+			if (player.gems < 15) {
+				clearOutput();
+				outputText("\n\nAyane shakes her head, indicating you need " + String(15 - player.gems) + " more gems to purchase this item.");
+				doNext(ayaneAtShrine);
+			}
+			else {
+				outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
+				player.gems -= 15;
+				inventory.takeItem(consumables.SMART_T, ayaneAtShrine);
+				statScreenRefresh();
+			}
+		}
+		private function sellVixenTea():void {
+			clearOutput();
+			outputText("\"<i>Honing your tongue and sexual knowledge is a valiant goal as a kitsune. We kitsune are naturally born with a talent for sex and innuendo, but since you weren't born as one of us, you will need this tea to master it. I think <b>15 gems</b> is a good deal to learn how to truly be lascivious.</i>\"");
+			doYesNo(buyVixenTea, ayaneAtShrine);
+		}
+		private function buyVixenTea():void {
+			if (player.gems < 15) {
+				clearOutput();
+				outputText("\n\nAyane shakes her head, indicating you need " + String(15 - player.gems) + " more gems to purchase this item.");
+				doNext(ayaneAtShrine);
+			}
+			else {
+				outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
+				player.gems -= 15;
+				inventory.takeItem(consumables.VIXEN_T, ayaneAtShrine);
+				statScreenRefresh();
+			}
 		}
 
 //[Read Books]
@@ -2293,32 +2529,115 @@ package classes.Scenes.Areas.Forest
 			}
 		}
 
-//[Meditate]
+		//[Offering]
+		private function offeringToTaoth():void
+		{
+			clearOutput();
+			outputText("You leave a generous offering of gems at the shrine of Taoth and pray to the fox god for his support in your quest. Light falls from the sky and seems to condense in your star sphere, as you feel your kitsune powers increasing. When you look down to the offering bowl, you discover it is now empty.\n\n");
+			if (player.perkv1(PerkLib.StarSphereMastery) < 10) player.addPerkValue(PerkLib.StarSphereMastery, 1, 1);
+			player.gems -= 1000;
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		public static var basicKitsuneHair:Array = ["white", "black", "black", "black", "red", "red", "red"];
+		public static var basicKitsuneFur:Array = ["orange and white", "black", "black and white", "red", "red and white", "white"];
+		public static var elderKitsuneColors:Array = ["metallic golden", "golden blonde", "metallic silver", "silver blonde", "snow white", "iridescent gray"];
+		
+		//[Meditate]
 		private function meditateLikeAKitsuneEhQuestionMark():void
 		{
 			clearOutput();
-			if (player.hasItem(consumables.FOXJEWL) && player.tailType == TAIL_TYPE_FOX && player.tailVenom < 9 && player.tailVenom + 1 <= player.level && player.tailVenom + 1 <= player.inte / 10 && player.earType == EARS_FOX && player.findPerk(PerkLib.CorruptedNinetails) < 0 && player.findPerk(PerkLib.EnlightenedNinetails) < 0) {
-				//20% chance if PC has fox ears, 1 or more fox tails, carries a Fox Jewel, and meets level & INT requirements for the next tail:
-				outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.\n\n");
-
-				outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
-				if (player.tailVenom < 8) {
-					outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tail" + ((player.tailVenom > 1) ? "s" : "" ) + " begin" + ((player.tailVenom > 1) ? "s" : "" ) + " to glow with an eerie, ghostly light, and with a crackle of electrical energy, split" + ((player.tailVenom > 1) ? "s" : "" ) + " into " + (player.tailVenom + 1) + "!");
-					player.tailVenom++;
+			if (player.hasItem(consumables.FOXJEWL) && player.earType == EARS_FOX && player.tailType == TAIL_TYPE_FOX) {
+				if (player.tailVenom >= 2 && player.findPerk(PerkLib.StarSphereMastery) < 0) {
+					outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.\n\n");
+					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
+					outputText("You look down and notice a weird ball filled with light sitting on the ground next to you. Somehow you can feel this item is connected to you and also very important. Ayane, noticing what happened, approaches and congratulates you.\n\n");
+					outputText("\"<i>It seems you are a true kitsune now. You formed your own star sphere. Hold on to it dearly, for your true essence resides in your star sphere, and should it be stolen, the thief could control you entirely, forcing you to do whatever it wishes.</i>\"\n\n");
+					outputText("<b>You acquired your own kitsune star sphere.</b>\n\n")
+					dynStats("int", 1, "lus", -10, "cor", -1);
+					player.createPerk(PerkLib.StarSphereMastery, 1, 0, 0, 0);
+					player.createKeyItem("Kitsune Star Sphere", 0, 0, 0, 0);
+					player.consumeItem(consumables.FOXJEWL);
+					doNext(camp.returnToCampUseOneHour);
 				}
-				else {
+				else if (player.tailVenom == 8 && player.level >= 42 && player.inte >= 180 && (player.findPerk(PerkLib.CorruptedNinetails) < 0 || player.perkv4(PerkLib.CorruptedNinetails) > 0)) {
+					//20% chance if PC has fox ears, 1 or more fox tails, carries a Fox Jewel, and meets level & INT requirements for the next tail:
+					outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.\n\n");
+					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
 					outputText("As the mystical flames wash over you, your mind is assaulted by a maelstrom of otherworldly knowledge and power.  For a moment it feels as though your mind will be torn asunder, but you are ready.  Your travels and meditations have prepared you well, and you open your mind to accept enlightenment.\n\n");
 					outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into nine tails.  <b>You are now a nine-tails!  Untold cosmic power radiates from your very being!  Use it wisely...</b>");
-
-					outputText("\n\nYou pause for a moment to reflect on your newfound wisdom, and with a renewed vigor for your quest, you stand and set off for camp.");
 					//Increment tail by 1, consume Fox Jewel, -2 COR, -20 LUST, +2 INT, Advance 1 hr and return to camp.
 					//Apply Nine-Tails perk if applicable.
 					player.tailVenom = 9;
-					player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);
+					if (player.findPerk(PerkLib.EnlightenedNinetails) < 0) player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);
+					// Nine tail kitsunes have their fur/hair color golden, silver or pure white
+					if (!InCollection(player.hairColor, elderKitsuneColors)) // wrong hair color
+						if (player.skinType == SKIN_TYPE_FUR && InCollection(player.furColor, elderKitsuneColors)) { // right fur color
+							player.hairColor = player.furColor;
+							if(player.hairLength > 0) outputText("\n\nNow you have " + player.hairColor + " hair matching your fur, like true kitsune elder. You look really regal!");
+						}
+						else if (player.skinType == SKIN_TYPE_FUR) { // wrong fur color
+							player.hairColor = randomChoice(elderKitsuneColors);
+							player.furColor = player.hairColor;
+							if (player.hairLength > 0) outputText("\n\Now you have " + player.hairColor + " fur and hair, like true kitsune elder. You look really regal!");
+							else outputText("\n\Now you have " + player.furColor + " fur, like true kitsune elder. You look really regal!");
+						}
+						else { // no fur
+							player.hairColor = randomChoice(elderKitsuneColors);
+							player.furColor = player.hairColor;
+							if (player.hairLength > 0) outputText("\n\Now you have " + player.hairColor + " hair, like true kitsune elder.");
+						}
+					else // right hair color
+						if (player.skinType == SKIN_TYPE_FUR && !InCollection(player.furColor, elderKitsuneColors)) { // wrong fur color
+							player.furColor = player.hairColor;
+							outputText("\n\Now you have " + player.furColor + " fur matching your hair, like true kitsune elder. You look really regal!");
+						}
+					outputText("\n\nYou pause for a moment to reflect on your newfound wisdom, and with a vastly renewed vigor for your quest, you stand and set off for camp.");
 					dynStats("int", 2, "lus", -20, "cor", -2);
+					player.consumeItem(consumables.FOXJEWL);
+					outputText("\n\nAyane approaches and bows to you in reverence. \"<i>You have acquired a near deific status [name], as a priestess of Taoth it would be an honor to serve as your attendant. That is, if you would allow me to follow and assist you.</i>\"");
+					outputText("\n\nA little surprised, you ask Ayane why she wants to serve you.");
+					outputText("\n\n\"<i>Nine-tailed kitsunes are, in every aspect, divine messengers of Taoth in the mortal world. By serving you I follow the fox god's teachings and uphold his will. It would be an honor with no equal for me.</i>\"");
+					outputText("\n\nDo you take her as your attendant?");
+					doYesNo(AyaneCome2Camp, AyaneStayAtShrine);
 				}
-				player.consumeItem(consumables.FOXJEWL);
-				doNext(camp.returnToCampUseOneHour);
+				else if (player.tailVenom == 7 && player.level >= 30 && player.inte >= 160 && (player.findPerk(PerkLib.CorruptedNinetails) < 0 || player.perkv4(PerkLib.CorruptedNinetails) > 0) && (player.findPerk(PerkLib.CorruptedKitsune) < 0 || player.perkv4(PerkLib.CorruptedKitsune) > 0)) {
+					outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to fight against the forces of corruption that permeate the land.\n\n");
+					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
+					outputText("As the mystical flames wash over you, your mind is assaulted by an otherworldly knowledge and power.\n\n");
+					outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into seven tails.  <b>You are now a seven-tails!  Weak cosmic power radiates from you!  Cultivate it wisely...</b>");
+					//Apply Kitsune perk if applicable.
+					player.tailVenom = 8;
+					outputText("\n\nYou pause for a moment to reflect on your new wisdom, and with a renewed vigor for your quest, you stand and set off for camp.");
+					dynStats("int", 1, "lus", -10, "cor", -1);
+					player.consumeItem(consumables.FOXJEWL);
+					doNext(camp.returnToCampUseOneHour);
+				}
+				else if (player.tailVenom == 6 && player.level >= 30 && player.inte >= 140 && (player.findPerk(PerkLib.CorruptedNinetails) < 0 || player.perkv4(PerkLib.CorruptedNinetails) > 0) && (player.findPerk(PerkLib.CorruptedKitsune) < 0 || player.perkv4(PerkLib.CorruptedKitsune) > 0)) {
+					outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to fight against the forces of corruption that permeate the land.\n\n");
+					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
+					outputText("As the mystical flames wash over you, your mind is assaulted by an otherworldly knowledge and power.\n\n");
+					outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into seven tails.  <b>You are now a seven-tails!  Weak cosmic power radiates from you!  Cultivate it wisely...</b>");
+					//Apply Kitsune perk if applicable.
+					player.tailVenom = 7;
+					if (player.findPerk(PerkLib.EnlightenedKitsune) < 0) player.createPerk(PerkLib.EnlightenedKitsune, 0, 0, 0, 0);
+					outputText("\n\nYou pause for a moment to reflect on your new wisdom, and with a renewed vigor for your quest, you stand and set off for camp.");
+					dynStats("int", 1, "lus", -10, "cor", -1);
+					player.consumeItem(consumables.FOXJEWL);
+					doNext(camp.returnToCampUseOneHour);
+				}
+				else if (player.tailVenom > 1 && player.tailVenom < 6 && player.tailVenom - 1 <= player.level / 6 && player.tailVenom <= player.inte / 20) {
+					outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.\n\n");
+					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
+					outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tails begins to glow with an eerie, ghostly light, and with a crackle of electrical energy, splits into " + (player.tailVenom + 1) + "!");
+					player.tailVenom++;
+				}
+				else if (player.tailVenom == 1 && player.inte >= 20) {
+					outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.\n\n");
+					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
+					outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tail begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into " + (player.tailVenom + 1) + "!");
+					player.tailVenom++;
+				}
 			}
 			else {
 				//Normal:
@@ -2327,6 +2646,40 @@ package classes.Scenes.Areas.Forest
 				dynStats("int", 1, "lus", -20, "cor", -2);
 				doNext(camp.returnToCampUseOneHour);
 			}
+		}
+		private function AyaneCome2Camp():void {
+			clearOutput();
+			outputText("\"<i>Thank you " + player.mf("lord", "lady") + " [name] please allow me to tend to your every need from now on.</i>\"");
+			outputText("\n\nAyane packs her belongings in a weird bag that seems to never be fuller or emptier and starts to follow you around.");
+			outputText("\n\n(<b>Ayane has been added to the Followers menu!</b>)\n\n");
+			flags[kFLAGS.AYANE_FOLLOWER] = 2;
+			doNext(camp.returnToCampUseOneHour);
+		}
+		private function AyaneStayAtShrine():void {
+			clearOutput();
+			outputText("\n\nAyane looks disappointed but nods regardless. \"<i>I accept your choice... maybe I was too hasty. Come back and see me again, should you be in need of counsel or a servant, my " + player.mf("lordship", "ladyship") + ".</i>\"");
+			flags[kFLAGS.AYANE_FOLLOWER] = 1;
+			doNext(camp.returnToCampUseOneHour);
+		}
+		private function AyaneServant():void {
+			clearOutput();
+			outputText("\n\nAyane perks up at the mention. \"<i>Did you change your mind?</i>\"");
+			doYesNo(AyaneCome2Camp, AyaneStayAtShrine);
+		}
+		private function AyaneSlave(): void {
+			clearOutput();
+			outputText("\n\nYou go over to Ayane as usual, planning to buy items, when it occurs to you the kitsune once said, whoever owns a kitsune star sphere can control them without question. You smirk maliciously, as a plan to make the silver vixen your personal slave forms in your mind.");
+			outputText("\n\nYou head to Ayane’s shop and pretend there's some sort of issue with the shrine, acting as though it is a serious matter that has made you concerned. Something about the statue making strange noises. Ayane, none the wiser, heads out to look, leaving you the opportunity to rummage through her belongings. For someone who values wits and thinks they’re so cunning, she’s pitifully gullible. You soon find exactly what you wanted. Ayane comes back, a look of confusion on her face, and her jaw drops as she sees you holding her ever so precious star sphere.");
+			outputText("\n\n\"<i>[name] what you’re doing here is... very bad for your karma. Please hand me back my sphere.</i>\"");
+			outputText("\n\nYou laugh and reply that her sphere will be perfectly safe in your hands, so long as she serves you with unwavering loyalty that is.");
+			outputText("\n\n\"<i>You...you're a monster! Why would you go so far to...? Gah I don’t want to know. Just let me pack up my things " + player.mf("master", "mistress") + "...</i>\"");
+			outputText("\n\nShe looks at you, and gives you a hateful glares, but there’s little the fox can do as long as you hold the very source of her power within the palm of your hand. You both head back to camp, Ayane maintaining a submissive attitude.");
+			outputText("\n\n<b>Aquired Ayane Star Sphere.</b>");
+			outputText("\n\n(<b>Ayane has been added to the Followers menu!</b>)\n\n");
+			player.createKeyItem("Ayane Star Sphere", 0, 0, 0, 0);
+			//dynStats("cor", 10); - dodawać czy nie to?
+			flags[kFLAGS.AYANE_FOLLOWER] = 2;
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 //[Steal Statue]
@@ -2372,7 +2725,7 @@ package classes.Scenes.Areas.Forest
 		public function kitsuneStatue():void
 		{
 			outputText("You pull out the gold statue and turn it around in your hands a few times, carefully examining the intricate filigree and inscriptions covering the masterfully crafted idol.  Whoever made this certainly put a lot of time and love into their craft." + ((player.cor < 50) ? "  Examining the painstaking detail that went into it, you feel a slight pang of guilt for having stolen it from its rightful place.  You push the thoughts away, reasoning that it won't be missed - after all, the owner was long gone before you arrived." : "") + "\n\n");
-			outputText("It's not much use to you other than decoration, but based on the craftsmanship alone you judge that you could get a fair price for it if you pawned it off.");
+			outputText("It's not much use to you other than decoration, but based on the craftsmanship alone you judge that you could get a fair price for it if you pawned it off.  ");
 		}
 	}
 }

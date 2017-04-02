@@ -2,7 +2,8 @@
 {
 	import classes.*;
 	import classes.internals.WeightedDrop;
-
+	import classes.GlobalFlags.kFLAGS;
+	
 	public class Akbal extends Monster
 	{
 
@@ -145,8 +146,24 @@
 					game.combatRoundOver();
 					return;
 				}
-				outputText("You are burned badly by the flames! ("+player.takeDamage(40)+")", false);
-				;
+				if (player.findStatusAffect(StatusAffects.Blizzard) >= 0) {
+					player.addStatusValue(StatusAffects.Blizzard, 1, -1);
+					var damage2:int = inte / 5;
+					if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage2 *= 3;
+					if (player.findPerk(PerkLib.FireAffinity) >= 0) damage2 *= 0.3;
+					damage2 = Math.round(damage2);
+					outputText("Surrounding your blizzard absorbed huge part of the attack at the price of loosing some of it protective power.\n", false);
+					outputText("You are burned badly by the flames! ", false);
+					damage2 = player.takeDamage(damage2, true);
+					game.combatRoundOver();
+					return;
+				}
+				var damage:int = inte;
+				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
+				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+				damage = Math.round(damage);
+				outputText("You are burned badly by the flames! ", false);
+				damage = player.takeDamage(damage, true);
 			}
 			game.combatRoundOver();
 		}
@@ -190,27 +207,36 @@
 			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_FUR];
 			this.hairColor = "black";
 			this.hairLength = 5;
-			initStrTouSpeInte(55, 53, 50, 75);
-			initLibSensCor(50, 50, 100);
+			initStrTouSpeInte(61, 76, 70, 86);
+			initLibSensCor(70, 50, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw-slash";
-			this.weaponAttack = 5;
+			this.weaponAttack = 15 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "shimmering pelt";
-			this.armorDef = 5;
+			this.armorDef = 8 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = 20;
+			this.bonusLust = 40;
 			this.lust = 30;
 			this.lustVuln = 0.8;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 6;
-			this.gems = 15;
+			this.level = 16;
+			this.gems = 40;
 			this.drop = new WeightedDrop().
-					add(consumables.INCUBID,6).
+					add(consumables.INCUBID,4).
 					add(consumables.W_FRUIT,3).
+					add(consumables.AKBALSL,2).
 					add(weapons.PIPE,1);
 			this.special1 = akbalLustAttack;
 			this.special2 = akbalSpecial;
 			this.special3 = akbalHeal;
 			this.tailType = TAIL_TYPE_DOG;
+			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
+			this.str += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 1440;
 			checkMonster();
 		}
 

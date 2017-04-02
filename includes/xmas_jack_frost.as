@@ -213,7 +213,7 @@ public function processJackFrostEvent():void {
 			
 			outputText("\n\nYou laugh and hug her back, telling Amily to take it easy.  With all the friction the two of you are making, hugging together and nuzzling, you might just end up melting all the snow.  The mouse looks into your eyes. \"<i>Oooh, you little tempter, you,</i>\" she trills, tail looping around your wrist.  \"<i>Maybe I wouldn't mind that...?</i>\" she suggests mischievously.");
 			outputText("\n\nYou grin at her then envelop her lips into a kiss... sounds like a plan, you're feeling a bit cold and this would be a nice way to warm you right up...");
-			outputText("\n\nIt's not really possible to smirk and kiss at the same time, but your murine lover does her level best to try.  Breaking the kiss with a smile, she tugs you gently towards your tent.  \"<i>Come on then, lover-" + player.mf("boy","girl") + ", let's go and get warmed up...</i>\" She coos.  Her hands start to remove your clothes, \"<i>So, what do you have in mind, exactly...?</i>\"");
+			outputText("\n\nIt's not really possible to smirk and kiss at the same time, but your murine lover does her level best to try.  Breaking the kiss with a smile, she tugs you gently towards your " + camp.homeDesc() + ".  \"<i>Come on then, lover-" + player.mf("boy","girl") + ", let's go and get warmed up...</i>\" She coos.  Her hands start to remove your clothes, \"<i>So, what do you have in mind, exactly...?</i>\"");
 			//[Penetrate Her] [Make out]
 			menu();
 			if(player.hasCock()) addButton(0,"Penetrate",penetradePureMouseWaifu);
@@ -710,7 +710,7 @@ public function spankNFingerCorruptJojoAss():void {
 	outputText("\n\nWith a gasp and a howl, Jojo does as you command, a fountain of tainted mouse-spooge gushing from his cock, soaking into the snow to create a great slushy puddle.  He cums and he cums until he's totally exhausted his strength, collapsing bonelessly into the puddle he's just created, his tail slipping off of your wrist as he does so.");
 	
 	outputText("\n\nYou laugh at the mouse-slut's blissed out face of pleasure, feeling like you managed to chip away another part of his broken will.  Before you leave him to pass out on his snowy puddle of mouse-cum you ask him, what is his name?  \"<i>S - Slut...</i>\"  Is the moaning reply.  Satisfied, you decide to leave for the moment.  Maybe you'll get back to him and break him in a little more later...");
-	dynStats("lus=", 100, "resisted", true);
+	dynStats("lus=", player.maxLust(), "resisted", true);
 	menu();
 	addButton(0,"Next",processJackFrostEvent);
 	flags[kFLAGS.JACK_FROST_PROGRESS] = 5;

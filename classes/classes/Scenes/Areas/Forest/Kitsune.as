@@ -56,10 +56,19 @@ package classes.Scenes.Areas.Forest
 		private function foxFireAttack():void
 		{
 			outputText("The kitsune makes a small circle in the air with her fingers, conjuring up a pale blue flame into her palm with the sound of flint striking against steel.  Pursing her lips, she blows it toward you with a kiss.");
-			outputText("\n\nThe flames burn furiously, but leave you with an incredibly pleasant tingling sensation all over your body.  Your skin flushes with excitement, and you can feel blood rushing to your extremities, making you shudder with pleasure.");
 			var damage:int = 5 + rand(20);
-			damage = player.takeDamage(damage);
-			outputText(" (" + damage + ")");
+			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
+			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+			if (player.findStatusAffect(StatusAffects.Blizzard) >= 0) {
+				player.addStatusValue(StatusAffects.Blizzard,1,-1);
+				outputText("\n\nThe flames burn furiously but power was negated by surround you blizzard, but still it leave you with an incredibly pleasant tingling sensation all over your body.  Your skin flushes with excitement, and you can feel blood rushing to your extremities, making you shudder with pleasure. ");
+				damage *= 0.2;
+			}
+			else {
+				outputText("\n\nThe flames burn furiously, but leave you with an incredibly pleasant tingling sensation all over your body.  Your skin flushes with excitement, and you can feel blood rushing to your extremities, making you shudder with pleasure. ");
+			}
+			damage = Math.round(damage);
+			damage = player.takeDamage(damage, true);
 			game.dynStats("lus", 15 + player.sens / 10);
 			combatRoundOver();
 		}
@@ -75,7 +84,7 @@ package classes.Scenes.Areas.Forest
 			if (player.inte < 30) resist = Math.round(player.inte);
 			else resist = 30;
 			if (player.findPerk(PerkLib.Whispered) >= 0) resist += 20;
-			if (player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor < 20) resist += 20 - player.cor;
+			if ((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor < 20) resist += 20 - player.cor;
 			if (rand(100) < resist) {
 				outputText("\n\nThe kitsune seems to melt away before your eyes for a moment, as though the edges of reality are blurring around her.  You tighten your focus, keeping your eyes trained on her, and she suddenly reels in pain, clutching her forehead as she is thrust back into view.  She lets out a frustrated huff of disappointment, realizing that you have resisted her illusions.");
 			}
@@ -94,7 +103,7 @@ package classes.Scenes.Areas.Forest
 			if (player.inte < 30) resist = Math.round(player.inte);
 			else resist = 30;
 			if (player.findPerk(PerkLib.Whispered) >= 0) resist += 20;
-			if (player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor < 20) resist += 20 - player.cor;
+			if ((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor < 20) resist += 20 - player.cor;
 			var select:int = rand(7);
 			//Attack:
 			if (select == 0) {
@@ -200,7 +209,7 @@ package classes.Scenes.Areas.Forest
 							" hair.  She appears mostly human, except for a pair of large, furry ears poking through her hair and six luxurious silky tails swaying in the air behind her.  Her robes are revealing but comfortable-looking, hugging her voluptuous curves and exposing large swaths of tattooed skin.  A layer of ornate tattoos covers patches of her exposed flesh, accentuating her feminine curves nicely, and each movement brings a pleasant jiggle from her plump backside and large breasts.";
 			// this.plural = false;
 			if (hairColor=="red" && game.flags[kFLAGS.redheadIsFuta] == 1) {
-				this.createCock(rand(13) + 14,1.5 + rand(20)/2,CockTypesEnum.HUMAN);
+				this.createCock(rand(13) + 14,1.5 + rand(20)/2,CockTypesEnum.FOX);
 				this.balls = 2;
 				this.ballSize = 2 + rand(13);
 				this.cumMultiplier = 1.5;
@@ -218,19 +227,30 @@ package classes.Scenes.Areas.Forest
 			this.skinTone = "pale";
 			this.hairColor = hairColor;
 			this.hairLength = 13 + rand(20);
-			initStrTouSpeInte(35, 45, 90, 95);
+			initStrTouSpeInte(35, 55, 110, 105);
 			initLibSensCor(60, 65, 45);
 			this.weaponName = "claws";
 			this.weaponVerb="punch";
+			this.weaponAttack = 8 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "skin";
+			this.armorDef = 5 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = 120;
+			this.bonusLust = 20;
 			this.lust = 20;
 			this.lustVuln = 0.9;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 6;
-			this.gems = rand(10) + 10;
-			this.drop = new WeightedDrop(consumables.FOXJEWL, 1);
+			this.level = 12;//mają wtedy tylko 2 ogony ale z czasem jak PC też rośnie w siłe z lvl-em bdą mieć awans to lvl może 18-20 i trzeci ogon plus wzmocnienie statów itp.
+			this.gems = rand(20) + 20;
+			this.drop = new WeightedDrop().
+					add(armors.ARCBANG,1).
+					add(consumables.FOXJEWL,4);
 			this.tailType = TAIL_TYPE_FOX;
+			this.str += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 1460;
 			checkMonster();
 		}
 

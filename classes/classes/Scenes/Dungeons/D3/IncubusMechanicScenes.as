@@ -24,8 +24,7 @@ package classes.Scenes.Dungeons.D3
 		// IF you approach him, then we can track that (either you fight, or you talk and give him an item)
 		private function metIncubusMechanicInD1():Boolean
 		{
-			if (player.findStatusAffect(StatusAffects.FactoryIncubusDefeated) >= 0) return true;
-			if (player.findStatusAffect(StatusAffects.IncubusBribed) >= 0) return true;
+			if (flags[kFLAGS.FACTORY_INCUBUS_DEFEATED] > 0 || flags[kFLAGS.FACTORY_INCUBUS_BRIBED] > 0) return true;
 			return false;
 		}
 		
@@ -46,7 +45,7 @@ package classes.Scenes.Dungeons.D3
 				outputText("\n\nA");
 				if (metIncubusMechanicInD1()) outputText(" familiar,");
 				outputText(" demonic mechanic lounges against a gleaming, metallic control panel");
-				if (player.findStatusAffect(StatusAffects.IncubusBribed) >= 0) outputText(", a rolled-up hentai magazine tucked neatly into the chest-pocket of his overalls");
+				if (flags[kFLAGS.FACTORY_INCUBUS_BRIBED] > 0) outputText(", a rolled-up hentai magazine tucked neatly into the chest-pocket of his overalls");
 				if (metIncubusMechanicInD1()) outputText(". This is the same incubus you met back in the factory! He still sports his familiar, stained coveralls, and the crotch is as torn as ever, revealing a cock that looks like an odd hybrid of a tentacle, a bumpy demon-dong, and a stinger-ringed anemone cock. While you watch, it idly divides into two... four... eight narrow, writhing tendrils before merging back together into a three-inch-thick monster-cock.");
 				else outputText(". He sports a pair of stained coveralls, with the crotch torn open, revealing a cock that looks like an odd hybrid of tentacle, a bumpy demon-dong, and a stinger-ringed anemone cock. While you watch, it idly divides into two... four... eight narrow, writhing tendriles before merging back together into a three-inch-thick monster-cock.")
 				outputText(" It stiffens under your ocular attentions, and a timeless voice with the smoothness of silk, yet an undercurrent of rumbling gravel calls, \"<i>Eyes up here, Champion.</i>\"");
@@ -67,15 +66,15 @@ package classes.Scenes.Dungeons.D3
 				// [Pay Toll] [Suck Dick] [Fight]
 				if (player.gems >= 500)
 				{
-					addButton(2, "Pay Toll", payDaToll);
+					addButton(0, "Pay Toll", payDaToll);
 				}
 				else
 				{
 					outputText("\n\n<b>You do not have enough gems to pay the required toll!</b>");
 				}
 
-				addButton(3, "Suck Dick", suckIncubusDick);
-				addButton(4, "Fight", startCombatImmediate, new IncubusMechanic());
+				addButton(1, "Suck Dick", suckIncubusDick);
+				addButton(2, "Fight", startCombatImmediate, new IncubusMechanic());
 			}
 			else if (flags[kFLAGS.D3_MECHANIC_LAST_GREET] == MECHANIC_SUCKED)
 			{
@@ -87,8 +86,8 @@ package classes.Scenes.Dungeons.D3
 
 				dynStats("lus", 10);
 				
-				addButton(3, "Suck Dick", suckIncubusDick);
-				addButton(4, "Fight", startCombatImmediate, new IncubusMechanic());
+				addButton(1, "Suck Dick", suckIncubusDick);
+				addButton(2, "Fight", startCombatImmediate, new IncubusMechanic());
 			}
 			else if (flags[kFLAGS.D3_MECHANIC_LAST_GREET] == MECHANIC_PAID)
 			{
@@ -102,19 +101,19 @@ package classes.Scenes.Dungeons.D3
 
 				if (player.gems >= 500)
 				{
-					addButton(2, "Pay Toll", payDaToll);
+					addButton(0, "Pay Toll", payDaToll);
 				}
 				else
 				{
 					outputText("\n\n<b>You do not have enough gems to pay the required toll!</b>");
 				}
 
-				addButton(3, "Suck Dick", suckIncubusDick);
-				addButton(4, "Fight", startCombatImmediate, new IncubusMechanic());
+				addButton(1, "Suck Dick", suckIncubusDick);
+				addButton(2, "Fight", startCombatImmediate, new IncubusMechanic());
 			}
 			else if (flags[kFLAGS.D3_MECHANIC_LAST_GREET] == MECHANIC_FOUGHT)
 			{
-				addButton(2, "Lift", useLiftPostDefeat);
+				addButton(0, "Lift", useLiftPostDefeat);
 			}
 		}
 		
@@ -125,7 +124,7 @@ package classes.Scenes.Dungeons.D3
 			clearOutput();
 
 			player.gems -= 500;
-
+			statScreenRefresh();
 			outputText("\n\nYou unceremoniously fill a small pouch with 500 gems and toss it to the incubus.");
 
 			outputText("\n\nHe lamely says, \"<i>You know, I wasn't really serious about the gems. Are you sure you don't want to suck my dick instead?</i>\" The demon offers you your bag full of money back.");
@@ -136,8 +135,7 @@ package classes.Scenes.Dungeons.D3
 
 			outputText("\n\nThe platform touches down roughly thirty minutes after your departure, and you head back to camp with all due haste.");
 
-			menu();
-			addButton(0, "Next", getGame().d3.exitD3);
+			doNext(getGame().d3.exitD3);
 		}
 		
 		private function useLiftPostDefeat():void
@@ -148,7 +146,7 @@ package classes.Scenes.Dungeons.D3
 			
 			outputText("\n\nThe platform touches down roughly thirty minutes after your departure, and you head back to camp with all due haste.");
 			
-			addButton(0, "Next", getGame().d3.exitD3);
+			doNext(getGame().d3.exitD3);
 		}
 		
 		public function suckIncubusDick():void
@@ -196,15 +194,14 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nYou wrench your head back, dragging eight inches of corrupted fuck-pole out of your slippery throat, and slam your face back into his abdomen, fucking his twitching demon-cock with your eager mouth and tight throat. You bounce right back off to repeat the action again. Spit is flying from the corners of your mouth; your belly is now nearly filled with drizzling pre-seed, and the cock is convulsing in your lips so hard that it may as well be having a seizure. The incubus's grip, once calm and reassured, has gone shaky and uncertain. His hips twitch wildly, and he moans, \"<i>Ohhhhh... ready, slut?</i>\"");
 
 			outputText("\n\nYou would nod if you weren't so busy face-humping the demon's sexy groin. He doesn't seem to care one way or the other, because you see his balls twitch in his sack and lift, tightening snugly against his crotch as they churn and unload. Not a split-second later, you feel the whole of his rod thicken, fat with undelivered cum. The nodules dig into the walls of your throat, and your belly abruptly gurgles, rounding a little from the sheer volume of incubus batter your gut was just inseminated with. A second surge follows an instant later, pressurizing your stomach with spunk. You're so stuffed with spooge that three inches of cock slide back out your mouth, and when the third pulse of jism fires, it pushes him the rest of the way out, filling your esophagus as it exits. The fourth bulges your cheeks before the still-shooting crown escapes your lips and paints your face. You cough and sputter, spunk spraying over your [chest] as you catch your breath. Rope after rope of alabaster goo splatters across your hair as the incubus finishes cumming.");
-
+			player.refillHunger(80);
 			outputText("\n\nYou both sag back, sated in entirely different ways. He looks more than a little drained, shuddering in bliss and gasping, \"<i>I, ung... I was a little pent-up.</i>\" In spite of that, his balls begin to swell up almost immediately, becoming a little bit larger than they were a moment ago. You have a hunch that if you sucked him again, he'd cum just as hard, and while the thought sends a shiver of pleasure through your well-stuffed body, you remember that you wanted to get back to camp.");
 
 			outputText("\n\nStumbling onto the elevator, you cradle your cum-pregnant middle and gesture for him to lower you. He does so, a smile that would shame a cheshire cat plastered on his face as he disappears behind the lip of a cliff. <b>Damn, that was hot.</b> You wind up masturbating most of the way down the elevator before stumbling into your camp as a pent-up, sexually fixated wreck.");
 
 			dynStats("lib+", 5, "cor+", 5, "lus+", 100);
 
-			menu();
-			addButton(0, "Next", getGame().d3.exitD3);
+			doNext(getGame().d3.exitD3);
 		}
 		
 		public function beatDaMechanic(hpVictory:Boolean):void
@@ -473,7 +470,7 @@ package classes.Scenes.Dungeons.D3
 			outputText(" twat to silence him.");
 
 			outputText("\n\n\"<i>Are all demons controlled this easily?</i>\" you muse out loud. \"<i>A few squeezes from a cunt and you're content to let me do whatever I want to you. I could probably slap a collar around your neck and take you back to camp without hearing a word of complaint. Perhaps 'please fuck me,' but I doubt I'd hear any legitimate desire to come back here.</i>\" You lift yourself up an inch and glide back down, teasing him. \"<i>Poor boy, they keep you so pent up, don't they?");
-			if (player.findStatusAffect(StatusAffects.IncubusBribed) >= 0) outputText(" Nothing but hentai mags for you to drain your balls with....");
+			if (flags[kFLAGS.FACTORY_INCUBUS_BRIBED] > 0) outputText(" Nothing but hentai mags for you to drain your balls with....");
 			outputText("</i>\"");
 
 			outputText("\n\nThe incubus sighs and nods. \"<i>It isn't easy to get off when the bitches make you fix their machinery all day long. Are a few hours with a succubus every day too much to ask for?</i>\" You feel his cock twitch inside you at the word succubus, and you give his poor boner another squeeze from your cunt for being so honest.");
@@ -695,7 +692,8 @@ package classes.Scenes.Dungeons.D3
 		{
 			clearOutput();
 			outputText("The champion finally got to cum once Lethice had her turn, but by that point, pussy was all " + player.mf("he","she") + " could think about. Release came more frequently with the demon queen's permission. It didn't really matter, though. The champion was addicted to riding on the edge of climax, broken into nothing more than a demonic vibrator.");
-			getGame().gameOver();
+
+			getGame().gameOver(); // G-G-G-GAMEOVER.
 		}
 		
 		
@@ -822,6 +820,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nYou suck harder, [legs] quivering from how hard you're trying to squeeze your button, and feel a sudden warmth explode in the back of your throat. It pours a thick, rich load of cum into your belly's wanton stomach. You can feel its corruptive influence acting on you already, helping you come to terms with your new station. Your tongue worships the underside of his knot, the tip tickling his quaking, emptying balls. This is your place after all, to pleasure with your mouth and drip with your cunt, always horny and willing, always delirious with the pleasant, corrupted buzz of an insatiable need.");
 
 			outputText("\n\nYou'll do anything to keep yourself pleasantly slick for your masters. You don't even protest when the plug is forced back into your mouth and hooked to a nutrient solution.");
+
 			getGame().gameOver();
 		}
 		

@@ -9,14 +9,14 @@
 	}
 
 public function exploreShowers():void {
-	outputText("", true);
+	clearOutput();
 	/*if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
 		outputText("You toss ten gems to centaur and head towards the back.\n\n", false);
 		player.gems -= 10;
 		statScreenRefresh();
 	}*/
 	hideUpDown();
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00182] <= 1) {
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00182] <= 1 && flags[kFLAGS.DISABLED_SEX_MACHINE] <= 0) {
 		outputText("Having worked your body to a pleasant soreness as well as coating your " + player.skinDesc + " in a thin sheen of sweat and pheromones, you decide to hit up the showers to wash off and relax in the hot water.  ", false);
 		outputText("You walk into the back halls of the gym, quickly realizing you aren't quite sure where you're headed.  You turn a couple corners, walking down the halls looking for someone, and are about to turn back when you see a goblin round the corner up ahead.\n\n", false);
 	
@@ -25,7 +25,8 @@ public function exploreShowers():void {
 		outputText("Made of polished steel, the machine has many foreign parts you couldn't even begin to guess the use of, and some familiar ones from the other work out machines from the main gym floor.  This one, however, even seems to have a small monitoring screen!  You could easily sit down and check out this sophisticated device while waiting for the goblin to come out from the back rooms.\n\n", false);
 		
 		outputText("Do you use it or not?", false);
-		doYesNo(useTheSexMachine,leaveShowers);
+		doYesNo(useTheSexMachine, leaveShowers);
+		addButton(2, "No way!", disableMachineForGood);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00182] = 1;
 	}
 	//Go directly to sex if you know what's in store!
@@ -37,13 +38,22 @@ public function exploreShowers():void {
 
 //[If you decide to leave.]
 private function leaveShowers():void {
-	outputText("", true);
+	clearOutput();
 	outputText("You shake your head.  You've had enough of a workout for the day, and you remember you're in a land where curiosity almost certainly kills (well, more thoroughly rapes) the cat.  You leave the room and continue to search for the showers, eventually finding them and heading back to camp.", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
+private function disableMachineForGood():void {
+	clearOutput();
+	outputText("No way you are going to use the machine in your life!  You shake your head.  You've had enough of a workout for the day, and you remember you're in a land where curiosity almost certainly kills (well, more thoroughly rapes) the cat.  You leave the room and continue to search for the showers, eventually finding them and heading back to camp.");
+	outputText("\n\n<b>You will not encounter the sex machine again but you can still take a shower.</b>");
+	flags[kFLAGS.DISABLED_SEX_MACHINE] = 1;
+	doNext(camp.returnToCampUseOneHour);
+}
+
+
 private function useTheSexMachine():void {
-	outputText("", true);
+	clearOutput();
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00182] = 2;
 	//[If you decide to mess with the machine: Male]
 	if(player.gender == 1) {

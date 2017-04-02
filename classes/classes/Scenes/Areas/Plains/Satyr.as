@@ -2,6 +2,7 @@ package classes.Scenes.Areas.Plains
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class Satyr extends Monster
 	{
@@ -13,14 +14,14 @@ package classes.Scenes.Areas.Plains
 				outputText(capitalA + short + " completely misses you with a blind punch!\n", false);
 			}
 			//Evade: 
-			else if(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			else if(player.getEvasionRoll()) {
 				outputText("He snarls as you duck his blow and it swishes harmlessly through the air.");
 			}
 			else {
 				var damage:Number = int((str + weaponAttack) - rand(player.tou));
 				if(damage > 0) {
-					damage = player.takeDamage(damage);
-					outputText("It feels like you just got hit with a wooden club! (" + damage + ")");
+					outputText("It feels like you just got hit with a wooden club! ");
+					damage = player.takeDamage(damage, true);
 				}
 				else outputText("You successfully block it.");
 			}
@@ -40,35 +41,38 @@ package classes.Scenes.Areas.Plains
 			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you due to blindness!\n", false);
 			}
-			else if(combatMiss()) {
-				outputText("He charges at you with a loud bleat, but you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
-				HP -= 5;
-			}
-			else if(combatEvade()) {
-				outputText("He charges at you with a loud bleat, but using your evasive skills, you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
-				HP -= 5;
-			}
-			else if(combatFlexibility()) {
-				outputText("He charges at you with a loud bleat, but using your flexibility, you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
-				HP -= 5;
-			}
-			else if(combatMisdirect()) {
-				outputText("He charges at you with a loud bleat, but using your misdirecting skills, you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
-				HP -= 5;
-			}
 			else {
-				var damage:Number = int((str + weaponAttack) - rand(player.tou));
-				if(damage > 0) {
-					damage = player.takeDamage(damage);
-					outputText("He charges at you with a loud bleat, catching you off-guard and sending you flying into the ground.");
-					if(player.findPerk(PerkLib.Resolute) < 0) {
-						outputText("  The pain of the impact is so big you feel completely dazed, almost seeing stars.");
-						player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
-					}
-					//stun PC + hp damage if hit, hp damage dependent on str if miss
-					outputText(" (" + damage + ")");
+				var evade:String = player.getEvasionReason();
+				if(evade == EVASION_EVADE) {
+					outputText("He charges at you with a loud bleat, but using your evasive skills, you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
+					HP -= 5;
 				}
-				else outputText("He charges at you, but you successfully deflect it at the last second.");
+				else if(evade == EVASION_FLEXIBILITY) {
+					outputText("He charges at you with a loud bleat, but using your flexibility, you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
+					HP -= 5;
+				}
+				else if(evade == EVASION_MISDIRECTION) {
+					outputText("He charges at you with a loud bleat, but using your misdirecting skills, you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
+					HP -= 5;
+				}
+				else if (evade == EVASION_SPEED || evade != null) {
+					outputText("He charges at you with a loud bleat, but you nimbly dodge and strike a vicious blow with your [weapon] in return that sends him crashing into the ground, hollering in pain. (5)");
+					HP -= 5;
+				}
+				else {
+					var damage:Number = int((str + weaponAttack) - rand(player.tou));
+					if(damage > 0) {
+						outputText("He charges at you with a loud bleat, catching you off-guard and sending you flying into the ground.");
+						if(player.findPerk(PerkLib.Resolute) < 0 && rand(2) == 0) {
+							outputText("  The pain of the impact is so big you feel completely dazed, almost seeing stars.");
+							player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
+						}
+						outputText(" ");
+						damage = player.takeDamage(damage, true);
+						//stun PC + hp damage if hit, hp damage dependent on str if miss
+					}
+					else outputText("He charges at you, but you successfully deflect it at the last second.");
+				}
 			}
 			combatRoundOver();
 		}
@@ -87,7 +91,7 @@ package classes.Scenes.Areas.Plains
 			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you due to blindness!\n", false);
 			}
-			else if(combatMiss() || combatFlexibility() || combatMisdirect() || combatEvade()) {
+			else if(player.getEvasionRoll()) {
 				outputText("As he charges you, you grab him by the horns and spin around, sending him away.");
 			}
 			else {
@@ -157,15 +161,24 @@ package classes.Scenes.Areas.Plains
 			initLibSensCor(60, 35, 45);
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
+			this.weaponAttack = 0 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "thick fur";
+			this.armorDef = 2 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = 300;
+			this.bonusLust = 20;
 			this.lust = 20;
 			this.lustVuln = 0.30;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 14;
-			this.gems = rand(25) + 25;
+			this.level = 19;
+			this.gems = rand(30) + 30;
 			this.drop = new ChainedDrop().add(consumables.INCUBID,1/2);
 			this.tailType = TAIL_TYPE_COW;
+			this.str += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 1540;
 			checkMonster();
 		}
 		

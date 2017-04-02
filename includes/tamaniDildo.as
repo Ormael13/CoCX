@@ -1,10 +1,10 @@
 ﻿//RAEP SOME FUKKIN SHARKGIRLZ NIGGA
 public function sharkGirlGetsDildoed():void {
-	outputText("", true);
+	clearOutput();
 	outputText("You grin from ear to ear, revealing enough teeth to make even the defeated shark-girl shiver.  Advancing upon the prone monster-woman, you ", false);
 	if(player.weaponName != "fists") outputText("put away your " + player.weaponName + " and ", false);
 	outputText("draw out a glistening pink dildo from your pouches, as if it were a weapon.   She looks up at you, at once knowing your intent.  ", false);
-	if(monster.lust > 99) outputText("Her legs spread invitingly wide and she tears off her bikini bottom in a lusty frenzy.  You hold the dildo over her and give it a tiny squeeze, wringing out a few drops of pink fluid from the special dildo.  They land on her exposed cunt and in seconds she's writhing underneath you, humping the air.", false);
+	if(monster.lust >= monster.eMaxLust()) outputText("Her legs spread invitingly wide and she tears off her bikini bottom in a lusty frenzy.  You hold the dildo over her and give it a tiny squeeze, wringing out a few drops of pink fluid from the special dildo.  They land on her exposed cunt and in seconds she's writhing underneath you, humping the air.", false);
 	else outputText("She holds her legs together defiantly, but you pry them open, tear off her bikini bottom and expose her bald nether-lips.   You hold the dildo over her and squeeze, squirting a gush of pink fluid onto her exposed cunt.  The effect is immediate, and in moments she's humping the air and wet with her own fluids.", false);
 	outputText("\n\n", false);
 	
@@ -33,7 +33,7 @@ public function sharkGirlGetsDildoed():void {
 
 //RAEP SAND-WITCH!
 public function sandwitchGetsDildoed():void {
-	outputText("", true);
+	clearOutput();
 	outputText("You pull out Tamani's dildo, advancing on the helpless witch.   Her derriere makes an enticing target as you advance upon her, and the simple brown robe she wears does nothing to protect her body from your unusual attentions.\n\n", false);
 	outputText("Pushing her legs apart, you take the toy and shove it up one of her moistened fuck-holes.   She cries out, noisily screaming into the dunes, though you're unsure whether from pain or pleasure.  Whatever the case, she'll think twice about sending her vibrating stones after you now.  You shove the dildo further into her, hard enough to lift her knees out of the sand. She slams back down once you've crammed it the whole way inside her, wiggling her supple ass back and forth as if it would somehow assuage the pain of the rapid insertion.\n\n", false); 
 	outputText("\"<i>This isn't what I wanted,</i>\" cries the defeated witch, but you can see the sand under her four tits darkening with moisture.  You roll her over, exposing the soaked, sand-covered front of her robe.  You tear it off savagely, exposing her quartette of glistening, tanned orbs.   Her sweaty bronze skin isn't marred by tan lines, and she glistens as she dribbles milk, as if she oiled up before coming out into the desert.\n\n", false);
@@ -49,7 +49,7 @@ public function sandwitchGetsDildoed():void {
 
 //[FACTORY SUCCUBUS]
 public function succubusGetsDildoed():void {
-	outputText("", true);
+	clearOutput();
 	outputText("Your defeated opponent eyes you warily as you advance upon her, thrusting her chest forwards lewdly, with a hopeful gleam in her eye.  That gleam vanishes in sudden surprise when you stop and pull the oblong form of Tamani's dildo from your pouches.  The busty demon giggles happily, \"<i>I, like, love those things!  Those little sluts never let me keep one though!  Greedy bitches...</i>\"\n\n", false);
 	outputText("The succubus spreads her fishnet-coated legs, exposing her moist vulva while she reclines against a table, beckoning you forwards.  Well, you certainly didn't expect her to be so willing, but you may as well go through with it!  You push up her tiny skirt for better access and position the toy for a perfect insertion. She begs, \"<i>Quit teasing me and just jam it in me already!  Honey, I just want to feel it stretch me while my hot little box drools all over it.  Would you mind giving my clitty a lick too?  It's aching for a touch.</i>\"\n\n", false);
 	outputText("You see her button poking between her folds, far larger than the mortal women you've met, and you feel more than a little compelled to do as she's asked.   The toy slides in easily, though the further it penetrates her dark-blue cunt, the thicker it gets, and the more difficult it becomes to force it deeper inside.  Eventually you get it the entire way in.  The pair of you, demon and champion, watch together as her glistening cunt-lips are slowly forced apart, stretched wider and wider by the exotic dildo.  She giggles as you watch transfixed, and begins stroking her fingers all over her juicy outer folds while she asks, \"<i>Are you going to rape me or just stare at my cunt all day?</i>\"\n\n", false);

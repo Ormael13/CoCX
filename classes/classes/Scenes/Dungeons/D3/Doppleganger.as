@@ -5,6 +5,8 @@ package classes.Scenes.Dungeons.D3
 	import classes.Monster;
 	import classes.VaginaClass;
 	import classes.StatusAffects;
+	import classes.PerkLib;
+	import classes.GlobalFlags.kFLAGS;
 	
 	/**
 	 * ...
@@ -25,7 +27,7 @@ package classes.Scenes.Dungeons.D3
 			// tl;dr this avoids a bunch of weapon effects and perks, but given the specific means of attack, I think it actually makes sense overall. (Basically having to pull back from what you would normally do mid-attack to successfully land any kind of hit).
 			if (damage > 0 && rand(8) < 6)
 			{
-				outputText("  At the very last moment, you twist downwards and strike into your opponent’s trunk, drawing a gasp of pain from " + player.mf("him", "her") +" as " + player.mf("he", "she") +" clumsily lashes " + player.mf("his", "her") + " own " + weaponName +" over you. It’s your turn to mirror " + player.mf("him", "her") +", smiling mockingly at " + player.mf("his", "her") +" rabid snarls as " + player.mf("he", "she") +" resets " + player.mf("him", "her") +"self, " + player.mf("his", "her") +" voice bubbling and flickering for a moment as " + player.mf("he", "she") +" tries to maintain control. (" + damage + ")");
+				outputText("  At the very last moment, you twist downwards and strike into your opponent’s trunk, drawing a gasp of pain from " + player.mf("him", "her") +" as " + player.mf("he", "she") +" clumsily lashes " + player.mf("his", "her") + " own " + weaponName +" over you. It’s your turn to mirror " + player.mf("him", "her") +", smiling mockingly at " + player.mf("his", "her") +" rabid snarls as " + player.mf("he", "she") +" resets " + player.mf("him", "her") +"self, " + player.mf("his", "her") +" voice bubbling and flickering for a moment as " + player.mf("he", "she") +" tries to maintain control. <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 				this.HP -= damage;
 			}
 			else
@@ -74,7 +76,7 @@ package classes.Scenes.Dungeons.D3
 				return;
 			}
 			
-			if (lust > 99)
+			if (lust > eMaxLust())
 			{
 				doNext(game.endLustVictory);
 				return;
@@ -86,7 +88,7 @@ package classes.Scenes.Dungeons.D3
 				return;
 			}
 			
-			if (player.lust > 99)
+			if (player.lust >= player.maxLust())
 			{
 				doNext(game.endLustLoss);
 				return;
@@ -134,6 +136,7 @@ package classes.Scenes.Dungeons.D3
 					break;
 					
 				default:
+					outputText("\n\n“<i>How did you even survive?</i>” the doppelganger looks in confusion. “<i>Regardless, I'm still taking your body.</i>”");
 					break;
 			}
 			
@@ -159,11 +162,19 @@ package classes.Scenes.Dungeons.D3
 			
 			if (spell == "fireball")
 			{
-				outputText(" (" + player.takeDamage(player.level * 10 + 45 + rand(10)) + ")");
+				var damage:Number = player.level * 10 + 45 + rand(10)
+				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
+				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+				damage = Math.round(damage);
+				player.takeDamage(damage, true);
 			}
 			else if (spell == "whitefire")
 			{
-				outputText(" (" + player.takeDamage(10 + (player.inte / 3 + rand(player.inte / 2))) + ")");
+				var damage2:Number = 10 + (player.inte / 3 + rand(player.inte / 2))
+				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage2 *= 3;
+				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage2 *= 0.3;
+				damage2 = Math.round(damage2);
+				player.takeDamage(damage2, true);
 			}
 			
 			addTalkShit();
@@ -177,6 +188,12 @@ package classes.Scenes.Dungeons.D3
 		
 		override public function doAI():void
 		{
+			if (findStatusAffect(StatusAffects.Stunned) >= 0) {
+				removeStatusAffect(StatusAffects.Stunned);
+				outputText("Your duplicate is too stunned, buying you another round!");
+				combatRoundOver();
+				return;
+			}
 			outputText("Your duplicate chuckles in the face of your attacks.");
 			addTalkShit();
 		}
@@ -188,9 +205,7 @@ package classes.Scenes.Dungeons.D3
 			this.long = ""; // Needs to be set to supress validation errors, but is handled by an accessor override.
 			this.imageName = "doppleganger";
 			this.plural = false;
-			
 			this.tallness = player.tallness;
-			
 			if (player.balls > 0)
 			{
 				this.balls = player.balls;
@@ -201,32 +216,28 @@ package classes.Scenes.Dungeons.D3
 				this.balls = 0;
 				this.ballSize = 0;
 			}
-			
 			this.hoursSinceCum = player.hoursSinceCum;
-			
 			hipRating = player.hipRating;
+			if (hipRating < 1) hipRating = 1;
 			buttRating = player.buttRating;
+			if (buttRating < 1) buttRating = 1;
 			lowerBody = player.lowerBody;
 			skinDesc = player.skinDesc;
 			initStrTouSpeInte(player.str, player.tou, player.spe, player.inte);
 			initLibSensCor(player.lib, player.sens, player.cor);
+			if (cor < 50) cor = 50;
 			faceType = player.faceType;
 			skinType = player.skinType;
-			
-			this.bonusHP = 250;
-			
+			this.bonusHP = 500;
+			this.bonusLust = 40;
 			this.weaponName = player.weaponName;
-			this.weaponAttack = player.weaponAttack;
+			this.weaponAttack = player.weaponAttack + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.weaponVerb = player.weaponVerb;
-			
-			this.armorDef = player.armorDef;
+			this.armorDef = player.armorDef + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = player.armorName;
-			
 			this.level = player.level;
-			
 			this.ass.analLooseness = player.ass.analLooseness;
 			this.ass.analWetness = player.ass.analWetness;
-			
 			if (player.cocks.length > 0)
 			{
 				for (var i:int = 0; i < player.cocks.length; i++)
@@ -234,7 +245,6 @@ package classes.Scenes.Dungeons.D3
 					this.createCock((player.cocks[i] as Cock).cockLength, (player.cocks[i] as Cock).cockThickness, (player.cocks[i] as Cock).cockType);
 				}
 			}
-			
 			if (player.vaginas.length > 0)
 			{
 				this.createVagina();
@@ -251,7 +261,6 @@ package classes.Scenes.Dungeons.D3
 				(this.vaginas[0] as VaginaClass).virgin = false;
 			}
 			this.breastRows = [];
-			
 			for (i = 0; i < player.breastRows.length; i++)
 			{
 				this.createBreastRow();
@@ -265,9 +274,16 @@ package classes.Scenes.Dungeons.D3
 				tbr.milkFullness = sbr.milkFullness;
 				tbr.nipplesPerBreast = sbr.nipplesPerBreast;
 			}
-			
+			this.pronoun1 = "[he]";
+			this.pronoun2 = "[him]";
+			this.pronoun3 = "[his]";
 			this.drop = NO_DROP;
-			
+			this.str += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 1000;
 			checkMonster();
 		}
 		

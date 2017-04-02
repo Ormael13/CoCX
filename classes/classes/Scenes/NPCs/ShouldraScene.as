@@ -66,7 +66,7 @@
 				return true;
 			}
 			//Ghostgirl pissed off dreams
-			if (shouldraFollower.followerShouldra() && flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -236 && model.time.hours == 3 && player.gender > 0) {
+			if (shouldraFollower.followerShouldra() && flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -236 && model.time.hours == 3 && player.gender > 0 && !prison.inPrison) {
 				getGame().shouldraFollower.nightTimeShouldraRapesThePC();
 				return true;
 			}
@@ -89,7 +89,7 @@
 //Intro
 internal function shouldraGreeting():void {
 	spriteSelect(66);
-	outputText("", true);
+	clearOutput();
 	if(silly() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00366] == 0) {
 		//NO MUTANTS ALLOWED
 		if(player.cockTotal() > 1 || player.faceType != FACE_HUMAN || player.lowerBody != LOWER_BODY_TYPE_HUMAN || player.tailType > TAIL_TYPE_NONE || player.horns > 0 || player.cor > 15 || player.longestCockLength() > 10 || player.tallness < 65 || player.tallness > 78 || player.hasVagina()) {}
@@ -140,7 +140,7 @@ internal function shouldraGreeting():void {
 //[yep]  
 private function yankeeEchoPapa():void {
 	spriteSelect(66);
-	outputText("", true);
+	clearOutput();
 	outputText("You graciously accept her offer, and she nods happily.  \"<i>Perfect!  Now then, let's get to it...</i>\"\n\n", false);
 	//[skip to 'let her in' text (i.e. win sex intro)]
 	doNext(littlePigLittlePigLetMeIn);
@@ -148,7 +148,7 @@ private function yankeeEchoPapa():void {
 //[nah] 
 private function novemberAlphaHotel():void {
 	spriteSelect(66);
-	outputText("", true);
+	clearOutput();
 	outputText("You shake your head slowly, raising your " + player.weaponName + " as you regard her.  \"<i>Ah, so that's how you want it?</i>\" she titters, a smile gracing her features.  \"<i>In that case, enough talk... have at you!</i>\"\n\n", false);
 	startCombat(new Shouldra());
 }
@@ -157,7 +157,7 @@ private function novemberAlphaHotel():void {
 //Ghost Girl Defeated
 internal function defeatDannyPhantom():void {
 	spriteSelect(67);
-	outputText("", true);
+	clearOutput();
 	//defeat by damage)
 	if(monster.HP < 1) {
 		outputText("With an ear-splitting, ghostly wail that forces you to your knees, the ", false);
@@ -186,7 +186,7 @@ internal function defeatDannyPhantom():void {
 //(deny entry)
 private function noSlimingSlimer():void {
 	spriteSelect(67);
-	outputText("", true);
+	clearOutput();
 	outputText("You shake your head angrily at the brazen girl, ", false);
 	//([if first time] 
 	if(flags[kFLAGS.TIMES_POSSESSED_BY_SHOULDRA] == 0) outputText("not feeling up to heed the strange girl's whims.", false);
@@ -202,7 +202,7 @@ private function noSlimingSlimer():void {
 //(let her in)
 private function littlePigLittlePigLetMeIn():void {
 	spriteSelect(67);
-	outputText("", true);
+	clearOutput();
 	outputText("You decide ", false);
 	if(flags[kFLAGS.TIMES_POSSESSED_BY_SHOULDRA] == 0) outputText("you can afford being a little adventurous with the obviously desperate girl", false);
 	else outputText("having a spiritual tag-along might be a bit of fun", false);
@@ -234,7 +234,7 @@ private function littlePigLittlePigLetMeIn():void {
 //Lake Victory Scenes
 private function nowOnVickiLake():void {
 	spriteSelect(67);
-	outputText("", true);
+	clearOutput();
 	//(go to lake), (penis), (vagina), (herm)
 	//(go to lake)
 	//Lake Introduction
@@ -258,7 +258,7 @@ private function nowOnVickiLake():void {
 //Shark Girl x Ghost Girl - Introduction
 private function sharkbustersVictory():void {
 	spriteSelect(67);
-	outputText("", true);
+	clearOutput();
 	outputText("You reach the lake without incident, and quickly hop into the waiting boat. As you cast off the dock, you keep an eye out for any signs of your intended prey; luckily, you did not have to wait long. A telltale fin breaks the surface of the water, heading unerringly towards you. You turn about and row back to shore, hopping out and waiting anxiously (the ghost girl screaming warnings in your ear about sharks in the lake not helping anything). The \"<i>shark</i>\" reaches the shore and breaches beautifully. You narrowly avoid getting splashed, and she lands solidly, spinning to face you. The shark girl gives you one of her vicious, tooth-filled smiles. \"<i>Wanna play? Heads up th-...grfgh!</i>\"\n\n", false);
 	
 	outputText("You don't even give her time to finish, rushing up to her and slamming your lips against hers in a passionate kiss", false);
@@ -280,7 +280,7 @@ private function sharkbustersVictory():void {
 //Shark Girl x Ghost Girl - Vagina Scene (Giantess)
 private function sharkyEctoginas():void {
 	spriteSelect(67);
-	outputText("", true);
+	clearOutput();
 	outputText("On her beckoning, you approach the ghost-turned-shark with an eyebrow raised. In lieu of words, the ghost gestures towards her undercarriage, still (hardly) enclosed in her black bikini. To her bemusement, the gray arm spasms as its host fights against this third-party rape. It seems as if the shark girl nearly succeeds, the yellow eyes even changing shade slightly, before the ghost girl thrusts herself back into the driver's seat. Despite signs of continued struggle, she winks an again-amber orb at you, and runs a hand along her rough thigh in anticipation. You push her backwards until she is forced to use her shark tail as a tripod, then drop level to her nautical nethers, the cloth dripping with a mixture of water, sweat, and an occasional small droplet of femspunk. You give it a little lick, not surprised with the salty taste in your tongue, then go at it with steadily increasing vigor. Her legs quiver with the power of her budding arousal, and her breathing quickens, short moans and sultry sighs escaping her throat. You hook your fingers around her bikini bottom and prepare to expose her naughty bits, but are stopped when her hips suddenly puff up to pull the fabric tight against her flesh once again. You slip your digits away and lean back, realizing you're about to be treated to the effects of her spell. The ghost girl gives an especially passionate groan, but interrupts it with a concerned gasp. The shark girl's visage momentarily restructures while she's distracted, showing hints of her possessor's features. After noticing and correcting the slight, she turns to you. \"<i>...I think... I cast... the wrong spell...", false);
 	//[if repeat]
 	if(flags[kFLAGS.TIMED_SHARKGINAS] > 0) outputText(" again...", false);
@@ -318,7 +318,7 @@ private function sharkyEctoginas():void {
 //Shark Girl x Ghost Girl - Penis Scene (Saliva Growth)
 private function ghostIzmaPenis():void {
 	spriteSelect(67);
-	outputText("", true);
+	clearOutput();
 	outputText("You swiftly disrobe and lay your " + player.armorName + " to the side, revealing your stiffening " + multiCockDescriptLight() + " in all of its glory. The ghost-girl's eyes brighten at the sight, and she even allows herself a little swoon (which looks absolutely silly, given her current tough shark-like vessel) as she regards your manhood.  ", false);
 	outputText("She staggers forward, dropping to her knees in front of you", false);
 	//[if testicles present] 
@@ -359,7 +359,7 @@ private function ghostIzmaPenis():void {
 //Slime x Ghost Girl - Introduction
 private function ghostGooGurlzDuckfaces():void {
 	spriteSelect(67);
-	outputText("", true);
+	clearOutput();
 	//[if boat not unlocked, and if it is, 50/50 chance of either encounter; preliminary stuff: breasts smaller than Z's, met Markus; also, choice for herms and all that]  
 	outputText("You hike easily along a path leading around the lake, keeping a wary eye on any potential playthings. With effort, you ignore the increasingly frustrated telepathic protests from your otherworldly companion. You begin to whistle a jaunty tune, but cut the noise short as you glance over and see a perfect recipient for the ghost girl's lust; an amoeba-like glob of goo. The ghost girl's complaints cease as she notices the squishy thing, and you can imagine her eyes lighting up as she queries, \"<i>Ooh, ooh, can we rape that?</i>\"  With a widening smile, you confirm her excitement. Realizing you can't exactly sneak up on the thing, as you don't know how exactly its perception works, you bid the ghost to act as vanguard. \"<i>...Exactly what does that involve?</i>\" she responds hesitantly, and you sigh, bluntly telling her to go and possess the thing. \"<i>Ah,</i>\" she says softly. \"<i>That makes sense.</i>\"\n\n", false);
 	
@@ -504,7 +504,7 @@ private function slimeyPenorsAhoy():void {
 //Genderless Scene
 private function genderlessGhostBuster():void {
 	spriteSelect(67);
-	outputText("", true);
+	clearOutput();
 	outputText("Excited to help relieve the girl of her accumulating lust, you allow her control of your arms. She eagerly cups a hand against your crotch to feel... nothing. Confused, she quickly wriggles out of your " + player.armorName + " and goes in for another grope, feeling nothing but skin. \"<i>Son of a...please don't tell me you don't have any sexual bits I can play with!</i>\" she huffs, and you chuckle sheepishly, not knowing what to tell her. She groans and falls back onto your " + buttDescript() + ", muttering a string of curse words under your breath. \"<i>That's it!</i>\" she fumes. \"<i>I'm going to get off, whether you want me to or not!</i>\" She resumes cursing and wiggling your hips for a bit longer, then stops suddenly, a smirk playing across your face. \"<i>Whether you want me to or not...</i>\"\n\n", false);
 	
 	outputText("She hops to your feet and makes for the decrepit hut you first saw her in.  ", false);
@@ -546,7 +546,7 @@ private function genderlessGhostBuster():void {
 private function penisLossThatIsntALoss():void {
 	spriteSelect(67);
 	var x:Number = player.biggestCockIndex();
-	outputText("", true);
+	clearOutput();
 	if(player.findStatusAffect(StatusAffects.Infested) >= 0) {
 		dewormYourGhost();
 		return;
@@ -622,14 +622,14 @@ private function penisLossThatIsntALoss():void {
 
 private function letShouldraIn():void {
 	spriteSelect(67);
-	outputText("", true);
+	clearOutput();
 	outputText("The ghost girl squeals in excitement as you allow her partial control- only enough for her to feel your penis as if it were her own.  With an ecstatic, victorious scream, she impales herself upon your dick, taking the entire thing down her throat like it's nothing.  Your jet-stream of cum rockets into her gob, blasting her head straight off your dick to slam into your " + chestDesc() + " with an \"<i>Oof.</i>\"\n\n", false);
 	ghostBJFinisher(true);
 }
 //deny her
 private function kickShouldraOut():void {
 	spriteSelect(67);
-	outputText("", true);
+	clearOutput();
 	outputText("Reminding her that this is a punishment for underestimating you, you firmly deny her request for entry.  Her bright yellow eyes glaze over in her disappointment, but she dare not go against your wishes.  The ghost girl turns back around and mechanically goes back to her work.  As soon as she slides her puckered lips down your twitching shaft, however, you're already past your point of endurance, and a jet of cum lifts her head right off of your dick.  The back of her head slams into your " + chestDesc() + " with an \"<i>Oof.</i>\"\n\n", false);
 	ghostBJFinisher(false);
 }
@@ -665,7 +665,7 @@ private function ghostBJFinisher(inside:Boolean):void {
 //[penis selection with worm infestation] 
 private function dewormYourGhost():void {
 	spriteSelect(67);
-	outputText("", true);
+	clearOutput();
 	outputText("As the ghost girl settles into your body, she swiftly recognizes the unfamiliar bulge against your " + player.armorName + ", and you feel a wave of joy run though your body as she regards your dick. The skin on the back of your hand shudders, and you jump in surprise when the spirit's face appears on it. She waits patiently for you to get over the initial shock, then asks, \"<i>May I... please... I mean, you... ah...</i>\" You guess she must be slightly overwhelmed by her discovery. You softly ask her if she is referring to your maleness, and she responds with a suddenly anxious \"<i>Mmhmm!</i>\"\n\n", false);
 	
 	outputText("Chuckling to yourself, you consent to her pleadings, and she falls back into your body with a gleeful squeal. You climb out of your " + player.armorName + " and put a hand on your not-so-erect maleness, taking pleasure in the way she coos as blood begins to surge into your tool. Soon enough, your penis pulses in your hand, erect and ready for stimulation. You give it a little squeeze, not even noticing when one of the worms sheltering in your crotch slips out and wriggles across the floor, but the ghost girl surely does, and she makes herself known with a shrill scream that leaves your ears ringing and your head pounding. Worried, you ask her what's the matter ", false);
@@ -684,7 +684,7 @@ private function dewormYourGhost():void {
 private function penisGartuanGhostSmexVictory():void {
 	spriteSelect(67);
 	var x:Number = player.biggestCockIndex();
-	outputText("", true);
+	clearOutput();
 	outputText("You feel an almost overwhelming surge of anxious arousal as the ghost girl regards your excessively large " + cockDescript(x) + ". You decide to play along and place your hand over the bulge in your " + player.armorName + ", enjoying her gleeful titter as your member twitches and hardens, just a tad. You begin to strip, but are halted by a familiar booming voice coming from the half-erect member. \"<i>WHO THE HELL IS THIS BITCH?</i>\" a perplexed Exgartuan yells grumpily. \"<i>Living in peoples' bodies is MY THING!</i>\"\n\n", false);
 	
 	outputText("The shocked ghost girl nearly leaps out of your body right then and there. \"<i>O-oh... I'm so-sorry for the... uh... ah...</i>\" she stutters in your voice, the words almost refusing to form in your mouth. Telepathically, she pulses to you, \"<i>Why didn't you tell me there was... someone else here?</i>\" angrily, and you meekly apologize for the oversight. \"<i>WELL!?</i>\" Exgartuan bellows, and your semi-flaccid dick twitches angrily.\n\n", false);
@@ -730,7 +730,7 @@ private function ghostGinaWinSexings():void {
 		return;
 	}
 	spriteSelect(67);
-	outputText("", true);
+	clearOutput();
 	outputText("The ghost girl heaves a mildly disappointed sigh as she settles into your body fully.  \"<i>I've had... many female hosts,</i>\" she explains. You momentarily feel embarrassed by the ghost's disapproval, and you almost move to apologize before the words catch in your throat and you cross your arms defensively.  ", false);
 	if(flags[kFLAGS.SHOULDRA_VAGINAL_POSSESSIONS] == 0) outputText("She 'hmm's several times inside your head, but you can feel a surge of elation as she apparently reaches a solution. \"<i>Of course!</i>\" she cries excitedly.  \"<i>I actually have never done this before!</i>\"\n\n", false);
 	else outputText("\"<i>Oh well, I suppose we can always just do that again,</i>\" she muses. \"<i>It worked well enough the first time.</i>\"\n\n", false);
@@ -752,7 +752,7 @@ private function ghostGinaWinSexings():void {
 private function hermaphroditeGhostsCumEctoplasm():void {
 	spriteSelect(67);
 	var x:Number = player.biggestCockIndex();
-	outputText("", true);
+	clearOutput();
 	if(flags[kFLAGS.SHOULDRA_HERMSEX_COUNT] == 0) outputText("She abruptly gasps in excitement and begins moving her hands towards your groin, though you swiftly reclaim control of the unruly appendages. \"<i>You have a penis,</i>\" she telepathically pulses to you with an anxious and excited edge to her voice. \"<i>My hosts... they rarely... they... </i>\"  ", false);
 	//[if repeated] 
 	if(flags[kFLAGS.SHOULDRA_HERMSEX_COUNT] > 0) outputText("She chuckles softly as she recalls the times you've shared, and she hungrily goes for your maleness once more, though you mentally throw her off of it.  ", false);
@@ -825,7 +825,7 @@ private function hermaphroditeGhostsCumEctoplasm():void {
 //Loss Introduction
 internal function loseToShouldra():void {
 	spriteSelect(67);
-	outputText("", true);
+	clearOutput();
 	outputText("You fall with a dull thud onto the abandoned road, thoroughly beaten by the seemingly unremarkable young woman.  As you struggle to rise, she casually walks over to you, standing with hands on hips and staring down at you.  You freeze, not wanting to make any sudden moves against this unpredictable opponent.  She slowly takes off her loose-fitting tunic, exposing her firm and squeezable C-cups. Curiously, she kicks off her comfortable shoes, but leaves her tight leggings on. You suspect something fishy, and raise an eyebrow as she straddles you. Unexpectedly, she hops up and spins completely around, landing on your abdomen, butt facing you, with enough force to elicit an 'oof'. You glance down at her; she half-turns, looking mischievously (and with a hint of evil intent) back at you. A small rumbling against your belly is the only warning you get before her leggings suddenly bulge weirdly, containing a substantially larger amount of flesh than a moment previous. Her ass continues to swell up, beginning to billow up and over the increasingly more constrictive waistband, and you can't help but raise a hand and squeeze the burgeoning buttflesh. You take pleasure in the sensation as it pulses further around your hand, squishing deeper into the cheek. Small rips begin to form on the cloth as her hips join in on the growth, the increasing amount of posterior raising her up slightly with each passing moment.  ", false);
 	//[if dick] 
 	if(player.hasCock()) outputText("Each pulse pushes her a bit further onto your hardening manhood", false);
@@ -1158,7 +1158,7 @@ private function ghostGartuanLossSceneOrSomeShit():void {
 //[super secret paladin 'sex' scene; prerequisites: human face, human body, human legs, no tail, no horns, light/olive/dark/ebony complexion, slightly to severely masculine face, 0-15 corruption, 4-10 inch normal penis, 1-2 inch testicles, no-adjective to narrow hips, height between 5'5</i>\" and 6'5</i>\"]  
 private function superCoolPaladinSexStuffDudeGasmJizzMonkies():void {
 	spriteSelect(66);
-	outputText("", true);
+	clearOutput();
 	
 	outputText("While gallantly striding through the wreckage of the town, you sense danger, and pause mid-stride. You strain your valiant ears for any out-of-place sounds, and your heroic eyes widen as you hear a shuffling from one of the heretical half-destroyed huts. Cursing your wise self for getting caught off-guard in such an unlawful place as this, you ready your incredibly just " + player.weaponName + " and wait. Another unsanctimonious sound issues forth, and you tense yourself. You are caught very slightly off-guard when a completely human leg steps out of the doorway. A virtuous maiden soon stands before you, eyeing you up curiously. After taking a breath to steady yourself, you inquire upon how such an untainted woman would find herself in a place such as this. Instead of the very reasonable response of being cowed by your almighty presence, the girl laughs softly, arching an eyebrow at your behavior. You narrow your eyes angrily at such a slight to your devout mannerisms and demand an apology. \"<i>Ah, I'm very sorry,</i>\" she replies, only a hint of humor to her admittedly lovely voice, \"<i>I was not expecting such a... remarkable man, such as yourself, to wander by. What business have you here?</i>\"\n\n", false);
 	
@@ -1178,7 +1178,7 @@ private function noCourtingYouFag():void {
 //(yup)
 private function courtCrazyGirlsDotCom():void {
 	spriteSelect(66);
-	outputText("", true);
+	clearOutput();
 	outputText("Her smile widens as she regards your venerable visage. \"<i>Is that so?</i>\" she says softly. \"<i>Interesting. I'll be back in a moment.</i>\" She returns to her \"<i>house,</i>\" rummaging around for some time before returning to you, hands hidden behind her. \"<i>If I am to be sought by a paladin, we must do things right,</i>\" she explains, handing you a small silk handkerchief. The white fabric slides around your fingers like a sacrosanct flow of holy water, and you reverently tuck her gift into your " + player.armorName + ", laying it over your heart. \"<i>Come back in two days' time, please,</i>\" she asks softly. Your eyes meet for a long moment, and it appears as if she's struggling to say something. She instead breaks away and starts back towards her shelter. \"<i>Be safe,</i>\" she advises, and with a smile and a wave, she's gone. For moments you stand silently, then you turn and start away with long, saintly strides. There's more work to do.\n\n", false);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] = 48;
 	doNext(camp.returnToCampUseOneHour);

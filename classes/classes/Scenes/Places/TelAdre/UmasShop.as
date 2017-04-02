@@ -213,7 +213,7 @@
 			}
 			
 			//addButton(4, "Train Loppe", trainLoppe); // Unfinished in the doc
-			addButton(9, "Leave", telAdre.telAdreMenu);
+			addButton(14, "Leave", telAdre.telAdreMenu);
 		}
 		
 		/**
@@ -670,7 +670,7 @@
 				// 25 per undo?
 				baseCost += (25 * flags[kFLAGS.UMA_TIMES_ACUPUNCTURE_UNDO]);
 			}
-			
+			if (baseCost > 1000) baseCost = 1000;
 			return baseCost;
 		}
 		
@@ -925,7 +925,7 @@
 			addButton(1, "Sexuality", talkSexuality);
 			addButton(2, "Loppe", talkLoppe);
 			addButton(3, "Loppe's Dad", talkLoppesDad);
-			addButton(9, "Back", enterClinic, true);
+			addButton(14, "Back", enterClinic, true);
 		}
 		
 		/**
@@ -1581,7 +1581,7 @@
 				addButton(3, "Handjob", sexHandjob);
 				addButton(4, "Get Blown", sexGetABJFromDisMilfyLesboSlut);
 			}
-			addButton(9,"Back",buildCoreMenu);
+			addButton(14,"Back",buildCoreMenu);
 		}
 
 		/**
@@ -1653,6 +1653,7 @@
 			var hoursSinceCum:int = player.hoursSinceCum;
 			dynStats("lust=", 0);
 			player.hoursSinceCum = Math.ceil(hoursSinceCum * 0.75);
+			flags[kFLAGS.TIMES_ORGASMED]++;
 
 			menu();
 			doNext(camp.returnToCampUseOneHour);

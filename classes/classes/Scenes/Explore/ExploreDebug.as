@@ -5,6 +5,7 @@ package classes.Scenes.Explore
 {
 	import classes.BaseContent;
 	import classes.Monster;
+	import classes.Scenes.Areas.BlightRidge.*;
 	import classes.Scenes.Areas.Bog.*;
 	import classes.Scenes.Areas.Desert.*;
 	import classes.Scenes.Areas.Forest.*;

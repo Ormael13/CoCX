@@ -2,16 +2,16 @@
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class GreenSlime extends Monster
 	{
-
-
+		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.", true);
 			//Boobfeed.
-			if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+			if(player.findStatusAffect(StatusAffects.Feeder) >= 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				//Eligable to rape
 				if(player.lust >= 33 && player.gender > 0) {
 					outputText("\n\nYou're horny enough to try and rape it, though you'd rather see how much milk you can squirt into it.  What do you do?", false);
@@ -24,7 +24,7 @@
 				}
 			}
 			//Not a breastfeeder
-			else if(player.lust >= 33 && player.gender > 0) {
+			else if(player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  Sadly you realize your own needs have not been met.  Of course, you could always play with the poor thing... Do you rape it?", false);
 				game.doYesNo(game.lake.greenSlimeScene.slimeVictoryRape, game.cleanupAfterCombat);
 			}
@@ -73,22 +73,32 @@
 			this.buttRating = BUTT_RATING_LARGE;
 			this.lowerBody = LOWER_BODY_TYPE_GOO;
 			this.skinTone = "green";
-			initStrTouSpeInte(25, 20, 10, 5);
+			initStrTouSpeInte(25, 30, 10, 5);
 			initLibSensCor(50, 60, 20);
 			this.weaponName = "hands";
-			this.weaponVerb="slap";
+			this.weaponVerb = "slap";
+			this.weaponAttack = 3 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "gelatinous skin";
-			this.bonusHP = 30;
+			this.armorDef = 3 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusHP = 50;
+			this.bonusLust = 20;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 2;
-			this.gems = rand(5) + 1;
+			this.level = 4;
+			this.gems = rand(5) + 3;
 			this.drop = new ChainedDrop().add(weapons.PIPE, 1 / 10)
 					.add(consumables.WETCLTH, 1 / 2)
 					.elseDrop(useables.GREENGL);
 			this.special1 = lustReduction;
 			this.special2 = lustAttack;
 			this.special3 = lustAttack;
+			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
+			this.str += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 240;
 			checkMonster();
 		}
 

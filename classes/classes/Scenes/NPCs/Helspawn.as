@@ -42,9 +42,9 @@ private function calledShot():void {
 	outputText(flags[kFLAGS.HELSPAWN_NAME] + " draws back her bowstring, spending an extra second aiming before letting fly!");
 	var damage:Number = int((str + weaponAttack) - rand(player.tou) - player.armorDef);
 	//standard dodge/miss text
-	if(damage <= 0 || (rand(2) == 0 && (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()))) outputText("\nYou avoid the hit!");
+	if(damage <= 0 || (rand(2) == 0 && (player.getEvasionRoll()))) outputText("\nYou avoid the hit!");
 	else {
-		outputText("\nOne of her arrows smacks right into your [leg], nearly bowling you over.  God DAMN that hurt! You're going to be limping for a while!");
+		outputText("\nOne of her arrows smacks right into your [leg], nearly bowling you over.  God DAMN that hurt! You're going to be limping for a while! ");
 		var affect:int = 20 + rand(5);
 		if(player.findStatusAffect(StatusAffects.CalledShot) >= 0) {
 			while(affect > 0 && player.spe >= 2) {
@@ -67,8 +67,7 @@ private function calledShot():void {
 				// speUp.visible = false;
 			}
 		}
-		damage = player.takeDamage(damage);
-		outputText(" (" + damage + ")");
+		damage = player.takeDamage(damage, true);
 	}
 }
 
@@ -87,15 +86,14 @@ private function calledShot():void {
 			// Stuns a bitch
 			outputText(flags[kFLAGS.HELSPAWN_NAME] + " lashes out with her shield, trying to knock you back!");
 			//standard dodge/miss text
-			if(damage <= 0 || combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText("\nYou evade the strike.");
+			if(damage <= 0 || player.getEvasionRoll()) outputText("\nYou evade the strike.");
 			else {
-				outputText("\nHer shield catches you right in the face, sending you tumbling to the ground and leaving you open to attack!");
-				damage = player.takeDamage(damage);
+				outputText("\nHer shield catches you right in the face, sending you tumbling to the ground and leaving you open to attack! ");
+				damage = player.takeDamage(damage, true);
 				if(rand(2) == 0 && player.findStatusAffect(StatusAffects.Stunned) < 0) {
 					player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
 					outputText(" <b>The hit stuns you.</b>");
 				}
-				outputText(" (" + damage + ")");
 			}
 		}
 
@@ -105,11 +103,10 @@ private function calledShot():void {
 			var damage:Number = int((str) - rand(player.tou));
 			outputText("\n" + flags[kFLAGS.HELSPAWN_NAME] + " whips at you with her tail, trying to sear you with her brilliant flames!");
 			//standard dodge/miss text
-			if(damage <= 0 || combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText("\nYou evade the strike.");
+			if(damage <= 0 || player.getEvasionRoll()) outputText("\nYou evade the strike.");
 			else {
-				outputText("\n" + flags[kFLAGS.HELSPAWN_NAME] + "'s tail catches you as you try to dodge.  Your [armor] sizzles, and you leap back with a yelp as she gives you a light burning.");
-				damage = player.takeDamage(damage);
-				outputText(" (" + damage + ")");
+				outputText("\n" + flags[kFLAGS.HELSPAWN_NAME] + "'s tail catches you as you try to dodge.  Your [armor] sizzles, and you leap back with a yelp as she gives you a light burning. ");
+				damage = player.takeDamage(damage, true);
 			}
 		}
 
@@ -181,28 +178,37 @@ private function calledShot():void {
 			this.skinTone = "dusky";
 			this.hairColor = "red";
 			this.hairLength = 13;
-			initStrTouSpeInte(50, 50, 65, 40);
-			initLibSensCor(35, 55, 20);
+			initStrTouSpeInte(60, 60, 64, 50);
+			initLibSensCor(45, 55, 20);
 			this.weaponName = weapon;
 			this.weaponVerb = {
 				'bow': "blunted arrow",
 				'scimitar': "slash",
 				'scimitar and shield': "slash"}[weapon];
-			this.weaponAttack = 20;
+			this.weaponAttack = 20 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "scales";
-			this.armorDef = 12;
+			this.armorDef = 12 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorPerk = "";
 			this.armorValue = 50;
 			this.bonusHP = 175;
+			this.bonusLust = 5;
 			this.lust = 30;
 			this.lustVuln = .55;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 12;
+			this.level = 18;
 			this.gems = 10 + rand(5);
-			this.tailType = TAIL_TYPE_LIZARD;
+			this.tailType = TAIL_TYPE_SALAMANDER;
 			this.tailRecharge = 0;
 			this.createStatusAffect(StatusAffects.Keen, 0, 0, 0, 0);
 			this.drop = NO_DROP;
+			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
+			if (flags[kFLAGS.HELSPAWN_WEAPON] == "scimitar and shield") this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
+			this.str += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 1100;
 			checkMonster();
 		}
 

@@ -2,6 +2,7 @@
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.*;
 
 	public class GoblinAssassin extends Monster
 	{
@@ -58,7 +59,7 @@
 		protected function lustNeedle():void {
 			outputText("With a swift step, the assassin vanishes, her movements too quick for you to follow. You take a sharp breath as you feel her ample thighs clench your head in between them, her slick cunt in full view as you take in her scent.");
 			//Miss
-			if (combatMiss() || combatEvade()) 
+			if (player.getEvasionRoll()) 
 			{
 				//Miss: 
 				outputText("\nYou’ve already prepared, however, as you hold your breath and grab the goblin by her sides. Unhindered by her advance, you take the opportunity to move backwards, throwing the goblin off balance and leaving you only faintly smelling of her pussy.");
@@ -76,17 +77,16 @@
 		protected function dualShot():void {
 			outputText("The assassin throws a syringe onto the ground, shattering it and allowing the dissipating smoke from its contents to distract you long enough for her to slip underneath you. With a quick flick of her wrists two needles are placed into her hands, though you’ve already caught wind of her movements.");
 			//Miss: 
-			if (combatMiss() || combatEvade() || combatMisdirect() || combatFlexibility()) 
+			if (player.getEvasionRoll()) 
 			{
 				outputText("\nYou jump backwards, far enough to avoid her quick thrust upwards as she attempts to lick the area in which your crotch once stood. Realising her situation, she quickly removes herself from the ground and faces you, more determined than before.");
 			}
 			//Hit: 
 			else {
-				outputText("\nBefore you can do anything to stop her, she lifts her head and takes a swift lick of your crotch, taking a small moan from you and giving her enough time to stab into the back of your knees. She rolls out of the way just as you pluck the two needles out and throw them back to the ground. They didn’t seem to have anything in them, but the pain is enough to make you stagger.");
+				outputText("\nBefore you can do anything to stop her, she lifts her head and takes a swift lick of your crotch, taking a small moan from you and giving her enough time to stab into the back of your knees. She rolls out of the way just as you pluck the two needles out and throw them back to the ground. They didn’t seem to have anything in them, but the pain is enough to make you stagger. ");
 				//(Medium HP loss, small lust gain)
 				var damage:int = int((str + weaponAttack + 40) - rand(player.tou) - player.armorDef);
-				damage = player.takeDamage(damage);
-				outputText(" (" + damage + ")");
+				damage = player.takeDamage(damage, true);
 			}
 			combatRoundOver();
 		}
@@ -96,8 +96,10 @@
 			outputText("\nYou shield yourself from the explosion, though the goblin has already lit a second needle which she throws behind you, launching your body forwards as it explodes behind your back. ");
 			//(High HP loss, no lust gain)
 			var damage:int = 25 + rand(75);
-			damage = player.takeDamage(damage);
-			outputText(" (" + damage + ")");
+			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
+			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+			damage = Math.round(damage);
+			damage = player.takeDamage(damage, true);
 			combatRoundOver();
 		}
 		override public function defeated(hpVictory:Boolean):void
@@ -107,7 +109,7 @@
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.gender == 0) {
+			if (player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
 				outputText("You collapse in front of the goblin, too wounded to fight.  She growls and kicks you in the head, making your vision swim. As your sight fades, you hear her murmur, \"<i>Fucking dicks can't even bother to grow a dick or cunt.</i>\"", false);
 				game.cleanupAfterCombat();
 			} 
@@ -136,11 +138,14 @@
 			this.hairColor = "blue";
 			this.hairLength = 7;
 			initStrTouSpeInte(45, 55, 110, 95);
-			initLibSensCor(65, 35, 60);
+			initLibSensCor(64, 35, 60);
 			this.weaponName = "needles";
-			this.weaponVerb="stabbing needles";
+			this.weaponVerb = "stabbing needles";
+			this.weaponAttack = 2 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "leather straps";
+			this.armorDef = 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.bonusHP = 70;
+			this.bonusLust = 20;
 			this.lust = 50;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 10;
@@ -152,6 +157,12 @@
 							consumables.BLUEDYE,
 							consumables.ORANGDY,
 							consumables.PURPDYE);// TODO this is a copy of goblin drop. consider replacement with higher-lever stuff
+			this.str += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 1460;
 			checkMonster();
 		}
 

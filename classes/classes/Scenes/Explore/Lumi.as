@@ -9,7 +9,7 @@
 	}
 
 	public function lumiEncounter():void {
-	outputText("", true);
+	clearOutput();
 	//1st time lumi meeting
 	if(flags[kFLAGS.LUMI_MET] == 0) {
 		//placeholder text for outside the cathedral
@@ -27,7 +27,7 @@
 
 public function lumiLabChoices():void {
 	spriteSelect(37);
-	outputText("", true);
+	clearOutput();
 	//First time meeting
 	if(flags[kFLAGS.LUMI_MET] == 0) {
 		//Set Lumi met flag 
@@ -141,10 +141,16 @@ public function lumiEnhance(justCheck:Boolean = false):Boolean {
 	var kitsune:Function =null;
 	if(player.hasItem(consumables.FOXJEWL))
 		kitsune = lumiEnhanceFoxJewel;
+	var pigTruffle:Function = null;
+	if(player.hasItem(consumables.PIGTRUF))
+		pigTruffle = lumiEnhancePigtailTruffle;
+	var pureHoney:Function = null;
+	if(player.hasItem(consumables.PURHONY))
+		pureHoney = lumiEnhancePureHoney;
 	if(justCheck) {
-		return fox != null || kanga != null || seed != null || laBova != null || succuDelight != null || oviElix != null || lustDraft != null || kitsune != null;
+		return fox != null || kanga != null || seed != null || laBova != null || succuDelight != null || oviElix != null || lustDraft != null || kitsune != null || pigTruffle != null || pureHoney != null;
 	}
-	outputText("", true);
+	clearOutput();
 	outputText("\"<i>Do you have 100 gems for de enhancement?</i>\" asks Lumi.\n\n", false); 
 	//If (player has less than 100 gems)
 	if(player.gems < 100) {
@@ -164,7 +170,9 @@ public function lumiEnhance(justCheck:Boolean = false):Boolean {
 				consumables.LABOVA_.shortName, laBova,
 				consumables.OVIELIX.shortName, oviElix,
 				consumables.SDELITE.shortName, succuDelight,
-				"", null, "Back", lumiLabChoices);
+				consumables.PIGTRUF.shortName, pigTruffle,
+				consumables.PURHONY.shortName, pureHoney);
+		addButton(14, "Back", lumiLabChoices);
 		return true;
 	}
 }
@@ -191,6 +199,12 @@ private function lumiEnhanceFox():void {
 }
 private function lumiEnhanceFoxJewel():void {
 	lumiEnhanceGo(consumables.FOXJEWL);
+}
+private function lumiEnhancePigtailTruffle():void {
+	lumiEnhanceGo(consumables.PIGTRUF);
+}
+private function lumiEnhancePureHoney():void {
+	lumiEnhanceGo(consumables.PURHONY);
 }
 
 private function lumiEnhanceGo(itype:ItemType):void
@@ -222,10 +236,16 @@ private function lumiEnhanceGo(itype:ItemType):void
 	else if(itype == consumables.FOXJEWL) {
 		nextItem = consumables.MYSTJWL;
 	}
+	else if(itype == consumables.PIGTRUF) {
+		nextItem = consumables.BOARTRU;
+	}
+	else if(itype == consumables.PURHONY) {
+		nextItem = consumables.SPHONEY;
+	}
 	player.gems -= 100;
 	statScreenRefresh();
 	player.consumeItem(itype);
-	outputText("", true);
+	clearOutput();
 	outputText("Lumi grabs the item from you and runs over to her table, stopping for only a second to put her apron on.  ", false);
 	//start list of possible enhancement texts
 	temp = rand(3);

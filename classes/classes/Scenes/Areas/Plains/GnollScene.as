@@ -4,6 +4,7 @@
 package classes.Scenes.Areas.Plains
 {
 	import classes.*;
+	import classes.GlobalFlags.*;
 
 	public class GnollScene extends BaseContent
 	{
@@ -15,7 +16,7 @@ package classes.Scenes.Areas.Plains
 		public function gnollEncounter():void
 		{
 			spriteSelect(11);
-			outputText("", true);
+			clearOutput();
 			outputText("The sound of distant laughter comes across the plains, then seems to die off suddenly.  A moment later, a gnoll comes bounding from the nearest scrap of cover and barrels into you.  The monstrous thing giggles as it bounces back and forth before you, looking for an opening to exploit.", false);
 			startCombat(new Gnoll());
 		}
@@ -24,12 +25,13 @@ package classes.Scenes.Areas.Plains
 //Gnoll Rape
 		public function getRapedByGnoll():void
 		{
+			if (doSFWloss()) return;
 			//Oh shit get anal raped.
 			if (player.hasItem(consumables.S_DREAM)) {
 				yoDawgIHeardULiekGNollBallzzzdahdakjldh();
 				return;
 			}
-			outputText("", true);
+			clearOutput();
 			outputText("The sound of the gnoll's mocking laughter grates in your ears as you collapse down on your knees before her.  She circles you with the last scrap of her wariness and then surges forward to knock you over, exposing your ", false);
 			if (player.hasCock()) {
 				outputText(multiCockDescriptLight(), false);
@@ -99,41 +101,25 @@ package classes.Scenes.Areas.Plains
 
 		public function defeatHyena():void
 		{
-			outputText("", true);
-			var dickDownClit:Function =null;
+			clearOutput();
 			//Gnoll Defeat (HP)	
 			if (monster.HP < 1) outputText("The hyena girl collapses backwards onto the dusty ground, unable to continue the fight.", false);
 			//Gnoll Defeat (Lust)
 			else outputText("The hyena girl heaves a giant breath and takes a single step backwards.  Her club thumps to the ground and her hands fall to her shaft, stroking along its rough length.", false);
 
 			//Do You Rape The Gnoll?
-			if (player.lust >= 33) {
-				//(if cockTotal>0 AND vaginas=0)
-				if (player.gender == 1) {
-					if (player.cockThatFits(monster.vaginalCapacity()) != -1) dickDownClit = dickDownGnollClit;
-					outputText("  The gnoll is at your mercy.  What will you do with her?", false);
-					//[DickDownClit] [DickInAss] [SuckHerClit] [Leave]
-					simpleChoices("DickDownClit", dickDownClit, "DickInAss", dickInGnollAss, "SuckHerClit", suckGnollClit, "", null, "Leave", cleanupAfterCombat);
+			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
+				outputText("  The gnoll is at your mercy.  What will you do with her?");
+				menu();
+				if (player.hasCock()) {
+					addButton(0, "DickDownClit", dickDownGnollClit, null, null, null, "Fuck the gnoll's clit with your penis.", "Dick Down Clit");
+					addButton(1, "DickInAss", dickInGnollAss, null, null, null, "Fuck the gnoll's ass with your penis.", "Dick In Ass");
 				}
-				//(if cockTotal>0 AND vaginas=1)
-				else if (player.gender == 3) {
-					if (player.cockThatFits(monster.vaginalCapacity()) != -1) dickDownClit = dickDownGnollClit;
-					outputText("  The gnoll is at your mercy.  What will you do with her?", false);
-					//[DickDownClit] [DickInAss] [SuckHerClit] [TakeHerClit] [Leave]
-					simpleChoices("DickDownClit", dickDownClit, "DickInAss", dickInGnollAss, "SuckHerClit", suckGnollClit, "TakeHerClit", takeGnollClit, "Leave", cleanupAfterCombat);
+				if (player.hasVagina()) {
+					addButton(2, "TakeHerClit", takeGnollClit, null, null, null, "Put your vagina to use and ride the gnoll's clit.", "Take Her Clit");
 				}
-				//(if cockTotal=0 AND vaginas=1)
-				else if (player.gender == 2) {
-					outputText("  The gnoll is at your mercy.  What will you do with her?", false);
-					//[SuckHerClit] [TakeHerClit] [Leave]
-					simpleChoices("SuckHerClit", suckGnollClit, "TakeHerClit", takeGnollClit, "", null, "", null, "Leave", cleanupAfterCombat);
-				}
-				//(if cockTotal=0 AND vaginas=0)
-				else {
-					outputText("  The gnoll is at your mercy.  What will you do with her?", false);
-					//[SuckHerClit] [Leave]
-					simpleChoices("SuckHerClit", suckGnollClit, "", null, "", null, "", null, "Leave", cleanupAfterCombat);
-				}
+				addButton(3, "SuckHerClit", suckGnollClit, null, null, null, "Suck the gnoll's clit.", "Suck Her Clit");
+				addButton(4, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
 		}
@@ -141,7 +127,7 @@ package classes.Scenes.Areas.Plains
 //DickDownClit
 		private function dickDownGnollClit():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("This is not an opportunity you can pass up.  You roughly roll her onto her back and pull her long clit up to a vertical position.  She moans softly, and the rough skin beneath your fingers pulses as her arousal brings it harder and taller.  The end bloats larger, fuller, until finally it looks nearly wide enough.  You don't wait any further; you position the head of your dick against the end of hers and jam it inside.\n\n", false);
 			outputText("Inch by inch, you sink your dick down into the warm tunnel of her monstrous clitoris.  The interior, you are happy to find, is not as rough as the exterior, and in fact is just slick enough to make your invasion possible.  After a few thrusts, you find it easiest to adopt a sort of reverse-cowgirl position, facing her feet as you roll your hips forward and shove more and more of your dick inside her.   Beneath you, the gnoll is clutching at the ground and making little submissive whimpers.\n\n", false);
 			var x:Number = player.longestCock();
@@ -168,7 +154,7 @@ package classes.Scenes.Areas.Plains
 //DickInAss
 		private function dickInGnollAss():void
 		{
-			outputText("", true);
+			clearOutput();
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = 0;
 			var y:Number = player.cockThatFits2(monster.analCapacity());
@@ -244,21 +230,21 @@ package classes.Scenes.Areas.Plains
 //SuckHerClit
 		private function suckGnollClit():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("Since you first saw this strange anatomy, you knew it needed to be inside you.  You roughly roll her onto her back and pull her long clit up to a vertical position.  She moans softly, and the rough skin beneath your fingers pulses as her arousal brings it harder and taller.  The end bloats larger and fuller, until it might be too wide for your purposes.  Without losing any more time, you lean forward and stuff the clit's end into your mouth.\n\n", false);
 			outputText("The gnoll yelps in surprise and then moans appreciatively as your mouth and tongue roam across her sensitive skin.  Her hips squirm against the hard-baked dirt, tentatively pushing her clit deeper into your mouth.\n\n", false);
 			outputText("You're only too happy to oblige her, slowly and carefully swallowing the strange member down your throat.  Inch by inch you draw it deeper into yourself, eliciting increasing groans from the hyena girl.  Finally your nose buries itself in the rough, curly hair of her crotch, your chin rubbing up against the fake scrotum formed out of her distorted labia.\n\n", false);
 			outputText("Her legs twitch around your ears as you continue to swallow, even though there is no more to go.  The muscles in your throat gently massage the length of the monstrous clitoris, which plumps even further as more blood rushes into it.  You can feel its tumescent bulk all down your throat and halfway into your chest.\n\n", false);
 			outputText("The massive clit-dick then begins to flutter and twitch as the gnoll starts to cum.  Her feet stamp the ground to either side of you and she abruptly screams into the sky.  Her warbling cry then seems to collapse inward, and her entire body slumps to the ground, unconscious.\n\n", false);
 			outputText("You leave her there on the sun-caked ground and head back to camp.", false);
-			dynStats("lus=", 100);
+			dynStats("lus=", player.maxLust());
 			cleanupAfterCombat();
 		}
 
 //TakeHerClit
 		private function takeGnollClit():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("You roughly roll her onto her back and pull her long clit up to a vertical position.  She moans softly, and the rough skin beneath your fingers pulses as her arousal brings it harder and taller.  The end bloats larger, fuller, until it might be too wide for your purposes.  You line up your " + vaginaDescript(0) + " and lower yourself onto the long, narrow faux-cock.", false);
 			player.cuntChange(9, true, true, false);
 			outputText("\n\n", false);
@@ -272,7 +258,7 @@ package classes.Scenes.Areas.Plains
 
 		internal function yoDawgIHeardULiekGNollBallzzzdahdakjldh():void
 		{
-			outputText("", true);
+			clearOutput();
 			player.consumeItem(consumables.S_DREAM);
 			//[either Gnoll loss, if the player has a succubi's dream in inventory]
 
@@ -291,7 +277,7 @@ package classes.Scenes.Areas.Plains
 
 		private function yoDawgHyenaBallz2():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("Using the distraction, you roll onto your belly, crawling towards your " + player.armorName + ", hoping to use the distraction to make an escape.  Baring your " + buttDescript() + ", however, proves to be a mistake, as the gnoll fixates on the wobbling orbs, lunging desperately.  She lands atop you, her paws pinning your head and shoulders to the ground as the warmth of her impatient shaft slides between your cheeks, her new scrotum slapping wetly against ", false);
 			if (player.balls > 0) outputText("your own " + ballsDescriptLight(), false);
 			else outputText("your sweat-slick thighs", false);
@@ -316,7 +302,7 @@ package classes.Scenes.Areas.Plains
 
 		private function yoDawgHyenaBallz3():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("Finally, you feel the gnoll's clit slide out of your anus as the overly-endowed girl collapses at your side.  Broken utterly, she pants with depraved exhaustion, no strength left to continue pounding your body into the dirt.  Even now, she strokes her massive clit with one spotted paw as the other helplessly massages the basketball-sized testicles that audibly churn with gallons of the girl's jizz.  Finding a reserve of strength you didn't know you had, you rise tenderly and gather your belongings, creeping away before the hyena-girl can get her second wind.", false);
 			//[24 hours pass, player asshole size increased, sensitivity significantly lowered, toughness lowered temporarily, fatigue maxed, remove one succubi's dream]
 			player.orgasm();

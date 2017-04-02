@@ -25,19 +25,28 @@ package classes.Scenes.Areas.HighMountains
 			this.skinTone = "creamy-white";
 			this.hairColor = "golden";
 			this.hairLength = 25;
-			initStrTouSpeInte(90, 90, 90, 80);
+			initStrTouSpeInte(230, 150, 110, 100);
 			initLibSensCor(30, 25, 15);
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
+			this.weaponAttack = 50 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "silken kimono";
-			this.bonusHP = 660;
+			this.armorDef = 14 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusHP = 800;
+			this.bonusLust = 10;
 			this.lust = 10;
 			this.lustVuln = 0.33;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 22;
-			this.gems = 25 + rand(25);
-			this.additionalXP = 75;
+			this.level = 30;
+			this.gems = 50 + rand(50);
+			this.additionalXP = 150;
 			this.drop = NO_DROP;
+			this.str += 72 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 7560;
 			checkMonster();
 		}
 
@@ -151,7 +160,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("Quick as a flash, Izumi lashes out with her free hand, aiming for your head.");
 
 			var damage:int = int((str + 175) - rand(player.tou) - player.armorDef);
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect())
+			if (player.getEvasionRoll())
 			{
 				outputText("  You deftly dodge under the lightning-quick punch.");
 			}
@@ -164,10 +173,9 @@ package classes.Scenes.Areas.HighMountains
 				outputText("  Her fist connects with your chin with a mighty crack, sending you sailing across the cave.  Izumi smirks at you as you");
 				if (player.isNaga()) outputText(" raise back up onto your [legs]");
 				else outputText(" stand");
-				outputText(" and dust yourself off.");
+				outputText(" and dust yourself off. ");
 				
-				damage = player.takeDamage(damage);
-				outputText(" (" + damage + ")");
+				player.takeDamage(damage, true);
 			}
 			combatRoundOver();
 		}
@@ -198,7 +206,7 @@ package classes.Scenes.Areas.HighMountains
 		// On escape, Izumi takes some damage
 		public function chokeSlam():void
 		{
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect())
+			if (player.getEvasionRoll())
 			{
 				outputText("Izumi surges towards you, closing the distance between you within the blink of an eye. You narrowly avoid her crushing grip, twisting away from her grasp at the last moment.  The enormous Oni lets loose a deep, satisfied laugh.");
 			}
@@ -238,7 +246,7 @@ package classes.Scenes.Areas.HighMountains
 				else outputText(" impressive"); 
 				outputText(" strength, in an attempt to free yourself from her crushing embrace, without success.");
 				
-				player.takeDamage(75 + rand(15));
+				player.takeDamage(75 + rand(15), true);
 				doAI();
 			}
 		}
@@ -249,7 +257,7 @@ package classes.Scenes.Areas.HighMountains
 			clearOutput();
 			
 			outputText("Your feet dangle uselessly in the air as Izumi holds you aloft.  Why bother resisting?  She's just so <i>strong</i>, her fingers wrapped so completely around your neck...");
-			player.takeDamage(75 + rand(15));
+			player.takeDamage(75 + rand(15), true);
 			
 			if (flags[kFLAGS.PC_FETISH] >= 2)
 			{
@@ -271,9 +279,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("The hit is extreme enough to leave you dazed for a moment, splayed out across the floor.  When you rouse yourself back to full consciousness a few seconds later, the cave is still echoing with the sound of the impact, a testament to the strength of the Oni - and your resilience.");
 			
 			var damage:int = int ((str + 225) - rand(player.tou) - player.armorDef);
-			player.takeDamage(damage);
-			
-			outputText("(" + damage + ")");
+			player.takeDamage(damage, true);
 			
 			combatRoundOver();
 		}
@@ -281,6 +287,7 @@ package classes.Scenes.Areas.HighMountains
 		// Player escapes from the chokeslam attack
 		public function chokeSlamEscape():void
 		{
+			var damage:Number = 50 + rand(player.str);
 			if (combatDebug) trace("Escaping from Chokeslam!");
 			
 			outputText("Scrabbling desperately against her wrist, you narrow your eyes at the Oni woman’s superior expression,");
@@ -290,10 +297,10 @@ package classes.Scenes.Areas.HighMountains
 			outputText(" in the face.  Izumi drops you, staggering back in surprise.  “Ow!”  She actually yelps, covering her face with her hands.\n\n");
 
 			outputText("You drop to the ground and roll away, expecting some form of retribution.  Izumi glares at you from behind her hand for a moment, then snickers.  Slowly, she drops back into her fighting stance and gestures for your bout to continue.");
-			
+			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>")
 			cleanupChokeslam();
 			
-			this.HP -= 50 + rand(player.str);
+			this.HP -= damage;
 			
 			combatRoundOver();
 		}
@@ -314,7 +321,7 @@ package classes.Scenes.Areas.HighMountains
 		{
 			outputText("Izumi raises one mighty foot and slams it to the ground with a victorious yell.  The ground itself actually shakes below your feet, threatening to knock you off balance.\n\n");
 			
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) // TODO: ensure this is correct
+			if (player.getEvasionRoll()) // TODO: ensure this is correct
 			{
 				outputText("Leaping to the side, you manage to steady yourself against the wall, keeping your footing.");
 			}
@@ -339,7 +346,7 @@ package classes.Scenes.Areas.HighMountains
 			{
 				// Can't use dynStats to achieve this, as it can give back more speed than we originally took away due to perks
 				player.spe += player.statusAffectv2(StatusAffects.Groundpound);
-				if (player.spe > 100) player.spe = 100;
+				if (player.spe > player.getMaxStats("spe")) player.spe = player.getMaxStats("spe");
 				
 				player.removeStatusAffect(StatusAffects.Groundpound);
 				
@@ -452,10 +459,12 @@ package classes.Scenes.Areas.HighMountains
 				outputText("  Izumi grits her teeth and growls as she pulls with all her might, trying to force your limbs to give way, but to no avail - with a final thrust, Izumi lets out a yelp as you knock her arm aside and leap away.  Izumi rolls her arm around a little, massaging her shoulder as she regards you, thoughtfully.  Then she reaches up and fans at her face with one hand, grinning that suggestive grin.\n\n");
 			}
 
-			outputText("“Oh my,” she purrs, lasciviously. “Aren’t you the impressive one?  Keep surprising me like that and I might just forget about this handicap...”");
+			outputText("“Oh my,” she purrs, lasciviously. “Aren’t you the impressive one?  Keep surprising me like that and I might just forget about this handicap...” ");
 
 			cleanupTitsmother();
-			this.HP -= (15 + rand(player.str));
+			var damage:Number = (15 + rand(player.str));
+			this.HP -= damage;
+			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			combatRoundOver();
 		}
 		

@@ -2,6 +2,8 @@
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.kACHIEVEMENTS;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class TentacleBeast extends Monster
 	{
@@ -15,8 +17,8 @@
 			}
 			//Hit
 			else {
-				temp = player.takeDamage(temp);
-				outputText("The tentacles crash upon your body mercilessly for " + temp + " damage.", false);
+				outputText("The tentacles crash upon your body mercilessly. ", false);
+				player.takeDamage(temp, true);
 			}
 			combatRoundOver();
 		}
@@ -48,6 +50,7 @@
 		{
 			if (hpVictory) {
 				outputText("The creature lets out an ear-piercing screech as it collapses upon itself. Its green coloring quickly fades to brown as the life drains from it, leaving you victorious.", true);
+				game.awardAchievement("Tentacle Beast Slayer", kACHIEVEMENTS.GENERAL_TENTACLE_BEAST_SLAYER);
 			} else {
 				outputText("The tentacle beast's mass begins quivering and sighing, the tentacles wrapping around each other and feverishly caressing each other.  It seems the beast has given up on fighting.", false);
 			}
@@ -56,7 +59,7 @@
 				game.desert.antsScene.phyllaTentacleDefeat();
 			}
 			else {
-				if(!hpVictory && player.gender > 0) {
+				if(!hpVictory && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 					outputText("  Perhaps you could use it to sate yourself?", true);
 					game.doYesNo(game.forest.tentacleBeastScene.tentacleVictoryRape,game.cleanupAfterCombat);
 				} else {
@@ -124,24 +127,31 @@
 			this.skinDesc = "bark";
 			this.hairColor = "green";
 			this.hairLength = 1;
-			initStrTouSpeInte(58, 25, 45, 45);
+			initStrTouSpeInte(73, 90, 25, 45);
 			initLibSensCor(90, 20, 100);
 			this.weaponName = "whip-tendril";
 			this.weaponVerb="thorny tendril";
-			this.weaponAttack = 1;
+			this.weaponAttack = 10 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "rubbery skin";
-			this.armorDef = 1;
-			this.bonusHP = 350;
+			this.armorDef = 18 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusHP = 400;
+			this.bonusLust = 20;
 			this.lust = 10;
 			this.lustVuln = 0.8;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 6;
-			this.gems = rand(15)+5;
+			this.level = 12;
+			this.gems = rand(25)+10;
 			this.drop = new WeightedDrop(null, 1);
 			this.special1 = tentaclePhysicalAttack;
 			this.special2 = tentacleEntwine;
 			this.special3 = tentaclePhysicalAttack;
 			this.tailType = TAIL_TYPE_DEMONIC;
+			this.str += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 1200;
 			checkMonster();
 		}
 

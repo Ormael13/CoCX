@@ -23,7 +23,7 @@ Note on progression:
 //const TURKEY_FUCK_YEAR_DONE:int = 566;
 
 public function isThanksgiving():Boolean {
-	return ((date.date >= 21 && date.month == 10) && (date.date < 30 && date.month == 10));
+	return ((date.date >= 21 && date.month == 10) && (date.date < 30 && date.month == 10) || flags[kFLAGS.ITS_EVERY_DAY] > 0);
 }
    
 //Introduction: -McGirt
@@ -55,6 +55,8 @@ public function shooTurkeyAway():void {
 	outputText("\n\nRolling your eyes, you yell at the strange girl until she finally gets the idea and; with a few more sorrowful gobbles, she wobbles off again, looking for someone else to bother.");
 	
 	outputText("\n\nShaking your head, you sit back down and eat.");
+	if (player.hunger > 60) player.hunger = 70;
+	player.refillHunger(40);
 	doNext(playerMenu);
 }
 
@@ -312,13 +314,13 @@ public function turkeyGirlTwoTheTurkeningBySavinWhatADickInAButt():void {
 	outputText("\n\nAs you reach for some of your spices, you notice...  something...  poking its head into one of your satchels, rustling around.");
 	outputText("\n\nYou jump to your feet, readying your [weapon] for battle as you scan the perimeter.   A moment later, and you see a ponderous figure step out of the shadows behind a large rock.   At first glance, it looks like a normal girl dressed in a simple moccasin poncho, her bright red hair falling past her shoulders to rest on a pair of absolutely massive breasts.   Timidly, she steps forward, giving you a good look at her less human attributes: a pair of avian legs stick out beneath the hem of her clothes, and a large plume of feathers stick up from her big bubble-butt, each red feather nearly reaching the back of her head.   And her breasts...  each is easily the size of a goblin, so massive that it seems she can barely wobble along.");
 	outputText("\n\n“<i>G-gobble?</i>”  she asks quietly, her big blue eyes pleading at you.");
-	
+	awardAchievement("Gobble Gobble", kACHIEVEMENTS.HOLIDAY_THANKSGIVING_II, true, true, false);
 	//[Shoo Off] [Let her Come] [Hello again!]
 	menu();
 	if(player.hasCock())
 	{
 		if(player.hasKeyItem("Deluxe Dildo") >= 0 || player.hasItem(consumables.L_DRAFT) || player.hasItem(consumables.F_DRAFT)) {
-			outputText("\n\n<b>You could let her come, like last year, or great her in a whole new way (by clicking 'Hello Again')</b>");
+			outputText("\n\n<b>You could let her come, like last year, or greet her in a whole new way (by clicking 'Hello Again')</b>");
 			addButton(2,"Hello Again",helloAgain);
 			flags[kFLAGS.MORE_TURKEY] = 0;
 		}
@@ -369,7 +371,7 @@ public function gravyBoatDatTurkturk():void {
 	
 	outputText("\n\n\"<i>Gobble indeed,</i>\" you laugh, planting your arms back on the dry ground, letting the turkey adjust herself.  Her tits are practically empty by now; not quite, but enough that her once immense rack is down to something you can quantify - maybe G-cups.  A pair of perfectly round, bouncy G-cups that are still dripping with spattered gravy, her big red nips erect and still leaking even without your hands to spur them on.  The turkey shifts around on your pole to face you, leaning back in your lap against your [legs], content for the moment to grind her cunt on the [cock] buried deep inside her.");
 	
-	outputText("\n\nSlowly, she starts to move, rising up along the girthy length of your [cock] until just the tip is buried inside her before sliding back down, giving a little squawk of \"<i>Gobble!</i>\" when you bottom out in her.  You liy back, letting the turkey bounce on your prick, and close your eyes, reveling in the warm coating of gravy smeared across your body, the contentment of having your cock nice and buried in the slutty turkey.");
+	outputText("\n\nSlowly, she starts to move, rising up along the girthy length of your [cock] until just the tip is buried inside her before sliding back down, giving a little squawk of \"<i>Gobble!</i>\" when you bottom out in her.  You lie back, letting the turkey bounce on your prick, and close your eyes, reveling in the warm coating of gravy smeared across your body, the contentment of having your cock nice and buried in the slutty turkey.");
 	
 	outputText("\n\n\"<i>Gobble?</i>\" the turkey asks mid-bounce, staring down at you expectantly.");
 	
@@ -391,7 +393,7 @@ public function gravyBoatDatTurkturk():void {
 //Season Her
 public function seasonHerDatTurkeyBitch():void {
 	clearOutput();
-	outputText("You plant your hands on the busty bird's broad, breeder's hips, spreading her cheeks to get a good look at her slit.  Still agape after taking your cock earlier, she's liberally leaking fem-slime onto your face, eagerly awaiting your lusty touch.  You venture your tongue out to taste her, and instantly draw back even as she flutters excitedly - does she...  of course she tastes like turkey.  What else? But it's a damn fine turkey, oh so sweet and juicy; you don't hesitate to dig in, tongue probing deep into the giddy fowel's slit.  She wiggles her tremendous tush happily as you spread her nethers wide, her vibrant brown plumage standing straight up, as erect as your own [cock] as Gobbles' tits bounce and jiggle around it.  Tongueing your tasty turkey, you slip a few fingers up between her luscious thighs, brushing the tender flesh just enough to make her arch her back, dragging her tits right along the length of your shaft to bury the crown in the jiggly bottom of her rack.  You trace your fingers higher, brushing the silky lips of her sodden box and circling up to the prominent little bud of her clit.");
+	outputText("You plant your hands on the busty bird's broad, breeder's hips, spreading her cheeks to get a good look at her slit.  Still agape after taking your cock earlier, she's liberally leaking fem-slime onto your face, eagerly awaiting your lusty touch.  You venture your tongue out to taste her, and instantly draw back even as she flutters excitedly - does she...  of course she tastes like turkey.  What else? But it's a damn fine turkey, oh so sweet and juicy; you don't hesitate to dig in, tongue probing deep into the giddy fowel's slit.  She wiggles her tremendous tush happily as you spread her nethers wide, her vibrant brown plumage standing straight up, as erect as your own [cock] as Gobbles' tits bounce and jiggle around it.  Tonguing your tasty turkey, you slip a few fingers up between her luscious thighs, brushing the tender flesh just enough to make her arch her back, dragging her tits right along the length of your shaft to bury the crown in the jiggly bottom of her rack.  You trace your fingers higher, brushing the silky lips of her sodden box and circling up to the prominent little bud of her clit.");
 	
 	outputText("\n\n\"<i>GOBBLE!</i>\" she cries as your digits brush her sensitive point, arching her back and squirting gravy onto your crotch, lactating from pleasure alone.  You shudder as the warm, creamy gravy slathers onto your " + player.multiCockDescriptLight() + " pinned between her tits, her pleasured motions getting her boobs bouncing like a regular titfucking.  At your touch, her quivering quim lets loose a torrent of excited fem-slime, smearing your face in turkey-tasting juices faster than your hard-working tongue can lap it up.  She's a fine tasting turkey if ever you saw one, her sweet juices practically compelling you to eat her out, pushing your tongue as deep into her juicy slit as you can to harvest her delicious bounty.");
 	
@@ -409,7 +411,7 @@ public function seasonHerDatTurkeyBitch():void {
 	outputText("\n\n\"<i>Gobbles, gobble,</i>\" you command, poking a finger into her drooling slit.");
 	
 	outputText("\n\n\"<i>Gobble!</i>\" she answers, rolling off of you and hiking her legs up, knees sinking into her bust to show off her slit for you, so eager and inviting.  You rise to your [feet], grabbing the lusty fowl behind her hooked knees and pulling her in to line up with your " + player.multiCockDescriptLight() + ".  \"<i>G-gobble!</i>\" she begs, fluttering her plumage against your [legs], staring up at you imploringly as her skin further reddens, so hot with desperate lust you can practically feel the sexual hunger radiating off of her.  Time to finish this turkey off in style!");
-	dynStats("lus=", 100, "resisted", false);
+	dynStats("lus=", player.maxLust(), "resisted", false);
 	menu();
 	addButton(0,"Next",turkeyDesertBitches);
 }
@@ -478,7 +480,7 @@ public function turkeyDesertBitches():void {
 	
 	outputText("\n\n\"<i>Gobble,</i>\" you agree, wrapping the giddy turkey up in your arms and planting one last kiss on her big ol' boob.  She stares sedately at you with big, blue eyes, a cute little smile on her lips as you withdraw from her, wiping the last of your spunk on her feathery thigh.  Running your hand through the turkey-girl’s hair, you whisper what a good little cockgobbler she is.  However, you soon find that the poor thing’s passed out, your rut finally over with.  Still, she's left you with a nice soft tit-pillow to lay your head down upon as you pick up the lunch you’d been preparing to eat before the eager slut arrived.");
 	
-	outputText("\n\n“<i>That’ll do, turkey,</i>” you say, patting her jiggling tit and scrapign soem of the excess gravy out of your lunch.  “<i>That’ll do.</i>”");
+	outputText("\n\n“<i>That’ll do, turkey,</i>” you say, patting her jiggling tit and scraping some of the excess gravy out of your lunch.  “<i>That’ll do.</i>”");
 	player.orgasm();
 	doNext(camp.returnToCampUseTwoHours);
 }
@@ -497,14 +499,22 @@ public function pigSlutRoastingGreet():void {
 	outputText("\n\nShe moves in closer to talk right into your ear with a seductive voice, \"<i>Just throw a gem in that bucket over there and <i>she's</i> all yours for the night!</i>\"");
 	
 	outputText("\n\nYou grin. You could really go for a wild night right about now and a cheap whore sounds like just the right thing to ease your... stress.");
-	
+	awardAchievement("Thankslutting", kACHIEVEMENTS.HOLIDAY_THANKSGIVING_I, true, true);
 	//{Lust = lust + 10}
 	dynStats("lus", 5);
 	menu();
 	if(player.gems >= 1) addButton(0,"Throw gem",getARoastPiggueOinkOinkOinkMotherfucker);
-	addButton(1,"Nah",telAdre.barTelAdre);
+	addButton(1, "Nah", telAdre.barTelAdre);
+	addButton(2, "Never", disablePigSlut);
 }
 //[ In For A Gem... ] [ Not My Style ]
+
+public function disablePigSlut():void {
+	clearOutput();
+	outputText("Pig sluts are not really your thing. You tell her that you have no interest in her. She seems to be a bit heartbroken.");
+	flags[kFLAGS.PIG_SLUT_DISABLED] = 1;
+	doNext(telAdre.barTelAdre);
+}
 
 //{Return to The Wet Bitch menu}
 //Ham Roast -> In For A Gem

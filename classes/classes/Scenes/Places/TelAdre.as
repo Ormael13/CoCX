@@ -2,6 +2,9 @@
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kACHIEVEMENTS;
+	import classes.Items.Armor;
+	import classes.Scenes.Dungeons.DeepCave.ValaScene;
 	import classes.Scenes.Places.TelAdre.*;
 
 	/**
@@ -31,8 +34,13 @@
 		public var rubi:Rubi = new Rubi();
 		public var scylla:Scylla = new Scylla();
 		public var sexMachine:SexMachine = new SexMachine();
-		public var umasShop:UmasShop = new UmasShop();
-
+		public var umasShop:UmasShop = new UmasShop();		
+		public var vala:ValaScene = new ValaScene();
+		
+		public var nails:Number = 0;
+		public var wood:Number = 0;
+		public var stone:Number = 0;
+		
 		public function TelAdre()
 		{
 			
@@ -75,7 +83,7 @@ public var piercingType:Number = 0;
 //}endregion
 
 public function discoverTelAdre():void {
-	outputText("", true);
+	clearOutput();
 	if(player.findStatusAffect(StatusAffects.TelAdre) < 0) {
 		outputText("The merciless desert sands grind uncomfortably under your " + player.feet() + " as you walk the dunes, searching the trackless sands to uncover their mysteries.  All of a sudden, you can see the outline of a small city in the distance, ringed in sandstone walls.  Strangely it wasn't there a few moments before.  It's probably just a mirage brought on by the heat.  Then again, you don't have any specific direction you're heading, what could it hurt to go that way?", false);
 		outputText("\n\nDo you investigate the city in the distance?", false);
@@ -88,7 +96,7 @@ public function discoverTelAdre():void {
 
 //player chose to approach the city in the distance
 private function encounterTelAdre():void {
-	outputText("", true);
+	clearOutput();
 	if(player.findStatusAffect(StatusAffects.TelAdre) < 0) {
 		outputText("You slog through the shifting sands for a long time, not really seeming to get that close.  Just when you're about to give up, you crest a large dune and come upon the walls of the city you saw before.  It's definitely NOT a mirage.  There are sandstone walls at least fifty feet tall ringing the entire settlement, and the only entrance you can see is a huge gate with thick wooden doors.  The entrance appears to be guarded by a female gray fox who's more busy sipping on something from a bottle than watching the desert.\n\n", false);
 		outputText("As if detecting your thoughts, she drops the bottle and pulls out a halberd much longer than she is tall.\n\n", false);
@@ -110,7 +118,7 @@ private function encounterTelAdre():void {
 private function telAdreCrystal():void {
 	if(player.findStatusAffect(StatusAffects.TelAdre) < 0) player.createStatusAffect(StatusAffects.TelAdre,0,0,0,0);
 	//-70+ corruption, or possessed by exgartuan
-	if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 || player.cor >= 70) {
+	if (player.findStatusAffect(StatusAffects.Exgartuan) >= 0 || player.cor >= 70 + player.corruptionTolerance()) {
 		outputText("The crystal pendant begins to vibrate in the air, swirling around and glowing dangerously black.  Edryn snatches her hand back and says, \"<i>I'm sorry, but you're too far gone to step foot into our city.  If by some miracle you can shake the corruption within you, return to us.</i>\"\n\n", false);
 		outputText("You shrug and step back.  You could probably defeat these two, but you know you'd have no hope against however many friends they had beyond the walls.  You turn around and leave, a bit disgruntled at their hospitality.  After walking partway down the dune you spare a glance over your shoulder and discover the city has vanished!  Surprised, you dash back up the dune, flinging sand everywhere, but when you crest the apex, the city is gone.", false);
 		doNext(camp.returnToCampUseOneHour);
@@ -121,7 +129,7 @@ private function telAdreCrystal():void {
 		outputText("The crystal pendant shimmers, vibrating in place and glowing a purple hue.  Edryn steps back, watching you warily, \"<i>You've been deeply touched by corruption.  You balance on a razor's edge between falling completely and returning to sanity.  You may enter, but we will watch you closely.</i>\"\n\n", false);
 	}
 	//-25+ corruption or corrupted Marae
-	else if(player.cor >= 25 || player.findStatusAffect(StatusAffects.FactoryOverload) >= 0) {
+	else if(player.cor >= 25 || flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
 		outputText("The crystal pendant twirls in place, glowing a dull red.  Edryn takes a small step back and murmers, \"<i>You've seen the darkness of this land first hand, but its hold on you is not deep.  You'll find sanctuary here.  The demons cannot find this place yet, and we promise you safe passage within the walls.</i>\"\n\n", false);
 	}
 	//-Low corruption/pure characters
@@ -135,7 +143,7 @@ private function telAdreCrystal():void {
 
 private function telAdreTour():void {
 	player.changeStatusValue(StatusAffects.TelAdre,1,1);
-	outputText("", true);
+	clearOutput();
 	kGAMECLASS.urta.urtaSprite();
 	outputText("Urta leads you into the streets of Tel'Adre, giving you a brief run-down of her and her city, \"<i>You see, about two decades back, the demons were chewing their way through every settlement and civilization in Mareth.  The covenant, a group of powerful magic-users, realized direct confrontation was doomed to fail.  They hid us in the desert with their magic, and the demons can't corrupt what they can't find.  So we're safe, for now.</i>\"\n\n", false);
 	outputText("The two of you find yourselves in the center of a busy intersection.  Urta explains that this is the main square of the city, and that, although the city is large, a goodly portion of it remains empty.  Much of the population left to assist other settlements in resisting the demons and was lost.  She brushes a lock of stray hair from her eye and guides you down the road, making sure to point out her favorite pub - \"The Wet Bitch\".  You ", false);
@@ -185,7 +193,7 @@ public function telAdreMenu():void {
 				return;
 			}
 	}
-	if(flags[kFLAGS.ARIAN_PARK] == 0 && player.level >= 4 && rand(10) == 0 && flags[kFLAGS.NOT_HELPED_ARIAN_TODAY] == 0) {
+	if(flags[kFLAGS.ARIAN_PARK] == 0 && rand(10) == 0 && flags[kFLAGS.NOT_HELPED_ARIAN_TODAY] == 0) {
 		kGAMECLASS.arianScene.meetArian();
 		return;
 	}
@@ -203,7 +211,8 @@ public function telAdreMenu():void {
 		maddie.runAwayMaddieFollowup();
 		return;
 	}
-	spriteSelect( -1);
+	spriteSelect(-1);
+	outputText(images.showImage("location-teladre"));
 	outputText("Tel'Adre is a massive city, though most of its inhabitants tend to hang around the front few city blocks.  It seems the fall of Mareth did not leave the city of Tel'Adre totally unscathed.  A massive tower rises up in the center of the city, shimmering oddly.  From what you overhear in the streets, the covenant's magic-users slave away in that tower, working to keep the city veiled from outside dangers.  There does not seem to be a way to get into the unused portions of the city, but you'll keep your eyes open.\n\n", true);
 	outputText("A sign depicting a hermaphroditic centaur covered in piercings hangs in front of one of the sandstone buildings, and bright pink lettering declares it to be the 'Piercing Studio'.  You glance over and see the wooden facade of Urta's favorite bar, 'The Wet Bitch'.  How strange that those would be what she talks about during a tour.  In any event you can also spot some kind of wolf-man banging away on an anvil in a blacksmith's stand, and a foppishly-dressed dog-man with large floppy ears seems to be running some kind of pawnshop in his stand.  Steam boils from the top of a dome-shaped structure near the far end of the street, and simple lettering painted on the dome proclaims it to be a bakery.  Perhaps those shops will be interesting as well.", false);
 	if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -2 && !kGAMECLASS.raphael.RaphaelLikes()) {
@@ -230,23 +239,29 @@ public function telAdreMenuShow():void { //Just displays the normal Tel'Adre men
 	if (homes) addButton(4, "Homes", houses);
 	if (flags[kFLAGS.ARIAN_PARK] > 0 && flags[kFLAGS.ARIAN_PARK] < 4) addButton(5, "Park", kGAMECLASS.arianScene.visitThePark);
 	addButton(6, "Pawn", oswaldPawn);
-	addButton(7, "Tower", library.visitZeMagesTower);
-	addButton(8, "Weapons", weaponShop);
-	addButton(9, "Leave", camp.returnToCampUseOneHour);
+	addButton(8, "Tower", library.visitZeMagesTower);
+	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 
 private function armorShops():void {
+	clearOutput();
+	outputText("The shopping district of Tel’adre happens to be contained in a large dead end street, with a large set of doors at the entrance to protect it from thieves at night, you’d assume from a higher elevation it would look like a giant square courtyard. Due to the cities shopping area being condensed into one spot, most if not every visible wall has been converted into a store front, in the center of the area are some small stands, guess not everyone can afford a real store.");
+	outputText("\n\nRight off the bat you see the ‘Piercing Studio’, its piercing covered centaur sign is a real eye catcher. You can also spot some kind of wolf-man banging away on an anvil in a blacksmith's stand. As well as other shops lining the walls, perhaps those shops will be interesting as well.");
 	menu();
-	addButton(0,"Blacksmith",armorShop);
-	addButton(1,"Piercing",piercingStudio);
+	addButton(0, "Blacksmith", armorShop);
+	addButton(1, "Piercing", piercingStudio);
 	addButton(2, "Tailor", tailorShoppe);
-
+	addButton(3, "Weapons", weaponShop);
+	addButton(4, "Jewelry", jewelShopEntry);
 	if (flags[kFLAGS.LOPPE_PC_MET_UMA] == 1)
 	{
-		addButton(3, "Clinic", umasShop.enterClinic);
+		addButton(5, "Clinic", umasShop.enterClinic);
 	}
-
-	addButton(4,"Back",telAdreMenu);
+	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4)
+	{
+		addButton(6, "Carpenter", carpentryShopEntry);
+	}
+	addButton(14,"Back",telAdreMenu);
 }
 
 public function houses():void {
@@ -263,19 +278,19 @@ public function houses():void {
 		}
 	}
 	menu();
-	if(flags[kFLAGS.ARIAN_PARK] >= 4 && !kGAMECLASS.arianScene.arianFollower()) addButton(0,"Arian's",kGAMECLASS.arianScene.visitAriansHouse);
-	addButton(1,"Orphanage",orphanage);
+	if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 5) addButton(0, "Kath's Apt", katherine.visitAtHome);
 	if (kGAMECLASS.urtaPregs.urtaKids() > 0 && player.hasKeyItem("Spare Key to Urta's House") >= 0)
-		addButton(2, "Urta's House", (katherine.isAt(Katherine.KLOC_URTAS_HOME) ? katherine.katherineAtUrtas : kGAMECLASS.urtaPregs.visitTheHouse));
-	if (flags[kFLAGS.KATHERINE_UNLOCKED] >= 5) addButton(3, "Kath's Apt", katherine.visitAtHome);
-	addButton(9,"Back",telAdreMenu);
+		addButton(1, "Urta's House", (katherine.isAt(Katherine.KLOC_URTAS_HOME) ? katherine.katherineAtUrtas : kGAMECLASS.urtaPregs.visitTheHouse));
+	if(flags[kFLAGS.ARIAN_PARK] >= 4 && !kGAMECLASS.arianScene.arianFollower()) addButton(2,"Arian's",kGAMECLASS.arianScene.visitAriansHouse);
+	addButton(3,"Orphanage",orphanage);
+	addButton(14,"Back",telAdreMenu);
 }
 
 private function piercingStudio():void {
 	spriteSelect(63);
 	var about:Function = null;
 	if(player.findStatusAffect(StatusAffects.Yara) < 0) about = aboutYara;
-	outputText("", true);
+	clearOutput();
 	outputText("The interior of the piercing studio is earthy, leaving the stone floors and walls uncovered, though the windows are covered with woven blankets, sewn from multicolored threads.  There are a number of cushy chairs facing a wall of mirrors, along with a shelf covered in needles, piercings, and strong alcohols.  A brunette prowls about the place, tidying it up during a lull in business.  You dully notice that unlike everyone else in this town, she's mostly human.  Perhaps she came through a portal as well?  She approaches you, and you see a cat tail waving behind her, and a pair of fuzzy feline ears, both covered in piercings, perched atop her head.  Clearly she's been here long enough to pick up some of the local flavor.\n\n", false);
 	outputText("She introduces herself, \"<i>Hello there " + player.mf("sir","cutie") + ", my name is Yara.  Would you like to get a piercing?</i>\"", false);
 	if (!flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
@@ -511,6 +526,10 @@ private function chooseCrimstone():void {
 	piercingMat = 12;
 	areYouSure();
 }
+private function chooseIcestone():void {
+	piercingMat = 13;
+	areYouSure();
+}
 
 private function areYouSure():void {
 	spriteSelect(63);
@@ -529,8 +548,10 @@ private function chooseAdvancedMaterials():void {
 	outputText("\n2. Fertite - A green gem sometimes fished up from the bottom of Mareth's great lake, it is said to enhance the fertility of both genders.", false);
 	outputText("\n3. Furrite - This beautiful purple gem is actually crystalized from materials used in hunting lures.  It is said to enhance the wearer's appeal to beast-people.", false);
 	outputText("\n4. Crimstone - Crimstone is said to be formed from volcanic fires, and to keep the fires of one's desires burning brightly.", false);
+	outputText("\n5. Icestone - Found from the Glacial Rift, this rare gem is said to counter the effects of Crimstone and quell ever-burning desires. This will annihilate some of crimstone magic. Due to its rarity, this costs 2000 gems instead.", false);
 	outputText("\n\n<b>DISCLAIMER</b>: Yara's Piercing Studio is not responsible if the piercee's body absorbs any residual magic of these stones, and is not required to resolve any issues if the effects persist beyond removal.</b>", false);
-	simpleChoices("Lethite",chooseLethite,"Fertite",chooseFertite,"Furrite",chooseFurrite,"Crimstone",chooseCrimstone,"Back",chooseMaterials);
+	choices("Lethite", chooseLethite, "Fertite", chooseFertite, "Furrite", chooseFurrite, "Crimstone", chooseCrimstone, "", null, "", null, "", null, "", null, "", null, "Back", chooseMaterials);
+	if (player.gems >= 2000) addButton(4, "Icestone", chooseIcestone);
 }
 
 private function normalPierceAssemble():void {
@@ -548,12 +569,13 @@ private function normalPierceAssemble():void {
 	//10. Fertite (Fertility Booster)
 	//11. Furrite (Attracts Furries)
 	//12. Crimsonite (+Min Lust)
-	//13.
+	//13. Icestone (-Min Lust)
 	//var piercingMat:Number = 0;
 	var shortP:String = "";
 	var longP:String = "";
 	player.gems -= 100;
-	if(piercingMat > 8) player.gems -= 900;
+	if (piercingMat > 8) player.gems -= 900;
+	if (piercingMat == 13) player.gems -= 1000;
 	statScreenRefresh();
 	//set up material description
 	switch(piercingMat) {
@@ -615,9 +637,27 @@ private function normalPierceAssemble():void {
 			break;
 		case 12:
 			shortP += "crimstone ";
-			if(player.findPerk(PerkLib.PiercedCrimstone) < 0) player.createPerk(PerkLib.PiercedCrimstone,5,0,0,0);
-			else player.addPerkValue(PerkLib.PiercedCrimstone,1,5);
+			if (player.findPerk(PerkLib.PiercedIcestone) >= 0) {
+				player.addPerkValue(PerkLib.PiercedIcestone, 1, -5);
+				if (player.perkv1(PerkLib.PiercedIcestone) <= 0) player.removePerk(PerkLib.PiercedIcestone);
+			}
+			else {
+				if (player.findPerk(PerkLib.PiercedCrimstone) <= 0) player.createPerk(PerkLib.PiercedCrimstone, 5, 0, 0, 0);
+				else player.addPerkValue(PerkLib.PiercedCrimstone, 1, 5);
+			}
 			longP += "Crimstone ";
+			break;
+		case 13:
+			shortP += "icestone ";
+			if (player.findPerk(PerkLib.PiercedCrimstone) >= 0) {
+				player.addPerkValue(PerkLib.PiercedCrimstone, 1, -5);
+				if (player.perkv1(PerkLib.PiercedCrimstone) <= 0) player.removePerk(PerkLib.PiercedCrimstone);
+			}
+			else {
+				if (player.findPerk(PerkLib.PiercedIcestone) <= 0) player.createPerk(PerkLib.PiercedIcestone, 5, 0, 0, 0);
+				else player.addPerkValue(PerkLib.PiercedIcestone, 1, 5);
+			}
+			longP += "Icestone ";
 			break;
 	}
 	switch(piercingLoc) {
@@ -956,7 +996,7 @@ private function removeVulvaPierce():void {
 
 public function oswaldPawn():void {
 	spriteSelect(47);
-	outputText("", true);
+	clearOutput();
 	if(player.findStatusAffect(StatusAffects.Oswald) < 0) {
 		outputText("Upon closer inspection, you realize the pawnbroker appears to be some kind of golden retriever.  He doesn't look entirely comfortable and he slouches, but he manages to smile the entire time.  His appearance is otherwise immaculate, including his classy suit-jacket and tie, though he doesn't appear to be wearing any pants.  Surprisingly, his man-bits are retracted.  ", false);
 		if(player.cor < 75) outputText("Who would've thought that seeing someone NOT aroused would ever shock you?", false);
@@ -968,7 +1008,7 @@ public function oswaldPawn():void {
 	}
 	else {
 		outputText("You see Oswald fiddling with a top hat as you approach his stand again.  He looks up and smiles, padding up to you and rubbing his furry hands together.  He asks, \"<i>Have any merchandise for me " + player.mf("sir","dear") + "?</i>\"\n\n", false);
-		outputText("(You can sell an item here, but Oswald will not let you buy them back, so be sure of your sales.)", false);
+		outputText("(You can sell an item here, but Oswald will not let you buy them back, so be sure of your sales.  You can shift-click to sell all items in a selected stack.)", false);
 	}
 	if(player.hasKeyItem("Carrot") < 0 && flags[kFLAGS.NIEVE_STAGE] == 3)
 	{
@@ -1001,33 +1041,44 @@ private function oswaldPawnMenu():void { //Moved here from Inventory.as
 	outputText("\n\n<b><u>Oswald's Estimates</u></b>");
 	menu();
 	var totalItems:int = 0;
-	for (var slot:int = 0; slot < 5; slot++) {
+	for (var slot:int = 0; slot < 10; slot++) {
 		if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
 			outputText("\n" + int(player.itemSlots[slot].itype.value / 2) + " gems for " + player.itemSlots[slot].itype.longName + ".");
 			addButton(slot, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), oswaldPawnSell, slot);
 			totalItems += player.itemSlots[slot].quantity;
 		}
 	}
-	if (totalItems > 1) addButton(7, "Sell All", oswaldPawnSellAll);
+	if (totalItems > 1) addButton(12, "Sell All", oswaldPawnSellAll);
 	switch (flags[kFLAGS.KATHERINE_UNLOCKED]) {
 		case 1:
-		case 2: addButton(5, "Kath's Alley", katherine.visitKatherine); break;
-		case 3: addButton(5, "Safehouse", katherineEmployment.katherineTrainingWithUrta); break;
-		case 4: addButton(5, "Kath's Alley", katherineEmployment.postTrainingAlleyDescription); //Appears until Kath gives you her housekeys
+		case 2: addButton(10, "Kath's Alley", katherine.visitKatherine); break;
+		case 3: addButton(10, "Safehouse", katherineEmployment.katherineTrainingWithUrta); break;
+		case 4: addButton(10, "Kath's Alley", katherineEmployment.postTrainingAlleyDescription); //Appears until Kath gives you her housekeys
 		default:
 	}
-	addButton(9, "Back", telAdreMenu);
+	addButton(14, "Back", telAdreMenu);
 }
 
 private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
 	spriteSelect(47);
 	var itemValue:int = int(player.itemSlots[slot].itype.value / 2);
 	clearOutput();
-	if (itemValue == 0)
-		outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He shrugs and says, “<i>Well ok, it isn't worth anything, but I'll take it.</i>”");
-	else outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He nervously pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
-	player.itemSlots[slot].removeOneItem();
-	player.gems += itemValue;
+	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+		if (itemValue == 0)
+			outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to Oswald.  He shrugs and says, “<i>Well ok, it isn't worth anything, but I'll take it.</i>”");
+		else outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to Oswald.  He nervously pulls out " + num2Text(itemValue * player.itemSlots[slot].quantity)  + " gems and drops them into your waiting hand.");
+		while (player.itemSlots[slot].quantity > 0){
+			player.itemSlots[slot].removeOneItem();
+			player.gems += itemValue;
+		}
+	}
+	else {
+		if (itemValue == 0)
+			outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He shrugs and says, “<i>Well ok, it isn't worth anything, but I'll take it.</i>”");
+		else outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He nervously pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
+		player.itemSlots[slot].removeOneItem();
+		player.gems += itemValue;
+	}
 	statScreenRefresh();
 	doNext(oswaldPawn);
 }
@@ -1036,7 +1087,7 @@ private function oswaldPawnSellAll():void {
 	spriteSelect(47);
 	var itemValue:int = 0;
 	clearOutput();
-	for (var slot:int = 0; slot < 5; slot++) {
+	for (var slot:int = 0; slot < 10; slot++) {
 		if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
 			itemValue += player.itemSlots[slot].quantity * int(player.itemSlots[slot].itype.value / 2);
 			player.itemSlots[slot].quantity = 0;
@@ -1055,7 +1106,7 @@ private function anotherButton(button:int, nam:String, func:Function, arg:* = -9
 	return button;
 }
 private function enterBarTelAdre():void {
-	if(isThanksgiving()) kGAMECLASS.pigSlutRoastingGreet();
+	if(isThanksgiving() && flags[kFLAGS.PIG_SLUT_DISABLED] == 0) kGAMECLASS.pigSlutRoastingGreet();
 	else barTelAdre();
 }
 
@@ -1071,6 +1122,7 @@ public function barTelAdre():void {
 		loppe.loppeFirstMeeting();
 		return;
 	}
+	outputText(images.showImage("location-teladre-thewetbitch"));
 	outputText("The interior of The Wet Bitch is far different than the mental picture its name implied.  It looks like a normal tavern, complete with a large central hearth, numerous tables and chairs, and a polished dark wood bar.  The patrons all seem to be dressed and interacting like normal people, that is if normal people were mostly centaurs and dog-morphs of various sub-species.  The atmosphere is warm and friendly, and ");
 	if (player.humanScore() <= 3) outputText("despite your altered appearance, ");
 	outputText("you hardly get any odd stares.  There are a number of rooms towards the back, as well as a stairway leading up to an upper level.");
@@ -1168,7 +1220,7 @@ public function barTelAdre():void {
 		//Wet Bitch bar text when Ro'gar phase = 4:
 		outputText("\n\nRo'gar is here with his back turned to the door, wearing his usual obscuring cloak.", false);
 	}
-	
+
 	switch (scylla.action) { //Scylla - requires dungeon shut down
 		case Scylla.SCYLLA_ACTION_FIRST_TALK:
 			outputText("\n\nThere is one nun sitting in a corner booth who catches your eye.  She sits straight-backed against the dark, wood chair, her thin waist accentuating the supple curve of her breasts. She's dressed in a black robe that looks a few sizes too small for her hips and wears a black and white cloth over her head.");
@@ -1229,9 +1281,9 @@ public function barTelAdre():void {
 		}
 	}
 	//VALA
-	if(kGAMECLASS.purifiedFaerieBitchBar()) button = anotherButton(button,"Vala",kGAMECLASS.chooseValaInBar);
+	if(vala.purifiedFaerieBitchBar()) button = anotherButton(button,"Vala",vala.chooseValaInBar);
 
-	addButton(9,"Leave",telAdreMenu);
+	addButton(14,"Leave",telAdreMenu);
 }
 
 /*
@@ -1241,7 +1293,7 @@ private function oldbarTelAdre():void {
 	var urta2:Function = null;
 	var misc1:Function = null;
 	var misc1Name:String = "";
-	outputText("", true);
+	clearOutput();
 	if(flags[kFLAGS.LOPPE_DISABLED] == 0 && flags[kFLAGS.LOPPE_MET] == 0 && rand(10) == 0) {
 		loppe.loppeFirstMeeting();
 		return;
@@ -1290,7 +1342,7 @@ private function oldbarTelAdre():void {
 		katherine.catMorphIntr();
 	}
 	//Scylla - requires dungeon shut down
-	if(player.totalCocks() > 0 && player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0) {
+	if(player.totalCocks() > 0 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0) {
 		//Scylla repeat
 		//big dick!
 		if(player.longestCockLength() >= 12) {
@@ -1300,12 +1352,12 @@ private function oldbarTelAdre():void {
 				misc1Name = "Nun";
 			}
 			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 1 && rand(5) == 0) {
-				outputText("", true);
+				clearOutput();
 				scylla.scyllaRoundII();
 				return;
 			}
 			else if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] == 2 && rand(5) == 0) {
-				outputText("", true);
+				clearOutput();
 				scylla.scyllaRoundThreeCUM();
 				return;
 			}
@@ -1346,11 +1398,11 @@ private function oldbarTelAdre():void {
 		hel = edryn.approachHelAtZeBitch;
 	}
 	//Everyone's favorite Vala!
-	var vala:Number = 0;
+	var valaChoose:Function = null;
 	//Backroom urta
 	var backroom:* = 0;
 	var backroomT:String = "Backrooms";
-	if(kGAMECLASS.purifiedFaerieBitchBar()) vala = 2621;
+	if(vala.purifiedFaerieBitchBar()) valaChoose = vala.chooseValaInBar;
 	if(!kGAMECLASS.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] != 1 && model.time.hours < 15) {
 		//Scylla + Urta sitting in a tree
 		// SOME COMFORT     FUCKED URTA      NOT PISSED      DRUNK TIME    SCYLLA TO LV4    RANDOM CHANCE  HAS THIS HAPPENED BEFORE? SCYLLA REQS ->
@@ -1419,8 +1471,11 @@ private function oldbarTelAdre():void {
 }
 */
 
+//-----------------
+//-- TAILOR SHOPPE
+//-----------------
 public function tailorShoppe():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(61);
 	outputText("The inside of the tailor's shop is far cleaner than anything else you've seen in the city.  The walls are painted muted gray, and the floor is carpeted with a sprawling, royal blue rug.  After glancing around, you realize WHY the walls and floor are so muted – the quiet backdrop makes the merchandise look even more amazing.  There are racks and racks of clothing, but much of it is plain comfortable clothing, and not worth spending much time investigating.  A high-pitched voice pipes up, \"<i>Can I help you?</i>\"\n\n", false);
 	if(player.findStatusAffect(StatusAffects.Victoria) < 0) {
@@ -1437,21 +1492,42 @@ public function tailorShoppe():void {
 		outputText("at Victoria the Corgi Tailor.  As usual, she's dressed in a stylish low-cut dress and sporting her feathery hat.", false);
 	}
 	outputText("\n\n(What do you want to buy?)", false);
-	choices(armors.CLSSYCL.shortName, createCallBackFunction(buyClothes,armors.CLSSYCL),
-			armors.RBBRCLT.shortName, createCallBackFunction(buyClothes,armors.RBBRCLT),
-			armors.ADVCLTH.shortName, createCallBackFunction(buyClothes,armors.ADVCLTH),
-			armors.TUBETOP.shortName, createCallBackFunction(buyClothes,armors.TUBETOP),
-			armors.OVERALL.shortName, createCallBackFunction(buyClothes,armors.OVERALL),
-			armors.B_DRESS.shortName, createCallBackFunction(buyClothes,armors.B_DRESS),
-			armors.T_BSUIT.shortName, createCallBackFunction(buyClothes,armors.T_BSUIT),
-			armors.M_ROBES.shortName, createCallBackFunction(buyClothes,armors.M_ROBES),
-			armors.LTHRPNT.shortName, createCallBackFunction(buyClothes,armors.LTHRPNT),
-			"Leave",telAdreMenu);
+	menu();
+	addButton(0, armors.CLSSYCL.shortName, buyClothes, armors.CLSSYCL);
+	addButton(1, armors.RBBRCLT.shortName, buyClothes, armors.RBBRCLT);
+	addButton(2, armors.ADVCLTH.shortName, buyClothes, armors.ADVCLTH);
+	addButton(3, armors.TUBETOP.shortName, buyClothes, armors.TUBETOP);
+
+	addButton(5, armors.OVERALL.shortName, buyClothes, armors.OVERALL);
+	addButton(6, armors.B_DRESS.shortName, buyClothes, armors.B_DRESS);
+	addButton(7, armors.T_BSUIT.shortName, buyClothes, armors.T_BSUIT);
+	addButton(8, armors.M_ROBES.shortName, buyClothes, armors.M_ROBES);
+	
+	addButton(10, armors.LTHRPNT.shortName, buyClothes, armors.LTHRPNT);
+	addButton(11, armors.BIMBOSK.shortName, buyClothes, armors.BIMBOSK);
+	addButton(12, armors.A_ROBE_.shortName, buyClothes, armors.A_ROBE_);
+	
+	addButton(4, "Next", undergarmentSection);
+	addButton(14, "Leave", telAdreMenu);
+}
+private function undergarmentSection():void {
+	menu();
+	addButton(0, undergarments.C_BRA.shortName, buyClothes, undergarments.C_BRA);
+	addButton(1, undergarments.C_PANTY.shortName, buyClothes, undergarments.C_PANTY);
+	addButton(2, undergarments.C_LOIN.shortName, buyClothes, undergarments.C_LOIN);
+	addButton(3, undergarments.FURLOIN.shortName, buyClothes, undergarments.FURLOIN);
+	
+	addButton(5, undergarments.GARTERS.shortName, buyClothes, undergarments.GARTERS);
+	addButton(6, undergarments.LTX_BRA.shortName, buyClothes, undergarments.LTX_BRA);
+	addButton(7, undergarments.LTXSHRT.shortName, buyClothes, undergarments.LTXSHRT);
+	addButton(8, undergarments.LTXTHNG.shortName, buyClothes, undergarments.LTXTHNG);
+	
+	addButton(9, "Previous", tailorShoppe);
+	addButton(14, "Leave", telAdreMenu);
 }
 
-
 private function buyClothes(itype:ItemType):void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(61);
 	outputText("Victoria nods and pulls a measuring tape off her shoulder.  She moves around you with practiced ease, taking measurements from every conceivable angle.  Thanks to her small stature, it's quite easy for her to take your inseam measurement, though Vicky manages to ", false);
 	if(player.biggestCockArea() > 30 || player.totalCocks() > 1) outputText("fondle your bulging package", false);
@@ -1479,49 +1555,95 @@ private function debitClothes(itype:ItemType):void {
 	inventory.takeItem(itype, tailorShoppe);
 }
 
+//-----------------
+//-- ARMOUR SHOP
+//-----------------
 public function armorShop():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(64);
 	outputText("The interior of the armory is blisteringly hot, filled with intense heat from the massive forge dominating the far side of the shop.  The bellows are blowing hard as a tall german-shepherd woman works the forge.  Incredibly, she's wearing nothing aside from a ragged leather apron.  It bulges from the front, barely containing her obscene proportions as it protects them from the heat of her forge.  She pulls a piece of metal from the forge and strikes it a few times with a hammer bigger than your head, then tosses it in a bucket filled with water, steam boiling out of it from the hot metal.  At last, the sweating forgemistress notices you and turns around, her breasts jiggling wildly.\n\n", true);
 	//outputText("\"<i>Vat can Yvonne make for you?  Ze platemail?  Or someting a bit lighter?</i>\" she asks you.", false);
 	outputText("\"<i>What can I make for you?  Platemail?  Or something that breathes a little easier?</i>\" Yvonne asks, fanning herself.");
-
+	
+	choices(armors.CHBIKNI.shortName,createCallBackFunction(armorBuy, armors.CHBIKNI),
+			armors.FULLCHN.shortName,createCallBackFunction(armorBuy, armors.FULLCHN),
+			armors.FULLPLT.shortName,createCallBackFunction(armorBuy, armors.FULLPLT),
+			armors.INDECST.shortName,createCallBackFunction(armorBuy, armors.INDECST),
+			armors.LTHRROB.shortName,createCallBackFunction(armorBuy, armors.LTHRROB),
+			armors.SCALEML.shortName,createCallBackFunction(armorBuy, armors.SCALEML),
+			shields.BUCKLER.shortName, createCallBackFunction(armorBuy, shields.BUCKLER),
+			shields.KITE_SH.shortName, createCallBackFunction(armorBuy, shields.KITE_SH),
+			shields.GREATSH.shortName, createCallBackFunction(armorBuy, shields.GREATSH),
+			shields.TOWERSH.shortName, createCallBackFunction(armorBuy, shields.TOWERSH));
+			
 	var egg:Function =null;
 	if(player.hasKeyItem("Dragon Eggshell") >= 0) {
 		outputText("\n\nThough the pieces on display have their arguable attractions, none of them really interest you.  Yvonne taps her foot impatiently.  \"<i>Well, I could make you something to order... if you have any decent materials, cutie.  200 gems.</i>\"");
 		if(player.gems < 200) {
 			outputText("\n\nYou can't afford that!");
 		}
-		else egg = kGAMECLASS.emberScene.getSomeStuff;
+		else addButton(10, "Eggshell", kGAMECLASS.emberScene.getSomeStuff);
 	}
-	choices(armors.CHBIKNI.shortName, createCallBackFunction(armorBuy, armors.CHBIKNI),
-			armors.FULLCHN.shortName, createCallBackFunction(armorBuy, armors.FULLCHN),
-			armors.FULLPLT.shortName, createCallBackFunction(armorBuy, armors.FULLPLT),
-			armors.INDECST.shortName, createCallBackFunction(armorBuy, armors.INDECST),
-			armors.LTHRROB.shortName, createCallBackFunction(armorBuy, armors.LTHRROB),
-			armors.SCALEML.shortName, createCallBackFunction(armorBuy, armors.SCALEML),
-			"", null, "Eggshell", egg, "Flirt", yvonneFlirt, "Leave", telAdreMenu);
+	addButton(13, "Flirt", yvonneFlirt);
+	addButton(14, "Leave", telAdreMenu);
+}
+private function armorBuy(itype:ItemType):void {
+	spriteSelect(64);
+	clearOutput();
+	if (itype is Armor) { 
+		outputText("Yvonne gives you a serious look, then nods.  She pulls the armor off a rack and makes a few adjustments, banging away with her massive hammer to ensure a perfect fit.  The entire time, she's oblivious to the movements of her massive breasts, accidentally exposing her impressive nipples multiple times.\n\n", false);
+		outputText("She finishes and turns to you, smiling broadly, \"<i>Now, that will be " + itype.value + " gems, unless you want to change your mind?</i>\"", false);
+	}
+	else {
+		outputText("Yvonne gives you a serious look, then nods.  She pulls the shield off a rack and shows it to you.\n\n", false);
+		outputText("She smiles broadly, \"<i>Now, that will be " + itype.value + " gems, unless you want to change your mind?</i>\"", false);
+
+	}
+	if(player.gems < itype.value) {
+		outputText("\n\nYou count out your gems and realize it's beyond your price range.", false);
+		//Goto shop main menu
+		doNext(armorShop);
+		return;
+	}
+	else outputText("\n\nDo you buy it?", false);
+	//Go to debit/update function or back to shop window
+	doYesNo(curry(debitArmor,itype),armorShop);
 }
 
+private function debitArmor(itype:ItemType):void {
+	spriteSelect(64);
+	clearOutput();
+	player.gems -= itype.value;
+	statScreenRefresh();
+	inventory.takeItem(itype, armorShop);
+}
+
+//-----------------
+//-- WEAPON SHOP
+//-----------------
 public function weaponShop():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(80);
 	outputText("The high pitched ring of a steel hammer slamming into hot metal assaults your ears as you walk up to the stand.  Sparks are flying with every blow the stand's owner strikes on his current work.  The metal is glowing red hot, and the hammer falls with the relentless, practiced precision of an experienced blacksmith's guiding hand.  Thick gray and white fur ruffles as the blacksmith stands up, revealing the details of his form to you.  He's one of the dog-people that inhabits this city, though his fur and ears remind you of a dog one of your friends had growing up called a husky.  The blacksmith is anything but husky.  He's fairly short, but lean and whip-cord tough.  His right arm is far more thickly muscled than his left thanks to his trade, and he walks with a self-assured gait that can only come with age and experience.\n\n", false);
-
 	outputText("His piercing blue eyes meet yours as he notices you, and he barks, \"<i>Buy something or fuck off.</i>\"\n\nWhat do you buy?", false);
-
-	choices(consumables.W_STICK.shortName, createCallBackFunction(weaponBuy, consumables.W_STICK),
-			weapons.CLAYMOR.shortName, createCallBackFunction(weaponBuy, weapons.CLAYMOR),
-			weapons.WARHAMR.shortName, createCallBackFunction(weaponBuy, weapons.WARHAMR),
-			weapons.KATANA.shortName, createCallBackFunction(weaponBuy, weapons.KATANA),
-			weapons.SPEAR.shortName, createCallBackFunction(weaponBuy, weapons.SPEAR),
-			weapons.WHIP.shortName, createCallBackFunction(weaponBuy, weapons.WHIP),
-			weapons.W_STAFF.shortName, createCallBackFunction(weaponBuy, weapons.W_STAFF),
-			weapons.S_GAUNT.shortName, createCallBackFunction(weaponBuy, weapons.S_GAUNT),
-			"", null, "Leave", telAdreMenu);
+	menu();
+	addButton(0, weapons.CLAYMOR.shortName, weaponBuy, weapons.CLAYMOR);
+	addButton(1, weapons.WARHAMR.shortName, weaponBuy, weapons.WARHAMR);
+	addButton(2, weapons.SPEAR.shortName, weaponBuy, weapons.SPEAR);
+	addButton(3, weapons.WHIP.shortName, weaponBuy, weapons.WHIP);
+	addButton(4, weapons.S_GAUNT.shortName, weaponBuy, weapons.S_GAUNT);
+	addButton(5, weapons.DAGGER.shortName, weaponBuy, weapons.DAGGER);
+	addButton(6, weapons.SCIMITR.shortName, weaponBuy, weapons.SCIMITR);
+	addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);
+	addButton(8, weapons.FLAIL.shortName, weaponBuy, weapons.FLAIL);
+	addButton(9, weapons.BFSWORD.shortName, weaponBuy, weapons.BFSWORD);
+	if (player.hasKeyItem("Sheila's Lethicite") >= 0 || flags[kFLAGS.SHEILA_LETHICITE_FORGE_DAY] > 0) {
+		addButton(13, "ScarBlade", forgeScarredBlade);
+	}
+	addButton(14, "Leave", telAdreMenu);
 }
 private function weaponBuy(itype:ItemType):void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(80);
 	outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"", false);
 	if(player.gems < itype.value) {
@@ -1540,40 +1662,611 @@ private function debitWeapon(itype:ItemType):void {
 	statScreenRefresh();
 	inventory.takeItem(itype, weaponShop);
 }
-private function armorBuy(itype:ItemType):void {
-	spriteSelect(64);
-	outputText("", true);
-	outputText("Yvonne gives you a serious look, then nods.  She pulls the armor off a rack and makes a few adjustments, banging away with her massive hammer to ensure a perfect fit.  The entire time, she's oblivious to the movements of her massive breasts, accidentally exposing her impressive nipples multiple times.\n\n", false);
-	outputText("She finishes and turns to you, smiling broadly, \"<i>Now, that will be " + itype.value + " gems, unless you want to change your mind?</i>\"", false);
+private function forgeScarredBlade():void {
+	if (player.hasKeyItem("Sheila's Lethicite") >= 0) forgeScarredBladeStart();
+	//remove Sheila's Lethicite key item, set sheilacite = 3, start sheilaforge timer, increment once per day at 0:00
+	if (model.time.days - flags[kFLAGS.SHEILA_LETHICITE_FORGE_DAY] < 14) forgeScarredBladeMiddle();
+	if (model.time.days - flags[kFLAGS.SHEILA_LETHICITE_FORGE_DAY] >= 14) forgeScarredBladeEnd();
+}
+
+private function forgeScarredBladeStart():void {
+	outputText("The blacksmith turns an appraising eye on you as you approach him without looking at any of the weapons on display.\n\n", true)
+	outputText("\"<i>What do you want?</i>\" he says, with characteristic gruffness.\n\n")
+	outputText("You pull out the dark purple crystal you received from Sheila and ask if it would be possible to alloy a blade from it.  He doesn't move to take it from your outstretched hand just yet, but you can see a hint of interest in the softening of his features.  \"<i>That's a lethicite.  Where'd you get it?</i>\" asks the smith.\n\n")
+	outputText("\"<i>Stole it from a demon,</i>\" you lie.\n\n")
+	outputText("He considers for a moment more before responding.  \"<i>Well done, then.</i>\"  At that, he takes the crystal gingerly from your hand.  \"<i>Never worked with this before.  I promise nothing, but come back in two weeks.  I should have an update for you.</i>\"\n\n")
+	flags[kFLAGS.SHEILA_LETHICITE_FORGE_DAY] = model.time.days;
+	player.removeKeyItem("Sheila's Lethicite");	
+	doNext(weaponShop);
+}
+private function forgeScarredBladeMiddle():void {
+	outputText("The weaponsmith looks up from the forge as you enter.  \"<i>Oh, it's you.  I'm not done yet.</i>\"  With a gesture, he dismisses you.  You can only content yourself with looking at the finished products.\n\n", true);
+	doNext(weaponShop);
+}
+private function forgeScarredBladeEnd():void {
+	outputText("The smith looks up as you enter, and you could swear the already-thin, no-nonsense line of his mouth becomes even tighter.  \"<i>It's you.  Come here.</i>\"\n\n", true)
+	outputText("Obligingly, you approach him, though the forge's heat is stifling.  \"<i>I finished.  The crystal impregnated the metal easily, but the blade itself... just have a look.</i>\"  He picks up a tatty scabbard from a pile of half-finished weapons and holds it to you - as he does, you notice for the first time the numerous bandages on his hands.  A bit wary, you unsheathe the blade halfway; it hisses against the oiled leather as you draw it.  The revealed form of the weapon is slim, curved rakishly, and glows with an umbral light against the backdrop of the lit forge, but its broad side is covered in deep lines.\n\n")
+	outputText("\"<i>Damnedest thing.  I couldn't straighten the blade for the life of me - with every hammer blow it would leap, vibrating, from the anvil, and warp somewhere else, adding a new twist for each one I took out.  After a few failures, I settled for a backsword design and channeled the bending toward the flat edge.  That's not the uncanny bit though.  You can see how sharp it is; the edge fairly shaped itself with just a touch of the grinder.  I haven't honed it - didn't need to.  But when I tried to etch a design just above the hilt, it would slide under the stencil, leaving a gouge on the blade.</i>\"\n\n")
+	outputText("Closer examination reveals the veracity of his claim: all the numerous scratches and flaws on the blade have their origins right above the tang, from the smith's abortive attempts at decoration.  Yet though several ugly gashes stop just short of the edge, none of them actually break the perfect arc, as if cutting were all the blade cared about.\n\n")
+	outputText("\"<i>Damnedest thing,</i>\" he repeats, breaking your train of thought.  \"<i>Every time the blade slipped, it would twist toward my hands.  It's as if it's alive and eager to find flesh.  Truth be told... I was debating whether to turn it over to the Covenant and tell you the crystal couldn't be used.  But you're here, so take it and go.\"  Giving you barely enough time to sheathe the blade again, he places a strong hand against your back and all-but-pushes you out to the street.\n\n")
+	inventory.takeItem(weapons.SCARBLD, weaponShop);
+}
+
+//-----------------
+//-- JEWELRY STORE
+//-----------------
+public function jewelShopEntry():void {
+	clearOutput();
+	outputText("You enter the jewelry store. There are large array of rings and necklaces, all stored in thick glass cases. A male lizan sits behind the counter, watching you as you look around the store. He is nude save for his gilded silken loincloth and a gold necklace. His chin is pierced with several gold ring piercings. He also wears a diamond ring on one of his fingers.\n\n", false);
+	outputText("<i>\"Welcome to my jewelry store. Here, I sell rings and necklaces. They can make you look great but not only that, I also have special jewelry that may have magical effect on you. The effect stays on until you take them off,\"</i> the lizan says.", false);
+
+	doNext(jewelShopInside);
+}
+
+public function jewelShopInside():void {
+	clearOutput();
+	outputText("<i>So what will it be?</i>", false);
+	menu();
+	addButton(0, "Normal rings", jewelShopPageI);
+	addButton(1, "Enchanted rings", jewelShopPageII);
+	addButton(3, "Taoth statue", jewelShopBuyStatue);
+	addButton(4, "Jewelry box", jewelShopBuyBox);
+	addButton(14, "Leave", telAdreMenu);
+}
+
+public function jewelShopPageI():void {
+	choices(jewelries.SILVRNG.shortName, createCallBackFunction(jewelBuy, jewelries.SILVRNG),
+			jewelries.GOLDRNG.shortName, createCallBackFunction(jewelBuy, jewelries.GOLDRNG),
+			jewelries.PLATRNG.shortName, createCallBackFunction(jewelBuy, jewelries.PLATRNG),
+			jewelries.DIAMRNG.shortName, createCallBackFunction(jewelBuy, jewelries.DIAMRNG),
+			jewelries.LTHCRNG.shortName, createCallBackFunction(jewelBuy, jewelries.LTHCRNG),
+			"", null,
+			"", null,
+			"", null,
+			"", null,
+			"", null);
+	addButton(14, "Back", jewelShopInside);
+}	
+public function jewelShopPageII():void {
+	choices(jewelries.CRIMRNG.shortName, createCallBackFunction(jewelBuy, jewelries.CRIMRNG),
+			jewelries.ICE_RNG.shortName, createCallBackFunction(jewelBuy, jewelries.ICE_RNG),
+			jewelries.FERTRNG.shortName, createCallBackFunction(jewelBuy, jewelries.FERTRNG),
+			jewelries.MANARNG.shortName, createCallBackFunction(jewelBuy, jewelries.MANARNG),
+			jewelries.LIFERNG.shortName, createCallBackFunction(jewelBuy, jewelries.LIFERNG),
+			jewelries.POWRRNG.shortName, createCallBackFunction(jewelBuy, jewelries.POWRRNG),
+			jewelries.PURERNG.shortName, createCallBackFunction(jewelBuy, jewelries.PURERNG),
+			jewelries.MYSTRNG.shortName, createCallBackFunction(jewelBuy, jewelries.MYSTRNG),
+			"", null,
+			"", null);
+	addButton(14, "Back", jewelShopInside);
+}	
+
+public function jewelShopBuyBox():void {
+	clearOutput();
+	if (player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0)
+	{
+		outputText("<b>You already own a jewelry box!</b>", true)
+		doNext(jewelShopInside);
+		return;
+	}
+	outputText("You look around for a while until you see something that catches your eyes. A finely-polished jewelry box sits on table.  You approach the jewelry box and examine it.  The box comes complete with a hinged lid and several small drawers.  The price tag says that it costs 500 gems.\n\n", false);
+	outputText("The lizan then walks over to you and asks \"<i>See something you'd like to buy?</i>\" You then ask him about the jewelry box. \n\n", false);
+	outputText("\"<i>We have plenty of them. This is a finely crafted box. It's designed to hold nine different rings and amulets. Of course, it's secure! It has combination lock. With the right code, you can unlock it. And it can be yours for only 500 gems!</i>\"\n\n", false);
+	outputText("Do you buy it?", false);
+	if (player.gems >= 500)
+	{
+		doYesNo(jewelShopBuyBoxYes, jewelShopBuyBoxNo);
+	}
+	else
+	{
+		outputText("\n\nYou count out your gems and realize it's beyond your price range.", false);
+		doNext(jewelShopInside);
+	}
+}	
+
+public function jewelShopBuyBoxYes():void {
+	player.gems -= 500;
+	statScreenRefresh();
+	outputText("You hand over five hundred gems to the lizan. ", true);
+	outputText("He then exclaims\"<i>Sold!</i>\" as he hands over the jewelry box to you. You take your time to set the combination and memorize it should you need to access your jewelry box.\n\n", false);
+	outputText("<b>Gained Key Item: Jewelry Box!</b>", false)
+	player.createKeyItem("Equipment Storage - Jewelry Box", 0, 0, 0, 0);
+	doNext(jewelShopInside);
+}	
+public function jewelShopBuyBoxNo():void {
+	outputText("\"<i>No thanks,</i>\" you tell him. \n\n", true);
+	outputText("\"<i>Very well. Let me know if you've changed your mind,</i>\" he says.", false);
+	doNext(jewelShopInside);
+}	
+
+public function jewelShopBuyStatue():void {
+	clearOutput();
+	outputText("\"<i>Oh so you want this statue? Sure I can sell it to you but I hope you have the gems.</i>\"\n\n", false);
+	outputText("Do you buy it?", false);
+	if (player.gems >= 2000)
+	{
+		doYesNo(jewelShopBuyStatueYes, jewelShopBuyStatueNo);
+	}
+	else
+	{
+		outputText("\n\nYou count out your gems and realize it's beyond your price range.", false);
+		doNext(jewelShopInside);
+	}
+}	
+
+public function jewelShopBuyStatueYes():void {
+	player.gems -= 2000;
+	statScreenRefresh();
+	outputText("You buy the gold statue and pocket it in your backpack.", false)
+	inventory.takeItem(useables.GLDSTAT, jewelShopInside);
+}	
+public function jewelShopBuyStatueNo():void {
+	outputText("\"<i>No thanks,</i>\" you tell him. \n\n", true);
+	outputText("\"<i>Very well. Let me know if you've changed your mind,</i>\" he says.", false);
+	doNext(jewelShopInside);
+}	
+
+private function jewelBuy(itype:ItemType):void {
+	clearOutput();
+	outputText("The lizan escorts you and opens the case to retrieve the ring. He shows you the ring. He says \"<i>That will be... uh... " + itype.value + " gems.</i>\"", false);
 	if(player.gems < itype.value) {
 		outputText("\n\nYou count out your gems and realize it's beyond your price range.", false);
 		//Goto shop main menu
-		doNext(armorShop);
+		doNext(jewelShopInside);
 		return;
 	}
-	else outputText("\n\nDo you buy it?", false);
+	else outputText("\n\nDo you buy it?\n\n", false);
 	//Go to debit/update function or back to shop window
-	doYesNo(curry(debitArmor,itype),armorShop);
+	doYesNo(curry(debitJewel, itype), jewelShopInside);
 }
-
-private function debitArmor(itype:ItemType):void {
-	spriteSelect(64);
-	outputText("", true);
+private function debitJewel(itype:ItemType):void {
 	player.gems -= itype.value;
 	statScreenRefresh();
-	inventory.takeItem(itype, armorShop);
+	inventory.takeItem(itype, jewelShopInside);
+}
+
+//-----------------
+//-- CARPENTRY SHOP
+//-----------------
+public function carpentryShopEntry():void {
+	clearOutput();
+	outputText("You enter the shop marked by a sign with hammer and saw symbol painted on it. There are array of tools all hung neatly. A six feet tall zebra-morph stallion stands behind the counter. He appears to be wearing typical lumberjack outfit.\n\n");
+	outputText("\"<i>Welcome to my hardware shop dear customer. Feel free to look around,</i>\" he says. \n\n");
+	if (flags[kFLAGS.CODEX_ENTRY_ZEBRAS] <= 0) {
+		flags[kFLAGS.CODEX_ENTRY_ZEBRAS] = 1;
+		outputText("<b>New codex entry unlocked: Zebras!</b>")
+	}
+	doNext(carpentryShopInside);
+}
+
+public function carpentryShopInside():void {
+	clearOutput();
+	outputText("<i>So what will it be?</i>");
+	menu();
+	addButton(0, "Buy Nails", carpentryShopBuyNails);
+	addButton(1, "Buy Wood", carpentryShopBuyWood);
+	addButton(2, "Buy Stones", carpentryShopBuyStone);
+	addButton(5, "Sell Nails", carpentryShopSellNails);	
+	addButton(6, "Sell Wood", carpentryShopSellWood);
+	addButton(7, "Sell Stones", carpentryShopSellStone);
+	addButton(10, "Toolbox", carpentryShopBuySet);
+	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 1) addButton(11, "Nails Box", carpentryShopBuySet2);
+	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) addButton(12, "Stone Building", carpentryShopBuySet3);
+	addButton(14, "Leave", telAdreMenu);
+}
+//Buy nails
+public function carpentryShopBuyNails():void {
+	clearOutput();
+	if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
+		//Popracować aby wspominal wlasciciel w rozmowie 200-600 gwozdzi
+		outputText("You ask him if he has nails for sale. He replies \"<i>Certainly! I've got nails. Your toolbox can hold up to two hundred nails. I'll be selling nails at a price of two gems per nail.</i>\" \n\n");
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
+			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/600")
+		}
+		else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) {
+			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200")
+		}
+		menu();
+		addButton(0, "Buy 10", carpentryShopBuyNailsAmount, 10);
+		addButton(1, "Buy 25", carpentryShopBuyNailsAmount, 25);
+		addButton(2, "Buy 50", carpentryShopBuyNailsAmount, 50);
+		addButton(3, "Buy 75", carpentryShopBuyNailsAmount, 75);
+		addButton(4, "Buy 100", carpentryShopBuyNailsAmount, 100);
+		addButton(14, "Back", carpentryShopInside)
+	}
+	else {
+		outputText("You ask him if he has nails for sale. He replies \"<i>I do. But I'm sorry, my friend. You don't have a toolbox. How are you going to carry nails safely?</i>\" ", true);
+		doNext(carpentryShopInside);
+	}
+}
+
+private function carpentryShopBuyNailsAmount(amount:int):void {
+	nails = amount;
+	outputText("You ask him for " + amount + " nails. He replies \"<i>That'll be " + (amount * 2) + " gems, please.</i>\" \n\nDo you buy the nails?", true);
+	doYesNo(carpentryShopBuyNailsYes, carpentryShopBuyNails);
+}
+
+private function carpentryShopBuyNailsYes():void {
+	clearOutput();
+	if (player.gems >= (nails * 2))
+	{
+		player.gems -= (nails * 2);
+		flags[kFLAGS.ACHIEVEMENT_PROGRESS_HAMMER_TIME] += nails;
+		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_HAMMER_TIME] >= 300) awardAchievement("Hammer Time", kACHIEVEMENTS.GENERAL_HAMMER_TIME);
+		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += nails;
+		outputText("You hand over " + (nails * 2) + " gems. \"<i>Done,</i>\" he says as he hands over bundle of " + nails +" nails to you.\n\n");
+		if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 600 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
+			outputText("Unfortunately, your toolbox can't hold anymore nails. You notify him and he refunds you the gems.\n\n", false);
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] - 600) * 2);
+			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 600;
+			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/600");
+		}
+		else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) {
+			outputText("Unfortunately, your toolbox can't hold anymore nails. You notify him and he refunds you the gems.\n\n", false);
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] - 200) * 2);
+			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 200;
+			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200");
+		}
+	}
+	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"", true);
+	statScreenRefresh();
+	doNext(carpentryShopBuyNails);
+}
+
+//Buy wood
+public function carpentryShopBuyWood():void {
+	outputText("You ask him if he has wood for sale. He replies \"<i>Certainly! I've got extra supply of wood. I'll be selling wood at a price of 10 gems per wood plank.</i>\" \n\n", true);
+	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) {
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/900", false)
+	}
+	else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) {
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/300", false)
+	}
+	menu();
+	addButton(0, "Buy 10", carpentryShopBuyWoodAmount, 10);
+	addButton(1, "Buy 20", carpentryShopBuyWoodAmount, 20);
+	addButton(2, "Buy 30", carpentryShopBuyWoodAmount, 30);
+	addButton(3, "Buy 40", carpentryShopBuyWoodAmount, 40);
+	addButton(4, "Buy 50", carpentryShopBuyWoodAmount, 50);
+	addButton(14, "Back", carpentryShopInside)
+}	
+
+private function carpentryShopBuyWoodAmount(amount:int):void {
+	wood = amount;
+	outputText("You ask him for " + amount + " wood planks. He replies \"<i>That'll be " + (amount * 10) + " gems, please.</i>\" \n\nDo you buy the wood?", true);
+	doYesNo(carpentryShopBuyWoodYes, carpentryShopBuyWood);
+}
+
+private function carpentryShopBuyWoodYes():void {
+	if (player.gems >= (wood * 10))
+	{
+		player.gems -= (wood * 10);
+		flags[kFLAGS.ACHIEVEMENT_PROGRESS_IM_NO_LUMBERJACK] += wood;
+		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_IM_NO_LUMBERJACK] >= 100) awardAchievement("I'm No Lumberjack", kACHIEVEMENTS.GENERAL_IM_NO_LUMBERJACK);
+		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += wood;
+		outputText("You hand over " + (wood * 10) + " gems. \"<i>I'll have the caravan deliver the wood to your camp as soon as you leave my shop,</i>\" he says.\n\n", true);
+		if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 900 && (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3)) {
+			outputText("Unfortunately, your wood supply seem to be full. You inform him. He refunds you the gems.\n\n", false);
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 900) * 10);
+			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 900);
+			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/900");
+		}
+		else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 300 && (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3)) {
+			outputText("Unfortunately, your wood supply seem to be full. You inform him. He refunds you the gems.\n\n", false);
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 300) * 10);
+			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 300);
+			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/300");
+		}
+	}
+	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"", true);
+	statScreenRefresh();
+	doNext(carpentryShopBuyWood);
+}
+
+//Buy Stones
+public function carpentryShopBuyStone():void {
+	outputText("You ask him if he has stones for sale. He replies \"<i>Certainly! I've got extra supply of stones. I'll be selling stones at a price of 20 gems per stone.</i>\" \n\n", true);
+	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) {
+		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/900", false)
+	}
+	else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 4) {
+		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/300", false)
+	}
+	menu();
+	addButton(0, "Buy 10", carpentryShopBuyStoneAmount, 10);
+	addButton(1, "Buy 20", carpentryShopBuyStoneAmount, 20);
+	addButton(2, "Buy 30", carpentryShopBuyStoneAmount, 30);
+	addButton(3, "Buy 40", carpentryShopBuyStoneAmount, 40);
+	addButton(4, "Buy 50", carpentryShopBuyStoneAmount, 50);
+	addButton(14, "Back", carpentryShopInside)
+}
+
+private function carpentryShopBuyStoneAmount(amount:int):void {
+	stone = amount;
+	outputText("You ask him for " + amount + " stones. He replies \"<i>That'll be " + (amount * 20) + " gems, please.</i>\" \n\nDo you buy the stones?", true);
+	doYesNo(carpentryShopBuyStoneYes, carpentryShopBuyStone);
+}
+
+private function carpentryShopBuyStoneYes():void {
+	if (player.gems >= (stone * 20))
+	{
+		player.gems -= (stone * 20);
+		flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] += stone;
+		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] >= 100) awardAchievement("Yabba Dabba Doo", kACHIEVEMENTS.GENERAL_YABBA_DABBA_DOO);
+		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stone;
+		outputText("You hand over " + (stone * 20) + " gems. \"<i>I'll have the caravan deliver the stones to your camp as soon as you leave my shop,</i>\" he says.\n\n", true);
+		if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 900 && (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4)) {
+			outputText("Unfortunately, your stone supply seem to be full. You inform him. He refunds you the gems.\n\n", false);
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - 900) * 10);
+			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - 900);
+			outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/900");
+		}
+		else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 300 && (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 4)) {
+			outputText("Unfortunately, your stone supply seem to be full. You inform him. He refunds you the gems.\n\n", false);
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - 300) * 10);
+			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - 300);
+			outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/300");
+		}
+	}
+	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"", true);
+	statScreenRefresh();
+	doNext(carpentryShopBuyStone);
+}
+
+//Sell Nails
+public function carpentryShopSellNails():void {
+	outputText("You ask him if he's willing to buy nails from you. He says, \"<i>Certainly! I'll be buying nails at a rate of one gem per nail.</i>\" \n\n", true);
+	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
+		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/600")
+	}
+	else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) {
+		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200")
+	}
+	menu();
+	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 10) addButton(0, "Sell 10", carpentryShopSellNailsAmount, 10);
+	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 25) addButton(1, "Sell 25", carpentryShopSellNailsAmount, 25);
+	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 50) addButton(2, "Sell 50", carpentryShopSellNailsAmount, 50);
+	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 75) addButton(3, "Sell 75", carpentryShopSellNailsAmount, 75);
+	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100) addButton(3, "Sell 100", carpentryShopSellNailsAmount, 100);
+	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 0) addButton(4, "Sell All", carpentryShopSellNailsAmount, flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES]);
+	addButton(14, "Back", carpentryShopInside)
+}
+
+private function carpentryShopSellNailsAmount(amount:int):void {
+	nails = amount;
+	outputText("You're willing to offer " + num2Text(amount) + " " + (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] == 1 ? "piece" : "pieces") + " of nails. He replies \"<i>I'll buy that for " + amount + " gems.</i>\" \n\nDo you sell the nails?", true);
+	doYesNo(carpentryShopSellNailsYes, carpentryShopSellNails);
+}
+
+private function carpentryShopSellNailsYes():void {
+	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= nails)
+	{
+		player.gems += nails;
+		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= nails;
+		outputText("You sign the permission form for " + num2Text(nails) + " " + (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] ? "piece" : "pieces") + " of nails to be taken from your camp. \"<i>Deal. Here are " + nails + " gems,</i>\" he says.\n\n", true);
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
+		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/600");
+		}
+		else {
+ 		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200");
+		}
+	}
+	else outputText("\"<i>I'm sorry, my friend. You do not have enough nails.</i>\"", true);
+	statScreenRefresh();
+	doNext(carpentryShopSellNails);
+}
+
+//Sell wood
+public function carpentryShopSellWood():void {
+	outputText("You ask him if he's willing to buy wood from you. He says, \"<i>Certainly! I'll be buying wood at a rate of five gems per piece.</i>\" \n\n", true);
+	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) {
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/900", false)
+	}
+	else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) {
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/300", false)
+	}
+	menu();
+	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 1) addButton(0, "Sell 1", carpentryShopSellWoodAmount, 1);
+	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 5) addButton(1, "Sell 5", carpentryShopSellWoodAmount, 5);
+	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 10) addButton(2, "Sell 10", carpentryShopSellWoodAmount, 10);
+	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 25) addButton(3, "Sell 25", carpentryShopSellWoodAmount, 25);
+	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 0) addButton(4, "Sell All", carpentryShopSellWoodAmount, flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES]);
+	addButton(14, "Back", carpentryShopInside)
+}	
+
+private function carpentryShopSellWoodAmount(amount:int):void {
+	wood = amount;
+	outputText("You're willing to offer " + num2Text(amount) + " " + (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] == 1 ? "piece" : "pieces") + " of wood. He replies \"<i>I'll buy that for " + (amount * 5) + " gems.</i>\" \n\nDo you sell the wood?", true);
+	doYesNo(carpentryShopSellWoodYes, carpentryShopSellWood);
+}
+
+private function carpentryShopSellWoodYes():void {
+	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= wood)
+	{
+		player.gems += (wood * 5);
+		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= wood;
+		outputText("You sign the permission form for " + num2Text(wood) + " " + (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] == 1 ? "piece" : "pieces") + " of wood to be unloaded from your camp. \"<i>Deal. Here are " + (wood * 5) + " gems,</i>\" he says.\n\n", true);
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) {
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/900");
+		}
+		else {
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/300");
+		}
+	}
+	else outputText("\"<i>I'm sorry, my friend. You do not have enough wood.</i>\"", true);
+	statScreenRefresh();
+	doNext(carpentryShopSellWood);
+}
+
+//Sell Stones
+public function carpentryShopSellStone():void {
+	outputText("You ask him if he's willing to buy stones from you. He says, \"<i>Certainly! I'll be buying stones at a rate of ten gems per piece.</i>\" \n\n", true);
+	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) {
+		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/900", false)
+	}
+	else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 4) {
+		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/300", false)
+	}
+	menu();
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 1) addButton(0, "Sell 1", carpentryShopSellStoneAmount, 1);
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 5) addButton(1, "Sell 5", carpentryShopSellStoneAmount, 5);
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 10) addButton(2, "Sell 10", carpentryShopSellStoneAmount, 10);
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 25) addButton(3, "Sell 25", carpentryShopSellStoneAmount, 25);
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 0) addButton(4, "Sell All", carpentryShopSellStoneAmount, flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES]);
+	addButton(14, "Back", carpentryShopInside)
+}
+
+private function carpentryShopSellStoneAmount(amount:int):void {
+	stone = amount;
+	outputText("You're willing to offer " + num2Text(amount) + " " + (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] == 1 ? "piece" : "pieces") + " of stone. He replies \"<i>I'll buy that for " + (amount * 10) + " gems.</i>\" \n\nDo you sell the stones?", true);
+	doYesNo(carpentryShopSellStoneYes, carpentryShopSellStone);
+}
+
+private function carpentryShopSellStoneYes():void {
+	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= stone)
+	{
+		player.gems += (stone * 10);
+		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= stone;
+		outputText("You sign the permission form for " + num2Text(stone) + " " + (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] == 1 ? "piece" : "pieces") + " of stones to be unloaded from your camp. \"<i>Deal. Here are " + (stone * 10) + " gems,</i>\" he says.\n\n", true);
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) {
+		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/900");
+		}
+		else {
+		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/300");
+		}
+	}
+	else outputText("\"<i>I'm sorry, my friend. You do not have enough stones.</i>\"", true);
+	statScreenRefresh();
+	doNext(carpentryShopSellStone);
+}
+
+//Buy toolbox
+public function carpentryShopBuySet():void {
+	if (player.hasKeyItem("Carpenter's Toolbox") >= 0)
+	{
+		outputText("<b>You already own a set of carpentry tools!</b>", true)
+		doNext(carpentryShopInside);
+		return;
+	}
+	outputText("You walk around for a while until you see a wooden toolbox. It's filled with assorted tools. One of them is a hammer. Another one is a saw. Even another is an axe. There is a measuring tape. There's even a book with hundreds of pages, all about how to use tools and it even has project instructions! There's also a compartment in the toolbox for nails. Just what you need to build your cabin. \n\n", true);
+	outputText("\"<i>Two hundred gems and it's all yours,</i>\" the shopkeeper says.\n\n");
+	outputText("Do you buy it?", false);
+	if (player.gems >= 200)
+	{
+		doYesNo(carpentryShopBuySetYes, carpentryShopBuySetNo);
+	}
+	else
+	{
+		outputText("\n\nYou count out your gems and realize it's beyond your price range.", false);
+		doNext(carpentryShopInside);
+	}
+}
+
+public function carpentryShopBuySetYes():void {
+	player.gems -= 200;
+	outputText("You hand over two hundred gems to the shopkeeper. ", true);
+	outputText("\"<i>Here you go,</i>\" he says. You feel so proud to have your own tools for building stuff! \n\n", false);
+	outputText("<b>Gained Key Item: Carpenter's Toolbox!</b>", false)
+	player.createKeyItem("Carpenter's Toolbox", 0, 0, 0, 0);
+	flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] += 1;
+	statScreenRefresh();
+	doNext(carpentryShopInside);
+}
+
+public function carpentryShopBuySetNo():void {
+	outputText("\"<i>No thanks,</i>\" you tell him. \n\n", true);
+	outputText("\"<i>Suit yourself,</i>\" he says as you put the box of tools back where it was.", false);
+	doNext(carpentryShopInside);
+}
+
+//Nails Box
+public function carpentryShopBuySet2():void {
+	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2)
+	{
+		outputText("<b>You already own box for nails!</b>", true)
+		doNext(carpentryShopInside);
+		return;
+	}
+	outputText("You walk around for a while until you see a wooden box. It's similar to the one you owns already. Asking zebra owner about it purpose he saying it's to keep nails that couldn't be keep inside toolbox. Exactly what you need in case building something will need more nails than your toolbox can hold. \n\n", true);
+	outputText("\"<i>Fifty gems and it's all yours,</i>\" the shopkeeper says.\n\n");
+	outputText("Do you buy it?", false);
+	if (player.gems >= 50)
+	{
+		doYesNo(carpentryShopBuySet2Yes, carpentryShopBuySet2No);
+	}
+	else
+	{
+		outputText("\n\nYou count out your gems and realize it's beyond your price range.", false);
+		doNext(carpentryShopInside);
+	}
+}
+
+public function carpentryShopBuySet2Yes():void {
+	player.gems -= 50;
+	outputText("You hand over fifty gems to the shopkeeper. ", true);
+	outputText("\"<i>Here you go,</i>\" he says. You feel so proud to been able store much more than two hundred of nails that you can use for building stuff without need of traveling to Tel'Adre in case of nails shortage! \n\n", false);
+	outputText("<b>Gained Key Item: Nail's Box!</b>", false)
+	player.createKeyItem("Nail's Box", 0, 0, 0, 0);
+	flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] += 1;
+	statScreenRefresh();
+	doNext(carpentryShopInside);
+}
+
+public function carpentryShopBuySet2No():void {
+	outputText("\"<i>No thanks,</i>\" you tell him. \n\n", true);
+	outputText("\"<i>Suit yourself,</i>\" he says as you put the nails box back where it was.", false);
+	doNext(carpentryShopInside);
+}
+
+//Stone Buildings
+public function carpentryShopBuySet3():void {
+	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 5)
+	{
+		outputText("<b>You already own this guide!</b>", true)
+		doNext(carpentryShopInside);
+		return;
+	}
+	outputText("You walk around for a while until you see leather-bound book. It's titled 'Stone Building Guide' and briefly looking over contest you notice is about how to use stone along few other materials to make stronger than wooden structures. What is more interesting it even has project instructions for at lest few things that you think will be good to have constructed in camp! Just what you need to upgrade your steady growning settlment to next 'civilization' level. \n\n", true);
+	outputText("\"<i>One hundred gems and it's all yours,</i>\" as usual the shopkeeper says.\n\n");
+	outputText("Do you buy it?", false);
+	if (player.gems >= 100)
+	{
+		doYesNo(carpentryShopBuySet3Yes, carpentryShopBuySet3No);
+	}
+	else
+	{
+		outputText("\n\nYou count out your gems and realize it's beyond your price range.", false);
+		doNext(carpentryShopInside);
+	}
+}
+
+public function carpentryShopBuySet3Yes():void {
+	player.gems -= 100;
+	outputText("You hand over a hundred gems to the shopkeeper. ", true);
+	outputText("\"<i>Here you go,</i>\" he says. You feel so proud to have guide to building stone structures! \n\n", false);
+	outputText("<b>Gained Key Item: Stone Building Guide!</b>", false)
+	player.createKeyItem("Stone Building Guide", 0, 0, 0, 0);
+	flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] += 1;
+	statScreenRefresh();
+	doNext(carpentryShopInside);
+}
+
+public function carpentryShopBuySet3No():void {
+	outputText("\"<i>No thanks,</i>\" you tell him. \n\n", true);
+	outputText("\"<i>Suit yourself,</i>\" he says as you put the book back where it was.", false);
+	doNext(carpentryShopInside);
 }
 
 private function urtaIsABadass():void {
 	flags[kFLAGS.PC_SEEN_URTA_BADASS_FIGHT] = 1;
-	outputText("", true);
+	clearOutput();
 	outputText("There's a commotion in the streets of Tel'Adre.  A dense crowd of onlookers has formed around the center of the street, massed together so tightly that you're unable to see much, aside from the backs the other onlookers' heads.  The sound of blows impacting on flesh can be heard over the crowd's murmuring, alerting you of the fight at the gathering's core.", false);
 	simpleChoices("Investigate", watchUrtaBeABadass, "Who cares?", telAdreMenu, "", null, "", null, "", null);
 }
 
 //[Invetigate]
 private function watchUrtaBeABadass():void {
-	outputText("", true);
+	clearOutput();
 	kGAMECLASS.urta.urtaSprite();
 	outputText("You shoulder past the bulky centaurs, ignore the rough fur of the nearby wolves and hounds as it brushes against you, and press your way through to the center of the crowd.  Eventually the throng parts, revealing the embattled combatants.  A snarling wolf, nearly eight feet tall, towers over Urta.  The comparatively diminutive fox-woman is girded in light leather armor and dripping with sweat.  The larger wolf-man is staggering about, and his dark brown fur is matted with blood.\n\n", false);
 
@@ -1599,7 +2292,7 @@ public function gymDesc():void {
 		return;
 	}
 
-	outputText("", true);
+	clearOutput();
 	outputText("Even though Ingnam, your hometown, was a large, prosperous village, you never saw a gym before coming to Tel'Adre.  The structure itself has numerous architectural differences from the surrounding buildings: short, waist-high walls, an arched ceiling supported by simple columns, and a sand-covered floor.  Perhaps the only 'normal' rooms inside are the changing stands and bathrooms, which ", false);
 	if(player.cor < 35) outputText("thankfully ", false);
 	else if(flags[kFLAGS.PC_FETISH] > 0 || player.cor > 80) outputText("unfortunately ", false);
@@ -1674,8 +2367,9 @@ private function gymMenu():void {
 }
 
 private function buyGymLifeTimeMembership():void {
-	outputText("", true);
+	clearOutput();
 	//[Buy LifeTime Membership]
+	if (silly()) outputText("You tell \"<i>Shut up and take my gems!</i>\" as you pull out your gem-pouch. \n\n"); //Shut up and take my gems!
 	outputText("You fish into your pouches and pull out 500 gems, dumping them into the centaur's hands.  Her eyes widen as she turns and trots towards a counter in the back.  She leans over as she counts, giving you a generous view down her low-cut top at the cleavage she barely bothers to conceal.", false);
 	if(player.hasCock()) {
 		outputText("  It brings a flush to your face that has nothing to do with exercise.  Maybe you'll be able to con her into some alone time later?", false);
@@ -1689,9 +2383,9 @@ private function buyGymLifeTimeMembership():void {
 }
 
 private function weightLifting():void {
-	outputText("", true);
+	clearOutput();
 	//Too tired?  Fuck off.
-	if(player.fatigue > 75) {
+	if(player.fatigue > player.maxFatigue() - 25) {
 		outputText("<b>There's no way you could exercise right now - you're exhausted!</b>  ", false);
 		if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) outputText("It'd be better to save your money and come back after you've rested.", false);
 		doNext(telAdreMenu);
@@ -1727,17 +2421,22 @@ private function weightLifting():void {
 	outputText("\n\nDo you want to hit the showers before you head back to camp?", false);
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
-		addButton(0,"\"Showers\"",sexMachine.exploreShowers);
-		addButton(1,"Showers",brooke.repeatChooseShower);
-		addButton(4,"Leave",camp.returnToCampUseOneHour);
+		if (flags[kFLAGS.DISABLED_SEX_MACHINE] == 0) {
+			addButton(0,"\"Showers\"",sexMachine.exploreShowers);
+			addButton(1,"Showers",brooke.repeatChooseShower);
+			addButton(4, "Leave", camp.returnToCampUseOneHour);
+		}
+		else {
+			doYesNo(brooke.repeatChooseShower,camp.returnToCampUseOneHour);
+		}
 	}
 	else doYesNo(sexMachine.exploreShowers,camp.returnToCampUseOneHour);
 }
 
 private function goJogging():void {
-	outputText("", true);
+	clearOutput();
 	//Too tired?  Fuck off.
-	if(player.fatigue > 70) {
+	if(player.fatigue > player.maxFatigue() - 30) {
 		outputText("<b>There's no way you could exercise right now - you're exhausted!</b>  ", false);
 		if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) outputText("It'd be better to save your money and come back after you've rested.", false);
 		doNext(telAdreMenu);
@@ -1822,7 +2521,7 @@ private function goJogging():void {
 
 private function yaraSex(girl:Boolean = true):void {
 	spriteSelect(63);
-	outputText("", true);
+	clearOutput();
 	outputText("Yara makes you comfortable and has you look away while she uses her piercing tools.  It hurts, but she's skilled. Before you know it, your piercing is done!  You move to rise, retaining a bit of modesty", false);
 	if(flags[kFLAGS.PC_FETISH] > 0) outputText(" despite the guilty thrill", false);
 	outputText(".  \"<i>Hold it,</i>\" Yara commands softly, pressing her hand against your " + chestDesc() + " and pushing you back in your chair.  \"<i>Do you think I'll let you get away without some... field testing?</i>\"\n\n", false);
@@ -1836,7 +2535,7 @@ private function yaraSex(girl:Boolean = true):void {
 
 private function letsDoYaraSex(girl:Boolean = true):void {
 	spriteSelect(63);
-	outputText("", true);
+	clearOutput();
 	var x:Number = player.cockThatFits(36);
 	if (flags[kFLAGS.HYPER_HAPPY])
 	{

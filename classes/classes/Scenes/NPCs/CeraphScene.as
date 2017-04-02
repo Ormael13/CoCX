@@ -88,16 +88,16 @@ package classes.Scenes.NPCs
 		{
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291]++;
 			spriteSelect(7);
-			outputText("", true);
+			clearOutput();
 			//UBER-Fullbodypenetration
-			if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR && player.biggestCockArea() > 500 && (player.statusAffectv1(StatusAffects.Exgartuan) == 1 || monk >= 5)) {
+			if (!player.isTaur() && player.biggestCockArea() > 500 && (player.statusAffectv1(StatusAffects.Exgartuan) == 1 || monk >= 5)) {
 				hugeCorruptionForceFuckCeraph();
 				return;
 			}
 			if (player.cockArea(0) <= monster.vaginalCapacity()) {
 				//[Male] Fuck 'Dat Pussah
 				//[lust]
-				if (monster.lust > 99) {
+				if (monster.lust >= monster.eMaxLust()) {
 					outputText("Ignoring her squeals of pleasure, you force Ceraph onto her back, oogling her perky breasts, indecent cock, and soaked cunt.  She looks up at you hungrily, and you have the feeling that on some level you're still giving her what she wants.  Mindful of her demonic wiles, you pull her hands together and use a few tattered strips of cloth to bind them over her head.  Moaning with helpless desire, the demon grinds her crotch against your " + player.leg() + ", spreading her thighs apart into a near split and giving you a world-class view of her juicy purple cunt.\n\n", false);
 				}
 				//[hp]
@@ -146,7 +146,7 @@ package classes.Scenes.NPCs
 			else {
 				//[MALE TOO DAMN BIGGA WIGGA]
 				//[lust] 
-				if (monster.lust > 99) outputText("Ignoring her squeals of pleasure, you force Ceraph onto her back, oogling her perky breasts, indecent cock, and soaked cunt.  She looks up at you hungrily, and you have the feeling that on some level you're still giving her what she wants.  Wary of the demon's wiles, you pull her hands together and use some scraps of cloth to bind them up.  Moaning with helpless desire, the demon grinds her crotch against your " + player.leg() + ", spreading her thighs apart into a near split and giving you a world-class view of her juicy purple cunt.\n\n", false);
+				if (monster.lust >= monster.eMaxLust()) outputText("Ignoring her squeals of pleasure, you force Ceraph onto her back, oogling her perky breasts, indecent cock, and soaked cunt.  She looks up at you hungrily, and you have the feeling that on some level you're still giving her what she wants.  Wary of the demon's wiles, you pull her hands together and use some scraps of cloth to bind them up.  Moaning with helpless desire, the demon grinds her crotch against your " + player.leg() + ", spreading her thighs apart into a near split and giving you a world-class view of her juicy purple cunt.\n\n", false);
 				//[hp] 
 				else outputText("Ignoring her grunts of pain, you force Ceraph onto her back, oogling her perky breasts, limp cock, and hairless cunt.  She looks up at you with disdain, growling at you from the back of her throat. Wary of the demon's abilities, you tie up her hands with a few pieces of tattered cloth.  She seems to like it, judging by her tenting erection and now-glistening gash.  The slut even goes so far as to begin grinding her crotch against you, spreading her thighs wider and wider as she gets off on being restrained.  You're given a perfect view of her enticing purple cunt.\n\n", false);
 
@@ -204,9 +204,9 @@ package classes.Scenes.NPCs
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291]++;
 			player.slimeFeed();
 			spriteSelect(7);
-			outputText("", true);
+			clearOutput();
 			//lust
-			if (monster.lust > 99) outputText("Ignoring her squeals of pleasure, you force Ceraph onto her back, oogling her perky breasts, indecent cock, and soaked cunt.  She looks up at you hungrily, and you have the feeling that on some level you're still giving her what she wants. Wary of the demon's wiles, you pull her hands together and use some tattered strips of cloth to bind them up.  Moaning with helpless desire, the demon grinds her crotch against your " + player.leg() + ", spreading her thighs apart into a near split and giving you a world-class view of her pulsating black demon-cock.\n\n", false);
+			if (monster.lust >= monster.eMaxLust()) outputText("Ignoring her squeals of pleasure, you force Ceraph onto her back, oogling her perky breasts, indecent cock, and soaked cunt.  She looks up at you hungrily, and you have the feeling that on some level you're still giving her what she wants. Wary of the demon's wiles, you pull her hands together and use some tattered strips of cloth to bind them up.  Moaning with helpless desire, the demon grinds her crotch against your " + player.leg() + ", spreading her thighs apart into a near split and giving you a world-class view of her pulsating black demon-cock.\n\n", false);
 			//[hp] 
 			else outputText("Ignoring her grunts of pain, you force Ceraph onto her back, oogling her perky breasts, limp cock, and hairless cunt.  She looks up at you with disdain, growling at you from the back of her throat.  Mindful of the demon's abilities, you tie up her hands with some tattered strips of cloth.  She seems to like it, judging by her tenting erection and now-glistening gash.  The slut even goes so far as to begin grinding her crotch against you, spreading her thighs wider and wider as she gets off on being restrained.  You're given a perfect view of her pulsating black demon-cock.\n\n", false);
 
@@ -258,7 +258,7 @@ package classes.Scenes.NPCs
 //[OH SHIT SON YOU LOST GET EARS PIERCED]
 		private function loseToCeraphAndGetPiercingsInEarsOrSomethingSomehow():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			outputText("Ceraph advances on your ", false);
 			if (player.HP < 1) outputText("prone ", false);
@@ -287,7 +287,7 @@ package classes.Scenes.NPCs
 //[OH SHIT SON MOAR SHIT GETTING PIERCEDEDEDED] – NIPPLEZ GO
 		private function loseToCeraphAnGetPierced2():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			outputText("Ceraph giggles as she closes in on you once again.  Unable to fight back, you lie there as she once again massages your temples, using her magic to paralyze your body.  She's all too happy to build up the suspense as she pulls out a pair of shining black studs, \"<i>Oh, did you want to know what these are going to teach you?  Well, how about I slide them into your ", false);
 			if (player.hasFuckableNipples()) outputText("slut", false);
@@ -314,7 +314,7 @@ package classes.Scenes.NPCs
 //[OH SHIT!  WHY DOES FEN KEEP WIRTING THAT 3RD TIME – CROTCH GO]
 		private function getPiercedByCeraphLoss3():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			outputText("The demoness pulls out a diamond-studded piercing and closes in on you, her cock hard, her pussy moist, and her hips swaying seductively as she advances.  Ceraph gives you a serious look and warns you, \"<i>You know how close you are to being my pet, don't you?  You just need this piercing and a little time to get used to it.  Then if you're good, I'll strip you naked, tie you down, and let you lick me out.  We can even let the imps watch!</i>\"\n\n", false);
 
@@ -368,7 +368,7 @@ package classes.Scenes.NPCs
 //[FINAL ENCOUNTER LEVEL]
 		private function finalEncounterLevelCeraphPiercingButtholeNipples():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			outputText("Ceraph wiggles out from between the bushes, holding a bondage harness and openly eyeing your body.  She suggestively says, \"<i>Well, aren't you just a cute little slave-to-be.  Are you ready to put yourself in your slave harness and join my harem?  I've got a few more piercings I think would look great on you.  Maybe I could give you an oral fixation and a foot fetish.  Wouldn't that be nice?  Or maybe I can just keep you tied up and parade you around Mareth.  You know I'll make sure you love every minute baby, just come put this on.</i>\"\n\n", false);
 
@@ -379,7 +379,7 @@ package classes.Scenes.NPCs
 //[no]
 		private function finalCeraphEncounterChoiceNo():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			outputText("You tell Ceraph no, emphatically, over and over.  She gives you a smirk and says, \"<i>Whatever.  It's only a matter of time.  You'll join me soon, pet.</i>\"\n\n", false);
 
@@ -390,7 +390,7 @@ package classes.Scenes.NPCs
 //[fight]
 		private function finalCeraphEncounterStartFight():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			outputText("You tell Ceraph no, and let her know ", false);
 			if (player.cor <= 50) outputText("you'll stop her devilish scheme", false);
@@ -403,7 +403,7 @@ package classes.Scenes.NPCs
 //[Agree to become Ceraph's Fuckpet Bondage Toy bitch slut]
 		private function agreeToBecomeCeraphsFuckpetBondageToyBitchSlut():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			outputText("At this point, you know she's right.  The desires Ceraph has awakened inside you will never go away.  In spite of the hassle they've caused, you've come to love being so uncontrollably aroused by such humiliating treatment.", false);
 			if (player.hasVagina()) outputText("  Your " + vaginaDescript(0) + " tingles as you wonder how many piercings and fetishes she could fit into your labia.", false);
@@ -439,20 +439,21 @@ package classes.Scenes.NPCs
 //(EPILOGUE)
 		private function agreeToBeABitchPt2():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			outputText("Months pass in pure bliss.  Since adoption into Mistress Ceraph's harem, pet gained over a dozen piercings and nearly twice as many fetishes.  Pet learned to love spanking, and developed the ability to cum just from having " + player.mf("his", "her") + " nipples pinched or being paddled.  Ceraph enjoyed that for a while, but she did eventually tire, and pet was given a fetish for orgasm denial", false);
 			if (player.cockTotal() > 0) outputText(" along with a magical cock-ring", false);
 			outputText(".  Two weeks of drug and bondage induced edging nearly broke pet's mind, but Mistress was nice and let " + player.mf("him", "her") + " cum over and over after getting a new piercing and worshiping her feet for a few hours.\n\n", false);
 
 			outputText("The champion that left Ingnam so long ago is totally unrecognizable, body and soul.  The spirit that once burned bright with the desire to save the innocents of the village has been warped and twisted beyond repair.  The once-champion known only as 'pet', not even worthy of a proper name, spends all " + player.mf("his", "her") + " time lusting after Mistress Ceraph, taking part in her depraved orgies and willingly submitting to any kinks or debaucheries that are presented to " + player.mf("him", "her") + ".  Pet's life of individuality and choice is over, all that remains is pleasure and pain.", false);
+
 			getGame().gameOver();
 		}
 
 //[Initial Meeting Text]
 		private function ceraphFirstTime():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(88);
 			outputText("A cute goblin steps out of the bushes, holding a pair of green earrings up to the light.  She politely asks, \"<i>Hey cutey!  I've got some spare earrings I made the other day.  I was wondering if you want them?  As you can see, my ears are already full, and my daughters are a bunch of ungrateful cunts.</i>\"\n\n", false);
 
@@ -465,7 +466,7 @@ package classes.Scenes.NPCs
 //[No]
 		private function ceraphFirstTimeDecline():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			outputText("You decline, informing the petite girl you have no interest in her earrings.  She shrugs and laughs, her form distorting as it grows taller, twisting as her skin lightens, her breasts bulge, and a pair of cute horns breaks out of the skin of her forehead.  She pockets the earrings and stretches, revealing a glistening demon-snatch capped with a modest cock growing from where her clit should be.\n\n", false);
 
@@ -479,7 +480,7 @@ package classes.Scenes.NPCs
 //[Yes]
 		private function ceraphFirstTimeVolunteer():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			outputText("The goblin motions for you to bend over, and you do.  She holds the earrings up on your ears, getting them aligned just right.  ", false);
 			if (player.earsPierced > 0) outputText("Miraculously, your old earrings just fall out.  ", false);
@@ -501,7 +502,7 @@ package classes.Scenes.NPCs
 //[PC 'BEAT OFF' Ceraph the first time...]
 		private function ceraphFirstTimeRepeat():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			outputText("Ceraph saunters out of the bushes and gives you a disapproving look, \"<i>I tried this the easy way.  Now we're doing it the hard way.</i>\"\n\n", false);
 
@@ -520,7 +521,7 @@ package classes.Scenes.NPCs
 //[PC @ 2 piercings, Ceraph offers 3rd]
 		private function level3CeraphOffer():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			outputText("Ceraph once again appears to you, licking her lips and repeatedly swatting a riding crop against her thigh.  She asks, \"<i>Have you come to love the exposure, the helplessness, of being nude and restrained?  Does your body ache for me to turn you into a bound love-pet yet?  We could keep going down this road my pet-to-be, just one more piercing and then you'll be ready.</i>\"\n\n", false);
 			outputText("Do you let her pierce you?", false);
@@ -531,7 +532,7 @@ package classes.Scenes.NPCs
 //[No]
 		private function level3CeraphOfferNo():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			outputText("You let Ceraph know that you refuse to let her violate your body and mind in such a way.  She shrugs nonchalantly and tugs on the crop, stretching it into a whip that bursts into flames.\n\n", false);
 			outputText("\"<i>Mortals always want to do things the hard way,</i>\" she sighs.\n\n", false);
@@ -542,7 +543,7 @@ package classes.Scenes.NPCs
 //[YES OH YES]
 		private function yesOHGODYESPIERCELEVEL3():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			outputText("You nod, biting your lip anxiously and undoing your armor to give her better access to your body.  The demoness pulls out a diamond-studded piercing and closes in on you, her cock hard, her pussy moist, and her hips swaying seductively as she advances.  Ceraph gives you a serious look and warns you, \"<i>You know how close you are to being my pet, don't you?  You just need this piercing and a little time to get used to it.  Then if you're good I'll strip you naked, tie you down, and let you lick me out.  We can even let the imps watch!</i>\"\n\n", false);
 			outputText("The idea turns you on immensely, and you pant and gasp as ", false);
@@ -649,7 +650,7 @@ package classes.Scenes.NPCs
 			}
 			//Normal stuff here
 			spriteSelect(7);
-			outputText("", true);
+			clearOutput();
 			if (monster.HP < 1) outputText("Ceraph collapses in a beaten, bloody heap.", false);
 			else outputText("Ceraph masturbates futilely, too driven by desire to fight.", false);
 			if (player.lust >= 33 && player.gender > 0) {
@@ -699,7 +700,7 @@ package classes.Scenes.NPCs
 		{
 			player.slimeFeed();
 			spriteSelect(7);
-			outputText("", true);
+			clearOutput();
 			if ((!getGame().inCombat) && flags[kFLAGS.PC_FETISH] < 3) outputText("The demoness touches your forehead, and suddenly your mind is awash with fetishes!  Judging by the playful look she has, it's temporary, and you play along.  ", false);
 			outputText("Ceraph throws her head back and laughs as you ", false);
 			if (player.HP < 1) outputText("slump down, defeated", false);
@@ -746,7 +747,7 @@ package classes.Scenes.NPCs
 		private function hugeCorruptionForceFuckCeraph():void
 		{
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291] += 2;
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			var x:Number = player.biggestCockIndex();
 
@@ -829,7 +830,7 @@ package classes.Scenes.NPCs
 
 		private function ceraphsNiceOffer():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			if (flags[kFLAGS.PC_FETISH] > 0) {
 				outputText("Ceraph touches your forehead, and it feels like her claws are raking through your brain, plowing through the surface of your thoughts.  She pulls away, leaving you feeling a little dazed.  You blink and mentally go over your fetishes - ", false);
@@ -858,7 +859,7 @@ package classes.Scenes.NPCs
 
 		public function friendlyNeighborhoodSpiderManCeraph():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			outputText("While exploring, a sudden compulsion to strip naked runs through your body, ", false);
 			if (player.cor > 66) outputText("and without a second thought you disrobe, tossing your " + player.armorName + " to the side.  It thumps heavily in the dry mountain dust.", false);
@@ -899,7 +900,7 @@ package classes.Scenes.NPCs
 //[Run] → 
 		private function runFromCeraphsNiceDeal():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			outputText("You ", false);
 			if (player.cor > 66) outputText("grab your equipment and ", false);
@@ -912,7 +913,7 @@ package classes.Scenes.NPCs
 //[Trade] 
 		private function tradeCeraphSomething():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			var liqueur:Function =null;
 			var endowment:Function =null;
@@ -963,7 +964,7 @@ package classes.Scenes.NPCs
 //[Trade Bimbo Liquer]
 		private function tradeCeraphBimboLiqueur():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			outputText("Ceraph grins as wide as the Cheshire Cat, groaning with happiness as she pulls her dripping tail from her snatch.  The pungent scent of her lusty, tainted puss hangs in the air while her tail extends towards you, looping around the liquer's top and pulling it from your pouch.  Ceraph plucks the bottle from her lust-drenched tail with great care and undoes the top.  She gives the liquer a tiny sniff, but it rocks her back on her heels all the same.  The demon starts giggling as she corks it, smiling with a slightly dopy look.  \"<i>Wheeeeeewww... heheheheee.. that stuff has got some kick!</i>\"\n\n", false);
 
@@ -978,7 +979,7 @@ package classes.Scenes.NPCs
 //[Trade Genitals]
 		private function tradeCeraphCrotchityBits():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			//(EXGARTUAN PISSED) 
 			if (player.statusAffectv1(StatusAffects.Exgartuan) == 1) {
@@ -1075,7 +1076,7 @@ package classes.Scenes.NPCs
 //[No]
 		private function bailBeforeCeraphYoinksYourNads():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			outputText("You let her know that you've changed your mind and take off before Ceraph can try to take your beloved body parts.  You hear her laugh and tease as you run, yelling, \"<i>What, can't handle the thought of an Omnibus touching your fun bits?  Poor baby!</i>\"\n\n", false);
 			doNext(camp.returnToCampUseOneHour);
@@ -1084,7 +1085,7 @@ package classes.Scenes.NPCs
 //[Yes]
 		private function giveUpYourBallsOrWhateverForLessFetishes():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(7);
 			var x:Number = 0;
 			outputText("You hold still, dreading this moment but knowing all-too well that you'd have to give something up to get her touch out of your mind.  ", false);
@@ -1401,7 +1402,7 @@ package classes.Scenes.NPCs
 			spriteSelect(7);
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = 0;
-			outputText("", true);
+			clearOutput();
 			outputText("Completely defeated, the haughty demoness lies face down in the dirt, ", false);
 			if (monster.HP < 1) outputText("her tail hanging limp between her legs.  She spits a wad of bloody saliva and says, \"<i>What's the matter?  Beat a girl senseless and lose your nerve?  I thought you were going to rape me.</i>\"", false);
 			else outputText("her rump up in the air while her tail plunges violently into her cunt over and over again.  She moans up to you, \"<i>What's the matter?  Are you nervous about putting it inside me?  Come on... rape me already!  Punish my gushing-wet cunt with your divine rod!</i>\"", false);

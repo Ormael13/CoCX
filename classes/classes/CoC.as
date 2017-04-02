@@ -1,32 +1,62 @@
+/* 
+ CoC Main File - This is what loads when the game begins. If you want to start understanding the structure of CoC,
+ this is the place to start.
+ First, we import all the classes from many different files across the codebase. It would be wise not to alter the
+ order of these imports until more is known about what needs to load and when.
+*/
+
 ﻿package classes
 {
 	// BREAKING ALL THE RULES.
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.Dungeons.D3.D3;
+	import classes.GlobalFlags.kFLAGS; // This file contains most of the persistent gamestate flags.
+	import classes.GlobalFlags.kGAMECLASS; // This file creates the gameclass that the game will run within.
+	import classes.GlobalFlags.kACHIEVEMENTS; // This file creates the flags for the achievements system.
+	import classes.Scenes.Areas.Beach.Gorgon;
+	import classes.Scenes.Dungeons.DungeonEngine; // This file creates all the dungeons, their rooms, and their completion states except for D3. This also includes cabin code. See file for more details.
+	import classes.Scenes.Dungeons.D3.D3; // Likely due to D3's complexity, that dungeon is split out separately.
 
-	import classes.CoC_Settings;
+	import classes.CoC_Settings; // This file creates basic variables for CoC itself (debug flags, buffers, button manipulation)
 
-	import classes.AssClass;
-	import classes.BreastRowClass;
-	import classes.Items.*;
-	import classes.PerkLib;
+/* 
+One very important thing to know about descriptions in this game is that many words are based on hidden integer values. 
+These integers are compared to tables or queried directly to get the words used for particular parts of descriptions. For instance,
+AssClass below has variables for wetness, looseness, fullness, and virginity. You'll often find little tables like this
+scattered through the code:
+butt looseness
+		0 - virgin
+		1 - normal
+		2 - loose
+		3 - very loose
+		4 - gaping
+		5 - monstrous
+Tracking down a full list of description variables, how their integer values translate to descriptions, and how to call them
+would be a very useful task for anyone who wants to extend content using variables.
+Further complicating this is that the code will also sometimes have a randomized list of words for certain things just to keep 
+the text from being too boring.
+*/
 
-	import classes.Player;
-	import classes.Cock;
-	import classes.Creature;
-	import classes.ItemSlotClass;
-	import classes.PerkClass;
-	import classes.StatusAffectClass;
-	import classes.VaginaClass;
-	import classes.ImageManager;
-	import classes.internals.Utils;
+	import classes.AssClass; // Creates the class that holds ass-related variables as described above. 
+	import classes.BreastRowClass; // Creates the class that holds breast-related variables.
+	import classes.Items.*; // This pulls in all the files in the Items folder. Basically any inventory item in the game
+	import classes.PerkLib; // This instantiates the IDs, names, and descriptions of perks. Does NOT have any code related to the actual perk! Use the ID field to search the code base for that. 
+
+	import classes.Player; // Creates a player with all that entails. See file for more info. Also see Creature.as.
+	import classes.Cock; // Creates the class that holds cock-related variables. Also has several functions for growing and shrinking cocks.
+	import classes.Creature; // Creates basic information for all characters in CoC. Contains many descriptors.
+	import classes.ItemSlotClass; // Creates item slots
+	import classes.PerkClass; // The function in this file pulls perk information from PerkLib for later querying
+	import classes.StatusAffectClass; // Similar to PerkClass, but for status effects in combat.
+	import classes.VaginaClass; // Creates vaginas
+	import classes.ImageManager; // Image voodoo for sprites
+	import classes.internals.Utils; // This file contains much voodoo for randomizing item arrays and other useful functions.
 
 
 	// This line not necessary, but added because I'm pedantic like that.
 	import classes.InputManager;
 
-	import classes.Parser.Parser;
+	import classes.Parser.Parser; // Much text voodoo for how to make all the description/pronoun/etc replacement work.
+
+// All the files below with Scenes loads the main content for the game.
 
 	import classes.Scenes.*;
 	import classes.Scenes.Areas.*;
@@ -45,13 +75,15 @@
 	import classes.Scenes.Places.*;
 	import classes.Scenes.Places.TelAdre.*;
 	import classes.Scenes.Quests.*;
+	//import coc.view.MainView; // Creates the framework for the game screen.
 	import coc.view.MainView;
-
-	import coc.model.GameModel;
-	import coc.model.TimeModel;
+	import coc.model.GameModel; // Uncertain.
+	import coc.model.TimeModel; // Various time-related functions for setting the game clock and querying its state.
 
 	// Class based content? In my CoC?! It's more likely than you think!
 	import classes.content.*;
+	
+	// All the imports below are for Flash.
 	import fl.controls.ComboBox;
 	import fl.data.DataProvider;
 	import flash.display.Loader;
@@ -73,10 +105,14 @@
 	/****
 		classes.CoC: The Document class of Corruption of the Champions.
 	****/
+	
+	// This class instantiates the game. If you create a new place/location/scene you'll likely have to add it into here.
+	// Add in descriptions for the include statements. Many of the description text code is inside of these.
+	// Suggest moving or removing old comments referencing things that aren't needed anymore.
 		
 	[SWF( width="1000", height="800", pageTitle="Corruption of Champions" )]
 
-	public class CoC extends MovieClip
+	public class CoC extends MovieClip 
 	{
 
 		// Include the functions. ALL THE FUNCTIONS
@@ -104,7 +140,6 @@
 		include "../../includes/engineCore.as";
 
 		// Lots of constants
-		//include "../../includes/flagDefs.as";
 		include "../../includes/appearanceDefs.as";
 
 		//Any classes that need to be made aware when the game is saved or loaded can add themselves to this array using saveAwareAdd.
@@ -140,7 +175,11 @@
 		public var consumables:ConsumableLib = new ConsumableLib();
 		public var useables:UseableLib;
 		public var weapons:WeaponLib = new WeaponLib();
+		public var weaponsrange:WeaponRangeLib = new WeaponRangeLib();
 		public var armors:ArmorLib = new ArmorLib();
+		public var undergarments:UndergarmentLib = new UndergarmentLib();
+		public var jewelries:JewelryLib = new JewelryLib();
+		public var shields:ShieldLib = new ShieldLib();
 		public var miscItems:MiscItemLib = new MiscItemLib();
 		// Scenes/
 		public var camp:Camp = new Camp(campInitialize);
@@ -149,31 +188,44 @@
 		public var inventory:Inventory = new Inventory(saves);
 		public var masturbation:Masturbation = new Masturbation();
 		// Scenes/Areas/
+		public var beach:Beach = new Beach();
+		public var blightridge:BlightRidge = new BlightRidge();
 		public var bog:Bog = new Bog();
+		public var deepsea:DeepSea = new DeepSea();
 		public var desert:Desert = new Desert();
 		public var forest:Forest = new Forest();
+		public var glacialRift:GlacialRift = new GlacialRift();
 		public var highMountains:HighMountains = new HighMountains();
 		public var lake:Lake = new Lake();
 		public var mountain:Mountain = new Mountain();
+		public var ocean:Ocean = new Ocean();
 		public var plains:Plains = new Plains();
 		public var swamp:Swamp = new Swamp();
+		public var volcanicCrag:VolcanicCrag = new VolcanicCrag();
 		// Scenes/Dungeons
 		public var brigidScene:BrigidScene = new BrigidScene();
 		public var d3:D3 = new D3();
 		// Scenes/Explore/
 		public var gargoyle:Gargoyle = new Gargoyle();
 		public var lumi:Lumi = new Lumi();
+		public var giacomoShop:Giacomo = new Giacomo();
 		// Scenes/Monsters/
 		public var goblinScene:GoblinScene = new GoblinScene();
 		public var impScene:ImpScene = new ImpScene();
 		public var goblinAssassinScene:GoblinAssassinScene = new GoblinAssassinScene();
+		public var goblinWarriorScene:GoblinWarriorScene = new GoblinWarriorScene();
+		public var goblinShamanScene:GoblinShamanScene = new GoblinShamanScene();
+		public var goblinElderScene:GoblinElderScene = new GoblinElderScene();
 		// Scenes/NPC/
 		public var amilyScene:AmilyScene = new AmilyScene();
 		public var anemoneScene:AnemoneScene = new AnemoneScene();
 		public var arianScene:ArianScene = new ArianScene();
+		public var ayaneFollower:AyaneFollower = new AyaneFollower();
 		public var ceraphScene:CeraphScene = new CeraphScene();
 		public var ceraphFollowerScene:CeraphFollowerScene = new CeraphFollowerScene();
 		public var emberScene:EmberScene = new EmberScene();
+		public var etnaScene:EtnaFollower = new EtnaFollower();
+		public var evangelineFollower:EvangelineFollower = new EvangelineFollower();
 		public var exgartuan:Exgartuan = new Exgartuan();
 		public var helFollower:HelFollower = new HelFollower();
 		public var helScene:HelScene = new HelScene();
@@ -183,8 +235,10 @@
 		public var isabellaFollowerScene:IsabellaFollowerScene = new IsabellaFollowerScene();
 		public var izmaScene:IzmaScene = new IzmaScene();
 		public var jojoScene:JojoScene = new JojoScene();
+		public var joyScene:JoyScene = new JoyScene();
 		public var kihaFollower:KihaFollower = new KihaFollower();
 		public var kihaScene:KihaScene = new KihaScene();
+		public var kindraFollower:KindraFollower = new KindraFollower();
 		public var latexGirl:LatexGirl = new LatexGirl();
 		public var marbleScene:MarbleScene = new MarbleScene();
 		public var marblePurification:MarblePurification = new MarblePurification();
@@ -208,31 +262,43 @@
 		public var farm:Farm = new Farm();
 		public var owca:Owca = new Owca();
 		public var telAdre:TelAdre = new TelAdre();
+		public var dungeons:DungeonEngine = new DungeonEngine();
+		public var ingnam:Ingnam = new Ingnam();
+		public var prison:Prison = new Prison();
+		public var hexindao:HeXinDao = new HeXinDao();
+		public var kitsuneScene:KitsuneScene = new KitsuneScene();
 		// Scenes/Quests/
 		public var urtaQuest:UrtaQuest = new UrtaQuest();
-
+		
+		public var debugMenu:DebugMenu = new DebugMenu();
+		
+		public var soulforce:Soulforce = new Soulforce();
+		public var metamorph:Metamorph = new Metamorph();
+		public var crafting:Crafting = new Crafting();
+		
 		// Force updates in Pepper Flash ahuehue
 		private var _updateHack:Sprite = new Sprite();
-
+		
+		public var mainViewManager:MainViewManager = new MainViewManager();
 		// Other scenes
 
 		include "../../includes/april_fools.as";
 
 		include "../../includes/dreams.as";
-		include "../../includes/dungeon2Supplimental.as";
-		include "../../includes/dungeonCore.as";
+		//include "../../includes/dungeon2Supplimental.as";
+		//include "../../includes/dungeonCore.as";
 //No longer needed. This file has been chopped up and spread throughout the codebase:		include "../../includes/dungeonEvents.as";
-		include "../../includes/dungeonHelSupplimental.as";
-		include "../../includes/dungeonSandwitch.as";
+		//include "../../includes/dungeonHelSupplimental.as";
+		//include "../../includes/dungeonSandwitch.as";
 		include "../../includes/fera.as";
 //Moved to Scenes/Masturbation.as		include "../../includes/masturbation.as";
 		include "../../includes/pregnancy.as";
 		include "../../includes/runa.as";
-		include "../../includes/symGear.as";
+//No longer needed. This file has been split:		include "../../includes/symGear.as";
 		include "../../includes/tamaniDildo.as";
 		include "../../includes/thanksgiving.as";
 		include "../../includes/valentines.as";
-		include "../../includes/worms.as";
+//Moved to Scenes/Areas/Mountain		include "../../includes/worms.as";
 		include "../../includes/xmas_bitch.as";
 		include "../../includes/xmas_gats_not_an_angel.as";
 		include "../../includes/xmas_jack_frost.as";
@@ -260,6 +326,8 @@
 		public var debug:Boolean;
 		public var ver:String;
 		public var version:String;
+		public var versionID:uint = 0;
+		public var permObjVersionID:uint = 0;
 		public var mobile:Boolean;
 		public var images:ImageManager;
 		public var player:Player;
@@ -268,6 +336,7 @@
 		public var monster:Monster;
 //No longer used:		public var itemSwapping:Boolean;
 		public var flags:DefaultDict;
+		public var achievements:DefaultDict;
 		private var gameState:int;
 //Gone, last use replaced by newRound arg for combatMenu:		public var menuLoc:Number;
 //No longer used:		public var itemSubMenu:Boolean;
@@ -297,7 +366,8 @@
 		public var testingBlockExiting:Boolean;
 
 		public var kFLAGS_REF:*;
-		
+		public var kACHIEVEMENTS_REF:*;
+
 		public function get inCombat():Boolean { return gameState == 1; }
 		
 		public function set inCombat(value:Boolean):void { gameState = (value ? 1 : 0); }
@@ -325,6 +395,7 @@
 			useables = new UseableLib();
 			
 			this.kFLAGS_REF = kFLAGS; 
+			this.kACHIEVEMENTS_REF = kACHIEVEMENTS; 
 			// cheat for the parser to be able to find kFLAGS
 			// If you're not the parser, DON'T USE THIS
 
@@ -338,7 +409,7 @@
 			this.parser = new Parser(this, CoC_Settings);
 
 			this.model = new GameModel();
-			this.mainView = new MainView( this.model );
+			this.mainView = new MainView(/*this.model*/);
 			this.mainView.name = "mainView";
 			this.stage.addChild( this.mainView );
 
@@ -419,8 +490,10 @@
 			//The extreme flag state array. This needs to go. Holds information about everything, whether it be certain attacks for NPCs 
 			//or state information to do with the game. 
 			flags = new DefaultDict();
-			model.flags = flags;
-
+			//model.flags = flags;
+			
+			achievements = new DefaultDict();
+			//model.achievements = achievements;
 
 			///Used everywhere to establish what the current game state is
 			// Key system variables
@@ -541,8 +614,11 @@
 			oldStats.oldCor  = 0;
 			oldStats.oldHP   = 0;
 			oldStats.oldLust = 0;
-
-			model.maxHP = maxHP;
+			oldStats.oldFatigue = 0;
+			oldStats.oldSoulforce = 0;
+			oldStats.oldHunger = 0;
+			
+			//model.maxHP = maxHP;
 
 			// ******************************************************************************************
 

@@ -30,10 +30,11 @@ package classes.Items.Consumables
 			var rdtCock:Function	= (game.player.cockTotal() > 0 && game.player.biggestCockArea() > 6 ? reductoCock : null);
 			var rdtHips:Function	= (game.player.hipRating > 2 ? reductoHips : null);
 			var rdtNipples:Function	= (game.player.nippleLength > 0.25 ? reductoNipples : null);
+			var rdtHorns:Function	= (game.player.horns > 2 ? shrinkHorns : null);
 			clearOutput();
 			outputText("You ponder the paste in your hand and wonder what part of your body you would like to shrink.  What will you use it on?");
 			game.choices("Balls", rdtBalls, "Breasts", rdtBreasts, "Butt", rdtButt, "Clit", rdtClit, "Cock", rdtCock,
-				"Hips", rdtHips, "Nipples", rdtNipples, "", null, "", null, "Nevermind", reductoCancel);
+				"Hips", rdtHips, "Nipples", rdtNipples, "Horns", rdtHorns, "", null, "Nevermind", reductoCancel);
 			return(true);
 		}
 		
@@ -149,6 +150,13 @@ package classes.Items.Consumables
 				game.player.nippleLength /= 2;
 			}
 			game.dynStats("sen", -5, "lus", -5);
+			game.inventory.itemGoNext();
+		}
+		
+		public function shrinkHorns():void {
+			outputText("You doubt if the reducto is going to work but you apply the foul-smelling paste all over your horns anyways.\n\n");
+			outputText("Incredibly, it works and you can feel your horns receding by an inch.")
+			game.player.horns -= 1;
 			game.inventory.itemGoNext();
 		}
 		

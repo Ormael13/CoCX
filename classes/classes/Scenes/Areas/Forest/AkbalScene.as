@@ -10,6 +10,8 @@ package classes.Scenes.Areas.Forest
 
 	public class AkbalScene extends BaseContent
 	{
+		
+		
 		public function AkbalScene()
 		{
 		}
@@ -29,7 +31,7 @@ package classes.Scenes.Areas.Forest
 			} else //[Victory via Lust]
 			{
 				outputText("Akbal falls to the ground, unable to go on. Yet a growl still rumbles in his chest, and you quickly recognize the submissive gesture when he bows his head, his cat belly hugging the ground.  His body begins shifting, and soon he has a vaguely humanoid form. You assume this is the form he uses for sex, as his lust is out of control.\n\n", true);
-				if (player.lust >= 33 && player.gender > 0)
+				if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0)
 				{
 					outputText("You walk around Akbal's beaten and lust crazed form with a smile on your face. The demon's growl continues as he awaits your judgment.", false);
 					var vagoo:Function =null;
@@ -57,7 +59,7 @@ package classes.Scenes.Areas.Forest
 		public function akbalWon(hpVictory:Boolean,pcCameWorms:Boolean):void{
 			flags[kFLAGS.AKBAL_SUBMISSION_STATE] = -1;
 			flags[kFLAGS.AKBAL_BITCH_Q] = 0;
-			outputText("", true);
+			clearOutput();
 			if(pcCameWorms){
 				outputText("\n\nYour foe doesn't seem disgusted enough to leave...");
 				doNext(loseToAckballllllz);
@@ -72,7 +74,7 @@ package classes.Scenes.Areas.Forest
 		private function rapeAkbalForcedFemaleOral():void
 		{
 			flags[kFLAGS.AKBAL_BITCH_Q]++;
-			outputText("", true);
+			clearOutput();
 			//Naga RAPPUUUUUU
 			if (player.isNaga())
 			{
@@ -139,7 +141,7 @@ package classes.Scenes.Areas.Forest
 			var primary:Number = player.cockThatFits(50);
 			if (primary < 0)
 				primary = 0;
-			outputText("", true);
+			clearOutput();
 			//Naga RAPPUUUUUU
 			if (player.lowerBody == LOWER_BODY_TYPE_NAGA)
 			{
@@ -215,7 +217,7 @@ package classes.Scenes.Areas.Forest
 					//END NAGA STUFF
 			}
 			//Centaur RAPPUUUUU
-			else if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR)
+			else if (player.isTaur())
 			{
 				outputText("You roughly grab the scruff of the demon's neck, aiming a gut crushing blow to his stomach and causing him to call out in pain.\n\n", false);
 
@@ -230,7 +232,7 @@ package classes.Scenes.Areas.Forest
 					{
 						outputText("Akbal snarls pitifully as you shove him stomach down against a log.  Your " + cockDescript(primary) + " leaks at the thought of bringing this \"god\" down a notch .  At your command he arches his back and lifts his tail, giving you a perfect view of his tight pucker.  From the looks of it nothing has ever even touched the tightly sealed rim.  As you lightly tap it with your finger it flinches, becoming even tighter as Akbal's body jerks away in fear.\n\n", false);
 
-						outputText("You rear up, standing on two legs for a moment before your hooves fall to the ground, Akbal's head between your front legs with his hair tickling your belly.  You give a few experimental thrusts.  The first one causes your " + cockDescript(primary) + " to slide up Akbal's upturned cheeks, making him cringe.  The second one, however, catches.\n\n", false);
+						outputText("You rear up, standing on hind legs for a moment before your front legs fall to the ground, Akbal's head between them with his hair tickling your belly.  You give a few experimental thrusts.  The first one causes your " + cockDescript(primary) + " to slide up Akbal's upturned cheeks, making him cringe.  The second one, however, catches.\n\n", false);
 
 						outputText("The virginally-tight hole clamps shut and Akbal hisses in pain as you force him open.  In no time at all you're sawing your " + cockDescript(primary) + " in and out of the demon's virginally-tight hole, relishing in the way it quivers and squirms around your embedded " + cockDescript(primary) + ".  The sounds coming from Akbal's throat are varied but include many unwillingly pleased groans.  He's obviously liking this more  than he's willing to admit.\n\n", false);
 					}
@@ -239,7 +241,7 @@ package classes.Scenes.Areas.Forest
 					{
 						outputText("Akbal snarls pitifully as you shove him stomach down against a log.  Your " + cockDescript(primary) + " leaks at the thought of bringing this \"god\" down a notch.  At your command he arches his back and lifts his tail, giving you a perfect view of his tight pucker.  From the looks of it nothing has ever even touched the tightly sealed rim.  As you lightly tap it with your finger it flinches, becoming even tighter as Akbal's body jerks away in fear.\n\n", false);
 
-						outputText("You rear up, standing on two legs for a moment before your hooves fall to the ground, Akbal's head between your legs tickling your belly.  You give a few experimental thrusts.  The first one causes your " + cockDescript(primary) + " to slide up Akbal's upturned cheeks, making him cringe.  The second one, however, catches.\n\n", false);
+						outputText("You rear up, standing on hind legs for a moment before your front legs fall to the ground, Akbal's head between them with his hair tickling your belly.  You give a few experimental thrusts.  The first one causes your " + cockDescript(primary) + " to slide up Akbal's upturned cheeks, making him cringe.  The second one, however, catches.\n\n", false);
 
 						outputText("As you shove your " + cockDescript(primary) + " forward into his virginally-tight pucker you are not surprised to find your " + cockDescript(primary) + " barely able to breach the tightly sealed walls.  Grunting with effort you slowly inch forward, Akbal howling and squirming beneath you as he is taken without regard for his own pleasure.\n\n", false);
 
@@ -250,7 +252,7 @@ package classes.Scenes.Areas.Forest
 					{
 						outputText("Akbal snarls pitifully as you shove him stomach down against a log. Your " + cockDescript(primary) + " leaks at the thought of bringing this \"god\" down a notch .  At your command he arches his back and lifts his tail, giving you a perfect view of his tight pucker.  From the looks of it nothing has ever even touched the tightly sealed rim.  As you lightly tap it with your finger it flinches, becoming even tighter as Akbal's body jerks away in fear.  There's no way in hell your " + cockDescript(primary) + " can fit inside something so incredibly tight but... since when has that stopped you?\n\n", false);
 
-						outputText("You rear up, standing on two legs for a moment before your hooves fall to the ground, Akbal's head between your legs, his hair tickling your belly.  You give a few experimental thrusts.  The first one causes your " + cockDescript(primary) + " to slide up Akbal's upturned cheeks, making him cringe.  The second one, however, catches.\n\n", false);
+						outputText("You rear up, standing on hind legs for a moment before your front legs fall to the ground, Akbal's head between them with his hair tickling your belly.  You give a few experimental thrusts.  The first one causes your " + cockDescript(primary) + " to slide up Akbal's upturned cheeks, making him cringe.  The second one, however, catches.\n\n", false);
 
 						outputText("The demon wines and wraps his arms around your front legs, pulling himself away from the burning pressure of your " + cockDescript(primary) + ".  His voice breaks as you invade his clenching sphincter, forcibly stretching Akbal's tight pink hole to a dangerous degree.  All too soon you are halted, barely able to fit more than a foot of your huge cock into Akbal's virginally-tight hole.  Deciding that's good enough you pull out and push forward, meeting the same resistance as before.\n\n", false);
 
@@ -364,7 +366,7 @@ package classes.Scenes.Areas.Forest
 		private function girlsRapeAkbal():void
 		{
 			flags[kFLAGS.AKBAL_BITCH_Q]++;
-			outputText("", true);
+			clearOutput();
 			outputText("You smirk to yourself quietly as the so called \"God of Terrestrial Fire\" lays in a twitching heap on the ground, his flesh squirming as he shifts into his more humanoid form. Removing your " + player.armorName + ", your hand lowers to your feminine slit, pondering how to make use of him.\n\n", false);
 			//{If Centaur}
 			outputText(images.showImage("akbal-deepwoods-female-bindakbal"));
@@ -449,7 +451,7 @@ package classes.Scenes.Areas.Forest
 
 		private function girlsRapeAkbalPart2():void
 		{
-			outputText("", true);
+			clearOutput();
 			kGAMECLASS.hideUpDown();
 			//Centaur
 			outputText(images.showImage("akbal-deepwoods-female-taur-bindakbal"));
@@ -593,7 +595,7 @@ package classes.Scenes.Areas.Forest
 		private function loseToAckballllllz():void
 		{
 			//[Defeat via Lust]
-			if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR)
+			if (!player.isTaur())
 			{
 				outputText(images.showImage("akbal-deepwoods-losslust-analed"));
 				outputText("You fall to your knees and begin to feverishly masturbate.  Akbal rises onto his two hind legs, his body shifting into a more humanoid form as he stands.  His long cock swings ominously between his legs as he walks towards you.  The first thing he does is pull his massive 15-inch cock to your lips, slapping the shaft against your chin.\n\n", false);
@@ -601,7 +603,7 @@ package classes.Scenes.Areas.Forest
 				outputText("\"<i>Defiance repaid,</i>\" is all you hear from the chorus of voices in your head as Akbal displays his massive length to you.  Your eyes widen in horror, counting a dozen wicked-looking barbs on the head of his overtly thick and over-sized cock.\n\n", false);
 			}
 			//Centaurs R SPECIALZ
-			else if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR)
+			else if (player.isTaur())
 			{
 				outputText(images.showImage("akbal-deepwoods-losslust-taur-analed"));
 				outputText("You stumble like a drunken pony as your lust goes into the red zone and you know in the pit of your stomach that you are at this wicked demon's mercy.\n\n", false);
@@ -706,7 +708,7 @@ package classes.Scenes.Areas.Forest
 				ackbalRepeatAfterLoss();
 				return;
 			}
-			outputText("", true);
+			clearOutput();
 			//(Player should be level 4 or greater before encounter
 			//chance is activated)
 			outputText("As you are walking through the forest, a twig suddenly snaps overhead.  You quickly look up towards the source of the noise, only to be met by a pair of glowing emerald eyes hidden in the shadowed canopy of a tree.  A demonic force sweeps over you, keeping you frozen in place as a single jaguar paw emerges from the darkness.  The graceful killer stalks across the branch of its tree and soon is fully exposed to you.  Bathed in the sunlight filtering through the trees overhead, the creature holds you within its gaze – a gaze far too intelligent to belong to a mere wild animal.  A chorus of whispering voices tickles your ear, but too quietly for you to make out what is being said.\n\n", false);
@@ -726,7 +728,7 @@ package classes.Scenes.Areas.Forest
 		private function superAkbalioTalk():void
 		{
 			spriteSelect(2);
-			outputText("", true);
+			clearOutput();
 			outputText("After a few moments of silence you ask, \"<i>What do you mean, 'submit'?</i>\" Akbal grins, revealing a row of wicked ivory teeth as he opens his mouth. You suddenly feel the demon's powerful body pinning you down, a wide tongue licking your neck and claws tickling your back in a way that is both horrifying and sensual. Yet after a moment of taking it in, you realize that he is still there in front of you, unmoved and grinning. You can guess what the image means: he wants you to become his mate for a day to make up for invading his territory.  What do you do?\n\n", false);
 
 			//Submit / Fight
@@ -737,7 +739,7 @@ package classes.Scenes.Areas.Forest
 		private function repeatAkbalPostSubmission():void
 		{
 			spriteSelect(2);
-			outputText("", true);
+			clearOutput();
 			outputText("As you walk through the forest, you hear a purring coming from behind you.  Turning around reveals that Akbal has come to find you.  He uses his head to push you in the direction of his territory, obviously wanting to dominate you again.\n\n", false);
 			outputText("What do you do?", false);
 			//Submit / Deny / Fight
@@ -748,7 +750,7 @@ package classes.Scenes.Areas.Forest
 		private function akbalDeny():void
 		{
 			spriteSelect(2);
-			outputText("", true);
+			clearOutput();
 			outputText("You shake your head and rub the lust-filled jaguar behind the ear as you tell him you're busy.  The demon's eyes roll, and he licks your " + player.leg() + " before his eyes find an imp in the trees above the two of you.\n\n", false);
 			outputText("Knowing he's found a new toy, Akbal allows you to leave unmolested.", false);
 			doNext(camp.returnToCampUseOneHour);
@@ -758,10 +760,10 @@ package classes.Scenes.Areas.Forest
 		private function ackbalRepeatAfterWin():void
 		{
 			spriteSelect(2);
-			outputText("", true);
+			clearOutput();
 			outputText("As you walk through the forest, you hear a snarl and look up just in time to dodge a surprise attack by the jaguar demon, Akbal.  Your ", false);
-			if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR)
-				outputText("equine leap places you a good distance away from him.  Do you fight or flee?\n\n", false);
+			if (player.isTaur())
+				outputText("four-legged leap places you a good distance away from him.  Do you fight or flee?\n\n", false);
 			else
 				outputText("dodging roll places you a good distance away from him.  Do you fight or flee?\n\n", false);
 			//Fight / Flee
@@ -772,7 +774,7 @@ package classes.Scenes.Areas.Forest
 		private function ackbalRepeatAfterLoss():void
 		{
 			spriteSelect(2);
-			outputText("", true);
+			clearOutput();
 			outputText("A chorus of laughter sounds inside your mind as the jaguar demon, Akbal, drops to the ground in front of you.  His masculine voice says, \"<i>Well, if it isn't the defiant welp who, in all their great idiocy, has wandered into my territory again.  Will you submit, or do I have to teach you another harsh lesson?</i>\"\n\n", false);
 
 			//Submit / Fight / Run
@@ -783,7 +785,7 @@ package classes.Scenes.Areas.Forest
 		private function startuAkabalFightomon():void
 		{
 			spriteSelect(2);
-			outputText("", true);
+			clearOutput();
 			outputText("You ready your " + player.weaponName + " and prepare to battle the demon jaguar.", false);
 			//[battle ensues]
 			startCombat(new Akbal());
@@ -804,7 +806,7 @@ package classes.Scenes.Areas.Forest
 				akbalBigButtSubmit();
 				return;
 			}
-			outputText("", true);
+			clearOutput();
 			//Naga variant goez here
 			if (player.lowerBody == LOWER_BODY_TYPE_NAGA)
 			{
@@ -868,7 +870,7 @@ package classes.Scenes.Areas.Forest
 				return;
 			}
 			//Taur variant goez here
-			if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR)
+			if (player.isTaur())
 			{
 				outputText(images.showImage("akbal-deepwoods-taur-sumbitanal"));
 				outputText("After a few moments of thinking you nod to Akbal.  The deep voice in your head commands you to disrobe.  You take off your " + player.armorName + ", setting it aside while mentally preparing yourself for whatever this demon has in mind.\n\n", false);
@@ -1031,7 +1033,7 @@ package classes.Scenes.Areas.Forest
 		public function akbalSubmissionFollowup():void
 		{
 			spriteSelect(2);
-			outputText("", true);
+			clearOutput();
 			if (flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] < 4)
 			{
 				outputText("You awake in your camp feeling dangerous, powerful and fiercely satisfied.", false);
@@ -1174,7 +1176,7 @@ package classes.Scenes.Areas.Forest
 			outputText("As you explore the deep woods you begin to hear a soft slurping sound. In this world you know that any strange sound, especially the wet ones, most likely means something dangerous is up ahead... or something dangerous is fucking something a little less dangerous.  As you cautiously advance you spy the pelt of the jaguar demon, Akbal.  The demon jaguar sits in the middle of the clearing with one leg extended as he repeatedly swipes his wide tongue against his hole, probably cleaning up imp spunk thanks to you.  He is so utterly focused on the task that he doesn’t notice your approach.");
 			flags[kFLAGS.AKBAL_BITCH_Q] = 1;
 			//{corruption < 40/choose no}
-			if (player.cor < 40 || player.lust < 33)
+			if ((player.cor < 40 && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0 && player.findPerk(PerkLib.Pervert) < 0 && player.findPerk(PerkLib.Sadist) < 0) || player.lust < 33)
 				akbitchNoThnx(false);
 			//{corruption > 40}
 			else

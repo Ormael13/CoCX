@@ -80,7 +80,7 @@ public function treeMenu(output:Boolean = true):void {
 	}
 	else if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 3) {
 		if(output) outputText("The familiar plant has blossomed into a nicely sized tree, though you doubt it has finished growing just yet.  It sports an outstretched canopy with nice, green leaves.  Unfortunately, you can still trace the corrupted veins on their undersides from below.  The vaginal flower is still there and is in full bloom, now several feet across and practically dripping with moisture.  Just up the trunk, there's a pair of small, roughly b-cup breasts bulging out of the bark.  They're exquisitely smooth and soft, and they ooze sweet-smelling sap that your tongue would love to taste.  In the canopy above, tentacle vines idly writhe about, though they show no sizes of aggression.");
-		if(player.findPerk(PerkLib.Dragonfire) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0) {
+		if(player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0) {
 			if(output) outputText("\n\nIt could be burned down with your supernatural fire, but it would definitely tire you.");
 			burnIt = torchP3Tree;
 		}
@@ -141,11 +141,20 @@ public function treeMenu(output:Boolean = true):void {
 			addButton(3, "Drink Sap", haveAMapleSyrupSnack);
 			if(flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(4, "Eat A Fruit", eatHolliFruit);
 			addButton(5, "Guarding", askBrokenHolliToGuard);
-			addButton(9, "Leave", inventory.inventoryMenu);
+			if(flags[kFLAGS.DAILY_MARA_FRUIT_COUNTER] < 1) addButton(6, "Mara Fruit", getMaraFruit);
+			addButton(14, "Leave", camp.campFollowers);
 		}
 		
 		if (flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(6, "Farm Help", helpWithFarm);
 	}
+}
+
+private function getMaraFruit():void
+{
+	clearOutput();
+	outputText("You ask plant goddess for another Mara Fruit.");
+	flags[kFLAGS.DAILY_MARA_FRUIT_COUNTER] = 1;
+	inventory.takeItem(consumables.MARAFRU, treeMenu);
 }
 
 private function helpWithFarm():void
@@ -372,7 +381,7 @@ public function flowerGrowsToP3():void {
 	outputText("\n\nThe first thing you notice is that the vaginal tentacle flower remains, affixed at waist height to the side of the tree.  It looks bigger, the petals huge and glossy, undoubtedly far more capable of swallowing dick than ever before.  The tree isn't that thick, just yet.  Glancing further up the smooth, knotless trunk, you see the most surprising thing of all - a pair of almond-colored nipples, perched upon small, tit-like bulges in the wood.  The bark on these globular protrusion is smoother and fairer than the surrounding surface.  On one of them, a trickle of sap has formed into a heavy bead, and it smells sweet, like maple syrup.");
 	outputText("\n\nA dollop of something moist landing in your hair startles you from your visual inspection.  Gingerly, you touch your fingers to the wet spot and come away with a thick, viscous fluid that smells faintly musky... and salty...  It's cum!  You recoil, looking up in time to see a half dozen tentacles curling between the branches rubbing against each other in what can only be described as an orgy of frotting cock-lust.  Well now, your little pet plant is growing up.  There's no easy way to get rid of it now");
 	var burnIt:Function = null;
-	if(player.findPerk(PerkLib.Dragonfire) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0) {
+	if(player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0) {
 		outputText(", though you suppose you could burn it down with magical fire if you set your mind to it");
 		burnIt = torchP3Tree;
 	}
@@ -453,6 +462,7 @@ private function drinkThePlantGirlsSap():void {
 	outputText("\n\nThe tree's nipples look larger and harder after your inspection, and when you take one into your mouth, it immediately releases a trickle of its amber syrup onto your hungry tongue.  A shiver runs down your spine from the sweet taste, a rush of sugary delight invigorating your body as you drink.  Unfortunately, the tree's tit soon empties of its delicious treat, and you have to slide around to the other.  You wrap your arms around the trunk for stability as you suck");
 	if(silly()) outputText(", tree hugger that you are");
 	outputText(".  The thick 'milk' quickly fills your body with energy, though it runs out nearly as soon as it started.");
+	player.refillHunger(10);
 	outputText("\n\nYou wipe your slightly sticky mouth on your arm and sigh with the act done, admiring the slightly rosy tinge of the now-smaller breasts.  This whole thing is weird as hell, but you're as full of energy as ever after the snack.");
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -486,7 +496,7 @@ private function rideTheWalrusP3():void {
 //Torch It (edited)(C)
 private function torchP3Tree():void {
 	clearOutput();
-	//Requires fire-based attack and fatigue at or below 30.  Maxes fatigue and removes the tree.
+	//Requires fire-based attack and removes the tree.
 	outputText("This has gone on long enough!  This thing cannot continue to grow in your camp any longer, and you have just the means to remove it: fire.  ");
 	//[(nerdfire)
 	if(player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0) outputText("Closing your eyes to focus, you gather your energies, and unleash your white, supernatural flames upon the thing.");
@@ -497,7 +507,6 @@ private function torchP3Tree():void {
 	if(player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0) outputText("magical will");
 	else outputText("breath");
 	outputText(".");
-	
 	outputText("\n\nThis time, it stays suitably lit.  The tree makes a handy torch for a few hours while it burns to ash, but leaves behind a thick, cloying smoke that takes forever to dissipate.  At least that nuisance plant is gone for good.");
 	fatigue(100);
 	flags[kFLAGS.FUCK_FLOWER_KILLED] = 1;
@@ -514,14 +523,12 @@ public function treePhaseFourGo():void {
 	if(flags[kFLAGS.TIMES_FUCKED_FLOWER] + flags[kFLAGS.TIMES_RIDDEN_FLOWER] > 0) outputText("Did you enjoy feeding me?  You should have seen the expression on your face when you were cumming in me.  Your eyes were rolling back and your mouth was just hanging open.  Do you know what it made me want to do?");
 	else outputText("Did you enjoy watching me grow?  You should have fed me.  It was so much harder to grow without proper nutrients.  Do you know what I thought about during all the time I spent waiting?  Do you know what it made me want to do?");
 	outputText("</i>\"");
-	
 	outputText("\n\nYou shake your head dumbly.  This girl could very well be the corrupt goddess's sister, a demon-twin born of lust and simmering desires.  You still haven't quite gotten over her sudden appearance.");
-	
 	outputText("\n\n\"<i>It made me want to fuck you that much harder.  It made me want to take you again and again, in every way possible, bringing you to the peak of pleasure that you lust for it above all else and never want to leave,</i>\" the demon dryad explains while lifting an arm to brush an errant curl from her view.  Her other arm studiously remains clapped across her glossy, almond-colored nipples, but you still manage a quick glance.  She giggles, her melons jiggling with her breathing as she promises, \"<i>Mother Marae created me to be your gift.  Your personal attendant.  My name is Hollicynthea, but you can call me Holli.  I'm your very own cum-potted plant!  And I can see that you're already quite taken with me, aren't you?</i>\"");
 	outputText("\n\nYou snap your eyes back up to her oddly-colored gaze just in time for her to drop the other arm away.  Of course, when you try to glance back down, she has her hands over her nipples again.");
 	outputText("\n\n\"<i>Tut tut, you'll have to play with me if you want to see these...  I can't leave my tree, not for a few years, so you'll have to keep me nice and... warm,</i>\" she coos.  Below, you realize the familiar flower remains, though it looks almost dainty compared to its former glory.  It's now nestled between the woman's thighs, just above where her body merges back into the wood-grain, and the petals are folded closed into a modest bud.");
 	outputText("\n\nThe demon-tree offers, \"<i>Come on, let's sate our lusts together.  If not now, then in a few hours, when championing pointless causes gets you all... hot and bothered.  And... maybe if you ask nicely, I'll even help to guard you while you rest.  Lesser creatures are so easily snared and toyed with.</i>\"");
-	outputText("\n\nWell... you have a demonic plant-woman on your hands; a dryad by the legends of your homeland.  She looks harmless, so long as you don't stand too close, and she's quite the alluring sight.  What now?");
+	outputText("\n\nWell... you have a demonic plant-woman on your hands; a dryad by the legends of your homeland.  She looks harmless, so long as you don't stand too close, and she's quite the alluring sight.  What now?\n\n<b>Hollicynthea is now available in the followers tab!</b>");
 	flags[kFLAGS.FUCK_FLOWER_LEVEL] = 4;
 	flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] = 0;
 	dynStats("lus", 15);
@@ -698,17 +705,17 @@ private function haveAMapleSyrupSnack():void {
 	outputText("You approach Holli with a hungry smile plastered across your [face], licking your chops as you eye the arboreal slut with unrestrained desire.  Of course, your gaze fixes on her heavy chest, with its distended, dripping nipples.  They leak sweet sap as you stare; the demon seems eager to feel your mouth on her slick, almond-colored buds.  Looking at you ");
 	if(flags[kFLAGS.HOLLI_SUBMISSIVE] == 0) outputText("knowingly, Holli asks, \"<i>Come for a little pick-me-up?  Well, go on; drink deeply of my nectar, </i>champion.\"  The last word is inundated with malicious, mocking tones.");
 	else outputText("eagerly, Holli asks, \"<i>Care for a little pick-me-up?  They're getting very engorged, and I'm sure it would be a refreshing snack for you.</i>\"");
-	outputText("\n\nGrowling faintly, you snake your arm in along her side and curl it behind her back, pulling her forward and out.  Holli gasps in surprise, but doesn't struggle.  A drop of her syrupy sap splashes on your [armor], trickling out with greater rapidity from the dryad's sweet tits.  You crane your neck to take one in your mouth, and immediately begin to suckle it down.  The fluid is more like maple syrup than milk, and so potent it fizzles on your tongue, bursting with flavor.  With your free hand, you squeeze the rounded tit and increase the flow.");
+	outputText("\n\nGrowling faintly, you snake your arm in along her side and curl it behind her back, pulling her forward and out.  Holli gasps in surprise, but doesn't struggle.  A drop of her syrupy sap splashes on your [armorname], trickling out with greater rapidity from the dryad's sweet tits.  You crane your neck to take one in your mouth, and immediately begin to suckle it down.  The fluid is more like maple syrup than milk, and so potent it fizzles on your tongue, bursting with flavor.  With your free hand, you squeeze the rounded tit and increase the flow.");
 	outputText("\n\nHolli gasps, \"<i>Not so hard!</i>\"");
 	outputText("\n\nLooking up at her concerned visage, you wink and bite down on the tender nipple, just hard enough to make her squeak in distress.  The demon's body twists in your grip, but with your arm around the small of her back and her body part of the tree, she has nowhere to go.  You easily restrain her, allowing yourself to fully sample her treats.  Your throat bobs with each gulp of the free-flowing nectar and tingles as your tongue did before.  Soon, your whole body feels alight with energy, just as you finish the first breast.");
 	outputText("\n\nThe nipple pops out of your lips with a weak spray of 'milk', and its owner shudders slightly, her flower blooming against your [legs], weakly grasping.  You let your restraining arm go a bit lower to squeeze Holli's cute little butt.  Her smooth skin feels perfect in your hand, though you can feel that a little lower, her flesh joins with the wood of the tree, becoming quite rough.  How odd.");
 	outputText("\n\nYou quickly tire of fondling the proud creature's body and return to drinking her treasure straight from the tap, suckling hungrily to expedite the process.  Holli's pants can be heard above you, and the slick grinding of her petals over your [hips] adds to the eroticism in the air.  Your own blood is pumping harder and faster, flushing your " + player.skin() + ".  Drinking deeper, you realize you feel vibrantly alive, completely and utterly suffused with energy.  You swallow the last of Holli's syrup and shake slightly, breaking away from the intimate embrace you shared.");
-	
+	player.refillHunger(20);
 	outputText("\n\nHolli is trembling and oozing lubricants from below, her pale-green skin flushed almost purple.  Eyelids hanging heavy over her dilated pupils, she gasps and pants... it appears that she was able to orgasm from that, but still wants more.");
 	outputText("\n\nPerhaps later.  You burp and walk off, having gotten just what you wanted.");
 	//stat changes n' shit
 	dynStats("lib", .5, "sen", 1, "lus", 15, "cor", 1);
-	fatigue(-60);
+	fatigue(-100);
 	doNext(camp.returnToCampUseOneHour);
 }
 	
@@ -762,7 +769,8 @@ private function eatHolliFruit():void {
 		outputText("\n\nYou nearly drop the purplish pear in surprise...  This came from the... the sex?  The corrupt woman nods at you and explains, \"<i>Well, what did you think?  I'd get pregnant?  I'm a tree.  When we bear fruit, we do it literally.</i>\"  Holli smirks a little and encourages you, \"<i>Go on, try it.  They're supposed to be delicious... though I haven't eaten one, of course.</i>\"\n\n");
 		flags[kFLAGS.HOLLI_FRUIT_EXPLAINED]++;
 	}
-	outputText("Biting into it, sweet juices seem to explode from the flesh, dribbling down your chin.  It tastes like a dessert and you chow down, happily munching away.  In no time flat, you're down to just a core.  You toss it and wipe your [face] clean, then burp.  Damn, that was good!");
+	outputText("Biting into it, sweet juices seem to explode from the flesh, dribbling down your chin.  It tastes like a dessert and you chow down, happily munching away.  In no time flat, you're down to just a core.  You toss it and wipe your [face] clean, then burp.  Damn, that was good! ");
+	player.refillHunger(25);
 	//TF CHANCES
 	if(rand(2) == 0 && player.cockTotal() > player.tentacleCocks()) {
 		var choices:Array = [];
@@ -1294,7 +1302,7 @@ internal function enjoyYourBadEndBIYAAAATCH():void {
 		
 		outputText("\n\n\"<i>Lovely,</i>\" Holli admires.  \"<i>You'll make for a fine ambiance.</i>\"  The demon sticks one finger into your still-drooling asshole, stroking the inside of the ring and fanning the flame of your magic-driven lust.  \"<i>I may even consent to use you for release occasionally... if I can't find someone more interesting to have a tryst with!</i>\"  With a cruel laugh, she pulls out of you and retreats into her tree, leaving you staring at her bark, smouldering with desire and helpless to indulge it.");
 		//--Next--
-		dynStats("lus=", 10000);
+		dynStats("lus=", player.maxLust());
 		menu();
 		addButton(0,"Next",holliAndGenderlessSittingInATree);
 	}

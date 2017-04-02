@@ -9,7 +9,7 @@ package classes.Scenes.Places.Farm
 		private function keltTramplesJoo():void {
 			outputText("Before you know what's what, Kelt is galloping toward you, kicking up a cloud of dust in his wake.  He's trying to trample you!  ");
 			//Miss:
-			if(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if(player.getEvasionRoll()) {
 				outputText("You roll out of the way at the last moment, avoiding his dangerous hooves.");
 				combatRoundOver();
 				return;
@@ -17,8 +17,7 @@ package classes.Scenes.Places.Farm
 
 			//Determine damage - str modified by enemy toughness!
 			var damage:int = Math.round((str + weaponAttack) - rand(player.tou) - player.armorDef);
-			if(damage > 0) damage = player.takeDamage(damage);
-
+			
 			//Block:
 			if(damage <= 0) {
 				outputText("Incredibly, you brace yourself and dig in your [feet].  Kelt slams into you, but you grind his momentum to a half.  His mouth flaps uncomprehendingly for a moment before he backs up, flushing from being so close to you.");
@@ -26,8 +25,9 @@ package classes.Scenes.Places.Farm
 			}
 			//Hit:
 			else {
-				outputText("You can't get out of the way in time, and you're knocked down!  Kelt tramples overtop of you!  (" + damage + ")");
+				outputText("You can't get out of the way in time, and you're knocked down!  Kelt tramples overtop of you!  ");
 			}
+			if(damage > 0) damage = player.takeDamage(damage, true);
 			combatRoundOver();
 		}
 
@@ -37,7 +37,7 @@ package classes.Scenes.Places.Farm
 			outputText("Kelt knocks and fires an arrow almost faster than you can track.  He's lost none of his talent with a bow, even after everything you've put him through.  ");
 
 			//Miss:
-			if(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if(player.getEvasionRoll()) {
 				outputText("You manage to avoid the missile by the skin of your teeth!");
 				combatRoundOver();
 				return;
@@ -52,8 +52,9 @@ package classes.Scenes.Places.Farm
 				return;
 			}
 			//Hit:
-			damage = player.takeDamage(damage);
-			outputText("The arrow bites into you before you can react. (" + damage + ")");
+			
+			outputText("The arrow bites into you before you can react. ");
+			damage = player.takeDamage(damage, true);
 			combatRoundOver();
 		}
 
@@ -103,8 +104,17 @@ package classes.Scenes.Places.Farm
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(game.flags[kFLAGS.KELT_BREAK_LEVEL] == 1) game.farm.kelly.defeatKellyNDBREAKHIM();
-			else game.farm.kelly.breakingKeltNumeroThree();
+			if (game.flags[kFLAGS.KELT_KILL_PLAN] == 1) {
+				if (hpVictory) {
+					game.farm.keltScene.fightToBeatKeltVictoryHP();
+				} else {
+					game.farm.keltScene.fightToBeatKeltVictoryLust();
+				}
+			}
+			else{
+				if(game.flags[kFLAGS.KELT_BREAK_LEVEL] == 1) game.farm.kelly.defeatKellyNDBREAKHIM();
+				else game.farm.kelly.breakingKeltNumeroThree();
+			}
 		}
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
@@ -137,25 +147,33 @@ package classes.Scenes.Places.Farm
 			this.tallness = 84;
 			this.hipRating = HIP_RATING_AVERAGE;
 			this.buttRating = BUTT_RATING_AVERAGE+1;
-			this.lowerBody = LOWER_BODY_TYPE_CENTAUR;
+			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			this.legCount = 4;
 			this.skinTone = "tan";
 			this.hairColor = randomChoice("black","brown");
 			this.hairLength = 3;
-			initStrTouSpeInte(60, 70, 40, 20);
+			initStrTouSpeInte(70, 80, 50, 20);
 			initLibSensCor(40, 25, 55);
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
-			this.weaponAttack = 10;
+			this.weaponAttack = 11 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "tough skin";
-			this.armorDef = 4;
+			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = 200;
+			this.bonusLust = 20;
 			this.lust = 40;
 			this.lustVuln = 0.83;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 6;
-			this.gems = rand(5) + 5;
+			this.level = 12;
+			this.gems = rand(15) + 25;
 			this.tailType = TAIL_TYPE_HORSE;
 			this.drop = NO_DROP;
+			this.str += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 1040;
 			checkMonster();
 		}
 		

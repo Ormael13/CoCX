@@ -3,6 +3,7 @@
 
 	import classes.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	/**
 	 * ...
@@ -76,18 +77,21 @@
 			this.skinDesc = "shaggy fur";
 			this.hairColor = furColor;
 			this.hairLength = 3;
-			initStrTouSpeInte(hasAxe ? 75 : 50, 60, 30, 20);
+			initStrTouSpeInte(hasAxe ? 100 : 75, 70, 35, 20);
 			initLibSensCor(40 + this.ballSize * 2, 15 + this.ballSize * 2, 35);
 			this.faceType = FACE_COW_MINOTAUR;
 			this.weaponName = hasAxe?"axe":"fist";
 			this.weaponVerb = hasAxe?"cleave":"punch";
+			this.weaponAttack = (hasAxe ? (50 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) : (40 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL])));
 			this.armorName = "thick fur";
+			this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = 20 + rand(this.ballSize*2);
+			this.bonusLust = 30 + rand(this.ballSize*3);
 			this.lust = this.ballSize * 3;
 			this.lustVuln = hasAxe?0.84:0.87;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = hasAxe?6:5;
-			this.gems = rand(5) + 5;
+			this.level = hasAxe?15:12;
+			this.gems = rand(15) + 15;
 			if (hasAxe) {
 				this.drop = new WeightedDrop(consumables.MINOBLO, 1);
 			} else {
@@ -97,6 +101,12 @@
 			}
 			this.special1 = game.mountain.minotaurScene.minoPheromones;
 			this.tailType = TAIL_TYPE_COW;
+			this.str += (hasAxe ? 20 : 15) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = (hasAxe ? 940 : 840);
 			checkMonster();
 		}
 

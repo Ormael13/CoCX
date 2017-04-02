@@ -235,7 +235,7 @@ package classes.Scenes.NPCs {
 	{
 		clearOutput();
 		flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_2] = 0;
-	 	outputText("As you get up, you hear the voices of two happy women chatting pleasantly to each other; you recognize one as Marble, but the other is a stranger to you. Whoever they are, they’re clearly getting along very well, and both sound quite excited.  <i>\"Morning sweetie!</i>\"  Marble excitedly exclaims at the sight of you coming out of your tent.  <i>\"Let me introduce you to my sister, Clara.</i>\"");
+	 	outputText("As you get up, you hear the voices of two happy women chatting pleasantly to each other; you recognize one as Marble, but the other is a stranger to you. Whoever they are, they’re clearly getting along very well, and both sound quite excited.  <i>\"Morning sweetie!</i>\"  Marble excitedly exclaims at the sight of you coming out of your " + camp.homeDesc() + ".  <i>\"Let me introduce you to my sister, Clara.</i>\"");
 	 	outputText("\n\nThe other woman, whom you presume is Clara, certainly does look like she is related to Marble.  She is obviously another Lacta Bovine, with many of the same features as ");
 		//[Marble has cow face or not]
 		if(flags[kFLAGS.MARBLE_BOVA_LEVEL] <= 1) outputText("your mate has");
@@ -831,6 +831,7 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\nFinally Clara turns to look at you.  Brimming with satisfaction, she opens up her dress and commands you to drink of her breast.  Satisfying your need goes much the same way it has every day.  <i>Milk, sweet delicious milk, need, need, need.  Must serve mistress.</i>  You can’t really control yourself, you <i>NEED!  Service, am I doing things right?  I will please you</i> damn slavedriver.  <i>Most wonderful lady!  Please forgive my insolent thoughts.  Need, need, NEED!</i>");
 	 	outputText("\n\nOnce you’ve finished drinking, mistress directs you to lie down on her bed.  She wants to use you for her pleasure.  As always, you’re happy to comply.  Just as things have been for so long, she mounts your custom prepared equipment: a kitty cock, 9 by 1.6 inches.  You are just happy that you can serve as her sex toy so well.  It fills you with such joy to watch the body of the most beautiful woman in the world bounce on top of yours, in that fine dress with her chest still exposed and tumbling around above you.");
 	 	outputText("\n\nThis is your life now.  Reduced to the milk addicted slave of a Lacta Bovine, you have abandoned your mission just to serve and be used for the rest of your life.");
+		//game over
 		getGame().gameOver();
 	}
 
@@ -1504,6 +1505,7 @@ package classes.Scenes.NPCs {
 		 	outputText("\n\nWhile her pure milk doesn't have the same effect as when it was addictive, you must admit that it's still extremely delicious.  The rich liquid gushes out, filling your mouth with bliss evoking sweetness. This time around, the flow's speed is far from unmanageable and so you drink with a steady pace rather than wild abandon. Greedily gulping down the white gold, it soothes your dry throat and waiting stomach. Thanks to the comparably moderate stream, you are actually able to appreciate the pleasant feel of the nipple that your lips are clamped to.");
 		 	outputText("\n\nWhile savoring the taste, you think that you should give some special attention to the fleshy nub in your mouth, and let your tongue play over the tip.  A few flicks and then a careful circle yields a very pleasant groan.  At the same time, Marble's hands run across your face and head while she mutters gentle words of encouragement and gratitude.");
 		 	outputText("\n\nAs you drink, you feel the aches and pains of the day wash away, and new energy fills your body.  The strengthening properties have vanished with the corruption and although the healing properties are weaker, they yet remain.  The flow starts to slow, and you take that as the cue to switch over to the other tit.  A satisfying sigh of pleasure accompanies this switch, and the gentle bovine gives your head a gentle hug, stroking the back of your head.");
+			player.refillHunger(30);
 		 	outputText("\n\nFinally, your tender moment with your mate comes to an end, and the last of her milk flows down your throat.  You separate, and a small burp escapes your lips.  Marble giggles at this and tells you to come and see her again whenever you're feeling thirsty.  She should be ready to nurse you again in about four hours.");
 			//Restore 20% of PC's health
 			HPChange(Math.round(player.maxHP()*.2),false);
@@ -1579,7 +1581,7 @@ package classes.Scenes.NPCs {
 	//displayed in the camp description if Clara was imprisoned in camp.
 	public function claraCampAddition():void
 	{
-		outputText("  Nearby the portal sits a large wooden cage for keeping Marble's sister Clara prisoner.  It is tall enough for her to stand in and long enough for her to lie down completely.  ");
+		outputText("Nearby the portal sits a large wooden cage for keeping Marble's sister Clara prisoner.  It is tall enough for her to stand in and long enough for her to lie down completely.  ");
 		//if (Clara was purified)
 		if(flags[kFLAGS.CLARA_PURIFIED] > 0)
 		{
@@ -1610,6 +1612,7 @@ package classes.Scenes.NPCs {
 				}
 			}
 		}
+		outputText("\n\n");
 	}
 }
 }

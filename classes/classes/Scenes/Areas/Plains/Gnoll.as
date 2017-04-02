@@ -2,6 +2,7 @@ package classes.Scenes.Areas.Plains
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	/**
 	 * ...
@@ -82,9 +83,8 @@ package classes.Scenes.Areas.Plains
 					else {
 						outputText("The gnoll waves her club threateningly, but it's her foot that snaps up from the dusty plain to connect with your gut.", false);
 					}
-					damage = player.takeDamage(damage);
-					outputText(" (" + damage + ")\n", false);
-					
+					outputText(" ");
+					player.takeDamage(damage, true);
 				}
 				game.statScreenRefresh();
 			}
@@ -196,8 +196,8 @@ package classes.Scenes.Areas.Plains
 					else {
 						outputText("The gnoll waves her club threateningly, but it's her foot that snaps up from the dusty plain to connect with your gut.", false);
 					}
-					damage = player.takeDamage(damage);
-					outputText(" (" + damage + ")\n", false);
+					outputText(" ");
+					player.takeDamage(damage, true);
 				}
 				game.statScreenRefresh();
 			}
@@ -335,8 +335,8 @@ package classes.Scenes.Areas.Plains
 						else {
 							outputText("The gnoll waves her club threateningly, but it's her foot that snaps up from the dusty plain to connect with your gut.", false);
 						}
-						damage = player.takeDamage(damage);
-						outputText(" (" + damage + ")\n", false);
+						outputText(" ");
+						player.takeDamage(damage);
 					}
 					game.statScreenRefresh();
 				}
@@ -389,25 +389,32 @@ package classes.Scenes.Areas.Plains
 			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_FUR];
 			this.hairColor = "black";
 			this.hairLength = 22;
-			initStrTouSpeInte(80, 70, 75, 60);
-			initLibSensCor(65, 25, 60);
+			initStrTouSpeInte(90, 75, 75, 60);
+			initLibSensCor(64, 25, 60);
 			this.weaponName = "twisted club";
 			this.weaponVerb="smash";
-			this.weaponAttack = 0;
+			this.weaponAttack = 11 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.weaponPerk = "";
 			this.weaponValue = 25;
 			this.armorName = "skin";
-			this.armorDef = 2;
-			this.bonusHP = 250;
+			this.armorDef = 7 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusHP = 600;
+			this.bonusLust = 10;
 			this.lust = 30;
 			this.lustVuln = .35;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 14;
-			this.gems = 10 + rand(5);
+			this.level = 18;
+			this.gems = 15 + rand(10);
 			this.drop = new ChainedDrop().
 					add(consumables.REDUCTO,1/5).
 					add(consumables.SUCMILK,1/2).
 					elseDrop(consumables.BLACK_D);
+			this.str += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 1440;
 			checkMonster();
 		}
 		

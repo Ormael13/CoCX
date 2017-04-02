@@ -1,6 +1,7 @@
 package classes.Scenes.Areas.Swamp
 {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class SpiderMorphMob extends Monster
 	{
@@ -9,7 +10,7 @@ package classes.Scenes.Areas.Swamp
 		//==============================
 		private function spiderStandardAttack():void {
 			//SPIDER HORDE ATTACK - Miss (guaranteed if turns 1-3 and PC lost to Kiha)
-			if(findStatusAffect(StatusAffects.MissFirstRound) >= 0 || combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if(findStatusAffect(StatusAffects.MissFirstRound) >= 0 || player.getEvasionRoll()) {
 				removeStatusAffect(StatusAffects.MissFirstRound);
 				outputText("A number of spiders rush at you, trying to claw and bite you.  You manage to beat them all back, though, with some literal covering fire from Kiha.", false);
 			}
@@ -24,13 +25,15 @@ package classes.Scenes.Areas.Swamp
 					if(rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + player.armorName + ".", false);
 					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
 				}
-				else if(damage < 6) outputText("You are struck a glancing blow by " + a + short + "! (" + damage + ")", false);
-				else if(damage < 11) outputText(capitalA + short + " wounds you! (" + damage + ")", false);
-				else if(damage < 21) outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! (" + damage + ")", false);
+				else if(damage < 6) outputText("You are struck a glancing blow by " + a + short + "! ", false);
+				else if(damage < 11) outputText(capitalA + short + " wounds you! ", false);
+				else if(damage < 21) outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! ", false);
 				else if(damage > 20) {
 					outputText(capitalA + short + " <b>mutilate", false);
-					outputText("</b> you with " + pronoun3 + " powerful " + weaponVerb + "! (" + damage + ")", false);
+					outputText("</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ", false);
 				}
+				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
+				else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>", false)
 				if(damage > 0) {
 					if(lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
 						if(!plural) outputText("\n" + capitalA + short + " brushes against your exposed skin and jerks back in surprise, coloring slightly from seeing so much of you revealed.", false);
@@ -46,7 +49,7 @@ package classes.Scenes.Areas.Swamp
 		//SPIDER HORDE WEB - Hit
 		private function spoidahHordeWebLaunchahs():void {
 			//SPIDER HORDE WEB - Miss (guaranteed if turns 1-3 and PC lost to Kiha)
-			if(findStatusAffect(StatusAffects.MissFirstRound) >= 0 || combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if(findStatusAffect(StatusAffects.MissFirstRound) >= 0 || player.getEvasionRoll()) {
 				outputText("One of the driders launches a huge glob of webbing right at you!  Luckily, Kiha manages to burn it out of the air with a well-timed gout of flame!", false);
 				combatRoundOver();
 			}
@@ -116,20 +119,30 @@ package classes.Scenes.Areas.Swamp
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
-			initStrTouSpeInte(60, 50, 99, 99);
+			initStrTouSpeInte(100, 80, 99, 99);
 			initLibSensCor(35, 35, 20);
 			this.weaponName = "claws";
 			this.weaponVerb="claws";
+			this.weaponAttack = 34 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "chitin";
+			this.armorDef = 30 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = 1200;
+			this.bonusLust = 50;
 			this.lustVuln = .2;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 18;
-			this.gems = rand(25)+40;
+			this.level = 23;
+			this.gems = rand(50)+100;
 			this.special1 = game.packAttack;
 			this.special2 = game.lustAttack;
 			this.tailType = TAIL_TYPE_SPIDER_ADBOMEN;
 			this.drop = NO_DROP;
+			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.str += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 2430;
 			checkMonster();
 		}
 		

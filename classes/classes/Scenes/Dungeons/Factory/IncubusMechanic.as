@@ -1,8 +1,11 @@
 package classes.Scenes.Dungeons.Factory
 {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Armors.LustyMaidensArmor;
+	import classes.Scenes.Dungeons.Factory;
 	import classes.internals.*;
+	import flash.display.InteractiveObject;
 	import classes.GlobalFlags.kFLAGS;
 
 	public class IncubusMechanic extends Monster {
@@ -21,27 +24,32 @@ package classes.Scenes.Dungeons.Factory
 		
 		private function defeatedInDungeon1(hpVictory:Boolean):void {
 			clearOutput();
+			game.menu();
 			if (hpVictory)
 				outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.");
 			else outputText("You smile in satisfaction as the " + short + " collapses, masturbating happily.");
 			if (player.gender == 0) {
 				outputText("  Now would be the perfect opportunity to test his demonic tool...\n\nHow do you want to handle him?");
-				game.simpleChoices("Anally", game.incubusVictoryRapeBackdoor, "Orally", game.incubusVictoryService, "", null, "", null, "Leave", game.cleanupAfterCombat);
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
+				game.addButton(0, "Anally", game.dungeons.factory.doRideIncubusAnally, null, null, null, "Ride him anally.");
+				game.addButton(1, "Orally", game.dungeons.factory.doOralIncubus, null, null, null, "Service the incubus orally.");
+				game.addButton(4, "Leave", game.cleanupAfterCombat);
 			}
 			else {
 				game.dynStats("lus", 1);
 				if (hpVictory) {
 					outputText("  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do, rape him, service him, or let him take you anally?");
-					game.simpleChoices("Rape", game.incubusVictoryRapeSex, "Service Him", game.incubusVictoryService, "Anal", game.incubusVictoryRapeBackdoor, "", null, "Nothing", game.cleanupAfterCombat);
+					if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
 				}
 				else {
 					outputText("  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do?");
-					var titfuck:Function = null;
-					if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") {
-						titfuck = game.createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, this);
-					}
-					game.simpleChoices("Rape", game.incubusVictoryRapeSex, "Service Him", game.incubusVictoryService, "Anal", game.incubusVictoryRapeBackdoor, "B.Titfuck", titfuck, "Nothing", game.cleanupAfterCombat);
+					if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
+					if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor == armors.LMARMOR) game.addButton(3, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, this);
 				}
+				game.addButton(0, "Rape", game.dungeons.factory.doRapeIncubus, null, null, null, player.hasCock() ? "Fuck his butt." : "Ride him vaginally.");
+				game.addButton(1, "Service Him", game.dungeons.factory.doOralIncubus, null, null, null, "Service the incubus orally.");
+				game.addButton(2, "Anal", game.dungeons.factory.doRideIncubusAnally, null, null, null, "Ride him anally.");
+				game.addButton(4, "Nothing", game.cleanupAfterCombat);
 			}
 		}
 		
@@ -68,13 +76,14 @@ package classes.Scenes.Dungeons.Factory
 				outputText("\n\nYour foe doesn't seem to care...");
 				doNext(game.endLustLoss);
 			} else {
-				game.incubusLossRape();
+				game.dungeons.factory.doLossIncubus();
 			}
 		}
 		
 		private function wonInDungeon3(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.d3.incubusMechanic.mechanicFuckedYouUp(hpVictory, pcCameWorms);
+			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) game.dungeons.factory.doLossIncubus();
+			else game.d3.incubusMechanic.mechanicFuckedYouUp(hpVictory, pcCameWorms);
 		}
 		
 		private function cockTripAttack():void {
@@ -114,6 +123,12 @@ package classes.Scenes.Dungeons.Factory
 				return;
 			}
 			outputText("Your demonic foe places his hands behind his head and lewdly pumps and thrusts his hips at you.  Your eyes open wide as a globule of cum erupts from the demon-prick and flies right at you.  ");
+			if (player.shield == game.shields.DRGNSHL && rand(2) == 0)
+			{
+				outputText("Your shield managed to absorb the attack!")
+				combatRoundOver();
+				return;
+			}
 			outputText("You do your best to dodge, but some still lands on your ");
 			switch (rand(3)) {
 				case 0: //Face
@@ -137,7 +152,7 @@ package classes.Scenes.Dungeons.Factory
 					break;
 				default: //Crotch
 					if (player.vaginas.length > 0) {
-						outputText("crotch.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way past your " + player.armorName + " and into your " + vaginaDescript(0) + ".  You can feel it moving around inside you, doing its best to prepare you for its master.");
+						outputText("crotch.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way past your " + player.armorName + " and into your " + player.vaginaDescript(0) + ".  You can feel it moving around inside you, doing its best to prepare you for its master.");
 						game.dynStats("lus", 3);
 						if (player.findStatusAffect(StatusAffects.DemonSeed) < 0)
 							player.createStatusAffect(StatusAffects.DemonSeed, 5, 0, 0, 0);
@@ -172,27 +187,49 @@ package classes.Scenes.Dungeons.Factory
 			this.skinTone = "light purple";
 			this.hairColor = "black";
 			this.hairLength = 12;
-			initStrTouSpeInte(65, 40, 45, 85);
+			initStrTouSpeInte(95, 60, 45, 85);
 			initLibSensCor(80, 70, 80);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 10;
+			this.weaponAttack = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
-			this.armorDef = 10;
-			this.bonusHP = 150;
+			this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusHP = 350;
+			this.bonusLust = 40;
 			this.lust = 50;
 			this.lustVuln = .5;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 8;
-			this.gems = rand(25)+10;
+			this.level = 14;
 			this.drop = new WeightedDrop(consumables.GROPLUS, 1);
+			this.gems = rand(25) + 20;
+			this.additionalXP = 100;
+			if (flags[kFLAGS.D3_MECHANIC_LAST_GREET] > 0) {
+				this.gems += rand(30) + 60;
+				this.additionalXP += 250;
+				this.level += 24;
+				this.bonusHP += 600 + (60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.str += 50 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.tou += 50 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.spe += 35 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.inte += 30 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.weaponAttack += 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.HP = eMaxHP();
+				this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
+			}
 			this.special1 = cockTripAttack;
 			this.special2 = spoogeAttack;
 			this.tailType = TAIL_TYPE_DEMONIC;
 			this.wingType = WING_TYPE_BAT_LIKE_TINY;
 			this.wingDesc = "tiny hidden";
+			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
+			this.str += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 1460;
 			checkMonster();
 		}
 	}

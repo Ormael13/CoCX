@@ -3,8 +3,7 @@
 //const VALENTINES_EVENT_YEAR:int = 736;
 
 public function isValentine():Boolean {
-	if(date.date >= 13 && date.date <= 15 && date.month == 1) return true;
-	return false;
+	return ((date.date >= 13 && date.date <= 15 && date.month == 1) || flags[kFLAGS.ITS_EVERY_DAY] > 0)
 }
 
 
@@ -68,6 +67,7 @@ public function crazyVDayShenanigansByVenithil():void {
 	//[end event]
 	//Corruption 16-85 : 
 	outputText("\n\nWell, you do have more important things to do, and in the world of Mareth, where the corruption is dominant and there's definitely way more sex than romance, such a mission may be doomed to fail anyways, but it is something to consider.  All in all, it comes down to whether you think you have the time for this and whether it even seems worth it.");
+	awardAchievement("Valentine", kACHIEVEMENTS.HOLIDAY_VALENTINE);
 	//[Help them][Leave]
 	menu();
 	addButton(0,"Help Them",helpValentinesDay);
@@ -199,8 +199,10 @@ public function cuddleWithScyllaVDay():void {
 	
 	outputText("\n\nLater, when you move through the desert around Tel'Adre towards your own camp, looking back at Scylla waving towards you, you're somehow glad things turned out that way, and feel more determined than ever to not only defeat the demons, but also spread the good will and positive feelings through any world you may call your own.");
 	
-	outputText("\n\n(<b>You have gained the Pure and Loving perk!</b>");
-	player.createPerk(PerkLib.PureAndLoving,0,0,0,0);
+	if (player.findPerk(PerkLib.PureAndLoving) < 0) {
+		outputText("\n\n(<b>You have gained the Pure and Loving perk!</b>");
+		player.createPerk(PerkLib.PureAndLoving,0,0,0,0);
+	}
 	doNext(camp.returnToCampUseTwoHours);
 }
 
@@ -270,8 +272,10 @@ public function feedScyllaVDay():void {
 	//{The PC titfucks Scylla again, and then gets her to suck them off, resulting in two quick orgasm and a big nice load of food for Scylla. How far can you fall to get off? On such a nice day, too!}
 	outputText("You feed Scylla what feels like a gallon of jizz!");
 	player.orgasm();
-	outputText("\n\n(<b>You have gained the One Track Mind perk.</b>");
-	player.createPerk(PerkLib.OneTrackMind,0,0,0,0);
+	if (player.findPerk(PerkLib.OneTrackMind) < 0) {
+		outputText("\n\n(<b>You have gained the One Track Mind perk.</b>");
+		player.createPerk(PerkLib.OneTrackMind,0,0,0,0);
+	}
 	doNext(camp.returnToCampUseTwoHours);
 }
 
@@ -375,7 +379,7 @@ public function pleasureAbbyVDay():void {
 	//([Naga tongue]
 	if(player.tongueType == TONUGE_SNAKE) outputText("  Your fingers make it into her pussy alongside your tongue, and the prehensile thing, longer and more flexible than a human's, ravages the insides of her pussy, tasting everywhere as Abby shakes in her orgasm.  Her pussy eagerly tries to milk both your fingers and your tongue, clenching and gripping at them as it drips her pussy juices all over your face.  Abby screams out in a loud, uninhibited orgasm at last, expressing her ecstasy.");
 	//([Demon/Dragon Tongue]
-	else if(player.tongueType == TONUGE_DEMONIC) outputText("  Abylon shakes in excitement, pleasure, and fear as you extend your inhuman tongue to reach deep into the recesses of her pussy.  She cannot hold out a moment longer, her cunt gripping your inhuman muscle tightly, the hole and muscles inside quivering as you can taster her orgasmic juices with every single point of your tongue.  She screams, shudders and moans, tongue lolling out from the intense pleasure as you force your own tongue to roll around inside her and stretch her in multiple ways. Only you holding her stops Abylon from slumping forward, it seems...");
+	else if(player.hasLongTongue()) outputText("  Abylon shakes in excitement, pleasure, and fear as you extend your inhuman tongue to reach deep into the recesses of her pussy.  She cannot hold out a moment longer, her cunt gripping your inhuman muscle tightly, the hole and muscles inside quivering as you can taster her orgasmic juices with every single point of your tongue.  She screams, shudders and moans, tongue lolling out from the intense pleasure as you force your own tongue to roll around inside her and stretch her in multiple ways. Only you holding her stops Abylon from slumping forward, it seems...");
 	//([Human tongue]
 	else outputText("  Hooking your fingers at the front and back of her cunny, you plunge your tongue in and wiggle it eagerly.  Abby clamps down on all three invaders and loudly moans out, screaming to her content at last, as your face is flooded with pussy juice.");
 	
@@ -385,8 +389,11 @@ public function pleasureAbbyVDay():void {
 	
 	outputText("\n\nAll in all, you're pleased that perhaps you've managed to show a goblin that real affection does exist... not to mention get somebody off twice on a new Mareth holiday!");
 	
-	outputText("\n\n(<b>You've received the Pure and Loving Perk!</b>)");
-	player.createPerk(PerkLib.PureAndLoving,0,0,0,0);
+	if (player.findPerk(PerkLib.PureAndLoving) < 0) {
+		outputText("\n\n(<b>You've received the Pure and Loving Perk!</b>)");
+		player.createPerk(PerkLib.PureAndLoving,0,0,0,0);
+	}
+	
 	dynStats("lus", 80);
 	doNext(camp.returnToCampUseTwoHours);
 }
@@ -513,8 +520,10 @@ public function fuckPastieForVDay():void {
 	
 	outputText("\n\nYou grin and lick your lips as you return to camp.");
 	
-	outputText("\n\n(<b>You have gained the One Track Mind perk!</b>)");
-	player.createPerk(PerkLib.OneTrackMind,0,0,0,0);
+	if (player.findPerk(PerkLib.OneTrackMind) < 0) {
+		outputText("\n\n(<b>You have gained the One Track Mind perk!</b>)");
+		player.createPerk(PerkLib.OneTrackMind, 0, 0, 0, 0);
+	}
 	player.orgasm();
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseTwoHours);
@@ -549,8 +558,10 @@ public function rubPastieOnYourWangDawg():void {
 	
 	outputText("\n\nYou grin and whistle a spritely tune as you return to camp.");
 	// (You have gained the One Track Mind perk!)
-	outputText("\n\n(<b>You have gained the One Track Mind perk!</b>)");
-	player.createPerk(PerkLib.OneTrackMind,0,0,0,0);
+	if (player.findPerk(PerkLib.OneTrackMind) < 0) {
+		outputText("\n\n(<b>You have gained the One Track Mind perk!</b>)");
+		player.createPerk(PerkLib.OneTrackMind, 0, 0, 0, 0);
+	}
 	player.orgasm();
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseTwoHours);

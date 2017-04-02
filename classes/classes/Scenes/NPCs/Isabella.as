@@ -1,6 +1,7 @@
 package classes.Scenes.NPCs
 {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class Isabella extends Monster
 	{
@@ -39,8 +40,9 @@ package classes.Scenes.NPCs
 					outputText("You brace yourself and catch her shield in both hands, dragging through the dirt as you slow her charge to a stop.  She gapes down, completely awestruck by the show of power.", false);
 				}
 				else {
-					damage = player.takeDamage(damage);
-					outputText("She's coming too fast to dodge, and you're forced to try to stop her.  It doesn't work.  Isabella's shield hits you hard enough to ring your ears and knock you onto your back with bruising force. (" + damage + ")\n", false);
+					outputText("She's coming too fast to dodge, and you're forced to try to stop her.  It doesn't work.  Isabella's shield hits you hard enough to ring your ears and knock you onto your back with bruising force. ", false);
+					damage = player.takeDamage(damage, true);
+					outputText("\n");
 				}
 			}
 			combatRoundOver();
@@ -82,8 +84,9 @@ package classes.Scenes.NPCs
 					damage = 0;
 				}
 				else {
-					damage = player.takeDamage(damage);
-					outputText("You try to avoid it, but her steely attack connects, rocking you back.  You stagger about while trying to get your bearings, but it's all you can do to stay on your feet.  <b>Isabella has stunned you!</b> (" + damage + ")\n", false);
+					outputText("You try to avoid it, but her steely attack connects, rocking you back.  You stagger about while trying to get your bearings, but it's all you can do to stay on your feet.  <b>Isabella has stunned you!</b> ", false);
+					damage = player.takeDamage(damage, true);
+					outputText("\n");
 					player.createStatusAffect(StatusAffects.IsabellaStunned,0,0,0,0);
 				}
 			}
@@ -123,8 +126,9 @@ package classes.Scenes.NPCs
 					outputText("You resolutely ignore the blow thanks to your immense toughness.\n");
 				}
 				else {
-					damage = player.takeDamage(damage);
-					outputText("You try your best to stop the onrushing fist, but it hits you square in the throat, nearly collapsing your windpipe entirely.  Gasping and sputtering, you try to breathe, and while it's difficult, you manage enough to prevent suffocation. <b>It will be impossible to focus to cast a spell in this state!</b> (" + damage + ")\n", false);
+					outputText("You try your best to stop the onrushing fist, but it hits you square in the throat, nearly collapsing your windpipe entirely.  Gasping and sputtering, you try to breathe, and while it's difficult, you manage enough to prevent suffocation. <b>It will be impossible to focus to cast a spell in this state!</b> ", false);
+					damage = player.takeDamage(damage, true);
+					outputText("\n");
 					player.createStatusAffect(StatusAffects.ThroatPunch,2,0,0,0);
 				}
 			}
@@ -189,24 +193,32 @@ package classes.Scenes.NPCs
 			this.skinTone = "dusky";
 			this.hairColor = "red";
 			this.hairLength = 13;
-			initStrTouSpeInte(70, 98, 75, 65);
-			initLibSensCor(65, 25, 40);
+			initStrTouSpeInte(80, 108, 75, 64);
+			initLibSensCor(64, 25, 40);
 			this.weaponName = "giant shield";
 			this.weaponVerb="smash";
-			this.weaponAttack = 15;
+			this.weaponAttack = 18 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "giant shield";
-			this.armorDef = 8;
+			this.armorDef = 18 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorPerk = "";
 			this.armorValue = 70;
 			this.bonusHP = 700;
+			this.bonusLust = 20;
 			this.lust = 30;
 			this.lustVuln = .35;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 15;
-			this.gems = rand(5) + 20;
+			this.level = 20;
+			this.gems = rand(10) + 25;
 			this.tailType = TAIL_TYPE_COW;
 			this.tailRecharge = 0;
 			this.drop = NO_DROP;
+			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
+			this.str += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 2280;
 			checkMonster();
 		}
 		

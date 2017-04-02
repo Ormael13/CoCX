@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.Areas.Forest{
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class Faerie extends BaseContent{
 
@@ -16,7 +17,7 @@ public function encounterFaerie():void {
 		if(rand(player.spe/2) + player.statusAffectv1(StatusAffects.FaerieFucked) > 15) {
 			if(player.statusAffectv1(StatusAffects.FaerieFucked) < 5) {
 				outputText("\n\nYou make a desperate lunge for the faerie girl and grab her before she can fly away.   She wriggles and squirms in your grasp, shouting, \"<i>Let me go you meanie!</i>\"\n\n", false);
-				outputText("It would be cute if she wasn't dressed up like such a slut.  You bet you could get her to help pleasure you, but she might not like it.  Or you could be a nice " + player.guyGirl() + " and let her go...\n\nDo you force her to pleasure you?", false);
+				outputText("It would be cute if she wasn't dressed up like such a slut.  You bet you could get her to help pleasure you, but she might not like it.  Or you could be a nice " + player.mf("guy", "girl") + " and let her go...\n\nDo you force her to pleasure you?", false);
 			}
 			else if(player.statusAffectv1(StatusAffects.FaerieFucked) < 10) {
 				outputText("\n\nYou snatch her out of the air fairly easily.  She seems like she's slowed down a little.   She squirms and wriggles, begging you, \"<i>Please don't cover me in cum again... I get so drunk and feel even sluttier afterwards.  I don't want to be a slut!</i>\"\n\nShe pouts, but blushes.  Do you make her get you off again?", false);
@@ -26,7 +27,8 @@ public function encounterFaerie():void {
 			}
 			else outputText("\n\nYou lazily make a grab for her and easily snatch her out of the air.  Her body is sticky with a mix of desire and your last encounter.  You can feel her humping against your pinky while she begs, \"<i>Come on, let me crawl into your " + player.armorName + " and wrap myself around your shaft.  I promise I'll only drink a little pre-cum this time, just enough to let me get off.  I'll be a good faerie slut, just let me get you off!</i>\"\n\nDo you let the faerie get you off?", false);
 			dynStats("lus", player.lib/10+2);
-			doYesNo(faerieCaptureHJ,letFaerieGo);
+			doYesNo(faerieCaptureHJ, letFaerieGo);
+			if(player.statusAffectv1(StatusAffects.FaerieFucked) < 5) addButton(2, "Never", disableFaerieEncounterForGood);
 			return;
 		}
 		dynStats("lus", player.lib/10+2);
@@ -150,7 +152,7 @@ private function faerieShooAway():void {
 
 private function faerieDoNothing():void {
 	spriteSelect(17);
-	outputText("", true);
+	clearOutput();
 	if(player.nippleLength >= 1) {
 		outputText("She looks you over, stopping at your upper torso and letting out a cry of glee. She lands on your chest, her exposed pussy coming to rest on your nipple. With one hand she grabs hold of you above her head and uses her other hand to guide the rapidly hardening nub between her legs. She sighs in delight as her tight confines squeeze your nipple hard, the feeling somewhere between pinching fingers and suckling lips. You gasp in delight yourself, and you notice she can exercise amazing control with her groin muscles as a rippling feeling courses through your nipple.\n\n", false);
 		outputText("Your nipple starts to get sloppy and wet as if someone's tongue were around it, but it's really the faerie's love juices dribbling down, some running down your breast and some down her legs. She starts thrusting against you, and you notice her clit getting hard and pushing into your soft flesh. With a free hand you grab the area around your nipple and squeeze it harder, forcing more into her.\n\n", false);
@@ -196,21 +198,31 @@ private function faerieDoNothing():void {
 //[No] *(let her go)
 private function letFaerieGo():void {
 	spriteSelect(17);
-	outputText("", true);
+	clearOutput();
 	outputText("You apologize and release her, letting her fly away on gossamer wings.  She thanks you, buzzing up to your lips and planting a chaste kiss on your mouth.  She zips away into the woods without a glance back...", false);
 	doNext(camp.returnToCampUseOneHour);
 }
+//Disable Faerie encounter
+private function disableFaerieEncounterForGood():void {
+	spriteSelect(17);
+	clearOutput();
+	outputText("You apologize and release her, letting her fly away on gossamer wings.  She thanks you, buzzing up to your lips and planting a chaste kiss on your mouth.  She zips away into the woods without a glance back...", false);
+	outputText("\n\nYou make a mental note and resolve to never catch her again.");
+	flags[kFLAGS.FAERIE_ENCOUNTER_DISABLED] = 1;
+	doNext(camp.returnToCampUseOneHour);
+}
+
 //[YES] *make her pleasure you
 private function faerieCaptureHJ():void {
 	spriteSelect(17);
 	if(player.findStatusAffect(StatusAffects.FaerieFucked) >= 0) player.addStatusValue(StatusAffects.FaerieFucked,1,2);
 	else player.createStatusAffect(StatusAffects.FaerieFucked,2,0,0,0);
-	outputText("", true);
+	clearOutput();
 	if(player.statusAffectv1(StatusAffects.FaerieFucked) < 15) {
 		outputText("You hold her tightly and scold her, \"<i>If you don't like hard cocks, you shouldn't be dressed up like a such a slut, flying around and teasing me like that.  You should be ashamed of yourself.  Now you've got me all worked up - so you better make it up to me and take care of my little 'problem'</i>.\"\n\n", false);
 		outputText("She looks up at you and gulps before nodding silently, unwilling or unable to resist your command.   ", false);
 	}
-	outputText("You let her loose and she hovers in place, as if pondering her one last chance to escape.  She sighs and looks back up, blushing fiercely as she lands on your hip and gazes down at the bulge of your groin.  You can't help but laugh as she slips under your " + player.armorName + ", crawling across your sensitive thigh towards your " + multiCockDescriptLight() + ".\n\n", false);
+	outputText("You let her loose and she hovers in place, as if pondering her one last chance to escape.  She sighs and looks back up, blushing fiercely as she lands on your hip and gazes down at " + player.clothedOrNakedLower("the bulge of ") + "your groin.  You can't help but laugh as she " + player.clothedOrNakedLower("slips under your " + player.armorName, "climbs onto you") + ", crawling across your sensitive thigh towards your " + multiCockDescriptLight() + ".\n\n", false);
 	//Taurs get a special scene!
 	if(player.isTaur()) {
 		outputText("The tiny Faerie climbs on top of your " + cockDescript(0), false);
@@ -245,10 +257,10 @@ private function faerieCaptureHJ():void {
 		else if(player.cocks[0].cockType == CockTypesEnum.DEMON) outputText("climbs atop your " + cockDescript(0) + ", hanging on to the corrupted nubs and nodules as she threads her legs between them, squeezing you tightly as she hangs on.  You can feel her wet gash sitting atop a particularly sensitive bump, teasing you with a tiny cunt you'll never be able to penetrate.  ", false);
 		else if(player.cocks[0].cockType == CockTypesEnum.TENTACLE) outputText("climbs onto your squirming " + cockDescript(0) + ", wrapping her legs tightly around it as it wiggles and writhes with excitement.  Unbidden, it curls around and rubs its reddish-purple head against her face like an animal.  She gives it a gentle squeeze and licks it.  ", false);
 		else outputText("climbs on to your hardness, wrapping her legs tightly around it as she secures a perch against you.   You can feel her wet gash rubbing against your sensitive skin, teasing you with a tiny cunt you'll never be able to penetrate.  ", false);
-		outputText("Your internal muscles clench unconsciously, squeezing out a dollop of pre that rolls down into the faerie's hair, soaking her head and face.  You can't see her reaction, but you can feel it oozing between her body and you, lubricating her as she humps and rubs against you.  Tiny muffled moans escape your " + player.armorName + ", indicating that some part of her is enjoying the task.\n\n", false);
-		outputText("Though she can only stimulate a few inches of you at a time, it feels really good – better than it should, and a budding warmth on the edge of release builds inside you.  Too late you realize you should have gotten at least partially undressed.  You cum before you can do anything about it, splattering your " + player.armorName + " with seed and leaving a wet patch on the crotch.  You can feel it dripping back onto you and the faerie as more spunk squirts out, soaking the tiny girl in spooge as the wet spot grows.  ", false);
+		outputText("Your internal muscles clench unconsciously, squeezing out a dollop of pre that rolls down into the faerie's hair, soaking her head and face.  You can't see her reaction, but you can feel it oozing between her body and you, lubricating her as she humps and rubs against you.  Tiny muffled moans escape " + player.clothedOrNakedLower("your " + player.armorName + "", "her mouth") + ", indicating that some part of her is enjoying the task.\n\n", false);
+		outputText("Though she can only stimulate a few inches of you at a time, it feels really good – better than it should, and a budding warmth on the edge of release builds inside you.  " + player.clothedOrNakedLower("Too late you realize you should have gotten at least partially undressed.  You cum before you can do anything about it, splattering your " + player.armorName + " with seed and leaving a wet patch on the crotch.  You can feel it dripping back onto you and the faerie as more spunk squirts out, soaking the tiny girl in spooge as the wet spot grows", "Good thing your junk is exposed as otherwise you would have ended up jizzing in your pants. You cum, splattering the faerie with seed. This continues until the tiny girl is soaked in spooge") + ".  ", false);
 		if(player.cumQ() > 250) {
-			outputText("You cum uncontrollably, regretting your fertility as your body paints the inside of your " + player.armorName + " with goopy whiteness.  ", false);
+			outputText("You cum uncontrollably, " + player.clothedOrNakedLower("regretting your fertility as your body paints the inside of your " + player.armorName + " with goopy whiteness.", "painting the ground with goopy whiteness.") + "  ", false);
 			if(player.cumQ() > 500) outputText("The proof of your release forms a puddle around you as your legs give out and y", false);
 			else outputText("Falling backwards as your legs give out, y", false);
 		}
@@ -264,9 +276,14 @@ private function faerieCaptureHJ():void {
 		outputText("The faerie takes off, still dripping, and flying in something less than a straight line...", false);
 		player.orgasm();
 		dynStats("lib", -.5);
-		if(player.findStatusAffect(StatusAffects.Jizzpants) < 0) player.createStatusAffect(StatusAffects.Jizzpants,1,0,0,0);
+		if(player.findStatusAffect(StatusAffects.Jizzpants) < 0 && player.armor.name != "nothing" && player.armor != armors.LTHCARM && player.armor != armors.GOOARMR) player.createStatusAffect(StatusAffects.Jizzpants,1,0,0,0);
+		if (player.armor == armors.GOOARMR) {
+			outputText("\n\nFortunately, your jizz gets absorbed into the blue goo covering your body.");
+			getGame().valeria.feedValeria(player.cumQ() / 10);
+		}
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
+
 }
 }

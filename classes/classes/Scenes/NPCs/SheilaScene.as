@@ -1,6 +1,8 @@
 ﻿package classes.Scenes.NPCs{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.Camp.*;
+	import classes.Items.*;
 
 	public class SheilaScene extends NPCAwareContent implements TimeAwareInterface {
 
@@ -686,7 +688,7 @@ private function sheilaReconcileKay2():void {
 	outputText("\n\n\"<i>Ah, here,</i>\" she says abruptly, pulling out a biscuit and holding it out to you as well.  You take it with care; it feels slightly slippery to the touch.  \"<i>Fish oil cracker,</i>\" Sheila explains.  \"<i>Made it myself this morning.  Eat nothing but rabbit and you get stonkered with headaches and fat cravings - any lean meat, really.  Most bushrangers find out the hard way.  I'm not cook enough to make it tasty, so get it down first and bog in afterward.</i>\"  She beams a smile as you eye up the unappetizing morsel of dry, fishy bread and swallow it in a single mouthful, then grimace.  Despite the kindly concern evidenced by the gesture, she... definitely wasn't sugar-coating the description.");
 	
 	outputText("\n\nThe two of you devour the first half of the meat in greedy silence, picking morsels from the bones without remorse; Sheila finishes before you and spits the second half of the rabbit, then begins holding it over the fire as she did the first.  Peering over your nearly-bare rabbit quarter at her, you turn the question you've been shaping in your head over a few times.");
-	
+	player.refillHunger(50);
 	outputText("\n\n\"<i>So how is it that you and your friends come to live out here by yourselves?</i>\"");
 	
 	outputText("\n\nShe stops humming and looks absently at the meat for a while, as if deciding whether to answer, and for a moment you despair of ever piercing the veil of her bluffness.");
@@ -737,7 +739,7 @@ private function sheilaGettingFamiliar():void {
 	addButton(2,"Curfew?",sheilaFriendlyCurfew);
 	addButton(3,"No Questions",sheilaFriendlyNoQuestions);
 	
-	addButton(9,"Leave",camp.returnToCampUseOneHour);
+	addButton(14,"Leave",camp.returnToCampUseOneHour);
 }
 
 
@@ -2429,7 +2431,7 @@ internal function sheilaGotWhomped():void {
 		}
 		if(player.hasVagina()) addButton(2,"Forced Lick",forcedSheilaOral,false);
 	}
-	addButton(9,"Leave",letSheilaGo);
+	addButton(14,"Leave",letSheilaGo);
 }
 //if choosing Let Her Go and sheila xp > -3, set sheila xp = -1, then give xp/gems and Next button to camp
 private function letSheilaGo():void {
@@ -3070,6 +3072,7 @@ private function sheilaCowgirlRapesYou():void {
 			//reduce lust and lib, reset hrs since cum, lose 8 hrs if HP or 2-3 if lust loss?
 			sheilaPreg(true);
 			player.orgasm();
+			sheilaPreg();
 			dynStats("lib", -1);
 			cleanupAfterCombat();
 		}
@@ -3161,7 +3164,7 @@ private function sheilaForcedOralGeneric():void {
 	//end scene, add fatigue if long tongue, very big lib-based lust gain, gain libido if lust hits 100; if PC corr > sheila corruption then -10 PC corr and +10 sheila corruption, else if PC corr < sheila corruption then +10 PC corr and -10 sheila corruption and slimefeed
 	if(player.tongueType > TONUGE_HUMAN) fatigue(15);
 	dynStats("lus", player.lib/3+30, "resisted", false);
-	if(player.lust >= 100) dynStats("lib", 1);
+	if(player.lust >= player.maxLust()) dynStats("lib", 1);
 	sheilaCorruptionUpdate();
 	/*
 	if(player.cor >= 90 || player.cor > sheilaCorruption()) {
@@ -4800,7 +4803,7 @@ private function jojoRuinsTheAnalHateFuck(clear:Boolean = true):void {
 	outputText("\n\nSmiling grimly, you leave the wet sounds of sex behind you, wondering if Jojo will ever come when you call again.");
 	
 	//set lust to 100, huge corruption gain (like it matters), set sheilapreg to -3 and disable Jojo unless and until new corrupted content is written to reflect changes
-	dynStats("lus=", 100, "cor", 10, "resisted", false);
+	dynStats("lus=", player.maxLust(), "cor", 10, "resisted", false);
 	flags[kFLAGS.SHEILA_DISABLED] = 4;
 	flags[kFLAGS.JOJO_DEAD_OR_GONE] = 1;
 	if (getGame().inCombat)
@@ -5029,6 +5032,61 @@ private function winAgainstDemoNSheilaForVaginas():void {
 	else doNext(camp.returnToCampUseOneHour);
 }
 
+//Scarred blade
+public function badEndScarredBlade():void {
+	outputText("You collapse from your injuries and realize what's the scarred blade's going to do. It's GOING FOR YOU! You scream as the saber thrusts towards you.");
+	if (silly()) rawOutputText("\n\n[DATA EXPUNGED]");
+	if (marbleFollower()) outputText("\n\n\"<i>NOOOOO! Sweetie!</i>\" Marble cries.");
+	getGame().inCombat = false;
+	flags[kFLAGS.SCARRED_BLADE_STATUS] = 1;
+	getGame().gameOver();
+}
+
+public function breakScarredBlade():void {
+	outputText("The scarred blade falls to the ground, inanimate. You walk over to grab the saber to find out it's still moving faintly. The saber needs to be broken to ensure it poses no further danger and remains usable.\n\n");
+	if (player.str >= 85) outputText("You grab the saber by the blade and bend it with all your might. The metal groans and the lethicite cracks. You repeatedly twist the blade until one segment of the saber finally snaps off.");
+	else {
+		outputText("You grab the saber by the blade and attempt to bend it with all your might. The blade refuses to bend despite your efforts. ");
+		if (followerHel()) outputText("You call Helia over. \"<i>Hey, lover! Need any help?</i>\" she asks. You ask her if she can break the scarred blade. \"<i>Yes, lover. Hold the sword out.</i>\" Helia instructs. You hold out the scarred blade, Hel raises her scimitar up and slashes it cleanly through the scarred blade, cutting off the segment of the blade.");
+		else if (followerKiha()) outputText("You call Kiha over. \"<i>Yes?</i>\"");
+		else if (marbleFollower()) outputText("You call Marble over. \"<i>What is it you need, sweetie?</i>\" she asks. You ask her if she can break the scarred blade. \"<i>Yes, sweetie. I'll get my hammer.</i>\"");
+		outputText("You throw the sword towards the tree and it lodges partway into the tree. With the additional leverage, you push and pull the sword to the side repeatedly. The metal groans and the lethicite cracks. After a few minutes of bending, one segment of the saber finally breaks off.");
+	}
+	outputText("\n\nYou examine the now-broken saber thoroughly to find out that it no longer moves at all. Whatever demonic power inside the scarred blade must be gone now. It looks like the sword is still usable. ");
+	cleanupAfterCombat();
+	//inventory.takeItem(weapons.B_SCARB, camp.returnToCamp);
+}
+
+public function rebellingScarredBlade(wieldAttempt:Boolean = false):void {
+	if (!wieldAttempt) outputText("<b>The scratched sword you carry jerks wildly like a bucking horse, and, tilting hilt-downward, slides itself right out of its scabbard.  Before you can pick it up and re-sheathe it, it lashes out at your hand, cutting you and landing with the point out.  Even when you try to circle it and grab the handle, the uncanny saber spins its edge around to fend you off.  Sighing with irritation, you abandon it for now.</b>\n\n");
+	else outputText("As soon as you try to wield the sword, it jerks wildly like a bucking horse. You quickly put it back into your pouches before it can do harm to you.");
+	if (!wieldAttempt) {
+		var dmg:int = 20
+		dmg -= player.armorDef;
+		if (dmg < 1) dmg = 1;
+		HPChange(-dmg, false);
+		player.setWeapon(WeaponLib.FISTS);
+		flags[kFLAGS.SCARRED_BLADE_STATUS] = 1;
+	}
+	doNext(playerMenu);
+	addButton(1, "Fight", startCombatImmediate, new ScarredBlade, true, null, "Fight the saber and try to break it. This is going to be a risky battle and a loss can mean your demise.");
+}
+public function findScarredBlade():void {
+	outputText("A nearby flash of light on metal catches your eye.  Drawing closer to it, you find the blade you abandoned before sticking point-down in the dirt.  The tainted saber leans toward you, presenting its hilt almost pleadingly.  Take up the sword again?");
+	doYesNo(takeScarredBlade, leaveScarredBlade);
+}
+private function takeScarredBlade():void {
+	clearOutput();
+	outputText("You grab the bloodthirsty saber and pull it from the ground. ");
+	flags[kFLAGS.SCARRED_BLADE_STATUS] = 0;
+	inventory.takeItem(weapons.SCARBLD, camp.returnToCampUseOneHour);
+}
+private function leaveScarredBlade():void {
+	clearOutput();
+	outputText("You choose not to take the saber, leaving it to rust. ");
+	flags[kFLAGS.SCARRED_BLADE_STATUS] = -1;
+	doNext(camp.returnToCampUseOneHour);
+}
 
 /*Sheila's Lethicite:
 

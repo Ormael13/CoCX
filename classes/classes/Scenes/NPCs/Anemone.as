@@ -2,6 +2,7 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.internals.WeightedDrop;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class Anemone extends Monster
 	{
@@ -96,19 +97,27 @@ package classes.Scenes.NPCs
 			this.hairColor = "purplish-black";
 			this.hairLength = 20;
 			this.hairType = HAIR_ANEMONE;
-			initStrTouSpeInte(40, 20, 40, 50);
+			initStrTouSpeInte(64, 45, 40, 50);
 			initLibSensCor(55, 35, 50);
 			this.weaponName = "tendrils";
 			this.weaponVerb="tentacle";
-			this.weaponAttack = 5;
+			this.weaponAttack = 16 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "clammy skin";
+			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = 120;
+			this.bonusLust = 20;
 			this.lust = 30;
 			this.lustVuln = .9;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 4;
-			this.gems = rand(5) + 1;
+			this.level = 12;
+			this.gems = rand(20) + 20;
 			this.drop = new WeightedDrop(consumables.DRYTENT, 1);
+			this.str += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 1000;
 			checkMonster();
 		}
 		

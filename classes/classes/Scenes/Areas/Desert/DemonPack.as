@@ -2,6 +2,7 @@
 {
 	import classes.*;
 	import classes.internals.WeightedDrop;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class DemonPack extends Monster
 	{
@@ -25,7 +26,7 @@
 			}
 			if(findStatusAffect(StatusAffects.phyllafight) >= 0) {
 				doNext(game.desert.antsScene.consolePhylla);
-			} else if (hpVictory){
+			} else if (hpVictory || flags[kFLAGS.SFW_MODE] > 0){
 				game.cleanupAfterCombat();
 			} else {
 				outputText("  Do you rape them?", true);
@@ -46,6 +47,9 @@
 				} else {
 					outputText("You offer yourself to the demons, who promptly begin laughing at your lack of endowments.  They fall on you as one, beating you into unconsciousness.", true);
 				}
+				game.cleanupAfterCombat();
+			} else if (flags[kFLAGS.SFW_MODE] > 0) {
+				outputText("Because SFW mode is enabled, this scene is disabled.");
 				game.cleanupAfterCombat();
 			} else if (hpVictory){
 				outputText("The demons finally beat you down and you collapse onto the sand of the oasis. Almost immediately you feel demonic hands pressing and probing your prone form. You hear the leader of the group say something in a strange tongue but you have a feeling you know what it means. The demons dive onto your inert body with intent and begin to press themselves against you...", true);
@@ -108,16 +112,19 @@
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
-			initStrTouSpeInte(80, 10, 10, 5);
-			initLibSensCor(50, 60, 80);
+			initStrTouSpeInte(50, 30, 10, 5);
+			initLibSensCor(50, 70, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
+			this.weaponAttack = 5 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "demonic skin";
-			this.bonusHP = 200;
+			this.armorDef = 5 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusHP = 20;
+			this.bonusLust = 200;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 6;
-			this.gems = rand(25)+10;
+			this.level = 9;
+			this.gems = rand(30)+20;
 			this.drop = new WeightedDrop().addMany(1,
 							consumables.SUCMILK,
 							consumables.INCUBID,
@@ -128,6 +135,13 @@
 			this.tailType = TAIL_TYPE_DEMONIC;
 			this.hornType = HORNS_DEMON;
 			this.horns = 2;
+			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.str += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 290;
 			checkMonster();
 		}
 

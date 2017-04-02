@@ -2,6 +2,7 @@
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class HellHound extends Monster
 	{
@@ -31,18 +32,29 @@
 			else {
 				//Determine the damage to be taken
 				var temp:Number = 15 + rand(10);
-				temp = player.takeDamage(temp);
-				outputText("Both the hellhound's heads breathe in deeply before blasting a wave of dark fire at you. While the flames don't burn much, the unnatural heat fills your body with arousal. (" + temp + " damage)", false);
-				game.dynStats("lus", 20-(player.sens/10));
+				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) temp *= 3;
+				if (player.findPerk(PerkLib.FireAffinity) >= 0) temp *= 0.3;
+				temp = Math.round(temp);
+				if (player.findStatusAffect(StatusAffects.Blizzard) >= 0) {
+				player.addStatusValue(StatusAffects.Blizzard,1,-1);
+				temp *= 0.2;
+				outputText("Both the hellhound's heads breathe in deeply before blasting a wave of dark fire at you. While the flames don't burn much due to protection of blizzard, the unnatural heat fills your body with arousal. ", false);
+				}
+				else {
+				outputText("Both the hellhound's heads breathe in deeply before blasting a wave of dark fire at you. While the flames don't burn much, the unnatural heat fills your body with arousal. ", false);
+				}
+				temp = Math.round(temp);
+				player.takeDamage(temp, true);
+				game.dynStats("lus", 20+(player.sens/10));
 				statScreenRefresh();
 				if(player.HP <= 0) {
 					doNext(game.endHpLoss);
 					return;
 				}
-				if(player.lust >= 100) {
+				if(player.lust >= player.maxLust()) {
 					doNext(game.endLustLoss);
 					return;
-				}		
+				}
 			}
 			doNext(game.playerMenu);
 		}
@@ -81,7 +93,7 @@
 				doNext(endHpLoss);
 				return;
 			}
-			if(player.lust > 100) {
+			if(player.lust > player.maxLust()) {
 				doNext(endLustLoss);
 				return;
 			}
@@ -159,16 +171,18 @@
 			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_FUR];
 			this.hairColor = "red";
 			this.hairLength = 3;
-			initStrTouSpeInte(55, 60, 40, 1);
+			initStrTouSpeInte(64, 64, 50, 1);
 			initLibSensCor(95, 20, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 10;
+			this.weaponAttack = 10 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "thick fur";
+			this.armorDef = 7 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusLust = 10;
 			this.lust = 25;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 5;
-			this.gems = 10+rand(10);
+			this.level = 10;
+			this.gems = 15+rand(12);
 			this.drop = new WeightedDrop().add(consumables.CANINEP, 3)
 					.addMany(1, consumables.BULBYPP,
 							consumables.KNOTTYP,
@@ -178,6 +192,13 @@
 			this.tailType = TAIL_TYPE_DOG;
 			this.special1 = hellhoundFire;
 			this.special2 = hellhoundScent;
+			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
+			this.str += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 1080;
 			checkMonster();
 		}
 

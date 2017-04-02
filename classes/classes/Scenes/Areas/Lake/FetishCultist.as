@@ -2,6 +2,7 @@
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.*;
 
 	public class FetishCultist extends Monster
 	{
@@ -80,7 +81,7 @@
 				outputText("She suddenly starts mauling her shapely breasts, her fingers nearly disappearing briefly in the soft, full flesh, while fingering herself eagerly, emitting a variety of lewd noises.  You are entranced by the scene, the sexual excitement she's experiencing penetrating your body in warm waves coming from your groin.", false);
 			}
 			game.dynStats("lus", (player.lib/10 + player.cor/20)+4);
-			if (player.lust >= 100)
+			if (player.lust >= player.maxLust())
 				doNext(game.endLustLoss);
 			else doNext(game.combatMenu);
 		}
@@ -106,7 +107,7 @@
 				lust -= 50;
 				if(lust < 0) lust = 10;
 			}
-			if (player.lust >= 100)
+			if (player.lust >= player.maxLust())
 				doNext(game.endLustLoss);
 			else doNext(game.combatMenu);
 		}
@@ -121,12 +122,12 @@
 			} else {
 				outputText("Overwhelmed by her lusts, the cultist loses the ability to control herself and collapses.", true);
 			}
-			if(player.lust >= 33 && player.gender > 0) {
+			if(player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  You realize she'd make a perfect receptacle for your lusts.  Do you have your way with her?", false);
 				game.simpleChoices("Sex", game.lake.fetishCultistScene.playerRapesCultist, "", null, "", null, "B. Feed", temp2, "Leave", game.cleanupAfterCombat);
 			}
 			else {
-				if(temp2!=null) {
+				if(temp2!=null && flags[kFLAGS.SFW_MODE] <= 0) {
 					outputText("  She looks like she might take some of your milk if you offered it to her.  What do you do?", false);
 					game.simpleChoices("B. Feed", temp2, "", null, "", null, "", null, "Leave", game.cleanupAfterCombat);
 				}
@@ -169,14 +170,17 @@
 			this.skinTone = "pale";
 			this.hairColor = "black";
 			this.hairLength = 15;
-			initStrTouSpeInte(35, 25, 30, 1);
+			initStrTouSpeInte(40, 25, 30, 1);
 			initLibSensCor(75, 80, 90);
 			this.weaponName = "whip";
-			this.weaponVerb="whip-crack";
+			this.weaponVerb = "whip-crack";
+			this.weaponAttack = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = FETISHY_OUTFIT;
+			this.armorDef = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusLust = 20;
 			this.lust = 25;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 2;
+			this.level = 3;
 			this.gems = 5+rand(10);
 			this.drop = new WeightedDrop().add(consumables.LABOVA_,1)
 					.add(weapons.RIDINGC,1)
@@ -184,6 +188,12 @@
 					.add(consumables.L_DRAFT,6);
 			this.special1 = cultistRaisePlayerLust;
 			this.special2 = cultistLustTransfer;
+			this.str += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 350;
 			checkMonster();
 		}
 

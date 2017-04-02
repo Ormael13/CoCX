@@ -52,38 +52,29 @@ private function favoriteSalonMenu():void {
 }
 
 private function salonFavoritesPaymentMenu():void {
-	var blow:Function = null;
-	if(player.hasCock()) blow = goblinHairDresserFacefuck;
-	var minoCum:Function = null;
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) minoCum = goblinHairDresserFacefuck;
 	menu();
 	if(flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] >= 4 && player.hasCock()) addButton(5,"Fuck Goblin",fuckLynnette);
-	addButton(0,"Goblin Blow",blow);
+	if(player.hasCock()) addButton(0,"Goblin Blow",goblinHairDresserFacefuck);
 	addButton(1,"Canine",gloryholeDoggie);
 	addButton(2,"Imp",gloryholeImp);
 	addButton(3,"Minotaur",gloryholeMinotaur);
 	addButton(4,"Incubus",gloryholeIncubus);
-	addButton(8,"Buy MinoCum",minoCum);
-	addButton(9,"Back",favoriteSalonMenu);
+	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) addButton(8,"Buy MinoCum",buyMinoCum);
+	addButton(14,"Back",favoriteSalonMenu);
 }
-
 
 private function salonPaymentMenu():void {
-	var blow:Function = null;
-	if(player.hasCock()) blow = goblinHairDresserFacefuck;
-	var minoCum:Function = null;
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) minoCum = buyMinoCum;
 	menu();
 	if(flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] >= 4 && player.hasCock()) addButton(5,"Fuck Goblin",fuckLynnette);
-	addButton(0,"Goblin Blow",blow);
-	addButton(1,"Canine",gloryholeDoggie);
-	addButton(2,"Imp",gloryholeImp);
-	addButton(3,"Minotaur",gloryholeMinotaur);
-	addButton(4,"Incubus",gloryholeIncubus);
-	addButton(8,"Buy MinoCum",minoCum);
-	addButton(9,"Leave",camp.returnToCampUseOneHour);
-	//choices("Goblin Blow",blow,"Canine",gloryholeDoggie,"Imp",gloryholeImp,"Minotaur",gloryholeMinotaur,"Incubus",gloryholeIncubus,"",0,"",0,"",0,"Buy MinoCum",minoCum,"Leave",13);
+	if (player.hasCock()) addButton(0, "Goblin Blow", goblinHairDresserFacefuck, null, null, null, "Let Lynnette suck you off.");
+	addButton(1, "Canine", gloryholeDoggie, null, null, null, "Suck that knotted cock.");
+	addButton(2, "Imp", gloryholeImp, null, null, null, "Suck that demonic cock. Judging from the constant bobbing, someone must have been trying hard to hover at the right height.");
+	addButton(3, "Minotaur", gloryholeMinotaur, null, null, null, "Suck that huge minotaur cock!");
+	addButton(4, "Incubus", gloryholeIncubus, null, null, null, "Suck that incubus cock. It gives off that pleasant spicy scent.");
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) addButton(8, "Buy MinoCum", buyMinoCum, null, null, null, "Buy a bottle of minotaur cum for 60 gems?");
+	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
+
 		private function buyMinoCum():void{
 			if (player.gems < 60)
 			{
@@ -101,45 +92,42 @@ private function salonPaymentMenu():void {
 				inventory.takeItem(consumables.MINOCUM, camp.returnToCampUseOneHour);
 			}
 		}
+		
 public function salonPurchaseMenu():void {
 	flags[kFLAGS.SALON_PAID] = 1;
 	spriteSelect(38);
-	var cutShort2:Function = null;
-	var cutMedium2:Function = null;
-	var cutLong2:Function = null;
-	var lengthening:Function = null;
-	var minoCum:Function = null;
-	var mudFacial2:Function = null;
-	var sandFacial2:Function = null;
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) minoCum = buyMinoCum;
-	if(player.hairLength > 2) cutShort2 = cutShort;
-	if(player.hairLength > 13) cutMedium2 = cutMedium;
-	if(player.hairLength >= 26) cutLong2 = cutLong;
-	if(player.hairLength < player.tallness) lengthening = hairGrow;
-	if(player.femininity < 100 && player.gender == 2) mudFacial2 = mudFacial;
-	else if(player.femininity < 85 && (player.gender == 0 || player.gender == 3)) mudFacial2 = mudFacial;
-	else if(player.femininity < 70 && player.gender == 1) mudFacial2 = mudFacial;
-	else if(player.femininity < 100 && player.findPerk(PerkLib.Androgyny) >= 0) mudFacial2 = mudFacial;
-	if(player.femininity > 0 && player.gender == 1) sandFacial2 = sandFacial;
-	else if(player.femininity > 30 && player.gender == 2) sandFacial2 = sandFacial;
-	else if(player.femininity > 20 && (player.gender == 0 || player.gender == 3))  sandFacial2 = sandFacial;
-	else if(player.femininity > 0 && player.findPerk(PerkLib.Androgyny) >= 0) sandFacial2 = sandFacial;
+	var mudFacialEnabled:Boolean = false;
+	var sandFacialEnabled:Boolean = false;
+	//Enable mud facial
+	if(player.femininity < 100 && player.gender == 2) mudFacialEnabled = true;
+	else if(player.femininity < 85 && (player.gender == 0 || player.gender == 3)) mudFacialEnabled = true;
+	else if(player.femininity < 70 && player.gender == 1) mudFacialEnabled = true;
+	else if(player.femininity < 100 && player.findPerk(PerkLib.Androgyny) >= 0) mudFacialEnabled = true;
+	//Enable sand facial
+	if(player.femininity > 0 && player.gender == 1) sandFacialEnabled = true;
+	else if(player.femininity > 30 && player.gender == 2) sandFacialEnabled = true;
+	else if(player.femininity > 20 && (player.gender == 0 || player.gender == 3))  sandFacialEnabled = true;
+	else if(player.femininity > 0 && player.findPerk(PerkLib.Androgyny) >= 0) sandFacialEnabled = true;
 	
 	menu();
-	addButton(0,"Cut Short",cutShort2);
-	addButton(1,"Cut Med.",cutMedium2);
-	addButton(2,"Cut Long",cutLong2);
-	addButton(3,"Lengthen",lengthening);
-	addButton(4,"Buy Products",dyeMenu);
-	addButton(5,"Buy MinoCum",minoCum);
-	addButton(7,"Mud Facial",mudFacial2);
-	addButton(8,"Sand Facial",sandFacial2);
-	addButton(9,"Leave",camp.returnToCampUseOneHour);
+	if (player.hairLength > 2) addButton(0, "Cut Short", cutShort);
+	if (player.hairLength > 13) addButton(1, "Cut Medium", cutMedium);
+	if (player.hairLength >= 26) addButton(2, "Cut Long", cutLong);
+	if (player.hairLength < player.tallness) addButton(3, "Lengthen", hairGrow);
+	if (player.hairLength > 0) addButton(4, "Remove Hair", removeHair);
+	addButton(5, "Buy Products", dyeMenu);
+	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) addButton(6, "Buy MinoCum", buyMinoCum, null, null, null, "Buy a bottle of minotaur cum for 60 gems?");
+	addButton(7, "Beard Options", beardMenu);
+	if (mudFacialEnabled) addButton(8, "Mud Facial", mudFacial, null, null, null, "This facial is supposed to enhance the softness of your face and enhance its femininity greatly.");
+	if (sandFacialEnabled) addButton(9, "Sand Facial", sandFacial, null, null, null, "The goblins promise this facial will give you a rough, handsome look thanks to their special, timeless sands.");
+	addButton(14,"Leave",camp.returnToCampUseOneHour);
 }
 
 private function hairDresserGreeting():void {
 	spriteSelect(38);
-	outputText("You step inside the cave, and are greeted by a sight you did not expect.  The cave's floor is covered with smooth wood panelling and the walls are nearly entirely covered with hanging mirrors.  The few stalactites have hooks drilled into them, from which hang hundreds of scissors, shears, razors, combs, and other hairstyling impliments.  It reminds you of the hair-cutter's shop in your hometown.", true);
+	clearOutput();
+	outputText(images.showImage("location-salon"));
+	outputText("You step inside the cave, and are greeted by a sight you did not expect.  The cave's floor is covered with smooth wood panelling and the walls are nearly entirely covered with hanging mirrors.  The few stalactites have hooks drilled into them, from which hang hundreds of scissors, shears, razors, combs, and other hairstyling impliments.  It reminds you of the hair-cutter's shop in your hometown.");
 	outputText("\n\nThere are a few chairs along the wall and goblins with latex dresses and gloves looking bored.  At the sight of you they perk up and clamor around you excitedly, until one with a gravity-defying chest pushes them apart and greets you.", false);
 	outputText("   \"<i>I apologize for my daughters,</i>\" she says as she presses herself against you.  \"<i>They're a bunch of brainless hussies for the most part.  My name is Lynnette, and welcome to my salon!  You want your hair cut or lengthened?  We've got you covered, and we don't ask for much - just a shot of cum.", false);
 	if(player.cockTotal() == 0) {
@@ -155,6 +143,7 @@ private function hairDresserGreeting():void {
 private function hairDresserRepeatGreeting():void {
 	clearOutput();
 	spriteSelect(38);
+	outputText(images.showImage("location-salon"));
 	var minoCum:Number = 0;
 	//Chance for mino craziness here
 	if(rand(5) == 0 && (player.findPerk(PerkLib.MinotaurCumAddict) >= 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] > 0)) {
@@ -251,7 +240,7 @@ private function hairDresserRepeatGreeting():void {
 }
 private function gloryholeImp():void {
 	player.slimeFeed();
-	outputText("", true);
+	clearOutput();
 	outputText("You walk over to the hole in the wall, looking at the erect demon-member you'll have to service.  Judging by the height and constant bobbing up and down it does, the imp must be hovering on the other side, trying pretty damn hard to stay in the hole.\n\n", true);
 	if(player.cor < 33) {
 		outputText("You struggle to force your mouth onto the abomination in front of you, wondering why you chose to do such a thing.  Your head bobs up and down, trying to match the motions of the thick demonic tool as you grab hold and guide it into your mouth.  It's hot, hotter than you'd expect, and dripping with sickly sweet pre-cum that makes you tingle.  You throw yourself into the wretched task, intent on finishing it as quickly as possible.  You circle your tongue over the nodules, holding on as it swells in your mouth, unloading a sticky batch of spooge into your throat.  You cough and sputter, swallowing most of it, but you manage to hang on to enough for your pay.\n\n", false);
@@ -265,6 +254,7 @@ private function gloryholeImp():void {
 		outputText("You immediately dive forwards, relishing the idea of taking in another load of demonic cum.  Your groin tingles as your lips make their way down the oddly textured shaft, engulphing nearly 10 inches of demon-cock, feeling it press down your throat.  You curl your tongue around and begin sliding back and forth, immediately rewarded with a thick dribble of pre-cum.  The imp on the other end loses it immediately, blasting waves of cum directly into your belly as you shove forwards, taking him into the hilt.  You feel him pulsing and pull back in time to take the last few loads in your mouth, saving your payment for the goblins.\n\n", false);
 		dynStats("lus", 45, "cor", 2);
 	}
+	player.refillHunger(25);
 	outputText("Abruptly, the demon-dong slips through your grasp and out the hole.  You hear a loud thump as something lands on the ground. Poor thing.\n\n", false);
 	doNext(hairDressingMainMenu);
 }
@@ -273,7 +263,7 @@ private function gloryholeImp():void {
 
 private function gloryholeDoggie():void {
 	player.slimeFeed();
-	outputText("", true);
+	clearOutput();
 	outputText("You sigh and kneel down to bring yourself level with the dog-dick hanging out of the wall.  It's pointed at the tip with a swollen circular bulb at the base.  As a matter of fact, the dog-dick's owner must be pretty excited to be here - it's dripping cum and the knot has swollen so large that it can't fit back through the hole.\n\n", true);
 	if(player.cor < 33) {
 		outputText("It's a struggle to force your lips apart and take the strange thing in your mouth.  You feel like a freak, but make yourself get to work servicing the male who'll be covering your hair treatment today.  It tastes salty and sweaty and has a potent musky scent that excites you in spite of your better judgment.  You find yourself starting to get into it as you lick and slurp, humming with pleasure.  You reach up to touch the knot and the dog-cock jumps in your mouth, spurting a wad of thick cum into your throat.  You pull back most of the way and pump the cock, collecting the jism in your mouth.\n\n", false);
@@ -287,12 +277,13 @@ private function gloryholeDoggie():void {
 		outputText("You throw yourself onto the swollen dog-cock and easily engulf the whole thing, spreading your lips wide around the thick knot.  You can feel it bouncing the uvula in your throat around but you manage to supress your gag reflex like a good slut while you work the sweaty dick, giving it a thorough tongue bath.  You wrap your lips around the base of the knot, feeling it start to stretch your jaws apart.  You pull back before it can lock you like that, and squeeze the knot in your hands.  It cums, unloading thick wads of gooey cum into your mouth.\n\n", false);
 		dynStats("lus", 30, "cor", .3);
 	}
+	player.refillHunger(10);
 	outputText("A young goblin comes by with a bowl for you to make your payment into.  You spit out the gunk and wipe your mouth, as the goblin carries the seed away.  You notice a trail of clear drops on the ground behind her.  She must be anticipating something...", false);
 	doNext(hairDressingMainMenu);
 }
 private function gloryholeIncubus():void {
 	player.slimeFeed();
-	outputText("", true);
+	clearOutput();
 	outputText("You kneel down in front of the throbbing demonic dick, ready to earn your pay.\n\n", false);
 	if(player.cor < 33) {
 		outputText("You picked this dick hoping that a male lust demon would be the most pleasurable to service, and judging by the pleasant spicy scent the member gives off, you're right.  You open wide and take it inside your mouth, feeling the ridges around the crown pressing back against your lips. A drop of pre-cum hits your tongue and it tastes divine, spurring you on to please the tainted member.  You grab it with both hands and pump it, feeling the corrupted nodules under your fingers as you lick and suck on the head, eager for more.  You get your reward soon enough, and you eagerly start drinking down the copious waves of fluid.  Thankfully, the incubus' orgasm seems to last forever, and when he finishes, you have a full belly and a mouth full of cream.  You manage to resist this last swallow, as you still need to pay.\n\n", false);
@@ -305,6 +296,7 @@ private function gloryholeIncubus():void {
 		player.lust = 99;
 		
 	}
+	player.refillHunger(35);
 	statScreenRefresh();
 	doNext(hairDressingMainMenu);
 }
@@ -319,12 +311,14 @@ private function gloryholeMinotaur(): void {
 	outputText("your [chest] as cum rains down upon you. By the time his orgasm stops and his dick goes limp, your face and [chest] are covered in a thick layer of spooge.\n\n", false);
 	outputText("Your head spins from the minotaur's musk, and you idly mop up and swallow the cum on your " + player.face() + ". A goblin aide comes in with a bowl, and gently scrapes the cum off your tits with a smooth, flat rock. Once you're cleaned up and you're dressed, the aide leads you back to Lynnette.\n\n", false);
 	dynStats("lus", 33, "cor", 1);
+	player.refillHunger(30);
 	player.minoCumAddiction(10);
 	doNext(hairDressingMainMenu);
 }
 
 private function goblinHairDresserFacefuck():void {
 	spriteSelect(38);
+	outputText(images.showImage("lynnette-blowjob"));
 	outputText("Lynnette licks her lips and practically tears her way into your " + player.armorName + ", having your crotch exposed in seconds.  Your " + cockDescript(0) + " flops out immediately, slapping her on the nose as it grows hard.  She wraps both hands around you and begins pumping with practiced ease, flicking her tongue over your crown and wrapping her lips ", true);
 	if(player.cocks[0].cockThickness >= 4) outputText("around as much of you as she can", false);
 	else outputText("around your first few inches", false);
@@ -399,14 +393,23 @@ private function hairGrow():void {
 	outputText(num2Text(temp) + " more inches of " + player.hairColor + " hair.", false);
 	doNext(camp.returnToCampUseOneHour);
 }
+
+private function removeHair():void {
+	outputText("You tell Lynnette that you'd like to have your hair removed.\n\n", true);
+	outputText("Lynnette instructs you to take a seat and instructs her daughters to pare down your hair down to short length. They effortlessly cut your hair to short length. Next, Lynnette applies a special cream all over your " + player.hairDescript() +".  Your hair starts to stiffen and falls out.  She gives your head a good cleaning afterwards.\n\n");
+	outputText("<b>You no longer have a hair!</b>");
+	player.hairLength = 0;
+	doNext(camp.returnToCampUseOneHour);
+}
+
 		private function buyDye(itype:ItemType):void{
-			outputText("", true);
+			clearOutput();
 			inventory.takeItem(itype, camp.returnToCampUseOneHour);
 		}
 		
 private function dyeMenu():void {
 	spriteSelect(38);
-	outputText("", true);
+	clearOutput();
 	outputText("Lynnette pulls open a cabinet in the corner, displaying a wide array of exotic hair-dyes.  Which kind do you want?", false);
 	menu();
 	addButton(0, "Blue", buyDye, consumables.BLUEDYE);
@@ -415,13 +418,97 @@ private function dyeMenu():void {
 	addButton(3, "Purple", buyDye, consumables.PURPDYE);
 	addButton(4, "Green", buyDye, consumables.GREEN_D);
 	addButton(5, "Ext.Serum", buyDye, consumables.EXTSERM);
-	addButton(9, "Back", hairDressingMainMenu);
+	addButton(14, "Back", hairDressingMainMenu);
 }
 
+private function beardMenu():void {
+	outputText("\<i>I can help you with your beard-related needs,</i>\" Lynnette says.", true)
+	menu();
+	if (player.hasBeard() && player.beardLength > 0.5) addButton(0, "Cut Beard", cutBeard);
+	if (player.hasBeard() && player.beardLength < 6) addButton(1, "Lengthen Beard", growBeard, 0);
+	if (!player.hasBeard()) addButton(1, "Grow Beard", growBeard, 1);
+	if (player.hasBeard()) addButton(2, "Beard Style", changeBeardStyle);
+	if (player.hasBeard()) addButton(3, "Remove Beard", removeBeard);
+	addButton(14, "Back", hairDressingMainMenu);
+}
 
+private function cutBeard():void {
+	if(player.hairType == 4) {
+		outputText("Lynnette stares at you when you ask for a cut.  \"<i>Nothing doing, hon; that stuff looks alive and I don't want blood all over my nice floor.  Thanks for contributing to the white file, though; maybe we can do something else?</i>\"\n\n", false);
+		beardMenu();
+		return;
+	}
+	outputText("Lynnette and her daughters crowd around you with razor-sharp scissors, effortlessly paring down your " + beardDescript() + ".  When they've finished, you're left with ", true);
+	player.beardLength = 0.01;
+	outputText(beardDescript() + ".", false);
+	doNext(camp.returnToCampUseOneHour);
+}
+
+private function growBeard(mode:int = 0):void {
+	//Grow beard if you don't have.
+	if (mode == 1){
+		if (player.mf("m", "f") == "f") {
+			outputText("Lynnette stares at you. \"<i>Don't you think you'll look strange being a bearded lady?</i>\" she asks.\n\n", false);
+			outputText("You insist her that you really want a beard, whether you're a man or a woman.\n\n");
+			outputText("\"<i>Well... I'll get started now,</i>\" she says.");
+		}
+		else {
+			outputText("Lynnette grabs a bottle and squirts a white fluid onto your chin and cheeks.  You really hope it isn't your payment.  But it must not be, as within short order your new beard sprouts! ", false);
+			player.beardLength = 0.2;
+			if (temp >= 2) outputText("es");
+			outputText(" of " + player.hairColor + " beard.\n\n", false);
+			outputText("\"<i>I'll let you choose your style before you leave,</i>\" she says.\n\n");
+			changeBeardStyle();
+			return;
+		}
+	}
+	//Grow existing beard.
+	else {
+			if(player.hairType == 4) {
+				outputText("Lynnette looks dubiously at you when you ask for a lengthening treatment.  \"<i>No offense hon, but that stuff is basically like an arm or an organ, not beard.  I'm not a goblin chirurgeon, and I wouldn't try to lengthen it even if one of my disobedient daughters were here to donate some parts.  Sorry to make you shoot and scoot, but I can't help you.  Maybe we could do something else?</i>\"\n\n", false);
+				beardMenu();
+				return;
+			}
+			outputText("Lynnette grabs a bottle and squirts a white fluid onto your chin and cheeks.  You really hope it isn't your payment.  But it must not be, as within short order you feel the added weight of ", true);		
+			temp = 5 + rand(5);
+			temp /= 5
+			player.beardLength += temp;
+			outputText(num2Text(temp) + " more inch");
+			if (temp >= 2) outputText("es");
+			outputText(" of " + player.hairColor + " beard.", false);	
+	}
+	doNext(camp.returnToCampUseOneHour);
+}
+
+private function changeBeardStyle():void {
+	outputText("What beard style would you like?", true);
+	menu();
+	addButton(0, "Normal", chooseBeardStyleFinalize, 0);
+	addButton(1, "Goatee", chooseBeardStyleFinalize, 1);
+	addButton(2, "Clean-cut", chooseBeardStyleFinalize, 2);
+	addButton(3, "Mountainman", chooseBeardStyleFinalize, 3);
+	addButton(4, "Back", beardMenu);
+}
+
+private function chooseBeardStyleFinalize(choiceStyle:int = 0):void {
+	outputText("You tell Lynnette that you'd like to have your beard style changed to what you've indicated.\n\n", true)
+	outputText("Lynnette and her daughters begin to mess with your beard with razor-sharp scissors and white fluid while they work to change your beard into what you've wanted.\n\n");
+	player.beardStyle = choiceStyle;
+	outputText("After a while, you now have " + player.beardDescript() + "!");
+	doNext(camp.returnToCampUseOneHour);
+}
+
+private function removeBeard():void {
+	outputText("You tell Lynnette that you'd like to have your beard removed.\n\n", true);
+	outputText("Lynnette instructs you to take a seat and she applies a special cream all over your " + player.beardDescript() +".  Your beard starts to stiffen and falls out.  She gives your chin a good cleaning afterwards.\n\n");
+	outputText("<b>You no longer have a beard!</b>");
+	player.beardStyle = 0;
+	player.beardLength = 0;
+	doNext(camp.returnToCampUseOneHour);
+}
 
 private function minotaurCumBukkakeInSalon():void {
-	outputText("", true);
+	clearOutput();
 	player.minoCumAddiction(10);
 	player.slimeFeed();
 	outputText("As the salon door swings closed behind you, a familiar, heavenly scent catches your nose and wicks into your brain, flooding you with need and molten-hot lust.  Lynnette saunters over with her lips slightly pursed and her body jiggling, but you brush her aside.  She's completely forgotten as you close in on the source of your olfactory bliss.  Your sigh dreamily while your pupils slowly dilate from the familiar chemicals pounding through your bloodstream", false);
@@ -506,7 +593,7 @@ private function minotaurCumBukkakeInSalon():void {
 }
 private function minotaurSalonFollowUp():void {
 	spriteSelect(38);
-	outputText("", true);
+	clearOutput();
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] == 0) {
 		//Unlock mino cum purchase
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142]++;
@@ -523,7 +610,7 @@ private function minotaurSalonFollowUp():void {
 
 private function mudFacial():void {
 	spriteSelect(38);
-	outputText("", true);
+	clearOutput();
 	outputText("You sit back in a comfortable chair and pull on a lever to recline it.  The goblins buzz around you, gathering up 'special mud'.  You close your eyes, letting them plaster your " + player.face() + " with the stuff in hopes that it will improve your complexion as much as you've been promised.  A pair of cucumber slices are laid out on your eyes, obscuring your view.\n\n", false);
 
 	outputText("With that finished, the crowd of busty, green-skinned women disperses to leave you in peace.  Time drags on, but eventually the mud hardens and cracks.  As if on cue, tiny hands emerge with wet rags to scrub your face clean.  Once they've finished, you feel like a whole new you! (+10 femininity)", false);
@@ -533,7 +620,7 @@ private function mudFacial():void {
 
 private function sandFacial():void {
 	spriteSelect(38);
-	outputText("", true);
+	clearOutput();
 	outputText("You sit back in a comfortable chair and pull on a lever to recline it.  The goblins buzz around you, gathering up 'special sand'.  You close your eyes, letting them splatter your " + player.face() + " with the rough, textured goop.  It doesn't feel very good, but that won't matter if it makes you as handsome as it's supposed to.\n\n", false);
 
 	outputText("After a while the goblin girls come back and clean the stuff from your face. (+10 masculinity)", false);
@@ -550,6 +637,7 @@ public static const LYNNETTE_CARRYING_COUNT:int                                 
 //Impregnate
 private function fuckLynnette():void {
 	clearOutput();
+	outputText(images.showImage("lynnette-fuck"));
 	//Checks to see if you've cum withint hte past 24 hours.
 	if(flags[kFLAGS.LYNNETTE_FUCK_COUNTER] == 0) {
 		outputText("At your suggestion, Lynnette's eyelashes flutter dangerously low. She gives you a smokey look and asks, \"<i>Is that so?</i>\" She circles around you, looking you up and down with eyes that seem to bore right through your [armor]. She must see something she likes, because she dips forward, parting her weighty melons around your ");

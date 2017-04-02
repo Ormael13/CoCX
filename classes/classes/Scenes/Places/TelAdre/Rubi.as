@@ -2,6 +2,7 @@
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kACHIEVEMENTS;
 
 	public class Rubi extends TelAdreAbstractContent {
 public function Rubi(){
@@ -536,6 +537,7 @@ public function buyRubiMilk():void {
 	}
 	player.gems -= 3;
  	rubiAffection(3);
+	player.refillHunger(7);
 	player.modThickness(100,1);
 	if(rubiAffection() >= 30 && flags[kFLAGS.RUBI_ADMITTED_GENDER] == 0) doNext(specialRelationship20scene);
 	else doNext(camp.returnToCampUseOneHour);
@@ -563,6 +565,7 @@ public function getTeaFromRubi():void {
 	}
 	player.gems -= 6;
 	rubiAffection(5);
+	player.refillHunger(7);
 	fatigue(-25);
 	if(rubiAffection() >= 30 && flags[kFLAGS.RUBI_ADMITTED_GENDER] == 0) doNext(specialRelationship20scene);
 	else doNext(camp.returnToCampUseOneHour);
@@ -631,7 +634,7 @@ public function rubisFuckingHouseYouPervert():void {
 		if(flags[kFLAGS.RUBI_GOT_BIMBO_SKIRT] == 0) {
 			outputText("\n\nMeanwhile, nothing really catches your eye... that is until you spot a pink, pleated skirt, with a pink and white halter top.  You squeal with delight as you pick it out.  It's just your size!");
 			outputText("\n\n\"<i>Ooh, that looks so sexy, babe.  Let me get that for you.  My treat, for such a sexy beast,</i>\" Rubi exclaims, and passes the money to the tailor.  As you leave the shop, you thank your lover profusely, and then head back to camp.");
-			outputText("\n\nIt's only once you get back tbat you realize you meant to fuck Rubi while you were in town!  You giggle and curse your airheadedness.  Oh well, you can always go into town again, there's always more shopping to be done!");
+			outputText("\n\nIt's only once you get back that you realize you meant to fuck Rubi while you were in town!  You giggle and curse your airheadedness.  Oh well, you can always go into town again, there's always more shopping to be done!");
 			//(Add Bimbo Skirt to inventory)
 			inventory.takeItem(armors.BIMBOSK, camp.returnToCampUseOneHour);
 			return;
@@ -682,7 +685,7 @@ public function rubisFuckingHouseYouPervert():void {
 		outputText("\n\n<b>You could use your snake-like motions to hypnotize Rubi and turn [rubi em] into a more complacent, eager slut. Doing so is likely irreversible.</b>")
 		addButton(5,"Hypno",hypnoBimboficationForRubiSloots);
 	}
-	addButton(9,"Leave",camp.returnToCampUseOneHour);
+	addButton(14,"Leave",camp.returnToCampUseOneHour);
 }
 
 private function rubiSexMenu():void {
@@ -707,7 +710,7 @@ private function rubiSexMenu():void {
 	//PC hotdogs Rubi's ass
 	//PC must have a penis
 	if (player.hasCock()) addButton(6, "Hotdogging", rubiHotdogging);
-	addButton(9, "Back", rubisFuckingHouseYouPervert);
+	addButton(14, "Back", rubisFuckingHouseYouPervert);
 }
 
 
@@ -756,7 +759,7 @@ private function rubiIsAHe():void {
 	flags[kFLAGS.RUBI_SHE] = 0;
 	outputText("Rubi nods, and will refer to himself as a \"he\" from now on.");
 	menu();
-	addButton(9,"Back",rubisFuckingHouseYouPervert);
+	addButton(14,"Back",rubisFuckingHouseYouPervert);
 }
 //She
 private function rubiIsAShe():void {
@@ -765,7 +768,7 @@ private function rubiIsAShe():void {
 	flags[kFLAGS.RUBI_SHE] = 1;
 	outputText("Rubi nods, and will refer to herself as a \"she\" from now on.");
 	menu();
-	addButton(9,"Back",rubisFuckingHouseYouPervert);
+	addButton(14,"Back",rubisFuckingHouseYouPervert);
 }
 //Sex Scenes Ahoy!
 //There are variants for Normal, Bimbo and Incubus Rubi, as well as smaller variations if you're currently teasing him or not.
@@ -1578,14 +1581,14 @@ private function playDressUp():void {
 		outputText("\n");
 	}
 	var button:int = 0;
-	while(button < 9 && button < buttonNames.length) {
+	while(button < 14 && button < buttonNames.length) {
 		trace("BUTTONNAMES: " + buttonNames[button]);
 		trace("CLOSET: " + closet[button]);
-		if(button < 8 || closet.length < 9) addButton(button,buttonNames[button],dressUpRouter,closet[button]);
-		else addButton(8,"More",playDressUp2);
+		if(button < 13 || closet.length < 14) addButton(button,buttonNames[button],dressUpRouter,closet[button]);
+		else addButton(13,"More",playDressUp2);
 		button++;
 	}
-	addButton(9,"Back",rubiAppearance);
+	addButton(14,"Back",rubiAppearance);
 }
 private function playDressUp2():void {
 	clearOutput();
@@ -1657,13 +1660,13 @@ private function playDressUp2():void {
 		}
 		outputText("\n");
 	}
-	var button:int = 7;
-	while(button-7 < 9 && button < buttonNames.length) {
-		if(button == 7) addButton(0,"Previous",playDressUp);
+	var button:int = 12;
+	while(button-12 < 14 && button < buttonNames.length) {
+		if(button == 12) addButton(0,"Previous",playDressUp);
 		else if(button <= closet.length) addButton(button-7,buttonNames[button],dressUpRouter,closet[button]);
 		button++;
 	}
-	addButton(9,"Back",rubiAppearance);
+	addButton(14,"Back",rubiAppearance);
 }
 
 private function dressUpRouter(arg:String):void {
@@ -2081,7 +2084,7 @@ private function iceCreamDate():void {
 	outputText("\n\nOnce you're back in the house, Rubi sprawls out on the couch, a devilish grin on [rubi eir] face.  \"<i>So, you plan on giving me a good \"kiss\" good night?\"");
 	//[Go to Sex menu]
 	rubiSexMenu();
-	addButton(9,"Leave",camp.returnToCampUseOneHour);
+	addButton(14,"Leave",camp.returnToCampUseOneHour);
 }
 
 //Fancy Dinner Date
@@ -2119,7 +2122,7 @@ private function fancyDate():void {
 		outputText("\n\nOnce you're back in the house, Rubi sprawls out on the couch, a devilish grin on [rubi eir] face.  \"<i>So, you plan on giving me a good \"kiss\" good night?\"");
 		//[to sex menu]
 		rubiSexMenu();
-		addButton(9,"Leave",camp.returnToCampUseOneHour);
+		addButton(14,"Leave",camp.returnToCampUseOneHour);
 	}
 	//Can't Afford It?
 	else {
@@ -2154,7 +2157,7 @@ private function exhibitionistDate():void {
 
 	//[Go to sex menu]
 	rubiSexMenu();
-	addButton(9,"Leave",camp.returnToCampUseOneHour);
+	addButton(14,"Leave",camp.returnToCampUseOneHour);
 }
 
 //Bar Date
@@ -2185,7 +2188,7 @@ private function barDate():void {
 	outputText("\n\nBy the time you enter Rubi's bedroom, [rubi eir] lips are locked with yours.  \"<i>So babe, what are we going to do about this?</i>\"");
 	//[Goto Sex menu]
 	rubiSexMenu();
-	addButton(9,"Leave",camp.returnToCampUseOneHour);
+	addButton(14,"Leave",camp.returnToCampUseOneHour);
 }
 
 //Anal Training
@@ -2441,7 +2444,8 @@ private function getFuckedByRubi():void {
 	if(this.rubiGetCockType() == CockTypesEnum.HUMAN) outputText("pink, mushroom-like tip");
 	else if(this.rubiGetCockType() == CockTypesEnum.DEMON) outputText("purple, nodule-laden tip");
 	else if(this.rubiGetCockType() == CockTypesEnum.HORSE) outputText("blunted, musky tip");
-	else if(this.rubiGetCockType() == CockTypesEnum.TENTACLE) outputText("tentacle-ringed crown");
+	else if(this.rubiGetCockType() == CockTypesEnum.CAT) outputText("spiked tip");
+	else if(this.rubiGetCockType() == CockTypesEnum.ANEMONE) outputText("tentacle-ringed crown");
 	else outputText("<b>ERROR: Rubi Cock Type set invalid. Currently: " + this.rubiGetCockType() + "</b>  ")
 	outputText(" emerges from the foreskin surrounding it as [rubi eir] cock strains, aching for something, anything to fill.");
 
@@ -2563,7 +2567,7 @@ private function rubiHotdogging():void {
 	outputText(".");
 
 	outputText("\n\nYou think to yourself.  You could keep teasing [rubi em] like this, without letting [rubi em] cum, as [rubi ey] obviously delights in the feelings.  Or you could be generous and let [rubi em] pop [rubi eir] load right now... Which will it be?");
-	dynStats("lus=", 100, "resisted", false);
+	dynStats("lus=", player.maxLust(), "resisted", false);
 	menu();
 	//[Tease] [Pop]
 	addButton(0,"Tease Rubi",teaseButtjobs);
@@ -2774,6 +2778,7 @@ private function giveRubiATFItem(itype:ItemType):void {
 			else outputText("pink");
 			outputText(" protrusion... a brand new cock!  Rubi shudders, [rubi eir] delicate little fingers wrapped around the new, five-inch cock.");
 			flags[kFLAGS.RUBI_COCK_SIZE] = 5;
+			flags[kFLAGS.RUBI_COCK_TYPE] = CockTypesEnum.HUMAN.Index
 		}
 		//(If Vagina removed)
 		if(flags[kFLAGS.RUBI_NO_CUNT] == 0 && rand(3) == 0) {
@@ -2874,7 +2879,7 @@ private function giveRubiATFItem(itype:ItemType):void {
 		flags[kFLAGS.RUBI_BIMBO] = 1;
 		flags[kFLAGS.RUBI_HAIR] = 1;
 		rubiSexMenu();
-		addButton(9,"Leave",camp.returnToCampUseOneHour);
+		addButton(14,"Leave",camp.returnToCampUseOneHour);
 		return;
 	}
 	//Equinum
@@ -2892,7 +2897,7 @@ private function giveRubiATFItem(itype:ItemType):void {
 		//(If Rubi gets Horsecock)
 		if(this.rubiGetCockType() != CockTypesEnum.HORSE) {
 			outputText("\n\nFor a few moments nothing happens.  Then Rubi suddenly doubles over, clutching [rubi eir] stomach in pain.  With one hand clamped firmly around [rubi eir] midsection, [rubi eir] other hand reaches down to grasp at [rubi eir] [rubi cock].  The flesh on [rubi eir] cock ripples, veins suddenly bulging.  A low moan wrestles its way out of Rubi's throat as [rubi eir] cock morphs, the pink head flattening all of a sudden and flaring outwards.");
-			flags[kFLAGS.RUBI_COCK_TYPE] = CockTypesEnum.HORSE;
+			flags[kFLAGS.RUBI_COCK_TYPE] = CockTypesEnum.HORSE.Index;
 			outputText("\n\nRubi's dick thickens in [rubi eir] hand, gaining at least an inch of width as it continues to change.  A thick, fleshy ring bulges out near the base of the cock... the beginnings of a sheathe, no doubt.  As you watch on in awe, the flesh at the base of Rubi's cock begins to darken, slowly become a dusky grey-black, which also overtakes [rubi eir] ");
 			if(flags[kFLAGS.RUBI_BLU_BALLS] >= 4 && flags[kFLAGS.RUBI_BLU_BALLS] < 9) outputText("swollen ");
 			else if(flags[kFLAGS.RUBI_BLU_BALLS] >= 9) outputText("engorged ");
@@ -2946,7 +2951,7 @@ private function giveRubiATFItem(itype:ItemType):void {
 			outputText(Math.round(flags[kFLAGS.RUBI_COCK_SIZE]*10)/10 + "-inch penis.");
 		}
 		//(Trappy ballsack)
-		else if(flags[kFLAGS.RUBI_BALLS_TYPE] > 0) {
+		else if(flags[kFLAGS.RUBI_BALLS_TYPE] == 0) {
 			outputText("\n\nThe oils seem to seep into Rubi's skin, giving it a glossy, almost insectile shine for a moment.  However, your eyes seem drawn, not to [rubi eir] lustrous skin, but rather to [rubi eir] crotch, [rubi eir] testicles in particular.  The sack itself seems to contort oddly, and you realize it's shrinking!  Rubi makes a panicked noise as the sack constricts and pulls upwards, but thankfully it does not disappear.  Rather, it seems to have tightened up.  You rest your fingers on [rubi eir] new sack experimentally, pleased to note that [rubi ey] still has two testicles, though it looks like [rubi ey] only has one: trapped in a cute little package that seems to pull upwards, rather than dangle down.");
 			flags[kFLAGS.RUBI_BALLS_TYPE] = 1;
 		}
@@ -2985,7 +2990,7 @@ private function giveRubiATFItem(itype:ItemType):void {
 		//(Gaining Cat Penis)
 		else if(this.rubiGetCockType() != CockTypesEnum.CAT && flags[kFLAGS.RUBI_COCK_SIZE] > 0) {
 			outputText("\n\nFor a few moments nothing happens.  Then Rubi suddenly doubles over, clutching [rubi eir] stomach in pain.  With one hand clamped firmly around [rubi eir] midsection, [rubi eir] other hand reaches down to grasp at [rubi eir] [rubi cock].  The flesh on [rubi eir] cock ripples, veins suddenly bulging.  A low moan wrestles its way out of Rubi's throat as [rubi eir] cock morphs, its tip lengthening out while a number of barb-like protrusions sprout from the head.  Before your eyes the barbs quiver and then go flush against [rubi eir] cock.  They don't seem sharp, more like they're ready to stimulate a potential mate.");
-			flags[kFLAGS.RUBI_COCK_TYPE] = CockTypesEnum.CAT;
+			flags[kFLAGS.RUBI_COCK_TYPE] = CockTypesEnum.CAT.Index;
 		}
 		//(Gaining Fur)
 		else if(flags[kFLAGS.RUBI_SKIN] != 2) {
@@ -3015,7 +3020,7 @@ private function giveRubiATFItem(itype:ItemType):void {
 		outputText(" underneath.  The demon-marked " + rubiMF("boy","girl") + " rubs [rubi eir] stomach appreciatively.  \"<i>Those were some great peaches, babe.</i>\"");
 
 		//(Any changes? Yes)
-		if (flags[kFLAGS.RUBI_EAR_TYPE] != 2 || flags[kFLAGS.RUBI_SKIN] != 3 || (flags[kFLAGS.RUBI_COCK_SIZE] > 0 && this.rubiGetCockType() != CockTypesEnum.TENTACLE))
+		if (flags[kFLAGS.RUBI_EAR_TYPE] != 2 || flags[kFLAGS.RUBI_SKIN] != 3 || (flags[kFLAGS.RUBI_COCK_SIZE] > 0 && this.rubiGetCockType() != CockTypesEnum.ANEMONE))
 		{
 			outputText("\n\nRubi's eyes suddenly dart open and [rubi ey] clutches [rubi eir] stomach.  \"<i>Oh gods...  My belly feels so warm all of a sudden.</i>\"");
 			//(Feathery ears)
@@ -3049,7 +3054,7 @@ private function giveRubiATFItem(itype:ItemType):void {
 
 				outputText("\n\n\"<i>Oh... Oh my.</i>\"  It's all [rubi ey] can say as [rubi ey] wraps a hand around this newly modified appendage.  The tentacles likewise attempt to wrap themselves around Rubi's hand, clearly having a mind of their own.  You're fairly certain this will take a little while to adapt to.");
 			}
-			flags[kFLAGS.RUBI_COCK_TYPE] = CockTypesEnum.ANEMONE;
+			flags[kFLAGS.RUBI_COCK_TYPE] = CockTypesEnum.ANEMONE.Index;
 		}
 		//(No)
 		else {
@@ -3241,9 +3246,10 @@ private function pickAnItemToFeedRubi():void {
 	
 	if (flags[kFLAGS.RUBI_BIMBO_MINIDRESS] == 1)
 		closet[closet.length] = "A Bimbo Minidress";
-	else
+	else {
 		gifts.push("A Bimbo Minidress"); //No button, must be found in a special event
-	
+		if (player.hasItem(armors.BIMBOSK)) addButton(button++, "BimboSk", giveRubiClothes, armors.BIMBOSK);
+	}
 	if (flags[kFLAGS.RUBI_BONDAGE_STRAPS] == 1)
 		closet[closet.length] = "Bondage Straps";
 	else {
@@ -3275,6 +3281,7 @@ private function pickAnItemToFeedRubi():void {
 	else {
 		outputText("You've given Rubi all the clothes [rubi ey] would want to make use of.");
 		if (silly()) outputText("  (Achievement Unlocked: Dress-tacular)");
+		awardAchievement("Dress-tacular", kACHIEVEMENTS.GENERAL_DRESSTACULAR);
 		outputText("\n\n");
 	}
 	
@@ -3437,7 +3444,8 @@ private function pickAnItemToFeedRubi():void {
 	}
 	else {
 		outputText("You've given Rubi all the clothes [rubi ey] would want to make use of.");
-		if(silly()) outputText("  (Achievement Unlocked: Dress-tacular)");
+		if (silly()) outputText("  (Achievement Unlocked: Dress-tacular)");
+		awardAchievement("Dress-tacular", kACHIEVEMENTS.GENERAL_DRESSTACULAR);
 		outputText("\n\n");
 	}
 
@@ -3579,7 +3587,7 @@ private function pickAnItemToFeedRubi():void {
 		if(events[counter] != 0) addButton(counter,eventNames[counter],functions[counter],events[counter]);
 		counter++;
 	}
-	addButton(9, "Back", rubiAppearance);
+	addButton(14, "Back", rubiAppearance);
 */
 		//choices(eventNames[0],events[0],eventNames[1],events[1],eventNames[2],events[2],eventNames[3],events[3],eventNames[4],events[4],eventNames[5],events[5],eventNames[6],events[6],eventNames[7],events[7],eventNames[8],events[8],"Back",3898);
 }
@@ -3604,6 +3612,7 @@ public function giveRubiClothes(itype:ItemType = null):void {
 	else if(itype == armors.S_SWMWR) flags[kFLAGS.RUBI_SWIMWEAR] = 1;
 	else if(itype == armors.I_CORST) flags[kFLAGS.RUBI_INQUISITORS_CORSET] = 1;
 	else if(itype == armors.BONSTRP) flags[kFLAGS.RUBI_BONDAGE_STRAPS] = 1;
+	else if(itype == armors.BIMBOSK) flags[kFLAGS.RUBI_BIMBO_MINIDRESS] = 1;
 	rubiAffection(20);
 	doNext(rubisFuckingHouseYouPervert);
 }

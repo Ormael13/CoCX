@@ -1,7 +1,8 @@
 ﻿package classes.Scenes.Areas.Lake
 {
 	import classes.*;
-
+	import classes.GlobalFlags.kFLAGS;
+	
 	public class SwordInStone extends AbstractLakeContent
 	{
 		public function SwordInStone()
@@ -10,7 +11,7 @@
 
 		public function findSwordInStone():void 
 		{
-			if (player.findStatusAffect(StatusAffects.FactoryOverload) < 0)
+			if (flags[kFLAGS.FACTORY_SHUTDOWN] < 2)
 			{
 				//Encounter it!
 				outputText("While walking along the lake, the glint of metal catches your eye.  You drop into a combat stance, readying your " + player.weaponName + " for another fight.   Your eyes dart about, searching for the source of the light. You feel rather foolish when you locate the source of the reflection.  It came from a sword lodged hilt-deep in the trunk of a tree.  You relax a bit, approaching the odd sight to get a better look.\n\n", true);
@@ -34,7 +35,7 @@
 
 		private function tryToTakeSwordInStone():void 
 		{
-			outputText("", true);
+			clearOutput();
 			//if corrupted...
 			if (player.cor >= 25) 
 			{

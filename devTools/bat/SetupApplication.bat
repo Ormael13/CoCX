@@ -32,7 +32,7 @@ set APP_DIR=bin
 set FILE_OR_DIR=-C %APP_DIR% .
 
 :: Your application ID (must match <id> of Application descriptor)
-set APP_ID=org.com.fenoxo.CorruptionOfChampions
+set APP_ID=com.fenoxo.coc
 
 :: Output packages
 set DIST_PATH=dist
@@ -54,5 +54,5 @@ echo ERROR:
 echo   Application ID in 'bat\SetupApplication.bat' (APP_ID) 
 echo   does NOT match Application descriptor '%APP_XML%' (id)
 echo.
-
+PAUSE
 :end

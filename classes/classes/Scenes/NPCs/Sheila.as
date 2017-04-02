@@ -19,13 +19,12 @@ package classes.Scenes.NPCs
 			spe -= 30;
 			//Midget misfire (if PC < 3'6"):
 			if(player.tallness < 42 && rand(2) == 0) {
-				outputText("Sheila bounces up to you and crouches low, curling her body like a watchspring.  She uncoils with her fist aimed at your jaw, but you easily perform a crouch of your own and duck under her lanky form, unbending yourself to push her legs up as she flies harmlessly overhead.  You can hear a partial shriek before she crashes face-first into the dirt behind you.");
+				outputText("Sheila bounces up to you and crouches low, curling her body like a watchspring.  She uncoils with her fist aimed at your jaw, but you easily perform a crouch of your own and duck under her lanky form, unbending yourself to push her legs up as she flies harmlessly overhead.  You can hear a partial shriek before she crashes face-first into the dirt behind you. ");
 				damage = 3 + rand(10);
-				damage = kGAMECLASS.doDamage(damage);
-				outputText(" (" + damage + ")");
+				damage = kGAMECLASS.doDamage(damage, true);
 			}
 			//Miss:
-			else if(combatMiss() || combatFlexibility() || combatEvade() || combatMisdirect() || findStatusAffect(StatusAffects.Blind) >= 0) {
+			else if(player.getEvasionRoll() || findStatusAffect(StatusAffects.Blind) >= 0) {
 				outputText("Sheila bounces up to you and crouches low, curling up her body like a watchspring.  The girl uncoils with fist raised, but you lean away from the uppercut, catching a faceful of her breasts instead!  Sheila squeals and pushes away from you");
 				//[(libido>40)
 				if(player.lib > 40) {
@@ -38,17 +37,16 @@ package classes.Scenes.NPCs
 			}
 			//Hit:
 			else {
-				outputText("Sheila bounces up to you and crouches low, curling up her body like a watchspring.  The girl uncoils just as quickly, launching herself at your face with a fist raised in front of her.  She lands a staggering crack on your jaw which knocks your head back and blurs your vision!");
+				outputText("Sheila bounces up to you and crouches low, curling up her body like a watchspring.  The girl uncoils just as quickly, launching herself at your face with a fist raised in front of her.  She lands a staggering crack on your jaw which knocks your head back and blurs your vision!  ");
 				//deals minor concussion which adds 5-10 pts fatigue, may stun pc and prevent attack, misses while blinded or misfires on pcs under 3'6")
 				kGAMECLASS.fatigue(5+rand(5));
 				if(rand(2) == 0 && player.findPerk(PerkLib.Resolute) < 0) {
 					player.createStatusAffect(StatusAffects.Stunned,1,0,0,0);
-					outputText("  <b>You are stunned!</b>");
+					outputText("<b>You are stunned!</b>  ");
 				}
 				damage = int((str + weaponAttack) - rand(player.tou) - player.armorDef);
 				if(damage < 1) damage = 2;
-				damage = player.takeDamage(damage);
-				outputText(" (" + damage + ")");
+				damage = player.takeDamage(damage, true);
 			}
 			spe += 30;
 			combatRoundOver();
@@ -59,7 +57,7 @@ package classes.Scenes.NPCs
 			var damage:Number = 0;
 			spe -= 60;
 			//Miss:
-			if(combatMiss() || combatFlexibility() || combatEvade() || combatMisdirect() || (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) == 0)) {
+			if(player.getEvasionRoll() || (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) == 0)) {
 				outputText("Sheila squats down, then bounds explosively toward you!  She swings her leg out in front to kick, but you roll to the side and she slips past your shoulder.  You hear an \"<i>Oof!</i>\" as she lands on her butt behind you.  When you turn to look, she's already back to her feet, rubbing her smarting posterior and looking a bit embarrassed.");
 				//(small Sheila HP loss)
 				damage = 3 + rand(10);
@@ -68,16 +66,15 @@ package classes.Scenes.NPCs
 			}
 			//Hit:
 			else {
-				outputText("Sheila squats down, then bounds explosively toward you feet-first!  She snaps one leg out softly just as she reaches your chest, then twists her body to the side, bringing her other leg over and landing a kick to the rear of your skull!  Your vision blurs and you wobble on your feet as she pushes off your chest.");
+				outputText("Sheila squats down, then bounds explosively toward you feet-first!  She snaps one leg out softly just as she reaches your chest, then twists her body to the side, bringing her other leg over and landing a kick to the rear of your skull!  Your vision blurs and you wobble on your feet as she pushes off your chest.  ");
 				//Stun triggered:
 				if(player.findPerk(PerkLib.Resolute) < 0) {
 					player.createStatusAffect(StatusAffects.Stunned,2,0,0,0);
-					outputText("  <b>You are stunned!</b>");
+					outputText("<b>You are stunned!</b>  ");
 				}
 				damage = int((str + 50 + weaponAttack) - rand(player.tou) - player.armorDef);
 				if(damage < 1) damage = 2;
-				damage = player.takeDamage(damage);
-				outputText(" (" + damage + ")");
+				damage = player.takeDamage(damage, true);
 				kGAMECLASS.fatigue(10+rand(6));
 			}
 			spe += 60;
@@ -158,7 +155,7 @@ package classes.Scenes.NPCs
 			outputText("Sheila waits patiently, staring at you and stroking her dark, spaded tail with its opposite.  A line of the always-oozing oil falls from the slit, pooling in the smooth brown coil; she unwinds it rapidly, flinging the liquid at your face playfully.  ");
 			//results, no new PG
 			//Hit:
-			if(!combatMiss() && !combatEvade() && !combatMisdirect() && !combatFlexibility()) {
+			if(!player.getEvasionRoll()) {
 				outputText("It lands on target, and you're forced to close your eyes lest it get in them!");
 				player.createStatusAffect(StatusAffects.Blind,1,0,0,0);
 				player.createStatusAffect(StatusAffects.SheilaOil,0,0,0,0);
@@ -308,17 +305,18 @@ package classes.Scenes.NPCs
 			this.skinTone = "tan";
 			this.hairColor = "auburn";
 			this.hairLength = 11;
-			initStrTouSpeInte(80, 45, 95, 50);
+			initStrTouSpeInte(90, 45, 105, 50);
 			initLibSensCor(30, 45, 25);
 			var lust:Number = 30;
 			var lustVuln:Number = 0.4;
 			var bonusHP:Number = 200;
 			if (sheilaDemon) {
 				//-slightly slower, has much more stamina, intel, and HP now
-				this.spe -= 15;
-				this.tou += 30;
-				this.inte += 30;
+				this.spe -= 15 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.tou += 30 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.inte += 30 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				bonusHP += 200;
+				this.bonusLust = 30;
 				lust= 50;
 				lustVuln= .15;
 				//-all special attacks are lust damage
@@ -330,15 +328,16 @@ package classes.Scenes.NPCs
 			}
 			this.weaponName = "foot";
 			this.weaponVerb="kick";
-			this.weaponAttack = 10;
+			this.weaponAttack = 12 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "clothes";
-			this.armorDef = 4;
+			this.armorDef = 7 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = bonusHP;
+			this.bonusLust = 10;
 			this.lust = lust;
 			this.lustVuln = lustVuln;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 14;
-			this.gems = rand(5) + 5;
+			this.level = 19;
+			this.gems = rand(7) + 7;
 			if (game.flags[kFLAGS.SHEILA_DEMON] == 0){
 				this.drop = new WeightedDrop(consumables.KANGAFT, 1);
 			} else {
@@ -347,6 +346,12 @@ package classes.Scenes.NPCs
 						add(consumables.INCUBID,1/2);
 			}
 			this.tailType = TAIL_TYPE_KANGAROO;
+			this.str += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 1280;
 			checkMonster();
 		}
 

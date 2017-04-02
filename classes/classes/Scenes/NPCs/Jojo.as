@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.NPCs
 {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class Jojo extends Monster
 	{
@@ -79,16 +80,18 @@
 			this.skinDesc = "fur";
 			this.hairColor = "white";
 			this.hairLength = 2;
-			initStrTouSpeInte(35, 40, 65, 55);
-			initLibSensCor(15, 40, 0);
+			initStrTouSpeInte(45, 50, 75, 64);
+			initLibSensCor(15, 40, game.monk * 15);
 			this.weaponName = "paw";
 			this.weaponVerb="punch";
+			this.weaponAttack = 5 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "robes";
+			this.armorDef = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.lust = 15;
 			this.lustVuln = .9;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 4;
-			this.gems = rand(5) + 2;
+			this.level = 10;
+			this.gems = rand(15) + 7;
 			this.special1 = selfCorruption;
 			//Create jojo sex attributes
 			//Variations based on jojo's corruption.
@@ -96,25 +99,35 @@
 				this.lust += 30;
 				this.cocks[0].cockThickness += .2;
 				this.cocks[0].cockLength += 1.5;
+				this.bonusLust = 10;
 				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 2;
 			}
 			if(game.monk == 4) {
 				this.lust += 40;
 				this.cocks[0].cockThickness += .5;
 				this.cocks[0].cockLength += 3.5;
+				this.bonusLust = 20;
 				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 3;
 			}
 			if(game.monk == 5) {
 				this.lust += 50;
 				this.cocks[0].cockThickness += 1;
 				this.cocks[0].cockLength += 5.5;
-				this.str -= 20;
-				this.tou += 30;
-				this.HP += 60;
+				this.str -= 20 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.tou += 30 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.cor += 10;
+				this.HP += 60 + (60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+				this.bonusLust = 30;
 				if(player.gender == 1 || player.gender == 3) this.ass.analLooseness = 4;
 				this.long = "Jojo is an anthropomorphic mouse with immaculate white fur.  Though he stands only four feet tall, he is covered in lean muscle and moves with incredible speed.  He's naked, with a large tainted throbbing member bouncing at attention.  A fuzzy sack with painfully large looking balls dangles between his legs.";
 			}
 			this.drop = NO_DROP;
+			this.str += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 980;
 			checkMonster();
 		}
 

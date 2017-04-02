@@ -612,7 +612,7 @@ private function bazaarSex():void {
 
 
 //[Meet Sean with bimbo champagne in inventory]
-//five bimbo champagne required, takes 24 hours to proc and 500 gems to do.
+//five bimbo champagne required, takes 24 hours to proc and 400 gems to do.
 public function seanBimboBrewing():void {
 	clearOutput();
 	outputText("The uncharacteristically gentlemanly incubus raises his eyebrow as you produce an armful of filled flasks and drop them onto his mostly-empty table.  \"<i>I assume you'd like me to do something special with these,</i>\" he quips, somewhat dryly.");
@@ -622,11 +622,11 @@ public function seanBimboBrewing():void {
 	//[Yep][Nope]
 	if (player.gems < 500) outputText("<b>\n\nYou're too poor to get Sean to make you bimbo liqueur.</b>");
 	else yep = yeahSeanLetsBimbooze;
-	simpleChoices("Yep", yep, "", null, "", null, "", null, "Back", getGame().incubusShop);
+	simpleChoices("Yep", yep, "", null, "", null, "", null, "Back", getGame().dungeons.deepcave.incubusShop);
 }
 
 //yeah I got this
-private function yeahSeanLetsBimbooze():void {
+public function yeahSeanLetsBimbooze():void {
 	clearOutput();
 	outputText("\"<i>Perfect!</i>\" he says, moving forward to gather up the flasks.  \"<i>You can go, now.  This is a delicate process, and any mistakes may lead to an outbreak of large-breasted and dim-witted fauna.</i>\"  He pauses, gauging your expression.  \"<i>... Which is <b>not</b> a good thing,</i>\" he adds.  Almost as an afterthought, he extends his hand toward the table, saying, \"<i>I'd like the payment now, if you'd please.</i>\"  You separate out the appropriate number of gems for the demon.  He snatches it up and idly throws it behind him, where you hear a clunk and tinkle as it strikes something and rolls a bit.");
 	outputText("\n\n\"<i>Now shoo, I must do work!</i>\" he scolds, ushering you out of the cave.  \"<i>Come back tomorrow!</i>\"  Satisfied, you leave his shop.");
@@ -652,7 +652,7 @@ public function getBimboozeFromSean():void {
 	outputText("You drop the vial into a pouch on your person.\n\n");
 	//bimbo liqueur aqcquired
 	flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] = 0;
-	inventory.takeItem(consumables.BIMBOLQ, getGame().incubusShop);
+	inventory.takeItem(consumables.BIMBOLQ, getGame().dungeons.deepcave.incubusShop);
 }
 
 // [LEAVE]

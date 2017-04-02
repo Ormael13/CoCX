@@ -2,6 +2,7 @@ package classes.Scenes.Quests.UrtaQuest
 {
 	import classes.*;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Areas.Desert.Naga;
 	import classes.internals.*;
 
@@ -25,7 +26,7 @@ package classes.Scenes.Quests.UrtaQuest
 			if (damage<=0) {
 				super.outputAttack(damage);
 			} else {
-				outputText("You misjudge his pattern and wind up getting slashed by a series of swipes from his sharpened nails.  He distances himself from you in order to avoid retaliation and glares at you with his piercing yellow eyes, a hint of a smile on his face. (" + damage + ")");
+				outputText("You misjudge his pattern and wind up getting slashed by a series of swipes from his sharpened nails.  He distances himself from you in order to avoid retaliation and glares at you with his piercing yellow eyes, a hint of a smile on his face. <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
 			}
 		}
 
@@ -77,15 +78,14 @@ package classes.Scenes.Quests.UrtaQuest
 		{
 			outputText("With a loud and vicious hiss, Sirius suddenly lunges at you, mouth distended impossibly wide and revealing four needle-like fangs dripping with venom!  ");
 //Miss:
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				outputText("You dodge just in the nick of time, and deliver a punishing blow with the butt of your halberd as Sirius soars past, forcing him to slither past you to make himself ready to defend himself again.");
 				combatRoundOver();
 			}
 //Hit:
-			outputText("The snake-man moves too quickly for you to evade and he sinks long fangs into your flesh, leaving a wound that burns with horrific pain.");
+			outputText("The snake-man moves too quickly for you to evade and he sinks long fangs into your flesh, leaving a wound that burns with horrific pain. ");
 			var damage:Number = 40 + rand(20);
-			damage = player.takeDamage(damage);
-			outputText(" (" + damage + ")");
+			damage = player.takeDamage(damage, true);
 			combatRoundOver();
 		}
 
@@ -119,22 +119,29 @@ package classes.Scenes.Quests.UrtaQuest
 			this.skinTone = "mediterranean-toned";
 			this.hairColor = "orange";
 			this.hairLength = 16;
-			initStrTouSpeInte(75, 70, 75, 92);
+			initStrTouSpeInte(110, 90, 125, 92);
 			initLibSensCor(45, 35, 40);
 			this.weaponName = "fangs";
 			this.weaponVerb="bite";
-			this.weaponAttack = 25;
+			this.weaponAttack = 37 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "scales";
-			this.armorDef = 30;
+			this.armorDef = 31 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = 400;
+			this.bonusLust = 20;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 12;
-			this.gems = rand(5) + 8;
+			this.level = 24;
+			this.gems = rand(20) + 26;
 			this.drop = NO_DROP;
 			this.special1 = nagaPoisonBiteAttack;
 			this.special2 = nagaConstrict;
 			this.special3 = nagaTailWhip;
+			this.str += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 2760;
 			checkMonster();
 		}
 

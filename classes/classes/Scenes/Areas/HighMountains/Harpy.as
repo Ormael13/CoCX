@@ -25,14 +25,14 @@
 			//(Harpy special attack 1, part two if PC does anything but "Wait")
 			else {
 				if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 0) {
-					var damage:Number = 160 + rand(20);
-					damage = player.takeDamage(damage);
-					outputText("The harpy lets out a terrible cry and drops, reaching an almost impossible speed as she dives down at you.  Her eyes are narrowed like a true bird of prey.  You were too busy with your own attack to avoid it!  Her claws surge down and pierce your " + player.armorName + " like paper, driving hard into the flesh beneath and making you cry out in pain.  The harpy dumps you onto the ground, your wounds bleeding profusely. (" + damage + ")", false);
+					outputText("The harpy lets out a terrible cry and drops, reaching an almost impossible speed as she dives down at you.  Her eyes are narrowed like a true bird of prey.  You were too busy with your own attack to avoid it!  Her claws surge down and pierce your " + player.armorName + " like paper, driving hard into the flesh beneath and making you cry out in pain.  The harpy dumps you onto the ground, your wounds bleeding profusely. ", false);
+					var damage:Number = (160 + rand(20)) * (1 + (player.newGamePlusMod() / 2));
+					player.takeDamage(damage, true);					
 					removeStatusAffect(StatusAffects.Uber);
 				}
 				else {
-					outputText("You stand firm and ready yourself as the crazed harpy hovers above you. Letting out an ear-splitting cry she dives at you with her claws extended, reaching an incredible speed before she levels out.  The harpy is heading right for you!  Thanks to your ready position, you manage to dive aside just as the harpy reaches you.  She clips you slightly, spinning you as you dive for the ground.  You hit the ground hard, but look up in time to see her make a rough, graceless landing.  Her body rolls until it reached a standstill.  The enraged harpy drags herself up and takes flight once more!", false);
-					player.takeDamage(10 + rand(10));
+					outputText("You stand firm and ready yourself as the crazed harpy hovers above you. Letting out an ear-splitting cry she dives at you with her claws extended, reaching an incredible speed before she levels out.  The harpy is heading right for you!  Thanks to your ready position, you manage to dive aside just as the harpy reaches you.  She clips you slightly, spinning you as you dive for the ground.  You hit the ground hard, but look up in time to see her make a rough, graceless landing.  Her body rolls until it reached a standstill.  The enraged harpy drags herself up and takes flight once more!  ", false);
+					player.takeDamage(10 + rand(10), true);
 					removeStatusAffect(StatusAffects.Uber);
 					HP -= 20;
 				}
@@ -85,7 +85,7 @@
 			if (damage <= 0) {
 				outputText("The harpy dives at you with her foot-talons, but you deflect the attack, grasp onto her leg, and swing her through the air, tossing her away from you before she has a chance to right herself.", false);
 			} else {
-				outputText("The harpy surges forward, bringing her razor-sharp claws down on you, tearing at all the exposed flesh she can reach! (" + damage + ")", false);
+				outputText("The harpy surges forward, bringing her razor-sharp claws down on you, tearing at all the exposed flesh she can reach! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
 			}
 		}
 
@@ -113,24 +113,31 @@
 			this.skinDesc = "feathers";
 			this.hairColor = "blue";
 			this.hairLength = 16;
-			initStrTouSpeInte(60, 40, 90, 40);
+			initStrTouSpeInte(90, 70, 110, 60);
 			initLibSensCor(70, 30, 80);
 			this.weaponName = "talons";
 			this.weaponVerb="slashing talons";
-			this.weaponAttack = 15;
+			this.weaponAttack = 35 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "feathers";
-			this.armorDef = 5;
-			this.bonusHP = 150;
+			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusHP = 200;
+			this.bonusLust = 20;
 			this.lust = 10;
 			this.lustVuln = .7;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 10;
-			this.gems = 10 + rand(4);
+			this.level = 20;
+			this.gems = 30 + rand(14);
 			this.drop = new ChainedDrop().add(armors.W_ROBES,1/10)
 					.elseDrop(consumables.GLDSEED);
 			this.wingType = WING_TYPE_HARPY;
 			this.special1 = harpyUberCharge;
 			this.special2 = harpyTease;
+			this.str += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 2400;
 			checkMonster();
 		}
 

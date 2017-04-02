@@ -1,9 +1,11 @@
 package classes.Scenes.Dungeons.D3 
 {
+	import classes.PerkLib;
 	import classes.Monster;
 	import classes.Appearance;
 	import classes.StatusAffects;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.CockTypesEnum;
 	
 	/**
@@ -17,40 +19,40 @@ package classes.Scenes.Dungeons.D3
 		{
 			this.a = "the ";
 			this.short = "herm centaur";
+			this.imageName = "hermcentaur";
 			this.long = "Standing tall and proud just a few feet away is a massive demon unlike any others you've seen.  She's every bit a centaur - horse body, hooves, fur, and everything, but she's also massive in proportion - about nine feet tall and equally well endowed.  Heaving, jiggly E-cups jut proudly from her chest, unrestrained and bare to the world, thick nipples capping them like majestic, sexual crowns.  Under her belly, a thick equine cock slaps wetly against her fur with every step, heavy balls dangling behind.  A solid black horn juts from her forehead, a testament to the demonic corruption flowing through this monstrous woman's veins.  Still, without the horn, you'd never have guessed she was a demon.  Her gleaming fire-orange hair and pale, freckled skin look like something you would see on an innocent maid, not a bestial altar of corrupted decadence.";
-			
 			this.tallness = 12 * 9;
-			
 			// THIS SHIT IS RETARDED.
 			// Rather than doing something smart, like usiing the mf() function to set the gender prounouns in checkMonster, instead, each create<x> function sets them to something. So if you createVag then createCock, you get male pronouns. Fuck off.
 			this.createBreastRow(Appearance.breastCupInverse("E"));
 			this.createCock(36, 5, CockTypesEnum.HORSE);
 			this.createVagina(false, 4, 5); 
-			
-			
 			this.balls = 2;
 			this.ballSize = 3;
-			
 			this.hipRating = HIP_RATING_FERTILE;
 			this.buttRating = BUTT_RATING_EXPANSIVE;
-			
-			initStrTouSpeInte(100, 100, 65, 65);
-			initLibSensCor(85, 40, 100);
-			
+			initStrTouSpeInte(210, 210, 120, 120);
+			initLibSensCor(140, 40, 100);
 			this.weaponName = "fists";
-			this.weaponAttack = 1;
+			this.weaponAttack = 30 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.weaponVerb = "punch";
 			this.armorName = "wraps";
-			
-			this.bonusHP = 800;
-			
-			this.gems = 75 + rand(50);
-			this.level = 22;
-			
+			this.armorDef = 26 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusHP = 1800;
+			this.bonusLust = 40;
+			this.gems = 300 + rand(90);
+			this.level = 41;
 			this.lustVuln = 0.6;
-			
+			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.drop = NO_DROP;
-			
+			this.str += 63 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 63 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 12000;
 			this.checkMonster();
 		}
 		
@@ -122,33 +124,33 @@ package classes.Scenes.Dungeons.D3
 			
 			game.dynStats("lus+", 8 + (player.lib / 10) + (player.sens / 10));
 
-	if (player.lust < 30) outputText("\n\nYou close your mouth tight and endure the shimmering shower, trying your damnedest to resist the effects of this insidious liquid.  Wherever it strikes you, it vanishes soon after, absorbed directly into your body.");
-	else if (player.lust < 40) outputText("\n\nYour heart beats faster.");
-	else if (player.lust < 50) outputText("\n\nYour cheeks color as you try not to imagine how you could fuck such a beast.");
-	else if (player.lust < 60) outputText("\n\nYour blink, but find your eyes staying closed a moment longer than you intended, visions of yourself suckling down the pink sweetness occupying your mind.");
-	else if (player.lust < 70) 
-	{
-		outputText("\n\nYou groan in disappointment when you realize what's going to happen, but as soon as you're slicked with the aphrodisiac,");
-		if (player.hasCock()) outputText(" [eachCock] awakens, filling itself towards full erection.");
-		else if (player.hasVagina()) outputText(" a wet heat answers in your loins, growing more insistent from moment to moment.");
-		else outputText(" your [asshole] tingles, craving something to fill it.");
-	}
-	else if (player.lust < 80) 
-	{
-		outputText("\n\nYou sigh and try to gain a better position during the pink rain");
-		if (player.hasCock()) outputText(" ignoring the stiffening pressure of [eachCock]");
-		else outputText(" ignoring the increasing wetness of your inner [armor]");
-		outputText(". It's getting harder to think straight with all this desire welling up inside you.  It isn't for a few moments that you realize you tongue is hanging out and drooling all over youself.  Gods, you want to fuck!");
-	}
-	else if (player.lust < 90)
-	{
-		outputText("\n\nPanting feverishly, you try to ignore the blush-colored downfall, but it's a futile gesture.  It makes your " + player.skinFurScales() + " burn hot, wicking inside you with devilish efficiency to stoke the fires of your lust beyond normal limits.");
-		if (player.hasCock()) outputText("  Pre begins to dribble from your hot-and-ready cum-slit, eager to pour out in a deluge of sperm.");
-		else if (player.hasVagina()) outputText("  A flood of sopping moisture dribbles down your [legs], the proof of your unholy desire to breed.");
-		outputText(" You NEED to fuck soon.  You can barely contain yourself!");
-	}
-	else if (player.lust < 100) outputText("\n\nMoaning out loud, you smear the stuff across your [chest] as it sprinkles you, the mounting desire almost at your limit.  You want to touch yourself SO BADLY, but you know that if you do, you'll wind up a mare to this centaur, perhaps forever.  You have to resist!  You can't fall victim to this... alluring creature.");
-	else outputText(" Sinking to your knees, you start trying to tear your way out of your [armor].  You don't care about winning anymore - fucking this woman... this beast... that's all that matters.  You don't care how she takes you, as long as you get to cum all over her!");
+			if (player.lust < 30) outputText("\n\nYou close your mouth tight and endure the shimmering shower, trying your damnedest to resist the effects of this insidious liquid.  Wherever it strikes you, it vanishes soon after, absorbed directly into your body.");
+			else if (player.lust < 40) outputText("\n\nYour heart beats faster.");
+			else if (player.lust < 50) outputText("\n\nYour cheeks color as you try not to imagine how you could fuck such a beast.");
+			else if (player.lust < 60) outputText("\n\nYour blink, but find your eyes staying closed a moment longer than you intended, visions of yourself suckling down the pink sweetness occupying your mind.");
+			else if (player.lust < 70) 
+			{
+				outputText("\n\nYou groan in disappointment when you realize what's going to happen, but as soon as you're slicked with the aphrodisiac,");
+				if (player.hasCock()) outputText(" [eachCock] awakens, filling itself towards full erection.");
+				else if (player.hasVagina()) outputText(" a wet heat answers in your loins, growing more insistent from moment to moment.");
+				else outputText(" your [asshole] tingles, craving something to fill it.");
+			}
+			else if (player.lust < 80) 
+			{
+				outputText("\n\nYou sigh and try to gain a better position during the pink rain");
+				if (player.hasCock()) outputText(" ignoring the stiffening pressure of [eachCock]");
+				else outputText(" ignoring the increasing wetness of your inner [armor]");
+				outputText(". It's getting harder to think straight with all this desire welling up inside you.  It isn't for a few moments that you realize you tongue is hanging out and drooling all over youself.  Gods, you want to fuck!");
+			}
+			else if (player.lust < 90)
+			{
+				outputText("\n\nPanting feverishly, you try to ignore the blush-colored downfall, but it's a futile gesture.  It makes your " + player.skinFurScales() + " burn hot, wicking inside you with devilish efficiency to stoke the fires of your lust beyond normal limits.");
+				if (player.hasCock()) outputText("  Pre begins to dribble from your hot-and-ready cum-slit, eager to pour out in a deluge of sperm.");
+				else if (player.hasVagina()) outputText("  A flood of sopping moisture dribbles down your [legs], the proof of your unholy desire to breed.");
+				outputText(" You NEED to fuck soon.  You can barely contain yourself!");
+			}
+			else if (player.lust < 100) outputText("\n\nMoaning out loud, you smear the stuff across your [chest] as it sprinkles you, the mounting desire almost at your limit.  You want to touch yourself SO BADLY, but you know that if you do, you'll wind up a mare to this centaur, perhaps forever.  You have to resist!  You can't fall victim to this... alluring creature.");
+			else outputText(" Sinking to your knees, you start trying to tear your way out of your [armor].  You don't care about winning anymore - fucking this woman... this beast... that's all that matters.  You don't care how she takes you, as long as you get to cum all over her!");
 	
 		}
 		
@@ -222,7 +224,7 @@ package classes.Scenes.Dungeons.D3
 				outputText("\n\nThe voice continues, \"<i>Every pulse, every sloppy discharge, every throb... they're all so sexy, so wet and hot.  The harder you watch, the more arousing it gets... the more you want to touch it.</i>\"");
 				outputText("\n\nGods, you want to touch it.  One of the rigid veins pulsates, and you want to caress it so badly, to feel it twitch in your hand and drip all over you.  It looks so good, so powerful and lusty.  It's making you so horny just looking at it.  How would it feel to fuck it?  To ride it?  To bend over and present yourself to be willingly impaled?");
 	
-				if (player.lust >= 100) outputText("\n\nYou whimper, too horny to care anymore.  You moan in anticipation when you realize she's going to breed you...");
+				if (player.lust >= player.maxLust()) outputText("\n\nYou whimper, too horny to care anymore.  You moan in anticipation when you realize she's going to breed you...");
 				else
 				{
 					outputText("You stumble forward, the movement actually startling you from your lusty haze.  It's just what you need to free yourself from the unholy compulsion, and you ready yourself anew to take down this troublesome foe.  Still, your gaze keeps flicking down.  You'll have a harder time fighting off any similar teases...");

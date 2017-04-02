@@ -88,7 +88,7 @@
 				}
 				else { //She's in camp and not pregnant
 					if (flags[kFLAGS.SOPHIE_HEAT_COUNTER] == 0) { //Tick over into heat if appropriate
-						if (player.hasCock()) {
+						if (player.hasCock() && (!prison.inPrison && flags[kFLAGS.IN_INGNAM] == 0)) {
 							if (sophieBimbo.bimboSophie()) sophieBimbo.sophieGoesIntoSeason();
 							else sophieFollowerScene.sophieFollowerGoesIntoSeas();
 							flags[kFLAGS.SOPHIE_HEAT_COUNTER] = 720;
@@ -97,12 +97,12 @@
 					}
 					else {
 						flags[kFLAGS.SOPHIE_HEAT_COUNTER]--;
-						if (flags[kFLAGS.SOPHIE_HEAT_COUNTER] == 552) { //Expire heat if it counts down to 552
+						if (flags[kFLAGS.SOPHIE_HEAT_COUNTER] == 552 && !prison.inPrison) { //Expire heat if it counts down to 552
 							if (sophieBimbo.bimboSophie()) sophieBimbo.sophieSeasonExpiration();
 							else sophieFollowerScene.sophieFertilityExpired();
 							needNext = true;
 						}
-						if (model.time.hours == 10 && (player.findPerk(PerkLib.LuststickAdapted) < 0 || rand(3) == 0) && sophieBimbo.bimboSophie() && !sophieBimbo.sophieIsInSeason() && flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] == 0) {
+						if (model.time.hours == 10 && (player.findPerk(PerkLib.LuststickAdapted) < 0 || rand(3) == 0) && sophieBimbo.bimboSophie() && !sophieBimbo.sophieIsInSeason() && flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] == 0 && !prison.inPrison) {
 							sophieBimbo.bimboSophieLustStickSurprise();
 							needNext = true;
 						}
@@ -118,7 +118,7 @@
 					sophieFollowerScene.sophieFollowerIntro();
 					return true;
 				}
-				if (flags[kFLAGS.SLEEP_WITH] == "Sophie" && player.hasCock()) {
+				if (flags[kFLAGS.SLEEP_WITH] == "Sophie" && player.hasCock() && !prison.inPrison) {
 					if (sophieBimbo.bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && rand(2) == 0 && player.cockThatFits(sophieBimbo.sophieCapacity()) >= 0) {
 						outputText("\n<b><u>Something odd happens that morning...</u></b>");
 						if (pregnancy.event >= 2) sophieBimbo.fuckYoPregnantHarpyWaifu(true);
@@ -239,7 +239,7 @@ public function meetSophie():void {
 	sophieBimbo.sophieSprite();
 	//increment met tag
 	flags[kFLAGS.MET_SOPHIE_COUNTER]++;
-	outputText("", true);
+	clearOutput();
 	outputText("You make the grueling trek through mountain passes with slow, weary determination.  As you get higher, you feel almost like you could reach out and touch the omnipresent clouds that surround the summit.  The fluttering of dozens of harpy wings fills the air when you get close to their nesting area.  They flutter off and circle in the distance, seemingly content to watch you for now.  You glance around and discover numerous egg-filled nests before deciding it would be wise to stay away from those. The mothers haven't gone far.  Climbing higher, you take special care not to disturb the nests, but the effort is wasted.\n\n", false);
 	
 	outputText("While hauling yourself up onto a particularly narrow ledge, you come face to face with a harpy's alien visage.  She must have heard you climbing and come to investigate.  Now she's scant inches away from you, looking ", false);
@@ -263,7 +263,7 @@ public function meetSophie():void {
 //[Repeat Meeting]
 public function meetSophieRepeat():void {
 	sophieBimbo.sophieSprite();
-	outputText("", true);
+	clearOutput();
 	//(Pissed)
 	if(flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] > 0) {
 		outputText("During your exploration of the mountains you wind up passing close to the harpy nests again.  Uh oh.  There's a constant, irritating buzz in the background that makes it hard to focus on what you're doing.  You crest a ledge and find yourself back on the edge of Sophie's nest.  Shit.  She glowers at you and raises one of her talons.  It's a fight!\n\n", false);
@@ -353,7 +353,7 @@ private function fightSophie():void {
 //[Yes]
 private function repeatBreastFeeding():void {
 	sophieBimbo.sophieSprite();
-	outputText("", true);
+	clearOutput();
 	outputText("You agree and climb the rest of the way up to her nest, finding Sophie waiting for you there.", false);
 	//– to consentual breastfeeding.
 	doNext(cramANippleInIt);
@@ -369,7 +369,7 @@ private function PCIgnoresSophieAndHarpyIsFought():void {
 //[Looking for Demons]
 private function sophieLookingForDemons():void {
 	sophieBimbo.sophieSprite();
-	outputText("", true);
+	clearOutput();
 	outputText("Sophie throws her head back and laughs. \"<i>Don't worry about any demons here.  Any time a demon is dumb enough to wander too close to our nests, we give him a 'foot-job' he won't forget.</i>\"  To illustrate, the busty harpy lifts her leg and proudly displays her razor-sharp talons.", false);
 	//Check her out if you're in the mood or dirty-minded
 	//Requires wang
@@ -395,7 +395,7 @@ private function sophieLookingForDemons():void {
 //[No]
 private function shootDownSophieSex():void {
 	sophieBimbo.sophieSprite();
-	outputText("", true);
+	clearOutput();
 	outputText("Sophie pouts for a moment, leaning forward to better display her cleavage. \"<i>Really?  Well if you change your mind, come back and visit me.</i>\"  She turns around and fluffs her tail-feathers at you in what is clearly a dismissal.  You climb down, careful to avoid any other nests as you head back to check on your camp and its portal.", false);
 	doNext(camp.returnToCampUseOneHour);
 	if(player.lib > 25) dynStats("lib", -1);
@@ -405,7 +405,7 @@ private function shootDownSophieSex():void {
 //[Sex]
 private function sophieMeetingChoseSex():void {
 	sophieBimbo.sophieSprite();
-	outputText("", true);
+	clearOutput();
 	//(FEMALE\Unsexed)(Genderless –  forces Leave.)
 	if(player.totalCocks() == 0) {
 		outputText("Sophie looks you up and down", false);
@@ -433,7 +433,7 @@ private function sophieMeetingChoseSex():void {
 //	[Stay&Sex] – starts combat
 private function FirstTimeSophieForceSex():void {
 	sophieBimbo.sophieSprite();
-	outputText("", true);
+	clearOutput();
 	outputText("You say, \"<i>I'm not going anywhere until I'm satisfied.  Don't worry, I'll be sure to give you a few licks back.</i>\"\n\n", false);
 	
 	outputText("Sophie's large eyes widen in surprise at your statement, and her wings unfold as she counters, \"<i>Then you'll have to hope you can handle me.</i>\"  Her foot comes up warningly.\n\n", false);
@@ -444,7 +444,7 @@ private function FirstTimeSophieForceSex():void {
 //[Got Lost]
 private function sophieMeetingGotLost():void {
 	sophieBimbo.sophieSprite();
-	outputText("", true);
+	clearOutput();
 	outputText("You explain that you were exploring the mountains and sheepishly admit that you got lost.  Sophie giggles, \"<i>Well then, you're fortunate I was here.  Some of the other girls, they might have taken advantage of you.  The younger harpies are so busy getting fertilized and laying eggs that they don't have much appreciation for good company and pleasant conversation like I do.</i>\"\n\n", false);
 	
 	//(Incongruity here: she disdains the young ones for wanting to fuck instead of talk and then jumps right to wanting to fuck. Not that cougars aren't dumb as hell. - Z)
@@ -473,7 +473,7 @@ private function sophieMeetingGotLost():void {
 //[Foraging For Supplies]
 private function tellSophieYoureForagingForStuff():void {
 	sophieBimbo.sophieSprite();
-	outputText("", true);
+	clearOutput();
 	outputText("You explain to her that you were merely searching for supplies that would aid you in your quest.  Sophie's eyes narrow dangerously as she warns you, \"<i>Don't even think of our eggs as food!  Of course, I'm sure a cute little morsel like you would never do that.  What's this about a quest?</i>\"\n\n", false);
 	
 	outputText("It takes a little while to make her understand the situation, but after a lengthy explanation the harpy finally gets it.   She doesn't comprehend your reasons, but at least she knows how important your mission is to you.   Sophie sighs, clearly bored with the discussion, and spreads her sizable thighs to begin circling a finger around the large, puffy entrance to her pussy.  Your eyes widen a bit at her brazen masturbation while your body heats with arousal of its own.  Though her posture is open, the shameless harpy doesn't seem to want a partner.  You take the hint that she's through talking and climb back down.\n\n", false);
@@ -488,13 +488,13 @@ private function tellSophieYoureForagingForStuff():void {
 private function cramANippleInIt():void {
 	sophieBimbo.sophieSprite();
 	player.boostLactation(.01);
-	outputText("", true);
+	clearOutput();
 	//Not a combat win
 	if (!getGame().inCombat) outputText("Sophie steps back and drops onto her knees, balancing herself with her wings.   You pull your " + player.armorName + " open with deliberate slowness, exposing your " + allBreastsDescript() + " one at a time.  Sophie licks her lips as she patiently awaits the sharing of your bounty.\n\n", false);
 	//COMBAT
 	else {
 		//(Lust Win)
-		if(monster.lust > 99) outputText("Sophie pants and pulls herself up to her knees.  She barely keeps her balance as she rams four of her fingers deep into her dripping pussy, fiddling at her clit with her thumb.  The harpy opens her mouth to beg for your milk with her glossy lips as you slowly undress.\n\n", false);
+		if(monster.lust >= monster.eMaxLust()) outputText("Sophie pants and pulls herself up to her knees.  She barely keeps her balance as she rams four of her fingers deep into her dripping pussy, fiddling at her clit with her thumb.  The harpy opens her mouth to beg for your milk with her glossy lips as you slowly undress.\n\n", false);
 		//(HP Win)
 		else outputText("You pull the dazed and defeated harpy up to her knees.  She sways unsteadily as you undress and expose your " + allBreastsDescript() + " to the cool mountain air.   Sophie's eyes open wider as she struggles back to consciousness, and the hungry harpy happily opens her mouth into a wide 'O', begging for your milk.\n\n", false);
 	}
@@ -597,7 +597,7 @@ private function cramANippleInIt():void {
 //[Consensual Secks – Requires Dick]
 private function consensualHotSophieDickings():void {
 	sophieBimbo.sophieSprite();
-	outputText("", true);
+	clearOutput();
 	flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS]++;
 	var x:Number = player.cockThatFits(232);
 	if(x < 0) 
@@ -732,7 +732,7 @@ private function consensualHotSophieDickings():void {
 //[Yes]
 private function postSophieSexSnuggle():void {
 	sophieBimbo.sophieSprite();
-	outputText("", true);
+	clearOutput();
 	outputText("You sprawl out in Sophie's nest and allow her to wrap her wings about you protectively.  Her hands stay busy the entire time, alternatively masturbating ", false);
 	if(player.cockTotal() > 1) outputText("each of ", false);
 	outputText("your " + multiCockDescriptLight() + " or her own cum-slicked twat.  The harpy gets herself off numerous times, clearly enjoying your discomfort and the fullness of her vagina.  After a few hours of this pleasure-hell you can feel your body dredging up another load, and Sophie whispers in your ear, \"<i>Relax and squirt it all out for me.</i>\"\n\n", false);
@@ -753,6 +753,7 @@ private function postSophieSexSnuggle():void {
 	else outputText("give her a kiss on the cheek, knowing all-too-well the dangers of her lips.  She quips, \"<i>Ohh, too bad.  I wanted to stroke you to sleep.</i>\"\n\n", false);
 	//Remove luststick
 	player.removeStatusAffect(StatusAffects.Luststick);
+	dynStats("lib=", flags[kFLAGS.LUSTSTICK_LIBIDO_INITIAL]);
 	//(+sensitivity, +libido
 	dynStats("lib", 1, "sen", 1);
 	
@@ -763,7 +764,7 @@ private function postSophieSexSnuggle():void {
 //[No]
 private function postSexSophieSnuggleTurnedDown():void {
 	sophieBimbo.sophieSprite();
-	outputText("", true);
+	clearOutput();
 	outputText("You turn down her offer and assure her that you'll be fine.  Sophie giggles while you try to get dressed, and you see her amber eyes watching you as try to climb back down the mountain with a stiffy.  She seems greatly amused by your predicament.", false);
 	//(+sensitivity, +libido
 	dynStats("lib", 1, "sen", 1);
@@ -775,7 +776,7 @@ private function consensualSophieSexNoFit():void {
 	sophieBimbo.sophieSprite();
 	var x:Number = player.biggestCockIndex();
 	flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS]++;
-	outputText("", true);
+	clearOutput();
 	outputText("With her spread thighs beckoning you so invitingly, there's no way you could resist.  You tear off your " + player.armorName + " and jump into her nest with her, hardening delightfully from your close proximity to the well-endowed woman.  Sophie places a hand ", false);
 	if(player.biggestTitSize() < 1) outputText("on your chest", false);
 	else outputText("between your " + allBreastsDescript(), false);
@@ -902,7 +903,10 @@ public function luststickApplication(hours:Number = 4):void {
 		}
 	}
 	//Apply a little of doctor L (thats Dr Lipstick you tard!)
-	else player.createStatusAffect(StatusAffects.Luststick,hours,0,0,0);
+	else {
+		flags[kFLAGS.LUSTSTICK_LIBIDO_INITIAL] = player.lib;
+		player.createStatusAffect(StatusAffects.Luststick, hours, 0, 0, 0);
+	}
 }
 
 internal function sophieLostCombat():void {
@@ -956,7 +960,7 @@ internal function sophieWonCombat():void {
 private function maleVictorySophieRape():void {
 	sophieBimbo.sophieSprite();
 	var x:Number = player.cockThatFits(232);
-	outputText("", true);
+	clearOutput();
 	outputText("Sophie is ", false);
 	if(monster.HP < 1) outputText("too beaten to resist, and lies on the ground in a semi-conscious heap.", false);
 	else outputText("too turned on to resist, and is vigorously fisting her large pussy.", false);
@@ -991,7 +995,7 @@ private function maleVictorySophieRape():void {
 private function maleVictorySophieRapeHUGE():void {
 	sophieBimbo.sophieSprite();
 	var x:Number = player.biggestCockIndex();
-	outputText("", true);
+	clearOutput();
 	
 	outputText("Not satisfied with a simple victory, you undress and expose your ", false);
 	if(player.lust > 90) outputText("dripping ", false);
@@ -1047,7 +1051,7 @@ private function maleVictorySophieRapeHUGE():void {
 //Female Pussy Grind
 private function sophieVictoryPussyGrind():void {
 	sophieBimbo.sophieSprite();
-	outputText("", true);
+	clearOutput();
 	outputText("Sophie is ", false);
 	if(monster.HP < 1) outputText("too beaten to resist, and lies on the ground in a semi-conscious heap.", false);
 	else outputText("too turned on to resist, and is vigorously fisting her large pussy.  You pull her feathery arm from the horny snatch and shove it to the side.", false);
@@ -1106,7 +1110,7 @@ private function sophieVictoryPussyGrind():void {
 //Female Clit-Fucking
 private function fuckDatClit():void {
 	sophieBimbo.sophieSprite();
-	outputText("", true);
+	clearOutput();
 	outputText("Sophie is ", false);
 	if(monster.HP < 1) outputText("too beaten to resist, and lies on the ground in a semi-conscious heap.", false);
 	else outputText("too turned on to resist, and is vigorously fisting her large pussy.  You pull her feathery arm from the horny snatch and shove it to the side.", false);
@@ -1139,7 +1143,7 @@ private function fuckDatClit():void {
 	outputText("It's several hours later when you wake up at the base of the mountain.   Your " + player.armorName + " is back on, and your gem-pouch feels a little lighter.  Maybe you'll think twice about jamming something as sensitive as your " + clitDescript() + " into a slick vice next time?  Then again, you might have to go visit her again.  You're still tingling from the aftereffects of those orgasms.", false);
 	monster.lust = 98;
 	monster.HP = 2;
-	player.lust = 100;
+	player.lust = player.maxLust();
 	flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 	cleanupAfterCombat();
 	player.orgasm();
@@ -1150,7 +1154,7 @@ private function fuckDatClit():void {
 //Tiny Wang Emasculation
 private function tinyDickSupremeSophieLoss():void {
 	sophieBimbo.sophieSprite();
-	outputText("", true);
+	clearOutput();
 	outputText("Sophie looks down at your ", false);
 	if(player.HP < 1) outputText("defeated", false);
 	else outputText("masturbating", false);
@@ -1202,7 +1206,7 @@ private function tinyDickSupremeSophieLoss():void {
 //Normal Sized Wang Rape – Kisstacular + Hypno
 private function normalLossRapuuuuSophie():void {
 	sophieBimbo.sophieSprite();
-	outputText("", true);
+	clearOutput();
 	var x:Number = player.cockThatFits(232);
 	
 	outputText("Sophie watches your lust-wracked body with an expression of pity.  The harpy woman saunters over and muses, \"<i>Well that was a waste.  You aren't exactly hard to get in the mood, you know?  Why don't you just come fuck me next time and skip all the foreplay?</i>\"  The motherly bird-woman takes a moment to preen her feathery hair while she watches your hands pump away at your " + cockDescript(x) + " ", false);
@@ -1248,7 +1252,7 @@ private function normalLossRapuuuuSophie():void {
 //Too Big – Get knocked out and wake up with your dick covered in kisses.  Status for 16 hours (8 more after waking up)
 private function tooBigForOwnGoodSophieLossRape():void {
 	sophieBimbo.sophieSprite();
-	outputText("", true);
+	clearOutput();
 	var x:Number = player.biggestCockIndex();
 	
 	outputText("Sophie reaches forwards with a clawed foot to pull down your armor, but your " + cockDescript(x) + " bursts free on its own.  She recoils in shock, nearly falling onto her feathery ass.   Sophie screeches, \"<i>How did you even hide that monster!?  I CAN'T TAKE THAT!</i>\"   She lashes and batters your head with her wings and kicks.  A particularly powerful hit lands just above your ears and things go black...\n\n", false);
@@ -1263,7 +1267,7 @@ private function tooBigForOwnGoodSophieLossRape():void {
 //No Dong – You wake up at the bottom of the mountain.
 private function SophieLossRapeNoDonguuuu():void {
 	sophieBimbo.sophieSprite();
-	outputText("", true);
+	clearOutput();
 	outputText("Utterly defeated, you collapse.   Sophie doesn't let up, and batters you mercilessly with her wings until you lose consciousness.\n\n", false);
 	
 	outputText("By the time you wake up, you're at the bottom of the mountain, and you feel as if you've fallen down the entire thing.  Obviously Sophie had enough care not to drop you to your death, but she didn't do you any favors on the ride either.   Yeesh.", false);

@@ -2,6 +2,7 @@
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	/**
 	 * ...
@@ -119,17 +120,19 @@
 			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_FUR];
 			this.hairColor = "red";
 			this.hairLength = 3;
-			initStrTouSpeInte(65, 60, 50, 1);
+			initStrTouSpeInte(75, 64, 50, 1);
 			initLibSensCor(95, 20, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 5;
+			this.weaponAttack = 5 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "thick fur";
+			this.armorDef = 7 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusLust = 10;
 			this.lust = 50;
 			this.lustVuln = 0.87;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 5;
-			this.gems = 10 + rand(10);
+			this.level = 10;
+			this.gems = 15 + rand(12);
             this.drop = new WeightedDrop().add(consumables.CANINEP, 3)
             					.addMany(1, consumables.BULBYPP,
             							consumables.KNOTTYP,
@@ -140,6 +143,13 @@
 			this.special2 = hellhoundScent;
 			this.special3 = hellHoundWormCannon;
 			this.tailType = TAIL_TYPE_DOG;
+			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
+			this.str += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 1140;
 			checkMonster();
 		}
 

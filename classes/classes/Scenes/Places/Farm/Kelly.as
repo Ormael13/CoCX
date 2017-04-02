@@ -97,6 +97,13 @@ public function breakingKeltOptions():void {
 	addButton(0,"Endure",farm.keltScene.keltEncounter);
 	addButton(1,"Resist",resistKeltsBSBreakHimIntro);
 	addButton(2,"Never",neverBreakKeltIntoKelly);
+	addButton(4,"FIGHT!",fightToBeatKelt);
+}
+
+public function fightToBeatKelt():void {
+	outputText("Deciding you've had enough with Kelt, you ready your " + player.weaponName + ". Kelt readies his bow. \"<i>Do you really think you can beat me, slut?</i>\"", true);
+	flags[kFLAGS.KELT_KILL_PLAN] = 1;
+	startCombat(new Kelt());
 }
 
 //Resist
@@ -160,6 +167,8 @@ private function resistKeltsBSBreakHimIntro():void {
 		approachKelly();
 	}
 }
+
+
 
 //Never: the PC will never be asked that question again, forever locking the quest.
 //Not Now: Nothing happens. The PC may carry on lessons like normal and they can still begin the mind-breaking process whenever they wish as long as they meet the above requirements.
@@ -335,7 +344,7 @@ internal function defeatKellyNDBREAKHIM():void {
 	//Cut these: You swing your [weapon], ready to use force against the restless centaur if necessary.
 	//Cut these: \"<i>Easy now, okay? You don't have your bow, and you know what I can do with my [weapon]. Now if you just calm down I promise I'll be much nicer this time.</i>\"
 	//lust/HP: 
-	if(monster.lust > 99) outputText("Kelt moans, mauling at his mantits in his lust before he realizes what's going on");
+	if(monster.lust >= monster.eMaxLust()) outputText("Kelt moans, mauling at his mantits in his lust before he realizes what's going on");
 	else outputText("Kelt groans, slumping slightly from all the damage you've done to him");
 	outputText(".  You close in, saying, \"<i>Easy now, okay?  You know what I can do with my [weapon].  Now if you just calm down, I promise I'll be much nicer this time.</i>\"");
 	
@@ -612,12 +621,15 @@ internal function keltFucksShitUp():void {
 }
 private function keltFucksShitUpII():void {
 	clearOutput();
-	outputText("You awaken at the periphery of the farm, thankful to be alive.  Kelt is nowhere to be seen.  You have to wonder if Whitney saved you or the dumb beast was too stupid to finish you off.  Whatever the case, you head back to camp to lick your wounds.  <b>The worst indignity of all is that he broke a lot of your succubi milks.</b>  He'll likely have regained some more of his maleness by the time you're ready to attempt teaching him another lesson.");
-	player.consumeItem(consumables.SUCMILK,5);
-	
-	//Roll Kelt back one obedience level - at the worst he drops to the level of the first fight
-	flags[kFLAGS.KELT_BREAK_LEVEL]--;
-	if(flags[kFLAGS.KELT_BREAK_LEVEL] < 1) flags[kFLAGS.KELT_BREAK_LEVEL] = 1;
+	outputText("You awaken at the periphery of the farm, thankful to be alive.  Kelt is nowhere to be seen.  You have to wonder if Whitney saved you or the dumb beast was too stupid to finish you off.  Whatever the case, you head back to camp to lick your wounds.  ");
+	if (!flags[kFLAGS.KELT_KILL_PLAN] == 1){
+		outputText("<b>The worst indignity of all is that he broke a lot of your succubi milks.</b>  He'll likely have regained some more of his maleness by the time you're ready to attempt teaching him another lesson.");
+		player.consumeItem(consumables.SUCMILK,5);
+		
+		//Roll Kelt back one obedience level - at the worst he drops to the level of the first fight
+		flags[kFLAGS.KELT_BREAK_LEVEL]--;
+		if (flags[kFLAGS.KELT_BREAK_LEVEL] < 1) flags[kFLAGS.KELT_BREAK_LEVEL] = 1;
+	}
 	cleanupAfterCombat();
 }
 
@@ -762,8 +774,8 @@ private function approachKelly():void {
 	//Showing up resets Kelly's desire not to fap without you
 	flags[kFLAGS.KELLY_DISOBEYING_COUNTER] = 0;
 
-	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 0)	addButton(9, "Leave", camp.returnToCampUseOneHour);
-	else addButton(9, "Back", farm.farmCorruption.rootScene);
+	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 0)	addButton(14, "Leave", camp.returnToCampUseOneHour);
+	else addButton(14, "Back", farm.farmCorruption.rootScene);
 }
 
 private function kellySexMenu():void {
@@ -784,7 +796,7 @@ private function kellySexMenu():void {
 		addButton(3,"Blowjob",kellyBJsAhoy);
 		addButton(4,"Talk And HJ",talkNHandToKelly);
 	}
-	addButton(9,"Back",approachKelly);
+	addButton(14,"Back",approachKelly);
 	
 }
 //Regular scenes
@@ -1780,7 +1792,7 @@ private function rewardKelly():void {
 	if(player.hasItem(consumables.PINKDYE) && flags[kFLAGS.KELLY_HAIR_COLOR] != "bright pink") addButton(4,"Pink Dye",dyeKellysBitchAssHair,consumables.PINKDYE);
 	if(player.hasItem(consumables.BROWN_D) && flags[kFLAGS.KELLY_HAIR_COLOR] != "chestnut brown") addButton(5,"Brown Dye",dyeKellysBitchAssHair,consumables.BROWN_D);
 	
-	addButton(9,"Back",approachKelly);
+	addButton(14,"Back",approachKelly);
 }
 
 //Hair Dye

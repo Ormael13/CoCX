@@ -62,6 +62,7 @@ package classes.Scenes.Areas.Forest
 			switch (rand(select)) {
 				case 0:
 					createStatusAffect(StatusAffects.Attacks, int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 20), 0, 0, 0); //Tamani's Daughters get multiattacks!
+					if (statusAffectv1(StatusAffects.Attacks) > 20) addStatusValue(StatusAffects.Attacks, 1, -(statusAffectv1(StatusAffects.Attacks) - 20));
 					eAttack();
 					break;
 				case 1:
@@ -119,12 +120,18 @@ package classes.Scenes.Areas.Forest
 			initLibSensCor(70, 70, 50);
 			this.weaponName = "fists";
 			this.weaponVerb="tiny punch";
+			this.weaponAttack = 5 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "leather straps";
+			this.armorDef = 5 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = 50 + (int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2) * 15);
+			if (bonusHP > 3350) bonusHP = 3350;
+			this.bonusLust = 20 + (int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2) * 10);
+			if (bonusLust > 1920) bonusLust = 1920;
 			this.lust = 30;
 			this.lustVuln = .65;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 8 + (Math.floor(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 20));
+			if (level > 30) level = 30;
 			this.gems = rand(15) + 5;
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE,5).
@@ -135,6 +142,13 @@ package classes.Scenes.Areas.Forest
 							consumables.PURPDYE);
 			this.special1 = goblinDrugAttack;
 			this.special2 = goblinTeaseAttack;
+			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.str += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 2000;
 			checkMonster();
 		}
 

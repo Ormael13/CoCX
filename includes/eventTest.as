@@ -91,7 +91,7 @@ consequatur aut perferendis doloribus asperiores repellat.
 
 	//trace("Maintext content @ eventTestingPane = ", mainText.htmlText.length)
 	//menu();
-	//addButton(9, "Back", debugPane)
+	//addButton(14, "Back", debugPane)
 }
 
 /*
@@ -103,7 +103,7 @@ consequatur aut perferendis doloribus asperiores repellat.
 */
 
 public function eventTester():void {
-	outputText("", true);
+	clearOutput();
 	mainView.showTestInputPanel();
 	mainView.eventTestInput.text = <![CDATA[
 [screen startup |
@@ -134,7 +134,7 @@ public function eventTesterGo():void
 	menu();
 	outputText(temp, true, true);
 
-	addButton(9, "Back", eventTester)
+	addButton(14, "Back", eventTester)
 	flushOutputTextToGUI();
 	// simpleChoices("Change Text",eventTester,"",0,"",0,"",0,"Exit",eventTesterExit);
 	return;

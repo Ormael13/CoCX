@@ -33,7 +33,7 @@ public function LiliumText(output:Boolean = false):Function {
 }
 
 private function approachLilium():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(93);
 	var pay:Function = null;
 	//#########FIRST TIME INTRODUCTION#########
@@ -59,7 +59,7 @@ private function approachLilium():void {
 
 
 private function payForLilium():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(93);
 	//#########GENDERLESS SCENE######### REQUIRES unsexed (hah)
 	if(player.gender == 0) {
@@ -94,7 +94,7 @@ private function payForLilium():void {
 	var buttFuck:Function = null;
 	var nippleFuck:Function = null;
 	var rideHer:Function = null;
-	if(player.hasCock() && player.tongueType >= TONUGE_DEMONIC) buttFuck = buttFuckTongueJeorb;
+	if(player.hasCock() && player.hasLongTongue()) buttFuck = buttFuckTongueJeorb;
 	if(player.hasCock()) nippleFuck = liliumNippleFuck;
 	if(player.hasVagina()) rideHer = liliumDickRidah;
 	simpleChoices("Buttfuck", buttFuck, "Ride Her", rideHer, "Nipple-Fuck", nippleFuck, "", null, "", null);
@@ -102,7 +102,7 @@ private function payForLilium():void {
 
 //- Leave:
 private function leaveLilium():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(93);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00267] == 0) outputText("\"<i>I'm deathly allergic to fun, unfortunately,</i>\" you reply before moving on to examine more of the bazaar.", false);
 	else outputText("\"<i>Just passing through, and I thought I'd see how you were doing,</i>\" you reply, and leave Lilium alone at her post.", false);
@@ -111,7 +111,7 @@ private function leaveLilium():void {
 
 //#########BUTTFUCK + TONGUEJOB SCENE######### REQUIRES PENIS AND LONG DEMONIC TONGUE
 private function buttFuckTongueJeorb():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(93);
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
@@ -153,7 +153,7 @@ private function buttFuckTongueJeorb():void {
 
 //#########DICK RIDE SCENE######### REQUIRES VAGINA
 private function liliumDickRidah():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(93);
 	outputText("Lilium takes you to a secluded spot away from the Bazaar.  She removes her corset and skirt and slips the lacy cock sock off her cock and you eagerly remove your own " + player.armorName + ".\n\n", false);
 
@@ -177,7 +177,7 @@ private function liliumDickRidah():void {
 	if(player.biggestTitSize() >= 1) {
 		outputText("You turn your attention to your own " + allBreastsDescript() + " and how they bounce from the force of your vigorous fucking, supporting the weight of your " + breastDescript(0) + " with your hands as you continue to ride Lilium's cock.", false);
 		//(if demonic tongue)
-		if(player.tongueType == TONUGE_DEMONIC) outputText("  Letting your demonic tongue extend out from between your lips, you wrap it around one " + nippleDescript(0) + " and gently squeeze, sending an electric thrill that flows to your core and back out to the tips of your fingers.", false);
+		if(player.hasLongTongue()) outputText("  Letting your long tongue extend out from between your lips, you wrap it around one " + nippleDescript(0) + " and gently squeeze, sending an electric thrill that flows to your core and back out to the tips of your fingers.", false);
 		//(else if no demonic tongue)
 		else outputText("  You begin to squeeze your " + nippleDescript(0) + " between two fingers, sending an electric thrill that flows to your core and back out to the tips of your fingers.", false);
 		//(if lactating a little)
@@ -212,7 +212,7 @@ private function liliumNippleFuck():void {
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
 	
-	outputText("", true);
+	clearOutput();
 	spriteSelect(93);
 	
 	outputText("Lilium takes you to a secluded spot in the Bazaar for you to be able to enjoy each other's company. She kneels down before you and you strip out of your " + player.armorName + ", baring your naked body before her.\n\n", false);

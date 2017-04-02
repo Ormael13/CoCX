@@ -443,7 +443,7 @@ package classes.Scenes.Areas.Bog
 					outputText(" has shrunk back down to the size and shape of a " + phoukaNameText("phouka", "faerie") + ".");
 					phoukaForm = PHOUKA_FORM_FAERIE;
 				}
-				if (player.lust < 33) {
+				if (player.lust < 33 || flags[kFLAGS.SFW_MODE] > 0) {
 					outputText("  The threat dealt with you scoop, dig and finally extract yourself from the mire.  Your lower half is soaked and you long to sit in front of the fire at your camp.  Hefting your supplies you turn back the way you came.");
 					phoukaLeaveOnLustWin(false);
 				}

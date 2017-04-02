@@ -28,6 +28,10 @@ package classes.Scenes.Areas.Mountain
 		public function hellhoundEncounter():void
 		{
 			outputText("You hear a fiery howl as a demonic, two-headed beast-man leaps out in front of you!", true);
+			if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Hellhounds!</b>")
+			}
 			startCombat(new HellHound());
 			spriteSelect(27);
 		}
@@ -35,11 +39,12 @@ package classes.Scenes.Areas.Mountain
 
 		public function hellhoundRapesPlayer():void
 		{
+			if (doSFWloss()) return; //No rape in SFW mode.
 			//Lust or HP loss texts here
-			if (player.lust >= 100) outputText("Overcome by sexual desire, you submit to the hungry hellhound.\n\n", true);
+			if (player.lust >= player.maxLust()) outputText("Overcome by sexual desire, you submit to the hungry hellhound.\n\n", true);
 			else outputText("Too weak to continue fighting, you fall to your knees.\n\n", true);
 			outputText("The heads of the hellhound grin with desire as he rises onto his hind legs. As the hellhound stands before you, your eyes widen at the sight of its equipment: a pair of eight-inch long black rods, one above the other, with a sack containing a quad of flaming balls underneath. As the hound swaggers closer, you gulp at the thought of what those fiery balls are going to be pumping into you. You are helpless against the hellhound as he pushes you onto your ", false);
-			if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("hocks and knees", false);
+			if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("hocks and knees", false);
 			else outputText("hands and knees", false);
 			outputText(" and positions himself behind you. He grips you with his clawed hands on your shoulders and easily holds you in place. The powerful creature is easily able to get past your " + player.armorName + " and you feel one of his rods brush against your " + buttDescript() + ".  A shudder shoots through your body as he brings his two heads down to either side of your own, his hot canine breath blowing past your ears. He stays there for a few moments, completely still... before suddenly pulling his heads back and ", false);
 			if (player.vaginas.length > 0 && player.lowerBody != LOWER_BODY_TYPE_NAGA) outputText("slamming his twin dicks into your " + vaginaDescript(0) + " and your " + assholeDescript() + ".  ", false);
@@ -80,7 +85,7 @@ package classes.Scenes.Areas.Mountain
 
 		public function hellHoundGetsRaped():void
 		{
-			outputText("", true);
+			clearOutput();
 			//(Raped by player)
 			//[if player has only one dick and no vagina]
 			if (player.cocks.length == 1 && player.vaginas.length == 0) outputText("The twin heads of the hellhound eagerly lick your " + cockDescript(0) + " for a while.  The large, flat tongues give you a rather unusual feeling, but it is definitely effective. As you approach your peak, one of the heads tries to take your manhood into its mouth. But the other head doesn't seem all that pleased with this, and the two start to nip at each other in an effort to claim the right to be the one to push you over the edge. Annoyed at being ignored, you give both heads a smack with your hand. After a moment of recoil, they look down apologetically before resuming their licking. As you peak, the heads pull back and try to catch all the cum that erupts from your " + cockDescript(0) + " in their mouths. The fierce competition between the two means that most of the cum ends up outside their eager maws, but they are nontheless satisfied.  With a pair of happy barks, the hellhound turns and runs away.", false);
@@ -100,7 +105,7 @@ package classes.Scenes.Areas.Mountain
 //HELLHOUND MASTER+ BAD ENDZZZZZ
 		public function HellHoundMasterEncounter():void
 		{
-			outputText("", true);
+			clearOutput();
 			//Initial encounter (A)
 			//Requires canine face, [either two dog dicks, or a vag and pregnant with a hellhound], at least two other hellhound features (black fur, dog legs, dog tail), and corruption >=60.
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00141] == 0) {
@@ -120,7 +125,7 @@ package classes.Scenes.Areas.Mountain
 //choose no (B)
 		private function declineCrazyPresences():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("You force the presence out of your mind.  You feel almost a bit lost after it disappears, but giving yourself over to foreign control can never be a good idea, can it?", false);
 			//end event, A can repeat later.
 			doNext(camp.returnToCampUseOneHour);
@@ -129,7 +134,7 @@ package classes.Scenes.Areas.Mountain
 //choose yes (C)
 		private function acceptCrazyPresences():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("You relax your mind and allow the presence to fill your mind.  It takes control of your consciousness, and guides your thoughts.  You feel like you should go home, your master probably wants to meet you for the first time.  Instinctively you navigate the many twists and turns of the mountains, a path you can't remember, and don't have the presence of mind to chart.  Some time later, you emerge from the crags and passes to find an elaborate vale, filled with hellhounds.\n\n", false);
 
 			outputText("You smile at the sight of your brothers running around, playing with each other, and fucking one another.  You can see many of both the violent twin headed and dicked hellhound males, and the more seductive twin headed and cunted hellhound females. It is also easy to see the vicious clearly heavily pregnant barghests, given the wide birth the other hounds give them once the females reach that stage.  It is quite the pack, but you can't look proudly at it for too long, you need to go see your master!\n\n", false);
@@ -141,7 +146,7 @@ package classes.Scenes.Areas.Mountain
 
 		private function acceptCrazyPresencesII():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("The interior of the fort is obviously just the outer fortifications of a much bigger complex that goes deep inside a cave system.  As you move further inside, you find yourself stopping in front of the kennels.  These seem to be for the strongest of the hellhounds, and those that have their own demon masters.  You see a few other incubi and succubi playing with their hellhound pets.  For the most part though, you don't pay attention to the details of the fortress.  You're far too excited to get to the deepest part and meet up with your master, so you hurry on past.\n\n", false);
 
 			outputText("You quickly move through the kennels, the pleasure pits, and the lab to get to the inner sanctum.  Inside you find a mighty and beautiful masculine demon.  He grins as he sees you and tells you to stand up so he can get a good look at you.  You eagerly rise up onto your hind legs and give a happy yip as he starts to walk around you and examine you.  At the same time, you get a chance to have a closer look at him.  He stands about seven feet tall, and has beautifully carved muscles and dark skin.  It is quite clear that he likes the appearance of his hounds, as he takes a form that has a build that is very close to that of the male hounds.  Well, save for only having one head, having both two dicks and two cunts.  He probably samples his hounds all the time.  The thought that he might do the same to you too brings on more than a little excitement.\n\n", false);
@@ -159,7 +164,7 @@ package classes.Scenes.Areas.Mountain
 //Choose no (E)
 		private function declineGivingAwayLethicite():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("You push the presence out of your mind.  Maybe later you'll collect the hellfire, but for now you'd rather keep the lethicite.", false);
 			//end event, D can repeat.
 			doNext(camp.returnToCampUseOneHour);
@@ -168,7 +173,7 @@ package classes.Scenes.Areas.Mountain
 //Choose yes (F)
 		private function giveUpLethicite():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("You once again allow the master's will to fill you and bring you to his home.  Once again you pass through the many crags and passes of the mountains and find yourself in the hellhound valley.  The place is just as it was the last time you were here, but you don't take in the views, you have other pressing matters to deal with.  You quickly make your way across the valley to the entrance to the master's lair.\n\n", false);
 
 			outputText("Another succubus stands guard at the entrance with another hellhound standing next to her.  She gives you a bit of a disdainful look before her hound steps forward.  \"<i>My mistress doesn't like dealing with lower hounds.  The grand master will be glad to see you, however.  Please go right in.</i>\"  One of its heads intones before directing you inside the fort.  Without hesitation you rush in.\n\n", false);
@@ -183,18 +188,19 @@ package classes.Scenes.Areas.Mountain
 //Regular Lethicite
 		private function giveLethicitePiece():void
 		{
-			outputText("", true);
+			clearOutput();
 			//Give a single piece of Lethicite, get hellfire
 			outputText("You produce the pink crystal and hand it to the master.  As the crystal touches his hand, he gives a low growl of pleasure and holds the crystal up to his eyes.  \"<i>Ah yes, excellent!  Thank you so much for this tasty treat of power.</i>\"\n\n", false);
-			//if (PC gave ⅔ Merae's crystal)
-			if (player.keyItemv2("Marae's Lethicite") == 1) {
+			//if (PC gave 2/3 Merae's crystal)
+			if (player.keyItemv1("Marae's Lethicite") == 2) {
 				outputText("He looks at the crystal for a moment, before biting off half of it and giving the other half back to you.  \"<i>This is enough for the hellfire, I think.  Go ahead and keep the rest, my favorite fan!</i>\"\n\n", false);
-				//Replace ⅔ Merae's Lethicite with regular lethicite.
-				player.addStatusValue(StatusAffects.MaraesLethicite, 2, 1)
+				//Replace 2/3 Merae's Lethicite with regular lethicite.
+				player.addKeyValue("Marae's Lethicite", 1, -1);
 			}
 			else {
 				//Remove 1 lethicite crystal from the PC
-				player.addStatusValue(StatusAffects.MaraesLethicite, 2, 1)
+				flags[kFLAGS.MARAE_LETHICITE]--;
+				player.addKeyValue("Marae's Lethicite", 1, -1);
 			}
 			outputText("He rolls the crystal around in his mouth for a few moments before swallowing the crystal.  In a moment, white flames rise up around his body, and he gives you a wicked grin.  \"<i>Now, let me give you the gift promised for this tribute.</i>\"\n\n", false);
 
@@ -219,10 +225,10 @@ package classes.Scenes.Areas.Mountain
 //Merae's Lethicite
 		private function giveALLTHELETHICITES():void
 		{
-			outputText("", true);
+			clearOutput();
 			//Give him Merae's Lethicite, now he's got enough power for a major upheaval in the demon hierarchy.  You don't get to keep being a champion.
 			//Max player's lust for genital descriptions.
-			dynStats("lus=", 100);
+			dynStats("lus=", player.maxLust());
 
 			outputText("You pull out the giant pink crystal that you stole from Merae.  At the sight of the gem, the demon's eyes go so wide, you almost can't believe that they stay in his head.  \"<i>Is that what I think... yes, YES! This is quite the prize you have brought me, my wonderful imitator!</i>\"  He snatches the crystal out of your hands and cradles it in his hands for a few moments, a crazed hungry look in his eyes.  You remain in his power, and can do nothing but watch as he raves for a few minutes with the jewel in his hands.\n\n", false);
 
@@ -289,12 +295,15 @@ package classes.Scenes.Areas.Mountain
 			outputText("You feel inclined to agree at the wonderful feeling of your new body, and the incredible amount of power you feel rushing through you.  You move one of your hands so that you can play with both your dicks and your cunts, relishing in the feeling of them and the flames that lie within.  You gasp for a moment, and open your mouth as a rush of heat rises up from your chest and a burst of flame emerges from your mouth.\n\n", false);
 
 			outputText("A powerful demon steps out in front of you, and picks up the crystal.  You can feel a strong connection with him, and you know this is your master.  \"<i>Well now, I think you need a new name now in commemoration of being the first three headed hellhound, and for being the one who will give me the world.</i>\"  He unceremoniously puts the crystal in his mouth and swallows it.  \"<i>Your new name is Cerberus, and you're my greatest pet.</i>\"  He steps closer and looks into your center head's eyes for a moment.  \"<i>That's much better than being a champion ever was, isn't it?</i>\"  You can't help but eagerly nod in agreement.", false);
+			player.orgasm();
+			dynStats("lib", 50, "cor", 100);
 			getGame().gameOver();
+
 		}
 
 		public function hellHoundPropahRape():void
 		{
-			outputText("", true);
+			clearOutput();
 			if (monster.HP < 1) outputText("The hellhound's flames dim and the heads let out a whine before the creature slumps down, defeated and barely conscious. After all the trouble you had with him, you want to have some fun in exchange. \"<i>Bad boy, roll over!</i>\" you command as if the hellhound was just an ordinary domestic dog. To your surprise the creature actually does as you say. Accepting your victory he rolls onto his back, exposing his human-like abs and throat, signaling submissiveness. Looking down on your foe, your lustful gaze rests upon his privates. You examine the unusual ballsack with its quadruple testes, but the real treasure is yet to be found. Pulling on his sheath you reveal his twin dog members. An obsessive idea comes to your mind and you are determined to put his magnificent tools to a good use.\n\n", false);
 			else outputText("Unable to bear hurting you anymore, the hellhound's flames dim as he stops its attack. The two heads look at you, whining plaintively. After all the trouble you had with him, you want to have some fun in exchange. \"<i>Bad boy, roll over!</i>\" you command as if the hellhound was just an ordinary domestic dog. To your surprise the creature actually does as you say. Accepting your victory he rolls onto his back, exposing his human-like abs and throat, signaling submissiveness. Looking down on your foe, your lustful gaze rests upon his privates. You examine the unusual ballsack with its quadruple testes, but the real treasures are pulsating just above it. Pulling on his sheath, you smile as his twin members twitch in response. An obsessive idea comes to your mind and you are determined to put his magnificent tools to a good use.\n\n", false);
 

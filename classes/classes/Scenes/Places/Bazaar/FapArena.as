@@ -20,7 +20,7 @@
 }
 //Option labeled "Arena» is available.
 public function fapArenaGOOOO():void {
-	outputText("", true);
+	clearOutput();
 	//(set X = longest cock)
 	var x:Number = player.longestCock();
 	//[1st time]
@@ -91,7 +91,7 @@ public function fapArenaGOOOO():void {
 private function fapArenaPageII():void {
 	//Increment 'times fap-arena'ed
 	flags[kFLAGS.FAP_ARENA_SESSIONS]++;
-	outputText("", true);
+	clearOutput();
 	var x:Number = player.longestCock();
 	
 	outputText("\"<i>READY!</i>\"\n\n", false);
@@ -146,7 +146,7 @@ private function fapArenaPageII():void {
 }
 
 private function fapResults(place:Number = 3):void {
-	outputText("", true);
+	clearOutput();
 	var x:Number = player.longestCock();
 	var num:Number = rand(50) + 5;
 	var tent:Boolean = false;

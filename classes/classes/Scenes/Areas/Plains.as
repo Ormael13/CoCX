@@ -7,6 +7,8 @@ package classes.Scenes.Areas
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.Plains.*;
+	import classes.Scenes.NPCs.Etna;
+	import classes.Scenes.NPCs.EtnaFollower;
 
 	use namespace kGAMECLASS;
 
@@ -16,13 +18,14 @@ package classes.Scenes.Areas
 		public var gnollScene:GnollScene = new GnollScene();
 		public var gnollSpearThrowerScene:GnollSpearThrowerScene = new GnollSpearThrowerScene();
 		public var satyrScene:SatyrScene = new SatyrScene();
+		public var etnaScene:EtnaFollower = new EtnaFollower();
 
 		public function Plains()
 		{
 		}
 		public function explorePlains():void
 		{
-			outputText("", true);
+			clearOutput();
 			flags[kFLAGS.TIMES_EXPLORED_PLAINS]++;
 			//Dem Kangasluts!  Force Sheila relationship phase!
 			if (flags[kFLAGS.SHEILA_DEMON] == 0 && flags[kFLAGS.SHEILA_XP] == 3 && model.time.hours == 20 && flags[kFLAGS.SHEILA_CLOCK] >= 0) {
@@ -44,13 +47,18 @@ package classes.Scenes.Areas
 				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}
+			//Etna
+			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
+				etnaScene.repeatYandereEnc();
+				return;
+			}
 			//Find Niamh
 			if (flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == 1) {
 				kGAMECLASS.telAdre.niamh.niamhPostTelAdreMoveOut();
 				return;
 			}
 			//Find Owca
-			if (player.level >= 8 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] % 25 == 0 && flags[kFLAGS.OWCA_UNLOCKED] == 0) {
+			if ((player.level >= 24 || flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 50) && flags[kFLAGS.TIMES_EXPLORED_PLAINS] % 25 == 0 && flags[kFLAGS.OWCA_UNLOCKED] == 0) {
 				kGAMECLASS.owca.gangbangVillageStuff();
 				return;
 			}
@@ -82,7 +90,7 @@ package classes.Scenes.Areas
 				choices[choices.length] = kGAMECLASS.isabellaScene.isabellaGreeting;
 				choices[choices.length] = kGAMECLASS.isabellaScene.isabellaGreeting;
 			}
-			if (!kGAMECLASS.helScene.followerHel()) {
+			if (!kGAMECLASS.helScene.followerHel() && (flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] == 0 || rand(2) == 0)) {
 				choices[choices.length] = kGAMECLASS.helScene.encounterAJerkInThePlains;
 				choices[choices.length] = kGAMECLASS.helScene.encounterAJerkInThePlains;
 			}

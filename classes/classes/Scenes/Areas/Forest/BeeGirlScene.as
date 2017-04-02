@@ -46,6 +46,11 @@ package classes.Scenes.Areas.Forest
 			spriteSelect(6);
 			//Intro text...
 			outputText("As you approach the edge of the forest, a sweet scent wafts into your nose. Tantalizing, teasing, alluring. As you sniff the air, you find yourself following it, as if an invisible hand is pulling you toward its origin.  Little do you know, that is essentially what's happening. The further and further you go, the more heavy the scent grows, as well as a sound. A sound of a buzz, but not in a maddening tone, as if someone is humming. It's a lovely tune, one that would stick in the back of the mind, but not in a bad way.\n\n");
+			//Bee appears!
+			if (flags[kFLAGS.CODEX_ENTRY_GIANTBEES] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_GIANTBEES] = 1;
+				outputText("<b>New codex entry unlocked: Giant Bees!</b>\n\n")
+			}
 			//Chance to avoid the bee or not if smart enough...
 			if (player.hasKeyItem("Traveler's Guide") >= 0 && player.inte / 2 > rand(40)) {
 				outputText("You suddenly remember a passage from the Traveler's Guide about monstrous bees that lay eggs in unmentionable places.  Of course, a brave champion would face any danger.\n\n<b>Do you proceed?</b>");
@@ -55,11 +60,10 @@ package classes.Scenes.Areas.Forest
 			//If not smart enough, proceed.
 			else beeEncounterSelect(false);
 		}
-		
+
 		private function beeEncounterSelect(clearScreen:Boolean = true):void {
 			if (clearScreen) clearOutput();
 			spriteSelect(6);
-			//Bee appears!
 			outputText("That's when she comes into view.  A great woman, yellow and black, a Bee-like handmaiden would be the best comparison.  She sits atop a great flower while humming her tune, happily picking the petals off of another flower.  Her body is thin, save her abdomen.  Her head is more humanoid than bee, with black eyes, antennae, and luscious black lips that glimmer wetly");
 			if (player.statusAffectv1(StatusAffects.Exgartuan) == 1 && player.cockArea(0) > 100 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) { //Exgartuan messes with things!
 				beeEncounterWithExgartuan();
@@ -102,7 +106,7 @@ package classes.Scenes.Areas.Forest
 					default: //Any other attitude options lead to the classic bee encounter
 						outputText(", bending into a smile as she sees you approach.  Standing, she welcomes you in, her wings giving a small buzz as her arms spread open for a welcoming embrace.\n\n");
 						//Chance to avoid raaaaeeeeep
-						if ((player.lib + player.cor < 140) || rand(2) == 0) {
+						if ((player.lib + player.cor < 160 + (40 * player.newGamePlusMod())) || rand(2) == 0) {
 							outputText("You barely stop yourself from gleefully throwing yourself into her arms.  You realize the harmonic buzzing of her wings and the unearthly scent of her honey briefly robbed you of your reason.  Feeling momentarily more clear-headed, what do you do?");
 							simpleChoices("Fight", fightTheBeeGirl, "Talk", beeTalk, "Seduce", null, "", null, "Leave", camp.returnToCampUseOneHour);
 						}
@@ -120,6 +124,10 @@ package classes.Scenes.Areas.Forest
 			outputText(",”</i> she says opening her arms wide to accept you.");
 			//Chance to avoid raaaaeeeeep
 			if ((player.lib + player.cor < 140) || rand(2) == 0) {
+				if (flags[kFLAGS.CODEX_ENTRY_GIANTBEES] <= 0) {
+					flags[kFLAGS.CODEX_ENTRY_GIANTBEES] = 1;
+					outputText("\n\n<b>New codex entry unlocked: Giant Bees!</b>")
+				}
 				outputText("\n\nYou just barely hold yourself back and shake your head to clear the smell and buzzing from your mind.  Something about your " + (isBeeMorph ? "new bee body seems to have drawn" : "massive member has attracted") + " her attention, and she is staring at your crotch in anticipation.  You steady yourself and decide what you should do next.");
 				simpleChoices("Fight", fightTheBeeGirl, "Sex", beeSexForCocks, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 			}
@@ -211,6 +219,7 @@ package classes.Scenes.Areas.Forest
 				if (player.ass.analLooseness == CoC.ANAL_LOOSENESS_VIRGIN)
 					outputText("<b>Well, at least you’re losing your anal virginity willingly.  That’s something to be said in this world.</b>");
 				else outputText("<b>Your " + assholeDescript() + " has become looser thanks to the knotted appendage penetrating you.</b>");
+				player.buttChange(25, true);
 				outputText("  The pain of being stretched out soon gives way to sharing in the pleasure that your insectoid lover feels with each new bump passing into your body.\n\n");
 			}
 			else {
@@ -967,7 +976,7 @@ package classes.Scenes.Areas.Forest
 		}
 		
 		private function beeMaidenConversationRejectCandy():void {
-			outputText("\n\nSomething about this whole thing just felt off to you, so you turn her down.  She almost bursts into tears.  <i>“But why?  Why do you want to be zzzo lonely?  I don’t underzzztand!”</i>  You try to offer up an explanation, but after a little while it’s clear that the two of you have fundamentally different mindsets.  To her, the most horrible thing imaginable is to not be a part of a hive, and it’s unlikely that you’ll be changing her opinion any time soon.  In the end all you can tell her that she’ll accept is that you don’t want this right now, but you hope you can continue your loving rendezvous if she’s feeling up to it.  She does perk up at this and gives you a nod, <i>“Okay, I’ll zzzee you around then.”</i>  Before you once again put your " + player.armorName + " back on and head away from her flower.");
+			outputText("\n\nSomething about this whole thing just felt off to you, so you turn her down.  She almost bursts into tears.  <i>“But why?  Why do you want to be zzzo lonely?  I don’t underzzztand!”</i>  You try to offer up an explanation, but after a little while it’s clear that the two of you have fundamentally different mindsets.  To her, the most horrible thing imaginable is to not be a part of a hive, and it’s unlikely that you’ll be changing her opinion any time soon.  In the end all you can tell her that she’ll accept is that you don’t want this right now, but you hope you can continue your loving rendezvous if she’s feeling up to it.  She does perk up at this and gives you a nod, <i>“Okay, I’ll zzzee you around then.”</i>  Before you once again " + player.clothedOrNaked("put your " + player.armorName + " back on and ") + "head away from her flower.");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1013,6 +1022,8 @@ package classes.Scenes.Areas.Forest
 			spriteSelect(6);
 			clearOutput();
 			flags[kFLAGS.BEE_GIRL_COMBAT_LOSSES]++;
+			if (doSFWloss()) return;
+
 			var sexed:Boolean = false;
 			//Centaur lost to giant bee:
 			if (player.isTaur()) {
@@ -1224,7 +1235,7 @@ package classes.Scenes.Areas.Forest
 				}
 				//Generic male bee-rape
 				if (player.gender == 1) {
-					if (player.lust >= 100) outputText("Overcome by lust, you throw yourself into her waiting arms.  ", true);
+					if (player.lust >= player.maxLust()) outputText("Overcome by lust, you throw yourself into her waiting arms.  ", true);
 					else outputText("Overcome by your wounds, you are unable to resist as she lifts you into her arms and embraces you.  ", true);
 					outputText("At first she holds you close, but as she does, a stinger slowly emerges from her abdomen, as well as a thick knot like organ, both covered in a sweet-smelling lubricant. Your mind synaesthetically sees a myriad of colors and scents, and you don't resist as she gently pushes you down to your stomach. Nor do you protest as she leans over you, her stinger - thank goodness it isn't poison - looming close to your anus. With no more words she shoves the thick, lengthy stinger and knot inside of you. Her 'cock' slipping in slowly, the lube keeping you from shaking out of your scent-induced pleasure coma. Your hand even ventures to your own engorged ", false);
 					if (player.cockTotal() == 1) outputText("member", false);
@@ -1255,7 +1266,7 @@ package classes.Scenes.Areas.Forest
 					else outputText("legs", false);
 					outputText(", making your thighs slick as your clit throbs almost painfully in the cold air. You begin to pant, your heart racing as the bee-girl slides back down your body, moaning as her breasts snag your nipples, rubbing them in a pleasurable way. She stops at head level, looking into your eyes with her own black orbs. She smiles at you and you realize that she is no longer pinning you with anything more than her own relatively light weight. You crease your brow with worry as you realize that running is the last thing on your mind, before the warm haze slips inside your skull.  The sexy bee leans in and kisses you softly, robbing you of your last shreds of resistance.\n\n", false);
 
-					if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR) {
+					if (player.isTaur()) {
 						outputText("She slips further down your chest, grabbing your " + player.allBreastsDescript() + " playfully. You feel her knee nudging against your " + vaginaDescript(0) + ", grinding roughly against it and sending shivers through your body. You yelp slightly as she bites one of your nipples, the sudden sensation giving way to moans of pleasure as she massages and pinches the other one. Her knee slides against your " + vaginaDescript(0) + ", flicking your " + clitDescript() + " and coating the bee-girl with your juices. You feel her straddle your legs, her feet deftly pulling your thigh into contact with her pussy, before she starts to rock against you.\n\n", false);
 						outputText("Her juices mix with your own as you feel yourself working steadily to climax. Noticing your heavy breathing and sudden vigor, she pulls away.  ", false);
 					}
@@ -1336,7 +1347,7 @@ package classes.Scenes.Areas.Forest
 		private function rapeTheBeeMultiCockStuff():void
 		{
 			spriteSelect(6);
-			outputText("", true);
+			clearOutput();
 			//Doubledick special
 			//HermCock supreme by mallowman
 			if (player.cockTotal() >= 5 && player.biggestTitSize() > 2
@@ -1371,12 +1382,12 @@ package classes.Scenes.Areas.Forest
 		private function rapeTheBeeGirlWithADick():void
 		{
 			spriteSelect(6);
-			outputText("", true);
+			clearOutput();
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = 0;
 			//TAURS GO!
 			if (player.isTaur()) {
-				if (monster.lust > 99) outputText("The bee-girl plops onto her flower with her legs splayed out, letting you get a clear look at her dripping honeypot. She watches you nervously as you approach, letting her stinger slide out in a pointless threat. She seems taken aback when you smile down at her, but returns the gesture with a nervous smile of her own.\n\n", false);
+				if (monster.lust >= monster.eMaxLust()) outputText("The bee-girl plops onto her flower with her legs splayed out, letting you get a clear look at her dripping honeypot. She watches you nervously as you approach, letting her stinger slide out in a pointless threat. She seems taken aback when you smile down at her, but returns the gesture with a nervous smile of her own.\n\n", false);
 				else outputText("The bee-girl plops onto her flower, barely conscious from the beating she's taken.  Her legs are splayed drunkenly, letting you get a clear look at her dripping honeypot. She watches through heavily, lidded eyes as you approach, letting her stinger slide out in a weak threat.  She seems taken aback when you smile down at her, but returns the gesture with a nervous, scared smile of her own.\n\n", false);
 
 				outputText("You reach down and stroke her hair. She flinches from your hand at first before realizing that you genuinely mean her no harm. Her own hand reaches to slide up your arm as you pull yourself down to kiss her. She happily kisses you back, her long, thin, dexterous tongue wrapping around your own.\n\n", false);
@@ -1497,7 +1508,7 @@ package classes.Scenes.Areas.Forest
 				outputText("You begin pounding away at her, splattering honey over her thighs with your enthusiastic fucking.  Her passage is unlike anything you've ever had before.  It's tight, but overly slick and textured with small nubs and bumps that tease and caress in wonderful ways.   Her muscles clamp and squeeze her vaginal entrance tightly, turning it into an organic cock-ring.  You hold still while her cunt begins twitching and slightly rotating back and forth around your " + cockDescript(x) + ".    Her head is thrown back in what you assume is an orgasm, her arms mashing her tits together for even more pleasure.  The vacuum seal around your " + cockDescript(x) + " only gets tighter as her rippling, squeezing, twisting cunt stimulates your over-engorged " + cockDescript(x) + ".\n\n", false);
 				//cum
 				outputText("Taken beyond your limit, you lose control, feeling the tightness and warmth of your orgasm build at the base of your cock.   It builds and builds, held back by the bee's vice-like cunt, almost becoming painful with its intensity.   Just when you think you can't take any more pressure, you cum, HARD.   Your body clenches hard, spurting out each wave of fuck-juice with more force than the last.    Honey squirts from the bee-slut's fuck-hole, drenching the fuzz on her thighs and your legs with slippery sweetness.   Her cunt doesn't show any signs of slowing down, and your body obliges it, providing more cum than you thought yourself capable of.", false);
-				if (player.gender == 3 && player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("  You reach down and finger your " + vaginaDescript(0) + " roughly, lost in the throes of your orgasm.", false);
+				if (player.gender == 3 && !player.isTaur()) outputText("  You reach down and finger your " + vaginaDescript(0) + " roughly, lost in the throes of your orgasm.", false);
 				outputText("\n\n", false);
 				//wind down
 				outputText("At last her quivering quim releases your sore member", false);
@@ -1525,7 +1536,7 @@ package classes.Scenes.Areas.Forest
 		private function rapeABeeGirlWithYourVagina():void
 		{
 			spriteSelect(6);
-			outputText("", true);
+			clearOutput();
 			if (player.isTaur()) {
 				outputText("The bee-girl plops onto her flower with her legs splayed out, letting you get a clear look at her dripping honeypot. She watches you nervously as you approach, letting her stinger slide out in a pointless threat. She seems taken aback when you smile down at her, but returns the gesture with a nervous smile of her own.\n\n", false);
 
@@ -1596,7 +1607,7 @@ package classes.Scenes.Areas.Forest
 		private function futaRapesBeeGirl():void
 		{
 			spriteSelect(6);
-			outputText("", true);
+			clearOutput();
 			outputText("Firmly grasping her thighs at the joining of her smooth carapace and soft skin, you force them open, revealing the source of her irresistible scent.   She buzzes pitifully in protest ", false);
 
 			if (player.isTaur()) outputText("as you idly fondle your " + player.allBreastsDescript() + " as you feel your blood-gorged " + multiCockDescriptLight() + " swaying under your belly.  ", false);
@@ -1643,23 +1654,23 @@ package classes.Scenes.Areas.Forest
 			if (player.isTaur()) outputText("As you're going to explode, you smile evilly as an idea crosses your mind. You turn around swiftly, leaving her surprised and still in the position of licking your pussy, her slender and squirming tongue out, and her face covered in girl-cum.  ", false);
 			if (player.cumQ() < 25) {
 				outputText("You erupt, your " + cockDescript(0) + " pulsing and spraying ribbons of cum.  You milk your dick hard, pistoning your hand up and down mercilessly, trying to squeeze out every drop.  You watch each burst splatter into the bee-girl's hair and grin cruelly.  ", false);
-				if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("Spent at last, you rise up off of her, shivering as her tongue retracts from your woman-hood.", false);
+				if (!player.isTaur()) outputText("Spent at last, you rise up off of her, shivering as her tongue retracts from your woman-hood.", false);
 			}
 			if (player.cumQ() >= 25 && player.cumQ() < 250) {
 				outputText("You erupt, your " + cockDescript(0) + " pulsing in your hands and spraying out thick ribbons of cum.  You milk your dick hard, pistoning it relentlessly as it spurts more and more jism.  The orgasm drags on and on, your cum soaking your poor victim's hair and forehead with your sticky white juices.   Satisfied at last, ", false);
 				if (player.balls >= 2) outputText("with empty balls, ", false);
-				if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("you rise up off her, shivering as her slender and squirming tongue retracts from your " + vaginaDescript(0) + ".", false);
+				if (!player.isTaur()) outputText("you rise up off her, shivering as her slender and squirming tongue retracts from your " + vaginaDescript(0) + ".", false);
 				else outputText("you walk away from her smiling, and sated.", false);
 			}
 			if (player.cumQ() >= 250 && player.cumQ() < 500) {
 				outputText("Your " + cockDescript(0) + " erupts, writhing in your hands from the force of your orgasm as thick ropes of cum burst from you.   Each pulse of juice seems to drag on and on, each nearly as long as a normal man's orgasm.  Looking down, you see the bee's hair and face totally slimed with your cum, and a puddle forming below her.  ", false);
-				if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("You rise up off of her in mid-orgasm, aiming lower and painting her with each blast of seed.  ", false);
+				if (!player.isTaur()) outputText("You rise up off of her in mid-orgasm, aiming lower and painting her with each blast of seed.  ", false);
 				else outputText("You aim right at the oval of her face and paint her with each blast of seed.  ", false);
 				outputText("Your " + cockDescript(0) + " flexes powerfully with each load, until your victim is soaked from the waist up, her breasts and face plastered with goo.  You sigh contentedly and step away, watching the bee scoop up your leavings in both hands, one going to her mouth, the other to her sweet wet snatch.  Giggling to yourself, you walk away, sated.", false);
 			}
 			if (player.cumQ() >= 500) {
 				outputText("Your " + cockDescript(0) + " erupts like a volcano, shooting a constant thick stream of cum that pulses with each clench of your pelvic muscles.  The pressure only seems to increase as your urethra tries to deal with the huge load your body is producing.  ", false);
-				if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("You stand up off your victim, letting her tongue slip free from your soaked folds, and", false);
+				if (!player.isTaur()) outputText("You stand up off your victim, letting her tongue slip free from your soaked folds, and", false);
 				else outputText("You", false);
 				outputText(" plunge your " + cockDescript(0) + " deep into the bee-girl's mouth and throat, pumping cum directly into her belly.  She writhes underneath you, her oxygen supply cut off as your spunk floods her belly.  The feeling of her inhuman lips wrapped tight around your base only makes it worse, intensifying the eruption of baby-batter that's pumping into her.  Her eyes roll back as cum begins leaking from her nose, her belly beginning to look distended and pregnant with the amount of jism you've pumped in.   Certain she's had enough, you pull free, marveling at how your last spurt made her look nearly nine months pregnant.   You note she's passed out, but your orgasm is far from over, so you resume jacking off, hosing her down from head to toe in thick white goop.  ", false);
 				if (player.balls >= 2) outputText("Your balls eventually empty", false);
@@ -1674,7 +1685,7 @@ package classes.Scenes.Areas.Forest
 		private function beeGirlRapeForTheDistinguishedGentleman():void
 		{
 			spriteSelect(6);
-			outputText("", true);
+			clearOutput();
 			//(if win via HP)
 			if (monster.HP < 1) outputText("The bee-maiden staggers backward against her perch and wheezes.  Quickly, you launch yourself forward and pin her bodily against the giant flora, grabbing her feebly thrashing arms.  In a flash of inspiration, you pull a long supple leaf from the underside of the blossom, twisting it lengthwise and managing to bind her hands to the stem above her head with your makeshift cord before she can focus on what's happening.\n\n", false);
 			//(if lust win)
@@ -1799,7 +1810,7 @@ package classes.Scenes.Areas.Forest
 				//New PG
 				outputText("\n\n", false);
 				outputText("The both of you smell like sex as you pull free of her with a groan.  You move to kneel over her and use her unstained lips to dry your " + multiCockDescriptLight() + " one by one.  Her lips part slightly on instinct and you can feel her swallow the globs of jism that coat you.  Once she's done you stand up quickly, ", false);
-				if (player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("stuffing your " + multiCockDescriptLight() + " inside your " + player.armorName, false);
+				if (!player.isTaur()) outputText("stuffing your " + multiCockDescriptLight() + " inside your " + player.armorName, false);
 				else outputText("your glorious but spent " + multiCockDescriptLight() + " dangling under your belly,", false);
 				outputText(" and leave the completely exhausted and drenched woman on the forest floor, wings and legs still twitching slightly, sending a fine mist of cum across the ground around her.", false);
 			}
@@ -1812,7 +1823,7 @@ package classes.Scenes.Areas.Forest
 		private function corruptNagaBitchesRapeABee():void
 		{
 			spriteSelect(6);
-			outputText("", true);
+			clearOutput();
 
 			outputText("Now that the bee-girl is unable to flit her wings and create that buzzing drone that seems to rob you of your senses, you can see her for what she truly is: Prey.\n\n", false);
 
@@ -1831,7 +1842,7 @@ package classes.Scenes.Areas.Forest
 		private function nagaRapesPt2TheExtremeContinuationOfAwesome():void
 		{
 			spriteSelect(6);
-			outputText("", true);
+			clearOutput();
 			//[Player is male]
 			if (player.gender == 1 || (player.gender == 3 && rand(3) == 0)) {
 				outputText("By now ", false);

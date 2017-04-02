@@ -11,28 +11,14 @@ package classes.Items.Weapons
 	public class LargeHammer extends Weapon {
 		
 		public function LargeHammer() {
-			super("L.Hammr", "L.Hammr", "large hammer", "Marble's large hammer", "smash", 16, 90, "This two-handed warhammer looks pretty devastating.  You took it from Marble after she refused your advances.", "Large");
+			super("L.Hammr", "L.Hammr", "large hammer", "Marble's large hammer", "smash", 18, 720, "This two-handed warhammer looks pretty devastating.  You took it from Marble after she refused your advances.", "Large");
 		}
 		
-		override public function canUse():Boolean {
-			if (game.player.tallness >= 60) return true;
-			outputText("This hammer is too large for you to wield effectively.  ");
-			return false;
+		override public function get attack():Number {
+			var boost:int = 0;
+			if (game.player.str >= 70) boost += 9;
+			return (9 + boost); 
 		}
 		
-/*
-		override public function canUse(player:Player, printReason:Boolean):Boolean
-		{
-			if (player.tallness < 60){
-				if (printReason) {
-					clearOutput();
-					outputText("This hammer is too large for you to wield effectively.  ");
-				}
-				return false;
-			} else {
-				return true;
-			}
-		}
-*/
 	}
 }

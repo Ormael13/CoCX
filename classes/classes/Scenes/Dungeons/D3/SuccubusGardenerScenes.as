@@ -239,7 +239,7 @@
 			else outputText(", too turned on to try and stop your hands from diving into your needy crotch.");
 			
 			outputText("\n\n<i>\"Fallen already? Has the once mighty champion finally lost herself to the corruption of this land? Who would have thought that the one to");
-			if (player.findStatusAffect(StatusAffects.FactoryOverload) >= 0) outputText(" destroy");
+			if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) outputText(" destroy");
 			else outputText(" shut down");
 			outputText(" our factory would fall to a simple succubus and her lowly garden?\"</i> She strides over to you, hips wiggling in pleasure, and kneels alongside you, running her hand over your abdomen like a girl handling a new pet for the first time. <i>\"You're going to be so useful in my garden!\"</i>");
 			

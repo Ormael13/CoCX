@@ -1,6 +1,8 @@
 package classes.Scenes.NPCs
 {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.internals.ChainedDrop;
 
 	public class Kiha extends Monster
 	{
@@ -25,11 +27,21 @@ package classes.Scenes.NPCs
 				//Determine damage - str modified by enemy toughness!
 				var damage:int = int((str + weaponAttack) - rand(player.tou) - player.armorDef);
 				damage += 5;
-				damage = player.takeDamage(damage);
+				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
+				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+				damage = Math.round(damage);
+				if (player.findStatusAffect(StatusAffects.Blizzard) >= 0) {
+					player.addStatusValue(StatusAffects.Blizzard, 1, -1);
+					damage *= 0.2;
+					damage = Math.round(damage);
+				}
+				
 				outputText("A torrent of heat bursts from between her fingertips as she thrusts her clenched fist forward, the ball of intense flame writhing and burning with a fury unknown to mankind. With one fell swoop, the combined power of her love, anger, and sorrow pushes you backward, launching you out of the swamp and into Marble's pillowy chest. \"<i>Ara ara,</i>\" she begins, but you've already pushed yourself away from the milky hell-prison as you run back towards ");
 				if(!game.kihaFollower.followerKiha()) outputText("the swamp");
 				else outputText("the fight");
-				outputText(". (" + damage + ")\n", false);
+				outputText(". ", false);
+				damage = player.takeDamage(damage, true);
+				outputText("\n");
 				if(player.HP >= 1) outputText("You follow the shrill cry of \"<i>B-BAKA!</i>\" in the distance until you reach the exact location you were in a few seconds earlier, prepared to fight again.", false);
 			}
 			combatRoundOver();
@@ -58,8 +70,12 @@ package classes.Scenes.NPCs
 			//HIT!
 			else {
 				var damage:int = int((str) - (player.armorDef));
-				damage = player.takeDamage(damage);
-				outputText("Before you can react, you're struck by the power of her blows, feeling an intense pain in your chest as each fist makes contact.  With a final thrust, you're pushed backwards onto the ground; the dragoness smiles as she pulls her axe out of the ground, her hands still steaming from the fingertips. (" + damage + ")\n", false);
+				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
+				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+				damage = Math.round(damage);
+				outputText("Before you can react, you're struck by the power of her blows, feeling an intense pain in your chest as each fist makes contact.  With a final thrust, you're pushed backwards onto the ground; the dragoness smiles as she pulls her axe out of the ground, her hands still steaming from the fingertips. ", false);
+				damage = player.takeDamage(damage, true);
+				outputText("\n");
 			}
 			combatRoundOver();
 		}
@@ -83,9 +99,13 @@ package classes.Scenes.NPCs
 				outputText("Using your cat-like flexibility, you manage to sidestep the flames in the nick of time; much to the dragoness' displeasure.", false);
 			}
 			else {
-				var damage:Number = Math.round(90 + rand(10));
-				damage = player.takeDamage(damage);
-				outputText("You try to avoid the flames, but you're too slow!  The inferno slams into you, setting you alight!  You drop and roll on the ground, putting out the fires as fast as you can.  As soon as the flames are out, you climb back up, smelling of smoke and soot. (" + damage + ")\n", false);
+				var damage:Number = Math.round(90 + rand(10) + (player.newGamePlusMod() * 30));
+				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
+				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+				damage = Math.round(damage);
+				outputText("You try to avoid the flames, but you're too slow!  The inferno slams into you, setting you alight!  You drop and roll on the ground, putting out the fires as fast as you can.  As soon as the flames are out, you climb back up, smelling of smoke and soot. ", false);
+				damage = player.takeDamage(damage, true);
+				outputText("\n");
 			}
 			combatRoundOver();
 		}
@@ -114,9 +134,12 @@ package classes.Scenes.NPCs
 		override protected function postAttack(damage:int):void
 		{
 			super.postAttack(damage);
-			var flame:int = 15 + rand(6);
-			flame = player.takeDamage(flame);
-			outputText("\nAn afterwash of flames trails behind her blow, immolating you! (" + flame + ")", false);
+			var flame:int = level + rand(6);
+			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) flame *= 3;
+			if (player.findPerk(PerkLib.FireAffinity) >= 0) flame *= 0.3;
+			flame = Math.round(flame);
+			outputText("\nAn afterwash of flames trails behind her blow, immolating you! ", false);
+			flame = player.takeDamage(flame, true);
 		}
 
 		override protected function performCombatAction():void
@@ -164,7 +187,11 @@ package classes.Scenes.NPCs
 			this.a = "";
 			this.short = "Kiha";
 			this.imageName = "kiha";
-			this.long = "Kiha is standing across from you, holding a double-bladed axe that's nearly as big as she is.  She's six feet tall, and her leathery wings span nearly twelve feet extended.  Her eyes are pure crimson, save for a black slit in the center, and a pair of thick draconic horns sprout from her forehead, arcing over her ruby-colored hair to point behind her.  Dim red scales cover her arms, legs, back, and strong-looking tail, providing what protection they might to large areas of her body.  The few glimpses of exposed skin are dark, almost chocolate in color, broken only by a few stray scales on the underside of her bosom and on her cheekbones.  Her vagina constantly glistens with moisture, regardless of her state of arousal.  Despite her nudity, Kiha stands with the confidence and poise of a trained fighter.";
+			this.long = "Kiha is standing across from you, holding a double-bladed axe that's nearly as big as she is.  She's six feet tall, and her leathery wings span nearly twelve feet extended.  Her eyes are pure crimson, save for a black slit in the center, and a pair of thick draconic horns sprout from her forehead, arcing over her ruby-colored hair to point behind her.  Dim red scales cover her arms, legs, back, and strong-looking tail, providing what protection they might to large areas of her body.  The few glimpses of exposed skin are dark, almost chocolate in color, broken only by a few stray scales on the underside of her bosom and on her cheekbones.  ";
+			if (game.flags[kFLAGS.KIHA_UNDERGARMENTS] > 0)
+				this.long += "Damp patch forms in her silk " + (game.flags[kFLAGS.KIHA_UNDERGARMENTS] == 1 ? "panties" : "loincloth") + ", regardless of her state of arousal.  Despite her near nudity, Kiha stands with the confidence and poise of a trained fighter.";
+			else 
+				this.long += "Her vagina constantly glistens with moisture, regardless of her state of arousal.  Despite her nudity, Kiha stands with the confidence and poise of a trained fighter.";
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
 			this.createStatusAffect(StatusAffects.BonusVCapacity, 40, 0, 0, 0);
@@ -181,23 +208,32 @@ package classes.Scenes.NPCs
 			this.skinDesc = "skin and scales";
 			this.hairColor = "red";
 			this.hairLength = 3;
-			initStrTouSpeInte(65, 60, 85, 60);
+			initStrTouSpeInte(85, 80, 85, 60);
 			initLibSensCor(50, 45, 66);
 			this.weaponName = "double-bladed axe";
 			this.weaponVerb="fiery cleave";
-			this.weaponAttack = 25;
+			this.weaponAttack = 28 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "thick scales";
-			this.armorDef = 30;
-			this.bonusHP = 430;
+			this.armorDef = 35 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			if (game.flags[kFLAGS.KIHA_UNDERGARMENTS] > 0)
+				this.armorDef += 2;
+			this.bonusHP = 500;
+			this.bonusLust = 20;
 			this.lust = 10;
 			this.lustVuln = 0.4;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 16;
+			this.level = 21;
 			this.gems = rand(15) + 95;
-			this.drop = NO_DROP;
+			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);
 			this.wingType = WING_TYPE_IMP;
 			this.wingDesc = "huge";
 			this.tailType = TAIL_TYPE_LIZARD;
+			this.str += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 2160;
 			checkMonster();
 		}
 

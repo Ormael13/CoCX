@@ -3,6 +3,7 @@
 	import classes.Appearance;
 	import classes.Monster;
 	import classes.StatusAffects;
+	import classes.PerkLib;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
 	
@@ -17,37 +18,38 @@
 		{
 			this.a = "the ";
 			this.short = "succubus gardener";
+			this.imageName = "succubusgardener";
 			this.long = "This succubus has everything you would expect from one of her kind: a bust that would drive women wild with jealousy, hips that could melt a preacher's conviction, an ass so perfectly rounded that it seems designed to be cupped, and a smoldering visage that simultaneously entices whilst wearing a domineering grin. Her raven hair cascades around ram horns that gleam like polished ivory, and her red eyes greedily drink in your every motion. What clothing she wears is only designed to enhance her rampant sexuality, somehow making her look more naked than if she actually were.\n\nBehind her, the shrubbery itself has come to life, revealing corded vines with inhuman strength, some capped with oozing, phallus-like tips. A few are as thick as your arm and tipped with gasping, swollen lips or violet, blooming pussies. Others still bear no ornamentation at all. There is little rhyme or reason to the mass of vegetation: only a theme of rampant, overgrown sexuality encouraged to an obscene degree.";
-			
 			this.createVagina(false, 3, 3);
 			this.createBreastRow(Appearance.breastCupInverse("FF"));
-			
 			this.ass.analLooseness = ANAL_LOOSENESS_LOOSE;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			
 			this.tallness = 8 * 12;
 			this.hipRating = HIP_RATING_AVERAGE;
 			this.buttRating = BUTT_RATING_TIGHT;
-			
 			this.weaponName = "tentacles";
 			this.weaponVerb = "lash";
-			this.weaponAttack = 22;
+			this.weaponAttack = 29 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "tentaclothes";
-			
-			initStrTouSpeInte(85, 60, 85, 100);
-			initLibSensCor(85, 60, 100);
-			
-			this.bonusHP = 600;
-			
-			this.gems = 50 + rand(33);
-			this.level = 20;
-			
+			this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			initStrTouSpeInte(100, 125, 110, 100);
+			initLibSensCor(150, 60, 100);
+			this.bonusHP = 1200;
+			this.bonusLust = 40;
+			this.fatigue = 0;
+			this.gems = 200 + rand(50);
+			this.level = 40;
 			this.lustVuln = 0;
-			
+			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.drop = NO_DROP;
-			
+			this.str += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 37 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 8750;
 			checkMonster();
-			
 			createStatusAffect(StatusAffects.TentagrappleCooldown, 10, 0, 0, 0);
 		}
 		
@@ -90,10 +92,10 @@
 			{
 				showerDotEffect();
 				
-				if (player.lust >= 100) return;
+				if (player.lust >= player.maxLust()) return;
 			}
 			
-			if (this.HPRatio() <= 0.6)
+			if (this.HPRatio() <= 0.6 && fatigue < 100)
 			{
 				vineHeal();
 			}
@@ -121,7 +123,7 @@
 		
 		override protected function handleStun():Boolean
 		{
-			if (HPRatio() <= 0.6) return true;
+			if (HPRatio() <= 0.6 && findStatusAffect(StatusAffects.MonsterAttacksDisabled) < 0) return true;
 			else
 			{
 				return super.handleStun();
@@ -176,6 +178,11 @@
 			
 			this.HP = this.eMaxHP();
 			this.lustVuln += 0.3;
+			this.fatigue += 5;
+			if (fatigue >= 100) { //Exhausted!
+				outputText(" <b>It appears that the vines have run out of pink slime.</b>");
+				fatigue = 100;
+			}
 		}
 		
 		private function tentagrapple():void
@@ -185,7 +192,7 @@
 			//Used once every ten rounds
 			outputText("A web of interwoven vines lashes out from behind the succubus, somehow leaving her untouched by the wave of advancing greenery. They're trying to grab you!");
 			
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect())
+			if (player.getEvasionRoll())
 			{
 				//Dodge
 				outputText(" You slip aside at the last moment, barely avoiding being wrapped in the squirming mass. It snaps back, perhaps at the limits of its reach, leaving you once more eye to eye with the alluring gardener.");
@@ -226,7 +233,9 @@
 				}
 				
 				player.addStatusValue(StatusAffects.Tentagrappled, 1, 1);
-				player.takeDamage(75 + rand(15));
+				if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
+					player.takeDamage(75 + rand(15));
+				}
 				game.dynStats("lus+", 3 + rand(3));
 				if (flags[kFLAGS.PC_FETISH] >= 2) game.dynStats("lus+", 5);
 				combatRoundOver();
@@ -252,7 +261,9 @@
 			}
 	
 			player.addStatusValue(StatusAffects.Tentagrappled, 1, 1);
-			player.takeDamage(75 + rand(15));
+			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
+				player.takeDamage(75 + rand(15));
+			}
 			game.dynStats("lus+", 3 + rand(3));
 			combatRoundOver();
 		}
@@ -267,7 +278,7 @@
 			
 			for (var i:int = 0; i < 10; i++)
 			{
-				if (!(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()))
+				if (!(player.getEvasionRoll()))
 				{
 					damage += 2 + rand(1 + player.lib / 20) + rand(1 + player.sens / 20);
 				}
@@ -290,7 +301,7 @@
 		{
 			outputText("The succubus lifts her hands up in the air, saying, <i>“Why not taste a sampling of the pleasures I offer?”</i> Above her, a canopy of corrupt, snarled greenery forms, oozing unmistakable sexual fluids - both male and female. Splatters of jism and pussy juice fall like curtains of corruptive rain, their scent lacing the air with their heady musk.");
 	
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect())
+			if (player.getEvasionRoll())
 			{
 			//Dodge
 				outputText(" Somehow, you manage to twist out from under the organic raincloud without getting stained by a single drop, though your breath has quickened, and not just from the physical effort.");

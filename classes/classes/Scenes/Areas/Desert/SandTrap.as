@@ -2,6 +2,7 @@
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class SandTrap extends Monster
 	{
@@ -47,7 +48,7 @@
 		private function sandTrapPheremones():void {
 			game.spriteSelect(97);
 			outputText("The sandtrap puckers its lips.  For one crazed moment you think it's going to blow you a kiss... but instead it spits clear fluid at you!   You desperately try to avoid it, even as your lower half is mired in sand.");
-			if(player.spe/10 + rand(20) > 10 || combatEvade() || combatFlexibility()) {
+			if(player.spe/10 + rand(20) > 10 || player.getEvasionRoll(false)) {
 				outputText("  Moving artfully with the flow rather than against it, you are able to avoid the trap's fluids, which splash harmlessly into the dune.");
 			}
 			else {
@@ -55,7 +56,7 @@
 				outputText("  Despite ducking away from the jet of fluid as best you can, you cannot avoid some of the stuff splashing upon your arms and face.  The substance feels oddly warm and oily, and though you quickly try to wipe it off it sticks resolutely to your skin and the smell hits your nose.  Your heart begins to beat faster as warmth radiates out from it; you feel languid, light-headed and sensual, eager to be touched and led by the hand to a sandy bed...  Shaking your head, you try to stifle what the foreign pheromones are making you feel.");
 				game.dynStats("lus", damage);
 				damage = Math.round(damage * game.lustPercent()/10)/10;
-				outputText(" (" + damage +" lust)");
+				outputText(" <b>(<font color=\"#ff00ff\">" + damage +" lust</font>)</b>");
 			}
 		}
 
@@ -64,7 +65,7 @@
 			game.spriteSelect(97);
 			outputText("The sandtrap smiles at you winningly as it thrusts its hands into the sifting granules.  The sand beneath you suddenly seems to lose even more of its density; you're sinking up to your thighs!");
 			//Quicksand attack fail:
-			if(player.spe/10 + rand(20) > 10 || combatEvade() || combatFlexibility()) {
+			if(player.spe/10 + rand(20) > 10  || player.getEvasionRoll(false)) {
 				outputText("  Acting with alacrity, you manage to haul yourself free of the area affected by the sandtrap's spell, and set yourself anew.");
 			}
 			//Quicksand attack success: (Speed and Strength loss, ability to fly free lost)
@@ -132,22 +133,29 @@
 			this.skinTone = "fair";
 			this.hairColor = "black";
 			this.hairLength = 15;
-			initStrTouSpeInte(55, 10, 45, 55);
+			initStrTouSpeInte(55, 15, 45, 55);
 			initLibSensCor(60, 45, 50);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 10;
+			this.weaponAttack = 10 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "chitin";
-			this.armorDef = 20;
+			this.armorDef = 20 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = 100;
+			this.bonusLust = 20;
 			this.lust = 20;
 			this.lustVuln = .55;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 4;
-			this.gems = 2 + rand(5);
+			this.level = 5;
+			this.gems = 5 + rand(5);
 			this.drop = new ChainedDrop(consumables.TRAPOIL).add(consumables.OVIELIX,1/3);
 			this.tailType = TAIL_TYPE_DEMONIC;
 			createStatusAffect(StatusAffects.Level,4,0,0,0);
+			this.str += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 460;
 			checkMonster();
 		}
 		

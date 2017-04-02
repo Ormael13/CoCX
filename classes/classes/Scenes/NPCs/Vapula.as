@@ -22,7 +22,7 @@ package classes.Scenes.NPCs
 				if (flags[kFLAGS.VAPULA_FOLLOWER] == .5 || flags[kFLAGS.VAPULA_FOLLOWER] == 1.5) flags[kFLAGS.VAPULA_FOLLOWER]++;
 				flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS]++;
 			}
-			if (vapulaSlave() && player.hasKeyItem("Demonic Strap-On") < 0 && player.gender == 2 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) {
+			if (vapulaSlave() && player.hasKeyItem("Demonic Strap-On") < 0 && player.gender == 2 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
 				vapulaGivesPCAPresent();
 				return true;
 			}
@@ -30,6 +30,7 @@ package classes.Scenes.NPCs
 		}
 	
 		public function timeChangeLarge():Boolean {
+			if (prison.inPrison || flags[kFLAGS.IN_INGNAM] > 0) return false;
 			if (flags[kFLAGS.VAPULA_FOLLOWER] >= 2.5 && model.time.hours == 6 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) {
 				femaleVapulaRecruitmentPartII();
 				return true;
@@ -128,56 +129,88 @@ package classes.Scenes.NPCs
 		public function mouseWaifuFreakout(amily:Boolean = false, jojo:Boolean = false):void
 		{
 			clearOutput();
+			//First block of text.
 			if (amily) {
 				outputText("Amily ");
 				if (jojo) outputText("and ");
 			}
-			if (jojo) outputText("Jojo ");
+			if (jojo) outputText(flags[kFLAGS.JOJO_BIMBO_STATE] < 3 ? "Jojo " : "Joy ");
 			outputText("walk");
 			if (!(amily && jojo)) outputText("s");
 			outputText(" up to you, worried, as Vapula struts around the camp.");
-			outputText("\n\n\"<i>" + player.short + ", what is this? Am I dreaming or did you actually bring a demon to your camp? What in the world is wrong with you?</i>\"");
+			//Amily and/or Jojo(or Joy), text #1
+			if (amily || (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] < 3)) outputText("\n\n\"<i>" + player.short + ", what is this? Am I dreaming or did you actually bring a demon to your camp? What in the world is wrong with you?</i>\"");
+			else if (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) outputText("\n\n\"<i>" + player.short + ", what is this? Like, a demon?</i>\"");
 			outputText("\n\n\"<i>Relax,</i>\" you answer.  \"<i>Yes, she's a demon, but she's MY demon. She's under control, aren't you, honey?</i>\"  The succubus simpers softly and nods.");
-			outputText("\n\n\"<i>But... but this is insane!  You're supposed to be fighting demons, not joining them!  Did the taint of this cursed land somehow get the better of you?  Did you lose your soul yet?  These monsters are the same ones who destroy and corrupt innocents, and you invite one of them to camp?  This is madness!</i>\"");
+			//Amily and/or Jojo(or Joy), text #2
+			if (amily || (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] < 3)) outputText("\n\n\"<i>But... but this is insane!  You're supposed to be fighting demons, not joining them!  Did the taint of this cursed land somehow get the better of you?  Did you lose your soul yet?  These monsters are the same ones who destroy and corrupt innocents, and you invite one of them to camp?  This is madness!</i>\"");
+			else if (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) outputText("\n\n\"<i>Like, that's not cool. Did you get the black, icky stuff? Those monsters spread the icky stuff everywhere. Yuck!</i>\"");
 			outputText("\n\nYou try your best to explain that Vapula is a renegade, that she fears Lethice.");
-			outputText("\n\n\"<i>She's still a demon!  A succubus!  She'll suck the living soul out of you!</i>\"");
-			//[if libido >=50]
-			if (player.lib >= 50) outputText("\"<i>Well, as long as she swallows, I don't care,</i>\" you quip.");
-			outputText("\n\n\"<i>That's it!</i>\"  The ");
-			if (jojo && amily) outputText("mice are");
-			else outputText("mouse is");
-			outputText(" raving.  \"<i>You've clearly given in to her demonic lust.</i>\"");
-			if (jojo) {
-				outputText("\n\n\"<i>I'm leaving, " + player.short + ",</i>\" Jojo says.  \"<i>I only hope for your sake that you come to your senses soon... I will return to my place in the forest when you require assistance in freeing your soul of taint.</i>\"");
-				flags[kFLAGS.JOJO_MOVE_IN_DISABLED] = 1;
-				player.removeStatusAffect(StatusAffects.JojoNightWatch);
-				player.removeStatusAffect(StatusAffects.PureCampJojo);
+			//Amily and/or Jojo(or Joy), text #3
+			if (amily || (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] < 3)) outputText("\n\n\"<i>She's still a demon!  A succubus!  She'll suck the living soul out of you!</i>\"");
+			else if (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) outputText("\n\n\"<i>She's still a demon! Like, a succubus! She'll, like, suck the soul out of you!</i>\"");
+			//Intelligence check
+			if (player.inte < (60 + (player.cor/2))) {
+				//[if libido >=50]
+				if (player.lib >= 50) outputText("\n\n\"<i>Well, as long as she swallows, I don't care,</i>\" you quip.");
+				outputText("\n\n\"<i>That's it!</i>\"  The ");
+				if (jojo && amily) outputText("mice are");
+				else outputText("mouse is");
+				outputText(" raving.  \"<i>You've clearly given in to her demonic lust.</i>\"");
+				if (jojo) {
+					if (flags[kFLAGS.JOJO_BIMBO_STATE] < 3) {
+						outputText("\n\n\"<i>I'm leaving, " + player.short + ",</i>\" Jojo says.  \"<i>I only hope for your sake that you come to your senses soon... I will return to my place in the forest when you require assistance in freeing your soul of taint.</i>\"");
+						flags[kFLAGS.JOJO_MOVE_IN_DISABLED] = 1;
+						player.removeStatusAffect(StatusAffects.JojoNightWatch);
+						player.removeStatusAffect(StatusAffects.PureCampJojo);
+					}
+					else {
+						outputText("\n\n\"<i>Ew! She's, like, covered in black icky stuff! I'm staying but please keep her away from me,</i>\" Joy pleads at you then makes a disgusted face at Vapula, tongue out.");
+						flags[kFLAGS.KEPT_PURE_JOJO_OVER_VAPULA] = 1;
+					}
+				}
+				if (amily) {
+					outputText("\n\nAmily shakes her head.  \"<i>Goodbye, [name].  You've changed.  What you did is pure folly.</i>\"");
+					//Set - amily flipped her shit
+					flags[kFLAGS.AMILY_FOLLOWER] = 0;
+					//Enable village encounters
+					flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
+					//Change to plain mouse birth!
+					if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
+					//FLAG THAT THIS SHIT WENT DOWN
+					flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
+					//Make sure the camp warning thing is off so she never moves back in.  Bitch be mad.
+					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] = 0;
+				}
+				//[(if PC corr > 70)
+				if (player.cor > 70 && !(jojo && flags[kFLAGS.JOJO_BIMBO_STATE] >= 3)) outputText("\n\n\"<i><i>Fine. Go fuck off then, I don't need you.  I have a much better and hotter slut now. Don't hesitate to come back if you want some sweet pussy, though.</i>\"");
+				outputText("\n\n");
+				if (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) outputText("Jojo");
+				if (amily && (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] < 3)) outputText(" and ");
+				if (amily) outputText("Amily");
+				if (amily && (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] < 3)) outputText(" have ");
+				else outputText(" has ");
+				outputText("moved out.");
+				outputText("\n\nMaybe it's past time you brought them around to your way of thinking?");
+				//Amily and Jojo removed from followers. Amily is encounterable again in the Village Place through the corrupted route and Jojo can still meditate with you.]
 			}
-			if (amily) {
-				outputText("\n\nAmily shakes her head.  \"<i>Goodbye, [name].  You've changed.  What you did is pure folly.</i>\"");
-				//Set - amily flipped her shit
-				flags[kFLAGS.AMILY_FOLLOWER] = 0;
-				//Enable village encounters
-				flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
-				//Change to plain mouse birth!
-				if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
-				//FLAG THAT THIS SHIT WENT DOWN
-				flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
-				//Make sure the camp warning thing is off so she never moves back in.  Bitch be mad.
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] = 0;
+			else {
+				outputText("\n\nYou assure them that you'll do your best to keep her away from ");
+				if (amily) outputText("Amily");
+				if (amily && jojo) outputText(" and ");
+				if (jojo) outputText(flags[kFLAGS.JOJO_BIMBO_STATE] < 3 ? "Jojo" : "Joy");
+				outputText(" and make sure she doesn't come close.");
+				if (jojo) {
+					if (flags[kFLAGS.JOJO_BIMBO_STATE] < 3) outputText("\n\n\"<i>Fine. But I'll keep a close watch from now on,</i>\" Jojo says.");
+					else outputText("\n\n\"<i>Like, thank you!</i>\" Joy yips excitedly, wrapping her arms around you.");
+					flags[kFLAGS.KEPT_PURE_JOJO_OVER_VAPULA] = 1;
+				}
+				if (amily) {
+					outputText("\n\n\"<i>Fine! Don't come near me if you're corrupted. I'll stay away from her,</i>\" Amily warns.");
+					flags[kFLAGS.KEPT_PURE_AMILY_OVER_VAPULA] = 1;
+				}
+				doNext(playerMenu);
 			}
-			//[(if PC corr > 70)
-			if (player.cor > 70) outputText("\n\n\"<i>Fine. Go fuck off then, I don't need you.  I have a much better and hotter slut now. Don't hesitate to come back if you want some sweet pussy, though.</i>\"");
-			outputText("\n\n");
-			if (jojo) outputText("Jojo");
-			if (amily && jojo) outputText(" and ");
-			if (amily) outputText("Amily");
-			if (amily && jojo) outputText(" have ");
-			else outputText(" has ");
-			outputText("moved out.");
-			outputText("\n\nMaybe it's past time you brought them around to your way of thinking?");
-			//Amily and Jojo removed from followers. Amily is encounterable again in the Village Place through the corrupted route and Jojo can still meditate with you.]
-			doNext(playerMenu);
 		}
 
 //tion camp
@@ -239,7 +272,8 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_VAPULA] == 0) addButton(7, "Harvest Milk", harvestMilk);
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_VAPULA] == 1) addButton(7, "Stop Harvest", stopHarvest);
 					
-			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+			dynStats("lus", 10);
 		}
 		
 		private function sendToFarm():void
@@ -329,7 +363,6 @@ package classes.Scenes.NPCs
 				}
 			}
 
-			dynStats("lus", 10);
 			callSlaveVapula(false);
 		}
 

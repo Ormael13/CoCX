@@ -2,14 +2,23 @@
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.NPCs.EvangelineFollower;
 
 	public class Imp extends Monster
 	{
+		public var Evangeline:EvangelineFollower = new EvangelineFollower()
+		
 		override public function defeated(hpVictory:Boolean):void
 		{
+			game.flags[kFLAGS.DEMONS_DEFEATED]++;
 			if (findStatusAffect(StatusAffects.KitsuneFight) >= 0) {
 				game.forest.kitsuneScene.winKitsuneImpFight();
-			} else {
+			}
+			else if (flags[kFLAGS.EVANGELINE_AFFECTION] == 1) {
+				Evangeline.winEvangelineImpFight();
+			}
+			else {
 				game.impScene.impVictory();
 			}
 		}
@@ -18,11 +27,17 @@
 		{
 			if (findStatusAffect(StatusAffects.KitsuneFight) >= 0) {
 				game.forest.kitsuneScene.loseKitsuneImpFight();
-			} else if (pcCameWorms) {
+			}
+			else if (pcCameWorms) {
 				outputText("\n\nThe imp grins at your already corrupted state...", false);
-				player.lust = 100;
+				player.lust = player.maxLust();
 				doNext(game.impScene.impRapesYou);
-			} else {
+			}
+			else if (flags[kFLAGS.EVANGELINE_AFFECTION] == 1) {
+				flags[kFLAGS.EVANGELINE_AFFECTION] = 2;
+				game.impScene.impRapesYou();
+			}
+			else {
 				game.impScene.impRapesYou();
 			}
 		}
@@ -30,19 +45,19 @@
 		protected function lustMagicAttack():void {
 			outputText("You see " + a + short + " make sudden arcane gestures at you!\n\n");
 			game.dynStats("lus", player.lib / 10 + player.cor / 10 + 10);
-			if (player.lust < 30) outputText("You feel strangely warm.  ");
-			if (player.lust >= 30 && player.lust < 60) outputText("Blood rushes to your groin as a surge of arousal hits you, making your knees weak.  ");
-			if (player.lust >= 60) outputText("Images of yourself fellating and fucking the imp assault your mind, unnaturally arousing you.  ");
+			if (player.lust < (player.maxLust() * 0.3)) outputText("You feel strangely warm.  ");
+			if (player.lust >= (player.maxLust() * 0.3) && player.lust < (player.maxLust() * 0.6)) outputText("Blood rushes to your groin as a surge of arousal hits you, making your knees weak.  ");
+			if (player.lust >= (player.maxLust() * 0.6)) outputText("Images of yourself fellating and fucking the imp assault your mind, unnaturally arousing you.  ");
 			if (player.cocks.length > 0) {
-				if (player.lust >= 60)
+				if (player.lust >= (player.maxLust() * 0.6))
 					outputText("You feel your " + player.multiCockDescriptLight() + " dribble pre-cum.");
-				else if (player.lust >= 30 && player.cocks.length == 1)
+				else if (player.lust >= (player.maxLust() * 0.3) && player.cocks.length == 1)
 					outputText("Your " + player.cockDescript(0) + " hardens, distracting you further.");
-				else if (player.lust >= 30 && player.cocks.length > 1)
+				else if (player.lust >= (player.maxLust() * 0.3) && player.cocks.length > 1)
 					outputText("Your " + player.multiCockDescriptLight() + " harden uncomfortably.");
 				if (player.hasVagina()) outputText("  ");
 			}
-			if (player.lust >= 60 && player.hasVagina()) {
+			if (player.lust >= (player.maxLust() * 0.6) && player.hasVagina()) {
 				switch (player.vaginas[0].vaginalWetness) {
 					case VAGINA_WETNESS_NORMAL:
 						outputText("Your " + game.allVaginaDescript() + " dampen" + (player.vaginas.length > 1 ? "" : "s") + " perceptibly.");
@@ -63,7 +78,7 @@
 				}
 			}
 			outputText("\n");
-			if (player.lust > 99)
+			if (player.lust >= player.maxLust())
 				doNext(game.endLustLoss);
 			else doNext(game.playerMenu);
 		}
@@ -89,11 +104,14 @@
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 5;
-			initStrTouSpeInte(20, 10, 25, 12);
+			initStrTouSpeInte(20, 10, 20, 12);
 			initLibSensCor(45, 45, 100);
 			this.weaponName = "claws";
-			this.weaponVerb="claw-slash";
+			this.weaponVerb = "claw-slash";
+			this.weaponAttack = 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.armorName = "leathery skin";
+			this.armorDef = 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.bonusLust = 30;
 			this.lust = 40;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 1;
@@ -104,6 +122,12 @@
 					add(consumables.IMPFOOD,4);
 			this.special1 = lustMagicAttack;
 			this.wingType = WING_TYPE_IMP;
+			this.str += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 105;
 			checkMonster();
 		}
 

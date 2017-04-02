@@ -7,6 +7,8 @@ package classes.Scenes.Areas
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.Desert.*;
+	import classes.Scenes.NPCs.Etna;
+	import classes.Scenes.NPCs.EtnaFollower;
 
 	use namespace kGAMECLASS;
 
@@ -18,6 +20,7 @@ package classes.Scenes.Areas
 		public var sandTrapScene:SandTrapScene = new SandTrapScene();
 		public var sandWitchScene:SandWitchScene = new SandWitchScene();
 		public var wanderer:Wanderer = new Wanderer();
+		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public function Desert()
 		{
 		}
@@ -25,11 +28,11 @@ package classes.Scenes.Areas
 		public function exploreDesert():void
 		{
 			player.exploredDesert++;
-			if (player.level >= 4 && player.exploredDesert % 15 == 0 && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] == 0) {
-				kGAMECLASS.enterBoobsDungeon();
+			if ((player.level >= 6 || player.exploredDesert > 45) && player.exploredDesert % 15 == 0 && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] == 0) {
+				kGAMECLASS.dungeons.desertcave.enterDungeon();
 //				kGAMECLASS.inDungeon = true;
 //				kGAMECLASS.dungeonLoc = 23;
-//				eventParser(1);
+//				playerMenu();
 				return;
 			}
 			if (rand(40) == 0) {
@@ -41,8 +44,22 @@ package classes.Scenes.Areas
 				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}
-			if ((player.exploredDesert == 20 && player.findStatusAffect(StatusAffects.TelAdre) < 0) || (rand(20) == 0 && player.statusAffectv1(StatusAffects.TelAdre) == 0)) {
+			//Etna
+			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
+				etnaScene.repeatYandereEnc();
+				return;
+			}
+			if ((player.exploredDesert == 5 && player.findStatusAffect(StatusAffects.TelAdre) < 0) || (rand(5) == 0 && player.statusAffectv1(StatusAffects.TelAdre) == 0)) {
 				kGAMECLASS.telAdre.discoverTelAdre();
+				return;
+			}
+			if ((player.exploredDesert >= 20) && flags[kFLAGS.DISCOVERED_BEACH] <= 0 && rand(3) == 0) {
+				flags[kFLAGS.DISCOVERED_BEACH] = 1;
+				player.explored++;
+				clearOutput();
+				outputText("While traversing the desert for who knows how long you suddenly hear something like the sound of a wave crashing against the shore in the distance. Looking at the sand beneath your [legs] you see it getting slightly darker ahead of you. Wandering further, echoes of the waves are getting louder.", false);
+				outputText("\n\nFinally, after stepping over another dune, in the distance before you a shore of water spreads. Its surely way bigger than the lake you found some time ago. As far as you look to the side you can't see the shores end.  Mesmerized by the view you continue walking towards the ocean until you stand in the shallow water with waves passing by around your waist. Despite the corruption of Mareth this water turns out to be quite clear and who knows, maybe it’s not even that much tainted... yet. But that would probably require submerging deeper to check it out.\n\n<b>You've discovered the Beach, the Ocean and the Deep Sea!</b>", false);
+				doNext(camp.returnToCampUseTwoHours);
 				return;
 			}
 			if (sandWitchScene.pregnancy.event == 2 && rand(4) == 0) {
@@ -51,30 +68,50 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Ant colony debug chances
-			if (player.level >= 5 && flags[kFLAGS.ANT_WAIFU] == 0 && (player.exploredDesert % 8 == 0) && flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] == 0 && flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] == 0) {
+			if (player.level >= 9 && flags[kFLAGS.ANT_WAIFU] == 0 && (player.exploredDesert % 8 == 0) && flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] == 0 && flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] == 0) {
 				antsScene.antColonyEncounter();
 				return;
 			}
 			//int over 50?  Chance of alice encounter!
-			if (rand(4) == 0 && player.inte > 50 && flags[kFLAGS.FOUND_WIZARD_STAFF] == 0) {
-				outputText("", true);
-				outputText("While exploring the desert, you see a plume of smoke rising in the distance.  You change direction and approach the soot-cloud carefully.  It takes a few moments, but after cresting your fourth dune, you locate the source.  You lie low, so as not to be seen, and crawl closer for a better look.\n\n", false);
-				outputText("A library is burning up, sending flames dozens of feet into the air.  It doesn't look like any of the books will survive, and most of the structure has already been consumed by the hungry flames.  The source of the inferno is curled up next to it.  It's a naga!  She's tall for a naga, at least seven feet if she stands at her full height.  Her purplish-blue skin looks quite exotic, and she wears a flower in her hair.  The naga is holding a stick with a potato on the end, trying to roast the spud on the library-fire.  It doesn't seem to be going well, and the potato quickly lights up from the intense heat.\n\n", false);
-				outputText("The snake-woman tosses the burnt potato away and cries, \"<i>Hora hora.</i>\"  She suddenly turns and looks directly at you.  Her gaze is piercing and intent, but she vanishes before you can react.  The only reminder she was ever there is a burning potato in the sand.   Your curiosity overcomes your caution, and you approach the fiery inferno.  There isn't even a trail in the sand, and the library is going to be an unsalvageable wreck in short order.   Perhaps the only item worth considering is the stick with the burning potato.  It's quite oddly shaped, and when you reach down to touch it you can feel a resonant tingle.  Perhaps it was some kind of wizard's staff?\n\n", false);
-				flags[kFLAGS.FOUND_WIZARD_STAFF]++;
-				inventory.takeItem(weapons.W_STAFF, camp.returnToCampUseOneHour);
-				return;
+			if (rand(4) == 0 && player.inte > 50) {
+				if (flags[kFLAGS.FOUND_WIZARD_STAFF] == 0) {
+					clearOutput();
+					outputText("While exploring the desert, you see a plume of smoke rising in the distance.  You change direction and approach the soot-cloud carefully.  It takes a few moments, but after cresting your fourth dune, you locate the source.  You lie low, so as not to be seen, and crawl closer for a better look.\n\n", false);
+					outputText("A library is burning up, sending flames dozens of feet into the air.  It doesn't look like any of the books will survive, and most of the structure has already been consumed by the hungry flames.  The source of the inferno is curled up next to it.  It's a naga!  She's tall for a naga, at least seven feet if she stands at her full height.  Her purplish-blue skin looks quite exotic, and she wears a flower in her hair.  The naga is holding a stick with a potato on the end, trying to roast the spud on the library-fire.  It doesn't seem to be going well, and the potato quickly lights up from the intense heat.\n\n", false);
+					outputText("The snake-woman tosses the burnt potato away and cries, \"<i>Hora hora.</i>\"  She suddenly turns and looks directly at you.  Her gaze is piercing and intent, but she vanishes before you can react.  The only reminder she was ever there is a burning potato in the sand.   Your curiosity overcomes your caution, and you approach the fiery inferno.  There isn't even a trail in the sand, and the library is going to be an unsalvageable wreck in short order.   Perhaps the only item worth considering is the stick with the burning potato.  It's quite oddly shaped, and when you reach down to touch it you can feel a resonant tingle.  Perhaps it was some kind of wizard's staff?\n\n", false);
+					flags[kFLAGS.FOUND_WIZARD_STAFF]++;
+					inventory.takeItem(weapons.W_STAFF, camp.returnToCampUseOneHour);
+					return;
+				}
+				else if (player.hasKeyItem("Carpenter's Toolbox") >= 0 && player.keyItemv1("Carpenter's Toolbox") < 200 && rand(2) == 0) {
+					clearOutput();
+					outputText("While exploring the desert, you find the wreckage of a building. Judging from the debris, it's the remains of the library that was destroyed by the fire.\n\n", false);
+					outputText("You circle the wreckage for a good while and you can't seem to find anything to salvage.  Until something shiny catches your eye.  There are exposed nails that look like they can be scavenged.\n\n", false)
+					outputText("You take your hammer out of your toolbox and you spend time extracting straight nails.  Some of the nails you've pulled out are bent but some are incredibly in good condition.  You could use these nails for construction.\n\n");
+					var extractedNail:int = 5 + rand(player.inte / 5) + rand(player.str / 10) + rand(player.tou / 10) + rand(player.spe / 20) + 5;
+					flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCAVENGER] += extractedNail;
+					flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += extractedNail;
+					outputText("After spending nearly an hour scavenging, you've managed to extract " + extractedNail + " nails.\n\n");
+					if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
+					if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 600 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 600;
+					outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/600")
+					}
+					else {
+					if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 200;
+					outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200")
+					}
+					doNext(camp.returnToCampUseOneHour);
+					return;
+				}
 			}
 			//Possible chance of boosting camp space!
 			if (player.hasKeyItem("Camp - Chest") < 0 && (rand(100) < 10)) {
-				outputText("While wandering the trackless sands of the desert, you break the silent monotony with a loud 'thunk'.  You look down and realize you're standing on the lid of an old chest, somehow intact and buried in the sand.  Overcome with curiosity, you dig it out, only to discover that it's empty.  It would make a nice addition to your campsite.\n\nYou decide to bring it back to your campsite.  <b>You now have six storage item slots at camp.</b>", true);
-				inventory.createStorage();
-				inventory.createStorage();
-				inventory.createStorage();
-				inventory.createStorage();
-				inventory.createStorage();
-				inventory.createStorage();
+				outputText("While wandering the trackless sands of the desert, you break the silent monotony with a loud 'thunk'.  You look down and realize you're standing on the lid of an old chest, somehow intact and buried in the sand.  Overcome with curiosity, you dig it out, only to discover that it's empty.  It would make a nice addition to your campsite.\n\nYou decide to bring it back to your campsite.  ", true);
+				for (var i:int = 0; i < 6; i++) {
+					inventory.createStorage();
+				}
 				player.createKeyItem("Camp - Chest", 0, 0, 0, 0);
+				outputText("<b>You now have " + num2Text(inventory.itemStorageDirectGet().length) + " storage item slots at camp.</b>");
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
@@ -95,7 +132,7 @@ package classes.Scenes.Areas
 				args[args.length] = -8008;
 			}
 			if (flags[kFLAGS.CUM_WITCHES_FIGHTABLE] > 0) {
-				choices[choices.length] = kGAMECLASS.fightCumWitch;
+				choices[choices.length] = kGAMECLASS.dungeons.desertcave.fightCumWitch;
 				args[args.length] = -8008;
 			}
 			//Encounter Marcus
@@ -103,7 +140,7 @@ package classes.Scenes.Areas
 			args[args.length] = -8008;
 			choices[choices.length] = walkingDesertStatBoost;
 			args[args.length] = -8008;
-			if (rand(2) == 0 && player.level >= 2) {
+			if (rand(2) == 0 && player.level >= 4) {
 				if (rand(2) == 0) {
 					choices[choices.length] = mirageDesert;
 					args[args.length] = -8008;

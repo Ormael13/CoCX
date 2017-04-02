@@ -19,5 +19,10 @@ package classes.Perks
 			super("Slutty Seduction", "Slutty Seduction",
 					"Your armor allows you access to 'Seduce', an improved form of 'Tease'.");
 		}
+		
+		override public function keepOnAscension(respec:Boolean = false):Boolean 
+		{
+			return true;
+		}		
 	}
 }

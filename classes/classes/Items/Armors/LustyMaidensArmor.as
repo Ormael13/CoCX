@@ -15,15 +15,18 @@ package classes.Items.Armors
 	public final class LustyMaidensArmor extends Armor {
 		
 		public function LustyMaidensArmor() {
-			super("LMArmor", "LMArmor", "lusty maiden's armor", "a bikini-like set of armor that could only belong to a lusty maiden", 6, 400, "This skimpy chain bikini barely qualifies as armor.  Indeed, the chain is made from links much finer and lighter than normal, so fine that it feels almost silken under your fingertips.  A simple seal in the g-string-like undergarment states, \"Virgins only.\"", "Light");
+			super("LMArmor", "LMArmor", "lusty maiden's armor", "a bikini-like set of armor that could only belong to a lusty maiden", 10, 400, "This skimpy chain bikini barely qualifies as armor.  Indeed, the chain is made from links much finer and lighter than normal, so fine that it feels almost silken under your fingertips.  A simple seal in the g-string-like undergarment states, \"Virgins only.\" \nRequirements: breast size of at least DD-cups and be a female.", "Light", false, false);
 		}
 		
 		override public function get def():Number {
-			if (game.player.hasVirginVagina()) return 9 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS];
-			return 6 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS];
+			if (game.player.hasVirginVagina()) return 15 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS];
+			return 10 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS];
 		}
 		
 		override public function canUse():Boolean {
+			if (!super.canUse()) {
+				return false;
+			}
 			if (game.player.biggestTitSize() < CoC.BREAST_CUP_A) { //{No titties}
 				outputText("You slide the bikini top over your chest and buckle it into place, but the material hangs almost comically across your flat chest.  The cold chain dangles away from you, swaying around ridiculously before smacking, cold and hard into your [nipples].  This simply won't do - it doesn't fit you, and you switch back to your old armor.\n\n");
 				return false;
@@ -37,7 +40,7 @@ package classes.Items.Armors
 			outputText("\n\nYou shake your head and smile ruefully - maybe once you finish getting dressed!  There's still a bottom to put on, after all.  Regardless, one of your hands keeps coming to rest on your boob, idly groping and fondling your heavy tit whenever you have a free moment.  This sure is some fun armor!");
 			game.dynStats("lus", 25, "resisted", false);
 			outputText("\n\nNow, the bottom is a leather thong and skirt combination.  The thong itself is leather dyed radiant white, with intricate gold filigree covering the front triangle.  On the back triangle, there's a similar pattern, though you could swear that from a distance the pattern looks a bit like arrows pointing towards where your [asshole] will be with golden sperm surrounding them. No, that has to be your imagination.  All this time in this strange land must really be getting to you!  Both pieces are molded to accentuate the female form, with a crease in the gusset that will rest over your vagina, ensuring ");
-			if (game.player.hasCock() || game.player.balls > 0) {
+			if ((game.player.hasCock() && !game.player.hasSheath()) || game.player.balls > 0) {
 				outputText("that it won't fit you ");
 				if (game.player.hasCock()) outputText("or your " + game.player.multiCockDescriptLight());
 				else outputText("or your [balls]");
@@ -85,8 +88,8 @@ package classes.Items.Armors
 			if (monster == null) monster = game.monster;
 			clearOutput();
 			outputText("You make sure " + monster.a + monster.short + " is comfortably lying down, " + monster.pronoun3 + " " + monster.cockDescriptShort(0) + " exposed to the air");
-			if(monster.lust < 50) outputText(", soft and not yet ready.  You purr throatily as you touch the burgeoning boner, tracing your thumb across the sensitive urethral bulge.  It pulses slowly at your touch, and the base begins to fill with blood, thickening against your palm.  You splay your remaining fingers just under the " + monster.cockHead() + ", tickling around the glans until that too is flooding with blood, expanding under your caresses until it slowly lifts away from " + monster.pronoun3 + " abdomen.");
-			else if(monster.lust < 100) outputText(", nicely turgid but quite ready to feel the sensuous pleasure of your girls' tight squeeze.  You lean over the defeated foe and kiss the rod just under the " + monster.cockHead() + ", smiling when it expands under your slow kisses.  Your fingers move up to play with the sensitive, urethral bulge that runs along the underside, and in no time, " + monster.a + monster.short + " is hard as a rock, so ready that " + monster.pronoun3 + " member is lifting up on its own.");
+			if(monster.lust < (monster.eMaxLust() * 0.5)) outputText(", soft and not yet ready.  You purr throatily as you touch the burgeoning boner, tracing your thumb across the sensitive urethral bulge.  It pulses slowly at your touch, and the base begins to fill with blood, thickening against your palm.  You splay your remaining fingers just under the " + monster.cockHead() + ", tickling around the glans until that too is flooding with blood, expanding under your caresses until it slowly lifts away from " + monster.pronoun3 + " abdomen.");
+			else if(monster.lust < monster.eMaxLust()) outputText(", nicely turgid but quite ready to feel the sensuous pleasure of your girls' tight squeeze.  You lean over the defeated foe and kiss the rod just under the " + monster.cockHead() + ", smiling when it expands under your slow kisses.  Your fingers move up to play with the sensitive, urethral bulge that runs along the underside, and in no time, " + monster.a + monster.short + " is hard as a rock, so ready that " + monster.pronoun3 + " member is lifting up on its own.");
 			else outputText(", bouncing with each beat of " + monster.pronoun3 + " heart, thick beads of pre dribbling from " + monster.pronoun3 + " tip as you bat " + monster.pronoun3 + " hands away before " + monster.pronoun1 + " can waste the load " + monster.pronoun1 + "'s saved up for you.");
 			outputText("\n\nYour own moistness has risen to uncomfortable levels, and the sticky seal of your g-string's curvy front panel slips oh-so-slightly across your hot, hard clitty, something that makes your [legs] weak and your arms quake.  The leather fold on the front of your undergarments is so slippery that each movement has it shifting and shuffling across your nethers, a tiny bit at a time.  Already, you have your [butt] up in the air, shaking it back and forth for more of the delicious friction.  The motion only exacerbates the jiggling your [chest] are doing inside their tight containment.  " + monster.capitalA + monster.short + "'s head tilts up to watch, an unashamedly lusty look overtaking " + monster.pronoun3 + " features as " + monster.pronoun1 + " enjoys the inadvertent show you're giving.");
 
@@ -137,34 +140,5 @@ package classes.Items.Armors
 				game.cleanupAfterCombat();
 			else game.doNext(game.camp.returnToCampUseOneHour);
 		}
-
-/*
-		override public function equipEffect(wearer:Player, output:Boolean):void
-		{
-			if(wearer.lib < 50) game.dynStats("lib", 1, "sen", 1);
-			/*Stats: Virgin - 9, Non-Virgin - 5
-
-			//NONVIRGIN:
-			if(wearer.hasPerk("Slutty Seduction") < 0) wearer.createPerk("Slutty Seduction",6,0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
-			//VIRGIN:
-			if(wearer.hasPerk("Slutty Seduction") < 0) wearer.createPerk("Slutty Seduction",10,0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
-			Special Bonus: Every time you use the special titfuck scene, you gain two defense and 2 tease damage up to a max of 8.  Every night you lose half your bonus (minimum 1).
-			Min lust: 30
-			Min libido: 50*/
-/*			if(wearer.hasVirginVagina()) {
-				while(wearer.findPerk(PerkLib.SluttySeduction) >= 0) wearer.removePerk(PerkLib.SluttySeduction);
-				wearer.createPerk(PerkLib.SluttySeduction,10 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0);
-			}
-			else {
-				while(wearer.findPerk(PerkLib.SluttySeduction) >= 0) wearer.removePerk(PerkLib.SluttySeduction);
-				if(wearer.findPerk(PerkLib.SluttySeduction) < 0) wearer.createPerk(PerkLib.SluttySeduction,6 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0);
-			}
-		}
-
-		override public function unequipEffect(wearer:Player, output:Boolean):void
-		{
-			while(wearer.findPerk(PerkLib.SluttySeduction) >= 0) wearer.removePerk(PerkLib.SluttySeduction);
-		}
-*/
 	}
 }

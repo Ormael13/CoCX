@@ -29,7 +29,7 @@ public function heckelAppearance():void {
 
 //Greeting scene:
 public function greetHeckel():void {
-	outputText("", true);
+	clearOutput();
 	if(flags[kFLAGS.MET_HECKEL] == 0) {
 		outputText("As you approach the edge of the track, the hyena comes around the bend towards you.  Her fur is a light brown mottled with spots of dark brown and black, with a thicker and longer black mane passing for hair.  You get a good view of her B-cup breasts bouncing inside her shirt, black workout bra straps sticking out on her shoulders.  She has simple black shorts on that hug her firm ass, and you can't help but admire her toned legs as they move beneath her.  As she stops running and turns toward you, you see something else entirely bouncing around in her groin.  Her body reminds you of a coiled spring, too much power and tension in too small a frame.\n\n", false);
 	
@@ -119,7 +119,7 @@ private function heckelTraining():void {
 
 //oral
 private function heckelOrallyFixated():void {
-	outputText("", true);
+	clearOutput();
 	if(flags[kFLAGS.TIMES_FUCKED_HECKEL_BLOWJOB] == 0) {
 		outputText("You walk over to Heckel and fall to your knees, already licking your lips. Heckel throws her head back in a barking laugh as she scoots forward, one paw coming around the back of your head. Without needing further encouragement, you grab the flaccid dog cock and give it an experimental pump.\n\n", false);
 
@@ -176,7 +176,7 @@ private function heckelOrallyFixated():void {
 }
 
 private function heckelOralFixationII():void {
-	outputText("", true);
+	clearOutput();
 	outputText("You look up her body at her scowling face, wondering what you did wrong. \"<i>None of that, little meat. I'm top dog here, which means you don't go near there. But if you keep sucking this well, I might just let you keep that hand.</i>\" Heckel clearly isn't amused, but she hasn't pulled you away either. Whether from her threat or your lust, you aren't about to let this hard cock out of your mouth any time soon anyway. Your next bob is echoed by a thrust from Heckel, as is the next and the next after that. Her thrusts start coming faster than your head can keep up, and then her hands in your " + hairDescript() + " tighten their grip to hold your mouth in place. Before you know it she's fucking your throat more than you're giving her head. All you can do is watch her furry groin and stomach pumping towards you, and you have ample time to watch a knot start forming at the base of her dick. Your eyes begin to tear up as her cock pushes your throat open again and again, her thrusts getting faster and faster. It's all you can do to keep one hand stroking her shaft without gagging on her dick.\n\n", false);
 
 	outputText("You let your eyes close as you focus on not gagging, but open them wide when something else presses against your lips. It takes you a moment to realize that her knot is pushing at the entrance to your mouth as Heckel grunts above you, her thrusts coming faster and faster. You look up at her in alarm, and she barks out a laugh from above her swaying breasts. \"<i>What? What did you think I meant by stretch?</i>\" Her voice wavers as her cock spasms, shooting another spurt of pre into your throat.\n\n", false);
@@ -190,7 +190,7 @@ private function heckelOralFixationII():void {
 
 //anal
 private function heckelLovesDaAnal(loss:Boolean = false):void {
-	outputText("", true);
+	clearOutput();
 	//rejection - ass not loose enough
 	if(player.analCapacity() <= 20 && !loss) {
 		outputText("Heckel lets out a barking laugh when you suggest using your " + assDescript() + ", ruffling your hair playfully. \"<i>Know your limits, " + player.short + ", I'd tear you apart down there. I'm sure there are plenty of others in this realm who can help you out with that.</i>\"\n\n", false);
@@ -230,7 +230,7 @@ private function heckelLovesDaAnal(loss:Boolean = false):void {
 }
 
 private function heckelLovesAnal2():void {
-	outputText("", true);
+	clearOutput();
 	outputText("Her legs bump against yours as she pulls herself up, the contact sending shivers through your sensitive body. \"<i>Even better than I thought,</i>\" she mumbles as you hear the sound of her stroking herself. Before the wetness around your ass can dry up, you feel something hard and slightly pointed poking the entrance of your " + assholeDescript() + ".\n\n", false);
 
 	outputText("You open your mouth to gasp as she slides into you, but no sounds come out. You can feel inch after inch penetrate you, your asshole slowly stretching to accommodate her increasing thickness. She pushes as much as she can into you before pulling back slightly, then humping lightly as she works the rest in little by little.", false);

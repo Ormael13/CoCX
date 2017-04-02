@@ -341,14 +341,14 @@ public function stayForPretendNTRGoodWinjobSex():void {
 	//LUST GAIN +20: IF 100:
 	dynStats("lus", 10+player.lib/10, "resisted", false);
 	outputText("\n\n");
-	if(player.lust >= 100) {
+	if(player.lust >= player.maxLust()) {
 		outputText("Despite yourself, your hands slowly begin crawling into your [armor] in pursuit of your naughty bits.  ");
 	}
 	outputText("\"<i>Aaaahn, North, you haven't lost your touch,</i>\" the giantess moans, kneading deeply into her chilled titflesh and barraging her already-titillated tunnel with three slender fingers.  Even from your position from on high, you can hear the squelches of her very well-lubricated fingering, and before you know it, the bottom part of your [armor] is off, and you're openly toying with your genitals, spurred on by the passionate internal embrace of the giant woman and her loving creation.");
 	outputText("\n\nWithout notice, the sexually belaboured titan howls with newfound fervor.  Her breasts shudder noticeably, her already dusky breast-skin darkening slightly as their churning contents shift in composition.  The giantess's fingers fly from stroking her womanhood to grabbing the other breast, a line of glistening femcum trailing from her fingers and splattering against the mountains.  Efforts redoubled by her two-handed grip, she writhes in absolute orgasmic bliss even as her bosom swells up a bit.");
 	outputText("\n\nYou can easily guess what's coming, even before the giantess's frenzied gasps give way to an almost anguished shriek of ecstasy.  Her butt rises off the ground, then slams back down, sending a snowy shockwave out in all directions and doing absolutely marvelous things to the suddenly-oscillating ass-flesh.  Even with the chilly breeze making sure her nipples will stay perpetually rock-stiff, you can see them puff up further and wiggle ominously from your perch.  Sure enough, her internal valves burst open, and twin geysers of milk - white, but a shade darker than what one would expect - spray into the air.");
 	//IF LUST 100:
-	if(player.lust >= 100) {
+	if(player.lust >= player.maxLust()) {
 		outputText("\n\nHer powerful climax nearly shakes the very bluff you're standing on, and the event is enough to force you over the edge");
 		if(player.wetness() >= 4 || player.cumQ() >= 1000) outputText(" - figuratively, and literally, as well, as your fluids drip off the edge to add to the rain of sexual fluids the giantess is laying in the midst of");
 		outputText(".");
@@ -356,7 +356,7 @@ public function stayForPretendNTRGoodWinjobSex():void {
 	outputText("\n\nFor many heartbeats she lays panting, basking in the afterglow of her and her lover's first outing in a long, long time.  Eventually, a stirring in the breast-milk coating her and the ground around her rouses her from her peaceful contemplations.  Just as you suspected, North had internally traveled from her vaginal passage to her enormous breasts, and escaped with the boobgasm that followed.  His shadow-essence separates from its milky prison to reform near the giantess's cheek.  She smiles warmly at him, and he hugs her cheek in response.");
 	outputText("\n\nWith North in tow, the giantess lifts herself back up onto the cliff, allowing the knight to retreat back into his ashen armor.  He turns towards you, his golden orbs slightly eclipsed in what you can only assume to be his form of a happy expression.  \"<i>Thank you, hero,</i>\" he says, only managing the brief courtesy before he's swept up into his lover's arms and smashed against her cheek once more, in an even bigger and more passionate hug.");
 	//IF MASTURBATED: 
-	if(player.lust >= 100) {
+	if(player.lust >= player.maxLust()) {
 		outputText("\n\nYou take the opportunity to do up your [armor] before either of them notices.");
 		player.orgasm();
 	}
@@ -376,7 +376,8 @@ public function conclusionOfGiantessGoodEnd():void {
 	outputText("\n\nAfter a long pause, you pocket the key, square yourself with Carol and North, returning her hand gesture before giving them a goofy grin that positively sparks in the snow-cushioned landscape.  As you turn to depart once more, you wave over your shoulder, escorted out with the continued giggles and lovey-dovey conversation of the unlikely couple.");
 	outputText("\n\nMerry Christmas indeed!");
 	//[if you haven't been introduced to christmas via elf or otherwise] 
-	if(flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] == 0) outputText("\n\nYou have no idea what that is.");
+	if (flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] == 0) outputText("\n\nYou have no idea what that is.");
+	awardAchievement("A Christmas Carol", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_II);
 	//[end, get The North Star & A Christmas Carol perks]
 	//The North Star
 	//Witness picnic events with North & Carol at the High Mountain.

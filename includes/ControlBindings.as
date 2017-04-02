@@ -1,4 +1,6 @@
 import classes.GlobalFlags.kGAMECLASS;
+import flash.ui.Keyboard;
+import coc.view.MainView;
 
 use namespace kGAMECLASS;
 
@@ -261,7 +263,16 @@ inputManager.AddBindableControl(
 			executeButtonClick(9);
 			return;
 		}
-		
+		// Button 14
+		if (kGAMECLASS.buttonIsVisible(14) && kGAMECLASS.buttonTextIsOneOf(14, [ "Nevermind", "Abandon", "Next", "Return", "Back", "Leave", "Resume" ]))
+		{
+			//trace( "keyboard(): processing space bar for button 9",
+			//	mainView.buttonIsVisible( 9 ) ? "(visible)" : "(hidden)",
+			//	mainView.getButtonText( 9 ) );
+			mainView.toolTipView.hide();
+			executeButtonClick(14);
+			return;
+		}		
 		// Button 0
 		if (mainView.buttonIsVisible(0) && mainView.buttonTextIsOneOf(0, [ "Next", "Return", "Back" ]))
 		{
@@ -425,6 +436,58 @@ inputManager.AddBindableControl(
 			executeButtonClick(9);
 		}
 	});
+	
+//Extra buttons
+inputManager.AddBindableControl(
+	"Button 11",
+	"Activate button 11",
+	function():void {
+		if (kGAMECLASS.buttonIsVisible(10))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(10);
+		}
+	});
+inputManager.AddBindableControl(
+	"Button 12",
+	"Activate button 12",
+	function():void {
+		if (kGAMECLASS.buttonIsVisible(11))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(11);
+		}
+	});
+inputManager.AddBindableControl(
+	"Button 13",
+	"Activate button 13",
+	function():void {
+		if (kGAMECLASS.buttonIsVisible(12))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(12);
+		}
+	});
+inputManager.AddBindableControl(
+	"Button 14",
+	"Activate button 14",
+	function():void {
+		if (kGAMECLASS.buttonIsVisible(13))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(13);
+		}
+	});
+inputManager.AddBindableControl(
+	"Button 15",
+	"Activate button 15",
+	function():void {
+		if (kGAMECLASS.buttonIsVisible(14))
+		{
+			mainView.toolTipView.hide();
+			executeButtonClick(14);
+		}
+	});
 
 inputManager.AddBindableControl(
 	"Cheat! Give Hummus",
@@ -480,6 +543,72 @@ inputManager.AddBindableControl(
 	},
 	InputManager.CHEATCONTROL);
 
+inputManager.AddBindableControl(
+	"Cheat! Access debug menu",
+	"Cheat code to access debug menu and spawn ANY items or change stats.",
+	function(keyCode:int):void {
+		if (flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 0)
+		{
+			if (keyCode == 68)
+			{
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER_2]++;
+			}
+			else
+			{
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] = 0;
+			}
+		}
+		else if (flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 1)
+		{
+			if (keyCode == 69)
+			{
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER_2]++;
+			}
+			else
+			{
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] = 0;
+			}
+		}
+		else if (flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 2)
+		{
+			if (keyCode == 66)
+			{
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER_2]++;
+			}
+			else
+			{
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] = 0;
+			}
+		}
+		else if (flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 3)
+		{
+			if (keyCode == 85)
+			{
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER_2]++;
+			}
+			else
+			{
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] = 0;
+			}
+		}
+		else if (flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 4)
+		{
+			if (keyCode == 71)
+			{
+				if (player.str > 0 && mainView.getButtonText(0).indexOf("Game Over") == -1 && (debug && flags[kFLAGS.HARDCORE_MODE] <= 0 || CoC_Settings.debugBuild))
+				{
+					kGAMECLASS.debugMenu.accessDebugMenu();
+				}
+			}
+			else
+			{
+				flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] = 0;
+			}
+		}
+	},
+	InputManager.CHEATCONTROL);
+
+	
 // Insert the default bindings
 inputManager.BindKeyToControl(83, "Show Stats");
 inputManager.BindKeyToControl(76, "Level Up");
@@ -512,10 +641,15 @@ inputManager.BindKeyToControl(55, "Button 7");
 inputManager.BindKeyToControl(56, "Button 8");
 inputManager.BindKeyToControl(57, "Button 9");
 inputManager.BindKeyToControl(48, "Button 10");
-inputManager.BindKeyToControl(81, "Button 6", InputManager.SECONDARYKEY);
-inputManager.BindKeyToControl(87, "Button 7", InputManager.SECONDARYKEY);
-inputManager.BindKeyToControl(69, "Button 8", InputManager.SECONDARYKEY);
-inputManager.BindKeyToControl(82, "Button 9", InputManager.SECONDARYKEY);
-inputManager.BindKeyToControl(84, "Button 10", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.Q, "Button 6", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.W, "Button 7", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.E, "Button 8", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.R, "Button 9", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.T, "Button 10", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.A, "Button 11", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.S, "Button 12", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.D, "Button 13", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.F, "Button 14", InputManager.SECONDARYKEY);
+inputManager.BindKeyToControl(Keyboard.G, "Button 15", InputManager.SECONDARYKEY);
 
 inputManager.RegisterDefaults();

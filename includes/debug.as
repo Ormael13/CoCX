@@ -82,7 +82,8 @@ INITIATING MONKEY
 
 public function debugPane():void
 {
-	outputText("<b>Debug information!</b>\n", true);
+	clearOutput();
+	displayHeader("Debug information!");
 
 	outputText("\nPossible flash sandboxing contexts:");
 	outputText("<ul>");
@@ -118,7 +119,7 @@ public function debugPane():void
 	addButton(5, "Parser Tests", doThatTestingThang);
 	addButton(6, "Halt on Errors", toggleHaltSettings);
 	addButton(3, "ChaosMonkey", monkeyStartConfirm)
-	addButton(9, "Back", mainMenu);
+	addButton(14, "Back", mainMenu);
 }
 
 public function toggleHaltSettings():void

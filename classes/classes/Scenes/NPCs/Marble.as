@@ -34,8 +34,10 @@
 				//Due to toughness or amor...
 				outputText("You somehow manage to deflect and block Marble's massive overhead swing.", false);
 			}
-			if(damage > 0) damage = player.takeDamage(damage);
-			outputText("You are struck by a two-handed overhead swing from the enraged cow-girl.  (" + damage + " damage).", false);
+			if(damage > 0) {
+				outputText("You are struck by a two-handed overhead swing from the enraged cow-girl.  ", false);
+				damage = player.takeDamage(damage, true);
+			}
 			statScreenRefresh();
 			combatRoundOver();
 		}
@@ -60,8 +62,8 @@
 				//Due to toughness or amor...
 				outputText("You easily deflect and block the damage from Marble's wide swing.", false);
 			}
-			outputText("Marble easily hits you with a wide, difficult to avoid swing.  (" + damage + " damage).", false);
-			if(damage > 0) player.takeDamage(damage);
+			outputText("Marble easily hits you with a wide, difficult to avoid swing.  ", false);
+			if(damage > 0) player.takeDamage(damage, true);
 			statScreenRefresh();
 			combatRoundOver();
 		}
@@ -95,20 +97,27 @@
 			this.skinTone = "pale";
 			this.hairColor = "brown";
 			this.hairLength = 13;
-			initStrTouSpeInte(75, 70, 35, 40);
+			initStrTouSpeInte(85, 80, 45, 40);
 			initLibSensCor(25, 45, 40);
 			this.weaponName = "large hammer";
 			this.weaponVerb="hammer-blow";
-			this.weaponAttack = 10;
+			this.weaponAttack = 26 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "tough hide";
-			this.armorDef = 5;
+			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusLust = 20;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 7;
-			this.gems = rand(5) + 25;
+			this.level = 14;
+			this.gems = rand(15) + 50;
 			this.drop = new WeightedDrop(weapons.L_HAMMR, 1);
 			this.tailType = TAIL_TYPE_COW;
 			this.special1 = marbleSpecialAttackOne;
 			this.special2 = marbleSpecialAttackTwo;
+			this.str += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 1100;
 			checkMonster();
 		}
 

@@ -8,11 +8,14 @@ package classes.Scenes.Places
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.Lake.*;
 	import classes.Scenes.Places.Boat.*;
+	import classes.Scenes.NPCs.Etna;
+	import classes.Scenes.NPCs.EtnaFollower;
 
 	public class Boat extends AbstractLakeContent
 	{
 		public var sharkGirlScene:SharkGirlScene = new SharkGirlScene();
-		public var marae:Marae = new Marae();
+		public var marae:MaraeScene = new MaraeScene();
+		public var etnaScene:EtnaFollower = new EtnaFollower();
 		public function Boat()
 		{
 		}
@@ -26,13 +29,19 @@ package classes.Scenes.Places
 		}
 		public function boatExplore():void
 		{
+			player.addStatusValue(StatusAffects.BoatDiscovery, 1, 1);
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
 				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}
+			//Etna
+			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
+				etnaScene.repeatYandereEnc();
+				return;
+			}
 			outputText("You reach the dock without any incident and board the small rowboat.  The water is calm and placid, perfect for rowing.  ", true);
-			if (player.findStatusAffect(StatusAffects.FactoryOverload) >= 0) {
+			if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
 				outputText("The water appears somewhat muddy and has a faint pungent odor.  ", false);
 				if (player.inte > 40) outputText("You realize what it smells like – sex.  ", false);
 			}
@@ -42,19 +51,31 @@ package classes.Scenes.Places
 				return;
 			}
 			outputText("You set out, wondering if you'll find any strange islands or creatures in the lake.\n\n", false);
-			//20% chance if not done with marae of meeting her.
-			if (rand(10) <= 2 && player.findStatusAffect(StatusAffects.MaraeComplete) < 0 && player.findStatusAffect(StatusAffects.MetCorruptMarae) < 0) {
+			//40% chance if not done with marae of meeting her.
+			if (rand(5) <= 2 && flags[kFLAGS.MARAE_QUEST_COMPLETE] <= 0 && flags[kFLAGS.MET_MARAE_CORRUPTED] <= 0) {
 				marae.encounterMarae();
 				return;
 			}
-			//10% chance of corrupt Marae followups
-			if ((debug || rand(10) == 0) && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 0 && player.findStatusAffect(StatusAffects.MetCorruptMarae) >= 0 && player.gender > 0) {
+			if (rand(5) <= 2 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 && flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] == 1) {
+				marae.talkToMaraeAboutMinervaPurification();
+				return;
+			}
+			if (rand(5) <= 2 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1 && flags[kFLAGS.MINERVA_PURIFICATION_MARAE_TALKED] != 1 && flags[kFLAGS.LETHICE_DEFEATED] > 0 && flags[kFLAGS.PURE_MARAE_ENDGAME] < 2) {
+				marae.encounterPureMaraeEndgame();
+				return;
+			}
+			//20% chance of corrupt Marae followups
+			if ((debug || rand(5) == 0) && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 0 && flags[kFLAGS.MET_MARAE_CORRUPTED] > 0 && player.gender > 0 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] <= 0) {
 				marae.level2MaraeEncounter();
 				return;
 			}
+			//Done to allow player who has both perks to fight Marae.
+			if ((debug || rand(5) == 0) && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 2 && flags[kFLAGS.MET_MARAE_CORRUPTED] > 0 && player.gender > 0 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] <= 0) {
+				marae.level3MaraeEncounter();
+			}
 			//BUILD LIST OF CHOICES
 			var choice:Array = [0, 1, 2, 3];
-			if (player.findStatusAffect(StatusAffects.DungeonShutDown) >= 0 && player.level > 2)
+			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && player.level > 2)
 				choice[choice.length] = 4;
 			choice[choice.length] = 5;
 			//MAKE YOUR CHOICE
@@ -79,6 +100,7 @@ package classes.Scenes.Places
 					lake.fetishZealotScene.zealotBoat();
 					return;
 				case 5:
+					flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] = 1;
 					kGAMECLASS.anemoneScene.mortalAnemoneeeeee();
 					return;
 			}

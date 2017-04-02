@@ -338,7 +338,7 @@
 			outputText("\n\nYou wriggle and wail, feeling the mounting pleasure growing into an unstoppable wave of bliss, bolstered by the fevered thrusts of your horny mistress.  She moans with you and bottoms out, her pussy spraying behind her while her soaked balls slap into you with brutal force, quivering once and then suddenly shrinking.  Her flare distends your poor body further, and then a thick wave of jizm is pouring out into your uterus, filling every empty cavity with demonic virility.  Your body seizes, then goes limp, all except for you the ripples of contractions churning through your [vagina] as it milks every drop from your demonic lover.  The next jizz-bomb bloats your abdomen to purely pregnant proportions and as you scream in absolute rapture, the pressure slowly forces you off, leaving you to lie in a pile of sperm while it fountains from your abused twat.");
 
 			outputText("\n\nDarkness takes you while you shiver in knocked-up bliss.");
-
+			dynStats("lib", 50, "cor", 50);
 			menu();
 			addButton(0, "Next", femLossII);
 		}
@@ -364,6 +364,8 @@
 			outputText("\n\nYou sigh as your latest litter of imps clamor around your nipples, hungry for their mother's milk.  They're such greedy, ceaselessly ravenous creatures.  Having their clutching mouths on your nipples all the time makes it so hard to sleep, and it doesn't help that the 'father' insists on rutting with you and knotting you for hours until she's 'sure' your pregnant.");
 
 			outputText("\n\nThe rest of your days are lived out like that, interrupted only for fresh injections of demonic chemicals and thick centaur-cum.  Amazingly, the demon's experiments bear fruit, and you have the honor of birthing the first true demon offspring - the first of many.  Though you're eventually traded to a new owner once you're well used and other sluts have been similar prepared, you keep a sense of a perverse pride through it all.  You were the first demon mother.  You helped the new species propagate and assure their dominance over lesser forms of life, like yourself.");
+
+			dynStats("lus=", player.maxLust(), "lib", 50, "cor", 50);
 			getGame().gameOver();
 		}
 		

@@ -95,8 +95,13 @@ package classes.Scenes.Explore {
 				outputText("You spy the merchant Giacomo in the distance.  He makes a beeline for you, setting up his shop in moments.  ");
 				outputText("Giacomo's grin is nothing short of creepy as he offers his wares to you. What are you interested in?");
 			}
-			var deworm:Function = (player.findStatusAffect(StatusAffects.WormOffer) >= 0 && player.findStatusAffect(StatusAffects.Infested) >= 0 ? wormRemovalOffer : null);
-			simpleChoices("Potions", potionMenu, "Books", bookMenu, "Erotica", eroticaMenu, "Worm Cure", deworm, "Leave", camp.returnToCampUseOneHour);
+			//var deworm:Function = (player.findStatusAffect(StatusAffects.WormOffer) >= 0 && player.findStatusAffect(StatusAffects.Infested) >= 0 ? wormRemovalOffer : null);
+			menu();
+			addButton(0, "Potions", potionMenu);
+			addButton(1, "Books", bookMenu);
+			addButton(2, "Erotica", eroticaMenu);
+			if (player.findStatusAffect(StatusAffects.WormOffer) >= 0 && player.findStatusAffect(StatusAffects.Infested) >= 0) addButton(3, "Worm Cure", wormRemovalOffer);
+			addButton(4, "Leave", camp.returnToCampUseOneHour);
 			statScreenRefresh();
 		}
 		
@@ -115,8 +120,11 @@ package classes.Scenes.Explore {
 			spriteSelect(23);
 			clearOutput();
 			outputText("Which potion or tincture will you examine?");
-			simpleChoices("Vitality T.", pitchVitailtyTincture, "Scholars T.", pitchScholarsTea,
-				"Cerulean P.", (player.gender != 2 ? pitchCeruleanPotion : null), "", null, "Back", giacomoEncounter);
+			menu();
+			addButton(0, "Vitality T.", pitchVitailtyTincture);
+			addButton(1, "Scholars T.", pitchScholarsTea);
+			if (player.gender != 2 || player.gender != 0) addButton(2, "Cerulean P.", pitchCeruleanPotion);
+			addButton(14, "Back", giacomoEncounter);
 			statScreenRefresh();
 		}
 		
@@ -124,8 +132,14 @@ package classes.Scenes.Explore {
 			spriteSelect(23);
 			clearOutput();
 			outputText("Which book are you interested in perusing?");
-			simpleChoices("Dangerous Plants", pitchDangerousPlantsBook, "Traveler's Guide", pitchTravellersGuide, "Hentai Comic", pitchHentaiComic,
-				"Yoga Guide", (flags[kFLAGS.COTTON_UNUSUAL_YOGA_BOOK_TRACKER] > 0 ? pitchYogaGuide : null), "Back", giacomoEncounter);
+			menu();
+			addButton(0, "Dangerous Plants", pitchDangerousPlantsBook);
+			addButton(1, "Traveler's Guide", pitchTravellersGuide);
+			addButton(2, "Hentai Comic", pitchHentaiComic);
+			if (flags[kFLAGS.COTTON_UNUSUAL_YOGA_BOOK_TRACKER] > 0) addButton(3, "Yoga Guide", pitchYogaGuide);
+			addButton(5, "White Book", pitchWhiteBook);
+			addButton(6, "Black Book", pitchBlackBook);
+			addButton(14, "Back", giacomoEncounter);
 			statScreenRefresh();
 		}
 		
@@ -133,14 +147,17 @@ package classes.Scenes.Explore {
 			spriteSelect(23);
 			clearOutput();
 			outputText("Giacomo's grin is nothing short of creepy as he offers his wares to you.  What are you interested in?");
-			if (player.gender == 1)
-				simpleChoices("Dildo", pitchDildo, "Onahole", pitchOnahole, "D Onahole", pitchDeluxeOnahole, "", null, "Back", giacomoEncounter);
-			if (player.gender == 2)
-				simpleChoices("Dildo", pitchDildo, "Stim-Belt", pitchSelfStimulationBelt, "AN Stim-Belt", pitchAllNaturalSelfStimulationBelt, "", null, "Back", giacomoEncounter);
-			if (player.gender == 3)
-				choices("Onahole", pitchOnahole, "D Onahole", pitchDeluxeOnahole, "AN Onahole", pitchAllNaturalOnahole, "Stim-Belt", pitchSelfStimulationBelt, "AN Stim-Belt", pitchAllNaturalSelfStimulationBelt, "Dual Belt", pitchDualStimulationBelt, "", null, "", null, "Dildo", pitchDildo, "Back", giacomoEncounter);
-			if (player.gender == 0)
-				simpleChoices("Dildo", pitchDildo, "Onahole", pitchOnahole, "Stim-Belt", pitchSelfStimulationBelt, "", null, "Back", giacomoEncounter);
+			menu();
+			addButton(0, "Dildo", pitchDildo);
+			if (player.hasVagina()) addButton(1, "Stim-Belt", pitchSelfStimulationBelt);
+			if (player.hasVagina()) addButton(2, "AN Stim-Belt", pitchAllNaturalSelfStimulationBelt);
+			if (player.hasCock()) addButton(3, "Onahole", pitchOnahole);
+			if (player.hasCock()) addButton(4, "D Onahole", pitchDeluxeOnahole);
+			if (player.hasCock() && player.hasVagina()) addButton(5, "Dual Belt", pitchDualStimulationBelt);
+			if (player.hasCock() && player.hasVagina()) addButton(6, "AN Onahole", pitchAllNaturalOnahole);
+			addButton(7, "Condom", pitchCondom);
+			addButton(14, "Back", giacomoEncounter);
+
 			statScreenRefresh();
 		}
 		
@@ -203,6 +220,27 @@ package classes.Scenes.Explore {
 			else {
 				inventory.takeItem(consumables.CERUL_P, potionMenu);
 				player.gems -= 75;
+				statScreenRefresh();
+			}
+		}
+		
+		public function pitchCondom():void {
+			spriteSelect(23);
+			outputText("Giacomo holds up the packet and says, \"<i>Ah, yes! This is a condom. Just slip it on any cocks and have it penetrate any holes. It's guaranteed to prevent the spread of STDs and it will help to prevent pregnancy. I must warn you that it does not completely prevent pregnancy. Rarely, it will fail. However, it will work most of the time. So, <b>ten gems</b>. What do you say?</i>\"", true);
+			doYesNo(buyCondom, eroticaMenu);
+		}
+		
+		public function buyCondom():void {
+			spriteSelect(23);
+			if (player.gems < 10)
+			{
+				outputText("\n\nGiacomo sighs, indicating you need " + String(10 - player.gems) + " more gems to purchase this item.", true);
+				doNext(eroticaMenu);
+			}
+			else
+			{
+				player.gems -= 10;
+				inventory.takeItem(useables.CONDOM, eroticaMenu);
 				statScreenRefresh();
 			}
 		}
@@ -287,6 +325,7 @@ package classes.Scenes.Explore {
 				outputText("You peruse the erotic book.  The story is one of a group of sisters who are all impossibly heavy-chested and equally horny getting into constant misadventures trying to satisfy their lust.  While the comic was entertaining and erotic to the highest degree, you cannot help but laugh at how over-the-top the story and all of the characters are.  Were the world as it was in the book, nothing would get done as humanity would be fucking like jackrabbits in heat for the rest of their lives.  While certainly a tempting proposition, everyone gets worn out sometime.  You place the book in your sack, well entertained and with a head filled with wilder perversions than what you woke up with this morning.");
 				doNext(bookMenu);
 				player.gems -= 10;
+				dynStats("lib", 2, "lus", 20);
 				player.createKeyItem("Hentai Comic", 0, 0, 0, 0);
 				statScreenRefresh();
 			}
@@ -314,6 +353,50 @@ package classes.Scenes.Explore {
 				statScreenRefresh();
 			}
 			doNext(bookMenu);
+		}
+		
+		private function pitchWhiteBook():void {
+			spriteSelect(23);
+			clearOutput();
+			outputText("Giacomo holds up a white book.  \"<i>While you may not find value in this as a simple book,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  Maybe even some usefull spell!  I will offer the super-cheap price of 100 gem!</i>\"");
+			doYesNo(buyWhiteBook, bookMenu);
+		}
+		
+		private function buyWhiteBook():void {
+			spriteSelect(23);
+			clearOutput();
+			if (player.gems < 100) {
+				outputText("\n\nGiacomo sighs, indicating you need 100 gem to purchase this item.");
+				doNext(bookMenu);
+			}
+			else {
+				outputText("\n\nThe crazy merchant nods satisfied when you hand him over a hundred gems and in exchange gives you a white book.");
+				player.gems -= 100;
+				statScreenRefresh();
+				inventory.takeItem(consumables.W__BOOK, bookMenu);
+			}
+		}
+		
+		private function pitchBlackBook():void {
+			spriteSelect(23);
+			clearOutput();
+			outputText("Giacomo holds up a black book.  \"<i>While you may not find value in this as a simple book,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  Maybe even some usefull spell!  I will offer the super-cheap price of 100 gem!</i>\"");
+			doYesNo(buyBlackBook, bookMenu);
+		}
+		
+		private function buyBlackBook():void {
+			spriteSelect(23);
+			clearOutput();
+			if (player.gems < 100) {
+				outputText("\n\nGiacomo sighs, indicating you need 100 gem to purchase this item.");
+				doNext(bookMenu);
+			}
+			else {
+				outputText("\n\nThe crazy merchant nods satisfied when you hand him over a hundred gems and in exchange gives you a white book.");
+				player.gems -= 100;
+				statScreenRefresh();
+				inventory.takeItem(consumables.B__BOOK, bookMenu);
+			}
 		}
 		
 		private function pitchDildo():void {
@@ -500,7 +583,7 @@ package classes.Scenes.Explore {
 			spriteSelect(23);
 			clearOutput();
 			if (player.hasKeyItem("Dual Belt") >= 0) {
-				outputText("<b>You already own a dual belt!</b>");
+				outputText("<b>You already own a Dual Belt!</b>");
 				doNext(eroticaMenu);
 				return;
 			}
@@ -512,7 +595,9 @@ package classes.Scenes.Explore {
 			spriteSelect(23);
 			clearOutput();
 			if (player.gems < 50) {
-				outputText("You do not have enough gems to purchase this item.");
+				outputText("\n\nGiacomo sighs, indicating you need " + String(50 - player.gems) + " more gems to purchase this item.");
+				doNext(eroticaMenu);
+				return;
 			}
 			else {
 				outputText("You are a bit dubious at the pleasure it could offer you, but it would be better than being raped by the creatures constantly... maybe to even work out some excess lusts... hesitantly, you reach into your bag and grab 50 gems, handing it to him.  He greedily snatches it from your palm and hands you with the belt with a smile.  \"<i>I promise you won't be disappointed.</i>\"  He counts the gems and waves goodbye.\n\n(<b>Dual Belt acquired!</b>)");

@@ -2,6 +2,7 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.internals.*;
 
 	/**
@@ -32,7 +33,6 @@ package classes.Scenes.NPCs
 			}
 			//Determine damage - str modified by enemy toughness!
 			damage = int((str + weaponAttack) - rand(player.tou) - player.armorDef);
-			if(damage > 0) damage = player.takeDamage(damage);
 			if(damage <= 0) {
 				damage = 0;
 				//Due to toughness or amor...
@@ -43,12 +43,12 @@ package classes.Scenes.NPCs
 			else {
 				var choice:Number = rand(3);
 				//(regular attack 1)
-				if(choice == 0) outputText("Ducking in close, the girl thunders a punch against your midsection, leaving a painful sting.", false);
+				if(choice == 0) outputText("Ducking in close, the girl thunders a punch against your midsection, leaving a painful sting. ", false);
 				//(regular attack 2)
-				else if(choice == 1) outputText("The girl feints a charge, leans back, and snaps a kick against your " + kGAMECLASS.hipDescript() + ". You stagger, correct your posture, and plunge back into combat.", false);
+				else if(choice == 1) outputText("The girl feints a charge, leans back, and snaps a kick against your " + kGAMECLASS.hipDescript() + ". You stagger, correct your posture, and plunge back into combat. ", false);
 				//(regular attack 3)
-				else if(choice == 2) outputText("You momentarily drop your guard as the girl appears to stumble. She rights herself as you step forward and lands a one-two combination against your torso.", false);
-				outputText(" (" + damage + ")", false);
+				else if(choice == 2) outputText("You momentarily drop your guard as the girl appears to stumble. She rights herself as you step forward and lands a one-two combination against your torso. ", false);
+				damage = player.takeDamage(damage, true);
 			}
 			if(damage > 0) {
 				if(lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
@@ -70,8 +70,9 @@ package classes.Scenes.NPCs
 		}
 		//(magic attack)
 		private function shouldraMagicLazers():void {
-			var damage:Number = player.takeDamage(20 + rand(10));
-			outputText("Falling back a step, the girl raises a hand and casts a small spell. From her fingertips shoot four magic missiles that slam against your skin and cause a surprising amount of discomfort. (" + damage + ")\n", false);
+			outputText("Falling back a step, the girl raises a hand and casts a small spell. From her fingertips shoot four magic missiles that slam against your skin and cause a surprising amount of discomfort. ", false);
+			var damage:Number = player.takeDamage(int + rand(10), true);
+			outputText("\n");
 			combatRoundOver();
 		}
 
@@ -112,17 +113,26 @@ package classes.Scenes.NPCs
 			this.skinTone = "white";
 			this.hairColor = "white";
 			this.hairLength = 3;
-			initStrTouSpeInte(45, 30, 5, 110);
-			initLibSensCor(100, 0, 33);
+			initStrTouSpeInte(55, 40, 10, 140);
+			initLibSensCor(120, 0, 33);
 			this.weaponName = "fists";
 			this.weaponVerb="punches";
+			this.weaponAttack = 14 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "comfortable clothes";
+			this.armorDef = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = 30;
+			this.bonusLust = 10;
 			this.lust = 10;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 4;
+			this.level = 12;
 			this.gems = 0;
 			this.drop = new ChainedDrop().add(consumables.ECTOPLS,1/3);
+			this.str += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 28 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 1460;
 			checkMonster();
 		}
 		

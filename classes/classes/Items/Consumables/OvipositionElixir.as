@@ -18,7 +18,6 @@ package classes.Items.Consumables
 			outputText("You pop the cork and prepare to drink the stuff, but the smell nearly makes you gag.  You cork it hastily.\n\n");
 			return false;
 		}
-		
 		//Oviposition Elixer!
 		/* Notes on StatusAffects.Eggs
 		 v1 = egg type.

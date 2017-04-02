@@ -84,7 +84,7 @@ package classes.Scenes.Areas.Forest
 			} else {
 				outputText("Tamani gives up on defeating you and starts masturbating!", true);
 			}
-			if(player.lust >= 33 && player.totalCocks() > 0) {
+			if(player.lust >= 33 && player.totalCocks() > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("  You could fuck her, but if that's the case why did you bother fighting her?\n\nWhat do you do to her?", false);
 				var temp:Function = null;
 				var temp2:Function = null;
@@ -143,17 +143,20 @@ package classes.Scenes.Areas.Forest
 			this.skinTone = "greenish gray";
 			this.hairColor = "pink and black";
 			this.hairLength = 16;
-			initStrTouSpeInte(32, 43, 55, 62);
-			initLibSensCor(65, 65, 50);
+			initStrTouSpeInte(37, 58, 55, 62);
+			initLibSensCor(64, 65, 50);
 			this.weaponName = "fists";
 			this.weaponVerb="tiny punch";
+			this.weaponAttack = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "leather straps";
-			this.bonusHP = 40;
+			this.armorDef = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusHP = 60;
+			this.bonusLust = 20;
 			this.lust = 40;
 			this.lustVuln = 0.9;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 4;
-			this.gems = rand(25) + 5;
+			this.level = 8;
+			this.gems = rand(35) + 10;
 			this.drop = new WeightedDrop().add(consumables.GOB_ALE,4)
 					.addMany(1,
 							consumables.L_DRAFT,
@@ -167,6 +170,12 @@ package classes.Scenes.Areas.Forest
 							null);
 			this.special1 = goblinDrugAttack;
 			this.special2 = goblinTeaseAttack;
+			this.str += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 530;
 			checkMonster();
 		}
 		

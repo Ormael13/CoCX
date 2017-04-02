@@ -20,7 +20,7 @@ public function ifrisIntro():Boolean {
 //2-Approach and Greeting-
 public function approachIfris():void {
 	spriteSelect(28);
-	outputText("", true);
+	clearOutput();
 	if(flags[kFLAGS.MET_IFRIS] == 0) {
 		flags[kFLAGS.MET_IFRIS] = 1;
 		outputText("The curious, appraising gaze on her pretty face turns into a pleased smile as you walk over, and her clawed toes click gently on the floor as she takes the last few steps to meet you. As you open your mouth to speak she preempts you, those pretty, black-painted lips parting, a voice too husky and smooth to be up to any good greeting you.\n\n", false);
@@ -55,7 +55,7 @@ public function approachIfris():void {
 //3a-PC responds they want to work out-
 private function workOutForIfris():void {
 	spriteSelect(28);
-	outputText("", true);
+	clearOutput();
 	if(player.fatigue > 70) {
 		outputText("There's no way you could work out as tired as you are.  Maybe you could come back to flirt with the demonic-looking girl during your next workout.", false);
 		doNext(telAdre.gymDesc);
@@ -72,7 +72,7 @@ private function workOutForIfris():void {
 //3b-PC asks if she'd like to join them-
 private function askIfrisToJoinYou():void {
 	spriteSelect(28);
-	outputText("", true);
+	clearOutput();
 	if(player.fatigue > 70) {
 		outputText("There's no way you could work out as tired as you are.  Maybe you could come back to flirt with the demonic-looking girl during your next workout.", false);
 		doNext(telAdre.gymDesc);
@@ -91,7 +91,7 @@ private function askIfrisToJoinYou():void {
 private function liftWhileIfrisWatches():void {
 	spriteSelect(28);
 	flags[kFLAGS.IFRIS_SHOWED_OFF]++;
-	outputText("", true);
+	clearOutput();
 	if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
 		outputText("The centauress working the door walks up to collect her fee, and you drop 10 gems for an hour workout into her hand.\n\n", false);
 		player.gems -= 10;
@@ -117,7 +117,7 @@ private function showOffForIfris():void {
 	spriteSelect(28);
 	flags[kFLAGS.IFRIS_SHOWED_OFF]++;
 	fatigue(30);
-	outputText("", true);
+	clearOutput();
 	if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
 		outputText("The centauress working the door walks up to collect her fee, and you drop 10 gems for an hour workout into her hand.\n\n", false);
 		player.gems -= 10;

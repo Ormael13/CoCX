@@ -42,7 +42,7 @@
 					//(AUTO-LOSE)
 					else {
 						outputText("She throws her hands out, palms facing you, and a rush of pink flame washes towards you.  Too busy with your own attack to effectively dodge, you're hit full on by the pink fire.  Incredibly, it doesn't burn.  The fire actually seems to flow inside you, disappearing into your skin.  You stumble, confused for a second, but then it hits you.  Every inch of your body is buzzing with pleasure, practically squirming and convulsing with sexual delight.  You collapse, twitching and heaving, feeling the constant sensation of sexual release running from your head to your " + player.feet() + ".  Too horny and pleasured to resist, you lie down and tremble, occasionally rubbing yourself to enhance the bliss.", false);
-						game.dynStats("lus", 1500);
+						game.dynStats("lus", 1000);
 					}
 				}
 			}
@@ -82,7 +82,7 @@
 		//(Struggle)
 		public function ceraphBindingStruggle():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("You wriggle in the tight binding, trying your best to escape.  ", false);
 			if (player.statusAffectv1(StatusAffects.Bound) - 1 <= 0) {
 				outputText("With a mighty twist and stretch, the whip gives and uncurls from you all at once.  You've regained your freedom", false);
@@ -113,7 +113,7 @@
 //(Wait)
 		public function ceraphBoundWait():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("Why bother resisting?  The feeling of the leather wrapped tightly around you, digging into your " + player.skinDesc + ", is intoxicating.", false);
 			if (flags[kFLAGS.PC_FETISH] >= 2) {
 				outputText("  You squirm inside the bindings as you get more and more turned on, hoping that Ceraph will strip away your armor and force you to parade around as her bound, naked pet.", false);
@@ -178,17 +178,19 @@
 					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
 				}
 				if (damage > 0 && damage < 6) {
-					outputText("You are struck a glancing blow by " + a + short + "! (" + damage + ")", false);
+					outputText("You are struck a glancing blow by " + a + short + "! ", false);
 				}
 				if (damage > 5 && damage < 11) {
-					outputText(capitalA + short + " wounds you! (" + damage + ")", false);
+					outputText(capitalA + short + " wounds you! ", false);
 				}
 				if (damage > 10 && damage < 21) {
-					outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! (" + damage + ")", false);
+					outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! ", false);
 				}
 				if (damage > 20) {
-					outputText(capitalA + short + " <b>mutilates</b> you with " + pronoun3 + " powerful " + weaponVerb + "! (" + damage + ")", false);
+					outputText(capitalA + short + " <b>mutilates</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ", false);
 				}
+				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
+				else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>", false)
 			}
 			game.statScreenRefresh();
 			outputText("\n", false);
@@ -223,18 +225,19 @@
 					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.", false);
 				}
 				if (damage > 0 && damage < 6) {
-					outputText("You are struck a glancing blow by " + a + short + "! (" + damage + ")", false);
+					outputText("You are struck a glancing blow by " + a + short + "! ", false);
 				}
 				if (damage > 5 && damage < 11) {
-					outputText(capitalA + short + " wounds you! (" + damage + ")", false);
+					outputText(capitalA + short + " wounds you! ", false);
 				}
 				if (damage > 10 && damage < 21) {
-					outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! (" + damage + ")", false);
+					outputText(capitalA + short + " staggers you with the force of " + pronoun3 + " " + weaponVerb + "! ", false);
 				}
 				if (damage > 20) {
-					outputText(capitalA + short + " <b>mutilates</b> you with " + pronoun3 + " powerful " + weaponVerb + "! (" + damage + ")", false);
+					outputText(capitalA + short + " <b>mutilates</b> you with " + pronoun3 + " powerful " + weaponVerb + "! ", false);
 				}
-
+				if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
+				else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>", false)
 			}
 			game.statScreenRefresh();
 			outputText("\n", false);
@@ -306,22 +309,30 @@
 			this.skinTone = "purple";
 			this.hairColor = "black";
 			this.hairLength = 20;
-			initStrTouSpeInte(65, 40, 80, 80);
+			initStrTouSpeInte(75, 55, 90, 80);
 			initLibSensCor(75, 15, 100);
 			this.weaponName = "flaming whip";
 			this.weaponVerb="flame-whip";
-			this.weaponAttack = 15;
+			this.weaponAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "demon-skin";
+			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = 200;
+			this.bonusLust = 40;
 			this.lust = 30;
 			this.lustVuln = 0.75;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 9;
+			this.level = 14;
 			this.gems = rand(5) + 38;
 			this.drop = NO_DROP;
 			this.special1 = ceraphSpecial1;
 			this.special2 = ceraphSpecial2;
 			this.special3 = ceraphSpecial3;
+			this.str += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 1500;
 			checkMonster();
 		}
 

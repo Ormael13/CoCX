@@ -2,11 +2,18 @@
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.*;
 
 	public class Goblin extends Monster
 	{
 		protected function goblinDrugAttack():void {
 			var temp2:Number = rand(2);
+			var multiplier:Number = 1; //Higher tier goblins have powerful potions.
+			if (short == "goblin assassin") multiplier += 0.2;
+			if (short == "goblin shaman") multiplier += 0.4;
+			if (short == "goblin warrior") multiplier += 0.5;
+			if (short == "goblin elder") multiplier += 1;
+			multiplier += player.newGamePlusMod() * 0.5;
 			if(short == "Tamani") temp2 = rand(5);
 			if(short == "Tamani's daughters") temp2 = rand(5);
 			var color:String = "";
@@ -26,7 +33,7 @@
 					outputText("Tamani pulls out a blue vial and uncaps it, then douses the mob with the contents.", false);
 					if(HPRatio() < 1) {
 						outputText("  Though less effective than ingesting it, the potion looks to have helped the goblins recover from their wounds!\n", false);
-						addHP(80);
+						addHP(80 * multiplier);
 					}
 					else outputText("  There doesn't seem to be any effect.\n", false);			
 					outputText("\n", false);
@@ -35,8 +42,8 @@
 					outputText(capitalA + short + " pulls out a blue vial and uncaps it, swiftly downing its contents.", false);
 					if(HPRatio() < 1) {
 						outputText("  She looks to have recovered from some of her wounds!\n", false);
-						addHP(eMaxHP() /4);
-						if(short == "Tamani") addHP(eMaxHP()/4);
+						addHP((eMaxHP() / 4) * multiplier);
+						if (short == "Tamani") addHP((eMaxHP() / 4) * multiplier);
 					}
 					else outputText("  There doesn't seem to be any effect.\n", false);
 					combatRoundOver();
@@ -52,12 +59,12 @@
 				if (color == "red") {
 					//Temporary heat
 					outputText("\nThe red fluids hit you and instantly soak into your skin, disappearing.  Your skin flushes and you feel warm.  Oh no...\n", false);
-					if (player.findStatusAffect(StatusAffects.TemporaryHeat) < 0) player.createStatusAffect(StatusAffects.TemporaryHeat, 0, 0, 0, 0);
+					if (player.findStatusAffect(StatusAffects.TemporaryHeat) < 0) player.createStatusAffect(StatusAffects.TemporaryHeat, 0, multiplier, 0, 0);
 				}
 				else if (color == "green") {
 					//Green poison
 					outputText("\nThe greenish fluids splash over you, making you feel slimy and gross.  Nausea plagues you immediately - you have been poisoned!\n", false);
-					if (player.findStatusAffect(StatusAffects.Poison) < 0) player.createStatusAffect(StatusAffects.Poison, 0, 0, 0, 0);
+					if (player.findStatusAffect(StatusAffects.Poison) < 0) player.createStatusAffect(StatusAffects.Poison, 0, multiplier, 0, 0);
 				}
 				else if (color == "white") {
 					//sticky flee prevention
@@ -67,7 +74,7 @@
 				else if (color == "black") {
 					//Increase fatigue
 					outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n", false);
-					game.fatigue(10 + rand(25));
+					game.fatigue(10 + rand(25) * multiplier);
 				}
 			}
 			if (!plural) combatRoundOver();
@@ -75,10 +82,32 @@
 		}
 		protected function goblinTeaseAttack():void {
 			var det:Number = rand(3);
-			if(det == 0) outputText(capitalA + short + " runs her hands along her leather-clad body and blows you a kiss. \"<i>Why not walk on the wild side?</i>\" she asks.", false);
-			if(det == 1) outputText(capitalA + short + " grabs her heel and lifts it to her head in an amazing display of flexibility.  She caresses her snatch and gives you a come hither look.", false);
-			if(det == 2) outputText(capitalA + short + " bends over, putting on a show and jiggling her heart-shaped ass at you.  She looks over her shoulder and sucks on her finger, batting her eyelashes.", false);
-			game.dynStats("lus", rand(player.lib/10)+8);
+			if (short == "goblin" || short == "goblin assassin") {
+				if (det == 0) outputText(capitalA + short + " runs her hands along her leather-clad body and blows you a kiss. \"<i>Why not walk on the wild side?</i>\" she asks.", false);
+				if (det == 1) outputText(capitalA + short + " grabs her heel and lifts it to her head in an amazing display of flexibility.  She caresses her snatch and gives you a come hither look.", false);
+				if (det == 2) outputText(capitalA + short + " bends over, putting on a show and jiggling her heart-shaped ass at you.  She looks over her shoulder and sucks on her finger, batting her eyelashes.", false);
+			}
+			else if (short == "goblin warrior") {
+				if (det == 0) outputText(capitalA + short + " runs her hands along her metal-clad body and blows you a kiss. \"<i>Why not walk on the wild side?</i>\" she asks.", false);
+				if (det == 1) outputText(capitalA + short + " grabs her heel and lifts it to her head in an amazing display of flexibility despite the armor she's wearing.  She caresses her snatch and gives you a come hither look.", false);
+				if (det == 2) outputText(capitalA + short + " bends over, putting on a show and jiggling her heart-shaped ass at you.  She looks over her shoulder and sucks on her finger, batting her eyelashes.", false);
+			}
+			else if (short == "goblin shaman") {
+				if (det == 0) outputText(capitalA + short + " runs her hands along her leather-clad body and blows you a kiss. \"<i>Why not walk on the wild side?</i>\" she asks.", false);
+				if (det == 1) outputText(capitalA + short + " grabs her heel and lifts it to her head in an amazing display of flexibility.  She lifts her loincloth and caresses her snatch and gives you a come hither look.", false);
+				if (det == 2) outputText(capitalA + short + " bends over, putting on a show and jiggling her heart-shaped ass at you.  She looks over her shoulder and sucks on her finger, batting her eyelashes.", false);
+			}
+			else if (short == "goblin elder") {
+				if (det == 0) outputText(capitalA + short + " runs her hands along her bone-clad body and blows you a kiss. \"<i>Why not walk on the wild side?</i>\" she asks.", false);
+				if (det == 1) outputText(capitalA + short + " grabs her heel and lifts it to her head in an amazing display of flexibility.  She lifts her loincloth and caresses her snatch and gives you a come hither look.", false);
+				if (det == 2) outputText(capitalA + short + " bends over, putting on a show and jiggling her heart-shaped ass at you.  She looks over her shoulder and sucks on her finger, batting her eyelashes.", false);
+			}
+			var lustDmg:int = rand(player.lib / 10) + 8;
+			if (short == "goblin assassin") lustDmg *= 1.4;
+			if (short == "goblin warrior") lustDmg *= 1.6;
+			if (short == "goblin shaman") lustDmg *= 1.6;
+			if (short == "goblin elder") lustDmg *= 2;
+			game.dynStats("lus", lustDmg);
 			outputText("  The display distracts you long enough to prevent you from taking advantage of her awkward pose, leaving you more than a little flushed.\n\n", false);
 			combatRoundOver();
 		}
@@ -90,7 +119,7 @@
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.gender == 0) {
+			if (player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
 				outputText("You collapse in front of the goblin, too wounded to fight.  She giggles and takes out a tube of lipstick smearing it whorishly on your face.  You pass into unconsciousness immediately.  It must have been drugged.", false);
 				game.cleanupAfterCombat();
 			} else if (pcCameWorms) {
@@ -121,14 +150,17 @@
 			this.skinTone = "dark green";
 			this.hairColor = "purple";
 			this.hairLength = 4;
-			initStrTouSpeInte(12, 13, 35, 42);
+			initStrTouSpeInte(15, 20, 35, 42);
 			initLibSensCor(45, 45, 60);
 			this.weaponName = "fists";
-			this.weaponVerb="tiny punch";
+			this.weaponVerb = "tiny punch";
+			this.weaponAttack = 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.armorName = "leather straps";
+			this.armorDef = 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.bonusLust = 20;
 			this.lust = 50;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 1;
+			this.level = 2;
 			this.gems = rand(5) + 5;
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE,5).
@@ -139,6 +171,12 @@
 							consumables.PURPDYE);
 			this.special1 = goblinDrugAttack;
 			this.special2 = goblinTeaseAttack;
+			this.str += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 155;
 			checkMonster();
 		}
 

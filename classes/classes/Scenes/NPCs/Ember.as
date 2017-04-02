@@ -2,6 +2,7 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.internals.ChainedDrop;
 
 	public class Ember extends Monster
 	{
@@ -33,14 +34,13 @@ package classes.Scenes.NPCs
 				outputText(capitalA + short + " completely misses you with a blind attack!", false);
 			}
 			//Miss/dodge
-			else if(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText("You dodge aside at the last second and Ember's claws whistle past you.");
+			else if(player.getEvasionRoll()) outputText("You dodge aside at the last second and Ember's claws whistle past you.");
 			else {
 				var damage:int = int((str + weaponAttack) - rand(player.tou) - player.armorDef);
 				if(damage <= 0) outputText("Ember's claws scrape noisily but harmlessly off your [armor].");
 				else {
-					damage = player.takeDamage(damage);
-					outputText("Ember's claws rip into you, leaving stinging wounds.");
-					outputText(" (" + damage + ")");
+					outputText("Ember's claws rip into you, leaving stinging wounds. ");
+					damage = player.takeDamage(damage, true);
 				}
 			}
 			combatRoundOver();
@@ -56,12 +56,21 @@ package classes.Scenes.NPCs
 			}
 			else {
 				outputText("Ember inhales deeply, then "+ emberMF("his","her") + " jaws open up, releasing streams of fire, ice and lightning; magical rather than physical, the gaudy displays lose cohesion and amalgamate into a column of raw energy as they fly at you.");
-				if(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText("  It's a narrow thing, but you manage to throw yourself aside at the last moment.  Fortunately, the energy whirling around and tearing up the soil blinds Ember to your escape until you have recovered and are ready to keep fighting.");
+				if(player.getEvasionRoll()) outputText("  It's a narrow thing, but you manage to throw yourself aside at the last moment.  Fortunately, the energy whirling around and tearing up the soil blinds Ember to your escape until you have recovered and are ready to keep fighting.");
 				else {
-					outputText("  The pain as the deadly combination washes over you is indescribable.  It's a miracle that you endure it, and even Ember looks amazed to see you still standing.");
-					var damage:Number = 100 + rand(100);
-					damage = player.takeDamage(damage);
-					outputText(" (" + damage + ")");
+					if (player.findStatusAffect(StatusAffects.Blizzard) >= 0) {
+						player.addStatusValue(StatusAffects.Blizzard, 1, -1);
+						outputText("  The pain as the deadly combination washes over you is indescribable.  Despite it wasn't pure fire attack surrounding you blizzard still managed to block prt of it power and you endure it somehow making even Ember looks amazed to see you still standing. ");
+						var damage2:Number = 70 + rand(70);
+						if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0 || player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 1.6;
+						damage2 = player.takeDamage(damage2, true);
+					}
+					else {
+						outputText("  The pain as the deadly combination washes over you is indescribable.  It's a miracle that you endure it, and even Ember looks amazed to see you still standing. ");
+						var damage:Number = 100 + rand(100);
+						if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0 || player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 1.6;
+						damage = player.takeDamage(damage, true);
+					}
 				}
 			}
 			combatRoundOver();
@@ -76,7 +85,7 @@ package classes.Scenes.NPCs
 				return;
 			}
 			outputText("Ember suddenly spins on "+ emberMF("his","her") + " heel, the long tail that splays behind " + emberMF("him","her") + " lashing out like a whip.  As it hurtles through the air towards you, your attention focuses on the set of spikes suddenly protruding from its tip!");
-			if(combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect() || rand(2) == 0) {
+			if(player.getEvasionRoll() || rand(2) == 0) {
 				outputText("  You ");
 				if(rand(2) == 0) outputText("duck under");
 				else outputText("leap over");
@@ -84,9 +93,8 @@ package classes.Scenes.NPCs
 			}
 			else {
 				var damage:int = int((str + weaponAttack + 100) - rand(player.tou) - player.armorDef);
-				outputText("  The tail slams into you with bone-cracking force, knocking you heavily to the ground even as the spines jab you wickedly.  You gasp for breath in pain and shock, but manage to struggle to your feet again.");
-				damage = player.takeDamage(damage);
-				outputText(" (" + damage + ")");
+				outputText("  The tail slams into you with bone-cracking force, knocking you heavily to the ground even as the spines jab you wickedly.  You gasp for breath in pain and shock, but manage to struggle to your feet again. ");
+				damage = player.takeDamage(damage, true);
 			}
 			combatRoundOver();
 		}
@@ -95,23 +103,26 @@ package classes.Scenes.NPCs
 		private function dragonFarce():void {
 			//Effect: Stuns the PC for one turn and deals some damage, not much though. (Note: PC's version of this does something different and Ember has no cooldown to use this again. Obviously do not spam or peeps will rage.)
 			//Description:
-			outputText("Ember bares "+ emberMF("his","her") + " teeth and releases a deafening roar; a concussive blast of force heads straight for you!");
-			outputText("  Try as you might, you can't seem to protect yourself; and the blast hits you like a stone, throwing you to the ground.");
-			if(player.findPerk(PerkLib.Resolute) < 0) {
-				outputText("  Your head swims - it'll take a moment before you can regain your balance.");
-				//Miss: You quickly manage to jump out of the way and watch in awe as the blast gouges into the ground you were standing on mere moments ago.
-				player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
+			outputText("Ember bares "+ emberMF("his","her") + " teeth and releases a deafening roar; a concussive blast of force heads straight for you!  ");
+			if (player.getEvasionRoll()) {
+				outputText("You quickly manage to jump out of the way and watch in awe as the blast gouges into the ground you were standing on mere moments ago.");
 			}
-			createStatusAffect(StatusAffects.StunCooldown,4,0,0,0);
-			var damage:Number = 10 + rand(10);
-			damage = player.takeDamage(damage);
-			outputText(" (" + damage + ")");
+			else {
+				outputText("Try as you might, you can't seem to protect yourself; and the blast hits you like a stone, throwing you to the ground. ");
+				if(player.findPerk(PerkLib.Resolute) < 0) {
+					outputText("Your head swims - it'll take a moment before you can regain your balance. ");
+					player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
+				}
+				createStatusAffect(StatusAffects.StunCooldown,4,0,0,0);
+				var damage:Number = 10 + rand(10);
+				damage = player.takeDamage(damage, true);
+			}
 			combatRoundOver();
 		}
 		
 		override protected function performCombatAction():void
 		{
-			if (lust >= 40) {
+			if (lust >= (eMaxLust() * 0.4)) {
 				emberReactsToLustiness();
 				return;
 			}
@@ -175,23 +186,30 @@ package classes.Scenes.NPCs
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
-			initStrTouSpeInte(75, 75, 75, 75);
+			initStrTouSpeInte(100 + Math.floor(game.flags[kFLAGS.EMBER_AFFECTION] / 5), 90, 80 + Math.floor(game.flags[kFLAGS.EMBER_AFFECTION] / 5), 90);
 			initLibSensCor(50, 35, game.flags[kFLAGS.EMBER_COR]);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 30;
+			this.weaponAttack = 36 + (8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "scales";
-			this.armorDef = 40;
-			this.bonusHP = 600;
+			this.armorDef = 54 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusHP = 600 + (game.flags[kFLAGS.EMBER_AFFECTION] * 2);
+			this.bonusLust = 10 + (game.flags[kFLAGS.EMBER_AFFECTION] / 5);
 			this.lust = 20;
 			this.lustVuln = .25;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 15;
+			this.level = 20 + Math.round(game.flags[kFLAGS.EMBER_AFFECTION] / 20);
 			this.gems = 0;
 			this.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
 			this.horns = 4;
 			this.tailType = TAIL_TYPE_DRACONIC;
-			this.drop = NO_DROP;
+			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);
+			this.str += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 2700;
 			checkMonster();
 		}
 		

@@ -1,12 +1,11 @@
 :user_configuration
-
+set PAUSE_ERRORS=1
 :: Path to Flex SDK
-set FLEX_SDK=C:\Code\Flex_4_11
+set FLEX_SDK=%~dp0\..\..\..\..\Adobe_Flex_SDK
 set AUTO_INSTALL_IOS=yes
 
 :: Path to Android SDK
-set ANDROID_SDK=C:\Code\adt-32\sdk
-
+set ANDROID_SDK=C:\Users\Sylvain\AppData\Local\Android\sdk
 
 :validation
 if not exist "%FLEX_SDK%\bin" goto flexsdk
@@ -34,4 +33,3 @@ exit
 :succeed
 set PATH=%PATH%;%FLEX_SDK%\bin
 set PATH=%PATH%;%ANDROID_SDK%\platform-tools
-

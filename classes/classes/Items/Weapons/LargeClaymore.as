@@ -9,26 +9,14 @@ package classes.Items.Weapons
 	public class LargeClaymore extends Weapon {
 		
 		public function LargeClaymore() {
-			super("Claymor", "L.Claymore", "large claymore", "a large claymore", "cleaving sword-slash", 15, 1000, "A massive sword that a very strong warrior might use.  Requires 40 strength to use.  (ATK: 15) (Cost: 1000)", "Large");
+			super("Claymor", "L.Claymore", "large claymore", "a large claymore", "cleaving sword-slash", 15, 600, "A massive sword that a very strong warrior might use.  Requires 40 strength to use.", "Large");
 		}
 		
-		override public function canUse():Boolean {
-			if (game.player.str >= 40) return true;
-			outputText("You aren't strong enough to handle such a heavy weapon!  ");
-			return false;
+		override public function get attack():Number {
+			var boost:int = 0;
+			if (game.player.str >= 40) boost += 8;
+			return (7 + boost); 
 		}
 		
-/*
-		override public function canUse(player:Player, printReason:Boolean):Boolean
-		{
-			if (player.str < 40){
-				if (printReason){
-					clearOutput();
-					outputText("You aren't strong enough to handle such a heavy weapon!  ");
-				}
-				return false;
-			} else return true;
-		}
-*/
 	}
 }

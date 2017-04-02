@@ -1,6 +1,7 @@
 package classes.Scenes.Places.Owca
 {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class Farmers extends Monster
 	{
@@ -47,20 +48,30 @@ package classes.Scenes.Places.Owca
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
-			initStrTouSpeInte(40, 50, 99, 99);
+			initStrTouSpeInte(40, 120, 110, 100);
 			initLibSensCor(35, 35, 20);
 			this.weaponName = "pitchforks";
 			this.weaponVerb="stab";
+			this.weaponAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "chitin";
-			this.bonusHP = 500;
+			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusHP = 300;
+			this.bonusLust = 10;
 			this.lustVuln = 0;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 10;
-			this.gems = rand(25)+40;
+			this.level = 24;
+			this.gems = rand(50)+100;
 			this.hornType = HORNS_DEMON;
 			this.horns = 2;
 			this.tailType = TAIL_TYPE_DEMONIC;
 			this.drop = NO_DROP;
+			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.str += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 2430;
 			checkMonster();
 		}
 		

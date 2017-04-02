@@ -3,25 +3,50 @@ package classes.Scenes {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 //	import classes.Scenes.NPCs.*;
-
+	import classes.Items.*;
+	
 	public class Masturbation extends BaseContent {
 		
 		public function Masturbation() {}
 		
 		public function masturbateMenu():void {
 			menu();
-			if (player.hasCock() && (player.cocks[0].cockType == CockTypesEnum.BEE)) {
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				meditate();
+				return;
+			}
+			if (prison.inPrison && !prison.prisonCanMasturbate()) {
+				doNext(playerMenu);
+				return;
+			}
+			if (prison.inPrison && flags[kFLAGS.PRISON_PUNISHMENT] == 2) {
+				prison.punishments.prisonCaptorPunishmentConfinementMasturbate();
+				return;
+			}
+			if (player.hasCock() && (player.cocks[0].cockType == CockTypesEnum.BEE) && !fappingItems(false)) {
 				clearOutput();
 				outputText("Although your bee cock aches you know that there's no way for you to get relief on your own.  When you touch your shaft or think about cumming images of the bee girl and the sound of her hypnotic buzzing fill your mind.");
 				addButton(0, "Next", playerMenu);
+				if (player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY) || player.hasItem(consumables.SPHONEY)) {
+					outputText("\n\nFortunately, you could smear honey all over your " + player.cockDescript() + " and relieve yourself if you want to.");
+					addButton(1, "Use Honey", masturbateGo);
+				}
+				if (((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) {
+					outputText("\n\nYou could meditate to cleanse your urges.");
+					addButton(2, "Meditate", meditate);
+				}
 				return;
 			}
 			var button:int = 0;
 			
 			//FAP BUTTON GOAADFADHAKDADK
-			if ((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) {
+			if (((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) {
 				if (player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0)
-					addButton(button++,"Masturbate", masturbateGo);
+					addButton(button++, "Masturbate", masturbateGo);
+				else if (player.findPerk(PerkLib.Enlightened) >= 0 && (player.findPerk(PerkLib.HistoryReligious) < 0 || player.findPerk(PerkLib.PastLifeReligious) < 0)) {
+					addButton(button++, "Masturbate", masturbateGo);
+					addButton(button++, "Meditate", meditate);
+				}
 				else addButton(button++,"Meditate", meditate);
 			}
 			else addButton(button++,"Masturbate", masturbateGo);
@@ -31,6 +56,10 @@ package classes.Scenes {
 			}
 			if (player.hasVagina() && (player.findPerk(PerkLib.Flexibility) >= 0 || flags[kFLAGS.TIMES_AUTOFELLATIO_DUE_TO_CAT_FLEXABILITY] > 0)) {
 				addButton(button++, "Lick 'Gina", lickYerGirlParts);
+			}
+			//scylla
+			if (player.hasVagina() && player.isScylla()) {
+				addButton(button++, "Tentacle Fun", tentacleSelfFuck2);
 			}
 			if (player.tentacleCocks() > 0 && player.hasVagina()) {
 				addButton(button++, "Tentapussy", tentacleSelfFuck);
@@ -45,9 +74,9 @@ package classes.Scenes {
 				addButton(button++, "LayInTits", layEggsInYerTits);
 			}
 			if (fappingItems(false))
-				addButton(8 ,"Items", fappingItems);
+				addButton(13 ,"Items", fappingItems);
 			else if (button == 1) { //If you can only masturbate or meditate the normal way then do that automatically
-				if ((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) {
+				if (((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) {
 					if (player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0)
 						masturbateGo();
 					else meditate();
@@ -57,7 +86,7 @@ package classes.Scenes {
 				args = new Array();
 				return;
 			}
-			addButton(9, "Back", playerMenu);
+			addButton(14, "Back", playerMenu);
 		}
 		
 		private function fappingItems(menus:Boolean = true):Boolean {
@@ -104,12 +133,138 @@ package classes.Scenes {
 			if (player.hasKeyItem("Dildo") >= 0) {
 				if (menus) addButton(button, "Anal Dildo", dildoButts);
 				button++;
-				if (player.hasVagina()) addButton(button, "Dildo", stickADildoInYourVagooSlut);
+				if (menus && player.hasVagina()) addButton(button, "Dildo", stickADildoInYourVagooSlut);
 			}
-			if (menus) addButton(9, "Back", masturbateMenu);
+			if (menus) addButton(14, "Back", masturbateMenu);
 			return button > 0;
 		}
-			
+		
+		//Generic stripping check.
+		public function doStripCheck():void 
+		{
+			if (player.hasVagina() && player.isScylla()) {
+				outputText("You take off your " + player.armorName + " and sit on the ground.", false);
+			}
+			//In Ingnam or not in cabin.
+			else if (flags[kFLAGS.IN_INGNAM] > 0 || flags[kFLAGS.CAMP_BUILT_CABIN] <= 0) {
+				if (player.cor < 15) {
+					outputText("You sheepishly find some rocks to hide in, where ", false);
+					if (player.armor == armors.GOOARMR) {
+						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("you remove your goo-soaked [lowerGarment] then ");
+						outputText("you reach your hand into your goo-covered groin.");
+					}
+					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("you reach for the intricately-decorated opening in your lethicite armor to access your groin.");
+					else outputText("you remove your " + player.armorName + "");
+					outputText("\n\n");
+				}
+				if (player.cor >= 15 && player.cor < 30) {
+					outputText("You make sure you are alone and ", false);
+					if (player.armor == armors.GOOARMR) {
+						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("you remove your goo-soaked [lowerGarment] then ");
+						outputText("you reach your hand into your goo-covered groin.");
+					}
+					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("you reach for the intricately-decorated opening in your lethicite armor to access your groin.");
+					else outputText("strip naked.");
+					outputText("\n\n");
+				}
+				if (player.cor >= 30 && player.cor < 60) {
+					outputText("You happily ", false);
+					if (player.armor == armors.GOOARMR) {
+						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and ");
+						outputText("reach your hand into your goo-covered groin");
+					}
+					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("reach for the intricately-decorated opening in your lethicite armor to access your groin.");
+					else outputText("remove your " + player.armorName + "");
+					outputText(", eager to pleasure yourself.\n\n");
+				}
+				if (player.cor >= 60 && player.cor < 80) {
+					outputText("You ");
+					if (player.armor == armors.GOOARMR) {
+						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+						outputText("reach your hand into your goo-covered groin");
+					}
+					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("reach for the intricately-decorated opening in your lethicite armor to access your groin");
+					else outputText("strip naked in an exaggerated fashion");
+					outputText(", hoping someone might be watching.\n\n");
+				}	
+				if (player.cor >= 80) {
+					outputText("You ");
+					if (player.armor == armors.GOOARMR) {
+						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+						outputText("reach your hand into your goo-covered groin, ");
+					}
+					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("reach for the intricately-decorated opening in your lethicite armor to access your groin, ");
+					else {
+						outputText("strip naked, ");
+						
+					}
+					if (player.hasCock() || player.hasVagina()) outputText("fondling your naughty bits as you do so and ");
+					outputText("casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n");
+				}
+			}
+			else if (prison.inPrison) {
+				outputText("You walk to a secluded corner" + player.clothedOrNakedLower(", remove your [lowergarment]") + " and sit down. ");
+			}
+			//In cabin
+			else {
+				if (player.cor < 15) {
+					outputText("You sheepishly enter your cabin and make sure to close the cabin door and shutters of your window to ensure privacy. ", false);
+					if (player.armor == armors.GOOARMR) {
+						outputText("You ");
+						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+						outputText("reach your hand into your goo-covered groin");
+					}
+					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated opening in your lethicite armor to access your groin.");
+					else outputText("You then proceed to remove your " + player.armorName + ".");
+					outputText("\n\n");
+				}
+				if (player.cor >= 15 && player.cor < 30) {
+					outputText("You enter your cabin and close the door, forgetting to close the shutters. ", false);
+					if (player.armor == armors.GOOARMR) {
+						outputText("You ");
+						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+						outputText("reach your hand into your goo-covered groin");
+					}
+					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated opening in your lethicite armor to access your groin.");
+					else outputText("You then proceed to remove your " + player.armorName + ".");
+					outputText("\n\n");
+				}
+				if (player.cor >= 30 && player.cor < 60) {
+					outputText("You enter your cabin and leave the shutters open. ", false);
+					if (player.armor == armors.GOOARMR) {
+						outputText("You ");
+						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+						outputText("reach your hand into your goo-covered groin");
+					}
+					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated opening in your lethicite armor to access your groin.");
+					else outputText("You happily remove your " + player.armorName + ".");
+					outputText("\n\n");
+				}
+				if (player.cor >= 60 && player.cor < 80) {
+					outputText("You enter your cabin and leave the shutters and door open, hoping someone might notice you. ", false);
+					if (player.armor == armors.GOOARMR) {
+						outputText("You ");
+						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+						outputText("reach your hand into your goo-covered groin");
+					}
+					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated opening in your lethicite armor to access your groin.");
+					else outputText("You eagerly remove your " + player.armorName + ".");
+					outputText("\n\n");
+				}	
+				if (player.cor >= 80) {
+					outputText("You enter your cabin and leave the shutters and door open. You move your bed so you're visible from the window, hopefully to draw someone's attention. ", false);
+					if (player.armor == armors.GOOARMR) {
+						outputText("You ");
+						if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("remove your goo-soaked [lowerGarment] and you ");
+						outputText("reach your hand into your goo-covered groin");
+					}
+					else if (player.armor == armors.LTHCARM && player.lowerGarment.name == "nothing") outputText("You reach for the intricately-decorated opening in your lethicite armor to access your groin.");
+					else outputText("You eagerly remove your " + player.armorName + " in an exaggerated fashion.");
+					outputText("\n\n");
+				}
+			}
+		}
+		
 		//Non-shitty masturbation
 		public function masturbateGo():void {
 			clearOutput();
@@ -118,35 +273,40 @@ package classes.Scenes {
 				doNext(playerMenu);
 				return;
 			}
-			if (player.hasCock() && (player.cocks[0].cockType == CockTypesEnum.BEE)) {
+			if (player.hasCock() && (player.cocks[0].cockType == CockTypesEnum.BEE) && !inDungeon) {
 				outputText("Although your bee cock aches you know that there's no way for you to get relief on your own.  When you touch your shaft or think about cumming images of the bee girl and the sound of her hypnotic buzzing fill your mind.");
 				doNext(playerMenu);
 				return;
 			}
-			if (inDungeon) {
+			if (inDungeon && kGAMECLASS.dungeonLoc != -10) {
 				outputText("There is no way you could get away with masturbating in a place like this!  You'd better find your way back to camp if you want to take care of that.");
 				doNext(playerMenu);
 				return;		
 			}
-			if (player.isTaur()) {
-				if (centaurMasturbation())
+			if (player.isTaur() && !player.isScylla()) {
+				if (centaurMasturbation()) {
+					flags[kFLAGS.TIMES_MASTURBATED]++;
 					doNext(camp.returnToCampUseOneHour);
+				}
 				else doNext(playerMenu);
 				return;
 			}
 			if (player.gender == 0) {
 				genderlessMasturbate();
+				flags[kFLAGS.TIMES_MASTURBATED]++;
 				dynStats("lus", -50);
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
 			if (player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) {
+				flags[kFLAGS.TIMES_MASTURBATED]++;
 				if (player.isNaga() && rand(2) == 0 && player.statusAffectv1(StatusAffects.Exgartuan) == 1)
 					getGame().exgartuan.exgartuanNagaStoleMyMasturbation();
 				else getGame().exgartuan.exgartuanMasturbation();
 				return;
 			}
 			if (player.countCockSocks("gilded") > 0 && flags[kFLAGS.GILDED_JERKED] < player.countCockSocks("gilded")) {
+				flags[kFLAGS.TIMES_MASTURBATED]++;
 				gildedCockTurbate();
 				return;
 			}
@@ -154,19 +314,17 @@ package classes.Scenes {
 			var hermtastic:Boolean = false;
 			var nippleFuck:Boolean = false;
 			//Early prep
-			if (player.cor < 15)
-				outputText("You sheepishly find some rocks to hide in, where you remove your clothes.\n\n");
-			else if (player.cor < 30)
-				outputText("You make sure you are alone and strip naked.\n\n");
-			else if (player.cor < 60)
-				outputText("You happily remove your " + player.armorName + ", eager to pleasure yourself.\n\n");
-			else if (player.cor < 80)
-				outputText("You strip naked in an exaggerated fashion, hoping someone might be watching.\n\n");
-			else outputText("You strip naked, fondling your naughty bits as you do so and casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n");
+			doStripCheck();
 			//Tit foreplay
 			titForeplay();
 			//Touch our various junks
 			if (player.cocks.length > 0) {
+				if (player.cocks[0].cockType == CockTypesEnum.BEE && (player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY) || player.hasItem(consumables.SPHONEY))) {
+					if (player.hasItem(consumables.BEEHONY)) player.consumeItem(consumables.BEEHONY, 1);
+					else if (player.hasItem(consumables.PURHONY)) player.consumeItem(consumables.PURHONY, 1);
+					else if (player.hasItem(consumables.SPHONEY)) player.consumeItem(consumables.SPHONEY, 1);
+					outputText("You take out a vial of honey and smear it all over your bee cock. It feels great and the pain quickly recedes. ");
+				}
 				if (player.cocks.length == 1) {
 					outputText("You stroke your " + player.cockDescript());
 					if (player.lib < 45)
@@ -670,19 +828,7 @@ package classes.Scenes {
 		private function genderlessMasturbate():void {
 			clearOutput();
 			//Early prep
-			if (player.cor < 15)
-				outputText("You sheepishly find some rocks to hide in, where you remove your clothes.\n\n");
-			else if (player.cor < 30)
-				outputText("You make sure you are alone and strip naked.\n\n");
-			else if (player.cor < 60)
-				outputText("You happily remove your " + player.armorName + ", eager to pleasure yourself.\n\n");
-			else if (player.cor < 80)
-				outputText("You strip naked in an exaggerated fashion, hoping someone might be watching.\n\n");
-			else {
-				if (player.hasCock() || player.hasVagina())
-					outputText("You strip naked, fondling your naughty bits as you do so and casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n");
-				else outputText("You strip naked, casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n");
-			}
+			doStripCheck();
 			//Tit foreplay
 			titForeplay();
 			if (player.findStatusAffect(StatusAffects.FappedGenderless) < 0) { //first time as a genderless person
@@ -853,7 +999,7 @@ package classes.Scenes {
 				//Special extras if lactating
 				if (player.biggestLactation() > 1 && player.biggestLactation() < 2)
 					outputText("Droplets of milk dribble from each nipple, spattering milk onto your " + player.legs() + " and crotch.  ");
-				else if (player.biggestLactation() < 3)
+				else if (player.biggestLactation() < 3 && player.biggestLactation() >= 2)
 					outputText("Thin squirts of milk spray from each nipple, spattering milk onto your " + player.legs() + " and crotch.  ");
 				else if(player.biggestLactation() >= 3) outputText("A constant stream of milk drizzles from each teat, soaking your " + player.legs() + " and crotch.  ");
 			}
@@ -1616,6 +1762,10 @@ package classes.Scenes {
 						else if (player.cumQ() < 500)
 							outputText("Pulse after pulse of cum erupts from your " + player.cockDescript() + " into your mouth.  You swallow what you can but it's too much for you.  Cum runs down your cock to pool on you as your orgasm drags on.  ");
 						else outputText("Your orgasm never seems to end, and your world dissolves into the feelings from your " + player.cockDescript() + " as it erupts jet after jet of cum into your mouth.  You nearly gag, cum overflowing to spray out in a river, pooling around you.  ");
+						//Refill hunger!
+						if (player.cumQ() < 1000) player.refillHunger(player.cumQ() / 20);
+						else if (player.cumQ() < 3000) player.refillHunger(50 + ((player.cumQ() - 1000) / 40));
+						else player.refillHunger(100);
 					}
 					else if (nippleFuck) {
 						if (player.cumQ() < 25)
@@ -1634,7 +1784,8 @@ package classes.Scenes {
 						else if (player.cumQ() < 500)
 							outputText("Your body spasms powerfully, each spurt making you twitch more powerfully than the last.  Rope after rope of jizz rains down.  ");
 						else outputText("The orgasm never seems to end, and your world dissolves to little more than the feeling of each jet of cum erupting from your cock.  Your mind dimly processes the feeling of each burst splattering over you, but it only enhances the feeling.  ");
-					}			
+					}
+					if (player.armor == armors.GOOARMR) outputText("Your seed gets absorbed into your gooey covering.  ");
 				}
 				//MULTICOCK
 				if (player.cocks.length > 1) {
@@ -1643,7 +1794,7 @@ package classes.Scenes {
 					if (player.dogCocks() > player.normalCocks() && player.dogCocks() > player.horseCocks()) { //Primary Dog
 						var dogIndex:int;
 						for (dogIndex = 0; dogIndex < player.cocks.length; dogIndex++) {
-							if (player.cocks[dogIndex].cockType == CockTypesEnum.DOG) break;
+							if (player.cocks[dogIndex].hasKnot()) break;
 						}
 						outputText("Your feel your knots bulging and swelling, growing tighter and tighter until they're nearly double the width of a " + player.cockDescript(dogIndex) + ".  The agonizing pressure builds higher and tighter with every passing second as you get closer and closer to orgasm.  ");
 					}
@@ -1678,16 +1829,21 @@ package classes.Scenes {
 						else if (player.cumQ() < 500)
 							outputText("Pulse after pulse of cum erupts from your " + player.cockDescript() + " into your mouth.  You swallow what you can but it's too much for you.  Cum runs down your " + player.cockDescript() + " to pool on you as your orgasm drags on.  Jizz rains over you the entire time from the rest of your \"equipment\".");
 						else outputText("Your orgasm never seems to end, and your world dissolves into the feelings from your " + player.cockDescript() + " as it erupts jet after jet of cum into your mouth.  You nearly gag, cum overflowing to spray out in a river, pooling around you.  Your other 'equipment' rains jizz upon you the whole while, soaking you in a cum-puddle.");
+						//Refill hunger!
+						if (player.cumQ() < 1000) player.refillHunger(player.cumQ() / 20);
+						else if (player.cumQ() < 3000) player.refillHunger(50 + ((player.cumQ() - 1000) / 40));
+						else player.refillHunger(100);
 					}
 					//These seem like they should always be displayed regardless of other factors.		
-					if (player.cumQ() < 5)
+					if (player.cumQ() < 25)
 						outputText("A few thick spurts of cum burst from your cocks, splattering you liberally.  ");
-					else if (player.cumQ() < 7)
+					else if (player.cumQ() < 250)
 						outputText("The orgasm drags on and on, spurt after spurt of jism coating you from each cock.  ");
-					else if (player.cumQ() < 10)
+					else if (player.cumQ() < 500)
 						outputText("Your body spasms powerfully, each spurt making you twitch more powerfully than the last.  Rope after rope of jizz rains down as the orgasms from each of your members begin to overlap.  Your nearly black out in pleasure.  ");
 					else outputText("The orgasm never seems to end, and your world dissolves to little more than the feeling of multiple cum eruptions spurting from your pricks.  Your mind dimly processes the feeling of each burst splattering over you, but it only enhances the feeling.  ");
 				}
+				
 			}
 			//Vaginal CUMMING
 			if (player.vaginas.length > 0) {
@@ -1716,8 +1872,24 @@ package classes.Scenes {
 				//WHYYYYY
 				titCum(player.cumQ());
 			}
+			if (player.armor == armors.GOOARMR) {
+				var valeriaFluids:int = 0;
+				if (player.hasVagina()) {
+					if (player.vaginas[0].vaginalWetness >= 3) valeriaFluids += player.vaginas[0].vaginalWetness * 3;
+				}
+				if (player.hasCock()) {
+					if (player.cumQ() < 100) valeriaFluids += (player.cumQ() / 5);
+					else if (player.cumQ() >= 100 && player.cumQ() < 500) valeriaFluids += 20 + (player.cumQ() / 20);
+					else if (player.cumQ() >= 500 && player.cumQ() < 3500) valeriaFluids += 40 + (player.cumQ() / 50);
+					else if (player.cumQ() >= 3500) valeriaFluids += 100;
+				}
+				valeriaFluids += Math.sqrt(player.lactationQ());
+				kGAMECLASS.valeria.feedValeria(valeriaFluids);
+				if (valeriaFluids > 0) outputText("\"<i>Thanks for the fluids!</i>\" Valeria says.  ");
+			}
 			//DONE!
 			player.orgasm();
+			flags[kFLAGS.TIMES_MASTURBATED]++;
 			dynStats("sen", (-0.5));
 		}
 		
@@ -1734,9 +1906,15 @@ package classes.Scenes {
 				if (player.averageNippleLength() <=1) outputText("erect nipples, ");
 				if (player.averageNippleLength() > 1 && player.averageNippleLength() < 4) outputText("fat, puckered nipples, ");
 				if (player.averageNippleLength() >= 4) outputText("huge, swollen teats, ");
-				if (player.averageLactation() <= 2.6) outputText("spattering milk everywhere. ");
-				if (player.averageLactation() > 2.6 && player.averageLactation() < 3) outputText("covering everything nearby. ");
-				if (player.averageLactation() >= 3) outputText("drenching the entire area.");
+				if (player.armor == armors.GOOARMR) {
+					if (player.averageLactation() < 2.6) outputText("spattering milk into the goo.  ");
+					if (player.averageLactation() >= 2.6) outputText("stuffing the goo with your milk.  ");
+				}
+				else {
+					if (player.averageLactation() <= 2.6) outputText("spattering milk everywhere.  ");
+					if (player.averageLactation() > 2.6 && player.averageLactation() < 3) outputText("covering everything nearby.  ");
+					if (player.averageLactation() >= 3) outputText("drenching the entire area.  ");
+				}
 			}
 			//Cumming with Nipplecunts!
 			if (player.hasFuckableNipples()) {
@@ -1750,7 +1928,9 @@ package classes.Scenes {
 				if (player.averageVaginalWetness() >= 4) outputText("gush ");
 				//Lactating?
 				if (player.averageLactation() > 0) outputText("milk and ");
-				outputText("pussy juice everywhere.");
+				outputText("pussy juice ");
+				if (player.armor == armors.GOOARMR) outputText("into the blue goo covering your body.  ");
+				else outputText("everywhere.  ");
 			}
 		}
 		
@@ -1828,6 +2008,7 @@ package classes.Scenes {
 					else outputText("splattering himself with mouse-spunk as he finishes enjoying your inadvertent show.  He runs off before you have a chance to react.");
 				}
 				player.orgasm();
+				flags[kFLAGS.TIMES_MASTURBATED]++;
 				doNext(camp.returnToCampUseOneHour);
 				outputText("\n");
 				player.cuntChange(player.vaginalCapacity() * 0.9, true);
@@ -1855,12 +2036,11 @@ package classes.Scenes {
 			else if (player.cor > 66)
 				onaholeRepeatUse(true);
 			else onaholeRepeatUse(false);
-			
 			dynStats("sen", -.75);
 			onaholeContinuation();
 		}
 		
-		private function deluxeOnaholeUse():void {
+		public function deluxeOnaholeUse():void {
 			clearOutput();
 			//Flag after first use!
 			if (player.findStatusAffect(StatusAffects.DeluxeOnaholeUsed) < 0) {
@@ -1888,6 +2068,7 @@ package classes.Scenes {
 		}
 		
 		private function onaholeContinuation():void {
+			flags[kFLAGS.TIMES_MASTURBATED]++;
 			if (player.cocks.length > 1) {
 				if (player.gender == 3 && rand(2) == 0)
 					doNext(onaholeFutaContinuation);
@@ -1952,6 +2133,7 @@ package classes.Scenes {
 			}
 		
 			dynStats("lib", -1.5, "sen", .75, "cor", .5);
+			flags[kFLAGS.TIMES_MASTURBATED]++;
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1980,6 +2162,7 @@ package classes.Scenes {
 					dynStats("sen", -1);
 					doNext(camp.returnToCampUseOneHour);
 				}
+				flags[kFLAGS.TIMES_MASTURBATED]++;
 				player.cuntChange(1, true, true, false);
 			}
 		}
@@ -2018,6 +2201,7 @@ package classes.Scenes {
 					}
 				}
 			}
+			flags[kFLAGS.TIMES_MASTURBATED]++;
 			player.cuntChange(1, true);
 			player.slimeFeed();
 		}
@@ -2074,6 +2258,7 @@ package classes.Scenes {
 			}
 			//Stats & next event
 			//DONE!
+			flags[kFLAGS.TIMES_MASTURBATED]++;
 			player.orgasm();
 			dynStats("sen", -0.5);
 			doNext(camp.returnToCampUseOneHour);
@@ -2117,6 +2302,10 @@ package classes.Scenes {
 				}
 				else {
 					outputText(". Suddenly, a feeling of complete bliss takes over your body, and you start to squirm and writhe as cum shoots down your throat. You pull off of the tip and let the next burst hit your face. Soon, the torrent of cum subsides, though your hips are still jerking in the air from the intense orgasm. You take a moment to lie down properly and decide to take a small cat nap.");
+					
+				if (player.cumQ() < 1000) player.refillHunger(player.cumQ() / 20);
+				else if (player.cumQ() < 3000) player.refillHunger(50 + ((player.cumQ() - 1000) / 40));
+				else player.refillHunger(100);
 				}
 			}
 			//[Repeatable]
@@ -2167,22 +2356,32 @@ package classes.Scenes {
 					else {
 						outputText("This releases the pent - up pressure through your cock and down your throat. It's too much for you to handle; your cheeks fill up with cum and you pull your head back, making a loud popping sound when you finally free your mouth, as the cum pooled in your cheeks spills out all over your cock. Your cock spurts a few more lines of sperm onto your stomach. You stroke the exhausted member a few times, milking the last drops of cum out. Satisfying the final bits of lust, you lay down on the bedroll and fall into a short cat nap.");
 					}
+					
+					if (player.cumQ() < 1000) player.refillHunger(player.cumQ() / 20);
+					else if (player.cumQ() < 3000) player.refillHunger(50 + ((player.cumQ() - 1000) / 40));
+					else player.refillHunger(100);
 				}
 			}
 			//Stats & next event
 			//DONE!
+			flags[kFLAGS.TIMES_MASTURBATED]++;
 			player.orgasm();
 			dynStats("sen", (-0.5));
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
-		private function meditate():void {
+		public function meditate(description:String = "rock"):void {
 			clearOutput();
-			outputText("You find a flat, comfortable rock to sit down on and meditate.  As always, meditation brings a sense of peace and calm to you, but it eats up two hours of the day.");
-			
-			dynStats("lus", -50, "cor", -.3 - 0.3 * player.countCockSocks("alabaster"));
+			outputText("You find a flat, comfortable " + description + " to sit down on and meditate.  As always, meditation brings a sense of peace and calm to you, but it eats up ");
+			outputText("one hour");
+			//outputText("two hours");
+			outputText(" of the day.");
+			dynStats("lus", -50);
+			dynStats("cor", -.3 - 0.3 * player.countCockSocks("alabaster"));
 			if (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10) HPChange(50, true);
-			doNext(camp.returnToCampUseTwoHours);
+			fatigue( -10);
+			doNext(camp.returnToCampUseOneHour);//później z kolejnymi perkami jak bedzie zbijane wiecej lust naraz to wydłuży si czas medytacjo do 2h
+			//doNext(camp.returnToCampUseTwoHours);
 		}
 		
 		private function dualBeltMasturbation():void {
@@ -2203,7 +2402,9 @@ package classes.Scenes {
 			outputText("When you wake, the black latex is no longer covering your body and the belt is silent around your waist. Cum drips from the tip of your cock and the top part of your " + player.legs() + " are coated with your feminine juices. ");
 			if (player.biggestLactation() >= 2) outputText("Thin streams of creamy milk flow from your " + player.allBreastsDescript() + ", your torso and midsection dripping wet from the stuff. ");
 			outputText("Completely sated, you take off the belt, finding it slides off easily, and put it away in your campsite, eagerly awaiting the time you can next use it and have the suit work you over once more.");
-			dynStats("sen", -1, "lus", -300);
+			dynStats("sen", -1);
+			flags[kFLAGS.TIMES_MASTURBATED]++;
+			player.orgasm();
 			if (player.lib < 30) dynStats("lib", .5);
 			if (player.lib < 50) dynStats("lib", .5);
 			if (player.lib < 60) dynStats("lib", .5);
@@ -2898,6 +3099,22 @@ package classes.Scenes {
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
+		private function tentacleSelfFuck2():void {
+			clearOutput();
+			doStripCheck();
+			outputText("You attempt to reach for your sex using your hand when suddenly a crazy idea fills your mind. You don't actually need your hand to fuck yourself you got way better than that...actually eight time better!\n\n");
+			outputText("Positioning yourself so your " + vaginaDescript(0) + " point toward the sky you start to move your tentacles one by one toward your love hole.");
+			outputText(" Once comfortable you start by inserting one tentacle into your snatch pushing it as deep as you can. Since there's enough space in there for more you add a second one then a third. Before long six of your tentacle are inside of your " + vaginaDescript(0) + " filling you perfectly.");
+			outputText(" You proceed to grope your " + breastDescript(temp) + " with the two remaining tentacle squeezing them until thin squirts of milk spray from each nipple, spattering milk around. Now this is nice but this needs movement.");
+			outputText(" You start by squirting a little ink so to lube your limbs nicely then proceed to slowly fuck yourself squirming your tentacle inside your love canal in order to stimulate your clit and drive yourself completely nuts.");
+			outputText(" Wow this is better than what any of those tentacle beast out there can do heck you know where to wriggle those tentacle just so to drive you to the edge ramming your clitty with perfect precision!");
+			outputText(" Fucking yourself with abandon your black girlcum starts to rain on the ground until everywhere around you is entirely soaked but you don't care this feels way too good to stop.");
+			outputText(" For hour your lock yourself in constant bliss until after a number of incalculable consecutive orgasm you collapse to the ground exhausted and entirely drenched in black ink.\n\n");
+			outputText("You proceed to clean yourself up in the nearby stream then go lay down on the grass to dry drifting off into a quick nap.");
+			player.orgasm();
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
 		//Tentacle In Gina Faps.
 		//Normal intro.
 		//Segue into tentacle-faps.
@@ -2926,12 +3143,7 @@ package classes.Scenes {
 				temp++;
 			}
 			clearOutput();
-			if (player.cor < 15) outputText("You sheepishly find some rocks to hide in, where you remove your clothes.\n\n");
-			else if (player.cor < 30) outputText("You make sure you are alone and strip naked.\n\n");
-			else if (player.cor < 60) outputText("You happily remove your " + player.armorName + ", eager to pleasure yourself.\n\n");
-			else if (player.cor < 80) outputText("You strip naked in an exaggerated fashion, hoping someone might be watching.\n\n");
-			else outputText("You strip naked, fondling your naughty bits as you do so and casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n");
-			
+			doStripCheck();			
 			outputText("Almost immediately, your " + cockDescript(x) + " perks up like a pet expecting to be fed, and you have to admit that you plan to give that squirming tentacle exactly what it desires - a hot, slippery slit to nestle inside of.  Already, your [vagina] has grown ");
 			if (player.wetness() <= 2)
 				outputText("moist");
@@ -3097,16 +3309,7 @@ package classes.Scenes {
 			}
 			clearOutput();
 			//[Standard text for stripping off goes here]
-			if (player.cor < 15)
-				outputText("You sheepishly find some rocks to hide in, where you remove your clothes.\n\n");
-			else if (player.cor < 30)
-				outputText("You make sure you are alone and strip naked.\n\n");
-			else if (player.cor < 60)
-				outputText("You happily remove your " + player.armorName + ", eager to pleasure yourself.\n\n");
-			else if (player.cor < 80)
-				outputText("You strip naked in an exaggerated fashion, hoping someone might be watching.\n\n");
-			else outputText("You strip naked, fondling your naughty bits as you do so and casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n");
-			
+			doStripCheck();			
 			outputText("You eagerly reveal your flora pecker as it squirms and wriggles on its own, gently caressing the green surface here and there, its coloration changing as you tease yourself.  After toying with your tentacle dick for a while, you decide to get down to business; using your newly acquired shaft muscles, you expertly guide your ever-writhing " + player.cockDescript(tentacle) + " to your back, pointing it toward your buttocks.  You grind the tip against your [butt], making pre-cum flow from your mushroom-like head and smearing it against your " + player.skinFurScales() + ".  Using your own seminal fluid as a natural lube, you press the tip of your " + player.cockDescript(tentacle) + " in front of your own backdoor, stretching your anal opening little by little, careful not to tear your own insides.  This goes on for a while, until you suddenly lose all patience and roughly stuff your own " + player.cockDescript(tentacle) + " at full force inside your colon.");
 			//[anal tightness check]
 			player.buttChange(player.cockArea(tentacle), true, true, false);

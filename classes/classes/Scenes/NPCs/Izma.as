@@ -1,6 +1,7 @@
 package classes.Scenes.NPCs
 {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	/**
 	 * ...
@@ -72,13 +73,13 @@ package classes.Scenes.NPCs
 			if(damage < 0) damage = 0;
 			outputText("Izma ducks and jinks, working to close quarters, and clinches you. Unable to get your weapon into play, you can only ", false);
 			if(player.armorDef >= 10 || damage == 0) {
-				//(armor-dependent Health damage, fullplate, chain, scale, and bee chitin armor are unaffected, has a chance to inflict 'Bleed' damage which removes 2-5% of health for the next three turns if successful)
-				damage = player.takeDamage(damage);
+				//(armor-dependent Health damage, fullplate, chain, scale, and bee chitin armor are unaffected, has a chance to inflict 'Bleed' damage which removes 4-10% of health for the next three turns if successful)
 				outputText("writhe as she painfully drags the blades of her glove down your back", false);
 				player.createStatusAffect(StatusAffects.IzmaBleed,3,0,0,0);
 			}
 			else outputText("laugh as her blades scape uselessly at your armor-clad back", false);
-			outputText(" before breaking her embrace and leaping away. (" + damage + ")", false);
+			outputText(" before breaking her embrace and leaping away. ", false);
+			player.takeDamage(damage, true);
 		}
 		private function IzmaSpecials3():void {
 			outputText("Rather than move to attack you, Izma grins at you and grabs her breasts, massaging them as she caresses her long penis with one knee. Her tail thrashes and thumps the sand heavily behind her as she simulates an orgasm, moaning loudly into the air. The whole display leaves you more aroused than before.", false);
@@ -160,20 +161,27 @@ package classes.Scenes.NPCs
 			this.skinTone = "striped orange";
 			this.hairColor = "silver";
 			this.hairLength = 20;
-			initStrTouSpeInte(80, 90, 85, 65);
+			initStrTouSpeInte(100, 110, 106, 74);
 			initLibSensCor(75, 25, 40);
 			this.weaponName = "clawed gauntlets";
 			this.weaponVerb="clawed punches";
-			this.weaponAttack = 45;
+			this.weaponAttack = 45 + (10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "bikini and grass skirt";
-			this.armorDef = 8;
+			this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = 330;
+			this.bonusLust = 20;
 			this.lust = 20;
 			this.lustVuln = .20;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 15;
-			this.gems = rand(5) + 1;
+			this.level = 25;
+			this.gems = rand(15) + 10;
 			this.drop = NO_DROP;
+			this.str += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 31 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 4140;
 			checkMonster();
 		}
 		

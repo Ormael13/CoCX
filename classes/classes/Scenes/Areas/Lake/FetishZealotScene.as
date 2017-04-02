@@ -4,6 +4,7 @@
 package classes.Scenes.Areas.Lake
 {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Armors.LustyMaidensArmor;
 
 	public class FetishZealotScene extends AbstractLakeContent
@@ -54,8 +55,12 @@ package classes.Scenes.Areas.Lake
 				return;
 			}
 			player.changeStatusValue(StatusAffects.FetishOn, 1, 1);
-			outputText("", true);
+			clearOutput();
 			outputText("As you get close to your boat, you are surprised to find someone standing at the end of the dock.  As you get closer, you see that it's a man wearing some kind of bizarre religious outfit.  He turns to face you as you approach and says \"<i>This has been claimed by the Followers of the Fetish for security reasons, leave at once.</i>\"\n\n\"<i>What?  This is my boat!</i>\" you cry out in surprise.  The zealot seems to take this as an aggressive action on your part and moves to attack you.", false);
+			if (flags[kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_FETISHFOLLOWERS] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Followers of the Fetish!</b>")
+			}
 			//next button, go to zealot fight
 			startCombat(new FetishZealot());
 			spriteSelect(20);
@@ -65,7 +70,7 @@ package classes.Scenes.Areas.Lake
 //This is the regular pre combat text for wandering zealots (they'll be a regular mob at the swamp)
 		private function zealotRepeat():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("While exploring, you hear someone cry out behind you \"<i>This is sacred land!  You WILL be punished for trespassing!</i>\"  It seems you've managed to stumble upon whatever land this zealot has been tasked to guard, and now you must fight him.", false);
 			startCombat(new FetishZealot());
 			spriteSelect(20);
@@ -74,7 +79,8 @@ package classes.Scenes.Areas.Lake
 //Raping the player
 		public function zealotLossRape():void
 		{
-			outputText("", true);
+			if (doSFWloss()) return; //No rape in SFW mode.
+			clearOutput();
 			var broseph:String = player.mf("dude", "chick");
 			//Pre Rape Scene - lose by hp
 			if (player.HP < 1)
@@ -90,7 +96,7 @@ package classes.Scenes.Areas.Lake
 			//Set asside a varaible for this, its used a few times
 			if (broseph == "dude") {
 				//set the player's armor to their new male teacher outfit, see lower down for a full description.
-				if (player.armorValue <= 0) {
+				if (player.armor == armors.C_CLOTH) {
 					player.modArmorName = "formal vest, tie, and crotchless pants";  //can you think of a better way of putting this?
 				}
 				outputText("You smooth down your detached pants, and look at your exposed dick for a few moments, wondering if there was anything you said that may have upset him.  ", false);
@@ -98,7 +104,7 @@ package classes.Scenes.Areas.Lake
 			//no its a girl, or it looks like one
 			else {
 				//Set armour to female teacher outfit with no back side.
-				if (player.armorValue == 0) {
+				if (player.armor == armors.C_CLOTH) {
 					player.modArmorName = "backless female teacher's clothes";  // again, change this if you've got a better name
 				}
 				outputText("You smooth out your half-skirt, trying to busy yourself as you try to remember if there was anything you said to upset him.  ", false);
@@ -214,7 +220,7 @@ package classes.Scenes.Areas.Lake
 			player.orgasm();
 			dynStats("int", -1, "cor", 2);
 			//Trigger bad end if player's intelligence is less than 10 after being drained.
-			if (player.inte < 10) {
+			if (player.inte < 10 && rand(2) == 0) {
 				outputText("You find that your mind is unable to return to reality, and it moves on to another, then another.  Later you feel a female body come and pick you up, but you are too messed up to react to it...", false);
 				doNext(lake.fetishCultistScene.cultistBadEnd2);
 				return;
@@ -229,7 +235,7 @@ package classes.Scenes.Areas.Lake
 			//If there were changes to the player's chest
 			//same as cultist
 			//If armour is replaced
-			if (player.armorValue == 0) {
+			if (player.armor == armors.C_CLOTH) {
 				outputText("\n\nYou notice that you still have the " + player.armorName + " from the fantasy that your mind was trapped in, with no sign of your original clothes.", false);
 			}
 			//If armour is not replaced
@@ -247,7 +253,7 @@ package classes.Scenes.Areas.Lake
 			if (monster.HP < 1) outputText("The zealot collapses from his wounds, too hurt to continue controlling his powers.", false);
 			//Defeated by lust
 			else outputText("The zealot quivers for a moment before collapsing, his desires becoming too great for even him to control.", false);
-			if (player.lust >= 33 && player.gender > 0) {
+			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("\n\nDo you want to take advantage of his vulnerable state to sate your lusts?", false);
 				var bikiniTits:Function = null;
 				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster);
@@ -260,7 +266,7 @@ package classes.Scenes.Areas.Lake
 //Raped by the player
 		private function zealotWinRape():void
 		{
-			outputText("", true);
+			clearOutput();
 			//Religious Costume Rape
 			outputText("The zealot's attire seems to have settled on an outfit similar to those commonly worn by members of religious orders, though you aren't too surprised to see that it has a slit running down the front and back of the outfit that gives you full access to his sizable cock and asshole.\n\n", false);
 			//If player has a dick, chose one of these at random if the player has both

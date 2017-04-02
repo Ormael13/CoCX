@@ -3,6 +3,7 @@
 	import classes.*;
 	import classes.Scenes.Areas.HighMountains.Harpy;
 	import classes.internals.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	/**
 	 * ...
@@ -224,6 +225,12 @@
 				//compulsion
 				special3 = sophieCompulsionAttack;
 			}
+			select = rand(4);
+			if (select == 0) {
+				eAttack();
+				combatRoundOver();
+				return;
+			}
 			if (player.hasCock() && findStatusAffect(StatusAffects.BimboBrawl) < 0) rando = 1 + rand(3);
 			else rando = 1 + rand(2);
 			if (rando == 1) special1();
@@ -276,25 +283,32 @@
 			this.skinDesc = "feathers";
 			this.hairColor = "pink";
 			this.hairLength = 16;
-			initStrTouSpeInte(55, 40, 110, 60);
+			initStrTouSpeInte(80, 70, 130, 80);
 			initLibSensCor(60, 50, 60);
 			this.weaponName = "talons";
 			this.weaponVerb="slashing talons";
-			this.weaponAttack = 20;
+			this.weaponAttack = 40 + (9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "feathers";
-			this.armorDef = 5;
-			this.bonusHP = 250;
+			this.armorDef = 10 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusHP = 300;
+			this.bonusLust = 20;
 			this.lust = 10;
 			this.lustVuln = .3;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 11;
-			this.gems = 20 + rand(25);
+			this.level = 22;
+			this.gems = 40 + rand(45);
 			this.drop = new ChainedDrop().add(armors.W_ROBES,1/10)
 					.elseDrop(consumables.GLDSEED);
 			this.wingType = WING_TYPE_HARPY;
 			this.wingDesc = "large feathery";
 			this.special1 = harpyUberCharge;
 			this.special2 = harpyTease;
+			this.str += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 23 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 2520;
 			checkMonster();
 		}
 

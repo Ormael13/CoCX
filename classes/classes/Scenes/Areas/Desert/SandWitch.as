@@ -2,6 +2,7 @@
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.*;
 
 	public class SandWitch extends Monster
 	{
@@ -14,7 +15,7 @@
 				player.removeStatusAffect(StatusAffects.StoneLust);
 			}
 			
-			if (player.lust >= 33){
+			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0){
 				game.desert.sandWitchScene.beatSandwitch();
 			} else {
 				game.finishCombat();
@@ -35,14 +36,14 @@
 			outputText("The sand witch points at you, drawing a circle in the air and mouthing strange words.\n\n");
 			if (player.findStatusAffect(StatusAffects.StoneLust) >= 0) {
 				outputText("The orb inside you grows warm, almost hot, suffusing your body with heat and arousal.  ");
-				game.dynStats("lus", 8 + int(player.sens) / 10);
+				game.dynStats("lus", 4 + int(player.sens) / 10);
 			}
 			else {
 				outputText("You feel the sands shift by your " + player.feet() + ", and look down to see something slip out of the sands and into your clothes!  It feels incredibly smooth and circular as it glides upward along your " + player.leg() + ", its progress unaffected by your frantic effort to dislodge it.  ");
 				if (player.vaginas.length > 0) outputText("It glides up your thighs to the entrance of your sex, and its intentions dawn on you!\n\nToo late! You reach to stop it, but it pushes against your lips and slips inside your " + vaginaDescript(0) + " in an instant.  You groan in frustration as it begins pulsing and vibrating, sometimes even seeming to change size.");
 				else outputText("It glides up your thighs, curving around your buttocks, and its intentions dawn on you.\n\nYou desperately grab for it, but are too late!  It pushes firmly against your rectum and slips inside instantaneously.  You groan in frustration as it begins pulsing and vibrating, sometimes even seeming to change size.");
 				player.createStatusAffect(StatusAffects.StoneLust, 0, 0, 0, 0);
-				game.dynStats("lus", 4 + int(player.sens) / 10);
+				game.dynStats("lus", 2 + int(player.sens) / 10);
 			}
 			doNext(game.playerMenu);
 		}
@@ -70,15 +71,18 @@
 			this.skinTone = "bronzed";
 			this.hairColor = "sandy-blonde";
 			this.hairLength = 15;
-			initStrTouSpeInte(25, 25, 35, 45);
+			initStrTouSpeInte(30, 45, 35, 45);
 			initLibSensCor(55, 40, 30);
 			this.weaponName = "kick";
 			this.weaponVerb="kick";
+			this.weaponAttack = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "robes";
-			this.bonusHP = 20;
+			this.armorDef = 2 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusHP = 100;
+			this.bonusLust = 20;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
-			this.level = 3;
+			this.level = 7;
 			this.gems = rand(15) + 5;
 			this.drop = new WeightedDrop().addMany(1,
 					consumables.TSCROLL,
@@ -91,6 +95,12 @@
 			this.special1 = lustMagicAttack;
 			this.special2 = special2;
 			this.special3 = special3;
+			this.str += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 420;
 			checkMonster();
 		}
 

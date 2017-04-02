@@ -38,6 +38,10 @@
 			spriteSelect(50);
 			clearOutput();
 			outputText("A strange woman seems to appear from the dunes themselves.  She identifies herself as a sand witch, and politely asks if she can cast a spell on you.");
+			if (flags[kFLAGS.CODEX_ENTRY_SANDWITCHES] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_SANDWITCHES] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Sand Witches!</b>\n\n")
+			}
 			if (player.statusAffectv1(StatusAffects.Exgartuan) == 1 && player.cockArea(0) > 100 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) {
 				outputText("\n\nThe " + player.armorName + " covering your lower half hits the ground, as if yanked down by magic.  Your " + cockDescript(0) + " pulsates darkly, growing rigid in seconds as the demon within you takes over.  It barks, \"<i>Fuck, how about I cast my spell on you baby?</i>\"\n\n");
 				outputText("The sandwitch ");
@@ -124,7 +128,7 @@ internal function sandwitchRape():void {
 	spriteSelect(50);
 	player.clearStatuses(false);
 	//LUST DEFEAT
-	if(player.lust > 99) {
+	if(player.lust >= player.maxLust()) {
 		//BAD END START
 		if(player.biggestTitSize() >= 9 && player.biggestLactation() >= 3 && player.cor >= 25) {
 			outputText("Overwhelmed by the intense pleasure caused by the vibrating sphere inside your body, you fall to your knees.\n\nYou whimper pathetically, desperate to cum, as the Sand Witch steps nearer to you and gently strokes your face. She smiles cruelly and lets her hands drop down to your chest, then tears your top away, letting your huge breasts bounce free. The mysterious woman firmly rubs and kneads them, making you gasp and writhe, until she starts lightly flicking your painfully hard nipples. You edge closer and closer to orgasm, panting like a whore while the witch teases you with her hands and magic.\n\n", true);
@@ -238,8 +242,8 @@ private function sandWitchBadEndPartThree():void {
 //Sandwitch gets raped
 private function sandwitchRaped():void {
 	spriteSelect(50);
-	outputText("", true);
-	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
+	clearOutput();
+	if(player.isTaur()) {
 		doNext(camp.returnToCampUseOneHour);
 		sandwitchCentaurBoning();
 		cleanupAfterCombat();
@@ -299,20 +303,21 @@ private function sandwitchRaped():void {
 
 private function sandwitchBewbs():void {
 	spriteSelect(50);
-	outputText("", true);
+	clearOutput();
 	outputText("You move yourself atop the defeated sand witch, and bring your lips to her breasts.  The moment the first drop of milk touches your tongue, you drink, hungrily, needfully, demandingly. You grope and massage her breasts as she leans back and cries out, her eyes wide in surprise. You guzzle and drink her sweet cream, the small seedlings underneath you appearing to rustle and move as you drink the alabaster flow once intended for the desert sands.  ", false);
 	outputText("Warmth fills your gluttonous belly, and the sand witch places a hand to your stomach, rubbing it lightly as you drink from her breasts, moving on when the one you're drinking from is drained.  ", false);
 	outputText("You burp, and flush scarlet, but the sand witch lays a hand against your face, leans close, and kisses your lips sweetly. Her tongue snakes out and dives into your mouth. She pulls your face against hers, grinding her breasts against your chest. You can feel fresh milk dribbling against your " + player.skinDesc + " and the scents are driving you wild with lust.  ", false);
 	outputText("She breaks the kiss and smiles at you, whispering. Your eyes slowly close as you grow drowsy; you realize too late that she's casting a spell. You fall asleep, the sand witch's milk in your stomach churning, gurgling.  ", false);
 	outputText("You wake up in the desert, immediately grabbing at your body to see if anything's changed...", false);
 	player.slimeFeed();
+	player.refillHunger(35);
 	dynStats("lus", 25);
 	cleanupAfterCombat();
 	outputText("\n", false);
 }
 private function sandwitchSex():void {
 	spriteSelect(50);
-	outputText("", true);
+	clearOutput();
 	outputText("With a charming, disarming smile, you reach between her legs and touch against the slick lips of her pussies. She has ", false);
 	if(player.cockTotal() > 1) outputText(num2Text(player.cockTotal()), false);
 	else outputText("two", false);
@@ -581,7 +586,7 @@ private function SWCentaurMore(argument:Number):Boolean {
 //Knot sand witch
 private function knotSandwitch():void {
 	spriteSelect(50);
-	outputText("", true);
+	clearOutput();
 	outputText("You press the tip of your " + cockDescript(0) + " at the entrance of her fragent flower.  It slides in, thanks to the pre already dribbling from your cock, your eyes rolling back in your head from the touch of her slippery folds.  You can't help but suddenly stab the length of your " + cockDescript(0) + " to the hilt within her, moaning as the tip pushes against her cervix.\n\n", false);
 	outputText("As your " + cockDescript(0) + " stirs within her, she begins to push back, her velvet walls gripping you tightly as you get a extra bit inside.  She pulls free and pounds in again, causing her to grunt from the force of your knot stretching her.  Your balls swing back and forth, slapping and bouncing against her ass in a delicious way.  You can feel the beginnings of the orgasm building within your loins, pulsing up through the tip of your " + cockDescript(0) + ". As the pleasure increases, your body readies itself for the spill, and your knot begins to swell.  ", false);
    outputText("You begin to buck into her at a frenzied pace, your body's need to release your motivation.  At first, your knot swelling is an extra sensation, a tightness that squeezes deliciously as more and more blood is forced inside by sheer stimulation.\n\n", false);
@@ -606,7 +611,7 @@ private function rapeSandwitchMultis():void {
 
 internal function beatSandwitch():void {
 	spriteSelect(50);
-	if(monster.lust > 99) outputText("You smile in satisfaction as the " + monster.short + " drops down on all fours and begins masturbating feverishly.  Sadly you realize your own needs have not been met.  Of course you could always fuck the horny witch...\n\nDo you rape her?", true);
+	if(monster.lust >= monster.eMaxLust()) outputText("You smile in satisfaction as the " + monster.short + " drops down on all fours and begins masturbating feverishly.  Sadly you realize your own needs have not been met.  Of course you could always fuck the horny witch...\n\nDo you rape her?", true);
 	else outputText("You smile in satisfaction as the " + monster.short + " drops down on all fours and struggles to rise.  Sadly you realize your own needs have not been met.  Of course, you could always fuck the witch...", true);
 	outputText("  Of course, just taunting, teasing, and humiliating her for her arrogance would be equally amusing, <b>but it would give her plenty of time to turn the tables...</b>");
 	var temp2:Function = null;
@@ -633,7 +638,7 @@ internal function beatSandwitch():void {
 //{Player selects [Use 3i@-]}
 private function missingoSex():void {
 	spriteSelect(50);
-	outputText("", true);
+	clearOutput();
 	outputText("You stride proudly towards your latest conquest, the prone witch starting at you with a look of pure and delightful helplessness. She backs away on all fours, but a simple \"Stop.\" uttered from your lips is enough to freeze her in place. You look do/n at her, your \" + multiCockDescript(0) + \" throbbing within your clothes. What clothes? Oh, those clothes th$t you happen to be tearing from your body, much to her dismay.\n\n", false);
 
 	outputText("Clearly, this bitch needs the dick. And you're just the ^&a*pion to give it to her. You lick your lips and drop to your @nees, taking hold of her le-s and forcibly spreading them apart. Looking down, you see that her body is quite ready for you, her exposed fuckhole pouted and moist. You cannot help but laugh a- the situation, the motions making your \" + multiCockDescript(0) + \" bounce in the open air as you co-vulse with laugh-er. Her res$$tance only serves to arouse you, making you savor that choice ass before you claim it for your own.\n\n", false);
@@ -651,7 +656,7 @@ private function missingoSex():void {
 //{Next Page}
 private function missingoSex2():void {
 	spriteSelect(50);
-	outputText("", true);
+	clearOutput();
 	outputText("Naturally, you %i-+. Hon-stly, her hole can't take such a pounding. You can tell t-is by looking at her prone,',, vulnerable body, #ipe for y-ur abuse. Your *i- isn't ev|n enough to do this! Your-i*))s fall short, landing i( the sand, splashing he- bo^y with a wave of the -tuff. She gasps in su!p!i!e, barely a?le to keep it from getting into h_r mouth. Her tits hardly fare as well, being coated genero_sly, ^er milk mi$ing w--h it. The resulting concocti@n sticks to her chest, leaving it quite the mess.\n\n", false);
 
 	outputText("\"I can't belie^e you just tried that.\" she says with a )_=f. \"You're goi(g to get and in all s))ts o& uncomfortable places ^& you ke-_p that up.\"\n\n", false);
@@ -665,7 +670,7 @@ private function missingoSex2():void {
 //{Next Page}
 private function missingoSex3():void {
 	spriteSelect(50);
-	outputText("", true);
+	clearOutput();
 	outputText("_at_r@_ly, you %i-+. Ho@-@@ly, her h_le c_n't take @_ch _ po_ndi_g. Yo_ can t_ll t-is b_ loo_ing _t her pr_ne,',, v@^@erable b@dy, #ipe _or y-ur a_use. Y_ur *i- isn't ev|n en_ug_ to do this! Y_ur-i*))s fall sho_t, la@d@ng i( the sa_d, sp_as_i_g he- bo^y wit@ a @ave @f the -tuff. She gasps in su!2!i!e, ba_el_ a?le to k_ep it fr_m g_tti_g into h_r m_uth. @er @it@ har_ly fa_e as well, bei@g c@_t_d ge_ero_sl_, ^er milk mi$ing w--h it. T_e re_ult_ng co@cocti@n sti-ks to her c_est, l@a_in@ it q_ite t_e m_s_.\n\n", false);
 	
 	outputText("\"@ @a@'t b@lie^e y_u j@st _rie_ th_t.\" s@e sa_s @?th a )_=f. \"Yo_'re @oi(g to g_t a_d in all s))ts o& u_c_mfo_table pla_es ^& yo_ ke-_p t@at u@.\"\n\n", false);
@@ -679,7 +684,7 @@ private function missingoSex3():void {
 //{Next Page}
 private function missingoSex4():void {
 	spriteSelect(50);
-	outputText("", true);
+	clearOutput();
 	outputText("_oo_o@_oo, ooo %o-+. oo@-@@oo, ooo o_oo o_o'o oooo @_oo _ oo_ooo_o. oo_ oo o_oo o-oo o_ ooo_ooo _o ooo oo_o,',, o@^@oooooo o@oo, #ooo _oo o-oo o_ooo. o_oo oo- ooo'o oo|o oo_oo_ oo oo oooo! o_oo-o*))o oooo ooo_o, oo@o@oo o( ooo oo_o, oo_oo_o_o oo- oo^o ooo@ o @ ooo@o ooo -oooo. ooo ooooo oo oo!2!o!o, oo_oo_ o?oo oo o_oo oo oo_o o_ooo_o oooo o_o o_ooo. @oo @oo@ ooo_oo oo_o oo oooo, ooo@o o@_o_o oo_oo_oo_, ^oo oooo oo$ooo o--o oo. o_o oo_ooo_oo oo@ooooo@o ooo-oo oo ooo o_ooo, l@o_oo@ oo o_ooo o_o o_o_.\n\n", false);
 	
 	outputText("\"@ @o@'o o@ooo^o o_o o@oo _ooo_ oo_o.\" o@o oo_o @?oo o )_=o. \"oo_'oo @oo(o oo o_o o_o oo ooo o))oo o& o_o_ooo_ooooo ooo_oo ^& oo_ oo-_o o@oo o@.\"\n\n", false);
@@ -692,7 +697,7 @@ private function missingoSex4():void {
 //{Next Page}
 private function missingoSex5():void {
 	spriteSelect(50);
-	outputText("", true);
+	clearOutput();
 	outputText("Yeah no, fuck this shit. Seriously. You grip your controller with a barely restrained fury, fighting the urge to throw it across the room in a fit. Taking a moment, you collect yourself, and test the game. Yep, totally unresponsive to your buttons now. Damn thing froze AGAIN.\n\n", false);
 
 	outputText("You sigh a defeated sigh and cut the power to your Super Fentendo. After removing your Corruption of Champions cartridge and inspecting it for damage, you flip it over and blow into the open end of it a few times. Crisp, clean blowing, from one end to the other. Thorough. Professional. These games should be proud to have you as their owner.\n\n", false);
@@ -713,7 +718,7 @@ private function missingoSex6():void {
 	cleanupAfterCombat();
 	hideUpDown();
 	statScreenRefresh();
-	outputText("", true);
+	clearOutput();
 	outputText("You successfully restore your game. Everything's intact. At least, you thought it was. You must have messed up the password somewhere along the line, but oddly enough, the only difference is the clock being set an hour ahead and a few extra gems and EXP in your pocket.\n\n", false);
 
 	outputText("It is like fucking christmas up in here.", false);
@@ -990,7 +995,7 @@ private function sandwitchSpanking():void {
 	if(monster.HP < 1) outputText("  You can't even stand up!");
 	else outputText("  You can't even stop masturbating, can you?");
 	outputText("</i>\"  You kick her hand away, and she tumbles down into a distraught heap, crying softly");
-	if(monster.lust > 99) outputText(" but still masturbating");
+	if(monster.lust >= monster.eMaxLust()) outputText(" but still masturbating");
 	outputText(".  It's time for some fun!");
 	outputText("\n\nYou grab the helpless witch and flop her onto her back.  She gasps, glaring defiantly up at you while her arms fold closed over the front of her robe, concealing what looks like four large tits beneath.  None of that!  You tickle her sides in a surprise attack, and she starts to laugh.  Then, you move your scurrying fingertips to her belly and down her thighs.  The spellcaster giggles uproariously and tries to bat your arms away, which gives you the opening you need.  You easily slide past her laughter-addled strikes to the course fabric of her brown robes, and with a quick flex of your muscles, you tear the fabric down the middle, exposing a sea of tanned breast-flesh capped with four prominent nipples.");
 	outputText("\n\n\"<i>Nooo,</i>\" the witch protests once her laughter dies down.  Smirking, you start to pinch and pull at her nipples, tweaking the tender nubs until drops of milk are rolling down all four of her ponderous jugs.  You milk her effortlessly, tugging and tweaking the teats idly while you ply her with questions, asking her if she has anything better to do than try to shove rocks up strangers' assholes.  Her tanned cheeks color in embarrassment, but she stays mute, glowering at you while you play with her nipples.");
@@ -1004,7 +1009,7 @@ private function sandwitchSpanking():void {
 	if(player.hasCock()) outputText("Worse still, [eachCock] is now unprotected and pressed against the rough stone by your body-weight.  It's less than pleasant.  ");
 	else if(player.hasVagina()) outputText("Worse still, your [vagina] is pressed up against the rough stone.  It's less than pleasant.  ");
 	outputText("You bristle at your helplessness");
-	if(player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.findPerk(PerkLib.Dragonfire) >= 0) outputText(", breathing out a gout of flame in rage, but you can't even direct the blast properly like this.  All it does is melt some of the sand below into glass");
+	if(player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.findPerk(PerkLib.DragonFireBreath) >= 0) outputText(", breathing out a gout of flame in rage, but you can't even direct the blast properly like this.  All it does is melt some of the sand below into glass");
 	else outputText(", but there's nothing you can do");
 	outputText(".  Fingers tickle the " + player.skin() + " of your bottom, and then, without warning, your [butt] is slapped!  The sound of the hit rings out across the desert, hard enough to make moisture bead at the corners of your eyes.");
 	outputText("\n\nThe smirking sorceress laughs, \"<i>You are too prideful for your own good.  Now, I will teach you respect for our order, one spank at a time.</i>\"  She doesn't even wait before hitting you again, bringing her hand down on your unprotected ass without hesitation.  You squirm from pain, trying to escape, to wiggle free, but there's no use - you're tied down with stone restraints that you can't hope to escape.  All you can do is writhe uselessly against your bindings while your [butt] is tanned bright red, tingling with residual pain even when it isn't being hit.");
@@ -1018,7 +1023,7 @@ private function sandwitchSpanking():void {
 	outputText(".  Bruised and orgasmed into exhaustion, you pass out in the sand with your [armor] around your ankles.  Maybe next time you won't waste your chances gloating.");
 	monster.lust = 98;
 	monster.HP = 2;
-	player.lust = 100;
+	player.lust = player.maxLust();
 	flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 	cleanupAfterCombat();
 	player.orgasm();

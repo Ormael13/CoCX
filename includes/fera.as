@@ -2,7 +2,7 @@
 //const PUMPKIN_FUCK_YEAR_DONE:int = 522;
 
 public function isHalloween():Boolean {
-	return ((date.date >= 28 && date.month == 9) || (date.date < 2 && date.month == 10));
+	return ((date.date >= 28 && date.month == 9) || (date.date < 2 && date.month == 10) || flags[kFLAGS.ITS_EVERY_DAY] > 0);
 }
 
 
@@ -31,7 +31,16 @@ public function pumpkinFuckEncounter():void {
 		outputText("\n\nOdd as it is, it doesn't seem to react as you look it over.  You avoid it, for now.");
 		doNext(camp.returnToCampUseOneHour);
 	}
-	else simpleChoices("Fuck It", fuck, "Mount It", mount, "", null, "", null, "No Way", camp.returnToCampUseOneHour);
+	simpleChoices("Fuck It", fuck, "Mount It", mount, "", null, "", null, "No Way", camp.returnToCampUseOneHour);
+	//addButton(3, "Smash It", pumpkinSmash);
+}
+
+//Unfinished scene.
+public function pumpkinSmash():void {
+	clearOutput();
+	outputText("You have no idea but to be safe, you pick up the pumpkin and throw the pumpkin at the tree, shattering the pumpkins into several pieces.");
+	outputText("\n\nAs you walk away, you are interrupted by someone.");
+	doNext(pumpkinFuckPartII);
 }
 
 //[HOLY SHIT YOU BE FUCKING A PUMPKIN]
@@ -45,7 +54,7 @@ public function pumpkinFuck():void {
 	if(player.balls > 0) outputText("balls deep ");
 	else outputText("hilt deep ");
 	outputText("or not.  Not that you mind - the swollen labia seem to be doing an adequate job of smooching all over your shaft as it passes through their glossy gates.");
-	if(player.cocks[0].cockLength >= 20) outputText("  After you've fed over a foot of your [cock biggest] into the gluttenous gourd, you briefly wonder where it's all going.  The pumpkin can't be more than a foot and a half across, yet it's sucking down the second foot now, and you have yet to hit any wall!  The suction suddenly increases, yanking you deeper, faster, and you forget all about the whys, whens, and whatevers.  It feels great.");
+	if(player.cocks[0].cockLength >= 20) outputText("  After you've fed over a foot of your [cock biggest] into the gluttonous gourd, you briefly wonder where it's all going.  The pumpkin can't be more than a foot and a half across, yet it's sucking down the second foot now, and you have yet to hit any wall!  The suction suddenly increases, yanking you deeper, faster, and you forget all about the whys, whens, and whatevers.  It feels great.");
 	outputText("\n\n");
 	if(player.balls > 0) outputText("Your [balls] slap");
 	else outputText("Your groin slaps");
@@ -119,8 +128,10 @@ public function pumpkinFuckPartIII():void {
 	outputText("\n\n\"<i>I went ahead and gave you your reward.  It seemed fitting to give you a little bit more 'juice', since that was how you saved me.  My hero,</i>\" Fera explains before giving you a chaste kiss on the lips.  \"<i>You'll find yourself cumming a little harder and recovering a little faster in the future.  Now go, take what you want from the weak.  Do not disappoint me.</i>\"");
 	outputText("\n\nFera disappears along with all the evidence of your encounter, her ruby lips hanging in the air for a split-second before fading as well.  You're left naked, alone with your discarded armor, lusts, and recently adjusted attitude.");
 	//(+30 corrution, Fera's Boon - Alpha gained)
-	outputText("\n\n(<b>Perk Gained: Fera's Boon - Alpha</b>)");
-	player.createPerk(PerkLib.FerasBoonAlpha,0,0,0,0);
+	if (player.findPerk(PerkLib.FerasBoonAlpha) < 0) {
+		outputText("\n\n(<b>Perk Gained: Fera's Boon - Alpha</b>)");
+		player.createPerk(PerkLib.FerasBoonAlpha,0,0,0,0);
+	}
 	dynStats("cor", 30);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -214,8 +225,10 @@ public function mountPumpkinsIII():void {
 	outputText("\n\nThe sultry orange-haired maiden pats your sloshing middle as the vines unwind, allowing you to stand on your own feet.  You go to wipe the cum from your nose and upper lip as soon as you're free.  It's dry.  Did any of that even happen?");
 	outputText("\n\n<i>\"I went ahead and gave you your reward.  It seemed fitting to enhance the power of your womb, since that was how you saved me.  My hero,\"</i> Fera explains before giving you a chaste kiss on the lips.  <i>\"You'll find yourself breeding easier and giving birth faster.  Now go, fill this world with strong offspring.  Do not disappoint me.\"</i>");
 	outputText("\n\nFera disappears along with all the evidence of your encounter, her ruby lips hanging in the air for a split-second before fading as well.  You're left naked, alone with your discarded armor, urge of release, and recently adjusted attitude.");
-	outputText("\n\n(<b>Perk Gained: Fera's Boon - Breeding Bitch</b>)");
-	player.createPerk(PerkLib.FerasBoonBreedingBitch,0,0,0,0);
+	if (player.findPerk(PerkLib.FerasBoonBreedingBitch) < 0) {
+		outputText("\n\n(<b>Perk Gained: Fera's Boon - Breeding Bitch</b>)");
+		player.createPerk(PerkLib.FerasBoonBreedingBitch,0,0,0,0);
+	}
 	dynStats("cor", 30);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -251,6 +264,7 @@ public function leaveFerasWonderland():void {
 //Explore Das Trees
 public function exploreFerasWonderland():void {
 	clearOutput();
+	awardAchievement("Fera's Wonderland", kACHIEVEMENTS.HOLIDAY_HALLOWEEN_II);
 	flags[kFLAGS.FERAS_GLADE_EXPLORED_YEAR] = date.fullYear;
 	outputText("Straightening to your full height, you take a few experimental sniffs and begin to walk back towards the middle of the meadow, brushing aside garish pink blooms that rise up past your waist.  That smell is getting stronger now.  How could you have missed it when you first arrived? It's heavenly, like a combination of every sweet treat you like with an undercurrent of passionate sexual musk blended in underneath.  You close in, " + player.mf("[hips] swaggering excitedly","[hips] sashaying excitedly") + ", " + player.skin() + " flushing.  A few baby blue sunflowers bump your shoulders as you muscle past them to hone in your new favorite aroma.  You've just got to know what bloom could possibly release such a heavenly scent!");
 	outputText("\n\nYou idly wonder what you would look like to any new arrivals, nose up and dragging you forward, almost like a fish on a hook, your body stumbling past chest-high blossoms that are nearly as wide as your shoulders.  A shadow dims the light as you pass under a massive flower-bulb that stretches thirty feet overhead, its petals folded into a familiar-looking, sealed sphere.  That doesn't stop it from dripping sweet-smelling nectar that reminds you vaguely of pussy for some reason, and you certainly don't notice the feet-shaped impressions that kick against the petals after you pass by.");
@@ -358,7 +372,7 @@ public function fuckDemCorruptFlowerLips():void {
 	outputText("\n\nThere isn't enough guidance in that question to rouse a response from your supine form, so Fera continues on, smiling all the while.  \"<i>Oh, I'm going to do it, [name].  You're going to do this for me.</i>\"  She idly slips a finger along the underside of [oneCock] and licks her lips.");
 	
 	//[next]
-	dynStats("lus=", 100);
+	dynStats("lus=", player.maxLust());
 	menu();
 	addButton(0,"Next",dickBoostingFuntimes);
 }
@@ -405,7 +419,9 @@ public function dickBoostingFuntimes():void {
 	}
 	player.orgasm();
 	dynStats("lib", 10, "cor", 5);
-	player.createPerk(PerkLib.FerasBoonSeeder,0,0,0,0);
+	if (player.findPerk(PerkLib.FerasBoonSeeder) < 0) {
+		player.createPerk(PerkLib.FerasBoonSeeder,0,0,0,0);
+	}
 	menu();
 	addButton(0,"Next",postSeederUpgrade);
 }
@@ -451,7 +467,7 @@ public function stickAStamenInIt():void {
 	outputText("?</i>\"");
 	outputText("\n\nWith the question asked, she awaits your slow-moving mind's answer.  No is not an option you're even capable of considering at this point.  Which do you want?");
 	//[Gape] [Tight] [Dick]
-	dynStats("lus=", 100, "cor", 2);
+	dynStats("lus=", player.maxLust(), "cor", 2);
 	menu();
 	addButton(0,"Gape",gapeMePleaseFera);
 	addButton(1,"Tight",tightLikeAToigar);
@@ -489,7 +505,9 @@ public function gapeMePleaseFera():void {
 	player.cuntChange(90000,true,true,false);
 	//(cum!)
 	//Minimum size to 4
-	player.createPerk(PerkLib.FerasBoonWideOpen,0,0,0,0);
+	if (player.findPerk(PerkLib.FerasBoonWideOpen) < 0) {
+		player.createPerk(PerkLib.FerasBoonWideOpen,0,0,0,0);
+	}
 	//Boost fertility by a bunch
 	player.fertility += 20;
 	if(player.fertility > 50) player.fertility = 50;
@@ -548,11 +566,13 @@ public function tightLikeAToigar():void {
 	player.orgasm();
 	dynStats("lib", 5, "sen", 20, "cor", 3);
 	//Maximum size to 2
-	player.createPerk(PerkLib.FerasBoonMilkingTwat,0,0,0,0);
+	if (player.findPerk(PerkLib.FerasBoonMilkingTwat) < 0) {
+		player.createPerk(PerkLib.FerasBoonMilkingTwat,0,0,0,0);
+	}
 	if(player.vaginas[0].vaginalLooseness > VAGINA_LOOSENESS_LOOSE) player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_LOOSE;
 	//Boost fertility a little
 	player.fertility += 10;
-	if(player.fertility >= 50) player.fertility = 50;
+	if(player.fertility < 50) player.fertility = 50;
 	//Raise wetness to at least 3.
 	if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLICK) player.vaginas[0].vaginalWetness =VAGINA_WETNESS_SLICK;
 	
@@ -590,7 +610,9 @@ public function growADickForFera():void {
 	player.cocks[0].cockLength = 10;
 	player.cocks[0].cockThickness = 2.5;
 	//Add five corruption.
-	player.createPerk(PerkLib.FerasBoonSeeder,0,0,0,0);
+	if (player.findPerk(PerkLib.FerasBoonSeeder) < 0) {
+		player.createPerk(PerkLib.FerasBoonSeeder,0,0,0,0);
+	}
 	menu();
 	genderCheck();
 	addButton(0,"Next",afterFeraGivesYouACawk);

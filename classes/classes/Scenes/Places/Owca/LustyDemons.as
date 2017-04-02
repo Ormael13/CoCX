@@ -4,18 +4,20 @@
 package classes.Scenes.Places.Owca
 {
 	import classes.*;
+	import classes.internals.WeightedDrop;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class LustyDemons extends Monster
 	{
 
 		override protected function performCombatAction():void
 		{
-			str = 40;
-			this.weaponAttack = 10;
+			str = 70;
+			this.weaponAttack = 14 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			createStatusAffect(StatusAffects.Attacks, 4, 0, 0, 0);
 			eAttack();
-			str = 80;
-			this.weaponAttack = 40;
+			str = 140;
+			this.weaponAttack = 56 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			eAttack();
 			combatRoundOver();
 		}
@@ -69,25 +71,39 @@ package classes.Scenes.Places.Owca
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
-			initStrTouSpeInte(80, 10, 10, 5);
-			initLibSensCor(50, 60, 100);
+			initStrTouSpeInte(180, 100, 10, 10);
+			initLibSensCor(120, 60, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
+			this.weaponAttack = 4 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "demonic skin";
+			this.armorDef = 8 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			//6 attacks: 5 from demons (10 damage each), 1 from Vapula (80 damage), 200 gems, 200 xp, 700 hp*/
-			this.bonusHP = 680;
+			this.bonusHP = 1200;
+			this.bonusLust = 350;
 			this.lust = 30;
 			this.lustVuln = .3;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 14;
-			this.gems = 150 + rand(100);
+			this.level = 28;
+			this.gems = 500 + rand(250);
 			this.special1 = game.packAttack;
 			this.special2 = game.lustAttack;
 			this.tailType = TAIL_TYPE_DEMONIC;
 			this.hornType = HORNS_DEMON;
 			this.horns = 2;
-			this.drop = NO_DROP;
+			this.drop = new WeightedDrop().
+					add(weapons.SUCWHIP,4).
+					add(armors.NURSECL,3).
+					add(armors.BONSTRP,2).
+					add(consumables.IMPFOOD, 1);
+			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			createStatusAffect(StatusAffects.Vapula,0,0,0,0);
+			this.str += 54 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 3780;
 			checkMonster();
 		}
 	}

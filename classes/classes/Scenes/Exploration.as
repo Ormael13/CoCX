@@ -6,6 +6,19 @@ package classes.Scenes
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.Areas.Beach;
+	import classes.Scenes.Areas.Beach.*;
+	import classes.Scenes.Areas.BlightRidge;
+	import classes.Scenes.Areas.BlightRidge.*;
+	import classes.Scenes.Areas.DeepSea;
+	import classes.Scenes.Areas.DeepSea.*;
+	import classes.Scenes.Areas.Ocean;
+	import classes.Scenes.Areas.Ocean.*;
+	import classes.Scenes.Dungeons.HiddenCave;
+	import classes.Scenes.NPCs.EvangelineFollower;
+	import classes.Scenes.Places.HeXinDao;
+	//import classes.Scenes.Areas.nazwa lokacji;
+	//import classes.Scenes.Areas.nazwa lokacji;
 	import classes.Scenes.Explore.ExploreDebug;
 	import classes.Scenes.Explore.Giacomo;
 	import classes.Scenes.Monsters.*;
@@ -13,7 +26,15 @@ package classes.Scenes
 	public class Exploration extends BaseContent
 	{
 		public var exploreDebug:ExploreDebug = new ExploreDebug();
-		public var giacomo:Giacomo = new Giacomo();
+		public var blightridge:BlightRidge = new BlightRidge();
+		public var beach:Beach = new Beach();
+		public var ocean:Ocean = new Ocean();
+		public var deepsea:DeepSea = new DeepSea();
+		//public var blightridge:BlightRidge = new BlightRidge();	//dla nowych lokacji
+		public var hexindao:HeXinDao = new HeXinDao();
+		public var hiddencave:HiddenCave = new HiddenCave();
+		public var TrueDemons:DemonScene = new DemonScene();
+		public var Evangeline:EvangelineFollower = new EvangelineFollower();
 
 		public function Exploration()
 		{
@@ -25,7 +46,7 @@ package classes.Scenes
 		//const BOG_EXPLORED:int = 1016;
 		public function doExplore():void
 		{
-			if (player.explored == 0) {
+			if (player.explored <= 0) {
 				outputText("You tentatively step away from your campsite, alert and scanning the ground and sky for danger.  You walk for the better part of an hour, marking the rocks you pass for a return trip to your camp.  It worries you that the portal has an opening on this side, and it was totally unguarded...\n\n...Wait a second, why is your campsite in front of you? The portal's glow is clearly visible from inside the tall rock formation.   Looking carefully you see your footprints leaving the opposite side of your camp, then disappearing.  You look back the way you came and see your markings vanish before your eyes.  The implications boggle your mind as you do your best to mull over them.  Distance, direction, and geography seem to have little meaning here, yet your campsite remains exactly as you left it.  A few things click into place as you realize you found your way back just as you were mentally picturing the portal!  Perhaps memory influences travel here, just like time, distance, and speed would in the real world!\n\nThis won't help at all with finding new places, but at least you can get back to camp quickly.  You are determined to stay focused the next time you explore and learn how to traverse this gods-forsaken realm.", true);
 				tryDiscover();
 				return;
@@ -40,28 +61,49 @@ package classes.Scenes
 				explorePageII();
 				return;
 			}
+			hideMenus();
 			menu();
-			addButton(0, "Explore", tryDiscover);
-			if (player.exploredDesert > 0) addButton(1, "Desert", kGAMECLASS.desert.exploreDesert);
-			if (player.exploredForest > 0) addButton(2, "Forest", kGAMECLASS.forest.exploreForest);
-			if (player.exploredLake > 0) addButton(3, "Lake", kGAMECLASS.lake.exploreLake);
+			addButton(0, "Explore", tryDiscover, null, null, null, "Explore to find new regions and visit any discovered regions.");
+			if (player.exploredForest > 0) addButton(1, "Forest", kGAMECLASS.forest.exploreForest, null, null, null, "Visit the lush forest. \n\nRecommended level: 1" + (player.level < 12 ? "\n\nBeware of Tentacle Beasts!" : "") + (debug ? "\n\nTimes explored: " + player.exploredForest : ""));
+			if (player.exploredLake > 0) addButton(2, "Lake", kGAMECLASS.lake.exploreLake, null, null, null, "Visit the lake and explore the beach. \n\nRecommended level: 1" + (player.level < 3 ? "\n\nLooks like it's still quiet here!" : "") + (debug ? "\n\nTimes explored: " + player.exploredLake : ""));
+			if (player.exploredDesert > 0) addButton(3, "Desert", kGAMECLASS.desert.exploreDesert, null, null, null, "Visit the dry desert. \n\nRecommended level: 5" + (debug ? "\n\nTimes explored: " + player.exploredDesert : ""));
+			
+			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(5, "Battlefield", battlefield.exploreBattlefield, null, null, null, "Visit the battlefield. \n\nRecommended level: 6" + (player.level < 18 ? "\n\nBut it's still too dangerous place to visit lightly!" : "") + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BATTLEFIELD] : ""));
+			if (player.exploredMountain > 0) addButton(6, "Mountain", kGAMECLASS.mountain.exploreMountain, null, null, null, "Visit the mountain. \n\nRecommended level: 10" + (debug ? "\n\nTimes explored: " + player.exploredMountain : ""));
+			if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0) addButton(7, "Plains", kGAMECLASS.plains.explorePlains, null, null, null, "Visit the plains. \n\nRecommended level: 14" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_PLAINS] : ""));
+			if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0) addButton(8, "Swamp", kGAMECLASS.swamp.exploreSwamp, null, null, null, "Visit the wet swamplands. \n\nRecommended level: 18" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_SWAMP] : ""));
+			
+			if (flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0) addButton(10, "Blight Ridge", blightridge.exploreBlightRidge, null, null, null, "Visit the corrupted blight ridge. \n\nRecommended level: 26" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] : ""));
+			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(11, "Glacial Rift", kGAMECLASS.glacialRift.exploreGlacialRift, null, null, null, "Visit the chilly glacial rift. \n\nRecommended level: 30" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] : ""));
+			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) addButton(12, "Volcanic Crag", kGAMECLASS.volcanicCrag.exploreVolcanicCrag, null, null, null, "Visit the infernal volcanic crag. \n\nRecommended level: 30" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] : ""));
+			
+			if (debug) addButton(9, "Debug", exploreDebug.doExploreDebug);
 			addButton(4, "Next", explorePageII);
-			if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0) addButton(5, "Plains", kGAMECLASS.plains.explorePlains);
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] > 0) addButton(6, "Swamp", kGAMECLASS.swamp.exploreSwamp);
-			if (player.findStatusAffect(StatusAffects.ExploredDeepwoods) >= 0) addButton(7, "Deepwoods", kGAMECLASS.forest.exploreDeepwoods);
-			if (player.exploredMountain > 0) addButton(8, "Mountain", kGAMECLASS.mountain.exploreMountain);
-			addButton(9, "Back", playerMenu);
+			addButton(14, "Back", playerMenu);
 		}
 
 		private function explorePageII():void
 		{
 			flags[kFLAGS.EXPLORATION_PAGE] = 2;
 			menu();
-			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(0, "High Mountain", kGAMECLASS.highMountains.exploreHighMountain);
-			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(1, "Bog", kGAMECLASS.bog.exploreBog);
-			addButton(4, "Previous", goBackToPageI);
-			if (debug) addButton(8, "Debug", exploreDebug.doExploreDebug);
-			addButton(9, "Back", playerMenu);
+			if (player.findStatusAffect(StatusAffects.ExploredDeepwoods) >= 0) addButton(0, "Deepwoods", kGAMECLASS.forest.exploreDeepwoods, null, null, null, "Visit the dark, bioluminescent deepwoods. \n\nRecommended level: 12" + (debug ? "\n\nTimes explored: " + player.statusAffectv1(StatusAffects.ExploredDeepwoods) : ""));
+			if (flags[kFLAGS.DISCOVERED_BEACH] > 0) addButton(1, "Beach", beach.exploreBeach, null, null, null, "Visit the sunny beach. \n\nRecommended level: 15" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BEACH] : ""));
+			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(2, "High Mountain", kGAMECLASS.highMountains.exploreHighMountain, null, null, null, "Visit the high mountains where basilisks and harpies are found. \n\nRecommended level: 20" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] : ""));
+			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(3, "Bog", kGAMECLASS.bog.exploreBog, null, null, null, "Visit the dark bog. \n\nRecommended level: 28" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.BOG_EXPLORED] : ""));
+			
+			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(5, "",	//Wuxia related area - ?latająca wyspa?
+			if (flags[kFLAGS.DISCOVERED_OCEAN] > 0) addButton(6, "Ocean", ocean.exploreOcean, null, null, null, "Explore the ocean surface. But beware of... sharks. \n\nRecommended level: 30" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OCEAN] : ""));
+			if (flags[kFLAGS.DISCOVERED_OCEAN] <= 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0) addButtonDisabled(6, "Ocean", "You need to find first some way to sail over the water surface to explore this area.");
+			//if (flags[kFLAGS.DISCOVERED_PIT] > 0) addButton(7, "Pit", kGAMECLASS.abyss.explorePit, null, null, null, "Visit the pit. \n\nRecommended level: 36" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_PIT] : ""));
+			
+			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(10, "",	//Wuxia related area - ?latająca wyspa?
+			if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.gillType != 0) addButton(11, "Deep Sea", deepsea.exploreDeepSea, null, null, null, "Visit the 'almost virgin' deep sea. But beware of... scyllas and krakens. \n\nRecommended level: 50" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
+			if (player.gillType == 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0) addButtonDisabled(11, "Deep Sea", "(Not yet ready to be unlockable - it wil happen after few more mod builds after 0.7c) Without any way to breathe underwater you can't explore this area!");
+			//if (flags[kFLAGS.DISCOVERED_ABYSS] > 0) addButton(12, "Abyss", kGAMECLASS.abyss.exploreAbyss, null, null, null, "Visit the abyss. \n\nRecommended level: 51" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_ABYSS] : ""));
+			
+			if (debug) addButton(4, "Debug", exploreDebug.doExploreDebug);
+			addButton(9, "Previous", goBackToPageI);
+			addButton(14, "Back", playerMenu);
 		}
 
 		private function goBackToPageI():void
@@ -69,8 +111,287 @@ package classes.Scenes
 			flags[kFLAGS.EXPLORATION_PAGE] = 1;
 			doExplore();
 		}
-
-
+		
+		public function genericGolGobImpEncounters(even:Boolean = false):void {
+			var impGobGol:Number = 5;
+			if (!even) {
+				if (player.totalCocks() > 0) impGobGol--;
+				if (player.hasVagina()) impGobGol++;
+				if (player.totalFertility() >= 30) impGobGol++;
+				if (player.cumQ() >= 200) impGobGol--;
+				if (player.findPerk(PerkLib.PiercedLethite) >= 0) {
+					if (impGobGol <= 3) impGobGol += 2;
+					else if (impGobGol < 7) impGobGol = 7;
+				}
+			}
+			//Imptacular Encounter
+			if (rand(10) < impGobGol) {
+				var impChooser:int = rand(100);
+				//Level modifier
+				if (player.level < 20) impChooser += player.level;
+				else impChooser += 20;
+				//Limit chooser ranges
+				if (impChooser > 100) impChooser = 100;
+				if (player.level < 8 && impChooser >= 40) impChooser = 39;
+				else if (player.level < 12 && impChooser >= 60) impChooser = 59;
+				else if (player.level < 16 && impChooser >= 80) impChooser = 79;
+				//Imp Lord
+				if (impChooser >= 50 && impChooser < 70) {
+					kGAMECLASS.impScene.impLordEncounter();
+					spriteSelect(29);
+					return;
+				}
+				//Imp Warlord
+				else if (impChooser >= 70 && impChooser < 90) {
+					kGAMECLASS.impScene.impWarlordEncounter();
+					spriteSelect(125);
+					return;
+				}
+				//Imp Overlord (Rare!)
+				else if (impChooser >= 90) {
+					kGAMECLASS.impScene.impOverlordEncounter();
+					spriteSelect(126);
+					return;
+				}
+				else {
+					outputText("An imp wings out of the sky and attacks!", true);
+					if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
+						flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
+						outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
+					}
+					startCombat(new Imp());
+					spriteSelect(29);
+				}
+				return;
+			}
+			//Encounter Gobbalin!
+			//Encounter Golemuuu!
+			else {
+				if (player.level >= 6 && rand(10) < 5) {
+					var golemChooser:int = rand(70);
+					//Limit chooser range
+					if (player.level < 12 && golemChooser >= 10) golemChooser = 9;
+					else if (player.level < 18 && golemChooser >= 20) golemChooser = 19;
+					else if (player.level < 24 && golemChooser >= 30) golemChooser = 29;
+					else if (player.level < 33 && golemChooser >= 40) golemChooser = 39;
+					else if (player.level < 42 && golemChooser >= 50) golemChooser = 49;
+					else if (player.level < 51 && golemChooser >= 60) golemChooser = 59;
+					//Improved dummy golem or golems
+					if (golemChooser >= 10 && golemChooser < 20) {
+						if (rand(4) < 2) {
+							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered improved dummy golems! You ready your " + player.weaponName + " for a fight!", true);
+							startCombat(new GolemsDummyImproved());
+							return;
+						}
+						else {
+							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved dummy golem! You ready your " + player.weaponName + " for a fight!", true);
+							startCombat(new GolemDummyImproved());
+							return;
+						}
+					}
+					//Advanced dummy golem or golems
+					if (golemChooser >= 20 && golemChooser < 30) {
+						if (rand(4) < 2) {
+							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered advanced dummy golems! You ready your " + player.weaponName + " for a fight!", true);
+							startCombat(new GolemsDummyAdvanced());
+							return;
+						}
+						else {
+							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered advanced dummy golem! You ready your " + player.weaponName + " for a fight!", true);
+							startCombat(new GolemDummyAdvanced());
+							return;
+						}
+					}
+					//Superior dummy golem or golems
+					if (golemChooser >= 30 && golemChooser < 40) {
+						if (rand(4) < 2) {
+							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered superior dummy golems! You ready your " + player.weaponName + " for a fight!", true);
+							startCombat(new GolemsDummySuperior());
+							return;
+						}
+						else {
+							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered superior dummy golem! You ready your " + player.weaponName + " for a fight!", true);
+							startCombat(new GolemDummySuperior());
+							return;
+						}
+					}
+					//Basic true golem or golems
+					if (golemChooser >= 40 && golemChooser < 50) {
+						if (rand(4) < 2) {
+							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered basic true golems! You ready your " + player.weaponName + " for a fight!", true);
+							startCombat(new GolemsTrueBasic());
+							return;
+						}
+						else {
+							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered basic true golem! You ready your " + player.weaponName + " for a fight!", true);
+							startCombat(new GolemTrueBasic());
+							return;
+						}
+					}
+					//Improved true golem or golems
+					if (golemChooser >= 50 && golemChooser < 60) {
+						if (rand(4) < 2) {
+							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered improved true golems! You ready your " + player.weaponName + " for a fight!", true);
+							startCombat(new GolemsTrueImproved());
+							return;
+						}
+						else {
+							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved true golem! You ready your " + player.weaponName + " for a fight!", true);
+							startCombat(new GolemTrueImproved());
+							return;
+						}
+					}
+					//Advanced true golem or golems
+					if (golemChooser >= 60) {
+						if (rand(4) < 2) {
+							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered advanced true golems! You ready your " + player.weaponName + " for a fight!", true);
+							startCombat(new GolemsTrueAdvanced());
+							return;
+						}
+						else {
+							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered advanced true golem! You ready your " + player.weaponName + " for a fight!", true);
+							startCombat(new GolemTrueAdvanced());
+							return;
+						}
+					}
+					//Dummy golem or golems
+					else {
+						if (rand(4) < 2) {
+							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered dummy golems! You ready your " + player.weaponName + " for a fight!", true);
+							if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] <= 0) {
+								flags[kFLAGS.CODEX_ENTRY_GOLEMS] = 1;
+								outputText("\n\n<b>New codex entry unlocked: Golems!</b>")
+							}
+							startCombat(new GolemsDummy());
+							return;
+						}
+						else {
+							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered dummy golem! You ready your " + player.weaponName + " for a fight!", true);
+							if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] <= 0) {
+								flags[kFLAGS.CODEX_ENTRY_GOLEMS] = 1;
+								outputText("\n\n<b>New codex entry unlocked: Golems!</b>")
+							}
+							startCombat(new GolemDummy());
+							return;
+						}
+					}
+				}
+				else {
+					var goblinChooser:int = rand(100);
+					//Level modifier
+					if (player.level < 20) goblinChooser += player.level;
+					else goblinChooser += 20;
+					//Limit chooser range
+					if (goblinChooser > 100) goblinChooser = 100;
+					if (player.level < 10 && goblinChooser >= 20) goblinChooser = 29;
+					else if (player.level < 12 && goblinChooser >= 60) goblinChooser = 49;
+					else if (player.level < 16 && goblinChooser >= 80) goblinChooser = 79;
+					//Goblin assassin!
+					if (goblinChooser >= 30 && goblinChooser < 50) {
+						kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
+						spriteSelect(24);
+						return;
+					}
+					//Goblin warrior! (Equal chance with Goblin Shaman)
+					else if (goblinChooser >= 50 && goblinChooser < 65) {
+						kGAMECLASS.goblinWarriorScene.goblinWarriorEncounter();
+						spriteSelect(123);
+						return;
+					}
+					//Goblin shaman!
+					else if (goblinChooser >= 65 && goblinChooser < 80) {
+						kGAMECLASS.goblinShamanScene.goblinShamanEncounter();
+						spriteSelect(124);
+						return;
+					}
+					//Goblin elder!
+					else if (goblinChooser >= 80) {
+						kGAMECLASS.goblinElderScene.goblinElderEncounter();
+						spriteSelect(122);
+						return;
+					}
+					if (player.gender > 0) {
+						outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud", "slut") + ".</i>\"", true);
+						if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
+							flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
+							outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
+						}
+						startCombat(new Goblin());
+						spriteSelect(24);
+						return;
+					}
+					else {
+						outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fuc-oh shit, you don't even have anything to play with!  This is for wasting my time!</i>\"", true);
+						if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
+							flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
+							outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
+						}
+						startCombat(new Goblin());
+						spriteSelect(24);
+						return;
+					}
+				}
+			}
+		}
+		public function genericImpEncounters2(even:Boolean = false):void {
+			//Imptacular Encounter
+			var impChooser:int = rand(100);
+			//Level modifier
+			if (player.level < 20) impChooser += player.level;
+			else impChooser += 20;
+			//Limit chooser ranges
+			if (impChooser > 100) impChooser = 100;
+			if (player.level < 16 && impChooser >= 75) impChooser = 74;
+			//Imp Warlord
+			if (impChooser >= 50 && impChooser < 75) {
+				kGAMECLASS.impScene.impWarlordEncounter();
+				spriteSelect(125);
+				return;
+			}
+			//Imp Overlord
+			else if (impChooser >= 75) {
+				kGAMECLASS.impScene.impOverlordEncounter();
+				spriteSelect(126);
+				return;
+			}
+			//Pack of Imps
+			else {
+				kGAMECLASS.impScene.impPackEncounter();
+				return;
+			}
+		}
+		public function genericDemonsEncounters1(even:Boolean = false):void {
+			//Imptacular Encounter
+			var demonChooser:int = rand(100);
+			//Succubus
+			//if (demonChooser >= 30 && demonChooser < 55) {
+			if (demonChooser >= 40 && demonChooser < 70) {
+				TrueDemons.SuccubusEncounter();
+				return;
+			}
+			//Incubus
+			//else if (demonChooser >= 55 && demonChooser < 80) {
+			else if (demonChooser >= 70) {
+				TrueDemons.IncubusEncounter();
+				return;
+			}
+			//Cow-Succubus
+			//else if (demonChooser >= 80 && demonChooser < 90) {
+				//startCombat(new CowSuccubus());
+				//return;
+			//}
+			//Mino-Incubus
+			//else if (demonChooser >= 90) {
+				//startCombat(new MinoIncubus());
+				//return;
+			//}
+			//Omnibus
+			else {
+				TrueDemons.OmnibusEncounter();
+				return;
+			}
+		}
+		
 		//Try to find a new location - called from doExplore once the first location is found
 		public function tryDiscover():void
 		{
@@ -78,19 +399,43 @@ package classes.Scenes
 			// kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
 			// return;
 
+			if (flags[kFLAGS.EVANGELINE_AFFECTION] < 1 && rand(3)) {
+				Evangeline.enterTheEvangeline();
+				return;
+			}
+			if (flags[kFLAGS.EVANGELINE_AFFECTION] == 2 && rand(6)) {
+				Evangeline.alternativEvangelineRecruit();
+				return;
+			}
+			if (player.level > 2 && player.hasKeyItem("Sky Poison Pearl") < 0 && flags[kFLAGS.SKY_POISON_PEARL] < 1 && rand(10)) {
+				pearldiscovery();
+				return;
+			}
+		//	if (player.level > 5 && flags[kFLAGS.HIDDEN_CAVE_FOUND] < 1 && rand(10)) {
+		//		hiddencavediscovery();
+		//		return;
+		//	}
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helFollower.followerHel()) {
 				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}
 			if (player.explored > 1) {
-				if (player.exploredLake == 0) {
-					outputText("Your wanderings take you far and wide across the barren wasteland that surrounds the portal, until the smell of humidity and fresh water alerts you to the nearby lake.  With a few quick strides you find a lake so massive the distant shore cannot be seen.  Grass and a few sparse trees grow all around it.\n\n<b>You have discovered the Lake!</b>", true);
+				
+				if (player.exploredForest <= 0) {
+					outputText("You walk for quite some time, roaming the hard-packed and pink-tinged earth of the demon-realm.  Rust-red rocks speckle the wasteland, as barren and lifeless as anywhere else you've been.  A cool breeze suddenly brushes against your face, as if gracing you with its presence.  You turn towards it and are confronted by the lush foliage of a very old looking forest.  You smile as the plants look fairly familiar and non-threatening.  Unbidden, you remember your decision to test the properties of this place, and think of your campsite as you walk forward.  Reality seems to shift and blur, making you dizzy, but after a few minutes you're back, and sure you'll be able to return to the forest with similar speed.\n\n<b>You've discovered the Forest!</b>", true);
+					player.exploredForest == 1;
+					player.exploredForest++;
+					doNext(camp.returnToCampUseOneHour);
+					return;
+				}
+				if (player.exploredLake <= 0) {
+					outputText("Your wanderings take you far and wide across the barren wasteland that surrounds the portal, until the smell of humidity and fresh water alerts you to the nearby lake.  With a few quick strides you find a lake so massive the distant shore cannot be seen.  Grass and a few sparse trees grow all around it.\n\n<b>You've discovered the Lake!</b>", true);
 					player.exploredLake = 1;
 					player.explored++;
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
-				if (player.exploredLake >= 1 && rand(3) == 0 && player.exploredDesert == 0) {
+				if (player.exploredLake >= 1 && rand(3) == 0 && player.exploredDesert <= 0) {
 					outputText("You stumble as the ground shifts a bit underneath you.  Groaning in frustration, you straighten up and discover the rough feeling of sand ", true);
 					if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("inside your footwear, between your toes", false);
 					if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("in your hooves", false);
@@ -102,14 +447,14 @@ package classes.Scenes
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
-				if (player.exploredDesert >= 1 && rand(3) == 0 && player.exploredMountain == 0) {
-					outputText("Thunder booms overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it.\n\n<b>You have discovered the mountain!</b>", true);
+				if (player.exploredDesert >= 1 && rand(3) == 0 && player.exploredMountain <= 0) {
+					outputText("Thunder booms overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it.\n\n<b>You've discovered the Mountain!</b>", true);
 					player.explored++;
 					player.exploredMountain = 1;
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
-				if (player.exploredMountain >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] == 0) {
+				if (player.exploredMountain >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] <= 0) {
 					flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
 					player.explored++;
 					outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>", true);
@@ -117,16 +462,80 @@ package classes.Scenes
 					return;
 				}
 				//EXPLOOOOOOORE
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] == 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && rand(3) == 0) {
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00272] = 1;
+				if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] <= 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && rand(3) <= 0) {
+					flags[kFLAGS.TIMES_EXPLORED_SWAMP] = 1;
 					player.explored++;
-					outputText("", true);
+					clearOutput();
 					outputText("All things considered, you decide you wouldn't mind a change of scenery.  Gathering up your belongings, you begin a journey into the wasteland.  The journey begins in high spirits, and you whistle a little traveling tune to pass the time.  After an hour of wandering, however, your wanderlust begins to whittle away.  Another half-hour ticks by.  Fed up with the fruitless exploration, you're nearly about to head back to camp when a faint light flits across your vision.  Startled, you whirl about to take in three luminous will-o'-the-wisps, swirling around each other whimsically.  As you watch, the three ghostly lights begin to move off, and though the thought of a trap crosses your mind, you decide to follow.\n\n", false);
 					outputText("Before long, you start to detect traces of change in the environment.  The most immediate difference is the increasingly sweltering heat.  A few minutes pass, then the will-o'-the-wisps plunge into the boundaries of a dark, murky, stagnant swamp; after a steadying breath you follow them into the bog.  Once within, however, the gaseous balls float off in different directions, causing you to lose track of them.  You sigh resignedly and retrace your steps, satisfied with your discovery.  Further exploration can wait.  For now, your camp is waiting.\n\n", false);
-					outputText("<b>You've discovered the swamp!</b>", false);
+					outputText("<b>You've discovered the Swamp!</b>", false);
 					doNext(camp.returnToCampUseTwoHours);
 					return;
 				}
+				//Discover Blight Ridge
+				if (flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] <= 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && rand(3) == 0) {
+					flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] = 1;
+					player.explored++;
+					clearOutput();
+					outputText("You wander around the mountain area thinking over this whole ‘demonic’ realm affair.  You're not sure how widespread this entire thing is, everything seems to be isolated to certain areas, you've only really seen the demons in small groups or alone, and even then it's usually comprised of imps.  As far as you know it IS a demonic realm so there should be some area where demons live normally, they can't all be hold up in lethice's stronghold right?  You question whether or not the demons could even hold together a city long enough before 'water' damage ruined the place.", false);
+					if (flags[kFLAGS.BAZAAR_ENTERED] > 0) outputText("  Then again you have been to that Bizarre Bazaar, they seem to exist there to an extent without any trouble...", false);
+					outputText("  As you think the random topic over in your head you spy a path you've never noticed before.\n\n", false);
+					outputText("Being the adventurous champion you are you start down the path, as you walk down this sketchy path, carved through a section of the mountain a ridge comes into view.  Walking onwards until you're at the ridge a somewhat would-be beautiful sight lies before you.\n\n", false);
+					if (player.cor < 66) {
+						outputText("That would be if it wasn't corrupted to all hell, the scent of sweat, milk and semen invade your nose as you peer across the corrupted glade.  And you thought that the main forest was bad.", false);
+						if (flags[kFLAGS.MET_MARAE] >= 1) outputText("  Gods... If Marae could see this.", false);
+						outputText("\n\n", false);
+					}
+					else if (player.cor >= 66) {
+						outputText("And it is!  Lush fields of corrupted glades consume the land, giving the heavy scent of sweat, milk and semen as you take a deep breath.  Taking it all in and relishing in the corruption.  Truly this is how the world should be.", false);
+						if (flags[kFLAGS.MET_MARAE] >= 1) outputText("  Heh, if Marae could see this she'd flip her shit.", false);
+						outputText("\n\n", false);
+					}
+					outputText("<b>You've discovered the Blight Ridge!</b>", false);
+					doNext(camp.returnToCampUseTwoHours);
+					return;
+				}				
+				//Discover Glacial Rift!
+				if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] <= 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && rand(4) <= 0) {
+					flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] = 1;
+					player.explored++;
+					clearOutput();
+					outputText("You walk for some time, roaming the hard-packed and pink-tinged earth of the demon-realm of Mareth. As you progress, a cool breeze suddenly brushes your cheek, steadily increasing in intensity and power until your clothes are whipping around your body in a frenzy. Every gust of wind seems to steal away part of your strength, the cool breeze having transformed into a veritable arctic gale. You wrap your arms around yourself tightly, shivering fiercely despite yourself as the hard pink dirt slowly turns to white; soon you’re crunching through actual snow, thick enough to make you stumble with every other step. You come to a stop suddenly as the ground before you gives way to a grand ocean, many parts of it frozen in great crystal islands larger than any city.\n\n", false);
+					outputText("<b>You've discovered the Glacial Rift!</b>", false);
+					doNext(camp.returnToCampUseTwoHours);
+					return;
+				}
+				//Discover Volcanic Crag!
+				if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] <= 0 && flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0 && rand(4) <= 0) {
+					flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] = 1;
+					player.explored++;
+					clearOutput();
+					outputText("You walk for some time, roaming the hard-packed and pink-tinged earth of the demon-realm of Mareth. As you progress, you can feel the air getting warm. It gets hotter as you progress until you finally stumble across a blackened landscape. You reward yourself with a sight of the endless series of a volcanic landscape. Crags dot the landscape.\n\n", false);
+					outputText("<b>You've discovered the Volcanic Crag!</b>", false);
+					doNext(camp.returnToCampUseTwoHours);
+					return;
+				}/*
+				//Discover Abyss
+				if (player.exploredMountain >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_ABYSS] <= 0 && flags[kGAMECLASS.dungeons.checkFactoryClear()] > 0 && (player.level >= 10) {
+					flags[kFLAGS.DISCOVERED_ABYSS] = 1;
+					player.explored++;
+					clearOutput();
+					outputText("You walk \n\n", false);
+					outputText("<b>You've discovered the Abyss!</b>", false);
+					doNext(camp.returnToCampUseTwoHours);
+					return;
+				}
+				//Discover Pit
+				if (player.exploredAbyss >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_PIT] <= 0 && (player.level >= 16) {
+					flags[kFLAGS.DISCOVERED_PIT] = 1;
+					player.explored++;
+					clearOutput();
+					outputText("You walk \n\n", false);
+					outputText("<b>You've discovered the Pit!</b>", false);
+					doNext(camp.returnToCampUseTwoHours);
+					return;
+				}
+				*/
 				//Used for chosing 'repeat' encounters.
 				var choosey:Number = rand(6);
 				//2 (gargoyle) is never chosen once cathedral is discovered.
@@ -138,7 +547,7 @@ package classes.Scenes
 				//Chance of encountering Giacomo!
 				if (choosey == 0) {
 					player.explored++;
-					giacomo.giacomoEncounter(); //eventParser(2015);
+					kGAMECLASS.giacomoShop.giacomoEncounter();
 					return;
 				}
 				else if (choosey == 1) {
@@ -152,47 +561,34 @@ package classes.Scenes
 					else kGAMECLASS.gargoyle.returnToCathedral();
 					return;
 				}
+				else if (choosey == 3 && flags[kFLAGS.PRISON_CAPTURE_COUNTER] < 1 && rand(4) == 0) {
+					player.explored++;
+					clearOutput();
+					outputText("Your curiosity draws you towards the smoke of a campfire on the edges of the forest. In the gloom ahead you see what appears to be a cage wagon surrounded by several tents, and hear the sounds of guttural voices engaged in boisterous conversation. Inexplicably you find yourself struck by an unwholesome sense of foreboding. <b>Even from here that cage looks like it is designed to carry people off to somewhere very unpleasant, some place where your life could be turned upside down and the rules you have become accustomed to in this world may no longer apply.</b> You take a long moment to consider turning back. Do you throw caution to the wind and investigate further?");
+					//outputText("\n\n(<b>NOTE:</b> Prisoner mod is currently under development and not all scenes are available.)");
+					doYesNo(kGAMECLASS.prison.goDirectlyToPrisonDoNotPassGoDoNotCollect200Gems, camp.returnToCampUseOneHour);
+					return;
+				}
+				else if (choosey == 4 && flags[kFLAGS.HEXINDAO_UNLOCKED] < 1) {
+					player.explored++;
+					clearOutput();
+					outputText("Against your better judgement, curiosity gets the better of you and you find yourself walking into the strange area.", false);
+					outputText("\n\nNot long into your journey you see a hooded figure, looming across the landscape, moving at the same speed as it goes across the terrain. The odd creature captures your interest and you start to follow it. Taking a moment to look around, there's still no one else around so you continue to tail the mysterious being.");
+					outputText("\n\nHalf an hour or so later, still following the cloaked figure you begin to hear the sound of running water, moving on you eventually come across the source, a decently sized river flows across the land, populated by variously sized island. Stopping for a second to take a look around the hooded person seems to be moving towards one of the several islands. He, she… It is still oblivious to your presence.");
+					outputText("\n\n\"<i> Did you came to visit He'Xin'Dao stranger? </i>\" Suddenly you hear some voice from behind you.");
+					outputText("\n\nTurning around you see few hooded figures similar to the one you been following.  Cursing in thought on getting in such situation and fact that you not even notice them coming so close without you noticing anything, you reply you just been walking and just casually came here.  One of the them measure you for a moment before speaking again. \"<i>You not seems to have strong soulforce, but lucky your soul is enough intact to allow future cultivation. So since you already here what you think about visiting our village? Maybe you would come more often to it in the future?</i>\"");
+					outputText("\n\nYou ponder for a moment over the offer.  Well so far none of them tried to attack you nor rape so maybe it's a worth to check this place?  You shortly reply accepting offer and then their lead you over the wide bridge on the one of the islands.  After stepping on your way is blocked by few heavy armored guards that looking at you with suspicion but then one of your companions explaining to them your guest.  Only then their let you pass by.  Next thing you do is visiting one of smaller islands near the entrance to register yourself as guest and receiving guide to the village.");
+					outputText("\n\nAfter that you're left alone.  Spending some time you wander around checking few interesting places before you decides it's time to come back to the camp.  With guide in your hands you're sure you'll easily find this place again if you need to.")
+					outputText("\n\n\n<b>You have unlocked He'Xin'Dao in Places menu!</b>");
+					flags[kFLAGS.HEXINDAO_UNLOCKED] = 1;
+					doNext(camp.returnToCampUseTwoHours);
+					return;
+				}
 				//Monster - 50/50 imp/gob split.
 				else {
 					player.explored++;
-					var impGob:Number = 5;
-					//Imptacular Encounter
-					if (rand(10) < impGob) {
-						if (player.level >= 8 && rand(2) == 0) {
-							kGAMECLASS.impScene.impLordEncounter();
-							spriteSelect(29);
-							return;
-						}
-						else {
-							outputText("An imp wings out of the sky and attacks!", true);
-							startCombat(new Imp());
-							spriteSelect(29);
-						}
-						return;
-					}
-					//Encounter Gobbalin!
-					else {
-						//50% of the time, goblin assassin!
-						if (player.level >= 10 && rand(2) == 0) {
-							kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
-							return;
-						}
-						if (player.gender > 0) {
-							outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud", "slut"), true);
-							outputText(".</i>\"", false);
-							startCombat(new Goblin());
-							spriteSelect(24);
-							return;
-						}
-						else {
-							outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fuc-oh shit, you don't even have anything to play with!  This is for wasting my time!", true);
-							outputText("</i>\"", false);
-							startCombat(new Goblin());
-							spriteSelect(24);
-							return;
-						}
-					}
-
+					genericGolGobImpEncounters(true);
+					return;
 				}
 				outputText("You wander around, fruitlessly searching for new places.", true);
 			}
@@ -200,7 +596,18 @@ package classes.Scenes
 			doNext(camp.returnToCampUseOneHour);
 		}
 
-
+		public function pearldiscovery():void {
+			flags[kFLAGS.SKY_POISON_PEARL] = 1;
+			outputText("While exploring, you feel something is off.  Wary of meeting new things in this world after your previous experiences, you decide to cautiously locate the source of this feeling.  Soon the object comes into view and you can see that it is an ordinary looking pearl.  Knowing that it may be more then it looks to be you check the suroundings next to it for a while before deciding to touch it.  Nothing happens so since it somehow attracted your attention you pocket this pearl.\n\n", true);
+			inventory.takeItem(consumables.SPPEARL, camp.returnToCampUseOneHour);
+		}
+		
+		public function hiddencavediscovery():void {
+			flags[kFLAGS.HIDDEN_CAVE_FOUND] = 1;
+			outputText("While exploring hills (rest is placeholder atm).\n\n", true);
+			doNext(hiddencave.enterDungeon);
+		}
+		
 		public function debugOptions():void
 		{
 			inventory.takeItem(consumables.W_FRUIT, playerMenu);
@@ -212,7 +619,7 @@ package classes.Scenes
 //AND THE TOTAL COMBINED WIDTH OF ALL THEIR COCKS IS TWELVE INCHES OR GREATER]
 		public function bigJunkDesertScene():void
 		{
-			outputText("", true);
+			clearOutput();
 			var x:Number = player.longestCock();
 			//PARAGRAPH 1
 			outputText("Walking along the sandy dunes of the desert you find yourself increasingly impeded by the bulk of your " + cockDescript(x) + " dragging along the sandscape behind you.  The incredibly hot surface of the desert causes your loins to sweat heavily and fills them with relentless heat.", false);
@@ -270,7 +677,6 @@ package classes.Scenes
 			fatigue(5);
 			doNext(camp.returnToCampUseOneHour);
 		}
-
 
 	}
 }

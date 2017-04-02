@@ -150,6 +150,10 @@ package classes.Scenes.NPCs
 		{
 			return kGAMECLASS.jojoScene;
 		}
+		protected function get joyScene():JoyScene
+		{
+			return kGAMECLASS.joyScene;
+		}
 		protected function get monk():Number {
 			return kGAMECLASS.monk;
 		}

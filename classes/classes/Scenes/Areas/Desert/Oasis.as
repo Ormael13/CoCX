@@ -63,7 +63,7 @@ private function oasisTalkAccept():void {
 	spriteSelect(46);
 	//You slut!
 	outputText("The leader smiles in genuine delight and excited chatter rises up from the group of demons. 'This is excellent. It has been so long since we last had one of your kind join us.' Behind him the demons begin to slide free of their tattered rags, hardening, dampening and licking their lips. As the leader steps forward to caress the curves and angles of your body you begin to suspect that the hunger this feast is to satisfy is not for food, but all that is forgotten as the demons swarm silently around you and you stumble back onto the hot sand, ", true);
-	if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("your rear legs losing their balance and sending you crashing on your flank.  ", false);
+	if(player.isTaur()) outputText("your rear legs losing their balance and sending you crashing on your flank.  ", false);
 	else outputText("legs falling open in the process.  ", false);
 	outputText("Suddenly the silence is broken by a shrill screeching laugh, then a howl and the movement of the demons begins to accelerate. The deep bass laugh of the demon leader breaks over you like a crashing wave and the demons shriek with frenzied lust as they take you on the sand of the oasis.", false);
 	//Count voluntary submissions
@@ -78,7 +78,7 @@ internal function oasisSexing():void {
 	spriteSelect(46);
 	player.slimeFeed();
 	//New screen
-	outputText("", true);
+	clearOutput();
 	//For manpartz
 	if(player.cocks.length > 0) {
 		outputText("You feel clawed hands grasp at ", false);
@@ -156,7 +156,7 @@ internal function oasisSexing():void {
 		outputText("You do your best to keep a vague mental catalogue of what has been in where, but eventually it becomes impossible to remember the type or number of demonic dicks that have filled you with their cum. The sand below your ass is wet with seed that has spilled out of your overflowing " + vaginaDescript(0) + " and there is every indication of more to come.\n\n", false);
 	}
 	//If you got here by winning combat!
-	if((monster.HP < 1 || monster.lust > 99) && getGame().inCombat) {
+	if((monster.HP < 1 || monster.lust >= monster.eMaxLust()) && getGame().inCombat) {
 		outputText("You fuck and fuck until not a single demon is capable of servicing your needs. They lie moaning and panting at the edge of the oasis, unable to move. You survey the fallen fiends with just a touch of pride and a whole lot of satisfaction, your body feeling stronger for the endurance exercise.", false);
 		cleanupAfterCombat();
 		player.orgasm();
@@ -164,7 +164,7 @@ internal function oasisSexing():void {
 		return;
 	}
 	//If you got here by losing combat!
-	else if((player.HP < 1 || player.lust > 99) && getGame().inCombat) {
+	else if((player.HP < 1 || player.lust >= player.maxLust()) && getGame().inCombat) {
 		//►Oasis Demons Defeat PC as part of antm
 		//Antmorph stuff
 		if(monster.findStatusAffect(StatusAffects.phyllafight) >= 0) {
@@ -198,15 +198,15 @@ private function oasisBadEnd():void {
 	
 	outputText("After passing out from your latest orgy with the desert tribe, you wake up to find yourself still naked and laying on your back. ", false);
 		//[If female/herm]
-		if(player.lowerBody != LOWER_BODY_TYPE_CENTAUR) outputText("Your feet are locked up in shackles, though with a chain long enough to leave you room to move or walk without problems. ", false);
-		if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("Your four legs are locked up in shackles, though with a chain long enough to leave you room to move or walk without problems. ", false);
+		if(!player.isTaur()) outputText("Your feet are locked up in shackles, though with a chain long enough to leave you room to move or walk without problems. ", false);
+		if(player.isTaur()) outputText("Your four legs are locked up in shackles, though with a chain long enough to leave you room to move or walk without problems. ", false);
 		outputText("Your arms are also tied up behind your back, resting uncomfortably in the hot desert sand. You can see the tribe is packing up to get ready to move on, and you struggle to sit up against your bindings.\n\n", false);
 	outputText("\"<i>I see that you are awake, slave,</i>\" the leader says after watching you get up, walking closer to you with a wicked smirk on his lips. He stares down at you with a look of satisfaction on his face. \"<i>Thought you would wake up in time to sneak off on us again, did you? Well, that won't be happening anymore.</i>\"\n\n", false);
 	outputText("\"<i>What the hell are you talking about? I'm no one's slave!</i>\" you yell in indignation, only to cry out in pain as the tribe leader's hand comes down and smacks you across the face. Your head jerks back from the force of the blow, successfully silencing you.\n\n", false);
 	outputText("\"<i>There will no longer be any of that back talk, slave. As for what I'm talking about... After all of our encounters with you, my tribesmen and I have made a decision.</i>\" The leader's smirk widens as he reaches down and grips your face tightly, forcing you to look up at him. His eyes look you over appraisingly as he pulls out a black collar with a long chain attached and fastens it to your neck. His other hand reaches down to one of your " + nippleDescript(0) + "s and grabs it roughly, giving it a hard squeeze and causing you to let out a small moan of pain and pleasure. He relinquishes his grip and walks around you, continually looking you over and scrutinizing your body from every angle. \"<i>We have decided that you would make an excellent addition to our group, and have laid claim to you as our sex slave... to be used in any way that we want.</i>\" He stops in front of you and continues, \"<i>We were lucky to catch you while you were still unconscious, before you could sneak off on us. I will personally enjoy using you for my own purposes. Maybe I'll even use you to carry my children once you're properly broken in.</i>\"\n\n", false);
 	//[If herm] 
 	if(player.gender == 3) {
-		if(player.lowerBody == LOWER_BODY_TYPE_CENTAUR) outputText("\"<i>Everyone will have a great time playing with you,</i>\" the leader says, smirking wider still as he stares at your centaur body. He reaches out and gives your " + buttDescript() + " a hard smack, causing you to yelp and quickly stand to your feet. You stagger a bit as your legs strain against the shackles as you stand. Without warning, he sticks his fingers inside of your " + assholeDescript() + " and stretches it out as his free hand reaches between your legs to play with both your " + vaginaDescript(0) + " and " + cockDescript(0) + ". You gasp and moan in pleasure as your cock becomes erect in his hand. He laughs as he lets go and moves back in front of you. \"<i>Plus we could use you to carry our heavy loads like a pack animal. You have the perfect body for it.</i>\"\n\n", false); 
+		if(player.isTaur()) outputText("\"<i>Everyone will have a great time playing with you,</i>\" the leader says, smirking wider still as he stares at your centaur body. He reaches out and gives your " + buttDescript() + " a hard smack, causing you to yelp and quickly stand to your feet. You stagger a bit as your legs strain against the shackles as you stand. Without warning, he sticks his fingers inside of your " + assholeDescript() + " and stretches it out as his free hand reaches between your legs to play with both your " + vaginaDescript(0) + " and " + cockDescript(0) + ". You gasp and moan in pleasure as your cock becomes erect in his hand. He laughs as he lets go and moves back in front of you. \"<i>Plus we could use you to carry our heavy loads like a pack animal. You have the perfect body for it.</i>\"\n\n", false); 
 		else outputText("His smirk widens even more as he stares down at your uncovered " + cockDescript(0) + " laying flaccidly between your legs against the hot desert sand. You gasp in surprise as he suddenly reaches down and takes a firm hold of your " + cockDescript(0) + ". He strokes it and gives it a rough squeeze, making you whimper sensually as it becomes fully erect in his hand. He laughs as he lets it go, \"<i>Our girls will definitely be having fun with you, slave.</i>\"\n\n", false);
 	}
 	outputText("You stare up at the leader with dread, realizing that there is nothing you could do for the moment. You cannot run away because you are chained up, and fighting isn't possible considering you don't see your weapons anywhere in sight. With all of the demons here, you wouldn't be able to get very far anyway. But even as you consider your method of escape, a small part of you feels excited about staying with the tribe, being used and abused by them for as long as possible.\n\n", false);

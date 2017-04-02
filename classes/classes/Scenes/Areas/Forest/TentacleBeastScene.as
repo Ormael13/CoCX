@@ -136,7 +136,7 @@ private function tentacleEntice():void {
 }
 
 internal function tentacleVictoryRape():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(100);
 	//Male/Herm
 	if(player.gender == 1 || player.gender == 3) {
@@ -175,7 +175,7 @@ internal function tentacleVictoryRape():void {
 //Spoiler for Bad End-Tentacle Monster: 
 //[CONDITIONS: Futa/Herm, Corruption > 50, Lust Defeat Only, Obtained 3 previous Lust Defeats to Tentacle Monster.]
 private function futaTentacleBadEnd():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(100);
 	outputText("Having repeatedly been ravaged by the tentacle beast in your travels, you surrender yourself to yet another savage session of forced pleasure. However, the beast lunges forward with its great maw open. Utterly surprised, you do not have time to react before the creature's tentacles seize you and swallow you whole!!!\n\n", false);
 	outputText("The last rays of light fade as the creature closes its beak, trapping you inside. You begin flailing and fighting in sheer panic at the prospect of being eaten alive. As you struggle, countless tentacles wrap around your arms and legs, essentially binding you inside the creature. A thick tentacle forces its way down your mouth and you feel the familiar sensation of salty lust being emptied into your mouth. Your " + cockDescript(0) + " instantly becomes erect, triggering a tentacle to encapsulate your member completely. As this occurs, another limb buries itself deep within your ass.\n\n", false);
@@ -188,10 +188,10 @@ private function futaTentacleBadEnd():void {
 }
 
 private function futaTentacleEpilogue():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(100);
 	//[Met Giacomo at least once]
-	if(kGAMECLASS.giacomo > 0) {
+	if(flags[kFLAGS.GIACOMO_MET] > 0) {
 		outputText("\"<i>Well, well, well. You aren't a total loss, I see.</i>\", says a sharp, masculine voice.\n\n", false);
 		outputText("While the fog of your brain has yet to lift completely, you recognize the voice to be the seedy merchant, Giacomo.\n\n", false);
 		outputText("\"<i>It is a good thing I happened to be out and about today.</i>\", Giacomo says. \"<i>I was testing out a new weapon to sell and I happened to see one of those nasty tentacle beasties. I had no idea they captured prey! Hell, you must have spent a few months inside that thing feeding it!</i>\"\n\n", false);
@@ -201,11 +201,11 @@ private function futaTentacleEpilogue():void {
 	}
 	//[Never met Giacomo]
 	else {
-		outputText("\"<i>Will she live?</i>\", says a soft and feminine voice.\n\n", false);
-		outputText("\"<i>Yes, doctor. She will live.</i>\", replies a gruff and clearly masculine voice.\n\n", false);
+		outputText("\"<i>Will " + player.mf("he", "she") + " live?</i>\", says a soft and feminine voice.\n\n", false);
+		outputText("\"<i>Yes, doctor. " + player.mf("He", "She") + " will live.</i>\", replies a gruff and clearly masculine voice.\n\n", false);
 		outputText("\"<i>Is the beast dead</i>\", queries the doctor.\n\n", false);
 		outputText("\"<i>Dead several times over, madam.</i>\", answers the man.\n\n", false);
-		outputText("\"<i>We cannot leave this unfortunate woman out in the wild like this. Load her onto the wagon. We will take her back to the village. I am certain I can help this woman recover.</i>\", the doctor states flatly.\n\n", false);
+		outputText("\"<i>We cannot leave this unfortunate " + player.mf("man", "woman") + " out in the wild like this. Load " + player.mf("him", "her") + " onto the wagon. We will take " + player.mf("him", "her") + " back to the village. I am certain I can help this " + player.mf("man", "woman") + " recover.</i>\", the doctor states flatly.\n\n", false);
 		outputText("Strong masculine hands easily lift your atrophied body and place you on a wooden slab. You feel the shaking of a cart as its movement assaults your stunted senses. After a while you notice the cart stops as it arrives at its destination. A cacophony of voices talk over one another as you feel a half a dozen people move you to what can only be a clinic. Many of the voices talk constantly as you are examined and various medicines are applied to you exhausted body. Your vision returns in a day or so, revealing that you are in a hospital and laborious effort from the staff allowed for your revival.\n\n", false);
 		outputText("Your recovery takes the better part of the year. The healers and apothecaries purge you of all of your corruptions, save your transgendered status. However, the sheer stress on your body has effectively ended your adventuring lifestyle and you resign yourself to settle down to a comparatively mundane existence, broken by the occasional tryst with a villager curious about your genitalia, which you are more than happy to display.", false);
 	}
@@ -215,6 +215,7 @@ private function futaTentacleEpilogue():void {
 internal function tentacleLossRape():void {
 	clearOutput();
 	spriteSelect(100);
+	if (doSFWloss()) return; //Disables rape in SFW mode.
 	//Genderless madness
 	if(player.gender == 0) {
 		//Taur madness
@@ -269,7 +270,7 @@ internal function tentacleLossRape():void {
 		return;
 	}
 	//Bad end + counter here
-	if(player.lust > 99) {
+	if(player.lust >= player.maxLust()) {
 		temp = player.findStatusAffect(StatusAffects.TentacleBadEndCounter);
 		if(temp < 0) {
 			player.createStatusAffect(StatusAffects.TentacleBadEndCounter,0,0,0,0);
@@ -655,7 +656,7 @@ private function tentacleRapeContinuationForFemales():void {
 
 //Centaur v. Tentacle Monster: (display if pc is unsexed centaur)
 private function centaurGenderlessRetardation():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(100);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00247] == 0 || player.balls == 0) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00247] = 1;
@@ -722,7 +723,7 @@ private function centaurGenderlessRetardation():void {
 
 //Naga v. Tentacle Monster:
 private function genderlessHilarityForNagaKenDolls():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(100);
 	outputText("Out of nowhere tentacles bind your arms and tail, holding you firm in a matter of seconds.  You struggle to free yourself but can do nothing against the strength of the beast holding you in your current state.  More of the appendages start teasing around your body, as if looking for something.  A handful test the entrance to your " + assholeDescript() + " but evidently that's not what they're after.\n\n", false);
 
@@ -742,7 +743,7 @@ private function genderlessHilarityForNagaKenDolls():void {
 
 //Goo v. Tentacle Monster:
 private function tentacularGenderGooTimes():void {
-	outputText("", true);
+	clearOutput();
 	spriteSelect(100);
 	outputText("All of a sudden, tentacles come whipping out of the undergrowth to grab you.  Though, they're moving a little too fast, and manage to compress your body walls so far together that you're almost squeezed in half.\n\n", false);
 

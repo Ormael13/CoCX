@@ -20,11 +20,17 @@
 		public function gogoFuckTheseBasilisksNorth():void
 		{
 			clearOutput();
-			outputText("You put your Laybans back on, carefully unlock the door and then, as quietly as you can, creep back out onto the wire gantry. The throng of greyish green below seems oblivious. It’s only when you get halfway across that you realize that you’ve been had. As soon as you are as far away from one exit as the other, two big groups of the lizards near the stairs immediately jump up and climb upwards determinedly. You speed as fast as you can to the door ahead, but the team of basilisks are ready and plough into you, grabbing your body as they reach for your shades. You desperately push and elbow them away from you but you cannot stop one from deftly hooking your Laybans off with his sickle claw.");
-			outputText("\n\nA horrible leaden weight settles upon your bones as your naked eyes gaze into a dozen basilisk eyes, your body turning into rapidly solidifying cement. You reach for your [weapon], but it’s as if it were a continent away, and the lizards press into you, grabbing your hands and [hips], forcing you to stare deeper and deeper into the ocean of depthless grey which surrounds you on all sides, and encompasses you, and where you were and what you were doing no longer matters, because the grey permeates your body and soul, and you are just an atom in a sky of peaceful, dove coloured submission, and whether you’re up or down or sideways or down doesn’t matter...");
-			
-			menu();
-			addButton(0, "Next", capturedByBasilisks);
+			outputText("You " + (player.hasKeyItem("Laybans") >= 0 ? "put your Laybans back on" : "steel yourself") + ", carefully unlock the door and then, as quietly as you can, creep back out onto the wire gantry. The throng of greyish green below seems oblivious. It’s only when you get halfway across that you realize that you’ve been had. As soon as you are as far away from one exit as the other, two big groups of the lizards near the stairs immediately jump up and climb upwards determinedly. You speed as fast as you can to the door ahead, but the team of basilisks are ready and plough into you, grabbing your body as they reach for your shades. You desperately push and elbow them away from you but you cannot stop one from " + (player.hasKeyItem("Laybans") >= 0 ? "deftly hooking your Laybans off with his sickle claw" : "grabbing you with his clawed hand") + ".");
+			if (player.findPerk(PerkLib.BasiliskResistance) >= 0) {
+				outputText("\n\nDespite your naked eyes gazing into a dozen basilisk eyes, they have no effect on you! You " + (player.canFly() ? "fly" : "run") + " as fast as you can, being careless of glancing over the basilisk eyes thanks to your immunity. In no time, you manage to open the door and lock it as soon as you enter! You laugh as you hear the basilisks cursing about.");
+				menu();
+				addButton(0, "Next", d3.move, "antechamber");
+			}
+			else {
+				outputText("\n\nA horrible leaden weight settles upon your bones as your naked eyes gaze into a dozen basilisk eyes, your body turning into rapidly solidifying cement. You reach for your [weapon], but it’s as if it were a continent away, and the lizards press into you, grabbing your hands and [hips], forcing you to stare deeper and deeper into the ocean of depthless grey which surrounds you on all sides, and encompasses you, and where you were and what you were doing no longer matters, because the grey permeates your body and soul, and you are just an atom in a sky of peaceful, dove coloured submission, and whether you’re up or down or sideways or down doesn’t matter...");
+				menu();
+				addButton(0, "Next", capturedByBasilisks);
+			}
 		}
 		
 		public function gogoFuckTheseBasilisks():void
@@ -32,7 +38,7 @@
 			clearOutput();
 			
 			outputText("You breathe deep, steel yourself")
-			if (player.hasKeyItem("Laybans") >= 0) outputText(", put your shades on")
+			if (player.hasKeyItem("Laybans") >= 0) outputText(", put your shades on");
 			outputText(" and stride out onto the gantry. The plan is simple. You’ll keep your eyes up and march across as if you belong there, as if you are on official business.");
 			if (player.demonScore() > 4) outputText("  You can’t be mistaken for anything but a demon, after all.");
 			outputText("  If or when the lizards realize who you are, you’ll make a break for it, and hopefully by then you’ll be in reach of the exit. It’s straight-forward, it’s elegant, it will work, whatever your hammering pulse has to say on the matter.");
@@ -63,7 +69,7 @@
 			{
 				outputText("\n\nImmediately you break into a run, pelting for the other side, as below you there’s a general rush for the stairs. Your heart feels like it’s going to burst out of your chest as the gantry bounces to your frantic motion, and to the beat of many feet climbing it.");
  
-				if (player.spe < 90)
+				if (player.spe < 90 && player.findPerk(PerkLib.BasiliskResistance) < 0)
 				{
 					outputText("\n\nThe booth is in reach... a sickle claw catches you in the thigh, and you stagger. Growling, you frantically right yourself- only to find yourself staring directly into the face of a basilisk. You punch that one in the nose, wildly tearing your eyes away... to another. And another. They surround you and though you wheel around, desperately pushing and elbowing them away from you, you cannot stop one deftly hooking your Laybans off with his sickle claw. A horrible leaden weight settles itself upon your bones as your naked gaze is trapped by a dozen basilisk eyes, your body turning into rapidly solidifying cement. You reach for your [weapon], but it’s as if it were a continent away, and the lizards press into you, grabbing your hands and [hips], forcing you to stare deeper and deeper into the ocean of depthless grey which surrounds you on all sides, and encompasses you, and where you were and what you were doing no longer matters, because the grey permeates your body and soul, and you are just an atom in a sky of peaceful, dove coloured submission, and whether you’re up or down or sideways or down doesn’t matter...");
 
@@ -112,7 +118,7 @@
 
 			outputText("\n\n“<i>But now the ball is in the basilisk court, is it not, interloper?</i>” Jean-Claude growls softly, holding your face close, pulling you deeper and deeper into his glow, bathing you in heat. “<i>And the only question now is how I am going to serve you.</i>”");
 
-			if (player.inte >= 80)
+			if (player.inte >= 80 || player.findPerk(PerkLib.BasiliskResistance) >= 0)
 			{
 				outputText("\n\nThe last of the petrifying curse slips from your limbs and a thought leaps lightning fast through your mind, cutting through the warm haze for a moment. It tells you that you have to act now - with your body free of the grey and your mind still resisting the gold. What do you do in this one, free, desperate moment?");
 				
@@ -347,6 +353,7 @@
 			if (player.averageVaginalLooseness() < 2)
 			{
 				outputText("\n\n“<i>Ungh! Tight little bitch,</i>” he gasps. He thrusts into you with wicked force and you gasp, grasping at his scaled shoulders, upon the threshold of pain and exquisite pleasure as he spreads your [vagina] wide with his huge girth. “<i>Been saving yourself for this? Good girl.</i>”");
+				player.cuntChange(24, true, true, false);
 			}
 			else
 			{
@@ -360,6 +367,8 @@
 			
 			outputText("\n\nAn excited, breathless murmur spreads through the hall to these words, whilst yellow tinted images push their way into your head, of being surrounded by tight, smooth lizard flesh, of hard, hot dick pushing urgently into every hole you have, all night long... you can’t help it. Your [vagina] convulses around Jean-Claude’s thick dick, surges of helpless pleasure pulsing through your body, and he roars with renewed laughter even as he continues to drive into you. “<i>She DOES like the sound of that! So behave yourself, boys. If you do real good for me, who knows? Maybe I’ll let you have some quality time with the queen!</i>” So saying, he thrusts himself upwards to his own orgasm, burying himself deep into you as he fills you full of his hot spunk. You buck your [hips] into him happily, unable to think of anything but of getting more of his seed, of being packed full of new life, of serving your new master. Your mind is a blank canvas of pure, submissive pleasure and it, like your future, is golden.");
 
+			//THE END
+			// 9999
 			getGame().gameOver();
 		}
 		

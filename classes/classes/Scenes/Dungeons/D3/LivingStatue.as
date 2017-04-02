@@ -30,35 +30,42 @@ package classes.Scenes.Dungeons.D3
 			this.short = "living statue";
 			this.imageName = "livingstatue";
 			this.long = "This animate marble statue shows numerous signs of wear and tear, but remains as strong and stable as the day it was carved. Its pearly, white skin is pockmarked in places from age, yet the alabaster muscles seem to move with almost liquid grace. You get the impression that the statue was hewn in the days before the demons, then brought to life shortly after. It bears a complete lack of genitalia - an immaculately carved leaf is all that occupies its loins. It wields a hammer carved from the same material as the rest of it.";
-			
-			initStrTouSpeInte(100, 80, 25, 50);
+			initStrTouSpeInte(300, 340, 50, 80);
 			initLibSensCor(10, 10, 100);
-			
 			this.lustVuln = 0;
-			
 			this.tallness = 16 * 12;
 			this.createBreastRow(0, 1);
 			initGenderless();
-			
 			this.drop = NO_DROP;
-			
-			this.level = 22;
-			this.bonusHP = 1000;
-			
+			this.level = 42;
+			this.bonusHP = 3000;
 			this.weaponName = "stone greathammer";
 			this.weaponVerb = "smash";
-			this.weaponAttack = 25;
+			this.weaponAttack = 120 + (25 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "cracked stone";
-			
+			this.armorDef = 100 + (11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.additionalXP = 1000;
 			createPerk(PerkLib.Resolute, 0, 0, 0, 0);
-			
+			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			this.str += 90 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 102 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 11600;
 			checkMonster();
 		}
 		
 		override protected function handleStun():Boolean
 		{
-			game.outputText("The stone giant's unforgiving flesh seems incapable of being stunned.");
-			return true;
+			if (findStatusAffect(StatusAffects.MonsterAttacksDisabled) >= 0) {
+				return super.handleStun();
+			}
+			else {
+				game.outputText("The stone giant's unforgiving flesh seems incapable of being stunned.");
+				return true;
+			}
 		}
 		
 		override protected function handleFear():Boolean
@@ -75,25 +82,23 @@ package classes.Scenes.Dungeons.D3
 		private function concussiveBlow():void
 		{
 			//Maybe replace this with passive stun? TERRIBLE IDEA
-			outputText("The giant raises his hammer for an obvious downward strike. His marble muscles flex as he swings it downward. You're able to hop out of the way of the clearly telegraphed attack, but nothing could prepare you for the shockwave it emits as it craters the ground.");
-
-			//Light magic-type damage!
-			var damage:Number = (100 * ((inte/player.inte) / 4));
-			damage = player.takeDamage(damage);
+			outputText("The giant raises his hammer for an obvious downward strike. His marble muscles flex as he swings it downward. You're able to hop out of the way of the clearly telegraphed attack, but nothing could prepare you for the shockwave it emits as it craters the ground. ");
 			
 			//Stun success
 			if (rand(2) == 0 && player.findStatusAffect(StatusAffects.Stunned) < 0)
 			{
-				outputText(" <b>The vibrations leave you rattled and stunned. It'll take you a moment to recover!</b>");
+				outputText("<b>The vibrations leave you rattled and stunned. It'll take you a moment to recover!</b> ");
 				player.createStatusAffect(StatusAffects.Stunned, 2, 0, 0, 0);
 			}
 			else
 			//Fail
 			{
-				outputText(" You shake off the vibrations immediately. It'll take more than that to stop you!");
+				outputText("You shake off the vibrations immediately. It'll take more than that to stop you! ");
 			}
 			
-			outputText(" (" + damage + ")");
+			//Light magic-type damage!
+			var damage:Number = (150 * ((inte/player.inte) / 4));
+			damage = player.takeDamage(damage, true);
 		}
 		
 		private function dirtKick():void
@@ -120,17 +125,16 @@ package classes.Scenes.Dungeons.D3
 	
 			var damage:Number = int ((str + weaponAttack) - rand(player.tou) - player.armorDef);
 			//Dodge
-			if (damage <= 0 || (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect())) outputText(" You slide underneath the surprise swing!");
+			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath the surprise swing!");
 			else
 			{
 				//Get hit
-				outputText(" It chits you square in the chest. The momentum sends you flying through the air. You land with a crunch against a wall. <b>You'll have to run back to the giant to engage it in melee once more.</b>");
+				outputText(" It chits you square in the chest. The momentum sends you flying through the air. You land with a crunch against a wall. <b>You'll have to run back to the giant to engage it in melee once more.</b> ");
 				
 				player.createStatusAffect(StatusAffects.KnockedBack, 0, 0, 0, 0);
 				this.createStatusAffect(StatusAffects.KnockedBack, 0, 0, 0, 0); // Applying to mob as a "used ability" marker
-				damage = player.takeDamage(damage);
+				damage = player.takeDamage(damage, true);
 				
-				outputText(" (" + damage + ")");
 			}
 		}
 		
@@ -140,13 +144,12 @@ package classes.Scenes.Dungeons.D3
 			outputText("Raising its hammer high overhead, the giant swiftly brings its hammer down in a punishing strike!");
 			
 			var damage:Number = 175 + int((str + weaponAttack) - rand(player.tou) - player.armorDef);
-			if (damage <= 0 || rand(100) < 25 || combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText(" You're able to sidestep it just in time.");
+			if (damage <= 0 || rand(100) < 25 || player.getEvasionRoll()) outputText(" You're able to sidestep it just in time.");
 			else
 			{
 				//Hit
-				outputText(" The concussive strike impacts you with bonecrushing force.");
-				damage = player.takeDamage(damage);
-				outputText(" (" + damage + ")");
+				outputText(" The concussive strike impacts you with bonecrushing force. ");
+				damage = player.takeDamage(damage, true);
 			}
 		}
 		
@@ -155,11 +158,11 @@ package classes.Scenes.Dungeons.D3
 			outputText("The animated statue spins its hammer around, striking at your [weapon] with its haft.");
 	
 			//Avoid
-			if ((combatMiss() && combatMiss()) || combatEvade() || combatFlexibility() || combatMisdirect()) outputText(" You manage to hold onto your equipment, for now.");
+			if ((combatMiss() && combatMiss()) || player.getEvasionRoll(false)) outputText(" You manage to hold onto your equipment, for now.");
 			//Oh noes!
 			else
 			{
-				outputText(" Your equipment flies off into the bushes! You'll have to fight another way. (" + player.takeDamage(str + weaponAttack) + ")");
+				outputText(" Your equipment flies off into the bushes! You'll have to fight another way. ");
 				player.createStatusAffect(StatusAffects.Disarmed, 0, 0, 0, 0);
 				this.createStatusAffect(StatusAffects.Disarmed, 0, 0, 0, 0);
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
@@ -174,15 +177,14 @@ package classes.Scenes.Dungeons.D3
 			//Difficult to avoid, moderate damage.
 			outputText("Twisting back, the giant abruptly launches into a circular spin. Its hammer stays low enough to the ground that its circular path is tearing a swath of destruction through the once pristine garden, and it's coming in your direction!");
 
-			var damage:Number = (175 + int((str + weaponAttack) - rand(player.tou) - player.armorDef)) / (rand(3) + 2);
+			var damage:Number = (200 + int((str + weaponAttack) - rand(player.tou) - player.armorDef)) / (rand(2) + 2);
 			//Avoid
-			if (damage <= 0 || combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) outputText(" By the grace of the gods, you somehow avoid the spinning hammer.");
+			if (damage <= 0 || player.getEvasionRoll()) outputText(" By the grace of the gods, you somehow avoid the spinning hammer.");
 			else
 			{
 				//Hit
-				outputText(" You're squarely struck by the spinning hammer.");
-				damage = player.takeDamage(damage);
-				outputText(" (" + damage + ")");
+				outputText(" You're squarely struck by the spinning hammer. ");
+				damage = player.takeDamage(damage, true);
 			}
 		}
 		

@@ -9,6 +9,9 @@ package classes.Scenes.Areas
 	import classes.Scenes.Areas.Mountain.*;
 	import classes.Scenes.Monsters.Goblin;
 	import classes.Scenes.Monsters.Imp;
+	import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
+	import classes.Scenes.NPCs.Etna;
+	import classes.Scenes.NPCs.EtnaFollower;
 
 	use namespace kGAMECLASS;
 
@@ -17,7 +20,10 @@ package classes.Scenes.Areas
 		public var hellHoundScene:HellHoundScene = new HellHoundScene();
 		public var infestedHellhoundScene:InfestedHellhoundScene = new InfestedHellhoundScene();
 		public var minotaurScene:MinotaurScene = new MinotaurScene();
+		public var wormsScene:WormsScene = new WormsScene();
 		public var salon:Salon = new Salon();
+		public var etnaScene:EtnaFollower = new EtnaFollower();
+		
 		public function Mountain()
 		{
 		}
@@ -29,6 +35,11 @@ package classes.Scenes.Areas
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
 				kGAMECLASS.helScene.helSexualAmbush();
+				return;
+			}
+			//Etna
+			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
+				etnaScene.repeatYandereEnc();
 				return;
 			}
 			//Discover 'high mountain' at level 5 or 40 explores of mountain
@@ -81,9 +92,9 @@ package classes.Scenes.Areas
 			}
 			//10% chance of hairdresser encounter if not found yet
 			if (rand(10) == 0 && player.findStatusAffect(StatusAffects.HairdresserMeeting) < 0) chooser = 4;
-			if ((rand(8) == 0 && player.findStatusAffect(StatusAffects.MetMarae) >= 0)
-					&& player.findStatusAffect(StatusAffects.FoundFactory) < 0) {
-				kGAMECLASS.enterFactory();
+			if ((rand(8) == 0 && flags[kFLAGS.MARAE_QUEST_START] >= 1) && flags[kFLAGS.FACTORY_FOUND] <= 0) {
+				trace("Dungeon start!")
+				kGAMECLASS.dungeons.enterFactory();
 				return;
 			}
 			//Boosts mino and hellhound rates!
@@ -100,60 +111,14 @@ package classes.Scenes.Areas
 				chooser = 1;
 			}
 			//Every 15 explorations chance at mino bad-end!
-			if (player.exploredMountain % 16 == 0 && player.findPerk(PerkLib.MinotaurCumAddict) >= 0) {
+			if (player.exploredMountain % 16 == 0 && player.findPerk(PerkLib.MinotaurCumAddict) >= 0 && rand(3) == 0) {
 				spriteSelect(44);
 				minotaurScene.minoAddictionBadEndEncounter();
 				return;
 			}
 			if (chooser == 0) {
-				//Determines likelyhood of imp/goblins
-				//Below - goblin, Equal and up - imp
-				var impGob:Number = 5;
-				if (player.findPerk(PerkLib.PiercedLethite) >= 0) {
-					if (impGob <= 3) impGob += 2;
-					else if (impGob < 7) impGob = 7;
-				}
-				trace("IMP/Gobb");
-				//Dicks + lots of cum boosts goblin probability
-				//Vags + Fertility boosts imp probability
-				if (player.totalCocks() > 0) impGob--;
-				if (player.hasVagina()) impGob++;
-				if (player.totalFertility() >= 30) impGob++;
-				if (player.cumQ() >= 200) impGob--;
-				//Imptacular Encounter
-				if (rand(10) < impGob) {
-					if (player.level >= 8 && rand(2) == 0) {
-						kGAMECLASS.impScene.impLordEncounter();
-					}
-					else {
-						outputText("An imp leaps out from behind a rock and attacks!", true);
-						startCombat(new Imp());
-					}
-					spriteSelect(29);
-					return;
-				}
-				//Encounter Gobbalin!
-				else {
-					//50% of the time, goblin assassin!
-					if (player.level >= 10 && rand(2) == 0) {
-						kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
-						return;
-					}
-					if (player.gender > 0) {
-						outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fucked, " + player.mf("stud", "slut"), true);
-						outputText(".</i>\"", false);
-						startCombat(new Goblin());
-						spriteSelect(24);
-						return;
-					}
-					else {
-						outputText("A goblin saunters out of the bushes with a dangerous glint in her eyes.\n\nShe says, \"<i>Time to get fuc-oh shit, you don't even have anything to play with!  This is for wasting my time!", true);
-						outputText("</i>\"", false);
-						startCombat(new Goblin());
-						spriteSelect(24);
-						return;
-					}
-				}
+				//Generic Goblin/Imp encounter
+				kGAMECLASS.exploration.genericGolGobImpEncounters();
 			}
 			//Minotauuuuur
 			if (chooser == 1) {
@@ -182,11 +147,19 @@ package classes.Scenes.Areas
 				}
 				//Mino gangbang
 				if (player.findStatusAffect(StatusAffects.MinoPlusCowgirl) < 0 || rand(10) == 0) {
-					if (flags[kFLAGS.HAS_SEEN_MINO_AND_COWGIRL] == 1 && player.horns > 0 && player.hornType == HORNS_COW_MINOTAUR && player.earType == EARS_COW && player.tailType == TAIL_TYPE_COW && player.lactationQ() >= 200 && player.biggestTitSize() >= 3 && player.minotaurAddicted()) {
+					if (flags[kFLAGS.HAS_SEEN_MINO_AND_COWGIRL] == 1 && player.cowScore() >= 4 && player.lactationQ() >= 200 && player.biggestTitSize() >= 3 && player.minotaurAddicted()) {
 						//PC must be a cowmorph (horns, legs, ears, tail, lactating, breasts at least C-cup)
 						//Must be addicted to minocum
 						outputText("As you pass a shadowy cleft in the mountainside, you hear the now-familiar call of a cowgirl echoing from within.  Knowing what's in store, you carefully inch closer and peek around the corner.");
 						outputText("\n\nTwo humanoid shapes come into view, both with pronounced bovine features - tails, horns and hooves instead of feet.  Their genders are immediately apparent due to their stark nudity.  The first is the epitome of primal femininity, with a pair of massive, udder-like breasts and wide child-bearing hips. The other is the pinnacle of masculinity, with a broad, muscular chest, a huge horse-like penis and a heavy set of balls more appropriate on a breeding stud than a person.  You have once again stumbled upon a cow-girl engaging in a not-so-secret rendezvous with her minotaur lover.");
+						if (flags[kFLAGS.CODEX_ENTRY_MINOTAURS] <= 0) {
+							flags[kFLAGS.CODEX_ENTRY_MINOTAURS] = 1;
+							outputText("<b>New codex entry unlocked: Minotaurs!</b>\n\n")
+						}
+						if (flags[kFLAGS.CODEX_ENTRY_LABOVINES] <= 0) {
+							flags[kFLAGS.CODEX_ENTRY_LABOVINES] = 1;
+							outputText("<b>New codex entry unlocked: Lacta Bovines/Cowgirl!</b>\n\n")
+						}
 						outputText("\n\nYou settle in behind an outcropping, predicting what comes next.  You see the stark silhouettes of imps and goblins take up similar positions around this makeshift theatre, this circular clearing surrounded on the edge by boulders and nooks where all manner of creatures might hide. You wonder if they're as eager for the upcoming show as you are.  The heady scent of impending sex rises in the air... and with it comes something masculine, something that makes your stomach rumble in anticipation.  The mouth-watering aroma of fresh minotaur cum wafts up to your nose, making your whole body quiver in need.  Your [vagOrAss] immediately ");
 						if (player.hasVagina()) outputText("dampens");
 						else outputText("twinges");
@@ -208,6 +181,14 @@ package classes.Scenes.Areas
 					else player.addStatusValue(StatusAffects.MinoPlusCowgirl, 1, 1);
 					outputText("As you pass a shadowy cleft in the mountainside, you hear the sounds of a cow coming out from it. Wondering how a cow got up here, but mindful of this land's dangers, you cautiously sneak closer and peek around the corner.\n\n", true);
 					outputText("What you see is not a cow, but two large human-shaped creatures with pronounced bovine features -- tails, horns, muzzles, and hooves instead of feet. They're still biped, however, and their genders are obvious due to their stark nudity. One has massive, udder-like breasts and wide hips, the other a gigantic, horse-like dong and a heavy set of balls more appropriate to a breeding stud than a person. You've stumbled upon a cow-girl and a minotaur.\n\n", false);
+					if (flags[kFLAGS.CODEX_ENTRY_MINOTAURS] <= 0) {
+						flags[kFLAGS.CODEX_ENTRY_MINOTAURS] = 1;
+						outputText("<b>New codex entry unlocked: Minotaurs!</b>\n\n")
+					}
+					if (flags[kFLAGS.CODEX_ENTRY_LABOVINES] <= 0) {
+						flags[kFLAGS.CODEX_ENTRY_LABOVINES] = 1;
+						outputText("<b>New codex entry unlocked: Lacta Bovines/Cowgirl!</b>\n\n")
+					}
 					outputText("A part of your mind registers bits of clothing tossed aside and the heady scent of impending sex in the air, but your attention is riveted on the actions of the pair. The cow-girl turns and places her hands on a low ledge, causing her to bend over, her ample ass facing the minotaur. The minotaur closes the distance between them in a single step.\n\n", false);
 					outputText("She bellows, almost moaning, as the minotaur grabs her cushiony ass-cheeks with both massive hands. Her tail raises to expose a glistening wet snatch, its lips already parted with desire. She moos again as his rapidly hardening bull-cock brushes her crotch. You can't tear your eyes away as he positions himself, his flaring, mushroom-like cock-head eliciting another moan as it pushes against her nether lips.\n\n", false);
 					outputText("With a hearty thrust, the minotaur plunges into the cow-girl's eager fuck-hole, burying himself past one -- two of his oversized cock's three ridge rings. She screams in half pain, half ecstasy and pushes back, hungry for his full length. After pulling back only slightly, he pushes deeper, driving every inch of his gigantic dick into his willing partner who writhes in pleasure, impaled exactly as she wanted.\n\n", false);
@@ -217,8 +198,14 @@ package classes.Scenes.Areas
 				}
 				//Cum addictus interruptus!  LOL HARRY POTTERFAG
 				//Withdrawl auto-fuck!
-				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) {
+				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3 && rand(2) == 0 && player.inte/10 + rand(20) < 15) {
 					minotaurScene.minoAddictionFuck();
+					return;
+				}
+				//Rare Minotaur Lord
+				if (rand(5) == 0 && player.level >= 10) {
+					outputText("Minding your own business, you walk along the winding paths.  You take your time to enjoy the view until you see a shadow approaching you.  You turn around to see a minotaur!  However, he is much bigger than the other minotaurs you've seen.  You estimate him to be eleven feet tall and he's wielding a chain-whip.  He's intent on raping you!", true);
+					startCombat(new MinotaurLord());
 					return;
 				}
 				minotaurScene.getRapedByMinotaur(true);
@@ -240,11 +227,15 @@ package classes.Scenes.Areas
 						doNext(camp.returnToCampUseOneHour);
 						return;
 					}
-					kGAMECLASS.wormEncounter();
+					wormsScene.wormEncounter();
 				}
 				else {
 					//If worms are off or the PC is infested, no worms.
 					if (player.findStatusAffect(StatusAffects.WormsOff) >= 0 || player.findStatusAffect(StatusAffects.Infested) >= 0 || (rand(2) == 0 && player.findStatusAffect(StatusAffects.WormsHalf) >= 0)) {
+						if (player.findStatusAffect(StatusAffects.WormsOff) >= 0 && player.findStatusAffect(StatusAffects.MetWorms) < 0) {
+							wormsScene.wormEncounter(); //You can only encounter the worms once.
+							return;
+						}
 						if (player.cor < 90) {
 							outputText("Your hike in the mountains, while fruitless, reveals pleasant vistas and provides you with good exercise and relaxation.", true);
 							dynStats("tou", .25, "spe", .5, "lus", player.lib / 10 - 15);
@@ -256,7 +247,7 @@ package classes.Scenes.Areas
 						doNext(camp.returnToCampUseOneHour);
 					}
 					else {
-						kGAMECLASS.wormToggle();
+						wormsScene.wormToggle();
 					}
 				}
 			}
@@ -346,6 +337,7 @@ package classes.Scenes.Areas
 			if (player.tongueType == TONUGE_SNAKE) outputText("serpentine ");
 			else if (player.tongueType == TONUGE_DEMONIC) outputText("demonic ");
 			else if (player.tongueType == TONUGE_DRACONIC) outputText("draconic ");
+			else if(player.hasLongTongue()) outputText("inhumanly long ");
 			outputText("tongue inside her, eagerly licking out and guzzling down the remnants of the minotaur's present.");
 
 			outputText("\n\nThe minotaur, for his part, is in no rush to give you a cream pie of your own. His thrusts are slow and deliberate, with a rhythm that has you writhing with pleasure.  The three of you moan together like some kind of erotic pyramid.  The bull's assault on your ");
@@ -392,7 +384,7 @@ package classes.Scenes.Areas
 			dynStats("lib", .5, "sen", -3, "cor", 1);
 			if (flags[kFLAGS.PC_FETISH] > 0) {
 				outputText("  A thrill runs through you.  Even though you were brought to such a satisfying climax, the whole thought that goblins and imps were watching you and getting off on it... it just makes you hornier than you were before.");
-				dynStats("lus=", 100);
+				dynStats("lus=", player.maxLust());
 			}
 			//Chance to impregnate PC, get mino-fix, and maybe relief from feeder perk.
 			player.minoCumAddiction(10);
@@ -447,6 +439,10 @@ package classes.Scenes.Areas
 			//Lust!
 			dynStats("lus", 5 + player.lib / 20 + player.minoScore() + player.cowScore());
 			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		private function findOre():void { //Not used, will be in 1.1
+			var ore:int = rand(3); //0 = copper, 1 = tin, 2 = iron
 		}
 	}
 }

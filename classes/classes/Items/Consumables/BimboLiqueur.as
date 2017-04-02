@@ -174,10 +174,13 @@ package classes.Items.Consumables
 				if (game.player.findPerk(PerkLib.BimboBrains) < 0) {
 					outputText("(Bimbo Brains - Perk Gained!)\n");//int to 20.  max int 50)
 					game.player.createPerk(PerkLib.BimboBrains, 0, 0, 0, 0);
-					if (game.player.inte > 21) game.player.inte = 21;
+					if (game.player.inte > 21) {
+						var boost:Number = game.player.inte / 5;
+						game.player.inte = 21 + boost;
+					}
 				}
 				game.player.orgasm();
-				game.dynStats("int", -1, "lib", 4, "sen", 25);
+				game.dynStats("int", -1, "lib", 5, "sen", 25);
 				//FULL ON BITCHFACE
 				game.player.modFem(100, 100);
 				//Body

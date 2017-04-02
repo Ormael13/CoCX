@@ -5,6 +5,7 @@ package classes.Scenes.Areas.Bog
 {
 	import classes.*;
 	import classes.internals.WeightedDrop;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class Phouka extends Monster
 	{
@@ -18,7 +19,7 @@ package classes.Scenes.Areas.Bog
 			else if (PhoukaScene.phoukaForm == PhoukaScene.PHOUKA_FORM_BUNNY) {
 				damage = Math.round((60 + 30 + 10) - rand(player.tou) - player.armorDef); //60 == Bunny Strength, 30 == Bunny Weapon Attack
 				outputText("The bunny morph hops towards you.  At the last second he changes direction and throws a kick toward you with his powerful hind legs.");
-				if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect())
+				if (player.getEvasionRoll())
 					outputText("\nThrowing yourself out of the way, you manage to avoid the kick.  The " + this.short + " hops out of reach and prepares for another attack.");
 				else if (damage <= 0)
 					outputText("\nYou block his attack by moving your shoulder in close, absorbing the energy of the kick harmlessly.");
@@ -30,7 +31,7 @@ package classes.Scenes.Areas.Bog
 			else if (PhoukaScene.phoukaForm == PhoukaScene.PHOUKA_FORM_GOAT) {
 				damage = Math.round((80 + 40 + 10) - rand(player.tou) - player.armorDef); //80 == Goat Strength, 40 == Goat Weapon Attack
 				outputText("The goat morph races toward you, head down.");
-				if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect())
+				if (player.getEvasionRoll())
 					outputText("\nThrowing yourself out of the way, you manage to keep from getting skewered.");
 				else if (damage <= 0)
 					outputText("\nYou manage to smack the goat morph in the side of the head.  The horns pass you by harmlessly.");
@@ -42,7 +43,7 @@ package classes.Scenes.Areas.Bog
 			else { //HORSE
 				damage = Math.round((95 + 55 + 10) - rand(player.tou) - player.armorDef); //95 == Horse Strength, 55 == Horse Weapon Attack
 				outputText("The stallion charges you, clearly intending to trample you under its hooves.");
-				if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect() || (damage <= 0))
+				if (player.getEvasionRoll() || (damage <= 0))
 					outputText("\nAs the stallion passes you twist in place and manage to stay clear of its legs.");
 				else {
 					player.takeDamage(damage);
@@ -60,7 +61,7 @@ package classes.Scenes.Areas.Bog
 				outputText("The bunny morph leaps forward, trying to catch you off guard and grapple you.  ");
 			else outputText("The stallion rears up on his hind legs, waving his massive cock at you.  ");
 
-			if (combatMiss() || combatEvade() || combatFlexibility() || combatMisdirect()) {
+			if (player.getEvasionRoll()) {
 				if (PhoukaScene.phoukaForm == PhoukaScene.PHOUKA_FORM_BUNNY)
 					outputText("You throw yourself out of the way at the last moment and succeed in throwing the " + this.short + " off balance. He staggers away, his attempted attack ruined.\n");
 				else outputText("You manage to look away in time and the " + this.short + "'s lewd display has no real effect on you.\n");
@@ -81,17 +82,23 @@ package classes.Scenes.Areas.Bog
 			outputText(this.capitalA + this.short + " scoops up some muck from the ground and rams it down over his cock.  After a few strokes he forms the lump of mud and precum into a ball and whips it at your face.  ");
 			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2)
 				outputText("Since he's blind the shot goes horribly wide, missing you entirely.");
-			else if (combatMiss())
-				outputText("You lean back and let the muck ball whip pass to one side, avoiding the attack.");
-			else if (combatEvade())
-				outputText("You pull back and to the side, blocking the shot with your arm. The muck splatters against it uselessly.");
-			else if (combatMisdirect())
-				outputText(this.capitalA + this.short + " was watching you carefully before his throw.  That proves to be his undoing as your misleading movements cause him to lob the muck at the wrong time");
-			else if (combatFlexibility())
-				outputText("As the ball leaves his fingers you throw yourself back, your spine bending in an inhuman way.  You feel the ball sail past, inches above your chest.");
-			else {
-				outputText("The ball smacks into your face like a wet snowball.  It covers most of your nose and mouth with a layer of sticky, salty mud which makes it hard to breathe.  You'll be unable to use your magic while you're struggling for breath!\n");
-				player.createStatusAffect(StatusAffects.WebSilence, 0, 0, 0, 0); //Probably safe to reuse the same status affect as for the spider morphs
+			else
+			{
+				var evade:String = player.getEvasionReason();
+				if (evade == EVASION_SPEED)
+					outputText("You lean back and let the muck ball whip pass to one side, avoiding the attack.");
+				else if (evade == EVASION_EVADE)
+					outputText("You pull back and to the side, blocking the shot with your arm. The muck splatters against it uselessly.");
+				else if (evade == EVASION_MISDIRECTION)
+					outputText(this.capitalA + this.short + " was watching you carefully before his throw.  That proves to be his undoing as your misleading movements cause him to lob the muck at the wrong time");
+				else if (evade == EVASION_FLEXIBILITY)
+					outputText("As the ball leaves his fingers you throw yourself back, your spine bending in an inhuman way.  You feel the ball sail past, inches above your chest.");
+				else if (evade != null) // failsafe
+					outputText("You throw yourself out of the way at the last moment!");
+				else {
+					outputText("The ball smacks into your face like a wet snowball.  It covers most of your nose and mouth with a layer of sticky, salty mud which makes it hard to breathe.  You'll be unable to use your magic while you're struggling for breath!\n");
+					player.createStatusAffect(StatusAffects.WebSilence, 0, 0, 0, 0); //Probably safe to reuse the same status affect as for the spider morphs
+				}
 			}
 			combatRoundOver();
 		}
@@ -261,43 +268,35 @@ package classes.Scenes.Areas.Bog
 			this.a = "the ";
 			this.short = phoukaName;
 			this.long = "The " + this.short + " is flying around near you, waiting for an opening.  He has the general appearance of a faerie, though he is slightly larger and his skin and wings are coal black.  A large cock stands erect between his legs.  His cat-like green eyes, filled with lust, follow your every motion.";
-
 			this.createCock(1, 0.5, CockTypesEnum.HUMAN);
 			this.balls = 2;
 			this.ballSize = 1;
 			this.cumMultiplier = 5;
 			this.hoursSinceCum = 20;
-
 			createBreastRow(0);
 			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_NORMAL;
-
 			this.tallness = 5;
 			this.hipRating = HIP_RATING_SLENDER;
 			this.buttRating = BUTT_RATING_TIGHT;
 			this.lowerBody = LOWER_BODY_TYPE_HUMAN
 			this.armType = ARM_TYPE_HUMAN;
-
 			this.skinTone = "black";
 			this.hairColor = "black";
 			this.hairLength = 1;
-
 			this.earType = EARS_ELFIN;
-
-			initStrTouSpeInte(55, 25, 80, 40);
-			initLibSensCor(75, 35, 100);
-
+			initStrTouSpeInte(90, 70, 140, 40);
+			initLibSensCor(90, 35, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 15;
+			this.weaponAttack = 34 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "skin";
-			this.armorDef = 80;
-
+			this.armorDef = 110 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = 300;
+			this.bonusLust = 10;
 			this.lust = 30;
 			this.lustVuln = .5;
-
-			this.level = 14;
+			this.level = 32;
 			this.gems = 0;
 			this.drop = new WeightedDrop().add(consumables.BLACK_D, 20)
 				.add(consumables.RIZZART, 10)
@@ -305,9 +304,14 @@ package classes.Scenes.Areas.Bog
 				.add(consumables.SDELITE, 13)
 				.add(consumables.P_WHSKY, 35)
 				.add(null, 20);
-
 			this.wingType = WING_TYPE_GIANT_DRAGONFLY; //Maybe later, if the PC can get them, make a Faerie wing type.
 			this.wingDesc = "small black faerie wings";
+			this.str += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 5160;
 			checkMonster();
 		}
 

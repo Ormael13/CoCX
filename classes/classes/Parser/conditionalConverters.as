@@ -18,6 +18,8 @@
 				"corruption"		: function(thisPtr:*):* {return  kGAMECLASS.player.cor;},
 				"fatigue"			: function(thisPtr:*):* {return  kGAMECLASS.player.fatigue;},
 				"hp"				: function(thisPtr:*):* {return  kGAMECLASS.player.HP;},
+				"hunger"			: function(thisPtr:*):* {return  kGAMECLASS.player.hunger;},
+				"minute"			: function(thisPtr:*):* {return  kGAMECLASS.model.time.minutes;},
 				"hour"				: function(thisPtr:*):* {return  kGAMECLASS.model.time.hours;},
 				"days"				: function(thisPtr:*):* {return  kGAMECLASS.model.time.days;},
 				"tallness"			: function(thisPtr:*):* {return  kGAMECLASS.player.tallness;},
@@ -54,5 +56,10 @@
 				"canfly"			: function(thisPtr:*):* {return  kGAMECLASS.player.canFly();},
 				"islactating"		: function(thisPtr:*):* {return  (kGAMECLASS.player.lactationQ() > 0);},
 				"true"				: function(thisPtr:*):* {return  true;},
-				"false"				: function(thisPtr:*):* {return  false;}
+				"false"				: function(thisPtr:*):* {return  false;},
+				
+				//Prison
+				"esteem"			: function(thisPtr:*):* {return  kGAMECLASS.player.esteem; },
+				"obey"				: function(thisPtr:*):* {return  kGAMECLASS.player.obey; },
+				"will"				: function(thisPtr:*):* {return  kGAMECLASS.player.will; }
 			}

@@ -1,28 +1,30 @@
 package classes.Scenes.Dungeons.HelDungeon
 {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class Brigid extends Monster
 	{
 
 		//Attack One: Hot Poker, Right Up Your Ass!
 		private function brigidPoke():void {
-			outputText("Brigid stalks forward with confidence, her shield absorbing your defensive blows until she's right on top of you. She bats your [weapon] aside and thrashes you with her hot poker, scalding your " + player.skin() + " and sending you reeling.");
+			outputText("Brigid stalks forward with confidence, her shield absorbing your defensive blows until she's right on top of you. She bats your [weapon] aside and thrashes you with her hot poker, scalding your " + player.skin() + " and sending you reeling. ");
 			//(Effect: Heavy Damage)
 			var damage:Number = Math.round((str + weaponAttack) - rand(player.tou) - player.armorDef);
-			if(damage < 30) damage = 30;
-			damage = player.takeDamage(damage);
-			outputText(" (" + damage + ")");
+			if (damage < 30) damage = 30;
+			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
+			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+			damage = Math.round(damage);
+			damage = player.takeDamage(damage, true);
 			game.combatRoundOver();
 		}
 
 		//Attack Two: SHIELD BOP! OOM BOP!
 		private function brigidBop():void {
-			outputText("The harpy feints at you with her poker; you dodge the blow, but you leave yourself vulnerable as she spins around and slams her heavy shield into you, knocking you off balance.");
+			outputText("The harpy feints at you with her poker; you dodge the blow, but you leave yourself vulnerable as she spins around and slams her heavy shield into you, knocking you off balance. ");
 			//(Effect: Stagger/Stun)
 			var damage:Number = 5;
-			damage = player.takeDamage(5);
-			outputText(" (" + damage + ")");
+			damage = player.takeDamage(damage, true);
 			if(player.findPerk(PerkLib.Resolute) >= 0) outputText("  Of course, your resolute posture prevents her from accomplishing much.");
 			else player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
 			game.combatRoundOver();
@@ -78,25 +80,33 @@ package classes.Scenes.Dungeons.HelDungeon
 			this.skinTone = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
-			initStrTouSpeInte(90, 60, 120, 40);
-			initLibSensCor(40, 45, 50);
+			initStrTouSpeInte(140, 110, 140, 50);
+			initLibSensCor(70, 45, 50);
 			this.weaponName = "poker";
 			this.weaponVerb="burning stab";
-			this.weaponAttack = 30;
+			this.weaponAttack = 34 + (7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "armor";
-			this.armorDef = 20;
+			this.armorDef = 24 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = 1000;
+			this.bonusLust = 30;
 			this.lust = 20;
 			this.lustVuln = .25;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 19;
-			this.gems = rand(25)+140;
-			this.additionalXP = 50;
+			this.level = 29;
+			this.gems = rand(37)+210;
+			this.additionalXP = 150;
 			this.wingType = WING_TYPE_FEATHERED_LARGE;
 			this.tailType = TAIL_TYPE_DEMONIC;
 			this.hornType = HORNS_DEMON;
 			this.horns = 2;
 			this.drop = NO_DROP;
+			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
+			this.str += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 33 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 4590;
 			checkMonster();
 		}
 		

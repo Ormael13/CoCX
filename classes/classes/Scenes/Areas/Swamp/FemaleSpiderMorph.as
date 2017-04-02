@@ -2,6 +2,7 @@ package classes.Scenes.Areas.Swamp
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	/**
 	 * ...
@@ -46,25 +47,32 @@ package classes.Scenes.Areas.Swamp
 			this.skinTone = "dusky";
 			this.hairColor = "red";
 			this.hairLength = 13;
-			initStrTouSpeInte(60, 50, 99, 99);
-			initLibSensCor(35, 35, 20);
+			initStrTouSpeInte(70, 60, 99, 99);
+			initLibSensCor(45, 35, 20);
 			this.weaponName = "dagger";
 			this.weaponVerb="stab";
-			this.weaponAttack = 15;
+			this.weaponAttack = 24 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "exoskeleton";
-			this.armorDef = 14;
+			this.armorDef = 23 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorPerk = "";
 			this.armorValue = 50;
 			this.bonusHP = 200;
+			this.bonusLust = 10;
 			this.lust = 20;
 			this.lustVuln = .6;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 13;
-			this.gems = rand(10) + 10;
+			this.level = 18;
+			this.gems = rand(15) + 15;
 			this.drop = new WeightedDrop().add(consumables.S_GOSSR,5)
 					.add(useables.T_SSILK,1)
 					.add(null,4);
 			this.tailType = TAIL_TYPE_SPIDER_ADBOMEN;
+			this.str += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 1460;
 			checkMonster();
 		}
 		

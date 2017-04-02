@@ -2,13 +2,13 @@
 {
 	import classes.*;
 	import classes.GlobalFlags.*;
-	import classes.internals.WeightedDrop;
+	import classes.internals.ChainedDrop;
 
 	public class BeeGirl extends Monster {
 
 		override public function defeated(hpVictory:Boolean):void {
 			clearOutput();
-			if (player.gender > 0) {
+			if(player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				if (hpVictory) {
 					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully, and you see an easy way to relieve it..\n\nWhat do you do to her?");
 				}
@@ -21,7 +21,7 @@
 				var milkAndHoney:Function = (player.findStatusAffect(StatusAffects.Feeder) >= 0 ? game.forest.beeGirlScene.milkAndHoneyAreKindaFunny : null);
 				game.simpleChoices("Rape", game.forest.beeGirlScene.rapeTheBeeGirl, "Dildo Rape", dildoRape, "", null, "B. Feed", milkAndHoney, "Leave", leaveAfterDefeating);
 			}
-			else if (player.findStatusAffect(StatusAffects.Feeder) >= 0) { //Genderless can still breastfeed
+			else if (player.findStatusAffect(StatusAffects.Feeder) >= 0 && flags[kFLAGS.SFW_MODE] <= 0) { //Genderless can still breastfeed
 				if (hpVictory) {
 					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully.\n\nWhat do you do?");
 				}
@@ -111,7 +111,7 @@
 					outputText("  You've fallen prey to paralyzation venom!  Better end this quick!");
 				}
 			}
-			if (player.lust >= 100)
+			if (player.lust >= player.maxLust())
 				doNext(game.endLustLoss);
 			else doNext(game.playerMenu);
 		}
@@ -134,23 +134,35 @@
 			this.skinTone = "yellow";
 			this.hairColor = randomChoice("black","black and yellow");
 			this.hairLength = 6;
-			initStrTouSpeInte(30, 30, 30, 20);
+			initStrTouSpeInte(30, 50, 30, 20);
 			initLibSensCor(60, 55, 0);
 			this.weaponName = "chitin-plated fist";
 			this.weaponVerb="armored punch";
+			this.weaponAttack = 4 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "chitin";
-			this.armorDef = 9;
+			this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusHP = 40;
+			this.bonusLust = 20;
 			this.lust = 20 + rand(40);
 			this.lustVuln = 0.9;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 4;
-			this.gems = rand(15) + 1;
-			this.drop = new WeightedDrop().add(consumables.BEEHONY,4).addMany(1,consumables.OVIELIX,consumables.W__BOOK,useables.B_CHITN,null);
+			this.level = 6;
+			this.gems = rand(20) + 5;
+			this.drop = new ChainedDrop().add(consumables.OVIELIX, 1 / 6)
+					.add(consumables.W__BOOK, 1 / 4)
+					.add(consumables.BEEHONY, 1 / 2)
+					.elseDrop(useables.B_CHITN);
 			this.antennae = ANTENNAE_BEE;
 			this.wingType = WING_TYPE_BEE_LIKE_SMALL;
 			this.tailType = TAIL_TYPE_BEE_ABDOMEN;
 			this.tailVenom = 100;
 			this.special1 = beeStingAttack;
+			this.str += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 380;
 			checkMonster();
 		}
 

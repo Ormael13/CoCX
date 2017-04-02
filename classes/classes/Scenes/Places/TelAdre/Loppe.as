@@ -314,7 +314,7 @@ private function talkWithLoppe():void {
 	//The curse (unfinished; available after choosing \"<i>Loppe</i>\" at least once)
 	//Fondle (after "Loppe"; see appropriate section)
 	if(flags[kFLAGS.TIMES_ASKED_LOPPE_ABOUT_LOPPE] > 0 && flags[kFLAGS.LOPPE_TIMES_SEXED] > 0) addButton(6,"Tease Her",fondleAndTease);
-	addButton(9,"Back",loppeGenericMeetings);
+	addButton(14,"Back",loppeGenericMeetings);
 }
 
 //Loppe (edited) (C)
@@ -481,7 +481,7 @@ private function gossipWithLoppe():void {
 	//Cotton
 	if(flags[kFLAGS.COTTON_MET_FUCKED] > 0) addButton(6,"Cotton",gossipWithLoppeAboutCotton);
 	//Back (spacebar default)
-	addButton(9,"Back",talkWithLoppe);
+	addButton(14,"Back",talkWithLoppe);
 }
 
 //Urta:
@@ -879,7 +879,7 @@ private function loppeSexChoice(bakery:Boolean = false):void {
 	if(flags[kFLAGS.LOPPE_TIMES_SEXED] > 0) addButton(4,"SqueezeJob",loppeSqueezedickWhateverThatIs);
 	if(player.isTaur() && player.lust >= 33) addButton(5,"TakeAnal",getAssFuckedByLoppeAsACentaur);
 	else if(player.lust >= 33) addButton(5,"TakeAnal",getButtFuckedNonHoarseByLoppe);
-	addButton(9,"Leave",beATeaseAndLeaveLoppeAfterSexInvite);
+	addButton(14,"Leave",beATeaseAndLeaveLoppeAfterSexInvite);
 }
 
 //Male
@@ -960,7 +960,7 @@ private function loppeRidesCocks():void {
 		menu();
 		addButton(0,"Next",loppeRidesYouNoFaceJizz);
 	}
-	dynStats("lus=", 100, "resisted", false);
+	dynStats("lus=", player.maxLust(), "resisted", false);
 }
 
 //{If NoFace:
@@ -1854,12 +1854,12 @@ private function boobjobLoppe():void {
 	outputText("\n\nEmboldened, you clasp your breasts firmer together and start to rise and fall, slowly scraping your " + player.skin() + " up and down the half-breed's prick.  It feels so hot and firm against your chest, growing increasingly damp as Loppe oozes gouts as voluminous as the cumshots of ordinary men, making your breasts and her prick alike equally slippery and enabling you to stroke her faster and faster. \"<i>K-keep that up and I'm gonna shoot anytime,</i>\" Loppe groans, trying to hump into your cleavage.");
 
 	//[(Normal/Naga tongue)
-	if(player.tongueType < TONUGE_DEMONIC) outputText("\n\nYou bend your head and lean down, letting your tongue flick out of your lips and slide gently across the flared head of Loppe's horse-prick, seductively tasting the sweet-salty flavor of her pre.  \"<i>Ah!  Hmm... I seriously hope you like the taste, because you're getting a faceful anytime now!</i>\"  Loppe moans.");
+	if(!player.hasLongTongue()) outputText("\n\nYou bend your head and lean down, letting your tongue flick out of your lips and slide gently across the flared head of Loppe's horse-prick, seductively tasting the sweet-salty flavor of her pre.  \"<i>Ah!  Hmm... I seriously hope you like the taste, because you're getting a faceful anytime now!</i>\"  Loppe moans.");
 	//Demon/Dragon:
 	else outputText("\n\nYour inhumanly long tongue slithers out of your mouth like a tentacle, swiping itself playfully across Loppe's flare to give you a taste of sweet and salty precum before you send it questing down, curling in a spiral pattern around her long shaft and burrowing into your cleavage to lap and squeeze and massage, filling your senses with the tang of her overheated cock.  \"<i>D-damn, sugar!  Such a wonderful tongue you have,</i>\" she groans, equine member throbbing against your hold.");
 
 	outputText("\n\n\"<i>C-cumming!</i>\" is all the warning you get before Loppe's slit opens wide and she begins spewing rope upon rope of hot jism.  You ");
-	if(player.tongueType >= TONUGE_DEMONIC) outputText("retract your tongue into your mouth and ");
+	if(player.hasLongTongue()) outputText("retract your tongue into your mouth and ");
 	outputText("barely shut your eyes in time, continuing to pump and squeeze with your tits even as your lover paints your upper body white in fresh spooge.  You can't see anything; all you know is the wet splashing of cum against your face, the intimate smell of hot, musky cock-cream assaulting your nose with the subtlety of a battering ram, Loppe's ecstatic moans and gasps and howls filling your ears.  Finally, the deluge stops; your hair is soaked in spunk, dripping wetly onto the floor, and you shake your head to try and fling off some of the worst of the gooey gunk, allowing you to look the panting girl in the eyes.");
 
 	outputText("\n\nShe looks back with the hungry stare of a predator eyeing a morsel.  \"<i>Boobies!</i>\" Loppe yells as she pounces you, trying to force you backward onto her bed.");

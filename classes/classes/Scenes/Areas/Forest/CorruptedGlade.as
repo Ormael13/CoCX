@@ -1,9 +1,29 @@
 package classes.Scenes.Areas.Forest {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
-	public class CorruptedGlade extends BaseContent {
+	public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 		
-		public function CorruptedGlade() {}
+		public function CorruptedGlade() {
+			CoC.timeAwareClassAdd(this);
+		}
+		
+		public function timeChange():Boolean {
+			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] > 1 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) { //Extinct if you destroyed 100 Corrupted Glades.
+				if (flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] > 0 && rand(6) == 0) flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]++;
+				if (flags[kFLAGS.KIHA_DESTROYING_CORRUPTED_GLADES] > 0 && rand(4) == 0) flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]++;
+				if (model.time.days % 3 == 0 && model.time.hours > 23) flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]--; //Decrement by 1 every 3 days.
+			}
+			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] >= 100) { //Extinct state
+				if (flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] > 0) flags[kFLAGS.AMILY_DESTROYING_CORRUPTED_GLADES] = 0;
+				if (flags[kFLAGS.KIHA_DESTROYING_CORRUPTED_GLADES] > 0) flags[kFLAGS.KIHA_DESTROYING_CORRUPTED_GLADES] = 0;
+			}
+			return false;
+		}
+		
+		public function timeChangeLarge():Boolean {
+			return false;
+		}
 		
 		public function intro():void {
 			spriteSelect(92);
@@ -18,7 +38,9 @@ package classes.Scenes.Areas.Forest {
 					outputText("  Disgusted by this perversion of nature, you turn away to leave, narrowly avoiding a sudden dripping of thick white fluid from the vines overhead.");
 					dynStats("lus", 2);
 				}
+				outputText("\n\nOf course, you could resolve to destroy the corrupted glade if you want to.");
 				doNext(camp.returnToCampUseOneHour);
+				addButton(1, "Destroy Them", destroyTheCorruptedGladesChoice, null, null, null, "Attempt to destroy the perverted glade.");
 			}
 			else if (player.cor <= 66) { //intrigued reaction
 				outputText("  You explore the glade with equal parts caution and curiosity.  ");
@@ -34,10 +56,16 @@ package classes.Scenes.Areas.Forest {
 				}
 				dynStats("lus", 20 + player.lib / 5, "cor", .5);
 				doNext(camp.returnToCampUseOneHour);
+				addButton(1, "Destroy Them", destroyTheCorruptedGladesChoice, null, null, null, "Attempt to destroy the perverted glade.");
 			}
 			else { //drink sap/lick flower reaction
 				outputText("  You smile as you enter the glade, wondering which of the forbidden fruits you should try...\n\nThere are flowers that bear more than a passing resemblance to pussies,\nvines with absurdly large penis-like tips,\nand trees covered in breast-like knots, leaking sap.");
-				simpleChoices("Flowers", flowerFun, "Vines", tentacleFun, "Trees", treeBoobFun, "", null, "Leave", camp.returnToCampUseOneHour);
+				menu();
+				addButton(0, "Flowers", flowerFun, null, null, null, "These flowers look like pussies. Play with the flower.");
+				addButton(1, "Vines", tentacleFun, null, null, null, "These vines look like cocks at their tips. Play with the vines.");
+				addButton(2, "Trees", treeBoobFun, null, null, null, "The knots on the trees look a lot like breasts. Play with the trees and lick some sap.");
+				addButton(3, "Destroy Them", destroyTheCorruptedGladesChoice, null, null, null, "Attempt to destroy the perverted glade.");
+				addButton(4, "Leave", camp.returnToCampUseOneHour);
 			}
 			//Wallow in decadence reaction - UNFINISHED
 		}
@@ -252,6 +280,96 @@ package classes.Scenes.Areas.Forest {
 					}
 				}
 			}
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		//DESTROY THE CORRUPTED GLADE!
+		private function destroyTheCorruptedGladesChoice():void {
+			clearOutput();
+			outputText("You ponder over how to destroy the foul glade.");
+			menu();
+			var button:int = 0;
+			if (player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0) {
+				addButton(button++, "Fire Breath", destroyTheCorruptedGlades, 0);
+			}
+			if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 || player.findPerk(PerkLib.CorruptedNinetails) >= 0) {
+				addButton(button++, "Fox Fire", destroyTheCorruptedGlades, 1);
+			}
+			if (player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0) {
+				addButton(button++, "Whitefire", destroyTheCorruptedGlades, 2);
+			}
+			if (player.hasKeyItem("Carpenter's Toolbox") >= 0 || player.weapon == weapons.L__AXE) {
+				addButton(button++, "Axe", destroyTheCorruptedGlades, 3);
+			}
+			if (player.weaponVerb == "stab" || player.weaponVerb == "slash" || player.weaponVerb == "cleave" || player.weaponVerb == "keen cut") {
+				addButton(button++, "Weapon", destroyTheCorruptedGlades, 4);
+			}
+			addButton(button++, "Your Hands", destroyTheCorruptedGlades, 5);
+			addButton(14, "Nevermind", camp.returnToCampUseOneHour);
+		}
+		
+		private function destroyTheCorruptedGlades(choice:int):void {
+			var destroyAmount:int = 0;
+			clearOutput();
+			outputText("That's it. Those fucking glades must die!\n\n");
+			//Fire abilities
+			switch(choice) {
+				case 0: //Fire breath
+					outputText("You charge the fire within you and as soon as you build it up enough, you unleash it on the glade, lighting them on fire. By the time the fire dies out, charred plants are all that remain of the glade.\n\n");
+					destroyAmount++;
+					fatigue(50, 1);
+					break;
+				case 1: //Nine tails foxfire
+					outputText("Holding out your palm, you conjure a flame that dances across your fingertips.  You launch it at the glade with a ferocious throw, and it bursts on impact, setting the glade on fire. By the time the fire dies out, charred plants are all that remain of the glade.\n\n");
+					destroyAmount++;
+					fatigue(20, 1);
+					break;
+				case 2: //Whitefire
+					outputText("You narrow your eyes, focusing your mind with deadly intent. You snap your fingers and the glade is enveloped in a flash of white flames! By the time the fire dies out, charred plants are all that remain of the glade.\n\n");
+					destroyAmount++;
+					fatigue(20, 1);
+					break;
+				case 3: //Axe
+					outputText("You grab an axe from your toolbox and hack away at the plants without mercy. Eventually, you manage to chop down every perverted plant in the glade save for some of the trees. They gradually wither away. ");
+					outputText("Finally, you chop down the trees with all your strength, making wedge-shaped cuts. With one last almighty swing, the tree falls and lands on the ground with a loud THUD. It looks like they would make fine wood. You chop the tree into several pieces and haul the wood to your camp. ");
+					camp.cabinProgress.incrementWoodSupply(10);
+					fatigue(30 - (player.str / 10));
+					outputText("\n\n");
+					break;
+				case 4: //Weapon
+					outputText("You ready your [weapon] and hack away at the plants without mercy. Eventually, you manage to cut down every perverted plant in the glade except for the trees. They gradually wither away. You give the breast-knotted trees some vandalism before turning to leave.\n\n");
+					fatigue(40 - (player.str / 5));
+					break;
+				case 5: //Your strength!
+					if (player.str < 30) { //Low strength.
+						outputText("You grab at one of the plants and easily rip the flower stem. Next, you grab one of the vines and focus on tearing it but despite your best efforts, you can't tear it. Sighing with frustration, you drop the vine. You'll have to come back later. \n\n");
+						fatigue(50);
+						doNext(camp.returnToCampUseOneHour);
+						return;
+					}
+					else if (player.str >= 30 && player.str < 70) { //Medium strength
+						outputText("You grab at one of the plants and easily rip the flower stem. Next, you grab one of the vines and focus on tearing it and with all your efforts, you manage to tear it. Finally, you look up at the tree but there's no way you could easily take down the tree. \n\n");
+						fatigue(40);
+					}
+					else { //High strength
+						outputText("You grab the pussy-flowers and cock-vines and tear them with little effort. Next, you look up at the breast-knotted tree and grab the knots. With some efforts, you yank and rip out the knots. Finally, you twist and snap the tree, ending its life. \n\n");
+						fatigue(30);
+					}
+					break;
+				default:
+					outputText("<b>Please report this error to Kitteh6660.</b>\n\n");
+			}
+			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] == 0) outputText("That's one glade eliminated! With effort and dedication, you will be able to cleanse the forest of foul glades.");
+			else outputText("Once again, the forest is cleansed of a tainted glade.");
+			
+			dynStats("cor", -1);
+			destroyAmount++;
+			flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] += destroyAmount;
+			//Milestone events
+			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] == 25) outputText("\n\nYou have a feeling you'll see the glades somewhat less often.");
+			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] == 50) outputText("\n\nYou have a feeling you'll see the glades less often.");
+			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] == 75) outputText("\n\nYou have a feeling you'll see the glades much less often.");
+			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] == 100) outputText("\n\nThat should be the last of the glades! <b>Corrupted Glades are now extinct.</b>");
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}

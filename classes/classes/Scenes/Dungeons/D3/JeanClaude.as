@@ -2,6 +2,8 @@ package classes.Scenes.Dungeons.D3
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.Items.*
+	import classes.GlobalFlags.kFLAGS;
 	
 	/**
 	 * ...
@@ -34,7 +36,7 @@ package classes.Scenes.Dungeons.D3
 		
 		public function handleTease(lustDelta:Number, successful:Boolean):void
 		{
-			if (player.findStatusAffect(StatusAffects.RemovedArmor) < 0)
+			if (player.findStatusAffect(StatusAffects.RemovedArmor) < 0 && player.armor != ArmorLib.NOTHING)
 			{
 				outputText("\n\nJean-Claude stops circling you, looking mildly surprised as you attempt to entice him with your body.");
 
@@ -83,40 +85,40 @@ package classes.Scenes.Dungeons.D3
 			this.imageName = "jeanclaude";
 			this.long = "You are fighting Jean-Claude. He stands over seven feet tall and has a perfect frame, padded with hard, defined muscle despite not looking heavy on his feet in the slightest; the way he circles you, his thighs tensing and relaxing, his powerful tail swishing, ready to spring forward at the first hint of an opening, makes a deep, monkey part of your brain panic, warning you that you are battling an apex predator in his prime. He is dressed in a leather tunic, a bronze cuirass and a centurion’s helmet that combine to give him even more protection than his thick, green and purple mottled hide otherwise would. His eyes glow with a depthless yellow light, endlessly catching your own, enticing you to look further into them. He wields a stained-looking cutlass, which he swings by his side with mocking casualness as he moves; it mimics the movement of his dual, tumescent purple cocks, swaying beneath his tunic in crude suggestion.";
 			this.plural = false;
-			
 			this.createCock(12, 2, CockTypesEnum.LIZARD);
 			this.balls = 2;
 			this.ballSize = 6;
 			this.hoursSinceCum = 9999;
 			createBreastRow(0);
 			tallness = 86;
-			
 			ass.analLooseness = 0;
 			ass.analWetness = 0;
-			
 			hipRating = HIP_RATING_AVERAGE;
 			buttRating = BUTT_RATING_AVERAGE;
 			lowerBody = LOWER_BODY_TYPE_LIZARD;
 			skinDesc = "green-purple mottled hide";
-			initStrTouSpeInte(80, 100, 80, 60);
+			initStrTouSpeInte(100, 200, 110, 70);
 			initLibSensCor(40, 40, 80);
 			faceType = FACE_LIZARD;
-			
 			weaponName = "cutlass";
 			weaponVerb = "slash";
-			weaponAttack = 20;
-			
-			this.bonusHP = 400;
-			
+			weaponAttack = 25 + (6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			armorName = "leather tunic";
+			armorDef = 25 + (3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusHP = 1000;
+			this.bonusLust = 30;
 			lustVuln = 0.6;
-			armorDef = 20;
 			lust = 5;
-			level = 20;
-			gems = 300 + rand(55);
-			
+			level = 38;
+			gems = 700 + rand(100);
 			this.drop = NO_DROP;
-			
+			this.createPerk(PerkLib.BasicSelfControl, 0, 0, 0, 0);
+			this.str += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 40 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 4160;
 			checkMonster();
 		}
 		

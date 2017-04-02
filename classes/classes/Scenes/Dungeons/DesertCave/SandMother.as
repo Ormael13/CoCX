@@ -1,20 +1,134 @@
 package classes.Scenes.Dungeons.DesertCave
 {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class SandMother extends Monster
 	{
-
+		//Notes:
+		//Starts combat with sandstorm.  GigaFire's every fifth round.
+		//Whispers every fourth.
+		public function sandWitchMotherAI():void {
+			if(findStatusAffect(StatusAffects.Sandstorm) < 0) {
+				sandStormAttack();
+				return;
+			}
+			if(findStatusAffect(StatusAffects.Gigafire) >= 0) {
+				gigaFire2();
+				return;
+			}
+			var choices:Array = [];
+			if(player.findStatusAffect(StatusAffects.Whispered) < 0) choices[choices.length] = getWhispered;
+			choices[choices.length] = eatALightningBolt;
+			choices[choices.length] = sandMotherTelekinesis;
+			choices[choices.length] = gigaFire;
+			choices[choices.length] = earthShield;
+			choices[rand(choices.length)]();
+		}
+		//Earthshield
+		public function earthShield():void {
+			//Surrounds the witch a vortex of stones, raising her defense greatly and conferring 25% block to standard attacks.
+			outputText("Lowering her scepter towards the ground, the eight-foot tall sorceress suddenly grunts, lifting it as if carrying great weight.  As the small staff passes her chest, bits of stone and rock begin to lift out of the ground, accelerating into a vortex of earth that spins around her.  <b>It's going to be harder to hit her with physical attacks now!</b>");
+			createStatusAffect(StatusAffects.Earthshield,0,0,0,0);
+			combatRoundOver();
+		}
+		//*GigaFire
+		public function gigaFire():void {
+			//Begins focusing into her staff, which floats in front of her.  PC disrupt attack by attacking.  Attack hits at half strength if disrupted.
+			outputText("Releasing the scepter, the Sand Mother spreads her hands, each glowing with eldritch, white flames.  Her heels slowly float up off the ground as she closes her eyes in concentration.  You can sense the power and heat rolling off her in waves, and if you don't do something to disrupt her, you'll likely be burned to a crisp.");
+			if(player.inte > 40) outputText("  She's not even looking at you and seems steeled against lusty interruptions.  Perhaps you can hit her hard enough to shatter her concentration.");
+			createStatusAffect(StatusAffects.Gigafire,0,0,0,0);
+			combatRoundOver();
+		}
+		public function gigaFire2():void {
+			var damage:int = 40 + rand(11);
+			//Not interrupted:
+			if(statusAffectv1(StatusAffects.Gigafire) < 10) {
+				if (player.findStatusAffect(StatusAffects.Blizzard) >= 0) {
+					outputText("The Sand Mother grabs her scepter in both hands, combining the flames that wreath them into an immense, blinding conflagration.  She points at you, and the fire washes out in a wave like a serpent, twisting at you as you try to avoid it, doubling back on itself whenever it misses.  It's unavoidable!  You're enveloped in the consuming fire that try to pierce surrounding you maelstorm of ice shards!");
+				}
+				else {
+					outputText("The Sand Mother grabs her scepter in both hands, combining the flames that wreath them into an immense, blinding conflagration.  She points at you, and the fire washes out in a wave like a serpent, twisting at you as you try to avoid it, doubling back on itself whenever it misses.  It's unavoidable!  You're enveloped in the consuming fire!");
+				}
+				damage *= 3;
+			}
+			//Interrupted:
+			else {
+				if (player.findStatusAffect(StatusAffects.Blizzard) >= 0) {
+					outputText("Thumbling back to the ground from your damaging hit, the Sand Mother grabs at her head, one flame going out.  She recovers in time to grab the staff and fling it towards you, but it's at a fraction of the strength she intended.  Still, it burns all the same. ");
+				}
+				else {
+					outputText("Thumbling back to the ground from your damaging hit, the Sand Mother grabs at her head, one flame going out.  She recovers in time to grab the staff and fling it towards you, but it's at a fraction of the strength she intended.  Still, it burns all the same. ");
+				}
+			}
+			if (player.findStatusAffect(StatusAffects.Blizzard) >= 0) {
+				player.addStatusValue(StatusAffects.Blizzard, 1, -1);
+				damage *= 0.2;
+				damage = Math.round(damage);
+			}
+			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
+			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+			damage = Math.round(damage);
+			damage = player.takeDamage(damage, true);
+			removeStatusAffect(StatusAffects.Gigafire);
+			combatRoundOver();
+		}
+			
+		//*Telekinesis
+		//Throws the PC against the wall.  Does more damage to shorter, thinner PCs.
+		public function sandMotherTelekinesis():void {
+			outputText("She narrows her eyes at you, and an immense, magical pressure reaches out, taking hold of you.  It spins you in the air before slamming you into the walls!");
+			
+			var sizeMod:Number = 100;
+			var thickMod:Number = player.thickness / 100 + 0.5;
+			sizeMod += player.tallness * thickMod;
+			if(sizeMod < 140) outputText("  You immediately wish you weren't so small, as you're sure she couldn't have flung a heavier champion nearly as easily. ");
+			else if(sizeMod >= 200) outputText("  You're glad for your size, as she couldn't seem to accelerate you into the stone as fast as she'd like.  Sometimes eating plenty pays off. ");
+			//0 thickness, 4' tall: 124
+			//100 thickness, 4' tall: 172
+			//0 thickness, 6' tall: 136
+			//100 thickness, 6' tall: 208
+			//0 thickness, 8' tall: 148
+			//100 thickness, 8' tall: 244
+			var multiplier:Number = sizeMod / 170;
+			var damage:Number = 20;
+			damage = multiplier * damage;
+			damage = player.takeDamage(damage, true);
+			combatRoundOver();
+		}
+		
+		//*Lightning Bolt
+		//Unavoidable magic damage.
+		public function eatALightningBolt():void {
+			outputText("Holding her staff back, she lifts her free hand with her fingers outstretched in a fan.  Sparks dance between her slender digits, coiling around them like snakes.  In a flash, they rush to her palm and erupt in a lightning bolt, striking you instantly and unavoidably! ");
+			var damage:int = 30 + rand(10);
+			damage = player.takeDamage(damage, true);
+			combatRoundOver();
+		}
+		//*Whisper:
+		//As ackbal, stuns the PC 1 round.  Cannot be resisted.
+		public function getWhispered():void {
+			outputText("Mouthing, \"<i>Can you hear me?</i>\" the witch's voice intrudes into your mind, matching her mouth word for word.  She floods your psyche with words and thoughts, all of your defeat or submission, each more degrading and more humiliating than the last.  Perhaps the worst are the ones where she turns you over to Lethice after you're broken...  The tumultous thoughts and emotions both stun and arouse you, preventing you from attacking while you try to clear your beleaguered consciousness.");
+			player.createStatusAffect(StatusAffects.Whispered,0,0,0,0);
+			game.dynStats("lus", 15);
+			combatRoundOver();
+		}
+		public function sandStormAttack():void {
+			outputText("With a smirk, the Sand Mother decrees, \"<i>You fight not just me, but the shifting sands as well.</i>\"  She casually flicks her wrist, and sand rises up from the floors, the walls, everywhere really.  It begins to spin about, blown by an unseen wind, and the entire chamber is wreathed in a shifting sandstorm.  The grit constantly tries to get into your eyes.  It's likely you're going to be blinded by it every now and then.");
+			createStatusAffect(StatusAffects.Sandstorm,0,0,0,0);
+			combatRoundOver();
+		}
+		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.defeatTheSandMother();
+			game.dungeons.desertcave.defeatTheSandMother();
 		}
-
+		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			game.loseToTheSandMother();
+			game.dungeons.desertcave.loseToTheSandMother();
 		}
-
+		
 		public function SandMother()
 		{
 			this.a = "the ";
@@ -35,24 +149,32 @@ package classes.Scenes.Dungeons.DesertCave
 			this.skinTone = "bronzed";
 			this.hairColor = "platinum-blonde";
 			this.hairLength = 15;
-			initStrTouSpeInte(55, 55, 35, 45);
-			initLibSensCor(55, 40, 30);
+			initStrTouSpeInte(64, 80, 55, 64);
+			initLibSensCor(60, 40, 30);
 			this.weaponName = "fists";
 			this.weaponVerb="punches";
-			this.weaponAttack = 0;
+			this.weaponAttack = 6 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "robes";
-			this.armorDef = 1;
+			this.armorDef = 10 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = 130;
+			this.bonusLust = 30;
 			this.lust = 20;
 			this.lustVuln = .6;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 7;
-			this.gems = rand(15) + 55;
+			this.level = 12;
+			this.gems = rand(30) + 70;
 			this.createPerk(PerkLib.Resolute,0,0,0,0);
 			this.createPerk(PerkLib.Focused,0,0,0,0);
+			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.drop = NO_DROP;
+			this.str += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 1260;
 			checkMonster();
 		}
 		

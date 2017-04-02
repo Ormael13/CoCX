@@ -1,5 +1,8 @@
-﻿import coc.view.CoCButton;
+﻿import classes.Scenes.Achievements;
+import coc.view.CoCButton;
 import coc.view.MainView;
+import flash.display.Stage;
+import flash.display.StageQuality;
 import flash.text.TextField;
 import flash.text.TextFormat;
 
@@ -23,26 +26,41 @@ public function mainMenu(e:MouseEvent = undefined):void
 	{
 		mainView.removeChild(mainView.aCb);
 	}
-
+	mainViewManager.registerShiftKeys();
 	mainView.eventTestInput.x = -10207.5;
 	mainView.eventTestInput.y = -1055.1;
 	hideStats();
+	mainView.background.gotoAndStop(flags[kFLAGS.BACKGROUND_STYLE] + 1);
+	mainView.sideBarBG.gotoAndStop(flags[kFLAGS.BACKGROUND_STYLE] + 1);
+	mainViewManager.startUpButtons();
+	kGAMECLASS.saves.loadPermObject();
+	mainViewManager.setTheme();
 	//Reset newgame buttons
-	mainView.setMenuButton( MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameGo );
+	mainView.setMenuButton(MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameFromScratch);
 	mainView.hideAllMenuButtons();
-	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
-	mainView.showMenuButton( MainView.MENU_DATA );
+	mainView.showMenuButton(MainView.MENU_NEW_MAIN);
+	mainView.showMenuButton(MainView.MENU_DATA);
+	
+	mainView.newGameButton.toolTipText = "Start a new game.";
+	mainView.dataButton.toolTipHeader = "New Game";
+	mainView.dataButton.toolTipText = "Save or load your files.";
+	mainView.dataButton.toolTipHeader = "Data";
+	mainView.statsButton.toolTipText = "View your stats.";
+	mainView.statsButton.toolTipHeader = "Stats";
+	mainView.perksButton.toolTipText = "View your perks.";
+	mainView.perksButton.toolTipHeader = "Perks";
+	mainView.appearanceButton.toolTipText = "View your appearance.";
+	mainView.appearanceButton.toolTipHeader = "Appearance";
 	//Sets game state to 3, used for determining back functionality of save/load menu.
 	gameState = 3;
-
-
-	outputText("<b>Corruption of Champions (" + version + ")</b>", true);
+	clearOutput();
+	//outputText("<img src=\"logo\" id=\"coc-logo\" height=\"300\" width=\"400\" />\n");
+	outputText("<b>Corruption of Champions (" + version + ")</b>", false);
 	
 	if (CoC_Settings.debugBuild)
-		outputText(" Debug Build.");
+		outputText(" Debug Build");
 	else
 		outputText(" Release Build");
-
 	//doThatTestingThang();
 
 	startupScreenBody();
@@ -51,23 +69,25 @@ public function mainMenu(e:MouseEvent = undefined):void
 	if (player.str > 0)  //we're in a game, allow resume.
 		resume = playerMenu;
 
+	var achievements:Achievements = new Achievements();
 
 	// I really wanted to only have the "imageCreditsScreen" button if images were found, but it turns out
 	// that if you check if any images were found immediately when this screen is shown, you get 0
 	// since the images haven't loaded yet.
 	// Therefore, the imageCreditScreen will just have to say "No image pack" if you don't have any images
 
-	choices("", null,
-			"Image Credits", imageCreditsScreen,
-			"Credits", creditsScreen,
-			"", null,
-			"Instructions", howToPlay,
-			"Debug Info", debugPane,
-			"", null,
-			"", null,
-			"Settings", settingsScreen,
-			"Resume", resume);
-
+	menu();
+	if (resume != null) addButton(0, "Resume", resume, null, null, null, "Get back to gameplay?");
+	else addButtonDisabled(0, "Resume", "Please start or load a game first.");
+	addButton(1, "Settings", settingsScreenMain, null, null, null, "Configure game settings and enable cheats.");
+	addButton(2, "Instructions", howToPlay, null, null, null, "How to play.  Starting tips.  And hotkeys for easy left-handed play...");
+	addButton(3, "Achievements", achievements.achievementsScreen, null, null, null, "View all achievements you have unlocked so far.");
+	//addButton(4, "Mod Thread", openURL, "http://fenoxo.com/forum/index.php?/topic/5-coc-revamp-mod", null, null, "Check the official mod thread on Fenoxo's forum.");
+		
+	addButton(5, "Credits", creditsScreen, null, null, null, "See a list of all the cool people who have contributed to content for this game!");
+	addButton(6, "Image Credits", imageCreditsScreen, null, null, null, "Check out who contributed to the image pack.");
+	//addButton(7, "Changelog", debugPane, null, null, null, "View changelog.");
+	//addButton(8, "Debug Info", debugPane, null, null, null, "View debug information.");
 	if (false)  // Conditionally jump into chaosmonkey IMMEDIATELY
 	{
 		this.monkey.throwOnSyntaxError = true;
@@ -81,33 +101,30 @@ public function startupScreenBody():void
 
 	// NO FUCKING DECENT MULTI-LINE STRING LITERALS BECAUSE FUCKING STUPID
 	// WTF ACTIONSCRIPT YOUR DEV'S ARE ON CRACK
-
-	outputText(<![CDATA[
-<br>(Formerly Unnamed Text Game)  
-<u>Created by: Fenoxo</u>
-
-Edited By:<br>
-&nbsp; &nbsp; &nbsp; Ashi, SoS, Prisoner416, Zeikfried, et al
-
-Open-source contributions by:<br>
-&nbsp; &nbsp; &nbsp; aimozg, Amygdala, Cmacleod42, Enterprise2001, Fake-Name, Gedan, Yoffy, et al
-
-Source Code: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>
-
-Bug Tracker: <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/issues'>https://github.com/herp-a-derp/Corruption-of-Champions/issues</a></u>  
-(requires an account, unfortunately)
-
-**<u>DISCLAIMER</u>**
-<br>- **There are many strange and odd fetishes contained in this flash.  Peruse at own risk.**
-<br>- **Please be 18 or the legal age to view porn before playing.**
-<br>- **Try to keep your keyboard clean.  Think of the children!**
-
-
-For more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>.
-
-Also go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u> by Xadera on furaffinity.
-
-	]]>, false, true);
+	// Fixed. No more markdown. :)
+	outputText("\n(Formerly Unnamed Text Game)");
+	//Brief credits
+	outputText("\n\n<b>Created by:</b> Fenoxo"); //The Original Creator
+	outputText("\n\n<b>Edited by:</b> "); //Edited By
+	outputText("\n\tAshi, SoS, Prisoner416, Zeikfried, et al");
+	outputText("\n\n<b>Open-source contributions by:</b> "); //Contributions
+	outputText("\n\taimozg, Amygdala, Cmacleod42, Enterprise2001, Fake-Name, Gedan, Yoffy, Kitteh6660, et al");
+	outputText("\n\n<b>Game Mod by:</b> Ormael"); //Mod Creator
+	//Github for Original
+	outputText("\n\n<b><u>Original Game Github</u></b>");
+	outputText("\n<b>Source Code:</b> <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions'>https://github.com/herp-a-derp/Corruption-of-Champions</a></u>");
+	outputText("\n<b>Bug Tracker:</b> <u><a href='https://github.com/herp-a-derp/Corruption-of-Champions/issues'>https://github.com/herp-a-derp/Corruption-of-Champions/issues</a></u>");
+	outputText("\n(requires an account, unfortunately)");
+	//Github for Mod
+	//Disclaimer
+	outputText("\n\n<b><u>DISCLAIMER</u></b>");
+	outputText("<li>There are many strange and odd fetishes contained in this flash.  Peruse at own risk.</li>");
+	outputText("<li>Please be 18 or the legal age to view porn before playing. If not, enable SFW Mode.</li>");
+	outputText("<li>Try to keep your keyboard clean.  Think of the children!</li>");
+	//Other Info
+	outputText("\n\nFor more information see Fenoxo's Blog at <b><u><a href='http://www.fenoxo.com/'>fenoxo.com</a></u></b>. ")
+	outputText("\n\nCheck out Trials in Tainted Space as well!");
+	outputText("\n\nFall of Eden is worth a try too ^^");
 
 	if(debug)
 		outputText("\n\n<b>DEBUG MODE ENABLED:  ITEMS WILL NOT BE CONSUMED BY USE.</b>");
@@ -117,6 +134,8 @@ Also go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u>
 		outputText("\n\n<b>Easy Mode On:  Bad-ends can be ignored.</b>");
 	if(flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
 		outputText("\n\n<b>SILLY MODE ENGAGED: Crazy, nonsensical, and possibly hilarious things may occur.</b>");
+	if (flags[kFLAGS.ITS_EVERY_DAY])
+		outputText("\n\n<b>Eternal holiday enabled.</b>");
 	if(isEaster())
 		outputText("\n\n<b>It's Easter!  Enjoy the eggs!</b>");
 	if(isValentine())
@@ -124,41 +143,81 @@ Also go play <u><a href='http://www.furaffinity.net/view/9830293/'>Nimin</a></u>
 	if(helFollower.isHeliaBirthday())
 		outputText("\n\n<b>It's Helia's Birthday Month!</b>");
 
-
 }
 
-public function settingsScreen():void
+public function settingsScreenMain():void
 {
-	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
-	mainView.showMenuButton( MainView.MENU_DATA );
+	saves.savePermObject(false);
+	mainView.showMenuButton(MainView.MENU_NEW_MAIN);
+	mainView.showMenuButton(MainView.MENU_DATA);
+	clearOutput();
+	displayHeader("Settings");
+	outputText("Here, you can adjust the gameplay and interface settings. Setting flags are saved in a special file so you don't have to re-adjust it each time you load a save file.");
+	menu();
+	addButton(0, "Gameplay", settingsScreenGameSettings);
+	addButton(1, "Interface", settingsScreenInterfaceSettings);
+	addButton(3, "Font Size", fontSettingsMenu);
+	addButton(4, "Controls", displayControls);
+
+	addButton(14, "Back", mainMenu);
+
+	if (flags[kFLAGS.HARDCORE_MODE] > 0)
+	{
+		debug = false;
+		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
+		flags[kFLAGS.HYPER_HAPPY] = 0;
+		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = 0;
+	}
+}
+
+//------------
+// GAMEPLAY
+//------------
+public function settingsScreenGameSettings():void {
+	clearOutput();
+	displayHeader("Gameplay Settings");
 	
-	outputText("<b>Settings toggles:</b>\n", true);
+	if (flags[kFLAGS.HARDCORE_MODE] > 0) outputText("<font color=\"#ff0000\">Hardcore mode is enabled. Cheats are disabled.</font>\n\n");
 
 	if(debug)
-		outputText("Debug mode enabled: <b>Yes</b>\n	Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.");
+		outputText("Debug Mode: <font color=\"#008000\"><b>ON</b></font>\n Items will not be consumed by use, fleeing always succeeds, and bad-ends can be ignored.");
 	else
-		outputText("Debug mode enabled: <b>No</b>\n	Items consumption will occur as normal.");
-
+		outputText("Debug Mode: <font color=\"#800000\"><b>OFF</b></font>\n Items consumption will occur as normal.");
+	
 	outputText("\n\n");
+	if (flags[kFLAGS.GAME_DIFFICULTY] <= 0)
+	{
+		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG]) outputText("Difficulty: <font color=\"#008000\"><b>Easy</b></font>\n Combat is easier and bad-ends can be ignored.");
+		else outputText("Difficulty: <font color=\"#808000\"><b>Normal</b></font>\n No opponent stats modifiers. You can resume from bad-ends with penalties.");
+	}
+	else if (flags[kFLAGS.GAME_DIFFICULTY] == 1)
+	{
+		outputText("Difficulty: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 25% more HP and does 15% more damage. Bad-ends can ruin your game.");
+	}
+	else if (flags[kFLAGS.GAME_DIFFICULTY] == 2)
+	{
+		outputText("Difficulty: <b><font color=\"#C00000\">Nightmare</font></b>\n Opponent has 50% more HP and does 30% more damage.");
+	}
+	else if (flags[kFLAGS.GAME_DIFFICULTY] == 3)
+	{
+		outputText("Difficulty: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent has 100% more HP and does more 50% damage.");
+	}
+	else if (flags[kFLAGS.GAME_DIFFICULTY] >= 4)
+	{
+		outputText("Difficulty: <b><font color=\"#FF0000\">Xianxia</font></b>\n Opponent has 200% more HP and does more 100% damage.");
+	}
 
-	if(flags[kFLAGS.SHOW_SPRITES_FLAG] == 0)
-		outputText("Sprites enabled: <b>Yes</b>.\n	You like to look at pretty pictures.");
+	/*if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG])
+		outputText("Easy Mode: <font color=\"#008000\"><b>ON</b></font>\n Bad-ends can be ignored and combat is easier.");
 	else
-		outputText("Sprites enabled: <b>No</b>.\n	There are only words. Nothing else.");
+		outputText("Easy Mode: <font color=\"#800000\"><b>OFF</b></font>\n Bad-ends can ruin your game and combat is challenging.");
 
+	outputText("\n\n");*/
 	outputText("\n\n");
-
-	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG])
-		outputText("Easy Mode <b>On</b>\n	Bad-ends can be ignored and combat is easier.");
-	else
-		outputText("Easy Mode <b>Off</b>\n	Bad-ends can ruin your game and combat is challenging.");
-
-	outputText("\n\n");
-
 	if(flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
-		outputText("Silly Mode <b>On</b>\n	Crazy, nonsensical, and possibly hilarious things may occur.");
+		outputText("Silly Mode: <font color=\"#008000\"><b>ON</b></font>\n Crazy, nonsensical, and possibly hilarious things may occur.");
 	else
-		outputText("Silly Mode <b>Off</b>\n	You're an incorrigable stick-in-the-mud with no sense of humor.");
+		outputText("Silly Mode: <font color=\"#800000\"><b>OFF</b></font>\n You're an incorrigable stick-in-the-mud with no sense of humor.");
 
 	outputText("\n\n");
 	outputText("<b>The following flags are not fully implemented yet (e.g. they don't apply in <i>all</i> cases where they could be relevant).</b>\n");
@@ -167,33 +226,451 @@ public function settingsScreen():void
 
 	if(flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
 	{
-		outputText("Low standards Mode <b>On</b>\n	NPCs ignore body type preferences.");
-		outputText("\n	(Not gender preferences though. You still need the right hole.)");
+		outputText("Low standards Mode: <font color=\"#008000\"><b>ON</b></font>\n NPCs ignore body type preferences.");
+		outputText("\n (Not gender preferences though. You still need the right hole.)");
 	}
 	else
-		outputText("Low standards Mode <b>Off</b>\n	NPCs have body-type preferences.");
-
+		outputText("Low standards Mode: <font color=\"#800000\"><b>OFF</b></font>\n NPCs have body-type preferences.");
 
 	outputText("\n\n");
 
 	if(flags[kFLAGS.HYPER_HAPPY])
 	{
-		outputText("Hyper Happy mode <b>On</b>\n	Only reducto and humus shrink endowments.");
-		outputText("\n	Incubus draft doesn't affect breasts, and succubi milk doesn't affect cocks.")
+		outputText("Hyper Happy Mode: <font color=\"#008000\"><b>ON</b></font>\n Only reducto and humus shrink endowments.");
+		outputText("\n Incubus draft doesn't affect breasts, and succubi milk doesn't affect cocks.")
 	}
 	else
-		outputText("Hyper Happy mode <b>Off</b>\n	Male enhancement potions shrink female endowments, and vice versa.");
+		outputText("Hyper Happy Mode: <font color=\"#800000\"><b>OFF</b></font>\n Male enhancement potions shrink female endowments, and vice versa.");
+		
+	outputText("\n\n");		
+		
+	if (flags[kFLAGS.SFW_MODE] >= 1)
+	{
+		outputText("SFW Mode: <font color=\"#008000\"><b>ON</b></font>\n Sex scenes are disabled and adult materials are hidden.");
+	}
+	else 
+		outputText("SFW Mode: <font color=\"#800000\"><b>OFF</b></font>\n Sex scenes are enabled.");
+		
+	outputText("\n\n");
+		
+	if (flags[kFLAGS.WATERSPORTS_ENABLED] >= 1 && flags[kFLAGS.SFW_MODE] <= 0)
+	{
+		outputText("Watersports: <font color=\"#008000\"><b>Enabled</b></font>\n Watersports scenes are enabled. (You kinky person)");
+	}
+	else 
+		outputText("Watersports: <font color=\"#800000\"><b>Disabled</b></font>\n Watersports scenes are disabled.");
+		
+	outputText("\n\n");
+	
+	if (flags[kFLAGS.AUTO_LEVEL] >= 1)
+	{
+		outputText("Automatic Leveling: <font color=\"#008000\"><b>ON</b></font>\n Leveling up is done automatically once you accumulate enough experience.");
+	}
+	else 
+		outputText("Automatic Leveling: <font color=\"#800000\"><b>OFF</b></font>\n Leveling up is done manually.");
 
-	choices("Toggle Debug", toggleDebug,
-			"Sprite Toggle", toggleSpritesFlag,
-			"EZ Mode", toggleEasyModeFlag,
-			"Larger Font", incFontSize,
-			"Controls", displayControls,
-			"Hyper Happy", toggleHyperHappy,
-			"Low Standards", toggleStandards,
-			"Silly Toggle", toggleSillyFlag,
-			"Smaller Font", decFontSize,
-			"Back", mainMenu);
+	menu();
+	addButton(0, "Toggle Debug", toggleDebug, null, null, null, "Turn on debug mode. Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.");
+	if (player.str > 0) addButton(1, "Difficulty", difficultySelectionMenu, null, null, null, "Adjust the game difficulty to make it easier or harder.");
+	//addButton(1, "Easy Mode", toggleEasyModeFlag, null, null, null, "Toggles easy mode.  Enemy damage is halved and bad-ends can be ignored.");	
+	addButton(2, "Silly Toggle", toggleSillyFlag, null, null, null, "Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.");
+	addButton(3, "Low Standards", toggleStandards);
+	addButton(4, "Hyper Happy", toggleHyperHappy);
+	
+	addButton(5, "SFW Toggle", toggleSFW, null, null, null, "Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored. \n\nCurrently under development, only disables most sex scenes. Soon, it'll disable rape scenes."); //Softcore Mode
+	addButton(6, "Auto level", toggleAutoLevel, null, null, null, "Toggles automatic leveling when you accumulate sufficient experience.");
+	if (player.str > 0) addButton(8, "Enable Surv", enableSurvivalPrompt, null, null, null, "Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");	
+	if (player.str > 0) addButton(9, "Enable Real", enableRealisticPrompt, null, null, null, "Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");	
+	addButton(10, "Fetishes", fetishSubMenu, null, null, null, "Toggle some of the weird fetishes such as watersports and worms.");
+
+	if (flags[kFLAGS.HUNGER_ENABLED] >= 0.5)
+	{
+		removeButton(8);
+	}
+	if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
+	{
+		removeButton(9);
+	}
+	if (flags[kFLAGS.HARDCORE_MODE] > 0) 
+	{
+		removeButton(0);
+		removeButton(1);
+		removeButton(3);
+		removeButton(4);
+		debug = false;
+		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
+		flags[kFLAGS.HYPER_HAPPY] = 0;
+		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = 0;
+	}
+	addButton(14, "Back", settingsScreenMain);
+}
+
+public function toggleDebug():void
+{
+	//toggle debug
+	if(debug)
+		debug = false;
+	else
+		debug = true;
+		
+	mainView.showMenuButton(MainView.MENU_DATA);
+	settingsScreenGameSettings();
+	return;
+}
+
+public function difficultySelectionMenu():void {
+	clearOutput();
+	outputText("You can choose a difficulty to set how hard battles will be.\n");
+	outputText("\n<b>Easy:</b> -50% damage, can ignore bad-ends.");
+	outputText("\n<b>Normal:</b> No stats changes.");
+	outputText("\n<b>Hard:</b> +25% HP, +15% damage.");
+	outputText("\n<b>Nightmare:</b> +50% HP, +30% damage.");
+	outputText("\n<b>Extreme:</b> +100% HP, +50% damage.");
+	outputText("\n<b>Xianxia:</b> +200% HP, +100% damage.");
+	menu();
+	addButton(0, "Easy", chooseDifficulty, -1);
+	addButton(1, "Normal", chooseDifficulty, 0);
+	addButton(2, "Hard", chooseDifficulty, 1);
+	addButton(3, "Nightmare", chooseDifficulty, 2);
+	addButton(5, "EXTREME", chooseDifficulty, 3);
+	addButton(6, "XIANXIA", chooseDifficulty, 4);
+	addButton(14, "Back", settingsScreenGameSettings);
+}
+
+public function chooseDifficulty(difficulty:int = 0):void {
+	if (difficulty <= -1) {
+		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 1;
+		flags[kFLAGS.GAME_DIFFICULTY] = 0;
+	}
+	else {
+		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
+		flags[kFLAGS.GAME_DIFFICULTY] = difficulty;
+	}
+	settingsScreenGameSettings();
+}
+
+//Not used anymore as there's difficulty settings.
+/*public function toggleEasyModeFlag():void
+{
+	//toggle easy mode
+	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 0)
+		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 1;
+	else
+		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
+	mainView.showMenuButton(MainView.MENU_DATA);
+	settingsScreenGameSettings();
+	return;
+}*/
+
+public function toggleSillyFlag():void
+{
+	//toggle silly mode
+	if(flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
+		flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = false;
+	else
+		flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = true;
+	settingsScreenGameSettings();
+	return;
+
+}
+
+public function toggleStandards():void
+{
+	//toggle low standards
+	if(flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
+		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = false;
+	else
+		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = true;
+	settingsScreenGameSettings();
+	return;
+}
+
+public function toggleHyperHappy():void
+{
+	//toggle hyper happy
+	if(flags[kFLAGS.HYPER_HAPPY])
+		flags[kFLAGS.HYPER_HAPPY] = false;
+	else
+		flags[kFLAGS.HYPER_HAPPY] = true;
+	settingsScreenGameSettings();
+	return;
+}
+
+public function toggleSFW():void {
+	if (flags[kFLAGS.SFW_MODE] < 1) flags[kFLAGS.SFW_MODE] = 1;
+	else flags[kFLAGS.SFW_MODE] = 0;
+	settingsScreenGameSettings();
+}
+
+public function toggleWatersports():void {
+	if (flags[kFLAGS.WATERSPORTS_ENABLED] < 1) flags[kFLAGS.WATERSPORTS_ENABLED] = 1;
+	else flags[kFLAGS.WATERSPORTS_ENABLED] = 0;
+	settingsScreenGameSettings();
+}
+
+public function toggleAutoLevel():void {
+	if (flags[kFLAGS.AUTO_LEVEL] < 1) flags[kFLAGS.AUTO_LEVEL] = 1;
+	else flags[kFLAGS.AUTO_LEVEL] = 0;
+	settingsScreenGameSettings();	
+}
+
+public function fetishSubMenu():void {
+	menu();
+	addButton(0, "Watersports", toggleWatersports, null, null, null, "Toggles watersports scenes. (Scenes related to urine fetish)"); //Enables watersports.
+	if (player.findStatusAffect(StatusAffects.WormsOn) >= 0 || player.findStatusAffect(StatusAffects.WormsOff) >= 0) addButton(1, "Worms", toggleWormsMenu, null, null, null, "Enable or disable worms. This will NOT cure infestation, if you have any.");
+	else addButtonDisabled(1, "Worms", "Find the sign depicting the worms in the mountains to unlock this.");
+	addButton(4, "Back", settingsScreenGameSettings);
+}
+
+private function toggleWormsMenu():void {
+	clearOutput();
+	if (player.findStatusAffect(StatusAffects.WormsOn) >= 0) {
+		outputText("You have chosen to encounter worms as you find the mountains");
+		if (player.findStatusAffect(StatusAffects.WormsHalf) >= 0) outputText(" albeit at reduced encounter rate");
+		outputText(". You can get infested.");
+	}
+	if (player.findStatusAffect(StatusAffects.WormsOff) >= 0) {
+		outputText("You have chosen to avoid worms. You won't be able to get infested.");
+	}
+	menu();
+	addButton(0, "Enable", setWorms, true, false);
+	addButton(1, "Enable (Half)", setWorms, true, true);
+	addButton(2, "Disable", setWorms, false, false);
+	addButton(4, "Back", fetishSubMenu);
+}
+
+private function setWorms(enabled:Boolean, half:Boolean):void {
+	//Clear status effects
+	if (player.findStatusAffect(StatusAffects.WormsOn) >= 0) player.removeStatusAffect(StatusAffects.WormsOn);
+	if (player.findStatusAffect(StatusAffects.WormsHalf) >= 0) player.removeStatusAffect(StatusAffects.WormsHalf);
+	if (player.findStatusAffect(StatusAffects.WormsOff) >= 0) player.removeStatusAffect(StatusAffects.WormsOff);
+	//Set status effects
+	if (enabled) {
+		player.createStatusAffect(StatusAffects.WormsOn, 0, 0, 0, 0);
+		if (half) player.createStatusAffect(StatusAffects.WormsHalf, 0, 0, 0, 0);
+	}
+	else {
+		player.createStatusAffect(StatusAffects.WormsOff, 0, 0, 0, 0);
+	}
+	toggleWormsMenu();
+}
+
+//Survival Mode
+public function enableSurvivalPrompt():void {
+	outputText("Are you sure you want to enable Survival Mode?\n\n", true)
+	outputText("You will NOT be able to turn it off! (Unless you reload immediately.)")
+	doYesNo(enableSurvivalForReal, settingsScreenGameSettings);
+}
+
+public function enableSurvivalForReal():void {
+	outputText("Survival mode is now enabled.", true)
+	player.hunger = 80;
+	flags[kFLAGS.HUNGER_ENABLED] = 0.5;
+	doNext(settingsScreenGameSettings);
+}
+
+//Realistic Mode
+public function enableRealisticPrompt():void {
+	outputText("Are you sure you want to enable Realistic Mode?\n\n", true)
+	outputText("You will NOT be able to turn it off! (Unless you reload immediately.)")
+	doYesNo(enableRealisticForReal, settingsScreenGameSettings);
+}
+
+public function enableRealisticForReal():void {
+	outputText("Realistic mode is now enabled.", true)
+	flags[kFLAGS.HUNGER_ENABLED] = 1;
+	doNext(settingsScreenGameSettings);
+}
+
+//------------
+// INTERFACE
+//------------
+public function settingsScreenInterfaceSettings():void {
+	clearOutput();
+	displayHeader("Interface Settings");
+	
+	/*if (flags[kFLAGS.USE_OLD_INTERFACE] >= 1)
+	{
+		outputText("Stats Pane Style: <b>Old</b>\n Old stats panel will be used.");
+	}
+	else 
+		outputText("Stats Pane Style: <b>New</b>\n New stats panel will be used.");
+		
+	outputText("\n\n");*/
+	
+	if (flags[kFLAGS.USE_OLD_FONT] >= 1)
+	{
+		outputText("Font: <b>Lucida Sans Typewriter</b>\n");
+	}
+	else 
+		outputText("Font: <b>Georgia</b>\n");
+		
+	outputText("\n\n");
+	
+	if (flags[kFLAGS.IMAGEPACK_OFF] == 0)
+	{
+		outputText("Image Pack: <font color=\"#008000\"><b>ON</b></font>\n Image pack is enabled.");
+	}
+	else
+		outputText("Image Pack: <font color=\"#800000\"><b>OFF</b></font>\n Image pack is disabled.");
+		
+	outputText("\n\n");
+	
+	if(flags[kFLAGS.SHOW_SPRITES_FLAG] == 0) {
+		outputText("Sprites: <font color=\"#008000\"><b>ON</b></font>\n You like to look at pretty pictures.");
+		outputText("\n\n");
+		if(flags[kFLAGS.SPRITE_STYLE] == 0)
+			outputText("Sprite Type: <b>New</b>\n 16-bit sprites will be used.");
+		else
+			outputText("Sprite Type: <b>Old</b>\n 8-bit sprites will be used.");
+	}
+	else {
+		outputText("Sprites: <font color=\"#800000\"><b>OFF</b></font>\n There are only words. Nothing else.");
+		outputText("\n\n\n");
+	}
+	
+	outputText("\n\n");
+	
+	if(flags[kFLAGS.USE_12_HOURS] > 0)
+		outputText("Time Format: <b>12 hours</b>\n Time will display in 12 hours format (AM/PM)");
+	else
+		outputText("Time Format: <b>24 hours</b>\n Time will display in 24 hours format.");
+		
+	outputText("\n\n");
+	
+	if(flags[kFLAGS.USE_METRICS] > 0)
+		outputText("Measurement: <b>Metric</b>\n Height and cock size will be measured in metres and centimetres.");
+	else
+		outputText("Measurement: <b>Imperial</b>\n Height and cock size will be measured in feet and inches.");
+		
+	menu();
+	addButton(0, "Side Bar Font", toggleFont, null, null, null, "Toggle between old and new font for side bar.");
+	addButton(1, "Main BG", menuMainBackground, null, null, null, "Choose a background for main game interface.");
+	addButton(2, "Text BG", menuTextBackground, null, null, null, "Choose a background for text.");
+	addButton(3, "Sprites", menuSpriteSelect, null, null, null, "Turn sprites on/off and change sprite style preference.");
+
+	addButton(5, "Toggle Images", toggleImages, null, null, null, "Enable or disable image pack.");
+	addButton(6, "Time Format", toggleTimeFormat, null, null, null, "Toggles between 12-hour and 24-hour format.");
+	addButton(7, "Measurements", toggleMeasurements, null, null, null, "Switch between imperial and metric measurements.  \n\nNOTE: Only applies to your appearance screen.");
+	addButton(14, "Back", settingsScreenMain);
+}
+
+public function menuMainBackground():void {
+	menu();
+	addButton(0, "Map (Default)", setMainBackground, 0);
+	addButton(1, "Parchment", setMainBackground, 1);
+	addButton(2, "Marble", setMainBackground, 2);
+	addButton(3, "Obsidian", setMainBackground, 3);
+	addButton(4, "Black", setMainBackground, 4);
+	
+	addButton(14, "Back", settingsScreenInterfaceSettings);
+}
+
+public function menuTextBackground():void {
+	menu();
+	addButton(0, "Normal", setTextBackground, 0);
+	addButton(1, "White", setTextBackground, 1);
+	addButton(2, "Tan", setTextBackground, 2);
+	
+	addButton(14, "Back", settingsScreenInterfaceSettings);
+}
+
+public function menuSpriteSelect():void {
+	menu();
+	addButton(0, "Off", toggleSpritesFlag, true, 0, null, "Turn off the sprites completely");
+	addButton(1, "Old", toggleSpritesFlag, false, 1, null, "Use the 8-bit sprites from older versions of CoC.");
+	addButton(2, "New", toggleSpritesFlag, false, 0, null, "Use the 16-bit sprites in current versions of CoC.");
+	
+	addButton(14, "Back", settingsScreenInterfaceSettings);
+}
+
+public function toggleInterface():void {
+	if (flags[kFLAGS.USE_OLD_INTERFACE] < 1) flags[kFLAGS.USE_OLD_INTERFACE] = 1;
+	else flags[kFLAGS.USE_OLD_INTERFACE] = 0;
+	settingsScreenInterfaceSettings();
+}
+
+public function toggleFont():void {
+	if (flags[kFLAGS.USE_OLD_FONT] < 1) flags[kFLAGS.USE_OLD_FONT] = 1;
+	else flags[kFLAGS.USE_OLD_FONT] = 0;
+	settingsScreenInterfaceSettings();
+}
+
+public function setMainBackground(type:int):void {
+	flags[kFLAGS.BACKGROUND_STYLE] = type;
+	mainView.background.gotoAndStop(flags[kFLAGS.BACKGROUND_STYLE] + 1);
+	mainView.sideBarBG.gotoAndStop(flags[kFLAGS.BACKGROUND_STYLE] + 1);
+	settingsScreenInterfaceSettings();
+}
+
+public function setTextBackground(type:int):void {
+	mainView.textBGWhite.visible = false;
+	mainView.textBGTan.visible = false;
+	if (type == 1) mainView.textBGWhite.visible = true;
+	if (type == 2) mainView.textBGTan.visible = true;
+	settingsScreenInterfaceSettings();
+}
+
+public function toggleSpritesFlag(enabled:Boolean, style:int):void
+{
+	flags[kFLAGS.SHOW_SPRITES_FLAG] = enabled;
+	flags[kFLAGS.SPRITE_STYLE] = style;
+	settingsScreenInterfaceSettings();
+	return;
+}
+
+//Needed for keys
+public function cycleBackground():void {
+	if (!mainView.textBGWhite.visible)
+	{
+		mainView.textBGWhite.visible = true;
+	}
+	else if (!mainView.textBGTan.visible)
+	{
+		mainView.textBGTan.visible = true;
+	}
+	else
+	{
+		mainView.textBGWhite.visible = false;
+		mainView.textBGTan.visible = false;
+	}		
+}
+
+public function cycleQuality():void {
+	if (stage.quality == StageQuality.LOW) stage.quality = StageQuality.MEDIUM;
+	else if (stage.quality == StageQuality.MEDIUM) stage.quality = StageQuality.HIGH;
+	else if (stage.quality == StageQuality.HIGH) stage.quality = StageQuality.LOW;
+	settingsScreenInterfaceSettings();
+}
+
+public function toggleImages():void {
+	if (flags[kFLAGS.IMAGEPACK_OFF] < 1) flags[kFLAGS.IMAGEPACK_OFF] = 1;
+	else flags[kFLAGS.IMAGEPACK_OFF] = 0;
+	settingsScreenInterfaceSettings();
+}
+
+public function toggleTimeFormat():void {
+	if (flags[kFLAGS.USE_12_HOURS] < 1) flags[kFLAGS.USE_12_HOURS] = 1;
+	else flags[kFLAGS.USE_12_HOURS] = 0;
+	settingsScreenInterfaceSettings();
+}
+
+public function toggleMeasurements():void {
+	if (flags[kFLAGS.USE_METRICS] < 1) flags[kFLAGS.USE_METRICS] = 1;
+	else flags[kFLAGS.USE_METRICS] = 0;
+	settingsScreenInterfaceSettings();
+}
+
+//------------
+// FONT SETTINGS
+//------------
+public function fontSettingsMenu():void {
+	menu();
+	simpleChoices("Smaller Font", decFontSize,
+		"Larger Font", incFontSize,
+		"Reset Size", resetFontSize,
+		"", null,
+		"Back", settingsScreenMain);
 }
 
 public function incFontSize():void
@@ -226,88 +703,57 @@ public function decFontSize():void
 	flags[kFLAGS.CUSTOM_FONT_SIZE] = fmt.size;
 }
 
-public function toggleStandards():void
-{
-	//toggle debug
-	if(flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
-		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = false;
-	else
-		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = true;
-	settingsScreen();
-	return;
+public function resetFontSize():void {
+	var fmt:TextFormat = mainView.mainText.getTextFormat();
+	if (fmt.size == null) fmt.size = 20;
+	fmt.size = 20;
+	mainView.mainText.setTextFormat(fmt);
+	flags[kFLAGS.CUSTOM_FONT_SIZE] = 0;
 }
 
-public function toggleHyperHappy():void
-{
-	//toggle debug
-	if(flags[kFLAGS.HYPER_HAPPY])
-		flags[kFLAGS.HYPER_HAPPY] = false;
-	else
-		flags[kFLAGS.HYPER_HAPPY] = true;
-	settingsScreen();
-	return;
-}
-
-public function toggleDebug():void
-{
-	//toggle debug
-	if(debug)
-		debug = false;
-	else
-		debug = true;
-		
-	mainView.showMenuButton( MainView.MENU_DATA );
-	settingsScreen();
-	return;
-}
-
-public function toggleEasyModeFlag():void
-{
-	if(flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 0)
-		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 1;
-	else
-		flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
-	settingsScreen();
-	mainView.showMenuButton( MainView.MENU_DATA );
-	settingsScreen();
-	return;
-}
-
-public function toggleSpritesFlag():void
-{
-	if(flags[kFLAGS.SHOW_SPRITES_FLAG])
-		flags[kFLAGS.SHOW_SPRITES_FLAG] = false;
-	else
-		flags[kFLAGS.SHOW_SPRITES_FLAG] = true;
-	settingsScreen();
-	return;
-}
-
-public function toggleSillyFlag():void
-{
-
-	if(flags[kFLAGS.SILLY_MODE_ENABLE_FLAG])
-		flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = false;
-	else
-		flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = true;
-	settingsScreen();
-	return;
-
-}
-
-
+//------------
+// CREDITS
+//------------
 public function creditsScreen():void {
-	outputText("<b>Coding and Main Events:</b>\n", true);
+	clearOutput();
+	displayHeader("Credits");
+	outputText("<b>Coding and Main Events:</b>\n");
 	outputText("<ul>");
 	outputText("<li> Fenoxo</li>\n");
+	outputText("</ul>");
+	outputText("<b>Game Mod:</b>\n");
+	outputText("<ul>");
+	outputText("<li> Ormael (Mod Creator)</li>");
+	outputText("</ul>");
+	outputText("<b>Game Mod Angels:</b>\n");
+	outputText("<ul>");
+	outputText("<li> Liadri</li>");
+	outputText("<li> Zevos</li>");
+	outputText("<li> MissBlackThorne</li>\n");
+	outputText("</ul>");
+	outputText("<b>Game Mod Contributors:</b>\n");
+	outputText("<ul>");
+	outputText("<li> Kitteh6660 (Creating mod that was base for the mod ^^ (Modception... xD))</li>");
+	outputText("</ul>");
+	outputText("<b>Game Mod Supplementary Events:</b>\n");
+	outputText("<ul>");
+	outputText("<li> worldofdrakan (Pigtail Truffles & Pig/Boar TF)</li>");
+	outputText("<li> FeiFongWong (Prisoner Mod)</li>");
+	outputText("<li> Foxxling (Lizan Rogue, Skin Oils & Body Lotions, Black Cock)</li>");
+	outputText("<li> LukaDoc (Bimbo Jojo)</li>");
+	outputText("<li> Kitteh6660 (Behemoth, Cabin, Ingnam, Pure Jojo sex scenes)</li>");
+	outputText("</ul>");
+	/*outputText("<b>Game Mod Bug Reporting:</b>\n");
+	outputText("<ul>");
+	outputText("<li> Netys (github)</li>");
+	outputText("<ul>");
 	outputText("</ul>");
 	outputText("<b>Typo Reporting</b>\n");
 	outputText("<ul>");
 	outputText("<li> SoS</li>");
 	outputText("<li> Prisoner416</li>");
 	outputText("<li> Chibodee</li>");
-	outputText("</ul>");
-	outputText("");
+	outputText("");*/
 	outputText("<b>Graphical Prettiness:</b>")
 	outputText("<ul>");;
 	outputText("<li> Dasutin (Background Images)</li>");
@@ -363,7 +809,7 @@ public function creditsScreen():void {
 	outputText("<li> Elfensyne (Phylla)</li>");
 	outputText("<li> Radar (Dominating Sand Witches, Some Phylla)</li>");
 	outputText("<li> Jokester (Sharkgirls, Izma, & Additional Amily Scenes)</li>");
-	outputText("<li> Lukadoc (Additional Izma, Ceraph Followers Corrupting Gangbang, Satyrs, Ember)</li>");
+	outputText("<li> Lukadoc (Additional Izma, Ceraph Followers Corrupting Gangbang, Satyrs, Ember, Arian)</li>");
 	outputText("<li> IxFa (Dildo Scene, Virgin Scene for Deluxe Dildo, Naga Tail Masturbation)</li>");
 	outputText("<li> Bob (Additional Izma)</li>");
 	outputText("<li> lh84 (Various Typos and Code-Suggestions)</li>");
@@ -404,6 +850,9 @@ public function creditsScreen():void {
 	outputText("<li> Gats, Shamblesworth, Symphonie, and Fenoxo (Corrupted Drider)</li>");
 	outputText("<li> Bagpuss (Female Thanksgiving Event, Harpy Scissoring, Drider Bondage Fuck)</li>");
 	outputText("<li> Frogapus (The Wild Hunt)</li>");
+	outputText("<li> Liadri (Etna, Manticore Venom (TF item), Black Ink - female scylla TF item, female scylla exclusive masturbation scene, texts and name for Mantis TF - Blade Grass, Kindra (writing part and some of ideas for few secenes), Archery Overhaul (main designer for it), Yeti Cum (yeti TF), Ceani the Orca girl)</li>");
+	outputText("<li> Zevos (Spider-silk shirt, Dragonscale vest, Eldritch Ribbon, Ascensus, Depravation, Puritas items, Ebonbloom crafting material and all items made from it)</li>");
+	outputText("<li> Coalsack (Arian App desc, option to change his/her scales color)</li>");
 	outputText("<li> Fenoxo (Everything Else)</li>");
 	outputText("</ul>");
 	outputText("<b>Oviposition Update Credits - Names in Order Appearance in Oviposition Document</b>");
@@ -423,42 +872,44 @@ public function creditsScreen():void {
 	outputText("<li> Eliria (Bee Laying Eggs in Bunny-Girls)</li>");
 	outputText("<li> Gardeford (Helia x Bimbo Sophie Threesomes)</li>");
 	outputText("</ul>");
-	outputText("\nIf I'm missing anyone, please contact me ASAP!  I have done a terrible job keeping the credits up to date!");
 	doNext(mainMenu);
 }
 
+//------------
+// IMAGE CREDITS
+//------------
 public function imageCreditsScreen():void
 {
-
+	clearOutput();
+	displayHeader("Image Credits");
 	if (images.getLoadedImageCount() > 0)
 	{
-		outputText(<![CDATA[
-
-**Bundled Image Credits:**
-
-**Yoh-SL**
-
-* Bee-Girl Monster Image
-* Goo-Girl Monster Image
-* Ceraph Monster Image
-* Sand-Witch (and sandwich)
-
-		]]>, true, true);
+		outputText("<b>Bundled Image Credits:</b>\n\n");
+		outputText("<b>Yoh-SL</b>");
+		outputText("<li>Bee-Girl Monster Image</li>");
+		outputText("<li>Goo-Girl Monster Image</li>");
+		outputText("<li>Ceraph Monster Image</li>");
+		outputText("<li>Sand-Witch (and sandwich)</li>");
 	}
 	else
 	{
-		outputText("<b>No Image-Pack Found!</b>\n", true);
+		outputText("<b>No Image-Pack Found!</b>\n", false);
 	}
 	doNext(mainMenu);
 }
 
+//------------
+// INSTRUCTIONS
+//------------
 public function howToPlay():void {
-	outputText("", true);
+	clearOutput();
+	displayHeader("Instructions");
 	outputText("<b><u>How To Play:</u></b>\nClick the buttons corresponding to the actions you want to take.  Your 'goal' is to obviously put an end to the demonic corruption around you, but do whatever the hell you want.  There is a story but sometimes it's fun to ignore it.\n\n", false);
 	outputText("<b>Exploration:</b>\nThe lake is a safe zone when you start the game.  It's a good place to explore, and Whitney's farm can offer some nice stat boosts to help get you on your feet. Once you feel comfortable, the forest is probably the next safest area, but beware of tentacle monsters.  The desert is the next toughest area, and the mountains offer further challenges.  There are more areas beyond that, but that's a good way to get started.  You'll uncover plenty of new 'places' exploring, which can be accessed from the <b>Places</b> menu.  You'll also find some interesting characters when you try to discover new explorable locations by choosing <b>Explore</b> twice.\n\n", false);
-	outputText("<b>Combat:</b>\nCombat is won by raising an opponent's lust to 100 or taking their HP to 0.  You lose if your enemy does the same to you.  Loss isn't game over, but some losses will make it harder in the future by lowering your stats.  Beware.  Don't be afraid to spam the <b>Run</b> option when you're in over your head.\n\n", false);
+	outputText("<b>Combat:</b>\nCombat is won by raising an opponent's lust to maximum lust (usualy a little bit over 100) or taking their HP to 0.  You lose if your enemy does the same to you.  Loss isn't game over, but some losses will make it harder in the future by lowering your stats.  Beware.  Don't be afraid to spam the <b>Run</b> option when you're in over your head.\n\n", false);
 	outputText("<b>Controls:</b>\nThe game features numerous hot-keys to make playing quicker and easier.\nP key - Perks Menu\nD key - Data Menu\nA key - Appearance Screen\n1 Through 5 - The top row of 'choice' buttons.\n6 Through 0 - The bottom row of 'choice' buttons.\nQ through T - Alternative bottom 'choice' hotkeys.\nSpace Bar - Next/Back/Leave\nHome Key - Toggle text field background.\nS key - Stats Screen\n(Save Hotkeys - May not work in all players)\nF1-F5 - Quicksave to slot 1 through 5.  Only works when Data is visible.\nF6-F0 - Quick Load from slots 1-5.\n\n", false);
 	outputText("<b>Save often using the Data Menu</b> - you never know when your journey will come to an end!", false);
 	doNext(mainMenu);
 }
+
 

@@ -36,7 +36,7 @@ package classes.Scenes.Areas.Swamp
 
 		public function fSpiderMorphGreeting():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(73);
 			//Egg sack sometimes
 			if (pregnancy.event == 2) { //If she's past event 2 then she has laid the eggs
@@ -56,6 +56,10 @@ package classes.Scenes.Areas.Swamp
 			simpleChoices("Fight", fightFSpiderMorph, "Try to Talk", talkToFSpiderMorph, "", null, "", null, "Leave", runFromFSpiderMorph);
 			//Incremement 'times encountered spider-girls'
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00270]++;
+			if (flags[kFLAGS.CODEX_ENTRY_ARACHNES] <= 0) {
+				flags[kFLAGS.CODEX_ENTRY_ARACHNES] = 1;
+				outputText("\n\n<b>New codex entry unlocked: Arachnes, Spider-Morphs, and Driders!</b>")
+			}
 		}
 
 		//Selecting fight starts combat and eventParsers to 1 to display the combat menu and enemy description.
@@ -69,7 +73,7 @@ package classes.Scenes.Areas.Swamp
 		//Run
 		private function runFromFSpiderMorph():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(73);
 			//Selecting has a 50% chance of displaying the following:
 			if (rand(2) == 0) {
@@ -86,7 +90,7 @@ package classes.Scenes.Areas.Swamp
 		//*Try to Talk
 		private function talkToFSpiderMorph():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(73);
 			if (rand(2) == 0) {
 				outputText("You hold up your hands non-threateningly and ask the spider-girl why she's trying to sneak up on you.  Her eyes go wide and she claps her chitinous hands over her mouth in shock before she cries, \"<i>Omigosh, I'm so sorry!</i>\"  You smirk at the decidedly girlish response while she recovers and continues to speak, \"<i>I didn't mean to scare you!  I've been living out here by myself for so long... ever since the demons destroyed our village.  C-could we just... umm... talk for a little while?</i>\"\n\n", false);
@@ -131,7 +135,7 @@ package classes.Scenes.Areas.Swamp
 		//*OPTION 1 No (Declined sex)
 		private function declinedCrazyFemaleSpiderMorphSexFunTimes():void
 		{
-			outputText("", true);
+			clearOutput();
 			outputText("You tell the lusty spider-morph that you're not interested in having sex with her now, and though she looks crestfallen, she nods understandingly and zips up a line of webbing into the trees before the situation can become any more awkward.", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -141,7 +145,7 @@ package classes.Scenes.Areas.Swamp
 		//*Summary: Webs PC down, suckles nipple and injects aphrodisiac into each breast, then sixty-nine's, ending with webbing bukkake?
 		private function defeatFemale():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(73);
 			//(Noncombat Intro)
 			if (!getGame().inCombat) {
@@ -239,6 +243,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("The arachnid sex tastes... sweet - unnaturally so, almost cloying in its intensity.  You lean up to lick at her slimy black box, and as soon as you make contact with her oozing nether-lips, her legs give out, dropping her weight fully on to you and smothering you in her honey-dripping cunt.  Grunting in discomfort from the change in pressure, your aphrodisiac-addled mind remembers that licking her pussy will get you release.  You thrust your tongue forward with every ounce of your strength, burying ", false);
 			if (player.tongueType == TONUGE_SNAKE) outputText("the snake-like length the whole way into her womb, slithering right past her cervix.", false);
 			else if (player.tongueType == TONUGE_DEMONIC) outputText("the massive, demonic length into her vagina, curling it around the walls and stroking them all with even motions.", false);
+			else if (player.hasLongTongue()) outputText("the inhuman length into her vagina, curling it around the walls and stroking them all with even motions.", false);
 			else outputText("all of your length as deep into her passage as possible, licking and lapping at it in an orgasm-seeking frenzy.", false);
 			outputText("  The hard nub of her clit bumps your lower lip, and you start to open and close your jaw as fast as possible to stroke that tiny pleasure-organ off.\n\n", false);
 
@@ -270,7 +275,7 @@ package classes.Scenes.Areas.Swamp
 		private function spiderMorphFemaleRidesACawk():void
 		{
 			//*SUMMARY:  PC is tied down and has a web-condom sprayed around their dick, then a webbing cock-ring.  The PC is then ridden hard, bit numerous times, and never able to cum until pain lances through his (balls/cock) from the lack of release.  Finally, she bites PC's neck and the PC cums, inflating web-condom of various size.
-			outputText("", true);
+			clearOutput();
 			spriteSelect(73);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = 0;
@@ -286,7 +291,7 @@ package classes.Scenes.Areas.Swamp
 			else if (player.HP < 1) outputText("You collapse into the soft moss,", false);
 			else outputText("You collapse into the soft moss and begin to masturbate,", false);
 			outputText(" sinking slightly into it while you watch the arachnid woman turn around and begin to shake her cute backside at you.  It sways entrancingly, the hefty weight of her large abdomen bobbing past with each shake to momentarily obstruct your view.  As you watch, a number of protuberances on the abdomen twist and writhe for a half-second before spraying out a huge quantity of sticky webbing.  It hits you like a hammer, knocking you completely flat and plastering your naked form to the dirt.", false);
-			if (player.lust > 99) outputText("  One of the gossamer strands hits your arm hard enough to rip it away from your groin, and you're left pinned down, unable to touch yourself.", false);
+			if (player.lust >= player.maxLust()) outputText("  One of the gossamer strands hits your arm hard enough to rip it away from your groin, and you're left pinned down, unable to touch yourself.", false);
 			outputText("  Once it finishes, you find that your head, chest, and crotch were all left uncovered by the sticky strands.  She unleashes another burst of pearlescent webbing to coat the first, and you're left completely, utterly restrained.\n\n", false);
 
 			outputText("\"<i>Perfect, now that you're nice and comfortable, we can have sex!</i>\" decrees the ", false);
@@ -375,7 +380,7 @@ package classes.Scenes.Areas.Swamp
 		//Summary: web-spooling around dick, then webjob.  
 		private function femaleSpiderMorphTooBigWebRape():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(73);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = 0;
@@ -397,7 +402,7 @@ package classes.Scenes.Areas.Swamp
 			//(COMBAT LOSS)
 			else {
 				outputText("You drop to the ground and ", false);
-				if (player.lust > 99) outputText("stick your hands into your groin, fondling " + oMultiCockDesc() + " with need", false);
+				if (player.lust >= player.maxLust()) outputText("stick your hands into your groin, fondling " + oMultiCockDesc() + " with need", false);
 				else outputText("groan in obvious pain, unable to move", false);
 				outputText(".  The spider-girl advances, giggling girlishly at your state while she painstakingly removes every piece of armor, visibly gasping at the size of your " + cockDescript(x) + " as it flops out.\n\n", false);
 
@@ -449,6 +454,11 @@ package classes.Scenes.Areas.Swamp
 
 		public function loseToFemaleSpiderMorph():void
 		{
+			if (flags[kFLAGS.SFW_MODE] > 0 && getGame().inCombat) { //No rape in SFW mode.
+				clearOutput();
+				cleanupAfterCombat();
+				return;
+			}
 			if (player.hasCock()) {
 				if (player.cockThatFits(monster.vaginalCapacity()) == -1) femaleSpiderMorphTooBigWebRape();
 				else spiderMorphFemaleRidesACawk();
@@ -463,12 +473,12 @@ package classes.Scenes.Areas.Swamp
 		//*Victory Intro
 		public function defeatASpiderBitch():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(73);
 			outputText("The spider-girl drops to her knees and wobbles unsteadily", false);
-			if (monster.lust > 99) outputText(", thrusting two of her carapace-covered finger-tips deep into her sloppy box as she gives into her lust.  She actually has the temerity to demand, \"<i>Fuck me, fuck me now!</i>\"", false);
+			if (monster.lust >= monster.eMaxLust()) outputText(", thrusting two of her carapace-covered finger-tips deep into her sloppy box as she gives into her lust.  She actually has the temerity to demand, \"<i>Fuck me, fuck me now!</i>\"", false);
 			else outputText(", too wounded to fight back or run away.", false);
-			if (player.lust >= 33 && player.gender > 0) {
+			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("\n\nWhat do you do to her?", false);
 				var scissor:Function =null;
 				var pussyFuck:Function =null;
@@ -489,14 +499,14 @@ package classes.Scenes.Areas.Swamp
 		//*Summary: Make her bite herself in the tit and inject aphrodisiac venom, then scissor (or brief clit-fuck)
 		private function fSpiderMorphRape():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(73);
 			outputText("You laugh at her and push her down with your " + player.legs() + ", enjoying the view of the pale maiden's unblemished skin and dark, fetishy-looking exoskeleton when she bounces in swamp loam.  Her legs scissor closed nervously, a weak effort to conceal her sex from you", false);
-			if (player.lust > 99) outputText(", even as her fingers continue to work her slick lips relentlessly", false);
+			if (player.lust >= player.maxLust()) outputText(", even as her fingers continue to work her slick lips relentlessly", false);
 			outputText(".  You slap her hands away and pry her legs open, getting a nice, close look at her vagina.\n\n", false);
 
 			outputText("Her pussy is dark, like her nipples, though the lips of her sex are closer to a pure midnight-black than the dusky skin of those tiny nubs.  A sheen of feminine lube has built up over her vulva, making her outer labia and skin glisten noticeably in the muted sunlight that filters down to the swamp floor.  Around her vagina, the skin rapidly fades from dark chocolate back to the porcelain white of the rest of her body.  You prod and play with the moist slit, feeling the soft skin part around your fingers like a soft velvet glove.  She grows wetter in response, giving up plaintive little moans at your incursion", false);
-			if (monster.lust > 99) outputText(" until she's panting and her tiny clit has emerged, hard as a rock", false);
+			if (monster.lust >= monster.eMaxLust()) outputText(" until she's panting and her tiny clit has emerged, hard as a rock", false);
 			outputText(".\n\n", false);
 
 			outputText("The spider-kin's honeyed onyx-hued pussy is irresistible, and you remove your " + player.armorName + " to prepare for the coming sex.  While you're distracted, the defeated arachnid-morph begins to masturbate while watching you with wide, eager eyes.  You grab a nearby vine and yank the slut's hands away from her pussy.  She protests, but you smirk and inform her she won't get her mitts back until she gets you off.  The spider-girl nods mutely, though confusion crosses her face once you start circling her, coming up next to her chest.\n\n", false);
@@ -551,7 +561,7 @@ package classes.Scenes.Areas.Swamp
 		{
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = 0;
-			outputText("", true);
+			clearOutput();
 			spriteSelect(73);
 			outputText("You push the spider-girl onto her back, getting a good long look at your conquest before you take off your " + player.armorName + ".  At the sight of your " + multiCockDescriptLight() + ", she ", false);
 			if (monster.lust <= 99) outputText("relaxes a bit.  The smell of an aroused female wafts up from her, reminding you that is probably what she wanted from the get-go.", false);
@@ -619,13 +629,13 @@ package classes.Scenes.Areas.Swamp
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if (x == -1) x = 0;
 			var y:Number = player.cockThatFits2(monster.analCapacity());
-			outputText("", true);
+			clearOutput();
 			spriteSelect(73);
 			outputText("You peel off your " + player.armorName + " while you gaze disdainfully down at your prize.  ", false);
-			if (monster.lust > 99) outputText("She's moaning plaintively and happily fingering herself, practically offering her juicy box to you.", false);
+			if (monster.lust >= monster.eMaxLust()) outputText("She's moaning plaintively and happily fingering herself, practically offering her juicy box to you.", false);
 			else outputText("She's groaning painfully and struggling to move before falling back down, legs akimbo, inadvertantly displaying her pussy to you.", false);
 			outputText("  Sighing, you grab her narrow frame, admiring the lightness of her body as you heft her up and position her onto her hands and knees.  ", false);
-			if (monster.lust > 99) outputText("She mewls with disappointment.  ", false);
+			if (monster.lust >= monster.eMaxLust()) outputText("She mewls with disappointment.  ", false);
 			outputText("This is a much better position for her; ass-up, with her pussy and pucker fully exposed.\n\n", false);
 
 			outputText("The spider-morph looks back fearfully, but she flexes her back to raise up her abdomen and allow you easier access to her holes like the obedient slut she truly is.  You wrap your arms around the heavy, exoskeletal organ and step forward, leveraging your " + cockDescript(x) + " to slide it into her welcoming pussy.  The arachnid cunt sucks you in with a wet slurp, welcoming your cock to the oozing sheath with uncommon eagerness until the plush black pussy lips are compressing against your loins.  You have trouble not giving into the hot, moist pressure of the silken canal and rutting her like a beast then and there, but a tighter, better hole beckons for your now-lubricated fuck-stick's attention.\n\n", false);
@@ -684,7 +694,7 @@ package classes.Scenes.Areas.Swamp
 		//*Egg Sack Find
 		private function findASpiderMorphEggSack():void
 		{
-			outputText("", true);
+			clearOutput();
 			spriteSelect(73);
 			outputText("You stumble upon a huge, webbed sack hanging from a tree.  Examining it closer, you see that bound up inside it are nearly a dozen webs, each containing a wriggling form.  They start moving faster and faster, perhaps reacting to the nearby movement, before the shells finally shatter and unleash their cargo.  Inside each is a tiny, six inch tall humanoid figure, each resembling a child in miniature.  Remarkably, their features remind you of your own, and before the significance of that fact settles in, they drop to the ground and scurry away on their tiny, carapace-covered legs.\n\n", false);
 

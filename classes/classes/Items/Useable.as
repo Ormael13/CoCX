@@ -16,7 +16,19 @@ package classes.Items
 			super(id, shortName, longName, value, description);
 		}
 		
-		public function canUse():Boolean { return true; } //If an item cannot be used it should provide some description of why not
+		override public function get description():String {
+			var desc:String = _description;
+			//Type
+			desc += "\n\nType: ";
+			if (shortName == "Condom" || shortName == "GldStat") desc += "Miscellaneous";
+			else if (shortName == "Debug Wand") desc += "Miscellaneous (Cheat Item)";
+			else desc += "Material";
+			//Value
+			desc += "\nBase value: " + String(value);
+			return desc;
+		}
+		
+		public function canUse():Boolean { return game.prison.prisonCanUseItem(this); } //If an item cannot be used it should provide some description of why not
 		
 //		public function hasSubMenu():Boolean { return false; } //Only GroPlus and Reducto use this. //Replaced with a return
 		

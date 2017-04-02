@@ -1,14 +1,18 @@
 package classes.Scenes.Dungeons.Factory
 {
 	import classes.*;
+	import classes.Scenes.Dungeons.Factory;
 	import classes.internals.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class OmnibusOverseer extends Monster
 	{
-
+		public var factory:Factory = new Factory()
+		private var temp:Number = 0;
+		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			game.omnibusVictoryEvent();
+			factory.winAgainstOmnibus();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -17,7 +21,7 @@ package classes.Scenes.Dungeons.Factory
 				outputText("\n\nYour foe doesn't seem to care...");
 				doNext(game.endLustLoss);
 			} else {
-				game.omnibusLossRape();
+				factory.doLossOmnibus();
 			}
 		}
 		
@@ -85,27 +89,38 @@ package classes.Scenes.Dungeons.Factory
 			this.skinTone = "light purple";
 			this.hairColor = "purple";
 			this.hairLength = 42;
-			initStrTouSpeInte(65, 45, 45, 85);
-			initLibSensCor(80, 70, 80);
+			initStrTouSpeInte(100, 70, 45, 85);
+			initLibSensCor(90, 70, 80);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 10;
+			this.weaponAttack = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
-			this.armorDef = 15;
-			this.bonusHP = 200;
+			this.armorDef = 18 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.bonusHP = 400;
+			this.bonusLust = 50;
 			this.lust = 20;
 			this.lustVuln = 0.75;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.level = 8;
-			this.gems = rand(25)+10;
+			this.level = 16;
+			this.gems = rand(35) + 30;
+			this.additionalXP = 200;
 			this.drop = new WeightedDrop(null, 1);
 			this.special1 = lustAura;
 			this.special2 = milkAttack;
 			this.wingType = WING_TYPE_BAT_LIKE_TINY;
 			this.wingDesc = "tiny hidden";
 			this.tailType = TAIL_TYPE_DEMONIC;
+			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			this.str += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 1560;
 			checkMonster();
 		}
 		

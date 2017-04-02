@@ -67,7 +67,7 @@ package classes.Scenes.Areas.Bog
 			clearOutput();
 			spriteSelect(89);
 			//-Lose by lust
-			if (player.lust > 99) {
+			if (player.lust >= player.maxLust()) {
 				outputText("Losing control to your own growing arousal, you fall to your knees and desperately start working to get at your needy body beneath your " + player.armorName + ".");
 			}
 			//Lose by HP
@@ -124,7 +124,7 @@ package classes.Scenes.Areas.Bog
 			var x:int = rand(player.totalCocks());
 			spriteSelect(89);
 			outputText("\n\nRecognizing that you're no danger, her skin shifts back into its natural " + monster.skinTone + " coloration as she walks towards you.  She swings her hips seductively as she splashes slowly through the water and licks her lips with a loud smack of her tongue, then reaches out and forcefully pulls your " + player.armorName + " above your waist before you can even try to resist her advances, and pushes you back against a tree.  With a few quick pulls of fabric she's stripped her own clothes, and she tosses her thong over a low-hanging branch.  The other band of silk she uses to quickly bind your wrists.  Were you in any shape to fight back you could pull free, but you're too ");
-			if (player.lust > 99) outputText("overwhelmed by lust");
+			if (player.lust >= player.maxLust()) outputText("overwhelmed by lust");
 			else outputText("battered");
 			outputText(" to even rip the makeshift binding.");
 
@@ -166,8 +166,8 @@ package classes.Scenes.Areas.Bog
 			outputText("\n\nHer moans quickly grow more insistent above you, though, and she nearly collapses forwards onto your head as she cums loudly.  You steady her with one hand, still using her tail like a smooth sex-toy in the other as her skin fades back to its normal " + monster.skinTone + " coloration.  Mind apparently cleared by her orgasm, she suddenly jerks her tail back, forcing it out of your hand and " + vaginaDescript(0) + ".  \"<i>Wha... no!  B-bitches like you don't get to cum!</i>\"  She puts her most menacing smile back on, with yet no idea how to manage one.  \"<i>And, umm, you better not come back to my bog!</i>\"  She turns and quickly scampers off, pulling her wet clothes up off the ground as she goes.  You chuckle a bit as the wannabe dominatrix runs back into the trees, but stop as you realize she did beat you and leave you horny.  With a frustrated \"<i>Hmph!</i>\" you pull your " + player.armorName + " back up.");
 
 			//set lust to 100, return to camp
-			dynStats("lus=", 100);
-			player.lust = 100;
+			dynStats("lus=", player.maxLust());
+			player.lust = player.maxLust();
 			cleanupAfterCombat();
 		}
 
@@ -177,7 +177,7 @@ package classes.Scenes.Areas.Bog
 			clearOutput();
 			spriteSelect(89);
 			//-Win by lust
-			if (monster.lust > 99) {
+			if (monster.lust >= monster.eMaxLust()) {
 				outputText("Unable to control her arousal, the chameleon girl collapses to her knees and begins masturbating underneath her thong, having lost all capacity to fight you; she moans and throws her head back as her hand splashes in and out of the water she's kneeling in.  Her skin returns to its usual " + monster.skinTone + " and then keeps going, shifting closer and closer to pink as her moans increase in both volume and volubility.");
 				if (player.lust >= 33) outputText("  Do you help the horny girl to get you both off?  Or maybe you could punish her bad attitude with something from your bag...");
 			}
@@ -186,7 +186,7 @@ package classes.Scenes.Areas.Bog
 				outputText("Too weak to continue fighting, the chameleon girl drops to her knees, exhausted.  Her skin returns to its usual " + monster.skinTone + ", unable to maintain the camouflage.");
 				if (player.lust >= 33) outputText("  Do you use the girl in her weakened state to get yourself off?  Or maybe you could punish her bad attitude with an item from your bags...");
 			}
-			if (player.lust < 33 || player.gender == 0) {
+			if (player.lust < 33 || player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
 				cleanupAfterCombat();
 				return;
 			}
@@ -238,7 +238,7 @@ package classes.Scenes.Areas.Bog
 			spriteSelect(89);
 			var x:int = player.biggestCockIndex();
 			outputText("You approach the fallen girl, and she looks up at you, a pleading expression in her eyes.  You might feel worse for her if she hadn't tried to assault you in a bog.  Reaching down behind her, you find the knot of the cloth covering her breasts, and with a quick pull you yank it off and toss it aside, then drop your [armorName], revealing your erect prick.  Her eyes widen when she sees it and her mouth parts slightly, letting a bit of her tongue slip out to lick her lips.  Quietly disdainful of the slutty girl's open arousal, you decide that if she wants to taste it so badly, she may.  But when you put your hand on the back of her head to push her onto your stiff cock, she manages to work up the strength to grab your arm with a free hand and resist its impulse.  Looking her over, you can see that her sudden burst of energy is due to ");
-			if (monster.lust > 99) outputText("her masturbating even more furiously than before at the thought of having your cock.");
+			if (monster.lust >= monster.eMaxLust()) outputText("her masturbating even more furiously than before at the thought of having your cock.");
 			//[if lost by HP:
 			else outputText("her starting to work the fingers of her free hand in and out of her own sex.");
 
@@ -265,9 +265,9 @@ package classes.Scenes.Areas.Bog
 			clearOutput();
 			spriteSelect(89);
 			outputText("You shed your " + player.armorName + " and approach the fallen chameleon girl");
-			if (monster.lust > 99) outputText(", her moans of pleasure growing more desperate as you approach");
+			if (monster.lust >= monster.eMaxLust()) outputText(", her moans of pleasure growing more desperate as you approach");
 			outputText(".  You look her up and down, following the smooth curves of her thin body with your eyes.  Squatting down beside her, you take her weak body by the shoulders in one arm and trail your fingertips lightly up her torso with the other, feeling the soft skin of her belly.");
-			if (monster.lust > 99) outputText("  She coos lustily at the sensation.");
+			if (monster.lust >= monster.eMaxLust()) outputText("  She coos lustily at the sensation.");
 			else outputText("  Her eyes widen, and she looks from your hand to your face and back again.");
 			outputText("  When your hand reaches the silk cloth covering her chest, you pull it off with a light tug and cast it off to the side.  You cup her small breast in your palm, and as you squeeze it her skin tone changes perceptibly, flashing to a much brighter shade of the colors it was.");
 

@@ -51,8 +51,6 @@ private function gargoyleMeeting2():void {
 	clearOutput();
 	outputText("You finally close the distance between yourself and the strange structure, which begins to take shape ahead.  Though it's half-buried under what must be years of built-up sand and debris, you can clearly make out high stone walls supported by vaulted arches, broken every so often by the shattered remains of stained-glass windows and a pair of utterly destroyed oaken doors nearly hidden behind a row of tall marble pillars, many of which have long since crumbled.  High above the ground, you can see a pair of tall, slender towers reaching up to the heavens, one of which has been nearly obliterated by some unimaginably powerful impact, leaving it a stump compared to its twin.  From the rooftops, strange shapes look down upon you – stone statues made in the image of demons, dragons, and other monsters.");
 	
-	//[b]You have discovered The Cathedral[/b] (If Fen wants to make this a Place; otherwise it can be encountered in the future via the Explore –> Explore function. Whichever works better. )
-	
 	outputText("\n\nYou arrive at the grounds around the ruins, cordoned off by a waist-high wrought-iron fence that surrounds the building and what once might have been a beautiful, pastoral garden, now rotting and wilted, its trees chopped down or burned, twig-like bushes a mere gale's difference from being tumbleweeds.  A few dozen tombstones outline the path to a gaping maw that was once the great wooden doors.  Seeing no obvious signs of danger, you make your way inside, stepping cautiously over the rubble and rotting debris that litters the courtyard.");
 	
 	outputText("\n\nIt's quite dark inside, illuminated only by thin shafts of light streaming in from the shattered windows and sundered doors.  You can make out a few dozen wooden pews, all either thrown aside and rotting or long-since crushed, leading up to a stone altar and an effigy of a great green tree, now covered in graffiti and filth.  Stairs beside the altar lead up to the towers, and down to what must be catacombs or dungeons deep underground.");
@@ -280,7 +278,7 @@ public function returnToCathedral(woken:Boolean = false):void {
 		}
 		addButton(3,"Appearance",gargoyleAppearance);
 	}
-	addButton(9,"Leave",camp.returnToCampUseOneHour);
+	addButton(14,"Leave",camp.returnToCampUseOneHour);
 }
 
 //[b]Sex[/b]
@@ -312,12 +310,12 @@ private function gargoyleSexMenu():void {
 		addButton(2,"Titfuck",titFuckTheGargoyle);
 		addButton(3,"Strap-On",strapOnGargoyle);
 		addButton(4,"Tail Fuck",tailFuckGargoyleScene);
-		addButton(9,"Leave",returnToCathedral);
+		addButton(14,"Leave",returnToCathedral);
 	}
 	//(If Genderless, display [Strap-on] [Leave])
 	if(player.gender == 0) {
 		addButton(3,"Strap-On",strapOnGargoyle);
-		addButton(9,"Leave",returnToCathedral);
+		addButton(14,"Leave",returnToCathedral);
 	}
 }
 

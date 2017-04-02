@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.Areas.Lake{
 	import classes.*;
+	import classes.GlobalFlags.*;
 
 	public class GreenSlimeScene extends AbstractLakeContent{
 //serviceLowCorruption();
@@ -557,6 +558,7 @@ private function oozeRapesYouOrally():void
 			player.orgasm();
 		}
 		else outputText("The creature withdraws while you're distracted, leaving no traces of its presence save for what it left on your body.", false);
+		player.refillHunger(35);
 	}
 	//standard
 	else if(player.cor >= 20)
@@ -565,6 +567,7 @@ private function oozeRapesYouOrally():void
 		outputText("It pulls out just as suddenly, leaving you gasping, leaving a thin trail of green fluid across your face as it pulls away.  Shifting its weight slightly it begins to explore your mouth and lips with one of its hands, and you realize that the creature tastes just slightly of mint.  After a moment it returns its cock to your mouth, thrusting quickly and deeply to again fill your throat, and this time begins pumping your face in earnest.  It begins to throb in your throat, slowly expanding and contracting in a steady, and quickening, rhythm.  You can feel its arousal grow with every thrust, and in spite of yourself, get caught up in the creature's desires.\n", false);
 		outputText("Without warning the creature leans forward, grabs you head, and pulls forward as it thrusts, forcing your face into its soft body as its cock goes as deep as it can possibly go.  Its cock practically shivers as you steel yourself for what's about to come, but the creature pulls you off, a powerful blast of thin, green fluid catching you in the face as soon as your mouth is empty.  You try to push your head forward to catch the thing's load more out of instinct than conscious thought, only to have it hold you back as it releases several powerful torrents of ejaculate onto your face.\n", false);
 		outputText("The beast moves off of you and you roll over onto your hands and knees, coughing and spitting up green fluid as you recover your senses.  When you finish you look around for the creature but find no traces of it except the fluid on the ground and a slight taste of mint in your mouth.", false);
+		player.refillHunger(15);
 	}
 	//resistant
 	else
@@ -577,6 +580,7 @@ private function oozeRapesYouOrally():void
 			outputText("You squirm under the slime as it begins to thrust faster and faster, and soon its shaft begins to throb powerfully, pressing even further out against your throat.  Eventually the thing takes a final powerful thrust into your mouth and arches its back, releasing a powerful torrent of fluid directly into your stomach.  After several strong spurts the thing begins to pull out, pausing as the head of its cock reaches your mouth to fill it with another powerful blast.  You try to avoid swallowing, but the suddenness and sheer amount of it forces a bit down your throat.  The thing eventually pulls all the way out and you cough as you eject the remaining juice.\n", false);
 			outputText("The beast moves off of you and you roll over onto your hands and knees, coughing and spitting up green fluid as you recover your senses.  When you finish you look around for the creature but find no traces of it except the fluid on the ground and a slight taste of mint in your mouth.", false);
 		}
+		player.refillHunger(35);
 	}
 	dynStats("lib", 2, "sen", 2, "lus", 10);
 }
@@ -687,8 +691,8 @@ private function oozeRapesYouVaginally():void
 
 
 internal function rapeOozeWithMilk():void {
-	outputText("", true);
-	outputText("You look over the ooze, wondering what to do about your need to nurse now that it has lost cohesion. After a while of puzzling things out, you decide to wing it, removing the top of your " + player.armorName + " and pressing the mess of a monster to your " + breastDescript(0) + " and giving it a squeeze to get the milk to it. The slime responds almost immediately, applying pressure from the base of your " + breastDescript(0) + " to the tip of your " + nippleDescript(0) + ", earning it a shot of milk to your immense satisfaction. As it tends to your " + nippleDescript(0) + ", it slowly works its way down your body, almost lovingly ", false);
+	clearOutput();
+	outputText("You look over the ooze, wondering what to do about your need to nurse now that it has lost cohesion. After a while of puzzling things out, you decide to wing it, " + player.clothedOrNaked("removing the top of your " + player.armorName + " and ") + "pressing the mess of a monster to your " + breastDescript(0) + " and giving it a squeeze to get the milk to it. The slime responds almost immediately, applying pressure from the base of your " + breastDescript(0) + " to the tip of your " + nippleDescript(0) + ", earning it a shot of milk to your immense satisfaction. As it tends to your " + nippleDescript(0) + ", it slowly works its way down your body, almost lovingly ", false);
 
 	// [If male- 
 	if(player.gender == 1) 
@@ -715,7 +719,7 @@ internal function rapeOozeWithMilk():void {
 	}
 	//[If Genderless- 
 	else {
-		outputText("caressing the blank spot where your genitalia should be despite your " + player.armorName + " still being in place. ", false);
+		outputText("caressing the blank spot where your genitalia should be" + player.clothedOrNaked(" despite your " + player.armorName + " still being in place") + ". ", false);
 		outputText("\n\n", false);
 		outputText("The barrage of pleasurable feelings causes you to fall over onto your " + buttDescript() + " and just soak in them, your hands ", false);
 	}
@@ -770,13 +774,13 @@ internal function rapeOozeWithMilk():void {
 		{
 			//Service for lower corruption
 			if (player.cor <= 33) {
-				outputText("", true);
+				clearOutput();
 				if (player.lust < 60) serviceLowCorruption();
 				else serviceLowCorruptionHighLust();
 			}
 			//higher corruption raaaaeeeep
 			else {
-				outputText("", true);
+				clearOutput();
 				//male or futa
 				if (player.gender == 1 || (player.gender == 3 && rand(2) == 0)) maleRapesOoze();
 				//female or futa
@@ -788,7 +792,8 @@ internal function rapeOozeWithMilk():void {
 
 		public function slimeLoss():void
 		{
-			outputText("", true);
+			if (doSFWloss()) return; //No rape in SFW mode.
+			clearOutput();
 			doNext(playerMenu);
 			if (player.gender == 2 || (player.gender == 3 && rand(2) == 0)) {
 				temp = rand(3);

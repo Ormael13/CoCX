@@ -183,8 +183,8 @@ public function milkyMenu():void {
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0 && flags[kFLAGS.MILK_SIZE] > 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(5, "Farm Work", sendToFarm);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1 && flags[kFLAGS.MILK_SIZE] > 0) addButton(5, "Go Camp", backToCamp);
 	
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) addButton(9, "Back", camp.campSlavesMenu);
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1) addButton(9, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0) addButton(14, "Back", camp.campSlavesMenu);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 1) addButton(14, "Back", kGAMECLASS.farm.farmCorruption.rootScene);
 }
 
 private function sendToFarm():void
@@ -319,6 +319,7 @@ private function superReductoUsage():void {
 	
 //Milk Bath (HHH or Giant boobs only)
 private function milkBathTime():void {
+	player.slimeFeed();
 	clearOutput();
 	outputText("Tussling " + flags[kFLAGS.MILK_NAME] + "'s hair, you tell her her breasts look a bit full.  She smiles up at you eagerly as you disrobe.  Once nude, you hop down inside and say, \"<i>Bath Time.</i>\"");
 	outputText("\n\nWith trembling anticipation, " + flags[kFLAGS.MILK_NAME] + " reaches down for her ");
@@ -357,7 +358,7 @@ private function milkBathTime():void {
 	if(sophieFollowerScene.sophieFollower()) count++;
 	if(player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) count++;
 	if(latexGirl.latexGooFollower()) count++;
-	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) count++;
+	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1 || player.armor == armors.GOOARMR) count++;
 	if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) count++;
 	if(helScene.followerHel()) count++;
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) count++;
@@ -383,6 +384,7 @@ private function relaxWithMilkWaifu():void {
 //[Communal Bath] (PC must have 3+ of the following followers)
 private function communalBath():void {
 	clearOutput();
+	outputText(images.showImage("communal-bath"));
 	outputText("As you relax in the tub, you decide it's hardly fair to have all this milk and just hog it to yourself.  You sit up and give a sharp whistle, getting the attention of the rest of camp.  \"<i>Jump on in, everyone!</i>\" you shout, quickly grabbing " + flags[kFLAGS.MILK_NAME] + " by the waist and dragging her in.  She tumbles into her own lactation with a sharp cry of surprise, breaching a moment later with a splutter.");
 	//If PC has Isabella: 
 	if(isabellaFollowerScene.isabellaFollower()) {
@@ -394,14 +396,20 @@ private function communalBath():void {
 	//If PC has Sophie:
 	if(sophieFollowerScene.sophieFollower()) outputText("\n\n\"<i>Oh, fresh milk!</i>\" Sophie exclaims cheerily.  She drops down by the edge of the pool and scoops up a handful, bringing the thick, creamy milk up to her lips.  Her wings flutter happily as she laps it up, rubbing more into her fair skin between clumps of downy feathers.");
 	
-	//If PC has Pure!Jojo:
-	if(player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) outputText("\n\nThe white-furred monk Jojo approaches the pool with some hesitation, eyeing the tub full of cream.  \"<i>How...  lewd.  Though it would be a shame for such a bounty to go to waste.</i>\"  Slowly, the monk disrobes down to his undergarments, and lowers himself into the pool nearby.");
+	//If PC has Pure!Jojo or Joy:
+	if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) {
+		if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3) outputText("\n\nThe white-furred Joy approaches the pool, eyeing the tub full of cream.  \"<i>How...  lewd.  Though it would be a shame for such a bounty to go to waste.</i>\"  Slowly, she disrobes completely, and lowers herself into the pool nearby.");
+		else outputText("\n\nThe white-furred monk Jojo approaches the pool with some hesitation, eyeing the tub full of cream.  \"<i>How...  lewd.  Though it would be a shame for such a bounty to go to waste.</i>\"  Slowly, the monk disrobes down to his undergarments, and lowers himself into the pool nearby.");
+	}
 	
 	//{If PC has Latexy:
 	if(latexGirl.latexGooFollower()) outputText("\n\nYou wave over your ebony-skinned latex goo, telling her to drink up.  \"<i>M-[master]?</i>\" she says, pausing at the poolside.  You repeat your command, patting the surface of the milky waves.  It looks like her primal hunger takes over a moment later as she slips into the vast sea of lactation, soaking it up.");
 	
 	//{If PC has Valeria:
-	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) outputText("\n\nThe gooey mass of Valeria materializes a few feet away, assuming her human shape as she surveys the milkbath awaiting her.  \"<i>Damn, [name].  This girl's got some faucets on her.  Ought to get some of the girls from the lake on up here to finish the job when we're done.</i>\"  Chuckling, Val slips into the pool, turning a brighter shade of blue as cream rushes through her porous body.");
+	if (flags[kFLAGS.VALARIA_AT_CAMP] == 1 || player.armor == armors.GOOARMR) {
+		outputText("\n\nThe gooey mass of Valeria materializes a few feet away, assuming her human shape as she surveys the milkbath awaiting her.  \"<i>Damn, [name].  This girl's got some faucets on her.  Ought to get some of the girls from the lake on up here to finish the job when we're done.</i>\"  Chuckling, Val slips into the pool, turning a brighter shade of blue as cream rushes through her porous body.");
+		valeria.feedValeria(100);
+	}
 	
 	//If PC has Pure!Amily:
 	if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) outputText("\n\nThe mouse-girl, Amily, is quick to respond to your call.  Happy for the luxury of a simple bath, even a milky one, she quickly tosses her clothes aside and dives in beside you, laughing and splashing playfully even as her brown hair is soaked.");
@@ -416,15 +424,17 @@ private function communalBath():void {
 	if(emberScene.followerEmber()) outputText("\n\nEmber approaches the pool, reptilian tail swishing eagerly.  " + emberScene.emberMF("He","She") + " lowers " + emberScene.emberMF("himself","herself") + " in with ease, sighing contentedly as milk washes over " + emberScene.emberMF("his","her") + " scaled body.  \"<i>Is this how you humans bathe normally?</i>\"  " + emberScene.emberMF("He","She") + " muses.  \"<i>How bizarre.</i>\"");
 	
 	//{If PC has Kiha:
-	if(kihaFollower.followerKiha()) outputText("\n\nKiha, your dear dusky dragoness, wanders over to see what the commotion is, but turns her nose up at the sight of you bathing in breastmilk.  \"<i>Ew.  How the hell can you just...  wallow in that?  Disgusting!</i>\"");
-	
+	if (kihaFollower.followerKiha()) {
+		outputText("\n\nKiha, your dear dusky dragoness, wanders over to see what the commotion is, but turns her nose up at the sight of you bathing in breastmilk.  \"<i>Ew.  How the hell can you just...  wallow in that?  Disgusting!</i>\"");
+		if (silly() && player.str > 80 && player.spe > 80) outputText("  Without warning Kiha, you grab her. \"<i>HEY, what are you doing, doofus?</i>\" she yells as you finally pull her into the milky bath. \"<i>What have you done, idiot!? Fine, I'll bathe. Are you happy? Baka!</i>\" she grumbles.")
+	}
 	//[Combine]
 	outputText("\n\nSurrounded by friends and lovers, you relax in the pool, leaning your arms back over the rim and closing your eyes, sighing contentedly.  Your friends splash and play with each other, happy to enjoy a few blissful, normal moments away from the cares of the world, away from the demons, and the monsters, and the horror their world has become.  The waves displace beside you, milk parting as a pair of giant jugs move over to you; you look down to see " + flags[kFLAGS.MILK_NAME] + " curling up in your arm.  Her giant teats float atop the waters, boyantly swaying with a strange grace atop the sea of their own making.");
 	
 	outputText("\n\nWithout prompting, " + flags[kFLAGS.MILK_NAME] + " shifts around to rub a little milk into your skin, gently bathing you.  Her dark fingers run through your hair, washing it thoroughly before moving down to your arms, [chest], and legs, cleansing every inch of your " + player.skinFurScales() + ".  You relax to " + flags[kFLAGS.MILK_NAME] + "'s touch, letting her massage the cares out of your weary muscles.  Around you, your followers begin to do much the same, taking turns bathing each other, scrubbing backs and extremities with the soothing milk of " + flags[kFLAGS.MILK_NAME] + "'s bounty.");
 	
 	outputText("\n\nThe lot of you carry on like this for nearly an hour, enjoying what little relaxation you're able to get in these dark times.  Eventually, though, you know you must return to your duties.  You and your companions one by one pull yourselves out of the pool, stopping to help " + flags[kFLAGS.MILK_NAME] + " and her bloated breasts; towels are passed around between joking and flirting hands, a few are even cracked over bare skin, making girls scream and yelp.  The camp is soon a mess of laughing and playing, with you in the center of it, teasing your lovers between shameless gropes and playful caresses.");
-	
+	player.refillHunger(50);
 	fatigue(-40);
 	HPChange(player.maxHP()*.33,false);
 	doNext(camp.returnToCampUseOneHour);
@@ -546,7 +556,7 @@ private function drinkAndFapturbate():void {
 	outputText(", inadvertently drawing a lewd moan from yourself.  The fat nipple stuffed in your mouth does an adequate job of muffling your pleasurable vocalizations");
 	if(player.hasCock()) outputText(", but it does little to hide the swelling of [eachCock] - you have the milk for that");
 	outputText(".");
-	
+	player.refillHunger(50);
 	outputText("\n\nAn excited moan worms out of " + flags[kFLAGS.MILK_NAME] + "'s puffy lips, a testament to the raw sensitivity of her milk-bloated jugs.  As your tongue swirls over the leaky nozzle's pebbly skin, she releases another breathy pant of delight.  The vocal tremors seem to coo all the way down to your loins, joining with your fingers' caresses to stir you to aching, trembling arousal.  ");
 	//{Fork, no new PG}
 	//(DA HERMS)
@@ -662,6 +672,8 @@ private function suckleDatMilk():void {
 	outputText("\n\nHer orgasm is as powerful as it is inevitable.  " + flags[kFLAGS.MILK_NAME] + " throws her head back, a silent cry escaping her lips as her fingers dig into your flesh, gripping you as tight as she can as the stream of milk passing your lips grows and grows and grows in power until you're nearly drowning.  White rivers from your mouth as you struggle to keep up with the unforgiving flow, swallowing fast to keep from drowning in her orgasmic release.  " + flags[kFLAGS.MILK_NAME] + " cries and squeals as her body is rocked by boobgasm, the breast not firmly in your grasp spraying wildly, creating a lake around the two of you.  You can see her thin panties darken with fem-cum, a few of her fingers darting down to rub her hidden nub, masturbating to the rhythm of the cream spurting from her breasts.");
 	
 	outputText("\n\nEventually, the boobgasm subsides, leaving " + flags[kFLAGS.MILK_NAME] + " a quivering, panting pile of lust in your arms, her fingers absently rubbing through her panties as the last dribbles of milk trickle down her chest and your chin.  Taking the first deep breath you've managed to get in the last few minutes, you grab a towel from nearby and try to dry yourself and the leaky girl off as best you can, brushing off the gallons of milk that have washed over you both.  When you're done, " + flags[kFLAGS.MILK_NAME] + " leans over and plants a long, lusty kiss on your lips, her tongue lapping up little drops of her own milk still inside your mouth.  She breaks the kiss after a long, pleasant moment, whispering \"<i>Thank you, [name].</i>\"");
+	player.slimeFeed();
+	player.refillHunger(50);
 	fatigue(-50);
 	dynStats("lus", 10+player.sens/10, "resisted", false);
 	doNext(camp.returnToCampUseOneHour);

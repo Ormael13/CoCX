@@ -4,6 +4,7 @@
 package classes.Scenes.Areas.Desert
 {
 	import classes.*;
+	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.Forest.TentacleBeast;
@@ -495,8 +496,18 @@ package classes.Scenes.Areas.Desert
 			menu();
 			if (player.hasCock()) addButton(0, "Use Penis", gigititigitigitigitigityAntGirl);
 			if (player.hasVagina()) addButton(1, "Use Vagina", femalePhyllaFirstFuckGooooo);
+			addButton(4, "Refuse", refuseAntSex);
 		}
-
+		
+		//Refuse sex. This disables further encounter.
+		private function refuseAntSex():void {
+			outputText("Your mind finally fires up; she's not worth your time. You quickly dart off towards the door, leaving Phylla heart-broken.", true)
+			outputText("\n\n\"<i>What are you doing? I mean... You won't?</i>\" She looks down, tears leaking from her eyes.");
+			outputText("\n\nYou have a feeling that you won't see her again.");
+			flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] = 1;
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
 //►Male Continuation
 		private function gigititigitigitigitigityAntGirl():void
 		{
@@ -800,7 +811,7 @@ package classes.Scenes.Areas.Desert
 			else outputText("these monsters");
 			outputText(" down?  I mean, I'm not complaining!  But I... just... I mean... you... inside me,</i>\" she shyly remarks, obviously wanting something more... traditional.");
 			//(Player lust increases to 100)
-			dynStats("lus=", 100);
+			dynStats("lus=", player.maxLust());
 			flags[kFLAGS.DIDNT_FUCK_PHYLLA_ON_RECRUITMENT] = 1;
 			//Where the fuck is this going?
 			menu();
@@ -1060,7 +1071,7 @@ package classes.Scenes.Areas.Desert
 				outputText("\n\nThe second your eyes lock onto her back, you feel something in your mind twitch.  You see the same thing happen to her as her whole body twitches.  She quickly turns around and runs over to you.");
 				outputText("\n\n\"<i>You came back! I mean... I hope you like it. I mean welcome... What do you want to talk about?</i>\"");
 			}
-			//[Talk] [Sex] [Lay Eggs / Don't Lay Eggs] [Children] [Appearance] [Gems]
+			//[Talk] [Sex] [Lay Eggs / Don't Lay Eggs] [Children] [Appearance] [Gems] [Stones]
 			menu();
 			addButton(0, "Talk", phyllaTalkChoices);
 			if (player.lust >= 33) addButton(1, "Sex", phyllaSexMenu);
@@ -1069,7 +1080,8 @@ package classes.Scenes.Areas.Desert
 			if (flags[kFLAGS.ANT_KIDS] > 0) addButton(3, "Children", phyllasKidsChildren);
 			addButton(4, "Appearance", phyllaPearance);
 			addButton(5, "Find Gems", phyllaDigsForGems);
-			addButton(9, "Back", camp.campLoversMenu);
+			addButton(6, "Take Stones", phyllaStones);
+			addButton(14, "Back", camp.campLoversMenu);
 
 			flags[kFLAGS.PHYLLA_CAMP_VISITS]++;
 		}
@@ -1099,7 +1111,7 @@ package classes.Scenes.Areas.Desert
 			//Drider/Bee impregnation scene for Phylla (universal unless otherwise specified, which will include varied intros and stuff.
 			//Sex > [Egg Phylla]
 			if (player.canOvipositSpider()) addButton(5, "Oviposit", eggDatBitch);
-			addButton(9, "Back", introductionToPhyllaFollower);
+			addButton(14, "Back", introductionToPhyllaFollower);
 		}
 
 		private function phyllaTalkChoices():void
@@ -1110,7 +1122,7 @@ package classes.Scenes.Areas.Desert
 			addButton(1, "Mating", talkAboutAntMatingAndRituals);
 			//(Phylla's Life Past & Future)
 			addButton(2, "Her Life", phyllasLifePastAndFuture);
-			addButton(9, "Back", introductionToPhyllaFollower);
+			addButton(14, "Back", introductionToPhyllaFollower);
 		}
 
 //►[Talk]
@@ -1170,7 +1182,7 @@ package classes.Scenes.Areas.Desert
 				outputText("\n\nThough you've taken 'advantage' of the corruption yourself, it makes you a little horny verbally asserting your dominance over Phylla.");
 
 				//(If PC has not completed the factory)
-				if (player.findStatusAffect(StatusAffects.DungeonShutDown) < 0) {
+				if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) {
 					outputText("\n\nEvery year!  Every year, your people valiantly send one of their own through that hellish portal to this place in the hopes to try and quell or even stop the spread of corruption.  Now you just learned that it all could have been slowed or even stopped completely by Phylla's race had they all not been gutless yellow-bellied cowards!");
 				}
 				//(If PC has completed the factory)
@@ -2562,7 +2574,8 @@ package classes.Scenes.Areas.Desert
 			clearOutput();
 			//Not Laying Eggs
 			if (flags[kFLAGS.PHYLLA_EGG_LAYING] == 0) {
-				outputText("Phylla is a 5-foot 8-inch tall ant morph with a very small, feminine frame covered in highly defined muscles.  She has four arms, two that attach at her shoulders and two slightly smaller ones that attach at her serratus anterior on her stomach.  Both sets of her arms and human-like legs are covered in plates of semi-reflective brown chitin armor.  Her interlocking joints remind you of how insect joints connect to one another. Her abdomen is about 4 feet long and is covered in large interlocking plates of skin colored exoskeleton.  Despite the fact that she has to carry the weight of an abdomen, her hips are very girly.  Her well toned butt is rarely seen as her abdomen covers it most of the time.  She has a sharp, slightly feminine face and large almond shaped emerald-green eyes with no hint of pupils or irises.  Her mouth is surprisingly large considering how thin her lips are.  When she smiles at you, you see a single row of human like teeth with typical human canines.  Her short brown hair is usually matted and covered in dirt, although on rare occasions she styles it so that two long bangs frame her face leaving the rest to flow around her neck.");
+				outputText("Phylla is a 5-foot 8-inch tall ant morph with a very small, feminine frame covered in highly defined muscles.  She has four arms, two that attach at her shoulders and two slightly smaller ones that attach at her serratus anterior on her stomach.  Both sets of her arms and human-like legs are covered in plates of semi-reflective brown chitin armor.  ");
+				outputText("Her interlocking joints remind you of how insect joints connect to one another. Her abdomen is about 4 feet long and is covered in large interlocking plates of skin colored exoskeleton.  Despite the fact that she has to carry the weight of an abdomen, her hips are very girly.  Her well toned butt is rarely seen as her abdomen covers it most of the time.  She has a sharp, slightly feminine face and large almond shaped emerald-green eyes with no hint of pupils or irises.  Her mouth is surprisingly large considering how thin her lips are.  When she smiles at you, you see a single row of human like teeth with typical human canines.  Her short brown hair is usually matted and covered in dirt, although on rare occasions she styles it so that two long bangs frame her face leaving the rest to flow around her neck.");
 				outputText("\n\nShe has a pair of B-cup breasts, with a single 0.5 inch nipple on each breast.");
 				outputText("\n\nShe has one extremely tight pussy placed between her legs, with a 2.0 inch clitoris.");
 				outputText("\n\nShe has one asshole placed between her well toned butt-cheeks, right where it belongs.");
@@ -2570,7 +2583,8 @@ package classes.Scenes.Areas.Desert
 			}
 			//When Laying Eggs
 			else {
-				outputText("Phylla is a 5-foot 8-inch tall ant morph with a very small, feminine frame covered in highly defined muscles.  She has four arms, two that attach at her shoulders and two slightly smaller ones that attach at her serratus anterior on her stomach.  Both sets of her arms and human-like legs are covered in plates of semi-reflective brown chitin armor.  Her interlocking joints remind you of how insect joints connect to one another. Her abdomen is currently engorged with eggs and is about 7 feet long!  It is covered in large interlocking plates of skin colored exoskeleton and every minute or two you watch Phylla moan as it contracts and relaxes, popping out another egg.  Despite the fact that she has to carry the weight of an abdomen, her hips are very girly.  Her well toned butt is rarely seen as her abdomen covers it most of the time.  She has a sharp, slightly feminine face and large almond shaped emerald-green eyes with no hint of pupils or irises.  Her mouth is surprisingly large considering how thin her lips are.  When she smiles at you, you see a single row of human like teeth with typical human canines.  Her short brown hair is usually matted and covered in dirt, although on rare occasions she styles it so that two long bangs frame her face leaving the rest to flow around her neck.");
+				outputText("Phylla is a 5-foot 8-inch tall ant morph with a very small, feminine frame covered in highly defined muscles.  She has four arms, two that attach at her shoulders and two slightly smaller ones that attach at her serratus anterior on her stomach.  Both sets of her arms and human-like legs are covered in plates of semi-reflective brown chitin armor.  ");
+				outputText("Her interlocking joints remind you of how insect joints connect to one another. Her abdomen is currently engorged with eggs and is about 7 feet long!  It is covered in large interlocking plates of skin colored exoskeleton and every minute or two you watch Phylla moan as it contracts and relaxes, popping out another egg.  Despite the fact that she has to carry the weight of an abdomen, her hips are very girly.  Her well toned butt is rarely seen as her abdomen covers it most of the time.  She has a sharp, slightly feminine face and large almond shaped emerald-green eyes with no hint of pupils or irises.  Her mouth is surprisingly large considering how thin her lips are.  When she smiles at you, you see a single row of human like teeth with typical human canines.  Her short brown hair is usually matted and covered in dirt, although on rare occasions she styles it so that two long bangs frame her face leaving the rest to flow around her neck.");
 				outputText("\n\nShe has a pair of DD-cup breasts, with a single 0.5 inch nipple on each breast.  Bursts of milk occasionally spurt from her swollen areolas in time with her contractions.");
 				outputText("\n\nShe has one extremely tight pussy placed between her legs, with a 2.0 inch clitoris.  A small stream of lubricant constantly flows down her legs, her lips slightly parted.");
 				outputText("\n\nShe has one asshole placed between her well toned butt-cheeks, right where it belongs.");
@@ -2629,6 +2643,54 @@ package classes.Scenes.Areas.Desert
 				outputText("\n\n\"<i>Is there anything else you wanted to do while you're down here?</i>\"  She inquires excitedly.");
 			}
 			flags[kFLAGS.PHYLLA_GEMS_HUNTED_TODAY] = 1;
+			doNext(camp.returnToCampUseOneHour);
+		}
+
+//[Stones]
+		private function phyllaStones():void
+		{
+			clearOutput();
+			var kidsMod2:int = 0;
+			if (flags[kFLAGS.ANT_KIDS] > 100) kidsMod2++;
+			if (flags[kFLAGS.ANT_KIDS] > 200) kidsMod2++;
+			if (flags[kFLAGS.ANT_KIDS] > 300) kidsMod2++;
+			if (flags[kFLAGS.ANT_KIDS] > 500) kidsMod2++;
+			if (flags[kFLAGS.ANT_KIDS] > 700) kidsMod2++;
+			if (flags[kFLAGS.ANT_KIDS] > 1000) kidsMod2++;
+			if (flags[kFLAGS.ANT_KIDS] > 1500) kidsMod2++;
+			if (flags[kFLAGS.ANT_KIDS] > 2000) kidsMod2++;
+			if (flags[kFLAGS.ANT_KIDS] > 3000) kidsMod2++;
+			if (flags[kFLAGS.ANT_KIDS] > 4000) kidsMod2++;
+			var stones:int = 2 + rand(10) + (kidsMod2 * 2);
+			flags[kFLAGS.ACHIEVEMENT_PROGRESS_ANTWORKS] += stones;
+			if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_ANTWORKS] >= 200) awardAchievement("AntWorks", kACHIEVEMENTS.GENERAL_ANTWORKS);
+			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stones;
+			statScreenRefresh();
+			//If Phylla IS NOT Laying Eggs
+			if (flags[kFLAGS.PHYLLA_EGG_LAYING] == 0) {
+				outputText("You ask Phylla is she's got any spare stones from digging, which you can take.  She nods happily and runs over to a small stone pile and rifles though it.  After a moment, she runs back over to you and holds up all four of her hands.");
+				outputText("\n\n\"<i>I hope... this is enough, I mean... we almost always digging, so there will be more of them soon.</i>\"  You mess up her hair with your hand, laughing. Telling her it's enough, you advise her to keep some of them instead throwing outside.  She gives you a playful salute as you taking the stones from her hands.");
+				outputText("\n\nYou gain " + stones + " stones.");
+				outputText("\n\n\"<i>Is there anything else you wanted to do while you're down here?</i>\"  She asks excitedly.");
+			}
+			//If Phylla IS Laying Eggs
+			else {
+				outputText("You ask Phylla if she allow take you few of the stones that her or her children have gathered while digging.  She nods happily and closes her eyes, tilting her head back slightly.  After a moment one your children scampers in. He runs overs to a stone pile in the corner of Phylla's room and after a moment of gathering walking over to you, he giving you few stones.  You accept them.");
+				//if corruption under 50
+				if (player.cor < 50) outputText("\n\nYou pat him on the head for a job well done as he walks deeper into the colony leaving you alone with Phylla.");
+				//If corruption over 50
+				else outputText("\n\nYou count the stones, and give both him and Phylla a look of disappointment.  Sighing heavily, you point decisively at the exit and your child hangs his head in shame as he heads back into the tunnels.  Phylla looks just as depressed and just stares at the ground, unable to really move due to her 'pregnancy.'");
+				outputText("\n\n\"<i>Is there anything else you wanted to do while you're down here?</i>\"");
+				outputText("\n\nYou gain " + stones + " stones.");
+			}
+			if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 900 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) {
+				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 900;
+				outputText(" <b>Your stone capacity is full.</b>");
+			}
+			else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 300 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 4) {
+				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = 300;
+				outputText(" <b>Your stone capacity is full.</b>");
+ 			}
 			doNext(camp.returnToCampUseOneHour);
 		}
 

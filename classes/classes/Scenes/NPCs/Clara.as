@@ -2,6 +2,7 @@
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class Clara extends Monster
 	{
@@ -61,11 +62,14 @@
 		{
 			outputText("Clara glares at you, clearly being worn down.  Then strange lights start dancing around her hand and she points it in your direction.");
 			//Successful: 
-			if(player.inte / 5 + rand(20) + 1 < 14)
+			if(player.findPerk(PerkLib.GorgonsEyes) < 0 && player.inte / 5 + rand(20) + 1 < 14)
 			{
 				outputText("\nA bright flash of light erupts in your face, blinding you!  You desperately blink and rub your eyes while Clara cackles with glee.");
 				player.createStatusAffect(StatusAffects.Blind,1,0,0,0);
 			}
+			else if (player.findPerk(PerkLib.GorgonsEyes) >= 0) {
+					outputText("Your mutated eyes not been affected at all by this flash!");
+				}
 			else outputText("\nYou manage to close your eyes just in time to avoid being blinded by the bright flash of light that erupts in your face!  Clara curses when she see's you're unaffected by her magic.");
 			combatRoundOver();
 		}
@@ -151,21 +155,28 @@
 			this.skinTone = "pale";
 			this.hairColor = "brown";
 			this.hairLength = 13;
-			initStrTouSpeInte(37, 55, 35, 60);
+			initStrTouSpeInte(57, 64, 35, 60);
 			initLibSensCor(25, 45, 40);
 			this.weaponName = "mace";
 			this.weaponVerb="smack";
-			this.weaponAttack = 10;
+			this.weaponAttack = 16 + (4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "tough hide";
-			this.armorDef = 5;
+			this.armorDef = 6 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 5;
+			this.level = 12;
 			this.bonusHP = 30;
+			this.bonusLust = 20;
 			this.gems = rand(5) + 25;
 			this.drop = NO_DROP;
 			this.tailType = TAIL_TYPE_COW;
 			//this.special1 = marbleSpecialAttackOne;
 			//this.special2 = marbleSpecialAttackTwo;
+			this.str += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 940;
 			checkMonster();
 		}
 

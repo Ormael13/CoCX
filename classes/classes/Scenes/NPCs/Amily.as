@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.NPCs
 {
 	import classes.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	/**
 	 * ...
@@ -20,7 +21,6 @@
 		//COMBAT AMILY STUFF
 		//(Has regular attack)
 		public function amilyAttack():void {
-			var dodged:Number = 0;
 			var damage:Number;
 			//return to combat menu when finished
 			doNext(game.playerMenu);
@@ -31,39 +31,28 @@
 				return;
 			}
 			//Determine if dodged!
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
-				dodged = 1;
-			}
-			//Determine if evaded
-			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
-				dodged = 2;
-			}
-			//("Misdirection"
-			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && player.armorName == "red, high-society bodysuit") {
-				dodged = 3;
-			}
-			//Determine if cat'ed
-			if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
-				dodged = 4;
-			}
+			var dodged:String = player.getEvasionReason();
 			//Determine damage - str modified by enemy toughness!
 			damage = int((str + weaponAttack) - Math.random()*(player.tou+player.armorDef));
 			//Dodged
-			if(dodged > 0) {
+			if(dodged != null) {
 				outputText("Amily dashes at you and swipes her knife, but you quickly sidestep the blow.", false);
 				//Add tags for miss/evade/flexibility/etc.
 				switch(dodged) {
-					case 1:
+					case EVASION_SPEED:
 						outputText(" [Dodge]", false);
 						break;
-					case 2:
+					case EVASION_EVADE:
 						outputText(" [Evade]", false);
 						break;
-					case 3:
+					case EVASION_MISDIRECTION:
 						outputText(" [Misdirect]", false);
 						break;
-					case 4:
+					case EVASION_FLEXIBILITY:
 						outputText(" [Flexibility]", false);
+						break;
+					case EVASION_UNHINDERED:
+						outputText(" [Unhindered]", false);
 						break;
 					default:
 						CoC_Settings.error();
@@ -80,8 +69,8 @@
 			}
 			//Got hit!
 			else {
-				damage = player.takeDamage(damage);
-				outputText("Amily dashes at you and swipes her knife, cutting you (" + damage + ").", false);
+				outputText("Amily dashes at you and swipes her knife, cutting you. ", false);
+				damage = player.takeDamage(damage, true);
 			}
 			if(damage > 0) {
 				if(lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
@@ -134,10 +123,10 @@
 				}
 				//NOT BLOCKED!
 				else {
-					damage = player.takeDamage(damage);
 					if(dodged > 0) outputText("Amily dashes at you and quickly slashes you twice; you manage to avoid the first blow, but the second one hits home, cutting you", false);
 					else outputText("Amily dashes at you and slashes at you twice in the time it would take most to throw a single blow", false);
-					outputText(" (" + damage + ")!", false);
+					outputText("! ", false);
+					damage = player.takeDamage(damage, true);
 				}
 			}
 			//Dodge all!
@@ -273,19 +262,26 @@
 			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_FUR];
 			this.hairColor = "brown";
 			this.hairLength = 5;
-			initStrTouSpeInte(30, 30, 85, 60);
-			initLibSensCor(45, 45, 10);
+			initStrTouSpeInte(40, 40, 120, 80);
+			initLibSensCor(44, 45, 10);
 			this.weaponName = "knife";
 			this.weaponVerb="slash";
-			this.weaponAttack = 6;
+			this.weaponAttack = 9 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "rags";
-			this.armorDef = 1;
+			this.armorDef = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = 20;
+			this.bonusLust = 10;
 			this.lust = 20;
 			this.lustVuln = .85;
-			this.level = 4;
-			this.gems = 2 + rand(5);
+			this.level = 12;
+			this.gems = 8 + rand(11);
 			this.drop = NO_DROP;
+			this.str += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 1280;
 			checkMonster();
 		}
 		

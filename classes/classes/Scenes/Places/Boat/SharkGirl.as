@@ -2,6 +2,7 @@
 {
 	import classes.*;
 	import classes.internals.*;
+	import classes.GlobalFlags.kFLAGS;
 
 	public class SharkGirl extends Monster
 	{
@@ -9,15 +10,15 @@
 		private function sharkTease():void {
 			game.spriteSelect(70);
 			if(rand(2) == 0) {
-				outputText("You charge at the shark girl, prepared to strike again, but stop dead in your tracks when she bends over and wiggles her toned ass towards you. It distracts you long enough for her tail to swing out and smack you to the ground. She coos, \"<i>Aw... You really do like me!</i>\"", false);
+				outputText("You charge at the shark girl, prepared to strike again, but stop dead in your tracks when she bends over and wiggles her toned ass towards you. It distracts you long enough for her tail to swing out and smack you to the ground. She coos, \"<i>Aw... You really do like me!</i>\" ", false);
 				//(Small health damage, medium lust build).
-				player.takeDamage(4+rand(4));
+				player.takeDamage(4+rand(4), true);
 				game.dynStats("lus", (10+(player.lib/20)));
 			}
 			else {
-				outputText("You pull your " + player.weaponName + " back, getting a running start to land another attack. The Shark girl smirks and pulls up her bikini top, shaking her perky breasts in your direction. You stop abruptly, aroused by the sight just long enough for the shark girl to kick you across the face and knock you to the ground.  She teases, \"<i>Aw, don't worry baby, you're gonna get the full package in a moment!</i>\"", false);
+				outputText("You pull your " + player.weaponName + " back, getting a running start to land another attack. The Shark girl smirks and pulls up her bikini top, shaking her perky breasts in your direction. You stop abruptly, aroused by the sight just long enough for the shark girl to kick you across the face and knock you to the ground.  She teases, \"<i>Aw, don't worry baby, you're gonna get the full package in a moment!</i>\" ", false);
 				//(Small health damage, medium lust build)
-				player.takeDamage(4+rand(4));
+				player.takeDamage(4+rand(4), true);
 				game.dynStats("lus", (5+(player.lib/10)));
 			}
 			combatRoundOver();
@@ -57,19 +58,20 @@
 			this.skinTone = "gray";
 			this.hairColor = "silver";
 			this.hairLength = 16;
-			initStrTouSpeInte(40, 40, 55, 42);
+			initStrTouSpeInte(90, 90, 60, 42);
 			initLibSensCor(75, 35, 40);
 			this.weaponName = "shark teeth";
 			this.weaponVerb="bite";
-			this.weaponAttack = 3;
+			this.weaponAttack = 20 + (5 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "tough skin";
-			this.armorDef = 5;
+			this.armorDef = 12 + (2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = 20;
+			this.bonusLust = 20;
 			this.lust = 40;
 			this.lustVuln = .9;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 4;
-			this.gems = rand(15) + 5;
+			this.level = 20;
+			this.gems = rand(30) + 25;
 			this.drop = new WeightedDrop().
 					add(consumables.L_DRAFT,3).
 					add(armors.S_SWMWR,1).
@@ -77,6 +79,12 @@
 					add(null,1);
 			this.special1 = sharkTease;
 			this.special2 = sharkTease;
+			this.str += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.spe += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.inte += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 2130;
 			checkMonster();
 		}
 
