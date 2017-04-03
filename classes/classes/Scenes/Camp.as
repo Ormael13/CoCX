@@ -2049,7 +2049,7 @@ public function placesCount():int {
 	if (flags[kFLAGS.BAZAAR_ENTERED] > 0) places++;
 	if (player.findStatusEffect(StatusEffects.BoatDiscovery) >= 0) places++;
 	if (flags[kFLAGS.FOUND_CATHEDRAL] > 0) places++;
-	if (flags[kFLAGS.FACTORY_FOUND] >= 0 || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) places++;
+	if (flags[kFLAGS.FACTORY_FOUND] > 0 || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) places++;
 	if (farmFound()) places++; 
 	if (flags[kFLAGS.OWCA_UNLOCKED] > 0) places++;
 	if (player.findStatusEffect(StatusEffects.HairdresserMeeting) >= 0) places++;

@@ -6,8 +6,10 @@ package classes.Scenes
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.API.Encounter;
+	import classes.Scenes.API.Encounters;
+	import classes.Scenes.API.FnHelpers;
 	import classes.Scenes.Explore.ExploreDebug;
-	import classes.Scenes.Explore.Giacomo;
 	import classes.Scenes.Monsters.*;
 
 	public class Exploration extends BaseContent
@@ -214,97 +216,101 @@ package classes.Scenes
 		
 		//Try to find a new location - called from doExplore once the first location is found
 		public function tryDiscover():void {
-
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && (player.cocks.length > 0 || player.vaginas.length > 0) && !kGAMECLASS.helFollower.followerHel()) {
-				kGAMECLASS.helScene.helSexualAmbush();
-				return;
-			}
-			if (flags[kFLAGS.GRIMDARK_MODE] > 0) {
-				randomEncounter();
-				return;
-			}
 			clearOutput();
 			flags[kFLAGS.TIMES_EXPLORED]++;
-			if (flags[kFLAGS.TIMES_EXPLORED_LAKE] <= 0) {
-				// Discover Lake
-				flags[kFLAGS.TIMES_EXPLORED_LAKE] = 1;
-				outputText("Your wanderings take you far and wide across the barren wasteland that surrounds the portal, until the smell of humidity and fresh water alerts you to the nearby lake.  With a few quick strides you find a lake so massive the distant shore cannot be seen.  Grass and a few sparse trees grow all around it.\n\n<b>You've discovered the Lake!</b>");
-				doNext(camp.returnToCampUseOneHour);
-			} else if (flags[kFLAGS.TIMES_EXPLORED_LAKE] >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_DESERT] <= 0) {
-				// Discover Desert
-				flags[kFLAGS.TIMES_EXPLORED_DESERT] = 1;
-				outputText("You stumble as the ground shifts a bit underneath you.  Groaning in frustration, you straighten up and discover the rough feeling of sand ");
-				if      (player.lowerBody == LOWER_BODY_TYPE_HUMAN)   outputText("inside your footwear, between your toes");
-				else if (player.lowerBody == LOWER_BODY_TYPE_HOOFED)  outputText("in your hooves");
-				else if (player.lowerBody == LOWER_BODY_TYPE_DOG)     outputText("in your paws");
-				else if (player.lowerBody == LOWER_BODY_TYPE_NAGA)    outputText("in your scales");
-				outputText(".\n\n<b>You've discovered the Desert!</b>");
-				doNext(camp.returnToCampUseOneHour);
-			} else if (flags[kFLAGS.TIMES_EXPLORED_DESERT] >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] <= 0) {
-				// Discover Mountain
-				flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] = 1;
-				outputText("Thunder booms overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it.\n\n<b>You've discovered the Mountain!</b>");
-				doNext(camp.returnToCampUseOneHour);
-			} else if (flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] >= 1 && rand(3) == 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] <= 0) {
-				// Discover Plains
-				flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
-				outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>");
-				doNext(camp.returnToCampUseOneHour);
-			} else if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] <= 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && rand(3) <= 0) {
-				// Discover Swamp
-				flags[kFLAGS.TIMES_EXPLORED_SWAMP] = 1;
-				outputText("All things considered, you decide you wouldn't mind a change of scenery.  Gathering up your belongings, you begin a journey into the wasteland.  The journey begins in high spirits, and you whistle a little traveling tune to pass the time.  After an hour of wandering, however, your wanderlust begins to whittle away.  Another half-hour ticks by.  Fed up with the fruitless exploration, you're nearly about to head back to camp when a faint light flits across your vision.  Startled, you whirl about to take in three luminous will-o'-the-wisps, swirling around each other whimsically.  As you watch, the three ghostly lights begin to move off, and though the thought of a trap crosses your mind, you decide to follow.\n\n");
-				outputText("Before long, you start to detect traces of change in the environment.  The most immediate difference is the increasingly sweltering heat.  A few minutes pass, then the will-o'-the-wisps plunge into the boundaries of a dark, murky, stagnant swamp; after a steadying breath you follow them into the bog.  Once within, however, the gaseous balls float off in different directions, causing you to lose track of them.  You sigh resignedly and retrace your steps, satisfied with your discovery.  Further exploration can wait.  For now, your camp is waiting.\n\n");
-				outputText("<b>You've discovered the Swamp!</b>");
-				doNext(camp.returnToCampUseTwoHours);
-			} else if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] <= 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && rand(4) <= 0 && (player.level >= 10 || model.time.days >= 60) ) {
-				// Discover Glacial Rift!
-				flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] = 1;
-				outputText("You walk for some time, roaming the hard-packed and pink-tinged earth of the demon-realm of Mareth. As you progress, a cool breeze suddenly brushes your cheek, steadily increasing in intensity and power until your clothes are whipping around your body in a frenzy. Every gust of wind seems to steal away part of your strength, the cool breeze having transformed into a veritable arctic gale. You wrap your arms around yourself tightly, shivering fiercely despite yourself as the hard pink dirt slowly turns to white; soon you’re crunching through actual snow, thick enough to make you stumble with every other step. You come to a stop suddenly as the ground before you gives way to a grand ocean, many parts of it frozen in great crystal islands larger than any city.\n\n");
-				outputText("<b>You've discovered the Glacial Rift!</b>");
-				doNext(camp.returnToCampUseTwoHours);
-			} else if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] <= 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && rand(4) <= 0 && (player.level >= 15 || model.time.days >= 90) ) {
-				// Discover Volcanic Crag!
-				flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] = 1;
-				outputText("You walk for some time, roaming the hard-packed and pink-tinged earth of the demon-realm of Mareth. As you progress, you can feel the air getting warm. It gets hotter as you progress until you finally stumble across a blackened landscape. You reward yourself with a sight of the endless series of a volcanic landscape. Crags dot the landscape.\n\n");
-				outputText("<b>You've discovered the Volcanic Crag!</b>");
-				doNext(camp.returnToCampUseTwoHours);
-			} else {
-				// Random Encounter
-				randomEncounter();
-			}
+			normalExploreEncounter.execEncounter();
+		}
+
+		private var _normalExploreEncounter:Encounter = null;
+		public function get normalExploreEncounter():Encounter {
+			const game:CoC     = kGAMECLASS;
+			const fn:FnHelpers = Encounters.fn;
+			if (_normalExploreEncounter == null) _normalExploreEncounter =
+					Encounters.group("explore", game.commonEncounters.withImpGob, {
+						name  : "grimdark_skip",
+						call  : game.commonEncounters.withImpGob.execEncounter,
+						chance: Encounters.ALWAYS,
+						when  : function ():Boolean {
+							return flags[kFLAGS.GRIMDARK_MODE] > 0
+						}
+					}, {
+						name  : "lake",
+						call  : game.lake.discover,
+						when  : fn.not(game.lake.isDiscovered),
+						chance: Encounters.ALWAYS
+					}, {
+						name  : "desert",
+						call  : game.desert.discover,
+						when  : fn.all(fn.not(game.desert.isDiscovered), game.lake.isDiscovered),
+						chance: 0.33
+					}, {
+						name  : "mountain",
+						call  : game.mountain.discover,
+						when  : fn.all(fn.not(game.mountain.isDiscovered), game.desert.isDiscovered),
+						chance: 0.33
+					}, {
+						name  : "plains",
+						call  : game.plains.discover,
+						when  : fn.all(fn.not(game.plains.isDiscovered), game.mountain.isDiscovered),
+						chance: 0.33
+					}, {
+						name  : "swamp",
+						call  : game.swamp.discover,
+						when  : fn.all(fn.not(game.swamp.isDiscovered), game.plains.isDiscovered),
+						chance: 0.33
+					}, {
+						name  : "glacial_rift",
+						call  : game.glacialRift.discover,
+						when  : fn.all(fn.not(game.glacialRift.isDiscovered), game.swamp.isDiscovered, fn.ifLevelMin(10)),
+						chance: 0.25
+					}, {
+						name  : "volcanic_crag",
+						call  : game.volcanicCrag.discover,
+						when  : fn.all(fn.not(game.volcanicCrag.isDiscovered), game.swamp.isDiscovered, fn.ifLevelMin(15)),
+						chance: 0.25
+					}, {
+						name  : "cathedral",
+						call  : gargoyle,
+						when  : function ():Boolean {
+							return flags[kFLAGS.FOUND_CATHEDRAL] == 0;
+						},
+						chance: 0.1
+					}, {
+						name  : "lumi",
+						call  : game.lumi.lumiEncounter,
+						chance: 0.1
+					}, {
+						name  : "giacomo",
+						call  : game.giacomoShop.giacomoEncounter,
+						chance: 0.2
+					}, {
+						name  : "prisonmod",
+						call  : prisonFn,
+						when  : function ():Boolean {
+							return flags[kFLAGS.BAZAAR_ENTERED] == 0;
+						},
+						chance: 0.01
+					}, {
+						name  : "loleasteregg",
+						chance: 0.01,
+						call  : function ():void {
+							//Easter egg!
+							outputText("You wander around, fruitlessly searching for new places.");
+							doNext(camp.returnToCampUseOneHour);
+						}
+					});
+			return _normalExploreEncounter;
 		}
 		
-		public function randomEncounter():void {
-			var choosey:Number = rand(5);
-			if (flags[kFLAGS.FOUND_CATHEDRAL] > 0 && choosey == 3) choosey ++;
-			if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0 && choosey == 2 && rand(4) > 0) choosey += 2;
-			if (flags[kFLAGS.GRIMDARK_MODE] > 0) choosey = 666;
-			
-			switch(choosey) {
-				case 0:
-					kGAMECLASS.giacomoShop.giacomoEncounter();
-					break;
-				case 1:
-					kGAMECLASS.lumi.lumiEncounter();
-					break;
-				case 2:
+		public function prisonFn():void {
 					outputText("Your curiosity draws you towards the smoke of a campfire on the edges of the forest. In the gloom ahead you see what appears to be a cage wagon surrounded by several tents, and hear the sounds of guttural voices engaged in boisterous conversation. Inexplicably you find yourself struck by an unwholesome sense of foreboding. <b>Even from here that cage looks like it is designed to carry people off to somewhere very unpleasant, some place where your life could be turned upside down and the rules you have become accustomed to in this world may no longer apply.</b> You take a long moment to consider turning back. Do you throw caution to the wind and investigate further?");
 					//outputText("\n\n(<b>NOTE:</b> Prisoner mod is currently under development and not all scenes are available.)");
 					doYesNo(kGAMECLASS.prison.goDirectlyToPrisonDoNotPassGoDoNotCollect200Gems, camp.returnToCampUseOneHour);
-					break;
-				case 3: //5 (gargoyle) is never chosen once cathedral is discovered.
+		}
+
+		public function gargoyle():void {
 					if (flags[kFLAGS.GAR_NAME] == 0) kGAMECLASS.gargoyle.gargoylesTheShowNowOnWBNetwork();
 					else kGAMECLASS.gargoyle.returnToCathedral();
-					break;
-				default:
-					if (rand(100) < 98) {
-						genericGobImpEncounters(true); //Monster - 50/50 imp/gob split.
-					} else { //Easter egg!
-						outputText("You wander around, fruitlessly searching for new places.");
-						doNext(camp.returnToCampUseOneHour);
-					}
-			}
 		}
 		
 		public function configureRooms():void {

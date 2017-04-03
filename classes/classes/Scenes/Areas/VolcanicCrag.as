@@ -21,7 +21,16 @@ package classes.Scenes.Areas
 		public function VolcanicCrag() 
 		{
 		}
-		
+		public function isDiscovered():Boolean {
+			return flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0;
+		}
+
+		public function discover():void {
+			flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] = 1;
+			outputText("You walk for some time, roaming the hard-packed and pink-tinged earth of the demon-realm of Mareth. As you progress, you can feel the air getting warm. It gets hotter as you progress until you finally stumble across a blackened landscape. You reward yourself with a sight of the endless series of a volcanic landscape. Crags dot the landscape.\n\n");
+			outputText("<b>You've discovered the Volcanic Crag!</b>");
+			doNext(camp.returnToCampUseTwoHours);
+		}
 		public function exploreVolcanicCrag():void {
 			flags[kFLAGS.DISCOVERED_VOLCANO_CRAG]++
 			doNext(playerMenu);

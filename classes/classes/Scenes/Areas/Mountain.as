@@ -7,8 +7,6 @@ package classes.Scenes.Areas
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.Mountain.*;
-	import classes.Scenes.Monsters.Goblin;
-	import classes.Scenes.Monsters.Imp;
 	import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 
 	use namespace kGAMECLASS;
@@ -23,6 +21,14 @@ package classes.Scenes.Areas
 		
 		public function Mountain()
 		{
+		}
+		public function isDiscovered():Boolean {
+			return flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] > 0;
+		}
+		public function discover():void {
+			flags[kFLAGS.TIMES_EXPLORED_MOUNTAIN] = 1;
+			outputText("Thunder booms overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it.\n\n<b>You've discovered the Mountain!</b>");
+			doNext(camp.returnToCampUseOneHour);
 		}
 		//Explore Mountain
 		public function exploreMountain():void

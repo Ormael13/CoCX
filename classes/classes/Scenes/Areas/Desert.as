@@ -21,6 +21,19 @@ package classes.Scenes.Areas
 		public function Desert()
 		{
 		}
+		public function isDiscovered():Boolean {
+			return flags[kFLAGS.TIMES_EXPLORED_DESERT] > 0;
+		}
+		public function discover():void {
+			flags[kFLAGS.TIMES_EXPLORED_DESERT] = 1;
+			outputText("You stumble as the ground shifts a bit underneath you.  Groaning in frustration, you straighten up and discover the rough feeling of sand ");
+			if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("inside your footwear, between your toes");
+			else if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("in your hooves");
+			else if (player.lowerBody == LOWER_BODY_TYPE_DOG) outputText("in your paws");
+			else if (player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("in your scales");
+			outputText(".\n\n<b>You've discovered the Desert!</b>");
+			doNext(camp.returnToCampUseOneHour);
+		}
 		//Explore desert
 		public function exploreDesert():void
 		{

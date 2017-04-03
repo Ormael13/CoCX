@@ -415,11 +415,9 @@ package classes
 		private var _femininity:Number = 50;
 		public function get femininity():Number {
 			var fem:Number = _femininity;
-			var statIndex:int = this.findStatusEffect(StatusEffects.UmasMassage);
-			if (statIndex >= 0) {
-				if (this.statusEffect(statIndex).value1 == UmasShop.MASSAGE_MODELLING_BONUS) {
-					fem += this.statusEffect(statIndex).value2;
-				}
+			const effect:StatusEffectClass = statusEffectByType(StatusEffects.UmasMassage);
+			if (effect != null && effect.value1 == UmasShop.MASSAGE_MODELLING_BONUS) {
+				fem += effect.value2;
 			}
 			if (fem > 100)
 				fem = 100;
@@ -841,67 +839,72 @@ package classes
 		}
 		
 		//Remove a status
-		public function removeStatusEffect(stype:StatusEffectType):void
-		{
-			var counter:Number = findStatusEffect(stype);
+		public function removeStatusEffect(stype:StatusEffectType):void {
+			var counter:Number = indexOfStatusEffect(stype);
 			if (counter < 0) return;
 			statusEffects.splice(counter, 1);
 			//trace("removeStatusEffect -> "+statusEffects.join(","));
 		}
 		
-		public function findStatusEffect(stype:StatusEffectType):Number
-		{
-			for (var counter:int = 0; counter < statusEffects.length; counter++)
-			{
-				if (statusEffect(counter).stype == stype)
+		public function indexOfStatusEffect(stype:StatusEffectType):int {
+			for (var counter:int = 0; counter < statusEffects.length; counter++) {
+				if ((statusEffects[counter] as StatusEffectClass).stype == stype)
 					return counter;
 			}
 			return -1;
 		}
+
+		/**
+		 * @deprecated Replace with indexOfStatusEffect(), statusEffectByType(), or hasStatusEffect()
+		 */
+		public function findStatusEffect(stype:StatusEffectType):int {
+			return indexOfStatusEffect(stype);
+		}
+		public function statusEffectByType(stype:StatusEffectType):StatusEffectClass {
+			var idx:int = indexOfStatusEffect(stype);
+			return idx<0 ? null : statusEffects[idx];
+		}
+		public function hasStatusEffect(stype:StatusEffectType):Boolean {
+			return indexOfStatusEffect(stype) >= 0;
+		}
 		//}endregion
 		
-		
-		public function changeStatusValue(stype:StatusEffectType, statusValueNum:Number = 1, newNum:Number = 0):void
-		{
-			var counter:Number = findStatusEffect(stype);
+		public function changeStatusValue(stype:StatusEffectType, statusValueNum:Number = 1, newNum:Number = 0):void {
+			var effect:StatusEffectClass = statusEffectByType(stype);
 			//Various Errors preventing action
-			if (counter < 0)return;
-			if (statusValueNum < 1 || statusValueNum > 4)
-			{
+			if (effect == null)return;
+			if (statusValueNum < 1 || statusValueNum > 4) {
 				CoC_Settings.error("ChangeStatusValue called with invalid status value number.");
 				return;
 			}
 			if (statusValueNum == 1)
-				statusEffect(counter).value1 = newNum;
+				effect.value1 = newNum;
 			if (statusValueNum == 2)
-				statusEffect(counter).value2 = newNum;
+				effect.value2 = newNum;
 			if (statusValueNum == 3)
-				statusEffect(counter).value3 = newNum;
+				effect.value3 = newNum;
 			if (statusValueNum == 4)
-				statusEffect(counter).value4 = newNum;
+				effect.value4 = newNum;
 		}
 		
 		public function addStatusValue(stype:StatusEffectType, statusValueNum:Number = 1, bonus:Number = 0):void
 		{
-			var counter:Number = findStatusEffect(stype);
 			//Various Errors preventing action
-			if (counter < 0)
-			{
-				return;
-			}
+			var effect:StatusEffectClass = statusEffectByType(stype);
+			if (effect == null) return;
 			if (statusValueNum < 1 || statusValueNum > 4)
 			{
 				CoC_Settings.error("ChangeStatusValue called with invalid status value number.");
 				return;
 			}
 			if (statusValueNum == 1)
-				statusEffect(counter).value1 += bonus;
+				effect.value1 += bonus;
 			if (statusValueNum == 2)
-				statusEffect(counter).value2 += bonus;
+				effect.value2 += bonus;
 			if (statusValueNum == 3)
-				statusEffect(counter).value3 += bonus;
+				effect.value3 += bonus;
 			if (statusValueNum == 4)
-				statusEffect(counter).value4 += bonus;
+				effect.value4 += bonus;
 		}
 		
 		public function statusEffect(idx:int):StatusEffectClass
@@ -1646,15 +1649,15 @@ package classes
 		}
 		public function milked():void
 		{
-			if (findStatusEffect(StatusEffects.LactationReduction) >= 0)
+			if (hasStatusEffect(StatusEffects.LactationReduction))
 				changeStatusValue(StatusEffects.LactationReduction, 1, 0);
-			if (findStatusEffect(StatusEffects.LactationReduc0) >= 0)
+			if (hasStatusEffect(StatusEffects.LactationReduc0))
 				removeStatusEffect(StatusEffects.LactationReduc0);
-			if (findStatusEffect(StatusEffects.LactationReduc1) >= 0)
+			if (hasStatusEffect(StatusEffects.LactationReduc1))
 				removeStatusEffect(StatusEffects.LactationReduc1);
-			if (findStatusEffect(StatusEffects.LactationReduc2) >= 0)
+			if (hasStatusEffect(StatusEffects.LactationReduc2))
 				removeStatusEffect(StatusEffects.LactationReduc2);
-			if (findStatusEffect(StatusEffects.LactationReduc3) >= 0)
+			if (hasStatusEffect(StatusEffects.LactationReduc3))
 				removeStatusEffect(StatusEffects.LactationReduc3);
 			if (findPerk(PerkLib.Feeder) >= 0)
 			{
@@ -1674,15 +1677,15 @@ package classes
 			//Prevent lactation decrease if lactating.
 			if (todo >= 0)
 			{
-				if (findStatusEffect(StatusEffects.LactationReduction) >= 0)
+				if (hasStatusEffect(StatusEffects.LactationReduction))
 					changeStatusValue(StatusEffects.LactationReduction, 1, 0);
-				if (findStatusEffect(StatusEffects.LactationReduc0) >= 0)
+				if (hasStatusEffect(StatusEffects.LactationReduc0))
 					removeStatusEffect(StatusEffects.LactationReduc0);
-				if (findStatusEffect(StatusEffects.LactationReduc1) >= 0)
+				if (hasStatusEffect(StatusEffects.LactationReduc1))
 					removeStatusEffect(StatusEffects.LactationReduc1);
-				if (findStatusEffect(StatusEffects.LactationReduc2) >= 0)
+				if (hasStatusEffect(StatusEffects.LactationReduc2))
 					removeStatusEffect(StatusEffects.LactationReduc2);
-				if (findStatusEffect(StatusEffects.LactationReduc3) >= 0)
+				if (hasStatusEffect(StatusEffects.LactationReduc3))
 					removeStatusEffect(StatusEffects.LactationReduc3);
 			}
 			if (todo > 0)
@@ -2080,7 +2083,7 @@ package classes
 		public function canFly():Boolean
 		{
 			//web also makes false!
-			if (findStatusEffect(StatusEffects.Web) >= 0)
+			if (hasStatusEffect(StatusEffects.Web))
 				return false;
 			return canFlyWings.indexOf(_wingType) != -1;
 
@@ -2398,7 +2401,7 @@ package classes
 				ass.analLooseness++;
 				stretched = true;
 				//Reset butt stretchin recovery time
-				if (findStatusEffect(StatusEffects.ButtStretched) >= 0) changeStatusValue(StatusEffects.ButtStretched,1,0);
+				if (hasStatusEffect(StatusEffects.ButtStretched)) changeStatusValue(StatusEffects.ButtStretched,1,0);
 			}
 			//If within top 10% of capacity, 25% stretch
 			if (cArea < analCapacity() && cArea >= .9*analCapacity() && rand(4) == 0) {
@@ -2419,7 +2422,7 @@ package classes
 			//Delay un-stretching
 			if (cArea >= .5 * analCapacity()) {
 				//Butt Stretched used to determine how long since last enlargement
-				if (findStatusEffect(StatusEffects.ButtStretched) < 0) createStatusEffect(StatusEffects.ButtStretched,0,0,0,0);
+				if (!hasStatusEffect(StatusEffects.ButtStretched)) createStatusEffect(StatusEffects.ButtStretched,0,0,0,0);
 				//Reset the timer on it to 0 when restretched.
 				else changeStatusValue(StatusEffects.ButtStretched,1,0);
 			}
@@ -2442,11 +2445,11 @@ package classes
 		}
 		
 		public function get inHeat():Boolean {
-			return findStatusEffect(StatusEffects.Heat) >= 0;
+			return hasStatusEffect(StatusEffects.Heat);
 		}
 		
 		public function get inRut():Boolean {
-			return findStatusEffect(StatusEffects.Rut) >= 0;
+			return hasStatusEffect(StatusEffects.Rut);
 		}
 
 		public function bonusFertility():Number
@@ -3510,11 +3513,9 @@ package classes
 			if (statusEffectv1(StatusEffects.BlackCatBeer) > 0)
 				mult *= 0.75;
 			// Uma's Massage bonuses
-			var statIndex:int = findStatusEffect(StatusEffects.UmasMassage);
-			if (statIndex >= 0) {
-				if (statusEffect(statIndex).value1 == UmasShop.MASSAGE_RELAXATION) {
-					mult *= statusEffect(statIndex).value2;
-				}
+			var effect:StatusEffectClass = statusEffectByType(StatusEffects.UmasMassage);
+			if (effect != null && effect.value1 == UmasShop.MASSAGE_RELAXATION) {
+				mult *= effect.value2;
 			}
 			//Round things off.
 			mult = Math.round(mult);
@@ -3564,29 +3565,27 @@ package classes
 			//DRAWBACKS TO JUSTIFY IT.
 			//++++++++++++++++++++++++++++++++++++++++++++++++++
 			//Bimbo body slows lust gains!
-			if ((findStatusEffect(StatusEffects.BimboChampagne) >= 0 || findPerk(PerkLib.BimboBody) >= 0) && lust > 0) lust *= .75;
+			if ((hasStatusEffect(StatusEffects.BimboChampagne) || findPerk(PerkLib.BimboBody) >= 0) && lust > 0) lust *= .75;
 			if (findPerk(PerkLib.BroBody) >= 0 && lust > 0) lust *= .75;
 			if (findPerk(PerkLib.FutaForm) >= 0 && lust > 0) lust *= .75;
 			//Omnibus' Gift reduces lust gain by 15%
 			if (findPerk(PerkLib.OmnibusGift) >= 0) lust *= .85;
 			//Luststick reduces lust gain by 10% to match increased min lust
 			if (findPerk(PerkLib.LuststickAdapted) >= 0) lust *= 0.9;
-			if (findStatusEffect(StatusEffects.Berzerking) >= 0) lust *= .6;
+			if (hasStatusEffect(StatusEffects.Berzerking)) lust *= .6;
 			if (findPerk(PerkLib.PureAndLoving) >= 0) lust *= 0.95;
 			//Berserking removes half!
-			if (findStatusEffect(StatusEffects.Lustzerking) >= 0) lust += ((100 - lust) / 2);
+			if (hasStatusEffect(StatusEffects.Lustzerking)) lust += ((100 - lust) / 2);
 			//Items
 			if (jewelryEffectId == JewelryLib.PURITY) lust *= 1 - (jewelryEffectMagnitude / 100);
 			if (armorName == game.armors.DBARMOR.name) lust *= 0.9;
 			if (weaponName == game.weapons.HNTCANE.name) lust *= 0.75;
 			// Lust mods from Uma's content -- Given the short duration and the gem cost, I think them being multiplicative is justified.
 			// Changing them to an additive bonus should be pretty simple (check the static values in UmasShop.as)
-			var statIndex:int = findStatusEffect(StatusEffects.UmasMassage);
-			if (statIndex >= 0)
-			{
-				if (statusEffect(statIndex).value1 == UmasShop.MASSAGE_RELIEF || statusEffect(statIndex).value1 == UmasShop.MASSAGE_LUST)
-				{
-					lust *= statusEffect(statIndex).value2;
+			var effect:StatusEffectClass = statusEffectByType(StatusEffects.UmasMassage);
+			if (effect != null) {
+				if (effect.value1 == UmasShop.MASSAGE_RELIEF || effect.value1 == UmasShop.MASSAGE_LUST) {
+					lust *= effect.value2;
 				}
 			}
 			

@@ -23,6 +23,15 @@ package classes.Scenes.Areas
 		public function Lake()
 		{
 		}
+		public function isDiscovered():Boolean {
+			return flags[kFLAGS.TIMES_EXPLORED_LAKE] > 0;
+		}
+
+		public function discover():void {
+			flags[kFLAGS.TIMES_EXPLORED_LAKE] = 1;
+			outputText("Your wanderings take you far and wide across the barren wasteland that surrounds the portal, until the smell of humidity and fresh water alerts you to the nearby lake.  With a few quick strides you find a lake so massive the distant shore cannot be seen.  Grass and a few sparse trees grow all around it.\n\n<b>You've discovered the Lake!</b>");
+			doNext(camp.returnToCampUseOneHour);
+		}
 		//Explore Lake
 		public function exploreLake():void
 		{

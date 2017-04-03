@@ -2,6 +2,8 @@ package classes.Scenes.NPCs{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.API.Encounter;
+	import classes.Scenes.API.Encounters;
 
 	public class HelScene extends NPCAwareContent implements TimeAwareInterface {
 
@@ -1915,6 +1917,17 @@ public function helSexualAmbush():void {
 //Got rid of this, now handled by passing true:	kGAMECLASS.buttonEvents[9] = pussyOutOfHelSexAmbush;
 	helFuckMenu(true);
 }
+
+	public var helSexualAmbushEncounter:Encounter = Encounters.build({
+		name:"helSexualAmbush",
+		call: helSexualAmbush,
+		when: function ():Boolean {
+			return flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1
+				   && flags[kFLAGS.HEL_RAPED_TODAY] == 0
+				   && player.gender > 0
+				   && !kGAMECLASS.helScene.followerHel();
+		}
+	});
 
 //[Leave] (From Sexual Ambush)
 private function pussyOutOfHelSexAmbush():void {
