@@ -178,7 +178,7 @@ package classes.Scenes.Dungeons.D3
 		
 		override public function doAI():void
 		{
-			if (findStatusEffect(StatusEffects.Stunned) >= 0) {
+			if (hasStatusEffect(StatusEffects.Stunned)) {
 				removeStatusEffect(StatusEffects.Stunned);
 				outputText("Your duplicate is too stunned, buying you another round!");
 				combatRoundOver();

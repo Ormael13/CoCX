@@ -248,9 +248,9 @@ package classes.Scenes.Places
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += wood;
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stones;
 			
-			if (nails > 0) resourceGainText.push(nails + (nails == 1 ? " nail" : " nails"));
+			if (nails > 0) resourceGainText.push("" + nails + (nails == 1 ? " nail" : " nails"));
 			if (wood > 0) resourceGainText.push(wood + " wood");
-			if (stones > 0) resourceGainText.push(stones + (stones == 1 ? " stone" : " stones"));
+			if (stones > 0) resourceGainText.push("" + stones + (stones == 1 ? " stone" : " stones"));
 			
 			if (nails + wood + stones > 0) outputText("\n\n<b>You have scavenged " + formatStringArray(resourceGainText) + "!</b>");
 			//Increment progress and clear furniture found variable, if any.

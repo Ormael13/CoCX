@@ -30,7 +30,7 @@ package classes.Scenes.Areas.HighMountains
 		}
 		
 		protected function phoenixFireBreath():void {
-			if (findStatusEffect(StatusEffects.Uber) < 0) {
+			if (!hasStatusEffect(StatusEffects.Uber)) {
 				outputText("Suddenly the phoenix disengages from you and loops through the air, giving out a loud cry before she starts to barrel down at you. She’s clearly building up for something, so you’d better wait until she makes her move if you want a chance to dodge!");
 				createStatusEffect(StatusEffects.Uber, 0, 0, 0, 0);
 			}
@@ -71,7 +71,7 @@ package classes.Scenes.Areas.HighMountains
 		override protected function performCombatAction():void
 		{
 			var choice:Number = rand(4);
-			if (findStatusEffect(StatusEffects.Uber) >= 0) {
+			if (hasStatusEffect(StatusEffects.Uber)) {
 				phoenixFireBreath();
 				return;
 			}

@@ -912,28 +912,28 @@ package classes
 			return statusEffects [idx];
 		}
 		
-		public function statusEffectv1(stype:StatusEffectType):Number
+		public function statusEffectv1(stype:StatusEffectType,defaultValue:Number=0):Number
 		{
-			var counter:Number = findStatusEffect(stype);
-			return (counter<0)?0:statusEffect(counter).value1;
+			var effect:StatusEffectClass = statusEffectByType(stype);
+			return (effect==null)?defaultValue:effect.value1;
 		}
 		
-		public function statusEffectv2(stype:StatusEffectType):Number
+		public function statusEffectv2(stype:StatusEffectType,defaultValue:Number=0):Number
 		{
-			var counter:Number = findStatusEffect(stype);
-			return (counter<0)?0:statusEffect(counter).value2;
+			var effect:StatusEffectClass = statusEffectByType(stype);
+			return (effect==null)?defaultValue:effect.value2;
 		}
 
-		public function statusEffectv3(stype:StatusEffectType):Number
+		public function statusEffectv3(stype:StatusEffectType,defaultValue:Number=0):Number
 		{
-			var counter:Number = findStatusEffect(stype);
-			return (counter<0)?0:statusEffect(counter).value3;
+			var effect:StatusEffectClass = statusEffectByType(stype);
+			return (effect==null)?defaultValue:effect.value3;
 		}
 
-		public function statusEffectv4(stype:StatusEffectType):Number
+		public function statusEffectv4(stype:StatusEffectType,defaultValue:Number=0):Number
 		{
-			var counter:Number = findStatusEffect(stype);
-			return (counter<0)?0:statusEffect(counter).value4;
+			var effect:StatusEffectClass = statusEffectByType(stype);
+			return (effect==null)?defaultValue:effect.value4;
 		}
 
 		public function removeStatuses():void

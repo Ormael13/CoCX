@@ -823,7 +823,7 @@ public function multipageChoices( cancelFunction :*, menuItems :Array ) :void {
 /**
  * Adds five button that can be chosen. 
  * 
- * I highly recommend you <b>DO NOT</b> use this for new content. Use addButton() instead.
+ * I highly recommend you <b>DO NOT</b> use this for new content. Use menu() + N x addButton() instead.
  */
 public function simpleChoices(text1:String, butt1:Function, 
 						text2:String, butt2:Function, 

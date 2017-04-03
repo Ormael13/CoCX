@@ -12,7 +12,7 @@ package classes.Scenes.NPCs
 		//[Special Attacks]
 		private function IzmaSpecials1():void {
 			//Blind dodge change
-			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) < 2) {
+			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText("Izma attempts to close the distance with you, but misses completely because of her blindness.\n", false);
 				return;
 			}
@@ -43,7 +43,7 @@ package classes.Scenes.NPCs
 
 		private function IzmaSpecials2():void {
 			//Blind dodge change
-			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) < 2) {
+			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText("Izma blindly tries to clinch you, but misses completely.\n", false);
 				return;
 			}

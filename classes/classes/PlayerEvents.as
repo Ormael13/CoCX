@@ -242,7 +242,7 @@ package classes {
 				}
 			}
 			if (player.lowerBody == LOWER_BODY_TYPE_HARPY && player.tailType == TAIL_TYPE_HARPY && player.findPerk(PerkLib.HarpyWomb) >= 0) { //Make eggs big if harpied!
-				if (player.findStatusEffect(StatusEffects.Eggs) >= 0 && player.statusEffectv2(StatusEffects.Eggs) == 0) {
+				if (player.hasStatusEffect(StatusEffects.Eggs) && player.statusEffectv2(StatusEffects.Eggs) == 0) {
 					player.changeStatusValue(StatusEffects.Eggs, 2, 1);
 					outputText("\n<b>A familiar, motherly rumble lets you know that your harpy-like womb is growing your eggs nice and large.</b>\n");
 					needNext = true;
@@ -293,7 +293,7 @@ package classes {
 			if (player.pregnancyIncubation <= 0 && player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) { //Fixing Egg Preg Preglocked Glitch
 				player.knockUpForce(); //Clear Pregnancy
 			}
-			if (player.findStatusEffect(StatusEffects.Uniball) >= 0 && player.ballSize > 1 && player.balls > 0) { //Testicles Normalise:
+			if (player.hasStatusEffect(StatusEffects.Uniball) && player.ballSize > 3 && player.balls > 0) { //Testicles Normalise:
 				outputText("\nYou feel a deep sensation of release around your genitals.  You sigh with relief and contentment as your testicles drop downwards and bloom outwards, heat throbbing within them as they split and form a proper ballsack.\n");
 				player.removeStatusEffect(StatusEffects.Uniball);
 				needNext = true;
@@ -305,14 +305,14 @@ package classes {
 					needNext = true;
 				}
 			}
-			if (player.findStatusEffect(StatusEffects.LustStickApplied) >= 0) { //Lust stick!
+			if (player.hasStatusEffect(StatusEffects.LustStickApplied)) { //Lust stick!
 				player.addStatusValue(StatusEffects.LustStickApplied, 1, -1); //Decrement!
 				if (player.statusEffectv1(StatusEffects.LustStickApplied) <= 0) {
 					player.removeStatusEffect(StatusEffects.LustStickApplied);
 					outputText("<b>\nYour drugged lipstick fades away, leaving only the faintest residue on your lips.  You'll have to put on more if you want to be able to kiss your foes into submission!</b>\n");
 				}
 			}
-			if (player.findStatusEffect(StatusEffects.Luststick) >= 0) { //Luststic countdown
+			if (player.hasStatusEffect(StatusEffects.Luststick)) { //Luststic countdown
 				player.addStatusValue(StatusEffects.Luststick, 1, -1);
 				if (rand(2) == 0 && player.hasCock()) { //50% chance to lust spike
 					//Display if haven't displayed
@@ -333,7 +333,7 @@ package classes {
 			}
 			if (player.flags[kFLAGS.LUSTSTICK_RESISTANCE_PROGRESS] >= 50 && player.findPerk(PerkLib.LuststickAdapted) < 0) { //Luststick resistance unlock
 				getGame().sophieBimbo.unlockResistance();
-				if (player.findStatusEffect(StatusEffects.Luststick) >= 0) player.removeStatusEffect(StatusEffects.Luststick);
+				if (player.hasStatusEffect(StatusEffects.Luststick)) player.removeStatusEffect(StatusEffects.Luststick);
 				needNext = true;
 			}
 			if (flags[kFLAGS.DICK_EGG_INCUBATION] > 0) {
@@ -344,7 +344,7 @@ package classes {
 					needNext = true;
 				}
 			}
-			if (player.findStatusEffect(StatusEffects.Eggchest) >= 0) { //Eggs in tits!
+			if (player.hasStatusEffect(StatusEffects.Eggchest)) { //Eggs in tits!
 				player.addStatusValue(StatusEffects.Eggchest, 1, -1);
 				if (player.statusEffectv1(StatusEffects.Eggchest) <= 0) {
 					outputText("\n<b>You feel the rounded eggs within your [fullChest] vanishing, absorbed into your body.  </b>");
@@ -428,7 +428,7 @@ package classes {
 			}
 			if (player.inHeat) { //Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 				if (player.statusEffectv3(StatusEffects.Heat) <= 1 || player.vaginas.length == 0) { //Remove bonus libido from heat
-					getGame().dynStats("lib", -player.statusEffect(player.findStatusEffect(StatusEffects.Heat)).value2, "resisted", false, "noBimbo", true);
+					getGame().dynStats("lib", -player.statusEffectv2(StatusEffects.Heat), "resisted", false, "noBimbo", true);
 					player.removeStatusEffect(StatusEffects.Heat); //remove heat
 					if (player.lib < 1) player.lib = 1;
 					getGame().statScreenRefresh();
@@ -450,7 +450,7 @@ package classes {
 				}
 				else player.addStatusValue(StatusEffects.Rut, 3, -1);
 			}
-			if (player.findStatusEffect(StatusEffects.LustyTongue) >= 0) { //Lusty Tongue Check!
+			if (player.hasStatusEffect(StatusEffects.LustyTongue)) { //Lusty Tongue Check!
 				if (rand(5) == 0) {
 					outputText("\nYou keep licking your lips, blushing with the sexual pleasure it brings you.");
 					getGame().dynStats("lus", 2 + rand(15));
@@ -530,10 +530,10 @@ package classes {
 					needNext = true;
 				}
 			}
-			if (player.findPerk(PerkLib.BimboBody) >= 0 || player.findStatusEffect(StatusEffects.BimboChampagne) >= 0) { //Bimbo checks
+			if (player.findPerk(PerkLib.BimboBody) >= 0 || player.hasStatusEffect(StatusEffects.BimboChampagne)) { //Bimbo checks
 				if (player.breastRows[0].breastRating < 5) { //Tits!
 					player.breastRows[0].breastRating = 5;
-					if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.findStatusEffect(StatusEffects.BimboChampagne) >= 0)
+					if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.hasStatusEffect(StatusEffects.BimboChampagne))
 						outputText("\n<b>Your boobies like, get all big an' wobbly again!  You'll have lots of fun now that your tits are back to being big, yummy knockers!</b>\n");
 					else outputText("\n<b>Your " + player.breastDescript(0) + " have regained their former bimbo-like size.  It looks like you'll be stuck with large, sensitive breasts forever, but at least it'll help you tease your enemies into submission!</b>\n");
 					getGame().dynStats("int", -1, "lus", 15);
@@ -541,7 +541,7 @@ package classes {
 				}
 				if (!player.hasVagina()) { //Vagoo
 					player.createVagina();
-					if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.findStatusEffect(StatusEffects.BimboChampagne) >= 0)
+					if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.hasStatusEffect(StatusEffects.BimboChampagne))
 						outputText("\n<b>Your crotch is like, all itchy an' stuff.  Omigawsh!  There's a wet little slit opening up, and it's all tingly!  It feels so good, maybe like, someone could put something inside there!</b>\n");
 					else outputText("\n<b>Your crotch tingles for a second, and when you reach down to feel, your " + player.legs() + " fold underneath you, limp.  You've got a vagina - the damned thing won't go away and it feels twice as sensitive this time.  Fucking bimbo liquer.</b>\n");
 					needNext = true;
@@ -594,7 +594,7 @@ package classes {
 					needNext = true;
 				}
 			}
-			if (player.findStatusEffect(StatusEffects.Feeder) >= 0) { //Feeder checks
+			if (player.hasStatusEffect(StatusEffects.Feeder)) { //Feeder checks
 				if (player.cor <= 20) { //Go away if pure
 					outputText("\nThe desire to breastfeed fades into the background.  It must have been associated with the corruption inside you.\n\n(<b>You have lost the 'Feeder' perk.</b>)\n");
 					player.removeStatusEffect(StatusEffects.Feeder);
@@ -617,7 +617,7 @@ package classes {
 					}
 				}
 			}
-			if (player.findStatusEffect(StatusEffects.WormPlugged) >= 0 && flags[kFLAGS.PLAYER_PREGGO_WITH_WORMS] == 0) { //Update worm drippy-cooch
+			if (player.hasStatusEffect(StatusEffects.WormPlugged) && flags[kFLAGS.PLAYER_PREGGO_WITH_WORMS] == 0) { //Update worm drippy-cooch
 				if (player.hasVagina()) {
 					if (rand(5) == 0) {
 						flags[kFLAGS.PLAYER_PREGGO_WITH_WORMS] = 1;
@@ -637,7 +637,7 @@ package classes {
 					player.knockUpForce(); //Clear worm 'pregnancy'
 				}
 			}				
-			if (player.findStatusEffect(StatusEffects.Milked) >= 0) { //"Milked"
+			if (player.hasStatusEffect(StatusEffects.Milked)) { //"Milked"
 				player.addStatusValue(StatusEffects.Milked, 1, -1);
 				if (player.statusEffectv1(StatusEffects.Milked) <= 0) {
 					outputText("\n<b>Your " + player.nippleDescript(0) + "s are no longer sore from the milking.</b>\n");
@@ -645,13 +645,13 @@ package classes {
 					needNext = true;
 				}
 			}
-			if (player.findStatusEffect(StatusEffects.Jizzpants) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.Jizzpants)) {
 				outputText("\nYour " + player.armorName + " squishes wetly with all the semen you unloaded into them, arousing you more and more with every movement.\n");
 				getGame().dynStats("lus", 10 + player.sens / 5);
 				player.removeStatusEffect(StatusEffects.Jizzpants);
 				needNext = true;
 			}
-			if (player.findStatusEffect(StatusEffects.Dysfunction) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.Dysfunction)) {
 				if (player.statusEffectv1(StatusEffects.Dysfunction) <= 1) {
 					player.removeStatusEffect(StatusEffects.Dysfunction);
 					outputText("\nYou feel a tingling in your nethers... at last full sensation has returned to your groin.  <b>You can masturbate again!</b>\n");
@@ -659,13 +659,13 @@ package classes {
 				}
 				else player.addStatusValue(StatusEffects.Dysfunction, 1, -1);
 			}
-			if (player.findStatusEffect(StatusEffects.LactationReduction) < 0) { //Lactation reduction
+			if (!player.hasStatusEffect(StatusEffects.LactationReduction)) { //Lactation reduction
 				if (player.biggestLactation() > 0) player.createStatusEffect(StatusEffects.LactationReduction, 0, 0, 0, 0);
 			}
-			else if (player.biggestLactation() > 0 && player.findStatusEffect(StatusEffects.Feeder) < 0 && player.findPerk(PerkLib.MilkMaid) < 0 && player.pregnancyIncubation == 0) {
+			else if (player.biggestLactation() > 0 && !player.hasStatusEffect(StatusEffects.Feeder) && player.findPerk(PerkLib.MilkMaid) < 0 && player.pregnancyIncubation == 0) {
 				player.addStatusValue(StatusEffects.LactationReduction, 1, 1);
 				if (player.statusEffectv1(StatusEffects.LactationReduction) >= 48) {
-					if (player.findStatusEffect(StatusEffects.LactationReduc0) < 0) {
+					if (!player.hasStatusEffect(StatusEffects.LactationReduc0)) {
 						player.createStatusEffect(StatusEffects.LactationReduc0, 0, 0, 0, 0);
 						if (player.biggestLactation() >= 1) {
 							outputText("\n<b>Your " + player.nippleDescript(0) + "s feel swollen and bloated, needing to be milked.</b>\n");
@@ -676,22 +676,22 @@ package classes {
 						needNext = true;
 					}
 					player.boostLactation(-0.5 * player.breastRows.length / 24);
-					if (player.biggestLactation() <= 2.5 && player.findStatusEffect(StatusEffects.LactationReduc1) < 0) {
+					if (player.biggestLactation() <= 2.5 && !player.hasStatusEffect(StatusEffects.LactationReduc1)) {
 						outputText("\n<b>Your breasts feel lighter as your body's milk production winds down.</b>\n");
 						player.createStatusEffect(StatusEffects.LactationReduc1, 0, 0, 0, 0);
 						needNext = true;
 					}
-					else if (player.biggestLactation() <= 1.5 && player.findStatusEffect(StatusEffects.LactationReduc2) < 0) {
+					else if (player.biggestLactation() <= 1.5 && !player.hasStatusEffect(StatusEffects.LactationReduc2)) {
 						outputText("\n<b>Your body's milk output drops down to what would be considered 'normal' for a pregnant woman.</b>\n");
 						player.createStatusEffect(StatusEffects.LactationReduc2, 0, 0, 0, 0);
 						needNext = true;
 					}
-					if (player.biggestLactation() < 1 && player.findStatusEffect(StatusEffects.LactationReduc3) < 0) {
+					if (player.biggestLactation() < 1 && !player.hasStatusEffect(StatusEffects.LactationReduc3)) {
 						player.createStatusEffect(StatusEffects.LactationReduc3, 0, 0, 0, 0);
 						outputText("\n<b>Your body no longer produces any milk.</b>\n");
 						needNext = true;
 					}
-					if (player.biggestLactation() == 0 && player.findStatusEffect(StatusEffects.LactationReduc3) >= 0) {
+					if (player.biggestLactation() == 0 && player.hasStatusEffect(StatusEffects.LactationReduc3)) {
 						player.removeStatusEffect(StatusEffects.LactationReduction);
 						needNext = true;
 					}
@@ -732,7 +732,7 @@ package classes {
 				}
 			}
 			
-			if (player.findStatusEffect(StatusEffects.ButtStretched) >= 0) { //Butt stretching stuff
+			if (player.hasStatusEffect(StatusEffects.ButtStretched)) { //Butt stretching stuff
 				player.addStatusValue(StatusEffects.ButtStretched, 1, 1);
 				if (player.ass.analLooseness == 2 && player.statusEffectv1(StatusEffects.ButtStretched) >= 72) {
 					outputText("\n<b>Your " + player.assholeDescript() + " recovers from your ordeals, tightening up a bit.</b>\n");
@@ -770,7 +770,7 @@ package classes {
 				}
 			}
 			if (player.hasKeyItem("Ruby Heart") >= 0) { //Regain slime core
-				if (player.findStatusEffect(StatusEffects.SlimeCraving) >= 0 && player.findPerk(PerkLib.SlimeCore) < 0 && player.isGoo() && player.gooScore() >= 4 && player.vaginalCapacity() >= 9000 && player.skinAdj == "slimy" && player.skinDesc == "skin" && player.lowerBody == LOWER_BODY_TYPE_GOO) {
+				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && player.findPerk(PerkLib.SlimeCore) < 0 && player.isGoo() && player.gooScore() >= 4 && player.vaginalCapacity() >= 9000 && player.skinAdj == "slimy" && player.skinDesc == "skin" && player.lowerBody == LOWER_BODY_TYPE_GOO) {
 					outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n");
 					
 					outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n");
@@ -781,7 +781,7 @@ package classes {
 					needNext = true;
 				}
 			}
-			if (player.findStatusEffect(StatusEffects.SlimeCraving) >= 0) { //Slime craving stuff
+			if (player.hasStatusEffect(StatusEffects.SlimeCraving)) { //Slime craving stuff
 				if (player.vaginalCapacity() < 9000 || player.skinAdj != "slimy" || player.skinDesc != "skin" || player.lowerBody != LOWER_BODY_TYPE_GOO) {
 					outputText("\n<b>You realize you no longer crave fluids like you once did.</b>\n");
 					player.removeStatusEffect(StatusEffects.SlimeCraving);
@@ -793,7 +793,7 @@ package classes {
 						player.addStatusValue(StatusEffects.SlimeCraving, 1, 0.5);
 					else player.addStatusValue(StatusEffects.SlimeCraving, 1, 1);
 					if (player.statusEffectv1(StatusEffects.SlimeCraving) >= 18) {
-						if (player.findStatusEffect(StatusEffects.SlimeCravingOutput) < 0) { //Protects against this warning appearing multiple times in the output
+						if (!player.hasStatusEffect(StatusEffects.SlimeCravingOutput)) { //Protects against this warning appearing multiple times in the output
 							player.createStatusEffect(StatusEffects.SlimeCravingOutput, 0, 0, 0, 0);
 							outputText("\n<b>Your craving for the 'fluids' of others grows strong, and you feel yourself getting weaker and slower with every passing hour.</b>\n");
 							needNext = true;
@@ -804,18 +804,18 @@ package classes {
 					}
 				}
 			}
-			if (player.findStatusEffect(StatusEffects.SlimeCravingFeed) >= 0) { //Slime feeding stuff
+			if (player.hasStatusEffect(StatusEffects.SlimeCravingFeed)) { //Slime feeding stuff
 				outputText("\n<b>You feel revitalized from your recent intake, but soon you'll need more...</b>\n");
 				getGame().dynStats("str", player.statusEffectv2(StatusEffects.SlimeCraving) * 0.5, "spe", player.statusEffectv3(StatusEffects.SlimeCraving)); //Boost speed and restore half the player's lost strength
 				player.removeStatusEffect(StatusEffects.SlimeCravingFeed); //Remove feed succuss status so it can be reset
 				player.changeStatusValue(StatusEffects.SlimeCraving, 2, 0); //Reset stored hp/toughness values
 				needNext = true;
 			}
-			if (player.findStatusEffect(StatusEffects.Fullness) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.Fullness)) {
 				player.addStatusValue(StatusEffects.Fullness, 1, -1);
 				if (player.statusEffectv1(StatusEffects.Fullness) <= 0) player.removeStatusEffect(StatusEffects.Fullness);
 			}
-			if (player.findStatusEffect(StatusEffects.AndysSmoke) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.AndysSmoke)) {
 				player.addStatusValue(StatusEffects.AndysSmoke, 1, -1);
 				if (player.statusEffectv1(StatusEffects.AndysSmoke) <= 0) {
 					outputText("\n<b>The change in your mental prowess confirms that the effects of Nepenthe must have worn off.</b>\n");
@@ -877,7 +877,7 @@ package classes {
 					if (getGame().latexGirl.gooHappiness() >= 90) getGame().latexGirl.gooObedience(1, false);
 				}
 				getGame().farm.farmCorruption.updateFarmCorruption(); //Farm Corruption updating
-				if (player.findStatusEffect(StatusEffects.Contraceptives) >= 0) { // Herbal contraceptives countdown
+				if (player.hasStatusEffect(StatusEffects.Contraceptives)) { // Herbal contraceptives countdown
 					if (player.statusEffectv1(StatusEffects.Contraceptives) == 1) {
 						player.addStatusValue(StatusEffects.Contraceptives, 2, -1);
 						if (player.statusEffectv1(StatusEffects.Contraceptives) < 0) player.removeStatusEffect(StatusEffects.Contraceptives);
@@ -922,7 +922,7 @@ package classes {
 					if (player.beardLength > 0 && player.beardLength < 12) player.growBeard(0.02);
 				}
 				//Clear dragon breath cooldown!
-				if (player.findStatusEffect(StatusEffects.DragonBreathCooldown) >= 0) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
 			}
 			if (flags[kFLAGS.WEATHER_CHANGE_COOLDOWN] > 0) {
 				flags[kFLAGS.WEATHER_CHANGE_COOLDOWN]--;

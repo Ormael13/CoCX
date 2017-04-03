@@ -24,7 +24,7 @@ package classes.Scenes.NPCs
 				damage = game.combat.doDamage(damage, true);
 			}
 			//Miss:
-			else if (player.getEvasionRoll() || findStatusEffect(StatusEffects.Blind) >= 0) {
+			else if (player.getEvasionRoll() || hasStatusEffect(StatusEffects.Blind)) {
 				outputText("Sheila bounces up to you and crouches low, curling up her body like a watchspring.  The girl uncoils with fist raised, but you lean away from the uppercut, catching a faceful of her breasts instead!  Sheila squeals and pushes away from you");
 				//[(libido>40)
 				if (player.lib > 40) {
@@ -57,7 +57,7 @@ package classes.Scenes.NPCs
 			var damage:Number = 0;
 			spe -= 60;
 			//Miss:
-			if (player.getEvasionRoll() || (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) == 0)) {
+			if (player.getEvasionRoll() || (hasStatusEffect(StatusEffects.Blind) && rand(3) == 0)) {
 				outputText("Sheila squats down, then bounds explosively toward you!  She swings her leg out in front to kick, but you roll to the side and she slips past your shoulder.  You hear an \"<i>Oof!</i>\" as she lands on her butt behind you.  When you turn to look, she's already back to her feet, rubbing her smarting posterior and looking a bit embarrassed.");
 				//(small Sheila HP loss)
 				damage = 3 + rand(10);
@@ -97,7 +97,7 @@ package classes.Scenes.NPCs
 		//Demon Sheila Combat - Special Attacks
 		//1: Suspicious Glint (int-based hit chance)
 		private function suspiciousGlint():void {
-			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(2) == 0) {
+			if (hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) {
 				outputText("Sheila's blind eyes glint suspiciously as she focuses her power, trying to send her fantasy to anything caught in their stare.  It seems to work - the rock next to you vibrates a little.");
 			}
 			//Miss:
@@ -111,7 +111,7 @@ package classes.Scenes.NPCs
 				else outputText("riding your dick to the hilt");
 				outputText(" run rampant inside your head and crowd out everything else.  \"<i>Did you see it, [name]?  My love for you?</i>\" Sheila asks, smiling.  God, did you ever!  You can hardly focus on anything!");
 				//big (20+) int drop and big lib-based lust gain if successful, locks Infest command for the fight if successful, always misses if Sheila is blinded
-				if (findStatusEffect(StatusEffects.TwuWuv) < 0) {
+				if (!hasStatusEffect(StatusEffects.TwuWuv)) {
 					createStatusEffect(StatusEffects.TwuWuv,0,0,0,0);
 					var counter:int = 40+rand(5);
 					showStatDown( 'inte' );
@@ -231,7 +231,7 @@ package classes.Scenes.NPCs
 
 		private function demonSheilaAI():void {
 			//Count up till give up!
-			if (findStatusEffect(StatusEffects.Counter) < 0) createStatusEffect(StatusEffects.Counter,0,0,0,0);
+			if (!hasStatusEffect(StatusEffects.Counter)) createStatusEffect(StatusEffects.Counter,0,0,0,0);
 			addStatusValue(StatusEffects.Counter,1,1);
 			if (statusEffectv1(StatusEffects.Counter) >= 5) {
 				sitAndPout();
@@ -239,7 +239,7 @@ package classes.Scenes.NPCs
 			}
 			var choices:Array = [];
 
-			if (player.findStatusEffect(StatusEffects.SheilaOil) < 0) {
+			if (!player.hasStatusEffect(StatusEffects.SheilaOil)) {
 				choices = [suspiciousGlint,
 					tittyMonsterAttack,
 					splashAttackLookOutShellEvolveIntoGyrados];

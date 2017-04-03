@@ -54,7 +54,7 @@ package classes.Scenes.Areas
 				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}
-			if ((flags[kFLAGS.TIMES_EXPLORED_DESERT] == 20 && player.findStatusEffect(StatusEffects.TelAdre) < 0) || (rand(20) == 0 && player.statusEffectv1(StatusEffects.TelAdre) == 0)) {
+			if ((flags[kFLAGS.TIMES_EXPLORED_DESERT] == 20 && !player.hasStatusEffect(StatusEffects.TelAdre)) || (rand(20) == 0 && player.statusEffectv1(StatusEffects.TelAdre) == 0)) {
 				kGAMECLASS.telAdre.discoverTelAdre();
 				return;
 			}

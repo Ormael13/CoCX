@@ -53,7 +53,7 @@ package classes.Scenes.Places.TelAdre {
 
 public function edrynBarTalk():void {
 	spriteSelect(14);
-	if (player.findStatusEffect(StatusEffects.Edryn) < 0) player.createStatusEffect(StatusEffects.Edryn,0,0,0,0);
+	if (!player.hasStatusEffect(StatusEffects.Edryn)) player.createStatusEffect(StatusEffects.Edryn,0,0,0,0);
 	clearOutput();
 	outputText(images.showImage("edryn-bar-chat"));
 	

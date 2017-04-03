@@ -22,7 +22,7 @@
 			game.sophieBimbo.sophieSprite();
 			outputText("Sophie bobs and weaves as she closes the distance between you in an instant.  ", false);
 			//Blind dodge change
-			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) < 2) {
+			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " looks like she's trying to kiss you, but it's easy to avoid the blind harpy!\n", false);
 				return;
 			}
@@ -50,7 +50,7 @@
 			outputText("Before you can react, she gives you a chaste peck on the lips.  The harpy pulls back with a sultry smile, watching you expectantly.", false);
 			
 			//Already affected by it
-			if (player.findStatusEffect(StatusEffects.Luststick) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.Luststick)) {
 				outputText("  Blood rushes to " + player.sMultiCockDesc() + " as you grow so hard so fast that it hurts.  ", false);
 				game.sophieScene.luststickApplication(2);
 				game.dynStats("lus", (12+player.lib/10));
@@ -81,7 +81,7 @@
 			game.sophieBimbo.sophieSprite();
 			outputText(capitalA + short + " flaps her wings and launches herself forwards with her talons up.  ", false);
 			//Blind dodge change
-			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) < 2) {
+			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + "'s talons are easy to avoid thanks to her blindness!\n", false);
 				return;
 			}
@@ -138,7 +138,7 @@
 			outputText("Sophie pulls her leg up, cocking her thigh dangerously.  Look out!  ", false);
 			var damage:Number = 0;
 			//Blind dodge change
-			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) < 2) {
+			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + "'s talons are easy to avoid thanks to her blindness!\n", false);
 				return;
 			}
@@ -207,7 +207,7 @@
 			var select:Number = 1;
 			var rando:Number = 1;
 //Update attacks for girls/neuters
-			if (!player.hasCock() || findStatusEffect(StatusEffects.BimboBrawl) >= 0) {
+			if (!player.hasCock() || hasStatusEffect(StatusEffects.BimboBrawl)) {
 				//Talons
 				special1 = talonsSophie;
 				//Batter
@@ -230,7 +230,7 @@
 				combatRoundOver();
 				return;
 			}
-			if (player.hasCock() && findStatusEffect(StatusEffects.BimboBrawl) < 0) rando = 1 + rand(3);
+			if (player.hasCock() && !hasStatusEffect(StatusEffects.BimboBrawl)) rando = 1 + rand(3);
 			else rando = 1 + rand(2);
 			if (rando == 1) special1();
 			if (rando == 2) special2();
@@ -240,7 +240,7 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (findStatusEffect(StatusEffects.BimboBrawl) >= 0)
+			if (hasStatusEffect(StatusEffects.BimboBrawl))
 				game.sophieFollowerScene.beatUpDebimboSophie();
 			else
 				game.sophieScene.sophieLostCombat();
@@ -248,7 +248,7 @@
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (findStatusEffect(StatusEffects.BimboBrawl) >= 0)
+			if (hasStatusEffect(StatusEffects.BimboBrawl))
 				game.sophieFollowerScene.debimboSophieBeatsYouUp();
 			else if (pcCameWorms) {
 				outputText("\n\nYour foe seems disgusted by the display and leaves you to recover alone...");

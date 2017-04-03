@@ -96,7 +96,7 @@ package classes.Items.Consumables
 			var sensChange:int = (player.sens < 10 ? player.sens : 10);
 			var speedChange:int = (player.spe < 20 ? player.spe : 20);
 			var intChange:int = (player.inte < 20 ? player.inte : 20);
-			if (player.findStatusEffect(StatusEffects.PhoukaWhiskeyAffect) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.PhoukaWhiskeyAffect)) {
 				var drinksSoFar:int = player.statusEffectv2(StatusEffects.PhoukaWhiskeyAffect);
 				if (drinksSoFar < 4)
 					player.addStatusValue(StatusEffects.PhoukaWhiskeyAffect, 1, 8 - (2 * drinksSoFar));

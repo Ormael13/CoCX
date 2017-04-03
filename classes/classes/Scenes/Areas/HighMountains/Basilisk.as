@@ -17,7 +17,7 @@ package classes.Scenes.Areas.HighMountains
 				if (amount < 0) amount = 0;
 			}
 			player.spe -= amount;
-			if (player.findStatusEffect(StatusEffects.BasiliskSlow) >= 0) player.addStatusValue(StatusEffects.BasiliskSlow,1,amount);
+			if (player.hasStatusEffect(StatusEffects.BasiliskSlow)) player.addStatusValue(StatusEffects.BasiliskSlow,1,amount);
 			else player.createStatusEffect(StatusEffects.BasiliskSlow,amount,0,0,0);
 			showStatDown( 'spe' );
 			// speUp.visible = false;
@@ -67,7 +67,7 @@ package classes.Scenes.Areas.HighMountains
 
 		override protected function performCombatAction():void
 		{
-			if (player.findStatusEffect(StatusEffects.BasiliskCompulsion) < 0 && rand(3) == 0 && findStatusEffect(StatusEffects.Blind) < 0) compulsion();
+			if (!player.hasStatusEffect(StatusEffects.BasiliskCompulsion) && rand(3) == 0 && !hasStatusEffect(StatusEffects.Blind)) compulsion();
 			else if (rand(3) == 0) basiliskTailSwipe();
 			else eAttack();
 		}

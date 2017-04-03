@@ -322,8 +322,8 @@ package classes.Scenes.Camp
 			//NPC comments, WIP
 			//if (kGAMECLASS.amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1) outputText("\"<i>PLACEHOLDER</i>\" Amily asks. \n\n");
 			outputText("You start to construct a wooden frame according to the instructions. Using your hammer and nails, you put the wood frame together and put it up. You then add temporary supports to ensure it doesn't fall down. You make two more frames of the same shape. Lastly, you construct one more frame, this time the frame is designed to have door and window.\n\n");
-			if (player.findStatusEffect(StatusEffects.CampRathazul) >= 0) outputText("\"<i>My, my. What are you building?</i>\" Rathazul asks. \n\n");
-			if (player.findStatusEffect(StatusEffects.PureCampJojo) >= 0) outputText("\"<i>You're building something?</i>\" Jojo asks. \n\n");
+			if (player.hasStatusEffect(StatusEffects.CampRathazul)) outputText("\"<i>My, my. What are you building?</i>\" Rathazul asks. \n\n");
+			if (player.hasStatusEffect(StatusEffects.PureCampJojo)) outputText("\"<i>You're building something?</i>\" Jojo asks. \n\n");
 			if (camp.marbleFollower()) outputText("\"<i>Sweetie, you're building a cabin? That's nice,</i>\" Marble says. \n\n");
 			if (camp.companionsCount() > 0) outputText("You announce that yes, you're building a cabin.\n\n");
 			//End of NPC comments

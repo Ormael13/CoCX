@@ -24,7 +24,7 @@
 			var needNext:Boolean = false;
 			if (flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] > 1) flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER]--;
 			if (flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] > 1) flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER]--;
-			if (player.findStatusEffect(StatusEffects.BimboChampagne) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.BimboChampagne)) {
 				player.addStatusValue(StatusEffects.BimboChampagne,1,-1);
 				if (player.statusEffectv1(StatusEffects.BimboChampagne) <= 0) {
 					removeBimboChampagne();
@@ -268,7 +268,7 @@ public function blackCatBeerEffects(player:Player,clearScreen:Boolean = true,new
 	//Regain 40 to 60 lost health, increase lust by 10 to 20 points, decrease Intelligence and Speed by 5, increase Libido by 5//
 	HPChange(40 + rand(21),false);
 	var lib:Number = 0;
-	if (player.findStatusEffect(StatusEffects.BlackCatBeer) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.BlackCatBeer)) {
 		if (100 - player.lib >= 10) lib = 10;
 		else lib = 100 - player.lib;
 		player.addStatusValue(StatusEffects.BlackCatBeer,1,4);
@@ -451,10 +451,10 @@ public function bimboChampagne(player:Player,clearScreen:Boolean,intro:Boolean):
 		if ((player.findPerk(PerkLib.FutaFaculties) >= 0 && player.findPerk(PerkLib.FutaForm) >= 0) || (player.findPerk(PerkLib.BimboBody) >= 0 && player.findPerk(PerkLib.BimboBrains) >= 0)) {
 			outputText("You could've swore the stuff worked when you saw Niamh do it to others, but for some reason, it had, like, no effect on you. How weird!");
 		}
-		else if (player.findStatusEffect(StatusEffects.BimboChampagne) < 0) outputText("You uncork the bottle and breathe in the fizzy, spicy aroma of the sparkling liquor.  Breathing deeply, you open your mouth and begin pouring the ever-effervescent fluid inside.  It's sweet and slightly gooey, and the feel of it sliding down your throat is intensely... awesome?  Like, totally!");
+		else if (!player.hasStatusEffect(StatusEffects.BimboChampagne)) outputText("You uncork the bottle and breathe in the fizzy, spicy aroma of the sparkling liquor.  Breathing deeply, you open your mouth and begin pouring the ever-effervescent fluid inside.  It's sweet and slightly gooey, and the feel of it sliding down your throat is intensely... awesome?  Like, totally!");
 		else outputText("You find yourself falling even further into the dense bimbo mindset.  You do feel, like, super-good and all, though!\n\nMoaning lewdly, you begin to sway your hips from side to side, putting on a show for anyone who might manage to see you.   You just feel so... sexy.  Too sexy to hide it.  Your body aches to show itself and feel the gaze of someone, anyone upon it.  Mmmm, it makes you so wet!  You sink your fingers into your sloppy cunt with a groan of satisfaction.  Somehow, you feel like you could fuck anyone right now!");
 	}
-	if (player.findStatusEffect(StatusEffects.BimboChampagne) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.BimboChampagne)) {
 		player.addStatusValue(StatusEffects.BimboChampagne,1,4);
 		dynStats("spe", -2, "lib", 1, "lus", 10);
 	}

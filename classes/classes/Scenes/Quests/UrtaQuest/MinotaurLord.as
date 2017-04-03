@@ -17,8 +17,8 @@ package classes.Scenes.Quests.UrtaQuest
 		{
 			if (HP < 300 && statusEffectv1(StatusEffects.MinoMilk) < 4 && flags[kFLAGS.URTA_QUEST_STATUS] == 0.75) minotaurDrankMalk();
 			else if (rand(4) == 0 && player.weaponName != "fists") minotaurDisarm();
-			else if (findStatusEffect(StatusEffects.Timer) < 0) minotaurLordEntangle();
-			else if (findStatusEffect(StatusEffects.MinotaurEntangled) >= 0) minotaurCumPress();
+			else if (!hasStatusEffect(StatusEffects.Timer)) minotaurLordEntangle();
+			else if (hasStatusEffect(StatusEffects.MinotaurEntangled)) minotaurCumPress();
 			else {
 				if (rand(2) == 0) minotaurPrecumTease();
 				else eAttack();
@@ -33,7 +33,7 @@ package classes.Scenes.Quests.UrtaQuest
 				outputText("\"<i>Catch!</i>\"  The succubus throws a bottle containing a milky-white substance to the minotaur.  He grabs it and uncorks the bottle, quickly chugging its contents with obvious enjoyment.  After he is done he looks even more energetic and ready to fight, and his cock looks even harder!");
 				addHP(300);
 				lust += 10;
-				if (findStatusEffect(StatusEffects.MinoMilk) < 0)
+				if (!hasStatusEffect(StatusEffects.MinoMilk))
 					createStatusEffect(StatusEffects.MinoMilk, 1, 0, 0, 0);
 				else
 					addStatusValue(StatusEffects.MinoMilk, 1, 1);

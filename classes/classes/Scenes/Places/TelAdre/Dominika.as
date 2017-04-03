@@ -152,27 +152,27 @@ private function acceptDominikasKnowledge():void {
 
 			outputText("Dominika seems to be quite good at magic, and you find yourself picking up the spell she demonstrates fairly quickly.", false);
 			//(Player receives random unlearned spell.)
-			if (player.findStatusEffect(StatusEffects.KnowsMight) < 0) {
+			if (!player.hasStatusEffect(StatusEffects.KnowsMight)) {
 				player.createStatusEffect(StatusEffects.KnowsMight,0,0,0,0);
 				outputText("\n\n<b>New Black Magic Spell Learned: Might</b>", false);
 			}
-			else if (player.findStatusEffect(StatusEffects.KnowsHeal) < 0) {
+			else if (!player.hasStatusEffect(StatusEffects.KnowsHeal)) {
 				player.createStatusEffect(StatusEffects.KnowsHeal,0,0,0,0);
 				outputText("\n\n<b>New Black Magic Spell Learned: Heal</b>", false);
 			}
-			else if (player.findStatusEffect(StatusEffects.KnowsArouse) < 0) {
+			else if (!player.hasStatusEffect(StatusEffects.KnowsArouse)) {
 				player.createStatusEffect(StatusEffects.KnowsArouse,0,0,0,0);
 				outputText("\n\n<b>New Black Magic Spell Learned: Arouse</b>", false);
 			}
-			else if (player.findStatusEffect(StatusEffects.KnowsCharge) < 0) {
+			else if (!player.hasStatusEffect(StatusEffects.KnowsCharge)) {
 				player.createStatusEffect(StatusEffects.KnowsCharge,0,0,0,0);
 				outputText("\n\n<b>New White Magic Spell Learned: Charge</b>", false);
 			}
-			else if (player.findStatusEffect(StatusEffects.KnowsBlind) < 0) {
+			else if (!player.hasStatusEffect(StatusEffects.KnowsBlind)) {
 				player.createStatusEffect(StatusEffects.KnowsBlind,0,0,0,0);
 				outputText("\n\n<b>New White Magic Spell Learned: Blind</b>", false);
 			}
-			else if (player.findStatusEffect(StatusEffects.KnowsWhitefire) < 0) {
+			else if (!player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
 				player.createStatusEffect(StatusEffects.KnowsWhitefire,0,0,0,0);
 				outputText("\n\n<b>New White Magic Spell Learned: Whitefire</b>", false);
 			}
@@ -187,27 +187,27 @@ private function acceptDominikasKnowledge():void {
 
 			outputText("Even with your inexperience, you find Dominika to be a good teacher. She helps you focus and train your mind, and you quickly find your first spell to be easy to perform.", false);
 			//(Player receives random unlearned spell.)
-			if (player.findStatusEffect(StatusEffects.KnowsMight) < 0) {
+			if (!player.hasStatusEffect(StatusEffects.KnowsMight)) {
 				player.createStatusEffect(StatusEffects.KnowsMight,0,0,0,0);
 				outputText("\n\n<b>New Black Magic Spell Learned: Might</b>", false);
 			}
-			else if (player.findStatusEffect(StatusEffects.KnowsHeal) < 0) {
+			else if (!player.hasStatusEffect(StatusEffects.KnowsHeal)) {
 				player.createStatusEffect(StatusEffects.KnowsHeal,0,0,0,0);
 				outputText("\n\n<b>New Black Magic Spell Learned: Heal</b>", false);
 			}
-			else if (player.findStatusEffect(StatusEffects.KnowsArouse) < 0) {
+			else if (!player.hasStatusEffect(StatusEffects.KnowsArouse)) {
 				player.createStatusEffect(StatusEffects.KnowsArouse,0,0,0,0);
 				outputText("\n\n<b>New Black Magic Spell Learned: Arouse</b>", false);
 			}
-			else if (player.findStatusEffect(StatusEffects.KnowsCharge) < 0) {
+			else if (!player.hasStatusEffect(StatusEffects.KnowsCharge)) {
 				player.createStatusEffect(StatusEffects.KnowsCharge,0,0,0,0);
 				outputText("\n\n<b>New White Magic Spell Learned: Charge</b>", false);
 			}
-			else if (player.findStatusEffect(StatusEffects.KnowsBlind) < 0) {
+			else if (!player.hasStatusEffect(StatusEffects.KnowsBlind)) {
 				player.createStatusEffect(StatusEffects.KnowsBlind,0,0,0,0);
 				outputText("\n\n<b>New White Magic Spell Learned: Blind</b>", false);
 			}
-			else if (player.findStatusEffect(StatusEffects.KnowsWhitefire) < 0) {
+			else if (!player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
 				player.createStatusEffect(StatusEffects.KnowsWhitefire,0,0,0,0);
 				outputText("\n\n<b>New White Magic Spell Learned: Whitefire</b>", false);
 			}

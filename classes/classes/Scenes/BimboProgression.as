@@ -780,7 +780,7 @@ package classes.Scenes
 			else if (player.hasVagina() ) {
 				outputText(" As you reach under your skirt, you idly give your [vagina] a tantalizing stroke. You coat your fingers with a quantity of clear girl-cum.");
 			}
-			else if (player.findStatusEffect(StatusEffects.LustyTongue) >= 0){
+			else if (player.hasStatusEffect(StatusEffects.LustyTongue)){
 				outputText(" You idly lick your aroused lips, and put a finger in your mouth. You suck it right and proper, lubricating it with your saliva.");
 			}
 			else {
@@ -956,7 +956,7 @@ package classes.Scenes
 			var craving:int = lipCraving();
 			var reduceDick:Boolean = false;
 			
-			if (player.findStatusEffect(StatusEffects.LustyTongue) < 0) {
+			if (!player.hasStatusEffect(StatusEffects.LustyTongue)) {
 				//outputText("\nAnticipation in your mouth doesn't seem to fade, only becoming more and more intense.  It will be hard to keep from getting turned on any time you lick your lips or eat some food.\n");
 				player.createStatusEffect(StatusEffects.LustyTongue, 24, 0, 0, 0);
 			}						

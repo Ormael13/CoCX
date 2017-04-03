@@ -66,8 +66,8 @@ public function keltEncounter():void {
 	clearOutput();
 	player.addStatusValue(StatusEffects.Kelt,3,1);
 	//If First Encounter
-	if (player.findStatusEffect(StatusEffects.Kelt) < 0) {
-		player.createStatusEffect(StatusEffects.Kelt,0,0,1,0);
+	if (!player.hasStatusEffect(StatusEffects.Kelt)) {
+		player.createStatusEffect(StatusEffects.Kelt, 0, 0, 1, 0);
 		keltFirstTime();
 	}
 	//Repeated encounter
@@ -79,7 +79,7 @@ public function keltEncounter():void {
 		}
 		//Bad Ends
 		if (player.statusEffectv2(StatusEffects.Kelt) >= 130) {
-			if (((player.lib + player.lust) < 30 && player.inte >= 50) || player.findStatusEffect(StatusEffects.KeltBadEndWarning) < 0)
+			if (((player.lib + player.lust) < 30 && player.inte >= 50) || !player.hasStatusEffect(StatusEffects.KeltBadEndWarning))
 			{
 				player.createStatusEffect(StatusEffects.KeltBadEndWarning, 0, 0, 0, 0);
 				outputText("You race towards the farm, only one thought on your mind.  Kelt... your master, your love, your hunger.  Your head is filled with thoughts of his cock, and you fancifully dream of how he will use it on you today.  Once, you had a mission of some kind... an important duty.  The stray thought vanishes almost instantly, though.  Of course you have a duty!  To be fucked by Kelt, whenever he wants to!\r\r")
@@ -92,7 +92,7 @@ public function keltEncounter():void {
 		}
 		//Centaur bad end
 		if (player.isTaur() && player.statusEffectv2(StatusEffects.Kelt) >= 100 && player.gender > 1) {
-			if (player.inte > rand(40) && player.statusEffectv2(StatusEffects.Kelt) < 130 && player.findStatusEffect(StatusEffects.KeltBadEndWarning) < 0) {
+			if (player.inte > rand(40) && player.statusEffectv2(StatusEffects.Kelt) < 130 && !player.hasStatusEffect(StatusEffects.KeltBadEndWarning)) {
 				player.createStatusEffect(StatusEffects.KeltBadEndWarning,0,0,0,0);
 				outputText("You approach the farm, ready for another archery lesson.  Kelt is oblivious to your presence, busy practicing with his own bow for the moment.  The wind shifts and blows his musk your way.  Unconsciously, you breathe deeply, sending heat racing between your rear legs.  Alarm bells go off in your mind as you realize what his presence is doing to you, and you run away to your camp before he can notice you.  It's clear to you that you can't resist him much longer; the next time you meet him, you'll probably volunteer to become his brood-mare.  Perhaps you should avoid Kelt and the farm until you feel his influence less keenly.", true);
 				dynStats("lus", player.lib/5 + 10);
@@ -102,12 +102,12 @@ public function keltEncounter():void {
 			return;
 		}
 		//Naked event if its time for it
-		if (player.statusEffectv3(StatusEffects.Kelt) == 4 && player.findStatusEffect(StatusEffects.NakedOn) < 0) {
+		if (player.statusEffectv3(StatusEffects.Kelt) == 4 && !player.hasStatusEffect(StatusEffects.NakedOn)) {
 			keltRequiresNakedness();
 			return;
 		}
 		//60+ Submissiveness—First Time Blowjob Requirement
-		if (player.statusEffectv2(StatusEffects.Kelt) >= 40 && player.findStatusEffect(StatusEffects.KeltBJ) < 0) {
+		if (player.statusEffectv2(StatusEffects.Kelt) >= 40 && !player.hasStatusEffect(StatusEffects.KeltBJ)) {
 			keltRequiresBlowjobs();
 			return;
 		}
@@ -459,7 +459,7 @@ private function keltMainEncounter():void {
 private function keltMainEncounterAfterNakedReq():void {
 	//After naked requirement
 	//(Naked On)
-	if (player.findStatusEffect(StatusEffects.NakedOn) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.NakedOn)) {
 		outputText("He nods, smirking slightly, and gestures at your clothes impatiently.  With some pleasure, you strip down before him, discarding your clothes with a little flair.  Kelt is grinning by the end, openly admiring your body, and you feel a little more aroused for obeying his dominant command.\r\r", false);
 		//(+5 Submissive)
 		player.addStatusValue(StatusEffects.Kelt,2,3);
@@ -529,7 +529,7 @@ private function keltMainEncounter2():void {
 		outputText("Together, the two of you head off to the practice field.\r\r", false);
 	}
 	//IF BLOWJOB HAS HAPPENED ALREADY, chances to repeat
-	if (player.statusEffectv2(StatusEffects.Kelt) >= 60 && rand(4) == 0 && player.findStatusEffect(StatusEffects.KeltBJ) >= 0) {
+	if (player.statusEffectv2(StatusEffects.Kelt) >= 60 && rand(4) == 0 && player.hasStatusEffect(StatusEffects.KeltBJ)) {
 		keltMainEncounterPostBlowjob();
 		return;
 	}
@@ -539,7 +539,7 @@ private function keltMainEncounter2():void {
 private function keltMainEncounter3():void {
 	var temporary:Number = 0;
 	//(Clothed)
-	if (player.findStatusEffect(StatusEffects.NakedOn) < 0) {
+	if (!player.hasStatusEffect(StatusEffects.NakedOn)) {
 		outputText("Kelt is arrogant, crude, and all too often cruel as he mocks your attempts at archery again and again.  Despite all this, however, he obviously does know what he's doing.  You try to ignore his insults and lewd comments as best as you can and focus on the archery.  In the end, you feel you've learned a lot, though Kelt remains snide.\r\r", false);
 		temp = rand(4);
 		//(25% Chance: 
@@ -690,7 +690,7 @@ private function keltMainEncounter3():void {
 
 private function keltMainEncounterPostBlowjob():void {
 	//(Blowjob Requirement On)
-	if (player.findStatusEffect(StatusEffects.BlowjobOn) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.BlowjobOn)) {
 		//(Submissiveness 75+, Lust 60+)
 		if (player.lust >= 75 || player.statusEffectv2(StatusEffects.Kelt) >= 90 && rand(2) == 0) {
 			outputText(images.showImage("kelt-farm-smallbarn"));
