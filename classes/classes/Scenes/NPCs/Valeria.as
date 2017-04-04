@@ -660,6 +660,7 @@ private function valeriaGooRapeII():void {
 			player.breastRows[x].breastRating += 3 + rand(3);
 		}
 		outputText(" Your tits have grown much larger, " + player.breastCup(0) + "-cups at least.");
+		player.orgasm('Tits',false);
 	}
 	if (player.hasCock() && player.balls > 0) {
 		player.ballSize += 3 + rand(2);

@@ -1746,6 +1746,7 @@ private function girlsThreesomeHelAndKiha():void {
 	
 	outputText("\n\nWith the two lizard-girls distracted, you languidly pull their limp tails out of your holes, relishing the blessedly empty feeling left before you collapse into a pool of your own juices... just to catch your breath, you insist.");
 	player.orgasm();
+	player.orgasm('Anal',false);
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }

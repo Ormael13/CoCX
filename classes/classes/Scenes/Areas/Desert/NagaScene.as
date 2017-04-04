@@ -160,7 +160,6 @@ public function nagaEncounter():void {
 
 private function gooNagaRape():void {
 	clearOutput();
-	player.orgasm();
 	outputText("You look over at the prone form of the naga lying in the sand, her ", false);
 	if (monster.HP < 0) outputText("weak ", false);
 	else outputText("flushed ", false);
@@ -249,13 +248,13 @@ private function gooNagaRape():void {
 		outputText("You cry out and shudder as you feel wave after wave of the naga's orgasm rushing over your body, bringing you to a strange orgasmic bliss of your own.", false);
 	} 
 	outputText("  For a moment you just sit there in post orgasmic bliss, the walls of the naga convulsing around your gooey half. You decide that the snake woman has had enough and slowly withdraw yourself from her abused love canal. You gather up your things and head back to your camp, leaving the naga lying in the sands.", false);
+	player.orgasm();
 	combat.cleanupAfterCombat();
 }
 
 //3) Victory male
 private function nagaVictoryMale():void {
 	clearOutput();
-	player.orgasm();
 	//Male or 50% herms
 	if (player.totalCocks() > 0) {
 		//Centaur
@@ -335,7 +334,7 @@ private function nagaVictoryMale():void {
 		}
 	}
 	outputText("You think it would be a very good idea to come to the desert more often.", false);
-	player.orgasm();
+	player.orgasm('Dick');
 	combat.cleanupAfterCombat();
 	return;
 }
@@ -483,6 +482,7 @@ internal function nagaFUCKSJOOOOOO():void {
 		outputText("As the tip of her tail finally comes to rest against your cervix, you find yourself succumbing to another orgasm, your slutty wails of pleasure encouraging the naga to continue. As you begin to calm down again, you believe that this is the deepest the naga will go, although your brain works really hard and comes up with a desire for MORE depth...", false);
 		//PROPER stretched.
 		player.cuntChange((player.vaginalCapacity() + 5),true,true,false);
+		player.orgasm('Vaginal');
 		outputText("\n\n", false);
 		
 		outputText("Then, like, your wish totally comes true! The naga's tail begins to bash itself against your cervix, searching for the weak point. Her hands hold you steady as her thrusts begin to increase in intensity. It's not long into this rough tail-fucking that you find yourself on the verge of orgasm again, totally turned on by the sight of your own " + player.allBreastsDescript() + " bouncing as she fucks you. The naga grits her teeth, and, with one last, powerful thrust, forces her tail inside of your womb, pushing through your well-pounded, well-used cervix. She manages to stuff enough tail inside you to cause a visible bulge in your stomach. This combination of sensations is too much for your tiny brain, and sends your head spinning as your climax reaches its peak. Your already weak mind slips even further, your vision fading. The last thing you see is the naga's smiling face, her cheeks flushed and her eyes full of passion.", false);
@@ -560,6 +560,7 @@ internal function nagaFUCKSJOOOOOO():void {
 			else 
 				outputText("You end up enjoying the whole thing. She then gets back up and leave you there, not without looking back. You stay there, lying on the sand for a few moments before you doze off in a nap.  After you wake, you finally decide to head back to your camp.", false);
 		}
+		player.orgasm('Dick');
 	}
 	//b) female //http://nekomimichan.org/mg/src/12844585127.jpg
 	else if (player.hasVagina()) {
@@ -667,6 +668,7 @@ internal function nagaFUCKSJOOOOOO():void {
 		}
 		outputText("  ", false);
 		player.cuntChange(40,true);
+		player.orgasm('Vaginal');
 	}
 	//d) genderless
 	else {
@@ -686,8 +688,8 @@ internal function nagaFUCKSJOOOOOO():void {
 		outputText("Her tail starts to squeeze you even tighter and you start having trouble breathing, causing you to pull your head back. The naga looks down at you, begging you to continue until she realizes what she was doing all along. Slowly, she unwraps you, giving you some time to catch your breath before finishing the job.\n\n", false);
 		
 		outputText("You bring your mouth back to her awaiting hole and redouble your efforts. You can feel that she is nearing her peak as you continue to lick at her pussy. With a final shudder the naga climaxes, squeezing you firmly against her, coating your chin and nose with her thick honey.  As the naga relaxes her grip you slide out from her loosened tail coils.  Exhausted, you lose consciousness, but when you awake, you grab your things and leave the moistened sands behind.", false);
+		player.orgasm('Lips');
 	}
-	player.orgasm();
 	combat.cleanupAfterCombat();
 }
 

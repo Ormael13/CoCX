@@ -69,7 +69,7 @@ package classes.Scenes
 		}
 		
 		public function toggleProgress():void {
-			flags[kFLAGS.USE_OLD_INTERFACE] ^= 1;
+			flags[kFLAGS.BIMBO_MINISKIRT_PROGRESS_DISABLED] ^= 1;
 			getGame().inventory.inventoryMenu();
 		}
 		
