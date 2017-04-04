@@ -587,6 +587,7 @@ public function useTentacleJojo():void {
 		else outputText("  Somehow you know they won't get any bigger from his rough treatment.", false);
 		outputText("  Your " + player.allBreastsDescript() + " finally feel emptied; it's a relief.\n\n", false);
 		milkPuddle = true;
+		player.orgasm('Tits',false);
 	}
 	//Titfucking breastgasm
 	if (titFucking) {
@@ -618,6 +619,7 @@ public function useTentacleJojo():void {
 	player.buttChange(40, true);
 	player.cuntChange(40, true);
 	player.orgasm();
+	player.orgasm('Anal',false);
 	dynStats("cor", .5);
 	doNext(camp.returnToCampUseOneHour);
 }

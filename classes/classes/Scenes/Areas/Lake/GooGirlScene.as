@@ -218,6 +218,7 @@ package classes.Scenes.Areas.Lake
 		{
 			clearOutput();
 			outputText("You sway, finding it difficult to maintain your balance. When you fall, your " + player.buttDescript() + " splashes wetly in the enveloping folds of the goo-girl's eager slime. You weakly hold your hand up to keep her back, but the wide-eyed victor disregards the gesture with playful disdain. She slithers against you, moist muck slurping at your flesh with a hungry heat. Her semi-solid hands take yours, pulling your arms apart to bare your chest. She cranes her dripping head around your shoulders, skillfully removing your " + player.armorName + " with only her mouth. Your " + player.chestDesc() + " heave as the irrepressible heat of the slime sears your " + player.nippleDescript(0) + "s until beads of sweat well up on your [skin] and trickle down your curves, leaving a wet sheen over your body.\n\n", false);
+			var titsOrgasm:Boolean = false;
 
 			//[If the player is pregnant]
 			if (player.pregnancyIncubation <= 280 && player.pregnancyIncubation >= 1) {
@@ -232,6 +233,7 @@ package classes.Scenes.Areas.Lake
 				//[player breast size increase, lactation activated/ amount increases]
 				player.breastRows[0].breastRating++;
 				player.boostLactation(1);
+				titsOrgasm = true;
 			}
 			//[Pregnancy continued]
 			if (player.pregnancyIncubation <= 280 && player.pregnancyIncubation >= 1) {
@@ -243,6 +245,7 @@ package classes.Scenes.Areas.Lake
 				else if (player.lactationQ() <= 2000) outputText("  She drinks gratefully, nursing you with her permeable body until the pout of her belly sloshes heavily with the pale ivory of your motherly bounty.", false);
 				else outputText("  You bite your lip and let go, torrents of rich, pearl fluid rushing through her arms and inflating the surprised girl before your eyes. The milk gushing into her fills the goo from base to breast, giving the once-" + gooColor5() + " girl an opalescent shine, her over-filled body bloated as if she were carrying triplets.", false);
 				outputText("  She gives you a fond bop on the chin and a loving stroke on your belly before sloshing back into the lake, her seething heat still clinging to your body like a lingering hug.", false);
+				titsOrgasm = true;
 			}
 			//[If the player isn't pregnant]
 			else {
@@ -262,7 +265,7 @@ package classes.Scenes.Areas.Lake
 					player.knockUp(PregnancyStore.PREGNANCY_GOO_GIRL, PregnancyStore.INCUBATION_GOO_GIRL, 1, 1);
 				}
 			}
-			player.orgasm();
+			player.orgasm(titsOrgasm ? 'Tits' : 'Vaginal');
 			dynStats("sen", 4);
 			player.slimeFeed();
 			combat.cleanupAfterCombat();

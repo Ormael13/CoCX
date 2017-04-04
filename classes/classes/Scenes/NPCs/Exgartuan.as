@@ -392,6 +392,7 @@ public function exgartuanMasturbation():void {
 		dynStats("sen", .25, "lus", 15, "cor", 1);
 		if (player.biggestLactation() > 1) outputText("As you calm down you realize your " + player.nippleDescript(0) + "s are dribbling streams of milk, and judging from the pools of whiteness in the soil, you turned into quite the little milk-sprinkler.  ", false);
 		outputText("You blush and redress, noting that Exgartuan seems to be silent and sleeping...  maybe you'll get a little peace now?", false);
+		player.orgasm('Tits',false);
 	}
 	player.changeStatusValue(StatusEffects.Exgartuan,2,(12+rand(7)));
 	doNext(camp.returnToCampUseOneHour);
@@ -1331,6 +1332,7 @@ private function boobgartuanSurprise3():void {
 	else outputText("  Your fingertips continue to sweep across your [skin], seemingly in denial that the exciting night has drawn to a close.  You peer up at the ever-present moon, its crimson hue as foreboding as the day you first arrived in Mareth.  You stew on the prospect of apologizing to the demoness for your forgetfulness.  Though, be it for your pride or hers, you decide it better to just shelf the idea.  All Exgartuan cares about is attention and fucking, better to not go and try to turn her into a conversationalist.  Best to just tend to her every so often if you actually do care.  Once you've taken care of your own lust anyway.  You shake some sense back into your head, sending some dirt flying.  The \"<i>breast show on earth</i>\" left you soaked, your milk turning the dirt to mud around you.  You figure it best to worry about it once you're at camp.  You begin the trek back, a little smile growing on your face once you see the trail of milk you're leaving behind in your wake.", false);
 	//[corruption +2, lust +5] 
 	dynStats("lus", 5, "cor", 2);
+	player.orgasm('Tits',false);
 	flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT]++;
 	player.changeStatusValue(StatusEffects.Exgartuan,2,25);
 	doNext(playerMenu);

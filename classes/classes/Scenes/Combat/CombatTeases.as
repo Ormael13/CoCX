@@ -76,7 +76,7 @@ package classes.Scenes.Combat
 			//10% for seduction perk
 			if (player.findPerk(PerkLib.Seduction) >= 0) chance += 10;
 			//10% for sexy armor types
-			if (player.findPerk(PerkLib.SluttySeduction) >= 0) chance += 10;
+			if (player.findPerk(PerkLib.SluttySeduction) >= 0) chance += player.perkv1(PerkLib.SluttySeduction);
 			//10% for bimbo shits
 			if (player.findPerk(PerkLib.BimboBody) >= 0) {
 				chance += 10;
@@ -95,6 +95,7 @@ package classes.Scenes.Combat
 				chance += 2;
 			}
 			if (player.findPerk(PerkLib.ChiReflowLust) >= 0) chance += UmasShop.NEEDLEWORK_LUST_TEASE_MULTI;
+			if (getGame().bimboProgress.ableToProgress()) chance += player.bimboScore() / 2; // up to maximum value of 10 for pure bimbos 
 			//==============================
 			//Determine basic damage.
 			//==============================
@@ -110,6 +111,7 @@ package classes.Scenes.Combat
 				damage += 5;
 				bimbo = true;
 			}
+			if (getGame().bimboProgress.ableToProgress()) damage += player.bimboScore() / 4; // up to maximum value of 5 for pure bimbos
 			if (player.level < 30) damage += player.level;
 			else if (player.level < 60) damage += 30 + ((player.level - 30) / 2);
 			else damage += 45 + ((player.level - 60) / 5);

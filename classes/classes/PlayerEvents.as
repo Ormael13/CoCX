@@ -840,6 +840,32 @@ package classes {
 			if (flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC] > 0) flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC]--; //Vala post-rape countdown
 			if (flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] > 0 && flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] < 500) flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY]++;
 			
+			if (player.armorName == "bimbo skirt") {
+			
+				var wornUpper:Boolean = (player.upperGarment != UndergarmentLib.NOTHING);
+				var wornLower:Boolean = (player.lowerGarment != UndergarmentLib.NOTHING);
+			
+				// If player wears underwear with bimbo skirt, slutty seduction perks are severely reduced
+				if (player.findPerk(PerkLib.SluttySeduction) >= 0) {
+					if (wornLower) {
+						if (wornUpper) player.setPerkValue(PerkLib.SluttySeduction, 1, 0);
+						else 		   player.setPerkValue(PerkLib.SluttySeduction, 1, 1);
+					}
+					else {
+						if (wornUpper) player.setPerkValue(PerkLib.SluttySeduction, 1, 3);
+						else  	       player.setPerkValue(PerkLib.SluttySeduction, 1, 10);
+					}
+				}
+				
+				// Normal tits growth if not wearing bra
+				if (getGame().model.time.hours == 6 && rand(10) == 0 && player.biggestTitSize() < 12 && !wornUpper && !getGame().bimboProgress.ableToProgress()) {
+					outputText("\n<b>As you wake up, you feel a strange tingling starting in your nipples that extends down into your breasts.  After a minute, the tingling dissipates in a soothing wave.  As you cup your tits, you realize they've gotten larger!</b>");
+					player.growTits(1, player.bRows(), false, 2);
+					getGame().dynStats("lus", 10);
+					needNext = true;
+				}
+			}
+			
 			if (getGame().model.time.hours > 23) { //Once per day
 				flags[kFLAGS.BROOKE_MET_TODAY] = 0;
 				if (getGame().model.time.days % 2 == 0 && flags[kFLAGS.KAIJU_BAD_END_COUNTER] > 0) {
