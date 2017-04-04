@@ -1362,6 +1362,7 @@ package classes.Scenes.Areas.Forest
 
 		private function topAkbitchFromBottomDuex():void
 		{
+			var analOrgasm:Boolean = false;
 			clearOutput();
 			outputText(images.showImage("akbal-deepwoods-male-akbalonback2"));
 			//-page turn-
@@ -1391,13 +1392,14 @@ package classes.Scenes.Areas.Forest
 				else
 					outputText(" climaxes");
 				outputText(".  Your [vagOrAss] spasms around the demon’s embedded cock as [eachCock] paints his chest and face with a generous coating of baby batter.  Your orgasm rages on, covering the demon cat in your sex fluids, matting his fur and darkening it with more seed than you ever thought possible.");
+				analOrgasm = true;
 			}
 			//[if (hasCock = false)
 			else
 				outputText("\n\nEvery nerve ending in your body explodes as you convulse atop the jaguar.  With a hoarse groan, your [vagOrAss] begins to spasm around the embedded pleasure rod as it gushes more fluid than you thought possible.  Soon the Jaguar is soaked from waist to thigh.");
 
 			outputText("\n\nYou look back at your new bitch with a grin while he regains his senses.  As you leave the forest, you hear a promise from Akbal’s chorus of voices, \"<i>You will regret this... Champion.</i>\"");
-			player.orgasm();
+			player.orgasm(analOrgasm ? 'Anal' : 'Vaginal');
 			dynStats("cor", 3);
 			if (player.hasVagina())
 				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);

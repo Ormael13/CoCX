@@ -1103,7 +1103,8 @@ private function genderlessShouldrasLossRapes():void {
 	outputText(".  With a happy sigh, you heave yourself upright, slipping back into your " + player.armorName + " and moving out into the ruins once more.\n\n", false);
 	outputText("A strange sensation begins in your midsection, and you press a hand against the flesh curiously. You remove it swiftly as a familiar head suddenly pushes out, wiggling about until it faces you. She smiles, then draws her arms out of her torso and uses them as leverage (with a whispered spell to make her hands tangible) to remove herself from you completely. Muttering an incantation and solidifying her again-unremarkable form, she winks at you and gathers her tunic, slipping it over her frame. As you watch, she slips her thumb and forefinger into her satisfied snatch, producing a healthy helping of a spooky gooey substance. Reaching into a pocket inside her tunic, she draws out a small bottle, which she promptly squishes the ectoplasm into. She offers you the bottle, explaining, \"<i>The product of a... ghost climax, if you will. Keep it, it's good for you.</i>\"  With a happy goodbye, she wanders into an alley, grabbing her ruined leggings and discarded shoes as she goes, and disappears into the shadows. You move to leave, but find your " + player.legs() + " growing heavy, fatigue washing over you in the aftermath of the possession. Before you know it, you're on your knees, and you have to struggle to keep your eyelids from drooping. You succumb to the exhaustion, slumping to the ground and soon snoring contentedly.", false);
 	flags[kFLAGS.SHOULDRA_GENDERLESS_FUCK_COUNT]++;
-	player.orgasm();
+	player.orgasm('Tits');
+	player.orgasm('Anal',false);
 	dynStats("sen", 1);
 	if (getGame().inCombat) {
 		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = consumables.ECTOPLS.id;

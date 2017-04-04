@@ -225,6 +225,7 @@ internal function loseToSalamander():void {
 		outputText(".  She gasps at the sensation and grabs your hips as another shot goes off inside her.  Panting, she gives you one massive, final thrust and cums herself, squeezing your " + player.cockDescript(x) + " hard inside her and screaming as brutal a scream as any warcry to the heavens.", false);
 
 		outputText("She collapses atop you, panting heavily.  \"<i>That.  Was.  Awesome,</i>\" she laughs, reaching up to give your nipple a pinch as she nestles her head on you.  Your cock begins to deflate inside her as trickles of spooge spill out around your girth, but she doesn't seem intent on leaving any time soon, and you have to admit, the warmth of her against you is more than nice.  The salamander gives you one last grin and withdraws her tail from your lips.  A moment later, she slides it under your head like a pillow, and closes her eyes, exhausted.  Soon, you, too, fall into a peaceful sleep.\n\n", false);
+		player.orgasm('Dick');
 	}
 	//Player Loss – Rape – Female
 	else if (player.hasVagina()) {
@@ -247,6 +248,7 @@ internal function loseToSalamander():void {
 		outputText(".\n\n", false);
 
 		outputText("Before your mind has settled, your new friend has collapsed on top of you, resting her cheek on your " + player.chestDesc() + ".  Her breath is ragged, not unlike yours, and her eyelids seem suddenly heavy.  Smiling, she slowly withdraws her cum-soaked tail from your " + player.vaginaDescript(0) + " and slips it under your head like a pillow, soft and warm, if not a little moist.  Seeing as she doesn't seem intent on going anywhere, you, too, close your eyes and drift off to a peaceful sleep.", false);
+		player.orgasm('Vaginal');
 	}
 	//Player Loss – Rape – Genderless & Male >85 cockarea
 	else {
@@ -270,8 +272,10 @@ internal function loseToSalamander():void {
 		outputText("All good things must come to an end, however, and soon the salamander's hot cunt contracts around your tongue as she cums, squirting girl-juice all over your face and neck.  You give her a last good tongue-fucking, picking up the pace and bringing her to a screaming, shuddering climax.  The power of her orgasm has a welcome side effect, as her tail begins to thrash wildly within you, battering your ass and bringing you, too, to a massive, mind-numbing climax.\n\n", false);
 
 		outputText("Before your mind has settled, your new friend has collapsed on top of you, resting her cheek on your " + player.chestDesc() + ".  Her breath is ragged, not unlike yours, and her eyelids seem suddenly heavy.  Smiling, she slowly withdraws her tail from your " + player.assholeDescript() + " and slips it under your head like a pillow, soft and warm, if not a little moist.  Seeing as she doesn't seem intent on going anywhere, you, too, close your eyes and drift off to a peaceful sleep.", false);
+		
+		player.orgasm('Anal');
+		
 	}
-	player.orgasm();
 	dynStats("sen", 1);
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]++;

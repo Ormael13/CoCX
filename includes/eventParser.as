@@ -438,6 +438,28 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 			return true;
 		}
 	}
+	//Unequip undergarment if bimbo skirt & corruption
+	if (player.armorName == "bimbo skirt" && player.cor >= 10 && player.upperGarment != UndergarmentLib.NOTHING) {
+		outputText("\nYou are feeling strange heat in your [breasts]. The thought of how much more pleasure you'll have without the embarassing strain from your " + player.upperGarmentName + " drives you into the frenzy. You take of the top of your dress, put off the garment and start teasing your [nipples], feeling lost in the waves warmth radiating through you body. Eventually, the pleasure subsides, but you decide to stay without your " + player.upperGarmentName + " for a while.\n\n");
+		kGAMECLASS.dynStats("lus", 10);
+		inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, 0), playerMenu);
+		return true;
+	}
+	if (player.armorName == "bimbo skirt" && player.cor >= 10 && player.lowerGarment != UndergarmentLib.NOTHING) {
+		outputText("\nLost in strange thought, you reach with your hand under the skirt. You take of you " + player.lowerGarmentName + " and immediately feel the increased sensitivity of your skin. You think how irresistible seductive you'll become without that embarassing underwear, and decide to stay that way.\n\n");
+		kGAMECLASS.dynStats("lus", 10);
+		inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, 1), playerMenu);
+		return true;
+	}
+	if (player.armorName == "bimbo skirt" && player.upperGarment != UndergarmentLib.NOTHING && flags[kFLAGS.TIMES_ORGASM_TITS] > 10) {
+		outputText("\nThe pressure building in your [breasts] becomes unbearable. Hastily, you take off your " + player.upperGarmentName + " and start teasing your nipples. ");
+		if (kGAMECLASS.bimboProgress.ableToProgress()) {
+			kGAMECLASS.bimboProgress.titsOrgasm();
+			
+		}
+		inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, 0), playerMenu);
+		return true;
+	}
 	//Unequip shield if you're wielding a large weapon.
 	if (player.weaponPerk == "Large" && player.shield != ShieldLib.NOTHING) {
 		outputText("Your current weapon requires the use of two hands. As such, your shield has been unequipped automatically. ");
