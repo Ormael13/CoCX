@@ -1151,7 +1151,7 @@ package classes.Scenes.NPCs
 		private function spankVapulaLikeABoss():void
 		{
 			clearOutput();
-			outputText("Without any warning, you grab the lusty succubus by the wrists and pull her into you, easily manhandling her surprised form until she's bent over your [leg], vulnerable and squealing like the gutter-slut she is.  Her wings batter at your face and chest, but after a little wrangling, you pin them flat against her back.  The best she can manage now is a few weak twitches at her wing-tips.  Her large, well-formed breasts jiggle and shake as she struggles, but all the trembling purple mountains accomplish is bringing a ready flush to your " + player.skin());
+			outputText("Without any warning, you grab the lusty succubus by the wrists and pull her into you, easily manhandling her surprised form until she's bent over your [leg], vulnerable and squealing like the gutter-slut she is.  Her wings batter at your face and chest, but after a little wrangling, you pin them flat against her back.  The best she can manage now is a few weak twitches at her wing-tips.  Her large, well-formed breasts jiggle and shake as she struggles, but all the trembling purple mountains accomplish is bringing a ready flush to your [skin]");
 			if (player.hasCock()) outputText(" and a healthy surge of blood to [eachCock]");
 			else if (player.hasVagina()) outputText(" and a teltale moistness to your nethers");
 			outputText(".");

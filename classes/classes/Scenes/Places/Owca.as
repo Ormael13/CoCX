@@ -430,8 +430,7 @@ private function rapeZeVapula():void {
 		outputText("\n\nYou throw away your expendable");
 		if (player.cumQ() > 1000) outputText(", expandable");
 		outputText(" cumdumpster and grab another slut.  This time you feel like you could use a blowjob to clean off the demonic sweat and slime from your cock; you forcefully open her jaw and shove your " + player.cockDescript(0) + " down her throat without any care.  The sudden influx of dickflesh blocking her air-flow makes her choke and cough, but a withdrawal and a good cock-slap reminds her of her place.  \"<i>You fucking bitch!  You goddamn worthless slut!  What good are you if you can't even give proper head?  Lick, you whore!  I want your tongue all over my crotch!  You can breathe when you've properly moistened my ");
-		if (player.balls > 0) outputText("balls");
-		else outputText(player.skin());
+		outputText(player.balls > 0 ? "balls" : "[skin]");
 		outputText("!</i>\"  The poor demoness, cheek stained with semen, mutters an apology and proceeds to lick your " + player.cockDescript(0) + ", suckling the tip, ");
 		if (player.balls > 0) outputText("fondling your " + player.ballsDescriptLight() + ", ");
 		//[if multicocks] 
