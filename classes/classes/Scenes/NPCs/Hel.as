@@ -12,7 +12,7 @@ package classes.Scenes.NPCs
 			//return to combat menu when finished
 			doNext(game.playerMenu);
 			//Blind dodge change
-			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) < 1) {
+			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 			}
 			//Determine if dodged!
@@ -65,7 +65,7 @@ package classes.Scenes.NPCs
 			//return to combat menu when finished
 			doNext(game.playerMenu);
 			//Blind dodge change
-			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) < 1) {
+			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 				return;
 			}
@@ -150,7 +150,7 @@ package classes.Scenes.NPCs
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (findStatusEffect(StatusEffects.Sparring) >= 0) game.helFollower.PCBeatsUpSalamanderSparring();
+			if (hasStatusEffect(StatusEffects.Sparring)) game.helFollower.PCBeatsUpSalamanderSparring();
 			else game.helScene.beatUpHel();
 		}
 
@@ -160,7 +160,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nHelia waits it out in stoic silence...");
 				doNext(game.combat.endLustLoss);
 			} else {
-				if (findStatusEffect(StatusEffects.Sparring) >= 0) game.helFollower.loseToSparringHeliaLikeAButtRapedChump();
+				if (hasStatusEffect(StatusEffects.Sparring)) game.helFollower.loseToSparringHeliaLikeAButtRapedChump();
 				else game.helScene.loseToSalamander();
 			}
 		}

@@ -208,7 +208,7 @@ package classes
 			if (player.lactationQ() > 0)
 				bodyStats += "<b>Milk Production:</b> " + addComma(Math.round(player.lactationQ())) + "mL\n";
 			
-			if (player.findStatusEffect(StatusEffects.Feeder) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.Feeder)) {
 				bodyStats += "<b>Hours Since Last Time Breastfed Someone:</b>  " + player.statusEffectv2(StatusEffects.Feeder);
 				if (player.statusEffectv2(StatusEffects.Feeder) >= 72)
 					bodyStats += " (Too long! Sensitivity Increasing!)";
@@ -251,7 +251,7 @@ package classes
 			if (player.findPerk(PerkLib.SpiderOvipositor) >= 0 || player.findPerk(PerkLib.BeeOvipositor) >= 0)
 				bodyStats += "<b>Ovipositor Total Egg Count: " + player.eggs() + "\nOvipositor Fertilized Egg Count: " + player.fertilizedEggs() + "</b>\n";
 				
-			if (player.findStatusEffect(StatusEffects.SlimeCraving) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.SlimeCraving)) {
 				if (player.statusEffectv1(StatusEffects.SlimeCraving) >= 18)
 					bodyStats += "<b>Slime Craving:</b> Active! You are currently losing strength and speed.  You should find fluids.\n";
 				else {
@@ -402,7 +402,7 @@ package classes
 				interpersonStats += "<b>Katherine's Submissiveness:</b> " + getGame().telAdre.katherine.submissiveness() + "\n";
 			}
 
-			if (player.findStatusEffect(StatusEffects.Kelt) >= 0 && flags[kFLAGS.KELT_BREAK_LEVEL] == 0 && flags[kFLAGS.KELT_KILLED] == 0) {
+			if (player.hasStatusEffect(StatusEffects.Kelt) && flags[kFLAGS.KELT_BREAK_LEVEL] == 0 && flags[kFLAGS.KELT_KILLED] == 0) {
 				if (player.statusEffectv2(StatusEffects.Kelt) >= 130)
 					interpersonStats += "<b>Submissiveness To Kelt:</b> " + 100 + "%\n";
 				else
@@ -955,7 +955,7 @@ package classes
 							_add(new PerkClass(PerkLib.FocusedMind));
 						
 						if (player.findPerk(PerkLib.Archmage) >= 0 && player.findPerk(PerkLib.Channeling) >= 0  &&
-						(player.findStatusEffect(StatusEffects.KnowsWhitefire) >= 0
+						(player.hasStatusEffect(StatusEffects.KnowsWhitefire)
 						|| player.findPerk(PerkLib.FireLord) >= 0 
 						|| player.findPerk(PerkLib.Hellfire) >= 0 
 						|| player.findPerk(PerkLib.EnlightenedNinetails) >= 0
@@ -964,11 +964,11 @@ package classes
 				}
 				// Spell-boosting perks
 				// Battlemage: auto-use Might
-				if (player.findPerk(PerkLib.Channeling) >= 0 && player.findStatusEffect(StatusEffects.KnowsMight) >= 0 && player.inte >= 80) {
+				if (player.findPerk(PerkLib.Channeling) >= 0 && player.hasStatusEffect(StatusEffects.KnowsMight) && player.inte >= 80) {
 						_add(new PerkClass(PerkLib.Battlemage));
 				}
 				// Spellsword: auto-use Charge Weapon
-				if (player.findPerk(PerkLib.Channeling) >= 0 && player.findStatusEffect(StatusEffects.KnowsCharge) >= 0 && player.inte >= 80) {
+				if (player.findPerk(PerkLib.Channeling) >= 0 && player.hasStatusEffect(StatusEffects.KnowsCharge) && player.inte >= 80) {
 						_add(new PerkClass(PerkLib.Spellsword));
 				}
 			}

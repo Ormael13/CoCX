@@ -593,7 +593,7 @@ private function cramANippleInIt():void {
 		combat.cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 	//You've now been milked, reset the timer for that
-	if (player.findStatusEffect(StatusEffects.Feeder) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.Feeder)) {
 		player.addStatusValue(StatusEffects.Feeder,1,1);
 		player.changeStatusValue(StatusEffects.Feeder,2,0);
 	}
@@ -893,7 +893,7 @@ public function luststickApplication(hours:Number = 4):void {
 	//Max of 20.
 	if (hours > 20) hours = 20;
 	//Add duration if under effects
-	if (player.findStatusEffect(StatusEffects.Luststick) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.Luststick)) {
 		//Max?
 		if (player.statusEffectv1(StatusEffects.Luststick) >= 20)
 		{}

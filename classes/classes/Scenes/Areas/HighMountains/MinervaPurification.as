@@ -10,10 +10,10 @@ package classes.Scenes.Areas.HighMountains
 	{
 		
 		public function checkRathazul():Boolean {
-			return (player.findStatusEffect(StatusEffects.CampRathazul) >= 0 || player.statusEffectv2(StatusEffects.MetRathazul) >= 3);
+			return (player.hasStatusEffect(StatusEffects.CampRathazul) || player.statusEffectv2(StatusEffects.MetRathazul) >= 3);
 		}
 		public function checkJojo():Boolean {
-			return (player.findStatusEffect(StatusEffects.PureCampJojo) >= 0);
+			return (player.hasStatusEffect(StatusEffects.PureCampJojo));
 		}
 		public function checkMarae():Boolean {
 			return (flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1);

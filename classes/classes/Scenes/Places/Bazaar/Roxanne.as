@@ -52,7 +52,7 @@ WIN:
 			//Reset if she finds someone to take it (random at high values)
 			if (flags[kFLAGS.ROXANNE_TIME_WITHOUT_SEX] >= 300 && model.time.hours == 1 && rand(5) == 0) flags[kFLAGS.ROXANNE_TIME_WITHOUT_SEX] = 1;
 			//hangover status stuff
-			if (player.findStatusEffect(StatusEffects.Hangover) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.Hangover)) {
 			//Countdown
 				if (player.statusEffectv1(StatusEffects.Hangover) > 0) player.addStatusValue(StatusEffects.Hangover,1,-1);
 				else {
@@ -561,7 +561,7 @@ private function applyHangover():void {
 	//v4 = intelligence
 
 	//Already hungover?  Reset duration.
-	if (player.findStatusEffect(StatusEffects.Hangover) >= 0) player.changeStatusValue(StatusEffects.Hangover,1,8);
+	if (player.hasStatusEffect(StatusEffects.Hangover)) player.changeStatusValue(StatusEffects.Hangover,1,8);
 	//No hangover yet?  Create and yoink stats
 	else {
 		player.createStatusEffect(StatusEffects.Hangover,8,0,0,0);

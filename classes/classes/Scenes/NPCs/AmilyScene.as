@@ -190,7 +190,7 @@ package classes.Scenes.NPCs
 			}
 			//Remove worm block if player got rid of worms.
 			if (flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] == 1) {
-				if (player.findStatusEffect(StatusEffects.Infested) < 0) flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] = 0;
+				if (!player.hasStatusEffect(StatusEffects.Infested)) flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] = 0;
 			}
 			//Corrupt blow up! - requires you've met Amily
 			if (flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] == 0 && flags[kFLAGS.AMILY_MET] > 0 && (player.cor > 25 + player.corruptionTolerance() || player.cor > 75)) {
@@ -1446,7 +1446,7 @@ package classes.Scenes.NPCs
 
 			flags[kFLAGS.AMILY_CLOTHING] = "rags";
 			//if marble is there, tag it for freakout
-			if (player.findStatusEffect(StatusEffects.CampMarble) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.CampMarble)) {
 				flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 1;
 			}
 			else flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 2;
@@ -2099,7 +2099,7 @@ package classes.Scenes.NPCs
 			amilySprite();
 
 			//worm infested reaction
-			if (player.findStatusEffect(StatusEffects.Infested) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.Infested)) {
 				outputText("\"<i>EWWWW!  You're infested!</i>\" she shrieks, \"<i>Get out!  Don't come back 'til you get rid of the worms!</i>\"\n\nYou high tail it out of there.  It looks like Amily doesn't want much to do with you until you're cured.", false);
 				doNext(camp.returnToCampUseOneHour);
 				flags[kFLAGS.AMILY_AFFECTION] -= 3;
@@ -2478,7 +2478,7 @@ package classes.Scenes.NPCs
 				return;
 			}
 			//Jojo + Amily Spar
-			if (flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_MET_PURE_JOJO] == 1 && flags[kFLAGS.AMILY_SPAR_WITH_PURE_JOJO] == 0 && player.findStatusEffect(StatusEffects.PureCampJojo) >= 0) {
+			if (flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_MET_PURE_JOJO] == 1 && flags[kFLAGS.AMILY_SPAR_WITH_PURE_JOJO] == 0 && player.hasStatusEffect(StatusEffects.PureCampJojo)) {
 				finter.pureJojoAndAmilySpar();
 				return;
 			}
@@ -6686,7 +6686,7 @@ package classes.Scenes.NPCs
 				flags[kFLAGS.AMILY_CLOTHING] = "sexy rags";
 			}
 			//if marble is there, tag it for freakout
-			if (player.findStatusEffect(StatusEffects.CampMarble) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.CampMarble)) {
 				flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 1;
 			}
 			else flags[kFLAGS.MARBLE_OR_AMILY_FIRST_FOR_FREAKOUT] = 2;

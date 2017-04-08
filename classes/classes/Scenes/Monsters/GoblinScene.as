@@ -209,7 +209,7 @@ package classes.Scenes.Monsters
 				dynStats("lus", 20);
 			}
 			//If cant rape or breastfeed
-			if (player.lust < 30 && player.findStatusEffect(StatusEffects.Feeder) < 0) {
+			if (player.lust < 30 && !player.hasStatusEffect(StatusEffects.Feeder)) {
 				combat.cleanupAfterCombat();
 				return;
 			}
@@ -247,7 +247,7 @@ package classes.Scenes.Monsters
 					spiderCondom = goblinCondomed;
 			}
 			//Breastfeed adds an option
-			if (player.findStatusEffect(StatusEffects.Feeder) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.Feeder)) {
 				feeder = giveGoblinAMilkMustache;
 			}
 			if (player.lust >= 33 && player.gender > 0 && (fitsFuck != null || cuntFuck != null || tooBig != null ||

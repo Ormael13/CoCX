@@ -116,7 +116,7 @@
 		override public function defeated(hpVictory:Boolean):void
 		{
 			var temp2:Function =null;
-			if (player.findStatusEffect(StatusEffects.Feeder) >= 0) temp2 = game.lake.fetishCultistScene.fetishCultistHasAMilkFetish;
+			if (player.hasStatusEffect(StatusEffects.Feeder)) temp2 = game.lake.fetishCultistScene.fetishCultistHasAMilkFetish;
 			if (hpVictory) {
 				outputText("Hurt too much to continue controlling her powers, the cultist collapses helplessly.", true);
 			} else {

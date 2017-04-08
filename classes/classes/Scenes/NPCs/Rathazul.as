@@ -36,7 +36,7 @@
 		//End of Interface Implementation
 		
 		public function returnToRathazulMenu():void {
-			if (player.findStatusEffect(StatusEffects.CampRathazul) >= 0)
+			if (player.hasStatusEffect(StatusEffects.CampRathazul))
 				campRathazul();
 			else encounterRathazul();
 		}
@@ -44,7 +44,7 @@
 public function encounterRathazul():void {
 	spriteSelect(49);
 	clearOutput();
-	if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.findStatusEffect(StatusEffects.MetRathazul) >= 0)
+	if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.hasStatusEffect(StatusEffects.MetRathazul))
 	{
 		marblePurification.visitRathazulToPurifyMarbleAfterLaBovaStopsWorkin();
 		return;
@@ -54,8 +54,8 @@ public function encounterRathazul():void {
 	if (player.lust > 30) dynStats("lus", -10);
 	//Introduction
 	outputText(images.showImage("rathazul-lake"));
-	if (player.findStatusEffect(StatusEffects.MetRathazul) >= 0) {
-		if (player.findStatusEffect(StatusEffects.CampRathazul) >= 0)
+	if (player.hasStatusEffect(StatusEffects.MetRathazul)) {
+		if (player.hasStatusEffect(StatusEffects.CampRathazul))
 			outputText("You walk over to Rathazul's corner of the camp.  He seems as busy as usual, with his nose buried deep in some tome or alchemical creation, but he turns to face you as soon as you walk within a few paces of him.\n\n");
 		else
 			outputText("You spy the familiar sight of the alchemist Rathazul's camp along the lake.  The elderly rat seems to be oblivious to your presence as he scurries between his equipment, but you know him well enough to bet that he is entirely aware of your presence.\n\n");
@@ -95,7 +95,7 @@ private function rathazulMoveDecline():void {
 public function campRathazul():void {
 	spriteSelect(49);
 	clearOutput();
-	if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.findStatusEffect(StatusEffects.MetRathazul) >= 0)
+	if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.hasStatusEffect(StatusEffects.MetRathazul))
 	{
 		marblePurification.visitRathazulToPurifyMarbleAfterLaBovaStopsWorkin();
 		return;
@@ -108,7 +108,7 @@ public function campRathazul():void {
 	if (rand(6) == 0 && flags[kFLAGS.RATHAZUL_CAMP_INTERACTION_COUNTDOWN] == 0) {
 		flags[kFLAGS.RATHAZUL_CAMP_INTERACTION_COUNTDOWN] = 3;
 		//Pure jojo
-		if (flags[kFLAGS.JOJO_RATHAZUL_INTERACTION_COUNTER] == 0 && player.findStatusEffect(StatusEffects.PureCampJojo) >= 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
+		if (flags[kFLAGS.JOJO_RATHAZUL_INTERACTION_COUNTER] == 0 && player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
 			finter.jojoOffersRathazulMeditation();
 			return;
 		}
@@ -138,7 +138,7 @@ public function campRathazul():void {
 	offered = rathazulWorkOffer();
 	if (!offered) {
 		outputText("He sighs dejectedly, \"<i>I don't think there is.  Why don't you leave me be for a time, and I will see if I can find something to aid you.</i>\"", false);
-		if (player.findStatusEffect(StatusEffects.CampRathazul) >= 0)
+		if (player.hasStatusEffect(StatusEffects.CampRathazul))
 			doNext(camp.campFollowers);
 		else doNext(playerMenu);
 	}
@@ -173,7 +173,7 @@ private function rathazulWorkOffer():Boolean {
 	}
 	//Item crafting offer
 	if (player.hasItem(useables.GREENGL)) { //Green Gel
-		if (player.findStatusEffect(StatusEffects.RathazulArmor) < 0) outputText("He pipes up with a bit of hope in his voice, \"<i>I can smell the essence of the tainted lake-slimes you've defeated, and if you'd let me, I could turn it into something a bit more useful to you.  You see, the slimes are filled with the tainted essence of the world-mother herself, and once the taint is burned away, the remaining substance remains very flexible but becomes nearly impossible to cut through.  With the gel of five defeated slimes I could craft you a durable suit of armor.</i>\"", false);
+		if (!player.hasStatusEffect(StatusEffects.RathazulArmor)) outputText("He pipes up with a bit of hope in his voice, \"<i>I can smell the essence of the tainted lake-slimes you've defeated, and if you'd let me, I could turn it into something a bit more useful to you.  You see, the slimes are filled with the tainted essence of the world-mother herself, and once the taint is burned away, the remaining substance remains very flexible but becomes nearly impossible to cut through.  With the gel of five defeated slimes I could craft you a durable suit of armor.</i>\"", false);
 		else outputText("He pipes up with a bit of excitement in his voice, \"<i>With just five pieces of slime-gel I could make another suit of armor...</i>\"", false);
 		spoken = true;
 		if (player.hasItem(useables.GREENGL,5)) {
@@ -262,7 +262,7 @@ private function rathazulWorkOffer():Boolean {
 		totalOffers++;
 	}
 	//Reducto
-	if (player.findStatusEffect(StatusEffects.CampRathazul) >= 0 && player.statusEffectv2(StatusEffects.MetRathazul) >= 4) {
+	if (player.hasStatusEffect(StatusEffects.CampRathazul) && player.statusEffectv2(StatusEffects.MetRathazul) >= 4) {
 		outputText("The rat hurries over to his supplies and produces a container of paste, looking rather proud of himself, \"<i>Good news everyone!  I've developed a paste you could use to shrink down any, ah, oversized body parts.  The materials are expensive though, so I'll need ");
 		if (flags[kFLAGS.AMILY_MET_RATHAZUL] >= 2) outputText("50");
 		else outputText("100");
@@ -272,13 +272,13 @@ private function rathazulWorkOffer():Boolean {
 		reductos = true;
 	}
 	//Vines
-	if (player.keyItemv1("Marae's Lethicite") > 0 && player.findStatusEffect(StatusEffects.DefenseCanopy) < 0 && player.findStatusEffect(StatusEffects.CampRathazul) >= 0) {
+	if (player.keyItemv1("Marae's Lethicite") > 0 && !player.hasStatusEffect(StatusEffects.DefenseCanopy) && player.hasStatusEffect(StatusEffects.CampRathazul)) {
 		outputText("His eyes widen in something approaching shock when he sees the Lethicite crystal you took from Marae.  Rathazul stammers, \"<i>By the goddess... that's the largest piece of lethicite I've ever seen.  I don't know how you got it, but there is immense power in those crystals.  If you like, I know a way we could use its power to grow a canopy of thorny vines that would hide the camp and keep away imps.  Growing such a defense would use a third of that lethicite's power.</i>\"\n\n");
 		totalOffers++;
 		spoken = true;
 		lethiciteDefense = growLethiciteDefense;
 	}
-	if (player.findStatusEffect(StatusEffects.CampRathazul) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.CampRathazul)) {
 		if (flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED] == 0 && (sophieBimbo.bimboSophie() || player.findPerk(PerkLib.BroBrains) >= 0 || player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0)) {
 			rathazulDebimboOffer();
 			return true;
@@ -337,7 +337,7 @@ private function rathazulWorkOffer():Boolean {
 		//These will be filled in.
 		if (lethiciteDefense != null) addButton(button++, "Lethicite", lethiciteDefense, null, null, null, "Ask him if he can make use of that lethicite you've obtained from Marae.");
 
-		if (player.findStatusEffect(StatusEffects.CampRathazul) >= 0)
+		if (player.hasStatusEffect(StatusEffects.CampRathazul))
 			addButton(14,"Leave", camp.campFollowers);
 		else
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
@@ -383,7 +383,7 @@ private function craftOozeArmor():void {
 	player.destroyItems(useables.GREENGL, 5);
 	player.addStatusValue(StatusEffects.MetRathazul,2,1);
 	inventory.takeItem(armors.GELARMR, returnToRathazulMenu);
-	if (player.findStatusEffect(StatusEffects.RathazulArmor) < 0) player.createStatusEffect(StatusEffects.RathazulArmor,0,0,0,0);
+	if (!player.hasStatusEffect(StatusEffects.RathazulArmor)) player.createStatusEffect(StatusEffects.RathazulArmor,0,0,0,0);
 }
 
 private function craftCarapace():void {
@@ -467,7 +467,7 @@ public function chooseArmorOrRobes(robeType:int):void {
 	player.gems -= 500;
 	statScreenRefresh();
 	outputText("Rathazul grunts in response and goes back to work.  ", true);
-	if (player.findStatusEffect(StatusEffects.CampRathazul) >= 0)
+	if (player.hasStatusEffect(StatusEffects.CampRathazul))
 	{
 		outputText("You turn back to the center of your camp", false);
 	}

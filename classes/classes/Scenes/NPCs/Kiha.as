@@ -139,11 +139,11 @@ package classes.Scenes.NPCs
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (findStatusEffect(StatusEffects.spiderfight) >= 0)
+			if (hasStatusEffect(StatusEffects.spiderfight))
 				game.kihaFollower.playerBeatsUpKihaPreSpiderFight();
-			else if (findStatusEffect(StatusEffects.DomFight) >= 0)
+			else if (hasStatusEffect(StatusEffects.DomFight))
 				game.kihaFollower.pcWinsDomFight();
-			else if (findStatusEffect(StatusEffects.Spar) >= 0)
+			else if (hasStatusEffect(StatusEffects.Spar))
 				game.kihaFollower.winSparWithKiha();
 			else game.kihaScene.kihaVictoryIntroduction();
 		}
@@ -151,11 +151,11 @@ package classes.Scenes.NPCs
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (findStatusEffect(StatusEffects.spiderfight) >= 0)
+			if (hasStatusEffect(StatusEffects.spiderfight))
 				game.kihaFollower.loseKihaPreSpiderFight();
-			else if (findStatusEffect(StatusEffects.DomFight) >= 0)
+			else if (hasStatusEffect(StatusEffects.DomFight))
 				game.kihaFollower.pcLosesDomFight();
-			else if (findStatusEffect(StatusEffects.Spar) >= 0)
+			else if (hasStatusEffect(StatusEffects.Spar))
 				game.kihaFollower.sparWithFriendlyKihaLose();
 			else if (pcCameWorms){
 				outputText("\n\nKiha seems visibly disturbed by your infection, enough that she turns to leave.");

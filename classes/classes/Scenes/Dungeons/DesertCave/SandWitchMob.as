@@ -5,9 +5,9 @@ package classes.Scenes.Dungeons.DesertCave
 	public class SandWitchMob extends Monster
 	{
 		public function sandWitchMobAI():void {
-			if (findStatusEffect(StatusEffects.Sandstorm) < 0) sandStormAttack();
+			if (!hasStatusEffect(StatusEffects.Sandstorm)) sandStormAttack();
 			else if (HPRatio() < .5) drankSomeMialk();
-			else if (findStatusEffect(StatusEffects.Sandstorm) >= 0 && rand(2) == 0 && player.findStatusEffect(StatusEffects.LustStones) < 0) sandstonesAreCool();
+			else if (hasStatusEffect(StatusEffects.Sandstorm) && rand(2) == 0 && !player.hasStatusEffect(StatusEffects.LustStones)) sandstonesAreCool();
 			else if (rand(3) == 0) headbuttABitch();
 			else gangrush();
 		}

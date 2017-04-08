@@ -65,7 +65,7 @@ package classes.Scenes.Areas.HighMountains
 				if (player.armorDef > 0) outputText(", but your defense has been reduced");
 				outputText("! ");
 				player.takeDamage(damage, true);
-				if (findStatusEffect(StatusEffects.TailWhip) >= 0) addStatusValue(StatusEffects.TailWhip, 1, 10);
+				if (hasStatusEffect(StatusEffects.TailWhip)) addStatusValue(StatusEffects.TailWhip, 1, 10);
 				else createStatusEffect(StatusEffects.TailWhip, 10, 0, 0, 0);
 			}
 			combatRoundOver();
@@ -141,7 +141,7 @@ package classes.Scenes.Areas.HighMountains
 		{
 			//The Siren's Song (2-part attack) (Rarely used or when she's desperate aka: Less than 10% hp)
 			//[part 1]
-			if (findStatusEffect(StatusEffects.SirenSong) < 0) {
+			if (!hasStatusEffect(StatusEffects.SirenSong)) {
 				outputText("Minerva begins to hum a pleasant tune.  It might be better to stand back to see what she's up to!");
 				createStatusEffect(StatusEffects.SirenSong, 0, 0, 0, 0);
 			}
@@ -162,7 +162,7 @@ package classes.Scenes.Areas.HighMountains
 
 		override protected function performCombatAction():void
 		{
-			if (findStatusEffect(StatusEffects.SirenSong) >= 0) sirensSong();
+			if (hasStatusEffect(StatusEffects.SirenSong)) sirensSong();
 			else if (rand(25) == 0 || (HP < 100 && rand(2) == 0)) sirensSong();
 			//Else choose randomly!
 			else {

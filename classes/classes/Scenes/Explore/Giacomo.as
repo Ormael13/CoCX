@@ -47,8 +47,8 @@ package classes.Scenes.Explore {
 		}
 		
 		public function timeChangeLarge():Boolean {
-			if (checkedSuccubi++ == 0 && model.time.hours == 4 && player.findStatusEffect(StatusEffects.SuccubiNight) >= 0 && (player.hasCock() || player.gender == 0)) { //Call secksins!
-				if (player.findStatusEffect(StatusEffects.RepeatSuccubi) >= 0) {
+			if (checkedSuccubi++ == 0 && model.time.hours == 4 && player.hasStatusEffect(StatusEffects.SuccubiNight) && (player.hasCock() || player.gender == 0)) { //Call secksins!
+				if (player.hasStatusEffect(StatusEffects.RepeatSuccubi)) {
 					if (getGame().vapula.vapulaSlave() && player.hasCock() && flags[kFLAGS.VAPULA_THREESOMES] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) //VapulaSurprise
 						getGame().vapula.vapulaAssistsCeruleanSuccubus();
 					else nightSuccubiRepeat(); //Normal night succubi shit
@@ -73,7 +73,7 @@ package classes.Scenes.Explore {
 			if (flags[kFLAGS.GIACOMO_MET] == 0) {
 				firstEncounter();
 			}
-			else if (player.findStatusEffect(StatusEffects.WormOffer) < 0 && player.findStatusEffect(StatusEffects.Infested) >= 0) { //If infested && no worm offer yet
+			else if (!player.hasStatusEffect(StatusEffects.WormOffer) && player.hasStatusEffect(StatusEffects.Infested) >= 0) { //If infested && no worm offer yet
 				outputText("Upon walking up to Giacomo's wagon, he turns to look at you and cocks an eyebrow in curiosity and mild amusement.\n\n");
 				outputText("\"<i>Been playing with creatures best left alone, I see</i>,\" he chuckles.  \"<i>Infestations of any kind are annoying, yet your plight is quite challenging given the magnitude of corrupt creatures around here.  It is not the first time I have seen one infested with THOSE worms.</i>\"\n\n");
 				outputText("You ask how he knows of your change and the merchant giggles heartily.\n\n");
@@ -95,7 +95,7 @@ package classes.Scenes.Explore {
 				outputText("You spy the merchant Giacomo in the distance.  He makes a beeline for you, setting up his shop in moments.  ");
 				outputText("Giacomo's grin is nothing short of creepy as he offers his wares to you. What are you interested in?");
 			}
-			var deworm:Function = (player.findStatusEffect(StatusEffects.WormOffer) >= 0 && player.findStatusEffect(StatusEffects.Infested) >= 0 ? wormRemovalOffer : null);
+			var deworm:Function = (player.hasStatusEffect(StatusEffects.WormOffer) && player.hasStatusEffect(StatusEffects.Infested) ? wormRemovalOffer : null);
 			simpleChoices("Potions", potionMenu, "Books", bookMenu, "Erotica", eroticaMenu, "Worm Cure", deworm, "Leave", camp.returnToCampUseOneHour);
 			statScreenRefresh();
 		}

@@ -20,7 +20,7 @@
 				//Get hit – 10+ lust
 				game.dynStats("lus", 5 + player.lib / 20);
 				outputText("Taken off-guard by the unexpected sexual display, you fail to move out of the way, and the wormy jism splatters you from the chest down.", false);
-				if (player.findStatusEffect(StatusEffects.Infested) >= 0 && player.totalCocks() > 0) {
+				if (player.hasStatusEffect(StatusEffects.Infested) && player.totalCocks() > 0) {
 					outputText("  The worms inside you begin moving and squirming. A few of your cum-soaked parasites crawl out from your shivering " + player.multiCockDescriptLight() + " as if attempting to meet the new arrivals.  You desperately want to brush them away, but the pleasure in your crotch is too good to fight, and you find yourself staying your hand as each and every one of the new worms makes it way into your " + player.multiCockDescriptLight() + ".", false);
 					if (player.balls > 0) outputText("  Your " + player.ballsDescriptLight() + " grow weightier as the worms settle into their new home, arousing you beyond measure.", false);
 					else outputText("  You can feel them shifting around inside you as they adjust to their new home, arousing you beyond measure.", false);
@@ -36,7 +36,7 @@
 			else {
 				outputText("You sidestep the gush of wormy fluid, letting it splatter against the rocks behind you.", false);
 				//(If infested +10 lust:  
-				if (player.findStatusEffect(StatusEffects.Infested) >= 0  && player.hasCock()) {
+				if (player.hasStatusEffect(StatusEffects.Infested)  && player.hasCock()) {
 					if (player.hasCock()) {
 						outputText("  Despite avoiding the torrent of infected seed, your own wormy ", false);
 						if (player.balls > 0) outputText(player.ballsDescriptLight(), false);
@@ -52,7 +52,7 @@
 					}
 				}
 				//if aroused by worms +5 lust:
-				else if (player.findStatusEffect(StatusEffects.WormsOn) >= 0 && player.findStatusEffect(StatusEffects.WormsHalf) < 0) {
+				else if (player.hasStatusEffect(StatusEffects.WormsOn) && !player.hasStatusEffect(StatusEffects.WormsHalf)) {
 					game.dynStats("lus", 5);
 					outputText("  The idea of being covered in the beast's infested seed arouses you slightly, but you shake your head violently and clear away the unwelcome thought.", false);
 				}

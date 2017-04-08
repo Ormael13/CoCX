@@ -56,7 +56,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 			checkedMarbleMilk = 0;
 			pregnancy.pregnancyAdvance();
 			trace("\nMarble time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
-			if (player.findStatusEffect(StatusEffects.CampMarble) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.CampMarble)) {
 				//Marble stuff pt I
 				if (flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] > 0) {
 					flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1]--;
@@ -98,9 +98,9 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 					}
 				}
 				//Marble find items check
-				else if (player.findStatusEffect(StatusEffects.MarbleHasItem) < 0 && marbleScene.marbleAtCamp()) {
+				else if (!player.hasStatusEffect(StatusEffects.MarbleHasItem) && marbleScene.marbleAtCamp()) {
 					// Off cooldown
-					if (player.findStatusEffect(StatusEffects.MarbleItemCooldown) < 0) {
+					if (!player.hasStatusEffect(StatusEffects.MarbleItemCooldown)) {
 						if (rand(10) == 0) {
 							spriteSelect(41);
 							outputText("\n<b>You find a note from Marble back at camp, letting you know that she has an item for you!</b>\n", false);
@@ -112,12 +112,12 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				}
 			}
 			//Decrement marble cooldown
-			if (player.findStatusEffect(StatusEffects.MarbleItemCooldown) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.MarbleItemCooldown)) {
 				player.addStatusValue(StatusEffects.MarbleItemCooldown,1,-1);
 				if (player.statusEffectv1(StatusEffects.MarbleItemCooldown) < 1) player.removeStatusEffect(StatusEffects.MarbleItemCooldown);
 			}
-			if (player.findStatusEffect(StatusEffects.Infested) < 0) flags[kFLAGS.MARBLE_GROSSED_OUT_BECAUSE_WORM_INFESTATION] = 0;
-			if (player.findStatusEffect(StatusEffects.MarblesMilk) >= 0 && player.findPerk(PerkLib.MarblesMilk) < 0) {
+			if (!player.hasStatusEffect(StatusEffects.Infested)) flags[kFLAGS.MARBLE_GROSSED_OUT_BECAUSE_WORM_INFESTATION] = 0;
+			if (player.hasStatusEffect(StatusEffects.MarblesMilk) && player.findPerk(PerkLib.MarblesMilk) < 0) {
 				//Decrement time remaining by 1		
 				player.addStatusValue(StatusEffects.MarblesMilk,1,-1);
 				//Remove the status and stat boosts when time runs out on the milk
@@ -135,7 +135,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 					//IF ADDICTED
 					if (player.statusEffectv3(StatusEffects.Marble) > 0) {
 						//If player is under bottled milk effects
-						if (player.findStatusEffect(StatusEffects.BottledMilk) >= 0) {
+						if (player.hasStatusEffect(StatusEffects.BottledMilk)) {
 							outputText("\nYour hands develop a tiny tremble as the effects of Marble's fresh milk wear off.  Thanks to the bottled milk you drank, you don't go into withdrawal just yet.\n", false);
 						}
 						else {
@@ -153,9 +153,9 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 			//Go into withdrawl if your addicted and don't have a reason not to be withdrawn.
 			if (player.statusEffectv3(StatusEffects.Marble) > 0 && player.findPerk(PerkLib.MarbleResistant) < 0 && player.findPerk(PerkLib.MarblesMilk) < 0 && player.statusEffectv2(StatusEffects.Marble) > 25) {
 				//If player does not have marble's milk or bottled milk, go into withdrawl
-				if (player.findStatusEffect(StatusEffects.MarblesMilk) < 0 && player.findStatusEffect(StatusEffects.BottledMilk) < 0) {
+				if (!player.hasStatusEffect(StatusEffects.MarblesMilk) && !player.hasStatusEffect(StatusEffects.BottledMilk)) {
 					//If player is not yet in withdrawl
-					if (player.findStatusEffect(StatusEffects.MarbleWithdrawl) < 0) {
+					if (!player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
 						outputText("\nYou are overwhelmed with a desire for more of Marble's Milk.\n", false);
 						needNext = true;
 						player.createStatusEffect(StatusEffects.MarbleWithdrawl,0,0,0,0);
@@ -168,7 +168,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				if (player.statusEffectv2(StatusEffects.Marble) > 60) player.changeStatusValue(StatusEffects.Marble, 2, 60);
 			}
 			//Withdrawl removal if you get unaddicted.
-			if (player.findStatusEffect(StatusEffects.MarbleWithdrawl) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
 				if (player.statusEffectv2(StatusEffects.Marble) <= 25) {
 					player.removeStatusEffect(StatusEffects.MarbleWithdrawl);
 					dynStats("tou", 5, "int", 5);
@@ -176,7 +176,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 					needNext = true;
 				}
 				//Remove withdrawl if you have bottled milk affect
-				else if (player.findStatusEffect(StatusEffects.BottledMilk) >= 0) {
+				else if (player.hasStatusEffect(StatusEffects.BottledMilk)) {
 					outputText("\nYou no longer feel the symptoms of withdrawal.\n", false);
 					needNext = true;
 					player.removeStatusEffect(StatusEffects.MarbleWithdrawl);
@@ -184,13 +184,13 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				}
 			}
 			//Bottled Milk Countdown
-			if (player.findStatusEffect(StatusEffects.BottledMilk) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.BottledMilk)) {
 				player.addStatusValue(StatusEffects.BottledMilk,1,-1);
 				if (player.statusEffectv1(StatusEffects.BottledMilk) <= 0) player.removeStatusEffect(StatusEffects.BottledMilk);
 			}
 			if (model.time.hours > 23) {
 				flags[kFLAGS.MARBLE_PLAYED_WITH_KIDS_TODAY] = 0;
-				if (player.findStatusEffect(StatusEffects.Marble) >= 0 && player.statusEffectv2(StatusEffects.Marble) > 0) marbleStatusChange(0,-1);
+				if (player.hasStatusEffect(StatusEffects.Marble) && player.statusEffectv2(StatusEffects.Marble) > 0) marbleStatusChange(0,-1);
 			}
 			return needNext;
 		}
@@ -297,12 +297,12 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 				//(From this point forward, the addiction scores and affection scores are no longer modified.  Additionally, the player can no longer be given the status effect of 'Marble's Milk' or go into withdrawal, they are instead permanently given the stat increases of 5 str, and 10 tou as part of a perk called 'Marble's Milk' and automatically drink Marble's milk every morning if a bad end is not triggered)
 				player.createPerk(PerkLib.MarblesMilk,0,0,0,0);
 				//Clear withdrawl
-				if (player.findStatusEffect(StatusEffects.MarbleWithdrawl) >= 0) {
+				if (player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
 					player.removeStatusEffect(StatusEffects.MarbleWithdrawl);
 					dynStats("tou", 5, "int", 5);
 				}
 				//Clear marble's milk status
-				if (player.findStatusEffect(StatusEffects.MarblesMilk) >= 0) {
+				if (player.hasStatusEffect(StatusEffects.MarblesMilk)) {
 					player.removeStatusEffect(StatusEffects.MarblesMilk);
 				}
 				//Boost stats if not under its affects
@@ -406,13 +406,13 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 					return true;
 				}
 				//Marble is at camp
-				if (player.findStatusEffect(StatusEffects.CampMarble) >= 0) {
+				if (player.hasStatusEffect(StatusEffects.CampMarble)) {
 					postAddictionCampMornings(false);
 				}
 				//Marble isn't at camp
 				else {
 					//Marble is still available at farm
-					if (player.findStatusEffect(StatusEffects.NoMoreMarble) < 0) {
+					if (!player.hasStatusEffect(StatusEffects.NoMoreMarble)) {
 						postAddictionFarmMornings();
 						kGAMECLASS.timeQ++; //We can get rid of this: threshhold--;
 					}
@@ -425,7 +425,7 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 		//End of Interface Implementation
 
 override public function marbleFollower():Boolean {
-	return player.findStatusEffect(StatusEffects.CampMarble) >= 0;
+	return player.hasStatusEffect(StatusEffects.CampMarble);
 }
 
 public function marbleAtCamp():Boolean
@@ -895,7 +895,7 @@ public function encounterMarbleExploring2():void {
 	}
 	else {
 		//[affection >=60, player has not had sex with Marble]
-		if (player.findStatusEffect(StatusEffects.FuckedMarble) < 0) {
+		if (!player.hasStatusEffect(StatusEffects.FuckedMarble)) {
 			outputText("\n\nAs the two of you finish chatting, Marble gives you an intense look.  \"<i>You know that I really like you right, sweetie?  I'd like it if I can do something special with you,</i>\" she hesitates for a moment, \"<i>Will you come to my bed?</i>\"\n\nDo you accept her invitation?", false);
 			dynStats("lus", 10);
 			doYesNo(AcceptMarblesSexualAdvances,turnDownMarbleSexFirstTime);
@@ -937,7 +937,7 @@ private function AcceptMarblesSexualAdvances():void {
 	spriteSelect(41);
 	//Standard sex (See sex section)
 	standardSex(true);
-	if (player.findStatusEffect(StatusEffects.FuckedMarble) < 0) player.createStatusEffect(StatusEffects.FuckedMarble,0,0,0,0);
+	if (!player.hasStatusEffect(StatusEffects.FuckedMarble)) player.createStatusEffect(StatusEffects.FuckedMarble,0,0,0,0);
 	//(increase affection by 10)
 	marbleStatusChange(10,0);
 	//(increase player inte)
@@ -1086,7 +1086,7 @@ public function addictedEncounterHappy(clearS:Boolean = true):void {
 	spriteSelect(41);
 	if (clearS) clearOutput();
 	//First visit post addiction:
-	if (player.findStatusEffect(StatusEffects.MalonVisitedPostAddiction) < 0) {
+	if (!player.hasStatusEffect(StatusEffects.MalonVisitedPostAddiction)) {
 		outputText("You find Marble coming out of the barn, holding one of her bottles of milk.  When she spots you, she hurries over and hands you the bottle.  \"<i>I want to find something out. Can you drink from that bottle?</i>\" she asks.  Do you drink it?", false);
 		//- player chooses yes/no
 		doYesNo(playerAgreesToDrinkMarbleMilkBottled,playerRefusesToDrinkBottledMilk);
@@ -1125,7 +1125,7 @@ private function playerAgreesToDrinkMarbleMilkBottled():void {
 	marbleStatusChange(0,5);
 	//(delay withdrawal effect)
 	//If the player is addicted, this item negates the withdrawal effects for a few hours (suggest 6), there will need to be a check here to make sure the withdrawal effect doesn't reactivate while the player is under the effect of 'Marble's Milk'.
-	if (player.findStatusEffect(StatusEffects.BottledMilk) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.BottledMilk)) {
 		player.addStatusValue(StatusEffects.BottledMilk,1,(3+rand(6)));
 	}
 	else player.createStatusEffect(StatusEffects.BottledMilk,8,0,0,0);
@@ -1143,7 +1143,7 @@ private function playerRefusesToDrinkBottledMilk():void {
 	dynStats("str", -1,"tou", -1);
 	//(delay withdrawal effect)
 	//If the player is addicted, this item negates the withdrawal effects for a few hours (suggest 6), there will need to be a check here to make sure the withdrawal effect doesn't reactivate while the player is under the effect of 'Marble's Milk'.
-	if (player.findStatusEffect(StatusEffects.BottledMilk) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.BottledMilk)) {
 		player.addStatusValue(StatusEffects.BottledMilk,1,(1+rand(6)));
 	}
 	else player.createStatusEffect(StatusEffects.BottledMilk,3,0,0,0);
@@ -1182,7 +1182,7 @@ private function playerDeclinesToDrinkMarbleMilk():void {
 	//(decrease player str and tou by 1.5)
 	dynStats("str", -1,"tou", -1);
 	//(delay withdrawal for a few hours)
-	if (player.findStatusEffect(StatusEffects.BottledMilk) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.BottledMilk)) {
 		player.addStatusValue(StatusEffects.BottledMilk,1,(1+rand(6)));
 	}
 	else player.createStatusEffect(StatusEffects.BottledMilk,3,0,0,0);
@@ -1199,7 +1199,7 @@ private function marbleChoreHelpChooseMilk():void {
 	//(decrease affection by 5)
 	marbleStatusChange(-5,0);
 	//(delay withdrawal for a few hours)
-	if (player.findStatusEffect(StatusEffects.BottledMilk) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.BottledMilk)) {
 		player.addStatusValue(StatusEffects.BottledMilk,1,(1+rand(6)));
 	}
 	else player.createStatusEffect(StatusEffects.BottledMilk,3,0,0,0);
@@ -1215,7 +1215,7 @@ private function marbleChoreHelpChooseMarble():void {
 	//(increase affection by 5)
 	marbleStatusChange(5,0);
 	//(delay withdrawal for a few hours)
-	if (player.findStatusEffect(StatusEffects.BottledMilk) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.BottledMilk)) {
 		player.addStatusValue(StatusEffects.BottledMilk,1,(1+rand(6)));
 	}
 	else player.createStatusEffect(StatusEffects.BottledMilk,3,0,0,0);
@@ -1233,7 +1233,7 @@ private function marbleChoreRefusal():void {
 	//(decrease addiction by 5)
 	marbleStatusChange(-5,-5);
 	//(delay withdrawal for a few hours)
-	if (player.findStatusEffect(StatusEffects.BottledMilk) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.BottledMilk)) {
 		player.addStatusValue(StatusEffects.BottledMilk,1,(1+rand(6)));
 	}
 	else player.createStatusEffect(StatusEffects.BottledMilk,3,0,0,0);
@@ -1261,7 +1261,7 @@ public function encounterMarbleAshamedAddiction(clearS:Boolean = true):void {
 	if (clearS) clearOutput();
 	spriteSelect(41);
 	//First visit post addiction:
-	if (player.findStatusEffect(StatusEffects.MalonVisitedPostAddiction) < 0) {
+	if (!player.hasStatusEffect(StatusEffects.MalonVisitedPostAddiction)) {
 		outputText("You find Marble walking out of the barn, a tank in her arms.  You decide to follow her as she goes behind the barn.  When you round the corner, you see her pouring the contents of the tank out onto the ground.  You ask her what she's doing, \"<i>I'm getting rid of this corrupted milk,</i>\" she says in disgust.  As you approach her, you recognize the smell of her milk and lick your lips unconsciously.  \"<i>I make so much of it each day, I'm a monster,</i>\" she says coldly, \"<i>and I made you need it.</i>\"  As the last of the milk splashes onto the ground, Marble looks towards you. Surprisingly, her face seems hard and cold.  Do you blame her for what happened to you, or do you comfort her?", false);
 		//- player chooses blame her or comfort her
 		simpleChoices("Comfort", AshamedAddictionComfort, "Blame", AshamedAddictionBlame, "", null, "", null, "", null);
@@ -1293,7 +1293,7 @@ private function AshamedAddictionBlame():void {
 	//(decrease player str and tou by 1.5)
 	dynStats("str", -1,"tou", -1);
 	//(delay withdrawal effect)
-	if (player.findStatusEffect(StatusEffects.BottledMilk) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.BottledMilk)) {
 		player.addStatusValue(StatusEffects.BottledMilk,1,(1+rand(6)));
 	}
 	else player.createStatusEffect(StatusEffects.BottledMilk,3,0,0,0);
@@ -1316,14 +1316,14 @@ private function AshamedAddictionComfort():void {
 }
 
 private function withdrawalDelay():void {
-	if (player.findStatusEffect(StatusEffects.BottledMilk) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.BottledMilk)) {
 		player.addStatusValue(StatusEffects.BottledMilk,1,(1+rand(6)));
 	}
 	else {
 		player.createStatusEffect(StatusEffects.BottledMilk,3,0,0,0);
 	}
 	//Clear withdrawal immediately
-	if (player.findStatusEffect(StatusEffects.MarbleWithdrawl) >= 0)
+	if (player.hasStatusEffect(StatusEffects.MarbleWithdrawl))
 	{
 		player.removeStatusEffect(StatusEffects.MarbleWithdrawl);
 		dynStats("tou", 5, "int", 5);
@@ -1341,7 +1341,7 @@ private function resistAddiction():void {
 	//(decrease player str and tou by 1.5)
 	dynStats("str", -1,"tou", -1);
 	//(delay withdrawal for a few hours)
-	if (player.findStatusEffect(StatusEffects.BottledMilk) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.BottledMilk)) {
 		player.addStatusValue(StatusEffects.BottledMilk,1,(1+rand(6)));
 	}
 	else player.createStatusEffect(StatusEffects.BottledMilk,3,0,0,0);
@@ -1381,7 +1381,7 @@ private function dumpMarblesMilk():void {
 	//(reduce str and tou by 1.5)
 	dynStats("str", -1,"tou", -1);
 	//(delay withdrawal for a few hours)
-	if (player.findStatusEffect(StatusEffects.BottledMilk) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.BottledMilk)) {
 		player.addStatusValue(StatusEffects.BottledMilk,1,(1+rand(6)));
 	}
 	else player.createStatusEffect(StatusEffects.BottledMilk,3,0,0,0);
@@ -1398,7 +1398,7 @@ private function refuseMarblesMilkAddiction():void {
 	//(increase affection by 5)
 	marbleStatusChange(5,0);
 	//(delay withdrawal for a few hours)
-	if (player.findStatusEffect(StatusEffects.BottledMilk) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.BottledMilk)) {
 		player.addStatusValue(StatusEffects.BottledMilk,1,(1+rand(6)));
 	}
 	else player.createStatusEffect(StatusEffects.BottledMilk,3,0,0,0);
@@ -1412,7 +1412,7 @@ private function ashamedAddictionBegForIt():void {
 	//(player gets a bottle of Marble's Milk)
 	inventory.takeItem(consumables.M__MILK, camp.returnToCampUseOneHour);
 	//(delay withdrawal for a few hours)
-	if (player.findStatusEffect(StatusEffects.BottledMilk) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.BottledMilk)) {
 		player.addStatusValue(StatusEffects.BottledMilk,1,(1+rand(6)));
 	}
 	else player.createStatusEffect(StatusEffects.BottledMilk,3,0,0,0);
@@ -1569,7 +1569,7 @@ private function extendedMurbelFarmTalkz():void {
 			outputText("  After my falling out with Ansgar, I noticed that I really missed nursing him more than anything else.</i>\"  She stops for a moment, shaking her head.  \"<i>That's not quite right.  It's more that I needed to keep nursing; it just felt like everything was wrong with me if I wasn't nursing something.</i>\"");
 			outputText("\n\n\"<i>It was so bad that I had to start nursing anything I could find, even if I had to force it.  The most notable of these was probably this one adorable imp, barely half my height.  I thought that my milk could make something so cute into anything I wanted.  I caught him and made him nurse me all night.  He was just the most wonderful thing once he'd gotten his mind off his monster cock.</i>\" She shakes her head.  \"<i>But an imp has demon taint, so you know how this is going to end, don't you?  The next day, my 'special' friend had gone out to get his other friends and decided that I'd make a wonderful sex toy.</i>\"  She smiles.  \"<i>That was one hell of a day... though maybe not in the way they expected.  I gave them such a bad beating that I doubt that they'll ever try to gang-rape someone outside the cover of night again.  Speaking of which sweetie, you'd best not show any of those horrible creatures where you live, ok?</i>\"");
 			//[if PC has been gang-banged by imps]
-			if (player.findStatusEffect(StatusEffects.ImpGangBang) >= 0) outputText("\n\nYou give a small chuckle at the belated advice; it would have been useful earlier.");
+			if (player.hasStatusEffect(StatusEffects.ImpGangBang)) outputText("\n\nYou give a small chuckle at the belated advice; it would have been useful earlier.");
 			else outputText("\n\nYou nod and thank Marble for the advice; but as long as you have to stay by and defend this side of the portal from being occupied, you're pretty sure it's a moot point.");
 			outputText("\n\nThe two of you decide to end things at that for now; Marble seems a bit restless after discussing nursing so much and often caresses her sensitive breasts when she thinks you aren't looking.  She's probably eager to get back in the milker.");
 			break;
@@ -1584,11 +1584,11 @@ private function extendedMurbelFarmTalkz():void {
 			outputText("\n\nMarble looks up to grin at you, and finally notices the dumbstruck look on your face.  \"<i>Uh, sweetie, what is it?</i>\"  You make absolutely sure that you heard her right when she said she was 11 years old last year.  She nods, and asks you why you find that so odd.  You can only shake your head and inform her that humans take about 18 to 25 years to fully mature.  She laughs at this idea and says that she's been fully grown since she was 6; all the members of her race are that way - those she's met, anyway.  Well, there isn't much else you can say to that.");
 			//-page break-
 			outputText("\n\n\"<i>Well, that's basically the story of my life.  I guess I've heard everything about you now");
-			if (player.findStatusEffect(StatusEffects.CampMarble) < 0) outputText(", except that mission of yours that's so important to you");
+			if (!player.hasStatusEffect(StatusEffects.CampMarble)) outputText(", except that mission of yours that's so important to you");
 			outputText(".</i>\"");
 			outputText("\n\nYou decide to ask her if she's changed since she left home.  \"<i>Well, I guess I'm a lot more level-headed than I was before, and I'm able to control myself much better when someone refuses to drink my milk.  It still makes me really mad inside, but I keep a lid on it.</i>\"  She stops for a moment.  \"<i>I'm also fairly good at hiding my feelings.");
 			//[if Marble is not in camp] 
-			if (player.findStatusEffect(StatusEffects.CampMarble) < 0) {
+			if (!player.hasStatusEffect(StatusEffects.CampMarble)) {
 				outputText("  I may not show it, but I'm actually really lonely on the inside.");
 				//[if addiction quest is active, and Marble is ashamed of her milk]
 				if (player.statusEffectv3(StatusEffects.Marble) == 2) outputText("  I really just wanted someone who loved me and loved nursing from my breast.  I had no idea what that would do to you.");
@@ -1747,7 +1747,7 @@ public function marbleSex2Continued(genders:int):void {
 		player.cuntChange(8,true);
 	}
 	//(first time sex)
-	if (player.findStatusEffect(StatusEffects.FuckedMarble) < 0) {
+	if (!player.hasStatusEffect(StatusEffects.FuckedMarble)) {
 		outputText("After a few minutes pass, Marble breaks the silence. \"<i>Sweetie, that was wonderful. You're really special to me, yah know?  Please remember that.</i>\"  You know that your relationship is special too; you won't forget Marble anytime soon.", false);
 		player.createStatusEffect(StatusEffects.FuckedMarble,0,0,0,0);
 	}
@@ -1915,7 +1915,7 @@ private function marbleGenderlessNoFuck():void {
 }
 
 public function marbleStatusChange(affection:Number, addiction:Number, isAddicted:Number = -1):void {
-	if (player.findStatusEffect(StatusEffects.Marble) < 0) player.createStatusEffect(StatusEffects.Marble,0,0,0,40);
+	if (!player.hasStatusEffect(StatusEffects.Marble)) player.createStatusEffect(StatusEffects.Marble,0,0,0,40);
 	//Values only change if not brought to conclusion
 	if (player.findPerk(PerkLib.MarblesMilk) < 0 && player.findPerk(PerkLib.MarbleResistant) < 0) {
 		player.addStatusValue(StatusEffects.Marble,1,affection);
@@ -1933,7 +1933,7 @@ private function applyMarblesMilk():void {
 	var tou:Number = 10;
 	//Marble's milk - effect
 	//Increases player toughness by 10 and strength by 5 for several hours (suggest 12).
-	if (player.findStatusEffect(StatusEffects.MarblesMilk) < 0) {
+	if (!player.hasStatusEffect(StatusEffects.MarblesMilk)) {
 		player.createStatusEffect(StatusEffects.MarblesMilk,12,0,0,0);
 		if (player.str + 5 > 100) {
 			str = 100 - player.str;
@@ -1953,7 +1953,7 @@ private function applyMarblesMilk():void {
 	//Prevent duration from going to high.
 	if (player.statusEffectv1(StatusEffects.MarblesMilk) > 36) player.changeStatusValue(StatusEffects.MarblesMilk,1,36);
 	//Remove withdrawl if applicable
-	if (player.findStatusEffect(StatusEffects.MarbleWithdrawl) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
 		player.removeStatusEffect(StatusEffects.MarbleWithdrawl);
 		dynStats("tou", 5, "int", 5);
 	}
@@ -2012,7 +2012,7 @@ public function interactWithMarbleAtCamp():void {
 	corruption is >=50, or if Marble's corruption is >=60.*/
 	if (player.itemCount(consumables.M__MILK) < 5) milkEvent = gotMilk;
 	//Determine if marble has an item for the player
-	if (player.findStatusEffect(StatusEffects.MarbleHasItem) >= 0) gatherEvent = marbleGathered;
+	if (player.hasStatusEffect(StatusEffects.MarbleHasItem)) gatherEvent = marbleGathered;
 	if (flags[kFLAGS.MARBLE_KIDS] > 0) playtime = marbleKidsPlaytime;
 
 	if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 3 && flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] == 0) {
@@ -2217,7 +2217,7 @@ private function definitelyBreakUpWithWithMarble():void {
 //Talk to Marble, she will give a quick talk about what the player should consider doing next, comment on how things are going in general, and she will eventually talk about the quest to purify her here once that has been implemented.  The topic of conversation changes if you are too corrupt.
 private function talkWithMarbleAtCamp():void {
 	spriteSelect(41);
-	if (player.findStatusEffect(StatusEffects.MarbleSpecials) < 0) {
+	if (!player.hasStatusEffect(StatusEffects.MarbleSpecials)) {
 		player.createStatusEffect(StatusEffects.MarbleSpecials,0,0,0,0);
 	}
 	doNext(playerMenu);
@@ -2484,7 +2484,7 @@ New function: marbleNips() – returns "nipples" or "quad-nipples" based on what
 */
 private function marbleCampSexNew():void {
 	spriteSelect(41);
-	if (player.findStatusEffect(StatusEffects.Infested) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.Infested)) {
 		outputText("  You call Marble over and ask her if she can give you some release.  She smiles at you and gently grips your " + player.cockDescript(0) + " in one of her hands before recoiling in horror.  \"<i>Uh, why don't you take care of that problem of yours in your cock first, sweetie?  Then I'll help you get release.</i>\"  It looks like Marble isn't willing to help you get release while you have worms infecting your cock.");
 		return;
 	}
@@ -2756,7 +2756,7 @@ private function marbleCampSexNew():void {
 	dynStats("sen", -3);
 }
 private function marbleNips():String {
-	if (player.findStatusEffect(StatusEffects.MarbleSpecials) < 0) {
+	if (!player.hasStatusEffect(StatusEffects.MarbleSpecials)) {
 		player.createStatusEffect(StatusEffects.MarbleSpecials,0,1,0,0);
 	}
 	//Set nipples to 1 if uninitialized
@@ -3201,7 +3201,7 @@ public function marbleNightSleepFlavor():Boolean {
 	//Marble 60+ & player 20+ - service
 	//boring
 	//PC has worms kills everything.
-	if (player.findStatusEffect(StatusEffects.Infested) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.Infested)) {
 		if (flags[kFLAGS.MARBLE_GROSSED_OUT_BECAUSE_WORM_INFESTATION] != 1) {
 			outputText("As you go to lie down for the night, you find that Marble has gotten there before you.  You lie down next to her, but you can't help wishing that the two of you could have sex.  Suddenly, you feel Marble's hand grab ahold of your " + player.cockDescript(0) + ".  She gives a bit of a squeal as one of the worms starts to move around inside the shaft.  She pulls open the blankets and looks closely at your dick for a few moments before picking up her bedroll and moving to a different part of the camp saying, \"<i>" + player.short + ", you get rid of those or I'm not going to sleep next to you or with you.</i>\"\n\n", false);
 			flags[kFLAGS.MARBLE_GROSSED_OUT_BECAUSE_WORM_INFESTATION] = 1;
@@ -3639,7 +3639,7 @@ private function marbleNomNoms():void {
 		//sucking her cock scene
 		outputText("Marble lifts up her skirt and gives you a good look at her very erect " + marbleCock() + ".  You position yourself overtop of her and take a deep breath, taking in her smell.  ", false);
 		//is the PC overwhelmed by her animalistic smell?
-		if (player.findStatusEffect(StatusEffects.SlimeCraving) >= 0 || player.lib + player.cor - player.inte > 35) {
+		if (player.hasStatusEffect(StatusEffects.SlimeCraving) || player.lib + player.cor - player.inte > 35) {
 			outputText("For some reason, your head starts to feel a bit fuzzy from the animalistic smell, and for a moment you forget what you were doing.  It comes back to you quickly, as there is a big juicy " + marbleCock() + " right there in front of you.  It gives off such a nice smell; it probably tastes really good, too.  You open your mouth and bring yourself closer, taking it inside.\n\n", false);
 			outputText("You hear a soft sigh and moan above you, \"<i>Oh sweetie,</i>\" it says in pleasure as you feel something get placed on the back of your head, pushing you forward.  The heady aroma is so strong that you can do nothing more than run your tongue over every part of this wonderful " + marbleCock() + ", letting the hand guide your movements while you hear happy noises coming from above you.  Those noises and words sound happy, so they make you feel happy too.\n\n", false);
 			outputText("Finally, you hear a gasp coming from the hand's owner, as a salty fluid starts to fill your mouth.  You swallow it instinctively and relish its taste.  About a minute later, you're finally able to collect your thoughts and realize that you'd lost control for a moment there.  From the satisfied look on Marble's face, it doesn't look like she's aware.  ", false);

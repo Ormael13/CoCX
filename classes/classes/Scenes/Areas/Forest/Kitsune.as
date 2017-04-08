@@ -161,10 +161,10 @@ package classes.Scenes.Areas.Forest
 		override protected function performCombatAction():void
 		{
 			var moves:Array = [foxFireAttack, foxFireAttack, kitSuneTeases, kitSuneTeases];
-			if (player.findStatusEffect(StatusEffects.Sealed) < 0) moves.push(kitsuneSealAttack);
-			if (player.findStatusEffect(StatusEffects.Sealed) < 0) moves.push(kitsuneSealAttack);
-			if (findStatusEffect(StatusEffects.PCTailTangle) < 0) moves.push(kitsuneEntwine);
-			if (findStatusEffect(StatusEffects.Illusion) < 0) moves.push(illusionKitsuneAttack);
+			if (!player.hasStatusEffect(StatusEffects.Sealed)) moves.push(kitsuneSealAttack);
+			if (!player.hasStatusEffect(StatusEffects.Sealed)) moves.push(kitsuneSealAttack);
+			if (!hasStatusEffect(StatusEffects.PCTailTangle)) moves.push(kitsuneEntwine);
+			if (!hasStatusEffect(StatusEffects.Illusion)) moves.push(illusionKitsuneAttack);
 			moves[rand(moves.length)]();
 		}
 

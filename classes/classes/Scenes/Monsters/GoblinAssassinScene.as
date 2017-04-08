@@ -195,7 +195,7 @@ package classes.Scenes.Monsters
 			outputText("The assassin falls to her feet, desperately trying to regain her composure but ultimately caving in to the exhaustion of defeat. The leather belt that was once wrapped around her pillowy breasts now hangs unfastened around her waist, the syringes once adorning it now littered around her. A shattered needle by her side emits a sweet-smelling vapor that soon reaches her nose, causing the girl to blush furiously as lust begins to overcome her senses.")
 				dynStats("lus", 20);
 			//If cant rape or breastfeed
-			if (player.lust < 30 && player.findStatusEffect(StatusEffects.Feeder) < 0) {
+			if (player.lust < 30 && !player.hasStatusEffect(StatusEffects.Feeder)) {
 				combat.cleanupAfterCombat();
 				return;
 			}
@@ -233,7 +233,7 @@ package classes.Scenes.Monsters
 					spiderCondom = goblinCondomed;
 			}
 			//Breastfeed adds an option
-			if (player.findStatusEffect(StatusEffects.Feeder) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.Feeder)) {
 				feeder = giveGoblinAMilkMustache;
 			}
 			if (player.lust >= 33 && player.gender > 0 && (fitsFuck != null || cuntFuck != null || tooBig != null ||

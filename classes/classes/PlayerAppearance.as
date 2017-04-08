@@ -799,10 +799,8 @@ package classes
 				outputText("  " + Num2Text(player.legCount)+ " digitigrade legs form below your [hips], ending in cloven hooves.");
 			if (player.findPerk(PerkLib.Incorporeality) >= 0)
 				outputText("  Of course, your " + player.legs() + " are partially transparent due to their ghostly nature."); // isn't goo transparent anyway?
-			
 			outputText("\n");
-			if (player.findStatusEffect(StatusEffects.GooStuffed) >= 0)
-			
+			if (player.hasStatusEffect(StatusEffects.GooStuffed))
 			{
 				outputText("\n<b>Your gravid-looking belly is absolutely stuffed full of goo. There's no way you can get pregnant like this, but at the same time, you look like some fat-bellied breeder.</b>\n");
 			}
@@ -1087,7 +1085,7 @@ package classes
 				}
 
 				//Worm flavor
-				if (player.findStatusEffect(StatusEffects.Infested) >= 0)
+				if (player.hasStatusEffect(StatusEffects.Infested))
 					outputText("Every now and again slimy worms coated in spunk slip partway out of your " + player.multiCockDescriptLight() + ", tasting the air like tongues of snakes.\n");
 			}
 
@@ -1095,7 +1093,7 @@ package classes
 			//Of Balls and Sacks!
 			if (player.balls > 0) 
 			{
-				if (player.findStatusEffect(StatusEffects.Uniball) >= 0)
+				if (player.hasStatusEffect(StatusEffects.Uniball))
 				{
 					if (player.hasGooSkin()) 
 						outputText("Your [sack] clings tightly to your groin, dripping and holding " + player.ballsDescript() + " snugly against you.");

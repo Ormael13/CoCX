@@ -20,6 +20,15 @@ package classes.Scenes.Areas
 		public function Plains()
 		{
 		}
+		public function isDiscovered():Boolean {
+			return flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0;
+		}
+		public function discover():void {
+			flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
+			outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>");
+			doNext(camp.returnToCampUseOneHour);
+		}
+
 		public function explorePlains():void
 		{
 			clearOutput();

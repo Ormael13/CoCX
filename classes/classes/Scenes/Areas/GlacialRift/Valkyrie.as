@@ -28,7 +28,7 @@ package classes.Scenes.Areas.GlacialRift
 				combatRoundOver();
 				return;
 			}
-			else if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) > 0) {
+			else if (hasStatusEffect(StatusEffects.Blind) && rand(3) > 0) {
 					outputText("and step away as you watch the valkyrie's blind attacks strike only air. ");
 					combatRoundOver();
 					return;
@@ -71,7 +71,7 @@ package classes.Scenes.Areas.GlacialRift
 				combatRoundOver();
 				return;
 			}
-			else if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) > 0) {
+			else if (hasStatusEffect(StatusEffects.Blind) && rand(3) > 0) {
 					outputText("and step away as you watch the valkyrie's blind bash strikes only air. ");
 					combatRoundOver();
 					return;

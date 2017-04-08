@@ -179,8 +179,8 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 				anemoneScene.goblinNightAnemone();
 				needNext = true;
 			}
-			else if (temp > rand(100) && player.findStatusEffect(StatusEffects.DefenseCanopy) < 0) {
-				if (player.gender > 0 && (player.findStatusEffect(StatusEffects.JojoNightWatch) < 0 || player.findStatusEffect(StatusEffects.PureCampJojo) < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !kihaFollower.followerKiha()) && !(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "")) && (flags[kFLAGS.IN_INGNAM] == 0 && flags[kFLAGS.IN_PRISON] == 0)) {
+			else if (temp > rand(100) && !player.hasStatusEffect(StatusEffects.DefenseCanopy)) {
+				if (player.gender > 0 && !(player.hasStatusEffect(StatusEffects.JojoNightWatch) && player.hasStatusEffect(StatusEffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !kihaFollower.followerKiha()) && !(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "")) && (flags[kFLAGS.IN_INGNAM] == 0 && flags[kFLAGS.IN_PRISON] == 0)) {
 					impScene.impGangabangaEXPLOSIONS();
 					doNext(playerMenu);
 					return true;
@@ -193,7 +193,7 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 					outputText("\n<b>Helia informs you over a mug of beer that she whupped some major imp asshole last night.  She wiggles her tail for emphasis.</b>\n");
 					needNext = true;
 				}
-				else if (player.gender > 0 && player.findStatusEffect(StatusEffects.JojoNightWatch) >= 0 && player.findStatusEffect(StatusEffects.PureCampJojo) >= 0) {
+				else if (player.gender > 0 && player.hasStatusEffect(StatusEffects.JojoNightWatch) && player.hasStatusEffect(StatusEffects.PureCampJojo)) {
 					outputText("\n<b>Jojo informs you that he dispatched a crowd of imps as they tried to sneak into camp in the night.</b>\n");
 					needNext = true;
 				}
@@ -211,8 +211,8 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 				}
 			}
 			//wormgasms
-			else if (flags[kFLAGS.EVER_INFESTED] == 1 && rand(100) <= 4 && player.hasCock() && player.findStatusEffect(StatusEffects.Infested) < 0) {
-				if (player.hasCock() && (player.findStatusEffect(StatusEffects.JojoNightWatch) < 0 || player.findStatusEffect(StatusEffects.PureCampJojo) < 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && flags[kFLAGS.SLEEP_WITH] == "")) {
+			else if (flags[kFLAGS.EVER_INFESTED] == 1 && rand(100) <= 4 && player.hasCock() && !player.hasStatusEffect(StatusEffects.Infested)) {
+				if (player.hasCock() && !(player.hasStatusEffect(StatusEffects.JojoNightWatch) && player.hasStatusEffect(StatusEffects.PureCampJojo) >= 0) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && flags[kFLAGS.SLEEP_WITH] == "")) {
 					kGAMECLASS.mountain.wormsScene.nightTimeInfestation();
 					return true;
 				}
@@ -224,7 +224,7 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 					outputText("\n<b>Helia informs you over a mug of beer that she stomped a horde of gross worms into paste.  She shudders after at the memory.</b>\n");
 					needNext = true;
 				}
-				else if (player.gender > 0 && player.findStatusEffect(StatusEffects.JojoNightWatch) >= 0 && player.findStatusEffect(StatusEffects.PureCampJojo) >= 0) {
+				else if (player.gender > 0 && player.hasStatusEffect(StatusEffects.JojoNightWatch) && player.hasStatusEffect(StatusEffects.PureCampJojo)) {
 					outputText("\n<b>Jojo informs you that he dispatched a horde of tiny, white worms as they tried to sneak into camp in the night.</b>\n");
 					needNext = true;
 				}
@@ -331,9 +331,9 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 			}
 		}
 		//Egg loot!
-		if (player.findStatusEffect(StatusEffects.LootEgg) >= 0) {
+		if (player.hasStatusEffect(StatusEffects.LootEgg)) {
 			trace("EGG LOOT HAS");
-			if (player.findStatusEffect(StatusEffects.Eggs) < 0) { //Handling of errors.
+			if (!player.hasStatusEffect(StatusEffects.Eggs)) { //Handling of errors.
 				outputText("Oops, looks like something went wrong with the coding regarding gathering eggs after pregnancy. Hopefully this should never happen again. If you encounter this again, please let Kitteh6660 know so he can fix it.");
 				player.removeStatusEffect(StatusEffects.LootEgg);
 				doNext(playerMenu);
@@ -344,7 +344,7 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 					[
 						[consumables.BROWNEG,consumables.PURPLEG,consumables.BLUEEGG,consumables.PINKEGG,consumables.WHITEEG,consumables.BLACKEG],
 						[consumables.L_BRNEG,consumables.L_PRPEG,consumables.L_BLUEG,consumables.L_PNKEG,consumables.L_WHTEG,consumables.L_BLKEG]]
-							[player.statusEffect(player.findStatusEffect(StatusEffects.Eggs)).value2 || 0][player.statusEffect(player.findStatusEffect(StatusEffects.Eggs)).value1 || 0] ||
+							[player.statusEffectByType(StatusEffects.Eggs).value2 || 0][player.statusEffectByType(StatusEffects.Eggs).value1 || 0] ||
 							consumables.BROWNEG;
 			player.removeStatusEffect(StatusEffects.LootEgg);
 			player.removeStatusEffect(StatusEffects.Eggs);
@@ -358,13 +358,13 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 	
 	// Hanging the Uma massage update here, I think it should work...
 	telAdre.umasShop.updateBonusDuration(time);
-	if (player.findStatusEffect(StatusEffects.UmasMassage) >= 0)
+	if (player.hasStatusEffect(StatusEffects.UmasMassage))
 	{
 		trace("Uma's massage bonus time remaining: " + player.statusEffectv3(StatusEffects.UmasMassage));
 	}
 	
 	highMountains.izumiScenes.updateSmokeDuration(time);
-	if (player.findStatusEffect(StatusEffects.IzumisPipeSmoke) >= 0)
+	if (player.hasStatusEffect(StatusEffects.IzumisPipeSmoke))
 	{
 		trace("Izumis pipe smoke time remaining: " + player.statusEffectv1(StatusEffects.IzumisPipeSmoke));
 	}
