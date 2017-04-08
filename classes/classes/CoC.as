@@ -444,8 +444,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8c";
-			version = ver + " (<b>Race rebalancing (part 2), Archery Rework (part 4), Kindra (part 1), SimCamp (part 2), Yeti Cum (yeti TF), Soul Exalt cultivation stage (Redemption Edition)</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8c2";
+			version = ver + " (<b>Bugfixs and 4 new perks.</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
