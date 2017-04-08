@@ -22,7 +22,14 @@ package classes.Scenes.Areas
 		public function HighMountains()
 		{
 		}
-		
+		public function isDiscovered():Boolean {
+			return flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0;
+		}
+		public function discover():void {
+			outputText("While exploring the mountain, you come across a relatively safe way to get at its higher reaches.  You judge that with this route you'll be able to get about two thirds of the way up the mountain.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>High Mountain exploration location unlocked!</b>)", true);
+			flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
+			doNext(camp.returnToCampUseOneHour);
+		}
 		//Explore High Mountain
 		public function exploreHighMountain():void
 		{

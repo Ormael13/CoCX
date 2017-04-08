@@ -9,7 +9,7 @@ package classes.Scenes.Areas.Swamp
 		//==============================
 		private function spiderStandardAttack():void {
 			//SPIDER HORDE ATTACK - Miss (guaranteed if turns 1-3 and PC lost to Kiha)
-			if (findStatusEffect(StatusEffects.MissFirstRound) >= 0 || player.getEvasionRoll()) {
+			if (hasStatusEffect(StatusEffects.MissFirstRound) || player.getEvasionRoll()) {
 				removeStatusEffect(StatusEffects.MissFirstRound);
 				outputText("A number of spiders rush at you, trying to claw and bite you.  You manage to beat them all back, though, with some literal covering fire from Kiha.", false);
 			}
@@ -48,7 +48,7 @@ package classes.Scenes.Areas.Swamp
 		//SPIDER HORDE WEB - Hit
 		private function spoidahHordeWebLaunchahs():void {
 			//SPIDER HORDE WEB - Miss (guaranteed if turns 1-3 and PC lost to Kiha)
-			if (findStatusEffect(StatusEffects.MissFirstRound) >= 0 || player.getEvasionRoll()) {
+			if (hasStatusEffect(StatusEffects.MissFirstRound) || player.getEvasionRoll()) {
 				outputText("One of the driders launches a huge glob of webbing right at you!  Luckily, Kiha manages to burn it out of the air with a well-timed gout of flame!", false);
 				combatRoundOver();
 			}
@@ -73,7 +73,7 @@ package classes.Scenes.Areas.Swamp
 		override protected function performCombatAction():void
 		{
 			game.spriteSelect(72);
-			if (rand(2) == 0 || player.findStatusEffect(StatusEffects.UBERWEB) >= 0) spiderStandardAttack();
+			if (rand(2) == 0 || player.hasStatusEffect(StatusEffects.UBERWEB)) spiderStandardAttack();
 			else spoidahHordeWebLaunchahs();
 		}
 

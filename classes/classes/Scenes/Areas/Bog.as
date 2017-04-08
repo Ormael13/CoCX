@@ -6,10 +6,6 @@ package classes.Scenes.Areas
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Items.ConsumableLib;
-	import classes.Items.Consumables.BeeHoney;
-	import classes.Items.Consumables.PhoukaWhiskey;
-	import classes.Items.Consumables.RizzaRoot;
 	import classes.Scenes.Areas.Bog.*;
 
 	use namespace kGAMECLASS;
@@ -22,6 +18,14 @@ package classes.Scenes.Areas
 		public var lizanScene:LizanRogueScene = new LizanRogueScene();
 		public function Bog()
 		{
+		}
+		public function isDiscovered():Boolean {
+			return flags[kFLAGS.BOG_EXPLORED] > 0;
+		}
+		public function discover():void {
+			outputText("While exploring the swamps, you find yourself into a particularly dark, humid area of this already fetid biome.  You judge that you could find your way back here pretty easily in the future, if you wanted to.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>Bog exploration location unlocked!</b>)", true);
+			flags[kFLAGS.BOG_EXPLORED]++;
+			doNext(camp.returnToCampUseOneHour);
 		}
 		public function exploreBog():void
 		{

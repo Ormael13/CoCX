@@ -12,7 +12,7 @@ package classes.Scenes.Quests.UrtaQuest
 
 		override protected function performCombatAction():void
 		{
-			if (findStatusEffect(StatusEffects.MilkyUrta) < 0 && rand(3) == 0) cowCubiMilkSprayAttack();
+			if (!hasStatusEffect(StatusEffects.MilkyUrta) && rand(3) == 0) cowCubiMilkSprayAttack();
 			else if (HP < 400) drinkMinoCum();
 			else if (player.HP < 100) eAttack();
 			else if (player.lust >= 90) succubusTease();
@@ -43,11 +43,11 @@ package classes.Scenes.Quests.UrtaQuest
 		{
 			outputText("Smiling wryly and licking her lips, the succubus-cow procures a bottle of her pet's cum with her probing tail.");
 //Success:
-			if (findStatusEffect(StatusEffects.DrankMinoCum) < 0 || findStatusEffect(StatusEffects.DrankMinoCum2) < 0) {
+			if (!hasStatusEffect(StatusEffects.DrankMinoCum) || !hasStatusEffect(StatusEffects.DrankMinoCum2)) {
 				outputText("\n\nSmiling triumphantly, she takes the bottle and opens it with a pop, drinking the contents with glee.  When done, she throws the bottle away and smacks her lips.  \"<i>Nothing like a bottle of minotaur cum to get you back on your feet, right?</i>\"  She grins, her pussy dripping with more juices.");
 				addHP(400);
 				lust += 25;
-				if (findStatusEffect(StatusEffects.DrankMinoCum) < 0) createStatusEffect(StatusEffects.DrankMinoCum, 0, 0, 0, 0);
+				if (!hasStatusEffect(StatusEffects.DrankMinoCum)) createStatusEffect(StatusEffects.DrankMinoCum, 0, 0, 0, 0);
 				else createStatusEffect(StatusEffects.DrankMinoCum2, 0, 0, 0, 0);
 			}
 			//Failure:

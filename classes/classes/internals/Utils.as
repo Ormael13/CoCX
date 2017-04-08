@@ -119,7 +119,7 @@ package classes.internals
 		 * @param	... args	Collection to look in
 		 * @return				Boolean true/false if found/not found.
 		 */
-		public function InCollection(tar:*, ... args):Boolean
+		public static function InCollection(tar:*, ... args):Boolean
 		{
 			if (args.length == 0) return false;
 			
@@ -171,7 +171,20 @@ package classes.internals
 			}
 			return error;
 		}
-		
+		/**
+		 * numberOfThings(0,"brain") = "no brains"
+		 * numberOfThings(1,"head") = "one head"
+		 * numberOfThings(2,"tail") = "2 tails"
+		 * numberOfThings(3,"hoof","hooves") = "3 hooves"
+		 */
+		public static function numberOfThings(n:int, name:String, pluralForm:String = null):String
+		{
+			pluralForm = pluralForm || (name + "s");
+			if (n == 0) return "no " + pluralForm;
+			if (n == 1) return "one " + name;
+			return n + " " + pluralForm;
+		}
+
 		/* None of these functions are called anymore
 		// lazy(obj,arg1,...,argN)() = obj[arg1]...[argN]
 		public static function lazyIndex(obj:*,...args):Function{

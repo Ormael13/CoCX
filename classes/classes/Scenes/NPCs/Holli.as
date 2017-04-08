@@ -41,7 +41,7 @@ package classes.Scenes.NPCs
 		public function holliBonusHealing():void
 		{
 			//(monster hp < 100%)
-			if (findStatusEffect(StatusEffects.HolliBurning) < 0) {
+			if (!hasStatusEffect(StatusEffects.HolliBurning)) {
 				if (HPRatio() < 1 && HP > 1) {
 					outputText("\n\nWhat wounds you have inflicted on the tree-demon overflow with sap, and begin to close!  You are left to watch helplessly as she recovers, knotting up her damaged bark until it looks as formidable as before.");
 					addHP(25);
@@ -55,8 +55,8 @@ package classes.Scenes.NPCs
 			}
 			//End of Round, Round 1 with Jojo Helping - make a little woodpile
 			//output anything triggered under no Jojo Fire condition, then output
-			if (findStatusEffect(StatusEffects.JojoIsAssisting) >= 0) {
-				if (findStatusEffect(StatusEffects.HolliBurning) >= 0) {
+			if (hasStatusEffect(StatusEffects.JojoIsAssisting)) {
+				if (hasStatusEffect(StatusEffects.HolliBurning)) {
 					outputText("\n\nJojo continues to ferry firewood to stoke the blaze; flames lick at Holli, and her face contorts in anger.  Sap flows from her burn wounds, but much of it boils away before it can do her any good and her iron-hard bark is peeling in places.");
 					//much less HP regain, no lust regain, monster armor lowered
 					if (armorDef > 20) armorDef = 20;
@@ -66,7 +66,7 @@ package classes.Scenes.NPCs
 					lust -= 2;
 					if (lust < 20) lust = 20;
 				}
-				else if (findStatusEffect(StatusEffects.JojoPyre) < 0) {
+				else if (!hasStatusEffect(StatusEffects.JojoPyre)) {
 					outputText("\n\nJojo throws another handful of dry leaves and sticks on the growing pile at the demon's roots, then waves and calls to you.  \"<i>[name]!  I've got enough dry wood at her base and I'm going to try to set it on fire!  Hold on just a bit longer; surcease is coming!</i>\"");
 					createStatusEffect(StatusEffects.JojoPyre, 0, 0, 0, 0);
 				}
@@ -92,8 +92,8 @@ package classes.Scenes.NPCs
 //if player uses whitefire/firebreath successfully, suppress these, go to 'Fire Lit' EOR events, and output additional line after the attack:
 		public function lightHolliOnFireMagically():void
 		{
-			if (findStatusEffect(StatusEffects.JojoIsAssisting) >= 0) {
-				if (findStatusEffect(StatusEffects.HolliBurning) < 0) {
+			if (hasStatusEffect(StatusEffects.JojoIsAssisting)) {
+				if (!hasStatusEffect(StatusEffects.HolliBurning)) {
 					outputText("The magical fire effectively ignites a wide swath of Jojo's tinder, and the demon howls in rage.  Seeing this, Jojo drops the burning torch he carries and turns back toward the forest to fetch more tinder.\n\n");
 					createStatusEffect(StatusEffects.HolliBurning, 0, 0, 0, 0);
 				}
@@ -107,7 +107,7 @@ package classes.Scenes.NPCs
 			outputText("A blossom opens up on a high branch of the tree, revealing an evil-looking eye surrounded by vicious spines.  With a gesture, " + short + " fires several at you!");
 
 			//Blinded - no hit penalty
-			if (findStatusEffect(StatusEffects.Blind) >= 0) outputText("  Though the demon herself is blinded, the fresh eye on the flower seems more than capable of aiming for her!");
+			if (hasStatusEffect(StatusEffects.Blind)) outputText("  Though the demon herself is blinded, the fresh eye on the flower seems more than capable of aiming for her!");
 			if (player.getEvasionRoll()) {
 				outputText("  Nimbly, you step aside and let the darts whistle by.");
 			}
@@ -131,7 +131,7 @@ package classes.Scenes.NPCs
 		{
 			outputText("A forest of thick roots bursts from the ground and several lash toward your [legs], trying to ensnare you!");
 			//Blinded - hit penalty, but not 100%
-			if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(6) == 0) {
+			if (hasStatusEffect(StatusEffects.Blind) && rand(6) == 0) {
 				outputText("  Luckily, the demon's blindness makes it fairly easy to dodge the grasping roots, though there are a few close scrapes.");
 			}
 			//Miss
@@ -202,7 +202,7 @@ package classes.Scenes.NPCs
 		override protected function performCombatAction():void
 		{
 			if (HP < 50 && rand(2) == 0) healHolli();
-			else if (rand(4) == 0 && player.findStatusEffect(StatusEffects.HolliConstrict) < 0) holliConstrictAttack();
+			else if (rand(4) == 0 && !player.hasStatusEffect(StatusEffects.HolliConstrict)) holliConstrictAttack();
 			else if (rand(2) == 0) fuckinJamanjiFlowerDarts();
 			else eAttack();
 			holliBonusHealing();
@@ -221,7 +221,7 @@ package classes.Scenes.NPCs
 
 		override public function teased(lustDelta:Number):void
 		{
-			if (findStatusEffect(StatusEffects.HolliBurning) >= 0) {
+			if (hasStatusEffect(StatusEffects.HolliBurning)) {
 				outputText("Holli doesn't even seem to notice, so concerned is she with defeating you before the mounting bonfire causes her any more pain.");
 				lustDelta = 0;
 			}

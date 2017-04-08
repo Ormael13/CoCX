@@ -50,6 +50,7 @@ package classes.Scenes
 				addButton(2, "Flag Editor", flagEditor, null, null, null, "Edit any flag. \n\nCaution: This might screw up your save!");
 				addButton(3, "Reset NPC", resetNPCMenu, null, null, null, "Choose a NPC to reset.");
 				if (player.isPregnant()) addButton(4, "Abort Preg", abortPregnancy);
+				addButton(5, "DumpEffects", dumpEffectsMenu, null, null, null, "Display your status effects");
 				addButton(7, "HACK STUFFZ", styleHackMenu, null, null, null, "H4X0RZ");
 				addButton(14, "Exit", playerMenu);
 			}
@@ -59,7 +60,14 @@ package classes.Scenes
 				doNext(playerMenu);
 			}
 		}
-		
+		private function  dumpEffectsMenu():void {
+			clearOutput();
+			for each (var effect:StatusEffectClass in player.statusEffects) {
+				outputText("'"+effect.stype.id+"': "+effect.value1+" "+effect.value2+" "+effect.value3+" "+effect.value4+"\n");
+			}
+			doNext(playerMenu);
+		}
+
 		//Spawn items menu
 		private function itemSpawnMenu():void {
 			setItemArrays();

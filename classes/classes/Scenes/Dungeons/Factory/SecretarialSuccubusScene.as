@@ -541,13 +541,13 @@ package classes.Scenes.Dungeons.Factory
 				outputText("Later on, you are briefly pulled out of your reverie by a familiar warm fluid flowing down your throat.  You come to your senses and see Marble looking down at you with an odd expression on her face.  ", false);
 				outputText("She seems to be in a state of bliss. Looking down, you see that she is wearing some kind of pair of pink panties.  Marble gasps and the surface of the panties ripples; it's a living thing!\n\nYou look around and realize you aren't alone.  ", false);
 			}
-			else if (player.findStatusEffect(StatusEffects.CampMarble) >= 0) {
+			else if (player.hasStatusEffect(StatusEffects.CampMarble)) {
 				outputText("You are given a brief moment of clarity as you see Marble standing in front of you.  ", false);
 				outputText("She seems to be in a state of bliss. Looking down, you see that she is wearing some kind of pair of pink panties.  Marble gasps and the surface of the panties ripples; it's a living thing!\n\nYou look around and realize you aren't alone.  ", false);
 			}
 			else outputText("Later on, in a moment of clarity, you look around and realize you aren't alone.  ", false);		
 			outputText("In rows alongside you are a large number of other captives, every single one endowed with freakishly sized breasts, and nearly all gifted with throbbing demonic dicks.  Some small analytical part of you notes that the farther down the line they are, the older and larger they have become.   You look down and see your own massive tits, shiny tainted nipples still pumping out streams of milk.  The huge throbbing demon-cock between your legs begins to get hard as the machines crank back up, filling you full of happy horniness.", false);
-			if (player.statusEffectv3(StatusEffects.Marble) == 1 || player.findStatusEffect(StatusEffects.CampMarble) >= 0) outputText("  With Marble here too, you'll be around for a long time.", false);
+			if (player.statusEffectv3(StatusEffects.Marble) == 1 || player.hasStatusEffect(StatusEffects.CampMarble)) outputText("  With Marble here too, you'll be around for a long time.", false);
 			getGame().gameOver();
 		}
 		

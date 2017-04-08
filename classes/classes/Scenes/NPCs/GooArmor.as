@@ -8,7 +8,7 @@ package classes.Scenes.NPCs
 	public class GooArmor extends GooGirl
 	{
 		public function gooArmorAI():void {
-			if (rand(2) == 0 && player.findStatusEffect(StatusEffects.GooArmorSilence) < 0) gooSilenceAttack();
+			if (rand(2) == 0 && !player.hasStatusEffect(StatusEffects.GooArmorSilence)) gooSilenceAttack();
 			else if (rand(3) > 0) gooArmorAttackPhysical();
 			else gooArmorAttackTwoGooConsume();
 		}
@@ -51,7 +51,7 @@ package classes.Scenes.NPCs
 				//(If fail 5 times, go to defeat scene)
 				player.addStatusValue(StatusEffects.GooArmorBind,1,1);
 				if (player.statusEffectv1(StatusEffects.GooArmorBind) >= 5) {
-					if (findStatusEffect(StatusEffects.Spar) >= 0) game.valeria.pcWinsValeriaSparDefeat();
+					if (hasStatusEffect(StatusEffects.Spar)) game.valeria.pcWinsValeriaSparDefeat();
 					else game.dungeons.heltower.gooArmorBeatsUpPC();
 					return;
 				}
@@ -78,7 +78,7 @@ package classes.Scenes.NPCs
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (findStatusEffect(StatusEffects.Spar) >= 0) game.valeria.pcWinsValeriaSpar();
+			if (hasStatusEffect(StatusEffects.Spar)) game.valeria.pcWinsValeriaSpar();
 			else game.dungeons.heltower.beatUpGooArmor();
 		}
 		
@@ -88,7 +88,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nThe armored goo sighs while you exhaust yourself...");
 				doNext(game.combat.endLustLoss);
 			} else {
-				if (findStatusEffect(StatusEffects.Spar) >= 0) game.valeria.pcWinsValeriaSparDefeat();
+				if (hasStatusEffect(StatusEffects.Spar)) game.valeria.pcWinsValeriaSparDefeat();
 				else game.dungeons.heltower.gooArmorBeatsUpPC();
 			}
 		}

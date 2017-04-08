@@ -11,7 +11,7 @@
 			//(Deals damage over 4-5 turns, invariably reducing 
 			//your speed. It wears off once combat is over.)
 			outputText("The naga strikes with the speed of a cobra, sinking her fangs into your flesh!  ", false);
-			if (player.findStatusEffect(StatusEffects.NagaVenom) < 0) {
+			if (!player.hasStatusEffect(StatusEffects.NagaVenom)) {
 				outputText("The venom's effects are almost instantaneous; your vision begins to blur and it becomes increasingly harder to stand.", false);
 				if (player.spe > 4) {
 					//stats(0,0,-3,0,0,0,0,0);

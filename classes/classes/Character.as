@@ -390,9 +390,9 @@ import classes.GlobalFlags.kFLAGS;
 		public function knockUp(type:int = 0, incubation:int = 0, beat:int = 100, arg:int = 0):void
 		{
 			//Contraceptives cancel!
-			if (findStatusEffect(StatusEffects.Contraceptives) >= 0 && arg < 1)
+			if (hasStatusEffect(StatusEffects.Contraceptives) && arg < 1)
 				return;
-//			if (findStatusEffect(StatusEffects.GooStuffed) >= 0) return; //No longer needed thanks to PREGNANCY_GOO_STUFFED being used as a blocking value
+//			if (hasStatusEffect(StatusEffects.GooStuffed)) return; //No longer needed thanks to PREGNANCY_GOO_STUFFED being used as a blocking value
 			var bonus:int = 0;
 			//If arg = 1 (always pregnant), bonus = 9000
 			if (arg >= 1)
@@ -430,7 +430,7 @@ import classes.GlobalFlags.kFLAGS;
 		public function buttKnockUp(type:int = 0, incubation:int = 0, beat:int = 100, arg:int = 0):void
 		{
 			//Contraceptives cancel!
-			if (findStatusEffect(StatusEffects.Contraceptives) >= 0 && arg < 1)
+			if (hasStatusEffect(StatusEffects.Contraceptives) && arg < 1)
 				return;
 			var bonus:int = 0;
 			//If arg = 1 (always pregnant), bonus = 9000

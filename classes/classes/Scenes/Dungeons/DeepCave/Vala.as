@@ -32,7 +32,7 @@ package classes.Scenes.Dungeons.DeepCave
 			outputText("  She releases her breasts, shaking them back and forth for your benefit, and flutters her wings, blowing shiny, glitter-like flakes at you.  They stick to the milk on your skin, leaving you coated in milk and faerie-dust.", false);
 			outputText("\nVala says, \"<i>Now you can be sexy like Vala!</i>\"\n", false);
 
-			if (findStatusEffect(StatusEffects.Milk) >= 0) {
+			if (hasStatusEffect(StatusEffects.Milk)) {
 				addStatusValue(StatusEffects.Milk,1,5);
 				outputText("Your " + player.skinDesc + " tingles pleasantly, making you feel sexy and exposed.  Oh no!  It seems each coating of milk and glitter is stronger than the last!", false);
 			}
@@ -53,7 +53,7 @@ package classes.Scenes.Dungeons.DeepCave
 
 		//[Fight dialog]
 		public function valaCombatDialogue():void {
-			if (findStatusEffect(StatusEffects.Vala) < 0) {
+			if (!hasStatusEffect(StatusEffects.Vala)) {
 				outputText("\"<i>Sluts needs to service the masters!</i>\" the fairy wails, flying high. \"<i>If they are not pleased, Bitch doesn't get any cum!</i>\"", false);
 				createStatusEffect(StatusEffects.Vala,0,0,0,0);
 			}

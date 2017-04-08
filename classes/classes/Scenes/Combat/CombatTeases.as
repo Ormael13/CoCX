@@ -35,11 +35,11 @@ package classes.Scenes.Combat
 		public function tease(justText:Boolean = false):void {
 			if (!justText) clearOutput();
 			//You cant tease a blind guy!
-			if (monster.findStatusEffect(StatusEffects.Blind) >= 0) {
+			if (monster.hasStatusEffect(StatusEffects.Blind)) {
 				outputText("You do your best to tease " + monster.a + monster.short + " with your body.  It doesn't work - you blinded " + monster.pronoun2 + ", remember?\n\n", true);
 				return;
 			}
-			if (player.findStatusEffect(StatusEffects.Sealed) >= 0 && player.statusEffectv2(StatusEffects.Sealed) == 1) {
+			if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 1) {
 				outputText("You do your best to tease " + monster.a + monster.short + " with your body.  Your artless twirls have no effect, as <b>your ability to tease is sealed.</b>\n\n", true);
 				return;
 			}	
@@ -408,7 +408,7 @@ package classes.Scenes.Combat
 				choices[choices.length] = 25;
 			}
 			//26 SMART PEEPS! 70+ int, arouse spell!
-			if (player.inte >= 70 && player.findStatusEffect(StatusEffects.KnowsArouse) >= 0) {
+			if (player.inte >= 70 && player.hasStatusEffect(StatusEffects.KnowsArouse)) {
 				choices[choices.length] = 26;
 				choices[choices.length] = 26;
 				choices[choices.length] = 26;
@@ -1410,7 +1410,7 @@ package classes.Scenes.Combat
 				damage = (damage + rand(bonusDamage)) * monster.lustVuln;
 				
 				if (monster is JeanClaude) (monster as JeanClaude).handleTease(damage, true);
-				else if (monster is Doppleganger && monster.findStatusEffect(StatusEffects.Stunned) < 0) (monster as Doppleganger).mirrorTease(damage, true);
+				else if (monster is Doppleganger && !monster.hasStatusEffect(StatusEffects.Stunned)) (monster as Doppleganger).mirrorTease(damage, true);
 				else if (!justText) monster.teased(damage);
 				
 				if (flags[kFLAGS.PC_FETISH] >= 1 && !getGame().urtaQuest.isUrta()) 

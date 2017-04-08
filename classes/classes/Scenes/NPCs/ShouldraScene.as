@@ -217,7 +217,7 @@ private function littlePigLittlePigLetMeIn():void {
 	
 	//CHOICES HURRAH
 	var lake:Function = null;
-	if (player.gender > 0 && ((player.findStatusEffect(StatusEffects.BoatDiscovery) >= 0 && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0) || flags[kFLAGS.TIMES_MET_OOZE] > 0)) {
+	if (player.gender > 0 && ((player.hasStatusEffect(StatusEffects.BoatDiscovery) && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0) || flags[kFLAGS.TIMES_MET_OOZE] > 0)) {
 		outputText("You could take her to the lake to find someone to play with...\n\n", false);
 		lake = nowOnVickiLake;
 	}
@@ -243,7 +243,7 @@ private function nowOnVickiLake():void {
 	//SHARK-GIRL - REQUIRES BOAT AND MET SHARKGIRL
 	//SLIME - REQUIRES MET SLIME
 	var shark:Function = null;
-	if (player.findStatusEffect(StatusEffects.BoatDiscovery) >= 0 && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0)
+	if (player.hasStatusEffect(StatusEffects.BoatDiscovery) && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0)
 		shark = sharkbustersVictory;
 	var ooze:Function = null;
 	if (flags[kFLAGS.TIMES_MET_OOZE] > 0) ooze = ghostGooGurlzDuckfaces;
@@ -406,7 +406,7 @@ private function slimeGinaFlation():void {
 	outputText("Your distended belly shivers as the goo jostles around, puffing up like a goblin after a minotaur bukakke. Some small thought, buried under layers of agonizing pleasure, calls to you repeatedly. The green slime likes it when you massage it; massage it, and you'll get out of here. As solid of reasoning as you'll get in a situation like this, you reach up and wrap your fingers around the thick oral tentacle. Treating it as you would a huge phallus, you caress, squeeze and stroke as much of the mostly solid ooze as you can reach. The stimulated green slime rewards you with a huge bulge of itself, beginning at the base and working its way toward you. The nearly-overwhelmed ghost girl screams out a warning, and you almost panic as you consider the thing. You can't see them, of course, but the appendages filling your lower crevices begin forming similar bulges, and they begin their way towards you as well. You can only wait in horror as the mouth-tentacle's lump squeezes under your now-still fingers, forcing them apart with its thickness. It's a macabre race to see what can stretch you first, and no matter the outcome, you have a feeling you won't enjoy the prize. Your cunt-tendril wins out, and your wail falls on deaf ears as your vagina dilates to compensate.\n\n", false);
 	
 	outputText("Content in taking second place, your anus also stretches as the bulb flows into it. Moments later, before you are even allowed to recover from the first two, your jaw is forced farther open to make room for the bulbous deposit. You hum unhappily as your throat widens, not unlike a croaking frog. Your already-huge belly burgeons with the new additions until it's at least twice as large as ", false);
-	if (player.findStatusEffect(StatusEffects.MeetWanderer) >= 0) outputText("both of Markus's testicles, combined!", false);
+	if (player.hasStatusEffect(StatusEffects.MeetWanderer)) outputText("both of Markus's testicles, combined!", false);
 	else outputText("a wheelbarrow!", false);
 	outputText("\n\n", false);
 	
@@ -547,7 +547,7 @@ private function penisLossThatIsntALoss():void {
 	spriteSelect(67);
 	var x:Number = player.biggestCockIndex();
 	clearOutput();
-	if (player.findStatusEffect(StatusEffects.Infested) >= 0) {
+	if (player.hasStatusEffect(StatusEffects.Infested)) {
 		dewormYourGhost();
 		return;
 	}
@@ -842,7 +842,7 @@ internal function loseToShouldra():void {
 	outputText("As you finally come out of the ghostly-influenced imagery, you find yourself unwillingly sitting up, the ghost girl beginning to explore your body freely. With a frustrated sigh, you concede control of your body to the ghost girl- for the time being, at least. With her at the wheel, your body reacts by shifting the color of your eyes to the same yellow tone of her ghostly form.\n\n", false);
 
 	if (player.gender == 1) {
-		if (player.findStatusEffect(StatusEffects.Infested) >= 0) loseToShouldraWithWorms();
+		if (player.hasStatusEffect(StatusEffects.Infested)) loseToShouldraWithWorms();
 		else if (player.statusEffectv1(StatusEffects.Exgartuan) == 1) ghostGartuanLossSceneOrSomeShit();
 		else if (player.biggestCockArea() >= 200) shouldraGiantCockLoss();
 		else ourDadTaughtUsNotToBeAshamedOfOurDicks();

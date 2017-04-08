@@ -35,7 +35,7 @@ package classes.Scenes.Dungeons.D3
 		
 		public function handleTease(lustDelta:Number, successful:Boolean):void
 		{
-			if (player.findStatusEffect(StatusEffects.RemovedArmor) < 0 && player.armor != ArmorLib.NOTHING)
+			if (!player.hasStatusEffect(StatusEffects.RemovedArmor) && player.armor != ArmorLib.NOTHING)
 			{
 				outputText("\n\nJean-Claude stops circling you, looking mildly surprised as you attempt to entice him with your body.");
 
@@ -54,7 +54,7 @@ package classes.Scenes.Dungeons.D3
 					// (JC arousal up one level, PC’s armor removed for rest of battle)
 					player.createStatusEffect(StatusEffects.RemovedArmor, 0, 0, 0, 0);
 					
-					if (this.findStatusEffect(StatusEffects.JCLustLevel) < 0)
+					if (!this.hasStatusEffect(StatusEffects.JCLustLevel))
 					{
 						this.createStatusEffect(StatusEffects.JCLustLevel, 1, 0, 0, 0);
 						lustVuln += 0.1;

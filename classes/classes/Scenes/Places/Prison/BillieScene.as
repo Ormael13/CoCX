@@ -23,7 +23,7 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorBillieOptedOut():Boolean
 		{
 			var testVal:* = undefined;
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyBillie) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
@@ -37,7 +37,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorBillieMet():Number
 		{
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyBillie) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
@@ -46,7 +46,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorBillieMetSet(newVal:Number):void
 		{
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyBillie) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
@@ -56,7 +56,7 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorBillieMetChange(changeVal:Number):void
 		{
 			var newVal:* = undefined;
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyBillie) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
@@ -74,7 +74,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorBillieHappiness():Number
 		{
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyBillie) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
@@ -83,7 +83,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorBillieHappinessSet(newVal:Number):void
 		{
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyBillie) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
@@ -93,7 +93,7 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorBillieHappinessChange(changeVal:Number):void
 		{
 			var newVal:* = undefined;
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyBillie) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
@@ -103,7 +103,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorBillieEvent():Number
 		{
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyBillie) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
@@ -112,7 +112,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorBillieEventSet(newVal:Number):void
 		{
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyBillie) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
@@ -122,7 +122,7 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorBillieEventChange(changeVal:Number):void
 		{
 			var newVal:int = 0;
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyBillie) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
@@ -140,7 +140,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorBillieScratch():Number
 		{
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyBillie) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
@@ -149,7 +149,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorBillieScratchSet(newVal:Number):void
 		{
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyBillie) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
@@ -159,7 +159,7 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorBillieScratchChange(changeVal:Number):void
 		{
 			var newVal:* = undefined;
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyBillie) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}

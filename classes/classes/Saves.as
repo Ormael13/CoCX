@@ -2323,12 +2323,12 @@ public function unFuckSave():void
 		}
 	}
 	
-	if (player.findStatusEffect(StatusEffects.KnockedBack) >= 0)
+	if (player.hasStatusEffect(StatusEffects.KnockedBack))
 	{
 		player.removeStatusEffect(StatusEffects.KnockedBack);
 	}
 	
-	if (player.findStatusEffect(StatusEffects.Tentagrappled) >= 0)
+	if (player.hasStatusEffect(StatusEffects.Tentagrappled))
 	{
 		player.removeStatusEffect(StatusEffects.Tentagrappled);
 	}
@@ -2339,7 +2339,7 @@ public function unFuckSave():void
 
 	if (player.gems < 0) player.gems = 0; //Force fix gems
 	
-	if (player.findStatusEffect(StatusEffects.SlimeCraving) >= 0 && player.statusEffectv4(StatusEffects.SlimeCraving) == 1) {
+	if (player.hasStatusEffect(StatusEffects.SlimeCraving) && player.statusEffectv4(StatusEffects.SlimeCraving) == 1) {
 		player.changeStatusValue(StatusEffects.SlimeCraving, 3, player.statusEffectv2(StatusEffects.SlimeCraving)); //Duplicate old combined strength/speed value
 		player.changeStatusValue(StatusEffects.SlimeCraving, 4, 1); //Value four indicates this tracks strength and speed separately
 	}
@@ -2459,8 +2459,8 @@ public function unFuckSave():void
 		}
 
 		if (flags[kFLAGS.TAMANI_PREGNANCY_TYPE] != 0) return; //Must be a new format save
-		if (player.findStatusEffect(StatusEffects.TamaniFemaleEncounter) >= 0) player.removeStatusEffect(StatusEffects.TamaniFemaleEncounter); //Wasn't used in previous code
-		if (player.findStatusEffect(StatusEffects.Tamani) >= 0) {
+		if (player.hasStatusEffect(StatusEffects.TamaniFemaleEncounter)) player.removeStatusEffect(StatusEffects.TamaniFemaleEncounter); //Wasn't used in previous code
+		if (player.hasStatusEffect(StatusEffects.Tamani)) {
 			if (player.statusEffectv1(StatusEffects.Tamani) == -500) { //This used to indicate that a player had met Tamani as a male
 				flags[kFLAGS.TAMANI_PREGNANCY_INCUBATION] = 0;
 				flags[kFLAGS.TAMANI_MET]                  = 1; //This now indicates the same thing

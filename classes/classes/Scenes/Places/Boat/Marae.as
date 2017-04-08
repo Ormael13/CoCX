@@ -70,7 +70,7 @@ package classes.Scenes.Places.Boat
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 			}
-			if (findStatusEffect(StatusEffects.Uber) >= 0) removeStatusEffect(StatusEffects.Uber);
+			if (hasStatusEffect(StatusEffects.Uber)) removeStatusEffect(StatusEffects.Uber);
 			combatRoundOver();
 		}
 		
@@ -85,9 +85,9 @@ package classes.Scenes.Places.Boat
 		}
 		
 		override public function doAI():void {
-			if (findStatusEffect(StatusEffects.Stunned) >= 0) {
+			if (hasStatusEffect(StatusEffects.Stunned)) {
 				outputText("Your foe is too dazed from your last hit to strike back!", false)
-				if (findStatusEffect(StatusEffects.Uber) >= 0) {
+				if (hasStatusEffect(StatusEffects.Uber)) {
 					outputText(" You've managed to interrupt her smite attack!");
 					removeStatusEffect(StatusEffects.Uber);
 				}
@@ -96,12 +96,12 @@ package classes.Scenes.Places.Boat
 				combatRoundOver();
 				return;
 			}
-			if (findStatusEffect(StatusEffects.Fear) >= 0) {
+			if (hasStatusEffect(StatusEffects.Fear)) {
 				game.outputText("\"<i>You think I'm afraid of anything? Foolish mortal.</i>\" Marae snarls.\n\n");
 				removeStatusEffect(StatusEffects.Fear);
 			}
 			var chooser:int = rand(10);
-			if (findStatusEffect(StatusEffects.Uber) >= 0) {
+			if (hasStatusEffect(StatusEffects.Uber)) {
 				smiteHit();
 				return;
 			}

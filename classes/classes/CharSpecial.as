@@ -1262,7 +1262,7 @@ package classes
 			player.tailType = TAIL_TYPE_FOX;
 			player.tailVenom = 2;
 			player.inte = 30;
-			if (player.findStatusEffect(StatusEffects.BonusVCapacity) < 0) player.createStatusEffect(StatusEffects.BonusVCapacity,0,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity,0,0,0,0);
 			else player.addStatusValue(StatusEffects.BonusVCapacity,1,5+rand(10));
 			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
 		}
@@ -1676,7 +1676,7 @@ package classes
 			if (player.weapon == WeaponLib.FISTS) player.setWeapon(weapons.SUCWHIP); // have succubus whip, to get corruption quickly when desired
 			//if (player.jewelry == JewelryLib.NOTHING) player.setJewelry(jewelries.PURERNG);
 			if (debug) {
-				if (player.findStatusEffect(StatusEffects.Kelt) < 0) player.createStatusEffect(StatusEffects.Kelt, 100, 0, 0, 0); // Kelt, you are dick.			
+				if (!player.hasStatusEffect(StatusEffects.Kelt)) player.createStatusEffect(StatusEffects.Kelt, 100, 0, 0, 0); // Kelt, you are dick.
 				if (player.hasKeyItem("Bow") < 0 && player.hasKeyItem("Kelt's Bow") < 0) player.createKeyItem("Bow", 0, 0, 0, 0);			
 				flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 4; // Raphael is too picky, and also pretty much unfinished - you can't continue training after chase scene.			
 				if (player.teaseLevel < 3) player.teaseLevel = 3; }			

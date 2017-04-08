@@ -9,7 +9,7 @@
 		public function sandTrapWait():void {
 			clearOutput();
 			game.spriteSelect(97);
-			if (findStatusEffect(StatusEffects.Climbed) < 0) createStatusEffect(StatusEffects.Climbed,0,0,0,0);
+			if (!hasStatusEffect(StatusEffects.Climbed)) createStatusEffect(StatusEffects.Climbed,0,0,0,0);
 			outputText("Instead of attacking, you turn away from the monster and doggedly attempt to climb back up the pit, digging all of your limbs into the soft powder as you climb against the sandslide.");
 			if (trapLevel() == 4) {
 				outputText("\n\nYou eye the ground above you.  The edge of the pit is too sheer, the ground too unstable... although it looks like you can fight against the currents carrying you further down, it seems impossible to gain freedom with the sand under the monster's spell.");
@@ -32,7 +32,7 @@
 		}
 
 		public function trapLevel(adjustment:Number = 0):Number {
-			if (findStatusEffect(StatusEffects.Level) < 0) createStatusEffect(StatusEffects.Level,4,0,0,0);
+			if (!hasStatusEffect(StatusEffects.Level)) createStatusEffect(StatusEffects.Level,4,0,0,0);
 			if (adjustment != 0) {
 				addStatusValue(StatusEffects.Level,1,adjustment);
 				//Keep in bounds ya lummox
@@ -72,17 +72,17 @@
 				outputText("  You can't get free in time and in a panic you realize you are now practically wading in sand.  Attempting to climb free now is going to be very difficult.");
 				if (player.canFly()) outputText("  You try to wrench yourself free by flapping your wings, but it is hopeless.  You are well and truly snared.");
 				trapLevel(-1);
-				if (findStatusEffect(StatusEffects.Climbed) < 0) createStatusEffect(StatusEffects.Climbed,0,0,0,0);
+				if (!hasStatusEffect(StatusEffects.Climbed)) createStatusEffect(StatusEffects.Climbed,0,0,0,0);
 			}
 		}
 
 		override protected function performCombatAction():void
 		{
-			if (findStatusEffect(StatusEffects.Level) >= 0) {
-				if (trapLevel() == 4 && findStatusEffect(StatusEffects.Climbed) < 0) nestleQuikSandAttack();
+			if (hasStatusEffect(StatusEffects.Level)) {
+				if (trapLevel() == 4 && !hasStatusEffect(StatusEffects.Climbed)) nestleQuikSandAttack();
 				else sandTrapPheremones();
 //PC sinks a level (end of any turn in which player didn't successfully \"<i>Wait</i>\"):
-				if (findStatusEffect(StatusEffects.Climbed) < 0) {
+				if (!hasStatusEffect(StatusEffects.Climbed)) {
 					outputText("\n\nRivulets of sand run past you as you continue to sink deeper into both the pit and the sand itself.");
 					trapLevel(-1);
 				}
