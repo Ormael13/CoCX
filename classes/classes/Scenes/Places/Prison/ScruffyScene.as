@@ -23,7 +23,7 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorScruffyOptedOut():Boolean
 		{
 			var testVal:* = undefined;
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyScruffy) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
@@ -37,7 +37,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorScruffyMet():Number
 		{
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyScruffy) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
@@ -46,7 +46,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorScruffyMetSet(newVal:Number):void
 		{
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyScruffy) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
@@ -56,7 +56,7 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorScruffyMetChange(changeVal:Number):void
 		{
 			var newVal:* = undefined;
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyScruffy) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
@@ -74,7 +74,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorScruffyHappiness():Number
 		{
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyScruffy) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
@@ -83,7 +83,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorScruffyHappinessSet(newVal:Number):void
 		{
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyScruffy) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
@@ -93,7 +93,7 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorScruffyHappinessChange(changeVal:Number):void
 		{
 			var newVal:* = undefined;
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyScruffy) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
@@ -103,7 +103,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorScruffyEvent():Number
 		{
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyScruffy) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
@@ -112,7 +112,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorScruffyEventSet(newVal:Number):void
 		{
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyScruffy) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
@@ -122,7 +122,7 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorScruffyEventChange(changeVal:Number):void
 		{
 			var newVal:* = undefined;
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyScruffy) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
@@ -140,7 +140,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorScruffyScratch():Number
 		{
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyScruffy) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
@@ -149,7 +149,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorScruffyScratchSet(newVal:Number):void
 		{
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyScruffy) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
@@ -159,7 +159,7 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorScruffyScratchChange(changeVal:Number):void
 		{
 			var newVal:* = undefined;
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyScruffy) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}

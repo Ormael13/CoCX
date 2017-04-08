@@ -6,12 +6,7 @@ package classes.Scenes.Areas
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Scenes.Areas.Forest.*;
-	import classes.Scenes.Monsters.Goblin;
-	import classes.Scenes.Monsters.Imp;
-	import classes.Scenes.NPCs.Jojo;
-	import classes.Scenes.Camp.CabinProgress;
 	
 	use namespace kGAMECLASS;
 
@@ -29,7 +24,23 @@ package classes.Scenes.Areas
 		public var erlkingScene:ErlKingScene = new ErlKingScene();
 		
 		public function Forest() { }
-		
+		public function isDiscovered():Boolean {
+			return flags[kFLAGS.TIMES_EXPLORED_FOREST] > 0;
+		}
+		public function discover():void {
+			outputText("You walk for quite some time, roaming the hard-packed and pink-tinged earth of the demon-realm.  Rust-red rocks speckle the wasteland, as barren and lifeless as anywhere else you've been.  A cool breeze suddenly brushes against your face, as if gracing you with its presence.  You turn towards it and are confronted by the lush foliage of a very old looking forest.  You smile as the plants look fairly familiar and non-threatening.  Unbidden, you remember your decision to test the properties of this place, and think of your campsite as you walk forward.  Reality seems to shift and blur, making you dizzy, but after a few minutes you're back, and sure you'll be able to return to the forest with similar speed.\n\n<b>You have discovered the Forest!</b>", true);
+			flags[kFLAGS.TIMES_EXPLORED]++;
+			flags[kFLAGS.TIMES_EXPLORED_FOREST]++;
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function deepwoodsDiscovered():Boolean {
+			return player.hasStatusEffect(StatusEffects.ExploredDeepwoods);
+		}
+		public function discoverDeepwoods():void {
+			player.createStatusEffect(StatusEffects.ExploredDeepwoods, 0, 0, 0, 0);
+			outputText("After exploring the forest so many times, you decide to really push it, and plunge deeper and deeper into the woods.  The further you go the darker it gets, but you courageously press on.  The plant-life changes too, and you spot more and more lichens and fungi, many of which are luminescent.  Finally, a wall of tree-trunks as wide as houses blocks your progress.  There is a knot-hole like opening in the center, and a small sign marking it as the entrance to the 'Deepwoods'.  You don't press on for now, but you could easily find your way back to explore the Deepwoods.\n\n<b>Deepwoods exploration unlocked!</b>", true);
+			doNext(camp.returnToCampUseOneHour);
+		}
 		public function exploreDeepwoods():void
 		{
 			clearOutput();
@@ -154,9 +165,9 @@ package classes.Scenes.Areas
 			
 			//Build choice list!
 			choice[choice.length] = 0; //General Goblin and Imp Encounters
-			if (player.findStatusEffect(StatusEffects.PureCampJojo) < 0 && !camp.campCorruptJojo() && flags[kFLAGS.JOJO_DEAD_OR_GONE] <= 0 && (flags[kFLAGS.JOJO_STATUS] < 2 || rand(2) == 0))
+			if (!player.hasStatusEffect(StatusEffects.PureCampJojo) && !camp.campCorruptJojo() && flags[kFLAGS.JOJO_DEAD_OR_GONE] <= 0 && (flags[kFLAGS.JOJO_STATUS] < 2 || rand(2) == 0))
 				choice[choice.length] = 1; //Jojo
-			if (player.findStatusEffect(StatusEffects.PureCampJojo) < 0 && !camp.campCorruptJojo() && flags[kFLAGS.JOJO_DEAD_OR_GONE] <= 0 && player.findPerk(PerkLib.PiercedFurrite) >= 0 && rand(5) == 0 && (player.cor > 25 || flags[kFLAGS.JOJO_STATUS] > 0))
+			if (!player.hasStatusEffect(StatusEffects.PureCampJojo) && !camp.campCorruptJojo() && flags[kFLAGS.JOJO_DEAD_OR_GONE] <= 0 && player.findPerk(PerkLib.PiercedFurrite) >= 0 && rand(5) == 0 && (player.cor > 25 || flags[kFLAGS.JOJO_STATUS] > 0))
 				choice[choice.length] = 1; //Extra chance of Jojo encounter.
 			if (player.level >= 2) choice[choice.length] = 2; //Tentacle Beast
 			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100 && rand(100) >= Math.round(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] * 0.75)) choice[choice.length] = 3; //Corrupted Glade
@@ -172,7 +183,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Chance to discover deepwoods
-			if ((flags[kFLAGS.TIMES_EXPLORED_FOREST] >= 20) && player.findStatusEffect(StatusEffects.ExploredDeepwoods) < 0) {
+			if ((flags[kFLAGS.TIMES_EXPLORED_FOREST] >= 20) && !player.hasStatusEffect(StatusEffects.ExploredDeepwoods)) {
 				player.createStatusEffect(StatusEffects.ExploredDeepwoods, 0, 0, 0, 0);
 				outputText("After exploring the forest so many times, you decide to really push it, and plunge deeper and deeper into the woods.  The further you go the darker it gets, but you courageously press on.  The plant-life changes too, and you spot more and more lichens and fungi, many of which are luminescent.  Finally, a wall of tree-trunks as wide as houses blocks your progress.  There is a knot-hole like opening in the center, and a small sign marking it as the entrance to the 'Deepwoods'.  You don't press on for now, but you could easily find your way back to explore the Deepwoods.\n\n<b>Deepwoods exploration unlocked!</b>", true);
 				doNext(camp.returnToCampUseOneHour);
@@ -191,7 +202,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//Marble randomness
-			if (flags[kFLAGS.TIMES_EXPLORED_FOREST] % 50 == 0 && flags[kFLAGS.TIMES_EXPLORED_FOREST] > 0 && player.findStatusEffect(StatusEffects.MarbleRapeAttempted) < 0 && player.findStatusEffect(StatusEffects.NoMoreMarble) < 0 && player.findStatusEffect(StatusEffects.Marble) >= 0 && flags[kFLAGS.MARBLE_WARNING] == 0) {
+			if (flags[kFLAGS.TIMES_EXPLORED_FOREST] % 50 == 0 && flags[kFLAGS.TIMES_EXPLORED_FOREST] > 0 && !player.hasStatusEffect(StatusEffects.MarbleRapeAttempted) && !player.hasStatusEffect(StatusEffects.NoMoreMarble) && player.hasStatusEffect(StatusEffects.Marble) && flags[kFLAGS.MARBLE_WARNING] == 0) {
 				//can be triggered one time after Marble has been met, but before the addiction quest starts.
 				clearOutput();
 				outputText("While you're moving through the trees, you suddenly hear yelling ahead, followed by a crash and a scream as an imp comes flying at high speed through the foliage and impacts a nearby tree.  The small demon slowly slides down the tree before landing at the base, still.  A moment later, a familiar-looking cow-girl steps through the bushes brandishing a huge two-handed hammer with an angry look on her face.");
@@ -221,7 +232,7 @@ package classes.Scenes.Areas
 					break;
 				case 1: //Jojo
 					clearOutput();
-					if (flags[kFLAGS.JOJO_STATUS] == 0 && player.findStatusEffect(StatusEffects.PureCampJojo) < 0) {
+					if (flags[kFLAGS.JOJO_STATUS] == 0 && !player.hasStatusEffect(StatusEffects.PureCampJojo)) {
 						if (player.cor < 25)
 						{
 							if (player.level >= 4)

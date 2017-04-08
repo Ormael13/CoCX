@@ -280,7 +280,7 @@ public function sandWitchGetsGhostly():void {
 //Genderless Masturbation
 private function shouldraFappinTimes():void {
 	spriteSelect(67);
-	if (player.hasCock() && player.findStatusEffect(StatusEffects.Infested) >= 0) {
+	if (player.hasCock() && player.hasStatusEffect(StatusEffects.Infested)) {
 		shouldraAndWormsYoureGonnaHaveABadTime();
 	}
 	else if (player.gender == 0) genderlessShouldraMasturbation();
@@ -1439,7 +1439,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 	//14 (Amily is a follower)
 	if (kGAMECLASS.amilyScene.amilyFollower()) choices[choices.length] = 14;
 	//15 (Pure Jojo is a follower)
-	if (player.findStatusEffect(StatusEffects.PureCampJojo) >= 0) choices[choices.length] = 15;
+	if (player.hasStatusEffect(StatusEffects.PureCampJojo)) choices[choices.length] = 15;
 	//16 (has any of Marae's gift perks)
 	if (player.findPerk(PerkLib.MaraesGiftStud) >= 0 || player.findPerk(PerkLib.MaraesGiftFertility) >= 0 || player.findPerk(PerkLib.MaraesGiftProfractory) >= 0 || player.findPerk(PerkLib.MaraesGiftButtslut) >= 0) choices[choices.length] = 16;
 	//17 (has had children with Izma)

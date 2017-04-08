@@ -78,7 +78,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("The giant raises his hammer for an obvious downward strike. His marble muscles flex as he swings it downward. You're able to hop out of the way of the clearly telegraphed attack, but nothing could prepare you for the shockwave it emits as it craters the ground. ");
 			
 			//Stun success
-			if (rand(2) == 0 && player.findStatusEffect(StatusEffects.Stunned) < 0)
+			if (rand(2) == 0 && !player.hasStatusEffect(StatusEffects.Stunned))
 			{
 				outputText("<b>The vibrations leave you rattled and stunned. It'll take you a moment to recover!</b> ");
 				player.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
@@ -99,7 +99,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("The animated sculpture brings its right foot around, dragging it through the gardens at a high enough speed to tear a half score of bushes out by the root. A cloud of shrubbery and dirt washes over you!");
 			
 			//blind
-			if (rand(2) == 0 && player.findStatusEffect(StatusEffects.Blind) < 0)
+			if (rand(2) == 0 && !player.hasStatusEffect(StatusEffects.Blind))
 			{
 				player.createStatusEffect(StatusEffects.Blind, 2, 0, 0, 0);
 				outputText(" <b>You are blinded!</b>");
@@ -183,11 +183,11 @@ package classes.Scenes.Dungeons.D3
 		
 		override protected function performCombatAction():void
 		{
-			if (this.HPRatio() < 0.7 && this.findStatusEffect(StatusEffects.KnockedBack) < 0)
+			if (this.HPRatio() < 0.7 && !this.hasStatusEffect(StatusEffects.KnockedBack))
 			{
 				this.backhand();
 			}
-			else if (this.HPRatio() < 0.4 && this.findStatusEffect(StatusEffects.Disarmed) < 0 && player.weaponName != "fists")
+			else if (this.HPRatio() < 0.4 && !this.hasStatusEffect(StatusEffects.Disarmed) && player.weaponName != "fists")
 			{
 				this.disarm();
 			}
@@ -195,8 +195,8 @@ package classes.Scenes.Dungeons.D3
 			{
 				var opts:Array = [];
 				
-				if (player.findStatusEffect(StatusEffects.Blind) < 0 && player.findStatusEffect(StatusEffects.Stunned) < 0) opts.push(dirtKick);
-				if (player.findStatusEffect(StatusEffects.Blind) < 0 && player.findStatusEffect(StatusEffects.Stunned) < 0) opts.push(concussiveBlow);
+				if (!player.hasStatusEffect(StatusEffects.Blind) && !player.hasStatusEffect(StatusEffects.Stunned)) opts.push(dirtKick);
+				if (!player.hasStatusEffect(StatusEffects.Blind) && !player.hasStatusEffect(StatusEffects.Stunned)) opts.push(concussiveBlow);
 				opts.push(cycloneStrike);
 				opts.push(cycloneStrike);
 				opts.push(overhandSmash);

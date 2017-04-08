@@ -1096,7 +1096,7 @@ private function arianMagicLessons():void {
 		else outputText(", exiting [Arian eir] tent and going about your business.");
 		
 		//(if PC doesn't know Charge Weapon)
-		if (player.findStatusEffect(StatusEffects.KnowsCharge) < 0) {
+		if (!player.hasStatusEffect(StatusEffects.KnowsCharge)) {
 			outputText("\n\nAs you ");
 			if (!player.isNaga()) outputText("walk");
 			else outputText("slither");
@@ -1114,7 +1114,7 @@ private function arianMagicLessons():void {
 		outputText("\n\nArian wasn't kidding; this is quite a complex subject...");
 		outputText("\n\n\"<i>Now to finish our lesson, I'll give you a practical example of how to effectively use conjuration to defend yourself.  So pay attention, [name].  Conjured objects are generally weaker than real objects, so conjuring a shield or a suit of armor or even a weapon is no good.  Not to mention it's quite complicated.  A suit of armor is made not only of metal, but of other components as well - you'd have to conjure and maintain each individually.  Instead, conjure a simple element that can turn the tide of the battle in your favor.</i>\"");
 		//(if PC doesn't know Blind)
-		if (player.findStatusEffect(StatusEffects.KnowsBlind) < 0) {
+		if (!player.hasStatusEffect(StatusEffects.KnowsBlind)) {
 			outputText("\n\nLike what?  You ask in curiosity.");
 			outputText("\n\nArian lifts a closed fist.  \"<i>Mind your eyes.</i>\"  You nod.  Arian points [Arian eir] fist towards a nearby wall and opens [Arian eir] hand.  A bright flash of light shoots out of [Arian eir] hand to hit the wall harmlessly.  \"<i>This was the element of light.  I produced a bright light capable of temporarily blinding whomever happens to be looking at it when it's exposed.</i>\"");
 			outputText("\n\nYou note how such a spell could be useful for you in combat.  Arian grins at you.  \"<i>I'm glad this lesson was helpful, [name].  Come here and I'll teach you how to properly conjure it.</i>\"");
@@ -1143,7 +1143,7 @@ private function arianMagicLessons():void {
 		if (!arianFollower()) outputText("begin the trek home.");
 		else outputText("exit [Arian eir] tent.");
 		//(if PC doesn't know Whitefire)
-		if (player.findStatusEffect(StatusEffects.KnowsWhitefire) < 0) {
+		if (!player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
 			outputText("\n\nAs you walk, you ponder what you discussed with Arian and conclude that by combining conjuration with alteration, you could quickly and easily create an expanding conflagration of flames, burning your foes in combat.");
 			outputText("\n\nYou should put that into practice sometime soon.");
 			player.createStatusEffect(StatusEffects.KnowsWhitefire,0,0,0,0);
@@ -3484,8 +3484,8 @@ private function arianSpellPlace(spell:*):void {
 	doNext(camp.returnToCampUseOneHour);
 }
 private function clearCharges():void {
-	if (player.findStatusEffect(StatusEffects.ShieldingSpell) >= 0) player.removeStatusEffect(StatusEffects.ShieldingSpell);
-	if (player.findStatusEffect(StatusEffects.ImmolationSpell) >= 0) player.removeStatusEffect(StatusEffects.ImmolationSpell);
+	if (player.hasStatusEffect(StatusEffects.ShieldingSpell)) player.removeStatusEffect(StatusEffects.ShieldingSpell);
+	if (player.hasStatusEffect(StatusEffects.ImmolationSpell)) player.removeStatusEffect(StatusEffects.ImmolationSpell);
 }
 public function clearTalisman():void {
 	player.removeKeyItem("Arian's Charged Talisman");

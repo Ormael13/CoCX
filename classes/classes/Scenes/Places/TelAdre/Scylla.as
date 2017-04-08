@@ -618,7 +618,7 @@ private function scyllaPtVLeave():void {
 //[Take Advantage]	(First time and Repeat)
 private function scyllaPtVTakeAdvantage():void {
 	scyllaSprite();
-	if (player.findStatusEffect(StatusEffects.Exgartuan) >= 0 && player.statusEffectv2(StatusEffects.Exgartuan) == 0) {
+	if (player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) {
 		flags[kFLAGS.TIMES_MET_SCYLLA_IN_ADDICTION_GROUP]++;
 		flags[kFLAGS.TIMES_SCYLLA_ADDICT_GROUP_EXPLOITED]++;
 		scyllaVTakeAdvantageWithExgartuan();

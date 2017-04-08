@@ -55,7 +55,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorScratch(valueNum:Number) : Number
 		{
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyScratch) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScratch))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScratch,0,0,0,0);
 			}
@@ -64,7 +64,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorScratchSet(valueNum:Number, newVal:Number) : void
 		{
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyScratch) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScratch))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScratch,0,0,0,0);
 			}
@@ -74,7 +74,7 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorScratchChange(valueNum:Number, changeVal:Number) : void
 		{
 			var newVal:* = undefined;
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyScratch) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScratch))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScratch,0,0,0,0);
 			}

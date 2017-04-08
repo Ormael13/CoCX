@@ -12,7 +12,7 @@ package classes.Scenes
 			if (player.fertility < 15) player.fertility++;
 			if (player.fertility < 25) player.fertility++;
 			if (player.fertility < 40) player.fertility++;
-			if (player.findStatusEffect(StatusEffects.Birthed) < 0) player.createStatusEffect(StatusEffects.Birthed,1,0,0,0);
+			if (!player.hasStatusEffect(StatusEffects.Birthed)) player.createStatusEffect(StatusEffects.Birthed,1,0,0,0);
 			else {
 				player.addStatusValue(StatusEffects.Birthed,1,1);
 				if (player.findPerk(PerkLib.BroodMother) < 0 && player.statusEffectv1(StatusEffects.Birthed) >= 10) {
@@ -1564,7 +1564,7 @@ package classes.Scenes
 				player.boostLactation(.01);
 				//Boost capacity
 				if (player.vaginalCapacity() < 300) {
-					if (player.findStatusEffect(StatusEffects.BonusVCapacity) < 0) player.createStatusEffect(StatusEffects.BonusVCapacity,0,0,0,0);
+					if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity,0,0,0,0);
 					player.addStatusValue(StatusEffects.BonusVCapacity, 1, 10);
 				}
 				player.knockUpForce(); //Clear Pregnancy
@@ -1650,7 +1650,7 @@ package classes.Scenes
 					//(reduce lust to min, increased minimum lust by 30 until halfway through PC's next pregnancy)]
 					player.orgasm();
 					dynStats("lib", 2, "sen", 5);
-					if (player.findStatusEffect(StatusEffects.AnemoneArousal) < 0) player.createStatusEffect(StatusEffects.AnemoneArousal,0,0,0,0);
+					if (!player.hasStatusEffect(StatusEffects.AnemoneArousal)) player.createStatusEffect(StatusEffects.AnemoneArousal,0,0,0,0);
 				}		
 				player.knockUpForce(); //Clear Pregnancy
 				outputText("Exhausted by the 'birth' and the climax, you slip into a doze.\n", false);
@@ -1659,7 +1659,7 @@ package classes.Scenes
 			if (player.pregnancyIncubation == 1 && player.pregnancyType == PregnancyStore.PREGNANCY_IMP) {
 				outputText("\n", false);
 				//Add imp birth status - used to control frequency of night imp gangbag
-				if (player.findStatusEffect(StatusEffects.BirthedImps) >= 0) player.addStatusValue(StatusEffects.BirthedImps,1,1);
+				if (player.hasStatusEffect(StatusEffects.BirthedImps)) player.addStatusValue(StatusEffects.BirthedImps,1,1);
 				else player.createStatusEffect(StatusEffects.BirthedImps,1,0,0,0);
 				if (player.vaginas.length == 0) {
 					outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ", false);
@@ -2080,7 +2080,7 @@ package classes.Scenes
 						dynStats("resisted", false);
 					}
 					outputText("\n\n<b>You feel compelled to leave the eggs behind, ", false);
-					if (player.findStatusEffect(StatusEffects.AteEgg) >= 0) outputText("but you remember the effects of the last one you ate.\n</b>", false);
+					if (player.hasStatusEffect(StatusEffects.AteEgg)) outputText("but you remember the effects of the last one you ate.\n</b>", false);
 					else outputText("but your body's intuition reminds you they shouldn't be fertile, and your belly rumbles with barely contained hunger.\n</b>", false);
 					player.cuntChange(20, true);
 					player.createStatusEffect(StatusEffects.LootEgg,0,0,0,0);
@@ -2094,7 +2094,7 @@ package classes.Scenes
 		public function eggDescript(plural:Boolean = true):String
 		{
 			var descript:String = "";
-			if (player.findStatusEffect(StatusEffects.Eggs) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.Eggs)) {
 				descript += num2Text(player.statusEffectv3(StatusEffects.Eggs)) + " ";
 				//size descriptor
 				if (player.statusEffectv2(StatusEffects.Eggs) == 1) descript += "large ";

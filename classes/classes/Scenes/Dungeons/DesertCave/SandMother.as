@@ -8,16 +8,16 @@ package classes.Scenes.Dungeons.DesertCave
 		//Starts combat with sandstorm.  GigaFire's every fifth round.
 		//Whispers every fourth.
 		public function sandWitchMotherAI():void {
-			if (findStatusEffect(StatusEffects.Sandstorm) < 0) {
+			if (!hasStatusEffect(StatusEffects.Sandstorm)) {
 				sandStormAttack();
 				return;
 			}
-			if (findStatusEffect(StatusEffects.Gigafire) >= 0) {
+			if (hasStatusEffect(StatusEffects.Gigafire)) {
 				gigaFire2();
 				return;
 			}
 			var choices:Array = [];
-			if (player.findStatusEffect(StatusEffects.Whispered) < 0) choices[choices.length] = getWhispered;
+			if (!player.hasStatusEffect(StatusEffects.Whispered)) choices[choices.length] = getWhispered;
 			choices[choices.length] = eatALightningBolt;
 			choices[choices.length] = sandMotherTelekinesis;
 			choices[choices.length] = gigaFire;

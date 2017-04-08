@@ -2,6 +2,8 @@ package classes.Scenes.NPCs{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
+	import classes.Scenes.API.Encounter;
+	import classes.Scenes.API.Encounters;
 
 	public class HelScene extends NPCAwareContent implements TimeAwareInterface {
 
@@ -1849,7 +1851,7 @@ private function telHelToGetOffTheMInoCock():void {
 	outputText("\n\n\"<i>Hmm?</i>\" she answers, cocking an eyebrow at you.  \"<i>What do you mean 'addictive?'  How the hell is bullspunk addictive; the fuck kinda sense does that make?</i>\"");
 	
 	outputText("\n\nYou shrug and tell her that's just how it is");
-	if (player.findStatusEffect(StatusEffects.CampMarble) >= 0) outputText(", just like how Cowgirls have addictive breastmilk");
+	if (player.hasStatusEffect(StatusEffects.CampMarble)) outputText(", just like how Cowgirls have addictive breastmilk");
 	outputText(".");
 	
 	outputText("\n\n\"<i>Well, shit, [name].  I don't wanna get hooked on minotaur cum, but... now what the fuck am I supposed to do? Those bulls are the best fucks around... present company excluded, of course,</i>\" she adds with a little wink.");
@@ -1919,6 +1921,17 @@ public function helSexualAmbush():void {
 //Got rid of this, now handled by passing true:	kGAMECLASS.buttonEvents[9] = pussyOutOfHelSexAmbush;
 	helFuckMenu(true);
 }
+
+	public var helSexualAmbushEncounter:Encounter = Encounters.build({
+		name:"helSexualAmbush",
+		call: helSexualAmbush,
+		when: function ():Boolean {
+			return flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1
+				   && flags[kFLAGS.HEL_RAPED_TODAY] == 0
+				   && player.gender > 0
+				   && !kGAMECLASS.helScene.followerHel();
+		}
+	});
 
 //[Leave] (From Sexual Ambush)
 private function pussyOutOfHelSexAmbush():void {

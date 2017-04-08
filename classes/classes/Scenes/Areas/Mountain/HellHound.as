@@ -7,7 +7,7 @@
 	{
 		protected function hellhoundFire():void {
 			//Blind dodge change
-			if(findStatusEffect(StatusEffects.Blind) >= 0) {
+			if(hasStatusEffect(StatusEffects.Blind)) {
 				outputText(capitalA + short + " completely misses you with a wave of dark fire! Thank the gods it's blind!", false);
 				combatRoundOver();
 				return;
@@ -47,7 +47,7 @@
 			doNext(game.playerMenu);
 		}
 		protected function hellhoundScent():void {
-			if(player.findStatusEffect(StatusEffects.NoFlee) >= 0) {
+			if(player.hasStatusEffect(StatusEffects.NoFlee)) {
 				if(spe == 100) {
 					hellhoundFire();
 					return;

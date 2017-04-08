@@ -264,19 +264,19 @@ package classes
 			menu();
 			addButton(0, "Watersports", toggleWatersports, null, null, null, "Toggles watersports scenes. (Scenes related to urine fetish)"); //Enables watersports.
 			//addButton(1, "Rimjob", toggleRimjob, null, null, null, "Toggles rimjob scenes."); //Enables rimjob.
-			if (player.findStatusEffect(StatusEffects.WormsOn) >= 0 || player.findStatusEffect(StatusEffects.WormsOff) >= 0) addButton(2, "Worms", toggleWormsMenu, null, null, null, "Enable or disable worms. This will NOT cure infestation, if you have any.");
+			if (player.hasStatusEffect(StatusEffects.WormsOn) || player.hasStatusEffect(StatusEffects.WormsOff)) addButton(2, "Worms", toggleWormsMenu, null, null, null, "Enable or disable worms. This will NOT cure infestation, if you have any.");
 			else addButtonDisabled(2, "Worms", "Find the sign depicting the worms in the mountains to unlock this.");
 			addButton(4, "Back", settingsScreenGameSettings);
 		}
 
 		private function toggleWormsMenu():void {
 			clearOutput();
-			if (player.findStatusEffect(StatusEffects.WormsOn) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.WormsOn)) {
 				outputText("You have chosen to encounter worms as you find the mountains");
-				if (player.findStatusEffect(StatusEffects.WormsHalf) >= 0) outputText(" albeit at reduced encounter rate");
+				if (player.hasStatusEffect(StatusEffects.WormsHalf)) outputText(" albeit at reduced encounter rate");
 				outputText(". You can get infested.");
 			}
-			if (player.findStatusEffect(StatusEffects.WormsOff) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.WormsOff)) {
 				outputText("You have chosen to avoid worms. You won't be able to get infested.");
 			}
 			menu();
@@ -288,9 +288,9 @@ package classes
 
 		private function setWorms(enabled:Boolean, half:Boolean):void {
 			//Clear status effects
-			if (player.findStatusEffect(StatusEffects.WormsOn) >= 0) player.removeStatusEffect(StatusEffects.WormsOn);
-			if (player.findStatusEffect(StatusEffects.WormsHalf) >= 0) player.removeStatusEffect(StatusEffects.WormsHalf);
-			if (player.findStatusEffect(StatusEffects.WormsOff) >= 0) player.removeStatusEffect(StatusEffects.WormsOff);
+			if (player.hasStatusEffect(StatusEffects.WormsOn)) player.removeStatusEffect(StatusEffects.WormsOn);
+			if (player.hasStatusEffect(StatusEffects.WormsHalf)) player.removeStatusEffect(StatusEffects.WormsHalf);
+			if (player.hasStatusEffect(StatusEffects.WormsOff)) player.removeStatusEffect(StatusEffects.WormsOff);
 			//Set status effects
 			if (enabled) {
 				player.createStatusEffect(StatusEffects.WormsOn, 0, 0, 0, 0);

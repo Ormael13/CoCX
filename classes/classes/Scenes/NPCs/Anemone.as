@@ -23,7 +23,7 @@ package classes.Scenes.NPCs
 		public function applyVenom(str:Number = 1):void
 		{
 			//First application
-			if (player.findStatusEffect(StatusEffects.AnemoneVenom) < 0) player.createStatusEffect(StatusEffects.AnemoneVenom, 0, 0, 0, 0);
+			if (!player.hasStatusEffect(StatusEffects.AnemoneVenom)) player.createStatusEffect(StatusEffects.AnemoneVenom, 0, 0, 0, 0);
 			//Gain some lust
 			game.dynStats("lus", (2 * str));
 

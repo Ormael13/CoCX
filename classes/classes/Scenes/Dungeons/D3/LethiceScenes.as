@@ -969,7 +969,7 @@ package classes.Scenes.Dungeons.D3
 				levelOfFuckedness += 25;
 			if(getGame().camp.campCorruptJojo())
 				levelOfFuckedness += 10;
-			if(player.findStatusEffect(StatusEffects.WandererDemon) >= 0)
+			if(player.hasStatusEffect(StatusEffects.WandererDemon))
 				levelOfFuckedness += 10;
 			if(flags[kFLAGS.AMILY_FOLLOWER] == 2)
 				levelOfFuckedness += 10;
@@ -1004,11 +1004,11 @@ package classes.Scenes.Dungeons.D3
 				levelOfFuckedness -= 20;
 			if(getGame().camp.followerKiha())
 				levelOfFuckedness -= 15;
-			if(player.findStatusEffect(StatusEffects.PureCampJojo) >= 0)
+			if(player.hasStatusEffect(StatusEffects.PureCampJojo))
 				levelOfFuckedness -= 5;
 			if(flags[kFLAGS.KATHERINE_UNLOCKED] == 4)
 				levelOfFuckedness -= 5;
-			if(player.findStatusEffect(StatusEffects.CampRathazul) >= 0)
+			if(player.hasStatusEffect(StatusEffects.CampRathazul))
 				levelOfFuckedness -= 5;
 			if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0)
 				levelOfFuckedness -= 20;

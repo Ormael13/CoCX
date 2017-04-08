@@ -6,7 +6,7 @@
 	public class ImpHorde extends Monster
 	{
 		public function impGangAI():void {
-			if (findStatusEffect(StatusEffects.ImpUber) >= 0) impGangUber();
+			if (hasStatusEffect(StatusEffects.ImpUber)) impGangUber();
 			else if (lust > 50 && rand(2) == 0) impGangBukkake();
 			else {
 				var choice:Number = rand(4);
@@ -22,7 +22,7 @@
 		}
 		
 		public function impGangUber():void {
-			if (findStatusEffect(StatusEffects.ImpUber) < 0) {
+			if (!hasStatusEffect(StatusEffects.ImpUber)) {
 				outputText("Three imps on the far side of the room close their eyes and begin murmuring words of darkness and power.  Your eyes widen, recognizing the spell.  Anything but that!  They're building up a massive arousal spell!  They keep muttering and gesturing, and you realize you've got one round to stop them!\n", false);
 				createStatusEffect(StatusEffects.ImpUber,0,0,0,0);
 			}
@@ -62,7 +62,7 @@
 				//Clear damage from last loop
 				damage = 0;
 				//Blind dodge change
-				if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) < 2) {
+				if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 					outputText(capitalA + short + "' misguided spooge flies everyone.  A few bursts of it don't even land anywhere close to you!\n", false);
 				}
 				//Determine if dodged!
@@ -116,7 +116,7 @@
 		
 		public function imtacularMultiHitzilla():void {
 			//Multiattack:
-			if (findStatusEffect(StatusEffects.Blind) < 0) outputText("The imps come at you in a wave, tearing at you with claws!\n", false);
+			if (!hasStatusEffect(StatusEffects.Blind)) outputText("The imps come at you in a wave, tearing at you with claws!\n", false);
 			//(ALT BLINDED TEXT)
 			else outputText("In spite of their blindness, most of them manage to find you, aided by the clutching claws of their brothers.\n", false);
 			//(2-6 hits for 10 damage each)
@@ -128,7 +128,7 @@
 				//Clear damage from last loop
 				damage = 0;
 				//Blind dodge change
-				if (findStatusEffect(StatusEffects.Blind) >= 0 && rand(3) < 2) {
+				if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 					outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 				}
 				//Determine if dodged!

@@ -3733,7 +3733,7 @@ package classes.Scenes.Places.Prison
 			var accept:Function = prisonCaptorFeedingQuestTrainingAccept;
 			var reject:Function = prisonCaptorFeedingTrainingReject;
 			var perform:Function = null;
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyQuest) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest))
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyQuest,0,0,0,0);
 			}
@@ -3907,7 +3907,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorFeedingQuestTrainingIsComplete():Boolean
 		{
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyQuest) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest))
 			{
 				return false;
 			}
@@ -3929,7 +3929,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorFeedingQuestOptedOut():Boolean
 		{
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyQuest) >= 0 && player.statusEffectv1(StatusEffects.PrisonCaptorEllyQuest) < 0)
+			if (player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest) && player.statusEffectv1(StatusEffects.PrisonCaptorEllyQuest) < 0)
 			{
 				return true;
 			}
@@ -3938,7 +3938,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorFeedingQuestTrainingExists():Boolean
 		{
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyQuest) >= 0 && player.statusEffectv1(StatusEffects.PrisonCaptorEllyQuest) > 0)
+			if (player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest) && player.statusEffectv1(StatusEffects.PrisonCaptorEllyQuest) > 0)
 			{
 				return true;
 			}
@@ -3947,7 +3947,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorFeedingQuestTrainingIsTimeUp():Boolean
 		{
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyQuest) >= 0 && player.statusEffectv2(StatusEffects.PrisonCaptorEllyQuest) <= 0)
+			if (player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest) && player.statusEffectv2(StatusEffects.PrisonCaptorEllyQuest) <= 0)
 			{
 				return true;
 			}
@@ -3972,7 +3972,7 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorFeedingQuestTrainingDecrementTime():void
 		{
 			var newVal:* = undefined;
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyQuest) < 0)
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest))
 			{
 				return;
 			}
@@ -3988,7 +3988,7 @@ package classes.Scenes.Places.Prison
 		{
 			var newval1:* = undefined;
 			var newval2:* = undefined;
-			if (player.findStatusEffect(StatusEffects.PrisonCaptorEllyQuest) < 0 || !(player.statusEffectv1(StatusEffects.PrisonCaptorEllyQuest) == questID))
+			if (!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest) || !(player.statusEffectv1(StatusEffects.PrisonCaptorEllyQuest) == questID))
 			{
 				return;
 			}

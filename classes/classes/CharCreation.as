@@ -377,7 +377,7 @@
 				}
 			}
 			//Clear key items
-			var keyItemTemp:Array = []
+			var keyItemTemp:Array = [];
 			for (i = 0; i < player.keyItems.length; i++) {
 				if (isSpecialKeyItem(player.keyItems[i].keyName)) keyItemTemp.push(player.keyItems[i]);
 			}
@@ -852,9 +852,9 @@
 		//-- BEARD STYLE
 		//-----------------
 		private function menuBeardSettings():void {
-			outputText("You can choose your beard length and style.\n\n", true)
-			outputText("Beard: " + player.beardDescript())
-			menu()
+			outputText("You can choose your beard length and style.\n\n", true);
+			outputText("Beard: " + player.beardDescript());
+			menu();
 			addButton(0, "Style", menuBeardStyle);
 			addButton(1, "Length", menuBeardLength);
 			addButton(14, "Back", genericStyleCustomizeMenu);
@@ -925,21 +925,21 @@
 			mainView.nameBox.visible = false;
 			if (int(mainView.nameBox.text) < 48)
 			{
-				outputText("That is below your minimum height choices!", true)
+				outputText("That is below your minimum height choices!", true);
 				//Off to the height selection!
 				doNext(setHeight);
 				return;
 			}
 			if (int(mainView.nameBox.text) > 96)
 			{
-				outputText("That is above your maximum height choices!", true)
+				outputText("That is above your maximum height choices!", true);
 				//Off to the height selection!
 				doNext(setHeight);
 				return;
 			}
 			if (mainView.nameBox.text == "")
 			{
-				outputText("Please input your height. Off you go to the height selection!", true)
+				outputText("Please input your height. Off you go to the height selection!", true);
 				//Off to the height selection!
 				doNext(setHeight);
 				return;
@@ -947,7 +947,7 @@
 			player.tallness = int(mainView.nameBox.text);
 			mainView.nameBox.maxChars = 16;
 			mainView.nameBox.restrict = null;
-			outputText("You'll be " + Math.floor(player.tallness / 12) + " feet and " + player.tallness % 12 + " inches tall. Is this okay with you?", true)
+			outputText("You'll be " + Math.floor(player.tallness / 12) + " feet and " + player.tallness % 12 + " inches tall. Is this okay with you?", true);
 			doYesNo(genericStyleCustomizeMenu, setHeight);
 		}
 
@@ -1318,7 +1318,7 @@
 		//-- GAME MODES
 		//-----------------
 		private function chooseModeNormal():void {
-			outputText("You have chosen Normal Mode. This is a classic gameplay mode. \n\n<b>Difficulty can be adjusted at any time.</b>", true)
+			outputText("You have chosen Normal Mode. This is a classic gameplay mode. \n\n<b>Difficulty can be adjusted at any time.</b>", true);
 			flags[kFLAGS.HARDCORE_MODE] = 0;
 			flags[kFLAGS.HUNGER_ENABLED] = 0;
 			flags[kFLAGS.GAME_DIFFICULTY] = 0;
@@ -1326,7 +1326,7 @@
 		}	
 
 		private function chooseModeSurvival():void {
-			outputText("You have chosen Survival Mode. This is similar to the normal mode but with hunger enabled. \n\n<b>Difficulty can be adjusted at any time.</b>", true)
+			outputText("You have chosen Survival Mode. This is similar to the normal mode but with hunger enabled. \n\n<b>Difficulty can be adjusted at any time.</b>", true);
 			flags[kFLAGS.HARDCORE_MODE] = 0;
 			flags[kFLAGS.HUNGER_ENABLED] = 0.5;
 			flags[kFLAGS.GAME_DIFFICULTY] = 0;
@@ -1335,7 +1335,7 @@
 		}	
 
 		private function chooseModeRealistic():void {
-			outputText("You have chosen Realistic Mode. In this mode, hunger is enabled so you have to eat periodically. Also, your cum production is capped and having oversized parts will weigh you down. \n\n<b>Difficulty can be adjusted at any time.</b>", true)
+			outputText("You have chosen Realistic Mode. In this mode, hunger is enabled so you have to eat periodically. Also, your cum production is capped and having oversized parts will weigh you down. \n\n<b>Difficulty can be adjusted at any time.</b>", true);
 			flags[kFLAGS.HARDCORE_MODE] = 0;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 0;
@@ -1344,12 +1344,12 @@
 		}
 
 		private function chooseModeHardcore():void {
-			outputText("You have chosen Hardcore Mode. In this mode, hunger is enabled so you have to eat periodically. In addition, the game forces autosave and if you encounter a Bad End, your save file is <b>DELETED</b>! \n\nDebug Mode and Easy Mode are disabled in this game mode. \n\nPlease choose a slot to save in. You may not make multiple copies of saves. \n\n<b>Difficulty is locked to hard.</b>", true)
+			outputText("You have chosen Hardcore Mode. In this mode, hunger is enabled so you have to eat periodically. In addition, the game forces autosave and if you encounter a Bad End, your save file is <b>DELETED</b>! \n\nDebug Mode and Easy Mode are disabled in this game mode. \n\nPlease choose a slot to save in. You may not make multiple copies of saves. \n\n<b>Difficulty is locked to hard.</b>", true);
 			flags[kFLAGS.HARDCORE_MODE] = 1;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 1;
 			player.hunger = 80;
-			menu()
+			menu();
 			for (var i:int = 0; i < 14; i++) {
 				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, (i + 1));
 			}
@@ -1357,12 +1357,12 @@
 		}
 
 		private function chooseModeBrutalHardcore():void {
-			outputText("You have chosen Brutal Hardcore Mode. This is the HARDEST mode of all. \n\n<b>Difficulty is locked to <i>EXTREME</i>.</b>", true)
+			outputText("You have chosen Brutal Hardcore Mode. This is the HARDEST mode of all. \n\n<b>Difficulty is locked to <i>EXTREME</i>.</b>", true);
 			flags[kFLAGS.HARDCORE_MODE] = 1;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 3;
 			player.hunger = 80;
-			menu()
+			menu();
 			for (var i:int = 0; i < 14; i++) {
 				addButton(i, "Slot " + (i + 1), chooseSlotHardcore, (i + 1));
 			}
@@ -1403,7 +1403,7 @@
 		private function startTheGame():void {
 			player.startingRace = player.race();
 			if (flags[kFLAGS.HARDCORE_MODE] > 0) {
-				trace("Hardcore save file " + flags[kFLAGS.HARDCORE_SLOT] + " created.")
+				trace("Hardcore save file " + flags[kFLAGS.HARDCORE_SLOT] + " created.");
 				getGame().saves.saveGame(flags[kFLAGS.HARDCORE_SLOT])
 			}
 			if (flags[kFLAGS.GRIMDARK_MODE] > 0) {
@@ -1632,7 +1632,7 @@
 				}
 				if (player.hasKeyItem("Equipment Storage - Jewelry Box") >= 0) {
 					outputText("\n\nThere is a jewelry box on the dresser. You walk over to the box, open it, and look inside. ");
-					if (inventory.jewelryBoxDescription()) outputText(" It's making sense! The contents must be from your past adventures.")
+					if (inventory.jewelryBoxDescription()) outputText(" It's making sense! The contents must be from your past adventures.");
 					else outputText("It's empty and you let out a sigh but you know you can bring it to Mareth.");	
 				}
 			}

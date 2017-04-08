@@ -5,7 +5,7 @@
  order of these imports until more is known about what needs to load and when.
 */
 
-﻿package classes
+package classes
 {
 	// BREAKING ALL THE RULES.
 	import classes.GlobalFlags.kFLAGS; // This file contains most of the persistent gamestate flags.
@@ -182,6 +182,8 @@ the text from being too boring.
 		public var bimboProgress:BimboProgression = new BimboProgression();
 		
 		// Scenes/Areas/
+		public var commonEncounters:CommonEncounters = new CommonEncounters(); // Common dependencies go first
+
 		public var bog:Bog = new Bog();
 		public var desert:Desert = new Desert();
 		public var forest:Forest = new Forest();

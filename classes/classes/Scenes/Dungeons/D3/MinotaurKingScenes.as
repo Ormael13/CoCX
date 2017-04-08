@@ -27,7 +27,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				outputText(" Even Isabella would struggle to wield such a weapon.");
 			}
-			else if (player.findStatusEffect(StatusEffects.CampMarble) >= 0)
+			else if (player.hasStatusEffect(StatusEffects.CampMarble))
 			{
 				outputText(" Even Marble would struggle to wield such a weapon");
 			}

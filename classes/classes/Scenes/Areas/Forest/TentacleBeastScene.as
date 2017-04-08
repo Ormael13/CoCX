@@ -87,7 +87,7 @@ public function encounter():void {
 	if (player.cor > 75)
 		outputText("You smile and stride forward, welcoming the pleasure you expect from such a monster.\n\n", false);
 	//Worms get nothing!
-	if (player.findStatusEffect(StatusEffects.Infested) >= 0)
+	if (player.hasStatusEffect(StatusEffects.Infested))
 	{
 		outputText("It stops itself completely in a moment and twitches, as if sniffing the air, before turning around and disappearing into the underbrush.", false);
 		doNext(camp.returnToCampUseOneHour);
@@ -271,15 +271,14 @@ internal function tentacleLossRape():void {
 	}
 	//Bad end + counter here
 	if (player.lust >= player.maxLust()) {
-		temp = player.findStatusEffect(StatusEffects.TentacleBadEndCounter);
-		if (temp < 0) {
+		var tbec:StatusEffectClass = player.statusEffectByType(StatusEffects.TentacleBadEndCounter);
+		if (tbec == null) {
 			player.createStatusEffect(StatusEffects.TentacleBadEndCounter,0,0,0,0);
-		}
-		else {
+		} else {
 			//count up
-			player.statusEffect(temp).value1++;
+			tbec.value1++;
 			//Bad end
-			if (player.statusEffect(temp).value1 >= 3 && player.cor > 50 && player.gender == 3) {
+			if (tbec.value1 >= 3 && player.cor > 50 && player.gender == 3) {
 				futaTentacleBadEnd();
 				return;
 			}

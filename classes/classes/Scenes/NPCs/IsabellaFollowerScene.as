@@ -1225,7 +1225,7 @@ private function declineIzzysCowBurpApology():void {
 	spriteSelect(31);
 	if (flags[kFLAGS.ISABELLA_PROBOVA_BURP_COUNT] == 1) {
 		outputText("As strange as the situation is, you're too weirded out to reassure Isabella, at least for now, and you relay that to her.  Though crestfallen, she takes the news well, apologizing - sincerely and soberly - once more before moving back to her designated camping spot.  ", false);
-		if (player.findStatusEffect(StatusEffects.BurpChanged) >= 0) {
+		if (player.hasStatusEffect(StatusEffects.BurpChanged)) {
 			outputText("  Happily, after about an hour, you go back to your old form, leaving the belch-borne bovine bounty behind.", false);
 			player.removeStatusEffect(StatusEffects.BurpChanged);
 		}
@@ -1242,7 +1242,7 @@ private function acceptCowpology():void {
 	clearOutput();
 	spriteSelect(31);
 	//Clear burps!
-	if (player.findStatusEffect(StatusEffects.BurpChanged) >= 0)
+	if (player.hasStatusEffect(StatusEffects.BurpChanged))
 		player.removeStatusEffect(StatusEffects.BurpChanged);
 	player.orgasm();
 	dynStats("sen", -1);

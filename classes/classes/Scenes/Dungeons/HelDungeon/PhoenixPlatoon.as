@@ -31,7 +31,7 @@ package classes.Scenes.Dungeons.HelDungeon
 		}
 
 		public function phoenixPlatoonAI():void {
-			if (findStatusEffect(StatusEffects.Platoon) < 0) {
+			if (!hasStatusEffect(StatusEffects.Platoon)) {
 				phoenixPlatoonRush();
 				createStatusEffect(StatusEffects.Platoon,0,0,0,0);
 			}

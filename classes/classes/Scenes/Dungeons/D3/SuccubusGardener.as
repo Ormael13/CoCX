@@ -56,8 +56,8 @@
 		
 		private function cleanupEffects():void
 		{
-			if (player.findStatusEffect(StatusEffects.Tentagrappled)) player.removeStatusEffect(StatusEffects.Tentagrappled);
-			if (player.findStatusEffect(StatusEffects.ShowerDotEffect)) player.removeStatusEffect(StatusEffects.ShowerDotEffect);
+			if (player.hasStatusEffect(StatusEffects.Tentagrappled)) player.removeStatusEffect(StatusEffects.Tentagrappled);
+			if (player.hasStatusEffect(StatusEffects.ShowerDotEffect)) player.removeStatusEffect(StatusEffects.ShowerDotEffect);
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -80,7 +80,7 @@
 			
 			// Her damage is all lust but in low amounts. This is something of a marathon fight.
 			
-			if (findStatusEffect(StatusEffects.TentagrappleCooldown) >= 0)
+			if (hasStatusEffect(StatusEffects.TentagrappleCooldown))
 			{
 				addStatusValue(StatusEffects.TentagrappleCooldown, 1, -1);
 				if (statusEffectv1(StatusEffects.TentagrappleCooldown) <= 0)
@@ -89,7 +89,7 @@
 				}
 			}
 			
-			if (player.findStatusEffect(StatusEffects.ShowerDotEffect) >= 0)
+			if (player.hasStatusEffect(StatusEffects.ShowerDotEffect))
 			{
 				showerDotEffect();
 				
@@ -100,11 +100,11 @@
 			{
 				vineHeal();
 			}
-			else if (findStatusEffect(StatusEffects.TentagrappleCooldown) < 0)
+			else if (!hasStatusEffect(StatusEffects.TentagrappleCooldown))
 			{
 				tentagrapple();
 			}
-			else if (player.findStatusEffect(StatusEffects.GardenerSapSpeed) < 0 && this.findStatusEffect(StatusEffects.VineHealUsed) >= 0)
+			else if (!player.hasStatusEffect(StatusEffects.GardenerSapSpeed) && this.hasStatusEffect(StatusEffects.VineHealUsed))
 			{
 				sapSpeed();
 			}
@@ -133,12 +133,12 @@
 		
 		private function vineHeal():void
 		{
-			if (findStatusEffect(StatusEffects.VineHealUsed) < 0)
+			if (!hasStatusEffect(StatusEffects.VineHealUsed))
 			{
 				createStatusEffect(StatusEffects.VineHealUsed, 0, 0, 0, 0);
 			}
 			
-			if (findStatusEffect(StatusEffects.Stunned) < 0)
+			if (!hasStatusEffect(StatusEffects.Stunned))
 			{
 				outputText("Tipping herself backward, the succubus gardener lets herself pitch into the writhing tendrils behind her, her mouth opened welcomingly. The tentacles gently catch her, and rather than ravishing her vulnerable form, they merely gather above her parted lips, dribbling thick flows of pink slime. Her throat bobs as she swallows, her injuries vanishing in seconds. The vines push her back up onto her feet. She's smiling a little dopily.");
 				
@@ -310,7 +310,7 @@
 			else
 			{
 				//Fail
-				if (player.findStatusEffect(StatusEffects.ShowerDotEffect) < 0)
+				if (!player.hasStatusEffect(StatusEffects.ShowerDotEffect))
 					player.createStatusEffect(StatusEffects.ShowerDotEffect, 3, 0, 0, 0);
 				else
 					player.addStatusValue(StatusEffects.ShowerDotEffect, 1, 3);
@@ -410,7 +410,7 @@
 		private function lustAuraCast():void
 		{
 			outputText("The demoness blinks her eyes closed and knits her eyebrows in concentration.  The red orbs open wide and she smiles, licking her lips.   The air around her grows warmer, and muskier, as if her presence has saturated it with lust.", false);
-			if (this.findStatusEffect(StatusEffects.LustAura) >= 0) 
+			if (this.hasStatusEffect(StatusEffects.LustAura))
 			{
 				outputText("  Your eyes cross with unexpected feelings as the taste of desire in the air worms its way into you.  The intense aura quickly subsides, but it's already done its job.", false);
 				game.dynStats("lus", (8+int(player.lib/20 + player.cor/25)));

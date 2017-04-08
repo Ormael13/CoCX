@@ -125,7 +125,7 @@ package classes.Scenes.Dungeons.D3
 			if (_lastRoundStun)
 			{
 				_lastRoundStun = false;
-				if (player.findStatusEffect(StatusEffects.Stunned) >= 0)
+				if (player.hasStatusEffect(StatusEffects.Stunned))
 				{
 					dickslap();
 					return;

@@ -176,7 +176,7 @@
 		public static function tongueDescription(i_character:Character):String
 		{
 			// fallback for tongueTypes not fully implemented yet
-			if (i_character.tongueType == TONGUE_HUMAN || !DEFAULT_TONGUE_NAMES.hasOwnProperty(i_character.tongueType))
+			if (i_character.tongueType == TONGUE_HUMAN || !DEFAULT_TONGUE_NAMES.hasOwnProperty(''+i_character.tongueType))
 				return "tongue";
 
 			return DEFAULT_TONGUE_NAMES[i_character.tongueType] + " tongue";
@@ -330,7 +330,7 @@
 					"slippery "];
 				description += randomChoice(options);
 			}
-			if (!haveDescription && i_creature.findStatusEffect(StatusEffects.BlackNipples) >= 0) {
+			if (!haveDescription && i_creature.hasStatusEffect(StatusEffects.BlackNipples)) {
 				options = ["black ",
 					"ebony ",
 					"sable "];
@@ -1188,7 +1188,7 @@
 			var description:String = "";
 			var options:Array;
 
-			if (i_plural && (i_creature.findStatusEffect(StatusEffects.Uniball) < 0)) {
+			if (i_plural && (!i_creature.hasStatusEffect(StatusEffects.Uniball))) {
 				if (i_creature.balls == 1) {
 					if (i_withArticle) {
 						options = ["a single",
@@ -1270,7 +1270,7 @@
 
 			}
 			//UNIBALL
-			if (i_creature.findStatusEffect(StatusEffects.Uniball) >= 0) {
+			if (i_creature.hasStatusEffect(StatusEffects.Uniball)) {
 				if (description) description += " ";
 				options = ["tightly-compressed",
 					"snug",
@@ -1329,7 +1329,7 @@
 			description += randomChoice(options);
 			if (i_plural) description += "s";
 
-			if (i_creature.findStatusEffect(StatusEffects.Uniball) >= 0 && rand(2) == 0) {
+			if (i_creature.hasStatusEffect(StatusEffects.Uniball) && rand(2) == 0) {
 				if (rand(3) == 0)
 					description += " merged into a cute, spherical package";
 				else if (rand(2) == 0)

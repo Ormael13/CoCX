@@ -41,7 +41,7 @@ package classes.Scenes {
 			
 			//FAP BUTTON GOAADFADHAKDADK
 			if ((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) {
-				if (player.findStatusEffect(StatusEffects.Exgartuan) >= 0 && player.statusEffectv2(StatusEffects.Exgartuan) == 0)
+				if (player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0)
 					addButton(button++, "Masturbate", masturbateGo);
 				else if (player.findPerk(PerkLib.Enlightened) >= 0 && player.findPerk(PerkLib.HistoryReligious) < 0) {
 					addButton(button++, "Masturbate", masturbateGo);
@@ -73,7 +73,7 @@ package classes.Scenes {
 				addButton(13 ,"Items", fappingItems);
 			else if (button == 1) { //If you can only masturbate or meditate the normal way then do that automatically
 				if ((player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) {
-					if (player.findStatusEffect(StatusEffects.Exgartuan) >= 0 && player.statusEffectv2(StatusEffects.Exgartuan) == 0)
+					if (player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0)
 						masturbateGo();
 					else meditate();
 				}
@@ -261,7 +261,7 @@ package classes.Scenes {
 		//Non-shitty masturbation
 		public function masturbateGo():void {
 			clearOutput();
-			if (player.findStatusEffect(StatusEffects.Dysfunction) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.Dysfunction)) {
 				outputText("You'd love to masturbate, but your sexual organs' numbness makes it impossible.  You'll have to find something to fuck to relieve your lust.");
 				doNext(playerMenu);
 				return;
@@ -291,7 +291,7 @@ package classes.Scenes {
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
-			if (player.findStatusEffect(StatusEffects.Exgartuan) >= 0 && player.statusEffectv2(StatusEffects.Exgartuan) == 0) {
+			if (player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) {
 				flags[kFLAGS.TIMES_MASTURBATED]++;
 				if (player.isNaga() && rand(2) == 0 && player.statusEffectv1(StatusEffects.Exgartuan) == 1)
 					getGame().exgartuan.exgartuanNagaStoleMyMasturbation();
@@ -843,7 +843,7 @@ package classes.Scenes {
 			doStripCheck();
 			//Tit foreplay
 			titForeplay();
-			if (player.findStatusEffect(StatusEffects.FappedGenderless) < 0) { //first time as a genderless person
+			if (!player.hasStatusEffect(StatusEffects.FappedGenderless)) { //first time as a genderless person
 				outputText("Now this might be a problem. Here you are ready to get your rocks off and you have no idea how to do it. Nothing to do except some trial and error. You run your hands gently over where your genitals would be. Lightly you pet the skin and feel your finger tips tickle what was once your most pleasurable of places. While it feels incredibly nice, it just isn't getting you there. You teeter at the edge and it only frustrates you further. Unsure of what to do next, your body gives you a little nudge in an unexplored avenue and you decide to take the trip.\n\n");
 				player.createStatusEffect(StatusEffects.FappedGenderless, 0, 0, 0, 0);
 			}
@@ -2008,7 +2008,7 @@ package classes.Scenes {
 				//Option Jojo veyeurism?
 				if (flags[kFLAGS.JOJO_STATUS] >= 5 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
 					outputText("\n\nAs you stand and try to clean up you manage to spot Jojo off in the woods, ");
-					if (player.findStatusEffect(StatusEffects.TentacleJojo) >= 0)
+					if (player.hasStatusEffect(StatusEffects.TentacleJojo))
 						outputText("his tentacles splattering mouse-jizz everywhere as he gets off from your show.");
 					else outputText("splattering himself with mouse-spunk as he finishes enjoying your inadvertent show.  He runs off before you have a chance to react.");
 				}
@@ -2091,7 +2091,7 @@ package classes.Scenes {
 			//Clear text for new stuff
 			clearOutput();
 			//Flag after first use!
-			if (player.findStatusEffect(StatusEffects.PlainOnaholeUsed) < 0) {
+			if (!player.hasStatusEffect(StatusEffects.PlainOnaholeUsed)) {
 				player.createStatusEffect(StatusEffects.PlainOnaholeUsed, 0, 0, 0, 0);
 				
 				outputText("You get naked and settle down with your new toy. The device looks mildly unappealing and almost comical. However, you have never been one to slouch in the search for new forms of pleasure. ");
@@ -2114,7 +2114,7 @@ package classes.Scenes {
 		private function deluxeOnaholeUse():void {
 			clearOutput();
 			//Flag after first use!
-			if (player.findStatusEffect(StatusEffects.DeluxeOnaholeUsed) < 0) {
+			if (!player.hasStatusEffect(StatusEffects.DeluxeOnaholeUsed)) {
 				player.createStatusEffect(StatusEffects.DeluxeOnaholeUsed, 0, 0, 0, 0);
 			
 				outputText("You get naked and settle down with your new toy. You are amazed at the level of care and detail in the craftsmanship of this toy. You wonder if it feels as good as it looks.\n\n");
@@ -2176,7 +2176,7 @@ package classes.Scenes {
 		private function allNaturalOnaholeUse():void {
 			clearOutput();
 			//First use!
-			if (player.findStatusEffect(StatusEffects.AllNaturalOnaholeUsed) < 0) {
+			if (!player.hasStatusEffect(StatusEffects.AllNaturalOnaholeUsed)) {
 					
 				player.createStatusEffect(StatusEffects.AllNaturalOnaholeUsed, 0, 0, 0, 0);
 			
@@ -2214,7 +2214,7 @@ package classes.Scenes {
 			//FIRST TIME USAGE
 			if ((player.hasKeyItem("Self-Stimulation Belt") >= 0)) {
 				//First use! Flag after first use!
-				if (player.findStatusEffect(StatusEffects.used_self_dash_stim) < 0) {
+				if (!player.hasStatusEffect(StatusEffects.used_self_dash_stim)) {
 					player.createStatusEffect(StatusEffects.used_self_dash_stim, 0, 0, 0, 0);
 					outputText("Brimming with anticipation, you wind up the small gearbox on the weird contraption. You place the machine down and strip yourself naked. Stepping through the straps of the garment, you pull it up. The dildo does not come out, so you take the time to ease the artificial phallus to rest deep in your womanhood. After nestling the false cock in your pussy, you finish pulling up the belt and you tighten the straps. You lay down and you flip the switch. The machine vibrates around and inside you vigorously. Immediately, waves and cramps of pleasure swirl around your cunt and shoot up and down your spine. The machine, free of human limitations and fatigue, ceaselessly rubs and caresses your insides at impossibly high speeds. Within minutes, you begin experiencing the tell-tale contractions of an impending orgasm. With your hands free, you are able to explore your breasts and body as the device hammers away. You squeeze your ");
 					outputText(player.breastCup(0));
@@ -2242,7 +2242,7 @@ package classes.Scenes {
 			clearOutput();
 			if (player.hasKeyItem("All-Natural Self-Stimulation Belt") >= 0) {
 				//First time!
-				if (player.findStatusEffect(StatusEffects.UsedNaturalSelfStim) < 0) {
+				if (!player.hasStatusEffect(StatusEffects.UsedNaturalSelfStim)) {
 					//Flag as used!
 					player.createStatusEffect(StatusEffects.UsedNaturalSelfStim, 0, 0, 0, 0);
 					outputText("Brimming with anticipation, you put on the gloves to avoid prematurely triggering the machine. You place the belt down and strip yourself completely. Stepping through the straps of the garment, you pull it up. You take the time to align the nodule with the opening of your womanhood. After settling the knob to the entrance to your pussy, you take off the gloves, lay back and touch the amber pads with your fingers.\n\n");
@@ -3158,7 +3158,7 @@ package classes.Scenes {
 					}
 				}
 			}
-			if (player.findStatusEffect(StatusEffects.Eggchest) < 0) {
+			if (!player.hasStatusEffect(StatusEffects.Eggchest)) {
 				player.createStatusEffect(StatusEffects.Eggchest, 3 + rand(10), 1 + rand(4), 0, 0);
 				
 			}

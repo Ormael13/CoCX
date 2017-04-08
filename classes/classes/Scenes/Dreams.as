@@ -630,7 +630,7 @@
 					}
 				}
 				else {
-					if (player.findStatusEffect(StatusEffects.BreastsMilked) < 0) {
+					if (!player.hasStatusEffect(StatusEffects.BreastsMilked)) {
 						outputText("walking into a large barn, filled with the smells of earth, wood, and grease. A bank of machinery along the wall thrums and pulses as if it's a living creature. A harness hangs limply in the stall, there to hold the occupant in place while they are milked of every last drop.  You exhale slowly and force yourself to step into it.  As you puzzle out the straps, it gets easier and easier to get the rest of the harness into place.  As you snap the last one into position, machinery whirs and pulls it tight, lifting you off the ground and suspending you, facedown.  The breast milk pumps pulse and vibrate on a tray below you, twitching slightly as you hear the machinery activate.\n\n", false);
 					}
 					else {

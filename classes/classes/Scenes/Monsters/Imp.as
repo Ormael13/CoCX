@@ -9,7 +9,7 @@
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
-			if (findStatusEffect(StatusEffects.KitsuneFight) >= 0) {
+			if (hasStatusEffect(StatusEffects.KitsuneFight)) {
 				game.forest.kitsuneScene.winKitsuneImpFight();
 			} else {
 				game.impScene.impVictory();
@@ -18,7 +18,7 @@
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (findStatusEffect(StatusEffects.KitsuneFight) >= 0) {
+			if (hasStatusEffect(StatusEffects.KitsuneFight)) {
 				game.forest.kitsuneScene.loseKitsuneImpFight();
 			} else if (pcCameWorms) {
 				outputText("\n\nThe imp grins at your already corrupted state...", false);

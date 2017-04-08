@@ -200,7 +200,7 @@ package classes.Scenes.Places.TelAdre
 			outputText("\n\nOf course you do. Your stall is still open, and you motion inside.");
 			outputText("\n\n\"<i>Y-yes, I’d like that very much,</i>\" he says, nodding furiously.");
 			outputText("\n\nWith that, you make your way to the stall, swinging your hips in a teasing fashion. Pablo is not far behind. On your way there, you consider how to tackle this. Should you take charge, or let Pablo run the show? What parts will you use?");
-			if (player.findStatusEffect(StatusEffects.Infested) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.Infested)) {
 				pabloGetsGrossedOutByWorms();
 				return;
 			}

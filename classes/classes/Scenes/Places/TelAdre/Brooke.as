@@ -103,7 +103,7 @@ public function repeatChooseShower():void {
 			telAdre.pablo.pabloShowerSexIntro();
 			return;
 		}
-		if (flags[kFLAGS.PABLO_FREAKED_OUT_OVER_WORMS] > 0 && player.findStatusEffect(StatusEffects.Infested) < 0) {
+		if (flags[kFLAGS.PABLO_FREAKED_OUT_OVER_WORMS] > 0 && !player.hasStatusEffect(StatusEffects.Infested)) {
 			telAdre.pablo.pabloComesBackAfterWormCure();
 			return;
 		}
@@ -1098,7 +1098,7 @@ public function brookeSpecialMediumSceneContinued():void {
 		//[if (hasBalls = true)
 		if (player.balls > 0)
 		{
-			if (player.findStatusEffect(StatusEffects.Uniball) < 0)
+			if (!player.hasStatusEffect(StatusEffects.Uniball))
 			{
 				outputText("  Your [sack] swings with every pump, slapping onto the firm skin of Brooke\'s vulva every time you bottom out.  You feel no pain, and in fact the smoothness of her fur around her genitals tickles the cum out of your [balls] all the faster.");
 			}

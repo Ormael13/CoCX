@@ -32,7 +32,7 @@ package classes.Scenes.Quests.UrtaQuest
 		override protected function performCombatAction():void
 		{
 			var attack:int = rand(4);
-			if (player.findStatusEffect(StatusEffects.Blind) >= 0) attack = rand(3);
+			if (player.hasStatusEffect(StatusEffects.Blind)) attack = rand(3);
 			if (attack == 0) eAttack();
 			if (attack == 1) poisonBite();
 			if (attack == 2) manNagaTease();
@@ -48,7 +48,7 @@ package classes.Scenes.Quests.UrtaQuest
 				combatRoundOver();
 			}
 //Hit (Blind):
-			if (findStatusEffect(StatusEffects.Blind) >= 0) {
+			if (hasStatusEffect(StatusEffects.Blind)) {
 				outputText("  Though your vision is still blurry, you feel yourself being sucked into the golden depths of those pupils, making you forget all your worries, if only for an instant.  All you can focus on is your growing arousal as you sink deeper into his gaze.  You shake your head, clearing your mind of the hypnotising effects the snake-man's eyes seem to possess, though the arousal remains.");
 				kGAMECLASS.dynStats("lus", (5 + player.lib / 10 - player.inte / 20));
 			}
