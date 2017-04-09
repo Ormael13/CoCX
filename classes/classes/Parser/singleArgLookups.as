@@ -78,6 +78,7 @@
 				"sheath"					: function(thisPtr:*):* { return kGAMECLASS.player.sheathDescript(); },
 				"shield"					: function(thisPtr:*):* { return kGAMECLASS.player.shieldName; },
 				"skin"						: function(thisPtr:*):* { return kGAMECLASS.player.skin(); },
+				"skin.noadj"				: function(thisPtr:*):* { return kGAMECLASS.player.skin(true); },
 				"skinfurscales"				: function(thisPtr:*):* { return kGAMECLASS.player.skinFurScales(); },
 				"tallness"					: function(thisPtr:*):* { return kGAMECLASS.measurements.footInchOrMetres(kGAMECLASS.player.tallness); },
 				"tits"						: function(thisPtr:*):* { return kGAMECLASS.player.breastDescript(0); },
