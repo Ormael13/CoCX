@@ -841,7 +841,6 @@ package classes
 				outputText("  " + Num2Text(player.legCount)+ " digitigrade legs form below your [hips], ending in cloven hooves.");
 			if (player.findPerk(PerkLib.Incorporeality) >= 0)
 				outputText("  Of course, your " + player.legs() + " are partially transparent due to their ghostly nature."); // isn't goo transparent anyway?
-			
 			outputText("\n");
 			if (player.hasStatusEffect(StatusEffects.GooStuffed))
 			{
