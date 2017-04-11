@@ -4800,7 +4800,7 @@ package classes.Scenes.NPCs
 			amilySprite();
 			clearOutput();
 			/*(If player is already locked into a relationship):
-			if (player.hasStatusEffect(StatusEffects.CampMarble) >= 0 || urtaLove()) {
+			if (player.hasStatusEffect(StatusEffects.CampMarble) || urtaLove()) {
 				outputText("You put a hand on her shoulder, bringing her to a stop. She looks so hopeful at you that it's almost painful, but you tell her that, while you do care for her and you like her as a friend, you're already in a relationship with somebody.\n\n", false);
 
 				outputText("\"<i>Are you? ...I see. Well, I'm happy that you, at least, found somebody. I... You're still welcome to come by and talk, but I'll respect your wishes.</i>\" Amily tells you. Evidently still quite embarrassed, she apologises and then melts away into the ruins again.", false);

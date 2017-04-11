@@ -3320,16 +3320,16 @@ private function analFuckRadarEnding():void {
 	//(If PC penetrated her pussy:
 	if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 2) outputText("\n\nEach gyration and pivot of the dick lodged in her slick cunt manipulates and twitches the muscles in Izma's body against her will, essentially turning her into a sort of cock sleeve puppet as your dick flows back and forth along her smooth vaginal walls, like a flash flood along a smooth rock; her feelers struggle to keep up with your erratic appendage as you playfully dodge across her vagina, like a seagull zig-zagging from its brethren with the spoils of sustenance in its craw.  Her pussy will have to wait for it's just desserts.");
 	//(If PC put a TD in Izma's mouth:
-	if (player.hasStatusEffect(StatusEffects.IzmaBlowing) >= 0) outputText("\n\nThe idea of weirding Izma out cracks like lightning across your mind, and you decide this is too good to pass up; to her apparent bewilderment, the ropey appendage in her mouth begins to swivel around, like debris in a wind tunnel as it hits every contour of her mouth, pulling out briefly and smearing your saliva covered dick across her face before plunging back in to further abuse her tongue.");
+	if (player.hasStatusEffect(StatusEffects.IzmaBlowing)) outputText("\n\nThe idea of weirding Izma out cracks like lightning across your mind, and you decide this is too good to pass up; to her apparent bewilderment, the ropey appendage in her mouth begins to swivel around, like debris in a wind tunnel as it hits every contour of her mouth, pulling out briefly and smearing your saliva covered dick across her face before plunging back in to further abuse her tongue.");
 
 	//Izma's Orgasm
 	outputText("Without warning, Izma ");
-	if (player.hasStatusEffect(StatusEffects.IzmaBlowing) < 0) outputText("screams");
+	if (!player.hasStatusEffect(StatusEffects.IzmaBlowing)) outputText("screams");
 	else outputText("releases a maleficiently muffled moan");
 	outputText(" and shakes with what you assume to be a distinctly powerful orgasm, given that the cock you worked her pussy with is damn near sizzling with her lady cum.");
 
 	//(If the PC "crossed swords" with Izma: 
-	if (player.hasStatusEffect(StatusEffects.JerkingIzma) >= 0) outputText("\n\nThe rumbling in her rod comes shortly after, signaling the releases of her jizzum as you stroke her lovingly with the head of your cock while pumping her with your coiled shaft.  Her cum flies straight into the ground and spasms in your tight grip as you hold her member close to comfort it during her release.");
+	if (player.hasStatusEffect(StatusEffects.JerkingIzma)) outputText("\n\nThe rumbling in her rod comes shortly after, signaling the releases of her jizzum as you stroke her lovingly with the head of your cock while pumping her with your coiled shaft.  Her cum flies straight into the ground and spasms in your tight grip as you hold her member close to comfort it during her release.");
 
 The vocal and passionate display of her release drives you over the edge, and you know that you can't hold on much longer. 
 	[proceeds to Tentacle Cumming, if PC only has one-two TD's; If PC has more than two 	TD's, the scene transitions to the TD group cumming]
