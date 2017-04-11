@@ -33,6 +33,7 @@ package classes.Scenes.Monsters
 		 */
 		public function goblinShamanEncounter():void {
 			clearOutput();
+			spriteSelect(124);
 			//First Time Intro
 			if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_SHAMAN] == 0)
 			{

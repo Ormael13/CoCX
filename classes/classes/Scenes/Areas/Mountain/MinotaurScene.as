@@ -44,7 +44,10 @@ public function minoVictoryRapeChoices():void {
 	if (player.hasCock()) {
 		if (player.cockThatFits(80) >= 0) bj = minotaurBlowjob;
 	}
-	if (player.hasCock() && x >= 0) dickRape = bumRapeaMinotaur; mutual = minoMutual;
+	if (player.hasCock() && x >= 0) {
+		dickRape = bumRapeaMinotaur;
+		mutual = minoMutual;
+	}
 	if (x >= 0 && player.cockTotal() > 1 && player.countCocksOfType(CockTypesEnum.TENTACLE) > 0) tentaRape = rapeMinotaurTentacles;
 	if (player.hasVagina()) cuntRape = girlRapeAMinotaur;
 	//Centaurs can't do the herm scene
@@ -1395,7 +1398,7 @@ private function minoMutualPt3(x:Number):void
 	}
 	else if (player.gender == 3) //Player is herm 
 	{
-		outputText("\n\nInstantly [eachCock] is at full mast as your [pussy] begs to be filled. The lust inducing mixture warms your [chest] the way alcohol would, probably due to the minotaur cum mixing with the lust draft. Your mind becomes consumed with the dual urges to fuck and be fucked. [EachCock] {strain / strains} for a tight hole to fill while your [pussy] wants something big and drooling stuffed into its drooling opening. Even now you feel the wetness of your drooling loins salivating and you can’t help but wonder if there is another minotaur around here somewhere to make a [playername] sandwich.");
+		outputText("\n\nInstantly [eachCock] is at full mast as your [pussy] begs to be filled. The lust inducing mixture warms your [chest] the way alcohol would, probably due to the minotaur cum mixing with the lust draft. Your mind becomes consumed with the dual urges to fuck and be fucked. [EachCock] strains for a tight hole to fill while your [pussy] wants something big and drooling stuffed into its drooling opening. Even now you feel the wetness of your drooling loins salivating and you can’t help but wonder if there is another minotaur around here somewhere to make a [name] sandwich.");
 	}
 	
 	outputText("\n\nYou drink your cocktail creation, each swallow sending a heady joy to your brain and [eachCock]. Your [face] twists into a silly grin as your loins stir with every sip.");

@@ -467,6 +467,7 @@ package classes.Scenes.Areas.Forest
 			var gemFind:int = 10 + rand(15);
 
 			outputText("<b>You found " + gemFind + " gems.</b>\n\n");
+			player.gems += gemFind;
 
 			var selector:int = rand(4);
 
