@@ -125,7 +125,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		}
 		
 		public function anzuTransition():void {
-			if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 1) {
+			if (anzuRelationshipLevel() == 1) {
 				outputText("Coming back to the avian’s home, you wander around the insides for a while without finding Anzu. When you’re almost leaving, you hear a noise in the upper floor. On the third floor, you quickly recognize the sound of the beating of wings. You go up stairs until reaching the roof. There, you finally spot Anzu, who is flying over the building. When he sees you there, he waves to you. After drawing a few circles in the air, he lands next to you.");
 				outputText("\n\n\"<i>So, you came again, " + player.mf("boy", "girl") + ".  Anyway, seeing how this place is the opposite of one of those tents that you have, and since I don’t mind that you rest your butt in my living room, this place was a good opportunity to escape from your camp. Either that or you got caught again by another ‘snow storm’ </i>\"");
 				outputText("\n\nPutting aside his joke, a nice and warm spot against the chill Rift is a good place to visit, but actually, you only wanted to spend time with him again. That is, if he has time.");
@@ -155,7 +155,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 				outputText("\n\n\"<i>Friend. It has been centuries since I could call someone else a friend.</i>\" Anzu says wistfully \"<i>[name], I don’t know what to say…But thanks. And I know I’ve said it before, but feel free to come here again. Really. I don’t mind if your house is a dirty shack or anything, but If you want to rest here someday, or have a place to stop when you’re traveling across the Rift, you know where I am.</i>\"");
 				flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] = 2;
 			}
-			else if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 2) {
+			else if (anzuRelationshipLevel() == 2) {
 				outputText("Walking around Anzu’s palace, this time you don’t have to search for him, as you find the avian peacefully sleeping on a couch on the living room. Looks like he isn’t using his usual set of clothing, and only has his robes and underwear covering him.");
 				outputText("\n\nApproaching him silently, and seeing now an opportunity which you probably won't have again in a long time, your hand slip inside the folds of the soft fabric, reaching to his chest, and without advertence to him you start tickling his chest and belly. The avian awakens at the sudden touches, and starts laughing at your constant tickling.");
 				outputText("\n\n\"<i>[name], what are you…, no… please no…, stop you… \"<i> he only manages to say, in between laughter.");
@@ -176,7 +176,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 				doYesNo(anzuRelatLvl3Help, anzuRelatLvl3Dont);
 				return;
 			}
-			else if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] == 3) {
+			else if (anzuRelationshipLevel() == 3) {
 				outputText("The familiar warmness of the palace’s interior welcomes you once more. And, again, Anzu isn’t in the living room. Well, this is his house after all, he can wander around the insides as he pleases. Going upstairs, you quickly find him on the third floor.");
 				outputText("\n\nAnzu is watching the snowy hills through the window down the hall. Approaching him, you notice that instead of his usual purple robes, he is wearing a violet and blue coat. On the back of the coat, patterns made of gems simulate in some way the constellations, absent on Mareth, that he used to see in the skies of his home world. You attract his attention and greet him, after which you join him at the window.");
 				outputText("\n\n\"<i>Hey, [name] I only was watching the view for a while. I’ve heard that in most of Mareth it never rains or snows, but here occasionally we have snow falling. Must be because of the distance from the demonic strongholds. Isn’t too common either. Once or twice every two weeks. </i>\"");
@@ -329,7 +329,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 			cheatTime(0.25);
 			anzuAffection(5);
 			flags[kFLAGS.ANZU_TALKED_PAST] = 1;
-			doNext(anzuTalkMenu);
+			doNext(playerMenu);
 		}
 		private function anzuTalkPalace():void {
 			clearOutput();
@@ -372,7 +372,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 			cheatTime(0.25);
 			anzuAffection(5);
 			flags[kFLAGS.ANZU_TALKED_PALACE] = 1;
-			doNext(anzuTalkMenu);
+			doNext(playerMenu);
 		}
 		private function anzuTalkRift():void {
 			clearOutput();
@@ -388,7 +388,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 			cheatTime(0.25);
 			anzuAffection(5);
 			flags[kFLAGS.ANZU_TALKED_RIFT] = 1;
-			doNext(anzuTalkMenu);
+			doNext(playerMenu);
 		}
 		private function anzuTalkPowers():void {
 			clearOutput();
@@ -433,7 +433,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 			cheatTime(0.25);
 			anzuAffection(5);
 			flags[kFLAGS.ANZU_TALKED_POWERS] = 1;
-			doNext(anzuTalkMenu);
+			doNext(playerMenu);
 		}
 		private function anzuTalkMaraeAndLethice():void {
 			clearOutput();
@@ -467,7 +467,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 			cheatTime(0.25);
 			anzuAffection(5);
 			flags[kFLAGS.ANZU_TALKED_GODS] = 1;
-			doNext(anzuTalkMenu);
+			doNext(playerMenu);
 		}
 		
 		//Sex
