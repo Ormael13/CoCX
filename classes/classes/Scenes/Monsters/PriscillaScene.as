@@ -18,6 +18,7 @@ package classes.Scenes.Monsters
 		*/
 		public function goblinElderEncounter():void {
 			clearOutput();
+			spriteSelect(122);
 			//First Time Intro
 			if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ELDER] == 0)
 			{

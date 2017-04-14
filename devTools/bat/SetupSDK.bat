@@ -5,7 +5,7 @@ set FLEX_SDK=%~dp0\..\..\..\..\Adobe_Flex_SDK
 set AUTO_INSTALL_IOS=yes
 
 :: Path to Android SDK
-set ANDROID_SDK=C:\Users\Sylvain\AppData\Local\Android\sdk
+set ANDROID_SDK=C:\Users\Cathy Trepasso\AppData\Local\Android\Sdk
 
 :validation
 if not exist "%FLEX_SDK%\bin" goto flexsdk

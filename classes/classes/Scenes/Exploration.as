@@ -110,19 +110,16 @@ package classes.Scenes
 				//Imp Lord
 				if (impChooser >= 50 && impChooser < 70) {
 					kGAMECLASS.impScene.impLordEncounter();
-					spriteSelect(29);
 					return;
 				}
 				//Imp Warlord
 				else if (impChooser >= 70 && impChooser < 90) {
 					kGAMECLASS.impScene.impWarlordEncounter();
-					spriteSelect(125);
 					return;
 				}
 				//Imp Overlord (Rare!)
 				else if (impChooser >= 90) {
 					kGAMECLASS.impScene.impOverlordEncounter();
-					spriteSelect(126);
 					return;
 				}
 				else {
@@ -170,25 +167,21 @@ package classes.Scenes
 				//Goblin assassin!
 				if (goblinChooser >= 30 && goblinChooser < 50) {
 					kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
-					spriteSelect(24);
 					return;
 				}
 				//Goblin warrior! (Equal chance with Goblin Shaman)
 				else if (goblinChooser >= 50 && goblinChooser < 65) {
 					kGAMECLASS.goblinWarriorScene.goblinWarriorEncounter();
-					spriteSelect(123);
 					return;
 				}
 				//Goblin shaman!
 				else if (goblinChooser >= 65 && goblinChooser < 80) {
 					kGAMECLASS.goblinShamanScene.goblinShamanEncounter();
-					spriteSelect(124);
 					return;
 				}
 				//Goblin elder!
 				else if (goblinChooser >= 80) {
 					kGAMECLASS.goblinElderScene.goblinElderEncounter();
-					spriteSelect(122);
 					return;
 				}
 				if (player.gender > 0) {
