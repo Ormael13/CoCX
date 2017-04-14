@@ -29,7 +29,7 @@ package classes.Items.Armors
 			game.dynStats("lus", 5);
 			
 			if (!wornUpper) {
-				if 		(game.player.biggestTitSize() >= 8) {
+				if (game.player.biggestTitSize() >= 8) {
 					outputText("The halter top clings tightly to your bustline, sending a shiver of pleasure through your body. You feel how your erect [nipples] protrude from the soft fabric of you beautiful dress, and sensation make you feel slightly dizzy. ");
 					if (game.player.isLactating()) {
 						outputText("You feel how the top your dress become wet, as droplets of milk sip from your [nipples]. ");
@@ -78,9 +78,8 @@ package classes.Items.Armors
 				if (game.player.hasCock()) {
 					outputText("Your [cock] becomes erect under your obscene skirt, bulging unnaturally. ");
 				}
-				else {
+				else if (game.player.hasVagina()) {
 					switch (game.player.vaginas[0].vaginalWetness) {
-						
 						case 5:
 							outputText("Your juice constantly escapes your [pussy] and spoils your sexy skirt. ");
 							game.dynStats("lus", 5);
@@ -94,7 +93,9 @@ package classes.Items.Armors
 							game.dynStats("lus", 5);
 							break;
 					}
-					
+				}
+				if (game.player.gender == 0) {
+					outputText("Despite your lack of features, you indeed feel arousal all over your body. ");
 				}
 				outputText("\n\n");
 				game.player.orgasm('Anal', false);
@@ -115,11 +116,8 @@ package classes.Items.Armors
 			var wornLower:Boolean = game.player.lowerGarment != UndergarmentLib.NOTHING;
 			
 			if (game.player.cor >= 10) {
-				
 				if (wornUpper || wornLower) {
 					var output:String = "";
-					
-
 					output += "It would be awkward to put on " + longName + " when you're currently wearing ";
 					if (wornUpper) {
 						output += game.player.upperGarment.longName;
@@ -139,7 +137,6 @@ package classes.Items.Armors
 					return true;
 			}
 			return true;
-
 		}
 	}
 	

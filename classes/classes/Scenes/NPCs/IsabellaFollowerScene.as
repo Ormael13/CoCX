@@ -263,6 +263,7 @@ private function isabellasAppearance():void {
 	
 	if (isabellaScene.pregnancy.isPregnant) {
 		switch(isabellaScene.pregnancy.event) {
+			case 0: //Just in case
 			case 1:
 				outputText("The cow-girl is about seven and a half feet tall. Instead of feet, she has hooves, complete with fur that grows part-way up her legs. Her olive skirt only covers the upper portion of her dusky, spotted thighs, and it flares out deliciously from her swaying hips. Isabella's top is sheer, white silk that barely hides anything from you, least of all her exotic, quad-tipped nipples. Unlike most of the rest of her, her face is not spotted with dark and white patches. Instead it is pure, unbroken chocolate in color. Two small, bovine horns sprout from her head, emerging from the tangle of her unruly, red curls. She even has a pair of cow ears that flick back and forth from time to time. Very little has changed since you two decided to have a child. Despite the fact that Isabella is off her birth controlling herbs, "); 
 				if (player.cumQ() >= 500) outputText("and your potent babymaking skills, "); 

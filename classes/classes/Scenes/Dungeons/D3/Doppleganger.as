@@ -191,7 +191,7 @@ package classes.Scenes.Dungeons.D3
 		public function Doppleganger() 
 		{
 			this.a = "the ";
-			this.short = "doppleganger";
+			this.short = "doppelganger";
 			this.long = ""; // Needs to be set to supress validation errors, but is handled by an accessor override.
 			this.imageName = "doppleganger";
 			this.plural = false;
@@ -330,6 +330,9 @@ package classes.Scenes.Dungeons.D3
 					break;
 				case EARS_MOUSE:
 					str += " a pair of large, dish-shaped mouse ears";
+					break;
+				case EARS_PIG:
+					str += " a pair of pig ears";
 					break;
 				default:
 					str += " a pair of non-descript ears";
