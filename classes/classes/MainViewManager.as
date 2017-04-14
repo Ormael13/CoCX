@@ -424,25 +424,25 @@ package classes
 			
 			//Time display
 			mainView.timeBG.alpha = 0;
+			var hoursDisplay:String = "";
 			var minutesDisplay:String = "";
+			
+			if (flags[kFLAGS.USE_12_HOURS] > 0) {
+				if ((model.time.hours + getGame().timeQ) % 12 == 0) hoursDisplay = "12";
+				else hoursDisplay = "" + (model.time.hours + getGame().timeQ) % 12;
+			}
+			else hoursDisplay = "" + (model.time.hours + getGame().timeQ);
+			
 			if (model.time.minutes < 10) minutesDisplay = "0" + model.time.minutes;
 			else minutesDisplay = "" + model.time.minutes;
+			
 			mainView.timeText.htmlText = "<u>Day#: " + model.time.days + "</u>\n";
 			if (flags[kFLAGS.USE_12_HOURS] == 0) {
-				mainView.timeText.htmlText += "Time: " + model.time.hours + ":" + minutesDisplay + "";
+				mainView.timeText.htmlText += "Time: " + hoursDisplay + ":" + minutesDisplay + "";
 			}
 			else {
-				if (model.time.hours < 12) {
-					if (model.time.hours == 0) mainView.timeText.htmlText += "Time: " + (model.time.hours + 12) + ":" + minutesDisplay + "am";
-					else mainView.timeText.htmlText += "Time: " + model.time.hours + ":" + minutesDisplay + "am";
-				}
-				else {
-					if (model.time.hours == 12) mainView.timeText.htmlText += "Time: " + model.time.hours + ":" + minutesDisplay + "pm";
-					else mainView.timeText.htmlText += "Time: " + (model.time.hours - 12) + ":" + minutesDisplay + "pm";
-				}
+				mainView.timeText.htmlText += "Time: " + hoursDisplay + ":" + minutesDisplay + ((model.time.hours + getGame().timeQ) < 12 ? "am" : "pm");
 			}
-			//if (timeTextFormat != null) mainView.timeText.setTextFormat(timeTextFormat);
-			
 			//Set theme!
 			setTheme();
 		}
