@@ -46,9 +46,18 @@ package classes
 			return [FACE_SNAKE_FANGS, FACE_LIZARD, FACE_DRAGON].indexOf(faceType) != -1;
 		}
 
-		public function hasReptileUnderBody():Boolean
+		public function hasReptileUnderBody(withSnakes:Boolean = false):Boolean
 		{
-			return [UNDER_BODY_TYPE_LIZARD, UNDER_BODY_TYPE_DRAGON].indexOf(underBody.type) != -1;
+			var underBodies:Array = [
+				UNDER_BODY_TYPE_LIZARD,
+				UNDER_BODY_TYPE_DRAGON,
+			];
+
+			if (withSnakes) {
+				underBodies.push(UNDER_BODY_TYPE_NAGA);
+			}
+
+			return underBodies.indexOf(underBody.type) != -1;
 		}
 
 		public function hasDragonWings(large:Boolean = false):Boolean

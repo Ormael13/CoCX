@@ -801,12 +801,18 @@ package classes
 				outputText("  Your " + num2Text(player.legCount)+ " legs are muscled and jointed oddly, covered in fur, and end in a bestial hooves.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_DOG) 
 				outputText("  " + Num2Text(player.legCount)+ " digitigrade legs grow downwards from your waist, ending in dog-like hind-paws.");
-			else if (player.lowerBody == LOWER_BODY_TYPE_NAGA) 
-				if (player.underBody.type == UNDER_BODY_TYPE_NAGA)
+			else if (player.lowerBody == LOWER_BODY_TYPE_NAGA)
+				if (player.hasReptileUnderBody(true)) {
+					var nagaColors:Array = ["", ""];
+					if (player.underBody.type == UNDER_BODY_TYPE_NAGA)
+						nagaColors = [player.underBody.skin.tone, player.nagaLowerBodyColor2()];
+					else
+						nagaColors = [player.skin.tone, player.underBody.skin.tone];
+
 					outputText("  Below your waist, in place of where your legs would be, your body transitions into a long snake like tail."
-					          +" Your snake-like lower body is covered by " + player.underBody.skin.tone + " color scales,"
-					          +" with " + player.nagaLowerBodyColor2() + " color ventral scales along your underside.");
-				else
+					          +" Your snake-like lower body is covered by " + nagaColors[0] + " color scales,"
+					          +" with " + nagaColors[1] + " color ventral scales along your underside.");
+				} else
 					outputText("  Below your waist your flesh is fused together into a very long snake-like tail.");
 			//Horse body is placed higher for readability purposes
 			else if (player.lowerBody == LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS) 
