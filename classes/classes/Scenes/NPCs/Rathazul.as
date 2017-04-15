@@ -493,7 +493,7 @@ private function collectSilkArmor():void {
 	spriteSelect(49);
 	clearOutput();
 	
-	outputText("Rathazul beams and ejaculates, \"<i>Good news everyone!  Your ", false);
+	outputText("Rathazul beams and announces, \"<i>Good news everyone!  Your ", false);
 	if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_TYPE] == 1) outputText("armor", false);
 	else if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_TYPE] == 2) outputText("robe", false);
 	else outputText("undergarment", false);
