@@ -346,7 +346,7 @@ package classes.Scenes.Monsters
 					//<<GoTo I2>>
 					centaurOnImpResults(2);
 					//<<End>>
-					player.orgasmDick();
+					player.orgasm('Dick');
 					combat.cleanupAfterCombat();
 					return;
 				}
@@ -360,7 +360,7 @@ package classes.Scenes.Monsters
 						outputText("Feeling merciful you extract yourself from the creature, flipping it unto a nearby rock as it begins to regain consciousness.  Before it realizes what you are doing your " + player.cockDescript(player.biggestCockIndex()) + " is prodding at its " + monster.assholeDescript() + ", then sliding quickly between its cheeks.  The amount of slobber over you is more than enough lubricant.  You groan in pleasure as it gives a slight squeal, then proceed to finish yourself off in the once-tight orifice.\n\n", false);
 						//<<Goto I1>> 
 						centaurOnImpResults(1);
-						player.orgasmDick();
+						player.orgasm('Dick');
 						combat.cleanupAfterCombat();
 						return;
 					}
@@ -379,7 +379,7 @@ package classes.Scenes.Monsters
 						//<<cum multiplier: lots>>
 						if (player.cumQ() > 250) outputText("Beneath you the creature's belly is distending more and more, and you can feel some of the overflowing cum filling back out until it is pouring out of the creature's unconscious mouth and overstretched ass, forming a spermy pool beneath it.", false);
 						outputText("With on last grunt you begin extracting the tentacles back out, almost cumming again from the tightness around them.  You give your " + player.cockDescript(player.smallestCockIndex()) + " one last shake over the creature's face before trotting away satisfied and already thinking about the next creature you might abuse.", false);
-						player.orgasmDick();
+						player.orgasm('Dick');
 						combat.cleanupAfterCombat();
 						return;
 					}
@@ -400,12 +400,12 @@ package classes.Scenes.Monsters
 					//<<GoTo I1>>
 					centaurOnImpResults(1);
 					//<<End>>
-					player.orgasmDick();
+					player.orgasm('Dick');
 					combat.cleanupAfterCombat();
 					return;
 				}
 			}
-			player.orgasmDick();
+			player.orgasm('Dick');
 			combat.cleanupAfterCombat();
 		}
 		//CUNTS
