@@ -2171,55 +2171,28 @@ package classes
 		//Rewritten!
 		public function mf(male:String, female:String):String
 		{
-			//if (femWeight()) return female;
-			//else return male;
-			//Dicks?
-			if (hasCock())
-			{
-				if (hasVagina()) // herm
-				{
-					if (biggestTitSize() >= 2) return female;
-					else if (biggestTitSize() == 1) return femininity >= 50 ? female : male;
-					else return femininity >= 75 ? female : male;
-				}
-				else
-					if (biggestTitSize() >= 1 && femininity > 55 || femininity >= 75) return female; // d-girl
-					else return male;
-			}
-			else
-			{
-				if (hasVagina()) // pure female
-					if (biggestTitSize() <= 1 && femininity < 45) return male; // c-boy
-					else return female;
-				else // genderless
-				{
-					if (biggestTitSize() >= 3 || femininity >= 75)
-						return female;
-					else
-						return male;
-				}
-			}
+			if (hasCock() && hasVagina()) // herm
+				return (biggestTitSize() >= 2 || biggestTitSize() == 1 && femininity >= 50 || femininity >= 75) ? female : male;
+
+			if (hasCock()) // male
+				return (biggestTitSize() >= 1 && femininity > 55 || femininity >= 75) ? female : male;
+
+			if (hasVagina()) // pure female
+				return (biggestTitSize() > 1 || femininity >= 45) ? female : male;
+
+			// genderless
+			return (biggestTitSize() >= 3 || femininity >= 75) ? female : male;
 		}
 		
 		public function maleFemaleHerm(caps:Boolean = false):String
 		{
-			if (gender == 0) {
-				if (caps) return mf("Genderless", "Fem-genderless");
-				else return mf("genderless", "fem-genderless");
+			switch (gender) {
+				case GENDER_NONE:   return caps ? mf("Genderless", "Fem-genderless") : mf("genderless", "fem-genderless");
+				case GENDER_MALE:   return caps ? mf("Male", "Dickgirl")             : mf("male", "dickgirl");
+				case GENDER_FEMALE: return caps ? mf("Cuntboy", "Female")            : mf("cuntboy", "female");
+				case GENDER_HERM:   return caps ? mf("Maleherm", "Hermaphrodite")    : mf("maleherm", "hermaphrodite");
+				default: return "<b>Gender error!</b>";
 			}
-			else if (gender == 1) {
-				if (caps) return mf("Male", "Dickgirl");
-				else return mf("male", "dickgirl");
-			}
-			else if (gender == 2) {
-				if (caps) return mf("Cuntboy", "Female");
-				else return mf("cuntboy", "female");
-			}
-			else if (gender == 3) {
-				if (caps) return mf("Maleherm", "Hermaphrodite");
-				else return mf("maleherm", "hermaphrodite");
-			}
-			else return "<b>Gender error!</b>";
 		}
 		
 		//Create a cock. Default type is HUMAN
