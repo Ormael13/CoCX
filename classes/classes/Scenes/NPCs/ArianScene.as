@@ -3206,7 +3206,7 @@ private function useReductoOnAriansAsshole():void {
 private function giveArianReptilum():void {
 	clearOutput();
 	player.consumeItem(consumables.REPTLUM);
-	outputText("Fingering the vial of reptilium, you smirk to yourself.  Quickly wiping it off your face, you instruct Arian to close [Arian eir] eyes and open [Arian eir] mouth, as you have a special surprise for [Arian em].");
+	outputText("Fingering the vial of reptilum, you smirk to yourself.  Quickly wiping it off your face, you instruct Arian to close [Arian eir] eyes and open [Arian eir] mouth, as you have a special surprise for [Arian em].");
 	
 	outputText("\n\nArian, quickly complies.  \"<i>Okay, but can you at least tell me what is this about?</i>\"  [Arian ey] asks in curiosity.");
 	
@@ -3218,7 +3218,7 @@ private function giveArianReptilum():void {
 	
 	outputText("\n\n\"<i>Aww, come on, you can trust me.  I promise not to peek!</i>\"");
 
-	outputText("\n\nYou tell [Arian em] it's more fun this way, popping the bottle of Reptilium open as you do so and following your words up by tipping it into the lizan's carelessly open mouth.");
+	outputText("\n\nYou tell [Arian em] it's more fun this way, popping the bottle of Reptilum open as you do so and following your words up by tipping it into the lizan's carelessly open mouth.");
 	
 	outputText("\n\n\"<i>I sweagrlpff-</i>\" the lizan's protests are cut short by the stream of cool reptilum being poured down [Arian eir] throat.  [Arian Ey] chokes a bit, but quickly adapts, drinking eagerly.  When you finish tipping the bottle and remove it from [Arian eir] lips, Arian coughs a bit and licks [Arian eir] lips.  \"<i>Hmm... that tasted good, what was it?</i>\"");
 	
@@ -3244,7 +3244,7 @@ private function giveArianReptilum():void {
 	
 	//(if ArianFirstRept == 1)
 	if (flags[kFLAGS.ARIAN_FIRST_REPTILUM] == 1) {
-		outputText("\n\nFeeling a touch nervous, you ask if [Arian ey]'s feeling all right.  \"<i>All right?  I'm super!</i>\" [Arian ey] replies, gigling madly.");
+		outputText("\n\nFeeling a touch nervous, you ask if [Arian ey]'s feeling all right.  \"<i>All right?  I'm super!</i>\" [Arian ey] replies, giggling madly.");
 	}
 	else outputText("\n\nYou were kinda waiting for this part.  [Arian Ey] might not know it, but Arian's flexibility is truly impressive for a non-feline.  Just a few extra inches of tongue and [Arian ey] actually manages to lick [Arian eir] belly!");
 	

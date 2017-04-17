@@ -457,7 +457,7 @@ package classes.Scenes.Places.Bazaar
 				}
 			}
 			else if (player.isTaur()) {
-				outputText("\n\nShe smiles big as she turns away and falls to her hands and knees, her ass pointed towards you as she assumes the perfect position. Her dripping wet pussy greets you, salavating for [eachCock] and sending a stirring heat through your body. You very unceremoniously raise your front twoto legs to mount her, shoving your [cockHead] into her dripping snatch.");
+				outputText("\n\nShe smiles big as she turns away and falls to her hands and knees, her ass pointed towards you as she assumes the perfect position. Her dripping wet pussy greets you, salivating for [eachCock] and sending a stirring heat through your body. You very unceremoniously raise your front twoto legs to mount her, shoving your [cockHead] into her dripping snatch.");
 				if (player.biggestCockLength() < 10) {
 					outputText("\n\nA growl comes from somewhere deep inside when you push forward. \n\n\"<i>You like that there tight pussy, doncha?</i>\" She groans through clenched teeth and you have to admit you're enjoying her tight wetness as she flexes her strong internal muscles against your embedded [cock]. \"<i>Fuck me hard stud,</i>\" she groans in that country drawl.");
 					outputText("\n\nYou bear down, pressing her into the ground as you fuck her wet cunt with body- jarring hammer blows. She screams beneath you, a shrill sound filled with so much ecstasy you know she has had another orgasm. You just continue to hammer her slim form into the dirt, listening her scream, groan and pant in response to your [cock] forcing its way in and out of her tiny body.");
@@ -491,7 +491,7 @@ package classes.Scenes.Places.Bazaar
 			clearOutput();
 			outputText(images.showImage("anita-sex-sixtynine"));
 			outputText("Before she says anything you press your lips against hers, shoving her against the tall fence behind her with a lip-locked growl. Still connected at the lips you throw off your [armor] and push her little unbuttoned cut-offs down. She gasps against you, her voice a husky groan as you begin to trail kisses down her neck, hungry to both taste her and to be tasted.");
-			outputText("\n\nYou grind your body against her supple form. Your [fullChest] presses against her soft tits as the two of you pull at each other. As she sucks your neck you tell her how hard you're going to make her cum, how she's going to taste the evidence of your pleasure and with that the married hapry lady slides to the ground and rolls over until her ass is propped up against the fence and her head lies against the ground. With a grin you fold yourself into her.");
+			outputText("\n\nYou grind your body against her supple form. Your [fullChest] presses against her soft tits as the two of you pull at each other. As she sucks your neck you tell her how hard you're going to make her cum, how she's going to taste the evidence of your pleasure and with that the married harpy lady slides to the ground and rolls over until her ass is propped up against the fence and her head lies against the ground. With a grin you fold yourself into her.");
 			if (player.hasCock()) { //Males and hermaphrodites
 				outputText("\n\n");
 				if (player.balls > 0) {
@@ -529,7 +529,7 @@ package classes.Scenes.Places.Bazaar
 				outputText("\n\nSuddenly your face is wetter, and then there is a gushing of a lady cum spraying your face as below you the harpy lady screams in pure euphoric ecstasy. You continue, following through her orgasm until it has subsided and she is left trembling.");
 				outputText("\n\n\"<i>Aw shucks, darlin', you're good at this. I reckon we'll be here awhile.</i>\" Then she shoves her face back into your [asshole]. Instantly your [legs] begin to tingle.");
 				outputText("\n\nAs the tingle of warning becomes the full cacophonous boom of climax you are lost in sensations. It's like the pressure of a raging river breaking free of a dam, exploding in violent glory. It's the boom of dynamite shaking your entire being to the core. Anita's tongue and lips send convulsing shudders through your very soul as the harpy lady brings you to completion again and again and again, leaving you a shuddering mess as you do the same, every time her pussy exploding and squirting you with her very sweet lady spray.");
-				outputText("\n\nYou can't help it as your trembling [ass] forces your voice to come out in agonized groans and soul choking sobs. When she can take your cunnilgal skills no more the harpy lady falls, admitting defeat as her tongue leaves your [asshole].");
+				outputText("\n\nYou can't help it as your trembling [ass] forces your voice to come out in agonized groans and soul choking sobs. When she can take your cunnilingal skills no more the harpy lady falls, admitting defeat as her tongue leaves your [asshole].");
 				outputText("\n\n\"<i>Darlin', you are a gem,</i>\" Anita says, breasts rising and falling as she heaves. You smile at the complement. Without words the two of you kiss and you push her own sweet release into her mouth.</i>\"");
 			}
 			outputText("\n\nYours and Anita's breaths come out in ragged huffs as you both come down from your respective oral-induced highs. After a few seconds your breaths have quieted and the two of you rise, smiling at each other. In the midst of that post-orgasmic glow the two of you chat a little before pulling your respective outfits back on and departing each other's company with a final quick peck on the lips.");
@@ -1450,7 +1450,7 @@ package classes.Scenes.Places.Bazaar
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.hasCock() && player.balls <= 0) {
-				outputText("Without warning your body begins to tremble as just below [eachCock] you feel a warm trickling sensation of fluid sliding down your body. Before you can check it, the sensation becomes ovewhelming as [eachCock] grows hard and ejaculates " + player.clothedOrNaked("into your [armor]", "all over the ground") + ". Once you've recovered from your intense orgasm you " + player.clothedOrNakedLower("remove your [armor] to ") + "clean yourself and find a <b>new pair of balls</b> hanging just below [eachCock].");
+				outputText("Without warning your body begins to tremble as just below [eachCock] you feel a warm trickling sensation of fluid sliding down your body. Before you can check it, the sensation becomes overwhelming as [eachCock] grows hard and ejaculates " + player.clothedOrNaked("into your [armor]", "all over the ground") + ". Once you've recovered from your intense orgasm you " + player.clothedOrNakedLower("remove your [armor] to ") + "clean yourself and find a <b>new pair of balls</b> hanging just below [eachCock].");
 				player.balls = 2;
 				player.ballSize = 1;
 				player.orgasm();
@@ -1723,7 +1723,7 @@ package classes.Scenes.Places.Bazaar
 			//Gain rhino horns
 			//Tier 1
 			if (rand(4) == 0 && changes < changeLimit && player.faceType == FACE_RHINO && player.hornType != HORNS_RHINO) {
-				outputText("\n\nYou begin to feel an annoying tingling sensation at the top of your head. Reaching up to inspect it you find the sharp nub of a horn protruding from the center of your forehead and growing. Once it'sits complete you estimate it to be about six inches long. If it were sharper and a little longer it would make a useful natural weapon.");
+				outputText("\n\nYou begin to feel an annoying tingling sensation at the top of your head. Reaching up to inspect it you find the sharp nub of a horn protruding from the center of your forehead and growing. Once it's complete you estimate it to be about six inches long. If it were sharper and a little longer it would make a useful natural weapon.");
 				player.horns = 1;
 				player.hornType = HORNS_RHINO;
 				changes++;
@@ -1946,7 +1946,7 @@ package classes.Scenes.Places.Bazaar
 						outputText("Your tapered ferret tail begins to feel chilly as all of its fur falls out. It becomes tight as the majority of the tail’s length recedes into your body, leaving you with just a little stump for a tail.");
 						break;
 					case TAIL_TYPE_RHINO:
-						outputText("The tip of your long rino tail begins to itch as the fur begins to fall out. The entire length of your tail becomes tight as the majority of the tail’s length recedes into your body, leaving you with just a little stump for a tail.");
+						outputText("The tip of your long rhino tail begins to itch as the fur begins to fall out. The entire length of your tail becomes tight as the majority of the tail’s length recedes into your body, leaving you with just a little stump for a tail.");
 						break;
 					default: //Catch-all
 						outputText("You groan as you feel your tail shifting and reforming. By the time the sensation is over, you find that you have a little stump for a tail.");

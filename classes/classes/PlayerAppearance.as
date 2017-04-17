@@ -1061,7 +1061,7 @@ package classes
 					else if (player.cocks[cock_index].cockType == CockTypesEnum.RHINO)
 						outputText("  It's a smooth, tough pink colored and takes on a long and narrow shape with an oval shaped bulge along the center.");
 					else if (player.cocks[cock_index].cockType == CockTypesEnum.ECHIDNA)
-						outputText("  It is quite a sight to behold, coming well-equiped with four heads.");
+						outputText("  It is quite a sight to behold, coming well-equipped with four heads.");
 
 					// Knot?
 					if (player.cocks[cock_index].knotMultiplier > 1) {

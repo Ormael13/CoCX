@@ -133,7 +133,7 @@ package classes.Scenes.Areas.Plains
 			var x:Number = player.longestCock();
 			//(if biggestCockLength()>9)
 			if (player.cocks[x].cockLength > 9) outputText("Finally you can feel your cockhead push free into a deeper, wetter place.  You look down at her strange anatomy, the entire length of her tube bulging thicker to accommodate your " + player.cockDescript(x) + ".  You've made it all the way to her vagina!\n\n", false);
-			else outputText("Soon you feel the end of her clitoral tunnel butting up against your crotch.  You are as far in as you'll get.  You look down the length of her strange anatomy, the tube bulging thicker to accomodate your " + player.cockDescript(x) + ".  There are still inches between your cockhead and the end of her clit-dick.\n\n", false);
+			else outputText("Soon you feel the end of her clitoral tunnel butting up against your crotch.  You are as far in as you'll get.  You look down the length of her strange anatomy, the tube bulging thicker to accommodate your " + player.cockDescript(x) + ".  There are still inches between your cockhead and the end of her clit-dick.\n\n", false);
 
 			outputText("Now you begin to roll your hips in a steady rhythm, running your dick up and down her long clitoral tunnel.  It's like the deepest, tightest cunt you've ever had, gripping every inch of you.", false);
 			//(if balls>0)

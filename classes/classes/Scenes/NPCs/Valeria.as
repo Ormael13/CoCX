@@ -592,7 +592,7 @@ private function valeriaGooRapeII():void {
 		if (player.totalCocks() > 1) outputText("s");
 		outputText(", circling your urethra");
 		if (player.totalCocks() > 1) outputText("s");
-		outputText(". You inadvertantly clench your muscles in a way that makes your " + player.multiCockDescriptLight() + " so very swollen, in turn making it that much easier for the gelatinous fiend to have her way with your cumslit");
+		outputText(". You inadvertently clench your muscles in a way that makes your " + player.multiCockDescriptLight() + " so very swollen, in turn making it that much easier for the gelatinous fiend to have her way with your cumslit");
 		if (player.totalCocks() > 1) outputText("s");
 		outputText(". You feel that warm, wet fluid slowly peel it open and push inside. It doesn't hurt at all, but it is a little weird having your " + player.multiCockDescriptLight() + " slowly stuffed in such a way. The warmth travels the whole way down your dick");
 		if (player.totalCocks() > 1) outputText("s");

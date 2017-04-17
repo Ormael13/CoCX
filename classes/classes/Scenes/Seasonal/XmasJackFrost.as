@@ -258,7 +258,7 @@ package classes.Scenes.Seasonal {
 						if (player.hasCock()) {
 							outputText("\n\nYou strip off your lower garments, exposing your " + player.multiCockDescriptLight() + " to the hungry eyes of your cumslut.  You tell her you would like her to give you a \"<i>hand</i>\", with the extraction process...");
 							outputText("\n\nAmily bows respectfully.  \"<i>Right away, [master].</i>\"");
-							outputText("\n\nShe promptly takes hold of your [cock] with awe-filled respect, her long, dextrous fingers quickly falling into the familiar rhythym of dancing along your cock to fill you with the most wonderous sensations.  Her spaded tail wiggles idly for several moments, then slithers through the air to brush its feather-like tip against the tip and underside of your shaft");
+							outputText("\n\nShe promptly takes hold of your [cock] with awe-filled respect, her long, dextrous fingers quickly falling into the familiar rhythm of dancing along your cock to fill you with the most wondrous sensations.  Her spaded tail wiggles idly for several moments, then slithers through the air to brush its feather-like tip against the tip and underside of your shaft");
 							if (player.balls > 0) outputText(", even tickling your [balls]");
 							else if (player.hasVagina()) outputText(", even tickling your [cunt] for added tantalization");
 							outputText(".");

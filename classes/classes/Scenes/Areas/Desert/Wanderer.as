@@ -72,7 +72,7 @@ private function wandererStayHuman():void {
 //Ask marcus to go demon
 private function wandererGoDemon():void {
 	spriteSelect(42);
-	outputText("Lucia breaks into a mischievious smile as you suggest taking her up on her offer.  She sashays over to you, flesh jiggling enticingly the whole way.  She leans close, sliding a slender finger down the center of your chest.  \"<i>Thank you for this.  Should we meet again, I promise rewards fit to make a whore faint.</i>\"\n\n", true);
+	outputText("Lucia breaks into a mischievous smile as you suggest taking her up on her offer.  She sashays over to you, flesh jiggling enticingly the whole way.  She leans close, sliding a slender finger down the center of your chest.  \"<i>Thank you for this.  Should we meet again, I promise rewards fit to make a whore faint.</i>\"\n\n", true);
 	outputText("Marcus raises an eyebrow at the exchange, but smiles as his demonic lover returns to his side.  Lucia winks again, and huge wings explode from her back.  She grabs Marcus, who bleats in surprise, and lifts off, flying away with her prize to her lair.", false);
 	dynStats("lus", 5, "cor", 1);
 	player.createStatusEffect(StatusEffects.WandererDemon,0,0,0,0);

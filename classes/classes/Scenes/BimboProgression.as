@@ -273,7 +273,7 @@ package classes.Scenes
 						if (rand(10) == 0 || (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_DROOLING && rand(2)==0)) {
 							outputText("pressing it harder and harder. You start moaning, your hands shaking, unable to think straight. Your well-lubricated [pussy] aches for it, and you give so much desired push. ");
 							player.cuntChange(8, true, true, true);
-							outputText(" You scream in pain an pleasure, as your [pussy] stretches, accomodating to a throbbing item inside. You take a deep breath, then push again, this time further. It becomes impossible to think of anything but wild urge in your [vagina].");
+							outputText(" You scream in pain an pleasure, as your [pussy] stretches, accommodating to a throbbing item inside. You take a deep breath, then push again, this time further. It becomes impossible to think of anything but wild urge in your [vagina].");
 							player.cuntChange(16, true, true, false);
 							getGame().dynStats("cor", 3);
 							useDildo = 2;
@@ -327,7 +327,7 @@ package classes.Scenes
 					if (rand(2) == 0 && player.buttRating < 12) {
 						outputText("You thrust your toy inside, deeper and deeper, faster and faster, feeling how your [ass] is bouncing in rhythm with your motions. You feel how it blossoms, becomes more sensitive and seductive, as you pump your insatiable [pussy]. ");
 						player.buttRating++;
-						outputText("You get on your kness, slower your pace, but start to thrust the dildo in your pussy much more vigorously, making loud moans every time the phallos enters you pussy, forcing it even deeper and harder inside, and feeling your [ass] shakes with every thrust.");
+						outputText("You get on your knees, slower your pace, but start to thrust the dildo in your pussy much more vigorously, making loud moans every time the phallos enters you pussy, forcing it even deeper and harder inside, and feeling your [ass] shakes with every thrust.");
 						player.cuntChange(8 + 0.75 * player.vaginalCapacity(), true, false, false);
 						getGame().dynStats("cor", 0.5);
 						outputText("\n\n");
@@ -414,12 +414,12 @@ package classes.Scenes
 				outputText("\n\nYou start gently caressing your " + player.cockDescript(0) + " your mind fixated on images of pussies you've encountered in your journey. You imagine opening slicky pussy lips, wet with sweet girl-cum. As you stroke your [cock], you imagine licking soft pink clit, so small compared to your large member, but somehow so much prettier and enjoyable. You think of what pleasures you would have if you had that soft womanhood, and the idea drives you into frenzy.");
 				
 				if (rand(4) == 0 && player.hipRating < 12) {
-					outputText("\n\nYou close your eyes and pant hard, feeling sensation of warmth spread over your hips. With your other hand you start caressing your [hips]. You need big hips, or cocks would not fit inside. Your mind stumbles processing this idea, but your hand don't stop. The sensation of expanding flesh makes you gulp with a thrill, as you rythmically rock your [hips] back and forth, entranced by obsession with pussies.");
+					outputText("\n\nYou close your eyes and pant hard, feeling sensation of warmth spread over your hips. With your other hand you start caressing your [hips]. You need big hips, or cocks would not fit inside. Your mind stumbles processing this idea, but your hand don't stop. The sensation of expanding flesh makes you gulp with a thrill, as you rhythmically rock your [hips] back and forth, entranced by obsession with pussies.");
 					player.hipRating += 0.5;
 					getGame().dynStats("cor", 0.5);
 				}							
 				if (rand(4) == 0 && player.buttRating < 12) {
-					outputText("\n\nYou fill folds of your sluttish skirt on your [ass], and your mind starts to fantasize about filling pussy from behind. You imagine bloated and soft ass, bouncing with every movenent, and you almost feel the jiggling flesh as you rythmically shake your [hips]. You imagine being taken from behind, and close your eyes in immense pleasure.");
+					outputText("\n\nYou fill folds of your sluttish skirt on your [ass], and your mind starts to fantasize about filling pussy from behind. You imagine bloated and soft ass, bouncing with every movement, and you almost feel the jiggling flesh as you rhythmically shake your [hips]. You imagine being taken from behind, and close your eyes in immense pleasure.");
 					player.buttRating += 0.5;
 					getGame().dynStats("cor", 0.5);
 				}							
@@ -465,7 +465,7 @@ package classes.Scenes
 			if (flags[kFLAGS.TIMES_ORGASM_TITS]>0) flags[kFLAGS.TIMES_ORGASM_TITS]--;
 			
 			if (player.biggestTitSize() >= 8) {
-				outputText("Your mind wanders off recaling your recent hussles. You gently stroke your " + player.breastDescript(0) + ", thinking about all the way you could use them to satisfy the needs of all the monsters and demons you encountered. You think about hugging monstrous cocks with your tits, squeesing the precious cum. You feel how your erect [nipples] protrude from the soft fabric of you beautiful dress, and sensation make you feel slightly dizzy. ");
+				outputText("Your mind wanders off recalling your recent hussles. You gently stroke your " + player.breastDescript(0) + ", thinking about all the way you could use them to satisfy the needs of all the monsters and demons you encountered. You think about hugging monstrous cocks with your tits, squeezing the precious cum. You feel how your erect [nipples] protrude from the soft fabric of you beautiful dress, and sensation make you feel slightly dizzy. ");
 				if (player.isLactating()) {
 					outputText("You feel how the snug top your dress become wet, as droplets of milk sip from your [nipples]. ");
 				}
@@ -522,7 +522,7 @@ package classes.Scenes
 			if (player.cocks.length > 0 && rand(3) == 0) removeCock = true;
 						
 			if  	(player.biggestTitSize() < 1)  {
-				outputText("You are fantasizing about cupping your tits, wanting them to be fuller. You are imaginging succubi and goblin girls, how they may feel with all the the added weight on their chest.");
+				outputText("You are fantasizing about cupping your tits, wanting them to be fuller. You are imagining succubi and goblin girls, how they may feel with all the the added weight on their chest.");
 				//outputText("\nYou imagine becoming a slut with a luscious tits, ready to be fucked by anyone. You daydream of riding a monstrous cock, with tits swaying from side to side, and a soft moan escapes your mouth as you touch your areolas. ");
 				if (growTits) {
 					outputText(" As you fondle yourself, you start feeling a how tender flesh swells under your hands. With a blissful smile you realize that <b>you have A-cup breast now</b>, and this realization make you cum.\n\n");
@@ -536,9 +536,9 @@ package classes.Scenes
 				}
 			}
 			else if (player.biggestTitSize() < 2) {
-				outputText("You grope your " + player.breastDescript(0) + ". They feel very sensitive and yet somehow supple. You are imaginging succubi and goblin girls, and how they may feel with their boobs swaying from side to side, as they are fucked, and a soft moan escapes your mouth as you touch your areolas.");
+				outputText("You grope your " + player.breastDescript(0) + ". They feel very sensitive and yet somehow supple. You are imagining succubi and goblin girls, and how they may feel with their boobs swaying from side to side, as they are fucked, and a soft moan escapes your mouth as you touch your areolas.");
 				if (growTits) {
-					outputText(" It’s almost impossible to pull your hands away, but you make do, if only so you can better view your burgeoning bosom as it grows. <b>Your titties are getting pretty big now!</b>  Moaning in excitement, you realize that one hand has reached back up to caress a sensitive nipple. You don’t try to stop it. Best of all, the sensations grow hotter and more potent moment by moment. Your legs curl as you feel a tide of mind-melting orgazm overcomes your resistance, and you shake in convulsions, feeling your hot and jiggly flesh under your palm.\n");
+					outputText(" It’s almost impossible to pull your hands away, but you make do, if only so you can better view your burgeoning bosom as it grows. <b>Your titties are getting pretty big now!</b>  Moaning in excitement, you realize that one hand has reached back up to caress a sensitive nipple. You don’t try to stop it. Best of all, the sensations grow hotter and more potent moment by moment. Your legs curl as you feel a tide of mind-melting orgasm overcomes your resistance, and you shake in convulsions, feeling your hot and jiggly flesh under your palm.\n");
 					player.growTits(1, 1, false, 3);
 					getGame().dynStats("cor", 0.2);
 				}
@@ -553,7 +553,7 @@ package classes.Scenes
 					outputText("Freeing your " + player.breastDescript(0) + " from the halter top of your beautiful dress, you start squeezing them aggressively, emitting loud moans of pleasure each time you flick one of your ");
 				}
 				else {
-					outputText("You free your " + player.breastDescript(0) + " from confines of your sluttish outfut and start caressing them gently, emitting soft gasps of pleasure each time you flick one of your ");
+					outputText("You free your " + player.breastDescript(0) + " from confines of your sluttish outfit and start caressing them gently, emitting soft gasps of pleasure each time you flick one of your ");
 				}
 				if 		(player.biggestLactation() > 2) outputText("huge, swollen nipples. ");
 				else if (player.biggestLactation() > 1) outputText("fat, puckered nipples. ");
@@ -652,7 +652,7 @@ package classes.Scenes
 					else if (player.biggestLactation() < 2) {
 						outputText("Your busily tug your [nipples], feeling a strong pressure in your chest. You yank down your top as powerful jets of milk spray from your nipples, spraying thick streams all around. ");
 						if (drinkTits) titDrink();
-						outputText("\n\nYour [vagorass] clenches in rythmic pulsations, the pleasure becomes unbearable, and your whole body shakes in a powerful orgasm.");
+						outputText("\n\nYour [vagorass] clenches in rhythmic pulsations, the pleasure becomes unbearable, and your whole body shakes in a powerful orgasm.");
 						player.boostLactation(.5);
 						getGame().dynStats("cor", 0.2);
 						dynStats("lib", 1, "sen", 4, "lus", 15);
@@ -660,7 +660,7 @@ package classes.Scenes
 					else if (player.biggestLactation() <= 2.6) {
 						outputText("Your busily tug your [nipples], feeling a strong pressure in your " + player.breastDescript(0) + ". You yank down your top as eruptions of milk squirt from your nipples, hosing thick streams everywhere. The feeling of the constant gush of fluids is very erotic, and you find yourself getting more and more into this. ");
 						if (drinkTits) titDrink();
-						outputText("\n\nYour mind is overwhelmed by a pleasure as your " + player.breastDescript(0) + " are producing jets of delicious white cream. Your [vagorass] clenches and [hips] shake in rythmic pulsations. The pressure builds and builds until you mind loses any control, and your body shatters in an orgasm.\n\n");
+						outputText("\n\nYour mind is overwhelmed by a pleasure as your " + player.breastDescript(0) + " are producing jets of delicious white cream. Your [vagorass] clenches and [hips] shake in rhythmic pulsations. The pressure builds and builds until you mind loses any control, and your body shatters in an orgasm.\n\n");
 						player.boostLactation(.5);
 						getGame().dynStats("cor", 0.2);
 						dynStats("lib", 1, "sen", 4, "lus", 15);
@@ -670,7 +670,7 @@ package classes.Scenes
 						outputText("Your busily tug your [nipples], feeling a strong pressure in your " + player.breastDescript(0) + ". You yank down your top as thick hoses of milk erupt from your aching nipples, forming puddles in the ground.  You smile at yourself, your milk coating the ground faster than it can be absorbed.  The constant lactation entrances you, and you find yourself moaning and pulling on your nipples, totally outside of your control. ");
 						if (drinkTits) titDrink();
 						
-						outputText("\n\nYour legs curl as your [vagorass] clenches, your dress sticky from the milk sprayed all over you. A low moan builds up in your chest, rising up to a high-pitched scream of immense pleasure, as hour hands fevereshly tug your nipples dry. Powerful convulsions shutter your resistance, and you lay back, spent. You feel lightheaded from the intense milking, and have difficulty focusing on anything but the residue of fluids coating your " + player.allBreastsDescript() + ".\n\n");
+						outputText("\n\nYour legs curl as your [vagorass] clenches, your dress sticky from the milk sprayed all over you. A low moan builds up in your chest, rising up to a high-pitched scream of immense pleasure, as hour hands feverishly tug your nipples dry. Powerful convulsions shutter your resistance, and you lay back, spent. You feel lightheaded from the intense milking, and have difficulty focusing on anything but the residue of fluids coating your " + player.allBreastsDescript() + ".\n\n");
 						
 						if (player.inte > 5) getGame().dynStats("int", -1);
 						getGame().dynStats("lib", 1, "sen", 4);						
@@ -679,7 +679,7 @@ package classes.Scenes
 						player.boostLactation(.5);
 					}
 					else {
-						outputText("Your fevershly tug your [nipples], and feel that there's no stopping the tidal wave of backed - up bliss. You can feel it pushing against your buds from the inside, released in squirts and sprays more orgasmic than any climax amidst your nethers. You tug at them in a wild frenzy, too delirious to register pain or discomfort. On your back, you mindlessly milk huge squirts of white ambrosia onto yourself and the ground. There's so much! Rivers of it wash down the sides of your " + player.breastDescript(0) + ".");
+						outputText("Your feverishly tug your [nipples], and feel that there's no stopping the tidal wave of backed - up bliss. You can feel it pushing against your buds from the inside, released in squirts and sprays more orgasmic than any climax amidst your nethers. You tug at them in a wild frenzy, too delirious to register pain or discomfort. On your back, you mindlessly milk huge squirts of white ambrosia onto yourself and the ground. There's so much! Rivers of it wash down the sides of your " + player.breastDescript(0) + ".");
 						if (drinkTits) titDrink();
 						outputText("\n\nSeconds, minutes, and maybe even hours are passing, but they're of little consequence to you. ");
 						outputText(" You're lead, squirming and moaning, from one milk-dripping orgasm to the next, coating yourself so thickly in the sticky fluid that its all you can smell anymore.  On and on, the cascades of ecstasy wash over you, exuded from your prominent buds as easily as the constant streams, but eventually, even seemingly timeless pleasure must abate. You dimly become aware that your milk has stopped flowing, your reserves exhausted. ");
@@ -730,7 +730,7 @@ package classes.Scenes
 				outputText("You feel how fine fabric of your sluttish skirt don't quite cover your [ass], and how smooth skirt is stretched by your [hips]. Your[asshole] clenches as you imagine how your cheeks are spread and a head of a hard cock pushes your [butthole].");
 			}
 			else {
-				outputText("You mind wanders recaling your recent hussles. Your gently stroke your [butt], thinking about the pleasures of being filled with large and tasty cocks.");
+				outputText("You mind wanders recalling your recent hussles. Your gently stroke your [butt], thinking about the pleasures of being filled with large and tasty cocks.");
 				if (player.buttRating > 6) outputText(" Your whorish [ass] looks quite seductive in your nice dress, you caress it, feeling how your [asshole] clenches is anticipation of a pleasure.");
 				outputText(" You daydream about getting fucked by all kinds of monstrous cocks, from minotaurs' thick, smelly dongs to demons' towering, bumpy pleasure-rods.");
 			}
@@ -760,7 +760,7 @@ package classes.Scenes
 			// Prelude
 			
 			if (bimboRating() <= 1) {
-				outputText(" Warmth spreads all over yout [butt], your [asshole] clenches, and you realize that it becomes impossible to stop touching yourself.\n"); 
+				outputText(" Warmth spreads all over your [butt], your [asshole] clenches, and you realize that it becomes impossible to stop touching yourself.\n"); 
 				outputText("\nYou adjust your position as you spread your [legs], giving you the most comfortable access to your [asshole].");
 			}
 			else if (bimboRating() <= 2) {
@@ -798,7 +798,7 @@ package classes.Scenes
 					getGame().dynStats("cor", 0.2);
 				}
 				if (rand(2) == 0 && player.biggestTitSize() > 2)  {
-					outputText("Entranced by desire, you start smugding the precum around your [nipples], as pulses of pleasure spread over your " + player.breastDescript(0) + ".");
+					outputText("Entranced by desire, you start smudging the precum around your [nipples], as pulses of pleasure spread over your " + player.breastDescript(0) + ".");
 					player.orgasm('Tits');
 					getGame().dynStats("cor", 0.2);
 				}
@@ -930,10 +930,10 @@ package classes.Scenes
 			var craving:int = lipCraving();
 			
 			if 		(craving == 1) {
-				outputText("Absentmindedly you lick your lips, and immediately feel warmh spreading over our face. You lick your lips again, feeling how sensual they become. ");
+				outputText("Absentmindedly you lick your lips, and immediately feel warmth spreading over our face. You lick your lips again, feeling how sensual they become. ");
 			}
 			else if (craving == 2) {
-				outputText("Your mind wanders off recaling your recent hussles. You keep licking your lips, blushing with the sexual pleasure it brings you. You are thinking of how wet your lips are, and you swallow, feeling strange hunger and itching all over your face. ");
+				outputText("Your mind wanders off recalling your recent hussles. You keep licking your lips, blushing with the sexual pleasure it brings you. You are thinking of how wet your lips are, and you swallow, feeling strange hunger and itching all over your face. ");
 			}
 			else if (craving == 3) {
 				outputText("Your mind wanders off, recalling taste of cum in your mouth. You keep licking your whorish lips, almost feeling the stickiness and musky smell. You wander how much time will pass before you can taste that magnificent cum again. ");
@@ -975,7 +975,7 @@ package classes.Scenes
 					player.orgasm('Vaginal',false);
 				}
 				else if (player.hasCock()) {
-					outputText("Your gently stroke your [cock], feeling a drible of precum. Overwhelmed by strange thoughts, you take your hand out and start licking pre-cum from you fingers. The taste is disgusting but somehow delicious, and you feel how your lips start to tingle. You make another soft moan, feeling how your indecent skirt becomes wet as your [cock] spray cum all over your shaky [legs].\n");
+					outputText("Your gently stroke your [cock], feeling a dribble of precum. Overwhelmed by strange thoughts, you take your hand out and start licking pre-cum from you fingers. The taste is disgusting but somehow delicious, and you feel how your lips start to tingle. You make another soft moan, feeling how your indecent skirt becomes wet as your [cock] spray cum all over your shaky [legs].\n");
 					
 				}
 				else {
@@ -993,7 +993,7 @@ package classes.Scenes
 				
 				outputText("You undress the top of your slutty outfit and begin caressing your [nipples]. ");
 				if (rand (2) == 0) {
-					outputText("A thin line of drool excapes from your mouth and drops to your " + player.breastDescript(0) + ".");
+					outputText("A thin line of drool escapes from your mouth and drops to your " + player.breastDescript(0) + ".");
 					if (player.biggestTitSize() < 1) {
 						outputText(" Immediately you feel as warmth spreads over your chest, and you are feeling how tender titflesh expands under your palm. ");
 						player.growTits(1, 1, false, 3);
@@ -1013,7 +1013,7 @@ package classes.Scenes
 					}
 					player.orgasm('Tits');
 					getGame().dynStats("cor", 0.2);
-					outputText(" As waves of pleasure subside, you open your eyes. Satisfied, you let your tit rest for a while. You should definetly repeat this some time.\n");
+					outputText(" As waves of pleasure subside, you open your eyes. Satisfied, you let your tit rest for a while. You should definitely repeat this some time.\n");
 				}
 				else {
 					outputText("\n\nMindlessly, you stuck a thumb in your mouth and start sucking. Your sensitive lips make this experience unbearable, you start moaning even harder. ");
@@ -1031,7 +1031,7 @@ package classes.Scenes
 						getGame().dynStats("cor", 0.2);
 						player.orgasm('Lips');
 					}
-					outputText(" As waves of pleasure subside, you open your eyes. Satisfied, you let your thumb out for a while. You should definetly repeat this some time.\n");
+					outputText(" As waves of pleasure subside, you open your eyes. Satisfied, you let your thumb out for a while. You should definitely repeat this some time.\n");
 				}
 				if (player.inte > 5) getGame().dynStats("int", -0.1);
 				getGame().dynStats("lib", 1, "sen", 2);
@@ -1079,7 +1079,7 @@ package classes.Scenes
 				else player.orgasm('Lips');
 				
 				if (player.hasKeyItem("Deluxe Dildo") >= 0) {
-					outputText("A shiver runs up your spine as you remember the floppy pink dildo that Tamani gave to you. With shaking hands you retrieve it from your posessions and lick it hungrily. It responses by leaking a drop of pink aphrodisiac from the tip, and you greedily put it in your mouth and start sucking. You are feeling how your tongue is set on fire by a sensual pleasure of arousing juice. The thickness of the toy gradually increases, filling you more and more effectively as it reacts to your wetness. The sensations just keep getting better and better as more and more of the goblin's sex-drug leaks into you.\n\n");
+					outputText("A shiver runs up your spine as you remember the floppy pink dildo that Tamani gave to you. With shaking hands you retrieve it from your possessions and lick it hungrily. It responses by leaking a drop of pink aphrodisiac from the tip, and you greedily put it in your mouth and start sucking. You are feeling how your tongue is set on fire by a sensual pleasure of arousing juice. The thickness of the toy gradually increases, filling you more and more effectively as it reacts to your wetness. The sensations just keep getting better and better as more and more of the goblin's sex-drug leaks into you.\n\n");
 					
 					if (player.hasVagina()) {
 						outputText("With you other hand you quickly reach under to your [vagina] and start stroking it. ");
@@ -1100,7 +1100,7 @@ package classes.Scenes
 					player.orgasm('Lips');
 				}
 				else if (player.hasKeyItem("Dildo") >= 0) {
-					outputText("A shiver runs up your spine as you remember your dildo. You retrieve it from your posessions and start hungrily sucking it, imagining it being real phallos. In your fantasy you are a whore, who's only purpose is to serve as a cocksucker. You greedily plunge it inside your mouth, hoping in vain that it will fill you with cum.\n\n");					
+					outputText("A shiver runs up your spine as you remember your dildo. You retrieve it from your possessions and start hungrily sucking it, imagining it being real phallos. In your fantasy you are a whore, who's only purpose is to serve as a cocksucker. You greedily plunge it inside your mouth, hoping in vain that it will fill you with cum.\n\n");					
 					
 					if (player.hasVagina()) {
 						outputText("With you other hand you quickly reach under to your [vagina] and start stroking it. ");
@@ -1129,7 +1129,7 @@ package classes.Scenes
 						outputText("Interrupting only to lick musky pre-cum from your finders, you continue sucking your thumb and stroking your [cock]. In your fantasy, you suck a cock much bigger than yours, as it becomes thicker, ready to unload in your mouth. This thought arouses you immensely, and very soon all the barriers break, as your hot [cock] and your indecent mouth explode in breath-taking pleasure. ");
 						if (rand(2) == 0) reduceDick = true;
 					}
-					outputText(" As waves of pleasure subside, you open your eyes. Satisfied, you let your thumb out for a while. You should definetly repeat this some time.\n");
+					outputText(" As waves of pleasure subside, you open your eyes. Satisfied, you let your thumb out for a while. You should definitely repeat this some time.\n");
 					if (player.inte > 5) getGame().dynStats("int", -0.2);
 					getGame().dynStats("lib", 1, "sen", 2);
 					getGame().dynStats("cor", 0.2);
@@ -1168,26 +1168,26 @@ package classes.Scenes
 			flags[kFLAGS.BIMBOSKIRT_MINIMUM_LUST] = 50;
 			
 			if (!(player.tone == 0)) {
-				outputText("\nYou are losing your mind in a sea pure enjoyement that awashes your broken body. Somehow you want to just stop bothering with your silly quest, and give in to the pleasure of being a whore, having your soft and sinful body fucked beyond all senses...\n\n");
+				outputText("\nYou are losing your mind in a sea pure enjoyment that awashes your broken body. Somehow you want to just stop bothering with your silly quest, and give in to the pleasure of being a whore, having your soft and sinful body fucked beyond all senses...\n\n");
 				if (rand(2) == 0 ) player.orgasm('Anal',false);
 				else player.orgasm('Tits',false);
 			}
 			else if (!(player.hipRating >= 12)) {
-				outputText("\nYou are losing your mind in a sea pure enjoyement that awashes your broken body. You lay down, spreading your [legs] to let everyone see your [vagorass]. Somehow you want to just stop bothering with your silly quest, and give in to the pleasure of being a whore, being pumped with a cum up to the very brims ...\n\n");
+				outputText("\nYou are losing your mind in a sea pure enjoyment that awashes your broken body. You lay down, spreading your [legs] to let everyone see your [vagorass]. Somehow you want to just stop bothering with your silly quest, and give in to the pleasure of being a whore, being pumped with a cum up to the very brims ...\n\n");
 				if (rand(2) == 0 ) player.orgasm('Anal',false);
 				else player.orgasm('Tits',false);
 			}
 			else if (!(player.buttRating >= 12)) {
-				outputText("\nYou are losing your mind in a sea pure enjoyement that awashes your broken body. Somehow you want to just stop bothering with your silly quest, and give in to the pleasure of being a whore, having your large and fuckable [ass] violated by monstrous cocks...\n\n");
+				outputText("\nYou are losing your mind in a sea pure enjoyment that awashes your broken body. Somehow you want to just stop bothering with your silly quest, and give in to the pleasure of being a whore, having your large and fuckable [ass] violated by monstrous cocks...\n\n");
 				if (rand(2) == 0 ) player.orgasm('Anal',false);
 				else player.orgasm('Vaginal',false);
 			}
 			else if (!(player.biggestTitSize() >= 12)) {
-				outputText("\nYou are losing your mind in a sea pure enjoyement that awashes your broken body. Somehow you want to just stop bothering with your silly quest, and give in to the pleasure of being a whore, having your juggly udders swishing as your drooling cunt is being pumped by monstrous cocks...\n\n");
+				outputText("\nYou are losing your mind in a sea pure enjoyment that awashes your broken body. Somehow you want to just stop bothering with your silly quest, and give in to the pleasure of being a whore, having your jiggly udders swishing as your drooling cunt is being pumped by monstrous cocks...\n\n");
 				player.orgasm('Tits',false);
 			}
 			else {
-				outputText("\nYou are losing your mind in a sea pure enjoyement that awashes your broken body. Somehow you want to just stop bothering with your silly quest, and give in to the pleasure of being a whore, feeling how hot and thrubbing member sprouts babymaking cum inside your belly...\n\n");
+				outputText("\nYou are losing your mind in a sea pure enjoyment that awashes your broken body. Somehow you want to just stop bothering with your silly quest, and give in to the pleasure of being a whore, feeling how hot and throbbing member sprouts babymaking cum inside your belly...\n\n");
 			}
 			
 			if (player.inte > 5) getGame().dynStats("int", -1);
@@ -1242,7 +1242,7 @@ package classes.Scenes
 		
 		public 	function debimbifyMe():void {
 			
-			outputText("\nYour mind wanders off recaling your recent hussles, but you keep focus on your quest.\n");
+			outputText("\nYour mind wanders off recalling your recent hussles, but you keep focus on your quest.\n");
 			
 			if 		(flags[kFLAGS.TIMES_ORGASM_VAGINAL] > 0 ) 	flags[kFLAGS.TIMES_ORGASM_VAGINAL]--;
 			else if (flags[kFLAGS.TIMES_ORGASM_TITS] > 0 ) 		flags[kFLAGS.TIMES_ORGASM_TITS]--;

@@ -1205,7 +1205,7 @@ package classes.Scenes
 						displayedUpdate = true;
 					}
 					if (player.pregnancyIncubation == 864) {
-						outputText("<b>Your distended belly has grown noticably, but you still have a long way to go.</b>");
+						outputText("<b>Your distended belly has grown noticeably, but you still have a long way to go.</b>");
 						displayedUpdate = true;
 					}
 					if (player.pregnancyIncubation == 576) {
@@ -1586,7 +1586,7 @@ package classes.Scenes
 				outputText("Hurriedly you strip off your gear and sit down with your back against a rock.  Focusing yourself, you attempt to prepare for labor; you try to remember your recent partners and worry about what kind of monstrous infant you might have to force out of your " + player.vaginaDescript(0) + ".  The first contraction comes and you push as hard as you can, to be rewarded with the feeling of something sliding out between your labia.  You attempt a few more pushes but nothing further seems forthcoming; curious, you look down at your crotch only to discover a blue stalk sticking proudly out of your vagina!\n\n", false);
 				
 				if (flags[kFLAGS.ANEMONE_KID] > 0) {
-					outputText("As you take in the sight, small nodules around the tip begin to form and lengthen, until the little anemone is capped by a mop of wriggling blue-green tentacles.  Horrified, you grasp it at the base and give it a sharp pull.  The pain makes you lock up and nearly takes away your consciousness as its sticky surface releases its grip on your labia and " + player.clitDescript() + "!   It writhes and slips out of your pain-wracked hands, leaving them tingling.  As you lie there, stunned, it begins to inch back toward your " + player.vaginaDescript(0)+ ".  Footfalls sound next to you, and a blue hand picks up the squirming, cilliated creature.  Kid A gives you a shy smile, then turns to her barrel.  A quick splash and a filled waterskin later, she heads toward the stream, toting your grub-like offspring.");
+					outputText("As you take in the sight, small nodules around the tip begin to form and lengthen, until the little anemone is capped by a mop of wriggling blue-green tentacles.  Horrified, you grasp it at the base and give it a sharp pull.  The pain makes you lock up and nearly takes away your consciousness as its sticky surface releases its grip on your labia and " + player.clitDescript() + "!   It writhes and slips out of your pain-wracked hands, leaving them tingling.  As you lie there, stunned, it begins to inch back toward your " + player.vaginaDescript(0)+ ".  Footfalls sound next to you, and a blue hand picks up the squirming, ciliated creature.  Kid A gives you a shy smile, then turns to her barrel.  A quick splash and a filled waterskin later, she heads toward the stream, toting your grub-like offspring.");
 					player.cuntChange(20,true,true,false);
 					outputText("\n\nExhausted by the birth but with a burden lifted from your mind, you slip into a grateful doze.");
 					player.knockUpForce(); //Clear Pregnancy

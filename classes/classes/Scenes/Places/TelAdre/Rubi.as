@@ -1908,7 +1908,7 @@ private function putOnSluttySwimwearYouSkank():void {
 
 	outputText("\n\nRubi starts off with the bikini bottoms, which consists of a strip of cloth that can barely be considered clothing.  [rubi Ey] pulls it up [rubi eir] legs and lets it cling tightly to [rubi eir] ample ass before turning around and waggling it at you.  Next comes the top, a halter-style bikini top that [rubi ey] slips over [rubi eir] head and ties up behind [rubi eir] back.  The two triangular pieces of fabric");
 	if (flags[kFLAGS.RUBI_BREAST_SIZE] < 3) outputText(" sit loosely over Rubi's small chest");
-	else outputText("strain thanks to Rubi's ample busom");
+	else outputText("strain thanks to Rubi's ample bosom");
 	outputText(".");
 
 	outputText("\n\nTopping it off, your demonic lover slips on a pair of sandals");
@@ -2071,7 +2071,7 @@ private function iceCreamDate():void {
 	outputText("\n\nPerplexed, you ask what's so funny.  \"<i>You've got a bit of ice cream on you,</i>\" [rubi ey] says between giggles.  You wipe at your face and nose, trying to rid yourself of the sugary sweets.");
 
 	outputText("\n\nJust when you're certain you've gotten it all, Rubi stops [rubi eir] giggling and says, \"<i>You missed a spot.</i>\"  Before you can ask where, Rubi leans over the table and kisses you full on the lips, sucking off a dollop of ice cream that you're not even sure existed in the first place.  Blushing bright red, Rubi sits back in [rubi eir] seat and mutters, \"<i>Got it.</i>\"");
-	outputText("\n\nThe two of you pass the rest of your date watching the people outside, occassionally coming up with life stories, goals and relationships for them.  Rubi's hopeless romantic side blossoms here.  Everyone, it seems, is pining for someone else in [rubi eir] imagination.  There's unrequited love, love triangles, love quadrangles, affairs and more.  Each person that passes by the window seems to be head-over-heels for someone, or multiple people.  Rubi invents entire backstories, first dates, first kisses overlooking a sunset, and their first nights together.");
+	outputText("\n\nThe two of you pass the rest of your date watching the people outside, occasionally coming up with life stories, goals and relationships for them.  Rubi's hopeless romantic side blossoms here.  Everyone, it seems, is pining for someone else in [rubi eir] imagination.  There's unrequited love, love triangles, love quadrangles, affairs and more.  Each person that passes by the window seems to be head-over-heels for someone, or multiple people.  Rubi invents entire backstories, first dates, first kisses overlooking a sunset, and their first nights together.");
 
 	//(if Relationship 100, happens once)
 	if (flags[kFLAGS.RUBI_AFFECTION] >= 100 && flags[kFLAGS.RUBI_ICECREAM_CONFESSION] == 0) {
@@ -2634,7 +2634,7 @@ private function popButtjobs():void {
 	//((blueballs 4-5)
 	else if (flags[kFLAGS.RUBI_BLU_BALLS] <= 5) outputText(" which is quickly followed by another, more powerful stream of cum, which splashes against [rubi eir] stomach, coating [rubi eir] [rubi breasts] in semen");
 	else if (flags[kFLAGS.RUBI_BLU_BALLS] <= 7) outputText(" which is quickly followed by another, more powerful stream of cum, and a third, and a fourth.  Before you know it, Rubi's entire torso, including [rubi eir] [rubi breasts] are practically glazed with cum");
-	else if (flags[kFLAGS.RUBI_BLU_BALLS] <= 9) outputText(" which is followed up by several more, each seemingly more poweful than the one previous.  Rubi's body twitches and shudders with every jet, until [rubi eir] entire torso, and the couch, is covered in the musky jizz");
+	else if (flags[kFLAGS.RUBI_BLU_BALLS] <= 9) outputText(" which is followed up by several more, each seemingly more powerful than the one previous.  Rubi's body twitches and shudders with every jet, until [rubi eir] entire torso, and the couch, is covered in the musky jizz");
 	else outputText(" which is followed by a dozen more, each one thicker and more powerful than the last.  Rubi's cock twitches uncontrollably, just like [rubi eir] body, as it coats the entire couch, [rubi eir] entire upper body, and even some of the wall five feet away in the musky stuff");
 	outputText(".");
 

@@ -180,7 +180,7 @@ package classes.Scenes.Places.TelAdre
 			clearOutput();
 			outputText("You sigh, resolving yourself to let him go. Pablo seemed embarrassed, ashamed even. He may need some time alone. Perhaps this was for your own good as well. You may need some time to think about all of this, to take it all in. It’s not everyday that someone admits to touching themselves to the thought of you.");
 			outputText("\n\nYou look to the ground, watching the water go down the drain. The water goes cold, and you find that you’re not enjoying yourself as much as you did with your other showers. Are you certain that you made the right decision?");
-			outputText("\n\nShivering, you turn off the water, drying yourself off as quickly as you can. You rush to the locker room, discarding your towel and re-equiping your [Armor]. With that, you make your way back to camp.");
+			outputText("\n\nShivering, you turn off the water, drying yourself off as quickly as you can. You rush to the locker room, discarding your towel and re-equipping your [Armor]. With that, you make your way back to camp.");
 			player.changeFatigue(-10);
 			doNext(camp.returnToCampUseOneHour);
 		}

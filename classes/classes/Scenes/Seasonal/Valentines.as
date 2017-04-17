@@ -192,7 +192,7 @@
 			clearOutput();
 			outputText("Realizing this can be quite a special moment, you gently slide a hand through Scylla's hair, guiding her by the head and towards your own [face].  Slowly, you place a kiss on her soft, ruby lips, allowing your tongue to slip inside and touch hers, which thrashes in her mouth for a moment before wrapping around yours, with Scylla first somewhat whimpering, then almost purring at the contact as the two of you kiss one another.  Her hand also meets the back of your head, pulling you more strongly into the kiss, her lips gently puffing up and encompassing yours with their warmth as your tongues coil around one another, a trickle of mixed saliva escaping your mouths and marking Scylla's habit with wetness.  Rather than break the kiss, Scylla gently decreases the pressure and, very slowly, starts to pull away, her lips first still keeping in light, tantalizing touch with your own before parting.  You start inhaling deeper, the flower in Scylla's hair still giving her a gentle fragrance, her own feminine scent nicely blending with it.  You thank Scylla for the kiss, which causes her to blush, and she answers right back.  \"<i>Thank you too, my dear angel.  For everything.  Saving me, and showing me both the good, pleasant things and the things I needed for survival... a kiss is the least I can give you, I guess.</i>\"");
 			
-			outputText("\n\nWith a smile, you cuddle up more against Scylla, sharing the bodily warmth between the two of you and snaking an arm around her waist.  \"<i>My, my.  I'm surely being treated appropriately for the occasion.  It's a bit embarassing...</i>\" she whispers, but leans her head towards you and you feel both her warmth and her gentle fragrance.");
+			outputText("\n\nWith a smile, you cuddle up more against Scylla, sharing the bodily warmth between the two of you and snaking an arm around her waist.  \"<i>My, my.  I'm surely being treated appropriately for the occasion.  It's a bit embarrassing...</i>\" she whispers, but leans her head towards you and you feel both her warmth and her gentle fragrance.");
 			
 			outputText("\n\nThe two of you spend some time cuddled up like that, watching the sun set.  Scylla's soft curves, especially her breasts, are overwhelming; you don't even have the willpower to resist copping a few feels, and initially, it's hard to stay still, aroused as you are.");
 			//[if (hasVagina = true)]
@@ -385,7 +385,7 @@
 			//([Human tongue]
 			else outputText("  Hooking your fingers at the front and back of her cunny, you plunge your tongue in and wiggle it eagerly.  Abby clamps down on all three invaders and loudly moans out, screaming to her content at last, as your face is flooded with pussy juice.");
 			
-			outputText("\n\nAfter a while, Abby comes down from her orgasm and you're holding her in your arms for the duration of it.  \"<i>Dammnnn... it's still twitching.  I don't know if I can...</i>\"  You shush her, telling her you intended to do that and that returning the favor is unneccessary, before kissing her on the lips and wishing her the best of luck on this new holiday, and advising that perhaps she shouldn't give up on finding that special someone...");
+			outputText("\n\nAfter a while, Abby comes down from her orgasm and you're holding her in your arms for the duration of it.  \"<i>Dammnnn... it's still twitching.  I don't know if I can...</i>\"  You shush her, telling her you intended to do that and that returning the favor is unnecessary, before kissing her on the lips and wishing her the best of luck on this new holiday, and advising that perhaps she shouldn't give up on finding that special someone...");
 			
 			outputText("\n\nAbylon blushes the whole time, for once not finding the words to retort or insult you in any way, as you pat her on the head, making your way out.  \"<i>Th...thanks,</i>\" she says in a stuttering voice, before you close the door behind yourself and leave for your camp.");
 			
@@ -491,7 +491,7 @@
 		public function fuckPastieForVDay():void {
 			clearOutput();
 			var x:int =  player.smallestCockIndex();
-			outputText("With a semi-sadistic grin, you watch Pastie saunter towards you, clearly allured by the scent of your genitals.  You stroke your " + player.cockDescript(x) + ", quickly bringing it to an erection, imagining how tight even this little thing will feel inside Pastie's small, but now unnaturaly stretchable body.");
+			outputText("With a semi-sadistic grin, you watch Pastie saunter towards you, clearly allured by the scent of your genitals.  You stroke your " + player.cockDescript(x) + ", quickly bringing it to an erection, imagining how tight even this little thing will feel inside Pastie's small, but now unnaturally stretchable body.");
 			
 			outputText("\n\nBeing able to resist no longer, you grab her little bum and direct her towards your cock, not really hearing whether she's cheering, complaining, or asking you to stop; honestly, you could care less when you press your " + player.cockDescript(x) + " against the entrance to her diminutive vagina and start pushing.");
 			outputText("\n\nAfter a while of fruitless pressing against her little legs, bum, and clit, Pastie finally gives way. Even your " + player.cockHead(x) + " is enough to stretch her already, but there's not much else to do now other than pushing it in deeper.");

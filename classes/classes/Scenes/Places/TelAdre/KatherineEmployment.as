@@ -363,7 +363,7 @@ package classes.Scenes.Places.TelAdre{
 			}
 			if (katherine.knotSize < 4) takeAnal = katherine.getPenetrated;
 			choices("Fuck Her", penKath, "Give Anal", penAnal, "Give Both", penBoth, "Bath", katherine.bathTime, "", null,
-				"Nount Her", takeVag, "Take Anal", takeAnal, "Take Both", takeVagAndAss, "", null, "", null);
+				"Mount Her", takeVag, "Take Anal", takeAnal, "Take Both", takeVagAndAss, "", null, "", null);
 		}
 
 		public function katherineTrainingStage3():void
@@ -662,7 +662,7 @@ package classes.Scenes.Places.TelAdre{
 					outputText("You would beg to differ, you happen to not only know one... but is also carrying one right at this instant...\n\n");
 					outputText("“<i>Oh? So why doesn’t he come out and say hello, huh?</i>” Urta snarks, clearly feeling very put out.\n\n");
 					outputText("“<i>Don’t mind if I do!</i>” an ethereal voice replies out of your chest.  A familiar face emerges, grinning widely.  “<i>Boo,</i>” Shouldra states, simply.\n\n");
-					outputText("Urta and Kath’s jaws drop in unision, both staring dumbfoundedly at Shouldra.  Looks like they’ve never seen a ghost before.  “<i>I can see at least two bodies I wouldn’t mind getting to know better... but first, let’s see what you’re packing...</i>”  Shouldra’s hand emerges from your chest and she makes a few arcane gestures, aimed at both Kath and Urta.  At once, the two’s outfits tent as their mismatched dicks swell as erect as they can between the ghost’s magic and their restraining garments.  Urta yelps in that way she has and tries to cover herself up; Kath just looks surprised, but doesn’t make any effort, figuring that it must be harmless.\n\n");
+					outputText("Urta and Kath’s jaws drop in unison, both staring dumbfoundedly at Shouldra.  Looks like they’ve never seen a ghost before.  “<i>I can see at least two bodies I wouldn’t mind getting to know better... but first, let’s see what you’re packing...</i>”  Shouldra’s hand emerges from your chest and she makes a few arcane gestures, aimed at both Kath and Urta.  At once, the two’s outfits tent as their mismatched dicks swell as erect as they can between the ghost’s magic and their restraining garments.  Urta yelps in that way she has and tries to cover herself up; Kath just looks surprised, but doesn’t make any effort, figuring that it must be harmless.\n\n");
 					outputText("“<i>Wow, jackpot!  Come here my swollen-dicked morsels, let’s have some fun!</i>”  Shouldra lunges after both Kath and Urta, who promptly scamper, not happy with the idea of becoming a ghost’s plaything.  You just watch the spectacle unfold and both the herms and Shouldra vanish from your sight...\n\n");
 					outputText("A few minutes later, both Urta and Kath return... panting and with their respective tents visibly absent...\n\n");
 					outputText("“<i>Oh, dear sweet Marae’s mercy, we finally lost that freaky ghoulie,</i>” Urta pants, tongue lolling out in a very canine fashion.\n\n");
@@ -689,7 +689,7 @@ package classes.Scenes.Places.TelAdre{
 			outputText("Urta pouts, clearly not too happy at having her thunder stolen, while Kath rolls her eyes.  “<i>Corny much, " + player.short + "?</i>”  Still, there’s a twinkle in her eyes that makes you feel you really have bolstered her spirits.  “<i>So, what does this training consist of, anyway?</i>”\n\n");
 			outputText("Upon hearing that, you grin evilly at Urta and ask her if you should get the package?\n\n");
 			outputText("Urta shakes her head and passes you the key, indicating silently that you should lock the front door instead.  Nodding in agreement, you concur that this is probably a good idea, there’s no telling how Kath will react.\n\n");
-			outputText("The cat-morph watches nervously as you and Urta head your seperate ways.  As the fox rummages amongst the junk on the side, she audibly professes, “<i>Why do I think I’m not going to like this?</i>”\n\n");
+			outputText("The cat-morph watches nervously as you and Urta head your separate ways.  As the fox rummages amongst the junk on the side, she audibly professes, “<i>Why do I think I’m not going to like this?</i>”\n\n");
 			outputText("You tell Kath to relax, this will all be over soon...\n\n");
 			outputText("“<i>Okay, now I’m really worried,</i>” she retorts, eyes flicking nervously between you and Urta.\n\n");
 			outputText("“<i>Before we begin, you should put this on,</i>” Urta says, holding the chastity belt towards Kath.\n\n");

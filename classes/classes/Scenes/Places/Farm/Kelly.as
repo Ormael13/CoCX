@@ -994,7 +994,7 @@ private function giveKellyEquinum():void {
 	
 	outputText("\n\n\"<i>Hush pet, I'm just finishing what I started.  Soon you'll have a cunt fit for dumping gallons of jizz into, just like you wanted.</i>\"");
 	
-	outputText("\n\n\"<i>Oh, right,</i>\" Kelly demurely replies, lifting her tail to further expose her prominant, womanly folds, \"<i>Whatever you want, [Master].</i>\"");
+	outputText("\n\n\"<i>Oh, right,</i>\" Kelly demurely replies, lifting her tail to further expose her prominent, womanly folds, \"<i>Whatever you want, [Master].</i>\"");
 	
 	outputText("\n\nSmiling cruelly, you give her bodacious rump a smack followed by a rough squeeze.  Kelly moans, shimmying her hindlegs and juicy bottom closer to you in response.  You immediately uncork the vial, place the flared bottle into that welcome honey-hole, and push it deep inside her.  Your centaur toy whinnies in delight, her wide-spread cunt rippling around the vial as it empties, convulsively milking it as if it was a tiny horse-cock.  You guess that even with a human cunt, some instincts must stay the same.  A trickle of her feminine ooze dripples out from her clenching snatch, mixed with a tiny amount of the potion.  Most of it seems to travel deeper inside her, and you can tell from the clear end of the bottle that it's fully emptied.  There's nothing to do now but pull it out and enjoy the changes as they happen.  You do so with a smile.");
 	

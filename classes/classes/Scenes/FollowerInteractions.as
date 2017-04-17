@@ -539,7 +539,7 @@ public function askAboutAmily():void {
 	}
 	//before Urta goes on duty at 1400:
 	else {
-		outputText("You ask the assembled bar patrons if anybody has seen either a strange mouse-woman or Urta around. The sparse morning crowd points, virtually as one, toward the back rooms. As you aproach, you hear a thumping, banging commotion coming from one of the rooms...\n\n", false);
+		outputText("You ask the assembled bar patrons if anybody has seen either a strange mouse-woman or Urta around. The sparse morning crowd points, virtually as one, toward the back rooms. As you approach, you hear a thumping, banging commotion coming from one of the rooms...\n\n", false);
 		
 		outputText("To a mixture of confusion and relief, you realize they aren't the sounds of violence.\n\n", false);
 
@@ -601,7 +601,7 @@ private function endThisMadness():void {
 	}
 	//(Chance of Urta rage) 
 	else {
-		outputText("Urta scowls and straightens, sobering noticably as an angry emerald fire seems to light in her eyes.  The vixen mutters, \"<i>You seduce both of us with kind words and affection, and now that we get together and realize we can love each other too, you have the nerve to accuse US of cheating?  You idiot!  This was all for you!  This was us learning to love each other the same way we learned to love you, so that together, we could make all three of us happy.</i>\"\n\n", false);
+		outputText("Urta scowls and straightens, sobering noticeably as an angry emerald fire seems to light in her eyes.  The vixen mutters, \"<i>You seduce both of us with kind words and affection, and now that we get together and realize we can love each other too, you have the nerve to accuse US of cheating?  You idiot!  This was all for you!  This was us learning to love each other the same way we learned to love you, so that together, we could make all three of us happy.</i>\"\n\n", false);
 		
 		outputText("The angry vixen snatches her clothes from a peg on the wall and slides out the door, too pissed to care that she's standing naked.  \"<i>I won't be a problem for you any more.  Just stay away from me.</i>\"\n\n", false);
 		urtaLove(-100);

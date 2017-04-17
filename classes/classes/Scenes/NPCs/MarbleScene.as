@@ -2547,7 +2547,7 @@ private function marbleCampSexNew():void {
 				if (player.balls > 0) outputText("  As her hand reaches the base of your cock, she stops stroking it to take a moment and gently roll your " + player.ballsDescriptLight() + " with her fingers.  \"<i>Are these ready to shoot out for me soon, sweetie?</i>\""); 
 				//([If pussy] : 
 				if (player.hasVagina()) outputText("  From the base of your cock, her hand moves even lower, gently rubbing your " + player.clitDescript() + ".  \"<i>This seems to also require some attention...  Maybe later, sweetie, if you do a good job nursing from me.  But right now, I want to see you shoot off,</i>\" she says, as her hand moves back to your " + player.multiCockDescriptLight() + ".");
-				outputText("\n\nShe starts tugging at and stroking your " + player.cockDescript(0) + ", eager to make you cum now.  You buck your hips again and she responds more agressively this time, pushing you back down with her breasts as her touch starts to become unbearable.  \"<i>You're close, aren't you, sweetie?  It's okay, I want to see you cum.</i>\"");
+				outputText("\n\nShe starts tugging at and stroking your " + player.cockDescript(0) + ", eager to make you cum now.  You buck your hips again and she responds more aggressively this time, pushing you back down with her breasts as her touch starts to become unbearable.  \"<i>You're close, aren't you, sweetie?  It's okay, I want to see you cum.</i>\"");
 				outputText("\n\nWith that said, her stroking becomes unrelenting and you decide to simply give in to the pleasure.  The repeated feeling of her hand moving up and down your shaft, teasing the head and stimulating all along the length, has you shivering, and soon you feel a tingling at the base of your spine.  Her milk flows richly into your mouth, and the comforting taste relaxes you completely and makes it impossible not to give in to the pleasure.");
 				outputText("\n\nMoments later, Marble's rapid strokes cause you to ejaculate.  \"<i>There you go!  You've done great, sweetie!</i>\"  Your bottom shakes, causing your member to bob in her grasp as she squeezes out more and more of your cum onto her slimy hand.  You grab her breasts harder from the sudden sensations, causing her to yelp and moan.");
 				if (player.cumQ() < 500) outputText("  You cover her hand as she keeps jerking you off, squeezing out tiny little droplets once you're done ejaculating.");
@@ -2716,7 +2716,7 @@ private function marbleCampSexNew():void {
 		
 			//wrapping things up
 			outputText("\n\nFinally satisfied with her efforts, Marble stands up and the two of you find a nearby river to get yourselves cleaned off.", false);
-			//Set player stats for masterbating with Marble, 
+			//Set player stats for masturbating with Marble, 
 		}
 	}
 	//NAGAS
@@ -4233,7 +4233,7 @@ private function milkMarbleBarFollowTail():void
 	}
 	else
 	{
-		outputText( "[pg]Her ribbon adorned bovine appendage slowly pulls your hand out of her wet slit and directs you up the side of her rump until you find something hiding out in her pocket.  Her tail rubs against the long hard shape a few times, and then you grasp and pull out a long black rubery object from your lover's skirt: her double dildo." );
+		outputText( "[pg]Her ribbon adorned bovine appendage slowly pulls your hand out of her wet slit and directs you up the side of her rump until you find something hiding out in her pocket.  Her tail rubs against the long hard shape a few times, and then you grasp and pull out a long black rubbery object from your lover's skirt: her double dildo." );
 		
 		outputText( "[pg]You ask Marble if there is any chance you've found what she wanted?" );
 		

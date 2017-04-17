@@ -147,7 +147,7 @@ package classes.Scenes.Places.Prison
 			}
 			else
 			{
-				outputText("However, you have no desire to fight back; to the contrary, your only desire is to absorb every ounce of punishment this " + guardType + " has in mind, and you silently communicate as much bending over and assuming the most secuctively submissive stance you can manage.\n",false);
+				outputText("However, you have no desire to fight back; to the contrary, your only desire is to absorb every ounce of punishment this " + guardType + " has in mind, and you silently communicate as much bending over and assuming the most seductively submissive stance you can manage.\n",false);
 				dynStats("lus", 100);
 			}
 			

@@ -2537,7 +2537,7 @@ private function rapeSheilasCooter():void {
 		outputText(" as your climax arrives and the first of your seed pours into her grasping pussy.  While you fill her, her back arches");
 		//[(nonhors) 
 		if (!player.isTaur()) outputText(" and she presses your hand uncomfortably");
-		outputText(", gasping as her own orgasm begins.  Her knees wrap around your sides, satisfying your predicition, and her vagina");
+		outputText(", gasping as her own orgasm begins.  Her knees wrap around your sides, satisfying your prediction, and her vagina");
 		//[(pc corr >= 90 or > sheila corruption)
 		if (player.cor >= 90 || sheilaCorruption() < player.cor) {
 			outputText(" pulls greedily at your [cockFit 48], drinking up your semen as fast as you can squirt it.  She sucks in breath as she climaxes, finally opening her eyes as her head tilts back");
