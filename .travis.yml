@@ -1,4 +1,4 @@
-sudo: true
+sudo: false
 language: java
 
 install:
@@ -6,3 +6,7 @@ install:
  
 script:
   - ant debug -DFLEX_HOME="/usr/local/bin/apache-flex"
+
+env:
+  global:
+    - PATH="$PATH:~/flex"
