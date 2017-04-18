@@ -1,15 +1,22 @@
-sudo: false
+sudo: required
 language: java
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install vnc4server xfce4 -y
 
 install:
   - devTools/ci/setup-flex.sh
+  - Xvnc :1 &
  
 script:
   - ant $BUILD
 
 env:
   global:
-    - FLEX_HOME=flex/"  
+    - FLEX_HOME=flex/"
+    - DISPLAY=":1"
   matrix:
     - BUILD="release"
     - BUILD="debug"
+    - BUILD="test"
