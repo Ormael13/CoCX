@@ -208,6 +208,11 @@ private function rathazulWorkOffer():Boolean {
 		totalOffers++;
 		outputText("\"<i>Oooh, is that dragon scale? If you happen to have five of these, I can work them into armor,</i>\" Rathazul says.\n\n");
 	}
+	if (player.hasItem(useables.LETHITE)) { //Lethicite Staff
+		showArmorMenu = true;
+		totalOffers++;
+		outputText("Rathazul glances your way, back at his desk, then to you again, eyes falling on the Lethicite in your hands. \"<i>Lethicite? Where did you get that?</i>\" He keeps talking before you can reply, inevitably not actually caring much. \"<i>If you could get me five shards of about that size and a magical staff, I might be able to increase the staff's power for you.</i>\" His eyes glitter in excitement. You get the feeling he just really wants to work with the Lethicite.\n\n");
+	}
 	//Marae bark armor
 	if (player.hasKeyItem("Tentacled Bark Plates") >= 0 || player.hasKeyItem("Divine Bark Plates") >= 0) showArmorMenu = true;
 	var pCounter:int = 0;
@@ -315,9 +320,9 @@ private function rathazulWorkOffer():Boolean {
 		var button:int = 5; //After the 8th button, the menus will dynamically fill in.
 		//Armour sub-menu
 		if (showArmorMenu)
-			addButton(0, "Armor", rathazulArmorMenu, null, null, null, "Ask Rathazul to make an armour for you.");
+			addButton(0, "Craft", rathazulArmorMenu, null, null, null, "Ask Rathazul to craft something for you.");
 		else
-			addButtonDisabled(0, "Armor", "You don't have sufficient materials that can be made into armour.");
+			addButtonDisabled(0, "Craft", "You don't have sufficient materials that can be crafted.");
 		//Shop sub-menu
 		if (dyes || philters || reductos)
 			addButton(1, "Shop", rathazulShopMenu, dyes, philters, reductos, "Check Rathazul's wares.");
@@ -325,7 +330,7 @@ private function rathazulWorkOffer():Boolean {
 			addButtonDisabled(1, "Shop", "You can't afford anything Rathazul has to offer.");
 		//Purification sub-menu
 		if (purify) {
-			addButton(2, "Purify", purifySomething, null, null, null, "Ask him to purify any tainted potions. \n\nCost: 20 Gems.");
+			addButton(2, "Purify", purifySomething, null, null, null, "Ask him to purify any tainted potions.\n\nCost: 20 Gems.");
 		}
 		else {
 			addButtonDisabled(2, "Purify", "You don't have any items that can be purified.");
@@ -352,7 +357,7 @@ private function rathazulWorkOffer():Boolean {
 public function rathazulArmorMenu():void {
 	spriteSelect(49);
 	clearOutput();
-	outputText("Which armor project would you like to pursue with Rathazul?");
+	outputText("Which crafting project would you like to pursue with Rathazul?");
 	menu();
 	if (player.hasItem(useables.GREENGL, 5)) {
 		addButton(0, "GelArmor", craftOozeArmor);
@@ -365,6 +370,9 @@ public function rathazulArmorMenu():void {
 	}
 	if (player.hasItem(useables.D_SCALE, 2)) {
 		addButton(3, "Dragonscale", craftDragonscaleArmor);
+	}
+	if (player.hasItem(useables.LETHITE, 5) && player.hasItem(weapons.W_STAFF, 1)) {
+		addButton(4, "Lethicite", craftLethiciteStaff);
 	}
 	if (player.hasKeyItem("Tentacled Bark Plates") >= 0) {
 		addButton(5, "T.Bark Armor", craftMaraeArmor, false);
@@ -485,7 +493,7 @@ private function collectSilkArmor():void {
 	spriteSelect(49);
 	clearOutput();
 	
-	outputText("Rathazul beams and ejaculates, \"<i>Good news everyone!  Your ", false);
+	outputText("Rathazul beams and announces, \"<i>Good news everyone!  Your ", false);
 	if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_TYPE] == 1) outputText("armor", false);
 	else if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_TYPE] == 2) outputText("robe", false);
 	else outputText("undergarment", false);
@@ -599,12 +607,34 @@ private function craftDragonscaleArmorForReal(type:int = 0):void {
 	inventory.takeItem(itype, returnToRathazulMenu);
 }
 
+private function craftLethiciteStaff():void {
+	spriteSelect(49);
+	clearOutput();
+	player.destroyItems(useables.LETHITE, 5);
+	player.destroyItems(weapons.W_STAFF, 1);
+		outputText("You present Rathazul the Wizard's Staff and pieces of Lethicite. He sets the staff aside and looks over the Lethicite in awe. You stifle a laugh at his expression. You'd think he'd never seen pieces Lethicite before. He jumps at your noise, nearly dropping the Lethicite in the process. He scrambles to keep them in his paws and looks up at you once they're secured against his chest. \"<i>Right,</i>\" he breathes. \"<i>I will see what I can do.</i>\" He then grabs the staff and ushers away, leaving you to sit and wait for him to be done.")
+		outputText("\n\nAn hour of worrying noises and concerning clouds of smoke later, and Rathazul comes back to you, covered in purple dust. He tries to shake some of it off, but gets cut short by coughing. You pat his back and ask if he's okay.\n\n\"<i>Fine, fine,</i>\" he mumbles in reply. \"<i>Just fine... Nothing a thorough washing can't resolve.</i>\" He holds out the staff for you. \"<i>Here. I was able to infuse the Lethicite with the staff. Be careful with it. I'm not making a new one until I clear out my lungs.</i>\"\n\nAs soon as you take the staff, he turns away and begins to head toward the river, grumbling to himself.")
+		outputText("You look over the staff. It's topped by a glowing orb of Lethicite whose corruption seems to have seeped down into the rest of the staff. The staff's surface is smooth and hard, nothing of the wood it was made of before. It's no longer a pale brown, but a metallic purple, and", false);
+			if (game.player.cor < 33) {
+				outputText(" seems to ooze corruption. You suppress a shudder. In your pure hands, though, you're confident it will only be used for good.\n\n", false);
+			}
+			else if (game.player.cor >= 33 && game.player.cor < 66) {
+				outputText(" brims with corruption. You take a slow breath to steady yourself. You're holding a strongly influential weapon. In the wrong hands, it could easily corrupt someone, but you're sure you can control it.\n\n", false);
+			}
+			else if (game.player.cor >= 66 && game.player.cor <= 100) {
+				outputText(" radiates corruption. You breathe, feeling its power flow through you and relishing in the sensation. When you open your eyes, you find yourself smiling. You and this staff are going to get along get well.\n\n", false);
+			}
+		outputText("You put the Lethicite Staff in your inventory for now.")
+	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
+	inventory.takeItem(weapons.L_STAFF, returnToRathazulMenu);
+}
+
 private function craftMaraeArmor(divine:Boolean = false):void {
 	clearOutput();
 	if (!divine) {
 		outputText(images.showImage("rathazul-craft-barkarmor-corrupt"));
 		outputText("You show him the pieces of thick bark with tentacles attached. \n\n \"<i>My, my. That's definitely the strangest thing I've ever seen. But as you've requested, I'll make armor for you,</i>\" the old rat says. He takes the pile of bark, taking care to avoid touching the still-alive tentacles. He works on his bench for an hour while you wait. \n\n")
-		outputText("Once he has finished, Ratzhul is beaming with both pride and shame, \"<i>I think you'll be pleased. Go ahead and take a look. I'm not working on this type of armor again. I nearly got surprised by tentacles.</i>\"\n\nHe hands you the armor. \n\n", false)
+		outputText("Once he has finished, Rathazul is beaming with both pride and shame, \"<i>I think you'll be pleased. Go ahead and take a look. I'm not working on this type of armor again. I nearly got surprised by tentacles.</i>\"\n\nHe hands you the armor. \n\n", false)
 		outputText("The plates are white like snow. Green tentacles grow from the shoulderpads. The armor includes a breastplate, pauldrons, full arm guards, and knee-high boots. You realize the armor is missing pants. \n\n", false);
 		outputText("\"<i>Something wrong? Nothing to protect your modesty? Surprise!</i>\"  He hands you a silken loincloth", false);
 		if (player.mf("m", "f") == "f") outputText(" with stockings and garters", false);
