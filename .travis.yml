@@ -1,0 +1,15 @@
+sudo: false
+language: java
+
+install:
+  - devTools/ci/setup-flex.sh
+ 
+script:
+  - ant $BUILD
+
+env:
+  global:
+    - FLEX_HOME=flex/"  
+  matrix:
+    - BUILD="release"
+    - BUILD="debug"

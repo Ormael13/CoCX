@@ -20,3 +20,6 @@ CoC-AIR.airi
 
 # build directory
 target/
+
+# vagrant generated files
+.vagrant
