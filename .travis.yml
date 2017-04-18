@@ -5,8 +5,11 @@ install:
   - devTools/ci/setup-flex.sh
  
 script:
-  - ant debug
+  - ant $BUILD
 
 env:
   global:
-    - FLEX_HOME=flex/"
+    - FLEX_HOME=flex/"  
+  matrix:
+    - BUILD="release"
+    - BUILD="debug"
