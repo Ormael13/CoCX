@@ -614,7 +614,7 @@ private function banishmentGargoyleRitual():void {
 	if (gargoyleConfidence() >= 50) outputText(" soothingly, using her free hand to stroke your thighs");
 	outputText(".  \"<i>The pain is necessary.  Everything will be all right.</i>\"");
 	
-	outputText("\n\nStill, you can't help but hiss in agony as the holy burn spreads through you, seeping into your vulnerable gentials and sensitive chest.");
+	outputText("\n\nStill, you can't help but hiss in agony as the holy burn spreads through you, seeping into your vulnerable genitals and sensitive chest.");
 	//with Exgartuan:
 	if (player.hasStatusEffect(StatusEffects.Exgartuan)) outputText("  Booming from within you, you hear the demon's voice: \"<i>Hey!  What the shit is this!?  What're you doing? Fucking stop, you ingrate!</i>\"");
 	//with Worms: 

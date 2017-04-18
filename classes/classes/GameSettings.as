@@ -76,7 +76,7 @@ package classes
 			outputText("\n\n");
 			
 			if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG]) outputText("Silly Mode: <font color=\"#008000\"><b>ON</b></font>\n Crazy, nonsensical, and possibly hilarious things may occur.");
-			else outputText("Silly Mode: <font color=\"#800000\"><b>OFF</b></font>\n You're an incorrigable stick-in-the-mud with no sense of humor.");
+			else outputText("Silly Mode: <font color=\"#800000\"><b>OFF</b></font>\n You're an incorrigible stick-in-the-mud with no sense of humor.");
 
 			outputText("\n\n");
 			

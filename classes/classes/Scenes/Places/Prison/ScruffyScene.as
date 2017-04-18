@@ -274,7 +274,7 @@ package classes.Scenes.Places.Prison
 				}
 				else
 				{
-					outputText(" In fact, while a second ago you thought you had the desire to resist him, now the thought of debasing yourself for his approval and the sight of his girthy dick are filling you with an overwheling desire to do the exact opposite and show him just how grateful you are for his kindness.\n\n",false);
+					outputText(" In fact, while a second ago you thought you had the desire to resist him, now the thought of debasing yourself for his approval and the sight of his girthy dick are filling you with an overwhelming desire to do the exact opposite and show him just how grateful you are for his kindness.\n\n",false);
 					prisonCaptorRandomEventJizzJanitorPerform();
 				}
 			}
@@ -351,7 +351,7 @@ package classes.Scenes.Places.Prison
 				}
 				else
 				{
-					outputText(" In fact, while a second ago you thought you had the desire to resist him, now the thought of debasing yourself for his approval and the sight of his girthy dick are filling you with an overwheling desire to do the exact opposite and show him just how grateful you are for his kindness.\n\n",false);
+					outputText(" In fact, while a second ago you thought you had the desire to resist him, now the thought of debasing yourself for his approval and the sight of his girthy dick are filling you with an overwhelming desire to do the exact opposite and show him just how grateful you are for his kindness.\n\n",false);
 					prisonCaptorRandomEventJizzJanitorPerform();
 				}
 			}

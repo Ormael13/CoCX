@@ -256,7 +256,7 @@ package classes.Scenes.Dungeons.D3
 			}
 			else
 			{
-				outputText("<i>“No!”</i> the corrupted drider cries before collapsing to the floor, writhing widly. He’s too aroused for any kind of proper coordination");
+				outputText("<i>“No!”</i> the corrupted drider cries before collapsing to the floor, writhing wildly. He’s too aroused for any kind of proper coordination");
 				if (!m.goblinFree)
 				{
 					outputText(", but he pushes the goblin off his cock all the same");

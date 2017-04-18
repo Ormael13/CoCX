@@ -743,7 +743,7 @@ private function tamaniDaughtersCombatLossDrain():void {
 	}
 	//(Shit taurs go!)
 	else {
-		outputText("The hands holding you slowly lower you down onto your back, guiding you into a combination chair and harness designed to accommodate a centuar's size and shape.  Before you know it, straps secure your " + player.legs() + " into tightly bound restraints.  A moment later your, hands are strapped into equally firm cuffs.  By this point, your lust-dulled mind has begun to worry, and you start to struggle, but binding leather straps are passed over your chest, midsection, and hindquarters, then tightened against the chair to completely restrain you.  Perhaps the only ", false);
+		outputText("The hands holding you slowly lower you down onto your back, guiding you into a combination chair and harness designed to accommodate a centaur's size and shape.  Before you know it, straps secure your " + player.legs() + " into tightly bound restraints.  A moment later your, hands are strapped into equally firm cuffs.  By this point, your lust-dulled mind has begun to worry, and you start to struggle, but binding leather straps are passed over your chest, midsection, and hindquarters, then tightened against the chair to completely restrain you.  Perhaps the only ", false);
 		if (cocks > 1) outputText(" things not restrained are your " + player.multiCockDescriptLight() + ", standing at attention despite, or perhaps because of, your predicament.\n\n", false);
 		else outputText(" thing not restrained is your " + player.multiCockDescriptLight() + ", standing at attention despite, or perhaps because of, your predicament.\n\n", false);
 	}

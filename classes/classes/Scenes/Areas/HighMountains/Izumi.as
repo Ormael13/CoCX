@@ -252,7 +252,7 @@ package classes.Scenes.Areas.HighMountains
 			
 			if (flags[kFLAGS.PC_FETISH] >= 2)
 			{
-				outputText(" and to be honest, the grip isn't an entirely unplesent experience, either.  If only Izumi would stop playing around and just <i>take you</i> already.");
+				outputText(" and to be honest, the grip isn't an entirely unpleasant experience, either.  If only Izumi would stop playing around and just <i>take you</i> already.");
 				game.dynStats("lus", 5);
 			}
 			else
@@ -472,7 +472,7 @@ package classes.Scenes.Areas.HighMountains
 			
 			if (flags[kFLAGS.PC_FETISH] >= 2)
 			{
-				outputText(" and to be honest, her grip isn't an entirely unplesent experience, either.  If only Izumi would stop playing around and just <i>take you</i> already.");
+				outputText(" and to be honest, her grip isn't an entirely unpleasant experience, either.  If only Izumi would stop playing around and just <i>take you</i> already.");
 				game.dynStats("lus", 5);
 			}
 			else

@@ -1214,7 +1214,7 @@
 					store = eMaxHP() * (4 + rand(5))/100;
 					store = game.combat.doDamage(store);
 					if (plural) outputText(capitalA + short + " continue to burn from the flames engulfing " + pronoun2 + ". <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n", false);
-					else outputText(capitalA + short + " continuew to burn from the flames engulfing " + pronoun2 + ". <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n", false);
+					else outputText(capitalA + short + " continues to burn from the flames engulfing " + pronoun2 + ". <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n", false);
 				}
 			}
 			if (hasStatusEffect(StatusEffects.Timer)) {

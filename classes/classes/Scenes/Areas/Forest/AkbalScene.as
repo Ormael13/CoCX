@@ -860,7 +860,7 @@ package classes.Scenes.Areas.Forest
 				//[Chance of butt growth]
 				if (player.buttRating < 8)
 				{
-					outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accomodate the demon's wishes...", false);
+					outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accommodate the demon's wishes...", false);
 					player.buttRating++;
 				}
 				player.createStatusEffect(StatusEffects.PostAkbalSubmission, 0, 0, 0, 0);
@@ -938,7 +938,7 @@ package classes.Scenes.Areas.Forest
 				//[Chance of butt growth]
 				if (player.buttRating < 8)
 				{
-					outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accomodate the demon's wishes...", false);
+					outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accommodate the demon's wishes...", false);
 					player.buttRating++;
 				}
 				player.createStatusEffect(StatusEffects.PostAkbalSubmission, 0, 0, 0, 0);
@@ -1018,7 +1018,7 @@ package classes.Scenes.Areas.Forest
 			//[Chance of butt growth]
 			if (player.buttRating < 8)
 			{
-				outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accomodate the demon's wishes...", false);
+				outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accommodate the demon's wishes...", false);
 				player.buttRating++;
 			}
 			player.createStatusEffect(StatusEffects.PostAkbalSubmission, 0, 0, 0, 0);
@@ -1576,7 +1576,7 @@ package classes.Scenes.Areas.Forest
 			{
 				outputText(images.showImage("akbal-deepwoods-female-highspeed"));
 				outputText("\n\nYou grab Akbal’s leg and use it to roll the tied up demon over until his rigid length is pointing to the sky.  The tall and ribbed demon cat dick excretes a natural lube along with the white pre-cum drooling down its front.  It looks very inviting but the Jaguar’s face, his wide tongue and black lips, look even more so.");
-				outputText("\n\nYou stand in a squat above the demon’s face.  Before you even have the chance to smash your [vagOrAss] onto his lips, he lunges upward, shoving his face into you before you are ready.  A cascading rush ofecstasyy enters your body the moment his saliva touches your [vagOrAss].  You fall and the demon follows as you spread your legs wider, giving him an easier target for his bliss inducing oral ministrations.  He slathers your [vagOrAss] with a generous amount of saliva while using his wide tongue to lap at your exposed privates.  When he begins teasing your ");
+				outputText("\n\nYou stand in a squat above the demon’s face.  Before you even have the chance to smash your [vagOrAss] onto his lips, he lunges upward, shoving his face into you before you are ready.  A cascading rush of ecstasy enters your body the moment his saliva touches your [vagOrAss].  You fall and the demon follows as you spread your legs wider, giving him an easier target for his bliss inducing oral ministrations.  He slathers your [vagOrAss] with a generous amount of saliva while using his wide tongue to lap at your exposed privates.  When he begins teasing your ");
 				if (player.hasVagina())
 					outputText("clit");
 				else
@@ -1586,7 +1586,7 @@ package classes.Scenes.Areas.Forest
 				//{tight/virgin vagorass}
 				if ((!player.hasVagina() && player.ass.analLooseness < 2) || (player.hasVagina() && player.looseness() <= 2))
 				{
-					outputText("\n\nWhen the mushroom-shaped head of Akbal’s monstrous dick touches your [vagOrAss], a lightning bolt of ecstasy shoots through your body.  The saliva coating your [vagOrAss] mixes with the fluid coating the demon’s dick and makes you call out from the very depths of your soul.  As if the heated, almost drug-like pleasure wasn’t enough, your [vagOrAss] is being stretched, somehow taking the full length of Akbal’s monster dick without a problem.  Once you’ve fully enveloped him, the barbs begn to vibrate, pulsing like sex beads that send you into overdrive.\n\nYou begin to bounce.  Your body cries out for more and you answer the call by bouncing up and down the entire length of Akbal’s wonderfully rigid dick as fast as you can.  Each time you crash your [vagOrAss] into his, there is a hard clap, and soon, you’re going so fast it sounds like excited applause.  Beneath you, Akbal shakes as you ride him faster and harder than he’s ever been ridden before.  The tightness of your [vagOrAss] seems to be rare treat to such a well-endowed demon.");
+					outputText("\n\nWhen the mushroom-shaped head of Akbal’s monstrous dick touches your [vagOrAss], a lightning bolt of ecstasy shoots through your body.  The saliva coating your [vagOrAss] mixes with the fluid coating the demon’s dick and makes you call out from the very depths of your soul.  As if the heated, almost drug-like pleasure wasn’t enough, your [vagOrAss] is being stretched, somehow taking the full length of Akbal’s monster dick without a problem.  Once you’ve fully enveloped him, the barbs begin to vibrate, pulsing like sex beads that send you into overdrive.\n\nYou begin to bounce.  Your body cries out for more and you answer the call by bouncing up and down the entire length of Akbal’s wonderfully rigid dick as fast as you can.  Each time you crash your [vagOrAss] into his, there is a hard clap, and soon, you’re going so fast it sounds like excited applause.  Beneath you, Akbal shakes as you ride him faster and harder than he’s ever been ridden before.  The tightness of your [vagOrAss] seems to be rare treat to such a well-endowed demon.");
 				}
 				//{medium vagorass}
 				else if ((!player.hasVagina() && player.ass.analLooseness < 4) || (player.hasVagina() && player.looseness() < 4))

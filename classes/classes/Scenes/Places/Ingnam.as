@@ -154,7 +154,7 @@ package classes.Scenes.Places
 				return;
 			}
 			else {
-				outputText("You explore the village of Ingnam for a while but you don't find anything intersting.");
+				outputText("You explore the village of Ingnam for a while but you don't find anything interesting.");
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}

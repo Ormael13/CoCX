@@ -17,7 +17,7 @@ package classes.Scenes.Dungeons.DeepCave
 				game.dynStats("lus", 5 + player.lib/20);
 			}
 			else if (HPRatio() > .4) {
-				outputText("  The rose-colored vapor spreads throughout the room, forcing you to breathe it in or pass out from lack of air.  It smells sweet and makes your head swim with sensual promises and your crotch tingle with desire.  Panicked by the knowledge that you're being drugged, you gasp, but it only draws more of the rapidly disappating cloud into your lungs, fueling your lust.", false);
+				outputText("  The rose-colored vapor spreads throughout the room, forcing you to breathe it in or pass out from lack of air.  It smells sweet and makes your head swim with sensual promises and your crotch tingle with desire.  Panicked by the knowledge that you're being drugged, you gasp, but it only draws more of the rapidly dissipating cloud into your lungs, fueling your lust.", false);
 				game.dynStats("lus", 10 + player.lib/20);
 			}
 			else {

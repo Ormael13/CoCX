@@ -1969,7 +1969,7 @@ package classes.Scenes.Areas.Forest
 
 			outputText("\"<i>Heheh, you like?</i>\"\n\n");
 
-			outputText("You give it a tight squeeze in reply, and her coy commentary immediately resolves into a moan, her legs splaying out by themselves as she relinquishes access to her mismatched genetalia.  Her teasing demeanor melts a bit as you give her a taste of her own medicine, stroking her shaft at a slow and methodical pace.  It takes but a light push on her forehead to send her sprawling back onto the ground, where she lies smirking contentedly with her head resting on her hands.\n\n");
+			outputText("You give it a tight squeeze in reply, and her coy commentary immediately resolves into a moan, her legs splaying out by themselves as she relinquishes access to her mismatched genitalia.  Her teasing demeanor melts a bit as you give her a taste of her own medicine, stroking her shaft at a slow and methodical pace.  It takes but a light push on her forehead to send her sprawling back onto the ground, where she lies smirking contentedly with her head resting on her hands.\n\n");
 
 			outputText("You casually discard your " + player.armorName + ", tossing them aside in a pile.  By this point, she is putty in your hands, her whole body shaking from head to toe with each teasing stroke of your palms.\n\n");
 

@@ -363,7 +363,7 @@ private function nagaVictoryFemale():void {
 				outputText(". As you accelerate your finger-thrusts, you can feel her approaching climax, and she begins to accelerate her own motions in response. It only takes a few more minutes before you feel she's ready to cum. Suddenly she throws herself free from your grasp, turning her body one hundred and eighty degrees, and plants a kiss firmly on your lips. As she begins to passionately make out with you, your tongues intertwining and your lips interlocking in a heated show of lust for each other. She begins to climax, her muscles tensing and her tail beginning to writhe inside your " + player.vaginaDescript(0) + ". Soon, the both of you are experiencing wonderful, simultaneous orgasms, each driving the other onwards. Finally, after several minutes of bliss, the two of you finally separate, the sexually exhausted naga slumping to the sandy earth, her desires fulfilled. She looks up at you meekly, her eyes showing a sort of gratitude that words might never be able to describe. She turns her back, and slithers slowly away, a trail of her love juices tracing her path through the sand.\n\n", false);
 			}
 			else {
-				outputText("No matter how hard you try, you can't think of a way to make this work.  You give up for now, disatisfied.\n\n", false);
+				outputText("No matter how hard you try, you can't think of a way to make this work.  You give up for now, dissatisfied.\n\n", false);
 			}
 		}
 		//a) Uncorrupted

@@ -227,7 +227,7 @@ package classes.Scenes.Areas.Swamp
 			player.cuntChange(monster.cockArea(0), true, true, false);
 			outputText("\n\n", false);
 
-			outputText("You pinch the arachnid male's nipple as you begin to bounce up and down upon him.  Each lewd slap of your " + player.buttDescript() + " on his groin is accompanied by a rippling spasm of pleasure in your " + player.vaginaDescript() + ", inadvertantly milking the thick-skinned member with the muscular spasms.  He moans and begins trying to lift his hips to meet you.  You deny him, slamming your body down harder with every downward motion to crush him back into the moist swamp-earth.\n\n", false);
+			outputText("You pinch the arachnid male's nipple as you begin to bounce up and down upon him.  Each lewd slap of your " + player.buttDescript() + " on his groin is accompanied by a rippling spasm of pleasure in your " + player.vaginaDescript() + ", inadvertently milking the thick-skinned member with the muscular spasms.  He moans and begins trying to lift his hips to meet you.  You deny him, slamming your body down harder with every downward motion to crush him back into the moist swamp-earth.\n\n", false);
 
 			outputText("\"<i>Ungh... uh... c-c-coming!</i>\" whines the spider-morph, trembling underneath you.  His cock squirts and dumps its inhuman seed into your innermost depths.  Squishing wetly, you can feel pump after pump of the thick spooge being forced past your cervix to burrow in your womb.  The male finishes his climax and sags down into the loam, panting.  Reaching down, you give him an irritated slap.  Your victim's dick actually starts wilting inside you while you ride him, spooge slopping past your lips with each thrust.  The nerve of some men!\n\n", false);
 
@@ -318,7 +318,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("Crossing your eyes, you grab the ground with both hands and struggle to hold on.  There's... too much... too much pleasure for you to think.  Muscles randomly seize and twitch throughout your body, and though the ", false);
 			if (player.cumQ() >= 500) outputText("semen continues to leak out at the same pace", false);
 			else outputText("semen trails off as you empty", false);
-			outputText(", you're absolutely drowning in a sea of bliss.  The waves of sexual indulgence threaten to drag you under their frothing crests.  Slowly, your self-control washes away, eroded by the all-encompasing pleasure " + player.sMultiCockDesc() + " is experiencing.\n\n", false);
+			outputText(", you're absolutely drowning in a sea of bliss.  The waves of sexual indulgence threaten to drag you under their frothing crests.  Slowly, your self-control washes away, eroded by the all-encompassing pleasure " + player.sMultiCockDesc() + " is experiencing.\n\n", false);
 
 			outputText("You begin to mumble, \"<i>fuckmefuckmefuckmefuckme,</i>\" like some kind of religious mantra.\n\n", false);
 

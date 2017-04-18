@@ -89,7 +89,7 @@ package classes.Scenes.Dungeons.DesertCave
 		//*Whisper:
 		//As ackbal, stuns the PC 1 round.  Cannot be resisted.
 		public function getWhispered():void {
-			outputText("Mouthing, \"<i>Can you hear me?</i>\" the witch's voice intrudes into your mind, matching her mouth word for word.  She floods your psyche with words and thoughts, all of your defeat or submission, each more degrading and more humiliating than the last.  Perhaps the worst are the ones where she turns you over to Lethice after you're broken...  The tumultous thoughts and emotions both stun and arouse you, preventing you from attacking while you try to clear your beleaguered consciousness.");
+			outputText("Mouthing, \"<i>Can you hear me?</i>\" the witch's voice intrudes into your mind, matching her mouth word for word.  She floods your psyche with words and thoughts, all of your defeat or submission, each more degrading and more humiliating than the last.  Perhaps the worst are the ones where she turns you over to Lethice after you're broken...  The tumultuous thoughts and emotions both stun and arouse you, preventing you from attacking while you try to clear your beleaguered consciousness.");
 			player.createStatusEffect(StatusEffects.Whispered,0,0,0,0);
 			game.dynStats("lus", 15);
 			combatRoundOver();

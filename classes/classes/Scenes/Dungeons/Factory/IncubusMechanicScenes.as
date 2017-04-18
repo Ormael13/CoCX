@@ -316,7 +316,7 @@ package classes.Scenes.Dungeons.Factory
 				outputText(" demonic mechanic lounges against a gleaming, metallic control panel");
 				if (flags[kFLAGS.FACTORY_INCUBUS_BRIBED] > 0) outputText(", a rolled-up hentai magazine tucked neatly into the chest-pocket of his overalls");
 				if (metIncubusMechanicInD1()) outputText(". This is the same incubus you met back in the factory! He still sports his familiar, stained coveralls, and the crotch is as torn as ever, revealing a cock that looks like an odd hybrid of a tentacle, a bumpy demon-dong, and a stinger-ringed anemone cock. While you watch, it idly divides into two... four... eight narrow, writhing tendrils before merging back together into a three-inch-thick monster-cock.");
-				else outputText(". He sports a pair of stained coveralls, with the crotch torn open, revealing a cock that looks like an odd hybrid of tentacle, a bumpy demon-dong, and a stinger-ringed anemone cock. While you watch, it idly divides into two... four... eight narrow, writhing tendriles before merging back together into a three-inch-thick monster-cock.")
+				else outputText(". He sports a pair of stained coveralls, with the crotch torn open, revealing a cock that looks like an odd hybrid of tentacle, a bumpy demon-dong, and a stinger-ringed anemone cock. While you watch, it idly divides into two... four... eight narrow, writhing tendrils before merging back together into a three-inch-thick monster-cock.")
 				outputText(" It stiffens under your ocular attentions, and a timeless voice with the smoothness of silk, yet an undercurrent of rumbling gravel calls, \"<i>Eyes up here, Champion.</i>\"");
 
 				outputText("\n\nScowling a little at being caught so openly studying his erection, you level your gaze at the haughty incubus.");
@@ -775,7 +775,7 @@ package classes.Scenes.Dungeons.Factory
 
 			outputText("\n\nThe feeling triggers your own climax. Your [vagina] clenches down around his "+ monster.cockDescriptShort() + " and gushes out around it, splattering the demon's crotch and legs the whole way down to his hooves. Arcs of femcum actually jet across the air");
 			if (player.wetness() < 4) outputText(", even though you aren't normally a squirter");
-			outputText(". The pleasure is so great that you can feel electric impulses arcing between neurons, short-circuiting your throughs into involuntary ecstasy. Your eyes roll back, and your [hips] twitch and shake, vibrating around the object that brough you to this perfect");
+			outputText(". The pleasure is so great that you can feel electric impulses arcing between neurons, short-circuiting your throughs into involuntary ecstasy. Your eyes roll back, and your [hips] twitch and shake, vibrating around the object that brought you to this perfect");
 			if (!player.isPregnant()) outputText(" insemination");
 			else outputText(" tryst");
 			outputText(".");
@@ -818,7 +818,7 @@ package classes.Scenes.Dungeons.Factory
 				if (player.cocks.length > 1) outputText("s");
 				outputText(" are jutting out enticingly, hard and ready. You shudder, too aroused to fight and certainly too turned on to think straight. Looking longingly at the demon's throbbing-hard member, you unconsciously lick your lips, finding yourself craving its touch unconditionally. Your hands remove your [armor] before falling to your crotch, grabbing, squeezing, and tugging, but in the back of your mind, you realize you'll need his help to orgasm.");
 	
-				outputText("\n\nThe inubus leers, smiling down at you.");
+				outputText("\n\nThe incubus leers, smiling down at you.");
 		
 				//Small cocks
 				if (player.biggestCockLength() < 6)
@@ -928,7 +928,7 @@ package classes.Scenes.Dungeons.Factory
 
 			outputText("\n\nAt this point, you're tossed down into a box. Instead of slamming into the hard wood, your back lands in a supple leather harness, your arms pressed to your sides. The incubus works quickly above your stunned form, securing you into place with more of the straps, disdainfully wrangling your cock into a support that has it pointing straight up. He steps back to admire his work. Then, a moment later, bends over to grab a thick, wooden board with two holes in it. He grunts as he hefts it into place, lowering it down so that your cock sticks out of one pre-cut hole and your face is exposed in the other. Then, he disappears from view.");
 
-			outputText("\n\nYou hear and feel a rumbling as your box is wheeled out into another room, and though you don't see them, you become aware of the presense of succubi. Lots of them, judging by the amount of wet, aching pussy you can smell. Your augmented cock twitches.");
+			outputText("\n\nYou hear and feel a rumbling as your box is wheeled out into another room, and though you don't see them, you become aware of the presence of succubi. Lots of them, judging by the amount of wet, aching pussy you can smell. Your augmented cock twitches.");
 			
 			// [Next]
 			doNext(maleLossToMechanicII);
@@ -990,7 +990,7 @@ package classes.Scenes.Dungeons.Factory
 
 				outputText("\n\nSmiling, the overall-clad corruptor drags his thick tool up your cheek and across your lips, leaking his slime as he goes, and he gleefully watches you try to maintain your disdain in the face of his lascivious influence.");
 
-				outputText("\n\nWhile you are distracted, he unhooked your [armor], casting it aside, already forgotten. Like this... he can take you more easily. No! You've got to fight this. He gently strokes your [hair] and laughs. You clench needily, aching to feel him inside you. Acting while you're distracted, the incubus suddenly presses something smooth and cold against your exposed ass. Something flows out of it into you! It was a bottle. You squeeze down, trying to force it out, but it stays stubbornly inside you. The incubus pulls it out a moment later, but the damage is done. Increadible warmth gathers in your crotch. With it comes arousal. In seconds, you're panting, and lurid wetness spreads out from your crotch, leaking from <b>your new vagina.</b>");
+				outputText("\n\nWhile you are distracted, he unhooked your [armor], casting it aside, already forgotten. Like this... he can take you more easily. No! You've got to fight this. He gently strokes your [hair] and laughs. You clench needily, aching to feel him inside you. Acting while you're distracted, the incubus suddenly presses something smooth and cold against your exposed ass. Something flows out of it into you! It was a bottle. You squeeze down, trying to force it out, but it stays stubbornly inside you. The incubus pulls it out a moment later, but the damage is done. Incredible warmth gathers in your crotch. With it comes arousal. In seconds, you're panting, and lurid wetness spreads out from your crotch, leaking from <b>your new vagina.</b>");
 
 				player.createVagina();
 
@@ -1050,7 +1050,7 @@ package classes.Scenes.Dungeons.Factory
 			else outputText(" knees don't get sore");
 			outputText(". How wonderful! If you move just right, you can make the whole contraption sway slightly to get a proper dick-sucking rhythm going. His pearly pre-cream oozes onto your tongue, and you swallow as much of it as you can.");
 
-			outputText("\n\nWith such skillful oral service being given, it comes as some surprise to you when the incubus removes his dick from your suckling maw. Of course, he must be just changing position to fuck you, hence the elaborate bondage rig! You close your eyes and focus your attentions lower on your body, awaiting the inevitable pentration, but your loins remain completely and totally unmolested. Something cool and rubbery is pressed against your mouth instead. You accept it, letting what you discover to be a faux phallus push the whole way to the back of your mouth before it is sealed on by a band the mechanic fastens to you.");
+			outputText("\n\nWith such skillful oral service being given, it comes as some surprise to you when the incubus removes his dick from your suckling maw. Of course, he must be just changing position to fuck you, hence the elaborate bondage rig! You close your eyes and focus your attentions lower on your body, awaiting the inevitable penetrations, but your loins remain completely and totally unmolested. Something cool and rubbery is pressed against your mouth instead. You accept it, letting what you discover to be a faux phallus push the whole way to the back of your mouth before it is sealed on by a band the mechanic fastens to you.");
 
 			outputText("\n\nHe smiles and affectionately tussles your [hair]. \"<i>Silly girl. Your pussy wasn't meant to be fucked and filled.</i>\"");
 

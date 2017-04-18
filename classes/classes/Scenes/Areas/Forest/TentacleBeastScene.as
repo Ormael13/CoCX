@@ -328,7 +328,7 @@ internal function tentacleLossRape():void {
 		if (player.ass.analLooseness >= 4) {
 			outputText("Your " + player.assholeDescript() + " makes an inviting target for the squirming mass and it's quick to capitalize.  A particularly bulbous appendage slides deep inside, roiling about in a way that not even your well-trained hole has been treated to.", false);
 			if (player.hasCock()) outputText("  A series of undulating lumps pass over your prostate, pushing out a splash of pre-cum.", false);
-			outputText("  You moan into the tentacle in your mouth appreciatevely at the beast's spectacular skill.\n\n", false);
+			outputText("  You moan into the tentacle in your mouth appreciatively at the beast's spectacular skill.\n\n", false);
 		}
 		// Breasts > Manly, lactating, not enough to overfill: 
 		if (player.biggestTitSize() >= 1 && player.lactationQ() > 0 && player.lactationQ() < 1000) {

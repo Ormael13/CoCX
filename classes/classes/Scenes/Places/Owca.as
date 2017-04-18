@@ -422,7 +422,7 @@ private function rapeZeVapula():void {
 		if (player.cockTotal() > 1) outputText(" and her love-tunnel");
 		outputText(".");
 		//[if massive cum production]
-		if (player.cumQ() > 1000) outputText("  Some of it spurts by little jets outside of her, even as she instinctively contracts her muscles to keep as much spooge as possible and her belly accomodates by bloating out absurdly.");
+		if (player.cumQ() > 1000) outputText("  Some of it spurts by little jets outside of her, even as she instinctively contracts her muscles to keep as much spooge as possible and her belly accommodates by bloating out absurdly.");
 		outputText("  Needless to say, watching this rough ");
 		if (player.cockTotal() == 1) outputText("anal");
 		else outputText("double-penetration");
@@ -702,7 +702,7 @@ private function rebeccBathScene():void {
 	outputText("\n\n\"<i>There.  Now let me wash you clean.</i>\"");
 	outputText("\n\nShe grabs hold of a nearby soap and starts lathering it all over your naked body.  You can't see her hands under the moving milky surface but you feel very pleasant tingles in the most intimate places.  She tickles you a bit and you can't help but giggle some more as you feel her delicate hands working you over.");
 	outputText("\n\n\"<i>Shhh... Relax now, soldier.  I'll take care of everything.</i>\"");
-	outputText("\n\nShe first softly brushes your hair with her fingers and strokes your head, then massages every tense muscle at the edge of your face, making you sigh and moan in relief.  Before you even notice, her hands are squeezing and pinching the nape of your neck, completely releasing your tension.  You don't know where she learned to be so good at this, but it just feels so right.  Now her hands are moving downards...  Gods, she is so sweet, so delicate.  You let out another moan, making her chortle.  Putting her head just above yours, her perky tits press against your back.  You can feel her erect nipples gently scratching you as she slowly rubs her appreciable bosom against you; her expert ministrations are arousing you little by little");
+	outputText("\n\nShe first softly brushes your hair with her fingers and strokes your head, then massages every tense muscle at the edge of your face, making you sigh and moan in relief.  Before you even notice, her hands are squeezing and pinching the nape of your neck, completely releasing your tension.  You don't know where she learned to be so good at this, but it just feels so right.  Now her hands are moving downwards...  Gods, she is so sweet, so delicate.  You let out another moan, making her chortle.  Putting her head just above yours, her perky tits press against your back.  You can feel her erect nipples gently scratching you as she slowly rubs her appreciable bosom against you; her expert ministrations are arousing you little by little");
 	if (player.gender == 0) outputText("."); 
 	else {
 		//[if cock]

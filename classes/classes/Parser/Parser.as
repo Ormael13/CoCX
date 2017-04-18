@@ -395,7 +395,7 @@ package classes.Parser
 				var condArg:* = convertConditionalArgumentFromStr(textCond);
 				if (condArg != null)
 				{
-					if (printConditionalEvalDebug) trace("WARNING: Conditional \"", textCond, "\" Evalueated to: \"", condArg, "\"")
+					if (printConditionalEvalDebug) trace("WARNING: Conditional \"", textCond, "\" Evaluated to: \"", condArg, "\"")
 					return condArg
 				}
 				else

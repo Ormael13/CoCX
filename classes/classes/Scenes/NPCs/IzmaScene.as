@@ -351,7 +351,7 @@ private function confirmBuyEtiquetteGuide():void {
 private function sharkgirlPronz():void {
 	spriteSelect(32);
 	clearOutput();
-	outputText("Izma seems exceedingly embarassed as you turn this book up from under a pile of the others.  It seems to be a series of erotic images made in this land itself, detailing various creatures of all different genders caught up in sexual situations.  You raise a questioning eyebrow to her.  \"<i>Ah, that... it's good material, I-I suppose,</i>\" she stammers, trying to cover her embarrassment at having mislaid it among the others.  \"<i>Uh... 20 gems if you want to look?</i>\"", false);
+	outputText("Izma seems exceedingly embarrassed as you turn this book up from under a pile of the others.  It seems to be a series of erotic images made in this land itself, detailing various creatures of all different genders caught up in sexual situations.  You raise a questioning eyebrow to her.  \"<i>Ah, that... it's good material, I-I suppose,</i>\" she stammers, trying to cover her embarrassment at having mislaid it among the others.  \"<i>Uh... 20 gems if you want to look?</i>\"", false);
 	if (player.gems < 20) {
 		outputText("\n\n<b>You haven't got that much.</b>", false);
 		doNext(tradeWithFuckingSharkBitches);
@@ -706,7 +706,7 @@ private function loseToIzma():void {
 		else outputText("throbbing erection and slavering cunt.", false);
 		outputText("\n\n", false);
 
-		outputText("\"<i>Dirty little minx, ain't ya?  You wanted this, didn't you...</i>\" Izma teases, shoving two fingers into your moist nether-lips, to test the waters.  The peneration of your needy cunt does serve to make you whimper softly, almost begging to just be filled.  ", false);
+		outputText("\"<i>Dirty little minx, ain't ya?  You wanted this, didn't you...</i>\" Izma teases, shoving two fingers into your moist nether-lips, to test the waters.  The penetration of your needy cunt does serve to make you whimper softly, almost begging to just be filled.  ", false);
 		//(Tight/Virgin vagina)
 		if (player.vaginalCapacity() < 26) {
 			outputText("\"<i>My oh my, quite a tight little slit you got back here. Not for long...</i>\" Izma says, her fingers roaming around within your cunt.", false);
@@ -723,7 +723,7 @@ private function loseToIzma():void {
 		outputText("Pulling her fingers free, Izma quickly flips your nude body over, leaving you on your back and staring up at her.  Izma's hands are resting on her hips and she seems to be puffing her large chest out proudly. Her foot-long cock is fully erect, hot beads of pre-cum occasionally dripping onto the sands.  She takes the time to examine your own cock, grinning with her fangs bared.  \"<i>Let's see what you've got, weakling.</i>\"  ", false);
 		var x:Number = player.biggestCockIndex();
 		//(1-10 inch penis)
-		if (player.cocks[x].cockLength <= 10) outputText("Izma manages to supress a snort of laughter at the sight of your cock.  \"<i>Um... wow?  It's simply... heh, huge...</i>\"", false);
+		if (player.cocks[x].cockLength <= 10) outputText("Izma manages to suppress a snort of laughter at the sight of your cock.  \"<i>Um... wow?  It's simply... heh, huge...</i>\"", false);
 		//(10-19 inches)
 		else if (player.cocks[x].cockLength <= 19) outputText("\"<i>Not bad, I'm actually impressed,</i>\" Izma says, nodding slightly in approval.", false);
 		//(20+ inches)
@@ -1618,7 +1618,7 @@ private function submitToLakeIzma():void {
 	}
 	//(herm)
 	else {
-		outputText("\"<i>Dirty little minx, ain't ya?  You wanted this, didn't you...</i>\" Izma teases, shoving two fingers into your moist nether-lips, to test the waters.  The peneration of your needy cunt does serve to make you whimper softly, almost begging to just be filled.  ", false);
+		outputText("\"<i>Dirty little minx, ain't ya?  You wanted this, didn't you...</i>\" Izma teases, shoving two fingers into your moist nether-lips, to test the waters.  The penetration of your needy cunt does serve to make you whimper softly, almost begging to just be filled.  ", false);
 		//(Tight/Virgin vagina)
 		if (player.vaginalCapacity() < 26) {
 			outputText("\"<i>My oh my, quite a tight little slit you got back here. Not for long...</i>\" Izma says, her fingers roaming around within your cunt.", false);
@@ -1803,7 +1803,7 @@ private function izmaPearance():void {
 	if (flags[kFLAGS.IZMA_GLOVES_TAKEN] == 0) outputText(" and wielding iron gauntlets as a weapon.");
 	else outputText(".");
 	
-	outputText("  She has an angular face whose features are slightly reminiscient of a shark.  Her mouth contains a second row of retractable knife-like teeth in front of the normal blunt ones.  Her face is feminine despite its angularity.  She has long silver - white hair that grows past her shoulders. Her hips are girly without being too wide and her butt is firm.  She has a long shark - tail that grows down to her ankles, marked with the same tiger stripes as the rest of her body.  She has two normal human legs ending in normal human feet.\n\n", false);
+	outputText("  She has an angular face whose features are slightly reminiscent of a shark.  Her mouth contains a second row of retractable knife-like teeth in front of the normal blunt ones.  Her face is feminine despite its angularity.  She has long silver - white hair that grows past her shoulders. Her hips are girly without being too wide and her butt is firm.  She has a long shark - tail that grows down to her ankles, marked with the same tiger stripes as the rest of her body.  She has two normal human legs ending in normal human feet.\n\n", false);
 
 	outputText("She has a pair of DD-cup breasts, with a single 0.5 inch nipple on each breast.\n\n", false);
 
@@ -2530,7 +2530,7 @@ private function IzmaPoopsBabies():void {
 	}
 	spriteSelect(32);
 	clearOutput();
-	outputText("You hear the sounds of splashing and cursing coming from the part of the stream where Izma, by neccessity, keeps her private mini-camp, and immediately you set off running. When you come tearing to a halt there, you find Izma, wading in the stream well up to her waist, and cursing as she holds her gravid belly, her tail angrily flailing through the water behind her. She still manages to smile when she sees it's you who's come to see her. No words are neccessary; you plunge into the water and head to her side.\n\n", false);
+	outputText("You hear the sounds of splashing and cursing coming from the part of the stream where Izma, by necessity, keeps her private mini-camp, and immediately you set off running. When you come tearing to a halt there, you find Izma, wading in the stream well up to her waist, and cursing as she holds her gravid belly, her tail angrily flailing through the water behind her. She still manages to smile when she sees it's you who's come to see her. No words are necessary; you plunge into the water and head to her side.\n\n", false);
  
 	outputText("\"<i>Here we go, huh?</i>\"  She tries to laugh.  That's Izma for you; always trying to be brave.\n\n", false);
  
@@ -2636,7 +2636,7 @@ public function pcPopsOutASharkTot():void {
 		outputText(" skin, it's obvious she's a baby ", false);
 		if (type == 0) outputText("shark-girl", false);
 		else outputText("tigershark", false);
-		outputText(". Finally, she calms down in her \"<i>daddy's</i>\" arms, looking around with surprising aclarity for a newborn. She sees you and holds her arms out, making strange babbling noises; she has no teeth at all, from what you can see. Izma walks over to you, smiling proudly, and lets you hold your new baby girl, who nuzzles against you and then immediately turns her attention towards your milky breasts.\n\n", false);
+		outputText(". Finally, she calms down in her \"<i>daddy's</i>\" arms, looking around with surprising alacrity for a newborn. She sees you and holds her arms out, making strange babbling noises; she has no teeth at all, from what you can see. Izma walks over to you, smiling proudly, and lets you hold your new baby girl, who nuzzles against you and then immediately turns her attention towards your milky breasts.\n\n", false);
  
 		outputText("She latches onto the " + player.nippleDescript(0) + " and starts to suckle for all she's worth, waves of pleasure both sexual and maternal filling you, overwhelming you with bliss. Oblivious to everything else, you hold her against your breast, allowing her to sate her incredible appetite. She drinks your breast dry, and then immediately latches onto the next one.", false);
 		if (player.breastRows.length > 1) outputText("  She then starts on your third breast, and while she slows down at the fourth breast, she still finishes it off.", false);
@@ -2647,7 +2647,7 @@ public function pcPopsOutASharkTot():void {
 		outputText("...Okay, maybe not so little. Before, she was the size of a human baby. Now, you're holding a fairly grown young ", false);
 		if (type == 0) outputText("shark-girl", false);
 		else outputText("tigershark", false);
-		outputText("; physically, you'd have to say she was anywhere from ten to thirteen years old. She grins at you, displaying both rows of teeth, and then kisses you on the lips. \"<i>Mama.</i>\" She states, clearly and contendly, then visibly relaxes, nuzzling into your arms and closing her eyes, clearly intent on drifting off to sleep.\n\n", false);
+		outputText("; physically, you'd have to say she was anywhere from ten to thirteen years old. She grins at you, displaying both rows of teeth, and then kisses you on the lips. \"<i>Mama.</i>\" She states, clearly and contentedly, then visibly relaxes, nuzzling into your arms and closing her eyes, clearly intent on drifting off to sleep.\n\n", false);
  
 		outputText("You look up at the tigershark who fathered her for support, but she just smiles and flops down beside you as well. With a soft sigh, you simply lay back and enjoy your strange new family being there with you. When you wake in the morning, Izma will have taken your daughter to stay at the stream with her; it's important for young shark-folk to be moist, constantly.\n", false);
 		player.orgasm();
@@ -3476,7 +3476,7 @@ private function izmaDomsLatexyPartI():void {
 	if (latexGirl.gooObedience()/5 + latexGirl.gooFluid()/5 + rand(20) < 10) {
 		outputText("" + flags[kFLAGS.GOO_NAME] + " grows and sucks harder, cheeks hollowed with suckling hunger.  You can see them stretch and go even more concave with rhythmic pulsations, vacuum-tight around the orange shaft.  Izma moans and tries to pull out, but she barely manages to extract an inch before her whole length is noisily pulled back in.  The shark-girl tries to pry the slutty, hungry little goo off of herself again and again, but each time, all she winds up doing is getting sensuously devoured again and again.  " + flags[kFLAGS.GOO_NAME] + " gives her four balls another appreciative squeeze, and Izma's eyes suddenly roll back, helpless again the hungry sluts impressive oral talents.");
 		
-		outputText("\n\n\"<i>C-c-cumming!  Ohhhh by the gods, yes!  Ungh!</i>\" Izma cries as her hips begin to weakly thrust against their onyx prison, smushing " + flags[kFLAGS.GOO_NAME] + "'s lips into her toned middle.  The smooth, latex sheath around her sack trembles, wrinkling as Izma's balls pull tight against her, and then, " + flags[kFLAGS.GOO_NAME] + " is gurgling noisily, massaging all four of those cum factories as they pour their cargo straight into her throat, feeding her the warm, soupy cum she craves.  They stay locked like that for upwards of a minute, Izma occassionally trying to talk but usually just babbling contently while she's milked for every drop.");
+		outputText("\n\n\"<i>C-c-cumming!  Ohhhh by the gods, yes!  Ungh!</i>\" Izma cries as her hips begin to weakly thrust against their onyx prison, smushing " + flags[kFLAGS.GOO_NAME] + "'s lips into her toned middle.  The smooth, latex sheath around her sack trembles, wrinkling as Izma's balls pull tight against her, and then, " + flags[kFLAGS.GOO_NAME] + " is gurgling noisily, massaging all four of those cum factories as they pour their cargo straight into her throat, feeding her the warm, soupy cum she craves.  They stay locked like that for upwards of a minute, Izma occasionally trying to talk but usually just babbling contently while she's milked for every drop.");
 		
 		outputText("\n\nAbruptly, the striped hermaphrodite slumps back against a rock, her drained dong sliding out of the constricting tightness of " + flags[kFLAGS.GOO_NAME] + "'s throat with a wet pop.  The crimson dick is encased in a hardening shell of latex, and you must admit, it's a good look on her.  Izma sighs, \"<i>You disobedient slut...</i>\" and staggers back up onto her feet.  Gesturing down at her glossy, black dick, she comments, \"<i>I guess it is a nice look on me.</i>\"");
 		outputText("\n\n" + flags[kFLAGS.GOO_NAME] + " grins happily and lays back, sunning herself as she starts to digest her 'meal'.");

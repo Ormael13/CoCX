@@ -391,7 +391,7 @@ private function auntNancyPoonPartIII():void {
 			if (player.balls == 0 && (player.cocks[y].cockLength < 22 || (player.cocks[y].cockLength >= 22 && player.cockTotal() <= 2)))
 				outputText("squeezing the fingers on Aunt Nancy's hand still tickling your insides", false);
 			else outputText("making you long for something inside of it", false);
-			outputText(", as " + player.sMultiCockDesc() + " spasms in ecstacy.\n\n", false);
+			outputText(", as " + player.sMultiCockDesc() + " spasms in ecstasy.\n\n", false);
 		}
 		//[All w/ penis:]
 		outputText("Eventually, both your orgasms end.  You feel worn out, like you just ran a long mile, even though Aunt Nancy was doing most of the work.  However, she seems fine, smiling down at you with a big, happy grin.", false);
@@ -467,7 +467,7 @@ private function auntNancyPoonPartIV():void {
 
 		outputText("You can feel Aunt Nancy's hot tears on your back, and you place a comforting hand onto one of hers.  You can all but feel her smile through her tears, and she presses another kiss into your ear.  \"<i>I know, I know,</i>\" the widow whispers. \"<i>I won't try to stop you.  Just... come back some time, if you please? Every now and again?  I'd... appreciate that.</i>\"\n\n", false);
 
-		outputText("The spider-lady pulls her head back, releasing your body with her four arms, and says, rather loudly, \"<i>Now, friend, get on out of here!  Go out there and get to the adventuring and world-saving!</i>\"  Suddenly, mischeviously, she pinches you rather hard on the " + player.buttDescript() + ".  You jump, yelping in pain, and turn indignantly to face her as she doubles over, chuckling, tears still streaming down her face.  \"<i>Let these old exoskeletal chitins rest awhile, friend,</i>\" Aunt Nancy laughs, lying back onto the soft mound of webbing.  She smiles lazily up at you.  \"<i>There's water next to the foyer if you want to clean off, and your " + player.armorName + " in the parlor.  And... please do keep in touch.</i>\"\n\n", false);
+		outputText("The spider-lady pulls her head back, releasing your body with her four arms, and says, rather loudly, \"<i>Now, friend, get on out of here!  Go out there and get to the adventuring and world-saving!</i>\"  Suddenly, mischievously, she pinches you rather hard on the " + player.buttDescript() + ".  You jump, yelping in pain, and turn indignantly to face her as she doubles over, chuckling, tears still streaming down her face.  \"<i>Let these old exoskeletal chitins rest awhile, friend,</i>\" Aunt Nancy laughs, lying back onto the soft mound of webbing.  She smiles lazily up at you.  \"<i>There's water next to the foyer if you want to clean off, and your " + player.armorName + " in the parlor.  And... please do keep in touch.</i>\"\n\n", false);
 
 		outputText("Tentatively, you smile back, before getting cleaned up, getting dressed, and walking out into the suddenly-blinding sun of Tel'Adre.\n\n", false);
 	}

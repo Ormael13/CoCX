@@ -1136,7 +1136,7 @@ private function collectSomeButtSmex():void {
 	
 	outputText("\n\nYour [armor] is quickly disposed of, putting your body on display for the four men.  Every breath is a whimpering pant as the effects of the lust draft take over your body.  Your eyes strain to remain focused.  The warmth and tingling floods your senses and washes down your skin to your loins, causing them to ache.");
 	if (player.hasCock()) {
-		outputText("  [EachCock] grows stiff as everyone watches.  You wince to try and fight off the draft, but soon you're driping pearls of pre-cum.");
+		outputText("  [EachCock] grows stiff as everyone watches.  You wince to try and fight off the draft, but soon you're dripping pearls of pre-cum.");
 	}
 	if (player.hasVagina()) outputText("  Your " + player.vaginaDescript(0)  + " grows slick in your excitement.");
 	if (player.gender == 0) outputText("  Your skin heats and tingles, sweat wetting its surface.");
@@ -1320,7 +1320,7 @@ private function finalGayFinallee(road:int = 0):void {
 	//Prisoner mod!
 	private function investigateBackAlley():void {
 		clearOutput();
-		outputText("Your curiousity draws you half way down a dark alleyway between two tents. In the gloom ahead you see what appears to be a cage wagon, and hear the sounds of guttural voices engaged in boisterous conversation. Inexplicably you find yourself struck by an unwholesome sense of foreboding. <b>Even from here that cage looks like it is designed to carry people off to somewhere very unpleasant, some place where your life could be turned upside down and the rules you have become accustomed to in this world may no longer apply.</b> You take a long moment to consider turning back. Do you throw caution to the wind and investigate further?");
+		outputText("Your curiosity draws you half way down a dark alleyway between two tents. In the gloom ahead you see what appears to be a cage wagon, and hear the sounds of guttural voices engaged in boisterous conversation. Inexplicably you find yourself struck by an unwholesome sense of foreboding. <b>Even from here that cage looks like it is designed to carry people off to somewhere very unpleasant, some place where your life could be turned upside down and the rules you have become accustomed to in this world may no longer apply.</b> You take a long moment to consider turning back. Do you throw caution to the wind and investigate further?");
 		doYesNo(getGame().prison.goDirectlyToPrisonDoNotPassGoDoNotCollect200Gems, enterTheBazaarAndMenu);
 	}
 

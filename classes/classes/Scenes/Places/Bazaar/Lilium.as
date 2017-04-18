@@ -217,7 +217,7 @@ private function liliumNippleFuck():void {
 	
 	outputText("Lilium takes you to a secluded spot in the Bazaar for you to be able to enjoy each other's company. She kneels down before you and you strip out of your " + player.armorName + ", baring your naked body before her.\n\n", false);
 
-	outputText("Lilium begins to gently rub her palms against the side of your flacid cock.  As it begins to harden in her hands she leans in close, letting it grow stiff against her soft cheek.  You feel her wet tongue against the base of your " + player.cockDescript(x) + " before it begins sliding along the underside of your cock as Lilium licks the length of your maleness right to the tip.  ", false);
+	outputText("Lilium begins to gently rub her palms against the side of your flaccid cock.  As it begins to harden in her hands she leans in close, letting it grow stiff against her soft cheek.  You feel her wet tongue against the base of your " + player.cockDescript(x) + " before it begins sliding along the underside of your cock as Lilium licks the length of your maleness right to the tip.  ", false);
 	//(If cock is pierced)
 	if (player.cocks[x].pierced > 0) outputText("You can feel a slight bump as her tongue passes over each piercing and she gives the head of your cock a flick with the tip of her tongue as she reaches the end.  ", false);
 	//(else)

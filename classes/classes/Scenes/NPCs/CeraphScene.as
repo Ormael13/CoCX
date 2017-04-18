@@ -883,7 +883,7 @@ package classes.Scenes.NPCs
 			else outputText("Are you going to try to fight me?  If you're going to do that, I suppose we can.  You do seem to need some practice at indulging your fetishes.", false);
 			outputText("</i>\"\n\n", false);
 
-			outputText("The demoness lifts one heeled foot high onto a boulder and winks at you, letting her whip rub up and down her hard, nodule-studded shaft.  Her tail rises languidly between her perfect, lissomelegs, rubbing the glistening wet delta of her sex enticingly.  The demon coos, \"<i>Oh, I do love putting on a show for my future pets.  Tell me, did you really come up here to fight?  I'd rather lie back in the sunlight, rubbing my fingers over my glistening skin and showing everyone just how wondrous sex with me would be.  You can even go if you want, or maybe you'd have something worth trading with me?</i>\"", false);
+			outputText("The demoness lifts one heeled foot high onto a boulder and winks at you, letting her whip rub up and down her hard, nodule-studded shaft.  Her tail rises languidly between her perfect, lissome legs, rubbing the glistening wet delta of her sex enticingly.  The demon coos, \"<i>Oh, I do love putting on a show for my future pets.  Tell me, did you really come up here to fight?  I'd rather lie back in the sunlight, rubbing my fingers over my glistening skin and showing everyone just how wondrous sex with me would be.  You can even go if you want, or maybe you'd have something worth trading with me?</i>\"", false);
 			dynStats("lus", (5 + player.cor / 10 + player.lib / 20), "cor", 0)
 			//[Fight] [Trade] [Run]
 			simpleChoices("Fight", startAFightWithCeraph, "Trade", tradeCeraphSomething, "", null, "", null, "Run", runFromCeraphsNiceDeal);

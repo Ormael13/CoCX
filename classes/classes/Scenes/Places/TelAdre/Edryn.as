@@ -962,7 +962,7 @@ private function jizzFromEatingPregdrynOut():void {
 
 	outputText("You tremble as you pull away, licking her lust from your lips and gasping for air as you shift to lick at her clit.", false);
 	if (player.isTaur()) {
-		outputText("  Your legs twitch weekly on the floor, forgetten about as you focus entirely on your hands, mouth, and pulsating " + Appearance.cockNoun(CockTypesEnum.HUMAN), false);
+		outputText("  Your legs twitch weekly on the floor, forgotten about as you focus entirely on your hands, mouth, and pulsating " + Appearance.cockNoun(CockTypesEnum.HUMAN), false);
 		if (player.cockTotal() > 1) outputText("s", false);
 		outputText(".", false);
 	}
@@ -982,7 +982,7 @@ private function jizzFromEatingPregdrynOut():void {
 	if (player.cumQ() < 1000) {
 		outputText("  The flow gets thicker and thicker.  Edryn even remarks, \"<i>Oh my, my baby's daddy is just full of cum!  Let it all out for me dear, you did such a good job on my clit that you deserve release.</i>\" You squirt and dribble, breathing airborne orgasm and squirting ", false);
 		if (player.cumQ() < 3000) outputText("out the last of your liquid pleasure.", false);
-		else outputText("ever greater amounts of liquid peasure.  Jism drips through the floorboards as you create a puddle a few inches deep.", false);
+		else outputText("ever greater amounts of liquid pleasure.  Jism drips through the floorboards as you create a puddle a few inches deep.", false);
 	}
 	outputText("\n\n", false);
 
