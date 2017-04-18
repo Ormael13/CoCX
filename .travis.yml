@@ -5,8 +5,8 @@ install:
   - devTools/ci/setup-flex.sh
  
 script:
-  - ant debug -DFLEX_HOME="/usr/local/bin/apache-flex"
+  - ant debug
 
 env:
   global:
-    - PATH="$PATH:~/flex"
+    - FLEX_HOME=flex/"
