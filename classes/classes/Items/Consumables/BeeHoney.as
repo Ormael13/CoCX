@@ -237,12 +237,14 @@ package classes.Items.Consumables
 			if (special) { //All the speical honey effects occur after any normal bee transformations (if the player wasn't a full bee morph)
 				//Cock growth multiplier.
 				var mult:int = 1.0;
-				if (player.cocks[0].cArea() >= 140) mult -= 0.2;
-				if (player.cocks[0].cArea() >= 180) mult -= 0.2;
-				if (player.cocks[0].cArea() >= 220) mult -= 0.2;
-				if (player.cocks[0].cArea() >= 260) mult -= 0.2;
-				if (player.cocks[0].cArea() >= 300) mult -= 0.1;
-				if (player.cocks[0].cArea() >= 400) mult -= 0.1; //Cock stops growing at that point.
+				if (player.hasCock()) {
+				    if (player.cocks[0].cArea() >= 140) mult -= 0.2;
+				    if (player.cocks[0].cArea() >= 180) mult -= 0.2;
+				    if (player.cocks[0].cArea() >= 220) mult -= 0.2;
+				    if (player.cocks[0].cArea() >= 260) mult -= 0.2;
+				    if (player.cocks[0].cArea() >= 300) mult -= 0.1;
+				    if (player.cocks[0].cArea() >= 400) mult -= 0.1; //Cock stops growing at that point.
+				}
 				//Begin TF
 				if (!player.hasCock()) {
 					outputText("\n\nYou double over in pain as the effects start to concentrate into your groin.  You need to get release, but what you’ve got just isn’t cutting it.  You fall to the ground and grab at your crotch, trying desperately to get the release you need.  Finally, it happens.  With a sudden burst of intense relief and sexual satisfaction, a new human looking penis bursts from your skin and sprays your seed all over the ground in front of you.  When you’re able to recover and take a look at your new possession.  <b>You now have an eight inch long human cock that is very sensitive to stimulation.</b>");
