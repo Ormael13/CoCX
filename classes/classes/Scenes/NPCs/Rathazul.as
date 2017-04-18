@@ -10,9 +10,13 @@
 	//Rathazul the Alchemist
 	//Encounter, random text for potential uses, choices.
 	//After he has crafted 3 things for the player, option to move into camp.
+		private var game:CoC;
+	
 		public function Rathazul()
 		{
 			CoC.timeAwareClassAdd(this);
+			//TODO inject this instead of using a global
+			this.game = kGAMECLASS;
 		}
 		
 		//Implementation of TimeAwareInterface
