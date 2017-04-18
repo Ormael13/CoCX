@@ -11,6 +11,21 @@ package classes
 	{
 		public function PlayerHelper() {}
 
+		public function hasDifferentUnderBody():Boolean
+		{
+			if ([UNDER_BODY_TYPE_NONE, UNDER_BODY_TYPE_NAGA].indexOf(underBody.type) != -1)
+				return false;
+
+			/* // Example for later use
+			if ([UNDER_BODY_TYPE_MERMAID, UNDER_BODY_TYPE_WHATEVER].indexOf(underBody.type) != -1)
+				return false; // The underBody is (mis)used for secondary skin, not for the underBody itself
+			*/
+
+			return underBody.skin.type != skin.type || underBody.skin.tone != skin.tone ||
+			       underBody.skin.adj  != skin.adj  || underBody.skin.desc != skin.desc ||
+			       (underBody.skin.hasFur() && hasFur() && underBody.skin.furColor != skin.furColor);
+		}
+
 		public function hasDragonHorns(fourHorns:Boolean = false):Boolean
 		{
 			return (!fourHorns && horns > 0 && hornType == HORNS_DRACONIC_X2) || hornType == HORNS_DRACONIC_X4_12_INCH_LONG;
@@ -29,6 +44,20 @@ package classes
 		public function hasReptileFace():Boolean
 		{
 			return [FACE_SNAKE_FANGS, FACE_LIZARD, FACE_DRAGON].indexOf(faceType) != -1;
+		}
+
+		public function hasReptileUnderBody(withSnakes:Boolean = false):Boolean
+		{
+			var underBodies:Array = [
+				UNDER_BODY_TYPE_LIZARD,
+				UNDER_BODY_TYPE_DRAGON,
+			];
+
+			if (withSnakes) {
+				underBodies.push(UNDER_BODY_TYPE_NAGA);
+			}
+
+			return underBodies.indexOf(underBody.type) != -1;
 		}
 
 		public function hasDragonWings(large:Boolean = false):Boolean

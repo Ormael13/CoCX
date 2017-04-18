@@ -294,34 +294,7 @@ import classes.GlobalFlags.kFLAGS;
 				return "ERROR: NO BEARD! <b>YOU ARE NOT A VIKING AND SHOULD TELL KITTEH IMMEDIATELY.</b>";
 			}
 		}
-		
-		public function skin(noAdj:Boolean = false, noTone:Boolean = false):String
-		{
-			var skinzilla:String = "";
-			//Only show stuff other than skinDesc if justSkin is false
-			if (!noAdj)
-			{
-				//Adjectives first!
-				if (skinAdj != "" && !noTone && skinTone != "rough gray")
-				{
-					skinzilla += skinAdj;
-					if (noTone)
-						skinzilla += " ";
-					else
-						skinzilla += ", ";
-				}
-			}
-			if (!noTone)
-				skinzilla += skinTone + " ";
-			//Fur handled a little differently since it uses
-			//haircolor
-			if (hasFur())
-				skinzilla += "skin";
-			else
-				skinzilla += skinDesc;
-			return skinzilla;
-		}
-		
+
 		public function hasMuzzle():Boolean
 		{
 			if (faceType == FACE_HORSE || faceType == FACE_DOG || faceType == FACE_CAT || faceType == FACE_LIZARD || faceType == FACE_KANGAROO || faceType == FACE_FOX || faceType == FACE_DRAGON || faceType == FACE_RHINO || faceType == FACE_ECHIDNA || faceType == FACE_DEER)
@@ -935,6 +908,11 @@ import classes.GlobalFlags.kFLAGS;
 		public function eyesDescript():String
 		{
 			return Appearance.eyesDescript(this);
+		}
+
+		public function nagaLowerBodyColor2():String
+		{
+			return Appearance.nagaLowerBodyColor2(this);
 		}
 	}
 

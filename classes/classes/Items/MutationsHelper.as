@@ -196,23 +196,23 @@ package classes.Items
 			return true;
 		}
 
-		public function newLizardSkinTone():String
+		public function newLizardSkinTone():Array
 		{
 			if (rand(10) == 0) {
 				//rare skinTone
-				return rand(2) == 0 ? "purple" : "silver";
+				return rand(2) == 0 ? ["purple", "deep pink"] : ["silver", "light gray"];
 			}
 
 			//non rare skinTone
 			switch (rand(5)) {
-				case 0: return "red";
-				case 1: return "green";
-				case 2: return "white";
-				case 3: return "blue";
-				case 4: return "black";
+				case 0: return ["red", "orange"];
+				case 1: return ["green", "yellow green"];
+				case 2: return ["white", "light gray"];
+				case 3: return ["blue", "ocean blue"];
+				case 4: return ["black", "dark gray"];
 			}
 
-			return "invalid"; // Will never happen. Suppresses 'Error: Function does not return a value.'
+			return ["invalid", "invalid"]; // Will never happen. Suppresses 'Error: Function does not return a value.'
 		}
 
 		public function updateClaws(clawType:int = CLAW_TYPE_NORMAL):String

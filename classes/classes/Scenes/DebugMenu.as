@@ -564,6 +564,7 @@ package classes.Scenes
 			player.legCount = 2;
 			player.skinType = SKIN_TYPE_FUR;
 			player.skinDesc = "fur";
+			player.underBody.restore(); // Restore the underbody for now
 			//Draconic TF
 			player.hornType = HORNS_DRACONIC_X2;
 			player.horns = 4;
@@ -585,8 +586,14 @@ package classes.Scenes
 			player.lowerBody = LOWER_BODY_TYPE_CAT;
 			player.legCount = 2;
 			//Draconic TF
-			player.skinType = SKIN_TYPE_LIZARD_SCALES;
-			player.skinDesc = "scales";
+			player.skinType = SKIN_TYPE_DRAGON_SCALES;
+			player.skinAdj = "tough";
+			player.skinDesc = "shield-shaped dragon scales";
+			player.furColor = player.hairColor;
+			player.underBody.type = UNDER_BODY_TYPE_DRAGON;
+			player.underBody.copySkin({        // copy the main skin props to the underBody skin ...
+				desc: "ventral dragon scales"  // ... and only override the desc
+			});
 			player.tongueType = TONGUE_DRACONIC;
 			player.hornType = HORNS_DRACONIC_X2;
 			player.horns = 4;

@@ -98,8 +98,11 @@ package classes
 				outputText("  You have a tapered, shrewd-looking vulpine face with a speckling of downward-curved whiskers just behind the nose.");
 				if (player.hasPlainSkin()) 
 					outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skinFurScales]."); 
-				else if (player.hasFur()) 
-					outputText("  A coat of [skinFurScales] decorates your muzzle.");
+				else if (player.hasFur())
+					if (player.hasDifferentUnderBody())
+						outputText("  Your muzzle is decorated with [skinFurScales] on your upper jaw and head and with [underBody.skinFurScales] on your lower jaw.");
+					else
+						outputText("  A coat of [skinFurScales] decorates your muzzle.");
 				else if (player.hasScales()) 
 					outputText("  Strangely, [skinFurScales] adorn every inch of your animalistic visage.");
 			}
@@ -150,8 +153,11 @@ package classes
 			{
 				if (player.hasPlainSkin() || player.hasGooSkin()) 
 					outputText("  You have a cat-like face, complete with a cute, moist nose and whiskers.  The [skin] that is revealed by your lack of fur looks quite unusual on so feline a face.");
-				if (player.hasFur()) 
-					outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your " + player.skinDesc + " is " + player.furColor + ", hiding your [skin.noadj] underneath.");
+				if (player.hasFur())
+					if (player.hasDifferentUnderBody())
+						outputText("  You have a cat-like face, complete with moist nose and whiskers.  You have [skinFurScales] on your upper jaw and head, while your lower jaw is decorated by [underBody.skinFurScales], hiding your [skin.noadj] underneath.");
+					else
+						outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your " + player.skinDesc + " is " + player.furColor + ", hiding your [skin.noadj] underneath.");
 				if (player.hasScales()) 
 					outputText("  Your facial structure blends humanoid features with those of a cat.  A moist nose and whiskers are included, but overlaid with glittering [skinFurScales].");
 				if (player.eyeType != EYES_BLACK_EYES_SAND_TRAP)
@@ -177,12 +183,18 @@ package classes
 					outputText("  You have a face resembling that of a lizard, and with your toothy maw, you have quite a fearsome visage.  The reptilian visage does look a little odd with just [skin].");
 				if (player.hasFur()) 
 					outputText("  You have a face resembling that of a lizard.  Between the toothy maw, pointed snout, and the layer of [skinFurScales] covering your face, you have quite the fearsome visage.");
-				if (player.hasScales()) 
-					outputText("  Your face is that of a lizard, complete with a toothy maw and pointed snout.  Reflective [skinFurScales] complete the look, making you look quite fearsome.");
+				if (player.hasScales()) {
+					outputText("  Your face is that of a lizard, complete with a toothy maw and pointed snout.");
+					if (!player.hasReptileUnderBody())
+						outputText("  Reflective [skinFurScales] complete the look, making you look quite fearsome.");
+					else
+						outputText("  Reflective [skinFurScales] on your upper jaw and head and [underBody.skinFurScales] on your lower jaw complete the look, making you look quite fearsome.");
+				}
 			}
 			if (player.faceType == FACE_DRAGON) 
 			{
-				outputText("  Your face is a narrow, reptilian muzzle.  It looks like a predatory lizard's, at first glance, but with an unusual array of spikes along the under-jaw.  It gives you a regal but fierce visage.  Opening your mouth reveals several rows of dagger-like sharp teeth.  The fearsome visage is decorated by [skinFurScales].");
+				outputText("  Your face is a narrow, reptilian muzzle.  It looks like a predatory lizard's, at first glance, but with an unusual array of spikes along the under-jaw.  It gives you a regal but fierce visage.  Opening your mouth reveals several rows of dagger-like sharp teeth.  The fearsome visage is decorated by [skinFurScales]");
+				outputText(player.hasReptileUnderBody() ? " on your upper jaw and head and [underBody.skinFurScales] on your lower jaw." : ".");
 			}
 			if (player.faceType == FACE_KANGAROO) 
 			{
@@ -228,7 +240,11 @@ package classes
 				if (player.hasPlainSkin())
 					outputText("  The [skin] that is revealed by your lack of fur looks quite unusual.");
 				else if (player.hasFur())
-					outputText("  It's covered in [skinFurScales] that covers your " + player.skinTone + " skin underneath.");
+					if (player.hasDifferentUnderBody())
+						outputText("  It's covered in [skinFurScales] on your upper jaw and head and [underBody.skinFurScales]"
+						          +" on your lower jaw that covers your [skin.noadj] underneath.");
+					else
+						outputText("  It's covered in [skinFurScales] that covers your [skin.noadj] underneath.");
 				else if (player.hasScales())
 					outputText("  It's covered in [skinFurScales], making your face looks more unusual.");
 			}
@@ -482,6 +498,10 @@ package classes
 			else if (player.armType == ARM_TYPE_PREDATOR)
 				outputText("  Your arms are covered by [skinFurScales] and your fingernails are now " + player.claws() + ".");
 			//Done with head bits. Move on to body stuff
+			// <mod name="BodyParts.UnderBody" author="Stadler76">
+			if (player.hasDifferentUnderBody())
+				outputText("  While most of your body is covered by [skinFurScales] you have [underBody.skinFurScales] covering your belly.");
+			// </mod>
 			//Horse lowerbody, other lowerbody texts appear lower
 			if (player.isTaur()) 
 			{
@@ -687,7 +707,15 @@ package classes
 			}
 			if (player.tailType == TAIL_TYPE_LIZARD) 
 			{
-				outputText("  A tapered tail hangs down from just above your " + player.assDescript() + ".  It sways back and forth, assisting you with keeping your balance.");
+				if (player.hasDifferentUnderBody())
+				{
+					outputText("  A tapered tail, covered in [skinFurScales] with [underBody.skinFurScales] along its underside hangs down from just"
+					          +" above your [ass].  It sways back and forth, assisting you with keeping your balance.");
+				}
+				else
+				{
+					outputText("  A tapered tail hangs down from just above your [ass].  It sways back and forth, assisting you with keeping your balance.");
+				}
 			}
 			if(player.tailType == TAIL_TYPE_SALAMANDER) 
 			{
@@ -713,7 +741,16 @@ package classes
 			}
 			else if (player.tailType == TAIL_TYPE_DRACONIC) 
 			{
-				outputText("  A thin, scaly, prehensile reptilian tail, almost as long as you are tall, swings behind you like a living bullwhip.  Its tip menaces with spikes of bone, meant to deliver painful blows.");		
+				if (player.hasDifferentUnderBody())
+				{
+					outputText("  A thin, prehensile reptilian tail, covered in [skinFurScales] with [underBody.skinFurScales] along its underside"
+					          +" and almost as long as you are tall, swings behind you like a living bullwhip. Its tip menaces with spikes of bone,"
+					          +" meant to deliver painful blows.");
+				}
+				else
+				{
+					outputText("  A thin, scaly, prehensile reptilian tail, almost as long as you are tall, swings behind you like a living bullwhip.  Its tip menaces with spikes of bone, meant to deliver painful blows.");
+				}
 			}
 			//appearance
 			else if (player.tailType == TAIL_TYPE_RACCOON) 
@@ -764,8 +801,19 @@ package classes
 				outputText("  Your " + num2Text(player.legCount)+ " legs are muscled and jointed oddly, covered in fur, and end in a bestial hooves.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_DOG) 
 				outputText("  " + Num2Text(player.legCount)+ " digitigrade legs grow downwards from your waist, ending in dog-like hind-paws.");
-			else if (player.lowerBody == LOWER_BODY_TYPE_NAGA) 
-				outputText("  Below your waist your flesh is fused together into a very long snake-like tail.");
+			else if (player.lowerBody == LOWER_BODY_TYPE_NAGA)
+				if (player.hasReptileUnderBody(true)) {
+					var nagaColors:Array = ["", ""];
+					if (player.underBody.type == UNDER_BODY_TYPE_NAGA)
+						nagaColors = [player.underBody.skin.tone, player.nagaLowerBodyColor2()];
+					else
+						nagaColors = [player.skin.tone, player.underBody.skin.tone];
+
+					outputText("  Below your waist, in place of where your legs would be, your body transitions into a long snake like tail."
+					          +" Your snake-like lower body is covered by " + nagaColors[0] + " color scales,"
+					          +" with " + nagaColors[1] + " color ventral scales along your underside.");
+				} else
+					outputText("  Below your waist your flesh is fused together into a very long snake-like tail.");
 			//Horse body is placed higher for readability purposes
 			else if (player.lowerBody == LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS) 
 				outputText("  Your " + num2Text(player.legCount)+ " perfect lissome legs end in mostly human feet, apart from the horn protruding straight down from the heel that forces you to walk with a sexy, swaying gait.");

@@ -106,11 +106,19 @@ package classes.Items.Consumables
 			//(Pending Tongue Masturbation Variants; if we ever get around to doing that.)
 			//Gain Dragon Scales
 			if (!player.hasDragonScales() && changes < changeLimit && rand(3) == 0) {
-				output.text("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, hoping for relief; and when you look at your hands you notice small fragments of your " + player.skinFurScales() + " hanging from your fingers.  Nevertheless you continue to scratch yourself, and when you're finally done, you look yourself over. New shield-like scales have grown to replace your peeled off " + player.skinFurScales() + ".  They are smooth and look nearly as tough as iron. <b>Your body is now covered in shield-shaped dragon scales.</b>");
-				player.skinType = SKIN_TYPE_DRAGON_SCALES;
-				player.skinAdj = "tough";
-				player.skinDesc = "scales";
+				output.text("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed"
+				           +" pins and needles.  You scratch yourself, hoping for relief; and when you look at your hands you notice small fragments"
+				           +" of your [skinFurScales] hanging from your fingers.  Nevertheless you continue to scratch yourself, and when you're"
+				           +" finally done, you look yourself over. New shield-like scales have grown to replace your peeled off [skinFurScales]."
+				           +" They are smooth and look nearly as tough as iron.");
+				player.skin.setProps({type: SKIN_TYPE_DRAGON_SCALES, adj: "tough", desc: "shield-shaped dragon scales"});
 				//def bonus of scales
+				player.underBody.type = UNDER_BODY_TYPE_DRAGON;
+				player.underBody.copySkin({        // copy the main skin props to the underBody skin ...
+					desc: "ventral dragon scales"  // ... and only override the desc
+				});
+				output.text("  <b>Your body is now covered in [skinTone], shield-shaped dragon scales with [underBody.skinTone] ventral scales"
+				           +" covering your underside.</b>");
 			}
 			//<mod name="Reptile eyes" author="Stadler76">
 			//Gain Dragon Eyes

@@ -3257,10 +3257,40 @@ use namespace kGAMECLASS;
 			
 			return true;
 		}
-		
-		public function setFurColor(colorArray:Array, ignoreSkinType:Boolean = false):void {
-			if (!ignoreSkinType && !hasFur()) return;
-			furColor = colorArray[rand(colorArray.length)];
+
+		public function setFurColor(colorArray:Array, underBodyProps:Object = null, doCopySkin:Boolean = false, restoreUnderBody:Boolean = true):void
+		{
+			_setSkinFurColor("fur", colorArray, underBodyProps, doCopySkin, restoreUnderBody);
+		}
+
+		public function setSkinTone(colorArray:Array, underBodyProps:Object = null, doCopySkin:Boolean = false, restoreUnderBody:Boolean = true):void
+		{
+			_setSkinFurColor("skin", colorArray, underBodyProps, doCopySkin, restoreUnderBody);
+		}
+
+		protected function _setSkinFurColor(what:String, colorArray:Array, underBodyProps:Object = null, doCopySkin:Boolean = false, restoreUnderBody:Boolean = true):void
+		{
+			var choice:* = colorArray[rand(colorArray.length)];
+
+			if (restoreUnderBody)
+				underBody.restore();
+
+			if (what == "fur")
+				furColor = (choice is Array) ? choice[0] : choice;
+			else
+				skinTone = (choice is Array) ? choice[0] : choice;
+
+			if (doCopySkin)
+				underBody.copySkin();
+
+			if (choice is Array)
+				if (what == "fur")
+					underBody.skin.furColor = choice[1];
+				else
+					underBody.skin.tone = choice[1];
+
+			if (underBodyProps != null)
+				underBody.setProps(underBodyProps);
 		}
 	}
 }

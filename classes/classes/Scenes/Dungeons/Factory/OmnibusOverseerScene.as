@@ -231,6 +231,7 @@ package classes.Scenes.Dungeons.Factory
 				outputText("The skin on your body itches intensely as it sheds it's " + player.skinDesc + ", revealing " + player.skinTone + " skin.  ", false);
 				player.skinDesc = "skin";
 				player.skinType = SKIN_TYPE_PLAIN;
+				player.underBody.restore();
 				temp++;
 			}
 			//Nothing changed
