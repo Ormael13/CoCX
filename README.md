@@ -1,5 +1,6 @@
 Corruption-of-Champions
 =======================
+[![Build Status](https://travis-ci.org/Kitteh6660/Corruption-of-Champions-Mod.svg?branch=master)](https://travis-ci.org/Kitteh6660/Corruption-of-Champions-Mod)
 
 NOTE: CONTAINS MATURE CONTENT. ADULTS ONLY
 
