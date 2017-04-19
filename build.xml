@@ -34,6 +34,7 @@
 		<attribute name="release-flag"/>
 		<attribute name="binary-name"/>
 		<sequential>
+			  <!-- build the game binary -->
 		      <mxmlc file="${main.src.dir}/classes/CoC.as" output="${build.dir}/@{binary-name}" static-rsls="true">
 		         <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
 		         <source-path path-element="${FLEX_HOME}/frameworks"/>
@@ -60,6 +61,7 @@
 		<attribute name="debug-flag"/>
 		<attribute name="release-flag"/>
 		<sequential>
+			<!-- build the unit test binary -->
 			<mxmlc file="${test.src.dir}/TestRunner.mxml" output="${test.file}" static-rsls="true">
 				<load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
 				<source-path path-element="${FLEX_HOME}/frameworks"/>

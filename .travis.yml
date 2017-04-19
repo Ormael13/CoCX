@@ -3,10 +3,13 @@ language: java
 
 before_install:
   - sudo apt-get update
+  # install VNC and xfce4 so we have a desktop, as the flash player requires one
   - sudo apt-get install vnc4server xfce4 -y
 
 install:
+  # download and install the flex SDK and the flash player
   - devTools/ci/setup-flex.sh
+  # start a VNC session, this will be the desktop for tests
   - Xvnc :1 &
  
 script:
@@ -14,7 +17,9 @@ script:
 
 env:
   global:
+    # tell the build file where to find the flex SDK
     - FLEX_HOME=flex/"
+    # this is to trick the flash player into thinking it is running on a desktop
     - DISPLAY=":1"
   matrix:
     - BUILD="release"
