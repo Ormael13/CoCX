@@ -29,32 +29,31 @@
 	  <mkdir dir="${report.dir}" />       
    </target>
    
+	<macrodef name="build-game-binary">
+		<attribute name="debug-flag"/>
+		<attribute name="release-flag"/>
+		<attribute name="binary-name"/>
+		<sequential>
+		      <mxmlc file="${main.src.dir}/classes/CoC.as" output="${build.dir}/@{binary-name}" static-rsls="true">
+		         <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+		         <source-path path-element="${FLEX_HOME}/frameworks"/>
+				 <source-path path-element="${main.src.dir}/"/>
+		         <compiler.debug>false</compiler.debug>
+		        <library-path dir="${lib.dir}" includes="*.swc" append="true"/>
+				<define name="CONFIG::release" value="@{release-flag}"/>
+				<define name="CONFIG::debug" value="@{debug-flag}"/>
+				<define name="CONFIG::AIR" value="false"/>
+				<define name="CONFIG::STANDALONE" value="true"/>
+		      </mxmlc>
+		</sequential>
+	</macrodef>
+	
    <target name="release" depends="init" description="Build with release flags">
-      <mxmlc file="${main.src.dir}/classes/CoC.as" output="${build.dir}/CoC-release.swf" static-rsls="true">
-         <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
-         <source-path path-element="${FLEX_HOME}/frameworks"/>
-		 <source-path path-element="${main.src.dir}/"/>
-         <compiler.debug>false</compiler.debug>
-        <library-path dir="${lib.dir}" includes="*.swc" append="true"/>
-		<define name="CONFIG::release" value="true"/>
-		<define name="CONFIG::debug" value="false"/>
-		<define name="CONFIG::AIR" value="false"/>
-		<define name="CONFIG::STANDALONE" value="true"/>
-      </mxmlc>
+      <build-game-binary debug-flag="false" release-flag="true" binary-name="CoC-release.swf"></build-game-binary>
    </target>
    
    <target name="debug" depends="init" description="Build with debug flags">
-      <mxmlc file="${main.src.dir}/classes/CoC.as" output="${build.dir}/CoC-debug.swf" static-rsls="true">
-         <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
-         <source-path path-element="${FLEX_HOME}/frameworks"/>
-		 <source-path path-element="${main.src.dir}/"/>
-         <compiler.debug>true</compiler.debug>
-        <library-path dir="${lib.dir}" includes="*.swc" append="true"/>
-		<define name="CONFIG::release" value="false"/>
-		<define name="CONFIG::debug" value="true"/>
-		<define name="CONFIG::AIR" value="false"/>
-		<define name="CONFIG::STANDALONE" value="true"/>
-      </mxmlc>
+   		<build-game-binary debug-flag="true" release-flag="false" binary-name="CoC-debug.swf"></build-game-binary>
    </target>
    
 	<macrodef name="build-unit-tests">
