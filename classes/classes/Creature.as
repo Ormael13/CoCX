@@ -401,11 +401,13 @@ package classes
 		public var vaginas:Vector.<VaginaClass>;
 		//Fertility is a % out of 100. 
 		public var fertility:Number = 10;
+		[Deprecated(replacement="VaginaClass.clitLength")]
 		private var legacyClitLength:Number = VaginaClass.DEFAULT_CLIT_LENGTH;
 		public var nippleLength:Number = .25;
 		public var breastRows:Array;
 		public var ass:AssClass = new AssClass();
 		
+		[Deprecated(replacement="VaginaClass.clitLength")]
 		public function get clitLength():Number {
 			if(!hasVagina()) {
 				//TODO throw a error in the future
@@ -416,6 +418,7 @@ package classes
 			}
 		}
 		
+		[Deprecated(replacement="VaginaClass.clitLength")]
 		public function set clitLength(clitLength:Number):void {
 			if(!hasVagina()) {
 				 //TODO throw a error in the future
