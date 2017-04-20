@@ -3561,7 +3561,7 @@ package classes
 			if (findPerk(PerkLib.Evade) >= 0) chance += 10;
 			if (findPerk(PerkLib.Flexibility) >= 0) chance += 6;
 			if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit") chance += 10;
-			if (findPerk(PerkLib.Unhindered) >= 0 && armorName == "nothing") chance += 10;
+			if (findPerk(PerkLib.Unhindered) >= 0 && InCollection(armorName, "nothing")) chance += 10;
 			return chance;
 		}
 	   
@@ -3588,11 +3588,11 @@ package classes
 			var roll:Number = rand(100);
 
 			// perks
-			if (findPerk(PerkLib.Evade) >= 0 && (roll < 10)) 
+			if (findPerk(PerkLib.Evade) >= 0 && ((roll = roll - 10) < 0)) 
 			return "Evade";
-			if (findPerk(PerkLib.Flexibility) >= 0 && (roll < 6)) return "Flexibility";
-			if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit" && (roll < 10)) return "Misdirection";
-			if (findPerk(PerkLib.Unhindered) >= 0 && armorName == "nothing" && (roll < 10)) return "Unhindered";
+			if (findPerk(PerkLib.Flexibility) >= 0 && ((roll = roll - 6) < 0)) return "Flexibility";
+			if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit" && ((roll = roll - 10) < 0)) return "Misdirection";
+			if (findPerk(PerkLib.Unhindered) >= 0 && InCollection(armorName, "nothing") && ((roll = roll - 10) < 0)) return "Unhindered";
 			return null;
 		}
 	   
