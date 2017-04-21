@@ -1,5 +1,6 @@
 package classes.Scenes {
 
+import classes.Scenes.NPCs.IsabellaSceneTest;
 import classes.Scenes.NPCs.JojoSceneTest;
 
 [Suite]
@@ -7,5 +8,6 @@ import classes.Scenes.NPCs.JojoSceneTest;
 	public class NPCsSuit
 	{
 		 public var jojoSceneTest:JojoSceneTest;
+		 public var isabellaSceneTest : IsabellaSceneTest;
 	}
 }

@@ -16,7 +16,7 @@
 		public function IsabellaScene()
 		{
 			pregnancy = new PregnancyStore(kFLAGS.ISABELLA_PREGNANCY_TYPE, kFLAGS.ISABELLA_PREGNANCY_INCUBATION, 0, 0);
-			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 2160, 1920, 1680, 1440, 1200, 960, 720, 480, 240);
+			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 2160, 1920, 1680, 1440, 1200, 960, 720, 480, ISABELLA_PREGNANCY_LAST_STAGE);
 			CoC.timeAwareClassAdd(this);
 		}
 		
@@ -30,6 +30,8 @@
 		public static const OFFSPRING_HUMAN_HERMS:int = 3;
 		public static const OFFSPRING_COWGIRLS:int = 4;
 		public static const OFFSPRING_COWFUTAS:int = 5;
+		
+		public static const ISABELLA_PREGNANCY_LAST_STAGE:int = 240;
 		
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
