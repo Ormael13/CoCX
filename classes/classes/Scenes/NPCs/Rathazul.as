@@ -288,7 +288,7 @@ private function rathazulWorkOffer():Boolean {
 		lethiciteDefense = growLethiciteDefense;
 	}
 	if (player.hasStatusEffect(StatusEffects.CampRathazul)) {
-		if (flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED] == 0 && (sophieBimbo.bimboSophie() || player.findPerk(PerkLib.BroBrains) >= 0 || player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) || flags[kFLAGS.IZMA_BROFIED] > 0) {
+		if (flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED] == 0 && (sophieBimbo.bimboSophie() || player.findPerk(PerkLib.BroBrains) >= 0 || player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0 || flags[kFLAGS.IZMA_BROFIED] > 0)) {
 			rathazulDebimboOffer();
 			return true;
 		}
@@ -993,7 +993,7 @@ private function rathazulDebimboOffer():void {
 			outputText("\n\n\"<i>Oh?  Nmm, YES, bimbos, that's right!  As I was saying, five Scholar's Teas along with 250 gems for other reagents should give me all I need to create a bimbo-beating brew!  Oh my, the alliteration!  How absurd.</i>\"  Rathazul chuckles slowly, wiping a drop from his eye before he looks back at you fiercely, \"<i>It is a worthwhile goal - no creature should be subjected to a reduced intellect.  Let me know when you have acquired what is needed.</i>\"");
 		}
 		else if (flags[kFLAGS.IZMA_BROFIED] > 0) {
-			outputText("\n\nRathazul glances your way as you approach his lab, a thoughtful expression on his age-lined face.  \"<i>I see Izma...el appears to be exhibiting his bro behaviors as if he's completely different. Did you change him? If you ever need me to reverse the effects, bring me five scholar teas and 250 gems. I'm sure you'll also need Bimbo Liqueur.</i>\"");
+			outputText("\n\nRathazul glances your way as you approach his lab, a thoughtful expression on his age-lined face.  \"<i>I see Izma...el appears to be exhibiting his bro behaviors as if he's completely different. Did you change him? If you ever need me to reverse the effects, bring me five scholar teas and 250 gems. I'm sure you'll also need Bimbo Liqueur along with my debimbofying solution.</i>\"");
 		}
 		else {
 			//Notification if the PC is the one bimbo'ed*
