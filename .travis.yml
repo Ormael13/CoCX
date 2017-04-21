@@ -1,5 +1,5 @@
 sudo: required
-language: actionscript
+language: java
 
 before_install:
   - sudo apt-get update
