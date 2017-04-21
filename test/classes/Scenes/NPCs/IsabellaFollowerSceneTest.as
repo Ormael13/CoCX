@@ -58,8 +58,6 @@ package classes.Scenes.NPCs
 			kGAMECLASS.player = player;
         }
 		
-		//FIXME text comparison makes for brittle tests, it would drive proofreaders nuts -> replace with const
-
 		[Test]
 		public function isabellaAppearance_withUnsupportedPregnancyType() : void 
 		{
@@ -68,7 +66,7 @@ package classes.Scenes.NPCs
 			
 			cut.isaAppearance();
 			
-			assertThat(cut.collectedOutput, hasItem(equalTo("you cannot help but question as to whether or not your seed was \"planted\" in the Bovine Braud's womb.")));
+			assertThat(cut.collectedOutput, hasItem(equalTo(IsabellaFollowerScene.DESC_APPEAR_NO_EVENTS_FOR_PREG_TYPE)));
 		}
 		
 		[Test]
@@ -82,7 +80,7 @@ package classes.Scenes.NPCs
 
 			cut.isaAppearance();
 			
-			assertThat(cut.collectedOutput, not(hasItem(equalTo("and your potent babymaking skills, "))));
+			assertThat(cut.collectedOutput, not(hasItem(equalTo(IsabellaFollowerScene.DESC_APPEAR_PLAYER_HIGH_CUMQ))));
 		}
 		
 		[Test]
@@ -90,13 +88,14 @@ package classes.Scenes.NPCs
 		{
 			isabellaScene.pregnancy.knockUpForce()
 			isabellaScene.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_ISABELLA)
+			//TODO Use mocking library so we can avoid stuff like this
 			player.createPerk(PerkLib.FerasBoonSeeder, 0, 0, 0, 0);
 			player.createCock(6, 1, CockTypesEnum.HUMAN);
 			assertThat(player.cumQ(), greaterThan(500)); // guard assert 
 			
 			cut.isaAppearance();
 			
-			assertThat(cut.collectedOutput, hasItem(equalTo("and your potent babymaking skills, ")));
+			assertThat(cut.collectedOutput, hasItem(equalTo(IsabellaFollowerScene.DESC_APPEAR_PLAYER_HIGH_CUMQ)));
 		}
 		
 		[Test]
@@ -106,7 +105,7 @@ package classes.Scenes.NPCs
 			
 			cut.isaAppearance();
 			
-			assertThat(cut.collectedOutput, hasItem(equalTo("The cow-girl is about seven and a half feet tall. Instead of feet, she has hooves, complete with fur that grows part-way up her legs. Her olive skirt only covers the upper portion of her dusky, spotted thighs, and it flares out deliciously from her swaying hips. Isabella's top is sheer, white silk that barely hides anything from you, least of all her exotic, quad-tipped nipples. Unlike most of the rest of her, her face is not spotted with dark and white patches. Instead it is pure, unbroken chocolate in color. Two small, bovine horns sprout from her head, emerging from the tangle of her unruly, red curls. She even has a pair of cow ears that flick back and forth from time to time.")));
+			assertThat(cut.collectedOutput, hasItem(equalTo(IsabellaFollowerScene.DESC_APPEAR_EVENT_NOT_PREGNANT)));
 		}
 		
 		[Test]
@@ -114,7 +113,7 @@ package classes.Scenes.NPCs
 		{
 			cut.isaAppearance();
 			
-			assertThat(cut.collectedOutput, hasItem(equalTo("The cow-girl is about seven and a half feet tall. Instead of feet, she has hooves, complete with fur that grows part-way up her legs. Her olive skirt only covers the upper portion of her dusky, spotted thighs, and it flares out deliciously from her swaying hips. Since you did the deed you often find her on her plump, toned, derriere. ")));
+			assertThat(cut.collectedOutput, hasItem(equalTo(IsabellaFollowerScene.DESC_APPEAR_EVENT_FIRST_STAGE_PREGNANT)));
 		}
 		
 		[Test]
@@ -124,7 +123,7 @@ package classes.Scenes.NPCs
 			
 			cut.isaAppearance();
 			
-			assertThat(cut.collectedOutput, not(hasItem(equalTo("Every once in a while when the wind blows just right you get a pleasing view of her well lubricated womanhood between her legs. "))));
+			assertThat(cut.collectedOutput, not(hasItem(equalTo(IsabellaFollowerScene.DESC_APPEAR_PLAYER_HIGH_LIBIDO))));
 		}
 		
 		[Test]
@@ -134,7 +133,7 @@ package classes.Scenes.NPCs
 			
 			cut.isaAppearance();
 			
-			assertThat(cut.collectedOutput, hasItem(equalTo("Every once in a while when the wind blows just right you get a pleasing view of her well lubricated womanhood between her legs. ")));
+			assertThat(cut.collectedOutput, hasItem(equalTo(IsabellaFollowerScene.DESC_APPEAR_PLAYER_HIGH_LIBIDO)));
 		}
 		
 		[Test]
@@ -146,7 +145,7 @@ package classes.Scenes.NPCs
 			
 			cut.isaAppearance();
 			
-			assertThat(cut.collectedOutput, hasItem(containsString("it kicked")));
+			assertThat(cut.collectedOutput, hasItem(containsString(IsabellaFollowerScene.DESC_APPEAR_EVENT_LAST_STAGE_PREGNANT)));
 		}
 	}
 }
