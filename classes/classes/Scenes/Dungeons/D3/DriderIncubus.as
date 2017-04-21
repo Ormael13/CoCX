@@ -120,7 +120,8 @@ package classes.Scenes.Dungeons.D3
 			}
 			else
 			{
-				opts = [this.bite,spiderMorphWebAttack,this.kick,this.kick,this.doubleStrike,this.doubleStrike];
+				opts = [spiderMorphWebAttack, this.kick, this.kick, this.doubleStrike, this.doubleStrike];
+				if (this.fatigue < 100) opts.push(this.bite);
 				opts[rand(opts.length)]();
 			}
 		}
@@ -227,6 +228,7 @@ package classes.Scenes.Dungeons.D3
 		
 		private function bite():void
 		{
+			this.fatigue += 20;
 			var amount:Number = 0;
 			var evade:String = player.getEvasionReason();
 			if (player.hasStatusEffect(StatusEffects.Stunned) || player.spe <= 1 && player.statusEffectv1(StatusEffects.Web) >= 2)
