@@ -258,8 +258,11 @@ private function backToCamp():void
 	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
 }
 
-private function isabellasAppearance():void {
+protected function isabellasAppearance():void {
 	clearOutput();
+	
+	//TODO use a Stringbuffer to construct the text, then return it to the function that does the output
+	//TODO move text into public static constant so we can use it for tests
 	
 	if (isabellaScene.pregnancy.isPregnant) {
 		switch(isabellaScene.pregnancy.event) {
