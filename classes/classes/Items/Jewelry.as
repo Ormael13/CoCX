@@ -56,6 +56,9 @@ package classes.Items
 				case JewelryLib.MODIFIER_HP:
 					desc += "Increases maximum HP by " + _effectMagnitude + "."
 					break;
+				case JewelryLib.MODIFIER_ATTACK_POWER:
+					desc += "Increases attack power by " + _effectMagnitude + "%."
+					break;
 				case JewelryLib.MODIFIER_SPELL_POWER:
 					desc += "Increases spellpower by " + _effectMagnitude + "%, applies additively."
 					break;

@@ -13,8 +13,8 @@ package classes.Items
 	 * 0: Nothing
 	 * 1: Minimum lust
 	 * 2: Fertility
-	 * 3: NOT USED
-	 * 4: NOT USED
+	 * 3: Critical
+	 * 4: Regeneration
 	 * 5: HP
 	 * 6: Attack power
 	 * 7: Spell power
@@ -71,7 +71,7 @@ package classes.Items
 		
 		//Untiered/Special
 		public const PURERNG:Jewelry = new Jewelry("PureRng", "Purity Ring", "lesser purity ring", "an enchanted diamond ring of purity", PURITY, 10, 3000, "This diamond-topped ring symbolizes chastity and purity. When worn, it reduces minimum libido and makes it harder for you to get turned on. ","Ring");
-		public const LTHCRNG:Jewelry = new Jewelry("LthcRng", "Lethic.Ring", "lethicite ring", "a glowing lethicite ring", 1, 0, 5000, "This ring appears to be made of platinum with some lethicite crystal. Very expensive as lethicite is rare. ","Ring");
+		public const LTHCRNG:Jewelry = new Jewelry("LthcRng", "Lethic.Ring", "lethicite ring", "a glowing lethicite ring", CORRUPTION, 0, 5000, "This ring appears to be made of platinum with some lethicite crystal. Very expensive as lethicite is rare. ","Ring");
 		
 		//Normal ring
 		public const DIAMRNG:Jewelry = new Jewelry("DiamRng", "Diam Ring", "gold and diamond ring", "a shining gold and diamond ring", 0, 0, 1000, "This shining ring is made of gold and topped with diamond. Truly expensive. ","Ring");
