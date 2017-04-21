@@ -1,4 +1,8 @@
 sudo: required
+
+# travis-ci does not support actionscript.
+# However the build uses ant, which is usually used to build java projects.
+# The ant task (mxmlc) provided by the flex SDK (ant/lib/flexTasks.jar) is used to build the project.
 language: java
 
 before_install:
