@@ -458,6 +458,20 @@ package classes
 			return getClitLength(vaginaIndex);
 		}
 		
+		/**
+		 * Change the clit length by the given amount. If the resulting length drops below 0, it will be set to 0 instead.
+		 * @param	delta the amount to change, can be positive or negative
+		 * @param	vaginaIndex the vagina whose clit will be changed
+		 * @return the updated clit length
+		 * @throws IllegalOperationError if the Creature does not have a vagina
+		 * @throws RangeError if the selected vagina cannot be found
+		 */
+		public function changeClitLength(delta:Number, vaginaIndex:int = 0):Number {
+			checkVaginaPresent();
+			var newClitLength:Number = vaginas[vaginaIndex].clitLength += delta;
+			return newClitLength < 0 ? 0 : newClitLength;
+		}
+		
 		private var _femininity:Number = 50;
 		public function get femininity():Number {
 			var fem:Number = _femininity;

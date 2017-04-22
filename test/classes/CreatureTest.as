@@ -554,5 +554,31 @@ package classes{
         public function getClitLength_multiVagina():void {
 			assertThat(maxVagina.getClitLength(1), equalTo(VaginaClass.DEFAULT_CLIT_LENGTH));
         }
+		
+				
+		[Test(expected="flash.errors.IllegalOperationError")] 
+        public function changeClitLength_noVagina():void {
+			noVagina.changeClitLength(1);
+		}
+		
+		[Test] 
+        public function changeClitLength_increase():void {
+			assertThat(oneVagina.changeClitLength(1), equalTo(VaginaClass.DEFAULT_CLIT_LENGTH + 1));
+        }
+		
+		[Test] 
+        public function changeClitLength_decrease():void {
+			assertThat(oneVagina.changeClitLength(-0.2), equalTo(VaginaClass.DEFAULT_CLIT_LENGTH - 0.2));
+        }
+		
+		[Test] 
+        public function changeClitLength_noNegativeValues():void {
+			assertThat(oneVagina.changeClitLength(-Number.MAX_VALUE), equalTo(0));
+        }
+		
+		[Test(expected="RangeError")] 
+        public function changeClitLength_invalid_vagina_index():void {
+			oneVagina.changeClitLength(1, int.MAX_VALUE);
+        }
     }
 }
