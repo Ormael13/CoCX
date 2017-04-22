@@ -476,52 +476,6 @@ package classes{
         }
 		
 		[Test(expected="flash.errors.IllegalOperationError")] 
-        public function clitLengthWithNoVagina():void {
-			assertThat(noVagina.clitLength, equalTo(DEFAULT_CLIT_LENGTH));
-        }
-		
-		[Test] 
-        public function testClitLengthWithVagina():void {
-			assertThat(oneVagina.clitLength, equalTo(DEFAULT_CLIT_LENGTH));
-        }
-		
-		[Test(expected="flash.errors.IllegalOperationError")] 
-        public function clitLengthUpdateWithNoVagina():void {
-			noVagina.clitLength = TEST_CLIT_LENGTH;
-        }
-		
-		[Test] 
-        public function testClitLengthUpdateWithVagina():void {
-			oneVagina.clitLength = TEST_CLIT_LENGTH;
-
-			assertThat(oneVagina.clitLength, equalTo(TEST_CLIT_LENGTH));
-        }
-		
-		[Test] 
-        public function testClitLengthIncrementWithVagina():void {
-			oneVagina.clitLength = TEST_CLIT_LENGTH;
-			oneVagina.clitLength++;
-
-			assertThat(oneVagina.clitLength, equalTo(TEST_CLIT_LENGTH + 1));
-        }
-		
-		[Test] 
-        public function testClitLengthAdditionAssignmentWithVagina():void {
-			oneVagina.clitLength = TEST_CLIT_LENGTH;
-			oneVagina.clitLength += 1;
-
-			assertThat(oneVagina.clitLength, equalTo(TEST_CLIT_LENGTH + 1));
-        }
-		
-		[Test] 
-        public function testClitLengthDivisionAssignmentWithVagina():void {
-			oneVagina.clitLength = TEST_CLIT_LENGTH;
-			oneVagina.clitLength /= TEST_CLIT_LENGTH;
-
-			assertThat(oneVagina.clitLength, equalTo(1));
-        }
-		
-		[Test(expected="flash.errors.IllegalOperationError")] 
         public function setClitLength_noVagina():void {
 			noVagina.setClitLength(TEST_CLIT_LENGTH);
         }

@@ -402,21 +402,9 @@ package classes
 		public var vaginas:Vector.<VaginaClass>;
 		//Fertility is a % out of 100. 
 		public var fertility:Number = 10;
-		[Deprecated(replacement="Creature.getClitLength()")]
-		private var legacyClitLength:Number = VaginaClass.DEFAULT_CLIT_LENGTH;
 		public var nippleLength:Number = .25;
 		public var breastRows:Array;
 		public var ass:AssClass = new AssClass();
-		
-		[Deprecated(replacement="Creature.getClitLength()")]
-		public function get clitLength():Number {
-			return getClitLength();
-		}
-		
-		[Deprecated(replacement="Creature.setClitLength()")]
-		public function set clitLength(clitLength:Number):void {
-			setClitLength(clitLength);
-		}
 		
 		/**
 		 * Check if the Creature has a vagina. If not, throw an informative Error.
