@@ -541,7 +541,6 @@
 			//Genetalia
 			player.balls = 2;
 			player.ballSize = 1;
-			player.clitLength = 0;
 			player.createCock();
 			player.cocks[0].cockLength = 5.5;
 			player.cocks[0].cockThickness = 1;
