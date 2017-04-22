@@ -29,66 +29,62 @@ package classes{
 			cut = new CharCreationForTest();
 			this.player = new Player();
 			kGAMECLASS.player = player;
-			kGAMECLASS.flags = new DefaultDict();
-        }  
+			kGAMECLASS.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = 0;
+        } 
+		
+		private function createVaginaWithClit(clitLength:Number):void {
+			player.createVagina();
+			player.setClitLength(clitLength);
+		}
      
 		[Test(description="Check that the array or vector for vaginas is correctly initialised")] 
         public function testReincarnateCreatesVaginaStoreNotNull():void {
 			cut.testReincarnate();
 			
-			assertThat(kGAMECLASS.player.vaginas, notNullValue());
+			assertThat(player.vaginas, notNullValue());
         }
 		
 		[Test(description="Check that the array or vector for vaginas is correctly initialised")] 
         public function testReincarnateCreatesVaginaStoreZeroLength():void {
 			cut.testReincarnate();
 			
-			assertThat(kGAMECLASS.player.vaginas, emptyArray());
-        }
-		
-		[Test] 
-        public function newGameGo_clitLengthIsResetWhenNotNewGamePlus():void {
-			player.clitLength = 3;
-			
-			cut.newGameGo();
-			
-			assertThat(kGAMECLASS.player.clitLength, equalTo(0));
+			assertThat(player.vaginas, emptyArray());
         }
 		
 		[Test(description="New game plus reduces the clit length to a maximum if it is too long")] 
         public function newGameGo_clitLengthIsResetToMaxWhenNewGamePlus():void {
-			player.clitLength = 3;
+			createVaginaWithClit(3);
 			kGAMECLASS.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = 1;
 			
 			cut.newGameGo();
 			
-			assertThat(kGAMECLASS.player.clitLength, equalTo(CharCreation.NEW_GAME_PLUS_RESET_CLIT_LENGTH_MAX));
+			assertThat(player.clitLength, equalTo(CharCreation.NEW_GAME_PLUS_RESET_CLIT_LENGTH_MAX));
         }
 		
 				
 		[Test(description="New game plus will not change the clit length if it is below the maximum")] 
         public function newGameGo_clitLengthIsNotResetWhenNewGamePlus():void {
 			var testLength : Number = 1.2;
-			player.clitLength = testLength;
+			createVaginaWithClit(testLength);
 			kGAMECLASS.flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = 1;
 			
 			cut.newGameGo();
 			
-			assertThat(kGAMECLASS.player.clitLength, equalTo(testLength));
+			assertThat(player.getClitLength(), equalTo(testLength));
         }
 		
 		[Test]
 		public function isAWoman_checkClitLength():void {
 			cut.isAWoman();
 			
-			assertThat(player.vaginas[0].clitLength, equalTo(VaginaClass.DEFAULT_CLIT_LENGTH));
+			assertThat(player.getClitLength(), equalTo(VaginaClass.DEFAULT_CLIT_LENGTH));
 		}
 		
 		[Test]
 		public function isAHerm_checkClitLength():void {
 			cut.isAHerm();
 			
-			assertThat(player.vaginas[0].clitLength, equalTo(VaginaClass.DEFAULT_CLIT_LENGTH));
+			assertThat(player.getClitLength(), equalTo(VaginaClass.DEFAULT_CLIT_LENGTH));
 		}
     }
 }

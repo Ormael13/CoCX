@@ -203,7 +203,6 @@
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				player.balls = 0;
 				player.ballSize = 0;
-				player.clitLength = 0;
 			}
 			player.hoursSinceCum = 0;
 			player.cumMultiplier = 1;
@@ -322,6 +321,13 @@
 			else {
 				var hadOldCock:Boolean = player.hasCock();
 				var hadOldVagina:Boolean = player.hasVagina();
+				//TODO rework this when doing better multi-vagina support
+				var oldClitLength:Number = -1;
+				
+				if (hadOldVagina) {
+					oldClitLength = player.getClitLength();
+				}
+				
 				//Clear cocks
 				while(player.cocks.length > 0)
 				{
@@ -336,10 +342,19 @@
 				}
 				//Keep gender and normalize genitals.
 				if (hadOldCock) player.createCock(5.5, 1, CockTypesEnum.HUMAN);
-				if (hadOldVagina) player.createVagina(true);
+				if (hadOldVagina) {
+					player.createVagina(true);
+					
+					if (player.hasVagina() && oldClitLength > NEW_GAME_PLUS_RESET_CLIT_LENGTH_MAX){
+						player.setClitLength(NEW_GAME_PLUS_RESET_CLIT_LENGTH_MAX);
+					}else{
+						player.setClitLength(oldClitLength);
+					}
+				}
+				
 				if (player.balls > 2) player.balls = 2;
 				if (player.ballSize > 2) player.ballSize = 2;
-				if (player.hasVagina() && player.clitLength > NEW_GAME_PLUS_RESET_CLIT_LENGTH_MAX) player.clitLength = NEW_GAME_PLUS_RESET_CLIT_LENGTH_MAX;
+
 				while (player.breastRows.length > 1)
 				{
 					player.removeBreastRow(1, 1);
