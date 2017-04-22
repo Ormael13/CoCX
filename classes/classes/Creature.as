@@ -408,26 +408,14 @@ package classes
 		public var breastRows:Array;
 		public var ass:AssClass = new AssClass();
 		
-		[Deprecated(replacement="VaginaClass.clitLength")]
+		[Deprecated(replacement="Creature.getClitLength()")]
 		public function get clitLength():Number {
-			if(!hasVagina()) {
-				//TODO throw a error in the future
-				trace("Error: legacy get clit length without a vagina!");
-				return legacyClitLength;
-			}else{
-				return vaginas[0].clitLength;
-			}
+			return getClitLength();
 		}
 		
-		[Deprecated(replacement="VaginaClass.clitLength")]
+		[Deprecated(replacement="Creature.setClitLength()")]
 		public function set clitLength(clitLength:Number):void {
-			if(!hasVagina()) {
-				 //TODO throw a error in the future
-				 trace("Error: legacy set clit length without a vagina!");
-				 legacyClitLength = clitLength;
-			}else{
-			 	vaginas[0].clitLength = clitLength;
-			}
+			setClitLength(clitLength);
 		}
 		
 		/**

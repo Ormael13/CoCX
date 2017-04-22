@@ -339,7 +339,7 @@
 				if (hadOldVagina) player.createVagina(true);
 				if (player.balls > 2) player.balls = 2;
 				if (player.ballSize > 2) player.ballSize = 2;
-				if (player.clitLength > NEW_GAME_PLUS_RESET_CLIT_LENGTH_MAX) player.clitLength = NEW_GAME_PLUS_RESET_CLIT_LENGTH_MAX;
+				if (player.hasVagina() && player.clitLength > NEW_GAME_PLUS_RESET_CLIT_LENGTH_MAX) player.clitLength = NEW_GAME_PLUS_RESET_CLIT_LENGTH_MAX;
 				while (player.breastRows.length > 1)
 				{
 					player.removeBreastRow(1, 1);
