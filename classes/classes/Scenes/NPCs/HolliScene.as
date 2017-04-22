@@ -310,7 +310,7 @@ private function fuckFuckingFuckFlowerP2():void {
 	if (player.cumQ() > 500) outputText("  You pour forth your prodigious essence without pause or fail, and the plant immediately begins to drink it down, the stem bulging with rounded balls of sperm that it carries underground.");
 	if (player.cumQ() > 1500) outputText("  Soon, the meager stem cannot swallow it all.  Spunk froths and squirts out around the base of your tool for a moment, and then a veritable tide of the stuff gushes out to soak  you.");
 	outputText("\n\nSatisfied and a little exhausted, you slump down and release your grip on the creampied fuck-flower.  It slowly, laboriously removes itself from around your orgasm-bloated shaft, cleaning the sperm from it as it goes.  There's a visible swallowing motion, and a globular bulb moves down the stalk into the ground.  Once the stalk stands fully erect, the petals bloom back into the flower, the only hint of your tryst a milky-white sheen upon the purple petals.");
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("cor", 1);
 	flags[kFLAGS.TIMES_FUCKED_FLOWER] = 1;
 	if (flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] < 1000) flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] += 4;
@@ -354,8 +354,8 @@ private function rideDatFuckingFukkFlowerP2():void {
 	else outputText("torrent");
 	outputText(".  The tentacles inside you curl in on themselves and slowly pull back from the well-creamed quim, scraping out as much fluid as possible from your oversensitive honey-pot.  The binding on your [clit] releases, which of course sets off a whole new wave of rippling pleasure-contractions in your cunt.");
 	
+	player.orgasm('VaginalAnal');
 	outputText("\n\nYou swoon from it all, your body slowly relaxing, sinking back to the ground.  The fuck-flower visibly swallows your juices, a bulge visible on the stem.  It detaches with a hungry pop, strands of its slime webbing the space between person and plant for a second before it withdraws completely.  Slowing gradually, the corrupt greenery resumes its formerly placid, open state, aimed at the sky.  You can see the tentacle-like stamen still wiggling inside, but they seem a little more lethargic now.  Your [vagina] twitches in remembrance of their caresses, and you wonder when you'll take advantage of this wondrous gift next.");
-	player.orgasm();
 	dynStats("cor", 1);
 	player.changeFatigue(5);
 	flags[kFLAGS.TIMES_RIDDEN_FLOWER] = 1;
@@ -434,7 +434,7 @@ private function fuckTheFlower():void {
 	outputText("  After what feels like forever, the spurting seed no longer flows from your long-abused dick, and as your member softens, the tentacles swing you away, setting you down softly.");
 	
 	outputText("\n\nYou sigh, utterly exhausted and drained of sperm.  What a rush!  Your [armor] slips on easily after that ordeal, though your muscles are a bit sore.");
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("cor", 1);
 	player.changeFatigue(5);
 	if (flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] < 1000) flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] += 5;
@@ -475,7 +475,7 @@ private function rideTheWalrusP3():void {
 	outputText("\n\nYou endure it all with wordless pleasure, your eyes vacant and spacy.  Your brain shuts down, and you simply go weak.  The tentacles, for their part, continue to take you with unhealthy levels of ardor, your body growing more and more cum-plastered until it's hard to make out your shape beneath all the dripping jizz and undulated, snake-like shapes.  The orgasms that follow are pitiful, pathetic punctuations of pleasure  that can't even spur your laconic muscles into movement.");
 	outputText("\n\nAt some point, you are set back down on the ground and sprayed with a fresh batch of seed.  You rest there for a while, until you can catch your breath and move without pain.  When you start trying to clean up, you realize the puddle of cum is completely gone, likely swallowed back up the tree's hungry roots, and the only mess left is your sodden " + player.skinDesc + ".  You get dressed and stumble away a little drunkenly, your [vagina] raw and oozing.");
 	//{- big sensitivity loss, big libido gain, minus lust}
-	player.orgasm();
+	player.orgasm('Vaginal');
 	dynStats("lib", 1, "sen", -5);
 	if (flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] < 1000) flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] += 5;
 	flags[kFLAGS.TIMES_RIDDEN_FLOWER]++;;
@@ -687,7 +687,7 @@ private function fuckHolliInZeFlowerPuss():void {
 	//{+1 corruption, -100 lust, -1 sensitivity.}
 	flags[kFLAGS.TIMES_FUCKED_FLOWER]++;
 	fertilizeHolli();
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("sen", -1, "cor", 1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -742,7 +742,7 @@ private function level4RideHollisTentacruels():void {
 	if (!player.isBiped()) outputText("you'd be walking bowlegged for a week, if you had legs.");
 	else outputText("you'll be walking bowlegged for a week!");
 	//empty lust, boost corruption, slimefeed(), +1 cor, -3 sens, +.5 libido
-	player.orgasm();
+	player.orgasm('Vaginal');
 	dynStats("lib", .5, "sen", 2, "cor", 1);
 	fertilizeHolli(false);
 	player.slimeFeed();
@@ -932,7 +932,7 @@ private function holliGetsDickDommed():void {
 	outputText("  Holli's tentacles cum with her, spraying her seed through her canopy in aimless ropes.  Most of it sticks to her branches and leaves, but small amounts of it trickle down to spatter the ground.  One of them lands on the back of your hand.  You frown and push it up against the tree-woman's mouth.  She licks you clean without question, still dazed from her orgasm.");
 	outputText("\n\nRemoving yourself from the gaping flowerpot, you admire the fruits of your labors.  Holli breathily says, \"<i>Th-thank you, [name]...  So good...</i>\"");
 	outputText("\n\nYou crook a finger and point down at the slop of sperm and nectar glazing your [cock biggest].  Getting the idea, she leans back out and opens wide.  You get a thorough cock polishing from the much meeker plant-woman.  She swallows it all and withdraws, offering, \"<i>If you ever want another round... my flower is yours.</i>\"");
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("sen", -2, "cor", 1);
 	flags[kFLAGS.TIMES_FUCKED_FLOWER]++;
 	flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
@@ -966,7 +966,7 @@ private function fullOnTentacleTasticGangBangForHolli():void {
 	outputText("\n\nHolli climaxes again when your load passes into her vagina, deforming the petals slightly as it goes.  Her cunt-tentacles are similarly stretched by the force of your orgasm, distended by spermy knots that erupt inside them.  Jizz and girl-cum drip from the numerous twats, all five of them.  Those pussies aren't simply idly filled either.  They hungrily massage you throughout their own moments of bliss, actually providing a modicum of suction to draw even more spunk from your [balls].  You roar in triumph and thrust all ten at once, pushing them as deep into their chosen locations as you ride out of the ecstasy, spurting and shaking.");
 	outputText("\n\nYou come to a little while later.  Your myriad tentacles have retracted back to your groin, though a goodly number of them have a distinctly feminine odor clinging to them.  Holli is sagging back in her tree, covered in a pearly shine that can only be your fertile batter.  She's panting while the cum runs out and over her unimpeded, dripping from the canopy as well.");
 	outputText("\n\nStretching the kinks from your shoulders, you walk up to the confused cum-dump and say, \"<i>That's how you sow seed, little flower.</i>\"  Holli shudders, releasing a squirt of your goo from her twat.  You laugh and get dressed before departing, feeling blessedly sated.");
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("lib", .4, "sen", -3, "cor", 1);
 	flags[kFLAGS.TIMES_FUCKED_FLOWER]++;
 	flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
@@ -1019,7 +1019,7 @@ private function vaginalDomHollisTentacruels():void {
 	flags[kFLAGS.HOLLI_FUCKED_TODAY] = 1;
 	fertilizeHolli(false);
 	player.slimeFeed();
-	player.orgasm();
+	player.orgasm('Vaginal');
 	dynStats("sen", -2, "cor", 1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1202,7 +1202,7 @@ internal function enjoyYourBadEndBIYAAAATCH():void {
 		outputText("\n\n\"<i>Foolish little meat,</i>\" the demon smiles down at you, \"<i>I <b>am</b> Mareth.  There is a part of me in everything born in this land.  And now, in you as well.</i>\"  Your tendril reaches for Holli's nethers at her unspoken command, dragging your [cock biggest] into her wet, lush depths as she wraps her arms around you...");
 		
 		//--Next--
-		player.orgasm();
+		player.orgasm('Dick');
 		dynStats("lib", 5, "sen", 20);
 		menu();
 		addButton(0,"Next",holliPlaysWithPenisesBadEnd);
@@ -1250,14 +1250,14 @@ internal function enjoyYourBadEndBIYAAAATCH():void {
 		outputText("\n\nThe young sapling encasing you bends toward Holli with a gesture from the demon, and she leans over you.  \"<i>Sweet little toy... you never had a chance.  I am Mareth. There is a part of me in everything of this world.  Now, in you as well.</i>\"  The verdant woman smiles darkly as vines cover your eyes, blinding you.  As something begins nosing up to your pussy, she whispers, \"<i>It won't be lonely, though...</i>\"");
 		
 		//--Next--
-		player.orgasm();
+		player.orgasm('Vaginal');
 		dynStats("lib", 5, "sen", 20);
 		menu();
 		addButton(0,"Next",girlsGetANiceManToBadEnd);
 	}
 	else {
 		//branch of nothing-having
-		player.orgasm();
+		player.orgasm('Anal');
 		dynStats("lib", 5, "sen", 20);
 		outputText("\n\nShe pulls your [armor] free without care, breaking the fastenings in her haste.  A raised eyebrow meets your bare crotch, but Holli doesn't pause for long.  \"<i>My simple little toy... if it were so easy to keep out the corruption of this land, the demons would be overthrown tomorrow.</i>\"  Revising her plans, the demon turns you around and slides a finger between your asscheeks, bending close.  ");
 		if (player.ass.analWetness > 0) outputText("Betraying your depravity, the slick crack opens wide and your greedy, wet asshole practically welcomes the demon's entire hand, sucking it up and making you shiver with repressed delight.  \"<i>Oh, mother!  It seems as though this is not a new lesson to you, is it?  My little whore, will you beg and moan as I fill you?</i>\"");

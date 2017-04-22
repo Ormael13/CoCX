@@ -627,7 +627,7 @@ private function rapeMarbleInHerRoom():void {
 				marbleRapeCorruptFantasy();
 			outputText("You taunt her one more time before feeling your body get racked by an orgasm and you blow your load inside her.  ", false);
 			//set player's lust to 0
-			player.orgasm();
+			player.orgasm('Dick');
 		}
 		//now if the player doesn't fit
 		else {
@@ -637,7 +637,7 @@ private function rapeMarbleInHerRoom():void {
 				marbleRapeCorruptFantasy();
 			outputText("You taunt her one more time before feeling your body get racked by an orgasm and you blow your load onto her ass.  ", false);
 			//set player's lust to 0
-			player.orgasm();
+			player.orgasm('Dick');
 		}
 	}
 	//dickless girls
@@ -649,7 +649,7 @@ private function rapeMarbleInHerRoom():void {
 			marbleRapeCorruptFantasy();
 		outputText("You taunt her one more time before feeling your body get racked by a satisfying orgasm from using Marble's own toy against her.  ", false);
 		//set player's lust to 0
-		player.orgasm();
+		player.orgasm('Vaginal');
 	}
 	//the genderless option
 	else {
@@ -1755,7 +1755,7 @@ public function marbleSex2Continued(genders:int):void {
 	else {
 		outputText("Marble sighs and gives you a big smile. \"<i>Sweetie, you're just as wonderful to be with as ever.  I'm always looking forward to our times together,</i>\" she tells you.  You would be inclined to agree with her.", false);
 	}
-	player.orgasm();
+	player.orgasm('Generic');
 	//– return to trigger
 }
 
@@ -1847,7 +1847,7 @@ private function marbleMilkSex(newpage:Boolean = true):void {
 		else outputText("other", false);
 		outputText(" " + player.nippleDescript(0) + " and starts the experience all over again.  By the end, her efforts have successfully rung an orgasm from you. After cleaning up a bit, Marble sends you off in high spirits.", false);
 	}
-	player.orgasm();
+	player.orgasm('Generic');
 }
 
 //(after addiction sex, standing sex)
@@ -1892,7 +1892,7 @@ public function marbleAddictionSex(newpage:Boolean = true):void {
 	if (player.tallness < 66) outputText("sets you down and ", false);
 	outputText("pushes you to arms length and asks you, \"<i>If it's all right with you, could we live together?</i>\"  You hesitate, before explaining that you don't think that's such a good idea. You explain that you aren't from this world, why you came here, and what you've found since doing so.  Marble looks at you for a moment before letting go of you and going over to her bed. Effortlessly, she lifts it up off the ground and turns to you.  \"<i>I can pull my weight, so don't you dare think I can't help you do something so important, champion.</i>\"  She says, setting the bed back down.  She barely is able to keep a straight face as she says \"<i>champion</i>\".  You smile and wonder how could you possibly turn down someone so wonderful?  \"<i>Well I guess that settles it, then,</i>\" she says happily, \"<i>I'll move right in.</i>\"", false);
 	//(set player lust to 0)
-	player.orgasm();
+	player.orgasm('Generic');
 }
 
 //(camp sex - masturbation aid, she stimulates the player with her breasts)
@@ -2752,7 +2752,7 @@ private function marbleCampSexNew():void {
 		}
 		outputText("\n\nA few minutes later, you release Marble's body from your grip and help her to a standing position with your tail.  She reaches a hand down to you and says, \"<i>I'm glad you had fun, sweetie; let's get you cleaned off, shall we?</i>\"");
 	}
-	player.orgasm();
+	player.orgasm('Generic');
 	dynStats("sen", -3);
 }
 private function marbleNips():String {
@@ -2839,7 +2839,7 @@ private function rapeDAHMARBLEZ():void {
 					marbleRapeCorruptFantasy();
 				outputText("You taunt her one more time before feeling your body get racked by an orgasm and you blow your load inside her.  ", false);
 				//set player's lust to 0
-				player.orgasm();
+				player.orgasm('Dick');
 			}
 			//now if the player doesn't fit
 			else {
@@ -2849,7 +2849,7 @@ private function rapeDAHMARBLEZ():void {
 					marbleRapeCorruptFantasy();
 				outputText("You taunt her one more time before feeling your body get racked by an orgasm and you blow your load onto her ass.  ", false);
 				//set player's lust to 0
-				player.orgasm();
+				player.orgasm('Dick');
 			}
 		}
 		//dickless girls
@@ -2861,7 +2861,7 @@ private function rapeDAHMARBLEZ():void {
 				marbleRapeCorruptFantasy();
 			outputText("You taunt her one more time before feeling your body get racked by a satisfying orgasm from using Marble's own toy against her.  ", false);
 			//set player's lust to 0
-			player.orgasm();
+			player.orgasm('Vaginal');
 		}
 		//the genderless option
 		else {
@@ -3614,7 +3614,7 @@ private function marbleSexFinish():void {
 	//After all Marble sex
 	outputText("\n\nYou roll to the side and the two of you are soon fast asleep.  You figure you'll clean yourself up in the morning.", false);
 	//Set PC lust to 0
-	player.orgasm();
+	player.orgasm('Generic');
 	dynStats("sen", -1);
 	doNext(camp.doSleep);
 }
@@ -4061,9 +4061,9 @@ private function milkMarbleFuckDatCowPussy():void
 		outputText( "[pg]Where the machine failed to handle Marble's increased production, you succeed in draining everything.  Heck, the feel of yourself bouncing around Marble's passage while she pushes against you and bounces back and forth only edges you on further than normal.  With one hand on her shoulder for leverage, you use the other to massage her bosom and coax even more milk out of her, greedily devouring as much of your favorite drug as possible." );
 		
 		outputText( "[pg]Almost an hour later, the flow from both of Marble's breasts has slowed to a trickle, and both of you have cum at least three times in a haze of both sexual and chemical pleasure.  Marble gives a contented sigh and informs you that she thinks she'll be taking a nap now, wondering whether or not she should make a habit of breaking the milker, given what happens afterwards." );
-		player.orgasm();
-		player.orgasm();
-		player.orgasm();
+		player.orgasm('Generic');
+		player.orgasm('Generic');
+		player.orgasm('Generic');
 		dynStats( "lus", 20 );
 		flags[kFLAGS.MARBLE_LUST] = 15;
 		dynStats( "lib", .3 );
@@ -4091,7 +4091,7 @@ private function milkMarbleFuckDatCowPussy():void
 		
 		outputText( "[pg]You and Marble each look each other in the eye and burst out laughing.  You then help her reattach the cups and excuse yourself.  Just as you're leaving, Marble blows you a kiss and says, \"<i>We should definitely do this again sometime.  Let's just give Whitney a break first.</i>\"" );
 		
-		player.orgasm();
+		player.orgasm('Generic');
 		flags[kFLAGS.MARBLE_LUST] = 5;
 		dynStats( "sen", -2 );
 	}
@@ -4107,7 +4107,7 @@ private function milkMarbleFuckDatCowPussy():void
 		
 		outputText( "[pg]The two of you cum together at least three times over the next hour or so, and while your hand milking certainly isn't as efficient as Whitney's machine, it manages well enough in satisfying your bovine lover.  When you go to tell the farmer what happened to her device, she is rather surprised at just how nonchalant and pleasant the two of you were about it.  As she put it, \"<i>Most folks generally feel bad when they go round breaking other people's things.</i>\"  Though, you're certain she knew what you'd been up to." );
 		
-		player.orgasm();
+		player.orgasm('Generic');
 		flags[kFLAGS.MARBLE_LUST] = 10;
 		dynStats( "sen", -2 );
 		marblePreggoChance(1);
@@ -4156,9 +4156,9 @@ private function milkMarbleTakeHerDick():void
 	
 	outputText( "[pg]Nearly an hour later, Marble finally calms down and looks down at what she has managed to do to you.  \"<i>Oh my!  Sweetie, I'm sorry, I'm not sure what came over me...</i>\" she freezes when she sees your happy expression, and you inform her that you rather liked seeing that side of her. The two of you will have to do this again some time." );
 	
-	player.orgasm();
-	player.orgasm();
-	player.orgasm();
+	player.orgasm('Vaginal');
+	player.orgasm('Vaginal');
+	player.orgasm('Vaginal');
 	flags[kFLAGS.MARBLE_LUST] = 10;
 	dynStats( "lib", .5 );
 	player.knockUp(PregnancyStore.PREGNANCY_MARBLE, PregnancyStore.INCUBATION_MARBLE, 150);
@@ -4268,7 +4268,7 @@ private function milkMarbleBarFollowTail():void
 	flags[kFLAGS.MARBLE_LUST] = 10;
 	if ( x >= 0 )
 	{
-		player.orgasm();
+		player.orgasm('Generic');
 		marblePreggoChance(1);
 	}
 	else
@@ -4403,7 +4403,7 @@ private function milkMarbleBarPullTail():void
 	
 	outputText( "[pg]You snuggle up to her bosom, thinking something very similar.  Things certainly haven't been dull while you've been in Marble's milking stall, that's for certain." );
 	
-	player.orgasm();
+	player.orgasm('VaginalAnal');
 	dynStats( "lus", 20 );
 	flags[kFLAGS.MARBLE_LUST] = 15;
 	dynStats( "sen", -2 );

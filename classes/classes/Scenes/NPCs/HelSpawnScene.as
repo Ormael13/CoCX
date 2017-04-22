@@ -238,7 +238,7 @@ internal function haveAKid():void {
 	outputText(".</i>\"  You start to reply, when you're suddenly upended, landing back on your back with Helia atop you, fingers brushing along the cock buried twixt her legs.  \"<i>Oh, don't think you're getting away that easy, lover mine... my love.  I've gotta make sure your seed took, and that... that's going to take all night long.</i>\"");
 	
 	outputText("\n\nYou gulp, and wince as Hel starts to move atop your battered cock - and not for the last time this sleepless night!");
-	player.orgasm();
+	player.orgasm('Dick');
 	menu();
 	addButton(0,"Next",HaveAHellKidPartII);
 	model.time.hours = 6;

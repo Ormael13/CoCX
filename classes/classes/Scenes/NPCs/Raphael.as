@@ -269,7 +269,7 @@ private function rapeRaphael():void {
 	if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 0) outputText("You push your tentacle cock in all the way through. You can feel it snaking its way through his intestines and stomach before finally comes out of his mouth! The fox looks down, unable to speak. You laugh at the poor fox-thief and pull your cock so you're just fucking his anus.");
 	outputText("\n\nEventually, you can hold back no more and empty your seed into his bowels. Raphael cums as well, shooting ropes of fox-jizz. With your orgasmic high complete, you pull your cock out of his ass, cum still dripping from his abused butthole. You give him a naughty grin and take his gems and rapier while he's still dazed. To the victor go the spoils after all! ");
 	player.gems += 100 + rand(20);
-	player.orgasm();
+	player.orgasm('Dick');
 	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 0;
 	flags[kFLAGS.REJECTED_RAPHAEL] = 1;
 	inventory.takeItem(weapons.RRAPIER, rapeRaphaelII);
@@ -860,7 +860,7 @@ private function RaphaelPostFenceSex():void {
 	outputText("With a victorious glint, Raphael rolls you on your back while you're still dazed.  The fox, taking the sash from his hips and tying either end around your knees, brings your legs towards your chest.  He holds them there without any effort on the part of either of you, by putting his chest down on the cloth tied between them and mounting you again, lying on top of you.  More deep thrusts follow, this time deep enough for the tip to titillate even your cervix, while the slender knot at his base parts the sensitive entrance a little wider with every bottoming bump into you.\n\n", false);
 
 	outputText("It is how you spend the rest of that morning, filled a thousands times over and constantly driven past the edge of orgasmic bliss by the master fencer's trained thrusts.  His civilized smile has long since given way to the mean smirk of a sexual victor driving his victim to the edge of madness.", false);
-	player.orgasm();
+	player.orgasm('Vaginal');
 	doNext(postRaphaelCoitus);
 
 }
@@ -1446,7 +1446,7 @@ private function kissRaphaelFirstTimeOrphanage():void {
 	
 	outputText("\n\nFinally, you beg of him to stop as the growing crescendo and steady rhythm becomes too much, not by pulling out, but by jamming into you one last time and simply keeping his wonderful cock in the magic spot for long enough to ride the sensation to a climax.");
 	player.slimeFeed();
-	player.orgasm();
+	player.orgasm('Vaginal');
 	dynStats("sen", -1);
 	menu();
 	addButton(0,"Next",followupToFirstTimeOrphanageRaphSex);
@@ -1488,7 +1488,7 @@ private function cunnilingusWithRaphael():void {
 	//({High wetness multiplier}
 	else outputText("gushing a torrent of femcum into the air");
 	outputText(".  Raphael backs off a bit afterwards, giving you a few more laps of admiration around the throbbing fissure and cleaning you of any spillage. He ends with a tiny kiss, just inside your inner thigh.");
-	player.orgasm();
+	player.orgasm('Vaginal');
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1510,7 +1510,7 @@ private function girlOnTopOfRedFoxesOhMy():void {
 	outputText("\n\nDesperate for that little bit more, you reach down and start fondling your " + player.clitDescript() + " too.  Your button brushing in against Raphael's soft white pubes tickles.");
 	
 	outputText("\n\nLooking him in the eyes again, you slaver on top of the fox.  Raphael simply lays back, lazily fondles your breasts and ass and looks at you to put in the effort around his cock.  Only after minutes of this, almost driving yourself towards the brink, does Raphael suddenly sit up sharply - an anguished snarl on his face - to hold you in a tight embrace and groan conceitedly.  You can feel his cock jerk up and grow an inch in size, before his passion escapes into your womanhood.  Allowing yourself as well, you follow him with a lazy orgasm and join him in his growl, while he squeezes you on your waist.");
-	player.orgasm();
+	player.orgasm('Vaginal');
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }

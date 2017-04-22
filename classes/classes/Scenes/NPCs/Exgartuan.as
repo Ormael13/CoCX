@@ -357,7 +357,7 @@ public function exgartuanMasturbation():void {
 			outputText("You explode, filling your mouth with the tangy seed of your demonic submission.  Why did you ever think to resist such pleasure?  White hot release radiates out from your groin, making your body numb and happy as wave after wave of demon-spunk pours down your throat and spatters your face.  Such unholy pleasures, truly you deserve to enjoy them after what you've been through, right?  You wallow in a growing lake of syrupy submission, happy to be host to such a fun demon.\n\n", false);
 			outputText("Temporarily sated, Exgartuan deflates, not even bothering to taunt you while you try to clean up the goop now splattered over your upper body.", false);
 		}
-		player.orgasm();
+		player.orgasm('Dick');
 		dynStats("lib", .25, "cor", 1);
 	}
 	//TITURBATION
@@ -798,7 +798,7 @@ public function exgartuanBeeRape():void {
 	outputText("It does not take long for the feeling of being in such a tight hole to push you beyond any point of endurance, and the obscene squelching mixed with high pitched moans doesn't help any.  You feel your orgasm building, flooding your groin with heat.  You press your body tightly against hers, forcing as much of yourself as possible inside her as you go off the deep end.  Wave after wave of spunk pumps into the bee, squeezing out an equal amount of eggs from her ovipositor.  Wet plops greet your ears in time with each spurt of seed you push into her.  Apparently, the eggs go in the very hole you're now abusing.\n\n", false);
 	outputText("You pull out with a satisfied grunt, enjoying the wet 'schlick' sound your " + player.cockDescript(0) + " makes as it pulls free of the bee-girl's once-tight hole.  Where once there was a honey-coated slit now resides a gaping monster, drooling a gooey mixture of slime and your tainted demonic seed.  Well, maybe her queen will have an easier time packing her full of eggs.\n\n", false);
 	outputText("You redress, whistling happily as you prepare to leave.  Your victim is practically unconscious, still shaking from the intense experience and leaking eggs and honey from the organ on her backside.  Do you cut her down or leave her bound up for the locals to enjoy?", false);
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("lib", 1, "cor", 2);
 	simpleChoices("Leave Her", leaveBeePostRape, "Free Her", freeBeePostRape, "", null, "", null, "", null);
 }
@@ -956,7 +956,7 @@ private function exgartuanSleepSurprise():void {
 		else outputText("between your tits", false);
 		outputText(" and across your belly as he retreats.  The thrill of orgasm is still fresh in your mind, but exhaustion quickly replaces it.  You resolve to clean up the mess in the morning as your eyelids flutter closed.  The smell of sex hangs off your dozing form like a cloud, keeping your dreams from straying too far from your cock...", false);
 		//[-100 lust, then +10 lust immediately, +1 libido to 60, then +.5 libido to 80, then +.25 libido.  +1 sensitivity.  +1 corruption]
-		player.orgasm();
+		player.orgasm('Dick');
 		dynStats("sen", 1, "cor", 1);
 		if (player.lib < 60) dynStats("lib", 1);
 		else if (player.lib < 80) dynStats("lib", .5);
@@ -1067,7 +1067,7 @@ private function exgartuanBulgeTortureIII():void {
 	else outputText("a colossal wave of heavy demonic jizz", false);
 	outputText(" hits you square in the face.  The surprising force of the blow sends you reeling, your hands clearing from the mighty demon as he points skyward, showering everything around you in black, warm ejaculate.  You care little, however, being too busy convulsing and indulging on every ounce of pleasure radiating through it.  It doesn't take long for you to black out, drawing an end to your excruciating experience.\n\n", false);
 	//[new page. lust resets to 0. corruption raises by 2. player gains ailment \"<i>Jizzpants</i>\"]
-	player.orgasm();
+	player.orgasm('Dick');
 	player.createStatusEffect(StatusEffects.Jizzpants, 1, 0, 0, 0);
 	dynStats("cor", 2);
 	doNext(exgartuanBulgeTortureIV);
@@ -1434,7 +1434,7 @@ public function exgartuanNagaStoleMyMasturbation():void {
 
 	outputText("Having coated your face and upper torso in a demonic jism assault, Exgartuan returns to your serpent's slit.  His grasp on your tail lifts, leaving you to undo the tangled mess he left behind.  But you're too busy laying back decompressing.  No thoughts, no musings, no questions, no doubts... nothing is going on in your cum-soaked head.  What is there to say?", false);
 	player.changeStatusValue(StatusEffects.Exgartuan,2,(16+rand(7)));
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("lib", .25);
 	doNext(camp.returnToCampUseOneHour);
 }
