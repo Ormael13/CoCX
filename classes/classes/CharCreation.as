@@ -26,6 +26,8 @@
 		public const MAX_VIRILITY_LEVEL:int = 15;
 		public const MAX_FERTILITY_LEVEL:int = 15;
 		
+		public static const NEW_GAME_PLUS_RESET_CLIT_LENGTH_MAX : Number = 1.5;
+		
 		private var specialCharacters:CharSpecial = new CharSpecial();
 		private var customPlayerProfile:Function;
 		
@@ -337,7 +339,7 @@
 				if (hadOldVagina) player.createVagina(true);
 				if (player.balls > 2) player.balls = 2;
 				if (player.ballSize > 2) player.ballSize = 2;
-				if (player.clitLength > 1.5) player.clitLength = 1.5;
+				if (player.clitLength > NEW_GAME_PLUS_RESET_CLIT_LENGTH_MAX) player.clitLength = NEW_GAME_PLUS_RESET_CLIT_LENGTH_MAX;
 				while (player.breastRows.length > 1)
 				{
 					player.removeBreastRow(1, 1);

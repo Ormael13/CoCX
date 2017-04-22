@@ -62,7 +62,7 @@ package classes{
 			
 			cut.newGameGo();
 			
-			assertThat(kGAMECLASS.player.clitLength, equalTo(1.5));
+			assertThat(kGAMECLASS.player.clitLength, equalTo(CharCreation.NEW_GAME_PLUS_RESET_CLIT_LENGTH_MAX));
         }
 		
 				
