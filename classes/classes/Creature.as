@@ -139,15 +139,21 @@ package classes
 		public var additionalXP:Number = 0;
 				
 		//Appearance Variables
-		//Gender 1M, 2F, 3H
+		/**
+		 * Get the gender of the creature, based on its genitalia or lack thereof. Not to be confused with gender identity by femininity.
+		 * @return the current gender (0 = gender-less, 1 = male, 2 = female, 3 = hermaphrodite)
+		 */
 		public function get gender():int
 		{
-			if (hasCock() && hasVagina())
+			if (hasCock() && hasVagina()) {
 				return GENDER_HERM;
-			if (hasCock())
+			}
+			if (hasCock()) {
 				return GENDER_MALE;
-			if (hasVagina())
+			}
+			if (hasVagina()) {
 				return GENDER_FEMALE;
+			}
 			return GENDER_NONE;
 		}
 		private var _tallness:Number = 0;
