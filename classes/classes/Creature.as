@@ -12,6 +12,7 @@ package classes
 	import classes.VaginaClass;
 	import classes.Scenes.Places.TelAdre.UmasShop;
 	import flash.display.InteractiveObject;
+	import flash.errors.IllegalOperationError;
 
 	public class Creature extends Utils
 	{
@@ -401,7 +402,7 @@ package classes
 		public var vaginas:Vector.<VaginaClass>;
 		//Fertility is a % out of 100. 
 		public var fertility:Number = 10;
-		[Deprecated(replacement="VaginaClass.clitLength")]
+		[Deprecated(replacement="Creature.getClitLength()")]
 		private var legacyClitLength:Number = VaginaClass.DEFAULT_CLIT_LENGTH;
 		public var nippleLength:Number = .25;
 		public var breastRows:Array;
@@ -427,6 +428,46 @@ package classes
 			}else{
 			 	vaginas[0].clitLength = clitLength;
 			}
+		}
+		
+		/**
+		 * Check if the Creature has a vagina. If not, throw an informative Error.
+		 * This should be more informative than the usual RangeError (Out of bounds).
+		 * @throws IllegalOperationError if no vagina is present
+		 */
+		private function checkVaginaPresent():void {
+			if (!hasVagina()) {
+				throw new IllegalOperationError("Creature does not have vagina.")
+			}
+		}
+		
+		/**
+		 * Get the clit length for the selected vagina (defaults to the first vagina).
+		 * @param	vaginaIndex the vagina to query for the clit length
+		 * @return the clit length of the vagina
+		 * @throws IllegalOperationError if the Creature does not have a vagina
+		 * @throws IllegalOperationError if the Creature does not have a vagina
+		 * @throws RangeError if the selected vagina cannot be found
+		 */
+		public function getClitLength(vaginaIndex : int = 0) : Number {
+			checkVaginaPresent();
+			
+			return vaginas[vaginaIndex].clitLength;
+		}
+		
+		/**
+		 * Set the clit length for the selected vagina (defaults to the first vagina).
+		 * @param clitLength the clit length to set for the vagina
+		 * @param vaginaIndex the vagina on witch to set the clit length
+		 * @return the clit length of the vagina
+		 * @throws IllegalOperationError if the Creature does not have a vagina
+		 * @throws RangeError if the selected vagina cannot be found
+		 */
+		public function setClitLength(clitLength:Number, vaginaIndex : int = 0) : Number {
+			checkVaginaPresent();
+			
+			vaginas[vaginaIndex].clitLength = clitLength;
+			return getClitLength(vaginaIndex);
 		}
 		
 		private var _femininity:Number = 50;
