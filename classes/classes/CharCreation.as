@@ -583,7 +583,7 @@
 			simpleChoices("Slender", buildSlenderFemale, "Average", buildAverageFemale, "Curvy", buildCurvyFemale, "Tomboyish", buildTomboyishFemale, "", null);
 		}
 
-		private function isAHerm():void {
+		internal function isAHerm():void {
 			//Attributes
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				player.str+=1;
@@ -601,7 +601,6 @@
 			player.balls = 2;
 			player.ballSize = 1;
 			player.createVagina();
-			player.clitLength = .5;
 			player.createCock();
 			player.cocks[0].cockLength = 5.5;
 			player.cocks[0].cockThickness = 1;

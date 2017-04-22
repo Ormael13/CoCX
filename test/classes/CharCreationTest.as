@@ -83,6 +83,13 @@ package classes{
 			
 			assertThat(player.vaginas[0].clitLength, equalTo(VaginaClass.DEFAULT_CLIT_LENGTH));
 		}
+		
+		[Test]
+		public function isAHerm_checkClitLength():void {
+			cut.isAHerm();
+			
+			assertThat(player.vaginas[0].clitLength, equalTo(VaginaClass.DEFAULT_CLIT_LENGTH));
+		}
     }
 }
 
