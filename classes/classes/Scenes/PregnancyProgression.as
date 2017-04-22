@@ -1546,7 +1546,6 @@ package classes.Scenes
 				if (player.vaginas.length == 0) {
 					outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ", false);
 					player.createVagina();
-					player.genderCheck();
 				}
 				outputText("A dangerous rumble comes from your womb, signaling that it's time to birth your body's cargo at last.  Your " + player.legs() + " wobble unsteadily as your strength ebbs with every gush that erupts  from your now-broken water until you collapse on your " + player.buttDescript() + ", grunting and groaning.  At first it goes slow – there's just a few small contractions that are more strange than anything else, rippling down your " + player.vaginaDescript(0) + " and squirting out more of your pregnancy's fluid.  All too soon the tempo kicks up, and you feel something starting to stretch you wider and wider.\n\n", false);
 				
@@ -1579,7 +1578,6 @@ package classes.Scenes
 				if (player.vaginas.length == 0) {
 					outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ", false);
 					player.createVagina();
-					player.genderCheck();
 				}
 				outputText("Your " + player.armorName + " feels damp around the groin and you reach down to check the area.  The  " + player.vaginaDescript(0) + " you feel is dilated and slick with unusual wetness; your water must have broken!\n\n", false);
 				
@@ -1635,7 +1633,6 @@ package classes.Scenes
 					else outputText("nearly a cupful of fluid", false);
 					outputText(" from your female orgasm to the puddle on the ground below your ass.\n\n", false);
 					//(gain 1 nemo-dick, reduce lust to min)]
-					player.genderCheck();
 					player.orgasm('Vaginal');
 					dynStats("lib", 2, "sen", 5);
 				}
@@ -1664,7 +1661,6 @@ package classes.Scenes
 				if (player.vaginas.length == 0) {
 					outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ", false);
 					player.createVagina();
-					player.genderCheck();
 				}		
 				outputText("A sudden gush of fluids erupts from your vagina - your water just broke.  You grunt painfully as you feel wriggling and squirming inside your belly, muscle contractions forcing it downwards.  ", false);
 				if (player.cor < 50) outputText("You rue the day you encountered that hateful imp.  ", false);
@@ -1701,8 +1697,6 @@ package classes.Scenes
 					player.growTits(1, 1, false, 3);
 				}
 				if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
-				if (player.gender == 1) player.gender = 3;
-				if (player.gender == 0) player.gender = 2;
 				player.orgasm('Vaginal');
 				dynStats("tou", -2, "spe", 2, "lib", 1, "sen", .5, "cor", 7);
 				if (player.buttRating < 10 && rand(2) == 0) {
@@ -1724,7 +1718,6 @@ package classes.Scenes
 				if (player.vaginas.length == 0) {
 					outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.\n", false);
 					player.createVagina();
-					player.genderCheck();
 				}	
 				//If you like terrible outcomes
 				if (flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] < 100) {
@@ -1796,7 +1789,6 @@ package classes.Scenes
 				if (player.vaginas.length == 0) {
 					outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n", false);
 					player.createVagina();
-					player.genderCheck();
 				}
 				player.boostLactation(.01);		
 				//Main Text here
@@ -1809,8 +1801,6 @@ package classes.Scenes
 				}
 				player.cuntChange(120, true,true,false);
 				if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
-				if (player.gender == 1) player.gender = 3;
-				if (player.gender == 0) player.gender = 2;
 				player.orgasm('Vaginal');
 				dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5);
 				displayedUpdate = true;
@@ -1853,7 +1843,6 @@ package classes.Scenes
 				if (player.vaginas.length == 0) {
 					outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.  ", false);
 					player.createVagina();
-					player.genderCheck();
 				}
 				//FUCKING BIRTH SHIT HERE.
 				getGame().amilyScene.pcBirthsAmilysKidsQuestVersion();
@@ -1872,7 +1861,6 @@ package classes.Scenes
 				if (player.vaginas.length == 0) {
 					outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.  ", false);
 					player.createVagina();
-					player.genderCheck();
 				}		
 
 				//Main Text here
@@ -1894,8 +1882,6 @@ package classes.Scenes
 				}
 				player.cuntChange(60, true,true,false);
 				if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
-				if (player.gender == 1) player.gender = 3;
-				if (player.gender == 0) player.gender = 2;
 				player.orgasm('Vaginal');
 				dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5);
 				displayedUpdate = true;
@@ -1919,7 +1905,6 @@ package classes.Scenes
 				if (player.vaginas.length == 0) {
 					outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.  ", false);
 					player.createVagina();
-					player.genderCheck();
 				}		
 				//Main Text here
 				player.boostLactation(.01);
@@ -1936,8 +1921,6 @@ package classes.Scenes
 				outputText("  ", false);
 				player.cuntChange(100, true);
 				if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
-				if (player.gender == 1) player.gender = 3;
-				if (player.gender == 0) player.gender = 2;
 				player.orgasm('Vaginal');
 				dynStats("str", -1,"tou", -4, "spe", 2, "lib", 1, "sen", .5);
 				displayedUpdate = true;
@@ -1962,7 +1945,6 @@ package classes.Scenes
 				if (player.vaginas.length == 0) {
 					outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n\n", false);
 					player.createVagina();
-					player.genderCheck();
 				}		
 				outputText("Hearing a hiss, you look down to see drops of water hitting the ground and instantly turning to steam.  There is unnatural heat filling you, it's hot enough to boil water; but thanks to the creature inside you, you're barely feeling a thing!  More energy fills you and you begin to push down on the child within in earnest.  The process is painful, but satisfying; you feel like you could push out a mountain with the energy you have right now.  Within a minute, you can feel the heads emerge.  The heads are quickly followed by the rest of the body and you catch your hellhound child in your hands and lift it up to look at it.\n\n", false);
 				outputText("You can see the distinctive dog heads are wrapped around each other and yipping softly; a hint of flame can sometimes be seen inside their mouths.  Its cute paws are waving in the air looking for purchase, but the rest of its body looks entirely human except for the double dicks, and it even has your skin color.  Its mouths are aching for nutrition, and you realize that your breasts are filled with what this pup needs and pull it to your chest.  Each head quickly finds a nipple and begins to suckle.  Having finished the birthing, you contentedly sit back down and bask in the feeling of giving milk to your child, or is it children?\n\n", false);
@@ -1976,8 +1958,6 @@ package classes.Scenes
 				}
 				player.cuntChange(60, true);
 				if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
-				if (player.gender == 1) player.gender = 3;
-				if (player.gender == 0) player.gender = 2;
 				player.orgasm('Vaginal');
 				dynStats("str", -1,"tou", -1, "spe", 2, "lib", 1, "sen", .5);
 				displayedUpdate = true;
@@ -2001,7 +1981,6 @@ package classes.Scenes
 				if (player.vaginas.length == 0) {
 					outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n", false);
 					player.createVagina();
-					player.genderCheck();
 				}
 				kGAMECLASS.highMountains.minervaScene.minervaPurification.playerGivesBirth();
 				if (player.hipRating < 10) {
@@ -2017,7 +1996,6 @@ package classes.Scenes
 				if (player.vaginas.length == 0) {
 					outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n", false);
 					player.createVagina();
-					player.genderCheck();
 				}
 				kGAMECLASS.volcanicCrag.behemothScene.giveBirthToBehemoth();
 				if (player.hipRating < 10) {
@@ -2041,7 +2019,6 @@ package classes.Scenes
 					if (player.vaginas.length == 0) {
 						outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n\n", false);
 						player.createVagina();
-						player.genderCheck();
 					}		
 					//Small egg scenes
 					if (player.statusEffectv2(StatusEffects.Eggs) == 0) {

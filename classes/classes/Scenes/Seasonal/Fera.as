@@ -610,7 +610,6 @@
 			//Add five corruption.
 			player.createPerk(PerkLib.FerasBoonSeeder,0,0,0,0);
 			menu();
-			player.genderCheck();
 			addButton(0,"Next",afterFeraGivesYouACawk);
 		}
 

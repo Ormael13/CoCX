@@ -130,7 +130,6 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 		timeQ--;
 		model.time.hours++;
 
-		genderCheck();
 		kGAMECLASS.combat.regeneration(false);
 		//Inform all time aware classes that a new hour has arrived
 		for (var tac:int = 0; tac < _timeAwareClassList.length; tac++) if (_timeAwareClassList[tac].timeChange()) needNext = true;

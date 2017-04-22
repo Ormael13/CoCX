@@ -140,7 +140,16 @@ package classes
 				
 		//Appearance Variables
 		//Gender 1M, 2F, 3H
-		public var gender:int = GENDER_NONE;
+		public function get gender():int
+		{
+			if (hasCock() && hasVagina())
+				return GENDER_HERM;
+			if (hasCock())
+				return GENDER_MALE;
+			if (hasVagina())
+				return GENDER_FEMALE;
+			return GENDER_NONE;
+		}
 		private var _tallness:Number = 0;
 		public function get tallness():Number { return _tallness; }
 		public function set tallness(value:Number):void { _tallness = value; }
@@ -2231,18 +2240,6 @@ package classes
 			return true;
 		}
 		
-		public function genderCheck():void
-		{
-			if (hasCock() && hasVagina())
-				gender = GENDER_HERM;
-			else if (hasCock())
-				gender = GENDER_MALE;
-			else if (hasVagina())
-				gender = GENDER_FEMALE;
-			else
-				gender = GENDER_NONE;
-		}
-		
 		//Remove cocks
 		public function removeCock(arraySpot:int, totalRemoved:int):void
 		{
@@ -2291,7 +2288,6 @@ package classes
 					//trace("Attempted to remove " + totalRemoved + " cocks.");
 				}
 			}
-			genderCheck();
 		}
 		
 		//REmove vaginas
@@ -2319,7 +2315,6 @@ package classes
 					//trace("Attempted to remove " + totalRemoved + " vaginas.");
 				}
 			}
-			genderCheck();
 		}
 		
 		//Remove a breast row

@@ -119,7 +119,6 @@ package classes.Scenes.Dungeons.Factory
 				player.cocks[0].cockType = CockTypesEnum.DEMON;
 				player.cocks[0].cockLength = 10;
 				player.cocks[0].cockThickness = 2;
-				player.genderCheck();
 			}
 			if (player.cocks.length == 1) {
 				if (player.countCocksOfType(CockTypesEnum.DEMON) < 1) {
@@ -249,7 +248,6 @@ package classes.Scenes.Dungeons.Factory
 			if (player.cocks.length > 1) {
 				outputText("Your " + player.multiCockDescriptLight() + " shiver and retract back towards your body.  When the process finishes you are left with only your " + player.cockDescript(0) + ".  ", false);
 				player.removeCock(1,player.cocks.length-1);
-				player.genderCheck();
 				temp++;
 			}
 			//Super long nerf
@@ -314,7 +312,6 @@ package classes.Scenes.Dungeons.Factory
 				}
 				temp++;
 				outputText("\n\n", false);
-				player.genderCheck();
 			}
 			//Reduce excessive anal wetness
 			if (player.ass.analWetness >= ANAL_WETNESS_SLIMY) { 
