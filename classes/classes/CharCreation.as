@@ -557,7 +557,7 @@
 			simpleChoices("Lean", buildLeanMale, "Average", buildAverageMale, "Thick", buildThickMale, "Girly", buildGirlyMale, "", null);
 		}
 
-		private function isAWoman():void {
+		internal function isAWoman():void {
 			//Attributes
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				player.spe += 3;
@@ -573,7 +573,6 @@
 			player.balls = 0;
 			player.ballSize = 0;
 			player.createVagina();
-			player.clitLength = 0.5;
 			
 			//Breasts
 			player.createBreastRow();

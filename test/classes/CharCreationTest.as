@@ -76,6 +76,13 @@ package classes{
 			
 			assertThat(kGAMECLASS.player.clitLength, equalTo(testLength));
         }
+		
+		[Test]
+		public function isAWoman_checkClitLength():void {
+			cut.isAWoman();
+			
+			assertThat(player.vaginas[0].clitLength, equalTo(VaginaClass.DEFAULT_CLIT_LENGTH));
+		}
     }
 }
 
