@@ -258,20 +258,50 @@ private function backToCamp():void
 	doNext(kGAMECLASS.farm.farmCorruption.rootScene);
 }
 
-private function isabellasAppearance():void {
+/*
+ * Using const variables so text changes also affect the tests, otherwise fixing simple spelling errors will break the tests.
+ * If anyone has a better idea, let me know @brrritssocold
+ */
+
+/**
+ * This scene is used if there are no pregnancy events stored for the given pregnancy.
+ */
+public static const DESC_APPEAR_NO_EVENTS_FOR_PREG_TYPE:String = "you cannot help but question as to whether or not your seed was \"planted\" in the Bovine Braud's womb.";
+/**
+ * Display addition information if the player has a high amount of cum.
+ */
+public static const DESC_APPEAR_PLAYER_HIGH_CUMQ:String = "and your potent babymaking skills, ";
+/**
+ * Display addition information if the player has a high amount of libido.
+ */
+public static const DESC_APPEAR_PLAYER_HIGH_LIBIDO:String = "Every once in a while when the wind blows just right you get a pleasing view of her well lubricated womanhood between her legs. ";
+/**
+ * Description of isabella if not pregnant
+ */
+public static const DESC_APPEAR_EVENT_NOT_PREGNANT:String = "The cow-girl is about seven and a half feet tall. Instead of feet, she has hooves, complete with fur that grows part-way up her legs. Her olive skirt only covers the upper portion of her dusky, spotted thighs, and it flares out deliciously from her swaying hips. Isabella's top is sheer, white silk that barely hides anything from you, least of all her exotic, quad-tipped nipples. Unlike most of the rest of her, her face is not spotted with dark and white patches. Instead it is pure, unbroken chocolate in color. Two small, bovine horns sprout from her head, emerging from the tangle of her unruly, red curls. She even has a pair of cow ears that flick back and forth from time to time.";
+/**
+ * Description of isabella if she is in the first event stage of pregnancy
+ */
+public static const DESC_APPEAR_EVENT_FIRST_STAGE_PREGNANT:String = "The cow-girl is about seven and a half feet tall. Instead of feet, she has hooves, complete with fur that grows part-way up her legs. Her olive skirt only covers the upper portion of her dusky, spotted thighs, and it flares out deliciously from her swaying hips. Since you did the deed you often find her on her plump, toned, derriere. ";
+/**
+ * Description of isabella if she is in the last event stage of pregnancy
+ */
+public static const DESC_APPEAR_EVENT_LAST_STAGE_PREGNANT:String = "The cow-girl is about seven and a half feet tall. Instead of feet, she has hooves, complete with fur that grows part-way up her legs. Her olive skirt only covers the upper portion of her dusky, spotted thighs, and it flares out deliciously from her swaying hips. The large woman knees shake slightly when she stands. You find yourself staring at the Bovine's large, exposed bust as it shifts with every breath, her poor exotic nipples slowly leaking out milk in a constant trickle that leaves her melon-like belly glazed and slick, already prepared to feed your offspring. Every once in awhile, you hear a giggle escape the braud as she rubs her large swollen belly. Upon further questioning she simply responds that \"it kicked.\" Unlike most of the rest of her, her face is not spotted with dark and white patches. Instead it is pure, unbroken chocolate in color. Two small, bovine horns sprout from her head, emerging from the tangle of her unruly, red curls. She even has a pair of cow ears that flick back and forth from time to time. Isabella seems to be suffering chronic bouts of pain (mock contractions, perhaps?), but still manages to smile when she sees you look her way. You don't think it'll be long now.";
+
+protected function isabellasAppearance():void {
 	clearOutput();
-	
+
 	if (isabellaScene.pregnancy.isPregnant) {
 		switch(isabellaScene.pregnancy.event) {
 			case 0: //Just in case
 			case 1:
 				outputText("The cow-girl is about seven and a half feet tall. Instead of feet, she has hooves, complete with fur that grows part-way up her legs. Her olive skirt only covers the upper portion of her dusky, spotted thighs, and it flares out deliciously from her swaying hips. Isabella's top is sheer, white silk that barely hides anything from you, least of all her exotic, quad-tipped nipples. Unlike most of the rest of her, her face is not spotted with dark and white patches. Instead it is pure, unbroken chocolate in color. Two small, bovine horns sprout from her head, emerging from the tangle of her unruly, red curls. She even has a pair of cow ears that flick back and forth from time to time. Very little has changed since you two decided to have a child. Despite the fact that Isabella is off her birth controlling herbs, "); 
-				if (player.cumQ() >= 500) outputText("and your potent babymaking skills, "); 
-				outputText("you cannot help but question as to whether or not your seed was \"planted\" in the Bovine Braud's womb.");
+				if (player.cumQ() >= 500) outputText(DESC_APPEAR_PLAYER_HIGH_CUMQ); 
+				outputText(DESC_APPEAR_NO_EVENTS_FOR_PREG_TYPE);
 				break;
 			case 2:
-				outputText("The cow-girl is about seven and a half feet tall. Instead of feet, she has hooves, complete with fur that grows part-way up her legs. Her olive skirt only covers the upper portion of her dusky, spotted thighs, and it flares out deliciously from her swaying hips. Since you did the deed you often find her on her plump, toned, derriere. ");
-				if (player.lib >= 60) outputText("Every once in a while when the wind blows just right you get a pleasing view of her well lubricated womanhood between her legs. "); 
+				outputText(DESC_APPEAR_EVENT_FIRST_STAGE_PREGNANT);
+				if (player.lib >= 60) outputText(DESC_APPEAR_PLAYER_HIGH_LIBIDO); 
 				outputText("Several times you've asked her if she is okay but she assures you it is just swollen ankles. Isabella's top is sheer, white silk that barely hides anything from you, least of all her exotic, quad-tipped nipples, and what you hope is a new slightly protruding baby bump. Unlike most of the rest of her, her face is not spotted with dark and white patches. Instead it is pure, unbroken chocolate in color. Two small, bovine horns sprout from her head, emerging from the tangle of her unruly, red curls. She even has a pair of cow ears that flick back and forth from time to time.");
 				break;
 			case 3:
@@ -294,14 +324,14 @@ private function isabellasAppearance():void {
 				break;
 			case 9:
 			case 10:
-				outputText("The cow-girl is about seven and a half feet tall. Instead of feet, she has hooves, complete with fur that grows part-way up her legs. Her olive skirt only covers the upper portion of her dusky, spotted thighs, and it flares out deliciously from her swaying hips. The large woman knees shake slightly when she stands. You find yourself staring at the Bovine's large, exposed bust as it shifts with every breath, her poor exotic nipples slowly leaking out milk in a constant trickle that leaves her melon-like belly glazed and slick, already prepared to feed your offspring. Every once in awhile, you hear a giggle escape the braud as she rubs her large swollen belly. Upon further questioning she simply responds that \"it kicked.\" Unlike most of the rest of her, her face is not spotted with dark and white patches. Instead it is pure, unbroken chocolate in color. Two small, bovine horns sprout from her head, emerging from the tangle of her unruly, red curls. She even has a pair of cow ears that flick back and forth from time to time. Isabella seems to be suffering chronic bouts of pain (mock contractions, perhaps?), but still manages to smile when she sees you look her way. You don't think it'll be long now.");
+				outputText(DESC_APPEAR_EVENT_LAST_STAGE_PREGNANT);
 				break;
 			default: //Failsafe
 				outputText("The cow-girl is about seven and a half feet tall. Instead of feet, she has hooves, complete with fur that grows part-way up her legs. Her olive skirt only covers the upper portion of her dusky, spotted thighs, and it flares out deliciously from her swaying hips. Isabella's top is sheer, white silk that barely hides anything from you, least of all her exotic, quad-tipped nipples. Unlike most of the rest of her, her face is not spotted with dark and white patches. Instead it is pure, unbroken chocolate in color. Two small, bovine horns sprout from her head, emerging from the tangle of her unruly, red curls. She even has a pair of cow ears that flick back and forth from time to time.");
 		}
 	}
 	else {
-		outputText("The cow-girl is about seven and a half feet tall. Instead of feet, she has hooves, complete with fur that grows part-way up her legs. Her olive skirt only covers the upper portion of her dusky, spotted thighs, and it flares out deliciously from her swaying hips. Isabella's top is sheer, white silk that barely hides anything from you, least of all her exotic, quad-tipped nipples. Unlike most of the rest of her, her face is not spotted with dark and white patches. Instead it is pure, unbroken chocolate in color. Two small, bovine horns sprout from her head, emerging from the tangle of her unruly, red curls. She even has a pair of cow ears that flick back and forth from time to time.");
+		outputText(DESC_APPEAR_EVENT_NOT_PREGNANT);
 	}
 	doNext(callForFollowerIsabella);
 }
