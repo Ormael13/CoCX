@@ -547,5 +547,30 @@ package classes{
 
 			assertThat(oneVagina.clitLength, equalTo(1));
         }
+		
+		[Test]
+		public function noGender():void {
+			assertThat(noVagina.gender, equalTo(GENDER_NONE));
+		}
+		
+		[Test]
+		public function genderIsFemale():void {
+			assertThat(oneVagina.gender, equalTo(GENDER_FEMALE));
+		}
+		
+		[Test]
+		public function genderIsMale():void {
+			noVagina.createCock(5, 1, CockTypesEnum.HUMAN);
+			
+			assertThat(noVagina.gender, equalTo(GENDER_MALE));
+		}
+		
+		[Test]
+		public function genderIsHerm():void {
+			noVagina.createCock(5, 1, CockTypesEnum.HUMAN);
+			noVagina.createVagina();
+			
+			assertThat(noVagina.gender, equalTo(GENDER_HERM));
+		}
     }
 }
