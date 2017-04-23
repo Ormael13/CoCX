@@ -7819,6 +7819,7 @@
 			changes = 0;
 			changeLimit = 1;
 			if (rand(2) == 0) changeLimit++;
+			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			if (mystic) changeLimit += 2;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
@@ -7921,7 +7922,15 @@
 				if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) {
 					player.createStatusEffect(StatusEffects.BonusVCapacity, 0, 0, 0, 0);
 				}
-				player.addStatusValue(StatusEffects.BonusVCapacity, 1, 5 + rand(10));
+				player.addStatusValue(StatusEffects.BonusVCapacity, 1, 10 + rand(10));
+				changes++;
+			}
+			else if (((mystic && rand(2) == 0) || (!mystic && rand(3) == 0)) && player.statusEffectv1(StatusEffects.BonusACapacity) < 150 && changes < changeLimit) {
+				outputText("\n\nYou feel... more accommodating somehow.  Your " + player.assholeDescript() + " is tingling a bit, and though it doesn't seem to have loosened, it has grown more elastic.");
+				if (!player.hasStatusEffect(StatusEffects.BonusACapacity)) {
+					player.createStatusEffect(StatusEffects.BonusACapacity, 0, 0, 0, 0);
+				}
+				player.addStatusValue(StatusEffects.BonusACapacity, 1, 10 + rand(10));
 				changes++;
 			}
 			//[Vag of Holding] - rare effect, only if PC has high vaginal looseness
@@ -8005,6 +8014,7 @@
 				theFurColor = player.furColor + " and " + player.underBody.skin.furColor;
 
 			if ((player.hasFur() 
+					&& player.faceType != FACE_FOX
 					&& !InCollection(theFurColor, convertMixedToStringArray(KitsuneScene.basicKitsuneFur))
 					&& !InCollection(theFurColor, KitsuneScene.elderKitsuneColors)
 					&& !InCollection(theFurColor, ["orange and white", "black and white", "red and white", "tan", "brown"])
