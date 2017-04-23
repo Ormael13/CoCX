@@ -720,11 +720,12 @@ private function buyDyes():void {
 		addButton(7, "Blue", buyDye, consumables.BLUEDYE);
 		addButton(8, "Green", buyDye, consumables.GREEN_D);
 		addButton(9, "Orange", buyDye, consumables.ORANGDY);
-		addButton(10, "Purple", buyDye, consumables.PURPDYE);
-		addButton(11, "Pink", buyDye, consumables.PINKDYE);
+		addButton(10, "Yellow", buyDye, consumables.YELLODY);
+		addButton(11, "Purple", buyDye, consumables.PURPDYE);
+		addButton(12, "Pink", buyDye, consumables.PINKDYE);
 	}
 	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 12) {
-		addButton(12, "Rainbow", buyDye, consumables.RAINDYE);
+		addButton(13, "Rainbow", buyDye, consumables.RAINDYE);
 	}
 	addButton(14, "Nevermind", buyDyeNevermind);
 }
@@ -780,6 +781,15 @@ private function buyOilsPage2():void {
 	addButton(2, "Purple", buyOil, consumables.PURPLOL);
 	addButton(3, "Silver", buyOil, consumables.SILVROL);
 	addButton(4, "Previous", buyOils, true);
+	addButton(5, "Yellow Green", buyOil, consumables.YELGROL);
+	addButton(6, "Spring Green", buyOil, consumables.SPRGROL);
+	addButton(7, "Cyan", buyOil, consumables.CYAN_OL);
+	addButton(8, "Ocean Blue", buyOil, consumables.OCBLUOL);
+	// Button 9 left empty in case, we add a third page here
+	addButton(10, "Electric Violet", buyOil, consumables.ELVIOOL);
+	addButton(11, "Magenta", buyOil, consumables.MAGENOL);
+	addButton(12, "Deep Pink", buyOil, consumables.DPPNKOL);
+	addButton(13, "Pink", buyOil, consumables.PINK_OL);
 	addButton(14, "Nevermind", buyOilNevermind);
 }
 private function buyOil(oil:ItemType):void {
