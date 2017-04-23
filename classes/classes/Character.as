@@ -787,6 +787,11 @@ import classes.GlobalFlags.kFLAGS;
 			return max;
 		}
 		
+		public function fatigueLeft():Number
+		{
+			return maxFatigue() - fatigue;
+		}
+		
 		public function maxHunger():Number
 		{
 			return 100;
