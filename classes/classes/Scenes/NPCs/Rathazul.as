@@ -746,21 +746,40 @@ private function buyDyeNevermind():void {
 }
 
 //Skin Oils
-private function buyOils():void {
+private function buyOils(fromPage2:Boolean = false):void {
 	spriteSelect(49);
-	clearOutput();
-	outputText("Rathazul smiles and pulls forth several bottles of skin oil.  Which type of skin oil would you like?");
-	outputText("\n\n<b>(-50 Gems)</b>");
-	player.gems -= 50;
-	statScreenRefresh();
+	if (!fromPage2) {
+		clearOutput();
+		outputText("Rathazul smiles and pulls forth several bottles of skin oil.  Which type of skin oil would you like?");
+		outputText("\n\n<b>(-50 Gems)</b>");
+		player.gems -= 50;
+		statScreenRefresh();
+	}
 	menu();
 	addButton(0, "Dark", buyOil, consumables.DARK_OL);
 	addButton(1, "Ebony", buyOil, consumables.EBONYOL);
 	addButton(2, "Fair", buyOil, consumables.FAIR_OL);
 	addButton(3, "Light", buyOil, consumables.LIGHTOL);
-	addButton(4, "Mahogany", buyOil, consumables.MAHOGOL);
-	addButton(5, "Olive", buyOil, consumables.OLIVEOL);
-	addButton(6, "Russet", buyOil, consumables.RUSS_OL);
+	addButton(4, "Next", buyOilsPage2);
+	addButton(5, "Mahogany", buyOil, consumables.MAHOGOL);
+	addButton(6, "Olive", buyOil, consumables.OLIVEOL);
+	addButton(7, "Russet", buyOil, consumables.RUSS_OL);
+	addButton(8, "Red", buyOil, consumables.RED__OL);
+	// Button 9 left empty in case, we add a third page here
+	addButton(10, "Orange", buyOil, consumables.ORANGOL);
+	addButton(11, "Yellow", buyOil, consumables.YELLOOL);
+	addButton(12, "Green", buyOil, consumables.GREENOL);
+	addButton(13, "White", buyOil, consumables.WHITEOL);
+	addButton(14, "Nevermind", buyOilNevermind);
+}
+private function buyOilsPage2():void {
+	spriteSelect(49);
+	menu();
+	addButton(0, "Blue", buyOil, consumables.BLUE_OL);
+	addButton(1, "Black", buyOil, consumables.BLACKOL);
+	addButton(2, "Purple", buyOil, consumables.PURPLOL);
+	addButton(3, "Silver", buyOil, consumables.SILVROL);
+	addButton(4, "Previous", buyOils, true);
 	addButton(14, "Nevermind", buyOilNevermind);
 }
 private function buyOil(oil:ItemType):void {
