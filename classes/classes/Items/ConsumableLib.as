@@ -4,7 +4,6 @@
 package classes.Items
 {
 	import classes.BaseContent;
-	import classes.BodyParts.Skin;
 	import classes.CoC;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Consumables.*;
