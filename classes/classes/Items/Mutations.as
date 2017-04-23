@@ -1237,6 +1237,7 @@
 				}
 				dynStats("spe", 3);
 				player.legCount = 4;
+				kGAMECLASS.rathazul.addMixologyXP(20);
 			}
 			//Remove odd eyes
 			if (changes < changeLimit && rand(5) == 0 && player.eyeType > EYES_HUMAN) {
@@ -1564,6 +1565,7 @@
 					updateClaws(player.clawType);
 					if (tainted) dynStats("cor", 1);
 					else dynStats("cor", 0);
+					kGAMECLASS.rathazul.addMixologyXP(20);
 				}
 			}
 			if (rand(5) == 0) updateOvipositionPerk(tfSource);
@@ -2291,14 +2293,15 @@
 					outputText("\n\nYour skin crawls, making you close your eyes and shiver.  When you open them again the world seems... different.  After a bit of investigation, you realize you've become shorter!\n", false);
 					player.tallness -= 1 + rand(3);
 				}
-				//Red skin!
-				if (rand(30) == 0 && player.skinTone != "red") {
+				//Red or orange skin!
+				if (rand(30) == 0 && ["red", "orange"].indexOf(player.skinTone) == -1) {
 					if (player.hasFur()) outputText("\n\nUnderneath your fur, your skin ", false);
 					else outputText("\n\nYour " + player.skinDesc + " ", false);
 					if (rand(2) == 0) player.skinTone = "red";
 					else player.skinTone = "orange";
 					outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinTone + ".", false);
 					updateClaws(player.clawType);
+					kGAMECLASS.rathazul.addMixologyXP(20);
 				}
 				return;
 			}
@@ -2308,14 +2311,15 @@
 				HPChange(20 + player.tou / 3, true);
 				dynStats("lus", 3, "cor", 1);
 			}
-			//Red skin!
-			if (rand(30) == 0 && player.skinTone != "red") {
+			//Red or orange skin!
+			if (rand(30) == 0 && ["red", "orange"].indexOf(player.skinTone) == -1) {
 				if (player.hasFur()) outputText("\n\nUnderneath your fur, your skin ", false);
 				else outputText("\n\nYour " + player.skinDesc + " ", false);
 				if (rand(2) == 0) player.skinTone = "red";
 				else player.skinTone = "orange";
 				outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinTone + ".", false);
 				updateClaws(player.clawType);
+				kGAMECLASS.rathazul.addMixologyXP(20);
 			}
 
 			//Shrinkage!
@@ -3769,6 +3773,7 @@
 				if (player.hasFur()) outputText("skin", false);
 				else outputText(player.skinDesc, false);
 				outputText(" turned " + player.skinTone + ".  No way!  It's staying, it really changed color!", false);
+				kGAMECLASS.rathazul.addMixologyXP(20);
 			}
 			//Face!
 			if (player.faceType != FACE_HUMAN && changes < changeLimit && rand(4) == 0 && player.earType == EARS_ELFIN) {
@@ -4090,6 +4095,7 @@
 					player.skinTone = "rough gray";
 					player.underBody.restore();
 					updateClaws(player.clawType);
+					kGAMECLASS.rathazul.addMixologyXP(20);
 					changes++;
 				}
 				else {
@@ -4099,6 +4105,7 @@
 					player.skinTone = "orange and black striped";
 					player.underBody.restore();
 					updateClaws(player.clawType);
+					kGAMECLASS.rathazul.addMixologyXP(20);
 					changes++;
 				}
 			}
@@ -5359,6 +5366,7 @@
 					tone: newSkinTones[1]   // ... and the color (tone)
 				});
 				outputText("\n\n<b>You're covered from head to toe in shiny " + player.skinTone + " scales with [underBody.skinFurScales] on your underside.</b>");
+				kGAMECLASS.rathazul.addMixologyXP(20);
 				changes++;
 			}
 			//-Lizard-like face.
@@ -7223,6 +7231,7 @@
 				outputText("\n\nYou absently bite down on the last of the tentacle, then pull your hand away, wincing in pain.  How did you bite your finger so hard?  Looking down, the answer becomes obvious; <b>your hand, along with the rest of your skin, is now the same aphotic color as the dormant tentacle was!</b>", false);
 				player.skinTone = "aphotic blue-black";
 				updateClaws(player.clawType);
+				kGAMECLASS.rathazul.addMixologyXP(20);
 				changes++;
 			}
 			//-eat more, grow more 'hair':
@@ -9591,6 +9600,7 @@
 				outputText("\n\nYour skin tingles ever so slightly as you skin’s color changes before your eyes. As the tingling diminishes, you find that your skin has turned " + skinToBeChosen + ".");
 				player.skinTone = skinToBeChosen;
 				updateClaws(player.clawType);
+				kGAMECLASS.rathazul.addMixologyXP(20);
 				changes++;
 			}
 			if (changes == 0) {
