@@ -27,55 +27,29 @@ package classes.Items.Consumables
 			var liquidDesc:String = "";
 			switch(_adj) {
 				case "smooth":
-					switch(Utils.rand(2)) { //Nested switch-and-case FTW!
-						case 0:
-							liquidDesc = "smooth liquid";
-							break;
-						case 1:
-							liquidDesc = "thick cream";
-							break;
-						default:
-							liquidDesc = "smooth liquid";
-					}
+					liquidDesc = randomChoice([
+						"smooth liquid",
+						"thick cream",
+					]);
 					break;
 				case "rough":
-					switch(Utils.rand(2)) { 
-						case 0:
-							liquidDesc = "abrasive goop";
-							break;
-						case 1:
-							liquidDesc = "rough textured goop";
-							break;
-						default:
-							liquidDesc = "abrasive goop";
-					}
+					liquidDesc = randomChoice([
+						"abrasive goop",
+						"rough textured goop",
+					]);
 					break;
 				case "sexy":
-					switch(Utils.rand(3)) {
-						case 0:
-							liquidDesc = "smooth liquid";
-							break;
-						case 1:
-							liquidDesc = "attractive cream";
-							break;
-						case 2:
-							liquidDesc = "beautiful cream";
-							break;
-						default:
-							liquidDesc = "smooth liquid";
-					}
+					liquidDesc = randomChoice([
+						"smooth liquid",
+						"attractive cream",
+						"beautiful cream",
+					]);
 					break;
 				case "clear":
-					switch(Utils.rand(2)) {
-						case 0:
-							liquidDesc = "smooth liquid";
-							break;
-						case 1:
-							liquidDesc = "thick cream";
-							break;
-						default:
-							liquidDesc = "smooth liquid";
-					}
+					liquidDesc = randomChoice([
+						"smooth liquid",
+						"thick cream",
+					]);
 					break;
 				default: //Failsafe
 					liquidDesc = "cream";
