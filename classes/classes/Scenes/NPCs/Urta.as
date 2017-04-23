@@ -985,7 +985,7 @@ internal function takeUrtaInTheButtPublically():void {
 	}
 	if (player.hasVagina()) {
 		outputText("Heat spreads through your loins as your " + player.vaginaDescript(0) + " engorges with blood, allowing your " + player.clitDescript() + " to ", false);
-		if (player.clitLength < 2) outputText("peep out", false);
+		if (player.getClitLength() < 2) outputText("peep out", false);
 		else outputText("grow to its full size", false);
 		outputText(".  ", false);
 		if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLICK) outputText("Moisture beads on your lips, signaling just how turned on this total violation is making you.", false);

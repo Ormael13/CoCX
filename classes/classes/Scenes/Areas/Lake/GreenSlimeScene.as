@@ -128,7 +128,7 @@ private function serviceLowCorruptionHighLust():void
 			//Foreplay and smearing goo about
 			outputText("Eventually your own arousal becomes unbearable and you let one of your hands slide down the creature's erection and body and up your leg, purring softly as a slight warm sensation spreads everywhere you get the green fluid the creature has been so readily leaking.  You let your hand crawl between your legs and gasp slightly as you run a hand over the lips of your " + player.vaginaDescript(0) + ", savoring the sensation before going to work on yourself.  ", false);
 			//Big clitties
-			if (player.clitLength >= 2) outputText("You moan and lean back slightly as you grip your " + player.clitDescript() + " between your thumb and forefinger, biting your lip at the intense sensations as you rub your thumb over your " + player.clitDescript() + " and shuddering in anticipation and delight.  ", false);
+			if (player.getClitLength() >= 2) outputText("You moan and lean back slightly as you grip your " + player.clitDescript() + " between your thumb and forefinger, biting your lip at the intense sensations as you rub your thumb over your " + player.clitDescript() + " and shuddering in anticipation and delight.  ", false);
 			//Small clitties
 			else outputText("You moan and lean back slightly as you start to flick your " + player.clitDescript() + ", the slime's fluid providing excellent lubrication and a luxurious warming feeling as you make small circles around your nub.  ", false);
 			//Jack off slime and make it human shapes

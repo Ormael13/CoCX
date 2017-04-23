@@ -387,7 +387,7 @@ public function useTentacleJojo():void {
 				else {
 					outputText("rubbing against your thighs and smearing them with lubricant while one of them easily sucks your " + player.clitDescript() + " inside.", false);
 					//(If big clit – 
-					if (player.clitLength >= 4) outputText("  You nearly cum on the spot from the clitoral stimulation; it's like you have a super-sensitive cock being licked by a thousand tongues.", false);
+					if (player.getClitLength() >= 4) outputText("  You nearly cum on the spot from the clitoral stimulation; it's like you have a super-sensitive cock being licked by a thousand tongues.", false);
 				}
 				outputText("\n\n", false);
 			}
@@ -412,7 +412,7 @@ public function useTentacleJojo():void {
 				if (player.hasVagina()) {
 					outputText("out your " + player.clitDescript() + " and sucking it inside.", false);
 					//(If big clit – 
-					if (player.clitLength >= 4) outputText("  You nearly cum on the spot from the clitoral stimulation; it's like you have a super-sensitive cock being licked by a thousand tongues.", false);
+					if (player.getClitLength() >= 4) outputText("  You nearly cum on the spot from the clitoral stimulation; it's like you have a super-sensitive cock being licked by a thousand tongues.", false);
 				}
 				else outputText("to rub itself along your taint, massaging the sensitive skin with its slimy lubricants.", false);
 				outputText("\n\n", false);
@@ -434,7 +434,7 @@ public function useTentacleJojo():void {
 	if (player.totalCocks() == 0 && player.hasVagina()) {
 		outputText("One of Jojo's tail-tentacles slides underneath his body, shooting forwards to seek out your " + player.clitDescript() + ".  It pauses an inch or two away and opens up a horrific orifice full of wriggling tentacles and slick fluids.  The next moment it lunges forwards and sucks it inside.", false);
 		//(If big clit – 
-		if (player.clitLength >= 4) outputText("  You nearly cum on the spot from the clitoral stimulation; it's like you have a super-sensitive cock being licked by a thousand tongues.", false);
+		if (player.getClitLength() >= 4) outputText("  You nearly cum on the spot from the clitoral stimulation; it's like you have a super-sensitive cock being licked by a thousand tongues.", false);
 		else outputText("  The sensation was unreal, and you find yourself wishing your clit was bigger so you could feel even more of the tendrils pleasure-hole.", false);
 		outputText("\n\n", false);
 	}
@@ -532,7 +532,7 @@ public function useTentacleJojo():void {
 		//(If big clit being sucked – 
 		if (player.cockTotal() <= 2 && player.balls == 0) {
 			outputText("The tentacle locked around your " + player.clitDescript() + " bulges out a bit as your clit throbs from the orgasm, before it sucks harder, making your clitty even larger.  You squeal from the raw sensation until the tentacle pops off, satisfied, leaving your clit looking like an angry red cock.  ", false);
-			player.clitLength += .25;
+			player.changeClitLength(.25);
 		}
 		outputText("Both tentacles pull out, still dripping whiteness that puddles in your holes.", false);
 	}
@@ -744,7 +744,7 @@ private function milkJojoFirst():void {
 		if (flags[kFLAGS.PC_COCK_MILKED_COUNTER] > 0) outputText("You know from experience that machine usually takes an hour before it will allow release", false);
 		else outputText("You figure the machine will probably pump him for quite a while before it allows release", false);
 		outputText(", and you're getting quite turned on from the show.  You shuck your " + player.armorName + " and reveal your " + player.vaginaDescript() + ", feeling your " + player.clitDescript() + " grow firm and hard.  For his part, Jojo doesn't even notice.  He just moans, squirms, and twitches any time he's brought particularly close to orgasm.  Seating yourself down below him, you let your fingers play across your now-wet folds, caressing your labia before you slide a few digits inside.  You brush your thumb against your clitoral hood and shudder from pleasure, enjoying watching your pet get milked as much as he's enjoying the milking.  ", false);
-		if (player.clitLength > 3) outputText("Your other hand grabs your penis-sized 'button' and begins to jack it, the action sending tremors of sensation through your " + player.hipDescript() + ".  ", false);
+		if (player.getClitLength() > 3) outputText("Your other hand grabs your penis-sized 'button' and begins to jack it, the action sending tremors of sensation through your " + player.hipDescript() + ".  ", false);
 		outputText("Feeling naughty, you sit up straight and lick at Jojo's twitching balls, observing his shame as he squirms on your nose.\n\n", false);
 		player.orgasm();
 	}

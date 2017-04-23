@@ -2650,7 +2650,7 @@ private function acceptARandomGenderFromASkunk():void {
 			player.breastRows[0].breastRating = 1;	
 		}
 		player.createVagina();
-		player.clitLength = 0.25;
+		player.setClitLength(0.25);
 		outputText("\n\nYou sigh in relief, examining your new endowments; well, that wasn't as bad as it could have been.");
 		outputText("\n\n\"<i>Excellent!  The reactions were exactly as I expected.  I would have you help me right now, but it's better if you get some rest first.  So return here when you're feeling rested and I'll see about breaking into that cute little pussy of yours.</i>\"");
 		outputText("\n\nYou nod your head, carefully get dressed, and then show yourself out.");
@@ -2662,7 +2662,7 @@ private function acceptARandomGenderFromASkunk():void {
 		outputText("\n\nYou sigh in relief, glad that your torment is over.  But before you get too comfortable, the feeling of something boiling makes itself known between your legs, and you set forth to stroke the flesh anew.  For a moment you're worried that you might actually be melting; the flesh there grows softer the more you knead and stroke it.  Suddenly there is wetness, a cascade of juices exploding from within, wetting your hands and Lianna's carpet, as the flesh there grows plump, wet and slick.  The heat concentrates on a small point, that quickly forms into a nub; your clit.");
 		outputText("\n\nWeak after these violent transformations, you don't even process that you've grown both sets of genders; instead you walk over to Lianna's bed and plop down there.");
 		player.createVagina();
-		player.clitLength = 0.25;
+		player.setClitLength(0.25);
 		player.createCock();
 		player.cocks[0].cockLength = 5;
 		player.cocks[0].cockThickness = 1;

@@ -41,7 +41,7 @@ package classes.Scenes.Areas.HighMountains
 				if (player.hasVagina()) {
 					if (player.isNaga()) outputText("  If you weren't a naga, you could scissor her.");
 					else addButton(3, "Scissor", harpyScissorSurprise, null, null, null, "Get into some girl-on-girl activity with the harpy.");
-					if (player.clitLength >= 3.5) addButton(4, "Clit Fuck", clitFuckAHarpy, null, null, null, "Fuck the harpy with your big clit.");
+					if (player.getClitLength() >= 3.5) addButton(4, "Clit Fuck", clitFuckAHarpy, null, null, null, "Fuck the harpy with your big clit.");
 				}
 				if (player.canOvipositSpider() && (player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS)) addButton(5, "Lay Eggs", spoidahsLegEggsInHarpeis, null, null, null, "Use your ovipositor to lay the eggs into harpy.");
 				addButton(14, "Leave", combat.cleanupAfterCombat);

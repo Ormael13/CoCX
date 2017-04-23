@@ -692,7 +692,7 @@ private function rubiSexMenu():void {
 	//[Fuck Rubi (if player has cock, OR at least a 4</i>\" clit)] [Dildo Fuck (If player has Deluxe Dildo)] [Tease] [Release (Only if Normal or Incubus Rubi who has been teased)] [Titfuck (Bimbo Rubi only)] [Give Item]
 	menu();
 	if (player.lust >= 33) {
-		if (player.hasCock() || (player.hasVagina() && player.clitLength >= 4)) addButton(0, "Fuck", fuckRubi);
+		if (player.hasCock() || (player.hasVagina() && player.getClitLength() >= 4)) addButton(0, "Fuck", fuckRubi);
 		if (player.hasKeyItem("Deluxe Dildo") >= 0) addButton(1, "Dildo Fuck", dildoFuckRubi);
 	}
 	addButton(2, "Tease", teaseRubi);
@@ -803,8 +803,8 @@ public function fuckRubi():void {
 		else size = 2;
 	}
 	else {
-		if (player.clitLength <= 4) size = 0;
-		else if (player.clitLength <= 12 || flags[kFLAGS.HYPER_HAPPY]) size = 1;
+		if (player.getClitLength() <= 4) size = 0;
+		else if (player.getClitLength() <= 12 || flags[kFLAGS.HYPER_HAPPY]) size = 1;
 		else size = 2;
 	}
 	if (size == 0) {

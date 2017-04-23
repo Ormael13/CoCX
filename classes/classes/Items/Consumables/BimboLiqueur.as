@@ -40,7 +40,7 @@ package classes.Items.Consumables
 					outputText("  Before you can even take a breath, an extremely peculiar sensation emanates from your crotch.  You can't see through your " + game.player.armorName + ", but you can certainly feel the vagina splitting " + (game.player.balls > 0 ? "from behind your testicles" : "your groin") + ".  Luckily, the cunt-forming doesn't yield any discomfort - on the contrary, you feel yourself falling farther into your chemically-dulled, libido-fueled rut.");
 					if (game.player.hipRating < 12 || game.player.buttRating < 12) outputText("  As if realizing the necessity of womanly proportions to attract the hard cocks your body now craves, your waist pinches slightly inward and your hips and butt swell.  You can't help but run a hand across your newly-feminized pelvis, admiring it.");
 					game.player.createVagina();
-					game.player.clitLength = 0.25;
+					game.player.setClitLength(0.25);
 					if (game.player.hipRating < 12) game.player.hipRating = 12;
 					if (game.player.buttRating < 12) game.player.buttRating = 12;
 				}
@@ -82,7 +82,7 @@ package classes.Items.Consumables
 				outputText("Moaning lewdly, you begin to sway your hips from side to side, putting on a show for anyone who might manage to see you.   You just feel so... sexy.  Too sexy to hide it.  Your body aches to show itself and feel the gaze of someone, anyone upon it.  Mmmm, it makes you so wet!  ");
 				if (!game.player.hasVagina()) {
 					game.player.createVagina();
-					game.player.clitLength = 0.25;
+					game.player.setClitLength(0.25);
 					game.player.vaginas[0].vaginalWetness = Appearance.VAGINA_WETNESS_SLICK;
 					if (game.player.isTaur()) outputText("Wait!? Wet? You wish you could touch yourself between the " + game.player.legs() + ", but you can tell from the fluid running down your hind-legs just how soaked your new vagina is.");
 					else outputText("Wait!?  Wet?  You touch yourself between the " + game.player.legs() + " and groan when your fingers sink into a sloppy, wet cunt.");
@@ -132,7 +132,7 @@ package classes.Items.Consumables
 				}
 				game.dynStats("sen", 20);
 				outputText("while the other toys with the juicy entrance of your folds.  Mmmm, it, like, feels too good not to touch yourself, and after being worried about getting all dumb and stuff, you need to relax.  Thinking is hard, but sex is so easy and, like, natural!  You lean back and start grunting as you plunge four fingers inside yourself, plowing your " + game.player.vaginaDescript(0) + " like no tomorrow.  By now, your " + game.player.clitDescript() + " is throbbing, and you give it an experimental ");
-				if (game.player.clitLength >= 3) outputText("jerk ");
+				if (game.player.getClitLength() >= 3) outputText("jerk ");
 				else outputText("caress ");
 				outputText("that makes your " + game.player.legs() + " give out as you cum, splattering female fluids as you convulse nervelessly on the ground.\n\n");
 

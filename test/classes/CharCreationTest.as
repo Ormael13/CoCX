@@ -58,7 +58,7 @@ package classes{
 			
 			cut.newGameGo();
 			
-			assertThat(player.clitLength, equalTo(CharCreation.NEW_GAME_PLUS_RESET_CLIT_LENGTH_MAX));
+			assertThat(player.getClitLength(), equalTo(CharCreation.NEW_GAME_PLUS_RESET_CLIT_LENGTH_MAX));
         }
 		
 				

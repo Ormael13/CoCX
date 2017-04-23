@@ -1227,7 +1227,7 @@ package classes.Scenes
 				}
 				getGame().dynStats("sen", 20);
 				outputText("while the other toys with the juicy entrance of your folds.  Mmmm, it, like, feels too good not to touch yourself, and after being worried about getting all dumb and stuff, you need to relax.  Thinking is hard, but sex is so easy and, like, natural!  You lean back and start grunting as you plunge four fingers inside yourself, plowing your " + player.vaginaDescript(0) + " like no tomorrow.  By now, your " + player.clitDescript() + " is throbbing, and you give it an experimental ");
-				if (player.clitLength >= 3) outputText("jerk ");
+				if (player.getClitLength() >= 3) outputText("jerk ");
 				else outputText("caress ");
 				outputText("that makes your " + player.legs() + " give out as you cum, splattering female fluids as you convulse nervelessly on the ground.\n\n");
 
@@ -1280,7 +1280,7 @@ package classes.Scenes
 					player.balls = 0;
 					player.ballSize = 1;
 					player.createVagina();
-					player.clitLength = .25;
+					player.setClitLength(.25);
 					player.removeCock(0, 1);
 					getGame().dynStats("cor", 1);
 				}
@@ -1303,7 +1303,7 @@ package classes.Scenes
 				player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_TIGHT;
 				player.vaginas[0].vaginalWetness = VAGINA_WETNESS_NORMAL;
 				player.vaginas[0].virgin = true;
-				player.clitLength = .25;
+				player.setClitLength(.25);
 				outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + player.vaginaDescript(0) + "</b>!", false);
 				getGame().dynStats("lus", 10);
 					}						
@@ -1315,7 +1315,7 @@ package classes.Scenes
 			player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_TIGHT;
 			player.vaginas[0].vaginalWetness = VAGINA_WETNESS_NORMAL;
 			player.vaginas[0].virgin = true;
-			player.clitLength = .25;
+			player.setClitLength(.25);
 			outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + player.vaginaDescript(0) + "</b>!", false);
 			getGame().dynStats("lus", 10);
 		}

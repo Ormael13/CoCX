@@ -301,9 +301,9 @@
 			outputText(" with foreign wetness. The vines' lubricant is surprisingly warm on your skin, and the feeling of rivulets of it running down the crack of your [butt] and over your [asshole] is surprisingly pleasant.");
 			if (player.isBiped()) outputText(" Your [legs] are eased open, but who are you to stop them? You're as wet as anything, and if spreading wide is the next step towards scratching your itch, so be it.");
 			outputText(" Your [clit] must look like a");
-			if (player.clitLength > 6) outputText(" glistening, cum-soaked shaft");
-			else if (player.clitLength > 3) outputText(" tiny, cum-soaked cock");
-			else if (player.clitLength > 1) outputText(" swollen, lube-lacquered gumball");
+			if (player.getClitLength() > 6) outputText(" glistening, cum-soaked shaft");
+			else if (player.getClitLength() > 3) outputText(" tiny, cum-soaked cock");
+			else if (player.getClitLength() > 1) outputText(" swollen, lube-lacquered gumball");
 			else outputText(" glistening, pink target");
 			outputText(" by now. You roll your [hips] as much as your position will allow. Your passion inflamed pussy has thus far avoided the tentacles' affections, though it's the one part that wants them more than anything.");
 			
@@ -327,8 +327,8 @@
 			
 			//Back to normal.
 			outputText("\n\nMore cum splatters across the exterior of your womanhood a moment before an enclosure envelops your [clit].");
-			if (player.clitLength > 6) outputText(" It stretches some around the cock-sized button");
-			else if (player.clitLength > 3) outputText(" It has no trouble handling your plus-sized button");
+			if (player.getClitLength() > 6) outputText(" It stretches some around the cock-sized button");
+			else if (player.getClitLength() > 3) outputText(" It has no trouble handling your plus-sized button");
 			else outputText(" Your tiny button seems dwarfed by the tube enveloping it");
 			outputText(", but that doesn't make it feel heavenly. It gently pulsates around your buzzer, rippling and squeezing, rhythmically whipping electric lashes of sensation into your fuck-crazed body one after another.");
 			

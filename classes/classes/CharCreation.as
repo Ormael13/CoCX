@@ -1142,7 +1142,7 @@
 					break;
 				case PerkLib.BigClit:
 					player.femininity -= 5;
-					player.clitLength = 1;
+					player.setClitLength(1);
 					player.createPerk(PerkLib.BigClit, 1.25, 0, 0, 0);
 					break;
 				case PerkLib.Fertile:

@@ -938,7 +938,7 @@ internal function sophieLostCombat():void {
 			//All girls get cuntfuck
 			cuntFuck = sophieVictoryPussyGrind;
 			//big clit girls
-			if (player.clitLength >= 5) clitFuck = fuckDatClit;
+			if (player.getClitLength() >= 5) clitFuck = fuckDatClit;
 		}
 		if (player.hasItem(consumables.BIMBOLQ)) bimbo = sophieBimbo.bimbotizeMeCaptainSophie;
 	}
@@ -1070,9 +1070,9 @@ private function sophieVictoryPussyGrind():void {
 	outputText("  You shift closer until you can feel the heat of her sex wafting against your own.  With erotic precision, you lower your " + player.vaginaDescript(0) + " until Sophie's large, puffy folds contact your own.  Both of you gasp with pleasure, but it's clear from her tone that the bird-matron isn't into it.\n\n", false);
 	
 	//(small clit)
-	if (player.clitLength < 2) outputText("Your " + player.clitDescript() + " puffs up inside your folds, turning into a hard little bump of pleasure.  Moaning happily, you start to drag your " + player.vaginaDescript(0) + " back and forth against Sophie's wet gash, shivering each time you bump into her own rapidly engorging clitoris.  ", false);
+	if (player.getClitLength() < 2) outputText("Your " + player.clitDescript() + " puffs up inside your folds, turning into a hard little bump of pleasure.  Moaning happily, you start to drag your " + player.vaginaDescript(0) + " back and forth against Sophie's wet gash, shivering each time you bump into her own rapidly engorging clitoris.  ", false);
 	//(large clit) 
-	else if (player.clitLength < 5) outputText("Your " + player.clitDescript() + " puffs up, protruding from your folds like a miniature cock.  Moaning happily, you start to pump your " + player.vaginaDescript(0) + " back and forth across Sophie's wet gash, shivering as your " + player.clitDescript() + " continually slips in and out of it.  The harpy's own nub quickly grows hard, and you feel it bumping against you pleasantly while your hips gyrate against her.  ", false);
+	else if (player.getClitLength() < 5) outputText("Your " + player.clitDescript() + " puffs up, protruding from your folds like a miniature cock.  Moaning happily, you start to pump your " + player.vaginaDescript(0) + " back and forth across Sophie's wet gash, shivering as your " + player.clitDescript() + " continually slips in and out of it.  The harpy's own nub quickly grows hard, and you feel it bumping against you pleasantly while your hips gyrate against her.  ", false);
 	//(cock-clit)
 	else outputText("Your " + player.clitDescript() + " puffs up, growing to an obscene, cock-like size.  You moan happily and begin to stroke the incredibly sensitive protrusion.   The whole time your hips continue to force your " + player.vaginaDescript(0) + " against the harpy's pussy, and you feel her own clitty budding up and getting hard.   It rubs between your girl-cum-slicked bodies, making your hips shake and twitch with delightful sensations.  ", false);
 	outputText("Loud squishes and fluid noises fill the air as the scissoring intensifies, and in no time Sophie's body is covered in a thin sheen of sweat and blushing hard.  ", false);

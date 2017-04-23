@@ -46,7 +46,7 @@
 				else {
 					if (player.hasVagina()) {
 						outputText("prods at your groin, circling around your " + player.vaginaDescript(0) + " deliberately, as if seeking other toys to play with.  ", false);
-						if (player.clitLength > 4) outputText("It brushes your " + player.clitDescript() + " then curls around it, squeezing and gently caressing it with a slow, pleasing rhythm.  ", false);
+						if (player.getClitLength() > 4) outputText("It brushes your " + player.clitDescript() + " then curls around it, squeezing and gently caressing it with a slow, pleasing rhythm.  ", false);
 					}
 					else {
 						outputText("prods your groin before curling around to circle your " + player.assholeDescript() + " playfully.  The entire tendril pulses in a pleasant, relaxing way.  ", false);
@@ -59,7 +59,7 @@
 				}
 				if (player.hasVagina()) {
 					outputText("The violation of your " + player.vaginaDescript() + " is swift and painless.  The fungus' slippery lubricants make it quite easy for it to slip inside, and you find your " + player.vaginaDescript() + " engorging with pleasure in spite of your need to escape.  The tentacle folds up so that it can rub its stalk over your " + player.clitDescript() + ", ", false);
-					if (player.clitLength > 3) outputText("and once it discovers how large it is, it wraps around it and squeezes.  It feels good!  ", false);
+					if (player.getClitLength() > 3) outputText("and once it discovers how large it is, it wraps around it and squeezes.  It feels good!  ", false);
 					else outputText("and it has quite an easy time making your bud grow hard and sensitive.  The constant rubbing feels good!  ", false);
 				}
 				outputText("One 'lucky' stalk manages to find your " + player.assholeDescript() + ".  As soon as it touches your rear 'entrance', it lunges forward to penetrate you.  The fluids coating the tentacle make your muscles relax, allowing it to slide inside you with ease.\n\n", false);

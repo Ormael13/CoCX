@@ -904,7 +904,6 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.ballSize = player.ballSize;
 		saveFile.data.hoursSinceCum = player.hoursSinceCum;
 		saveFile.data.fertility = player.fertility;
-		saveFile.data.clitLength = player.clitLength;
 		
 		//Preggo stuff
 		saveFile.data.pregnancyIncubation = player.pregnancyIncubation;
