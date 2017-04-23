@@ -101,7 +101,6 @@ package classes.Scenes.Dungeons.Factory
 				outputText("Her palm caresses your crotch, stoking the warmth inside you until it blazes white-hot with new sensation.  Your skin ripples and parts, ", false);
 				if (player.biggestTitSize() <= 1) {
 					outputText("pushed apart the thick flesh of a powerful demonic member, complete with two swollen balls.", false);
-					player.gender = 1;
 					player.createCock();
 					player.cocks[0].cockLength = 10;
 					player.cocks[0].cockThickness = 2;
@@ -111,7 +110,6 @@ package classes.Scenes.Dungeons.Factory
 				}
 				else {
 					outputText("gushing with fluids as it shapes itself into a hungry demonic cunt.", false);  
-					player.gender = 2;
 					player.createVagina();
 					player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
 				}

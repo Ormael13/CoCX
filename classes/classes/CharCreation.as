@@ -551,9 +551,6 @@
 			//Breasts
 			player.createBreastRow();
 			
-			//Gender set
-			player.gender = GENDER_MALE;
-			
 			//Choices
 			clearOutput();
 			outputText("You are a man.  Your upbringing has provided you an advantage in strength and toughness.\n\nWhat type of build do you have?");
@@ -581,9 +578,6 @@
 			//Breasts
 			player.createBreastRow();
 			
-			//Gender set
-			player.gender = GENDER_FEMALE;
-			
 			//Choices
 			clearOutput();
 			outputText("You are a woman.  Your upbringing has provided you an advantage in speed and intellect.\n\nWhat type of build do you have?");
@@ -591,7 +585,6 @@
 		}
 
 		private function isAHerm():void {
-			player.gender = GENDER_HERM;
 			//Attributes
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				player.str+=1;
@@ -618,9 +611,6 @@
 			
 			//Breasts
 			player.createBreastRow();
-			
-			//Gender set
-			player.gender = GENDER_HERM;
 			
 			//Choices
 			outputText("\n\nYou are a hermaphrodite.  Your upbringing has provided you an average in stats.\n\nWhat type of build do you have?", true);
@@ -1638,7 +1628,6 @@
 				}
 			}
 			outputText("\n\nAfter looking around the room for a while, you look into the mirror and begin to recollect who you are...");
-			player.genderCheck();
 			player.breastRows = [];
 			player.cocks = [];
 			player.vaginas = new Vector.<VaginaClass>();

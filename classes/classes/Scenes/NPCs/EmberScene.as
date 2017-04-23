@@ -3812,7 +3812,6 @@ package classes.Scenes.NPCs
 				flags[kFLAGS.EMBER_EGGS]++;
 			}
 			player.createStatusEffect(StatusEffects.EmberNapping, 5, 0, 0, 0);
-			player.genderCheck();
 		}
 
 //Requirements (Either)

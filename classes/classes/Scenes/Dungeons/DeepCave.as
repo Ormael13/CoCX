@@ -208,7 +208,6 @@ package classes.Scenes.Dungeons
 				clearOutput();
 				outputText("Vala forces a bottle into your throat before your defeated form has a chance to react, and you grunt with pleasure as a new gash opens between your " + player.legs() + "!", false);
 				player.createVagina();
-				player.gender = 2;
 				doNext(loseToValaFemale);
 			}
 		}
@@ -654,7 +653,6 @@ package classes.Scenes.Dungeons
 				outputText("He squints down at you with a bemused look and laughs, \"<i>How did you lose your gender anyhow?  Never mind, we've got to do something about that!</i>\"\n\n", false);
 				outputText("Zetaz grabs a bottle, uncorks it, and crams it against your lips while you're still too dazed to resist.  He massages your throat to make you swallow the milk-like fluid, and in seconds the skin of your groin splits to form a new, virgin pussy.\n\n", false);
 				player.createVagina();
-				player.gender = 2;
 			}
 			//(fork to male/female/herm)
 			if (player.gender == 1) malesZetazOver();

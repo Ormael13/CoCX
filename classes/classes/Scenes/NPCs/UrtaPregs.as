@@ -684,7 +684,6 @@ public function PCGivesBirf():void {
 	if (player.vaginas.length == 0) {
 		outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ", false);
 		player.createVagina();
-		player.genderCheck();
 	}
 	outputText("You double over in pain as you feel a rush of fluids escape your [pussy].  Looks like your water broke.  You recall promising Urta that you'd go to the hospital before actually going into labor, but right now there's nothing you can do.  It hurts and you know you won't make it there in time, so you rush to your " + camp.homeDesc() + " and lay down on your " + camp.bedDesc() + ", silently praying that Urta will swing by to assist you.");
 	//1st Time:
@@ -2692,7 +2691,6 @@ private function acceptARandomGenderFromASkunk():void {
 		outputText("\n\n\"<i>Very well.  Don't worry about the mess, I'll clean it all up.  It's just too bad I didn't have anything to catch all this discharge with.  Those samples are all contaminated now, so I'll still need your help collecting more.</i>\"  You ignore her and focus on hauling yourself out of bed and getting decent to go out in public.");
 		outputText("\n\nShe swipes one of the ropes of cum sticking to her body and pops it into her mouth.  \"<i>Tasty.  I wonder if that was an effect of the potion or if you naturally taste good.  Something to test for sometime...</i>\"  By this point you've already gotten dressed, and you promptly leave as quickly as you can.  \"<i>See ya!</i>\"  You hear her yell after you, as you hurriedly make your way out.");
 	}
-	player.genderCheck();
 	doNext(camp.returnToCampUseOneHour);
 }
 

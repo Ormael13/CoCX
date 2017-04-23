@@ -259,7 +259,6 @@
 			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//Demonic changes - higher chance with higher corruption.
 			if (rand(40) + player.cor / 3 > 35 && tainted) demonChanges(player);
-			player.genderCheck();
 			if (rand(4) == 0 && tainted) outputText(player.modFem(5, 2), false);
 			if (rand(4) == 0 && tainted) outputText(player.modThickness(30, 2), false);
 			player.refillHunger(10);
@@ -561,7 +560,6 @@
 							player.cocks[0].cockType = CockTypesEnum.HORSE;
 							player.clitLength = .25;
 						}
-						player.genderCheck();
 					}
 					changes++;
 				}
@@ -1579,7 +1577,6 @@
 				outputText(player.modFem(90, 1), false);
 				if (rand(3) == 0) outputText(player.modTone(20, 2), false);
 			}
-			player.genderCheck();
 			player.refillHunger(20);
 		}
 
@@ -1766,7 +1763,6 @@
 						}
 					}
 				}
-				player.genderCheck();
 			}
 			//Knotty knot pepper!
 			if (type == 4) {
@@ -2629,7 +2625,6 @@
 				if (player.cocks.length > 0) {
 					player.killCocks(1);
 					outputText("\n\n", false);
-					player.genderCheck()
 				}
 				//remove balls
 				if (player.balls > 0) {
@@ -2656,7 +2651,6 @@
 				if (player.cocks.length > 0) {
 					player.killCocks(-1);
 					outputText("\n\n", false);
-					player.genderCheck();
 				}
 				if (player.balls > 0) {
 					player.balls = 0;
@@ -2688,7 +2682,6 @@
 					outputText("\n\nYour vagina clenches in pain, doubling you over.  You slip a hand down to check on it, only to feel the slit growing smaller and smaller until it disappears, taking your clit with it! <b> Your vagina is gone!</b>", false);
 					player.removeVagina(0, 1);
 					player.clitLength = .5;
-					player.genderCheck();
 				}
 				//Dickz
 				if (player.cocks.length > 0) {
@@ -2752,7 +2745,6 @@
 					if (player.bRows() > 1 || player.buttRating > 5 || player.hipRating > 5) outputText("  ", false);
 					player.removeVagina(0, 1);
 					player.clitLength = .5;
-					player.genderCheck();
 				}
 				//Kill extra boobages
 				if (player.bRows() > 1) {
@@ -3210,7 +3202,6 @@
 					}
 					else {
 						player.killCocks(1);
-						player.genderCheck();
 					}
 				}
 				//if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
@@ -3223,7 +3214,6 @@
 					outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + player.vaginaDescript(0) + "</b>!", false);
 
 					changes++;
-					player.genderCheck();
 					dynStats("lus", 10);
 				}
 			}
@@ -3930,9 +3920,7 @@
 				player.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
 				player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
 				player.clitLength = .4;
-				player.genderCheck();
 				return;
-
 			}
 			//3b.Infinite Vagina
 			if (player.vaginalCapacity() < 9000) {
@@ -4019,7 +4007,6 @@
 				player.createVagina();
 				player.clitLength = .25;
 				dynStats("sen", 10);
-				player.genderCheck();
 			}
 			//WANG GROWTH - TIGGERSHARK ONLY
 			if (type == 1 && (!player.hasCock()) && changes < changeLimit && rand(3) == 0) {
@@ -4035,7 +4022,6 @@
 				outputText("!", false);
 				player.createCock(7, 1.4);
 				dynStats("lib", 4, "sen", 5, "lus", 20);
-				player.genderCheck();
 				changes++;
 			}
 			//(Requires the player having two testicles)
@@ -4582,7 +4568,6 @@
 			if (player.cocks.length > 1 && rand(3) == 0 && changes < changeLimit) {
 				player.killCocks(1);
 				outputText("\n\nYou have a strange feeling as your crotch tingles.  Opening your " + player.armorName + ", <b>you realize that one of your cocks have vanished completely!</b>", false);
-				player.genderCheck()
 				changes++;
 			}
 			//Remove additional balls
@@ -6161,7 +6146,6 @@
 				player.createVagina();
 				player.clitLength = .25;
 				dynStats("sen", 10);
-				player.genderCheck();
 			}
 			//-Remove extra breast rows
 			if (changes < changeLimit && player.breastRows.length > 1 && rand(3) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
@@ -6944,7 +6928,6 @@
 				player.createPerk(PerkLib.FutaForm, 0, 0, 0, 0);
 				player.createPerk(PerkLib.FutaFaculties, 0, 0, 0, 0);
 				outputText("(Gained Perks - Futa Form, Futa Faculties)</b>", false);
-				player.genderCheck();
 				return;
 			}
 			//HP restore for bros!
@@ -7029,7 +7012,6 @@
 				outputText("At the same time, your " + player.vaginaDescript(0) + " burns hot, nearly feeling on fire.  You cuss in a decidedly masculine way for a moment before the pain fades to a dull itch.  Scratching it, you discover your lady-parts are gone.  Only a sensitive patch of skin remains.\n\n", false);
 				player.removeVagina(0, 1);
 			}
-			player.genderCheck();
 			//(below max masculinity)
 			if (player.femininity > 0) {
 				outputText("Lastly, the change hits your face.  You can feel your jawbones shifting and sliding around, your skin changing to accommodate your face's new shape.  Once it's finished, you feel your impeccable square jaw and give a wide, easy-going grin.  You look awesome!\n\n", false);

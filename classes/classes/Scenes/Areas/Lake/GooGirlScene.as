@@ -279,7 +279,6 @@ package classes.Scenes.Areas.Lake
 			if (player.vaginas.length == 0) {
 				outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ", false);
 				player.createVagina();
-				player.genderCheck();
 			}
 			outputText("There is a lurching in your belly that steals the breath from you. As seconds pass, the quivering kicks increase and you're forced to the ground as your womb feels like it's been set aflame by the heat pouring from your stowaway goo-girl. You pant and spread your labia with two fingers, the chill of your hands on your inflamed sex so sweet that you almost cum from the mere touch. Your cervix clenches involuntarily and you try to relax as much as possible, but the slime inside of you hardly needs the help. Squishing and slurping in gouts of syrupy fluid, she trickles from your uterus, sliding out of your tunnel in spurting gouts. You sigh and let her force her seething warmth from within you, the small puddle of ooze growing larger as it pools together. Finally, the small, red heart pops out of your tunnel and you allow yourself a big gulp of chill air to resuscitate your seared lungs.\n\n", false);
 			monster = new GooGirl();//because if we don't, the gooColor4() goes crazy.

@@ -1286,7 +1286,6 @@ package classes.Scenes
 				}
 				else {
 					player.killCocks(1);
-					player.genderCheck();
 					getGame().dynStats("cor", 0.2);
 				}
 			}
@@ -1306,7 +1305,6 @@ package classes.Scenes
 				player.vaginas[0].virgin = true;
 				player.clitLength = .25;
 				outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + player.vaginaDescript(0) + "</b>!", false);
-				player.genderCheck();
 				getGame().dynStats("lus", 10);
 					}						
 				
@@ -1319,7 +1317,6 @@ package classes.Scenes
 			player.vaginas[0].virgin = true;
 			player.clitLength = .25;
 			outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + player.vaginaDescript(0) + "</b>!", false);
-			player.genderCheck();
 			getGame().dynStats("lus", 10);
 		}
 		
