@@ -46,7 +46,7 @@ package classes.Items.Consumables
 				game.addButtonDisabled(1, "Fur", "You have no fur!");
 			}
 
-			if (game.player.underBody.type != UNDER_BODY_TYPE_NONE && game.player.underBody.skin.hasFur()) {
+			if (game.player.hasFurryUnderBody()) {
 				outputText("\n\nYou have " + game.player.underBody.skin.furColor + " fur on your underbody.");
 				if (game.player.furColor != _color) game.addButton(2, "Under Fur", dyeUnderBodyFur);
 				else game.addButtonDisabled(2, "Under Fur", "Your already have " + _color + " fur on your underbody!");
