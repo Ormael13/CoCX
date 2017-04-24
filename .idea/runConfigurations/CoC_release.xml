@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="CoC-release (Chrome)" type="FlashRunConfigurationType" factoryName="Flash App">
+  <configuration default="false" name="CoC-release" type="FlashRunConfigurationType" factoryName="Flash App">
     <option name="BCName" value="CoC-release" />
     <option name="IOSSimulatorSdkPath" value="" />
     <option name="adlOptions" value="" />
@@ -15,10 +15,10 @@
     <option name="launchUrl" value="false" />
     <option name="launcherParameters">
       <LauncherParameters>
-        <option name="browserFamily" value="CHROME" />
-        <option name="launcherType" value="Browser" />
+        <option name="browser" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
+        <option name="launcherType" value="Player" />
         <option name="newPlayerInstance" value="false" />
-        <option name="playerPath" value="C:/Program Files/Adobe/Adobe Flash Builder 4.7 (64 Bit)/player/win/11.4/FlashPlayerDebugger.exe" />
+        <option name="playerPath" value="$FLEX_SDK$/runtimes/player/11.1/win/FlashPlayerDebugger.exe" />
       </LauncherParameters>
     </option>
     <option name="mobileRunTarget" value="Emulator" />
