@@ -1302,7 +1302,7 @@ public static const UNKNOWN_FLAG_NUMBER_01293:int                               
 public static const UNKNOWN_FLAG_NUMBER_01294:int                                   = 1294;
 public static const UNKNOWN_FLAG_NUMBER_01295:int                                   = 1295;
 public static const UNKNOWN_FLAG_NUMBER_01296:int                                   = 1296;
-public static const UNKNOWN_FLAG_NUMBER_01297:int                                   = 1297;
+public static const RATHAZUL_MIXOLOGY_XP:int                                        = 1297; // 0-200, currently for selling new skin oils only
 public static const DISABLE_QUICKLOAD_CONFIRM:int                                   = 1298; // Disable the confirmation-dialog on quickload
 public static const DISABLE_QUICKSAVE_CONFIRM:int                                   = 1299; // Disable the confirmation-dialog on quicksave
 public static const BENOIT_EYES_TALK_UNLOCKED:int                                   = 1300; // Player has talked to Benoit(e) about basilisk eyes

@@ -45,6 +45,37 @@
 			else encounterRathazul();
 		}
 
+		public function mixologyXP():Number
+		{
+			//Failsafe
+			if (flags[kFLAGS.RATHAZUL_MIXOLOGY_XP] < 0) {
+				flags[kFLAGS.RATHAZUL_MIXOLOGY_XP] = 0;
+			}
+
+			if (flags[kFLAGS.RATHAZUL_MIXOLOGY_XP] > 200) {
+				flags[kFLAGS.RATHAZUL_MIXOLOGY_XP] = 200;
+			}
+
+			// In case you've ditched the second value of this status effect, remove this conditional completely (Stadler76)
+			if (player.hasStatusEffect(StatusEffects.MetRathazul) &&
+				flags[kFLAGS.RATHAZUL_MIXOLOGY_XP] < 200 &&
+			    flags[kFLAGS.RATHAZUL_MIXOLOGY_XP] < player.statusEffectv2(StatusEffects.MetRathazul) * 4) {
+				flags[kFLAGS.RATHAZUL_MIXOLOGY_XP] = player.statusEffectv2(StatusEffects.MetRathazul) * 4;
+			}
+
+			return flags[kFLAGS.RATHAZUL_MIXOLOGY_XP];
+		}
+
+		public function addMixologyXP(amount:uint):void
+		{
+			mixologyXP(); // no-op to fix the flag just in time
+			flags[kFLAGS.RATHAZUL_MIXOLOGY_XP] += amount;
+
+			if (flags[kFLAGS.RATHAZUL_MIXOLOGY_XP] > 200) {
+				flags[kFLAGS.RATHAZUL_MIXOLOGY_XP] = 200;
+			}
+		}
+
 public function encounterRathazul():void {
 	spriteSelect(49);
 	clearOutput();
@@ -162,6 +193,8 @@ private function rathazulWorkOffer():Boolean {
 	var debimbo:Boolean = false;
 	var reductos:Boolean = false;
 	var lethiciteDefense:Function = null;
+
+	mixologyXP(); // no-op to fix the flag just in time
 	if (flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1 && flags[kFLAGS.RATHAZUL_SILK_ARMOR_TYPE] > 0) {
 		collectSilkArmor();
 		return true;
@@ -720,11 +753,12 @@ private function buyDyes():void {
 		addButton(7, "Blue", buyDye, consumables.BLUEDYE);
 		addButton(8, "Green", buyDye, consumables.GREEN_D);
 		addButton(9, "Orange", buyDye, consumables.ORANGDY);
-		addButton(10, "Purple", buyDye, consumables.PURPDYE);
-		addButton(11, "Pink", buyDye, consumables.PINKDYE);
+		addButton(10, "Yellow", buyDye, consumables.YELLODY);
+		addButton(11, "Purple", buyDye, consumables.PURPDYE);
+		addButton(12, "Pink", buyDye, consumables.PINKDYE);
 	}
 	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 12) {
-		addButton(12, "Rainbow", buyDye, consumables.RAINDYE);
+		addButton(13, "Rainbow", buyDye, consumables.RAINDYE);
 	}
 	addButton(14, "Nevermind", buyDyeNevermind);
 }
@@ -734,6 +768,7 @@ private function buyDye(dye:ItemType):void {
 	outputText(images.showImage("rathazul-buy-dye"));
 	inventory.takeItem(dye, returnToRathazulMenu);
 	statScreenRefresh();
+	addMixologyXP(4);
 	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 }
 private function buyDyeNevermind():void {
@@ -746,21 +781,63 @@ private function buyDyeNevermind():void {
 }
 
 //Skin Oils
-private function buyOils():void {
+private function buyOils(fromPage2:Boolean = false):void {
 	spriteSelect(49);
-	clearOutput();
-	outputText("Rathazul smiles and pulls forth several bottles of skin oil.  Which type of skin oil would you like?");
-	outputText("\n\n<b>(-50 Gems)</b>");
-	player.gems -= 50;
-	statScreenRefresh();
+	if (!fromPage2) {
+		clearOutput();
+		outputText("Rathazul smiles and pulls forth several bottles of skin oil.  Which type of skin oil would you like?");
+		outputText("\n\n<b>(-50 Gems)</b>");
+		player.gems -= 50;
+		statScreenRefresh();
+	}
 	menu();
 	addButton(0, "Dark", buyOil, consumables.DARK_OL);
 	addButton(1, "Ebony", buyOil, consumables.EBONYOL);
 	addButton(2, "Fair", buyOil, consumables.FAIR_OL);
 	addButton(3, "Light", buyOil, consumables.LIGHTOL);
-	addButton(4, "Mahogany", buyOil, consumables.MAHOGOL);
-	addButton(5, "Olive", buyOil, consumables.OLIVEOL);
-	addButton(6, "Russet", buyOil, consumables.RUSS_OL);
+	if (mixologyXP() >= 80) {
+		addButton(4, "Next", buyOilsPage2);
+	}
+	addButton(5, "Mahogany", buyOil, consumables.MAHOGOL);
+	addButton(6, "Olive", buyOil, consumables.OLIVEOL);
+	addButton(7, "Russet", buyOil, consumables.RUSS_OL);
+	if (mixologyXP() >= 50) {
+		addButton(8, "Red", buyOil, consumables.RED__OL);
+		// Button 9 left empty in case, we add a third page here
+		addButton(10, "Green", buyOil, consumables.GREENOL);
+		addButton(11, "White", buyOil, consumables.WHITEOL);
+		addButton(12, "Blue", buyOil, consumables.BLUE_OL);
+		addButton(13, "Black", buyOil, consumables.BLACKOL);
+	}
+	addButton(14, "Nevermind", buyOilNevermind);
+}
+private function buyOilsPage2():void {
+	if (mixologyXP() < 80) { // Failsafe, should probably never happen (Stadler76)
+		buyOils(true);
+		return;
+	}
+	spriteSelect(49);
+	menu();
+	addButton(0, "Purple", buyOil, consumables.PURPLOL);
+	addButton(1, "Silver", buyOil, consumables.SILVROL);
+	if (mixologyXP() >= 100) {
+		addButton(2, "Orange", buyOil, consumables.ORANGOL);
+		addButton(3, "Yellow", buyOil, consumables.YELLOOL);
+	}
+	addButton(4, "Previous", buyOils, true);
+	if (mixologyXP() >= 120) { // Rathazul discovers mixing blue and green ... wow!! o.O
+		addButton(5, "Yellow Green", buyOil, consumables.YELGROL);
+		addButton(6, "Spring Green", buyOil, consumables.SPRGROL);
+		addButton(7, "Cyan", buyOil, consumables.CYAN_OL);
+		addButton(8, "Ocean Blue", buyOil, consumables.OCBLUOL);
+	}
+	// Button 9 left empty in case, we add a third page here
+	if (mixologyXP() >= 150) { // Rathazul discovers mixing blue and red ... oh my gawd!!! o.O
+		addButton(10, "Electric Violet", buyOil, consumables.ELVIOOL);
+		addButton(11, "Magenta", buyOil, consumables.MAGENOL);
+		addButton(12, "Deep Pink", buyOil, consumables.DPPNKOL);
+		addButton(13, "Pink", buyOil, consumables.PINK_OL);
+	}
 	addButton(14, "Nevermind", buyOilNevermind);
 }
 private function buyOil(oil:ItemType):void {
@@ -769,6 +846,7 @@ private function buyOil(oil:ItemType):void {
 	outputText(images.showImage("rathazul-buy-oil"));
 	inventory.takeItem(oil, returnToRathazulMenu);
 	statScreenRefresh();
+	addMixologyXP(4);
 	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 }
 private function buyOilNevermind():void {
@@ -801,6 +879,7 @@ private function buyLotion(lotion:ItemType):void {
 	outputText(images.showImage("rathazul-buy-lotion"));
 	inventory.takeItem(lotion, returnToRathazulMenu);
 	statScreenRefresh();
+	addMixologyXP(4);
 	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 }
 private function buyLotionNevermind():void {
@@ -823,6 +902,7 @@ private function buyReducto():void {
 		player.gems -= cost;
 		inventory.takeItem(consumables.REDUCTO, returnToRathazulMenu);
 		statScreenRefresh();
+		addMixologyXP(4);
 		player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 	}
 	else {
@@ -842,6 +922,7 @@ private function buyGroPlus():void {
 		player.gems -= cost;
 		inventory.takeItem(consumables.GROPLUS, returnToRathazulMenu);
 		statScreenRefresh();
+		addMixologyXP(4);
 		player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 	}
 	else {
@@ -855,6 +936,7 @@ private function buyPuritySomething(item:ItemType):void {
 	player.gems -= 100;
 	statScreenRefresh();
 	inventory.takeItem(item, returnToRathazulMenu);
+	addMixologyXP(4);
 	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 }
 
@@ -896,6 +978,7 @@ private function rathazulPurifyItem(itype:ItemType, result:ItemType):void {
 	inventory.takeItem(result, returnToRathazulMenu);
 	player.gems -= 20;
 	statScreenRefresh();
+	addMixologyXP(8);
 	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 }
 
@@ -1023,6 +1106,7 @@ private function makeADeBimboDraft():void {
 	player.gems -= 250;
 	player.consumeItem(consumables.SMART_T,5);
 	statScreenRefresh();
+	addMixologyXP(8);
 	player.addStatusValue(StatusEffects.MetRathazul,2,1);
 	inventory.takeItem(consumables.DEBIMBO, returnToRathazulMenu);
 }
@@ -1041,6 +1125,8 @@ private function rathazulMakesPureHoney():void {
 	outputText("You hand over a vial of bee honey and the 25 gems.");
 	outputText("\n\n\"<i>I'll see what I can do,</i>\" he says as he takes the bee honey and begin brewing something. ");
 	outputText("\n\nA few minutes later, he comes back with the crystal vial that contains glittering liquid.  \"<i>It's ready. The honey should be pure now,</i>\" he says. He hands you over the vial of honey and goes back to working.  ");
+	addMixologyXP(8);
+	player.addStatusValue(StatusEffects.MetRathazul,2,1);
 	inventory.takeItem(consumables.PURHONY, returnToRathazulMenu);
 }
 
@@ -1063,6 +1149,8 @@ private function rathazulMakesMilkPotion():void {
 	outputText("You hand over the ingredients and 250 gems.");
 	outputText("\n\n\"<i>I'll see what I can do,</i>\" he says as he takes the ingredients and begin brewing something. ");
 	outputText("\n\nA few minutes later, he comes back with the potion.  \"<i>It's ready. If you have some issues with lactation or you want to produce milk forever, drink this. Keep in mind that it might be irreversible,</i>\" he says. He hands you over the potion and goes back to working.  ");
+	addMixologyXP(8);
+	player.addStatusValue(StatusEffects.MetRathazul,2,1);
 	inventory.takeItem(consumables.MILKPTN, returnToRathazulMenu);
 }
 
@@ -1085,6 +1173,7 @@ private function rathazulMakesTaurPotion():void {
 	statScreenRefresh();
 	outputText("You hand over two vials of Equinum, one vial of Minotaur Blood and one hundred gems to Rathazul, which he gingerly takes them and proceeds to make a special potion for you.");
 	outputText("\n\nAfter a while, the rat hands you a vial labeled \"Taurinum\" and nods.");
+	addMixologyXP(8);
 	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 	inventory.takeItem(consumables.TAURICO, returnToRathazulMenu);
 }
