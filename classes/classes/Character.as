@@ -385,8 +385,14 @@ import classes.GlobalFlags.kFLAGS;
 
 		public function isButtPregnant():Boolean { return _buttPregnancyType != 0; }
 	
-		//fertility must be >= random(0-beat)
-		//If arg == 1 then override any contraceptives and guarantee fertilization
+		/**
+		 * Impregnate the character with the given pregnancy type if the total fertility 
+		 * is greater or equal to the roll.
+		 * @param	type the type of pregnancy (@see PregnancyStore.PREGNANCY_xxx)
+		 * @param	incubation the incubation duration in hours
+		 * @param	beat possible maximum roll for an impregnation check. 
+		 * @param	arg specify a large bonus or malus to fertility (0 = no action, positive number = guaranteed pregnancy, negative number = no pregnancy)
+		 */
 		public function knockUp(type:int = 0, incubation:int = 0, beat:int = 100, arg:int = 0):void
 		{
 			//Contraceptives cancel!
