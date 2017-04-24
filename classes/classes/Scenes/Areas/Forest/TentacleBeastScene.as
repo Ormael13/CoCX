@@ -619,8 +619,8 @@ private function tentacleRapeContinuationForFemales():void {
 	if (player.vaginas.length == 1) { //single coochie
 		outputText("Satisfied, the creature drops you smartly, withdraws its limbs from you, and lumbers away.  Covered completely in cum, you see that your clitoris has swollen up to ");
 		//Big clit girls get huge clits
-		if ((player.findPerk(PerkLib.BigClit) >= 0 && player.clitLength > 2) || player.clitLength > 3)
-			outputText("almost " + num2Text(Math.floor(player.clitLength * 1.75)) + " inches in length. ");
+		if ((player.findPerk(PerkLib.BigClit) >= 0 && player.getClitLength() > 2) || player.getClitLength() > 3)
+			outputText("almost " + num2Text(Math.floor(player.getClitLength() * 1.75)) + " inches in length. ");
 		//normal girls get big clits
 		else
 			outputText("almost four inches in length.  Bruised and sore, you pass into unconsciousness ");
@@ -634,20 +634,20 @@ private function tentacleRapeContinuationForFemales():void {
 	//Very corrupt
 	else outputText("too intoxicated with lust to continue the pleasure. ");
 	//If has big-clit grow to max of 6"
-	if (player.clitLength < 7 && player.clitLength >= 3.5 && player.findPerk(PerkLib.BigClit) >= 0) {
-		player.clitLength += .1 + player.cor / 100;
-		outputText("Your massive clitty eventually diminishes, retaining a fair portion of its former glory.  It is now " + int(player.clitLength * 10) / 10 + " inches long when aroused, ");
-		if (player.clitLength < 5)
+	if (player.getClitLength() < 7 && player.getClitLength() >= 3.5 && player.findPerk(PerkLib.BigClit) >= 0) {
+		player.changeClitLength(.1 + player.cor / 100);
+		outputText("Your massive clitty eventually diminishes, retaining a fair portion of its former glory.  It is now " + int(player.getClitLength() * 10) / 10 + " inches long when aroused, ");
+		if (player.getClitLength() < 5)
 			outputText("like a tiny cock.");
-		if (player.clitLength >= 5 && player.clitLength < 7)
+		if (player.getClitLength() >= 5 && player.getClitLength() < 7)
 			outputText("like a slick throbbing cock.");
-		if (player.clitLength >= 7)
+		if (player.getClitLength() >= 7)
 			outputText("like a big thick cock.");
 	}
 	//Grow clit if smaller than 3.5"
-	else if (player.clitLength < 3.5) {
+	else if (player.getClitLength() < 3.5) {
 		outputText("In time your clit returns to a more normal size, but retains a bit of extra volume.");
-		player.clitLength += .2;
+		player.changeClitLength(.2);
 	}
 	//Mention that clit doesn't grow if your big enough.
 	else outputText("In time it returns to its normal size, losing all the extra volume.");

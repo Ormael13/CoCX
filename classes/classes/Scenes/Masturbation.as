@@ -764,11 +764,11 @@ package classes.Scenes {
 				if (player.vaginas.length == 1) {
 					outputText("You let your hand roam over your pussy-lips, slowly teasing yourself, diving deeper into your folds to arouse and expose your clit.  ");
 					//Smaller clits
-					if (player.clitLength < 1.5) {
+					if (player.getClitLength() < 1.5) {
 						outputText("You stroke and tease around the sensitive little pleasure bud, letting your fingers plumb the depths below.  ");
 					}
 					//Big clits
-					else if (player.clitLength < 4.5) {
+					else if (player.getClitLength() < 4.5) {
 						outputText("Your large clit is already poking out from your ");
 						if (player.vaginas[0].vaginalWetness > VAGINA_WETNESS_DRY) outputText("glistening ");
 						outputText("lips.  You gently stroke and touch it until it grows as large as a tiny cock.  ");
@@ -1824,9 +1824,9 @@ package classes.Scenes {
 					if (player.gender == 3) outputText("fem");
 					outputText("sex quivers as the pleasure overwhelms you, robbing you of muscle control, your passage rippling and contracting around your fingers.  ");
 					//Big clitty bonus!
-					if (player.clitLength >= 4.5)
+					if (player.getClitLength() >= 4.5)
 						outputText("A hand finds your cock-like clit, squeezing and caressing it as the cunt-wrenching orgasm wracks your body, the over-sized joy-buzzer nearly making you black out from the sensations it generates.  ");
-					else if (player.clitLength > 1.5)
+					else if (player.getClitLength() > 1.5)
 						outputText("Every muscle-twitch seems to stretch your big oversensitive clitty larger, causing you to squeal with delight at every bump and touch against it.  ");
 					//Wet orgasms
 					if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) outputText("A veritable gush of fluid explodes from your nethers, pulsing in time with the ripples of your " + player.vaginaDescript() + ".  ");
@@ -1960,11 +1960,11 @@ package classes.Scenes {
 				//high cor
 				else outputText("You hold the fake dong, squeezing it and giggling at the realistic texture.  You can't wait to try it out.");
 				outputText("  A drop of pink aphrodisiac leaks from the tip, offering you a hint of the pleasure you're in for.   You make sure to catch it on your crotch, letting the fluid seep into your " + player.vaginaDescript() + ".  Warmth radiates outwards, spreading to your thighs as your " + player.clitDescript());
-				if (player.clitLength < .5)
+				if (player.getClitLength() < .5)
 					outputText(" becomes hard and sensitive");
-				else if (player.clitLength < 3)
+				else if (player.getClitLength() < 3)
 					outputText(" peeks through your folds");
-				else if (player.clitLength < 6)
+				else if (player.getClitLength() < 6)
 					outputText(" fills with blood, growing erect like a tiny cock");
 				else outputText(" fills with blood, twitching and pulsating like a man's cock");
 				outputText(".  You ");

@@ -68,7 +68,7 @@ package classes.Items.Consumables
 			clearOutput();
 			game.player.slimeFeed();
 			outputText("You sink the needle into your clit, nearly crying with how much it hurts.  You push down the plunger and the pain vanishes as your clit starts to grow.\n\n");
-			game.player.clitLength++;
+			game.player.changeClitLength(1);
 			outputText("Your " + game.player.clitDescript() + " stops growing after an inch of new flesh surges free of your netherlips.  It twitches, feeling incredibly sensitive.");
 			game.dynStats("sen", 2, "lus", 10);
 			game.inventory.itemGoNext();

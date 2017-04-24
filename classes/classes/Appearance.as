@@ -1484,7 +1484,7 @@
 			//Length Adjective - 50% chance
 			if (rand(2) == 0) {
 				//small clits!
-				if (i_creature.clitLength <= .5) {
+				if (i_creature.getClitLength() <= .5) {
 					options = ["tiny ",
 						"little ",
 						"petite ",
@@ -1493,11 +1493,11 @@
 					description += randomChoice(options);
 				}
 				//"average".
-				if (i_creature.clitLength > .5 && i_creature.clitLength < 1.5) {
+				if (i_creature.getClitLength() > .5 && i_creature.getClitLength() < 1.5) {
 					//no size comment
 				}
 				//Biggies!
-				if (i_creature.clitLength >= 1.5 && i_creature.clitLength < 4) {
+				if (i_creature.getClitLength() >= 1.5 && i_creature.getClitLength() < 4) {
 					options = ["large ",
 						"large ",
 						"substantial ",
@@ -1506,7 +1506,7 @@
 					description += randomChoice(options);
 				}
 				//'Uge
-				if (i_creature.clitLength >= 4) {
+				if (i_creature.getClitLength() >= 4) {
 					options = ["monster ",
 						"tremendous ",
 						"colossal ",

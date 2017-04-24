@@ -328,7 +328,7 @@ private function joeysMassageWifNoExtraJizz():void {
 		//(Female orgasm)
 		else {
 			outputText("Though his spit and cum-lubed tongue is quite skilled, deftly tasting your labia and channel, the bunny adds a pair of fingers to the mix, pulling the musky tunnel wide and letting more of his slippery seed inside you.  He uses it like lube, sliding his digits around while he sucks your " + player.clitDescript() + " ", false);
-			if (player.clitLength >= 4) outputText("like a practiced whore fellating a john.", false);
+			if (player.getClitLength() >= 4) outputText("like a practiced whore fellating a john.", false);
 			else outputText("like a professional pussy-licker.", false);
 			outputText("  You give your " + player.nippleDescript(0) + "s a hard tweak, torturing them as the building pleasure grows.  Aware of this, Joey curls a finger to press directly on a sensitive spot, deep inside you, and then you're arching your back and howling with unleashed release.\n\n", false);
 		}

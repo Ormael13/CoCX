@@ -193,7 +193,7 @@ private function bunbunFucksYourVag():void {
 	outputText("How much pre-cum can she squirt?!\n\n", false);
 	
 	outputText("You reach down and grab the bunny's hips for support as she bounces you again, higher this time.  A solid five or six inches of her length slide in and out of your " + player.vaginaDescript(0) + " before you slap into her, and a split second later, you're airborne again.  She bounces you harder and harder until each thrust of her muscled thighs is launching you nearly a foot off her loins and letting gravity guide you back down her shaft.", false);
-	if (player.clitLength >= 4) outputText("  Your " + player.clitDescript() + " bounces on her belly, tingling like mad every time it slaps into her tanned, sweat-slicked skin.", false);
+	if (player.getClitLength() >= 4) outputText("  Your " + player.clitDescript() + " bounces on her belly, tingling like mad every time it slaps into her tanned, sweat-slicked skin.", false);
 	if (player.biggestLactation() >= 1) outputText("  Milk begins to bead on your " + player.allBreastsDescript() + " from the sensation of the bunny's brutal, almost mechanical fucking.", false);
 	outputText("  The eager girl moans, \"<i>Ooooh fuckfuckyes... gotta fuck... gotta breed... ungh... eggs eggs eggs!</i>\"\n\n", false);
 	
@@ -205,7 +205,7 @@ private function bunbunFucksYourVag():void {
 	outputText("\n\n", false);
 	
 	outputText("The girl underneath you is thrashing and moaning, chanting, \"<i>Yes... eggs eggs EGGS! YES!</i>\" while her ovipositor-like cock robs you of your strength and slides egg-shaped bulges inside you.  Amazingly, your " + player.vaginaDescript(0) + " is awash with pleasure, and you reach down to ", false);
-	if (player.clitLength >= 4) outputText("fondle your " + player.clitDescript() + " a moment before wrapping your hand around it and stroking the girl-cock excitedly.", false);
+	if (player.getClitLength() >= 4) outputText("fondle your " + player.clitDescript() + " a moment before wrapping your hand around it and stroking the girl-cock excitedly.", false);
 	else outputText("caress your " + player.clitDescript() + " a moment before you start to circle it with a finger, teasing it expertly.", false);
 	if (player.cockTotal() > 0) {
 		outputText("  " + player.SMultiCockDesc() + " twitches and drools ", false);

@@ -242,8 +242,8 @@ private function drinkFountainEndowment():void {
 	//(+Big Clit)
 	if (rand(4) == 0 && player.hasVagina()) {
 		outputText("\n\nYour " + player.clitDescript() + " plumps up, visibly parting your lips even when you aren't turned on.  It probably ", false);
-		player.clitLength += 2;
-		if (player.clitLength < 6) outputText("gets as big as a cock", false);
+		player.changeClitLength(2);
+		if (player.getClitLength() < 6) outputText("gets as big as a cock", false);
 		else outputText("gets bigger than most cocks", false);
 		outputText(" now!", false);
 		changed = true;
@@ -905,7 +905,7 @@ private function exgartuanSleepSurprise():void {
 				if (player.hasScales()) outputText("scales", false);
 				else outputText("skin", false);
 				outputText(" surrounding your sex, teasing you with the barest hint of sensation while your ignorant hands maul your " + player.cockDescript(0) + " at Exgartuan's behest.  If only you had taken care of yourself earlier, you might have had the control to slip a digit into your " + player.vaginaDescript(0), false);
-				if (player.clitLength > 3) outputText(" or stroke your " + player.clitDescript(), false);
+				if (player.getClitLength() > 3) outputText(" or stroke your " + player.clitDescript(), false);
 				outputText(" to fully satisfy ALL of yourself.", false);
 				outputText("\n\n", false);
 			}

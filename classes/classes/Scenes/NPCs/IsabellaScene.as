@@ -508,7 +508,7 @@ public function izzyGivesSmallWangsFreeOral():void {
 		if (player.balls > 0) outputText("She cups your " + player.ballsDescriptLight() + " and begins caressing the twitching orbs, giving them gentle squeezes each time the pleasure forces them to involuntarily contract towards your groin.", false);
 		else if (player.hasVagina()) {
 			outputText("She probes your " + player.vaginaDescript() + " with her fingers, running them over your engorged lips and giving your " + player.clitDescript() + " ", false);
-			if (player.clitLength < 3) outputText("gentle squeezes", false);
+			if (player.getClitLength() < 3) outputText("gentle squeezes", false);
 			else outputText("firm pumps", false);
 			outputText(".", false);
 		}
@@ -1256,8 +1256,8 @@ public function victoryAgainstIzzzzzySixtyNine():void {
 	//(VAGOOZLES) 
 	if (player.gender == 2) {
 		outputText("Isabella returns to her task with gusto, muff-diving deep and hard to plant her exquisitely long tongue far inside you.  Her lips circle your " + player.clitDescript() + ", ", false);		
-		if (player.clitLength >= 5) outputText("struggling with the cock-like appendage", false);
-		else if (player.clitLength >= 2) outputText("suckling the large button with slow, measured inhalations", false);
+		if (player.getClitLength() >= 5) outputText("struggling with the cock-like appendage", false);
+		else if (player.getClitLength() >= 2) outputText("suckling the large button with slow, measured inhalations", false);
 		else outputText("devouring the tiny bud", false);
 		outputText(" even as the smooth skin of her tongue inadvertently caresses it.  You writhe against her with your juices ", false);
 		if (player.wetness() < 3) outputText("coating her tongue", false);

@@ -387,7 +387,7 @@
 			}
 			if (player.hasVagina()) {
 				outputText("  Your " + player.clitDescript() + " engorges, ", false);
-				if (player.clitLength < 3) outputText("parting your lips.", false);
+				if (player.getClitLength() < 3) outputText("parting your lips.", false);
 				else outputText("bursting free of your lips and bobbing under its own weight.", false);
 				if (player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_NORMAL) outputText("  Wetness builds inside you as your " + player.vaginaDescript(0) + " tingles and aches to be filled.", false);
 				else if (player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_SLICK) outputText("  A trickle of wetness escapes your " + player.vaginaDescript(0) + " as your body reacts to the desire burning inside you.", false);
@@ -555,10 +555,10 @@
 						if (player.cocks.length == 0) {
 							outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment... shifting into the shape of a small ribbed minotaur-like penis!  <b>You now have a horse-cock!</b>", false);
 							player.createCock();
-							player.cocks[0].cockLength = player.clitLength + 2;
+							player.cocks[0].cockLength = player.getClitLength() + 2;
 							player.cocks[0].cockThickness = 1;
 							player.cocks[0].cockType = CockTypesEnum.HORSE;
-							player.clitLength = .25;
+							player.setClitLength(.25);
 						}
 					}
 					changes++;
@@ -1469,7 +1469,7 @@
 				player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_TIGHT;
 				player.vaginas[0].vaginalWetness = VAGINA_WETNESS_NORMAL;
 				player.vaginas[0].virgin = true;
-				player.clitLength = .25;
+				player.setClitLength(.25);
 				if (player.fertility <= 5) player.fertility = 6;
 				outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + player.vaginaDescript(0) + "</b>!", false);
 			}
@@ -1536,12 +1536,12 @@
 				if (player.skinTone == "blue" || player.skinTone == "purple" || player.skinTone == "indigo" || player.skinTone == "shiny black") {
 					if (player.vaginas.length > 0) {
 						outputText("\n\nYour heart begins beating harder and harder as heat floods to your groin.  You feel your clit peeking out from under its hood, growing larger and longer as it takes in more and more blood.", false);
-						if (player.clitLength > 3 && player.findPerk(PerkLib.BigClit) < 0) outputText("  After some time it shrinks, returning to its normal aroused size.  You guess it can't get any bigger.", false);
-						if (player.clitLength > 5 && player.findPerk(PerkLib.BigClit) >= 0) outputText("  Eventually it shrinks back down to its normal (but still HUGE) size.  You guess it can't get any bigger.", false);
-						if (((player.findPerk(PerkLib.BigClit) >= 0) && player.clitLength < 6)
-								|| player.clitLength < 3) {
+						if (player.getClitLength() > 3 && player.findPerk(PerkLib.BigClit) < 0) outputText("  After some time it shrinks, returning to its normal aroused size.  You guess it can't get any bigger.", false);
+						if (player.getClitLength() > 5 && player.findPerk(PerkLib.BigClit) >= 0) outputText("  Eventually it shrinks back down to its normal (but still HUGE) size.  You guess it can't get any bigger.", false);
+						if (((player.findPerk(PerkLib.BigClit) >= 0) && player.getClitLength() < 6)
+								|| player.getClitLength() < 3) {
 							temp += 2;
-							player.clitLength += (rand(4) + 2) / 10;
+							player.changeClitLength((rand(4) + 2) / 10);
 						}
 						dynStats("sen", 3, "lus", 8);
 					}
@@ -1550,7 +1550,7 @@
 						player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_TIGHT;
 						player.vaginas[0].vaginalWetness = VAGINA_WETNESS_NORMAL;
 						player.vaginas[0].virgin = true;
-						player.clitLength = .25;
+						player.setClitLength(.25);
 						outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + player.vaginaDescript(0) + "</b>!", false);
 					}
 				}
@@ -2681,7 +2681,7 @@
 				if (player.vaginas.length > 0) {
 					outputText("\n\nYour vagina clenches in pain, doubling you over.  You slip a hand down to check on it, only to feel the slit growing smaller and smaller until it disappears, taking your clit with it! <b> Your vagina is gone!</b>", false);
 					player.removeVagina(0, 1);
-					player.clitLength = .5;
+					player.setClitLength(.5);
 				}
 				//Dickz
 				if (player.cocks.length > 0) {
@@ -2744,7 +2744,7 @@
 					outputText("Your vagina clenches in pain, doubling you over.  You slip a hand down to check on it, only to feel the slit growing smaller and smaller until it disappears, taking your clit with it!\n\n", false);
 					if (player.bRows() > 1 || player.buttRating > 5 || player.hipRating > 5) outputText("  ", false);
 					player.removeVagina(0, 1);
-					player.clitLength = .5;
+					player.setClitLength(.5);
 				}
 				//Kill extra boobages
 				if (player.bRows() > 1) {
@@ -3197,7 +3197,7 @@
 						player.balls = 0;
 						player.ballSize = 1;
 						player.createVagina();
-						player.clitLength = .25;
+						player.setClitLength(.25);
 						player.removeCock(0, 1);
 					}
 					else {
@@ -3210,7 +3210,7 @@
 					player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_TIGHT;
 					player.vaginas[0].vaginalWetness = VAGINA_WETNESS_NORMAL;
 					player.vaginas[0].virgin = true;
-					player.clitLength = .25;
+					player.setClitLength(.25);
 					outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + player.vaginaDescript(0) + "</b>!", false);
 
 					changes++;
@@ -3919,7 +3919,7 @@
 				player.createVagina();
 				player.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
 				player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
-				player.clitLength = .4;
+				player.setClitLength(.4);
 				return;
 			}
 			//3b.Infinite Vagina
@@ -4005,7 +4005,7 @@
 				//(neither)
 				else outputText("\n\nAn itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your " + player.armorName + " to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>", false);
 				player.createVagina();
-				player.clitLength = .25;
+				player.setClitLength(.25);
 				dynStats("sen", 10);
 			}
 			//WANG GROWTH - TIGGERSHARK ONLY
@@ -4358,7 +4358,7 @@
 				player.createVagina();
 				player.vaginas[0].virgin = virgin;
 			}
-			player.clitLength = .25;
+			player.setClitLength(.25);
 			//Tighten butt!
 			player.buttRating = 2;
 			player.hipRating = 2;
@@ -6144,7 +6144,7 @@
 				//(neither)
 				else outputText("\n\nAn itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your " + player.armorName + " to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>", false);
 				player.createVagina();
-				player.clitLength = .25;
+				player.setClitLength(.25);
 				dynStats("sen", 10);
 			}
 			//-Remove extra breast rows
@@ -6463,9 +6463,9 @@
 				changes++;
 			}
 			//-Shorten clits to reasonable size
-			if (player.clitLength >= 4 && changes < changeLimit && rand(5) == 0) {
+			if (player.getClitLength() >= 4 && changes < changeLimit && rand(5) == 0) {
 				outputText("\n\nPainful pricks work through your " + player.clitDescript() + ", all the way into its swollen clitoral sheath.  Gods, it feels afire with pain!  Agony runs up and down its length, and by the time the pain finally fades, the feminine organ has lost half its size.", false);
-				player.clitLength /= 2;
+				player.setClitLength(player.getClitLength() / 2);
 				changes++;
 			}
 			//Find biggest dick!

@@ -41,7 +41,7 @@
 				}
 				if (player.hasVagina()) {
 					outputText("become stained with feminine moisture", false);
-					if (player.clitLength > 3) outputText(" as your clit swells up in a more sensitive imitation of a cock", false);
+					if (player.getClitLength() > 3) outputText(" as your clit swells up in a more sensitive imitation of a cock", false);
 				}
 				if (player.gender == 0) outputText("rub the sensitive skin of your thighs and featureless groin in a way that makes you wish you had a sex of some sort", false);
 				outputText(".\n", false);
