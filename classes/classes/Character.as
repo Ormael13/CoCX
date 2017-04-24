@@ -400,17 +400,20 @@ import classes.GlobalFlags.kFLAGS;
 				return;
 				
 			var bonus:int = 0;
-			//If arg = 1 (always pregnant), bonus = 9000
+			
+			// apply fertility bonus or malus
 			if (forcePregnancy >= 1)
 				bonus = 9000;
 			if (forcePregnancy <= -1)
 				bonus = -9000;
-			//If unpregnant and fertility wins out:
+				
+			//If not pregnant and fertility wins out:
 			if (pregnancyIncubation == 0 && totalFertility() + bonus > Math.floor(Math.random() * maxRoll) && hasVagina())
 			{
 				knockUpForce(type, incubation);
 				trace("PC Knocked up with pregnancy type: " + type + " for " + incubation + " incubation.");
 			}
+			
 			//Chance for eggs fertilization - ovi elixir and imps excluded!
 			if (type != PregnancyStore.PREGNANCY_IMP && type != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS && type != PregnancyStore.PREGNANCY_ANEMONE)
 			{
