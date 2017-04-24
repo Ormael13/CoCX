@@ -1382,7 +1382,7 @@ internal function receiveAllTheCowTOngues():void {
 	outputText("\n\nYou can feel orgasm fast approaching.  Digging your fingers into Isabella's scalp to push her face further into your crotch so that just a little more of her great big tongue can delve into you.  Finally, you feel the very tip of her licker flick against the mouth of your cervix.");
 
 	outputText("\n\nThat touch to your deepest reaches sets you off.  You cry out and cum, clamping down hard on Isabella's head and tongue so that she cannot pull out, entrapped as you squirt fem-cum onto her face and hair, soaking her in your juices as you buck your hips");
-	if (player.clitLength < 1) outputText(", your clit grinding into her nose,");
+	if (player.getClitLength() < 1) outputText(", your clit grinding into her nose,");
 	outputText(" until you've finally soaked her in enough cum to let her out.");
 
 	outputText("\n\nYou grunt as she exits, but your orgasm carries on and on until you're a half-conscious wreck, writhing in Isabella's chair as the cow looms over you, a self-satisfied grin on her face.  ");

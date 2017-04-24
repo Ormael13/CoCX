@@ -45,6 +45,15 @@ package classes.Items.Consumables
 				outputText("\n\nYou have no fur.");
 				game.addButtonDisabled(1, "Fur", "You have no fur!");
 			}
+
+			if (game.player.hasFurryUnderBody()) {
+				outputText("\n\nYou have " + game.player.underBody.skin.furColor + " fur on your underbody.");
+				if (game.player.furColor != _color) game.addButton(2, "Under Fur", dyeUnderBodyFur);
+				else game.addButtonDisabled(2, "Under Fur", "Your already have " + _color + " fur on your underbody!");
+			} else {
+				outputText("\n\nYou have no special or furry underbody.");
+				game.addButtonDisabled(2, "Under Fur", "You have no special or furry underbody!");
+			}
 			
 			game.addButton(4, "Nevermind", dyeCancel);
 			return true;
@@ -75,6 +84,19 @@ package classes.Items.Consumables
 			outputText("You rub the dye into your fur, then use a bucket of cool lakewater to rinse clean a few minutes later.  ");
 			game.player.furColor = _color;
 			outputText("You now have " + game.player.furColor + " fur.");
+			if (game.player.lust > 50) {
+				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
+				game.dynStats("lus", -15);
+			}
+			game.inventory.itemGoNext();
+		}
+		
+		private function dyeUnderBodyFur():void
+		{
+			clearOutput();
+			outputText("You rub the dye into your fur on your underside, then use a bucket of cool lakewater to rinse clean a few minutes later.  ");
+			game.player.underBody.skin.furColor = _color;
+			outputText("You now have " + game.player.underBody.skin.furColor + " fur on your underside.");
 			if (game.player.lust > 50) {
 				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
 				game.dynStats("lus", -15);

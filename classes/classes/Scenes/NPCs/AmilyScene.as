@@ -6412,7 +6412,7 @@ package classes.Scenes.NPCs
 			outputText("\n\n", false);
 
 			//[(if PC's clit is big enough)
-			if (player.clitLength >= 4) outputText("Amily then crushes your sensitive clit between her breasts, working her mounds over it like it was a cock. You gasp and moan as Amily smiles up at you, happy to see your reaction to her stimulation.", false);
+			if (player.getClitLength() >= 4) outputText("Amily then crushes your sensitive clit between her breasts, working her mounds over it like it was a cock. You gasp and moan as Amily smiles up at you, happy to see your reaction to her stimulation.", false);
 			//(else)
 			else outputText("Amily decides to tease your sensitive clit with her wet nipples, circling the little nub and sending electric shocks up your spine; you can't help but moan; Amily just smiles and grinds her generous breasts harder against your pussy.", false);
 			outputText("\n\n", false);
@@ -6598,7 +6598,7 @@ package classes.Scenes.NPCs
 
 			outputText("The pleasure is overwhelming, Amily's practiced licks are able to send you into multiple orgasms, at one point you have to resort to supporting yourself on her head; something she doesn't seem to mind. In fact, realizing what kind of effect her pussy eating is having just eggs her on. She pushes and grinds her nose on your pussy; bumping on your clit with each lick; sending shocks of pleasure up your spine.", false);
 			//[(if PC has a big clit)
-			if (player.clitLength >= 4) outputText("  One of her hands begins stroking your erect clit as if it was a cock. The pleasure of the act nearly overloads your senses.", false);
+			if (player.getClitLength() >= 4) outputText("  One of her hands begins stroking your erect clit as if it was a cock. The pleasure of the act nearly overloads your senses.", false);
 			outputText("\n\n", false);
 
 			outputText("You feel the biggest orgasm yet build up, and you decide to reward your obedient little cumslut by making sure she gets all of it. \"<i>Clamp down on my pussy slut. I'm about to reward you for all your effort.</i>\" Amily loses no time in obeying your orders. She gives your pussy one final lap, and you feel it.", false);

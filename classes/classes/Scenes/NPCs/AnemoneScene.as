@@ -159,7 +159,7 @@ package classes.Scenes.NPCs
 				var anal:Function =null;
 				var eggs:Function =null;
 				if (player.canOviposit()) eggs = anemoneGetsLayedByBeePositor;
-				if (player.hasVagina() && player.clitLength >= 4) anal = anemoneButtPlugginz;
+				if (player.hasVagina() && player.getClitLength() >= 4) anal = anemoneButtPlugginz;
 				else if (player.hasCock() && player.cockThatFits(48) >= 0) anal = anemoneButtPlugginz;
 				//Normal male: -requires dick of area < 36
 				if (player.cockTotal() > 0) cockRape = rapeAnemoneWithDick;
@@ -254,7 +254,7 @@ package classes.Scenes.NPCs
 				//[(if balls)
 				if (player.balls > 0) outputText("  As your thrusts get faster your " + player.sackDescript() + " starts to slap into the tickly and quite-venomous feelers fringing her pussy, getting hotter and hotter as the aphrodisiac builds in your " + player.ballsDescriptLight() + ".  Your body answers with swelling, causing your sack to feel bigger and tighter with every slap.", false);
 				//[(if noballs and clit > 6")
-				else if (player.clitLength >= 6) outputText("  As your thrusts into the blue girl arouse you, your " + player.clitDescript() + " begins to swell with blood.  Pretty soon it's so erect that a particularly violent thrust mashes it into the feelers at the base of her labia, delivering a shock that almost makes you collapse.  The anemone, her reverie interrupted as you temporarily stop pumping, looks down.  Noticing the massive girl-cock sticking out of your " + player.vaginaDescript(0) + ", she reaches between her legs and gives the tip a flick, grinning with sadistic playfulness.  Your eyes cross at that, sending her into a spasm of giggling.  Irritated but aroused by the abuse of your " + player.clitDescript() + ", you move your thumb over her own tiny blue button and begin flicking it in revenge as you renew your pumping.", false);
+				else if (player.getClitLength() >= 6) outputText("  As your thrusts into the blue girl arouse you, your " + player.clitDescript() + " begins to swell with blood.  Pretty soon it's so erect that a particularly violent thrust mashes it into the feelers at the base of her labia, delivering a shock that almost makes you collapse.  The anemone, her reverie interrupted as you temporarily stop pumping, looks down.  Noticing the massive girl-cock sticking out of your " + player.vaginaDescript(0) + ", she reaches between her legs and gives the tip a flick, grinning with sadistic playfulness.  Your eyes cross at that, sending her into a spasm of giggling.  Irritated but aroused by the abuse of your " + player.clitDescript() + ", you move your thumb over her own tiny blue button and begin flicking it in revenge as you renew your pumping.", false);
 				outputText("\n\n", false);
 
 				outputText("The anemone's eyes roll back in her head as she reaches her climax first, hips shaking and penis squirting a glob of semen that drools down the side.  ", false);
@@ -467,7 +467,7 @@ package classes.Scenes.NPCs
 						else outputText(" all the way", false);
 						outputText(" into your " + player.vaginaDescript(0) + ", sending a tingle through your lower lips and exposing your clitoris.", false);
 						//[(if clit > 5")
-						if (player.clitLength > 5) outputText("  Having achieved this, she pulls her hand out and wraps another bundle of tentacles around your " + player.clitDescript() + ", then begins jerking it off in time to her efforts on your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + ".  Your eyes roll back in your head and your mouth gapes involuntarily at the rough stimulation of your swollen chick-stick.", false);
+						if (player.getClitLength() > 5) outputText("  Having achieved this, she pulls her hand out and wraps another bundle of tentacles around your " + player.clitDescript() + ", then begins jerking it off in time to her efforts on your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + ".  Your eyes roll back in your head and your mouth gapes involuntarily at the rough stimulation of your swollen chick-stick.", false);
 					}
 					outputText("\n\n", false);
 
@@ -1613,7 +1613,7 @@ package classes.Scenes.NPCs
 					//[(vag)
 					else if (player.hasVagina()) {
 						outputText("  Her fingers part your labia and reveal your " + player.clitDescript() + ", ");
-						if (player.clitLength >= 6) outputText("working it free as well and allowing her to tease and stroke it, cock-like, with her hands and hair.");
+						if (player.getClitLength() >= 6) outputText("working it free as well and allowing her to tease and stroke it, cock-like, with her hands and hair.");
 						else outputText("in order to give the sensitive button their attention.");
 						outputText("  Her other hand slips into your garments after the first, following it down to your groin and slipping into your pussy to pump back and forth gently.");
 					}
@@ -1669,8 +1669,8 @@ package classes.Scenes.NPCs
 
 				outputText("\n\nWith all the grace of a first-timer, the girl clumsily leans down to kiss you, but falls short and can only plant a smooch on your still-clad [chest].  Still, she continues pumping enthusiastically, worry and shame evaporating from her brow as you moan lustily instead of rebuking her temerity.  Pausing to support you with one hand as she spreads your lips wider with her fingers, she exposes your " + player.clitDescript() + " to the air.");
 				//[(clitsize<6)]
-				if (player.clitLength < 6) outputText("  The little button gets rubbed by her probing hand even as she resumes thrusting, accelerating your imminent peaking.");
-				else if (player.clitLength < 36) outputText("  The monstrous chick-stick bobs in the air as she pounds you harder; the breeze alone would be enough to arouse you further, but the anemone grabs it and begins jacking the nerve-laden stalk off like a dick, which sends your back into spasms.");
+				if (player.getClitLength() < 6) outputText("  The little button gets rubbed by her probing hand even as she resumes thrusting, accelerating your imminent peaking.");
+				else if (player.getClitLength() < 36) outputText("  The monstrous chick-stick bobs in the air as she pounds you harder; the breeze alone would be enough to arouse you further, but the anemone grabs it and begins jacking the nerve-laden stalk off like a dick, which sends your back into spasms.");
 				else outputText("  The incredible length of your clitoris is such that the pace of the fuck slows to a crawl as the anemone puzzles out what to do with it; finally falling back on her racial instinct, she pops it into her mouth and begins to caress the tip gently with her teeth and tongue as her short hair reaches around to tickle the shaft.  Your body flops weakly, too wracked by the sensation from your clit to allow conscious control.");
 
 				outputText("\n\nThough her technique is still nothing to sing praises about, the constant smears of venom coating your pussy with heat do their work industriously, and your orgasm is pried from you by force rather than skill.  Gasping and moaning, you clench down on her rod and your climaxing pussy wrings it for all its worth - which it soon delivers.  She moans in a high-pitched voice as she reclines on her hands and knees, and first one and then a second squirt of cool fluid lands in your overheating cunt.  Her cock continues drooling and trickling her seed even as her elbows fail and she lands on her back.");

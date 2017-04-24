@@ -486,7 +486,7 @@ package classes.Scenes.Areas.Forest
 					else if (player.gender == 2) {
 						outputText("Her legs curl around your hind legs and her 'feet' begin rubbing your " + player.vaginaDescript(0) + ". The strangeness of the sensation doesn't register though as just the contact is enough to send you over the edge.  ", false);
 						//[Tiny-normal clit:
-						if (player.clitLength < 3) outputText("Her awkward ministrations to your " + player.clitDescript() + " cause a gush of fluids from your " + player.vaginaDescript(0) + " and you let out a lewd moan of satisfaction.  ", false);
+						if (player.getClitLength() < 3) outputText("Her awkward ministrations to your " + player.clitDescript() + " cause a gush of fluids from your " + player.vaginaDescript(0) + " and you let out a lewd moan of satisfaction.  ", false);
 						//[Cock-like clit:
 						else outputText("She quickly finds your " + player.clitDescript() + " and begins to jerk it off like a cock.  The sensation is incredible and you moan lewdly as your " + player.vaginaDescript(0) + " gushes fluid.  ", false);
 						outputText("Your hind legs are soon coated in the slick girlcum pouring out of you.\n\n", false);
@@ -508,7 +508,7 @@ package classes.Scenes.Areas.Forest
 							outputText("Thinking you still not satisfied, she pulls her 'feet' up slightly and she begins to rub your " + player.vaginaDescript(0) + ".  ", false);
 							// [Same as female without intro]
 							//[Tiny-normal clit:
-							if (player.clitLength < 3) outputText("Her awkward ministrations to your " + player.clitDescript() + " cause a gush of fluids from your " + player.vaginaDescript(0) + " and you let out a lewd moan of satisfaction.  ", false);
+							if (player.getClitLength() < 3) outputText("Her awkward ministrations to your " + player.clitDescript() + " cause a gush of fluids from your " + player.vaginaDescript(0) + " and you let out a lewd moan of satisfaction.  ", false);
 							//[Cock-like clit:
 							else outputText("She quickly finds your " + player.clitDescript() + " and begins to jerk it off like a cock.  The sensation is incredible and you moan lewdly as your " + player.vaginaDescript(0) + " gushes fluid.  ", false);
 							outputText("Your hind legs are soon coated in the slick girlcum pouring out of you.", false);
@@ -518,7 +518,7 @@ package classes.Scenes.Areas.Forest
 						else {
 							outputText("Her legs curl around your hind legs and her 'feet' begin rubbing your " + player.vaginaDescript(0) + ". The strangeness of the sensation doesn't register though as just the contact is enough to send you over the edge.  ", false);
 							//[Tiny-normal clit:
-							if (player.clitLength < 3) outputText("Her awkward ministrations to your " + player.clitDescript() + " cause a gush of fluids from your " + player.vaginaDescript(0) + " and you let out a lewd moan of satisfaction.  ", false);
+							if (player.getClitLength() < 3) outputText("Her awkward ministrations to your " + player.clitDescript() + " cause a gush of fluids from your " + player.vaginaDescript(0) + " and you let out a lewd moan of satisfaction.  ", false);
 							//[Cock-like clit:
 							else outputText("She quickly finds your " + player.clitDescript() + " and begins to jerk it off like a cock.  The sensation is incredible and you moan lewdly as your " + player.vaginaDescript(0) + " gushes fluid.  ", false);
 							outputText("Your hind legs are soon coated in the slick girlcum pouring out of you.\n\n", false);
@@ -1593,8 +1593,8 @@ package classes.Scenes.Areas.Forest
 				if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLICK) outputText("Thankfully her tongue keeps up its assault, curling 'round your clit and probing your depths in equal measure, keeping you slick and writhing in pleasure.  ", false);
 				if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK && player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLAVERING) outputText("Your hips wiggle and writhe on the length of her tongue as it dives into your slippery depths and curls tightly around your clit, jacking it up and down like a cock.  Your girl-cum soaks her chin, drooling happily as she pleasures you.  ", false);
 				if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLAVERING) outputText("Your hips quiver and grind against her face as her unusually long tongue simultaneously probes your depths and works your clit, wrapping around it and jerking it like a cock.   You squirt and drool constantly from her skilled assault, soaking her face and hair with your girl-cum.  ", false);
-				if (player.clitLength > 3 && player.clitLength < 5) outputText("Your hips piston your huge clit into her mouth with no warning, forcing her to give your clit a blowjob.  Her slick black lips wrap around it immediately, sucking and licking, filling your body with lust and pleasure.  ", false);
-				if (player.clitLength >= 5) outputText("Your hips shove your massive clit into her mouth without warning, stretching her slicked lips wide around your very un-womanly appendage.   She reacts immediately, sucking it into her mouth and throat.  Her tongue curls around it and begins to caress it sensually as she lets you hammer it in and out of her open throat.  Instinctively you mash your face into her sweetened cunt, losing all control of your lower body as it face-fucks her with reckless abandon.  ", false);
+				if (player.getClitLength() > 3 && player.getClitLength() < 5) outputText("Your hips piston your huge clit into her mouth with no warning, forcing her to give your clit a blowjob.  Her slick black lips wrap around it immediately, sucking and licking, filling your body with lust and pleasure.  ", false);
+				if (player.getClitLength() >= 5) outputText("Your hips shove your massive clit into her mouth without warning, stretching her slicked lips wide around your very un-womanly appendage.   She reacts immediately, sucking it into her mouth and throat.  Her tongue curls around it and begins to caress it sensually as she lets you hammer it in and out of her open throat.  Instinctively you mash your face into her sweetened cunt, losing all control of your lower body as it face-fucks her with reckless abandon.  ", false);
 				//New PG - orgasm
 				if (player.isTaur()) outputText("You orgasm in no time, coating her face with girl-cum the process.  You return the favor and dive into her muff, planting kisses and licks down as a reward for your victim's rather skilled efforts.  The taste is sweet and sexy all at once, and you quickly lose track of your reward scheme, simply licking and slurping to get as much of her nectar as possible until she is satisfied as well.", false);
 				else outputText("In no time you both orgasm, sweet girl-cum coating both your faces as you work each other's cunt with desperation born of desire.  ", false);
@@ -1891,7 +1891,7 @@ package classes.Scenes.Areas.Forest
 
 				outputText("Her eyelids flutter even as her gaze remains locked, and she deeply inhales your musky and arid scent. Deep inside, you feel a level of affection that isn't betrayed by your facial features. You gasp as the bee-girl's lengthy tongue shoots inside your snatch, and retracts as quickly as it came; once, twice, again and again, striking your cervix and twisting out again. Her hands grip your scaly " + player.hipDescript() + " as she thrusts her tongue in and out, threatening the fixation of your glare with pleasure. You are moaning and screaming in your mind, while your stony expression betrays nothing; nothing but the locking gaze that makes your will her own. The bee-maiden's mouth wraps around your " + player.clitDescript() + ", rubbing it through its hood with the inside of her upper lip until it protrudes its full length.", false);
 				//[if clit size => 1"]: 
-				if (player.clitLength > 1) outputText("  Emergent from its sheath, she uses the base of her tongue as a bottom lip and begins to suck you off like a cock, unceasing in her lingual assault on the inside of your canal.", false);
+				if (player.getClitLength() > 1) outputText("  Emergent from its sheath, she uses the base of her tongue as a bottom lip and begins to suck you off like a cock, unceasing in her lingual assault on the inside of your canal.", false);
 				outputText("\n\n", false);
 
 				outputText("You cry out when her tongue finds your G-spot, barely maintaining focus. Sensing your approval, she begins probing the same area until she has you crying out again, and begins hammering at the spongy tissue.\n\n", false);

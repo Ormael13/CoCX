@@ -867,7 +867,7 @@ package classes.Scenes.Dungeons.D3
 				outputText(" aroused");
 			}
 			outputText(" lips spreading against him, the way your petals push open to reveal the delicate smoothness of your inner flower.");
-			if (player.clitLength > 3)
+			if (player.getClitLength() > 3)
 			{
 				outputText("\n\nThe best part is the way your [clit] is smashed up against the upper half of his dick, rubbing against the thick, veiny shaft in the most delicious way. You can barely stand the avalanche of sensations coming from your oversized button while you frot it against the needy demon, but isn’t that what you wanted? To get off so powerfully that Lethice would have nothing left to tempt you with?");
 				outputText("\n\nThe mounting hunger in your channel for some kind of penetration jars you from your surprisingly heterosexual frottage. You want him inside you. He can always manage your cock-sized clitty with one of his hands while you mount him again and again, trading a little corruption for the kind of");
@@ -928,15 +928,15 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\n<i>“Don’t fight it. You’re not an incubus anymore, just a slut that’ll whore out his dick for anyone and everyone to use, right?”</i> You bounce up and down, squeezing tight for emphasis. <i>“Even a mortal... or a goblin.”</i> You gesture at Mitzi, who even now is trying to work beneath you to lick at his balls. You let her. <i>“Just let go. Moan for your audience and let yourself enjoy it.”</i> Your juices are puddling thick below you. It’s getting harder and harder to keep this line of thought together. <i>“Be my slut.”</i>");
 			outputText("\n\nThat does it. His insect legs splay wide as the tension leaves them, and the demon himself throws back his head, groaning, <i>“Yessssssss...”</i> loud enough to be heard over the din. Chuckles of mirth surround you, but your corrupt toy wallows in it this time, twisting to expose the immense drider-cock beneath the spidery portion of his body. The goblin, Mitzi, is on it in a second, abandoning her sloppy seconds for a cut of the real deal. Shivers wrack the drider’s form from the simultaneous fuck from both ends, his cock jerking wildly inside you, slamming aggressively against your g-spot as if it knows exactly where to push to set you off.");
 			outputText("\n\nButterslick heat slams into the wall of your sensitive slit a half-second later as the slut-drider erupts, squirting and moaning, aggressively twisting");
-			if (player.clitLength > 3 || player.cocks.length > 0)
+			if (player.getClitLength() > 3 || player.cocks.length > 0)
 			{
 				outputText(" one of");
 			}
 			outputText(" his nipples");
-			if (player.clitLength > 3 || player.cocks.length > 0)
+			if (player.getClitLength() > 3 || player.cocks.length > 0)
 			{
 				outputText(" while still trying to");
-				if (player.clitLength > 3)
+				if (player.getClitLength() > 3)
 				{
 					outputText(" pump your [clit]");
 				}

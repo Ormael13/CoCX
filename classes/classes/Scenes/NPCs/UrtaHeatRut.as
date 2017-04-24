@@ -328,7 +328,7 @@ private function soberUrtaSatingPCHeat():void {
 	if (player.hasCock()) outputText("[cock biggest]");
 	else {
 		outputText("clitoris, ");
-		if (player.clitLength < 2.5) outputText("rubbing the hard, stimulated sensitive spot between her fingers");
+		if (player.getClitLength() < 2.5) outputText("rubbing the hard, stimulated sensitive spot between her fingers");
 		else outputText("running her fingers over your entire big clit before stroking it like she'd do with a cock");
 	}
 	outputText(", letting you have a few moments to get used to her mammoth member and accommodate it.");
@@ -573,7 +573,7 @@ private function drunkenUrtaFucksPCInHeat():void {
 		outputText(" to get to the feminine orifice below");
 	}
 	outputText(". You cry out in joy as your [vagina] is filled, her soft fur brushing against your inner walls before she opens her mouth as wide as she can and sticks out her tongue. The long, broad, vulpine appendage slides out and up your depths, caressing the walls, lapping up your juices, ");
-	if (player.clitLength < 2.5) outputText("playing with your [clit]");
+	if (player.getClitLength() < 2.5) outputText("playing with your [clit]");
 	else outputText("lapping around your huge pleasure-button, slurping it into her mouth where she suckles from it");
 	outputText(", and making you thrash and scream until you think you're going to cum from the pussy-eating alone.  ");
 	if (player.wetness() >= 4) outputText("As if to emphasize this, your squelching, slurping pussy suddenly sprays fem-cum all over Urta's face, making her pull herself free with a shocked shake of her head.");
@@ -731,7 +731,7 @@ private function drunkUrtaRidesARutPCsCock():void {
 	else if (player.cumQ() > 1500) {
 		outputText("\n\nUrta is stretched and completely full, so, holding your " + player.cockDescript(x) + " in her hand for a moment, she lifts herself off your cock, presses on her abdomen and allows some of your spunk to drip out of her, coating the table, your thighs and your ");
 		if (player.balls > 0) outputText("[balls]");
-		else if (player.hasVagina() && player.clitLength >= 3.5) outputText("cock-like clit");
+		else if (player.hasVagina() && player.getClitLength() >= 3.5) outputText("cock-like clit");
 		else if (player.hasVagina()) outputText("pussy lips");
 		else outputText("inside of your thighs");
 		outputText(" with your own thick white semen.  Then, she slides your softening erection back into herself again.");

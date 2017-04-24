@@ -1197,7 +1197,7 @@ private function milkerBadEnd1():void {
 		outputText("  Another tube, likewise capped with a thick, firm end instead of a suction cup, reaches your " + player.vaginaDescript(0) + " and pushes inside, secreting more of the fluid.  ", false);
 		player.cuntChange(15,true);
 		//[(bigclit)
-		if (player.clitLength > 3) outputText("A smaller suction tube fastens over your " + player.clitDescript() + " as it rouses from the vaginal stimulation.", false);
+		if (player.getClitLength() > 3) outputText("A smaller suction tube fastens over your " + player.clitDescript() + " as it rouses from the vaginal stimulation.", false);
 	}
 	//[(lactation, no nipplecunts)
 	if (player.biggestLactation() >= 1 && !player.hasFuckableNipples()) {
@@ -1224,7 +1224,7 @@ private function milkerBadEnd1():void {
 	if (player.hasVagina()) {
 		outputText("  Your cunt spasms around its invader, milking the pseudo-cock and drawing the tainted semen it emits even deeper into your womb", false);
 		//[(big clit)
-		if (player.clitLength > 3) outputText(", and your clitoris twitches under the cup, threatening to black you out from the pleasure", false);
+		if (player.getClitLength() > 3) outputText(", and your clitoris twitches under the cup, threatening to black you out from the pleasure", false);
 		outputText(".", false);
 	}
 	//[(lactation) 

@@ -857,9 +857,9 @@ private function forceMinitaurToGiveOral(choice:Number = 0):void {
 			outputText("spread your " + player.vaginaDescript() + " wide with your fingers, exposing the glistening pinkness of your womanhood.", false);
 		}
 		outputText("  Your " + player.clitDescript() + " slowly peeks out from its hood", false);
-		if (player.clitLength >= 8) outputText(", until the huge size of it is revealed.", false);
-		else if (player.clitLength >= 3) outputText(", until the cock-like length of your feminine organ is revealed.", false);
-		else if (player.clitLength >= 1) outputText(", until the large, womanly organ is revealed.", false);
+		if (player.getClitLength() >= 8) outputText(", until the huge size of it is revealed.", false);
+		else if (player.getClitLength() >= 3) outputText(", until the cock-like length of your feminine organ is revealed.", false);
+		else if (player.getClitLength() >= 1) outputText(", until the large, womanly organ is revealed.", false);
 		else outputText(", revealing its cute button self.", false);
 		outputText("\n\n", false);
 	
@@ -869,11 +869,11 @@ private function forceMinitaurToGiveOral(choice:Number = 0):void {
 		outputText("  He opens his mouth and hesitantly extends his tongue towards your womanhood.  It's clear he doesn't have much experience providing oral to the fairer sex.  Since you don't have much intention of staying in the mountains long, you grab him by his short little horns and pull him against your gash.\n\n", false);
 		
 		outputText("Extending outward defensively, the minitaur's tongue slides into your vaginal opening with ease.  It's very, very long and extraordinarily wet.  His hot breath washes over your " + player.clitDescript() + ", fogging the surrounding air as you press his bovine nose against your folds.  The difference in temperature between the coolness of his moist nose and the heat of his breath and tongue drives you wild.  The feminine beast-man adapts to his task with enthusiasm, hungrily lapping and sucking at your " + player.vaginaDescript(), false);
-		if (player.clitLength < 3) outputText(", even sucking your clit into his mouth and running his tongue along its length.", false);
+		if (player.getClitLength() < 3) outputText(", even sucking your clit into his mouth and running his tongue along its length.", false);
 		else outputText(", even stroking your clit in his hand in time with his licks.", false);
 		
 		outputText("You begin to undulate your " + player.hipDescript() + " into the minitaur's bestial muzzle, grinding and groaning in joy at the forced cunnilingus.  ", false);
-		if (player.clitLength >= 6) outputText("He jacks your huge clit like a cock, and the incredible stimulation is too much for you to take.", false);
+		if (player.getClitLength() >= 6) outputText("He jacks your huge clit like a cock, and the incredible stimulation is too much for you to take.", false);
 		else outputText("He sucks and licks your pussy and clit simultaneously, displaying hidden talent with his bovine tongue.  It's just too much for you to take!", false);
 		outputText("  You cum - hard, into the cow-boy's muzzle.  He laps at your juices enthusiastically - a natural born cunt-licker.", false);
 		if (player.wetness() >= 5) outputText("  The wave of squirting fluids drips from his shaggy chin and runs down his chest.", false);

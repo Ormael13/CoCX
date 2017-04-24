@@ -236,7 +236,7 @@ private function rapeMinotaurTentacle():void {
 		temp = 1;
 		outputText("It's not enough! Your other dicks demand attention too! Fortunately, he has a large hole for you to abuse... you stuff as many of your " + player.multiCockDescript() + " as you can, the rest hanging underneath him, slapping against his sack. ");
 	}
-	if (player.clitLength > 6) {
+	if (player.getClitLength() > 6) {
 		outputText("Eager for more stimulation, you muse that your clit's big enough to fuck with, so why not!? You take your fingers, spit on them, and slide them into place, opening him up wider to accept your " + player.clitDescript() + ". It's so sensitive, sliding into that tight hole, and the sensations are driving you wild as you hump against him with your dick-like clit.  ", false);
 	}
 	//Free pussy!
