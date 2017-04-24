@@ -390,23 +390,23 @@ import classes.GlobalFlags.kFLAGS;
 		 * is greater or equal to the roll.
 		 * @param	type the type of pregnancy (@see PregnancyStore.PREGNANCY_xxx)
 		 * @param	incubation the incubation duration in hours
-		 * @param	beat possible maximum roll for an impregnation check. 
-		 * @param	arg specify a large bonus or malus to fertility (0 = no action, positive number = guaranteed pregnancy, negative number = no pregnancy)
+		 * @param	maxRoll the possible maximum roll for an impregnation check
+		 * @param	forcePregnancy specify a large bonus or malus to fertility (0 = no bonus, positive number = guaranteed pregnancy, negative number = no pregnancy)
 		 */
-		public function knockUp(type:int = 0, incubation:int = 0, beat:int = 100, arg:int = 0):void
+		public function knockUp(type:int = 0, incubation:int = 0, maxRoll:int = 100, forcePregnancy:int = 0):void
 		{
 			//Contraceptives cancel!
-			if (hasStatusEffect(StatusEffects.Contraceptives) && arg < 1)
+			if (hasStatusEffect(StatusEffects.Contraceptives) && forcePregnancy < 1)
 				return;
 //			if (hasStatusEffect(StatusEffects.GooStuffed)) return; //No longer needed thanks to PREGNANCY_GOO_STUFFED being used as a blocking value
 			var bonus:int = 0;
 			//If arg = 1 (always pregnant), bonus = 9000
-			if (arg >= 1)
+			if (forcePregnancy >= 1)
 				bonus = 9000;
-			if (arg <= -1)
+			if (forcePregnancy <= -1)
 				bonus = -9000;
 			//If unpregnant and fertility wins out:
-			if (pregnancyIncubation == 0 && totalFertility() + bonus > Math.floor(Math.random() * beat) && hasVagina())
+			if (pregnancyIncubation == 0 && totalFertility() + bonus > Math.floor(Math.random() * maxRoll) && hasVagina())
 			{
 				knockUpForce(type, incubation);
 				trace("PC Knocked up with pregnancy type: " + type + " for " + incubation + " incubation.");
@@ -416,7 +416,7 @@ import classes.GlobalFlags.kFLAGS;
 			{
 				if (findPerk(PerkLib.SpiderOvipositor) >= 0 || findPerk(PerkLib.BeeOvipositor) >= 0)
 				{
-					if (totalFertility() + bonus > Math.floor(Math.random() * beat))
+					if (totalFertility() + bonus > Math.floor(Math.random() * maxRoll))
 					{
 						fertilizeEggs();
 					}
