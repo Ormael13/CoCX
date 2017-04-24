@@ -534,5 +534,30 @@ package classes{
         public function changeClitLength_invalid_vagina_index():void {
 			oneVagina.changeClitLength(1, int.MAX_VALUE);
         }
+		
+		[Test]
+		public function noGender():void {
+			assertThat(noVagina.gender, equalTo(GENDER_NONE));
+		}
+		
+		[Test]
+		public function genderIsFemale():void {
+			assertThat(oneVagina.gender, equalTo(GENDER_FEMALE));
+		}
+		
+		[Test]
+		public function genderIsMale():void {
+			noVagina.createCock(5, 1, CockTypesEnum.HUMAN);
+			
+			assertThat(noVagina.gender, equalTo(GENDER_MALE));
+		}
+		
+		[Test]
+		public function genderIsHerm():void {
+			noVagina.createCock(5, 1, CockTypesEnum.HUMAN);
+			noVagina.createVagina();
+			
+			assertThat(noVagina.gender, equalTo(GENDER_HERM));
+		}
     }
 }
