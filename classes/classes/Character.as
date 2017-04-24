@@ -385,6 +385,7 @@ import classes.GlobalFlags.kFLAGS;
 
 		public function isButtPregnant():Boolean { return _buttPregnancyType != 0; }
 	
+		
 		/**
 		 * Impregnate the character with the given pregnancy type if the total fertility 
 		 * is greater or equal to the roll.
@@ -395,6 +396,7 @@ import classes.GlobalFlags.kFLAGS;
 		 */
 		public function knockUp(type:int = 0, incubation:int = 0, maxRoll:int = 100, forcePregnancy:int = 0):void
 		{
+			//TODO push this down into player?
 			//Contraceptives cancel!
 			if (hasStatusEffect(StatusEffects.Contraceptives) && forcePregnancy < 1)
 				return;
@@ -427,10 +429,20 @@ import classes.GlobalFlags.kFLAGS;
 			}
 		}
 
-		//The more complex knockUp function used by the player is defined above
-		//The player doesn't need to be told of the last event triggered, so the code here is quite a bit simpler than that in PregnancyStore
+
+		
+		 /**
+		  * Forcefully override the characters pregnancy. If no pregnancy type is provided,
+		  * the function does nothing.
+		  * 
+		  * Note: A more complex pregnancy function used by the character is Character.knockUp
+		  * The character doesn't need to be told of the last event triggered, so the code here is quite a bit simpler than that in PregnancyStore.
+		  * @param	type the type of pregnancy (@see PregnancyStore.PREGNANCY_xxx)
+		  * @param	incubation  the incubation duration in hours
+		  */
 		public function knockUpForce(type:int = 0, incubation:int = 0):void
 		{
+			//TODO push this down into player?
 			_pregnancyType = type;
 			_pregnancyIncubation = (type == 0 ? 0 : incubation); //Won't allow incubation time without pregnancy type
 		}
