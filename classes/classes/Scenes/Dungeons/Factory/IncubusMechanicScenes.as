@@ -339,7 +339,7 @@ package classes.Scenes.Dungeons.Factory
 				}
 				else
 				{
-					outputText("\n\n<b>You do not have enough gems to pay the required toll!</b>");
+					addDisabledButton(0, "Pay Toll", "You do not have enough gems to pay the required toll!");
 				}
 
 				addButton(1, "Suck Dick", suckIncubusDick);
@@ -374,7 +374,7 @@ package classes.Scenes.Dungeons.Factory
 				}
 				else
 				{
-					outputText("\n\n<b>You do not have enough gems to pay the required toll!</b>");
+					addDisabledButton(0, "Pay Toll", "You do not have enough gems to pay the required toll!");
 				}
 
 				addButton(1, "Suck Dick", suckIncubusDick);

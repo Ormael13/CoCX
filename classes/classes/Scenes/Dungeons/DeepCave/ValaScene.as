@@ -80,9 +80,15 @@ package classes.Scenes.Dungeons.DeepCave
 			outputText("You search the room for a way to free the fairy from her shackles and find an ugly, iron key that looks like a promising candidate. Opening the rusted metal with a teeth-clenching screech, the girl slumps to the ground in an ungainly heap. The fall seems to have roused her, at least, because she blinks, slowly, several times before lifting her head to stare blankly at you. You try to explain that she's free, but it's clear that thoughts are travelling through a pretty thick haze of abuse, so you take a moment to let her gather herself. When she's managed to assemble what wits are left to her, she slowly curls her mouth into a hopeful smile. \"<i>How can Bitch please Master?</i>\" she asks in an innocent voice tainted by husky desire.\n\n", false);
 			outputText("You bend down to comfort the girl and offer her a shoulder to lean on as you help her to her feet. As you expected, the weight of her milky tits nearly surpasses the rest of her body. She clings to you happily, stroking and rubbing her bare skin against your body. She is adamantly ignoring your efforts to dissuade her amorous advances, merely cooing \"<i>master</i>\" and \"<i>pleasure</i>\" over and over again. If you had the right materials, you might be able to mix something to heal the damage her captors have done to the fairy's mind.\n\n", false);
 			//Choicez go here.  I can haz fucks?
-			simpleChoices("", null, "", null, "Reject", rejectFuckingVala, "", null, "", null);
+			menu();
+			
 			if (player.hasItem(consumables.PURHONY, 1) || player.hasItem(consumables.P_PEARL, 1) || player.hasItem(consumables.PPHILTR, 1)) addButton(0, "Fix Her", healVala);
+			else addDisabledButton(0, "Fix Her", "You could try to fix her with some anti-corruption potion, but you have none.");
+			
 			if (player.gender > 0) addButton(1, "Sex", ValaGetsSexed);
+			else addDisabledButton(1, "Sex", "You must have genitals in order to have sex.");
+			
+			addButton(3, "Reject", rejectFuckingVala);
 		}
 		
 		//[Heal]
@@ -242,20 +248,27 @@ package classes.Scenes.Dungeons.DeepCave
 			}
 			outputText("\n\nWhat would you like to do to her?", false);
 			//[Heal][Use][Wake][Leave]
-			var Use:* = null;
-			var Wake:* = null;
-			if (player.gender > 0) Use = useValaOHYEAHSNAPINTOASLIMJIM;
-			if (player.gender > 0) Wake = wakeValaUpBeforeYouGoGo;
-			var shouldra:Function = null;
-			if (player.lust >= 33 && kGAMECLASS.shouldraFollower.followerShouldra()) shouldra = kGAMECLASS.shouldraFollower.shouldraMeetsCorruptVala;
-			simpleChoices("Fix Her", tryToHealVala, "Use", Use, "Wake", Wake, "ShouldraVala", shouldra, "Leave", playerMenu);
+			menu();
+			addButton(0, "Fix Her", tryToHealVala);
+			addDisabledButton(1, "Use", "This scene requires you to have genitals.");
+			addDisabledButton(2, "Wake", "This scene requires you to have genitals.");
+			addDisabledButton(3, "ShouldraVala", "This scene requires you to have Shouldra follower.");
+			
+			if (!player.isGenderless()) {
+				addButton(1, "Use", useValaOHYEAHSNAPINTOASLIMJIM);
+				addButton(2, "Wake", wakeValaUpBeforeYouGoGo);
+			}
+			if (player.lust >= 33 && kGAMECLASS.shouldraFollower.followerShouldra()) {
+				addButton(3, "ShouldraVala", kGAMECLASS.shouldraFollower.shouldraMeetsCorruptVala);
+			}
+			addButton(14, "Leave", playerMenu);
 		}
 		
 		public function tryToHealVala():void {
 			spriteSelect(85);
 			clearOutput();
 			//(Without Pure Honey)
-			if (!(player.hasItem(consumables.PURHONY,1) || player.hasItem(consumables.P_PEARL,1))) {
+			if (!(player.hasItem(consumables.PURHONY,1) || player.hasItem(consumables.P_PEARL,1) || player.hasItem(consumables.PPHILTR,1))) {
 				outputText("You try your best with what you've got, but nothing seems to restore the broken fairy's mind to her sex-addled  body. You're going to have to go out and gather more materials. Surely there's something that can break the damage the imps have done to Vala.", false);
 				doNext(playerMenu);
 			}
@@ -268,6 +281,17 @@ package classes.Scenes.Dungeons.DeepCave
 				
 				//[Next]
 				doNext(tryToHealValaWHoney2);
+			}
+			else if (player.hasItem(consumables.PPHILTR,1)) {
+				player.consumeItem(consumables.PPHILTR, 1);
+				outputText("You have the hunch that Purity Philter will do the trick. You set the broken girl down and she clings onto your ", false);
+				if (player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("tail", false);
+				else outputText(player.leg(), false);
+				outputText(" as you walk, and you end up dragging her across the dungeon floor leaving a trail of her cum behind you. Before things can get too out of hand with the needy girl, you pull out the vial of Purity Philter and forcibly hold her mouth open. She makes no protestation, instead gleefully opens wide, tongue thrashing about in anticipation. You pour the entire cool liquid into her mouth. Freezing sensations surges through her as she stiffens, feeling almost frozen in place.\n\n", false);
+				outputText("The effects of your cure are more potent than you expected. The fairy lays stiffly and you wait patiently for a few minutes. Gradually, her motions slow and her breath calms to a more normal pace. When she looks back up at you, her eyes are clear at last, the pollution of lust burned away by the honey's restorative properties. She gives you a genuine smile and speaks with a voice like the rushing of wind over reeds. \"<i>Thank you. I cannot express my gratitude for what you've done. The fate you've saved me from was worse than any death these wretched creatures could have subjected me to.</i>\"", false);
+				//[Next]
+				flags[kFLAGS.FREED_VALA] = 1;
+				doNext(playerMenu);
 			}
 			else {
 				//Pure Pearl
@@ -573,8 +597,6 @@ package classes.Scenes.Dungeons.DeepCave
 		//[Vala]
 		public function chooseValaInBar():void {
 			spriteSelect(60);
-			var cumBath:Function = null;
-			if (player.hasCock()) cumBath = valaCumBath;
 			clearOutput();
 			menu();
 			//(First meeting)
@@ -611,8 +633,14 @@ package classes.Scenes.Dungeons.DeepCave
 				}	
 			}
 			addButton(1,"You",cleansedValaRepeatBrainFucking);
-			if (cumBath != null) addButton(2, "Cum Bath", cumBath);
-			if (flags[kFLAGS.SHOULDRA_MET_VALA] > 0 && kGAMECLASS.shouldraFollower.followerShouldra()) addButton(3, "Big You", valaBigYou);
+			if (player.hasCock()) {
+				addButton(2, "Cum Bath", valaCumBath);
+			} else {
+				addDisabledButton(2, "Cum Bath", "This scene requires you to have cock.");
+			}
+			if (flags[kFLAGS.SHOULDRA_MET_VALA] > 0 && kGAMECLASS.shouldraFollower.followerShouldra()) {
+				addButton(3, "Big You", valaBigYou);
+			}
 			addButton(4,"Leave",kGAMECLASS.telAdre.barTelAdre);
 		}
 
