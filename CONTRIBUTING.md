@@ -20,4 +20,4 @@ Good luck!
 Please don't use deprecated code for new content. If you find any deprecated code, try your best to refactor it.
 
 * `choices` and `simpleChoices`: Those are really old code used for setting up a choice of buttons. Remember that there are now 15 buttons so use `addButton` instead.
-* Lots and lots of variables for gating scenes. Those are prominient in many of the victory scene choices. Just remove the variables and change the way the buttons are gated, check the newer code for that.
+* Lots and lots of local variables for gating scenes. Those are prominient in many of the victory scene choices. Just remove the variables and change the way the buttons are gated, check the newer code for that.
