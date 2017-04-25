@@ -184,67 +184,51 @@ package classes.Scenes.Monsters
 			spriteSelect(124);
 			clearOutput();
 			outputText("The shaman falls to her feet, smashing her titties against the ground. She looks up at you and sniffles.");
-			//If cant rape or breastfeed
-			if (player.lust < 30 && !player.hasStatusEffect(StatusEffects.Feeder)) {
-				combat.cleanupAfterCombat();
-				return;
+			
+			if (player.lust < 33) {
+				outputText("\n\n<b>You aren't horny enough to rape her.</b>");
 			}
-			var buttseks:Function =null;
-			var feeder:Function =null;
-			var fitsFuck:Function =null;
-			var tooBig:Function =null;
-			var corruptTooBig:Function =null;
-			var cuntFuck:Function =null;
-			var spiderCondom:Function =null;
-			var jog:Function =null;
-			var eggs:Function =null;
-			if (player.canOvipositSpider()) {
-				eggs = laySomeDriderEggsInGobboTwat;
-			}
+			
+			addDisabledButton(0, "Dick Fuck", "This scene requires you to have fitting cock.", "Dick Fuck");
+			addDisabledButton(1, "DickTooBig", "This scene requires you to have overly large cock.", "Dick Too Big");
+			addDisabledButton(2, "CorruptDick", "This scene requires you to have overly large cock and high corruption.", "Corrupt Big");
+			addDisabledButton(3, "Dick In Ass", "This scene requires you to have cock and high corruption.", "Dick In Ass");
+			addDisabledButton(4, "Jog Fuck", "This scene requires you to have fitting cock.", "Jog Fuck");
+			addDisabledButton(5, "Breastfeed", "This scene requires you to have enough milk.", "Breastfeed");
+			addDisabledButton(6, "Use Condom", "This scene requires you to have either condom or spider abdomen and fitting cock.", "Use Condom");
+			addDisabledButton(7, "Pussies", "This scene requires you to have vagina.", "Pussies");
+			addDisabledButton(8, "Lay Eggs", "This scene requires you to have drider ovipositor and some eggs.", "Lay Eggs");
+			
 			//cunt stuff
-			if (player.hasVagina()) cuntFuck = gobboGetsRapedFem;
+			if (player.hasVagina() && player.lust >= 33) addButton(7, "Pussies", gobboGetsRapedFem);
 			//Dick stuff:
-			if (player.hasCock()) {
+			if (player.hasCock() && player.lust >= 33) {
 				//Corrupt too big scene
-				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity() && player.cor > 80 && flags[kFLAGS.JOJO_STATUS] > 2)
-					corruptTooBig = rapeAGoblinCorruptTooBig;
+				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity() && (player.cor > 80 - player.corruptionTolerance() || player.findPerk(PerkLib.Sadist) >= 0 || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1))
+					addButton(2, "CorruptDick", manRapesGoblinTooBig);
 				//Regular too big scene
 				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity())
-					tooBig = manRapesGoblinTooBig;
+					addButton(1, "DickTooBig", manRapesGoblinTooBig);
 				//It fits!
 				if (player.cockThatFits(monster.vaginalCapacity()) >= 0) {
-					jog = gobboGetsRapedMaleFits;
-					fitsFuck = gatsGoblinBoners;
+					addButton(0, "Dick Fuck", gatsGoblinBoners);
+					addButton(4, "Jog Fuck", gobboGetsRapedMaleFits);
 				}
 				//Buttsex toggle
-				if (player.cockThatFits(monster.analCapacity()) >= 0 && player.cor > 70 - player.corruptionTolerance()) buttseks = gobboButtSecks;
+				if (player.cockThatFits(monster.analCapacity()) >= 0 && (player.cor > 70 - player.corruptionTolerance() || player.findPerk(PerkLib.Sadist) >= 0 || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1)) addButton(3, "Dick In Ass", gobboButtSecks);
 				//Spidercondom
 				if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN && player.cockThatFits(monster.vaginalCapacity()) >= 0)
-					spiderCondom = goblinCondomed;
+					addButton(6, "Web Condom", goblinCondomed, 0);
+				else if (player.hasItem(useables.CONDOM) && player.cockThatFits(monster.vaginalCapacity()) >= 0)
+					addButton(6, "Use Condom", goblinCondomed, 1);
+			}
+			if (player.canOvipositSpider()) {
+				addButton(8, "Lay Eggs", laySomeDriderEggsInGobboTwat);
 			}
 			//Breastfeed adds an option
-			if (player.hasStatusEffect(StatusEffects.Feeder)) {
-				feeder = giveGoblinAMilkMustache;
-			}
-			if (player.lust >= 33 && player.gender > 0 && (fitsFuck != null || cuntFuck != null || tooBig != null ||
-					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null) && flags[kFLAGS.SFW_MODE] <= 0) {
-				outputText("\n\n<b>What do you do to her, and if anything, which of your body parts do you use?</b>", false);
-				choices("Dick Fuck", fitsFuck, "DickTooBig", tooBig, "CorruptDick", corruptTooBig, "Dick In Ass", buttseks, "Jog Fuck", jog, "Breastfeed", feeder, "Web Condom", spiderCondom, "Pussies", cuntFuck, "Lay Eggs", eggs, "Leave", combat.cleanupAfterCombat);
-				if (player.hasItem(useables.CONDOM) && player.cockThatFits(monster.vaginalCapacity()) >= 0) {
-					addButton(6, "Use Condom", goblinCondomed, 1);
-				}
-			}
-			else if (feeder!=null || eggs!=null) {
-				outputText("\n\n<b>You aren't horny enough to rape her, but ");
-				if (feeder!=null) outputText("your nipples ache with the desire to feed her your milk.  Do you feed her milk or leave?</b>", false);
-				else outputText("your abdomen aches with the desire to impregnate her full of insect eggs.  Do you?</b>");
-				simpleChoices("Feed", feeder, "Lay Eggs", eggs, "", null, "", null, "Leave", combat.cleanupAfterCombat);
-				//doYesNo(feeder, combat.cleanupAfterCombat);
-			}
-			else 
-			{
-				combat.cleanupAfterCombat();
-			}
+			if (player.lactationQ() >= 500 || player.hasStatusEffect(StatusEffects.Feeder)) addButton(5, "Breastfeed", giveGoblinAMilkMustache);
+			
+			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
 		private function giveGoblinAMilkMustache():void {
 			clearOutput();
