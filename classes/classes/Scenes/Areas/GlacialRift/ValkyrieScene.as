@@ -51,6 +51,13 @@ package classes.Scenes.Areas.GlacialRift
 		
 		public function winAgainstValkyrie():void {
 			clearOutput();
+			
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.", true);
+				combat.cleanupAfterCombat();
+				return;
+			}
+			
 			if (monster.HP <= 0) outputText("Beaten and bloodied, the valkyrie stumbles for a moment before dropping her spear and shield.  She kneels before you, head bowed low enough that her long hair brushes the icy ground. ")
 			else outputText("Unable to contain her arousal, the valkyrie drops her weapons and collapses onto her knees, slipping a hand into her short skirt. ")
 			outputText("\"<i>I submit,</i>\" she concedes weakly, avoiding eye contact with you.  \"<i>I was too weak to defeat you, it seems.  Do with me what you will. </i>\"")
@@ -59,7 +66,12 @@ package classes.Scenes.Areas.GlacialRift
 			//-If Female: [Get Licked] [Scissor]
 			//-If Herm: All Options)
 			menu();
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
+			addDisabledButton(0, "Aerial Fuck", "This scene requires you to have cock and sufficient arousal.");
+			addDisabledButton(1, "Anal Fuck", "This scene requires you to have cock and sufficient arousal.");
+			addDisabledButton(2, "Get Licked", "This scene requires you to have vagina and sufficient arousal.");
+			addDisabledButton(3, "Scissor", "This scene requires you to have vagina and sufficient arousal.");
+			
+			if (player.lust >= 33) {
 				if (player.hasCock()) {
 					addButton(0, "Aerial Fuck", valkyrieAerialFuck);
 					addButton(1, "Anal Fuck", valkyrieAnalFuck);
@@ -67,12 +79,9 @@ package classes.Scenes.Areas.GlacialRift
 				if (player.hasVagina()) {
 					addButton(2, "Get Licked", valkyrieLicksYou);
 					addButton(3, "Scissor", valkyrieScissor);
-				}
-				addButton(4, "Leave", combat.cleanupAfterCombat);
+				}	
 			}
-			else {
-				combat.cleanupAfterCombat();
-			}
+			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
 		
 		//Aerial Fuck
