@@ -620,21 +620,34 @@ private function rapeSandwitchMultis():void {
 
 internal function beatSandwitch():void {
 	spriteSelect(50);
-	if (monster.lust >= monster.eMaxLust()) outputText("You smile in satisfaction as the " + monster.short + " drops down on all fours and begins masturbating feverishly.  Sadly you realize your own needs have not been met.  Of course you could always fuck the horny witch...\n\nDo you rape her?", true);
-	else outputText("You smile in satisfaction as the " + monster.short + " drops down on all fours and struggles to rise.  Sadly you realize your own needs have not been met.  Of course, you could always fuck the witch...", true);
-	outputText("  Of course, just taunting, teasing, and humiliating her for her arrogance would be equally amusing, <b>but it would give her plenty of time to turn the tables...</b>");
-	var temp2:Function = null;
-	var temp3:Function = null;
-	if (silly()) temp3 = missingoSex;
-	if (player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = sandwitchGetsDildoed;
-	var shouldra:Function = null;
-	if (kGAMECLASS.shouldraFollower.followerShouldra() && player.gender > 0) shouldra = kGAMECLASS.shouldraFollower.sandWitchGetsGhostly;
-	//doYesNo(sandwitchRaped, combat.cleanupAfterCombat);
-	var ovi:Function = null;
-	if (player.gender > 0 && player.canOviposit()) ovi = ovipositSandWitches;
+	if (monster.lust >= monster.eMaxLust()) outputText("You smile in satisfaction as the " + monster.short + " drops down on all fours and begins masturbating feverishly.", true);
+	else outputText("You smile in satisfaction as the " + monster.short + " drops down on all fours and struggles to rise.", true);
 	
-	choices("Yes", sandwitchRaped, "Dildo Rape", temp2, "Use 3i@-", temp3, "Use Shouldra", shouldra, "Lay Eggs", ovi,
-		"Taunt Her", sandwitchSpanking, "", null, "", null, "", null, "Leave", combat.cleanupAfterCombat);
+	menu();
+	addDisabledButton(0, "Rape", "This scene requires sufficient arousal.");
+	addDisabledButton(1, "Dildo Rape", "This scene requires you to have Deluxe Dildo and sufficient arousal.");
+	addDisabledButton(2, "Taunt", "This scene requires sufficient arousal.");
+	addDisabledButton(3, "Lay Eggs", "This scene requires you to have sufficient arousal, ovipositor and some genitals.");
+	addDisabledButton(4, "Use Shouldra", "This scene requires you to have sufficient arousal, Shouldra follower and some genitals.");
+	// 5 - Use 3i@- is hidden if silly mode is not enabled
+	
+	if (player.lust >= 33) {
+		outputText("  Sadly you realize your own needs have not been met.  Of course, you could always fuck the witch...");
+		outputText("  Of course, just taunting, teasing, and humiliating her for her arrogance would be equally amusing, <b>but it would give her plenty of time to turn the tables...</b>");
+		
+		addButton(0, "Rape", sandwitchRaped);
+		if (player.hasKeyItem("Deluxe Dildo") >= 0)
+			addButton(1, "Dildo Rape");
+		addButton(2, "Taunt Her", sandwitchSpanking);
+		if (!player.isGenderless() && player.canOviposit())
+			addButton(3, "Lay Eggs", ovipositSandWitches);
+		if (kGAMECLASS.shouldraFollower.followerShouldra() && !player.isGenderless())
+			addButton(4, "Use Shouldra", kGAMECLASS.shouldraFollower.sandWitchGetsGhostly);
+		if (silly())
+			addButton(5, "Use 3i@-", missingoSex);
+	}
+	
+	addButton(14, "Leave", combat.cleanupAfterCombat);
 }
 
 //This is a bonus scene for those who are playing Corruption of Champions with Silly Mode activated and defeat the Sand Witch by dropping her hit points and have the option of having their way with her. A special third(?) option appears that begins the encounter. The idea is that it breaks the 4th wall and gives the player the impression that they've stumbled upon a glitchy, incomplete scene. As a special note to anyone who does coding: all code tags (anything like \" + player.cockDescript(0) + \" but not my usual {code brackets} for example) are meant to be printed in game exactly as they were written on this document, pushing the idea that the player \"broke the game\".
