@@ -268,7 +268,7 @@ use namespace kGAMECLASS;
 			//Stacks on top of Thick Skin perk.
 			if (hasFur()) armorDef += 1;
 			if (hasReptileScales()) armorDef += 3;
-			//if (hasDragonScales()) armorDef += 3; // maybe later
+			if (hasDragonScales()) armorDef += 2;
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorDef += 1;
 			//Bonus defense
