@@ -842,27 +842,36 @@ internal function getRapedByTamaniYouHypnoSlut():void {
 
 public function tamaniVictoryMenu():void {
 	flags[kFLAGS.TAMANI_DEFEAT_COUNTER]++;
-	if (player.lust >= 33 && player.totalCocks() > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
-		outputText(" You could fuck her, but if that's the case why did you bother fighting her?");
-		outputText("\n\nWhat do you do to her?");
-		menu();
-		addButton(0, "Fuck", tamaniSexWon);
-		if (player.cockThatFits(monster.analCapacity()) >= 0) addButton(1, "Buttfuck", tamaniAnalShits);
-		else addButtonDisabled(1, "Buttfuck", player.cockTotal() == 1 ? "Your cock is too big to fit in Tamani's ass." : "None of your cocks will fit in Tamani's ass.");
-		if (!getGame().forest.tamaniScene.pregnancy.isPregnant && player.canOvipositSpider()) addButton(2, "Lay Eggs", tamaniBeaten); //NOT PREGGERS
-		if (flags[kFLAGS.TAMANI_DEFEAT_COUNTER] >= 4 && monster.HP <= 0) addButton(3, "NO MORE!", killTamaniChoice);
-		addButton(4, "Leave", combat.cleanupAfterCombat);
-	}
-	else {
-		if (flags[kFLAGS.TAMANI_DEFEAT_COUNTER] >= 4 && monster.HP <= 0) {
-			outputText(" If you're tired of Tamani trying to force herself upon you, you could resolve to not see her again.");
-			addButton(3, "NO MORE!", killTamaniChoice);
-			addButton(4, "Leave", combat.cleanupAfterCombat);
-		}
-		else {
-			combat.cleanupAfterCombat();
-		}
+	
+	if (flags[kFLAGS.SFW_MODE] > 0) {
+		outputText("You smile in satisfaction as Tamani collapses, unable to continue fighting.");
 		
+		combat.cleanupAfterCombat();
+		return;
+	}
+	
+	menu();
+	
+	if (flags[kFLAGS.TAMANI_DEFEAT_COUNTER] >= 4) {
+		outputText(" If you're tired of Tamani trying to force herself upon you, you could resolve to not see her again.");
+		addButton(10, "NO MORE!", killTamaniChoice);
+	}
+	addButton(14, "Leave", combat.cleanupAfterCombat);
+	
+	
+	if (flags[kFLAGS.SFW_MODE] <= 0) {
+		addDisabledButton(0, "Fuck", "This scene requires you to have cock and sufficient arousal.");
+		addDisabledButton(1, "Buttfuck", "This scene requires you to have fitting cock and sufficient arousal.");
+		addDisabledButton(2, "Lay Eggs", "This scene requires you to have spider ovipositor and enough eggs. She should not be pregnant.");
+		
+		if (player.lust >= 33 && player.hasCock()) {
+			outputText(" You could fuck her, but if that's the case why did you bother fighting her?");
+			addButton(0, "Fuck", tamaniSexWon);
+			if (player.cockThatFits(monster.analCapacity()) >= 0)
+				addButton(1, "Buttfuck", tamaniAnalShits);
+		}
+		if (!pregnancy.isPregnant && player.canOvipositSpider())
+			addButton(2, "Lay Eggs", tamaniBeaten); //NOT PREGGERS
 	}
 }
 

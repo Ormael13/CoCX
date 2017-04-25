@@ -367,6 +367,14 @@
 			return kGAMECLASS.player;
 		}
 		
+		/**
+		 * This is alias for player.
+		 */
+		protected function get pc():Player
+		{
+			return kGAMECLASS.player;
+		}
+		
 		protected function set player(val:Player):void
 		{
 			kGAMECLASS.player = val;
@@ -413,6 +421,14 @@
 		}
 		
 		protected function get monster():Monster
+		{
+			return kGAMECLASS.monster;
+		}
+		
+		/**
+		 * This is alias for monster.
+		 */
+		protected function get enemy():Monster
 		{
 			return kGAMECLASS.monster;
 		}

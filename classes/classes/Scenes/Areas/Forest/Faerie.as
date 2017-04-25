@@ -12,7 +12,7 @@
 public function encounterFaerie():void {
 	spriteSelect(17);
 	outputText("A faerie slightly taller and thicker than your middle finger flits about the air. Her flat chest and girlish bob of hair make her look quite cute, but the solid black stockings and leather straps covering her chest show her slutty nature. Her wings are a light red, the color of aroused genitals.\n\n", true);
-	if (player.cockTotal() > 0 && (!player.hasVagina() || rand(2) == 0)) {
+	if (player.cockTotal() > 0 && (player.biggestTitSize() <= BREAST_CUP_B || rand(2) == 0)) {
 		outputText("She seems to notice you getting hard at the sight of her and looks down. \"<i>Ew, man parts!</i>\" the faerie exclaims, flying away like a frightened bird.", false);
 		if (rand(player.spe/2) + player.statusEffectv1(StatusEffects.FaerieFucked) > 15) {
 			if (player.statusEffectv1(StatusEffects.FaerieFucked) < 5) {
@@ -162,8 +162,9 @@ private function faerieDoNothing():void {
 		if (player.biggestLactation() > 1) outputText("A squirt of milk shoots inside her, making the faerie moan. She looks up at you with lusty, slitted eyes, squeezing her legs together to draw more from you.\n\n", false);
 		outputText("Eventually you both find a rhythm and soon she's moaning loudly.  ", false);
 		if (player.hasVagina()) outputText("With your other hand you start diddling your " + player.vaginaDescript(0) + ", adding your own soft moans to hers.  ", false);
+		else if (player.hasCock()) outputText("With your other hand you start jerking your " + player.cockDescript(0) + ", adding your own soft moans to hers.  ", false);
 		outputText("A few blissful moments later, she shudders and you feel her uncontrolled spasms around your nipple.  ", false);
-		if (player.hasVagina()) outputText("You join her shortly after.  ", false);
+		if (!player.isGenderless()) outputText("You join her shortly after.  ", false);
 		outputText("The faerie goes limp and spirals to the ground, crashing gently and still twitching in the afterglow. Stepping back carefully, you leave her.", false);
 		if (player.biggestLactation() > 1.5) outputText("\n\nA copious gout of your milk escapes her rosy folds.", false);
 		player.orgasm('Tits');
@@ -181,7 +182,7 @@ private function faerieDoNothing():void {
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
-	if (player.getClitLength() > 4.5) {
+	if (player.hasVagina() && player.getClitLength() > 4.5) {
 		outputText("The faerie flies close to your ear and speaks in a volume that would be a whisper from another human, \"You've got some sexy parts girl, but you're too big for me. I hope you find someone to get you off so I can watch.\" Then she flies in front of you, cutely kisses the bridge of your nose, and flies off.", false);
 		dynStats("lus", 5);
 		doNext(camp.returnToCampUseOneHour);

@@ -7,42 +7,7 @@
 	public class BeeGirl extends Monster {
 
 		override public function defeated(hpVictory:Boolean):void {
-			clearOutput();
-			if (player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
-				if (hpVictory) {
-					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully, and you see an easy way to relieve it..\n\nWhat do you do to her?");
-				}
-				else {
-					outputText("You smile in satisfaction as the " + short + " spreads her legs and starts frigging her honey-soaked cunt.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully, and you see an easy way to relieve it..\n\nWhat do you do to her?");
-				}
-				player.lust = 98;
-				game.dynStats("lus", 1);
-				var dildoRape:Function = (player.hasKeyItem("Deluxe Dildo") >= 0 ? game.forest.beeGirlScene.beeGirlsGetsDildoed : null);
-				var milkAndHoney:Function = (player.hasStatusEffect(StatusEffects.Feeder) ? game.forest.beeGirlScene.milkAndHoneyAreKindaFunny : null);
-				game.simpleChoices("Rape", game.forest.beeGirlScene.rapeTheBeeGirl, "Dildo Rape", dildoRape, "", null, "B. Feed", milkAndHoney, "Leave", leaveAfterDefeating);
-			}
-			else if (player.hasStatusEffect(StatusEffects.Feeder) && flags[kFLAGS.SFW_MODE] <= 0) { //Genderless can still breastfeed
-				if (hpVictory) {
-					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully.\n\nWhat do you do?");
-				}
-				else {
-					outputText("You smile in satisfaction as the " + short + " spreads her legs and starts frigging her honey-soaked cunt.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully.\n\nWhat do you do?");
-				}
-				game.simpleChoices("B. Feed", game.forest.beeGirlScene.milkAndHoneyAreKindaFunny, "", null, "", null, "", null, "Leave", leaveAfterDefeating);
-			}
-			else {
-                game.combat.finishCombat();
-            }
-		}
-		
-		private function leaveAfterDefeating():void {
-			if (HP < 1) {
-				flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITHOUT_RAPE]++; //This only happens if you beat her up and then don't rape her
-			}
-			else {
-				flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE]++; //All wins by lust count towards the desire option, even when you leave
-			}
-			game.combat.cleanupAfterCombat();
+			game.forest.beeGirlScene.beeGirlPCVictory(hpVictory);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void

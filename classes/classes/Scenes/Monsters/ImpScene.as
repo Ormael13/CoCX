@@ -20,53 +20,49 @@ package classes.Scenes.Monsters
 		
 		public function impVictory():void {
 			clearOutput();
-			var canFeed:Boolean = (player.hasStatusEffect(StatusEffects.Feeder));
-			var canBikiniTits:Boolean = (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor);
+			
 			outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses and begins masturbating feverishly.");
 			menu();
-			if (canFeed) {
-				if (player.lust >= 33)
-					outputText("  Sadly you realize your own needs have not been met.  Of course you could always rape the poor thing, but it might be more fun to force it to guzzle your breast-milk.\n\nWhat do you do?");
-				else outputText("  You're not really turned on enough to rape it, but it might be fun to force it to guzzle your breast-milk.\n\nDo you breastfeed it?");
-			}
-			else if (player.lust >= 33 || canBikiniTits || player.canOvipositBee()) {
-				outputText("  Sadly you realize your own needs have not been met.  Of course you could always rape the poor thing...\n\nDo you rape him?");
-			}
-			else {
-				outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses and begins masturbating feverishly.", true);
-				if (addKillPetrifyButtons())
-					addButton(4, "Leave", combat.cleanupAfterCombat);
-				else combat.cleanupAfterCombat();
-				return;
-			}
-			if (player.lust > 33) {
-				var maleRape:Function = null;
-				if (player.hasCock()) {
-					if (player.cockThatFits(monster.analCapacity()) == -1)
-						outputText("\n\n<b>You're too big to rape an imp with " + player.oMultiCockDesc() + ".</b>");
-					else maleRape = (player.isTaur() ? centaurOnImpStart : rapeImpWithDick);
+			
+			addDisabledButton(0, "Male Rape", "This scene requires you to have fitting cock and sufficient arousal.", "Male Rape");
+			addDisabledButton(1, "Female Rape", "This scene requires you to have vagina and sufficient arousal.", "Female Rape");
+			addDisabledButton(2, "NippleFuck", "This scene requires you to have fuckable nipples and sufficient arousal.", "NippleFuck");
+			addDisabledButton(3, "Breastfeed", "This scene requires you to have enough milk.", "Breastfeed");
+			addDisabledButton(4, "Use Condom", "This scene requires you to have fitting cock and sufficient arousal. It can't accomodate taurs.", "Use Condom");
+			addDisabledButton(5, "Oviposit", "This scene requires you to have bee ovipositor and enough eggs.", "Oviposit");
+			// Button 6 is used for Lusty Maidens Armor special scene and is hidden without it
+			
+			if (pc.lust >= 33) {
+				outputText("  Sadly you realize your own needs have not been met.  Of course you could always rape the poor thing...\n\n");
+				if (pc.hasCock()) {
+					if (player.cockThatFits(monster.analCapacity()) == -1) {
+						addDisabledButton(0, "Male Rape", "Male Rape", "You're too big to rape an imp.");
+					}
+					else 
+						addButton(0, (pc.isTaur() ? "Centaur Rape" : "Male Rape"), (pc.isTaur() ? centaurOnImpStart : rapeImpWithDick));
 				}
-				if (player.hasVagina()) {
-					if (player.isTaur()) {
-						maleRape = centaurOnImpStart;
+				if (pc.hasVagina()) {
+					if (pc.isTaur()) {
 						addButton(1, "Group Vaginal", centaurGirlOnImps);
 					}
 					else addButton(1, "Female Rape", rapeImpWithPussy);
 				}
-				else if (maleRape == null && !player.hasFuckableNipples() && !canFeed && !canBikiniTits && !player.canOvipositBee()) {
-					combat.cleanupAfterCombat(); //Only happens when there's no way to fuck the imp
-					return;
-				}
-				addButton(0, (player.isTaur() ? "Centaur Rape" : "Male Rape"), maleRape);
-				if (player.hasFuckableNipples()) addButton(2, "NippleFuck", noogaisNippleRape);
+				if (pc.hasFuckableNipples()) addButton(2, "NippleFuck", noogaisNippleRape);
+			
+				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(6, "B.Titfuck", (pc.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+				if (pc.cockThatFits(enemy.analCapacity()) != -1 && !pc.isTaur() && pc.hasItem(useables.CONDOM)) addButton(4, "Use Condom", rapeImpWithDick, 1);
+			} else {
+				outputText("\n\n<b>You aren't horny enough to rape him.</b>");
 			}
-			if (canFeed) addButton(3, "Breastfeed", areImpsLactoseIntolerant);
-			if (canBikiniTits) addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
-			if (maleRape == rapeImpWithDick && player.hasItem(useables.CONDOM)) addButton(5, "Use Condom", rapeImpWithDick, true);
-			addKillPetrifyButtons(6);
-			if (player.canOvipositBee()) addButton(8, "Oviposit", putBeeEggsInAnImpYouMonster);
+			if (pc.lactationQ() >= 500 || player.hasStatusEffect(StatusEffects.Feeder)) addButton(3, "Breastfeed", areImpsLactoseIntolerant);
+			
+			if (pc.canOvipositBee()) addButton(5, "Oviposit", putBeeEggsInAnImpYouMonster);
+			
+			addKillPetrifyButtons(10, 11);
+			
 			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
+		
 		private function rapeImpWithDick(condomed:Boolean = false):void {
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = 0;
@@ -1560,9 +1556,27 @@ package classes.Scenes.Monsters
 				outputText("The muscular imp groans in pained arousal, his loincloth being pushed to the side by his thick, powerful dick.  Grabbing the useless clothing, he rips it from his body, discarding it.  The imp's eyes lock on his cock as he becomes completely ignorant of your presence.  His now insatiable lust has completely clouded his judgment.  Wrapping both of his hands around his pulsing member he begins to masturbate furiously, attempting to relieve the pressure you've caused.");
 				//Leave // Rape]
 				menu();
-				if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) addButton(0, "Sex", sexAnImpLord);
-				addKillPetrifyButtons(1);
-				addButton(4, "Leave", combat.cleanupAfterCombat);
+				if (flags[kFLAGS.SFW_MODE] <= 0) {
+					addDisabledButton(0, "FuckHisAss", "This scene requires you to have fitting cock and sufficient arousal.", "Fuck His Ass");
+					addDisabledButton(1, "Get Blown", "This scene requires you to have cock and sufficient arousal.", "Get Blown");
+					addDisabledButton(2, "Ride Cock", "This scene requires you to have vagina and sufficient arousal.", "Ride Cock");
+					if (monster.short != "imp overlord" && monster.short != "imp warlord")
+						addDisabledButton(3, "Breastfeed", "This scene requires you to have enough milk.", "Breastfeed");
+					// Button 4 is used for Lusty Maidens Armor special scene and is hidden without it
+						
+					if (player.lust >= 33) {
+						if (player.hasCock() && player.cockThatFits(monster.analCapacity()) >= 0)
+							addButton(0, "FuckHisAss", impLordBumPlug);
+						if (player.hasCock()) addButton(1,"Get Blown",getBlownByAnImpLord);
+						if (player.hasVagina()) addButton(2,"Ride Cock",femaleVagRape);
+						if ((player.findPerk(PerkLib.Feeder) >= 0 || pc.lactationQ() >= 500) && monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape);
+						if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+					} else {
+						outputText("\n\n<b>You aren't horny enough to rape him.</b>");
+					}
+				}
+				addKillPetrifyButtons(10, 11);
+				addButton(14, "Leave", combat.cleanupAfterCombat);
 			}
 		}
 
@@ -1576,27 +1590,6 @@ package classes.Scenes.Monsters
 				impLordRapeFemale(overlord);
 			} else 
 				impLordRapeMale(overlord);
-		}
-		
-		//Rape
-		private function sexAnImpLord():void {
-			clearOutput();
-			outputText("You grin evilly and walk towards the defeated corrupted creature.  He doesn't take notice of you even though you're only inches away from him.  You remove your [armor] slowly, enjoying the show the imp is giving you.  But soon it's time for you to have fun too.");
-			//(No line break)
-			//if (player doesn't have centaur legs)
-			if (!player.isTaur()) outputText("  You grab his hands, removing them from his " + monster.cockDescriptShort(0) + ". This gets his attention immediately, and you grin widely, pinning him to the ground.");
-			else outputText("  You place one of your front hooves on his chest, knocking him onto his back.  He attempts to get back up, but you apply more pressure to his thick, manly chest, until he gasps.  The imp gets the idea quickly and stops masturbating, all of his focus now on you.");
-			
-			menu();
-			//Continues in, Male Anal, Female Vaginal, or Breastfeed
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
-				if (player.hasCock() && player.cockThatFits(monster.analCapacity()) >= 0) addButton(0,"FuckHisAss",impLordBumPlug);
-				if (player.hasCock()) addButton(1,"Get Blown",getBlownByAnImpLord);
-				if (player.hasVagina()) addButton(2,"Ride Cock",femaleVagRape);
-				if (player.findPerk(PerkLib.Feeder) >= 0 && monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape);
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
-			}
-			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
 		
 		//MALE ANAL
@@ -1803,7 +1796,7 @@ package classes.Scenes.Monsters
 						}
 						else {
 							if (player.cor < 80) {
-								outputText("\n\nUnfortunately it looks like you won't find out, as the last of your " + player.breastDescript(2) + " runs dry.  The imp wobbles and falls over, clearly not used to the added weight.  Now that you get a good look at him, you see some subtle changes.  He's got a very full belly.  It's a shame as your milk is not potent enough.");
+								outputText("\n\nUnfortunately it looks like you won't find out, as the last of your " + player.breastDescript(1) + " runs dry.  The imp wobbles and falls over, clearly not used to the added weight.  Now that you get a good look at him, you see some subtle changes.  He's got a very full belly.  It's a shame as your milk is not potent enough.");
 								outputText("\n\nThe imp on the other hand looks a little sick to the stomach now, and flops backwards, passing out completely.  You look at him for a moment and decide he'll be fine.");
 							}
 							else {
