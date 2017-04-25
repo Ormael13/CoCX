@@ -7,6 +7,10 @@
 
 	public class Valeria extends NPCAwareContent implements TimeAwareInterface {
 
+		public static const GOOSTUFFED_EFFECT_MIN_DURATION:int = 10;
+		public static const GOOSTUFFED_EFFECT_MAX_DURATION_DELTA:int = 300;
+		public static const GOOSTUFFED_PREGNANCY_DURATION:int = 500;
+		
 		public function Valeria()
 		{
 			CoC.timeAwareClassAdd(this);
@@ -545,7 +549,7 @@ public function valeriaAndGooThreeStuff():void {
 	addButton(0,"Next",valeriaGooRapeII);
 }
 
-private function valeriaGooRapeII():void {
+protected function valeriaGooRapeII():void {
 	clearOutput();
 	outputText("The lump that bumped you earlier smacks off ");
 	if (player.biggestTitSize() >= 3) outputText("the valley of your cleavage");
@@ -683,11 +687,11 @@ private function valeriaGooRapeII():void {
 	//v2 = cock fill = 1, balls fill = 2
 	//v3 = cunt fill?
 	//v4 = tit fill?
-	player.createStatusEffect(StatusEffects.GooStuffed, 10 + rand(300), 0, 0, 0);
-	player.buttKnockUpForce(PregnancyStore.PREGNANCY_GOO_STUFFED, 500); //Blocks other pregnancies - Way higher than GooStuffed status can last. Cleared when GooStuffed removed
+	player.createStatusEffect(StatusEffects.GooStuffed, GOOSTUFFED_EFFECT_MIN_DURATION + rand(GOOSTUFFED_EFFECT_MAX_DURATION_DELTA), 0, 0, 0);
+	player.buttKnockUpForce(PregnancyStore.PREGNANCY_GOO_STUFFED, GOOSTUFFED_PREGNANCY_DURATION); //Blocks other pregnancies - Way higher than GooStuffed status can last. Cleared when GooStuffed removed
 	if (player.hasVagina()) {
 		player.changeStatusValue(StatusEffects.GooStuffed, 3, 1);
-		player.knockUpForce(PregnancyStore.PREGNANCY_GOO_STUFFED, 500); //Blocks other pregnancies - Way higher than GooStuffed status can last. Cleared when GooStuffed removed
+		player.knockUpForce(PregnancyStore.PREGNANCY_GOO_STUFFED, GOOSTUFFED_PREGNANCY_DURATION); //Blocks other pregnancies - Way higher than GooStuffed status can last. Cleared when GooStuffed removed
 	}
 	if (player.hasCock()) {
 		if (player.balls > 0) player.changeStatusValue(StatusEffects.GooStuffed,2,2);
