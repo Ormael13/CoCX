@@ -23,6 +23,7 @@ public function minoVictoryRapeChoices():void {
 	if (flags[kFLAGS.SFW_MODE] > 0) {
 		outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.", true);
 		combat.cleanupAfterCombat();
+		return;
 	}
 	
 	//Hungry for cum?  Grab a snickers.
