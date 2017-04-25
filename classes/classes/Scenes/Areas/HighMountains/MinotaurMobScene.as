@@ -602,26 +602,45 @@ private function analSpearSemiPregMinotaurGangbang():void {
 internal function victoryMinotaurGang():void {
 	clearOutput();
 	spriteSelect(94);
+	
+	if (flags[kFLAGS.SFW_MODE] > 0) {
+		outputText("You smile in satisfaction as the last minotaur collapses, unable to continue fighting.", true);
+		combat.cleanupAfterCombat();
+		return;
+	}
+	
 	//(HP) 
 	if (monster.HP < 1) outputText("The last minotaur sinks to his knees, wobbling back and forth while fighting to stay upright. He gives up and slumps down onto his back, mooing in pain.  You exult in your victory as you look across the defeated beast-men.  Though they're strong and aided by potent natural aphrodisiacs, they were no match for you.  Amusingly enough, they're still hard, even in their semi-conscious state. The horse-like mino-cocks lift their loincloths to stab at the sky, dripping moisture.\n\n", false);
 	//(Lust) 
 	else outputText("The last minotaur sinks to his knees, pulling aside his loincloth with thread-rending strength to expose the pulsating, needy shaft to the air.  He begins to masturbate himself just like his brother, spilling his pre-seed over the ground into the messy, growing puddle.  The smell hangs thick in the air, but you've won and kept enough of your wits about you to walk away if you want.\n\n", false);
 	//+lust regardless 
-	if (player.lust < 33) player.lust = 33;
+	if (player.lust < 33) dynStats("lus=", 33, "resisted", false);
 	else dynStats("lus", 20);
-	dynStats("lus", 1);
+	
 	outputText("Your body is burning up, buzzing with growing lust from the obscenity going on a few feet away from you.  What do you do?", false);
 	//	[win options]
-	var getSuck:Function = null;
-	if (player.hasCock()) getSuck = createCallBackFunction(forceMinitaurToGiveOral,1);
-	var nipFuck:Function = null;
-	if (player.hasFuckableNipples()) nipFuck = victoryBJNippleFuckMinotaurGang;
-	var titFuck:Function = null;
-	if (player.biggestTitSize() >= 6) titFuck = victoryMinotaurGangTitFuck;
-	choices("Gangbang", victoryAllThePenetrationsMinotaurGangBang,
-			"Tit-Fuck", titFuck, "Nipple-Fuck", nipFuck,
-			"Get Licked", createCallBackFunction(forceMinitaurToGiveOral, 0),
-			"Get Sucked", getSuck, "Discipline", disciplineEldestMinotaurSon, "", null, "", null, "", null, "Leave", combat.cleanupAfterCombat);
+	// Logic assumes that you are either female or herm, since encounter requires vagina to happen.
+	menu();
+	// 0 - Gangbang always available
+	addDisabledButton(1, "Tit-Fuck", "This scene requires you to have big enough breasts.");
+	addDisabledButton(2, "Nipple-Fuck", "This scene requires you to have fuckable nipples.");
+	// 3 - Get Licked always available
+	addDisabledButton(4, "Get Sucked", "This scene requires you to have cock.");
+	// 5 - Discipline always available
+	
+	addButton(0, "Gangbang", victoryAllThePenetrationsMinotaurGangBang);
+	if (player.biggestTitSize() >= 6) {
+		addButton(1, "Tit-Fuck", victoryMinotaurGangTitFuck);
+	}
+	if (player.hasFuckableNipples()) {
+		addButton(2, "Nipple-Fuck", victoryBJNippleFuckMinotaurGang);
+	}
+	addButton(3, "Get Licked", createCallBackFunction(forceMinitaurToGiveOral, 0));
+	if (player.hasCock()) {
+		addButton(4, "Get Sucked", createCallBackFunction(forceMinitaurToGiveOral,1));
+	}
+	addButton(5, "Discipline", disciplineEldestMinotaurSon);
+	addButton(14, "Leave", combat.cleanupAfterCombat);
 }
 //*[Victory Tit-Fuck] (for only the fattest of fat bitch titties) 
 private function victoryMinotaurGangTitFuck():void {

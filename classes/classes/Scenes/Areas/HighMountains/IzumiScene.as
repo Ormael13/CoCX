@@ -1603,6 +1603,12 @@ package classes.Scenes.Areas.HighMountains
 			outputText("You could play nice and let the Oni go free... she is asking nicely, after all.  On the other hand, after the way she tried to ravage you earlier, you figure Izumi’s arrogant attitude could use being taken down a notch or two.  The only question is, what exactly are you going to do?\n\n");
 
 			menu();
+			addDisabledButton(1, "TribHorn", "This scene requires you to have vagina.");
+			addDisabledButton(2, "LetsFuck", "This scene requires you to have cock.");
+			addDisabledButton(3, "RevengeAnal", "This scene requires you to have cock.");
+			addDisabledButton(4, "RevengeOral", "This scene requires you to have cock.");
+			addDisabledButton(5, "Tentacruel", "This scene requires you to have at least eight tentacle cocks.");
+			
 			addButton(0, "Let Go", letGoAndLeaveYouSillyFuck);
 
 			flags[kFLAGS.IZUMI_SEEN_PC_GENDER] = player.gender;
