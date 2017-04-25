@@ -549,7 +549,7 @@ public function valeriaAndGooThreeStuff():void {
 	addButton(0,"Next",valeriaGooRapeII);
 }
 
-protected function valeriaGooRapeII():void {
+private function valeriaGooRapeII():void {
 	clearOutput();
 	outputText("The lump that bumped you earlier smacks off ");
 	if (player.biggestTitSize() >= 3) outputText("the valley of your cleavage");
