@@ -2275,6 +2275,22 @@ package classes
 		{
 			return gender == GENDER_NONE;
 		}
+
+		/**
+		 * Checks if the creature is technically male or herm: has at least a cock.
+		 */
+		public function isMaleOrHerm():Boolean
+		{
+			return (gender & GENDER_MALE) != 0;
+		}
+
+		/**
+		 * Checks if the creature is technically female or herm: has at least a vagina.
+		 */
+		public function isFemaleOrHerm():Boolean
+		{
+			return (gender & GENDER_FEMALE) != 0;
+		}
 		
 		//Create a cock. Default type is HUMAN
 		public function createCock(clength:Number = 5.5, cthickness:Number = 1,ctype:CockTypesEnum=null):Boolean
