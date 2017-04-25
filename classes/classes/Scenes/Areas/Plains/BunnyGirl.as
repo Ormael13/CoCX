@@ -44,39 +44,34 @@ public function bunnbunbunMeet():void {
 		outputText("She claps both hands over her mouth, leaving her swollen prick to bounce precipitously while she awaits your response.\n\n", false);
 		
 		outputText("(If you're going to sex her, which of her body parts will you use?", false);
-		dynStats("lus", 5+player.lib/20);
-		var DickInV:Function = null;
-		var Vagina:Function = null;
-		var sixtyNine:Function = null;
-		var eggs:Function = null;
-		if (player.cockThatFits(40) >= 0) {
-			Vagina = bunbunGetsFucked;
-			outputText("  Fuck her vagina?", false);
-		}
-		else if (player.cockTotal() > 0) outputText("  <b>You're too to big fit inside her...</b>", false);
+		dynStats("lus", 5 + player.lib / 20);
 		
-		//Dick requires one 40 area or smaller.
+		menu();
+		addDisabledButton(0, "Your Vagina", "This scene requires you to have vagina.");
+		addDisabledButton(1, "Her Vagina", "This scene requires you to have fitting cock.");
+		addDisabledButton(2, "69", "This scene requires you to have genitals.");
+		addDisabledButton(3, "LayYourEggs", "This scene requires you to have ovipositor and enough eggs.", "Lay Your Eggs");
+		// 4 - anal always available
+		
 		if (player.hasVagina()) {
-			DickInV = bunbunFucksYourVag;
-			outputText("  Her dick in your vagina?", false);
+			addButton(0, "Your Vagina", bunbunFucksYourVag, undefined, undefined, undefined, "Her dick in your vagina?");
 		}
-		if (player.gender > 0) {
-			sixtyNine = bunbun69;
-			outputText("  Sixty-nine her?", false);
+		//Dick requires one 40 area or smaller.
+		if (player.cockThatFits(40) >= 0) {
+			addButton(1, "Her Vagina", bunbunGetsFucked, undefined, undefined, undefined, "Fuck her vagina?");
 		}
-		
-		if (player.canOviposit() && player.lust >= 33) {
+		if (!player.isGenderless()) {
+			addButton(2, "69", bunbun69, undefined, undefined, undefined, "Sixty-nine her?");
+		}
+		if (player.canOviposit()) {
 			if (!player.canOvipositBee() || rand(2) == 0)
-				eggs = ovipositBunnyEaster;
+				addButton(3, "LayYourEggs", ovipositBunnyEaster, undefined, undefined, undefined, "Fill her with your own eggs?");
 			else
-				eggs = layEggsInBunbuns;
+				addButton(3, "LayYourEggs", layEggsInBunbuns, undefined, undefined, undefined, "Fill her with your own eggs?");
 		}
+		addButton(4, "Your Ass", bunbunFucksPCInAss, undefined, undefined, undefined, "Her dick in your ass?");
 		
-		outputText("  Her dick in your ass?)", false);
-		//var Ass:Number = 0;
-		//Dick In V] [Dick in A] [Vagina] [Ass] [Leave]
-		choices("Your Vagina", DickInV, "Her Vagina", Vagina, "69", sixtyNine, "LayYourEggs", eggs, "Your Ass", bunbunFucksPCInAss,
-			"", null, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+		addButton(14, "Leave", camp.returnToCampUseOneHour);
 	}
 }
 //[Talk]
@@ -95,28 +90,27 @@ private function talkToBunnyBunBun():void {
 	
 	outputText("In no time flat she's on her back, playing with herself and lifting her balls to expose a bubblegum-pink gash.  You could 'help' her with that or you could leave.  Of course if you leave you doubt you'll find her again.  Maybe a good fucking will clear her head long enough for her to figure out how to leave this land and return to wherever she came from?\n\n", false);
 	outputText("(If you're going to sex her, which of her body parts will you use?", false);
-	var DickInV:Function = null;
-	var Vagina:Function = null;
-	var sixtyNine:Function = null;
-	//Dick requires one 40 area or smaller.
+	dynStats("lus", 5 + player.lib / 20);
+	
+	menu();
+	addDisabledButton(0, "Your Vagina", "This scene requires you to have vagina.");
+	addDisabledButton(1, "Her Vagina", "This scene requires you to have fitting cock.");
+	addDisabledButton(2, "69", "This scene requires you to have genitals.");
+	// 3 - anal always available
+	
 	if (player.hasVagina()) {
-		DickInV = bunbunFucksYourVag;
-		outputText("  Her dick in your vagina?", false);
+		addButton(0, "Your Vagina", bunbunFucksYourVag, undefined, undefined, undefined, "Her dick in your vagina?");
 	}
+	//Dick requires one 40 area or smaller.
 	if (player.cockThatFits(40) >= 0) {
-		Vagina = bunbunGetsFucked;
-		outputText("  Fuck her vagina?", false);
+		addButton(1, "Her Vagina", bunbunGetsFucked, undefined, undefined, undefined, "Fuck her vagina?");
 	}
-	else if (player.cockTotal() > 0) outputText("  <b>You're too big to fit inside her...</b>", false);
-	if (player.gender > 0) {
-		sixtyNine = bunbun69;
-		outputText("  Sixty-nine her?", false);
+	if (!player.isGenderless()) {
+		addButton(2, "69", bunbun69, undefined, undefined, undefined, "Sixty-nine her?");
 	}
-	outputText("  Her dick in your ass?)", false);
-	//var Ass:Number = 0;
-	//Dick In V] [Dick in A] [Vagina] [Ass] [Leave]
-	simpleChoices("Your Vagina",DickInV,"Your Ass",bunbunFucksPCInAss,"Her Vagina",Vagina,"69",sixtyNine,"Leave",camp.returnToCampUseOneHour);
-	dynStats("lus", 5+player.lib/20);
+	addButton(3, "Your Ass", bunbunFucksPCInAss, undefined, undefined, undefined, "Her dick in your ass?");
+	
+	addButton(14, "Leave", camp.returnToCampUseOneHour);	
 }
 //[Rape Her]
 private function rapeBunBun():void {
@@ -138,28 +132,26 @@ private function rapeBunBun():void {
 		
 		dynStats("lus", 10, "cor", 3);
 		outputText("(If you're going to sex her, which of her body parts will you use?", false);
-		var DickInV:Function = null;
-		var Vagina:Function = null;
-		var sixtyNine:Function = null;
-		//Dick requires one 40 area or smaller.
+		
+		menu();
+		addDisabledButton(0, "Your Vagina", "This scene requires you to have vagina.");
+		addDisabledButton(1, "Her Vagina", "This scene requires you to have fitting cock.");
+		addDisabledButton(2, "69", "This scene requires you to have genitals.");
+		// 3 - anal always available
+		
 		if (player.hasVagina()) {
-			DickInV = bunbunFucksYourVag;
-			outputText("  Her dick in your vagina?", false);
+			addButton(0, "Your Vagina", bunbunFucksYourVag, undefined, undefined, undefined, "Her dick in your vagina?");
 		}
+		//Dick requires one 40 area or smaller.
 		if (player.cockThatFits(40) >= 0) {
-			Vagina = bunbunGetsFucked;
-			outputText("  Fuck her vagina?", false);
+			addButton(1, "Her Vagina", bunbunGetsFucked, undefined, undefined, undefined, "Fuck her vagina?");
 		}
-		else if (player.cockTotal() > 0) outputText("  <b>You're too big to fit inside her...</b>", false);
-		if (player.gender > 0) {
-			sixtyNine = bunbun69;
-			outputText("  Sixty-nine her?", false);
+		if (!player.isGenderless()) {
+			addButton(2, "69", bunbun69, undefined, undefined, undefined, "Sixty-nine her?");
 		}
-		outputText("  Her dick in your ass?)", false);
-		//var Ass:Number = 0;
-		//Dick In V] [Dick in A] [Vagina] [Ass] [Leave]
-		simpleChoices("Your Vagina",DickInV,"Your Ass",bunbunFucksPCInAss,"Her Vagina",Vagina,"69",sixtyNine,"Leave",camp.returnToCampUseOneHour);
-
+		addButton(3, "Your Ass", bunbunFucksPCInAss, undefined, undefined, undefined, "Her dick in your ass?");
+		
+		addButton(14, "Leave", camp.returnToCampUseOneHour);
 	}
 }
 
