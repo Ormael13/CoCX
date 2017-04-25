@@ -70,31 +70,24 @@
 		{
 			if (hpVictory) {
 				outputText("The hellhound's flames dim and the heads let out a whine before the creature slumps down, defeated and nearly unconscious.", true);
-				//Rape if not naga, turned on, and girl that can fit!
-				if (player.hasVagina() && player.lust >= 33 && !player.isNaga()) {
-					outputText("  You find yourself musing that you could probably take advantage of the poor 'doggy'.  Do you fuck it?", false);
-					game.simpleChoices("Fuck it", game.mountain.hellHoundScene.hellHoundPropahRape, "", null, "", null, "", null, "Leave", game.combat.cleanupAfterCombat);
-				} else {
-					game.combat.cleanupAfterCombat();
-				}
 			} else {
 				outputText("Unable to bear hurting you anymore, the hellhound's flames dim as he stops his attack. The two heads look at you, whining plaintively.  The hellhound slowly pads over to you and nudges its noses at your crotch.  It seems he wishes to pleasure you.\n\n", true);
-				var temp2:Function =null;
-				if (player.gender > 0 && player.lust >= 33) {
-					outputText("You realize your desires aren't quite sated.  You could let it please you", false);
-					//Rape if not naga, turned on, and girl that can fit!
-					if (player.hasVagina() && player.lust >= 33 && !player.isNaga()) {
-						outputText(" or make it fuck you", false);
-						temp2 = game.mountain.hellHoundScene.hellHoundPropahRape;
-					}
-					outputText(".  What do you do?", false);
-					game.simpleChoices("Lick", game.mountain.hellHoundScene.hellHoundGetsRaped, "Fuck", temp2, "", null, "", null, "Leave", game.combat.cleanupAfterCombat);
+			}
+			game.menu();
+			
+			game.addButtonDisabled(0, "Fuck it", "Ride his twin cocks. This scene requires you to have vagina and sufficient arousal. This scene can not accomodate naga body.");
+			game.addButtonDisabled(1, "Lick", "Make him use his tongues. This scene requires you to have genitals and sufficient arousal. This scene requires lust victory.");
+			
+			if (player.lust >= 33 && !player.isGenderless()) {
+				if (player.hasVagina() && !player.isNaga()) {
+					game.addButton(0, "Fuck it", game.mountain.hellHoundScene.hellHoundPropahRape, undefined, undefined, undefined, "Ride his twin cocks.");
 				}
-				else {
-					outputText("You turn away, not really turned on enough to be interested in such an offer.", false);
-					game.combat.cleanupAfterCombat();
+				if (!hpVictory) {
+					game.addButton(1, "Lick", game.mountain.hellHoundScene.hellHoundGetsRaped, undefined, undefined, undefined, "Make him use his tongues.");
 				}
 			}
+			
+			game.addButton(14, "Leave", game.combat.cleanupAfterCombat);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
