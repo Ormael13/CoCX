@@ -2684,8 +2684,8 @@
 				//Kill pussies!
 				if (player.vaginas.length > 0) {
 					outputText("\n\nYour vagina clenches in pain, doubling you over.  You slip a hand down to check on it, only to feel the slit growing smaller and smaller until it disappears, taking your clit with it! <b> Your vagina is gone!</b>", false);
-					player.removeVagina(0, 1);
 					player.setClitLength(.5);
+					player.removeVagina(0, 1);
 				}
 				//Dickz
 				if (player.cocks.length > 0) {
@@ -2747,8 +2747,8 @@
 				if (player.vaginas.length > 0) {
 					outputText("Your vagina clenches in pain, doubling you over.  You slip a hand down to check on it, only to feel the slit growing smaller and smaller until it disappears, taking your clit with it!\n\n", false);
 					if (player.bRows() > 1 || player.buttRating > 5 || player.hipRating > 5) outputText("  ", false);
-					player.removeVagina(0, 1);
 					player.setClitLength(.5);
+					player.removeVagina(0, 1);
 				}
 				//Kill extra boobages
 				if (player.bRows() > 1) {
