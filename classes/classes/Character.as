@@ -787,6 +787,10 @@ import classes.GlobalFlags.kFLAGS;
 			return max;
 		}
 		
+		/**
+		 *Get the remaining fatigue of the Character.
+		 *@return maximum amount of fatigue that still can be used
+		 */
 		public function fatigueLeft():Number
 		{
 			return maxFatigue() - fatigue;

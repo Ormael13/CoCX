@@ -2237,7 +2237,7 @@ package classes
 		{
 			switch (gender) {
 				case GENDER_NONE:   return caps ? mf("Genderless", "Fem-genderless") : mf("genderless", "fem-genderless");
-				case GENDER_MALE:   return caps ? mf("Male", biggestTitSize() > 1 ? "Shemale" : "Femboy")             : mf("male", biggestTitSize() > 1 ? "shemale" : "femboy");
+				case GENDER_MALE:   return caps ? mf("Male", biggestTitSize() > BREAST_CUP_A ? "Shemale" : "Femboy")             : mf("male", biggestTitSize() > BREAST_CUP_A ? "shemale" : "femboy");
 				case GENDER_FEMALE: return caps ? mf("Cuntboy", "Female")            : mf("cuntboy", "female");
 				case GENDER_HERM:   return caps ? mf("Maleherm", "Hermaphrodite")    : mf("maleherm", "hermaphrodite");
 				default: return "<b>Gender error!</b>";
