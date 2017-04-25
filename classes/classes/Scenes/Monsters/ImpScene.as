@@ -36,7 +36,7 @@ package classes.Scenes.Monsters
 				outputText("  Sadly you realize your own needs have not been met.  Of course you could always rape the poor thing...\n\n");
 				if (pc.hasCock()) {
 					if (player.cockThatFits(monster.analCapacity()) == -1) {
-						addDisabledButton(0, "Male Rape", "Male Rape", "You're too big to rape an imp with [pc.smallestCock].");
+						addDisabledButton(0, "Male Rape", "Male Rape", "You're too big to rape an imp.");
 					}
 					else 
 						addButton(0, (pc.isTaur() ? "Centaur Rape" : "Male Rape"), (pc.isTaur() ? centaurOnImpStart : rapeImpWithDick));
