@@ -156,31 +156,43 @@ internal function pcBeatsATrap():void {
 	//PC lust victory: 
 	else outputText("The sand around you stops sinking.  Overpowered with lust, the sandtrap moans and gives up control over itself and its pit to desperately run one set of hands over its flat chest whilst the other pushes into the sand to masturbate... whatever it has down there.  With your foe in this state, climbing out won't be so difficult now.");
 	
-	var nagaThreeSome:Function = null;
-	var putYourDickInIt:Function = null;
-	var rideDatSantTrap:Function = null;
-	var useSandTarpsHand:Function = null;
-	var bikiniTits:Function = null;
-	if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster);
-	//Requirements: Player is naga with tail and fangs, has met desert naga as naga at least once
-	if (player.isNaga() && player.hasStatusEffect(StatusEffects.Naga) && player.gender > 0 && player.faceType == FACE_SNAKE_FANGS) nagaThreeSome = nagaThreesomeWithSandTrap;
+	if (flags[kFLAGS.SFW_MODE] > 0) {
+		combat.cleanupAfterCombat();
+		return;
+	}
 	
-	//Requires: Penis and str requirement
-	if (player.hasCock() && player.str >= 60) putYourDickInIt = stickWangInSandgina;
-	
-	//\"<i>Ride</i>\" (Z)
-	if (player.hasVagina()) rideDatSantTrap = rideDatSandTarpLikeIts1999;
-	//\"<i>Hands</i>\" (Z)
-	if (player.gender > 0) useSandTarpsHand = useSandTarpsHands;
+	menu();
+	addDisabledButton(0, "Naga3Some", "This scene requires you to have naga body with genitals and another friendly naga around.", "Naga Treesome");
+	addDisabledButton(1, "UseYourCock", "This scene requires you to have cock and to be strong enough.", "Use Your Cock");
+	addDisabledButton(2, "RideVaginal", "This scene requires you to have vagina.");
+	addDisabledButton(3, "Handjob", "This scene requires you to have genitals.");
+	// Button 4 is used for Lusty Maidens Armor special scene and is hidden without it
 	
 	//additional victory sentence if PC lust over 30: 
 	if (player.lust >= 33) {
 		outputText("\n\nBefore you go, you take in the helpless body of your would-be ambusher.  What do you do?");
-		
-		choices("Naga3Some", nagaThreeSome, "UseYourCock", putYourDickInIt, "RideVaginal", rideDatSantTrap, "Handjob", useSandTarpsHand, "", null,
-			"", null, "", null, "", null, "B.Titfuck", bikiniTits, "Leave", combat.cleanupAfterCombat);
+		//Requirements: Player is naga with tail and fangs, has met desert naga as naga at least once
+		if (player.isNaga() && player.hasStatusEffect(StatusEffects.Naga) && !player.isGenderless() && player.faceType == FACE_SNAKE_FANGS) {
+			addButton(0, "Naga3Some", nagaThreesomeWithSandTrap, undefined, undefined, undefined, "Call your friend for a treesome.", "Naga Treesome");
+		}
+		//Requires: Penis and str requirement
+		if (player.hasCock() && player.str >= 60) {
+			addButton(1, "UseYourCock", stickWangInSandgina);
+		}
+		//\"<i>Ride</i>\" (Z)
+		if (player.hasVagina()) {
+			addButton(2, "RideVaginal", rideDatSandTarpLikeIts1999);
+		}
+		//\"<i>Hands</i>\" (Z)
+		if (!player.isGenderless()) {
+			addButton(3, "Handjob", useSandTarpsHands);
+		}
+		if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") {
+			addButton(4, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, monster));
+		}
 	}
-	else combat.cleanupAfterCombat();
+	
+	addButton(14, "Leave", combat.cleanupAfterCombat);
 }
 
 //Male/Herm loss (Z)
