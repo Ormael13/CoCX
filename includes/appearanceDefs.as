@@ -15,6 +15,7 @@ public static const SKIN_TYPE_PLAIN:int                                         
 public static const SKIN_TYPE_FUR:int                                               =    1;
 public static const SKIN_TYPE_LIZARD_SCALES:int                                     =    2;
 public static const SKIN_TYPE_GOO:int                                               =    3;
+[Deprecated(message="silently discarded upon loading a saved game.")]
 public static const SKIN_TYPE_UNDEFINED:int                                         =    4; // DEPRECATED, silently discarded upon loading a saved game
 public static const SKIN_TYPE_DRAGON_SCALES:int                                     =    5;
 public static const SKIN_TYPE_FISH_SCALES:int                                       =    6; // NYI, for future use
@@ -182,6 +183,7 @@ public static const LOWER_BODY_TYPE_HUMAN:int                                   
 public static const LOWER_BODY_TYPE_HOOFED:int                                      =   1;
 public static const LOWER_BODY_TYPE_DOG:int                                         =   2;
 public static const LOWER_BODY_TYPE_NAGA:int                                        =   3;
+[Deprecated(replacement="LOWER_BODY_TYPE_HOOFED and legCount=4")]
 public static const LOWER_BODY_TYPE_CENTAUR:int                                     =   4; // DEPRECATED, use LOWER_BODY_TYPE_HOOFED and legCount=4
 public static const LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS:int                          =   5;
 public static const LOWER_BODY_TYPE_DEMONIC_CLAWS:int                               =   6;
@@ -202,6 +204,7 @@ public static const LOWER_BODY_TYPE_FERRET:int                                  
 public static const LOWER_BODY_TYPE_CLOVEN_HOOFED:int                               =  21;
 //public static const LOWER_BODY_TYPE_RHINO:int                                       =  22;
 public static const LOWER_BODY_TYPE_ECHIDNA:int                                     =  23;
+[Deprecated(replacement="LOWER_BODY_TYPE_CLOVEN_HOOFED and legCount=4")]
 public static const LOWER_BODY_TYPE_DEERTAUR:int                                    =  24; // DEPRECATED, use LOWER_BODY_TYPE_CLOVEN_HOOFED and legCount=4
 public static const LOWER_BODY_TYPE_SALAMANDER:int                                  =  25;
 

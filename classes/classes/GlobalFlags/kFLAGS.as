@@ -259,7 +259,9 @@ public static const IZMA_INCUBATION:int                                         
 public static const IZMA_CHILDREN_SHARKGIRLS:int                                    =  251; // Izma sharkgirls
 public static const IZMA_CHILDREN_TIGERSHARKS:int                                   =  252; // Izma tigersharks
 public static const IZMA_TIME_TILL_NEW_BOOK_AVAILABLE:int                           =  253; // Izma Nu Book Countdown
+[Deprecated(message="No longer used")]
 public static const TAKEN_WEAPON_RACK_DEPRECATED:int                                =  254; // Weapon Rack owned? (1 = yes) (NO LONGER USED)
+[Deprecated(message="No longer used")]
 public static const TAKEN_ARMOUR_RACK_DEPRECATED:int                                =  255; // Armor Rack owned? (2 = yes) (NO LONGER USED)
 public static const ISABELLA_CAMP_APPROACHED:int                                    =  256; // PC decided to approach Isabella's camp yet? 1
 public static const ISABELLA_MET:int                                                =  257; // Met Isabella?
@@ -2199,6 +2201,7 @@ public static const JOJO_ANAL_CATCH_COUNTER:int                                 
 public static const KIHA_UNDERGARMENTS:int                                          = 2191; //0 if nude, 1 if wearing panties, 2 if wearing loincloth. (Spider-silk only)
 public static const KIHA_PREGNANCY_TYPE:int                                         = 2192;
 public static const KIHA_INCUBATION:int                                             = 2193;
+[Deprecated(message="Not used anymore, might be reclaimed.")]
 public static const KIHA_EGG_COUNTER:int                                            = 2194; //Not used anymore, might be reclaimed.
 public static const KIHA_CHILDREN_BOYS:int                                          = 2195;
 public static const KIHA_CHILDREN_GIRLS:int                                         = 2196;
