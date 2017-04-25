@@ -76,6 +76,13 @@ public function sharkGirlEncounter(exploreLoc:Number = 0):void {
 internal function sharkWinChoices():void {
 	clearOutput();
 	spriteSelect(70);
+	
+	if (flags[kFLAGS.SFW_MODE] > 0) {
+		outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.", true);
+		combat.cleanupAfterCombat();
+		return;
+	}
+	
 	//HP Win
 	if (monster.HP < 1) {
 		outputText("The shark-girl falls, clearly defeated.");
@@ -85,15 +92,21 @@ internal function sharkWinChoices():void {
 		outputText("The shark-girl begins masturbating, giving up on dominating you.  The sight is truly entrancing.");
 		dynStats("lus", 15);
 	}
-	if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
-		outputText("  Do you have your way with her or leave?");
-		menu();
+	
+	menu();
+	addDisabledButton(0, "Use Dick", "This scene requires you to have cock and sufficient arousal.");
+	addDisabledButton(1, "Pussy Oral", "This scene requires you to have vagina and sufficient arousal.");
+	addDisabledButton(2, "Dildo Rape", "This scene requires you to have the Deluxe Dildo.");
+	
+	if (player.lust >= 33) {
+		if (!player.isGenderless())
+			outputText("  Do you have your way with her or leave?");
 		if (player.hasCock()) addButton(0, "Use Dick", sharkgirlDickFuck);
 		if (player.hasVagina()) addButton(1, (player.isNaga() ? "Pussy Oral" : "Pussy w/69"), sharkgirlSixtyNine);
 		if (player.hasKeyItem("Deluxe Dildo") >= 0) addButton(2, "Dildo Rape", sharkGirlGetsDildoed);
-		addButton(4, "Leave", combat.cleanupAfterCombat);
 	}
-	else combat.cleanupAfterCombat();
+	
+	addButton(14, "Leave", combat.cleanupAfterCombat);
 }
 
 //Male and Herm: 
