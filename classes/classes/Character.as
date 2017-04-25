@@ -390,11 +390,11 @@ import classes.GlobalFlags.kFLAGS;
 		 * Impregnate the character with the given pregnancy type if the total fertility 
 		 * is greater or equal to the roll.
 		 * @param	type the type of pregnancy (@see PregnancyStore.PREGNANCY_xxx)
-		 * @param	incubation the incubation duration
+		 * @param	incubationDuration the incubation duration
 		 * @param	maxRoll the possible maximum roll for an impregnation check
 		 * @param	forcePregnancy specify a large bonus or malus to fertility (0 = no bonus, positive number = guaranteed pregnancy, negative number = no pregnancy)
 		 */
-		public function knockUp(type:int = 0, incubation:int = 0, maxRoll:int = 100, forcePregnancy:int = 0):void
+		public function knockUp(type:int = 0, incubationDuration:int = 0, maxRoll:int = 100, forcePregnancy:int = 0):void
 		{
 			//TODO push this down into player?
 			//Contraceptives cancel!
@@ -412,8 +412,8 @@ import classes.GlobalFlags.kFLAGS;
 			//If not pregnant and fertility wins out:
 			if (pregnancyIncubation == 0 && totalFertility() + bonus > Math.floor(Math.random() * maxRoll) && hasVagina())
 			{
-				knockUpForce(type, incubation);
-				trace("PC Knocked up with pregnancy type: " + type + " for " + incubation + " incubation.");
+				knockUpForce(type, incubationDuration);
+				trace("PC Knocked up with pregnancy type: " + type + " for " + incubationDuration + " incubation.");
 			}
 			
 			//Chance for eggs fertilization - ovi elixir and imps excluded!
@@ -438,13 +438,13 @@ import classes.GlobalFlags.kFLAGS;
 		  * Note: A more complex pregnancy function used by the character is Character.knockUp
 		  * The character doesn't need to be told of the last event triggered, so the code here is quite a bit simpler than that in PregnancyStore.
 		  * @param	type the type of pregnancy (@see PregnancyStore.PREGNANCY_xxx)
-		  * @param	incubation  the incubation duration
+		  * @param	incubationDuration the incubation duration
 		  */
-		public function knockUpForce(type:int = 0, incubation:int = 0):void
+		public function knockUpForce(type:int = 0, incubationDuration:int = 0):void
 		{
 			//TODO push this down into player?
 			_pregnancyType = type;
-			_pregnancyIncubation = (type == 0 ? 0 : incubation); //Won't allow incubation time without pregnancy type
+			_pregnancyIncubation = (type == 0 ? 0 : incubationDuration); //Won't allow incubation time without pregnancy type
 		}
 	
 		//fertility must be >= random(0-beat)
