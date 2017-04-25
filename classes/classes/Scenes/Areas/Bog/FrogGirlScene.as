@@ -113,7 +113,8 @@ private function questDatFrogGirl():void {
 	outputText("\n\nYou wonder what it would be like to carry the massive load of eggs. Do you want to offer to carry the frog’s eggs or continue on your way?");
 	menu();
 	addButton(4,"Leave",continueOnYourWay);
-	if (player.hasVagina()) addButton(0,"Vaginally",superBonusFrogEggsInYerCooch);
+	if (player.hasVagina()) addButton(0, "Vaginally", superBonusFrogEggsInYerCooch);
+	else addDisabledButton(0, "Vaginally");
 	addButton(1,"Carry",carryBeeGirlsEggsVoluntarilyYouButtSlut);
 }
 

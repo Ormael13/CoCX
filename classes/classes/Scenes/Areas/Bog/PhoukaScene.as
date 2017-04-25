@@ -106,6 +106,7 @@ package classes.Scenes.Areas.Bog
 
 			menu();
 			if (hasAlcohol) addButton(0, "Offer Drink", phoukaStuckOfferWhiskey);
+			else addDisabledButton(0, "Offer Drink", "You have no whiskey to offer.");
 			addButton(1, "Talk", phoukaTalk);
 			addButton(2, "Fight", phoukaStartFight);
 		}
@@ -153,7 +154,7 @@ package classes.Scenes.Areas.Bog
 				outputText(" if perhaps there's some way he could release you.")
 			else outputText(" if he really wants a taste of what you're going to give him.");
 
-			if (player.cor + rand(125) <= 110) { //Players with 0% corruption have a 12% chance that the Phouka is willing to talk, players with 100% corruption have a 92% chance
+			if (player.cor + rand(125) + pc.corruptionTolerance() + (player.level - 10) * 4 <= 110) { //Players with 0% corruption have a 12% chance that the Phouka is willing to talk, players with 100% corruption have a 92% chance
 				//The phouka is not in the mood for talk, start the fight gagged as punishment for trying to talk
 				outputText("  You open your mouth to say something more to the ");
 				if (player.cor < 34)
@@ -535,6 +536,8 @@ package classes.Scenes.Areas.Bog
 
 		protected function phoukaSexAddStandardMenuChoices():void
 		{ //This happens several times so it's broken out here in case additional options get added later
+			addDisabledButton(1, "Bunny", "This scene requires you to have vagina.");
+			addDisabledButton(2, "Horse", "This scene requires you to have vagina.");
 			if (player.hasVagina()) {
 				addButton(1, "Bunny", phoukaSexBunnyChoice);
 				addButton(2, "Horse", phoukaSexHorseChoice);
