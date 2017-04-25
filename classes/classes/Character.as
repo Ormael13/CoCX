@@ -433,7 +433,7 @@ import classes.GlobalFlags.kFLAGS;
 		
 		 /**
 		  * Forcefully override the characters pregnancy. If no pregnancy type is provided,
-		  * the function does nothing.
+		  * any current pregancy is cleared.
 		  * 
 		  * Note: A more complex pregnancy function used by the character is Character.knockUp
 		  * The character doesn't need to be told of the last event triggered, so the code here is quite a bit simpler than that in PregnancyStore.
