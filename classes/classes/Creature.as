@@ -381,7 +381,7 @@ package classes
 		//MALE STUFF
 		//public var cocks:Array;
 		//TODO: Tuck away into Male genital class?
-		public var cocks:Array;
+		public var cocks:/*Cock*/Array;
 		//balls
 		public var balls:Number = 0;
 		public var cumMultiplier:Number = 1;
