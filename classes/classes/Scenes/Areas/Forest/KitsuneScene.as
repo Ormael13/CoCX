@@ -1068,78 +1068,105 @@ package classes.Scenes.Areas.Forest
 			var button:int = 0;
 			//Shared Scenes
 			//[Vaginal] - requires cock
-			if (player.hasCock()) button = kitsuneButton(button, "FuckHerVag", fuckAKitsuneVaginally);
-			if (player.cockThatFits(144) >= 0)
-				button = kitsuneButton(button, "FuckAss", putItInAKitsunesAssWin);
-			if (player.hasVagina())
-				button = kitsuneButton(button, "Tribbing", tribbingWithAKitsune);
 			if (player.hasCock())
-				button = kitsuneButton(button, "Tailjob", tailJobKitsuneWin);
+				addButton(button++, "FuckHerVag", fuckAKitsuneVaginally);
+			else 
+				addDisabledButton(button++, "FuckHerVag", "This scene requires you to have cock.", "Fuck Her Vag");
+			
+			if (player.cockThatFits(144) != -1) {
+				addButton(button++, "FuckAss", putItInAKitsunesAssWin);
+			} else
+				addDisabledButton(button++, "FuckAss", "This scene requires you to have fitting cock.", "Fuck Her Ass");
+			
+			if (player.hasVagina()) {
+				addButton(button++, "Tribbing", tribbingWithAKitsune);
+			} else
+				addDisabledButton(button++, "Tribbing", "This scene requires you to have vagina.");
+				
+			if (player.hasCock()) {
+				addButton(button++, "Tailjob", tailJobKitsuneWin);
+			} else
+				addDisabledButton(button++, "Tailjob", "This scene requires you to have cock.");
+			
 			//[Tentacles] - requires 3+ tentacles of 30" or longer
-			if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 3)
-				button = kitsuneButton(button, "Tentacles...", kitsunesGetBonedBy3PlusTentacles);
+			if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 3) {
+				addButton(button++, "Tentacles...", kitsunesGetBonedBy3PlusTentacles);
+			} else
+				addDisabledButton(button++, "Tentacles...", "This scene requires you to have at least 3 tentacle cocks.");
+				
 			//Blonde-exclusive
 			if (monster.hairColor == "blonde") {
-				if (player.hasCock()) {
-					//[Fuck Draft]
-					if (player.hasItem(consumables.F_DRAFT)) {
-						if (display) outputText("  You could dose her with a fuck draft...");
-						button = kitsuneButton(button, "Use F.Draft", fuckDraftBlond);
-					}
-					//[Lactaid]
-					if (player.hasItem(consumables.LACTAID)) {
-						if (display) outputText("  You could dose her with lactad...");
-						button = kitsuneButton(button, "Use L-Aid", lactaidDoseAKitSune);
-					}
-					//[Ovi Elixir]
-					if (player.hasItem(consumables.OVIELIX)) {
-						if (display) outputText("  You could use an oviposition elixir on her...");
-						button = kitsuneButton(button, "Use OviElix", doseAKitsuneWithOviElixirs);
-					}
-				}
+				//[Fuck Draft]
+				if (player.hasItem(consumables.F_DRAFT)) {
+					addButton(button++, "Use F.Draft", fuckDraftBlond, undefined, undefined, undefined, "You could dose her with a fuck draft...");
+				} else 
+					addDisabledButton(button++, "Use F.Draft", "This scene requires you to have cock and a bottle of fuck draft.", "Use Fuck Draft");
+				//[Lactaid]
+				if (player.hasItem(consumables.LACTAID)) {
+					addButton(button++, "Use L-Aid", lactaidDoseAKitSune, undefined, undefined, undefined, "You could dose her with lactad...");
+				} else 
+					addDisabledButton(button++, "Use L-Aid", "This scene requires you to have cock and a bottle of lactaid.", "Use LactAid");
+				//[Ovi Elixir]
+				if (player.hasItem(consumables.OVIELIX)) {
+					addButton(button++, "Use OviElix", doseAKitsuneWithOviElixirs, undefined, undefined, undefined, "You could use an oviposition elixir on her...");
+				} else 
+					addDisabledButton(button++, "Use OviElix", "This scene requires you to have cock and a bottle of ovi elixir.", "Use Ovi Elixir");
 			}
 			//Black-hair-exclusive
 			if (monster.hairColor == "black") {
 				//[Hotdog Anal] - replaces regular Anal option only for the black-haired girl.
-				// player.cockThatFits( 144 );
-				if (player.cockThatFits(144) >= 0)
-					button = kitsuneButton(button, "HotDogAnal", hotdogAnalInKitsuneButtDontLetTailTickleYourNose);
+				if (player.cockThatFits(144) >= 0) {
+					addButton(1, "HotDogAnal", hotdogAnalInKitsuneButtDontLetTailTickleYourNose);
+				} else 
+					addDisabledButton(1, "HotDogAnal", "This scene requires you to have fitting cock.", "Hot Dog Anal");
 				//[GetLicked] - requires a vagina
-				if (player.hasVagina())
-					button = kitsuneButton(button, "GetLicked", getLickedByKitsunes);
+				if (player.hasVagina()) {
+					addButton(button++, "GetLicked", getLickedByKitsunes);
+				} else 
+					addDisabledButton(button++, "GetLicked", "This scene requires you to have vagina.", "Get Licked");
 				//[GetBJ] - requires cock 108 area or less
-				if (player.cockThatFits(108) >= 0)
-					button = kitsuneButton(button, "Get BJ", getABJFromAFoxGirl);
+				if (player.cockThatFits(108) >= 0) {
+					addButton(button++, "Get BJ", getABJFromAFoxGirl);
+				} else 
+					addDisabledButton(button++, "Get BJ", "This scene requires you to have fitting cock.");
 			}
 			if (monster.hairColor == "red") {
 				//Non-futa Redhead: [Bondage] - requires a cock with area <= 144 due to some anal
-				if (player.cockThatFits(144) >= 0)
-					button = kitsuneButton(button, "Bondage", nonFutaRedHeadBondageIGuessYouTieHerUpWithYourPenisThenHuh);
+				if (player.cockThatFits(144) >= 0) {
+					addButton(button++, "Bondage", nonFutaRedHeadBondageIGuessYouTieHerUpWithYourPenisThenHuh);
+				} else 
+					addDisabledButton(button++, "Bondage", "This scene requires you to have fitting cock.");
 				//Non-Futa Redhead: [Some sort of lapsitting handjob thing, I don't know]
-				if (flags[kFLAGS.redheadIsFuta] == 0 && player.hasCock())
-					button = kitsuneButton(button, "Lap HJ", nonFutaRedHeadIsWorstRedheadLapsittingHandjobThingIDontKnow);
+				if (flags[kFLAGS.redheadIsFuta] == 0 && player.hasCock()) {
+					addButton(button++, "Lap HJ", nonFutaRedHeadIsWorstRedheadLapsittingHandjobThingIDontKnow);
+				} else addDisabledButton(button++, "Lap HJ", "This scene requires you to have fitting cock. She should be pure female.");
 				//[Helix] - requires herm
-				if (flags[kFLAGS.redheadIsFuta] > 0 && player.gender == 3)
-					button = kitsuneButton(button, "Herm Helix", helixZeKitsunes);
+				if (flags[kFLAGS.redheadIsFuta] > 0 && player.isHerm()) {
+					addButton(button++, "Herm Helix", helixZeKitsunes);
+				} else addDisabledButton(button++, "Herm Helix", "This scene requires you both to be herms.");
 
 				//[Bring Back Dick] // AKA you don't know dick about dick AKA the dickening
 				if (flags[kFLAGS.redheadIsFuta] == 0)
-					button = kitsuneButton(button, "Grow Dick", bringBackDick);
+					addButton(button++, "Grow Dick", bringBackDick);
 				//[Remove Dick]
 				else {
 					//AKA Lose the dick, schweethaat AKA put that thing away
-					button = kitsuneButton(button, "Ditch Dick", redheadsDontDeserveToHavePenisesBecauseTheyreTooGayForPenisOrSomethingIDontReallyKnowHowThisWorksOrWhyThisFunctionNameIsSoFuckingLong);
+					addButton(button++, "Ditch Dick", redheadsDontDeserveToHavePenisesBecauseTheyreTooGayForPenisOrSomethingIDontReallyKnowHowThisWorksOrWhyThisFunctionNameIsSoFuckingLong);
 				}
 				//Redhead-exclusive
-				//[Ride] - requires vagina & redheadIsFuta
-				if (player.hasVagina() && flags[kFLAGS.redheadIsFuta] > 0)
-					button = kitsuneButton(button, "RideHerCock", rideDatRedheadKitsuneCockIntoTheSkyDiamonds);
+				//[Ride] - requires vagina & KITSUNE_READHEAD_FUTA
+				if (player.hasVagina() && flags[kFLAGS.redheadIsFuta] > 0) {
+					addButton(button++, "RideHerCock", rideDatRedheadKitsuneCockIntoTheSkyDiamonds);
+				} else addDisabledButton(button++, "RideHerCock", "This scene requires you to have vagina. She should be herm.", "Ride Her Cock");
 				if (flags[kFLAGS.redheadIsFuta] > 0 && player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor")
-					button = kitsuneButton(button, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+					addButton(button++, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 			}
+			
 			//[Feeder]
-			if (player.findPerk(PerkLib.Feeder) >= 0)
-				button = kitsuneButton(button, "Breastfeed", feederTheKitsunes);
+			if (player.findPerk(PerkLib.Feeder) >= 0 || player.lactationQ() >= 2000) {
+				addButton(button++, "Breastfeed", feederTheKitsunes);
+			} else addDisabledButton(button++, "Breastfeed", "This scene requires you to have very high milk amount.");
+			
 			//Remove buttons in SFW mode. No rapes!
 			if (flags[kFLAGS.SFW_MODE] > 0) {
 				removeButton(0);
@@ -1151,16 +1178,13 @@ package classes.Scenes.Areas.Forest
 				removeButton(6);
 				removeButton(7);
 				removeButton(8);
+				removeButton(9);
+				removeButton(10);
+				removeButton(11);
+				removeButton(12);
+				removeButton(13);
 			}
 			addButton(14, "Leave", leaveKitsune);
-		}
-
-		private function kitsuneButton(button:int, nam:String, func:Function):int
-		{
-			if (button > 8) return 9;
-			addButton(button, nam, func);
-			button++;
-			return button;
 		}
 
 
