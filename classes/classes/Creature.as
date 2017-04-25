@@ -903,9 +903,7 @@ package classes
 			return -1;
 		}
 
-		/**
-		 * @deprecated Replace with indexOfStatusEffect(), statusEffectByType(), or hasStatusEffect()
-		 */
+		[Deprecated(replacement="indexOfStatusEffect(), statusEffectByType(), or hasStatusEffect() instead")]
 		public function findStatusEffect(stype:StatusEffectType):int {
 			return indexOfStatusEffect(stype);
 		}
@@ -2083,7 +2081,7 @@ package classes
 			return false
 		}
 		
-		// Deprecated
+		[Deprecated]
 		public function hasSock(arg:String = ""):Boolean
 		{
 			var index:int = cocks.length;
