@@ -98,26 +98,28 @@ public function farmExploreEncounter():void {
 			if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) addButton(1,"Kelly",kelly.breakingKeltOptions);
 			else addButton(1,"Kelt",kelly.breakingKeltOptions);
 		}
-		if (player.hasKeyItem("Breast Milker - Installed At Whitney's Farm") >= 0) {
-			if (player.hasStatusEffect(StatusEffects.Milked)) {
-				outputText("\n\n<b>Your " + player.nippleDescript(0) + "s are currently too sore to be milked.  You'll have to wait a while.</b>", false);
-			}
-			else if (flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(2,"Get Milked",getMilked);
-			
-		}
-		if (player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") >= 0 && player.cockTotal() > 0)
-		{
-			
-			if (flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(5,"Milk Cock",cockPumping);
-		}
-		if (!player.hasStatusEffect(StatusEffects.MarbleRapeAttempted) && !player.hasStatusEffect(StatusEffects.NoMoreMarble) && player.hasStatusEffect(StatusEffects.Marble) && flags[kFLAGS.MARBLE_WARNING] == 0) {
-			
-			if (flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(3,"Marble", meetMarble);
-		}
 		//choices("Explore",exploreFarm,"Kelt",keltEvent,"Get Milked",milkYou,"Marble",marble,"Milk Jojo",milkJojo,"Milk Cock",cockMilk,"Talk",talkWhitney,"Work",workFarm,"",0,"Leave",13);
-		if (flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(0,"Explore",exploreFarm);
-		if (flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(6,"Talk",talkWhitney);
-		if (flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(7,"Work",workFarm);
+		if (flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) {
+			if (player.hasKeyItem("Breast Milker - Installed At Whitney's Farm") >= 0) {
+				if (player.hasStatusEffect(StatusEffects.Milked)) {
+					outputText("\n\n<b>Your " + player.nippleDescript(0) + "s are currently too sore to be milked.  You'll have to wait a while.</b>", false);
+				}
+				else addButton(2,"Get Milked",getMilked);
+				
+			}
+			if (player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") >= 0 && player.cockTotal() > 0) {
+				addButton(5,"Milk Cock",cockPumping);
+			}
+			if (!player.hasStatusEffect(StatusEffects.MarbleRapeAttempted) && !player.hasStatusEffect(StatusEffects.NoMoreMarble) && player.hasStatusEffect(StatusEffects.Marble) && flags[kFLAGS.MARBLE_WARNING] == 0) {
+				addButton(3,"Marble", meetMarble);
+			}
+			addButton(0,"Explore",exploreFarm);
+			addButton(6,"Talk",talkWhitney);
+			if (player.fatigueLeft() >= 20)
+				addButton(7, "Work", workFarm, undefined, undefined, undefined, "Ask Whitney if she could use a hand.");
+			else
+				addButtonDisabled(7, "Work", "You are too tired.");
+		}
 		addButton(14,"Leave",camp.returnToCampUseOneHour);		
 	}		
 }
@@ -415,27 +417,36 @@ public function workFarm():void {
 			}
 		}
 	}
-	//25% chance of stable mucking
+	// 25% chance of stable mucking, payment 5 gems, train str and tou
 	if (rand(4) == 0) {
 		spriteSelect(62);
 		outputText("You find Whitney getting a scythe out of her tool shed. \"<i>Do you know how to muck out a stable?</i>\" she asks when you offer to help. You admit that you did a lot of that while growing up in your village. After passing you a rake, shovel, and pitchfork, she leads you to the milking barn.", true);
 		outputText("  The first thing that hits you is the smell, a mingling of sweat, milk, droppings, and rotting hay. There are also probably some cows in Whitney's herd ready for breeding.\n\n", false);
 		outputText("Opening the door to one of the empty stalls, Whitney says, \"<i>I don't get to them as often as I should. Anything you can do would help.</i>\"\n\n", false);
 		outputText("You steel yourself, ignore your ", false);
-		if (player.faceType == FACE_DOG) outputText("sensitive ", false);
+		if (InCollection(player.faceType, FACE_DOG, FACE_FOX, FACE_CAT)) outputText("sensitive ", false);
 		outputText("nose, and set to work.", false);
 		//[Lust increase based on libido, degree of cow/mino features] 
-		dynStats("lus", player.cowScore() + player.minoScore());
-		outputText("\n\nAn hour later you can stand it no more and exit the milking barn. Gulping down the fresher air and dragging the tools back to their shed, you admit to yourself that Whitney is a much harder worker and has a stronger constitution than you thought. You promise yourself you'll come back and help her out some more -- as soon as your nose recovers.", false);
-		//always +1 str till 50, then 50% chance.
-		if (player.str <= 50) dynStats("str", 1);
-		else dynStats("str", rand(2));
+		if (player.cowScore() + player.minoScore() > 0) dynStats("lus", player.cowScore() + player.minoScore());
+		outputText("\n\nAn hour later you can stand it no more and exit the milking barn. Gulping down the fresher air and dragging the tools back to their shed, you admit to yourself that Whitney is a much harder worker and has a stronger constitution than you thought.", false);
+		outputText("\n\n\"<i>I'll take care of the rest. Thank you for helping me. Here's your payment,</i>\" she says. She hands you five gems.");
+		outputText("\n\nYou promise yourself you'll come back and help her out some more -- as soon as your nose recovers.");
+		//always +1 str/tou till 25, then 50% chance.
+		if (player.str <= 25 || rand(2) == 0) dynStats("str", 1);
+		if (player.tou <= 25 || rand(2) == 0) dynStats("tou", 1);
+		player.gems += 5;
+		player.changeFatigue(20);
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
+	// crops collecting, payment one canine pepper, train tou and spe
 	spriteSelect(62);
 	outputText("You ask Whitney if she could use help with anything and she points towards the pepper fields, \"<i>Ya mind gathering up some peppers for an hour or two?  I'm gonna need a few for supper tonight.  I'll even let you keep the best one!</i>\"\n\n", false);
 	outputText("You nod and borrow a basket, and set off towards the fields.  The next two hours are a blur of sweat and hard work as you prowl between the rows of plants, picking as many ripe red peppers as you can find.  When you finish, you drop the basket by Whitney's door, but not before taking your pepper.\n", false);
+	//always +1 spe/tou till 25, then 50% chance.
+	if (player.spe <= 25 || rand(2) == 0) dynStats("spe", 1);
+	if (player.tou <= 25 || rand(2) == 0) dynStats("tou", 1);
+	player.changeFatigue(20);
 	//(75% chance normal pepper, 25% chance \"<i>rare</i>\" pepper)
 	var pepper:Number = rand(4);
 	var itype:ItemType;

@@ -1121,22 +1121,16 @@ package classes.Scenes.NPCs
 		public function approachAnemoneBarrel():void
 		{
 			var item:Function =null;
-			var weaponT:String = "Give Weapon";
-			var weaponB:Function = giveAnemoneWeapon;
 			clearOutput();
 			spriteSelect(71);
 			outputText("You walk over to the barrel.  ");
 			//[(display if hourssinceKiditem >= 16)
 			if (flags[kFLAGS.KID_ITEM_FIND_HOURS] != model.time.days) {
 				outputText("An item sits next to it, left there by the anemone as a present to you.  Or 'rent', if you choose to think of it that way.  ");
-				item = getAnemoneItem;
 			}
 			//[(if Kid A has been given a weapon)
 			if (flags[kFLAGS.ANEMONE_WEAPON_ID] != 0) {
 				outputText("She has " + ItemType.lookupItem(flags[kFLAGS.ANEMONE_WEAPON_ID]).longName + " sitting next to it.  ");
-				//outputText("Kid A pokes her head out and smiles at you.  What do you need from her?");
-				weaponT = "Take Weapon";
-				weaponB = takeOutOfAnemone;
 			}
 			//(if babysitting)
 			if (flags[kFLAGS.KID_SITTER] > 1) outputText("Kid A is away right now, helping season some of Marble's children.  If you wanted to leave or take an item, she would discover it when she got back.  ");
@@ -1149,29 +1143,30 @@ package classes.Scenes.NPCs
 
 			//Tutor, N.Watch, and Evict require the anemone to be present
 			menu();
-			addButton(0, "Item", item);
-			addButton(1, weaponT, weaponB);
+			if (flags[kFLAGS.KID_ITEM_FIND_HOURS] != model.time.days) addButton(0, "Item", getAnemoneItem, undefined, undefined, undefined, "Take her gift.");
+			else addButtonDisabled(0, "Item", "She has nothing to give you now.");
+			
+			if (flags[kFLAGS.ANEMONE_WEAPON_ID] != 0) addButton(1, "Take Weapon", takeOutOfAnemone, undefined, undefined, undefined, "Take away her weapon.");
+			else addButton(1, "Give Weapon", giveAnemoneWeapon, undefined, undefined, undefined, "Give her a weapon.");
+			
 			if (flags[kFLAGS.KID_SITTER] <= 1) {
-				if (flags[kFLAGS.ANEMONE_WEAPON_ID] != 0 && player.fatigue <= 90) addButton(3, "Tutor", tutorAnemoneKid);
-				else if (player.fatigue > 90) outputText("\n\nYou're too tired to tutor Kid A.");
-				addButton(4, "Watch", anemoneWatchToggle);
-				addButton(8, "Evict", evictANemone);
-				var sex:Boolean = false;
+				if (flags[kFLAGS.ANEMONE_WEAPON_ID] != 0 && player.fatigueLeft() >= 10) addButton(3, "Tutor", tutorAnemoneKid, undefined, undefined, undefined, "Have a training session with her.");
+				else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == 0) addButtonDisabled(3, "Tutor", "You should give her some kind of weapon.");
+				else if (player.fatigueLeft() < 10) addButtonDisabled(3, "Tutor", "You're too tired to tutor Kid A.");
+				
+				if (flags[kFLAGS.ANEMONE_WATCH] > 0) addButton(4, "No Watch", anemoneWatchToggle, undefined, undefined, undefined, "Ask Kid A to stop watching for enemies at night.");
+				else if (flags[kFLAGS.ANEMONE_WEAPON_ID] == 0) addButtonDisabled(4, "Watch", "Your anemone daughter will not be able to guard you at night without a weapon.");
+				else addButton(4, "Watch", anemoneWatchToggle, undefined, undefined, undefined, "Ask Kid A to watch for enemies at night.");
+				
 				if (flags[kFLAGS.HAD_KID_A_DREAM] > 0 && flags[kFLAGS.ANEMONE_KID] >= 2) {
-					if (kidAXP() >= 40) {
-						if (player.lust >= 33) {
-							if (player.hasCock()) {
-								if (player.cockThatFits(60) >= 0) sex = true;
-								else outputText("\n\nYour dick is too big for Kid A to do anything with.");
-							}
-							if (player.hasVagina()) sex = true;
-							if (sex == true) addButton(2, "Sex", kidASex, false);
-						}
-						else outputText("\n\nYou aren't aroused enough to have sex with her right now.");
-					}
-					else outputText("\n\nKid A isn't self-confident enough to have sex with right now...  Perhaps if you could tutor her with a weapon she seems to agree with?");
+					if (kidAXP() < 40) addButtonDisabled(2, "Sex", "Kid A isn't self-confident enough to have sex with right now...  Perhaps if you could tutor her with a weapon she seems to agree with?");
+					else if (player.lust < 33) addButtonDisabled(2, "Sex", "You aren't aroused enough to have sex with her right now.");
+					else if (player.hasVagina() || player.cockThatFits(60) >= 0) addButton(2, "Sex", kidASex, false, undefined, undefined, "She looks up for some fun.");
+					else if (player.hasCock()) addButtonDisabled(2, "Sex", "Your dick is too big for Kid A to do anything with.");
+					else addButtonDisabled(2, "Sex", "You must have genitals to have sex with her.");
 				}
-
+				
+				addButton(10, "Evict", evictANemone);
 			}
 			addButton(14, "Back", inventory.stash);
 		}

@@ -2237,11 +2237,43 @@ package classes
 		{
 			switch (gender) {
 				case GENDER_NONE:   return caps ? mf("Genderless", "Fem-genderless") : mf("genderless", "fem-genderless");
-				case GENDER_MALE:   return caps ? mf("Male", "Dickgirl")             : mf("male", "dickgirl");
+				case GENDER_MALE:   return caps ? mf("Male", biggestTitSize() > BREAST_CUP_A ? "Shemale" : "Femboy")             : mf("male", biggestTitSize() > BREAST_CUP_A ? "shemale" : "femboy");
 				case GENDER_FEMALE: return caps ? mf("Cuntboy", "Female")            : mf("cuntboy", "female");
 				case GENDER_HERM:   return caps ? mf("Maleherm", "Hermaphrodite")    : mf("maleherm", "hermaphrodite");
 				default: return "<b>Gender error!</b>";
 			}
+		}
+		
+		/**
+		 * Checks if the creature is technically male: has cock but not vagina.
+		 */
+		public function isMale():Boolean
+		{
+			return gender == GENDER_MALE;
+		}
+		
+		/**
+		 * Checks if the creature is technically female: has vagina but not cock.
+		 */
+		public function isFemale():Boolean
+		{
+			return gender == GENDER_FEMALE;
+		}
+		
+		/**
+		 * Checks if the creature is technically herm: has both cock and vagina.
+		 */
+		public function isHerm():Boolean
+		{
+			return gender == GENDER_HERM;
+		}
+		
+		/**
+		 * Checks if the creature is technically genderless: has neither cock nor vagina.
+		 */
+		public function isGenderless():Boolean
+		{
+			return gender == GENDER_NONE;
 		}
 		
 		//Create a cock. Default type is HUMAN

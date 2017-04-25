@@ -310,6 +310,11 @@
 			kGAMECLASS.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
 		}
 		
+		protected function addDisabledButton(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):void
+		{
+			kGAMECLASS.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
+		}
+		
 		protected function removeButton(arg:*):void
 		{
 			kGAMECLASS.removeButton(arg);
