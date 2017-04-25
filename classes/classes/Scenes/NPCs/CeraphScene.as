@@ -1182,7 +1182,6 @@ package classes.Scenes.NPCs
 				flags[kFLAGS.CERAPH_TITS_OWNED]++;
 			}
 			//Fix any gender mixmatches
-			player.genderCheck();
 			doNext(camp.returnToCampUseOneHour);
 		}
 

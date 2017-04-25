@@ -182,7 +182,7 @@ package classes.Scenes.Monsters
 				outputText("\"<i>Yummy yummy isn't it?  I made this myself.  It's made up of the best stuff – it reacts with fluids to puff up and fill ANY hole perfectly.  Even better, it has a reservoir stuffed with aphrodisiacs that'll slowly leak out.  Do you feel warm yet hun?</i>\" she asks.\n\n", false);
 				outputText("You sputter a bit when she pulls the thick spit-soaked dong out of your mouth.  The part that was stuffed down your throat is swollen up nearly twice as wide as the half in her hand.  The goblin slurps the other half into her throat, taking at least eight inches into her mouth with no sign of discomfort.  She pulls it out, watching it begin to puff up and blushing, turning her slightly-dimpled cheeks purple.   The dildo slaps your twat cruelly as she drops part of it onto your mons.  With a few expert motions, she shoves it inside you, stuffing you full of artificial cock.  The goblin giggles again and slaps the outer half of the dong, making it flop about and sending vibrations directly to your core.\n\n", false);
 				outputText("The green slut stands up and steps over your crotch, positioning herself at a ninety degree angle to you.   The warm wetness of her readiness splashes your thighs when she works the free end of the double-dong into her own aching twat.  She slides down its length, easily taking the remaining length up her juicy cunt.  Your " + player.vaginaDescript(0) + " squelches against hers wetly as they meet in the middle.  The goblin twists, grinding and scissoring her thighs, the hard bud of her clit rubbing back and forth over your " + player.clitDescript() + ".\n\n", false);
-				if (player.clitLength >= 7) outputText("Of course, the sheer size of your clit makes it difficult for the goblin to handle in the normal way - it keeps slipping between up her breasts.  The tiny green tart's eyes light up with a devilish idea.  She pulls out a vial of pink slime and dumps it over her breasts, pushing them around your clit and smothering them in slippery flesh.   You cry out in delight, overwhelmed by the feelings radiating from your over-sized pleasure-buzzer as it is mercilessly worked by the tiny woman.\n\n", false);
+				if (player.getClitLength() >= 7) outputText("Of course, the sheer size of your clit makes it difficult for the goblin to handle in the normal way - it keeps slipping between up her breasts.  The tiny green tart's eyes light up with a devilish idea.  She pulls out a vial of pink slime and dumps it over her breasts, pushing them around your clit and smothering them in slippery flesh.   You cry out in delight, overwhelmed by the feelings radiating from your over-sized pleasure-buzzer as it is mercilessly worked by the tiny woman.\n\n", false);
 				outputText("By now your passage feels as stuffed as it ever has been, crammed totally full of the squishy expanded double-dong.  Every motion the tiny slut makes is amplified directly into the fuck-stick plugging your " + player.vaginaDescript(0) + ".  Judging by how wonderful it feels rubbing and twisting against your sensitive walls, the aphrodisiac is definitely having an effect.  You moan and spread your legs wide, giving the tiny dominatrix free reign over your body.  She wiggles against you harder, throwing her head back and running her fingers through her " + monster.hairColor + " hair, shouting out encouragement all the while, \"<i>Mmmm, you like this, don't you slut?  Doesn't my dildo just fill you up perfectly?  Keep wiggling those hips – the aphrodisiac is gravity fed, and with you on the bottom you'll be blissed into unconsciousness soon.  Just don't cum before me hun, I want to feel release with you.</i>\"\n\n", false);
 				outputText("You lose yourself to the sweet sensations of the bloated dildo that joins your simmering groins.  Rocking back and forth, scissoring relentlessly against your green mistress, you moan, drowning yourself in a sea of drug-enhanced pleasure. The goblin cries out and thrashes in sudden orgasm, twisting the fat dildo violently around inside your " + player.vaginaDescript(0) + ".   The juices of her orgasm react with the toy, stretching you almost painfully and pushing you past the point of no return.  Your bodies thrash together, wracked by twin orgasms that leave you smeared with a mixture of sweat and girl-cum.\n\n", false);
 				outputText("Later, the wet goblin audibly pops off the dildo.  She stumbles, bow-legged, before teasing your " + player.clitDescript() + " and yanking her toy free.  Your lips ", false);
@@ -202,71 +202,58 @@ package classes.Scenes.Monsters
 			spriteSelect(24);
 			clearOutput();
 			//[HP Intro]
-			if (monster.HP < 1) outputText("The goblin falls down, smashing her tits flat on the ground and crying softly from the pain.  She looks up at you and sniffles.", false);
+			if (monster.HP < 1) outputText("The goblin falls down, smashing her tits flat on the ground and crying softly from the pain.  She looks up at you and sniffles.");
 			//[Lust Intro]
 			else {
-				outputText("The goblin groans and drops onto her back.  Her legs spread wide, displaying amazing flexibility as one hand dives into her cunt and the other begins twisting her pierced nipples, one at a time.  The display manages to stir your loins.", false);
+				outputText("The goblin groans and drops onto her back.  Her legs spread wide, displaying amazing flexibility as one hand dives into her cunt and the other begins twisting her pierced nipples, one at a time.  The display manages to stir your loins.");
 				dynStats("lus", 20);
 			}
-			//If cant rape or breastfeed
-			if (player.lust < 30 && !player.hasStatusEffect(StatusEffects.Feeder)) {
-				combat.cleanupAfterCombat();
-				return;
+			if (player.lust < 33) {
+				outputText("\n\n<b>You aren't horny enough to rape her.</b>");
 			}
-			var buttseks:Function =null;
-			var feeder:Function =null;
-			var fitsFuck:Function =null;
-			var tooBig:Function =null;
-			var corruptTooBig:Function =null;
-			var cuntFuck:Function =null;
-			var spiderCondom:Function =null;
-			var jog:Function =null;
-			var eggs:Function =null;
-			if (player.canOvipositSpider()) {
-				eggs = laySomeDriderEggsInGobboTwat;
-			}
+			
+			addDisabledButton(0, "Dick Fuck", "This scene requires you to have fitting cock.", "Dick Fuck");
+			addDisabledButton(1, "DickTooBig", "This scene requires you to have overly large cock.", "Dick Too Big");
+			addDisabledButton(2, "CorruptDick", "This scene requires you to have overly large cock and high corruption.", "Corrupt Big");
+			addDisabledButton(3, "Dick In Ass", "This scene requires you to have cock and high corruption.", "Dick In Ass");
+			addDisabledButton(4, "Jog Fuck", "This scene requires you to have fitting cock.", "Jog Fuck");
+			addDisabledButton(5, "Breastfeed", "This scene requires you to have enough milk.", "Breastfeed");
+			addDisabledButton(6, "Use Condom", "This scene requires you to have either condom or spider abdomen and fitting cock.", "Use Condom");
+			addDisabledButton(7, "Pussies", "This scene requires you to have vagina.", "Pussies");
+			addDisabledButton(8, "Lay Eggs", "This scene requires you to have drider ovipositor and some eggs.", "Lay Eggs");
+			
 			//cunt stuff
-			if (player.hasVagina()) cuntFuck = gobboGetsRapedFem;
+			if (player.hasVagina() && player.lust >= 33) addButton(7, "Pussies", gobboGetsRapedFem);
 			//Dick stuff:
-			if (player.hasCock()) {
+			if (player.hasCock() && player.lust >= 33) {
 				//Corrupt too big scene
-				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity() && player.cor > 80 && flags[kFLAGS.JOJO_STATUS] > 2)
-					corruptTooBig = rapeAGoblinCorruptTooBig;
+				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity() && (player.cor > 80 - player.corruptionTolerance() || player.findPerk(PerkLib.Sadist) >= 0 || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1))
+					addButton(2, "CorruptDick", manRapesGoblinTooBig);
 				//Regular too big scene
 				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity())
-					tooBig = manRapesGoblinTooBig;
+					addButton(1, "DickTooBig", manRapesGoblinTooBig);
 				//It fits!
 				if (player.cockThatFits(monster.vaginalCapacity()) >= 0) {
-					jog = gobboGetsRapedMaleFits;
-					fitsFuck = gatsGoblinBoners;
+					addButton(0, "Dick Fuck", gatsGoblinBoners);
+					addButton(4, "Jog Fuck", gobboGetsRapedMaleFits);
 				}
 				//Buttsex toggle
-				if (player.cockThatFits(monster.analCapacity()) >= 0 && (player.cor > 70 - player.corruptionTolerance() || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1)) buttseks = gobboButtSecks;
+				if (player.cockThatFits(monster.analCapacity()) >= 0 && (player.cor > 70 - player.corruptionTolerance() || player.findPerk(PerkLib.Sadist) >= 0 || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1)) addButton(3, "Dick In Ass", gobboButtSecks);
 				//Spidercondom
 				if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN && player.cockThatFits(monster.vaginalCapacity()) >= 0)
-					spiderCondom = goblinCondomed;
+					addButton(6, "Web Condom", goblinCondomed, 0);
+				else if (player.hasItem(useables.CONDOM) && player.cockThatFits(monster.vaginalCapacity()) >= 0)
+					addButton(6, "Use Condom", goblinCondomed, 1);
+			}
+			if (player.canOvipositSpider()) {
+				addButton(8, "Lay Eggs", laySomeDriderEggsInGobboTwat);
 			}
 			//Breastfeed adds an option
-			if (player.hasStatusEffect(StatusEffects.Feeder)) {
-				feeder = giveGoblinAMilkMustache;
-			}
-			if (player.lust >= 33 && player.gender > 0 && (fitsFuck != null || cuntFuck != null || tooBig != null ||
-					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null) && flags[kFLAGS.SFW_MODE] <= 0) {
-				outputText("\n\n<b>What do you do to her, and if anything, which of your body parts do you use?</b>", false);
-				choices("Dick Fuck", fitsFuck, "DickTooBig", tooBig, "CorruptDick", corruptTooBig, "Dick In Ass", buttseks, "Jog Fuck", jog, "Breastfeed", feeder, "Web Condom", spiderCondom, "Pussies", cuntFuck, "Lay Eggs", eggs, "Leave", combat.cleanupAfterCombat);
-				if (player.hasItem(useables.CONDOM) && player.cockThatFits(monster.vaginalCapacity()) >= 0) {
-					addButton(6, "Use Condom", goblinCondomed, 1);
-				}
-			}
-			else if (feeder!=null || eggs!=null) {
-				outputText("\n\n<b>You aren't horny enough to rape her, but ");
-				if (feeder!=null) outputText("your nipples ache with the desire to feed her your milk.  Do you feed her milk or leave?</b>", false);
-				else outputText("your abdomen aches with the desire to impregnate her full of insect eggs.  Do you?</b>");
-				simpleChoices("Feed", feeder, "Lay Eggs", eggs, "", null, "", null, "Leave", combat.cleanupAfterCombat);
-				//doYesNo(feeder, combat.cleanupAfterCombat);
-			}
-			else combat.cleanupAfterCombat();
+			if (player.lactationQ() >= 500 || player.hasStatusEffect(StatusEffects.Feeder)) addButton(5, "Breastfeed", giveGoblinAMilkMustache);
+			
+			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
+		
 		private function giveGoblinAMilkMustache():void {
 			clearOutput();
 			outputText("You slowly walk up to the downed goblin, gently telling her that everything will be all right now. She looks at you a bit incredulously and spreads her legs, obviously hoping that you will satisfy the urges that she has. You shake your head at her and instead cup your hands under your " + player.biggestBreastSizeDescript() + " and tell her that it's feeding time. The goblin looks at you annoyed and says, \"<i>I don't want your breasts! I want your naughty bits!</i>\" You laugh at her and grab her arms, pulling them behind her head.\n\n", false);

@@ -486,7 +486,7 @@ package classes.Scenes.Areas.Forest
 					else if (player.gender == 2) {
 						outputText("Her legs curl around your hind legs and her 'feet' begin rubbing your " + player.vaginaDescript(0) + ". The strangeness of the sensation doesn't register though as just the contact is enough to send you over the edge.  ", false);
 						//[Tiny-normal clit:
-						if (player.clitLength < 3) outputText("Her awkward ministrations to your " + player.clitDescript() + " cause a gush of fluids from your " + player.vaginaDescript(0) + " and you let out a lewd moan of satisfaction.  ", false);
+						if (player.getClitLength() < 3) outputText("Her awkward ministrations to your " + player.clitDescript() + " cause a gush of fluids from your " + player.vaginaDescript(0) + " and you let out a lewd moan of satisfaction.  ", false);
 						//[Cock-like clit:
 						else outputText("She quickly finds your " + player.clitDescript() + " and begins to jerk it off like a cock.  The sensation is incredible and you moan lewdly as your " + player.vaginaDescript(0) + " gushes fluid.  ", false);
 						outputText("Your hind legs are soon coated in the slick girlcum pouring out of you.\n\n", false);
@@ -508,7 +508,7 @@ package classes.Scenes.Areas.Forest
 							outputText("Thinking you still not satisfied, she pulls her 'feet' up slightly and she begins to rub your " + player.vaginaDescript(0) + ".  ", false);
 							// [Same as female without intro]
 							//[Tiny-normal clit:
-							if (player.clitLength < 3) outputText("Her awkward ministrations to your " + player.clitDescript() + " cause a gush of fluids from your " + player.vaginaDescript(0) + " and you let out a lewd moan of satisfaction.  ", false);
+							if (player.getClitLength() < 3) outputText("Her awkward ministrations to your " + player.clitDescript() + " cause a gush of fluids from your " + player.vaginaDescript(0) + " and you let out a lewd moan of satisfaction.  ", false);
 							//[Cock-like clit:
 							else outputText("She quickly finds your " + player.clitDescript() + " and begins to jerk it off like a cock.  The sensation is incredible and you moan lewdly as your " + player.vaginaDescript(0) + " gushes fluid.  ", false);
 							outputText("Your hind legs are soon coated in the slick girlcum pouring out of you.", false);
@@ -518,7 +518,7 @@ package classes.Scenes.Areas.Forest
 						else {
 							outputText("Her legs curl around your hind legs and her 'feet' begin rubbing your " + player.vaginaDescript(0) + ". The strangeness of the sensation doesn't register though as just the contact is enough to send you over the edge.  ", false);
 							//[Tiny-normal clit:
-							if (player.clitLength < 3) outputText("Her awkward ministrations to your " + player.clitDescript() + " cause a gush of fluids from your " + player.vaginaDescript(0) + " and you let out a lewd moan of satisfaction.  ", false);
+							if (player.getClitLength() < 3) outputText("Her awkward ministrations to your " + player.clitDescript() + " cause a gush of fluids from your " + player.vaginaDescript(0) + " and you let out a lewd moan of satisfaction.  ", false);
 							//[Cock-like clit:
 							else outputText("She quickly finds your " + player.clitDescript() + " and begins to jerk it off like a cock.  The sensation is incredible and you moan lewdly as your " + player.vaginaDescript(0) + " gushes fluid.  ", false);
 							outputText("Your hind legs are soon coated in the slick girlcum pouring out of you.\n\n", false);
@@ -1293,59 +1293,84 @@ package classes.Scenes.Areas.Forest
 			}
 		}
 
-		public function rapeTheBeeGirl():void
+		public function beeGirlPCVictory(hpVictory:Boolean):void
 		{
 			spriteSelect(6);
-			flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE]++;
-			var sexed:Boolean = false;
-			outputText("With your mind made up, you approach the ", true);
-			if (monster.HP <= 0) outputText("helpless ", false);
-			else outputText("horny ", false);
-			outputText("bee-girl with a devilish smile painted across your face.\n\nHow will you take her?\n\n", false);
-
-			//OPTIONS HERE!
-			var naga:Function =null;
-			var multiCock:Function =null;
-			var cock:Function =null;
-			var vagina:Function =null;
-			var herm:Function =null;
-			var gentleman:Function =null;
-			var eggs:Function =null;
-			if (player.canOvipositSpider() && (player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS)) {
-				eggs = layEggsInABeeSpiderLike;
-				outputText("(You could dose her with venom and lay YOUR eggs in her.)\n");
+			clearOutput();
+			
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.");
+				leaveAfterDefeating(hpVictory);
+				return;
 			}
+			
+			if (hpVictory) {
+				outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully, and you see an easy way to relieve it..\n\nWhat do you do to her?");
+			}
+			else {
+				outputText("You smile in satisfaction as the " + monster.short + " spreads her legs and starts frigging her honey-soaked cunt.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully, and you see an easy way to relieve it..\n\nWhat do you do to her?");
+			}
+			
+			dynStats("lus", 50, "resisted", false);
+			
+			//OPTIONS HERE!
+			menu();
+			addDisabledButton(0, "Use Cock", "This scene requires you to have cock.");
+			addDisabledButton(1, "Use Cocks", "This scene requires you to have at least two cocks.");
+			addDisabledButton(2, "Use Vagina", "This scene requires you to have vagina.");
+			addDisabledButton(3, "Herm Style", "This scene requires you to be a herm.");
+			addDisabledButton(4, "Dildo Rape", "This scene requires you to have the Deluxe Dildo.");
+			addDisabledButton(5, "B. Feed", "This scene requires you to have enough milk.");
+			addDisabledButton(6, "Naga", "This scene requires you to have fangs and naga body.");
+			addDisabledButton(7, "Self-Egg", "This scene requires you to have decent strength and corruption, as well as some bits to have fun.");
+			addDisabledButton(8, "LayYourEggs", "This scene requires you to have spider ovipositor and fangs.", "Lay Your Eggs");
+			
 			if (player.hasCock()) {
-				outputText("(You could fuck her with " + player.oMultiCockDesc() + ".)\n", false);
-				cock = rapeTheBeeGirlWithADick;
+				addButton(0, "Use Cock", rapeTheBeeGirlWithADick, undefined, undefined, undefined, "You could fuck her with " + player.oMultiCockDesc() + ".", "Use Cock");
 			}
 			if (player.cockTotal() > 1) {
-				outputText("(You could use more than one of your " + player.multiCockDescriptLight() + " on her.)\n", false);
-				multiCock = rapeTheBeeMultiCockStuff;
+				addButton(1, "Use Cocks", rapeTheBeeMultiCockStuff, undefined, undefined, undefined, "You could use more than one of your " + player.multiCockDescriptLight() + " on her.", "Use Cocks");
 			}
 			if (player.hasVagina()) {
-				outputText("(You could make her get off your " + player.vaginaDescript() + ".)\n", false);
-				vagina = rapeABeeGirlWithYourVagina;
+				addButton(2, "Use Vagina", rapeABeeGirlWithYourVagina, undefined, undefined, undefined, "You could make her get off your " + player.vaginaDescript() + ".", "Use Vagina");
 			}
-			if (player.gender == 3) {
-				outputText("(You could try to please both your 'male' and 'female' halves on the bee.)\n", false);
-				herm = futaRapesBeeGirl;
+			if (player.isHerm()) {
+				addButton(3, "Herm Style", futaRapesBeeGirl, undefined, undefined, undefined, "You could try to please both your 'male' and 'female' halves on the bee.", "Herm Style");
+			}
+			if (player.hasKeyItem("Deluxe Dildo") >= 0) {
+				addButton(4, "Dildo Rape", beeGirlsGetsDildoed, undefined, undefined, undefined, "You could play with your toy.", "Dildo Rape");
+			}
+			if (player.hasStatusEffect(StatusEffects.Feeder) || player.lactationQ() >= 500) {
+				addButton(5, "B. Feed", milkAndHoneyAreKindaFunny, undefined, undefined, undefined, "You could have some relief.", "Breastfeed");
 			}
 			if (player.isNaga() && player.faceType == FACE_SNAKE_FANGS) {
-				outputText("(You could focus on your snakelike, 'naga' attributes.)\n", false);
-				naga = corruptNagaBitchesRapeABee;
+				addButton(6, "Naga", corruptNagaBitchesRapeABee, undefined, undefined, undefined, "You could focus on your snakelike, 'naga' attributes.", "Naga");
 			}
-			if (player.cor >= 75 && player.str >= 60 && (player.tongueType == TONGUE_SNAKE || player.hasCock() || player.hasVagina() || player.biggestTitSize() >= 4)) {
-				outputText("(You could play with her a bit and try to make her lay eggs into herself.)\n", false);
-				gentleman = beeGirlRapeForTheDistinguishedGentleman;
+			if ((player.cor >= 75 - player.corruptionTolerance() || player.findPerk(PerkLib.Pervert) >= 0 || player.findPerk(PerkLib.Sadist) >= 0 || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1)
+					&& player.str >= 60
+					&& (player.tongueType == TONGUE_SNAKE || player.hasCock() || player.hasVagina() || player.biggestTitSize() >= 4)) {
+				addButton(7, "Self-Egg", beeGirlRapeForTheDistinguishedGentleman, undefined, undefined, undefined, "You could play with her a bit and try to make her lay eggs into herself.", "Self-Egg");
 			}
-			choices("Use Cock", cock, "Use Cocks", multiCock, "Use Vagina", vagina, "Herm Style", herm, "Naga", naga,
-				"Self-Egg", gentleman, "", null, "", null, "LayYourEggs", eggs, "", null);
+			if (player.canOvipositSpider() && (player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS)) {
+				addButton(8, "LayYourEggs", layEggsInABeeSpiderLike, undefined, undefined, undefined, "You could dose her with venom and lay YOUR eggs in her.", "Lay Your Eggs");
+			}
+			
+			addButton(14, "Leave", leaveAfterDefeating, hpVictory);
 		}
-
-
+		
+		private function leaveAfterDefeating(hpVictory:Boolean):void {
+			if (hpVictory) {
+				flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITHOUT_RAPE]++; //This only happens if you beat her up and then don't rape her
+			} else {
+				//All wins by lust count towards the desire option, even when you leave
+				flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE]++;
+			}
+			combat.cleanupAfterCombat();
+		}
+		
 		private function rapeTheBeeMultiCockStuff():void
 		{
+			flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE]++;
 			spriteSelect(6);
 			clearOutput();
 			//Doubledick special
@@ -1381,6 +1406,7 @@ package classes.Scenes.Areas.Forest
 //MALE sometimes herm
 		private function rapeTheBeeGirlWithADick():void
 		{
+			flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE]++;
 			spriteSelect(6);
 			clearOutput();
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
@@ -1535,6 +1561,7 @@ package classes.Scenes.Areas.Forest
 //FEMALE sometimes herm
 		private function rapeABeeGirlWithYourVagina():void
 		{
+			flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE]++;
 			spriteSelect(6);
 			clearOutput();
 			if (player.isTaur()) {
@@ -1593,8 +1620,8 @@ package classes.Scenes.Areas.Forest
 				if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLICK) outputText("Thankfully her tongue keeps up its assault, curling 'round your clit and probing your depths in equal measure, keeping you slick and writhing in pleasure.  ", false);
 				if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK && player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLAVERING) outputText("Your hips wiggle and writhe on the length of her tongue as it dives into your slippery depths and curls tightly around your clit, jacking it up and down like a cock.  Your girl-cum soaks her chin, drooling happily as she pleasures you.  ", false);
 				if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLAVERING) outputText("Your hips quiver and grind against her face as her unusually long tongue simultaneously probes your depths and works your clit, wrapping around it and jerking it like a cock.   You squirt and drool constantly from her skilled assault, soaking her face and hair with your girl-cum.  ", false);
-				if (player.clitLength > 3 && player.clitLength < 5) outputText("Your hips piston your huge clit into her mouth with no warning, forcing her to give your clit a blowjob.  Her slick black lips wrap around it immediately, sucking and licking, filling your body with lust and pleasure.  ", false);
-				if (player.clitLength >= 5) outputText("Your hips shove your massive clit into her mouth without warning, stretching her slicked lips wide around your very un-womanly appendage.   She reacts immediately, sucking it into her mouth and throat.  Her tongue curls around it and begins to caress it sensually as she lets you hammer it in and out of her open throat.  Instinctively you mash your face into her sweetened cunt, losing all control of your lower body as it face-fucks her with reckless abandon.  ", false);
+				if (player.getClitLength() > 3 && player.getClitLength() < 5) outputText("Your hips piston your huge clit into her mouth with no warning, forcing her to give your clit a blowjob.  Her slick black lips wrap around it immediately, sucking and licking, filling your body with lust and pleasure.  ", false);
+				if (player.getClitLength() >= 5) outputText("Your hips shove your massive clit into her mouth without warning, stretching her slicked lips wide around your very un-womanly appendage.   She reacts immediately, sucking it into her mouth and throat.  Her tongue curls around it and begins to caress it sensually as she lets you hammer it in and out of her open throat.  Instinctively you mash your face into her sweetened cunt, losing all control of your lower body as it face-fucks her with reckless abandon.  ", false);
 				//New PG - orgasm
 				if (player.isTaur()) outputText("You orgasm in no time, coating her face with girl-cum the process.  You return the favor and dive into her muff, planting kisses and licks down as a reward for your victim's rather skilled efforts.  The taste is sweet and sexy all at once, and you quickly lose track of your reward scheme, simply licking and slurping to get as much of her nectar as possible until she is satisfied as well.", false);
 				else outputText("In no time you both orgasm, sweet girl-cum coating both your faces as you work each other's cunt with desperation born of desire.  ", false);
@@ -1606,6 +1633,7 @@ package classes.Scenes.Areas.Forest
 //FUTA Fallback
 		private function futaRapesBeeGirl():void
 		{
+			flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE]++;
 			spriteSelect(6);
 			clearOutput();
 			outputText("Firmly grasping her thighs at the joining of her smooth carapace and soft skin, you force them open, revealing the source of her irresistible scent.   She buzzes pitifully in protest ", false);
@@ -1684,6 +1712,7 @@ package classes.Scenes.Areas.Forest
 //(can replace normal rape victory scenes if corruption>75, and strength>60, and while player has naga tongue, dick, vagina, or d-cup or larger breasts)
 		private function beeGirlRapeForTheDistinguishedGentleman():void
 		{
+			flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE]++;
 			spriteSelect(6);
 			clearOutput();
 			//(if win via HP)
@@ -1822,6 +1851,7 @@ package classes.Scenes.Areas.Forest
 //Naga on Bee Scene
 		private function corruptNagaBitchesRapeABee():void
 		{
+			flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE]++;
 			spriteSelect(6);
 			clearOutput();
 
@@ -1891,7 +1921,7 @@ package classes.Scenes.Areas.Forest
 
 				outputText("Her eyelids flutter even as her gaze remains locked, and she deeply inhales your musky and arid scent. Deep inside, you feel a level of affection that isn't betrayed by your facial features. You gasp as the bee-girl's lengthy tongue shoots inside your snatch, and retracts as quickly as it came; once, twice, again and again, striking your cervix and twisting out again. Her hands grip your scaly " + player.hipDescript() + " as she thrusts her tongue in and out, threatening the fixation of your glare with pleasure. You are moaning and screaming in your mind, while your stony expression betrays nothing; nothing but the locking gaze that makes your will her own. The bee-maiden's mouth wraps around your " + player.clitDescript() + ", rubbing it through its hood with the inside of her upper lip until it protrudes its full length.", false);
 				//[if clit size => 1"]: 
-				if (player.clitLength > 1) outputText("  Emergent from its sheath, she uses the base of her tongue as a bottom lip and begins to suck you off like a cock, unceasing in her lingual assault on the inside of your canal.", false);
+				if (player.getClitLength() > 1) outputText("  Emergent from its sheath, she uses the base of her tongue as a bottom lip and begins to suck you off like a cock, unceasing in her lingual assault on the inside of your canal.", false);
 				outputText("\n\n", false);
 
 				outputText("You cry out when her tongue finds your G-spot, barely maintaining focus. Sensing your approval, she begins probing the same area until she has you crying out again, and begins hammering at the spongy tissue.\n\n", false);

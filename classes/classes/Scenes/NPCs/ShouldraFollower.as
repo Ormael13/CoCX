@@ -983,7 +983,7 @@ private function shouldraGrowsYoClit():void {
 	spriteSelect(67);
 	outputText("\"<i>Looking to give your joy buzzer a little jumpstart?</i>\" Shouldra teases, your hands sliding down to your inviting [cunt].  Your fingers tease your [clit] while the ghost girl spouts her arcane tongue from your mouth.  ");
 	//clitLength + 1
-	player.clitLength += 1;
+	player.changeClitLength(1);
 	outputText("She welcomes the new inch with a quick flick.  The sensitive [clit] twitches happily in response, confirming the success of the spell.");
 	dynStats("sen", 5, "lus", 15);
 	doNext(camp.returnToCampUseOneHour);
@@ -1079,7 +1079,7 @@ private function shouldraReductoMenu():void {
 	if (player.buttRating >= 2) butt = shrinkDatBootyForYoGhost;
 	if (player.balls > 0 && player.ballSize > 1) balls = shouldraReductosYourBallsUpInsideYa;
 	if (player.hasCock() && player.longestCockLength() > 4) cock = shouldraMakesCocksDisappear;
-	if (player.hasVagina() && player.clitLength > .25) clit = clittyVanishingActShouldra;
+	if (player.hasVagina() && player.getClitLength() > .25) clit = clittyVanishingActShouldra;
 	choices("Balls", balls, "Breasts", breasts, "Clit", clit, "Cock", cock, "Nipples", nipples, "Butt", butt, "", null, "", null, "", null, "Back", shouldraTalkMenu);
 }
 //Balls
@@ -1116,9 +1116,9 @@ private function clittyVanishingActShouldra():void {
 	clearOutput();
 	spriteSelect(67);
 	outputText("\"<i>Aw, really, Champ?  The best part of your snatch?</i>\"  A nod of your head reasserts your desire.  The depressed phantom hastily works through the spell, the notion of shrinking your [clit] not sitting well with her.");
-	player.clitLength /= 1.7;
+	player.setClitLength(player.getClitLength() / 1.7);
 	//Set clitlength down to 2 digits in length
-	player.clitLength = int(player.clitLength * 100)/100;
+	player.setClitLength(int(player.getClitLength() * 100)/100);
 	outputText("\n\nA soft moan is all you can manage as your button tingles and shrinks to almost half its original size.  You think you can hear Shouldra sighing in the back of your head.  She'll get over it.");
 	dynStats("sen", 2, "lus", 10);
 	doNext(camp.returnToCampUseOneHour);

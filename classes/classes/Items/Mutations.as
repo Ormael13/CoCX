@@ -259,7 +259,6 @@
 			if (rand(5) == 0) updateOvipositionPerk(tfSource);
 			//Demonic changes - higher chance with higher corruption.
 			if (rand(40) + player.cor / 3 > 35 && tainted) demonChanges(player);
-			player.genderCheck();
 			if (rand(4) == 0 && tainted) outputText(player.modFem(5, 2), false);
 			if (rand(4) == 0 && tainted) outputText(player.modThickness(30, 2), false);
 			player.refillHunger(10);
@@ -388,7 +387,7 @@
 			}
 			if (player.hasVagina()) {
 				outputText("  Your " + player.clitDescript() + " engorges, ", false);
-				if (player.clitLength < 3) outputText("parting your lips.", false);
+				if (player.getClitLength() < 3) outputText("parting your lips.", false);
 				else outputText("bursting free of your lips and bobbing under its own weight.", false);
 				if (player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_NORMAL) outputText("  Wetness builds inside you as your " + player.vaginaDescript(0) + " tingles and aches to be filled.", false);
 				else if (player.vaginas[0].vaginalWetness <= VAGINA_WETNESS_SLICK) outputText("  A trickle of wetness escapes your " + player.vaginaDescript(0) + " as your body reacts to the desire burning inside you.", false);
@@ -556,12 +555,11 @@
 						if (player.cocks.length == 0) {
 							outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment... shifting into the shape of a small ribbed minotaur-like penis!  <b>You now have a horse-cock!</b>", false);
 							player.createCock();
-							player.cocks[0].cockLength = player.clitLength + 2;
+							player.cocks[0].cockLength = player.getClitLength() + 2;
 							player.cocks[0].cockThickness = 1;
 							player.cocks[0].cockType = CockTypesEnum.HORSE;
-							player.clitLength = .25;
+							player.setClitLength(.25);
 						}
-						player.genderCheck();
 					}
 					changes++;
 				}
@@ -1239,6 +1237,7 @@
 				}
 				dynStats("spe", 3);
 				player.legCount = 4;
+				kGAMECLASS.rathazul.addMixologyXP(20);
 			}
 			//Remove odd eyes
 			if (changes < changeLimit && rand(5) == 0 && player.eyeType > EYES_HUMAN) {
@@ -1471,7 +1470,7 @@
 				player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_TIGHT;
 				player.vaginas[0].vaginalWetness = VAGINA_WETNESS_NORMAL;
 				player.vaginas[0].virgin = true;
-				player.clitLength = .25;
+				player.setClitLength(.25);
 				if (player.fertility <= 5) player.fertility = 6;
 				outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + player.vaginaDescript(0) + "</b>!", false);
 			}
@@ -1538,12 +1537,12 @@
 				if (player.skinTone == "blue" || player.skinTone == "purple" || player.skinTone == "indigo" || player.skinTone == "shiny black") {
 					if (player.vaginas.length > 0) {
 						outputText("\n\nYour heart begins beating harder and harder as heat floods to your groin.  You feel your clit peeking out from under its hood, growing larger and longer as it takes in more and more blood.", false);
-						if (player.clitLength > 3 && player.findPerk(PerkLib.BigClit) < 0) outputText("  After some time it shrinks, returning to its normal aroused size.  You guess it can't get any bigger.", false);
-						if (player.clitLength > 5 && player.findPerk(PerkLib.BigClit) >= 0) outputText("  Eventually it shrinks back down to its normal (but still HUGE) size.  You guess it can't get any bigger.", false);
-						if (((player.findPerk(PerkLib.BigClit) >= 0) && player.clitLength < 6)
-								|| player.clitLength < 3) {
+						if (player.getClitLength() > 3 && player.findPerk(PerkLib.BigClit) < 0) outputText("  After some time it shrinks, returning to its normal aroused size.  You guess it can't get any bigger.", false);
+						if (player.getClitLength() > 5 && player.findPerk(PerkLib.BigClit) >= 0) outputText("  Eventually it shrinks back down to its normal (but still HUGE) size.  You guess it can't get any bigger.", false);
+						if (((player.findPerk(PerkLib.BigClit) >= 0) && player.getClitLength() < 6)
+								|| player.getClitLength() < 3) {
 							temp += 2;
-							player.clitLength += (rand(4) + 2) / 10;
+							player.changeClitLength((rand(4) + 2) / 10);
 						}
 						dynStats("sen", 3, "lus", 8);
 					}
@@ -1552,7 +1551,7 @@
 						player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_TIGHT;
 						player.vaginas[0].vaginalWetness = VAGINA_WETNESS_NORMAL;
 						player.vaginas[0].virgin = true;
-						player.clitLength = .25;
+						player.setClitLength(.25);
 						outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + player.vaginaDescript(0) + "</b>!", false);
 					}
 				}
@@ -1566,6 +1565,7 @@
 					updateClaws(player.clawType);
 					if (tainted) dynStats("cor", 1);
 					else dynStats("cor", 0);
+					kGAMECLASS.rathazul.addMixologyXP(20);
 				}
 			}
 			if (rand(5) == 0) updateOvipositionPerk(tfSource);
@@ -1579,7 +1579,6 @@
 				outputText(player.modFem(90, 1), false);
 				if (rand(3) == 0) outputText(player.modTone(20, 2), false);
 			}
-			player.genderCheck();
 			player.refillHunger(20);
 		}
 
@@ -1766,7 +1765,6 @@
 						}
 					}
 				}
-				player.genderCheck();
 			}
 			//Knotty knot pepper!
 			if (type == 4) {
@@ -2295,14 +2293,15 @@
 					outputText("\n\nYour skin crawls, making you close your eyes and shiver.  When you open them again the world seems... different.  After a bit of investigation, you realize you've become shorter!\n", false);
 					player.tallness -= 1 + rand(3);
 				}
-				//Red skin!
-				if (rand(30) == 0 && player.skinTone != "red") {
+				//Red or orange skin!
+				if (rand(30) == 0 && ["red", "orange"].indexOf(player.skinTone) == -1) {
 					if (player.hasFur()) outputText("\n\nUnderneath your fur, your skin ", false);
 					else outputText("\n\nYour " + player.skinDesc + " ", false);
 					if (rand(2) == 0) player.skinTone = "red";
 					else player.skinTone = "orange";
 					outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinTone + ".", false);
 					updateClaws(player.clawType);
+					kGAMECLASS.rathazul.addMixologyXP(20);
 				}
 				return;
 			}
@@ -2312,14 +2311,15 @@
 				HPChange(20 + player.tou / 3, true);
 				dynStats("lus", 3, "cor", 1);
 			}
-			//Red skin!
-			if (rand(30) == 0 && player.skinTone != "red") {
+			//Red or orange skin!
+			if (rand(30) == 0 && ["red", "orange"].indexOf(player.skinTone) == -1) {
 				if (player.hasFur()) outputText("\n\nUnderneath your fur, your skin ", false);
 				else outputText("\n\nYour " + player.skinDesc + " ", false);
 				if (rand(2) == 0) player.skinTone = "red";
 				else player.skinTone = "orange";
 				outputText("begins to lose its color, fading until you're as white as an albino.  Then, starting at the crown of your head, a reddish hue rolls down your body in a wave, turning you completely " + player.skinTone + ".", false);
 				updateClaws(player.clawType);
+				kGAMECLASS.rathazul.addMixologyXP(20);
 			}
 
 			//Shrinkage!
@@ -2629,7 +2629,6 @@
 				if (player.cocks.length > 0) {
 					player.killCocks(1);
 					outputText("\n\n", false);
-					player.genderCheck()
 				}
 				//remove balls
 				if (player.balls > 0) {
@@ -2656,7 +2655,6 @@
 				if (player.cocks.length > 0) {
 					player.killCocks(-1);
 					outputText("\n\n", false);
-					player.genderCheck();
 				}
 				if (player.balls > 0) {
 					player.balls = 0;
@@ -2687,8 +2685,7 @@
 				if (player.vaginas.length > 0) {
 					outputText("\n\nYour vagina clenches in pain, doubling you over.  You slip a hand down to check on it, only to feel the slit growing smaller and smaller until it disappears, taking your clit with it! <b> Your vagina is gone!</b>", false);
 					player.removeVagina(0, 1);
-					player.clitLength = .5;
-					player.genderCheck();
+					player.setClitLength(.5);
 				}
 				//Dickz
 				if (player.cocks.length > 0) {
@@ -2751,8 +2748,7 @@
 					outputText("Your vagina clenches in pain, doubling you over.  You slip a hand down to check on it, only to feel the slit growing smaller and smaller until it disappears, taking your clit with it!\n\n", false);
 					if (player.bRows() > 1 || player.buttRating > 5 || player.hipRating > 5) outputText("  ", false);
 					player.removeVagina(0, 1);
-					player.clitLength = .5;
-					player.genderCheck();
+					player.setClitLength(.5);
 				}
 				//Kill extra boobages
 				if (player.bRows() > 1) {
@@ -3205,12 +3201,11 @@
 						player.balls = 0;
 						player.ballSize = 1;
 						player.createVagina();
-						player.clitLength = .25;
+						player.setClitLength(.25);
 						player.removeCock(0, 1);
 					}
 					else {
 						player.killCocks(1);
-						player.genderCheck();
 					}
 				}
 				//if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
@@ -3219,11 +3214,10 @@
 					player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_TIGHT;
 					player.vaginas[0].vaginalWetness = VAGINA_WETNESS_NORMAL;
 					player.vaginas[0].virgin = true;
-					player.clitLength = .25;
+					player.setClitLength(.25);
 					outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + player.vaginaDescript(0) + "</b>!", false);
 
 					changes++;
-					player.genderCheck();
 					dynStats("lus", 10);
 				}
 			}
@@ -3779,6 +3773,7 @@
 				if (player.hasFur()) outputText("skin", false);
 				else outputText(player.skinDesc, false);
 				outputText(" turned " + player.skinTone + ".  No way!  It's staying, it really changed color!", false);
+				kGAMECLASS.rathazul.addMixologyXP(20);
 			}
 			//Face!
 			if (player.faceType != FACE_HUMAN && changes < changeLimit && rand(4) == 0 && player.earType == EARS_ELFIN) {
@@ -3929,10 +3924,8 @@
 				player.createVagina();
 				player.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
 				player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
-				player.clitLength = .4;
-				player.genderCheck();
+				player.setClitLength(.4);
 				return;
-
 			}
 			//3b.Infinite Vagina
 			if (player.vaginalCapacity() < 9000) {
@@ -4017,9 +4010,8 @@
 				//(neither)
 				else outputText("\n\nAn itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your " + player.armorName + " to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>", false);
 				player.createVagina();
-				player.clitLength = .25;
+				player.setClitLength(.25);
 				dynStats("sen", 10);
-				player.genderCheck();
 			}
 			//WANG GROWTH - TIGGERSHARK ONLY
 			if (type == 1 && (!player.hasCock()) && changes < changeLimit && rand(3) == 0) {
@@ -4035,7 +4027,6 @@
 				outputText("!", false);
 				player.createCock(7, 1.4);
 				dynStats("lib", 4, "sen", 5, "lus", 20);
-				player.genderCheck();
 				changes++;
 			}
 			//(Requires the player having two testicles)
@@ -4104,6 +4095,7 @@
 					player.skinTone = "rough gray";
 					player.underBody.restore();
 					updateClaws(player.clawType);
+					kGAMECLASS.rathazul.addMixologyXP(20);
 					changes++;
 				}
 				else {
@@ -4113,6 +4105,7 @@
 					player.skinTone = "orange and black striped";
 					player.underBody.restore();
 					updateClaws(player.clawType);
+					kGAMECLASS.rathazul.addMixologyXP(20);
 					changes++;
 				}
 			}
@@ -4372,7 +4365,7 @@
 				player.createVagina();
 				player.vaginas[0].virgin = virgin;
 			}
-			player.clitLength = .25;
+			player.setClitLength(.25);
 			//Tighten butt!
 			player.buttRating = 2;
 			player.hipRating = 2;
@@ -4582,7 +4575,6 @@
 			if (player.cocks.length > 1 && rand(3) == 0 && changes < changeLimit) {
 				player.killCocks(1);
 				outputText("\n\nYou have a strange feeling as your crotch tingles.  Opening your " + player.armorName + ", <b>you realize that one of your cocks have vanished completely!</b>", false);
-				player.genderCheck()
 				changes++;
 			}
 			//Remove additional balls
@@ -5374,6 +5366,7 @@
 					tone: newSkinTones[1]   // ... and the color (tone)
 				});
 				outputText("\n\n<b>You're covered from head to toe in shiny " + player.skinTone + " scales with [underBody.skinFurScales] on your underside.</b>");
+				kGAMECLASS.rathazul.addMixologyXP(20);
 				changes++;
 			}
 			//-Lizard-like face.
@@ -6159,9 +6152,8 @@
 				//(neither)
 				else outputText("\n\nAn itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your " + player.armorName + " to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>", false);
 				player.createVagina();
-				player.clitLength = .25;
+				player.setClitLength(.25);
 				dynStats("sen", 10);
-				player.genderCheck();
 			}
 			//-Remove extra breast rows
 			if (changes < changeLimit && player.breastRows.length > 1 && rand(3) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
@@ -6479,9 +6471,9 @@
 				changes++;
 			}
 			//-Shorten clits to reasonable size
-			if (player.clitLength >= 4 && changes < changeLimit && rand(5) == 0) {
+			if (player.getClitLength() >= 4 && changes < changeLimit && rand(5) == 0) {
 				outputText("\n\nPainful pricks work through your " + player.clitDescript() + ", all the way into its swollen clitoral sheath.  Gods, it feels afire with pain!  Agony runs up and down its length, and by the time the pain finally fades, the feminine organ has lost half its size.", false);
-				player.clitLength /= 2;
+				player.setClitLength(player.getClitLength() / 2);
 				changes++;
 			}
 			//Find biggest dick!
@@ -6944,7 +6936,6 @@
 				player.createPerk(PerkLib.FutaForm, 0, 0, 0, 0);
 				player.createPerk(PerkLib.FutaFaculties, 0, 0, 0, 0);
 				outputText("(Gained Perks - Futa Form, Futa Faculties)</b>", false);
-				player.genderCheck();
 				return;
 			}
 			//HP restore for bros!
@@ -7029,7 +7020,6 @@
 				outputText("At the same time, your " + player.vaginaDescript(0) + " burns hot, nearly feeling on fire.  You cuss in a decidedly masculine way for a moment before the pain fades to a dull itch.  Scratching it, you discover your lady-parts are gone.  Only a sensitive patch of skin remains.\n\n", false);
 				player.removeVagina(0, 1);
 			}
-			player.genderCheck();
 			//(below max masculinity)
 			if (player.femininity > 0) {
 				outputText("Lastly, the change hits your face.  You can feel your jawbones shifting and sliding around, your skin changing to accommodate your face's new shape.  Once it's finished, you feel your impeccable square jaw and give a wide, easy-going grin.  You look awesome!\n\n", false);
@@ -7241,6 +7231,7 @@
 				outputText("\n\nYou absently bite down on the last of the tentacle, then pull your hand away, wincing in pain.  How did you bite your finger so hard?  Looking down, the answer becomes obvious; <b>your hand, along with the rest of your skin, is now the same aphotic color as the dormant tentacle was!</b>", false);
 				player.skinTone = "aphotic blue-black";
 				updateClaws(player.clawType);
+				kGAMECLASS.rathazul.addMixologyXP(20);
 				changes++;
 			}
 			//-eat more, grow more 'hair':
@@ -7837,6 +7828,7 @@
 			changes = 0;
 			changeLimit = 1;
 			if (rand(2) == 0) changeLimit++;
+			if (rand(2) == 0) changeLimit++;
 			if (rand(3) == 0) changeLimit++;
 			if (mystic) changeLimit += 2;
 			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) changeLimit++;
@@ -7939,7 +7931,15 @@
 				if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) {
 					player.createStatusEffect(StatusEffects.BonusVCapacity, 0, 0, 0, 0);
 				}
-				player.addStatusValue(StatusEffects.BonusVCapacity, 1, 5 + rand(10));
+				player.addStatusValue(StatusEffects.BonusVCapacity, 1, 10 + rand(10));
+				changes++;
+			}
+			else if (((mystic && rand(2) == 0) || (!mystic && rand(3) == 0)) && player.statusEffectv1(StatusEffects.BonusACapacity) < 150 && changes < changeLimit) {
+				outputText("\n\nYou feel... more accommodating somehow.  Your " + player.assholeDescript() + " is tingling a bit, and though it doesn't seem to have loosened, it has grown more elastic.");
+				if (!player.hasStatusEffect(StatusEffects.BonusACapacity)) {
+					player.createStatusEffect(StatusEffects.BonusACapacity, 0, 0, 0, 0);
+				}
+				player.addStatusValue(StatusEffects.BonusACapacity, 1, 10 + rand(10));
 				changes++;
 			}
 			//[Vag of Holding] - rare effect, only if PC has high vaginal looseness
@@ -8023,6 +8023,7 @@
 				theFurColor = player.furColor + " and " + player.underBody.skin.furColor;
 
 			if ((player.hasFur() 
+					&& player.faceType != FACE_FOX
 					&& !InCollection(theFurColor, convertMixedToStringArray(KitsuneScene.basicKitsuneFur))
 					&& !InCollection(theFurColor, KitsuneScene.elderKitsuneColors)
 					&& !InCollection(theFurColor, ["orange and white", "black and white", "red and white", "tan", "brown"])
@@ -9609,6 +9610,7 @@
 				outputText("\n\nYour skin tingles ever so slightly as you skin’s color changes before your eyes. As the tingling diminishes, you find that your skin has turned " + skinToBeChosen + ".");
 				player.skinTone = skinToBeChosen;
 				updateClaws(player.clawType);
+				kGAMECLASS.rathazul.addMixologyXP(20);
 				changes++;
 			}
 			if (changes == 0) {

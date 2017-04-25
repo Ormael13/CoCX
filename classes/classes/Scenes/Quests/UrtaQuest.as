@@ -264,7 +264,7 @@ public function startUrtaQuest():void {
 	player.createVagina();
 	player.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
 	player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_NORMAL;
-	player.clitLength = 1;
+	player.setClitLength(1);
 	player.str = 75;
 	player.tou = 80;
 	player.spe = 90;
@@ -797,8 +797,8 @@ private function putUrtasWangInPCsCunt(truth:Boolean):void {
 	//{goo}
 	else if (player2.isGoo()) {
 		outputText("and roll the gooey woman so " + player2.mf("he","she") + "'s face down.  " + player2.mf("He","She") + " holds " + player2.mf("him","her") + "self up off the dry dirt with " + player2.mf("his","her") + " palms, sweet, slimy bottom upraised above " + player2.mf("his","her") + " goopy undercarriage.  Amazingly, there's a slight parting in the mass of slime, right between where " + player2.mf("his","her") + " legs would be, if " + player2.mf("he","she") + " had them.  A narrow, barely visible divide can be spotted inside, capped with the telltale bulge of " + player2.mf("his","her") + " ");
-		if (player2.clitLength < .5) outputText("tiny ");
-		else if (player2.clitLength >= 2.5) outputText("massive ");
+		if (player2.getClitLength() < .5) outputText("tiny ");
+		else if (player2.getClitLength() >= 2.5) outputText("massive ");
 		outputText("button.  You nuzzle up to that slick slime-cunt, sniffing at " + player2.mf("his","her") + " super-wet snatch, taking the pheromones as deeply inside yourself as possible.  " + player2.mf("His","Her") + " femininity is so strong that it makes your head spin and your dick ache.  Glancing down as you lick the moisture from your muzzle, you see the rigid, over-engorged veins standing out in harsh relief on your equine tool.  Your legs seem to move on their own, lining you up with the moisture-laden slit just inches away.");
 	}
 	//{nagas}

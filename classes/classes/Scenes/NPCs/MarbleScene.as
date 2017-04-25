@@ -2563,7 +2563,7 @@ private function marbleCampSexNew():void {
 				outputText("\n\n\"<i>That feels good, doesn't it, sweetie?  You should suck my breasts some more, I'd really appreciate that.</i>\"");
 				outputText("\n\nYou gently moan into her nipple in response, causing her to giggle as she plays with the tip your " + player.clitDescript() + ".");
 				//([Normal clit] 
-				if (player.clitLength < 3) outputText("\n\nShe rubs it with care but quite intensely, bringing you a tingling, overwhelming pleasure.");
+				if (player.getClitLength() < 3) outputText("\n\nShe rubs it with care but quite intensely, bringing you a tingling, overwhelming pleasure.");
 				else outputText("\n\nShe grabs your clit and strokes it a few times, then grins widely.  \"<i>This is kind of perverse, sweetie.  Is this really one of your lady parts?</i>\"");
 				outputText("  She returns to pumping her fingers in and out of your pussy and, just as she increases the pace, you decide you need something to grab onto - and the most pleasant things at hand are her breasts.  Marble gasps in surprise and moans as you rub her breasts while suckling, and starts fingering you even faster in response.");
 				//( [Female Marble] 
@@ -2681,7 +2681,7 @@ private function marbleCampSexNew():void {
 			if (player.vaginas.length > 0) {
 				outputText("\n\nShe slides down your body to rub and caress your " + player.vaginaDescript(0) + " with her breasts, sometimes pushing one of her " + marbleNips() + " inside your " + player.vaginaDescript(0) + " and pulling a small gasp from you.  ", false);
 				//If clit is too small to be titfucked...
-				if (player.clitLength < 2) {
+				if (player.getClitLength() < 2) {
 					outputText("  Marble runs down each of your legs once with her breasts before unexpectedly plunging two of her fingers inside your " + player.vaginaDescript(0) + ".", false);
 				} 
 				else {

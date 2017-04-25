@@ -611,7 +611,7 @@ package classes.Scenes.NPCs
 			outputText("Now breathing heavily, your " + player.hipDescript() + " begin trembling, aching to mount the invading member, fuck it, mate with it; anything to sate your growing desires.  Ceraph gives you a knowing wink and sidles forward, sliding the last several inches through your spread nether-lips into the velvety embrace of your " + player.vaginaDescript() + ".  You can feel it, squirming and rubbing inside you, twisting through your pussy with a slow, maddening purpose.  From time to time it brushes your cervix, but never hard, never painfully.  At the same time, it seems to always be in contact with your most sensitive places.  It makes you wonder if Ceraph has practiced this on herself at some point, and you briefly entertain the notion of the demon bent over, vigorously fucking her box with her perverted tongue-prick ravaging her purple pussy.\n\n", false);
 
 			outputText("A jolt of pleasure blasts the image from your mind and nearly takes your " + player.legs() + " out from under you.  With a start, you realize Ceraph has opened her lips wide enough to slurp your " + player.clitDescript() + " into her mouth, and somehow, she's produced a second tongue to service it.  With the stimulation of a tentacular tongue constantly hitting your g-spot and a second oral organ ", false);
-			if (player.clitLength >= 3) outputText("fellating", false);
+			if (player.getClitLength() >= 3) outputText("fellating", false);
 			else outputText("licking", false);
 			outputText(" at your " + player.clitDescript() + ", you start to shudder, trying to stave off what you know is coming.  You don't want Ceraph to get too uppity, thinking she can get you off this fast, but you're dangerously close, and her pumping, teasing mouth-cock is relentless.\n\n", false);
 
@@ -1553,7 +1553,6 @@ package classes.Scenes.NPCs
 			dynStats("lib", -2, "sen", -2, "cor", 5);
 			flags[kFLAGS.CERAPH_DICKS_OWNED]++;
 			player.removeCock(x, 1);
-			player.genderCheck();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1567,7 +1566,6 @@ package classes.Scenes.NPCs
 			outputText("\n\n\"<i>Oh don't mind the feelings, they'll fade once I get farther away and get this stuffed into one of my pets.  Thank you again, [Master] for supporting your pet's ever-growing harem.  I'll be sure and put the new pocket-pussy to use right away so that you'll have some good dreams soon.  I'll miss seeing it on you though, so if you would, please replace it. </i>\" instructs Ceraph with an air of feigned meekness.", false);
 			outputText("\n\nYou work your jaw in consternation, trying to stay upright as Ceraph starts to fly away, amusing herself by masturbating your old cunt as she flies.  The lewd squishes seem to hang in the air, and you're helpless to do naught but writhe in the dirt and moan as you're brought to orgasm from a nonexistent vagina.  It seems as soon as she leaves camp she forgets she's supposed to be YOUR subservient bitch.");
 			player.removeVagina(0, 1);
-			player.genderCheck();
 			//(-100 lust, -1 fetish, +1 vagina toy status)
 			player.orgasm('Vaginal');
 			dynStats("lib", -2, "sen", -2, "cor", 5);

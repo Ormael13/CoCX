@@ -26,6 +26,22 @@ package classes
 			       (underBody.skin.hasFur() && hasFur() && underBody.skin.furColor != skin.furColor);
 		}
 
+		public function hasUnderBody(noSnakes:Boolean = false):Boolean
+		{
+			var normalUnderBodies:Array = [UNDER_BODY_TYPE_NONE];
+
+			if (noSnakes) {
+				normalUnderBodies.push(UNDER_BODY_TYPE_NAGA);
+			}
+
+			return normalUnderBodies.indexOf(underBody.type) == -1;
+		}
+
+		public function hasFurryUnderBody(noSnakes:Boolean = false):Boolean
+		{
+			return hasUnderBody(noSnakes) && underBody.skin.hasFur();
+		}
+
 		public function hasDragonHorns(fourHorns:Boolean = false):Boolean
 		{
 			return (!fourHorns && horns > 0 && hornType == HORNS_DRACONIC_X2) || hornType == HORNS_DRACONIC_X4_12_INCH_LONG;
@@ -110,16 +126,6 @@ package classes
 		public function featheryHairPinEquipped():Boolean
 		{
 			return hasKeyItem("Feathery hair-pin") >= 0 && keyItemv1("Feathery hair-pin") == 1;
-		}
-
-		public function isMaleOrHerm():Boolean
-		{
-			return (gender & GENDER_MALE) != 0;
-		}
-
-		public function isFemaleOrHerm():Boolean
-		{
-			return (gender & GENDER_FEMALE) != 0;
 		}
 	}
 }

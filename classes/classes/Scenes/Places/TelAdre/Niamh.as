@@ -469,7 +469,6 @@ public function bimboChampagne(player:Player,clearScreen:Boolean,intro:Boolean):
 		//(Player does not have vagina:
 		if (!player.hasVagina()) {
 			player.createVagina();
-			player.genderCheck();
 			outputText("\n\nYou can feel ");
 			if (player.hasCock()) outputText("the flesh under your cock[if (hasBalls = true)  and behind your [balls]]");
 			else outputText("the blank expanse of flesh that is your crotch");
@@ -483,7 +482,6 @@ public function bimboChampagne(player:Player,clearScreen:Boolean,intro:Boolean):
 			player.buttRating = 12;
 			if (player.hipRating < 10) player.hipRating = 10;
 		}
-		player.genderCheck();
 		dynStats("spe", -10, "lib", 1, "lus", 25);
 	}
 }
@@ -504,7 +502,6 @@ public function removeBimboChampagne():void {
 		outputText("  Of course, the added junk in your trunk fades too, leaving you back to having a [butt].");
 	}
 	player.removeStatusEffect(StatusEffects.BimboChampagne);
-	player.genderCheck();
 	outputText("\n");
 }
 
@@ -765,7 +762,7 @@ private function barBeerOrgyTits():void {
 	// ELSE IF [Player has multiple cocks]
 	else if (player.cockTotal() > 1) outputText("\n\n\"<i>Ooooh, how delightful.  Ye come overly equipped dontcha?</i>\"  Niamh grabs a handful of your cock meat as she settles her hips down to smother your face with her vaginal folds.  Her labia slip between your lips and you find yourself tonguing her cunt in search of her entrance.  With your cocks in her hands she begins glomping down on one of your shafts with her own mouth, eagerly sucking you off while giving you a hand job at the same time.  Excessive amounts of your pre-cum serve as the perfect lubricant for her hands as they stroke you off.  \"<i>Mmmmm,</i>\"  Niamh purrs, \"<i>I hope your cum is as good as your " + boozeBoobsType() + ".</i>\"");
 	//IF [Player has 2+ inch clit]
-	if (player.clitLength >= 2) outputText("\n\nThe sensations in your groin become more pleasurably irresistible as you feel something wet and tight slip around your clit.  Amongst the ruckus of voices in the bar you can make out the distinctive yelps of a fairy that call out in time with the sensations of whatever is sliding up and down your pussy's nub.");
+	if (player.getClitLength() >= 2) outputText("\n\nThe sensations in your groin become more pleasurably irresistible as you feel something wet and tight slip around your clit.  Amongst the ruckus of voices in the bar you can make out the distinctive yelps of a fairy that call out in time with the sensations of whatever is sliding up and down your pussy's nub.");
 
 	//===============
 	//Fifth Paragraph

@@ -101,7 +101,6 @@ package classes.Scenes.Dungeons.Factory
 				outputText("Her palm caresses your crotch, stoking the warmth inside you until it blazes white-hot with new sensation.  Your skin ripples and parts, ", false);
 				if (player.biggestTitSize() <= 1) {
 					outputText("pushed apart the thick flesh of a powerful demonic member, complete with two swollen balls.", false);
-					player.gender = 1;
 					player.createCock();
 					player.cocks[0].cockLength = 10;
 					player.cocks[0].cockThickness = 2;
@@ -111,7 +110,6 @@ package classes.Scenes.Dungeons.Factory
 				}
 				else {
 					outputText("gushing with fluids as it shapes itself into a hungry demonic cunt.", false);  
-					player.gender = 2;
 					player.createVagina();
 					player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
 				}
@@ -175,7 +173,7 @@ package classes.Scenes.Dungeons.Factory
 				outputText(player.vaginaDescript(0) + " grows wet and ready, practically juicing itself as the demoness' hand caresses your inner thigh.  She teases, \"<i>Oh my! You're so wet and ready and I haven't even touched your moist little cum-receptacle.  You're a slut aren't you?  Who else would be so turned on by the idea of cumming until all your humanity drips out?</i>\"\n\n", false);
 				outputText("The words make you blush hard, shaming you and stoking the growing fire between your " + player.legs() + ".  You know two things for certain: she's right and you're more turned on that ever.  You don't resist as the demoness easily lifts you up, setting you down on a table with your " + player.legs() + " spread.  \"<i>There,</i>\" she comments, \"<i>now your juicy snatch is on display, just like you've always wanted.</i>\"\n\n", false);
 				outputText("She effortlessly swings her lissome legs onto the table as she pulls herself up, mounting you as a man might.  You can feel waves of heat rolling off her sex, bathing your own slit in her warmth.  ", false);
-				if (player.clitLength >= 2) outputText("Your " + player.clitDescript() + " pushes free, nuzzling against her hairless cunt and slipping inside, as if drawn in by its desire.  She openly moans, and begins rocking on top of you.  You gasp in delight as she rides your " + player.clitDescript() + ", fucking and grinding against it.  ", false);
+				if (player.getClitLength() >= 2) outputText("Your " + player.clitDescript() + " pushes free, nuzzling against her hairless cunt and slipping inside, as if drawn in by its desire.  She openly moans, and begins rocking on top of you.  You gasp in delight as she rides your " + player.clitDescript() + ", fucking and grinding against it.  ", false);
 				else outputText("She lowers herself down, rubbing smooth hairless netherlips over you, smearing you with her fragrant demon-honey.  You feel her clit grinding on your own, drawing out gasps of delight from both of your mouths as she relentlessly scissors against you.  ", false);
 				outputText("In no time flat you feel your climax building.  Your " + player.vaginaDescript(0) + " quivers and grows wetter in anticipation.  Tugging on your aching " + player.nippleDescript(0) + "s and aching for release, you squirm under your demonic mistress, smashing your " + player.vaginaDescript(0) + " against her in a lewd attempt to find your orgasm.  It does not happen, and you moan in disappointment as the pleasure continues to build, oblivious to your desire for orgasm.\n\n", false);
 				outputText("\"<i>Have you hit it yet?</i>\" the succubus asks as she rocks on top of you, \"<i>I've placed a block inside you.  Don't worry, it's temporary, it'll only stop you from orgasming for a few days...</i>\"\n\n", false);
@@ -197,7 +195,7 @@ package classes.Scenes.Dungeons.Factory
 				outputText(player.multiCockDescript() + " and " + player.vaginaDescript(0) + " grow wet and ready, both starting to leak fluids as the succubus' hand traces your inner thigh.  She teases, \"<i>Oh my! You're so wet and ready and I haven't even touched your moist little cum-receptacle.  And that throbbing cock!  How obscene!  You're a slut aren't you?  Who else would be so turned on by the idea of cumming until your humanity is splattered between my legs?</i>\"\n\n", false);
 				outputText("The words make you blush hard, shaming you and stoking the growing fire between your legs.  You know two things for certain: she's right and you're more turned on that ever.  You don't resist as the demoness easily lifts you up, setting you down on a table with your legs spread.  \"<i>There,</i>\" she comments, \"<i>now all of your fun-parts are on display.  Maybe I should call in an incubus and a few imps to watch.  I bet you'd like that wouldn't you?</i>\"\n\n", false);
 				outputText("She effortlessly swings her lissome legs onto the table as she pulls herself up, mounting you in a single swift motion.  You can feel waves of heat rolling off her sex, bathing your " + player.cockDescript(0) + " in her warmth.  ", false);
-				if (player.clitLength >= 2) outputText("Your " + player.clitDescript() + " pushes free, nuzzling against her tight asshole and slipping inside, as if drawn in by its desire.  She openly moans, and begins rocking on top of you.  You gasp in delight as she rides your " + player.clitDescript() + ", fucking her ass and grinding against it.", false);
+				if (player.getClitLength() >= 2) outputText("Your " + player.clitDescript() + " pushes free, nuzzling against her tight asshole and slipping inside, as if drawn in by its desire.  She openly moans, and begins rocking on top of you.  You gasp in delight as she rides your " + player.clitDescript() + ", fucking her ass and grinding against it.", false);
 				else outputText("She lowers herself down, rubbing smooth hairless netherlips over your crotch and vulva, smearing you with her fragrant demon-honey.  You feel her clit grinding on your belly, drawing out gasps of delight from both of your mouths as she relentlessly works her body against your own.", false);
 				outputText("\n\nMarvelous heat and wetness wraps your " + player.cockDescript(0) + " tightly.  You sigh happily, already lost in the feeling of having a succubus' tight walls wriggling around you.  Were you not already so corrupt, you would probably be cumming already, but as it is, you can lie there and enjoy it, reveling in the sensations your unholy lover is spreading through your body.  You shiver, finally approaching your climax, but as it nears you find yourself denied by something deep inside you, pushing away your release and hiding it somewhere inaccessible.\n\n", false);
 				outputText("\"<i>Have you hit it yet?</i>\" the succubus asks as she rocks on top of you, \"<i>I've placed a block inside you.  Don't worry, it's temporary, it'll only stop you from orgasming for a few days...</i>\"\n\n", false);
@@ -322,7 +320,7 @@ package classes.Scenes.Dungeons.Factory
 		}
 		public function doScissorSuccubus():void {
 			outputText("You shiver with anticipation as you hook your leg under her thick thighs, lining up your " + player.vaginaDescript(0) + " as you press forwards.  The anticipation builds as your matched honeypots grow ever closer.  Making contact, your folds part as her purplish-red clit slips betwixt your nether-lips, vibrating slightly in tune with the succubus' heartbeats.  You gasp, feeling your own " + player.clitDescript() + " erecting and rubbing against her smooth mound.\n\n", false);
-			if (player.clitLength >= 3) outputText("You groan with wanton desire as your " + player.clitDescript() + " continues to grow and grow until reaching full size and slipping inside the defeated slut's sloppy pleasure-hole.  ", false);
+			if (player.getClitLength() >= 3) outputText("You groan with wanton desire as your " + player.clitDescript() + " continues to grow and grow until reaching full size and slipping inside the defeated slut's sloppy pleasure-hole.  ", false);
 			outputText("It takes only a few seconds to get the succubus' juices really flowing, the sounds of your grinding hips dissolving into a cacophony of liquid squelches.  The gooey corrupt fem-cum tingles, spreading warmth through every patch of skin it touches.  Your locked hips writhe and twist with her's, eliciting pants and squeals from the both of you.  In no time flat, you find yourself cumming and feel your " + player.vaginaDescript(0) + "'s muscles clench hungrily with an unquenchable desire to be filled.  The succubus shivers in pleasure, probably feeding off your orgasm.  You back off, fingering your " + player.vaginaDescript(0) + " languidly and denying her a full meal.  Pouting, the succubus dips her fingers back in, determined to cum.", false);
 			outputText("\n\nYou turn away with a bemused sigh.  When you glance back, she has vanished!", false);
 			player.orgasm('Vaginal');
@@ -486,9 +484,9 @@ package classes.Scenes.Dungeons.Factory
 			//Vagooooz
 			if (player.vaginas.length > 0) {
 				//'uge clit
-				if (player.clitLength >= 4.5) outputText("Popping from between your thighs, your " + player.clitDescript() + " responds to the sheer hotness of the situation by making itself known.   You squeeze your legs tightly together, hungry for additional sensation.  ", false);
+				if (player.getClitLength() >= 4.5) outputText("Popping from between your thighs, your " + player.clitDescript() + " responds to the sheer hotness of the situation by making itself known.   You squeeze your legs tightly together, hungry for additional sensation.  ", false);
 				//big clit
-				if (player.clitLength > 1 && player.clitLength < 4.5) outputText("A wave of pleasure erupts from between your legs as your " + player.clitDescript() + " pops free.    You squeeze your legs tightly together, hungry for the additional sensations.  ", false);
+				if (player.getClitLength() > 1 && player.getClitLength() < 4.5) outputText("A wave of pleasure erupts from between your legs as your " + player.clitDescript() + " pops free.    You squeeze your legs tightly together, hungry for the additional sensations.  ", false);
 				//slick
 				if (player.vaginas[0].vaginalWetness >= VAGINA_WETNESS_SLICK) outputText("Squishing wetly, your bottoms become soggy with the flood of fluids leaking from your " + player.vaginaDescript(0) + ".   Your legs spread apart on their own, begging for any kind of intrusion.  ", false);
 				//normal

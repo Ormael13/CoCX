@@ -246,7 +246,6 @@
 		public function Monster()
 		{
 			// trace("Generic Monster Constructor!");
-			this.gender = GENDER_NONE;
 
 			//// INSTRUCTIONS
 			//// Copy-paste remaining code to the new monster constructor
@@ -496,7 +495,6 @@
 				}
 			}
 			var result:Boolean = super.createCock(clength, cthickness, ctype);
-			this.genderCheck();
 			return result;
 		}
 
@@ -515,7 +513,6 @@
 				}
 			}
 			var result:Boolean = super.createVagina(virgin, vaginalWetness, vaginalLooseness);
-			this.genderCheck();
 			return result;
 		}
 
@@ -533,7 +530,6 @@
 				this.pronoun2 = "it";
 				this.pronoun3 = "its";
 			}
-			this.genderCheck();
 		}
 
 		override public function createBreastRow(size:Number = 0, nipplesPerBreast:Number = 1):Boolean

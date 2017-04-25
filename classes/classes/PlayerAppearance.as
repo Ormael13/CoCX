@@ -1179,12 +1179,12 @@ package classes
 					outputText("\nYour womanly parts have shifted to lie between your hind legs, in a rather feral fashion.");
 				outputText("\n");
 				if (player.vaginas.length == 1) 
-					outputText("You have a " + player.vaginaDescript(0) + ", with a " + inchesOrCentimetres(player.clitLength) + " clit");
+					outputText("You have a " + player.vaginaDescript(0) + ", with a " + inchesOrCentimetres(player.getClitLength()) + " clit");
 				if (player.vaginas[0].virgin) 
 					outputText(" and an intact hymen"); // Wait, won't this fuck up, with multiple vaginas?
 				outputText(".  ");
 				if (player.vaginas.length > 1) 
-					outputText("You have " + player.vaginas.length+ " " + player.vaginaDescript(0) + "s, with " + inchesOrCentimetres(player.clitLength) + "-centimetre clits each.  ");
+					outputText("You have " + player.vaginas.length+ " " + player.vaginaDescript(0) + "s, with " + inchesOrCentimetres(player.getClitLength()) + "-centimetre clits each.  ");
 				if (player.lib < 50 && player.lust < 50) //not particularly horny
 				
 				{

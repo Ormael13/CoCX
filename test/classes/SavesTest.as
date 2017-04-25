@@ -43,13 +43,13 @@ package classes{
         [Test] 
         public function testClitLengthSaved():void {
 			player.createVagina();
-			player.vaginas[0].clitLength = CLIT_LENGTH;
+			player.setClitLength(CLIT_LENGTH);
             cut.saveGame(TEST_SAVE_GAME, false);
-			player.vaginas[0].clitLength = 0;
+			player.setClitLength(0);
 			
 			cut.loadGame(TEST_SAVE_GAME);
 			
-			assertThat(kGAMECLASS.player.vaginas[0].clitLength, equalTo(CLIT_LENGTH));
+			assertThat(kGAMECLASS.player.getClitLength(), equalTo(CLIT_LENGTH));
         }
 		  
 		[Test] 

@@ -1546,7 +1546,6 @@ package classes.Scenes
 				if (player.vaginas.length == 0) {
 					outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ", false);
 					player.createVagina();
-					player.genderCheck();
 				}
 				outputText("A dangerous rumble comes from your womb, signaling that it's time to birth your body's cargo at last.  Your " + player.legs() + " wobble unsteadily as your strength ebbs with every gush that erupts  from your now-broken water until you collapse on your " + player.buttDescript() + ", grunting and groaning.  At first it goes slow – there's just a few small contractions that are more strange than anything else, rippling down your " + player.vaginaDescript(0) + " and squirting out more of your pregnancy's fluid.  All too soon the tempo kicks up, and you feel something starting to stretch you wider and wider.\n\n", false);
 				
@@ -1579,7 +1578,6 @@ package classes.Scenes
 				if (player.vaginas.length == 0) {
 					outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ", false);
 					player.createVagina();
-					player.genderCheck();
 				}
 				outputText("Your " + player.armorName + " feels damp around the groin and you reach down to check the area.  The  " + player.vaginaDescript(0) + " you feel is dilated and slick with unusual wetness; your water must have broken!\n\n", false);
 				
@@ -1635,7 +1633,6 @@ package classes.Scenes
 					else outputText("nearly a cupful of fluid", false);
 					outputText(" from your female orgasm to the puddle on the ground below your ass.\n\n", false);
 					//(gain 1 nemo-dick, reduce lust to min)]
-					player.genderCheck();
 					player.orgasm('Vaginal');
 					dynStats("lib", 2, "sen", 5);
 				}
@@ -1664,7 +1661,6 @@ package classes.Scenes
 				if (player.vaginas.length == 0) {
 					outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ", false);
 					player.createVagina();
-					player.genderCheck();
 				}		
 				outputText("A sudden gush of fluids erupts from your vagina - your water just broke.  You grunt painfully as you feel wriggling and squirming inside your belly, muscle contractions forcing it downwards.  ", false);
 				if (player.cor < 50) outputText("You rue the day you encountered that hateful imp.  ", false);
@@ -1701,8 +1697,6 @@ package classes.Scenes
 					player.growTits(1, 1, false, 3);
 				}
 				if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
-				if (player.gender == 1) player.gender = 3;
-				if (player.gender == 0) player.gender = 2;
 				player.orgasm('Vaginal');
 				dynStats("tou", -2, "spe", 2, "lib", 1, "sen", .5, "cor", 7);
 				if (player.buttRating < 10 && rand(2) == 0) {
@@ -1724,7 +1718,6 @@ package classes.Scenes
 				if (player.vaginas.length == 0) {
 					outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.\n", false);
 					player.createVagina();
-					player.genderCheck();
 				}	
 				//If you like terrible outcomes
 				if (flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] < 100) {
@@ -1796,7 +1789,6 @@ package classes.Scenes
 				if (player.vaginas.length == 0) {
 					outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n", false);
 					player.createVagina();
-					player.genderCheck();
 				}
 				player.boostLactation(.01);		
 				//Main Text here
@@ -1809,8 +1801,6 @@ package classes.Scenes
 				}
 				player.cuntChange(120, true,true,false);
 				if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
-				if (player.gender == 1) player.gender = 3;
-				if (player.gender == 0) player.gender = 2;
 				player.orgasm('Vaginal');
 				dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5);
 				displayedUpdate = true;
@@ -1853,7 +1843,6 @@ package classes.Scenes
 				if (player.vaginas.length == 0) {
 					outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.  ", false);
 					player.createVagina();
-					player.genderCheck();
 				}
 				//FUCKING BIRTH SHIT HERE.
 				getGame().amilyScene.pcBirthsAmilysKidsQuestVersion();
@@ -1872,7 +1861,6 @@ package classes.Scenes
 				if (player.vaginas.length == 0) {
 					outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.  ", false);
 					player.createVagina();
-					player.genderCheck();
 				}		
 
 				//Main Text here
@@ -1894,8 +1882,6 @@ package classes.Scenes
 				}
 				player.cuntChange(60, true,true,false);
 				if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
-				if (player.gender == 1) player.gender = 3;
-				if (player.gender == 0) player.gender = 2;
 				player.orgasm('Vaginal');
 				dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5);
 				displayedUpdate = true;
@@ -1919,7 +1905,6 @@ package classes.Scenes
 				if (player.vaginas.length == 0) {
 					outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.  ", false);
 					player.createVagina();
-					player.genderCheck();
 				}		
 				//Main Text here
 				player.boostLactation(.01);
@@ -1936,8 +1921,6 @@ package classes.Scenes
 				outputText("  ", false);
 				player.cuntChange(100, true);
 				if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
-				if (player.gender == 1) player.gender = 3;
-				if (player.gender == 0) player.gender = 2;
 				player.orgasm('Vaginal');
 				dynStats("str", -1,"tou", -4, "spe", 2, "lib", 1, "sen", .5);
 				displayedUpdate = true;
@@ -1962,7 +1945,6 @@ package classes.Scenes
 				if (player.vaginas.length == 0) {
 					outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n\n", false);
 					player.createVagina();
-					player.genderCheck();
 				}		
 				outputText("Hearing a hiss, you look down to see drops of water hitting the ground and instantly turning to steam.  There is unnatural heat filling you, it's hot enough to boil water; but thanks to the creature inside you, you're barely feeling a thing!  More energy fills you and you begin to push down on the child within in earnest.  The process is painful, but satisfying; you feel like you could push out a mountain with the energy you have right now.  Within a minute, you can feel the heads emerge.  The heads are quickly followed by the rest of the body and you catch your hellhound child in your hands and lift it up to look at it.\n\n", false);
 				outputText("You can see the distinctive dog heads are wrapped around each other and yipping softly; a hint of flame can sometimes be seen inside their mouths.  Its cute paws are waving in the air looking for purchase, but the rest of its body looks entirely human except for the double dicks, and it even has your skin color.  Its mouths are aching for nutrition, and you realize that your breasts are filled with what this pup needs and pull it to your chest.  Each head quickly finds a nipple and begins to suckle.  Having finished the birthing, you contentedly sit back down and bask in the feeling of giving milk to your child, or is it children?\n\n", false);
@@ -1976,8 +1958,6 @@ package classes.Scenes
 				}
 				player.cuntChange(60, true);
 				if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
-				if (player.gender == 1) player.gender = 3;
-				if (player.gender == 0) player.gender = 2;
 				player.orgasm('Vaginal');
 				dynStats("str", -1,"tou", -1, "spe", 2, "lib", 1, "sen", .5);
 				displayedUpdate = true;
@@ -2001,7 +1981,6 @@ package classes.Scenes
 				if (player.vaginas.length == 0) {
 					outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n", false);
 					player.createVagina();
-					player.genderCheck();
 				}
 				kGAMECLASS.highMountains.minervaScene.minervaPurification.playerGivesBirth();
 				if (player.hipRating < 10) {
@@ -2017,7 +1996,6 @@ package classes.Scenes
 				if (player.vaginas.length == 0) {
 					outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n", false);
 					player.createVagina();
-					player.genderCheck();
 				}
 				kGAMECLASS.volcanicCrag.behemothScene.giveBirthToBehemoth();
 				if (player.hipRating < 10) {
@@ -2041,7 +2019,6 @@ package classes.Scenes
 					if (player.vaginas.length == 0) {
 						outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n\n", false);
 						player.createVagina();
-						player.genderCheck();
 					}		
 					//Small egg scenes
 					if (player.statusEffectv2(StatusEffects.Eggs) == 0) {
@@ -2055,9 +2032,9 @@ package classes.Scenes
 						//High quantity
 						else {
 							outputText("A strange desire overwhelms your sensibilities, forcing you to shed your " + player.armorName + " and drop to your hands and knees.   You manage to roll over and prop yourself up against a smooth rock, looking down over your pregnant-looking belly as green fluids leak from you, soaking into the ground.   A powerful contraction rips through you and your legs spread instinctively, opening your " + player.vaginaDescript(0) + " to better deposit your precious cargo.   You see the rounded surface of an egg peek through your lips, mottled with strange colors.   You push hard and it drops free with an abrupt violent motion.  The friction and slimy fluids begin to arouse you, flooding your groin with heat as you feel the second egg pushing down.  It slips free with greater ease than the first, arousing you further as you bleat out a moan from the unexpected pleasure.  Before it stops rolling on the ground, you feel the next egg sliding down your slime-slicked passage, rubbing you perfectly as it slides free.  You lose count of the eggs and begin to masturbate, ", false);
-							if (player.clitLength > 5) outputText("jerking on your huge clitty as if it were a cock, moaning and panting as each egg slides free of your diminishing belly.  You lubricate it with a mix of your juices and the slime until ", false);
-							if (player.clitLength > 2 && player.clitLength <= 5) outputText("playing with your over-large clit as if it were a small cock, moaning and panting as the eggs slide free of your diminishing belly.  You spread the slime and cunt juice over it as you tease and stroke until ", false);
-							if (player.clitLength <= 2) outputText("pulling your folds wide and playing with your clit as another egg pops free from your diminishing belly.  You make wet 'schlick'ing sounds as you spread the slime around, vigorously frigging yourself until ", false); 
+							if (player.getClitLength() > 5) outputText("jerking on your huge clitty as if it were a cock, moaning and panting as each egg slides free of your diminishing belly.  You lubricate it with a mix of your juices and the slime until ", false);
+							if (player.getClitLength() > 2 && player.getClitLength() <= 5) outputText("playing with your over-large clit as if it were a small cock, moaning and panting as the eggs slide free of your diminishing belly.  You spread the slime and cunt juice over it as you tease and stroke until ", false);
+							if (player.getClitLength() <= 2) outputText("pulling your folds wide and playing with your clit as another egg pops free from your diminishing belly.  You make wet 'schlick'ing sounds as you spread the slime around, vigorously frigging yourself until ", false); 
 							outputText("you quiver in orgasm, popping out the last of your eggs as your body twitches nervelessly on the ground.   In total you lay " + eggDescript() + ".", false);
 							player.orgasm('Vaginal');
 							dynStats("resisted", false);
@@ -2070,9 +2047,9 @@ package classes.Scenes
 						if (player.vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness <= VAGINA_LOOSENESS_GAPING_WIDE) outputText("temporarily stretching your cunt-lips wide-open ", false);
 						if (player.vaginas[0].vaginalLooseness > VAGINA_LOOSENESS_GAPING_WIDE) outputText("parting your already gaping lips wide ", false);
 						outputText("as something begins sliding down your passage.  A burst of green slime soaks the ground below as the birthing begins in earnest, and the rounded surface of a strangely colored egg peaks between your lips.  You push hard and the large egg pops free at last, making you sigh with relief as it drops into the pool of slime.  The experience definitely turns you on, and you feel your clit growing free of its hood as another big egg starts working its way down your birth canal, rubbing your sensitive vaginal walls pleasurably.   You pant and moan as the contractions stretch you tightly around the next, slowly forcing it out between your nether-lips.  The sound of a gasp startles you as it pops free, until you realize it was your own voice responding to the sudden pressure and pleasure.  Aroused beyond reasonable measure, you begin to masturbate ", false);
-						if (player.clitLength > 5) outputText("your massive cock-like clit, jacking it off with the slimy birthing fluids as lube.   It pulses and twitches in time with your heartbeats, its sensitive surface overloading your fragile mind with pleasure.  ", false);
-						if (player.clitLength > 2 && player.clitLength <= 5) outputText("your large clit like a tiny cock, stroking it up and down between your slime-lubed thumb and fore-finger.  It twitches and pulses with your heartbeats, the incredible sensitivity of it overloading your fragile mind with waves of pleasure.  ", false);
-						if (player.clitLength <= 2) outputText("your " + player.vaginaDescript(0) + " by pulling your folds wide and playing with your clit.  Another egg pops free from your diminishing belly, accompanied by an audible burst of relief.  You make wet 'schlick'ing sounds as you spread the slime around, vigorously frigging yourself.  ", false);
+						if (player.getClitLength() > 5) outputText("your massive cock-like clit, jacking it off with the slimy birthing fluids as lube.   It pulses and twitches in time with your heartbeats, its sensitive surface overloading your fragile mind with pleasure.  ", false);
+						if (player.getClitLength() > 2 && player.getClitLength() <= 5) outputText("your large clit like a tiny cock, stroking it up and down between your slime-lubed thumb and fore-finger.  It twitches and pulses with your heartbeats, the incredible sensitivity of it overloading your fragile mind with waves of pleasure.  ", false);
+						if (player.getClitLength() <= 2) outputText("your " + player.vaginaDescript(0) + " by pulling your folds wide and playing with your clit.  Another egg pops free from your diminishing belly, accompanied by an audible burst of relief.  You make wet 'schlick'ing sounds as you spread the slime around, vigorously frigging yourself.  ", false);
 						outputText("You cum hard, the big eggs each making your cunt gape wide just before popping free.  You slump down, exhausted and barely conscious from the force of the orgasm.  ", false);
 						if (player.statusEffectv3(StatusEffects.Eggs) >= 11) outputText("Your swollen belly doesn't seem to be done with you, as yet another egg pushes its way to freedom.   The stimulation so soon after orgasm pushes you into a pleasure-stupor.  If anyone or anything discovered you now, they would see you collapsed next to a pile of eggs, your fingers tracing the outline of your " + player.vaginaDescript(0) + " as more and more eggs pop free.  In time your wits return, leaving you with the realization that you are no longer pregnant.  ", false);
 						outputText("\n\nYou gaze down at the mess, counting " + eggDescript() + ".", false);

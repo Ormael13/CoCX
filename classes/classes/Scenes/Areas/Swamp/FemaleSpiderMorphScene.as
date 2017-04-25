@@ -520,12 +520,12 @@ package classes.Scenes.Areas.Swamp
 			outputText("While the stimulation of her twitching body grinding against your " + player.vaginaDescript() + " is wonderful, you quickly tire of her thrashing.  You locate her bulky abdomen and find one of the spinnerets.  The fleshy protuberance is surprisingly quite easy to handle, and you aim it at one of the spider-girl's legs and squeeze.  A torrent of webbing splatters over her carapace-clad legs, and though it doesn't stick to her, it does completely engulf her ankle and adhere to the ground, securing her in place.  You pull back and repeat the action with her other leg, leaving her stuck fast.\n\n", false);
 
 			outputText("You thread yourself back under and around her, sliding back up against her still-quivering cunt until your slippery sex is mashing against it.  With two pairs of slippery pussy lips gliding over each other, squishing wetly from the mixed dribbles of fem-cum, the rest of the swamp fades to a barely-noticed background.  Your " + player.clitDescript() + " quickly emerges from its sheath", false);
-			if (player.clitLength < 4) outputText(", bumping and gliding against the black spider-cooch's sopping lips.", false);
+			if (player.getClitLength() < 4) outputText(", bumping and gliding against the black spider-cooch's sopping lips.", false);
 			else outputText(", slowly spearing forward to penetrate the sopping wet spider-cooch with its decidedly unladylike length and girth.", false);
 			outputText("  The pale beauty moans and screams, her bound arms pulling futilely against the restraints as you work her relentlessly, using her body as your lubricated, vibrating toy.\n\n", false);
 
 			outputText("The squishes and schlicks of your mating echo out, while both your voices rise to higher pitches from the pleasure.  The arachnid-woman cums numerous times, squirting her sweet honey over your " + player.vaginaDescript() + " enough times to leave a puddle under the joining of your waists.  Even in the humid swamp air, the splattering lady-spunk quickly soaks into the mud, but your spidery lover will keep making more; you're sure of it.  You grab one of her feet for leverage and hump harder and harder until your " + player.clitDescript() + " ", false);
-			if (player.clitLength >= 4) outputText("is seized by her velvet embrace just right, and you cum while fucking her with your 'tiny' nub.", false);
+			if (player.getClitLength() >= 4) outputText("is seized by her velvet embrace just right, and you cum while fucking her with your 'tiny' nub.", false);
 			else outputText("drags over her velvet lips just right, and you cum hard, screaming in ecstasy.", false);
 			outputText("\n\n", false);
 

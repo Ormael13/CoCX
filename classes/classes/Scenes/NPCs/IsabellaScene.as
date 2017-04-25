@@ -16,7 +16,7 @@
 		public function IsabellaScene()
 		{
 			pregnancy = new PregnancyStore(kFLAGS.ISABELLA_PREGNANCY_TYPE, kFLAGS.ISABELLA_PREGNANCY_INCUBATION, 0, 0);
-			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 2160, 1920, 1680, 1440, 1200, 960, 720, 480, 240);
+			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 2160, 1920, 1680, 1440, 1200, 960, 720, 480, ISABELLA_PREGNANCY_LAST_STAGE);
 			CoC.timeAwareClassAdd(this);
 		}
 		
@@ -30,6 +30,8 @@
 		public static const OFFSPRING_HUMAN_HERMS:int = 3;
 		public static const OFFSPRING_COWGIRLS:int = 4;
 		public static const OFFSPRING_COWFUTAS:int = 5;
+		
+		public static const ISABELLA_PREGNANCY_LAST_STAGE:int = 240;
 		
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
@@ -506,7 +508,7 @@ public function izzyGivesSmallWangsFreeOral():void {
 		if (player.balls > 0) outputText("She cups your " + player.ballsDescriptLight() + " and begins caressing the twitching orbs, giving them gentle squeezes each time the pleasure forces them to involuntarily contract towards your groin.", false);
 		else if (player.hasVagina()) {
 			outputText("She probes your " + player.vaginaDescript() + " with her fingers, running them over your engorged lips and giving your " + player.clitDescript() + " ", false);
-			if (player.clitLength < 3) outputText("gentle squeezes", false);
+			if (player.getClitLength() < 3) outputText("gentle squeezes", false);
 			else outputText("firm pumps", false);
 			outputText(".", false);
 		}
@@ -1254,8 +1256,8 @@ public function victoryAgainstIzzzzzySixtyNine():void {
 	//(VAGOOZLES) 
 	if (player.gender == 2) {
 		outputText("Isabella returns to her task with gusto, muff-diving deep and hard to plant her exquisitely long tongue far inside you.  Her lips circle your " + player.clitDescript() + ", ", false);		
-		if (player.clitLength >= 5) outputText("struggling with the cock-like appendage", false);
-		else if (player.clitLength >= 2) outputText("suckling the large button with slow, measured inhalations", false);
+		if (player.getClitLength() >= 5) outputText("struggling with the cock-like appendage", false);
+		else if (player.getClitLength() >= 2) outputText("suckling the large button with slow, measured inhalations", false);
 		else outputText("devouring the tiny bud", false);
 		outputText(" even as the smooth skin of her tongue inadvertently caresses it.  You writhe against her with your juices ", false);
 		if (player.wetness() < 3) outputText("coating her tongue", false);

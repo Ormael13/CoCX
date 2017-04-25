@@ -684,7 +684,6 @@ public function PCGivesBirf():void {
 	if (player.vaginas.length == 0) {
 		outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ", false);
 		player.createVagina();
-		player.genderCheck();
 	}
 	outputText("You double over in pain as you feel a rush of fluids escape your [pussy].  Looks like your water broke.  You recall promising Urta that you'd go to the hospital before actually going into labor, but right now there's nothing you can do.  It hurts and you know you won't make it there in time, so you rush to your " + camp.homeDesc() + " and lay down on your " + camp.bedDesc() + ", silently praying that Urta will swing by to assist you.");
 	//1st Time:
@@ -2651,7 +2650,7 @@ private function acceptARandomGenderFromASkunk():void {
 			player.breastRows[0].breastRating = 1;	
 		}
 		player.createVagina();
-		player.clitLength = 0.25;
+		player.setClitLength(0.25);
 		outputText("\n\nYou sigh in relief, examining your new endowments; well, that wasn't as bad as it could have been.");
 		outputText("\n\n\"<i>Excellent!  The reactions were exactly as I expected.  I would have you help me right now, but it's better if you get some rest first.  So return here when you're feeling rested and I'll see about breaking into that cute little pussy of yours.</i>\"");
 		outputText("\n\nYou nod your head, carefully get dressed, and then show yourself out.");
@@ -2663,7 +2662,7 @@ private function acceptARandomGenderFromASkunk():void {
 		outputText("\n\nYou sigh in relief, glad that your torment is over.  But before you get too comfortable, the feeling of something boiling makes itself known between your legs, and you set forth to stroke the flesh anew.  For a moment you're worried that you might actually be melting; the flesh there grows softer the more you knead and stroke it.  Suddenly there is wetness, a cascade of juices exploding from within, wetting your hands and Lianna's carpet, as the flesh there grows plump, wet and slick.  The heat concentrates on a small point, that quickly forms into a nub; your clit.");
 		outputText("\n\nWeak after these violent transformations, you don't even process that you've grown both sets of genders; instead you walk over to Lianna's bed and plop down there.");
 		player.createVagina();
-		player.clitLength = 0.25;
+		player.setClitLength(0.25);
 		player.createCock();
 		player.cocks[0].cockLength = 5;
 		player.cocks[0].cockThickness = 1;
@@ -2692,7 +2691,6 @@ private function acceptARandomGenderFromASkunk():void {
 		outputText("\n\n\"<i>Very well.  Don't worry about the mess, I'll clean it all up.  It's just too bad I didn't have anything to catch all this discharge with.  Those samples are all contaminated now, so I'll still need your help collecting more.</i>\"  You ignore her and focus on hauling yourself out of bed and getting decent to go out in public.");
 		outputText("\n\nShe swipes one of the ropes of cum sticking to her body and pops it into her mouth.  \"<i>Tasty.  I wonder if that was an effect of the potion or if you naturally taste good.  Something to test for sometime...</i>\"  By this point you've already gotten dressed, and you promptly leave as quickly as you can.  \"<i>See ya!</i>\"  You hear her yell after you, as you hurriedly make your way out.");
 	}
-	player.genderCheck();
 	doNext(camp.returnToCampUseOneHour);
 }
 

@@ -40,6 +40,7 @@ package classes.Items
 		public const RAINDYE:HairDye = new HairDye("RainDye", "Rainbow");
 		public const RED_DYE:HairDye = new HairDye("Red Dye", "Red");
 		public const WHITEDY:HairDye = new HairDye("WhiteDy", "White");
+		public const YELLODY:HairDye = new HairDye("YelloDy", "Yellow");
 		
 		//SKIN OILS & BODY LOTIONS
 		public const DARK_OL:SkinOil = new SkinOil("DarkOil", "Dark");
@@ -49,6 +50,23 @@ package classes.Items
 		public const MAHOGOL:SkinOil = new SkinOil("MahogOl", "Mahogany");
 		public const OLIVEOL:SkinOil = new SkinOil("OliveOl", "Olive");
 		public const RUSS_OL:SkinOil = new SkinOil("RussOil", "Russet");
+		public const RED__OL:SkinOil = new SkinOil("Red Oil", "Red");
+		public const ORANGOL:SkinOil = new SkinOil("OranOil", "Orange");
+		public const YELLOOL:SkinOil = new SkinOil("YeloOil", "Yellow");
+		public const GREENOL:SkinOil = new SkinOil("GrenOil", "Green");
+		public const WHITEOL:SkinOil = new SkinOil("WhitOil", "White");
+		public const BLUE_OL:SkinOil = new SkinOil("BlueOil", "Blue");
+		public const BLACKOL:SkinOil = new SkinOil("BlakOil", "Black");
+		public const PURPLOL:SkinOil = new SkinOil("PurpOil", "Purple");
+		public const SILVROL:SkinOil = new SkinOil("SlvrOil", "Silver");
+		public const YELGROL:SkinOil = new SkinOil("YlGrOil", "Yellow Green");
+		public const SPRGROL:SkinOil = new SkinOil("SpGrOil", "Spring Green");
+		public const CYAN_OL:SkinOil = new SkinOil("CyanOil", "Cyan");
+		public const OCBLUOL:SkinOil = new SkinOil("OBluOil", "Ocean Blue");
+		public const ELVIOOL:SkinOil = new SkinOil("EVioOil", "Electric Violet");
+		public const MAGENOL:SkinOil = new SkinOil("MagenOl", "Magenta");
+		public const DPPNKOL:SkinOil = new SkinOil("DPnkOil", "Deep Pink");
+		public const PINK_OL:SkinOil = new SkinOil("PinkOil", "Pink");
 		
 		public const CLEARLN:BodyLotion = new BodyLotion("ClearLn", "Clear", "smooth thick creamy liquid");
 		public const ROUGHLN:BodyLotion = new BodyLotion("RoughLn", "Rough", "thick abrasive cream");

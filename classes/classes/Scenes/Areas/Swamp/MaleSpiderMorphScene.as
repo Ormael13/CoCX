@@ -360,7 +360,7 @@ package classes.Scenes.Areas.Swamp
 			else if (player.wetness() >= 2) outputText("wet", false);
 			else outputText("moist", false);
 			outputText(" mons, teasing against your vulva until your " + player.clitDescript() + " emerges from its hood, ", false);
-			if (player.clitLength >= 3) outputText("frotting against him", false);
+			if (player.getClitLength() >= 3) outputText("frotting against him", false);
 			else outputText("grinding along the underside of his dick", false);
 			outputText(".  You start rocking your " + player.hipDescript() + " encouragingly, trying to snare his marvelous maleness, but every time you catch his tip within your lips, he changes the angle and swivels away, teasing you.\n\n", false);
 
@@ -376,7 +376,7 @@ package classes.Scenes.Areas.Swamp
 			outputText(", ", false);
 			if (player.hasCock()) outputText(player.sMultiCockDesc() + " becomes so full and hard it feels like it could burst, ", false);
 			outputText("and your " + player.clitDescript() + " ", false);
-			if (player.clitLength >= 4) outputText("bounces up and down on your belly with each beat of your heart", false);
+			if (player.getClitLength() >= 4) outputText("bounces up and down on your belly with each beat of your heart", false);
 			else outputText("seems to pulsate with every beat of your heart", false);
 			outputText(".\n\n", false);
 
@@ -404,7 +404,6 @@ package classes.Scenes.Areas.Swamp
 			if (player.vaginas.length == 0) {
 				outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ", false);
 				player.createVagina();
-				player.genderCheck();
 			}
 			outputText("You shudder violently, your stomach growling fiercely at you. It feels as if something is moving around in your womb, and you bend over on all fours, raising your ass into the air as if it is the most natural thing in the world. A slimy green fluid starts leaking out of your " + player.vaginaDescript(0) + ", making a small puddle on the ground. The sensation is extremely pleasurable as you feel it running down your thighs. Groaning, you start to push out a small, smooth green ball, and the action makes your " + player.vaginaDescript(0) + " so much wetter.  You push out another, and another, each ball rubbing against your inner walls before dropping into the slimy pool of goo. After the sixth, you orgasm, ", false);
 			//[if male/herm]

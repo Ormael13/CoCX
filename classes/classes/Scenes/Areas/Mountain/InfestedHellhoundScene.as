@@ -155,7 +155,9 @@ package classes.Scenes.Areas.Mountain
 					player.addStatusValue(StatusEffects.WormPlugged, 1, 1 + rand(5));
 				else
 					player.createStatusEffect(StatusEffects.WormPlugged, 1 + rand(5), 0, 0, 0);
-				player.knockUpForce(PregnancyStore.PREGNANCY_WORM_STUFFED, 100 + player.statusEffectv1(StatusEffects.WormPlugged)); //Will be cleared when the WormPlugged effect ends
+				
+				//TODO add some text if already pregnant?
+				player.knockUp(PregnancyStore.PREGNANCY_WORM_STUFFED, 100 + player.statusEffectv1(StatusEffects.WormPlugged),100,1); //Will be cleared when the WormPlugged effect ends
 				player.orgasm('Vaginal');
 				dynStats("lib", 1, "cor", 1);
 				combat.cleanupAfterCombat();

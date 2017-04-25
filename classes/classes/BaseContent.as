@@ -310,6 +310,11 @@
 			kGAMECLASS.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
 		}
 		
+		protected function addDisabledButton(pos:int, text:String = "", toolTipText:String = "", toolTipHeader:String = ""):void
+		{
+			kGAMECLASS.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
+		}
+		
 		protected function removeButton(arg:*):void
 		{
 			kGAMECLASS.removeButton(arg);
@@ -362,6 +367,14 @@
 			return kGAMECLASS.player;
 		}
 		
+		/**
+		 * This is alias for player.
+		 */
+		protected function get pc():Player
+		{
+			return kGAMECLASS.player;
+		}
+		
 		protected function set player(val:Player):void
 		{
 			kGAMECLASS.player = val;
@@ -408,6 +421,14 @@
 		}
 		
 		protected function get monster():Monster
+		{
+			return kGAMECLASS.monster;
+		}
+		
+		/**
+		 * This is alias for monster.
+		 */
+		protected function get enemy():Monster
 		{
 			return kGAMECLASS.monster;
 		}

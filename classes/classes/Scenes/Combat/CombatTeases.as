@@ -703,7 +703,7 @@ package classes.Scenes.Combat
 					}
 					if (monster.plural) outputText(monster.capitalA + monster.short + "' gazes are riveted on your groin as you run your fingers up and down your folds seductively.", false);
 					else outputText(monster.capitalA + monster.short + "'s gaze is riveted on your groin as you run your fingers up and down your folds seductively.", false);
-					if (player.clitLength > 3) outputText("  You smile as your " + player.clitDescript() + " swells out from the folds and stands proudly, begging to be touched.", false);
+					if (player.getClitLength() > 3) outputText("  You smile as your " + player.clitDescript() + " swells out from the folds and stands proudly, begging to be touched.", false);
 					else outputText("  You smile and pull apart your lower-lips to expose your " + player.clitDescript() + ", giving the perfect view.", false);
 					if (player.cockTotal() > 0) outputText("  Meanwhile, " + player.sMultiCockDesc() + " bobs back and forth with your gyrating hips, adding to the display.", false);
 					//BONUSES!
@@ -1218,19 +1218,19 @@ package classes.Scenes.Combat
 						bonusChance += .5;
 						bonusDamage += 1;
 					}
-					if (player.clitLength > 1.5) {
+					if (player.getClitLength() > 1.5) {
 						bonusChance += .5;
 						bonusDamage++;
 					}
-					if (player.clitLength > 3.5) {
+					if (player.getClitLength() > 3.5) {
 						bonusChance += .5;
 						bonusDamage += 1;
 					}
-					if (player.clitLength > 7) {
+					if (player.getClitLength() > 7) {
 						bonusChance += .5;
 						bonusDamage += 1;
 					}
-					if (player.clitLength > 12) {
+					if (player.getClitLength() > 12) {
 						bonusChance += .5;
 						bonusDamage += 1;
 					}

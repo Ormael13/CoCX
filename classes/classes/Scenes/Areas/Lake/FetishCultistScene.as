@@ -263,7 +263,6 @@ package classes.Scenes.Areas.Lake
 					outputText("Soon you have a fully formed " + player.cockDescript(0) + " standing tall and proud where your old femininity used to lie.  The nurse sets the syringe aside and climbs on top of your legs. She giggles softly before lowering herself and taking your " + player.cockDescript(0) + " between her breasts and starts rubbing and playing with them while running your " + player.cockDescript(0) + " between them.  It is an exquisite experience having her tit fuck your brand new " + player.cockDescript(0) + ", and you notice that she seems to be enjoying it just as much as you are.  It doesn't take long for her ministrations to make you cum between her breasts, and cum you do.  Satisfied, the nurse rises from you and says \"<i>Looks to me like its working properly.  For now, I've got to go take care of another patient. Don't you do anymore running about until I get back, ok?  I'll be back to check on your progress as soon as I'm able!</i>\"  She gives you a wink, and turns to walk out the door.", false);
 					dynStats("sen", 3);
 					changed = true;
-					player.genderCheck();
 					changedCock = true;
 				}
 				//(5 - if player has no genitals)
@@ -273,7 +272,6 @@ package classes.Scenes.Areas.Lake
 					outputText("Soon you have a fully formed " + player.cockDescript(0) + " standing tall and proud where your bare crotch used to lie.  The nurse sets the syringe aside and climbs on top of your legs. She giggles softly before lowering herself and taking your " + player.cockDescript(0) + " between her breasts and starts rubbing and playing with them while running your " + player.cockDescript(0) + " between them.  It is an exquisite experience having her tit fuck your brand new " + player.cockDescript(0) + ", and you notice that she seems to be enjoying it just as much as you are.  It doesn't take long for her ministrations to make you cum between her breasts, and cum you do.  Satisfied, the nurse rises from you and says \"<i>That was fun, maybe later we can practice more.  For now, I've got to go take care of another patient. Don't you do anymore running about until I get back, ok?  I'll be back to check on your progress as soon as I'm able!</i>\"  She gives you a wink, and turns to walk out the door.", false);
 					dynStats("sen", 3);
 					changed = true;
-					player.genderCheck();
 					changedCock = true;
 				}
 				//Check for bad-end start!

@@ -824,7 +824,7 @@ package classes.Scenes.Seasonal {
 			//Female Nieve
 			//Must have a penis or at least a 3.5 inch clit
 			//Nieve's capacity is about 130.
-			if ((player.hasCock() || (player.hasVagina() && player.clitLength >= 3.5)) && player.lust >= 33) {
+			if ((player.hasCock() || (player.hasVagina() && player.getClitLength() >= 3.5)) && player.lust >= 33) {
 				if (flags[kFLAGS.NIEVE_GENDER] == 2) addButton(1,"Fuck Her",fuckNieve);
 			}
 			//Get Fucked by Gurumash
@@ -919,7 +919,7 @@ package classes.Scenes.Seasonal {
 			var x:int = -1;
 			if (player.hasCock()) {
 				x = player.cockThatFits(130);
-				if (x <= 0 && player.hasVagina() && player.clitLength >= 3.5 && rand(2) == 0) x = -1;
+				if (x <= 0 && player.hasVagina() && player.getClitLength() >= 3.5 && rand(2) == 0) x = -1;
 				else x = player.smallestCockIndex();
 			}
 			outputText("You look your naked, icy lover up and down, thinking of all the things you could do to her.  She raises a white eyebrow at you curiously while you take in her statuesque form.  A thin layer of frost covers her flesh, giving her pale blue skin a sparkling, shimmering appearance.  You find yourself getting aroused at all the potentialities.  Your " + player.cockClit(x) + " rises to attention as you ponder it, and with a smirk, you finally settle on something.");
@@ -935,8 +935,8 @@ package classes.Scenes.Seasonal {
 				else outputText("  \"<i>Mmm,</i>\" she smacks her lips and takes a quick breath, \"<i>Such a nice example of a candycane right here.  Let's go in for another taste.</i>\"");
 			}
 			else {
-				if (player.clitLength < 6) outputText("\"<i>It's so cute, [Master],</i>\" Nieve says while catching a breath, \"<i>Like a little toy cock.</i>\"");
-				else if (player.clitLength >= 24) outputText("  She has to take a breath almost immediately, saying, \"<i>By the fat man's beard this thing is huge.  You must make the rest of this world jealous.</i>\"");
+				if (player.getClitLength() < 6) outputText("\"<i>It's so cute, [Master],</i>\" Nieve says while catching a breath, \"<i>Like a little toy cock.</i>\"");
+				else if (player.getClitLength() >= 24) outputText("  She has to take a breath almost immediately, saying, \"<i>By the fat man's beard this thing is huge.  You must make the rest of this world jealous.</i>\"");
 				else outputText("  \"<i>Mmm,</i>\" she smacks her lips and takes a quick breath, \"<i>Such a nice example of a candycane right here.  Let's go in for another taste.</i>\"");
 			}
 			outputText("  And with that she dives back down onto your " + player.cockClit(x) + ".  Her head bobs and bows, giving the sensation of an icecube running up and down your ");
@@ -988,8 +988,8 @@ package classes.Scenes.Seasonal {
 			//(Clitoris) 
 			else {
 				outputText("  Nieve nuzzles and lavishes your elongated love button, showering it with attention. \"<i>I didn't know clits could get this big,</i>\" she says with wonder in her voice. \"<i>");
-				if (player.clitLength < 5) outputText("It's just like a little cock");
-				else if (player.clitLength < 9) outputText("It's just like a cock");
+				if (player.getClitLength() < 5) outputText("It's just like a little cock");
+				else if (player.getClitLength() < 9) outputText("It's just like a cock");
 				else outputText("I bet even men get jealous of this bad girl");
 				outputText(".</i>\"");
 			}
@@ -1027,8 +1027,8 @@ package classes.Scenes.Seasonal {
 				else outputText("Though you can't fit your entire " + player.cockClit(x) + " inside, you are amazed at how much she takes.  Her pale blue stomach bulges with every thrust.  Soon Nieve is wriggling, her eyes slightly open as she bites her lip in ecstasy.");
 			}
 			else {
-				if (player.clitLength <= 4) outputText("Your meager clit isn't much, but at this angle you manage to hit all the right places.  Soon Nieve is wriggling around, eyes staring up at you, urging you on faster and faster.");
-				else if (player.clitLength <= 12) outputText("At this angle you manage to hit all the right places.  Soon Nieve is wriggling around, eyes tightly shut as she whispers dirty words you can't even make out.");
+				if (player.getClitLength() <= 4) outputText("Your meager clit isn't much, but at this angle you manage to hit all the right places.  Soon Nieve is wriggling around, eyes staring up at you, urging you on faster and faster.");
+				else if (player.getClitLength() <= 12) outputText("At this angle you manage to hit all the right places.  Soon Nieve is wriggling around, eyes tightly shut as she whispers dirty words you can't even make out.");
 				else if (player.cockArea(x) <= 24) outputText("Nieve's cunt feels like an icy vice on your oversized clitty, but even so, you manage to hit all the right places.  Soon she is wriggling around, eyes tightly shut as she pants for breath.");
 				//(Cocksize 130+/Clit 48+)
 				else outputText("Though you can't fit your entire " + player.cockClit(x) + " inside, you are amazed at how much she takes.  Her pale blue stomach bulges with every thrust.  Soon Nieve is wriggling, her eyes slightly open as she bites her lip in ecstasy.");

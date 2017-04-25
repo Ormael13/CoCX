@@ -1725,7 +1725,7 @@ private function consensualSheila69(cock:Boolean = true):void {
 	else {
 		outputText("  When you finally drop your bottoms, revealing your wet " + player.vaginaDescript(0) + ", she smiles softly.");
 		outputText("\n\n\"<i>Cute little flower...</i>\" Sheila says, playing with her own.  You mimic her, slipping a finger between your labia to stimulate yourself");
-		if (player.clitLength > 8) outputText(" and bring your " + player.clitDescript() + " to its erect state.  \"<i>... And quite a stem,</i>\" your lover concludes.  \"<i>You sure that's not a dick?</i>\"");
+		if (player.getClitLength() > 8) outputText(" and bring your " + player.clitDescript() + " to its erect state.  \"<i>... And quite a stem,</i>\" your lover concludes.  \"<i>You sure that's not a dick?</i>\"");
 		else outputText(", producing a slight sigh and a wet finger.  \"<i>And I'm the eager one, right?</i>\" your lover asks, wryly - though her finger is just as wet.");
 	}
 	
@@ -1764,7 +1764,7 @@ private function consensualSheila69(cock:Boolean = true):void {
 	}
 	else {
 		outputText("pussy dangles just over her face; she ");
-		if (player.clitLength > 8) outputText("nips and sucks at the tip of your clit, rolling it with her tongue");
+		if (player.getClitLength() > 8) outputText("nips and sucks at the tip of your clit, rolling it with her tongue");
 		else outputText("parts your labia with her tongue, stroking them gently and tickling your little clitoris");
 		outputText(".");
 	}
@@ -1778,7 +1778,7 @@ private function consensualSheila69(cock:Boolean = true):void {
 	if (!cock) {
 		outputText("slipping her tongue back into you");
 		//[(bigclit)
-		if (player.clitLength > 8) outputText(" and stroking your " + player.clitDescript() + " rapidly with one hand");
+		if (player.getClitLength() > 8) outputText(" and stroking your " + player.clitDescript() + " rapidly with one hand");
 		outputText(".");
 	}
 	//(smallcox)
@@ -4259,17 +4259,17 @@ private function clitSwellingDemonSheilaClitSoundingAnal():void {
 		else outputText("the underside of your [cock biggest], before");
 	}
 	outputText(" forcing your lips apart and lingering on your rapidly-swelling " + player.clitDescript() + ".  \"<i>Oh, my.  What's with this ");
-	if (player.clitLength <= 6) outputText("lewd little");
+	if (player.getClitLength() <= 6) outputText("lewd little");
 	else outputText("grotesque");
 	outputText(" thing doing growing from a pretty girl like you?  It's just the perfect size for some fun.</i>\"");
 	
 	outputText("\n\nYour eyes open in alarm at the same time as her mouth does in pleasure; she jams the slit of her spade onto your button");
-	if (player.clitLength > 6) outputText(", taking it several inches deep");
+	if (player.getClitLength() > 6) outputText(", taking it several inches deep");
 	outputText(".  Your head swims as pleasure from your engulfed clitoris overwhelms you, then toes the line to genuine pain.  The copious demonic fluid backing up inside her tail begins to leak around the tip, coating your clit and drooling onto your labia; your muscles tighten as the heat escalates past comfortable levels, and you begin shifting violently, trying to pull your swollen chick-stick free from the demon's anatomy.  \"<i>Ah, ah, god, [name], stop!  Don't thrash so!  You're teasing me too fast!</i>\"  Sheila's words are lost on you, sunken as you are into a hell of oversensitized skin and constant stimulation.  It feels like the nerves exposed to the torment are even multiplying, as if skin you weren't even feeling before suddenly appears to be immersed into the tainted slime.");
 	outputText("\n\nYour eyes roll in temporary shock as her tail squeezes around your " + player.clitDescript() + " tighter and tighter; the siege lifts slightly, allowing you to focus with supreme effort and see that the demon is similarly affected!  Her head sags between her shoulders, even as she places two hands on the ground in front of her to steady herself.  The two tails on her butt whip spastically, squeezing another wave of painful pleasure into your crotch.  Staring, you can only watch as Sheila's thrashing black spade describes a clipped arc, a long, thick rod of flesh growing out of it to join your bodies.");
 	
 	//[(<=6")
-	if (player.clitLength <= 6) outputText("\n\nAwareness comes to you slowly; that flesh is your clitoris, gratuitously mutated by Sheila's fluids!");
+	if (player.getClitLength() <= 6) outputText("\n\nAwareness comes to you slowly; that flesh is your clitoris, gratuitously mutated by Sheila's fluids!");
 	else outputText("Though you're by now accustomed to the sight of your clitoris, more like a cock than a dainty feminine bump, this is something else altogether!  The huge thing poking into her tail is almost twice the thickness of the slim growth you remember and bulges with blood vessels; as you watch it, transfixed, a trickle of Sheila's oily, dark secretion slides down it, then is absorbed into some flesh near your groin, adding another layer of width with a pulse!");
 	outputText("  \"<i>Fuck, it's so tight!</i>\" the demon gasps, now resting on her elbows with her chest and face pressed to the grass.  Her tail jerks again, yanking your stalk this way and that and releasing more of her backed-up fluids.  They slide all the way to the bottom of your rod before sinking into your skin.");
 	
@@ -4277,7 +4277,7 @@ private function clitSwellingDemonSheilaClitSoundingAnal():void {
 	
 	//divide scene here by clit size
 	//(clit<=6" initially)
-	if (player.clitLength <= 6) {
+	if (player.getClitLength() <= 6) {
 		outputText("\n\nShe sits up on her knees, then turns to face you.  ");
 		if (!player.isTaur()) outputText("Taking your face into her hand, she closes your jaw and then leans in to plant a kiss on your chin.");
 		else outputText("Her eyes glitter with mirth.");
@@ -4320,10 +4320,10 @@ private function clitSwellingDemonSheilaClitSoundingAnal():void {
 		//[(horse)
 		if (player.isTaur()) outputText(" and rolls onto her back");
 		outputText(", then wraps her tails around your thickened clit.  They twist and pull, sending spirals of pleasure along the numerous nerves, and begin gently but insistently tugging you toward her tan butt.  Sheila directs the tip right between her cheeks, and you can feel her using it to rub the ring around her hole.  \"<i>I think this should be about the right size for you, love,</i>\" she teases, spearing herself on your " + player.clitDescript() + ".  Inch after inch slides into her slowly, maddening you with warmth, until ");
-		if (player.clitLength <= 12) outputText("all of it is in her bowels and her hot cunt rests against yours");
+		if (player.getClitLength() <= 12) outputText("all of it is in her bowels and her hot cunt rests against yours");
 		else outputText("she's taken as much as she can");
 		outputText(".  She half-smiles and half-winces at you.  \"<i>Don't usually take it in this hole, but I wanted to feel your pussy going crazy for me.</i>\"  ");
-		if (player.clitLength <= 12) outputText("Her hips shift, dragging her lips across yours and stirring your clit through her asshole even as it squeezes you; your pussy twitches at the stimulation.");
+		if (player.getClitLength() <= 12) outputText("Her hips shift, dragging her lips across yours and stirring your clit through her asshole even as it squeezes you; your pussy twitches at the stimulation.");
 		else {
 			outputText("Her tails, one still swollen from being stretched and tormented by your growing clit, slip into you abruptly, bringing their mild burning sensation with them; if you hadn't been saturated with it already, you'd probably pass out.");
 			//[(if virgin vagina)
@@ -4336,15 +4336,15 @@ private function clitSwellingDemonSheilaClitSoundingAnal():void {
 		if (!player.isNaga()) outputText("your thighs, spreading your [legs] wide and then hooking them over top to touch ");
 		outputText("the ground next to your ass, and uses the leverage to begin pumping your clit out of and into her asshole, caressing your " + player.vaginaDescript(0) + " every time she slides home.  \"<i>I could get used to this, love.  What say I keep you dosed up like this and you become my dildo?  I'll ride you with a different hole every time!</i>\"  Your eyes roll back in your head, at least partially from the irregular pace at which she's stroking your clit.  Sheila grabs her breasts as she slows down drastically once again, mashing them with her hands and sinking onto you an inch at a time.  \"<i>Fuck... I love your junk, [name].  Maybe I should catch a goblin, too, and make her tease my pussy while you fill my ass.</i>\"  She raises back up and ");
 		//[(clit>12")
-		if (player.clitLength > 12) outputText("pulls her black tail free, dripping with your juice, then ");
+		if (player.getClitLength() > 12) outputText("pulls her black tail free, dripping with your juice, then ");
 		outputText("begins to work her drooling spade along your clit again, smearing her goo along your chunky chick-stick.  You can feel the edges of the stretched hole in her tip working on your skin, opening and closing ever so slightly as her copious tainted lube oozes out.  Your " + player.clitDescript() + " must be completely saturated already, because the slippery goo lingers on the surface instead of wicking into it.  \"<i>Gonna g-get you nice and wet, love...  Ohh,</i>\" Sheila says, affected to distraction by the pleasure of tracing the slick end of her stubby tail along you.");
 		
 		outputText("\n\nFinally coating you to satisfaction with the oily secretions, Sheila begins pumping again.  The heated friction from before evaporates, replaced with a dull, distributed warmth as she slides her asshole along your clit.  With less resistance, she's able to up the tempo to frantic, scraping along the ground so fast that she begins to tear up the grass.  You bear up as much as you can under the onslaught of pumping and gyrating hips, but eventually the sensation is too much, and your nerves take over as your climax begins.  Your " + player.vaginaDescript(0) + " spasms, drooling onto her ");
-		if (player.clitLength <= 12) outputText("pussy; her smooth, small labia greedily lap at the fluid when they touch, brushing against yours and drawing further twitches and squirts.");
+		if (player.getClitLength() <= 12) outputText("pussy; her smooth, small labia greedily lap at the fluid when they touch, brushing against yours and drawing further twitches and squirts.");
 		else outputText("teasing tails; they shift from stroking your labia to holding them open, allowing your pussy to squirt as it pleases.");
 		outputText("  Suddenly she stops mid-stroke as her asshole quivers, sending shivers up your orgasm-sensitized clitoris.  \"<i>Fffuck!  So soon!  I'm coming too, [name]!</i>\"  Sheila sinks down, burying your " + player.clitDescript() + " into her asshole.");
 		//(clit>12")
-		if (player.clitLength <= 12) {
+		if (player.getClitLength() <= 12) {
 			outputText("  Her tails sink into you as she squirms, parting your lips and pushing their way inside.");
 			//[output hymen check, but don't remove virgin flag yet]  
 			if (player.hasVirginVagina()) outputText("  <b>You've lost your virginity!</b>");
@@ -4359,7 +4359,7 @@ private function clitSwellingDemonSheilaClitSoundingAnal():void {
 		
 		outputText("\n\n\"<i>Ahh, [name],</i>\" Sheila says, after a minute to recover.  \"<i>It feels good in my butt.</i>\"  Slowly, she pulls apart from you, letting your clit out of her backdoor at an agonizing pace, and stands up.");
 		//[(if clit >12" and virgin vag)
-		if (player.clitLength > 12 && player.hasVirginVagina()) {
+		if (player.getClitLength() > 12 && player.hasVirginVagina()) {
 			outputText("  \"<i>Sorry about your hymen, love, but I just couldn't resist making a sweet little slut like you into my girl.  I hope you'll remember me - I only wish I had a proper donger so I could give you my baby, too.</i>\"");
 		}
 		outputText("  Even as tired as you are, what you see on the demon girl makes you laugh.  She starts at this, then follows the direction of your gaze; ");
@@ -4368,12 +4368,12 @@ private function clitSwellingDemonSheilaClitSoundingAnal():void {
 		outputText("  \"<i>... Oh, god dammit,</i>\" Sheila gripes.  She walks over and forces your face into them with a long, slow shake, then giggles as a joke comes to her.  \"<i>There, [name]; I've stained you with my colors!</i>\"  She plants a long kiss on your grass-smeared forehead, then drops you back to the ground, straightens up, and departs.  Exhausted, you slip into a doze, wondering if you'll be able to fit your swollen clit back into your clothing when you wake or if you'll have to walk back to camp with it sticking out.  It slowly deflates as you sleep, but does retain a bit of additional length.");
 	}
 	//reduce lust and libido, increase sensitivity, remove virgin vag if PC clit>12", slimefeed if PC clit>12" or PC corr <50, increase clit by 1" before perk mod; if PC corr <50 then +10 corr and -10 sheila corruption, else if PC corr >=50 then -10 corr and +10 sheila corruption
-	if (player.clitLength > 12 || player.cor < 50) {
+	if (player.getClitLength() > 12 || player.cor < 50) {
 		player.cuntChange(12,false,false,false);
 		player.slimeFeed();
 	}
-	player.clitLength++;
-	if (player.findPerk(PerkLib.BigClit) >= 0) player.clitLength += .5;
+	player.changeClitLength(1);
+	if (player.findPerk(PerkLib.BigClit) >= 0) player.changeClitLength(.5);
 	if (player.cor < 50) {
 		dynStats("cor", 10);
 		sheilaCorruption(-10);

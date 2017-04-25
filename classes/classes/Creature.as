@@ -12,6 +12,7 @@ package classes
 	import classes.VaginaClass;
 	import classes.Scenes.Places.TelAdre.UmasShop;
 	import flash.display.InteractiveObject;
+	import flash.errors.IllegalOperationError;
 
 	public class Creature extends Utils
 	{
@@ -139,8 +140,23 @@ package classes
 		public var additionalXP:Number = 0;
 				
 		//Appearance Variables
-		//Gender 1M, 2F, 3H
-		public var gender:int = GENDER_NONE;
+		/**
+		 * Get the gender of the creature, based on its genitalia or lack thereof. Not to be confused with gender identity by femininity.
+		 * @return the current gender (0 = gender-less, 1 = male, 2 = female, 3 = hermaphrodite)
+		 */
+		public function get gender():int
+		{
+			if (hasCock() && hasVagina()) {
+				return GENDER_HERM;
+			}
+			if (hasCock()) {
+				return GENDER_MALE;
+			}
+			if (hasVagina()) {
+				return GENDER_FEMALE;
+			}
+			return GENDER_NONE;
+		}
 		private var _tallness:Number = 0;
 		public function get tallness():Number { return _tallness; }
 		public function set tallness(value:Number):void { _tallness = value; }
@@ -386,29 +402,62 @@ package classes
 		public var vaginas:Vector.<VaginaClass>;
 		//Fertility is a % out of 100. 
 		public var fertility:Number = 10;
-		private var legacyClitLength:Number = VaginaClass.DEFAULT_CLIT_LENGTH;
 		public var nippleLength:Number = .25;
 		public var breastRows:Array;
 		public var ass:AssClass = new AssClass();
 		
-		public function get clitLength():Number {
-			if(!hasVagina()) {
-				//TODO throw a error in the future
-				trace("Error: legacy get clit length without a vagina!");
-				return legacyClitLength;
-			}else{
-				return vaginas[0].clitLength;
+		/**
+		 * Check if the Creature has a vagina. If not, throw an informative Error.
+		 * This should be more informative than the usual RangeError (Out of bounds).
+		 * @throws IllegalOperationError if no vagina is present
+		 */
+		private function checkVaginaPresent():void {
+			if (!hasVagina()) {
+				throw new IllegalOperationError("Creature does not have vagina.")
 			}
 		}
 		
-		public function set clitLength(clitLength:Number):void {
-			if(!hasVagina()) {
-				 //TODO throw a error in the future
-				 trace("Error: legacy set clit length without a vagina!");
-				 legacyClitLength = clitLength;
-			}else{
-			 	vaginas[0].clitLength = clitLength;
-			}
+		/**
+		 * Get the clit length for the selected vagina (defaults to the first vagina).
+		 * @param	vaginaIndex the vagina to query for the clit length
+		 * @return the clit length of the vagina
+		 * @throws IllegalOperationError if the Creature does not have a vagina
+		 * @throws IllegalOperationError if the Creature does not have a vagina
+		 * @throws RangeError if the selected vagina cannot be found
+		 */
+		public function getClitLength(vaginaIndex : int = 0) : Number {
+			checkVaginaPresent();
+			
+			return vaginas[vaginaIndex].clitLength;
+		}
+		
+		/**
+		 * Set the clit length for the selected vagina (defaults to the first vagina).
+		 * @param clitLength the clit length to set for the vagina
+		 * @param vaginaIndex the vagina on witch to set the clit length
+		 * @return the clit length of the vagina
+		 * @throws IllegalOperationError if the Creature does not have a vagina
+		 * @throws RangeError if the selected vagina cannot be found
+		 */
+		public function setClitLength(clitLength:Number, vaginaIndex : int = 0) : Number {
+			checkVaginaPresent();
+			
+			vaginas[vaginaIndex].clitLength = clitLength;
+			return getClitLength(vaginaIndex);
+		}
+		
+		/**
+		 * Change the clit length by the given amount. If the resulting length drops below 0, it will be set to 0 instead.
+		 * @param	delta the amount to change, can be positive or negative
+		 * @param	vaginaIndex the vagina whose clit will be changed
+		 * @return the updated clit length
+		 * @throws IllegalOperationError if the Creature does not have a vagina
+		 * @throws RangeError if the selected vagina cannot be found
+		 */
+		public function changeClitLength(delta:Number, vaginaIndex:int = 0):Number {
+			checkVaginaPresent();
+			var newClitLength:Number = vaginas[vaginaIndex].clitLength += delta;
+			return newClitLength < 0 ? 0 : newClitLength;
 		}
 		
 		private var _femininity:Number = 50;
@@ -2188,11 +2237,59 @@ package classes
 		{
 			switch (gender) {
 				case GENDER_NONE:   return caps ? mf("Genderless", "Fem-genderless") : mf("genderless", "fem-genderless");
-				case GENDER_MALE:   return caps ? mf("Male", "Dickgirl")             : mf("male", "dickgirl");
+				case GENDER_MALE:   return caps ? mf("Male", biggestTitSize() > BREAST_CUP_A ? "Shemale" : "Femboy")             : mf("male", biggestTitSize() > BREAST_CUP_A ? "shemale" : "femboy");
 				case GENDER_FEMALE: return caps ? mf("Cuntboy", "Female")            : mf("cuntboy", "female");
 				case GENDER_HERM:   return caps ? mf("Maleherm", "Hermaphrodite")    : mf("maleherm", "hermaphrodite");
 				default: return "<b>Gender error!</b>";
 			}
+		}
+		
+		/**
+		 * Checks if the creature is technically male: has cock but not vagina.
+		 */
+		public function isMale():Boolean
+		{
+			return gender == GENDER_MALE;
+		}
+		
+		/**
+		 * Checks if the creature is technically female: has vagina but not cock.
+		 */
+		public function isFemale():Boolean
+		{
+			return gender == GENDER_FEMALE;
+		}
+		
+		/**
+		 * Checks if the creature is technically herm: has both cock and vagina.
+		 */
+		public function isHerm():Boolean
+		{
+			return gender == GENDER_HERM;
+		}
+		
+		/**
+		 * Checks if the creature is technically genderless: has neither cock nor vagina.
+		 */
+		public function isGenderless():Boolean
+		{
+			return gender == GENDER_NONE;
+		}
+
+		/**
+		 * Checks if the creature is technically male or herm: has at least a cock.
+		 */
+		public function isMaleOrHerm():Boolean
+		{
+			return (gender & GENDER_MALE) != 0;
+		}
+
+		/**
+		 * Checks if the creature is technically female or herm: has at least a vagina.
+		 */
+		public function isFemaleOrHerm():Boolean
+		{
+			return (gender & GENDER_FEMALE) != 0;
 		}
 		
 		//Create a cock. Default type is HUMAN
@@ -2229,18 +2326,6 @@ package classes
 			newBreastRow.nipplesPerBreast = nipplesPerBreast;
 			breastRows.push(newBreastRow);
 			return true;
-		}
-		
-		public function genderCheck():void
-		{
-			if (hasCock() && hasVagina())
-				gender = GENDER_HERM;
-			else if (hasCock())
-				gender = GENDER_MALE;
-			else if (hasVagina())
-				gender = GENDER_FEMALE;
-			else
-				gender = GENDER_NONE;
 		}
 		
 		//Remove cocks
@@ -2291,7 +2376,6 @@ package classes
 					//trace("Attempted to remove " + totalRemoved + " cocks.");
 				}
 			}
-			genderCheck();
 		}
 		
 		//REmove vaginas
@@ -2319,7 +2403,6 @@ package classes
 					//trace("Attempted to remove " + totalRemoved + " vaginas.");
 				}
 			}
-			genderCheck();
 		}
 		
 		//Remove a breast row

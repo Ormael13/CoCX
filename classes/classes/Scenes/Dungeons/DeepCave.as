@@ -208,7 +208,6 @@ package classes.Scenes.Dungeons
 				clearOutput();
 				outputText("Vala forces a bottle into your throat before your defeated form has a chance to react, and you grunt with pleasure as a new gash opens between your " + player.legs() + "!", false);
 				player.createVagina();
-				player.gender = 2;
 				doNext(loseToValaFemale);
 			}
 		}
@@ -373,7 +372,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\n", false);
 			
 			outputText("At last you feel it bottom out, bumping against your cervix with the tiniest amount of pressure.  Grinning like a cat with the cream, you swivel your hips, grinding your " + player.clitDescript() + " against him in triumph.  ", false);
-			if (player.clitLength > 3) outputText("You stroke the cock-like appendage in your hand, trembling with delight.  ", false);
+			if (player.getClitLength() > 3) outputText("You stroke the cock-like appendage in your hand, trembling with delight.  ", false);
 			outputText("You begin riding the tiny demon, lifting up, and then dropping down, feeling each of the nodes gliding along your sex-lubed walls.   As time passes and your pleasure mounts, you pick up the pace, until you're bouncing happily atop your living demon-dildo.\n\n", false);
 			
 			outputText("The two of you cum together, though the demon's pleasure starts first.  A blast of his tainted seed pushes you over the edge.  You sink the whole way down, feeling him bump your cervix and twitch inside you, the bumps on his dick swelling in a pulsating wave in time with each explosion of fluid.  ", false);
@@ -654,7 +653,6 @@ package classes.Scenes.Dungeons
 				outputText("He squints down at you with a bemused look and laughs, \"<i>How did you lose your gender anyhow?  Never mind, we've got to do something about that!</i>\"\n\n", false);
 				outputText("Zetaz grabs a bottle, uncorks it, and crams it against your lips while you're still too dazed to resist.  He massages your throat to make you swallow the milk-like fluid, and in seconds the skin of your groin splits to form a new, virgin pussy.\n\n", false);
 				player.createVagina();
-				player.gender = 2;
 			}
 			//(fork to male/female/herm)
 			if (player.gender == 1) malesZetazOver();

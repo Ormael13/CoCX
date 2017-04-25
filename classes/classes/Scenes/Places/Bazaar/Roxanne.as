@@ -320,14 +320,14 @@ private function roxanneCunnilingus():void {
 	outputText("Face blushing red, you groan and hump at the lizan, grabbing her horns so that you can smear her nose into your " + player.clitDescript() + ".  She pulls back, resisting your insistent pulls with inebriated strength, but before you can let go she reverses direction and smashes her forehead into your gut, winding you.  Your fingers release immediately, clutching at your aching middle while the angry lizard snarls, \"<i>You're getting oral, NOT using me as a dildo!  ...but I am sorry I hit you that hard. I just needed to breathe.  Relax and let me make it up to you...</i>\"\n\n", false);
 	
 	outputText("The drunken lizan puts her soft, lightly scaled fingers around you to squeeze at your " + player.buttDescript() + " and leans in to give your " + player.clitDescript() + " a tender kiss.  Her massive tongue ", false);
-	if (player.clitLength < 16) outputText("dwarfs", false);
+	if (player.getClitLength() < 16) outputText("dwarfs", false);
 	else outputText("envelops", false);
 	outputText(" the ", false);
-	if (player.clitLength < 1) outputText("little pleasure buzzer", false);
-	else if (player.clitLength < 3) outputText("swollen love-button", false);
+	if (player.getClitLength() < 1) outputText("little pleasure buzzer", false);
+	else if (player.getClitLength() < 3) outputText("swollen love-button", false);
 	else outputText("cock-like lady-part", false);
 	outputText(", slobbering over it with a lewd tongue-kiss. Her frothy spit completely soaks it ", false);
-	if (player.clitLength >= 3) outputText("before she curls tightly around the female member, enveloping it with flexible, gooey tongue.  You catch your breath just in time to exhale the noisy sounds of your pleasure, and groan out loud.  Roxanne takes the auditory encouragement to heart and begins pumping her tongue while she places her lower lips against your " + player.vaginaDescript() + " and hums.  As if that wasn't enough, she begins twisting the curled tongue up and down your " + player.clitDescript() + " rotating it as she pumps you.", false);
+	if (player.getClitLength() >= 3) outputText("before she curls tightly around the female member, enveloping it with flexible, gooey tongue.  You catch your breath just in time to exhale the noisy sounds of your pleasure, and groan out loud.  Roxanne takes the auditory encouragement to heart and begins pumping her tongue while she places her lower lips against your " + player.vaginaDescript() + " and hums.  As if that wasn't enough, she begins twisting the curled tongue up and down your " + player.clitDescript() + " rotating it as she pumps you.", false);
 	else outputText("before she lets her spit-sloppy tongue push through the saliva-soaked entrance of your mound.  You catch your breath just in time to exhale noisy sounds of pleasure, groaning out loud while you're speared with flexible, gooey tongue. Roxanne takes the auditory encouragement to heart and begins to pump her tongue deep inside you, at least two feet of constantly-thickening appendage coiling over your entrance before sliding inside to kiss your cervix.  As if that wasn't enough, a moment later she starts to hum, nuzzling at your " + player.clitDescript() + " while she tongue-fucks you.", false);
 	outputText("\n\n", false);
 	
