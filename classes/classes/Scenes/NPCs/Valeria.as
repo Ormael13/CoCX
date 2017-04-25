@@ -9,7 +9,7 @@
 
 		public static const GOOSTUFFED_EFFECT_MIN_DURATION:int = 10;
 		public static const GOOSTUFFED_EFFECT_MAX_DURATION_DELTA:int = 300;
-		public static const GOOSTUFFED_PREGNANCY_DURATION:int = 500;
+		public static const GOOSTUFFED_PREGNANCY_DURATION:int = int.MAX_VALUE;
 		
 		public function Valeria()
 		{

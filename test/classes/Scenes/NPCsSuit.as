@@ -3,6 +3,7 @@ package classes.Scenes {
 import classes.Scenes.NPCs.IsabellaSceneTest;
 import classes.Scenes.NPCs.JojoSceneTest;
 import classes.Scenes.NPCs.IsabellaFollowerSceneTest;
+import classes.Scenes.NPCs.ValeriaTest;
 
 [Suite]
 [RunWith("org.flexunit.runners.Suite")]
@@ -11,5 +12,6 @@ import classes.Scenes.NPCs.IsabellaFollowerSceneTest;
 		 public var jojoSceneTest:JojoSceneTest;
 		 public var isabellaSceneTest : IsabellaSceneTest;
 		 public var isabellaFollowerSceneTest:IsabellaFollowerSceneTest;
+		 public var valeriaTest:ValeriaTest;
 	}
 }
