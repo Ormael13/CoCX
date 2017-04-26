@@ -89,12 +89,16 @@ private function heckelTraining():void {
 		outputText("A black cock hangs half erect between her legs, a pair of fist-sized testes underneath.  Fully erect, you estimate her dong would be around ten inches long; large, but fitting for her lithe body.  It grows a little stiffer as you stare down at it, and it isn't until Heckel starts cackling that you realize how long you've been staring.\n\n", false);
 	
 		outputText("\"<i>Like what you see?</i>\" she asks, looking you up and down.  \"<i>'Cause I like what I see.  It's not every day I get someone as fit as you brave enough to partner up with me.  Come on then fresh meat, every newbie has to start at the bottom.</i>\"  She tilts her head towards her hardening member and raises an eyebrow.", false);
+		//ORAL or LEAVE
+		menu();
+		addButton(0, "Oral", heckelOrallyFixated);
 		if (player.str > 50 && player.hasCock()) {
 			outputText("\n\nYou feel pretty strong yourself, and you realize you could probably arm wrestle this hyena-bitch down to size.");
-			dom = dominateHeckel;
+			addButton(1, "Be Top Dog", dominateHeckel);
+		} else {
+			addDisabledButton(1, "Be Top Dog", "This scene requires you to have considerable strength and cock.");
 		}
-		//ORAL or LEAVE
-		simpleChoices("Oral", heckelOrallyFixated, "Anal", null, "Be Top Dog", dom, "", null, "Leave", camp.returnToCampUseOneHour);
+		addButton(14, "Leave", camp.returnToCampUseOneHour);
 	}
 	//FOLLOWUP SECKZ
 	else {
@@ -108,12 +112,17 @@ private function heckelTraining():void {
 		outputText("By the time she comes back into the locker room, you're completely naked. She doesn't bother to cover herself as she towels her fur off, making the coarse hair stand on end in more than a few places. She tosses the towel aside as she passes you, her black cock already bobbing between her legs. She sits down on one of the simple wooden benches and pats the spot next to her, beckoning you over.\n\n", false);
 
 		outputText("\"<i>I'm not gonna mince words,</i>\" she says with a snicker. \"<i>I need a good fuck and I need it right now. I promise, this is going to be as much of a workout as hitting the track.</i>\" As you sit down next to her, she runs a paw up your back and along your neck, eventually draping it over your shoulders. \"<i>Now then partner, how are you gonna take this?</i>\"\n\n", false);
+		//ORAL or LEAVE
+		menu();
+		addButton(0, "Oral", heckelOrallyFixated);
+		addButton(1, "Anal", heckelLovesDaAnal);
 		if (player.str > 50 && player.hasCock()) {
 			outputText("You feel pretty strong yourself, and you realize you could probably arm wrestle this hyena-bitch down to size.");
-			dom = dominateHeckel;
+			addButton(2, "Be Top Dog", dominateHeckel);
+		} else {
+			addDisabledButton(2, "Be Top Dog", "This scene requires you to have considerable strength and cock.");
 		}
-		//ORAL or LEAVE
-		simpleChoices("Oral", heckelOrallyFixated, "Anal", heckelLovesDaAnal, "Be Top Dog", dom, "", null, "Leave", camp.returnToCampUseOneHour);
+		addButton(14, "Leave", camp.returnToCampUseOneHour);
 	}
 }
 

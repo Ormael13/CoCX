@@ -860,26 +860,46 @@ private function loppeSexChoice(bakery:Boolean = false):void {
 		//[Cowgirl][CockWorship][TakeVaginal][Boobjob][TakeAnal][Squeezejob][Bail]
 	}
 	if (player.lust < 33) {
-		player.lust = 33;
-		dynStats("lus", .2);
+		dynStats("lus=", 33, "resisted", false);
 	}
 	//Display sex options
 	//[Cowgirl][Frot][TakeVaginal][Boobjob][TakeAnal][Bail]
 	menu();
-	//if (flags[kFLAGS.LOPPE_TIMES_SEXED] > 0)
-	if (player.hasCock() && player.lust >= 33) {
-		if (player.cockThatFits(loppeCapacity()) >= 0)
-			addButton(0,"Cow-girl",loppeRidesCocks);
+	
+	
+	if (player.cockThatFits(loppeCapacity()) >= 0) {
+		addButton(0, "Cow-girl", loppeRidesCocks);
+	} else {
+		addDisabledButton(0, "Cow-girl", "This scene requires you to have fitting cock.");
 	}
-	if (player.hasCock() && player.lust >= 33)
-		addButton(1,"Get BJ",loppeWorshipsDicks);
-	if (player.hasVagina() && player.lust >= 33)
+	if (player.hasCock()) {
+		addButton(1, "Get BJ", loppeWorshipsDicks);
+	} else {
+		addDisabledButton(1, "Get BJ", "This scene requires you to have cock.");
+	}
+	if (player.hasVagina()) {
 		addButton(2,"TakeVaginal",getFuckedInYerTwatYaCunt);
-	if (player.biggestTitSize() >= 4) addButton(3,"Boob-job",boobjobLoppe);
-	if (flags[kFLAGS.LOPPE_TIMES_SEXED] > 0) addButton(4,"SqueezeJob",loppeSqueezedickWhateverThatIs);
-	if (player.isTaur() && player.lust >= 33) addButton(5,"TakeAnal",getAssFuckedByLoppeAsACentaur);
-	else if (player.lust >= 33) addButton(5,"TakeAnal",getButtFuckedNonHoarseByLoppe);
-	addButton(14,"Leave",beATeaseAndLeaveLoppeAfterSexInvite);
+	} else {
+		addDisabledButton(2, "TakeVaginal", "This scene requires you to have vagina.");
+	}
+	if (player.biggestTitSize() >= 4) {
+		addButton(3, "Boob-job", boobjobLoppe);
+	} else {
+		addDisabledButton(3, "Boob-job", "This scene requires you to have big enouth breasts.");
+	}
+	if (flags[kFLAGS.LOPPE_TIMES_SEXED] > 0) {
+		addButton(4, "SqueezeJob", loppeSqueezedickWhateverThatIs);
+	} else {
+		addDisabledButton(4, "SqueezeJob", "This scene requires you to have some experience with Loppe.");
+	}
+	if (player.isTaur()) {
+		addButton(5, "TakeAnal", getAssFuckedByLoppeAsACentaur);
+	}
+	else {
+		addButton(5, "TakeAnal", getButtFuckedNonHoarseByLoppe);
+	}
+	
+	addButton(14, "Leave", beATeaseAndLeaveLoppeAfterSexInvite);
 }
 
 //Male

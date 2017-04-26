@@ -323,13 +323,22 @@ private function acceptYoga():void {
 
 		outputText("Once you're done and about to hit the showers, Cotton pulls you aside and says with a grin, \"<i>Up for some post-workout exercises?</i>\"", false);
 		//[Shower Sex (Fuck Her) (As Male or Herm only)] [Shower Sex (Get Fucked)] [Tantric Sex (Only if Speed is 50+)] [Leave]
-		if (player.hasCock())
-			fuckHer = fuckCottonInShowerRepeat;
-		if (player.gender > 0)
-			getFucked = cottonFucksYouInShowerRepeat;
-		if (player.spe >= 50 && !player.isTaur())
-			option3 = cottonTantricSex;
-		simpleChoices("Fuck Her", fuckHer, "Get Fucked", getFucked, "Tantric Sex", option3, "", null, "Leave", leaveCotton);
+		if (player.hasCock()) {
+			addButton(0, "Fuck Her", fuckCottonInShowerRepeat);
+		} else {
+			addDisabledButton(0, "Fuck Her", "This scene requires you to have cock.");
+		}
+		if (!player.isGenderless()) {
+			addButton(1, "Get Fucked", cottonFucksYouInShowerRepeat);
+		} else {
+			addDisabledButton(1, "Get Fucked", "This scene requires you to have genitals.");
+		}
+		if ((player.spe >= 50 || player.findPerk(PerkLib.Flexibility)) && !player.isTaur()) {
+			addButton(2, "Tantric Sex", cottonTantricSex);
+		} else {
+			addDisabledButton(2, "Tantric Sex", "This scene requires you to have enough flexibility. It does not accomodate taurs.");
+		}
+		addButton(14, "Leave", leaveCotton);
 	}
 	//(Increases muscle tone up to 50, speed and feminine features.)
 	player.modTone(52,1);
@@ -419,11 +428,18 @@ private function cottonShowerFunTimes():void {
 
 	outputText("\"<i>Well? Care for a little... post-workout stretching?</i>\"", false);
 	//[Fuck Her (Male or Herm only)] [Get Fucked] [Service her] [Refuse]
-	if (player.hasCock())
-		option1 = cottonFirstTimeFuckHer;
-	if (player.gender > 0)
-		option2 = cottonFucksYou;
-	simpleChoices("Fuck Her", option1, "Get Fucked", option2, "ServiceHer", serviceFirstTimeCotton, "", null, "Refuse", refuseFirstTimeCotton);
+	if (player.hasCock()) {
+		addButton(0, "Fuck Her", cottonFirstTimeFuckHer);
+	} else {
+		addDisabledButton(0, "Fuck Her", "This scene requires you to have cock.");
+	}
+	if (!player.isGenderless()) {
+		addButton(1, "Get Fucked", cottonFucksYou);
+	} else {
+		addDisabledButton(1, "Get Fucked", "This scene requires you to have genitals.");
+	}
+	addButton(3, "ServiceHer", serviceFirstTimeCotton);
+	addButton(14, "Refuse", refuseFirstTimeCotton);
 }
 
 //(Fuck Her)
