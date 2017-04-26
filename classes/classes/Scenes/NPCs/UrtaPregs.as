@@ -951,8 +951,12 @@ private function preggoUrtaSmexOrSomething():void {
 	addButton(0,"Massage Her",massagePregnantUrtasBelly);
 	addButton(1,"Boob Worship",urtaBoobWorshipScene);
 	addButton(2,"Nurse",nurseFromMommaUrtasBooBees);
-	addButton(3,"Milk Her",milkPregnantUrta);
-	addButton(4,"Cravings",urtaPregCravings);
+	addButton(3, "Milk Her", milkPregnantUrta);
+	if (player.hasCock()) {
+		addButton(4, "Cravings", urtaPregCravings);
+	} else {
+		addDisabledButton(4, "Cravings", "This scene requires you to have cock.");
+	}
 }
 
 //Belly Massage
@@ -2578,12 +2582,16 @@ private function sexWithLianna():void {
 	if (player.gender == 3) outputText("\n\n\"<i>A herm, huh?  That's interesting.  I'll be sure to note that in my experiments.</i>\"  She crosses her arms.  \"<i>So which part will you be using to help me?</i>\"");
 	//(Display sex options)
 	menu();
+	addDisabledButton(0, "HarvestGirly", "This scene requires you to have vagina. You shouldn't be pregnant.");
+	addDisabledButton(1, "HarvestManly", "This scene requires you to have cock.");
 	if (player.hasVagina()) {
-		if (player.pregnancyIncubation == 0) addButton(0,"HarvestGirly",getEggsHarvested);
+		if (player.pregnancyIncubation == 0) addButton(0, "HarvestGirly", getEggsHarvested);
 		else outputText("\n\n<b>She's not willing to have sex with you until your womb is unfilled.</b>");
 	}
-	if (player.hasCock()) addButton(1,"HarvestManly",liannaHandjobbies);
-	addButton(4,"Back",visitTheHouse);
+	if (player.hasCock()) {
+		addButton(1,"HarvestManly",liannaHandjobbies);
+	}
+	addButton(4, "Back", visitTheHouse);
 }
 
 //[=Refuse=]

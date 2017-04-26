@@ -306,6 +306,16 @@ package classes.Scenes.NPCs
 			}*/
 			//choices("Catch Anal",catchAnal,"Pitch Anal",pitchAnal,"Blow Ember",blowEmber,"Get Blown",getBlown,"Eat Her Out",eatOut,"Get Eaten Out",getEatenOut,"Penetrate Her",penetrateHer,"Get Penetrated",getPenetrated,"",0,"Leave",emberCampMenu);
 			menu();
+			
+			addDisabledButton(0, "Catch Anal", "This scene requires Ember to have cock.");
+			addDisabledButton(1, "Pitch Anal", "This scene requires you to have cock and sufficient arousal.");
+			addDisabledButton(2, "Blow Ember", "This scene requires Ember to have cock.");
+			addDisabledButton(3, "Get Blown", "This scene requires you to have cock and sufficient arousal.");
+			addDisabledButton(4, "Eat " + emberMF("Him", "Her") + " Out", "This scene requires Ember to have vagina.");
+			addDisabledButton(5, "Get Eaten Out", "This scene requires you to have vagina and sufficient arousal.");
+			addDisabledButton(6, "Penetrate " + emberMF("Him", "Her"), "This scene requires you to have cock and sufficient arousal. Ember should have vagina.");
+			addDisabledButton(7, "Get Penetrated", "This scene requires you to have vagina and sufficient arousal. Ember should have cock.");
+			addDisabledButton(8, "LustyFuck", "This scene requires you to have cock and insatiable libido or bottle of lust draft. Ember affection should be really high.");
 
 			if (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3) addButton(0, "Catch Anal", catchAnal, null, null, null, "Ask Ember if " + emberMF("he", "she") + "'s willing to penetrate your " + player.assDescript() + " with that cock of " + emberMF("his", "hers") + ".");
 			if (player.hasCock() && player.lust >= 33) addButton(1, "Pitch Anal", stickItInEmbersButt, null, null, null, "Penetrate Ember anally with your cock.");
@@ -595,32 +605,57 @@ package classes.Scenes.NPCs
 			outputText("Shaking your head, confused and startled by these strange impulses, you step away for a moment. Once away from the egg, its pattern of pulsations returns to normal and you feel the urges disappear.");
 			//If PC picks No and qualifies for item use, display the text below.
 			//(If player has an item that is valid for application)
-			var fap:Function =null;
-			if (player.lust >= 33) fap = masturbateOntoAnEgg;
-			var draft:Function =null;
-			if (player.hasItem(consumables.INCUBID)) draft = createCallBackFunction(useIncubusDraftOnEmber,false);
-			var pDraft:Function =null;
-			if (player.hasItem(consumables.P_DRAFT)) pDraft = createCallBackFunction(useIncubusDraftOnEmber,true);
-			var milk:Function =null;
-			if (player.hasItem(consumables.SUCMILK)) milk = createCallBackFunction(useSuccubiMilkOnEmber,false);
-			var pMilk:Function =null;
-			if (player.hasItem(consumables.P_S_MLK)) pMilk = createCallBackFunction(useSuccubiMilkOnEmber,true);
-			var hair:Function =null;
-			if (player.hasItem(consumables.EXTSERM)) hair = hairExtensionSerum;
-			var ovi:Function =null;
-			if (player.hasItem(consumables.OVIELIX)) ovi = useOviElixerOnEmber;
-			var lactaid:Function =null;
-			if (player.hasItem(consumables.LACTAID)) lactaid = useLactaidOnEmber;
-			var hatch:Function =null;
-			if (flags[kFLAGS.EMBER_EGG_FLUID_COUNT] >= 5 && flags[kFLAGS.EMBER_JACKED_ON] > 0 && flags[kFLAGS.EMBER_GENDER] > 0) hatch = hatchZeMuzzles;
-
 			outputText("  The egg's rhythm suddenly changes; as if it were excited by something - something that you have brought near it.");
 			outputText("\n\nYou start fishing through your pockets, holding up the various items you have; it doesn't react to some, while others make its flashes quicken.  These you set aside.  When you've finished testing the contents of your pouches, you look at the items the egg has selected.  As you rest your hand on the egg and consider your choices, it begins to excite once more, alarming you.  You pull away and it calms down... the egg considers <b>you</b> an item as well, apparently!");
-			if (hatch!=null) outputText("\n\n<b>The egg is ready to be hatched - if you're just as ready.</b>");
-
-			if (hatch!=null) choices("Hatch", hatch, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
-			else if (fap!=null) choices("Masturbate", fap, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
-			else choices("Hatch", hatch, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
+			
+			menu();
+			if (flags[kFLAGS.EMBER_EGG_FLUID_COUNT] >= 5 && flags[kFLAGS.EMBER_JACKED_ON] > 0 && flags[kFLAGS.EMBER_GENDER] > 0) {
+				outputText("\n\n<b>The egg is ready to be hatched - if you're just as ready.</b>");
+				addButton(0, "Hatch", hatchZeMuzzles);
+			} else if (player.lust >= 33 && !player.isGenderless()) {
+				addButton(0, "Masturbate", masturbateOntoAnEgg);
+			} else {
+				addDisabledButton(0, "Masturbate", "This scene requires you to have genitals and sufficient arousal.");
+			}
+			
+			addButton(1, "Blood", giveEmberBludSausages);
+			
+			if (player.hasItem(consumables.INCUBID)) {
+				addButton(2, "IncubiDraft", createCallBackFunction(useIncubusDraftOnEmber, false));
+			} else {
+				addDisabledButton(2, "IncubiDraft");
+			}
+			if (player.hasItem(consumables.P_DRAFT)) {
+				addButton(3, "Pure Draft", createCallBackFunction(useIncubusDraftOnEmber,true));
+			} else {
+				addDisabledButton(3, "Pure Draft");
+			}
+			if (player.hasItem(consumables.SUCMILK)) {
+				addButton(4, "Succubi Milk", createCallBackFunction(useSuccubiMilkOnEmber, false));
+			} else {
+				addDisabledButton(4, "Succubi Milk");
+			}
+			if (player.hasItem(consumables.P_S_MLK)) {
+				addButton(5, "Pure Milk", createCallBackFunction(useSuccubiMilkOnEmber, true));
+			} else {
+				addDisabledButton(5, "Pure Milk");
+			}
+			if (player.hasItem(consumables.EXTSERM)) {
+				addButton(6, "Hair Serum", hairExtensionSerum);
+			} else {
+				addDisabledButton(6, "Hair Serum");
+			}
+			if (player.hasItem(consumables.OVIELIX)) {
+				addButton(7, "Ovi Elixir", useOviElixerOnEmber);
+			} else {
+				addDisabledButton(7, "Ovi Elixir");
+			}
+			if (player.hasItem(consumables.LACTAID)) {
+				addButton(8, "Lactaid", useLactaidOnEmber);
+			} else {
+				addDisabledButton(8, "Lactaid");
+			}
+			addButton(14, "Back", leaveWithoutUsingAnEmberItem);
 		}
 
 //Leave Without Using Item (Z)
