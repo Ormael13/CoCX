@@ -234,8 +234,8 @@ protected function hideMenus():void {
 	kGAMECLASS.hideMenus();
 }
 
-/** Creates a menu with 10 buttons.
- * @deprecated    This is deprecated. Use a series of addButton instead.
+[Deprecated(replacement="Use a series of BaseContent.addButton instead.")]
+/**[DEPRECATED] Creates a menu with 10 buttons.
  */
 protected function choices(text1:String, butt1:Function,
 						   text2:String, butt2:Function,
@@ -260,9 +260,8 @@ protected function choices(text1:String, butt1:Function,
 			text0, butt0
 	);
 }
-
-/** Creates a menu with 5 buttons.
- * @deprecated    This is deprecated. Use menu() + series of addButton instead.
+[Deprecated(replacement="Use menu() + series of addButton instead.")]
+/**[DEPRECATED] Creates a menu with 5 buttons.
  */
 protected function simpleChoices(text1:String, butt1:Function,
 								 text2:String, butt2:Function,
