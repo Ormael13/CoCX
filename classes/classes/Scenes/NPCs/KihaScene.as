@@ -345,7 +345,7 @@ private function kihaMilkTitHumiliation():void {
 	if (player.cor < 33) outputText("How far you've fallen.", false);
 	else if (player.cor < 66) outputText("How confusing this all is.  Why can't things be simple like they were back home?", false);
 	else outputText("Damn, that was hot.", false);
-	player.orgasm();
+	player.orgasm('Tits');
 	dynStats("tou", -1, "sen", 5);
 	combat.cleanupAfterCombat();
 }
@@ -394,7 +394,7 @@ private function kihaRapesMen():void {
 	outputText("\"<i>Fill my ass with that cum,</i>\" she purrs, forgetting her hostile attitude for a moment.  \"<i>I want to feel it in my belly.</i>\"  You can't help but comply, your suffocation-induced panic lending strength to your orgasm until her abdomen distends under the weight of your seed.  Before you black out, you can see her hooking four long, clawed fingers up into her pussy, while her thumb frantically jills her dusky clit.  Then, only darkness.\n\n", false);
 	
 	outputText("When you come to, your throat feels raw, the taste of her pussy still on your lips.  Surprisingly, your groin is wet, but not sticky, without a trace of semen anywhere.  She must've licked " + player.sMultiCockDesc() + " clean after you passed out.  Your " + player.hipDescript() + " are still sore from the wild woman's ride, so it takes you longer than usual to limp your way back to camp.", false);
-	player.orgasm();
+	player.orgasm('Dick');
 	combat.cleanupAfterCombat();
 }
 //*Herm - Adj
@@ -430,7 +430,7 @@ private function kihaRapesHerms():void {
 	
  	//[Incubus Draft end: 
 	if (dicked) outputText("\n\nAs she steps back into the mire, the sound of her muttering carries back to you. \"<i>Much as I'd like to keep it, better to be done with this,</i>\" she sighs, glancing down at her turgid, draconic shaft.  \"<i>Just as well I held onto all those pink eggs after that crystal vial knocked me up.</i>\"  The rest of that story is lost to you, however, as her lean, swaying torso is swallowed back into the swamp's embrace.", false);
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("lib", 1, "sen", 3);
 	combat.cleanupAfterCombat();
 }
@@ -480,7 +480,7 @@ private function tsundereMasturbationChristmasCarol():void {
 	outputText("Her moist juices flush from beneath her, drenching your fingers in her essence.  She slowly removes her lips from yours, moving closer towards you", false);
 	if (player.hasCock()) {
 		outputText(" and accidentally brushing against your trembling genitals, pushing you hard enough to cause you to ejaculate against her backside", false);
-		player.orgasm();
+		player.orgasm('Dick');
 	}
 	outputText(".  The girl sighs in relief, tuckered out more from the sensual experience than the battle itself.  You slowly remove yourself, leaving the tired girl underneath the tree to rest.\n\n", false);
 	
@@ -537,7 +537,7 @@ private function kihaVictoryPomfTail():void {
 	outputText("The draconic woman snaps when you pull your soiled undies from her maw.  \"<i>Bitch!  I'll get you for t-this!</i>\"\n\n", false);
 	
 	outputText("Your only response is to get dressed, enjoying the pleasant tingle of her bubbling saliva on your girl-parts.  Kiha glares at you, futilely shaking her hips as if that would somehow quell the tide of lust washing through her body.  Maybe another of the swamp's denizens will keep her company in your absence?", false);
-	player.orgasm();
+	player.orgasm('Generic');
 	combat.cleanupAfterCombat();
 }
 //*Victory Dicking - Fencrafted
@@ -636,7 +636,7 @@ private function victoryDickKiha():void {
 		else outputText(", smear your dribbling cock all over her face, make her lick it clean, and then, get dressed.  Maybe the bitch will consider a little humility when addressing the real owner of this territory - you.", false);
 		outputText("  Somehow, you doubt she'll learn anything from the encounter.", false);
 	}
-	player.orgasm();
+	player.orgasm('Dick');
 	combat.cleanupAfterCombat();
 }
 
@@ -664,7 +664,7 @@ private function kihaRapesLittleGirlsISawItOnTheNews():void {
 	outputText("  She responds in kind, gushing her unspoken attraction across your clenched features. Drowning in dragon juices and shuddering in pleasure, you finally pass out.\n\n", false);
 	
 	outputText("By the time you come to, Kiha is long gone.", false);
-	player.orgasm();
+	player.orgasm('Vaginal');
 	dynStats("sen", 2);
 	combat.cleanupAfterCombat();
 }
@@ -803,7 +803,7 @@ private function analRapuzulaKiha():void {
 
 		outputText("Deciding that you are done here, you retrieve your " + player.armorName + " and leave the girl. Perhaps now she'll treat you with a little more respect. You return to camp.", false);
 	}
-	player.orgasm();
+	player.orgasm('Dick');
 	combat.cleanupAfterCombat();
 }
 

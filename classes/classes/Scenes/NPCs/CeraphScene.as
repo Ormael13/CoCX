@@ -191,7 +191,7 @@ package classes.Scenes.NPCs
 
 				outputText("As you leave, you don't bother to spare a glance at the confused omnibus; she isn't worth your time.", false);
 			}
-			player.orgasm();
+			player.orgasm('Dick');
 			dynStats("lib", 3, "sen", 3, "cor", 1);
 			if (getGame().inCombat)
 				combat.cleanupAfterCombat();
@@ -247,7 +247,7 @@ package classes.Scenes.NPCs
 			else outputText("You bend over and rub your belly while whispering in her ear, \"<i>Like mother, like child.</i>\"\n\n", false);
 			outputText("As you leave, you don't bother to spare a glance at the confused omnibus; she isn't worth your time.\n\n", false);
 			player.cuntChange(monster.cockArea(0), true);
-			player.orgasm();
+			player.orgasm('Vaginal');
 			dynStats("lib", 3, "sen", 3,"cor", 1);
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
 			if (getGame().inCombat)
@@ -807,7 +807,7 @@ package classes.Scenes.NPCs
 			outputText("Ceraph gasps, \"<i>Ohhhhkay.  That felt goooooooood.</i>\"  She gathers some of your sperm from her space and swallows it with a smile before she offers, \"<i>You've shown me a good time, mortal.", false);
 			if (!getGame().inCombat) {
 				outputText("</i>\"", false);
-				player.orgasm();
+				player.orgasm('Generic');
 				dynStats("lib", 3, "sen", 3, "cor", 1);
 				doNext(camp.returnToCampUseOneHour);
 				return;
@@ -824,7 +824,7 @@ package classes.Scenes.NPCs
 			outputText("(Do you accept Ceraph's Offer?)", false);
 			//Y/N – remove 1 fetish level or +10 gems
 			doYesNo(ceraphsNiceOffer, combat.cleanupAfterCombat);
-			player.orgasm();
+			player.orgasm('Generic');
 			dynStats("lib", 3, "sen", 3, "cor", 1);
 		}
 
@@ -1126,7 +1126,7 @@ package classes.Scenes.NPCs
 				outputText("You work your jaw in consternation, trying to dredge up a response or stop her, but before you can do anything, she pushes your old " + player.vaginaDescript(0) + " down on her throbbing demon-shaft.  It knocks the strength out of your " + player.legs() + ", and you lie there moaning while Ceraph prances off, masturbating herself with your disembodied pussy.  Eventually you cum to the feeling of demon-cum spurting inside you, but it's a strange, empty orgasm.", false);
 				player.removeVagina(0, 1);
 				//(-100 lust, -1 fetish, +1 vagina toy status)
-				player.orgasm();
+				player.orgasm('Generic');
 				dynStats("cor", 5);
 				flags[kFLAGS.PC_FETISH]--;
 				flags[kFLAGS.CERAPH_PUSSIES_OWNED]++;
@@ -1255,7 +1255,7 @@ package classes.Scenes.NPCs
 
 					outputText("Sudden warmth plasters your feet and ankles, drenching them with the inhumanly warm jizm of Ceraph's pleasure.  She sighs, relaxing her grip on your ankles while you pump away, dutifully milking every ounce of demonic juice onto your willing soles.  \"<i>Gooood pet... yes, good girl,</i>\" coos the still blissful dominatrix before she suddenly yanks the pump from your groin without warning.  Your poor pussy jiggles with pain and pleasure, orgasming hard enough to squirt all over your cock-sized clitty.  Thankfully, the swelling of your genitals immediately fades, leaving them larger but less freakish.  Ceraph presses her still-hard cock against your lips, but the mental link starts to fade as she does so, leaving you to return to your normal dreams...", false);
 					//(-3 sens, -100 lust)
-					player.orgasm();
+					player.orgasm('Vaginal');
 					dynStats("sen", -3);
 				}
 				//PUSSY FLESHLIGHT
@@ -1271,7 +1271,7 @@ package classes.Scenes.NPCs
 
 					outputText("The vision and feelings slowly fade, letting you out of their grip and leaving faint after-images of Ceraph cleaning you with her tongue.", false);
 					//(-100 lust, +2 sens, +1 cor)
-					player.orgasm();
+					player.orgasm('Vaginal');
 					dynStats("sen", 2, "cor", 1);
 				}
 				else {
@@ -1285,7 +1285,7 @@ package classes.Scenes.NPCs
 					outputText("\n\nA quim-stained crotch smacks into your lips, and explosions of warmth begin detonating deep inside your depths, the blooms of liquid heat bringing you to a cunt-clenching climax of epic proportions.  Your muscles lock and your [butt] rises from your resting place, cheeks clenched in tight pleasure.  A scream of bliss tears through the night as you cum.  Jizz froths from your entrance as you're overfilled, spilling out to roll to the ground.  It feels so good, so goddamn good.  Your wails slowly trail off to whimpers, aftershocks of enjoyment causing your body to twitch wildly beneath the blankets until the cream-spurting cock is finally removed from your jizz-glazed cavern.");
 					outputText("\n\n\"<i>I suppose I should thank [name] for giving me such an excellent fuck-toy,</i>\" the mysterious-yet-familiar voice comments.  Wait... Ceraph!");
 					outputText("\n\nYou jolt awake, sweating buckets and shivering.  Somewhere, the demoness just blew a load in your old pussy.  The thought would keep you awake, if that orgasm hadn't been so goddamn satisfying.");
-					player.orgasm();
+					player.orgasm('Vaginal');
 					dynStats("sen", 2, "cor", 1);
 				}
 			}
@@ -1363,7 +1363,7 @@ package classes.Scenes.NPCs
 
 					outputText("With the sensation and scenario fading, your confused dreams shift before resuming a more normal flow.  You've no doubt you'll feel sated in the morning, but the lingering echoes of Ceraph's pet in your mind wishes you'd go submit to her.", false);
 					//(-100 lust, +1 corruption)
-					player.orgasm();
+					player.orgasm('Dick');
 					dynStats("cor", 1);
 				}
 				//FEATHER TORTURE
@@ -1451,7 +1451,7 @@ package classes.Scenes.NPCs
 			outputText(" asshole leaks spunk everywhere. Disgusted with her", false);
 			if (player.cor < 33) outputText(" and a little bit by yourself", false);
 			outputText(", you drop her like a discarded rag.  She moans and begins masturbating, half-insensate from the rough treatment.  You ignore her, get dressed, and get out of there before the mountain's beasts show up.  Ceraph is in for a wild night!", false);
-			player.orgasm();
+			player.orgasm('Dick');
 			if (getGame().inCombat)
 				combat.cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
