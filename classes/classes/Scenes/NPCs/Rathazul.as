@@ -398,25 +398,35 @@ public function rathazulArmorMenu():void {
 	menu();
 	if (player.hasItem(useables.GREENGL, 5)) {
 		addButton(0, "GelArmor", craftOozeArmor);
+	} else {
+		addDisabledButton(0, "GelArmor", "He can make armor using 5 clumps of green gel.");
 	}
 	if (player.hasItem(useables.B_CHITN, 5)) {
 		addButton(1, "BeeArmor", craftCarapace);
+	} else {
+		addDisabledButton(1, "BeeArmor", "He can make armor using 5 shards of chitinous plating.");
 	}
 	if (player.hasItem(useables.T_SSILK) && flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] + flags[kFLAGS.RATHAZUL_SILK_ARMOR_TYPE] == 0) {
 		addButton(2, "SpiderSilk", craftSilkArmor);
+	} else {
+		addDisabledButton(2, "SpiderSilk", "He can make armor or clothes using tough spider-silk.");
 	}
 	if (player.hasItem(useables.D_SCALE, 2)) {
 		addButton(3, "Dragonscale", craftDragonscaleArmor);
+	} else {
+		addDisabledButton(3, "Dragonscale", "He can make armor or clothes using dragonscales.");
 	}
 	if (player.hasItem(useables.LETHITE, 5) && player.hasItem(weapons.W_STAFF, 1)) {
 		addButton(4, "Lethicite", craftLethiciteStaff);
+	} else {
+		addDisabledButton(4, "Lethicite", "He can upgrade your wizard's staff if you bring him 5 chunks of lethicite.");
 	}
 	if (player.hasKeyItem("Tentacled Bark Plates") >= 0) {
 		addButton(5, "T.Bark Armor", craftMaraeArmor, false);
-	}
+	} // no disabled button - you'll get directions when you'll get bark plates
 	if (player.hasKeyItem("Divine Bark Plates") >= 0) {
 		addButton(6, "D.Bark Armor", craftMaraeArmor, true);
-	}
+	} // no disabled button - you'll get directions when you'll get bark plates
 	addButton(14, "Back", returnToRathazulMenu);
 }
 
@@ -489,6 +499,9 @@ private function commissionSilkArmorForReal():void {
 	if (player.hasItem(useables.T_SSILK, 5)) {
 		addButton(0, "Armor", chooseArmorOrRobes, 1, null, null, armors.SSARMOR.description);
 		addButton(1, "Robes", chooseArmorOrRobes, 2, null, null, armors.SS_ROBE.description);
+	} else {
+		addDisabledButton(0, "Armor", "You must have 5 bundles of silk to make it.");
+		addDisabledButton(1, "Robes", "You must have 5 bundles of silk to make it.");
 	}
 	addButton(2, "Bra", chooseArmorOrRobes, 3, null, null, undergarments.SS_BRA.description);
 	addButton(3, "Panties", chooseArmorOrRobes, 4, null, null, undergarments.SSPANTY.description);
@@ -587,8 +600,11 @@ private function craftDragonscaleArmor():void {
 	if (player.hasItem(useables.D_SCALE, 5)) {
 		addButton(0, "Armor", craftDragonscaleArmorForReal, 0, null, null, armors.DSCLARM.description);
 		addButton(1, "Robe", craftDragonscaleArmorForReal, 1, null, null, armors.DSCLROB.description);
+	} else {
+		outputText("\n\nYou realize you're still a bit short on dragonscales for the armor but you can have undergarments made instead.");
+		addDisabledButton(0, "Armor", "You must have 5 sheets of dragonscales to make it.");
+		addDisabledButton(1, "Robes", "You must have 5 sheets of dragonscales to make it.");
 	}
-	else outputText("\n\nYou realize you're still a bit short on dragonscales for the armor but you can have undergarments made instead.");
 	addButton(2, "Bra", craftDragonscaleArmorForReal, 2, null, null, undergarments.DS_BRA.description);
 	addButton(3, "Thong", craftDragonscaleArmorForReal, 3, null, null, undergarments.DSTHONG.description);
 	addButton(4, "Loincloth", craftDragonscaleArmorForReal, 4, null, null, undergarments.DS_LOIN.description);
