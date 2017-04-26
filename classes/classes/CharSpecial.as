@@ -1616,9 +1616,10 @@ package classes
 			player.buttRating = BUTT_RATING_TIGHT;
 			player.thickness = 20; // thin
 			player.tone = 20; // soft
-			player.skinType = SKIN_TYPE_PLAIN;
-			player.skinDesc = "skin";
-			player.skinAdj = "smooth"; // flawless skin, black egg effect
+			player.skinType = SKIN_TYPE_FUR;
+			player.furColor = "snow white";
+			player.skinDesc = "fur";
+			player.skinAdj = "fluffy";
 			player.skinTone = "light";
 			player.hairColor = "snow white";
 			player.hairType = HAIR_ANEMONE; flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 1; // tentacle hair... never can have enough tentacles!
@@ -1627,8 +1628,6 @@ package classes
 			player.beardLength = 0;
 			player.beardStyle = 0;
 			
-			player.skinType = SKIN_TYPE_FUR;
-			player.furColor = "snow white";
 			player.faceType = FACE_FOX;
 			player.earType = EARS_FOX;
 			player.clawType = CLAW_TYPE_DOG;
