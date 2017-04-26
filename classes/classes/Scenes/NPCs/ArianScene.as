@@ -1105,7 +1105,6 @@ private function arianMagicLessons():void {
 		}
 	}
 	else if (player.inte < 75) {
-		outputText("<b>Game Note: This isn't canon and will be re-written soonish.</b>");
 		//Teach Blind if PC doesn't know.
 		outputText("\n\nYou say you have a pretty good understanding of how magic works now, so you'd like [Arian em] to get started on the more complex theories.");
 		outputText("\n\nArian rubs [Arian eir] chin in thought.  \"<i>Hmm.... Aha!  Let's discuss conjuration.  This is where we start getting to the more complex theories and methods.  I know I don't have to say it, but pay attention.  Conjuration is an important art for any mage.</i>\"");
@@ -1129,7 +1128,6 @@ private function arianMagicLessons():void {
 	}
 	else { 
 		//Teach Whitefire if PC doesn't know.
-		outputText("<b>Game Note: This isn't canon and will be re-written soonish.</b>");
 		outputText("\n\nYou ask Arian if [Arian ey] wouldn't mind hearing some of your own theories about magic; you've been giving the subject a lot of thought lately.");
 		outputText("\n\nArian looks at you, eyes alight with interest at what you have to say.  \"<i>Please, do share your thoughts.</i>\"  You explain that if you are able to use magic to conjure elements, with a little concentration it might also be possible to alter these elements on the fly; you convey the method you theorized to the lizan mage.");
 		outputText("\n\nIf you can conjure elements at will, would it be possible to also alter them?  You could have one element start out as a non-volatile substance within your hands and then hurl it towards a target whilst also focusing upon changing its nature, thus creating an explosive reaction.  For instance, you can start out with a small gathering of dust and quickly change it into a highly combustible element and make it look like as if you made the air explode.");
