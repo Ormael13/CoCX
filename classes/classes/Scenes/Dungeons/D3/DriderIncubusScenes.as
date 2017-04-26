@@ -310,10 +310,14 @@ package classes.Scenes.Dungeons.D3
 				if (player.vaginas.length > 0)
 				{
 					addButton(1,"Ride Drider",rideDrider);
+				} else {
+					addDisabledButton(1, "Ride Drider", "This scene requires you to have vagina.");
 				}
 				if (player.cocks.length > 0)
 				{
 					addButton(2,"Buttfuck Drider",buttfuckDrider);
+				} else {
+					addDisabledButton(2, "Buttfuck Drider", "This scene requires you to have cock.");
 				}
 			}
 			else
@@ -328,10 +332,15 @@ package classes.Scenes.Dungeons.D3
 					{
 						addButton(5,"Fuck Goblin",fuckMitzi);
 						addButton(6,"Goblin Tittyfuck",titfuckMitzi);
+					} else {
+						addDisabledButton(5, "Fuck Goblin", "This scene requires you to have cock.");
+						addDisabledButton(6, "Goblin Tittyfuck", "This scene requires you to have cock.");
 					}
 					if (player.vaginas.length > 0)
 					{
 						addButton(7,"Goblin Licks",mitziEatsPussy);
+					} else {
+						addDisabledButton(7, "Goblin Licks", "This scene requires you to have vagina.");
 					}
 				}
 				addButton(8,"Recruit Goblin",recruitMitzi);

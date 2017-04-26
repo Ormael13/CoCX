@@ -1690,10 +1690,12 @@ private function sheilaXP4Sex(display:Boolean = false):void {
 	//Consensual scenes (normal Sheila's vaginal capacity is 32, for reference):
 	//[Consensual - Either 69] - Fenoxo beware, omnibus scene!(req. vag or dix; both buttons direct here but decide the focus)
 	menu();
-	if (player.gender > 0) {
-		if (player.hasCock()) addButton(0,"69WithWang",consensualSheila69,true);
-		if (player.hasVagina()) addButton(1,"69WithCooch",consensualSheila69,false);
-	}
+	addDisabledButton(0, "69WithWang", "This scene requires you to have cock.");
+	addDisabledButton(1, "69WithCooch", "This scene requires you to have vagina.");
+	addDisabledButton(2, "Fuck Her", "This scene requires you to have fitting cock.");
+	
+	if (player.hasCock()) addButton(0,"69WithWang",consensualSheila69,true);
+	if (player.hasVagina()) addButton(1,"69WithCooch",consensualSheila69,false);
 	//[Consensual - Vaginal Sex] (req. cock <= 32 area):
 	if (player.hasCock() && player.cockThatFits(32) >= 0) addButton(2,"Fuck Her",consentacleVagSexForKangarooSlutBitches);
 	//da scene
@@ -4433,6 +4435,12 @@ internal function beatUpDemonSheila(output:Boolean = true):void {
 	}
 	//if lust high enough, display choices [Missionary][Big Dick+Thighs][Penetration, In Spades][Nipple Kisses][Anal Hate-fuck(req >= 75 corr and monster lust >99 or monster HP < 1 to appear)]
 	menu();
+	
+	addDisabledButton(0, "Missionary", "This scene requires you to have fitting cock.");
+	addDisabledButton(1, "AnalHateFuck", "This scene requires you to have fitting cock.");
+	addDisabledButton(2, "UseHerThighs", "This scene requires you to have big cock.");
+	addDisabledButton(3, "Clit-Fuck", "This scene requires you to have vagina.");
+	
 	//Win - [Missionary] - for the purpose of procreation
 	//requires a cockarea <= 56
 	if (player.hasCock() && player.cockThatFits(56) >= 0) addButton(0,"Missionary",missionaryForThePurposesOfCreatingImpsWithSheila);

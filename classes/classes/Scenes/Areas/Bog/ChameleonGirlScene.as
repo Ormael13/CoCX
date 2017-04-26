@@ -176,6 +176,13 @@ package classes.Scenes.Areas.Bog
 		{
 			clearOutput();
 			spriteSelect(89);
+	
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.", true);
+				combat.cleanupAfterCombat();
+				return;
+			}
+			
 			//-Win by lust
 			if (monster.lust >= monster.eMaxLust()) {
 				outputText("Unable to control her arousal, the chameleon girl collapses to her knees and begins masturbating underneath her thong, having lost all capacity to fight you; she moans and throws her head back as her hand splashes in and out of the water she's kneeling in.  Her skin returns to its usual " + monster.skinTone + " and then keeps going, shifting closer and closer to pink as her moans increase in both volume and volubility.");
@@ -186,22 +193,32 @@ package classes.Scenes.Areas.Bog
 				outputText("Too weak to continue fighting, the chameleon girl drops to her knees, exhausted.  Her skin returns to its usual " + monster.skinTone + ", unable to maintain the camouflage.");
 				if (player.lust >= 33) outputText("  Do you use the girl in her weakened state to get yourself off?  Or maybe you could punish her bad attitude with an item from your bags...");
 			}
-			if (player.lust < 33 || player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
-				combat.cleanupAfterCombat();
-				return;
+			
+			menu();
+			addDisabledButton(0, "Use Dick", "This scene requires you to have cock and sufficient arousal.");
+			addDisabledButton(1, "Use Pussy", "This scene requires you to have vagina and sufficient arousal.");
+			addDisabledButton(2, "Herm Style", "This scene requires you to be a herm and to have sufficient arousal.");
+			addDisabledButton(3, "SuccMilk", "This scene requires you to have a bottle of Succubus Milk, cock and sufficient arousal.");
+			addDisabledButton(4, "LustnSensD.", "This scene requires you to have a bottle of Fuck Draft, genitals and sufficient arousal. Lust Draft mixed with Sensitivity Draft would work too.");
+			
+			if (player.lust >= 33 && !player.isGenderless()) {
+				if (player.hasCock()) {
+					addButton(0, "Use Dick", manFucksChameleonWithBiggishWang);
+				}
+				if (player.hasVagina()) {
+					addButton(1, "Use Pussy", femaleHasWinSexWithChamCham);
+				}
+				if (player.isHerm()) {
+					addButton(2, "Herm Style", fuckDatChameleonAsACoolGuyGirlHerm);
+				}
+				if ((player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && player.hasCock()) {
+					addButton(3, "SuccMilk", giveTheChameleonASuccubiMilk);
+				}
+				if (player.hasItem(consumables.SENSDRF) && (player.hasItem(consumables.L_DRAFT) || player.hasItem(consumables.F_DRAFT))) {
+					addButton(4, "LustnSensD.", doseDatChameleonWithLustAndSensitivityDrafts);
+				}
 			}
-			//(Display Options: [Fuck Her Face] [Pussy Rub] [Herm Style Pussyrub] [Incubi Draft] [Succubi Milk] [Lust&Sens Drafts])
-			var dick:Function =null;
-			var pussy:Function =null;
-			var herm:Function =null;
-			var item:Function =null;
-			if (player.hasCock()) dick = manFucksChameleonWithBiggishWang;
-			if (player.hasVagina()) pussy = femaleHasWinSexWithChamCham;
-			if (player.gender == 3) herm = fuckDatChameleonAsACoolGuyGirlHerm;
-			//let PC use item
-			if ((player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && player.hasCock()) item = useAnItemOnTheChamcham;
-			else if (player.hasItem(consumables.SENSDRF) && (player.hasItem(consumables.L_DRAFT) || player.hasItem(consumables.F_DRAFT))) item = useAnItemOnTheChamcham;
-			simpleChoices("Use Dick", dick, "Use Pussy", pussy, "Herm Style", herm, "Use Item", item, "Leave", combat.cleanupAfterCombat);
+			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
 
 		//-Herm Victory (Z edited)

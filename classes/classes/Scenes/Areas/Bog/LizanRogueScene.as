@@ -43,7 +43,11 @@ package classes.Scenes.Areas.Bog
 				}
 				menu();
 				addButton(0, "Spar", fightLizan, true, null, null, "Do a spar session with the lizan!");
-				if (player.lust >= 33) addButton(1, "Sex", haveSexWithLizan, null, null, null, "Have some fun with the oh-so-sexy lizan.");
+				if (player.lust >= 33) {
+					addButton(1, "Sex", haveSexWithLizan, null, null, null, "Have some fun with the oh-so-sexy lizan.");
+				} else {
+					addDisabledButton(1, "Sex", "You are not aroused enough.");
+				}
 				addButton(2, "Decline", leaveLizan, true, null, null, "Excuse yourself and leave.");
 				return;
 			}
@@ -75,14 +79,23 @@ package classes.Scenes.Areas.Bog
 		
 		public function winAgainstLizan():void {
 			clearOutput();
+	
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.", true);
+				combat.cleanupAfterCombat();
+				return;
+			}
+			
 			outputText("The lizan raises his hands in defeat and you celebrate with a victory dance. ");
 			menu();
 			if (player.cor > 30) {
+				addDisabledButton(0, "Use Dick", "This scene requires you to have cock and sufficient arousal.");
+				addDisabledButton(1, "Use Pussy", "This scene requires you to have vagina and sufficient arousal.");
 				if (player.lust >= 33 && player.gender > 0) {
 					outputText("You wonder what you should do to the lizan.");
 					if (player.hasCock()) addButton(0, "Use Dick", rapeLizanInTheAss, null, null, null, "Anally penetrate him with your [cocks].");
 					if (player.hasVagina()) addButton(1, "Use Pussy", rapeLizanWithPussy, null, null, null, "Get on top of the lizan and stuff his cock into your [pussy].");
-					addButton(4, "Leave", combat.cleanupAfterCombat);
+					addButton(14, "Leave", combat.cleanupAfterCombat);
 					return;
 				}
 				else {
@@ -93,10 +106,10 @@ package classes.Scenes.Areas.Bog
 			}
 			else {
 				dynStats("str", 1, "tou", 1);
-				if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
+				if (player.lust >= 33) {
 					outputText("<b>You could have sex with him if you like to.</b> ");
 					addButton(0, "Sex", haveSexWithLizan, null, null, null, "Have some fun with the oh-so-sexy lizan.");
-					addButton(4, "Leave", leaveLizanAfterCombat);
+					addButton(14, "Leave", leaveLizanAfterCombat);
 					return;
 				}
 				else leaveLizanAfterCombat();
@@ -128,9 +141,12 @@ package classes.Scenes.Areas.Bog
 			}
 			menu();
 			if (player.hasCock()) addButton(0, "Use Dick", consensualButtfuck, null, null, null, "Anally penetrate him with your penis.");
+			else addDisabledButton(0, "Use Dick", "This scene requires you to have cock.");
 			if (player.hasVagina()) addButton(1, "Use Vagina", consensualGetFucked, null, null, null, "Have him take you vaginally.");
+			else addDisabledButton(1, "Use Vagina", "This scene requires you to have vagina.");
 			addButton(2, "Use Ass", consensualGetButtFucked, null, null, null, "Have him take you anally.");
 			if (player.hasVagina()) addButton(3, "Dbl.Penetration", consensualDoublePenetration, null, null, null, "Have him stuff both your holes with his dual cocks.", "Double Penetration");
+			else addDisabledButton(3, "Dbl.Penetration", "This scene requires you to have vagina.", "Double Penetration");
 			if (flags[kFLAGS.WATERSPORTS_ENABLED] > 0 && flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER] >= 3 && !continuation) addButton(4, "Watersports", consensualWatersports, null, null, null, "Participate into urine activity with him. \n\nNOTE: Contains watersports!");
 		}
 		

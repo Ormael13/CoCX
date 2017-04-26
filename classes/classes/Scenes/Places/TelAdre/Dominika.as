@@ -274,7 +274,8 @@ private function declineFellatrixOral():void {
 		outputText("What were you thinking?  A little oral sounds great.", false);
 
 		//(Only \"<i>Yes</i>\" is available)
-		simpleChoices("Yes", acceptFellatrixOral, "", null, "", null, "", null, "", null);
+		menu();
+		addButton(0, "Yes", acceptFellatrixOral);
 	}
 }
 //[If \"<i>No.</i>\" twice]

@@ -56,10 +56,16 @@ package classes.Scenes.Dungeons.D3
 				outputText(" The poor things are so corrupted.");
 			}
 			menu();
+			addDisabledButton(1, "Docking", "This scene requires you to have fitting cock.");
+			addDisabledButton(2, "Buttfuck", "This scene requires you to have fitting cock.");
+			addDisabledButton(3, "Titfuck", "This scene requires you to have cock.");
+			addDisabledButton(4, "SloppySeconds", "This scene requires you to have cock.");
+			addDisabledButton(5, "Ride Him", "This scene requires you to have vagina.");
+			
 			addButton(0,"Kill Them",this.murderhobo);
 			if (player.hasCock())
 			{
-				if (player.smallestCockIndex()) addButton(1, "Docking", this.dockucocku, player.smallestCockIndex());
+				if (player.smallestCockArea() <= 50) addButton(1, "Docking", this.dockucocku, player.smallestCockIndex());
 				if (player.cockThatFits(200) >= 0) addButton(2,"Buttfuck",this.buttufucku);
 				addButton(3,"Titfuck",this.titfuckCowslut);
 				addButton(4,"SloppySeconds",this.sloppySeconds);
@@ -119,7 +125,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				outputText("\n\nYou cum like a firehose, spraying a deluge of sticky spunk straight down the minotaur’s cock. His body may have been ready to expel such flows, but never to take one in. He grunts in what you take for discomfort and stares in horror at the bulges of fluid disappearing into his sheath, spreading through his body and collecting in his balls. You can actually see his nuts swelling up with all the pumped-in sperm, absolutely bloated with the fruit of your loins. Hefting one, you feel the extra fluid slosh as you fill it, marvelling at your own virility.");
 			}
-			if (!player.hasKnot())
+			if (!player.hasKnot(cockIdx) || player.cocks[cockIdx].knotMultiplier * player.cocks[cockIdx].cockThickness <= 2)
 			{
 				outputText("\n\nSatisfied at last, you pull out with lurid ‘schliiiick’ sound. A few of the assembled demons clap and catcall, but most surprising of all is the monarch’s own roar of bliss, followed shortly after by his powerful hips lifting up off the floor. The well-fucked horse-cock erupts like a long-dormant volcano, spraying jizz from its sloppy, stretched slit until minotaur spunk is raining over the assembled crowd. Many of the demons immediately fall into fucking one another, but you have the good sense to avoid the bulk of it.");
 				outputText("\n\nAgain and again, those powerful, shaggy hips lift, and each time, more cow-cream explodes into the air, mixed with something else. Something better. Champion cum. Excellia is revitalized by erotic monsoon and manages to climb on top before he finishes, riding him like the bucking bronco that he is.");

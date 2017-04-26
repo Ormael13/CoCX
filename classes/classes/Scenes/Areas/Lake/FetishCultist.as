@@ -115,24 +115,32 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			var temp2:Function =null;
-			if (player.hasStatusEffect(StatusEffects.Feeder)) temp2 = game.lake.fetishCultistScene.fetishCultistHasAMilkFetish;
 			if (hpVictory) {
 				outputText("Hurt too much to continue controlling her powers, the cultist collapses helplessly.", true);
 			} else {
 				outputText("Overwhelmed by her lusts, the cultist loses the ability to control herself and collapses.", true);
 			}
-			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
-				outputText("  You realize she'd make a perfect receptacle for your lusts.  Do you have your way with her?", false);
-				game.simpleChoices("Sex", game.lake.fetishCultistScene.playerRapesCultist, "", null, "", null, "B. Feed", temp2, "Leave", game.combat.cleanupAfterCombat);
+			
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				game.combat.cleanupAfterCombat();
+				return;
 			}
-			else {
-				if (temp2!=null && flags[kFLAGS.SFW_MODE] <= 0) {
-					outputText("  She looks like she might take some of your milk if you offered it to her.  What do you do?", false);
-					game.simpleChoices("B. Feed", temp2, "", null, "", null, "", null, "Leave", game.combat.cleanupAfterCombat);
-				}
-				else game.combat.cleanupAfterCombat();
+			
+			game.menu();
+			
+			game.addButtonDisabled(0, "Sex", "This scene requires you to have genitals and sufficient arousal.");
+			game.addButtonDisabled(1, "B. Feed", "This scene requires you to have enough milk.");
+			
+			if (player.lust >= 33 && !player.isGenderless()) {
+				outputText("  You realize she'd make a perfect receptacle for your lusts.  Do you have your way with her?");
+				game.addButton(0, "Sex", game.lake.fetishCultistScene.playerRapesCultist);
 			}
+			
+			if (player.hasStatusEffect(StatusEffects.Feeder) || player.lactationQ() >= 500) {
+				game.addButton(1, "B. Feed", game.lake.fetishCultistScene.fetishCultistHasAMilkFetish);
+			}
+		
+			game.addButton(14, "Leave", game.combat.cleanupAfterCombat);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void

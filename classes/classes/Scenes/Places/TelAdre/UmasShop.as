@@ -1580,15 +1580,20 @@
 			addButton(0, "EroMassage", sexEroticMassage);
 			addButton(1, "Eat Her Out", sexEatHerOut);
 
-			if (player.gender >= 2 && player.lowerBody != 4) // Vaginas & not centaurs
+			if (player.hasVagina() && !player.isTaur()) // Vaginas & not centaurs
 			{
 				addButton(2, "Fingerbang", sexGetFingered);
+			} else {
+				addDisabledButton(2, "Fingerbang", "This scene requires you to have vagina. It can't accomodate taurs.");
 			}
 
 			if (player.hasCock()) // Has a dick
 			{
 				addButton(3, "Handjob", sexHandjob);
 				addButton(4, "Get Blown", sexGetABJFromDisMilfyLesboSlut);
+			} else {
+				addDisabledButton(3, "Handjob", "This scene requires you to have cock.");
+				addDisabledButton(4, "Get Blown", "This scene requires you to have cock.");
 			}
 			addButton(14,"Back",buildCoreMenu);
 		}

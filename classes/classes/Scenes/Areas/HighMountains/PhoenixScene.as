@@ -43,22 +43,36 @@ package classes.Scenes.Areas.HighMountains
 		//VICTORY!
 		public function winAgainstPhoenix():void {
 			flags[kFLAGS.PHOENIX_HP_LOSS_COUNTER] = 0; //Reset counter if you win.
+	
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.", true);
+				combat.cleanupAfterCombat();
+				return;
+			}
+			
 			outputText("With one final grunt, the phoenix collapses against a nearby rock, barely able to support herself. The once-proud soldier has been reduced to a " + (monster.lust >= monster.eMaxLust() ? "dazed, lust-crazed slut, desperately pulling at her clothing in a mad attempt to expose herself": "a beaten, battered heap; completely unable to resist your advances") + ". ");
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
-				outputText("What do you do? \n\n");
+			outputText("What do you do? \n\n");
+			
+			menu();
+			addDisabledButton(0, "Missionary", "This scene requires you to have fitting cock and sufficient arousal.");
+			addDisabledButton(1, "Fuck Ass", "This scene requires you to have fitting cock and sufficient arousal.");
+			addDisabledButton(2, "Get Wanked", "This scene requires you to have cock and sufficient arousal.");
+			addDisabledButton(3, "Ride Anal", "This scene requires you to have sufficient arousal.");
+			addDisabledButton(4, "Ride Vaginal", "This scene requires you to have vagina and sufficient arousal.");
+			
+			if (player.lust >= 33) {
 				if (player.hasCock()) {
 					if (player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(0, "Missionary", missionaryWithPhoenix);
-					else outputText("<b>Unfortunately, " + (player.cocks.length == 1 ? "your cock doesn't": "none of your cocks") + " fit in her vagina.</b>\n");
+					else addDisabledButton(0, "Missionary", "Unfortunately, " + (player.cocks.length == 1 ? "your cock doesn't": "none of your cocks") + " fit in her vagina.");
 					if (player.cockThatFits(monster.analCapacity()) >= 0) addButton(1, "Fuck Ass", fuckPhoenixsButt);
-					else outputText("<b>Unfortunately, " + (player.cocks.length == 1 ? "your cock doesn't": "none of your cocks") + " fit in her ass.</b>\n");
+					else addDisabledButton(1, "Fuck Ass", "Unfortunately, " + (player.cocks.length == 1 ? "your cock doesn't": "none of your cocks") + " fit in her ass.");
 					addButton(2, "Get Wanked", getWanked);
 				}
 				addButton(3, "Ride Anal", rideAnal);
 				if (player.hasVagina()) addButton(4, "Ride Vaginal", rideVaginal);
-				//addButton(5, "Suck Her Dick", rideAnal);
-				addButton(14, "Leave", combat.cleanupAfterCombat);
 			}
-			else combat.cleanupAfterCombat();
+			
+			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
 		
 		public function missionaryWithPhoenix():void {

@@ -691,6 +691,14 @@ public function rubisFuckingHouseYouPervert():void {
 private function rubiSexMenu():void {
 	//[Fuck Rubi (if player has cock, OR at least a 4</i>\" clit)] [Dildo Fuck (If player has Deluxe Dildo)] [Tease] [Release (Only if Normal or Incubus Rubi who has been teased)] [Titfuck (Bimbo Rubi only)] [Give Item]
 	menu();
+	addDisabledButton(0, "Fuck", "This scene requires you to have cock or big enough clit and sufficient arousal.");
+	addDisabledButton(1, "Dildo Fuck", "This scene requires you to have Deluxe Dildo and sufficient arousal.");
+	// 2 - always on
+	addDisabledButton(3, "Release", "This scene requires Rubi to be pent up.");
+	addDisabledButton(4, "Train", "This scene requires you to have overly large cock and high enough Rubi affection.");
+	addDisabledButton(5, "Train", "This scene requires Rubi to have decently sized cock and high enough affection.");
+	addDisabledButton(6, "Hotdogging", "This scene requires you to have cock.");
+	
 	if (player.lust >= 33) {
 		if (player.hasCock() || (player.hasVagina() && player.getClitLength() >= 4)) addButton(0, "Fuck", fuckRubi);
 		if (player.hasKeyItem("Deluxe Dildo") >= 0) addButton(1, "Dildo Fuck", dildoFuckRubi);

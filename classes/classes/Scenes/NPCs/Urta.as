@@ -396,7 +396,11 @@ public function urtaBarApproach():void {
 			if (flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] >= 5) addButton(1,"Suck Off",slurpFawkesCocksForFunAndInflation, null, null, null, "Suck Urta's dick until she cums! \n\nNote: Given how long she hasn't relieved, this is most likely going to fill your belly.");
 			else addButton(1,"Suck Off",blowUrtaUnderTheTableLuv, null, null, null, "Suck Urta's dick until she cums!");
 			addButton(2, "Eat Out", eatUrtaOutNomNomPussy, null, null, null, "Get a taste of Urta's vagina! (And optionally, drink a glass of her cum.)");
-			if (player.hasCock() && !player.isTaur()) addButton(3, "Vixen & Cream", vixenAndCreamPart1, false, null, null, "Try something special! \n\nNOTE: This is very long! Don't select this if you have ADHD.");
+			if (player.hasCock() && !player.isTaur()) {
+				addButton(3, "Vixen & Cream", vixenAndCreamPart1, false, null, null, "Try something special! \n\nNOTE: This is very long! Don't select this if you have ADHD.");
+			} else {
+				addDisabledButton(3, "Vixen & Cream", "This scene requires you to have cock. It can't accomodate taurs.");
+			}
 			addButton(14, "Leave", telAdre.barTelAdre);
 			return;
 		}
@@ -1167,17 +1171,24 @@ internal function goBackToUrtasForLuvinzII():void {
 
 	outputText("Urta is clearly looking to take a more passive role, and she begins stroking herself as she asks, \"<i>How do you want to fuck, lover?</i>\"", false);
 	//[M: VAGINAL] [F: RIDE] [GENDERLESS/M: RIDE ANAL]
-	var vaginal:Function = null;
-	var femaleRides:Function = null;
-	if (player.totalCocks() > 0) vaginal = dudeFuckingUrtasCooch;
-	if (player.hasVagina()) femaleRides = rideUrtaTenderFemale;
-	//simpleChoices("Fuck Vagina",vaginal,"Ride (Vaginal)",femaleRides,"Ride (Anal)",tenderTakeItUpTheAssFromUrta,"No Condoms",condomlessUrtaInHouseSmex,"",0);
 	menu();
-	addButton(0,"Fuck Vagina",vaginal);
-	addButton(1,"Ride(Vaginal)",femaleRides);
-	addButton(2,"Ride(Anal)",tenderTakeItUpTheAssFromUrta);
-	addButton(3,"No Condoms",condomlessUrtaInHouseSmex);
-	if (player.isGoo() && player.hasGooSkin()) addButton(4,"Goo (Weird)",urtaGooTesticleVoreRuinedOrgasms);
+	if (player.totalCocks() > 0) {
+		addButton(0, "Fuck Vagina", dudeFuckingUrtasCooch);
+	} else {
+		addDisabledButton(0, "Fuck Vagina", "This scene requires you to have cock.");
+	}
+	if (player.hasVagina()) {
+		addButton(1, "Ride(Vaginal)", rideUrtaTenderFemale);
+	} else {
+		addDisabledButton(1, "Ride(Vaginal)", "This scene requires you to have vagina.");
+	}
+	addButton(2, "Ride(Anal)", tenderTakeItUpTheAssFromUrta);
+	addButton(3, "No Condoms", condomlessUrtaInHouseSmex);
+	if (player.isGoo() && player.hasGooSkin()) {
+		addButton(4, "Goo (Weird)", urtaGooTesticleVoreRuinedOrgasms);
+	} else {
+		addDisabledButton(4, "Goo (Weird)", "This scene requires you to have goo body.");
+	}
 }
 
 private function rideUrtaTenderFemale():void {
@@ -2060,22 +2071,34 @@ internal function urtaHomeLuvLuvinsMenu():void {
 	menu();
 	if (player.hasVagina()) {
 		outputText("  She could ride your vagina.");
-		addButton(0,"Ride Vag",rideUrtasCoochLoveyDovey);
+		addButton(0, "Ride Vag", rideUrtasCoochLoveyDovey);
+	} else {
+		addDisabledButton(0, "Ride Vag", "This scene requires you to have vagina.");
 	}
 	outputText("  She could fuck your ass.");
-	addButton(1,"Ride Ass",rideUrtaInButtAtHomeLove);
+	addButton(1, "Ride Ass", rideUrtaInButtAtHomeLove);
 	if (player.hasCock()) {
 		outputText("  Urta could 69 with you, let you fuck her pussy, or you could even fuck her cunt full of jizz and then lick her to a second cum.");
-		addButton(2,"69",oralFiestyUberExplosionUrta);
-		addButton(3,"Vag Fuck",urtasCoochiNeedsFuckedLove);
-		addButton(5,"FuckAndLick",lickOutUrtaAtHome);
+		addButton(2, "69", oralFiestyUberExplosionUrta);
+		addButton(3, "Vag Fuck", urtasCoochiNeedsFuckedLove);
+		addButton(5, "FuckAndLick", lickOutUrtaAtHome);
+	} else {
+		addDisabledButton(2, "69", "This scene requires you to have cock.");
+		addDisabledButton(3, "Vag Fuck", "This scene requires you to have cock.");
+		addDisabledButton(5, "FuckAndLick", "This scene requires you to have cock.");
 	}
-	if (player.gender > 0) {
+	if (!player.isGenderless()) {
 		outputText("  There's always the option to ask her to go condomless for a bit of extra fun.");
-		addButton(4,"No Condoms",condomlessUrtaInHouseSmex);
+		addButton(4, "No Condoms", condomlessUrtaInHouseSmex);
+	} else {
+		addDisabledButton(4, "No Condoms", "This scene requires you to have genitals.");
 	}
-	if (player.isGoo() && player.hasGooSkin()) addButton(6,"Goo (Weird)",urtaGooTesticleVoreRuinedOrgasms);
-	if (flags[kFLAGS.URTA_PETPLAY_DONE] >= 0 && player.gender > 0) addButton(7,"Collar",urtaPetPlayDeletedForeverBecauseThirdProovedMeWrongAboutDice);
+	if (player.isGoo() && player.hasGooSkin()) {
+		addButton(6,"Goo (Weird)",urtaGooTesticleVoreRuinedOrgasms);
+	} else {
+		addDisabledButton(6, "Goo (Weird)", "This scene requires you to have goo body.");
+	}
+	if (flags[kFLAGS.URTA_PETPLAY_DONE] >= 0 && !player.isGenderless()) addButton(7, "Collar", urtaPetPlayDeletedForeverBecauseThirdProovedMeWrongAboutDice);
 }
 
 private function urtasCoochiNeedsFuckedLove():void {
@@ -3794,13 +3817,22 @@ private function condomlessUrtaInHouseSmex():void {
 	else outputText("\n\nUrta rolls her eyes and declares, \"<i>Fine, but you'll help me clean up the mess, love.</i>\"  She's practically panting as she says so, cock jutting in the air as ribbons of pre dangle from that rigid tower.  Watching through lusty, half-hidden eyes, the vixen seems curious as to just how messy you want to get.");
 	//[Peg Her Ass] [Fill Me Up]
 	menu();
-	if (player.hasCock()) {
-		if (player.cockThatFits(urtaCapacity()) >= 0) addButton(0,"Peg Her Ass",pegUrtasAssMessy);
-		else outputText("\n\n<b>You're too big to peg her ass and make her bust a nut all over herself.</b>");
+	if (player.cockThatFits(urtaCapacity()) >= 0) {
+		addButton(0, "Peg Her Ass", pegUrtasAssMessy);
+	} else {
+		addDisabledButton(0, "Peg Her Ass", "This scene requires you to have fitting cock.");
 	}
-	if (player.hasVagina()) addButton(1,"Fill Me Up",fillMeUpPleaseUrta);
-	if (player.gender > 0 && player.isNaga()) addButton(2,"TailFun",nagaOnUrtaMess);
-	addButton(4,"Back", goBackToUrtasForLuvinz);
+	if (player.hasVagina()) {
+		addButton(1, "Fill Me Up", fillMeUpPleaseUrta);
+	} else {
+		addDisabledButton(1, "Fill Me Up", "This scene requires you to have vagina.");
+	}
+	if (!player.isGenderless() && player.isNaga()) {
+		addButton(2, "TailFun", nagaOnUrtaMess);
+	} else {
+		addDisabledButton(2, "TailFun", "This scene requires you to have naga tail and genitals.");
+	}
+	addButton(14, "Back", goBackToUrtasForLuvinz);
 }
 //[Peg Her Ass]
 private function pegUrtasAssMessy():void {

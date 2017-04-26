@@ -34,7 +34,7 @@ import classes.GlobalFlags.kFLAGS;
 
 		
 		//Key items
-		public var keyItems:Array;
+		public var keyItems:/*KeyItemClass*/Array;
 		
 		public function Character()
 		{

@@ -25,6 +25,7 @@ public function kaijuMeeting():void {
 		menu();
 		addButton(0,"Yes",meetDatKaijuYo);
 		addButton(1,"No",noMeetingKaijus);
+		addButton(2,"Never",noMeetingKaijus, true);
 	}
 	else {
 		if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && !kaijuCock()) kaijuGrowsWangus();
@@ -38,9 +39,13 @@ private function kaijuCock():Boolean {
 }
 
 //[If no]
-private function noMeetingKaijus():void {
+private function noMeetingKaijus(never:Boolean=false):void {
 	clearOutput();
 	outputText("You continue rowing on, away from the hilly island.");
+	if (never) {
+		outputText(" It would be better to avoid it in future as well.");
+		flags[kFLAGS.KAIJU_DISABLED] = 1;
+	}
 	//[There is still a chance of finding the hill later]
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -62,7 +67,7 @@ private function meetDatKaijuYo():void {
 	menu();
 	
 	addButton(0,"Compliment",complimentKaiju);
-	if (player.gender > 0) addButton(1,"Flirt",flirtWithKaiju);
+	if (!player.isGenderless()) addButton(1,"Flirt",flirtWithKaiju);
 	addButton(2,"Insult",insultTheKaijuFirstMeeting);
 }
 
@@ -276,17 +281,19 @@ private function repeatKaijuEncounter():void {
 	spriteSelect(103);
 	outputText("As you row through the lake you encounter a familiar sight, a giant shell as big as an island.  As you row near it the terrapin giantess, Venus emerges from the corrupted waters.  One giant green hand plays with her titanic jugs as the other remains in the water playing with her unseen sex.  It takes several moments before she notices you.  \"<i>Oh my, it's you again, my favorite voyeur!  Did you come back for a little peek, or do you want to have some real fun?</i>\"");
 	menu();
-	var drafts:int = 0;
-	//[If PC has 15 incubus drafts (regular or pure) and Venus is not already a herm]
-	if (player.itemCount(consumables.INCUBID) + player.itemCount(consumables.P_DRAFT) >= 10 && !kaijuCock()) {
-		outputText("\n\nIt occurs to you that you have enough Incubi Drafts on you to even affect someone of the turtle girl’s great size.  Maybe you could give her a cock?");
-		addButton(5,"Give Cock",yesTurnKaijuFuta);
-	}
 	//[Peek][Hug Boobs][Fuck][Urethra Fuck (only if Venus is a herm)][Talk][Leave]
 	addButton(0,"Peek",peekAtSomePhatAssKaijuButt);
 	addButton(1,"Hug Boobs",kaijuRepeatBoobHug);
 	addButton(2,"Fuck",fuckThisGiantYouDumbCunt);
-	if (kaijuCock()) addButton(3,"UrethraFuck",urethraFuckDatGiantCock);
+	if (kaijuCock()) addButton(3, "UrethraFuck", urethraFuckDatGiantCock);
+	else {
+		//[If PC has 15 incubus drafts (regular or pure) and Venus is not already a herm]
+		if (player.itemCount(consumables.INCUBID) + player.itemCount(consumables.P_DRAFT) >= 10) {
+			outputText("\n\nIt occurs to you that you have enough Incubi Drafts on you to even affect someone of the turtle girl’s great size.  Maybe you could give her a cock?");
+			addButton(3,"Give Cock",yesTurnKaijuFuta);
+		} else 
+			addDisabledButton(3, "Give Cock", "Maybe with ten Incubi Drafts you could transform her?.");
+	}
 	addButton(4,"Talk",talkToKaiju);	
 	addButton(14,"Leave",leaveRepeatKaiju);
 }
@@ -304,9 +311,9 @@ private function kaijuRepeatBoobHug():void {
 	
 	outputText("\n\n\"<i>Oh my, it seems someone is enjoying my special hug,</i>\" the giant beauty says noticing your rising arousal.  The lusty giant removes the lower half of your [armor] revealing your ");
 	if (player.hasCock()) outputText(player.multiCockDescriptLight());
-	if (player.gender == 3) outputText(" and ");
+	if (player.isHerm()) outputText(" and ");
 	if (player.hasVagina()) outputText("[vagina]");
-	if (player.gender == 0) outputText("bare groin");
+	if (player.isGenderless()) outputText("bare groin");
 	outputText(".  \"<i>Let's have some fun!</i>\"");
 	
 	//[if player has cock]
@@ -327,7 +334,7 @@ private function kaijuRepeatBoobHug():void {
 		player.orgasm('Vaginal');
 	}
 	//[if player is genderless]
-	if (player.gender == 0) {
+	if (player.isGenderless()) {
 		outputText("\n\nThe giantess begins to moan as she rubs you around her nipple, firmly pressing your body into her breast.  She moves you over to her other breast, using your body to tease her other stiffening nipple.  \"<i>Would you mind licking it?  Please?</i>\" she asks, pressing your face to her nipple.  You open your mouth to stick out your tongue when suddenly she pushes it up against your mouth, quickly getting the first few inches of pink nipple past your lips.  Your mouth is stuffed with nipple flesh, your tongue pushed to the bottom of your mouth.  She slowly forces more of herself into your, her nipple sliding down into your throat.  Her moans grow louder when you suddenly feel liquid spurting down into your gut.  She has begun lactating, pumping you full of tainted turtle milk!  You quickly fill up as your stomach expands with gallons of white fluid, until you're gurgling with milk, the stuff leaking around the nipple in your mouth.  When you feel like you will soon burst she pops her nip out and coats you with her milk.");
 	}
 	//[All genders]

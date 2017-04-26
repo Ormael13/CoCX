@@ -77,19 +77,19 @@ private function consensualSatyrFuck(loc:int = 0):void {
 	//Trick him only available to High Int PCs and Skip Foreplay only available to High Libido PCs.
 
 	//(if High Int)
-	if (player.inte > 60 && player.lust <= 99) {
+	if (player.inte > 60 && player.lust < player.maxLust()) {
 		outputText("\n\nPerhaps you could trick him into knocking himself out with it?");
 		addButton(0, "Trick Him", trickZeSatyr);
-	}
+	} else addDisabledButton(0, "Trick Him", "Tricking him into knocking himself out would require some smart moves and clear enough head.");
 	//(if High Libido)
 	if (player.lib > 60) {
 		outputText("\n\nThat cock of his looks yummy, though... there's no need for all this ruse, you're pretty sure you know how to handle a dick; maybe you should skip foreplay and let him fill you up...");
 		addButton(2, "Skip Foreplay", skipForeplay);
-	}
+	} else addDisabledButton(2, "Skip Foreplay", "You are not lusty enough to rush things.");
 	if (player.lust >= 33) {
 		outputText("\n\nYou could drink just one more and have sex with him if you like.");
 		addButton(3, "Drink & Sex", drinkAndSex);
-	}
+	} else addDisabledButton(3, "Drink & Sex", "You are not lusty enough to rush things.");
 	
 	//What should you do?
 	//[Trick him] [Keep Drinking] [Skip Foreplay] [Leave]
@@ -248,26 +248,38 @@ internal function loseToSatyr():void {
 internal function defeatASatyr():void {
 	clearOutput();
 	spriteSelect(98);
+	
+	if (flags[kFLAGS.SFW_MODE] > 0) {
+		outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.", true);
+		combat.cleanupAfterCombat();
+		return;
+	}
+	
 	//Lust Victory
 	if (monster.lust >= monster.eMaxLust()) outputText("The satyr collapses to its caprine knees, bleating in dismay as it paws frantically at its huge cock, oblivious to everything in its need to get off.  Already, pre-cum is fountaining from the goat-man's shaft, his jerking motions smearing the pungent sexual fluid across the crown.");
 	//HP Victory
 	else outputText("Beaten and dazed, the satyr collapses to its caprine knees, shaking his head in a futile attempt to recover himself from the brutal trouncing you've just given him.  The combination of the blows and his previous drunken state mean he's quite incapable of getting back, however.");
-	var butt:Function = null;
-	var faces:Function = null;
-	if (player.lust < 33 || flags[kFLAGS.SFW_MODE] > 0) {
-		combat.cleanupAfterCombat();
-		return;
-	}
-	if (player.lust >= 33 && player.gender > 0) {
+	
+	menu();
+	addDisabledButton(0, "FuckHisButt", "This scene requires you to have fitting cock and sufficient arousal.", "Fuck His Butt");
+	addDisabledButton(1, "Ride Face", "This scene requires you to have vagina and sufficient arousal.");
+	// Button 2 is used for Lusty Maidens Armor special scene and is hidden without it
+	
+	if (player.lust >= 33 && !player.isGenderless()) {
 		outputText("\n\nYou wonder if you should give the satyr some sort of payback for attempting to rape you... do you take advantage of the helpless goat-man?");
 		//[Male][Female][Leave]
-		if (player.hasCock() && player.cockThatFits(monster.analCapacity()) >= 0) butt = malesTakeAdvantageOfSatyrs;
-		else if (player.hasCock()) outputText("\n\nYou're too big to fuck his ass...");
-		if (player.hasVagina()) faces = femaleTakesAdvantageOfSatyr;
+		if (player.hasCock() && player.cockThatFits(monster.analCapacity()) >= 0) {
+			addButton(0, "FuckHisButt", malesTakeAdvantageOfSatyrs);
+		}
+		if (player.hasVagina()) {
+			addButton(1, "Ride Face", femaleTakesAdvantageOfSatyr);
+			if (player.biggestTitSize() >= 4 && player.armor == armors.LMARMOR) {
+				addButton(2, "Ride Face", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+			}
+		}
 	}
-	var bikiniTits:Function = null;
-	if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor == armors.LMARMOR) bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
-	simpleChoices("FuckHisButt", butt, "Ride Face", faces, "B.Titfuck", bikiniTits, "", null, "Leave", combat.cleanupAfterCombat);
+	
+	addButton(14, "Leave", combat.cleanupAfterCombat);
 }
 //Female (Z)
 private function femaleTakesAdvantageOfSatyr():void {

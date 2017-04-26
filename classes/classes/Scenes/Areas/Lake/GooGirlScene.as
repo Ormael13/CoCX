@@ -295,80 +295,82 @@ package classes.Scenes.Areas.Lake
 			outputText("The excitement of your scuffle proves too much for the goo-girl to keep up with and she collapses into the slime of her lower torso, her skin wiggling as she struggles to maintain cohesion. Her expression is one of disappointment, and she looks at you with big, hopeful eyes, reaching out a hand, as if to offer an apology for her over-exuberance.\n\n", false);
 
 			//Victory – Neuter
-			if (player.gender == 0 || player.lust < 33 || flags[kFLAGS.SFW_MODE] > 0) {
+			if (flags[kFLAGS.SFW_MODE] > 0) {
 				outputText("The goo-girl, while an unusual creature, seems unable to communicate and clearly has nothing of value.  Of no particular use in your quest, you shoo the dripping blob back to the shore. She seems disappointed at first, but bounces back quickly enough, spotting movement in the lake.  She splashes in and takes off at top speed, " + gooColor9() + " blur while you take your leave.", false);
 				combat.cleanupAfterCombat();
+				return;
 			}
-			else {
-				outputText("With the goo-girl defeated, her unusual body is at your mercy.  What do you do?", false);
-				var sex1S:String = "";
-				var sex1N:Function =null;
-				var sex2S:String = "";
-				var sex2N:Function =null;
-				var sex3S:String = "";
-				var sex3N:Function =null;
-				var sex4S:String = "";
-				var sex4N:Function =null;
-				var valeria:Function = kGAMECLASS.valeria.valeriaAndGooThreeStuff;
-				if (player.armorName != "goo armor" || player.isButtPregnant() || player.isPregnant()) valeria = null;
-				var eggs:Function =null;
-				if (player.canOvipositBee()) eggs = layBeeEggsInGoo;
+			
+			outputText("With the goo-girl defeated, her unusual body is at your mercy.  What do you do?", false);
+			menu();
+			
+			addDisabledButton(0, "DickSex", "This scene requires you to have cock and sufficient arousal.");
+			addDisabledButton(1, "BigDickSex", "This scene requires you to have huge cock and sufficient arousal.");
+			addDisabledButton(2, "Herm Sex", "This scene requires you to be herm and have sufficient arousal.");
+			addDisabledButton(3, "FemFuck", "This scene requires you to be female and have sufficient arousal.");
+			addDisabledButton(4, "Exhib.Fuck", "This scene requires you to be female exhibitionist and have sufficient arousal."); // actually, should be fitting herms as well
+			addDisabledButton(5, "Breastfeed", "This scene requires you to have enough milk.");
+			addDisabledButton(6, "Lay Eggs", "This scene requires you to have bee ovipositor and enough eggs.");
+			addDisabledButton(7, "Valeria", "This scene requires you to have goo armor, sufficient arousal and not be pregnant.");
+			
+			if ((flags[kFLAGS.GOO_TFED_MEAN] == 0 && flags[kFLAGS.GOO_TFED_NICE] == 0) && flags[kFLAGS.TIMES_FUCKED_NORMAL_GOOS] >= 2)
+				addDisabledButton(8, "Make Slave", "Maybe if you drugged one of these things with a black egg and some succubi milk, you could make it your pet?");
+			
+			addButton(14, "Leave", combat.cleanupAfterCombat);
+			
+			if (player.lust >= 33) {
 				if (player.hasCock()) {
-					if (player.cocks[player.smallestCockIndex()].cockLength < 24) {
-						sex1S = "DickSex";
-						sex1N = createCallBackFunction(gooMaleRape,2);
+					if (player.smallestCockLength() < 24) {
+						addButton(0, "DickSex", createCallBackFunction(gooMaleRape, 2));
 					}
 					if (player.longestCockLength() >= 24) {
-						sex2S = "BigDickSex";
-						sex2N = createCallBackFunction(gooMaleRape,1);
-					}
-					if (player.hasVagina()) {
-						sex3S = "Herm Sex";
-						sex3N = victoryHermSex;
+						addButton(1, "BigDickSex", createCallBackFunction(gooMaleRape, 1));
 					}
 				}
-				else if (player.hasVagina()) {
-					sex1S = "Fuck";
-					sex1N = normalFemaleRapesAGooGirl;
-					if (flags[kFLAGS.PC_FETISH] >= 1) {
-						sex2S = "Exhib.Fuck";
-						sex2N = exhibitionismGooGirlVictoryRape;
+				if (player.isHerm()) {
+					addButton(2, "Herm Sex", victoryHermSex);
+				}
+				if (player.isFemale()) {
+					addButton(3, "FemFuck", normalFemaleRapesAGooGirl);
+					if (flags[kFLAGS.PC_FETISH] >= 1 || player.cor >= 66 - player.corruptionTolerance() || player.findPerk(PerkLib.Pervert) >= 0) {
+						addButton(4, "Exhib.Fuck", exhibitionismGooGirlVictoryRape);
 					}
 				}
-				if (player.findPerk(PerkLib.Feeder) >= 0) {
-					sex4S = "Breastfeed";
-					sex4N = victoryRapeAGooGalAsFeeder;
-				}
-				var gooTF:Function = null;
-				//corrupt chances
-				if ((flags[kFLAGS.GOO_TFED_MEAN] == 0 && flags[kFLAGS.GOO_TFED_NICE] == 0) && flags[kFLAGS.TIMES_FUCKED_NORMAL_GOOS] >= 2) {
-					if (player.cor < 50 && (player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && (player.hasItem(consumables.BLACKEG) || player.hasItem(consumables.L_BLKEG))) {
-						kGAMECLASS.latexGirl.pureGooRecruitmentStart();
-						return;
-					}
-					else if (flags[kFLAGS.PC_KNOWS_ABOUT_BLACK_EGGS] > 0) {
-						//Recruitment:
-						//Notice After Victory:
-						if (flags[kFLAGS.TIMES_THOUGHT_ABOUT_GOO_RECRUITMENT] == 0) {
-							outputText("\n\nWith this quivering lump of goo before you, a devilish idea comes to mind.  What would it take to make one of these aqueous sluts your willing slave?  ...Something to make them a little solid - perhaps one of those black eggs to make its skin a little more solid and restrainable?  Maybe a succubi milk to help make it a little more human-like, and the increased libido certainly couldn't hurt.");
-							flags[kFLAGS.TIMES_THOUGHT_ABOUT_GOO_RECRUITMENT]++;
-						}
-						//(Repeat)
-						else {
-							outputText("\n\nAs you survey your victory, you remember the idea you had before - maybe if you drugged one of these things with a black egg and some succubi milk, you could make it your pet?");
-						}
-						if ((player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && (player.hasItem(consumables.BLACKEG) || player.hasItem(consumables.L_BLKEG))) {
-							outputText("  Good thing you have those handy!");
-							gooTF = kGAMECLASS.latexGirl.meanGooGirlRecruitment;
-						}
-					}
-				}
-				if (valeria != null) {
+				if (player.armorName == "goo armor" && !player.isButtPregnant() && !player.isPregnant()) {
 					outputText("\n\nValeria's armored form seems to ebb towards the puddled goo-woman before you, almost eager to close the distance with her despite her pledge to protect you. ");
 					if (flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] == 0) outputText("Do you offer a threesome with the girl to Valeria? It could get a little weird....");
 					else outputText("Do you offer a threesome with the girl to Valeria? She'll likely try flood with you with more sloshing, shuddering pleasure than your body can handle.");
+					addButton(7, "Valeria", kGAMECLASS.valeria.valeriaAndGooThreeStuff, undefined, undefined, undefined, "Have a treesome with Valeria.");
 				}
-				choices(sex1S, sex1N, sex2S, sex2N, sex3S, sex3N, sex4S, sex4N, "Lay Eggs", eggs, "", null, "", null, "Valeria", valeria, "Make Slave", gooTF, "Leave", combat.cleanupAfterCombat);
+			}
+			if (player.findPerk(PerkLib.Feeder) >= 0 || player.lactationQ() >= 500) {
+				addButton(5, "Breastfeed", victoryRapeAGooGalAsFeeder);
+			}
+			if (player.canOvipositBee()) {
+				addButton(6, "Lay Eggs", layBeeEggsInGoo);
+			}
+			//corrupt chances
+			if ((flags[kFLAGS.GOO_TFED_MEAN] == 0 && flags[kFLAGS.GOO_TFED_NICE] == 0) && flags[kFLAGS.TIMES_FUCKED_NORMAL_GOOS] >= 2) {
+				if (player.cor < 50 + player.corruptionTolerance() && (player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && (player.hasItem(consumables.BLACKEG) || player.hasItem(consumables.L_BLKEG))) {
+					kGAMECLASS.latexGirl.pureGooRecruitmentStart();
+					return;
+				}
+				else if (flags[kFLAGS.PC_KNOWS_ABOUT_BLACK_EGGS] > 0) {
+					//Recruitment:
+					//Notice After Victory:
+					if (flags[kFLAGS.TIMES_THOUGHT_ABOUT_GOO_RECRUITMENT] == 0) {
+						outputText("\n\nWith this quivering lump of goo before you, a devilish idea comes to mind.  What would it take to make one of these aqueous sluts your willing slave?  ...Something to make them a little solid - perhaps one of those black eggs to make its skin a little more solid and restrainable?  Maybe a succubi milk to help make it a little more human-like, and the increased libido certainly couldn't hurt.");
+						flags[kFLAGS.TIMES_THOUGHT_ABOUT_GOO_RECRUITMENT]++;
+					}
+					//(Repeat)
+					else {
+						outputText("\n\nAs you survey your victory, you remember the idea you had before - maybe if you drugged one of these things with a black egg and some succubi milk, you could make it your pet?");
+					}
+					if ((player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && (player.hasItem(consumables.BLACKEG) || player.hasItem(consumables.L_BLKEG))) {
+						outputText("  Good thing you have those handy!");
+						addButton(8, "Make Slave", kGAMECLASS.latexGirl.meanGooGirlRecruitment);
+					}
+				}
 			}
 		}
 

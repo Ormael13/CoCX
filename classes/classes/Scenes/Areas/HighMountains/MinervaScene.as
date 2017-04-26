@@ -413,10 +413,12 @@ private function genericMenu(display:Boolean = false):void {
 	addButton(0,"Appearance",minervaAppearance);
 	addButton(1,"Talk",minervaTalkSelect);
 	if (player.lust >= 33) addButton(2,"Sex",minervaSexMenu);
+	else addButtonDisabled(2, "Sex", "You are not horny enough.");
 	addButton(3,"Eat",eatSomethingYouCunt);
 	addButton(4,"Drink",getADrinkYouBitch);
 	addButton(5, "Spar", fightMinerva);
 	if (minervaRomanced() && model.time.hours >= 20) addButton(6, "Sleep With", sleepWithMinerva);
+	else addDisabledButton(6, "Sleep With", "Available at evenings with high enough affection.");
 	if (player.hasKeyItem("Rathazul's Purity Potion") >= 0) addButton(7, "Purify", minervaPurification.purificationByRathazul)
 	if (player.hasKeyItem("Marae's Seed") >= 0) addButton(8, "Plant Seed", minervaPurification.purificationByMarae)
 	addButton(14, "Leave", camp.returnToCampUseOneHour);	
@@ -760,18 +762,24 @@ private function minervaSexMenu(display:Boolean = true):void
 		}
 	}
 	menu();
-	var btnIdx:int = 0;
+	addDisabledButton(0, "FuckHerButt", "This scene requires you to have fitting cock.");
+	addDisabledButton(1, "FuckCowgirl", "This scene requires you to have fitting cock and high enough Minerva affection.");
+	addDisabledButton(2, "RestrainFuck", "This scene requires you to have fitting cock and high enough Minerva affection.");
+	// 3 - always on
+	// 4 - always on
+	addDisabledButton(5, "Get BJ", "This scene requires you to have cock.");
+	
 	if (player.hasCock() && player.cockThatFits(minervaACapacity()) >= 0)
-		addButton(btnIdx++, "FuckHerButt", fuckMinervasAsshole);
+		addButton(0, "FuckHerButt", fuckMinervasAsshole);
 	if (player.hasCock() && player.cockThatFits(minervaVCapacity()) >= 0 && minervaRomanced())
 	{
-		addButton(btnIdx++, "FuckCowgirl", minervaCowgirlSex);
-		addButton(btnIdx++, "RestrainFuck", fuckMinervaWithHerHandsBehindHerBack);
+		addButton(1, "FuckCowgirl", minervaCowgirlSex);
+		addButton(2, "RestrainFuck", fuckMinervaWithHerHandsBehindHerBack);
 	}
-	addButton(btnIdx++, "TakeHerDick", chooseVagOrAss);
-	addButton(btnIdx++, "EatHerOut", goDownOnAHermAndLoveItYouDirtySlutYou);
+	addButton(3, "TakeHerDick", chooseVagOrAss);
+	addButton(4, "EatHerOut", goDownOnAHermAndLoveItYouDirtySlutYou);
 	if (player.hasCock())
-		addButton(btnIdx++, "Get BJ", letMinervaSuckYouOff);
+		addButton(5, "Get BJ", letMinervaSuckYouOff);
 	addButton(14, "Leave", genericMenu, true);
 }
 

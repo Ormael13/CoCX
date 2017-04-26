@@ -2684,8 +2684,8 @@
 				//Kill pussies!
 				if (player.vaginas.length > 0) {
 					outputText("\n\nYour vagina clenches in pain, doubling you over.  You slip a hand down to check on it, only to feel the slit growing smaller and smaller until it disappears, taking your clit with it! <b> Your vagina is gone!</b>", false);
-					player.removeVagina(0, 1);
 					player.setClitLength(.5);
+					player.removeVagina(0, 1);
 				}
 				//Dickz
 				if (player.cocks.length > 0) {
@@ -2747,8 +2747,8 @@
 				if (player.vaginas.length > 0) {
 					outputText("Your vagina clenches in pain, doubling you over.  You slip a hand down to check on it, only to feel the slit growing smaller and smaller until it disappears, taking your clit with it!\n\n", false);
 					if (player.bRows() > 1 || player.buttRating > 5 || player.hipRating > 5) outputText("  ", false);
-					player.removeVagina(0, 1);
 					player.setClitLength(.5);
+					player.removeVagina(0, 1);
 				}
 				//Kill extra boobages
 				if (player.bRows() > 1) {
@@ -7662,18 +7662,6 @@
 			if (player.tone > 40 && changes < changeLimit && rand(2) == 0) {
 				outputText("\n\nMoving brings with it a little more jiggle than you're used to.  You don't seem to have gained weight, but your muscles seem less visible, and various parts of you are pleasantly softer.");
 				player.tone -= 4;
-			}
-			//Nipples Turn Back:
-			if (player.hasStatusEffect(StatusEffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nSomething invisible brushes against your " + player.nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
-				changes++;
-				player.removeStatusEffect(StatusEffects.BlackNipples);
-			}
-			//Debugcunt
-			if (changes < changeLimit && rand(3) == 0 && player.vaginaType() == 5 && player.hasVagina()) {
-				outputText("\n\nSomething invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your vagina and find that it has turned back to its natural flesh colour.");
-				player.vaginaType(0);
-				changes++;
 			}
 			if (changes == 0) {
 				outputText("\n\nWell that didn't do much, but you do feel a little refreshed!");

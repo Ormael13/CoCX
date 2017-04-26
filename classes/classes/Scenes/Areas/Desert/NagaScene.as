@@ -697,27 +697,34 @@ internal function nagaRapeChoice():void {
 	if (monster.HP < 1) outputText("You've defeated the naga!  ", true);
 	else outputText("The naga writhes in the sand, masturbating feverishly!  She's completely forgotten about fighting you.  ", true);
 	
-	var eggs:Function = null;
-	if (player.canOvipositSpider()) eggs = eggUpANagaSpiderLike;
-	if (player.canOvipositBee() && player.gender > 0) eggs = beePositANagaPlease;
-	if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
-		outputText("Your body aches for further satisfaction - do you rape the snake woman?", false);
-		if (player.lowerBody == LOWER_BODY_TYPE_GOO) {
-			if (player.gender == 0) simpleChoices("Yes", nagaVictoryGenderless, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "", null, "Leave", combat.cleanupAfterCombat);
-			if (player.gender == 1) simpleChoices("Yes", nagaVictoryMale, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "", null, "Leave", combat.cleanupAfterCombat);
-			if (player.gender == 2) simpleChoices("Yes", nagaVictoryFemale, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "", null, "Leave", combat.cleanupAfterCombat);
-			if (player.gender == 3) simpleChoices("As Male", nagaVictoryMale, "As Female", nagaVictoryFemale, "Gooey Rape", gooNagaRape, "Lay Eggs", eggs, "Leave", combat.cleanupAfterCombat);
-			return;
-		}
-		else {
-			if (player.gender == 0) simpleChoices("Yes", nagaVictoryGenderless, "", null, "", null, "Lay Eggs", eggs, "No", combat.cleanupAfterCombat);
-			if (player.gender == 1) simpleChoices("Yes", nagaVictoryMale, "", null, "", null, "Lay Eggs", eggs, "No", combat.cleanupAfterCombat);
-			if (player.gender == 2) simpleChoices("Yes", nagaVictoryFemale, "", null, "", null, "Lay Eggs", eggs, "Leave", combat.cleanupAfterCombat);
-			if (player.gender == 3) simpleChoices("As Male", nagaVictoryMale, "As Female", nagaVictoryFemale, "", null, "Lay Eggs", eggs, "Leave", combat.cleanupAfterCombat);
-			return;	
-		}
+	if (flags[kFLAGS.SFW_MODE] > 0) {
+		combat.cleanupAfterCombat();
+		return;
 	}
-	combat.cleanupAfterCombat();
+	
+	menu();
+	addDisabledButton(0, "Male Rape", "This scene requires you to have cock and sufficient arousal.");
+	addDisabledButton(1, "Female Rape", "This scene requires you to have vagina and sufficient arousal.");
+	addDisabledButton(2, "Genderless", "This scene requires you to have no genitals and sufficient arousal.");
+	addDisabledButton(3, "Gooey Rape", "This scene requires you to have goo body and sufficient arousal.");
+	addDisabledButton(4, "Lay Eggs", "This scene requires you to have ovipositor and enough eggs. Also requires genitals for bee oviposition.");
+		
+	if (player.lust >= 33) {
+		outputText("Your body aches for further satisfaction - do you rape the snake woman?");
+		if (player.hasCock())
+			addButton(0, "Male Rape", nagaVictoryMale);
+		if (player.hasVagina())
+			addButton(1, "Female Rape", nagaVictoryFemale);
+		if (player.isGenderless())
+			addButton(2, "Genderless", nagaVictoryGenderless);
+		if (player.lowerBody == LOWER_BODY_TYPE_GOO)
+			addButton(3, "Gooey Rape", gooNagaRape);
+	}
+	
+	if (player.canOvipositSpider()) addButton(4, "Lay Eggs", eggUpANagaSpiderLike);
+	if (player.canOvipositBee() && !player.isGenderless())  addButton(4, "Lay Eggs", beePositANagaPlease);
+	
+	addButton(14, "Leave", combat.cleanupAfterCombat);
 }
 
 public function nagaPlayerConstrict():void {

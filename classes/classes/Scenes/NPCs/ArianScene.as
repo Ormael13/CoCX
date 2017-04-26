@@ -652,7 +652,7 @@ private function bargeInOnArian():void {
 	outputText("\n\nSlowly you approach the hiding lizard, and sit on his bed.  You let him know you're flattered to be his object of desire, and that there's no need to hide himself.  If he felt this way about you he should just have said so.");
 	outputText("\n\nArian peeks from under his covers.  \"<i>Y - You mean you're not mad at me?</i>\"  You smile and tell him you aren't.  Arian visibly relaxes, letting his covers fall on his chest.");
 	//(if PC is male)
-	if (player.hasCock() && !player.hasVagina()) {
+	if (player.isMale()) {
 		outputText("\n\n\"<i>I just assumed... since we're both male....</i>\" He explains himself, fidgeting.  \"<i>I didn't know if you... well... if you would mind that....</i>\"");
 		outputText("\n\nYou raise your eyebrow; it seems that Arian is not opposed to some male on male.... What do you tell him?");
 		//[Don't mind] [Like Girls]
@@ -661,14 +661,14 @@ private function bargeInOnArian():void {
 		addButton(1,"Like Girls",youLikeGirlsNotSickLizardDudes);
 	}
 	//(else if PC is genderless)
-	else if (!player.hasCock() && !player.hasVagina()) {
+	else if (player.isGenderless()) {
 		outputText("\n\n\"<i>I just assumed... since we're both male....</i>\"  He fidgets with his hands.  \"<i>I didn't know if you... well... if you would mind that....</i>\"");
 		outputText("\n\nYou stop him in his tracks, and tell him you're not exactly male.  You strip your undergarments and let Arian gaze in fascination at your crotch - your clean, smooth, genderless crotch.  Not believing what he is seeing Arian crawls forward to touch your crotch, mesmerized.  \"<i>How?  You... I... we can't....</i>\"  You silence him with a finger, and tell him there's plenty you two can do.");
 		//(Display Sex Menu)
 		arianSexMenu(false);
 	}
 	//(else if PC is female)
-	else if (!player.hasCock() && player.hasVagina()) {
+	else if (player.isFemale()) {
 		outputText("\n\n\"<i>It's just that... well... you're so beautiful and I'm... I didn't think you....</i>\"  He trails off.");
 		outputText("\n\nYou tell him he looks adorable, especially when he's acting like a hopeless virgin.  At the mention of the word ‘virgin' Arian recoils.  Surprised by this development, you ask him if he really is a virgin.");
 		outputText("\n\nArian hides his face once more inside his covers and says in a whisper, \"<i>Yes....</i>\"");
@@ -704,7 +704,11 @@ private function hermsLikeMaleArian():void {
 	//Penetrate - (Proceed to appropriate scene)
 	//Get Penetrated - (Proceed to appropriate scene)
 	menu();
-	if (player.hasCock() && player.cockThatFits(50) >= 0) addButton(0,"Penetrate",giveArianAnal);
+	if (player.hasCock() && player.cockThatFits(50) >= 0) {
+		addButton(0, "Penetrate", giveArianAnal);
+	} else {
+		addDisabledButton(0, "Penetrate", "This scene requires you to have fitting cock.");
+	}
 	addButton(1,"Get Penetrated",getPenetratedByArianAndHisHitlerMustache);
 }
 //[=Prefer Female=]
@@ -736,17 +740,13 @@ private function youDontMindBeingGayForArian():void {
 	outputText("\n\nArian hides his face once more inside his covers and says in a whisper, \"<i>Yes....</i>\"");
 	outputText("\n\nWell, we'll have to fix that then.  You pull the covers off his face.  Slipping off his bed, you begin stripping off your [armor].  Arian shyly does the same, stripping out of his robes until he is laying in his bed, completely naked.\n\n");
 	//(Proceed Give Anal)
-	
-	// Redirecting the scene if the players cock is too big for the anal scene... not ideal, but its a QWIKFIX™
 	menu();
-	if (player.cockThatFits(50) == -1)
-	{
-		addButton(0, "Next", getBlownByArian);
+	if (player.cockThatFits(50) >= 0) {
+		addButton(0, "Penetrate", giveArianAnal);
+	} else {
+		addDisabledButton(0, "Penetrate", "This scene requires you to have fitting cock.");
 	}
-	else
-	{
-		addButton(0, "Next", giveArianAnal);
-	}
+	addButton(1, "Get Penetrated", getButtWreckedByArian);
 	
 }
 //[=Like Girls=]
@@ -761,7 +761,6 @@ private function youLikeGirlsNotSickLizardDudes():void {
 	outputText("\n\nWith a nervous smile, she asks, \"<i>S-So? How do I look now...?</i>\"");
 	outputText("\n\nYou don't bother replying; you walk up to her and help her up then gently push her towards the bed as you begin stripping.  Arian smiles and lays down. ");
 	//(Proceed to Penetrate)
-	menu();
 	flags[kFLAGS.ARIAN_HERM_CHAT] = 1;
 	flags[kFLAGS.ARIAN_VAGINA] = 1;
 	flags[kFLAGS.ARIAN_BREASTS] = 1;
@@ -1106,7 +1105,6 @@ private function arianMagicLessons():void {
 		}
 	}
 	else if (player.inte < 75) {
-		outputText("<b>Game Note: This isn't canon and will be re-written soonish.</b>");
 		//Teach Blind if PC doesn't know.
 		outputText("\n\nYou say you have a pretty good understanding of how magic works now, so you'd like [Arian em] to get started on the more complex theories.");
 		outputText("\n\nArian rubs [Arian eir] chin in thought.  \"<i>Hmm.... Aha!  Let's discuss conjuration.  This is where we start getting to the more complex theories and methods.  I know I don't have to say it, but pay attention.  Conjuration is an important art for any mage.</i>\"");
@@ -1130,7 +1128,6 @@ private function arianMagicLessons():void {
 	}
 	else { 
 		//Teach Whitefire if PC doesn't know.
-		outputText("<b>Game Note: This isn't canon and will be re-written soonish.</b>");
 		outputText("\n\nYou ask Arian if [Arian ey] wouldn't mind hearing some of your own theories about magic; you've been giving the subject a lot of thought lately.");
 		outputText("\n\nArian looks at you, eyes alight with interest at what you have to say.  \"<i>Please, do share your thoughts.</i>\"  You explain that if you are able to use magic to conjure elements, with a little concentration it might also be possible to alter these elements on the fly; you convey the method you theorized to the lizan mage.");
 		outputText("\n\nIf you can conjure elements at will, would it be possible to also alter them?  You could have one element start out as a non-volatile substance within your hands and then hurl it towards a target whilst also focusing upon changing its nature, thus creating an explosive reaction.  For instance, you can start out with a small gathering of dust and quickly change it into a highly combustible element and make it look like as if you made the air explode.");
@@ -1411,6 +1408,16 @@ private function arianSexMenu(output:Boolean = true):void {
 	}
 	//(Display Options)
 	menu();
+	addDisabledButton(0, "Anal - Pitch", "This scene requires you to have fitting cock.");
+	addDisabledButton(1, "Anal - Catch", "This scene requires Arian to have cock.");
+	addDisabledButton(2, "Get Blown", "This scene requires you to have cock.");
+	addDisabledButton(3, "Blow " + arianMF("Him", "Her"), "This scene requires Arian to have cock.");
+	addDisabledButton(4, "Fuck Vagina", "This scene requires you to have fitting cock. Arian should have vagina.");
+	addDisabledButton(5, "Get Fucked", "This scene requires Arian to have cock.");
+	addDisabledButton(6, "Dildo Fun", "This scene requires both you and Arian to have vagina. You should have a dildo.");
+	addDisabledButton(7, "Docking", "This scene requires you to have fitting cock. Arian should have not overly large cock.");
+	addDisabledButton(8, "Double Pen", "This scene requires you to have two fitting cocks. Arian should have vagina.");
+	
 	if (player.hasCock()) {
 		//PC must have a cock that fits (cock area 50 or less)
 		if (player.cockThatFits(50) >= 0) addButton(0,"Anal - Pitch",giveArianAnal);
@@ -2649,13 +2656,20 @@ private function giveArianAnItem():void {
 	else if (flags[kFLAGS.ARIAN_S_DIALOGUE] == 4 && arianHealth() >= 75) arianPlot4();
 	else if (flags[kFLAGS.ARIAN_S_DIALOGUE] == 5 && arianHealth() >= 100) arianPlot5();
 	else {
-		if (player.hasItem(consumables.VITAL_T)) addButton(0,"Vital Tinct",arianVitalityTincture);
+		addDisabledButton(0, "Vital Tinct");
+		addDisabledButton(1, "P. Incubi D");
+		addDisabledButton(2, "P. Suc.Milk");
+		addDisabledButton(3, "Lactaid");
+		addDisabledButton(4, "Reducto");
+		addDisabledButton(5, "Reptilum");
+		
+		if (player.hasItem(consumables.VITAL_T)) addButton(0, "Vital Tinct", arianVitalityTincture);
 		if (flags[kFLAGS.ARIAN_HEALTH] >= 20) {
-			if (player.hasItem(consumables.P_DRAFT)) addButton(1,"P. Incubi D",giveIncubusDraftToArian);
-			if (player.hasItem(consumables.P_S_MLK)) addButton(2,"P. Suc.Milk",succubiMilkForArian);
-			if (player.hasItem(consumables.LACTAID)) addButton(3,"Lactaid",giveArianLactaid);
-			if (player.hasItem(consumables.REDUCTO)) addButton(4,"Reducto",giveArianReducto);
-			if (player.hasItem(consumables.REPTLUM)) addButton(5,"Reptilum",giveArianReptilum);
+			if (player.hasItem(consumables.P_DRAFT)) addButton(1, "P. Incubi D", giveIncubusDraftToArian);
+			if (player.hasItem(consumables.P_S_MLK)) addButton(2, "P. Suc.Milk", succubiMilkForArian);
+			if (player.hasItem(consumables.LACTAID)) addButton(3, "Lactaid", giveArianLactaid);
+			if (player.hasItem(consumables.REDUCTO)) addButton(4, "Reducto", giveArianReducto);
+			if (player.hasItem(consumables.REPTLUM)) addButton(5, "Reptilum", giveArianReptilum);
 		}
 		addButton(14,"Back",arianHomeMenu);
 	}

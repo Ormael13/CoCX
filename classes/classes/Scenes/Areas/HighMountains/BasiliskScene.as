@@ -69,30 +69,42 @@ package classes.Scenes.Areas.HighMountains
 		public function defeatBasilisk():void {
 			spriteSelect(75);
 			clearOutput();
-			var evil:Function =null;
-			var eggs:Function =null;
-			if (player.canOvipositSpider()) eggs = driderPCEggLaysBasilisk;
-			if (player.canOvipositBee() && player.gender > 0) eggs = layBeeEggsInABasilisk;
-			if (player.cockThatFits(monster.analCapacity()) >= 0 && (player.cor >= 66 - player.corruptionTolerance())) evil = defeatBasiliskAndAnal;
+	
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.", true);
+				combat.cleanupAfterCombat();
+				return;
+			}
 			//Player HP victory: 
 			if (monster.HP < 1) outputText("Unable to stand anymore, the basilisk shakily sinks down on one knee, drops his head and looks at the ground, evidently demonstrating submission.", false);
 			//Player Lust victory: 
 			else outputText("No longer able to control his raging erection, the basilisk closes his eyes and sinks to one knee. He would probably be attempting to signal his submission to you if he weren't furiously masturbating his long, purple cock, which has emerged straining from the creature's genital slit.", false);
-		
-			//If victory and Player Lust above 30: 
-			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+			
+			menu();
+			addDisabledButton(0, "Tongue", "This scene requires you to have genitals and sufficient arousal");
+			addDisabledButton(1, "Ass (Gentle)", "This scene requires you to have fitting cock and sufficient arousal.");
+			addDisabledButton(2, "Ass (Cruel)", "This scene requires you to have fitting cock, high corruption and sufficient arousal.");
+			addDisabledButton(3, "Lay Eggs", "This scene requires you to have ovipositor and enough eggs. Bee oviposition requires genitals as well.");
+			
+			if (player.lust >= 33) {
 				outputText(" Certain that the creature won't dare try and turn his eyes on you again, you take your time to look the tall reptile over directly for the first time. Perhaps you could use him to satisfy your baser urges. If so, what part of him do you choose?", false);
 				//[Tongue][Ass]
-				menu();
 				addButton(0, "Tongue", tongueBasiliskSmex, null, null, null, "Put that creature's tongue to a good use.");
 				if (player.cockThatFits(monster.analCapacity()) >= 0) {
 					addButton(1, "Ass (Gentle)", defeatBasiliskAndAnal, false, null, null, "Fuck the basilisk's ass gently!");
-					if (player.cor >= 66 - player.corruptionTolerance()) addButton(2, "Ass (Cruel)", defeatBasiliskAndAnal, true, null, null, "Dominate and fuck the basilisk in the ass! He wouldn't like it though.");
+					if (player.cor >= 66 - player.corruptionTolerance() || player.findPerk(PerkLib.Sadist) >= 0)
+						addButton(2, "Ass (Cruel)", defeatBasiliskAndAnal, true, null, null, "Dominate and fuck the basilisk in the ass! He wouldn't like it though.");
 				}
-				addButton(3, "Lay Eggs", eggs, null, null, null, "Lay your eggs in the basilisk.");
-				addButton(4, "Leave", combat.cleanupAfterCombat);
 			}
-			else combat.cleanupAfterCombat();
+			
+			if (player.canOvipositSpider()) {
+				addButton(3, "Lay Eggs", driderPCEggLaysBasilisk, null, null, null, "Lay your eggs in the basilisk.");
+			}
+			if (player.canOvipositBee() && !player.isGenderless()) {
+				addButton(3, "Lay Eggs", layBeeEggsInABasilisk, null, null, null, "Lay your eggs in the basilisk.");
+			}
+			
+			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
 		
 		//Player Victory sex:

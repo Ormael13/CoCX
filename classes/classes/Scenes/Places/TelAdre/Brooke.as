@@ -438,12 +438,17 @@ public function gropeDatBrooke():void {
 	outputText("\n\nWhat is your weapon of choice?");
 	//[=Penetrate her=] [=Anal=] [=Tribadism=] [=Down on her=] [=Get laid=] [=Double-dicked=]
 	menu();
-	if (player.hasCock() && player.cockThatFits(brookeCapacity()) >= 0) addButton(0,"Penetrate",penetrateBrooke);
-	if (player.hasCock()) addButton(1,"Anal",brookeAnal);
-	if (player.hasVagina()) addButton(2,"Tribadism",tribadism);
+	if (player.hasCock() && player.cockThatFits(brookeCapacity()) >= 0) addButton(0, "Penetrate", penetrateBrooke);
+	else addDisabledButton(0, "Penetrate", "This scene requires you to have fitting cock.");
+	if (player.hasCock()) addButton(1, "Anal", brookeAnal);
+	else addDisabledButton(1, "Anal", "This scene requires you to have cock.");
+	if (player.hasVagina()) addButton(2, "Tribadism", tribadism);
+	else addDisabledButton(2, "Tribadism", "This scene requires you to have vagina.");
 	addButton(3,"Go Down On",goDownOnBrooke);
-	if (player.hasCock() && player.cockThatFits(brookeCapacity()) >= 0) addButton(4,"Get Laid",getLaidByBrooke);
-	if (player.cockTotal() >= 2) addButton(5,"Double-Dick",doubleDicked);
+	if (player.hasCock() && player.cockThatFits(brookeCapacity()) >= 0) addButton(4, "Get Laid", getLaidByBrooke);
+	else addDisabledButton(4, "Get Laid", "This scene requires you to have fitting cock.");
+	if (player.cockTotal() >= 2) addButton(5, "Double-Dick", doubleDicked);
+	else addDisabledButton(5, "Double-Dick", "This scene requires you to have at least two cocks.");
 }
 
 //[=Penetrate her=]

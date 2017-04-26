@@ -37,7 +37,7 @@
 		{
 			clearOutput();
 			//if corrupted...
-			if (player.cor >= 25) 
+			if (player.cor >= 25 + player.corruptionTolerance()) 
 			{
 				outputText("You grip the handle with both hands and ", false);
 				
