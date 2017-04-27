@@ -275,7 +275,9 @@ package classes.Scenes.Monsters
 			else if (player.hasVagina() && x < 0) centaurOnImpFemale();
 			else {
 				outputText("Do you focus on your maleness or girl-parts?", false);
-				simpleChoices("Male", createCallBackFunction(centaurOnImpMale, true), "Female", createCallBackFunction(centaurOnImpFemale, true), "", null, "", null, "", null);
+				menu();
+				addButton(0, "Male", createCallBackFunction(centaurOnImpMale, true));
+				addButton(1, "Female", createCallBackFunction(centaurOnImpFemale, true));
 			}
 		}
 		

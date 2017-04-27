@@ -30,7 +30,10 @@ package classes.Scenes.Areas.Swamp
 			else {
 				outputText("He breaks into a smile and says, \"<i>Hi there!  I haven't seen anyone else with a shred of sanity in FOREVER.  Would you mind just, talking with me?</i>\"", false);
 				//[Fight] [Talk] [Leave]
-				simpleChoices("Fight", fightSpiderBoy, "Talk", talkToSpiderBoy, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+				menu();
+				addButton(0, "Fight", fightSpiderBoy);
+				addButton(1, "Talk", talkToSpiderBoy);
+				addButton(14, "Leave", camp.returnToCampUseOneHour);
 			}
 			if (flags[kFLAGS.CODEX_ENTRY_ARACHNES] <= 0) {
 				flags[kFLAGS.CODEX_ENTRY_ARACHNES] = 1;
