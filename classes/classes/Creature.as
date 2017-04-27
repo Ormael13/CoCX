@@ -1981,6 +1981,11 @@ package classes
 			return countCocksOfType(CockTypesEnum.DOG) + countCocksOfType(CockTypesEnum.FOX);
 		}
 		
+		public function wolfCocks():int {
+			if (cocks.length == 0) return 0;
+			return countCocksOfType(CockTypesEnum.WOLF);
+		}
+		
 		public function findFirstCockType(ctype:CockTypesEnum):Number
 		{
 			var index:Number = 0;
