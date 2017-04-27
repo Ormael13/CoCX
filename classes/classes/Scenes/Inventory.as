@@ -20,10 +20,14 @@ package classes.Scenes
 	import classes.Scenes.Dungeons.DungeonCore;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
+	import classes.internals.LoggerFactory;
+	import mx.logging.ILogger;
 
 	use namespace kGAMECLASS;
 
 	public class Inventory extends BaseContent {
+		private static const LOGGER:ILogger = LoggerFactory.getLogger(Inventory);
+		
 		private static const inventorySlotName:Array = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"];
 		
 		private var itemStorage:Array;
@@ -299,27 +303,34 @@ package classes.Scenes
 		//Clear storage slots
 		public function clearStorage():void {
 			//Various Errors preventing action
-			if (itemStorage == null) trace("ERROR: Cannot clear storage because storage does not exist.");
+			if (itemStorage == null){
+				LOGGER.error("Cannot clear storage because it does not exist.");
+			}
 			else {
-				trace("Attempted to remove " + itemStorage.length + " storage slots.");
+				LOGGER.debug("Attempted to remove {0} storage slots.", itemStorage.length);
 				itemStorage.splice(0, itemStorage.length);
 			}
 		}
 		
 		public function clearGearStorage():void {
 			//Various Errors preventing action
-			if (gearStorage == null) trace("ERROR: Cannot clear storage because storage does not exist.");
+			if (gearStorage == null) {
+				LOGGER.error("Cannot clear gear storage because it does not exist.");
+			}
 			else {
-				trace("Attempted to remove " + gearStorage.length + " storage slots.");
+				LOGGER.debug("Attempted to remove {0} gear storage slots.", gearStorage.length);
 				gearStorage.splice(0, gearStorage.length);
 			}
 		}
 		
 		public function initializeGearStorage():void {
 			//Completely empty storage array
-			if (gearStorage == null) trace("ERROR: Cannot clear gearStorage because storage does not exist.");
+			if (gearStorage == null) {
+				//TODO refactor this to use clearGearStorage()
+				LOGGER.error("Cannot clear gearStorage because storage does not exist.");
+			}
 			else {
-				trace("Attempted to remove " + gearStorage.length + " gearStorage slots.");
+				LOGGER.debug("Attempted to remove {0} gear storage slots.", gearStorage.length);
 				gearStorage.splice(0, gearStorage.length);
 			}
 			//Rebuild a new one!
