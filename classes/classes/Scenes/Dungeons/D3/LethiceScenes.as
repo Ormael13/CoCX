@@ -93,10 +93,14 @@ package classes.Scenes.Dungeons.D3
 			if(player.hasCock())
 			{
 				addButton(0,"Plow Her",plowHer);
+			} else {
+				addDisabledButton(0, "Plow Her", "This scene requires you to have cock.");
 			}
 			if(player.hasVagina())
 			{
 				addButton(1,"Queen Her",queenHer);
+			} else {
+				addDisabledButton(1, "Queen Her", "This scene requires you to have vagina.");
 			}
 			addButton(2,"Boob Play",boobPlay,hpVictory);
 			var hasLethicite:Boolean = player.hasKeyItem("Sheila's Lethicite") > 0 || player.hasKeyItem("Stone Statue Lethicite") > 0;

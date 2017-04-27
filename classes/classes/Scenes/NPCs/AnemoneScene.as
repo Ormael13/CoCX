@@ -214,7 +214,7 @@ package classes.Scenes.NPCs
 			else if (player.hasVagina()) outputText("another ", false);
 			outputText(" giggle from the blue girl.  Standing up, you gather your gear and blow her a kiss before you leave.  She darkens in color, her camouflage reflex causing her to 'blush' in discomfort at this display of affection.", false);
 			//(pass 1 hour, reduce lust to min)
-			player.orgasm();
+			player.orgasm('Anal');
 			combat.cleanupAfterCombat();
 		}
 
@@ -273,7 +273,7 @@ package classes.Scenes.NPCs
 				}
 				outputText("After the last of your cum has been squeezed out, you pull your " + player.cockDescript(0) + " out and rinse it off in the lakewater.  You gather your gear while the anemone holds her belly and smiles placidly, staring into the sky.", false);
 				//(pass 1 hour, reset lust to min or min+10 if big or greater skeet)
-				player.orgasm();
+				player.orgasm('Dick');
 				combat.cleanupAfterCombat();
 			}
 			//Too-big male: -requires cockarea > 36
@@ -317,7 +317,7 @@ package classes.Scenes.NPCs
 				//[(mega skeet)
 				else outputText("she continues to sputter and cough up bubbles of your spunk.", false);
 				//(pass 1 hour, reset lust to min or min+10 if big or greater skeet)
-				player.orgasm();
+				player.orgasm('Dick');
 				combat.cleanupAfterCombat();
 			}
 		}
@@ -389,7 +389,7 @@ package classes.Scenes.NPCs
 			anemonePreg();
 			//(reduce lust to min, pregnancy check)
 			//(pass 1 hour, reset lust to min or min+10 if big or greater skeet)
-			player.orgasm();
+			player.orgasm('Vaginal');
 			combat.cleanupAfterCombat();
 		}
 
@@ -505,7 +505,7 @@ package classes.Scenes.NPCs
 					}
 					outputText(".  The blue girl continues to stroke your privates with her tentacle hair, flicking your urethra with her tongue, until you've come twice more.  Nor does she display any intention of stopping there, but mercifully you black out and collapse into the water.  Half-frowning, the anemone shrugs and pushes your insensible form up onto the sandy shore.", false);
 					//(pass 8 hours, reset lust to min)
-					player.orgasm();
+					player.orgasm('Dick');
 					combat.cleanupAfterCombat();
 				}
 				//loss, too-big male (cock > 5" width or > 48" length):
@@ -573,7 +573,7 @@ package classes.Scenes.NPCs
 					else outputText("She leans over you and begins licking the semen off your body, not stopping until you're clean (if slightly sticky).", false);
 					outputText("  Having fed, she grins mischievously and grabs your " + player.cockDescript(0) + ", then tows your floating body to the shoreline with it.  She rolls you onto the sand and then swims for deep water, vanishing.", false);
 					//(pass 8 hours, minus libido, reset lust to min)
-					player.orgasm();
+					player.orgasm('Dick');
 					dynStats("lib", -1);
 					combat.cleanupAfterCombat();
 				}
@@ -601,7 +601,7 @@ package classes.Scenes.NPCs
 				outputText("After several minutes of this final orgasm you fall backwards into the shallow water with a splash and pass out with a look of bliss, floating on a surface made choppy by your hectic ride.  The poor anemone takes a while longer to collect herself, then slowly pulls her limp dick out of your " + player.vaginaDescript(0) + " and tugs you up the beach past the tideline so you won't roll facedown in the water while you're unconscious.  She bends down and kisses you, tracing your " + player.nippleDescript(0) + "; too spent to hold up her hair, it drapes over your prone form as she leans and releases a last shot of her drug to ensure that your dreams will be of her.", false);
 				anemonePreg();
 				//(reduce lust to min, add 10 lust, pregnancy check)
-				player.orgasm();
+				player.orgasm('Vaginal');
 				dynStats("lib", 1, "lus", 10);
 				combat.cleanupAfterCombat();
 			}
@@ -818,7 +818,7 @@ package classes.Scenes.NPCs
 				outputText(" and leave her.");
 			}
 			//end scene, reset hours since cum and lust, reduce libido and sens a little
-			player.orgasm();
+			player.orgasm('Generic');
 			dynStats("lib", -.5, "sen", -.5);
 			combat.cleanupAfterCombat();
 		}
@@ -872,7 +872,7 @@ package classes.Scenes.NPCs
 			else outputText("looks indolently at you as you go.");
 
 			//end scene, reset hours since cum and lust, reduce libido and sens a bit
-			player.orgasm();
+			player.orgasm('Generic');
 			dynStats("lib", -.5, "sen", -.5);
 			combat.cleanupAfterCombat();
 		}
@@ -967,7 +967,7 @@ package classes.Scenes.NPCs
 				outputText("  Gathering your things, you " + player.mf("laugh", "giggle") + " at her and depart.");
 			}
 			player.dumpEggs();
-			player.orgasm();
+			player.orgasm('Ovi');
 			combat.cleanupAfterCombat();
 		}
 
@@ -1045,7 +1045,7 @@ package classes.Scenes.NPCs
 			}
 			//ponytailed anemone with Lisa Loeb glasses WHEN
 			player.dumpEggs();
-			player.orgasm();
+			player.orgasm('Ovi');
 			combat.cleanupAfterCombat();
 		}
 
@@ -1566,7 +1566,7 @@ package classes.Scenes.NPCs
 				}
 				outputText("\n\nSpent, your blue girl slumps down onto your chest, not even bothering to avoid the puddle of her own spunk or pull your cock out, and is quickly asleep.  Your eyes close as sleep overtakes you as well, though the venom trickling into your chest as she rests her head on it ensures the scene will play over and over in your dreams...");
 				//pass 2 hr, remove 100 lust and add 30 base lust before resistance, set Kidswag = 3
-				player.orgasm();
+				player.orgasm('Dick');
 				dynStats("lus", 30);
 				if (flags[kFLAGS.ANEMONE_KID] < 3) flags[kFLAGS.ANEMONE_KID] = 3;
 				doNext(camp.returnToCampUseTwoHours);
@@ -1650,7 +1650,7 @@ package classes.Scenes.NPCs
 
 				outputText("\n\nYou lay back, spent, and slip from consciousness.");
 				//lose 100 lust, pass 2 hr, if Kidswag = 1, set Kidswag = 2
-				player.orgasm();
+				player.orgasm('Dick');
 				if (flags[kFLAGS.ANEMONE_KID] == 1) flags[kFLAGS.ANEMONE_KID] = 2;
 				doNext(camp.returnToCampUseTwoHours);
 				return true;
@@ -1679,7 +1679,7 @@ package classes.Scenes.NPCs
 				//anemone preg chance, slimefeed, reduce lust by 100, if Kidswag = 1 set Kidswag = 2
 				anemonePreg();
 				player.slimeFeed();
-				player.orgasm();
+				player.orgasm('Vaginal');
 				if (flags[kFLAGS.ANEMONE_KID] == 1) flags[kFLAGS.ANEMONE_KID] = 2;
 				doNext(camp.returnToCampUseEightHours);
 				return true;

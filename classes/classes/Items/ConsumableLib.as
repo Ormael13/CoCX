@@ -209,7 +209,7 @@ package classes.Items
 		public const VIXVIGR:SimpleConsumable = mk("VixVigr","VixVigr", "a bottle labelled \"Vixen's Vigor\"", curry(m.foxTF, true), "This small medicine bottle contains something called \"Vixen's Vigor\", supposedly distilled from common fox-berries.  It is supposed to be a great deal more potent, and a small warning label warns of \"extra boobs\", whatever that means.", 30);
 		public const W_FRUIT:SimpleConsumable = mk("W.Fruit","W.Fruit", "a piece of whisker-fruit", m.catTransformation, "This small, peach-sized fruit has tiny whisker-like protrusions growing from the sides.");
 		public const WETCLTH:SimpleConsumable = mk("WetClth","WetClth", "a wet cloth dripping with slippery slime", m.gooGasmic, "Dripping with a viscous slime, you've no doubt rubbing this cloth on your body would have some kind of strange effect.");
-		public const WOLF_PP:SimpleConsumable = mk("Wolf Pp","WolfPepper", "a Wolf pepper", curry(m.caninePepper, 6), "The pepper is shiny and black, bulbous at the base but long and narrow at the tip.  It has a fuzzy feel to it and it smells spicy.", 10);
+		public const WOLF_PP:SimpleConsumable = mk("Wolf Pp","WolfPepper", "a Wolf Pepper", m.wolfPepper, "The pepper is shiny and black, bulbous at the base but long and narrow at the tip. It has a fuzzy feel to it and it smells spicy. Somehow, you know it's different from the usual Canine Peppers you see.");
 
 		public const LARGE_EGGS:Array = [L_BLKEG,L_BLUEG,L_BRNEG,L_PNKEG,L_PRPEG,L_WHTEG];
 		public const SMALL_EGGS:Array = [BLACKEG,BLUEEGG,BROWNEG,PINKEGG,PURPLEG,WHITEEG];

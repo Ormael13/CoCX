@@ -1510,7 +1510,7 @@ package classes.Scenes.NPCs
 			chance += player.virilityQ() * 100;
 			if (chance > 100) chance = 100;
 			if (rand(100) < chance) jojoScene.pregnancy.knockUp(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MOUSE);
-			player.orgasm();
+			player.orgasm('Dick');
 			dynStats("sens", -1, "cor", -(1 + Math.ceil(player.cor / 20)));
 			flags[kFLAGS.TIMES_PENETRATED_JOY_VAGINALLY]++;
 			doNext(camp.returnToCampUseOneHour);
@@ -1558,7 +1558,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nYou roll your eyes and decide to just enjoy your closeness to Joy for the moment. Eventually though, you decide to get up; so you extract yourself from Joy warm innards and pull away.");
 			outputText("\n\nThen you get up and extend a hand to help Joy up as well, that's when you notice that she actually seems to be sleeping...");
 			outputText("\n\nYou chuckle and gather your things to go clean up, leaving Joy to rest.");
-			player.orgasm();
+			player.orgasm('Dick');
 			dynStats("sens", -1, "cor", -(1 + Math.ceil(player.cor / 20)));
 			flags[kFLAGS.JOJO_ANAL_XP]++;
 			doNext(camp.returnToCampUseOneHour);
@@ -1650,7 +1650,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nYou do the same, feeling yourself approach the edge quickly. You thrust against her once more and groan into her mouth as you begin cumming, painting both your bellies as well as your chests in hot spunk.");
 			outputText("\n\nJoy gasps and moans, eagerly blowing her load with full-body jerks and spasms until, at least, she peters out and her cock flops limply down between her legs, your front and hers painted in her spooge. \"<i>Wow... That's not, like, my favorite way to do things, but it's certainly pretty fun, y'know?</i>\" She comments. Stepping back, she gently brushes off some of the mixed spunk with her finger and slurps it up. \"<i>Mmm. We make a good mix.</i>\" She giggles");
 			outputText("\n\nYou " + player.clothedOrNakedLower("gather the discarded pieces of your " + player.armorDescript() + " and ") + "give her ass a good grope before leading the both of you towards the nearest stream to clean up.");
-			player.orgasm();
+			player.orgasm('Generic');
 			dynStats("cor", -(0.5 + Math.ceil(player.cor / 30)));
 			flags[kFLAGS.TIMES_FROTTED_WITH_JOY]++;
 			incrementJoysCockFondness(1);
@@ -1706,7 +1706,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nYou ruffle her hair and tell her it's because she looks cute when she's mad.");
 			outputText("\n\nShe gives you a wide, goofy smile at that and coos in delight, leaning into your stroking hand.");
 			outputText("\n\nYou " + player.clothedOrNakedLower("gather your [armor] and ") + "leave to clean up.");
-			player.orgasm();
+			player.orgasm('Dick');
 			dynStats("cor", -(0.5 + Math.ceil(player.cor / 30)));
 			flags[kFLAGS.TIMES_GET_BLOWN_BY_JOY]++;
 			doNext(camp.returnToCampUseOneHour);
@@ -1740,7 +1740,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nYou point to her face and let her know there's still a bit of cum hanging from chin.");
 			outputText("\n\nJoy's tongue immediately snakes out and licks it up. \"<i>Better now?</i>\" She teases.");
 			outputText("\n\nYou just give her a thumbs up and leave.");
-			player.orgasm();
+			player.orgasm('Vaginal');
 			dynStats("cor", -(0.5 + Math.ceil(player.cor / 20)));
 			flags[kFLAGS.TIMES_GET_LICKED_BY_JOY]++;
 			doNext(camp.returnToCampUseOneHour);
@@ -1772,7 +1772,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nYou sigh and get up, extracting yourself from under her; a small trickle of cum leaks from your used fuckhole, and down your legs; looks like you'll need a bath... but first. You help Joy up and pat her head telling her if she promises to be a good girl you two can have more fun later.");
 			outputText("\n\n\"<i>Yay!</i>\" Joy perks right up at that, throwing her arms into the air in delight.");
 			outputText("\n\nYou giggle at her reaction and gather your discarded clothes. Then take Joy's hand and begin making your way towards the nearest stream.");
-			player.orgasm();
+			player.orgasm('Vaginal');
 			dynStats("sens", 1, "cor", -(1 + Math.ceil(player.cor / 20)));
 			flags[kFLAGS.JOJO_VAGINAL_CATCH_COUNTER]++;
 			incrementJoysCockFondness(2);
@@ -1826,7 +1826,7 @@ package classes.Scenes.NPCs
 			outputText("\n\n\"<i>No! Please! Don't cut off the sex! I couldn't stand no more sex!</i>\" Joy begs you.");
 			outputText("\n\nYou laugh at Joy's mortified expression and comfort her by hugging her and telling her you would never refuse something as cute as her... but if she really expects to have a shot at your ass again she'd better grab your stuff and help you clean up. Then you release her and make your way towards the stream.");
 			outputText("\n\nThe mouse bimbo watches you go. \"<i>Like, [name], that was really mean!</i>\" She whines, then scampers after you.");
-			player.orgasm();
+			player.orgasm('Anal');
 			dynStats("sens", 1, "cor", -(1 + Math.ceil(player.cor / 20)));
 			flags[kFLAGS.JOJO_ANAL_CATCH_COUNTER]++;
 			incrementJoysCockFondness(2);
@@ -2055,7 +2055,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nYou pull out from the sleeping mouse and gaze at your handiwork; the two of you really made a mess of your " + camp.homeDesc() + " and your " + camp.bedDesc() + " is completely matted with mouse femcum as well as some of your own. You consider tidying the place up a bit, but you're too tired to do any kind of work right now; this little tryst with Joy has left you completely drained, although very satisfied as well...");
 			outputText("\n\nYou shrug and lay down beside Joy, gently stroking her belly as you do. Joy reaches out and embraces you, snuggling up and you sigh, letting sleep overtake you.");
 			outputText("\n\n\"<i>Love you...</i>\" Joy murmurs sleepily.");
-			player.orgasm();
+			player.orgasm('Generic');
 			dynStats("cor", -(1 + Math.ceil(player.cor / 20)));
 			flags[kFLAGS.TIMES_PENETRATED_JOY_VAGINALLY]++;
 			flags[kFLAGS.JOJO_ANAL_XP]++;
@@ -2094,7 +2094,7 @@ package classes.Scenes.NPCs
 			else outputText("manages to scrabble along on all fours");
 			outputText(", heading back to her personal nest.");
 			outputText("\n\nGetting a bit more sleep sounds just fine, so you flop down on your " + camp.bedDesc() + " and close your eyes.");
-			player.orgasm();
+			player.orgasm('Generic');
 			flags[kFLAGS.JOY_NIGHT_FUCK] = 0;
 			doNext(camp.sleepWrapper);
 		}
@@ -2225,7 +2225,7 @@ package classes.Scenes.NPCs
 			player.knockUpForce(); //Clear pregnancy
 			player.cuntChange(60, true,true,false);
 			if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
-			player.orgasm();
+			player.orgasm('Vaginal');
 			dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5);
 			flags[kFLAGS.JOY_TWINS_BIRTHED]++;
 			if (flags[kFLAGS.JOY_TWINS_BIRTHED] >= 3 && flags[kFLAGS.JOY_TAKES_BABIES_AWAY_COUNTER] == 0) flags[kFLAGS.JOY_TAKES_BABIES_AWAY_COUNTER] = 72;

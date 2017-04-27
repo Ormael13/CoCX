@@ -186,9 +186,9 @@
 			return kGAMECLASS.createCallBackFunction(func,arg);
 		}
 
-		/** Create a function that will pass multiple arguments. 
-		 * @deprecated	This function is deprecated.
+		/** [DEPRECATED] Create a function that will pass multiple arguments. 
 		 */
+		[Deprecated(message="This function is deprecated.")]
 		protected function createCallBackFunction2(func:Function, ...args):Function
 		{
 			return kGAMECLASS.createCallBackFunction2.apply(null,[func].concat(args));
@@ -254,8 +254,9 @@
 			kGAMECLASS.hideMenus();
 		}
 		
-		/** Creates a menu with 10 buttons. 
-		 * @deprecated	This is deprecated. Use a series of addButton instead.
+
+		[Deprecated(replacement = "Use a series of BaseContent.addButton instead")]
+		/**[DEPRECATED] Creates a menu with 10 buttons. 
 		 */
 		protected function choices(text1:String, butt1:Function,
 								text2:String, butt2:Function,
@@ -281,8 +282,9 @@
 			);
 		}
 
-		/** Creates a menu with 5 buttons. 
-		 * @deprecated	This is deprecated. Use a series of addButton instead.
+		[Deprecated(replacement = "Use a series of BaseContent.addButton instead.")]
+		/**
+		 * [DEPRECATED] Creates a menu with 5 buttons. 
 		 */
 		protected function simpleChoices(text1:String, butt1:Function,
 								text2:String, butt2:Function,

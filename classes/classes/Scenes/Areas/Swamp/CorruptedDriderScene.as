@@ -67,54 +67,54 @@ package classes.Scenes.Areas.Swamp
 		{
 			spriteSelect(77);
 			clearOutput();
+	
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.", true);
+				combat.cleanupAfterCombat();
+				return;
+			}
+			
 			outputText("All eight of the drider's black and " + monster.hairColor + " striped legs collapse under her weight while she struggles ", false);
 			if (monster.HP < 1) outputText("to try to continue the fight, her movements slowed by pain and weakness.", false);
 			else outputText("to masturbate her swollen pussy-lips and the thick, juicy demon-cock that's sprouted in place of her clit.  She's so focused on getting off that she utterly gives up on the idea of fighting back, let alone dominating you as she seemed to plan originally.", false);
 			outputText("  The spider-herm lies in a miserable, defeated heap.", false);
-
-			var buttFuckBUTTFUCKBUTTTFUCKBUTTFUCK:Function =null;
-			if (player.cockThatFits(monster.analCapacity()) >= 0) buttFuckBUTTFUCKBUTTTFUCKBUTTFUCK = buttFuckADriderOhBaby;
-			var vagFuck:Function =null;
-			var fuckSpinner:Function =null;
-			var careful:Function =null;
-			if (player.hasCock() && player.lust >= 33) {
+			
+			menu();
+			addDisabledButton(0, "Butt Fuck", "This scene requires you to have fitting cock and sufficient arousal.");
+			addDisabledButton(1, "Fuck Pussy", "This scene requires you to have fitting cock and sufficient arousal.");
+			addDisabledButton(2, "Bondage Fuck", "This scene requires you to have fitting cock, some way to bind her and sufficient arousal.");
+			addDisabledButton(3, "FuckSpinner", "This scene requires you to have fitting cock and sufficient arousal.");
+			addDisabledButton(4, "Ride Cock", "This scene requires you to have vagina and sufficient arousal.");
+			addDisabledButton(5, "Ride Ovi", "This scene requires you to have vagina and sufficient arousal.");
+			addDisabledButton(6, "RideOviAnal", "This scene requires you to have sufficient arousal.");
+			// Button 7 is used for Lusty Maidens Armor special scene and is hidden without it
+			
+			if (player.lust >= 33) {
+				if (player.cockThatFits(monster.analCapacity()) >= 0) {
+					addButton(0, "Butt Fuck", buttFuckADriderOhBaby);
+				}
 				if (player.cockThatFits(monster.vaginalCapacity()) >= 0) {
-					outputText("\nYou could fuck her pussy, though you'd be within easy reach of her lips.  If she gets any crazy ideas, it'd be hard to stop her.", false);
-					vagFuck = winDriderPCDickInSpiderCunt;
+					addButton(1, "Fuck Pussy", winDriderPCDickInSpiderCunt, undefined, undefined, undefined, "You could fuck her pussy, though you'd be within easy reach of her lips.  If she gets any crazy ideas, it'd be hard to stop her.");
 					if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.hasItem(useables.T_SSILK)) {
-						outputText("\nYou could bind her up with some webbing for some bondage.  Her lips are dangerous, after all.");
-						careful = driderVagSmartFuck;
+						addButton(2, "Bondage Fuck", driderVagSmartFuck, undefined, undefined, undefined, "You could bind her up with some webbing for some bondage.  Her lips are dangerous, after all.");
 					}
 				}
-				else outputText("\n<b>You're too big to fit inside her vagina.</b>", false);
 				if (player.cockThatFits(12) >= 0) {
-					fuckSpinner = victoryVSDriderStickDickInSpinneret;
-					outputText("\nYou could fuck her spinneret.", false);
+					addButton(3, "FuckSpinner", victoryVSDriderStickDickInSpinneret, undefined, undefined, undefined, "You could fuck her spinneret.");
 				}
-				else outputText("\n<b>You briefly consider shoving it in a spinneret, but there's no way you could fit inside the tight opening.</b>", false);
+				
+				if (player.hasVagina()) {
+					addButton(4, "Ride Cock", winVSDriderTakeItsCockInCunt, undefined, undefined, undefined, "You could ride the drider's retractible demon-cock.");
+					addButton(5, "Ride Ovi", victoryVSDriderRideOviVaginal, undefined, undefined, undefined, "You could ride the drider's ovipositor.");
+					if (player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) {
+						addButton(7, "Ride Cock", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri, undefined, undefined, undefined, "");
+					}
+				}
+				
+				addButton(6, "RideOviAnal", victoryVSDriderRideOviAnal, undefined, undefined, undefined, "You could always ride her ovipositor anally...");
 			}
-			var rideCock:Function =null;
-			var rideOvi:Function =null;
-			var bikiniTits:Function =null;
-			if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
-			if (player.hasVagina() && player.lust >= 33) {
-				rideCock = winVSDriderTakeItsCockInCunt;
-				rideOvi = victoryVSDriderRideOviVaginal;
-				outputText("\nYou could ride the drider's retractible demon-cock or her ovipositor.", false);
-			}
-			var rideOviAss:Function =null;
-			if (player.lust >= 33) {
-				outputText("\nYou could always ride her ovipositor anally...", false);
-				rideOviAss = victoryVSDriderRideOviAnal;
-			}
-
-			//(Qualifies for any rape?:)
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
-				outputText("\n\nWhat do you do?", false);
-				choices("Butt Fuck", buttFuckBUTTFUCKBUTTTFUCKBUTTFUCK, "Fuck Pussy", vagFuck, "Bondage Fuck", careful, "FuckSpinner", fuckSpinner, "Ride Cock", rideCock,
-					"Ride Ovi", rideOvi, "RideOviAnal", rideOviAss, "", null, "B.Titfuck", bikiniTits, "Leave", combat.cleanupAfterCombat);
-			}
-			else combat.cleanupAfterCombat();
+			
+			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
 
 //Lose to drider

@@ -381,7 +381,7 @@ package classes
 		//MALE STUFF
 		//public var cocks:Array;
 		//TODO: Tuck away into Male genital class?
-		public var cocks:Array;
+		public var cocks:/*Cock*/Array;
 		//balls
 		public var balls:Number = 0;
 		public var cumMultiplier:Number = 1;
@@ -903,9 +903,7 @@ package classes
 			return -1;
 		}
 
-		/**
-		 * @deprecated Replace with indexOfStatusEffect(), statusEffectByType(), or hasStatusEffect()
-		 */
+		[Deprecated(replacement="indexOfStatusEffect(), statusEffectByType(), or hasStatusEffect() instead")]
 		public function findStatusEffect(stype:StatusEffectType):int {
 			return indexOfStatusEffect(stype);
 		}
@@ -1981,6 +1979,11 @@ package classes
 			return countCocksOfType(CockTypesEnum.DOG) + countCocksOfType(CockTypesEnum.FOX);
 		}
 		
+		public function wolfCocks():int {
+			if (cocks.length == 0) return 0;
+			return countCocksOfType(CockTypesEnum.WOLF);
+		}
+		
 		public function findFirstCockType(ctype:CockTypesEnum):Number
 		{
 			var index:Number = 0;
@@ -2025,6 +2028,12 @@ package classes
 				}
 				//Dog - > horse
 				if (cocks[counter].cockType == CockTypesEnum.DOG)
+				{
+					cocks[counter].cockType = CockTypesEnum.HORSE;
+					return counter;
+				}
+				//Wolf - > horse
+				if (cocks[counter].cockType == CockTypesEnum.WOLF)
 				{
 					cocks[counter].cockType = CockTypesEnum.HORSE;
 					return counter;
@@ -2083,7 +2092,7 @@ package classes
 			return false
 		}
 		
-		// Deprecated
+		[Deprecated]
 		public function hasSock(arg:String = ""):Boolean
 		{
 			var index:int = cocks.length;
@@ -3253,6 +3262,7 @@ package classes
 			}
 			switch (cocks[0].cockType) { //With multiple cocks only use the descriptions for specific cock types if all cocks are of a single type
 				case CockTypesEnum.ANEMONE:
+				case CockTypesEnum.WOLF:
 				case CockTypesEnum.CAT:
 				case CockTypesEnum.DEMON:
 				case CockTypesEnum.DISPLACER:
@@ -3279,6 +3289,7 @@ package classes
 					case CockTypesEnum.CAT:
 					case CockTypesEnum.DISPLACER:
 					case CockTypesEnum.DOG:
+					case CockTypesEnum.WOLF:
 					case CockTypesEnum.FOX:
 					case CockTypesEnum.HORSE:
 					case CockTypesEnum.KANGAROO:
@@ -3361,6 +3372,7 @@ package classes
 						default: return "bizarre head";
 					}
 				case CockTypesEnum.DOG:
+				case CockTypesEnum.WOLF:
 				case CockTypesEnum.FOX:
 					if (rand(2) == 0) return "pointed tip";
 					return "narrow tip";

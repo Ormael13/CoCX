@@ -138,6 +138,15 @@ package classes
 				if (player.hasScales()) 
 					outputText("  You have the face and head structure of a horse, overlaid with glittering [skinFurScales].");
 			}
+			//wolf-face
+			if (player.faceType == FACE_WOLF) 
+			{
+				outputText("  You have an angular wolf's face complete with a muzzle and black nose");
+				if (!player.hasFur())
+					outputText(", though devoid of any fur.");
+				else
+					outputText(".");
+			}
 			//dog-face
 			if (player.faceType == FACE_DOG) 
 			{
@@ -256,6 +265,8 @@ package classes
 				outputText("  In addition to your primary two eyes, you have a second, smaller pair on your forehead.");
 			else if (player.eyeType == EYES_BLACK_EYES_SAND_TRAP) 
 				outputText("  Your eyes are solid spheres of inky, alien darkness.");
+			else if (player.eyeType == EYES_WOLF) 
+				outputText("  Your amber eyes are circled by darkness to help keep the sun from obscuring your view and have a second eyelid to keep them wet. You're rather near-sighted, but your peripherals are great!");
 			else if (player.faceType != FACE_CAT && player.hasReptileEyes())
 			{
 				outputText("  Your eyes are");
@@ -312,6 +323,8 @@ package classes
 					outputText("  A pair of small rounded openings appear on your head that are your ears.");
 				else if (player.earType == EARS_DEER) 
 					outputText("  A pair of deer-like ears rise up from the top of your head.");
+				else if (player.earType == EARS_WOLF) 
+					outputText("  A pair of wolf ears stick out from your head, attuned to every sound around you.");
 				//</mod>
 				if (player.antennae == ANTENNAE_BEE) 
 					outputText("  Floppy antennae also appear on your skull, bouncing and swaying in the breeze.");
@@ -356,6 +369,8 @@ package classes
 					outputText("  Your [hair] makes it near-impossible to see the small, rounded openings that are your ears.");
 				else if (player.earType == EARS_DEER) 
 					outputText("  The [hair] on your head parts around a pair of deer-like ears that grow up from your head.");
+				else if (player.earType == EARS_WOLF) 
+					outputText("  A pair of wolf ears stick out from your head, parting your [hair] and remaining alert to your surroundings.");
 				//</mod>
 				if (player.gillType == GILLS_FISH) 
 				{
@@ -491,8 +506,10 @@ package classes
 			//Wing arms
 			if (player.armType == ARM_TYPE_HARPY) 
 				outputText("  Feathers hang off your arms from shoulder to wrist, giving them a slightly wing-like look.");
+			else if (player.armType == ARM_TYPE_WOLF) 
+				outputText("  Your arms are shaped like a wolf's, overly muscular at your shoulders and biceps before quickly slimming down. They're covered in " + player.furColor + " fur and end in paws with just enough flexibility to be used as hands. They're rather difficult to move in directions besides back and forth.");	
 			else if (player.armType == ARM_TYPE_SPIDER) 
-				outputText("  Shining black exoskeleton  covers your arms from the biceps down, resembling a pair of long black gloves from a distance.");	
+				outputText("  Shining black exoskeleton covers your arms from the biceps down, resembling a pair of long black gloves from a distance.");	
 			else if (player.armType == ARM_TYPE_SALAMANDER)
 				outputText("  Shining thick, leathery red scales cover your arms from the biceps down and your fingernails are now short, fiery-red curved claws.");
 			else if (player.armType == ARM_TYPE_PREDATOR)
@@ -791,6 +808,10 @@ package classes
 			{
 				outputText("  A very short, stubby deer tail sprouts from just above your butt.");
 			}
+			else if (player.tailType == TAIL_TYPE_WOLF)
+			{
+				outputText("  A thick-furred wolf tail hangs above your [ass].");
+			}
 			//</mod>
 			//LOWERBODY SPECIAL
 			if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) 
@@ -799,6 +820,8 @@ package classes
 				outputText("  " + Num2Text(player.legCount)+ " furry, digitigrade legs form below your [hips].  The fur is thinner on the feet, and your toes are tipped with claws.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) 
 				outputText("  Your " + num2Text(player.legCount)+ " legs are muscled and jointed oddly, covered in fur, and end in a bestial hooves.");
+			else if (player.lowerBody == LOWER_BODY_TYPE_WOLF) 
+				outputText("  You have " + num2Text(player.legCount) + " digitigrade legs that end in wolf paws.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_DOG) 
 				outputText("  " + Num2Text(player.legCount)+ " digitigrade legs grow downwards from your waist, ending in dog-like hind-paws.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_NAGA)
@@ -1054,7 +1077,7 @@ package classes
 				if      (player.isTaur() && player.cocks.length == 1)
 					outputText("\nYour equipment has shifted to lie between your hind legs, like a feral animal.");
 				else if (player.isTaur())
-					outputText("\nBetween hind legs of your bestial body you have grown " + player.multiCockDescript() + "!\n");
+					outputText("\nBetween your hind legs, you have grown " + player.multiCockDescript() + "!\n");
 				else if (player.cocks.length == 1)
 					outputText("\n");
 				else
@@ -1084,6 +1107,8 @@ package classes
 						outputText("  It's mottled black and brown in a very animalistic pattern.  The 'head' of its shaft flares proudly, just like a horse's.");
 					else if (player.cocks[cock_index].cockType == CockTypesEnum.DOG) 
 						outputText("  It is shiny, pointed, and covered in veins, just like a large dog's cock.");
+					else if (player.cocks[cock_index].cockType == CockTypesEnum.WOLF) 
+						outputText("  It is shiny red, pointed, and covered in veins, just like a large wolf's cock.");
 					else if (player.cocks[cock_index].cockType == CockTypesEnum.FOX) 
 						outputText("  It is shiny, pointed, and covered in veins, just like a large fox's cock.");
 					else if (player.cocks[cock_index].cockType == CockTypesEnum.DEMON) 

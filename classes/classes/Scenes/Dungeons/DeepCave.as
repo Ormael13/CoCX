@@ -330,11 +330,19 @@ package classes.Scenes.Dungeons
 			flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED] = 1;
 			if (monster.HP < 1) outputText("The last of the imps collapses into the pile of his defeated comrades.  You're not sure how you managed to win a lopsided fight, but it's a testament to your new-found prowess that you succeeded at all.", false);
 			else outputText("The last of the imps collapses, pulling its demon-prick free from the confines of its loincloth.  Surrounded by masturbating imps, you sigh as you realize how enslaved by their libidos the foul creatures are.", false);
-			if (player.lust >= 33 && player.gender > 0) {
+			if (player.lust >= 33 && !player.isGenderless()) {
 				outputText("\n\nFeeling a bit horny, you wonder if you should use them to sate your budding urges before moving on.  Do you rape them?", false);
-				if (player.gender == 1) simpleChoices("Rape",impGangGetsRapedByMale,"", null,"", null,"", null,"Leave", combat.cleanupAfterCombat);
-				if (player.gender == 2) simpleChoices("Rape",impGangGetsRapedByFemale,"", null,"", null,"", null,"Leave", combat.cleanupAfterCombat);
-				if (player.gender == 3) simpleChoices("Male Rape",impGangGetsRapedByMale,"Female Rape",impGangGetsRapedByFemale,"", null,"", null,"Leave", combat.cleanupAfterCombat);
+				if (player.hasCock()) {
+					addButton(0, "Male Rape", impGangGetsRapedByMale);
+				} else {
+					addDisabledButton(0, "Male Rape", "This scene requires you to have cock.");
+				}
+				if (player.hasVagina()) {
+					addButton(1, "Female Rape", impGangGetsRapedByFemale);
+				} else {
+					addDisabledButton(1, "Female Rape", "This scene requires you to have vagina.");
+				}
+				addButton(14, "Leave", combat.cleanupAfterCombat);
 			}
 			else combat.cleanupAfterCombat();
 		}

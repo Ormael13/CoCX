@@ -106,11 +106,22 @@ package classes.Scenes.Areas.Plains
 			if (monster.HP < 1) outputText("The hyena girl collapses backwards onto the dusty ground, unable to continue the fight.", false);
 			//Gnoll Defeat (Lust)
 			else outputText("The hyena girl heaves a giant breath and takes a single step backwards.  Her club thumps to the ground and her hands fall to her shaft, stroking along its rough length.", false);
-
+			
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				combat.cleanupAfterCombat();
+				return;
+			}
+			
+			outputText("  The gnoll is at your mercy.  What will you do with her?");
+			
+			menu();
+			addDisabledButton(0, "DickDownClit", "This scene requires you to have cock and sufficient arousal.", "Dick Down Clit");
+			addDisabledButton(1, "DickInAss", "This scene requires you to have cock and sufficient arousal.", "Dick In Ass");
+			addDisabledButton(2, "TakeHerClit", "This scene requires you to have vagina and sufficient arousal.", "Take Her Clit");
+			addDisabledButton(3, "SuckHerClit", "This scene requires you to have sufficient arousal.", "Suck Her Clit");
+			
 			//Do You Rape The Gnoll?
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
-				outputText("  The gnoll is at your mercy.  What will you do with her?");
-				menu();
+			if (player.lust >= 33) {
 				if (player.hasCock()) {
 					addButton(0, "DickDownClit", dickDownGnollClit, null, null, null, "Fuck the gnoll's clit with your penis.", "Dick Down Clit");
 					addButton(1, "DickInAss", dickInGnollAss, null, null, null, "Fuck the gnoll's ass with your penis.", "Dick In Ass");
@@ -119,9 +130,9 @@ package classes.Scenes.Areas.Plains
 					addButton(2, "TakeHerClit", takeGnollClit, null, null, null, "Put your vagina to use and ride the gnoll's clit.", "Take Her Clit");
 				}
 				addButton(3, "SuckHerClit", suckGnollClit, null, null, null, "Suck the gnoll's clit.", "Suck Her Clit");
-				addButton(4, "Leave", combat.cleanupAfterCombat);
 			}
-			else combat.cleanupAfterCombat();
+			
+			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
 
 //DickDownClit

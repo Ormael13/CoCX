@@ -60,15 +60,18 @@ package classes.Scenes.Areas.Lake
 				//[Facesitting] [Fuck Her] [Fish] [Skedaddle]
 			}
 			menu();
-			if (player.lust < 33) outputText("\n\nYou aren't aroused enough to fuck her.");
-			else {
+			
+			addDisabledButton(0, "Fuck Her", "This scene requires you to have fitting cock and sufficient arousal.");
+			addDisabledButton(1, "Facesitting", "This scene requires you to have sufficient arousal.");
+			
+			if (player.lust >= 33) {
 				//(If cocksize above 48")
 				if (player.hasCock()) {
 					if (player.shortestCockLength() > 48) outputText("\n\nUnfortunately, you don't think she can quite handle your cock.");
 					else addButton(0, "Fuck Her", ottergirlLikesDongs);
 				}
-				if (player.hasVagina() || !player.hasCock()) addButton(1, "Facesitting", ottersForGals);
-			}
+				addButton(1, "Facesitting", ottersForGals, undefined, undefined, undefined, "Lick her cunt and get some oral attention in turn.");
+			} else outputText("\n\nYou aren't aroused enough to fuck her.");
 			if (flags[kFLAGS.MET_OTTERGIRL] > 1) addButton(2, "Get Fish", getSomeFishYaFatty);
 			addButton(4, "Leave", avoidZeOtterPussy);
 		}
@@ -238,7 +241,7 @@ package classes.Scenes.Areas.Lake
 
 			outputText("\n\nYou take several minutes to recover before doing the same.  ");
 
-			player.orgasm('Vaginal');
+			player.orgasm('VaginalAnal');
 			dynStats("sen", -1);
 			inventory.takeItem(consumables.FISHFIL, camp.returnToCampUseOneHour);
 		}

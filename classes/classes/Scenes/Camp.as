@@ -2704,6 +2704,12 @@ private function promptSaveUpdate():void {
 		flags[2295] = 0; //Reclaim those flags
 		flags[2296] = 0;
 	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 14) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 15;
+		flags[2194] = 0; //Reclaim those flags
+		flags[254] = 0;
+		flags[255] = 0;
+	}
 	doCamp();
 }
 

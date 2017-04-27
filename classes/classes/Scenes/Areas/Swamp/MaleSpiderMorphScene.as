@@ -63,25 +63,41 @@ package classes.Scenes.Areas.Swamp
 		{
 			clearOutput();
 			spriteSelect(74);
-			var mount:Function =null;
-			var buttfuck:Function =null;
-			var frot:Function =null;
-			if (player.hasVagina()) mount = victoryCowgirlRidingOnSpiderBoi;
-			if (player.hasCock()) {
-				if (player.cockThatFits(monster.analCapacity()) != -1) buttfuck = victoryButtFuck;
-				if (player.biggestCockArea() > monster.analCapacity()) frot = victoryFrotTheSpoidah;
+	
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.", true);
+				combat.cleanupAfterCombat();
+				return;
 			}
-			var bikiniTits:Function = null;
-			if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster);
 			outputText("The male spider-morph collapses onto his hands and knees, ", false);
 			if (monster.lust >= monster.eMaxLust()) outputText("masturbating with furious abandon, working his ebon dick with such vigor that the spider's pre-cum-slicked dick-skin noisily slides itself back and forth over his fattened glans; it becomes apparent just how much foreskin he truly has at this point, as even with his frenzied rubbing his glans remains shrouded in the thick excess skin while his fist slaps lewdly against his groin.  Dribbles of pre-cum leak from between his fingers to spill on the ground.", false);
 			else outputText("wobbling back and forth as he tries to stay up and fight.  There's no way he can oppose you, as beaten as he is now.", false);
-			if (player.gender > 0 && player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
+			
+			menu();
+			addDisabledButton(0, "Mount", "This scene requires you to have vagina and sufficient arousal.");
+			addDisabledButton(1, "FuckHisButt", "This scene requires you to have fitting cock and sufficient arousal.");
+			addDisabledButton(2, "Frot", "This scene requires you to have overly big cock and sufficient arousal.");
+			// Button 3 is used for Lusty Maidens Armor special scene and is hidden without it
+			
+			if (!player.isGenderless() && player.lust >= 33) {
 				outputText("\n\nWhat do you do?", false);
-				//[CHOICES]
-				simpleChoices("Mount", mount, "FuckHisButt", buttfuck, "Frot", frot, "B.Titfuck", bikiniTits, "Leave", combat.cleanupAfterCombat);
+				if (player.hasVagina()) {
+					addButton(0, "Mount", victoryCowgirlRidingOnSpiderBoi);
+					if (player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") {
+						addButton(3, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
+					}
+				}
+				if (player.hasCock()) {
+					if (player.cockThatFits(monster.analCapacity()) != -1) {
+						addButton(1, "FuckHisButt", victoryButtFuck);
+					}
+					if (player.biggestCockArea() > monster.analCapacity()) {
+						addButton(2, "Frot", victoryFrotTheSpoidah);
+					}
+				}
 			}
-			else combat.cleanupAfterCombat();
+			
+			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
 
 //Loss selector

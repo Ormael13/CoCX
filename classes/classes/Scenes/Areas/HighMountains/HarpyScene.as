@@ -20,34 +20,45 @@ package classes.Scenes.Areas.HighMountains
 		public function harpyVictoryuuuuu():void
 		{
 			clearOutput();
+			
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.", true);
+				combat.cleanupAfterCombat();
+				return;
+			}
+			
 			//(Enemy defeated by damage) 
 			if (monster.HP < 1) outputText("The harpy screams out in one last, pained cry before her wings give way, the feathered woman collapsing into a weary heap.", true);
 			//(Enemy defeated by lust)
 			else outputText("The harpy can't contain her lust anymore and crumples to the ground before you, on her knees with her plush, heavy ass resting on her feet. She coos pathetically, with one hand between her legs furiously fingering herself, and the other pressed against your crotch, a needy look in her eyes.", false);
-			//Genderless get nothing.
-			if (player.gender == 0) {
-				combat.cleanupAfterCombat();
-				return;
-			}
+			
+			menu();
+			addDisabledButton(0, "Anal", "This scene requires you to have fitting cock and sufficient arousal.");
+			addDisabledButton(1, "Pussy", "This scene requires you to have fitting cock and sufficient arousal.");
+			addDisabledButton(2, "Oral", "This scene requires you to have genitals and sufficient arousal.");
+			addDisabledButton(3, "Scissor", "This scene requires you to have vagina and sufficient arousal. It does not accomodate naga tail.");
+			addDisabledButton(4, "Clit Fuck", "This scene requires you to have huge clit and sufficient arousal.");
+			addDisabledButton(5, "Lay Eggs", "This scene requires you to have spider ovipositor, fangs and enough eggs.");
+			
 			//Rape options
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if (player.lust >= 33) {
 				outputText("  What do you do to her?", false);
-				menu();
 				if (player.hasCock()) {
 					if (player.cockThatFits(monster.analCapacity()) >= 0) addButton(0, "Anal", winAndRapeHarpyAnally, null, null, null, "Put your cock to a good use and take the harpy from behind.");
 					if (player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(1, "Pussy", victoryHarpyGetsHerPussyRaped, null, null, null, "That harpy's pussy looks inviting...");
 				}
-				addButton(2, "Oral", WinOnHarpyAndOralRape);
+				addButton(2, "Oral", WinOnHarpyAndOralRape, null, null, null, "Those lips are inviting, but her drugged lipstick can be dangerous.");
 				if (player.hasVagina()) {
-					if (player.isNaga()) outputText("  If you weren't a naga, you could scissor her.");
-					else addButton(3, "Scissor", harpyScissorSurprise, null, null, null, "Get into some girl-on-girl activity with the harpy.");
+					if (!player.isNaga()) addButton(3, "Scissor", harpyScissorSurprise, null, null, null, "Get into some girl-on-girl activity with the harpy.");
 					if (player.getClitLength() >= 3.5) addButton(4, "Clit Fuck", clitFuckAHarpy, null, null, null, "Fuck the harpy with your big clit.");
 				}
-				if (player.canOvipositSpider() && (player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS)) addButton(5, "Lay Eggs", spoidahsLegEggsInHarpeis, null, null, null, "Use your ovipositor to lay the eggs into harpy.");
-				addButton(14, "Leave", combat.cleanupAfterCombat);
 			}
-			//Not horny?  Iz over
-			else combat.cleanupAfterCombat();
+			
+			if (player.canOvipositSpider() && (player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS)) {
+				addButton(5, "Lay Eggs", spoidahsLegEggsInHarpeis, null, null, null, "Use your ovipositor to lay the eggs into harpy.");
+			}
+			
+			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
 
 		public function harpyLossU():void

@@ -15,7 +15,7 @@
 				player.removeStatusEffect(StatusEffects.StoneLust);
 			}
 			
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0){
+			if (flags[kFLAGS.SFW_MODE] <= 0){
 				game.desert.sandWitchScene.beatSandwitch();
 			} else {
 				game.combat.finishCombat();

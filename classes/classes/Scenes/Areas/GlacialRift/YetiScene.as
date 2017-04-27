@@ -64,22 +64,29 @@ package classes.Scenes.Areas.GlacialRift
 		
 		public function winAgainstYeti():void {
 			clearOutput();
+			
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.", true);
+				combat.cleanupAfterCombat();
+				return;
+			}
+			
 			if (monster.HP <= 0) outputText("The yeti beast’s bruised and battered body stares you down, though it’s obvious his muscles are giving out. With a loud thump he falls on his back, and lays there, vulnerable. A bellowed groan of defeat echoes the cavern walls and the threat passes. What do you do now?");
 			else outputText("The beast looks at you with a hungry gaze, his hot thick member sliding from the sheath between his legs. Unable to fight it any longer, the yeti wraps his hands around his long hot prick, protecting it from the cold as he pleasures the slick, stiff flesh. You lower your guard as you realize the monster is no longer willing to fight, content to just touch himself while looking warily at you. So, what do you do now?");
 			//Options
 			menu()
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0){
+			addDisabledButton(0, "Buttfuck", "This scene requires you to have cock and sufficient arousal.");
+			addDisabledButton(1, "RideHisCock", "This scene requires you to have vagina and sufficient arousal.");
+			
+			if (player.lust >= 33){
 				if (player.hasCock()) {
 					addButton(0, "Buttfuck", fuckYetiInTheAss);
 				}
 				if (player.hasVagina()) {
 					addButton(1, "RideHisCock", rideYetisCock);
 				}
-				addButton(4, "Leave", combat.cleanupAfterCombat);
 			}
-			else {
-				combat.cleanupAfterCombat();
-			}
+			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
 		
 		private function fuckYetiInTheAss():void {

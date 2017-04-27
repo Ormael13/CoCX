@@ -162,14 +162,23 @@ package classes.Scenes.Areas.Plains
 			if (monster.HP <= 0) outputText(" dazed");
 			else outputText(" aroused");
 			outputText(" to fight further.  One spotted paw holds tight to the shaft while the tawny warrior slowly falls to her knees, the will to fight completely gone.  Her head bows to you in submission as you slowly approach the defeated hyena.", false);
-			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+			
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				combat.cleanupAfterCombat();
+				return;
+			}
+			
+			menu();
+			addDisabledButton(0, "Get BJ", "This scene requires you to have cock and sufficient arousal.", "Get Blowjob");
+			addDisabledButton(1, "Get Licked", "This scene requires you to have vagina and sufficient arousal.");
+			
+			if (player.lust >= 33 && !player.isGenderless()) {
 				outputText("\n\nUsing the hyena to get off would be easy.  What do you do?");
-				menu();
 				if (player.hasCock()) addButton(0, "Get BJ", hyenaVictoryRapeFellatio, null, null, null, "Make the gnoll suck you off.", "Get Blowjob");
 				if (player.hasVagina()) addButton(1, "Get Licked", victoryRapeHyenaCunnilingus, null, null, null, "Make the gnoll lick your pussy.");
-				addButton(4, "Leave", combat.cleanupAfterCombat);
 			}
-			else doNext(combat.cleanupAfterCombat);
+			
+			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
 
 //<Hyena Defeat - Fellatio>

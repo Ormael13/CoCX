@@ -34,7 +34,7 @@ import classes.GlobalFlags.kFLAGS;
 
 		
 		//Key items
-		public var keyItems:Array;
+		public var keyItems:/*KeyItemClass*/Array;
 		
 		public function Character()
 		{
@@ -297,7 +297,7 @@ import classes.GlobalFlags.kFLAGS;
 
 		public function hasMuzzle():Boolean
 		{
-			if (faceType == FACE_HORSE || faceType == FACE_DOG || faceType == FACE_CAT || faceType == FACE_LIZARD || faceType == FACE_KANGAROO || faceType == FACE_FOX || faceType == FACE_DRAGON || faceType == FACE_RHINO || faceType == FACE_ECHIDNA || faceType == FACE_DEER)
+			if (faceType == FACE_HORSE || faceType == FACE_DOG || faceType == FACE_CAT || faceType == FACE_LIZARD || faceType == FACE_KANGAROO || faceType == FACE_FOX || faceType == FACE_DRAGON || faceType == FACE_RHINO || faceType == FACE_ECHIDNA || faceType == FACE_DEER || faceType == FACE_WOLF)
 				return true;
 			return false;
 		}
@@ -326,6 +326,8 @@ import classes.GlobalFlags.kFLAGS;
 					stringo = "rhino ";
 				if (int(Math.random() * 3) == 0 && (faceType == FACE_LIZARD || faceType == FACE_DRAGON))
 					stringo = "reptilian ";
+				if (int(Math.random() * 3) == 0 && faceType == FACE_WOLF)
+					stringo = "canine ";
 				switch(rand(3)) {
 					case 0:
 						return stringo + "muzzle";
@@ -385,32 +387,43 @@ import classes.GlobalFlags.kFLAGS;
 
 		public function isButtPregnant():Boolean { return _buttPregnancyType != 0; }
 	
-		//fertility must be >= random(0-beat)
-		//If arg == 1 then override any contraceptives and guarantee fertilization
-		public function knockUp(type:int = 0, incubation:int = 0, beat:int = 100, arg:int = 0):void
+		
+		/**
+		 * Impregnate the character with the given pregnancy type if the total fertility 
+		 * is greater or equal to the roll.
+		 * @param	type the type of pregnancy (@see PregnancyStore.PREGNANCY_xxx)
+		 * @param	incubationDuration the incubation duration
+		 * @param	maxRoll the possible maximum roll for an impregnation check
+		 * @param	forcePregnancy specify a large bonus or malus to fertility (0 = no bonus, positive number = guaranteed pregnancy, negative number = no pregnancy)
+		 */
+		public function knockUp(type:int = 0, incubationDuration:int = 0, maxRoll:int = 100, forcePregnancy:int = 0):void
 		{
+			//TODO push this down into player?
 			//Contraceptives cancel!
-			if (hasStatusEffect(StatusEffects.Contraceptives) && arg < 1)
+			if (hasStatusEffect(StatusEffects.Contraceptives) && forcePregnancy < 1)
 				return;
-//			if (hasStatusEffect(StatusEffects.GooStuffed)) return; //No longer needed thanks to PREGNANCY_GOO_STUFFED being used as a blocking value
+				
 			var bonus:int = 0;
-			//If arg = 1 (always pregnant), bonus = 9000
-			if (arg >= 1)
+			
+			// apply fertility bonus or malus
+			if (forcePregnancy >= 1)
 				bonus = 9000;
-			if (arg <= -1)
+			if (forcePregnancy <= -1)
 				bonus = -9000;
-			//If unpregnant and fertility wins out:
-			if (pregnancyIncubation == 0 && totalFertility() + bonus > Math.floor(Math.random() * beat) && hasVagina())
+				
+			//If not pregnant and fertility wins out:
+			if (pregnancyIncubation == 0 && totalFertility() + bonus > Math.floor(Math.random() * maxRoll) && hasVagina())
 			{
-				knockUpForce(type, incubation);
-				trace("PC Knocked up with pregnancy type: " + type + " for " + incubation + " incubation.");
+				knockUpForce(type, incubationDuration);
+				trace("PC Knocked up with pregnancy type: " + type + " for " + incubationDuration + " incubation.");
 			}
+			
 			//Chance for eggs fertilization - ovi elixir and imps excluded!
 			if (type != PregnancyStore.PREGNANCY_IMP && type != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS && type != PregnancyStore.PREGNANCY_ANEMONE)
 			{
 				if (findPerk(PerkLib.SpiderOvipositor) >= 0 || findPerk(PerkLib.BeeOvipositor) >= 0)
 				{
-					if (totalFertility() + bonus > Math.floor(Math.random() * beat))
+					if (totalFertility() + bonus > Math.floor(Math.random() * maxRoll))
 					{
 						fertilizeEggs();
 					}
@@ -418,12 +431,22 @@ import classes.GlobalFlags.kFLAGS;
 			}
 		}
 
-		//The more complex knockUp function used by the player is defined above
-		//The player doesn't need to be told of the last event triggered, so the code here is quite a bit simpler than that in PregnancyStore
-		public function knockUpForce(type:int = 0, incubation:int = 0):void
+
+		
+		 /**
+		  * Forcefully override the characters pregnancy. If no pregnancy type is provided,
+		  * any current pregancy is cleared.
+		  * 
+		  * Note: A more complex pregnancy function used by the character is Character.knockUp
+		  * The character doesn't need to be told of the last event triggered, so the code here is quite a bit simpler than that in PregnancyStore.
+		  * @param	type the type of pregnancy (@see PregnancyStore.PREGNANCY_xxx)
+		  * @param	incubationDuration the incubation duration
+		  */
+		public function knockUpForce(type:int = 0, incubationDuration:int = 0):void
 		{
+			//TODO push this down into player?
 			_pregnancyType = type;
-			_pregnancyIncubation = (type == 0 ? 0 : incubation); //Won't allow incubation time without pregnancy type
+			_pregnancyIncubation = (type == 0 ? 0 : incubationDuration); //Won't allow incubation time without pregnancy type
 		}
 	
 		//fertility must be >= random(0-beat)

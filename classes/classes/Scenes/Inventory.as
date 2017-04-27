@@ -116,10 +116,6 @@ package classes.Scenes
 		}
 		
 		public function stash():void {
-			/*Hacked in cheat to enable shit
-			flags[kFLAGS.TAKEN_WEAPON_RACK_DEPRECATED] = 1;
-			flags[kFLAGS.TAKEN_ARMOUR_RACK_DEPRECATED] = 1;*/
-			//REMOVE THE ABOVE BEFORE RELASE ()
 			hideMenus();
 			clearOutput();
 			spriteSelect(-1);

@@ -3285,51 +3285,88 @@ public function katherineSex():void {
 
 private function katSexMenu():void {
 	katherineSprite(true);
-	var penetrate:Function = null;
-	var getPen:Function = null;
-	var helix:Function = null;
-	var suckle:Function = null;
+	menu();
+	addDisabledButton(0, "Penetration", "This scene requires you to have fitting cock and sufficient arousal.");
+	// 1 - oral always available
+	// 2 - handjob always available
+	// 3 - variable by location
+	// 4 - variable by location
+	addDisabledButton(5, "GetPenetrated", "This scene requires Kath to have cock and you to have sufficient arousal.");
+	addDisabledButton(6, "DoubleHelix", "This scene requires you to have fitting cock, vagina and sufficient arousal.");
+	addDisabledButton(7, "Suckle", "This scene requires at least one of you to lactate.");
+	
+	addButton(1, "Oral", oralKatherineChoices);
+	addButton(2, "Handjob", handjobbiesFurrDemCatFurries);
+	
 	if (player.lust >= 33) { //No penetration or helix if you’re at low lust
 		if (player.hasCock()) {
-			if (player.cockThatFits(70) >= 0) penetrate = katPenetrate;
+			if (player.cockThatFits(70) >= 0) {
+				addButton(0, "Penetration", katPenetrate);
+			}
 		}
 		if (hasCock()) {
-			getPen = letKatKnotYou;
-			if (player.hasCock() && player.hasVagina() && player.cockThatFits(70) >= 0) helix = katDoubleHelixCraziness;
+			addButton(5, "GetPenetrated", letKatKnotYou);
+			if (player.hasCock() && player.hasVagina() && player.cockThatFits(70) >= 0) {
+				addButton(6, "DoubleHelix", katDoubleHelixCraziness);
+			}
 		}
 	}
 	if (player.lactationQ() > 0 && player.biggestLactation() >= 1 && player.biggestTitSize() >= 1) {
-		if (doneSubmissive(KBIT_SUB_START_LACTATION))
-			suckle = suckleMenu;
-		else suckle = suckleTacularKats;
+		if (doneSubmissive(KBIT_SUB_START_LACTATION)) {
+			addButton(7, "Suckle", suckleMenu, undefined, undefined, undefined, "Both of you are lactating!");
+		} else {
+			addButton(7, "Suckle", suckleTacularKats, undefined, undefined, undefined, "You have some milk for your hungry kitty!");
+		}
 	}
-	else if (doneSubmissive(KBIT_SUB_START_LACTATION)) suckle = suckleFromKath;
+	else if (doneSubmissive(KBIT_SUB_START_LACTATION)) {
+		addButton(7, "Suckle", suckleFromKath, undefined, undefined, undefined, "Milk your cat!");
+	}
 	
 	if (isAt(KLOC_KATHS_APT)) {
-		var bedBond:Function = (hasAlready(KBIT_TRIED_BEDROOM_BONDAGE) || player.gems >= 40 ? bedroomBondage : null);
-		choices("Penetration", penetrate, "Oral", oralKatherineChoices, "Handjob", handjobbiesFurrDemCatFurries, "Bed Bondage", bedBond, "", null,
-		"GetPenetrated", getPen, "DoubleHelix", helix, "Suckle", suckle, "", null, "Back", katherineMenu);
+		if (hasAlready(KBIT_TRIED_BEDROOM_BONDAGE) || player.gems >= 40) {
+			addButton(2, "Bed Bondage", bedroomBondage);
+		} else {
+			addDisabledButton(2, "Bed Bondage", "This scene requires you to have 40 gems to buy some toys.");
+		}
+		addButton(14, "Back", katherineMenu);
 	}
 	else { //Not yet employed or at the bar. Kath can't be on duty, since there's a special sex menu for on duty encounters
-		var seeUrta:Function = null;
-		var seeVala:Function = null;
-		var backOpt:Function = katherineMenu;
+		addButton(14, "Back", katherineMenu);
 		if (isAt(KLOC_BAR)) { //Check to see if her partners are comfortable fucking her sober
-			if (flags[kFLAGS.KATHERINE_URTA_AFFECTION] > 10 && getGame().urta.urtaAtBar() && getGame().urta.urtaAvailableForSex()) seeUrta = katherineSeeUrta;
-			if (flags[kFLAGS.KATHERINE_VALA_AFFECTION] > 10 && isValaAtBar()) seeVala = katherineSeeVala;
+			if (flags[kFLAGS.KATHERINE_URTA_AFFECTION] > 10 && getGame().urta.urtaAtBar() && getGame().urta.urtaAvailableForSex()) {
+				addButton(3, "See Urta", katherineSeeUrta);
+			} else {
+				addDisabledButton(3, "See Urta", "This scene requires high enough affection between you three. Urta should be available at bar.");
+			}
+			if (flags[kFLAGS.KATHERINE_VALA_AFFECTION] > 10 && isValaAtBar()) {
+				addButton(4, "See Vala", katherineSeeVala);
+			} else {
+				addDisabledButton(4, "See Vala", "This scene requires high enough affection between you three. Vala should be available at bar.");
+			}
 		}
 		else if (isAt(KLOC_BAR_DRUNK)) {
-			suckle = null; //If she's drunk she wants sex, not suckling
-			if (getGame().urta.urtaAtBar() && getGame().urta.urtaAvailableForSex() && !getGame().urta.drainedByKath) seeUrta = katherineDrunkSeeUrta; //Different conversation if Kath is sloshed
-			if (isValaAtBar() && !getGame().urta.drainedByKath) seeVala = katherineSeeVala;
-			backOpt = null; //Kath won't take no for an answer if she's sauced
+			addDisabledButton(7, "Suckle", "This scene requires at least one of you to lactate. If she's drunk she wants sex, not suckling.");
+			if (getGame().urta.urtaAtBar() && getGame().urta.urtaAvailableForSex() && !getGame().urta.drainedByKath) {
+				addButton(3, "See Urta", katherineDrunkSeeUrta); //Different conversation if Kath is sloshed
+			} else {
+				addDisabledButton(3, "See Urta", "Urta should be available at bar.");
+			}
+			if (isValaAtBar() && !getGame().urta.drainedByKath) {
+				addButton(4, "See Vala", katherineSeeVala);
+			} else {
+				addDisabledButton(4, "See Vala", "Vala should be available at bar.");
+			}
+			addDisabledButton(14, "Back", "Kath won't take no for an answer if she's sauced!");
 		}
 		else if (isAt(KLOC_BAR_URTA_REFUSED)) {
-			if (isValaAtBar()) seeVala = katherineSeeVala;
-			backOpt = null; //Kath won't take no for an answer if she's sauced
+			addDisabledButton(3, "See Urta");
+			if (isValaAtBar()) {
+				addButton(4, "See Vala", katherineSeeVala);
+			} else {
+				addDisabledButton(4, "See Vala", "Vala should be available at bar.");
+			}
+			addDisabledButton(14, "Back", "Kath won't take no for an answer if she's sauced!");
 		}
-		choices("Penetration", penetrate, "Oral", oralKatherineChoices, "Handjob", handjobbiesFurrDemCatFurries, "See Urta", seeUrta, "See Vala", seeVala,
-		"GetPenetrated", getPen, "DoubleHelix", helix, "Suckle", suckle, "", null, "Back", backOpt);
 	}
 }
 
@@ -3345,26 +3382,44 @@ private function katherineDrunkSeeUrta():void {
 		var button:int = 0;
 		menu();
 		if (submissiveness() >= 3) {
-			addButton(button++, "Orgy", telAdre.katherineThreesome.orgy);
+			addButton(0, "Orgy", telAdre.katherineThreesome.orgy);
 			outputText("  On the other hand everyone enjoys an orgy. \n\nYou");
 			outputText("");
 		}
-		else outputText("\n\nOtherwise you");
-		if (player.gender == GENDER_NONE) {
+		else {
+			addDisabledButton(0, "Orgy", "This scene requires Kath to be more submissive.");
+			outputText("\n\nOtherwise you");
+		}
+		if (player.isGenderless()) {
 			outputText(" could let the two of them fuck.  Unfortunately, you really aren't equipped for more than that.");
-			addButton(button++, "Watch", telAdre.katherineThreesome.watchNoIntro, true);
+			addButton(1, "Watch", telAdre.katherineThreesome.watchNoIntro, true);
 		}
 		else {
 			outputText(" could let the two of them fuck and then help yourself or you and Urta could work together to fill Kath's needy holes.");
-			addButton(button++, "Let 'em fuck", telAdre.katherineThreesome.doubleStuffKath);
-			if (player.hasCock()) addButton(button++, "Dbl Pen Kath", telAdre.katherineThreesome.doublePenetrateKath);
+			addButton(1, "Let 'em fuck", telAdre.katherineThreesome.doubleStuffKath);
+			if (player.hasCock()) {
+				addButton(2, "Dbl Pen Kath", telAdre.katherineThreesome.doublePenetrateKath);
+			} else {
+				addDisabledButton(2, "Dbl Pen Kath", "This scene requires you to have cock.");
+			}
 		}
 	}
 	else if (flags[kFLAGS.KATHERINE_URTA_AFFECTION] > 10) { //Willing to bang Kath (when sober)
 		outputText("Urta hugs her back and asks, “<i>" + player.short + ", Kath - Looking to get in a little trouble?</i>” before scratching behind Kath’s ears.\n\n");
 		outputText("Kath winks at you, gives Urta a kiss and says, “<i>only the best kind of trouble,</i>” in a slightly slurred voice.");
-		simpleChoices("Lick Out", telAdre.katherineThreesome.kathLicksOutUrta, "Sandwich", (hasCock() ? telAdre.katherineThreesome.sandwich : null),
-			"Knothole", (player.gender != GENDER_NONE && hasCock() ? telAdre.katherineThreesome.knothole : null), "", null, "", null); //Do not show knothole button for genderless
+		menu();
+		addButton(0, "Lick Out", telAdre.katherineThreesome.kathLicksOutUrta);
+		if (hasCock()) {
+			addButton(1, "Sandwich", telAdre.katherineThreesome.sandwich);
+		} else {
+			addDisabledButton(1, "Sandwich", "This scene requires Kath to have cock.");
+		}
+		if (!player.isGenderless() && hasCock()) { //Do not show knothole button for genderless
+			addButton(2, "Knothole", telAdre.katherineThreesome.knothole);
+		} else {
+			addDisabledButton(2, "Knothole", "This scene requires Kath to have cock. You should have genitals.");
+		}
+		
 	}
 	else { //Not willing to bang Kath (while sober) just yet
 		outputText("Urta pushes Kath back gently.  “<i>Whoa - " + player.short + " I think someone’s had a bit much.</i>”\n\n");
@@ -3385,23 +3440,31 @@ private function katherineSeeUrta():void {
 		outputText("Urta looks up as the two of you cross the open floor, her horse cock rising rapidly.");
 		menu();
 		addButton(0, "Watch", telAdre.katherineThreesome.watch, true);
-		if (hasCock()) addButton(1, "Pin & Fuck", telAdre.katherineThreesome.pinAndFuck);
+		if (hasCock()) {
+			addButton(1, "Pin & Fuck", telAdre.katherineThreesome.pinAndFuck);
+		} else {
+			addDisabledButton(1, "Pin & Fuck", "This scene requires Kath to have cock.");
+		}
 	}
 	else {
 		outputText("Katherine looks over at Urta’s table.  Urta catches her looking and gestures for both of you to come over.\n\n");
 		outputText("Kath offers you her hand and says, “<i>I guess we’d better get over there.  It looks like Urta’s really horny and I wouldn’t want to disappoint her.</i>”\n\n");
 		outputText("Given the warmth you feel from Katherine’s body you think that she’s projecting some of her own feelings onto Urta.  It doesn’t matter much to you.  No matter how you play this you’re likely to wind up with a pair of hot, naked herms on your hands.  Life as the champion can be so tough sometimes.\n\n");
 		menu();
-		if (player.gender == GENDER_NONE) {
-			if (hasCock())
-				addButton(0, "Roast You", telAdre.katherineThreesome.roastYou);
-			else addButton(0, "Watch", telAdre.katherineThreesome.watch, false); //A non-drunk version of this scene deals with the difficult ones if Kath can't pound you
+		addDisabledButton(0, "Roast You", "This scene requires Kath to have cock.");
+		addDisabledButton(1, "Roast Kath", "This scene requires you to have genitals.");
+		addDisabledButton(2, "Circlejeck", "This scene requires you to have genitals.");
+		addDisabledButton(3, "369", "This scene requires you to have cock.");
+		
+		if (hasCock()) {
+			addButton(0, "Roast You", telAdre.katherineThreesome.roastYou);
 		}
-		else {
-			addButton(0, "Circlejeck", telAdre.katherineThreesome.circlejerk);
+		if (!player.isGenderless()) {
 			addButton(1, "Roast Kath", telAdre.katherineThreesome.spitroastKath);
-			if (hasCock()) addButton(2, "Roast You", telAdre.katherineThreesome.roastYou);
+			addButton(2, "Circlejeck", telAdre.katherineThreesome.circlejerk);
 			if (player.hasCock()) addButton(3, "369", telAdre.katherineThreesome.threeSixtyNine);
+		} else if (!hasCock()) {
+			addButton(4, "Watch", telAdre.katherineThreesome.watch, false); //A non-drunk version of this scene deals with the difficult ones if Kath can't pound you
 		}
 	}
 }
@@ -3411,10 +3474,15 @@ private function katherineSeeVala():void {
 	outputText("Kath looks like she’s ready for some fun but before you get started something else catches your eye.  You note that Vala is sitting at one end of the bar, her tray propped up beside her.  It looks like a slow night and Vala seems bored.  " + (flags[kFLAGS.KATHERINE_VALA_AFFECTION] < 5 ? "You decide it’s time to expand their horizons and" : "You know they enjoy each other’s company so you") + " motion for her to come over.\n\n");
 	outputText("Vala flies over quickly.  When she arrives you pat the seat next to you. You’re sitting between your submissive cat " + catGirl("girl", "morph") + " on one side and your supersized faerie on the other.  You certainly walked a strange path to wind up here.");
 	menu();
+	addDisabledButton(1, "Eat Out", "This scene requires Kath to have cock.");
+	addDisabledButton(2, "Dbl Stuff", "This scene requires both Kath and you to have cock. It does not accomodate taurs.");
+	
 	addButton(0, "Fist Them", telAdre.katherineThreesome.fistKathAndVala);
 	if (hasCock()) { //All but the fisting scene require Kath be a herm
 		addButton(1, "Eat Out", telAdre.katherineThreesome.eatOutVala);
-		if (!player.isTaur() && player.hasCock()) addButton(2, "Dbl Stuff", telAdre.katherineThreesome.doubleStuffVala);
+		if (!player.isTaur() && player.hasCock()) {
+			addButton(2, "Dbl Stuff", telAdre.katherineThreesome.doubleStuffVala);
+		}
 	}
 }
 
@@ -3428,13 +3496,21 @@ private function katPenetrate():void {
 		flags[kFLAGS.KATHERINE_LOCATION] = KLOC_STREETS;
 	}
 	outputText("You suggest that maybe you could try penetrating one of Katherine's holes.  Without further ado, she strips herself off until she's wearing nothing but a lecherous grin.  She then turns around and " + (isAt(KLOC_KATHS_APT) ? "perches on the edge of her bed" : "leans on a crate") + ", waving her tail to freely show off both her tailhole and her already-dripping cunt" + (hasBalls() ? " above her dangling balls" : "") + ".  “<i>So, come on in,</i>” she purrs.\n\n");
-	var vagina:Function = penetrateKatsVag;
-	var anus:Function = pcPenetratesKatAnally;
-	var double:Function = pcPenetratesKatDoubly;
-	var sucknFucks:Function = suckNFuck;
-	if (player.cockThatFits2(70) < 0) double = null;
-	if (!hasCock() || knotSize > 4) sucknFucks = null;
-	simpleChoices("Vagina", vagina, "Anus", anus, "Both", double, "SucknFuck", sucknFucks, "Back", katSexMenu);
+	menu();
+	addButton(0, "Vagina", penetrateKatsVag);
+	addButton(1, "Anus", pcPenetratesKatAnally);
+	if (player.cockThatFits2(70) >= 0) {
+		addButton(2, "Both", pcPenetratesKatDoubly);
+	} else {
+		addDisabledButton(2, "Both", "This scene requires you to have second fitting cock.");
+	}
+	if (!hasCock() || knotSize > 4) {
+		addDisabledButton(3, "SucknFuck", "This scene requires Kath to have cock with not too large knot.");
+	} else {
+		addButton(2, "SucknFuck", suckNFuck);
+	}
+	
+	addButton(14, "Back", katSexMenu);
 }
 
 //PC Penetrates Kath: Vaginal (doin' a cat doggy-style)
@@ -3883,15 +3959,34 @@ private function letKatKnotYou():void {
 	}
 	else letKatKnotYouCommonDialogue(false); //Either at her apartment or behind Oswald's
 	//[Vagina] [Anus] [Double Penetrate] [Sucked 'n' Fucked]
-	var dubs:Function = null;
-	if (cockNumber > 1 && player.hasVagina()) dubs = getDoublePennedByKat;
-	var sukn:Function = null;
-	var vag:Function = null;
-	if (player.hasVagina()) vag = letKatKnotYourCuntPussyFuck;
-	//This scene requires the PC has a penis and has fucked Kat at least once since moving her
-	if (player.hasCock() && flags[kFLAGS.KATHERINE_TIMES_SEXED] > 0) sukn = suckedNFuckedByKat;
-	var backroomFuck:Function = (isAt(KLOC_BAR_DRUNK) || isAt(KLOC_BAR_URTA_REFUSED) ? drunkFuck : null);
-	choices("Vagina", vag, "Anus", getPenetrated, "DblPenetr", dubs, "SuckNFuckd", sukn, "Backroom", backroomFuck, "", null, "", null, "", null, "", null, "Back", katSexMenu);
+	menu();
+	if (player.hasVagina()) {
+		addButton(0, "Vagina", letKatKnotYourCuntPussyFuck);
+		if (cockNumber > 1) {
+			addButton(2, "DblPenetr", getDoublePennedByKat);
+		} else {
+			addDisabledButton(2, "DblPenetr", "This scene requires Kath to have two cocks.");
+		}
+	} else {
+		addDisabledButton(0, "Vagina", "This scene requires you to have vagina.");
+		addDisabledButton(2, "DblPenetr", "This scene requires you to have vagina. Kath should have two cocks.");
+	}
+	addButton(1, "Anus", getPenetrated);
+	if (player.hasCock() && flags[kFLAGS.KATHERINE_TIMES_SEXED] > 0) {
+		addButton(3, "SuckNFuckd", suckedNFuckedByKat);
+	} else if (flags[kFLAGS.KATHERINE_TIMES_SEXED] <= 0) {
+		addDisabledButton(3, "SuckNFuckd", "This scene requires you to have some sexual experience with Kath.");
+	} else {
+		addDisabledButton(3, "SuckNFuckd", "This scene requires you to have cock.");
+	}
+	
+	if (isAt(KLOC_BAR_DRUNK) || isAt(KLOC_BAR_URTA_REFUSED)) {
+		addButton(4, "Backroom", drunkFuck);
+	} else if (isAt(KLOC_BAR)) {
+		addDisabledButton(4, "Backroom", "Maybe if she'll drink more...");
+	}
+	
+	addButton(14, "Back", katSexMenu);
 }
 
 private function letKatKnotYouCommonDialogue(inAlleyBehindBar:Boolean):void {
@@ -4261,10 +4356,17 @@ private function oralKatherineChoices():void {
 	}
 	outputText("With a smirk, you suggest a taste test.  Katherine blinks, then smiles. “<i>Fine by me... but who's going to be the taster?</i>”\n\n");
 	menu();
-	if (hasCock())
+	if (hasCock()) {
 		addButton(0, "PC Sucks", giveKatOralPenisWingWang);
-	else addButton(0, "PC Laps", giveKatOralPussyLicking);
-	if (player.gender > 0) addButton(1, "Kath Laps", katherineGivesPCOralAllDayLongDotJPG);
+	}
+	else {
+		addButton(0, "PC Laps", giveKatOralPussyLicking);
+	}
+	if (!player.isGenderless()) {
+		addButton(1, "Kath Laps", katherineGivesPCOralAllDayLongDotJPG);
+	} else {
+		addDisabledButton(1, "Kath Laps", "This scene requires you to have genitals.");
+	}
 	addButton(4, "Back", katSexMenu);
 }
 
@@ -4729,7 +4831,10 @@ private function katDoubleHelixCraziness():void {
 
 //Suckle
 private function suckleMenu():void {
-	simpleChoices("She Suckles", suckleTacularKats, "You Suckle", suckleFromKath, "", null, "", null, "Back", katSexMenu);
+	menu();
+	addButton(0, "She Suckles", suckleTacularKats);
+	addButton(1, "You Suckle", suckleFromKath);
+	addButton(14, "Back", katSexMenu);
 }
 
 private function suckleFromKath():void {
@@ -5411,15 +5516,31 @@ public function bathTime():void {
 		outputText(" like a red hot poker.");
 	}
 	if (player.isTaur()) {
-		if (player.cocks.length == 0) //Female or genderless
-			doNext(bathTimeCentaurPenetrated);
-		else simpleChoices("Ride", bathTimeCentaurRide, "GetPenetrated", bathTimeCentaurPenetrated, "", null, "", null, "", null);
+		menu();
+		if (pc.hasCock()) {
+			addButton(0, "Ride", bathTimeCentaurRide);
+		} else {
+			addDisabledButton(0, "Ride", "This scene requires you to have cock.");
+		}
+		addButton(1, "GetPenetrated", bathTimeCentaurPenetrated);
 	}
 	else {
-		if (player.cocks.length == 0) //Female or genderless
-			doNext(hasCock() ? bathTimePenetrated : bathTimeFrustrated);
-		else //Herm or Male
-			simpleChoices("Penetrate", bathTimeFuckKath, "GetPenetrated", (hasCock() ? bathTimePenetrated : null), "", null, "", null, "", null);
+		menu();
+		if (pc.hasCock()) {
+			addButton(0, "Penetrate", bathTimeFuckKath);
+		} else {
+			addDisabledButton(0, "Penetrate", "This scene requires you to have cock.");
+		}
+		if (hasCock()) {
+			addButton(1, "GetPenetrated", bathTimePenetrated);
+		} else {
+			addDisabledButton(1, "GetPenetrated", "This scene requires Kath to have cock.");
+		}
+		
+		if (!hasCock() && !pc.hasCock()) { //Female or genderless
+			menu();
+			addButton(0, "Next", bathTimeFrustrated);
+		}
 	}
 }
 

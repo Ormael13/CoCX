@@ -39,9 +39,11 @@ public function changingRoom():void {
 		outputText("You enter back into the largest of the changing rooms. Everything seems to be as it was the last time you poked your head in here. Everything somehow stays so clean in this particular place despite that so much sex and debauchery goes down in this city. You find it all rather refreshing, quite honestly.", false);
 	}
 	//[Look Around]
+	menu();
 	if (flags[kFLAGS.JASUN_NAME_LEARNED] == 0)
-		simpleChoices("Look Around", meetJasun, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
-	else simpleChoices("Jasun", meetJasun, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+		addButton(0, "Look Around", meetJasun);
+	else addButton(0, "Jasun", meetJasun);
+	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 
 //AT CHANGING ROOM (SELECTING TO SEE THE SHARK OR LOOK AROUND IF FIRST TIME)

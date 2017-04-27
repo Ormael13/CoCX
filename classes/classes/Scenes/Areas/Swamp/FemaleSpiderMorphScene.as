@@ -475,24 +475,39 @@ package classes.Scenes.Areas.Swamp
 		{
 			clearOutput();
 			spriteSelect(73);
+	
+			if (flags[kFLAGS.SFW_MODE] > 0) {
+				outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.", true);
+				combat.cleanupAfterCombat();
+				return;
+			}
+			
 			outputText("The spider-girl drops to her knees and wobbles unsteadily", false);
 			if (monster.lust >= monster.eMaxLust()) outputText(", thrusting two of her carapace-covered finger-tips deep into her sloppy box as she gives into her lust.  She actually has the temerity to demand, \"<i>Fuck me, fuck me now!</i>\"", false);
 			else outputText(", too wounded to fight back or run away.", false);
-			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
-				outputText("\n\nWhat do you do to her?", false);
-				var scissor:Function =null;
-				var pussyFuck:Function =null;
-				var analFuck:Function =null;
-				if (player.hasVagina()) scissor = fSpiderMorphRape;
+			
+			menu();
+			addDisabledButton(0, "Fuck Ass", "This scene requires you to have fitting cock and sufficient arousal.");
+			addDisabledButton(1, "Fuck Pussy", "This scene requires you to have fitting cock and sufficient arousal.");
+			addDisabledButton(2, "Scissor", "This scene requires you to have vagina and sufficient arousal.");
+			
+			if (player.lust >= 33) {
+				outputText("\n\nWhat do you do to her?");
+				
 				if (player.hasCock()) {
-					if (player.cockThatFits(monster.vaginalCapacity()) != -1) pussyFuck = fSpiderMorphRapeDude;
-					else outputText("  <b>You don't have a dick small enough to fuck her vagina.</b>", false);
-					if (player.cockThatFits(monster.analCapacity()) != -1) analFuck = evilSpiderGirlVictoryAnal;
-					else outputText("  <b>Her ass is too tight for you to fit inside.</b>", false);
+					if (player.cockThatFits(monster.analCapacity()) != -1) {
+						addButton(0, "Fuck Ass", evilSpiderGirlVictoryAnal);
+					}
+					if (player.cockThatFits(monster.vaginalCapacity()) != -1) {
+						addButton(1, "Fuck Pussy", fSpiderMorphRapeDude);
+					}
 				}
-				simpleChoices("Fuck Ass", analFuck, "Fuck Pussy", pussyFuck, "Scissor", scissor, "", null, "Leave", combat.cleanupAfterCombat);
+				if (player.hasVagina()) {
+					addButton(2, "Scissor", fSpiderMorphRape);
+				}
 			}
-			else combat.cleanupAfterCombat();
+			
+			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
 
 		//*Victory Female

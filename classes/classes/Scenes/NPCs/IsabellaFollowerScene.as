@@ -524,7 +524,7 @@ public function isabellaMorningWakeupCall():void {
 	outputText("</i>\"\n\n", false);
 	
 	outputText("You slump down while the tension oozes from your frame.  By the time you can move again, Isabella has walked off towards her section of camp.  Is it just you, or does her ass have a particularly sensuous sway this morning?", false);
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("sen", -1.5);
 	doNext(playerMenu);
 }
@@ -686,7 +686,7 @@ private function repeatGermanBratwurstInCamp():void {
 	}
 	flags[kFLAGS.ISABELLA_TIME_SINCE_LAST_HOTDOGGING] = 1;
 	flags[kFLAGS.ISABELLA_TIMES_HOTDOGGED]++;
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("lib", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -833,7 +833,7 @@ private function tentacleBoneFollowerIzzy():void {
 	outputText("feels empty, devoid of any fluid left to spray on her.  ", false);
 	
 	outputText("You keep holding her with " + player.sMultiCockDesc() + " for a moment, both of you enjoying the powerful embrace as you literally dick-hug her.  The entirety of her body is dripping with your jism but she doesn't seem to care.  Eventually, you put her down, letting her splat in the puddle of juices that formed below your junk-prison.  At last, you unfold your arms.\n\n", false);
-	player.orgasm();
+	player.orgasm('Generic');
 	dynStats("lib", -1, "sen", -1, "cor", .3);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1278,7 +1278,7 @@ private function acceptCowpology():void {
 	//Clear burps!
 	if (player.hasStatusEffect(StatusEffects.BurpChanged))
 		player.removeStatusEffect(StatusEffects.BurpChanged);
-	player.orgasm();
+	player.orgasm('Generic');
 	dynStats("sen", -1);
 	//FIRST TIME
 	if (flags[kFLAGS.ISABELLA_PROBOVA_BURP_COUNT] == 1) {
@@ -1392,7 +1392,7 @@ internal function receiveAllTheCowTOngues():void {
 
 	outputText("\n\nYou give her a weak thumbs-up before passing out for a quick nap in her comfy chair.");
 	if (isabellaAccent()) outputText("  A bit confused, she nonetheless leaves and returns with a drink, setting it beside you before leaving you to your rest.");
-	player.orgasm();
+	player.orgasm('Generic');
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1471,7 +1471,7 @@ private function fuckIsabella():void {
 		else outputText("\n\n\"<i>Gods, was I ever wrong about big cocks.  That was... You're incredible with that thing, [name].</i>\"");
 	}
 	outputText("\n\nYou grin and rub the big cow's hair before getting dressed.");
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("sen", -1);
 	isabellaKnockUpAttempt();
 	doNext(camp.returnToCampUseOneHour);
@@ -1581,7 +1581,7 @@ private function isabellaBarnFuckPartII():void {
 	outputText("\n\nYou laugh, and rest your head in the pillowy warmth of her milk-stained bosom.  You're nearly ready to drift off into a post-coitus drowse when you hear a sharp voice behind you, \"<i>Isabella?  You alright in there?</i>\"");
 	
 	outputText("\n\nYou look over your shoulders as Whitney throws the door open, her pitchfork at the ready, as if expecting some demon.  You grin sheepishly, your bare [ass] staring the farmer girl right in the face as your trouser snake drips onto the barn floor.  Silently, Whitney turns on a heel and withdraws, closing the door behind her.  A silent moment passes before you and Isabella erupt in laughter, both reaching for your clothes.");
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("lib", -1, "sen", -3);
 	player.changeFatigue(-25);
 	isabellaKnockUpAttempt();

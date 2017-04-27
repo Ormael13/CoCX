@@ -655,10 +655,12 @@ package classes.Scenes.Areas.HighMountains
 			addButton(0, "Appearance", pureMinervaAppearance);
 			addButton(1, "Talk", minervaTalkSelect);
 			if (player.lust >= 33) addButton(2, "Sex", pureMinervaSexMenu);
+			else addButtonDisabled(2, "Sex", "You are not horny enough.");
 			addButton(3, "Eat", kGAMECLASS.highMountains.minervaScene.eatSomethingYouCunt);
 			addButton(4, "Drink", kGAMECLASS.highMountains.minervaScene.getADrinkYouBitch);
 			addButton(5, "Spar", kGAMECLASS.highMountains.minervaScene.fightMinerva);
 			if (kGAMECLASS.highMountains.minervaScene.minervaRomanced() && model.time.hours >= 20) addButton(6, "Sleep With", sleepWithMinerva);
+			else addDisabledButton(6, "Sleep With", "Available at evenings with high enough affection.");
 			//if (flags[kFLAGS.MINERVA_CHILDREN] > 0) addButton(7, "Children", checkUpOnMinervaChildren);
 			if (kGAMECLASS.highMountains.minervaScene.pregnancy.isPregnant) addButton(7, "Pregnancy", checkPregnancy);
 			if (player.hasKeyItem("Marae's Seed") >= 0) addButton(8, "Plant Seed", growTreePostPurification);
@@ -927,7 +929,6 @@ package classes.Scenes.Areas.HighMountains
 		private function pureMinervaSexMenu():void {
 			menu();
 			clearOutput();
-			var btnIdx:int = 0;
 			outputText("Minerva grins and slides her arms around you. \"<i>Oh darling, you know I'm always ready to have some fun with you.</i>\" Playfully she reaches down and cups your crotch, gently massaging your "); 
 			if (player.hasCock()) outputText(player.cockDescript());
 			if (player.hasCock() && player.hasVagina()) outputText(" and ");
@@ -936,16 +937,23 @@ package classes.Scenes.Areas.HighMountains
 			outputText(". \"<i>So darling, how do you want it today?</i>\" ");
 			if (player.hasVagina()) outputText("\"<i>Want me to stuff that hot little cunt of yours? Or maybe I should prod your delightful rump?</i>\"");
 			
-			if (player.hasCock() && player.cockThatFits(kGAMECLASS.highMountains.minervaScene.minervaACapacity()) >= 0) addButton(btnIdx++, "FuckHerButt", fuckMinervasAsshole);
+			addDisabledButton(0, "FuckHerButt", "This scene requires you to have fitting cock.");
+			addDisabledButton(1, "FuckCowgirl", "This scene requires you to have fitting cock.");
+			addDisabledButton(2, "RestrainFuck", "This scene requires you to have fitting cock.");
+			// 3 - always on
+			// 4 - always on
+			addDisabledButton(5, "Get BJ", "This scene requires you to have cock.");
+			
+			if (player.hasCock() && player.cockThatFits(kGAMECLASS.highMountains.minervaScene.minervaACapacity()) >= 0) addButton(0, "FuckHerButt", fuckMinervasAsshole);
 			if (player.hasCock() && player.cockThatFits(kGAMECLASS.highMountains.minervaScene.minervaVCapacity()) >= 0)
 			{
-				addButton(btnIdx++, "FuckCowgirl", minervaCowgirlSex);
-				addButton(btnIdx++, "RestrainFuck", fuckMinervaWithHerHandsBehindHerBack);
+				addButton(1, "FuckCowgirl", minervaCowgirlSex);
+				addButton(2, "RestrainFuck", fuckMinervaWithHerHandsBehindHerBack);
 			}
-			addButton(btnIdx++, "TakeHerDick", chooseVagOrAss);
-			addButton(btnIdx++, "EatHerOut", goDownOnAHermAndLoveItYouDirtySlutYou);
+			addButton(3, "TakeHerDick", chooseVagOrAss);
+			addButton(4, "EatHerOut", goDownOnAHermAndLoveItYouDirtySlutYou);
 			if (player.hasCock())
-				addButton(btnIdx++, "Get BJ", letMinervaSuckYouOff);
+				addButton(5, "Get BJ", letMinervaSuckYouOff);
 			addButton(14, "Leave", pureMinervaMenu);
 		}
 		

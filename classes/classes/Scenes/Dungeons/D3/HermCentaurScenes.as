@@ -49,7 +49,9 @@
 			menu();
 
 			if (player.hasCock()) addButton(0, "Fuck Her", maleFuckHer);
+			else addDisabledButton(0, "Fuck Her", "This scene requires you to have cock.");
 			if (player.hasVagina()) addButton(1, "Get Fucked", femFuckHer);
+			else addDisabledButton(1, "Get Fucked", "This scene requires you to have vagina.");
 			addButton(5, "Release", letHerGo);
 			addButton(6, "Kill", killHer);
 		}

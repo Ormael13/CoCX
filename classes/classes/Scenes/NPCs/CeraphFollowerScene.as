@@ -578,7 +578,7 @@ package classes.Scenes.NPCs
 			outputText(" and mouths, \"<i>Thank you.</i>\"\n\n", false);
 
 			outputText("Nodding, you give her ass a slap and send her off, noting Ceraph has freed her hands at some point and returned them to their normal position.  She hasn't done anything about the sexual filth coating her body, but knowing her, she probably doesn't want to.", false);
-			player.orgasm();
+			player.orgasm('Dick');
 			dynStats("sen", -2, "cor", .25);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -629,7 +629,7 @@ package classes.Scenes.NPCs
 
 			outputText("You pull her back to your " + player.vaginaDescript() + " to lick the last of your lady-spunk from your nethers, then send her on her way with a smile on your face.  Your expression widens when you see Ceraph stagger, still a bit shaky from her own orgasm.", false);
 			flags[kFLAGS.CERAPH_LICKED_YOU_OUT]++;
-			player.orgasm();
+			player.orgasm('Vaginal');
 			dynStats("sen", -2 ,"cor", .25);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -679,7 +679,7 @@ package classes.Scenes.NPCs
 
 			outputText("You come to in a puddle of cum, both yours and Ceraph's.  The demoness is sitting down across from you, her appearance returned to normal.  She brightens when she wakes and kneels, saying, \"<i>Thank you for allowing me to serve you so... completely, " + player.mf("Master", "Mistress") + ".  It was... thrilling.</i>\"\n\n", false);
 
-			player.orgasm();
+			player.orgasm('Vaginal');
 
 			dynStats("sen", -2, "cor", .25);
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
@@ -769,7 +769,7 @@ package classes.Scenes.NPCs
 			outputText(" thank you for the 'cream'.  You nod weakly and they jump to their feet and swish their tails at you, then depart.\n\n", false);
 
 			//lust to 0, corruption +0.5
-			player.orgasm();
+			player.orgasm('Generic');
 			dynStats("lib", -1);
 			//end scene
 			doNext(camp.returnToCampUseOneHour);
@@ -836,7 +836,7 @@ package classes.Scenes.NPCs
 			outputText("\n\n", false);
 
 			outputText("You wake up before long and find yourself cleaned, though still a little sticky, as if someone had used their tongue to wash the cum from your " + player.skinFurScales() + ".", false);
-			player.orgasm();
+			player.orgasm('Generic');
 			dynStats("lib", -1, "sen", -2, "cor", 2);
 			//Preggers chance!
 			if (player.hasVagina() && player.totalFertility() >= rand(45) && player.pregnancyIncubation == 0) {
@@ -878,7 +878,7 @@ package classes.Scenes.NPCs
 			outputText("When the two of you reach the crest of your climax this time, neither of you has the strength to hold back, triumphantly surging toward your simultaneous orgasms. Urta squeezes your hand so tightly your knuckles crack in her hands while her legs pull your " + player.hipDescript() + " into an iron embrace. Your " + player.cockDescript(player.biggestCockIndex()) + " releases its fertile load into the girl's depths, liquid weight flooding her ravished canal with the creamy testament of your love.  She holds you inside her desperately, her pliant, sable lips murmuring her devotion to you with shuddering whispers.  When you finally finish, she keeps you within her a minute longer, savoring the sensation of your shaft surrounded by the rapturous warmth of your seed, before finally releasing her grip, allowing you to withdraw.  Sighing happily, she rubs her pussy lips as you slip out, a pearl bead of your jizz bubbling from her stuffed uterus. She runs her fingertips through the spunk, massaging the cum against the folds of her glistening labia. \"<i>You know,</i>\" she playfully murmurs, \"<i>now that my curse is broken, I'm not barren anymore.</i>\" She closes her eyes and takes a deep breath, cooing about the feeling of your silken sperm pressing against her waiting womb. You smile, despite yourself.\n\n", false);
 
 			outputText("Retrieving your " + player.armorName + ", when you turn around again, Urta is gone, the moment vanishing like a drop of water in an endless sea. \"<i>Thank you, " + player.mf("Master", "Mistress") + ",</i>\" Ceraph's voice demurely whispers, gratitude floating on the wind.", false);
-			player.orgasm();
+			player.orgasm('Dick');
 			dynStats("lib", -1, "sen", -2, "cor", 2);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1002,7 +1002,7 @@ package classes.Scenes.NPCs
 			outputText("She smiles at you seductively, licking her lips.  A slapping sound along with multiple pants and gasps catches your attention; both you and the succubus look around for its source.  The imps that brought the succubus for you are still masturbating furiously.  She looks at you with an eyebrow raised and says, \"<i>There is only one more thing you have to do to completely subdue me.  Order me to pleasure those lowly imps.</i>\"\n\n", false);
 
 			outputText("Do you?", false);
-			player.orgasm();
+			player.orgasm('Generic');
 			dynStats("lib", -3, "cor", 5);
 			//[Yes][No][Never Again]
 			simpleChoices("Yes", acceptMoreCeraphFauxCorruption, "No", declineCeraphFauxCorruption, "", null, "", null, "Never Again", iQuitCeraphCorruptionDemons);
@@ -1166,7 +1166,7 @@ package classes.Scenes.NPCs
 
 			outputText("Her grip fades, and you turn around to see... nothing.  She's simply gone, vanished without a trace.  No... not without a trace, you realize.  Right near where the milker used to lie sits a lone cowbell, lying in a pool of what you can only assume to be cum.  You reach for it, but it disappears as well, turned into a small puff of smoke and dispersing with the wind.  \"<i>Bye, sweetie,</i>\" the disembodied voice of your demonic slave whispers into your ear, mocking tones interspersed with a promise of further pleasure.", false);
 			//end (stat changes?)
-			player.orgasm();
+			player.orgasm('Dick');
 			dynStats("lib", 1, "sen", -5, "cor", 3);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1282,7 +1282,7 @@ package classes.Scenes.NPCs
 
 				outputText("\"<i>That said,</i>\" she whispers in your ear, \"<i>If you get a chance to do that to that cunt, do invite me.</i>\"", false);
 			}
-			player.orgasm();
+			player.orgasm('Generic');
 			dynStats("sen", -2, "cor", 2);
 			flags[kFLAGS.CERAPH_ROLEPLAY_AS_DOMINIKA_COUNT]++;
 			doNext(camp.returnToCampUseOneHour);
@@ -1389,7 +1389,7 @@ package classes.Scenes.NPCs
 			outputText("Her pussy continues to suck on you gently as you pull out, and when your " + player.cockDescript(x) + " finally comes free of her bizarre lovehole, her tongue gently swirls around the lips before retracting itself inside.  You back up, wondering if you should help the bound kitsune to her feet, but as you are considering this, she flashes you a crazed grin and is suddenly bathed in purple flames, disappearing before your eyes.\n\n", false);
 
 			outputText("\"<i>Zetsuko hopes to taste " + player.mf("Master", "Mistress") + " again sometime...</i>\"", false);
-			player.orgasm();
+			player.orgasm('Dick');
 			dynStats("lib", .25, "sen", -5, "cor", 2);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1444,7 +1444,7 @@ package classes.Scenes.NPCs
 			outputText("Fully spent, you pull yourself back, grasping Zetsuko's still-writhing tongue in your hand and sliding it out of you, letting her lower body thump to the ground.  You watch as her tongue gently swirls around the lips and then retracts within the bizarre orifice, looking for all the world to be an ordinary — if slightly overstretched — pussy.  You wonder if you should help her up for a moment, but as you are considering reaching down to bring her to her feet, she is suddenly bathed in corrupted flames, disappearing before your eyes.\n\n", false);
 
 			outputText("\"<i>Zetsuko hopes to taste " + player.mf("Master", "Mistress") + " again sometime...</i>\"", false);
-			player.orgasm();
+			player.orgasm('Vaginal');
 			dynStats("lib", .25, "sen", -5, "cor", 2);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1549,7 +1549,7 @@ package classes.Scenes.NPCs
 			outputText(" in her hand!  At the base there's smooth flesh and an arcane mark, somehow keeping the disembodied dick alive to pulse and squirm in her grasp.  The place on your groin is left completely smooth and featureless, as if it had never been there at all.", false);
 			outputText("\n\nCeraph runs a finger up and down the length, setting off fireworks in your brain – you can still feel it!  The demoness laughs and says, \"<i>Don't worry, that will fade once I get it further away, though you know what to expect at night, right?  For now, enjoy the pleasure!  Oh, and thank you again for this, you won't regret it.  If you do, no refunds.</i>\"", false);
 			outputText("\n\nShe pirouettes away, practically dancing into the sky while she strokes and teases the cock you just lost.  You shudder and shake as orgasm wracks your body, your cum falling like rain thousands of feet away.  You swear, you can hear your pet laughing.", false);
-			player.orgasm();
+			player.orgasm('Dick');
 			dynStats("lib", -2, "sen", -2, "cor", 5);
 			flags[kFLAGS.CERAPH_DICKS_OWNED]++;
 			player.removeCock(x, 1);
@@ -1567,7 +1567,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nYou work your jaw in consternation, trying to stay upright as Ceraph starts to fly away, amusing herself by masturbating your old cunt as she flies.  The lewd squishes seem to hang in the air, and you're helpless to do naught but writhe in the dirt and moan as you're brought to orgasm from a nonexistent vagina.  It seems as soon as she leaves camp she forgets she's supposed to be YOUR subservient bitch.");
 			player.removeVagina(0, 1);
 			//(-100 lust, -1 fetish, +1 vagina toy status)
-			player.orgasm();
+			player.orgasm('Vaginal');
 			dynStats("lib", -2, "sen", -2, "cor", 5);
 			flags[kFLAGS.CERAPH_PUSSIES_OWNED]++;
 			doNext(camp.returnToCampUseOneHour);
@@ -1663,7 +1663,7 @@ package classes.Scenes.NPCs
 			outputText("  Her hands run through your [hair] and pull your [face] into her shoulder.  She holds you tightly, clingingly even.  If you weren't so enraptured by the sensation of your sperm-filled nipples, you might actually care.");
 			outputText("\n\nThe two of you slowly relax, dueling climaxes winding down to return some level of sanity at last.  As soon as the demoness' eyes uncross, she stands up, " + num2Text(player.totalNipples()) + " dicks sliding free of clutching, spunk-stuffed twats at once.  You gasp and shudder, the sensitive flesh nearly setting you off again.  As she stretches, Ceraph's new appendages shrink, losing their masculinity and even faster their size.  You rise while trying to ignore the runnels of demon-spunk that spout from your well-fucked chest, your [chest] wobbling fantastically with the extra fluid weight.  Ceraph leans over to suck a [nipple] into her mouth, and after a few quick swallows, she sighs contently.");
 			outputText("\n\n\"<i>Delicious, my [Master],</i>\" the demoness coos as her wings unfurl, \"<i>Please, let's do this again.</i>\"  She leaps into the sky and flies off, no doubt to tend to her own pets.");
-			player.orgasm();
+			player.orgasm('Nipples');
 			dynStats("sen", 2, "cor", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1703,7 +1703,7 @@ package classes.Scenes.NPCs
 			outputText("\n\nThere's no stopping the surging passion as it races through you, and with a throaty sigh, you release your seed.  It's amazing, from this vantage you can do more than just experience your orgasm, you can watch it happen.  You can see the underside of your disembodied cock bulging with each urethra-stretching load.[if (cumQuantity > 500)   Jizz foams at her lips as her belly rounds, and you're treated to the sight of Ceraph's bellybutton suddenly becoming an outtie.][if (cumQuantity > 1000)   A moment later, her stomach rounds further, taking on a positively pregnant appearance.][if (cumQuantity > 1500)   Spunky rivers pump from the demon's overfull womb as it loses its ability to stretch any further.]  You sigh and idly move the portal up and down, fucking through the sloshing, sperm-filled mess that the demon's cunt has turned into.  Delightful.");
 			if (flags[kFLAGS.CERAPH_HIDING_DICK] == 0) outputText("\n\nCeraph gurgles happily for a second, then her cheeks bulge.  Her throat begins working, and you realize she's cumming into her own mouth.  By the look of how squirrel-like her visage has become, she can barely manage to swallow a mouthful before the next is stuffing her full, dribbles of pearly cream running freely from the corners of her mouth.  Ceraph quietly gulps and swallows over and over until her dick finally begins to soften, spent at last.");
 			outputText("\n\nYou stand up and stretch, your cock still lodged tight in Ceraph's cooch.  Alas, all good things must come to an end, and with one slow tug, you remove the ring from your [cock " + y + "] (and your maleness from her cunt).  You toss the borrowed item back to her, letting it fall on your slave's heaving bosom as she tries to recover, a fucked-out mess in the dirt.  You turn to get dressed, and when you glance back, Ceraph is gone, until the next time you call for her.");
-			player.orgasm();
+			player.orgasm('Generic');
 			dynStats("cor", 1);
 			awardAchievement("Now You're Fucking With Portals", kACHIEVEMENTS.GENERAL_FUCK_WITH_PORTALS, true, true);
 			flags[kFLAGS.TIMES_CERAPH_PORTAL_FUCKED]++;
@@ -1755,7 +1755,7 @@ package classes.Scenes.NPCs
 
 			outputText("\n\nHumming a happy tune to yourself as you walk around Ceraph's twitching form, you grab a handful of her hair and pull her up off the ground.  Her face is crusted with dirt and her sparkling, gem-like eyes stare senselessly at you.  You rub your ovipositor over her head, carefully wiping your mingled lubes off on her hair before retracting the organ back into its holding sleeve.  \"<i>That will be all,</i>\" you tell her, and she smiles dreamily at you.  You turn around to gather your things, and don't bother to look back.");
 			player.dumpEggs();
-			player.orgasm();
+			player.orgasm('Ovi');
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1953,7 +1953,7 @@ package classes.Scenes.NPCs
 			outputText("\n\n\"<i>Good, " + player.mf("boy", "girl") + ".</i>\" her voice says, slowly fading into the wind.");
 			//Increase corruption, reset lust, increase sensitivity.
 			player.slimeFeed();
-			player.orgasm();
+			player.orgasm('Generic');
 			dynStats("sen", 2, "cor", 1);
 			doNext(camp.returnToCampUseOneHour);
 		}

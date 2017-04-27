@@ -19,82 +19,24 @@ private function minotaurNeed():Boolean {
  */
 public function minoVictoryRapeChoices():void {
 	spriteSelect(44);
-	//Determine if PC can rape with a dick!
-	var x:Number = player.cockThatFits(monster.analCapacity());
-	var dickRape:Function = null;
-	var cuntRape:Function = null;
-	var tentaRape:Function = null;
-	var hermRape:Function = null;
-	var urethralPen:Function = null;
-	var filled:Function = null;
-	var bj:Function = null;
-	var eggs:Number;
-	var feedposit:String = "B. Feed";
-	var bikiniTits:int;
-	var mutual:Function = null;
-	//Checking to see if can urethral pen
-	if (player.hasCock()) {
-		var counter:Number = 0;
-		//Loop through to see if any dicks qualify, and if so enable it.
-		while(counter < player.cockTotal()) {
-			if (player.cocks[counter].cockThickness <= 4 && player.cocks[counter].cockLength >= 14) urethralPen = minoUrethralPen;
-			counter++;
-		}
+	
+	if (flags[kFLAGS.SFW_MODE] > 0) {
+		outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.", true);
+		combat.cleanupAfterCombat();
+		return;
 	}
-	if (player.hasCock()) {
-		if (player.cockThatFits(80) >= 0) bj = minotaurBlowjob;
-	}
-	if (player.hasCock() && x >= 0) {
-		dickRape = bumRapeaMinotaur;
-		mutual = minoMutual;
-	}
-	if (x >= 0 && player.cockTotal() > 1 && player.countCocksOfType(CockTypesEnum.TENTACLE) > 0) tentaRape = rapeMinotaurTentacles;
-	if (player.hasVagina()) cuntRape = girlRapeAMinotaur;
-	//Centaurs can't do the herm scene
-	if (player.gender == 3 && x >= 0 && !player.isTaur()) hermRape = minotaurGetsRapedByHerms;
-	//Enable feeder scene if appropriate
-	var temp2:Function = null;
-	if (player.findPerk(PerkLib.Feeder) >= 0) temp2 = minotaurDrinksMilkNewsAtEleven;
-	//Oviposit overlaps feeder
-	if (player.canOvipositSpider() || (player.canOvipositBee() && player.gender > 0)) {
-		feedposit = "Lay Eggs";
-		temp2 = layEggsInAMinotaurSpiderLike;
-	}
-	if ((temp2 == null || rand(2) == 0) && player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) {
-		feedposit = "B.Titfuck";
-		temp2 = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
-	}
-	if (temp2 == null && player.hasCock()) //For mino mutual scene, didn't know where else to put since the choices below are full. 
-	{
-		feedposit = "MinoMutual"; //Also didn't know what the actual button should say
-		temp2 = minoMutual;
-	}
-	//Used for tracking prostate milking and injection
-	var tempText:String = "";
-	var temp:Function = null;
-	//Enable mino milking even if not in need
-	if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0) {
-		if (player.biggestTitSize() >= 5 && !player.isNaga()) {
-			temp = minoGetsTitFucked;
-			tempText = "Titfuck Him";
-		}
-		else if (player.isNaga()) {
-			temp = minoGetsTitFucked;
-			tempText = "ProstateMilk";
-		}
-		filled = takeMinoCumDirectly;
-	}
+	
 	//Hungry for cum?  Grab a snickers.
 	if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1) {
 		outputText("Smiling down at your vanquished foe, you feel a familiar hunger growing within you.  What do you do?", true);
 	}
 	//Not an addict
-	else if ((player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) || (feedposit == "Lay Eggs" && flags[kFLAGS.SFW_MODE] <= 0)) {
+	else if (player.lust >= 33 && !player.isGenderless()) {
 		if (monster.lust >= monster.eMaxLust()) outputText("You smile in satisfaction as the " + monster.short + " drops down on all fours and begins masturbating feverishly.  Sadly you realize your own needs have not been met.  Of course you could always fuck the eager bull...\n\nWhat do you do?", true);
 		else outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.  Sadly you realize your own needs have not been met.  Of course you could always rape the poor thing...\n\nWhat do you do?", true);
 	}
 	//Not able to rape but a feeder
-	else if (player.hasStatusEffect(StatusEffects.Feeder) && feedposit == "B. Feed" && flags[kFLAGS.SFW_MODE] <= 0) {
+	else if (player.hasStatusEffect(StatusEffects.Feeder)) {
 		if (monster.lust >= monster.eMaxLust()) outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.  Sadly you realize your own need to breastfeed has not been met.  You could always let the poor thing have a drink...\n\nDo you?", true);
 		else outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.  Sadly you realize your own need to breastfeed has not been met.  You could always let the poor thing have a drink...\n\nWhat do you do?", true);
 	}
@@ -102,23 +44,79 @@ public function minoVictoryRapeChoices():void {
 	else {
 		if (monster.lust >= monster.eMaxLust()) outputText("You smile in satisfaction as the " + monster.short + " drops down on all fours and begins masturbating feverishly.", true);
 		else outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.", true);
-		combat.cleanupAfterCombat();
-		return;
 	}
-	//No rapinz if not horney!
-	if (player.lust < 33) {
-		dickRape = null;
-		cuntRape = null;
-		tentaRape = null;
-		hermRape = null;
-		urethralPen = null;
-		bj = null;
-		mutual = null;
+	
+	menu();
+	
+	addDisabledButton(0, "Use Cock", "This scene requires you to have fitting cock and sufficient arousal.");
+	addDisabledButton(1, "Use Vagina", "This scene requires you to have vagina and sufficient arousal.");
+	addDisabledButton(2, "Use Both", "This scene requires you to be herm and to have sufficient arousal. This scene can't accomodate taurs.");
+	addDisabledButton(3, "TentacleDick", "This scene requires you to have at least two cocks, at least one of them should be tentacle and have sufficient arousal.");
+	addDisabledButton(4, "UrethraFuck", "This scene requires you to have long enough, bot not too thick cock and sufficient arousal.");
+	addDisabledButton(5, "MakeHimSuck", "This scene requires you to have fitting cock and sufficient arousal.");
+	addDisabledButton(6, "MinoMutual", "This scene requires you to have cock and sufficient arousal.");
+	addDisabledButton(7, "Get Filled", "This scene requires you to be a cum addict.");
+	addDisabledButton(8, "Titfuck Him", "This scene requires you to be a cum addict with big tits or naga tail.");
+	addDisabledButton(9, "Lay Eggs", "This scene requires you to have ovipositor and enough eggs. Bee oviposition requires genitals as well.");
+	addDisabledButton(10, "Breastfeed", "This scene requires you to have enough milk.", "Breastfeed");
+	// Button 11 is used for Lusty Maidens Armor special scene and is hidden without it
+	
+	//Determine if PC can rape with a dick!
+	var x:Number = player.cockThatFits(monster.analCapacity());
+	// Scenes with lust requirement first
+	if (player.lust >= 33) {
+		// buttfuck options
+		if (x >= 0) {
+			addButton(0, "Use Cock", bumRapeaMinotaur, undefined, undefined, undefined, "Fuck his ass with your cock.");
+			addButton(6, "MinoMutual", minoMutual, undefined, undefined, undefined, "Fuck his ass with a lot of gentle foreplay.");
+			if (player.cockTotal() > 1 && player.countCocksOfType(CockTypesEnum.TENTACLE) > 0)
+				addButton(3, "TentacleDick", rapeMinotaurTentacles, undefined, undefined, undefined, "Tentacle-flavored buttfuck.");
+		}
+		
+		if (player.hasCock()) {
+			//Checking to see if can urethral pen
+			//Loop through to see if any dicks qualify, and if so enable it.
+			for (var counter:int = 0; counter < player.cockTotal(); counter++) 
+			{
+				if (player.cocks[counter].cockThickness <= 4 && player.cocks[counter].cockLength >= 14) {
+					addButton(4, "UrethraFuck", minoUrethralPen, undefined, undefined, undefined, "Stick your cock into his own.", "Urethra Fuck");
+					break;
+				}
+			}
+			if (player.cockThatFits(80) >= 0) {
+				addButton(5, "MakeHimSuck", minotaurBlowjob, undefined, undefined, undefined, "Get a blowjob.", "Make Him Suck");
+			}
+		}
+		
+		if (player.hasVagina()) {
+			addButton(1, "Use Vagina", girlRapeAMinotaur, undefined, undefined, undefined, "Ride his cock.");
+		}
+		
+		if (player.isHerm() && x >= 0 && !player.isTaur())
+			addButton(2, "Use Both", minotaurGetsRapedByHerms, undefined, undefined, undefined, "Fuck his butt while using his cock.");
 	}
-	choices("Use Cock",dickRape,"Use Vagina",cuntRape,"Use Both",hermRape,"TentacleDick",tentaRape,"UrethraFuck",urethralPen,"Get Filled",filled,tempText,temp,"MakeHimSuck",bj,feedposit,temp2,"Leave", combat.cleanupAfterCombat);
-
-	if (x < 0 && player.hasCock()) outputText("\nSadly, you're too well endowed to penetrate the minotaur.", false);
-	if (player.gender == 3 && player.isTaur()) outputText("\nIf you had a different body type you might be able to penetrate him while taking him, but as a centaur that's not an option.", false);
+	// Cum addict scenes
+	if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0) {
+		addButton(7, "Get Filled", takeMinoCumDirectly, undefined, undefined, undefined, "Get cum injection in your ass.");
+		if (player.biggestTitSize() >= 5 && !player.isNaga()) {
+			addButton(8, "Titfuck Him", minoGetsTitFucked, undefined, undefined, undefined, "Use your breasts to milk him for his cum.");
+		}
+		else if (player.isNaga()) {
+			addButton(8, "ProstateMilk", minoGetsTitFucked, undefined, undefined, undefined, "Use your tail to milk him for his cum.");
+		}
+	}
+	// Special scenes
+	if (player.canOvipositSpider() || (player.canOvipositBee() && !player.isGenderless())) {
+		addButton(9, "Lay Eggs", layEggsInAMinotaurSpiderLike, undefined, undefined, undefined, "Fuck his butt while using his cock.");
+	}
+	if (player.findPerk(PerkLib.Feeder) >= 0 || player.lactationQ() >= 1000) {
+		addButton(10, "Breastfeed", minotaurDrinksMilkNewsAtEleven, undefined, undefined, undefined, "Feed this oversized calf.");
+	}
+	if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) {
+		addButton(11, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri, undefined, undefined, undefined, "Lusty maiden paizuri.");
+	}
+	
+	addButton(14, "Leave", combat.cleanupAfterCombat);
 }
 
 

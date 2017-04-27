@@ -358,7 +358,7 @@ public function nomOnMommaIzzysTits():void {
 			if (flags[kFLAGS.ISABELLA_SLEEP_RAPE_COUNTER] == 0) outputText("  S-she fucked you in your sleep?  That explains how good your dreams were.  On one hand you feel a little violated, but on the other you have to wonder how long this woman has held her camp against the demons with nothing to please her.", false);
 			else outputText("  It looks like she fucked you in your sleep again.  You wish you wouldn't fall asleep so soundly after drinking her milk so that you could contribute to the sex, but you wake so COMPLETELY SATED in every way that you know it's going to be hard to ever turn her down.", false);
 			//(no lust!, minus 50 fatigue)
-			player.orgasm();
+			player.orgasm('Dick');
 			player.changeFatigue(-50);
 			//increment sleep rape counter
 			flags[kFLAGS.ISABELLA_SLEEP_RAPE_COUNTER]++;
@@ -431,7 +431,7 @@ public function nomOnMommaIzzysTits():void {
 				outputText(".", false);
 			}
 			//(no lust!, minus 50 fatigue)
-			player.orgasm();
+			player.orgasm('Dick');
 			player.changeFatigue(-50);
 			//increment sleep rape counter
 			flags[kFLAGS.ISABELLA_SLEEP_RAPE_COUNTER]++;
@@ -592,7 +592,7 @@ public function izzyGivesSmallWangsFreeOral():void {
 		}
 	}
 	if (!isabellaFollower()) isabellaFollowerScene.isabellaAffection(2);
-	player.orgasm();
+	player.orgasm('Dick');
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -730,7 +730,7 @@ public function IsabellaWinsAndSpanks():void {
 		player.refillHunger(30);
 		player.changeFatigue(-40);
 		dynStats("sen", 4);
-		if (player.findPerk(PerkLib.Masochist) >= 0) player.orgasm();
+		if (player.findPerk(PerkLib.Masochist) >= 0) player.orgasm('Generic');
 	}
 	//[Lose And Get Spanked – Tall]
 	else {
@@ -791,7 +791,7 @@ public function IsabellaWinsAndSpanks():void {
 		player.refillHunger(30);
 		player.changeFatigue(-40);
 		dynStats("sen", 4);
-		if (player.findPerk(PerkLib.Masochist) >= 0) player.orgasm();
+		if (player.findPerk(PerkLib.Masochist) >= 0) player.orgasm('Generic');
 	}
 	if (player.hasCock()) {
 		if (player.cocks[player.shortestCockIndex()].cockLength < 9) {
@@ -933,7 +933,7 @@ public function isabellaRapesYouWithHerAss():void {
 		outputText("Isabella sighs, panting lightly from the effort as she watches the tension drain from your face.  \"<i>Such a good [boy] to let it all out.  All that nasty, vile stuff just pouring out of your body for me... yes, you are my good boy.</i>\"  The cow-girl kisses you full on the lips, slipping her wide, flat tongue through your own.  You sigh, but she breaks it and stretches languidly.  Overcome by exhaustion, you slip into a restful slumber, interrupted only by the feel of your body swaying as it's moved.", false);
 	}
 	if (!isabellaFollower()) isabellaFollowerScene.isabellaAffection(4);
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("sen", 2);
 	combat.cleanupAfterCombat();
 }
@@ -978,7 +978,7 @@ public function IsabellaPostSpankFeedSex():void {
 	else outputText("\"<i>You're a very good [boy]! I hope I taught you some manners. Maybe you should come and visit me some time, but be polite for me or I'll have to give you another spanking!</i>\"")
 	outputText(" She climbs up on woozy legs and walks off, leaving you to doze in the defiled well of earth like a discarded tissue.\n\n", false);
 	if (!isabellaFollower()) isabellaFollowerScene.isabellaAffection(3);
-	player.orgasm();
+	player.orgasm('Dick');
 	combat.cleanupAfterCombat();
 }
 
@@ -1137,7 +1137,7 @@ public function victoryLactation69():void {
 	player.changeStatusValue(StatusEffects.Feeder,2,0);
 	//Reset anger
 	flags[kFLAGS.ISABELLA_ANGRY_AT_PC_COUNTER] = 0;
-	player.orgasm();
+	player.orgasm('Tits');
 	combat.cleanupAfterCombat();
 }
 //[VICTORY BUTTSEX]
@@ -1229,7 +1229,7 @@ public function PCVictoryOnIsabellaButtsex():void {
 	
 	outputText("You get dressed and set off, feeling quite proud of how you handled the haughty foreign bovine.", false);
 	if (!isabellaFollower()) isabellaFollowerScene.isabellaAffection(3);
-	player.orgasm();
+	player.orgasm('Dick');
 	combat.cleanupAfterCombat();
 }
 
@@ -1342,7 +1342,7 @@ public function victoryAgainstIzzzzzySixtyNine():void {
 	outputText("  It takes you a moment to catch your breath, but once you do, you stand with renewed vigor and satisfaction – Isabella is delirious and panting.  You lean down to listen and she whispers, \"<i>..love you.  Lick lick lick slurp slurp cum cum! Fun fun cum cum...</i>\"  The poor girl is completely blissed out!  Hell, it sounds like she's already forgiven you for the rough treatment, just as she should.\n\n", false);
 	outputText("You get dressed and leave with a smile.", false);
 	//(slimefeed + izzy unmad!)
-	player.orgasm();
+	player.orgasm('Generic');
 	if (!isabellaFollower()) isabellaFollowerScene.isabellaAffection(9);
 	flags[kFLAGS.ISABELLA_ANGRY_AT_PC_COUNTER] = 0;
 	player.slimeFeed();
@@ -1424,7 +1424,7 @@ public function tooBigVictoryTittyFuckingFuntimesWithMilk():void {
 	outputText(" her breasts.  She's mooing contentedly and tugging on her teats now, squeezing the last of her cream out while you watch.  The cow-girl barely seems conscious of your presence at this point.\n\n", false);
 	if (!isabellaFollower()) isabellaFollowerScene.isabellaAffection(3);
 	outputText("Shrugging, you wipe " + player.sMultiCockDesc() + " off on her lips and get dressed.  This cow is one marvelous cum-dump.", false);
-	player.orgasm();
+	player.orgasm('Dick');
 	combat.cleanupAfterCombat();
 }
 
@@ -1506,7 +1506,7 @@ public function vaginalProdNPokeIsabella():void {
 	flags[kFLAGS.ISABELLA_ANGRY_AT_PC_COUNTER] = 0;
 	if (!isabellaFollower()) isabellaFollowerScene.isabellaAffection(7);
 	combat.cleanupAfterCombat();
-	player.orgasm();
+	player.orgasm('Dick');
 }
 
 //[Small dick tit-fucking] (Dicks less than 9 inches)
@@ -1563,7 +1563,7 @@ public function tinyVictoryTittyFuckingFuntimesWithMilk():void {
 	if (!isabellaFollower()) isabellaFollowerScene.isabellaAffection(8);
 	flags[kFLAGS.ISABELLA_ANGRY_AT_PC_COUNTER] = 0;
 	combat.cleanupAfterCombat();
-	player.orgasm();
+	player.orgasm('Dick');
 }
 
 //[Discuss Isabella]

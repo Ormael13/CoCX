@@ -513,7 +513,7 @@ internal function IzmaWins():void {
 		kGAMECLASS.mountain.wormsScene.infestOrgasm();
 		outputText("\n\nIzma looks on in horror as you push out the load of wormy cargo onto the sand at her feet, only snapping out of her daze as several of the parasites begin climbing her ankle with an eye toward her cock.  She shrieks and jumps back, then drags her foot in the sand, dislodging or pulverizing the squirming vermin.  \"<i>" + player.short + ", that's nasty!  Get away!  Get away and don't talk to me again!  Ugh!</i>\"  She takes off, grabbing her chest of books and kicking sand up in her flight down the beach.", false);
 		flags[kFLAGS.IZMA_WORMS_SCARED] = 1;
-		player.orgasm();
+		player.orgasm('Generic');
 		doNext(combat.cleanupAfterCombat);
 		return;
 	}
@@ -754,7 +754,7 @@ private function loseToIzma():void {
 		//(Izmafight minus 1
 		flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON]--;
 	}
-	player.orgasm();
+	player.orgasm('VaginalAnal');
 	dynStats("sen", 2);
 	//[Post-loss submissiveness blurb, checks Izmafight AFTER any changes from the sex]
 	//zmafight -1: 
@@ -820,7 +820,7 @@ private function finalIzmaSubmission():void {
 	if (player.race() != "shark-morph") outputText("  \"<i>But we'll have to make some changes to your body, of course...</i>\"", false);
 	outputText("\n\n", false);
 	player.slimeFeed();
-	player.orgasm();
+	player.orgasm('VaginalAnal');
 	doNext(IzmaBadEnd);
 }
 //[Bad end]
@@ -889,7 +889,7 @@ private function victoryPenisIzma():void {
 		
 		outputText("Izma gasps again as you plant your " + player.vaginaDescript(0) + " onto her face, grinding against the angular features and moaning loudly as her obliging tongue darts past your lips.  You could really get used to this feeling.  You ride her face for another few minutes before an orgasm rocks your female parts, splattering girlcum onto Izma's face.  You sigh happily and weakly get to your feet, redressing.  You see Izma fishing something from her storage chest - a plant of some sort - and munching it down.\n\n", false);
 	}
-	player.orgasm();
+	player.orgasm('Dick');
 	//[(if Izmafight <=4)
 	if (flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] <= 4 || flags[kFLAGS.IZMA_GLOVES_TAKEN] > 0) {
 		outputText("You say your goodbyes to the pretty tigershark and leave once she hands you your tooth-shaped reward.", false);
@@ -924,7 +924,7 @@ private function useVagooOnIzmaWin():void {
 
 	outputText("After a few more minutes of vigorous fucking, Izma grunts and roars in an animalistic fashion as she orgasms, jets of hot musky spunk pumping into your depths.  You cry out in pleasure, your inner walls clamping down on her cock and milking every available drop of jizz she has.  After a while you manage to recover and stumble onto your feet.  \"<i>Hey, wait a sec,</i>\" Izma says weakly as you start to leave.  She goes to her storage chest and retrieves a crumpled leaf, then holds it out to you with a smile.  \"<i>Here, take this.  It's an anti-pregnancy herb.</i>\" Do you take it?", false);
 	player.slimeFeed();
-	player.orgasm();
+	player.orgasm('Vaginal');
 	//[yes/no]
 	doYesNo(eatIzmasLeafAfterRapinHer,dontEatIzamsLeafAfterRape);
 }
@@ -977,7 +977,7 @@ private function takeItInZeButtVictoryLikeFromIzma():void {
 	outputText("\n\n", false);
 	
 	outputText("The shark grits her teeth and gives a roar as she cums, blowing a massive, hot load straight up your " + player.assholeDescript() + ", bloating you slightly as she empties her quads inside you.  Your muscles twitch and contract, and you can swear you see stars as she ejaculates.  It takes you a while to catch your breath as you slide off her slowly softening meat pole and crawl onto the sand.\n\n", false);
-	player.orgasm();
+	player.orgasm('Anal');
 	//[(if Izmafight <=4)
 	if (flags[kFLAGS.IZMA_TIMES_FOUGHT_AND_WON] <= 4 || flags[kFLAGS.IZMA_GLOVES_TAKEN] > 0) {
 		outputText("You say your goodbyes to the pretty tigershark and leave once she hands you your tooth-shaped reward.", false);
@@ -1114,7 +1114,7 @@ private function nonFightIzmaSmexPAINUS():void {
 	//(lust -100, gain 1 t-shark toof, Izmacounter+1)
 	player.slimeFeed();
 	flags[kFLAGS.IZMA_ENCOUNTER_COUNTER]++;
-	player.orgasm();
+	player.orgasm('Dick');
 	inventory.takeItem(consumables.TSTOOTH, camp.returnToCampUseOneHour);
 }
 
@@ -1159,7 +1159,7 @@ private function nonFightIzmaSmexCUNTPUSSYSNATCHQUIM():void {
 	outputText("You don't get long to contemplate it, sitting up alongside Izma.  \"<i>Phew... now, you are something else.  We're going to do this again some time,</i>\" Izma says, licking her lips and handing you the promised payment.  You smile, more than excited to take her up on the offer.  You stand up then and get dressed, departing for camp feeling very satisfied.\n\n", false);
 	//(lust minus 100, gain 1 t-shark tooth, Izmacounter +1)
 	flags[kFLAGS.IZMA_ENCOUNTER_COUNTER]++;
-	player.orgasm();
+	player.orgasm('Generic');
 	inventory.takeItem(consumables.TSTOOTH, camp.returnToCampUseOneHour);
 }
 
@@ -1429,7 +1429,7 @@ private function izmaLakeDominate():void {
 		outputText("The two of you get dress after awhile, have some small talk, and then you make your way back to camp.", false);
 		player.slimeFeed();
 	}
-	player.orgasm();
+	player.orgasm('VaginalAnal');
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1473,7 +1473,7 @@ private function izmaLakeDominateContinueVanilla(vanilla:Boolean = true) :void
 		
 		outputText("Izma gasps again as you plant your " + player.vaginaDescript(0) + " onto her face, grinding against the angular features and moaning loudly as her obliging tongue darts past your lips.  You could really get used to this feeling.  You ride her face for another few minutes before an orgasm rocks your female parts, splattering girlcum onto Izma's face.  You sigh happily and weakly get to your feet, redressing.  You see Izma fishing something from her storage chest - a plant of some sort - and munching it down.", false);
 	}
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1660,7 +1660,7 @@ private function submitToLakeIzma():void {
 		}
 		else outputText("gives you a decidedly unchaste kiss before she helps you up.  You dress yourself and head back to camp feeling very sated.", false);
 	}
-	player.orgasm();
+	player.orgasm('VaginalAnal');
 	dynStats("sen", 2);
 	player.slimeFeed();
 	doNext(camp.returnToCampUseOneHour);
@@ -1900,7 +1900,7 @@ private function followerIzmaMountsPC(lastHalf:Boolean = false):void {
 	outputText("  Once you've finished, Izma rolls off you and continues breathing heavily.  \"<i>That was amazing... my Alpha.</i>\"\n\n", false);
 
 	outputText("You're too busy gasping for breath to reply, at first.  But then, with a smile, you pick yourself up and give her a quick kiss on the cheek.  To your surprise, the ever-horny shark-girl actually blushes with delight at the gesture.  The two of you leisurely dress yourselves and then go your separate ways; you back to your camp, Izma back to the stream to soak and recover.", false);
-	player.orgasm();
+	player.orgasm('Generic');
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1938,7 +1938,7 @@ private function RadarIzmaLeaveHerWangUnWingWanged():void {
 	outputText("  Once you've finished, Izma rolls off you and continues breathing heavily.  \"<i>That was amazing... my Alpha.</i>\"\n\n", false);
 
 	outputText("You're too busy gasping for breath to reply, at first.  But then, with a smile, you pick yourself up and give her a quick kiss on the cheek.  To your surprise, the ever-horny shark-girl actually blushes with delight at the gesture.  The two of you leisurely dress yourselves and then go your separate ways; you back to your camp, Izma back to the stream to soak and recover.", false);
-	player.orgasm();
+	player.orgasm('Generic');
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2076,7 +2076,7 @@ private function followerIzmaTakesItInPooper():void {
 	}
 	//(10; resume here for dickless)
 	if (!player.hasCock()) outputText("After a few minutes, she pulls her shrinking cock out of you and gives you a deep kiss. \"<i>Thanks for that,</i>\" she says, \"<i>...my Alpha.</i>\"  She jogs off to the river to clean off.  After a minute you follow her, with her cum dripping out of your well-used anus.", false);
-	player.orgasm();
+	player.orgasm('Anal');
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2141,7 +2141,7 @@ private function followerIzmaTakesItInVagoo():void {
 	 else outputText("She giggles and runs her tongue over your lips, her tongue lingering for a few moments before she gives you another long kiss and lets you go.", false);
 	//PREGGO CHANCES
 	izmaPreg();
-	player.orgasm();
+	player.orgasm('Vaginal');
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2196,7 +2196,7 @@ private function facialWhereItGoesRadarIzmaXpack():void {
 	outputText("She giggles and runs her tongue over the mess she's made; her tongue lingers on your lips for a few moments before she gives you another long kiss and lets you go.", false);
 	//PREGGO CHANCES
 	izmaPreg();
-	player.orgasm();
+	player.orgasm('Generic');
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2226,7 +2226,7 @@ private function RadarIzmaCumInYourChest():void {
 	outputText("\n\nWhen she concludes with cleaning her Alpha, she takes a few moments to show you her appreciation for mating with her, kissing your chest and working her way up to your neck.");
 	//PREGGO CHANCES
 	izmaPreg();
-	player.orgasm();
+	player.orgasm('Tits');
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2244,7 +2244,7 @@ private function IzmaSelfFacialWheeRadar():void {
 	outputText("When she concludes with cleaning her Alpha, she takes a few moments to show you her appreciation for mating with her, kissing your chest and working her way up to your neck.");
 	//PREGGO CHANCES
 	izmaPreg();
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2294,7 +2294,7 @@ private function followerIzmaTakesIt69():void {
 	outputText("spunk in your stomach...\n\n", false);
  
 	outputText("\"<i>Thanks for that...</i>\" Izma whispers, stumbling onto her feet and retrieving her clothing.  \"<i>Feel free to come back for some more... or maybe we could do something a little more intense next time.</i>\"  It's a little hard to tell with her skin color, but you can almost see a blush on her face.  You smile at Izma and nod, before heading off to wash up.\n\n", false);
-	player.orgasm();
+	player.orgasm('Generic');
 	dynStats("sen", -2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2648,7 +2648,7 @@ public function pcPopsOutASharkTot():void {
 		outputText("; physically, you'd have to say she was anywhere from ten to thirteen years old. She grins at you, displaying both rows of teeth, and then kisses you on the lips. \"<i>Mama.</i>\" She states, clearly and contentedly, then visibly relaxes, nuzzling into your arms and closing her eyes, clearly intent on drifting off to sleep.\n\n", false);
  
 		outputText("You look up at the tigershark who fathered her for support, but she just smiles and flops down beside you as well. With a soft sigh, you simply lay back and enjoy your strange new family being there with you. When you wake in the morning, Izma will have taken your daughter to stay at the stream with her; it's important for young shark-folk to be moist, constantly.\n", false);
-		player.orgasm();
+		player.orgasm('Vaginal');
 		dynStats("lib", 1, "sen", 1);
 	}
 	player.boostLactation(.01);
@@ -2830,7 +2830,7 @@ private function inCampRideIzmasDickDongTheWitchIsDead():void {
 	outputText("Izma moans weakly from beneath you, trying hard to keep her eyes open.  \"<i>If, ah... if that's what you want.</i>\"\n\n", false);
  
 	outputText("You simply give her your wickedest grin, already starting to get into the rhythm of rising and falling...\n\n", false);
-	player.orgasm();
+	player.orgasm('Vaginal');
  	dynStats("sen", -2);
 	outputText("<b>Some time later...</b>\n", false);
 	outputText("Finally, you are tired and sexually sated enough that you tell Izma you're fulfilled. The tigershark merely groans and you have to help her get into the stream to restore her strength. Still, seven orgasms in only an hour is pretty impressive, and you give her a pat on her shapely derierre before you leave, calling over her shoulder that you'll be back again sometime.\n\n", false);
@@ -3128,7 +3128,7 @@ private function radarIzmaGasm():void {
 	if (flags[kFLAGS.IZMA_NO_COCK] == 0) outputText(" cock");
 	else outputText("self");
 	outputText(" down at the river... but judging by how tired she looks, you doubt that will happen anytime soon.");
-	player.orgasm();
+	player.orgasm('Dick');
 	dynStats("sen", -1);
 	izmaPreg();
 	doNext(camp.returnToCampUseOneHour);
@@ -3197,7 +3197,7 @@ private function radarIzmaAnalDominant():void {
 		outputText("\n\nA half hour passes before you wake up; Izma peacefully snoozing away as she holds you in a lover's embrace.  Faintly, you pull yourself from her grasp and place your [armor] back on.  As you finish placing the last piece of your gear back on, Izma wakes and rises to her feet, planting a tender kiss on her Alpha's neck as she sees you off.  Before you go though, Izma quietly asks, \"<i>So... where's my gift?</i>\", smirking as you turn around to respond to her.  With a firm slap on your ass, you tell her that going all the way with her Alpha was the gift.  Sheepishly grinning, she sees you off as you head out to tend to other matters.");
 		doNext(camp.returnToCampUseOneHour);
 	}
-	player.orgasm();
+	player.orgasm('Generic');
 	dynStats("sen", 2);
 }
 //[Tuck in]

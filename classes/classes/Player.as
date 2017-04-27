@@ -93,10 +93,10 @@ use namespace kGAMECLASS;
 		public var itemSlot8:ItemSlotClass;
 		public var itemSlot9:ItemSlotClass;
 		public var itemSlot10:ItemSlotClass;
-		public var itemSlots:Array;
+		public var itemSlots:/*ItemSlotClass*/Array;
 		
 		public var prisonItemSlots:Array = [];
-		public var previouslyWornClothes:Array = []; //For tracking achievement.
+		public var previouslyWornClothes:/*Armor*/Array = []; //For tracking achievement.
 		
 		private var _weapon:Weapon = WeaponLib.FISTS;
 		private var _armor:Armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
@@ -268,7 +268,7 @@ use namespace kGAMECLASS;
 			//Stacks on top of Thick Skin perk.
 			if (hasFur()) armorDef += 1;
 			if (hasReptileScales()) armorDef += 3;
-			//if (hasDragonScales()) armorDef += 3; // maybe later
+			if (hasDragonScales()) armorDef += 2;
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorDef += 1;
 			//Bonus defense
@@ -786,6 +786,14 @@ use namespace kGAMECLASS;
 				if (isTaur())
 					race = "raccoon-taur";
 			}
+			if (wolfScore() >= 4) {
+				if (hasFur()) {
+					race = "wolf-morph";
+				}
+				else {
+					race = "wolf-" +mf("boy","girl");
+				}
+			}
 			if (dogScore() >= 4)
 			{
 				if (isTaur() && lowerBody == LOWER_BODY_TYPE_DOG)
@@ -1132,6 +1140,33 @@ use namespace kGAMECLASS;
 			if (lowerBody == LOWER_BODY_TYPE_FERRET) counter++;
 			if (hasFur() && counter > 0) counter++;
 			return counter;
+		}
+		//Wolf Score
+		public function wolfScore():Number {
+			var wolfCounter:Number = 0;
+			if (faceType == FACE_WOLF)
+				wolfCounter++;
+			if (wolfCocks() > 0)
+				wolfCounter++;
+			if (breastRows.length > 1)
+				wolfCounter++;
+			if (breastRows.length == 4)
+				wolfCounter++;
+			if (breastRows.length > 4)
+				wolfCounter--;
+			if (earType == EARS_WOLF)
+				wolfCounter++;
+			if (tailType == TAIL_TYPE_WOLF)
+				wolfCounter++;
+			if (lowerBody == LOWER_BODY_TYPE_WOLF)
+				wolfCounter++;
+			if (armType == ARM_TYPE_WOLF)
+				wolfCounter++;
+			if (eyeType == EYES_WOLF)
+				wolfCounter+=2;
+			if (hasFur() && wolfCounter > 0) //Only counts if we got wolf features
+				wolfCounter++;
+			return wolfCounter;
 		}
 		//Determine Dog Rating
 		public override function dogScore():Number
@@ -2537,6 +2572,12 @@ use namespace kGAMECLASS;
 				}
 			}
 			//Alter max stats depending on race
+			if (wolfScore() >= 4) {
+				maxSpe -= 10;
+				maxInt += 5;
+				maxTou += 10;
+				maxStr += 5;
+			}
 			if (minoScore() >= 4) {
 				maxStr += 20;
 				maxTou += 10;
