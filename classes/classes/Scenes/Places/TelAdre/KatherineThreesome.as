@@ -387,10 +387,13 @@
 			katherine.katherineAndUrtaHadSex(true);
 			katherine.orgasm();
 			urta.urtaLove(1);
+			menu();
 			if (player.hasCock()) {
-				simpleChoices("Stuff Kath", pinAndFuckStuffKath, "Mount Urta", pinAndFuckMountUrta, "", null, "", null, "", null);
+				addButton(0, "Stuff Kath", pinAndFuckStuffKath);
+			} else {
+				addDisabledButton(0, "Stuff Kath", "This scene requires you to have cock.");
 			}
-			else doNext(pinAndFuckMountUrta);
+			addButton(1, "Mount Urta", pinAndFuckMountUrta);
 		}
 
 		private function pinAndFuckMountUrta():void { //Plays for anyone without a cock and for herms who select this option
@@ -621,9 +624,13 @@
 			outputText("When Urta is mostly naked Kath gets behind her and puts her cock" + katherine.cockMultiple("", "s") + " between Urta’s thighs.  Taken by surprise Urta closes her legs.  Kath grabs Urta’s hips and purrs in her ear as she starts to slide her member" + katherine.cockMultiple("", "s") + " in and out.  You see them start to glisten with Urta’s juices and when Kath next pulls back she winks at you.  Her " + katherine.cockMultiple("", "upper cock pressing against Urta’s ass and her lower ") + "cock " + (katherine.cockNumber == 1 && urta.pregnancy.isPregnant ? "pressing against Urta’s ass" : "slipping between the folds of Urta’s dripping snatch") + ".  Urta’s jaw quivers and she holds her breath, waiting for her fucking to begin.\n\n");
 			outputText("You put your hands on Urta’s shoulders, pushing her back towards Katherine.  When Kath sinks her shaft" + katherine.cockMultiple("", "s") + " into Urta you comment that they’re really getting along well.  You’re glad to see there isn’t much friction between them.\n\n");
 			outputText("“<i>How could there be when she’s cumming buckets?</i>” asks Kath, her cock" + katherine.cockMultiple("", "s") + " bottoming out inside Urta.  “<i>Now how about you give her something to do?</i>”");
-			if (player.hasCock())
-				simpleChoices("Mount Urta", sandwichGetFucked, "Get Licked", (player.isTaur() ? sandwichMaleCentaurLicked : sandwichGetLicked), "", null, "", null, "", null);
-			else doNext(sandwichGetFucked);
+			menu();
+			addButton(0, "Mount Urta", sandwichGetFucked);
+			if (player.hasCock()) {
+				addButton(1, "Get Licked", (player.isTaur() ? sandwichMaleCentaurLicked : sandwichGetLicked));
+			} else {
+				addDisabledButton(1, "Get Licked", "This scene requires you to have cock.");
+			}
 		}
 
 		private function sandwichGetFucked():void {
