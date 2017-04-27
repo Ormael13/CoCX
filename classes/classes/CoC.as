@@ -340,7 +340,7 @@ the text from being too boring.
 		public var date:Date = new Date();
 		
 		//Mod save version.
-		public var modSaveVersion:Number = 13;
+		public var modSaveVersion:Number = 15;
 		public var levelCap:Number = 120;
 		
 		//dungeoneering variables (If it ain't broke, don't fix it)
