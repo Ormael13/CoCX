@@ -859,7 +859,7 @@
 			outputText("You down the potion, grimacing at the strong taste.", true);
 			//CHANCE OF BAD END - 20% if face/tail/skin/cock are appropriate.
 			//If hooved bad end doesn't appear till centaured
-			if (player.hasFur() && player.faceType == FACE_HORSE && player.tailType == TAIL_TYPE_HORSE && (player.lowerBody != LOWER_BODY_TYPE_HOOFED)) {
+			if (player.hasFur() && player.faceType == FACE_HORSE && player.tailType == TAIL_TYPE_HORSE && (player.lowerBody != LOWER_BODY_TYPE_HOOFED || player.isTaur())) {
 				//WARNINGS
 				//Repeat warnings
 				if (player.hasStatusEffect(StatusEffects.HorseWarning) && rand(3) == 0) {
