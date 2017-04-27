@@ -95,14 +95,14 @@ package classes.Scenes.Areas.GlacialRift
 			this.short = "Amarok";
 			this.imageName = "amarok";
 			this.long = "You are fighting an Amarok, a massive wolf that seems set on hunting you. The buffeting snow does nothing to hide its thick, black fur, and hardly manages to even ruffle it. It has golden, hungry eyes that watch your every move and sharp teeth capable of crushing bones. It looms over you in both height and width, with well-defined muscles, long legs, and bulky paws with deadly claws only adding to its intimidating stature. Even its tail looks capable of knocking you down. It's the most normal animal-like creature you've seen here yet, a normal wolf despite its size, but is no less terrifying. You get the feeling this won't be an easy fight, especially considering it's not about to let you run away.";
+			this.plural = false;
 			this.createVagina(false, 1, 1);
 			this.createCock(8, 1.5, CockTypesEnum.WOLF);
 			this.balls = 2;
 			this.ballSize = 2;
-			this.cumMultiplier = 1;
-			//this.pronoun1 = "it";
-			//this.pronoun2 = "it";
-			//this.pronoun3 = "its";
+			this.pronoun1 = "it";
+			this.pronoun2 = "it";
+			this.pronoun3 = "its";
 			createBreastRow(2,1);
 			createBreastRow(2,1);
 			createBreastRow(2,1);
@@ -138,7 +138,7 @@ package classes.Scenes.Areas.GlacialRift
 			this.special1 = amarokClaw;
 			this.special2 = amarokTail;
 			this.tailType = TAIL_TYPE_WOLF;
-			if (!player.canFly())) {
+			if (!player.canFly()) {
 				this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
 				//"Watching your movements" alluded to this. Its lore is stalking and hunting people, so I imagine you can't get away.
 				//Otherwise I'd suggest doing a hellhound knock-off of the scent tracking, which makes it harder to run.
