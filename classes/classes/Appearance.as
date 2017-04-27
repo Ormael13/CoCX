@@ -2052,122 +2052,6 @@
 
 			return i_creature.underBody.skin.tone;
 		}
-
-/* All of these functions have been replaced with direct calls to the appropriate form of cockNoun().
-		private static function humanDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.HUMAN);
-			return descript;
-		}
-
-		private static function kangaDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.KANGAROO);
-			return descript;
-		}
-
-		public static function dogDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.DOG);
-			return descript;
-		}
-
-		public static function wolfDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.WOLF);
-			return descript;
-		}
-
-		private static function foxDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.FOX);
-			return descript;
-		}
-
-		private static function tentacleDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.TENTACLE);
-			return descript;
-		}
-
-		private static function demonDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.DEMON);
-			return descript;
-		}
-
-
-		//Horsecock + Descript
-		public static function horseDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.HORSE);
-			return descript;
-		}
-
-		private static function catDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.CAT);
-			return descript;
-		}
-
-		private static function anemoneDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.ANEMONE);
-			return descript;
-		}
-
-		private static function dragonDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.DRAGON);
-			return descript;
-		}
-
-		private static function displacerDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.DISPLACER);
-			return descript;
-		}
-
-		private static function snakeDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.LIZARD);
-			return descript;
-		}
-
-		private static function pigDescript(cockNum:Number):String
-		{
-			var descript:String = "";
-			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
-			descript += cockNoun(CockTypesEnum.PIG);
-			return descript;
-		}
-*/
 		
 		public static const BREAST_CUP_NAMES:Array = [
 			"flat",//0
@@ -2263,7 +2147,7 @@
 					[SKIN_TYPE_GOO, "goo"],
 					[SKIN_TYPE_UNDEFINED, "undefined flesh"],
 					[SKIN_TYPE_DRAGON_SCALES, "scales"],
-					[SKIN_TYPE_FISH_SCALES, "scales"],
+					[SKIN_TYPE_FISH_SCALES, "scales"]
 				]
 		);
 		public static const DEFAULT_SKIN_DESCS:Object = createMapFromPairs(
@@ -2274,7 +2158,7 @@
 					[SKIN_TYPE_GOO, "skin"],
 					[SKIN_TYPE_UNDEFINED, "skin"],
 					[SKIN_TYPE_DRAGON_SCALES, "scales"],
-					[SKIN_TYPE_FISH_SCALES, "scales"],
+					[SKIN_TYPE_FISH_SCALES, "scales"]
 				]
 		);
 		public static const DEFAULT_HAIR_NAMES:Object = createMapFromPairs(
@@ -2286,7 +2170,7 @@
 					[HAIR_ANEMONE, "tentacle"],
 					[HAIR_QUILL, "quill"],
 					[HAIR_BASILISK_SPINES, "spiny basilisk"],
-					[HAIR_BASILISK_PLUME, "feathery plume"],
+					[HAIR_BASILISK_PLUME, "feathery plume"]
 				]
 		);
 		public static const DEFAULT_BEARD_NAMES:Object = createMapFromPairs(
@@ -2333,7 +2217,7 @@
 					[TONGUE_DEMONIC, "demonic"],
 					[TONGUE_DRACONIC, "draconic"],
 					[TONGUE_ECHIDNA, "echidna"],
-					[TONGUE_LIZARD, "lizard"],
+					[TONGUE_LIZARD, "lizard"]
 				]
 		);
 		public static const DEFAULT_EYES_NAMES:Object = createMapFromPairs(
@@ -2344,7 +2228,7 @@
 					[EYES_LIZARD, "lizard"],
 					[EYES_WOLF, "wolf"],
 					[EYES_DRAGON, "dragon"],
-					[EYES_BASILISK, "basilisk"],
+					[EYES_BASILISK, "basilisk"]
 				]
 		);
 		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
