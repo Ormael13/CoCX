@@ -2942,33 +2942,6 @@ public function marbleBadEndFollowup():void {
 	//Variables for this function:
 	//morph – keeps track of player's form (human, dog-morph, centaur)
 	var morph:String = player.race(); //Now uses actual race.
-	//var morph:String = "human";
-	/*if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) morph = "centaur";
-	if (player.catScore() >= 4) morph = "cat-morph";
-	if (player.demonScore() >= 4) morph = "demon-morph";
-	if (player.dogScore() >= 4) morph = "dog-morph";
-	if (player.horseScore() >= 3) {
-		if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) morph = "centaur-morph";
-		else morph = "equine-morph";
-	}
-	if (player.mutantScore() >= 5) morph = "corrupted mutant";
-	if (player.minoScore() >= 4) morph = "minotaur-morph";
-	if (player.cowScore() >= 5) {
-		morph = "cow-";
-		if (player.gender <= 1) morph += "boi";
-		else morph += "girl";
-	}
-	if (player.beeScore() >= 4) morph = "bee-morph";
-	if (player.spiderScore() >= 4) morph = "spider-morph";
-	if (player.raccoonSocre() >= 4) morph = "raccoon-morph";
-	if (player.kitsuneScore() >= 4) morph = "kitsune-morph";
-	if (player.goblinScore() >= 5) morph = "goblin";
-	if (player.humanScore() >= 5 && morph == "corrupted mutant") morph = "somewhat human mutant";
-	if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) morph = "centaur";	
-	if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) morph = "centaur";*/
-	//gender – keeps track of player's gender (male, female, genderless, or hermaphrodite)
-	//pronouns – holds the proper pronouns for the player's gender, he/she, his/hers, him/her (should probably be multiple
-	//OH FUCK THIS!
 	//approxHeight – short description for approximately how tall is the player is, (very short, short, average height, tall, very tall)
 	var approxHeight:String = "";
 	if (player.tallness < 54) approxHeight = "very short";

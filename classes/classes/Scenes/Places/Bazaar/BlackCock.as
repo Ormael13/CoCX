@@ -1963,9 +1963,6 @@ package classes.Scenes.Places.Bazaar
 				outputText("\n\n");
 				switch(player.lowerBody) {
 					//Irregular lower body type
-					case LOWER_BODY_TYPE_CENTAUR: // should be done in other way now...
-						outputText("You collapse to the ground, a sharp pain encompassing your equine lower body. The pain quickly becomes so severe that you black out on the spot. Eventually you awake to find that you no longer have the lower body of a horse. You have just two legs again, and your feet look a lot like your old human feet. The only difference is that your toes are clawed, and the bottoms of your feet padded.");
-						break;
 					case LOWER_BODY_TYPE_NAGA:
 						outputText("You collapse to the ground, a sharp pain encompassing your serpentine tail. The pain quickly becomes so severe that you black out on the spot. Eventually you awake to find that you no longer have the lower body of a snake. You have two legs again, and your feet look a lot like your old human feet. The only difference is that your toes are clawed, and the bottoms of your feet padded.");
 						break;
