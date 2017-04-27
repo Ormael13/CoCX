@@ -1583,8 +1583,7 @@
 		}
 
 // Fuck yo dog shit we full-on wolf bitches now -Foxwells
-public
-function wolfPepper(type: Number, player: Player): void {
+public function wolfPepper(type: Number, player: Player): void {
     var tfSource: String = "wolfPepper";
     var temp2: Number = 0;
     var temp3: Number = 0;
@@ -1666,7 +1665,6 @@ function wolfPepper(type: Number, player: Player): void {
     //normal legs
     if (player.lowerBody != LOWER_BODY_TYPE_HUMAN && rand(4) == 0 && changes < changeLimit) {
         outputText("\n\nYou collapse as your legs shift and twist. By the time the pain subsides, you notice that you have normal legs and normal feet. <b>You now have normal feet!</b>");
-        doRestore = true;
         player.lowerBody = LOWER_BODY_TYPE_HUMAN;
         player.legCount = 2;
         changes++;
@@ -1914,7 +1912,7 @@ function wolfPepper(type: Number, player: Player): void {
             changes++;
         }
         //Ears time
-        if (rand(3) == 0 && player.earType != WOLF && changes < changeLimit) {
+        if (rand(3) == 0 && player.earType != EARS_WOLF && changes < changeLimit) {
             if (player.earType == -1) outputText("\n\nTwo painful nubs begin sprouting from your head, growing and opening into canine ears. ", false);
             if (player.earType == EARS_HUMAN) outputText("\n\nThe skin on the sides of your face stretches painfully as your ears migrate upwards, towards the top of your head. They shift and elongate, becoming canine in nature. ", false);
             if (player.earType == EARS_HORSE) outputText("\n\nYour equine ears twist as they transform into canine versions. ", false);
@@ -1943,14 +1941,14 @@ function wolfPepper(type: Number, player: Player): void {
                 flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 1;
                 changes++;
             } else if (player.hairType == HAIR_NORMAL && flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0 && changes < changeLimit && rand(5) == 0) {
-                outputText(You reach up and feel the top of your head as it begins to tingle.You put a hand on the top of your head.Nothing feels like it 's changed, but somehow, you get the feeling that your hair won't be growing anymore.", false);
+                outputText("You reach up and feel the top of your head as it begins to tingle.You put a hand on the top of your head.Nothing feels like it 's changed, but somehow, you get the feeling that your hair won't be growing anymore.", false);
                     flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 1;
                     changes++;
                 }
             }
             //MUTATIONZ LEVEL 2: fur->arms fur+tail+ears->face stophair->nohair fur+tail->legs
             //gain wolf face
-            if (player.faceType != FACE_WOLF && player.earType == EARS_WOLF && player.tailType == TAIL_WOLF && player.skinType == SKIN_TYPE_FUR && rand(5) == 0 && changes < changeLimit) {
+            if (player.faceType != FACE_WOLF && player.earType == EARS_WOLF && player.tailType == TAIL_TYPE_WOLF && player.skinType == SKIN_TYPE_FUR && rand(5) == 0 && changes < changeLimit) {
                 outputText("\n\nYou screech in pain as the bones of your face begin to rearrange themselves. Your [skinFurScales] practically melts off you, dropping onto the ground with heavy streams of blood. You put your hands to your face, writhing, blackness covering your vision as pain overwhelms you. But as quickly as it came, it stops, and you pull your shaking hands from your face. You scramble to the nearest reflective surface. <b>You have a wolf's face!</b>", false);
                 player.faceType == FACE_WOLF;
                 changes++;
@@ -1962,14 +1960,14 @@ function wolfPepper(type: Number, player: Player): void {
                 changes++;
             }
             //wolf arms
-            if (player.armType != ARM_TYPE_WOLF && player.skinType = SKIN_TYPE_FUR && rand(4) == 0 && changes < changeLimit) {
+            if (player.armType != ARM_TYPE_WOLF && player.skinType == SKIN_TYPE_FUR && rand(4) == 0 && changes < changeLimit) {
                 outputText("\n\nYou hold your arms to your chest and absent-mindedly squeeze them, trying to get rid of a feeling of discomfort. When it fails to go away, you look down in annoyance at whatever could be bothering you, only to see that your hands have turned to wolf paws and your arms are slim but muscular. They're built strong, but have difficulty moving in any direction but back and forth. <b>You now have wolf arms.</b>");
                 player.armType = ARM_TYPE_WOLF;
                 updateClaws(CLAW_TYPE_NORMAL);
                 changes++;
             }
             //legz
-            if (player.legCount == 2 && player.lowerBody != LOWER_BODY_TYPE_WOLF && player.tailType == TAIL_TYPE_WOLF && player.skinType = SKIN_TYPE_FUR && rand(4) == 0 && changes < changeLimit) {
+            if (player.legCount == 2 && player.lowerBody != LOWER_BODY_TYPE_WOLF && player.tailType == TAIL_TYPE_WOLF && player.skinType == SKIN_TYPE_FUR && rand(4) == 0 && changes < changeLimit) {
                 //Hooman feets
                 if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("\n\nYou stumble and fall, howling in pain as your legs and feet break apart and reform into wolf-like legs and paws. The worst of the pain eventually passes, but you're still left whimpering for a while. <b>You now have paws!</b>", false);
                 //Hooves -> Paws
