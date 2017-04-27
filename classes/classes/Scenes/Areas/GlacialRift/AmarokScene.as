@@ -19,28 +19,25 @@ package classes.Scenes.Areas.GlacialRift
 		//He's not actually going to eat you. Unless you fuck up 5 times.
 			clearOutput();
 			flags[kFLAGS.AMAROK_LOSSES]++;
-			if (doSFWloss()) {
-				return; //guess we should skip the vore in sfw mode, huh
-			}
-			else if (player.HP <= 0) {
+			if (player.HP <= 0) {
 				outputText("Your legs give out under you and your " + player.weaponName + " falls into the snow. The Amarok has you beat. Your face crashes into the snow, a refreshing cool on the heat of your wounds. You raise your head at the sound of footsteps and find yourself staring at the Amarok's nose as it sniffs you. You let your head drop and resign yourself to fate.", false);
-			amarokFlagCheck();
+				amarokFlagCheck();
 			}
 			else { //If you lust lost you kinda deserve it, he shouldn't tease if I did this right.
 				outputText("You collapse into the snow, your lust uncontrollable. As your hand reaches for your loins, you silently curse yourself for bringing yourself to this state. You raise your head at the sound of footsteps and find yourself staring at the Amarok's nose as it sniffs you. You let your head drop and resign yourself to fate.", false);
-			amarokFlagCheck();
+				amarokFlagCheck();
 			}
 		}
 
 		public function amarokFlagCheck():void {
 			if (player.findStatusEffect(StatusEffects.Infested) >= 0) {
-					amarokNoEat();
+				amarokNoEat();
 			}
 			else if (flags[kFLAGS.AMAROK_LOSSES] >= 5) {
-					amarokBadEnd();
+				amarokBadEnd();
 			}
 			else if (flags[kFLAGS.AMAROK_LOSSES] < 5) {
-					amarokChompo();
+				amarokChompo();
 			}
 		}
 		
@@ -51,12 +48,11 @@ package classes.Scenes.Areas.GlacialRift
 		}
 		
 		private function amarokChompo():void {
-			combat.cleanupAfterCombat();
 			clearOutput();
 			outputText("It lets out a soft bark as you close your eyes and skips to the other side of you. You remain still in fear of what it plans to do. It picks you by your neck. Its grip isn't hard enough to even break your skin, but firm enough that it won't drop you. It then begins to drag you somewhere. Something in your mind tells you to struggle, but you can't seem to muster the will to try. It'd just bite through your neck and kill you anyway. The feeling of its hot breath running down your back is oddly soothing. You open your eyes long enough to make sense of your surroundings, then pass out.", false);
 			outputText("\n\nYou awaken some time later to a chorus of yips. You've stopped moving. You're on the ground, with small paws and dull teeth prodding you all over. They don't hurt you outside of being uncomfortable, but you're sure you'll be left with bruises. You focus your vision and slowly make out where you are-- the side of a short cliff, protected from snow by tall trees. You're laying atop of pine needles and dead leaves. A strong scent of feces causes you to jolt upright in disgust, and something that'd been gnawing on your ear fell to the ground with a squeak. You look back at it. It's a black wolf pup, likely the Amarok's. You spot three others scattered about the den. You must have been left as food for them. The pups, however, seem much more interested in using you as a toy than a meal. You get to your feet, shaking off the pups. You don't feel like sticking around for them to change their minds.", false);
 			outputText("\n\nYou spot your " + player.armorName + " a bit away. It must've been ripped off you when you were passed out. You scramble to it and put it back on, then head back to camp as fast as you can.", false);
-			doNext(camp.returnToCampUseOneHour);
+			combat.cleanupAfterCombat();
 		}
 
 		public function amarokBadEnd():void { //Hungry Hungry Hipp-- err, Wolves
@@ -70,8 +66,10 @@ package classes.Scenes.Areas.GlacialRift
 		}
 		
 		public function winAgainstAmarok():void {
-			flags[kFLAGS.AMAROK_LOSSES] = 0; //Kinda unfair to continually stack it imo. I'd say subtract 1 but idk how to do that
+			flags[kFLAGS.AMAROK_LOSSES]--; //Kinda unfair to continually stack it imo
+			if (flags[kFLAGS.AMAROK_LOSSES] < 0)
+				flags[kFLAGS.AMAROK_LOSSES] = 0;
 			clearOutput();
 			outputText("The Amarok collapses, unable to withstand any more.", false);
-			simpleChoices("", null, "", null, "", null, "", null, "Leave", leave);
+			combat.cleanupAfterCombat();
 		}
