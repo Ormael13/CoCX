@@ -787,7 +787,7 @@ use namespace kGAMECLASS;
 					race = "raccoon-taur";
 			}
 			if (wolfScore() >= 4) {
-				if (player.hasFur()) {
+				if (hasFur()) {
 					race = "wolf-morph";
 				}
 				else {
