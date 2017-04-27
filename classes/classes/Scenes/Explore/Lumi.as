@@ -44,10 +44,10 @@ public function lumiLabChoices():void {
 	else {
 		outputText("Once more, you step into Lumi's lab.  She's still working on her experiments. Before you even have a chance to call out to her, she has already pivoted to watch you.  In a flash her apron hits the floor and she is standing on her desk, asking, \"<i>Stho, what can Lumi the Aochomist Extwaordinaire do fo you today?</i>\"", false);
 	}
-	var enhance:Function =null;
-	if (lumiEnhance(true)) 
-		enhance = lumiEnhance;
-	simpleChoices("Shop", lumiShop, "Enhance", enhance, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+	menu();
+	addButton(0, "Shop", lumiShop);
+	addButton(1, "Enhance", lumiEnhance);
+	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 
 public function lumiShop():void {
@@ -58,10 +58,23 @@ public function lumiShop():void {
 	outputText("Lust Draft - 15 gems\nGoblin Ale - 20 gems\nOviposition Elixir - 45 gems\n", false);
 	
 	//The player is given a list of choices, clicking on one gives the description and the price, like Giacomo.
-	simpleChoices(consumables.L_DRAFT.shortName,lumiLustDraftPitch,
-			consumables.GOB_ALE.shortName,lumiPitchGobboAle,
-			consumables.OVIELIX.shortName,lumiPitchOviElixer,
-			"", null, "Leave", lumiLabChoices);
+	menu();
+	if (player.gems >= 15) {
+		addButton(0, consumables.L_DRAFT.shortName, lumiLustDraftPitch);
+	} else {
+		addDisabledButton(0, consumables.L_DRAFT.shortName);
+	}
+	if (player.gems >= 20) {
+		addButton(1, consumables.GOB_ALE.shortName, lumiPitchGobboAle);
+	} else {
+		addDisabledButton(1, consumables.GOB_ALE.shortName);
+	}
+	if (player.gems >= 45) {
+		addButton(2, consumables.OVIELIX.shortName, lumiPitchOviElixer);
+	} else {
+		addDisabledButton(2, consumables.OVIELIX.shortName);
+	}
+	addButton(14, "Back", lumiLabChoices);
 }
 
 //Lust Draft
@@ -70,7 +83,9 @@ private function lumiLustDraftPitch():void {
 	clearOutput();
 	outputText("You point at the bottle filled with bubble-gum pink fluid.\n\n\"<i>De lust dwaft? Always a favowite, with it you nevar have to worwy about not bein weady for sexy time; one of my fiwst creations. 15 gems each.</i>\"\n\n", false);
 	outputText("Will you buy the lust draft?", false);
-	doYesNo(curry(lumiPurchase,consumables.L_DRAFT),lumiShop);
+	menu();
+	addButton(0, "Yes", curry(lumiPurchase, consumables.L_DRAFT, 15));
+	addButton(1, "No", lumiShop);
 }
 //Goblin Ale
 private function lumiPitchGobboAle():void {
@@ -78,7 +93,9 @@ private function lumiPitchGobboAle():void {
 	clearOutput();
 	outputText("You point at the flagon. \"<i>Oh? Oh thats Lumi's... actually no, dat tispsy stuff for 20 gems. You'll like if you want to be like Lumi. Do you like it?</i>\"\n\n", false);
 	outputText("Will you buy the goblin ale?", false);
-	doYesNo(curry(lumiPurchase,consumables.GOB_ALE),lumiShop);
+	menu();
+	addButton(0, "Yes", curry(lumiPurchase, consumables.GOB_ALE, 20));
+	addButton(1, "No", lumiShop);
 }
 //Ovi Elixir
 private function lumiPitchOviElixer():void {
@@ -86,131 +103,92 @@ private function lumiPitchOviElixer():void {
 	clearOutput();
 	outputText("You point at the curious hexagonal bottle. \"<i>De Oviposar Elixir? Made baithsed on da giant bee's special stuff dey give deir queen. It will help make de burfing go faster, an if you dwink it while you awen pweggy, iw will give you some eggs to burf later. More dwinks, eqwals more and biggar eggs. Lumi charges 45 gems for each dose.</i>\"\n\n", false);
 	outputText("Will you buy the Ovi Elixir?", false);
-	doYesNo(curry(lumiPurchase,consumables.OVIELIX),lumiShop);
+	menu();
+	addButton(0, "Yes", curry(lumiPurchase, consumables.OVIELIX, 45));
+	addButton(1, "No", lumiShop);
 }
 
-
-private function lumiPurchase(itype:ItemType):void {
+private function lumiPurchase(itype:ItemType, cost:int):void {
 	spriteSelect(37);
 	clearOutput();
 	//After choosing, and PC has enough gems
-	var cost:Number = 0;
-	if (itype == consumables.OVIELIX)
-		cost = 45;
-	if (itype == consumables.GOB_ALE)
-		cost = 20;
-	if (itype == consumables.L_DRAFT)
-		cost = 15;
-	if (player.gems >= cost) {
-		outputText("You pay Lumi the gems, and she hands you " + itype.longName + " saying, \"<i>Here ya go!</i>\"\n\n", false);
-		player.gems -= cost;
-		statScreenRefresh();
-		inventory.takeItem(itype, lumiShop, lumiLabChoices);
-	}
-	else {
-		//After choosing, and PC doesn't have enough gems
-		outputText("You go to pay Lumi the gems, but then you realize that you don't have enough. Lumi seems to know what happened and tells you \"<i>Ok, is dere somefing you want to buy that you can affowd?</i>\"\n\n", false);
-		//Return to main Lumi menu
-		doNext(lumiShop);
-	}
+	outputText("You pay Lumi the gems, and she hands you " + itype.longName + " saying, \"<i>Here ya go!</i>\"\n\n", false);
+	player.gems -= cost;
+	statScreenRefresh();
+	inventory.takeItem(itype, lumiShop, lumiLabChoices);
 }
 
-public function lumiEnhance(justCheck:Boolean = false):Boolean {
+public function lumiEnhance():void {
 	spriteSelect(37);
-	var fox:Function =null;
-	if (player.hasItem(consumables.FOXBERY))
-		fox = lumiEnhanceFox;
-	var laBova:Function =null;
-	if (player.hasItem(consumables.LABOVA_))
-		laBova = lumiEnhanceLaBova;
-	var succuDelight:Function =null;
-	if (player.hasItem(consumables.SDELITE))
-		succuDelight = lumiEnhanceSDelight;
-	var oviElix:Function =null;
-	if (player.hasItem(consumables.OVIELIX))
-		oviElix = lumiEnhanceOviElix;
-	var lustDraft:Function =null;
-	if (player.hasItem(consumables.L_DRAFT))
-		lustDraft = lumiEnhanceDraft;
-	var seed:Function =null;
-	if (player.hasItem(consumables.GLDSEED))
-		seed = lumiEnhanceGoldenSeed;
-	var kanga:Function =null;
-	if (player.hasItem(consumables.KANGAFT))
-		kanga = lumiEnhanceKanga;
-	var kitsune:Function =null;
-	if (player.hasItem(consumables.FOXJEWL))
-		kitsune = lumiEnhanceFoxJewel;
-	var pigTruffle:Function = null;
-	if (player.hasItem(consumables.PIGTRUF))
-		pigTruffle = lumiEnhancePigtailTruffle;
-	var pureHoney:Function = null;
-	if (player.hasItem(consumables.PURHONY))
-		pureHoney = lumiEnhancePureHoney;
-	if (justCheck) {
-		return fox != null || kanga != null || seed != null || laBova != null || succuDelight != null || oviElix != null || lustDraft != null || kitsune != null || pigTruffle != null || pureHoney != null;
-	}
 	clearOutput();
-	outputText("\"<i>Do you have 100 gems for de enhancement?</i>\" asks Lumi.\n\n", false); 
-	//If (player has less than 100 gems)
-	if (player.gems < 100) {
-		outputText("You shake your head no, and Lumi gives you a disappointed look and says, \"<i>Den Lumi can do no enhancement for you. Anyfing else?</i>\"\n\n", false);
-		//Return to main Lumi menu
-		doNext(lumiLabChoices);
-		return false;
+	outputText("\"<i>Yay! Lumi loves to do enhancement, what you want to be bettar?</i>\"");
+	menu();
+	var btn:int = 0;
+	if (player.hasItem(consumables.FOXBERY)) {
+		addButton(btn++, consumables.FOXBERY.shortName, lumiEnhanceGo, consumables.FOXBERY, undefined, undefined);
+	} else {
+		addDisabledButton(btn++, consumables.FOXBERY.shortName);
 	}
-	else {
-		outputText("You nod and Lumi gives an excited yell, \"<i>Yay! Lumi loves to do enhancement, what you want to be bettar?</i>\"\n\n", false);
-		//The player chooses an item that can be enhanced from a list, regardless of which is chosen, the text for the next part is the same.
-		choices(consumables.FOXBERY.shortName, fox,
-				consumables.FOXJEWL.shortName, kitsune,
-				consumables.GLDSEED.shortName, seed,
-				consumables.KANGAFT.shortName, kanga,
-				consumables.L_DRAFT.shortName, lustDraft,
-				consumables.LABOVA_.shortName, laBova,
-				consumables.OVIELIX.shortName, oviElix,
-				consumables.SDELITE.shortName, succuDelight,
-				consumables.PIGTRUF.shortName, pigTruffle,
-				consumables.PURHONY.shortName, pureHoney);
-		addButton(14, "Back", lumiLabChoices);
-		return true;
+	if (player.hasItem(consumables.FOXJEWL)) {
+		addButton(1, consumables.FOXJEWL.shortName, lumiEnhanceGo, consumables.FOXJEWL, undefined, undefined);
+	} else {
+		addDisabledButton(btn++, consumables.FOXJEWL.shortName);
 	}
-}
-private function lumiEnhanceLaBova():void {
-	lumiEnhanceGo(consumables.LABOVA_);
-}
-private function lumiEnhanceSDelight():void {
-	lumiEnhanceGo(consumables.SDELITE);
-}
-private function lumiEnhanceOviElix():void {
-	lumiEnhanceGo(consumables.OVIELIX);
-}
-private function lumiEnhanceDraft():void {
-	lumiEnhanceGo(consumables.L_DRAFT);
-}
-private function lumiEnhanceGoldenSeed():void {
-	lumiEnhanceGo(consumables.GLDSEED);
-}
-private function lumiEnhanceKanga():void {
-	lumiEnhanceGo(consumables.KANGAFT);
-}
-private function lumiEnhanceFox():void {
-	lumiEnhanceGo(consumables.FOXBERY);
-}
-private function lumiEnhanceFoxJewel():void {
-	lumiEnhanceGo(consumables.FOXJEWL);
-}
-private function lumiEnhancePigtailTruffle():void {
-	lumiEnhanceGo(consumables.PIGTRUF);
-}
-private function lumiEnhancePureHoney():void {
-	lumiEnhanceGo(consumables.PURHONY);
+	if (player.hasItem(consumables.GLDSEED)) {
+		addButton(btn++, consumables.GLDSEED.shortName, lumiEnhanceGo, consumables.GLDSEED, undefined, undefined);
+	} else {
+		addDisabledButton(btn++, consumables.GLDSEED.shortName);
+	}
+	if (player.hasItem(consumables.KANGAFT)) {
+		addButton(btn++, consumables.KANGAFT.shortName, lumiEnhanceGo, consumables.KANGAFT, undefined, undefined);
+	} else {
+		addDisabledButton(btn++, consumables.KANGAFT.shortName);
+	}
+	if (player.hasItem(consumables.L_DRAFT)) {
+		addButton(btn++, consumables.L_DRAFT.shortName, lumiEnhanceGo, consumables.L_DRAFT, undefined, undefined);
+	} else {
+		addDisabledButton(btn++, consumables.L_DRAFT.shortName);
+	}
+	if (player.hasItem(consumables.LABOVA_)) {
+		addButton(btn++, consumables.LABOVA_.shortName, lumiEnhanceGo, consumables.LABOVA_, undefined, undefined);
+	} else {
+		addDisabledButton(btn++, consumables.LABOVA_.shortName);
+	}
+	if (player.hasItem(consumables.OVIELIX)) {
+		addButton(btn++, consumables.OVIELIX.shortName, lumiEnhanceGo, consumables.OVIELIX, undefined, undefined);
+	} else {
+		addDisabledButton(btn++, consumables.OVIELIX.shortName);
+	}
+	if (player.hasItem(consumables.SDELITE)) {
+		addButton(btn++, consumables.SDELITE.shortName, lumiEnhanceGo, consumables.SDELITE, undefined, undefined);
+	} else {
+		addDisabledButton(btn++, consumables.SDELITE.shortName);
+	}
+	if (player.hasItem(consumables.PIGTRUF)) {
+		addButton(btn++, consumables.PIGTRUF.shortName, lumiEnhanceGo, consumables.PIGTRUF, undefined, undefined);
+	} else {
+		addDisabledButton(btn++, consumables.PIGTRUF.shortName);
+	}
+	if (player.hasItem(consumables.PURHONY)) {
+		addButton(btn++, consumables.PURHONY.shortName, lumiEnhanceGo, consumables.PURHONY, undefined, undefined);
+	} else {
+		addDisabledButton(btn++, consumables.PURHONY.shortName);
+	}
+	
+	addButton(14, "Back", lumiLabChoices);
 }
 
 private function lumiEnhanceGo(itype:ItemType):void
 {
 	spriteSelect(37);
 	trace("LUMI ENHANCE");
+	//If (player has less than 100 gems)
+	if (player.gems < 100) {
+		outputText("\"<i>Do you have 100 gems for de enhancement?</i>\" asks Lumi.\n\nYou shake your head no, and Lumi gives you a disappointed look and says, \"<i>Den Lumi can do no enhancement for you. Anyfing else?</i>\"\n\n");
+		//Return to main Lumi menu
+		doNext(lumiLabChoices);
+		return;
+	}
 	var nextItem:ItemType = ItemType.NOTHING;
 	if (itype == consumables.LABOVA_) {
 		nextItem = consumables.PROBOVA;
