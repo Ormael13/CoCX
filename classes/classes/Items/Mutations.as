@@ -1663,14 +1663,14 @@ public function wolfPepper(type: Number, player: Player): void {
         changes++;
     }
     //normal legs
-    if (player.lowerBody != LOWER_BODY_TYPE_HUMAN && rand(4) == 0 && changes < changeLimit) {
+    if (player.lowerBody != LOWER_BODY_TYPE_HUMAN && player.lowerBody != LOWER_BODY_TYPE_WOLF && rand(4) == 0 && changes < changeLimit) {
         outputText("\n\nYou collapse as your legs shift and twist. By the time the pain subsides, you notice that you have normal legs and normal feet. <b>You now have normal feet!</b>");
         player.lowerBody = LOWER_BODY_TYPE_HUMAN;
         player.legCount = 2;
         changes++;
     }
     //normal arms
-    if (player.armType != ARM_TYPE_HUMAN && rand(4) == 0 && changes < changeLimit) {
+    if (player.armType != ARM_TYPE_HUMAN && player.armType != ARM_TYPE_WOLF && rand(4) == 0 && changes < changeLimit) {
         outputText("\n\nYour unusual arms change more and more until they are normal human arms, leaving [skinfurscales] behind. <b>You have normal human arms.</b>");
         updateClaws();
         player.armType = ARM_TYPE_HUMAN;
