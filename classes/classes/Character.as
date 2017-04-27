@@ -297,7 +297,7 @@ import classes.GlobalFlags.kFLAGS;
 
 		public function hasMuzzle():Boolean
 		{
-			if (faceType == FACE_HORSE || faceType == FACE_DOG || faceType == FACE_CAT || faceType == FACE_LIZARD || faceType == FACE_KANGAROO || faceType == FACE_FOX || faceType == FACE_DRAGON || faceType == FACE_RHINO || faceType == FACE_ECHIDNA || faceType == FACE_DEER)
+			if (faceType == FACE_HORSE || faceType == FACE_DOG || faceType == FACE_CAT || faceType == FACE_LIZARD || faceType == FACE_KANGAROO || faceType == FACE_FOX || faceType == FACE_DRAGON || faceType == FACE_RHINO || faceType == FACE_ECHIDNA || faceType == FACE_DEER || faceType == FACE_WOLF)
 				return true;
 			return false;
 		}
@@ -326,6 +326,8 @@ import classes.GlobalFlags.kFLAGS;
 					stringo = "rhino ";
 				if (int(Math.random() * 3) == 0 && (faceType == FACE_LIZARD || faceType == FACE_DRAGON))
 					stringo = "reptilian ";
+				if (int(Math.random() * 3) == 0 && faceType == FACE_WOLF)
+					stringo = "canine ";
 				switch(rand(3)) {
 					case 0:
 						return stringo + "muzzle";
