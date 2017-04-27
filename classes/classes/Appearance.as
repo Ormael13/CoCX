@@ -2136,7 +2136,7 @@
 					[GENDER_NONE, "genderless"],
 					[GENDER_MALE, "male"],
 					[GENDER_FEMALE, "female"],
-					[GENDER_HERM, "hermaphrodite"]
+					[GENDER_HERM, "hermaphrodite"],
 				]
 		);
 		public static const DEFAULT_SKIN_NAMES:Object = createMapFromPairs(
@@ -2147,7 +2147,7 @@
 					[SKIN_TYPE_GOO, "goo"],
 					[SKIN_TYPE_UNDEFINED, "undefined flesh"],
 					[SKIN_TYPE_DRAGON_SCALES, "scales"],
-					[SKIN_TYPE_FISH_SCALES, "scales"]
+					[SKIN_TYPE_FISH_SCALES, "scales"],
 				]
 		);
 		public static const DEFAULT_SKIN_DESCS:Object = createMapFromPairs(
@@ -2158,7 +2158,7 @@
 					[SKIN_TYPE_GOO, "skin"],
 					[SKIN_TYPE_UNDEFINED, "skin"],
 					[SKIN_TYPE_DRAGON_SCALES, "scales"],
-					[SKIN_TYPE_FISH_SCALES, "scales"]
+					[SKIN_TYPE_FISH_SCALES, "scales"],
 				]
 		);
 		public static const DEFAULT_HAIR_NAMES:Object = createMapFromPairs(
@@ -2170,7 +2170,7 @@
 					[HAIR_ANEMONE, "tentacle"],
 					[HAIR_QUILL, "quill"],
 					[HAIR_BASILISK_SPINES, "spiny basilisk"],
-					[HAIR_BASILISK_PLUME, "feathery plume"]
+					[HAIR_BASILISK_PLUME, "feathery plume"],
 				]
 		);
 		public static const DEFAULT_BEARD_NAMES:Object = createMapFromPairs(
@@ -2178,7 +2178,7 @@
 					[BEARD_NORMAL, "normal"],
 					[BEARD_GOATEE, "goatee"],
 					[BEARD_CLEANCUT, "clean-cut"],
-					[BEARD_MOUNTAINMAN, "mountain-man"]
+					[BEARD_MOUNTAINMAN, "mountain-man"],
 				]
 		);
 		public static const DEFAULT_FACE_NAMES:Object = createMapFromPairs(
@@ -2207,7 +2207,7 @@
 					[FACE_RHINO, "rhino"],
 					[FACE_WOLF, "wolf"],
 					[FACE_ECHIDNA, "echidna"],
-					[FACE_DEER, "deer"]
+					[FACE_DEER, "deer"],
 				]
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
@@ -2217,7 +2217,7 @@
 					[TONGUE_DEMONIC, "demonic"],
 					[TONGUE_DRACONIC, "draconic"],
 					[TONGUE_ECHIDNA, "echidna"],
-					[TONGUE_LIZARD, "lizard"]
+					[TONGUE_LIZARD, "lizard"],
 				]
 		);
 		public static const DEFAULT_EYES_NAMES:Object = createMapFromPairs(
@@ -2228,7 +2228,7 @@
 					[EYES_LIZARD, "lizard"],
 					[EYES_WOLF, "wolf"],
 					[EYES_DRAGON, "dragon"],
-					[EYES_BASILISK, "basilisk"]
+					[EYES_BASILISK, "basilisk"],
 				]
 		);
 		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
@@ -2251,7 +2251,7 @@
 					[EARS_RHINO, "rhino"],
 					[EARS_WOLF, "wolf"],
 					[EARS_ECHIDNA, "echidna"],
-					[EARS_DEER, "deer"]
+					[EARS_DEER, "deer"],
 				]
 		);
 		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(
@@ -2263,13 +2263,13 @@
 					[HORNS_DRACONIC_X4_12_INCH_LONG, "four 12\" long draconic"],
 					[HORNS_ANTLERS, "deer"],
 					[HORNS_GOAT, "goat"],
-					[HORNS_RHINO, "rhino"]
+					[HORNS_RHINO, "rhino"],
 				]
 		);
 		public static const DEFAULT_ANTENNAE_NAMES:Object = createMapFromPairs(
 				[
 					[ANTENNAE_NONE, "non-existant"],
-					[ANTENNAE_BEE, "bee"]
+					[ANTENNAE_BEE, "bee"],
 				]
 		);
 		public static const DEFAULT_ARM_NAMES:Object = createMapFromPairs(
@@ -2279,7 +2279,7 @@
 					[ARM_TYPE_SPIDER, "spider"],
 					[ARM_TYPE_WOLF, "wolf"],
 					[ARM_TYPE_PREDATOR, "predator"],
-					[ARM_TYPE_SALAMANDER, "salamander"]
+					[ARM_TYPE_SALAMANDER, "salamander"],
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2309,7 +2309,7 @@
 					[TAIL_TYPE_WOLF, "wolf"],
 					[TAIL_TYPE_ECHIDNA, "echidna"],
 					[TAIL_TYPE_DEER, "deer"],
-					[TAIL_TYPE_SALAMANDER, "salamander"]
+					[TAIL_TYPE_SALAMANDER, "salamander"],
 				]
 		);
 		public static const DEFAULT_WING_NAMES:Object = createMapFromPairs(
@@ -2326,7 +2326,7 @@
 					[WING_TYPE_FEATHERED_LARGE, "large feathered"],
 					[WING_TYPE_DRACONIC_SMALL, "small draconic"],
 					[WING_TYPE_DRACONIC_LARGE, "large draconic"],
-					[WING_TYPE_GIANT_DRAGONFLY, "giant dragonfly"]
+					[WING_TYPE_GIANT_DRAGONFLY, "giant dragonfly"],
 				]
 		);
 		public static const DEFAULT_WING_DESCS:Object = createMapFromPairs(
@@ -2343,7 +2343,7 @@
 					[WING_TYPE_FEATHERED_LARGE, "large, feathered"],
 					[WING_TYPE_DRACONIC_SMALL, "small, draconic"],
 					[WING_TYPE_DRACONIC_LARGE, "large, draconic"],
-					[WING_TYPE_GIANT_DRAGONFLY, "giant dragonfly"]
+					[WING_TYPE_GIANT_DRAGONFLY, "giant dragonfly"],
 				]
 		);
 		public static const DEFAULT_LOWER_BODY_NAMES:Object = createMapFromPairs(
@@ -2373,7 +2373,7 @@
 					[LOWER_BODY_TYPE_CLOVEN_HOOFED, "cloven-hoofed"],
 					[LOWER_BODY_TYPE_ECHIDNA, "echidna"],
 					[LOWER_BODY_TYPE_ECHIDNA, "deertaur"],
-					[LOWER_BODY_TYPE_SALAMANDER, "salamander"]
+					[LOWER_BODY_TYPE_SALAMANDER, "salamander"],
 				]
 		);
 		public static const DEFAULT_PIERCING_NAMES:Object = createMapFromPairs(
@@ -2383,14 +2383,14 @@
 					[PIERCING_TYPE_RING, "ring"],
 					[PIERCING_TYPE_LADDER, "ladder"],
 					[PIERCING_TYPE_HOOP, "hoop"],
-					[PIERCING_TYPE_CHAIN, "chain"]
+					[PIERCING_TYPE_CHAIN, "chain"],
 				]
 		);
 		public static const DEFAULT_VAGINA_TYPE_NAMES:Object = createMapFromPairs(
 				[
 					[VAGINA_TYPE_HUMAN, "human"],
 					[VAGINA_TYPE_EQUINE, "equine"],
-					[VAGINA_TYPE_BLACK_SAND_TRAP, "black sandtrap"]
+					[VAGINA_TYPE_BLACK_SAND_TRAP, "black sandtrap"],
 				]
 		);
 		public static const DEFAULT_VAGINA_WETNESS_SCALES:Array = [
@@ -2407,7 +2407,7 @@
 			[VAGINA_LOOSENESS_LOOSE, "loose"],
 			[VAGINA_LOOSENESS_GAPING, "gaping"],
 			[VAGINA_LOOSENESS_GAPING_WIDE, "gaping wide"],
-			[VAGINA_LOOSENESS_LEVEL_CLOWN_CAR, "clown-car level"]
+			[VAGINA_LOOSENESS_LEVEL_CLOWN_CAR, "clown-car level"],
 		];
 		public static const DEFAULT_ANAL_WETNESS_SCALES:Array = [
 			[ANAL_WETNESS_DRY, "dry"],
@@ -2423,7 +2423,7 @@
 			[ANAL_LOOSENESS_NORMAL, "normal"],
 			[ANAL_LOOSENESS_LOOSE, "loose"],
 			[ANAL_LOOSENESS_STRETCHED, "stretched"],
-			[ANAL_LOOSENESS_GAPING, "gaping"]
+			[ANAL_LOOSENESS_GAPING, "gaping"],
 		];
 		public static const DEFAULT_HIP_RATING_SCALES:Array = [
 			[HIP_RATING_BOYISH, "boyish"],
@@ -2432,7 +2432,7 @@
 			[HIP_RATING_AMPLE, "ample"],
 			[HIP_RATING_CURVY, "curvy"],
 			[HIP_RATING_FERTILE, "fertile"],
-			[HIP_RATING_INHUMANLY_WIDE, "inhumanly wide"]
+			[HIP_RATING_INHUMANLY_WIDE, "inhumanly wide"],
 		];
 		public static const DEFAULT_BUTT_RATING_SCALES:Array = [
 			[BUTT_RATING_BUTTLESS, "buttless"],
@@ -2443,7 +2443,7 @@
 			[BUTT_RATING_JIGGLY, "jiggly"],
 			[BUTT_RATING_EXPANSIVE, "expansive"],
 			[BUTT_RATING_HUGE, "huge"],
-			[BUTT_RATING_INCONCEIVABLY_BIG, "inconceivably big"]
+			[BUTT_RATING_INCONCEIVABLY_BIG, "inconceivably big"],
 		];
 
 		/**
