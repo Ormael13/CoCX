@@ -2574,8 +2574,8 @@ use namespace kGAMECLASS;
 			//Alter max stats depending on race
 			if (wolfScore() >= 4) {
 				maxSpe -= 10;
-				maxInt += 10;
-				maxTou += 5;
+				maxInt += 5;
+				maxTou += 10;
 				maxStr += 5;
 			}
 			if (minoScore() >= 4) {
