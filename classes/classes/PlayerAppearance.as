@@ -141,15 +141,11 @@ package classes
 			//wolf-face
 			if (player.faceType == FACE_WOLF) 
 			{
-				if (player.hasPlainSkin() || player.hasGooSkin()) {
-					outputText(" You have a wolf-like face, complete with a muzzle and black nose. The odd visage is hairless and covered with [skinFurScales].");
-				}
-				else if (player.hasFur()) {
-					outputText(" You have a wolf's face, complete with an angular shape, muzzle, and black nose. You've got [skinFurScales], hiding your [skin.noadj] underneath your furry visage.");
-				}
-				else if (player.hasScales()) 
-					outputText(" You have the facial structure of a wolf, muzzle and all, but overlaid with glittering [skinFurScales].");
-				}
+				outputText("  You have an angular wolf's face complete with a muzzle and black nose");
+				if (player.hasPlainSkin() || player.hasGooSkin() || player.hasScales())
+					outputText(", though devoid of any fur.);
+				else
+					outputText(".");
 			}
 			//dog-face
 			if (player.faceType == FACE_DOG) 
@@ -270,7 +266,7 @@ package classes
 			else if (player.eyeType == EYES_BLACK_EYES_SAND_TRAP) 
 				outputText("  Your eyes are solid spheres of inky, alien darkness.");
 			else if (player.eyeType == EYES_WOLF) 
-				outputText(" Your amber eyes are circled by darkness to help keep the sun from obscuring your view and have a second eyelid to keep them wet. You're rather near-sighted, but your peripherals are great!");
+				outputText("  Your amber eyes are circled by darkness to help keep the sun from obscuring your view and have a second eyelid to keep them wet. You're rather near-sighted, but your peripherals are great!");
 			else if (player.faceType != FACE_CAT && player.hasReptileEyes())
 			{
 				outputText("  Your eyes are");
@@ -296,8 +292,6 @@ package classes
 					outputText("  A pair of horse-like ears rise up from the top of your head.");
 				else if (player.earType == EARS_FERRET) 
 					outputText("  A pair of small, rounded ferret ears sit on top of your head.");
-				else if (player.earType == EARS_WOLF) 
-					outputText(" A pair of wolf ears stick out from your head, attuned to every sound around you.");
 				else if (player.earType == EARS_DOG) 
 					outputText("  A pair of dog ears protrude from your skull, flopping down adorably.");
 				else if (player.earType == EARS_COW) 
@@ -329,6 +323,8 @@ package classes
 					outputText("  A pair of small rounded openings appear on your head that are your ears.");
 				else if (player.earType == EARS_DEER) 
 					outputText("  A pair of deer-like ears rise up from the top of your head.");
+				else if (player.earType == EARS_WOLF) 
+					outputText("  A pair of wolf ears stick out from your head, attuned to every sound around you.");
 				//</mod>
 				if (player.antennae == ANTENNAE_BEE) 
 					outputText("  Floppy antennae also appear on your skull, bouncing and swaying in the breeze.");
@@ -812,8 +808,9 @@ package classes
 			{
 				outputText("  A very short, stubby deer tail sprouts from just above your butt.");
 			}
-			if (player.tailType == TAIL_TYPE_WOLF) {
-				outputText("  A thick-furred wolf tail hangs above your " + player.buttDescript() + ", standing alert.");
+			else if (player.tailType == TAIL_TYPE_WOLF)
+			{
+				outputText("  A thick-furred wolf tail hangs above your [ass].");
 			}
 			//</mod>
 			//LOWERBODY SPECIAL
@@ -824,7 +821,7 @@ package classes
 			else if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) 
 				outputText("  Your " + num2Text(player.legCount)+ " legs are muscled and jointed oddly, covered in fur, and end in a bestial hooves.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_WOLF) 
-				outputText("  You have " + Num2Text(player.legCount)+ " digitigrade legs that end in wolf paws.");
+				outputText("  You have " + num2Text(player.legCount) + " digitigrade legs that end in wolf paws.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_DOG) 
 				outputText("  " + Num2Text(player.legCount)+ " digitigrade legs grow downwards from your waist, ending in dog-like hind-paws.");
 			else if (player.lowerBody == LOWER_BODY_TYPE_NAGA)
