@@ -113,7 +113,7 @@ package classes.Scenes.Areas.GlacialRift
 			this.short = "Amarok";
 			this.imageName = "amarok";
 			this.long = "You are fighting an Amarok, a massive wolf that seems set on hunting you. The buffeting snow does nothing to hide its thick, black fur, and hardly manages to even ruffle it. It has golden, hungry eyes that watch your every move and sharp teeth capable of crushing bones. It looms over you in both height and width, with well-defined muscles, long legs, and bulky paws with deadly claws only adding to its intimidating stature. Even its tail looks capable of knocking you down. It's the most normal animal-like creature you've seen here yet, a normal wolf despite its size, but is no less terrifying. You get the feeling this won't be an easy fight, especially considering it's not about to let you run away.";
-			this.createCock(8, 1.5, CockTypesEnum.DOG);
+			this.createCock(8, 1.5, CockTypesEnum.WOLF);
 			this.balls = 2;
 			this.ballSize = 2;
 			this.cumMultiplier = 1;
@@ -130,12 +130,12 @@ package classes.Scenes.Areas.GlacialRift
 			this.tallness = 8*12;
 			this.hipRating = HIP_RATING_AVERAGE;
 			this.buttRating = BUTT_RATING_AVERAGE;
-			this.lowerBody = LOWER_BODY_TYPE_DOG;
+			this.lowerBody = LOWER_BODY_TYPE_WOLF;
 			this.skinTone = "black";
 			this.skinType = SKIN_TYPE_FUR;
 			this.hairColor = "black";
-			this.faceType = FACE_DOG;
-			this.earType = EARS_DOG;
+			this.faceType = FACE_WOLF;
+			this.earType = EARS_WOLF;
 			initStrTouSpeInte(110, 80, 85, 95);
 			initLibSensCor(15, 15, 25);
 			this.weaponName = "teeth";
@@ -152,7 +152,7 @@ package classes.Scenes.Areas.GlacialRift
 			this.drop = new WeightedDrop(consumables.WOLF_PP);
 			this.special1 = amarokClaw;
 			this.special2 = amarokTail;
-			this.tailType = TAIL_TYPE_DOG;
+			this.tailType = TAIL_TYPE_WOLF;
 			this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
 			//"Watching your movements" alluded to this. Its lore is stalking and hunting people, so I imagine you can't get away.
 			//Otherwise I'd suggest doing a hellhound knock-off of the scent tracking.
