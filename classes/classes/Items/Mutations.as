@@ -1665,9 +1665,9 @@ public function wolfPepper(type: Number, player: Player): void {
         changes++;
     }
     //normal legs
-    if (!= LOWER_BODY_TYPE_WOLF && rand(4) == 0) restoreLegs(tfSource);
+    if (player.lowerBody != LOWER_BODY_TYPE_WOLF && rand(4) == 0) restoreLegs(tfSource);
     //normal arms
-    if (rand(4) == 0 && player.lowerBody != ARM_TYPE_WOLF) restoreArms(tfSource);
+    if (rand(4) == 0 && player.armType != ARM_TYPE_WOLF) restoreArms(tfSource);
     //remove feather hair
     if (rand(4) == 0) removeFeatheryHair();
     //remove basilisk hair
