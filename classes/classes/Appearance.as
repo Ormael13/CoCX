@@ -541,19 +541,6 @@
 					"canine cock",
 					"knotted dog-cock");
 			}
-			else if (cockType == CockTypesEnum.WOLF) {
-				return randomChoice("wolf-shaped dong",
-					"canine shaft",
-					"pointed prick",
-					"knotty wolf-shaft",
-					"bestial cock",
-					"animalistic wolf-pecker",
-					"pointed wolf-dick",
-					"pointed shaft",
-					"canine member",
-					"canine cock",
-					"knotted wolf-cock");
-			}
 			else if (cockType == CockTypesEnum.FOX) {
 				return randomChoice("fox-shaped dong",
 					"vulpine shaft",
@@ -718,6 +705,19 @@
 					"rhino prick",
 					"bulged rhino cock",
 					"bulged rhino dick");
+			}
+			else if (cockType == CockTypesEnum.WOLF) {
+				return randomChoice("wolf-shaped dong",
+					"canine shaft",
+					"pointed prick",
+					"knotty wolf-shaft",
+					"bestial cock",
+					"animalistic wolf-pecker",
+					"pointed wolf-dick",
+					"pointed shaft",
+					"canine member",
+					"canine cock",
+					"knotted wolf-cock");
 			}
 			else if (cockType == CockTypesEnum.ECHIDNA) {
 				return randomChoice("strange echidna dick",
@@ -1087,20 +1087,6 @@
 					"furred monster"];
 				description += randomChoice(options);
 			}
-			else if (cockType == CockTypesEnum.WOLF) {
-				options = ["wolf dong",
-					"canine shaft",
-					"pointed prick",
-					"wolf-shaft",
-					"wolf-cock",
-					"wolf-pecker",
-					"wolf-dick",
-					"pointed shaft",
-					"canine cock",
-					"canine cock",
-					"wolf cock"];
-				description += randomChoice(options);
-			}
 			else if (cockType == CockTypesEnum.DOG) {
 				options = ["doggie dong",
 					"canine shaft",
@@ -1190,6 +1176,20 @@
 					"oblong penis",
 					"oblong dong",
 					"oblong dick"];
+				description += randomChoice(options);
+			}
+			else if (cockType == CockTypesEnum.WOLF) {
+				options = ["wolf dong",
+					"canine shaft",
+					"pointed prick",
+					"wolf-shaft",
+					"wolf-cock",
+					"wolf-pecker",
+					"wolf-dick",
+					"pointed shaft",
+					"canine cock",
+					"canine cock",
+					"wolf cock"];
 				description += randomChoice(options);
 			}
 			else {
@@ -2186,7 +2186,6 @@
 					[FACE_HUMAN, "human"],
 					[FACE_HORSE, "horse"],
 					[FACE_DOG, "dog"],
-					[FACE_WOLF, "wolf"],
 					[FACE_COW_MINOTAUR, "cow"],
 					[FACE_SHARK_TEETH, "shark"],
 					[FACE_SNAKE_FANGS, "snake"],
@@ -2206,6 +2205,7 @@
 					[FACE_PIG, "pig"],
 					[FACE_BOAR, "boar"],
 					[FACE_RHINO, "rhino"],
+					[FACE_WOLF, "wolf"],
 					[FACE_ECHIDNA, "echidna"],
 					[FACE_DEER, "deer"]
 				]
@@ -2237,7 +2237,6 @@
 					[EARS_HORSE, "horse"],
 					[EARS_DOG, "dog"],
 					[EARS_COW, "cow"],
-					[EARS_WOLF, "wolf"],
 					[EARS_ELFIN, "elfin"],
 					[EARS_CAT, "cat"],
 					[EARS_LIZARD, "lizard"],
@@ -2250,6 +2249,7 @@
 					[EARS_FERRET, "ferret"],
 					[EARS_PIG, "pig"],
 					[EARS_RHINO, "rhino"],
+					[EARS_WOLF, "wolf"],
 					[EARS_ECHIDNA, "echidna"],
 					[EARS_DEER, "deer"]
 				]
@@ -2277,7 +2277,7 @@
 					[ARM_TYPE_HUMAN, "human"],
 					[ARM_TYPE_HARPY, "harpy"],
 					[ARM_TYPE_SPIDER, "spider"],
-					[ARM_TYPE_WOLF, "wolf-like"],
+					[ARM_TYPE_WOLF, "wolf"],
 					[ARM_TYPE_PREDATOR, "predator"],
 					[ARM_TYPE_SALAMANDER, "salamander"]
 				]
@@ -2288,7 +2288,6 @@
 					[TAIL_TYPE_HORSE, "horse"],
 					[TAIL_TYPE_DOG, "dog"],
 					[TAIL_TYPE_DEMONIC, "demonic"],
-					[TAIL_TYPE_WOLF, "wolf"],
 					[TAIL_TYPE_COW, "cow"],
 					[TAIL_TYPE_SPIDER_ADBOMEN, "spider abdomen"],
 					[TAIL_TYPE_BEE_ABDOMEN, "bee abdomen"],
@@ -2307,6 +2306,7 @@
 					[TAIL_TYPE_SCORPION, "scorpion"],
 					[TAIL_TYPE_GOAT, "goat"],
 					[TAIL_TYPE_RHINO, "rhino"],
+					[TAIL_TYPE_WOLF, "wolf"],
 					[TAIL_TYPE_ECHIDNA, "echidna"],
 					[TAIL_TYPE_DEER, "deer"],
 					[TAIL_TYPE_SALAMANDER, "salamander"]
