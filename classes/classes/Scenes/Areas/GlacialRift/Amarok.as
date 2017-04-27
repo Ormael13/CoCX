@@ -53,7 +53,7 @@ package classes.Scenes.Areas.GlacialRift
 			else {
 				//Damageeee + stun! Reference to the legend of it slapping a kid with its tail, except minus the bone breaking.
 				outputText("The hit sends you stumbling back", false);
-				if (player.findPerk(PerkLib.Resolute) < 0 && rand(2) == 0) 
+				if (player.findPerk(PerkLib.Resolute) <= 0 && rand(2) == 0) 
 				{
 					outputText(", stunning you.", false);
 					player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
@@ -66,6 +66,14 @@ package classes.Scenes.Areas.GlacialRift
 			combatRoundOver();
 		}
 		
+		override protected function performCombatAction():void
+		{
+			var chooser:Number = 0;
+			chooser = rand(10);
+			if (chooser < 6) amarokClaw(); //60% chance
+			if (chooser >= 6 && chooser < 9) amarokTail(); //40% chance
+		}
+		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.glacialRift.amarokScene.winAgainstAmarok();
@@ -75,7 +83,7 @@ package classes.Scenes.Areas.GlacialRift
 		{
 			if(pcCameWorms){
 				outputText("\n\nThe Amarok looks down at the worms you came, sniffs them, then snarls and walks away. It must consider you tainted meat.", false);
-				doNext(game.combat.cleanupAfterCombat);
+				doNext(game.combat.endLustLoss);
 			} else {
 				game.glacialRift.amarokScene.amarokChowTime();
 			}
@@ -95,6 +103,7 @@ package classes.Scenes.Areas.GlacialRift
 			this.pronoun1 = "it";
 			this.pronoun2 = "it";
 			this.pronoun3 = "its";
+			createBreastRow();
 			createBreastRow();
 			createBreastRow();
 			createBreastRow();
