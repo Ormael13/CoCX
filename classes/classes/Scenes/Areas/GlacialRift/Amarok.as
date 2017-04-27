@@ -95,7 +95,7 @@ package classes.Scenes.Areas.GlacialRift
 			this.short = "Amarok";
 			this.imageName = "amarok";
 			this.long = "You are fighting an Amarok, a massive wolf that seems set on hunting you. The buffeting snow does nothing to hide its thick, black fur, and hardly manages to even ruffle it. It has golden, hungry eyes that watch your every move and sharp teeth capable of crushing bones. It looms over you in both height and width, with well-defined muscles, long legs, and bulky paws with deadly claws only adding to its intimidating stature. Even its tail looks capable of knocking you down. It's the most normal animal-like creature you've seen here yet, a normal wolf despite its size, but is no less terrifying. You get the feeling this won't be an easy fight, especially considering it's not about to let you run away.";
-			this.createCock(8, 1.5, CockTypesEnum.WOLF);
+			this.createCock(8, 1.5, CockTypesEnum.DOG);
 			this.balls = 2;
 			this.ballSize = 2;
 			this.cumMultiplier = 1;
@@ -112,7 +112,7 @@ package classes.Scenes.Areas.GlacialRift
 			this.tallness = 8*12;
 			this.hipRating = HIP_RATING_AVERAGE;
 			this.buttRating = BUTT_RATING_AVERAGE;
-			this.lowerBody = LOWER_BODY_TYPE_WOLF;
+			this.lowerBody = LOWER_BODY_TYPE_DOG;
 			this.skinTone = "black";
 			this.skinType = SKIN_TYPE_FUR;
 			this.hairColor = "black";
