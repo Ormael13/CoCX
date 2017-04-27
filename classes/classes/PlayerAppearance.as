@@ -143,7 +143,7 @@ package classes
 			{
 				outputText("  You have an angular wolf's face complete with a muzzle and black nose");
 				if (!player.hasFur())
-					outputText(", though devoid of any fur.);
+					outputText(", though devoid of any fur.");
 				else
 					outputText(".");
 			}

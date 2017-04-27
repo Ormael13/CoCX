@@ -1142,8 +1142,8 @@ use namespace kGAMECLASS;
 			return counter;
 		}
 		//Wolf Score
-		public override function wolfScore():Number {
-			var wolfCounter:number = 0;
+		public function wolfScore():Number {
+			var wolfCounter:Number = 0;
 			if (faceType == FACE_WOLF)
 				wolfCounter++;
 			if (wolfCocks() > 0)
@@ -1164,7 +1164,7 @@ use namespace kGAMECLASS;
 				wolfCounter++;
 			if (eyeType == EYES_WOLF)
 				wolfCounter+=2;
-			if (hasFur() && counter > 0) //Only counts if we got wolf features
+			if (hasFur() && wolfCounter > 0) //Only counts if we got wolf features
 				wolfCounter++;
 			return wolfCounter;
 		}
