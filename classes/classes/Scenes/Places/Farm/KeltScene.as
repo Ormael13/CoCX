@@ -190,18 +190,27 @@ private function keltRequiresNakedness():void {
 	outputText("He slaps a hand on his bare chest proudly, and you realize that he means for you to strip down naked.  When you protest, his eyes narrow with irritation, and his sneer becomes more cruel.\r\r", false);
 	outputText("\"<i>Didn't know you were a coward, too.  That's fine... go fuck off, then.  You can't handle it, then go back to your camp and braid your hair, or something.  If you wait long enough, I'm sure a nice minotaur will come along to make you his bitch.  'Bout all you're good for, right?</i>\"\r\r", false);
 	outputText("Do you obey his demand?", false);
-	if (player.cor > 70 - player.corruptionTolerance() && player.inte > 40 && !player.isTaur()) {
-		outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
-		simpleChoices("Reluctantly", keltReluctantlyGetNaked, "Eagerly", keltEagerlyGetNaked, "Fight Back", keltResistance, "", null, "Never", keltRefuseNakedness);
-		return;
-	}
-	else simpleChoices("Reluctantly", keltReluctantlyGetNaked, "Eagerly", keltEagerlyGetNaked, "", null, "", null, "Never", keltRefuseNakedness);
+	
 	//(Corruption higher than 60 automatically chooses eagerly)
-	if (player.cor + player.lib + player.lust >= 180) {
+	if (player.cor + player.lib + (player.lust * 100 / player.maxLust()) >= 180) {
 		outputText(" Of course you do.  You love putting on a show.", false);
 		// go eagerly.
 		doNext(keltEagerlyGetNaked);
+		return;
 	}
+	
+	menu();
+	addButton(0, "Reluctantly", keltReluctantlyGetNaked);
+	addButton(1, "Eagerly", keltEagerlyGetNaked);
+	
+	if (player.inte > 40 && (player.cor > 70 - player.corruptionTolerance() || player.findPerk(PerkLib.Sadist) >= 0 || player.findPerk(PerkLib.Pervert) >= 0) && !player.isTaur()) {
+		outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
+		addButton(3, "Turn Tables", keltResistance);
+	} else {
+		addDisabledButton(3, "Turn Tables", "Someone hard and smart enough could probably catch him off-guard... Being a taur defenitely doesn't help, though.");
+	}
+	
+	addButton(4, "Never", keltRefuseNakedness);
 }
 
 //Naked Requirement, Never
@@ -345,12 +354,18 @@ private function keltRequiresBlowjobs():void {
 		doNext(keltBlowjobRequirementEagerly);
 		return;
 	}
-	simpleChoices("Shamefully", keltBlowjobRequirementShamefully, "Eagerly", keltBlowjobRequirementEagerly, "Never!", keltBlowjobRequirementNever, "", null, "FIGHT!", kelly.fightToBeatKelt);
 	//Never!			Shamefully			Eagerly
-	if (player.inte > 40 && player.cor > 70 - player.corruptionTolerance() && !player.isTaur()) {
+	menu();
+	addButton(0, "Shamefully", keltBlowjobRequirementShamefully);
+	addButton(1, "Eagerly", keltBlowjobRequirementEagerly);
+	addButton(2, "Never!", keltBlowjobRequirementNever);
+	if (player.inte > 40 && (player.cor > 70 - player.corruptionTolerance() || player.findPerk(PerkLib.Sadist) >= 0 || player.findPerk(PerkLib.Pervert) >= 0) && !player.isTaur()) {
 		outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
-		addButton(3, "Fight Back", keltResistance);
+		addButton(3, "Turn Tables", keltResistance);
+	} else {
+		addDisabledButton(3, "Turn Tables", "Someone hard and smart enough could probably catch him off-guard... Being a taur defenitely doesn't help, though.");
 	}
+	addButton(4, "FIGHT!", kelly.fightToBeatKelt);
 }
 
 //Blowjob Requirement, Never
@@ -485,11 +500,16 @@ private function keltMainEncounterAfterNakedReq():void {
 				outputText("\r\rYou're not certain you want to practice naked again... particularly with the way Kelt is looking at you, his arrogant smirk plastered on his face.  Do you agree to his terms?", false);
 				//(Yes[+5 Submissive]			No[Never event])
 				//Link this to reluctant && never
-				simpleChoices("Yes", keltReluctantlyGetNaked, "No", keltRefuseNakedness, "", null, "", null, "FIGHT!", kelly.fightToBeatKelt);
-				if (player.inte > 40 && player.cor > 70 - player.corruptionTolerance() && !player.isTaur()) {
+				menu();
+				addButton(0, "Yes", keltReluctantlyGetNaked);
+				addButton(1, "No", keltRefuseNakedness);
+				if (player.inte > 40 && (player.cor > 70 - player.corruptionTolerance() || player.findPerk(PerkLib.Sadist) >= 0 || player.findPerk(PerkLib.Pervert) >= 0) && !player.isTaur()) {
 					outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
-					addButton(2, "Fight Back",keltResistance);
+					addButton(2, "Turn Tables", keltResistance);
+				} else {
+					addDisabledButton(2, "Turn Tables", "Someone hard and smart enough could probably catch him off-guard... Being a taur defenitely doesn't help, though.");
 				}
+				addButton(4, "FIGHT!", kelly.fightToBeatKelt);
 				return;
 			}
 		}
@@ -771,7 +791,10 @@ private function keltMainEncounterPostBlowjob():void {
 		else {
 			outputText("Despite the need, despite the desire, you are still in control of yourself enough to make a choice.  Do you submit to the centaur's will, and your own hunger?  Or will you somehow find the strength to walk away?", false);
 			//Submit				Resist!
-			simpleChoices("Submit", keltSubmitGivingBJ, "Resist", keltResistGivingBJ, "", null, "", null, "FIGHT!", kelly.fightToBeatKelt);
+			menu();
+			addButton(0, "Submit", keltSubmitGivingBJ);
+			addButton(1, "Resist", keltResistGivingBJ);
+			addButton(4, "FIGHT!", kelly.fightToBeatKelt);
 			return;
 		}
 	}
@@ -918,11 +941,13 @@ private function keltBadEndEpilogue():void {
 private function keltResistance():void {
 	spriteSelect(35);
 	outputText("You close your eyes, ", true);
-	if (player.faceType == FACE_HORSE || player.faceType == FACE_DOG) outputText("a low growl building in the back of your throat", false);
+	if (player.hasMuzzle()) outputText("a low growl building in the back of your throat", false);
 	else outputText("fighting anger-fueled muscle-spasms", false); 
 	outputText(" as Kelt's insults go too far.  You've had just about enough of his disingenuous assertions!\r\r", false);
 	outputText("An idea on how to put him in his place slowly forms in the back of your mind, though you're sure pulling it off would humiliate the puffed-up centaur into never his showing his face around the farm again.  Do you do it?", false);
-	doYesNo(fuckKeltsShitUp,keltResistancePussyOut);
+	menu();
+	addButton(0, "Yes", fuckKeltsShitUp);
+	addButton(1, "No", keltResistancePussyOut);
 }
 private function keltResistancePussyOut():void {
 	spriteSelect(35);

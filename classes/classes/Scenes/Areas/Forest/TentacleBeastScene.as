@@ -95,7 +95,9 @@ public function encounter():void {
 	}
 	if (player.cor > 50) {
 		outputText("Do you joyfully submit or fight back?\n\n", false);
-		simpleChoices("Fight", startTentacleBeastCombat, "Submit", tentacleLossRape, "", null, "", null, "", null);
+		menu();
+		addButton(0, "Fight", startTentacleBeastCombat);
+		addButton(1, "Submit", tentacleLossRape);
 		return;
 	}
 	startCombat(new TentacleBeast());

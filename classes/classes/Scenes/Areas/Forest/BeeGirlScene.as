@@ -55,7 +55,9 @@ package classes.Scenes.Areas.Forest
 			if (player.hasKeyItem("Traveler's Guide") >= 0 && player.inte / 2 > rand(40)) {
 				outputText("You suddenly remember a passage from the Traveler's Guide about monstrous bees that lay eggs in unmentionable places.  Of course, a brave champion would face any danger.\n\n<b>Do you proceed?</b>");
 				//Yes goes to beeEncounterLevel2(), no goes to camp
-				simpleChoices("Yes", beeEncounterSelect, "", null, "", null, "", null, "Back", camp.returnToCampUseOneHour);
+				menu();
+				addButton(0, "Yes", beeEncounterSelect);
+				addButton(14, "Back", camp.returnToCampUseOneHour);
 			}
 			//If not smart enough, proceed.
 			else beeEncounterSelect(false);
@@ -108,7 +110,10 @@ package classes.Scenes.Areas.Forest
 						//Chance to avoid raaaaeeeeep
 						if ((player.lib + player.cor < 140) || rand(2) == 0) {
 							outputText("You barely stop yourself from gleefully throwing yourself into her arms.  You realize the harmonic buzzing of her wings and the unearthly scent of her honey briefly robbed you of your reason.  Feeling momentarily more clear-headed, what do you do?");
-							simpleChoices("Fight", fightTheBeeGirl, "Talk", beeTalk, "Seduce", null, "", null, "Leave", camp.returnToCampUseOneHour);
+							menu();
+							addButton(0, "Fight", fightTheBeeGirl);
+							addButton(1, "Talk", beeTalk);
+							addButton(14, "Leave", camp.returnToCampUseOneHour);
 						}
 						else beeEncounterClassic(false);
 				}
@@ -129,7 +134,10 @@ package classes.Scenes.Areas.Forest
 					outputText("\n\n<b>New codex entry unlocked: Giant Bees!</b>")
 				}
 				outputText("\n\nYou just barely hold yourself back and shake your head to clear the smell and buzzing from your mind.  Something about your " + (isBeeMorph ? "new bee body seems to have drawn" : "massive member has attracted") + " her attention, and she is staring at your crotch in anticipation.  You steady yourself and decide what you should do next.");
-				simpleChoices("Fight", fightTheBeeGirl, "Sex", beeSexForCocks, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+				menu();
+				addButton(0, "Fight", fightTheBeeGirl);
+				addButton(1, "Sex", beeSexForCocks);
+				addButton(14, "Leave", camp.returnToCampUseOneHour);
 			}
 			else beeSexForCocks(false);
 		}
@@ -143,7 +151,10 @@ package classes.Scenes.Areas.Forest
 				outputText("You catch yourself staring at her for a few moments before you collect yourself.  She seems harmless enough, and it does seem like it will be fun to enjoy what she has to offer.");
 			else outputText("You grin at the thought, it would certainly be fun fucking her, but maybe it would be even more fun to force yourself on her?");
 			outputText("  What will you do?");
-			simpleChoices("Fight", fightTheBeeGirl, "Play", beeMaidenPlay, "", null, "", null, "Leave", beeEncounterAsBeeMorphFemaleLeave);
+			menu();
+			addButton(0, "Fight", fightTheBeeGirl);
+			addButton(1, "Play", beeMaidenPlay);
+			addButton(14, "Leave", beeEncounterAsBeeMorphFemaleLeave);
 		}
 		
 		private function beeEncounterAsBeeMorphFemaleLeave():void {
@@ -155,7 +166,10 @@ package classes.Scenes.Areas.Forest
 		private function beeEncounterAfraid():void {
 			outputText(" in the light.\n\n");
 			outputText("Her face breaks into a smile at the sight of you.  Her buzzing dies down and you notice that the mind numbing smell in the glade isn’t as strong as you were last here.  The handmaiden turns to the side and shows you that her bee abdomen is quite slender today; it doesn’t look like she has any eggs this time.  <i>“Zzzo, the queen hazzz zzzaid that we can try a little experiment with you, if thingzzz work out, maybe we won’t use zzzo much buzzzing and honey.”</i>  She giggles, <i>“Firzzzt time, no eggzzz, zzzo you don’t have to worry.  Are you ready to have zzzome fun?”</i>");
-			simpleChoices("Fight", fightTheBeeGirl, "Have Sex", beeEncounterAfraidFirstTimeSex, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+			menu();
+			addButton(0, "Fight", fightTheBeeGirl);
+			addButton(1, "Have Sex", beeEncounterAfraidFirstTimeSex);
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 		
 		private function beeEncounterAfraidFirstTimeSex():void {
@@ -198,7 +212,10 @@ package classes.Scenes.Areas.Forest
 		private function beeEncounterAfraidRepeat():void {
 			outputText(" in the light.\n\n");
 			outputText("Her face breaks into a smile at the sight of you and her buzzing dies down.  Once again, the smell in the grove is much weaker than it was when you first came to this grove.  Those same flowers have been scattered around to ease off on the scent’s mind affecting powers.  She turns to the side to give you a full view of her now swollen abdomen and gives it a gentle pat.  <i>“Are you ready to carry zzzome eggzzz now?  I won’t hurt you, and I promizzzizz I won’t uzzze my buzzzing and honey to make you do it.  Thezzze where zzzaved zzzpecially for you, and I’ve got a little gift for you too if you zzzay yezzz.  Are you up for a little zzzex and eggzzz up your butt?”</i>");
-			simpleChoices("Fight", fightTheBeeGirl, "Have Sex", beeEncounterAfraidRepeatSex, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+			menu();
+			addButton(0, "Fight", fightTheBeeGirl);
+			addButton(1, "Have Sex", beeEncounterAfraidRepeatSex);
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 		
 		private function beeEncounterAfraidRepeatSex():void {
@@ -257,13 +274,18 @@ package classes.Scenes.Areas.Forest
 		private function beeEncounterDisgusted():void {
 			outputText(" in the light.\n\n");
 			outputText("Her face breaks into a frown at the sight of you.  At once her buzzing stops and she looks at you and says <i>“Oh, it’zzz you again, juzzzt go away; I need to find zzzomeone that actually will carry my queen’zzz eggzzz.”</i>  Your mind is pulled from its stupor, as she directs you out of the clearing with a dismissive look.");
-			simpleChoices("Fight", fightTheBeeGirl, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+			menu();
+			addButton(0, "Fight", fightTheBeeGirl);
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 		
 		private function beeEncounterDuty():void {
 			outputText(" in the light.\n\n");
 			outputText("Her face breaks into a smile and her buzzing dies down.  You shake your head slightly to clear away the effect that you were under and look back at the smiling bee girl.");
-			simpleChoices("Fight", fightTheBeeGirl, "Talk", beeEncounterDutyTalk, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+			menu();
+			addButton(0, "Fight", fightTheBeeGirl);
+			addButton(1, "Talk", beeEncounterDutyTalk);
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 		
 		private function beeEncounterDutyTalk():void {
@@ -271,7 +293,9 @@ package classes.Scenes.Areas.Forest
 			spriteSelect(6);
 			outputText("The handmaiden seems to be quite happy to talk to you for a little while.  She is quite interested in the tales you have to share, and you have a chance to hear a bit about the world from her.  After the two of you have been talking for awhile, you notice that she has been running her hand over her lady bits and you ask her about it.  <i>“Oh?  Well, I’m juzzzt zzzo horny right now, do you think you could help me out with that?  You can keep zzzome of the honey for later, and it could do zzzome incredible thingzzz to you.”</i>  Do you take her up on her offer?”</i>");
 			if (player.inte < 50) dynStats("int", 0.5);
-			doYesNo(freeHoneyEvent, beeEncounterDutyLeave);
+			menu();
+			addButton(0, "Yes", freeHoneyEvent);
+			addButton(1, "No", beeEncounterDutyLeave);
 		}
 		
 		private function beeEncounterDutyLeave():void {
@@ -285,14 +309,18 @@ package classes.Scenes.Areas.Forest
 			outputText(" in the light.\n\n");
 			outputText("Her mouth opens wide in panic as she catches sight of you.  She drops the flower and starts to draw back yelling <i>“Pleazzze don't hurt me again!  I won't try to lay eggzzz in you any more, just let me go!”</i>\n\n");
 			outputText("What will you do with her?");
-			simpleChoices("Fight", fightTheBeeGirl, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+			menu();
+			addButton(0, "Fight", fightTheBeeGirl);
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 		
 		private function beeEncounterSheDesiresYou():void {
 			outputText(" in the light.\n\n");
 			outputText("Her mouth opens wide in panic as she catches sight of you.  She drops the flower and starts to draw back yelling <i>“No!  I won't give in to the dezzzire!  Go away!”</i>\n\n");
 			outputText("What will you do with her?");
-			simpleChoices("Fight", fightTheBeeGirl, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+			menu();
+			addButton(0, "Fight", fightTheBeeGirl);
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 		
 		private function beeEncounterSheBeatsYouRegularly():void {
@@ -300,7 +328,10 @@ package classes.Scenes.Areas.Forest
 			outputText("Her mouth breaks out in a grin at the sight of you.  <i>“Hello again naughty " + player.mf("boy", "girl") + ",”</i> her buzzing really starting to get inside your head as she stands up and beckons to you.  <i>“Juzzzt make it eazzier on yourzzzelf and let me lay my eggzzz in you.  No fuzzzzz, no fighting.  Just let yourzzzelf be carried away.”</i>\n\n");
 			if ((player.lib + player.cor < 70) || rand(4) == 0) { //Chance to avoid raaaaeeeeep
 				outputText("With great difficulty you manage to stop yourself from throwing yourself into her arms.  Losing to this girl isn’t helping you resist her charms at all.  You’re finding It harder and harder to fight the call of her incredible song and unnatural scent, it may be wise to run now; but what will you do now that you have your senses again?");
-				simpleChoices("Fight", fightTheBeeGirl, "Talk", beeEncounterSheBeatsYouRegularlyTalk, "", null, "", null, "Run", camp.returnToCampUseOneHour);
+				menu();
+				addButton(0, "Fight", fightTheBeeGirl);
+				addButton(1, "Talk", beeEncounterSheBeatsYouRegularlyTalk);
+				addButton(14, "Leave", camp.returnToCampUseOneHour);
 			}
 			else {
 				outputText("Unable to control yourself in her presence, you throw yourself into her arms and she lifts you up a little into the air before setting you face down onto the flower and landing on your back.  <i>“That’zzz the way it should be, it’zzz zzzo much easier when you juzzzt let go.  Are you ready?”</i>");
@@ -317,7 +348,9 @@ package classes.Scenes.Areas.Forest
 		
 		private function beeEncounterSheBeatsYouRegularlyLastChance():void {
 			if ((player.lib + player.cor < 70) || rand(4) == 0) { //Chance to avoid raaaaeeeeep
-				doYesNo(beeEncounterSheBeatsYouRegularlyAndYouLetHerLaysEggs, beeEncounterSheBeatsYouRegularlyDontLetHer);
+				menu();
+				addButton(0, "Yes", beeEncounterSheBeatsYouRegularlyAndYouLetHerLaysEggs);
+				addButton(1, "No", beeEncounterSheBeatsYouRegularlyDontLetHer);
 			}
 			else {
 				outputText("\n\nThanks to her wiles, you can’t think of any reason why you shouldn’t be.");
@@ -372,7 +405,9 @@ package classes.Scenes.Areas.Forest
 				outputText("Your " + player.cockDescript(0) + " wriggles free of your " + player.armorName + ", as you keep walking forward.  A bodiless voice yells, \"<i>Honeypot, honeypot, ME LOOOOVE HONEYPOOOOOT!</i>\"\n\n");
 				outputText("The bee-girl's eyes widen at the sight, shocked by your over-endowed form being dragged towards her as if there were a magnet in your " + player.cockDescript(0) + ".  She presses herself against the flower's petals, terrified and afraid to put up any meaningful resistance.  The nagging voice pipes up, \"<i>So are we gonna rape her or what, " + player.short + "?  I need some honeyyy!</i>\"\n\n");
 				outputText("She seems too surprised to resist.  Will you go along with Exgartuan and rape her?");
-				doYesNo(getGame().exgartuan.exgartuanBeeRape, camp.returnToCampUseOneHour);
+				menu();
+				addButton(0, "Yes", getGame().exgartuan.exgartuanBeeRape);
+				addButton(1, "No", camp.returnToCampUseOneHour);
 			}
 			else {
 				outputText("The bee-girl's eyes widen at the sight,  shocked by your over-endowed form being dragged towards her as if there were a magnet in your " + player.cockDescript(0) + ".   She flutters into the air and aims her stinger towards you, ready to fight!");
@@ -766,13 +801,17 @@ package classes.Scenes.Areas.Forest
 				if (player.cor >= 33 && player.cor <= 66) outputText("Her offer intrigues you, and the arousing sweetness of her scent makes it difficult to resist.");
 				if (player.cor > 66) outputText("Looking at her through lust-tinted eyes, you're sure she can deliver on her offer.  Getting closer to her scent alone would be worth bearing a few eggs...");
 				outputText("\n\nDo you accept her offer?");
-				doYesNo(beeEncounterClassic, camp.returnToCampUseOneHour);
+				menu();
+				addButton(0, "Yes", beeEncounterClassic);
+				addButton(1, "No", camp.returnToCampUseOneHour);
 			}
 			else {
 				//If you get lucky, chance for free honey and -corruption in exchange for lust.
 				if (rand(2) == 0) {
 					outputText("\"<i>Awww, it zzzeemz you've caught me with my 'pants' down,</i>\" she giggles, \"<i>I'm all out of eggzzz.</i>\"  She pats her smaller-sized abdomen for a moment, thinking.\n\nHer eyes light up with inspiration, \"<i>Zzzince I'm ztill zzzo horny, would you like pure undiluted honey? Itzzz very good,</i>\" she says, spreading her legs and exposing the source of the scent – her puffy black vulva dripping with sticky amber fluid.\n\nDo you collect her honey?");
-					doYesNo(freeHoneyEvent, camp.returnToCampUseOneHour);
+					menu();
+					addButton(0, "Yes", freeHoneyEvent);
+					addButton(1, "No", camp.returnToCampUseOneHour);
 				}
 				//If you get unlucky you just get the choice of getting egg-laid.
 				else {
@@ -783,7 +822,9 @@ package classes.Scenes.Areas.Forest
 					if (player.cor >= 33 && player.cor <= 66) outputText("Her offer intrigues you, and the arousing sweetness of her scent makes it difficult to resist.");
 					if (player.cor > 66) outputText("Looking at her through lust-tinted eyes, you're sure she can deliver on her offer.  Getting closer to her scent alone would be worth bearing a few eggs...");
 					outputText("\n\nDo you accept her offer?");
-					doYesNo(beeEncounterClassic, beeEncounterRefusedHerEggs);
+					menu();
+					addButton(0, "Yes", beeEncounterClassic);
+					addButton(1, "No", beeEncounterRefusedHerEggs);
 				}
 			}
 		}

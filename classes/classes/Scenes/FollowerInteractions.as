@@ -53,7 +53,9 @@ public function amilyIsPissedAtYouForRuiningJojo():void {
 	outputText("(You're at a crossroads. You can help Amily purify Jojo, but the mouse will likely never give you a chance to corrupt him again.  Alternatively, you could tell the bitch off and keep your favorite fuck-pet.)");
 	
 	//[Fix him] [Fuck off]
-	simpleChoices("Fix Him", agreeToHelpAmilyFixJojo, "Fuck Off", tellAmilyToFuckOffRuinedJojo, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Fix Him", agreeToHelpAmilyFixJojo);
+	addButton(1, "Fuck Off", tellAmilyToFuckOffRuinedJojo);
 }
 
 //[Tell Amily to fuck off]
@@ -164,7 +166,9 @@ public function amilyDiscoversJojoWithTentaclesAndShitOhBoy():void {
 	else {
 		outputText("This is bad.  You could try to explain that what happened to Jojo was a moment of weakness before you overcame your corruption, but judging from the look in her eyes, she would KILL JOJO rather than let him continue to live in such a pathetic state.  Or, you could stand by your choice to corrupt Jojo, but you'd have to get Amily to leave so she couldn't harm Jojo.  Flipping her the bird might do the trick.");
 		//[Corrupt/Choose Jojo]
-		simpleChoices("Explain", aerisDies, "Flip Bird", AmilyLeavesBirdJojoTentacles, "", null, "", null, "", null);
+		menu();
+		addButton(0, "Explain", aerisDies);
+		addButton(1, "Flip Bird", AmilyLeavesBirdJojoTentacles);
 	}
 }
 
@@ -193,7 +197,9 @@ private function aerisDies():void {
 	outputText("(Amily is going to kill Jojo.  What do you do?)");
 	
 	//[Stop Her] [Let Her]
-	simpleChoices("Stop Her!", stopJojoDeathInTheNameOfLove, "Let Her", whyWouldDoThis, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Stop Her!", stopJojoDeathInTheNameOfLove);
+	addButton(1, "Let Her", whyWouldDoThis);
 }
 
 //[STOP – in the name of love]
@@ -291,7 +297,10 @@ internal function rathazulFreaksOverJojo():void {
 	
 	outputText("(He is mine, I can handle it, or he's harmless?)");
 	//[Jojo is yours] [I can handle it] [It's harmless]
-	simpleChoices("Mine", tellRathazulYouOwnJojo, "Handle It", tellRathazulYouCanHandleIt, "Harmless", TellRathazulJojoIsHarmless, "", null, "", null);
+	menu();
+	addButton(0, "Mine", tellRathazulYouOwnJojo);
+	addButton(1, "Handle It", tellRathazulYouCanHandleIt);
+	addButton(2, "Harmless", TellRathazulJojoIsHarmless);
 }
 //	[Jojo is yours]
 private function tellRathazulYouOwnJojo():void {
@@ -366,7 +375,10 @@ internal function marbleVsAmilyFreakout():void {
 	
 	//Player choices how they want to respond.  
 	//Stay silent (A1), pimp (B1), or explain (C1).
-	simpleChoices("StaySilent", marbleIsPissyAndYourTooDumbToTalk, "Pimp", beAPimpMarbleLovesIt, "Explain", LucyYouGotSomeSplainingToDo, "", null, "", null);
+	menu();
+	addButton(0, "StaySilent", marbleIsPissyAndYourTooDumbToTalk);
+	addButton(1, "Pimp", beAPimpMarbleLovesIt);
+	addButton(2, "Explain", LucyYouGotSomeSplainingToDo);
 }
 
 //Stay silent like a douche
@@ -411,13 +423,17 @@ private function beAPimpMarbleLovesIt():void {
 	if (player.findPerk(PerkLib.MarblesMilk) >= 0) {
 		outputText("Marble blinks before saying \"<i>" + player.short + ", try again, I know you're better than that.</i>\"  You blink in response and wonder yourself what possessed you to say that.\n\n", false);
 		//Player chooses stay silent (A1) or explain (C1)
-		simpleChoices("StaySilent", marbleIsPissyAndYourTooDumbToTalk, "Explain", LucyYouGotSomeSplainingToDo, "", null, "", null, "", null);
+		menu();
+		addButton(0, "StaySilent", marbleIsPissyAndYourTooDumbToTalk);
+		addButton(1, "Explain", LucyYouGotSomeSplainingToDo);
 	}
 	//Pimp -> PC is not addicted (B3)
 	else {
 		outputText("The two of them simply stare at you for several minutes in disbelief at your statement, it doesn't seem like either expected you to say that.  Finally Amily sputters, \"<i>I... what, how?   This isn't like how you acted when we were back in my village.</i>\"  You give her a winning smile and say, \"<i>Hey baby, I meant every word of it, and just look at me!  I can handle two girls like you, easy.</i>\"  Marble gives you the strangest of looks before saying, \"<i>Apparently you have a death wish,</i>\" before her hammer comes to the ready.  Amily does the same with her blowpipe.\n\nThe mouse begs, \"<i>" + player.short + ", please tell me you were making a bad joke.</i>\"\n\n", false);
 		//Player chooses serious (B4), just joking (B5)
-		simpleChoices("Serious", srslyPimpinGuyz, "Joking", jokeAboutPimpularness, "", null, "", null, "", null);
+		menu();
+		addButton(0, "Serious", srslyPimpinGuyz);
+		addButton(1, "Joking", jokeAboutPimpularness);
 	}
 }
 //Pimp -> PC is not addicted -> serious (B4)
@@ -454,7 +470,9 @@ private function jokeAboutPimpularness():void {
 	clearOutput();
 	outputText("You assure them that you thought a joke might help them calm down.  The two of them seem to disagree with you on that sentiment, but wait for you to say something else.", false);
 	//Player chooses stay silent (A1) or explain (C1)
-	simpleChoices("StaySilent", marbleIsPissyAndYourTooDumbToTalk, "Explain", LucyYouGotSomeSplainingToDo, "", null, "", null, "", null);
+	menu();
+	addButton(0, "StaySilent", marbleIsPissyAndYourTooDumbToTalk);
+	addButton(1, "Explain", LucyYouGotSomeSplainingToDo);
 }
 
 private function LucyYouGotSomeSplainingToDo():void {
@@ -472,14 +490,16 @@ private function LucyYouGotSomeSplainingToDo():void {
 	}
 	//Explain -> fail (C3)
 	else {
-		var blameMarble:Function = BlameMarblezSweetVagoozle;
 		outputText("After a while it becomes apparent to both yourself and the others that you have no idea what you're talking about.  Marble then says to you, \"<i>Well, do you have anything else to say?</i>\" At this point it probably isn't possible to say something to make both of them happy, will you stay silent or turn on one of them to try and keep the other?\n\n", false);
-		if (player.findPerk(PerkLib.MarblesMilk) >= 0) {
-			outputText("Since you need Marble's milk to live, there's no way you can blame her.  It would be tantamount to suicide.", false);
-			blameMarble = null;
-		}
 		//Player chooses stay silent (A1), blame Marble (C4), blame Amily (C5)
-		simpleChoices("StaySilent", marbleIsPissyAndYourTooDumbToTalk, "BlameMarble", blameMarble, "BlameAmily", blameAmilysDumbMouseCunt, "", null, "", null);
+		menu();
+		addButton(0, "StaySilent", marbleIsPissyAndYourTooDumbToTalk);
+		if (player.findPerk(PerkLib.MarblesMilk) >= 0) {
+			addDisabledButton(1, "BlameMarble", "Since you need Marble's milk to live, there's no way you can blame her.  It would be tantamount to suicide.");
+		} else {
+			addButton(1, "BlameMarble", BlameMarblezSweetVagoozle);
+		}
+		addButton(2, "BlameAmily", blameAmilysDumbMouseCunt);
 		return;
 	}
 }
@@ -555,7 +575,9 @@ public function askAboutAmily():void {
 		
 		outputText("Do you leave them to get acquainted (and possibly be up for threesomes in the future), or do you barge in and stop these cheating sluts?", false);
 		//[Leave Them (finishes as normal] [Interrupt]
-		simpleChoices("Leave Them", askAboutAmilyPt2, "Interrupt", cheatingSloots, "", null, "", null, "", null);
+		menu();
+		addButton(0, "Leave Them", askAboutAmilyPt2);
+		addButton(1, "Interrupt", cheatingSloots);
 	}
 }
 		
@@ -578,7 +600,9 @@ private function cheatingSloots():void {
 	
 	outputText("Well, the mouse may have a point.  You could let them get to know each other and perhaps turn this into a threesome down the road, or you could put a firm end to it right now.  There's a pretty good chance putting your boot down on this might piss off one of them.", false);
 	//[Let Them Be] [End It]
-	simpleChoices("Let It Be", letTheSlootsFuck, "End It", endThisMadness, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Let It Be", letTheSlootsFuck);
+	addButton(1, "End It", endThisMadness);
 }
 private function letTheSlootsFuck():void {
 	clearOutput();
@@ -625,7 +649,9 @@ public function amilyUrtaMorningAfter():void {
 	outputText("You wait for her to relax, and then, with studied nonchalance, add that it looked like the two of them had settled things amicably enough.  At that, Amily looks panic-stricken, fear and embarrassment warring for her face.  \"<i>... you saw?</i>\" she manages to blurt.  \"<i>Uh... uh... sorry,</i>\" Amily is mumbling, panic still evident.  \"<i>I mean...</i>\"  The mouse trails off, looking at you for reassurance.  What do you do?", false);
 	
 	//[Smile and nod][Be totally a dick]
-	simpleChoices("Be Nice", smileAndNodToAmilyXUrta, "Be A Dick", beADickToAmily, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Be Nice", smileAndNodToAmilyXUrta);
+	addButton(1, "Be A Dick", beADickToAmily);
 }
 
 //[Be totally a dick]
@@ -687,11 +713,18 @@ public function amilyUrtaSex():void {
 	outputText("Once the three of you are in a empty room, you lock the door behind you as Urta and Amily both strip down, eyeing each other and you with equal attention.  \"<i>So... are you going to partake?  Or just watch?</i>\" Amily asks, hesitantly.", false);
 	
 	//Watch (only game in town for now, so suppress the choice buttons and route right to this)
-	var dick:Function = null;
-	var vag:Function = null;
-	if (player.hasVagina()) vag = amilyScene.urtaXAmilyCuntPussyVagSQUICK;
-	if (player.hasCock()) dick = amilyScene.threesomeAmilUrtaCAWKS;
-	simpleChoices("Use Dick", dick, "Use Vag", vag, "", null, "", null, "Watch", amilyUrtaSexWatch);
+	menu();
+	if (player.hasCock()) {
+		addButton(0, "Use Dick", amilyScene.threesomeAmilUrtaCAWKS);
+	} else {
+		addDisabledButton(0, "Use Dick", "This scene requires you to have cock.");
+	}
+	if (player.hasVagina()) {
+		addButton(1, "Use Vag", amilyScene.urtaXAmilyCuntPussyVagSQUICK);
+	} else {
+		addDisabledButton(1, "Use Vag", "This scene requires you to have vagina.");
+	}
+	addButton(3, "Watch", amilyUrtaSexWatch);
 }
 private function amilyUrtaSexWatch():void {
 	clearOutput();

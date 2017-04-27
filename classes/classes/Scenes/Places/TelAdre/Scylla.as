@@ -268,7 +268,9 @@ public function scyllaRoundThreeCUM():void {
 
 		outputText("After seeing that display, you've got a few questions for her. What would you like to discuss?", false);
 
-		simpleChoices("Belly", scyllaIIIBellyChat, "Breathing", scyllaIIIHOWZUBREETH, "", null, "", null, "", null);
+		menu();
+		addButton(0, "Belly", scyllaIIIBellyChat);
+		addButton(1, "Breathing", scyllaIIIHOWZUBREETH);
 	}
 	//Special for cum pumps
 	else {
@@ -279,7 +281,9 @@ public function scyllaRoundThreeCUM():void {
         outputText("Scylla is inside, daintily smoothing the wrinkles from her too-tight velvet black habit.  Her belly is swollen almost to bursting and she absently strokes it with one hand while her other wipes a slimy glob of cum from the side of her mouth with an alabaster pinkie.  She slides the finger into her mouth and sucks it hard enough to bring a blush to her cheeks, sighing in savory delight.  In her other hand, she's clutching a massive, freshly emptied candy-colored condom that glistens as though licked clean.  As you're about to knock on the door and greet her, you hear a loud growling sound and your instincts drop you to a wary crouch, looking for the creature that must've snuck through Tel'Adre's gates.  A gurgle and rumble follow and you realize that it's Scylla's tummy that's making those monstrous noises.  Before your eyes, her stomach quivers and pulses, flesh roiling and twitching violently under the apparently elastic robe.  Then, with a deep draining slurp, her belly contracts, sinking inward until it is flat and smooth.  It seems the nun just digested a few gallons of cum in a matter of seconds.\r\r", false);
 		outputText("She pats her empty tummy and sighs, half in relief before a second rumble comes from her gut.  \"<i>Darn,</i>\" she chirps in her soft, quiet voice, \"<i>still thirsty.</i>\" She squeaks in what you assume was supposed to be a frustrated grumble.  Sitting down on the bed, she notices you in the doorway at last.  Her face lights up at seeing her friend, but she immediately averts her eyes.  \"<i>I'm sorry about my cursing just now,</i>\" she apologizes bashfully.  \"<i>I'm just having a little trouble.  Please, sit down and talk with me.</i>\" She pats the bed next to her plump thighs.\r\r", false);
         outputText("After seeing that display, you've got a few questions for her.  What would you like to discuss?", false);
-        simpleChoices("Belly", scyllaIIIBellyChat, "Breathing", scyllaIIIHOWZUBREETH, "", null, "", null, "", null);
+		menu();
+		addButton(0, "Belly", scyllaIIIBellyChat);
+		addButton(1, "Breathing", scyllaIIIHOWZUBREETH);
 	}
 }
 
@@ -432,7 +436,9 @@ private function scyllaRoundIVPtIII():void {
 	outputText("Scylla sits heavily on her stool, panting, with sweat dripping down her neck and into her heaving cleavage. Her thirst must be overpowering after defying the demon. She stares down at the stunned body of the imp and wets her lips. The tiny nubs poking out of her hair sharpen before your eyes, growing outwards and curling slowly in the air. What will you do?", false);
 
 	//[Watch] [Kiss]
-	simpleChoices("Watch", scyllaRoundIVPtIVWATCH, "Kiss Her", scyllaPtIVKissPtI, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Watch", scyllaRoundIVPtIVWATCH);
+	addButton(1, "Kiss Her", scyllaPtIVKissPtI);
 }
 
 private function scyllaRoundIVPtIVWATCH():void {
@@ -592,7 +598,10 @@ private function scyllaPtVFirstTimeII():void {
 
 	outputText("You feel a little shitty about spying on the three as they shared their weaknesses and you think it might be best to walk away from this one. Or, you could admit to your spying and share your own struggles with addiction. Another, darker part of you thinks that these girls seem awfully vulnerable right about now. What will you do?  Will you share, take advantage, or leave them in peace?", false);
 	//[Share] [Take Advantage] [Leave]
-	simpleChoices("Share", scyllaPtVShare, "Advantage", scyllaPtVTakeAdvantage, "", null, "", null, "Leave", scyllaPtVLeave);
+	menu();
+	addButton(0, "Share", scyllaPtVShare);
+	addButton(1, "Advantage", scyllaPtVTakeAdvantage);
+	addButton(14, "Leave", scyllaPtVLeave);
 }
 //[Nun]	(Repeat)
 private function scyllaPtVRepeat():void {
@@ -600,7 +609,10 @@ private function scyllaPtVRepeat():void {
 	clearOutput();
 	outputText("Scylla's at the bar, filling up another large tray of drinks. Judging by how many she's got, you assume she's giving the addiction counseling meeting another shot. The nun is murmuring to herself, possibly rehearsing a sermon or maybe just working up the strength to be the pillar the other girls need. She heads upstairs and you ponder what to do as you watch her go. Will you join them?\n\n", false);
 	//[Share][Take Advantage][Leave]
-	simpleChoices("Share", scyllaPtVShare, "Advantage", scyllaPtVTakeAdvantage, "", null, "", null, "Leave", scyllaPtVLeave);
+	menu();
+	addButton(0, "Share", scyllaPtVShare);
+	addButton(1, "Advantage", scyllaPtVTakeAdvantage);
+	addButton(14, "Leave", scyllaPtVLeave);
 }
 //[Leave]	(First time and Repeat)
 private function scyllaPtVLeave():void {
@@ -761,17 +773,28 @@ private function scyllaPtVShare():void {
 	flags[kFLAGS.TIMES_MET_SCYLLA_IN_ADDICTION_GROUP]++;
 	outputText("What addiction would you like to discuss?", false);
 	//Set choices
-	var milk:Function = null;
-	if ((player.findPerk(PerkLib.MarblesMilk) >= 0 || player.statusEffectv3(StatusEffects.Marble) > 0) && player.findPerk(PerkLib.MarbleResistant) < 0)
-		milk = scyllaPtVMilk;
-	var cum:Function = null;
-	if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 50 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0) cum = scyllaPtVCum;
-	var sex:Function = null;
-	if (player.lib >= 85 || player.minLust() >= 20) sex = scyllaPtVSex;
-	var tentacles:Function = null;
-	if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 2) tentacles = shareTentaclesWithScylla;
-	//CHOOSE HERE
-	simpleChoices("Cum", cum, "Milk", milk, "Sex", sex, "Tentacles", tentacles, "None", scyllaPtVNoDiscussion);
+	menu();
+	if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 50 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0) {
+		addButton(0, "Cum", scyllaPtVCum);
+	} else {
+		addDisabledButton(0, "Cum", "This scene requires you to be a cum addict.");
+	}
+	if ((player.findPerk(PerkLib.MarblesMilk) >= 0 || player.statusEffectv3(StatusEffects.Marble) > 0) && player.findPerk(PerkLib.MarbleResistant) < 0) {
+		addButton(1, "Milk", scyllaPtVMilk);
+	} else {
+		addDisabledButton(1, "Milk", "This scene requires you to be a milk addict.");
+	}
+	if (player.lib >= 85 || player.minLust() >= 20) {
+		addButton(2, "Sex", scyllaPtVSex);
+	} else {
+		addDisabledButton(2, "Sex", "This scene requires you to have extreme libido or high minimal lust.");
+	}
+	if (player.countCocksOfType(CockTypesEnum.TENTACLE) >= 2) {
+		addButton(3, "Tentacles", shareTentaclesWithScylla);
+	} else {
+		addDisabledButton(3, "Tentacles", "This scene requires you to have at least 2 tentacle cocks.");
+	}
+	addButton(4, "None", scyllaPtVNoDiscussion);
 }
 private function scyllaPtVNoDiscussion():void {
 	scyllaSprite();
@@ -1131,9 +1154,12 @@ public function Scylla6():void {
 	else outputText("Scylla guides you with polite little directions, pointing demurely at houses you pass by and letting you know a bit about their inhabitants. The cobbler over there just recovered from a terrible accident and has regained the use of his legs. That baker caught ill last week and is finally on the upswing. The family there found their missing daughter after searching high and low yesterday night. She seems happy to be able to tell you all the positive, encouraging things that would've seemed to be mundane back home. Here, in this demon-tainted land, every small blessing seems a miracle.\n\n", false);
 	dynStats("lus", 5+player.lib/20);
 	outputText("The nun guides you down an alley, talking about how she saw a bunny the other day when a couple of felines rush past, jostling you as they do so. You pat your pockets and notice they're emptier than usual, so you let go of Scylla's hand and turn around to chase the thieves. As you do so, you hear a soft shuffling behind you and the nun gasps.\n\n", false);
-	var duck:Number = 0;
 	//[Next][Duck! (high int/speed only)]
-	simpleChoices("Next", Scylla6SLOW, "Duck!", Scylla6DUCK, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Next", Scylla6SLOW);
+	if (player.spe + player.inte > 100) {
+		addButton(1, "Duck!", Scylla6DUCK);
+	}
 }
 //(super high Intelligence or speed)
 private function Scylla6DUCK():void {
@@ -1164,9 +1190,14 @@ private function Scylla6SLOW():void {
 
 		outputText("The cats around the two of you are jittery and mill impatiently. Males and females dressed in rags eye the pair of you with ill-concealed thirst, licking their lips with long, rough tongues. They're quite small, between four and five feet tall, but look lean and fast. Even if you broke your restraints, they'd be on you in an instant. You weren't too far from the city's dusty streets- if you can distract them for long enough, Urta or one of the other city guards should be along shortly. If you yelled for help, they might find you faster, but it would probably spook the felines away and, you have to admit, the furry bodies crawling atop you feel pretty good.\n\n", false);
 		//[Yell]      [Wait]    [Kick Ass (Super high str only)]
-		var kickass:Function = null;
-		if (player.str >= 85) kickass = lactateAndKickAss;
-		simpleChoices("Yell", Scylla6YellForHelp, "Wait", Scylla6MilkyWait, "Kick Ass", kickass, "", null, "", null);
+		menu();
+		addButton(0, "Yell", Scylla6YellForHelp);
+		addButton(1, "Wait", Scylla6MilkyWait);
+		if (player.str >= 85 || player.hasStatusEffect(StatusEffects.KnowsMight) && player.str + 10 * player.spellMod() >= 85) {
+			addButton(2, "Kick Ass", lactateAndKickAss);
+		} else {
+			addDisabledButton(2, "Kick Ass", "You are not strong enough!");
+		}
 	}
 	//else! //[Player is not Lactating]
 	else {
@@ -1176,22 +1207,30 @@ private function Scylla6SLOW():void {
 
 		outputText("The cats are milling around her colossal chest, anxious and jittery. Between Scylla's position and the pressure her bound arms are putting on her supple tit flesh, the nun's nipples have begun leaking drops of her creamy, thick milk, the smell of which seems to be driving the cats wild. Still, they're holding back, perhaps because they've never seen lips on boobs before. Maybe it's the concussion talking, but between the sight of all that exposed flesh and the heat pouring off of their puffed genitals, you're starting to feel a little hot under the collar. They haven't noticed you yet. What will you do?\n\n", false);
 
-		var submit:Function = null;
-		var rapeWorld:Function = null;
-		if (flags[kFLAGS.KATHERINE_UNLOCKED] < 1) {
-			if (player.hasVagina()) submit = Scylla6NoMilkSubmit;
-			rapeWorld = Scylla6NoMilkRAPETHEWORLD;
-		}
 		//[Get Help] [Submit (VAGINA+DICk ONLY)] [Rape]
-		simpleChoices("Get Help", Scylla6NoMilkGetHelp, "Submit", submit, "Rape", rapeWorld, "", null, "", null);
-
+		menu();
+		addButton(0, "Get Help", Scylla6NoMilkGetHelp);
+		if (flags[kFLAGS.KATHERINE_UNLOCKED] < 1) {
+			if (player.hasVagina()) {
+				addButton(1, "Submit", Scylla6NoMilkSubmit, undefined, undefined, undefined, "Why let her take all the fun for herself?");
+			} else addDisabledButton(1, "Submit", "This scene requires you to have vagina.");
+			addButton(2, "Rape", Scylla6NoMilkRAPETHEWORLD, undefined, undefined, undefined, "Catch one on the unsuspecting cats.");
+		} else {
+			addDisabledButton(1, "Submit", "This scene is not available if Katherine has left the gang.");
+			addDisabledButton(2, "Rape", "This scene is not available if Katherine has left the gang.");
+		}
 	}
 }
 //[Kick Ass]
 private function lactateAndKickAss():void {
 	spriteSelect(59);
 	clearOutput();
-	outputText("Cracking your neck, you decide to end this right now. Flexing your nearly unholy strength, you easily break the leather collar binding your hands and rise to your feet, dumping the cats pining you down to their asses. The felines hiss and leap backward, fearful of your might. You rub the bridge of your nose with the back of your hand, sniffing. \"<i>I enjoy a good joke,</i>\" you start, speaking slowly and loud enough for your voice to bounce around the cramped alley. \"<i>But you have to be kidding me. Cats? I've beaten demon overlords into bloody pulps. I've nearly torn the head off an imp with my bare hands. I've stomached a lot of crap since I came through the portal, but nothing I've drank or eaten, no matter how foul, has been as hard to swallow as this pathetic little ambush. I'm going to count to three and then I'm going to fuck the closest thing I lay my hands on. And if a hole isn't convenient, I'll make my own. Understand? One.</i>\"\n\n", false);
+	if (player.str < 85) {
+		outputText("You flush, drawing on your body's desires to empower your muscles and toughen you up. ");
+	} else {
+		outputText("Cracking your neck, you decide to end this right now. ");
+	}
+	outputText("Flexing your nearly unholy strength, you easily break the leather collar binding your hands and rise to your feet, dumping the cats pining you down to their asses. The felines hiss and leap backward, fearful of your might. You rub the bridge of your nose with the back of your hand, sniffing. \"<i>I enjoy a good joke,</i>\" you start, speaking slowly and loud enough for your voice to bounce around the cramped alley. \"<i>But you have to be kidding me. Cats? I've beaten demon overlords into bloody pulps. I've nearly torn the head off an imp with my bare hands. I've stomached a lot of crap since I came through the portal, but nothing I've drank or eaten, no matter how foul, has been as hard to swallow as this pathetic little ambush. I'm going to count to three and then I'm going to fuck the closest thing I lay my hands on. And if a hole isn't convenient, I'll make my own. Understand? One.</i>\"\n\n");
 
 	outputText("The cats need no further encouragement, and scatter in terror. You chuckle and brush the dirt from your clothes before helping Scylla down from her perch. The nun looks relieved but you can see worry in her big, blue eyes as she places a gentle hand on your shoulder. \"<i>Thank you, truly, but please take a softer touch with people. Life gives everyone challenges and whenever we can, we should pity and forgive, not threaten and harm. Um. If that's okay with you?</i>\" She looks embarrassed to be scolding you and hurries away, leaving you alone in the alley.\n\n", false);
 	doNext(camp.returnToCampUseOneHour);
@@ -1207,7 +1246,9 @@ private function Scylla6YellForHelp():void {
 
 	outputText("\"<i>Sorry about this. These damned milk-freaks have been coming out of the woodwork lately. A real menace, if you ask me. Don't worry, they'll never bother you again.</i>\" She pauses, as an unpleasant thought strikes her and she makes a face. \"<i>Unless... you were just up to some moronic exhibition-bondage crap?</i>\" She manages to blush despite the stern tone, bobbed ears lowering. The cats look pitifully at you, tired, hungry, and horny despite their predicament. Will you turn them in, or lie to cover for them?\n\n", false);
 	// [Truth] [Lie]
-	simpleChoices("Truth", Scylla6AfterYellTruth, "Lie", Scylla6AfterYellLie, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Truth", Scylla6AfterYellTruth);
+	addButton(1, "Lie", Scylla6AfterYellLie);
 }
 //[Truth]
 private function Scylla6AfterYellTruth():void {
@@ -1290,7 +1331,9 @@ private function Scylla6NoMilkGetHelp():void {
 
 	outputText("\"<i>Sorry about this. These damned milk-freaks have been coming out of the woodwork lately. A real menace, if you ask me. Don't worry, they'll never bother you again.</i>\" She pauses, as an unpleasant thought strikes her and she makes a face. \"<i>Unless... you were just up to some moronic exhibition-bondage crap?</i>\" She manages to blush despite the stern tone, bobbed ears lowering. The cats look pitifully at you, tired, hungry, and horny despite their predicament. Will you turn them in, or lie to cover for them?\n\n", false);
 	// [Truth] [Lie]
-	simpleChoices("Truth", Scylla6NoMilkTruth, "Lie", Scylla6NoMilkLie, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Truth", Scylla6NoMilkTruth);
+	addButton(1, "Lie", Scylla6NoMilkLie);
 }
 //[Truth]
 private function Scylla6NoMilkTruth():void {

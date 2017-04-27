@@ -183,7 +183,9 @@ private function specialRelationship20scene():void {
 	outputText("\n\nYou're a little surprised, but it does make sense.  She... he is pretty flat-chested, and you'd often wondered if you'd seen a bulge of some sort in her skirt from time to time...");
 	flags[kFLAGS.RUBI_ADMITTED_GENDER] = 1;
 	//(Accept) or (Reject)
-	simpleChoices("Accept", acceptRubi, "Reject", rejectRubi, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Accept", acceptRubi);
+	addButton(1, "Reject", rejectRubi);
 }
 //[If Accept]
 private function acceptRubi():void {
@@ -502,16 +504,25 @@ public function approachRubiScenes():void {
 	}
 	//(add to the bottom of all:)
 	outputText("\n\nYou look over the menu... what do you want?\n-----------------------\nMilk: 3 gems\nTea: 6 gems");
-	var place:Function = null;
-	var tea:Function = null;
-	var milk:Function = null;
-	if (player.gems >= 6) tea = getTeaFromRubi;
-	else outputText("\n<b>You cannot afford tea.</b>");
-	if (player.gems >= 3) milk = buyRubiMilk;
-	else outputText("\n<b>You cannot afford milk.</b>");
-	if (flags[kFLAGS.RUBI_ADMITTED_GENDER] >= 1) place = rubisFuckingHouseYouPervert;
 	//[Milk] [Tea] [Chat] [Rubi's Place (Relationship 20+)] [Leave]
-	simpleChoices("Milk", milk, "Tea", tea, "Chat", chatWithRubi, "Rubi's Place", place, "Leave", telAdre.bakeryScene.bakeryuuuuuu);
+	menu();
+	if (player.gems >= 3) {
+		addButton(0, "Milk", buyRubiMilk);
+	} else {
+		addDisabledButton(0, "Milk", "You cannot afford milk.");
+	}
+	if (player.gems >= 6) {
+		addButton(1, "Tea", getTeaFromRubi);
+	} else {
+		addDisabledButton(1, "Tea", "You cannot afford tea.");
+	}
+	addButton(2, "Chat", chatWithRubi);
+	if (flags[kFLAGS.RUBI_ADMITTED_GENDER] >= 1) {
+		addButton(3, "Rubi's Place", rubisFuckingHouseYouPervert);
+	} else {
+		addDisabledButton(3, "Rubi's Place", "Maybe if you spend more time with her...");
+	}
+	addButton(14, "Back", telAdre.bakeryScene.bakeryuuuuuu);
 }
 
 //Choose Milk?
@@ -1186,7 +1197,9 @@ public function cheatingRubi():void {
 	outputText("\n\nShe gives you an exasperated sigh and says, \"<i>I dunno, she took off again, like she does with you.  Some guy came in, she got all giggly, and they got out of here.  If you see her, let her know I'm taking all of today's tips again.</i>\"  With that she turns to service another table.");
 	outputText("\n\nSo your bimboified slut is seeing someone else?  What will you do about this?");
 	//[Find Her] [Don't Care]
-	simpleChoices("Find Her", findBimboCheatster, "Don't Care", dontCareAboutNoCheatingRubis, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Find Her", findBimboCheatster);
+	addButton(1, "Don't Care", dontCareAboutNoCheatingRubis);
 }
 
 //(Don't Care)
@@ -1208,7 +1221,9 @@ private function findBimboCheatster():void {
 	outputText("\n\nThere she is, Rubi, splayed out on the couch, naked with two fingers buried deep inside her pussy.  You shift around a bit, and see nearby her a tanned man in the process of taking off his shirt.  So, you got to them before they did anything.  Rubi moans, running a hand through her platinum blonde hair and staring at the tanned man.");
 	outputText("\n\nYou could interrupt them before they go any further, or wait until it's over.");
 	//[Interrupt] [Wait]
-	simpleChoices("Interrupt", interruptTheNTRsYouCrazyFool, "Watch n Wait", waitAndGetNTRedLikeTheBoyBitchYouAre, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Interrupt", interruptTheNTRsYouCrazyFool);
+	addButton(1, "Watch n Wait", waitAndGetNTRedLikeTheBoyBitchYouAre);
 }
 //(Interrupt)
 private function interruptTheNTRsYouCrazyFool():void {
@@ -1279,7 +1294,11 @@ private function NTRbimboBitchResolution():void {
 	outputText("\n\nRubi hugs the cushion close, apparently done with her speech.  So how do you react?");
 	outputText("\n\nYou could tell her no, forbidding her to see anyone else.  Or you could say yes, letting her sleep with anyone.  You could always break up with her.  Or there might be a fourth option...");
 	//[No] [Yes] [Break Up] [Pimp]
-	simpleChoices("No", noBimboNTR, "Yes", yesBimboNTR, "Break Up", breakUpWithRubi, "Pimp", pimpOutRubi, "", null);
+	menu();
+	addButton(0, "No", noBimboNTR);
+	addButton(1, "Yes", yesBimboNTR);
+	addButton(2, "Break Up", breakUpWithRubi);
+	addButton(4, "Pimp", pimpOutRubi);
 }
 
 //(No)

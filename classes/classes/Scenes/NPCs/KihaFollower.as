@@ -181,7 +181,9 @@ internal function loseKihaPreSpiderFight():void {
 
 	outputText("You could warn Kiha of the approaching mob - or you could let them jump her and scamper away in the confusion, leaving Kiha to whatever horrible fate awaits her.  What do you do?", false);
 	//(Display Options: [Warn Kiha] [Let Them])
-	simpleChoices("Warn Kiha", warnKihaOfHerImpendingDemise, "Let Them", letTheSpidersHaveTheirWayWithKiha, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Warn Kiha", warnKihaOfHerImpendingDemise);
+	addButton(1, "Let Them", letTheSpidersHaveTheirWayWithKiha);
 }
 
 //Player Wins Against Kiha (Z)
@@ -200,7 +202,9 @@ internal function playerBeatsUpKihaPreSpiderFight():void {
 
 	outputText("You could make like a baker and move your buns, but Gods knows what will happen to Kiha if you do.", false);
 	//(Display Options: [Help Kiha] [Leave Her]
-	simpleChoices("Help Kiha", helpKihaAgainstSpoidahs, "Leave Her", leaveKihaToSpoidahHorde, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Help Kiha", helpKihaAgainstSpoidahs);
+	addButton(1, "Leave Her", leaveKihaToSpoidahHorde);
 }
 
 //Warn Kiha (Z)
@@ -511,7 +515,10 @@ public function kihaXSalamander():void {
 	outputText("[pg]You consider warning the dragoness, but too late!  The mysterious figure leaps from the brush and shoulder-slams into Kiha, throwing her right off you and into the mud.  Before you can even say a word to your new friend, she grabs you by the scruff of your neck and throws you to the ground behind her, putting herself between you and Kiha.", false);
 	outputText("[pg]You could just lie there, but you're not sure how well you'd fare against two powerful warriors at once - you could end up dominated, at the very least.  You could instead try and get the jump on the fighters before they jump you... Or, you suppose you could get the fuck out while you have the chance.", false);
 	//(Display Options: [Lie There] [Jump Them] [GTFO])
-	simpleChoices("Lie There", lieThere, "Jump Them", jumpDaBitches, "GTFO", GTFO, "", null, "", null);
+	menu();
+	addButton(0, "Lie There", lieThere);
+	addButton(1, "Jump Them", jumpDaBitches);
+	addButton(2, "GTFO", GTFO);
 }
 
 //GTFO (Z)
@@ -990,67 +997,72 @@ private function blechKihaYourCooking():void {
 
 private function kihaSexMenu(display:Boolean = true, allowBack:Boolean = true):void {
 	spriteSelect(72);
-	var gro:Function = null;
-	var incu:Function = null;
-	var tent:Function = null;
-	var horse:Function = null;
-	var anal:Function = null;
-	var sixtyNine:Function = null;
-	var dickWorship:Function = null;
-	var fuckVag:Function = null;
-	var dom:Function = null;
-	var backFunc:Function = (allowBack ? kihaScene.encounterKiha : camp.returnToCampUseOneHour);
 	if (display) outputText("\n");
-	//REQUIRES CAMP FOLLOWER:
-	if (followerKiha()) {
-		if (player.gender > 0) dom = dominateKihasFaceWithStuffAndStuffOrSomethingIDunnoWhyImStillWritingThis;
-		//Req: Gro+ (also soft ghost req!)
-		if (player.hasItem(consumables.GROPLUS)) {
-			if (display) {
-				if (player.findPerk(PerkLib.Incorporeality) >= 0) outputText("\nYou could try and pump her boobs a bit with gro+, and if she decides against it, possess her and do it anyway!");
-				else outputText("\nYou could see if she'd let you pump her boobs with gro+.");
-			}
-			gro = ghostboobiesKiha;
-		}
-		else if (display) outputText("\nIf you had some gro+, you could ask her about making her breasts bigger.");
-		if (player.hasItem(consumables.INCUBID) || player.hasItem(consumables.P_DRAFT)) {
-			if (display) outputText("\nYou could slip her an incubi draft and let her fuck your ass with it.");
-			incu = giveKihaIncubusDraft;
-		}
-		else if (display) outputText("\nIf you had an incubi draft, you could have her grow a dick for you to take in the ass, at least for a while.");
-		if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 1)
-			tent = fuckKihaWithATentacle;
-		//Req: Cock
-		if (player.hasCock()) {
-			if (player.cockThatFits(67) >= 0) fuckVag = fuckKihasVagInCamp;
-			else if (display) outputText("\nKiha's vagina is too small and tight for you to take.");
-			//(requires 50+ minimum lust, or 80+ libido, or a lust/fuck draft)
-			if (player.cockThatFits(200) >= 0 && (player.minLust() > 50 || player.lib > 80 || player.hasItem(consumables.L_DRAFT))) {
-				//Dick also can't be that small.
-				if (player.cockArea(player.cockThatFits(200)) >= 40) {
-					horse = boneTheShitOutofKihaHolesWithHorsecock;
-				}
-				else if (display) {
-					if (player.minLust() > 50 || player.lib > 80) outputText("\nYou have a hunch that if your dick were bigger you'd be able to really go town on her with your incredible libido.");
-					else outputText("\nIf you had a bigger dick and a lust draft you could really go to town on her.");
-				}
-			}
+
+	menu();
+	if (player.cockThatFits(94) >= 0) {
+		addButton(0, "Anal", savinTheAnalForKiha);
+	} else {
+		addDisabledButton(0, "Anal", "This scene requires you to have fitting cock.");
+	}
+	if (!followerKiha()) {
+		addDisabledButton(1, "Dominate", "Kiha doesn't seem to keen on the idea of vaginal sex right now.");
+	} else if (!player.isGenderless()) {
+		addButton(1, "Dominate", dominateKihasFaceWithStuffAndStuffOrSomethingIDunnoWhyImStillWritingThis);
+	} else {
+		addDisabledButton(1, "Dominate", "This scene requires you to have genitals.");
+	}
+	if (!followerKiha()) {
+		addDisabledButton(2, "FuckVag", "Kiha doesn't seem to keen on the idea of vaginal sex right now.");
+	} else if (player.cockThatFits(67) >= 0) {
+		addButton(2, "FuckVag", fuckKihasVagInCamp);
+	} else {
+		addDisabledButton(2, "FuckVag", "This scene requires you to have fitting cock.");
+	}
+	if (player.biggestCockArea() >= 150) {
+		addButton(3, "Get HJ", kihaPlaysWithBigassCocksFemDomAhoy);
+	} else {
+		addDisabledButton(3, "Get HJ", "This scene requires you to have overly large cock.");
+	}
+	if (player.hasVagina()) {
+		addButton(4, "Girl69", kihaGirlGirlSex);
+	} else {
+		addDisabledButton(4, "Girl69", "This scene requires you to have vagina.");
+	}
+	if (!followerKiha()) {
+		addDisabledButton(5, "GroPlusTits", "Kiha doesn't seem to keen on the idea of vaginal sex right now.");
+	} else if (player.hasItem(consumables.GROPLUS)) {
+		addButton(5, "GroPlusTits", ghostboobiesKiha, undefined, undefined, undefined, "You could try and pump her boobs a bit with gro+" + ((player.findPerk(PerkLib.Incorporeality) >= 0) ? ", and if she decides against it, possess her and do it anyway!" : "."));
+	} else {
+		addDisabledButton(5, "GroPlusTits", "This scene requires you to have a dose of Gro+.");
+	}
+	if (!followerKiha()) {
+		addDisabledButton(6, "Give I.Drft", "Kiha doesn't seem to keen on the idea of vaginal sex right now.");
+	} else if (player.hasItem(consumables.INCUBID) || player.hasItem(consumables.P_DRAFT)) {
+		addButton(6, "Give I.Drft", giveKihaIncubusDraft, undefined, undefined, undefined, "You could slip her an incubi draft and let her fuck your ass with it.");
+	} else {
+		addDisabledButton(6, "Give I.Drft", "This scene requires you to have a dose of Incubi Draft.");
+	}
+	if (!followerKiha()) {
+		addDisabledButton(7, "LustyDicking", "Kiha doesn't seem to keen on the idea of vaginal sex right now.");
+	} else {
+		if (player.cockThatFits(200) < 0 || player.cockArea(player.cockThatFits(200)) < 40) {
+			addDisabledButton(7, "LustyDicking", "This scene requires you to have large yet fitting cock.");
+		} else if (player.minLust() < 50 && player.lib < 80 && !player.hasItem(consumables.L_DRAFT)) {
+			addDisabledButton(7, "LustyDicking", "This scene requires you to have insatiable libido or a bottle of Lust Draft.");
+		} else {
+			addButton(7, "LustyDicking", boneTheShitOutofKihaHolesWithHorsecock);
 		}
 	}
-	else if (display && player.hasCock()) outputText("\nKiha doesn't seem to keen on the idea of vaginal sex right now.");
-	//WARM SEX:
-	//Req Dick That Fits Butt
-	if (player.hasCock()) {
-		//savinTheAnalForKiha()
-		if (player.cockThatFits(94) >= 0) anal = savinTheAnalForKiha;
-		else if (display) outputText("\nYou're too big to fuck her ass.");
-		//Req Bigass Dick
-		if (player.biggestCockArea() >= 150) dickWorship = kihaPlaysWithBigassCocksFemDomAhoy;
-		else if (display) outputText("\nYour penis isn't ridiculously large enough for her to take care of it with her hands and feet.");
+	if (!followerKiha()) {
+		addDisabledButton(8, "TentacleFuck", "Kiha doesn't seem to keen on the idea of vaginal sex right now.");
+	} else if (player.countCocksOfType(CockTypesEnum.TENTACLE) > 1) {
+		addButton(8, "TentacleFuck", fuckKihaWithATentacle);
+	} else {
+		addDisabledButton(8, "TentacleFuck", "This scene requires you to have at least two tentacle cocks.");
 	}
-	//Req Vag
-	if (player.hasVagina()) sixtyNine = kihaGirlGirlSex;
-	choices("Anal", anal, "Dominate", dom, "FuckVag", fuckVag, "Get HJ", dickWorship, "Girl69", sixtyNine, "GroPlusTits", gro, "Give I.Drft", incu, "LustyDicking", horse, "TentacleFuck", tent, (allowBack ? "Back" : "Leave"), (allowBack ? kihaScene.encounterKiha : camp.returnToCampUseOneHour));
+	
+	addButton(14, (allowBack ? "Back" : "Leave"), (allowBack ? kihaScene.encounterKiha : camp.returnToCampUseOneHour));
 }
 
 //Savage Every Hole With A Bigass Horsecock 
@@ -1735,7 +1747,9 @@ internal function kihaBitchesOutCorruptPCs():void {
 		outputText("[pg]\"<i>[name].</i>\"  She says flatly, planting the haft of her axe in the ground, leaning heavily upon it.");
 		outputText("[pg]You say hello, looking nervously around.  Something isn't right here, and your hand drifts toward your [weaponName].");
 		outputText("[pg]\"<i>Listen, [name],</i>\" Kiha says, eyeing you from behind her axe.  \"<i>Maybe we've gotten to be friends lately, but... something's changed about you.  I can SMELL the corruption on you, the lust... I-I can't do it, [name].  I can't be around someone that could turn into someTHING at any moment, someone who's just letting themselves go like... like you are. Please j-just go, [name].</i>\"  You try to protest, to reason with the fiery warrior, but she only lifts up her axe and levels it at you...  \"<i>J-JUST GO!</i>\"");
-		simpleChoices("Fight", kihaScene.meetKihaAndFight, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+		menu();
+		addButton(0, "Fight", kihaScene.meetKihaAndFight);
+		addButton(14, "Leave", camp.returnToCampUseOneHour);
 	}
 	else {
 		outputText("Kiha approaches you, her belongings gathered in her hands.  The sexy dragoness seems visibly upset, and before you can say a word, she interrupts, \"<i>Don't say a word, [name].  You're corrupt.  I can smell the corruption rolling off you from over here.  I won't be here when you turn into a demon, and I don't want to fight you... but if you come after me, I won't hesitate to defend myself!</i>\"");
@@ -1813,7 +1827,9 @@ private function dominateKihasFaceWithStuffAndStuffOrSomethingIDunnoWhyImStillWr
 	outputText("[pg]\"<i>If you want have your way with me, you'll need to earn it, just like anyone else,</i>\" Kiha explains.  She narrows her eyes at you and questions, \"<i>The question is, are you " + player.mf("man","woman") + " enough to take what you want?  I wouldn't want you to get hurt.</i>\"");
 	outputText("[pg]That seems like a challenge.  Will you rise to it, or will you back down?");
 	//[Back down]    [Fight for position]
-	simpleChoices("Back Down", beABitchDumbass, "FightForDom", fightForDominanceWithDragonCunnies, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Back Down", beABitchDumbass);
+	addButton(1, "FightForDom", fightForDominanceWithDragonCunnies);
 }
 
 //[Back down]

@@ -33,7 +33,7 @@ package classes.Scenes.Monsters
 			// Button 6 is used for Lusty Maidens Armor special scene and is hidden without it
 			
 			if (pc.lust >= 33) {
-				outputText("  Sadly you realize your own needs have not been met.  Of course you could always rape the poor thing...\n\n");
+				outputText("  Sadly you realize your own needs have not been met.  Of course you could always rape the poor thing...");
 				if (pc.hasCock()) {
 					if (player.cockThatFits(monster.analCapacity()) == -1) {
 						addDisabledButton(0, "Male Rape", "Male Rape", "You're too big to rape an imp.");
@@ -275,7 +275,9 @@ package classes.Scenes.Monsters
 			else if (player.hasVagina() && x < 0) centaurOnImpFemale();
 			else {
 				outputText("Do you focus on your maleness or girl-parts?", false);
-				simpleChoices("Male", createCallBackFunction(centaurOnImpMale, true), "Female", createCallBackFunction(centaurOnImpFemale, true), "", null, "", null, "", null);
+				menu();
+				addButton(0, "Male", createCallBackFunction(centaurOnImpMale, true));
+				addButton(1, "Female", createCallBackFunction(centaurOnImpFemale, true));
 			}
 		}
 		

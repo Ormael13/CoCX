@@ -113,7 +113,9 @@ package classes.Scenes.Areas
 					if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
 						trace("TENTACLE'S AVOIDED DUE TO BOOK!");
 						outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n", true);
-						simpleChoices("Continue", tentacleBeastScene.encounter, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+						menu();
+						addButton(0, "Continue", tentacleBeastScene.encounter);
+						addButton(14, "Leave", camp.returnToCampUseOneHour);
 						return;
 					}
 					else {
@@ -267,7 +269,9 @@ package classes.Scenes.Areas
 					if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
 						trace("TENTACLE'S AVOIDED DUE TO BOOK!");
 						outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n", false);
-						simpleChoices("Continue", tentacleBeastScene.encounter, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+						menu();
+						addButton(0, "Continue", tentacleBeastScene.encounter);
+						addButton(14, "Leave", camp.returnToCampUseOneHour);
 						return;
 					}
 					else {
@@ -464,7 +468,9 @@ package classes.Scenes.Areas
 			else {
 				outputText("You can see his goat tail flitting happily above his tight, squeezable asscheeks, the loincloth discarded beside him failing to obscure his black cherry, ripe for the picking.  Do you take advantage of his distraction and ravage his ass while he's helpless?\n\n", false);
 				//[Yes] [No]
-				simpleChoices("Ravage", rapeSatyr, "", null, "", null, "", null, "Leave", ignoreSatyr);
+				menu();
+				addButton(0, "Ravage", rapeSatyr);
+				addButton(14, "Leave", ignoreSatyr);
 			}
 		}
 
@@ -531,7 +537,9 @@ package classes.Scenes.Areas
 			outputText("As you watch the lewd display, you feel your arousal building and your " + player.cockDescript(x) + " growing back into full mast. Figuring you already have a willing slut readily available, you consider using him to relieve yourself once more... What do you do?", false);
 			player.orgasm('Dick');
 			//[Again][Leave]
-			simpleChoices("Again", secondSatyrFuck, "", null, "", null, "", null, "Leave", dontRepeatFuckSatyr);
+			menu();
+			addButton(0, "Again", secondSatyrFuck);
+			addButton(14, "Leave", dontRepeatFuckSatyr);
 		}
 
 		//[=Leave=]
