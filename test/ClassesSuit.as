@@ -1,5 +1,6 @@
 package {
 	import classes.HelperSuit;
+	import classes.InternalsSuit;
 	import classes.ScenesSuit;
 	import classes.ItemsSuit;
 
@@ -30,5 +31,6 @@ package {
 		 public var savesTest:SavesTest;
 		 public var playerEventsTest:PlayerEventsTest;
 		 public var playerEventsVaginaLoosenessRecoveryTest:PlayerEventsVaginaLoosenessRecoveryTest;
+		 public var internalsSuit:InternalsSuit;
 	}
 }

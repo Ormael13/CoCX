@@ -12,13 +12,17 @@ package classes.Scenes.Dungeons.D3
 	import classes.PerkLib;
 	import classes.CockTypesEnum;
 	import classes.PregnancyStore;
+	import classes.internals.LoggerFactory;
+	import mx.logging.ILogger;
 	
 	/**
 	 * ...
 	 * @author Gedan
 	 */
 	public class D3 extends BaseContent
-	{		
+	{
+		private static const LOGGER:ILogger = LoggerFactory.getLogger(D3);
+		
 		public var jeanClaude:JeanClaudeScenes = new JeanClaudeScenes();
 		public var doppleganger:DopplegangerScenes = new DopplegangerScenes();
 		public var incubusMechanic:IncubusMechanicScenes = new IncubusMechanicScenes();
@@ -35,15 +39,13 @@ package classes.Scenes.Dungeons.D3
 		
 		public function configureRooms():void {
 			var tRoom:room;
+			LOGGER.info("Setting up D3 rooms...");
+			LOGGER.debug("Dungeons are {0}", kGAMECLASS.dungeons);
+			
 			if (kGAMECLASS.dungeons != null) {
-				trace("OK");
+				LOGGER.debug("Rooms are {0}", kGAMECLASS.dungeons.rooms);
 			}
-			if (kGAMECLASS.dungeons.rooms) {
-				trace("Debugging... ")
-			}
-			else {
-				trace("Nope");
-			}
+		
 			// Entrance
 			tRoom = new room();
 			tRoom.RoomName = "entrance";

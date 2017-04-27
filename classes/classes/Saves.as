@@ -6,6 +6,8 @@
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Scenes.Inventory;
 	import classes.Scenes.Places.TelAdre.Katherine;
+	import classes.internals.LoggerFactory;
+	import mx.logging.ILogger;
 
 	CONFIG::AIR 
 	{
@@ -29,6 +31,7 @@
 
 
 public class Saves extends BaseContent {
+	private static const LOGGER:ILogger = LoggerFactory.getLogger(Saves);
 
 	private static const SAVE_FILE_CURRENT_INTEGER_FORMAT_VERSION:int		= 816;
 		//Didn't want to include something like this, but an integer is safer than depending on the text version number from the CoC class.
@@ -652,8 +655,9 @@ public function savePermObject(isFile:Boolean):void {
 }
 
 public function loadPermObject():void {
-	var saveFile:* = SharedObject.getLocal("CoC_Main", "/");
-	trace("Loading achievements!")
+	var permObjectFileName:String = "CoC_Main";
+	var saveFile:* = SharedObject.getLocal(permObjectFileName, "/");
+	LOGGER.info("Loading achievements from {0}!", permObjectFileName);
 	//Initialize the save file
 	//var saveFile:Object = loader.data.readObject();
 	if (saveFile.data.exists)
@@ -696,7 +700,7 @@ public function loadPermObject():void {
 
 		if (saveFile.data.permObjVersionID != undefined) {
 			getGame().permObjVersionID = saveFile.data.permObjVersionID;
-			trace("Found internal permObjVersionID:", getGame().permObjVersionID);
+			LOGGER.debug("Found internal permObjVersionID:{0}", getGame().permObjVersionID);
 		}
 
 		if (getGame().permObjVersionID < 1039900) {
@@ -707,7 +711,7 @@ public function loadPermObject():void {
 			achievements[kACHIEVEMENTS.GENERAL_BAD_ENDER] = 0;
 			getGame().permObjVersionID = 1039900;
 			savePermObject(false);
-			trace("PermObj internal versionID updated:", getGame().permObjVersionID);
+			LOGGER.debug("PermObj internal versionID updated:{0}", getGame().permObjVersionID);
 		}
 	}
 }
