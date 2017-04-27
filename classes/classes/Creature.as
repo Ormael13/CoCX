@@ -3264,6 +3264,7 @@ package classes
 			}
 			switch (cocks[0].cockType) { //With multiple cocks only use the descriptions for specific cock types if all cocks are of a single type
 				case CockTypesEnum.ANEMONE:
+				case CockTypesEnum.WOLF:
 				case CockTypesEnum.CAT:
 				case CockTypesEnum.DEMON:
 				case CockTypesEnum.DISPLACER:
@@ -3275,7 +3276,6 @@ package classes
 				case CockTypesEnum.TENTACLE:
 					if (countCocksOfType(cocks[0].cockType) == cocks.length) return Appearance.cockNoun(cocks[0].cockType) + "s";
 					break;
-				case CockTypesEnum.WOLF:
 				case CockTypesEnum.DOG:
 				case CockTypesEnum.FOX:
 					if (dogCocks() == cocks.length) return Appearance.cockNoun(CockTypesEnum.DOG) + "s";
