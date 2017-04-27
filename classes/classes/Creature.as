@@ -2029,6 +2029,12 @@ package classes
 					cocks[counter].cockType = CockTypesEnum.HORSE;
 					return counter;
 				}
+				//Wolf - > horse
+				if (cocks[counter].cockType == CockTypesEnum.WOLF)
+				{
+					cocks[counter].cockType = CockTypesEnum.HORSE;
+					return counter;
+				}
 				//Tentacle - > horse
 				if (cocks[counter].cockType == CockTypesEnum.TENTACLE)
 				{
@@ -3264,6 +3270,7 @@ package classes
 				case CockTypesEnum.TENTACLE:
 					if (countCocksOfType(cocks[0].cockType) == cocks.length) return Appearance.cockNoun(cocks[0].cockType) + "s";
 					break;
+				case CockTypesEnum.WOLF:
 				case CockTypesEnum.DOG:
 				case CockTypesEnum.FOX:
 					if (dogCocks() == cocks.length) return Appearance.cockNoun(CockTypesEnum.DOG) + "s";
@@ -3279,6 +3286,7 @@ package classes
 					case CockTypesEnum.CAT:
 					case CockTypesEnum.DISPLACER:
 					case CockTypesEnum.DOG:
+					case CockTypesEnum.WOLF:
 					case CockTypesEnum.FOX:
 					case CockTypesEnum.HORSE:
 					case CockTypesEnum.KANGAROO:
@@ -3361,6 +3369,7 @@ package classes
 						default: return "bizarre head";
 					}
 				case CockTypesEnum.DOG:
+				case CockTypesEnum.WOLF:
 				case CockTypesEnum.FOX:
 					if (rand(2) == 0) return "pointed tip";
 					return "narrow tip";
