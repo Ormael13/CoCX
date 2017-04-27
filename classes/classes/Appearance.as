@@ -541,6 +541,19 @@
 					"canine cock",
 					"knotted dog-cock");
 			}
+			else if (cockType == CockTypesEnum.WOLF) {
+				return randomChoice("wolf-shaped dong",
+					"canine shaft",
+					"pointed prick",
+					"knotty wolf-shaft",
+					"bestial cock",
+					"animalistic wolf-pecker",
+					"pointed wolf-dick",
+					"pointed shaft",
+					"canine member",
+					"canine cock",
+					"knotted wolf-cock");
+			}
 			else if (cockType == CockTypesEnum.FOX) {
 				return randomChoice("fox-shaped dong",
 					"vulpine shaft",
@@ -1072,6 +1085,20 @@
 					"insectoid cock",
 					"insectoid cock",
 					"furred monster"];
+				description += randomChoice(options);
+			}
+			else if (cockType == CockTypesEnum.WOLF) {
+				options = ["wolf dong",
+					"canine shaft",
+					"pointed prick",
+					"wolf-shaft",
+					"wolf-cock",
+					"wolf-pecker",
+					"wolf-dick",
+					"pointed shaft",
+					"canine cock",
+					"canine cock",
+					"wolf cock"];
 				description += randomChoice(options);
 			}
 			else if (cockType == CockTypesEnum.DOG) {
@@ -2051,6 +2078,14 @@
 			return descript;
 		}
 
+		public static function wolfDescript(cockNum:Number):String
+		{
+			var descript:String = "";
+			//if (rand(2) == 0) descript += cockAdjective(cockNum) + ", ";
+			descript += cockNoun(CockTypesEnum.WOLF);
+			return descript;
+		}
+
 		private static function foxDescript(cockNum:Number):String
 		{
 			var descript:String = "";
@@ -2267,6 +2302,7 @@
 					[FACE_HUMAN, "human"],
 					[FACE_HORSE, "horse"],
 					[FACE_DOG, "dog"],
+					[FACE_WOLF, "wolf"],
 					[FACE_COW_MINOTAUR, "cow"],
 					[FACE_SHARK_TEETH, "shark"],
 					[FACE_SNAKE_FANGS, "snake"],
@@ -2306,6 +2342,7 @@
 					[EYES_FOUR_SPIDER_EYES, "4 spider"],
 					[EYES_BLACK_EYES_SAND_TRAP, "sandtrap black"],
 					[EYES_LIZARD, "lizard"],
+					[EYES_WOLF, "wolf"],
 					[EYES_DRAGON, "dragon"],
 					[EYES_BASILISK, "basilisk"],
 				]
@@ -2316,6 +2353,7 @@
 					[EARS_HORSE, "horse"],
 					[EARS_DOG, "dog"],
 					[EARS_COW, "cow"],
+					[EARS_WOLF, "wolf"],
 					[EARS_ELFIN, "elfin"],
 					[EARS_CAT, "cat"],
 					[EARS_LIZARD, "lizard"],
@@ -2355,6 +2393,7 @@
 					[ARM_TYPE_HUMAN, "human"],
 					[ARM_TYPE_HARPY, "harpy"],
 					[ARM_TYPE_SPIDER, "spider"],
+					[ARM_TYPE_WOLF, "wolf-like"],
 					[ARM_TYPE_PREDATOR, "predator"],
 					[ARM_TYPE_SALAMANDER, "salamander"]
 				]
@@ -2365,6 +2404,7 @@
 					[TAIL_TYPE_HORSE, "horse"],
 					[TAIL_TYPE_DOG, "dog"],
 					[TAIL_TYPE_DEMONIC, "demonic"],
+					[TAIL_TYPE_WOLF, "wolf"],
 					[TAIL_TYPE_COW, "cow"],
 					[TAIL_TYPE_SPIDER_ADBOMEN, "spider abdomen"],
 					[TAIL_TYPE_BEE_ABDOMEN, "bee abdomen"],
@@ -2428,6 +2468,7 @@
 					[LOWER_BODY_TYPE_HOOFED, "hoofed"],
 					[LOWER_BODY_TYPE_DOG, "dog"],
 					[LOWER_BODY_TYPE_NAGA, "naga"],
+					[LOWER_BODY_TYPE_WOLF, "wolf"],
 					[LOWER_BODY_TYPE_CENTAUR, "centaur"],
 					[LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS, "demonic high-heels"],
 					[LOWER_BODY_TYPE_DEMONIC_CLAWS, "demonic claws"],
@@ -2788,10 +2829,12 @@
 			var currCock:Number = 0;
 			var totCock:Number = creature.cocks.length;
 			var dogCocks:Number = 0;
+			var wolfCocks:Number = 0;
 			var horseCocks:Number = 0;
 			var normalCocks:Number = 0;
 			var normalCockKey:Number = 0;
 			var dogCockKey:Number = 0;
+			var wolfCockKey:Number = 0;
 			var horseCockKey:Number = 0;
 			var averageLength:Number = 0;
 			var averageThickness:Number = 0;
@@ -2815,6 +2858,10 @@
 					dogCocks++;
 					dogCockKey = currCock;
 				}
+				if (creature.cocks[currCock].cockType == CockTypesEnum.WOLF) {
+					wolfCocks++;
+					wolfCockKey = currCock;
+				}
 				averageLength += creature.cocks[currCock].cockLength;
 				averageThickness += creature.cocks[currCock].cockThickness;
 				//If cocks are matched make sure they still are
@@ -2826,6 +2873,7 @@
 			averageThickness /= currCock;
 			//Quantity descriptors
 			if (creature.cockTotal() == 1) {
+				if (wolfCocks == 1) return cockNoun(CockTypesEnum.WOLF);
 				if (dogCocks == 1) return cockNoun(CockTypesEnum.DOG);
 				if (horseCocks == 1) return cockNoun(CockTypesEnum.HORSE);
 				if (normalCocks == 1) return creature.cockDescript(0);
@@ -2840,6 +2888,7 @@
 					if (normalCocks == 2) descript += " " + cockNoun(CockTypesEnum.HUMAN) + "s";
 					if (horseCocks == 2) descript += ", " + cockNoun(CockTypesEnum.HORSE) + "s";
 					if (dogCocks == 2) descript += ", " + cockNoun(CockTypesEnum.DOG) + "s";
+					if (wolfCocks == 2) descript += ", " + cockNoun(CockTypesEnum.WOLF) + "s";
 					//Failsafe
 					if (creature.cocks[0].cockType.Index > 2) descript += ", " + cockNoun(creature.cocks[0].cockType) + "s";
 				}
@@ -2858,6 +2907,7 @@
 					if (normalCocks == 3) descript += " " + cockNoun(CockTypesEnum.HUMAN) + "s";
 					if (horseCocks == 3) descript += ", " + cockNoun(CockTypesEnum.HORSE) + "s";
 					if (dogCocks == 3) descript += ", " + cockNoun(CockTypesEnum.DOG) + "s";
+					if (wolfCocks == 3) descript += ", " + cockNoun(CockTypesEnum.WOLF) + "s";
 					//Tentacles
 					if (creature.cocks[0].cockType.Index > 2) descript += ", " + cockNoun(creature.cocks[0].cockType) + "s";
 				}
@@ -2882,6 +2932,11 @@
 					if (currCock == dogCocks) {
 						descript += creature.cockAdjective() + ", ";
 						descript += cockNoun(CockTypesEnum.DOG) + "s";
+						descripted = true;
+					}
+					if (currCock == wolfCocks) {
+						descript += creature.cockAdjective() + ", ";
+						descript += cockNoun(CockTypesEnum.WOLF) + "s";
 						descripted = true;
 					}
 					if (currCock == horseCocks) {
@@ -2915,10 +2970,12 @@
 			var currCock:Number = 0;
 			var totCock:Number = creature.cocks.length;
 			var dogCocks:Number = 0;
+			var wolfCocks:Number = 0;
 			var horseCocks:Number = 0;
 			var normalCocks:Number = 0;
 			var normalCockKey:Number = 0;
 			var dogCockKey:Number = 0;
+			var wolfCockKey:Number = 0;
 			var horseCockKey:Number = 0;
 			var averageLength:Number = 0;
 			var averageThickness:Number = 0;
@@ -2941,6 +2998,10 @@
 					dogCocks++;
 					dogCockKey = currCock;
 				}
+				if (creature.cocks[currCock].cockType == CockTypesEnum.WOLF) {
+					wolfCocks++;
+					wolfCockKey = currCock;
+				}
 				averageLength += creature.cocks[currCock].cockLength;
 				averageThickness += creature.cocks[currCock].cockThickness;
 				//If cocks are matched make sure they still are
@@ -2953,6 +3014,7 @@
 			//Quantity descriptors
 			if (currCock == 1) {
 				if (dogCocks == 1) return cockNoun(CockTypesEnum.DOG);
+				if (wolfCocks == 1) return cockNoun(CockTypesEnum.WOLF);
 				if (horseCocks == 1) return cockNoun(CockTypesEnum.HORSE);
 				if (normalCocks == 1) return cockDescript(creature,0);
 				//Catch-all for when I add more cocks.  Let cock descript do the sorting.
@@ -2966,6 +3028,7 @@
 					if (normalCocks == 2) descript += " " + cockNoun(CockTypesEnum.HUMAN) + "s";
 					if (horseCocks == 2) descript += ", " + cockNoun(CockTypesEnum.HORSE) + "s";
 					if (dogCocks == 2) descript += ", " + cockNoun(CockTypesEnum.DOG) + "s";
+					if (wolfCocks == 2) descript += ", " + cockNoun(CockTypesEnum.WOLF) + "s";
 					//Tentacles
 					if (creature.cocks[0].cockType.Index > 2)
 						descript += ", " + cockNoun(creature.cocks[0].cockType) + "s";
@@ -2988,6 +3051,8 @@
 						descript += ", " + cockNoun(CockTypesEnum.HORSE) + "s";
 					if (dogCocks == 3)
 						descript += ", " + cockNoun(CockTypesEnum.DOG) + "s";
+					if (wolfCocks == 3)
+						descript += ", " + cockNoun(CockTypesEnum.WOLF) + "s";
 					//Tentacles
 					if (creature.cocks[0].cockType.Index > 2) descript += ", " + cockNoun(creature.cocks[0].cockType) + "s";   // Not sure what's going on here, referencing index *may* be a bug.
 
@@ -3013,6 +3078,11 @@
 					if (creature.cocks[0].cockType == CockTypesEnum.DOG) {
 						descript += cockAdjectives(averageLength, averageThickness, CockTypesEnum.DOG, creature) + ", ";
 						descript += cockNoun(CockTypesEnum.DOG) + "s";
+						descripted = true;
+					}
+					if (creature.cocks[0].cockType == CockTypesEnum.WOLF) {
+						descript += cockAdjectives(averageLength, averageThickness, CockTypesEnum.WOLF, creature) + ", ";
+						descript += cockNoun(CockTypesEnum.WOLF) + "s";
 						descripted = true;
 					}
 					if (creature.cocks[0].cockType == CockTypesEnum.HORSE) {
