@@ -32,10 +32,6 @@ package classes.Scenes.Areas.GlacialRift
 				var damage:int = ((str + 50) + rand(100));
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
-				if(player.HP <= 0) {
-					doNext(game.combat.endHpLoss);
-					return;
-				}
 			}
 			combatRoundOver();
 		}
@@ -96,7 +92,6 @@ package classes.Scenes.Areas.GlacialRift
 			this.ballSize = 2;
 			this.cumMultiplier = 1;
 			this.createVagina(false, 1, 1);
-			this.gender = 0;
 			this.pronoun1 = "it";
 			this.pronoun2 = "it";
 			this.pronoun3 = "its";
