@@ -1665,12 +1665,7 @@ public function wolfPepper(type: Number, player: Player): void {
         changes++;
     }
     //normal legs
-    if (player.lowerBody != LOWER_BODY_TYPE_HUMAN && player.lowerBody != LOWER_BODY_TYPE_WOLF && rand(4) == 0 && changes < changeLimit) {
-        outputText("\n\nYou collapse as your legs shift and twist. By the time the pain subsides, you notice that you have normal legs and normal feet. <b>You now have normal feet!</b>");
-        player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-        player.legCount = 2;
-        changes++;
-    }
+    if (player.lowerBody != LOWER_BODY_TYPE_WOLF && rand(4) == 0) restoreLegs(tfSource);
     //normal arms
     if (rand(4) == 0 && player.armType != ARM_TYPE_WOLF) restoreArms(tfSource);
     //remove feather hair
@@ -1949,7 +1944,7 @@ public function wolfPepper(type: Number, player: Player): void {
             //Hooman feets
             if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("\n\nYou stumble and fall, howling in pain as your legs and feet break apart and reform into wolf-like legs and paws. The worst of the pain eventually passes, but you're still left whimpering for a while. <b>You now have paws!</b>", false);
             //Hooves -> Paws
-            else if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("\n\nYou feel your hooves suddenly splinter, growing into five unique digits. Their flesh softens as your hooves reshape into furred paws.", false);
+            else if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("\n\nYou feel your hooves suddenly splinter, growing into five unique digits. Their flesh softens as your hooves reshape into furred paws. <b>You now have paws!</b>", false);
             else outputText("\n\nYour lower body is suddenly wracked by pain, causing you to collapse onto the ground in agony. Once it passes, you discover that you're standing on fur-covered paws. <b>You now have paws!</b>", false);
             player.lowerBody = LOWER_BODY_TYPE_WOLF;
             changes++;
