@@ -1946,49 +1946,49 @@ public function wolfPepper(type: Number, player: Player): void {
                     changes++;
                 }
             }
-            //MUTATIONZ LEVEL 2: fur->arms fur+tail+ears->face stophair->nohair fur+tail->legs
-            //gain wolf face
-            if (player.faceType != FACE_WOLF && player.earType == EARS_WOLF && player.tailType == TAIL_TYPE_WOLF && player.skinType == SKIN_TYPE_FUR && rand(5) == 0 && changes < changeLimit) {
-                outputText("\n\nYou screech in pain as the bones of your face begin to rearrange themselves. Your [skinFurScales] practically melts off you, dropping onto the ground with heavy streams of blood. You put your hands to your face, writhing, blackness covering your vision as pain overwhelms you. But as quickly as it came, it stops, and you pull your shaking hands from your face. You scramble to the nearest reflective surface. <b>You have a wolf's face!</b>", false);
-                player.faceType == FACE_WOLF;
-                changes++;
-            }
-            //no hair
-            if (player.hairLength > 0 && rand(5) == 0 && changes < changeLimit) {
-                outputText("\n\nYou grip your head as your scalp burns in pain. Your hands seem to fall away, though, and bring clumps of hair with. Before you know it, your hair is falling right off your head without you touching it. It's only a matter of seconds before it's all gone.", false);
-                player.hairLength == 0;
-                changes++;
-            }
-            //wolf arms
-            if (player.armType != ARM_TYPE_WOLF && player.skinType == SKIN_TYPE_FUR && rand(4) == 0 && changes < changeLimit) {
-                outputText("\n\nYou hold your arms to your chest and absent-mindedly squeeze them, trying to get rid of a feeling of discomfort. When it fails to go away, you look down in annoyance at whatever could be bothering you, only to see that your hands have turned to wolf paws and your arms are slim but muscular. They're built strong, but have difficulty moving in any direction but back and forth. <b>You now have wolf arms.</b>");
-                player.armType = ARM_TYPE_WOLF;
-                updateClaws(CLAW_TYPE_NORMAL);
-                changes++;
-            }
-            //legz
-            if (player.legCount == 2 && player.lowerBody != LOWER_BODY_TYPE_WOLF && player.tailType == TAIL_TYPE_WOLF && player.skinType == SKIN_TYPE_FUR && rand(4) == 0 && changes < changeLimit) {
-                //Hooman feets
-                if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("\n\nYou stumble and fall, howling in pain as your legs and feet break apart and reform into wolf-like legs and paws. The worst of the pain eventually passes, but you're still left whimpering for a while. <b>You now have paws!</b>", false);
-                //Hooves -> Paws
-                else if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("\n\nYou feel your hooves suddenly splinter, growing into five unique digits. Their flesh softens as your hooves reshape into furred paws.", false);
-                else outputText("\n\nYour lower body is suddenly wracked by pain, causing you to collapse onto the ground in agony. Once it passes, you discover that you're standing on fur-covered paws. <b>You now have paws!</b>", false);
-                player.lowerBody = LOWER_BODY_TYPE_WOLF;
-                changes++;
-            }
-            //MUTATIONZ LEVEL 3: face->eyes
-            if (player.eyeType != EYES_WOLF && player.faceType == FACE_WOLF && rand(4) == 0 && changes < changeLimit) {
-                outputText("\n\nYou feel a sudden surge of pain in your face as your eyes begin to change. You close them and feel something wet slide under your eyelids. You jump in surprise. The feeling's gone, but now the distance is a blurred view, and greens seem to be mixed with yellows.", false);
-                outputText("\n\nYou turn to a nearby reflective surface to investigate. Your eyes have massive amber irises and are dipped into your face, hiding any sign of your sclera. Blackness surrounds them and emphasise the wolfish shape of your face. You blink a few times as you stare at your reflection. <b>You now have wolf eyes!</b> Your peripherals and night vision has probably improved, too.", false);
-                player.eyeType == EYES_WOLF;
-                changes++;
-            }
-            //MISC CRAP
-            if (rand(5) == 0) mutations.updateOvipositionPerk(tfSource);
-            if (rand(3) == 0) outputText(player.modTone(100, 4), false);
-            if (rand(3) == 0) outputText(player.modThickness(75, 3), false);
-            player.refillHunger(10);
+        //MUTATIONZ LEVEL 2: fur->arms fur+tail+ears->face stophair->nohair fur+tail->legs
+        //gain wolf face
+        if (player.faceType != FACE_WOLF && player.earType == EARS_WOLF && player.tailType == TAIL_TYPE_WOLF && player.skinType == SKIN_TYPE_FUR && rand(5) == 0 && changes < changeLimit) {
+            outputText("\n\nYou screech in pain as the bones of your face begin to rearrange themselves. Your [skinFurScales] practically melts off you, dropping onto the ground with heavy streams of blood. You put your hands to your face, writhing, blackness covering your vision as pain overwhelms you. But as quickly as it came, it stops, and you pull your shaking hands from your face. You scramble to the nearest reflective surface. <b>You have a wolf's face!</b>", false);
+            player.faceType == FACE_WOLF;
+            changes++;
         }
+        //no hair
+        if (player.hairLength > 0 && rand(5) == 0 && changes < changeLimit) {
+            outputText("\n\nYou grip your head as your scalp burns in pain. Your hands seem to fall away, though, and bring clumps of hair with. Before you know it, your hair is falling right off your head without you touching it. It's only a matter of seconds before it's all gone.", false);
+            player.hairLength == 0;
+            changes++;
+        }
+        //wolf arms
+        if (player.armType != ARM_TYPE_WOLF && player.skinType == SKIN_TYPE_FUR && rand(4) == 0 && changes < changeLimit) {
+            outputText("\n\nYou hold your arms to your chest and absent-mindedly squeeze them, trying to get rid of a feeling of discomfort. When it fails to go away, you look down in annoyance at whatever could be bothering you, only to see that your hands have turned to wolf paws and your arms are slim but muscular. They're built strong, but have difficulty moving in any direction but back and forth. <b>You now have wolf arms.</b>");
+            player.armType = ARM_TYPE_WOLF;
+            updateClaws(CLAW_TYPE_NORMAL);
+            changes++;
+        }
+        //legz
+        if (player.legCount == 2 && player.lowerBody != LOWER_BODY_TYPE_WOLF && player.tailType == TAIL_TYPE_WOLF && player.skinType == SKIN_TYPE_FUR && rand(4) == 0 && changes < changeLimit) {
+            //Hooman feets
+            if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) outputText("\n\nYou stumble and fall, howling in pain as your legs and feet break apart and reform into wolf-like legs and paws. The worst of the pain eventually passes, but you're still left whimpering for a while. <b>You now have paws!</b>", false);
+            //Hooves -> Paws
+            else if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("\n\nYou feel your hooves suddenly splinter, growing into five unique digits. Their flesh softens as your hooves reshape into furred paws.", false);
+            else outputText("\n\nYour lower body is suddenly wracked by pain, causing you to collapse onto the ground in agony. Once it passes, you discover that you're standing on fur-covered paws. <b>You now have paws!</b>", false);
+            player.lowerBody = LOWER_BODY_TYPE_WOLF;
+            changes++;
+        }
+        //MUTATIONZ LEVEL 3: face->eyes
+        if (player.eyeType != EYES_WOLF && player.faceType == FACE_WOLF && rand(4) == 0 && changes < changeLimit) {
+            outputText("\n\nYou feel a sudden surge of pain in your face as your eyes begin to change. You close them and feel something wet slide under your eyelids. You jump in surprise. The feeling's gone, but now the distance is a blurred view, and greens seem to be mixed with yellows.", false);
+            outputText("\n\nYou turn to a nearby reflective surface to investigate. Your eyes have massive amber irises and are dipped into your face, hiding any sign of your sclera. Blackness surrounds them and emphasise the wolfish shape of your face. You blink a few times as you stare at your reflection. <b>You now have wolf eyes!</b> Your peripherals and night vision has probably improved, too.", false);
+            player.eyeType == EYES_WOLF;
+            changes++;
+        }
+        //MISC CRAP
+        if (rand(5) == 0) mutations.updateOvipositionPerk(tfSource);
+        if (rand(3) == 0) outputText(player.modTone(100, 4), false);
+        if (rand(3) == 0) outputText(player.modThickness(75, 3), false);
+        player.refillHunger(10);
+    }
 
 //1-Oversized Pepper (+size, thickness)
 //2-Double Pepper (+grows second cock or changes two cocks to dogcocks)
