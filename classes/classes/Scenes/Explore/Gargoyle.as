@@ -253,11 +253,23 @@ public function returnToCathedral(woken:Boolean = false):void {
 			outputText("  \"<i>What would you have of me?</i>\"");
 		}
 		//(Display options: [Sex] [Rituals] [Talk] [Appearance] and [Leave]. If Confidence is 70+, also display the option for [Kinky Rituals])
-		if (player.lust >= 33) addButton(0,"Sex",gargoyleSexMenu);
+		if (player.lust >= 33) {
+			addButton(0, "Sex", gargoyleSexMenu);
+		} else {
+			addDisabledButton(0, "Sex", "You are not aroused enough.");
+		}
 		addButton(1,"Rituals",ritualGargoyle);
-		if (flags[kFLAGS.GAR_HISTORY] < 3 || flags[kFLAGS.GAR_CATHEDRAL] < 3 || flags[kFLAGS.GAR_NAME_TALKS] < 3) addButton(2,"Talk",talkToGargoyle);
+		if (flags[kFLAGS.GAR_HISTORY] < 3 || flags[kFLAGS.GAR_CATHEDRAL] < 3 || flags[kFLAGS.GAR_NAME_TALKS] < 3) {
+			addButton(2, "Talk", talkToGargoyle);
+		} else {
+			addDisabledButton(2, "Talk", "She has nothing more to tell you.");
+		}
 		addButton(3,"Appearance",gargoyleAppearance);
-		if (gargoyleConfidence() >= 70 && flags[kFLAGS.RITUAL_INTRO] > 0) addButton(4,"Kinky Rituals",gargoyleKinkyRituals);
+		if (gargoyleConfidence() >= 70 && flags[kFLAGS.RITUAL_INTRO] > 0) {
+			addButton(4, "Kinky Rituals", gargoyleKinkyRituals);
+		} else {
+			addDisabledButton(4, "Kinky Rituals", "Maybe if you'll know her better...");
+		}
 	}
 	//[b]Cathedral Interior: 10:00 –> 17:00[/b]
 	else {
@@ -267,10 +279,13 @@ public function returnToCathedral(woken:Boolean = false):void {
 			outputText("."); 
 		}
 		//(Display options: [Wake Her] [Use Her (if Lust >= 30)] [Appearance] and [Leave])
-		addButton(0,"Wake Her",returnToCathedral,true);
+		addButton(0, "Wake Her", returnToCathedral, true);
 		if (player.lust >= 33) {
-			if (player.hasCock()) addButton(1,"Use Her",useGargoyleMaleHerm);
-			else if (player.hasVagina()) addButton(1,"Use Her",useHerGargoyleFemale);
+			if (player.hasCock()) addButton(1, "Use Her", useGargoyleMaleHerm);
+			else if (player.hasVagina()) addButton(1, "Use Her", useHerGargoyleFemale);
+			else addDisabledButton(1, "Use Her", "This scene requires you to have genitals.");
+		} else {
+			addDisabledButton(1, "Use Her", "You are not aroused enough.");
 		}
 		addButton(3,"Appearance",gargoyleAppearance);
 	}
@@ -286,33 +301,22 @@ private function gargoyleSexMenu():void {
 	else outputText("  Her ruby-red eyes lock with yours and a sultry grin plays across her gray marble features.  She slides an arm around your waist and presses her sizable, surprisingly soft breasts against your chest.  \"<i>How would Master have me?</i>\"");
 	menu();
 	//(If Male, display options: [Vaginal] [Anal] [Titfuck] [Strap-on] [Leave])
-	if (player.gender == 1) {
-		addButton(1,"Anal",gargoyleAnal);
-		addButton(0,"Vaginal",gargoyleCoochiiGetsPlowed);
-		addButton(2,"Titfuck",titFuckTheGargoyle);
-		addButton(3,"Strap-On",strapOnGargoyle);
-		addButton(4,"Leave",returnToCathedral);
-	}	
-	//(If Female, display options: [Tail Fuck] and [Ride Strap-on] [Leave])
-	if (player.gender == 2) {
-		addButton(0,"Tail Fuck",tailFuckGargoyleScene);
-		addButton(1,"Strap-On",strapOnGargoyle);
-		addButton(4,"Leave",returnToCathedral);
+	if (player.hasCock()) {
+		addButton(0, "Vaginal", gargoyleCoochiiGetsPlowed);
+		addButton(1, "Anal", gargoyleAnal);
+		addButton(2, "Titfuck", titFuckTheGargoyle);
+	} else {
+		addDisabledButton(0, "Vaginal", "This scene requires you to have cock.");
+		addDisabledButton(1, "Anal", "This scene requires you to have cock.");
+		addDisabledButton(2, "Titfuck", "This scene requires you to have cock.");
 	}
-	//(If Herm, display all above options)
-	if (player.gender == 3) {
-		addButton(1,"Anal",gargoyleAnal);
-		addButton(0,"Vaginal",gargoyleCoochiiGetsPlowed);
-		addButton(2,"Titfuck",titFuckTheGargoyle);
-		addButton(3,"Strap-On",strapOnGargoyle);
-		addButton(4,"Tail Fuck",tailFuckGargoyleScene);
-		addButton(14,"Leave",returnToCathedral);
+	addButton(3, "Strap-On", strapOnGargoyle);
+	if (player.hasVagina()) {
+		addButton(4, "Tail Fuck", tailFuckGargoyleScene);
+	} else {
+		addDisabledButton(4, "Tail Fuck", "This scene requires you to have vagina.");
 	}
-	//(If Genderless, display [Strap-on] [Leave])
-	if (player.gender == 0) {
-		addButton(3,"Strap-On",strapOnGargoyle);
-		addButton(14,"Leave",returnToCathedral);
-	}
+	addButton(14, "Leave", returnToCathedral);
 }
 
 //[b]Anal[/b]
@@ -529,7 +533,10 @@ private function ritualGargoyle():void {
 	menu();
 	addButton(0,"Body",bodyRitual);
 	addButton(1,"Mind",mindGargoyleRitual);
-	if (player.hasStatusEffect(StatusEffects.Infested) || player.hasStatusEffect(StatusEffects.Exgartuan)) addButton(2,"Banish",banishmentGargoyleRitual);
+	if (player.hasStatusEffect(StatusEffects.Infested) || player.hasStatusEffect(StatusEffects.Exgartuan)) addButton(2, "Banish", banishmentGargoyleRitual);
+	else {
+		addDisabledButton(2, "Banish", "A ritual that banishes evil creatures and spirits...");
+	}
 	addButton(4,"Leave",returnToCathedral);
 }
 
@@ -685,7 +692,10 @@ private function gargoyleKinkyRituals():void {
 	menu();
 	addButton(0,"Body",kinkyBodyRitual);
 	addButton(1,"Mind",mindRitualPervy);
-	if (player.hasStatusEffect(StatusEffects.Exgartuan) || player.hasStatusEffect(StatusEffects.Infested)) addButton(2,"Banish",banishPervRitual);
+	if (player.hasStatusEffect(StatusEffects.Infested) || player.hasStatusEffect(StatusEffects.Exgartuan)) addButton(2, "Banish", banishPervRitual);
+	else {
+		addDisabledButton(2, "Banish", "A ritual that banishes evil creatures and spirits...");
+	}
 	addButton(4,"Leave",returnToCathedral);
 }
 
@@ -817,10 +827,22 @@ private function talkToGargoyle(output:Boolean = true):void {
 	//(Display Options: [History] [Cathedral] " + flags[kFLAGS.GAR_NAME] + " [Leave])
 	//(Whenever the player selects a topic, play one of the following dialogue scenes then return the PC to the main interaction menu and increase Confidence by +10, unless noted otherwise. Once a scene has been played, it will not play again. Once all three in a topic are played, it closes.)
 	menu();
-	if (flags[kFLAGS.GAR_HISTORY] < 3) addButton(0,"History",historyGo);
-	if (flags[kFLAGS.GAR_CATHEDRAL] < 3) addButton(1,"Cathedral",cathedralTalks);
-	if (flags[kFLAGS.GAR_NAME_TALKS] < 3) addButton(2,"Her",talkAboutGarName);
-	addButton(4,"Back",returnToCathedral);
+	if (flags[kFLAGS.GAR_HISTORY] < 3) {
+		addButton(0,"History",historyGo);
+	} else {
+		addDisabledButton(0, "History");
+	}
+	if (flags[kFLAGS.GAR_CATHEDRAL] < 3) {
+		addButton(1,"Cathedral",cathedralTalks);
+	} else {
+		addDisabledButton(1, "Cathedral");
+	}
+	if (flags[kFLAGS.GAR_NAME_TALKS] < 3) {
+		addButton(2,"Her",talkAboutGarName);
+	} else {
+		addDisabledButton(2, "Her");
+	}
+	addButton(14,"Back",returnToCathedral);
 }
 
 private function historyGo():void {
