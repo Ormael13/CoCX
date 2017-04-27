@@ -31,15 +31,15 @@ package classes.Scenes.Areas.GlacialRift
 				outputText("The Amarok charges at you, attempting to claw you with one of its massive paws. You dodge, using your incredible flexibility to twist out of the way.", false);
 			}
 			else if (player.getEvasionRoll()) {
-				outputText("The Amarok throws itself at you, attempting to slash you with its claws. Luckily, you manage to leap out of the way.");
+				outputText("The Amarok throws itself at you, attempting to slash you with its claws. Luckily, you manage to leap out of the way.", false);
 				combatRoundOver();
 				return;
 			}
 			else {
 				//Damage roll
-				outputText("The Amarok throws itself at you and rakes one of its hefty paws across you. Its claws slice you open and draw blood.");
+				outputText("The Amarok throws itself at you and rakes one of its hefty paws across you. Its claws slice you open and draw blood.", false);
 				var damage:int = ((str + 50) + rand(100));
-				damage = player.reduceDamage(damage)
+				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 				if(player.HP <= 0) {
 					doNext(game.combat.endHpLoss);
@@ -50,7 +50,7 @@ package classes.Scenes.Areas.GlacialRift
 		}
 		protected function amarokTail():void {
 			//AMAROK used TAIL SLAP!
-			outputText("The Amarok rushes up to you and immediately turns heel, attempting to crash its tail into you. ");
+			outputText("The Amarok rushes up to you and immediately turns heel, attempting to crash its tail into you. ", false);
 			//Blind check...
 			if(findStatusEffect(StatusEffects.Blind) >= 0) {
 				outputText("Luckily, though, its blindness causes it to misjudge your location and it misses entirely.", false);
@@ -68,21 +68,21 @@ package classes.Scenes.Areas.GlacialRift
 				outputText("You use your incredibly flexibility and twist out of the way of the attack.", false);
 			}
 			else if (player.getEvasionRoll()) {
-				outputText("You jump out of the way before it can hit.");
+				outputText("You jump out of the way before it can hit.", false);
 				combatRoundOver();
 				return;
 			}
 			else {
 				//Damageeee + stun! Reference to the legend of it slapping a kid with its tail, except minus the bone breaking.
-				outputText("The hit sends you stumbling back");
+				outputText("The hit sends you stumbling back", false);
 				if (player.findPerk(PerkLib.Resolute) < 0 && rand(2) == 0) 
 				{
-					outputText(", stunning you.", false)
+					outputText(", stunning you.", false);
 					player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 				}
-				else outputText(".");
+				else outputText(".", false);
 				var damage:int = ((str + 100) + rand(75));
-				damage = player.reduceDamage(damage)
+				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
 				if(player.HP <= 0) {
 					doNext(game.combat.endHpLoss);
