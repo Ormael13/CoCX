@@ -25,8 +25,6 @@ use namespace kGAMECLASS;
 	 */
 	public class Player extends PlayerHelper {
 		
-		public var legCount:Number = 2;
-		
 		public function Player() {
 			//Item things
 			itemSlot1 = new ItemSlotClass();
@@ -789,12 +787,11 @@ use namespace kGAMECLASS;
 					race = "raccoon-taur";
 			}
 			if (wolfScore() >= 4) {
-				if (legCount == 4 && lowerBody == LOWER_BODY_TYPE_WOLF)
-					race = "wolf";
-				else {
+				if (player.hasFur()) {
 					race = "wolf-morph";
-					if (faceType == 0)
-						race = "wolf-" +mf("boy","girl");
+				}
+				else {
+					race = "wolf-" +mf("boy","girl");
 				}
 			}
 			if (dogScore() >= 4)
@@ -1166,8 +1163,6 @@ use namespace kGAMECLASS;
 			if (armType == ARM_TYPE_WOLF)
 				wolfCounter++;
 			if (eyeType == EYES_WOLF)
-				wolfCounter+=2;
-			if (legCount == 4)
 				wolfCounter+=2;
 			if (hasFur() && counter > 0) //Only counts if we got wolf features
 				wolfCounter++;
