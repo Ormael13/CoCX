@@ -73,3 +73,5 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("The Amarok collapses, unable to withstand any more.", false);
 			combat.cleanupAfterCombat();
 		}
+	}
+}
