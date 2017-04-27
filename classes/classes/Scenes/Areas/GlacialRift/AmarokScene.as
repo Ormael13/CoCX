@@ -30,7 +30,7 @@ package classes.Scenes.Areas.GlacialRift
 		}
 
 		public function amarokFlagCheck():void {
-			if (player.findStatusEffect(StatusEffects.Infested) >= 0) {
+			if (player.hasStatusEffect(StatusEffects.Infested)) {
 				amarokNoEat();
 			}
 			else if (flags[kFLAGS.AMAROK_LOSSES] >= 5) {
