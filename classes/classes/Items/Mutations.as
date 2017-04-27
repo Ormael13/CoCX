@@ -1624,14 +1624,8 @@ public function wolfPepper(type: Number, player: Player): void {
     }
     //MUTATIONZZZZZ
     //PRE-CHANGES: become biped, remove horns, remove wings, give human tongue, remove claws, remove antennea
-    //no oviposition
-    if (rand(4) == 0 && changes < changeLimit) {
-    	updateOvipositionPerk(tfSource);
-    }
     //no claws
-    if (rand(4) == 0 && changes < changeLimit) {
-    	updateClaws();
-    }
+    if (rand(4) == 0) updateClaws();
     //remove antennae
     if (player.antennae != ANTENNAE_NONE && rand(3) == 0 && changes < changeLimit) {
         outputText("\n\nYou tilt your head down as a wave of dizziness passes over you. Your antennae fall to the ground. You touch where they were on your head and confirm that they did indeed just fall off. <b>You have lost your anntenae!</b>", false);
@@ -1671,21 +1665,13 @@ public function wolfPepper(type: Number, player: Player): void {
         changes++;
     }
     //normal legs
-    if (!= LOWER_BODY_TYPE_WOLF && rand(4) == 0 && changes < changeLimit) {
-        restoreLegs(tfSource);
-    }
+    if (!= LOWER_BODY_TYPE_WOLF && rand(4) == 0) restoreLegs(tfSource);
     //normal arms
-    if (rand(4) == 0 && changes < changeLimit && player.lowerBody != ARM_TYPE_WOLF) {
-        restoreArms(tfSource);
-    }
+    if (rand(4) == 0 && player.lowerBody != ARM_TYPE_WOLF) restoreArms(tfSource);
     //remove feather hair
-    if (rand(4) == 0 && changes < changeLimit) {
-        removeFeatheryHair();
-    }
+    if (rand(4) == 0) removeFeatheryHair();
     //remove basilisk hair
-    if (changes < changeLimit && rand(4) == 0) {
-        removeBassyHair()
-    }
+    if (rand(4) == 0) removeBassyHair()
     //MUTATIONZ AT ANY TIME: wolf dick, add/decrease breasts, decrease breast size if above D
     //get a wolf dick
     //if ya genderless we give ya a dick cuz we nice like that
