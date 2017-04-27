@@ -1624,6 +1624,14 @@ public function wolfPepper(type: Number, player: Player): void {
     }
     //MUTATIONZZZZZ
     //PRE-CHANGES: become biped, remove horns, remove wings, give human tongue, remove claws, remove antennea
+    //no oviposition
+    if (rand(4) == 0 && changes < changeLimit) {
+    	updateOvipositionPerk(tfSource);
+    }
+    //no claws
+    if (rand(4) == 0 && changes < changeLimit) {
+    	updateClaws();
+    }
     //remove antennae
     if (player.antennae != ANTENNAE_NONE && rand(3) == 0 && changes < changeLimit) {
         outputText("\n\nYou tilt your head down as a wave of dizziness passes over you. Your antennae fall to the ground. You touch where they were on your head and confirm that they did indeed just fall off. <b>You have lost your anntenae!</b>", false);
@@ -1663,41 +1671,20 @@ public function wolfPepper(type: Number, player: Player): void {
         changes++;
     }
     //normal legs
-    if (player.lowerBody != LOWER_BODY_TYPE_HUMAN && player.lowerBody != LOWER_BODY_TYPE_WOLF && rand(4) == 0 && changes < changeLimit) {
-        outputText("\n\nYou collapse as your legs shift and twist. By the time the pain subsides, you notice that you have normal legs and normal feet. <b>You now have normal feet!</b>");
-        player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-        player.legCount = 2;
-        changes++;
+    if (!= LOWER_BODY_TYPE_WOLF && rand(4) == 0 && changes < changeLimit) {
+        restoreLegs(tfSource);
     }
     //normal arms
-    if (player.armType != ARM_TYPE_HUMAN && player.armType != ARM_TYPE_WOLF && rand(4) == 0 && changes < changeLimit) {
-        outputText("\n\nYour unusual arms change more and more until they are normal human arms, leaving [skinfurscales] behind. <b>You have normal human arms.</b>");
-        updateClaws();
-        player.armType = ARM_TYPE_HUMAN;
-        changes++;
+    if (rand(4) == 0 && changes < changeLimit && player.lowerBody != ARM_TYPE_WOLF) {
+        restoreArms(tfSource);
     }
     //remove feather hair
-    if (changes < changeLimit && player.hairType == HAIR_FEATHER && rand(4) == 0) {
-        //(long):
-        if (player.hairLength >= 6) outputText("\n\nA lock of your downy-soft feather-hair droops over your eye.  Before you can blow the offending down away, you realize the feather is collapsing in on itself.  It continues to curl inward until all that remains is a normal strand of hair.  <b>Your hair is no longer feathery!</b>", false);
-        //(short)
-        else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your feathers.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer feathery!</b>", false);
-        player.hairType = HAIR_NORMAL;
-        changes++;
+    if (rand(4) == 0 && changes < changeLimit) {
+        removeFeatheryHair();
     }
     //remove basilisk hair
-    if (changes < changeLimit && player.hairType != HAIR_NORMAL && rand(4) == 0) {
-        if (player.hairType == HAIR_BASILISK_PLUME) {
-            outputText("\n\nA lock of your feathery plume droops over your eye. Before you can blow the offending down away, you realize the feather is collapsing in on itself. It continues to curl inward until all that remains is a normal strand of hair.");
-            outputText("\n\n<b>Your hair is no longer feathery!</b>");
-        } else {
-            outputText("\n\nYou feel a tingling on your scalp. You reach up to your basilisk spines to find out what is happening. The moment your hand touches a spine, it comes loose and falls in front of you. One after another the other spines fall out, until all the spines that once decorated your head now lay around you, leaving you with a bald head.");
-            outputText("\n\n<b>You realize, that you'll grow normal human hair again!</b>");
-            flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
-            player.hairLength = 0;
-        }
-        player.hairType = HAIR_NORMAL;
-        changes++;
+    if (changes < changeLimit && rand(4) == 0) {
+        removeBassyHair()
     }
     //MUTATIONZ AT ANY TIME: wolf dick, add/decrease breasts, decrease breast size if above D
     //get a wolf dick
