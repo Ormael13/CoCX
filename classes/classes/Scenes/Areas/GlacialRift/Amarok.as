@@ -82,7 +82,7 @@ package classes.Scenes.Areas.GlacialRift
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if(pcCameWorms){
-				outputText("\n\nThe Amarok looks down at the worms you came, sniffs them, then snarls and walks away. It must consider you tainted meat.", false);
+				outputText("\n\nThe Amarok looks down at the worms you came, sniffs them, then snarls and walks away. It must consider you to be tainted meat.", false);
 				doNext(game.combat.endLustLoss);
 			} else {
 				game.glacialRift.amarokScene.amarokChowTime();
@@ -116,10 +116,10 @@ package classes.Scenes.Areas.GlacialRift
 			this.skinTone = "black";
 			this.skinType = SKIN_TYPE_FUR;
 			this.hairColor = "black";
-			this.faceType = FACE_WOLF;
-			this.earType = EARS_WOLF;
-			initStrTouSpeInte(110, 80, 85, 95);
-			initLibSensCor(15, 15, 25);
+			this.faceType = FACE_DOG;
+			this.earType = EARS_DOG;
+			initStrTouSpeInte(90, 110, 75, 85);
+			initLibSensCor(0, 10, 10);
 			this.weaponName = "teeth";
 			this.weaponVerb="bite";
 			this.weaponAttack = 20;
@@ -137,7 +137,7 @@ package classes.Scenes.Areas.GlacialRift
 			this.tailType = TAIL_TYPE_DOG;
 			this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
 			//"Watching your movements" alluded to this. Its lore is stalking and hunting people, so I imagine you can't get away.
-			//Otherwise I'd suggest doing a hellhound knock-off of the scent tracking.
+			//Otherwise I'd suggest doing a hellhound knock-off of the scent tracking, which makes it harder to run.
 			checkMonster();
 		}
 		
