@@ -1985,15 +1985,6 @@ function wolfPepper(type: Number, player: Player): void {
                 player.eyeType == EYES_WOLF;
                 changes++;
             }
-            //MUTATIONZ LEVEL 4: all of the above->quadruped wolf
-            if (player.eyeType == EYES_WOLF && player.faceType == FACE_WOLF && player.legCount == 2 && player.lowerBody == LOWER_BODY_TYPE_WOLF && player.armType == ARM_TYPE_WOLF && player.tailType == TAIL_TYPE_WOLF && player.skinType = SKIN_TYPE_FUR && player.earType == EARS_WOLF && flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 1 && player.hairLength == 0 && player.clawType == CLAW_TYPE_NORMAL && rand(20) == 0 && changes < changeLimit) {
-                outputText("\n\nImmense pain overtakes you as you feel your backbone snap. The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs and arms flex and twist. Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns. <b>You now walk on four legs like a feral wolf.</b>", false);
-                if (player.gender > 0) {
-                    outputText(" After taking a moment to get used to your new body, you notice that your genitals now reside between your back legs.", false);
-                }
-                player.legCount == 4;
-                changes++;
-            }
             //MISC CRAP
             if (rand(5) == 0) mutations.updateOvipositionPerk(tfSource);
             if (rand(3) == 0) outputText(player.modTone(100, 4), false);
