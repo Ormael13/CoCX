@@ -20,18 +20,9 @@ package classes.Scenes.Areas.GlacialRift
 				combatRoundOver();
 				return;
 			}
-			//Too many things for evasion...
-			if(player.findPerk(PerkLib.Evade) >= 0 && player.spe >= 35 && rand(3) != 0) {
-				outputText("The Amarok lunges for you, paw ready to strike, but you easily roll out of the way thanks to your talents in evasion.", false);
-			}
-			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 20 && player.armorName == "red, high-society bodysuit") {
-				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep the Amarok's attempt to claw you.", false);
-			}
-			else if(player.findPerk(PerkLib.Flexibility) >= 0 && player.spe > 30 && rand(10) != 0) {
-				outputText("The Amarok charges at you, attempting to claw you with one of its massive paws. You dodge, using your incredible flexibility to twist out of the way.", false);
-			}
-			else if (player.getEvasionRoll()) {
-				outputText("The Amarok throws itself at you, attempting to slash you with its claws. Luckily, you manage to leap out of the way.", false);
+			//Dodge that shit yo
+			if (player.getEvasionRoll()) {
+				outputText("The Amarok throws itself at you, attempting to slash you with its claws. Luckily, you manage to move out of the way.", false);
 				combatRoundOver();
 				return;
 			}
@@ -57,18 +48,9 @@ package classes.Scenes.Areas.GlacialRift
 				combatRoundOver();
 				return;
 			}
-			//Evasion stuffs
-			if(player.findPerk(PerkLib.Evade) >= 0 && player.spe >= 35 && rand(3) != 0) {
-				outputText("You manage easily jump out of the way due to your talents in evasion.", false);
-			}
-			else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 20 && player.armorName == "red, high-society bodysuit") {
-				outputText("However, Raphael's teachings and your bodysuit's flexibility let you get out of the way before it can connect.", false);
-			}
-			else if(player.findPerk(PerkLib.Flexibility) >= 0 && player.spe > 30 && rand(10) != 0) {
-				outputText("You use your incredibly flexibility and twist out of the way of the attack.", false);
-			}
-			else if (player.getEvasionRoll()) {
-				outputText("You jump out of the way before it can hit.", false);
+			//Evasioning
+			if (player.getEvasionRoll()) {
+				outputText("You move out of the way before it can hit.", false);
 				combatRoundOver();
 				return;
 			}
@@ -84,10 +66,6 @@ package classes.Scenes.Areas.GlacialRift
 				var damage:int = ((str + 100) + rand(75));
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
-				if(player.HP <= 0) {
-					doNext(game.combat.endHpLoss);
-					return;
-				}
 			}
 			combatRoundOver();
 		}
@@ -118,7 +96,7 @@ package classes.Scenes.Areas.GlacialRift
 			this.ballSize = 2;
 			this.cumMultiplier = 1;
 			this.createVagina(false, 1, 1);
-			this.gender = genderless;
+			this.gender = 0;
 			this.pronoun1 = "it";
 			this.pronoun2 = "it";
 			this.pronoun3 = "its";
