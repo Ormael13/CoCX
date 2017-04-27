@@ -60,6 +60,7 @@ public static const FACE_BOAR:int                                               
 public static const FACE_RHINO:int                                                  =   21;
 public static const FACE_ECHIDNA:int                                                =   22;
 public static const FACE_DEER:int                                                   =   23;
+public static const FACE_WOLF:int                                                   =   24;
 
 // tongueType
 public static const TONGUE_HUMAN:int                                                =   0;
@@ -76,6 +77,7 @@ public static const EYES_BLACK_EYES_SAND_TRAP:int                               
 public static const EYES_LIZARD:int                                                 =   3;
 public static const EYES_DRAGON:int                                                 =   4; // Slightly different description/TF and *maybe* in the future(!) grant different perks/combat abilities
 public static const EYES_BASILISK:int                                               =   5;
+public static const EYES_WOLF:int                                                   =   6;
 
 // earType
 public static const EARS_HUMAN:int                                                  =   0;
@@ -96,6 +98,7 @@ public static const EARS_PIG:int                                                
 public static const EARS_RHINO:int                                                  =  15;
 public static const EARS_ECHIDNA:int                                                =  16;
 public static const EARS_DEER:int                                                   =  17;
+public static const EARS_WOLF:int                                                   =  18;
 
 // hornType
 public static const HORNS_NONE:int                                                  =   0;
@@ -123,6 +126,7 @@ public static const ARM_TYPE_HARPY:int                                          
 public static const ARM_TYPE_SPIDER:int                                             =   2;
 public static const ARM_TYPE_PREDATOR:int                                           =   4;
 public static const ARM_TYPE_SALAMANDER:int                                         =   5;
+public static const ARM_TYPE_WOLF:int                                               =   6;
 
 // clawType
 public static const CLAW_TYPE_NORMAL:int                                            =   0;
@@ -161,6 +165,7 @@ public static const TAIL_TYPE_RHINO:int                                         
 public static const TAIL_TYPE_ECHIDNA:int                                           =  23;
 public static const TAIL_TYPE_DEER:int                                              =  24;
 public static const TAIL_TYPE_SALAMANDER:int                                        =  25;
+public static const TAIL_TYPE_WOLF:int                                              =  26;
 
 // wingType
 public static const WING_TYPE_NONE:int                                              =   0;
@@ -204,6 +209,7 @@ public static const LOWER_BODY_TYPE_CLOVEN_HOOFED:int                           
 public static const LOWER_BODY_TYPE_ECHIDNA:int                                     =  23;
 public static const LOWER_BODY_TYPE_DEERTAUR:int                                    =  24; // DEPRECATED, use LOWER_BODY_TYPE_CLOVEN_HOOFED and legCount=4
 public static const LOWER_BODY_TYPE_SALAMANDER:int                                  =  25;
+public static const LOWER_BODY_TYPE_WOLF:int                                        =  26;
 
 // underBody
 public static const UNDER_BODY_TYPE_NONE:int                                        =   0;
