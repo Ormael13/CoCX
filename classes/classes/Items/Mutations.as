@@ -1610,13 +1610,13 @@ function wolfPepper(type: Number, player: Player): void {
         else outputText("\n\nYour muscles feel denser and more durable. Not so much that feel stronger, but you feel like you can take more hits.", false);
         changes++;
     }
-    if (player.spe > 30 && rand(3) == 0 && changes < changeLimit) {
+    if (player.spe > 30 && rand(7) == 0 && changes < changeLimit) {
         dynStats("spe", (-1 * crit));
         if (crit > 1) outputText("\n\nThe pepper's strong taste makes you take a couple steps back and lean against the nearest solid object. You don't feel like you'll be moving very fast anymore.", false);
         else outputText("\n\nYou stumble forward, but manage to catch yourself. Still, though, you feel somewhat slower.", false);
         changes++;
     }
-    if (player.inte < 80 && rand(3) == 0 && changes < changeLimit) {
+    if (player.inte < 60 && rand(7) == 0 && changes < changeLimit) {
         dynStats("int", (1 * crit));
         outputText("\n\nThe spiciness makes your head twirl, but you manage to gather yourself. A strange sence of clarity comes over you in the aftermath, and you feel ", false);
         if (crit > 1) outputText("a lot ", false);
