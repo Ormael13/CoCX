@@ -15,8 +15,8 @@ package classes.internals
 		 */
 		public static const ILLEGAL_SYMBOLS:String = "[]~$^&\/(){}<>+=`!#%?,:;'\"@";
 		
-		private static const CLASS_DELIMITER:RegExp = /::/g;
-		private static const CLASS_DELIMITER_REPLACEMENT:String = ".";
+		private static const PACKAGE_DELIMITER:RegExp = /::/g;
+		private static const PACKAGE_DELIMITER_REPLACEMENT:String = ".";
 		
 		public function LoggerFactory() 
 		{
@@ -30,8 +30,8 @@ package classes.internals
 		 * @return a new logger for the class
 		 */
 		public static function getLogger(clazz:Class):ILogger {
-			var sanitizedClassname:String = getQualifiedClassName(clazz).replace(CLASS_DELIMITER, CLASS_DELIMITER_REPLACEMENT);
-			return Log.getLogger(sanitizedClassname);
+			var sanitizedFQN:String = getQualifiedClassName(clazz).replace(PACKAGE_DELIMITER, PACKAGE_DELIMITER_REPLACEMENT);
+			return Log.getLogger(sanitizedFQN);
 		}
 	}
 }
