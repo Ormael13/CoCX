@@ -142,7 +142,7 @@ package classes
 			if (player.faceType == FACE_WOLF) 
 			{
 				outputText("  You have an angular wolf's face complete with a muzzle and black nose");
-				if (player.hasPlainSkin() || player.hasGooSkin() || player.hasScales())
+				if (!player.hasFur())
 					outputText(", though devoid of any fur.);
 				else
 					outputText(".");
