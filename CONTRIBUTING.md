@@ -22,3 +22,24 @@ Please don't use deprecated code for new content. If you find any deprecated cod
 * `choices` and `simpleChoices`: Those are really old code used for setting up a choice of buttons. Remember that there are now 15 buttons so use `addButton` instead.
 * Lots and lots of local variables for gating scenes. Those are prominient in many of the victory scene choices. Just remove the variables and change the way the buttons are gated, check the newer code for that.
 * Deprecated functions, variables and classes can be marked with `[Deprecated]` metadata tags to generate compiler warnings. [Adobe metadata documentation](http://help.adobe.com/en_US/flex/using/WS2db454920e96a9e51e63e3d11c0bf680e1-7ffe.html), [Deprecated metadata](http://help.adobe.com/en_US/flex/using/WS2db454920e96a9e51e63e3d11c0bf680e1-7ffe.html#WS2db454920e96a9e51e63e3d11c0bf69084-7a6c)
+
+## Logging
+
+Please don't use `trace()`, but instead use `ILogger` based loggers.
+
+e.g.:
+```actionscript
+	import classes.internals.LoggerFactory;
+	import mx.logging.ILogger;
+	
+	public class Foo {
+		private static const LOGGER:ILogger = LoggerFactory.getLogger(Foo);
+		
+		private var bar:int = 5;
+		
+		public function Foo() {
+			LOGGER.error("This is an error message.");
+			LOGGER.debug("Bar has the value of {0}.", bar);
+		}
+	}
+```
