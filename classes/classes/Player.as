@@ -25,6 +25,8 @@ use namespace kGAMECLASS;
 	 */
 	public class Player extends PlayerHelper {
 		
+		public var legCount:Number = 2;
+		
 		public function Player() {
 			//Item things
 			itemSlot1 = new ItemSlotClass();
@@ -787,7 +789,7 @@ use namespace kGAMECLASS;
 					race = "raccoon-taur";
 			}
 			if (wolfScore() >= 4) {
-				if (isTaur() && lowerBody == LOWER_BODY_TYPE_WOLF)
+				if (legCount == 4 && lowerBody == LOWER_BODY_TYPE_WOLF)
 					race = "wolf";
 				else {
 					race = "wolf-morph";
