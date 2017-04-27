@@ -371,8 +371,12 @@ the text from being too boring.
 		private static function setUpLogging():void {
 			traceTarget = new TraceTarget();
 
-			//TODO clever way to set log level at start up. Read from file in CWD?
-			traceTarget.level = LogEventLevel.ALL;
+			traceTarget.level = LogEventLevel.WARN;
+			
+			CONFIG::debug
+			{
+				traceTarget.level = LogEventLevel.DEBUG;
+			}
 
 			//Add date, time, category, and log level to the output
 			traceTarget.includeDate = true;
