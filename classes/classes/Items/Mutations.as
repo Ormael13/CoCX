@@ -1648,7 +1648,7 @@ function wolfPepper(type: Number, player: Player): void {
     //give human tongue
     if (player.tongueType != TONGUE_HUMAN && rand(3) == 0 && changes < changeLimit) {
         outputText("\n\nYou lick the roof of your mouth, noticing that your tongue feels different. It then hits you-- <b>You have a human tongue!</b>", false);
-        player.tongueType == TONGUE_HUMAN
+        player.tongueType == TONGUE_HUMAN;
         changes++;
     }
     //remove non-wolf eyes
@@ -1980,8 +1980,8 @@ function wolfPepper(type: Number, player: Player): void {
             }
             //MUTATIONZ LEVEL 3: face->eyes
             if (player.eyeType != EYES_WOLF && player.faceType == FACE_WOLF && rand(4) == 0 && changes < changeLimit) {
-                outputText("\n\nYou feel a sudden surge of pain in your face as your eyes begin to change. You close them and feel something wet slide under your eyelids. You jump in surprise. The feeling's gone, but now the distance is a blurred view, and greens seem to be mixed with yellows.");
-                outputText("\n\nYou turn to a nearby reflective surface to investigate. Your eyes have massive amber irises and are dipped into your face, hiding any sign of your sclera. Blackness surrounds them and emphasise the wolfish shape of your face. You blink a few times as you stare at your reflection. <b>You now have wolf eyes!</b> Your peripherals and night vision has probably improved, too.");
+                outputText("\n\nYou feel a sudden surge of pain in your face as your eyes begin to change. You close them and feel something wet slide under your eyelids. You jump in surprise. The feeling's gone, but now the distance is a blurred view, and greens seem to be mixed with yellows.", false);
+                outputText("\n\nYou turn to a nearby reflective surface to investigate. Your eyes have massive amber irises and are dipped into your face, hiding any sign of your sclera. Blackness surrounds them and emphasise the wolfish shape of your face. You blink a few times as you stare at your reflection. <b>You now have wolf eyes!</b> Your peripherals and night vision has probably improved, too.", false);
                 player.eyeType == EYES_WOLF;
                 changes++;
             }
