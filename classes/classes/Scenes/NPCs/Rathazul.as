@@ -1217,12 +1217,11 @@ private function getThatRatAss():void {
 	outputText("\"<i>Oh... Ohhhh no...</i>\" He takes a couple steps back, mumbling, \"<i>No, no no no no no no, no, no...</i>\" His eyes glaze over and his steps grow uncoordinated as his soul seems to leave his body. \"<i>No, no, no... No... No...</i>\"\n\n");
 	outputText("His foot steps in a bowl and he slips, crashing into the ground. His head slams into a rock along the way. You hear something crack that sounds like it shouldn't. You drop to all fours and put your hand on his shoulder, shouting his name. He doesn't respond. You put a hand to his neck. His pulse has stopped, and there is blood gathering around his head.\n\n");
 	outputText("You get up and very slowly back away. You have no idea what just happened, but you are sure of one thing-- You need to get out of here.\n\n");
-	outputText("An hour later, you muster up the courage to return to the scene of your crime. Much to your surprise, though, there is no scene. No corpse, no Rathazul, not even any of his materials. All that's left is a note on the ground. You pick it up and read it.\n\n");
+	outputText("An hour later, you muster up the courage to return to the scene of your crime. Much to your surprise, though, there is no scene. Rathazul is back on his feet, though distinctly avoiding looking at you. All he's offered is a note on the ground. You pick it up and read it.\n\n");
 	outputText("\"<i>No. And please do not as me that again.\n- Rathazul</i>\"\n\n");
 	outputText("Sheesh, what a drama queen. A simple \"No thanks\" would've been fine. You toss the note aside with a huff and turn back to camp.\n\n");
 	outputText("Still though, thinking about that rat ass gets you turned on...");
 	game.dynStats("lus", 10);
-	player.removeStatusEffect(StatusEffects.CampRathazul);
 	doNext(camp.returnToCampUseOneHour);
 }
 
