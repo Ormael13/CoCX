@@ -24,7 +24,7 @@ install:
 script:
     # this is where the build happens. A separate build is started for every entry in the matrix element
   - ant test-$BUILD
-  - devTools/ci/updated-sonar-version.sh
+  - devTools/ci/update-sonar-version.sh
   - sonar-scanner
 
 env:
