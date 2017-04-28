@@ -144,8 +144,9 @@ private function agreeToFollowRebecFirstTime():void {
 		outputText("\n\nYou know very well what these people want: some meat to appease the demons.  Will you help them?");
 	}
 	//Yes/No
-	if (flags[kFLAGS.TIMES_IN_DEMON_PIT] == 0) doYesNo(createCallBackFunction2(acceptRebeccsPlea,true, true),declineRebeccsPlea);
-	else doYesNo(createCallBackFunction2(acceptRebeccsPlea,false, true),declineRebeccsPlea);
+	menu();
+	addButton(0, "Yes", acceptRebeccsPlea, flags[kFLAGS.TIMES_IN_DEMON_PIT] == 0, true);
+	addButton(1, "No", declineRebeccsPlea);
 }
 //Refuse plea (Z)
 private function declineRebeccsPlea():void {
@@ -222,8 +223,9 @@ private function intoTheDemonPit(sacrifice:Boolean = true):void {
 	}
 	flags[kFLAGS.TIMES_IN_DEMON_PIT]++;
 	flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS] = 0;
-	if (sacrifice) simpleChoices("Fight",createCallBackFunction(fightZeDemons,true),"Submit",loseOrSubmitToVapula, "", null, "", null, "", null);
-	else simpleChoices("Fight",createCallBackFunction(fightZeDemons,false),"Submit",loseOrSubmitToVapula, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Fight", fightZeDemons, sacrifice);
+	addButton(1, "Submit", loseOrSubmitToVapula);
 }
 //Submit/Fight
 private function fightZeDemons(sacrifice:Boolean = true):void {
@@ -546,7 +548,9 @@ private function owcaMainScreenOn():void {
 		outputText("\n\nThis time you fully understand the consequences of another sacrifice.  Do you comply?");
 		//Yes: Leads to Accept Plea scene. Attitude is raised by 5.
 		//No: Leads to Refuse Plea scene. Attitude is lowered by 10.
-		doYesNo(createCallBackFunction2(acceptRebeccsPlea,false, true),declineRebeccsPlea);
+		menu();
+		addButton(0, "Yes", acceptRebeccsPlea, false, true);
+		addButton(1, "No", declineRebeccsPlea);
 		return;
 	}
 	outputText(images.showImage("location-owca"));
@@ -568,35 +572,44 @@ private function owcaMainScreenOn():void {
 	else if (flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS] > 7 && flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 0) outputText("  More than a week");
 	if (flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS] >= 7 && flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 0) outputText(" has passed since the last offering to the demons; guarding the pit would certainly help improve your relations with the little town's denizens.");
 	//Option: 
-	var pit:Function = null;
-	var herd:Function = null;
-	var tavern:Function = null;
+	//[Pit][Herds][Rebecc][Tavern]
+	menu();
 	if (model.time.hours >= 16 && flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 0) {
 		//Pit. Requires 16:00 or later. Leads to the night gangbang (with possible fight) scene, this time fully equipped and clothed. Attitude is raised by 3.
-		pit = zePit;
+		addButton(0, "Pit", zePit);
+	} else {
+		addDisabledButton(0, "Pit");
 	}
 	if (flags[kFLAGS.OWCAS_ATTITUDE] >= 50) {
-		outputText("\n\nBeyond the tiny hamlet you see herders guarding a considerable amount of sheep.  You could probably join them and ask them for work.");
-		herd = herds;
 		//Option: Herds, needs 50 attitude.
+		outputText("\n\nBeyond the tiny hamlet you see herders guarding a considerable amount of sheep.  You could probably join them and ask them for work.");
+		addButton(1, "Herds", herds);
+	} else {
+		addDisabledButton(1, "Herds");
 	}
 	outputText("\n\nRebecc's house is nearby, and her door is open. She would probably welcome the chance to wash away any taint you've received from your time in the pit.");
+	addButton(2, "Rebecc", rebeccMenu);
 	//Option: Rebecc. Leads to Rebecc Menu
 	if (flags[kFLAGS.OWCAS_ATTITUDE] >= 10) {
 		outputText("\n\nA tavern appears to be open; various Owca folk are drinking and chatting in it.  They give you friendly waves when you make eye contact.");
 		//Option: Tavern. Leads to the Tavern, needs 10 attitude
-		tavern = owcaTavern;
+		addButton(3, "Tavern", owcaTavern);
+	} else {
+		addDisabledButton(3, "Tavern");
 	}
-	//[Pit][Herds][Rebecc][Tavern]
-	simpleChoices("Pit", pit, "Herds", herd, "Rebecc", rebeccMenu, "Tavern", tavern, "Leave", camp.returnToCampUseOneHour);
-	if (flags[kFLAGS.GRIMDARK_MODE] > 0) addButton(4, "Leave", leaveOwcaGrimdark);
+	
+	if (flags[kFLAGS.GRIMDARK_MODE] > 0) {
+		addButton(14, "Leave", leaveOwcaGrimdark);
+	} else {
+		addButton(14, "Leave", camp.returnToCampUseOneHour);
+	}
 }
 
-		public function leaveOwcaGrimdark():void {
-			inRoomedDungeonResume = getGame().dungeons.resumeFromFight;
-			getGame().dungeons._currentRoom = "plains";
-			getGame().dungeons.move(getGame().dungeons._currentRoom);
-		}
+public function leaveOwcaGrimdark():void {
+	inRoomedDungeonResume = getGame().dungeons.resumeFromFight;
+	getGame().dungeons._currentRoom = "plains";
+	getGame().dungeons.move(getGame().dungeons._currentRoom);
+}
 
 //Tavern (Z)
 public function owcaTavern():void {
@@ -604,26 +617,40 @@ public function owcaTavern():void {
 	outputText(images.showImage("location-owca-tavern"));
 	outputText("The tavern is nice and cozy; there are a few tables and chairs scattered around in no ordered pattern, and most clients here appear to belong to the same species.  By the crude wooden bar, you see a list of all the current drinks on sale:\n<i>");
 	//SheepMk
-	var milk:Function = createCallBackFunction(owcaBuySetup,consumables.SHEEPMK);
+	
+	menu();
 	outputText("\nSheep Milk Bottle: " + (180 - flags[kFLAGS.OWCAS_ATTITUDE]) + " gems");
-	if ((180 - flags[kFLAGS.OWCAS_ATTITUDE]) > player.gems) milk = null;
-	
-	var goblin:Function = createCallBackFunction(owcaBuySetup,consumables.GOB_ALE);
-	outputText("\nGoblin Ale: " + (60 - Math.round(flags[kFLAGS.OWCAS_ATTITUDE]/2)) + " gems");
-	if ((60 - Math.round(flags[kFLAGS.OWCAS_ATTITUDE]/2)) > player.gems) goblin = null;
-	
-	var brew:Function = createCallBackFunction(owcaBuySetup,consumables.BROBREW);
-	if (rand(10) > flags[kFLAGS.OWCAS_ATTITUDE]/10) {
-		outputText("\nBro Brew: 2000 gems");
-		if ((2000) > player.gems) brew = null;
+	if ((180 - flags[kFLAGS.OWCAS_ATTITUDE]) > player.gems) {
+		addDisabledButton(0, "Sheep Milk");
+	} else {
+		addButton(0, "Sheep Milk", owcaBuySetup, consumables.SHEEPMK);
 	}
-	else brew = null;
 	
-	var cum:Function = createCallBackFunction(owcaBuySetup,consumables.MINOCUM);
+	outputText("\nGoblin Ale: " + (60 - Math.round(flags[kFLAGS.OWCAS_ATTITUDE]/2)) + " gems");
+	if ((60 - Math.round(flags[kFLAGS.OWCAS_ATTITUDE] / 2)) > player.gems) {
+		addDisabledButton(1, "Goblin Ale");
+	} else {
+		addButton(1, "Goblin Ale", owcaBuySetup, consumables.GOB_ALE);
+	}
+	
+	if (rand(100) > flags[kFLAGS.OWCAS_ATTITUDE]) {
+		outputText("\nBro Brew: 2000 gems");
+		if ((2000) > player.gems) {
+			addDisabledButton(2, "Bro Brew");
+		} else {
+			addButton(2, "Bro Brew", owcaBuySetup, consumables.BROBREW);
+		}
+	}
+	
 	outputText("\nMinotaur Cum: " + (300 - flags[kFLAGS.OWCAS_ATTITUDE]) + " gems");
-	if ((300 - flags[kFLAGS.OWCAS_ATTITUDE]) > player.gems) cum = null;
+	if ((300 - flags[kFLAGS.OWCAS_ATTITUDE]) > player.gems) {
+		addDisabledButton(3, "MinotaurCum");
+	} else {
+		addButton(3, "MinotaurCum", owcaBuySetup, consumables.MINOCUM);
+	}
 	outputText("</i>");
-	simpleChoices("Sheep Milk",milk,"Goblin Ale",goblin,"Bro Brew",brew,"MinotaurCum",cum,"Back",gangbangVillageStuff);
+	
+	addButton(14, "Back", gangbangVillageStuff);
 }
 
 private function owcaBuySetup(item:ItemType):void {
@@ -676,12 +703,16 @@ private function rebeccMenu():void {
 	//Option: Rape: Leads to Rebecc Rape scene. Ends the quest. Requires sizable corruption score.
 	//Option: Leave: Redirects PC to Owca Village.
 	//[Appearance][Bath][Leave][Surprise Sex!]
-	var sex:Function = null;
-	if (player.cor >= 66) {
-		sex = createCallBackFunction(rapeRebecc,false);
+	menu();
+	addButton(0, "Appearance", rebeccAppearance);
+	addButton(1, "Bath", rebeccBathScene);
+	if (player.cor >= 66 - player.corruptionTolerance() || player.findPerk(PerkLib.Sadist)) {
 		outputText("\n\nYou could try and force yourself on her, but you might not be welcome in town after...");
+		addButton(3, "Surprise Sex", rapeRebecc, false);
+	} else {
+		addDisabledButton(3, "Surprise Sex");
 	}
-	simpleChoices("Appearance", rebeccAppearance, "Bath", rebeccBathScene, "", null, "Surprise Sex", sex, "Back", gangbangVillageStuff);
+	addButton(14, "Back", gangbangVillageStuff);
 }
 //Rebecc Appearance (Z)
 private function rebeccAppearance():void {
@@ -791,7 +822,9 @@ private function desperateVillages():void {
 	outputText("\n\nIt seems that these villagers have grown weary of your repeated refusals; they are likely to react angrily if you deny them another sacrifice.");
 	outputText("\n\nDo you submit?");
 	//Yes/No. Yes leads to Accept Plea, Attitude raised by 10. No to Villagers Fight
-	doYesNo(createCallBackFunction2(acceptRebeccsPlea,false, true),fightZeVillagers);
+	menu();
+	addButton(0, "Yes", acceptRebeccsPlea, false, true);
+	addButton(1, "No", fightZeVillagers);
 }
 //Villagers Fight (Z, but pretty barebones)
 private function fightZeVillagers():void {
@@ -810,12 +843,18 @@ public function beatUpOwca():void {
 	clearOutput();
 	outputText("The last of the villagers drops his improvised weapon.  They are all lying defenseless before you.  At last, you notice Rebecc, the only one still conscious, curled up as she weeps uncontrollably.  She is clearly oblivious of her surroundings, undoubtedly shocked by the violent fight.  Even if she calls herself your friend, you don't think you'd be able to reason with her after pummeling her kin.  What do you do?");
 	//Rape Rebbecc/Torch Village (needs Akbal's fire or Whitefire)/Leave
-	var torch:Function = null;
-	if (player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.findPerk(PerkLib.Dragonfire) >= 0)
-		torch = torchOwcaMotherFuckers;
-	var rape:Function = null;
-	if (player.cor >= 60 && player.gender > 0 && player.lust >= 33) rape = createCallBackFunction(rapeRebecc,true);
-	simpleChoices("Rape Rebecc", rape, "Torch Village", torch, "", null, "", null, "Leave", leaveOwcaAfterWhupping);
+	menu();
+	if (!player.isGenderless() && player.lust >= 33 && (player.cor >= 60 - player.corruptionTolerance() || player.findPerk(PerkLib.Sadist) >= 0)) {
+		addButton(0, "Rape Rebecc", rapeRebecc, true);
+	} else {
+		addDisabledButton(0, "Rape Rebecc");
+	}
+	if (player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.findPerk(PerkLib.EnlightenedNinetails) >= 0 || player.findPerk(PerkLib.CorruptedNinetails) >= 0) {
+		addButton(1, "Torch Village", torchOwcaMotherFuckers);
+	} else {
+		addDisabledButton(1, "Torch Village");
+	}
+	addButton(14, "Leave", leaveOwcaAfterWhupping);
 }
 
 //"Leave" redirects the PC to camp; next encounter is Rebecc's Last Plea.
@@ -828,15 +867,17 @@ private function leaveOwcaAfterWhupping():void {
 private function torchOwcaMotherFuckers():void {
 	clearOutput();
 	outputText("These ignorant folks deserve to be punished for trying to take you by force.  You muster your strength and release a wave of magical flame.  The raw heat and energy is enough to set entire thatched roofs ablaze.  You ignite house after house, the poor constructions unable to withstand your fiery might, until there are enough burning that the wind can carry the flames to all other buildings nearby.  A few minutes later, the entire village is ablaze; hovels are crumbling under their own weight and the crude roads are being littered with fallen debris.  You watch Owca burn silently, arms crossed.  Finally, when the last building has been thoroughly reduced to a pile of rubble and ashes, you quickly search for any valuables among the villagers' belongings.  Fortunately their gems haven't been melted; you pack a substantial amount of them away before leaving.  You cast a thoughtful glance at the remains of what used to be a peaceful village; ironically enough, the only structure you preserved was the pole in the pit, an ultimate mockery of their futile struggles against forces that ridiculously outmatch them.");
+	outputText("You notice Rebecc is still weeping among the scattered bodies of the beaten villagers.  Do you abuse her?");
 	player.gems += 900 + rand(150);
 	flags[kFLAGS.OWCA_UNLOCKED] = -1;
 	dynStats("cor", 15);
-	if (player.cor >= 60 && player.gender > 0 && player.lust >= 33) {
-		outputText("You notice Rebecc is still weeping among the scattered bodies of the beaten villagers.  Do you abuse her?");
-		simpleChoices("Abuse Her",createCallBackFunction(rapeRebecc,true),
-				"", null, "", null, "", null, "Leave", torchUpVillagersAndLeave);
+	menu();
+	if (!player.isGenderless() && player.lust >= 33 && (player.cor >= 60 - player.corruptionTolerance() || player.findPerk(PerkLib.Sadist) >= 0)) {
+		addButton(0, "Abuse Her", rapeRebecc, true);
+	} else {
+		addDisabledButton(0, "Abuse Her");
 	}
-	else doNext(torchUpVillagersAndLeave);
+	addButton(14, "Leave", torchUpVillagersAndLeave);
 }
 	
 //Fuck off village
@@ -872,8 +913,10 @@ private function morningAfterRape():void {
 	//Option: Forgive. Sets Attitude to 50, quest goes back to normal.
 	//Option: Rape. Leads to Rebecc Rape scene and ends the quest. 
 	//Option: Leave. Redirects PC to camp, next encounter leads to Rebecc's Last Plea
-	simpleChoices("Forgive",forgiveOwca,
-			"Rape", createCallBackFunction(rapeRebecc, false), "", null, "", null, "Leave", fuckThisShit);
+	menu();
+	addButton(0, "Forgive", forgiveOwca);
+	addButton(1, "Rape", rapeRebecc, false);
+	addButton(2, "Leave", fuckThisShit);
 }
 //Option: Forgive (Z)
 private function forgiveOwca():void {
@@ -909,8 +952,10 @@ private function rebeccsLastPlea():void {
 	//(You could rape her.) //Leads to Rebecc Rape scene. 
 	//(You could face the villagers and demons in her stead.) 
 	//(You could leave.) //End of quest.
-	simpleChoices("Rape Her",createCallBackFunction(rapeRebecc,true),
-			"Face Them All", faceDownHordes, "", null, "", null, "Leave", leaveRebeccToBeRaped);
+	menu();
+	addButton(0, "Rape Her", rapeRebecc, true);
+	addButton(1, "Face Them All", faceDownHordes);
+	addButton(2, "Leave", leaveRebeccToBeRaped);
 }
 //Option: Leave (Z)
 private function leaveRebeccToBeRaped():void {
@@ -967,11 +1012,19 @@ private function subdueVapula():void {
 	outputText("\n\nYou grip her by the shoulders and stare at her, asserting your dominance.  Your vanquished foe casts her gaze down but maintains eye contact; she looks solemn and reflective, probably knowing that her fate will depend on your next decision.");
 	outputText("\n\nBy now, you've completely broken the back of the rapacious demon horde.  Their leader is starting to get used to her repeated defeats; it's time for you to make a decision... what do you do?");
 	//choices: [Disband the horde]/[Enslave Vapula(requires cock or non-centaur vagina, D2 completion, libido >= 60, and corr >= 70)]
-	var fuck:Function = null;
-	if (player.gender > 0 && (player.lust >= 33 - player.corruptionTolerance())) fuck = rapeZeVapula;
-	var enslave:Function = null;
-	if (player.gender > 0 && (player.cor >= 66 - player.corruptionTolerance())) enslave = enslaveVapulaWithYourWang;
-	simpleChoices("Disband", disbandHorde, "EnslaveVapula", enslave, "JustFuckEm", fuck, "", null, "Skip Out", combat.cleanupAfterCombat);
+	menu();
+	addButton(0, "Disband", disbandHorde);
+	if (!player.isGenderless() && (player.cor >= 66 - player.corruptionTolerance())) {
+		addButton(1, "EnslaveVapula", enslaveVapulaWithYourWang);
+	} else {
+		addDisabledButton(1, "EnslaveVapula", "This scene requires you to have genitals and high enough corruption.");
+	}
+	if (!player.isGenderless() && player.lust >= 33) {
+		addButton(2, "JustFuckEm", rapeZeVapula);
+	} else {
+		addDisabledButton(2, "JustFuckEm", "This scene requires you to have genitals and high enough arousal.");
+	}
+	addButton(3, "Skip Out", combat.cleanupAfterCombat);
 }
 //Option: Disband (Z)
 private function disbandHorde():void {

@@ -175,25 +175,39 @@ public function corruptCampJojo():void {
 		}
 	}
 	
-	var tent:Function = null;
-	if (tentacleJojo() && player.lust >= 33) tent = useTentacleJojo;
-	var milkHim:Function = null;
-	var tentaMilk:Function = null;
-	var eggs:Function = null;
-	if (player.canOvipositBee()) eggs = beeEggsInCorruptJojo;
+	menu();
+	addDisabledButton(0, "Sex");
+	addDisabledButton(1, "TentacleSex");
+	addDisabledButton(2, "Milk Him");
+	addDisabledButton(3, "TentacleMilk");
+	addDisabledButton(4, "HairCare");
+	addDisabledButton(5, "Lay Eggs");
+
+	if (!player.isGenderless() && player.lust >= 33) {
+		addButton(0, "Sex", corruptJojoSexMenu);
+	}
+	if (tentacleJojo() && player.lust >= 33) {
+		addButton(1, "TentacleSex", useTentacleJojo);
+	}
 	if (player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") >= 0) {
 		if (flags[kFLAGS.JOJO_COCK_MILKING_COOLDOWN] > 0) outputText("\n\n<b>Jojo is still drained from his last visit to the milkers - you should wait a few hours before taking him back.</b>", false);
 		//First time:
 		else if (flags[kFLAGS.JOJO_COCK_MILKING_COUNTER] != 0) {
-			milkHim = repeatMilkJojo;
-			if (tentacleJojo()) tentaMilk = createCallBackFunction(repeatMilkJojo, true);
-		} else milkHim = milkJojoFirst;
+			addButton(2, "Milk Him", repeatMilkJojo);
+			if (tentacleJojo()) {
+				addButton(3, "TentacleMilk", repeatMilkJojo, tentacleJojo());
+			}
+		} else {
+			addButton(2, "Milk Him", milkJojoFirst);
+		}
 	}
-	var hairCare:Function = null;
-	var sex:Function = null;
-	if (player.gender > 0 && player.lust >= 33) sex = corruptJojoSexMenu;
-	if (player.hasStatusEffect(StatusEffects.HairdresserMeeting)) hairCare = jojoPaysForPerms;
-	choices("Sex", sex, "TentacleSex", tent, "Milk Him", milkHim, "TentacleMilk", tentaMilk, "HairCare", hairCare, "Lay Eggs", eggs, "", null, "", null, "", null, "Back", camp.campSlavesMenu);
+	if (player.hasStatusEffect(StatusEffects.HairdresserMeeting)) {
+		addButton(4, "HairCare", jojoPaysForPerms);
+	}
+	if (player.canOvipositBee()) {
+		addButton(5, "Lay Eggs", beeEggsInCorruptJojo);
+	}
+	addButton(14, "Back", camp.campSlavesMenu);
 	
 	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0) addButton(6, "Farm Work", sendToFarm);
 	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 1) addButton(6, "Go Camp", backToCamp);
@@ -948,13 +962,14 @@ private function BJRidesGETYOUONE():void {
 	//[Cum in Amily Mouth] [Cum in Amily Pussy] [Cum in Jojo Mouth]
 	outputText("\n\nWhere do you cum?");
 	//Pussy requires a minimum tallness?
-	var puss:Function = null;
-	if (player.tallness > 55) puss = stuffAmilysMouthWithPostBJCUM;
-	simpleChoices("Amily's Mouth", fillAmilysMouth,
-					"Amily's Pussy", puss,
-					"Jojo's Mouth", fillJojosMouthWithHotStickyCum,
-					"", null,
-					"", null);
+	menu();
+	addButton(0, "Amily's Mouth", fillAmilysMouth);
+	if (player.tallness > 55) {
+		addButton(1, "Amily's Pussy", stuffAmilysMouthWithPostBJCUM);
+	} else {
+		addDisabledButton(1, "Amily's Pussy", "This scene requires you to be tall enough.")
+	}
+	addButton(2, "Jojo's Mouth", fillJojosMouthWithHotStickyCum);
 }
 //Fill Amily's Mouth (Z)
 private function fillAmilysMouth():void {
@@ -2459,7 +2474,14 @@ public function jojoCamp():void {
 			outputText("You walk up to the boulder where Jojo usually sits, and see him sitting cross legged with his eyes closed.  He seems to be deep in meditation, but when you approach his eyes open suddenly and he gets up appearing slightly distressed, “<i>Uh... [name], I can feel a bit of corruption within you.  It is not much, but I think you should be concerned about it before it gets out of hand and you do something you might regret.  If you want to I'd be happy to meditate with you as you rid yourself of it.</i>” he offers with a concerned look on his face.\n\n");
 		}
 		outputText("Do you accept Jojo's help?\n\n");
-		simpleChoices("Yes", acceptOfferOfHelp, "No", refuseOfferOfHelp, "", null, "", null, "Rape", (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.JOJO_STATUS] >= 0 ? jojoAtCampRape : null));
+		menu();
+		addButton(0, "Yes", acceptOfferOfHelp);
+		addButton(1, "No", refuseOfferOfHelp);
+		if (player.lust >= 33 && !player.isGenderless() && flags[kFLAGS.JOJO_STATUS] >= 0) {
+			addButton(4, "Rape", jojoAtCampRape);
+		} else {
+			addDisabledButton(4, "Rape");
+		}
 	}
 	else { //Normal shit
 		if (player.cor > 10)

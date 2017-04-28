@@ -75,7 +75,11 @@ public function meetMinotaurSons():void {
 	
 			outputText("You can't help but laugh with a mixture of maternal pride and rational worry.  What do your offspring have planned for you?  Judging by the three stiffening loincloths, they won't hold back much longer.  What will you do?", false);
 			//[Fight] [Submit] [Negotiate] [Run]
-			simpleChoices("Fight", fightOTaurs, "Submit", submitToMinotaurMob, "Negotiate", negotiate, "", null, "Leave", runFromMinotaurs);
+			menu();
+			addButton(0, "Fight", fightOTaurs);
+			addButton(1, "Submit", submitToMinotaurMob);
+			addButton(2, "Negotiate", negotiate);
+			addButton(3, "Run", runFromMinotaurs);
 		}
 		//(Addicted) 
 		else {
@@ -100,7 +104,10 @@ public function meetMinotaurSons():void {
 			else if (player.cor < 66) outputText("You're not sure how to feel about this morally, but you can't keep from licking your lips, fantasizing about the fix these wonderful kids of yours are so willing to give you.", false);
 			else outputText("Who cares if they're your offspring?  They're all grown up and they smell so... appetizing.", false);
 			//[Fight] [Submit] [Run]
-			simpleChoices("Fight", fightOTaurs, "Submit", submitToMinotaurMob, "Negotiate", negotiate, "", null, "Leave", runFromMinotaurs);
+			menu();
+			addButton(0, "Fight", fightOTaurs);
+			addButton(1, "Submit", submitToMinotaurMob);
+			addButton(3, "Run", runFromMinotaurs);
 		}
 	}
 	//Repeat meetings
@@ -155,7 +162,10 @@ public function meetMinotaurSons():void {
 				outputText("Your mind is fogging from the scent in the air, but thankfully, you aren't in withdrawal right now.  You can try to resist and maybe even turn the tables on your brood, or you can run.", false);
 			}
 			//[Fight] [Submit] [Run]
-			simpleChoices("Fight", fightOTaurs, "Submit", submitToMinotaurMob, "", null, "", null, "Run", runFromMinotaurs);
+			menu();
+			addButton(0, "Fight", fightOTaurs);
+			addButton(1, "Submit", submitToMinotaurMob);
+			addButton(2, "Run", runFromMinotaurs);
 		}
 		//Tribe sized
 		else {
@@ -208,7 +218,9 @@ public function meetMinotaurSons():void {
 				outputText("This is glorious – so many horny, willing boys, all here for you to squeeze dry.  Even if you wanted to leave, you'd have to fight them to make an opening.  It'd be better to just beat them into submission and take your time savoring their wondrous spunk.", false);
 			}
 			//[Fight] [Submit]
-			simpleChoices("Fight", fightOTaurs, "Submit", submitToMinotaurMob, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Fight", fightOTaurs);
+			addButton(1, "Submit", submitToMinotaurMob);
 		}
 	}
 }
@@ -227,7 +239,10 @@ private function negotiate():void {
 	
 	outputText("Looks like they're only interested in one thing.", false);
 	//[Fight] [Submit] [Run]
-	simpleChoices("Fight", fightOTaurs, "Submit", submitToMinotaurMob, "", null, "", null, "Run", runFromMinotaurs);
+	menu();
+	addButton(0, "Fight", fightOTaurs);
+	addButton(1, "Submit", submitToMinotaurMob);
+	addButton(2, "Run", runFromMinotaurs);
 }
 
 //[Run] 

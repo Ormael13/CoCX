@@ -110,7 +110,9 @@ public function isabellaGreeting():void {
 		outputText("While walking through the high grasses you hear a rich, high voice warbling out a melodious tune in a language you don't quite understand.  Do you approach or avoid it?", false);
 		//[Approach – to meeting] [Avoid – camp] – dont flag as met yet
 		//Approach - sets flags[kFLAGS.ISABELLA_CAMP_APPROACHED] to 1 and calls this function
-		simpleChoices("Approach", isabellaGreetingFirstTime, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+		menu();
+		addButton(0, "Approach", isabellaGreetingFirstTime);
+		addButton(14, "Leave", camp.returnToCampUseOneHour);
 		return;
 	}
 	//CAMP MEETING – UMAD BRAH!?
@@ -137,7 +139,10 @@ public function isabellaGreeting():void {
 			outputText("You answer and begin to explain yourself, but she interrupts, \"<i>Get out!  Zis is mein camp and I vill not tolerate you here!</i>\"\n\n", false);
 			outputText("A bit taken aback by her violent reaction, you blink in confusion as she pulls a titanic shield from behind her chair and slides her arm comfortably into the strap.  What do you do?\n\n", false);
 			//[Talk] [Fight] [Leave]
-			simpleChoices("Try to Talk", tryToTalkDownAngryCow, "Fight", unwelcomeFightCowGal, "", null, "", null, "Leave", leaveAngryIzzy);
+			menu();
+			addButton(0, "Try To Talk", tryToTalkDownAngryCow);
+			addButton(1, "Fight", unwelcomeFightCowGal);
+			addButton(14, "Leave", leaveAngryIzzy);
 		}
 		//(Shorter PC's) 
 		else {
@@ -154,7 +159,12 @@ public function isabellaGreeting():void {
 				else outputText("  The cow's eyes close, disappointment visible on her face when she sees the sheer size of your bulge.", false);
 			}
 			//[Talk – real conversations] [Drink – leads to breastfeeding] [Get Licks – leads to oral for small fries] [Rape?]
-			simpleChoices("Talk", talkWithIsabella, "Drink", nomOnMommaIzzysTits, "Get Licked", suck, "Fight", fightIsabella, "Leave", camp.returnToCampUseOneHour);
+			menu();
+			addButton(0, "Talk", talkWithIsabella);
+			addButton(1, "Drink", nomOnMommaIzzysTits);
+			addButton(2, "Get Licked", suck);
+			addButton(3, "Fight", fightIsabella);
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 		return;
 	}
@@ -163,7 +173,10 @@ public function isabellaGreeting():void {
 		outputText("You stumble through the grass, nearly tripping as it parts to reveal the now-familiar sight of Isabella's camp.  The cow-girl spots you instantly and snarls, \"<i>Begone!  I varned you once already!</i>\"", false);
 		//[Talk] [Fight] [Leave]
 		//Leave goes to special variation, see below.
-		simpleChoices("Try To Talk", tryToTalkDownAngryCow, "Fight", fightIsabella, "", null, "", null, "Leave", leaveAngryIzzy);
+		menu();
+		addButton(0, "Try To Talk", tryToTalkDownAngryCow);
+		addButton(1, "Fight", fightIsabella);
+		addButton(14, "Leave", leaveAngryIzzy);
 		return;
 	}
 	//Camp Meeting – Was welcome tall, but not short yet!
@@ -226,9 +239,13 @@ public function isabellaGreeting():void {
 			}
 		}
 	}
-	choices("Talk", talkWithIsabella, "Drink", nomOnMommaIzzysTits, "Get Licked", suck, "Fight 4 Rape", fightIsabella, "Offer Oral", volunteerToSlurpCowCunt,
-		"", null, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
-	//outputText("ISABELLA HAS BROKEN.  PLEASE TELL FENOXO.", true);
+	menu();
+	addButton(0, "Talk", talkWithIsabella);
+	addButton(1, "Drink", nomOnMommaIzzysTits);
+	addButton(2, "Get Licked", suck);
+	addButton(3, "Fight 4 Rape", fightIsabella);
+	addButton(4, "Offer Oral", volunteerToSlurpCowCunt);
+	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 
 private function isabellaGreetingFirstTime():void {
@@ -665,7 +682,9 @@ public function volunteerToSlurpCowCunt():void {
 		if (!isabellaAccent()) outputText("Seeing the ardent desire your sexual service has so visibly inspired in your body - in your slick, ready cunt and erect nipples - the cow-girl smiles slightly, and asks, \"<i>Perhaps you would like me to return the favor?  It seems only fair...</i>\"");
 		else outputText("Seeing the ardent desire your sexual service has so visibly inspired in your body - in your slick, ready cunt and erect nipples - the cow-girl smiles slightly, and asks, \"<i>Perhaps you vould like me to return ze favor?  It seems only fair...</i>\"");
 		//[Leave] [Get Cowlicked]
-		simpleChoices("Get Licked", isabellaFollowerScene.receiveAllTheCowTOngues, "Leave", camp.returnToCampUseOneHour, "", null, "", null, "", null);
+		menu();
+		addButton(0, "Get Licked", isabellaFollowerScene.receiveAllTheCowTOngues);
+		addButton(14, "Leave", camp.returnToCampUseOneHour);
 	}
 }
 
@@ -1027,10 +1046,6 @@ public function defeatIsabella():void {
 	outputText("</i>\"  ", false);
 	if (monster.HP < 1) outputText("She acts so haughty, but she can't hide how her nipples are tenting her sheer top.", false);
 	else outputText("She acts like all she needs is a milking, but you can smell the dampness she's trickling from 'down under'.", false);
-	if (player.lust < 33) {
-		combat.cleanupAfterCombat();
-		return;
-	}
 	/*
 	2962	victoryLactation69()
 	2963	PCVictoryOnIzmaButtsex()
@@ -1038,6 +1053,20 @@ public function defeatIsabella():void {
 	2965	tooBigVictoryTittyFuckingFuntimesWithMilk()
 	2966	vaginalProdNPokeIsabella()
 	2967	tinyVictoryTittyFuckingFuntimesWithMilk()*/
+	menu();
+	addDisabledButton(0, "Lactation69");
+	addDisabledButton(1, "Buttsex");
+	addDisabledButton(2, "Sixty-Nine");
+	addDisabledButton(3, "Vaginal");
+	addDisabledButton(4, "Big Titfuck");
+	addDisabledButton(5, "Small Titfuck");
+	
+	addButton(14, "Leave", combat.cleanupAfterCombat);
+	
+	if (player.lust < 33) {
+		return;
+	}
+	
 	var lactation:Function = null;
 	if (player.biggestLactation() >= 1) lactation = victoryLactation69;
 	var buttsex:Function = null;
@@ -1052,8 +1081,12 @@ public function defeatIsabella():void {
 		if (player.cockArea(player.biggestCockIndex()) > 70 && player.lust >= 33) bigTitFuck = tooBigVictoryTittyFuckingFuntimesWithMilk;
 		if (player.cocks[player.shortestCockIndex()].cockLength < 9 && player.lust >= 33) smallTitFuck = tinyVictoryTittyFuckingFuntimesWithMilk;
 	}
-	choices("Lactation69", lactation, "Buttsex", buttsex, "Sixty-Nine", sixtyNine, "Vaginal", vaginalSex, "Big Titfuck", bigTitFuck,
-		"Small Titfuck", smallTitFuck, "", null, "", null, "", null, "Leave", combat.cleanupAfterCombat);
+	addButton(0, "Lactation69", lactation);
+	addButton(1, "Buttsex", buttsex);
+	addButton(2, "Sixty-Nine", sixtyNine);
+	addButton(3, "Vaginal", vaginalSex);
+	addButton(4, "Big Titfuck", bigTitFuck);
+	addButton(5, "Small Titfuck", smallTitFuck);
 }
 //[LACTATION 69]
 public function victoryLactation69():void {

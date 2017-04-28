@@ -126,7 +126,9 @@ public function shouldraGreeting():void {
 			if (flags[kFLAGS.TIMES_BEATEN_SHOULDRA] == 3) outputText("You can't say you saw that coming.  It seems she has offered to forego the fight in lieu of sexings.  ", false);
 			outputText("Would you like to accept her offer, or do you want to fight her regardless?", false);
 			//Now back to the good part!
-			simpleChoices("Accept", yankeeEchoPapa, "Fight", novemberAlphaHotel, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Accept", yankeeEchoPapa);
+			addButton(1, "Fight", novemberAlphaHotel);
 		}
 		else {
 			//FIGHT!
@@ -174,12 +176,13 @@ internal function defeatDannyPhantom():void {
 		//([if first time]
 		if (flags[kFLAGS.TIMES_POSSESSED_BY_SHOULDRA] < 1) {
 			outputText("What does she mean, \"<i>let me in?</i>\" Do you want to find out?", false);
-			doYesNo(littlePigLittlePigLetMeIn,noSlimingSlimer);
 		}
 		else {
 			outputText("What do you do?", false);
-			simpleChoices("Let Her In", littlePigLittlePigLetMeIn, "Deny", noSlimingSlimer, "", null, "", null, "", null);
 		}
+		menu();
+		addButton(0, "Let Her In", littlePigLittlePigLetMeIn);
+		addButton(1, "Deny", noSlimingSlimer);
 	}
 	flags[kFLAGS.TIMES_BEATEN_SHOULDRA]++;
 }
@@ -215,12 +218,9 @@ private function littlePigLittlePigLetMeIn():void {
 	if (flags[kFLAGS.TIMES_POSSESSED_BY_SHOULDRA] == 0) outputText("Wait... WHAT!?  Did you just let some sort of... g-... g-... g-... G-... G-... GHOOOOOST possess you?", false);
 	outputText("  \"<i>D-Damn,</i>\" she sighs, her voice wavering from her lust build-up, \"<i>Gotta get used to all of this " + player.skinFurScales() + "...</i>\"  You adjust the best you can to the realization that you are sharing your body with a spirit, then turn your attentions to her. You telepathically ask her if she has anything in particular in mind for relieving her of her arousal. She pulses back a 'hmm' at you, indicating she will allow you to decide her fate.\n\n", false);
 	
+	flags[kFLAGS.TIMES_POSSESSED_BY_SHOULDRA]++;
 	//CHOICES HURRAH
-	var lake:Function = null;
-	if (player.gender > 0 && ((player.hasStatusEffect(StatusEffects.BoatDiscovery) && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0) || flags[kFLAGS.TIMES_MET_OOZE] > 0)) {
-		outputText("You could take her to the lake to find someone to play with...\n\n", false);
-		lake = nowOnVickiLake;
-	}
+	menu();
 	var gender:Function = null;
 	//Genderless Scene
 	if (player.gender == 0) gender = genderlessGhostBuster;
@@ -228,8 +228,14 @@ private function littlePigLittlePigLetMeIn():void {
 	else if (player.gender == 2) gender = ghostGinaWinSexings;
 	else if (player.gender == 3) gender = hermaphroditeGhostsCumEctoplasm;
 	
-	flags[kFLAGS.TIMES_POSSESSED_BY_SHOULDRA]++;
-	simpleChoices("Sex Here", gender, "Lake", lake, "", null, "", null, "", null);
+	addButton(0, "Sex Here", gender);
+	
+	if (player.gender > 0 && ((player.hasStatusEffect(StatusEffects.BoatDiscovery) && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0) || flags[kFLAGS.TIMES_MET_OOZE] > 0)) {
+		outputText("You could take her to the lake to find someone to play with...\n\n", false);
+		addButton(1, "Lake", nowOnVickiLake);
+	} else {
+		addDisabledButton(1, "Lake");
+	}
 }
 //Lake Victory Scenes
 private function nowOnVickiLake():void {
@@ -242,17 +248,18 @@ private function nowOnVickiLake():void {
 	
 	//SHARK-GIRL - REQUIRES BOAT AND MET SHARKGIRL
 	//SLIME - REQUIRES MET SLIME
-	var shark:Function = null;
-	if (player.hasStatusEffect(StatusEffects.BoatDiscovery) && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0)
-		shark = sharkbustersVictory;
-	var ooze:Function = null;
-	if (flags[kFLAGS.TIMES_MET_OOZE] > 0) ooze = ghostGooGurlzDuckfaces;
-	if (ooze != null && shark != null) {
-		outputText("You recall the experiences of both the slime and the shark girl. Which encounter would you wish to seek out?", false);
-		simpleChoices("Shark", shark, "Ooze", ooze, "", null, "", null, "", null);
+	outputText("Which encounter would you wish to seek out?", false);
+	menu();
+	if (player.hasStatusEffect(StatusEffects.BoatDiscovery) && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0) {
+		addButton(0, "Shark", sharkbustersVictory);
+	} else {
+		addDisabledButton(0, "Shark");
 	}
-	else if (ooze != null) doNext(ooze);
-	else doNext(shark);
+	if (flags[kFLAGS.TIMES_MET_OOZE] > 0) {
+		addButton(1, "Ooze", ghostGooGurlzDuckfaces);
+	} else {
+		addDisabledButton(1, "Ooze");
+	}
 }
 		
 //Shark Girl x Ghost Girl - Introduction
@@ -267,14 +274,17 @@ private function sharkbustersVictory():void {
 	outputText(".  Confused, the shark girl stands stiffly, arms flailing about. The corrupted creature's confusion only heightens when, on telepathic command, the ghost-girl's form suddenly substantiates... in your mouth. Taking the form of a serpent, the ghost lances across the bridge of lips, zipping down the shark girl's throat before she can even draw a surprised breath. You gently break the embrace and back off while the two girls begin their internal battle. After long moments of gasping, head-grasping, and teeth-gnashing, the shark girl quiets and looks up into your face. The formerly red eyes now shine with a pale yellow light, the same glow you previously housed. She smiles and nods, signifying the ghost-girl's successful dominance of the body. You stand patiently while she gets used to her new host, gray hands roaming over the alien dermal denticles that make up her skin. You notice she lingers for a long while at the groin. The ghost girl veritably purrs when she inserts a probing finger into the shark girl's snatch to find cilia-like structures wriggling inside it. With her analysis complete, the ghost girl returns the shark's gaze to you. \"<i>Well, we COULD just fuck,</i>\" she begins, \"<i>but let me make this a bit more interesting...</i>\"\n\n", false);
 	
 	outputText("She muses over her choices for several moments, snapping her fingers when she appears to find a good one. \"<i>Oh, this will be fun,</i>\" she purrs, then begins casting the archaic spell. A short way into the chant, however, the ghost-girl's voice wavers, and she falls to a kneel. You figure the shark girl decided her mind was not completely taken yet, but that never stops the ghost, whose voice hardens as she forces the rest of the words out of her mouth, ending the last word with an uncomfortable groan. As soon as her concentration returns to her, she mentally cows the shark girl back into submission, then stands, brushes herself off, and shrugs at you. You return the gesture, then move forward to check the results of the spell.", false);
-	//(If hermaphrodite: 
-	if (player.hasCock() && player.hasVagina()) {
-		outputText("Which gender would you like to focus on?", false);
-		//male / female)
-		simpleChoices("Male", ghostIzmaPenis, "Female", sharkyEctoginas, "", null, "", null, "", null);
+	menu();
+	if (player.hasCock()) {
+		addButton(0, "Use Cock", ghostIzmaPenis);
+	} else {
+		addDisabledButton(0, "Use Cock");
 	}
-	else if (player.hasVagina()) doNext(sharkyEctoginas);
-	else if (player.hasCock()) doNext(ghostIzmaPenis);
+	if (player.hasVagina()) {
+		addButton(1, "Use Vagina", sharkyEctoginas);
+	} else {
+		addDisabledButton(1, "Use Vagina");
+	}
 }
 
 //Shark Girl x Ghost Girl - Vagina Scene (Giantess)
@@ -599,7 +609,9 @@ private function penisLossThatIsntALoss():void {
 		if (player.cockTotal() > 1) outputText("s", false);
 		outputText(" while swaying her hips to and fro.  Both of her hands get to work on rubbing your ever-growing testicles, but two hands can't cover the growing amount of space necessary for effective stimulation.  She shrugs, content with patting, tickling, and squeezing the skin she can reach.  A massive churning begins in your gargantuan cumsack, a movement that actually shakes the ground.  Both of you knows what that signifies, the ghost girl going so far as to disengage from her feverish oral to stare longingly at you.  It seems you hold the key to sating her lust or denying her the orgasm she so craves; what do you do?", false);
 		
-		simpleChoices("LetHerCum", letShouldraIn, "KeepHerOut", kickShouldraOut, "", null, "", null, "", null);
+		menu();
+		addButton(0, "LetHerCum", letShouldraIn);
+		addButton(1, "KeepHerOut", kickShouldraOut);
 		return;
 	}
 	outputText("\n\n", false);
@@ -797,7 +809,9 @@ private function hermaphroditeGhostsCumEctoplasm():void {
 		if (player.cockTotal() > 1) outputText("s", false);
 		outputText(" while swaying her hips to and fro.  Both of her hands get to work on rubbing your ever-growing testicles, but two hands can't cover the growing amount of space necessary for effective stimulation.  She shrugs, content with patting, tickling, and squeezing the skin she can reach.  A massive churning begins in your gargantuan cumsack, a movement that actually shakes the ground.  Both of you knows what that signifies, the ghost girl going so far as to disengage from her feverish oral to stare longingly at you.  It seems you hold the key to sating her lust or denying her the orgasm she so craves; what do you do?", false);
 		
-		simpleChoices("LetHerCum", letShouldraIn, "KeepHerOut", kickShouldraOut, "", null, "", null, "", null);
+		menu();
+		addButton(0, "LetHerCum", letShouldraIn);
+		addButton(1, "KeepHerOut", kickShouldraOut);
 		return;
 	}
 	outputText("\n\n", false);

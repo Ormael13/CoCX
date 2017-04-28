@@ -90,7 +90,7 @@ package classes.Scenes.Areas.Forest
 				doNext(createCallBackFunction(followTheWillOWisp, true));
 			}//PC did NOT see through glamour
 			//With Religious BG:
-			else if (player.findPerk(PerkLib.HistoryReligious) >= 0) {
+			else if (player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.EnlightenedNinetails) >= 0 || player.findPerk(PerkLib.CorruptedNinetails) >= 0) {
 				outputText("The instant she touches you, she recoils with a yelp, a brilliant flash temporarily blinding you both.\n\n");
 				outputText("\"<i>Ow, ow, ow!</i>\"\n\n");
 				outputText("When the spots clear from your eyes, the kitsune's glamour has been dispelled, revealing her for what she truly is.  A pair of large triangular fox ears poke up from her ");
@@ -107,7 +107,8 @@ package classes.Scenes.Areas.Forest
 			else {
 				outputText("Her touch sends involuntary tingles down your spine, and you are drawn ever deeper into her eyes.  She trails a finger along your chin, slipping away from you and beckoning for you to follow her.  Your " + player.legs() + " move with a mind of their own, dragging you along after her as she leads you down a winding path into the darkness.");
 				// -> Go to "She leads you deeper and deeper into..."
-				doNext(createCallBackFunction2(mansion,true, true));
+				menu();
+				addButton(0, "Next", mansion,true, true);
 			}
 		}
 
@@ -129,7 +130,9 @@ package classes.Scenes.Areas.Forest
 			if (player.hasKeyItem("Traveler's Guide") >= 0) {
 				outputText("\n\nYour mind is jogged out of its haze when you remember a note from the Traveler's Guide.  It warned about mysterious flames in the forest that lead hapless adventurers astray.  You hesitate now, wondering what to do.");
 				//[Turn Back] [Follow] //automatically follow without traveler's guide.
-				simpleChoices("Turn Back", turnBackFromWillOWisp, "Follow", followTheWillOWisp, "", null, "", null, "", null);
+				menu();
+				addButton(0, "Turn Back", turnBackFromWillOWisp);
+				addButton(1, "Follow", followTheWillOWisp);
 			}
 			else doNext(followTheWillOWisp);
 		}
@@ -174,8 +177,9 @@ package classes.Scenes.Areas.Forest
 				outputText("How did she get behind you so quickly?  You were staring at her the entire time!  Glancing quickly over your shoulder, you confirm that this is not a case of twins, but when you turn to face her, she has disappeared once again!\n\n");
 				outputText("\"<i>Over here, silly~</i>\" she calls to you with a mischievous tone, beckoning to you as you whip around to face her voice.  \"<i>Don't be shy, I don't bite...  often...</i>\"\n\n");
 				outputText("Her tone is innocuous enough, but her mannerisms are a little disconcerting, somehow.  What are you going to do?");
-				if (!getGame().inCombat) simpleChoices("Fight", fightSomeKitsunes, "Talk", talkAfterResistingKitsunellusion, "", null, "", null, "", null);
-				else simpleChoices("Fight", fightSomeKitsunes, "Talk", talkAfterResistingKitsunellusion, "", null, "", null, "", null);
+				menu();
+				addButton(0, "Fight", fightSomeKitsunes);
+				addButton(1, "Talk", talkAfterResistingKitsunellusion);
 			}
 		}
 
@@ -208,7 +212,9 @@ package classes.Scenes.Areas.Forest
 			outputText("Self-preservation battles with curiosity " + ((player.lust > 50) ? "and lust " : "" ) + "as you consider her offer, " + ((player.lib < 50) ? "weighing your chances against the possible dangers." : "eying the voluptuous curves that fill out her robes."));
 
 			//[Follow { mansion(willing = true) }] [Leave]
-			simpleChoices("Follow", createCallBackFunction2(mansion,true, false), "", null, "", null, "", null, "Leave", createCallBackFunction(leaveKitsune,true));
+			menu();
+			addButton(0, "Follow", mansion, true, false);
+			addButton(14, "Leave", leaveKitsune, true);
 		}
 
 //[Leave] (C)
@@ -274,7 +280,8 @@ package classes.Scenes.Areas.Forest
 			outputText("The three ladies close in around you, running their hands over your body and giggling lightly.  You find yourself practically floating among their many tails, drunk on the promise of pleasure as they lead you through the foyer.  They sit you down in front of a long table with a spectacularly opulent spread, and before long you are having your fill of delicacies the likes of which you never dared to dream about.\n\n");
 			outputText("Your cup never remains empty for long, as one of the sisters is always quick to arrive with a fresh decanter.  The strong alcohol burns your throat as it goes down, and it does not take much before your head is swimming.  You have grown so tipsy by now that you don't even register as the girls usher you out of the dining room, only noticing your change of scenery as you feel yourself being pulled down into a warm pool of water.\n\n");
 			//next
-			doNext(createCallBackFunction2(nonTentaclePCMansion,willing));
+			menu();
+			addButton(0, "Next", nonTentaclePCMansion, willing);
 		}
 
 //NON-TENTACLE PC SCENES:
@@ -310,8 +317,9 @@ package classes.Scenes.Areas.Forest
 				outputText("<b>How do you respond?</b>");
 				// display choices:
 				//["Let Her" ] ["Shove Her" ]
-				simpleChoices("Let Her", createCallBackFunction(kitSuneLetHerMansion,willing),
-						"Shove Her", createCallBackFunction(kitsuneShoveHerMansion, willing), "", null, "", null, "", null);
+				menu();
+				addButton(0, "Let Her", kitSuneLetHerMansion, willing);
+				addButton(1, "Shove Her", kitsuneShoveHerMansion, willing);
 			}
 			else {
 				doNext(createCallBackFunction(kitSuneLetHerMansion,true));
@@ -498,8 +506,9 @@ package classes.Scenes.Areas.Forest
 				outputText("<b>How do you respond?</b>");
 				// display choices:
 				//["Let Her" = letHer() ] ["Shove Her" = shoveHer() ]
-				simpleChoices("Let Her", createCallBackFunction(kitsunesGenderlessLetHer, willing),
-						"Shove Her", createCallBackFunction(kitsunesGenderlessShoverHer, willing), "", null, "", null, "", null);
+				menu();
+				addButton(0, "Let Her", kitsunesGenderlessLetHer, willing);
+				addButton(1, "Shove Her", kitsunesGenderlessShoverHer, willing);
 			}
 			else {
 				doNext(createCallBackFunction(kitsunesGenderlessLetHer, true));

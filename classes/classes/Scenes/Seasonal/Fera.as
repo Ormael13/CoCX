@@ -20,27 +20,26 @@
 			if (flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE] > 0) outputText("  An old, haunting memory surfaces, and you realizes this seems... familiar.  Did you find this last year?  Yes... it could have been this very same pumpkin...");
 			outputText("\n\nWhile startled by the vegetation's placement, it seems harmless enough.");
 			outputText("\n\nYou advance cautiously, extremely familiar with the traps and pitfalls that all-too-often prevail in this world.  The pumpkin's rind is bright orange, ripe and seemingly ready to bulge out.  The vines are thick, dark green, and reflective, partly thanks to the oozing moisture that drips from them to the floor.  After closing, it becomes clear that it isn't a coating of dew on the pumpkin but thick, viscous slime instead.  The clear, syrupy ooze begins to drip from the vines even as it rolls down the pumpkin, seeping out of the plant's skin in fat, heavy rivulets.");
-			var fuck:Function = null;
-			var mount:Function = null;
+			menu();
+			addDisabledButton(0, "Fuck It");
+			addDisabledButton(1, "Mount It");
 			if (player.hasCock()) {
 				outputText("\n\nOne of the many indentations that mar the sphere's circumference seems deeper, darker than the others.  You lean a little closer, for a better look, and the shadowed fold ripples, then undulates, yawning wider and wider to reveal whole new shades of inky blackness.  It squelches, and a wide streamer of slime oozes out to slide down the side of the rind.  The puddle below the obviously tainted gord deepens with this new addition even as the wide-open rent widens.  A sweet, fruity smell rises from the opening, splattering out with a fresh wave of goop. This time, the passed slime leaves something different behind.\n\nWhere once the pumpkin had a midnight-black crevasse, it now has a fleshy, purplish gash.  The slime it exudes is more a fragrant nectar.  The rind around the opening appears cushy, and soft.  Best of all, the interior is as pink as any pussy you've ever seen, and as wet as a succubus's snatch.  You take a deep breath of the fruit's female musk and find yourself wondering: should you fuck it?");
-				fuck = pumpkinFuck;
+				addButton(0, "Fuck It", pumpkinFuck);
 			}
 			/* UNUSED DUE TO FEN LAZINESS {PC has tits}{NIPNUMBER} of the corrupted growth's vines rise up, slowly waving, snake-like in the air.  As if hypnotized, they lazily bob back and forth, drawing a few inches closer at the culmination of each movement.  You ready your [weapon], reading to defend yourself, but the slimy green tentacles pause at the new development, their tips opening to reveal plush green lips and slobbery purple tongues.  They lick at their lips, hungrily watching your {allChest] and waiting, biding their time.  They seem hungry for tits, and at the sight you feel your burgeoning milk readying to let down.  You could feed the plant, if you want to.  The idea is oddly compelling.  Do you?*/
 			//Chick sauce
 			if (player.hasVagina()) {
 				outputText("\n\nThe stem of the pumpkin is long and proud, as well as knotted, barbed, ribbed, and flared like someone crafted the world's most perverted dildo to simultaneously resemble every type of cock in existence.  The tip bubbles constantly with slime like pre-cum oozing out of an erect phallus.");
 				outputText("\n\nAs you gaze upon the stem, you can see it twitching like an actual penis and the aroma that comes from it is as enticing as what any incubus could produce.  You take a deep breath of the fruit's musk and find yourself wondering: should you mount it?");
-				mount = mountPumpkin;
+				addButton(1, "Mount It", mountPumpkin);
 			}
-			if (player.gender == 3) outputText("\n\nSo many choices, so little time.");
+			if (player.isHerm()) outputText("\n\nSo many choices, so little time.");
 			//If PC has neither
-			if (player.gender == 0) {
+			if (player.isGenderless()) {
 				outputText("\n\nOdd as it is, it doesn't seem to react as you look it over.  You avoid it, for now.");
-				doNext(camp.returnToCampUseOneHour);
 			}
-			simpleChoices("Fuck It", fuck, "Mount It", mount, "", null, "", null, "No Way", camp.returnToCampUseOneHour);
-			//addButton(3, "Smash It", pumpkinSmash);
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 
 		//Unfinished scene.
@@ -473,7 +472,8 @@
 			menu();
 			addButton(0,"Gape",gapeMePleaseFera);
 			addButton(1,"Tight",tightLikeAToigar);
-			if (!player.hasCock()) addButton(2,"Dick",growADickForFera);
+			if (!player.hasCock()) addButton(2, "Dick", growADickForFera);
+			else addDisabledButton(2, "Dick", "You already have it.");
 		}
 
 		//Gape
@@ -607,6 +607,7 @@
 			player.createCock();
 			player.cocks[0].cockLength = 10;
 			player.cocks[0].cockThickness = 2.5;
+			if (rand(2) == 0) player.cocks[0].cockType = CockTypesEnum.TENTACLE;
 			//Add five corruption.
 			player.createPerk(PerkLib.FerasBoonSeeder,0,0,0,0);
 			menu();

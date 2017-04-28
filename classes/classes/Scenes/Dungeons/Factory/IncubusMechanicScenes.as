@@ -45,11 +45,12 @@ package classes.Scenes.Dungeons.Factory
 			spriteSelect(30);
 			if (flags[kFLAGS.FACTORY_INCUBUS_BRIBED] > 0) {
 				outputText("\n\nThe incubus mechanic is here, thumbing through a hentai comic and laughing to himself at the absurdity of it.  That doesn't stop him from stroking his half-hard member the whole time...", false);
+				// no menu reset - you can just leave him alone
 				addButton(0, "Fight", doFightIncubus);
 			}
 			else {
-				menu();
 				outputText("\n\nA demonic mechanic lounges against the hot machinery, unperturbed by the high temperatures of the room.  He wears cut-off denim overalls, stained with grease in a few places.  They don't seem to be in good repair, and have a fair-sized hole at his groin, where a floppy foot-long member hangs free.  His skin is light purple and unblemished, as you would expect from a sexual demon.  He has a rugged handsome face and black hair tied back in a simple ponytail.  Two large curving horns protrude from his forehead, curving back along his skull and giving him a dangerous appearance.  A narrow goatee grows from his chin, about 3 inches long and braided skillfully.  He looks up and smiles, amused at your appearance.", false);
+				menu();
 				addButton(0, "Fight", doFightIncubus);
 				addButton(1, "Talk", talkIncubus);
 			}
@@ -59,11 +60,15 @@ package classes.Scenes.Dungeons.Factory
 			spriteSelect(30);
 			if (player.hasKeyItem("Hentai Comic") >= 0) {
 				outputText("The incubus speaks to you with calm deep voice, \"<i>And so the insect, heedless of it's path, stumbled directly into the spider's web.  Tiny insect... wait, what is that book you're carrying?  Is that hentai?  It IS!  Let me offer you a deal – I'm not really hungry or interested in fighting. So if you hand over the comic, I'll happily ignore your presence here. Though, I guess you could also just submit. Then I could put you to work and still get the comic.</i>\"", true);
-				simpleChoices("Fight", doFightIncubus, "Submit", doSubmitIncubus, "Trade", doTradeIncubus, "", null, "", null);
-			}
-			else {
+				menu();
+				addButton(0, "Fight", doFightIncubus);
+				addButton(1, "Submit", doSubmitIncubus);
+				addButton(2, "Trade", doTradeIncubus);
+			} else {
 				outputText("The incubus speaks to you with calm, deep voice, \"<i>And so the insect, unaware of its path, stumbles directly into the spider's web.  Tiny insect, you have little to offer me, but everything to offer our facility.  Why don't you come along quietly?</i>\"", true);
-				simpleChoices("Fight", doFightIncubus, "Submit", doSubmitIncubus, "", null, "", null, "", null);
+				menu();
+				addButton(0, "Fight", doFightIncubus);
+				addButton(1, "Submit", doSubmitIncubus);
 			}
 		}
 		

@@ -496,12 +496,20 @@ internal function defeatIzma():void {
 		else outputText("Izma falls into the sand in an exaggerated fashion.  \"<i>Oh no!  I seem to have lost!  Please don't ravish me again!</i>\" she proclaims loudly as she undresses, her bad acting almost making you laugh your ass off.\n\n", false);
 	}
 	outputText("Which part of your body will you claim her with?", false);
-	var penis:Function = null;
-	if (player.hasCock()) penis = victoryPenisIzma;
-	var vag:Function = null;
-	if (player.hasVagina()) vag = useVagooOnIzmaWin;
 	//[use penis][use vag][use ass][Leave]
-	simpleChoices("Use Penis", penis, "Use Vagina", vag, "Use Ass", takeItInZeButtVictoryLikeFromIzma, "", null, "Leave", leaveIzmaVictoryTease);
+	menu();
+	if (player.hasCock()) {
+		addButton(0, "Use Penis", victoryPenisIzma);
+	} else {
+		addDisabledButton(0, "Use Penis");
+	}
+	if (player.hasVagina()) {
+		addButton(1, "Use Vagina", useVagooOnIzmaWin);
+	} else {
+		addDisabledButton(1, "Use Vagina");
+	}
+	addButton(2, "Use Ass", takeItInZeButtVictoryLikeFromIzma);
+	addButton(14, "Leave", leaveIzmaVictoryTease);
 }
 
 
@@ -1015,7 +1023,9 @@ private function leaveIzmaVictoryTease():void {
 private function victorzChoice():void {
 	outputText("Izma looks at you, panting from the sex.  \"<i>S-so... that was good... want your reward now?</i>\" she asks, holding the tigershark tooth out to you.  You stare at it, thinking.  Do you want another one of those, or do you want something else?", false);
 	//[Tooth][Gloves]
-	simpleChoices("Tooth", chooseIzmaTooth, "Gloves", chooseIzmaGloves, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Tooth", chooseIzmaTooth);
+	addButton(1, "Gloves", chooseIzmaGloves);
 }
 //[Tooth]
 private function chooseIzmaTooth():void {
@@ -1048,7 +1058,9 @@ private function chooseYourIzmaWeapon():void {
 	else if (player.gender == 2) nonFightIzmaSmexCUNTPUSSYSNATCHQUIM();
 	else {
 		outputText("Which of your genitals will you focus on?", true);
-		simpleChoices("Male", nonFightIzmaSmexPAINUS, "Female", nonFightIzmaSmexCUNTPUSSYSNATCHQUIM, "", null, "", null, "", null);
+		menu();
+		addButton(0, "Male", nonFightIzmaSmexPAINUS);
+		addButton(1, "Female", nonFightIzmaSmexCUNTPUSSYSNATCHQUIM);
 	}
 }
 //[no-fight Sex: use penus]
@@ -1349,7 +1361,11 @@ private function izmaLakeTurnedDownCampSex():void {
 
 	outputText("The tigershark grins right back at you, carefully undoing her skirt and letting her impressive, rapidly-growing erection free.  \"<i>Sounds great to me, lover.  So, what are you in the mood for?  A little equal time?  Exerting your place as alpha?</i>\"  She gives you a very wicked grin.  \"<i>Or... do you want to let your beta have her wicked way with you, hmm?</i>\"  She growls lustfully at the thought.", false);
 	//[Equals] [Dominate] [Submit]
-	simpleChoices("Equals", izmaLakeSexAsEquals, "Dominate", izmaLakeDominate, "Submit", submitToLakeIzma, "", null, "Back", meetIzmaAtLake);
+	menu();
+	addButton(0, "Equals", izmaLakeSexAsEquals);
+	addButton(1, "Dominate", izmaLakeDominate);
+	addButton(2, "Submit", submitToLakeIzma);
+	addButton(14, "Back", meetIzmaAtLake);
 }
 
 //[Equals]
@@ -1486,7 +1502,9 @@ private function noWankingForIzmaRadarSaysSo():void {
 	//if (x < 0) cockIndex = 0;
 	outputText("Opting not to jerk her member off, you continue your gyrations against the tigershark's twat, brutally slamming the head of your cock against the feelers in her pussy and battering them around like tree branches in a wind storm.  Izma, sensing that you will not be giving her member the attention it \"deserves\", reaches down with one hand and takes hold of her cock, jerking it impetuously as she struggles to pleasure herself in between thrusts of your cock.  Raising an eyebrow, you contemplate whether she should be allowed to just start masturbating without permission...");
 	//[Remove her hands]    [Let her masturbate]
-	simpleChoices("Stop Her", noWankingForIzma, "LetHerWank", letIzmaWankLikeABitch, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Stop Her", noWankingForIzma);
+	addButton(1, "LetHerWank", letIzmaWankLikeABitch);
 }
 //[Let her masturbate]
 private function letIzmaWankLikeABitch():void {
@@ -1862,8 +1880,9 @@ private function followerIzmaMountsPC(lastHalf:Boolean = false):void {
 		if (flags[kFLAGS.IZMA_NO_COCK] == 0) {
 			outputText("  Still, the sight and sensation of her pre-cum-dribbling cock slapping against your belly gives you an idea.  ");
 			outputText("You could reach up, grab her meaty member and jerk it off... or you can just enjoy the sex as is.  What will you do?");
-			simpleChoices("Jerk It", createCallBackFunction(followerIzmaMountsPC, true),
-					"Nope", RadarIzmaLeaveHerWangUnWingWanged, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Jerk It", followerIzmaMountsPC, true);
+			addButton(1, "Nope", RadarIzmaLeaveHerWangUnWingWanged);
 			return;
 			//outputText("You remove your hand from her mark and instead place it squarely on her cock, wrapping your fingers around its two-inch-thick girth.\n\n", false);
 		}
@@ -2106,7 +2125,9 @@ private function followerIzmaTakesItInVagoo():void {
 	//RADAR XPACK FORK
 	if (flags[kFLAGS.IZMA_NO_COCK] == 0) {
 		outputText(".");
-		simpleChoices("Let Her", radarIzmaXPackLetHer, "Deny Her", radarIzmaXpackDenyHer, "", null, "", null, "", null);
+		menu();
+		addButton(0, "Let Her", radarIzmaXPackLetHer);
+		addButton(1, "Deny Her", radarIzmaXpackDenyHer);
 		return;
 	}
 	outputText(", but decide it's probably better to let her have some 'hands on involvement'.  Instead, you reach up to caress and fondle her breasts, gently tugging and rubbing her stiff nipples and giving them the occasional soft pinch.  The pretty tigershark responds well to your movements, moaning and gasping from pleasure.  She bites her lip, thankfully with her human teeth");
@@ -2174,7 +2195,10 @@ private function wheresItGoing(denied:Boolean = false):void {
 	outputText("you can see long streams of pre dribble down her red cock, and know full well she's close to her limit.  Her cock stands at attention, ready to release its sticky load in your direction.");
 	outputText("\n\nIt seems Izma cannot hold out much longer... where will you direct her orgasm?");
 	//[Your face]   [Your chest]   [Her face]
-	simpleChoices("Your Face", facialWhereItGoesRadarIzmaXpack, "Your Chest", RadarIzmaCumInYourChest, "Her Face", IzmaSelfFacialWheeRadar, "", null, "", null);
+	menu();
+	addButton(0, "Your Face", facialWhereItGoesRadarIzmaXpack);
+	addButton(1, "Your Chest", RadarIzmaCumInYourChest);
+	addButton(2, "Her Face", IzmaSelfFacialWheeRadar);
 }
 //[facial] Scene follows vanilla scripting from Jokester
 private function facialWhereItGoesRadarIzmaXpack():void {
@@ -2379,7 +2403,9 @@ private function talkWivIzma():void {
 		
 		flags[kFLAGS.IZMA_TALK_LEVEL]++;
 		//[Leave] [Flirt]
-		simpleChoices("Flirt", chooseToFlirtWithIzma, "", null, "", null, "", null, "Leave", chooseNotToFlirtWithIzma);
+		menu();
+		addButton(0, "Flirt", chooseToFlirtWithIzma);
+		addButton(14, "Leave", chooseNotToFlirtWithIzma);
 		return;
 	}
 	//[Talk option 5]
@@ -2990,7 +3016,9 @@ private function removeIzmasPenis(forced:Boolean = false):void {
 	}
 	else {
 		outputText("\n\nYou have enough succubi milk already. <b>Do you want to get rid of Izma's penis?</b>");
-		simpleChoices("Remove Dick", izmaDickToggle, "", null, "", null, "", null, "Back", izmaFollowerMenu);
+		menu();
+		addButton(0, "Remove Dick", izmaDickToggle);
+		addButton(14, "Back", izmaFollowerMenu);
 	}
 }
 
@@ -3084,7 +3112,9 @@ private function fuckIzmasPussyDominate():void {
 		outputText("\n\nSpicing up the act, you decide to slide a bit of your goopy body into Izma's asshole, and with a little concentration and focus, being to shape the solidity of your slime until you form a makeshift dildo, customly shaped for her tight little asshole. She moans as her ass is filled with the increasingly hardened mass of your body.  Looking down at your shark morph, you notice her cock is unattended; something that looks rather sad as it depressingly juts against the trunk of the stump you are breeding Izma on.");
 		outputText("Will you tend to her dick?");
 		//[Goo job]    [Leave it, leads to [Spanking scene])
-		simpleChoices("Goo Job", gooJob, "Leave It", radarIzmaSpanking, "", null, "", null, "", null);
+		menu();
+		addButton(0, "Goo Job", gooJob);
+		addButton(1, "Leave It", radarIzmaSpanking);
 	}
 	outputText("\n\n");
 	radarIzmaGasm();
@@ -3188,7 +3218,9 @@ private function radarIzmaAnalDominant():void {
 		outputText("\n\nYou could carry her back to her bedding and tuck her in... or you could just let her sleep it off.");
 		
 		//[Tuck in]   [Leave her]
-		simpleChoices("Tuck In", radarIzmaAnalDomResultTuckIn, "Stay", radarIzmaLeaveHerInTheDirtAfterAnalDom, "", null, "", null, "", null);
+		menu();
+		addButton(0, "Tuck In", radarIzmaAnalDomResultTuckIn);
+		addButton(1, "Stay", radarIzmaLeaveHerInTheDirtAfterAnalDom);
 	}
 	else {
 		//(If PC is genderless, ending: 
@@ -3255,7 +3287,9 @@ private function radarFucksIzmasAss():void {
 		if (y>=0) outputText("s");
 		outputText(".  All too quickly though, your loins ache with the pained vice-grip of orgasm.  As much as you would like to continue dominating Izma, you cannot hold out.  The only choice you have now is where to direct your impending release.");
 		//[Internal, Global option for non-TD and TD scenes]    [External, Non-TD scenes]
-		simpleChoices("Internal", null, "External", null, "", null, "", null, "", null);
+		menu();
+		addDisabledButton(0, "Internal");
+		addDisabledButton(1, "External");
 	}
 	//!Tentacle dick scenes!
 	else {
@@ -3275,7 +3309,9 @@ private function radarFucksIzmasAss():void {
 			else outputText("cocks that need");
 			outputText(" a little loving from her; something that visibly registers on her face as her expression goes wide in shock, her eyes seemingly asking you where THIS one is going next.");
 			//[Dick]    [Blowjob]   
-			simpleChoices("Dick", null, "Blowjob", null, "", null, "", null, "", null);
+			menu();
+			addDisabledButton(0, "Dick");
+			addDisabledButton(1, "Blowjob");
 			return;
 		}
 		//Go to buttsex

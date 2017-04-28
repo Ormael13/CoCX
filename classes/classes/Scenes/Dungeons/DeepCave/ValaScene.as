@@ -657,7 +657,9 @@ package classes.Scenes.Dungeons.DeepCave
 
 			outputText("\"<i>I've been looking forward to this,</i>\" she whispers, flying up to steal a kiss from you, her soft, fey lips leaving a taste of pure, spring rain on the tip of your tongue. Piece by piece, she strips the clothes from your shoulders and hips, leaving warm kisses on your exposed skin with every piece she removes. When your body is laid bare before her, the pixie raises her hands to her own dress. She hesitates to expose the permanent scars the imps left on her, but sighing, she laughs and a sweet wind sweeps through the storeroom. \"<i>Silly to be bashful around you, of all people,</i>\" she chuckles, sliding out of her verdant silk, pulling pins from her bun to let long, violet tresses spill down her shoulders with a shake of her head. She bats her eyes at you over one shoulder and flashes a wry little smile. \"<i>If we can replace every hash mark on my back with one of your visits, I'll switch to backless dresses,</i>\" she teases. Flying over you, she lands her delicate legs and plump, breeder's rear in your lap, wrapping her arms around your shoulders and hugging you tightly. \"<i>So, what's on your mind, hero?</i>\"", false);
 			//[You][Leave]
-			simpleChoices("You",cleansedValaFuckHerBrainsOut,"", null,"", null,"", null,"Leave",kGAMECLASS.telAdre.barTelAdre);
+			menu();
+			addButton(0, "You", cleansedValaFuckHerBrainsOut);
+			addButton(14, "Leave", kGAMECLASS.telAdre.barTelAdre);
 		}
 
 		//[You] 
@@ -801,12 +803,20 @@ package classes.Scenes.Dungeons.DeepCave
 			outputText("You thank Vala for introducing you, but you've really got to be going, you claim. Demons to defeat, maidens to rescue, all that. The large fairy chuckles and gives you a squeeze. \"<i>You're so cute when you're flustered. Don't worry, we're not going to all jump you at once- you'd probably end up like I did! No, I asked my sisters here to help me with a little forest magic. Don't you want to see how fairies masturbate?</i>\" You're a little taken aback by the question, but you nod all the same. \"<i>All right girls, the petals please.</i>\" The cloud of fairies in front of you disperses, each winged vixen scattering to different corners of the room to retrieve hidden flower petals. Each blossom, you note, matches the hair color of the fairy holding it, creating a dizzying array of  hues as they form circles around the two of you. Vala guides you to the bed and gently removes your " + player.armorName + " before instructing you to lie down.\n\n", false);
 			flags[kFLAGS.WEEKLY_FAIRY_ORGY_COUNTDOWN] = 6;
 			//[Herm]
-			if (player.gender == 3) {
+			if (player.isHerm()) {
 				outputText("Vala folds her arms across her breast. \"<i>But which one should we use?</i>\" she ponders. \"<i>I wouldn't advise trying both- your mind wouldn't be able to take it. You'd end up worse than just mind-broken, you'd be a drooling shell. And I'd never do that to my hero,</i>\" she smiles and gives you a wink. \"<i>So, what would you prefer?</i>\"\n\n", false);
-				simpleChoices("Male",faerieOrgyFuckMaleContinue,"Female",faerieOrgyFuckFemaleContinue,"", null,"", null,"", null);
 			}
-			else if (player.gender == 2) doNext(faerieOrgyFuckFemaleContinue);
-			else if (player.gender == 1) doNext(faerieOrgyFuckMaleContinue);
+			menu();
+			if (player.hasCock()) {
+				addButton(0, "Male", faerieOrgyFuckMaleContinue);
+			} else {
+				addDisabledButton(0, "Male", "This scene requires you to have cock.");
+			}
+			if (player.hasVagina()) {
+				addButton(1, "Female", faerieOrgyFuckFemaleContinue);
+			} else {
+				addDisabledButton(0, "Male", "This scene requires you to have vagina.");
+			}
 		}
 			
 		//[Male]

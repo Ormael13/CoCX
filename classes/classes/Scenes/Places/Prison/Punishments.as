@@ -108,10 +108,6 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorPunishmentStockadesFreedom():void
 		{
 			clearOutput();
-			var begEvent:Function = null;
-			var acceptEvent:Function = null;
-			var rejectEvent:Function = null;
-			
 			//Check to see if the player is ready to be released
 			if (player.statusEffectv4(StatusEffects.PrisonCaptorEllyStatus) < 2 + rand(5))
 			{
@@ -121,21 +117,20 @@ package classes.Scenes.Places.Prison
 				return;
 			}
 			outputText("(Placeholder) You are given a chance to be released from the stockades -- all you need do is admit that you deserved to be punished, and apologize for what you did wrong. ",false);
-			begEvent = prisonCaptorPunishmentStockadesFreedomBeg;
-			acceptEvent = prisonCaptorPunishmentStockadesFreedomAccept;
-			rejectEvent = prisonCaptorPunishmentStockadesFreedomReject;
-			
 			//Checks Player "Self Esteem" and "Obedience" to see whether the player will beg for freedom or simply accept it 
-			if (player.esteem > 40 || player.obey < 10)
-			{
-				begEvent = null;
+			outputText("Do you accept your " + prison.prisonCaptor.captorTitle + "'s terms, or do refuse? " + prison.prisonWillCostDescript(15), false);
+			menu();
+			if (player.esteem > 40 || player.obey < 10) {
+				addDisabledButton(0, "Beg");
+			} else {
+				addButton(0, "Beg", prisonCaptorPunishmentStockadesFreedomBeg);
 			}
-			if (player.esteem < 20 && player.obey > 45)
-			{
-				acceptEvent = null;
+			if (player.esteem < 20 && player.obey > 45) {
+				addDisabledButton(1, "Accept");
+			} else {
+				addButton(1, "Accept", prisonCaptorPunishmentStockadesFreedomAccept);
 			}
-			outputText("Do you accept your " + prison.prisonCaptor.captorTitle + "'s terms, or do refuse? " + prison.prisonWillCostDescript(15),false);
-			simpleChoices("Beg",begEvent,"Accept",acceptEvent,"Reject",rejectEvent,"",null,"",null);
+			addButton(2, "Reject", prisonCaptorPunishmentStockadesFreedomReject);
 		}
 		
 		public function prisonCaptorPunishmentStockadesFreedomReject():void
@@ -426,23 +421,20 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorPunishmentConfinementFreedom():void
 		{
 			clearOutput();
-			var begEvent:Function = null;
-			var acceptEvent:Function = null;
-			var rejectEvent:Function = null;
 			outputText("(Placeholder) You are given a chance to be released from the isolation chamber -- all you need do is admit that you deserved to be punished, thank your " + prison.prisonCaptor.captorTitle + " for the lesson, and apologize for what you did wrong. ",false);
-			begEvent = prisonCaptorPunishmentConfinementFreedomBeg;
-			acceptEvent = prisonCaptorPunishmentConfinementFreedomAccept;
-			rejectEvent = prisonCaptorPunishmentConfinementFreedomReject;
-			if (player.esteem > 40 || player.obey < 10)
-			{
-				begEvent = null;
+			outputText("Do accept your " + prison.prisonCaptor.captorTitle + "'s terms, or do you refuse? " + prison.prisonWillCostDescript(15), false);
+			menu();
+			if (player.esteem > 40 || player.obey < 10) {
+				addDisabledButton(0, "Beg");
+			} else {
+				addButton(0, "Beg", prisonCaptorPunishmentConfinementFreedomBeg);
 			}
-			if (player.esteem < 20 && player.obey > 45)
-			{
-				acceptEvent = null;
+			if (player.esteem < 20 && player.obey > 45) {
+				addDisabledButton(1, "Accept");
+			} else {
+				addButton(1, "Accept", prisonCaptorPunishmentConfinementFreedomAccept);
 			}
-			outputText("Do accept your " + prison.prisonCaptor.captorTitle + "'s terms, or do you refuse? " + prison.prisonWillCostDescript(15),false);
-			simpleChoices("Beg",begEvent,"Accept",acceptEvent,"Reject",rejectEvent,"",null,"",null);
+			addButton(2, "Reject", prisonCaptorPunishmentConfinementFreedomReject);
 		}
 		
 		public function prisonCaptorPunishmentConfinementFreedomReject():void

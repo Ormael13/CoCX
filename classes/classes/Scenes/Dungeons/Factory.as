@@ -49,8 +49,10 @@ package classes.Scenes.Dungeons
 			if (flags[kFLAGS.FACTORY_FOUND] < 1) {
 				outputText("\n\n<b>The factory is now accessible from the 'Dungeons' submenu inside 'Places' menu.</b>");
 				flags[kFLAGS.FACTORY_FOUND] = 1
-			}			
-			simpleChoices("Enter", roomLobby, "", null, "", null, "", null, "Leave", exitDungeon);
+			}
+			menu();
+			addButton(0, "Enter", roomLobby);
+			addButton(14, "Leave", exitDungeon);
 		}
 		
 		private function exitDungeon():void {

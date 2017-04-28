@@ -87,7 +87,7 @@ package classes.Scenes.Areas.Swamp
 				if (player.hasVagina()) {
 					addButton(0, "Mount", victoryCowgirlRidingOnSpiderBoi);
 					if (player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") {
-						addButton(3, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
+						addButton(3, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, monster);
 					}
 				}
 				if (player.hasCock()) {

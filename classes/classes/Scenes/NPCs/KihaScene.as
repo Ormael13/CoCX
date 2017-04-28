@@ -144,7 +144,9 @@ private function offerToBuyPassageFromKiha():void {
 	//(Unlocks toll option next encounter)
 	flags[kFLAGS.KIHA_TOLL] = 1;
 	//[Fight] [Leave] - Same results as main fight/leave.
-	simpleChoices("Fight", meetKihaAndFight, "", null, "", null, "", null, "Leave", leaveWhenMeetingAgressiveKiha);
+	menu();
+	addButton(0, "Fight", meetKihaAndFight);
+	addButton(14, "Leave", leaveWhenMeetingAgressiveKiha);
 }
 //[Leave] 
 private function leaveWhenMeetingAgressiveKiha():void {
@@ -860,7 +862,10 @@ private function analRapuzulaKiha():void {
 
 			//if implying that Rathazul used to be an advisor to the queen before the fall, start by spelling his name correctly; else, proceed as normal
 			//[Retribution] [Carnality] [No]
-			simpleChoices("Retribution", retributionArmorIsCoolShit, "Carnality", carnalityArmorIsCoolShitToo, "", null, "", null, "NOPE!", noThankYouSirIDontWantAwesomeArmors);
+			menu();
+			addButton(0, "Retribution", retributionArmorIsCoolShit);
+			addButton(1, "Carnality", carnalityArmorIsCoolShitToo);
+			addButton(4, "NOPE!", noThankYouSirIDontWantAwesomeArmors);
 		}
 
 		//[No]

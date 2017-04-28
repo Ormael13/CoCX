@@ -18,24 +18,21 @@ package classes.Scenes.Dungeons.Factory
 			menu();
 			// demon bad end available
 			if (player.demonScore() >= 4 && player.cor > 75) {
-				outputText("The busty succubus turns, her barely contained breasts jiggling obscenely as she notices you, \"<i>Oh, like hi there ", false);
-				if (player.gender == 1) outputText("stud", false);
-				else outputText("sexy", false);
-				outputText("!</i>\"  She stops, sniffing the air, a curious expression on her face as she slowly circles you, her heals clicking loudly on the floor.  A knowing grin blooms across her face as understanding hits her.\n\n", false); 
+				outputText("The busty succubus turns, her barely contained breasts jiggling obscenely as she notices you, \"<i>Oh, like hi there " + player.mf("stud", "sexy") + "!</i>\"  She stops, sniffing the air, a curious expression on her face as she slowly circles you, her heals clicking loudly on the floor.  A knowing grin blooms across her face as understanding hits her.\n\n", false);
 				outputText("She exclaims, \"<i>Omigawsh!  You're the champion!  Your, like, soul is still there and everything!  But, you're like, completely corrupt an' stuff!  Ya know what'd be fun?  I could fuck you 'til you cum so hard your soul melts out an' you turn into a demon.  Wouldn't that be great?</i>\"\n\n", false);
 				outputText("The secretarial demoness pulls out a file and fiddles with her nails, murmuring, \"<i>I guess if you don't wanna, we could just hook you up in the factory.  What's it gonna be?</i>\"", false);
 				if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] <= 0) {
 					flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
 					outputText("<b>New codex entry unlocked: Succubus!</b>\n\n")
 				}
-				simpleChoices("Fight", doFightSuccubus, "Go Demon", goDemon, "Hook Up", talkSuccubusYes, "", null, "", null);
+				menu();
+				addButton(0, "Fight", doFightSuccubus);
+				addButton(1, "Go Demon", goDemon);
+				addButton(2, "Hook Up", talkSuccubusYes);
 			}
 			//Not recognized
 			else if (player.humanScore() <= 3) {
-				outputText("The busty succubus turns, her barely contained breasts jiggling obscenely as she notices you, \"<i>Oh, like hi there ", false);
-				if (player.gender == 1) outputText("stud", false);
-				else outputText("sexy", false);
-				outputText("!  You haven't seen a confused human about calling itself a champion have you?</i>\"\n\nShe shakes her more-than-ample bosom from side to side as she licks her lips and offers, \"<i>If you do, be sure and bring them back here ok?  We've got their spot all ready for them, but that little prick Zetaz fucked up the pickup.  Tell you what – if you bring me the 'champion' I'll ", false);
+				outputText("The busty succubus turns, her barely contained breasts jiggling obscenely as she notices you, \"<i>Oh, like hi there " + player.mf("stud", "sexy") + "!  You haven't seen a confused human about calling itself a champion have you?</i>\"\n\nShe shakes her more-than-ample bosom from side to side as she licks her lips and offers, \"<i>If you do, be sure and bring them back here ok?  We've got their spot all ready for them, but that little prick Zetaz fucked up the pickup.  Tell you what – if you bring me the 'champion' I'll ", false);
 				if (player.totalCocks() > 0) outputText("give you the blowjob of a lifetime", false);
 				else if (player.hasVagina()) outputText("lick your honeypot 'til you soak my face", false);
 				else outputText("give you a new addition and show you how to use it", false);
@@ -44,18 +41,21 @@ package classes.Scenes.Dungeons.Factory
 					flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
 					outputText("<b>New codex entry unlocked: Succubus!</b>\n\n")
 				}
-				simpleChoices("Fight", doFightSuccubus, "It's Me!", talkSuccubusItsMe, "Leave", getGame().dungeons.factory.roomLobby, "", null, "", null);
+				menu();
+				addButton(0, "Fight", doFightSuccubus);
+				addButton(1, "It's Me!", talkSuccubusItsMe);
+				addButton(2, "Leave", getGame().dungeons.factory.roomLobby);
 			}
 			else {
-				outputText("The busty succubus turns, her barely contained breasts jiggling obscenely as she notices you, \"<i>Oh, like hi there ", false);
-				if (player.gender == 1) outputText("stud", false);
-				else outputText("sexy", false);
-				outputText("!  What's a cute little morsel like you doing by yourself out here?</i>\"", false);
+				outputText("The busty succubus turns, her barely contained breasts jiggling obscenely as she notices you, \"<i>Oh, like hi there " + player.mf("stud", "sexy") + "!  What's a cute little morsel like you doing by yourself out here?</i>\"", false);
 				if (flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] <= 0) {
 					flags[kFLAGS.CODEX_ENTRY_SUCCUBUS] = 1;
 					outputText("<b>New codex entry unlocked: Succubus!</b>\n\n")
 				}
-				simpleChoices("Fight", doFightSuccubus, "Talk", talkSuccubus, "Run", getGame().dungeons.factory.roomLobby, "", null, "", null);
+				menu();
+				addButton(0, "Fight", doFightSuccubus);
+				addButton(1, "Talk", talkSuccubus);
+				addButton(2, "Run", getGame().dungeons.factory.roomLobby);
 			}
 		}
 		
@@ -64,14 +64,18 @@ package classes.Scenes.Dungeons.Factory
 			spriteSelect(55);
 			outputText("\"<i>I suppose I really should thank you for coming down all by your lonesome.  The boss is gonna be sooo happy we found you.  Just think, in an hour or two we can get you strapped in and working with the others,</i>\"  says the secretarial succubus as she saunters over, still sipping her coffee, \"<i>You're so cute!  I tell you what, if you agree to come with me, I'll, like, make sure the experience is pleasurable.</i>\"\n\n", true);
 			outputText("She runs a stocking covered foot up your leg and thigh, almost to your groin.  Giggling, the succubus pulls it away and asks, \"<i>So are you ready and willing?</i>\"", false);
-			simpleChoices("For what?", talkSuccubusForWhat, "Yes", talkSuccubusYes, "No", talkSuccubusNo,"", null,"", null);
-			return;
+			menu();
+			addButton(0, "For what?", talkSuccubusForWhat);
+			addButton(1, "Yes", talkSuccubusYes);
+			addButton(2, "No", talkSuccubusNo);
 		}
 		
 		private function talkSuccubusForWhat():void {
 			spriteSelect(55);
 			outputText("The succubus looks at you with a bemused expression, \"<i>You haven't figured it out yet?  Really?  What do you think we make at this factory, bubble-gum?</i>\" she asks with a cruel smile, \"<i>We take human and once-human champions like you, pump you full of aphrodisiacs, body-altering drugs, and corrupting agents, and then milk you of your tainted fluids continually for the rest of your life!  And don't even start to ask why, I'll tell you – there are still pockets of purity out there that repel cute demons like me.  So the best way to deal with those is just to release a river of drug-filled sex-juice at them.  By the time the area dries off, the locals welcome us with open arms... and spread legs.</i>\"", true);
-			simpleChoices("Sick!", talkSuccubusNo, "Sounds Fun", talkSuccubusYes,"", null,"", null,"", null);
+			menu();
+			addButton(0, "Sick!", talkSuccubusNo);
+			addButton(1, "Sounds Fun", talkSuccubusYes);
 		}
 		
 		private function talkSuccubusItsMe():void {
@@ -308,13 +312,13 @@ package classes.Scenes.Dungeons.Factory
 				if (monster.HP < 1) outputText("Your foe staggers and falls hard on her ass, utterly defeated.  Her bruises and lacerations slowly fade and heal, regenerating with the aid of her demonic powers.  You easily tear through her clothes, leaving only the damaged stockings that gird her legs. It doesn't take much to force her down on her back and straddle her as you disrobe, ready to take your pleasure.\n\n", false);
 				else outputText("Your foe drops to her knees, stuffing three digits into her greedy snatch as arousal overcomes her desire to subdue you.  With great care, you approach your insensible enemy and tear off her clothes, leaving her wearing only the remains of her stockings as you force her down on her back.  As if possessing a will of their own, her legs lewdly spread as you disrobe.\n\n", false);
 				outputText("Her budding clit rises from between her folds, hardening like a tiny three inch dick.\n\n", false);
+				menu();
+				addButton(0, "Scissor", doScissorSuccubus);
 				if (player.biggestLactation() > 1) {
 					outputText("<b>You could scissor with her, or maybe force-feed her some of the milk you've backed up.  Which will it be?</b>", false);
-					simpleChoices("Scissor",doScissorSuccubus,"Force Feed",doForcefeedSuccubus,"", null,"", null,"", null);
-				}
-				//No choices if not lactating...
-				else {
-					doScissorSuccubus();
+					addButton(1, "Force Feed", doForcefeedSuccubus);
+				} else {
+					addDisabledButton(1, "Force Feed");
 				}
 			}
 		}

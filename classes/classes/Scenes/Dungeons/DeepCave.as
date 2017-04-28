@@ -40,7 +40,9 @@ package classes.Scenes.Dungeons
 				outputText("While you explore the deepwoods, you do your best to forge into new, unexplored locations.  While you're pushing away vegetation and slapping at plant-life, you spot a half-overgrown orifice buried in the side of a ravine.  There's a large number of imp-tracks around the cavern's darkened entryway.  Perhaps this is where the imp, Zetaz, makes his lair?  In any event, it's past time you checked back on the portal.  You make a mental note of the cave's location so that you can return when you're ready.");
 				outputText("\n\n<b>You've discovered the location of Zetaz's lair! You can visit anytime from the dungeons menu in Places tab.</b>");
 				flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] = 1
-				simpleChoices("Enter", roomEntrance, "", null, "", null, "", null, "Leave", exitDungeon);
+				menu();
+				addButton(0, "Enter", roomEntrance);
+				addButton(14, "Leave", exitDungeon);
 			}
 			else 
 			{
@@ -87,7 +89,10 @@ package classes.Scenes.Dungeons
 			outputText("Caught, you stand up and ready your " + player.weaponName + ", taking up a defensive stance to ready yourself for whatever new attacks this demon has.  Strangely, he just starts laughing again, and he has to stop to wipe tears from the corners of his eyes before he talks, \"<i>Oh that's rich!  I'm not here to fight you, Champion.  I doubt I'd stand much of a chance anyways.  I heard there were some renegades around this area, so I thought I'd show up to offer my services.  You see, I'm a procurer of strange and rare alchemical solutions.  Of course you beat down everyone before I got here, but I thought I'd stick around and see if some scouts were still around before I high-tailed it out of here.</i>\"\n\n", false);
 			outputText("You stare, blinking your eyes in confusion.  A demon of lust, and he's not interested in fighting or raping you?  He laughs again as he reads your expression and calmly states, \"<i>No, I'm far from your average incubus.  To tell the truth I enjoy a spirited debate or the thrill of discovery over sating my sexual appetite, though of course I do indulge that from time to time.</i>\"\n\n", false);
 			outputText("The strange incubus flashes you a smile that makes you feel a tad uncomfortable before he finally introduces himself, \"<i>The name's Sean, and as you seem to be kicking the living shit out of Lethice's followers and enemies alike, I'd like to be on your side.  So I propose a mutually beneficial agreement – I'll sell you items you can't get anywhere else, and you let me live in this cave.  What do you say?</i>\"\n\n", false);
-			simpleChoices("Deal", seanDeal, "No Deal", seanNoDeal, "Not Now", seanNotNow, "", null, "", null);
+			menu();
+			addButton(0, "Deal", seanDeal);
+			addButton(1, "No Deal", seanNoDeal);
+			addButton(2, "Not Now", seanNotNow);
 		}
 		
 		private function seanDeal():void {
@@ -313,14 +318,17 @@ package classes.Scenes.Dungeons
 		public function fightValaVictory():void {
 			spriteSelect(85);
 			clearOutput();
-			outputText("The fairy girl collapses, well-drilled obedience robbing her limbs of their fight. She squirms to a crouching bow, fully accepting you as her new " + player.mf("Master","Mistress") + ". The warped fae's empty eyes look up at you, her face a mask of rapture as she anxiously awaits her punishment, wagging her butt in the air as lubrication gushes down her thighs. It seems being defeated has excited the broken creature to a breeding frenzy. Her endurance must be incredible to be this frisky after your battle.", false);
+			outputText("The fairy girl collapses, well-drilled obedience robbing her limbs of their fight. She squirms to a crouching bow, fully accepting you as her new " + player.mf("Master", "Mistress") + ". The warped fae's empty eyes look up at you, her face a mask of rapture as she anxiously awaits her punishment, wagging her butt in the air as lubrication gushes down her thighs. It seems being defeated has excited the broken creature to a breeding frenzy. Her endurance must be incredible to be this frisky after your battle.", false);
+			outputText(" What will you do?", false);
 			flags[kFLAGS.TIMES_PC_DEFEATED_VALA]++;
 			//[Fuck] [Leave]
-			if (player.gender > 0) {
-				outputText(" What will you do?", false);
-				simpleChoices("Fuck",vala.valaFightVictoryFuck,"", null,"", null,"", null,"Leave", combat.cleanupAfterCombat);
+			menu();
+			if (!player.isGenderless()) {
+				addButton(0, "Fuck", vala.valaFightVictoryFuck);
+			} else {
+				addDisabledButton(0, "Fuck", "This scene requires you to have genitals.");
 			}
-			else combat.cleanupAfterCombat();
+			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
 		
 		//Imp gang

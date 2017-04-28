@@ -466,11 +466,18 @@ package classes.Scenes.Areas.Lake
 				//increase PC's lust thanks to foreplay
 				dynStats("lus", 30);
 				//player chooses between; penetrate vagina, vibrator vagina, nevermind.  Options as appropriate.
-				var vibe:Function =null;
-				var fuckVag:Function =null;
-				if (player.hasVagina()) vibe = swimsuitVibrators;
-				if (player.hasCock()) fuckVag = plugSwimsuitVag;
-				simpleChoices("FuckHerVag", fuckVag, "Vibrator", vibe, "", null, "", null, "Leave", combat.cleanupAfterCombat);
+				menu();
+				if (player.hasCock()) {
+					addButton(0, "FuckHerVag", plugSwimsuitVag);
+				} else {
+					addDisabledButton(0, "FuckHerVag", "This scene requires you to have cock.");
+				}
+				if (player.hasVagina()) {
+					addButton(1, "Vibrator", swimsuitVibrators);
+				} else {
+					addDisabledButton(1, "Vibrator", "This scene requires you to have vagina.");
+				}
+				addButton(14, "Leave", combat.cleanupAfterCombat);
 				return;
 			}
 			else {

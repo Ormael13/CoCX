@@ -303,25 +303,6 @@ package classes.Scenes.Areas.Bog
 			combat.cleanupAfterCombat();
 		}
 
-		//Item Use Scenes Intro (Victory) (Z edited)
-		private function useAnItemOnTheChamcham():void
-		{
-			clearOutput();
-			spriteSelect(89);
-			outputText("Looking at the poor girl kneeling pathetically before you, you almost feel sorry for her.  But, she did try to rape you and claim that you were on 'her' territory.  You rummage through your bags, trying to find a fun way to punish her.  Fun for you, at least.");
-
-			//player must have either a purified or unpurified Succubi Milk (also requires cock,) Incubus Draft, or Lust & Sens Draft (both) in inventory
-			//also incubi draft and succubi milk should probably have something of a corruption requirement
-			//(Display Options: [Incubus Draft] [Succubi Milk](PC must have cock) [Lust&SensDrafts]
-			//optionz go herez
-			var milk:Function =null;
-			var drafts:Function =null;
-			if ((player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && player.hasCock()) milk = giveTheChameleonASuccubiMilk;
-			if (player.hasItem(consumables.SENSDRF) && (player.hasItem(consumables.L_DRAFT) || player.hasItem(consumables.F_DRAFT))) drafts = doseDatChameleonWithLustAndSensitivityDrafts;
-
-			simpleChoices("SuccMilk", milk, "LustnSensD.", drafts, "", null, "", null, "Back", defeatChameleonGirl);
-		}
-
 		//-P. Succubi Milk or Succubi Milk (Z edited)
 		//Prerequisite: at least one dick
 		private function giveTheChameleonASuccubiMilk():void

@@ -8,7 +8,7 @@
 		{
 		}
 
-		public function oasisEncounter():void {
+public function oasisEncounter():void {
 	spriteSelect(46);
 	//Find oasis, sit there.
 	outputText("You wander in the desert for what seems like hours, sweating profusely in the sweltering heat. Eventually you come across a small watering hole surrounded by scrappy trees and shrubs. It would be foolish not to take this opportunity to drink, freshen up and paddle your " + player.legs() + " in the cooling water, so you settle into what little shade you can find for a quick break.\n\n", true);
@@ -18,14 +18,17 @@
 	outputText("The group is composed of roughly twenty tan skinned demons, mostly humanoid in shape with many and varied corruptions across the group. You see demonic high heels, twisting horns and swinging cocks of all shapes and sizes. There even seems to be a bull head in there somewhere. You also make out plenty of breasts ranging from tiny ones to a pair that require a second person to carry them, and with those breasts a wide range of pussies, dripping and dry, sometimes nestled below some form of demonic dick. The small tribe carry no weapons and what little clothing they wear is well shredded, except for one hefty male wearing a cloak of what appears to be snakeskin across his broad shoulders. You assume from his clothing and the size of his equipment that this male is the leader. He, along with the others, is in good spirits and they all look fairly non-threatening, although you've learned not to trust anything that looks non-threatening in this place. Especially if it can carry its cock over its shoulder.\n\n", false);
 	//OH noes! Cheese it!
 	outputText("The demons don't notice you until they are quite close, the glare of the surrounding sand making you very difficult to see in the shade of your scrappy bush. They ignore you, intent on the refreshing waters of the oasis, but you can't stay hidden forever. A small keen eyed demon eventually spots you and lets out a  cry of alarm, pointing you out to the others. More eyes than twenty heads should really possess are now pointed straight at you.\n\n<b>What do you do?</b>", false);
-	simpleChoices("Talk", oasisTalk, "Fight", chooseToFight, "", null, "", null, "Leave", oasisRunAway);
+	menu();
+	addButton(0, "Talk", oasisTalkAccept);
+	addButton(1, "Fight", chooseToFight);
+	addButton(14, "Leave", oasisRunAway);
 }
 
-		private function chooseToFight():void{
-			startCombat(new DemonPack());
-			spriteSelect(46);
-			playerMenu();
-		}
+private function chooseToFight():void{
+	startCombat(new DemonPack());
+	spriteSelect(46);
+	playerMenu();
+}
 
 private function oasisRunAway():void {
 	spriteSelect(46);
@@ -48,7 +51,9 @@ private function oasisTalk():void {
 	//Offer...
 	outputText("At this your repertoire of desert conversation topics is exhausted and it occurs to you that it may be easier to break the ice somewhere it is possible for ice to form. At the edge of slipping over into awkward silence the leader speaks. 'It is quite the strike of fortune that you would come to us just as we were to rest and feast. Perhaps you wish to partake with us?' A flash of panic runs over your mind, and you turn over the phrase a few times in your head. After a few seconds you conclude that 'partake with us' really cannot mean 'be a delicious entree' and entertain the thought of staying to feast.  As if sensing your hesitation the leader speaks again. \"<i>We have not feasted in a long time, and we do hunger for it so.  This one promises to be a feast of grand proportions, and it should be a shame for you to miss such an opportunity.</i>\"\n\n", false);
 	outputText("<b>Do you stay or try to leave?</b>", false);
-	simpleChoices("Stay", oasisTalkAccept, "", null, "", null, "", null, "Leave", oasisTalkDecline);
+	menu();
+	addButton(0, "Stay", oasisTalkAccept);
+	addButton(14, "Leave", oasisTalkDecline);
 }
 
 private function oasisTalkDecline():void {

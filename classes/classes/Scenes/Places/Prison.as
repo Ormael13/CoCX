@@ -2101,8 +2101,11 @@ package classes.Scenes.Places
 		//Conclusion
 		public function captorChanceChoose():void {
 			clearOutput();
-			outputText("As you make your way back to camp, you can't help but think about how easy it is to find yourself knocked unconscious and left helpless in the wilderness of Mareth. While slave hunters have never plucked you off the ground in such a state before, now that you've bumbled into being captured by them you consider that they might come hunting for you now that you've escaped. You give it a moment's thought. Are you now in danger of being recaptured should you be defeated in combat?",false);
-			simpleChoices("Likely", chooseLikelyChance, "Maybe", chooseMaybeChance, "Never", chooseNeverChance, "", null, "", null);
+			outputText("As you make your way back to camp, you can't help but think about how easy it is to find yourself knocked unconscious and left helpless in the wilderness of Mareth. While slave hunters have never plucked you off the ground in such a state before, now that you've bumbled into being captured by them you consider that they might come hunting for you now that you've escaped. You give it a moment's thought. Are you now in danger of being recaptured should you be defeated in combat?", false);
+			menu();
+			addButton(0, "Likely", chooseLikelyChance);
+			addButton(1, "Maybe", chooseMaybeChance);
+			addButton(2, "Never", chooseNeverChance);
 		}
 		
 		public function chooseLikelyChance():void
@@ -2449,8 +2452,10 @@ package classes.Scenes.Places
 				billieScene.prisonCaptorBillieEventChange(1);
 				trace("Elly");
 				outputText(prisonCaptor.captorTitle + " " + prisonCaptor.captorName + " enters the room to find you writhing on the floor with unmanageable lust and is clearly amused by your pathetic state of affairs. After a moment's thought " + prisonCaptor.captorPronoun1 + " comes to a decision and says, \"<i>Beg me to fuck you, and I might take pity on you.</i>\"\n\n",false);
-				outputText("Do you give in to your lust and beg your " + prisonCaptor.captorTitle + " to fuck you, or do you try to resist? " + prisonWillCostDescript(15),false);
-				simpleChoices("Beg",prisonCaptorBegSubmit,"Resist",prisonCaptorBegResist,"",null,"",null,"",null);
+				outputText("Do you give in to your lust and beg your " + prisonCaptor.captorTitle + " to fuck you, or do you try to resist? " + prisonWillCostDescript(15), false);
+				menu();
+				addButton(0, "Beg", prisonCaptorBegSubmit);
+				addButton(1, "Resist", prisonCaptorBegResist);
 				return true;
 			}
 			//Pet dreams
@@ -2832,7 +2837,9 @@ package classes.Scenes.Places
 		{
 			outputText("[captorTitle] [captorName] wears a beguiling half smile while studying you intently with [captorhis] piercing eyes, then reaches a decision. \"<i>A good fucking should suffice; whether you try to resist or not, your own body is going to correct your bad behavior today. Either way we're both going to enjoy this, so the only question is how hard you want to make it for yourself?</i>\"[if (lust > 75) \" You wonder if [captorhe] can see just how horny you currently are as you consider how to respond.\"]\n\n");
 			outputText("Do you give in and take your punishment submissively, or do you make an effort to resist?");
-			simpleChoices("Submit", prisonCaptorPunishmentFuckSubmit, "Resist", prisonCaptorPunishmentFuckResist, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Submit", prisonCaptorPunishmentFuckSubmit);
+			addButton(1, "Resist", prisonCaptorPunishmentFuckResist);
 		}
 		
 		public function prisonCaptorPunishmentFuckSubmit():void

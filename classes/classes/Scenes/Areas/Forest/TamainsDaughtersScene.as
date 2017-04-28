@@ -109,7 +109,10 @@ public function encounterTamanisDaughters():void {
 		if (flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] >= 10) outputText(", your wife", false);
 		outputText(".  You realize now that the other goblins must be your daughters.  Another crowd of small women emerges from the bushes, closing in a ring around you, preventing any chance of escape.  The largest of the younger goblin-women steps forwards, her " + tdCup() + " breasts jiggling, barely contained by the bondage ropes she has tied around herself.  She stops once she's next to her mother and Tamani explains, \"<i>I just can't keep their aching cunts at home anymore!  They're fertile adults now and they're wanting to get some experience with real dicks.  I figured you wouldn't mind helping them out a little.</i>\"\n\nWhat do you do? (Fight them off, Fuck them willingly, Let them fuck you)", false);
 		//[Fuck Them] [Let Them] [Fight]
-		simpleChoices("Fight", fightTamanisDaughters, "Fuck Them", fuckYoDaughtersHomie, "Let Them", legTamanisDaughtersRAEPYou, "", null, "", null);
+		menu();
+		addButton(0, "Fight", fightTamanisDaughters);
+		addButton(1, "Fuck Them", fuckYoDaughtersHomie);
+		addButton(2, "Let Them", legTamanisDaughtersRAEPYou);
 		return;
 	}
 	tamaniPresent = false;
@@ -122,11 +125,18 @@ public function encounterTamanisDaughters():void {
 	if (flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS] == 0) {
 		outputText("She calls out, \"<i>We're tired of getting leftovers, so we're coming to the source.  Are you going to give us what we want?</i>\"\n\n", false);
 		//[Fuck them] [Fight] [Play Dumb]
-		simpleChoices("Fight", fightTamanisDaughters, "Fuck Them", fuckYoDaughtersHomie, "Play Dumb", playDumbToTamanisDaughters, "Let Them", legTamanisDaughtersRAEPYou, "", null);
+		menu();
+		addButton(0, "Fight", fightTamanisDaughters);
+		addButton(1, "Fuck Them", fuckYoDaughtersHomie);
+		addButton(2, "Let Them", legTamanisDaughtersRAEPYou);
+		addButton(3, "Play Dumb", playDumbToTamanisDaughters);
 	}
 	else {
 		outputText("She calls out, \"<i>We came back for more cream!  Come on, let's fuck again!</i>\"\n\nIt doesn't look like 'no' is a word they understand.  What do you do?</i>", false);
-		simpleChoices("Fight", fightTamanisDaughters, "Fuck Them", fuckYoDaughtersHomie, "Let Them", legTamanisDaughtersRAEPYou, "", null, "", null);
+		menu();
+		addButton(0, "Fight", fightTamanisDaughters);
+		addButton(1, "Fuck Them", fuckYoDaughtersHomie);
+		addButton(2, "Let Them", legTamanisDaughtersRAEPYou);
 	}
 }
 
@@ -149,7 +159,10 @@ private function playDumbToTamanisDaughters():void {
 	outputText("litters one way or another!</i>\"\n\n", false);
 	
 	//[Fuck them] [Fight] [Let them have their way with you]
-	simpleChoices("Fuck Them", fuckYoDaughtersHomie, "Fight", fightTamanisDaughters, "", null, "Let Them", legTamanisDaughtersRAEPYou, "", null);
+	menu();
+	addButton(0, "Fuck Them", fuckYoDaughtersHomie);
+	addButton(1, "Fight", fightTamanisDaughters);
+	addButton(2, "Let Them", legTamanisDaughtersRAEPYou);
 }
 
 //[Fight Them]
@@ -859,7 +872,10 @@ private function tamaniDaughtersBadEndChoice():void {
 	if (player.statusEffectv1(StatusEffects.Exgartuan) == 1) outputText("Exgartuan barks, \"<i>Hell yes I do!</i>\" but the goblin only smirks down for a moment before looking back at you.\n\n", false);
 	
 	outputText("(Options: Yes, No, I'd rather fill your cunts individually & personally)", false);
-	simpleChoices("Yes", tamaniDaughtersYesBadEndMePlease, "No", tamaniDaughtersDeclineBadEnd, "Individual", tamanisDaughtersFillIndividuallyBADEND, "", null, "", null);
+	menu();
+	addButton(0, "Yes", tamaniDaughtersYesBadEndMePlease);
+	addButton(1, "No", tamaniDaughtersDeclineBadEnd);
+	addButton(2, "Individual", tamanisDaughtersFillIndividuallyBADEND);
 }
 
 //[Yes]

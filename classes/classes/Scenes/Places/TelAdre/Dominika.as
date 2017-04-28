@@ -84,13 +84,17 @@ public function fellatrixBarApproach():void {
 
 		outputText("\"<i>Although...</i>\" she seems to think about something, glancing over at you for a few seconds. After a pause, she adds \"<i>If you'd like, my place is just a few blocks down, I could... impart some knowledge on you there.</i>\"\n\n", false);
 
-		simpleChoices("Sure", acceptDominikasKnowledge, "No Thanks", turnDownDominikasKnowledge, "", null, "", null, "", null);
+		menu();
+		addButton(0, "Sure", acceptDominikasKnowledge);
+		addButton(1, "No Thanks", turnDownDominikasKnowledge);
 		return;
 	}
 	//[Follow-up Introduction]
 	else {
 		outputText("You make your way over to Dominika's table and strike up conversation with the modestly dressed woman. Her eyes give away her smile and the two of you discuss your exploits. She doesn't attempt to hide the casual way she ogles you during the conversation, and after a brief while, she invites you back to her place.", false);
-		simpleChoices("Sure", acceptDominikasKnowledge, "No Thanks", turnDownDominikasKnowledge, "", null, "", null, "", null);
+		menu();
+		addButton(0, "Sure", acceptDominikasKnowledge);
+		addButton(1, "No Thanks", turnDownDominikasKnowledge);
 		return;
 	}
 	outputText("ERROR, ERROR, ALERT THE FENFEN!", true);
@@ -250,7 +254,9 @@ private function fellatrixSexWarmup():void {
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
-	simpleChoices("Yes", acceptFellatrixOral, "No", declineFellatrixOral, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Yes", acceptFellatrixOral);
+	addButton(1, "No", declineFellatrixOral);
 }
 
 //If \"<i>No.</i>\"]
@@ -328,7 +334,10 @@ private function acceptFellatrixOral():void {
 			outputText("She takes a deep breath, turning back towards you. \"<i>I would burn this city to the ground if it would result in my freedom from this land, able to return to the spires of my home at last. But surely, as a champion of Ingnam, you understand? To see your family, your friends once again?</i>\"\n\n", false);
 
 			outputText("She seems to be looking at you for affirmation.", false);
-			simpleChoices("Agree", agreeWithDominika, "Ehhh", ehhhhDominika, "Disagree", disagreeDominika, "", null, "", null);
+			menu();
+			addButton(0, "Agree", agreeWithDominika);
+			addButton(1, "Ehhh", ehhhhDominika);
+			addButton(2, "Disagree", disagreeDominika);
 		}
 		else {
 			outputText("You arrive at Dominika's apartment and are led into the familiar adjacent room, where the familiar slick and slurping brutality is enacted by Dominika's mouth upon you.  Those lips engulf you, devour you, caress you, and in the haze of pleasure you love every single moment.  They shine in your mind glamorized, an immaculate altar to which you can only cum, and cum, and cum, and...\n\n", false);
@@ -344,7 +353,10 @@ private function acceptFellatrixOral():void {
 			outputText("The aggressiveness of her speech has had a clear effect on Dominika.  Her tattooes have a subtle fading light to them, vanishing as she regains her composure.  When she turns back to you her expression is solemn, and cold.  \"<i>I am ready to leave this city to the fate it has resigned itself to.</i>\"  The words come quietly, but hold more weight than all the dialogue you two have shared.  \"<i>But with it actively choosing to oppress me rather than fight, I cannot do it alone. You, champion – you are strong. Regardless of what this land has done to you, you fight.</i>\"\n\n", false);
 
 			outputText("She crosses the room to return to you, resting a hand on your chest.  \"<i>I want my freedom back, and I do not care anymore what I have to destroy to get it.  Help me.</i>\"", false);
-			simpleChoices("Agree", agreeWithDominika, "Ehhh", ehhhhDominika, "Disagree", disagreeDominika, "", null, "", null);
+			menu();
+			addButton(0, "Agree", agreeWithDominika);
+			addButton(1, "Ehhh", ehhhhDominika);
+			addButton(2, "Disagree", disagreeDominika);
 		}
 		player.orgasm();
 		dynStats("lib", -1, "sen", 1);

@@ -284,7 +284,10 @@ private function waitForChunkyOrcLoe():void {
 //sexy choices
 private function sexyChoices():void {
 	spriteSelect(86);
-	simpleChoices("Ewww", ewwwRogarIsGay, "NoThnxBro", noSlowBroIDontWantPokeSex, "Lick Clean", okayBroLetsHaveAGayCarwash, "", null, "", null);
+	menu();
+	addButton(0, "Ewww", ewwwRogarIsGay);
+	addButton(1, "NoThnxBro", noSlowBroIDontWantPokeSex);
+	addButton(2, "Lick Clean", okayBroLetsHaveAGayCarwash);
 }
 //((Ewww))
 private function ewwwRogarIsGay():void {
@@ -700,7 +703,9 @@ private function brobrobrobro():void {
 	spriteSelect(86);
 	outputText("You follow Ro'gar home and walk into the apartment, draping your arm around the orc man in a tight hug. \"<i>Glad ta see you too.  What's that you got?</i>\"  Ro'gar looks at the can in your pack.  \"<i>Bro Brew!  Love the stuff.  That for me?</i>\"  He snickers and snags it before you can object, then plays keepaway with you, yanking the can out of reach.  Did you want to keep that?  His dangerous, playful expression would suggest he means to make mischief for you if you try to grab it, and it may get spilled - on you!\n\n", false);
 	//[Fukkin' Grab It!][Reverse Psychology]
-	simpleChoices("FukkinGrabIt", takeDatBroBrewFromDaBigMeanOlOrc, "ReversePsych", rogarIsDumb, "", null, "", null, "", null);
+	menu();
+	addButton(0, "FukkinGrabIt", takeDatBroBrewFromDaBigMeanOlOrc);
+	addButton(1, "ReversePsych", rogarIsDumb);
 }
 //[reverse psychology]
 private function rogarIsDumb():void {
@@ -909,7 +914,9 @@ private function rubdubWithDaOrcWithoutDucky():void {
 	outputText("Without any hesitation you straddle the orc's hips again, his engorged orc cock brushing against the bare skin of your " + player.buttDescript () + ". Your hands get to work smearing the relaxing oil over Ro'gar's body. The orc stares at you with a lurid gaze as you massage his bulging pectorals, teasing his darkened nipples with your fingers. You grin feeling Ro'gar's thick cock pressing more against your " + player.buttDescript () + " as his chest rumbles under your hands.\n\n", false);
         outputText("\"<i>You're good at this " + player.short + ", have you done this before?</i>\" Ro'gar purrs as you work over his abdominals, tracing over every gap with your fingertips, the oils glistening over your lover's body. Ro'gar's hips buck gently, bumping your " + player.buttDescript () + " with his throbbing cock with a chuckle, his mouth curls into a coy smile. You watch as Ro'gar reaches his arms back, resting his head on his hands as he bares his underarm and pits.\n\n", false);
 	//[Play with pits][Ignore pits]
-	simpleChoices("Play with pits", sexyOrcPitsAreSexy, "Ignore pits", lickSomeMoreOrcButNoPits, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Play with pits", sexyOrcPitsAreSexy);
+	addButton(1, "Ignore pits", lickSomeMoreOrcButNoPits);
 }
 //[Play with pits]
 private function sexyOrcPitsAreSexy():void {

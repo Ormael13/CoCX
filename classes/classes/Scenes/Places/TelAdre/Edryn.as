@@ -540,11 +540,10 @@ public function helAppearance():void {
 public function approachHelAtZeBitch():void {
 	clearOutput();
 	outputText(images.showImage("hel-chat-at-bar"));
-	var edryn:Function = null;
-	if (edrynBar() && player.cockThatFits(300) >= 0 && player.statusEffectv1(StatusEffects.Edryn) >= 4)
-		edryn = helEdrynThreeSomeStartYerEngines;
 
-	if (edryn != null && flags[kFLAGS.HEL_EDRYN_OFFER] == 0) {
+	menu();
+	addDisabledButton(0, "Edryn3Some");
+	if ((edrynBar() && player.cockThatFits(300) >= 0 && player.statusEffectv1(StatusEffects.Edryn) >= 4) && flags[kFLAGS.HEL_EDRYN_OFFER] == 0) {
 		outputText("\"<i>Hey there, lover mine,</i>\" Helia says with a coy grin as you take a seat across from her.  The two fox-girls giggle drunkenly, prompting Hel to give them each a playful slap on the ass and send them on their way.  \"<i>Well, fancy meeting you here, ", false);
 		if (player.femininity < 49) outputText("handsome", false);
 		else outputText("beautiful", false);
@@ -558,6 +557,7 @@ public function approachHelAtZeBitch():void {
 
 		outputText("Sitting with the salamander, you notice across the crowded bar that Edryn is sitting at her table, sipping a little glass of wine.  Catching your eye, the centauress gives you a sultry wink.  An idea forms in your mind: you could easily introduce the two girls.  Do you?", false);
 		flags[kFLAGS.HEL_EDRYN_OFFER]++;
+		addButton(0, "Edryn3Some", helEdrynThreeSomeStartYerEngines);
 	}
 	else {
 		outputText("\"<i>Hey there, lover mine,</i>\" Helia says with a coy grin as you take a seat across from her.  The two fox-girls giggle drunkenly, prompting Hel to give them each a playful slap on the ass and send them on their way before swinging over and taking her place on your lap.  \"<i>Well, fancy meeting you here, ", false);
@@ -570,7 +570,9 @@ public function approachHelAtZeBitch():void {
 		outputText("  Eventually, though, Hel gives you a sultry look and asks if you're up for a little group activity.  Are you?\n\n", false);
 	}
 	//(Display Options: [Threesome] [Leave]
-	simpleChoices("Edryn3Some", edryn, "Fox Girls", kGAMECLASS.helScene.heliaPlusFoxyFluffs, "", null, "", null, "Leave", leaveHelInZeBitch);
+	
+	addButton(1, "Fox Girls", kGAMECLASS.helScene.heliaPlusFoxyFluffs);
+	addButton(14, "Leave", leaveHelInZeBitch);
 }
 
 //First Time - Leave
@@ -661,10 +663,15 @@ public function findOutEdrynIsPregnant():void {
 	outputText("The centaur blushes fiercely, blurting everything out in a rush now that she's started to talk, \"<i>I don't know how it happened!  I've been taking herbs to prevent this kind of thing, and I've NEVER heard of someone getting pregnant while they're on these.</i>\"  She gives her flank a gentle pat as she keeps speaking, \"<i>There's just something about your cum I guess!  Our child will be a centaur, just like her mom, and I intend to keep her.</i>\"\n\n", false);
 
 	outputText("<b>How do you react?</b>", false);
-
-	var aroused:Function = (player.totalCocks() > 0 ? arousedByPregdryn : null);
 	//[Shocked] [Pleased] [Aroused (Requires Wang)]
-	simpleChoices("Shocked", shockedByEdrynsPregnancy, "Pleased", pleasedbyPregdryn, "Aroused", aroused, "", null, "", null);
+	menu();
+	addButton(0, "Shocked", shockedByEdrynsPregnancy);
+	addButton(1, "Pleased", pleasedbyPregdryn);
+	if (player.hasCock()) {
+		addButton(2, "Aroused", arousedByPregdryn);
+	} else {
+		addDisabledButton(2, "Aroused", "This scene requires you to have cock.");
+	}
 }
 
 //Shocked
@@ -675,7 +682,9 @@ private function shockedByEdrynsPregnancy():void {
 
 	outputText("\n\n<b>What do you do?</b>", false);
 	//[Accept it] [Reject it]
-	simpleChoices("Accept It", shockedByPregdrynThenAccept, "Reject It", beAnAssholeToPregdryn, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Accept It", shockedByPregdrynThenAccept);
+	addButton(1, "Reject It", beAnAssholeToPregdryn);
 }
 //Accept it
 private function shockedByPregdrynThenAccept():void {

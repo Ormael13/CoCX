@@ -686,7 +686,9 @@ private function bimboSophieLicksRugs():void {
 	}
 	else {
 		outputText("What do you do?", false);
-		simpleChoices("Sixtynine", bimboSophieSixtyNineAfterCunnilingus, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+		menu();
+		addButton(0, "Sixtynine", bimboSophieSixtyNineAfterCunnilingus);
+		addButton(14, "Leave", camp.returnToCampUseOneHour);
 	}
 }
 //SixtyNine Continuation - GOILS you're a wreckin' machine
@@ -878,12 +880,19 @@ public function sophieEggApocalypse():void {
 		outputText("You let Sophie find another Ovi Elixir amid your supplies and her normally vapid expression locks into a grin of impatient glee. \"<i>Oh, can we do it again? Please please please!</i>\"", false);
 	}
 	//[Daddy (Male/herm)] [Mommy (female/herm)] [Leave]
-	var daddy:Function = null;
-	var mommy:Function = null;
 	flags[kFLAGS.TIMES_SOPHIE_HAS_DRUNK_OVI_ELIXIR]++;
-	if (player.hasCock()) daddy = beBimboSophiesSugarDaddy;
-	if (player.hasVagina()) mommy = beBimboSophiesSugarMommy;
-	simpleChoices("Daddy", daddy, "Mommy", mommy, "", null, "", null, "Leave", playerMenu);
+	menu();
+	if (player.hasCock()) {
+		addButton(0, "Daddy", beBimboSophiesSugarDaddy);
+	} else {
+		addDisabledButton(0, "Daddy");
+	}
+	if (player.hasVagina()) {
+		addButton(1, "Mommy", beBimboSophiesSugarMommy);
+	} else {
+		addDisabledButton(1, "Mommy");
+	}
+	addButton(14, "Leave", playerMenu);
 }
 	
 //[Daddy]

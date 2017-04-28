@@ -29,7 +29,10 @@ public function bunnbunbunMeet():void {
 		
 		outputText("Even though nearly a minute has passed, the bunny-lass is STILL frozen and staring.  She hasn't done anything since realizing that you're looking at her.  Well, it looks like the ball's in your court.  What do you do?", false);
 		//[Talk] [Rape Her]
-		simpleChoices("Talk", talkToBunnyBunBun, "Rape Her", rapeBunBun, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+		menu();
+		addButton(0, "Talk", talkToBunnyBunBun);
+		addButton(1, "Rape Her", rapeBunBun);
+		addButton(14, "Leave", camp.returnToCampUseOneHour);
 	}
 	//Met her
 	else {

@@ -264,8 +264,10 @@ private function sandwitchRaped():void {
 		//Not so corrupt
 		if (player.cor < 50) {
 			outputText("You smile at the sand witch, trying to seem enticing. A tiny smile plays across her face even though she supports a worried frown. She reaches up to you, and you allow her to gently pull you down to her. You marvel at her multiple breasts, each perfectly rounded. Each has a nipple approximately two inches long, enough to suck if you wanted to.  ", false);
-			outputText("Your attention wanders down to the damp sand underneath her legs, and her musky scent hits your nose. Which do you go after?\n\n", false);
-			simpleChoices("Breasts", sandwitchBewbs, "Sex", sandwitchSex, "", null, "", null, "", null);
+			outputText("Your attention wanders down to the damp sand underneath her legs, and her musky scent hits your nose. Which do you go after?\n\n", false);			
+			menu();
+			addButton(0, "Breasts", sandwitchBewbs);
+			addButton(1, "Sex", sandwitchSex);
 		}
 		//Really corrupt
 		else 
@@ -673,7 +675,8 @@ private function missingoSex():void {
 	
 	outputText("\n\n<b>Don't report this as a bug, okay dawg?</b>", false);
 	
-	simpleChoices("N*xt", missingoSex2, "", null, "", null, "", null, "", null);
+	menu();
+	addButton(0, "N*xt", missingoSex2);
 }
 //{Next Page}
 private function missingoSex2():void {
@@ -686,7 +689,8 @@ private function missingoSex2():void {
 	outputText("\"Still...\" she says, ##ok%7g at you slyly. \"Why don't you (ull b=c( and try that again....\"", false);
 	
 	//[N*xt]
-	simpleChoices("N*xt", missingoSex3, "", null, "", null, "", null, "", null);
+	menu();
+	addButton(0, "N*xt", missingoSex3);
 }
 
 //{Next Page}
@@ -700,7 +704,8 @@ private function missingoSex3():void {
 	outputText("\"@_i@_...\" s_e says, ##o@%7g @t yo_ s_@_y. \"W_@ d_n't @o_ (ull b=c( an_ @r_ _h_@ a_@in....\"\n\n", false);
 
 	//[@*xt]
-	simpleChoices("@*xt", missingoSex4, "", null, "", null, "", null, "", null);
+	menu();
+	addButton(0, "@*xt", missingoSex4);
 }
 
 //{Next Page}
@@ -713,7 +718,8 @@ private function missingoSex4():void {
 	
 	outputText("\"@_o@_...\" o_o oooo, ##o@%7o @o oo_ o_@_o. \"o_@ o_o'o @o_ (ooo o=o( oo_ @o_ _o_@ o_@oo....\"", false);
 	//[Fuck this!]
-	simpleChoices("Fuck This!", missingoSex5, "", null, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Fuck This!", missingoSex5);
 }
 
 //{Next Page}
@@ -731,7 +737,8 @@ private function missingoSex5():void {
 	outputText("Oh goddammit. You remember that your progress from before was lost, and now you have to start from the beginning. You can't help but roll your eyes and groan, though you're hardly angry enough to put a controller-shaped hole through your TV screen over this. But hey! At least you were smart enough to jot down the Champion Password. Perhaps one day video games will be sophisticated enough to have some internal means of storing progress, but at least with this, you should be able to get all of your old stuff!", false);
 	
 	//Restore]
-	simpleChoices("Restore", missingoSex6, "", null, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Restore", missingoSex6);
 }
 //{Next Page}
 private function missingoSex6():void {
@@ -793,7 +800,9 @@ private function ovipositSandWitches():void {
 	outputText(" can do to their partners and unsure if this is really what she wants.  The poor girl seems to need a little 'encouragement'... of course, you could just skip all that regardless if you really wanted.");
 	
 	//[Foreplay 1st]    [Get Fucking]
-	simpleChoices("Foreplay 1st", eggwitchForeplay, "Get Fucking", getToFuckingWithZeEggsInWitch, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Foreplay 1st", eggwitchForeplay);
+	addButton(1, "Get Fucking", getToFuckingWithZeEggsInWitch);
 }
 
 //[Foreplay 1st]
