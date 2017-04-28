@@ -1,6 +1,7 @@
 Corruption-of-Champions-Mod
 ===========================
 [![Build Status](https://travis-ci.org/Kitteh6660/Corruption-of-Champions-Mod.svg?branch=master)](https://travis-ci.org/Kitteh6660/Corruption-of-Champions-Mod)
+[Sonarqube code analysis](https://sonarqube.com/dashboard?id=org.github.Kitteh6660%3ACorruption-of-Champions-Mod)
 
 NOTE: CONTAINS MATURE CONTENT. ADULTS ONLY
 
