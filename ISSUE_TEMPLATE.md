@@ -17,3 +17,4 @@
 3.
 
 If possible, attach a save file that reproduces the issue.
+Please be aware that any files uploaded here are publicly accessible and cannot be deleted (but the link to them can be removed).
