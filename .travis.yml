@@ -2,7 +2,7 @@ sudo: required
 
 addons:
   sonarqube:
-    organization: "brrritssocold-github"
+    organization: "Kitteh6660-github"
 
 # travis-ci does not support actionscript.
 # However the build uses ant, which is usually used to build java projects.
