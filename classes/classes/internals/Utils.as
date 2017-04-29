@@ -36,6 +36,16 @@ package classes.internals
 			for (var x:int = 1; x < stringList.length - 1; x++) concat += ", " + stringList[x];
 			return concat + " and " + stringList[stringList.length - 1];
 		}
+		public static function stringOr(input:*,def:String=""):String {
+			return (input is String) ? input : def;
+		}
+		public static function intOr(input:*,def:int=0):int {
+			return (input is int) ? input :
+					(input is Number) ? input|0 : def;
+		}
+		public static function numberOr(input:*,def:Number=0):Number {
+			return (input is Number) ? input : def;
+		}
 		/**
 		 * Performs a shallow copy of properties from `src` to `dest`.
 		 * A `hasOwnProperties` check is performed.
