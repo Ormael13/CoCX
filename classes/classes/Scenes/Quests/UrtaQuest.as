@@ -220,7 +220,6 @@ public function startUrtaQuest():void {
 	player.hairLength = 12;
 	player.skinType = SKIN_TYPE_FUR;
 	player.skinAdj = "silky";
-	player.skinDesc = "fur";
 	player.createBreastRow();
 	player.breastRows[0].breastRating = 7;
 	player.nippleLength = .75;

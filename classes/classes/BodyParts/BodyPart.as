@@ -14,8 +14,9 @@ public class BodyPart extends SimpleJsonable {
 		type = 0;
 	}
 	protected var creature:Creature;
-	public function BodyPart(creature:Creature) {
-		addPublicPrimitives("type");
+	public function BodyPart(creature:Creature,publicPrimitives:Array) {
+		addPublicPrimitives(publicPrimitives);
+		addPublicPrimitives(["type"]);
 		this.creature       = creature;
 	}
 	public function get type():int {return _type;}
@@ -26,7 +27,14 @@ public class BodyPart extends SimpleJsonable {
 		// Upgrade old saves
 		if (typeof o === 'object' && o != null && "type" in o && !("_type" in o)) this.type = o.type;
 	}
-
+	public function isAny(...args:Array):Boolean {
+		for each (var i_type:int in args) if (type == i_type) return true;
+		return false;
+	}
+	public function isNot(...args:Array):Boolean {
+		for each (var i_type:int in args) if (type == i_type) return false;
+		return true;
+	}
 	/**
 	 * Should be implemented in subclasses.
 	 * @param options A part-dependent option set, for example {noAdj:true,noTone:true}

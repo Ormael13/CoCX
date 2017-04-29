@@ -876,9 +876,10 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			saveFile.data[key] = (player[key] as SimpleJsonable).saveToObject();
 		}*/
 		saveFile.data.face = player.facePart.saveToObject();
-		saveFile.data.underBody = player.underBody.saveToObject();
+		//saveFile.data.underBody = player.underBody.saveToObject();
 		saveFile.data.lowerBodyPart = player.lowerBodyPart.saveToObject();
 		saveFile.data.skin = player.skin.saveToObject();
+		saveFile.data.tail = player.tail.saveToObject();
 		saveFile.data.clawsPart = player.clawsPart.saveToObject();
 
 		saveFile.data.wingDesc = player.wingDesc;

@@ -185,13 +185,13 @@ import classes.BodyParts.UnderBody;
 		public function set furColor(value:String):void { skin.furColor = value; }
 		private var _scalesColor:String = "no"; //Scales colour!
 		public function get scalesColor():String {
-			if (skinType == SKIN_TYPE_SCALES || skinType == SKIN_TYPE_PARTIAL_SCALES) return _scalesColor;
+			if (skin.hasScales()) return _scalesColor;
 			else return hairColor;
 		}
 		public function set scalesColor(value:String):void { _scalesColor = value; }
 		private var _chitinColor:String = "no"; //Chitin colour!
 		public function get chitinColor():String {
-			if (skinType == SKIN_TYPE_SCALES || skinType == SKIN_TYPE_PARTIAL_SCALES) return _chitinColor;
+			if (skin.hasChitin()) return _chitinColor;
 			else return hairColor;
 		}
 		public function set chitinColor(value:String):void { _chitinColor = value; }
@@ -2592,9 +2592,11 @@ import classes.BodyParts.UnderBody;
 		public function hasNonLizardScales():Boolean { return skin.hasNonLizardScales(); }
 		public function hasFurOrScales():Boolean { return skin.hasFurOrScales(); }
 		public function hasFur():Boolean { return skin.hasFur(); }
+		public function hasPlainSkinOnly():Boolean { return skin.hasPlainSkinOnly(); }
 		public function hasPlainSkin():Boolean { return skin.hasPlainSkin(); }
 		public function hasGooSkin():Boolean { return skin.hasGooSkin(); }
 		public function skinDescript():String { return skin.describe({layer:'basic'}); }
+		public function skinFurScales():String { return skin.describe({layer:'cover'}); }
 
 		// <mod name="Predator arms" author="Stadler76">
 		public function claws():String { return clawsPart.describe({}); }
@@ -2610,7 +2612,6 @@ import classes.BodyParts.UnderBody;
 		public function isNaga():Boolean { return lowerBodyPart.isNaga(); }
 		public function isTaur():Boolean { return lowerBodyPart.isTaur(); }
 		public function isScylla():Boolean { return lowerBodyPart.isScylla(); }
-		public function skinFurScales():String { return skin.coverLayerDesc(); }
 
 		public function canOvipositSpider():Boolean
 		{

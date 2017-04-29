@@ -16,9 +16,9 @@ import classes.internals.SimpleJsonable;
 
 		public function UnderBody(creature:Creature)
 		{
-			super(creature);
+			super(creature,[]);
 			this.skin = new Skin(creature);
-			addPublicJsonable(skin);
+			addPublicJsonables(["skin"]);
 		}
 
 		public function skinFurScales(...args):String { return skin.skinFurScales.apply(null, args); }

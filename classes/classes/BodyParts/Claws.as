@@ -17,8 +17,7 @@ public class Claws extends BodyPart {
 	public var tone:String                  = "";
 
 	public function Claws(creature:Creature) {
-		super(creature);
-		addPublicPrimitives("tone");
+		super(creature,["tone"]);
 	}
 
 	override public function restore(keepColor:Boolean = true):void {

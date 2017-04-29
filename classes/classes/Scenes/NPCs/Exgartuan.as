@@ -370,10 +370,10 @@ public function exgartuanMasturbation():void {
 			outputText("You shrug off your top eagerly, ready to cooperate with the demon inside your " + allBreastsDescript() + " and enjoy a relaxing tit-massage.  You slide the offending material to the side and marvel at the wondrously large orbs on your chest.  Truly any place that can give you such wonderful endowments can't be evil.  You lean back, enjoying the warmth in the air as it flows over every extra-sensitive inch of your mounds, more than ready to get started.\n\n", false);
 		}
 		outputText("Both hands rise unbidden and begin to caress your " + breastDescript(0) + ".  They slide over every sensitive inch of ", false);
-		if(player.skinType == SKIN_TYPE_PLAIN || player.skinType >= SKIN_TYPE_UNDEFINED) outputText("flesh", false);
-		else if(player.skinType == SKIN_TYPE_FUR) outputText("furry-covered flesh", false);
-		else if(player.skinType == SKIN_TYPE_SCALES) outputText("soft scaley flesh", false);
-		else outputText("gooey surface", false);
+		if(player.skin.hasFur()) outputText("furry-covered flesh", false);
+		else if(player.skin.hasScales()) outputText("soft scaley flesh", false);
+		else if (player.skin.hasGooSkin()) outputText("gooey surface", false);
+		else outputText("flesh", false);
 		outputText(", pausing to gently squeeze and caress any particularly sensitive spots.  Soft sighs escape your lips from the self-imposed pleasure-assault.  Your body relaxes totally, slouching down against a rock while you continue to happily play with your " + allBreastsDescript() + ".  The entire time your hands never touch one of your " + nippleDescript(0) + "s, merely circling them from time to time, making you arch your back in need.\n\n", false);
 		outputText("A voice taunts, \"<i>Oh, does my champion tit-massager need a little nipple-play?  And to think I thought I was the one needing to get off.  Go ahead then, submit to your desires and play with your nipples.  Wallow in the pleasure that I can give you and remember who your true master is!</i>\"\n\n", false);
 		outputText("At last, fingers wrap themselves about your " + nippleDescript(0) + "s, squeezing them gently and forcing happy gasps from your mouth.  ", false);

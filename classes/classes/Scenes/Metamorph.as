@@ -831,7 +831,6 @@ private function metamorphScales():void {
 		outputText(player.skinTone + " scales.</b>", false);
 	}
 	player.skinType = SKIN_TYPE_SCALES;
-	player.skinDesc = "scales";
 	doNext(accessMetamorphMenu);
 }
 private function metamorphFur():void {
@@ -841,7 +840,6 @@ private function metamorphFur():void {
 	else outputText("Your skin itches all over, the sudden intensity and uniformity making you too paranoid to scratch.  As you hold still through an agony of tiny tingles and pinches, fine, luxuriant fur sprouts from every bare inch of your skin!  <b>You'll have to get used to being furry...</b>");
 	player.skinType = SKIN_TYPE_FUR;
 	player.skinAdj = "";
-	player.skinDesc = "fur";
 	doNext(accessMetamorphMenu);
 }
 

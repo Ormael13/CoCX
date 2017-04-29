@@ -1177,7 +1177,7 @@ internal function goBackToUrtasForLuvinzII():void {
 	addButton(1,"Ride(Vaginal)",femaleRides);
 	addButton(2,"Ride(Anal)",tenderTakeItUpTheAssFromUrta);
 	addButton(3,"No Condoms",condomlessUrtaInHouseSmex);
-	if(player.isGoo() && player.skinType == SKIN_TYPE_GOO) addButton(4,"Goo (Weird)",urtaGooTesticleVoreRuinedOrgasms);
+	if(player.isGoo() && player.skin.hasGooSkin()) addButton(4,"Goo (Weird)",urtaGooTesticleVoreRuinedOrgasms);
 }
 
 private function rideUrtaTenderFemale():void {
@@ -2074,7 +2074,7 @@ internal function urtaHomeLuvLuvinsMenu():void {
 		outputText("  There's always the option to ask her to go condomless for a bit of extra fun.");
 		addButton(4,"No Condoms",condomlessUrtaInHouseSmex);
 	}
-	if(player.isGoo() && player.skinType == SKIN_TYPE_GOO) addButton(6,"Goo (Weird)",urtaGooTesticleVoreRuinedOrgasms);
+	if(player.isGoo() && player.skin.hasGooSkin()) addButton(6,"Goo (Weird)",urtaGooTesticleVoreRuinedOrgasms);
 	if(flags[kFLAGS.URTA_PETPLAY_DONE] >= 0 && player.gender > 0) addButton(7,"Collar",urtaPetPlayDeletedForeverBecauseThirdProovedMeWrongAboutDice);
 }
 

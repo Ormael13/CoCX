@@ -308,7 +308,7 @@ package classes {
 				player.createPerk(PerkLib.FireAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if ((player.salamanderScore() < 4 || player.phoenixScore() < 10) && player.findPerk(PerkLib.FireAffinity) >= 0) {
+			else if ((player.salamanderScore() < 4 && player.phoenixScore() < 10) && player.findPerk(PerkLib.FireAffinity) >= 0) {
 				outputText("\nYou suddenly feel chilly as your bodily temperature drop down to human level. You lost your natural warmth reverting to that of a standard human.\n\n<b>(Lost Perk: Fire Affinity)</b>\n");
 				player.removePerk(PerkLib.FireAffinity);
 				needNext = true;

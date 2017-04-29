@@ -521,7 +521,7 @@ private function roxanneFucksYourAssOHGODITSHUGE():void {
 	if(player.analCapacity() >= 150) outputText("spit", false);
 	else outputText("ointment", false);
 	outputText("-slicked ass to accept ever-greater quantities of cock.  Sharp fingernails drag over your " + hipDescript(), false);
-	if(player.skinType == SKIN_TYPE_PLAIN) outputText(", leaving red lines in your unblemished skin", false);
+	if(player.skin.hasPlainSkinOnly()) outputText(", leaving red lines in your unblemished skin", false);
 	outputText(" while your hips visibly spread, somehow accepting something a normal human body never could.", false);
 	player.buttChange(Math.floor(30+(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225]/4)),true,true,false);
 	outputText("\n\n", false);

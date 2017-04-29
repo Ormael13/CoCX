@@ -24,8 +24,7 @@ public class Tail extends BodyPart {
 	}
 
 	public function Tail(creature:Creature) {
-		super(creature);
-		addPublicPrimitives("count","venom","recharge");
+		super(creature,["count","venom","recharge"]);
 	}
 
 	public function isLong():Boolean {

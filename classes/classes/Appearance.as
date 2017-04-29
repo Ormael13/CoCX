@@ -545,7 +545,7 @@
 			}
 			var isPierced:Boolean = (creature.cocks.length == 1) && (creature.cocks[cockIndex].isPierced); //Only describe as pierced or sock covered if the creature has just one cock
 			var hasSock:Boolean = (creature.cocks.length == 1) && (creature.cocks[cockIndex].sock != "");
-			var isGooey:Boolean = (creature.skinType == SKIN_TYPE_GOO);
+			var isGooey:Boolean = (creature.skin.hasGooSkin());
 			return cockDescription(cockType, creature.cocks[cockIndex].cockLength, creature.cocks[cockIndex].cockThickness, creature.lust, creature.cumQ(), isPierced, hasSock, isGooey);
 		}
 

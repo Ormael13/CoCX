@@ -77,7 +77,6 @@
 			this.buttRating = BUTT_RATING_TIGHT;
 			this.skinTone = "white";
 			this.skinType = SKIN_TYPE_FUR;
-			this.skinDesc = "fur";
 			this.hairColor = "white";
 			this.hairLength = 2;
 			initStrTouSpeInte(45, 50, 75, 64);

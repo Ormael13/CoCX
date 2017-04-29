@@ -56,8 +56,7 @@ public class LowerBody extends BodyPart {
 		}
 	}
 	public function LowerBody(creature:Creature) {
-		super(creature);
-		addPublicPrimitives("legCount");
+		super(creature,["legCount"]);
 	}
 
 	override public function restore(keepColor:Boolean = true):void {

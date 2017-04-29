@@ -4351,10 +4351,12 @@ public function tease(justText:Boolean = false):void {
 	if (player.findPerk(PerkLib.JobSeducer) >= 0) damage += player.teaseLevel*3;
 	else damage += player.teaseLevel * 2;
 	//partial skins bonuses
-	if (player.skinType == SKIN_TYPE_PARTIAL_FUR) damage += (1 + player.newGamePlusMod());
-	if (player.skinType == SKIN_TYPE_PARTIAL_SCALES) damage += (2 * (1 + player.newGamePlusMod()));
-	if (player.skinType == SKIN_TYPE_PARTIAL_CHITIN) damage += (3 * (1 + player.newGamePlusMod()));
-	if (player.skinType == SKIN_TYPE_PARTIAL_BARK) damage += (4 * (1 + player.newGamePlusMod()));
+	if (player.skin.isPartiallyCovered()) {
+		if (player.skin.hasFur()) damage += (1 + player.newGamePlusMod());
+		else if (player.skin.hasScales()) damage += (2 * (1 + player.newGamePlusMod()));
+		else if (player.skin.hasChitin()) damage += (3 * (1 + player.newGamePlusMod()));
+		else if (player.skin.hasBark()) damage += (4 * (1 + player.newGamePlusMod()));
+	}
 	//slutty simplicity bonus
 	if(player.findPerk(PerkLib.SluttySimplicity) >= 0 && player.armorName == "nothing") damage *= (1 + ((10 + rand(11)) / 100));
 	damage = Math.round(damage);
@@ -7521,10 +7523,12 @@ public function ScyllaTease():void {
 		damage += player.teaseLevel*2;
 		damage += rand(7);
 		//partial skins bonuses
-		if (player.skinType == SKIN_TYPE_PARTIAL_FUR) damage += (1 + player.newGamePlusMod());
-		if (player.skinType == SKIN_TYPE_PARTIAL_SCALES) damage += (2 * (1 + player.newGamePlusMod()));
-		if (player.skinType == SKIN_TYPE_PARTIAL_CHITIN) damage += (3 * (1 + player.newGamePlusMod()));
-		if (player.skinType == SKIN_TYPE_PARTIAL_BARK) damage += (4 * (1 + player.newGamePlusMod()));
+		if (player.skin.isPartiallyCovered()) {
+			if (player.skin.hasFur()) damage += (1 + player.newGamePlusMod());
+			else if (player.skin.hasScales()) damage += (2 * (1 + player.newGamePlusMod()));
+			else if (player.skin.hasChitin()) damage += (3 * (1 + player.newGamePlusMod()));
+			else if (player.skin.hasBark()) damage += (4 * (1 + player.newGamePlusMod()));
+		}
 		chance += 2;
     	//Specific cases for slimes and demons, as the normal ones would make no sense
         if(monster.short == "demons") {
@@ -7704,10 +7708,12 @@ public function GooTease():void {
 		damage += player.teaseLevel*2;
 		damage += rand(7);
 		//partial skins bonuses
-		if (player.skinType == SKIN_TYPE_PARTIAL_FUR) damage += (1 + player.newGamePlusMod());
-		if (player.skinType == SKIN_TYPE_PARTIAL_SCALES) damage += (2 * (1 + player.newGamePlusMod()));
-		if (player.skinType == SKIN_TYPE_PARTIAL_CHITIN) damage += (3 * (1 + player.newGamePlusMod()));
-		if (player.skinType == SKIN_TYPE_PARTIAL_BARK) damage += (4 * (1 + player.newGamePlusMod()));
+		if (player.skin.isPartiallyCovered()) {
+			if (player.skin.hasFur()) damage += (1 + player.newGamePlusMod());
+			else if (player.skin.hasScales()) damage += (2 * (1 + player.newGamePlusMod()));
+			else if (player.skin.hasChitin()) damage += (3 * (1 + player.newGamePlusMod()));
+			else if (player.skin.hasBark()) damage += (4 * (1 + player.newGamePlusMod()));
+		}
 		chance += 2;
 		//Land the hit!
 		if(rand(100) <= chance) {

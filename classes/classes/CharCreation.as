@@ -172,7 +172,6 @@
 			player.beardStyle = 0;
 			player.tone = 50;
 			player.thickness = 50;
-			player.skinDesc = "skin";
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				player.balls = 0;
 				player.ballSize = 0;

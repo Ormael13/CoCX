@@ -119,7 +119,6 @@ package classes
 			player.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
 			player.skinTone = "pink";
 			player.skinType = SKIN_TYPE_FUR;
-			player.skinDesc = "fur";
 			player.hairColor = "pink";
 			player.hairLength = 50;
 			player.hipRating = 5;
@@ -251,7 +250,6 @@ package classes
 			//if possible with fur, Hair color: "midnight black", Skin/Fur color: "ashen grayish-blue",  Height: 65", Tone: 100, Thickness: 0, Hip rating: 6, Butt rating: 3,Feminimity: 50,  ( 4 rows of breasts (Descending from the top ones: D,C,B,A), nipple length: 0.1", Fuckable, 1 nipple per breast, Tongue type: demon
 			player.hairColor = "midnight black";
 			player.skinType = SKIN_TYPE_FUR;
-			player.skinDesc = "fur";
 			player.skinTone = "ashen grayish-blue";
 			player.tallness = 65;
 			player.tone = 100;
@@ -362,7 +360,6 @@ package classes
 			//-Cat with (black and orange tiger fur if possible) if not just Orange fur
 			player.hairColor = "black and orange";
 			player.skinType = SKIN_TYPE_FUR;
-			player.skinDesc = "fur";
 			//-Chainmail armor
 			player.setArmor(armors.FULLCHN);
 			//-Large Claymore (i understand 40 Strength is need so if he could start with that would be great if not hit the gyms)"
@@ -555,7 +552,6 @@ package classes
 			player.beardStyle = 0;
 			player.tone = 30;
 			player.thickness = 50;
-			player.skinDesc = "skin";
 			player.skinTone = "olive";
 			player.hairColor = "black";
 			player.balls = 0;
@@ -638,7 +634,6 @@ package classes
 			player.beardLength = 0;
 			player.beardStyle = 0;
 			player.thickness = 50;
-			player.skinDesc = "skin";
 			player.hoursSinceCum = 0;
 			player.clitLength = 0;
 			player.ass.analLooseness = 0;
@@ -657,7 +652,6 @@ package classes
 			player.tailType = TAIL_TYPE_DRACONIC;
 			player.skinType = SKIN_TYPE_FUR;
 			player.hairColor = "blue";
-			player.skinDesc = "fur";
 			player.tone = 88;
 			player.tongueType = TONUGE_DRACONIC;
 			//gel plate armor, warhammer, 88 body tone, 1 breast row, flat manly breasts, 0.2 inch nipples, 1 on each breast, draconic tongue, short hair-blue, light skin."	Lukaz
@@ -739,8 +733,6 @@ package classes
 			player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
 			player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
 			player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
-	
-			player.skinDesc = "fur";
 			player.skinTone = "ashen";
 			player.skinType = SKIN_TYPE_FUR;
 			player.tailType = TAIL_TYPE_CAT;
@@ -794,8 +786,7 @@ package classes
 			player.skinTone = "brown";
 			player.skinType = SKIN_TYPE_FUR;
 			player.hairColor = "black";
-			player.skinDesc = "fur";
-			//Legs/Feet = Digigrade hooved 
+			//Legs/Feet = Digigrade hooved
 			player.lowerBody = LOWER_BODY_TYPE_HOOFED;
 			//Wing type = Dragon
 			player.wingType = WING_TYPE_DRACONIC_LARGE;
@@ -842,7 +833,6 @@ package classes
 			//White Fur (if possible)
 			player.skinType = SKIN_TYPE_FUR;
 			player.hairColor = "white";
-			player.skinDesc = "fur";
 			//Body Thickness/breastsize/- As if I had selected the ""Average"" body type from the start.
 			player.createBreastRow();
 			player.breastRows[0].breastRating = 3;
@@ -902,7 +892,6 @@ package classes
 			player.tallness = 93;
 			player.skinTone = "black";
 			player.skinType = SKIN_TYPE_FUR;
-			player.skinDesc = "fur";
 			player.hairColor = "silver";
 			player.faceType = FACE_FOX;
 			player.earType = EARS_FOX;
@@ -1032,7 +1021,6 @@ package classes
 			player.tone = 75;
 			//25 thickness
 			player.thickness = 25;
-			player.skinDesc = "fur";
 			player.skinType = SKIN_TYPE_FUR;
 			player.skinTone = "light";
 			player.hairColor = "silver";
@@ -1111,7 +1099,6 @@ package classes
 			player.hairLength = 22;
 			player.hairColor = "red";
 			player.skinTone = "light";
-			player.skinDesc = "skin";
 			player.skinType = SKIN_TYPE_PLAIN;
 			player.femininity = 100;
 			player.thickness = 25;
@@ -1270,7 +1257,6 @@ package classes
 			player.beardStyle = 0;
 			player.tone = 0;
 			player.thickness = 100;
-			player.skinDesc = "skin";
 			player.skinTone = "pale";
 			player.hairColor = "black";
 			player.balls = 2;
@@ -1481,7 +1467,6 @@ package classes
 			player.beardStyle = 0;
 			player.tone = 30;
 			player.thickness = 50;
-			player.skinDesc = "skin";
 			player.skinTone = "light";
 			player.hairColor = "brown";
 			player.balls = 0;
@@ -1669,7 +1654,6 @@ package classes
 			player.thickness = 20; // thin
 			player.tone = 20; // soft
 			player.skinType = SKIN_TYPE_PLAIN;
-			player.skinDesc = "skin";
 			player.skinAdj = "smooth"; // flawless skin, black egg effect
 			player.skinTone = "light";
 			player.hairColor = "silver blonde"; // not just flavor - it actually counts towards kitsune score
@@ -1881,17 +1865,13 @@ package classes
 			var skin:Number = rand(100);			
 			if(skin < 50){
 				player.skinType = SKIN_TYPE_PLAIN; // skin, 50%
-				player.skinDesc = "skin";}
-			else if(skin < 80){
+			} else if(skin < 80){
 				player.skinType = SKIN_TYPE_FUR; // fur, 30%
-				player.skinDesc = "fur";}
-			else if(skin < 95){
+			} else if(skin < 95){
 				player.skinType = SKIN_TYPE_SCALES; // scales, 15%
-				player.skinDesc = "scales";}
-			else{
+			} else{
 				player.skinType = SKIN_TYPE_GOO; // goo, 5%
-				player.skinDesc = "skin";
-				player.skinAdj = "slimy";}
+			}
 					
 			if(rand(3) != 0) // 2/3 to have human face
 				player.faceType = FACE_HUMAN;

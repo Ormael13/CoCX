@@ -565,7 +565,7 @@ private function nagaThreesomeWithSandTrap():void {
 		//14 inches or more: 
 		else {
 			outputText("\n\nYour " + cockDescript(0) + " is bigger than what the sandtrap's mouth can accommodate, and it isn't long before you are beginning to push into the creature's tight throat.  It lavishes its oil and saliva onto your straining cock, lying its head back and opening its mouth as wide as it can to aid you in your task, and soon you are ");
-			if(player.skinType == SKIN_TYPE_PLAIN) outputText("beading sweat, ");
+			if(player.skin.hasPlainSkinOnly()) outputText("beading sweat, ");
 			outputText("pistoning into its submissive opening with fervor, ");
 			if(player.balls > 0) outputText("your " + ballsDescriptLight() + " swinging heavily in front of the sandtrap's nose, ");
 			outputText("pushing as much of your lubricated dick down the creature's gullet as you can.");

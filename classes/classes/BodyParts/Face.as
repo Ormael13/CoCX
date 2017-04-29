@@ -8,7 +8,7 @@ import classes.internals.Utils;
 public class Face extends BodyPart {
 
 	public function Face(creature:Creature) {
-		super(creature);
+		super(creature,[]);
 	}
 
 	public function hasMuzzle():Boolean {

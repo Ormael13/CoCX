@@ -1,4 +1,6 @@
 package classes.BodyParts {
+import classes.Appearance;
+import classes.Appearance;
 import classes.Creature;
 import classes.internals.Utils;
 
@@ -10,18 +12,34 @@ import classes.internals.Utils;
 public class Skin extends BodyPart {
 	include "../../../includes/appearanceDefs.as";
 
-	public var desc:String     = "skin";
+	private var _desc:String   = "";
 	public var furColor:String = "no";
 	public var tone:String     = "albino";
 	public var adj:String      = "";
 
 	public function Skin(creature:Creature) {
-		super(creature);
-		addPublicPrimitives("tone", "adj", "desc", "furColor");
+		super(creature, ["tone", "adj", "desc", "furColor"]);
 	}
 
 	public function skinFurScales():String {
 		return describe({layer: 'cover'});
+	}
+	public function defaultDesc():String {
+		return Appearance.DEFAULT_SKIN_DESCS[
+					   isPartiallyCovered()
+							   ? PARTIAL_TO_FULL[type]
+							   : Appearance.DEFAULT_SKIN_DESCS[type]
+					   ] || "skin";
+	}
+	public function get desc():String {
+		return _desc || defaultDesc();
+	}
+	public function set desc(value:String):void {
+		_desc = value == defaultDesc() ? "" : value;
+	}
+	override public function set type(value:int):void {
+		super.type = value;
+		_desc      = "";
 	}
 	/**
 	 * @param options.layer: (default 'basic'
@@ -36,29 +54,29 @@ public class Skin extends BodyPart {
 	override public function describe(options:Object):String {
 		switch (options.layer) {
 			case 'cover':
-				return coverLayerDesc(options);
+				return coverLayerDescription(options);
 			case 'both':
 				switch (coverage()) {
 					case 0:
-						return basicLayerDesc(options.noAdj, options.noTone);
+						return basicLayerDescription(options.noAdj, options.noTone);
 					case 1:
-						return basicLayerDesc(options.noAdj, options.noTone) +
+						return basicLayerDescription(options.noAdj, options.noTone) +
 							   ' covered with ' +
-							   coverLayerDesc(options.noAdj, options.noTone);
+							   coverLayerDescription(options.noAdj, options.noTone);
 					default:
 					case 2:
-						return coverLayerDesc(options.noAdj, options.noTone);
+						return coverLayerDescription(options.noAdj, options.noTone);
 				}
 			case 'basic':
 			default:
-				return basicLayerDesc(options);
+				return basicLayerDescription(options);
 		}
 	}
 	public function coverColor():String {
 		switch (type) {
 			case SKIN_TYPE_PARTIAL_FUR:
 			case SKIN_TYPE_FUR:
-				return creature.furColor;
+				return furColor;
 			case SKIN_TYPE_PARTIAL_SCALES:
 			case SKIN_TYPE_SCALES:
 				return creature.scalesColor;
@@ -71,17 +89,17 @@ public class Skin extends BodyPart {
 				return "no";
 		}
 	}
-	public function coverLayerDesc(noAdj:Boolean = false, noTone:Boolean = false):String {
-		var p_adj:String  = coverage() == 1 ? "small patches of" : adj;
-		var p_tone:String = coverage() > 0 ? coverColor() : tone;
+	public function coverLayerDescription(noAdj:Boolean = false, noTone:Boolean = false):String {
+		var p_adj:String  = [adj, "small patches of", adj][coverage()];
+		var p_tone:String = [tone, coverColor(), tone][coverage()];
 		if (noTone) p_tone = "";
 		if (noAdj) p_adj = "";
 		return p_adj + (p_adj && p_tone ? " " : "") + p_tone + (p_adj || p_tone ? " " : "") + desc;
 	}
-	public function basicLayerDesc(noAdj:Boolean = false, noTone:Boolean = false):String {
+	public function basicLayerDescription(noAdj:Boolean = false, noTone:Boolean = false):String {
 		var p_adj:String  = !noAdj ? adj : "";
-		var p_tone:String = coverage() > 1 ? coverColor() : tone;
-		var p_desc:String = (coverage() <= 1) ? desc : "skin";
+		var p_tone:String = tone;//[tone,tone,tone][coverage()];
+		var p_desc:String = [desc, "skin", "skin"][coverage()];
 		if (noTone) p_tone = "";
 		return p_adj + (p_adj && p_tone ? ", " : "") + p_tone + (p_adj || p_tone ? " " : "") + p_desc;
 	}
@@ -119,7 +137,28 @@ public class Skin extends BodyPart {
 	public function hasScales():Boolean {
 		return [SKIN_TYPE_SCALES, SKIN_TYPE_AQUA_SCALES, SKIN_TYPE_PARTIAL_SCALES].indexOf(type) != -1;
 	}
-
+	public function hasChitin():Boolean {
+		return [SKIN_TYPE_CHITIN, SKIN_TYPE_PARTIAL_CHITIN].indexOf(type) != -1;
+	}
+	public function hasBark():Boolean {
+		return [SKIN_TYPE_BARK, SKIN_TYPE_PARTIAL_BARK].indexOf(type) != -1;
+	}
+	public function isPartiallyCovered():Boolean {
+		return [
+				   SKIN_TYPE_PARTIAL_FUR, SKIN_TYPE_PARTIAL_BARK, SKIN_TYPE_PARTIAL_SCALES, SKIN_TYPE_PARTIAL_CHITIN
+			   ].indexOf(type) != -1;
+	}
+	public function isCovered():Boolean {
+		return isPartiallyCovered()
+			   || [
+					  SKIN_TYPE_FUR, SKIN_TYPE_BARK, SKIN_TYPE_SCALES, SKIN_TYPE_CHITIN
+				  ].indexOf(type) != -1;
+	}
+	public function isFacePartiallyCovered():Boolean {
+		return [
+				   SKIN_TYPE_SCALES, SKIN_TYPE_PARTIAL_SCALES, SKIN_TYPE_FUR
+			   ].indexOf(type) != -1;
+	}
 	public function hasReptileScales():Boolean {
 		return [SKIN_TYPE_SCALES, SKIN_TYPE_PARTIAL_SCALES].indexOf(type) != -1;
 	}
@@ -144,8 +183,18 @@ public class Skin extends BodyPart {
 		return type == SKIN_TYPE_GOO;
 	}
 
-	public function hasPlainSkin():Boolean {
-		return type == SKIN_TYPE_PLAIN;
+	public function hasPlainSkinOnly(allowTatoo:Boolean = true):Boolean {
+		return type == SKIN_TYPE_PLAIN
+			   || allowTatoo && type == SKIN_TYPE_TATTOED;
+	}
+	public function hasPlainSkin(allowTatoo:Boolean = true):Boolean {
+		return isPartiallyCovered()
+			   || type == SKIN_TYPE_PLAIN
+			   || allowTatoo && type == SKIN_TYPE_TATTOED;
+	}
+	public function hasSmoothSkinType(allowPartiallyCovered:Boolean = true):Boolean {
+		return isAny(SKIN_TYPE_TATTOED, SKIN_TYPE_PLAIN, SKIN_TYPE_GOO, SKIN_TYPE_STONE)
+			   || allowPartiallyCovered && isPartiallyCovered();
 	}
 	override public function restore(keepTone:Boolean = true):void {
 		super.restore(keepTone);
@@ -163,5 +212,11 @@ public class Skin extends BodyPart {
 		restore(keepTone);
 		setProps(p);
 	}
+	public static const PARTIAL_TO_FULL:Object = Appearance.createMapFromPairs([
+		[SKIN_TYPE_PARTIAL_CHITIN, SKIN_TYPE_CHITIN],
+		[SKIN_TYPE_PARTIAL_SCALES, SKIN_TYPE_SCALES],
+		[SKIN_TYPE_PARTIAL_FUR, SKIN_TYPE_FUR],
+		[SKIN_TYPE_PARTIAL_BARK, SKIN_TYPE_BARK]
+	]);
 }
 }

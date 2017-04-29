@@ -1018,7 +1018,6 @@ package classes.Scenes.Areas.Forest
 				outputText("\n\nFor a moment, it looks like a ray of sunlight has shimmered through the canopy. You blink and realize that your fur has become dappled, with lighter, sun-speckled spots highlighting it.");
 				player.skinType = SKIN_TYPE_FUR;
 				player.skinAdj = "";
-				player.skinDesc = "fur";
 				player.furColor = "brown";
 				changes++;
 			}

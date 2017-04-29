@@ -1377,10 +1377,12 @@ public function naggaTease():void {
 		damage += player.teaseLevel*2;
 		damage += rand(7);
 		//partial skins bonuses
-		if (player.skinType == SKIN_TYPE_PARTIAL_FUR) damage += (1 + player.newGamePlusMod());
-		if (player.skinType == SKIN_TYPE_PARTIAL_SCALES) damage += (2 * (1 + player.newGamePlusMod()));
-		if (player.skinType == SKIN_TYPE_PARTIAL_CHITIN) damage += (3 * (1 + player.newGamePlusMod()));
-		if (player.skinType == SKIN_TYPE_PARTIAL_BARK) damage += (4 * (1 + player.newGamePlusMod()));
+		if (player.skin.isPartiallyCovered()) {
+			if (player.skin.hasFur()) damage += (1 + player.newGamePlusMod());
+			if (player.skin.hasScales()) damage += (2 * (1 + player.newGamePlusMod()));
+			if (player.skin.hasChitin()) damage += (3 * (1 + player.newGamePlusMod()));
+			if (player.skin.hasBark()) damage += (4 * (1 + player.newGamePlusMod()));
+		}
 		chance += 2;
     	//Specific cases for slimes and demons, as the normal ones would make no sense
         if(monster.short == "demons") {

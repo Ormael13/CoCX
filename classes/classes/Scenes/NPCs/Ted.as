@@ -55,7 +55,6 @@ package classes.Scenes.NPCs
 			this.buttRating = BUTT_RATING_TIGHT;
 			this.skinTone = "white";
 			this.skinType = SKIN_TYPE_PLAIN;
-			this.skinDesc = "skin";
 			this.hairColor = "brown";
 			this.hairLength = 2;
 			initStrTouSpeInte(30, 50, 50, 30);

@@ -505,7 +505,6 @@ package classes.Scenes
 			player.lowerBody = LOWER_BODY_TYPE_CAT;
 			player.legCount = 2;
 			player.skinType = SKIN_TYPE_FUR;
-			player.skinDesc = "fur";
 			//Draconic TF
 			player.hornType = HORNS_DRACONIC_X2;
 			player.horns = 4;
@@ -528,7 +527,6 @@ package classes.Scenes
 			player.legCount = 2;
 			//Draconic TF
 			player.skinType = SKIN_TYPE_SCALES;
-			player.skinDesc = "scales";
 			player.tongueType = TONUGE_DRACONIC;
 			player.hornType = HORNS_DRACONIC_X2;
 			player.horns = 4;

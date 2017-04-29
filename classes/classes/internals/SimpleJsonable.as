@@ -7,16 +7,16 @@ public class SimpleJsonable implements Jsonable{
 	protected const myPublicJsonables: Array = [];
 	/**
 	 * @see Utils.copyObject
-	 * Short version: names of !public! !primitive!-typed properties that should be saved/loaded
+	 * @param names names of !public! !primitive!-typed properties that should be saved/loaded
 	 */
-	protected function addPublicPrimitives(...args:Array): void {
-		myPublicPrimitives.push.apply(myPublicPrimitives,args);
+	protected function addPublicPrimitives(names:Array): void {
+		myPublicPrimitives.push.apply(myPublicPrimitives,names);
 	}
 	/**
-	 * @return names of !public! !Jsonable!-typed properties that should be saved/loaded
+	 * @param names names of !public! !Jsonable!-typed properties that should be saved/loaded
 	 */
-	protected function addPublicJsonable(arg:Jsonable):void {
-		myPublicJsonables.push(arg);
+	protected function addPublicJsonables(names:Array):void {
+		myPublicJsonables.push.apply(myPublicJsonables,names);
 	}
 	public function saveToObject():Object {
 		var o:* = {};

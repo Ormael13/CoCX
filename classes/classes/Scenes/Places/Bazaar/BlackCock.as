@@ -1444,7 +1444,7 @@ package classes.Scenes.Places.Bazaar
 				changes++;
 			}
 			//Transformations
-			if (rand(3) == 0 && changes < changeLimit && player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_PARTIAL_SCALES) {
+			if (rand(3) == 0 && changes < changeLimit && player.skin.hasScales()) {
 				outputText("\n\nYou feel an odd rolling sensation as your scales begin to shift, spreading and reforming as they grow and disappear, <b>becoming normal human skin</b>.");
 				player.skinType = SKIN_TYPE_PLAIN;
 				changes++;
@@ -1467,7 +1467,7 @@ package classes.Scenes.Places.Bazaar
 			}
 			if (rand(4) == 0 && changes < changeLimit && player.skinType != SKIN_TYPE_SCALES && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.earType != EARS_ELFIN) {
 				outputText("\n\nYou feel an odd shifting sensation on the side of your head and, reaching up to inspect it, find a <b>pair of fleshy pointed ears</b>. "); 
-				if (player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_PARTIAL_FUR) outputText("As you examine your new elvish ears you feel fur grow around them, matching the rest of you.");
+				if (player.skin.hasFur()) outputText("As you examine your new elvish ears you feel fur grow around them, matching the rest of you.");
 				player.earType = EARS_ELFIN;
 				changes++;
 			}
@@ -1581,7 +1581,7 @@ package classes.Scenes.Places.Bazaar
 				changes++;
 			}
 			//Fur/scales fall out
-			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && (player.skinType != SKIN_TYPE_PLAIN || player.skinTone != "gray" || player.skinAdj != "tough")) {
+			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && (!player.hasPlainSkinOnly() || player.skinTone != "gray" || player.skinAdj != "tough")) {
 				outputText("\n\n");
 				switch(player.skinType) {
 					case SKIN_TYPE_PLAIN:
@@ -1602,7 +1602,6 @@ package classes.Scenes.Places.Bazaar
 				player.skinTone = "gray";
 				player.skinAdj = "tough";
 				player.skinType = SKIN_TYPE_PLAIN;
-				player.skinDesc = "skin";
 				changes++;
 			}
 			//Arms change to regular
@@ -1868,7 +1867,6 @@ package classes.Scenes.Places.Bazaar
 			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.skinType != SKIN_TYPE_FUR) {
 				outputText("\n\nYou shiver, feeling a bit cold. Just as you begin to wish for something to cover up with, it seems your request is granted; <b>fur begins to grow all over your body!</b> You tug at the tufts in alarm, but they're firmly rooted and... actually pretty soft. Huh. ");
 				player.skinAdj = "";
-				player.skinDesc = "fur";
 				player.skinType = SKIN_TYPE_FUR;
 				player.furColor = "brown";
 				changes++;
