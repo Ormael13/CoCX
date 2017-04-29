@@ -2524,7 +2524,9 @@ public function talkMenu():void
 	addButton(1, "Monks", jojoTalkJoiningTheMonks, null, null, null, "Ask him about how and why he became a monk.");
 	addButton(2, "MonksFall", jojoTalkFallOfTheMonks, null, null, null, "Ask him about the demise of the monks.");
 	addButton(3, "Forest", jojoTalkForestConvo, null, null, null, "Ask him about how he ended up in the forest.");
-	if (flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4) addButton(4, "You", jojoTalkYourOrigin, null, null, null, "Tell him about Ingnam and your history.");
+	if (flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4 && flags[kFLAGS.JOJO_BIMBO_STATE] == 0) addButton(4, "You", jojoTalkYourOrigin, null, null, null, "Tell him about Ingnam and your history.");
+	if (flags[kFLAGS.JOJO_BIMBO_STATE] == 1) addButton(4, "Thief", jojoCatchesThief, null, null, null, "Ask Jojo to catch the thief instead of guard the stash.");
+	if (flags[kFLAGS.JOJO_BIMBO_STATE] == 2) addButton(4, "Thief", jojoGuardsStash, null, null, null, "Ask Jojo to guard the stash instead of catch the thief.");
 	if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) addButton(5, "Factory", jojoTalkFactory, null, null, null, "Tell him about how you've shut down the factory.");
 	if (flags[kFLAGS.SAND_WITCHES_COWED] == 1 || flags[kFLAGS.SAND_WITCHES_FRIENDLY] == 1 || flags[kFLAGS.SAND_MOTHER_DEFEATED] == 1) addButton(6, "SandCave", jojoTalkSandCave, null, null, null, "Tell him about your encounter in the Sand Cave in the desert.");
 	if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 0 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4) addButton(7, "Training", apparantlyJojoDOESlift, null, null, null, "Ask him if he's willing to train you.");
@@ -2727,6 +2729,71 @@ public function jojoTalkYourOrigin():void // Prob tack on some interaction count
 
 	menu();
 	doNext(camp.returnToCampUseOneHour);
+}
+
+//Change Jojo Bimbo State from no bimbo to go bimbo
+//Requirements: Tell Jojo to guard the stash over catch the thief
+public function jojoCatchesThief():void {
+	clearOutput();
+	jojoSprite();
+	outputText("You tell Jojo that you've changed your mind on what you want him to do about the thief. You want him to try and catch the thief, though you want him to be careful.");
+	outputText("\n\n\"<i>I will be careful, don't worry, my friend. I assure you that everything will be fine,</i>\" Jojo insists. With that, he takes the bottle and leaves, clearly getting ready to lay a trap for the mysterious would-be thief.");
+	inventory.removeItemFromStorage(inventory.itemStorageDirectGet(), consumables.BIMBOLQ);
+	flags[kFLAGS.JOJO_BIMBO_STATE] = 2;
+	flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO] = 0; //Reset timer to 0.
+	doNext(playerMenu);
+}
+
+//Change Jojo Bimbo State from go bimbo to no bimbo
+//Requirements: Tell Jojo to catch the thief over guard the stash
+public function jojoGuardsStash():void {
+	clearOutput();
+	jojoSprite();
+		outputText("You tell Jojo that you've changed your mind-- you'd rather have him just keep a close eye on your stash. It sounds less risky than having him catch the thief.");
+		outputText("\n\n\"<i>I’m not afraid of danger; don’t forget that the forest where we met is full of monsters, especially imps and tentacle beasts.  I can defend myself.</i>\" Jojo points out, sounding a little annoyed at being dismissed like this.");
+		outputText("\n\nEven so, you’d still rather he didn’t risk himself.  There’s no telling what this thief would do if they got your hands on your Bimbo Liqueur.");
+		outputText("\n\n\"<i>What does it even do, anyway?  Why would anyone want it?</i>\" The baffled murine monk asks.");
+		outputText("\n\nKnowing the monk, he would surely oppose to you keeping it around... and you really don’t feel like throwing it away... so you tell him it’s just a very rare liquor you happened to find in a stash hidden somewhere.  You’re just saving it for a special occasion, that’s all.");
+		outputText("\n\n\"<i>Well, I guess even in these times, rare alcohol is still valuable... very well; if you’re sure it’s best that I leave it to you, I’ll focus on just guarding the camp.</i>\"");
+		outputText("\n\nYou thank Jojo for understanding... and for keeping your camp safe.\n\n");
+	flags[kFLAGS.JOJO_BIMBO_STATE] = 1;
+	flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO] = 0; //Reset timer to 0, not like it'll hurt.
+	if (player.hasItem(consumables.BIMBOLQ) || inventory.hasItemInStorage(consumables.BIMBOLQ)) { //Avoids infinite Bimbo Liqueur spawn
+		doNext(getBackYouMenu);
+	} else {
+		inventory.takeItem(consumables.BIMBOLQ, getBackYouMenu);
+	}
+}
+
+// A menu to let you decide you never want to change Jojo's no-bimbo state and get back the "You" button
+// It sets the Bimbo State at 0, so you can always go back and change your mind by re-adding Bimbo Liqueur to the stash
+public function getBackYouMenu():void {
+	clearOutput();
+	jojoSprite();
+	if (player.hasItem(consumables.BIMBOLQ)) {
+		outputText("You look at the Bimbo Liqueur in your hand.", false);
+	} else {
+		outputText("You hesitate for a moment, contemplating your choices.", false);
+	}
+	outputText(" You could always ask Jojo to catch the thief if you change your mind, but do you really think you ever will?", false);
+	menu();
+	addButton(0, "Yes", keepChanging, null, null, null, null);
+	addButton(1, "No", stopChanging, null, null, null, null);
+}
+
+public function keepChanging():void {
+	clearOutput();
+	jojoSprite();
+		outputText("Of course you might. It's impossible to tell what the future holds, and you might need him to if the thief becomes too much of a problem. You decide to keep your options open.", false);
+	doNext(playerMenu);
+}
+
+public function stopChanging():void {
+	clearOutput();
+	jojoSprite();
+		outputText("Of course you won't. You're sure Jojo could handle the thief, but you don't want to put him in that kind of dangerous position in the first place. You decide that you won't change your mind.", false);
+	flags[kFLAGS.JOJO_BIMBO_STATE] = 0;
+	doNext(playerMenu);
 }
 
 //Dungeon Convo: Factory
