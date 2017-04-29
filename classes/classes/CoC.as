@@ -119,7 +119,7 @@ the text from being too boring.
 //No longer needed. Added into CharCreation.as:		include "../../includes/customCharCreation.as";
 		
 		include "../../includes/descriptors.as";
-		include "../../includes/PlayerAppearance.as";
+		include "PlayerAppearance.as";
 
 //No longer needed:		include "../../includes/InitialiseUI.as";
 		include "../../includes/input.as";
