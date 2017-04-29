@@ -891,7 +891,7 @@ public function tamaniVictoryMenu():void {
 	}
 }
 
-internal function tamaniStealDildo():void {
+private function tamaniStealDildo():void {
 	outputText("And to the victor go the spoils. You open her satchel and take a look inside. ");
 	outputText("\n\n<b>(You find a well-crafted pink dildo inside! There are also some other stuff.)</b>");
 	player.createKeyItem("Deluxe Dildo", 0, 0, 0, 0);
