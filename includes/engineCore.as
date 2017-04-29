@@ -3622,7 +3622,7 @@ public function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):voi
 	}        
 	//If cock is bigger than unmodified vagina can hold - 100% stretch!
 	if(player.vaginas[vIndex].capacity() <= monster.cocks[cIndex].cArea()) {
-		if(player.vaginas[vIndex] < 5) {
+		if(player.vaginas[vIndex].vaginalLooseness < 5) {
 			trace("CUNT STRETCHED: By cock larger than it's total capacity.");
 			if(display) {
 				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + vaginaDescript(0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ", false);
@@ -3636,7 +3636,7 @@ public function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):voi
 	}
 	//If cock is within 75% of max, streeeeetch 33% of the time
 	if(player.vaginas[vIndex].capacity() * .75 <= monster.cocks[cIndex].cArea()) {
-		if(player.vaginas[vIndex] < 5) {
+		if(player.vaginas[vIndex].vaginalLooseness < 5) {
 			trace("CUNT STRETCHED: By cock @ 75% of capacity.");
 			if(display) {
 				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + vaginaDescript(0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ", false);

@@ -672,7 +672,7 @@
 		protected function initGenderless():void
 		{
 			this.cocks = [];
-			this.vaginas = [];
+			this.vaginas = new <VaginaClass>[];
 			initedGenitals = true;
 			if (plural) {
 				this.pronoun1 = "they";
