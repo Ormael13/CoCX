@@ -304,12 +304,11 @@ use namespace kGAMECLASS;
 				armorDef += (2 * (1 + newGamePlusMod()));
 			}
 			//Stacks on top of Thick Skin perk.
-			if(skinType == SKIN_TYPE_PARTIAL_FUR) armorDef += (1 + newGamePlusMod());
-			if(skinType == SKIN_TYPE_FUR || skinType == SKIN_TYPE_PARTIAL_CHITIN) armorDef += (2 * (1 + newGamePlusMod()));
-			if(skinType == SKIN_TYPE_PARTIAL_SCALES) armorDef += (3 * (1 + newGamePlusMod()));
-			if(skinType == SKIN_TYPE_CHITIN || skinType == SKIN_TYPE_PARTIAL_BARK) armorDef += (4 * (1 + newGamePlusMod()));//bee-morph (), mantis-morph (), scorpion-morph (wpisane), spider-morph (wpisane)
-			if(skinType == SKIN_TYPE_SCALES) armorDef += (6 * (1 + newGamePlusMod()));
-			if(skinType == SKIN_TYPE_BARK) armorDef += (8 * (1 + newGamePlusMod()));//może do 10 podnieść jak doda sie scales dla smoków?
+			var p:Boolean = skin.isPartiallyCovered();
+			if(skin.hasFur()) armorDef += (p?1:2)*(1 + newGamePlusMod());
+			if(skin.hasChitin()) armorDef += (p?2:4)*(1 + newGamePlusMod());
+			if(skin.hasScales()) armorDef += (p?3:6)*(1 + newGamePlusMod()); //bee-morph (), mantis-morph (), scorpion-morph (wpisane), spider-morph (wpisane)
+			if(skin.hasBark()) armorDef += (p?4:8)*(1 + newGamePlusMod()); //może do 10 podnieść jak doda sie scales dla smoków?
 			if(skinType == SKIN_TYPE_STONE) armorDef += (8 * (1 + newGamePlusMod()));//może do 10 podnieść jak doda sie scales dla smoków?
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorDef += (1 * (1 + newGamePlusMod()));

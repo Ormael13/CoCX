@@ -79,11 +79,18 @@
 				"sack"						: function(thisPtr:*):* { return kGAMECLASS.sackDescript(); },
 				"sheath"					: function(thisPtr:*):* { return kGAMECLASS.player.sheathDescription(); },
 				"shield"					: function(thisPtr:*):* { return kGAMECLASS.player.shieldName; },
-				"skin"						: function(thisPtr:*):* { return kGAMECLASS.player.skin.describe({layer:'basic'}); },
-				"skin.long"					: function(thisPtr:*):* { return kGAMECLASS.player.skin.describe({layer:'both'}); },
-				"skin.noadj"				: function(thisPtr:*):* { return kGAMECLASS.player.skin.describe({layer:'basic',noAdj:true}); },
-				"skinfurscales"				: function(thisPtr:*):* { return kGAMECLASS.player.skin.describe({layer:'cover'}); },
-				"skintone"					: function(thisPtr:*):* { return kGAMECLASS.player.skinTone; },
+				"skin"						: function(thisPtr:*):* {
+					trace("[DEPRECATED] tag [skin] was called");
+					return kGAMECLASS.player.skin.describe();
+				},
+				"skinfurscales"				: function(thisPtr:*):* {
+					trace("[DEPRECATED] tag [skinfurscales] was called");
+					return kGAMECLASS.player.skin.describe('coat');
+				},
+				"skintone"					: function(thisPtr:*):* {
+					trace("[DEPRECATED] tag [skintone] was called");
+					return kGAMECLASS.player.skinTone;
+				},
 				"teasetext"					: function(thisPtr:*):* { return kGAMECLASS.teaseText(); },
 				"tongue"					: function(thisPtr:*):* { return kGAMECLASS.tongueDescript(); },
 				"uppergarment"				: function(thisPtr:*):* { return kGAMECLASS.player.upperGarmentName; },

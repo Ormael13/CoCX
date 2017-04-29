@@ -16,9 +16,9 @@ import classes.internals.SimpleJsonable;
 
 		public function UnderBody(creature:Creature)
 		{
-			super(creature);
+			super(creature,[]);
 			this.skin = new Skin(creature);
-			addPublicJsonable(skin);
+			addPublicJsonables(["skin"]);
 		}
 
 		public function skinFurScales(...args):String { return skin.skinFurScales.apply(null, args); }
@@ -35,16 +35,5 @@ import classes.internals.SimpleJsonable;
 			skin.restore(keepTone);
 		}
 
-		public function setProps(p:Object):void
-		{
-			if (p.hasOwnProperty('type')) type = p.type;
-			if (p.hasOwnProperty('skin')) skin.setProps(p.skin);
-		}
-
-		public function setAllProps(p:Object, keepTone:Boolean = true):void
-		{
-			restore(keepTone);
-			setProps(p);
-		}
 	}
 }

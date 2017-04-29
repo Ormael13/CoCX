@@ -2,10 +2,11 @@
  * Created by aimozg on 25.04.2017.
  */
 package classes.BodyParts {
+import classes.Appearance;
 import classes.Creature;
 import classes.internals.Utils;
 
-public class LowerBody extends BodyPart {
+public class LowerBody extends SaveableBodyPart {
 	public var legCount:int = 2;
 
 	override public function set type(value:int):void {
@@ -56,8 +57,7 @@ public class LowerBody extends BodyPart {
 		}
 	}
 	public function LowerBody(creature:Creature) {
-		super(creature);
-		addPublicPrimitives("legCount");
+		super(creature,"lowerBodyPart",["legCount"]);
 	}
 
 	override public function restore(keepColor:Boolean = true):void {
@@ -161,7 +161,7 @@ public class LowerBody extends BodyPart {
 			return "flat pony-feet";
 		//BUNNAH
 		if (type == 12) {
-			select = Utils.rand(5);
+			select = rand(5);
 			if (select == 0)
 				return "large bunny feet";
 			else if (select == 1)
@@ -181,7 +181,7 @@ public class LowerBody extends BodyPart {
 		if (type == 14)
 			return "foot-paws";
 		if (type == 17) {
-			select = Utils.rand(4);
+			select = rand(4);
 			if (select == 0)
 				return "paws";
 			else if (select == 1)
@@ -299,9 +299,9 @@ public class LowerBody extends BodyPart {
 		//lowerBody:
 		//4 legs - centaur!
 		if (isDrider())
-			return Utils.num2Text(legCount) + " spider legs";
+			return num2Text(legCount) + " spider legs";
 		if (isTaur())
-			return Utils.num2Text(legCount) + " legs";
+			return num2Text(legCount) + " legs";
 
 		switch (type) {
 			case LOWER_BODY_TYPE_HUMAN:
@@ -368,6 +368,20 @@ public class LowerBody extends BodyPart {
 			default:
 				return "legs";
 		}
+	}
+	override protected function loadFromOldSave(savedata:Object):void {
+		type = intOr(savedata.lowerBody,LOWER_BODY_TYPE_HUMAN);
+		if (type === LOWER_BODY_TYPE_CENTAUR) {
+			type = LOWER_BODY_TYPE_HOOFED;
+		} else if (type === LOWER_BODY_TYPE_DEERTAUR) {
+			type = LOWER_BODY_TYPE_CLOVEN_HOOFED;
+		}
+		legCount = intOr(savedata.legCount,2);
+	}
+
+	override protected function saveToOldSave(savedata:Object):void {
+		savedata.lowerBody = type;
+		savedata.legCount = legCount;
 	}
 }
 }

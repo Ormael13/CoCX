@@ -15,16 +15,16 @@ public static const SKIN_TYPE_PLAIN:int                                         
 public static const SKIN_TYPE_FUR:int                                               =    1;
 public static const SKIN_TYPE_SCALES:int                                            =    2;
 public static const SKIN_TYPE_GOO:int                                               =    3;
-public static const SKIN_TYPE_UNDEFINED:int                                         =    4;
+[Deprecated] public static const SKIN_TYPE_UNDEFINED:int							=    4;
 public static const SKIN_TYPE_CHITIN:int											=	 5;
-public static const SKIN_TYPE_BARK:int												=	 6;
+public static const SKIN_TYPE_BARK:int												=	 6;//niedokończone
 public static const SKIN_TYPE_STONE:int												=	 7;//niedokończone
-public static const SKIN_TYPE_TATTOED:int											=	 8;
+[Deprecated] public static const SKIN_TYPE_TATTOED:int								=	 8;
 public static const SKIN_TYPE_AQUA_SCALES:int										=	 9;//niedokończone
-public static const SKIN_TYPE_PARTIAL_FUR:int										=	10;
-public static const SKIN_TYPE_PARTIAL_SCALES:int									=	11;
-public static const SKIN_TYPE_PARTIAL_CHITIN:int									=	12;//niedokończone
-public static const SKIN_TYPE_PARTIAL_BARK:int										=	13;//niedokończone
+[Deprecated] public static const SKIN_TYPE_PARTIAL_FUR:int							=	10;
+[Deprecated] public static const SKIN_TYPE_PARTIAL_SCALES:int						=	11;
+[Deprecated] public static const SKIN_TYPE_PARTIAL_CHITIN:int						=	12;//niedokończone
+[Deprecated] public static const SKIN_TYPE_PARTIAL_BARK:int							=	13;//niedokończone
 public static const SKIN_TYPE_DRAGON_SCALES:int										=	14;//niedokończone
 public static const SKIN_TYPE_MOSS:int												=	15;
 public static const SKIN_TYPE_PARTIAL_DRAGON_SCALES:int								=	16;//niedokończone
@@ -79,6 +79,11 @@ public static const FACE_SALAMANDER_FANGS:int                                   
 public static const FACE_YETI_FANGS:int                                		      	=   27;
 public static const FACE_ORCA:int                                		     	 	=   28;
 public static const FACE_PLANT_DRAGON:int                                		    =   29;
+
+// face.cheekDecoration etc
+public static const DECORATION_NONE:int                                             =    0;
+public static const DECORATION_GENERIC:int                                          =    1;
+public static const DECORATION_TATTOO:int                                           =    2;
 
 // tongueType
 public static const TONUGE_HUMAN:int                                                =   0;

@@ -1,167 +1,345 @@
 package classes.BodyParts {
+import classes.Appearance;
 import classes.Creature;
-import classes.internals.Utils;
 
 /**
  * Container class for the players skin
  * @since December 27, 2016
  * @author Stadler76
  */
-public class Skin extends BodyPart {
+public class Skin extends SaveableBodyPart {
 	include "../../../includes/appearanceDefs.as";
 
-	public var desc:String     = "skin";
-	public var furColor:String = "no";
-	public var tone:String     = "albino";
-	public var adj:String      = "";
+	public static const COVERAGE_NONE:int   = 0;
+	public static const COVERAGE_LOW:int    = 1;
+	public static const COVERAGE_MEDIUM:int = 2;
+	public static const COVERAGE_HIGH:int   = 3;
+	public static const COVERAGE_FULL:int   = 4;
+
+	public var base:SkinLayer;
+	public var coat:SkinLayer;
+	private var _coverage:int  = COVERAGE_NONE;
 
 	public function Skin(creature:Creature) {
-		super(creature);
-		addPublicPrimitives("tone", "adj", "desc", "furColor");
+		super(creature, "skin", ["coverage"]);
+		base = new SkinLayer(this);
+		coat = new SkinLayer(this);
+		addPublicJsonables(["base","coat"]);
 	}
 
+
 	public function skinFurScales():String {
-		return describe({layer: 'cover'});
+		return describe('cover');
+	}
+	public function defaultDesc():String {
+		return Appearance.DEFAULT_SKIN_DESCS[
+					   isPartiallyCovered()
+							   ? PARTIAL_TO_FULL[type]
+							   : type
+					   ] || "skin";
+	}
+	public function defaultAdj():String {
+		return Appearance.DEFAULT_SKIN_ADJS[
+					   isPartiallyCovered()
+							   ? PARTIAL_TO_FULL[type]
+							   : type
+					   ] || "";
+	}
+	public function get coverage():int {
+		return _coverage;
+	}
+	public function set coverage(value:int):void {
+		if (value <= COVERAGE_NONE) {
+			_coverage = COVERAGE_NONE;
+		} else if (value >= COVERAGE_FULL) {
+			base.setAllProps(coat, false);
+			_coverage = COVERAGE_NONE;
+		} else {
+			_coverage = value;
+		}
+	}
+	public function get tone():String {
+		return color;
+	}
+	public function get color():String {
+		return skinValue(base.color, coat.color);
+	}
+	public function get desc():String {
+		return skinValue(base.desc, coat.desc);
+	}
+	public function get adj():String {
+		return skinValue(base.adj, coat.adj);
+	}
+	override public function get type():int {
+		if (coverage >= COVERAGE_FULL) return coat.type;
+		return base.type;
 	}
 	/**
-	 * @param options.layer: (default 'basic'
-	 *  opt\cov | 0 (none)| 2 (full)| 1 (partial)
-	 * ---------+---------+---------+------------
-	 *  'basic' | [basic] | [basic] | [basic]
-	 *  'cover' | [basic] | [cover] | [cover]
-	 *  'both'  | [basic] | [cover] | [basic] covered with [cover]
-	 * @param options.noTone (default false)
-	 * @param options.noAdj (default false)
+	 * @param props {type, color, adj, desc}
 	 */
-	override public function describe(options:Object):String {
-		switch (options.layer) {
-			case 'cover':
-				return coverLayerDesc(options);
-			case 'both':
-				switch (coverage()) {
-					case 0:
-						return basicLayerDesc(options.noAdj, options.noTone);
-					case 1:
-						return basicLayerDesc(options.noAdj, options.noTone) +
-							   ' covered with ' +
-							   coverLayerDesc(options.noAdj, options.noTone);
+	public function setSingleLayer(props:Object):void {
+		coverage = COVERAGE_NONE;
+		base.setProps(props);
+	}
+	/**
+	 * @param coat {type, color, adj, desc}
+	 * @param base {type, color, adj, desc}
+	 */
+	public function setPartiallyCovered(coat:Object,base:Object=null):void {
+		coverage = COVERAGE_LOW;
+		this.coat.setProps(coat);
+		this.base.setProps(base);
+	}
+	/**
+	 * @param coat {type, color, adj, desc}
+	 * @param base {type, color, adj, desc}
+	 */
+	public function setMixed(coat:Object,base:Object):void {
+		coverage = COVERAGE_MEDIUM;
+		this.coat.setProps(coat);
+		this.base.setProps(base);
+	}
+	/**
+	 * @param coat {type, color, adj, desc}
+	 * @param base {type, color, adj, desc}
+	 */
+	public function setCovered(coat:Object,base:Object=null):void {
+		coverage = COVERAGE_HIGH;
+		this.coat.setProps(coat);
+		this.base.setProps(base);
+	}
+	/**
+	 * @param layer 'base','coat','skin' (both layer if MEDIUM, else major),'full' (both layers if present)
+	 * @return
+	 */
+	public function describe(layer:String = 'skin', noAdj:Boolean = false, noTone:Boolean = false):String {
+		var s_base:String = base.describe(noAdj, noTone);
+		var s_coat:String = coat.describe(noAdj,noTone);
+		switch (coverage) {
+			case COVERAGE_NONE:
+				return s_base;
+			case COVERAGE_LOW:
+				switch (layer) {
+					case 'coat':
+						return s_coat;
+					case 'full':
+						return s_base + " with patches of " + s_coat;
+					case 'skin':
+					case 'base':
 					default:
-					case 2:
-						return coverLayerDesc(options.noAdj, options.noTone);
+						return s_base;
 				}
-			case 'basic':
+				break;
+			case COVERAGE_MEDIUM:
+				switch (layer) {
+					case 'coat':
+						return s_coat;
+					case 'full':
+					case 'skin':
+						return s_base + " and " + s_coat;
+					case 'base':
 			default:
-				return basicLayerDesc(options);
+						return s_base;
+		}
+				break;
+			case COVERAGE_HIGH:
+				switch (layer) {
+					case 'base':
+						return s_coat;
+					case 'full':
+						return s_base + " under " + s_coat;
+					case 'skin':
+					case 'coat':
+			default:
+						return s_coat;
+		}
+				break;
+			case COVERAGE_FULL:
+			default:
+				return s_coat;
+		}
+
+	}
+	override public function descriptionFull():String {
+		return describe("full");
+	}
+	public function hasAny(...types:Array):Boolean {
+		if (types.length === 1 && types[0] is Array) types = types[0];
+		return (coverage < COVERAGE_FULL && base.isAny(types)) ||
+			   (coverage > COVERAGE_NONE && coat.isAny(types));
+	}
+	public function hasFur():Boolean {
+		return hasAny(SKIN_TYPE_FUR);
+	}
+	public function hasScales():Boolean {
+		return hasAny(SKIN_TYPE_SCALES, SKIN_TYPE_AQUA_SCALES);
+	}
+	public function hasChitin():Boolean {
+		return hasAny(SKIN_TYPE_CHITIN);
+	}
+	public function hasBark():Boolean {
+		return hasAny(SKIN_TYPE_BARK);
+	}
+	public function isPartiallyCovered():Boolean {
+		return coverage > COVERAGE_NONE && coverage < COVERAGE_HIGH;
+	}
+	public function isCovered():Boolean {
+		return coverage > COVERAGE_NONE && coverage < COVERAGE_FULL;
+	}
+	public function isFacePartiallyCovered():Boolean {
+		return coverage == COVERAGE_HIGH;
+	}
+	public function hasReptileScales():Boolean {
+		return hasAny(SKIN_TYPE_SCALES);
+	}
+	public function hasDragonScales():Boolean {
+		return false;//type == SKIN_TYPE_DRAGON_SCALES;
+	}
+	public function hasLizardScales():Boolean {
+		return hasAny(SKIN_TYPE_SCALES);//type == SKIN_TYPE_LIZARD_SCALES;
+	}
+	public function hasNonLizardScales():Boolean {
+		return hasScales() && !hasLizardScales();
+	}
+	[Deprecated]
+	public function hasFurOrScales():Boolean {
+		return hasFur() || hasScales();
+	}
+	public function hasGooSkin():Boolean {
+		return hasAny(SKIN_TYPE_GOO);
+	}
+	public function hasPlainSkinOnly():Boolean {
+		return coverage == COVERAGE_NONE && base.type == SKIN_TYPE_PLAIN;
+	}
+	public function hasPlainSkin():Boolean {
+		return coverage < COVERAGE_FULL && base.type == SKIN_TYPE_PLAIN;
+	}
+	public function hasSmoothSkinType():Boolean {
+		return isAny(SKIN_TYPE_PLAIN, SKIN_TYPE_GOO, SKIN_TYPE_STONE);
+	}
+	override public function restore(keepTone:Boolean = true):void {
+		coverage = COVERAGE_NONE;
+		base.restore(keepTone);
+		coat.restore(keepTone);
+	}
+	private function skinValue(inBase:String, inCoat:String):String {
+		switch (coverage) {
+			case COVERAGE_NONE:
+			case COVERAGE_LOW:
+				return inBase;
+			case COVERAGE_MEDIUM:
+				return inBase + " and " + inCoat;
+			case COVERAGE_HIGH:
+			case COVERAGE_FULL:
+			default:
+				return inCoat;
 		}
 	}
-	public function coverColor():String {
-		switch (type) {
-			case SKIN_TYPE_PARTIAL_FUR:
-			case SKIN_TYPE_FUR:
-				return creature.furColor;
-			case SKIN_TYPE_PARTIAL_SCALES:
-			case SKIN_TYPE_SCALES:
-				return creature.scalesColor;
-			case SKIN_TYPE_PARTIAL_CHITIN:
-			case SKIN_TYPE_CHITIN:
-				return creature.chitinColor;
-			case SKIN_TYPE_PARTIAL_BARK:
-				return "";
-			default:
-				return "no";
-		}
-	}
-	public function coverLayerDesc(noAdj:Boolean = false, noTone:Boolean = false):String {
-		var p_adj:String  = coverage() == 1 ? "small patches of" : adj;
-		var p_tone:String = coverage() > 0 ? coverColor() : tone;
-		if (noTone) p_tone = "";
-		if (noAdj) p_adj = "";
-		return p_adj + (p_adj && p_tone ? " " : "") + p_tone + (p_adj || p_tone ? " " : "") + desc;
-	}
-	public function basicLayerDesc(noAdj:Boolean = false, noTone:Boolean = false):String {
-		var p_adj:String  = !noAdj ? adj : "";
-		var p_tone:String = coverage() > 1 ? coverColor() : tone;
-		var p_desc:String = (coverage() <= 1) ? desc : "skin";
-		if (noTone) p_tone = "";
-		return p_adj + (p_adj && p_tone ? ", " : "") + p_tone + (p_adj || p_tone ? " " : "") + p_desc;
-	}
-	// Returns 0: none, 1: partial, 2: max cover
-	public function coverage():int {
-		switch (type) {
+	//noinspection JSDeprecatedSymbols
+	private static const PARTIAL_TO_FULL:Object = createMapFromPairs([
+		[SKIN_TYPE_PARTIAL_CHITIN, SKIN_TYPE_CHITIN],
+		[SKIN_TYPE_PARTIAL_SCALES, SKIN_TYPE_SCALES],
+		[SKIN_TYPE_PARTIAL_FUR, SKIN_TYPE_FUR],
+		[SKIN_TYPE_PARTIAL_BARK, SKIN_TYPE_BARK],
+		[SKIN_TYPE_PARTIAL_AQUA_SCALES, SKIN_TYPE_AQUA_SCALES],
+		[SKIN_TYPE_PARTIAL_DRAGON_SCALES, SKIN_TYPE_DRAGON_SCALES],
+		[SKIN_TYPE_PARTIAL_STONE, SKIN_TYPE_PARTIAL_STONE]
+	]);
+	[Deprecated]
+	public override function set type(value:int):void {
+		//noinspection JSDeprecatedSymbols
+		switch (value) {
 			case SKIN_TYPE_PLAIN:
 			case SKIN_TYPE_GOO:
 			case SKIN_TYPE_UNDEFINED:
 			case SKIN_TYPE_TATTOED:
 			case SKIN_TYPE_STONE:
-				return 0;
+			case SKIN_TYPE_SCALES:
+			case SKIN_TYPE_AQUA_SCALES:
+				coverage  = COVERAGE_NONE;
+				base.type = value;
+				break;
 			case SKIN_TYPE_PARTIAL_FUR:
 			case SKIN_TYPE_PARTIAL_SCALES:
 			case SKIN_TYPE_PARTIAL_CHITIN:
 			case SKIN_TYPE_PARTIAL_BARK:
-				return 1;
+				coverage  = COVERAGE_LOW;
+				base.type = SKIN_TYPE_PLAIN;
+				coat.type = PARTIAL_TO_FULL[value];
+				break;
 			case SKIN_TYPE_FUR:
-			case SKIN_TYPE_SCALES:
-			case SKIN_TYPE_AQUA_SCALES:
 			case SKIN_TYPE_CHITIN:
 			case SKIN_TYPE_BARK:
-				return 2;
-			default:
-				return 0;
+				coverage  = COVERAGE_HIGH;
+				base.type = SKIN_TYPE_PLAIN;
+				coat.type = value;
+				break;
 		}
 	}
-	public function description(noAdj:Boolean = false, noTone:Boolean = false):String {
-		return describe({noAdj: noAdj, noTone: noTone});
+	override protected function loadFromOldSave(savedata:Object):void {
+		//Convert from old skinDesc to new skinAdj + skinDesc!
+		var type:int = intOr(savedata.skinType, SKIN_TYPE_PLAIN);
+		//noinspection JSDeprecatedSymbols
+		if (type === SKIN_TYPE_UNDEFINED) type = SKIN_TYPE_PLAIN;
+		var desc:String = stringOr(savedata.skinDesc, "");
+		var adj:String  = stringOr(savedata.skinAdj, "");
+		for each (var legacyAdj:String in ["smooth", "thick", "rubber", "latex", "slimey"]) {
+			if (desc.indexOf(legacyAdj) != -1) {
+				adj = legacyAdj;
+				if (type == SKIN_TYPE_FUR) {
+					desc = "fur";
+				} else if (type == SKIN_TYPE_GOO) {
+					desc = "goo";
+				} else if ([
+							   SKIN_TYPE_SCALES,
+							   SKIN_TYPE_AQUA_SCALES
+						   ].indexOf(type) >= 0) {
+					desc = "scales";
+				} else {
+					desc = "skin";
 	}
-
-	public function hasFur():Boolean {
-		return [SKIN_TYPE_FUR, SKIN_TYPE_PARTIAL_FUR].indexOf(type) != -1;
 	}
-	public function hasScales():Boolean {
-		return [SKIN_TYPE_SCALES, SKIN_TYPE_AQUA_SCALES, SKIN_TYPE_PARTIAL_SCALES].indexOf(type) != -1;
+		}
+		var tone:String        = stringOr(savedata.skinTone, "albino");
+		var furColor:String    = stringOr(savedata.furColor, stringOr(savedata.hairColor, ""));
+		var chitinColor:String = stringOr(savedata.chitinColor, "");
+		var scalesColor:String = stringOr(savedata.scalesColor, "");
+		if (furColor === "no") furColor = "";
+		if (chitinColor === "no") chitinColor = "";
+		if (scalesColor === "no") scalesColor = "";
+		//noinspection JSDeprecatedSymbols
+		if (InCollection(type, SKIN_TYPE_PLAIN, SKIN_TYPE_GOO, SKIN_TYPE_TATTOED, SKIN_TYPE_STONE, SKIN_TYPE_SCALES, SKIN_TYPE_AQUA_SCALES)) {
+			coverage   = COVERAGE_NONE;
+			base.type  = type;
+			base.color = (type == SKIN_TYPE_SCALES && scalesColor) ? scalesColor : tone;
+			base.adj   = adj;
+			base.desc  = desc;
+		} else {
+			coverage = COVERAGE_HIGH;
+			if (type in PARTIAL_TO_FULL) {
+				coverage = COVERAGE_LOW;
+				type     = PARTIAL_TO_FULL[type];
+			}
+			coat.type  = type;
+			coat.adj   = adj;
+			coat.desc  = desc;
+			base.color = tone;
+			if (type === SKIN_TYPE_FUR) {
+				coat.color = furColor;
+			} else if (type === SKIN_TYPE_SCALES) {
+				coat.color = scalesColor;
+			} else if (type === SKIN_TYPE_CHITIN) {
+				coat.color = chitinColor;
+			}
+			if (!coat.color) coat.color = furColor || scalesColor || chitinColor || "white";
+		}
 	}
-
-	public function hasReptileScales():Boolean {
-		return [SKIN_TYPE_SCALES, SKIN_TYPE_PARTIAL_SCALES].indexOf(type) != -1;
-	}
-
-	public function hasDragonScales():Boolean {
-		return false;//type == SKIN_TYPE_DRAGON_SCALES;
-	}
-
-	public function hasLizardScales():Boolean {
-		return type == SKIN_TYPE_SCALES;//type == SKIN_TYPE_LIZARD_SCALES;
-	}
-
-	public function hasNonLizardScales():Boolean {
-		return hasScales() && !hasLizardScales();
-	}
-
-	public function hasFurOrScales():Boolean {
-		return hasFur() || hasScales();
-	}
-
-	public function hasGooSkin():Boolean {
-		return type == SKIN_TYPE_GOO;
-	}
-
-	public function hasPlainSkin():Boolean {
-		return type == SKIN_TYPE_PLAIN;
-	}
-	override public function restore(keepTone:Boolean = true):void {
-		super.restore(keepTone);
-		if (!keepTone) tone = "albino";
-		desc     = "skin";
-		furColor = "no";
-		adj      = "";
-	}
-
-	public function setProps(p:Object):void {
-		Utils.copyObjectEx(this, p, myPublicPrimitives);
-	}
-
-	public function setAllProps(p:Object, keepTone:Boolean = true):void {
-		restore(keepTone);
-		setProps(p);
+	override protected function saveToOldSave(savedata:Object):void {
+		savedata.skinType = type;
+		savedata.skinDesc = desc;
+		savedata.skinAdj  = adj;
+		savedata.skinTone = tone;
+		savedata.furColor = coat.color;
 	}
 }
 }

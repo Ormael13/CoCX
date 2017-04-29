@@ -5,6 +5,7 @@ package classes.BodyParts {
 import classes.CoC_Settings;
 import classes.Creature;
 import classes.internals.SimpleJsonable;
+import classes.internals.Utils;
 
 public class BodyPart extends SimpleJsonable {
 	include "../../../includes/appearanceDefs.as";
@@ -13,28 +14,42 @@ public class BodyPart extends SimpleJsonable {
 	public function restore(keepColor:Boolean = true):void {
 		type = 0;
 	}
-	protected var creature:Creature;
-	public function BodyPart(creature:Creature) {
-		addPublicPrimitives("type");
-		this.creature       = creature;
+	private var _creature:Creature;
+	public function get creature():Creature {
+		return _creature;
+	}
+	public function BodyPart(creature:Creature,publicPrimitives:Array) {
+		addPublicPrimitives(publicPrimitives);
+		addPublicPrimitives(["type"]);
+		this._creature       = creature;
 	}
 	public function get type():int {return _type;}
 	public function set type(value:int):void {_type = value;}
-	override public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
-		restore(false);
-		super.loadFromObject(o, ignoreErrors);
-		// Upgrade old saves
-		if (typeof o === 'object' && o != null && "type" in o && !("_type" in o)) this.type = o.type;
-	}
 
+	public function isAny(...args:Array):Boolean {
+		if (args.length == 1 && args[0] is Array) args = args[0];
+		for each (var i_type:int in args) if (type == i_type) return true;
+		return false;
+	}
+	public function isNeither(...args:Array):Boolean {
+		if (args.length == 1 && args[0] is Array) args = args[0];
+		for each (var i_type:int in args) if (type == i_type) return false;
+		return true;
+	}
 	/**
 	 * Should be implemented in subclasses.
-	 * @param options A part-dependent option set, for example {noAdj:true,noTone:true}
-	 * Unless overriden by options, should return noun phrase
 	 */
-	public function describe(options:Object):String {
+	public function descriptionFull():String {
 		CoC_Settings.errorAMC("BodyPart","describe");
 		return "something";
+	}
+	public function setProps(p:Object):void {
+		copyObjectEx(this, p, myPublicPrimitives);
+	}
+
+	public function setAllProps(p:Object, keepTone:Boolean = true):void {
+		restore(keepTone);
+		setProps(p);
 	}
 }
 }
