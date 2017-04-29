@@ -154,7 +154,7 @@ package classes.Scenes
 			var soulforceamountrestored:int = 10;
 			if (player.alicornScore() >= 6) soulforceamountrestored += 10;
 			if (player.kitsuneScore() >= 6) soulforceamountrestored += 10;
-			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailVenom == 9) soulforceamountrestored += 40;
+			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailCount == 9) soulforceamountrestored += 40;
 			if (player.unicornScore() >= 5) soulforceamountrestored += 5;
 			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 10;
 			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 10;
@@ -187,7 +187,7 @@ package classes.Scenes
 			var soulforceamountrestored:int = 30;
 			if (player.alicornScore() >= 6) soulforceamountrestored += 30;
 			if (player.kitsuneScore() >= 6) soulforceamountrestored += 30;
-			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailVenom == 9) soulforceamountrestored += 120;
+			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailCount == 9) soulforceamountrestored += 120;
 			if (player.unicornScore() >= 5) soulforceamountrestored += 15;
 			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 30;
 			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 30;
@@ -221,7 +221,7 @@ package classes.Scenes
 			var soulforceamountrestored:int = 70;
 			if (player.alicornScore() >= 6) soulforceamountrestored += 70;
 			if (player.kitsuneScore() >= 6) soulforceamountrestored += 70;
-			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailVenom == 9) soulforceamountrestored += 280;
+			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailCount == 9) soulforceamountrestored += 280;
 			if (player.unicornScore() >= 5) soulforceamountrestored += 35;
 			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 70;
 			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 70;
@@ -255,7 +255,7 @@ package classes.Scenes
 			var soulforceamountrestored:int = 110;
 			if (player.alicornScore() >= 6) soulforceamountrestored += 110;
 			if (player.kitsuneScore() >= 6) soulforceamountrestored += 110;
-			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailVenom == 9) soulforceamountrestored += 440;
+			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailCount == 9) soulforceamountrestored += 440;
 			if (player.unicornScore() >= 5) soulforceamountrestored += 55;
 			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 110;
 			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 110;
@@ -289,7 +289,7 @@ package classes.Scenes
 			var soulforceamountrestored:int = 150;
 			if (player.alicornScore() >= 6) soulforceamountrestored += 150;
 			if (player.kitsuneScore() >= 6) soulforceamountrestored += 150;
-			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailVenom == 9) soulforceamountrestored += 600;
+			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailCount == 9) soulforceamountrestored += 600;
 			if (player.unicornScore() >= 5) soulforceamountrestored += 75;
 			if (player.findPerk(PerkLib.SoulApprentice) >= 0) soulforceamountrestored += 150;
 			if (player.findPerk(PerkLib.SoulPersonage) >= 0) soulforceamountrestored += 150;
@@ -333,7 +333,7 @@ package classes.Scenes
 			var costPercent:Number = 100;
 			if (player.alicornScore() >= 6) costPercent += 100;
 			if (player.kitsuneScore() >= 6) costPercent += 100;
-			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailVenom == 9) costPercent += 400;
+			if (player.kitsuneScore() >= 12 && player.tailType == 13 && player.tailCount == 9) costPercent += 400;
 			if (player.unicornScore() >= 5) costPercent += 50;
 			if (player.findPerk(PerkLib.SoulApprentice) >= 0) costPercent += 100;
 			if (player.findPerk(PerkLib.SoulPersonage) >= 0) costPercent += 100;

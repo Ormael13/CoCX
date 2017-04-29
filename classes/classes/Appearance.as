@@ -2838,16 +2838,16 @@
 			
 			var descript:String = "";
 			
-			if (i_creature.tailType == TAIL_TYPE_FOX && i_creature.tailVenom >= 1)
+			if (i_creature.tailType == TAIL_TYPE_FOX && i_creature.tailCount >= 1)
 			{
 				// Kitsune tails, we're using tailVenom to track tail count
-				if (i_creature.tailVenom > 1)
+				if (i_creature.tailCount > 1)
 				{
-					if (i_creature.tailVenom == 2) descript += "pair ";
-					else if (i_creature.tailVenom == 3) descript += "trio ";
-					else if (i_creature.tailVenom == 4) descript += "quartet ";
-					else if (i_creature.tailVenom == 5) descript += "quintet ";
-					else if (i_creature.tailVenom > 5) descript += "bundle ";
+					if (i_creature.tailCount == 2) descript += "pair ";
+					else if (i_creature.tailCount == 3) descript += "trio ";
+					else if (i_creature.tailCount == 4) descript += "quartet ";
+					else if (i_creature.tailCount == 5) descript += "quintet ";
+					else if (i_creature.tailCount > 5) descript += "bundle ";
 					
 					descript += "of kitsune tails";
 				}
@@ -2872,9 +2872,9 @@
 			
 			var descript:String = "";
 			
-			if (i_creature.tailType == TAIL_TYPE_FOX && i_creature.tailVenom >= 1)
+			if (i_creature.tailType == TAIL_TYPE_FOX && i_creature.tailCount >= 1)
 			{
-				if (i_creature.tailVenom == 1)
+				if (i_creature.tailCount == 1)
 				{
 					descript += "your kitsune tail";
 				}

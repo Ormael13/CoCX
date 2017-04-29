@@ -230,7 +230,7 @@ public function startUrtaQuest():void {
 	player.earType = EARS_FOX;
 	player.faceType = FACE_FOX;
 	player.tailType = TAIL_TYPE_FOX;
-	player.tailVenom = 1;
+	player.tailCount = 1;
 	player.createCock();
 	player.cocks[0].cockType = CockTypesEnum.HORSE;
 	player.cocks[0].cockLength = 20;

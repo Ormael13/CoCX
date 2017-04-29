@@ -234,7 +234,7 @@ import classes.GlobalFlags.kFLAGS;
 	public function beard():String{ return facePart.beard(); }
 	public function hasMuzzle():Boolean{ return facePart.hasMuzzle(); }
 	public function face():String { return facePart.describe({}); }
-	public function faceDesc():String { return facePart.describe({withFem:true}); }
+	public function faceDesc():String { return facePart.describe({fem:true}); }
 	public function hasLongTail():Boolean { return tail.isLong(); }
 
 		public function isPregnant():Boolean { return _pregnancyType != 0; }
@@ -732,8 +732,8 @@ import classes.GlobalFlags.kFLAGS;
 			var max:Number = 100;
 			if (game.player.alicornScore() >= 6) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.foxScore() >= 7) max += (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.kitsuneScore() >= 5 && game.player.tailVenom >= 2 && game.player.tailVenom < 9) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.kitsuneScore() >= 12 && game.player.tailVenom == 9) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.kitsuneScore() >= 5 && game.player.tailCount >= 2 && game.player.tailCount < 9) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.kitsuneScore() >= 12 && game.player.tailCount == 9) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.lizardScore() >= 4) max += (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.unicornScore() >= 5) max += (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.ArchersStaminaI) >= 0) max += Math.round(spe);
@@ -833,8 +833,8 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.AscensionSoulPurity) >= 0) max += perkv1(PerkLib.AscensionSoulPurity) * 50;
 			if (findPerk(PerkLib.JobSoulCultivator) >= 0) {//3720-4720 soulforce na razie przed liczeniem mnożnika jest
 				var multimax:Number = 1;
-				if (game.player.kitsuneScore() >= 5 && game.player.tailVenom >= 2 && game.player.tailVenom < 9) multimax += 0.2;
-				if (game.player.kitsuneScore() >= 12 && game.player.tailVenom == 9) multimax += 0.4;
+				if (game.player.kitsuneScore() >= 5 && game.player.tailCount >= 2 && game.player.tailCount < 9) multimax += 0.2;
+				if (game.player.kitsuneScore() >= 12 && game.player.tailCount == 9) multimax += 0.4;
 				if (findPerk(PerkLib.HistoryCultivator) >= 0 || findPerk(PerkLib.PastLifeCultivator) >= 0) multimax += 0.1;
 				if (findPerk(PerkLib.JobMunchkin) >= 0) multimax += 0.1;
 				if (findPerk(PerkLib.Dantain) >= 0) {

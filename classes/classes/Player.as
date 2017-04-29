@@ -1026,12 +1026,12 @@ use namespace kGAMECLASS;
 			}
 			if (kitsuneScore() >= 5)
 			{
-				if (tailType == 13 && tailVenom >= 2 && kitsuneScore() >= 6) {
+				if (tailType == 13 && tailCount >= 2 && kitsuneScore() >= 6) {
 					if (kitsuneScore() >= 12) {
-						if (tailVenom == 9 && isTaur()) {
+						if (tailCount == 9 && isTaur()) {
 							race = "nine tailed kitsune-taur";
 						}
-						else if (tailVenom == 9) {
+						else if (tailCount == 9) {
 							race = "nine tailed kitsune";
 						}
 						else {
@@ -1504,7 +1504,7 @@ use namespace kGAMECLASS;
 				grandchimeraCounter++;
 /*			if (ferretScore() >= 4)
 				grandchimeraCounter++;*/
-			if (kitsuneScore() >= 6 && tailType == 13 && tailVenom >= 2)
+			if (kitsuneScore() >= 6 && tailType == 13 && tailCount >= 2)
 				grandchimeraCounter++;	
 /*			if (horseScore() >= 4)
 				grandchimeraCounter++;
@@ -1906,7 +1906,7 @@ use namespace kGAMECLASS;
 				foxCounter++;
 			if (tailType == 13)
 				foxCounter++;
-			if (tailType == 13 && tailVenom >= 2)
+			if (tailType == 13 && tailCount >= 2)
 				foxCounter -= 7;
 			if (armType == 13)
 				foxCounter++;
@@ -2074,15 +2074,15 @@ use namespace kGAMECLASS;
 			//If the character has ears other than fox ears, -1
 			if (earType != EARS_FOX)
 				kitsuneCounter--;
-			if (tailType == TAIL_TYPE_FOX && tailVenom >= 2 && tailVenom < 4)
+			if (tailType == TAIL_TYPE_FOX && tailCount >= 2 && tailCount < 4)
 				kitsuneCounter++;
-			if (tailType == TAIL_TYPE_FOX && tailVenom >= 4 && tailVenom < 6)
+			if (tailType == TAIL_TYPE_FOX && tailCount >= 4 && tailCount < 6)
 				kitsuneCounter += 2;
-			if (tailType == TAIL_TYPE_FOX && tailVenom >= 6 && tailVenom < 9)
+			if (tailType == TAIL_TYPE_FOX && tailCount >= 6 && tailCount < 9)
 				kitsuneCounter += 3;
-			if (tailType == TAIL_TYPE_FOX && tailVenom == 9)
+			if (tailType == TAIL_TYPE_FOX && tailCount == 9)
 				kitsuneCounter += 4;
-			if (tailType != TAIL_TYPE_FOX || (tailType == TAIL_TYPE_FOX && tailVenom < 2))
+			if (tailType != TAIL_TYPE_FOX || (tailType == TAIL_TYPE_FOX && tailCount < 2))
 				kitsuneCounter -= 7;
 			if (skinType == SKIN_TYPE_TATTOED || skinType == SKIN_TYPE_FUR)
 				kitsuneCounter++;
@@ -2692,10 +2692,10 @@ use namespace kGAMECLASS;
 		//	if (tailType == TAIL_TYPE_FOX)
 		//		kitshooCounter++;
 			//If the character has two to eight fox tails, +2
-		//	if (tailType == TAIL_TYPE_FOX && tailVenom >= 2 && tailVenom < 9)
+		//	if (tailType == TAIL_TYPE_FOX && tailCount >= 2 && tailCount < 9)
 		//		kitshooCounter += 2;
 			//If the character has nine fox tails, +3
-		//	if (tailType == TAIL_TYPE_FOX && tailVenom == 9)
+		//	if (tailType == TAIL_TYPE_FOX && tailCount == 9)
 		//		kitshooCounter += 3;
 			//If the character has tattooed skin, +1
 			//9999
@@ -3758,7 +3758,7 @@ use namespace kGAMECLASS;
 				}
 			}//+20/10-20
 			if (kitsuneScore() >= 5) {
-				if (kitsuneScore() >= 12 && tailType == 13 && tailVenom == 9) {
+				if (kitsuneScore() >= 12 && tailType == 13 && tailCount == 9) {
 					maxStr -= (40 * (1 + newGamePlusMod()));;
 					maxSpe += (60 * (1 + newGamePlusMod()));;
 					maxInt += (100 * (1 + newGamePlusMod()));;
@@ -3773,17 +3773,17 @@ use namespace kGAMECLASS;
 			}//+50/50-60
 		/*	if (kitshooScore() >= 6) {
 				if (tailType == 26) {
-					if (tailVenom == 1) {
+					if (tailCount == 1) {
 						maxStr -= (2 * (1 + newGamePlusMod()));
 						maxSpe += (2 * (1 + newGamePlusMod()));
 						maxInt += (4 * (1 + newGamePlusMod()));
 					}
-					else if (tailVenom >= 2 && tailVenom < 9) {
-						maxStr -= ((tailVenom + 1) * (1 + newGamePlusMod()));
-						maxSpe += ((tailVenom + 1) * (1 + newGamePlusMod()));
-						maxInt += (((tailVenom/2) + 2) * (1 + newGamePlusMod()));
+					else if (tailCount >= 2 && tailCount < 9) {
+						maxStr -= ((tailCount + 1) * (1 + newGamePlusMod()));
+						maxSpe += ((tailCount + 1) * (1 + newGamePlusMod()));
+						maxInt += (((tailCount/2) + 2) * (1 + newGamePlusMod()));
 					}
-					else if (tailVenom >= 9) {
+					else if (tailCount >= 9) {
 						maxStr -= (10 * (1 + newGamePlusMod()));;
 						maxSpe += (10 * (1 + newGamePlusMod()));;
 						maxInt += (20 * (1 + newGamePlusMod()));;

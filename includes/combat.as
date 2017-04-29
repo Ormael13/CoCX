@@ -5205,7 +5205,7 @@ public function tease(justText:Boolean = false):void {
 			outputText("You shimmy and shake sensually. (An error occurred.)", false);
 			break;
 		case 37:
-			outputText("You purse your lips coyly, narrowing your eyes mischievously and beckoning to " + monster.a + monster.short + " with a burning come-hither glare.  Sauntering forward, you pop your hip to the side and strike a coquettish pose, running " + ((player.tailVenom > 1) ? "one of your tails" : "your tail") + " up and down " + monster.pronoun3 + " body sensually.");
+			outputText("You purse your lips coyly, narrowing your eyes mischievously and beckoning to " + monster.a + monster.short + " with a burning come-hither glare.  Sauntering forward, you pop your hip to the side and strike a coquettish pose, running " + ((player.tailCount > 1) ? "one of your tails" : "your tail") + " up and down " + monster.pronoun3 + " body sensually.");
 			chance+= 6;
 			damage+= 3;
 			break;
@@ -5217,7 +5217,7 @@ public function tease(justText:Boolean = false):void {
 			break;
 		case 39:
 			outputText( "Leaning forward, you bow down low, raising a hand up to your lips and blowing " + monster.a + monster.short + " a kiss.  You stand straight, wiggling your " + hipDescript() + " back and forth seductively while trailing your fingers down your front slowly, pouting demurely.  The tip of ");
-			if(player.tailVenom == 1) outputText("your");
+			if(player.tailCount == 1) outputText("your");
 			else outputText("a");
 			outputText(" bushy tail curls up around your " + player.leg() + ", uncoiling with a whipping motion that makes an audible crack in the air.");
 			ass = true;
@@ -5226,9 +5226,9 @@ public function tease(justText:Boolean = false):void {
 			break;
 		case 40:
 			outputText("Turning around, you stare demurely over your shoulder at " + monster.a + monster.short + ", batting your eyelashes amorously.");
-			if(player.tailVenom == 1) outputText("  Your tail twists and whips about, sliding around your " + hipDescript() + " in a slow arc and framing your rear nicely as you slowly lift your " + player.armorName + ".");
+			if(player.tailCount == 1) outputText("  Your tail twists and whips about, sliding around your " + hipDescript() + " in a slow arc and framing your rear nicely as you slowly lift your " + player.armorName + ".");
 			else outputText("  Your tails fan out, twisting and whipping sensually, sliding up and down your " + player.legs() + " and framing your rear nicely as you slowly lift your " + player.armorName + ".");
-			outputText("  As your [butt] comes into view, you brush your tail" + ((player.tailVenom > 1) ? "s" : "" ) + " across it, partially obscuring the view in a tantalizingly teasing display.");
+			outputText("  As your [butt] comes into view, you brush your tail" + ((player.tailCount > 1) ? "s" : "" ) + " across it, partially obscuring the view in a tantalizingly teasing display.");
 			ass = true;
 			anus = true;
 			chance++;
@@ -5239,7 +5239,7 @@ public function tease(justText:Boolean = false):void {
 			if(player.cockTotal() > 0) outputText(player.sMultiCockDesc());
 			if(player.gender == 3) outputText(" and ");
 			if(player.gender >= 2) outputText("your " + vaginaDescript(0));
-			outputText(".  Your bushy tail" + ((player.tailVenom > 1) ? "s" : "" ) + " cross" + ((player.tailVenom > 1) ? "": "es") + " in front, wrapping around your genitals and obscuring the view teasingly.");
+			outputText(".  Your bushy tail" + ((player.tailCount > 1) ? "s" : "" ) + " cross" + ((player.tailCount > 1) ? "": "es") + " in front, wrapping around your genitals and obscuring the view teasingly.");
 			vagina = true;
 			penis = true;
 			damage += 2;
@@ -9391,28 +9391,28 @@ public function magicalSpecials():void {
 	if (player.findPerk(PerkLib.Whispered) >= 0) {
 		addButton(button++, "Whisper", superWhisperAttack, null, null, null, "Whisper and induce fear in your opponent. \n\nFatigue Cost: " + spellCost(10) + "");
 	}
-	if ((player.tailType == TAIL_TYPE_FOX && player.tailVenom >= 2 && player.tailVenom < 7) || ((player.tailType != TAIL_TYPE_FOX || (player.tailType == TAIL_TYPE_FOX && player.tailVenom < 2)) && (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 || player.findPerk(PerkLib.CorruptedNinetails) >= 0))) {
+	if ((player.tailType == TAIL_TYPE_FOX && player.tailCount >= 2 && player.tailCount < 7) || ((player.tailType != TAIL_TYPE_FOX || (player.tailType == TAIL_TYPE_FOX && player.tailCount < 2)) && (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 || player.findPerk(PerkLib.CorruptedNinetails) >= 0))) {
 		addButton(button++, "FoxFire", foxFire, null, null, null, "Unleash a fox flame at your opponent for high damage. \n\nFatigue Cost: " + spellCost(60) + "\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti() + "");
 	}
-	if (player.findPerk(PerkLib.CorruptedKitsune) >= 0 && player.findPerk(PerkLib.EnlightenedKitsune) >= 0 && ((player.tailType == TAIL_TYPE_FOX && player.tailVenom >= 7) || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0)) {
+	if (player.findPerk(PerkLib.CorruptedKitsune) >= 0 && player.findPerk(PerkLib.EnlightenedKitsune) >= 0 && ((player.tailType == TAIL_TYPE_FOX && player.tailCount >= 7) || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0)) {
 		addButton(button++, "F.FoxFire", fusedFoxFire, null, null, null, "Unleash fused ethereal blue and corrupted purple flame at your opponent for high damage. \n\nFatigue Cost: " + spellCost(160) + "\nSoulforce cost: " + 70 * soulskillCost() * soulskillcostmulti() + "");
 	}	
-	if (player.findPerk(PerkLib.CorruptedKitsune) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailVenom >= 7) {
+	if (player.findPerk(PerkLib.CorruptedKitsune) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount >= 7) {
 		addButton(button++, "C.FoxFire", corruptedFoxFire, null, null, null, "Unleash a corrupted purple flame at your opponent for high damage. Less effective against corrupted enemies. \n\nFatigue Cost: " + spellCost(70) + "\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti() + "");
 		if (player.findStatusAffect(StatusAffects.CooldownTerror) < 0) {
-			if (player.tailVenom == 9 && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Terror", kitsuneTerror, null, null, null, "Instill fear into your opponent with eldritch horrors. The more you cast this in a battle, the lesser effective it becomes.  \n\nWould go into cooldown after use for: 6 rounds  \n\nFatigue Cost: " + spellCost(20));
-			else if (player.tailVenom == 9 || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Terror", kitsuneTerror, null, null, null, "Instill fear into your opponent with eldritch horrors. The more you cast this in a battle, the lesser effective it becomes.  \n\nWould go into cooldown after use for: 7 rounds  \n\nFatigue Cost: " + spellCost(20));
+			if (player.tailCount == 9 && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Terror", kitsuneTerror, null, null, null, "Instill fear into your opponent with eldritch horrors. The more you cast this in a battle, the lesser effective it becomes.  \n\nWould go into cooldown after use for: 6 rounds  \n\nFatigue Cost: " + spellCost(20));
+			else if (player.tailCount == 9 || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Terror", kitsuneTerror, null, null, null, "Instill fear into your opponent with eldritch horrors. The more you cast this in a battle, the lesser effective it becomes.  \n\nWould go into cooldown after use for: 7 rounds  \n\nFatigue Cost: " + spellCost(20));
 			else addButton(button++, "Terror", kitsuneTerror, null, null, null, "Instill fear into your opponent with eldritch horrors. The more you cast this in a battle, the lesser effective it becomes.  \n\nWould go into cooldown after use for: 8 rounds  \n\nFatigue Cost: " + spellCost(20));
 		}
 		else if (player.findStatusAffect(StatusAffects.CooldownTerror) >= 0) {
 			outputText("<b>You need more time before you can use Terror again.</b>\n\n");
 		}
 	}
-	if (player.findPerk(PerkLib.EnlightenedKitsune) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailVenom >= 7) {
+	if (player.findPerk(PerkLib.EnlightenedKitsune) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount >= 7) {
 		addButton(button++, "P.FoxFire", pureFoxFire, null, null, null, "Unleash an ethereal blue flame at your opponent for high damage. More effective against corrupted enemies. \n\nFatigue Cost: " + spellCost(70) + "\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti() + "");
 		if (player.findStatusAffect(StatusAffects.CooldownIllusion) < 0) {
-			if (player.tailVenom == 9 && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Illusion", kitsuneIllusion, null, null, null, "Warp the reality around your opponent to temporary boost your evasion for 4 round and arouse target slightly.  \n\nWould go into cooldown after use for: 8 rounds  \n\nFatigue Cost: " + spellCost(25));
-			else if (player.tailVenom == 9 || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Illusion", kitsuneIllusion, null, null, null, "Warp the reality around your opponent to temporary boost your evasion for 4 round and arouse target slightly.  \n\nWould go into cooldown after use for: 8 rounds  \n\nFatigue Cost: " + spellCost(25));
+			if (player.tailCount == 9 && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Illusion", kitsuneIllusion, null, null, null, "Warp the reality around your opponent to temporary boost your evasion for 4 round and arouse target slightly.  \n\nWould go into cooldown after use for: 8 rounds  \n\nFatigue Cost: " + spellCost(25));
+			else if (player.tailCount == 9 || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Illusion", kitsuneIllusion, null, null, null, "Warp the reality around your opponent to temporary boost your evasion for 4 round and arouse target slightly.  \n\nWould go into cooldown after use for: 8 rounds  \n\nFatigue Cost: " + spellCost(25));
 			else addButton(button++, "Illusion", kitsuneIllusion, null, null, null, "Warp the reality around your opponent to temporary boost your evasion for 4 round and arouse target slightly.  \n\nWould go into cooldown after use for: 8 rounds  \n\nFatigue Cost: " + spellCost(25));
 		}
 		else if (player.findStatusAffect(StatusAffects.CooldownIllusion) >= 0) {
@@ -9810,11 +9810,11 @@ public function foxFire2():void {
 	if (monster.findPerk(PerkLib.FireVulnerability) >= 0) dmg *= 2;
 	if (monster.findPerk(PerkLib.IceVulnerability) >= 0) dmg *= 0.5;
 	if (monster.findPerk(PerkLib.FireNature) >= 0) dmg *= 0.2;
-	if ((player.tailType != TAIL_TYPE_FOX || (player.tailType == TAIL_TYPE_FOX && player.tailVenom < 2)) && (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 || player.findPerk(PerkLib.CorruptedNinetails) >= 0) && player.findPerk(PerkLib.KitsuneThyroidGland) < 0) dmg *= 0.2;
-	if (player.tailVenom == 2) dmg *= 0.2;
-	if (player.tailVenom == 3) dmg *= 0.4;
-	if (player.tailVenom == 4) dmg *= 0.6;
-	if (player.tailVenom == 5) dmg *= 0.8;
+	if ((player.tailType != TAIL_TYPE_FOX || (player.tailType == TAIL_TYPE_FOX && player.tailCount < 2)) && (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 || player.findPerk(PerkLib.CorruptedNinetails) >= 0) && player.findPerk(PerkLib.KitsuneThyroidGland) < 0) dmg *= 0.2;
+	if (player.tailCount == 2) dmg *= 0.2;
+	if (player.tailCount == 3) dmg *= 0.4;
+	if (player.tailCount == 4) dmg *= 0.6;
+	if (player.tailCount == 5) dmg *= 0.8;
 	if (player.shieldName == "spirit focus") dmg *= 1.2;
 	if (player.armorName == "white kimono" || player.armorName == "red kimono" || player.armorName == "blue kimono" || player.armorName == "purple kimono") dmg *= 1.2;
 	if (player.jewelryName == "fox hairpin") dmg *= 1.2;
@@ -9936,7 +9936,7 @@ public function corruptedFoxFire2():void {
 	}
 	dmg = calcInfernoMod(dmg);
 	dmg *= 0.125;
-	if (player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailVenom == 9) dmg *= 0.5;
+	if (player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) dmg *= 0.5;
 	if (monster.cor >= 66) dmg = Math.round(dmg * 1.0);
 	else if (monster.cor >= 50) dmg = Math.round(dmg * 1.1);
 	else if (monster.cor >= 25) dmg = Math.round(dmg * 1.2);
@@ -9997,7 +9997,7 @@ public function corruptedFoxFire2():void {
 		}
 	}
 	lustDmg *= 0.5;
-	if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailVenom == 9) lustDmg *= 2;
+	if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) lustDmg *= 2;
 	if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 	if (player.jewelryName == "fox hairpin") dmg *= 1.2;
 	lustDmg = Math.round(lustDmg);
@@ -10082,7 +10082,7 @@ public function fusedFoxFire2():void {
 	dmg = calcInfernoMod(dmg);
 	dmg *= 1.1;
 //	dmg *= 4.4;//0.4 to 40% za połączenie efektu na corruption obu płomieni
-	if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 && player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailVenom == 9) dmg *= 2;
+	if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 && player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) dmg *= 2;
 	//Hosohi No Tama and Fusion bonus dmg
 //	if (player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) dmg *= 3;	
 	//High damage to goes.
@@ -10096,7 +10096,7 @@ public function fusedFoxFire2():void {
 	if (monster.findPerk(PerkLib.FireVulnerability) >= 0) dmg *= 2;
 	if (monster.findPerk(PerkLib.IceVulnerability) >= 0) dmg *= 0.5;
 	if (monster.findPerk(PerkLib.FireNature) >= 0) dmg *= 0.2;
-	if (((player.tailType == TAIL_TYPE_FOX && player.tailVenom < 7) || player.tailType != TAIL_TYPE_FOX) && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) dmg *= 0.2;
+	if (((player.tailType == TAIL_TYPE_FOX && player.tailCount < 7) || player.tailType != TAIL_TYPE_FOX) && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) dmg *= 0.2;
 	if (player.shieldName == "spirit focus") dmg *= 1.2;
 	if (player.armorName == "white kimono" || player.armorName == "red kimono" || player.armorName == "blue kimono" || player.armorName == "purple kimono") dmg *= 1.2;
 	if (player.jewelryName == "fox hairpin") dmg *= 1.2;
@@ -10139,7 +10139,7 @@ public function fusedFoxFire2():void {
 		}
 	}
 	lustDmg *= 0.5;
-	if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 && player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailVenom == 9) lustDmg *= 2;
+	if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 && player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) lustDmg *= 2;
 	if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 	lustDmg = Math.round(lustDmg);
 	monster.teased(lustDmg);
@@ -10222,7 +10222,7 @@ public function pureFoxFire2():void {
 	}
 	dmg = calcInfernoMod(dmg);
 	dmg *= 0.5;
-	if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailVenom == 9) dmg *= 2;
+	if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) dmg *= 2;
 	if (monster.cor < 33) dmg = Math.round(dmg * 1.0);
 	else if (monster.cor < 50) dmg = Math.round(dmg * 1.1);
 	else if (monster.cor < 75) dmg = Math.round(dmg * 1.2);
@@ -10282,7 +10282,7 @@ public function pureFoxFire2():void {
 		}
 	}
 	lustDmg *= 0.125;
-	if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailVenom == 9) lustDmg *= 0.5;
+	if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) lustDmg *= 0.5;
 	if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 	if (player.jewelryName == "fox hairpin") dmg *= 1.2;
 	lustDmg = Math.round(lustDmg);
@@ -10327,8 +10327,8 @@ public function kitsuneTerror():void {
 	}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 	fatigue(20,1);
-	if (player.tailVenom == 9 && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) player.createStatusAffect(StatusAffects.CooldownTerror, 6, 0, 0, 0);
-	else if (player.tailVenom == 9 || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) player.createStatusAffect(StatusAffects.CooldownTerror, 7, 0, 0, 0);
+	if (player.tailCount == 9 && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) player.createStatusAffect(StatusAffects.CooldownTerror, 6, 0, 0, 0);
+	else if (player.tailCount == 9 || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) player.createStatusAffect(StatusAffects.CooldownTerror, 7, 0, 0, 0);
 	else player.createStatusAffect(StatusAffects.CooldownTerror,8,0,0,0);
 	//Inflicts fear and reduces enemy SPD.
 	outputText("The world goes dark, an inky shadow blanketing everything in sight as you fill " + monster.a + monster.short + "'s mind with visions of otherworldly terror that defy description.  They cower in horror as they succumb to your illusion, believing themselves beset by eldritch horrors beyond their wildest nightmares.\n\n");
@@ -10358,8 +10358,8 @@ public function kitsuneIllusion():void {
 	}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 	fatigue(25,1);
-	if (player.tailVenom == 9 && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) player.createStatusAffect(StatusAffects.CooldownIllusion, 6, 0, 0, 0);
-	else if (player.tailVenom == 9 || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) player.createStatusAffect(StatusAffects.CooldownIllusion, 7, 0, 0, 0);
+	if (player.tailCount == 9 && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) player.createStatusAffect(StatusAffects.CooldownIllusion, 6, 0, 0, 0);
+	else if (player.tailCount == 9 || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) player.createStatusAffect(StatusAffects.CooldownIllusion, 7, 0, 0, 0);
 	else player.createStatusAffect(StatusAffects.CooldownIllusion,8,0,0,0);
 	if(monster.findStatusAffect(StatusAffects.Shell) >= 0) {
 		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");

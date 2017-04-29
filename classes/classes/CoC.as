@@ -135,7 +135,6 @@ the text from being too boring.
 		include "../../includes/eventTest.as";
 		
 		
-		include "../../includes/transform.as";
 		
 		include "../../includes/engineCore.as";
 

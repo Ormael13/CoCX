@@ -417,7 +417,7 @@ package classes.Scenes.Areas.Forest
 				outputText("\n\nThe sudden intrusion " + ((player.biggestCockArea() > 80) ? "" : "into her behind ") + "drives her over the edge in an instant, and soon your ears are met with the sound of hungry slurping.  " + (flags[kFLAGS.redheadIsFuta] > 0 ? "The black-haired kitsune swallows eagerly around her sister's engorged cock, slurping down stream after stream of thick futa-jizz.  She raises her hand up and slides two fingers into the girl's convulsing cleft, moaning in approval as the copious fountain of semen in her throat thickens even more.  Her other hand slowly massages her gradually expanding stomach, caressing the growing bulge while she pounds her fingertips into her sister's pussy, sucking out every creamy, salty morsel." : "The black-haired kitsune laps eagerly at her sister's convulsing pussy, a thick spray of girlcum splattering across her face as she tries her best to catch it in her mouth.  Her lips wrap around the girl's quivering cunt, and she begins to drink deeply from the viscous fountain, humming her pleasure the entire time.") + "  After what certainly must have felt like an eternity, the girl's climax begins to ebb, and she collapses fantastically beneath the blonde's weight with a splash, narrowly avoiding the raven-haired girl's face on the way down.\n\n");
 				outputText("Her warm " + ((player.biggestCockArea() > 80) ? "cunt" : "asshole") + " still grips your cock tightly, dragging you down with her.  You collapse into the blonde's open arms, finding yourself pressed into the marshmallowy embrace of her mountainous breasts.  As your twitching cock relieves itself of the last of your seed inside the redhead's " + ((player.biggestCockArea() > 80) ? "pussy" : "ass") + ", you feel your strength slipping away from you with each spasm, your eyelids growing heavy with an uncommon weariness.\n\n");
 			}
-			else if ((player.gender = 3) && flags[kFLAGS.redheadIsFuta] > 0) {
+			else if ((player.gender == 3) && flags[kFLAGS.redheadIsFuta] > 0) {
 				outputText("\n\nThe blonde casually wades over to the redhead, flipping her onto her back and sliding onto her sister's hips with a haughty smirk.  The poor redhead is pinned under her weight, flushing with wanton desire, her cock twitching needfully between the blonde's ass cheeks.  One of the blonde's tails winds around the " + ((player.hasSheath()) ? "sheath" : "base" ) + " of your " + cockDescript(player.biggestCockIndex()) + ", pulling it into the shimmering tangle of golden coils, and though a fluffy forest obscures your view, you can feel the " + player.cockHead(player.biggestCockIndex()) + " pressing up against the blonde's warm, inviting snatch.\n\n");
 				outputText("Her tail coils and constricts around your member, drawing you forward to plunge into the waiting folds with a wet slurp." + ((player.biggestCockArea() > 80) ? "  Her walls draw you inward for ages, rippling sensually along your length as her cavernous cunt seems to go on forever.  Impossible though it might sound, it seems she intends to take ALL of you." : "") + "  She shudders with satisfaction as your hips lightly press against hers, a few of her tails lashing around your " + hipDescript() + " to draw you in as far as possible" + ((player.cocks.length > 1) ? ", [eachCock] entangled in a jungle of gold that caresses and tickles them teasingly." : ".") + "  The redhead's tails flail sporadically beneath her, bristling with pleasure as your " + vaginaDescript() + " slides across the tip of her cock teasingly, sending a shiver up her spine and a blush to her cheeks.\n\n");
 				outputText("You feel something brushing against you and look down to find the black-haired girl pressing her face against your [butt], running her hands up and down your " + hipDescript() + " and smacking your cheek once lightly for good measure.  An involuntary shudder zigzags up your spine as her slick tongue runs up your crack, lining your [asshole] with saliva.  Her fingertips dig into the flesh of your bottom, the other hand sliding along your " + vaginaDescript() + ", pinching and rolling your " + clitDescript() + ".  A moment later, you rise an inch or two off the ground as a squirming invader spears your ass.  Her plush lips press against you like soft pillows, a muffled giggle vibrating up her tongue and into your prostate.  Your strength gives out as she prods your prostate, dragging you down with her weight at the same time to impale you on the redhead's cock.");
@@ -2261,7 +2261,7 @@ package classes.Scenes.Areas.Forest
 		{
 			clearOutput();
 			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] == 0) {
-				if (flags[kFLAGS.KITSUNE_SHRINE_VISIT] > 0 && player.earType == EARS_FOX && player.tailVenom >= 2) {
+				if (flags[kFLAGS.KITSUNE_SHRINE_VISIT] > 0 && player.earType == EARS_FOX && player.tailCount >= 2) {
 					outputText("As you wander the woods you spot a floating blue flame yet again. Being a kitsune yourself you’ve grown wise to that tactic, and go straight for the trickster herself. Surprisingly, it’s not one of the kitsune sisters you were expecting, but a different person. She wears a formal kimono and has hair as white as snow. When she notices you, she starts by giving you the classic \"<i>Hello adventurer would you like to...</i>\" line until she realises you also have a pair of fox ears and multiple tails. There is an awkward silence as she sizes you up, then sighs.\n\n");
 					outputText("\"<i>My apologies, I heard there was a human wandering the woods as of late, and I couldn’t stop myself from thinking of a potential meal. My name is Ayane. I don’t recall meeting you within the region, are you new?</i>\"\n\n");
 					outputText("You decide to play fair and admit you actually are a former human and that you have been looking for a way to become a kitsune yourself.\n\n");
@@ -2548,7 +2548,7 @@ package classes.Scenes.Areas.Forest
 		{
 			clearOutput();
 			if (player.hasItem(consumables.FOXJEWL) && player.earType == EARS_FOX && player.tailType == TAIL_TYPE_FOX) {
-				if (player.tailVenom >= 2 && player.findPerk(PerkLib.StarSphereMastery) < 0) {
+				if (player.tailCount >= 2 && player.findPerk(PerkLib.StarSphereMastery) < 0) {
 					outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.\n\n");
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
 					outputText("You look down and notice a weird ball filled with light sitting on the ground next to you. Somehow you can feel this item is connected to you and also very important. Ayane, noticing what happened, approaches and congratulates you.\n\n");
@@ -2560,7 +2560,7 @@ package classes.Scenes.Areas.Forest
 					player.consumeItem(consumables.FOXJEWL);
 					doNext(camp.returnToCampUseOneHour);
 				}
-				else if (player.tailVenom == 8 && player.level >= 42 && player.inte >= 180 && (player.findPerk(PerkLib.CorruptedNinetails) < 0 || player.perkv4(PerkLib.CorruptedNinetails) > 0)) {
+				else if (player.tailCount == 8 && player.level >= 42 && player.inte >= 180 && (player.findPerk(PerkLib.CorruptedNinetails) < 0 || player.perkv4(PerkLib.CorruptedNinetails) > 0)) {
 					//20% chance if PC has fox ears, 1 or more fox tails, carries a Fox Jewel, and meets level & INT requirements for the next tail:
 					outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.\n\n");
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
@@ -2568,7 +2568,7 @@ package classes.Scenes.Areas.Forest
 					outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into nine tails.  <b>You are now a nine-tails!  Untold cosmic power radiates from your very being!  Use it wisely...</b>");
 					//Increment tail by 1, consume Fox Jewel, -2 COR, -20 LUST, +2 INT, Advance 1 hr and return to camp.
 					//Apply Nine-Tails perk if applicable.
-					player.tailVenom = 9;
+					player.tailCount = 9;
 					if (player.findPerk(PerkLib.EnlightenedNinetails) < 0) player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);
 					// Nine tail kitsunes have their fur/hair color golden, silver or pure white
 					if (!InCollection(player.hairColor, elderKitsuneColors)) // wrong hair color
@@ -2601,42 +2601,42 @@ package classes.Scenes.Areas.Forest
 					outputText("\n\nDo you take her as your attendant?");
 					doYesNo(AyaneCome2Camp, AyaneStayAtShrine);
 				}
-				else if (player.tailVenom == 7 && player.level >= 30 && player.inte >= 160 && (player.findPerk(PerkLib.CorruptedNinetails) < 0 || player.perkv4(PerkLib.CorruptedNinetails) > 0) && (player.findPerk(PerkLib.CorruptedKitsune) < 0 || player.perkv4(PerkLib.CorruptedKitsune) > 0)) {
+				else if (player.tailCount == 7 && player.level >= 30 && player.inte >= 160 && (player.findPerk(PerkLib.CorruptedNinetails) < 0 || player.perkv4(PerkLib.CorruptedNinetails) > 0) && (player.findPerk(PerkLib.CorruptedKitsune) < 0 || player.perkv4(PerkLib.CorruptedKitsune) > 0)) {
 					outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to fight against the forces of corruption that permeate the land.\n\n");
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
 					outputText("As the mystical flames wash over you, your mind is assaulted by an otherworldly knowledge and power.\n\n");
 					outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into seven tails.  <b>You are now a seven-tails!  Weak cosmic power radiates from you!  Cultivate it wisely...</b>");
 					//Apply Kitsune perk if applicable.
-					player.tailVenom = 8;
+					player.tailCount = 8;
 					outputText("\n\nYou pause for a moment to reflect on your new wisdom, and with a renewed vigor for your quest, you stand and set off for camp.");
 					dynStats("int", 1, "lus", -10, "cor", -1);
 					player.consumeItem(consumables.FOXJEWL);
 					doNext(camp.returnToCampUseOneHour);
 				}
-				else if (player.tailVenom == 6 && player.level >= 30 && player.inte >= 140 && (player.findPerk(PerkLib.CorruptedNinetails) < 0 || player.perkv4(PerkLib.CorruptedNinetails) > 0) && (player.findPerk(PerkLib.CorruptedKitsune) < 0 || player.perkv4(PerkLib.CorruptedKitsune) > 0)) {
+				else if (player.tailCount == 6 && player.level >= 30 && player.inte >= 140 && (player.findPerk(PerkLib.CorruptedNinetails) < 0 || player.perkv4(PerkLib.CorruptedNinetails) > 0) && (player.findPerk(PerkLib.CorruptedKitsune) < 0 || player.perkv4(PerkLib.CorruptedKitsune) > 0)) {
 					outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to fight against the forces of corruption that permeate the land.\n\n");
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
 					outputText("As the mystical flames wash over you, your mind is assaulted by an otherworldly knowledge and power.\n\n");
 					outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into seven tails.  <b>You are now a seven-tails!  Weak cosmic power radiates from you!  Cultivate it wisely...</b>");
 					//Apply Kitsune perk if applicable.
-					player.tailVenom = 7;
+					player.tailCount = 7;
 					if (player.findPerk(PerkLib.EnlightenedKitsune) < 0) player.createPerk(PerkLib.EnlightenedKitsune, 0, 0, 0, 0);
 					outputText("\n\nYou pause for a moment to reflect on your new wisdom, and with a renewed vigor for your quest, you stand and set off for camp.");
 					dynStats("int", 1, "lus", -10, "cor", -1);
 					player.consumeItem(consumables.FOXJEWL);
 					doNext(camp.returnToCampUseOneHour);
 				}
-				else if (player.tailVenom > 1 && player.tailVenom < 6 && player.tailVenom - 1 <= player.level / 6 && player.tailVenom <= player.inte / 20) {
+				else if (player.tailCount > 1 && player.tailCount < 6 && player.tailCount - 1 <= player.level / 6 && player.tailCount <= player.inte / 20) {
 					outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.\n\n");
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
-					outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tails begins to glow with an eerie, ghostly light, and with a crackle of electrical energy, splits into " + (player.tailVenom + 1) + "!");
-					player.tailVenom++;
+					outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tails begins to glow with an eerie, ghostly light, and with a crackle of electrical energy, splits into " + (player.tailCount + 1) + "!");
+					player.tailCount++;
 				}
-				else if (player.tailVenom == 1 && player.inte >= 20) {
+				else if (player.tailCount == 1 && player.inte >= 20) {
 					outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.\n\n");
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
-					outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tail begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into " + (player.tailVenom + 1) + "!");
-					player.tailVenom++;
+					outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tail begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into " + (player.tailCount + 1) + "!");
+					player.tailCount++;
 				}
 			}
 			else {

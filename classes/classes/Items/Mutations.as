@@ -263,7 +263,6 @@
 			}
 			//Demonic changes - higher chance with higher corruption.
 			if (rand(40) + player.cor / 3 > 35 && tainted) demonChanges(player);
-			player.genderCheck();
 			if (rand(4) == 0 && tainted) outputText(player.modFem(5, 2), false);
 			if (rand(4) == 0 && tainted) outputText(player.modThickness(30, 2), false);
 			player.refillHunger(10);
@@ -612,7 +611,6 @@
 							player.cocks[0].cockType = CockTypesEnum.HORSE;
 							player.clitLength = .25;
 						}
-						player.genderCheck();
 					}
 					changes++;
 				}
@@ -2328,7 +2326,7 @@
 				outputText("Your legs almost look... like a flower about to bloom? Bloom it does indeed as everything below your waist explode in a orchid of enormous size with petal large enough to engulf you entirely. Worried about being rooted in place you try and move and to your surprise you pretty much discover you can actually walk around on the vine like tentacle cocks at the base of your body. It feels weird at first but you think you will get used to walking on pseudo vines.");
 				if (player.tailType != 0) {
 					if (player.tailType == 5 || player.tailType == 6) outputText(" Your insectile abdomen", false);
-					else if (player.tailType > 0 && player.tailVenom > 1) outputText(" Your tails", false);
+					else if (player.tailType > 0 && player.tailCount > 1) outputText(" Your tails", false);
 					else outputText(" Your tail", false);
 					outputText(" recede back into your body disappearing entirely into your backside as if it never existed.", false);
 				}
@@ -2546,7 +2544,6 @@
 				outputText(player.modFem(90, 1), false);
 				if (rand(3) == 0) outputText(player.modTone(20, 2), false);
 			}
-			player.genderCheck();
 			player.refillHunger(20);
 		}
 		
@@ -3142,7 +3139,6 @@
 						}
 					}
 				}
-				player.genderCheck();
 			}
 			//Knotty knot pepper!
 			if (type == 4) {
@@ -4005,7 +4001,6 @@
 				if (player.cocks.length > 0) {
 					player.killCocks(1);
 					outputText("\n\n", false);
-					player.genderCheck()
 				}
 				//remove balls
 				if (player.balls > 0) {
@@ -4032,7 +4027,6 @@
 				if (player.cocks.length > 0) {
 					player.killCocks(-1);
 					outputText("\n\n", false);
-					player.genderCheck();
 				}
 				if (player.balls > 0) {
 					player.balls = 0;
@@ -4064,7 +4058,6 @@
 					outputText("\n\nYour vagina clenches in pain, doubling you over.  You slip a hand down to check on it, only to feel the slit growing smaller and smaller until it disappears, taking your clit with it! <b> Your vagina is gone!</b>", false);
 					player.removeVagina(0, 1);
 					player.clitLength = .5;
-					player.genderCheck();
 				}
 				//Dickz
 				if (player.cocks.length > 0) {
@@ -4128,7 +4121,6 @@
 					if (player.bRows() > 1 || player.buttRating > 5 || player.hipRating > 5) outputText("  ", false);
 					player.removeVagina(0, 1);
 					player.clitLength = .5;
-					player.genderCheck();
 				}
 				//Kill extra boobages
 				if (player.bRows() > 1) {
@@ -4712,7 +4704,6 @@
 					}
 					else {
 						player.killCocks(1);
-						player.genderCheck();
 					}
 				}
 				//if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
@@ -4725,7 +4716,6 @@
 					outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + vaginaDescript(0) + "</b>!", false);
 
 					changes++;
-					player.genderCheck();
 					dynStats("lus", 10);
 				}
 			}
@@ -5555,7 +5545,6 @@
 				player.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
 				player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
 				player.clitLength = .4;
-				player.genderCheck();
 				return;
 
 			}
@@ -5643,7 +5632,6 @@
 				player.createVagina();
 				player.clitLength = .25;
 				dynStats("sen", 10);
-				player.genderCheck();
 			}
 			//WANG GROWTH - TIGGERSHARK ONLY
 			if (type == 1 && (!player.hasCock()) && changes < changeLimit && rand(3) == 0) {
@@ -5659,7 +5647,6 @@
 				outputText("!", false);
 				player.createCock(7, 1.4);
 				dynStats("lib", 4, "sen", 5, "lus", 20);
-				player.genderCheck();
 				changes++;
 			}
 			//(Requires the player having two testicles)
@@ -6452,7 +6439,6 @@
 			if (player.cocks.length > 1 && rand(3) == 0 && changes < changeLimit) {
 				player.killCocks(1);
 				outputText("\n\nYou have a strange feeling as your crotch tingles.  Opening your " + player.armorName + ", <b>you realize that one of your cocks have vanished completely!</b>", false);
-				player.genderCheck()
 				changes++;
 			}
 			//Remove additional balls
@@ -7743,7 +7729,6 @@
 				player.createVagina();
 				player.clitLength = .25;
 				dynStats("sen", 10);
-				player.genderCheck();
 				changes++;
 			}
 			//WANG GROWTH
@@ -7760,7 +7745,6 @@
 				outputText("!", false);
 				player.createCock(7, 1.4);
 				dynStats("lib", 4, "sen", 5, "lus", 20);
-				player.genderCheck();
 				changes++;
 			}
 			//-Shrink tits if above DDs.
@@ -8390,7 +8374,6 @@
 				player.createVagina();
 				player.clitLength = .25;
 				dynStats("sen", 10);
-				player.genderCheck();
 			}
 			//-Remove extra breast rows
 			if (changes < changeLimit && player.breastRows.length > 1 && rand(3) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
@@ -9285,7 +9268,6 @@
 				player.createPerk(PerkLib.FutaForm, 0, 0, 0, 0);
 				player.createPerk(PerkLib.FutaFaculties, 0, 0, 0, 0);
 				outputText("(Gained Perks - Futa Form, Futa Faculties)</b>", false);
-				player.genderCheck();
 				return;
 			}
 			//HP restore for bros!
@@ -9370,7 +9352,6 @@
 				outputText("At the same time, your " + vaginaDescript(0) + " burns hot, nearly feeling on fire.  You cuss in a decidedly masculine way for a moment before the pain fades to a dull itch.  Scratching it, you discover your lady-parts are gone.  Only a sensitive patch of skin remains.\n\n", false);
 				player.removeVagina(0, 1);
 			}
-			player.genderCheck();
 			//(below max masculinity)
 			if (player.femininity > 0) {
 				outputText("Lastly, the change hits your face.  You can feel your jawbones shifting and sliding around, your skin changing to accommodate your face's new shape.  Once it's finished, you feel your impeccable square jaw and give a wide, easy-going grin.  You look awesome!\n\n", false);
@@ -9698,7 +9679,7 @@
 					else outputText("berries ");
 					outputText("with an uncommonly voracious appetite, taking particular enjoyment in the succulent, tart flavor.  As you carefully suck the last drops of ochre juice from your fingers, you note that it tastes so much more vibrant than you remember.  Your train of thought is violently interrupted by the sound of bones snapping, and you cry out in pain, doubling over as a flaming heat boils through your ribs.");
 					outputText("\n\nWrithing on the ground, you clutch your hand to your chest, looking on in horror through tear-streaked eyes as the bones in your fingers pop and fuse, rearranging themselves into a dainty paw covered in coarse black fur, fading to a ruddy orange further up.  You desperately try to call out to someone - anyone - for help, but all that comes out is a high-pitched, ear-splitting yap.");
-					if (player.tailVenom > 1) outputText("  Your tails thrash around violently as they begin to fuse painfully back into one, the fur bristling back out with a flourish.");
+					if (player.tailCount > 1) outputText("  Your tails thrash around violently as they begin to fuse painfully back into one, the fur bristling back out with a flourish.");
 					outputText("\n\nA sharp spark of pain jolts through your spinal column as the bones shift themselves around, the joints in your hips migrating forward.  You continue to howl in agony even as you feel your intelligence slipping away.  In a way, it's a blessing - as your thoughts grow muddied, the pain is dulled, until you are finally left staring blankly at the sky above, tilting your head curiously.");
 					outputText("\n\nYou roll over and crawl free of the " + player.armorName + " covering you, pawing the ground for a few moments before a pang of hunger rumbles through your stomach.  Sniffing the wind, you bound off into the wilderness, following the telltale scent of a farm toward the certain bounty of a chicken coop.");
 					getGame().gameOver();
@@ -9738,8 +9719,8 @@
 			//[Change Hair Color: Golden-blonde or Reddish-orange]
 			var fox_hair:Array = ["golden blonde", "reddish-orange", "silver", "white", "red", "black"];
 			if (!InCollection(player.hairColor, fox_hair) && !InCollection(player.hairColor, KitsuneScene.basicKitsuneHair) && !InCollection(player.hairColor, KitsuneScene.elderKitsuneColors) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
-				if (player.tailType == TAIL_TYPE_FOX && player.tailVenom > 1)
-					if(player.tailVenom < 9) player.hairColor = randomChoice(KitsuneScene.basicKitsuneHair);
+				if (player.tailType == TAIL_TYPE_FOX && player.tailCount > 1)
+					if(player.tailCount < 9) player.hairColor = randomChoice(KitsuneScene.basicKitsuneHair);
 					else player.hairColor = randomChoice(KitsuneScene.elderKitsuneColors);
 				else player.hairColor = randomChoice(fox_hair);
 				outputText("\n\nYour scalp begins to tingle, and you gently grasp a strand of hair, pulling it out to check it.  Your hair has become " + player.hairColor + "!");
@@ -9925,7 +9906,7 @@
 					if(InCollection(player.hairColor, KitsuneScene.basicKitsuneFur) || InCollection(player.hairColor, KitsuneScene.elderKitsuneColors))
 						player.furColor = player.hairColor;
 					else
-						if (player.tailType == TAIL_TYPE_FOX && player.tailVenom == 9)
+						if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 9)
 							player.furColor = randomChoice(KitsuneScene.elderKitsuneColors);
 						else
 							player.furColor = randomChoice(KitsuneScene.basicKitsuneFur);
@@ -10001,7 +9982,7 @@
 				//from another type of tail
 				else outputText("\n\nPain lances through your lower back as your tail shifts violently.  With one final aberrant twitch, it fluffs out into a long, bushy fox tail that whips around in an almost hypnotic fashion.  <b>You now have a fox's tail!</b>");
 				player.tailType = TAIL_TYPE_FOX;
-				player.tailVenom = 1;
+				player.tailCount = 1;
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && player.findStatusAffect(StatusAffects.UnlockedFoxTail) < 0) {
 					outputText("\n\n<b>Genetic Memory: Fox Tail - Memorized!</b>\n\n");
 					player.createStatusAffect(StatusAffects.UnlockedFoxTail, 0, 0, 0, 0);
@@ -10334,84 +10315,84 @@
 					outputText("\n\nPain lances through your lower back as your tail shifts and twitches violently.  With one final aberrant twitch, it fluffs out into a long, bushy fox tail that whips around in an almost hypnotic fashion.  <b>You now have a fox-tail.</b>");
 				}
 				player.tailType = TAIL_TYPE_FOX;
-				player.tailVenom = 1;
+				player.tailCount = 1;
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && player.findStatusAffect(StatusAffects.UnlockedFoxTail) < 0) {
 					outputText("\n\n<b>Genetic Memory: Fox Tail - Memorized!</b>\n\n");
 					player.createStatusAffect(StatusAffects.UnlockedFoxTail, 0, 0, 0, 0);
 				}
 				changes++;
 			}
-			if (!mystic && player.earType == EARS_FOX && player.tailType == TAIL_TYPE_FOX && player.tailVenom == 8 && rand(3) == 0) {
+			if (!mystic && player.earType == EARS_FOX && player.tailType == TAIL_TYPE_FOX && player.tailCount == 8 && rand(3) == 0) {
 				outputText("\n\nYou have the feeling that if you could grow a ninth tail you would be much more powerful, but you would need to find a way to enhance one of these gems or meditate with one to have a chance at unlocking your full potential.");
 			}
 			//[Grow Addtl. Fox Tail]
 			//(rare effect, up to max of 8 tails, requires PC level and int*10 = number of tail to be added)
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailVenom == 1 && player.inte >= 20 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
+			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 1 && player.inte >= 20 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
 				outputText("\n\nA tingling pressure builds on your backside, and your bushy tail begins to glow with an eerie, ghostly light.  With a crackle of electrical energy, your tail splits into two!  <b>You now have a pair of fox-tails.</b>");
-				player.tailVenom++;
+				player.tailCount++;
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && player.findStatusAffect(StatusAffects.UnlockedFoxTail2nd) < 0) {
 					outputText("\n\n<b>Genetic Memory: Fox Tail 2nd - Memorized!</b>\n\n");
 					player.createStatusAffect(StatusAffects.UnlockedFoxTail2nd, 0, 0, 0, 0);
 				}
 				changes++;
 			}
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailVenom == 2 && player.level >= 6 && player.inte >= 40 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
-				outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailVenom + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailVenom + 1) + " fox-tails.</b>");
-				player.tailVenom++;
+			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 2 && player.level >= 6 && player.inte >= 40 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
+				outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
+				player.tailCount++;
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && player.findStatusAffect(StatusAffects.UnlockedFoxTail3rd) < 0) {
 					outputText("\n\n<b>Genetic Memory: Fox Tail 3rd - Memorized!</b>\n\n");
 					player.createStatusAffect(StatusAffects.UnlockedFoxTail3rd, 0, 0, 0, 0);
 				}
 				changes++;
 			}
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailVenom == 3 && player.level >= 12 && player.inte >= 60 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
-				outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailVenom + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailVenom + 1) + " fox-tails.</b>");
-				player.tailVenom++;
+			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 3 && player.level >= 12 && player.inte >= 60 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
+				outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
+				player.tailCount++;
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && player.findStatusAffect(StatusAffects.UnlockedFoxTail4th) < 0) {
 					outputText("\n\n<b>Genetic Memory: Fox Tail 4th - Memorized!</b>\n\n");
 					player.createStatusAffect(StatusAffects.UnlockedFoxTail4th, 0, 0, 0, 0);
 				}
 				changes++;
 			}
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailVenom == 4 && player.level >= 18 && player.inte >= 80 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
-				outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailVenom + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailVenom + 1) + " fox-tails.</b>");
-				player.tailVenom++;
+			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 4 && player.level >= 18 && player.inte >= 80 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
+				outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
+				player.tailCount++;
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && player.findStatusAffect(StatusAffects.UnlockedFoxTail5th) < 0) {
 					outputText("\n\n<b>Genetic Memory: Fox Tail 5th - Memorized!</b>\n\n");
 					player.createStatusAffect(StatusAffects.UnlockedFoxTail5th, 0, 0, 0, 0);
 				}
 				changes++;
 			}
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailVenom == 5 && player.level >= 24 && player.inte >= 100 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
-				outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailVenom + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailVenom + 1) + " fox-tails.</b>");
-				player.tailVenom++;
+			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 5 && player.level >= 24 && player.inte >= 100 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
+				outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
+				player.tailCount++;
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && player.findStatusAffect(StatusAffects.UnlockedFoxTail6th) < 0) {
 					outputText("\n\n<b>Genetic Memory: Fox Tail 6th - Memorized!</b>\n\n");
 					player.createStatusAffect(StatusAffects.UnlockedFoxTail6th, 0, 0, 0, 0);
 				}
 				changes++;
 			}
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailVenom == 6 && player.level >= 30 && player.inte >= 120 && mystic && rand(3) == 0 && changes < changeLimit && player.earType == EARS_FOX && (player.findPerk(PerkLib.EnlightenedKitsune) < 0 || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (player.findPerk(PerkLib.EnlightenedNinetails) < 0 || player.perkv4(PerkLib.EnlightenedNinetails) > 0)) {
+			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 6 && player.level >= 30 && player.inte >= 120 && mystic && rand(3) == 0 && changes < changeLimit && player.earType == EARS_FOX && (player.findPerk(PerkLib.EnlightenedKitsune) < 0 || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (player.findPerk(PerkLib.EnlightenedNinetails) < 0 || player.perkv4(PerkLib.EnlightenedNinetails) > 0)) {
 				outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into seven tails.  <b>You are now a seven-tails!  But something is wrong...  The cosmic power radiating from your body feels...  tainted somehow.  The corruption pouring off your body feels...  good.</b>");
 				outputText("\n\n(Perk Gained: Corrupted Kitsune - Grants Corrupted Fox Fire and Terror special attacks.)");
 				if (player.findPerk(PerkLib.CorruptedKitsune) < 0) player.createPerk(PerkLib.CorruptedKitsune, 0, 0, 0, 0);
 				dynStats("lib", 1, "lus", 5, "cor", 5);
-				player.tailVenom = 7;
+				player.tailCount = 7;
 				changes++;
 			}
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailVenom == 7 && player.level >= 36 && player.inte >= 140 && mystic && rand(4) == 0 && changes < changeLimit && player.earType == EARS_FOX) {
-				outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailVenom + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailVenom + 1) + " fox-tails.</b>");
-				player.tailVenom++;
+			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 7 && player.level >= 36 && player.inte >= 140 && mystic && rand(4) == 0 && changes < changeLimit && player.earType == EARS_FOX) {
+				outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
+				player.tailCount++;
 				changes++;
 			}
 			//[Grow 9th tail and gain Corrupted Nine-tails perk]
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailVenom == 8 && player.level >= 42 && player.inte >= 160 && mystic && rand(4) == 0 && changes < changeLimit && player.earType == EARS_FOX && player.findPerk(PerkLib.CorruptedNinetails) < 0 && (player.findPerk(PerkLib.EnlightenedNinetails) < 0 || player.perkv4(PerkLib.EnlightenedNinetails) > 0)) {
+			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 8 && player.level >= 42 && player.inte >= 160 && mystic && rand(4) == 0 && changes < changeLimit && player.earType == EARS_FOX && player.findPerk(PerkLib.CorruptedNinetails) < 0 && (player.findPerk(PerkLib.EnlightenedNinetails) < 0 || player.perkv4(PerkLib.EnlightenedNinetails) > 0)) {
 				outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into nine tails.  <b>You are now a nine-tails!  But something is strange...  The cosmic power radiating from your body feels...  somehow more tainted than before.  The corruption pouring off your body feels...  amazing good.</b>");
 				outputText("\n\nYou have the inexplicable urge to set fire to the world, just to watch it burn.  With your newfound power, it's a goal that is well within reach.");
 				outputText("\n\n(Perk Gained: Corrupted Nine-tails - Grants boosts to your racial special attacks.)");
 				if (player.findPerk(PerkLib.CorruptedNinetails) < 0) player.createPerk(PerkLib.CorruptedNinetails, 0, 0, 0, 0);
 				dynStats("lib", 2, "lus", 10, "cor", 10);
-				player.tailVenom = 9;
+				player.tailCount = 9;
 				changes++;
 			}
 			//Fox Eyes
@@ -10499,7 +10480,7 @@
 			}
 			//[Change Hair Color: Golden-blonde, SIlver Blonde, White, Black, Red]
 			if (((mystic && rand(2) == 0) || (!mystic && rand(4) == 0)) && changes < changeLimit && !InCollection(player.hairColor, KitsuneScene.basicKitsuneHair) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && !InCollection(player.hairColor, KitsuneScene.elderKitsuneColors)) {
-				if (player.tailType == TAIL_TYPE_FOX && player.tailVenom == 9) player.hairColor = randomChoice(KitsuneScene.elderKitsuneColors);
+				if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) player.hairColor = randomChoice(KitsuneScene.elderKitsuneColors);
 				else player.hairColor = randomChoice(KitsuneScene.basicKitsuneHair);
 				outputText("\n\nYour scalp begins to tingle, and you gently grasp a strand, pulling it forward to check it.  Your hair has become the same " + player.hairColor + " as a kitsune's!");
 				changes++;
@@ -12378,7 +12359,6 @@
 					}
 					else {
 						player.killCocks(1);
-						player.genderCheck();
 					}
 				}
 				//if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
@@ -12391,7 +12371,6 @@
 					outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + vaginaDescript(0) + "</b>!", false);
 
 					changes++;
-					player.genderCheck();
 					dynStats("lus", 10);
 				}
 			}
@@ -12417,7 +12396,6 @@
 							player.cocks[0].cockType = CockTypesEnum.HUMAN;
 							player.clitLength = .25;
 						}
-						player.genderCheck();
 					}
 					changes++;
 				}
@@ -12603,7 +12581,7 @@
 				outputText("\n\nYou suddenly feel your legs giving in bellow you and you fall off to the ground unable to resume standing.", false);
 				if (player.tailType != 0) {
 					if (player.tailType == 5 || player.tailType == 6) outputText(" Your insectile abdomen", false);
-					else if (player.tailType > 0 && player.tailVenom > 1) outputText(" Your tails", false);
+					else if (player.tailType > 0 && player.tailCount > 1) outputText(" Your tails", false);
 					else outputText(" Your tail", false);
 					outputText(" recede back into your body disappearing entirely into your backside as if it never existed.", false);
 				}

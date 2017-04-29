@@ -13,8 +13,15 @@ public class Tail extends BodyPart {
 	//Tail recharge determines how fast venom/webs comes back per hour.
 	public var recharge:Number = 5;
 
+	override public function set type(value:int):void {
+		var old:int = type;
+		super.type = value;
+		if (count < 1 || value != TAIL_TYPE_FOX) count = 1;
+	}
+
 	public function Tail(creature:Creature) {
 		super(creature);
+		addPublicPrimitives("count","venom","recharge");
 	}
 
 	public function isLong():Boolean {

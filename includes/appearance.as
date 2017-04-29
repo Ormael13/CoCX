@@ -999,9 +999,9 @@ public function appearance(e:MouseEvent = null):void
 	}
 	else if(player.tailType == TAIL_TYPE_FOX) 
 	{
-		if(player.tailVenom <= 1) 
+		if(player.tailCount <= 1)
 			outputText("  A swishing " + player.furColor + " fox's brush extends from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
-		else outputText("  " + Num2Text(player.tailVenom) + " swishing " + player.furColor + " fox's tails extend from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
+		else outputText("  " + Num2Text(player.tailCount) + " swishing " + player.furColor + " fox's tails extend from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
 	}
 	else if(player.tailType == TAIL_TYPE_DRACONIC) 
 	{
@@ -1886,14 +1886,14 @@ public function RacialScores():void {
 	//else if (player.kitshooScore() >= 1 && player.kitshooScore() < 6) outputText("\n<font color=\"#008000\">Kitshoo: " + player.kitshooScore() + "</font>", false);
 	//else if (player.kitshooScore() < 1) outputText("\n<font color=\"#ff0000\">Kitshoo: 0</font>", false);
 	if (player.kitsuneScore() >= 6) {
-		if (player.tailType == 13 && player.tailVenom >= 2 && player.kitsuneScore() >= 12) {
-			if (player.tailVenom < 9) outputText("\n<font color=\"#0000a0\">Kitsune:", false);
-			else if (player.tailVenom == 9) outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune:", false);
+		if (player.tailType == 13 && player.tailCount >= 2 && player.kitsuneScore() >= 12) {
+			if (player.tailCount < 9) outputText("\n<font color=\"#0000a0\">Kitsune:", false);
+			else if (player.tailCount == 9) outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune:", false);
 			outputText(" " + player.kitsuneScore() + " (-" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, ", false);
-			if (player.tailVenom < 9) {
+			if (player.tailCount < 9) {
 				outputText("+" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue, +20% max Soulforce)</font>", false);
 			}
-			else if (player.tailVenom == 9) {
+			else if (player.tailCount == 9) {
 				outputText("+" + (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue, +40% max Soulforce)</font>", false);
 			}
 		}

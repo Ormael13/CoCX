@@ -614,7 +614,6 @@ public function growADickForFera():void {
 		player.createPerk(PerkLib.FerasBoonSeeder,0,0,0,0);
 	}
 	menu();
-	genderCheck();
 	addButton(0,"Next",afterFeraGivesYouACawk);
 }
 
