@@ -180,6 +180,7 @@ package classes
 			outputText("<li> Ormael (Salamander TFs)</li>");
 			outputText("<li> Coalsack (Anzu the Avian Deity)</li>");
 			outputText("<li> Nonesuch (Izmael)</li>");
+			outputText("<li> IxFa (Naga Tail Masturbation)</li>");
 			outputText("</ul>");
 			outputText("<b>Game Mod Bug Reporting:</b>\n");
 			outputText("<ul>");

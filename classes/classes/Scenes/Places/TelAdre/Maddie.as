@@ -26,7 +26,9 @@ internal function procMaddieOneIntro():void {
 	else {
 		outputText("You walk into the bakery and a burly, hair-covered arm grabs your shoulder.  The familiar voice of a minotaur barks, \"<i>You.  You can help.  Come.</i>\"  You turn, but he's already walking towards an 'employees only' door.  Do you follow?", false);
 	}
-	doYesNo(followMinotaurIntoBackroom,telAdre.bakeryScene.bakeryuuuuuu);
+	menu();
+	addButton(0, "Yes", followMinotaurIntoBackroom);
+	addButton(1, "No", telAdre.bakeryScene.bakeryuuuuuu);
 }
 //[Follow] 
 private function followMinotaurIntoBackroom():void {
@@ -38,18 +40,23 @@ private function followMinotaurIntoBackroom():void {
 		if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0) outputText("You lick your lips when you realize you're meeting the source of the 'special' éclairs.", false);
 		else outputText("You blush when you realize what he must be using for cream filling.", false);
 		//[Give Them] [Leave]
-		if (player.hasItem(consumables.BEEHONY) && player.hasItem(consumables.L_DRAFT))
-			simpleChoices("Give Them", handOverIngredientsItBeBakingTimeYo, "", null, "", null, "", null, "Leave", nopeAintGotNoneODemSpeculIngredimathings);
-		else simpleChoices("", null, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+		if (player.hasItem(consumables.BEEHONY) && player.hasItem(consumables.L_DRAFT)) {
+			addButton(0, "Give Them", handOverIngredientsItBeBakingTimeYo);
+			addButton(14, "Leave", nopeAintGotNoneODemSpeculIngredimathings);
+		} else doNext(telAdre.bakeryScene.bakeryuuuuuu);
 		flags[kFLAGS.MINO_CHEF_EXPLAINED_INGREDIENTS] = 1;
 	}
 	//(Explained) 
 	else {
 		outputText("You follow the burly chef through the door, winding through the familiar ovens.  By the time you reach his work area, you're both covered in a fine sheen of sweat and you find yourself responding to the minotaur musk unconsciously.  The strange chef turns to ask, \"<i>You have special ingredients now, yes?</i>\"", false);
 		//[Yes] [Lie – No/Not Yet]
-		if (player.hasItem(consumables.BEEHONY) && player.hasItem(consumables.L_DRAFT))
-			simpleChoices("Yes", handOverIngredientsItBeBakingTimeYo, "Lie - No", nopeAintGotNoneODemSpeculIngredimathings, "", null, "", null, "", null);
-		else simpleChoices("No", nopeAintGotNoneODemSpeculIngredimathings, "", null, "", null, "", null, "", null);
+		menu();
+		addButtonDisabled(0, "Yes");
+		addButton(1, "No", nopeAintGotNoneODemSpeculIngredimathings);
+		if (player.hasItem(consumables.BEEHONY) && player.hasItem(consumables.L_DRAFT)) {
+			addButton(0, "Yes", handOverIngredientsItBeBakingTimeYo);
+			addButton(1, "Lie - No", nopeAintGotNoneODemSpeculIngredimathings);
+		}
 	}
 }
 
@@ -79,9 +86,13 @@ public function handOverIngredientsItBeBakingTimeYo():void {
 	if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0) outputText("  Your mouth salivates at the thought.", false);
 	else outputText("You aren't sure you want to.", false);
 	outputText("\n\n", false);
-	if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0) doNext(waitForSlutCake);
-	//[Wait] [Sneak Out]
-	else simpleChoices("Wait", waitForSlutCake, "Sneak Out", sneakAwayFromMaddie, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Wait", waitForSlutCake);
+	if (player.findPerk(PerkLib.MinotaurCumAddict) < 0) {
+		addButton(1, "Sneak Out", sneakAwayFromMaddie);
+	} else {
+		addDisabledButton(1, "Sneak Out", "You just can't miss it!");
+	}
 }
 	
 //[Sneak Out]
@@ -115,7 +126,9 @@ private function waitForSlutCake():void {
 	
 	outputText("Running seems like a very good idea.  Who knows what she has planned for you?", false);
 	//[RUN] [TRY TO TALK]
-	simpleChoices("Run Away", runAwayFromMaddiiiieee, "TryToTalk", talkToMaddie, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Run Away", runAwayFromMaddiiiieee);
+	addButton(1, "TryToTalk", talkToMaddie);
 }
 //[RUN DAFUQ AWAY]
 private function runAwayFromMaddiiiieee():void {

@@ -1739,7 +1739,7 @@ use namespace kGAMECLASS;
 				deerCounter++;
 			if (faceType == FACE_DEER)
 				deerCounter++;
-			if (lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED || lowerBody == LOWER_BODY_TYPE_DEERTAUR)
+			if (lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED)
 				deerCounter++;
 			if (hornType == HORNS_ANTLERS && horns >= 4)
 				deerCounter++;

@@ -109,6 +109,9 @@ the text from being too boring.
 	import flash.utils.ByteArray;
 	import flash.system.Capabilities;
 	import flash.display.Sprite;
+	import mx.logging.targets.TraceTarget;
+	import mx.logging.Log;
+	import mx.logging.LogEventLevel;
 
 	/****
 		classes.CoC: The Document class of Corruption of the Champions.
@@ -122,6 +125,15 @@ the text from being too boring.
 
 	public class CoC extends MovieClip 
 	{
+		{
+			/*
+			 * This is a static initializer block, used as an ugly hack to setup
+			 * logging before any of the class variables are initialized.
+			 * This is done because they could log messages during construction.
+			 */
+			
+			 CoC.setUpLogging();
+		}
 
 		// Include the functions. ALL THE FUNCTIONS
 		include "../../includes/input.as";
@@ -354,6 +366,28 @@ the text from being too boring.
 		public var timeQ:Number = 0;
 		public var campQ:Boolean = false;
 		
+		private static var traceTarget:TraceTarget;
+		
+		private static function setUpLogging():void {
+			traceTarget = new TraceTarget();
+
+			traceTarget.level = LogEventLevel.WARN;
+			
+			CONFIG::debug
+			{
+				traceTarget.level = LogEventLevel.DEBUG;
+			}
+
+			//Add date, time, category, and log level to the output
+			traceTarget.includeDate = true;
+			traceTarget.includeTime = true;
+			traceTarget.includeCategory = true;
+			traceTarget.includeLevel = true;
+
+			// let the logging begin!
+			Log.addTarget(traceTarget);
+		}
+		
 		/**
 		 * Create the main game instance.
 		 * If a stage is injected it will be use instead of the one from the superclass.
@@ -412,8 +446,8 @@ the text from being too boring.
 			 * Debug, Version, etc
 			 */
 			debug = false; //DEBUG, used all over the place
-			ver = "1.0.2_mod_1.4.2"; //Version NUMBER
-			version = ver + " (<b>The Fabulous Update</b>)"; //Version TEXT
+			ver = "1.0.2_mod_1.4.3"; //Version NUMBER
+			version = ver + " (<b>1,000,000 Views!</b>)"; //Version TEXT
 
 			//Indicates if building for mobile?
 			mobile = false;

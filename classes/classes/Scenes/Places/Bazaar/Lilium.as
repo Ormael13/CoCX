@@ -44,7 +44,7 @@ private function approachLilium():void {
 
 		outputText("Of <i>course</i> that would be why she's standing there dressed like that.\n\n", false);
 
-		outputText("\"<i>200 gems and I'm all yours,</i>\" she continues, sweeping her arms out wide for emphasis.\n\n", false);
+		outputText("\"<i>50 gems and I'm all yours,</i>\" she continues, sweeping her arms out wide for emphasis.\n\n", false);
 	}
 	//#########REPEAT INTRODUCTION#########
 	else {
@@ -52,9 +52,14 @@ private function approachLilium():void {
 
 		outputText("\"<i>Back again?  I thought I was finally rid of you!</i>\"  Lilium teases, but you can see the eager smile on her face.  \"<i>Is this visit business or pleasure?  I'm hoping both.</i>\"\n\n", false);
 	}
-	if (player.gems < 200) outputText("<b>You remember that you haven't got the 200 gems for her services right now.  Maybe next time.</b>", false);
-	else pay = payForLilium;
-	simpleChoices("Pay", pay, "", null, "", null, "", null, "Leave", leaveLilium);
+	menu();
+	if (player.gems < 50) {
+		outputText("<b>You remember that you haven't got the 50 gems for her services right now.  Maybe next time.</b>", false);
+		addDisabledButton(0, "Pay");
+	} else {
+		addButton(0, "Pay", payForLilium);
+	}
+	addButton(14, "Leave", leaveLilium);
 }
 
 
@@ -62,7 +67,7 @@ private function payForLilium():void {
 	clearOutput();
 	spriteSelect(93);
 	//#########GENDERLESS SCENE######### REQUIRES unsexed (hah)
-	if (player.gender == 0) {
+	if (player.isGenderless()) {
 		outputText("You follow Lilium to a secluded spot. With a grin on her face she squats before you and helps you remove your " + player.armorName + ".  The grin is quickly replaced by a look of surprise and confusion as she looks at your flat, featureless crotch.\n\n", false);
 
 		outputText("She looks up at you and then back at your groin a few times before scratching her head and crossing her arms.  \"<i>Well,</i>\" she begins, breaking the awkward silence.  \"<i>That's not something you see every day.  Did you get in an accident or something?  I mean, I've seen people with missing parts before, but...</i>\"  The woman trails off as she lightly prods your bare mons with one gloved finger.  \"<i>Actually, you know what?  I really don't think I want to know what could have done this to you.</i>\" With that she stands back up, grabs one of your arms and drops the small pouch of gems containing your payment to her back in your hand.\n\n", false);
@@ -88,16 +93,25 @@ private function payForLilium():void {
 		outputText("You toss the gems to the hooker and while she counts them, you wonder just what you want her to do this time.", false);
 	}	
 	flags[kFLAGS.LILIUM_TIMES_TALKED]++;
-	player.gems -= 200;
+	player.gems -= 50;
 	statScreenRefresh();
 	//Sex Menu here
-	var buttFuck:Function = null;
-	var nippleFuck:Function = null;
-	var rideHer:Function = null;
-	if (player.hasCock() && player.hasLongTongue()) buttFuck = buttFuckTongueJeorb;
-	if (player.hasCock()) nippleFuck = liliumNippleFuck;
-	if (player.hasVagina()) rideHer = liliumDickRidah;
-	simpleChoices("Buttfuck", buttFuck, "Ride Her", rideHer, "Nipple-Fuck", nippleFuck, "", null, "", null);
+	menu();
+	if (player.hasCock() && player.hasLongTongue()) {
+		addButton(0, "Buttfuck", buttFuckTongueJeorb);
+	} else {
+		addDisabledButton(0, "Buttfuck", "This scene requires player to have cock and long tongue.");
+	}
+	if (player.hasVagina()) {
+		addButton(1, "Ride Her", liliumDickRidah);
+	} else {
+		addDisabledButton(1, "Ride Her", "This scene requires player to have vagina.");
+	}
+	if (player.hasCock()) {
+		addButton(2, "Nipple-Fuck", liliumNippleFuck);
+	} else {
+		addDisabledButton(2, "Nipple-Fuck", "This scene requires player to have cock.");
+	}
 }
 
 //- Leave:

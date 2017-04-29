@@ -570,7 +570,11 @@
 			//Choices
 			clearOutput();
 			outputText("You are a man.  Your upbringing has provided you an advantage in strength and toughness.\n\nWhat type of build do you have?");
-			simpleChoices("Lean", buildLeanMale, "Average", buildAverageMale, "Thick", buildThickMale, "Girly", buildGirlyMale, "", null);
+			menu();
+			addButton(0, "Lean", buildLeanMale);
+			addButton(1, "Average", buildAverageMale);
+			addButton(2, "Thick", buildThickMale);
+			addButton(3, "Girly", buildGirlyMale);
 		}
 
 		internal function isAWoman():void {
@@ -596,7 +600,11 @@
 			//Choices
 			clearOutput();
 			outputText("You are a woman.  Your upbringing has provided you an advantage in speed and intellect.\n\nWhat type of build do you have?");
-			simpleChoices("Slender", buildSlenderFemale, "Average", buildAverageFemale, "Curvy", buildCurvyFemale, "Tomboyish", buildTomboyishFemale, "", null);
+			menu();
+			addButton(0, "Slender", buildSlenderFemale);
+			addButton(1, "Average", buildAverageFemale);
+			addButton(2, "Curvy", buildCurvyFemale);
+			addButton(3, "Tomboyish", buildTomboyishFemale);
 		}
 
 		internal function isAHerm():void {
@@ -1401,7 +1409,12 @@
 			outputText("<b>Brutal Hardcore mode:</b> Like hardcore mode, but the difficulty is locked to extreme! How long can you survive?\n", false);
 			if (debug) outputText("<b>Grimdark mode:</b> (In dev) In the grimdark future, there are only rape and corruptions. Lots of things are changed and Lethice has sent out her minions to wall the borders and put up a lot of puzzles. Can you defeat her in this mode in as few bad ends as possible?\n", false);
 			
-			simpleChoices("Normal", chooseModeNormal, "Survival", chooseModeSurvival, "Realistic", chooseModeRealistic, "Hardcore", chooseModeHardcore, "Brutal HC", chooseModeBrutalHardcore);
+			menu();
+			addButton(0, "Normal", chooseModeNormal);
+			addButton(1, "Survival", chooseModeSurvival);
+			addButton(2, "Realistic", chooseModeRealistic);
+			addButton(3, "Hardcore", chooseModeHardcore);
+			addButton(4, "Brutal HC", chooseModeBrutalHardcore);
 			if (debug) addButton(12, "Grimdark", chooseModeGrimdark);
 		}
 
