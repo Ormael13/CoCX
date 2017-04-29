@@ -215,7 +215,7 @@ inputManager.AddBindableControl(
 	function():void {
 		if (mainView.menuButtonIsVisible(MainView.MENU_APPEARANCE))
 		{
-			appearance(undefined);
+			playerAppearance.appearance();
 		}
 	});
 	

@@ -119,7 +119,6 @@ the text from being too boring.
 //No longer needed. Added into CharCreation.as:		include "../../includes/customCharCreation.as";
 		
 		include "../../includes/descriptors.as";
-		include "PlayerAppearance.as";
 
 //No longer needed:		include "../../includes/InitialiseUI.as";
 		include "../../includes/input.as";
@@ -169,6 +168,7 @@ the text from being too boring.
 		private var _statusAffects:StatusAffects = new StatusAffects();// to init the static
 		public var charCreation:CharCreation = new CharCreation();
 		public var saves:Saves = new Saves(gameStateDirectGet, gameStateDirectSet);
+		public var playerAppearance:PlayerAppearance = new PlayerAppearance();
 		// Items/
 		public var mutations:Mutations = new Mutations();
 		public var consumables:ConsumableLib = new ConsumableLib();
@@ -414,7 +414,7 @@ the text from being too boring.
 
 			// Hooking things to MainView.
 			this.mainView.onNewGameClick = charCreation.newGameGo;
-			this.mainView.onAppearanceClick = appearance;
+			this.mainView.onAppearanceClick = playerAppearance.appearance;
 			this.mainView.onDataClick = saves.saveLoad;
 			this.mainView.onLevelClick = levelUpGo;
 			this.mainView.onPerksClick = displayPerks;
