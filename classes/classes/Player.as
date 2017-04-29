@@ -1,4 +1,4 @@
-﻿package classes
+package classes
 {
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
@@ -93,10 +93,10 @@ use namespace kGAMECLASS;
 		public var itemSlot8:ItemSlotClass;
 		public var itemSlot9:ItemSlotClass;
 		public var itemSlot10:ItemSlotClass;
-		public var itemSlots:/*ItemSlotClass*/Array;
+		public var itemSlots:Array;
 		
 		public var prisonItemSlots:Array = [];
-		public var previouslyWornClothes:/*Armor*/Array = []; //For tracking achievement.
+		public var previouslyWornClothes:Array = []; //For tracking achievement.
 		
 		private var _weapon:Weapon = WeaponLib.FISTS;
 		private var _armor:Armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
@@ -268,7 +268,7 @@ use namespace kGAMECLASS;
 			//Stacks on top of Thick Skin perk.
 			if (hasFur()) armorDef += 1;
 			if (hasReptileScales()) armorDef += 3;
-			if (hasDragonScales()) armorDef += 2;
+			//if (hasDragonScales()) armorDef += 3; // maybe later
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorDef += 1;
 			//Bonus defense
@@ -786,14 +786,6 @@ use namespace kGAMECLASS;
 				if (isTaur())
 					race = "raccoon-taur";
 			}
-			if (wolfScore() >= 4) {
-				if (hasFur()) {
-					race = "wolf-morph";
-				}
-				else {
-					race = "wolf-" +mf("boy","girl");
-				}
-			}
 			if (dogScore() >= 4)
 			{
 				if (isTaur() && lowerBody == LOWER_BODY_TYPE_DOG)
@@ -871,9 +863,11 @@ use namespace kGAMECLASS;
 			}
 			if (spiderScore() >= 4)
 			{
-				race = "spider-morph";
-				if (mf("no", "yes") == "yes")
-					race = "spider-girl";
+				if (gender == 0 || gender == 3) {
+					race = "spider-morph";
+				} else {
+					race = "spider-" + mf("boy", "girl");
+				}
 				if (isDrider())
 					race = "drider";
 			}
@@ -907,7 +901,7 @@ use namespace kGAMECLASS;
 			if (rhinoScore() >= 4)
 			{
 				race = "rhino-morph";
-				if (faceType == 0) race = "rhino-" + mf("man", "girl");
+				if (faceType == 0) race = "rhino-" + mf("boy", "girl");
 			}
 			if (echidnaScore() >= 4)
 			{
@@ -919,7 +913,7 @@ use namespace kGAMECLASS;
 				if (isTaur()) race = "deer-taur";
 				else {
 					race = "deer-morph";
-					if (faceType == 0) race = "deer-" + mf("morph", "girl");
+					if (faceType == 0) race = "deer-" + mf("boy", "girl");
 				}
 			}
 			//Special, bizarre races
@@ -929,14 +923,14 @@ use namespace kGAMECLASS;
 				else {
 					race  = "dragonne-morph";
 					if (faceType == 0)
-						race = "dragonne-" + mf("man", "girl");
+						race = "dragonne-" + mf("boy", "girl");
 				}
 			}
 			if (manticoreScore() >= 6)
 			{
 				race = "manticore-morph"
 				if (faceType == 0)
-					race = "manticore-" + mf("man", "girl");
+					race = "manticore-" + mf("boy", "girl");
 			}
 			if (sirenScore() >= 4)
 			{
@@ -972,7 +966,7 @@ use namespace kGAMECLASS;
 			if (gooScore() >= 3)
 			{
 				race = "goo-";
-				race += mf("boi", "girl");
+				race += mf("boy", "girl");
 			}
 			
 			
@@ -1140,33 +1134,6 @@ use namespace kGAMECLASS;
 			if (lowerBody == LOWER_BODY_TYPE_FERRET) counter++;
 			if (hasFur() && counter > 0) counter++;
 			return counter;
-		}
-		//Wolf Score
-		public function wolfScore():Number {
-			var wolfCounter:Number = 0;
-			if (faceType == FACE_WOLF)
-				wolfCounter++;
-			if (wolfCocks() > 0)
-				wolfCounter++;
-			if (breastRows.length > 1)
-				wolfCounter++;
-			if (breastRows.length == 4)
-				wolfCounter++;
-			if (breastRows.length > 4)
-				wolfCounter--;
-			if (earType == EARS_WOLF)
-				wolfCounter++;
-			if (tailType == TAIL_TYPE_WOLF)
-				wolfCounter++;
-			if (lowerBody == LOWER_BODY_TYPE_WOLF)
-				wolfCounter++;
-			if (armType == ARM_TYPE_WOLF)
-				wolfCounter++;
-			if (eyeType == EYES_WOLF)
-				wolfCounter+=2;
-			if (hasFur() && wolfCounter > 0) //Only counts if we got wolf features
-				wolfCounter++;
-			return wolfCounter;
 		}
 		//Determine Dog Rating
 		public override function dogScore():Number
@@ -1739,7 +1706,7 @@ use namespace kGAMECLASS;
 				deerCounter++;
 			if (faceType == FACE_DEER)
 				deerCounter++;
-			if (lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED)
+			if (lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED || lowerBody == LOWER_BODY_TYPE_DEERTAUR)
 				deerCounter++;
 			if (hornType == HORNS_ANTLERS && horns >= 4)
 				deerCounter++;
@@ -2572,12 +2539,6 @@ use namespace kGAMECLASS;
 				}
 			}
 			//Alter max stats depending on race
-			if (wolfScore() >= 4) {
-				maxSpe -= 10;
-				maxInt += 5;
-				maxTou += 10;
-				maxStr += 5;
-			}
 			if (minoScore() >= 4) {
 				maxStr += 20;
 				maxTou += 10;
