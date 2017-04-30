@@ -1,5 +1,10 @@
 sudo: required
 
+addons:
+  # service for code quality analysis
+  sonarqube:
+    organization: "Kitteh6660-github"
+
 # travis-ci does not support actionscript.
 # However the build uses ant, which is usually used to build java projects.
 # The ant task (mxmlc) provided by the flex SDK (ant/lib/flexTasks.jar) is used to build the project.
@@ -19,6 +24,8 @@ install:
 script:
     # this is where the build happens. A separate build is started for every entry in the matrix element
   - ant test-$BUILD
+  - devTools/ci/update-sonar-version.sh
+  - sonar-scanner
 
 env:
   global:
