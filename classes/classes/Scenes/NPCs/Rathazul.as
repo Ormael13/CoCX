@@ -376,6 +376,11 @@ private function rathazulWorkOffer():Boolean {
 		if (alchemy) {
 			addButton(3, "Alchemy", rathazulAlchemyMenu, null, null, null, "Have Rathazul make something out of the ingredients you carry.");
 		}
+		//Silly Mode: Straight-up kill Rathazul (He'll revive, this is silly mode. Just, no longer a follower)
+		//I blame the Wikia Discord chat for this, they egged me on
+		if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] == true && player.hasStatusEffect(StatusEffects.CampRathazul)) {
+			addButton(4, "Flirt", getThatRatAss, null, null, null, "Try to score with Rathazul.");
+		}
 		//These will be filled in.
 		if (lethiciteDefense != null) addButton(button++, "Lethicite", lethiciteDefense, null, null, null, "Ask him if he can make use of that lethicite you've obtained from Marae.");
 
@@ -1215,6 +1220,25 @@ private function growLethiciteDefenseGuessNot():void {
 	clearOutput();
 	outputText("Rathazul nods sagely, \"<i>That may be wise.  Perhaps there will be another use for this power.");
 	doNext(returnToRathazulMenu);
+}
+
+private function getThatRatAss():void {
+	spriteSelect(49);
+	clearOutput();
+	outputText("You slide over to Rathazul's spot in camp and wink at him, saying, \"<i>Hey cutie, do you have 11 protons? Cause your sodium fine.</i>\"\n\n");
+	outputText("Rathazul looks up from the whatever it is he's working on and blinks wearily. \"<i>What?</i>\"\n\n");
+	outputText("\"<i>Oh, nothing.</i>\" You let out a soft laugh. \"<i>Just that we have chemistry, so I think it's time we try some biology.</i>\"\n\n");
+	outputText("There's a moment of silence, then he coughs. \"<i>I-I'm sorry, what are you trying to say?</i>\" There's a glimmer of a plea in his eyes, asking you to stop.\n\n");
+	outputText("No way. You are getting what you came here for. You puff your chest and declare, \"<i>I wanna fuck you.</i>\"\n\n");
+	outputText("\"<i>Oh... Ohhhh no...</i>\" He takes a couple steps back, mumbling, \"<i>No, no no no no no no, no, no...</i>\" His eyes glaze over and his steps grow uncoordinated as his soul seems to leave his body. \"<i>No, no, no... No... No...</i>\"\n\n");
+	outputText("His foot steps in a bowl and he slips, crashing into the ground. His head slams into a rock along the way. You hear something crack that sounds like it shouldn't. You drop to all fours and put your hand on his shoulder, shouting his name. He doesn't respond. You put a hand to his neck. His pulse has stopped, and there is blood gathering around his head.\n\n");
+	outputText("You get up and very slowly back away. You have no idea what just happened, but you are sure of one thing-- You need to get out of here.\n\n");
+	outputText("An hour later, you muster up the courage to return to the scene of your crime. Much to your surprise, though, there is no scene. Rathazul is back on his feet, though distinctly avoiding looking at you. All he's offered is a note on the ground. You pick it up and read it.\n\n");
+	outputText("\"<i>No. And please do not as me that again.\n- Rathazul</i>\"\n\n");
+	outputText("Sheesh, what a drama queen. A simple \"No thanks\" would've been fine. You toss the note aside with a huff and turn back to camp.\n\n");
+	outputText("Still though, thinking about that rat ass gets you turned on...");
+	game.dynStats("lus", 10);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 }
