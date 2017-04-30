@@ -2092,7 +2092,6 @@ package classes
 			return false
 		}
 		
-		[Deprecated]
 		public function hasSock(arg:String = ""):Boolean
 		{
 			var index:int = cocks.length;

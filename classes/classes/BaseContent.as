@@ -186,14 +186,6 @@
 			return kGAMECLASS.createCallBackFunction(func,arg);
 		}
 
-		/** [DEPRECATED] Create a function that will pass multiple arguments. 
-		 */
-		[Deprecated(message="This function is deprecated.")]
-		protected function createCallBackFunction2(func:Function, ...args):Function
-		{
-			return kGAMECLASS.createCallBackFunction2.apply(null,[func].concat(args));
-		}
-
 		protected function doSFWloss():Boolean {
 			return kGAMECLASS.doSFWloss();
 		}
