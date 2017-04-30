@@ -5,10 +5,10 @@ package classes.BodyParts {
 import classes.Creature;
 import classes.internals.Utils;
 
-public class Face extends BodyPart {
+public class Face extends SaveableBodyPart {
 
 	public function Face(creature:Creature) {
-		super(creature,[]);
+		super(creature,"facePart",[]);
 	}
 
 	public function hasMuzzle():Boolean {
@@ -129,6 +129,13 @@ public class Face extends BodyPart {
 			else
 				return a + "jaw-droppingly feminine shape with full, pouting lips, an adorable nose, and long, beautiful eyelashes";
 		}
+	}
+
+	override protected function loadFromOldSave(savedata:Object):void {
+		type = Utils.intOr(savedata.faceType,FACE_HUMAN);
+	}
+	override protected function saveToOldSave(savedata:Object):void {
+		savedata.faceType = type;
 	}
 }
 }

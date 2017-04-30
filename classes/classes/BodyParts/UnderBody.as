@@ -35,16 +35,5 @@ import classes.internals.SimpleJsonable;
 			skin.restore(keepTone);
 		}
 
-		public function setProps(p:Object):void
-		{
-			if (p.hasOwnProperty('type')) type = p.type;
-			if (p.hasOwnProperty('skin')) skin.setProps(p.skin);
-		}
-
-		public function setAllProps(p:Object, keepTone:Boolean = true):void
-		{
-			restore(keepTone);
-			setProps(p);
-		}
 	}
 }

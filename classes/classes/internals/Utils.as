@@ -46,6 +46,9 @@ package classes.internals
 		public static function numberOr(input:*,def:Number=0):Number {
 			return (input is Number) ? input : def;
 		}
+		public static function objectOr(input:*,def:Object=null):Object {
+			return (input is Object && input !== null) ? input : def;
+		}
 		/**
 		 * Performs a shallow copy of properties from `src` to `dest`.
 		 * A `hasOwnProperties` check is performed.

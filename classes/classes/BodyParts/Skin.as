@@ -9,7 +9,7 @@ import classes.internals.Utils;
  * @since December 27, 2016
  * @author Stadler76
  */
-public class Skin extends BodyPart {
+public class Skin extends SaveableBodyPart {
 	include "../../../includes/appearanceDefs.as";
 
 	private var _desc:String   = "";
@@ -18,7 +18,7 @@ public class Skin extends BodyPart {
 	public var adj:String      = "";
 
 	public function Skin(creature:Creature) {
-		super(creature, ["tone", "adj", "desc", "furColor"]);
+		super(creature,"skin", ["tone", "adj", "desc", "furColor"]);
 	}
 
 	public function skinFurScales():String {
@@ -190,19 +190,44 @@ public class Skin extends BodyPart {
 		adj      = "";
 	}
 
-	public function setProps(p:Object):void {
-		Utils.copyObjectEx(this, p, myPublicPrimitives);
-	}
-
-	public function setAllProps(p:Object, keepTone:Boolean = true):void {
-		restore(keepTone);
-		setProps(p);
-	}
 	public static const PARTIAL_TO_FULL:Object = Appearance.createMapFromPairs([
 		[SKIN_TYPE_PARTIAL_CHITIN, SKIN_TYPE_CHITIN],
 		[SKIN_TYPE_PARTIAL_SCALES, SKIN_TYPE_SCALES],
 		[SKIN_TYPE_PARTIAL_FUR, SKIN_TYPE_FUR],
 		[SKIN_TYPE_PARTIAL_BARK, SKIN_TYPE_BARK]
 	]);
+
+	override protected function loadFromOldSave(savedata:Object):void {
+		//Convert from old skinDesc to new skinAdj + skinDesc!
+		type = Utils.intOr(savedata.skinType,SKIN_TYPE_PLAIN);
+		desc = Utils.stringOr(savedata.skinDesc,"");
+		adj = Utils.stringOr(savedata.skinAdj,"");
+		for each (var legacyAdj:String in ["smooth", "thick", "rubber", "latex", "slimey"]) {
+			if (desc.indexOf(legacyAdj) != -1) {
+				adj = legacyAdj;
+				if (type == SKIN_TYPE_FUR) {
+					desc = "fur";
+				} else if (type == SKIN_TYPE_GOO) {
+					desc = "goo";
+				} else if ([
+							   SKIN_TYPE_SCALES,
+							   SKIN_TYPE_AQUA_SCALES
+						   ].indexOf(type) >= 0) {
+					desc = "scales";
+				} else {
+					desc = "skin";
+				}
+			}
+		}
+		tone    = Utils.stringOr(savedata.skinTone,"albino");
+		furColor= Utils.stringOr(savedata.furColor,"no");
+	}
+	override protected function saveToOldSave(savedata:Object):void {
+		savedata.skinType = type;
+		savedata.skinDesc = desc;
+		savedata.skinAdj = adj;
+		savedata.skinTone = tone;
+		savedata.furColor = furColor;
+	}
 }
 }

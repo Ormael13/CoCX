@@ -2,9 +2,11 @@
  * Created by aimozg on 27.04.2017.
  */
 package classes.BodyParts {
+import classes.BodyParts.SaveableBodyPart;
 import classes.Creature;
+import classes.internals.Utils;
 
-public class Claws extends BodyPart {
+public class Claws extends SaveableBodyPart {
 	public static const TYPE_NORMAL:int     = 0;
 	public static const TYPE_LIZARD:int     = 1;
 	public static const TYPE_DRAGON:int     = 2;
@@ -17,7 +19,7 @@ public class Claws extends BodyPart {
 	public var tone:String                  = "";
 
 	public function Claws(creature:Creature) {
-		super(creature,["tone"]);
+		super(creature,"clawsPart",["tone"]);
 	}
 
 	override public function restore(keepColor:Boolean = true):void {
@@ -34,6 +36,15 @@ public class Claws extends BodyPart {
 			// Since mander arms are hardcoded and the others are NYI, we're done here for now
 		}
 		return "fingernails";
+	}
+
+	override protected function loadFromOldSave(savedata:Object):void {
+		type = Utils.intOr(savedata.clawType,TYPE_NORMAL);
+		tone = Utils.stringOr(savedata.clawTone,"");
+	}
+	override protected function saveToOldSave(savedata:Object):void {
+		savedata.clawType = type;
+		savedata.clawTone = tone;
 	}
 }
 }

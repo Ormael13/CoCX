@@ -2,9 +2,10 @@
  * Created by aimozg on 27.04.2017.
  */
 package classes.BodyParts {
+import classes.BodyParts.SaveableBodyPart;
 import classes.Creature;
 
-public class Tail extends BodyPart {
+public class Tail extends SaveableBodyPart {
 
 	// A number of tails; legacy version used venom for counting
 	public var count:int       = 0;
@@ -24,7 +25,7 @@ public class Tail extends BodyPart {
 	}
 
 	public function Tail(creature:Creature) {
-		super(creature,["count","venom","recharge"]);
+		super(creature,"tail",["count","venom","recharge"]);
 	}
 
 	public function isLong():Boolean {
@@ -36,6 +37,18 @@ public class Tail extends BodyPart {
 				   TAIL_TYPE_WOLF
 			   ].indexOf(type) >= 0;
 
+	}
+
+	override protected function loadFromOldSave(savedata:Object):void {
+		count = savedata.tailVenum;
+		venom = savedata.tailVenum;
+		recharge = savedata.tailRecharge;
+		type = savedata.tailType;
+	}
+	override protected function saveToOldSave(savedata:Object):void {
+		savedata.tailVenum = type == TAIL_TYPE_FOX ? count : venom;
+		savedata.tailRecharge = recharge;
+		savedata.tailType = type;
 	}
 
 }

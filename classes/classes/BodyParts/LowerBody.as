@@ -2,10 +2,11 @@
  * Created by aimozg on 25.04.2017.
  */
 package classes.BodyParts {
+import classes.Appearance;
 import classes.Creature;
 import classes.internals.Utils;
 
-public class LowerBody extends BodyPart {
+public class LowerBody extends SaveableBodyPart {
 	public var legCount:int = 2;
 
 	override public function set type(value:int):void {
@@ -56,7 +57,7 @@ public class LowerBody extends BodyPart {
 		}
 	}
 	public function LowerBody(creature:Creature) {
-		super(creature,["legCount"]);
+		super(creature,"lowerBodyPart",["legCount"]);
 	}
 
 	override public function restore(keepColor:Boolean = true):void {
@@ -367,6 +368,20 @@ public class LowerBody extends BodyPart {
 			default:
 				return "legs";
 		}
+	}
+	override protected function loadFromOldSave(savedata:Object):void {
+		type = Utils.intOr(savedata.lowerBody,LOWER_BODY_TYPE_HUMAN);
+		if (type === LOWER_BODY_TYPE_CENTAUR) {
+			type = LOWER_BODY_TYPE_HOOFED;
+		} else if (type === LOWER_BODY_TYPE_DEERTAUR) {
+			type = LOWER_BODY_TYPE_CLOVEN_HOOFED;
+		}
+		legCount = Utils.intOr(savedata.legCount,2);
+	}
+
+	override protected function saveToOldSave(savedata:Object):void {
+		savedata.lowerBody = type;
+		savedata.legCount = legCount;
 	}
 }
 }
