@@ -3,9 +3,11 @@
 		// note that these are only used in doubleArgLookups, not in Parser.as itself
 		//
 		// =!= NOTE: MUST BE IMPORTED BEFORE "./doubleArgLookups.as" =!=
-		// 
+		//
 		//Calls are now made through kGAMECLASS rather than thisPtr. This allows the compiler to detect if/when a function is inaccessible.
 		import classes.GlobalFlags.kGAMECLASS;
+		import classes.internals.Utils;
+
 		include "./npcLookups.as";
 
 
@@ -111,7 +113,27 @@
 						}
 					}
 
+		};
+		private static function skinDescription(layer:String,noAdj:Boolean,noTone:Boolean):String {
+			return kGAMECLASS.player.skin.describe(layer,noAdj,noTone)
 		}
+		/*
+		 Your [skin noadj] [skin isare] [skin color].
+		 Your body is covered with [skin.full].
+		 I have [skin.basic][if skin.isPartiallyCovered| with skin.cover.long].
+		 */
+		public var skinLookups:Object = {
+			"basic": function (thisPtr:*, aspect:*):* {return skinDescription("basic", false, false);},
+			"basic.noadj": function (thisPtr:*, aspect:*):* {return skinDescription("basic", true, false);},
+			"main": function (thisPtr:*, aspect:*):* {return skinDescription("main", false, false);},
+			"main.noadj": function (thisPtr:*, aspect:*):* {return skinDescription("main", true, false);},
+			"cover": function (thisPtr:*, aspect:*):* {return skinDescription("cover", false, false);},
+			"cover.noadj": function (thisPtr:*, aspect:*):* {return skinDescription("cover", true, false);},
+			"full": function (thisPtr:*, aspect:*):* {return skinDescription("both", false, false);},
+			"full.noadj": function (thisPtr:*, aspect:*):* {
+				return skinDescription("both", true, false);
+			}
+		};
 
 		// These tags take an ascii attribute for lookup.
 		// [object attribute]
@@ -127,5 +149,6 @@
 			// PC Attributes:
 
 			"cock"		: cockLookups,
-			"cockhead"	: cockHeadLookups
+			"cockhead"	: cockHeadLookups,
+			"skin"      : skinLookups
 		}

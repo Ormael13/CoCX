@@ -62,19 +62,23 @@ public class Face extends BodyPart {
 		}
 		return "face";
 	}
+
+	override public function descriptionFull():String {
+		return describe(false,true);
+	}
 	/**
-	 * @param options.fem (default false): Describe femininity level
-	 * @param options.a (default false): Add an article a/an/the
+	 * @param fem (default false): Describe femininity level
+	 * @param article (default false): Add an article a/an/the
 	 */
-	override public function describe(options:Object):String {
+	public function describe(article:Boolean=false,fem:Boolean=false):String {
 		var femininity:Number = creature.femininity;
 		var a:String          = "", an:String = "", the:String = "";
-		if (options.a) {
+		if (article) {
 			a   = "a ";
 			an  = "an ";
 			the = "the ";
 		}
-		if (!options.fem) {
+		if (!fem) {
 			return a + nounPhrase();
 		} else {
 			var faceo:String = "";

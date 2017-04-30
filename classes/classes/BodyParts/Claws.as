@@ -25,7 +25,7 @@ public class Claws extends BodyPart {
 		tone = "";
 	}
 
-	override public function describe(options:Object):String {
+	override public function descriptionFull():String {
 		var toneText:String = tone == "" ? " " : (", " + tone + " ");
 		switch (type) {
 			case TYPE_NORMAL: return "fingernails";

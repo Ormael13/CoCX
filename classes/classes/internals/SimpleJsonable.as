@@ -40,5 +40,11 @@ public class SimpleJsonable implements Jsonable{
 			}
 		}
 	}
+	public static function getPublicPrimitives(o:SimpleJsonable):Array {
+		return o.myPublicPrimitives;
+	}
+	public static function getPublicJsonables(o:SimpleJsonable):Array {
+		return o.myPublicJsonables;
+	}
 }
 }

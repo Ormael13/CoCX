@@ -1,13 +1,10 @@
 package classes.Scenes 
 {
 	import classes.*;
-	import classes.Items.*
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.MainViewManager;
 	import flash.utils.describeType;
-	import flash.utils.*
-	
+
 	public class DebugMenu extends BaseContent
 	{
 		public var flagNames:XML = describeType(kFLAGS);
@@ -441,13 +438,13 @@ package classes.Scenes
 		private function statChangeMenu():void {
 			outputText("Which attribute would you like to alter?", true);
 			menu();
-			addButton(0, "Strength", statChangeAttributeMenu, "str")
-			addButton(1, "Toughness", statChangeAttributeMenu, "tou")
-			addButton(2, "Speed", statChangeAttributeMenu, "spe")
-			addButton(3, "Intelligence", statChangeAttributeMenu, "int")
-			addButton(5, "Libido", statChangeAttributeMenu, "lib")
-			addButton(6, "Sensitivity", statChangeAttributeMenu, "sen")
-			addButton(7, "Corruption", statChangeAttributeMenu, "cor")
+			addButton(0, "Strength", statChangeAttributeMenu, "str");
+			addButton(1, "Toughness", statChangeAttributeMenu, "tou");
+			addButton(2, "Speed", statChangeAttributeMenu, "spe");
+			addButton(3, "Intelligence", statChangeAttributeMenu, "int");
+			addButton(5, "Libido", statChangeAttributeMenu, "lib");
+			addButton(6, "Sensitivity", statChangeAttributeMenu, "sen");
+			addButton(7, "Corruption", statChangeAttributeMenu, "cor");
 			addButton(14, "Back", accessDebugMenu);
 		}
 		
@@ -474,7 +471,7 @@ package classes.Scenes
 		}
 		
 		private function styleHackMenu():void {
-			menu()
+			menu();
 			outputText("TEST STUFFZ", true);
 			addButton(0, "ASPLODE", styleHackMenu);
 			addButton(1, "Scorpion Tail", changeScorpionTail);
@@ -484,7 +481,59 @@ package classes.Scenes
 			addButton(5, "Tooltips Ahoy", kGAMECLASS.doNothing, null, null, null, "Ahoy! I'm a tooltip! I will show up a lot in future updates!", "Tooltip 2.0");
 			addButton(6, "Lights Out", startLightsOut, testVictoryFunc, testFailureFunc, null, "Test the lights out puzzle, fresh off TiTS!");
 			addButton(7, "Isabella Birth", kGAMECLASS.isabellaFollowerScene.isabellaGivesBirth, null, null, null, "Test Isabella giving birth for debugging purposes.", "Trigger Isabella Giving Birth");
+			addButton(8, "BodyPartEditor", bodyPartEditor,null,null,null, "Inspect and fine-tune the player body parts");
 			addButton(14, "Back", accessDebugMenu);
+		}
+		private function generateTagDemos(...tags:Array):String {
+			return tags.map(function(tag:String,index:int,array:Array):String {
+				return "\\["+tag+"\\] = ["+tag+"]"
+			}).join(",\n");
+		}
+		private function dumpPlayerData():void {
+			clearOutput();
+			getGame().playerAppearance.describeFace();
+
+			outputText("[pg]");
+		}
+		private function bodyPartEditor():void {
+			menu();
+			dumpPlayerData();
+			addButton(0,"SkinType",changeSkinType);
+			addButton(14, "Back", accessDebugMenu);
+		}
+		public static const SKIN_TYPE_CONSTANTS:Array = [
+			"PLAIN", // SKIN_TYPE_PLAIN
+			"FUR", // SKIN_TYPE_FUR
+			"SCALES", // SKIN_TYPE_SCALES
+			"GOO", // SKIN_TYPE_GOO
+			"UNDEFINED", // SKIN_TYPE_UNDEFINED
+			"CHITIN", // SKIN_TYPE_CHITIN
+			"BARK", // SKIN_TYPE_BARK
+			"STONE", // SKIN_TYPE_STONE
+			"TATTOED", // SKIN_TYPE_TATTOED
+			"AQUA_SCALES", // SKIN_TYPE_AQUA_SCALES
+			"PARTIAL_FUR", // SKIN_TYPE_PARTIAL_FUR
+			"PARTIAL_SCALES", // SKIN_TYPE_PARTIAL_SCALES
+			"PARTIAL_CHITIN", // SKIN_TYPE_PARTIAL_CHITIN
+			"PARTIAL_BARK" // SKIN_TYPE_PARTIAL_BARK
+		];
+		private function changeSkinType(page:int=0,setTo:int=-1):void {
+			if (setTo>=0) player.skin.type = setTo;
+			menu();
+			dumpPlayerData();
+			outputText("player.skin = "+JSON.stringify(player.skin).replace(",",", ")+"\n");
+			outputText(generateTagDemos(
+							"skin basic","skin basic.noadj","skin","skin.noadj",
+							"skin main","skin main.noadj",
+							"skin cover","skin cover.noadj","skinfurscales",
+							"skin full","skin full.noadj","skin.full",
+							"skintone")+".\n");
+			for (var i:int=10*page;i<SKIN_TYPE_CONSTANTS.length && i<10*page+10;i++) {
+				addButton(i%10,"("+i+") "+SKIN_TYPE_CONSTANTS[i],curry(changeSkinType,page,i));
+			}
+			if (page>0) addButton(12,"PrevPage",curry(changeSkinType,page-1));
+			if (page*10+10<SKIN_TYPE_CONSTANTS.length) addButton(13,"NextPage",curry(changeSkinType,page+1));
+			addButton(14, "Back", bodyPartEditor);
 		}
 		
 		private function changeScorpionTail():void {
@@ -781,7 +830,7 @@ package classes.Scenes
 		
 		public function toggleSlot(slot:int):void
 		{
-			lightsArray[slot] = !lightsArray[slot]
+			lightsArray[slot] = !lightsArray[slot];
 			
 			if (lightsArray[slot]) 
 			{

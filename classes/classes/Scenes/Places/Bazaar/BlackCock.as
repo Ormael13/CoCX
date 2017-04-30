@@ -1581,7 +1581,7 @@ package classes.Scenes.Places.Bazaar
 				changes++;
 			}
 			//Fur/scales fall out
-			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && (!player.hasPlainSkinOnly() || player.skinTone != "gray" || player.skinAdj != "tough")) {
+			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && (!player.skin.hasPlainSkinOnly() || player.skinTone != "gray" || player.skinAdj != "tough")) {
 				outputText("\n\n");
 				switch(player.skinType) {
 					case SKIN_TYPE_PLAIN:

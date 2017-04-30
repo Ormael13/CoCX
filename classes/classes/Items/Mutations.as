@@ -1797,7 +1797,7 @@
 				changes++;
 			}
 			//Human skin	
-			if (player.tailType == TAIL_TYPE_HORSE && player.skin.isNot(SKIN_TYPE_PLAIN,SKIN_TYPE_STONE) && changes < changeLimit && rand(4) == 0) {
+			if (player.tailType == TAIL_TYPE_HORSE && player.skin.isNeither(SKIN_TYPE_PLAIN,SKIN_TYPE_STONE) && changes < changeLimit && rand(4) == 0) {
 				if (player.skin.hasFur()) outputText("\n\nYour fur itches incessantly, so you start scratching it.  It starts coming off in big clumps before the whole mess begins sloughing off your body.  In seconds, your skin is nude.  <b>You've lost your fur!</b>", false);
 				else if (player.skin.hasScales()) outputText("\n\nYour scales itch incessantly, so you scratch at them.  They start falling off wholesale, leaving you standing in a pile of scales after only a few moments.  <b>You've lost your scales!</b>", false);
 				else outputText("\n\nYour " + player.skinDesc + " itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin.  <b>Your skin is once again normal!</b>", false);
@@ -7541,7 +7541,7 @@
 				player.skinType = SKIN_TYPE_PARTIAL_SCALES;
 				changes++;
 			}
-			if (player.skin.isNot(SKIN_TYPE_PLAIN,SKIN_TYPE_PARTIAL_SCALES) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(4) == 0) {
+			if (player.skin.isNeither(SKIN_TYPE_PLAIN,SKIN_TYPE_PARTIAL_SCALES) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(4) == 0) {
 				outputText("\n\nYour " + player.skinDesc + " tingles delightfully as it ", false);
 				if (player.skin.hasFur()) outputText(" falls out in clumps, revealing smooth skin underneath.", false);
 				else if (player.skin.hasScales()) outputText(" begins dropping to the ground in a pile around you, revealing smooth skin underneath.", false);

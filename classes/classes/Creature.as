@@ -2595,11 +2595,11 @@ import classes.BodyParts.UnderBody;
 		public function hasPlainSkinOnly():Boolean { return skin.hasPlainSkinOnly(); }
 		public function hasPlainSkin():Boolean { return skin.hasPlainSkin(); }
 		public function hasGooSkin():Boolean { return skin.hasGooSkin(); }
-		public function skinDescript():String { return skin.describe({layer:'basic'}); }
-		public function skinFurScales():String { return skin.describe({layer:'cover'}); }
+		public function skinDescript():String { return skin.describe('basic'); }
+		public function skinFurScales():String { return skin.describe('cover'); }
 
 		// <mod name="Predator arms" author="Stadler76">
-		public function claws():String { return clawsPart.describe({}); }
+		public function claws():String { return clawsPart.descriptionFull(); }
 		// </mod>
 
 		public function legs():String { return lowerBodyPart.legs(); }
