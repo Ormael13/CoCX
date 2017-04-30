@@ -262,7 +262,11 @@ public function meetSophie():void {
 	}
 
 	//[Looking for Demons] [Sex] [Got Lost] [Foraging]
-	simpleChoices("Foraging", tellSophieYoureForagingForStuff, "Got Lost", sophieMeetingGotLost, "Look4Demons", sophieLookingForDemons, "Sex", sophieMeetingChoseSex, "", null);
+	menu();
+	addButton(0, "Foraging", tellSophieYoureForagingForStuff);
+	addButton(1, "Got Lost", sophieMeetingGotLost);
+	addButton(2, "Look4Demons", sophieLookingForDemons);
+	addButton(3, "Sex", sophieMeetingChoseSex);
 }
 
 //[Repeat Meeting]
@@ -288,7 +292,9 @@ public function meetSophieRepeat():void {
 			if (player.lust < 60 || rand(3) <= 1) {
 				outputText("Her need amplifies the compulsion, making it difficult to resist.  It looks like if you turned her down now she'd probably try to force herself on you anyway.  Do you give in to her demand?", false);
 				//[Yes-Consentual sex] [No - fight]
-				simpleChoices("Yes", consensualSexSelector, "No", fightSophie, "", null, "", null, "", null);
+				menu();
+				addButton(0, "Yes", consensualSexSelector);
+				addButton(1, "No", fightSophie);
 			}
 			//(high lust?)
 			else {
@@ -315,7 +321,10 @@ public function meetSophieRepeat():void {
 		outputText("(Her words sink into you, and a desire to go with her threatens to overcome your self-control.  You take a deep breath and clear your head.  Do you go with her, turn her down, or try to take control and be the dominant one?  You'll probably have to fight her in order to dominate her...)", false);
 		dynStats("lus", 20);
 		//[Yes – consentacle sex] [No – sad harpy]
-		simpleChoices("Yes", consensualSexSelector, "No", shootDownSophieSex, "Dominate", fightSophie, "", null, "", null);
+		menu();
+		addButton(0, "Yes", consensualSexSelector);
+		addButton(1, "No", shootDownSophieSex);
+		addButton(2, "Dominate", fightSophie);
 		return;
 	}
 	//(NO DICK)
@@ -325,14 +334,20 @@ public function meetSophieRepeat():void {
 			outputText("Your climb manages to take you back into the harpy nests again.  Sophie flutters down next to you and warns, \"<i>Cutey, a " + player.mf("neuter","girl") + " like you doesn't belong up here.  The younger harpies don't really get the idea of conversation and see you as competition.</i>\"\n\n", false);
 			
 			outputText("Do you see the wisdom of her words and climb back down the mountain, fight Sophie, or keep climbing?", false);
-			simpleChoices("Fight Sophie", FirstTimeSophieForceSex, "Keep Climbing", PCIgnoresSophieAndHarpyIsFought, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+			menu();
+			addButton(0, "Fight Sophie", FirstTimeSophieForceSex);
+			addButton(1, "Keep Climbing", PCIgnoresSophieAndHarpyIsFought);
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
 			return;
 		}
 		//(LACTATE)
 		else {
 			outputText("Your climb manages to take you back into the harpy nests again.  Sophie flutters down next to you and licks her lips hungrily.  She asks, \"<i>Would you mind coming up to my nest and sharing some of your milk?  I've worked up quite a craving for cute girl-milk.</i>\"\n\n", false);
 			outputText("Do you agree to breastfeed the hungry harpy?", false);
-			simpleChoices("Yes", cramANippleInIt, "No", shootDownSophieSex, "Fight Her", FirstTimeSophieForceSex, "", null, "", null);
+			menu();
+			addButton(0, "Yes", cramANippleInIt);
+			addButton(1, "No", shootDownSophieSex);
+			addButton(2, "Fight Her", FirstTimeSophieForceSex);
 			//No(cramANippleInIt,shootDownSophieSex);
 			//[Yes][No]
 			return;
@@ -419,7 +434,9 @@ private function sophieMeetingChoseSex():void {
 		if (player.hasVagina()) {
 			outputText("  What do you do?", false);
 			//[Stay&Sex] [Leave]
-			simpleChoices("Force Sex", FirstTimeSophieForceSex, "Leave", camp.returnToCampUseOneHour, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Force Sex", FirstTimeSophieForceSex);
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
 			return;
 		}
 		doNext(camp.returnToCampUseOneHour);
@@ -922,32 +939,33 @@ internal function sophieLostCombat():void {
 	if (monster.HP < 1) outputText("She's too wounded to fight, and she lies in a miserable heap in the nest.", false);
 	else outputText("She's too turned on to be a threat and is happily masturbating.", false);
 	//RAEP OPTIONS
-	if (player.gender != 0) {
-		var dickRape:Function = null;
-		var clitFuck:Function = null;
-		var cuntFuck:Function = null;
-		var bimbo:Function = null;
-		if (player.lust >= 33 && player.totalCocks() > 0) {
-			//Set dick rape to correct scene.
-			//Too big
-			if (player.cockThatFits(232) == -1) {dickRape = maleVictorySophieRapeHUGE;}
-			//Fits
-			else dickRape = maleVictorySophieRape;
+	menu();
+	addDisabledButton(0, "Use Dick");
+	addDisabledButton(1, "Scissor");
+	addDisabledButton(2, "Fuck wClit");
+	addDisabledButton(3, "Bimbo Her");
+	if (player.lust >= 33 && player.hasCock()) {
+		//Set dick rape to correct scene.
+		if (player.cockThatFits(232) == -1) {
+			addButton(0, "Use Dick", maleVictorySophieRapeHUGE); //Too big
+		} else {
+			addButton(0, "Use Dick", maleVictorySophieRape); //Fits
 		}
-		//Girl options!
-		if (player.lust >= 33 && player.hasVagina()) {
-			//All girls get cuntfuck
-			cuntFuck = sophieVictoryPussyGrind;
-			//big clit girls
-			if (player.getClitLength() >= 5) clitFuck = fuckDatClit;
+	}
+	//Girl options!
+	if (player.lust >= 33 && player.hasVagina()) {
+		//All girls get cuntfuck
+		addButton(1, "Scissor", sophieVictoryPussyGrind);
+		//big clit girls
+		if (player.getClitLength() >= 5) {
+			addButton(2, "Fuck wClit", fuckDatClit);
 		}
-		if (player.hasItem(consumables.BIMBOLQ)) bimbo = sophieBimbo.bimbotizeMeCaptainSophie;
 	}
-	if (dickRape != null || cuntFuck != null || clitFuck != null || bimbo != null) {
-		outputText("  What do you do to her?", false);
-		simpleChoices("Use Dick", dickRape, "Scissor", cuntFuck, "Fuck wClit", clitFuck, "Bimbo Her", bimbo, "Leave", combat.cleanupAfterCombat);
+	if (player.hasItem(consumables.BIMBOLQ)) {
+		addButton(3, "Bimbo Her", sophieBimbo.bimbotizeMeCaptainSophie);
 	}
-	else combat.cleanupAfterCombat();
+	
+	addButton(14, "Leave", combat.cleanupAfterCombat);
 }
 internal function sophieWonCombat():void {
 	sophieBimbo.sophieSprite();

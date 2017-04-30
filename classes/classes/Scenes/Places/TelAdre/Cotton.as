@@ -239,11 +239,7 @@ private function acceptYoga():void {
 	spriteSelect(12);
 	clearOutput();
 	outputText(images.showImage("cotton-yoga"));
-	var fuckHer:Function =null;
-	var getFucked:Function =null;
-	var option3:Function =null;
-	var option4:Function =null;
-	if (player.fatigue > player.maxFatigue() - 20) {
+	if (player.fatigueLeft() < 20) {
 		outputText("You're way too tired to do any yoga right now.", false);
 		doNext(telAdre.telAdreMenu);
 		return;
@@ -268,12 +264,23 @@ private function acceptYoga():void {
 
 		outputText("Once you're done and about to hit the showers, Cotton pulls you aside and says with a grin, \"<i>Up for some post-workout exercises?</i>\"", false);
 		//[Shower Sex (Fuck Her) (As Male or Herm only)] [Shower Sex (Get Fucked)] [Tantric Sex (Only if Speed is 50+)] [Leave]
-		if (player.hasCock())
-			fuckHer = fuckCottonInShowerRepeat;
-		if (player.gender > 0)
-			getFucked = cottonFucksYouInShowerRepeat;
-		//if (player.spe >= 50 && !player.isTaur()) option3 = 2819;
-		simpleChoices("Fuck Her", fuckHer, "Get Fucked", getFucked, "Tantric Sex", option3, "", null, "Leave", leaveCotton);
+		menu();
+		if (player.hasCock()) {
+			addButton(0, "Fuck Her", fuckCottonInShowerRepeat);
+		} else {
+			addDisabledButton(0, "Fuck Her", "This scene requires you to have cock.");
+		}
+		if (!player.isGenderless()) {
+			addButton(1, "Get Fucked", cottonFucksYouInShowerRepeat);
+		} else {
+			addDisabledButton(1, "Get Fucked", "This scene requires you to have genitals.");
+		}
+		if ((player.spe >= 50 || player.findPerk(PerkLib.Flexibility)) && !player.isTaur()) {
+			addButton(2, "Tantric Sex", cottonTantricSex);
+		} else {
+			addDisabledButton(2, "Tantric Sex", "This scene requires you to have enough flexibility. It does not accomodate taurs.");
+		}
+		addButton(14, "Leave", leaveCotton);
 	}
 	//First time
 	else if (flags[kFLAGS.TIMES_HAD_YOGA] == 0) {
@@ -292,7 +299,9 @@ private function acceptYoga():void {
 
 		outputText("\"<i>Oh, that's too bad. But you've done pretty good for a beginner,</i>\" she helps you up off the mat and pats you gently on the back. \"<i>Want to hit the showers then?</i>\" Despite having done little more than stretching, you find you are sweating quite a bit... but something makes you wonder if her idea of hitting the shower is the same as yours.", false);
 		//[Shower] or [Leave]
-		simpleChoices("Shower", cottonShowerFunTimes, "", null, "", null, "", null, "Leave", leaveAfterYoga);
+		menu();
+		addButton(0, "Shower", cottonShowerFunTimes);
+		addButton(14, "Leave", leaveAfterYoga);
 	}
 	//(Repeat Encounter (Didn't have sex))
 	//Done yoga > 0 && met type = 1
@@ -301,13 +310,23 @@ private function acceptYoga():void {
 
 		outputText("Once you're done and about to hit the showers, Cotton pulls you aside and says, \"<i>I know you weren't comfortable with our shower before, so I won't join you this time. But if you ever change your mind, just say the word.</i>\"", false);
 		//[Shower Sex (Fuck Her)] [Shower Sex (Get Fucked)] [Tantric Sex (Only if Speed is 50+)] [Leave]
-		if (player.hasCock())
-			fuckHer = fuckCottonInShowerRepeat;
-		if (player.gender > 0)
-			getFucked = cottonFucksYouInShowerRepeat;
-		if (player.spe >= 50 && !player.isTaur())
-			option3 = cottonTantricSex;
-		simpleChoices("Fuck Her", fuckHer, "Get Fucked", getFucked, "Tantric Sex", option3, "", null, "Leave", leaveCotton);
+		menu();
+		if (player.hasCock()) {
+			addButton(0, "Fuck Her", fuckCottonInShowerRepeat);
+		} else {
+			addDisabledButton(0, "Fuck Her", "This scene requires you to have cock.");
+		}
+		if (!player.isGenderless()) {
+			addButton(1, "Get Fucked", cottonFucksYouInShowerRepeat);
+		} else {
+			addDisabledButton(1, "Get Fucked", "This scene requires you to have genitals.");
+		}
+		if ((player.spe >= 50 || player.findPerk(PerkLib.Flexibility)) && !player.isTaur()) {
+			addButton(2, "Tantric Sex", cottonTantricSex);
+		} else {
+			addDisabledButton(2, "Tantric Sex", "This scene requires you to have enough flexibility. It does not accomodate taurs.");
+		}
+		addButton(14, "Leave", leaveCotton);
 	}
 	//(Repeat Encounter (Had Sex))
 	else {

@@ -51,8 +51,14 @@ private function approachBazaarGuard():void {
 	if (player.cor < 33 - player.corruptionTolerance() && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) outputText("Leave at once.  You are not yet ready for the wonders of the Bazaar.", false);
 	else outputText("Welcome to the Bizarre Bazaar.  Enter, but be mindful of your actions within.", false);
 	outputText("</i>\"", false);
-	if (player.cor < 33 - player.corruptionTolerance() && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) simpleChoices("FIGHT!",initiateFightGuard, "", null, "", null, "", null, "Leave",camp.returnToCampUseOneHour);
-	else simpleChoices("Enter",enterTheBazaar, "", null, "", null, "", null, "Leave",camp.returnToCampUseOneHour);
+	menu();
+	if (player.cor < 33 - player.corruptionTolerance() && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
+		addButton(0, "FIGHT!",initiateFightGuard);
+	} else {
+		addButton(0, "Enter",enterTheBazaar);
+	}
+	
+	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 
 public function enterTheBazaar():void {
@@ -230,8 +236,10 @@ private function buyCockMilker():void {
 	outputText("\n\n(<b>Key Item Acquired: Cock Milker</b>)");
 	player.gems -= 200;
 	statScreenRefresh();
-	player.createKeyItem("Cock Milker",0,0,0,0);
-	simpleChoices("JoeyMassage", joeyMassage, "Androgyny", null, "Joey'sOffer", null, "", null, "Leave", enterTheBazaar);
+	player.createKeyItem("Cock Milker", 0, 0, 0, 0);
+	menu();
+	addButton(0, "JoeyMassage", joeyMassage);
+	addButton(14, "Leave", enterTheBazaar);
 }
 
 private function joeyAndrogyny():void {
@@ -421,13 +429,17 @@ private function joeyBigBalls():void {
 		if (player.cor > 70) outputText("; you won't get to watch him fountaining all that pearly spunk like a perverted statue", false);
 		outputText(".  What do you decide?", false);
 		//[SuckCumOut] [MasturbateOut]
-		simpleChoices("SuckCumOut", suckOffJoeysGardenHose, "MasturbateOut", joeyWanksItOut, "", null, "", null, "", null);
+		menu();
+		addButton(0, "SuckCumOut", suckOffJoeysGardenHose);
+		addButton(1, "MasturbateOut", joeyWanksItOut);
 	}
 	//(Sucked Joey once) 
 	else {
 		outputText("As soon as you enter The Slippery Squeeze, you know somehow that something is amiss.  Joey staggers out from a back-room, his balls once again swollen huge and round.  He looks at you and admits, \"<i>Someone's <b>got</b> to be sabotaging me... gods, this hurts!  Could you help me, or should I go in the back and jerk it out myself?</i>\"\n\n", false);
 		//[SuckCumOut] [MasturbateOut]
-		simpleChoices("SuckCumOut", suckOffJoeysGardenHose, "MasturbateOut", joeyWanksItOut, "", null, "", null, "", null);
+		menu();
+		addButton(0, "SuckCumOut", suckOffJoeysGardenHose);
+		addButton(1, "MasturbateOut", joeyWanksItOut);
 	}
 	flags[kFLAGS.JOEY_BIG_BALLS_COUNTER]++;	
 }

@@ -157,7 +157,10 @@ public function RoxanneChooseApproachOrRepeat():void {
 		flags[kFLAGS.CODEX_ENTRY_LIZANS] = 1;
 		outputText("\n\n<b>New codex entry unlocked: Lizans!</b>")
 	}
-	simpleChoices("Yes", roxanneDrinkingContest, "No", roxanneDrinkingContestNo, "Lose", roxanneDrinkingContestLoseDeliberately, "", null, "", null);
+	menu();
+	addButton(0, "Yes", roxanneDrinkingContest);
+	addButton(1, "No", roxanneDrinkingContestNo);
+	addButton(2, "Lose", roxanneDrinkingContestLoseDeliberately);
 }
 
 private function roxanneDrinkingContestNo():void {
@@ -220,7 +223,15 @@ private function roxanneDrinkingContest():void {
 	}
 	var score:Number = 0;
 	//Calculate score if not 
-	if (flags[kFLAGS.ROXANNE_DRINKING_CONTEST_LOSE_ON_PURPOSE] == 0) score = (player.tallness * ((player.thickness + 100)/200) * (player.tou/100)) + flags[kFLAGS.ROXANNE_DRINKING_CONTEST_BONUS_SCORE];
+	if (flags[kFLAGS.ROXANNE_DRINKING_CONTEST_LOSE_ON_PURPOSE] == 0) {
+		score = (player.tallness * ((player.thickness + 100) / 200) * (player.tou / 100)) + flags[kFLAGS.ROXANNE_DRINKING_CONTEST_BONUS_SCORE];
+		if (player.findPerk(PerkLib.SatyrSexuality) >= 0) score += 10; // satyrs are not easy to beat in drinking contest!
+		if (player.findPerk(PerkLib.Lustzerker) >= 0) score += 10; // as well as salamanders
+		if (player.findPerk(PerkLib.Dragonfire) >= 0) score += 10; // and dragons
+		if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 || player.findPerk(PerkLib.CorruptedNinetails) >= 0) score += 10; // kitsune would always find a way to trick
+		if (player.findPerk(PerkLib.Medicine) >= 0) score += 5; // it gives poison resistances, after all
+		if (player.findPerk(PerkLib.Resolute) >= 0) score += 5; // never surrender!
+	}
 	//If score is less than 30-50 (Strahza is inconsistant!)
 	//[Lose!] 
 	if (score < (45 + rand(20))) {
@@ -254,11 +265,18 @@ private function roxanneDrinkingContest():void {
 		outputText("Laughing uproariously, you watch with a bemused expression while Roxanne tries to stumble up to the tap, tripping over her tail three times before she finally manages to ask for another mug.  The partly-corrupted deer-taur shakes his head and folds his arms across his chest.  She's been cut off!  You win!  The lecherous lizan stamps her heeled boot in the dirt before tramping back over to you, hips swaying drunkenly.  She trips on her tail again, this time falling face-first into your lap.  Hiccuping drunkenly, Roxanne slurs, \"<i>Well at leasht I don't havta go far to give you your winningshh, huh?</i>\"\n\n", false);
 		outputText("The other lizans are looking at you with a watchful eye.  It looks like you'll have to stick by the terms of the contest.  What manner of oral service do you make her provide?", false);
 		//[Fellatio] [Cunnilingus] [Rimming]
-		var fellatio:Function = null;
-		var cunnilingus:Function = null;
-		if (player.hasCock()) fellatio = roxanneGivesABlowjob;
-		if (player.hasVagina()) cunnilingus = roxanneCunnilingus;
-		simpleChoices("Cunnilingus", cunnilingus, "Fellatio", fellatio, "Rimming", roxanneRimjob, "", null, "", null);
+		menu();
+		if (player.hasVagina()) {
+			addButton(0, "Cunnilingus", roxanneCunnilingus);
+		} else {
+			addDisabledButton(0, "Cunnilingus");
+		}
+		if (player.hasCock()) {
+			addButton(1, "Fellatio", roxanneGivesABlowjob);
+		} else {
+			addDisabledButton(1, "Fellatio");
+		}
+		addButton(2, "Rimming", roxanneRimjob);
 	}
 }
 

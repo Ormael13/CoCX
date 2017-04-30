@@ -800,7 +800,9 @@ public function exgartuanBeeRape():void {
 	outputText("You redress, whistling happily as you prepare to leave.  Your victim is practically unconscious, still shaking from the intense experience and leaking eggs and honey from the organ on her backside.  Do you cut her down or leave her bound up for the locals to enjoy?", false);
 	player.orgasm('Dick');
 	dynStats("lib", 1, "cor", 2);
-	simpleChoices("Leave Her", leaveBeePostRape, "Free Her", freeBeePostRape, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Leave Her", leaveBeePostRape);
+	addButton(1, "Free Her", freeBeePostRape);
 }
 
 //[Free Her] (negates some corruption gain)

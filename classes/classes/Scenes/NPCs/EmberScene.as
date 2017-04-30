@@ -378,7 +378,9 @@ package classes.Scenes.NPCs
 			outputText("\n\nWith nothing else in the cave, you prepare to leave, but find yourself stopped by a sudden thought.  The egg yolk, though raw, looks strangely appetizing...");
 			flags[kFLAGS.EGG_BROKEN] = 1;
 			//[Eat][Leave]
-			simpleChoices("Eat It", eatEmbersYolkLikeAnEvenBiggerDick, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+			menu();
+			addButton(0, "Eat It", eatEmbersYolkLikeAnEvenBiggerDick);
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 
 //[=Eat=]
@@ -572,30 +574,55 @@ package classes.Scenes.NPCs
 			else {
 				outputText("\n\nYou stare at the egg's pulsations as the rhythm shifts slightly.  You feel a tinge of excitement, a distant expectation not your own.  Though curious about what could be inside, you decide nothing more can be done for now.");
 			}
-			var fap:Function =null;
-			if (player.lust >= 33) fap = masturbateOntoAnEgg;
-			var draft:Function =null;
-			if (player.hasItem(consumables.INCUBID)) draft = createCallBackFunction(useIncubusDraftOnEmber,false);
-			var pDraft:Function =null;
-			if (player.hasItem(consumables.P_DRAFT)) pDraft = createCallBackFunction(useIncubusDraftOnEmber,true);
-			var milk:Function =null;
-			if (player.hasItem(consumables.SUCMILK)) milk = createCallBackFunction(useSuccubiMilkOnEmber,false);
-			var pMilk:Function =null;
-			if (player.hasItem(consumables.P_S_MLK)) pMilk = createCallBackFunction(useSuccubiMilkOnEmber,true);
-			var hair:Function =null;
-			if (player.hasItem(consumables.EXTSERM)) hair = hairExtensionSerum;
-			var ovi:Function =null;
-			if (player.hasItem(consumables.OVIELIX)) ovi = useOviElixerOnEmber;
-			var lactaid:Function =null;
-			if (player.hasItem(consumables.LACTAID)) lactaid = useLactaidOnEmber;
-			var hatch:Function =null;
+			
+			menu();
 			if (flags[kFLAGS.EMBER_EGG_FLUID_COUNT] >= 5 && flags[kFLAGS.EMBER_JACKED_ON] > 0 && flags[kFLAGS.EMBER_GENDER] > 0) {
-				hatch = hatchZeMuzzles;
 				outputText("\n\n<b>The egg is ready to be hatched - if you're just as ready.</b>");
+				addButton(0, "Hatch", hatchZeMuzzles);
+			} else if (player.lust >= 33 && !player.isGenderless()) {
+				addButton(0, "Masturbate", masturbateOntoAnEgg);
+			} else {
+				addDisabledButton(0, "Masturbate", "This scene requires you to have genitals and sufficient arousal.");
 			}
-			if (hatch!=null) choices("Hatch", hatch, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
-			else if (fap!=null) choices("Masturbate", fap, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
-			else choices("Hatch", hatch, "Blood", giveEmberBludSausages, "IncubiDraft", draft, "Pure Draft", pDraft, "Succubi Milk", milk, "Pure Milk", pMilk, "Hair Serum", hair, "Ovi Elixir", ovi, "Lactaid", lactaid, "Back", leaveWithoutUsingAnEmberItem);
+			
+			addButton(1, "Blood", giveEmberBludSausages);
+			
+			if (player.hasItem(consumables.INCUBID)) {
+				addButton(2, "IncubiDraft", createCallBackFunction(useIncubusDraftOnEmber, false));
+			} else {
+				addDisabledButton(2, "IncubiDraft");
+			}
+			if (player.hasItem(consumables.P_DRAFT)) {
+				addButton(3, "Pure Draft", createCallBackFunction(useIncubusDraftOnEmber,true));
+			} else {
+				addDisabledButton(3, "Pure Draft");
+			}
+			if (player.hasItem(consumables.SUCMILK)) {
+				addButton(4, "Succubi Milk", createCallBackFunction(useSuccubiMilkOnEmber, false));
+			} else {
+				addDisabledButton(4, "Succubi Milk");
+			}
+			if (player.hasItem(consumables.P_S_MLK)) {
+				addButton(5, "Pure Milk", createCallBackFunction(useSuccubiMilkOnEmber, true));
+			} else {
+				addDisabledButton(5, "Pure Milk");
+			}
+			if (player.hasItem(consumables.EXTSERM)) {
+				addButton(6, "Hair Serum", hairExtensionSerum);
+			} else {
+				addDisabledButton(6, "Hair Serum");
+			}
+			if (player.hasItem(consumables.OVIELIX)) {
+				addButton(7, "Ovi Elixir", useOviElixerOnEmber);
+			} else {
+				addDisabledButton(7, "Ovi Elixir");
+			}
+			if (player.hasItem(consumables.LACTAID)) {
+				addButton(8, "Lactaid", useLactaidOnEmber);
+			} else {
+				addDisabledButton(8, "Lactaid");
+			}
+			addButton(14, "Back", leaveWithoutUsingAnEmberItem);
 		}
 
 //[= No =]
@@ -1121,8 +1148,12 @@ package classes.Scenes.NPCs
 			//Talk about Dragons
 			//Talk about Exploring
 			//Talk about Yourself
-			simpleChoices("Dragons", talkToEmberAboutDragonzzz, "Exploring", discussExplorationWithEmber, "Yourself", talkToEmberAboutYourself, "", null, "Back", emberCampMenu);
+			menu();
+			addButton(0, "Dragons", talkToEmberAboutDragonzzz);
+			addButton(1, "Exploring", discussExplorationWithEmber);
+			addButton(2, "Yourself", talkToEmberAboutYourself);
 			if (flags[kFLAGS.EMBER_AFFECTION] >= 100 && flags[kFLAGS.EGG_BROKEN] < 1) addButton(3, "Eggshell", askEmberForEggshell, null, null, null, "Ask Ember for the eggshell. After all, you should have deserved the eggshell by now.");
+			addButton(14, "Back", emberCampMenu);
 		}
 
 //Talk about Dragons (Z)
@@ -1553,7 +1584,9 @@ package classes.Scenes.NPCs
 
 				outputText("\n\nAs you drink, you feel a rush of energy course throughout your body; you feel lofty, powerful, and erudite.  Who knows what will happen if you keep drinking...");
 				//[Continue][Stop]
-				simpleChoices("Continue", drinkDeeplyOfDagronBlud, "Stop", noMoDagronBlud, "", null, "", null, "", null);
+				menu();
+				addButton(0, "Continue", drinkDeeplyOfDagronBlud);
+				addButton(1, "Stop", noMoDagronBlud);
 			}
 			//(High Affection)
 			else {
@@ -1563,7 +1596,9 @@ package classes.Scenes.NPCs
 				outputText("\n\nEmber kisses you back; " + emberMF("his", "her") + " bleeding tongue stroking yours lovingly.");
 				outputText("\n\nAs you drink, you feel a rush of energy course throughout your body; you feel lofty, powerful, and erudite.  Who knows what will happen if you keep drinking?");
 				//[Continue][Stop]
-				simpleChoices("Continue", drinkDeeplyOfDagronBlud, "Stop", noMoDagronBlud, "", null, "", null, "", null);
+				menu();
+				addButton(0, "Continue", drinkDeeplyOfDagronBlud);
+				addButton(1, "Stop", noMoDagronBlud);
 			}
 			//Flag as drinking her blood today!
 			flags[kFLAGS.DRANK_EMBER_BLOOD_TODAY] = 1;
@@ -1662,7 +1697,9 @@ package classes.Scenes.NPCs
 				outputText("\n\nEmber bites her lips and says once more, a bit louder this time, \"<i>Would you like to watch?</i>\"");
 				outputText("\n\nYou blink at the offer, then give her your most winning smile.  You could agree, or just smooth-talk your way out of it.");
 				//[Watch][Fob Off]
-				simpleChoices("Watch", watchMediumAffectionEmberEggLay, "Don't Watch", dontWatchEmberLayEgg, "", null, "", null, "", null);
+				menu();
+				addButton(0, "Watch", watchMediumAffectionEmberEggLay);
+				addButton(1, "Don't Watch", dontWatchEmberLayEgg);
 			}
 			//(High Affection)
 			else {
@@ -3194,7 +3231,9 @@ package classes.Scenes.NPCs
 			dynStats("lus", 10 + player.lib / 10);
 			outputText("\n\nWhat do you say?");
 			//[Accept] [Deny]
-			simpleChoices("Accept", timeToPuffTheMagicDragon, "Deny", fuckOffEmberIWantANap, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Accept", timeToPuffTheMagicDragon);
+			addButton(1, "Deny", fuckOffEmberIWantANap);
 		}
 
 //[=Deny=]
@@ -3238,7 +3277,9 @@ package classes.Scenes.NPCs
 			if (player.pregnancyIncubation == 0 && !pregnancy.isPregnant && flags[kFLAGS.EMBER_GENDER] == 3 && player.gender == 3) {
 				outputText("\n\n(Who should bear the kids?)");
 				//[Ember] [You]
-				simpleChoices("Ember", breedEmberPregnantAsIfThereWasAnyOtherKindOfBreeding, "You", getKnockedUpByEmbrahBroBaby, "", null, "", null, "", null);
+				menu();
+				addButton(0, "Ember", breedEmberPregnantAsIfThereWasAnyOtherKindOfBreeding);
+				addButton(1, "You", getKnockedUpByEmbrahBroBaby);
 			}
 			//[Play appropriate breeding scene.]
 			//Female Breeding Scene:

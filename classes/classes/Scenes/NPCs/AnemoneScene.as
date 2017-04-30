@@ -150,26 +150,36 @@ package classes.Scenes.NPCs
 			if (monster.HP < 1) outputText("The anemone's knees buckle and she collapses, planting her hands behind her with a splash.  You stand over her, victorious.\n\n", false);
 			//win by lust:
 			else outputText("The anemone slumps down and begins masturbating, stroking her cock furiously.  You think you can detect something like desperation in her opaque eyes.  It doesn't look like she'll trouble you anymore.\n\n", false);
+			//victory sex choice for males with cock fit 48 or females with clit >7": "her anus"
+			//(change "If you do, which of your parts" to "If you do, which part" in pre-sex choice menu)
+			menu();
+			addDisabledButton(1, "Your Cock");
+			addDisabledButton(2, "Your Vagina");
+			addDisabledButton(3, "Her Butt");
+			addDisabledButton(4, "Lay Egg");
+			
 			if (player.lust >= 33) {
 				outputText("You could always have your way with her.  If you do, which parts do you use to do the deed?", false);
-				//victory sex choice for males with cock fit 48 or females with clit >7": "her anus"
-				//(change "If you do, which of your parts" to "If you do, which part" in pre-sex choice menu)
-				var cockRape:Function =null;
-				var vaginaRape:Function =null;
-				var anal:Function =null;
-				var eggs:Function =null;
-				if (player.canOviposit()) eggs = anemoneGetsLayedByBeePositor;
-				if (player.hasVagina() && player.getClitLength() >= 4) anal = anemoneButtPlugginz;
-				else if (player.hasCock() && player.cockThatFits(48) >= 0) anal = anemoneButtPlugginz;
-				//Normal male: -requires dick of area < 36
-				if (player.cockTotal() > 0) cockRape = rapeAnemoneWithDick;
-				if (player.hasVagina()) vaginaRape = rapeAnemoneWithPussy;
-				var bikiniTits:Function =null;
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
-				choices("Your Ass", victoryButtholeRape, "Your Cock", cockRape, "Your Vagina", vaginaRape, "Her Butt", anal, "Lay Egg", eggs,
-					"", null, "", null, "", null, "B.Titfuck", bikiniTits, "Leave", combat.cleanupAfterCombat);
+			
+				addButton(0, "Your Ass", victoryButtholeRape);
+				if (player.hasCock()) {
+					addButton(1, "Your Cock", rapeAnemoneWithDick);
+				}
+				if (player.hasVagina()) {
+					addButton(2, "Your Vagina", rapeAnemoneWithPussy);
+				}
+				if (player.hasVagina() && player.getClitLength() >= 4 || player.cockThatFits(48) >= 0) {
+					addButton(3, "Her Butt", anemoneButtPlugginz);
+				}
+				if (player.canOviposit()) {
+					addButton(4, "Lay Egg", anemoneGetsLayedByBeePositor);
+				}
+				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) {
+					addButton(5, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+				} // no disabled button for this scene
 			}
-			else combat.cleanupAfterCombat();
+			
+			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
 
 //anal: -requires butthole
@@ -633,7 +643,9 @@ package classes.Scenes.NPCs
 				anemone.applyVenom(1);
 				return;
 			}
-			simpleChoices("Give", giveMino, "Don't Give", dontGiveMino, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Give", giveMino);
+			addButton(1, "Don't Give", dontGiveMino);
 		}
 
 //'Don't Give':
@@ -672,9 +684,19 @@ package classes.Scenes.NPCs
 				var cockRape:Function =null;
 				var vaginaRape:Function =null;
 				//Normal male: -requires dick of area < 36
-				if (player.cockTotal() > 0) cockRape = rapeAnemoneWithDick;
-				if (player.hasVagina()) vaginaRape = rapeAnemoneWithPussy;
-				simpleChoices("Your ass", victoryButtholeRape, "Your Cock", cockRape, "Your Vagina", vaginaRape, "", null, "Leave", camp.returnToCampUseOneHour);
+				menu();
+				addButton(0, "Your ass", victoryButtholeRape);
+				if (player.hasCock()) {
+					addButton(1, "Your Cock", rapeAnemoneWithDick);
+				} else {
+					addDisabledButton(1, "Your Cock");
+				}
+				if (player.hasVagina()) {
+					addButton(2, "Your Vagina", rapeAnemoneWithPussy);
+				} else {
+					addDisabledButton(2, "Your Vagina");
+				}
+				addButton(14, "Leave", camp.returnToCampUseOneHour);
 				return;
 			}
 			doNext(camp.returnToCampUseOneHour);
@@ -734,10 +756,14 @@ package classes.Scenes.NPCs
 
 			outputText("\n\nWell, you've located her anus... what do you do now?");
 
-			var hotdog:Function =null;
-			if (!player.isTaur()) hotdog = hotdogTheAnemone;
-
-			simpleChoices("FUCK IT", anemoneQuoteUnquoteAnal, "Hotdog", hotdog, "", null, "", null, "Fuck Off", fuckingAssholelessAnemoneeeez);
+			menu();
+			addButton(0, "FUCK IT", anemoneQuoteUnquoteAnal);
+			if (!player.isTaur()) {
+				addButton(1, "Hotdog", hotdogTheAnemone);
+			} else {
+				addDisabledButton(1, "Hotdog", "This scene does not accomodate taurs.");
+			}
+			addButton(2, "Fuck Off", fuckingAssholelessAnemoneeeez);
 		}
 
 //[FUCK IT] (if cock fit 48, use cock; else use clit scenes)
@@ -1066,7 +1092,9 @@ package classes.Scenes.NPCs
 			outputText("\n\nAnd... she's plunging the dipper into the barrel around her ankles.  You can hear it scraping the sides and bottom as she swishes it around to fill it up.  Politely and carefully handing it back to you, she resumes her seat and the water level rises slightly to cover her legs.  You stare at the dipper and then at her; she returns your gaze unflinchingly, splashing some liquid on her exposed gills with an idle hand.");
 			outputText("\n\nDoes she expect you to drink this?  And does she plan to live in your camp?  Won't it be absurdly toilsome to evict someone from your water barrel without speaking a word of their language or using physical force?  Your mind, unwilling to fathom answers to these questions - which is just as well since they're all variations on 'yes' - latches onto the trivial like a lifeline.  The water level was definitely lower than you left it before your nap.  Maybe she absorbed it through her skin as she grew to adulthood?  This might explain why her hips and thighs are better developed than her chest and 'hair'.");
 			outputText("\n\nChanging tack to work your hesitant brain around to the real issue, you address her again; assisted by clumsy pantomime, you ask her if she intends to stay in your barrel forever.  She smiles widely, her eyes lighting up, then makes a show of bowing her head graciously several times.  Oh... she thought it was an invitation.  The wind spills out of your sails and your shoulders slump in the face of her cheerful imperturbability.  Looks like words won't work; you'll have to reach her with your fists.  Do you eject the anemone from your camp?");
-			simpleChoices("Keep It", keepAnemoneKid, "Eject", getRidOfAnemone, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Keep It", keepAnemoneKid);
+			addButton(1, "Eject", getRidOfAnemone);
 			//[yesno]
 		}
 

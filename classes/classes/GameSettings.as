@@ -515,11 +515,10 @@ package classes
 		//------------
 		public function fontSettingsMenu():void {
 			menu();
-			simpleChoices("Smaller Font", decFontSize,
-				"Larger Font", incFontSize,
-				"Reset Size", resetFontSize,
-				"", null,
-				"Back", settingsScreenMain);
+			addButton(0, "Smaller Font", decFontSize);
+			addButton(1, "Larger Font", incFontSize);
+			addButton(2, "Reset Size", resetFontSize);
+			addButton(4, "Back", settingsScreenMain);
 		}
 
 		public function incFontSize():void

@@ -68,26 +68,50 @@ public function treeMenu(output:Boolean = true):void {
 	}
 	else if (flags[kFLAGS.FUCK_FLOWER_LEVEL] == 1) {
 		if (output) outputText("The sprout looks about the same as when you first noticed it.  It's a simple, leafy shoot that only goes to about knee height.  It looks healthy and strong, with a few dozen branches and shiny green leaves.  If you look closely, the veins on the undersides of the leaf are purplish and pulse slightly with corruption.  You could easily destroy it.");
-		simpleChoices("Burn It", destroyDatFukkinTree, "", null, "", null, "", null, "Back", inventory.inventoryMenu);
+		menu();
+		addButton(0, "Burn It", destroyDatFukkinTree);
+		addButton(4, "Leave It", inventory.inventoryMenu);
 	}
 	else if (flags[kFLAGS.FUCK_FLOWER_LEVEL] == 2) {
 		//[Fuck It] [Ride Stamen] [Do Nothing] [Destroy It]
 		if (output) outputText("Before you is a large, waist-high plant of questionable origin.  A huge, violet bloom sits atop a strong, central stalk, and the obscene flower looks positively female in every sense, right down to a clit-shaped bump and moist, gently parted lips.  Inside that central passage, you can see a bevy of wiggling stamen surrounding a larger, flared stalk.  The scent that wafts out of that opening is sweet and floral, but undoubtedly sexual.  It looks like an organic sex toy and is clearly corrupt.  It wouldn't be hard to get rid of right now, assuming you don't let it grow larger.");
-		if (player.hasCock() && player.cockThatFits(100) >= 0 && player.lust >= 33) fuck = fuckFuckingFuckFlowerP2;
-		
-		if (player.hasVagina() && player.lust >= 33) ride = rideDatFuckingFukkFlowerP2;
-		simpleChoices("Fuck It", fuck, "Ride Stamen", ride, "", null, "Destroy It", destroyDatFuckingPlantAtP2, "Back", inventory.inventoryMenu);
+		menu();
+		if (player.hasCock() && player.cockThatFits(100) >= 0 && player.lust >= 33) {
+			addButton(0, "Fuck It", fuckFuckingFuckFlowerP2);
+		} else {
+			addDisabledButton(0, "Fuck It");
+		}
+		if (player.hasVagina() && player.lust >= 33) {
+			addButton(1, "Ride Stamen", rideDatFuckingFukkFlowerP2);
+		} else {
+			addDisabledButton(1, "Ride Stamen");
+		}
+		addButton(3, "Destroy It", destroyDatFuckingPlantAtP2);
+		addButton(4, "Leave It", inventory.inventoryMenu);
 	}
 	else if (flags[kFLAGS.FUCK_FLOWER_LEVEL] == 3) {
 		if (output) outputText("The familiar plant has blossomed into a nicely sized tree, though you doubt it has finished growing just yet.  It sports an outstretched canopy with nice, green leaves.  Unfortunately, you can still trace the corrupted veins on their undersides from below.  The vaginal flower is still there and is in full bloom, now several feet across and practically dripping with moisture.  Just up the trunk, there's a pair of small, roughly b-cup breasts bulging out of the bark.  They're exquisitely smooth and soft, and they ooze sweet-smelling sap that your tongue would love to taste.  In the canopy above, tentacle vines idly writhe about, though they show no sizes of aggression.");
-		if (player.findPerk(PerkLib.Dragonfire) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
-			if (output) outputText("\n\nIt could be burned down with your supernatural fire, but it would definitely tire you.");
-			burnIt = torchP3Tree;
-		}
-		if (player.hasCock() && player.lust >= 33) fuck = fuckTheFlower;
-		if (player.hasVagina() && player.lust >= 33) ride = rideTheWalrusP3;
 		//[Fuck flower] [Drink Sap] [Ride Tentacles] [{Torch It}] [Leave It]
-		simpleChoices("Fuck Flower", fuck, "Drink Sap", drinkThePlantGirlsSap, "Ride Tentacle", ride, "Torch It", burnIt, "Leave It", inventory.inventoryMenu);
+		menu();
+		if (player.hasCock() && player.lust >= 33) {
+			addButton(0, "Fuck Flower", fuckTheFlower);
+		} else {
+			addDisabledButton(0, "Fuck Flower");
+		}
+		addButton(1, "Drink Sap", drinkThePlantGirlsSap);
+		if (player.hasVagina() && player.lust >= 33) {
+			addButton(2, "Ride Tentacle", rideTheWalrusP3);
+		} else {
+			addDisabledButton(2, "Ride Tentacle");
+		}
+		if (player.findPerk(PerkLib.Dragonfire) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.findPerk(PerkLib.EnlightenedNinetails) >= 0 || player.findPerk(PerkLib.CorruptedNinetails) >= 0) {
+			if (output) outputText("\n\nIt could be burned down with your supernatural fire, but it would definitely tire you.");
+			addButton(3, "Torch It", torchP3Tree);
+		} else {
+			addDisabledButton(3, "Torch It", "It could be burned down only with supernatural fire.");
+		}
+		
+		addButton(4, "Leave It", inventory.inventoryMenu);
 	}
 	else {
 		//Camp Menu (edited)
@@ -119,19 +143,26 @@ public function treeMenu(output:Boolean = true):void {
 			}
 		}
 		if (flags[kFLAGS.HOLLI_SUBMISSIVE] == 0) {
-			var eat:Function = null;
-			if (flags[kFLAGS.HOLLI_FRUIT] > 0) eat = eatHolliFruit;
-			if (player.hasCock() && player.lust >= 33) fuck = fuckHolliInZeFlowerPuss;
-			if (player.hasVagina() && player.lust >= 33) ride = level4RideHollisTentacruels;
-			
-			var guardT:String = "";
-			if (flags[kFLAGS.HOLLI_DEFENSE_ON] == 1) guardT = "Stop Guarding";
-			else guardT = "Guard Camp";
-			burnIt = askHolliToWatch;
-			
 			//[Fuck Her] [Drink] [Tentacle Ride] {Guard Camp} {Threaten} [Leave]
-			choices("Fuck Holli", fuck, "Drink Sap", haveAMapleSyrupSnack, "Ride Tentacles", ride, guardT, burnIt, "Eat A Fruit", eat,
-				"", null, "", null, "", null, "", null, "Leave", inventory.inventoryMenu);
+			menu();
+			if (player.hasCock() && player.lust >= 33) {
+				addButton(0, "Fuck Holli", fuckHolliInZeFlowerPuss);
+			} else {
+				addDisabledButton(0, "Fuck Holli");
+			}
+			addButton(1, "Drink Sap", haveAMapleSyrupSnack);
+			if (player.hasVagina() && player.lust >= 33) {
+				addButton(2, "Ride Tentacles", level4RideHollisTentacruels);
+			} else {
+				addDisabledButton(2, "Ride Tentacles");
+			}
+			addButton(3, flags[kFLAGS.HOLLI_DEFENSE_ON] == 1 ? "Stop Guarding" : "Guard Camp", askHolliToWatch);
+			if (flags[kFLAGS.HOLLI_FRUIT] > 0) {
+				addButton(4, "Eat A Fruit", eatHolliFruit);
+			} else {
+				addDisabledButton(4, "Eat A Fruit");
+			}
+			addButton(14, "Leave", inventory.inventoryMenu);
 		}
 		else {
 			menu();
@@ -228,7 +259,9 @@ public function getASprout():void {
 	flags[kFLAGS.FUCK_FLOWER_LEVEL] = 1;
 	flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] = 0;
 	//[Yes] [No]
-	simpleChoices("Yes", destroyDatFukkinTree, "No", letZeFuckingSproutLive, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Yes", destroyDatFukkinTree);
+	addButton(1, "No", letZeFuckingSproutLive);
 }
 //[Yes] Destroy Tree (edited)
 private function destroyDatFukkinTree():void {
@@ -265,15 +298,20 @@ public function fuckPlantGrowsToLevel2():void {
 	if (silly()) outputText("\n\n<b>What do?</b>");
 	else outputText("\n\n<b>What do you do?</b>");
 	//[Fuck It] [Ride Stamen] [Do Nothing] [Destroy It]
-	var fuck:Function = null;
-	if (player.hasCock() && player.cockThatFits(100) >= 0 && player.lust >= 33) fuck = fuckFuckingFuckFlowerP2;
-	var ride:Function = null;
-	if (player.hasVagina() && player.lust >= 33) ride = rideDatFuckingFukkFlowerP2;
-	simpleChoices("Fuck It", fuck, "Ride Stamen", ride, "Do Nothing", playerMenu, "Destroy It", destroyDatFuckingPlantAtP2, "", null);
+	menu();
+	if (player.hasCock() && player.cockThatFits(100) >= 0 && player.lust >= 33) {
+		addButton(0, "Fuck It", fuckFuckingFuckFlowerP2);
+	} else {
+		addDisabledButton(0, "Fuck It");
+	}
+	if (player.hasVagina() && player.lust >= 33) {
+		addButton(1, "Ride Stamen", rideDatFuckingFukkFlowerP2);
+	} else {
+		addDisabledButton(1, "Ride Stamen");
+	}
+	addButton(2, "Destroy It", destroyDatFuckingPlantAtP2);
+	addButton(3, "Do Nothing", playerMenu);
 }
-
-
-
 
 //Destroy It (edited)
 private function destroyDatFuckingPlantAtP2():void {
@@ -371,20 +409,30 @@ public function flowerGrowsToP3():void {
 	outputText("  The distinct sound of wood bowing and creaking under new weight catches your ears, and well before you can get to the plant, you can see a leafy canopy stretching towards the sky.  <b>It's grown into a small tree, with bark, leaves, and everything!</b>  Warily, you round one of the ancient standing stones to get a better look.");
 	outputText("\n\nThe first thing you notice is that the vaginal tentacle flower remains, affixed at waist height to the side of the tree.  It looks bigger, the petals huge and glossy, undoubtedly far more capable of swallowing dick than ever before.  The tree isn't that thick, just yet.  Glancing further up the smooth, knotless trunk, you see the most surprising thing of all - a pair of almond-colored nipples, perched upon small, tit-like bulges in the wood.  The bark on these globular protrusion is smoother and fairer than the surrounding surface.  On one of them, a trickle of sap has formed into a heavy bead, and it smells sweet, like maple syrup.");
 	outputText("\n\nA dollop of something moist landing in your hair startles you from your visual inspection.  Gingerly, you touch your fingers to the wet spot and come away with a thick, viscous fluid that smells faintly musky... and salty...  It's cum!  You recoil, looking up in time to see a half dozen tentacles curling between the branches rubbing against each other in what can only be described as an orgy of frotting cock-lust.  Well now, your little pet plant is growing up.  There's no easy way to get rid of it now");
-	var burnIt:Function = null;
-	if (player.findPerk(PerkLib.Dragonfire) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
-		outputText(", though you suppose you could burn it down with magical fire if you set your mind to it");
-		burnIt = torchP3Tree;
-	}
 	flags[kFLAGS.FUCK_FLOWER_LEVEL] = 3;
 	flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] = 0;
-	outputText(".\n\n<b>What do you do?</b>");
-	var fuck:Function = null;
-	var ride:Function = null;
-	if (player.hasCock() && player.lust >= 33) fuck = fuckTheFlower;
-	if (player.hasVagina() && player.lust >= 33) ride = rideTheWalrusP3;
 	//[Fuck flower] [Drink Sap] [Ride Tentacles] [{Torch It}] [Leave It]
-	simpleChoices("Fuck Flower", fuck, "Drink Sap", drinkThePlantGirlsSap, "Ride Tentacle", ride, "Torch It", burnIt, "Leave It", playerMenu);
+	menu();
+	if (player.hasCock() && player.lust >= 33) {
+		addButton(0, "Fuck Flower", fuckTheFlower);
+	} else {
+		addDisabledButton(0, "Fuck Flower");
+	}
+	addButton(1, "Drink Sap", drinkThePlantGirlsSap);
+	if (player.hasVagina() && player.lust >= 33) {
+		addButton(2, "Ride Tentacle", rideTheWalrusP3);
+	} else {
+		addDisabledButton(2, "Ride Tentacle");
+	}
+	if (player.findPerk(PerkLib.Dragonfire) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.findPerk(PerkLib.EnlightenedNinetails) >= 0 || player.findPerk(PerkLib.CorruptedNinetails) >= 0) {
+		outputText(", though you suppose you could burn it down with magical fire if you set your mind to it");
+		addButton(3, "Torch It", torchP3Tree);
+	} else {
+		addDisabledButton(3, "Torch It", "You suppose you could burn it down with magical fire.");
+	}
+	
+	outputText(".\n\n<b>What do you do?</b>");
+	addButton(4, "Leave It", playerMenu);
 }
 
 //Fuck Flower (skimmed)
@@ -575,7 +623,9 @@ public function amilyHatesTreeFucking():void {
 	outputText("\n\nNo matter how you try to interrupt, Amily's not even giving you a chance to answer...");
 	
 	//[Stay Quiet][Slap Her]
-	simpleChoices("Stay Quiet", stayQuietWhileAmilyBitchesAboutFuckingArborday, "Slap Her", slapAmilysWhoreFace, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Stay Quiet", stayQuietWhileAmilyBitchesAboutFuckingArborday);
+	addButton(1, "Slap Her", slapAmilysWhoreFace);
 }
 //[Stay Quiet]
 private function stayQuietWhileAmilyBitchesAboutFuckingArborday():void {

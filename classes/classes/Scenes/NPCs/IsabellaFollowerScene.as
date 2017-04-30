@@ -115,14 +115,18 @@ internal function isabellaMoovesInGreeting():void {
 		outputText("Isabella still seems to think that moving in would be a good idea; do you accept her proposal, or demur for now?  She doesn't seem too dead-set on the idea.", false);
 		//(Raise threshold for next occurance to current affection + 15)
 		//[Accept - Use standard] [Normal Menu Options]
-		var suck:Function = null;
-		if (player.hasCock()) {
-			if (player.cocks[player.shortestCockIndex()].cockLength < 9)
-				suck = isabellaScene.izzyGivesSmallWangsFreeOral;
+		menu();
+		addButton(0, "Talk", isabellaScene.talkWithIsabella);
+		addButton(1, "Drink", isabellaScene.nomOnMommaIzzysTits);
+		if (player.shortestCockLength() < 9) {
+			addButton(2, "Get Licked", isabellaScene.izzyGivesSmallWangsFreeOral);
+		} else {
+			addDisabledButton(2, "Get Licked", "She likes to lick small cocks.");
 		}
-		choices("Talk", isabellaScene.talkWithIsabella, "Drink", isabellaScene.nomOnMommaIzzysTits, "Get Licked", suck,
-			"Fight 4 Rape", isabellaScene.fightIsabella, "Offer Oral", isabellaScene.volunteerToSlurpCowCunt, "Accept Offer", moveTheBitchIn,
-			"", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+		addButton(3, "Fight 4 Rape", isabellaScene.fightIsabella);
+		addButton(4, "Offer Oral", isabellaScene.volunteerToSlurpCowCunt);
+		addButton(5, "Accept Offer", moveTheBitchIn);
+		addButton(14, "Leave", camp.returnToCampUseOneHour);
 	}
 	flags[kFLAGS.ISABELLA_TIMES_OFFERED_FOLLOWER]++;
 }
@@ -134,14 +138,17 @@ private function turnDownIsabellaFollower():void {
 	outputText("You push back from Isabella's smothering embrace with a little bit of frustration.  As soon as she realizes what's going on, the heavy-breasted woman's cheeks color in embarrassment and she retreats to her shield, her hands kneading the hard metal edge nervously.  You inform her that it would be best she remain here for now, at least until you've succeeded in your mission and brought peace to this strange place.\n\n", false);
 	
 	outputText("Isabella sighs and slumps down against her metal defender at your words.  Eventually, she answers, \"<i>I... understand, " + player.short + ".  I shall continue mein lonely vigil.  Vas zere somezing else I could do for you, ja?</i>\"\n\n", false);
-	var suck:Function = null;
-	if (player.hasCock()) {
-		if (player.cocks[player.shortestCockIndex()].cockLength < 9)
-			suck = isabellaScene.izzyGivesSmallWangsFreeOral;
+	menu();
+	addButton(0, "Talk", isabellaScene.talkWithIsabella);
+	addButton(1, "Drink", isabellaScene.nomOnMommaIzzysTits);
+	if (player.shortestCockLength() < 9) {
+		addButton(2, "Get Licked", isabellaScene.izzyGivesSmallWangsFreeOral);
+	} else {
+		addDisabledButton(2, "Get Licked", "She likes to lick small cocks.");
 	}
-	choices("Talk", isabellaScene.talkWithIsabella, "Drink", isabellaScene.nomOnMommaIzzysTits, "Get Licked", suck,
-		"Fight 4 Rape", isabellaScene.fightIsabella, "Offer Oral", isabellaScene.volunteerToSlurpCowCunt, "", null,
-		"", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+	addButton(3, "Fight 4 Rape", isabellaScene.fightIsabella);
+	addButton(4, "Offer Oral", isabellaScene.volunteerToSlurpCowCunt);
+	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 //Move Ze Bitch In! 
 private function moveTheBitchIn():void {
@@ -338,6 +345,12 @@ protected function isabellasAppearance():void {
 
 private function campIzzySexMenu():void {
 	spriteSelect(31);
+	menu();
+	addDisabledButton(2, "Hotdog");
+	addDisabledButton(4, "TentacleSex");
+	addDisabledButton(5, "Get Sucked");
+	addDisabledButton(6, "Fuck Her");
+	
 	var tentacle:Function = null;
 	if (izzyTentacleRapeBool() && player.lust >= 33) tentacle = tentacleBoneFollowerIzzy;
 	var hotdog:Function = null;
@@ -363,8 +376,13 @@ private function campIzzySexMenu():void {
 	if (player.hasCock() && player.lust >= 33) hotdog = repeatGermanBratwurstInCamp;
 	var fuckHer:Function = null;
 	if (player.cockThatFits(164) >= 0 && player.lust >= 33) fuckHer = fuckIsabella;
-	choices(bjTogText, bjToggle, "Drink Milk", isabellaScene.nomOnMommaIzzysTits, "Hotdog", hotdog, "Service Her", isabellaScene.volunteerToSlurpCowCunt, "TentacleSex", tentacle,
-		"Get Sucked", getSucked, "Fuck Her", fuckHer, "", null, "", null, "", null);
+	addButton(0, bjTogText, bjToggle);
+	addButton(1, "Drink Milk", isabellaScene.nomOnMommaIzzysTits);
+	addButton(2, "Hotdog", hotdog);
+	addButton(3, "Service Her", isabellaScene.volunteerToSlurpCowCunt);
+	addButton(4, "TentacleSex", tentacle);
+	addButton(5, "Get Sucked", getSucked);
+	addButton(6, "Fuck Her", fuckHer);
 	addButton(14, "Back", callForFollowerIsabella);
 }
 
@@ -927,7 +945,9 @@ private function izzyMilkingMeinMilkersMya2():void {
 	outputText("  What do you say?", false);
 
 	//[I'll Allow It][Mine Mine MINE!]
-	simpleChoices("Allow It", AllowIzzyMilkerUse, "MINE!", noMilkingMilky, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Allow It", AllowIzzyMilkerUse);
+	addButton(1, "MINE!", noMilkingMilky);
 }
 
 //[I'll Allow It]
@@ -1025,7 +1045,10 @@ private function isabellaSparMenu():void {
 	if (isabellaAccent()) outputText("Isabella asks, \"<i>Vhat stakes should ve use?  Vould you rather we spar light or fight like ze creatures of zis world?</i>\"", false);
 	else outputText("Isabella asks, \"<i>How should we fight?  Would you rather we spar light or fight like the creatures of this world?</i>\"", false);
 	outputText("\n\n(Do you spar 'light' with no consequences for losing, or would you rather spar 'hard' (with full consequences for loss/win)?)", false);
-	simpleChoices("Light", createCallBackFunction(sparring, 2), "Hard", createCallBackFunction(sparring, 1), "", null, "", null, "Back", callForFollowerIsabella);
+	menu();
+	addButton(0, "Light", sparring, 2);
+	addButton(1, "Hard", sparring, 1);
+	addButton(14, "Back", callForFollowerIsabella);
 }
 
 private function sparring(type:int = 1):void {
@@ -1080,7 +1103,9 @@ private function isabellaBurps():void {
 		outputText("Her eyes widen as realization strikes her.  \"<i>Back away,</i>\" she warns, weakly waving an arm at you. \"<i>Allergy...</i>\" It seems as if something might be coming. Do you flee from the pained cow-girl, or do you attempt to assist her with her problem?  Though, judging by her reaction, assistance might be a poor plan...", false);
 	
 		//put 'run' and 'help' buttons root hurr
-		simpleChoices("Run", runAwayFromIzzyBurps, "Help", getIzzyBurped, "", null, "", null, "", null);
+		menu();
+		addButton(0, "Run", runAwayFromIzzyBurps);
+		addButton(1, "Stay", getIzzyBurped);
 	}
 	//Repeat
 	else {
@@ -1090,7 +1115,9 @@ private function isabellaBurps():void {
 		else outputText("You're sure about this, huh?</i>\" she asks to confirm, shaking the bottle at you gently.  \"<i>You know what this does to me.</i>\"  Your mischievous smile is the only answer she needs.  She easily gulps down the potion, already rubbing her belly in apparent anticipation.  She notices your curious glance and answers with a nervous chuckle.  \"<i>It's one of those things...</i>\" she tries to explain while waiting for the onset of her reaction.  \"<i>Making you more like me... it's comforting somehow.</i>\"\n\n", false);
 
 		outputText("\"<i>Aaah, I can feel it,</i>\" she warns, and sure enough, the bottom hem of her top lifts to reveal an unhurriedly-swelling ponch.  \"<i>Are you ready, or are you having second thoughts?</i>\"  Your gaze falls to her gurgling pot-belly as you mull over her question.  Do you see any harm in getting another dose of Izzy-gas, or would you like to duck out of this one?", false);
-		simpleChoices("Run", runAwayFromIzzyBurps, "Stay", getIzzyBurped, "", null, "", null, "", null);
+		menu();
+		addButton(0, "Run", runAwayFromIzzyBurps);
+		addButton(1, "Stay", getIzzyBurped);
 	}
 }
 

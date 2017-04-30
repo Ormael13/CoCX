@@ -50,7 +50,9 @@ package classes.Scenes.Seasonal {
 			outputText("\n\n\"<i>G-gobble?</i>\"  she asks quietly, her big blue eyes pleading at you.");
 			
 			//[Shoo her Off] [Let her Approach]
-			simpleChoices("Let Approach", letZeTurkeyApproach, "Shoo Away", shooTurkeyAway, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Let Approach", letZeTurkeyApproach);
+			addButton(1, "Shoo Away", shooTurkeyAway);
 		}
 
 		//Shoo her Off -McGirt
@@ -82,7 +84,9 @@ package classes.Scenes.Seasonal {
 			outputText("\n\n\"<i>Gobble?</i>\"  she asks again, her hand drifting onto your leg.  You feel [eachCock] involuntarily stiffening as her slender, alabaster fingers slide along your thigh.  \"<i>Gobble,</i>\" she repeats, brushing your stiffening prick through your [armor].  Oh, is that what she wants?  Well then....");
 			
 			//(Baste Her) (That's Enough)
-			simpleChoices("Baste Her", basteThatTurkeyBooty, "No Thanks", noThanksTurkeyGal, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Baste Her", basteThatTurkeyBooty);
+			addButton(1, "No Thanks", noThanksTurkeyGal);
 		}
 
 		public function noThanksTurkeyGal():void {
@@ -112,7 +116,9 @@ package classes.Scenes.Seasonal {
 			outputText("\n\nThe turkey-girl smiles at you and flops onto her back, spreading her meaty thighs to give you a good look at the trimmed red bush between her legs, and the glistening slit of her vagina.  It looks like she wants some stuffing....");
 			player.orgasm('Dick');
 			dynStats("sen", -1);
-			simpleChoices("Stuff Her", stuffDatTurkeyWithSpoo, "", null, "", null, "", null, "That'll Do", thatllDoTurkey);
+			menu();
+			addButton(0, "Stuff Her", stuffDatTurkeyWithSpoo);
+			addButton(1, "That'll Do", thatllDoTurkey);
 		}
 
 		//Stuff Her -McGirt, this is awful by the way.
@@ -147,7 +153,9 @@ package classes.Scenes.Seasonal {
 			dynStats("sen", -1);
 			if (flags[kFLAGS.HEL_FUCKBUDDY] == 1 && flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] == 0) {
 				outputText("\n\nAs you lay atop the turkey, you hear a faint, almost pleading, \"<i>Gobble?</i>\"  from her. Furrowing your brow, you pick yourself up to look at the cum-slathered turkey.  As soon as you're off her, she rolls over onto her hands and knees, her big bubble butt sticking up in the air for you, her plume of feathers tickling your cheeks.  She... still wants more?</i>\"");
-				simpleChoices("Spit-Roast", spitRoastThatTurkey, "", null, "", null, "", null, "That's Enough", thatllDoTurkey);
+				menu();
+				addButton(0, "Spit-Roast", spitRoastThatTurkey);
+				addButton(1, "That's Enough", thatllDoTurkey);
 			}
 			else doNext(thatllDoTurkey);
 		}
@@ -209,7 +217,10 @@ package classes.Scenes.Seasonal {
 			
 			outputText("\n\nIt looks like you've found yourself a dinner guest...");
 			//[Appetiser] [Main Course] [Dessert]
-			simpleChoices("Appetizer", turkeyAppetizer, "Main Course", femaleAndTurkeyMainCourse, "Dessert", haveTurkeyGirlDesertInYourCunt, "", null, "", null);
+			menu();
+			addButton(0, "Appetizer", turkeyAppetizer);
+			addButton(1, "Main Course", femaleAndTurkeyMainCourse);
+			addButton(2, "Dessert", haveTurkeyGirlDesertInYourCunt);
 		}
 
 		//Appetiser:

@@ -64,22 +64,31 @@ package classes.Scenes.NPCs
 
 				outputText("<b>What will you do with your slave?</b>  ", false);
 			}
-			var dickToggle:String = "";
-			if (flags[kFLAGS.CERAPH_HIDING_DICK] == 0) dickToggle = "Go Female";
-			else dickToggle = "Go Herm";
-			var gainFetish:Function =null;
-			var loseFetish:Function =null;
-			if (flags[kFLAGS.PC_FETISH] < 3) gainFetish = CeraphHandsOutNewFetishesLikePervCandy;
-			if (flags[kFLAGS.PC_FETISH] > 0) loseFetish = unfetishifyYourselfWithFollowerCeraph;
-			var rp:Function =null;
-			if (player.lust >= 33) rp = followerCeraphRoleplay;
-			var sexMenu:Function =null;
-			if (player.lust < 33) {
-				if (output) outputText("\n\n<b>You aren't turned on enough for sex.</b>", false);
+			menu();
+			if (player.lust >= 33) {
+				addButton(0, "Sex", ceraphSexMenu);
+				addButton(6, "Roleplay", followerCeraphRoleplay);
+			} else {
+				addDisabledButton(0, "Sex", "You aren't turned on enough for sex.");
+				addDisabledButton(6, "Roleplay", "You aren't turned on enough for sex.");
 			}
-			else sexMenu = ceraphSexMenu;
-			choices("Sex", sexMenu, "", null, "", null, "", null, "Partswap", giveFollowerBodyBits,
-				"Roleplay", rp, "Get Fetish", gainFetish, "RemoveFetish", loseFetish, dickToggle, cawkTawgle, "Leave", camp.campSlavesMenu);
+			addButton(5, "Partswap", giveFollowerBodyBits);
+			if (flags[kFLAGS.PC_FETISH] < 3) {
+				addButton(7, "Get Fetish", CeraphHandsOutNewFetishesLikePervCandy);
+			} else {
+				addDisabledButton(7, "Get Fetish", "You have all fetishes Ceraph can offer.");
+			}
+			if (flags[kFLAGS.PC_FETISH] > 0) {
+				addButton(8, "RemoveFetish", unfetishifyYourselfWithFollowerCeraph);
+			} else {
+				addDisabledButton(8, "RemoveFetish", "You have no fetishes... Forced on you by Ceraph.");
+			}
+			if (flags[kFLAGS.CERAPH_HIDING_DICK] == 0) {
+				addButton(9, "Go Female", cawkTawgle);
+			} else {
+				addButton(9, "Go Herm", cawkTawgle);
+			}
+			addButton(14, "Leave", camp.campSlavesMenu);
 			
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_CERAPH] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(1, "Farm Work", helpWithFarm);
 		}
@@ -124,36 +133,33 @@ package classes.Scenes.NPCs
 		private function ceraphSexMenu():void
 		{
 			clearOutput();
-			var maleFuck:Function =null;
-			var femaleFuck:Function =null;
-			var hermFuck:Function =null;
-			var nipFuck:Function =null;
-			var portalFuck:Function =null;
-			var eggs:Function =null;
-			if (player.canOviposit()) eggs = layEggsInSlaveCeraph;
+			menu();
+			addDisabledButton(0, "Fuck Pussy");
+			addDisabledButton(1, "Get Tongued");
+			addDisabledButton(2, "Please All");
+			addDisabledButton(3, "NippleFuck");
+			addDisabledButton(4, "Penis Magic");
+			addDisabledButton(5, "Lay Eggs");
+			
 			if (player.hasCock() && player.lust >= 33) {
-				outputText("You could fuck her pussy.  ", false);
-				maleFuck = fuckFollowerCeraphsVagoo;
+				addButton(0, "Fuck Pussy", fuckFollowerCeraphsVagoo, undefined, undefined, undefined, "You could fuck her pussy.");
 			}
 			if (player.hasVagina() && player.lust >= 33) {
-				outputText("You could make her lick your pussy.  ", false);
-				femaleFuck = followerCeraphTongueFucking;
+				addButton(1, "Get Tongued", followerCeraphTongueFucking, undefined, undefined, undefined, "You could make her lick your pussy.");
 			}
 			if (player.hasCock() && player.hasVagina() && player.lust >= 33) {
-				outputText("You could command her to please all of your organs.  ", false);
-				hermFuck = ceraphTentacleGrape;
+				addButton(2, "Please All", ceraphTentacleGrape, undefined, undefined, undefined, "You could command her to please all of your organs.");
 			}
 			if (player.hasFuckableNipples()) {
-				outputText("You could have your slave please your nipplecunts.  ");
-				nipFuck = stuffSomeNippleCunts;
+				addButton(3, "NippleFuck", stuffSomeNippleCunts, undefined, undefined, undefined, "You could have your slave please your nipplecunts.");
 			}
 			if (player.hasCock() && player.cockThatFits(100) >= 0) {
-				outputText("You could use your penis but see if Ceraph has some magic to mix it up.  ");
-				portalFuck = portalFuckWithFollowerCeraph;
+				addButton(4, "Penis Magic", portalFuckWithFollowerCeraph, undefined, undefined, undefined, "You could use your penis but see if Ceraph has some magic to mix it up.");
 			}
-			if (maleFuck + femaleFuck + hermFuck + nipFuck + portalFuck == 0) outputText("There's no sexual acts you can perform with Ceraph at present.");
-			choices("Fuck Pussy", maleFuck, "Get Tongued", femaleFuck, "Please All", hermFuck, "NippleFuck", nipFuck, "Penis Magic", portalFuck,
-				"", null, "", null, "", null, "Lay Eggs", eggs, "Back", ceraphFollowerAppearance);
+			if (player.canOviposit()) {
+				addButton(5, "Lay Eggs", layEggsInSlaveCeraph);
+			}
+			addButton(14, "Back", ceraphFollowerAppearance);
 		}
 
 
@@ -202,24 +208,29 @@ package classes.Scenes.NPCs
 			outputText("Letting your eyes play over the demon's exotic, sculpted skin, you can't help but be tempted by her offer... Ceraph sees you mulling it over and produces a collar as she purrs, \"<i>No pressure... " + player.mf("Master", "Mistress") + ".  You could always just take me here like usual, and perhaps, the next time you'll stop being so lucky...</i>\"\n\n", false);
 
 			//[Display Rape Options + Collar Option]
-			if (player.gender > 0) {
-				outputText("Do you fuck her? (And if so, which of your body parts do you do it with?)", false);
-
-				var dicking:Function =null;
-				var buttsmexing:Function =null;
-				//Dickings ahoyu!
+			outputText("Do you fuck her? (And if so, which of your body parts do you do it with?)", false);
+			
+			menu();
+			addDisabledButton(1, "Fuck Her");
+			addDisabledButton(2, "Ride Her");
+			addDisabledButton(3, "FuckHerAss");
+			
+			addButton(0, "Collar Her", collarCeraph);
+			if (player.lust >= 33) {
 				if (player.hasCock()) {
-					dicking = ceraphScene.maleFuckCeraphsPussy;
-					if (player.cockThatFits(monster.analCapacity()) != -1) buttsmexing = ceraphScene.buttRapeCeraph;
-					else outputText("  <b>There's no way you could fit inside her ass - you're too big.</b>", false);
+					addButton(1, "Fuck Her", ceraphScene.maleFuckCeraphsPussy);
+					if (player.cockThatFits(monster.analCapacity()) != -1) {
+						addButton(3, "FuckHerAss", ceraphScene.buttRapeCeraph);
+					} else {
+						addDisabledButton(3, "FuckHerAss", "There's no way you could fit inside her ass - you're too big.");
+					}
 				}
-				var cunting:Function =null;
-				if (player.hasVagina()) cunting = ceraphScene.rideCeraphsCockLikeaBAWSSexclamation11eleven;
-
-
-				simpleChoices("Collar Her", collarCeraph, "Fuck Her", dicking, "Ride Her", cunting, "FuckHerAss", buttsmexing, "Leave", combat.cleanupAfterCombat);
+				
+				if (player.hasVagina()) {
+					addButton(2, "Ride Her", ceraphScene.rideCeraphsCockLikeaBAWSSexclamation11eleven);
+				}
 			}
-			else simpleChoices("Collar Her", collarCeraph, "", null, "", null, "", null, "Leave", combat.cleanupAfterCombat);
+			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
 
 //Collar Ceraph After 4th Defeat + Rape: (Zeddited)
@@ -248,7 +259,9 @@ package classes.Scenes.NPCs
 			outputText(" her nodule-studded demon-dick with her free hand.  She whimpers, \"<i>Would my " + player.mf("Master", "Mistress") + " prefer to carry " + player.mf("his", "her") + " slave's token, or wear it as a belly-button piercing?</i>\"\n\n", false);
 
 			//[Carry] [Pierce]
-			simpleChoices("Carry", carryCarephsToken, "Pierce", getCeraphFollowerPiercing, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Carry", carryCarephsToken);
+			addButton(1, "Pierce", getCeraphFollowerPiercing);
 		}
 
 //[Carry]
@@ -264,25 +277,29 @@ package classes.Scenes.NPCs
 			flags[kFLAGS.CERAPH_TOKEN] = 1;
 			player.createKeyItem("Onyx Token - Ceraph's", 0, 0, 0, 0);
 			//[Display Rape Options + Collar Option]
-			if (player.gender > 0) {
-				outputText("Do you fuck her as a disobedient demon, one last time? (And if so, which of your body parts do you do it with?)", false);
-
-				var dicking:Function =null;
-				var buttsmexing:Function =null;
-				//Dickings ahoyu!
+			outputText("\n\nDo you fuck her as a disobedient demon, one last time? (And if so, which of your body parts do you do it with?)", false);
+			menu();
+			addDisabledButton(0, "Fuck Her");
+			addDisabledButton(1, "Ride Her");
+			addDisabledButton(2, "FuckHerAss");
+			
+			if (player.lust >= 33) {
+				outputText("  Do you have your way with her? (And if so, which of your body parts do you do it with?)", false);
+				
 				if (player.hasCock()) {
-					dicking = ceraphScene.maleFuckCeraphsPussy;
-					if (player.cockThatFits(monster.analCapacity()) != -1) buttsmexing = ceraphScene.buttRapeCeraph;
-					else outputText("  <b>There's no way you could fit inside her ass - you're too big.</b>", false);
+					addButton(0, "Fuck Her", ceraphScene.maleFuckCeraphsPussy);
+					if (player.cockThatFits(monster.analCapacity()) != -1) {
+						addButton(2, "FuckHerAss", ceraphScene.buttRapeCeraph);
+					} else {
+						addDisabledButton(2, "FuckHerAss", "There's no way you could fit inside her ass - you're too big.");
+					}
 				}
-				var cunting:Function =null;
-				if (player.hasVagina()) cunting = ceraphScene.rideCeraphsCockLikeaBAWSSexclamation11eleven;
-				simpleChoices("Fuck Her", dicking, "Ride Her", cunting, "FuckHerAss", buttsmexing, "", null, "Leave", combat.cleanupAfterCombat);
+				
+				if (player.hasVagina()) {
+					addButton(1, "Ride Her", ceraphScene.rideCeraphsCockLikeaBAWSSexclamation11eleven);
+				}
 			}
-			else {
-				outputText("  You don't really have the equipment to.  Oh well.", false);
-				combat.cleanupAfterCombat();
-			}
+			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
 
 //[Pierce] 
@@ -301,25 +318,29 @@ package classes.Scenes.NPCs
 
 			outputText("Ceraph asks, \"<i>" + player.mf("Master", "Mistress") + ", before you go, would you like to fuck your slut one of the old ways, one last time?</i>\"", false);
 			//[Display Rape Options + Collar Option]
-			if (player.gender > 0) {
-				outputText("\n\nDo you fuck her as a disobedient demon, one last time? (And if so, which of your body parts do you do it with?)", false);
-
-				var dicking:Function =null;
-				var buttsmexing:Function =null;
-				//Dickings ahoyu!
+			outputText("\n\nDo you fuck her as a disobedient demon, one last time? (And if so, which of your body parts do you do it with?)", false);
+			menu();
+			addDisabledButton(0, "Fuck Her");
+			addDisabledButton(1, "Ride Her");
+			addDisabledButton(2, "FuckHerAss");
+			
+			if (player.lust >= 33) {
+				outputText("  Do you have your way with her? (And if so, which of your body parts do you do it with?)", false);
+				
 				if (player.hasCock()) {
-					dicking = ceraphScene.maleFuckCeraphsPussy;
-					if (player.cockThatFits(monster.analCapacity()) != -1) buttsmexing = ceraphScene.buttRapeCeraph;
-					else outputText("  <b>There's no way you could fit inside her ass - you're too big.</b>", false);
+					addButton(0, "Fuck Her", ceraphScene.maleFuckCeraphsPussy);
+					if (player.cockThatFits(monster.analCapacity()) != -1) {
+						addButton(2, "FuckHerAss", ceraphScene.buttRapeCeraph);
+					} else {
+						addDisabledButton(2, "FuckHerAss", "There's no way you could fit inside her ass - you're too big.");
+					}
 				}
-				var cunting:Function =null;
-				if (player.hasVagina()) cunting = ceraphScene.rideCeraphsCockLikeaBAWSSexclamation11eleven;
-				simpleChoices("Fuck Her", dicking, "Ride Her", cunting, "FuckHerAss", buttsmexing, "", null, "Leave", combat.cleanupAfterCombat);
+				
+				if (player.hasVagina()) {
+					addButton(1, "Ride Her", ceraphScene.rideCeraphsCockLikeaBAWSSexclamation11eleven);
+				}
 			}
-			else {
-				outputText("  You don't really have the equipment to.  Oh well.", false);
-				combat.cleanupAfterCombat();
-			}
+			addButton(14, "Leave", combat.cleanupAfterCombat);
 		}
 
 //*Decision to Display Demonic Dick or Demur (pretty sure Fen mentioned wanting this -Z)
@@ -471,7 +492,9 @@ package classes.Scenes.NPCs
 
 			outputText("Do you go through with it?", false);
 			//[Yes] [No] - back to follower menu
-			simpleChoices("Yes", goThroughWithCeraphUnfetishification, "", null, "", null, "", null, "Leave", ceraphFollowerAppearance);
+			menu();
+			addButton(0, "Yes", goThroughWithCeraphUnfetishification);
+			addButton(14, "Leave", ceraphFollowerAppearance);
 		}
 
 //*Ceraph Actually Removes The Fetish (Zeddited)
@@ -685,7 +708,9 @@ package classes.Scenes.NPCs
 			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
 			if (flags[kFLAGS.CERAPH_HIDING_DICK] == 0 && flags[kFLAGS.CERAPH_PUNISHED] == 0) {
 				outputText("You smirk and wonder if you should punish her for stuffing her cock down your throat.  Do you?", false);
-				simpleChoices("Punish", punishCeraphForSurpriseThroatFuck, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+				menu();
+				addButton(0, "Punish", punishCeraphForSurpriseThroatFuck);
+				addButton(14, "Leave", camp.returnToCampUseOneHour);
 			}
 			//ELSE: 
 			else {
@@ -711,7 +736,7 @@ package classes.Scenes.NPCs
 			clearOutput();
 			//requires that the PC have a cock, just to keep it simple, no centaurs and probably not slimes
 			outputText("You call on Ceraph, but are a bit taken aback when she doesn't appear right away.  You look around to see if you might have missed her, then spot something else streaking towards you from the wastes.  It is kicking up so much dust that you don't have time to see what it is before it ", false);
-			if (player.findPerk(PerkLib.Evade) < 0 && player.spe / 5 + rand(20) < 22) outputText("flies into you, knocking you to the ground.  After a moment, you find yourself faced with a pair of overeager cat-morphs grinning down at you.", false);
+			if (!player.getEvasionRoll(false, 50)) outputText("flies into you, knocking you to the ground.  After a moment, you find yourself faced with a pair of overeager cat-morphs grinning down at you.", false);
 			else outputText("just barely misses you and crashes into the ground behind you.  After a moment, two bodies disentangle themselves from the impact site.  Once they stand up, you can see that a pair of overeager cat morphs have arrived in your camp.", false);
 			outputText("\n\n", false);
 
@@ -721,7 +746,9 @@ package classes.Scenes.NPCs
 			outputText("As a chorus, the two start to speak.  \"<i>Mistress Ceraph couldn't come, so she has sent us to help you with your needs; the sisters are here for your pleasure.</i>\"  The choice is yours; do you play with these furry, eager, cat-faced girls, or send them away?\n\n", false);
 
 			//player chooses sex, no sex(, extermination)
-			simpleChoices("Sex", fuckCeraphsCatgirls, "", null, "", null, "", null, "Leave", declineCeraphsCatgirls);
+			menu();
+			addButton(0, "Sex", fuckCeraphsCatgirls);
+			addButton(14, "Leave", declineCeraphsCatgirls);
 		}
 
 //No sex
@@ -789,11 +816,17 @@ package classes.Scenes.NPCs
 			outputText("\"<i>Oh! " + player.short + "! I, um, didn't expect to find you here! This... this isn't what it looks like,</i>\" she apologizes, flushing deeply, nervous shame sending humiliated shivers through her shoulders. She longingly eyes the bottle in her hand and, without lifting her head, raises her eyes to yours, silently asking what she should do.", false);
 
 			//[Drink][Sober]
-			var sober:Function =null;
-			if (player.hasCock()) sober = ceraphUrtaRoleplaySober;
-			var drunk:Function =null;
-			if (player.hasVagina()) drunk = ceraphUrtaRoleplayDrunk;
-			simpleChoices("Sober", sober, "Drunk", drunk, "", null, "", null, "", null);
+			menu();
+			if (player.hasCock()) {
+				addButton(0, "Sober", ceraphUrtaRoleplaySober);
+			} else {
+				addDisabledButton(0, "Sober", "This scene requires you to have cock.");
+			}
+			if (player.hasVagina()) {
+				addButton(1, "Drunk", ceraphUrtaRoleplayDrunk);
+			} else {
+				addDisabledButton(0, "Sober", "This scene requires you to have vagina.");
+			}
 		}
 
 //DRANK AS FCUK
@@ -911,7 +944,9 @@ package classes.Scenes.NPCs
 
 			outputText("Do you accept the 'offering' of the girl and drink the potion?", false);
 			//[Yes][No]
-			simpleChoices("Yes", ceraphLackeyCorruption, "", null, "", null, "", null, "Leave", makeCarephsLackeysLeave);
+			menu();
+			addButton(0, "Yes", ceraphLackeyCorruption);
+			addButton(14, "Leave", makeCarephsLackeysLeave);
 		}
 
 //[=No=]
@@ -1005,7 +1040,10 @@ package classes.Scenes.NPCs
 			player.orgasm('Generic');
 			dynStats("lib", -3, "cor", 5);
 			//[Yes][No][Never Again]
-			simpleChoices("Yes", acceptMoreCeraphFauxCorruption, "No", declineCeraphFauxCorruption, "", null, "", null, "Never Again", iQuitCeraphCorruptionDemons);
+			menu();
+			addButton(0, "Yes", acceptMoreCeraphFauxCorruption);
+			addButton(1, "No", declineCeraphFauxCorruption);
+			addButton(4, "Never Again", iQuitCeraphCorruptionDemons);
 		}
 
 //[=Never Again - Fuck this nerd shit=]
@@ -1085,7 +1123,10 @@ package classes.Scenes.NPCs
 				outputText("  \"<i>Now then, " + player.mf("Master", "Mistress") + "... or, should I say, Sweetie,</i>\" she breathes, her sultry tones smoothing into an earthy, slightly drawn-out accent, \"<i>there's one more detail that she - sorry, I - don't have; would you like me to have... an udder?</i>\"\n\n", false);
 				outputText("The question strikes you as a curious one.  Do you want your make-believe Marble to make an udder, or is she better off without?", false);
 				//[yep] [no way jose]
-				simpleChoices("Udder", yesUdderPWEASE, "No Udder", noUdderPlz, "Never Udder", noUdderPlz, "", null, "", null);
+				menu();
+				addButton(0, "Udder", yesUdderPWEASE);
+				addButton(1, "No Udder", noUdderPlz);
+				addButton(2, "Never Udder", noUdderPlz);
 			}
 		}
 
@@ -1328,7 +1369,6 @@ package classes.Scenes.NPCs
 				outputText("\"<i>Is Zetsuko's pussy to " + player.mf("Master", "Mistress") + "'s liking?</i>\" she says, laying on her back and spreading her legs further to proudly display her freakish appendage to you, putting on a display as she begins to tongue her own clit, flicking her hood piercing gently.\n\n", false);
 
 				outputText("Will you make use of Zetsuko now, or send her back to Ceraph?", false);
-				if (silly()) banana = zetsukoBanana;
 			}
 			//(Subsequent times): 
 			else {
@@ -1339,15 +1379,24 @@ package classes.Scenes.NPCs
 				outputText("You tell her that you have no plans to let her loose today, which causes her to pout a little, though Ceraph's piercings seem to keep her from being actively defiant.  Your eyes are drawn down to watch as her obscenely long tongue unfurls from between the folds of her pussy, slathering slick juices along the insides of her thighs in anticipation.", false);
 
 				outputText("Will you make use of Zetsuko now, or send her back to Ceraph?", false);
-				if (silly()) {
-					outputText("  (You also remember Ceraph's note had mentioned something about a safety word... what was it again?)", false);
-					banana = zetsukoBanana;
-				}
 			}
 			//[FuckVagina] [GetTongued] [Banana?]silly mode — [Leave]
-			if (player.hasCock()) dick = fuckZetsukosTonguepussy;
-			if (player.hasVagina()) vag = getTonguedByZetsuko;
-			simpleChoices("FuckVagina", dick, "GetTongued", vag, "Banana", banana, "", null, "Leave", noZetsukoLoveToday);
+			menu();
+			if (player.hasCock()) {
+				addButton(0, "FuckVagina", fuckZetsukosTonguepussy);
+			} else {
+				addDisabledButton(0, "FuckVagina");
+			}
+			if (player.hasVagina()) {
+				addButton(1, "GetTongued", getTonguedByZetsuko);
+			} else {
+				addDisabledButton(1, "GetTongued");
+			}
+			if (silly()) {
+				outputText("  (You also remember Ceraph's note had mentioned something about a safety word... what was it again?)", false);
+				addButton(2, "Banana", zetsukoBanana);
+			}
+			addButton(14, "Leave", noZetsukoLoveToday);
 		}
 
 //▶[FuckVagina] requires penis
@@ -1497,33 +1546,40 @@ package classes.Scenes.NPCs
 			}
 			else outputText("  Sadly, you don't have anything that would be worth taking right now.  A true shame, my [Master].");
 			outputText("</i>\"");
+			menu();
+			
 			if (player.gender > 0 || player.biggestTitSize() > 0) {
 				outputText("\n\nYou scratch your head as she prattles on, growing more animated and a touch aroused. \"<i>Then, I can fly back to the harem and add them to my collection.  My pets do so love when I give them an exotic endowment and then spend all night teasing it.  Could you imagine it?  Going to bed at night and dreaming of all the debauched things my slaves and I are doing, over and over?</i>\"");
 				outputText("\n\nWell, that's quite the pitch she's put together.  Do you want to give her something?\n");
-				var wang:Function =null;
-				var smallestWang:Function =null;
-				var vag:Function =null;
-				var breasts:Function =null;
-				var breasts2:Function =null;
-				var breasts3:Function =null;
+				//[(Biggest )Penis] [Smallest Penis][Vagina] [TopBreastRow] [2ndBreastRow] [3rdBreastRow]
+				menu();
+				addDisabledButton(0, "Penis");
+				addDisabledButton(1, "Smallest Penis");
+				addDisabledButton(2, "Vagina");
+				addDisabledButton(3, "Breasts");
 				if (player.hasCock()) {
 					outputText("\nYou can give her your [if (cocks == 1) penis|biggest penis or smallest penis].");
-					wang = ceraphFollowerCockTaking;
-					if (player.cockTotal() > 1) smallestWang = createCallBackFunction(ceraphFollowerCockTaking,true);
+					addButton(0, "Penis", ceraphFollowerCockTaking);
+					if (player.cockTotal() > 1) {
+						addButton(1, "Smallest Penis", ceraphFollowerCockTaking, true);
+					}
 				}
 				if (player.hasVagina()) {
 					outputText("\nYour vagina would probably give you the most amazing sensations while being used in Ceraph's orgies.");
-					vag = ceraphFollowerCuntTaking;
+					addButton(2, "Vagina", ceraphFollowerCuntTaking);
 				}
 				if (player.biggestTitSize() >= 1) {
 					outputText("\nDo you really need your boobs?");
-					breasts = ceraphFollowerTitTaking;
-					if (player.bRows() > 1) breasts2 = createCallBackFunction(ceraphFollowerTitTaking,1);
-					if (player.bRows() > 2) breasts3 = createCallBackFunction(ceraphFollowerTitTaking,2);
+					addButton(3, "Breasts", ceraphFollowerTitTaking);
+					if (player.bRows() > 1) {
+						for (var i:int = 1; i < player.bRows() && i < 10; i++) 
+						{
+							if (player.breastRows[i].breastRating >= 1)
+								addButton(3 + i, "BreastsRow" + i, ceraphFollowerTitTaking, i);
+						}
+					}
 				}
-				//[(Biggest )Penis] [Smallest Penis][Vagina] [TopBreastRow] [2ndBreastRow] [3rdBreastRow]
-				choices("Penis", wang, "Smallest Penis", smallestWang, "Vagina", vag, "Breasts", breasts, "BreastsRow2", breasts2,
-					"BreastsRow3", breasts3, "", null, "", null, "", null, "Back", ceraphFollowerAppearance);
+				addButton(14, "Back", ceraphFollowerAppearance);
 			}
 			else doNext(ceraphFollowerAppearance);
 		}

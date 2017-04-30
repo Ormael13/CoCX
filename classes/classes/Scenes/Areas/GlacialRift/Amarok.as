@@ -15,7 +15,7 @@ package classes.Scenes.Areas.GlacialRift
 		
 		protected function amarokClaw():void {
 			//Blind
-			if(findStatusEffect(StatusEffects.Blind) >= 0) {
+			if(hasStatusEffect(StatusEffects.Blind)) {
 				outputText("The Amarok lunges for you, attempting to slash you with one of its paws, but misses completely due to its blindness.", false);
 				combatRoundOver();
 				return;
@@ -39,7 +39,7 @@ package classes.Scenes.Areas.GlacialRift
 			//AMAROK used TAIL SLAP!
 			outputText("The Amarok rushes up to you and immediately turns heel, attempting to crash its tail into you. ", false);
 			//Blind check...
-			if(findStatusEffect(StatusEffects.Blind) >= 0) {
+			if(hasStatusEffect(StatusEffects.Blind)) {
 				outputText("Luckily, though, its blindness causes it to misjudge your location and it misses entirely.", false);
 				combatRoundOver();
 				return;

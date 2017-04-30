@@ -99,7 +99,10 @@ private function tamaniFemaleEncounter():void {
 	outputText("A goblin leaps out from behind a rock outcropping.  She keeps her arms folded across her " + tamaniChest() + " and glares at you.  The little thing is only about four feet tall, with pink and black dyed hair cut into a cute little 'do.  The greenish-gray skin of her breasts bulges out around her arms, supported by a few leather straps, amplifying her cleavage.  Her cunt lips are pierced multiple times, inflamed, and slightly parted.  There really isn't any clothing on her to hide them, just more of the ever-present straps wrapping around her thighs.\n\n", false);
 	outputText("She says, \"<i>There's only so much cock around, and I got dibs on ALL of it, O.K. skank?</i>\"\n\n", false);
 	//[Umm OK?] [No]
-	simpleChoices("Umm OK?", tamaniFemaleYes, "No", tamaniFemaleNo, "PreferGirls", preferTamaniFemdom, "", null, "", null);
+	menu();
+	addButton(0, "Umm OK?", tamaniFemaleYes);
+	addButton(1, "No", tamaniFemaleNo);
+	addButton(2, "PreferGirls", preferTamaniFemdom);
 }
 
 //(Umm OK?)
@@ -135,7 +138,9 @@ private function tamaniMaleFirstEncounter():void {
 	outputText("A goblin leaps out from behind a rock outcropping.  For something so small, she has a lot of curves.  She advances towards you, rolling her hips in a suggestive way, immediately diverting your blood-flow to your crotch.  The little thing is only about four feet tall, with pink and black dyed hair cut into a cute little 'do.  The greenish-gray skin of her breasts jiggles pleasantly with every step, supported by a few leather straps, amplifying her cleavage.  Her cunt lips are pierced multiple times, inflamed, and slightly parted.  There really isn't any clothing on her to hide them, just more of the ever-present straps wrapping around her thighs.\n\n", false);
 	outputText("The goblin makes you an offer that's difficult to turn down, \"<i>Hey there stud, want to fuck me pregnant?  I promise my box will milk your dick dry.  Just let Tamani take care of all your boners OK?</i>\"", false);
 	//[Fuck Her] [Refuse]
-	simpleChoices("Fuck Her", tamaniFirstTimeConsentual, "Refuse", tamaniFirstTimeRefusal, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Fuck Her", tamaniFirstTimeConsentual);
+	addButton(1, "Refuse", tamaniFirstTimeRefusal);
 }
 //[Fuck Her – Consentual First Time]
 private function tamaniFirstTimeConsentual():void {
@@ -201,7 +206,9 @@ private function tamaniFirstTimeRefusal():void {
 	outputText("Tamani's eyes widen in surprise, \"<i>Don't let the size fool you, big " + player.mf("boy", "girl") + ". I can take more than you think,</i>\" she says while her hands begins playing with her box, \"<i>Are you sure you don't want to just let off a little steam?</i>\"\n\n", false);
 	//[Fuck Her (Goes to fuck her - consensual first time)]
 	//[No means no]
-	simpleChoices("Fuck Her", tamaniFirstTimeConsentual, "No", tamaniSecondRefusal, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Fuck Her", tamaniFirstTimeConsentual);
+	addButton(1, "No", tamaniSecondRefusal);
 	dynStats("lus", 5);
 }
 //[No Means No]
@@ -230,7 +237,10 @@ private function tamaniMaleRepeatEncounter():void {
 	//[Take Her – win sex] 
 	//[Let Her – Get dommed] 
 	//[No – starts fight]
-	simpleChoices("Take Her", tamaniSexWon, "Let Her", tamaniSexLetHer, "No", tamaniStartFight, "", null, "", null);
+	menu();
+	addButton(0, "Take Her", tamaniSexWon);
+	addButton(1, "Let Her", tamaniSexLetHer);
+	addButton(2, "No", tamaniStartFight);
 }
 
 private function tamaniStartFight():void {
@@ -577,7 +587,9 @@ private function tamaniPregnantEncounter():void {
 	outputText("Tamani strolls out from behind a boulder, and wow is she ever pregnant.  It doesn't diminish the look of lust in her eyes when she meets your gaze, but her hands do keep rubbing the outside of her belly, only pausing to squeeze drops of milk from her nipples.  Her leather straps seem to fit her even better than before, accentuating her expanding curves and looking fantastic on her pregnant form.\n\n", false);
 	outputText("She parts her legs and rubs her lower lips while she begs you, \"<i>Please fuck me!   I'm so horny from the pregnancy and I can't wait to give you daughters so you can knock me up all over again!</i>\"", false);
 	//[Fuck Her] [Refuse]
-	simpleChoices("Fuck Her", tamaniPregnantFuck, "Refuse", tamaniPregnantRefusal, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Fuck Her", tamaniPregnantFuck);
+	addButton(1, "Refuse", tamaniPregnantRefusal);
 }
 
 //[Refuse]
@@ -872,7 +884,18 @@ public function tamaniVictoryMenu():void {
 		}
 		if (!pregnancy.isPregnant && player.canOvipositSpider())
 			addButton(2, "Lay Eggs", tamaniBeaten); //NOT PREGGERS
+		
+		if (player.hasKeyItem("Deluxe Dildo") < 0) {
+			addButton(3, "Take Dildo", tamaniStealDildo, undefined, undefined, undefined, "This bad girl doesn't deserve a good toy.");
+		}
 	}
+}
+
+private function tamaniStealDildo():void {
+	outputText("And to the victor go the spoils. You open her satchel and take a look inside. ");
+	outputText("\n\n<b>(You find a well-crafted pink dildo inside! There are also some other stuff.)</b>");
+	player.createKeyItem("Deluxe Dildo", 0, 0, 0, 0);
+	combat.cleanupAfterCombat();
 }
 
 internal function tamaniAnalShits():void {

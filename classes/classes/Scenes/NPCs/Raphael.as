@@ -92,7 +92,7 @@
 override public function RaphaelLikes():Boolean {
 	if (flags[kFLAGS.LOW_STANDARDS_FOR_ALL])		
 	{
-		if (player.gender == 2 || player.gender == 3)	// you at least need a vagoo for raphael to fuck you. Otherwise the sex scenes will be rather broken.
+		if (player.hasVagina())	// you at least need a vagoo for raphael to fuck you. Otherwise the sex scenes will be rather broken.
 			return true;
 	}
 	
@@ -157,8 +157,20 @@ private function meetRaphaelPtII():void {
 	
 	outputText("What do you do?", false);
 	//[Talk] [Slap] [Swoon]
-	if (RaphaelLikes()) simpleChoices("Talk", RaphaelFirstMeetingTALK, "Slap", RaphaelFirstMeetingSLAP, "Swoon", RaphaelFirstMeetingSWOON, "Rape", null, "", null);
-	else simpleChoices("Let Him Go", letRaphaelGoFirstMeeting, "Slap", RaphaelFirstMeetingSLAP, "Rape", (player.lust >= 33 && player.hasCock() && player.cor >= (60 - player.corruptionTolerance())) ? rapeRaphael : null, "", null, "", null);
+	menu();
+	if (RaphaelLikes()) {
+		addButton(0, "Talk", RaphaelFirstMeetingTALK);
+		addButton(2, "Swoon", RaphaelFirstMeetingSWOON);
+	} else {
+		addButton(0, "Let Him Go", letRaphaelGoFirstMeeting);
+		addDisabledButton(2, "Swoon");
+	}
+	addButton(1, "Slap", RaphaelFirstMeetingSLAP);
+	if (player.lust >= 33 && player.hasCock() && (player.cor >= 60 - player.corruptionTolerance() || player.findPerk(PerkLib.Pervert))) {
+		addButton(3, "Rape", rapeRaphael);
+	} else {
+		addDisabledButton(3, "Rape");
+	}
 }
 
 //{When Player chooses Slap/refuse after the first encounter}
@@ -355,7 +367,10 @@ private function RaphaelEncounterIIDressFollowup():void {
 		outputText("What do you do?", false);
 		flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE] = 0;
 		//[Reject] [Frisk] [Date]
-		simpleChoices("Reject", RaphaelChooseReject, "Frisk", RaphaelChooseFrisk, "Date", RaphaelSelectDate, "", null, "", null);
+		menu();
+		addButton(0, "Reject", RaphaelChooseReject);
+		addButton(1, "Frisk", RaphaelChooseFrisk);
+		addButton(2, "Date", RaphaelSelectDate);
 	}
 	//({If player does not meet the first encounter requirements:}
 	else {
@@ -474,7 +489,9 @@ private function RaphaelChooseFrisk():void {
 		
 		outputText("How do you respond?", false);
 		//Reject] [Accept]
-		simpleChoices("Reject", friskRejectChoice, "Accept", friskAcceptChoice, "", null, "", null, "", null);
+		menu();
+		addButton(0, "Reject", friskRejectChoice);
+		addButton(1, "Accept", friskAcceptChoice);
 	}
 	//{If player's corruption is higher than 19 and higher than Intelligence.}
 	else {
@@ -486,7 +503,9 @@ private function RaphaelChooseFrisk():void {
 
 		outputText("What do you do?", false);
 		//[Squeeze] [Fondle]
-		simpleChoices("Squeeze", friskSqueezeChoice, "Fondle", friskFondleChoice, "", null, "", null, "", null);
+		menu();
+		addButton(0, "Squeeze", friskSqueezeChoice);
+		addButton(1, "Fondle", friskFondleChoice);
 	}
 }
 
@@ -586,7 +605,9 @@ private function RaphaelPicnicII():void {
 
 	outputText("Curious and certain he has a great deal of knowledge on Mareth, you begin asking Raphael questions about his craft and his experiences. Soon enough, two distinct subjects come up as possible topics. Then again, the wine goes straight to your head and this seems like the perfect time to enjoy more leisurely activities and simply enjoy yourself.\n\n", false);
 	//[Discuss] [Skill] [Flirt]
-	simpleChoices("Fencing", RaphaelPicnicSkill, "Thieving", RaphaelPicnicChooseThieving, "Flirt", null, "", null, "", null);
+	menu();
+	addButton(0, "Fencing", RaphaelPicnicSkill);
+	addButton(1, "Thieving", RaphaelPicnicChooseThieving);
 }
 private function RaphaelPicnicEnd():void {
 	clearOutput();
@@ -761,7 +782,9 @@ private function RaphaelPicnicSkill():void {
 		flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 4;
 		awardAchievement("Fencer", kACHIEVEMENTS.GENERAL_FENCER);
 		//[Fence] [Discuss]
-		simpleChoices("Fence", fenceRaphaelSexily, "Discus", fenceOfferChangeToDiscuss, "", null, "", null, "", null);
+		menu();
+		addButton(0, "Fence", fenceRaphaelSexily);
+		addButton(1, "Discus", fenceOfferChangeToDiscuss);
 		return;
 	}
 	doNext(RaphaelPicnicEnd);
@@ -1046,7 +1069,9 @@ private function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
 		//[Fencing] [Flirt]
 		//[Fencing] {Leads to Fencing Variables}
 		//[Flirt] Leads towards the final Int Sex scene. 
-		simpleChoices("Fencing", RaphaelPicnicSkill, "Flirt", thieveryEnding, "", null, "", null, "", null);
+		menu();
+		addButton(0, "Fencing", RaphaelPicnicSkill);
+		addButton(1, "Flirt", thieveryEnding);
 		return;
 	}
 	doNext(playerMenu);
@@ -1219,7 +1244,9 @@ private function QuiksilverFawkesPtII():void {
 	outputText("You could sell Raphael out, or you could cover for him.  What do you do?", false);
 
 	//[Cover] [Sell out] 
-	simpleChoices("Cover", coverForRaphael, "Sell Out", betrayRaphael, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Cover", coverForRaphael);
+	addButton(1, "Sell Out", betrayRaphael);
 }
 
 //{PC chooses to cover for Raphael}

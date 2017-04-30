@@ -249,29 +249,31 @@ package classes.Scenes.NPCs
 			//Option: Feed (cocks only for now)
 			//Option: Threesome
 			//Option: Leave
-			var mFeed:Function = null;
-			var fFeed:Function = null;
-			if (player.hasCock()) {
-				if (player.lust >= 33) mFeed = feedVapulaACupOfJizz;
-				else if (output) outputText("\n\nYou aren't suitably aroused to feed Vapula right now.");
-			}
-			if (player.hasVagina() && player.hasKeyItem("Demonic Strap-On") >= 0) {
-				if (player.lust >= 33) fFeed = chixFeedVapulaBlehblehIVantToZuckYourSpooo;
-				else if (output && !player.hasCock()) outputText("\n\nYou aren't suitably aroused to feed Vapula right now.");
-			}
-			var threesome:Function = null;
-			if (player.lust < 33) {
-				if (output) outputText("\n\nYou aren't much interested in any of the threesomes Vapula seems poised to suggest.");
-			}
-			var spank:Function = null;
-			//Spank Vapula for misbehaving.
-			//Requires Vapula force herself on you for food.
-			//Requires bipedal-ness
-			if (flags[kFLAGS.VAPULA_EARNED_A_SPANK] > 0 && !player.isTaur() && !player.isDrider()) spank = spankVapulaLikeABoss;
-			else threesome = vapulaThreesomeMenu;
 			
-			choices("Appearance", fapulaFapfapfapAppearance, "Talk", talkToVapulaForSomeReason, "Feed", mFeed, "Feed(Dildo)", fFeed, "Threesome", threesome,
-				"Spank", spank, "", null, "", null, "", null, "Leave", camp.campSlavesMenu);
+			menu();
+			addButton(0, "Appearance", fapulaFapfapfapAppearance);
+			addButton(1, "Talk", talkToVapulaForSomeReason);
+			
+			addDisabledButton(2, "Feed");
+			addDisabledButton(3, "Feed(Dildo)");
+			addDisabledButton(4, "Threesome");
+			
+			if (player.lust >= 33) {
+				if (player.hasCock()) {
+					addButton(2, "Feed", feedVapulaACupOfJizz);
+				}
+				if (player.hasVagina() && player.hasKeyItem("Demonic Strap-On") >= 0) {
+					addButton(3, "Feed(Dildo)", chixFeedVapulaBlehblehIVantToZuckYourSpooo);
+				}
+				addButton(4, "Threesome", vapulaThreesomeMenu);
+			}
+			
+			if (flags[kFLAGS.VAPULA_EARNED_A_SPANK] > 0 && !player.isTaur() && !player.isDrider()) {
+				addButton(5, "Spank", spankVapulaLikeABoss);
+			} else {
+				addDisabledButton(5, "Spank");
+			}
+			addButton(14, "Leave", camp.campSlavesMenu);
 					
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(6, "Farm Work", sendToFarm);
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 1) addButton(6, "Go Camp", backToCamp);
@@ -380,31 +382,27 @@ package classes.Scenes.NPCs
 			outputText("\"<i>You want to talk?  Well it's quite rare to see " + player.mf("studs", "girls") + " looking for conversation with the likes of me, but go ahead.  What do you want to talk about?</i>\"");
 			//Option: Stop Fucking Harem OR Fucking Harem OK (if toggled on off)
 			//Option: Cerulean Threesome On/Off
-			var threesomeT:String = "";
-			var threesomeB:Function = null;
-			var haremT:String = "";
-			var haremB:Function = toggleVapulaHaremFucks;
+			menu();
 			if (flags[kFLAGS.VAPULA_HAREM_FUCK] == 0) {
 				outputText("\n\nVapula will not currently fuck anyone else in your camp without permission.");
-				haremT = "FuckFollowers";
+				addButton(0, "FuckFollowers", toggleVapulaHaremFucks);
 			}
 			else {
 				outputText("\n\nVapula will fuck any willing partners you may have around camp.");
-				haremT = "Don'tFuck";
+				addButton(0, "Don'tFuck", toggleVapulaHaremFucks);
 			}
 			//IF PC has cerulean succubused before
 			if (player.hasStatusEffect(StatusEffects.RepeatSuccubi)) {
 				if (flags[kFLAGS.VAPULA_THREESOMES] == 0) {
 					outputText("\n\nShe won't currently assist the cerulean succubus if you invite her over.");
-					threesomeT = "Assist On";
+					addButton(1, "Assist On", toggleCeruleanVapulaAssist);
 				}
 				else {
 					outputText("\n\nIf you call the cerulean succubus, Vapula will assist her in pleasuring you.");
-					threesomeT = "Assist Off";
+					addButton(1, "Assist Off", toggleCeruleanVapulaAssist);
 				}
-				threesomeB = toggleCeruleanVapulaAssist;
 			}
-			simpleChoices(haremT, haremB, threesomeT, threesomeB, "", null, "", null, "Back", callSlaveVapula);
+			addButton(14, "Back", callSlaveVapula);
 		}
 
 		private function toggleCeruleanVapulaAssist():void
@@ -474,24 +472,24 @@ package classes.Scenes.NPCs
 		{
 			clearOutput();
 			outputText("Who do you invite?");
-			//Option: Amily
-			var amily:Function = null;
-			//Option: Ceraph
-			var ceraph:Function = null;
-			//Option: Sophie
-			var sophie:Function = null;
-			//Option: Jojo
-			var jojo:Function = null;
-			//Option: Izma
-			var izma:Function = null;
 			if (player.hasCock() || (player.hasVagina() && player.hasKeyItem("Demonic Strap-On") >= 0)) {
-				if (jojoScene.campCorruptJojo()) jojo = vapulaJojoThreesomes;
-				if (amilyScene.amilyFollower() && amilyScene.amilyCorrupt() && player.hasCock()) amily = vapulaAndAmilyThreesome;
-				if (ceraphFollowerScene.ceraphIsFollower() && player.hasCock()) ceraph = vapulaCeraphThreesome;
-				if (sophieBimbo.bimboSophie()) sophie = vapulaSophieThreesomeSelect;
-				if (izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0) izma = vapulaAndIzmaThreeSome;
+				if (amilyScene.amilyFollower() && amilyScene.amilyCorrupt() && player.hasCock()) {
+					addButton(0, "Amily", vapulaAndAmilyThreesome);
+				}
+				if (ceraphFollowerScene.ceraphIsFollower() && player.hasCock()) {
+					addButton(1, "Ceraph", vapulaCeraphThreesome);
+				}
+				if (sophieBimbo.bimboSophie()) {
+					addButton(2, "Sophie", vapulaSophieThreesomeSelect);
+				}
+				if (jojoScene.campCorruptJojo()) {
+					addButton(3, "Jojo", vapulaJojoThreesomes);
+				}
+				if (izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0) {
+					addButton(4, "Izma", vapulaAndIzmaThreeSome);
+				}
 			}
-			choices("Amily", amily, "Ceraph", ceraph, "Sophie", sophie, "Jojo", jojo, "Izma", izma, "", null, "", null, "", null, "", null, "Back", callSlaveVapula);
+			addButton(14, "back", callSlaveVapula);
 		}
 
 //Vapula-Ceraph threesome
@@ -505,7 +503,9 @@ package classes.Scenes.NPCs
 			outputText("\n\nHow will you take them?");
 			//Plz both - requires dick
 			//Option: Butt-fuck train. Requires Ceraph to be herm.
-			simpleChoices("Please Both", vapulaCeraphThreesomePleaseBoth, "AnalTrain", vapulaAndCeraphButtfuckTrainYeehaw, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Please Both", vapulaCeraphThreesomePleaseBoth);
+			addButton(1, "AnalTrain", vapulaAndCeraphButtfuckTrainYeehaw);
 		}
 
 //Option: Please both.
@@ -776,14 +776,13 @@ package classes.Scenes.NPCs
 			outputText("\n\n<b>How will you use your fucktoy?</b>");
 			outputText("\n\nYou could fuck Vapula in front of him; it would serve him right for displaying an erection for your succubus lover without your consent.");
 			if (player.hasCock()) outputText("\n\nYou could initiate a butt-fuck train, and ram his asshole while he fucks Vapula's; this way he would get what he clearly wants.");
-			var tease:Function = null;
-			var train:Function = null;
-			if (player.hasVagina() || player.hasKeyItem("Demonic Strap-On") >= 0) tease = NTRSomeJojos;
-			if (!player.hasCock()) {} else {
-				tease = NTRSomeJojos;
-				train = jojoButtFuckTrain;
+			menu();
+			if (player.hasCock() || (player.hasVagina() && player.hasKeyItem("Demonic Strap-On") >= 0)) {
+				addButton(0, "Tease Jojo", NTRSomeJojos);
 			}
-			simpleChoices("Tease Jojo", tease, "ButtfuckTrain", train, "", null, "", null, "", null);
+			if (player.hasCock()) {
+				addButton(1, "ButtfuckTrain", jojoButtFuckTrain);
+			}
 		}
 
 //Netorare
@@ -995,9 +994,13 @@ package classes.Scenes.NPCs
 			clearOutput();
 			outputText("You produce the demonic dildo and hold it by the hilt of its giant purple end, wagging it lazily by your side with a playful grin.  Vapula knows what that means; she is on her knees in an instant, staring at you with wolfish anticipation.");
 			//Feed/Tease
-			var tease:Function = null;
-			if (flags[kFLAGS.VAPULA_HAREM_FUCK] == 0) tease = teaseVapula;
-			simpleChoices("Feed", chicksFeedVapula, "Tease", tease, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Feed", chicksFeedVapula);
+			if (flags[kFLAGS.VAPULA_HAREM_FUCK] == 0) {
+				addButton(1, "Tease", teaseVapula);
+			} else {
+				addDisabledButton(1, "Tease", "Vapula should not be not fucking harem.");
+			}
 		}
 
 //Tease

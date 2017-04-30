@@ -182,8 +182,13 @@ package classes.Scenes.Areas.Mountain
 			outputText("You barely spare a thought at the interior in your hurry to get to the master.  As you burst into the room, the master's eyes light up at the sight of you.  \"<i>Ah!  It is my favorite fan.  Have you brought me a piece of that pink crystal I asked you for?</i>\"\n\n", false);
 
 			//Player chooses to either give Merae's full Lethicite, or a regular piece of Lethicite.  Limited by what they have, of course.  They cannot choose to leave at this point.  Merae's Lethicite -> G, Regular Lethicite -> H.
-			if (player.keyItemv2("Marae's Lethicite") == 0) simpleChoices("Give All", giveALLTHELETHICITES, "Give Part", giveLethicitePiece, "", null, "", null, "", null);
-			else doNext(giveLethicitePiece);
+			menu();
+			if (player.keyItemv2("Marae's Lethicite") == 0) {
+				addButton(0, "Give All", giveALLTHELETHICITES);
+			} else {
+				addDisabledButton(0, "Give All");
+			}
+			addButton(1, "Give Part", giveLethicitePiece);
 		}
 
 //Regular Lethicite

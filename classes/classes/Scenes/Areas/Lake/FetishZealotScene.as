@@ -269,7 +269,7 @@ package classes.Scenes.Areas.Lake
 				addButton(0, "Sex", zealotWinRape);
 				
 				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor")
-					addButton(1, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
+					addButton(1, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, monster);
 			}
 			
 			addButton(14, "Leave", combat.cleanupAfterCombat);

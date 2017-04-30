@@ -51,7 +51,10 @@ package classes.Scenes.Areas.Mountain
 			else if (player.hasCock()) {
 				outputText("Minding your own business, you make your way through the mountain and you find yourself stopped by another mass of the sickly worms. The collective stops, apparently sensing your presence and briefly ebbs in your direction. After a few tense moments, the mass begins moving again... straight towards you at an alarming rate!\n\n");
 				outputText("What do you do?");
-				simpleChoices("Confront", wormsConfront, "Do Nothing", wormsDoNothing, "", null, "", null, "Run", wormsRun);
+				menu();
+				addButton(0, "Confront", wormsConfront);
+				addButton(1, "Do Nothing", wormsDoNothing)
+				addButton(2, "Run", wormsRun);
 			}
 			else {
 				outputText("Making your way, you stumble on another gross mass of worms. The countless struggling creatures bar the path before you. Again, you freeze in place as the horror gropes about on the ground. It appears to have no real interest in your presence and it makes its way in a direction other than yours, much to your relief.");
@@ -63,7 +66,10 @@ package classes.Scenes.Areas.Mountain
 			spriteSelect(76);
 			clearOutput();
 			outputText("While wandering, you come across a crudely illustrated sign.  It depicts an imp in obvious discomfort, covered in white little worms.  It looks as if one of them is even crawling into the imp's penis!\n\nHow do you feel about that?");
-			simpleChoices("Aroused", wormsOn, "Grossed Out", wormsOff, "Who Cares?", wormsPartiallyOn, "", null, "", null);
+			menu();
+			addButton(0, "Aroused", wormsOn);
+			addButton(1, "Grossed Out", wormsOff);
+			addButton(2, "Who Cares?", wormsPartiallyOn);
 		}
 
 		private function wormsOn():void {

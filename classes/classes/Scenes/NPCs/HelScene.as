@@ -352,11 +352,26 @@ private function helFuckMenu(isAmbush:Boolean = false):void {
 	var leave:Function = declineHelSexings;
 	if (isAmbush) leave = pussyOutOfHelSexAmbush;
 	
+	menu();
+	addDisabledButton(0, "Get Licked");
+	addDisabledButton(1, "FuckHerVag");
+	addDisabledButton(2, "FuckHerAss");
+	addDisabledButton(3, "GetTailPegged");
+	addDisabledButton(4, "Tail Wank");
+	addDisabledButton(5, "DoublePen");
+	addDisabledButton(6, "Get Blown");
+	addDisabledButton(7, "CoilFuck");
+	addDisabledButton(8, "TailsInButts");
+	addDisabledButton(9, "Mount Her");
+	addDisabledButton(10, "Hanging69");
+	addDisabledButton(11, "Possess");
+	
 	if (player.lust < 33) {
 		outputText("\n\n<b>You aren't really up for sex right now.</b>", false);
-		simpleChoices("", null, "", null, "", null, "", null, "Leave", leave);
+		addButton(14, "Leave", leave);
 		return;
 	}
+	
 	var getLicked:Function = null;
 	if (player.hasVagina()) {
 		getLicked = getLickedByHel;
@@ -384,12 +399,6 @@ private function helFuckMenu(isAmbush:Boolean = false):void {
 			dp = dpHel;
 		getBlown = helBlowsYou;
 	}
-	var tailFuck:Function = helTailPegging;
-	//ALTERNATE BODY BUTTONS
-	var bodyText:String = "";
-	var bodyButt:Function = null;
-	var bodyText2:String = "";
-	var bodyButt2:Function = null;
 	//Player's Options (Male): [Fuck her Vag] [Fuck her Ass] [Get Blown] [Tail Wank] [DP] [No Thanks]
 	//Player's Options (Female): [Get Licked] [Tail Fuck] [No Thanks]
 	//Player's Options (Herm): [Fuck her Vag] [Fuck her Ass] [Get Blown] [Get Licked] [Tail Fuck] [DP] [Tail Wank] [No Thanks]
@@ -400,49 +409,31 @@ private function helFuckMenu(isAmbush:Boolean = false):void {
 	//[Possession]
 	if (player.isNaga()) {
 		if (player.hasCock() && player.cockThatFits(85) >= 0) {
-			bodyButt = nagaCoilsUpHel;
-			bodyText = "CoilFuck";
+			addButton(7, "CoilFuck", nagaCoilsUpHel);
 		}
-		else {
-			bodyText2 = "TailsInButts";
-			bodyButt2 = nagaCoilsUpAnalNaga;
-		}
+		addButton(8, "TailsInButts", nagaCoilsUpAnalNaga);
 	}
-	else if (player.isTaur()) {
+	if (player.isTaur()) {
 		if (player.hasCock() && player.cockThatFits(85) >= 0) {
-			bodyText = "Mount Her";
-			bodyButt = mountHel;
+			addButton(9, "Mount Her", mountHel);
 		}
 		if (player.hasVagina()) {
-			bodyText2 = "Hanging69";
-			bodyButt2 = helVaginaTaur69;
+			addButton(10, "Hanging69", helVaginaTaur69);
 		}
 	}
 	//Possess crams in free spot or overlaps another.
 	if (player.findPerk(PerkLib.Incorporeality) >= 0) {
 		//Taurs or nagas with both scenes, replace 1!
-		if (bodyButt != null && bodyButt2 != null) {
-			if (rand(2) == 0) {
-				bodyText = "Possess";
-				bodyButt = helPossessionShitPoopCock;
-			}
-			else {
-				bodyText2 = "Possess";
-				bodyButt2 = helPossessionShitPoopCock;
-			}
-		}
-		//Second button slot is free
-		else if (bodyButt2 == null) {
-			bodyText2 = "Possess";
-			bodyButt2 = helPossessionShitPoopCock;
-		}
-		//First button slot is free
-		else {
-			bodyText = "Possess";
-			bodyButt = helPossessionShitPoopCock;
-		}
+		addButton(11, "Possess", helPossessionShitPoopCock);
 	}
-	choices("Get Licked",getLicked,"FuckHerVag",fuckVag,"FuckHerAss",fuckAss,"GetTailPegged",tailFuck,"Tail Wank",tailWank,"DoublePen",dp,"Get Blown",getBlown,bodyText,bodyButt,bodyText2,bodyButt2,"Leave",leave);
+	addButton(0, "Get Licked", getLicked);
+	addButton(1, "FuckHerVag", fuckVag);
+	addButton(2, "FuckHerAss", fuckAss);
+	addButton(3, "GetTailPegged", helTailPegging);
+	addButton(4, "Tail Wank", tailWank);
+	addButton(5, "DoublePen", dp);
+	addButton(6, "Get Blown", getBlown);
+	addButton(14, "Leave", leave);
 }
 
 //[b]Player Win – Victory Un-Fuck – No Thanks (Any Gender)
@@ -1022,10 +1013,14 @@ private function helMinotaurThreesome():void {
 
 	///Player's Options:
 	//Male/Herm – [Fuck her Ass] [Mino Lick] [Leave]
-	if (player.hasCock() && player.cockThatFits(85) >= 0)
-		simpleChoices("FuckHerAss", fuckHerAss, "Mino Lick", helMinoThreeSomeLickItsDick, "", null, "", null, "Nope", leaveMinotaurHelThreesome);
-	//Female/Genderless – [Mino Lick] [Leave]
-	else simpleChoices("", null, "Mino Lick", helMinoThreeSomeLickItsDick, "", null, "", null, "Nope", leaveMinotaurHelThreesome);
+	menu();
+	if (player.hasCock() && player.cockThatFits(85) >= 0) {
+		addButton(0, "FuckHerAss", fuckHerAss);
+	} else {
+		addDisabledButton(0, "FuckHerAss");
+	}
+	addButton(1, "Mino Lick", helMinoThreeSomeLickItsDick);
+	addButton(4, "Nope", leaveMinotaurHelThreesome);
 }
 //[Leave]
 private function leaveMinotaurHelThreesome():void {
@@ -1178,21 +1173,30 @@ private function askHelAboutAttackingYou():void {
 	outputText("You suppose you could ask her to stop attacking you anyway, though.  One less threat out here couldn't hurt, and maybe – just maybe – you could skip the formalities when you meet and go straight to the really fun part.\n\n", false);
 	flags[kFLAGS.HEL_TALKED_ABOUT_ATTACKING_YOU] = 1;
 	//[Stop] [Say Nothing]
-	simpleChoices("Stop",telHelSTOPATTACKINGMEYOUBITCH,"Say Nothing",helChatMenu,"",null,"",null,"",null);
+	menu();
+	addButton(0, "Stop", telHelSTOPATTACKINGMEYOUBITCH);
+	addButton(1, "Say Nothing", helChatMenu);
 }
 
 //[Say Nothing]
 private function helChatMenu():void {
 	spriteSelect(68);
 	outputText(images.showImage("helia-interview"));
-	if (flags[kFLAGS.HEL_TALKED_ABOUT_HER] == 0)
-		simpleChoices("About Her", askHelAboutHer, "", null, "", null, "", null, "Leave", bugOutAfterHelMinoThreesome);
-	else {
-		var zerk:Function = null;
-		var attackin:Function = null;
-		if (flags[kFLAGS.HEL_TALKED_ABOUT_ATTACKING_YOU] == 0) attackin = askHelAboutAttackingYou;
-		if (flags[kFLAGS.HEL_TALKED_ABOUT_BERSERKING] == 0) zerk = berserkMode;
-		choices("", null, "Berserking?", zerk, "Y Attack Me", attackin, "Seconds", askMommaHelForSecondsAfterDinner, "MinosRBad", telHelToGetOffTheMInoCock, "", null, "", null, "", null, "", null, "Leave", leaveHelAfterMinoThreeSomeChat);
+	if (flags[kFLAGS.HEL_TALKED_ABOUT_HER] == 0) {
+		menu();
+		addButton(0, "About Her", askHelAboutHer);
+		addButton(4, "Leave", bugOutAfterHelMinoThreesome);
+	} else {
+		menu();
+		if (flags[kFLAGS.HEL_TALKED_ABOUT_BERSERKING] == 0) {
+			addButton(1, "Berserking?", berserkMode);
+		}
+		if (flags[kFLAGS.HEL_TALKED_ABOUT_ATTACKING_YOU] == 0) {
+			addButton(2, "Y Attack Me", askHelAboutAttackingYou);
+		}
+		addButton(3, "Seconds", askMommaHelForSecondsAfterDinner);
+		addButton(4, "MinosRBad", telHelToGetOffTheMInoCock);
+		addButton(14, "Leave", leaveHelAfterMinoThreeSomeChat);
 	}
 }
 
@@ -1270,7 +1274,10 @@ public function salamanderXIsabellaPlainsIntro():void {
 
 	outputText("Before Isabella can say any more, the salamander leaps into the air and slams her sword down upon the cow-girl's narrowly-interposed shield.  The force of the blow staggers both of them, giving you a moment to intervene before there's bloodshed!", false);
 	//(Display Options: [Diplomacy] [Watch] [Leave])
-	simpleChoices("Diplomacy", salamanderXIsabellaDiplomacy, "Watch", watchIsabellaAndHelFight, "", null, "", null, "Leave", skipTownOnIsabellaAndHelsFight);
+	menu();
+	addButton(0, "Diplomacy", salamanderXIsabellaDiplomacy);
+	addButton(1, "Watch", watchIsabellaAndHelFight);
+	addButton(2, "Leave", skipTownOnIsabellaAndHelsFight);
 }
 
 //Diplomacy (edited)
@@ -1444,7 +1451,9 @@ public function isabellaXHelThreeSomePlainsStart():void {
 
 	outputText("You certainly do feel thirsty, and Isabella's invitation is certainly... enticing, and is made all the more exciting by the busty salamander you'll be sharing a meal with.", false);
 	//(Display Options: [Drink] [Leave])
-	simpleChoices("Drink", nomOnIzzyTitWithSallyMancer, "", null, "", null, "", null, "Leave", leaveIsabellaSallyBehind);
+	menu();
+	addButton(0, "Drink", nomOnIzzyTitWithSallyMancer);
+	addButton(1, "Leave", leaveIsabellaSallyBehind);
 }
 //Isabella x Hel Threesome Scene – Beginning at Camp (edited)
 //(Has a 10% chance to play when the player chooses [Sleep] while Isabella is at camp)
@@ -1461,7 +1470,9 @@ public function isabellaXHelThreeSomeCampStart():void {
 
 	outputText("You certainly do feel thirsty, and Isabella's invitation is certainly... enticing, and is made all the more exciting by the busty salamander you'll be sharing a meal with.", false);
 	//(Display Options: [Drink] [Leave])
-	simpleChoices("Drink", nomOnIzzyTitWithSallyMancer, "", null, "", null, "", null, "Leave", playerMenu);
+	menu();
+	addButton(0, "Drink", nomOnIzzyTitWithSallyMancer);
+	addButton(14, "Leave", playerMenu);
 }
 
 //[Leave]
@@ -1495,30 +1506,32 @@ private function nomOnIzzyTitWithSallyMancer():void {
 	dynStats("lus", 40);
 	player.changeFatigue(-40);
 	
-	var dick:Function = null;
-	var dick2:Number = 0;
-	var dick4:Number = 0;
-	var vag:Function = null;
+	
+	menu();
+	addDisabledButton(0, "Dick")
+	addDisabledButton(1, "Vagina");
 	//(If PC is Herm::)
 	if (player.hasCock() && player.hasVagina()) {
 		outputText("You'll need to decide which of your sex organs to use on the hot redheads.\n\n", false);
 		if (player.cockThatFits(85) >= 0) {
-			dick = stuffIzzyAndSalamanderWithDicks;
+			addButton(0, "Dick", stuffIzzyAndSalamanderWithDicks)
 		}
 		else outputText("<b>You're too big to fuck them with your man-bits...</b>", false);
-		vag = izzySallyThreeSomeVagoozlaz;
+		addButton(1, "Vagina", izzySallyThreeSomeVagoozlaz);
 	}
-	else if (player.hasVagina()) vag = izzySallyThreeSomeVagoozlaz;
+	else if (player.hasVagina()) {
+		addButton(1, "Vagina", izzySallyThreeSomeVagoozlaz);
+	}
 	else if (player.hasCock()) {
 		if (player.cockThatFits(85) >= 0) {
-			dick = stuffIzzyAndSalamanderWithDicks;
+			addButton(0, "Dick", stuffIzzyAndSalamanderWithDicks)
 		}
 		else outputText("<b>You're too big to fuck them with your man-bits...</b>\n\n", false);
 	}
 	//(If PC is genderless: Unfortunately, you don't have much to contribute...)
 	else outputText("Unfortunately, you don't have much to contribute...", false);
 	//(Display Appropriate Options: [1 Dick] [2 Dicks] [4 Dicks] [Vagina] [Leave])
-	simpleChoices("Dick", dick, "", null, "", null, "Vagina", vag, "Leave", noThreesomeSexWithSallyAndIssyLastMinute);
+	addButton(2, "Leave", noThreesomeSexWithSallyAndIssyLastMinute);
 	//(Dick scenes have a common open, then branch out before a common end between all genders)
 }
 
@@ -1722,7 +1735,9 @@ public function heliaPlusFoxyFluffs():void {
 	
 		outputText("\"<i>Mmm, wanna play with Sister and I?</i>\" Mai purrs, nuzzling your neck after a long swig of beer.  Hel and Miko both give you hopeful, expectant looks.  Do you?\n\n", false);
 		//(Display Options: [Foursome] [Leave])
-		simpleChoices("Foursome", heliasFoxyFourSomeFluffs, "", null, "", null, "", null, "Leave", runAwayFromFoxGirls);
+		menu();
+		addButton(0, "Foursome", heliasFoxyFourSomeFluffs);
+		addButton(14, "Leave", runAwayFromFoxGirls);
 	}
 	//(Leave because cocks are a new reveal; should give those grossed out by futa an escape; doesn't appear afterwards to save horny gamers a click)
 	//Fox Girls -- Repeat Intro
@@ -1751,14 +1766,19 @@ private function heliasFoxyFourSomeFluffs():void {
 
 	outputText("The four of you slide into your room for the evening, a small affair with a large, plush bed.  The fox-twins waste no time in undressing, revealing their large D-cups, 8-inch red cocks, and glistening loose cunts.  Hel tosses her scale bikini aside, letting her hefty E-cups bounce free, and puts an arm around the twins' lithe, tan shoulders so all three nude bodies are on display together for you.\n\n", false);
 	
-	//[If Herm]
-	if (player.gender == 3) {
-		outputText("\"<i>So what parts do you want to use?</i>\" she asks, looking to your mixed endowments.", false);
-		//(Display Options: [As Male] [As Female])
-		simpleChoices("As Male", foxyFluffsFoursomeAsMale, "As Female", foxyFluffGirlsFuckSex, "", null, "", null, "", null);
+	outputText("\"<i>So what parts do you want to use?</i>\" she asks, looking to your mixed endowments.", false);
+	//(Display Options: [As Male] [As Female])
+	menu();
+	if (player.hasCock()) {
+		addButton(0, "As Male", foxyFluffsFoursomeAsMale);
+	} else {
+		addDisabledButton(0, "As Male");
 	}
-	else if (player.gender == 2) doNext(foxyFluffGirlsFuckSex);
-	else doNext(foxyFluffsFoursomeAsMale);
+	if (player.hasVagina()) {
+		addButton(1, "As Female", foxyFluffGirlsFuckSex);
+	}else {
+		addDisabledButton(1, "As Female");
+	}
 }
 
 //Foursome Scene -- As Male

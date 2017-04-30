@@ -531,7 +531,8 @@ public function heliaFollowerMenu(display:Boolean = true):void {
 				if (display) outputText("\n\n<b>You are in Hardcore Mode. Are you sure you want to embark on the quest? You cannot return until you defeat the opponents and if you get defeated, your save file is permanently deleted.</b>");
 			}
 			//(Display Options: [Dungeon] [Not Yet])
-			simpleChoices("Dungeon", kGAMECLASS.dungeons.heltower.goToHeliaDungeon, "", null, "", null, "", null, "Not Yet", kGAMECLASS.dungeons.heltower.notYet);
+			addButton(0, "Dungeon", kGAMECLASS.dungeons.heltower.goToHeliaDungeon);
+			addButton(1, "Not Yet", kGAMECLASS.dungeons.heltower.notYet);
 		}
 	}
 }
@@ -2222,13 +2223,18 @@ private function leaveWithGirls():void {
 	outputText("\n\nShe stands and, turning toward the crowd, announces: \"<i>Thank you all so very, very much for coming out.  I can't even begin to tell you how much it means to me to see you all... I honestly didn't know anybody would come.  I hardly remembered myself. I love you all, and thanks again.</i>\"");
 	
 	outputText("\n\nThere's a general murmur of approval as Hel picks up another beer, kicks it back, and then takes your hand.  The fox-girls giggle drunkenly as Hel practically hefts them off their feet and carries them upstairs to the great amusement of the party-goers.  A moment later and you're stumbling into a rented room above the Bitch, struggling out of your [armor] as a pair of tight panties suddenly fly your way, flopping onto your face as Hel practically hangs her chain bikini on your head.  Your give a primal growl at that and quickly push the girls down onto the bed, deciding what to do with them.  By the lusty looks and sensual caresses they're giving each other, they're up for just about anything.");
-	if (player.gender == 3) {
-		outputText("\n\n\"<i>So what parts do you want to use?</i>\" she asks, looking to your mixed endowments.", false);
-		//(Display Options: [As Male] [As Female])
-		simpleChoices("As Male", helScene.foxyFluffsFoursomeAsMale, "As Female", helScene.foxyFluffGirlsFuckSex, "", null, "", null, "", null);
+	//(Display Options: [As Male] [As Female])
+	menu();
+	if (player.hasCock()) {
+		addButton(0, "As Male", helScene.foxyFluffsFoursomeAsMale);
+	} else {
+		addDisabledButton(0, "As Male");
 	}
-	else if (player.gender == 2) doNext(helScene.foxyFluffGirlsFuckSex);
-	else doNext(helScene.foxyFluffsFoursomeAsMale);
+	if (player.hasVagina()) {
+		addButton(1, "As Female", helScene.foxyFluffGirlsFuckSex);
+	} else {
+		addDisabledButton(1, "As Female");
+	}
 }
 
 private function helAndSluttyHarpy():void

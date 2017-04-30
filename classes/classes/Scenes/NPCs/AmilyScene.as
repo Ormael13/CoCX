@@ -265,9 +265,15 @@ package classes.Scenes.NPCs
 
 						outputText("Amily scuffs the ground with one of her finger-like toe claws, looking down at it as if it was the most interesting thing in the world - or as if she doesn't dare to look you in the eyes. \"<i>I... You know what I've been asking of you; from you, and you keep turning me down... but you kept talking to me, asking me about myself. You wanted to get to know me, but... why don't you want to know ALL of me? I... I want to give myself to you. You're the nicest, kindest man I've met - even before the demons destroyed my village. I want to be with you... but you don't seem to want to be with me.</i>\" She looks up to you at last, her eyes wet with tears. \"<i>Is there something wrong with me? Can't you like me in that way?</i>\" she pleads.\n\n", false);
 						//Accept her / Turn her down gently / Turn her down bluntly
-						var fur:Function = null;
-						if (flags[kFLAGS.AMILY_NOT_FURRY] == 0) fur = amilyNoFur;
-						simpleChoices("Accept Her", desperateAmilyPleaAcceptHer, "RejectFurry", fur, "RejectGently", desperateAmilyPleaTurnDown, "BluntReject", desperateAmilyPleaTurnDownBlunt, "", null);
+						menu();
+						addButton(0, "Accept Her", desperateAmilyPleaAcceptHer);
+						if (flags[kFLAGS.AMILY_NOT_FURRY] == 0) {
+							addButton(1, "RejectFurry", amilyNoFur);
+						} else {
+							addDisabledButton(1, "RejectFurry");
+						}
+						addButton(2, "RejectGently", desperateAmilyPleaTurnDown);
+						addButton(3, "BluntReject", desperateAmilyPleaTurnDownBlunt);
 						return;
 					}
 					//[First Meeting]
@@ -305,7 +311,11 @@ package classes.Scenes.NPCs
 
 						outputText("What do you do?", false);
 						//Accept Eagerly / Accept Hesitantly / Refuse
-						simpleChoices("AcceptEagerly", acceptAmilysOfferEagerly, "Hesitantly", acceptAmilyOfferHesitantly, "NoFurries", amilyNoFur, "Refuse", refuseAmilysOffer, "", null);
+						menu();
+						addButton(0, "AcceptEagerly", acceptAmilysOfferEagerly);
+						addButton(1, "Hesitantly", acceptAmilyOfferHesitantly);
+						addButton(2, "NoFurries", amilyNoFur);
+						addButton(3, "Refuse", refuseAmilysOffer);
 						//Set flag for 'last gender met as'
 						flags[kFLAGS.AMILY_PC_GENDER] = player.gender;
 						return;
@@ -597,15 +607,25 @@ package classes.Scenes.NPCs
 					}
 			}
 			//Sex / Talk / Talk then sex
-			var efficiency:Function = null;
+			var sex:Function = determineAmilySexEvent();
+			menu();
+			if (sex != null) {
+				addButton(0, "Sex", sex);
+				addButton(2, "Both", (sex == null ? null : talkThenSexWithAmily));
+			} else {
+				addDisabledButton(0, "Sex");
+				addDisabledButton(2, "Both");
+			}
+			addButton(1, "Talk", talkToAmily);
 			//Amily is not a herm but is ok with herm-daddying!
 			if (player.hasItem(consumables.P_DRAFT) && flags[kFLAGS.AMILY_WANG_LENGTH] == 0 && flags[kFLAGS.AMILY_HERM_QUEST] == 2 && flags[kFLAGS.AMILY_AFFECTION] >= 40 && player.gender == 3) {
-				efficiency = makeAmilyAHerm;
 				outputText("You could probably bring up the efficiency of having two hermaphrodite mothers, particularly since you have this purified incubi draft handy.\n\n", false);
+				addButton(3, "Efficiency", makeAmilyAHerm);
+			} else {
+				addDisabledButton(3, "Efficiency", "You could probably bring up the efficiency of having two hermaphrodite mothers, should you find a bottle of purified incubi draft.");
 			}
-
-			var sex:Function = determineAmilySexEvent();
-			simpleChoices("Sex", sex, "Talk", talkToAmily, "Both", (sex == null ? null : talkThenSexWithAmily), "Efficiency", efficiency, "Leave", camp.returnToCampUseOneHour);
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
+			
 			//Set flag for 'last gender met as'
 			flags[kFLAGS.AMILY_PC_GENDER] = player.gender;
 
@@ -797,7 +817,12 @@ package classes.Scenes.NPCs
 			amilySprite();
 			outputText("\"<i>So, have you changed your mind? Have you come to help me out?</i>\" Amily asks curiously.\n\n", false);
 			//Accept / Politely refuse / Here to talk / Get lost
-			simpleChoices("Accept",secondTimeAmilyOfferedAccepted,"RefusePolite",secondTimeAmilyRefuseAgain,"Just Talk",repeatAmilyTalk,"Get Lost",tellAmilyToGetLost,"Leave",camp.returnToCampUseOneHour);
+			menu();
+			addButton(0, "Accept", secondTimeAmilyOfferedAccepted);
+			addButton(1, "RefusePolite", secondTimeAmilyRefuseAgain);
+			addButton(2, "Just Talk", repeatAmilyTalk);
+			addButton(3, "Get Lost", tellAmilyToGetLost);
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 
 		//[Accept]
@@ -1097,8 +1122,14 @@ package classes.Scenes.NPCs
 						else outputText("\"<i>You're coming along nicely, lover mine.</i>\" She smiles, proud as can be at your display of skill. \"<i>So, what brings you running to me?</i>\" she teases.\n\n", false);
 			}
 			//Sex / Talk / Talk then sex
-			if (player.lust >= 33) simpleChoices("Sex", sexWithAmily, "Talk", talkToAmily, "Both", talkThenSexWithAmily, "", null, "", null);
-			else simpleChoices("", null, "Talk", talkToAmily, "", null, "", null, "", null);
+			menu();
+			addDisabledButton(0, "Sex");
+			addDisabledButton(2, "Both");
+			addButton(2, "Talk");
+			if (player.lust >= 33) {
+				addButton(0, "Sex", sexWithAmily);
+				addButton(2, "Both", talkThenSexWithAmily);
+			}
 		}
 
 		//[Scare her]
@@ -1157,8 +1188,14 @@ package classes.Scenes.NPCs
 			}
 			//Sex / Talk / Talk then sex
 			//(Same as [Normal Remeeting))
-			if (player.lust >= 33) simpleChoices("Sex", sexWithAmily, "Talk", talkToAmily, "Both", talkThenSexWithAmily, "", null, "", null);
-			else simpleChoices("", null, "Talk", talkToAmily, "", null, "", null, "", null);
+			menu();
+			addDisabledButton(0, "Sex");
+			addDisabledButton(2, "Both");
+			addButton(2, "Talk");
+			if (player.lust >= 33) {
+				addButton(0, "Sex", sexWithAmily);
+				addButton(2, "Both", talkThenSexWithAmily);
+			}
 			//Affection -1;
 			flags[kFLAGS.AMILY_AFFECTION] -= 1;
 		}
@@ -1197,7 +1234,10 @@ package classes.Scenes.NPCs
 			outputText("Amily scuffs the ground with one of her finger-like toe claws, looking down at it as if it was the most interesting thing in the world - or as if she doesn't dare to look you in the eyes. \"<i>I... You know what I've been asking of you; from you, and you keep turning me down... but you kept talking to me, asking me about myself. You wanted to get to know me, but... why don't you want to know ALL of me? I... I want to give myself to you. You're the nicest, kindest man I've met - even before the demons destroyed my village. I want to be with you... but you don't seem to want to be with me.</i>\" She looks up to you at last, her eyes wet with tears. \"<i>Is there something wrong with me? Can't you like me in that way?</i>\" she pleads.\n\n", false);
 
 			//Accept her / Turn her down gently / Turn her down bluntly
-			simpleChoices("Accept Her", desperateAmilyPleaAcceptHer, "TurnDownGently", desperateAmilyPleaTurnDown, "TurnDownBlunt", desperateAmilyPleaTurnDownBlunt, "", null, "", null);
+			menu();
+			addButton(0, "Accept Her", desperateAmilyPleaAcceptHer);
+			addButton(1, "TurnDownGently", desperateAmilyPleaTurnDown);
+			addButton(2, "TurnDownBlunt", desperateAmilyPleaTurnDownBlunt);
 		}
 
 		//[Accept her]
@@ -1262,7 +1302,10 @@ package classes.Scenes.NPCs
 			//Increase baby count here rather than in 3 places.
 			flags[kFLAGS.AMILY_BIRTH_TOTAL]++;
 			//Leave / Watch / Help
-			simpleChoices("Leave", pregnancyIsScaryGoddamnMousePregnancyImNotWatchingThisShit, "Watch", heyIGotTicketsToMicePoppingOut, "Help", helpThatFukkinUngratefulBitchGiveBirth, "", null, "", null);
+			menu();
+			addButton(0, "Leave", pregnancyIsScaryGoddamnMousePregnancyImNotWatchingThisShit);
+			addButton(1, "Watch", heyIGotTicketsToMicePoppingOut);
+			addButton(2, "Help", helpThatFukkinUngratefulBitchGiveBirth);
 		}
 
 		//[Leave]
@@ -1921,7 +1964,10 @@ package classes.Scenes.NPCs
 			//[Take Charge]
 			//[Wait for Her]
 			//[Kiss Her]
-			simpleChoices("Take Charge", FirstTimeAmilyTakeCharge, "Wait 4 Her", beSomeKindofNervousDoucheAndWaitForAmily, "Kiss Her", kissAmilyInDaMoufFirstTimeIsSomehowBetterThatWay, "", null, "", null);
+			menu();
+			addButton(0, "Take Charge", FirstTimeAmilyTakeCharge);
+			addButton(1, "Wait 4 Her", beSomeKindofNervousDoucheAndWaitForAmily);
+			addButton(2, "Kiss Her", kissAmilyInDaMoufFirstTimeIsSomehowBetterThatWay);
 		}
 
 		//[=Take Charge=]
@@ -2049,7 +2095,9 @@ package classes.Scenes.NPCs
 				outputText("Amily's efforts at leading you through the ruined village are brisk and efficient. You don't really think she's looking forward to doing this all that much. No, that might be overstating things. It's more like she's under the impression that, details aside, this encounter between the two of you will be pure business.\n\n", false);
 
 				outputText("It's hard for you to say if you were led by a different route this time, but soon you are in what Amily has to offer for a private bedchamber, and she begins to reach for her clothes, obviously expecting you to do the same thing.\n\n", false);
-				simpleChoices("Business", amilySexBusiness, "Playtime 1st", amilySexPlaytimeFirst, "", null, "", null, "", null);
+				menu();
+				addButton(0, "Business", amilySexBusiness);
+				addButton(1, "Playtime 1st", amilySexPlaytimeFirst);
 			}
 			//Moderate Affection Sex:
 			else if (flags[kFLAGS.AMILY_AFFECTION] < 40) {
@@ -2061,7 +2109,9 @@ package classes.Scenes.NPCs
 
 				outputText("Once you are inside, Amily gently tries to push you onto the bedding where you will be mating. Once you are seated, she smiles at you with a teasing expression and begins to slowly strip herself off, clearly trying to make the act seem as erotic as possible.", false);
 				if (pregEvent >= 6) outputText("  However, her confidence visibly slips when she has to fully bare the bulging belly that marks her pregnant state, but she musters the confidence and starts to show it off for you as well.", false);
-				simpleChoices("Step In", amilyStepTheFuckIn, "Watch Show", amilyEnjoyShow, "", null, "", null, "", null);
+				menu();
+				addButton(0, "Step In", amilyStepTheFuckIn);
+				addButton(1, "Watch Show", amilyEnjoyShow);
 			}
 			else {
 				if (pregnancy.event >= 6) fuckAmilyPreg();
@@ -2107,7 +2157,9 @@ package classes.Scenes.NPCs
 				return;
 			}
 			outputText("Now that both of you are naked, Amily takes a step back from you and begins to stroke herself - though her gestures are a little hesitant, and she clearly has never done this before, she is sincerely trying to be arousing. A finger strokes each dainty little nipple, circling around in opposite directions in order to make them perk as hard as they can. Her right hand slips away, leaving her left hand to alternate between each nipple as her nimble fingers begin to tease her most private of places. She may not be extraordinarily skilled at it, but she's definitely doing a good job of turning you on - particularly with the cute little gasp she makes when she pinches her clitoris a bit too hard.\n\n", false);
-			simpleChoices("Sit & Watch", sitAndWatchAmilySex, "Caress Her", caressAmilyHaveSex, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Sit & Watch", sitAndWatchAmilySex);
+			addButton(1, "Caress Her", caressAmilyHaveSex);
 		}
 
 		//[Sit & Watch]
@@ -2125,7 +2177,9 @@ package classes.Scenes.NPCs
 			clearOutput();
 			amilySprite();
 			outputText("Watching Amily masturbate and tease herself in front of you is definitely erotic... but you want something more to this session than that. Licking your lips with a combination of arousal and nervousness, you tentatively reach out one hand and brush a feather-light touch against her fingers.  Her eyes, which she had previously been keeping closed, suddenly spring open, and you ready yourself to withdraw and apologize if she protests. But, for whatever reason, she does not protest and, emboldened, you continue to touch and caress her. You keep your touches gentle, light and restricted to non-intimate regions, but she seems to be enjoying this; she draws a little closer, and reaches out to brush your cheek, absentmindedly using the very hand she had been stroking her netherlips with before, and so the scent of her intimate regions drifts to your nostrils from where her fingers lay. Her eyes have rolled almost completely shut, the gaze she is giving you is a very languid one, but something about the set of her lips, only just starting to open, entices you to kiss them.\n\n", false);
-			simpleChoices("Refuse Kiss", AmilyGetKissed, "Kiss Her", AmilyTakeTheKiss, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Refuse Kiss", AmilyGetKissed);
+			addButton(1, "Kiss Her", AmilyTakeTheKiss);
 		}
 		//[Refuse the Kiss]
 		private function AmilyGetKissed():void {
@@ -2205,7 +2259,9 @@ package classes.Scenes.NPCs
 			outputText("By the time Amily is completely naked, she is clearly excited about what is coming up; you even think she's wet already. She stares at you with a mischievous, turned-on smile, waiting to see what you will do now that it is your turn to strip.\n\n", false);
 
 			outputText("Do you do a striptease of your own or just strip naked and get to business?", false);
-			simpleChoices("Striptease", StripForAmilyYouSlut, "Business", getDownWithSexTiem, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Striptease", StripForAmilyYouSlut);
+			addButton(1, "Business", getDownWithSexTiem);
 		}
 
 		//[Fair Is Fair]
@@ -2230,7 +2286,9 @@ package classes.Scenes.NPCs
 			dynStats("lus", 5);
 			amilySprite();
 			outputText("Once you are both naked, you embrace and begin with a deep kiss. Slowly you both sink down and start exploring each other's bodies. You feel Amily's hands caressing you while you lightly kiss her breasts, one of your hands slowly drifting down to her cute ass and lightly squeezing it. Looking into her eyes, you see a sparkle in them before she surprises you and somehow manages to turn you onto your back. Now she's sitting on your belly, with your already hard cock being fondled by her rather flexible tail. Grinning at you, she seems to plan on teasing you as long as possible before allowing you to enter her.\n\n", false);
-			simpleChoices("Play Along", playAlongWithAmilyWhataDumbBitch, "Please Her", workToPleaseTheCunt, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Play Along", playAlongWithAmilyWhataDumbBitch);
+			addButton(1, "Please Her", workToPleaseTheCunt);
 		}
 		//[Play Along]
 		private function playAlongWithAmilyWhataDumbBitch():void {
@@ -2259,7 +2317,9 @@ package classes.Scenes.NPCs
 			amilyPreggoChance();
 			flags[kFLAGS.AMILY_AFFECTION] += 3 + rand(4);
 			flags[kFLAGS.AMILY_FUCK_COUNTER]++;
-			simpleChoices("Say Goodbye", sayGoodByeToAmilyPostSecks, "Stay A While", stayAfterAmilyMiddleGradeSecks, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Say Goodbye", sayGoodByeToAmilyPostSecks);
+			addButton(1, "Stay A While", stayAfterAmilyMiddleGradeSecks);
 		}
 
 		//[Say Goodbye]
@@ -4783,7 +4843,9 @@ package classes.Scenes.NPCs
 			outputText("You interject, telling her to slow down and breathe, you're not going anywhere. Amily pants, then finally squeaks out, \"<i>I'm in love with you!</i>\" before her face turns bright red. Stunned, you ask her to repeat that. \"<i>I said... I'm in love with you. I... ah, forget it, who was I kidding?</i>\" She trails off, sadly, and you watch as she begins to turn around and shuffle off.", false);
 			//Set flag that she's confessed her lesbo-live!
 			flags[kFLAGS.AMILY_CONFESSED_LESBIAN] = 1;
-			simpleChoices("Stop Her", amilyLesboStopHer, "Let Her Go", amilyLesboLetHerGo, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Stop Her", amilyLesboStopHer);
+			addButton(1, "Let Her Go", amilyLesboLetHerGo);
 		}
 		//[=Stop Her=]
 		private function amilyLesboStopHer():void {
@@ -4828,7 +4890,9 @@ package classes.Scenes.NPCs
 			outputText("She looks down at the ground, unable to meet your eyes, then pulls her tattered pants down to reveal something you never would have expected. A penis - a four inch long, surprisingly human-like penis, already swelling to erection. Blushing, she starts to speak, still not looking at you. \"<i>I... I thought that, if it's my idea and all, I should be the one to grow this thing... Please, I love you, I want to have children with you, can't we -</i>\"\n\n", false);
 			flags[kFLAGS.AMILY_WANG_LENGTH] = 4;
 			flags[kFLAGS.AMILY_WANG_GIRTH] = 1;
-			simpleChoices("Accept", amilyOnGirlSurpriseBonerAcceptance, "Reject", amilyOnGirlSurpriseBonerREJECT, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Accept", amilyOnGirlSurpriseBonerAcceptance);
+			addButton(1, "Reject", amilyOnGirlSurpriseBonerREJECT);
 		}
 		//[=Accept=]
 		private function amilyOnGirlSurpriseBonerAcceptance():void {
@@ -4994,7 +5058,10 @@ package classes.Scenes.NPCs
 			outputText(", but... I love you. The children, they're going to leave here now, and set up a new village somewhere else. But I... I want to stay here with you. Forever. Please, say yes.</i>\"\n\n", false);
 			outputText("Do you accept her offer?", false);
 			flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]++;
-			simpleChoices("Accept", acceptAmilyAsYourFemaleWaifu, "StayFriends", declineButBeFriends, "ShootDown", notInterestedInDumbshitMouseBitches, "", null, "", null);
+			menu();
+			addButton(0, "Accept", acceptAmilyAsYourFemaleWaifu);
+			addButton(1, "StayFriends", declineButBeFriends);
+			addButton(2, "ShootDown", notInterestedInDumbshitMouseBitches);
 		}
 
 		//[=Accept=]
@@ -5209,9 +5276,15 @@ package classes.Scenes.NPCs
 						//mark as agreed to preg-quest!
 						flags[kFLAGS.AMILY_OFFER_ACCEPTED] = 1;
 						//(Use the Remeeting scene options.)
-						if (player.lust >= 33) sex = sexWithAmily;
-						if (sex != null) simpleChoices("Sex", sex, "Talk", talkToAmily, "Both", talkThenSexWithAmily, "", null, "", null);
-						else simpleChoices("", null, "Talk", talkToAmily, "", null, "", null, "", null);
+						menu();
+						addDisabledButton(0, "Sex");
+						addDisabledButton(2, "Both");
+						
+						addButton(1, "Talk", talkToAmily);
+						if (player.lust >= 33) {
+							addButton(0, "Sex", sexWithAmily);
+							addButton(2, "Both", talkThenSexWithAmily);
+						}
 						return;
 					}
 					//High Affection:
@@ -5222,9 +5295,15 @@ package classes.Scenes.NPCs
 						//mark as agreed to preg-quest!
 						flags[kFLAGS.AMILY_OFFER_ACCEPTED] = 1;
 						//(Use the Remeeting scene options.)
-						if (player.lust >= 33) sex = sexWithAmily;
-						if (sex != null) simpleChoices("Sex", sex, "Talk", talkToAmily, "Both", talkThenSexWithAmily, "", null, "", null);
-						else simpleChoices("", null, "Talk", talkToAmily, "", null, "", null, "", null);
+						menu();
+						addDisabledButton(0, "Sex");
+						addDisabledButton(2, "Both");
+						
+						addButton(1, "Talk", talkToAmily);
+						if (player.lust >= 33) {
+							addButton(0, "Sex", sexWithAmily);
+							addButton(2, "Both", talkThenSexWithAmily);
+						}
 						return;
 					}
 				}
@@ -5349,9 +5428,12 @@ package classes.Scenes.NPCs
 			//[Yes]
 			//[No]
 			//doYesNo(beAmilysDadAsAHerm,fuckNoYouWontBeAmilysHermDaddy);
-			var noFurry:Function = null;
-			if (flags[kFLAGS.AMILY_NOT_FURRY] == 0) noFurry = amilyNoFur;
-			simpleChoices("Yes", beAmilysDadAsAHerm, "No", fuckNoYouWontBeAmilysHermDaddy, "NoFurry", noFurry, "", null, "", null);
+			menu();
+			addButton(0, "Yes", beAmilysDadAsAHerm);
+			addButton(1, "No", fuckNoYouWontBeAmilysHermDaddy);
+			if (flags[kFLAGS.AMILY_NOT_FURRY] == 0) {
+				addButton(2, "NoFurry", amilyNoFur);
+			}
 		}
 
 		//[=Yes=]
@@ -6125,13 +6207,21 @@ package classes.Scenes.NPCs
 			else if (flags[kFLAGS.AMILY_CORRUPTION] == 1) {
 				if (player.gender == 1) doNext(rapeCorruptAmily2Male);
 				else if (player.gender == 2) doNext(rapeCorruptAmily2Female);
-				else if (player.gender == 3) simpleChoices("MaleFocus", rapeCorruptAmily2Male, "FemaleFocus", rapeCorruptAmily2Female, "", null, "", null, "", null);
+				else if (player.gender == 3) {
+					menu();
+					addButton(0, "MaleFocus", rapeCorruptAmily2Male);
+					addButton(1, "FemaleFocus", rapeCorruptAmily2Female);
+				}
 			}
 			//3nd rape scene
 			else if (flags[kFLAGS.AMILY_CORRUPTION] == 2) {
 				if (player.gender == 1) doNext(rapeCorruptAmily3Male);
 				else if (player.gender == 2) doNext(rapeCorruptAmily3Female);
-				else if (player.gender == 3) simpleChoices("MaleFocus", rapeCorruptAmily3Male, "FemaleFocus", rapeCorruptAmily3Female, "", null, "", null, "", null);
+				else if (player.gender == 3) {
+					menu();
+					addButton(0, "MaleFocus", rapeCorruptAmily3Male);
+					addButton(1, "FemaleFocus", rapeCorruptAmily3Female);
+				}
 			}
 			//4nd rape scene
 			else if (flags[kFLAGS.AMILY_CORRUPTION] == 3) {
@@ -6176,7 +6266,9 @@ package classes.Scenes.NPCs
 			//[(if herm)
 			if (player.gender == 3) {
 				outputText("Which part of you should Amily lick?", false);
-				simpleChoices("Cock", rapeCorruptAmily1Male, "Pussy", rapeCorruptAmily1Female, "", null, "", null, "", null);
+				menu();
+				addButton(0, "Cock", rapeCorruptAmily1Male);
+				addButton(1, "Pussy", rapeCorruptAmily1Female);
 			}
 			//Cocks!
 			else if (player.gender == 1) doNext(rapeCorruptAmily1Male);
@@ -6490,7 +6582,9 @@ package classes.Scenes.NPCs
 			if (player.gender == 3) {
 				outputText("Which part should you use to finish off the mousette?", false);
 				//[Cock] [Pussy]
-				simpleChoices("Cock", rapeCorruptAmily4Male, "Pussy", rapeCorruptAmily4Female, "", null, "", null, "", null);
+				menu();
+				addButton(0, "Cock", rapeCorruptAmily4Male);
+				addButton(1, "Pussy", rapeCorruptAmily4Female);
 			}
 			else if (player.gender == 2) doNext(rapeCorruptAmily4Female);
 			else doNext(rapeCorruptAmily4Male);
@@ -7079,7 +7173,9 @@ package classes.Scenes.NPCs
 
 			outputText("Well, this could be interesting.  If you get both the girls drunk, it might be easy (or inevitable) for something sexual to happen.  Or, you could take Amily home right now and make sure nothing untoward happens to either of your lovers.", false);
 			//(Display Options: [Drink!] [Leave])
-			simpleChoices("Drink", liqueurUpTheWaifus, "", null, "", null, "", null, "Leave", amilyXUrtaRunAWAY);
+			menu();
+			addButton(0, "Drink", liqueurUpTheWaifus);
+			addButton(4, "Leave", amilyXUrtaRunAWAY);
 		}
 
 		//Amily/Urta -- LEAVE

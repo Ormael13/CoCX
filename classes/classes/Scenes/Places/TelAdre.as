@@ -292,28 +292,16 @@ public function houses():void {
 
 private function piercingStudio():void {
 	spriteSelect(63);
-	var about:Function = null;
-	if (!player.hasStatusEffect(StatusEffects.Yara)) about = aboutYara;
 	clearOutput();
 	outputText("The interior of the piercing studio is earthy, leaving the stone floors and walls uncovered, though the windows are covered with woven blankets, sewn from multicolored threads.  There are a number of cushy chairs facing a wall of mirrors, along with a shelf covered in needles, piercings, and strong alcohols.  A brunette prowls about the place, tidying it up during a lull in business.  You dully notice that unlike everyone else in this town, she's mostly human.  Perhaps she came through a portal as well?  She approaches you, and you see a cat tail waving behind her, and a pair of fuzzy feline ears, both covered in piercings, perched atop her head.  Clearly she's been here long enough to pick up some of the local flavor.\n\n", false);
 	outputText("She introduces herself, \"<i>Hello there " + player.mf("sir","cutie") + ", my name is Yara.  Would you like to get a piercing?</i>\"", false);
-	if (!flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
-		simpleChoices("Pierce", pierceMenu, "Remove", piercingRemove, "About Her", about, "", null, "Leave", telAdreMenu);
-	else
-	{
-
-		outputText("\n\n(Low Standard mode!)\nAlternatively, she might be open to a quick fuck if you ask.");
-		choices("Pierce", pierceMenu,
-		        "Remove", piercingRemove,
-		        "", null,
-		        "AsFemale", createCallBackFunction(letsDoYaraSex,true),
-		        "AsMale", createCallBackFunction(letsDoYaraSex,false),
-		        "About Her", about,
-		        "", null,
-		        "", null,
-		        "", null,
-		        "Leave", telAdreMenu);
+	menu();
+	addButton(0, "Pierce", pierceMenu);
+	addButton(1, "Remove", piercingRemove);
+	if (!player.hasStatusEffect(StatusEffects.Yara)) {
+		addButton(2, "About Her", aboutYara);
 	}
+	addButton(14, "Leave", telAdreMenu);
 }
 private function aboutYara():void {
 	spriteSelect(63);
@@ -328,49 +316,45 @@ private function aboutYara():void {
 private function pierceMenu():void {
 	spriteSelect(63);
 	hideUpDown();
-	var clit:Function = null;
+	outputText("Yara asks, \"<i>Ok then, what would you like pierced " + player.mf("sir", "cutie") + "?  Just keep in mind my piercings are special - they're permanent and CAN'T be removed.</i>\"", true);
+	menu();
 	if (player.hasVagina())
 	{
-		if (player.vaginas[0].clitPierced == 0)
-		clit = clitPierce;
+		if (player.vaginas[0].clitPierced == 0) {
+			addButton(0, "Clit", clitPierce);
+		}
 	}
-	var dick:Function = null;
 	if (player.totalCocks() > 0)
 	{
-		if (player.cocks[0].pierced == 0)
-			dick = dickPierce;
+		if (player.cocks[0].pierced == 0) {
+			addButton(1, "Dick", dickPierce);
+		}
 	}
-	var ears:Function = null;
-	if (player.earsPierced == 0)
-		ears = earPierce;
-	var eyebrow:Function = null;
-	if (player.eyebrowPierced == 0)
-		eyebrow = eyebrowPierce;
-	var lip:Function = null;
-	if (player.lipPierced == 0)
-		lip = lipPierce;
-	var nipples:Function = null;
-	if (player.nipplesPierced == 0)
-		nipples = nipplePierce;
-	var nose:Function = null;
-	if (player.nosePierced == 0)
-		nose = nosePierce;
-	var tongue:Function = null;
-	if (player.tonguePierced == 0)
-		tongue = tonguePierce;
-	var vulva:Function = null;
+	if (player.earsPierced == 0) {
+		addButton(2, "Ears", earPierce);
+	}
+	if (player.eyebrowPierced == 0) {
+		addButton(3, "Eyebrow", eyebrowPierce);
+	}
+	if (player.lipPierced == 0) {
+		addButton(4, "Lip", lipPierce);
+	}
+	if (player.nipplesPierced == 0) {
+		addButton(5, "Nipples", nipplePierce);
+	}
+	if (player.nosePierced == 0) {
+		addButton(6, "Nose", nosePierce);
+	}
+	if (player.tonguePierced == 0) {
+		addButton(7, "Tongue", tonguePierce);
+	}
 	if (player.hasVagina())
 	{
-		if (player.vaginas[0].labiaPierced == 0) vulva = vulvaPierce;
+		if (player.vaginas[0].labiaPierced == 0) {
+			addButton(8, "Labia", vulvaPierce);
+		}
 	}
-	outputText("Yara asks, \"<i>Ok then, what would you like pierced " + player.mf("sir","cutie") + "?  Just keep in mind my piercings are special - they're permanent and CAN'T be removed.</i>\"", true);
-	if (clit != null || dick != null || ears != null || eyebrow != null || lip != null || nipples != null || nose != null || tongue != null || vulva != null)
-		choices("Clit",clit,"Dick",dick,"Ears",ears,"Eyebrow",eyebrow,"Lip",lip,"Nipples",nipples,"Nose",nose,"Tongue",tongue,"Labia",vulva,"Back",piercingStudio);
-	else
-	{
-		outputText("\n\nYou give yourself a quick once-over and realize there's nowhere left for her to pierce you.  Oh well.", false);
-		doNext(piercingStudio);
-	}
+	addButton(14, "Back", piercingStudio);
 }
 
 private function dickPierce():void {
@@ -381,8 +365,13 @@ private function dickPierce():void {
 		doNext(pierceMenu);
 		return;
 	}
-	simpleChoices("Stud", chooseStud, "Ring", chooseRing, "Ladder", chooseLadder, "Back", pierceMenu, "Nevermind", piercingStudio);
 	piercingLoc = 1;
+	menu();
+	addButton(0, "Stud", chooseStud);
+	addButton(1, "Ring", chooseRing);
+	addButton(2, "Ladder", chooseLadder);
+	addButton(3, "Back", pierceMenu);
+	addButton(4, "Nevermind", piercingStudio);
 }
 
 private function clitPierce():void {
@@ -394,49 +383,78 @@ private function clitPierce():void {
 		return;
 	}
 	piercingLoc = 0;
-	simpleChoices("Stud", chooseStud, "Ring", chooseRing, "", null, "Back", pierceMenu, "Nevermind", piercingStudio);
+	menu();
+	addButton(0, "Stud", chooseStud);
+	addButton(1, "Ring", chooseRing);
+	addButton(3, "Back", pierceMenu);
+	addButton(4, "Nevermind", piercingStudio);
 }
 
 private function earPierce():void {
 	spriteSelect(63);
 	piercingLoc = 2;
 	outputText("\"<i>Okay, just let me get my supplies and we can get started.  What kind of jewelry do you want in them?</i>\" asks Yara.", true);
-	simpleChoices("Stud", chooseStud, "Ring", chooseRing, "Hoop", chooseHoop, "Back", pierceMenu, "Nevermind", piercingStudio);
+	menu();
+	addButton(0, "Stud", chooseStud);
+	addButton(1, "Ring", chooseRing);
+	addButton(2, "Hoop", chooseHoop);
+	addButton(3, "Back", pierceMenu);
+	addButton(4, "Nevermind", piercingStudio);
 }
 
 private function eyebrowPierce():void {
 	spriteSelect(63);
 	piercingLoc = 3;
 	outputText("\"<i>Ah, that's a good look!  What do you want there?</i>\" asks Yara.", true);
-	simpleChoices("Stud", chooseStud, "Ring", chooseRing, "", null, "Back", pierceMenu, "Nevermind", piercingStudio);
+	menu();
+	addButton(0, "Stud", chooseStud);
+	addButton(1, "Ring", chooseRing);
+	addButton(3, "Back", pierceMenu);
+	addButton(4, "Nevermind", piercingStudio);
 }
 
 private function lipPierce():void {
 	spriteSelect(63);
 	piercingLoc = 4;
 	outputText("\"<i>Oh my, that'll be HAWT!  What kind of jewelry do you want there?</i>\" asks Yara.", true);
-	simpleChoices("Stud", chooseStud, "Ring", chooseRing, "", null, "Back", pierceMenu, "Nevermind", piercingStudio);
+	menu();
+	addButton(0, "Stud", chooseStud);
+	addButton(1, "Ring", chooseRing);
+	addButton(3, "Back", pierceMenu);
+	addButton(4, "Nevermind", piercingStudio);
 }
 
 private function nipplePierce():void {
 	spriteSelect(63);
 	piercingLoc = 5;
 	outputText("\"<i>Yeah, sure I can do those!  What kind of jewelry do you want there?  I'm partial to nipple-chains myself,</i>\" admits Yara, blushing bright red.", true);
-	simpleChoices("Studs", chooseStud, "Rings", chooseRing, "Chain", chooseChain, "Back", pierceMenu, "Nevermind", piercingStudio);
+	menu();
+	addButton(0, "Stud", chooseStud);
+	addButton(1, "Ring", chooseRing);
+	addButton(2, "Chain", chooseChain);
+	addButton(3, "Back", pierceMenu);
+	addButton(4, "Nevermind", piercingStudio);
 }
 
 private function nosePierce():void {
 	spriteSelect(63);
 	piercingLoc = 6;
 	outputText("Yara wrinkles her nose in distaste, \"<i>Really?  Well ok, what do you want there?</i>\"", true);
-	simpleChoices("Stud", chooseStud, "Ring", chooseRing, "", null, "Back", pierceMenu, "Nevermind", piercingStudio);
+	menu();
+	addButton(0, "Stud", chooseStud);
+	addButton(1, "Ring", chooseRing);
+	addButton(3, "Back", pierceMenu);
+	addButton(4, "Nevermind", piercingStudio);
 }
 
 private function tonguePierce():void {
 	spriteSelect(63);
 	piercingLoc = 7;
 	outputText("Yara happily purrs, \"<i>Oh my, I bet that'll be fun!  I'm afraid I can only put a stud there though, ok?</i>\"", true);
-	simpleChoices("Ok", chooseStud, "", null, "", null, "Back", pierceMenu, "Nevermind", piercingStudio);
+	menu();
+	addButton(0, "Stud", chooseStud);
+	addButton(3, "Back", pierceMenu);
+	addButton(4, "Nevermind", piercingStudio);
 }
 private function vulvaPierce():void {
 	spriteSelect(63);
@@ -447,7 +465,11 @@ private function vulvaPierce():void {
 		doNext(pierceMenu);
 		return;
 	}
-	simpleChoices("Stud", chooseStud, "Ring", chooseRing, "", null, "Back", pierceMenu, "Nevermind", piercingStudio);
+	menu();
+	addButton(0, "Stud", chooseStud);
+	addButton(1, "Ring", chooseRing);
+	addButton(3, "Back", pierceMenu);
+	addButton(4, "Nevermind", piercingStudio);
 }
 private function chooseStud():void {
 	piercingType = 1;
@@ -478,9 +500,22 @@ private function chooseMaterials():void {
 		doNext(piercingStudio);
 		return;
 	}
-	var rare:Function = null;
-	if (player.gems >= 1000) rare = chooseAdvancedMaterials;
-	choices("Amethyst",chooseAmethyst,"Diamond",chooseDiamond,"Gold",chooseGold,"Emerald",chooseEmerald,"Jade",chooseJade,"Onyx",chooseOnyx,"Ruby",chooseRuby,"Steel",chooseSteel,"Rare Menu",rare,"Nevermind",piercingStudio);
+	menu();
+	addButton(0, "Amethyst", chooseAmethyst);
+	addButton(1, "Diamond", chooseDiamond);
+	addButton(2, "Gold", chooseGold);
+	addButton(3, "Emerald", chooseEmerald);
+	addButton(4, "Jade", chooseJade);
+	addButton(5, "Onyx", chooseOnyx);
+	addButton(6, "Ruby", chooseRuby);
+	addButton(7, "Steel", chooseSteel);
+	if (player.gems >= 1000) {
+		addButton(8, "Rare Menu", chooseAdvancedMaterials);
+	} else {
+		addDisabledButton(8, "Rare Menu", "You can't afford this!");
+	}
+	
+	addButton(14, "Back", piercingStudio);
 }
 private function chooseAmethyst():void {
 	piercingMat = 1;
@@ -554,8 +589,17 @@ private function chooseAdvancedMaterials():void {
 	outputText("\n4. Crimstone - Crimstone is said to be formed from volcanic fires, and to keep the fires of one's desires burning brightly.", false);
 	outputText("\n5. Icestone - Found from the Glacial Rift, this rare gem is said to counter the effects of Crimstone and quell ever-burning desires. This will annihilate some of crimstone magic. Due to its rarity, this costs 2000 gems instead.", false);
 	outputText("\n\n<b>DISCLAIMER</b>: Yara's Piercing Studio is not responsible if the piercee's body absorbs any residual magic of these stones, and is not required to resolve any issues if the effects persist beyond removal.</b>", false);
-	choices("Lethite", chooseLethite, "Fertite", chooseFertite, "Furrite", chooseFurrite, "Crimstone", chooseCrimstone, "", null, "", null, "", null, "", null, "", null, "Back", chooseMaterials);
-	if (player.gems >= 2000) addButton(4, "Icestone", chooseIcestone);
+	menu();
+	addButton(0, "Lethite", chooseLethite);
+	addButton(1, "Fertite", chooseFertite);
+	addButton(2, "Furrite", chooseFurrite);
+	addButton(3, "Crimstone", chooseCrimstone);
+	if (player.gems >= 2000) {
+		addButton(4, "Icestone", chooseIcestone);
+	} else {
+		addDisabledButton(4, "Icestone", "You can't afford this!");
+	}
+	addButton(14, "Back", chooseMaterials);
 }
 
 private function normalPierceAssemble():void {
@@ -847,34 +891,41 @@ private function normalPierceAssemble():void {
 private function piercingRemove():void {
 	spriteSelect(63);
 	hideUpDown();
-	var clit:Function = null;
+	menu();
+	
 	if (player.hasVagina()) {
-		if (player.vaginas[0].clitPierced > 0) clit = removeClitPierce;
+		if (player.vaginas[0].clitPierced > 0) {
+			addButton(0, "Clit", removeClitPierce);
+		}
 	}
-	var dick:Function = null;
 	if (player.totalCocks() > 0) {
-		if (player.cocks[0].pierced > 0) dick = removeCockPierce;
+		if (player.cocks[0].pierced > 0) {
+			addButton(1, "Dick", removeCockPierce);
+		}
 	}
-	var ears:Function = null;
-	if (player.earsPierced > 0) ears = removeEarsPierce;
-	var eyebrow:Function = null;
-	if (player.eyebrowPierced > 0) eyebrow = removeEyebrowPierce;
+	if (player.earsPierced > 0) {
+		addButton(2, "Ears", removeEarsPierce);
+	}
+	if (player.eyebrowPierced > 0) {
+		addButton(3, "Eyebrow", removeEyebrowPierce);
+	}
 	var lip:Function = null;
-	if (player.lipPierced > 0) lip = removeLipPierce;
-	var nipples:Function = null;
-	if (player.nipplesPierced > 0) nipples = removeNipplesPierce;
-	var nose:Function = null;
-	if (player.nosePierced > 0) nose = removeNosePierce;
-	var tongue:Function = null;
-	if (player.tonguePierced > 0) tongue = removeTonguePierce;
-	var vulva:Function = null;
-	if (player.hasVagina()) {
-		if (player.vaginas[0].labiaPierced > 0) vulva = removeVulvaPierce;
+	if (player.lipPierced > 0) {
+		addButton(4, "Lip", removeLipPierce);
 	}
-	if (clit == null && dick == null && ears == null && eyebrow == null && lip == null && nipples == null && nose == null && tongue == null && vulva == null) {
-		outputText("Yara giggles, \"<i>You don't have any piercings, silly!</i>\"", true);
-		doNext(piercingStudio);
-		return;
+	if (player.nipplesPierced > 0) {
+		addButton(5, "Nipples", removeNipplesPierce);
+	}
+	if (player.nosePierced > 0) {
+		addButton(6, "Nose", removeNosePierce);
+	}
+	if (player.tonguePierced > 0) {
+		addButton(7, "Tongue", removeTonguePierce);
+	}
+	if (player.hasVagina()) {
+		if (player.vaginas[0].labiaPierced > 0) {
+			addButton(8, "Labia", removeVulvaPierce);
+		}
 	}
 	outputText("\"<i>Really?</i>\" asks Yara, \"<i>I told you those piercings are permanent!  Well, I suppose they CAN be removed, but you're gonna hurt like hell afterwards.  If you really want me to, I can remove something, but it'll cost you 100 gems for the painkillers and labor.</i>\"", true);
 	if (player.gems < 100) {
@@ -882,12 +933,12 @@ private function piercingRemove():void {
 		doNext(piercingStudio);
 		return;
 	}
-	if (player.tou <= 5.5) {
+	if (player.tou < 6) {
 		outputText("Yara looks you up and down before refusing you outright, \"<i>You don't look so good " + player.short + ".  I don't think your body could handle it right now.</i>\"", true);
 		doNext(piercingStudio);
 		return;
 	}
-	choices("Clit",clit,"Dick",dick,"Ears",ears,"Eyebrow",eyebrow,"Lip",lip,"Nipples",nipples,"Nose",nose,"Tongue",tongue,"Labia",vulva,"Back",piercingStudio);
+	addButton(14, "Back", piercingStudio);
 }
 
 private function removeClitPierce():void {
@@ -1581,9 +1632,14 @@ private function buyClothes(itype:ItemType):void {
 		return;
 	}
 	//Go to debit/update function or back to shop window
-	if (player.hasCock() && player.lust >= 33)
-		simpleChoices("Yes", curry(debitClothes, itype), "No", tailorShoppe, "", null, "", null, "Flirt", curry(flirtWithVictoria, itype));
-	else doYesNo(curry(debitClothes,itype), tailorShoppe);
+	menu();
+	addButton(0, "Yes", debitClothes, itype);
+	addButton(1, "No", tailorShoppe);
+	if (player.hasCock() && player.lust >= 33) {
+		addButton(4, "Flirt", flirtWithVictoria, itype);
+	} else {
+		addDisabledButton(4, "Flirt");
+	}
 }
 
 private function debitClothes(itype:ItemType):void {
@@ -1666,17 +1722,18 @@ public function weaponShop():void {
 	outputText("The high pitched ring of a steel hammer slamming into hot metal assaults your ears as you walk up to the stand.  Sparks are flying with every blow the stand's owner strikes on his current work.  The metal is glowing red hot, and the hammer falls with the relentless, practiced precision of an experienced blacksmith's guiding hand.  Thick gray and white fur ruffles as the blacksmith stands up, revealing the details of his form to you.  He's one of the dog-people that inhabits this city, though his fur and ears remind you of a dog one of your friends had growing up called a husky.  The blacksmith is anything but husky.  He's fairly short, but lean and whip-cord tough.  His right arm is far more thickly muscled than his left thanks to his trade, and he walks with a self-assured gait that can only come with age and experience.\n\n", false);
 
 	outputText("His piercing blue eyes meet yours as he notices you, and he barks, \"<i>Buy something or fuck off.</i>\"\n\nWhat do you buy?", false);
-
-	choices(consumables.W_STICK.shortName,createCallBackFunction(weaponBuy, consumables.W_STICK),
-			weapons.CLAYMOR.shortName,createCallBackFunction(weaponBuy, weapons.CLAYMOR),
-			weapons.WARHAMR.shortName,createCallBackFunction(weaponBuy, weapons.WARHAMR),
-			weapons.KATANA.shortName,createCallBackFunction(weaponBuy, weapons.KATANA),
-			weapons.SPEAR.shortName,createCallBackFunction(weaponBuy, weapons.SPEAR),
-			weapons.WHIP.shortName,createCallBackFunction(weaponBuy, weapons.WHIP),
-			weapons.W_STAFF.shortName,createCallBackFunction(weaponBuy, weapons.W_STAFF),
-			weapons.S_GAUNT.shortName,createCallBackFunction(weaponBuy, weapons.S_GAUNT),
-			weapons.DAGGER.shortName, createCallBackFunction(weaponBuy, weapons.DAGGER), 
-			weapons.SCIMITR.shortName, createCallBackFunction(weaponBuy, weapons.SCIMITR));
+	
+	menu();
+	addButton(0, consumables.W_STICK.shortName, weaponBuy, consumables.W_STICK);
+	addButton(0, weapons.CLAYMOR.shortName, weaponBuy, weapons.CLAYMOR);
+	addButton(0, weapons.WARHAMR.shortName, weaponBuy, weapons.WARHAMR);
+	addButton(0, weapons.KATANA.shortName, weaponBuy, weapons.KATANA);
+	addButton(0, weapons.SPEAR.shortName, weaponBuy, weapons.SPEAR);
+	addButton(0, weapons.WHIP.shortName, weaponBuy, weapons.WHIP);
+	addButton(0, weapons.W_STAFF.shortName, weaponBuy, weapons.W_STAFF);
+	addButton(0, weapons.S_GAUNT.shortName, weaponBuy, weapons.S_GAUNT);
+	addButton(0, weapons.DAGGER.shortName, weaponBuy, weapons.DAGGER);
+	addButton(0, weapons.SCIMITR.shortName, weaponBuy, weapons.SCIMITR);
 	addButton(10, weapons.MACE.shortName, weaponBuy, weapons.MACE);
 	addButton(11, weapons.FLAIL.shortName, weaponBuy, weapons.FLAIL);
 	if (player.hasKeyItem("Sheila's Lethicite") >= 0 || flags[kFLAGS.SHEILA_LETHICITE_FORGE_DAY] > 0) {
@@ -2227,7 +2284,9 @@ private function urtaIsABadass():void {
 	flags[kFLAGS.PC_SEEN_URTA_BADASS_FIGHT] = 1;
 	clearOutput();
 	outputText("There's a commotion in the streets of Tel'Adre.  A dense crowd of onlookers has formed around the center of the street, massed together so tightly that you're unable to see much, aside from the backs the other onlookers' heads.  The sound of blows impacting on flesh can be heard over the crowd's murmuring, alerting you of the fight at the gathering's core.", false);
-	simpleChoices("Investigate", watchUrtaBeABadass, "Who cares?", telAdreMenu, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Investigate", watchUrtaBeABadass);
+	addButton(1, "Who cares?", telAdreMenu);
 }
 
 //[Invetigate]
@@ -2471,9 +2530,9 @@ private function yaraSex(girl:Boolean = true):void {
 
 	outputText("She seems intent on getting some loving - would you like to turn her down, or will you let nature run its course?", false);
 	//[not at all] [yeah baby]
-	if (girl)
-		simpleChoices("Turn down", piercingStudio, "Oh yeah!", createCallBackFunction(letsDoYaraSex, true), "", null, "", null, "", null);
-	else simpleChoices("Turn down", piercingStudio, "Oh yeah!", createCallBackFunction(letsDoYaraSex, false), "", null, "", null, "", null);
+	menu();
+	addButton(0, "Turn down", piercingStudio);
+	addButton(1, "Oh yeah!", letsDoYaraSex, girl);
 }
 
 private function letsDoYaraSex(girl:Boolean = true):void {
@@ -2597,7 +2656,9 @@ private function yvonneFlirt():void {
 	else outputText("You want to go again, huh?  I do love working up a sweat...");
 	outputText("</i>\"");
 	//[Fuck] [Nevermind]
-	simpleChoices("Fuck Her", fuckYvonneInZeBlacksmith, "Nevermind", backOutOfYvonneFuck, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Fuck Her", fuckYvonneInZeBlacksmith);
+	addButton(1, "Nevermind", backOutOfYvonneFuck);
 }
 //[Nevermind]
 private function backOutOfYvonneFuck():void {

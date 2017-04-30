@@ -878,26 +878,37 @@ public function shouldraFollowerScreen():void {
 		doNext(playerMenu);
 		return;
 	}
-	var sex:Function = null;
-	if (player.lust >= 33) sex = shouldraSexMenu;
-	simpleChoices("Talk", shouldraTalkMenu, "Sex", sex, "", null, "Go Away", kickFollowerShouldraOut, "Back", camp.campFollowers);
+	menu();
+	addButton(0, "Talk", shouldraTalkMenu);
+	if (player.lust >= 33) {
+		addButton(1, "Sex", shouldraSexMenu);
+	} else {
+		addDisabledButton(1, "Sex");
+	}
+	addButton(10, "Go Away", kickFollowerShouldraOut);
+	addButton(14, "Back", camp.campFollowers);
 }
 
 private function shouldraSexMenu():void {
 	clearOutput();
 	spriteSelect(67);
 	outputText("Shouldra stirs from somewhere deep inside you, excitement evident in the swiftness of her reaction.  \"<i>Is it time for some fun, Champ?</i>\" she asks happily, her increased lust affecting you just a bit.  Do you oblige her?");
-	var vala:Function = null;
+	menu();
+	addButton(0, "GhostMasturbate", shouldraFappinTimes);
 	if (flags[kFLAGS.FREED_VALA] != 0 && (model.time.hours >= 12 && model.time.hours <= 21)) {
 		outputText("\n\nVala might interest Shouldra.  You could go introduce them...");
-		vala = shouldraAndValaGetBigger;
+		addButton(2, "Visit Vala", shouldraAndValaGetBigger);
+	} else {
+		addDisabledButton(2, "Visit Vala");
 	}
 	var anal:Function = null;
 	if (player.gender > 0 && player.lust >= 33) {
-		anal = nongenderlessAnalShouldraMasturbation;
+		addButton(1, "Anal Masturb", nongenderlessAnalShouldraMasturbation);
 		outputText("\n\nShouldra could also let you have a little anal fun, if you'd like.");
+	} else {
+		addDisabledButton(1, "Anal Masturb");
 	}
-	simpleChoices("GhostMasturbate", shouldraFappinTimes, "Anal Masturb", anal, "Visit Vala", vala, "", null, "Back", shouldraFollowerScreen);
+	addButton(14, "Back", shouldraFollowerScreen);
 }
 
 //Talk Options
@@ -909,15 +920,17 @@ private function shouldraTalkMenu():void {
 		return;
 	}
 	//Allow for the expansion of bodyparts via spooky magic
-	var blowShitUp:Function = null;
-	var shrinkShit:Function = null;
+	menu();
+	addButton(0, "Normal Talk", shouldraYappin);
+	addDisabledButton(1, "Grow Something");
+	addDisabledButton(2, "Shrink Something");
 	if (flags[kFLAGS.SHOULDRA_PLOT_LEVEL] >= 2 && flags[kFLAGS.SHOULDRA_MAGIC_COOLDOWN] <= 0) {
-		blowShitUp = shouldraGroPlus;
-		shrinkShit = shouldraReductoMenu;
+		addButton(1, "Grow Something", shouldraGroPlus);
+		addButton(2, "Shrink Something", shouldraReductoMenu);
 		outputText("\n\nShouldra could permanently expand or reduce part of your body.");
 	}
 	else if (flags[kFLAGS.SHOULDRA_PLOT_LEVEL] >= 2) outputText("\n\nShouldra needs some time before she can grow or shrink one of your body parts permanently.");
-	simpleChoices("Normal Talk", shouldraYappin, "Grow Something", blowShitUp, "Shrink Something", shrinkShit, "", null, "Back", shouldraFollowerScreen);
+	addButton(14, "Back", shouldraFollowerScreen);
 }
 
 //Grow Bodypart
@@ -930,16 +943,26 @@ private function shouldraGroPlus():void {
 	spriteSelect(67);
 	outputText("You decide to take up Shouldra's offer on natural body enhancement.  Before you tell her as much, the eager spectre quickly assumes control of your body.  \"<i>Alright, Champ, now we're in business.  So, what did you have in mind?</i>\"");
 	//Balls     Breast     Clit     Cock     Nipples     Butt     Nevermind
-	var balls:Function = null;
-	var breast:Function = shouldraGrowsYoTits;
-	var clit:Function = null;
-	var cock:Function = null;
-	var butt:Function = shouldrasButtBigginator;
-	var nipples:Function = shouldraGivesYaSomeFukkinTeats;
-	if (player.balls > 0) balls = groBallsBiggaGHOSTYSTYLE;
-	if (player.hasCock()) cock = shouldraCockBloating101;
-	if (player.hasVagina()) clit = shouldraGrowsYoClit;
-	choices("Balls", balls, "Breasts", breast, "Clit", clit, "Cock", cock, "Nipples", nipples, "Butt", butt, "", null, "", null, "", null, "Back", shouldraTalkMenu);
+	menu();
+	if (player.balls > 0) {
+		addButton(0, "Balls", groBallsBiggaGHOSTYSTYLE);
+	} else {
+		addDisabledButton(0, "Balls");
+	}
+	addButton(1, "Breasts", shouldraGrowsYoTits);
+	if (player.hasVagina()) {
+		addButton(2, "Clit", shouldraGrowsYoClit);
+	} else {
+		addDisabledButton(2, "Clit");
+	}
+	if (player.hasCock()) {
+		addButton(3, "Cock", shouldraCockBloating101);
+	} else {
+		addDisabledButton(3, "Cock");
+	}
+	addButton(4, "Nipples", shouldraGivesYaSomeFukkinTeats);
+	addButton(5, "Butt", shouldrasButtBigginator);
+	addButton(14, "Back", shouldraTalkMenu);
 }
 		
 //Balls
@@ -1068,19 +1091,38 @@ private function shouldraReductoMenu():void {
 	spriteSelect(67);
 	outputText("Shouldra's offer to shrink aspects of your body sounds right up your alley, and you pulse as much to your ghostly compatriot.  There's no response.  You remind her that it was HER suggestion in the first place.  \"<i>Come ooooon, Champ.  It was just a slip of the ol' spiritual tongue.</i>\"  You cross your arms and look up and off to the side, the best way you can figure to glare at something that isn't there. \"<i>Ugh, fine.  Let's just get this over with,</i>\" Shouldra concedes, removing your [armor].");
 	//Balls     Breast     Clit     Cock     Nipples     Butt     Nevermind
-	var balls:Function = null;
-	var breasts:Function = null;
-	var clit:Function = null;
-	var cock:Function = null;
-	var butt:Function = null;
-	var nipples:Function = null;
-	if (player.nippleLength > .25) nipples = shrinkDemNipplzForYoGhost;
-	if (player.biggestTitSize() >= 1) breasts = shouldraReductosYourTits;
-	if (player.buttRating >= 2) butt = shrinkDatBootyForYoGhost;
-	if (player.balls > 0 && player.ballSize > 1) balls = shouldraReductosYourBallsUpInsideYa;
-	if (player.hasCock() && player.longestCockLength() > 4) cock = shouldraMakesCocksDisappear;
-	if (player.hasVagina() && player.getClitLength() > .25) clit = clittyVanishingActShouldra;
-	choices("Balls", balls, "Breasts", breasts, "Clit", clit, "Cock", cock, "Nipples", nipples, "Butt", butt, "", null, "", null, "", null, "Back", shouldraTalkMenu);
+	menu();
+	if (player.balls > 0 && player.ballSize > 1) {
+		addButton(0, "Balls", shouldraReductosYourBallsUpInsideYa);
+	} else {
+		addDisabledButton(0, "Balls");
+	}
+	if (player.biggestTitSize() >= 1) {
+		addButton(1, "Breasts", shouldraReductosYourTits);
+	} else {
+		addDisabledButton(1, "Breasts");
+	}
+	if (player.hasVagina() && player.getClitLength() > .25) {
+		addButton(2, "Clit", clittyVanishingActShouldra);
+	} else {
+		addDisabledButton(2, "Clit");
+	}
+	if (player.hasCock() && player.longestCockLength() > 4) {
+		addButton(3, "Cock", shouldraMakesCocksDisappear);
+	} else {
+		addDisabledButton(3, "Cock");
+	}
+	if (player.nippleLength > .25) {
+		addButton(4, "Nipples", shrinkDemNipplzForYoGhost);
+	} else {
+		addDisabledButton(4, "Nipples");
+	}
+	if (player.buttRating >= 2) {
+		addButton(5, "Butt", shrinkDatBootyForYoGhost);
+	} else {
+		addDisabledButton(5, "Butt");
+	}
+	addButton(14, "Back", shouldraTalkMenu);
 }
 //Balls
 public function shouldraReductosYourBallsUpInsideYa(rescue:Boolean = false):void {
@@ -1623,7 +1665,9 @@ private function shouldraAndWormsYoureGonnaHaveABadTime():void {
 	else outputText("\n\n\"<i>Your dick's INFESTED!</i>\"  your mouth utters, lower jaw quivering in fear.  A worm pokes its head up out of your fat cock head, causing Shouldra to scream and violently pivot your hips again, desperately trying to shake more of the vermin loose.  \"<i>I... I can feel all of them... crawling around in-  How do you live like this!</i>\"  You explain to the panicked spirit to the best of your ability the allure of your dickworms - maybe you should have figured out a better name - how they aid in battle, how they help <i>after</i> battle, and many other fascinating facts one may not realize about your chummy little pals.");
 	outputText("\n\nThe two of you sit in silence for a moment, your body breathing heavily.  \"<i>What the fuck is wrong with you?</i>\"  your mouth says plainly.  More wormy escape attempts cause your pelvis to thrash about; Shouldra not only refuses to touch your blighted phallus, but is actively working to avoid its every swing. \"<i>NOPE.  NEVER.  These fuckers have GOT to GO!  There's no way in HELL I'm riding shotgun with-</i>\"  The ghost has you shout yet again, quickly jumping away from a thick strand of your jism flying back towards you.  Looks like the decision lies with you.");
 	//[Keep Worms]	[Keep Shouldra]
-	simpleChoices("Keep Shouldra", kickOutWormiesForYourGhostPalPAL, "Keep Worms", kickOutShouldra4YoWormyBuddies, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Keep Shouldra", kickOutWormiesForYourGhostPalPAL);
+	addButton(1, "Keep Worms", kickOutShouldra4YoWormyBuddies);
 }
 //Keep Worms
 private function kickOutShouldra4YoWormyBuddies():void {
@@ -1721,7 +1765,10 @@ public function exgartuMonAndShouldraShowdown():void {
 	if (silly()) outputText("  It's a man's right to choose what's done with his body.  Not anyone else's!");
 	outputText("  You shout loud enough to get the two to at least shut up and notice you're there.  It's time to end this little battle once and for all, starting with your first - and hopefully last - involvement.");
 	//[Keep Exgartuan]	[Keep Shouldra]	[Keep Both!]
-	simpleChoices("Keep Exgartuan", keepExgartuanInsteadOfShouldra, "Keep Shouldra", keepShouldraAndKickOutExgartuan, "Keep Both", keepAllTheGhosts, "", null, "", null);
+	menu();
+	addButton(0, "Keep Exgartuan", keepExgartuanInsteadOfShouldra);
+	addButton(1, "Keep Shouldra", keepShouldraAndKickOutExgartuan);
+	addButton(2, "Keep Both", keepAllTheGhosts);
 }
 //Keep Exgartuan
 private function keepExgartuanInsteadOfShouldra():void {
@@ -1848,7 +1895,9 @@ public function shouldraBakeryIntro():void {
 	if (flags[kFLAGS.SHOULDRA_BAKERY_TIMES] == 0) outputText("You smirk, wondering how exactly a ghost manages to work up a hunger.  Your skepticism is met by an intense stabbing pain in your stomach, forcing you to buckle slightly from the cramping.  It lasts only a moment before it vanishes, however.  \"<i>You feel that, smartass?</i>\" The ghost girl sneers, \"<i>That's what decades of fasting will do to you.");
 	else outputText("You point out that she's already had something at the bakery.  \"<i>Yeah, I did.  And now I'm hungry again.  Deal with it.");
 	outputText("  Now, how about a snack?  Or two?</i>\" Her enthusiasm is clear...  and slightly worrying.");
-	simpleChoices("Continue", feedShouldraACake, "Bail Out", bailOut, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Continue", feedShouldraACake);
+	addButton(1, "Bail Out", bailOut);
 }
 
 //Bail out (you pussy)
@@ -1870,7 +1919,8 @@ private function feedShouldraACake():void {
 	outputText("\n\nYou spy the pastry-woman Maddie working at the counter; seems she had to be pulled off baking duty for some reason.  As she glances around the room, your eyes meet, and she quickly looks away.  Is she...  blushing?  You didn't know she could do that.");
 	outputText("\n\nShouldra is definitely getting antsy now, and you can feel her dragging your eyes towards the menu.  A sliver of drool slides down your chin.  You sigh and let the ghost girl head towards the service counter; hopefully both your wallet and your figure will remain reasonably intact.");
 	//Maddie
-	simpleChoices("Maddie", shouldraAndMaddieSittingInATree, "", null, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Maddie", shouldraAndMaddieSittingInATree);
 }
 
 private function shouldraAndMaddieSittingInATree():void {
@@ -1885,7 +1935,9 @@ private function shouldraAndMaddieSittingInATree():void {
 	else outputText("curvaceous");
 	outputText(" figure...");
 	//[Go along with it] [Resist]
-	simpleChoices("Go Along", goAlongWIthShouldrasEatingSpree, "Resist", resistBeingAFatass, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Go Along", goAlongWIthShouldrasEatingSpree);
+	addButton(1, "Resist", resistBeingAFatass);
 }
 //Go along with it
 private function goAlongWIthShouldrasEatingSpree():void {

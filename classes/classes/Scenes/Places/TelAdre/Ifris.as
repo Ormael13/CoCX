@@ -51,41 +51,43 @@ public function approachIfris():void {
 	}
 	outputText("(You could go ahead and work out while she watches, ask her to join you, or leave.)", false);
 	//Work out || Ask Her To Join || Leave?
-	simpleChoices("Work Out", workOutForIfris, "Join Me?", askIfrisToJoinYou, "", null, "", null, "Leave", telAdre.gymDesc);
+	menu();
+	if (player.fatigueLeft() >= 30) {
+		addButton(0, "Work Out", workOutForIfris);
+		addButton(1, "Join Me?", askIfrisToJoinYou);
+	} else {
+		addDisabledButton(0, "Work Out", "There's no way you could work out as tired as you are.  Maybe you could come back to flirt with the demonic-looking girl during your next workout.");
+		addDisabledButton(1, "Join Me?", "There's no way you could work out as tired as you are.  Maybe you could come back to flirt with the demonic-looking girl during your next workout.");
+	}
+	addButton(14, "Leave", telAdre.gymDesc);
 }
 //3a-PC responds they want to work out-
 private function workOutForIfris():void {
 	spriteSelect(28);
 	clearOutput();
-	if (player.fatigue > 70) {
-		outputText("There's no way you could work out as tired as you are.  Maybe you could come back to flirt with the demonic-looking girl during your next workout.", false);
-		doNext(telAdre.gymDesc);
-		return;
-	}
 	outputText("You smile to the devil-looking-girl and tell her you're just here to get your work-out on.\n\n", false);
 
 	outputText("\"<i>Oh, don't mind me, then. Please, by all means.</i>\" She gestures to the bench-press, stepping back and watching you with a smile.\n\n", false);
 
 	outputText("\"<i>I hope you don't mind if I keep you company. I'd love to... see you in action.</i>\"\n\n", false);
 	//WORK OUT or SHOW OFF?
-	simpleChoices("Work Out", liftWhileIfrisWatches, "Show Off", showOffForIfris, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Work Out", liftWhileIfrisWatches);
+	addButton(1, "Show Off", showOffForIfris);
 }
 //3b-PC asks if she'd like to join them-
 private function askIfrisToJoinYou():void {
 	spriteSelect(28);
 	clearOutput();
-	if (player.fatigue > 70) {
-		outputText("There's no way you could work out as tired as you are.  Maybe you could come back to flirt with the demonic-looking girl during your next workout.", false);
-		doNext(telAdre.gymDesc);
-		return;
-	}
 	outputText("You ask Ifris if she'd like to join you in some exercises. Her eyes glint mischievously, obviously finding unintended meaning in your words, and you can't help but blush.\n\n", false);
 
 	outputText("\"<i>That's sweet of you, darling... but I don't want to get in the way. I'll just wait my turn. Don't worry about me at all.</i>\"\n\n", false);
 
 	outputText("You shrug at her response, but there's something about the way she eyes you now...", false);
 	//WORK OUT or SHOW OFF?
-	simpleChoices("Work Out", liftWhileIfrisWatches, "Show Off", showOffForIfris, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Work Out", liftWhileIfrisWatches);
+	addButton(1, "Show Off", showOffForIfris);
 }
 
 //4a-PC does a modest work out-
@@ -153,7 +155,7 @@ private function showOffForIfris():void {
 		return;
 	}
 	//4b5-PC masculinity > 60, corruption > 75, has cow features-
-	if (player.gender == 0 || (player.femininity < 40 && player.cor > 75 && player.faceType == FACE_COW_MINOTAUR)) {
+	if (player.isGenderless() || (player.femininity < 40 && player.cor > 75 + player.corruptionTolerance() && player.faceType == FACE_COW_MINOTAUR)) {
 		outputText("Ifris watches you for a moment as you move down to the bench, but her eyes clearly wander elsewhere now and then. The pleasant smile never leaves her pretty face, but it's clear she's distracted or even disinterested for some reason. Soon enough she turns to leave, a bored little sigh leaving her. Her hips sway with a sexy gait as though it were natural, though nothing about her seems particularly excited at the moment...", false);
 		//Stat changes HERE!
 		if (player.str < 90) dynStats("str", .5);

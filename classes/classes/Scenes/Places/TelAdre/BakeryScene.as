@@ -161,7 +161,7 @@ private function talkAboutBrownies():void {
 	
 	//[Yes][No]
 	menu();
-	addButton(0,"Yes",createCallBackFunction2(nomnomnom, "brownies", 3));
+	addButton(0, "Yes", nomnomnom, "brownies", 3);
 	addButton(1,"No",talkToBaker);
 }
 
@@ -171,7 +171,7 @@ private function talkAboutCookies():void {
 	outputText("The baker nods at you.  \"<i>Cookies good.  Cookies easy, only need butter, sugar, flour, egg, and fig.  Mix batter and put in little circles, mash up figs, put figs in centers of circles, put other circle on top.  Cook cookie.  Also able to just put whatever into batter and make chocolate cookie or anything else, but fig most popular and cheapest.</i>\"  He smiles proudly and gestures toward the four-gem cookie display.  Do you buy one?");
 	//[Yes][No]
 	menu();
-	addButton(0,"Yes",createCallBackFunction2(nomnomnom, "cookies", 4));
+	addButton(0, "Yes", nomnomnom, "cookies", 4);
 	addButton(1,"No",talkToBaker);
 }
 
@@ -185,7 +185,7 @@ private function talkAboutCupcakes():void {
 	outputText("\n\n\"<i>Too popular, too cheap.  Always making cupcakes, no time to experiment on recipes.  Want to raise price but cupcakes are best seller and customers get mad.</i>\"  A bell rings.  Sighing again, he walks over to the oven and opens it, then pulls out a tray of un-iced cupcakes.  \"<i>See?  Making now.  You buying one?  Four... no, still three gems I guess.</i>\"");
 	//[Yes][No]
 	menu();
-	addButton(0,"Yes",createCallBackFunction2(nomnomnom, "cupcakes", 3));
+	addButton(0, "Yes", nomnomnom, "cupcakes", 3);
 	addButton(1,"No",talkToBaker);
 }
 
@@ -197,7 +197,7 @@ private function talkAboutDoughnuts():void {
 	outputText("\n\n\"<i>Fry in hot oil until brown and delicious, lift out with spatula.  Penetrate jam doughnuts with pastry bag and squirt jam like cum into breeding cow... sorry.</i>\"  He frowns.  \"<i>Take longer to make than other things, even cupcakes.  Can't make batches as big because so many kinds.  So doughnuts cost more - five gems.  Still, lots of fun to pound and fry and stuff.  Sell lots when watch shifts change; watchmen come in and clean out doughnut trays.  Want to buy one before next rush starts?</i>\"");
 	//[Yes][No]
 	menu();
-	addButton(0,"Yes",createCallBackFunction2(nomnomnom, "doughnuts", 5));
+	addButton(0, "Yes", nomnomnom, "doughnuts", 5);
 	addButton(1,"No",talkToBaker);
 }
 
@@ -207,7 +207,7 @@ private function talkToBakerAboutPoundCake():void {
 	outputText("The minotaur snorts again, \"<i>'Baker's Special' pound cake is easy... mix butter and shortening, then sugar and eggs.  Put in little salt and whatever dry stuff needed, like fruits or chocolate.  Add milk too.  Put in narrow pan, bake long time.  Can't make batter in bulk though, got to have lots of varieties since not one is more popular than others.  So costs four gems; not as cheap as batch items.  Want a piece?</i>\"");
 	//[Yes][No]
 	menu();
-	addButton(0,"Yes",createCallBackFunction2(nomnomnom, "pound cake", 4));
+	addButton(0, "Yes", nomnomnom, "pound cake", 4);
 	addButton(1,"No",talkToBaker);
 }
 

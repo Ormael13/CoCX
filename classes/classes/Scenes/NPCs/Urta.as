@@ -332,7 +332,10 @@ public function urtaBarApproach():void {
 		else outputText("nervously", false);
 		outputText(" while she awaits your reply.  It seems you could tell her to stay away from Scylla, enjoy Scylla, or just tell her you don't want to see her again.  What do you do?", false);
 		//[No Scylla] [Scylla Okay] [Leave Her]
-		simpleChoices("No Scylla", tellUrtaNoMoreScylla, "Scylla Okay", tellUrtaMoreScyllaIsFine, "Leave Her", leaveUrtaAfterScyllaConfrontation, "", null, "", null);
+		menu();
+		addButton(0, "No Scylla", tellUrtaNoMoreScylla);
+		addButton(1, "Scylla Okay", tellUrtaMoreScyllaIsFine);
+		addButton(4, "Leave Her", leaveUrtaAfterScyllaConfrontation);
 		return;
 	}
 	//TO ZE FLIPOUT!
@@ -437,7 +440,10 @@ public function urtaBarApproach():void {
 		outputText("You spend a moment looking over your shoulder, but can't for the life of you figure out what she was freaking out about.  She must be really drunk!  You turn back to scold her, but Urta has vanished!  She must have left in a hurry – she left her bottle of \"<i>John Doe</i>\" behind, and still half-full.  The bar's back-door swings closed, maybe she went that way.  What do you do?", false);
 
 		//(LEAVE HER TABLE) (DRINK HER BOOZE) (BACKDOOR)
-		simpleChoices("Backdoor", urtaFollowedOutBack, "Drink Booze", drinkUrtasBooze, "", null, "", null, "Leave", telAdre.barTelAdre);
+		menu();
+		addButton(0, "Backdoor", urtaFollowedOutBack);
+		addButton(1, "Drink Booze", drinkUrtasBooze);
+		addButton(14, "Leave", telAdre.barTelAdre);
 		return;
 	}
 	//[URTA FRIEND APPROACH]
@@ -516,7 +522,9 @@ private function drinkUrtasBoozePtTwo():void {
 	outputText("She shakes her massive horse-meat more than a few times, shuddering lightly with pleasure as her tip flares a bit in response.  Urta stumbles over moaning, \"<i>This ish all your fault!  You damned... sexy... mmm... letsh fuck!</i>\"\n\n", false);
 	outputText("The stumbling hermaphrodite is openly rubbing herself as she closes in on you.  What do you do?", false);
 	//[RUN!] [LET HER]
-	simpleChoices("Run!", drinkUrtasBoozeRun, "Let Her", drinkUrtasBoozeLetHer, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Run!", drinkUrtasBoozeRun);
+	addButton(1, "Let Her", drinkUrtasBoozeLetHer);
 }
 
 private function drinkUrtasBoozeRun(): void{
@@ -605,8 +613,12 @@ private function urtaFollowedOutBack():void {
 	outputText("Urta moans and cries, \"<i>Ooh, just go down! Please cum and go down!  Why won't you go awayyyyyy...</i>\" eventually breaking off into blubbering sobbing, interrupted by the occasional involuntary gasp of pleasure.\n\n", false);
 	//[Sneak away] [Watch] [Masturbate With Her] [Fuck Her]
 	outputText("(You could fuck her, masturbate with her, watch, or leave her like that.)",false);
-	dynStats("lus", 5+player.lib/20);
-	simpleChoices("Fuck Her", urtaFuckHer, "MutualMasturb", dualUrtaMasturbation, "Watch", watchUrtaJerkIt, "", null, "Leave", urtaSneakAwayFromMasturbate);
+	dynStats("lus", 5 + player.lib / 20);
+	menu();
+	addButton(0, "Fuck Her", urtaFuckHer);
+	addButton(1, "MutualMasturb", dualUrtaMasturbation);
+	addButton(2, "Watch", watchUrtaJerkIt);
+	addButton(4, "Leave", urtaSneakAwayFromMasturbate);
 }
 
 //[Sneak Away]
@@ -1354,9 +1366,16 @@ private function fuckUrtasVagButTooBig():void {
 	clearOutput();
 	outputText("You let her know that you want her just the way she is and climb into bed behind her.  She watches you apprehensively over her shoulder and objects, \"<i>I'm sorry lover, but that's WAYYYY too big to fit in any hole I've got.  Maybe I should go ahead and take you?  Or would you rather help me off under the table back at the bar?</i>\"", false);
 	//[GET BUTT FUCKED] [GET CUNT-FUCKED] [BAR BJ] [Fuck it I'm leaving!]
-	var vaginal:Function = null;
-	if (player.hasVagina()) vaginal = rideUrtaTenderFemale;
-	simpleChoices("Ride Vaginal", vaginal, "Ride Anal", tenderTakeItUpTheAssFromUrta, "Bar BJ", blowUrtaUnderTable, "No Condom", condomlessUrtaInHouseSmex, "Leave", fuckItAndLeave);
+	menu();
+	if (player.hasVagina()) {
+		addButton(0, "Ride Vaginal", rideUrtaTenderFemale);
+	} else {
+		addDisabledButton(0, "Ride Vaginal");
+	}
+	addButton(1, "Ride Anal", tenderTakeItUpTheAssFromUrta);
+	addButton(2, "Bar BJ", blowUrtaUnderTable);
+	addButton(3, "No Condom", condomlessUrtaInHouseSmex);
+	addButton(4, "Leave", fuckItAndLeave);
 }
 
 private function fuckItAndLeave():void {
@@ -1473,7 +1492,10 @@ private function marbleCockuBlockuUrta():void {
 	}
 	outputText("Do you answer honestly, refuse to answer, or lie?", false);
 	//[Honestly] [Refuse] [Lie]
-	simpleChoices("Honestly", TellUrtaDAHTRUUUUF, "Refuse", trufftrufftrufftruff, "Lie", lietoUrtaAboutMarble, "", null, "", null);
+	menu();
+	addButton(0, "Honestly", TellUrtaDAHTRUUUUF);
+	addButton(1, "Refuse", trufftrufftrufftruff);
+	addButton(2, "Lie", lietoUrtaAboutMarble);
 }
 
 //[Honestly]
@@ -1494,7 +1516,10 @@ private function TellUrtaDAHTRUUUUF():void {
 		//(Toughen Up – Let her know she's great in the sack but you not relationship material.)
 		//(Walk Out – Fuck her, she cheated on me!)
 		//[Comfort] [Toughen Up] [Walk Out]
-		simpleChoices("Comfort", comfortUrtaAfterTellinTruuf, "Toughen Up", toughenUpUrtaAfterTellingTruuf, "Walk Out", walkoutOnUrtaAfterTellingTruff, "", null, "", null);
+		menu();
+		addButton(0, "Comfort", comfortUrtaAfterTellinTruuf);
+		addButton(1, "Toughen Up", toughenUpUrtaAfterTellingTruuf);
+		addButton(2, "Walk Out", walkoutOnUrtaAfterTellingTruff);
 	}
 	else {
 		outputText("</i>\"");
@@ -1559,7 +1584,9 @@ private function trufftrufftrufftruff():void {
 	outputText("You refuse to answer the question, telling Urta that what happens outside the walls has no impact on what the two of you have here.  She disagrees as her fairly meek attitude slips away, replaced with a sterner expression, \"<i>No.  It matters to me.  I want to know about your life and if you won't even answer... then you aren't as kind as I thought you were.</i>\"\n\n", false);
 	outputText("\n\nIt looks like you've have to tell her the truth or lie...", false);
 	//[Truth] [Lie]
-	simpleChoices("Truth", TellUrtaDAHTRUUUUF, "Lie", lietoUrtaAboutMarble, "", null, "", null, "", null);
+	menu();
+	addButton(0, "Truth", TellUrtaDAHTRUUUUF);
+	addButton(1, "Lie", lietoUrtaAboutMarble);
 }
 
 //[Lie]
@@ -1658,7 +1685,11 @@ public function eatUrtaOutNomNomPussy():void {
 
 	outputText("Finished at last, Urta's member rapidly deflates, the scent of her cum on your " + player.hairDescript() + " and her juice on your " + player.face() + " lingers.  You slide up into the booth next to your blissed out lover.", false);
 	//[Give Glass] [Drink Glass] [Set Aside] [(New) Take Some Home]
-	simpleChoices("Give Glass", giveUrtaCumGlass, "Drink Glass", drinkUrtasCumGlass, "Set Aside", setAsideUrtaCumGlass, "TakeSomeHome", takeUrtasCumHomeWithYou, "", null);
+	menu();
+	addButton(0, "Give Glass", giveUrtaCumGlass);
+	addButton(1, "Drink Glass", drinkUrtasCumGlass);
+	addButton(2, "Set Aside", setAsideUrtaCumGlass);
+	addButton(3, "TakeSomeHome", takeUrtasCumHomeWithYou);
 }
 
 //[GIVE GLASS]
@@ -2318,6 +2349,9 @@ private function urtaAndScyllaBoningLikeBitchesSober():void {
 	else outputText("lover");
 	outputText("'s lusty slip-up and skittish responses, pinching her booty for good measure while you decide just how to get involved in the potential <i>ménage à trois</i>.\n\nWhat do you do?");
 	dynStats("lus", 10 + player.lib/5, "resisted", false);
+	menu();
+	addDisabledButton(0, "Fuck Fox");
+	addDisabledButton(1, "Worshipped");
 	//Get worshipped requires gigantic dong
 	var worship:Function = null;
 	var fuck:Function = null;
@@ -2331,7 +2365,9 @@ private function urtaAndScyllaBoningLikeBitchesSober():void {
 	}
 	outputText("  Whatever you do, with Scylla involved, it's sure to get out of hand.");
 	//[Fuck Nun Nipple] [Fuck Urta] [Get Worshipped]
-	simpleChoices("Fuck Fox", fuck, "Worshipped", worship, "", null, "", null, "Back", telAdre.barTelAdre);
+	addButton(0, "Fuck Fox", fuck);
+	addButton(1, "Worshipped", worship);
+	addButton(14, "Back", telAdre.barTelAdre);
 }
 //Fuck Urta while scylla sucks sober
 private function fuckUrtaWhileScyllaSucksSober():void {
@@ -2631,7 +2667,11 @@ private function tellUrtaNoMoreScylla():void {
 	if (urtaLove()) outputText("Just please, don't doubt my love for you.  ", false);
 	outputText("Do I need to stop drinking too?", false);
 	//[Drink More] [Drink Less] [No Change] [Leave Her]
-	simpleChoices("Drink More", tellUrtaToBeADrunkenHussy, "Drink Less", tellUrtaToStopBeingALush, "No Change", tellUrtaToStayTheSame, "Leave Her", leaveUrtaAfterScyllaConfrontation, "", null);
+	menu();
+	addButton(0, "Drink More", tellUrtaToBeADrunkenHussy);
+	addButton(1, "Drink Less", tellUrtaToStopBeingALush);
+	addButton(2, "No Change", tellUrtaToStayTheSame);
+	addButton(4, "Leave Her", leaveUrtaAfterScyllaConfrontation);
 }
 //[Scylla Okay]
 private function tellUrtaMoreScyllaIsFine():void {
@@ -2642,7 +2682,11 @@ private function tellUrtaMoreScyllaIsFine():void {
 	else outputText("Me and her, we've been partners in the guard for a long time, but the sex is just mechanical, to sate us.  You don't have to worry about her stealing me away.  ", false);
 	outputText("But what about my drinking or how I get when I'm drunk?  It doesn't bother you, does it?", false);
 	//[Drink More] [Drink Less] [No Change] [Leave Her]
-	simpleChoices("Drink More", tellUrtaToBeADrunkenHussy, "Drink Less", tellUrtaToStopBeingALush, "No Change", tellUrtaToStayTheSame, "Leave Her", leaveUrtaAfterScyllaConfrontation, "", null);
+	menu();
+	addButton(0, "Drink More", tellUrtaToBeADrunkenHussy);
+	addButton(1, "Drink Less", tellUrtaToStopBeingALush);
+	addButton(2, "No Change", tellUrtaToStayTheSame);
+	addButton(4, "Leave Her", leaveUrtaAfterScyllaConfrontation);
 }
 //[Leave Her]
 private function leaveUrtaAfterScyllaConfrontation():void {
@@ -2707,7 +2751,9 @@ private function amilyXUrtaUrtaFallout(): void {
 
 	outputText("(You can tell her that it's okay, and you're actually kind of glad that your girls are getting along in such a fun way.  Or, you could crush the bitch's heart for daring to fuck YOUR woman.)", false);
 	//[It's Okay] [Heartbreak]
-	simpleChoices("It's Okay", itsOkayUrtaAmilyIsHot, "Heartbreak", crushUrtasHeart, "", null, "", null, "", null);
+	menu();
+	addButton(0, "It's Okay", itsOkayUrtaAmilyIsHot);
+	addButton(1, "Heartbreak", crushUrtasHeart);
 }
 
 //[It's Okay]
@@ -2832,26 +2878,25 @@ private function urtaDiscussesSelf():void {
 		outputText("“<i>You wanna talk about me?</i>” she asks" + (urtaJustFriends() ? "" : ", blushing softly") + ".  “<i>Well, there isn't THAT much to tell, but what do you want to know?</i>”   She seems surprisingly pleased to have the chance to talk.");
 	else outputText("“<i>Well, I don't think there's that much to tell,</i>” she says with a smile.  She idly blows a bang out of her face and exhales, “<i>Well, lover, I'm an open book for you, what do you want to know?</i>”");
 	//[Family] [Sex/Romance] [Employment] [Prejudice]
-	if (urtaJustFriends())
-		simpleChoices("Flirt", flirtWithUrta, "Employment", urtaDiscussesEmployment, "Prejudice", urtaDiscussesPrejudice, "", null, "Back", urtaDialogueMenu);
-	else if (flags[kFLAGS.URTA_QUEST_STATUS] == .5)
-		simpleChoices("Infertility",kGAMECLASS.urtaQuest.infertilityQuestions,
-				"Romance&Sex",urtaDiscussesSexAndRomance,
-				"Employment",urtaDiscussesEmployment,
-				"Prejudice",urtaDiscussesPrejudice,
-				"Back",urtaDialogueMenu);
-	else if (flags[kFLAGS.URTA_QUEST_STATUS] == 1)
-		simpleChoices("Fertility",urtaFertilityDiscussion,
-				"Romance&Sex",urtaDiscussesSexAndRomance,
-				"Employment",urtaDiscussesEmployment,
-				"Prejudice",urtaDiscussesPrejudice,
-				"Back",urtaDialogueMenu);
-	else
-		simpleChoices("Family",urtaDiscussesFamily,
-				"Romance&Sex",urtaDiscussesSexAndRomance,
-				"Employment",urtaDiscussesEmployment,
-				"Prejudice",urtaDiscussesPrejudice,
-				"Back",urtaDialogueMenu);
+	menu();
+	addButton(2, "Employment", urtaDiscussesEmployment);
+	addButton(3, "Prejudice", urtaDiscussesPrejudice);
+	addButton(14, "Back",urtaDialogueMenu);
+	if (urtaJustFriends()) {
+		addButton(1, "Flirt", flirtWithUrta);
+	}
+	else if (flags[kFLAGS.URTA_QUEST_STATUS] == .5) {
+		addButton(0, "Infertility", kGAMECLASS.urtaQuest.infertilityQuestions);
+		addButton(1, "Romance&Sex", urtaDiscussesSexAndRomance);
+	}
+	else if (flags[kFLAGS.URTA_QUEST_STATUS] == 1) {
+		addButton(0, "Fertility", urtaFertilityDiscussion);
+		addButton(1, "Romance&Sex", urtaDiscussesSexAndRomance);
+	}
+	else {
+		addButton(0, "Family", urtaDiscussesFamily);
+		addButton(1, "Romance&Sex", urtaDiscussesSexAndRomance);
+	}
 }
 
 public function flirtWithUrta():void {
@@ -2955,7 +3000,11 @@ private function urtaDiscussesEdryn():void {
 		outputText("\n\n\"<i>I don't need to worry about her stealing you away from me, do I, lover?</i>\" the gray fox teases.  She smirks knowingly and continues, \"<i>I'm joking, though she is a hottie, isn't she?  What do you want to know?</i>\"");
 	//[History Together] [Working Together] [Romance?]
 	var discussRomance:Function = (urtaJustFriends() ? null : urtaDiscussesEdrynRomance);
-	simpleChoices("History", urtaDiscussesEdrynHistory, "Working", urtaDiscussesWorkingWithEdryn, "Romance", discussRomance, "", null, "Back", urtaDialogueMenu);
+	menu();
+	addButton(0, "History", urtaDiscussesEdrynHistory);
+	addButton(1, "Working", urtaDiscussesWorkingWithEdryn);
+	addButton(2, "Romance", discussRomance);
+	addButton(14, "Back", urtaDialogueMenu);
 }
 
 //[=The Watch=]
@@ -2966,7 +3015,12 @@ private function urtaDiscussesTheWatch():void {
 	if (!urtaLove()) outputText("\n\nUrta perks up at that, her spine stiffening with obvious pride as she takes a hearty swig of her drink.  \"<i>What do you want to know?</i>\" she asks happily.");
 	else outputText("\n\nUrta stiffens proudly, unintentionally thrusting her chest forward before realizing the show she's making of her own cleavage.  She colors and asks, \"<i>What do ya wanna know?</i>\"");
 	//[Membership] [Role in the city] [Crime & Punishment] [Reach of the Watch] [Interesting Cases]
-	simpleChoices("Membership",urtaDiscussesWatchMembership,"Role",urtaDiscussesWatchRole,"Crime",urtaDiscussesCrimeAndPunishment,"Reach",urtaDiscussesTheWatchsReach,"Back",urtaDialogueMenu);
+	menu();
+	addButton(0, "Membership", urtaDiscussesWatchMembership);
+	addButton(1, "Role", urtaDiscussesWatchRole);
+	addButton(2, "Crime", urtaDiscussesCrimeAndPunishment);
+	addButton(3, "Reach", urtaDiscussesTheWatchsReach);
+	addButton(14, "Back", urtaDialogueMenu);
 }
 
 //[=Alcoholism=]
@@ -3001,7 +3055,11 @@ private function urtaDiscussesAlcholism():void {
 			outputText("lover.  I don't think I've ever had anyone accept me like you have - even Edryn kind of holds back from me.  You... you're different.  Maybe it's because you're an off-worlder, I don't know, but meeting you has been the best thing to happen to me since I joined the guard.  Honestly... I feel like I could probably stop - I don't really need it anymore, though I do seem to wind up having a lot of fun when I do.</i>\"");
 		outputText("[pg]Urta falls silent, waiting for you to speak.  Will you tell her to start drinking less?  Will you tell her that you are fine with her drinking habits, now that she's explained her startling change in behavior and her reasons for doing so?  Will you break up with her if she's that much of an alcoholic? Or do you want her to drink even more - perhaps you find her so much more fun to be with when she's blink stinking drunk?");
 		//[Drink More] [Drink Less] [No Change] [Break Up]
-		simpleChoices("Drink More", urtaDiscussAlcoholDrinkMore, "Drink Less", urtaDiscussAlcoholDrinkLess, "Be Yourself", urtaDiscussAlcoholNoChange, "Break Up", breakUpWithTheBitchOverAlcoholism, "", null);
+		menu();
+		addButton(0, "Drink A Lot", urtaDiscussAlcoholDrinkMore);
+		addButton(1, "Drink A Little", urtaDiscussAlcoholDrinkLess);
+		addButton(2, "Be Yourself", urtaDiscussAlcoholNoChange);
+		addButton(3, "Break Up", breakUpWithTheBitchOverAlcoholism);
 	}
 	else {
 		outputText("You tell Urta that you want to discuss her newfound drinking habits.  The grey-furred fox-morph meets your gaze calmly.  \"<i>Really?  What more do you have in mind?</i>\" she asks.");
@@ -3012,7 +3070,10 @@ private function urtaDiscussesAlcholism():void {
 				outputText("  \"<i>You said you didn't mind me drinking as much as I do... are you going to ask me to cut down?</i>\" she asks, calmly and clearly assuming that's what you intend.");
 			else
 				outputText("  \"<i>I said it before, I'll say it again, I'm not going to stop drinking entirely - there's nothing wrong with a few cold ones to take the edge off.  I don't drink myself stupid any more; that should be enough for you,</i>\" she replies, defensively.");
-		simpleChoices("Drink A Lot", urtaDiscussAlcoholDrinkMore, "Drink A Little", urtaDiscussAlcoholDrinkLess, "Be Yourself", urtaDiscussAlcoholNoChange, "Break Up", null, "", null);
+		menu();
+		addButton(0, "Drink A Lot", urtaDiscussAlcoholDrinkMore);
+		addButton(1, "Drink A Little", urtaDiscussAlcoholDrinkLess);
+		addButton(2, "Be Yourself", urtaDiscussAlcoholNoChange);
 	}
 }
 
@@ -3132,7 +3193,9 @@ private function urtaDiscussesSexAndRomance():void {
 	if (player.inte < 60) dynStats("int", .5);
 	urtaLove(.5);
 	//[Leave] [Tease]
-	simpleChoices("Tease Her", urtaDiscussionTeaseAfterRomance, "", null, "", null, "", null, "Leave", urtaDiscussionLeaveAfterRomance);
+	menu();
+	addButton(0, "Tease Her", urtaDiscussionTeaseAfterRomance);
+	addButton(14, "Leave", urtaDiscussionLeaveAfterRomance);
 }
 
 //[==Leave==]
@@ -3257,7 +3320,9 @@ private function urtaDiscussesEdrynRomance():void {
 			outputText("\n\nShe shakes her head.  \"<i>But I owed you this truth, at the least.  So... what'll be?  Can we be honest, polygamous lovers?   Or is that too weird for you?</i>\"  She stares at you and takes a fortifying drink of whiskey, shuddering nervously as she awaits your response.");
 			outputText("\n\nYou ponder what you should do for a moment.  Will you accept Urta's little indiscretions?  Or will you refuse to have anything to do with her if she can't be faithful to you alone?");
 			//[Accept] [Reject]
-			simpleChoices("Accept", urtaDiscussesEdrynNonLoveAccept, "Reject", urtaDiscussesEdrynNonLoveREJECT, "", null, "", null, "", null);
+			menu();
+			addButton(0, "Accept", urtaDiscussesEdrynNonLoveAccept);
+			addButton(1, "Reject", urtaDiscussesEdrynNonLoveREJECT);
 		}
 		//Subsequent Regular Variant:
 		else {
@@ -3294,7 +3359,10 @@ private function urtaDiscussesEdrynRomance():void {
 			outputText("\n\n\"<i>I didn't want to keep it secret from you, but I was scared you'd hate me for not telling you this to start with,</i>\" Urta suddenly blurts out, looking up at you with wet eyes.  \"<i>I... I won't blame you if you do anyway, but I love you, [name], more than anyone else in the world,</i>\" she states desperately.  \"<i>It's just a matter of physical relief for me - you're the one I love, the only one I love, and she's happy for me to be with you.  I just... I just can't stop having sex entirely, because I'd never be able to stay sane - you aren't here often enough for me to release my pent-up urges, and you'll never be there while you're still out there fighting the demons.  I want YOU and only you, but with our lives like they are now, I can't.  Please tell me you understand,</i>\" she begs.");
 			outputText("\n\nIt's quite clear that she means what she's saying.  Can you accept this arrangement, maybe even be happy about it, or will you break up with her over this breach of trust?");
 			//[Happy] [Tolerate] [Breakup]
-			simpleChoices("Happy", urtaDiscussesEdrynLoveHappy, "Tolerate", urtaDiscussesEdrynLoveTolerate, "Break Up", urtaDiscussesEdrynLoveBreakup, "", null, "", null);
+			menu();
+			addButton(0, "Happy", urtaDiscussesEdrynLoveHappy);
+			addButton(1, "Tolerate", urtaDiscussesEdrynLoveTolerate);
+			addButton(2, "Break Up", urtaDiscussesEdrynLoveBreakup);
 		}
 		else {
 			outputText("With a smirk, you ask Urta how things have been between her and Edryn lately.");
@@ -3531,7 +3599,10 @@ private function urtaDiscussessKatherine():void {
 	else if (affection < 32) { //Willing to have sober sex
 		outputText("“<i>Mmmm yeah Kath,</i>” she says dreamily, then shakes her head and laughs.  “<i>Guess that about sums things up, huh?  Yeah I like Kath, I like her quite a bit.  She’s a good watch officer and she’s a good lover in a threesome.</i>”  Urta looks a little nervous, but presses on.  “<i>So... what do you think of the two of us, when you’re not around, you know?</i>”\n\n");
 		outputText("You could tell Urta not to have sex with Katherine except when you’re around, tell her it’s alright for them to have sex whenever they want or encourage them to fuck each other’s brains out.");
-		simpleChoices("Don't Fuck", urtaKathSexDont, "Whenever", urtaKathSexWhenever, "Encourage", urtaKathSexEncourage, "", null, "", null);
+		menu();
+		addButton(0, "Don't Fuck", urtaKathSexDont);
+		addButton(1, "Whenever", urtaKathSexWhenever);
+		addButton(2, "Encourage", urtaKathSexEncourage);
 		return;
 	}
 	else { //Lovers

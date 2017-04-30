@@ -440,13 +440,13 @@ package classes.Scenes
 			menu();
 			for (var x:int = 0; x < 10; x++) {
 				if (player.itemSlots[x].unlocked)
-					addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), createCallBackFunction2(replaceItem, itype, x));
+					addButton(x, (player.itemSlots[x].itype.shortName + " x" + player.itemSlots[x].quantity), replaceItem, itype, x);
 			}
 			if (source != null) {
 				currentItemSlot = source;
-				addButton(12, "Put Back", createCallBackFunction2(returnItemToInventory, itype, false));
+				addButton(12, "Put Back", returnItemToInventory, itype, false);
 			}
-			if (showUseNow && itype is Useable) addButton(13, "Use Now", createCallBackFunction2(useItemNow, itype as Useable, source));
+			if (showUseNow && itype is Useable) addButton(13, "Use Now", useItemNow, itype as Useable, source);
 			addButton(14, "Abandon", callOnAbandon); //Does not doNext - immediately executes the callOnAbandon function
 		}
 		
@@ -714,7 +714,7 @@ package classes.Scenes
 			var button:int = 0;
 			menu();
 			for (var x:int = startSlot; x < endSlot; x++, button++) {
-				if (storage[x].quantity > 0) addButton(button, (storage[x].itype.shortName + " x" + storage[x].quantity), createCallBackFunction2(pickFrom, storage, x));
+				if (storage[x].quantity > 0) addButton(button, (storage[x].itype.shortName + " x" + storage[x].quantity), pickFrom, storage, x);
 			}
 			addButton(14, "Back", stash);
 		}
