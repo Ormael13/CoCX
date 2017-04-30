@@ -653,6 +653,7 @@ package classes.Scenes.Combat
 			clearOutput();
 			outputText("You gather energy in your Talisman and unleash the spell contained within.  A pink aura washes all over you and as soon as the aura fades, you feel much less hornier.");
 			var temp:int = 30 + rand(player.inte / 5) * player.spellMod();
+			dynStats("lus", -temp);
 			outputText(" <b>(-" + temp + " lust)</b>\n\n");
 			getGame().arianScene.clearTalisman();
 			monster.doAI();
