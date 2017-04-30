@@ -506,17 +506,6 @@ public function createCallBackFunction(func:Function, arg:*, arg2:* = null, arg3
 		}
 	}
 }
-public function createCallBackFunction2(func:Function,...args):Function
-{
-	if (func == null){
-		CoC_Settings.error("createCallBackFunction(null,"+args+")");
-	}
-	return function():*
-	{
-		if (CoC_Settings.haltOnErrors) logFunctionInfo(func,args);
-		return func.apply(null,args);
-	}
-}
 
 /**
  * Adds a button.

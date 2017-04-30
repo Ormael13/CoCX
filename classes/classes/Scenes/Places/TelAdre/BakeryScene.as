@@ -289,7 +289,6 @@ private function buyFig():void {
 
 
 private function talkBakeryMenu():void {
-	//choices("Brownies",createCallBackFunction2(nomnomnom, "brownies", 3),"Cookies",2831,"Cupcakes",2833,"Doughnuts",createCallBackFunction2(nomnomnom, "doughnuts", 5),"Pound Cake",createCallBackFunction2(nomnomnom, "pound cake", 4),"Fox Berry",buyFoxBerry,"SpecialEclair",minoCum,"GiantCupcake",gcupcake,rubiT,rubiB,"Leave",telAdreMenu);
 	clearOutput();
 	outputText("Who will you talk to?\n");
 	var rubiT:String = "Waitress";
