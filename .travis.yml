@@ -3,7 +3,7 @@ sudo: required
 addons:
   # service for code quality analysis
   sonarqube:
-    organization: "Kitteh6660-github"
+    organization: "kitteh6660-github"
 
 # travis-ci does not support actionscript.
 # However the build uses ant, which is usually used to build java projects.
