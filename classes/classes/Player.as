@@ -1,4 +1,4 @@
-﻿package classes
+package classes
 {
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
@@ -268,7 +268,7 @@ use namespace kGAMECLASS;
 			//Stacks on top of Thick Skin perk.
 			if (hasFur()) armorDef += 1;
 			if (hasReptileScales()) armorDef += 3;
-			if (hasDragonScales()) armorDef += 2;
+			if (hasDragonScales()) armorDef += 3;
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorDef += 1;
 			//Bonus defense
@@ -787,7 +787,7 @@ use namespace kGAMECLASS;
 					race = "raccoon-taur";
 			}
 			if (wolfScore() >= 4) {
-				if (hasFur()) {
+				if (hasFur() || gender == 0 || gender == 3) {
 					race = "wolf-morph";
 				}
 				else {
@@ -871,9 +871,11 @@ use namespace kGAMECLASS;
 			}
 			if (spiderScore() >= 4)
 			{
-				race = "spider-morph";
-				if (mf("no", "yes") == "yes")
-					race = "spider-girl";
+				if (gender == 0 || gender == 3) {
+					race = "spider-morph";
+				} else {
+					race = "spider-" + mf("boy", "girl");
+				}
 				if (isDrider())
 					race = "drider";
 			}
@@ -907,7 +909,7 @@ use namespace kGAMECLASS;
 			if (rhinoScore() >= 4)
 			{
 				race = "rhino-morph";
-				if (faceType == 0) race = "rhino-" + mf("man", "girl");
+				if (faceType == 0) race = "rhino-" + mf("boy", "girl");
 			}
 			if (echidnaScore() >= 4)
 			{
@@ -919,7 +921,7 @@ use namespace kGAMECLASS;
 				if (isTaur()) race = "deer-taur";
 				else {
 					race = "deer-morph";
-					if (faceType == 0) race = "deer-" + mf("morph", "girl");
+					if (faceType == 0) race = "deer-" + mf("boy", "girl");
 				}
 			}
 			//Special, bizarre races
@@ -929,14 +931,14 @@ use namespace kGAMECLASS;
 				else {
 					race  = "dragonne-morph";
 					if (faceType == 0)
-						race = "dragonne-" + mf("man", "girl");
+						race = "dragonne-" + mf("boy", "girl");
 				}
 			}
 			if (manticoreScore() >= 6)
 			{
 				race = "manticore-morph"
 				if (faceType == 0)
-					race = "manticore-" + mf("man", "girl");
+					race = "manticore-" + mf("boy", "girl");
 			}
 			if (sirenScore() >= 4)
 			{
@@ -972,7 +974,7 @@ use namespace kGAMECLASS;
 			if (gooScore() >= 3)
 			{
 				race = "goo-";
-				race += mf("boi", "girl");
+				race += mf("boy", "girl");
 			}
 			
 			

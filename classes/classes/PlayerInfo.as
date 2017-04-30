@@ -265,6 +265,120 @@ package classes
 			if (bodyStats != "")
 				outputText("\n<b><u>Body Stats</u></b>\n" + bodyStats, false);
 			// End Body Stats
+			
+			
+			// Begin Racial Scores display -Foxwells
+			var raceScores:String = "";
+			
+			if (player.humanScore() > 0) {
+				raceScores += "<b>Human Score:</b> " + player.humanScore() + "\n";
+			}
+			if (player.mutantScore() > 0) {
+				raceScores += "<b>Mutant Score:</b> " + player.mutantScore() + "\n";
+			}
+			if (player.demonScore() > 0) {
+				raceScores += "<b>Demon Score:</b> " + player.demonScore() + "\n";
+			}
+			if (player.goblinScore() > 0) {
+				raceScores += "<b>Goblin Score:</b> " + player.goblinScore() + "\n";
+			}
+			if (player.gooScore() > 0) {
+				raceScores += "<b>Goo Score:</b> " + player.gooScore() + "\n";
+			}
+			if (player.cowScore() > 0) {
+				raceScores += "<b>Cow Score:</b> " + player.cowScore() + "\n";
+			}
+			if (player.minoScore() > 0) {
+				raceScores += "<b>Minotaur Score:</b> " + player.minoScore() + "\n";
+			}
+			if (player.catScore() > 0) {
+				raceScores += "<b>Cat Score:</b> " + player.catScore() + "\n";
+			}
+			if (player.dragonneScore() > 0) {
+				raceScores += "<b>Dragonne Score:</b> " + player.dragonneScore() + "\n";
+			}
+			if (player.manticoreScore() > 0) {
+				raceScores += "<b>Manticore Score:</b> " + player.manticoreScore() + "\n";
+			}
+			if (player.lizardScore() > 0) {
+				raceScores += "<b>Lizard Score:</b> " + player.lizardScore() + "\n";
+			}
+			if (player.salamanderScore() > 0) {
+				raceScores += "<b>Salamander Score:</b> " + player.salamanderScore() + "\n";
+			}
+			if (player.dragonScore() > 0) {
+				raceScores += "<b>Dragon Score:</b> " + player.dragonScore() + "\n";
+			}
+			if (player.nagaScore() > 0) {
+				raceScores += "<b>Naga Score:</b> " + player.nagaScore() + "\n";
+			}
+			if (player.sandTrapScore() > 0) {
+				raceScores += "<b>Sand Trap Score:</b> " + player.sandTrapScore() + "\n";
+			}
+			if (player.harpyScore() > 0) {
+				raceScores += "<b>Avian Score:</b> " + player.harpyScore() + "\n";
+			}
+			if (player.sharkScore() > 0) {
+				raceScores += "<b>Shark Score:</b> " + player.sharkScore() + "\n";
+			}
+			if (player.sirenScore() > 0) {
+				raceScores += "<b>Siren Score:</b> " + player.sirenScore() + "\n";
+			}
+			if (player.dogScore() > 0) {
+				raceScores += "<b>Dog Score:</b> " + player.dogScore() + "\n";
+			}
+			if (player.wolfScore() > 0) {
+				raceScores += "<b>Wolf Score:</b> " + player.wolfScore() + "\n";
+			}
+			if (player.foxScore() > 0) {
+				raceScores += "<b>Fox Score:</b> " + player.foxScore() + "\n";
+			}
+			if (player.kitsuneScore() > 0) {
+				raceScores += "<b>Kitsune Score:</b> " + player.kitsuneScore() + "\n";
+			}
+			if (player.echidnaScore() > 0) {
+				raceScores += "<b>Echidna Score:</b> " + player.echidnaScore() + "\n";
+			}
+			if (player.mouseScore() > 0) {
+				raceScores += "<b>Mouse Score:</b> " + player.mouseScore() + "\n";
+			}
+			if (player.ferretScore() > 0) {
+				raceScores += "<b>Ferret Score:</b> " + player.ferretScore() + "\n";
+			}
+			if (player.raccoonScore() > 0) {
+				raceScores += "<b>Raccoon Score:</b> " + player.raccoonScore() + "\n";
+			}
+			if (player.bunnyScore() > 0) {
+				raceScores += "<b>Naga Score:</b> " + player.bunnyScore() + "\n";
+			}
+			if (player.kangaScore() > 0) {
+				raceScores += "<b>Kangaroo Score:</b> " + player.kangaScore() + "\n";
+			}
+			if (player.horseScore() > 0) {
+				raceScores += "<b>Horse Score:</b> " + player.horseScore() + "\n";
+			}
+			if (player.deerScore() > 0) {
+				raceScores += "<b>Deer Score:</b> " + player.deerScore() + "\n";
+			}
+			if (player.satyrScore() > 0) {
+				raceScores += "<b>Satyr Score:</b> " + player.satyrScore() + "\n";
+			}
+			if (player.rhinoScore() > 0) {
+				raceScores += "<b>Rhino Score:</b> " + player.rhinoScore() + "\n";
+			}
+			if (player.spiderScore() > 0) {
+				raceScores += "<b>Spider Score:</b> " + player.spiderScore() + "\n";
+			}
+			if (player.pigScore() > 0) {
+				raceScores += "<b>Pig Score:</b> " + player.pigScore() + "\n";
+			}
+			if (player.beeScore() > 0) {
+				raceScores += "<b>Bee Score:</b> " + player.beeScore() + "\n";
+			}
+			
+			if (raceScores != "")
+				outputText("\n<b><u>Racial Scores</u></b>\n" + raceScores, false);
+			// End Racial Scores display -Foxwells
 
 			// Begin Misc Stats
 			var miscStats:String = "";
