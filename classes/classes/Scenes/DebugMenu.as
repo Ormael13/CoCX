@@ -489,53 +489,146 @@ package classes.Scenes
 				return "\\["+tag+"\\] = ["+tag+"]"
 			}).join(",\n");
 		}
+		private function showChangeOptions(page:int, constants:Array, functionPageIndex:Function):void {
+			var N:int = 12;
+			for (var i:int = N * page; i < constants.length && i < (page + 1) * N; i++) {
+				addButton(i % N, constants[i], curry(functionPageIndex, page, i));
+			}
+			if (page > 0) addButton(12, "PrevPage", curry(functionPageIndex, page - 1));
+			if ((page +1)*N < constants.length) addButton(13, "NextPage", curry(functionPageIndex, page + 1));
+			addButton(14, "Back", bodyPartEditor);
+		}
 		private function dumpPlayerData():void {
 			clearOutput();
-			getGame().playerAppearance.describeFace();
+			var pa:PlayerAppearance = getGame().playerAppearance;
+			pa.describeFaceShape();
+			outputText("  It has " + player.faceDesc() + ".", false);
+			pa.describeEyes();
+			pa.describeHair();
 
-			outputText("[pg]");
 		}
 		private function bodyPartEditor():void {
 			menu();
 			dumpPlayerData();
 			addButton(0,"SkinType",changeSkinType);
+			addButton(1,"SkinTone",changeSkinTone);
+			addButton(2,"SkinAdj",changeSkinAdj);
+			addButton(3,"SkinDesc",changeSkinDesc);
+			addButton(4,"FaceType",changeFaceType);
 			addButton(14, "Back", accessDebugMenu);
 		}
-		public static const SKIN_TYPE_CONSTANTS:Array = [
-			"PLAIN", // SKIN_TYPE_PLAIN
-			"FUR", // SKIN_TYPE_FUR
-			"SCALES", // SKIN_TYPE_SCALES
-			"GOO", // SKIN_TYPE_GOO
-			"UNDEFINED", // SKIN_TYPE_UNDEFINED
-			"CHITIN", // SKIN_TYPE_CHITIN
-			"BARK", // SKIN_TYPE_BARK
-			"STONE", // SKIN_TYPE_STONE
-			"TATTOED", // SKIN_TYPE_TATTOED
-			"AQUA_SCALES", // SKIN_TYPE_AQUA_SCALES
-			"PARTIAL_FUR", // SKIN_TYPE_PARTIAL_FUR
-			"PARTIAL_SCALES", // SKIN_TYPE_PARTIAL_SCALES
-			"PARTIAL_CHITIN", // SKIN_TYPE_PARTIAL_CHITIN
-			"PARTIAL_BARK" // SKIN_TYPE_PARTIAL_BARK
+		private static const SKIN_TYPE_CONSTANTS:Array = [
+			"(0) PLAIN", // SKIN_TYPE_PLAIN
+			"(1) FUR", // SKIN_TYPE_FUR
+			"(2) SCALES", // SKIN_TYPE_SCALES
+			"(3) GOO", // SKIN_TYPE_GOO
+			"(4)", // SKIN_TYPE_UNDEFINED
+			"(5) CHITIN", // SKIN_TYPE_CHITIN
+			"(6) BARK", // SKIN_TYPE_BARK
+			"(7) STONE", // SKIN_TYPE_STONE
+			"(8) TATTOED", // SKIN_TYPE_TATTOED
+			"(9) AQUA_SCALES", // SKIN_TYPE_AQUA_SCALES
+			"(10) PART_FUR", // SKIN_TYPE_PARTIAL_FUR
+			"(11) PART_SCALES", // SKIN_TYPE_PARTIAL_SCALES
+			"(12) PART_CHITIN", // SKIN_TYPE_PARTIAL_CHITIN
+			"(13) PART_BARK" // SKIN_TYPE_PARTIAL_BARK
 		];
-		private function changeSkinType(page:int=0,setTo:int=-1):void {
-			if (setTo>=0) player.skin.type = setTo;
+		private static const SKIN_TONE_CONSTANTS:Array = [
+			"pale", "light", "dark", "green",
+			"gray", "blue", "black", "white",
+			"ghostly pale", "bubblegum pink", "dirty red", "blueish yellow"
+		];
+		private static const SKIN_ADJ_CONSTANTS:Array = [
+			"(none)", "tough", "smooth", "rough",
+			"freckled", "milky", "ashen", "slimy",
+			"goopey", "latex", "rubber"
+		];
+		private static const SKIN_DESC_CONSTANTS:Array = [
+			"(default)", "covering", "feathers", "hide",
+			"skin and scales","shaggy fur","skin","fur",
+			"scales","bark","stone","chitin"
+		];
+		private function dumpPlayerFace():void {
+			outputText("[pg]");
+			outputText("player.skin = " + JSON.stringify(player.skin)
+											  .replace(/":"/g,'":&nbsp; "')
+											  .replace(/,"/g, ', "') + "\n");
+			outputText(generateTagDemos(
+							"skin basic", "skin basic.noadj", "skin", "skin.noadj",
+							"skin main", "skin main.noadj",
+							"skin cover", "skin cover.noadj", "skinfurscales",
+							"skin full", "skin full.noadj", "skin.full",
+							"skintone") + ".\n");
+			outputText("player.face = " + JSON.stringify(player.facePart).replace(/,/g, ", ") + "\n");
+			outputText(generateTagDemos("face")+".\n");
+		}
+		private function changeSkinType(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.skin.type = setIdx;
 			menu();
 			dumpPlayerData();
-			outputText("player.skin = "+JSON.stringify(player.skin).replace(",",", ")+"\n");
-			outputText(generateTagDemos(
-							"skin basic","skin basic.noadj","skin","skin.noadj",
-							"skin main","skin main.noadj",
-							"skin cover","skin cover.noadj","skinfurscales",
-							"skin full","skin full.noadj","skin.full",
-							"skintone")+".\n");
-			for (var i:int=10*page;i<SKIN_TYPE_CONSTANTS.length && i<10*page+10;i++) {
-				addButton(i%10,"("+i+") "+SKIN_TYPE_CONSTANTS[i],curry(changeSkinType,page,i));
-			}
-			if (page>0) addButton(12,"PrevPage",curry(changeSkinType,page-1));
-			if (page*10+10<SKIN_TYPE_CONSTANTS.length) addButton(13,"NextPage",curry(changeSkinType,page+1));
-			addButton(14, "Back", bodyPartEditor);
+			dumpPlayerFace();
+			showChangeOptions(page, SKIN_TYPE_CONSTANTS, changeSkinType);
 		}
-		
+		private function changeSkinTone(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.skin.tone = SKIN_TONE_CONSTANTS[setIdx];
+			menu();
+			dumpPlayerData();
+			dumpPlayerFace();
+			showChangeOptions(page, SKIN_TONE_CONSTANTS, changeSkinTone);
+		}
+		private function changeSkinAdj(page:int=0,setIdx:int=-1):void {
+			if (setIdx==0) player.skin.tone = "";
+			if (setIdx>0) player.skin.tone = SKIN_ADJ_CONSTANTS[setIdx];
+			menu();
+			dumpPlayerData();
+			dumpPlayerFace();
+			showChangeOptions(page, SKIN_ADJ_CONSTANTS, changeSkinAdj);
+		}
+		private function changeSkinDesc(page:int=0,setIdx:int=-1):void {
+			if (setIdx==0) player.skin.desc = "";
+			if (setIdx>0) player.skin.desc = SKIN_DESC_CONSTANTS[setIdx];
+			menu();
+			dumpPlayerData();
+			dumpPlayerFace();
+			showChangeOptions(page, SKIN_DESC_CONSTANTS, changeSkinDesc);
+		}
+		private static const FACE_TYPE_CONSTANTS:Array = [
+			"(0) HUMAN",  // FACE_HUMAN
+			"(1) HORSE",  // FACE_HORSE
+			"(2) DOG",  // FACE_DOG
+			"(3) COW_MINOTAUR",  // FACE_COW_MINOTAUR
+			"(4) SHARK_TEETH",  // FACE_SHARK_TEETH
+			"(5) SNAKE_FANGS",  // FACE_SNAKE_FANGS
+			"(6) CAT",  // FACE_CAT
+			"(7) LIZARD",  // FACE_LIZARD
+			"(8) BUNNY",  // FACE_BUNNY
+			"(9) KANGAROO",  // FACE_KANGAROO
+			"(10) SPIDER_FANGS",  // FACE_SPIDER_FANGS
+			"(11) FOX",  // FACE_FOX
+			"(12) DRAGON",  // FACE_DRAGON
+			"(13) RACCOON_MASK",  // FACE_RACCOON_MASK
+			"(14) RACCOON",  // FACE_RACCOON
+			"(15) BUCKTEETH",  // FACE_BUCKTEETH
+			"(16) MOUSE",  // FACE_MOUSE
+			"(17) FERRET_MASK",  // FACE_FERRET_MASK
+			"(18) FERRET",  // FACE_FERRET
+			"(19) PIG",  // FACE_PIG
+			"(20) BOAR",  // FACE_BOAR
+			"(21) RHINO",  // FACE_RHINO
+			"(22) ECHIDNA",  // FACE_ECHIDNA
+			"(23) DEER",  // FACE_DEER
+			"(24) WOLF",  // FACE_WOLF
+			"(25) MANTICORE",  // FACE_MANTICORE
+			"(26) SALAMANDER_FANGS",  // FACE_SALAMANDER_FANGS
+			"(27) YETI_FANGS",  // FACE_YETI_FANGS
+		];
+		private function changeFaceType(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.facePart.type = setIdx;
+			menu();
+			dumpPlayerData();
+			dumpPlayerFace();
+			showChangeOptions(page, FACE_TYPE_CONSTANTS, changeFaceType);
+		}
 		private function changeScorpionTail():void {
 			clearOutput();
 			outputText("<b>Your tail is now that of a scorpion's. Currently, scorpion tail has no use but it will eventually be useful for stinging.</b>");

@@ -2382,7 +2382,7 @@
 					[SKIN_TYPE_CHITIN, "chitin"],
 					[SKIN_TYPE_BARK, "bark"],
 					[SKIN_TYPE_STONE, "stone"],
-					[SKIN_TYPE_TATTOED, "sexy tattoed"],
+					[SKIN_TYPE_TATTOED, "sexy tattoed skin"],
 					[SKIN_TYPE_AQUA_SCALES, "bark"],
 					[SKIN_TYPE_PARTIAL_FUR, "small patches of fur"],
 					[SKIN_TYPE_PARTIAL_SCALES, "small patches of scales"],

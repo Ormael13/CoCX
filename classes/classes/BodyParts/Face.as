@@ -29,6 +29,12 @@ public class Face extends BodyPart {
 			return "ERROR: NO BEARD! <b>YOU ARE NOT A VIKING AND SHOULD TELL KITTEH IMMEDIATELY.</b>";
 		}
 	}
+	public function isHumanShaped():Boolean {
+		return isAny(FACE_HUMAN,
+				FACE_MANTICORE, FACE_BUCKTEETH, FACE_BUNNY, FACE_SHARK_TEETH,
+				FACE_SNAKE_FANGS, FACE_SPIDER_FANGS, FACE_YETI_FANGS, FACE_SALAMANDER_FANGS,
+				FACE_FERRET_MASK);
+	}
 	public function nounPhrase():String {
 		var stringo:String = "";
 		if (type == FACE_HUMAN) return "face";

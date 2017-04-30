@@ -90,6 +90,7 @@ public class Skin extends BodyPart {
 			case SKIN_TYPE_CHITIN:
 				return creature.chitinColor;
 			case SKIN_TYPE_PARTIAL_BARK:
+			case SKIN_TYPE_BARK:
 				return tone;
 			default:
 				return "no";
