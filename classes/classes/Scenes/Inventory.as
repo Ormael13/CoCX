@@ -450,7 +450,7 @@ package classes.Scenes
 			addButton(14, "Abandon", callOnAbandon); //Does not doNext - immediately executes the callOnAbandon function
 		}
 		
-		private function useItemNow(item:Useable, source:ItemSlotClass):void {
+		private function useItemNow(item:Useable, source:ItemSlotClass = null):void {
 			clearOutput();
 			if (item.canUse()) { //If an item cannot be used then canUse should provide a description of why the item cannot be used
 				useItem(item, source);
