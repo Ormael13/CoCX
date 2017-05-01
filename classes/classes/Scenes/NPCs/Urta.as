@@ -89,7 +89,7 @@
 				if (flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] == 0) flags[kFLAGS.URTA_CUM_NO_CUM_DAYS]++;
 				else flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] = 0;
 				if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] > 0) {
-					flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] -= .5;
+					flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] -= .25;
 					if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] < 0) flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] = 0;
 				}
 			}
