@@ -148,6 +148,33 @@ package classes.internals
 			return dest;
 		}
 		/**
+		 * [ [key1,value1], [key2, value2], ... ] -> { key1: value1, key2: value2, ... }
+		 */
+		public static function createMapFromPairs(src:Array):Object {
+			return multipleMapsFromPairs(src)[0];
+		}
+		/**
+		 * [ [key1, value1_1, value1_2, ...],
+		 *   [key2, value2_1, value2_2, ...], ... ]
+		 *   ->
+		 * [ { key1: value1_1,
+		 *     key2: value2_1, ...
+		 *   }, {
+		 *     key1: value1_2,
+		 *     key2: value2_2, ...
+		 *   }, ... ]
+		 */
+		public static function multipleMapsFromPairs(src:Array):Array {
+			var results:Array = [{}];
+			for each(var tuple:Array in src) {
+				while (results.length < tuple.length-1) results.push({});
+				var key:* = tuple[0];
+				for (var i:int = 1; i<tuple.length; i++) results[i-1][key] = tuple[i];
+			}
+			return results;
+		}
+
+		/**
 		 * Convert a mixed array to an array of strings
 		 *
 		 * Some string lists (color lists for example) may contain strings and arrays containing 2+ strings.

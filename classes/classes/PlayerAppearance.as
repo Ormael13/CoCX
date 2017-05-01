@@ -1471,20 +1471,20 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  You have a face resembling that of a minotaur, with cow-like features, particularly a squared off wet nose.  Despite your lack of fur elsewhere, your visage does have a short layer of " + player.furColor + " fuzz");
 				if (player.skinType == SKIN_TYPE_TATTOED) outputText(" covered with magical tattoo");
 				outputText(".", false);
-			}
-			if (player.skinType == SKIN_TYPE_FUR)
+			} else if (player.skinType == SKIN_TYPE_FUR)
 				outputText("  You have a face resembling that of a minotaur, with cow-like features, particularly a squared off wet nose.  Your " + player.skinFurScales() + " thickens noticeably on your head, looking shaggy and more than a little monstrous once laid over your visage.", false);
-			if (player.skin.isPartiallyCovered() || player.skinType == SKIN_TYPE_PARTIAL_FUR)
+			else if (player.skin.isPartiallyCovered()) {
 				outputText("  Your face resembles a minotaur's, though strangely it is covered small patches of shimmering ", false);
-			if (player.skinType == SKIN_TYPE_PARTIAL_FUR) outputText("fur", false);
-			if (player.skinType == SKIN_TYPE_PARTIAL_SCALES) outputText("scales", false);
-			if (player.skinType == SKIN_TYPE_PARTIAL_CHITIN) outputText("chitin", false);
-			outputText(", right up to the flat cow-like nose that protrudes from your face.", false);
-			if (player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_CHITIN)
+				if (player.skinType == SKIN_TYPE_PARTIAL_FUR) outputText("fur", false);
+				if (player.skinType == SKIN_TYPE_PARTIAL_SCALES) outputText("scales", false);
+				if (player.skinType == SKIN_TYPE_PARTIAL_CHITIN) outputText("chitin", false);
+				outputText(", right up to the flat cow-like nose that protrudes from your face.", false);
+			} else if (player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_CHITIN) {
 				outputText("  Your face resembles a minotaur's, though strangely it is covered in shimmering ", false);
-			if (player.skinType == SKIN_TYPE_SCALES) outputText("scales", false);
-			if (player.skinType == SKIN_TYPE_CHITIN) outputText("chitin", false);
-			outputText(", right up to the flat cow-like nose that protrudes from your face.", false);
+				if (player.skinType == SKIN_TYPE_SCALES) outputText("scales", false);
+				else if (player.skinType == SKIN_TYPE_CHITIN) outputText("chitin", false);
+				outputText(", right up to the flat cow-like nose that protrudes from your face.", false);
+			}
 		}
 		//Lizard-face
 		if (player.faceType == FACE_LIZARD) {

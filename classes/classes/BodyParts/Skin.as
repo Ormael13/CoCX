@@ -13,9 +13,9 @@ public class Skin extends SaveableBodyPart {
 	include "../../../includes/appearanceDefs.as";
 
 	private var _desc:String   = "";
-	public var furColor:String = "no";
+	public var furColor:String = "";
 	public var tone:String     = "albino";
-	public var adj:String      = "";
+	private var _adj:String      = "";
 
 	public function Skin(creature:Creature) {
 		super(creature,"skin", ["tone", "adj", "desc", "furColor"]);
@@ -31,6 +31,13 @@ public class Skin extends SaveableBodyPart {
 							   : type
 					   ] || "skin";
 	}
+	public function defaultAdj():String {
+		return Appearance.DEFAULT_SKIN_ADJS[
+					   isPartiallyCovered()
+							   ? PARTIAL_TO_FULL[type]
+							   : type
+					   ] || "";
+	}
 	public function get color():String { return tone; }
 	public function get desc():String {
 		return _desc || defaultDesc();
@@ -38,9 +45,16 @@ public class Skin extends SaveableBodyPart {
 	public function set desc(value:String):void {
 		_desc = value == defaultDesc() ? "" : value;
 	}
+	public function get adj():String {
+		return _adj;
+	}
+	public function set adj(value:String):void {
+		_adj = value == defaultAdj() ? "" : value;
+	}
 	override public function set type(value:int):void {
 		super.type = value;
 		_desc      = "";
+		if (!_adj) _adj = defaultAdj();
 	}
 	/**
 	 * @param layer: (default 'basic')
@@ -82,9 +96,10 @@ public class Skin extends SaveableBodyPart {
 		switch (type) {
 			case SKIN_TYPE_PARTIAL_FUR:
 			case SKIN_TYPE_FUR:
-				return furColor;
+				return furColor||creature.hairColor;
 			case SKIN_TYPE_PARTIAL_SCALES:
 			case SKIN_TYPE_SCALES:
+			case SKIN_TYPE_AQUA_SCALES:
 				return creature.scalesColor;
 			case SKIN_TYPE_PARTIAL_CHITIN:
 			case SKIN_TYPE_CHITIN:
@@ -93,7 +108,7 @@ public class Skin extends SaveableBodyPart {
 			case SKIN_TYPE_BARK:
 				return tone;
 			default:
-				return "no";
+				return "gamebug-tinted";
 		}
 	}
 	// Returns 0: none, 1: partial, 2: max cover
@@ -190,7 +205,7 @@ public class Skin extends SaveableBodyPart {
 		adj      = "";
 	}
 
-	public static const PARTIAL_TO_FULL:Object = Appearance.createMapFromPairs([
+	public static const PARTIAL_TO_FULL:Object = createMapFromPairs([
 		[SKIN_TYPE_PARTIAL_CHITIN, SKIN_TYPE_CHITIN],
 		[SKIN_TYPE_PARTIAL_SCALES, SKIN_TYPE_SCALES],
 		[SKIN_TYPE_PARTIAL_FUR, SKIN_TYPE_FUR],
@@ -199,9 +214,9 @@ public class Skin extends SaveableBodyPart {
 
 	override protected function loadFromOldSave(savedata:Object):void {
 		//Convert from old skinDesc to new skinAdj + skinDesc!
-		type = Utils.intOr(savedata.skinType,SKIN_TYPE_PLAIN);
-		desc = Utils.stringOr(savedata.skinDesc,"");
-		adj = Utils.stringOr(savedata.skinAdj,"");
+		type = intOr(savedata.skinType,SKIN_TYPE_PLAIN);
+		desc = stringOr(savedata.skinDesc,"");
+		adj = stringOr(savedata.skinAdj,"");
 		for each (var legacyAdj:String in ["smooth", "thick", "rubber", "latex", "slimey"]) {
 			if (desc.indexOf(legacyAdj) != -1) {
 				adj = legacyAdj;
@@ -219,8 +234,8 @@ public class Skin extends SaveableBodyPart {
 				}
 			}
 		}
-		tone    = Utils.stringOr(savedata.skinTone,"albino");
-		furColor= Utils.stringOr(savedata.furColor,"no");
+		tone    = stringOr(savedata.skinTone,"albino");
+		furColor= stringOr(savedata.furColor,"no");
 	}
 	override protected function saveToOldSave(savedata:Object):void {
 		savedata.skinType = type;

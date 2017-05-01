@@ -39,7 +39,7 @@ public class BodyPart extends SimpleJsonable {
 		return "something";
 	}
 	public function setProps(p:Object):void {
-		Utils.copyObjectEx(this, p, myPublicPrimitives);
+		copyObjectEx(this, p, myPublicPrimitives);
 	}
 
 	public function setAllProps(p:Object, keepTone:Boolean = true):void {

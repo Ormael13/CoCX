@@ -2339,12 +2339,7 @@
 			return defaultValue;
 		}
 
-		public static function createMapFromPairs(src:Array):Object
-		{
-			var result:Object = {};
-			for (var i:int = 0; i < src.length; i++) result[src[i][0]] = src[i][1];
-			return result;
-		}
+
 
 		public static const DEFAULT_GENDER_NAMES:Object = createMapFromPairs(
 				[
@@ -2354,42 +2349,25 @@
 					[GENDER_HERM, "hermaphrodite"]
 				]
 		);
-		public static const DEFAULT_SKIN_NAMES:Object = createMapFromPairs(
-				[
-					[SKIN_TYPE_PLAIN, "skin"],
-					[SKIN_TYPE_FUR, "fur"],
-					[SKIN_TYPE_SCALES, "scales"],
-					[SKIN_TYPE_GOO, "goo"],
-					[SKIN_TYPE_UNDEFINED, "undefined flesh"],
-					[SKIN_TYPE_CHITIN, "chitin"],
-					[SKIN_TYPE_BARK, "bark"],
-					[SKIN_TYPE_STONE, "stone"],
-					[SKIN_TYPE_TATTOED, "sexy tattoed"],
-					[SKIN_TYPE_AQUA_SCALES, "bark"],
-					[SKIN_TYPE_PARTIAL_FUR, "partial fur"],
-					[SKIN_TYPE_PARTIAL_SCALES, "partial scales"],
-					[SKIN_TYPE_PARTIAL_CHITIN, "partial chitin"],
-					[SKIN_TYPE_PARTIAL_BARK, "partial bark"]
-				]
-		);
-		public static const DEFAULT_SKIN_DESCS:Object = createMapFromPairs(
-				[
-					[SKIN_TYPE_PLAIN, "skin"],
-					[SKIN_TYPE_FUR, "fur"],
-					[SKIN_TYPE_SCALES, "scales"],
-					[SKIN_TYPE_GOO, "skin"],
-					[SKIN_TYPE_UNDEFINED, "skin"],
-					[SKIN_TYPE_CHITIN, "chitin"],
-					[SKIN_TYPE_BARK, "bark"],
-					[SKIN_TYPE_STONE, "stone"],
-					[SKIN_TYPE_TATTOED, "sexy tattoed skin"],
-					[SKIN_TYPE_AQUA_SCALES, "bark"],
-					[SKIN_TYPE_PARTIAL_FUR, "small patches of fur"],
-					[SKIN_TYPE_PARTIAL_SCALES, "small patches of scales"],
-					[SKIN_TYPE_PARTIAL_CHITIN, "small patches of chitin"],
-					[SKIN_TYPE_PARTIAL_BARK, "small patches of bark"]
-				]
-		);
+		private static const DEFAULT_SKIN_NAMES_DESCS_ADJS:Object = multipleMapsFromPairs([
+			[SKIN_TYPE_PLAIN, "PLAIN", "skin", ""],
+			[SKIN_TYPE_FUR, "FUR", "fur", ""],
+			[SKIN_TYPE_SCALES, "SCALES", "scales", ""],
+			[SKIN_TYPE_GOO, "GOO", "skin", "goopey"],
+			[SKIN_TYPE_UNDEFINED, "UNDEFINED", "game bug", "buggy"],
+			[SKIN_TYPE_CHITIN, "CHITIN", "chitin", ""],
+			[SKIN_TYPE_BARK, "BARK", "bark", ""],
+			[SKIN_TYPE_STONE, "STONE", "stone", ""],
+			[SKIN_TYPE_TATTOED, "TATTOED", "sexy tattoed skin",""],
+			[SKIN_TYPE_AQUA_SCALES, "AQUA_SCALES", "scales", ""],
+			[SKIN_TYPE_PARTIAL_FUR, "PART_FUR", "small patches of fur", ""],
+			[SKIN_TYPE_PARTIAL_SCALES, "PART_SCALES", "small patches of scales", ""],
+			[SKIN_TYPE_PARTIAL_CHITIN, "PART_CHITIN", "small patches of chitin", ""],
+			[SKIN_TYPE_PARTIAL_BARK, "PART_BARK", "small patches of bark", ""],
+		]);
+		public static const DEFAULT_SKIN_NAMES:Object = DEFAULT_SKIN_NAMES_DESCS_ADJS[0];
+		public static const DEFAULT_SKIN_DESCS:Object = DEFAULT_SKIN_NAMES_DESCS_ADJS[1];
+		public static const DEFAULT_SKIN_ADJS:Object = DEFAULT_SKIN_NAMES_DESCS_ADJS[2];
 		public static const DEFAULT_HAIR_NAMES:Object = createMapFromPairs(
 				[
 					[HAIR_NORMAL, "normal"],

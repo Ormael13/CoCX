@@ -39,8 +39,8 @@ public class Claws extends SaveableBodyPart {
 	}
 
 	override protected function loadFromOldSave(savedata:Object):void {
-		type = Utils.intOr(savedata.clawType,TYPE_NORMAL);
-		tone = Utils.stringOr(savedata.clawTone,"");
+		type = intOr(savedata.clawType,TYPE_NORMAL);
+		tone = stringOr(savedata.clawTone,"");
 	}
 	override protected function saveToOldSave(savedata:Object):void {
 		savedata.clawType = type;

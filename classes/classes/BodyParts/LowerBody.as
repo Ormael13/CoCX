@@ -161,7 +161,7 @@ public class LowerBody extends SaveableBodyPart {
 			return "flat pony-feet";
 		//BUNNAH
 		if (type == 12) {
-			select = Utils.rand(5);
+			select = rand(5);
 			if (select == 0)
 				return "large bunny feet";
 			else if (select == 1)
@@ -181,7 +181,7 @@ public class LowerBody extends SaveableBodyPart {
 		if (type == 14)
 			return "foot-paws";
 		if (type == 17) {
-			select = Utils.rand(4);
+			select = rand(4);
 			if (select == 0)
 				return "paws";
 			else if (select == 1)
@@ -299,9 +299,9 @@ public class LowerBody extends SaveableBodyPart {
 		//lowerBody:
 		//4 legs - centaur!
 		if (isDrider())
-			return Utils.num2Text(legCount) + " spider legs";
+			return num2Text(legCount) + " spider legs";
 		if (isTaur())
-			return Utils.num2Text(legCount) + " legs";
+			return num2Text(legCount) + " legs";
 
 		switch (type) {
 			case LOWER_BODY_TYPE_HUMAN:
@@ -370,13 +370,13 @@ public class LowerBody extends SaveableBodyPart {
 		}
 	}
 	override protected function loadFromOldSave(savedata:Object):void {
-		type = Utils.intOr(savedata.lowerBody,LOWER_BODY_TYPE_HUMAN);
+		type = intOr(savedata.lowerBody,LOWER_BODY_TYPE_HUMAN);
 		if (type === LOWER_BODY_TYPE_CENTAUR) {
 			type = LOWER_BODY_TYPE_HOOFED;
 		} else if (type === LOWER_BODY_TYPE_DEERTAUR) {
 			type = LOWER_BODY_TYPE_CLOVEN_HOOFED;
 		}
-		legCount = Utils.intOr(savedata.legCount,2);
+		legCount = intOr(savedata.legCount,2);
 	}
 
 	override protected function saveToOldSave(savedata:Object):void {

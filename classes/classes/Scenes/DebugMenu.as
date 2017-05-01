@@ -577,8 +577,8 @@ package classes.Scenes
 			showChangeOptions(page, SKIN_TONE_CONSTANTS, changeSkinTone);
 		}
 		private function changeSkinAdj(page:int=0,setIdx:int=-1):void {
-			if (setIdx==0) player.skin.tone = "";
-			if (setIdx>0) player.skin.tone = SKIN_ADJ_CONSTANTS[setIdx];
+			if (setIdx==0) player.skin.adj = "";
+			if (setIdx>0) player.skin.adj = SKIN_ADJ_CONSTANTS[setIdx];
 			menu();
 			dumpPlayerData();
 			dumpPlayerFace();

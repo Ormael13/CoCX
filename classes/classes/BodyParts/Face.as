@@ -39,7 +39,7 @@ public class Face extends SaveableBodyPart {
 		var stringo:String = "";
 		if (type == FACE_HUMAN) return "face";
 		if (hasMuzzle()) {
-			if (Utils.trueOnceInN(3)) {
+			if (trueOnceInN(3)) {
 				if (type == FACE_HORSE) stringo = "long ";
 				if (type == FACE_CAT) stringo = "feline ";
 				if (type == FACE_RHINO) stringo = "rhino ";
@@ -47,22 +47,22 @@ public class Face extends SaveableBodyPart {
 					|| type == FACE_DRAGON) stringo = "reptilian ";
 				if (type == FACE_WOLF) stringo = "canine ";
 			}
-			return stringo + Utils.randomChoice("muzzle", "snout", "face");
+			return stringo + randomChoice("muzzle", "snout", "face");
 		}
 		//3 - cowface
 		if (type == FACE_COW_MINOTAUR) {
-			if (Utils.trueOnceInN(4)) stringo = "bovine ";
-			return Utils.randomChoice("muzzle", stringo + "face");
+			if (trueOnceInN(4)) stringo = "bovine ";
+			return randomChoice("muzzle", stringo + "face");
 		}
 		//4 - sharkface-teeth
 		if (type == FACE_SHARK_TEETH) {
-			if (Utils.trueOnceInN(4)) stringo = "angular ";
+			if (trueOnceInN(4)) stringo = "angular ";
 			return stringo + "face";
 		}
 		if (type == FACE_PIG || type == FACE_BOAR) {
-			if (Utils.trueOnceInN(4))
+			if (trueOnceInN(4))
 				stringo = (type == FACE_PIG ? "pig" : "boar") + "-like ";
-			if (Utils.trueOnceInN(4))
+			if (trueOnceInN(4))
 				return stringo + "snout";
 			return stringo + "face";
 		}
@@ -132,7 +132,7 @@ public class Face extends SaveableBodyPart {
 	}
 
 	override protected function loadFromOldSave(savedata:Object):void {
-		type = Utils.intOr(savedata.faceType,FACE_HUMAN);
+		type = intOr(savedata.faceType,FACE_HUMAN);
 	}
 	override protected function saveToOldSave(savedata:Object):void {
 		savedata.faceType = type;
