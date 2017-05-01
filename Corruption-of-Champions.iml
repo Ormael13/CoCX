@@ -13,7 +13,7 @@
         </dependencies>
         <compiler-options>
           <map>
-            <entry key="compiler.define" value="CONFIG::debug&#9;true&#10;CONFIG::release&#9;false" />
+            <entry key="compiler.define" value="CONFIG::debug&#9;true&#10;CONFIG::release&#9;false&#10;CONFIG::AIR&#9;false&#10;CONFIG::STANDALONE&#9;false" />
           </map>
           <option name="resourceFilesMode" value="None" />
         </compiler-options>
@@ -32,7 +32,7 @@
         </dependencies>
         <compiler-options>
           <map>
-            <entry key="compiler.define" value="CONFIG::debug&#9;false&#10;CONFIG::release&#9;true" />
+            <entry key="compiler.define" value="CONFIG::debug&#9;false&#10;CONFIG::release&#9;true&#10;CONFIG::AIR&#9;false&#10;CONFIG::STANDALONE&#9;false" />
           </map>
           <option name="resourceFilesMode" value="None" />
         </compiler-options>
@@ -59,4 +59,3 @@
     <orderEntry type="library" exported="" name="lib" level="project" />
   </component>
 </module>
-

@@ -12,6 +12,7 @@ Corruption-of-Champions.as3proj
 /dist
 .idea/workspace.xml
 .idea/copyright/profiles_settings.xml
+node_modules
 *.sol
 *.swc
 /out
