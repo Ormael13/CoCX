@@ -1,7 +1,9 @@
 package classes.Scenes 
 {
 	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Skin;
+import classes.BodyParts.SkinLayer;
+import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import flash.utils.describeType;
 
@@ -492,7 +494,10 @@ package classes.Scenes
 		private function showChangeOptions(page:int, constants:Array, functionPageIndex:Function):void {
 			var N:int = 12;
 			for (var i:int = N * page; i < constants.length && i < (page + 1) * N; i++) {
-				if (constants[i]!=="") addButton(i % N, constants[i], curry(functionPageIndex, page, i));
+				var e:* = constants[i];
+				if (!e) continue;
+				if (!(e is Array)) e = [i,e];
+				addButton(i % N, e[1], curry(functionPageIndex, page, e[0]));
 			}
 			if (page > 0) addButton(12, "PrevPage", curry(functionPageIndex, page - 1));
 			if ((page +1)*N < constants.length) addButton(13, "NextPage", curry(functionPageIndex, page + 1));
@@ -505,135 +510,156 @@ package classes.Scenes
 			outputText("  It has " + player.faceDesc() + ".", false);
 			pa.describeEyes();
 			pa.describeHair();
-
-		}
-		private function bodyPartEditor():void {
-			menu();
-			dumpPlayerData();
-			addButton(0,"SkinType",changeSkinType);
-			addButton(1,"SkinTone",changeSkinTone);
-			addButton(2,"SkinAdj",changeSkinAdj);
-			addButton(3,"SkinDesc",changeSkinDesc);
-			addButton(5,"FaceType",changeFaceType);
-			addButton(6,"FaceDecoType",changeFaceDecoType);
-			addButton(7,"FaceDecoAdj",changeFaceDecoAdj);
-			addButton(14, "Back", accessDebugMenu);
-		}
-		private static const SKIN_TYPE_CONSTANTS:Array = [
-			"(0) PLAIN", // SKIN_TYPE_PLAIN
-			"(1) FUR", // SKIN_TYPE_FUR
-			"(2) SCALES", // SKIN_TYPE_SCALES
-			"(3) GOO", // SKIN_TYPE_GOO
-			"", // SKIN_TYPE_UNDEFINED
-			"(5) CHITIN", // SKIN_TYPE_CHITIN
-			"(6) BARK", // SKIN_TYPE_BARK
-			"(7) STONE", // SKIN_TYPE_STONE
-			"(8) TATTOED", // SKIN_TYPE_TATTOED
-			"(9) AQUA_SCALES", // SKIN_TYPE_AQUA_SCALES
-			"(10) PART_FUR", // SKIN_TYPE_PARTIAL_FUR
-			"(11) PART_SCALES", // SKIN_TYPE_PARTIAL_SCALES
-			"(12) PART_CHITIN", // SKIN_TYPE_PARTIAL_CHITIN
-			"(13) PART_BARK" // SKIN_TYPE_PARTIAL_BARK
-		];
-		private static const SKIN_TONE_CONSTANTS:Array = [
-			"pale", "light", "dark", "green",
-			"gray", "blue", "black", "white",
-			"ghostly pale", "bubblegum pink", "dirty red", "blueish yellow"
-		];
-		private static const SKIN_ADJ_CONSTANTS:Array = [
-			"(none)", "tough", "smooth", "rough",
-			"freckled", "milky", "ashen", "slimy",
-			"goopey", "latex", "rubber"
-		];
-		private static const SKIN_DESC_CONSTANTS:Array = [
-			"(default)", "covering", "feathers", "hide",
-			"skin and scales","shaggy fur","skin","fur",
-			"scales","bark","stone","chitin"
-		];
-		private function dumpPlayerFace():void {
 			outputText("[pg]");
 			outputText("player.skin = " + JSON.stringify(player.skin.saveToObject())
 											  .replace(/":"/g,'":&nbsp; "')
 											  .replace(/,"/g, ', "') + "\n");
-			outputText(generateTagDemos(
-							"skin basic", "skin basic.noadj", "skin", "skin.noadj",
-							"skin main", "skin main.noadj",
-							"skin cover", "skin cover.noadj", "skinfurscales",
-							"skin full", "skin full.noadj", "skin.full",
-							"skintone") + ".\n");
 			outputText("player.facePart = " + JSON.stringify(player.facePart.saveToObject()).replace(/,/g, ", ") + "\n");
+		}
+		private var editBase:Boolean = true;
+		private function bodyPartEditor():void {
+			menu();
+			dumpPlayerData();
+			addButton(0,editBase?"Edit Coat":"Edit Base",editCoatBase);
+			var bc:String = editBase?"Base":"Coat";
+			addButton(1,bc+"Type",changeLayerType);
+			addButton(2,bc+"Tone",changeLayerColor);
+			addButton(3,bc+"Adj",changeLayerAdj);
+			addButton(4,bc+"Desc",changeLayerDesc);
+			addButton(5,"Skin Coverage",changeSkinCoverage);
+			addButton(6,"FaceType",changeFaceType);
+			addButton(7,"FaceDecoType",changeFaceDecoType);
+			addButton(8,"FaceDecoAdj",changeFaceDecoAdj);
+			addButton(14, "Back", accessDebugMenu);
+		}
+		private function editCoatBase():void {
+			editBase = !editBase;
+			bodyPartEditor();
+		}
+		private static const LAYER_TYPE_CONSTANTS:Array = [
+			[SKIN_TYPE_PLAIN,"(0) PLAIN"], // SKIN_TYPE_PLAIN
+			[SKIN_TYPE_FUR,"(1) FUR"], // SKIN_TYPE_FUR
+			[SKIN_TYPE_SCALES,"(2) SCALES"], // SKIN_TYPE_SCALES
+			[SKIN_TYPE_GOO,"(3) GOO"], // SKIN_TYPE_GOO
+			[SKIN_TYPE_CHITIN,"(5) CHITIN"], // SKIN_TYPE_CHITIN
+			[SKIN_TYPE_BARK,"(6) BARK"], // SKIN_TYPE_BARK
+			[SKIN_TYPE_STONE,"(7) STONE"], // SKIN_TYPE_STONE
+			[SKIN_TYPE_TATTOED,"(8) TATTOED"], // SKIN_TYPE_TATTOED
+			[SKIN_TYPE_AQUA_SCALES,"(9) AQUA_SCALES"], // SKIN_TYPE_AQUA_SCALES
+			//"(10) PART_FUR", // SKIN_TYPE_PARTIAL_FUR
+			//"(11) PART_SCALES", // SKIN_TYPE_PARTIAL_SCALES
+			//"(12) PART_CHITIN", // SKIN_TYPE_PARTIAL_CHITIN
+			//"(13) PART_BARK" // SKIN_TYPE_PARTIAL_BARK
+		];
+		private static const SKIN_TONE_CONSTANTS:Array = [
+			"pale", "light", "dark", "green","gray",
+			"blue", "black", "white", "dirty red", "blueish yellow",
+			"ghostly pale", "bubblegum pink",
+		];
+		private static const SKIN_ADJ_CONSTANTS:Array = [
+			"(none)", "tough", "smooth", "rough", "sexy",
+			"freckled", "glistering", "shiny", "slimy","goopey",
+			"latex", "rubber"
+		];
+		private static const SKIN_DESC_CONSTANTS:Array = [
+			"(default)", "covering", "feathers", "hide",
+			"shell", "plastic", "skin", "fur",
+			"scales", "bark", "stone", "chitin"
+		];
+		private static const SKIN_COVERAGE_CONSTANTS:Array = [
+				[Skin.COVERAGE_NONE, "(0) NONE"],
+				[Skin.COVERAGE_LOW, "(1) LOW"],
+				[Skin.COVERAGE_MEDIUM, "(2) MEDIUM"],
+				[Skin.COVERAGE_HIGH, "(3) HIGH"],
+				[Skin.COVERAGE_FULL, "(4) FULL"]
+		];
+		private function dumpPlayerFace():void {
+			outputText("[pg]");
+			outputText(generateTagDemos(
+							"skin", "skin noadj", "skin notone", "skin type",
+							"skin base", "skin base.noadj", "skin base.notone", "skin base.type",
+							"skin coat", "skin coat.noadj", "skin coat.notone", "skin coat.type",
+							"skin full", "skin full.noadj", "skin full.notone", "skin full.type",
+							"skinfurscales", "skintone") + ".\n");
 			outputText(generateTagDemos("face","face deco","face full","player.facePart.isDecorated")+".\n");
 		}
-		private function changeSkinType(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.skin.type = setIdx;
+		private function changeLayerType(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) (editBase?player.skin.base:player.skin.coat).type = setIdx;
 			menu();
 			dumpPlayerData();
 			dumpPlayerFace();
-			showChangeOptions(page, SKIN_TYPE_CONSTANTS, changeSkinType);
+			showChangeOptions(page, LAYER_TYPE_CONSTANTS, changeLayerType);
 		}
-		private function changeSkinTone(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.skin.tone = SKIN_TONE_CONSTANTS[setIdx];
+		private function changeLayerColor(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) (editBase?player.skin.base:player.skin.coat).color = SKIN_TONE_CONSTANTS[setIdx];
 			menu();
 			dumpPlayerData();
 			dumpPlayerFace();
-			showChangeOptions(page, SKIN_TONE_CONSTANTS, changeSkinTone);
+			showChangeOptions(page, SKIN_TONE_CONSTANTS, changeLayerColor);
 		}
-		private function changeSkinAdj(page:int=0,setIdx:int=-1):void {
-			if (setIdx==0) player.skin.adj = "";
-			if (setIdx>0) player.skin.adj = SKIN_ADJ_CONSTANTS[setIdx];
+		private function changeLayerAdj(page:int=0,setIdx:int=-1):void {
+			var tgt:SkinLayer = (editBase?player.skin.base:player.skin.coat);
+			if (setIdx==0) tgt.adj = "";
+			if (setIdx>0) tgt.adj = SKIN_ADJ_CONSTANTS[setIdx];
 			menu();
 			dumpPlayerData();
 			dumpPlayerFace();
-			showChangeOptions(page, SKIN_ADJ_CONSTANTS, changeSkinAdj);
+			showChangeOptions(page, SKIN_ADJ_CONSTANTS, changeLayerAdj);
 		}
-		private function changeSkinDesc(page:int=0,setIdx:int=-1):void {
-			if (setIdx==0) player.skin.desc = "";
-			if (setIdx>0) player.skin.desc = SKIN_DESC_CONSTANTS[setIdx];
+		private function changeLayerDesc(page:int=0,setIdx:int=-1):void {
+			var tgt:SkinLayer = (editBase?player.skin.base:player.skin.coat);
+			if (setIdx==0) tgt.desc = "";
+			if (setIdx>0) tgt.desc = SKIN_DESC_CONSTANTS[setIdx];
 			menu();
 			dumpPlayerData();
 			dumpPlayerFace();
-			showChangeOptions(page, SKIN_DESC_CONSTANTS, changeSkinDesc);
+			showChangeOptions(page, SKIN_DESC_CONSTANTS, changeLayerDesc);
+		}
+		private function changeSkinCoverage(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.skin.coverage = setIdx;
+			menu();
+			dumpPlayerData();
+			dumpPlayerFace();
+			showChangeOptions(page, SKIN_COVERAGE_CONSTANTS, changeSkinCoverage);
 		}
 		private static const FACE_TYPE_CONSTANTS:Array = [
-			"(0) HUMAN",  // FACE_HUMAN
-			"(1) HORSE",  // FACE_HORSE
-			"(2) DOG",  // FACE_DOG
-			"(3) COW_MINOTAUR",  // FACE_COW_MINOTAUR
-			"(4) SHARK_TEETH",  // FACE_SHARK_TEETH
-			"(5) SNAKE_FANGS",  // FACE_SNAKE_FANGS
-			"(6) CAT",  // FACE_CAT
-			"(7) LIZARD",  // FACE_LIZARD
-			"(8) BUNNY",  // FACE_BUNNY
-			"(9) KANGAROO",  // FACE_KANGAROO
-			"(10) SPIDER_FANGS",  // FACE_SPIDER_FANGS
-			"(11) FOX",  // FACE_FOX
-			"(12) DRAGON",  // FACE_DRAGON
-			"(13) RACCOON_MASK",  // FACE_RACCOON_MASK
-			"(14) RACCOON",  // FACE_RACCOON
-			"(15) BUCKTEETH",  // FACE_BUCKTEETH
-			"(16) MOUSE",  // FACE_MOUSE
-			"(17) FERRET_MASK",  // FACE_FERRET_MASK
-			"(18) FERRET",  // FACE_FERRET
-			"(19) PIG",  // FACE_PIG
-			"(20) BOAR",  // FACE_BOAR
-			"(21) RHINO",  // FACE_RHINO
-			"(22) ECHIDNA",  // FACE_ECHIDNA
-			"(23) DEER",  // FACE_DEER
-			"(24) WOLF",  // FACE_WOLF
-			"(25) MANTICORE",  // FACE_MANTICORE
-			"(26) SALAMANDER_FANGS",  // FACE_SALAMANDER_FANGS
-			"(27) YETI_FANGS",  // FACE_YETI_FANGS
+			[FACE_HUMAN,"(0) HUMAN"],  // FACE_HUMAN
+			[FACE_HORSE,"(1) HORSE"],  // FACE_HORSE
+			[FACE_DOG,"(2) DOG"],  // FACE_DOG
+			[FACE_COW_MINOTAUR,"(3) COW_MINOTAUR"],  // FACE_COW_MINOTAUR
+			[FACE_SHARK_TEETH,"(4) SHARK_TEETH"],  // FACE_SHARK_TEETH
+			[FACE_SNAKE_FANGS,"(5) SNAKE_FANGS"],  // FACE_SNAKE_FANGS
+			[FACE_CAT,"(6) CAT"],  // FACE_CAT
+			[FACE_LIZARD,"(7) LIZARD"],  // FACE_LIZARD
+			[FACE_BUNNY,"(8) BUNNY"],  // FACE_BUNNY
+			[FACE_KANGAROO,"(9) KANGAROO"],  // FACE_KANGAROO
+			[FACE_SPIDER_FANGS,"(10) SPIDER_FANGS"],  // FACE_SPIDER_FANGS
+			[FACE_FOX,"(11) FOX"],  // FACE_FOX
+			[FACE_DRAGON,"(12) DRAGON"],  // FACE_DRAGON
+			[FACE_RACCOON_MASK,"(13) RACCOON_MASK"],  // FACE_RACCOON_MASK
+			[FACE_RACCOON,"(14) RACCOON"],  // FACE_RACCOON
+			[FACE_BUCKTEETH,"(15) BUCKTEETH"],  // FACE_BUCKTEETH
+			[FACE_MOUSE,"(16) MOUSE"],  // FACE_MOUSE
+			[FACE_FERRET_MASK,"(17) FERRET_MASK"],  // FACE_FERRET_MASK
+			[FACE_FERRET,"(18) FERRET"],  // FACE_FERRET
+			[FACE_PIG,"(19) PIG"],  // FACE_PIG
+			[FACE_BOAR,"(20) BOAR"],  // FACE_BOAR
+			[FACE_RHINO,"(21) RHINO"],  // FACE_RHINO
+			[FACE_ECHIDNA,"(22) ECHIDNA"],  // FACE_ECHIDNA
+			[FACE_DEER,"(23) DEER"],  // FACE_DEER
+			[FACE_WOLF,"(24) WOLF"],  // FACE_WOLF
+			[FACE_MANTICORE,"(25) MANTICORE"],  // FACE_MANTICORE
+			[FACE_SALAMANDER_FANGS,"(26) SALAMANDER_FANGS"],  // FACE_SALAMANDER_FANGS
+			[FACE_YETI_FANGS,"(27) YETI_FANGS"],  // FACE_YETI_FANGS
 		];
 		private static const DECO_DESC_CONSTANTS:Array = [
-			"(0) NONE",
-			"(1) GENERIC",
-			"(2) OVERLAY",
-			"(3) TATTOO"
+			[DECORATION_NONE,"(0) NONE"],
+			[DECORATION_GENERIC,"(1) GENERIC"],
+			[DECORATION_TATTOO,"(2) TATTOO"],
 		];
 		private static const DECO_ADJ_CONSTANTS:Array = [
-			"(none)", "magic", "glowing", "sexy",
-			"", "", "", "",
-			"mark", "burn", "scar"
+			"(none)", "magic", "glowing", "sexy","",
+			"", "", "mark", "burn", "scar"
 		];
 		private function changeFaceType(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.facePart.type = setIdx;

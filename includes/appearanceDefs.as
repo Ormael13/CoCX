@@ -76,8 +76,7 @@ public static const FACE_YETI_FANGS:int                                		      	
 // face.cheekDecoration etc
 public static const DECORATION_NONE:int                                             =    0;
 public static const DECORATION_GENERIC:int                                          =    1;
-public static const DECORATION_OVERLAY:int                                          =    2;
-public static const DECORATION_TATTOO:int                                           =    3;
+public static const DECORATION_TATTOO:int                                           =    2;
 
 // tongueType
 public static const TONUGE_HUMAN:int                                                =   0;

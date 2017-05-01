@@ -1399,7 +1399,7 @@
 					outputText("\n\nYour " + oldTone + " scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of ", false);
 					if (type == 0) outputText("" + player.hairColor + "", false);
 					else outputText("white", false);
-					outputText(" [skinfurscales].  At last the itching stops as <b>you brush a few more loose scales from your new coat of fur.</b>", false);
+					outputText(" [skin coat].  At last the itching stops as <b>you brush a few more loose scales from your new coat of fur.</b>", false);
 				}
 				if (type == 0) player.setFurColor(["brown", "chocolate", "auburn", "sandy brown", "caramel", "peach", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "brown and white", "black and white"]);
 				else player.setFurColor(["white"]);

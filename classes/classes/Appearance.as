@@ -2354,16 +2354,11 @@
 			[SKIN_TYPE_FUR, "FUR", "fur", ""],
 			[SKIN_TYPE_SCALES, "SCALES", "scales", ""],
 			[SKIN_TYPE_GOO, "GOO", "skin", "goopey"],
-			[SKIN_TYPE_UNDEFINED, "UNDEFINED", "game bug", "buggy"],
 			[SKIN_TYPE_CHITIN, "CHITIN", "chitin", ""],
 			[SKIN_TYPE_BARK, "BARK", "bark", ""],
 			[SKIN_TYPE_STONE, "STONE", "stone", ""],
 			[SKIN_TYPE_TATTOED, "TATTOED", "sexy tattoed skin",""],
-			[SKIN_TYPE_AQUA_SCALES, "AQUA_SCALES", "scales", ""],
-			[SKIN_TYPE_PARTIAL_FUR, "PART_FUR", "small patches of fur", ""],
-			[SKIN_TYPE_PARTIAL_SCALES, "PART_SCALES", "small patches of scales", ""],
-			[SKIN_TYPE_PARTIAL_CHITIN, "PART_CHITIN", "small patches of chitin", ""],
-			[SKIN_TYPE_PARTIAL_BARK, "PART_BARK", "small patches of bark", ""],
+			[SKIN_TYPE_AQUA_SCALES, "AQUA_SCALES", "scales", ""]
 		]);
 		public static const DEFAULT_SKIN_NAMES:Object = DEFAULT_SKIN_NAMES_DESCS_ADJS[0];
 		public static const DEFAULT_SKIN_DESCS:Object = DEFAULT_SKIN_NAMES_DESCS_ADJS[1];
@@ -2652,7 +2647,7 @@
 					[REAR_BODY_SHARK_FIN, "shark fin"]
 				]
 		);
-		public static const DEFAULT_PIERCING_NAMES:Object = createMapFromPairs(
+		public static const DEFAULT_PIERCING_NAMES:Object       = createMapFromPairs(
 				[
 					[PIERCING_TYPE_NONE, "none"],
 					[PIERCING_TYPE_STUD, "stud"],
@@ -2662,21 +2657,21 @@
 					[PIERCING_TYPE_CHAIN, "chain"]
 				]
 		);
-		public static const DEFAULT_VAGINA_TYPE_NAMES:Object = createMapFromPairs(
+		public static const DEFAULT_VAGINA_TYPE_NAMES:Object    = createMapFromPairs(
 				[
 					[VAGINA_TYPE_HUMAN, "human"],
 					[VAGINA_TYPE_EQUINE, "equine"],
 					[VAGINA_TYPE_BLACK_SAND_TRAP, "black sandtrap"]
 				]
 		);
-		public static const DEFAULT_DECORATION_TYPENAMES_:Array = multipleMapsFromPairs(
+		public static const DECORATION_TYPENAMES_:Array         = multipleMapsFromPairs(
 				[
 					[DECORATION_NONE, "nothing", ""],
-					[DECORATION_OVERLAY, "overlay", ""],
+					[DECORATION_GENERIC, "generic", ""],
 					[DECORATION_TATTOO, "tattoo", ""]
 				]
 		);
-		public static const DEFAULT_DECORATION_TYPENAMES:Object = DEFAULT_DECORATION_TYPENAMES_[0];
+		public static const DEFAULT_DECORATION_TYPENAMES:Object = DECORATION_TYPENAMES_[0];
 		//public static const DEFAULT_DECORATION_NAMES:Object = DEFAULT_DECORATION_TYPENAMES_NAMES[1];
 
 		/**
@@ -2687,8 +2682,6 @@
 			switch (decoType) {
 				case DECORATION_NONE:
 					return "nothing";
-				case DECORATION_OVERLAY:
-					return decoAdj+creature.skin.describe('cover');
 				case DECORATION_TATTOO:
 					return decoAdj+"tattoo";
 				case DECORATION_GENERIC:

@@ -8,7 +8,7 @@
 		//Calls are now made through kGAMECLASS rather than thisPtr. This allows the compiler to detect if/when a function is inaccessible.
 		import classes.GlobalFlags.kFLAGS;
 		import classes.GlobalFlags.kGAMECLASS;
-		
+
 		public var singleArgConverters:Object =
 		{
 				// all the errors related to trying to parse stuff if not present are
@@ -79,11 +79,18 @@
 				"sack"						: function(thisPtr:*):* { return kGAMECLASS.sackDescript(); },
 				"sheath"					: function(thisPtr:*):* { return kGAMECLASS.player.sheathDescription(); },
 				"shield"					: function(thisPtr:*):* { return kGAMECLASS.player.shieldName; },
-				"skin"						: function(thisPtr:*):* { return kGAMECLASS.player.skin.describe(); },
-				"skin.full"					: function(thisPtr:*):* { return kGAMECLASS.player.skin.describe('both'); },
-				"skin.noadj"				: function(thisPtr:*):* { return kGAMECLASS.player.skin.describe('basic',true); },
-				"skinfurscales"				: function(thisPtr:*):* { return kGAMECLASS.player.skin.describe('cover'); },
-				"skintone"					: function(thisPtr:*):* { return kGAMECLASS.player.skinTone; },
+				"skin"						: function(thisPtr:*):* {
+					trace("[DEPRECATED] tag [skin] was called");
+					return kGAMECLASS.player.skin.describe();
+				},
+				"skinfurscales"				: function(thisPtr:*):* {
+					trace("[DEPRECATED] tag [skinfurscales] was called");
+					return kGAMECLASS.player.skin.describe('coat');
+				},
+				"skintone"					: function(thisPtr:*):* {
+					trace("[DEPRECATED] tag [skintone] was called");
+					return kGAMECLASS.player.skinTone;
+				},
 				"teasetext"					: function(thisPtr:*):* { return kGAMECLASS.teaseText(); },
 				"tongue"					: function(thisPtr:*):* { return kGAMECLASS.tongueDescript(); },
 				"uppergarment"				: function(thisPtr:*):* { return kGAMECLASS.player.upperGarmentName; },

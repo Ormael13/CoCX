@@ -855,9 +855,6 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.thickness = player.thickness;
 		saveFile.data.tone = player.tone;
 		saveFile.data.tallness = player.tallness;
-		saveFile.data.furColor = player.furColor;
-		saveFile.data.scalesColor = player.scalesColor;
-		saveFile.data.chitinColor = player.chitinColor;
 		saveFile.data.hairColor = player.hairColor;
 		saveFile.data.hairType = player.hairType;
 		saveFile.data.gillType = player.gillType;
@@ -872,9 +869,6 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.antennae = player.antennae;
 		saveFile.data.horns = player.horns;
 		saveFile.data.hornType = player.hornType;
-		/*for each (var key:String in ["underBody","lowerBodyPart","skin","clawsPart"]) {
-			saveFile.data[key] = (player[key] as SimpleJsonable).saveToObject();
-		}*/
 		player.facePart.saveToSaveData(saveFile.data);
 		//player.underBody.saveToSaveData(saveFile.data);
 		player.lowerBodyPart.saveToSaveData(saveFile.data);
@@ -1708,14 +1702,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.thickness = saveFile.data.thickness;
 		
 		player.tallness = saveFile.data.tallness;
-		if (saveFile.data.scalesColor == undefined || saveFile.data.scalesColor == "no")
-			player.scalesColor = saveFile.data.scalesColor;
-		else
-			player.scalesColor = saveFile.data.scalesColor;
-		if (saveFile.data.chitinColor == undefined || saveFile.data.chitinColor == "no")
-			player.chitinColor = saveFile.data.chitinColor;
-		else
-			player.chitinColor = saveFile.data.chitinColor;
 		player.hairColor = saveFile.data.hairColor;
 		if (saveFile.data.hairType == undefined)
 			player.hairType = 0;
@@ -1732,9 +1718,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.armType = saveFile.data.armType;
 		player.hairLength = saveFile.data.hairLength;
-		/*for each (var key:String in ["underBody","lowerBodyPart","skin","clawPart"]) {
-		 (player[key] as SimpleJsonable).loadFromObject(saveFile.data[key],true);
-		 }*/
 		player.lowerBodyPart.loadFromSaveData(data);
 		player.skin.loadFromSaveData(data);
 		player.clawsPart.loadFromSaveData(data);

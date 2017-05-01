@@ -15,9 +15,13 @@ public class SaveableBodyPart extends BodyPart {
 	public function loadFromSaveData(savedata:Object):void {
 		restore(false);
 		var o:Object = objectOr(savedata[keyInSaveData], null);
-		if (o) {
-			loadFromObject(o, true);
-			return;
+		try {
+			if (o) {
+				loadFromObject(o, false);
+				return;
+			}
+		} catch (e:*){
+			trace(e);
 		}
 		loadFromOldSave(savedata);
 	}

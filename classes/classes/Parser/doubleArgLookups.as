@@ -119,20 +119,23 @@
 				return kGAMECLASS.player.skin.describe(layer,noAdj,noTone)
 			}
 		}
-		/*
-		 Your [skin noadj] [skin isare] [skin color].
-		 Your body is covered with [skin.full].
-		 I have [skin.basic][if skin.isPartiallyCovered| with skin.cover.long].
-		 */
 		public var skinLookups:Object = {
-			"basic": skinDescriptionFn("basic", false, false),
-			"basic.noadj": skinDescriptionFn("basic", true, false),
-			"main": skinDescriptionFn("main", false, false),
-			"main.noadj": skinDescriptionFn("main", true, false),
-			"cover": skinDescriptionFn("cover", false, false),
-			"cover.noadj": skinDescriptionFn("cover", true, false),
-			"full": skinDescriptionFn("both", false, false),
-			"full.noadj": skinDescriptionFn("both", true, false)
+			"skin": skinDescriptionFn("skin", false, false),
+			"noadj": skinDescriptionFn("skin", true, false),
+			"notone": skinDescriptionFn("skin", false, true),
+			"type": skinDescriptionFn("skin", true, true),
+			"base": skinDescriptionFn("base", false, false),
+			"base.noadj": skinDescriptionFn("base", true, false),
+			"base.notone": skinDescriptionFn("base", false, true),
+			"base.type": skinDescriptionFn("base", true, true),
+			"coat": skinDescriptionFn("coat", false, false),
+			"coat.noadj": skinDescriptionFn("coat", true, false),
+			"coat.notone": skinDescriptionFn("coat", false, true),
+			"coat.type": skinDescriptionFn("coat", true, true),
+			"full": skinDescriptionFn("full", false, false),
+			"full.noadj": skinDescriptionFn("full", true, false),
+			"full.notone": skinDescriptionFn("full", false, true),
+			"full.type": skinDescriptionFn("full", true, true)
 		};
 		public var faceLookups:Object = {
 			"deco": function(thisPtr:*,aspect:*):*{

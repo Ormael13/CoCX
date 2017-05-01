@@ -911,11 +911,11 @@ package classes.Scenes.Areas.HighMountains
 			if (!player.isTaur())
 			{
 				outputText("Without warning, Izumi violently lunges forward, grabbing at you.  You are only able to let out a surprised yelp before she grips onto your arms, pulling you towards her and spinning you around.");
-				if (!player.isNaga()) outputText("  Before you know it, she has you down on your knees, the cold stone of the floor digging into your [skinfurscales] a little as she circles behind you, smirking cruelly.");
+				if (!player.isNaga()) outputText("  Before you know it, she has you down on your knees, the cold stone of the floor digging into your [skin] a little as she circles behind you, smirking cruelly.");
 				else outputText("  She takes hold of your shoulders and forces you lower to the ground, forced to slither more and more of your tail out from under yourself, until Izumi towers over you.  She circles behind you, a cruel smirk the only hint of her intentions.");
 				outputText("\n\n");
 
-				outputText("Izumi reaches around from behind you and you half turn to look at her, but she grips you by the chin and firmly turns your head away from her.  Your gaze flits nervously around the cave at random as you feel Izumi’s other hand glide slowly across your [skinfurscales], running along your stomach and down towards your");
+				outputText("Izumi reaches around from behind you and you half turn to look at her, but she grips you by the chin and firmly turns your head away from her.  Your gaze flits nervously around the cave at random as you feel Izumi’s other hand glide slowly across your [skin], running along your stomach and down towards your");
 				if(player.isNaga()) outputText(" [leg]");
 				else outputText(" thighs");
 				outputText(".\n\n");

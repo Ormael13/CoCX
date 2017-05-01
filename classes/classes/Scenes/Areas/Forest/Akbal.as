@@ -202,9 +202,7 @@
 			this.tallness = 4*12;
 			this.hipRating = HIP_RATING_SLENDER;
 			this.buttRating = BUTT_RATING_TIGHT;
-			this.skinTone = "spotted";
-			this.skinType = SKIN_TYPE_FUR;
-			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_FUR];
+			this.skin.setCovered({color:"spotted",type:SKIN_TYPE_FUR});
 			this.hairColor = "black";
 			this.hairLength = 5;
 			initStrTouSpeInte(61, 76, 70, 86);
