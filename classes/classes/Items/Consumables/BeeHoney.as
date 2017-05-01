@@ -212,7 +212,6 @@ package classes.Items.Consumables
 			if (changes < changeLimit && player.wingType == CoC.WING_TYPE_BEE_LIKE_SMALL && Utils.rand(4)) {
 				changes++;
 				player.wingType = CoC.WING_TYPE_BEE_LIKE_LARGE;
-				player.wingDesc = "large bee-like";
 				outputText("\n\nYour wings tingle as they grow, filling out until they are large enough to lift you from the ground and allow you to fly!  <b>You now have large bee wings!</b>  You give a few experimental flaps and begin hovering in place, a giddy smile plastered on your face by the thrill of flight.");
 			}
 
@@ -222,14 +221,12 @@ package classes.Items.Consumables
 				if (player.wingType == CoC.WING_TYPE_SHARK_FIN) outputText("\n\nYou feel an itching on your large back-fin as something begins growing there.  You twist and contort yourself, trying to scratch and bring yourself relief, and failing miserably.  A sense of relief erupts from you as you feel something new grow out from your fin.  You hastily remove the top portion of your " + player.armorName + " and marvel as a pair of small bee-like wings sprout from your back, replacing the fin that once grew there.  Tenderly flexing your new muscles, you find you can flap them quite fast.  Unfortunately you can't seem to flap your little wings fast enough to fly, but they would certainly slow a fall.  A few quick modifications to your " + player.armorName + " later and you are ready to continue your journey with <b>your new bee wings</b>.");
 				else outputText("\n\nYou feel an itching between your shoulder-blades as something begins growing there.  You twist and contort yourself, trying to scratch and bring yourself relief, and failing miserably.  A sense of relief erupts from you as you feel something new grow out from your body.  You hastily remove the top portion of your " + player.armorName + " and marvel as a pair of small bee-like wings sprout from your back.  Tenderly flexing your new muscles, you find you can flap them quite fast.  Unfortunately you can't seem to flap your little wings fast enough to fly, but they would certainly slow a fall.  A few quick modifications to your " + player.armorName + " later and you are ready to continue your journey with <b>your new bee wings</b>.");
 				player.wingType = CoC.WING_TYPE_BEE_LIKE_SMALL;
-				player.wingDesc = "small bee-like";
 			}
 			//Melt demon wings!
 			if (changes < changeLimit && (player.wingType == CoC.WING_TYPE_BAT_LIKE_TINY || player.wingType == CoC.WING_TYPE_BAT_LIKE_LARGE)) {
 				changes++;
 				outputText("\n\nYour demonic wings ripple, jelly-like.  Worried, you crane back to look, and to your horror, they're melting away!  Runnels of amber honey trail down the wings' edges, building into a steady flow.  <b>In a moment, the only remnant of your wings is a puddle of honey in the dirt</b>.  Even that is gone in seconds, wicked into the dry soil.");
 				player.wingType = CoC.WING_TYPE_NONE;
-				player.wingDesc = "";
 			}
 			//Remove gills!
 			if (Utils.rand(4) == 0 && player.hasGills() && changes < changeLimit) mutations.updateGills();

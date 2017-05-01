@@ -190,24 +190,20 @@ package classes.Items.Consumables
 				if (player.wingType == WING_TYPE_NONE) {
 					output.text("\n\nYou double over as waves of pain suddenly fill your shoulderblades; your back feels like it's swelling, flesh and muscles ballooning.  A sudden sound of tearing brings with it relief and you straighten up.  Upon your back now sit small, leathery wings, not unlike a bat's. <b>You now have small dragon wings.  They're not big enough to fly with, but they look adorable.</b>");
 					player.wingType = WING_TYPE_DRACONIC_SMALL;
-					player.wingDesc = "small, draconic";
 				}
 				//(If Small Dragon Wings Present)
 				else if (player.wingType == WING_TYPE_DRACONIC_SMALL) {
 					output.text("\n\nA not-unpleasant tingling sensation fills your wings, almost but not quite drowning out the odd, tickly feeling as they swell larger and stronger.  You spread them wide - they stretch further than your arms do - and beat them experimentally, the powerful thrusts sending gusts of wind, and almost lifting you off your feet.  <b>You now have fully-grown dragon wings, capable of winging you through the air elegantly!</b>");
 					player.wingType = WING_TYPE_DRACONIC_LARGE;
-					player.wingDesc = "large, draconic";
 				}
 				else if (player.wingType == WING_TYPE_SHARK_FIN) {
 					output.text("\n\nA sensation of numbness suddenly fills your fin.  When it does away, it feels... different.  Looking back, you realize that it has been replaced by new, small wings, ones that you can only describe as draconic.  <b>Your shark-like fin has changed into dragon wings.</b>");
 					player.wingType = WING_TYPE_DRACONIC_SMALL;
-					player.wingDesc = "small, draconic";
 				}
 				//(If other wings present)
 				else {
 					output.text("\n\nA sensation of numbness suddenly fills your wings.  When it dies away, they feel... different.  Looking back, you realize that they have been replaced by new, small wings, ones that you can only describe as draconic.  <b>Your wings have changed into dragon wings.</b>");
 					player.wingType = WING_TYPE_DRACONIC_SMALL;
-					player.wingDesc = "small, draconic";
 				}
 				changes++;
 			}

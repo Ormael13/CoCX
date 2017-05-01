@@ -495,7 +495,7 @@ package classes.Scenes.Dungeons.DeepCave
 
 				outputText("She needs no additional urging, and wraps her whip-thin arms around your " + player.buttDescript() + " with a grip like steel. Her corruption-strengthened dragonfly wings flutter uselessly for a moment, but as your excitement begins to drip warm fluid onto her tongue, she flaps like she means it.  ", false);
 				//(PC Has Wings: 
-				if (player.wingType > WING_TYPE_NONE) outputText("You decide to give her a hand, and flap your " + player.wingDesc + " as hard as you can, the added thrust giving her the start she needs.  ", false);
+				if (player.wingType > WING_TYPE_NONE) outputText("You decide to give her a hand, and flap your [wings] as hard as you can, the added thrust giving her the start she needs.  ", false);
 				
 				outputText("Like a hummingbird on coffee, the fairy's wings blur as she pulls the two of you into the air and a thrill of glee sends shivers down your spine as the two of you slowly circle the room, clinging to each other in a desperate 69. Under her well-practiced mouth, you can feel your " + player.vaginaDescript(0) + " drooling nearly as much as the fey girl's, your utter dominion of the fairy delighting you nearly to the verge of orgasm.\n\n", false);
 
@@ -507,7 +507,7 @@ package classes.Scenes.Dungeons.DeepCave
 				
 				outputText("She needs no additional urging, and wraps her whip-thin legs around your " + player.hipDescript() + " with a grip like steel. Her corruption-strengthened dragonfly wings flutter uselessly for a moment, but as your excitement begins to leak globs of pre-cum into her sucking box, she flaps like she means it. ", false);
 				//(PC Has Wings: 
-				if (player.wingType > WING_TYPE_NONE) outputText("You decide to give her a hand, and flap your " + player.wingDesc + " as hard as you can, the added thrust giving her the start she needs.  ", false);
+				if (player.wingType > WING_TYPE_NONE) outputText("You decide to give her a hand, and flap your [wings] as hard as you can, the added thrust giving her the start she needs.  ", false);
 				outputText("Like a hummingbird on coffee, the fairy's wings blur as she pulls the two of you into the air and a thrill of glee sends shivers down your spine as the two of you slowly circle the room, you mounting her doggy-style, hands gripping her ribs as you lean over her. The tight clenching of her overburdened flight turns her loose pussy into a tight, clenching sphincter that practically milks your shaft with every heartbeat.\n\n", false); 
 				
 				outputText("She makes a short circuit around the room, slowing enough to savor each thrust, your pounding giving her a short burst of speed as you ride the bitch through the air, every muscle in both of your bodies tense with the effort. You're still not convinced she's been sufficiently humbled, however, so you thread your arms under her wings and loop your hands around the sides of her face. You slide your forefingers into her mouth and hook the fingers to pull her cheeks wide open. Like a horse's reins, you jerk the fairy's head back and wrap your other fingers under her jaw, fully controlling her head. She tries to speak, but slurs the words, drool gushing from her wrenched mouth. You guide her head up, and she rises, descending when you yank it down. Satisfied that she understands your commands, you decide that it's time to take your mare through her paces.", false);

@@ -4496,7 +4496,6 @@ public function wolfPepper(type: Number, player: Player): void {
 				if (player.wingType > WING_TYPE_NONE) outputText("Your wings fold into themselves, merging together with your back.  ", false);
 				outputText("You groan and slump down in pain, almost instantly regretting eating the tooth. You start sweating profusely and panting loudly, feeling the space between your shoulder blades shifting about. You hastily remove your " + player.armorName + " just in time before a strange fin-like structure bursts from in-between your shoulders. You examine it carefully and make a few modifications to your " + player.armorName + " to accommodate your new fin.", false);
 				player.wingType = WING_TYPE_SHARK_FIN;
-				player.wingDesc = "";
 				changes++;
 			}
 			if (changes == 0) {
@@ -4701,7 +4700,6 @@ public function wolfPepper(type: Number, player: Player): void {
 			player.lowerBody = LOWER_BODY_TYPE_HUMAN;
 			player.legCount = 2;
 			player.wingType = WING_TYPE_NONE;
-			player.wingDesc = "non-existant";
 			player.tailType = TAIL_TYPE_NONE;
 			player.tongueType = TONGUE_HUMAN;
 			player.tailRecharge = 0;
@@ -6677,15 +6675,13 @@ public function wolfPepper(type: Number, player: Player): void {
 			if (player.wingType == WING_TYPE_NONE && changes < changeLimit && (type == 1 || player.armType == ARM_TYPE_HARPY) && rand(4) == 0) {
 				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your " + player.skinDesc + ". It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your " + player.armorName + ". Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, " + player.hairColor + " wings.</b>", false);
 				player.wingType = WING_TYPE_FEATHERED_LARGE;
-				player.wingDesc = "large, feathered";
 				changes++;
 			}
 			//-Remove old wings
-			if (player.wingType != WING_TYPE_FEATHERED_LARGE && player.wingType > WING_TYPE_NONE && changes < changeLimit && rand(4) == 0) {
-				if (player.wingType != WING_TYPE_SHARK_FIN) outputText("\n\nSensation fades from your " + player.wingDesc + " wings slowly but surely, leaving them dried out husks that break off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.", false);
-				else outputText("\n\nSensation fades from your large fin slowly but surely, leaving it a dried out husk that breaks off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.", false);
+			if ([WING_TYPE_NONE, WING_TYPE_FEATHERED_LARGE].indexOf(player.wingType) == -1 && changes < changeLimit && rand(4) == 0) {
+				if (player.wingType != WING_TYPE_SHARK_FIN) outputText("\n\nSensation fades from your [wings] slowly but surely, leaving them dried out husks that break off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.");
+				else outputText("\n\nSensation fades from your large fin slowly but surely, leaving it a dried out husk that breaks off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.");
 				player.wingType = WING_TYPE_NONE;
-				player.wingDesc = "non-existant";
 				changes++;
 			}
 			//-Feathery Arms
@@ -7586,7 +7582,6 @@ public function wolfPepper(type: Number, player: Player): void {
 			if (rand(4) == 0 && (player.wingType == WING_TYPE_BEE_LIKE_SMALL || player.wingType == WING_TYPE_BEE_LIKE_LARGE) && changes < changeLimit) {
 				outputText("\n\nYour wings twitch and flap involuntarily.  You crane your neck to look at them as best you are able; from what you can see, they seem to be shriveling and curling up.  They're starting to look a lot like they did when they first popped out, wet and new.  <b>As you watch, they shrivel all the way, then recede back into your body.</b>", false);
 				player.wingType = WING_TYPE_NONE;
-				player.wingDesc = "non-existent";
 				changes++;
 			}
 			//-hair morphs to anemone tentacles, retains color, hair shrinks back to med-short('shaggy') and stops growing, lengthening treatments don't work and goblins won't cut it, but more anemone items can lengthen it one level at a time
@@ -8954,7 +8949,6 @@ public function wolfPepper(type: Number, player: Player): void {
 				//Wings Fall Out: You feel a sharp pinching sensation in your shoulders and you cringe slightly.  Your former dragonfly wings make soft, papery sounds as they fall into the dirt behind you.
 				changes++;
 				player.wingType = WING_TYPE_GIANT_DRAGONFLY;
-				player.wingDesc = "giant dragonfly";
 			}
 			if (changes == 0) {
 				outputText("\n\nWell... that didn't amount to much.");
@@ -9472,14 +9466,12 @@ public function wolfPepper(type: Number, player: Player): void {
 					outputText("\n\n", false);
 					outputText("Your small demonic wings stretch and grow, tingling with the pleasure of being attached to such a tainted body.  You stretch over your shoulder to stroke them as they unfurl, turning into full-sized demon-wings.  <b>Your demonic wings have grown!</b>", false);
 					player.wingType = WING_TYPE_BAT_LIKE_LARGE;
-					player.wingDesc = "large, bat-like";
 				}
 				else if (player.wingType == WING_TYPE_SHARK_FIN) {
 					outputText("\n\n", false);
 					outputText("The muscles around your shoulders bunch up uncomfortably, changing to support the new bat-like wings growing from your back.  You twist your head as far as you can for a look and realize your fin has changed into ", false);
 					outputText("small ", false);
 					player.wingType = WING_TYPE_BAT_LIKE_TINY;
-					player.wingDesc = "tiny, bat-like";
 					outputText("bat-like demon-wings!", false);
 				}
 				else if (player.wingType == WING_TYPE_BEE_LIKE_SMALL || player.wingType == WING_TYPE_BEE_LIKE_LARGE) {
@@ -9488,12 +9480,10 @@ public function wolfPepper(type: Number, player: Player): void {
 					if (player.wingType == WING_TYPE_BEE_LIKE_SMALL) {
 						outputText("small ", false);
 						player.wingType = WING_TYPE_BAT_LIKE_TINY;
-						player.wingDesc = "tiny, bat-like";
 					}
 					else {
 						outputText("large ", false);
 						player.wingType = WING_TYPE_BAT_LIKE_LARGE;
-						player.wingDesc = "large, bat-like";
 					}
 					outputText("<b>bat-like demon-wings!</b>", false);
 				}
@@ -9502,7 +9492,6 @@ public function wolfPepper(type: Number, player: Player): void {
 					outputText("\n\n", false);
 					outputText("A knot of pain forms in your shoulders as they tense up.  With a surprising force, a pair of small demonic wings sprout from your back, ripping a pair of holes in the back of your " + player.armorName + ".  <b>You now have tiny demonic wings</b>.", false);
 					player.wingType = WING_TYPE_BAT_LIKE_TINY;
-					player.wingDesc = "tiny, bat-like";
 				}
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
