@@ -310,6 +310,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		
 		private function anzuTalkPast():void {
 			clearOutput();
+			outputText(images.showImage("anzu-talk-past"));
 			outputText("You ask Anzu about what was he doing before he lived in Mareth. He said he was a empty shell of his former power, and he protected a city called Mittani.");
 			outputText("\n\n\"<i>First of all, I should explain to you about my full name,</i>\" Anzu says, \"<i>The Annuna is the common surname of the fifty powerful gods which are part of the council of gods that rule my former world. They're commonly known as the Council of the Annuna</i>\"");
 			outputText("\n\n\"<i>Generally, being selected to protect a city is a great honour, especially for medium or low ranking gods, as few members of the Council are sent to fulfill that labour. In my case Mittani was the city I was sent to. Honestly, I was hoping to be sent to Lagash, located near the coast, because everything around Mittani was dirt and sand.</i>\"");
@@ -333,6 +334,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		}
 		private function anzuTalkPalace():void {
 			clearOutput();
+			outputText(images.showImage("anzu-talk-palace"));
 			outputText("He said something about valkyries living here before he arrived. How was the palace before?");
 			outputText("\n\n\"<i>The group of women that used to live here before? With them, this place looked a little more rustic back then. Wooden tables, iron decorations, weapons hanging on the walls, and a fountain containing something they call mead. I had to redecorate the place after I threw them out.</i>\"");
 			outputText("\n\nAnzu makes a hand gesture to indicate you to follow him.");			
@@ -376,6 +378,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		}
 		private function anzuTalkRift():void {
 			clearOutput();
+			outputText(images.showImage("anzu-talk-rift"));
 			outputText("Besides exploring and fighting some monsters, you know very few things about the Rift. Since Anzu has been living here for fifteen years, he could explain to you some details about the land. And, you still have doubts about how exactly he ended up in this place, and not, for example, the plains, or like you, the barrens.");
 			outputText("\n\n\"<i>The Rift is likely one of the largest areas in the realm of Mareth, although I admit that I’ve yet to explore much outside the Rift. The weather is always snowy, and usually has sudden snowstorms. A multitude of hills, mostly covered in forests across the land. All the trees are pines, etc.");
 			outputText("\n\nAbout the inhabitants, most of them are hostile. The Jotuns, or Ice Giants, wander across the hills, sometimes carrying trees which they use as maces. The valkyries, winged women, cross the skies looking for someone worthy for challenge themselves. Besides that, they’re not exactly evil, and after our first encounter, we haven’t had any problems.");
@@ -392,6 +395,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		}
 		private function anzuTalkPowers():void {
 			clearOutput();
+			outputText(images.showImage("anzu-talk-powers"));
 			outputText("Anzu said before he was a powerful deity. What are his powers exactly?");
 			outputText("\n\n\"<i>The term ‘god of storms’ mean anything to you?</i>\" Anzu says mockingly");
 			outputText("\n\nWell, that’s obvious, but being more specific, what kind of things he can do?");
@@ -437,6 +441,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		}
 		private function anzuTalkMaraeAndLethice():void {
 			clearOutput();
+			outputText(images.showImage("anzu-talk-marae-lethice"));
 			outputText("Anzu said he was aware of the war between Marae and Lethice. After fifteen years in the Rift, he hasn’t been tempted to support one side?");
 			outputText("\n\n\"<i>I’ve said before, [name]. I act for myself. Always have been that way. Even before coming here. Besides, even if I sided with you and helped Marae, her followers probably wouldn’t look well on me.</i>\"");
 			outputText("\n\nWhy? He has proven to be a nice guy, and by helping Marae, that would make clear to everyone that he is on their side.");
@@ -474,6 +479,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		private function anzuSexMenu(showText:Boolean = true):void {
 			if (showText) {
 				clearOutput();
+				outputText(images.showImage("anzu-sex-stripping"));
 				if (anzuSexCounter() == 0) {
 					outputText("You ask Anzu if he is up to a little fun in his bedroom.");
 					outputText("\n\n\"<i>Uh, maybe</i>\" he says doubtfully.");
@@ -511,6 +517,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		
 		private function catchAnalPart1():void {
 			clearOutput();
+			outputText(images.showImage("anzu-sex-anal-catch"));
 			if (flags[kFLAGS.ANZU_ANAL_CATCH_COUNTER] == 0) {
 				outputText("Looking at the handsome avian, your eyes quickly dart to the huge bulge on his pants. You look it, thinking how must feel to have that thick and huge monster inside. Anzu, who laughs nervously at your staring, seems to have realized what you have on mind.");
 				outputText("\n\n\"<i>Wha...what you want to do, [name]?</i>\"");
@@ -620,6 +627,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		
 		private function catchVaginal():void {
 			clearOutput();
+			outputText(images.showImage("anzu-sex-vaginal-catch"));
 			if (flags[kFLAGS.ANZU_VAGINAL_CATCH_COUNTER] == 0) {
 				outputText("Finding yourself on Anzu’s embrace, this time you wonder if the avian would like the idea to get intimate with you, in the most traditional way. The idea of enticing your avian friend on sliding that monster inside your vagina, while he pounds you with enough force to make you scream and finally, having his thick load flooding your womb is something that you can’t resist,  With that on mind, you slip down one of your hands to his crotch, and sliding down his underwear, start grabbing at the girthy meat that lies within. The avian lets out a moan at your sudden touch, but don’t removes your hand.");
 				outputText("\n\n\"<i>Heh...what are you doing, " + player.mf("boy", "girl") + "?</i>\" he question you, his face blushing red under his autumn colored feathers.");
@@ -669,6 +677,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		
 		private function getBlown():void {
 			clearOutput();
+			outputText(images.showImage("anzu-sex-give-blowjob"));
 			if (flags[kFLAGS.ANZU_BLOWN_YOU_COUNTER] == 0) {
 				outputText("Deciding to take the initiative, you tell him that you have an uncomfortable pressure " + (player.balls > 0 ? "in your balls" : "on your loins") + ", and if he was kind enough to help you with….");
 				outputText("\n\nOn a second thought, you look again at Anzu’s predatory beak, and imagine several circumstances that would be able to kill the mood or worst, result on a painful nightmare. The avian notices how quickly you interrupted you teasing, and proceeds to ask you.");
@@ -707,6 +716,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		
 		private function suckOffDeitysCock():void {
 			clearOutput();
+			outputText(images.showImage("anzu-sex-receive-blowjob"));
 			if (flags[kFLAGS.ANZU_SUCKED_OFF_COUNTER] == 0) {
 				outputText("Now that you’ve played a bit on the bed, it time to get into business. The perfumed scent of the avian has been driving you crazy for a while, and now that you have a full sight of his athletic form, you attention goes down to his crotch. The thought of the hefty package inside his pants makes your mouth water. You then say Anzu that if he is stressed you’ll be more than happy to help him relieve pressure.");
 				outputText("\n\n\"<i>Relieve pressure?</i>\"...He asks doubtfully.");
@@ -762,6 +772,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		
 		private function fuckGodlyBirdButt():void {
 			clearOutput();
+			outputText(images.showImage("anzu-sex-analpitch"));
 			outputText("In the mood for some bird butt, you tell Anzu that you'd like a turn on his ass.");
 			if (flags[kFLAGS.ANZU_ANAL_PITCH_COUNTER] == 0) {
 				outputText("\n\n\"<i>Well, you see, being, that I am…I never, well, had anything, or anyone, you know…back there…and…</i>\"");
@@ -803,6 +814,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		
 		private function feedAnzu():void {
 			clearOutput();
+			outputText(images.showImage("anzu-sex-feeding"));
 			if (flags[kFLAGS.ANZU_FED_COUNTER] == 0) {
 				outputText("While resting with him on the bed, you feel a familiar weight on your breasts. Sensing the milky gift barely contained by your [chest], why not share a little of it with your avian " + (anzuRelationshipLevel() >= 4 ? "lover" : "friend") + "?");
 				outputText("\n\nYour ask Anzu if he suddenly felt thirsty. He don’t seem to understand what exactly you’re offering him, as he asks:");
@@ -863,6 +875,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		//Racing
 		private function racingWithAnzu():void {
 			clearOutput();
+			outputText(images.showImage("anzu-racing-intro"));
 			if (flags[kFLAGS.ANZU_TIMES_RACED] == 0) {
 				outputText("Standing on the roof, you see Anzu again, looking thoughtfully at the snowed hills that surround the place. Judging by the way he flexes his quartet of wings, he is about to depart, probably to exercise his otherwise idle wings. While at a first though he seems oblivious at your arrival, when you get a bit closer, he turns back and greets you with a friendly smile.");
 				outputText("\n\n“Hey, little friend. You caught me just in time. I was about to go out on a little trip across the Rift. Being stuck in a single place every day ends up being a bit… stressing. Besides, the exercise helps me to keep these on good shape” He says, pointing at the four huge appendages.");
@@ -883,10 +896,10 @@ package classes.Scenes.Dungeons.AnzuPalace
 			outputText("Letting him know that you’re pretty tired now, you tell him that you’ll have to pass this time. Next time maybe, with a little luck.");
 			outputText("\n\n“No problem. I understand. Flying tired isn’t exactly a relaxing activity ,”Anzu answers “Maybe, when you feel alright you could came here again...if you want, of course.” he continues “I usually fly at this hour almost every day.”");
 			outputText("\n\nAnswering him that you’ll think about it one of these days, you leave him to his exercise routine, while you return to the safety of your camp.");
-			
 		}
 		private function racingWithAnzuAccept():void {
 			clearOutput();
+			outputText(images.showImage("anzu-racing-scene"));
 			outputText("Well, a bit of extra exercise would certainly help your body. Telling Anzu that you agree on his offer, you stand next to him on the border of the roof. Thankfully, it seems like he keeps the place where you’re standing clear of snow, otherwise you’ll probably trip and end up falling from the—now you realize, somewhat frightening—height of the palace.");
 			outputText("\n\nFocusing again on the thought of flying, you give a nod to the avian, saying that you’re ready to start.");
 			outputText("\n\nSeeing you ready, Anzu spreads his wings wide, forcing you to stand away a couple of feet, and soon he launches himself to the sky. The wind propelled by the beating of his wings almost makes you stumble, but you manage to keep yourself on your feet.");
@@ -911,6 +924,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		private function dinnerWithAnzu():void {
 			clearOutput();
 			if (model.time.hours < 8) {
+				outputText(images.showImage("anzu-prep-breakfast"));
 				if (flags[kFLAGS.ANZU_TIMES_DINED_BREAKFAST] == 0) {
 					outputText("Arriving early to his palace, you search for Anzu until you find him in the kitchen, naked except for an apron. He is cooking some eggs in a frying pan, while watching how some pieces of bacon are cooking in another. The avian is so busy with his labour that he doesn’t notice your arrival.");
 					outputText("\n\nYou cough a bit for announcing your presence.");
@@ -931,6 +945,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 				doYesNo(eatFoodWithAnzu, dontEatFoodWithAnzu);
 			}
 			else if (model.time.hours < 16) {
+				outputText(images.showImage("anzu-prep-lunch"));
 				if (flags[kFLAGS.ANZU_TIMES_DINED_LUNCH] == 0) {
 					outputText("When you arrive to the palace a smell of meat cooking attracts your attention. The smell leads you to the kitchen, and when your enter, you find Anzu taking some roasted steaks from a grill. Looks like this time he has left behind his robes and now he’s wearing a white apron over his set of shirt and pants. When putting the steaks on a plate, he manages to look you and says.");
 					outputText("\n\n\"<i>[name]. You’re here! Looks like you’ve arrived just in time. As you see, I’m cooking the meal.</i>\" He says, pointing the tables around him.");
@@ -943,6 +958,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 				doYesNo(eatFoodWithAnzu, dontEatFoodWithAnzu);
 			}
 			else {
+				outputText(images.showImage("anzu-prep-dinner"));
 				if (flags[kFLAGS.ANZU_TIMES_DINED_DINNER] == 0) {
 					outputText("The noises of someone moving things is heard even from the hall. When you approach to the kitchen, you manage to hear the voice of an irritated Anzu. Dressed only in his usual set of shirt and pants, covered with an apron instead of his robes, he goes around the kitchen searching for something desperately.");
 					outputText("\n\n“Where in hell I put those damn blueberries?! Raspberries, strawberries, cloudberries, but no trace of blueberries!”");
@@ -975,6 +991,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 			if (hungerRefillAmount < 20) hungerRefillAmount = 20;
 			//Scene GO!
 			if (model.time.hours < 8) {
+				outputText(images.showImage("anzu-dining-breakfast"));
 				outputText("You answer giving him a quick peck on his cheek and saying that you’d love to have breakfast with him.");
 				outputText("\n\n\"<i>Excellent.</i>\" He says \"<i>If you want, you could help me to make the food ready</i>\"");
 				outputText("\n\nAccepting his offer, you start helping him to do the breakfast. Taking some butter from the cabinets, you take with you the slices of breads in the plate and smear them with the butter, and put them in the stove until the butter on it melts. After that, you put them on a big plate.");
@@ -990,6 +1007,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 				flags[kFLAGS.ANZU_TIMES_DINED_BREAKFAST]++;
 			}
 			else if (model.time.hours < 16) {
+				outputText(images.showImage("anzu-dining-lunch"));
 				outputText("With your appetite open by the wonderful smell of the steaks, you accept Anzu’s offer.");
 				outputText("\n\n“We must start now, then. There are some dishes that still need be finished.”");
 				outputText("\n\nAsking him about what you should do, he instructs you about how make the second dish. Taking a pot from one cabinet, you shred the chunks of cheese inside it, and mix them. After that, you place the pot on a burner until all the cheese on it melts. You put the pot with the burner on a plate next to a bowl with some pieces of bread and two large forks. It’s a little difficult to carry those things to the dining room, specially with the melted cheese, but you manage to arrive to the table with the food safe.");
@@ -1020,6 +1038,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 				flags[kFLAGS.ANZU_TIMES_DINED_LUNCH]++;
 			}
 			else {
+				outputText(images.showImage("anzu-dining-dinner"));
 				outputText("Nothing like a good dinner to end a good day, you tell him.");
 				outputText("\n\nHappy to have your help, Anzu explains you the process to make the cake. While you heat the oven following his instructions, he makes the base mixing some biscuit crumbs and butter on a large, round tin putting it on the oven. After that, he points you the blueberries and motions you to work with them.");
 				outputText("\n\nHe starts whisking up the creamy cheese with some eggs, sugar and flour. Meanwhile, you're busy with the blueberries, putting them on a pan with some sugar and water and mixing them until the contents of the pan becomes sauce.");
@@ -1105,6 +1124,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		//------------
 		public function anzuBathTimeBeginning():void {
 			clearOutput();
+			outputText(images.showImage("anzu-bathtime-begin"));
 			outputText("Wandering again across the halls of the palace, you notice than Anzu isn't in his usual spot at this time of the day, reading a book in the tranquility of his living room. Actually, he isn’t in the kitchen either. A little confused about his whereabouts you search him across the palace, a task a bit difficult given its dimensions and the quantity of rooms.");
 			outputText("\n\nAfter an infructuous search you end looking at the window of the third floor, thinking that he may be gone outside, until you realize that you haven’t searched in one of the most obvious places: his bedroom. Joining action to the thought, you return downstairs to the first floor, and opening the gate to the opulent room, you find it empty. Seems like the bird doesn’t want to be found today.");
 			outputText("\n\nJust when you’re about to return to the camp, you manage to hear a low whistle coming from the end of hall, behind the large portion of the floor occupied by Anzu’s room. Soon you remember that this must be the bathroom, and that would explain the avian’s absence. Upon getting closer to the door, your nose is assaulted by an fragrance even more exquisite than the sweet scent of violets that perfumes the rooms.");
@@ -1122,6 +1142,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		
 		private function anzuBathTimeAccept():void {
 			clearOutput();
+			outputText(images.showImage("anzu-bathtime-mid"));
 			outputText("Well, a warm bath sounds nice at this time of the day, and Anzu seems to be enjoying it, so, why not? " + player.clothedOrNaked("Leaving your " + player.armorDescript() + "aside, on a nearby table, y", "Y") + "ou get in the pool, not without making sure that Anzu gets a good view of your naked body when entering on it. When you return the look, you manage to see his avian manhood under the water, hanging limp and lazy between his legs. Even on it's unaroused state, it remains quite impressive. Under it, a pair of huge, feather-covered, nuts lie, moving slightly with the water.");
 			outputText("\n\n\"<i>Ehh, you…you look pretty nice today, [name]</i>\"  the avian says, interrupting your ogling of his privates, while blushing deeply without keeping his eyes away of your body and " + (player.hasCock() ? "hanging [cock] that swings playfully as you descend upon the pool" : "your exposed nether lips as your descend upon the pool") + ".");
 			outputText("\n\nYou place yourself on the pool as gingerly as you can, [if (tallness >= 120)sitting|standing] on the tiles no too far away from him. The water itself is pleasantly warm, and the relaxing scents of oils mixed with the soap perfumed scent soon get to your body, as you start feeling your mind calmer and your body more relaxed.");
@@ -1144,6 +1165,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		
 		private function anzuBathTimeSex():void {
 			clearOutput();
+			outputText(images.showImage("anzu-bathtime-sex"));
 			outputText("You take the initiative, rubbing your backside against Anzu’s maleness, who stands proudly erect, now smearing your back with avian pre, that is quickly washed away by the water.");
 			outputText("\n\n\"<i>Heh, seems like a got a bit...., you know...[name]</i>\" Anzu says with a soft laugh, yet a bit embarrassed, after seeing his raging erection over your back. \"<i>And, having you so close, it’s no wonder that I eventually got a bit excited.</i>\"  he admits.");
 			outputText("\n\nHmm, seems like it can’t be helped, at least with someone that gets aroused so quickly like him, you remark.");
@@ -1157,6 +1179,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		
 		private function anzuBathTimeRelax():void {
 			clearOutput();
+			outputText(images.showImage("anzu-bathtime-relax"));
 			outputText("As fun as it could be, you decided to take a bath for cleanse your body, no for making it dirtier, so you attention diverges from Anzu's rod. ");
 			outputText("\n\nNow focusing on having all stressful thing that plague Mareth of your mind, you let your [legs] rest on the tiled bottom of the indoor pool, while your body enjoys the warm feeling of water on your [skin/fur/scales]. Your mind diverges to peaceful thoughts, away from this cursed place, reminiscences of your home on Ingnam, your village, and about all the good things that you have found that this land, that despite its cursed nature, has allowed to survive fills your mind and calm your troubled body.");
 			outputText("\n\nAfter a while, a tickling sensations distracts you from those musings, and you turn back your head to find Anzu pouring a small receptacle containing a pearlish pink, oily liquid over your back and shoulders and rubbing it softly over your [skin/fur/scales]. It’s floral and pleasant smells tells your quickly that it must be a kind of aromatic soap.");
@@ -1183,6 +1206,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		//------------
 		public function sleepWithAnzuInvitation():void {
 			clearOutput();
+			outputText(images.showImage("anzu-bed-begin"));
 			outputText("Satisfied in many senses, you feel a bit drowsy after all that cooking, eating and fucking, you let out a loud yawn and extend your body on one of the comfy couches in the living room.");
 			outputText("\n\n\"<i>Hey there, little friend</i>\" Anzu salutes you, as he returns too from the kitchen. \"<i>Feeling a bit tired after all that…exercise</i>\" he jokes.");
 			outputText("\n\nDespite how wonderful his cooking is, and how a pleasant experience are the romps on his company, the body gets exhausted eventually, you point him.");
@@ -1204,6 +1228,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		
 		private function acceptSleepingWithAnzu():void {
 			clearOutput();
+			outputText(images.showImage("anzu-bed-mid"));
  			outputText("Well, with him as company, who wouldn’t want to stay in the palace for the night, you answer. The avian, overjoyed, despite being almost as tired as you, hugs you even tighter and proceeds to carry you on his arms, a " + (player.tallness >= 120 ? "a simple task, given his strength" : "a very easy task, given his strength and much larger frame") + ".");
 			outputText("\n\nSuddenly lifted from the ground by a couple of softly feathered arms, you let your body relax as  you let out a loud yawn. While on his arms you can feel his strong muscles embracing you, and you rest you head on his shoulder, " + (player.hairLength > 0 ? "while he ruffles your hair lovingly" : "rubs your neck, as he walks to his room") + ".");
 			outputText("\n\nAfter going upstairs, he finally arrives to the door, opening it with a soft push. The now familiar and perfumed scent of the bedroom greets you once more, as you're carefully placed on the gargantuan bed.");
@@ -1242,6 +1267,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 	
 		private function sleepingWithAnzuBlowjob():void {
 			clearOutput();
+			outputText(images.showImage("anzu-bed-blowjob"));
 			outputText("Softy disentangling yourself from the avian’s embrace, you try to get off from the unsurprisingly tall bed, without luck, as your " + player.feet() + " get stuck with something as you climb down the bed. Then, a familiar wetness near the area where your [leg] got stuck, reinforced with a tugging from the thing that refrains you from leaving, makes you turn back, only to found that the thing entangled with your " + player.foot() + " is nothing less than the avian’s underwear.");
 			outputText("\n\nSofty disentangling yourself from the avian’s embrace, you try to get off from the unsurprisingly tall bed, without luck, as your " + player.feet() + " get stuck with something as you climb down the bed. Then, a familiar wetness near the area where your [leg] got stuck, reinforced with a tugging from the thing that refrains you from leaving, makes you turn back, only to found that the thing entangled with your " + player.foot() + " is nothing less than the avian’s underwear.");
 			outputText("\n\nWhat a…curious way to get stuck. Adjusting yourself to get your " + player.foot() + " free, you end in an even more uncomfortable position, as you end up with your " + player.face() + " on Anzu’s crotch, and your " + (player.isNaga() ? "tail swishing over" : "[legs] resting on") + " the huge avian’s lower belly. In this position, you get a much closer look to the avian’s underwear, and realize that its cloth is tented and with a wet spot on the top. This, added to the subtle noises and moves that he makes from time to time, is a clear signal that the avian is having a…rather naughty dream.");
@@ -1285,6 +1311,7 @@ package classes.Scenes.Dungeons.AnzuPalace
 		}
 		
 		private function wakeUpWithAnzuGoodMorningBirdie():void {
+			outputText(images.showImage("anzu-bed-end"));
 			outputText("Reinvigorated by the refreshing sleep, you get up in the first hours of the morning, still cuddled with Anzu, that wakes up between yawns.");
 			outputText("\n\nGetting off the bed with his aid, both you get dressed, not without some frisky grope from each other in the process, and after eating the breakfast that Anzu cooks for you in the early morning, you give the avian a deep kiss, and bid him farewell, returning to the camp with a smile on your face.");
 			if (player.hunger < player.maxHunger() - 20) player.refillHunger(30);

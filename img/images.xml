@@ -233,6 +233,118 @@
 				<ImageFile>./img/ants-desert-male-firstencounter</ImageFile>
 				<ImageFile>./img/ants-desert-male-firstencounter_1</ImageFile>
 			</ImageSet>
+			<ImageSet id="anzu-bathtime-begin">
+				<ImageFile>./img/anzu-bathtime-begin</ImageFile>
+				<ImageFile>./img/anzu-bathtime-begin_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-bathtime-mid">
+				<ImageFile>./img/anzu-bathtime-mid</ImageFile>
+				<ImageFile>./img/anzu-bathtime-mid_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-bathtime-relax">
+				<ImageFile>./img/anzu-bathtime-relax</ImageFile>
+				<ImageFile>./img/anzu-bathtime-relax_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-bathtime-sex">
+				<ImageFile>./img/anzu-bathtime-sex</ImageFile>
+				<ImageFile>./img/anzu-bathtime-sex_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-bed-begin">
+				<ImageFile>./img/anzu-bed-begin</ImageFile>
+				<ImageFile>./img/anzu-bed-begin_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-bed-blowjob">
+				<ImageFile>./img/anzu-bed-blowjob</ImageFile>
+				<ImageFile>./img/anzu-bed-blowjob_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-bed-end">
+				<ImageFile>./img/anzu-bed-end</ImageFile>
+				<ImageFile>./img/anzu-bed-end_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-bed-mid">
+				<ImageFile>./img/anzu-bed-mid</ImageFile>
+				<ImageFile>./img/anzu-bed-mid_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-dining-breakfast">
+				<ImageFile>./img/anzu-dining-breakfast</ImageFile>
+				<ImageFile>./img/anzu-dining-breakfast_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-dining-dinner">
+				<ImageFile>./img/anzu-dining-dinner</ImageFile>
+				<ImageFile>./img/anzu-dining-dinner_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-dining-lunch">
+				<ImageFile>./img/anzu-dining-lunch</ImageFile>
+				<ImageFile>./img/anzu-dining-lunch_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-prep-breakfast">
+				<ImageFile>./img/anzu-prep-breakfast</ImageFile>
+				<ImageFile>./img/anzu-prep-breakfast_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-prep-dinner">
+				<ImageFile>./img/anzu-prep-dinner</ImageFile>
+				<ImageFile>./img/anzu-prep-dinner_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-prep-lunch">
+				<ImageFile>./img/anzu-prep-lunch</ImageFile>
+				<ImageFile>./img/anzu-prep-lunch_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-racing-intro">
+				<ImageFile>./img/anzu-racing-intro</ImageFile>
+				<ImageFile>./img/anzu-racing-intro_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-racing-scene">
+				<ImageFile>./img/anzu-racing-scene</ImageFile>
+				<ImageFile>./img/anzu-racing-scene_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-sex-anal-catch">
+				<ImageFile>./img/anzu-sex-anal-catch</ImageFile>
+				<ImageFile>./img/anzu-sex-anal-catch_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-sex-analpitch">
+				<ImageFile>./img/anzu-sex-analpitch</ImageFile>
+				<ImageFile>./img/anzu-sex-analpitch_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-sex-feeding">
+				<ImageFile>./img/anzu-sex-feeding</ImageFile>
+				<ImageFile>./img/anzu-sex-feeding_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-sex-give-blowjob">
+				<ImageFile>./img/anzu-sex-give-blowjob</ImageFile>
+				<ImageFile>./img/anzu-sex-give-blowjob_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-sex-receive-blowjob">
+				<ImageFile>./img/anzu-sex-receive-blowjob</ImageFile>
+				<ImageFile>./img/anzu-sex-receive-blowjob_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-sex-stripping">
+				<ImageFile>./img/anzu-sex-stripping</ImageFile>
+				<ImageFile>./img/anzu-sex-stripping_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-sex-vaginal-catch">
+				<ImageFile>./img/anzu-sex-vaginal-catch</ImageFile>
+				<ImageFile>./img/anzu-sex-vaginal-catch_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-talk-marae-lethice">
+				<ImageFile>./img/anzu-talk-marae-lethice</ImageFile>
+				<ImageFile>./img/anzu-talk-marae-lethice_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-talk-palace">
+				<ImageFile>./img/anzu-talk-palace</ImageFile>
+				<ImageFile>./img/anzu-talk-palace_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-talk-past">
+				<ImageFile>./img/anzu-talk-past</ImageFile>
+				<ImageFile>./img/anzu-talk-past_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-talk-powers">
+				<ImageFile>./img/anzu-talk-powers</ImageFile>
+				<ImageFile>./img/anzu-talk-powers_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="anzu-talk-rift">
+				<ImageFile>./img/anzu-talk-rift</ImageFile>
+				<ImageFile>./img/anzu-talk-rift_1</ImageFile>
+			</ImageSet>
 			<ImageSet id="arian-fap">
 				<ImageFile>./img/arian-fap</ImageFile>
 				<ImageFile>./img/arian-fap_1</ImageFile>
@@ -425,10 +537,6 @@
 				<ImageFile>./img/camping</ImageFile>
 				<ImageFile>./img/camping_1</ImageFile>
 			</ImageSet>
-			<ImageSet id="coc-logo">
-				<ImageFile>./img/coc-logo</ImageFile>
-				<ImageFile>./img/coc-logo_1</ImageFile>
-			</ImageSet>
 			<ImageSet id="communal-bath">
 				<ImageFile>./img/communal-bath</ImageFile>
 				<ImageFile>./img/communal-bath_1</ImageFile>
@@ -500,6 +608,10 @@
 			<ImageSet id="dungeon-entrance-factory">
 				<ImageFile>./img/dungeon-entrance-factory</ImageFile>
 				<ImageFile>./img/dungeon-entrance-factory_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="dungeon-entrance-palace">
+				<ImageFile>./img/dungeon-entrance-palace</ImageFile>
+				<ImageFile>./img/dungeon-entrance-palace_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="dungeon-entrance-phoenixtower">
 				<ImageFile>./img/dungeon-entrance-phoenixtower</ImageFile>
@@ -1073,10 +1185,6 @@
 				<ImageFile>./img/kiha-vagfuck</ImageFile>
 				<ImageFile>./img/kiha-vagfuck_1</ImageFile>
 			</ImageSet>
-			<ImageSet id="lethice-intro">
-				<ImageFile>./img/lethice-intro</ImageFile>
-				<ImageFile>./img/lethice-intro_1</ImageFile>
-			</ImageSet>
 			<ImageSet id="location-bazaar">
 				<ImageFile>./img/location-bazaar</ImageFile>
 				<ImageFile>./img/location-bazaar_1</ImageFile>
@@ -1381,6 +1489,10 @@
 				<ImageFile>./img/monster-akbal</ImageFile>
 				<ImageFile>./img/monster-akbal_1</ImageFile>
 			</ImageSet>
+			<ImageSet id="monster-amarok">
+				<ImageFile>./img/monster-amarok</ImageFile>
+				<ImageFile>./img/monster-amarok_1</ImageFile>
+			</ImageSet>
 			<ImageSet id="monster-amily">
 				<ImageFile>./img/monster-amily</ImageFile>
 				<ImageFile>./img/monster-amily_1</ImageFile>
@@ -1565,6 +1677,10 @@
 				<ImageFile>./img/monster-isabella</ImageFile>
 				<ImageFile>./img/monster-isabella_1</ImageFile>
 			</ImageSet>
+			<ImageSet id="monster-ivorysuccubus">
+				<ImageFile>./img/monster-ivorysuccubus</ImageFile>
+				<ImageFile>./img/monster-ivorysuccubus_1</ImageFile>
+			</ImageSet>
 			<ImageSet id="monster-izma">
 				<ImageFile>./img/monster-izma</ImageFile>
 				<ImageFile>./img/monster-izma_1</ImageFile>
@@ -1593,14 +1709,6 @@
 				<ImageFile>./img/monster-kitsune</ImageFile>
 				<ImageFile>./img/monster-kitsune_1</ImageFile>
 			</ImageSet>
-			<ImageSet id="monster-lethice">
-				<ImageFile>./img/monster-lethice</ImageFile>
-				<ImageFile>./img/monster-lethice_1</ImageFile>
-			</ImageSet>
-			<ImageSet id="monster-lethice-phase2">
-				<ImageFile>./img/monster-lethice-phase2</ImageFile>
-				<ImageFile>./img/monster-lethice-phase2_1</ImageFile>
-			</ImageSet>
 			<ImageSet id="monster-livingstatue">
 				<ImageFile>./img/monster-livingstatue</ImageFile>
 				<ImageFile>./img/monster-livingstatue_1</ImageFile>
@@ -1624,6 +1732,10 @@
 			<ImageSet id="monster-milkysuccubus">
 				<ImageFile>./img/monster-milkysuccubus</ImageFile>
 				<ImageFile>./img/monster-milkysuccubus_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="monster-mimic">
+				<ImageFile>./img/monster-mimic</ImageFile>
+				<ImageFile>./img/monster-mimic_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="monster-minerva">
 				<ImageFile>./img/monster-minerva</ImageFile>
@@ -1784,6 +1896,10 @@
 			<ImageSet id="rathazul-buy-dye">
 				<ImageFile>./img/rathazul-buy-dye</ImageFile>
 				<ImageFile>./img/rathazul-buy-dye_1</ImageFile>
+			</ImageSet>
+			<ImageSet id="rathazul-buy-groplus">
+				<ImageFile>./img/rathazul-buy-groplus</ImageFile>
+				<ImageFile>./img/rathazul-buy-groplus_1</ImageFile>
 			</ImageSet>
 			<ImageSet id="rathazul-buy-lotion">
 				<ImageFile>./img/rathazul-buy-lotion</ImageFile>
