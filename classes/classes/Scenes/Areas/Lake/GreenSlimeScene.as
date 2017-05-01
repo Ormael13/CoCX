@@ -772,6 +772,32 @@ internal function rapeOozeWithMilk():void {
 	combat.cleanupAfterCombat();
 }
 
+public function slimeVictory():void {
+	outputText("You smile in satisfaction as the " + monster.short + " collapses, unable to continue fighting.", true);
+	//Boobfeed.
+	if (player.hasStatusEffect(StatusEffects.Feeder) && flags[kFLAGS.SFW_MODE] <= 0) {
+		//Eligable to rape
+		if (player.lust >= 33 && player.gender > 0) {
+			outputText("\n\nYou're horny enough to try and rape it, though you'd rather see how much milk you can squirt into it.  What do you do?", false);
+			menu();
+			addButton(0, "Breastfeed", rapeOozeWithMilk);
+			addButton(1, "Rape", slimeVictoryRape);
+			addButton(4, "Leave", combat.cleanupAfterCombat);
+		}
+		//Rapes not on the table.
+		else {
+			outputText("\n\nYour nipples ache with the desire to forcibly breastfeed the gelatinous beast.  Do you?", false);
+			doYesNo(rapeOozeWithMilk, combat.cleanupAfterCombat);
+		}
+	}
+	//Not a breastfeeder
+	else if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+		outputText("  Sadly you realize your own needs have not been met.  Of course, you could always play with the poor thing... Do you rape it?", false);
+		doYesNo(slimeVictoryRape, combat.cleanupAfterCombat);
+	}
+	else combat.cleanupAfterCombat();
+}
+
 		public function slimeVictoryRape():void
 		{
 			//Service for lower corruption
