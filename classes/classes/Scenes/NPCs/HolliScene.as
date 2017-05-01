@@ -848,7 +848,6 @@ private function askHolliToWatch():void {
 		if (flags[kFLAGS.THREATENED_HOLLI] > 0) outputText("<b>  You could always just slap the cunt.</b>");
 		//choosing not to beg unlocks Threaten?
 		//[Beg][Threaten][Back]
-		//simpleChoices("Beg",begHolli4Watches,"Threaten",0,"Assert Self",domUpSomeHolli,"",0,"Back",treeMenu);
 		menu();
 		addButton(0,"Beg",begHolli4Watches);
 		if (flags[kFLAGS.THREATENED_HOLLI] == 0) addButton(1,"Threaten",threatenHolli);

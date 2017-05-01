@@ -15,7 +15,10 @@
 				//Eligable to rape
 				if (player.lust >= 33 && player.gender > 0) {
 					outputText("\n\nYou're horny enough to try and rape it, though you'd rather see how much milk you can squirt into it.  What do you do?", false);
-					game.simpleChoices("B.Feed",game.lake.greenSlimeScene.rapeOozeWithMilk,"Rape",game.lake.greenSlimeScene.slimeVictoryRape,"",null,"",null,"Leave",game.combat.cleanupAfterCombat);
+					game.menu();
+					game.addButton(0, "Breastfeed", game.lake.greenSlimeScene.rapeOozeWithMilk);
+					game.addButton(1, "Rape", game.lake.greenSlimeScene.slimeVictoryRape);
+					game.addButton(4, "Leave", game.combat.cleanupAfterCombat);
 				}
 				//Rapes not on the table.
 				else {

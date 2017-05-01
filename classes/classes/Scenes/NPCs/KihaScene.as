@@ -128,7 +128,6 @@ public function encounterKiha():void {
 			addButton(1, "Ask Why", askWhy, null, null, null, "Ask Kiha why she's trying to drive you off.");
 			addButton(2, "Buy Passage", offerToBuyPassageFromKiha, null, null, null, "Try to offer Kiha 200 gems to buy passage.");
 			addButton(4, "Leave", leaveWhenMeetingAgressiveKiha);
-			//simpleChoices("Fight",meetKihaAndFight,"Ask Why",askWhy,"Buy Passage",offerToBuyPassageFromKiha,"",0,"Leave",leaveWhenMeetingAgressiveKiha);
 		}
 		else {
 			outputText("It's a fight!", false);

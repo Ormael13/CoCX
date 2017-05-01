@@ -382,7 +382,6 @@ internal function kihaFriendlyGreeting(output:Boolean = true):void {
 	addButton(1, "Spar", sparWithKiha, null, null, null, "Do some quick battle with Kiha!");
 	addButton(2, "Hug", hugFriendWarmKiha, null, null, null, "Give the dragoness a hug.");
 	addButton(4, "Leave", camp.returnToCampUseOneHour);
-	//simpleChoices("Talk", talk, "Spar", sparWithKiha, "Hug", hugFriendWarmKiha, "", null, "Leave", camp.returnToCampUseOneHour);
 }
 //Spar with Friendly Kiha - Intro (Z)
 private function sparWithKiha():void {
@@ -670,7 +669,6 @@ private function kihaAdmitsSheLikesYourWang():void {
 	addButton(2, "Hug", hugFriendWarmKiha, null, null, null, "Give the dragoness a hug.");
 	addButton(3, "LovinHug", lovinHugKiha, null, null, null, "Give the dragoness a hug and take things to a whole new level!");
 	addButton(4, "Leave", camp.returnToCampUseOneHour);
-	//simpleChoices("Talk", null, "Spar", sparWithKiha, "Hug", hugFriendWarmKiha, "LovinHug", lovinHugKiha, "Leave", camp.returnToCampUseOneHour);
 }
 //Loving Hug
 private function lovinHugKiha():void {

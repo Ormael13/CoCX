@@ -814,30 +814,18 @@ public function multipageChoices( cancelFunction :*, menuItems :Array ) :void {
  * 
  * I highly recommend you <b>DO NOT</b> use this for new content. Use menu() + N x addButton() instead.
  */
-public function simpleChoices(text1:String, butt1:Function, 
+/*public function simpleChoices(text1:String, butt1:Function, 
 						text2:String, butt2:Function, 
 						text3:String, butt3:Function, 
 						text4:String, butt4:Function, 
 						text5:String, butt5:Function):void { //New typesafe version
-
-	//trace("SimpleChoices");
-/*	choices(text1,butt1,
-			text2,butt2,
-			text3,butt3,
-			text4,butt4,
-			text5,butt5,
-			"",0,
-			"",0,
-			"",0,
-			"",0,
-			"",0);*/
 	menu();
 	addButton(0, text1, butt1);
 	addButton(1, text2, butt2);
 	addButton(2, text3, butt3);
 	addButton(3, text4, butt4);
 	addButton(4, text5, butt5);
-}
+}*/
 
 /**
  * Clears all button and adds a 'Yes' and a 'No' button.

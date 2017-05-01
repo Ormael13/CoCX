@@ -393,7 +393,6 @@ public function urtaBarApproach():void {
 				else outputText("\n\nYou don't think it's likely Urta would agree to host your eggs in her present state; wait until she's turned down her inhibitions before asking.");
 			}
 			//[URTAZ PLACE] [Suck Off] [Eat Out] [Vixen & Cream]
-			//simpleChoices("Her Place",goBackToUrtasForLuvinz,"Suck Off",blowUrtaUnderTheTableLuv,"Eat Out",eatUrtaOutNomNomPussy,"",0,"",0);
 			menu();
 			addButton(0,"Her Place",goBackToUrtasForLuvinz, null, null, null, "Go to Urta's apartment for sex.");
 			if (flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] >= 5) addButton(1,"Suck Off",slurpFawkesCocksForFunAndInflation, null, null, null, "Suck Urta's dick until she cums! \n\nNote: Given how long she hasn't relieved, this is most likely going to fill your belly.");
@@ -418,7 +417,6 @@ public function urtaBarApproach():void {
 				temp = giveTheFoxSomeEggs;
 			}
 			//As per normal drunk-fawks
-			//simpleChoices("Jerkoff",getAPublicFacialFromUrta,"Anal Ride",takeUrtaInTheButtPublically,"Lay Eggs",temp,"Spank Her",spank,"Leave",barTelAdre);
 			menu();
 			addButton(0,"Jerkoff",getAPublicFacialFromUrta);
 			addButton(1,"Anal Ride",takeUrtaInTheButtPublically);
@@ -426,7 +424,7 @@ public function urtaBarApproach():void {
 			addButton(3,"Spank Her",spank);
 			if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -2 && RaphaelLikes() && flags[kFLAGS.URTA_X_RAPHAEL_HAPPENED] == 0) {
 				outputText("\n\nYou know Urta and Raphael get along about as well as cats and dogs, but it might be fun to have them double-team you in the dark.");
-				addButton(8,"3SomeSurprise",urtaAndRaphaelSurprise);
+				addButton(4,"3SomeSurprise",urtaAndRaphaelSurprise);
 			}
 			addButton(14,"Leave",telAdre.barTelAdre);
 			return;
@@ -460,7 +458,6 @@ public function urtaBarApproach():void {
 			if (flags[kFLAGS.URTA_TIMES_EGG_PREGGED] == 0) outputText("\n\nHmm... sounds like she wants to fuck almost as badly as you want to get these eggs out of you.  Besides, didn't Urta say to you once that she's basically barren and sterile?  You'd be doing her a favor by letting her carry your eggs, wouldn't you?  Let's see if she's drunk enough to let you fill her full...");
 			temp = giveTheFoxSomeEggs;
 		}
-		//simpleChoices("Jerkoff",getAPublicFacialFromUrta,"Anal Ride",takeUrtaInTheButtPublically,"Lay Eggs",temp,"Spank Her",spank,"Leave",barTelAdre);
 		menu();
 		addButton(0,"Jerkoff",getAPublicFacialFromUrta);
 		addButton(1,"Anal Ride",takeUrtaInTheButtPublically);
@@ -468,7 +465,7 @@ public function urtaBarApproach():void {
 		addButton(3,"Spank Her",spank);
 		if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -2 && RaphaelLikes() && flags[kFLAGS.URTA_X_RAPHAEL_HAPPENED] == 0) {
 			outputText("\n\nYou know Urta and Raphael get along about as well as cats and dogs, but it might be fun to have them double-team you in the dark.");
-			addButton(8,"3SomeSurprise",urtaAndRaphaelSurprise);
+			addButton(4,"3SomeSurprise",urtaAndRaphaelSurprise);
 		}
 		addButton(14,"Leave",telAdre.barTelAdre);
 		return;
@@ -493,7 +490,6 @@ public function urtaBarApproach():void {
 		else outputText("\n\nYou don't think it's likely Urta would agree to host your eggs in her present state; wait until she's turned down her inhibitions before asking.");
 	}
 	//[Under Table BJ] [Public Jerkoff onto your face] [Public Buttfucking (Receiver)] [Tender lovemaking @ Urtas] [Minotaur Cum-Addict Special?] [TABLE FUCK]
-	//simpleChoices("Hidden BJ",blowUrtaUnderTable,"Urta's Place",goBackToUrtasForLuvinz,"",0,"",0,"Leave",barTelAdre);
 	menu();
 	addButton(0,"Urta's Place",goBackToUrtasForLuvinz, null, null, null, "Go to Urta's apartment for sex.");
 	if (flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] >= 5) addButton(1,"Hidden BJ",slurpFawkesCocksForFunAndInflation, null, null, null, "Suck Urta's dick until she cums! \n\nNote: Given how long she hasn't relieved, this is most likely going to fill your belly.");
@@ -2094,10 +2090,6 @@ internal function urtaHomeLuvLuvinsMenu():void {
 	outputText("She caresses a nipple and visibly shivers as she says, \"<i>You teased me the whole way here, and I'm COMPLETELY ready for you, any way you could want.</i>\"\n\n", false);
 	outputText("She blushes and continues, \"<i>So, what'll it be, lover?  A little injection of fox-cream or something else?</i>\"", false);
 	//[Ride Vaginal] [Ride Anal] [69]
-	/*if (player.gender == 3) simpleChoices("Ride Vag",rideUrtasCoochLoveyDovey,"Ride Anal",rideUrtaInButtAtHomeLove,"69",oralFiestyUberExplosionUrta,"Vag Fuck",urtasCoochiNeedsFuckedLove,"No Condoms",condomlessUrtaInHouseSmex);
-	if (player.gender == 2) simpleChoices("Ride Vag",rideUrtasCoochLoveyDovey,"Ride Anal",rideUrtaInButtAtHomeLove,"69",0,"No Condoms",condomlessUrtaInHouseSmex,"",0);
-	if (player.gender == 1) simpleChoices("Ride Vag",0,"Ride Anal",rideUrtaInButtAtHomeLove,"69",oralFiestyUberExplosionUrta,"Vag Fuck",urtasCoochiNeedsFuckedLove,"No Condoms",condomlessUrtaInHouseSmex);
-	if (player.gender == 0) simpleChoices("Ride Vag",0,"Ride Anal",rideUrtaInButtAtHomeLove,"69",0,"",0,"",0);*/
 	outputText("\n\nHow do you want to fuck with the vixen?");
 	menu();
 	if (player.hasVagina()) {

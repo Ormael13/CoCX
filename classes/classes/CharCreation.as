@@ -121,7 +121,6 @@
 			//mainView.mainText.autoSize = TextFieldAutoSize.LEFT;
 			menu();
 			addButton(0, "OK", chooseName);
-		//	simpleChoices("OK",10034,"",0,"",0,"",0,"",0);
 			mainView.nameBox.x = mainView.mainText.x + 5;
 			mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 		

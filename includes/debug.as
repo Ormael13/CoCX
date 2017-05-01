@@ -321,7 +321,9 @@ public function eventTester():void {
 ]]>;
 
 	;
-	simpleChoices("Proceed",eventTesterGo,"",null,"",null,"",null,"Back",eventTesterExit);
+	menu();
+	addButton(0, "Proceed", eventTesterGo);
+	addButton(4, "Back", eventTesterExit);
 }
 
 public function eventTesterGo():void {

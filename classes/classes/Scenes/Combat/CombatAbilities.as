@@ -727,12 +727,6 @@ package classes.Scenes.Combat
 			addButton(14, "Back", combat.combatMenu, false);
 		}
 		
-		/*private function fireBreathMenu():void { (Doesn't seem to be used. Besides, there are 14 slots.)
-			clearOutput();
-			outputText("Which of your special fire-breath attacks would you like to use?");
-			simpleChoices("Akbal's", fireballuuuuu, "Hellfire", hellFire, "Dragonfire", dragonBreath, "", null, "Back", playerMenu);
-		}*/
-		
 		public function berzerk():void {
 			clearOutput();
 			if (player.hasStatusEffect(StatusEffects.Berzerking)) {

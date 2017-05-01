@@ -274,11 +274,11 @@
 			);
 		}
 
-		[Deprecated(replacement = "Use a series of BaseContent.addButton instead.")]
+		//[Deprecated(replacement = "Use a series of BaseContent.addButton instead.")]
 		/**
 		 * [DEPRECATED] Creates a menu with 5 buttons. 
 		 */
-		protected function simpleChoices(text1:String, butt1:Function,
+		/*protected function simpleChoices(text1:String, butt1:Function,
 								text2:String, butt2:Function,
 								text3:String, butt3:Function,
 								text4:String, butt4:Function,
@@ -288,7 +288,7 @@
 					text3, butt3,
 					text4, butt4,
 					text5, butt5);
-		}
+		}*/
 
 		protected function doYesNo(eventYes:Function, eventNo:Function):void { //Now typesafe
 			kGAMECLASS.doYesNo(eventYes, eventNo);

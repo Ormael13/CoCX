@@ -192,7 +192,6 @@ private function theSlipperySqueeze():void {
 		milker = askJoeyAboutOffer;
 	//	[Joey] [Sara] [][] [Leave]
 	
-	//simpleChoices("JoeyMassage",joeyMassage,"Androgyny",androgyny,"Joey'sOffer",milker,"",0,"Leave",2855);
 	menu();
 	addButton(0,"JoeyMassage",joeyMassage);
 	addButton(1,"Adrogyny",androgyny);

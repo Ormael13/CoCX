@@ -78,7 +78,6 @@ package classes.Scenes.Seasonal {
 			menu();
 			addButton(0,"Yes",helpWithTheCandyCane);
 			addButton(1,"No",declineCandyCaneCawks);
-			//simpleChoices("Yes",9999,"No",9999,"",0,"",0,"",0);
 			dynStats("lus", 10+player.lib/10, "resisted", false);
 		}
 
