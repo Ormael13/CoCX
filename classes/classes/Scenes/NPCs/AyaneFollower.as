@@ -98,8 +98,9 @@ private function ayaneShop():void {
 	addButton(5, "SpiritFocus", sellSpiritFocus);
 	addButton(6, "Fox Hairin", sellFoxHairpin);
 	addButton(7, "Fox Jewel", sellFoxJewel);
-	addButton(8, "Scholar Tea", sellScholarTea);
-	addButton(9, "Vixen Tea", sellVixenTea);
+	addButton(10, "Agility B.", sellAgilityElixir);
+	addButton(11, "Scholar T.", sellScholarTea);
+	addButton(12, "Vixen Tea", sellVixenTea);
 	addButton(14, "Back", ayaneCampMenu);
 }
 private function sellWhiteKimono():void {
@@ -243,6 +244,24 @@ private function buyFoxJewel():void {
 		outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
 		player.gems -= 50;
 		inventory.takeItem(consumables.FOXJEWL, ayaneShop);
+		statScreenRefresh();
+	}
+}
+private function sellAgilityElixir():void {
+	clearOutput();
+	outputText("\"<i>This elixir helps increase your natural speed. While you may think casting magical pranks is enough it would be wise to actually work on your agility for a fast trick or a swift escape. I think <b>15 gems</b> is not too steep a price for the gift of speed.</i>\"");
+	doYesNo(buyAgilityElixir, ayaneShop);
+}
+private function buyAgilityElixir():void {
+	if (player.gems < 15) {
+		clearOutput();
+		outputText("\n\nAyane shakes her head, indicating you need " + String(15 - player.gems) + " more gems to purchase this item.");
+		doNext(ayaneShop);
+	}
+	else {
+		outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
+		player.gems -= 15;
+		inventory.takeItem(consumables.AGILI_E, ayaneShop);
 		statScreenRefresh();
 	}
 }

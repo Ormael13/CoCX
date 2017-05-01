@@ -168,6 +168,7 @@ package classes.Scenes.Places.Farm
 			this.gems = rand(15) + 25;
 			this.tailType = TAIL_TYPE_HORSE;
 			this.drop = NO_DROP;
+			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.str += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

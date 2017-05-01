@@ -728,8 +728,10 @@ public function creditsScreen():void {
 	outputText("<b>Game Mod Angels:</b>\n");
 	outputText("<ul>");
 	outputText("<li> Liadri</li>");
-	outputText("<li> Zevos</li>");
+	outputText("<li> Zavos/Zevos</li>");
+	outputText("<li> Xana</li>\n");
 	outputText("<li> MissBlackThorne</li>\n");
+	outputText("<li> 'Secret Collaborant'</li>\n");
 	outputText("</ul>");
 	outputText("<b>Game Mod Contributors:</b>\n");
 	outputText("<ul>");

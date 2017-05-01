@@ -66,6 +66,7 @@ package classes.Scenes.Places.Owca
 			this.tailType = TAIL_TYPE_DEMONIC;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.str += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

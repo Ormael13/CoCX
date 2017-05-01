@@ -123,64 +123,21 @@ public function fight2Kindra():void {
 public function trainingArcheryWithKindra():void {
 	clearOutput();
 	if (flags[kFLAGS.KINDRA_DAILY_TRAINING] < 1) {
-		if (player.statusAffectv1(StatusAffects.Kelt) < 100) {
-			outputText("You ask Kindra if she would mind to teach you how to properly use a bow. She’s quite skilled. She ask a few question then sigh in disappointment.\n\n");
-			outputText("\"<i>You don’t seem to have any proper training. You will need to learn the base from someone else as I don’t teach to beginners.</i>\"\n\n");
-			doNext(meet2Kindra);
-		}
-		if (player.statusAffectv1(StatusAffects.Kelt) >= 100 && player.statusAffectv1(StatusAffects.Kindra) < 50) {
-			if (flags[kFLAGS.KINDRA_ADV_ARCHERY] == 1) {
-				outputText("\"<i>I see you here for more archery training pup... lets see what you can do.</i>\"\n\n");
+		if (player.statusAffectv1(StatusAffects.Kindra) >= 145) {
+			if (player.isArtifactBow()) {
+				outputText("You ready your magical bow and shoot putting both your dexterity and will at the task and pushing them to the limit. Your arrows all impale one another the last striking the target with such impossible power the target fissure by the center in a cross shape and falls ground in rubble.\n\n");
+				outputText("Kindra applaud you.\n\n");
+				outputText("\"<i>Well wow I didn’t expect you to not only manage this feat but also actually destroy the target in the process pup. I can hereby and without doubt call you one of Mareth best archer your training is complete.</i>\"\n\n");
+				outputText("\"<b>Learned Sidewinder ability!</b>\"\n\n");
+				if (player.findStatusAffect(StatusAffects.KnowsSidewinder) < 0) player.createStatusAffect(StatusAffects.KnowsSidewinder, 0, 0, 0, 0);
+				bowSkill(5);
 			}
 			else {
-				outputText("You ask Kindra if she would mind to teach you how to properly use a bow. She’s quite skilled. She ask a few question then nod satisfied.\n\n");
-				outputText("\"<i>You know the basics which is a good start and something I can work with. Keep in mind I won’t be going easy on you. If you thought your first teacher was a cold hearted jackass then know I will likely be pushing you hard just as much if not more pup. Our training begins now.</i>\"\n\n");
-				flags[kFLAGS.KINDRA_ADV_ARCHERY] = 1;
+				outputText("You head back to the archery field to resume training.\n\n");
+				outputText("Your aim is true but no matter how you do it your arrows tend to only shoot around the absolute center rather than in it. At least you improved your accuracy a little today.\n\n");
+				outputText("Kindra watch passively all the while but eventually calling it off for the day you both head back to camp.\n\n");
 			}
-			outputText("She leads you to a nearby field where she set a target and has you practice your aim in various sometime weird condition such as doing jump shots or shooting while running. It doesn’t come as a surprise that the majority of your shots miss.\n\n");
-			outputText("\"<i>Eyes the prey not the horizon. You ain’t aiming straight at all! Stop thinking about fucking and concentrate on the target!</i>\"\n\n");
-			outputText("You get at it for several hours until you're so tired you can no longer pull your bowstring.\n\n");
-			if (player.inte < 100) {
-				outputText("\"<i>That will do for today pup ask me tomorrow to resume training.</i>\"\n\n");
-				player.spe += 5;
-				player.inte += 5;
-				statScreenRefresh();
-			}
-			else {
-				outputText("\"<i>Not bad you're hitting the center as you should. We can move on to step two tomorrow, I expect you to be ready.</i>\"\n\n");
-			}
-			bowSkill(5);
-			flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
-			doNext(camp.returnToCampUseFourHours);
-		}
-		if (player.statusAffectv1(StatusAffects.Kindra) >= 50 && player.statusAffectv1(StatusAffects.Kindra) < 100) {
-			if (flags[kFLAGS.KINDRA_ADV_ARCHERY] == 2) {
-				outputText("You head to the training field with Kindra to resume shooting.\n\n");
-			}
-			else {
-				outputText("Kindra brings you to the training field as usual but this time she lined several target each at different ranges.\n\n");
-				outputText("\"<i>Shooting the same target over and over is cute but enemies will change distance moving closer or farther during battle. Your beyond shooting a stationary target now. Your training today is to shoot those targets in rapid fire and constantly adapt to the changing distance. Once you reliably hit all targets in the center we can continue.</i>\"\n\n");
-				flags[kFLAGS.KINDRA_ADV_ARCHERY] = 2;
-			}
-			outputText("This training is somewhat harder than anything you’ve tried so far. You shoot those targets for a while missing quite a few shots. After a few hour you indeed gain in accuracy and fluidity your arrows hitting the targets more often. ");
-			outputText("This doesn’t prevent Kindra mocking you when you fail at hitting targets entirely but strangely her taunts helps you push yourself harder and harder. Perhaps because you want to prove the sheep morph wrong.\n\n");
-			if (player.spe < 150) {
-				player.spe += 5;
-				statScreenRefresh();
-			}
-			if (player.inte < 120) {
-				player.inte += 5;
-				statScreenRefresh();
-			}
-			if (player.spe >= 150 && player.inte >= 120) {
-				outputText("Kindra watch satisfied as your arrows hits the five consecutives targets right in their centers.\n\n");
-				outputText("\"<i>Good that will be all for today. I have a new training for you tomorrow that will push your skill to the limit. For now go rest pup you earned it.</i>\"\n\n");
-				outputText("\"<b>Learned Barrage ability!</b>\"\n\n");
-				if (player.findStatusAffect(StatusAffects.KnowsBarrage) < 0) player.createStatusAffect(StatusAffects.KnowsBarrage, 0, 0, 0, 0);
-				flags[kFLAGS.KINDRA_ADV_ARCHERY] = 3;
-			}
-			bowSkill(5);
-			flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
+		//	flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
 			doNext(camp.returnToCampUseFourHours);
 		}
 		if (player.statusAffectv1(StatusAffects.Kindra) >= 100 && player.statusAffectv1(StatusAffects.Kindra) < 145) {
@@ -208,25 +165,69 @@ public function trainingArcheryWithKindra():void {
 			}
 			if (player.spe >= 150 && player.inte >= 120) flags[kFLAGS.KINDRA_ADV_ARCHERY] = 5;
 			bowSkill(5);
-			flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
+		//	flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
 			doNext(camp.returnToCampUseFourHours);
 		}
-		if (player.statusAffectv1(StatusAffects.Kindra) >= 145) {
-		/*	if () {
-				outputText("You ready your magical bow and shoot putting both your dexterity and will at the task and pushing them to the limit. Your arrows all impale one another the last striking the target with such impossible power the target fissure by the center in a cross shape and falls ground in rubble.\n\n");
-				outputText("Kindra applaud you.\n\n");
-				outputText("\"<i>Well wow I didn’t expect you to not only manage this feat but also actually destroy the target in the process pup. I can hereby and without doubt call you one of Mareth best archer your training is complete.</i>\"\n\n");
-				outputText("\"<b>Learned Sidewinder ability!</b>\"\n\n");
-				if (player.findStatusAffect(StatusAffects.KnowsSidewinder) < 0) player.createStatusAffect(StatusAffects.KnowsSidewinder, 0, 0, 0, 0);
-				bowSkill(5);
+		if (player.statusAffectv1(StatusAffects.Kindra) >= 50 && player.statusAffectv1(StatusAffects.Kindra) < 100) {
+			if (flags[kFLAGS.KINDRA_ADV_ARCHERY] == 2) {
+				outputText("You head to the training field with Kindra to resume shooting.\n\n");
 			}
-			else {	*/
-				outputText("You head back to the archery field to resume training.\n\n");
-				outputText("Your aim is true but no matter how you do it your arrows tend to only shoot around the absolute center rather than in it. At least you improved your accuracy a little today.\n\n");
-				outputText("Kindra watch passively all the while but eventually calling it off for the day you both head back to camp.\n\n");
-		//	}
-			flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
+			else {
+				outputText("Kindra brings you to the training field as usual but this time she lined several target each at different ranges.\n\n");
+				outputText("\"<i>Shooting the same target over and over is cute but enemies will change distance moving closer or farther during battle. Your beyond shooting a stationary target now. Your training today is to shoot those targets in rapid fire and constantly adapt to the changing distance. Once you reliably hit all targets in the center we can continue.</i>\"\n\n");
+				flags[kFLAGS.KINDRA_ADV_ARCHERY] = 2;
+			}
+			outputText("This training is somewhat harder than anything you’ve tried so far. You shoot those targets for a while missing quite a few shots. After a few hour you indeed gain in accuracy and fluidity your arrows hitting the targets more often. ");
+			outputText("This doesn’t prevent Kindra mocking you when you fail at hitting targets entirely but strangely her taunts helps you push yourself harder and harder. Perhaps because you want to prove the sheep morph wrong.\n\n");
+			if (player.spe < 150) {
+				player.spe += 5;
+				statScreenRefresh();
+			}
+			if (player.inte < 120) {
+				player.inte += 5;
+				statScreenRefresh();
+			}
+			if (player.statusAffectv1(StatusAffects.Kindra) >= 95 && player.spe >= 150 && player.inte >= 120) {
+				outputText("Kindra watch satisfied as your arrows hits the five consecutives targets right in their centers.\n\n");
+				outputText("\"<i>Good that will be all for today. I have a new training for you tomorrow that will push your skill to the limit. For now go rest pup you earned it.</i>\"\n\n");
+				outputText("\"<b>Learned Barrage ability!</b>\"\n\n");
+				if (player.findStatusAffect(StatusAffects.KnowsBarrage) < 0) player.createStatusAffect(StatusAffects.KnowsBarrage, 0, 0, 0, 0);
+				flags[kFLAGS.KINDRA_ADV_ARCHERY] = 3;
+			}
+			bowSkill(5);
+		//	flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
 			doNext(camp.returnToCampUseFourHours);
+		}
+		if (player.statusAffectv1(StatusAffects.Kelt) >= 100 && player.statusAffectv1(StatusAffects.Kindra) < 50) {
+			if (flags[kFLAGS.KINDRA_ADV_ARCHERY] == 1) {
+				outputText("\"<i>I see you here for more archery training pup... lets see what you can do.</i>\"\n\n");
+			}
+			else {
+				outputText("You ask Kindra if she would mind to teach you how to properly use a bow. She’s quite skilled. She ask a few question then nod satisfied.\n\n");
+				outputText("\"<i>You know the basics which is a good start and something I can work with. Keep in mind I won’t be going easy on you. If you thought your first teacher was a cold hearted jackass then know I will likely be pushing you hard just as much if not more pup. Our training begins now.</i>\"\n\n");
+				flags[kFLAGS.KINDRA_ADV_ARCHERY] = 1;
+			}
+			outputText("She leads you to a nearby field where she set a target and has you practice your aim in various sometime weird condition such as doing jump shots or shooting while running. It doesn’t come as a surprise that the majority of your shots miss.\n\n");
+			outputText("\"<i>Eyes the prey not the horizon. You ain’t aiming straight at all! Stop thinking about fucking and concentrate on the target!</i>\"\n\n");
+			outputText("You get at it for several hours until you're so tired you can no longer pull your bowstring.\n\n");
+			if (player.inte < 100) {
+				outputText("\"<i>That will do for today pup ask me tomorrow to resume training.</i>\"\n\n");
+				player.spe += 5;
+				player.inte += 5;
+				statScreenRefresh();
+			}
+			if (player.statusAffectv1(StatusAffects.Kindra) > 40) {
+				outputText("\"<i>Not bad you're hitting the center as you should. We can move on to step two tomorrow, I expect you to be ready.</i>\"\n\n");
+			}
+			if (player.statusAffectv1(StatusAffects.Kindra) < 5) player.createStatusAffect(StatusAffects.Kindra,5,0,0,0);
+			else bowSkill(5);
+		//	flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
+			doNext(camp.returnToCampUseFourHours);
+		}
+		if (player.statusAffectv1(StatusAffects.Kelt) < 100) {
+			outputText("You ask Kindra if she would mind to teach you how to properly use a bow. She’s quite skilled. She ask a few question then sigh in disappointment.\n\n");
+			outputText("\"<i>You don’t seem to have any proper training. You will need to learn the base from someone else as I don’t teach to beginners.</i>\"\n\n");
+			doNext(meet2Kindra);
 		}
 	}
 	else {

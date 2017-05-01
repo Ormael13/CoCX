@@ -207,42 +207,42 @@ package classes.Scenes.Dungeons
 			}
 			if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_TSTOOTH] > 0) {
 				if(flags[kFLAGS.HIDDEN_CAVE_TAKEN_TSTOOTH] < 5) {
-					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_TSTOOTH]) + " glowing tiger shark tooth inside.\n\n", false);
+					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_TSTOOTH]) + " glowing tiger shark tooth inside.", false);
 					addButton(0, "TSharkT", takeTSharkTooth);
 				}
 			}
 			else {
-				outputText("\n\nThere is an unopened crate with five glowing tiger shark teeth inside.\n\n", false);
+				outputText("\n\nThere is an unopened crate with five glowing tiger shark teeth inside.", false);
 				addButton(0, "TSharkT", takeTSharkTooth);
 			}
 			if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_GLDSEED] > 0) {
 				if(flags[kFLAGS.HIDDEN_CAVE_TAKEN_GLDSEED] < 5) {
-					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_GLDSEED]) + " golden seed inside.\n\n", false);
+					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_GLDSEED]) + " golden seed inside.", false);
 					addButton(1, "GoldSeed", takeGoldenSeed);
 				}
 			}
 			else {
-				outputText("\n\nThere is an unopened crate with five golden seeds inside.\n\n", false);
+				outputText("\n\nThere is an unopened crate with five golden seeds inside.", false);
 				addButton(1, "GoldSeed", takeGoldenSeed);
 			}
 			if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_MARAFRU] > 0) {
 				if(flags[kFLAGS.HIDDEN_CAVE_TAKEN_MARAFRU] < 5) {
-					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_MARAFRU]) + " Mara fruit inside.\n\n", false);
+					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_MARAFRU]) + " Mara fruit inside.", false);
 					addButton(2, "MaraFruit", takeMaraFruit);
 				}
 			}
 			else {
-				outputText("\n\nThere is an unopened crate with five Mara fruits inside.\n\n", false);
+				outputText("\n\nThere is an unopened crate with five Mara fruits inside.", false);
 				addButton(2, "MaraFruit", takeMaraFruit);
 			}
 			if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_SALAMFW] > 0) {
 				if(flags[kFLAGS.HIDDEN_CAVE_TAKEN_SALAMFW] < 5) {
-					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_SALAMFW]) + " bottle of Salamander firewater inside.\n\n", false);
+					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_SALAMFW]) + " bottle of Salamander firewater inside.", false);
 					addButton(3, "SalamFW", takeSalamFireWat);
 				}
 			}
 			else {
-				outputText("\n\nThere is an unopened crate with five bottles of Salamander firewater inside.\n\n", false);
+				outputText("\n\nThere is an unopened crate with five bottles of Salamander firewater inside.", false);
 				addButton(3, "SalamFW", takeSalamFireWat);
 			}
 		}
@@ -257,6 +257,14 @@ package classes.Scenes.Dungeons
 				flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] = 3;
 				doNext(playerMenu);
 				return;
+			}
+			if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS] == 1) {
+		//		outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_TSTOOTH]) + " glowing tiger shark tooth inside.\n\n", false);
+				addButtonDisabled(0, "???", "???");
+			}
+			else {
+				outputText("\n\nThere is an unopened crate with something inside.\n\n", false);
+				addButton(0, "Crate 1", takeGuidedBow);
 			}
 		}
 		public function roomSStaircaseB():void {
@@ -332,6 +340,10 @@ package classes.Scenes.Dungeons
 		private function takeSalamFireWat():void {
 			flags[kFLAGS.HIDDEN_CAVE_TAKEN_SALAMFW]++
 			inventory.takeItem(consumables.SALAMFW, roomLStorageW);
+		}
+		private function takeGuidedBow():void {
+			flags[kFLAGS.HIDDEN_CAVE_TAKEN_ITEMS] = 1;
+			inventory.takeItem(weaponsrange.BOWGUID, roomLStorageE);
 		}
 	}
 

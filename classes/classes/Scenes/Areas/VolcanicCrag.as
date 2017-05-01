@@ -36,10 +36,10 @@ package classes.Scenes.Areas
 			
 			//Build choice list!
 			choice[choice.length] = 0; //Behemoth
-			if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) choice[choice.length] = 1; //Phoenix
-			if (rand(3) == 0) choice[choice.length] = 1; //Find Drake's Heart
+			if (flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0) choice[choice.length] = 1; //Phoenix
+			if (rand(3) == 0) choice[choice.length] = 2; //Find Drake's Heart
 			choice[choice.length] = 3; //Fire True Golems
-			if (rand(4) == 0) choice[choice.length] = 4; //Find nothing! The rand will be removed from this once the Volcanic Crag is populated with more encounters.
+			if (rand(3) == 0) choice[choice.length] = 4; //Find nothing! The rand will be removed from this once the Volcanic Crag is populated with more encounters.
 			
 			//DLC april fools
 			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {

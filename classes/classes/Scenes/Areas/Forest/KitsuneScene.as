@@ -2261,7 +2261,7 @@ package classes.Scenes.Areas.Forest
 		{
 			clearOutput();
 			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] == 0) {
-				if (flags[kFLAGS.KITSUNE_SHRINE_VISIT] > 0 && player.earType == EARS_FOX && player.tailVenom >= 2) {
+				if (flags[kFLAGS.KITSUNE_SHRINE_VISIT] > 0 && player.earType == EARS_FOX && player.tailCount >= 2) {
 					outputText("As you wander the woods you spot a floating blue flame yet again. Being a kitsune yourself you’ve grown wise to that tactic, and go straight for the trickster herself. Surprisingly, it’s not one of the kitsune sisters you were expecting, but a different person. She wears a formal kimono and has hair as white as snow. When she notices you, she starts by giving you the classic \"<i>Hello adventurer would you like to...</i>\" line until she realises you also have a pair of fox ears and multiple tails. There is an awkward silence as she sizes you up, then sighs.\n\n");
 					outputText("\"<i>My apologies, I heard there was a human wandering the woods as of late, and I couldn’t stop myself from thinking of a potential meal. My name is Ayane. I don’t recall meeting you within the region, are you new?</i>\"\n\n");
 					outputText("You decide to play fair and admit you actually are a former human and that you have been looking for a way to become a kitsune yourself.\n\n");
@@ -2293,13 +2293,13 @@ package classes.Scenes.Areas.Forest
 			addButton(0, "Read Books", readKitsuneBooks);
 			if (flags[kFLAGS.TOOK_KITSUNE_STATUE] == 0) addButton(1, "Meditate", meditateLikeAKitsuneEhQuestionMark);
 			if ((player.hasItem(useables.GLDSTAT) || flags[kFLAGS.TOOK_KITSUNE_STATUE] == 0) && flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] < 1) addButton(2, "Statue", stealAStatue);
-			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 2) addButton(2, "Ayane", ayaneAtShrine);
 			if (player.findPerk(PerkLib.StarSphereMastery) > 0 && player.perkv1(PerkLib.StarSphereMastery) < 10 && player.gems >= 1000) addButton(3, "Offering", offeringToTaoth);
-			addButton(4, "Leave", camp.returnToCampUseOneHour);
+			if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && flags[kFLAGS.AYANE_FOLLOWER] < 2) addButton(5, "Ayane", ayaneAtShrine);
 			if (flags[kFLAGS.AYANE_FOLLOWER] == 1) {
-				addButton(5, "Servant", AyaneServant);
+				addButton(6, "Servant", AyaneServant);
 			}
-			if (player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.inte >= 100 && player.cor >= 50) addButton(6, "Slave", AyaneSlave);
+			if (player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.inte >= 100 && player.cor >= 50) addButton(7, "Slave", AyaneSlave);
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 
 //[Ayane Shop at Shrine]
@@ -2317,8 +2317,9 @@ package classes.Scenes.Areas.Forest
 			addButton(5, "SpiritFocus", sellSpiritFocus);
 			addButton(6, "Fox Hairin", sellFoxHairpin);
 			addButton(7, "Fox Jewel", sellFoxJewel);
-			addButton(8, "Scholar Tea", sellScholarTea);
-			addButton(9, "Vixen Tea", sellVixenTea);
+			addButton(10, "Agility E.", sellAgilityElixir);
+			addButton(11, "Scholar T.", sellScholarTea);
+			addButton(12, "Vixen Tea", sellVixenTea);
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 		private function sellWhiteKimono():void {
@@ -2465,6 +2466,24 @@ package classes.Scenes.Areas.Forest
 				statScreenRefresh();
 			}
 		}
+		private function sellAgilityElixir():void {
+			clearOutput();
+			outputText("\"<i>Kitsune's wits are their primary weapon. Since you weren't born one of us, you will need to learn true trickery. Drinking this tea can help you sharpen your dull human wits. I think <b>15 gems</b> is not too steep a price for the gift of intelligence.</i>\"");
+			doYesNo(buyAgilityElixir, ayaneAtShrine);
+		}
+		private function buyAgilityElixir():void {
+			if (player.gems < 15) {
+				clearOutput();
+				outputText("\n\nAyane shakes her head, indicating you need " + String(15 - player.gems) + " more gems to purchase this item.");
+				doNext(ayaneAtShrine);
+			}
+			else {
+				outputText("\n\nAfter you give Ayane gems she hand over to you purchased item. ");
+				player.gems -= 15;
+				inventory.takeItem(consumables.AGILI_E, ayaneAtShrine);
+				statScreenRefresh();
+			}
+		}
 		private function sellScholarTea():void {
 			clearOutput();
 			outputText("\"<i>Kitsune's wits are their primary weapon. Since you weren't born one of us, you will need to learn true trickery. Drinking this tea can help you sharpen your dull human wits. I think <b>15 gems</b> is not too steep a price for the gift of intelligence.</i>\"");
@@ -2548,7 +2567,7 @@ package classes.Scenes.Areas.Forest
 		{
 			clearOutput();
 			if (player.hasItem(consumables.FOXJEWL) && player.earType == EARS_FOX && player.tailType == TAIL_TYPE_FOX) {
-				if (player.tailVenom >= 2 && player.findPerk(PerkLib.StarSphereMastery) < 0) {
+				if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && player.tailCount >= 2 && player.findPerk(PerkLib.StarSphereMastery) < 0) {
 					outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.\n\n");
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
 					outputText("You look down and notice a weird ball filled with light sitting on the ground next to you. Somehow you can feel this item is connected to you and also very important. Ayane, noticing what happened, approaches and congratulates you.\n\n");
@@ -2560,7 +2579,7 @@ package classes.Scenes.Areas.Forest
 					player.consumeItem(consumables.FOXJEWL);
 					doNext(camp.returnToCampUseOneHour);
 				}
-				else if (player.tailVenom == 8 && player.level >= 42 && player.inte >= 180 && (player.findPerk(PerkLib.CorruptedNinetails) < 0 || player.perkv4(PerkLib.CorruptedNinetails) > 0)) {
+				else if (player.tailCount == 8 && player.level >= 42 && player.inte >= 180 && (player.findPerk(PerkLib.CorruptedNinetails) < 0 || player.perkv4(PerkLib.CorruptedNinetails) > 0)) {		// && (player.findPerk(PerkLib.CorruptedKitsune) < 0 || player.perkv4(PerkLib.CorruptedKitsune) > 0)
 					//20% chance if PC has fox ears, 1 or more fox tails, carries a Fox Jewel, and meets level & INT requirements for the next tail:
 					outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.\n\n");
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
@@ -2568,7 +2587,7 @@ package classes.Scenes.Areas.Forest
 					outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into nine tails.  <b>You are now a nine-tails!  Untold cosmic power radiates from your very being!  Use it wisely...</b>");
 					//Increment tail by 1, consume Fox Jewel, -2 COR, -20 LUST, +2 INT, Advance 1 hr and return to camp.
 					//Apply Nine-Tails perk if applicable.
-					player.tailVenom = 9;
+					player.tailCount = 9;
 					if (player.findPerk(PerkLib.EnlightenedNinetails) < 0) player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);
 					// Nine tail kitsunes have their fur/hair color golden, silver or pure white
 					if (!InCollection(player.hairColor, elderKitsuneColors)) // wrong hair color
@@ -2601,42 +2620,50 @@ package classes.Scenes.Areas.Forest
 					outputText("\n\nDo you take her as your attendant?");
 					doYesNo(AyaneCome2Camp, AyaneStayAtShrine);
 				}
-				else if (player.tailVenom == 7 && player.level >= 30 && player.inte >= 160 && (player.findPerk(PerkLib.CorruptedNinetails) < 0 || player.perkv4(PerkLib.CorruptedNinetails) > 0) && (player.findPerk(PerkLib.CorruptedKitsune) < 0 || player.perkv4(PerkLib.CorruptedKitsune) > 0)) {
+				else if (player.tailCount == 7 && player.level >= 36 && player.inte >= 160 && (player.findPerk(PerkLib.CorruptedNinetails) < 0 || player.perkv4(PerkLib.CorruptedNinetails) > 0) && (player.findPerk(PerkLib.CorruptedKitsune) < 0 || player.perkv4(PerkLib.CorruptedKitsune) > 0)) {
 					outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to fight against the forces of corruption that permeate the land.\n\n");
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
 					outputText("As the mystical flames wash over you, your mind is assaulted by an otherworldly knowledge and power.\n\n");
 					outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into seven tails.  <b>You are now a seven-tails!  Weak cosmic power radiates from you!  Cultivate it wisely...</b>");
 					//Apply Kitsune perk if applicable.
-					player.tailVenom = 8;
+					player.tailCount = 8;
 					outputText("\n\nYou pause for a moment to reflect on your new wisdom, and with a renewed vigor for your quest, you stand and set off for camp.");
 					dynStats("int", 1, "lus", -10, "cor", -1);
 					player.consumeItem(consumables.FOXJEWL);
 					doNext(camp.returnToCampUseOneHour);
 				}
-				else if (player.tailVenom == 6 && player.level >= 30 && player.inte >= 140 && (player.findPerk(PerkLib.CorruptedNinetails) < 0 || player.perkv4(PerkLib.CorruptedNinetails) > 0) && (player.findPerk(PerkLib.CorruptedKitsune) < 0 || player.perkv4(PerkLib.CorruptedKitsune) > 0)) {
+				else if (player.tailCount == 6 && player.level >= 30 && player.inte >= 140 && (player.findPerk(PerkLib.CorruptedNinetails) < 0 || player.perkv4(PerkLib.CorruptedNinetails) > 0) && (player.findPerk(PerkLib.CorruptedKitsune) < 0 || player.perkv4(PerkLib.CorruptedKitsune) > 0)) {
 					outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to fight against the forces of corruption that permeate the land.\n\n");
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
 					outputText("As the mystical flames wash over you, your mind is assaulted by an otherworldly knowledge and power.\n\n");
 					outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into seven tails.  <b>You are now a seven-tails!  Weak cosmic power radiates from you!  Cultivate it wisely...</b>");
 					//Apply Kitsune perk if applicable.
-					player.tailVenom = 7;
+					player.tailCount = 7;
 					if (player.findPerk(PerkLib.EnlightenedKitsune) < 0) player.createPerk(PerkLib.EnlightenedKitsune, 0, 0, 0, 0);
 					outputText("\n\nYou pause for a moment to reflect on your new wisdom, and with a renewed vigor for your quest, you stand and set off for camp.");
 					dynStats("int", 1, "lus", -10, "cor", -1);
 					player.consumeItem(consumables.FOXJEWL);
 					doNext(camp.returnToCampUseOneHour);
 				}
-				else if (player.tailVenom > 1 && player.tailVenom < 6 && player.tailVenom - 1 <= player.level / 6 && player.tailVenom <= player.inte / 20) {
+				else if ((player.tailCount == 2 || player.tailCount == 3 || player.tailCount == 4 || player.tailCount == 5) && player.tailCount - 1 <= player.level / 6 && player.tailCount <= player.inte / 20) {
 					outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.\n\n");
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
-					outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tails begins to glow with an eerie, ghostly light, and with a crackle of electrical energy, splits into " + (player.tailVenom + 1) + "!");
-					player.tailVenom++;
+					outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tails begins to glow with an eerie, ghostly light, and with a crackle of electrical energy, splits into " + (player.tailCount + 1) + "!");
+					player.consumeItem(consumables.FOXJEWL);
+					player.tailCount++;
 				}
-				else if (player.tailVenom == 1 && player.inte >= 20) {
+				else if (player.inte >= 20) {
 					outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.\n\n");
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
-					outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tail begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into " + (player.tailVenom + 1) + "!");
-					player.tailVenom++;
+					outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tail begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into " + (player.tailCount + 1) + "!");
+					player.consumeItem(consumables.FOXJEWL);
+					player.tailCount = 2;
+				}
+				else {
+					outputText("You sit down carefully on a small mat in front of the shrine and clear your mind.  Closing your eyes, you meditate on the things you've learned in your journey thus far, and resolve to continue fighting against the forces of corruption that permeate the land.  As you open your eyes again, you feel as if a great burden has been lifted from your shoulders.\n\nWith a renewed vigor for your quest, you stand up and set off for camp.");
+					//-2 COR, -20 LUST, +1 INT, Advance 1hr and return to camp.
+					dynStats("int", 1, "lus", -20, "cor", -2);
+					doNext(camp.returnToCampUseOneHour);
 				}
 			}
 			else {

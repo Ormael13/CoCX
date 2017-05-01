@@ -3076,6 +3076,33 @@ private function promptSaveUpdate():void {
 		doNext(doCamp);
 		return;
 	}
+	if (flags[kFLAGS.MOD_SAVE_VERSION] == 17) {
+		flags[kFLAGS.MOD_SAVE_VERSION] = 18;
+		clearOutput();
+		outputText("Multi tails get broken or was it venom in them...so we fixed that both will not gonna mess up other or so we think ^^");
+		if (player.tailType == TAIL_TYPE_FOX) {
+			player.tailCount = player.tailVenom;
+			if (player.tailCount < 1) player.tailCount = 1;
+			player.tailVenom = 0;
+		}
+		if (player.faceType == FACE_SNAKE_FANGS) {
+			if (player.tailRecharge < 5) player.tailRecharge = 5;
+		}
+		if (player.findPerk(PerkLib.Cupid) >= 0) {
+			player.removePerk(PerkLib.Cupid);
+			player.perkPoints = player.perkPoints + 1;
+		}
+		if (player.findPerk(PerkLib.ElementalArrows) >= 0) {
+			player.removePerk(PerkLib.ElementalArrows);
+			player.perkPoints = player.perkPoints + 1;
+		}
+		if (player.findPerk(PerkLib.JobArcaneArcher) >= 0) {
+			player.removePerk(PerkLib.JobArcaneArcher);
+			player.createPerk(PerkLib.JobHunter, 0, 0, 0, 0);
+		}
+		doNext(doCamp);
+		return;
+	}
 /*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 10) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 11;
 		clearOutput();

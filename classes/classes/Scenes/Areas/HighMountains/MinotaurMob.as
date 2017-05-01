@@ -199,6 +199,7 @@ package classes.Scenes.Areas.HighMountains
 			this.special1 = game.mountain.minotaurScene.minoPheromones;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.str += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

@@ -33,6 +33,7 @@ package classes.Items
 		public const DSCLARM:Armor = new Armor("DSclArm", "D.Scale Armor", "dragonscale armor", "a suit of dragonscale armor", 20, 800, "This armor is cleverly fashioned from dragon scales. It offers high protection while at the same time, quite flexible.", "Medium");
 		public const DSCLROB:Armor = new ArmorWithPerk("DSclRob", "D.Scale Robes", "dragonscale robes", "a dragonscale robes", 10, 500, "This robe is expertly made from dragon scales. It offers high protection while being lightweight and should be comfortable to wear all day.", "Light",
 				PerkLib.WizardsEndurance,20,0,0,0);
+		public const EHGARB_:EbonweaveHereticsGarb = new EbonweaveHereticsGarb();
 		public const EWJACK_:ArmorWithPerk = new ArmorWithPerk("EWJack","E.W. Jacket","ebonweave jacket","an ebonweave jacket",24,960,"This outfit is ebonweave, created using refined ebonbloom petals. The outfit consists of a leatherlike jacket, a mesh breastplate and a set of arrowproof clothing. Between them all, the outfit provide layers of protection rivaling heavier, more traditional armor.","Light",
 				PerkLib.WizardsEndurance,15,0,0,0);
 		public const EWPLTMA:ArmorWithPerk = new ArmorWithPerk("EWPltMa","E.W. Platemail","ebonweave platemail","an ebonweave platemail",36,4320,"The armor is ebonweave, created using refined ebonbloom petals. The armor consists of two layers, an outer layer of ebonweave playing, and an inner layer of arrowproof ebonweave cloth.","Heavy",
@@ -43,6 +44,7 @@ package classes.Items
 		public const FULLPLT:Armor = new Armor("FullPlt","Full Plate","full platemail","a suit of full-plate armor",21,1260,"A highly protective suit of steel platemail.  It would be hard to find better physical protection than this.","Heavy");
 		public const GELARMR:Armor = new Armor("GelArmr","GelArmr","glistening gel-armor plates","a suit of gel armor",10,600,"This suit of interlocking plates is made from a strange green material.  It feels spongy to the touch but is amazingly resiliant.","Heavy");
 		public const GOOARMR:GooArmor = new GooArmor();
+		public const H_GARB_:HereticsGarb = new HereticsGarb();
 		public const I_CORST:InquisitorsCorset = new InquisitorsCorset();
 		public const I_ROBES:InquisitorsRobes = new InquisitorsRobes();
 		public const INDECST:ArmorWithPerk = new ArmorWithPerk("IndecSt","Indec StAr","practically indecent steel armor","a suit of practically indecent steel armor",5,400,"This suit of steel 'armor' has two round disks that barely cover the nipples, a tight chainmail bikini, and circular butt-plates.","Medium",

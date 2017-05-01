@@ -817,6 +817,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.tou = player.tou;
 		saveFile.data.spe = player.spe;
 		saveFile.data.inte = player.inte;
+		saveFile.data.wis = player.wis;
 		saveFile.data.lib = player.lib;
 		saveFile.data.sens = player.sens;
 		saveFile.data.cor = player.cor;
@@ -878,6 +879,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.lowerBody = player.lowerBody;
 		saveFile.data.legCount = player.legCount;
 		saveFile.data.tailType = player.tailType;
+		saveFile.data.tailCount = player.tailCount;
 		saveFile.data.tailVenum = player.tailVenom;
 		saveFile.data.tailRecharge = player.tailRecharge;
 		saveFile.data.hipRating = player.hipRating;
@@ -1456,6 +1458,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.tou = saveFile.data.tou;
 		player.spe = saveFile.data.spe;
 		player.inte = saveFile.data.inte;
+		player.wis = saveFile.data.wis;
 		player.lib = saveFile.data.lib;
 		player.sens = saveFile.data.sens;
 		player.cor = saveFile.data.cor;
@@ -1817,6 +1820,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.wingType = saveFile.data.wingType;
 		player.lowerBody = saveFile.data.lowerBody;
 		player.tailType = saveFile.data.tailType;
+		player.tailCount = saveFile.data.tailCount;
 		player.tailVenom = saveFile.data.tailVenum;
 		player.tailRecharge = saveFile.data.tailRecharge;
 		player.hipRating = saveFile.data.hipRating;
@@ -2223,6 +2227,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		
 		//Set soulforce
 		if (saveFile.data.soulforce == undefined) player.soulforce = 25;
+		//Set wisdom
+		if (saveFile.data.wis == undefined) player.wis = 15;
 		
 		//player.cocks = saveFile.data.cocks;
 		player.ass.analLooseness = saveFile.data.ass.analLooseness;

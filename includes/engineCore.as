@@ -19,6 +19,7 @@ import flash.text.TextFormat;
 // oldStats.oldTou  = 0;
 // oldStats.oldSpe  = 0;
 // oldStats.oldInte = 0;
+// oldStats.oldWis 	= 0;
 // oldStats.oldSens = 0;
 // oldStats.oldLib  = 0;
 // oldStats.oldCor  = 0;
@@ -29,6 +30,10 @@ import flash.text.TextFormat;
 
 public function maxHP():Number {
 	return player.maxHP();
+}
+
+public function maxSoulforce():Number {
+	return player.maxSoulforce();
 }
 
 public function silly():Boolean {
@@ -128,7 +133,47 @@ public function HPChangeNotify(changeNum:Number):void {
 			outputText("You take <b><font color=\"#800000\">" + int(changeNum*-1) + "</font></b> damage.\n", false);
 	}
 }
-		
+
+public function SoulforceChange(changeNum:Number, display:Boolean):Number
+{
+	var before:Number = player.soulforce;
+	if(changeNum == 0) return 0;
+	if(changeNum > 0) {
+		if(player.soulforce + int(changeNum) > maxSoulforce()) {
+		//	if(player.HP >= maxHP()) {
+		//	if (display) HPChangeNotify(changeNum);
+		//		return player.HP - before;
+		//	}
+		//	if (display) HPChangeNotify(changeNum);
+			player.soulforce = maxSoulforce();
+		}
+		else
+		{
+		//	if (display) HPChangeNotify(changeNum);
+			player.soulforce += int(changeNum);
+		//	mainView.statsView.showStatUp( 'hp' );
+			// hpUp.visible = true;
+		}
+	}
+	//Negative Soulforce
+/*	else
+	{
+		if(player.HP + changeNum <= 0) {
+			if (display) HPChangeNotify(changeNum);
+			player.HP = 0;
+			mainView.statsView.showStatDown( 'hp' );
+		}
+		else {
+			if (display) HPChangeNotify(changeNum);
+			player.HP += changeNum;
+			mainView.statsView.showStatDown( 'hp' );
+		}
+	}
+	dynStats("lust", 0, "resisted", false) //Workaround to showing the arrow.
+*/	statScreenRefresh();
+	return player.soulforce - before;
+}
+
 public function clone(source:Object):* {
 	var copier:ByteArray = new ByteArray();
 	copier.writeObject(source);
@@ -264,7 +309,7 @@ public function displayPerks(e:MouseEvent = null):void {
 		outputText(" to spend.</b>", false);
 		addButton(button++, "Perk Up", perkBuyMenu);
 	}
-	if(player.findPerk(PerkLib.DoubleAttack) >= 0) {
+	if(player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0) {
 		outputText("\n<b>You can adjust your melee attack settings.</b>");
 		addButton(button++,"Melee Opt",doubleAttackOptions);
 	}
@@ -299,11 +344,26 @@ public function doubleAttackOptions():void {
 	outputText(".");
 	outputText("\n\nYou can change it to different amount of attacks.");
 	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 0) addButton(0, "All Single", singleAttack);
-	if (player.findPerk(PerkLib.DoubleAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 1) addButton(1, "All Double", doubleAttack);
-	if (player.findPerk(PerkLib.TripleAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 2) addButton(5, "All Triple", tripleAttack);
-	if (player.findPerk(PerkLib.QuadrupleAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 3) addButton(6, "All Quadruple", quadrupleAttack);
-	if (player.findPerk(PerkLib.PentaAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 4) addButton(10, "All Penta", pentaAttack);
-	if (player.findPerk(PerkLib.HexaAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 5) addButton(11, "All Hexe", hexaAttack);
+	if ((player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 1) {
+		if ((player.weaponPerk != "Large" || (player.weaponPerk == "Large" && player.findPerk(PerkLib.DoubleAttackLarge) < 0)) && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && player.weaponName != "fists") addButton(1, "All Double", doubleAttack);
+		else addButtonDisabled(1, "All Double", "You current melee weapon not allow to use this option");
+	}
+	if ((player.findPerk(PerkLib.TripleAttack) >= 0 || player.findPerk(PerkLib.TripleAttackLarge) >= 0) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 2) {
+		if ((player.weaponPerk != "Large" || (player.weaponPerk == "Large" && player.findPerk(PerkLib.TripleAttackLarge) < 0)) && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && player.weaponName != "fists") addButton(5, "All Triple", tripleAttack);
+		else addButtonDisabled(5, "All Triple", "You current melee weapon not allow to use this option");
+	}
+	if (player.findPerk(PerkLib.QuadrupleAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 3) {
+		if (player.weaponPerk != "Large" && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && player.weaponName != "fists") addButton(6, "All Quadruple", quadrupleAttack);
+		else addButtonDisabled(6, "All Quadruple", "You current melee weapon not allow to use this option");
+	}// && player.weaponName != "hooked gauntlets" && player.weaponName != "spiked gauntlet"
+	if (player.findPerk(PerkLib.PentaAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 4) {
+		if (player.weaponPerk != "Large" && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && player.weaponName != "fists") addButton(10, "All Penta", pentaAttack);
+		else addButtonDisabled(10, "All Penta", "You current melee weapon not allow to use this option");
+	}// && player.weaponName != "hooked gauntlets" && player.weaponName != "spiked gauntlet"
+	if (player.findPerk(PerkLib.HexaAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 5) {
+		if (player.weaponPerk != "Large" && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && player.weaponName != "fists") addButton(11, "All Hexe", hexaAttack);
+		else addButtonDisabled(11, "All Hexe", "You current melee weapon not allow to use this option");
+	}// && player.weaponName != "hooked gauntlets" && player.weaponName != "spiked gauntlet"
 	
 	var e:MouseEvent;
 	if (inCombat) addButton(14, "Back", combatMenu);
@@ -365,17 +425,33 @@ public function doubleStrikeOptions():void {
 		if (flags[kFLAGS.ENVENOMED_BOLTS] == 1) outputText("\n\nVenom effect added: <b>Yes</b>");
 	}
 	if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 0) addButton(0, "All Single", singleStrike);
-	if (player.findPerk(PerkLib.DoubleStrike) >= 0 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 1) addButton(1, "All Double", doubleStrike);
-	if (player.findPerk(PerkLib.TripleStrike) >= 0 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 2) addButton(2, "All Triple", tripleStrike);
-	if (player.findPerk(PerkLib.Manyshot) >= 0 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 3) addButton(3, "All Quad", quadrupleStrike);
-	if (player.findPerk(PerkLib.WildQuiver) >= 0 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 4) addButton(4, "All Penta", pentaStrike);
-	if (player.findPerk(PerkLib.ElementalArrows) >= 0 && flags[kFLAGS.ELEMENTAL_ARROWS] != 0) addButton(5, "None", normalArrows);
-	if (player.findPerk(PerkLib.ElementalArrows) >= 0 && player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0 && flags[kFLAGS.ELEMENTAL_ARROWS] != 1) addButton(6, "Fire", fireArrows);
-	if (player.findPerk(PerkLib.ElementalArrows) >= 0 && player.findStatusAffect(StatusAffects.KnowsIceSpike) >= 0 && flags[kFLAGS.ELEMENTAL_ARROWS] != 2) addButton(7, "Ice", iceArrows);
+	if (player.findPerk(PerkLib.DoubleStrike) >= 0 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 1) {
+		if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") addButton(1, "All Double", doubleStrike);
+		else addButtonDisabled(1, "All Double", "You current range weapon not allow to use this option");
+	}
+	if (player.findPerk(PerkLib.TripleStrike) >= 0 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 2) {
+		if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") addButton(2, "All Triple", tripleStrike);
+		else addButtonDisabled(2, "All Triple", "You current range weapon not allow to use this option");
+	}
+	if (player.findPerk(PerkLib.Manyshot) >= 0 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 3) {
+		if (player.weaponRangePerk == "Bow") addButton(5, "All Quad", quadrupleStrike);
+		else addButtonDisabled(5, "All Quad", "You current range weapon not allow to use this option");
+	}
+	if (player.findPerk(PerkLib.WildQuiver) >= 0 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 4) {
+		if (player.weaponRangePerk == "Bow") addButton(6, "All Penta", pentaStrike);
+		else addButtonDisabled(6, "All Penta", "You current range weapon not allow to use this option");
+	}
+	if (player.findPerk(PerkLib.Multishot) >= 0 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 5) {
+		if (player.weaponRangePerk == "Bow") addButton(7, "All Hexa", hexaStrike);
+		else addButtonDisabled(7, "All Hexa", "You current range weapon not allow to use this option");
+	}
+	if (player.findPerk(PerkLib.ElementalArrows) >= 0 && flags[kFLAGS.ELEMENTAL_ARROWS] != 0) addButton(3, "None", normalArrows);
+	if (player.findPerk(PerkLib.ElementalArrows) >= 0 && player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0 && flags[kFLAGS.ELEMENTAL_ARROWS] != 1) addButton(8, "Fire", fireArrows);
+	if (player.findPerk(PerkLib.ElementalArrows) >= 0 && player.findStatusAffect(StatusAffects.KnowsIceSpike) >= 0 && flags[kFLAGS.ELEMENTAL_ARROWS] != 2) addButton(9, "Ice", iceArrows);
 	if (player.findPerk(PerkLib.Cupid) >= 0 && flags[kFLAGS.CUPID_ARROWS] != 0) addButton(10, "None", normalArrows2);
 	if (player.findPerk(PerkLib.Cupid) >= 0 && player.findStatusAffect(StatusAffects.KnowsArouse) >= 0 && flags[kFLAGS.CUPID_ARROWS] != 1) addButton(11, "Arouse", arouseArrows);
 	if (player.findPerk(PerkLib.EnvenomedBolt) >= 0 && flags[kFLAGS.ENVENOMED_BOLTS] != 0) addButton(12, "None", normalArrows3);
-	if (player.findPerk(PerkLib.EnvenomedBolt) >= 0 && (player.tailType == TAIL_TYPE_BEE_ABDOMEN || player.tailType == TAIL_TYPE_SCORPION || player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) && flags[kFLAGS.ENVENOMED_BOLTS] != 1) addButton(13, "Venom", venomArrows);
+	if (player.findPerk(PerkLib.EnvenomedBolt) >= 0 && (player.tailType == TAIL_TYPE_BEE_ABDOMEN || player.tailType == TAIL_TYPE_SCORPION || player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL || player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS) && flags[kFLAGS.ENVENOMED_BOLTS] != 1) addButton(13, "Venom", venomArrows);
 	
 	var e:MouseEvent;
 	if (inCombat) addButton(14, "Back", combatMenu);
@@ -408,6 +484,10 @@ public function venomArrows():void {
 }
 public function normalArrows3():void {
 	flags[kFLAGS.ENVENOMED_BOLTS] = 0;
+	doubleStrikeOptions();
+}
+public function hexaStrike():void {
+	flags[kFLAGS.DOUBLE_STRIKE_STYLE] = 5;
 	doubleStrikeOptions();
 }
 public function pentaStrike():void {
@@ -552,6 +632,10 @@ private function attributeMenu():void {
 	if (player.inte < player.getMaxStats("int")) outputText("" + Math.floor(player.inte) + " + <b>" + player.tempInt + "</b> → " + Math.floor(player.inte + player.tempInt) + "\n");
 	else outputText("" + Math.floor(player.inte) + " (Maximum)\n");
 	
+	outputText("Wisdom: ");
+	if (player.wis < player.getMaxStats("wis")) outputText("" + Math.floor(player.wis) + " + <b>" + player.tempWis + "</b> → " + Math.floor(player.wis + player.tempWis) + "\n");
+	else outputText("" + Math.floor(player.wis) + " (Maximum)\n");
+	
 	outputText("Libido: ");
 	if (player.lib < player.getMaxStats("lib")) outputText("" + Math.floor(player.lib) + " + <b>" + player.tempLib + "</b> → " + Math.floor(player.lib + player.tempLib) + "\n");
 	else outputText("" + Math.floor(player.lib) + " (Maximum)\n");
@@ -563,14 +647,16 @@ private function attributeMenu():void {
 		if ((player.tou + player.tempTou) < player.getMaxStats("tou")) addButton(1, "Add TOU", addAttribute, "tou", null, null, "Add 1 point to Toughness.", "Add Toughness");
 		if ((player.spe + player.tempSpe) < player.getMaxStats("spe")) addButton(2, "Add SPE", addAttribute, "spe", null, null, "Add 1 point to Speed.", "Add Speed");
 		if ((player.inte + player.tempInt) < player.getMaxStats("int")) addButton(3, "Add INT", addAttribute, "int", null, null, "Add 1 point to Intelligence.", "Add Intelligence");
-		if ((player.lib + player.tempLib) < player.getMaxStats("lib")) addButton(4, "Add LIB", addAttribute, "lib", null, null, "Add 1 point to Libido.", "Add Libido");
+		if ((player.wis + player.tempWis) < player.getMaxStats("wis")) addButton(4, "Add WIS", addAttribute, "wis", null, null, "Add 1 point to Wisdom.", "Add Wisdom");
+		if ((player.lib + player.tempLib) < player.getMaxStats("lib")) addButton(10, "Add LIB", addAttribute, "lib", null, null, "Add 1 point to Libido.", "Add Libido");
 	}
 	//Subtract
 	if (player.tempStr > 0) addButton(5, "Sub STR", subtractAttribute, "str", null, null, "Subtract 1 point from Strength.", "Subtract Strength");
 	if (player.tempTou > 0) addButton(6, "Sub TOU", subtractAttribute, "tou", null, null, "Subtract 1 point from Toughness.", "Subtract Toughness");
 	if (player.tempSpe > 0) addButton(7, "Sub SPE", subtractAttribute, "spe", null, null, "Subtract 1 point from Speed.", "Subtract Speed");
 	if (player.tempInt > 0) addButton(8, "Sub INT", subtractAttribute, "int", null, null, "Subtract 1 point from Intelligence.", "Subtract Intelligence");
-	if (player.tempLib > 0) addButton(9, "Sub LIB", subtractAttribute, "lib", null, null, "Subtract 1 point from Libido.", "Subtract Libido");
+	if (player.tempWis > 0) addButton(9, "Sub WIS", subtractAttribute, "wis", null, null, "Subtract 1 point from Wisdom.", "Subtract Wisdom");
+	if (player.tempLib > 0) addButton(11, "Sub LIB", subtractAttribute, "lib", null, null, "Subtract 1 point from Libido.", "Subtract Libido");
 	
 	addButton(13, "Reset", resetAttributes);
 	addButton(14, "Done", finishAttributes);
@@ -589,6 +675,9 @@ private function addAttribute(attribute:String):void {
 			break;
 		case "int":
 			player.tempInt++;
+			break;
+		case "wis":
+			player.tempWis++;
 			break;
 		case "lib":
 			player.tempLib++;
@@ -613,6 +702,9 @@ private function subtractAttribute(attribute:String):void {
 		case "int":
 			player.tempInt--;
 			break;
+		case "wis":
+			player.tempWis--;
+			break;
 		case "lib":
 			player.tempLib--;
 			break;
@@ -628,12 +720,14 @@ private function resetAttributes():void {
 	player.statPoints += player.tempTou;
 	player.statPoints += player.tempSpe;
 	player.statPoints += player.tempInt;
+	player.statPoints += player.tempWis;
 	player.statPoints += player.tempLib;
 	//Reset temporary attributes to 0.
 	player.tempStr = 0;
 	player.tempTou = 0;
 	player.tempSpe = 0;
 	player.tempInt = 0;
+	player.tempWis = 0;
 	player.tempLib = 0;
 	//DONE!
 	attributeMenu();
@@ -660,12 +754,17 @@ private function finishAttributes():void {
 		if (player.tempInt >= 3) outputText("Your time spent fighting the creatures of this realm has sharpened your wit.\n");
 		else outputText("Your time spent fighting the creatures of this realm has sharpened your wit slightly.\n");
 	}
+	if (player.tempWis > 0)
+	{
+		if (player.tempWis >= 3) outputText("Your time spent fighting the creatures of this realm has improved your insight.\n");
+		else outputText("Your time spent fighting the creatures of this realm has improved your insight slightly.\n");
+	}
 	if (player.tempLib > 0)
 	{
 		if (player.tempLib >= 3) outputText("Your time spent in this realm has made you more lustful.\n");
 		else outputText("Your time spent in this realm has made you slightly more lustful.\n");
 	}
-	if (player.tempStr + player.tempTou + player.tempSpe + player.tempInt + player.tempLib <= 0 || player.statPoints > 0)
+	if (player.tempStr + player.tempTou + player.tempSpe + player.tempInt + player.tempWis + player.tempLib <= 0 || player.statPoints > 0)
 	{
 		outputText("\nYou may allocate your remaining stat points later.", false);
 	}
@@ -673,11 +772,13 @@ private function finishAttributes():void {
 	player.tou += player.tempTou;
 	player.spe += player.tempSpe;
 	player.inte += player.tempInt;
+	player.wis += player.tempWis;
 	player.lib += player.tempLib;
 	player.tempStr = 0;
 	player.tempTou = 0;
 	player.tempSpe = 0;
 	player.tempInt = 0;
+	player.tempWis = 0;
 	player.tempLib = 0;
 	statScreenRefresh();
 	if (player.perkPoints > 0) doNext(perkBuyMenu);
@@ -703,6 +804,7 @@ private function perkBuyMenu():void {
 		outputText("Please select a perk from the drop-down list, then click 'Okay'.  You can press 'Skip' to save your perk point for later.\n\n");
 		mainView.aCb.x = 210;
 		mainView.aCb.y = 112;
+		mainView.aCb.rowCount = 15;
 		
 		if (mainView.aCb.parent == null) {
 			mainView.addChild(mainView.aCb);
@@ -805,6 +907,9 @@ public function buildPerkList():Array {
 		if(player.findPerk(PerkLib.JobBarbarian) >= 0 && player.str >= 100) {
 			_add(new PerkClass(PerkLib.WeaponMastery));
 		}
+		if(player.findPerk(PerkLib.JobBarbarian) >= 0 && player.str >= 75 && player.spe >= 50) {
+			_add(new PerkClass(PerkLib.DoubleAttackLarge));
+		}
 	}
 	//Tier 3 Strength Perks
 	if(player.level >= 18) {
@@ -823,8 +928,11 @@ public function buildPerkList():Array {
 		if(player.findPerk(PerkLib.WeaponMastery) >= 0 && player.str >= 140) {
 			_add(new PerkClass(PerkLib.WeaponGrandMastery));
 		}
-		if(player.findPerk(PerkLib.DualWield) >= 0 && player.findPerk(PerkLib.TitanGrip) >= 0 && player.str >= 150) {
+		if(player.findPerk(PerkLib.DualWield) >= 0 && player.findPerk(PerkLib.TitanGrip) >= 0 && player.str >= 125) {
 			_add(new PerkClass(PerkLib.DualWieldLarge));
+		}
+		if(player.findPerk(PerkLib.DoubleAttackLarge) >= 0 && player.str >= 125 && player.spe >= 100) {
+			_add(new PerkClass(PerkLib.TripleAttackLarge));
 		}
 	}
 	//Tier 5 Strength Perks
@@ -833,6 +941,18 @@ public function buildPerkList():Array {
 //			_add(new PerkClass(PerkLib.HiddenDualMomentum));
 //		}
 //	}
+	//Tier 6 Strength Perks
+//	if (player.level >= 30) {
+//		if (player.findPerk(PerkLib.HiddenMomentum) >= 0 && player.str >= 200 && player.spe >= 100) {
+//			_add(new PerkClass(PerkLib.HiddenDualMomentum));	//herculanmight - perk dodający limit do str cap (i może do max tone też)
+//		}		//a może właśnie perk dodający do max str cap tyle ile wynosi obecnie PC tone?
+//	}
+	//Tier 7 Strength Perks
+	if (player.level >= 42) {
+		if (player.maxPrestigeJobs() > 0 && player.findPerk(PerkLib.JobBarbarian) >= 0 && player.findPerk(PerkLib.JobGuardian) >= 0 && (player.findPerk(PerkLib.Berzerker) >= 0 || player.findPerk(PerkLib.Lustzerker) >= 0) && player.str >= 200) {
+			_add(new PerkClass(PerkLib.PrestigeJobBerserker));
+		}
+	}
 	//------------
 	// TOUGHNESS
 	//------------
@@ -888,10 +1008,10 @@ public function buildPerkList():Array {
 		if(player.findPerk(PerkLib.TankII) >= 0 && player.tou >= 100 && player.level >= 10 && player.newGamePlusMod() >= 2) {
 			_add(new PerkClass(PerkLib.TankIII));
 		}
-		if(player.findPerk(PerkLib.JobGuardian) >= 0 && player.tou >= 75) {
-			_add(new PerkClass(PerkLib.ImmovableObject));
-		}
 		if(player.findPerk(PerkLib.JobGuardian) >= 0 && player.tou >= 50) {
+			_add(new PerkClass(PerkLib.JobKnight));
+		}
+		if(player.findPerk(PerkLib.JobKnight) >= 0 && player.tou >= 50) {
 			_add(new PerkClass(PerkLib.ShieldMastery));
 		}
 		if(player.tou >= 60 && player.str >= 40 && player.findPerk(PerkLib.BasicEndurance) >= 0) {
@@ -900,10 +1020,12 @@ public function buildPerkList():Array {
 	}
 	//Tier 2 Toughness Perks
 	if(player.level >= 12) {
-		if(player.tou >= 75) {
-			_add(new PerkClass(PerkLib.Resolute));
+		if(player.findPerk(PerkLib.JobGuardian) >= 0 && player.tou >= 75) {
+			_add(new PerkClass(PerkLib.JobDefender));
 		}
-		if(player.tou >= 60) {
+		if(player.findPerk(PerkLib.JobDefender) >= 0 && player.tou >= 75) {
+			_add(new PerkClass(PerkLib.ImmovableObject));
+			_add(new PerkClass(PerkLib.Resolute));
 			_add(new PerkClass(PerkLib.HeavyArmorProficiency));
 		}
 		if(player.tou >= 60) {
@@ -1069,11 +1191,8 @@ public function buildPerkList():Array {
 		if(player.findPerk(PerkLib.DoubleStrike) >= 0 && player.spe >= 75) {
 			_add(new PerkClass(PerkLib.TripleStrike));
 		}
-		if(player.findPerk(PerkLib.JobRanger) >= 0 && player.findPerk(PerkLib.JobSorcerer) >= 0 && player.spe >= 80 && player.inte >= 60) {
-			_add(new PerkClass(PerkLib.JobArcaneArcher));
-		}
-		if(player.findPerk(PerkLib.JobArcaneArcher) >= 0 && (player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0 || player.findStatusAffect(StatusAffects.KnowsIceSpike) >= 0)) {
-			_add(new PerkClass(PerkLib.ElementalArrows));
+		if(player.findPerk(PerkLib.JobRanger) >= 0 && player.findPerk(PerkLib.ArchersStaminaI) >= 0 && player.spe >= 80) {
+			_add(new PerkClass(PerkLib.JobHunter));
 		}
 		if(player.findPerk(PerkLib.CarefulButRecklessAimAndShooting) >= 0 && player.spe >= 50) {
 			_add(new PerkClass(PerkLib.ColdAim));
@@ -1087,23 +1206,23 @@ public function buildPerkList():Array {
 		if(player.findPerk(PerkLib.DancersVitalityII) >= 0 && player.spe >= 90 && player.level >= 16 && player.newGamePlusMod() >= 2) {
 			_add(new PerkClass(PerkLib.DancersVitalityIII));
 		}
+		if(player.findPerk(PerkLib.JobHunter) >= 0) {
+			_add(new PerkClass(PerkLib.DeadlyThrow));
+		}
 		//if (player.findPerk(PerkLib.JobMonk) >= 0 && player.spe >= 50) {
 			//_add(new PerkClass(PerkLib.	//perk dajacy 2 ataki kiedy uzywa sie tylko fists - 
 		//}		// - cos jak double attack ale bez limitu sily ^^ (ale dodac nowy status aby byl niezalezny od double strike)
 	}
 	//Tier 3 Speed Perks
 	if (player.level >= 18) {
-		if(player.findPerk(PerkLib.JobArcaneArcher) >= 0 && player.findPerk(PerkLib.TripleStrike) >= 0 && player.spe >= 100) {
+		if(player.findPerk(PerkLib.JobHunter) >= 0 && player.findPerk(PerkLib.TripleStrike) >= 0 && player.spe >= 100) {
 			_add(new PerkClass(PerkLib.Manyshot));
 		}
-		if(player.findPerk(PerkLib.JobArcaneArcher) >= 0 && player.findStatusAffect(StatusAffects.KnowsArouse) >= 0) {
-			_add(new PerkClass(PerkLib.Cupid));
-		}
-	//	if(player.findPerk(PerkLib.JobArcaneArcher) >= 0 && (player.tailType == TAIL_TYPE_BEE_ABDOMEN || player.tailType == TAIL_TYPE_SCORPION || player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL)) {
-	//		_add(new PerkClass(PerkLib.EnvenomedBolt));
-	//	}
 		if(player.findPerk(PerkLib.TripleAttack) >= 0 && player.spe >= 100) {
 			_add(new PerkClass(PerkLib.QuadrupleAttack));
+		}
+		if(player.findPerk(PerkLib.JobHunter) >= 0 && (player.tailType == TAIL_TYPE_BEE_ABDOMEN || player.tailType == TAIL_TYPE_SCORPION || player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL || player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS)) {
+			_add(new PerkClass(PerkLib.EnvenomedBolt));
 		}
 		if(player.findPerk(PerkLib.DancersVitalityIII) >= 0 && player.spe >= 105 && player.newGamePlusMod() >= 3) {
 			_add(new PerkClass(PerkLib.DancersVitalityIV));
@@ -1114,34 +1233,46 @@ public function buildPerkList():Array {
 	}
 	//Tier 4 Speed Perks
 	if (player.level >= 24) {
-		if(player.findPerk(PerkLib.JobArcaneArcher) >= 0) {
-			if (player.findPerk(PerkLib.Manyshot) >= 0 && player.spe >= 125) {
-				_add(new PerkClass(PerkLib.WildQuiver));
-			}
-	//		if (player.findPerk(PerkLib.SoulApprentice) >= 0) {
-	//			_add(new PerkClass(PerkLib.JobSoulArcher));
-	//		}
+		if (player.findPerk(PerkLib.Manyshot) >= 0 && player.spe >= 125) {
+			_add(new PerkClass(PerkLib.WildQuiver));
 		}
-	//	if(player.findPerk(PerkLib.QuadrupleAttack) >= 0 && player.spe >= 125) {
-	//		_add(new PerkClass(PerkLib.PentaAttack));
-	//	}
+		if (player.findPerk(PerkLib.QuadrupleAttack) >= 0 && player.spe >= 125) {
+			_add(new PerkClass(PerkLib.PentaAttack));
+		}
 	}
 	//Tier 5 Speed Perks
 	if (player.level >= 30) {
-		if(player.findPerk(PerkLib.PentaAttack) >= 0 && player.spe >= 150) {
+		if (player.findPerk(PerkLib.PentaAttack) >= 0 && player.spe >= 150) {
 			_add(new PerkClass(PerkLib.HexaAttack));
+		}
+		if (player.findPerk(PerkLib.WildQuiver) >= 0 && player.spe >= 150) {
+			_add(new PerkClass(PerkLib.Multishot));
 		}
 	}
 	//Tier 6 Speed Perks
 //	if (player.level >= 36) {
-//		if(player.findPerk(PerkLib.PentaAttack) >= 0 && player.spe >= 150) {
-//			_add(new PerkClass(PerkLib.HexaAttack));
+//		if(player.findPerk(PerkLib.) >= 0 && player.spe >= 175) {
+//			_add(new PerkClass(PerkLib.));
 //		}
 //	}
 	//Tier 7 Speed Perks
 	if (player.level >= 42) {
-		if (player.findPerk(PerkLib.JobArcaneArcher) >= 0 && player.findPerk(PerkLib.SoulSprite) >= 0) {
-			_add(new PerkClass(PerkLib.PrestigeJobSoulArcher));
+		if (player.maxPrestigeJobs() > 0 && player.findPerk(PerkLib.JobHunter) >= 0 && player.spe >= 200) {
+			if (player.findPerk(PerkLib.SoulOverlord) >= 0) {
+				_add(new PerkClass(PerkLib.PrestigeJobSoulArcher));
+			}
+			if (player.findPerk(PerkLib.JobSorcerer) >= 0 && player.inte >= 150) {
+				_add(new PerkClass(PerkLib.PrestigeJobArcaneArcher));
+			}
+		}
+		if(player.findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0 && (player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0 || player.findStatusAffect(StatusAffects.KnowsIceSpike) >= 0)) {
+			_add(new PerkClass(PerkLib.ElementalArrows));
+		}
+	}
+	//Tier 8 Speed Perks
+	if (player.level >= 48) {
+		if(player.findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0 && player.findStatusAffect(StatusAffects.KnowsArouse) >= 0) {
+			_add(new PerkClass(PerkLib.Cupid));
 		}
 	}
 	//------------
@@ -1209,9 +1340,8 @@ public function buildPerkList():Array {
 			_add(new PerkClass(PerkLib.JobEnchanter));
 			_add(new PerkClass(PerkLib.FocusedMind));
 		}
-		if(player.inte >= 75) {	
-				
-				if (player.findPerk(PerkLib.Archmage) >= 0 && player.findPerk(PerkLib.Channeling) >= 0  &&
+		if(player.inte >= 75) {
+				if (player.findPerk(PerkLib.Archmage) >= 0 && player.findPerk(PerkLib.Channeling) >= 0 &&
 				(player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0
 				|| player.findPerk(PerkLib.DragonFireBreath) >= 0
 				|| player.findPerk(PerkLib.FireLord) >= 0 
@@ -1220,7 +1350,7 @@ public function buildPerkList():Array {
 				|| player.findPerk(PerkLib.CorruptedNinetails) >= 0))
 					_add(new PerkClass(PerkLib.RagingInferno));
 				
-				if (player.findPerk(PerkLib.Archmage) >= 0 && player.findPerk(PerkLib.Channeling) >= 0  &&
+				if (player.findPerk(PerkLib.Archmage) >= 0 && player.findPerk(PerkLib.Channeling) >= 0 &&
 				(player.findStatusAffect(StatusAffects.KnowsIceSpike) >= 0
 				|| player.findStatusAffect(StatusAffects.KnowsIceRain) >= 0
 				|| player.findPerk(PerkLib.DragonIceBreath) >= 0))
@@ -1269,6 +1399,18 @@ public function buildPerkList():Array {
 			_add(new PerkClass(PerkLib.GreyArchmage));
 		}
 	}
+	//Tier 6 Intelligence perks
+	
+	//Tier 7 Intelligence perks
+	if (player.level >= 42) {
+		if (player.maxPrestigeJobs() > 0 && player.findPerk(PerkLib.GreyArchmage) >= 0 && player.findPerk(PerkLib.SoulOverlord) >= 0 && player.inte >= 200) {
+			_add(new PerkClass(PerkLib.PrestigeJobSeer));
+		}
+	}
+	//------------
+	// WISDOM
+	//------------
+	//Nope.avi
 	//------------
 	// LIBIDO
 	//------------
@@ -1307,6 +1449,12 @@ public function buildPerkList():Array {
 		//Slot 5 - minimum libido
 		if(player.lib >= 60 && player.cor >= 50) {
 			_add(new PerkClass(PerkLib.Masochist));
+		}
+		if (player.findPerk(PerkLib.JobSeducer) > 0 && player.lib >= 30 && player.inte >= 60) {
+			_add(new PerkClass(PerkLib.JobEromancer));
+		}
+		if (player.findPerk(PerkLib.JobEromancer) > 0) {
+			_add(new PerkClass(PerkLib.ArcaneLash));
 		}
 		if(player.lib >= 40 && player.inte >= 60 && player.findPerk(PerkLib.BasicSelfControl) >= 0) {
 			_add(new PerkClass(PerkLib.HalfStepToImprovedSelfControl));
@@ -1355,6 +1503,9 @@ public function buildPerkList():Array {
 		}
 		if(player.lib >= 80 && player.inte >= 120 && player.findPerk(PerkLib.ImprovedSelfControl) >= 0) {
 			_add(new PerkClass(PerkLib.HalfStepToAdvancedSelfControl));
+		}
+		if(player.findPerk(PerkLib.Lustzerker) >= 0 && player.findPerk(PerkLib.ImprovedSelfControl) >= 0 && player.lib >= 75) {	
+			_add(new PerkClass(PerkLib.ColdLust));
 		}
 	}
 	//Tier 4 Libido Perks
@@ -1439,12 +1590,13 @@ public function buildPerkList():Array {
 	}
 	if(player.findPerk(PerkLib.JobSoulCultivator) >= 0) {
 		_add(new PerkClass(PerkLib.BodyCultivator));
+		_add(new PerkClass(PerkLib.DaoistCultivator));
 	}
 //	if(player.findPerk(PerkLib.JobSoulCultivator) >= 0) {
-//		_add(new PerkClass(PerkLib.MindCultivator));		//soulskills/mage cultivation
+//		_add(new PerkClass(PerkLib.HeartCultivator));		//psionic/min powers cultivation/psion class from D&D?
 //	}
 //	if(player.findPerk(PerkLib.JobSoulCultivator) >= 0) {
-//		_add(new PerkClass(PerkLib.HeartCultivator));		//psionic/min powers cultivation
+//		_add(new PerkClass(PerkLib.));		//allowing to use soulforce options more times per day - 1/2/3 time more?
 //	}
 //	if(player.findPerk(PerkLib.JobSoulCultivator) >= 0) {
 //		_add(new PerkClass(PerkLib.));		//allowing to use soul artifacts - new slot?
@@ -1452,58 +1604,85 @@ public function buildPerkList():Array {
 	//Tier 1
 	if(player.level >= 6) {
 		if(player.findPerk(PerkLib.JobSoulCultivator) >= 0) {
-			_add(new PerkClass(PerkLib.SoulApprentice));
+			if (player.wis >= 20) {
+				_add(new PerkClass(PerkLib.SoulApprentice));
+			}
+			if (player.wis >= 50) {
+				_add(new PerkClass(PerkLib.InsightfulResourcesI));
+			}
 		}
 		if(player.findPerk(PerkLib.BodyCultivator) >= 0) {
 			_add(new PerkClass(PerkLib.FleshBodyApprenticeStage));
 		}
+		if(player.findPerk(PerkLib.DaoistCultivator) >= 0) {
+			_add(new PerkClass(PerkLib.DaoistApprenticeStage));
+		}
+		if(player.findPerk(PerkLib.InsightfulResourcesI) >= 0 && player.wis >= 70 && player.level >= 8 && player.newGamePlusMod() >= 1) {
+			_add(new PerkClass(PerkLib.InsightfulResourcesII));
+		}
+		if(player.findPerk(PerkLib.InsightfulResourcesII) >= 0 && player.wis >= 90 && player.level >= 10 && player.newGamePlusMod() >= 2) {
+			_add(new PerkClass(PerkLib.InsightfulResourcesIII));
+		}
 	}
 	//Tier 2
 	if(player.level >= 12) {
-		if(player.findPerk(PerkLib.SoulApprentice) >= 0)
+		if(player.findPerk(PerkLib.SoulApprentice) >= 0 && player.wis >= 40) {
 			_add(new PerkClass(PerkLib.SoulPersonage));
+		}
+		if(player.findPerk(PerkLib.InsightfulResourcesIII) >= 0 && player.wis >= 110 && player.newGamePlusMod() >= 3) {
+			_add(new PerkClass(PerkLib.InsightfulResourcesIV));
+		}
+		if(player.findPerk(PerkLib.InsightfulResourcesIV) >= 0 && player.wis >= 130 && player.level >= 20 && player.newGamePlusMod() >= 4) {
+			_add(new PerkClass(PerkLib.InsightfulResourcesV));
+		}
 	}
 	//Tier 3
 	if(player.level >= 18) {
-		if(player.findPerk(PerkLib.SoulPersonage) >= 0)
+		if(player.findPerk(PerkLib.SoulPersonage) >= 0 && player.wis >= 60)
 			_add(new PerkClass(PerkLib.SoulWarrior));
 	}
 	//Tier 4
 	if(player.level >= 24) {
-		if(player.findPerk(PerkLib.SoulWarrior) >= 0) {		// && player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0
+		if(player.findPerk(PerkLib.SoulWarrior) >= 0 && player.wis >= 80) {		// && player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0
 			_add(new PerkClass(PerkLib.SoulSprite));
 		}
 		if(player.findPerk(PerkLib.FleshBodyApprenticeStage) >= 0) {
 			_add(new PerkClass(PerkLib.FleshBodyWarriorStage));
 		}
+		if(player.findPerk(PerkLib.DaoistApprenticeStage) >= 0) {
+			_add(new PerkClass(PerkLib.DaoistWarriorStage));
+		}
 	}
 	//Tier 5
 	if(player.level >= 30) {
-		if(player.findPerk(PerkLib.SoulSprite) >= 0)
+		if(player.findPerk(PerkLib.SoulSprite) >= 0 && player.wis >= 100)
 			_add(new PerkClass(PerkLib.SoulExalt));
 	}
 	//Tier 6
-//	if(player.level >= 36) {
-//		if(player.findPerk(PerkLib.SoulExalt) >= 0)
-//			_add(new PerkClass(PerkLib.SoulOverlord));
-//	}
+	if(player.level >= 36) {
+		if(player.findPerk(PerkLib.SoulExalt) >= 0 && player.wis >= 120)
+			_add(new PerkClass(PerkLib.SoulOverlord));
+	}
 	//Tier 7
 	if(player.level >= 42) {
-		if(player.findPerk(PerkLib.SoulOverlord) >= 0 && player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) {
+		if(player.findPerk(PerkLib.SoulOverlord) >= 0 && player.wis >= 140) {	// && player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0
 			_add(new PerkClass(PerkLib.SoulTyrant));
 		}
 		if(player.findPerk(PerkLib.FleshBodyWarriorStage) >= 0) {
 			_add(new PerkClass(PerkLib.FleshBodyOverlordStage));
 		}
-	}
+		if(player.findPerk(PerkLib.DaoistWarriorStage) >= 0) {
+			_add(new PerkClass(PerkLib.DaoistOverlordStage));
+		}
+	}		//zablokować wszystkie trzy perki w momnencie robienia live version
 	//Tier 8
 	if(player.level >= 48) {
-		if(player.findPerk(PerkLib.SoulTyrant) >= 0)
+		if(player.findPerk(PerkLib.SoulTyrant) >= 0 && player.wis >= 160)
 			_add(new PerkClass(PerkLib.SoulKing));
 	}
 	//Tier 9
 	if(player.level >= 54) {
-		if(player.findPerk(PerkLib.SoulKing) >= 0)
+		if(player.findPerk(PerkLib.SoulKing) >= 0 && player.wis >= 180)
 			_add(new PerkClass(PerkLib.SoulEmperor));
 	}
 	//------------
@@ -1577,10 +1756,6 @@ public function buildPerkList():Array {
 	//	_add(new PerkClass(PerkLib.DualWield));
 		if (flags[kFLAGS.HUNGER_ENABLED] > 0)
 			_add(new PerkClass(PerkLib.Survivalist));
-		if (player.findPerk(PerkLib.JobSeducer) > 0 && player.findPerk(PerkLib.JobSorcerer) > 0 && player.inte >= 30 && player.lib >= 30)
-			_add(new PerkClass(PerkLib.JobEromancer));
-		if (player.findPerk(PerkLib.JobEromancer) > 0)
-			_add(new PerkClass(PerkLib.ArcaneLash));
 		if (player.findPerk(PerkLib.ResistanceI) >= 0 && player.level >= 8 && player.newGamePlusMod() >= 1) {
 			_add(new PerkClass(PerkLib.ResistanceII));
 		}
@@ -1605,6 +1780,10 @@ public function buildPerkList():Array {
 		if (player.internalChimeraScore() >= 2 && player.findPerk(PerkLib.ChimericalBodyInitialStage) >= 0) {
 			_add(new PerkClass(PerkLib.ChimericalBodyBasicStage));
 		}
+		if (player.findPerk(PerkLib.JobBarbarian) > 0)
+			_add(new PerkClass(PerkLib.Whirlwind));
+		if (player.findPerk(PerkLib.JobEromancer) > 0)
+			_add(new PerkClass(PerkLib.Whipping));
 	}
 	//Tier 3
 //	if (player.level >= 18) {
@@ -1614,23 +1793,23 @@ public function buildPerkList():Array {
 //	}
 	//Tier 4
 	if (player.level >= 24) {
-		if (player.findPerk(PerkLib.JobGuardian) > 0 && player.findPerk(PerkLib.JobRanger) > 0 && player.findPerk(PerkLib.JobSeducer) > 0 && player.findPerk(PerkLib.JobSorcerer) > 0 && player.findPerk(PerkLib.JobSoulCultivator) >= 0 && player.findPerk(PerkLib.JobWarrior) > 0 && player.str >= 75 && player.tou >= 75 && player.spe >= 75 && player.inte >= 75 && player.lib >= 45) {
+		if (player.findPerk(PerkLib.JobGuardian) > 0 && player.findPerk(PerkLib.JobRanger) > 0 && player.findPerk(PerkLib.JobSeducer) > 0 && player.findPerk(PerkLib.JobSorcerer) > 0 && player.findPerk(PerkLib.JobSoulCultivator) >= 0 && player.findPerk(PerkLib.JobWarrior) > 0 && player.str >= 75 && player.tou >= 75 && player.spe >= 75 && player.inte >= 75 && player.wis >= 75 && player.lib >= 45) {
 			_add(new PerkClass(PerkLib.JobAllRounder));
 		}
 //		if(player.internalChimeraScore() >= 8 && player.findPerk(PerkLib.ChimericalBodyAdvancedStage) >= 0) {
 //			_add(new PerkClass(PerkLib.ChimericalBodyPerfectStage));
 //		}
 	}
-	//(Still need some other related stuff added to make PC true Munchkin
-	//na razie jest perk GreyMage, potrzeba jeszcze pare innych perków tak z 3-5 innych jeszcze)
 	//Tier 5
 //	if (player.level >= 30) {
 //		if (player.internalChimeraScore() >= 16 && player.findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0) {
 //			_add(new PerkClass(PerkLib.ChimericalBodyUltimateStage));
 //		}
-		//if
-			//_add(new PerkClass(PerkLib.
-//	}
+		if (player.findPerk(PerkLib.JobHunter) > 0 && player.findPerk(PerkLib.JobEromancer) > 0 && player.findPerk(PerkLib.JobEnchanter) > 0 && player.findPerk(PerkLib.JobDervish) > 0 && player.findPerk(PerkLib.JobBarbarian) > 0 && player.findPerk(PerkLib.JobAllRounder) > 0 && player.str >= 150 && player.tou >= 150 && player.spe >= 150 && player.inte >= 150 && player.wis >= 150 &&
+		player.lib >= 90) {	//player.findPerk(PerkLib.JobEromancer) > 0 && player.findPerk(PerkLib.JobMonk) > 0 && 
+			_add(new PerkClass(PerkLib.JobMunchkin));
+		}	//(Still need some other related stuff added to make PC true Munchkin
+//	}		//na razie jest perk GreyMage, potrzeba jeszcze pare innych perków tak z 3-5 innych jeszcze)
 	//Tier 6
 	//if (player.level >= 36) {
 		//if
@@ -2410,6 +2589,7 @@ public function hideUpDown():void {
 	oldStats.oldTou = 0;
 	oldStats.oldSpe = 0;
 	oldStats.oldInte = 0;
+	oldStats.oldWis = 0;
 	oldStats.oldLib = 0;
 	oldStats.oldSens = 0;
 	oldStats.oldCor = 0;  
@@ -2438,11 +2618,13 @@ public function bowCost(mod:Number):Number {
 public function spellCostBlack(mod:Number):Number {
 	//Addiditive mods
 	var costPercent:Number = 100;
+	if (player.findPerk(PerkLib.Obsession) >= 0) costPercent -= (100 * player.perkv2(PerkLib.Obsession));
 	if (player.findPerk(PerkLib.SpellcastingAffinity) >= 0) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
 	if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
 	if (player.findPerk(PerkLib.WizardsAndSoulcultivatorsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsAndSoulcultivatorsEndurance);
 	if (player.findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
 	if (player.jewelryName == "fox hairpin") costPercent -= 20;
+	if (player.jewelryName == "medius signet") costPercent -= 15;
 	if (player.weaponName == "Depravatio" || player.weaponName == "Ascensus") costPercent -= 15;
 	//Limiting it and multiplicative mods
 	if(player.findPerk(PerkLib.BloodMage) >= 0 && costPercent < 50) costPercent = 50;
@@ -2634,11 +2816,12 @@ public function displayStats(e:MouseEvent = null):void
 	
 	combatStats += "<b>Unarmed:</b> +" + unarmedAttack() + "\n";
 	
-	if (player.statusAffectv1(StatusAffects.Kelt) > 0)
+	if (player.statusAffectv1(StatusAffects.Kelt) > 0) {
 		if (player.statusAffectv1(StatusAffects.Kindra) < 1)
 			combatStats += "<b>Bow Skill:</b> " + Math.round(player.statusAffectv1(StatusAffects.Kelt)) + " / 100\n";
 		if (player.statusAffectv1(StatusAffects.Kindra) > 0)
 			combatStats += "<b>Bow Skill:</b> " + (Math.round(player.statusAffectv1(StatusAffects.Kelt)) + Math.round(player.statusAffectv1(StatusAffects.Kindra))) + " / 250\n";
+	}
 	
 	combatStats += "<b>Arrow/Bolt Cost:</b> " + bowCost(100) + "%\n";
 	
@@ -2652,9 +2835,11 @@ public function displayStats(e:MouseEvent = null):void
 	
 	if (player.findPerk(PerkLib.WildQuiver) >= 0) combatStats += "<b>Accuracy (5th range attack):</b> " + ((arrowsAccuracy() / 2) - 60) + "%\n";
 	
+	if (player.findPerk(PerkLib.Multishot) >= 0) combatStats += "<b>Accuracy (6th range attack):</b> " + ((arrowsAccuracy() / 2) - 75) + "%\n";
+	
 	combatStats += "<b>Soulskill Effect Multiplier:</b> " + Math.round(100 * soulskillMod()) + "%\n";
 	
-	combatStats += "<b>Soulskill Cost:</b> " + soulskillCost() + "%\n";
+	combatStats += "<b>Soulskill Cost:</b> " + Math.round(100 * soulskillCost()) + "%\n";
 	
 	if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0)
 		combatStats += "<b>Rapier Skill:</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + " / 4\n";
@@ -2663,7 +2848,14 @@ public function displayStats(e:MouseEvent = null):void
 		combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / 5 (Exp: " + player.teaseXP + " / "+ (10 + (player.teaseLevel + 1) * 5 * (player.teaseLevel + 1))+ ")\n";
 	else
 		combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / 5 (Exp: MAX)\n";	
-		
+	
+	combatStats += "<b>Strength Cap:</b> " + player.getMaxStats("str") + "\n";
+	combatStats += "<b>Toughness Cap:</b> " + player.getMaxStats("tou") + "\n";
+	combatStats += "<b>Speed Cap:</b> " + player.getMaxStats("spe") + "\n";
+	combatStats += "<b>Intelligence Cap:</b> " + player.getMaxStats("inte") + "\n";
+	combatStats += "<b>Wisdom Cap:</b> " + player.getMaxStats("wis") + "\n";
+	combatStats += "<b>Libido Cap:</b> " + player.getMaxStats("lib") + "\n";
+	
 	if (combatStats != "")
 		outputText("<b><u>Combat Stats</u></b>\n" + combatStats, false);
 	// End Combat Stats
@@ -2814,17 +3006,13 @@ public function displayStats(e:MouseEvent = null):void
 		bodyStats += ")\n";
 	}
 	bodyStats += "<b>Times Transformed:</b> " + flags[kFLAGS.TIMES_TRANSFORMED] + "\n";
-	if (player.tailType == TAIL_TYPE_BEE_ABDOMEN || player.tailType == TAIL_TYPE_SCORPION || player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL || player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) {
-		if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN)
-			bodyStats += "<b>Web:</b> " + player.tailVenom + "/100\n";
-		else {
-			if (player.tailType == TAIL_TYPE_BEE_ABDOMEN)
-				bodyStats += "<b>Venom:</b> " + player.tailVenom + "/100\n";
-			if (player.tailType == TAIL_TYPE_SCORPION)
-				bodyStats += "<b>Venom:</b> " + player.tailVenom + "/150\n";
-			if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL)
-				bodyStats += "<b>Venom:</b> " + player.tailVenom + "/200\n";
-		}
+	if (player.tailType == TAIL_TYPE_BEE_ABDOMEN || player.tailType == TAIL_TYPE_SCORPION || player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL || player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS) {
+		if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN && player.faceType != FACE_SNAKE_FANGS && player.faceType != FACE_SPIDER_FANGS)
+			bodyStats += "<b>Web:</b> " + player.tailVenom + "/" + player.maxVenom() + "\n";
+		else if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN && (player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS))
+			bodyStats += "<b>Venom/Web:</b> " + player.tailVenom + "/" + player.maxVenom() + "\n";
+		else if (player.tailType != TAIL_TYPE_SPIDER_ADBOMEN)
+			bodyStats += "<b>Venom:</b> " + player.tailVenom + "/" + player.maxVenom() + "\n";
 	}
 
 	bodyStats += "<b>Anal Capacity:</b> " + Math.round(player.analCapacity()) + "\n";
@@ -3007,6 +3195,8 @@ public function displayStats(e:MouseEvent = null):void
 	if (flags[kFLAGS.BROOKE_MET] > 0)
 		interpersonStats += "<b>Brooke Affection:</b> " + Math.round(telAdre.brooke.brookeAffection()) + "\n";
 		
+	if (flags[kFLAGS.CEANI_AFFECTION] > 0)
+		interpersonStats += "<b>Ceani Affection:</b> " + Math.round(flags[kFLAGS.CEANI_AFFECTION]) + "%\n";
 	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220] > 0)
 		interpersonStats += "<b>Body Parts Taken By Ceraph:</b> " + (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00219] + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220]) + "\n";
 	if (flags[kFLAGS.ETNA_AFFECTION] > 0)
@@ -3279,8 +3469,7 @@ public function lustPercent():Number {
 	}
 	
 	lust = Math.round(lust);
-	if (player.findStatusAffect(StatusAffects.Lustzerking) >= 0) lust = 100;
-	// && player.findPerk(PerkLib.SalamanderAdrenalGlands) < 1) lust = 100;
+	if (player.findStatusAffect(StatusAffects.Lustzerking) >= 0 && player.findPerk(PerkLib.ColdLust) < 1) lust = 100;
 	return lust;
 }
 
@@ -3420,6 +3609,7 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 		oldStats.oldTou = player.tou;
 		oldStats.oldSpe = player.spe;
 		oldStats.oldInte = player.inte;
+		oldStats.oldWis = player.wis;
 		oldStats.oldLib = player.lib;
 		oldStats.oldSens = player.sens;
 		oldStats.oldCor = player.cor;
@@ -3511,6 +3701,8 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	if(player.spe < 1) player.spe = 1;
 	if(player.inte > player.getMaxStats("inte")) player.inte = player.getMaxStats("inte");
 	if(player.inte < 1) player.inte = 1;
+	if(player.wis > player.getMaxStats("wis")) player.wis = player.getMaxStats("wis");
+	if(player.wis < 1) player.wis = 1;
 	if(player.lib > player.getMaxStats("lib")) player.lib = player.getMaxStats("lib");
 	if(player.lib < 0) player.lib = 0;
 	//Minimum libido. Rewritten.
@@ -3591,7 +3783,7 @@ public function showUpDown():void { //Moved from StatsView.
 
 	mainView.statsView.upDownsContainer.visible = true;
 
-//	allStats = ["str", "tou", "spe", "inte", "lib", "sens", "cor", "HP", "lust", "fatigue", "soulforce", "hunger"];
+//	allStats = ["str", "tou", "spe", "inte", "wis" "lib", "sens", "cor", "HP", "lust", "wraith", "fatigue", "soulforce", "hunger"];
 	allStats = ["str", "tou", "spe", "inte", "lib", "sens", "cor", "HP", "lust", "fatigue", "hunger"];
 
 	for each(statName in allStats) {

@@ -60,16 +60,19 @@ public function golemmerchant():void {
 	}
 	menu();
 	addButton(0, "LGSFRecovPill", LowGradeSoulforceRecoveryPill, null, null, null, "Low-grade Soulforce Recovery Pill.");
-	addButton(2, "Bag of Cosmos", BagOfCosmos, null, null, null, "Bag of Cosmos.");
+	addButton(1, "Bag of Cosmos", BagOfCosmos, null, null, null, "Bag of Cosmos.");
 	if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) {
-		addButton(3, "Triple Thrust", TripleThrustManual, null, null, null, "Triple Thrust Manual.");
+		addButton(2, "Triple Thrust", TripleThrustManual, null, null, null, "Triple Thrust Manual.");
+		addButton(3, "Draco Sweep", DracoSweepManual, null, null, null, "Draco Sweep Manual.");
 		addButton(4, "Many Birds", ManyBirdsManual, null, null, null, "Many Birds Manual.");
-		addButton(5, "Draco Sweep", DracoSweepManual, null, null, null, "Draco Sweep Manual.");
 	}
-	if (player.findPerk(PerkLib.SoulPersonage) >= 0) {
-		addButton(1, "MGSFRecovPill", MidGradeSoulforceRecoveryPill, null, null, null, "Mid-grade Soulforce Recovery Pill.");
+	if (player.findPerk(PerkLib.SoulWarrior) >= 0) {
+		addButton(5, "MGSFRecovPill", MidGradeSoulforceRecoveryPill, null, null, null, "Mid-grade Soulforce Recovery Pill.");
 		addButton(6, "Comet", CometManual, null, null, null, "Comet Manual.");
 		addButton(7, "V P Trans", VioletPupilTransformationManual, null, null, null, "Violet Pupil Transformation Manual.");
+	}
+	if (player.findPerk(PerkLib.SoulOverlord) >= 0) {
+		addButton(10, "HGSFRecovPill", HighGradeSoulforceRecoveryPill, null, null, null, "High-grade Soulforce Recovery Pill.");
 	}
 	addButton(14, "Back", riverislandVillageStuff);
 	statScreenRefresh();
@@ -80,7 +83,6 @@ public function LowGradeSoulforceRecoveryPill():void {
 	outputText("While you reach toward the one of the pills on the display golem says, \"<i>It's quite useful item for all soul cultivators, this little pill can help you restore some of used up soulforce.  Interested?  It is <b>5 gems</b></i>.\"");
 	doYesNo(buyLowGradeSoulforceRecoveryPill, golemmerchant);
 }
-
 public function buyLowGradeSoulforceRecoveryPill():void {
 	if (player.gems < 5) {
 		clearOutput();
@@ -97,20 +99,38 @@ public function buyLowGradeSoulforceRecoveryPill():void {
 
 public function MidGradeSoulforceRecoveryPill():void {
 	clearOutput();
-	outputText("While you reach toward the one of the pills on the display golem says, \"<i>It's quite useful item for all cultivators at Soul Personage or above stage, this small pill can help you restore some of used up soulforce and it would be much more than the low-grade one.  Interested?  It is <b>50 gems</b></i>.\"");
+	outputText("While you reach toward the one of the pills on the display golem says, \"<i>It's quite useful item for all cultivators at Soul Personage or above stage, this small pill can help you restore some of used up soulforce and it would be much more than the low-grade one.  Interested?  It is <b>30 gems</b></i>.\"");
 	doYesNo(buyMidGradeSoulforceRecoveryPill, golemmerchant);
 }
-
 public function buyMidGradeSoulforceRecoveryPill():void {
-	if (player.gems < 50) {
+	if (player.gems < 30) {
 		clearOutput();
-		outputText("\n\nGolem shakes his head, indicating you need " + String(50 - player.gems) + " more gems to purchase this item.");
+		outputText("\n\nGolem shakes his head, indicating you need " + String(30 - player.gems) + " more gems to purchase this item.");
 		doNext(golemmerchant);
 	}
 	else {
-		player.gems -= 50;
+		player.gems -= 30;
 		outputText("\n");
 		inventory.takeItem(consumables.MG_SFRP, golemmerchant);
+		statScreenRefresh();
+	}
+}
+
+public function HighGradeSoulforceRecoveryPill():void {
+	clearOutput();
+	outputText("While you reach toward the one of the pills on the display golem says, \"<i>It's quite useful item for all cultivators at Soul Personage or above stage, this small pill can help you restore some of used up soulforce and it would be much more than the low-grade one.  Interested?  It is <b>180 gems</b></i>.\"");
+	doYesNo(buyHighGradeSoulforceRecoveryPill, golemmerchant);
+}
+public function buyHighGradeSoulforceRecoveryPill():void {
+	if (player.gems < 180) {
+		clearOutput();
+		outputText("\n\nGolem shakes his head, indicating you need " + String(180 - player.gems) + " more gems to purchase this item.");
+		doNext(golemmerchant);
+	}
+	else {
+		player.gems -= 180;
+		outputText("\n");
+		inventory.takeItem(consumables.HG_SFRP, golemmerchant);
 		statScreenRefresh();
 	}
 }

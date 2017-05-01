@@ -60,6 +60,7 @@ package classes.Scenes.Areas.BlightRidge
 				}
 			}
 			addButton (4, "Leave", cleanupAfterCombat);
+			if(monster.HP < 1) addButton (5, "Kill Him", killDemon);
 		}
 		
 		public function lustyPaizuri():void {
@@ -306,6 +307,7 @@ package classes.Scenes.Areas.BlightRidge
 				if (player.gender == 2 || player.gender == 3) addButton (0, "F. Fuck", OmnibusGetsRapedByFemale);
 			}
 			addButton (4, "Leave", cleanupAfterCombat);
+			if(monster.HP < 1) addButton (5, "Kill Her", killDemon);
 		}
 		
 		public function OmnibusGetsRapedByMale():void {
@@ -580,6 +582,7 @@ package classes.Scenes.Areas.BlightRidge
 				}
 			}
 			addButton (4, "Leave", cleanupAfterCombat);
+			if(monster.HP < 1) addButton (5, "Kill Her", killDemon);
 		}
 		
 		public function SuccubusGetsRapedByMale():void {
@@ -775,6 +778,24 @@ package classes.Scenes.Areas.BlightRidge
 				cleanupAfterCombat();
 			}
 		}
+		
+		private function killDemon():void {
+			clearOutput();
+			flags[kFLAGS.IMPS_KILLED]++;
+			outputText("You make a quick work of the ");
+			if (monster.short == "succubus") outputText("succubus");
+			if (monster.short == "incubus") outputText("incubus");
+			if (monster.short == "omnibus") outputText("omnibus");
+			outputText(" before dragging the corpse away. That's one less foul creature prowling the realms. ");
+			if (player.cor < 25) dynStats("cor", -0.5);
+			menu(); 
+			addButton(0, "Take Skull", takeSkull);
+			addButton(1, "Leave", cleanupAfterCombat);
+		}
+		private function takeSkull():void {
+			inventory.takeItem(useables.DEMSKLL, cleanupAfterCombat);
+		}
+		
 	}
 
 }

@@ -46,6 +46,7 @@ package classes.Scenes.Dungeons.D3
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.drop = NO_DROP;
 			this.str += 63 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 63 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

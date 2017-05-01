@@ -184,18 +184,16 @@ package classes {
 				if (flags[kFLAGS.VALERIA_FLUIDS] > 100) flags[kFLAGS.VALERIA_FLUIDS] = 100;
 			}
 			//Recharge tail
-			if (player.tailType == TAIL_TYPE_BEE_ABDOMEN || player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.tailType == TAIL_TYPE_SCORPION || player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) { //Spider, Bee, Scorpion and Manticore Venom Recharge
+			if (player.tailType == TAIL_TYPE_BEE_ABDOMEN || player.tailType == TAIL_TYPE_SPIDER_ADBOMEN || player.tailType == TAIL_TYPE_SCORPION || player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL || player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS) { //Spider, Bee, Scorpion, Manticore and Naga Venom Recharge
 				if (player.tailRecharge < 5) player.tailRecharge = 5;
 				player.tailVenom += player.tailRecharge;
-				if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) {
-					if (player.tailVenom > 200) player.tailVenom = 200;
-				}
-				else if (player.tailType == TAIL_TYPE_SCORPION) {
-					if (player.tailVenom > 150) player.tailVenom = 150;
-				}
-				else {
-					if (player.tailVenom > 100) player.tailVenom = 100;
-				}
+				if (player.findPerk(PerkLib.ImprovedVenomGland) >= 0) player.tailVenom += 10;
+				if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
+			}
+			//Improved venom gland
+			if (flags[kFLAGS.VENOM_TIMES_USED] >= 50 && player.findPerk(PerkLib.ImprovedVenomGland) < 0) {
+				outputText("\nYou feel wonderfully healthy. After using your venom so many time your body finally got acclimated to the presence of your venom gland allowing for increased capacity and production. \n\n(<b>Gained Perk: Improved venom gland</b>)\n");
+				player.createPerk(PerkLib.ImprovedVenomGland, 0, 0, 0, 0);
 			}
 			//Flexibility perk
 			if (player.tailType == TAIL_TYPE_CAT && player.lowerBody == LOWER_BODY_TYPE_CAT && player.earType == EARS_CAT) { //Check for gain of cat agility - requires legs, tail, and ears
@@ -213,7 +211,7 @@ package classes {
 			//Lustzerker perk
 			if ((player.tailType == TAIL_TYPE_SALAMANDER && player.lowerBody == LOWER_BODY_TYPE_SALAMANDER && player.armType == ARM_TYPE_SALAMANDER) || (player.findPerk(PerkLib.Lustzerker) < 0 && player.findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)) { //Check for gain of lustzerker - requires legs, arms and tail
 				if (player.findPerk(PerkLib.Lustzerker) < 0) {
-					outputText("\nAfter drinking to the last drop another hip flask of firewater you starts to feel weird maybe slight unpleasant feeling inside your body.  Like many tiny flames cursing inside your veins making you ponder what just happening with your body.  Remembering about salamanders natural talent to enter berserk-like state you quessing it's could be that.\n\n(<b>Gained Perk: Lustzerker</b>)");
+					outputText("\nAfter drinking the last drop another hip flask of firewater you starts to feel a weird, maybe slightly unpleasant feeling inside your body.  Like many tiny flames cursing inside your veins making you ponder whats just happening with your body.  Remembering about salamanders natural talent to enter a berserk-like state you quess that should be it.\n\n(<b>Gained Perk: Lustzerker</b>)");
 					player.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
 					needNext = true;
 				}
@@ -308,9 +306,24 @@ package classes {
 				player.createPerk(PerkLib.FireAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if ((player.salamanderScore() < 4 || player.phoenixScore() < 10) && player.findPerk(PerkLib.FireAffinity) >= 0) {
+			else if ((player.salamanderScore() < 4 && player.phoenixScore() < 10) && player.findPerk(PerkLib.FireAffinity) >= 0) {
 				outputText("\nYou suddenly feel chilly as your bodily temperature drop down to human level. You lost your natural warmth reverting to that of a standard human.\n\n<b>(Lost Perk: Fire Affinity)</b>\n");
 				player.removePerk(PerkLib.FireAffinity);
+				needNext = true;
+			}
+			//Aquatic Affinity
+			if (player.lowerBody == LOWER_BODY_TYPE_ORCA && player.armType == ARM_TYPE_ORCA && player.tailType == TAIL_TYPE_ORCA && player.earType == EARS_ORCA && player.findPerk(PerkLib.AquaticAffinity) < 0) {
+				outputText("\nYou suddenly feel an urge to jump into the nearest pool of water as your breath becomes ragged and messy. You swiftly run up to the stream and scream in release as you fill your aching respiratory systems with water. Wait water? You realise you just gained the ability to breath underwater but to make sure you can still breath normal air you go back to the surface. It soon appears you can still breath fresh air. Reassured on your condition you head back to camp.\n");
+				if (player.rearBody == REAR_BODY_ORCA_BLOWHOLE) outputText("\nIt dawns on you that you didn't breath for a full hour. When you realise this you relax your blowhole and take in some air. Well wow it seems you can now hold in your oxigen for very lengthy period. This will be perfect for underwater explorations.\n");
+				outputText("\n(<b>Gained Perk: Aquatic Affinity</b>)\n");
+				player.createPerk(PerkLib.AquaticAffinity, 0, 0, 0, 0);
+				needNext = true;
+			}
+			else if ((player.lowerBody != LOWER_BODY_TYPE_ORCA || player.armType != ARM_TYPE_ORCA || player.tailType != TAIL_TYPE_ORCA || player.earType != EARS_ORCA) && player.findPerk(PerkLib.AquaticAffinity) >= 0) {
+				outputText("\nAs you lose the respiratory organ to breath underwater it also becomes obvious that you will drown if attempting to breath water in. You will need to get items or transform to breath underwater again.\n");
+				if (player.rearBody == REAR_BODY_ORCA_BLOWHOLE) outputText("\nYou take a deep breath in then out. It seems you can no longer hold your breath like the whales do. It will take some using to.</b>\n");
+				outputText("\n<b>(Lost Perk: Aquatic Affinity)</b>\n");
+				player.removePerk(PerkLib.AquaticAffinity);
 				needNext = true;
 			}
 			//Soul Sense
@@ -382,12 +395,12 @@ package classes {
 				outputText("\nYou feel a strange tingling sensation. It seems as if you've finally adapted to the transformative properties of the food in Mareth and your body has finally built up enough resistance! You suspect that you can still transform but at somewhat diminished rate. \n\n(<b>Gained Perk: Transformation Resistance - Transformative items now have less chance to transform you. In addition, any Bad Ends related to overdose of certain transformative items are now disabled.</b>)\n");
 				player.createPerk(PerkLib.TransformationResistance, 0, 0, 0, 0);
 			}
-			if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 && player.perkv4(PerkLib.EnlightenedNinetails) == 0 && (player.tailType != TAIL_TYPE_FOX || player.tailVenom < 9)) { //Check ninetails perks!
+			if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 && player.perkv4(PerkLib.EnlightenedNinetails) == 0 && (player.tailType != TAIL_TYPE_FOX || player.tailCount < 9)) { //Check ninetails perks!
 				outputText("\n<b>Without your tails, the magic power they once granted withers and dies, vanishing completely.</b>\n");
 				player.removePerk(PerkLib.EnlightenedNinetails);
 				needNext = true;
 			}
-			if (player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.perkv4(PerkLib.CorruptedNinetails) == 0 && (player.tailType != TAIL_TYPE_FOX || player.tailVenom < 9)) { //Check ninetails perks!
+			if (player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.perkv4(PerkLib.CorruptedNinetails) == 0 && (player.tailType != TAIL_TYPE_FOX || player.tailCount < 9)) { //Check ninetails perks!
 				outputText("\n<b>Without your tails, the magic power they once granted withers and dies, vanishing completely.</b>\n");
 				player.removePerk(PerkLib.CorruptedNinetails);
 				needNext = true;
@@ -1112,11 +1125,11 @@ package classes {
 				//Reset Kindra Training daiy limit
 				if (flags[kFLAGS.KINDRA_DAILY_TRAINING] > 0) flags[kFLAGS.KINDRA_DAILY_TRAINING] = 0;
 				//Daily regeneration of soulforce for non soul cultivators
-		/*		if (player.soulforce < player.maxSoulforce()) {
-					player.soulforce += 12;
+				if (player.findPerk(PerkLib.JobSoulCultivator) < 0 && (player.soulforce < player.maxSoulforce())) {
+					player.soulforce += 25;
 					if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
 				}
-		*/	}
+			}
 			return needNext;
 		}
 		
@@ -1223,6 +1236,12 @@ package classes {
 				}
 				if (player.viridianChange()) {
 					getGame().fuckedUpCockDreamChange();
+					return true;
+				}
+				if (player.plantScore() >= 4 && player.findPerk(PerkLib.SoulSense) >= 0 && flags[kFLAGS.SOUL_SENSE_WORLD_TREE] < 1) {
+					outputText("\nYou find yourself in a forest. You feel a delicate melody fill the air around you, and while it has no discernable sound it somehow resonates with your being. Without even realizing it, you find yourself walking towards the source. Before long, you’re standing before a towering goliath of a tree, much larger than the others around you. As you touch the bark, you hear a soft voice. “Welcome home”. You bolt awake, and realize it was but a dream.  But somehow, you still feel the song whispering in your mind... <b>Perhaps you could seek out this tree in the waking world?</b>");
+					flags[kFLAGS.SOUL_SENSE_WORLD_TREE] = 1;
+					getGame().doNext(playerMenu);
 					return true;
 				}
 				if (player.lib > 50 || player.lust > 40) { //Randomly generated dreams here

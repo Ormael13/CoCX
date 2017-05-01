@@ -131,6 +131,7 @@ package classes.Scenes.Areas.HighMountains
 					.elseDrop(consumables.REPTLUM);
 			this.tailType = TAIL_TYPE_COW;
 			this.tailRecharge = 0;
+			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.str += 19 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

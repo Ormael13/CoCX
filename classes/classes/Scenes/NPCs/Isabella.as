@@ -213,6 +213,7 @@ package classes.Scenes.NPCs
 			this.tailRecharge = 0;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.str += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

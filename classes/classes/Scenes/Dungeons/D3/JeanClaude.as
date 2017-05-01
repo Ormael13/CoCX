@@ -113,6 +113,7 @@ package classes.Scenes.Dungeons.D3
 			gems = 700 + rand(100);
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.BasicSelfControl, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.str += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 40 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

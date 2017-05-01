@@ -148,7 +148,7 @@ private function evangelineAppearance():void {
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 8) outputText("a skimpy chain bikini that barely qualifies as armor. The chain is made from links much finer and lighter than normal, so fine that it feels almost silken under fingertips. A simple seal in the g-string-like undergarment states, \"Virgins only.\"");
 	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("a suit of steel 'armor' which have two round disks that barely cover her nipples, a tight chainmail bikini, and circular butt-plates.");
 	else outputText("a simple peasant's robes that are torn and frayed in a few places.");
-	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("\n\nBetween collarbones there is medium sized purple crystal stucking out of her skin that sometimes gently glow.");
+	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) outputText("\n\nBetween collarbones there is a medium sized purple crystal sticking out of her skin that sometimes gently glow.");
 	doNext(meetEvangeline);
 }
 
@@ -195,11 +195,11 @@ private function TalkDemons():void {
 private function TalkPastLife1():void {
 	clearOutput();
 	outputText("This time you asks Evangeline about the time you both met. What she’s been doing or how she managed to avoid demons. For a really long moment she remain silent.\n\n");
-	outputText("\"<i>I'm not any champion like you. I have just been living day after day, escaping to the hideouts I made when any of demons noticed me.</i>\" Once again there is some hint of sadness in her voice, \"<i>but they were quite persistent in searching for me, always finding each hideout quite fast. With time I haven't even got a chances to eat much, so I was getting weaker and weaker till one day I would probably be too weak to escape them.</i>\"\n\n");
+	outputText("\"<i>I'm not any champion like you. I have just been living day after day, escaping to the hideouts I made when any of the demons noticed me.</i>\" Once again there is some hint of sadness in her voice, \"<i>but they were quite persistent in searching for me, always finding each hideout quite fast. With time I haven't even got a chance to eat much, so I was getting weaker and weaker till one day I would probably be too weak to escape them.</i>\"\n\n");
 	outputText("So she was running away from them but that makes you curious to what was the reason she was chased for. She never mentioned about demons being so 'organized' and overcoming their typical 'fuck everything' attitude.\n\n");
 	outputText("\"<i>Well there is some reason for that,</i>\" Evangeline casts her gaze down, \"<i>even demons can go wild for some 'things' like lethicite or other things that could make them stronger in any way.</i>\"\n\n");
 	outputText("So it looks like she may have have something that caused all those demons to pursue her for so long. Probably something that is as valuable as this ‘lethicite’.\n\n");
-	outputText("\"<i>Yes you could say that. But I hid it before and only by catching me would they know where it's hidden. Luckily for me they won’t get me now that you're here now, right champion?</i>\" She gives you one of those rare smiles in which you nod to. Sadly further attempts to find out what she hide ");
+	outputText("\"<i>Yes you could say that. But I hid it before and only by catching me would they know where it's hidden. Luckily for me they won't get me now when you're here, right champion?</i>\" She gives you one of those rare smiles in which you nod to. Sadly further attempts to find out what she hide ");
 	if (flags[kFLAGS.EVANGELINE_TALKS] >= 3) outputText("once again fails.");
 	else outputText("turns out to be futile.");
 	outputText(" She talks about many things and some may or may not be lies, about this 'treasure' and how you only know it's well hidden and the demons will never find it without her pointing to the place.");
@@ -291,13 +291,13 @@ private function HardSpar():void {
 
 private function evangelineAlchemyMenu():void {
 	clearOutput();
-	outputText("\"<i>So you do want another transformational item made by me?</i>\" She asked after hearing purpose you found her this time, at which you simply nod. Without wasting time she walks, with you closely behind, toward entrance to a small cave right after camp borders, in which she keep her equipment.\n\n\"<i>So what you want this time for me to make?</i>\" Stopping at the edge of the entrance to lab Evangeline glance in your direction.");
+	outputText("\"<i>So you do want another transformational item made by me?</i>\" She asked after hearing what potion you want to purpose to her this time, at which you simply nod. Without wasting time she walks, with you closely behind, toward a entrance to a small cave right outside the camp's border, in which she keep her equipment.\n\n\"<i>So what you want this time for me to make?</i>\" Stopping at the edge of the entrance to lab Evangeline glance in your direction.");
 	menu();
 	addButton(0, "Gorgon Oil", MakingGorgonPotion, null, null, null, "Ask her to brew a special potion that could aid in becoming a gorgon. \n\nCost: 10 Gems \nNeeds 1 Snake Oil and 1 Reptilum.");
-	addButton(1, "Centaurinum", MakingCentaurPotion, null, null, null, "Ask her to brew a special potion that could aid in becoming a centaur. \n\nCost: 10 Gems \nNeeds 1 Equinum and 1 Minotaur Blood.");
-	//zamienić to na inne evolution TF crafting może nekomanta TF?			addButton(2, "Fox Jewel", MakingFoxJewel, null, null, null, "Ask her to make special jewel that could aid in becoming a kitsune. \n\nCost: 8 Gems \nNeeds 3 Fox Berries and 4 Low-grade Soulforce Recovery Pills.");//1st stage Soul evolution race TF
-	addButton(3, "Unicornum", MakingUnicornumPotion, null, null, null, "Ask her to brew a special potion that could aid in becoming a unicorn. \n\nCost: 20 Gems \nNeeds 1 Equinum and 4 Low-grade Soulforce Recovery Pills.");//1st stage Soul evolution race TF
-	//addButton(4, "", , null, null, null, ".");
+	addButton(1, "Vouivre Oil", MakingVouivrePotion, null, null, null, "Ask her to brew a special potion that could aid in becoming a vouivre. \n\nCost: 15 Gems \nNeeds 1 Snake Oil and 1 Drake Heart.");
+	addButton(2, "Couatl Oil", MakingCouatlPotion, null, null, null, "Ask her to brew a special potion that could aid in becoming a couatl. \n\nCost: 10 Gems \nNeeds 1 Snake Oil and 1 Golden Seed.");
+	addButton(3, "Centaurinum", MakingCentaurPotion, null, null, null, "Ask her to brew a special potion that could aid in becoming a centaur. \n\nCost: 10 Gems \nNeeds 1 Equinum and 1 Minotaur Blood.");
+	addButton(4, "Unicornum", MakingUnicornumPotion, null, null, null, "Ask her to brew a special potion that could aid in becoming a unicorn. \n\nCost: 20 Gems \nNeeds 1 Equinum and 4 Low-grade Soulforce Recovery Pills.");//1st stage Soul evolution race TF
 	//addButton(5, "", , null, null, null, ".");kitsune/salamander TF//Hybryd race TF
 	addButton(6, "Nocello Liq", MakingNocelloLiqueur, null, null, null, "Ask her to brew a special potion that could aid in becoming a phoenix. \n\nCost: 10 Gems \nNeeds 1 Golden Seed and 1 Salamander Firewater.");//Hybryd race TF
 	//addButton(7, "", , null, null, null, ".");siren TF//Hybryd race TF
@@ -331,6 +331,48 @@ private function MakingGorgonPotion():void {
 	inventory.takeItem(consumables.GORGOIL, evangelineAlchemyMenu);
 	cheatTime(1/6);
 }
+private function MakingVouivrePotion():void {
+	clearOutput();
+	if (player.gems < 15) {
+		outputText("\"<i>I'm sorry but you don't have the gems for this potion,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	else if (!(player.hasItem(consumables.SNAKOIL, 1) && player.hasItem(consumables.DRAKHRT, 1))) {
+		outputText("\"<i>I'm sorry but you don't have the materials I need. I need vial of Snake Oil and Drake Heart,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	player.destroyItems(consumables.SNAKOIL, 1);
+	player.destroyItems(consumables.DRAKHRT, 1);
+	player.gems -= 15;
+	statScreenRefresh();
+	outputText("You hand over one vial of Snake Oil, one Drake Heart and fifteen gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
+	outputText("\n\nAfter a while, she hands you a vial filled with an oily, purple liquid.  ");
+	inventory.takeItem(consumables.VOUIOIL, evangelineAlchemyMenu);
+	cheatTime(1/6);
+}
+private function MakingCouatlPotion():void {
+	clearOutput();
+	if (player.gems < 10) {
+		outputText("\"<i>I'm sorry but you don't have the gems for this potion,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	else if (!(player.hasItem(consumables.SNAKOIL, 1) && player.hasItem(consumables.GLDSEED, 1))) {
+		outputText("\"<i>I'm sorry but you don't have the materials I need. I need vial of Snake Oil and Golden Seed,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	player.destroyItems(consumables.SNAKOIL, 1);
+	player.destroyItems(consumables.GLDSEED, 1);
+	player.gems -= 10;
+	statScreenRefresh();
+	outputText("You hand over one vial of Snake Oil, one Golden Seed and ten gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
+	outputText("\n\nAfter a while, she hands you a vial filled with an oily, red liquid.  ");
+	inventory.takeItem(consumables.COUAOIL, evangelineAlchemyMenu);
+	cheatTime(1/6);
+}
 
 private function MakingCentaurPotion():void {
 	clearOutput();
@@ -351,27 +393,6 @@ private function MakingCentaurPotion():void {
 	outputText("You hand over one vial of Equinum, one vial of Minotaur Blood and ten gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
 	outputText("\n\nAfter a while, she hands you a vial labeled \"Centaurinum\".  ");
 	inventory.takeItem(consumables.CENTARI, evangelineAlchemyMenu);
-	cheatTime(1/6);
-}
-
-private function MakingFoxJewel():void {
-	if (player.gems < 8) {
-		outputText("\"<i>I'm sorry but you don't have the gems for this jewel,</i>\" Evangeline says.");
-		doNext(evangelineAlchemyMenu);
-		return;
-	}
-	else if (!(player.hasItem(consumables.FOXBERY, 3) && player.hasItem(consumables.LG_SFRP, 4))) {
-		outputText("\"<i>I'm sorry but you don't have the materials I need. I need three Fox Berries and four Low-grade Soulforce Recovery Pills,</i>\" Evangeline says.");
-		doNext(evangelineAlchemyMenu);
-		return;
-	}
-	player.destroyItems(consumables.FOXBERY, 3);
-	player.destroyItems(consumables.LG_SFRP, 4);
-	player.gems -= 8;
-	statScreenRefresh();
-	outputText("You hand over three Fox Berries, four Low-grade Soulforce Recovery Pills and eight gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
-	outputText("\n\nAfter a while, she hands you a Fox Jewel. When you asked how she made of all those things a jewel she just smile mysteriously.  ");
-	inventory.takeItem(consumables.FOXJEWL, evangelineAlchemyMenu);
 	cheatTime(1/6);
 }
 
@@ -495,7 +516,7 @@ private function MakingWhiteInkPotion():void {
 
 private function LvLUp():void {
 	clearOutput();
-	outputText("\"<i>So " + player.short + " how much gems will you give me this time for my recovery or new experiments?</i>\" Askes Evangeline waiting for your decision.");
+	outputText("\"<i>So " + player.short + " how much gems will you give me this time for my recovery or new experiments?</i>\" Asks Evangeline waiting for your decision.");
 	outputText("\n\nEvangeline gem purse: " + flags[kFLAGS.EVANGELINE_GEMS_PURSE] + " gems");
 	menu();
 	if (player.gems > 1) addButton(0, "1 gem", Give1Gem, null, null, null, "Give Evangeline 1 gem.");
@@ -523,7 +544,7 @@ private function LvLUp():void {
 //koszt vitality tincture, scholar tea i sucubus milk to 6 gems (1 VT to +2 str i tou a 1 ST to +2 do jej statów)
 private function Give1Gem():void {
 	clearOutput();
-	outputText("Reaching to your purse you take out a single gem and hands over it to her.");
+	outputText("Reaching into your purse you take out a single gem and hands over it to her.");
 	outputText("\n\n\"<i>So stingy...</i>\" she mumble.");
 	player.gems -= 1;
 	flags[kFLAGS.EVANGELINE_GEMS_PURSE]++;
@@ -534,7 +555,7 @@ private function Give1Gem():void {
 
 private function Give10Gems():void {
 	clearOutput();
-	outputText("Reaching to your purse you take out a few gems and hands over it to her.");
+	outputText("Reaching into your purse you take out a few gems and hands over it to her.");
 	outputText("\n\n\"<i>Not much but still something,</i>\" she mumble.");
 	player.gems -= 10;
 	flags[kFLAGS.EVANGELINE_GEMS_PURSE] += 10;
@@ -545,7 +566,7 @@ private function Give10Gems():void {
 
 private function Give100Gems():void {
 	clearOutput();
-	outputText("Reaching to your purse you take out around a hundred gems and hands over it to her.");
+	outputText("Reaching into your purse you take out around a hundred gems and hands over it to her.");
 	outputText("\n\n\"<i>Thank you,</i>\" she mumble.");
 	player.gems -= 100;
 	flags[kFLAGS.EVANGELINE_GEMS_PURSE] += 100;

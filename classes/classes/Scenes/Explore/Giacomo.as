@@ -121,9 +121,10 @@ package classes.Scenes.Explore {
 			clearOutput();
 			outputText("Which potion or tincture will you examine?");
 			menu();
-			addButton(0, "Vitality T.", pitchVitailtyTincture);
-			addButton(1, "Scholars T.", pitchScholarsTea);
-			if (player.gender != 2 || player.gender != 0) addButton(2, "Cerulean P.", pitchCeruleanPotion);
+			addButton(0, "ManUp B.", pitchManUpBeer);
+			addButton(1, "Vitality T.", pitchVitailtyTincture);
+			addButton(2, "Scholars T.", pitchScholarsTea);
+			if (player.gender != 2 || player.gender != 0) addButton(3, "Cerulean P.", pitchCeruleanPotion);
 			addButton(14, "Back", giacomoEncounter);
 			statScreenRefresh();
 		}
@@ -159,6 +160,27 @@ package classes.Scenes.Explore {
 			addButton(14, "Back", giacomoEncounter);
 
 			statScreenRefresh();
+		}
+		
+		private function pitchManUpBeer():void {
+			spriteSelect(23);
+			clearOutput();
+			outputText("Giacomo holds up the item and says, \"<i>Ahh so you're interested into this beverage eh?  It is rumored to help weight lifter grow bigger muscle.  Yes " + player.mf("sir", "madam") + ", this is liquid gold for pilgrim and adventurer alike.  Interested?  It is <b>15 gems</b></i>.\"  ");
+			doYesNo(buyManUpBeer, potionMenu);
+		}
+		
+		private function buyManUpBeer():void {
+			spriteSelect(23);
+			if (player.gems < 15) {
+				clearOutput();
+				outputText("\n\nGiacomo sighs, indicating you need " + String(15 - player.gems) + " more gems to purchase this item.");
+				doNext(potionMenu);
+			}
+			else {
+				player.gems -= 15;
+				inventory.takeItem(consumables.MANUP_B, potionMenu);
+				statScreenRefresh();
+			}
 		}
 		
 		private function pitchVitailtyTincture():void {

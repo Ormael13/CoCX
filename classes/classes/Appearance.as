@@ -667,6 +667,13 @@
 					"slithering vine-prick",
 					"vine-shaped cock");
 			}
+			else if (cockType == CockTypesEnum.STAMEN) {
+				return randomChoice("squirming cock-stamen",
+					"plant-like stamen",
+					"penile flora",
+					"smooth shaft",
+					"stamen-shaped cock");
+			}
 			else if (cockType == CockTypesEnum.CAT) {
 				return randomChoice("feline dick",
 					"spined cat-cock",
@@ -1228,6 +1235,14 @@
 					"tentacle dick",
 					"vine prick",
 					"vine-like cock"];
+				description += randomChoice(options);
+			}
+			else if (cockType == CockTypesEnum.STAMEN) {
+				options = ["squirming cock-stamen",
+					"plant-like stamen",
+					"penile flora",
+					"smooth shaft",
+					"stamen-shaped cock"];
 				description += randomChoice(options);
 			}
 			else if (cockType == CockTypesEnum.CAT) {
@@ -2361,11 +2376,16 @@
 					[SKIN_TYPE_BARK, "bark"],
 					[SKIN_TYPE_STONE, "stone"],
 					[SKIN_TYPE_TATTOED, "sexy tattoed"],
-					[SKIN_TYPE_AQUA_SCALES, "bark"],
+					[SKIN_TYPE_AQUA_SCALES, "fish scales"],
 					[SKIN_TYPE_PARTIAL_FUR, "partial fur"],
 					[SKIN_TYPE_PARTIAL_SCALES, "partial scales"],
 					[SKIN_TYPE_PARTIAL_CHITIN, "partial chitin"],
-					[SKIN_TYPE_PARTIAL_BARK, "partial bark"]
+					[SKIN_TYPE_PARTIAL_BARK, "partial bark"],
+					[SKIN_TYPE_DRAGON_SCALES, "dragon scales"],
+					[SKIN_TYPE_MOSS, "moss"],
+					[SKIN_TYPE_PARTIAL_DRAGON_SCALES, "partial dragon scales"],
+					[SKIN_TYPE_PARTIAL_STONE, "partial stone"],
+					[SKIN_TYPE_PARTIAL_AQUA_SCALES, "partial fish scales"]
 				]
 		);
 		public static const DEFAULT_SKIN_DESCS:Object = createMapFromPairs(
@@ -2379,11 +2399,16 @@
 					[SKIN_TYPE_BARK, "bark"],
 					[SKIN_TYPE_STONE, "stone"],
 					[SKIN_TYPE_TATTOED, "sexy tattoed"],
-					[SKIN_TYPE_AQUA_SCALES, "bark"],
+					[SKIN_TYPE_AQUA_SCALES, "fish scales"],
 					[SKIN_TYPE_PARTIAL_FUR, "small patches of fur"],
 					[SKIN_TYPE_PARTIAL_SCALES, "small patches of scales"],
 					[SKIN_TYPE_PARTIAL_CHITIN, "small patches of chitin"],
-					[SKIN_TYPE_PARTIAL_BARK, "small patches of bark"]
+					[SKIN_TYPE_PARTIAL_BARK, "small patches of bark"],
+					[SKIN_TYPE_DRAGON_SCALES, "dragon scales"],
+					[SKIN_TYPE_MOSS, "moss"],
+					[SKIN_TYPE_PARTIAL_DRAGON_SCALES, "partial dragon scales"],
+					[SKIN_TYPE_PARTIAL_STONE, "partial stone"],
+					[SKIN_TYPE_PARTIAL_AQUA_SCALES, "partial fish scales"]
 				]
 		);
 		public static const DEFAULT_HAIR_NAMES:Object = createMapFromPairs(
@@ -2436,7 +2461,9 @@
 					[FACE_WOLF, "wolf"],
 					[FACE_MANTICORE, "manticore"],
 					[FACE_SALAMANDER_FANGS, "salamander"],
-					[FACE_YETI_FANGS, "yeti"]
+					[FACE_YETI_FANGS, "yeti"],
+					[FACE_ORCA, "orca"],
+					[FACE_PLANT_DRAGON, "plant dragon"]
 				]
 		);
 		public static const DEFAULT_TONGUE_NAMES:Object = createMapFromPairs(
@@ -2459,7 +2486,9 @@
 					[EYES_FENRIR, "fenrir"],
 					[EYES_MANTICORE, "manticore"],
 					[EYES_FOX, "fox"],
-					[EYES_REPTILIAN, "reptilian"]
+					[EYES_REPTILIAN, "reptilian"],
+					[EYES_SNAKE, "snake"],
+					[EYES_DRAGON, "dragon"]
 				]
 		);
 		public static const DEFAULT_EARS_NAMES:Object = createMapFromPairs(
@@ -2484,7 +2513,9 @@
 					[EARS_DEER, "deer"],
 					[EARS_WOLF, "wolf"],
 					[EARS_LION, "lion"],
-					[EARS_YETI, "yeti"]
+					[EARS_YETI, "yeti"],
+					[EARS_ORCA, "orca"],
+					[EARS_SNAKE, "snake"]
 				]
 		);
 		public static const DEFAULT_HORNS_NAMES:Object = createMapFromPairs(
@@ -2519,7 +2550,7 @@
 					[ARM_TYPE_BEE, "bee"],
 					[ARM_TYPE_SALAMANDER, "salamander"],
 					[ARM_TYPE_PHOENIX, "phoenix"],
-					[ARM_TYPE_PLANT, "plant"],
+					[ARM_TYPE_PLANT, "vine-covered"],
 					[ARM_TYPE_SHARK, "shark"],
 					[ARM_TYPE_GARGOYLE, "gargoyle"],
 					[ARM_TYPE_WOLF, "wolf"],
@@ -2528,7 +2559,9 @@
 					[ARM_TYPE_FOX, "fox"],
 					[ARM_TYPE_LIZARD, "lizard"],
 					[ARM_TYPE_DRAGON, "dragon"],
-					[ARM_TYPE_YETI, "yeti"]
+					[ARM_TYPE_YETI, "yeti"],
+					[ARM_TYPE_ORCA, "orca"],
+					[ARM_TYPE_PLANT2, "tentacle-covered"]
 				]
 		);
 		public static const DEFAULT_TAIL_NAMES:Object = createMapFromPairs(
@@ -2562,7 +2595,9 @@
 					[TAIL_TYPE_MANTIS_ABDOMEN, "mantis abdomen"],
 					[TAIL_TYPE_WOLF, "wolf"],
 					[TAIL_TYPE_GARGOYLE, "gargoyle"],
-					[TAIL_TYPE_MANTICORE_PUSSYTAIL, "manticore pussytail"]
+					[TAIL_TYPE_MANTICORE_PUSSYTAIL, "manticore pussytail"],
+					[TAIL_TYPE_ORCA, "orca"],
+					[TAIL_TYPE_YGGDRASIL, "yggdrasil"]
 				]
 		);
 		public static const DEFAULT_WING_NAMES:Object = createMapFromPairs(
@@ -2655,7 +2690,9 @@
 					[LOWER_BODY_TYPE_PLANT_ROOT_CLAWS, "root feet"],
 					[LOWER_BODY_TYPE_WOLF, "wolf"],
 					[LOWER_BODY_TYPE_LION, "lion"],
-					[LOWER_BODY_TYPE_YETI, "yeti"]
+					[LOWER_BODY_TYPE_YETI, "yeti"],
+					[LOWER_BODY_TYPE_ORCA, "orca"],
+					[LOWER_BODY_TYPE_YGG_ROOT_CLAWS, "root feet"]
 				]
 		);
 		// <mod name="Dragon patch" author="Stadler76">
@@ -2667,7 +2704,8 @@
 					[REAR_BODY_FENRIR_ICE_SPIKES, "ice shards"],
 					[REAR_BODY_BEHEMOTH, "behemoth spikes"],
 					[REAR_BODY_LION_MANE, "lion mane"],
-					[REAR_BODY_SHARK_FIN, "shark fin"]
+					[REAR_BODY_SHARK_FIN, "shark fin"],
+					[REAR_BODY_ORCA_BLOWHOLE, "orca blowhole"]
 				]
 		);
 		public static const DEFAULT_PIERCING_NAMES:Object = createMapFromPairs(
@@ -2834,16 +2872,16 @@
 			
 			var descript:String = "";
 			
-			if (i_creature.tailType == TAIL_TYPE_FOX && i_creature.tailVenom >= 1)
+			if (i_creature.tailType == TAIL_TYPE_FOX && i_creature.tailCount >= 1)
 			{
-				// Kitsune tails, we're using tailVenom to track tail count
-				if (i_creature.tailVenom > 1)
+				// Kitsune tails, we're using tailCount to track tail count
+				if (i_creature.tailCount > 1)
 				{
-					if (i_creature.tailVenom == 2) descript += "pair ";
-					else if (i_creature.tailVenom == 3) descript += "trio ";
-					else if (i_creature.tailVenom == 4) descript += "quartet ";
-					else if (i_creature.tailVenom == 5) descript += "quintet ";
-					else if (i_creature.tailVenom > 5) descript += "bundle ";
+					if (i_creature.tailCount == 2) descript += "pair ";
+					else if (i_creature.tailCount == 3) descript += "trio ";
+					else if (i_creature.tailCount == 4) descript += "quartet ";
+					else if (i_creature.tailCount == 5) descript += "quintet ";
+					else if (i_creature.tailCount > 5) descript += "bundle ";
 					
 					descript += "of kitsune tails";
 				}
@@ -2868,9 +2906,9 @@
 			
 			var descript:String = "";
 			
-			if (i_creature.tailType == TAIL_TYPE_FOX && i_creature.tailVenom >= 1)
+			if (i_creature.tailType == TAIL_TYPE_FOX && i_creature.tailCount >= 1)
 			{
-				if (i_creature.tailVenom == 1)
+				if (i_creature.tailCount == 1)
 				{
 					descript += "your kitsune tail";
 				}

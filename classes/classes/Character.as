@@ -897,7 +897,7 @@ import classes.GlobalFlags.kFLAGS;
 			if (jewelryEffectId == JewelryLib.MODIFIER_HP) max += jewelryEffectMagnitude;
 			max *= 1 + (countCockSocks("green") * 0.02);
 			max = Math.round(max);
-			if (max > 75499) max = 75499;
+			if (max > 149999) max = 149999;
 			return max;
 		}
 		
@@ -938,7 +938,7 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.AscensionDesires) >= 0) max += perkv1(PerkLib.AscensionDesires) * 10;
 			if (findPerk(PerkLib.UnlockId) >= 0) max += level;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 2;
-			if (max > 6499) max = 6499;
+			if (max > 9999) max = 9999;
 			return max;
 		}
 		
@@ -947,8 +947,8 @@ import classes.GlobalFlags.kFLAGS;
 			var max:Number = 100;
 			if (game.player.alicornScore() >= 6) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.foxScore() >= 7) max += (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.kitsuneScore() >= 5 && game.player.tailVenom >= 2 && game.player.tailVenom < 9) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.kitsuneScore() >= 12 && game.player.tailVenom == 9) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.kitsuneScore() >= 5 && game.player.tailCount >= 2 && game.player.tailCount < 9) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.kitsuneScore() >= 12 && game.player.tailCount == 9) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.lizardScore() >= 4) max += (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.unicornScore() >= 5) max += (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.ArchersStaminaI) >= 0) max += Math.round(spe);
@@ -986,17 +986,19 @@ import classes.GlobalFlags.kFLAGS;
 			if (findPerk(PerkLib.HalfStepToPeerlessEndurance) >= 0) max += 700;
 			if (findPerk(PerkLib.PeerlessEndurance) >= 0) max += 1000;
 			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 75) max += 45;
-			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) max += 15;
+			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) max += 30;
 			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 100) max += 60;
 			if (findPerk(PerkLib.GreyArchmage) >= 0 && inte >= 125) max += 150;
 			if (findPerk(PerkLib.GreyMage) >= 0 && inte >= 125) max += 105;
 			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) max += 30;
-			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) max += 30;
-			if (findPerk(PerkLib.JobArcaneArcher) >= 0) max += 50;
+			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) max += 15;
+			if (findPerk(PerkLib.JobHunter) >= 0) max += 50;
 			if (findPerk(PerkLib.JobMunchkin) >= 0) max += 100;
 			if (findPerk(PerkLib.JobRanger) >= 0) max += 5;
-			if (findPerk(PerkLib.JobSoulArcher) >= 0) max += 100;
 			if (findPerk(PerkLib.JobSorcerer) >= 0) max += 15;
+			if (findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0) max += 600;
+			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) max += 150;
+			if (findPerk(PerkLib.PrestigeJobSeer) >= 0) max += 900;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (findPerk(PerkLib.AscensionEndurance) >= 0) max += perkv1(PerkLib.AscensionEndurance) * 30;
@@ -1004,7 +1006,7 @@ import classes.GlobalFlags.kFLAGS;
 			max += level * 5;
 			if (findPerk(PerkLib.UnlockMind) >= 0) max += level * 5;
 			if (findPerk(PerkLib.AscensionUnlockedPotential) >= 0) max += level * 7;
-			if (max > 18499) max = 18499;
+			if (max > 99999) max = 99999;
 			return max;
 		}
 		
@@ -1042,14 +1044,41 @@ import classes.GlobalFlags.kFLAGS;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 28) max += 110;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 29) max += 110;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 30) max += 110;
+			if (findPerk(PerkLib.InsightfulResourcesI) >= 0) max += Math.round(wis*5);
+			if (findPerk(PerkLib.InsightfulResourcesII) >= 0) max += Math.round(wis*5);
+			if (findPerk(PerkLib.InsightfulResourcesIII) >= 0) max += Math.round(wis*5);
+			if (findPerk(PerkLib.InsightfulResourcesIV) >= 0) max += Math.round(wis*5);
+			if (findPerk(PerkLib.InsightfulResourcesV) >= 0) max += Math.round(wis*5);
+			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) max += 1000;
+			if (findPerk(PerkLib.PrestigeJobSeer) >= 0) max += 500;
+			if (findPerk(PerkLib.AscensionSoulPurity) >= 0) max += perkv1(PerkLib.AscensionSoulPurity) * 50;
+			if (findPerk(PerkLib.DaoistCultivator) >= 0) max += 25;
+			if (findPerk(PerkLib.DaoistApprenticeStage) >= 0) {
+				if (findPerk(PerkLib.SoulApprentice) >= 0) max += 30;
+				if (findPerk(PerkLib.SoulPersonage) >= 0) max += 30;
+				if (findPerk(PerkLib.SoulWarrior) >= 0) max += 30;
+			}
+			if (findPerk(PerkLib.DaoistWarriorStage) >= 0) {
+				if (findPerk(PerkLib.SoulSprite) >= 0) max += 40;
+				if (findPerk(PerkLib.SoulExalt) >= 0) max += 40;
+				if (findPerk(PerkLib.SoulOverlord) >= 0) max += 40;
+			}
+			if (findPerk(PerkLib.DaoistOverlordStage) >= 0) {
+				if (findPerk(PerkLib.SoulTyrant) >= 0) max += 50;
+				if (findPerk(PerkLib.SoulKing) >= 0) max += 50;
+				if (findPerk(PerkLib.SoulEmperor) >= 0) max += 50;
+			}
+//			if (findPerk(PerkLib.DaoistTyrantStage) >= 0) {
+//				if (findPerk(PerkLib.SA) >= 0) max += 60;
+//				if (findPerk(PerkLib.SS) >= 0) max += 60;
+//				if (findPerk(PerkLib.SS) >= 0) max += 60;
+//			}
 			if (flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING] > 0) max += flags[kFLAGS.SOULFORCE_GAINED_FROM_CULTIVATING];//+310
 			if (jewelryEffectId == JewelryLib.MODIFIER_SF) max += jewelryEffectMagnitude;//+20
-			if (findPerk(PerkLib.JobSoulArcher) >= 0) max += 300;
-			if (findPerk(PerkLib.AscensionSoulPurity) >= 0) max += perkv1(PerkLib.AscensionSoulPurity) * 50;
-			if (findPerk(PerkLib.JobSoulCultivator) >= 0) {//3720-4720 soulforce na razie przed liczeniem mnożnika jest
+			if (findPerk(PerkLib.JobSoulCultivator) >= 0) {//4105-5105 soulforce na razie przed liczeniem mnożnika jest
 				var multimax:Number = 1;
-				if (game.player.kitsuneScore() >= 5 && game.player.tailVenom >= 2 && game.player.tailVenom < 9) multimax += 0.2;
-				if (game.player.kitsuneScore() >= 12 && game.player.tailVenom == 9) multimax += 0.4;
+				if (game.player.kitsuneScore() >= 5 && game.player.tailCount >= 2 && game.player.tailCount < 9) multimax += 0.2;
+				if (game.player.kitsuneScore() >= 12 && game.player.tailCount == 9) multimax += 0.4;
 				if (findPerk(PerkLib.HistoryCultivator) >= 0 || findPerk(PerkLib.PastLifeCultivator) >= 0) multimax += 0.1;
 				if (findPerk(PerkLib.JobMunchkin) >= 0) multimax += 0.1;
 				if (findPerk(PerkLib.Dantain) >= 0) {
@@ -1060,9 +1089,9 @@ import classes.GlobalFlags.kFLAGS;
 					if (findPerk(PerkLib.SoulSprite) >= 0) multimax += 0.15;
 					if (findPerk(PerkLib.SoulExalt) >= 0) multimax += 0.15;
 					if (findPerk(PerkLib.SoulOverlord) >= 0) multimax += 0.15;
-					if (findPerk(PerkLib.SoulTyrant) >= 0) multimax += 0.15;
-					if (findPerk(PerkLib.SoulKing) >= 0) multimax += 0.15;
-					if (findPerk(PerkLib.SoulEmperor) >= 0) multimax += 0.15;
+					if (findPerk(PerkLib.SoulTyrant) >= 0) multimax += 0.2;
+					if (findPerk(PerkLib.SoulKing) >= 0) multimax += 0.2;
+					if (findPerk(PerkLib.SoulEmperor) >= 0) multimax += 0.2;
 				}
 				if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) multimax += 0.1;
 				if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) multimax += 0.15;
@@ -1071,8 +1100,21 @@ import classes.GlobalFlags.kFLAGS;
 				max *= multimax;
 			}
 			max = Math.round(max);
-			if (max > 14999) max = 14999;
+			if (max > 79999) max = 79999;
 			return max;
+		}
+		
+		public function maxVenom():Number
+		{
+			var maxven:Number = 0;
+			if (game.player.faceType == FACE_SNAKE_FANGS) maxven += 100;
+			if (game.player.faceType == FACE_SPIDER_FANGS) maxven += 100;
+			if (game.player.tailType == TAIL_TYPE_BEE_ABDOMEN) maxven += 150;
+			if (game.player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) maxven += 150;
+			if (game.player.tailType == TAIL_TYPE_SCORPION) maxven += 150;
+			if (game.player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) maxven += 200;
+			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) maxven *= 2;
+			return maxven;
 		}
 		
 		public function maxHunger():Number
@@ -1098,22 +1140,22 @@ import classes.GlobalFlags.kFLAGS;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 19) max += 25;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 20) max += 25;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 21) max += 25;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 22) max += 25;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 23) max += 25;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 24) max += 25;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 25) max += 25;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 26) max += 25;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 27) max += 25;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 28) max += 25;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 29) max += 25;
-			if (flags[kFLAGS.SOUL_CULTIVATION] >= 30) max += 25;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 22) max += 30;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 23) max += 30;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 24) max += 30;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 25) max += 30;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 26) max += 30;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 27) max += 30;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 28) max += 30;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 29) max += 30;
+			if (flags[kFLAGS.SOUL_CULTIVATION] >= 30) max += 30;
 			if (findPerk(PerkLib.EzekielBlessing) >= 0) max += 50;
 			// (findPerk(PerkLib.) >= 0 && game.player.humanScore() < 5) max += 100;
 			// jak bedzie mieć chimeryczna nature to kolejny boost to max hunger moze...150 lub nawet 200 ^^
 			// (findPerk(PerkLib.xxxx) >= 0) max += xxx;	Iron Stomach perk chyba tutaj
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) max += 20;
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) max += 30;
-			if (max > 999) max = 999;//obecnie max to 850
+			if (max > 999) max = 999;//obecnie max to 895
 			return max;
 		}
 		

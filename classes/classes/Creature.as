@@ -136,6 +136,7 @@ package classes
 		public var tou:Number = 0;
 		public var spe:Number = 0;
 		public var inte:Number = 0;
+		public var wis:Number = 0;
 		public var lib:Number = 0;
 		public var sens:Number = 0;
 		public var cor:Number = 0;
@@ -322,6 +323,7 @@ package classes
 		16 - mousetail*/
 		public var tailType:Number = TAIL_TYPE_NONE;
 		
+		public var tailCount:Number = 0;
 		//Tail venom is a 0-100 slider used for tail attacks. Recharges per hour.
 		public var tailVenom:Number = 0;
 		//Tail recharge determines how fast venom/webs comes back per hour.
@@ -429,13 +431,13 @@ package classes
 				"tallness", "hipRating", "buttRating", "lowerBody", "armType",
 				"skinType", "hairLength", "hairType",
 				"faceType", "earType", "tongueType", "eyeType",
-				"str", "tou", "spe", "inte", "lib", "sens", "cor",
+				"str", "tou", "spe", "inte", "wis", "lib", "sens", "cor",
 				// Allow weaponAttack to be negative as a penalty to strength-calculated damage
 				// Same with armorDef, bonusHP, additionalXP
 				"weaponValue", "armorValue",
 				"lust", "fatigue",
 				"level", "gems",
-				"tailVenom", "tailRecharge", "horns",
+				"tailCount", "tailVenom", "tailRecharge", "horns",
 				"HP", "XP"
 			]);
 			// 2.2. non-empty String fields
@@ -469,7 +471,7 @@ package classes
 			}
 			// 4.3. tail
 			if (tailType == TAIL_TYPE_NONE) {
-				if (tailVenom != 0) error += "No tail but tailVenom = "+tailVenom+". ";
+				if (tailCount != 0) error += "No tail but tailCount = "+tailCount+". ";
 			}
 			// 4.4. horns
 			if (hornType == HORNS_NONE){
@@ -1895,6 +1897,10 @@ package classes
 			return countCocksOfType(CockTypesEnum.TENTACLE);
 		}
 		
+		public function stamenCocks():int { //How many stamencocks?
+			return countCocksOfType(CockTypesEnum.STAMEN);
+		}
+		
 		public function findFirstCockType(ctype:CockTypesEnum):Number
 		{
 			var index:Number = 0;
@@ -2044,11 +2050,29 @@ package classes
 		}
 		
 		//PC can swim underwater?
-/*		public function canSwimUnderwater():Boolean
+		public function canSwimUnderwater():Boolean
 		{
-			return _gi
-		}//bdzie sprawdzać czy PC ma odpowiedni typ skrzeli
-*/		
+			if (gillType != GILLS_NONE)
+				return true;	//dodać jeszcze trzeba bdzie tu efekt of itemów i inne opcje dające oddych. pod wodą
+			return false;
+		}
+		
+		//Artifacts Bows
+		public function isArtifactBow():Boolean
+		{
+			if (game.player.weaponRange == game.weaponsrange.BOWGUID)
+				return true;
+			return false;
+		}
+		
+		//Fists and fist weapons
+		public function isFistOrFistWeapon():Boolean
+		{
+			if (game.player.weaponName == "fists" || game.player.weapon == game.weapons.S_GAUNT)
+				return true;
+			return false;
+		}
+		
 		//check for vagoo
 		public function hasVagina():Boolean
 		{

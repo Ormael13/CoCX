@@ -132,6 +132,7 @@
 			this.wingType = WING_TYPE_HARPY;
 			this.special1 = harpyUberCharge;
 			this.special2 = harpyTease;
+			this.createStatusAffect(StatusAffects.Flying,50,0,0,0);
 			this.str += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

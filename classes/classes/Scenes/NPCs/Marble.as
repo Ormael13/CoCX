@@ -112,6 +112,7 @@
 			this.tailType = TAIL_TYPE_COW;
 			this.special1 = marbleSpecialAttackOne;
 			this.special2 = marbleSpecialAttackTwo;
+			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.str += 17 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

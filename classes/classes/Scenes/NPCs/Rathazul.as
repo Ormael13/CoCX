@@ -133,8 +133,11 @@ public function campRathazul():void {
 	//Rat is definitely not sexy!
 	if(player.lust > 30) dynStats("lus", -1);
 	if(player.lust > 50) dynStats("lus", -5);
-	if(player.lust > 80) dynStats("lus", -10);
-	if(player.lust > 150) dynStats("lus", -15);
+	if(player.lust > 100) dynStats("lus", -5);
+	if(player.lust > 150) dynStats("lus", -5);
+	if(player.lust > 200) dynStats("lus", -5);
+	if(player.lust > 300) dynStats("lus", -5);
+	if(player.lust > 400) dynStats("lus", -5);
 	//Introduction
 	outputText(images.showImage("rathazul-camp"));
 	outputText("Rathazul looks up from his equipment and gives you an uncertain smile.\n\n\"<i>Oh, don't mind me,</i>\" he says, \"<i>I'm just running some tests here.  Was there something you needed, " + player.short + "?</i>\"\n\n");
@@ -933,12 +936,17 @@ private function craftEbonbloomArmor():void {
 	addButton(8, "R.Thong", craftEbonbloomArmorForReal, 11, null, null, undergarments.R_THONG.description);
 	addButton(10, "Vest", craftEbonbloomArmorForReal, 13, null, null, undergarments.EW_VEST.description);
 	addButton(11, "Corset", craftEbonbloomArmorForReal, 12, null, null, undergarments.EW_CORS.description);
+	if (player.hasItem(useables.EBONBLO, 10) && player.hasItem(armors.H_GARB_, 1) && player.hasKeyItem("Dark Mage’s Grimoire") >= 0) addButton(12, "H. Garb", craftEbonbloomArmorForReal, 20, null, null, armors.EHGARB_.description);
 	addButton(14, "Nevermind", rathazulArmorMenu);
 }
 private function craftEbonbloomArmorForReal(type:int = 0):void {
 	spriteSelect(49);
-	if (type == 16 || type == 17 || type == 18 || type == 19) { //Armor or robes
-		player.destroyItems(useables.EBONBLO, 8);
+	if (type == 16 || type == 17 || type == 18 || type == 19 || type == 20) { //Armor or robes
+		if (type == 20) {
+			player.destroyItems(armors.H_GARB_, 1);
+			player.destroyItems(useables.EBONBLO, 10);
+		}
+		else player.destroyItems(useables.EBONBLO, 8);
 	}
 	else { //Undergarments
 		player.destroyItems(useables.EBONBLO, 3);
@@ -1009,6 +1017,13 @@ private function craftEbonbloomArmorForReal(type:int = 0):void {
 			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging on the rack is a long, flowing robe. The dark grey cloth ripples in the wind, but strangely it shines in the light as metal would. Upon closer inspection, you realize that the robe is more of a longcoat, meant to display your chest and groin. You run your fingers over the dark grey garment, feeling the soft (yet slightly slick) material give at your touch. There’s a hood around the edge. For now, it hangs limply down the back, but it would be easy to pull up in order to shield the wearer’s eyes from harsh sunlight or rainy drizzle.  ");
 			outputText("Moving your hands through it, you find a layer of ebonweave straps lining the inside, likely to keep the front of the robe open and preventing this from disrupting the balance of the wearer. The straps are so subtle that you doubt you will notice them while wearing the robe. Beyond the physical, you can feel magical power flow through this robe. This untapped power should be quite helpful when casting magic.  You thank the rat and collect your new robe.");
 			itype = armors.INDEEWR;
+			break;
+		case 20: //Heretic‘s Garb
+			outputText(images.showImage("rathazul-craft-ebonweavehereticsgarb"));
+			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nLaid out on a workbench is a duster next to a breastplate. Both items are a greasy, dark grey color. Nearby there is a similarly colored hat, shirt and a pair of pants on a small rack. As you approach the workbench, you notice that the surface of the  leather appears to have an oily texture. The duster on your left has a much more natural texture to it than the breastplate on your right.  It is leather, that much your are certain, and yet it shouldn’t be.  ");
+			outputText("Perhaps Rathazul bonded the ebonbloom onto a normal duster, altering the leather’s properties? As you look closer, you can see runes running across the inside of the duster.  Wards of protection, runes of magical power. The item on your right is much stranger. It feels like metal, yet is spongy and bends slightly under your fingers, only to fill back up when your remove your hand. You spot a knife nearby, amongst Rathazul’s tools and oddities dotting his workbench, you take it and experimentally try to cut the breastplate. Unexpectedly, you cannot seem to do any damage, after a few increasingly vigorous attempts you see no damage done to the breastplate. ");
+			outputText("Yes, this will do. Examining the hat and clothes on the rack, you notice the material has the same ebony color and oily texture as the other articles. Adorning the hat is a strange pin, silvery and shaped like the crescent moon. You thank the rat and collect your new armor.");
+			itype = armors.EHGARB_;
 			break;
 		default:
 			outputText("Something bugged! Please report this bug to Ormael.");

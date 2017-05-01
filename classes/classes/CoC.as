@@ -444,8 +444,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8c2";
-			version = ver + " (<b>Bugfixs and 4 new perks.</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8d";
+			version = ver + " (<b></b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

@@ -56,7 +56,7 @@ public function approachIfris():void {
 private function workOutForIfris():void {
 	spriteSelect(28);
 	clearOutput();
-	if(player.fatigue > 70) {
+	if(player.fatigue > player.maxFatigue() - 30) {
 		outputText("There's no way you could work out as tired as you are.  Maybe you could come back to flirt with the demonic-looking girl during your next workout.", false);
 		doNext(telAdre.gymDesc);
 		return;
@@ -73,7 +73,7 @@ private function workOutForIfris():void {
 private function askIfrisToJoinYou():void {
 	spriteSelect(28);
 	clearOutput();
-	if(player.fatigue > 70) {
+	if(player.fatigue > player.maxFatigue() - 30) {
 		outputText("There's no way you could work out as tired as you are.  Maybe you could come back to flirt with the demonic-looking girl during your next workout.", false);
 		doNext(telAdre.gymDesc);
 		return;

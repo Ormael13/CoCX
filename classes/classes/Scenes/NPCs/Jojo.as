@@ -122,6 +122,7 @@
 				this.long = "Jojo is an anthropomorphic mouse with immaculate white fur.  Though he stands only four feet tall, he is covered in lean muscle and moves with incredible speed.  He's naked, with a large tainted throbbing member bouncing at attention.  A fuzzy sack with painfully large looking balls dangles between his legs.";
 			}
 			this.drop = NO_DROP;
+			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.str += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

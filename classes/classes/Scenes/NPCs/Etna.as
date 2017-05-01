@@ -168,6 +168,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.ETNA_FOLLOWER] > 1 || flags[kFLAGS.ETNA_TALKED_ABOUT_HER] > 1) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.str += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 72 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

@@ -230,7 +230,7 @@ public function startUrtaQuest():void {
 	player.earType = EARS_FOX;
 	player.faceType = FACE_FOX;
 	player.tailType = TAIL_TYPE_FOX;
-	player.tailVenom = 1;
+	player.tailCount = 1;
 	player.createCock();
 	player.cocks[0].cockType = CockTypesEnum.HORSE;
 	player.cocks[0].cockLength = 20;
@@ -284,7 +284,7 @@ public function startUrtaQuest():void {
 	player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
 	player.createPerk(PerkLib.JobWarrior,0,0,0,0);
 	player.createPerk(PerkLib.JobBarbarian,0,0,0,0);
-	player.createPerk(PerkLib.JobMunchkin,0,0,0,0);
+	player.createPerk(PerkLib.JobAllRounder,0,0,0,0);
 	player.createPerk(PerkLib.HiddenMomentum,0,0,0,0);
 	player.createPerk(PerkLib.HoldWithBothHands,0,0,0,0);
 	player.createPerk(PerkLib.ColdFury,0,0,0,0);

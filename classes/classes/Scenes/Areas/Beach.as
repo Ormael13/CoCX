@@ -10,7 +10,7 @@ package classes.Scenes.Areas
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.Beach.*;
-	import classes.Scenes.NPCs.CeaniScene
+	import classes.Scenes.NPCs.CeaniScene;
 	import classes.Scenes.NPCs.CaiLin;
 	import classes.Scenes.NPCs.Etna;
 	import classes.Scenes.NPCs.EtnaFollower;
@@ -47,7 +47,8 @@ package classes.Scenes.Areas
 			//Build choice list!
 		//	choice[choice.length] = 0;	//Stronger oasis demons pack
 			choice[choice.length] = 0;	//Gorgon
-			if (rand(4) == 0) choice[choice.length] = 1;	 //Find nothing! The rand will be removed from this once the Beach is populated with more encounters.
+			if (rand(2) == 0) choice[choice.length] = 1;	//Orca TF
+			if (rand(4) == 0) choice[choice.length] = 2;	//Find nothing! The rand will be removed from this once the Beach is populated with more encounters.
 			
 			//Finding Sea Boat
 			if ((flags[kFLAGS.DISCOVERED_BEACH] >= 10) && flags[kFLAGS.DISCOVERED_OCEAN] <= 0 && rand(3) == 0) {
@@ -73,6 +74,10 @@ package classes.Scenes.Areas
 					return;
 				}
 			}
+			if (flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 4) {	//(model.time.hours >= 6 && model.time.hours <= 11) && 
+				ceaniScene.beachInteractionsAfterArcheryTraining();
+				return;
+			}
 			
 			select = choice[rand(choice.length)];
 			switch(select) {
@@ -87,6 +92,10 @@ package classes.Scenes.Areas
 						flags[kFLAGS.CAILIN_LVL_UP] = 0;
 					}
 					gorgonScene.gorgonEncounter();
+					break;
+				case 1:
+					outputText("As you walk on the beach you find a weird black bottle with a white line and a cap. You pick it up and read the tag. It claims to be 'Orca sunscreen'. ", true)
+					inventory.takeItem(consumables.ORCASUN, camp.returnToCampUseOneHour);
 					break;
 				default:
 					outputText("You walk through the sunny beach for an hour, finding nothing.\n\n", true);

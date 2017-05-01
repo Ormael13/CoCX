@@ -93,7 +93,7 @@ package classes.Scenes.Areas
 					}
 				}
 			}
-			if (kGAMECLASS.dungeons.checkPhoenixTowerClear() && rand(4) == 0) {
+			if (flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0 && rand(4) == 0) {
 				phoenixScene.encounterPhoenix1();
 				return;
 			}

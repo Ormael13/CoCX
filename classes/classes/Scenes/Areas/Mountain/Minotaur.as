@@ -101,6 +101,7 @@
 			}
 			this.special1 = game.mountain.minotaurScene.minoPheromones;
 			this.tailType = TAIL_TYPE_COW;
+			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.str += (hasAxe ? 20 : 15) * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 7 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

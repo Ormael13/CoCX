@@ -424,7 +424,7 @@
 			if (player.tailType != 0)
 			{
 				outputText(" your tail");
-				if (player.tailType == 13 && player.tailVenom > 1) outputText("s");
+				if (player.tailType == 13 && player.tailCount > 1) outputText("s");
 			}
 			else outputText(" your stubby, new tail");
 			outputText(" wagging.");

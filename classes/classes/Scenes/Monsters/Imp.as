@@ -83,6 +83,47 @@
 			else doNext(game.playerMenu);
 		}
 		
+		protected function lustMagicAttack1():void {
+			outputText("You see " + a + short + " make sudden arcane gestures at you!\n\n");
+			game.dynStats("lus", player.lib / 20 + player.cor / 20 + 5);
+			if (player.lust < (player.maxLust() * 0.3)) outputText("You feel strangely warm.  ");
+			if (player.lust >= (player.maxLust() * 0.3) && player.lust < (player.maxLust() * 0.6)) outputText("Blood rushes to your groin as a surge of arousal hits you, making your knees weak.  ");
+			if (player.lust >= (player.maxLust() * 0.6)) outputText("Images of yourself fellating and fucking the imp assault your mind, unnaturally arousing you.  ");
+			if (player.cocks.length > 0) {
+				if (player.lust >= (player.maxLust() * 0.6))
+					outputText("You feel your " + player.multiCockDescriptLight() + " dribble pre-cum.");
+				else if (player.lust >= (player.maxLust() * 0.3) && player.cocks.length == 1)
+					outputText("Your " + player.cockDescript(0) + " hardens, distracting you further.");
+				else if (player.lust >= (player.maxLust() * 0.3) && player.cocks.length > 1)
+					outputText("Your " + player.multiCockDescriptLight() + " harden uncomfortably.");
+				if (player.hasVagina()) outputText("  ");
+			}
+			if (player.lust >= (player.maxLust() * 0.6) && player.hasVagina()) {
+				switch (player.vaginas[0].vaginalWetness) {
+					case VAGINA_WETNESS_NORMAL:
+						outputText("Your " + game.allVaginaDescript() + " dampen" + (player.vaginas.length > 1 ? "" : "s") + " perceptibly.");
+						break;
+					case VAGINA_WETNESS_WET:
+						outputText("Your crotch becomes sticky with girl-lust.");
+						break;
+					case VAGINA_WETNESS_SLICK:
+						outputText("Your " + game.allVaginaDescript() + " become" + (player.vaginas.length > 1 ? "" : "s") + " sloppy and wet.");
+						break;
+					case VAGINA_WETNESS_DROOLING:
+						outputText("Thick runners of girl-lube stream down the insides of your thighs.");
+						break;
+					case VAGINA_WETNESS_SLAVERING:
+						outputText("Your " + game.allVaginaDescript() + " instantly soak" + (player.vaginas.length > 1 ? "" : "s") + " your groin.");
+					default: //Dry vaginas are unaffected
+						
+				}
+			}
+			outputText("\n");
+			if (player.lust >= player.maxLust())
+				doNext(game.endLustLoss);
+			else doNext(game.playerMenu);
+		}
+		
 		public function Imp(noInit:Boolean=false)
 		{
 			if (noInit) return;
@@ -120,7 +161,7 @@
 					add(consumables.SUCMILK,3).
 					add(consumables.INCUBID,3).
 					add(consumables.IMPFOOD,4);
-			this.special1 = lustMagicAttack;
+			this.special1 = lustMagicAttack1;
 			this.wingType = WING_TYPE_IMP;
 			this.str += 4 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

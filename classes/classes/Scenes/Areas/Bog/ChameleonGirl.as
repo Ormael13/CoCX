@@ -156,6 +156,7 @@ package classes.Scenes.Areas.Bog
 			this.level = 28;
 			this.gems = 50 + rand(60);
 			this.drop = NO_DROP;
+			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.str += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 31 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

@@ -189,6 +189,7 @@
 			if (findPerk(PerkLib.RefinedBodyI) >= 0) temp += (50 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.TankI) >= 0) temp += ((this.tou*3) * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.JobGuardian) >= 0) temp += 30;
+			if (findPerk(PerkLib.JobMunchkin) >= 0) temp += 150;
 			if (findPerk(PerkLib.BodyCultivator) >= 0) temp += (25 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.FleshBodyApprenticeStage) >= 0) {
 				if (findPerk(PerkLib.SoulApprentice) >= 0) temp += (50 * (1 + player.newGamePlusMod()));
@@ -243,6 +244,7 @@
 			if (findPerk(PerkLib.PeerlessSelfControl) >= 0) temp += 500;
 			if (findPerk(PerkLib.InhumanDesireI) >= 0) temp += (20 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.DemonicDesireI) >= 0) temp += Math.round(this.lib * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.JobMunchkin) >= 0) temp += 50;
 			if (findPerk(PerkLib.JobSeducer) >= 0) temp += 10;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (50 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (75 * (1 + player.newGamePlusMod()));
@@ -269,17 +271,34 @@
 			if (findPerk(PerkLib.NaturesSpringI) >= 0) temp += (20 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.ManaAffinityI) >= 0) temp += (35 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.MindOverBodyI) >= 0) temp += Math.round((this.inte*2) * (1 + player.newGamePlusMod()));
+			if (findPerk(PerkLib.Archmage) >= 0 && inte >= 75) temp += 45;
+			if (findPerk(PerkLib.Channeling) >= 0 && inte >= 60) temp += 30;
+			if (findPerk(PerkLib.GrandArchmage) >= 0 && inte >= 100) temp += 60;
 			if (findPerk(PerkLib.GreyArchmage) >= 0 && inte >= 125) temp += 150;
 			if (findPerk(PerkLib.GreyMage) >= 0 && inte >= 125) temp += 105;
 			if (findPerk(PerkLib.Mage) >= 0 && inte >= 50) temp += 30;
-			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) temp += 30;
-			if (findPerk(PerkLib.JobArcaneArcher) >= 0) temp += 50;
+			if (findPerk(PerkLib.Spellpower) >= 0 && inte >= 50) temp += 15;
+			if (findPerk(PerkLib.JobHunter) >= 0) temp += 50;
 			if (findPerk(PerkLib.JobMunchkin) >= 0) temp += 100;
 			if (findPerk(PerkLib.JobRanger) >= 0) temp += 5;
-			if (findPerk(PerkLib.JobSoulArcher) >= 0) temp += 100;
 			if (findPerk(PerkLib.JobSorcerer) >= 0) temp += 15;
+			if (findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0) temp += 600;
+			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) temp += 150;
+			if (findPerk(PerkLib.PrestigeJobSeer) >= 0) temp += 900;
 			if (findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) temp += (100 * (1 + player.newGamePlusMod()));
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) temp += (150 * (1 + player.newGamePlusMod()));
+			return temp;
+		}
+		
+		public function eMaxSoulforce():Number
+		{
+			//Base soulforce
+			var temp:Number = 50;
+			if (findPerk(PerkLib.JobSoulCultivator) >= 0) {
+				if (this.level >= 2) temp += 25;
+				if (this.level >= 4) temp += 25;
+			}
+			if (findPerk(PerkLib.JobMunchkin) >= 0) temp *= 1.1;
 			return temp;
 		}
 
@@ -553,6 +572,7 @@
 
 			//// 16. Tail
 			///*OPTIONAL*/ //this.tailType = TAIL_TYPE_; // default NONE
+			///*OPTIONAL*/ //this.tailCount = ; // default 0
 			///*OPTIONAL*/ //this.tailVenom = ; // default 0
 			///*OPTIONAL*/ //this.tailRecharge = ; // default 5
 
@@ -1039,10 +1059,7 @@
 			else addStatusValue(StatusAffects.Stunned, 1, -1);
 			if (findStatusAffect(StatusAffects.InkBlind) >= 0) game.outputText("Your foe is busy trying to remove the ink and therefore does no other action then flay its hand about its face.", false);
 			else if (findStatusAffect(StatusAffects.FreezingBreathStun) >= 0) game.outputText("Your foe is too busy trying to break out of his icy prison to fight back.", false);
-			else if (findStatusAffect(StatusAffects.MonsterAttacksDisabled) >= 0) {
-			if (plural) game.outputText(capitalA + short + " trying to hit you but are unable to reach you!", false);
-			else game.outputText(capitalA + short + " try to hit you but is unable to reach you!", false);
-			}
+			else if (findStatusAffect(StatusAffects.MonsterAttacksDisabled) >= 0) game.outputText(capitalA + short + " try to hit you but is unable to reach you!", false);
 			else {
 			if (plural) game.outputText("Your foes are too dazed from your last hit to strike back!", false);
 			else game.outputText("Your foe is too dazed from your last hit to strike back!", false);
@@ -1226,7 +1243,7 @@
 					+(Appearance.DEFAULT_EYES_NAMES[eyeType]||("eyeType#"+eyeType))+" eyes.\n";
 			result += Hehas;
 			if (tailType == TAIL_TYPE_NONE) result += "no tail, ";
-			else result+=(Appearance.DEFAULT_TAIL_NAMES[tailType]||("tailType#"+tailType))+" tail with venom="+tailVenom+" and recharge="+tailRecharge+", ";
+			else result+=(Appearance.DEFAULT_TAIL_NAMES[tailType]||("tailType#"+tailType))+" "+tailCount+" tails with venom="+tailVenom+" and recharge="+tailRecharge+", ";
 			if (hornType == HORNS_NONE) result += "no horns, ";
 			else result += horns+" "+(Appearance.DEFAULT_HORNS_NAMES[hornType]||("hornType#"+hornType))+" horns, ";
 			if (wingType == WING_TYPE_NONE) result += "no wings, ";
@@ -1279,7 +1296,7 @@
 			result += Pronoun1 + " can " + weaponVerb + " you with  " + weaponPerk + " " + weaponName+" (attack " + weaponAttack + ", value " + weaponValue+").\n";
 			result += Pronoun1 + " is guarded with " + armorPerk + " " + armorName+" (defense " + armorDef + ", value " + armorValue+").\n";
 			result += Hehas + HP + "/" + eMaxHP() + " HP, " + lust + "/" + eMaxLust() + " lust, " + fatigue + "/" + eMaxFatigue() + " fatigue. " + Pronoun3 + " bonus HP=" + bonusHP + ", bonus lust=" + bonusLust + ", and lust vulnerability=" + lustVuln + ".\n";
-			result += Heis + "level " + level + " and " + have+" " + gems + " gems. You will be awarded " + XP + " XP.\n";
+			result += Heis + "level " + level + " and " + have+" " + gems + " gems. You will be awarded " + XP + " XP.\n";		//, " + soulforce + "/" + eMaxSoulforce() + " soulforce
 			
 			var numSpec:int = (special1 != null ? 1 : 0) + (special2 != null ? 1 : 0) + (special3 != null ? 1 : 0);
 			if (numSpec > 0) {
@@ -1545,7 +1562,7 @@
 				}
 			}
 			//regeneration perks for monsters
-			if ((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0
+			if ((findPerk(PerkLib.Regeneration) >= 0 || findPerk(PerkLib.LizanRegeneration) >= 0 || findPerk(PerkLib.LizanMarrow) >= 0 || findPerk(PerkLib.EnemyGodType) >= 0 || findPerk(PerkLib.BodyCultivator) >= 0
 			|| findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0 || findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) && (this.HP < eMaxHP()) && (this.HP > 0)) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;

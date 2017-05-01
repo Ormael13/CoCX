@@ -1180,6 +1180,7 @@ package classes.Scenes.Dungeons
 			if(player.tailType > TAIL_TYPE_NONE) {
 				outputText("  A moment later, your feel something detach from above your backside.  <b>You no longer have a tail!</b>", false);
 				player.tailType = TAIL_TYPE_NONE;
+				player.tailCount = 0;
 				player.tailVenom = 0;
 				player.tailRecharge = 5;
 			}

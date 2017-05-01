@@ -277,9 +277,12 @@ package classes
 		//metamorph
 		public static const UnlockedFur:StatusAffectType = mk("Unlocked Fur");//użyć fox fur lub inne skin tf scene text
 		public static const UnlockedScales:StatusAffectType = mk("Unlocked Scales");
+		public static const UnlockedChitin:StatusAffectType = mk("Unlocked Chitin");
+	//	public static const Unlocked:StatusAffectType = mk("Unlocked ");//pozostałe typy skóry tutaj a także partial skin types
 	//	public static const Unlocked:StatusAffectType = mk("Unlocked ");//pozostałe typy skóry tutaj a także partial skin types
 	//	public static const Unlocked:StatusAffectType = mk("Unlocked ");//pozostałe typy skóry tutaj a także partial skin types
 		public static const UnlockedTattoed:StatusAffectType = mk("Unlocked Tattoed");
+		public static const UnlockedFishGills:StatusAffectType = mk("Unlocked Fish Gills");
 		
 		public static const UnlockedFoxLowerBody:StatusAffectType = mk("Unlocked Fox Lower Body");
 		public static const UnlockedFoxArms:StatusAffectType = mk("Unlocked Fox Arms");
@@ -318,11 +321,26 @@ package classes
 		public static const UnlockedHarpyArms:StatusAffectType = mk("Unlocked Harpy Arms");
 		public static const UnlockedHarpyHair:StatusAffectType = mk("Unlocked Harpy Hair");
 		public static const UnlockedHarpyWings:StatusAffectType = mk("Unlocked Harpy Wings");
-	//	public static const UnlockedSpider:StatusAffectType = mk("Unlocked Spider ");
-	//	public static const UnlockedSpider:StatusAffectType = mk("Unlocked Spider ");
-	//	public static const UnlockedSpider:StatusAffectType = mk("Unlocked Spider ");
+		public static const UnlockedElfinEars:StatusAffectType = mk("Unlocked Elfin Ears");
+		public static const UnlockedSpiderFourEyes:StatusAffectType = mk("Unlocked Spider Four Eyes");
+		public static const UnlockedSpiderFangs:StatusAffectType = mk("Unlocked Spider Fangs");
+		public static const UnlockedSpiderArms:StatusAffectType = mk("Unlocked Spider Arms");
+		public static const UnlockedSpiderLegs:StatusAffectType = mk("Unlocked Spider Legs");
+		public static const UnlockedSpiderTail:StatusAffectType = mk("Unlocked Spider Tail");
+		public static const UnlockedDriderLegs:StatusAffectType = mk("Unlocked Drider Legs");
+		public static const UnlockedSharkTeeth:StatusAffectType = mk("Unlocked Shark Teeth");
+		public static const UnlockedSharkTail:StatusAffectType = mk("Unlocked Shark Tail");
+		public static const UnlockedSharkLegs:StatusAffectType = mk("Unlocked Shark Legs");
+		public static const UnlockedSharkArms:StatusAffectType = mk("Unlocked Shark Arms");
+		public static const UnlockedSharkFin:StatusAffectType = mk("Unlocked Shark Fin");
+	//	public static const UnlockedGoo:StatusAffectType = mk("Unlocked Goo ");
+	//	public static const UnlockedGoo:StatusAffectType = mk("Unlocked Goo ");
+	//	public static const UnlockedGoo:StatusAffectType = mk("Unlocked Goo ");
+	//	public static const UnlockedGoo:StatusAffectType = mk("Unlocked Goo ");
 		public static const UnlockedDraconicX2:StatusAffectType = mk("Unlocked Draconic Horns");
 		public static const UnlockedDraconicX4:StatusAffectType = mk("Unlocked Draconic Horns (2nd pair)");
+	//	public static const Unlocked:StatusAffectType = mk("Unlocked ");
+	//	public static const Unlocked:StatusAffectType = mk("Unlocked ");
 	//	public static const Unlocked:StatusAffectType = mk("Unlocked ");
 	//	public static const Unlocked:StatusAffectType = mk("Unlocked ");
 	//	public static const Unlocked:StatusAffectType = mk("Unlocked ");
@@ -401,6 +419,7 @@ package classes
 		public static const Titsmother:CombatStatusAffect = mk2("Titsmother");
 		public static const TwuWuv:CombatStatusAffect = mk2("Twu Wuv");
 		public static const UBERWEB:CombatStatusAffect = mk2("UBERWEB");
+		public static const UnderwaterCombatBoost:CombatStatusAffect = mk2("UnderwaterCombatBoost");
 		public static const VioletPupilTransformation:CombatStatusAffect = mk2("Violet Pupil Transformation");
 		public static const Web:CombatStatusAffect = mk2("Web");
 		public static const WebSilence:CombatStatusAffect = mk2("Web-Silence");
@@ -413,8 +432,10 @@ package classes
 		public static const CooldownFreezingBreathYeti:StatusAffectType = mk("Cooldown Freezing Breath (Y)");
 		public static const CooldownIllusion:StatusAffectType = mk2("Cooldown Illusion");
 		public static const CooldownInkSpray:StatusAffectType = mk("Cooldown Ink Spray");
+		public static const CooldownPhoenixFireBreath:StatusAffectType = mk("Cooldown Phoenix Fire Breath");
 		public static const CooldownStoneClaw:StatusAffectType = mk("Cooldown Stone Claw");
 		public static const CooldownTailSlam:StatusAffectType = mk("Cooldown Tail Slam");
+		public static const CooldownTailSmack:StatusAffectType = mk("Cooldown Tail Smack");
 		public static const CooldownTerror:StatusAffectType = mk2("Cooldown Terror");
 		public static const CooldownWingBuffet:StatusAffectType = mk2("Cooldown Wing Buffet");
 		

@@ -1,6 +1,6 @@
 /**
  * ...
- * @author Ormael
+ * @author Zavos
  */
 package classes.Perks 
 {

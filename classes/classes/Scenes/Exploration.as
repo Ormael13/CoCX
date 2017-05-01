@@ -16,6 +16,7 @@ package classes.Scenes
 	import classes.Scenes.Areas.Ocean.*;
 	import classes.Scenes.Dungeons.HiddenCave;
 	import classes.Scenes.NPCs.EvangelineFollower;
+	import classes.Scenes.NPCs.RyuBiDragon;
 	import classes.Scenes.Places.HeXinDao;
 	//import classes.Scenes.Areas.nazwa lokacji;
 	//import classes.Scenes.Areas.nazwa lokacji;
@@ -74,8 +75,9 @@ package classes.Scenes
 			if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0) addButton(8, "Swamp", kGAMECLASS.swamp.exploreSwamp, null, null, null, "Visit the wet swamplands. \n\nRecommended level: 18" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_SWAMP] : ""));
 			
 			if (flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0) addButton(10, "Blight Ridge", blightridge.exploreBlightRidge, null, null, null, "Visit the corrupted blight ridge. \n\nRecommended level: 26" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] : ""));
-			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(11, "Glacial Rift", kGAMECLASS.glacialRift.exploreGlacialRift, null, null, null, "Visit the chilly glacial rift. \n\nRecommended level: 30" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] : ""));
-			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) addButton(12, "Volcanic Crag", kGAMECLASS.volcanicCrag.exploreVolcanicCrag, null, null, null, "Visit the infernal volcanic crag. \n\nRecommended level: 30" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] : ""));
+			if (flags[kFLAGS.DISCOVERED_BEACH] > 0) addButton(11, "Beach", beach.exploreBeach, null, null, null, "Visit the sunny beach. \n\nRecommended level: 15" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BEACH] : ""));
+			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(12, "Glacial Rift", kGAMECLASS.glacialRift.exploreGlacialRift, null, null, null, "Visit the chilly glacial rift. \n\nRecommended level: 30" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] : ""));
+			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0) addButton(13, "Volcanic Crag", kGAMECLASS.volcanicCrag.exploreVolcanicCrag, null, null, null, "Visit the infernal volcanic crag. \n\nRecommended level: 30" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] : ""));
 			
 			if (debug) addButton(9, "Debug", exploreDebug.doExploreDebug);
 			addButton(4, "Next", explorePageII);
@@ -87,18 +89,17 @@ package classes.Scenes
 			flags[kFLAGS.EXPLORATION_PAGE] = 2;
 			menu();
 			if (player.findStatusAffect(StatusAffects.ExploredDeepwoods) >= 0) addButton(0, "Deepwoods", kGAMECLASS.forest.exploreDeepwoods, null, null, null, "Visit the dark, bioluminescent deepwoods. \n\nRecommended level: 12" + (debug ? "\n\nTimes explored: " + player.statusAffectv1(StatusAffects.ExploredDeepwoods) : ""));
-			if (flags[kFLAGS.DISCOVERED_BEACH] > 0) addButton(1, "Beach", beach.exploreBeach, null, null, null, "Visit the sunny beach. \n\nRecommended level: 15" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BEACH] : ""));
+			if (flags[kFLAGS.DISCOVERED_OCEAN] > 0) addButton(1, "Ocean", ocean.exploreOcean, null, null, null, "Explore the ocean surface. But beware of... sharks. \n\nRecommended level: 30" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OCEAN] : ""));
+			if (flags[kFLAGS.DISCOVERED_OCEAN] <= 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0) addButtonDisabled(1, "Ocean", "You need to find first some way to sail over the water surface to explore this area.");
 			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(2, "High Mountain", kGAMECLASS.highMountains.exploreHighMountain, null, null, null, "Visit the high mountains where basilisks and harpies are found. \n\nRecommended level: 20" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] : ""));
 			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(3, "Bog", kGAMECLASS.bog.exploreBog, null, null, null, "Visit the dark bog. \n\nRecommended level: 28" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.BOG_EXPLORED] : ""));
 			
 			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(5, "",	//Wuxia related area - ?latająca wyspa?
-			if (flags[kFLAGS.DISCOVERED_OCEAN] > 0) addButton(6, "Ocean", ocean.exploreOcean, null, null, null, "Explore the ocean surface. But beware of... sharks. \n\nRecommended level: 30" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OCEAN] : ""));
-			if (flags[kFLAGS.DISCOVERED_OCEAN] <= 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0) addButtonDisabled(6, "Ocean", "You need to find first some way to sail over the water surface to explore this area.");
+		//	if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.gillType != 0) addButton(6, "Deep Sea", deepsea.exploreDeepSea, null, null, null, "Visit the 'almost virgin' deep sea. But beware of... scyllas and krakens. \n\nRecommended level: 50" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
+		//	if (player.gillType == 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0) addButtonDisabled(6, "Deep Sea", "(Not yet ready to be unlockable - it wil happen after few more mod builds after 0.7c) Without any way to breathe underwater you can't explore this area!");
 			//if (flags[kFLAGS.DISCOVERED_PIT] > 0) addButton(7, "Pit", kGAMECLASS.abyss.explorePit, null, null, null, "Visit the pit. \n\nRecommended level: 36" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_PIT] : ""));
 			
 			//if (flags[kFLAGS.DISCOVERED_] > 0) addButton(10, "",	//Wuxia related area - ?latająca wyspa?
-			if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.gillType != 0) addButton(11, "Deep Sea", deepsea.exploreDeepSea, null, null, null, "Visit the 'almost virgin' deep sea. But beware of... scyllas and krakens. \n\nRecommended level: 50" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
-			if (player.gillType == 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0) addButtonDisabled(11, "Deep Sea", "(Not yet ready to be unlockable - it wil happen after few more mod builds after 0.7c) Without any way to breathe underwater you can't explore this area!");
 			//if (flags[kFLAGS.DISCOVERED_ABYSS] > 0) addButton(12, "Abyss", kGAMECLASS.abyss.exploreAbyss, null, null, null, "Visit the abyss. \n\nRecommended level: 51" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_ABYSS] : ""));
 			
 			if (debug) addButton(4, "Debug", exploreDebug.doExploreDebug);
@@ -399,22 +400,30 @@ package classes.Scenes
 			// kGAMECLASS.goblinAssassinScene.goblinAssassinEncounter();
 			// return;
 
-			if (flags[kFLAGS.EVANGELINE_AFFECTION] < 1 && rand(3)) {
+			if (flags[kFLAGS.EVANGELINE_AFFECTION] < 1 && rand(3) == 0) {
 				Evangeline.enterTheEvangeline();
 				return;
 			}
-			if (flags[kFLAGS.EVANGELINE_AFFECTION] == 2 && rand(6)) {
+			if (flags[kFLAGS.EVANGELINE_AFFECTION] == 2 && rand(6) == 0) {
 				Evangeline.alternativEvangelineRecruit();
 				return;
 			}
-			if (player.level > 2 && player.hasKeyItem("Sky Poison Pearl") < 0 && flags[kFLAGS.SKY_POISON_PEARL] < 1 && rand(10)) {
+			if (player.level > 2 && player.hasKeyItem("Sky Poison Pearl") < 0 && flags[kFLAGS.SKY_POISON_PEARL] < 1 && rand(10) == 0) {
 				pearldiscovery();
 				return;
 			}
-		//	if (player.level > 5 && flags[kFLAGS.HIDDEN_CAVE_FOUND] < 1 && rand(10)) {
-		//		hiddencavediscovery();
-		//		return;
-		//	}
+			if (player.level > 5 && flags[kFLAGS.HIDDEN_CAVE_FOUND] < 1 && rand(10) == 0) {
+				hiddencavediscovery();
+				return;
+			}
+			if (player.level > 5 && flags[kFLAGS.RYUBI_LVL_UP] < 1 && rand(4) == 0) {
+				ryubifirstenc();
+				return;
+			}
+			if (player.level > 5 && flags[kFLAGS.RYUBI_LVL_UP] >= 1 && rand(4) == 0) {
+				ryubirepenc();
+				return;
+			}
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helFollower.followerHel()) {
 				kGAMECLASS.helScene.helSexualAmbush();
 				return;
@@ -495,6 +504,16 @@ package classes.Scenes
 					doNext(camp.returnToCampUseTwoHours);
 					return;
 				}				
+				//Discover Beach / Ocean/ Deep Sea
+				if (flags[kFLAGS.DISCOVERED_BEACH] <= 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && rand(3) == 0) {
+					flags[kFLAGS.DISCOVERED_BEACH] = 1;
+					player.explored++;
+					clearOutput();
+					outputText("You hear seagulls in the distance and run on the grass to look what is beyond. There is a few dunes of sand with patch of grass that you eagerly cross over as you discover what you hoped to find.", false);
+					outputText("\n\nFinally, after stepping over another dune, in the distance before you a shore of water spreads. Its surely way bigger than the lake you found some time ago. As far as you look to the side you can't see the shores end.  Mesmerized by the view you continue walking towards the ocean until you stand in the shallow water with waves passing by around your waist. Despite the corruption of Mareth this water turns out to be quite clear and who knows, maybe it’s not even that much tainted... yet. But that would probably require submerging deeper to check it out.\n\n<b>You've discovered the Beach, the Ocean and the Deep Sea!</b>", false);
+					doNext(camp.returnToCampUseTwoHours);
+					return;
+				}
 				//Discover Glacial Rift!
 				if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] <= 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && rand(4) <= 0) {
 					flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] = 1;
@@ -606,6 +625,17 @@ package classes.Scenes
 			flags[kFLAGS.HIDDEN_CAVE_FOUND] = 1;
 			outputText("While exploring hills (rest is placeholder atm).\n\n", true);
 			doNext(hiddencave.enterDungeon);
+		}
+		
+		public function ryubifirstenc():void {
+			flags[kFLAGS.RYUBI_LVL_UP] = 1;
+			outputText("While exploring (rest is placeholder atm).\n\n", true);
+			startCombat(new RyuBiDragon());
+		}
+		
+		public function ryubirepenc():void {
+			outputText("While exploring (rest is placeholder atm).\n\n", true);
+			startCombat(new RyuBiDragon());
 		}
 		
 		public function debugOptions():void

@@ -1629,7 +1629,6 @@ package classes.Scenes.NPCs
 								outputText("  The change seems to have shrunken the horns, they're about a foot long now.", false);
 								player.horns = 12;
 							}
-
 						}
 						changes++;
 					}
@@ -1639,7 +1638,6 @@ package classes.Scenes.NPCs
 						outputText("\n\nWith painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns.  They're angled back in such a way as to resemble those you saw on the dragons in your village's legends.  A few inches of horn sprout from your head before stopping.  <b>You have about four inches of dragon-like horn.</b>", false);
 						player.horns = 4;
 						player.hornType = HORNS_DRACONIC_X2;
-
 						changes++;
 					}
 				}
@@ -1672,6 +1670,12 @@ package classes.Scenes.NPCs
 			if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.earType != EARS_DRAGON) {
 				player.earType = EARS_DRAGON;
 				outputText("\n\nA prickling sensation suddenly fills your ears; unpleasant, but hardly painful.  It grows and grows until you can't stand it any more, and reach up to scratch at them.  To your surprise, you find them melting away like overheated candles.  You panic as they fade into nothingness, leaving you momentarily deaf and dazed, stumbling around in confusion.  Then, all of a sudden, hearing returns to you.  Gratefully investigating, you find you now have a pair of reptilian ear-holes, one on either side of your head.  A sudden pain strikes your temples, and you feel bony spikes bursting through the sides of your head, three on either side, which are quickly sheathed in folds of skin to resemble fins.  With a little patience, you begin to adjust these fins just like ears to aid your hearing.  <b>You now have dragon ears!</b>");
+				changes++;
+			}
+			//Gain Dragon Eyes
+			if (player.earType == EARS_DRAGON && player.eyeType != EYES_DRAGON && rand(3) == 0 && changes < changeLimit) {
+				player.eyeType = EYES_DRAGON;
+				outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a dragon.  <b>You now have dragon eyes!</b>.", false);
 				changes++;
 			}
 			//Gain Dragon Tongue
@@ -1732,6 +1736,16 @@ package classes.Scenes.NPCs
 				player.legCount = 2;
 				changes++;
 			}
+			//Arms
+			if (player.armType != ARM_TYPE_DRAGON && player.lowerBody == LOWER_BODY_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
+				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of dragon one with leathery scales and short claws replacing your fingernails.  <b>You now have a dragon arms.</b>", false);
+			//	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && player.findStatusAffect(StatusAffects.UnlockedLizardArms) < 0) {
+			//		outputText("\n\n<b>Genetic Memory: Lizard Arms - Memorized!</b>\n\n");
+			//		player.createStatusAffect(StatusAffects.UnlockedLizardArms, 0, 0, 0, 0);
+			//	}
+				player.armType = ARM_TYPE_DRAGON;
+				changes++;
+			}
 			//Gain Dragon Tail
 			if (player.tailType != TAIL_TYPE_DRACONIC && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
 				//(If no tail)
@@ -1771,11 +1785,6 @@ package classes.Scenes.NPCs
 					player.wingType = WING_TYPE_DRACONIC_HUGE;
 					player.wingDesc = "large, majestic draconic";
 				}
-		//		else if (player.wingType == WING_TYPE_SHARK_FIN) {
-		//			outputText("\n\nA sensation of numbness suddenly fills your fin.  When it does away, it feels... different.  Looking back, you realize that it has been replaced by new, small wings, ones that you can only describe as draconic.  <b>Your shark-like fin has changed into dragon wings.</b>");
-		//			player.wingType = WING_TYPE_DRACONIC_SMALL;
-		//			player.wingDesc = "small, draconic";
-		//		}
 				//(If other wings present)
 				else {
 					outputText("\n\nA sensation of numbness suddenly fills your wings.  When it dies away, they feel... different.  Looking back, you realize that they have been replaced by new, small wings, ones that you can only describe as draconic.  <b>Your wings have changed into dragon wings.</b>");

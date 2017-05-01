@@ -124,14 +124,16 @@ package classes.Scenes.Dungeons
 			if (player.hasItem(consumables.BIMBOCH) && flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 0) {
 				outputText("\n\nSean could probably do something with the Bimbo Champagne if you had enough of it...");
 				if (player.hasItem(consumables.BIMBOCH, 5)) {
-					addButton(4, consumables.BIMBOLQ.shortName, kGAMECLASS.telAdre.niamh.yeahSeanLetsBimbooze);
+					addButton(6, consumables.BIMBOLQ.shortName, kGAMECLASS.telAdre.niamh.yeahSeanLetsBimbooze);
 					outputText("  Luckily, you do!");
 				}
 			}
 			addButton(0, consumables.NUMBROX.shortName, buyItem, 0);
 			addButton(1, consumables.SENSDRF.shortName, buyItem, 1);
 			addButton(2, consumables.REDUCTO.shortName, buyItem, 2);
-			addButton(3, weapons.SUCWHIP.shortName, buyItem, 3);
+			addButton(3, consumables.AGILI_E.shortName, buyItem, 3);
+			addButton(4, consumables.VIXEN_T.shortName, buyItem, 4);
+			addButton(5, weapons.SUCWHIP.shortName, buyItem, 5);
 			addButton(14, "Leave", roomEntrance);
 		}		
 		
@@ -141,7 +143,9 @@ package classes.Scenes.Dungeons
 			if (item == 0) incubusBuy(consumables.NUMBROX);
 			if (item == 1) incubusBuy(consumables.SENSDRF);
 			if (item == 2) incubusBuy(consumables.REDUCTO);
-			if (item == 3) incubusBuy(weapons.SUCWHIP);
+			if (item == 3) incubusBuy(consumables.AGILI_E);
+			if (item == 4) incubusBuy(consumables.VIXEN_T);
+			if (item == 5) incubusBuy(weapons.SUCWHIP);
 		}
 
 		public function incubusBuy(itype:ItemType):void {

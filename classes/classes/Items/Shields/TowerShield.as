@@ -10,13 +10,13 @@ package classes.Items.Shields
 		
 		public function TowerShield() 
 		{
-			super("TowerSh", "TowerShld", "tower shield", "a tower shield", 16, 500, "A towering metal shield.  It looks heavy!  \n\nType: Shield \nBlock rating: 16 \nValue: 500 \nRequirement: 40 strength");
+			super("TowerSh", "TowerShld", "tower shield", "a tower shield", 16, 500, "A towering metal shield.  It looks heavy! \nReq 40 strength to fully use it potential.");
 		}
 		
-		override public function canUse():Boolean {
-			if (game.player.str >= 40) return true;
-			outputText("This shield is too heavy for you to hold effectively.  ");
-			return false;
+		override public function get block():Number {
+			var block:int = 0;
+			if (game.player.str >= 40) block += 12;
+			return (4 + block);
 		}
 	}
 

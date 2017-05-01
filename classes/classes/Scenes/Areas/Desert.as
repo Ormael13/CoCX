@@ -53,15 +53,6 @@ package classes.Scenes.Areas
 				kGAMECLASS.telAdre.discoverTelAdre();
 				return;
 			}
-			if ((player.exploredDesert >= 20) && flags[kFLAGS.DISCOVERED_BEACH] <= 0 && rand(3) == 0) {
-				flags[kFLAGS.DISCOVERED_BEACH] = 1;
-				player.explored++;
-				clearOutput();
-				outputText("While traversing the desert for who knows how long you suddenly hear something like the sound of a wave crashing against the shore in the distance. Looking at the sand beneath your [legs] you see it getting slightly darker ahead of you. Wandering further, echoes of the waves are getting louder.", false);
-				outputText("\n\nFinally, after stepping over another dune, in the distance before you a shore of water spreads. Its surely way bigger than the lake you found some time ago. As far as you look to the side you can't see the shores end.  Mesmerized by the view you continue walking towards the ocean until you stand in the shallow water with waves passing by around your waist. Despite the corruption of Mareth this water turns out to be quite clear and who knows, maybe it’s not even that much tainted... yet. But that would probably require submerging deeper to check it out.\n\n<b>You've discovered the Beach, the Ocean and the Deep Sea!</b>", false);
-				doNext(camp.returnToCampUseTwoHours);
-				return;
-			}
 			if (sandWitchScene.pregnancy.event == 2 && rand(4) == 0) {
 				if (flags[kFLAGS.EGG_WITCH_TYPE] == PregnancyStore.PREGNANCY_DRIDER_EGGS) sandWitchScene.sammitchBirthsDriders();
 				else sandWitchScene.witchBirfsSomeBees();

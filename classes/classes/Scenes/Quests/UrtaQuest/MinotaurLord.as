@@ -207,6 +207,7 @@ package classes.Scenes.Quests.UrtaQuest
 			else this.drop = NO_DROP;
 			this.tailType = TAIL_TYPE_COW;
 			this.special1 = game.mountain.minotaurScene.minoPheromones;
+			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.str += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

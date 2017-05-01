@@ -113,7 +113,7 @@ package classes
 			player.createPerk(PerkLib.BimboBody, 0, 0, 0, 0);
 			player.createPerk(PerkLib.BimboBrains, 0, 0, 0, 0);
 			player.tailType = TAIL_TYPE_FOX;
-			player.tailVenom = 9;
+			player.tailCount = 9;
 			player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);
 			player.breastRows[0].breastRating = 5;
 			player.femininity = 100;
@@ -154,7 +154,7 @@ package classes
 			//fox ears, tails, A cup breasts with normal nipples	Betram															
 			player.earType = EARS_FOX;
 			player.tailType = TAIL_TYPE_FOX;
-			player.tailVenom = 1;
+			player.tailCount = 1;
 			if(player.biggestTitSize() > 1) player.breastRows[0].breastRating = 1;
 			if(!player.hasCock()) {
 				player.createCock();
@@ -250,7 +250,7 @@ package classes
 			player.clitLength = 0.5;
 			player.fertility = 15;
 			player.tailType = TAIL_TYPE_FOX;
-			player.tailVenom = 9;
+			player.tailCount = 9;
 			player.createPerk(PerkLib.EnlightenedNinetails,0,0,0,0);
 			//if possible with fur, Hair color: "midnight black", Skin/Fur color: "ashen grayish-blue",  Height: 65", Tone: 100, Thickness: 0, Hip rating: 6, Butt rating: 3,Feminimity: 50,  ( 4 rows of breasts (Descending from the top ones: D,C,B,A), nipple length: 0.1", Fuckable, 1 nipple per breast, Tongue type: demon
 			player.hairColor = "midnight black";
@@ -506,7 +506,7 @@ package classes
 			player.createBreastRow();
 			//- three fox tails
 			player.tailType = TAIL_TYPE_FOX;
-			player.tailVenom = 3;
+			player.tailCount = 3;
 			//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 			//equipment;
 			//- katana (don't suppose you could rename the katana 'Zon'ith' could you? ~.^)
@@ -583,6 +583,7 @@ package classes
 			player.fatigue = 0;
 			player.horns = 0;
 			player.tallness = 67;
+			player.tailCount = 0;
 			player.tailVenom = 0;
 			player.tailRecharge = 0;
 			player.wingType = WING_TYPE_NONE;
@@ -661,6 +662,7 @@ package classes
 			player.fertility = 5;
 			player.fatigue = 0;
 			player.horns = 0;
+			player.tailCount = 0;
 			player.tailVenom = 0;
 			player.tailRecharge = 0;
 			player.wingType = WING_TYPE_NONE;
@@ -986,7 +988,7 @@ package classes
 			player.wingType = WING_TYPE_DRACONIC_LARGE;
 			player.wingDesc = "large, draconic";
 			player.tailType = TAIL_TYPE_FOX;
-			player.tailVenom = 9;
+			player.tailCount = 9;
 			player.lowerBody = LOWER_BODY_TYPE_DRAGON;
 			player.tongueType = TONUGE_DRACONIC;
 			player.hairLength = 45;
@@ -1072,6 +1074,7 @@ package classes
 			player.fatigue = 0;
 			player.horns = 0;
 			player.tallness = 82;
+			player.tailCount = 0;
 			player.tailVenom = 0;
 			player.tailRecharge = 0;
 			player.wingType = WING_TYPE_NONE;
@@ -1255,7 +1258,7 @@ package classes
 			player.tongueType = TONUGE_SNAKE;
 			player.earType = EARS_FOX;
 			player.tailType = TAIL_TYPE_FOX;
-			player.tailVenom = 2;
+			player.tailCount = 2;
 			player.inte = 30;
 			if(player.findStatusAffect(StatusAffects.BonusVCapacity) < 0) player.createStatusAffect(StatusAffects.BonusVCapacity,0,0,0,0);
 			else player.addStatusValue(StatusAffects.BonusVCapacity,1,5+rand(10));
@@ -1288,7 +1291,7 @@ package classes
 			player.skinType = SKIN_TYPE_PLAIN;
 			player.faceType = FACE_HUMAN;
 			player.tailType = TAIL_TYPE_FOX;
-			player.tailVenom = 4;
+			player.tailCount = 4;
 			player.tongueType = TONUGE_HUMAN;
 			player.femininity = 90;
 			player.beardLength = 0;
@@ -1523,6 +1526,7 @@ package classes
 			player.fatigue = 0;
 			player.horns = 0;
 			player.tallness = 67;
+			player.tailCount = 0;
 			player.tailVenom = 0;
 			player.tailRecharge = 0;
 			player.wingType = WING_TYPE_NONE;
@@ -1595,47 +1599,39 @@ package classes
 		}
 		
 		private function customZavos():void {
-			//Male. 2 cock. 5.5 average thickness and 12 in with excessive thickness both pierced with silver rings. Balls, large, about the size of a billiard ball, four of them. All humanish, more details on the character.
-	//		player.createCock();
-	//		player.createCock();
-	//		player.balls = 4;
-	//		player.ballSize = 3;
-	//		player.cocks[0].cockThickness = 5.5;
-	//		player.cocks[1].cockThickness = 5.5;
-	//		player.cocks[0].cockLength = 12;
-	//		player.cocks[1].cockLength = 12;
-	//		player.cocks[0].pierced = 2;
-	//		player.cocks[1].pierced = 2;
-	//		player.cocks[0].pShortDesc = "silver cock-ring";
-	//		player.cocks[1].pShortDesc = "silver cock-ring";
-	//		player.cocks[0].pLongDesc = "Silver cock-ring";
-	//		player.cocks[1].pLongDesc = "Silver cock-ring";
-			//"Androgynous face, large brown eyes, long black hair down to about ass level, full lips, pirced with one silver ring ass itself is round and thick, chest is flat, only two nipples, about nickle sized pierced with silver studs, skin of a pale ghostly transparent complexion, rest of the body is not notably muscular or chubby in any definite way, feet seem to taper off into full transparency. Full body housed in the lewd Inquisitor Armor, wielding a Wizard Staff. Starting at level 5 with tank, regeneration, healing, smarts, channeling, mage and incorperability perks, a full knowledge of 
+			player.createCock();
+			player.balls = 2;
+			player.ballSize = 1;
+			player.cocks[0].cockThickness = 1;
+			player.cocks[0].cockLength = 5.8;
 			player.gender = 1;
-	//		player.tallness = 72;
-	//		player.femininity = 50;
-	//		player.hairLength = 35;
-	//		player.hairColor = "black";
-	//		player.lipPierced = 2;
-	//		player.lipPShort = "silver lip-ring";
-	//		player.lipPLong = "Silver lip-ring";
-	//		player.buttRating = 8;
-	//		player.hipRating = 8;
-	//		player.createBreastRow();
-	//		player.nipplesPierced = 1;
-	//		player.nipplesPShort = "silver studs";
-	//		player.nipplesPLong = "Silver studs";
-				
-	//		player.skinTone = "ghostly pale";
-	//		player.createPerk(PerkLib.Incorporeality, 0, 0, 0, 0);
-	//		player.setArmor(armors.I_CORST);
-	
-			player.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
-			player.createPerk(PerkLib.Smart, 0, 0, 0, 0);
-			player.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
-			player.createPerk(PerkLib.Mage, 0, 0, 0, 0);
+			player.tallness = 70;
+			player.femininity = 30;
+			player.hairLength = 1;
+			player.hairColor = "black";
+			player.buttRating = 3;
+			player.hipRating = 3;
+			player.createBreastRow();
+			player.skinTone = "fair";
+			
+			player.setArmor(armors.H_GARB_);
+			player.setShield(shields.BLASPHE);
+			player.setJewelry(jewelries.MSIGNIT);
+			player.setUndergarment(undergarments.C_LOIN);
+			player.createKeyItem("Dark Mage’s Grimoire",0,0,0,0);
+			if (player.hasKeyItem("Backpack") < 0) player.createKeyItem("Backpack", 3, 0, 0, 0);
+			player.itemSlot1.setItemAndQty(consumables.H_BISCU, 5);
+			
+			player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
 			player.createPerk(PerkLib.HistoryHealer, 0, 0, 0, 0);
-			player.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+			player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
+			player.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Spellpower, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Mage, 0, 0, 0, 0);
+			player.createPerk(PerkLib.SoulApprentice, 0, 0, 0, 0);
+			player.createPerk(PerkLib.DarkCharm, 0, 0, 0, 0);
+			player.createPerk(PerkLib.BlackHeart, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Pervert, 0, 0, 0, 0);
 			player.createStatusAffect(StatusAffects.KnowsArouse,0,0,0,0);
 			player.createStatusAffect(StatusAffects.KnowsHeal,0,0,0,0);
 			player.createStatusAffect(StatusAffects.KnowsManyBirds,0,0,0,0);
@@ -1711,7 +1707,7 @@ package classes
 			
 			player.earType = EARS_FOX;
 			player.tailType = TAIL_TYPE_FOX; // soft fur feels so lovely... too bad having too much fox fur would make you dumber, and while you would enjoy feline body, channeling magic using nine tails is great benefit which is hard to give up
-			player.tailVenom = 9;			
+			player.tailCount = 9;			
 			player.tongueType = TONUGE_DRACONIC; // tongue as long as your whole body height! almost tentackle! and so much fun to use!
 			player.hornType = HORNS_DRACONIC_X2; // draconic horns adds to your exotic look, counts towards dragon score and keeps your tentacle hair out of your face! and your partners can use them as handles on occasions, letting your delicate ears uncrumpled!
 			player.horns = 12;

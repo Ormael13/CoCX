@@ -339,6 +339,7 @@ package classes.Scenes.NPCs
 			this.level = 19;
 			this.gems = rand(7) + 7;
 			if (game.flags[kFLAGS.SHEILA_DEMON] == 0){
+				this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 				this.drop = new WeightedDrop(consumables.KANGAFT, 1);
 			} else {
 				this.drop = new ChainedDrop(consumables.KANGAFT).

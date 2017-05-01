@@ -1781,7 +1781,7 @@ public function jewelShopBuyBoxNo():void {
 
 public function jewelShopBuyStatue():void {
 	clearOutput();
-	outputText("\"<i>Oh so you want this statue? Sure I can sell it to you but I hope you have the gems.</i>\"\n\n", false);
+	outputText("\"<i>Oh so you want this statue? Sure I can sell it to you but I hope you have two thousand gems.</i>\"\n\n", false);
 	outputText("Do you buy it?", false);
 	if (player.gems >= 2000)
 	{
@@ -2144,6 +2144,7 @@ private function carpentryShopSellStoneYes():void {
 public function carpentryShopBuySet():void {
 	if (player.hasKeyItem("Carpenter's Toolbox") >= 0)
 	{
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 1) flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] = 1;
 		outputText("<b>You already own a set of carpentry tools!</b>", true)
 		doNext(carpentryShopInside);
 		return;
@@ -2168,7 +2169,7 @@ public function carpentryShopBuySetYes():void {
 	outputText("\"<i>Here you go,</i>\" he says. You feel so proud to have your own tools for building stuff! \n\n", false);
 	outputText("<b>Gained Key Item: Carpenter's Toolbox!</b>", false)
 	player.createKeyItem("Carpenter's Toolbox", 0, 0, 0, 0);
-	flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] += 1;
+	flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] = 1;
 	statScreenRefresh();
 	doNext(carpentryShopInside);
 }

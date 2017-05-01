@@ -231,6 +231,7 @@
 			this.special3 = akbalHeal;
 			this.tailType = TAIL_TYPE_DOG;
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.str += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 14 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

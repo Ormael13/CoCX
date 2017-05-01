@@ -15,7 +15,154 @@ package classes.Scenes
 		{}
 		
 		public function accessChangelogMenu():void {
-			Changelog12();
+			Changelog13();
+		}
+		
+		private function Changelog13():void {
+			clearOutput();
+			outputText("<b>Version 0.8c2 (Bugfixs and 4 new perks):</b>\n\n");
+			outputText("-New tier 4 speed lvl-up perk: Penta Attack. Req. perk Quadruple Attack and 125+ speed. Effects: adds toggle to use 5th melee attack at 80% power with same limitation as Double Attack.\n");
+			outputText("-New tier 5 speed lvl-up perk: Hexa Attack. Req. perk Penta Attack and 150+ speed. Effects: adds toggle to use 6th melee attack at 80% power with same limitation as Double Attack.\n");
+			outputText("-New tier 2 strength lvl-up perk: Double Attack (Large). Req. perk Job: Barbarian, 75+ strength and 50+ speed. Effects: adds toggle to use 2th melee attack with any Large type weapon at 95% power with same limitation as Double Attack.\n");
+			outputText("-New tier 4 strength lvl-up perk: Triple Attack (Large). Req. perk Double Attack (Large), 125+ strength and 100+ speed. Effects: adds toggle to use 3th melee attack with any Large type weapon at 90% power with same limitation as Double Attack.\n");
+			outputText("-Changed req. for accuring Magic Bolt m. speicla from having perk Staff Channeling to Job: Sorcerer perk. It dmg was been nerfed but it's also specila not using fatigue now.\n");
+			outputText("-Added fatigue req. for each misc. buliding options in tooltips.\n");
+			outputText("-Bugs fixed: Fire Affinity perk, Perm perks at ascension, additional attack when using multiattacks, building wood storage and kitsune shrine.\n\n");
+			outputText("<b>Version 0.8d:</b>\n\n");
+			outputText("-Added in current version race effects to Metamorph perk: Spider, Shark\n");
+			outputText("-New preset PC with short history: Zavos\n");
+			outputText("-New Armors: \n");
+			outputText("-New Shield: \n");
+			outputText("-New Ring: \n");
+			outputText("-Swapped bonuses for Channeling and Spellpower perks. Magic bolt have scalling similar like melee attack but based on int. With perk Staff Channeling and using any staff as melee weapon m. blt will have added bonus for used weapon.\n");
+			outputText("-Charge Weapon, Charge Armor, Might, Blink spells moved to subpage of spells called Buffs and formula to count how strong effect each will have replaced part for PC intelligence with flat values based how many mage related perks PC have. Base power of each buff was slight increased.\n");
+			outputText("-Ceani affection meter added to stats page.\n");
+			outputText("-Surrender option: Rising lust to max and triggering lust defeat end of fight. Put in place of button used only to dispel one of Lethice special and free goblin option - in both fights loosing isn't a good solution anyway.\n");
+			outputText("-New 6th stage of soul cultivation: Soul Overlord (req. lvl 36+ and Soul Exalt perk).\n");
+			outputText("-New core stat added: Wisdom. It can be rised using stat pints form lvl-ups. Currently how high it's can be checked in Soulforce menu only.\n");
+			outputText("-Each of perk with word Soul in name aside first of line Job: Soul Cultivator have now added min wisdom req. that is stage of cultivation x20 so newest one added cultivation stage Soul Overlord req. to have 120+ wisdom. Also job: Soul Cultivator similary like other base job perks will be giving stat bonus now too: +5 to max Wis (scalable with NG tiers).\n");
+			outputText("-Perks like Ezekiel Blessing, Job: All-Rounder or asc perk Transhumanism will also grat bonuses to max Wis of the same amount as intelligent bonuses. Huanity bonuses due to addition of wisdom lowered to +60 to max str/tou/spe and +65 to max int/wis/lib at 25 pts in humanity score with loosing each point of hunaity to get 10 points from bonuses still happening.\n");
+			outputText("-Job: Arcane Archer perk has been renamed to Job: Hunter with new req. been: perk Job: Ranger and Archers Stamina I and 80+ speed.\n");
+			outputText("-Perks Elemental Arrows and Cupid was moved from currently newly named Job: Hunter group (old Job: Arcane Archer) to new group under perk Prestige Job: Arcane Archer keeping all previous req. aside min. lvl that was rised for first to lvl 42+ and second to lvl 48+\n");
+			outputText("-Options for multiattacks inmelee and range menu will be grey out if currnetly used weapon not allow them like 4-6 melee attack when PC use large weapon.\n");
+			outputText("-Beach moved to first page of exploration and can be now found similary like lake or plains.\n");
+			outputText("-New TF item: Orca Sunscreen (orca TF). Found at beach during exploration.\n");
+			outputText("-At 6+ in yeti score PC is half-orcaboy/girl, and at 12+ orca-morph. Bonuses are as following: +35/70 str, +20/40 tou, +35/70 spe.\n");
+			outputText("-New body part - legs: Orca Legs Req. glossy white and back human skin.\n");
+			outputText("-New body part - arms: Orca Arms Req. Orca Legs\n");
+			outputText("-New body part - tail: Orca Tail Req. Orca Arms\n");
+			outputText("-New body part - ears: Orca Ears Req. Orca Tail\n");
+			outputText("-New body part - rear body: Blowhole Req. Orca Ears\n");
+			outputText("-New body part - face: Orca Face Req. Blowhole\n");
+			outputText("-Having Orca face unlocks Bite p. special that work same as shark bite. Having Orca tail allow to use Tail Smack p. special that stunns enemy for 2 turns.\n");
+			outputText("-New body part - eyes: Snake Eyes Req. Partial Scales skin\n");
+			outputText("-New body part - ears: Snake Ears Req. Snake Eyes\n");
+			outputText("-In Snake Oil and Gorgon Oil has been added three new TF effects. After PC get naga tail next TF will be partila scales, then next one is snake eyes and then snake ears. For snake oil it's last tf in chain while for gorgon oil it continue to gorgon hair tf with rest of gorgon related tf happening in normal order.\n");
+			outputText("-Changes to naga races. Naga is it own race with half (4+) and full score (8+). Bonuses are respectively: +20 to max str, +40 to max spe and +40 to max str, +20 to max tou and +60 to max spe (all scalable). On those bonuses can be addeded bnus from been naga.\n");
+			outputText("-Gorgon race become one of possible paths of evolution of naga with 11+ in racial score for scalable bonuses: +50 to max str, +45 to max tou and +70 to max spe.\n");
+			outputText("-Two new naga evolution paths both req. 11+ pts it they racial scores to give bonuses: Vouivre (+60 to max Str, +30 to max Tou, +45 to max Spe, +30 max Int) and Couatl (+40 to max Str, +25 to max Tou, +100 to max Spe)\n");
+			outputText("-Two new TF that Evangelin can craft: Vouivre Oil (1 Snake Oil, 1 Drake Heart, 15 gems) and Couatl Oil (1 Snake Oil, 1 Golden Seed, 10 gems)\n");
+			outputText("-Prices for soul recovery pills slight changed with slight increase to amount of recovered soulforce after use.\n");
+			outputText("-New High-grde Soul Recovery Pill buyable at He'Xin'Dao for 180 gems and req. to be at least Soul Overlord to be able to purchase it.\n");
+			outputText("-Soulforce would naturaly recover over time (non cultivators with ~1 point per hour - daily recovery happening at the time when all other daily flags reset aka during sleep, for cultivators it's 1 + (2 * stage of cultivation) + other possible bonuses rate per hour/half of hourly rate per combat turn)\n");
+			outputText("-In Stats page there was added new 6 trackers to show how high is current max cap for all base stats: Str, Tou, Spe, Int, Wis, Lib.\n");
+			outputText("-Job: Eromancer req. changed as follows: instead of 30+ need 60+ int and no longer need to have perk Job: Sorcerer.\n");
+			outputText("-New multi-rank tier 1 soulforce lvl-up perk: Insightful Resources I-V. Req. for rank 1: lvl 6+, 50+ wis, perk Job: Soul Cultivator, Effect. Increase max soulforce per each point of wisdom.\n");
+			outputText("-Perk selection drop down list now show at once up to 15 perks before scroll bar is added on the right side of the list.\n");
+			outputText("-Shield mastery perk req. now additionaly perk Job: Knight. Immovable object, Resolute and Heavy Armor Profcienty perks now all are tier lvl perks and req. 75+ tou and perk Job: Defender.\n");
+			outputText("-New tier 0 soulforce lvl-up perk: Daoist Cultivator. Req. Job: Soul Cultivator perk. Effects: +10 to recovered soulforce during meditation, +10% to soulskill power, +25 max soulforce, -10% to soulskils costs\n");
+			outputText("-New tier 1 soulforce lvl-up perk: Daoist: Apprentice Stage. Req. Daoist Cultivator perk. Effects: +10 to recovered soulforce during meditation, +20% to soulskill power, +30 max soulforce (all gained each time PC gets one of these perks: Soul Apprentice, Soul Personage, Soul Warrior)\n");
+			outputText("-New tier 2 misc lvl-up perk: Whipping. Req. perk Job: Eromancer. Effects: adds dmg scalling based on current PC str and increase bonus for fighting group enemies from 5x to 6x.\n");
+			outputText("-New tier 2 misc lvl-up perk: Whirlwind. Req. perk Job: Barbarian. Effects: adds dmg scalling based on current PC str and increase bonus for fighting group enemies from 5x to 6x.\n");
+			outputText("-New tier 2 speed lvl-up perk: Deadly Throw. Req. Job: Hunter Effect: adds speed modifier to throwing weapons.\n");
+			outputText("-New tier 3 libido lvl-up perk: Cold Lust Req. Lustzerker, Improved Self-Control perks and 75+ lib Effect: Lustzerking no longer reduce PC lust resistance to 0.\n");
+			outputText("-New tier 3 speed lvl-up perk: Envenomed Bolt. Req. Job: Hunter and one of venom producing tail types (bee, scorpion, manticore). Allows to apply lust inducing venom on arrow/bolt tip.\n");
+			outputText("-New tier 4 soulforce lvl-up perk: Daoist: Warrior Stage. Req. Daoist: Apprentice Stage perk. Effects: +10 to recovered soulforce during meditation, +30% to soulskill power, +40 max soulforce (all gained each time PC gets one of these perks: Soul Sprite, Soul Exalt, Soul Overlord)\n");
+			outputText("-New tier 5 speed lvl-up perk: Multishot Req. Wild Quiver and 150+ speed. Addes toggle option for 6 arrows shoot in one attack.\n");
+			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
+			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Arcane Archer Req. Job: Sorcerer, Job: Hunter perks, 150+ int and 200+ spe Effect: +40 to max spe and int (scalable with NG tiers), +600 to max Fatigue\n");
+			outputText("-New tier 7 strength lvl-up perk: Prestige Job: Berserker Req. Job: Barbarian, Job: Guardian perks, 200+ str and either Berzerking or Lustzerking perk Effect: +60 to max str and +20 to max tou (scalable with NG tiers)\n");//powinno dodawać to wraith max bar niż fatigue
+			outputText("-New tier 7 intelligence lvl-up perk: Prestige Job: Seer Req. Grey Archmage, Soul Overlord perks and 200+ int Effect: +60 max int and +20 to max wis (scalable with NG tiers), +900 max Fatigue, +500 max Soulforce\n");
+			outputText("-New enemy perk: Beast or Animal-morph enemy type. Some of PC attack will deal more dmg to such enemies that atm is 27 diff enemeis with this perk ingame.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-Fixed bugs: Naming bug for demons, Too high normaly Goo score\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-Hooked Gauntlets and Spiked Gauntlet weapons are removed from pool of weapons working with mutliattack due to been put in same group of weapons that would benefits form perks affecting fists attacks.\n");później jak bede dodawać fist attack perks przeios je do tej grupy
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");, Goo, Salamander, Phoenix, Siren, Naga, Gorgon, Vouivre, Couatl
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("-New tier 1 misc lvl-up perk: Dual Wield. Effect: allows to use dual weapons (only with 'Dual' weapon tag not others that may have word Dual in it).\n");
+			outputText("-New tier 4 strength lvl-up perk: Dual Wield Large. Req. perk Dual Wield and Titan Grip, 125+ str. Effect: alowing use dual large weapons.\n");
+			outputText("-New tier 5 strength lvl-up perk: Hidden Dual Momentum. Req. perk Hidden Momentum, 150+ str and 100+ spe. Effect: adds to base atk for dual large weapons 10% of ((str+spe) - 200).\n");
+			outputText("-New weapon (by Zevos): eldritch ribbon; +5 atk, +40% Wizard’s focus, aoe type weapon (allow of use Whipping special).\n");
+			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
+			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
+			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");Chimerical Body: Initial Stage perk for now active in version for testing purpose of bonuses comparing and etc. - if giving +10 to all race scores that giving any bonus and req. to get it is having at least 1 point in CHIMERICAL DISPOSITION
+			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Kitshoo-morph, Mouse-morph, Pig-morph, Scorpion-morph
+			outputText("\n");New tier 0 lvl-up perk: Tracheal System (Evolved) (req. mantis score >= 4 and having Tracheal System perk; effect: )
+			outputText("\n");
+			outputText("\n");dodać potem dodatkową kategorie w Moga menu z itemami co nie są stricte racial TF ale też dają efekty TF jak: ImpFood, PrFruit, Rizza Root
+			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
+			outputText("\n");
+			outputText("<b>Version 0.8e:</b>\n\n");
+			outputText("<b>Version 0.8f:</b>\n\n");
+			outputText("<b>Version 0.8g:</b>\n\n");
+			outputText("\n");
+			outputText("\n");cel na 0.8d: dodać siren TF
+			outputText("\n");cel na 0.8d: archery expansion
+			outputText("\n");cel na 0.8d: dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)
+			outputText("\n");cel na 0.8d: pododawanie kilku(nastu) nowych opisów cześci ciała, powiazanie tego z poszczegolnymi animal-morphami, dodanie nieco specjalnych zdolnosci do kilku z nich, balansowanie ich, itp.
+			outputText("\n");cel na 0.8d: może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we wlasciwy sposob ^^
+			outputText("\n");cel na 0.8d: pododawać 1-3 grey spells (single target fire and ice spell)
+			outputText("\n");cel na 0.8d: dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");cel na 0.8d: pododawać nieco związanych z walką perków
+			outputText("\n");cel na 0.8d: dodać nekomanta TF
+			outputText("\n");cel na 0.8d: dodać kitsune/salamander TF
+			outputText("\n");cel na 0.8d: dodać kitsune/nekomanta TF
+			outputText("\n");cel na 0.8d: dodać yuki-onna TF
+			outputText("\n");cel na 0.8d: dodać yeti TF
+			outputText("\n");
+			outputText("\n");cel na 0.8(/9): działający pasek soulforce na main stats
+			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
+			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");*/
+			outputText("\n\n\n");
+			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
+			outputText("-Add more soulforce options.\n");
+			outputText("-Implement follower Kindra stuff and rest of Archery expansion.\n");
+			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
+			outputText("-Add soulforce stuff to kitsune encounters.\n");
+			outputText("-Add Wuxia themed area and enemies.\n");
+			outputText("-Add few new options during chara creation.\n");
+			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
+			outputText("-More camp build options (involving using stones and etc.)\n");
+			outputText("-Few more perks and achievements.\n");
+			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
+			outputText("-Add option to reward PC with 1 perk point for each cleared dungeon - for main story ones maybe even 2 perk points (since now it's way MORE perks to gain and would probably be even more to pick from making buy out all hard at normal lvl's to beat game ^^).\n");
+			menu();
+			addButton(0, "Next", Changelog12);
+			addButton(1, "Back", playerMenu);
 		}
 		
 		private function Changelog12():void {
@@ -51,7 +198,7 @@ package classes.Scenes
 			outputText("-New npc to meet and possible recruit to the camp: Kindra (the Soul Archer). Found at Owca village and req. win enough times to recruit her (Word of warning: At first she's holding back but each lost fight to PC makes her hold less and less until at the final battle she go all out. Happy checking how tough the ground beneath PC is ^^).\n");
 			outputText("-Atm Kindra interaction in camp is limited to sparring partner but in next version she will provide advanced archery training fitting Soul Archers. Oh right in this sparrings she also will not hold back at all just like in the final fight at her recruit path.\n");
 			outputText("-Fixed bugs: fixed wrong bonuses for fox race to the ones meantioned in changelog for 0.7f build and making all 7+ pts in fox score PC called fox-morph no matter what gender. Bee intelligence bonuses now are positive not negative values. Lust resets added to Ayane Worship and Anal scene + Etna Pussy Opera sex scenes.\n\n");
-			outputText("<b>Version 0.8c:</b>\n\n");
+			outputText("<b>Version 0.8c (Race rebalancing (part 2), Archery Rework (part 4), Kindra (part 1), SimCamp (part 2), Yeti Cum (yeti TF), Soul Exalt cultivation stage (Redemption Edition)):</b>\n\n");
 			outputText("-Cabin building msg pop up at 7th not 14th day.\n");
 			outputText("-Prices of crafting materials increased: Green Gel to 50, Chitin to 100, Spider Silk to 200 and Dragonscale to 500.\n");
 			outputText("-New 5th stage of soul cultivation: Soul Exalt (req. lvl 30+ and Soul Sprite perk).\n");
@@ -101,94 +248,10 @@ package classes.Scenes
 			outputText("-Each of the new camp constructions adds 2 ascension points. Completing Hot Spring allows PC to take a bath that will give a buff to recover fatigue slighty faster for 3 days. It’s also possible to trigger Peeping Tom scene if PC has a cock, this can end with all female camp members 'punishing' PC leading to a 24hr long inability to masturbate.\n");
 			outputText("-PC can meditate in Forest Shrine or Camp Shrine to get more tails if Fox Jewel is in inventory.\n");
 			outputText("-Req. min lvl for the last three fox tails was lowered: 7th to lvl 30, 8th to lvl 36 and 9th to lvl 42. At same time int req. for each tail starts with 20+ for 1st and ends up at 180+ for 9th.\n");
+			outputText("-Foxfire specials use now not only fatigue but also soulforce to cast them. So msg about been too tired may mean having too low soulforce or too little spare fatigue to cast.\n");
 			outputText("-During Evangeline recruitment, if PC rejects her joining camp, text will be shown clearly stating that the PC has been cursed. When PC agrees to accepting Evangeline joining the camp, curse will be removed, instead of requiring Ezekiel Fruit.\n");
 			outputText("-In Benoit shop, option to buy Dragonscale was replaced with Sensitivity Potion and Spider Silk with Numb Rocks(so now even without finishing Deep Cave PC can obtain those two items).\n");
-			outputText("-Redemption ending after Lethice fight is no longer missing.\n\n\n\n\n\n\n\n");/*ostatni punkt changelogu
-			outputText("<b>Version 0.8d:</b>\n\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
-			outputText("-New tier 4 speed lvl-up perk: Penta Attack. Req. perk Quadruple Attack and 125+ speed. Effects: adds toggle to use 5th melee attack at 80% power with same limitation as Double Attack.\n");
-			outputText("-New tier 5 speed lvl-up perk: Hexa Attack. Req. perk Penta Attack and 150+ speed. Effects: adds toggle to use 6th melee attack at 80% power with same limitation as Double Attack.\n");
-			outputText("-New tier 3 speed lvl-up perk: Envenomed Bolt. Req. Job: Arcane Archer and one of venom producing tail types (bee, scorpion, manticore). Allows to apply lust inducing venom on arrow/bolt tip.\n");
-			outputText("\n");, Spider, Shark, Goo
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("-New tier 1 misc lvl-up perk: Dual Wield. Effect: allows to use dual weapons (only with 'Dual' weapon tag not others that may have word Dual in it).\n");
-			outputText("-New tier 4 strength lvl-up perk: Dual Wield Large. Req. perk Dual Wield and Titan Grip, 150+ str. Effect: alowing use dual large weapons.\n");
-			outputText("-New tier 5 strength lvl-up perk: Hidden Dual Momentum. Req. perk Hidden Momentum, 150+ str and 100+ spe. Effect: adds to base atk for dual large weapons 10% of ((str+spe) - 200).\n");
-			outputText("-New weapon (by Zevos): eldritch ribbon; +5 atk, +40% Wizard’s focus, aoe type weapon (allow of use Whipping special).\n");
-			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 80+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
-			outputText("\n");
-			//wciąż nie działa wiec zachowam ten punkt na przyszłość outputText("-Soulforce would naturaly recover over time (non cultivators with 0.5 point per hour - daily recovery happening at the time when all other daily flags reset aka during sleep, for cultivators it's stage of cultivation +1 rate per hour)n");
-			outputText("\n");
-			outputText("\n");Chimerical Body: Initial Stage perk for now active in version for testing purpose of bonuses comparing and etc. - if giving +10 to all race scores that giving any bonus and req. to get it is having at least 1 point in CHIMERICAL DISPOSITION
-			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Kitshoo-morph, Mouse-morph, Pig-morph, Scorpion-morph
-			outputText("\n");New tier 0 lvl-up perk: Tracheal System (Evolved) (req. mantis score >= 4 and having Tracheal System perk; effect: )
-			outputText("\n");
-			outputText("\n");dodać potem dodatkową kategorie w Moga menu z itemami co nie są stricte racial TF ale też dają efekty TF jak: ImpFood, PrFruit, Rizza Root
-			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
-			outputText("\n");
-			outputText("<b>Version 0.8e:</b>\n\n");
-			outputText("\n");
-			outputText("\n");cel na 0.8a: dodać siren TF
-			outputText("\n");cel na 0.8a: archery expansion
-			outputText("\n");cel na 0.8a: dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)
-			outputText("\n");cel na 0.8a: pododawanie kilku(nastu) nowych opisów cześci ciała, powiazanie tego z poszczegolnymi animal-morphami, dodanie nieco specjalnych zdolnosci do kilku z nich, balansowanie ich, itp.
-			outputText("\n");cel na 0.8a: może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we wlasciwy sposob ^^
-			outputText("\n");cel na 0.8a: pododawać 1-3 grey spells (single target fire and ice spell)
-			outputText("\n");cel na 0.8a: dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");cel na 0.8a: pododawać nieco związanych z walką perków
-			outputText("\n");cel na 0.8a: dodać nekomanta TF
-			outputText("\n");cel na 0.8a: dodać kitsune/salamander TF
-			outputText("\n");cel na 0.8a: dodać kitsune/nekomanta TF
-			outputText("\n");cel na 0.8a: dodać yuki-onna TF
-			outputText("\n");cel na 0.8a: dodać yeti TF
-			outputText("\n");
-			outputText("\n");cel na 0.8(/9): działający pasek soulforce na main stats
-			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
-			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");*/
-			outputText("\n\n\n");
-			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
-			outputText("-Add more soulforce options.\n");
-			outputText("-Implement follower Kindra stuff and rest of Archery expansion.\n");
-			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
-			outputText("-Add soulforce stuff to kitsune encounters.\n");
-			outputText("-Add Wuxia themed area and enemies.\n");
-			outputText("-Add few new options during chara creation.\n");
-			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
-			outputText("-More camp build options (involving using stones and etc.)\n");
-			outputText("-Few more perks and achievements.\n");
-			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
-			outputText("-Add option to reward PC with 1 perk point for each cleared dungeon - for main story ones maybe even 2 perk points (since now it's way MORE perks to gain and would probably be even more to pick from making buy out all hard at normal lvl's to beat game ^^).\n");
+			outputText("-Redemption ending after Lethice fight is no longer missing.\n");
 			menu();
 			addButton(0, "Next", Changelog11);
 			addButton(1, "Back", playerMenu);
@@ -326,8 +389,8 @@ package classes.Scenes
 			outputText("-A new item slot that PC can use: Range Weapon. Current weapon slot renamed to Melee Weapon slot. Tel'Adre weapon shop selling 2 new items: Light Bow and Light Crossbow. Range weapons got now new code to handle their dmg output, accuracy and hit texts based mostly on old bow special code.\n");
 			outputText("-Bow and Kelt Bow Key Items changed into range weapon items. Others range weapons aside staffs with PC having Staff Channeling perk converted from melee type to range type weapon items. Atm range weapon can't be been placed in weapon rack (but their would after final 0.7e build version come out).\n");
 			outputText("-Perk Tripple Strike moved to tier 3 form tier 2 and req. changed to req. 100+ speed with req. perk Manyshot. Effect is unchanged of granting another arrow shoot at the increaed cost. Just due to Many shot perk it will make it been 4th shoots attack.\n");
-			outputText("-New tier 2 speed lvl-up perk: Manyshot. Req. Double Strike and 75+ speed. Adds toggle option for 3 arrows shoot in one attack.\n");
-			outputText("-New tier 4 speed lvl-up perk: Wild Quiver. Req. Tripple Strike, Job: Arcane Archer and 125+ speed. Addes toggle option for 5 arrows shoot in one attack.\n");
+			outputText("-New tier 2 speed lvl-up perk: Manyshot. Req. Double Strike and 75+ speed. Adds toggle option for 4 arrows shoot in one attack.\n");
+			outputText("-New tier 4 speed lvl-up perk: Wild Quiver. Req. Tripple Strike and 125+ speed. Addes toggle option for 5 arrows shoot in one attack.\n");
 			outputText("-New tier 1 speed lvl-up perk: Vital Shot. Req. perk Job: Ranger and Tactician, 60+ speed. Adding 10% crit chance with arrows.\n");
 			outputText("-New tier 1 speed lvl-up perk: Deadly Aim. Req. perk Job: Ranger and Precision, 60+ speed. Removing enemies dmg reduction effect.\n");
 			outputText("-New tier 2 speed lvl-up perk: Job: Arcane Archer. Req. perk Job: Ranger and Job: Sorcerer, 80+ speed, 60+ intelligence. Effects: +10 to spe, +5 to int (scalable with NG tiers), +50 to max fatigue, allows to get +0.5% to acc per Int poins as long it's above 50 (but max possible to gain acc bonus is capped at 50% aka 150 int).\n");

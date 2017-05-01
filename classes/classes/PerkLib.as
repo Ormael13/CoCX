@@ -84,6 +84,8 @@ package classes
 	//			".");
 	//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
 	//			".");
+	//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
+	//			".");
 		
 		// History perks
 		public static const HistoryAlchemist:PerkType = mk("History: Alchemist", "History: Alchemist",
@@ -205,8 +207,8 @@ package classes
 				"Gain +5% to critical strike chance when wielding a sword and not using a shield.",
 				"You choose the 'Blademaster' perk.  Your chance of critical hit is increased by 5% as long as you're wielding a sword and not using a shield.");
 		public static const BodyCultivator:PerkType = mk("Body Cultivator", "Body Cultivator",
-				"Allow you to train the body of soul cultivator.",
-				"You choose the 'Body Cultivator' perk, starting journey of the body cultivators path!");
+				"Allow you to train your soul cultivator body to make it as tough as artifacts.",
+				"You choose the 'Body Cultivator' perk, starting journey on the body cultivators path!");
 		public static const Brawler:PerkType = mk("Brawler", "Brawler",
 				"Brawling experience allows you to make two unarmed attacks in a turn.",
 				"You choose the 'Brawler' perk, allowing you to make two unarmed attacks in a turn!");
@@ -225,7 +227,7 @@ package classes
 				"You choose the 'Cat-like Nimbleness' perk. Your body joints due to repeadly usage of cat-like flexibility became more nimble.");
 		public static const Channeling:PerkType = mk("Channeling", "Channeling",
 				"[if (player.inte>=60)" +
-						"Increases base spell strength by 10% and base mana pool by 15." +
+						"Increases base spell strength by 20% and base mana pool by 30." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
@@ -257,6 +259,9 @@ package classes
 		public static const ColdFury:PerkType = mk("Cold Fury", "Cold Fury",
 				"Berserking does not reduce your armor.",
 				"You choose the 'Cold Fury' perk, causing Berserking to not reduce your armor.");
+		public static const ColdLust:PerkType = mk("Cold Lust", "Cold Lust",
+				"Lustzerking does not reduce your lust resistance.",
+				"You choose the 'Cold Lust' perk, causing Lustzerking to not reduce your lust resistance.");
 		public static const CorruptedLibido:PerkType = mk("Corrupted Libido", "Corrupted Libido",
 				"Reduces lust gain by 10%.",
 				"You choose the 'Corrupted Libido' perk.  As a result of your body's corruption, you've become a bit harder to turn on. (Lust gain reduced by 10%!)");
@@ -281,9 +286,27 @@ package classes
 		public static const Dantain:PerkType = mk("Dantain", "Dantain",
 				"Increase max soulforce by 10% plus 10% to 15% per each attained cultivation stage.",
 				"You choose the 'Dantain' perk.  As a result of many cultivation sessions you managed to find dantain in your body, which resulted in increased capacity to store soulforce.");
+		public static const DaoistCultivator:PerkType = mk("Daoist Cultivator", "Daoist Cultivator",
+				"Allow you to train your soul cultivator mind to unleash soulskills with their apex power.",
+				"You choose the 'Daoist Cultivator' perk, starting journey on the daoist cultivators path!");
+		public static const DaoistApprenticeStage:PerkType = mk("Daoist: Apprentice Stage", "Daoist: Apprentice Stage",
+				"Your reached first stage of Daoist path.",
+				"You choose the 'Daoist: Apprentice Stage' perk, progressing on your Daoist path.");
+		public static const DaoistOverlordStage:PerkType = mk("Daoist: Overlord Stage", "Daoist: Overlord Stage",
+				"Your reached third stage of Daoist path.",
+				"You choose the 'Daoist: Overlord Stage' perk, progressing on your Daoist path.");
+		public static const DaoistTyrantStage:PerkType = mk("Daoist: Tyrant Stage", "Daoist: Tyrant Stage",
+				"Your reached fourth stage of Daoist path.",
+				"You choose the 'Daoist: Tyrant Stage' perk, progressing on your Daoist path.");
+		public static const DaoistWarriorStage:PerkType = mk("Daoist: Warrior Stage", "Daoist: Warrior Stage",
+				"Your reached second stage of Daoist path.",
+				"You choose the 'Daoist: Warrior Stage' perk, progressing on your Daoist path.");
 		public static const DeadlyAim:PerkType = mk("Deadly Aim", "Deadly Aim",
 				"Arrows/Bolts ignore damage reductions piercing right through your opponent armor weak points (ignore enemy dmg red).",
 				"You choose the 'Deadly Aim' perk, causing arrows/bolts to ignore the damage reductions of opponent.");
+		public static const DeadlyThrow:PerkType = mk("Deadly Throw", "Deadly Throw",
+				"You learned how to use throwing weapon with better efficiency adding your speed to the damage.",
+				"You choose the 'Deadly Throw' perk, adding your speed to throwing weapon damage.");
 		public static const DemonicDesireI:PerkType = mk("Demonic Desire I", "Demonic Desire I",
 				"+1 extra LP per point of libido.",
 				"You choose the 'Demonic Desire I' perk, granting an extra maximum LP for each point of libido.");
@@ -302,6 +325,9 @@ package classes
 		public static const DoubleAttack:PerkType = mk("Double Attack", "Double Attack",
 				"Allows you to perform two melee attacks with non-large weapons per round.",
 				"You choose the 'Double Attack' perk.  This allows you to make two melee attacks with non-large weapons.");
+		public static const DoubleAttackLarge:PerkType = mk("Double Attack (Large)", "Double Attack (Large)",
+				"Allows you to perform two melee attacks with large weapons per round.",
+				"You choose the 'Double Attack (Large)' perk.  This allows you to make two melee attacks with large weapons.");
 		public static const DoubleStrike:PerkType = mk("Double Strike", "Double Strike",
 				"Allows you to perform two range attacks per round.",
 				"You choose the 'Double Strike' perk.  This allows you to make two range attacks.");
@@ -438,6 +464,21 @@ package classes
 		public static const InhumanDesireV:PerkType = mk("Inhuman Desire V", "Inhuman Desire V",
 				"Raises max LP by 20.",
 				"You choose the 'Inhuman Desire V' perk, giving you an additional 20 LP!");
+		public static const InsightfulResourcesI:PerkType = mk("Insightful Resources I", "Insightful Resources I",
+				"+5 extra soulforce per point of wisdom.",
+				"You choose the 'Insightful Resources I' perk, granting +5 extra maximum soulforce for each point of wisdom.");
+		public static const InsightfulResourcesII:PerkType = mk("Insightful Resources II", "Insightful Resources II",
+				"+5 extra soulforce per point of wisdom.",
+				"You choose the 'Insightful Resources II' perk, granting +5 extra maximum soulforce for each point of wisdom.");
+		public static const InsightfulResourcesIII:PerkType = mk("Insightful Resources III", "Insightful Resources III",
+				"+5 extra soulforce per point of wisdom.",
+				"You choose the 'Insightful Resources III' perk, granting +5 extra maximum soulforce for each point of wisdom.");
+		public static const InsightfulResourcesIV:PerkType = mk("Insightful Resources IV", "Insightful Resources IV",
+				"+5 extra soulforce per point of wisdom.",
+				"You choose the 'Insightful Resources IV' perk, granting +5 extra maximum soulforce for each point of wisdom.");
+		public static const InsightfulResourcesV:PerkType = mk("Insightful Resources V", "Insightful Resources V",
+				"+5 extra soulforce per point of wisdom.",
+				"You choose the 'Insightful Resources V' perk, granting +5 extra maximum soulforce for each point of wisdom.");
 		public static const IronFistsI:PerkType = mk("Iron Fists I", "Iron Fists I",
 				"Hardens your fists to increase attack rating by 10.",
 				"You choose the 'Iron Fists I' perk, hardening your fists. This increases attack power by 10.");
@@ -459,15 +500,15 @@ package classes
 		public static const JobAllRounder:PerkType = mk("Job: All-Rounder", "Job: All-Rounder",
 				"You've combined all basic jobs training effects into an all-round fighting style.",
 				"You choose 'Job: All-Rounder' perk, to combine effects of training in all six basic jobs.");
-		public static const JobArcaneArcher:PerkType = mk("Job: Arcane Archer", "Job: Arcane Archer",
-				"You've trained in art of combining magic and arrows.",
-				"You choose 'Job: Arcane Archer' perk, training yourself to became Arcane Archer.");
 		public static const JobBarbarian:PerkType = mk("Job: Barbarian", "Job: Barbarian",
 				"You've trained in combat using large weapons.",
 				"You choose 'Job: Barbarian' perk, training yourself to became Barbarian.");
 		public static const JobBrawler:PerkType = mk("Job: Brawler", "Job: Brawler",
 				"You've trained in unarmed combat.",
 				"You choose 'Job: Brawler' perk, training yourself to became Brawler.");
+		public static const JobDefender:PerkType = mk("Job: Defender", "Job: Defender",
+				"You've trained in withstanding even the heaviest attacks head on.",
+				"You choose 'Job: Defender' perk, training yourself to became Defender.");
 		public static const JobDervish:PerkType = mk("Job: Dervish", "Job: Dervish",
 				"You've trained in multi meele attacks combat and using of medium sized dual weapons.",
 				"You choose 'Job: Dervish' perk, training yourself to became Dervish.");
@@ -480,12 +521,18 @@ package classes
 		public static const JobGuardian:PerkType = mk("Job: Guardian", "Job: Guardian",
 				"You've trained in defensive combat.",
 				"You choose 'Job: Guardian' perk, training yourself to became Guardian.");
+		public static const JobHunter:PerkType = mk("Job: Hunter", "Job: Hunter",
+				"You've trained in hunter combat.",
+				"You choose 'Job: Hunter' perk, training yourself to became Hunter.");
+		public static const JobKnight:PerkType = mk("Job: Knight", "Job: Knight",
+				"You've trained in combat using shields and heaviest armors.",
+				"You choose 'Job: Knight' perk, training yourself to became Knight.");
 		public static const JobMonk:PerkType = mk("Job: Monk", "Job: Monk",
 				"You've trained in unarmed combat.",
 				"You choose 'Job: Monk' perk, training yourself to became Monk.");
-		public static const JobMunchkin:PerkType = mk("Job: Munchkin", "Job: Munchkin",
+		public static const JobMunchkin:PerkType = mk("Deity Job: Munchkin", "Deity Job: Munchkin",
 				"You're Munchkin, an ultimate being that possess a god-like body and powers.",
-				"You choose 'Job: Munchkin' perk, becoming an ultimate being with a god-like body and powers.");
+				"You choose 'Deity Job: Munchkin' perk, becoming an ultimate being with a god-like body and powers.");
 		public static const JobRanger:PerkType = mk("Job: Ranger", "Job: Ranger",
 				"You've trained in ranged combat.",
 				"You choose 'Job: Ranger' perk, training yourself to became Ranger.");
@@ -495,9 +542,6 @@ package classes
 		public static const JobSorcerer:PerkType = mk("Job: Sorcerer", "Job: Sorcerer",
 				"You've trained in magic combat.",
 				"You choose 'Job: Sorcerer' perk, training yourself to became Sorcerer.");
-		public static const JobSoulArcher:PerkType = mk("Job: Soul Archer", "Job: Soul Archer",
-				"You've trained in art of combining soulforce and arrows.",
-				"You choose 'Job: Soul Archer' perk, training yourself to became Soul Archer.");
 		public static const JobSoulCultivator:PerkType = mk("Job: Soul Cultivator", "Job: Soul Cultivator",
 				"You've cultivated powers of your soul.",
 				"You choose the 'Job: Soul Cultivator' perk, starting journey of the soul cultivation path!");
@@ -553,8 +597,8 @@ package classes
 				"Raises max fatigue by 35 and regain fatigue 10% faster.",
 				"You choose the 'Mana Affinity V' perk, giving you an additional 35 fatigue and boosting your fatigue recovery rate.");
 		public static const ManticoreMetabolism:PerkType = mk("Manticore Metabolism", "Manticore Metabolism",
-				"Allows you to gain a boost of speed for a few hours after an intake of cum.",
-				"You choose the 'Manticore Metabolism' perk, allows you to gain a boost of speed after an intake of cum.");
+				"Allows you to gain a boost of speed for a few hours after an intake of cum and allow attack twice with tail spike per turn.",
+				"You choose the 'Manticore Metabolism' perk, allows you to gain a boost of speed after an intake of cum and allow atack more often with tail spike.");
 		public static const MantislikeAgility:PerkType = mk("Mantis-like Agility", "Mantis-like Agility",
 				"Your altered musculature allows to increase your natural agility and speed. If somehow you would have some type of natural armor or even thicker skin this increase could be even greater...",
 				"You choose the 'Mantis-like Agility' perk, by becoming much more mantis-like your body musculature started to slowly adapt to existance of exoskeleton.");
@@ -585,6 +629,9 @@ package classes
 		public static const MindOverBodyV:PerkType = mk("Mind over Body V", "Mind over Body V",
 				"+2 extra fatigue per point of intelligence.",
 				"You choose the 'Mind over Body V' perk, granting +2 extra maximum fatigue for each point of intelligence.");
+		public static const Multishot:PerkType = mk("Multishot", "Multishot",
+				"Allows you to perform additional range attack per round.",
+				"You choose the 'Multishot' perk, This allows you to make additional range attack.");
 		public static const HiddenMomentum:PerkType = mk("Hidden Momentum", "Hidden Momentum",
 				"You've trained in using your speed to enhance power of your single large weapons swings.",
 				"You choose 'Hidden Momentum' perk, allowing to use your speed to enhance power of your attacks with single large weapons.");
@@ -631,9 +678,18 @@ package classes
 		public static const Precision:PerkType = mk("Precision", "Precision",
 				"Reduces enemy armor by 10. (Req's 25+ Intelligence)",
 				"You've chosen the 'Precision' perk.  Thanks to your intelligence, you're now more adept at finding and striking an enemy's weak points, reducing their damage resistance from armor by 10.  If your intelligence ever drops below 25 you'll no longer be smart enough to benefit from this perk.");
+		public static const PrestigeJobArcaneArcher:PerkType = mk("Prestige Job: Arcane Archer", "Prestige Job: Arcane Archer",
+				"You've trained in prestige art of combining magic and arrows.",
+				"You choose 'Prestige Job: Arcane Archer' perk, training yourself to became Arcane Archer.");
+		public static const PrestigeJobBerserker:PerkType = mk("Prestige Job: Berserker", "Prestige Job: Berserker",
+				"You've trained in prestige art of perfect mastery over all forms of berserking.",
+				"You choose 'Prestige Job: Berserker' perk, training yourself to became Berserker.");
 		public static const PrestigeJobSoulArcher:PerkType = mk("Prestige Job: Soul Archer", "Prestige Job: Soul Archer",
 				"You've trained in prestige art of combining soulforce and arrows.",
 				"You choose 'Prestige Job: Soul Archer' perk, training yourself to became Soul Archer.");
+		public static const PrestigeJobSeer:PerkType = mk("Prestige Job: Seer", "Prestige Job: Seer",
+				"You've trained in prestige art of combining soulforce and magic.",
+				"You choose 'Prestige Job: Seer' perk, training yourself to became Seer.");
 		public static const QuadrupleAttack:PerkType = mk("Quadruple Attack", "Quadruple Attack",
 				"Allows you to perform four melee attacks with non-large weapons per round.",
 				"You choose the 'Quadruple Attack' perk.  This allows you to make four melee attacks with non-large weapons.");
@@ -748,11 +804,11 @@ package classes
 				"You choose the 'Spellarmor' perk. You start every battle with Charge Armor effect, as long as your Lust is not preventing you from casting it before battle.");
 		public static const Spellpower:PerkType = mk("Spellpower", "Spellpower",
 				"[if (player.inte>=50)" +
-						"Increases base spell strength by 20% and mana pool by 30." +
+						"Increases base spell strength by 10% and mana pool by 15." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You choose the 'Spellpower' perk.  Thanks to your sizeable intellect and willpower, you are able to more effectively use magic, boosting base spell effects by 20% and mana pool by 30.");
+				"You choose the 'Spellpower' perk.  Thanks to your sizeable intellect and willpower, you are able to more effectively use magic, boosting base spell effects by 10% and mana pool by 15.");
 		public static const Spellsword:PerkType = mk("Spellsword", "Spellsword",
 				"Start every battle with Charge Weapon enabled, if you meet White Magic requirements before it starts.",
 				"You choose the 'Spellsword' perk. You start every battle with Charge Weapon effect, as long as your Lust is not preventing you from casting it before battle.");
@@ -817,6 +873,9 @@ package classes
 		public static const TripleAttack:PerkType = mk("Triple Attack", "Triple Attack",
 				"Allows you to perform three melee attacks with non-large weapons per round.",
 				"You choose the 'Triple Attack' perk.  This allows you to make three melee attacks with non-large weapons.");
+		public static const TripleAttackLarge:PerkType = mk("Triple Attack (Large)", "Triple Attack (Large)",
+				"Allows you to perform three melee attacks with large weapons per round.",
+				"You choose the 'Triple Attack (Large)' perk.  This allows you to make three melee attacks with large weapons.");
 		public static const TripleStrike:PerkType = mk("Triple Strike", "Triple Strike",
 				"Allows you to perform three range attacks per round.",
 				"You choose the 'Triple Strike' perk.  This allows you to make three range attacks.");
@@ -852,9 +911,21 @@ package classes
 		public static const WellAdjusted:PerkType = mk("Well Adjusted", "Well Adjusted",
 				"You gain half as much lust as time passes in Mareth.",
 				"You choose the 'Well Adjusted' perk, reducing the amount of lust you naturally gain over time while in this strange land!");
+		public static const Whipping:PerkType = mk("Whipping", "Whipping",
+				"Whipping special deal increased damage based on current strength.",
+				"You choose the 'Whipping' perk, making your Whipping special stronger.");
+		public static const Whirlwind:PerkType = mk("Whirlwind", "Whirlwind",
+				"Whirlwind special deal increased damage based on current strength.",
+				"You choose the 'Whirlwind' perk, making your Whirlwind special stronger.");
 		public static const WildQuiver:PerkType = mk("Wild Quiver", "Wild Quiver",
 				"You grab and shoot arrows at blinding speed, gaining an extra shot.",
 				"You choose the 'Wild Quiver' perk, you combine it with triple attack and manyshot to shoot up to 5 times.");
+		public static const JobSoulArcher:PerkType = mk("Job: Soul Archer", "Job: Soul Archer",
+				"You've trained in art of combining soulforce and arrows.",
+				"You choose 'Job: Soul Archer' perk, training yourself to became Soul Archer.");
+		public static const JobArcaneArcher:PerkType = mk("Job: Arcane Archer", "Job: Arcane Archer",
+				"You've trained in art of combining magic and arrows.",
+				"You choose 'Job: Arcane Archer' perk, training yourself to became Arcane Archer.");
 		public static const JobArcher:PerkType = mk("Job: Archer", "Job: Archer",
 				"You've trained in ranged combat.",
 				"You choose 'Job: Archer' perk, training yourself to became Archer.");//perk później do usuniecia
@@ -892,9 +963,10 @@ package classes
 		public static const PhallicRestraint:PerkType = mk("Phallic Restraint", "Phallic Restraint",
 				"Reduces the effects of penis-enlarging transformations.");
 
-		// Armor perks
+		// Armor & Shield perks
 		public static const BloodMage:PerkType = mk("Blood Mage", "Blood Mage",
 				"Spellcasting now consumes health instead of fatigue!",null,true);
+		public static const Obsession:ObsessionPerk = new ObsessionPerk();
 		public static const SluttySeduction:SluttySeductionPerk = new SluttySeductionPerk();
 		public static const WellspringOfLust:PerkType = mk("Wellspring of Lust", "Wellspring of Lust",
 				"At the beginning of combat, gain lust up to black magic threshold if lust is bellow black magic threshold.",null,true);
@@ -902,7 +974,7 @@ package classes
 		public static const WizardsAndSoulcultivatorsEndurance:WizardsAndSoulcultivatorsEndurancePerk = new WizardsAndSoulcultivatorsEndurancePerk();
 		public static const WizardsEndurance:WizardsEndurancePerk = new WizardsEndurancePerk();
 
-		// Weapon perks
+		// Weapon melee & range perks
 		public static const WizardsFocus:WizardsFocusPerk = new WizardsFocusPerk();
 		public static const Accuracy1:Accuracy1Perk = new Accuracy1Perk();
 		public static const Accuracy2:Accuracy2Perk = new Accuracy2Perk();
@@ -919,6 +991,8 @@ package classes
 		// Mutation perks
 		public static const Androgyny:PerkType = mk("Androgyny", "Androgyny",
 				"No gender limits on facial masculinity or femininity.");
+		public static const AquaticAffinity:PerkType = mk("Aquatic Affinity", "Aquatic Affinity",
+				"When in an aquatic battle you gains a +30 to strength and speed.");
 		public static const BasiliskWomb:PerkType = mk("Basilisk Womb", "Basilisk Womb",
 				"Enables your eggs to be properly fertilized into basilisks of both genders!");
 		public static const BeeOvipositor:PerkType = mk("Bee Ovipositor", "Bee Ovipositor",
@@ -977,6 +1051,8 @@ package classes
 				"Your body can remember almost any transformation it undergone.");
 		public static const HarpyWomb:PerkType = mk("Harpy Womb", "Harpy Womb",
 				"Increases all laid eggs to large size so long as you have harpy legs and a harpy tail.");
+		public static const ImprovedVenomGland:PerkType = mk("Improved venom gland", "Improved venom gland",
+				"Allows you to fade into a ghost-like state and temporarily possess others.");
 		public static const Incorporeality:PerkType = mk("Incorporeality", "Incorporeality",
 				"Allows you to fade into a ghost-like state and temporarily possess others.");
 		public static const InkSpray:PerkType = mk("Ink Spray", "Ink Spray",
@@ -1079,6 +1155,7 @@ package classes
 
 		// Monster perks
 		public static const Acid:PerkType = mk("Acid", "Acid", "");
+		public static const EnemyBeastOrAnimalMorphType:PerkType = mk("Beast or Animal-morph enemy type", "Beast or Animal-morph enemy type", "");
 		public static const EnemyBossType:PerkType = mk("Boss-type enemy", "Boss-type enemy", "");
 		public static const EnemyGigantType:PerkType = mk("Gigant-sized type enemy", "Gigant-sized type enemy", "");
 		public static const EnemyGodType:PerkType = mk("God-type enemy", "God-type enemy", "");
@@ -1088,7 +1165,6 @@ package classes
 		public static const IceNature:PerkType = mk("Ice Nature", "Ice Nature", "");
 		public static const IceVulnerability:PerkType = mk("Ice Vulnerability", "Ice Vulnerability", "");
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
-		//public static const :PerkType = mk("", "", "");
 		//public static const :PerkType = mk("", "", "");
 		//public static const :PerkType = mk("", "", "");
 		//public static const :PerkType = mk("", "", ""); na poźniej dopisane perki wzór

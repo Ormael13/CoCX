@@ -206,76 +206,76 @@ package classes.Scenes.NPCs
 				this.newgamebonusHP = 1740;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 2) {
-				initStrTouSpeInte(40, 60, 120, 100);
-				initLibSensCor(40, 40, 10);
+				initStrTouSpeInte(30, 50, 120, 100);
+				initLibSensCor(30, 40, 10);
 				this.bonusHP = 100;
-				this.level = 23;
-				this.str += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.level = 25;
+				this.str += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.spe += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.inte += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 2160;
+				this.lib += 6 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 1980;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 3) {
-				initStrTouSpeInte(50, 70, 140, 120);
-				initLibSensCor(50, 40, 10);
+				initStrTouSpeInte(30, 50, 140, 120);
+				initLibSensCor(30, 40, 10);
 				this.bonusHP = 150;
-				this.level = 26;
-				this.str += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.level = 30;
+				this.str += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.spe += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.inte += 36 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 3870;
+				this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 4440;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 4) {
-				initStrTouSpeInte(60, 80, 160, 140);
-				initLibSensCor(70, 40, 10);
+				initStrTouSpeInte(30, 50, 160, 140);
+				initLibSensCor(30, 40, 10);
 				this.bonusHP = 200;
-				this.level = 29;
-				this.str += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.level = 35;
+				this.str += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.spe += 48 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.inte += 42 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 4590;
+				this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 4920;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 5) {
-				initStrTouSpeInte(70, 90, 180, 150);
-				initLibSensCor(70, 40, 10);
+				initStrTouSpeInte(30, 50, 180, 150);
+				initLibSensCor(30, 40, 10);
 				this.bonusHP = 250;
-				this.level = 32;
-				this.str += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 27 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.level = 40;
+				this.str += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.spe += 54 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.inte += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 6720;
+				this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 6660;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 6) {
-				initStrTouSpeInte(70, 100, 200, 150);
-				initLibSensCor(70, 40, 10);
+				initStrTouSpeInte(30, 50, 200, 150);
+				initLibSensCor(30, 40, 10);
 				this.bonusHP = 300;
-				this.level = 35;
-				this.str += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.tou += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.level = 45;
+				this.str += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.tou += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.spe += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.inte += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-				this.lib += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 7080;
+				this.lib += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+				this.newgamebonusHP = 6900;
 			}
 			if (flags[kFLAGS.KINDRA_LVL_UP] == 7) {		//niedokończone
 				initStrTouSpeInte(70, 100, 200, 150);
 				initLibSensCor(70, 40, 10);
 				this.bonusHP = 300;
-				this.level = 35;
+				this.level = 45;
 				this.str += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.tou += 30 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.spe += 60 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 				this.inte += 45 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
 				this.lib += 21 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-				this.newgamebonusHP = 177 * 40;
+				this.newgamebonusHP = 177 * 50;
 			}
 			this.createVagina(false, VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_TIGHT);
 			createBreastRow(Appearance.breastCupInverse("C"));
@@ -305,8 +305,8 @@ package classes.Scenes.NPCs
 					add(consumables.SHEEPMK,0.6);
 			this.createPerk(PerkLib.JobRanger, 0, 0, 0, 0);
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 2) this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
-			if (flags[kFLAGS.KINDRA_LVL_UP] >= 3) this.createPerk(PerkLib.JobArcaneArcher, 0, 0, 0, 0);
-			if (flags[kFLAGS.KINDRA_LVL_UP] >= 4) this.createPerk(PerkLib.JobSoulArcher, 0, 0, 0, 0);
+			if (flags[kFLAGS.KINDRA_LVL_UP] >= 4) this.createPerk(PerkLib.JobHunter, 0, 0, 0, 0);
+			if (flags[kFLAGS.KINDRA_LVL_UP] >= 6) this.createPerk(PerkLib.PrestigeJobSoulArcher, 0, 0, 0, 0);
 			this.createPerk(PerkLib.BasicEndurance, 0, 0, 0, 0);
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 2) this.createPerk(PerkLib.HalfStepToImprovedEndurance, 0, 0, 0, 0);
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 3) this.createPerk(PerkLib.ImprovedEndurance, 0, 0, 0, 0);
@@ -314,6 +314,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 5) this.createPerk(PerkLib.AdvancedEndurance, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ArchersStaminaI, 0, 0, 0, 0);
 			if (flags[kFLAGS.KINDRA_LVL_UP] >= 4) this.createPerk(PerkLib.VitalShot, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

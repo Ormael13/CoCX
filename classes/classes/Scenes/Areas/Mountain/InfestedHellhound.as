@@ -144,6 +144,7 @@
 			this.special3 = hellHoundWormCannon;
 			this.tailType = TAIL_TYPE_DOG;
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.str += 15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 10 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
