@@ -134,26 +134,28 @@ package classes.Scenes.Explore {
 			outputText("Which book are you interested in perusing?");
 			menu();
 			if (player.hasKeyItem("Dangerous Plants") < 0) {
-				addButton(0, "Danger. Plants", pitchDangerousPlantsBook, undefined, undefined, undefined, "Its title is pretty self-descriptive.", "Dangerous Plants");
+				addButton(0, "Danger. Plants", pitchDangerousPlantsBook, undefined, undefined, undefined, "This is a book titled 'Dangerous Plants'.  As explained by the title, this tome is filled with information on all manner of dangerous plants from this realm.", "Dangerous Plants");
 			} else {
 				addDisabledButton(0, "Danger. Plants", "You already own a copy.", "Dangerous Plants");
 			}
 			
 			if (player.hasKeyItem("Traveler's Guide") < 0) {
-				addButton(1, "Travel. Guide", pitchTravellersGuide, undefined, undefined, undefined, "More a pamphlet than a book.", "Traveler's Guide");
+				addButton(1, "Travel. Guide", pitchTravellersGuide, undefined, undefined, undefined, "This traveler's guide is more of a pamphlet than an actual book, but it still contains some useful information on avoiding local pitfalls.", "Traveler's Guide");
 			} else {
 				addDisabledButton(1, "Travel. Guide", "You already own a copy.", "Traveler's Guide");
 			}
+			
 			if (player.hasKeyItem("Hentai Comic") < 0) {
-				addButton(2, "Hentai Comic", pitchHentaiComic, undefined, undefined, undefined, "A drawn porn.", "Hentai Comic");
+				addButton(2, "Hentai Comic", pitchHentaiComic, undefined, undefined, undefined, "This oddly drawn comic book is filled with images of fornication, sex, and overly large eyeballs.", "Hentai Comic");
 			} else {
-				addDisabledButton(2, "Hentai Comic", "You already own a copy.");
+				addDisabledButton(2, "Hentai Comic", "You already own a copy.", "Hentai Comic");
 			}
+			
 			if (player.hasKeyItem("Yoga Guide") >= 0) {
 				addDisabledButton(3, "Yoga Guide", "You already own a copy.");
 			}
 			else if (flags[kFLAGS.COTTON_UNUSUAL_YOGA_BOOK_TRACKER] > 0) {
-				addButton(3, "Yoga Guide", pitchYogaGuide);
+				addButton(3, "Yoga Guide", pitchYogaGuide, undefined, undefined, undefined, "This leather-bound book is titled 'Yoga for Non-Humanoids.' It contains numerous illustrations of centaurs, nagas and various other oddly-shaped beings in a variety of poses.");
 			} // quest item - no disabled button if you don't own it and don't need it
 			addButton(14, "Back", giacomoEncounter);
 			statScreenRefresh();

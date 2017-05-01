@@ -358,19 +358,7 @@ public function getButtonToolTipText(buttonText:String):String
 	if (buttonText.indexOf("Fake Mare") != -1) {
 		toolTipText = "This fake mare is made of metal and wood, but the anatomically correct vagina looks as soft and wet as any female centaur's.";
 	}
-	//Books
-	if (buttonText.indexOf("Dangerous Plants") != -1) {
-		toolTipText = "This is a book titled 'Dangerous Plants'.  As explained by the title, this tome is filled with information on all manner of dangerous plants from this realm.";
-	}
-	if (buttonText.indexOf("Traveler's Guide") != -1) {
-		toolTipText = "This traveler's guide is more of a pamphlet than an actual book, but it still contains some useful information on avoiding local pitfalls.";
-	}
-	if (buttonText.indexOf("Yoga Guide") != -1) {
-		toolTipText = "This leather-bound book is titled 'Yoga for Non-Humanoids.' It contains numerous illustrations of centaurs, nagas and various other oddly-shaped beings in a variety of poses.";
-	}
-	if (buttonText.indexOf("Hentai Comic") != -1) {
-		toolTipText = "This oddly drawn comic book is filled with images of fornication, sex, and overly large eyeballs.";
-	}
+	//Books - MOVED
 	//------------
 	// TITLE SCREEN 
 	//------------
