@@ -3,7 +3,9 @@
  */
 package classes.Scenes {
 import classes.Appearance;
+import classes.BaseContent;
 import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
 import classes.PerkLib;
 import classes.Scenes.API.Encounter;
 import classes.Scenes.API.Encounters;
@@ -11,8 +13,7 @@ import classes.Scenes.API.FnHelpers;
 import classes.Scenes.Monsters.Goblin;
 import classes.Scenes.Monsters.Imp;
 
-public class CommonEncounters implements Encounter {
-	include "../baseContentInclude.as";
+public class CommonEncounters extends BaseContent implements Encounter {
 
 	// This could be moved to ImpScene class
 	private var _impEncounter:Encounter = null;
