@@ -1918,7 +1918,7 @@
 			player.genderCheck();
 			player.breastRows = [];
 			player.cocks = [];
-			player.vaginas = [];
+			player.vaginas = new <VaginaClass>[];
 			player.horns = 0;
 			player.hornType = HORNS_NONE;
 			player.antennae = ANTENNAE_NONE;

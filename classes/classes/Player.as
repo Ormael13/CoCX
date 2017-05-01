@@ -3475,16 +3475,6 @@ use namespace kGAMECLASS;
 					.length;
 		}
 
-		public function hairDescript():String
-		{
-			return Appearance.hairDescription(this);
-		}
-
-		public function beardDescript():String
-		{
-			return Appearance.beardDescription(this);
-		}
-
 		public function armorDescript(nakedText:String = "gear"):String
 		{
 			var textArray:Array = [];

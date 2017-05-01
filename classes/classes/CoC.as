@@ -5,7 +5,7 @@
  order of these imports until more is known about what needs to load and when.
 */
 
-﻿package classes
+package classes
 {
 	// BREAKING ALL THE RULES.
 	import classes.GlobalFlags.kFLAGS; // This file contains most of the persistent gamestate flags.
