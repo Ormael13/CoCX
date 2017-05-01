@@ -4,8 +4,19 @@ import classes.Creature;
 
 /**
  * Container class for the players skin
+ *
+ * * character has two layer of skin: base and ~~cover~~ coat
+ * each layer has: `type`, `tone`, `adj` (optional adjective), and `desc` (overrides default noun for type)
+ * a **coverage** parameter with the rance:
+ * `(0) COVERAGE_NONE` : coat layer is non-existant
+ * `(1) COVERAGE_LOW` : coat layer exists, but its descriptions appear only when explicitly called
+ * `(2) COVERAGE_MEDIUM` : coat layer exists, descriptions use mixed "[base] and [coat]", can explicitly check either
+ * `(3) COVERAGE_HIGH` : coat layer exists and is used as a default layer when describing skin; base description appear only when explicitly called
+ * `(4) COVERAGE_FULL` : this is virtual state which should automatically reset the `{base:A, cover:B, coverage:FULL}` to `{base:B, coverage: NONE}`.
+ * tattoos should be moved to body part-level or character-level
+ *
  * @since December 27, 2016
- * @author Stadler76
+ * @author Stadler76, aimozg
  */
 public class Skin extends SaveableBodyPart {
 	include "../../../includes/appearanceDefs.as";
@@ -27,23 +38,9 @@ public class Skin extends SaveableBodyPart {
 		addPublicJsonables(["base","coat"]);
 	}
 
-
+	[Deprecated(replacement="describe('coat')")]
 	public function skinFurScales():String {
-		return describe('cover');
-	}
-	public function defaultDesc():String {
-		return Appearance.DEFAULT_SKIN_DESCS[
-					   isPartiallyCovered()
-							   ? PARTIAL_TO_FULL[type]
-							   : type
-					   ] || "skin";
-	}
-	public function defaultAdj():String {
-		return Appearance.DEFAULT_SKIN_ADJS[
-					   isPartiallyCovered()
-							   ? PARTIAL_TO_FULL[type]
-							   : type
-					   ] || "";
+		return describe('coat');
 	}
 	public function get coverage():int {
 		return _coverage;
@@ -75,6 +72,16 @@ public class Skin extends SaveableBodyPart {
 		return base.type;
 	}
 	/**
+	 * Checks both layers against property set
+	 * @param p {color, type, adj, desc}
+	 * @return this.base, this.coat, or null
+	 */
+	public function findLayer(p:Object):SkinLayer {
+		if (coverage < COVERAGE_FULL && base.checkProps(p)) return base;
+		if (coverage > COVERAGE_NONE && coat.checkProps(p)) return coat;
+		return null;
+	}
+	/**
 	 * @param props {type, color, adj, desc}
 	 */
 	public function setSingleLayer(props:Object):void {
@@ -85,7 +92,7 @@ public class Skin extends SaveableBodyPart {
 	 * @param coat {type, color, adj, desc}
 	 * @param base {type, color, adj, desc}
 	 */
-	public function setPartiallyCovered(coat:Object,base:Object=null):void {
+	public function setPatches(coat:Object,base:Object=null):void {
 		coverage = COVERAGE_LOW;
 		this.coat.setProps(coat);
 		this.base.setProps(base);
@@ -171,9 +178,6 @@ public class Skin extends SaveableBodyPart {
 	public function hasFur():Boolean {
 		return hasAny(SKIN_TYPE_FUR);
 	}
-	public function hasScales():Boolean {
-		return hasAny(SKIN_TYPE_SCALES, SKIN_TYPE_AQUA_SCALES);
-	}
 	public function hasChitin():Boolean {
 		return hasAny(SKIN_TYPE_CHITIN);
 	}
@@ -189,14 +193,17 @@ public class Skin extends SaveableBodyPart {
 	public function isFacePartiallyCovered():Boolean {
 		return coverage == COVERAGE_HIGH;
 	}
+	public function hasScales():Boolean {
+		return hasAny(SKIN_TYPE_SCALES, SKIN_TYPE_AQUA_SCALES, SKIN_TYPE_DRAGON_SCALES);
+	}
 	public function hasReptileScales():Boolean {
-		return hasAny(SKIN_TYPE_SCALES);
+		return hasAny(SKIN_TYPE_SCALES,SKIN_TYPE_DRAGON_SCALES);
 	}
 	public function hasDragonScales():Boolean {
-		return false;//type == SKIN_TYPE_DRAGON_SCALES;
+		return hasAny(SKIN_TYPE_DRAGON_SCALES);
 	}
 	public function hasLizardScales():Boolean {
-		return hasAny(SKIN_TYPE_SCALES);//type == SKIN_TYPE_LIZARD_SCALES;
+		return hasAny(SKIN_TYPE_SCALES);
 	}
 	public function hasNonLizardScales():Boolean {
 		return hasScales() && !hasLizardScales();
@@ -256,13 +263,17 @@ public class Skin extends SaveableBodyPart {
 			case SKIN_TYPE_STONE:
 			case SKIN_TYPE_SCALES:
 			case SKIN_TYPE_AQUA_SCALES:
+			case SKIN_TYPE_DRAGON_SCALES:
 				coverage  = COVERAGE_NONE;
 				base.type = value;
 				break;
 			case SKIN_TYPE_PARTIAL_FUR:
 			case SKIN_TYPE_PARTIAL_SCALES:
+			case SKIN_TYPE_PARTIAL_AQUA_SCALES:
+			case SKIN_TYPE_PARTIAL_DRAGON_SCALES:
 			case SKIN_TYPE_PARTIAL_CHITIN:
 			case SKIN_TYPE_PARTIAL_BARK:
+			case SKIN_TYPE_PARTIAL_STONE:
 				coverage  = COVERAGE_LOW;
 				base.type = SKIN_TYPE_PLAIN;
 				coat.type = PARTIAL_TO_FULL[value];
@@ -292,7 +303,8 @@ public class Skin extends SaveableBodyPart {
 					desc = "goo";
 				} else if ([
 							   SKIN_TYPE_SCALES,
-							   SKIN_TYPE_AQUA_SCALES
+							   SKIN_TYPE_AQUA_SCALES,
+								SKIN_TYPE_DRAGON_SCALES
 						   ].indexOf(type) >= 0) {
 					desc = "scales";
 				} else {
@@ -308,7 +320,7 @@ public class Skin extends SaveableBodyPart {
 		if (chitinColor === "no") chitinColor = "";
 		if (scalesColor === "no") scalesColor = "";
 		//noinspection JSDeprecatedSymbols
-		if (InCollection(type, SKIN_TYPE_PLAIN, SKIN_TYPE_GOO, SKIN_TYPE_TATTOED, SKIN_TYPE_STONE, SKIN_TYPE_SCALES, SKIN_TYPE_AQUA_SCALES)) {
+		if (InCollection(type, SKIN_TYPE_PLAIN, SKIN_TYPE_GOO, SKIN_TYPE_TATTOED, SKIN_TYPE_STONE, SKIN_TYPE_SCALES, SKIN_TYPE_AQUA_SCALES, SKIN_TYPE_PARTIAL_DRAGON_SCALES)) {
 			coverage   = COVERAGE_NONE;
 			base.type  = type;
 			base.color = (type == SKIN_TYPE_SCALES && scalesColor) ? scalesColor : tone;
@@ -340,6 +352,8 @@ public class Skin extends SaveableBodyPart {
 		savedata.skinAdj  = adj;
 		savedata.skinTone = tone;
 		savedata.furColor = coat.color;
+		savedata.scalesColor = coat.color;
+		savedata.chitinColor = coat.color;
 	}
 }
 }

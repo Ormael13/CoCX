@@ -1,4 +1,4 @@
-﻿﻿package classes.Scenes{
+﻿package classes.Scenes{
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kACHIEVEMENTS;

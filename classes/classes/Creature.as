@@ -5,6 +5,7 @@ import classes.BodyParts.Claws;
 import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
+import classes.BodyParts.SkinLayer;
 import classes.BodyParts.Tail;
 import classes.BodyParts.UnderBody;
 	import classes.GlobalFlags.kGAMECLASS;
@@ -185,32 +186,50 @@ import classes.BodyParts.UnderBody;
 		[Deprecated]
 		public function get furColor():String {
 			trace("[DEPRECATED] get furColor");
-			return skin.coat.color;
+			var l:SkinLayer = skin.findLayer({
+				type:[SKIN_TYPE_FUR]
+			});
+			return l ? l.color : "no";
 		}
 		[Deprecated]
 		public function set furColor(value:String):void {
 			trace("[DEPRECATED] set furColor");
-			skin.coat.color = value;
+			var l:SkinLayer = skin.findLayer({
+				type:[SKIN_TYPE_FUR]
+			});
+			if (l) l.color = value;
 		}
 		[Deprecated]
 		public function get scalesColor():String {
 			trace("[DEPRECATED] get scalesColor");
-			return skin.coat.color;
+			var l:SkinLayer = skin.findLayer({
+				type:[SKIN_TYPE_SCALES,SKIN_TYPE_DRAGON_SCALES,SKIN_TYPE_AQUA_SCALES]
+			});
+			return l ? l.color : "no"
 		}
 		[Deprecated]
 		public function set scalesColor(value:String):void {
 			trace("[DEPRECATED] set scalesColor");
-			skin.coat.color = value;
+			var l:SkinLayer = skin.findLayer({
+				type:[SKIN_TYPE_CHITIN]
+			});
+			if (l) l.color = value;
 		}
 		[Deprecated]
 		public function get chitinColor():String {
 			trace("[DEPRECATED] get chitinColor");
-			return skin.coat.color;
+			var l:SkinLayer = skin.findLayer({
+				type:[SKIN_TYPE_CHITIN]
+			});
+			return l ? l.color : "no"
 		}
 		[Deprecated]
 		public function set chitinColor(value:String):void {
 			trace("[DEPRECATED] set chitinColor");
-			skin.coat.color = value;
+			var l:SkinLayer = skin.findLayer({
+				type:[SKIN_TYPE_CHITIN]
+			});
+			if (l) l.color = value;
 		}
 		/*Beardstyle
 		0- normal
@@ -231,19 +250,21 @@ import classes.BodyParts.UnderBody;
 		[Deprecated]
 		public function set skinTone(value:String):void {
 			trace("[DEPRECATED] set skinTone");
-			skin.base.color = skin.coat.color = value;
+			skin.base.color = value;
 		}
 		public function get skinDesc():String { return skin.desc; }
 		[Deprecated]
 		public function set skinDesc(value:String):void {
-			trace("[DEPRECATED] set skinTone");
-			skin.base.desc = skin.coat.desc = value;
+			trace("[DEPRECATED] set skinDesc");
+			if (skin.coverage >= Skin.COVERAGE_HIGH) skin.coat.desc = value;
+			else skin.base.desc = value;
 		}
 		public function get skinAdj():String { return skin.adj; }
 		[Deprecated]
 		public function set skinAdj(value:String):void {
-			trace("[DEPRECATED] set skinTone");
-			skin.base.adj = skin.coat.adj = value;
+			trace("[DEPRECATED] set skinAdj");
+			if (skin.coverage >= Skin.COVERAGE_HIGH) skin.coat.adj = value;
+			else skin.base.adj = value;
 		}
 		
 		public var facePart:Face;

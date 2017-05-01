@@ -19,8 +19,8 @@ public class BodyPart extends SimpleJsonable {
 		return _creature;
 	}
 	public function BodyPart(creature:Creature,publicPrimitives:Array) {
-		addPublicPrimitives(publicPrimitives);
 		addPublicPrimitives(["type"]);
+		addPublicPrimitives(publicPrimitives);
 		this._creature       = creature;
 	}
 	public function get type():int {return _type;}
@@ -50,6 +50,38 @@ public class BodyPart extends SimpleJsonable {
 	public function setAllProps(p:Object, keepTone:Boolean = true):void {
 		restore(keepTone);
 		setProps(p);
+	}
+	/**
+	 * Tests each property in `p` against this object property with the same name.
+	 * Keys should be equal to public this properties.
+	 * Value can be either primitives, objects, or arrays.
+	 * If value is a primitive, this property should be equal
+	 * If value is an object and this property is a BodyPart, this sub-object is passed to its checkProps
+	 * If value is an array, this property should pass any of the elements' checks
+	 *
+	 * Example:
+	 *
+	 * player.skin.checkProps({
+	 *     coverage: [0, 1, 2], // either none, low, or mid coverage
+	 *     base: {
+	 *         type: SKIN_TYPE_PLAIN,
+	 *         color: ["blue", "light blue"]
+	 *     }
+	 * });
+	 *
+	 * @return true if all tests are passed
+	 */
+	public function checkProps(p:Object):Boolean {
+		for (var key:String in p) {
+			var v:Array = p[key] is Array ? p[key] : [p[key]];
+			var thiz:* = this[key];
+			for each (var test:* in v) {
+				if (thiz is BodyPart && test is Object) {
+					if (!thiz.checkProps(test)) return false;
+				} else if (thiz != test) return false;
+			}
+		}
+		return true;
 	}
 }
 }
