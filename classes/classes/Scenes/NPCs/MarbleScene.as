@@ -2067,16 +2067,6 @@ public function interactWithMarbleAtCamp():void {
 	addButton(6, "Playtime", playtime);
 	addButton(7, "Break Up", breakUpWithMarble);
 	addButton(8, goEventString, marbleGoEvent);
-	/*choices("Appearance",marbleAppearance,
-			"Talk",marbleTalkOverhaul,
-			"Present",gatherEvent,
-			"Give Item", (canGiveItem() ? giveItem : null),
-			"Get Milk",milkEvent,
-			"Release",sexEvent,
-			"Playtime",playtime,
-			"Break Up",breakUpWithMarble,
-			goEventString,marbleGoEvent,
-			"", null);*/
 	addButton(14, "Back", camp.campLoversMenu);
 }
 

@@ -2847,7 +2847,6 @@ private function friendsTalkExpack():void {
 }
 
 public function urtaDialogueMenu():void {
-	//choices("Urta",urtaDiscussesSelf,"Edryn",urtaDiscussesEdryn,"The Watch",urtaDiscussesTheWatch,"Alcoholism",urtaDiscussesAlcholism,"",0);
 	menu();
 	addButton(0,"Urta",urtaDiscussesSelf);
 	addButton(1,"Edryn",urtaDiscussesEdryn);

@@ -96,29 +96,28 @@ public function farmExploreEncounter():void {
 		var marble:Number = 0;
 		if (player.hasStatusEffect(StatusEffects.Kelt) && !player.hasStatusEffect(StatusEffects.KeltOff) && flags[kFLAGS.KELT_KILLED] <= 0) {
 			if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) addButton(1,"Kelly",kelly.breakingKeltOptions);
-			else addButton(1,"Kelt",kelly.breakingKeltOptions);
+			else addButton(3,"Kelt",kelly.breakingKeltOptions);
 		}
-		//choices("Explore",exploreFarm,"Kelt",keltEvent,"Get Milked",milkYou,"Marble",marble,"Milk Jojo",milkJojo,"Milk Cock",cockMilk,"Talk",talkWhitney,"Work",workFarm,"",0,"Leave",13);
 		if (flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) {
+			addButton(0,"Explore",exploreFarm);
+			addButton(1,"Talk",talkWhitney);
+			if (player.fatigueLeft() >= 20)
+				addButton(2, "Work", workFarm, undefined, undefined, undefined, "Ask Whitney if she could use a hand.");
+			else
+				addButtonDisabled(2, "Work", "You are too tired.");
+			if (!player.hasStatusEffect(StatusEffects.MarbleRapeAttempted) && !player.hasStatusEffect(StatusEffects.NoMoreMarble) && player.hasStatusEffect(StatusEffects.Marble) && flags[kFLAGS.MARBLE_WARNING] == 0) {
+				addButton(4,"Marble", meetMarble);
+			}
 			if (player.hasKeyItem("Breast Milker - Installed At Whitney's Farm") >= 0) {
 				if (player.hasStatusEffect(StatusEffects.Milked)) {
 					outputText("\n\n<b>Your " + player.nippleDescript(0) + "s are currently too sore to be milked.  You'll have to wait a while.</b>", false);
 				}
-				else addButton(2,"Get Milked",getMilked);
+				else addButton(5,"Get Milked",getMilked);
 				
 			}
 			if (player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") >= 0 && player.cockTotal() > 0) {
-				addButton(5,"Milk Cock",cockPumping);
+				addButton(6,"Milk Cock",cockPumping);
 			}
-			if (!player.hasStatusEffect(StatusEffects.MarbleRapeAttempted) && !player.hasStatusEffect(StatusEffects.NoMoreMarble) && player.hasStatusEffect(StatusEffects.Marble) && flags[kFLAGS.MARBLE_WARNING] == 0) {
-				addButton(3,"Marble", meetMarble);
-			}
-			addButton(0,"Explore",exploreFarm);
-			addButton(6,"Talk",talkWhitney);
-			if (player.fatigueLeft() >= 20)
-				addButton(7, "Work", workFarm, undefined, undefined, undefined, "Ask Whitney if she could use a hand.");
-			else
-				addButtonDisabled(7, "Work", "You are too tired.");
 		}
 		addButton(14,"Leave",camp.returnToCampUseOneHour);		
 	}		

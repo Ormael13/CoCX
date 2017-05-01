@@ -548,7 +548,7 @@ public function addButtonDisabled(pos:int, text:String = "", toolTipText:String 
 	//Removes sex-related button in SFW mode.
 	if (flags[kFLAGS.SFW_MODE] > 0) {
 		if (text.indexOf("Sex") != -1 || text.indexOf("Threesome") != -1 ||  text.indexOf("Foursome") != -1 || text == "Watersports" || text == "Make Love" || text == "Use Penis" || text == "Use Vagina" || text.indexOf("Fuck") != -1 || text.indexOf("Ride") != -1 || (text.indexOf("Mount") != -1 && text.indexOf("Mountain") == -1) || text.indexOf("Vagina") != -1) {
-			trace("Button removed due to SFW mode.");
+			//trace("Button removed due to SFW mode.");
 			return;
 		}
 	}
@@ -602,7 +602,7 @@ public function menu():void { //The newer, simpler menu - blanks all buttons so 
  * 
  * I highly recommend you <b>DO NOT</b> use this for new content. Use addButton() instead.
  */
-public function choices(text1:String, butt1:Function,
+/*public function choices(text1:String, butt1:Function,
 						text2:String, butt2:Function,
 						text3:String, butt3:Function,
 						text4:String, butt4:Function,
@@ -624,67 +624,7 @@ public function choices(text1:String, butt1:Function,
 	addButton(7, text8, butt8);
 	addButton(8, text9, butt9);
 	addButton(9, text0, butt0);
-/*
-	var callback :Function;
-	var toolTipText :String;
-
-	var textLabels :Array;
-	var j :int;
-
-	textLabels = [
-		text1,
-		text2,
-		text3,
-		text4,
-		text5,
-		text6,
-		text7,
-		text8,
-		text9,
-		text0
-	];
-
-	//Transfer event code to storage
-	buttonEvents[0] = butt1;
-	buttonEvents[1] = butt2;
-	buttonEvents[2] = butt3;
-	buttonEvents[3] = butt4;
-	buttonEvents[4] = butt5;
-	buttonEvents[5] = butt6;
-	buttonEvents[6] = butt7;
-	buttonEvents[7] = butt8;
-	buttonEvents[8] = butt9;
-	buttonEvents[9] = butt0;
-
-	var tmpJ:int;
-
-	// iterate over the button options, and only enable the ones which have a corresponding event number
-	menu();
-	for (tmpJ = 0; tmpJ < 10; tmpJ += 1)
-	{
-		if (buttonEvents[tmpJ] == -9000 || buttonEvents[tmpJ] == 0 || buttonEvents[tmpJ] == null) {
-			mainView.hideBottomButton( tmpJ );
-		}
-		else {
-			if (buttonEvents[tmpJ] is Number) {
-				addButton(tmpJ, textLabels[tmpJ], eventParser, buttonEvents[tmpJ]);
-				//callback = createCallBackFunction(eventParser, buttonEvents[tmpJ] );
-			} else {
-				addButton(tmpJ, textLabels[tmpJ], buttonEvents[tmpJ]);
-				//callback = createCallBackFunction(buttonEvents[tmpJ], null);
-			}
-			toolTipText = getButtonToolTipText( textLabels[ tmpJ ] );
-
-			//mainView.showBottomButton( tmpJ, textLabels[ tmpJ ], callback, toolTipText );
-		}
-
-	}
-	// funcs = new Array();
-	// args = new Array();
-	//mainView.setOutputText( currentText );
-	output.flush();
-*/
-}
+}*/
 
 /****
 	This function is made for multipage menus of unpredictable length,
@@ -735,7 +675,7 @@ public function choices(text1:String, butt1:Function,
 			[ "Margle", gurgleFluidsInMouthEvent ] // no comma on last item.
 		]);
 ****/
-public function multipageChoices( cancelFunction :*, menuItems :Array ) :void {
+/*public function multipageChoices( cancelFunction :*, menuItems :Array ) :void {
 	const itemsPerPage :int = 8;
 
 	var currentPageIndex :int;
@@ -806,7 +746,7 @@ public function multipageChoices( cancelFunction :*, menuItems :Array ) :void {
 		cancelFunction = 0;
 
 	showPage( 0 );
-}
+}*/
 
 // simpleChoices and doYesNo are convenience functions. They shouldn't re-implement code from choices()
 /**
@@ -836,23 +776,6 @@ public function doYesNo(eventYes:Function, eventNo:Function):void { //New typesa
 	menu();
 	addButton(0, "Yes", eventYes);
 	addButton(1, "No", eventNo);
-/*
-	//Make buttons 1-2 visible and hide the rest.
-
-	//trace("doYesNo");
-	choices("Yes",eventYes,
-			"No",eventNo,
-			"",0,
-			"",0,
-			"",0,
-			"",0,
-			"",0,
-			"",0,
-			"",0,
-			"",0);
-
-}
-*/
 }
 
 /**
@@ -865,22 +788,9 @@ public function doNext(event:Function):void { //Now typesafe
 		trace("Do next setup cancelled by game over");
 		return;
 	}
-	
-	//trace("DoNext have item:", eventNo);
-	//choices("Next", event, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0); 
 	menu();
 	addButton(0, "Next", event);
 }
-
-/* Was never called
-public function doNextClear(eventNo:*):void 
-{
-	outputText("", true, true);
-	//trace("DoNext Clearing display");
-	//trace("DoNext have item:", eventNo);
-	choices("Next", eventNo, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
-}
-*/
 
 public function invertGo():void{ 
 	mainView.invert();

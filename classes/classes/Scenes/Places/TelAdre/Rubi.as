@@ -3327,7 +3327,7 @@ private function pickAnItemToFeedRubi():void {
 	if (player.hasItem(consumables.REDUCTO)) addButton(button++, "Reducto", giveRubiATFItem, consumables.REDUCTO);
 	if (player.hasItem(consumables.GROPLUS)) addButton(button++, "Gro Plus", giveRubiATFItem, consumables.GROPLUS);
 	if (player.hasItem(consumables.TRAPOIL)) addButton(button++, "Trap Oil", giveRubiATFItem, consumables.TRAPOIL);
-	addButton(9, "Back", rubiAppearance);
+	addButton(14, "Back", rubiAppearance);
 
 	
 	

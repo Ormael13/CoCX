@@ -166,23 +166,17 @@ package classes.Scenes.NPCs
 		private function followerCeraphRoleplay():void
 		{
 			clearOutput();
-			outputText("You tell Ceraph you'd like to do a little roleplaying.  Her nipples turn hard under their latex bindings as she asks, \"<i>What will it be, " + player.mf("Master", "Mistress") + "?  Shall I pretend you've just teased me into sexual submission, or would you like to switch things up and have your bottom play at being top again?  Or maybe... you'd like me to shapeshift into some other girl, and do all the dirty, depraved things she never would?</i>\"", false);
-			outputText("\n\nShe makes a gesture, and the surroundings take on a mountainous look.  Of course, she can probably change that on a whim.  What do you have Ceraph roleplay?", false);
-			var urta:Function =null;
-			var marbles:Function =null;
-			var dominika:Function =null;
-			if (flags[kFLAGS.TIMES_FUCKED_URTA] > 0 && (player.hasCock() || player.hasVagina()) && player.lust >= 33) urta = ceraphUrtaRoleplay;
-			if (player.hasCock() && player.cockThatFits(70) >= 0 && player.hasStatusEffect(StatusEffects.Marble) && player.lust >= 33) marbles = sweetieNOOOO;
-			if (flags[kFLAGS.DOMINIKA_STAGE] > 0 && player.lust >= 33 && player.hasCock()) dominika = cerminika;
-			if (player.lust < 33) outputText("\n\n<b>You aren't turned on enough for sex.</b>", false);
+			outputText("You tell Ceraph you'd like to do a little roleplaying.  Her nipples turn hard under their latex bindings as she asks, \"<i>What will it be, " + player.mf("Master", "Mistress") + "?  Shall I pretend you've just teased me into sexual submission, or would you like to switch things up and have your bottom play at being top again?  Or maybe... you'd like me to shapeshift into some other girl, and do all the dirty, depraved things she never would?</i>\"");
+			outputText("\n\nShe makes a gesture, and the surroundings take on a mountainous look.  Of course, she can probably change that on a whim.  What do you have Ceraph roleplay?");
+			if (player.lust < 33) outputText("\n\n<b>You aren't turned on enough for sex.</b>");
+			
 			menu();
-			if (player.gender > 0) addButton(8, "Be A Pet", sumissivenessToCeraphFollower);
 			addButton(0, "Defeat Her", ceraphScene.winRapeChoices);
 			addButton(1, "Lose to Her", ceraphScene.ceraphRapesYouBADDAWGYODIGGITY);
-			addButton(5, "Dominika", dominika);
-			addButton(6, "Marble Play", marbles);
-			addButton(7, "Urta Play", urta);
-			//choices("Defeat Her",winRapeChoices,"Lose to Her",ceraphRapesYouBADDAWGYODIGGITY,"",0,"",0,"",0,"",0,"Dominika P.",dominika,"Marble Play",marbles,"Urta Play",urta,"Back",ceraphFollowerAppearance);
+			if (flags[kFLAGS.DOMINIKA_STAGE] > 0 && player.lust >= 33 && player.hasCock()) addButton(5, "Dominika", cerminika);
+			if (player.hasCock() && player.cockThatFits(70) >= 0 && player.hasStatusEffect(StatusEffects.Marble) && player.lust >= 33) addButton(6, "Marble Play", sweetieNOOOO);
+			if (flags[kFLAGS.TIMES_FUCKED_URTA] > 0 && (player.hasCock() || player.hasVagina()) && player.lust >= 33) addButton(7, "Urta Play", ceraphUrtaRoleplay);
+			if (player.gender > 0) addButton(8, "Be A Pet", sumissivenessToCeraphFollower);
 			addButton(14, "Back", ceraphFollowerAppearance);
 		}
 

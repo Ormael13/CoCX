@@ -29,7 +29,13 @@ package classes.Items.Consumables
 			var gpNipples:Function	= (game.player.totalNipples() > 0 ? growPlusNipples : null);
 			clearOutput();
 			outputText("You ponder the needle in your hand knowing it will enlarge the injection site.  What part of your body will you use it on?  ");
-			game.choices("Balls", gpBalls, "Breasts", gpBreasts, "Clit", gpClit, "Cock", gpCock, "Nipples", gpNipples, "", null, "", null, "", null, "", null, "Nevermind", growPlusCancel);
+			game.menu();
+			game.addButton(0, "Balls", gpBalls);
+			game.addButton(1, "Breasts", gpBreasts);
+			game.addButton(2, "Clit", gpClit);
+			game.addButton(3, "Cock", gpCock);
+			game.addButton(4, "Nipples", gpNipples);
+			game.addButton(14, "Nevermind", growPlusCancel);
 			return(true);
 		}
 		

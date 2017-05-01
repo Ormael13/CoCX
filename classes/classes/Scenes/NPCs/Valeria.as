@@ -138,19 +138,6 @@ private function followersValeriaSex(display:Boolean = true):void {
 		outputText(".");
 		outputText("\n\n\"<i>Hmm... I suppose that could be arranged. What did you have in mind, partner?</i>\"");
 	}
-	//(Display Options: \"<i>[Penetrate Her](Cockwielder PC Only)  [Get Fucked]  [Gooflation] 
-	//[Get Dominated](Must have a gender)  [Dick/No Dick])
-	/*var penetrate:Function = null;
-	if (player.hasCock()) penetrate = penetrateValeria;
-	var getFucked:Function = valeriaGetFucked;
-	var gooFlation:Function = gooFlation;
-	var dominated:Function = null;
-	if (player.gender > 0) dominated = valeriaSexDominated;
-	var dickToggle:Function = valeriaDickToggle;
-	var dickText:String = "Grow Dick";
-	if (flags[kFLAGS.VELARIA_FUTA] == 1) {
-		dickText = "Lose Dick";
-	}*/
 	menu();
 	if (player.hasCock()) addButton(0, "PenetrateHer", penetrateValeria, null, null, null, "Fuck the goo girl with your penis!");
 	addButton(1, "Get Fucked", valeriaGetFucked, null, null, null, player.hasVagina() ? "Have her penetrate you vaginally.": "Have her penetrate you anally.");
@@ -158,7 +145,6 @@ private function followersValeriaSex(display:Boolean = true):void {
 	if (player.gender > 0) addButton(3, "GetDominated", valeriaSexDominated, null, null, null, "Submit to the armor-goo and have her take charge.");
 	if (flags[kFLAGS.VELARIA_FUTA] == 1) addButton(4, "Lose Dick", valeriaDickToggle, null, null, null, "Ask her to hide that gooey cock of hers.");
 	else addButton(4, "Grow Dick", valeriaDickToggle, null, null, null, "Ask her to grow a gooey cock.");
-	//choices("PenetrateHer",penetrate,"Get Fucked",getFucked,"Gooflation",gooFlation,"GetDominated",dominated,dickText,dickToggle,"",0,"",0,"",0,"",0,"Back",valeriaFollower);
 	addButton(14, "Back", valeriaFollower);
 }
 
