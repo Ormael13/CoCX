@@ -545,7 +545,7 @@ use namespace kGAMECLASS;
 		override public function get shieldBlock():Number {
 			var block:Number = _shield.block;
 			//miejce na sposoby boostowania block value like perks or status effects
-			
+
 			block = Math.round(block);
 			return block;
 		}
@@ -1287,7 +1287,7 @@ use namespace kGAMECLASS;
 				if (nagaScore() >= 8) race = "naga";
 				else race = "half-naga";
 			}
-				
+
 			if (phoenixScore() >= 10)
 			{
 				if (isTaur()) race = "phoenix-taur";
@@ -2567,7 +2567,7 @@ use namespace kGAMECLASS;
 				orcaCounter++;
 			return orcaCounter;
 		}
-		
+
 		//Determine Mutant Rating
 		public function mutantScore():Number
 		{
@@ -2714,7 +2714,7 @@ use namespace kGAMECLASS;
 				yetiCounter++;
 			return yetiCounter;
 		}
-		
+
 		//Centaur score
 		public function centaurScore():Number
 		{
@@ -2981,11 +2981,11 @@ use namespace kGAMECLASS;
 			if (armType == 7 || armType == 18)
 				yggdrasilCounter++;
 			//claws?
-			
+
 			if (wingType == WING_TYPE_PLANT)
 				yggdrasilCounter++;
 			//skin(fur(moss), scales(bark))
-			
+
 			if (tentacleCocks() > 0 || stamenCocks() > 0)
 				yggdrasilCounter++;
 			if (lowerBody == 38)
@@ -2994,7 +2994,7 @@ use namespace kGAMECLASS;
 				yggdrasilCounter++;
 			return yggdrasilCounter;
 		}
-		
+
 		//Wolf/Fenrir score
 		public function wolfScore():Number
 		{
@@ -3025,7 +3025,7 @@ use namespace kGAMECLASS;
 				wolfCounter += 1;
 			return wolfCounter;
 		}
-		
+
 		public function sirenScore():Number 
 		{
 			var sirenCounter:Number = 0;
@@ -3267,7 +3267,7 @@ use namespace kGAMECLASS;
 		//		prestigeJobs++;
 			return prestigeJobs;
 		}
-		
+
 		public function lactationQ():Number
 		{
 			if (biggestLactation() < 1)

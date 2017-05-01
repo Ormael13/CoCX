@@ -507,9 +507,6 @@
 			//Breasts
 			player.createBreastRow();
 			
-			//Gender set
-			player.gender = GENDER_MALE;
-			
 			//Choices
 			clearOutput();
 			outputText("You are a man.  Your upbringing has provided you an advantage in strength and toughness.\n\nWhat type of build do you have?");
@@ -537,9 +534,6 @@
 			//Breasts
 			player.createBreastRow();
 			
-			//Gender set
-			player.gender = GENDER_FEMALE;
-			
 			//Choices
 			clearOutput();
 			outputText("You are a woman.  Your upbringing has provided you an advantage in speed and intellect.\n\nWhat type of build do you have?");
@@ -547,7 +541,6 @@
 		}
 
 		private function isAHerm():void {
-			player.gender = GENDER_HERM;
 			//Attributes
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				player.str+=1;
@@ -572,9 +565,6 @@
 			
 			//Breasts
 			player.createBreastRow();
-			
-			//Gender set
-			player.gender = GENDER_HERM;
 			
 			//Choices
 			outputText("\n\nYou are a hermaphrodite.  Your upbringing has provided you an average in stats.\n\nWhat type of build do you have?", true);
@@ -1915,7 +1905,6 @@
 			if (player.hasKeyItem("Sky Poison Pearl") >= 0) {
 				outputText("\n\nYou soon noticing a circular green imprint at the palm of your left hand. When you trying to figure out it meaning something clicks in your mind. It's a strange artifact that fused with your body that allow storing many things inside. Artifact that fused with your body? You are unable to recall when did yo... Wait a second there are few almost fully faded away memory fragments of you been somewhere underwater fearlessly facing some huge monster with tentacles as it legs... Doing you utermost efforts no other memories even slightest fragments apprear in your mind. Resigned you try to concentrate on remembering how to use this thing but those memories are still too blurred. Maybe with time you remember all about this... 'thing'.")
 			}
-			player.genderCheck();
 			player.breastRows = [];
 			player.cocks = [];
 			player.vaginas = new <VaginaClass>[];

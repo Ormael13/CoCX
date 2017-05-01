@@ -162,7 +162,12 @@ import classes.BodyParts.UnderBody;
 				
 		//Appearance Variables
 		//Gender 1M, 2F, 3H
-		public var gender:int = GENDER_NONE;
+		public function get gender():int {
+			if (hasCock() && hasVagina()) return GENDER_HERM;
+			if (hasCock()) return GENDER_MALE;
+			if (hasVagina()) return GENDER_FEMALE;
+			return GENDER_NONE;
+		}
 		private var _tallness:Number = 0;
 		public function get tallness():Number { return _tallness; }
 		public function set tallness(value:Number):void { _tallness = value; }
@@ -2369,18 +2374,6 @@ import classes.BodyParts.UnderBody;
 			return true;
 		}
 		
-		public function genderCheck():void
-		{
-			if (hasCock() && hasVagina())
-				gender = GENDER_HERM;
-			else if (hasCock())
-				gender = GENDER_MALE;
-			else if (hasVagina())
-				gender = GENDER_FEMALE;
-			else
-				gender = GENDER_NONE;
-		}
-		
 		//Remove cocks
 		public function removeCock(arraySpot:int, totalRemoved:int):void
 		{
@@ -2456,7 +2449,6 @@ import classes.BodyParts.UnderBody;
 					//trace("Attempted to remove " + totalRemoved + " vaginas.");
 				}
 			}
-			genderCheck();
 		}
 		
 		//Remove a breast row
@@ -2625,7 +2617,7 @@ import classes.BodyParts.UnderBody;
 		public function hasFur():Boolean { return skin.hasFur(); }
 		public function hasPlainSkin():Boolean { return skin.hasPlainSkin(); }
 		public function hasGooSkin():Boolean { return skin.hasGooSkin(); }
-		public function skinDescript(...args):String { return skin.description.apply(skin, args); }
+		public function skinDescript():String { return skin.describe({layer:'basic'}); }
 
 		// <mod name="Predator arms" author="Stadler76">
 		public function claws():String { return clawsPart.describe({}); }

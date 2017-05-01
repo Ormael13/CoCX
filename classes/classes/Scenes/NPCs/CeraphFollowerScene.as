@@ -1553,7 +1553,6 @@ package classes.Scenes.NPCs
 			dynStats("lib", -2, "sen", -2, "cor", 5);
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00218]++;
 			player.removeCock(x, 1);
-			player.genderCheck();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1567,7 +1566,6 @@ package classes.Scenes.NPCs
 			outputText("\n\n\"<i>Oh don't mind the feelings, they'll fade once I get farther away and get this stuffed into one of my pets.  Thank you again, [Master] for supporting your pet's ever-growing harem.  I'll be sure and put the new pocket-pussy to use right away so that you'll have some good dreams soon.  I'll miss seeing it on you though, so if you would, please replace it. </i>\" instructs Ceraph with an air of feigned meekness.", false);
 			outputText("\n\nYou work your jaw in consternation, trying to stay upright as Ceraph starts to fly away, amusing herself by masturbating your old cunt as she flies.  The lewd squishes seem to hang in the air, and you're helpless to do naught but writhe in the dirt and moan as you're brought to orgasm from a nonexistent vagina.  It seems as soon as she leaves camp she forgets she's supposed to be YOUR subservient bitch.");
 			player.removeVagina(0, 1);
-			player.genderCheck();
 			//(-100 lust, -1 fetish, +1 vagina toy status)
 			player.orgasm();
 			dynStats("lib", -2, "sen", -2, "cor", 5);

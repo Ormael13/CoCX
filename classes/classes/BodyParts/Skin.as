@@ -76,11 +76,11 @@ public class Skin extends BodyPart {
 		var p_tone:String = coverage() > 0 ? coverColor() : tone;
 		if (noTone) p_tone = "";
 		if (noAdj) p_adj = "";
-		return p_adj + (p_adj && p_tone ? ", " : "") + p_tone + (p_adj || p_tone ? " " : "") + desc;
+		return p_adj + (p_adj && p_tone ? " " : "") + p_tone + (p_adj || p_tone ? " " : "") + desc;
 	}
 	public function basicLayerDesc(noAdj:Boolean = false, noTone:Boolean = false):String {
 		var p_adj:String  = !noAdj ? adj : "";
-		var p_tone:String = coverage() > 0 ? furColor : tone;
+		var p_tone:String = coverage() > 1 ? coverColor() : tone;
 		var p_desc:String = (coverage() <= 1) ? desc : "skin";
 		if (noTone) p_tone = "";
 		return p_adj + (p_adj && p_tone ? ", " : "") + p_tone + (p_adj || p_tone ? " " : "") + p_desc;

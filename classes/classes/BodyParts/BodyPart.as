@@ -24,7 +24,7 @@ public class BodyPart extends SimpleJsonable {
 		restore(false);
 		super.loadFromObject(o, ignoreErrors);
 		// Upgrade old saves
-		if ("type" in o && !("_type" in o)) this.type = o.type;
+		if (typeof o === 'object' && o != null && "type" in o && !("_type" in o)) this.type = o.type;
 	}
 
 	/**

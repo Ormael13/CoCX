@@ -190,7 +190,6 @@ package classes.Items.Consumables
 				//Brain
 				//Max int - 50
 			}
-			game.player.genderCheck();
 			return(false);
 		}
 	}
