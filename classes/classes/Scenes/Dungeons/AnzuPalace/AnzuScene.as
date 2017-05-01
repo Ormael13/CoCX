@@ -946,15 +946,10 @@ package classes.Scenes.Dungeons.AnzuPalace
 			}
 			else if (model.time.hours < 16) {
 				outputText(images.showImage("anzu-prep-lunch"));
-				if (flags[kFLAGS.ANZU_TIMES_DINED_LUNCH] == 0) {
-					outputText("When you arrive to the palace a smell of meat cooking attracts your attention. The smell leads you to the kitchen, and when your enter, you find Anzu taking some roasted steaks from a grill. Looks like this time he has left behind his robes and now he’s wearing a white apron over his set of shirt and pants. When putting the steaks on a plate, he manages to look you and says.");
-					outputText("\n\n\"<i>[name]. You’re here! Looks like you’ve arrived just in time. As you see, I’m cooking the meal.</i>\" He says, pointing the tables around him.");
-					outputText("\n\nOn the tables near the stove are many slices of what once were a huge cheese, some pieces of bread, with some bunches of grapes on the left. Isn’t too much for a midday lunch?");
-					outputText("\n\n\"<i>You see, I usually eat much more food at noon than in the dinner. Since I’ve almost finished with the main dish, you could help me, and then we could eat together. If you want, of course.</i>\"");
-				}
-				else {
-					
-				}
+				outputText("When you arrive to the palace a smell of meat cooking attracts your attention. The smell leads you to the kitchen, and when your enter, you find Anzu taking some roasted steaks from a grill. Looks like this time he has left behind his robes and now he’s wearing a white apron over his set of shirt and pants. When putting the steaks on a plate, he manages to look you and says.");
+				outputText("\n\n\"<i>[name]. You’re here! Looks like you’ve arrived just in time. As you see, I’m cooking the meal.</i>\" He says, pointing the tables around him.");
+				outputText("\n\nOn the tables near the stove are many slices of what once were a huge cheese, some pieces of bread, with some bunches of grapes on the left. Isn’t too much for a midday lunch?");
+				outputText("\n\n\"<i>You see, I usually eat much more food at noon than in the dinner. Since I’ve almost finished with the main dish, you could help me, and then we could eat together. If you want, of course.</i>\"");
 				doYesNo(eatFoodWithAnzu, dontEatFoodWithAnzu);
 			}
 			else {
