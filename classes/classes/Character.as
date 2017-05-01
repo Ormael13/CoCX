@@ -234,7 +234,7 @@ import classes.GlobalFlags.kFLAGS;
 	public function beard():String{ return facePart.beard(); }
 	public function hasMuzzle():Boolean{ return facePart.hasMuzzle(); }
 	public function face():String { return facePart.describe(); }
-	public function faceDesc():String { return facePart.describe(false,true); }
+	public function faceDesc():String { return facePart.describeMF(); }
 	public function hasLongTail():Boolean { return tail.isLong(); }
 
 		public function isPregnant():Boolean { return _pregnancyType != 0; }

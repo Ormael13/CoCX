@@ -14,11 +14,14 @@ public class BodyPart extends SimpleJsonable {
 	public function restore(keepColor:Boolean = true):void {
 		type = 0;
 	}
-	protected var creature:Creature;
+	private var _creature:Creature;
+	public function get creature():Creature {
+		return _creature;
+	}
 	public function BodyPart(creature:Creature,publicPrimitives:Array) {
 		addPublicPrimitives(publicPrimitives);
 		addPublicPrimitives(["type"]);
-		this.creature       = creature;
+		this._creature       = creature;
 	}
 	public function get type():int {return _type;}
 	public function set type(value:int):void {_type = value;}

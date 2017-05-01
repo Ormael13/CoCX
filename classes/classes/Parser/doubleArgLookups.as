@@ -114,8 +114,10 @@
 					}
 
 		};
-		private static function skinDescription(layer:String,noAdj:Boolean,noTone:Boolean):String {
-			return kGAMECLASS.player.skin.describe(layer,noAdj,noTone)
+		private static function skinDescriptionFn(layer:String,noAdj:Boolean,noTone:Boolean):Function {
+			return function (thisPtr:*, aspect:*):* {
+				return kGAMECLASS.player.skin.describe(layer,noAdj,noTone)
+			}
 		}
 		/*
 		 Your [skin noadj] [skin isare] [skin color].
@@ -123,18 +125,23 @@
 		 I have [skin.basic][if skin.isPartiallyCovered| with skin.cover.long].
 		 */
 		public var skinLookups:Object = {
-			"basic": function (thisPtr:*, aspect:*):* {return skinDescription("basic", false, false);},
-			"basic.noadj": function (thisPtr:*, aspect:*):* {return skinDescription("basic", true, false);},
-			"main": function (thisPtr:*, aspect:*):* {return skinDescription("main", false, false);},
-			"main.noadj": function (thisPtr:*, aspect:*):* {return skinDescription("main", true, false);},
-			"cover": function (thisPtr:*, aspect:*):* {return skinDescription("cover", false, false);},
-			"cover.noadj": function (thisPtr:*, aspect:*):* {return skinDescription("cover", true, false);},
-			"full": function (thisPtr:*, aspect:*):* {return skinDescription("both", false, false);},
-			"full.noadj": function (thisPtr:*, aspect:*):* {
-				return skinDescription("both", true, false);
+			"basic": skinDescriptionFn("basic", false, false),
+			"basic.noadj": skinDescriptionFn("basic", true, false),
+			"main": skinDescriptionFn("main", false, false),
+			"main.noadj": skinDescriptionFn("main", true, false),
+			"cover": skinDescriptionFn("cover", false, false),
+			"cover.noadj": skinDescriptionFn("cover", true, false),
+			"full": skinDescriptionFn("both", false, false),
+			"full.noadj": skinDescriptionFn("both", true, false)
+		};
+		public var faceLookups:Object = {
+			"deco": function(thisPtr:*,aspect:*):*{
+				return kGAMECLASS.player.facePart.describeDeco();
+			},
+			"full": function(thisPtr:*,aspect:*):*{
+				return kGAMECLASS.player.facePart.describe(false,true);
 			}
 		};
-
 		// These tags take an ascii attribute for lookup.
 		// [object attribute]
 		// if attribute cannot be cast to a number, the parser looks for "object" in twoWordTagsLookup,
@@ -150,5 +157,7 @@
 
 			"cock"		: cockLookups,
 			"cockhead"	: cockHeadLookups,
-			"skin"      : skinLookups
+
+			"skin"      : skinLookups,
+			"face"      : faceLookups
 		}

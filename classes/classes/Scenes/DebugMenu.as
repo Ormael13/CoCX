@@ -492,7 +492,7 @@ package classes.Scenes
 		private function showChangeOptions(page:int, constants:Array, functionPageIndex:Function):void {
 			var N:int = 12;
 			for (var i:int = N * page; i < constants.length && i < (page + 1) * N; i++) {
-				addButton(i % N, constants[i], curry(functionPageIndex, page, i));
+				if (constants[i]!=="") addButton(i % N, constants[i], curry(functionPageIndex, page, i));
 			}
 			if (page > 0) addButton(12, "PrevPage", curry(functionPageIndex, page - 1));
 			if ((page +1)*N < constants.length) addButton(13, "NextPage", curry(functionPageIndex, page + 1));
@@ -514,7 +514,9 @@ package classes.Scenes
 			addButton(1,"SkinTone",changeSkinTone);
 			addButton(2,"SkinAdj",changeSkinAdj);
 			addButton(3,"SkinDesc",changeSkinDesc);
-			addButton(4,"FaceType",changeFaceType);
+			addButton(5,"FaceType",changeFaceType);
+			addButton(6,"FaceDecoType",changeFaceDecoType);
+			addButton(7,"FaceDecoAdj",changeFaceDecoAdj);
 			addButton(14, "Back", accessDebugMenu);
 		}
 		private static const SKIN_TYPE_CONSTANTS:Array = [
@@ -522,7 +524,7 @@ package classes.Scenes
 			"(1) FUR", // SKIN_TYPE_FUR
 			"(2) SCALES", // SKIN_TYPE_SCALES
 			"(3) GOO", // SKIN_TYPE_GOO
-			"(4)", // SKIN_TYPE_UNDEFINED
+			"", // SKIN_TYPE_UNDEFINED
 			"(5) CHITIN", // SKIN_TYPE_CHITIN
 			"(6) BARK", // SKIN_TYPE_BARK
 			"(7) STONE", // SKIN_TYPE_STONE
@@ -550,7 +552,7 @@ package classes.Scenes
 		];
 		private function dumpPlayerFace():void {
 			outputText("[pg]");
-			outputText("player.skin = " + JSON.stringify(player.skin)
+			outputText("player.skin = " + JSON.stringify(player.skin.saveToObject())
 											  .replace(/":"/g,'":&nbsp; "')
 											  .replace(/,"/g, ', "') + "\n");
 			outputText(generateTagDemos(
@@ -559,8 +561,8 @@ package classes.Scenes
 							"skin cover", "skin cover.noadj", "skinfurscales",
 							"skin full", "skin full.noadj", "skin.full",
 							"skintone") + ".\n");
-			outputText("player.face = " + JSON.stringify(player.facePart).replace(/,/g, ", ") + "\n");
-			outputText(generateTagDemos("face")+".\n");
+			outputText("player.facePart = " + JSON.stringify(player.facePart.saveToObject()).replace(/,/g, ", ") + "\n");
+			outputText(generateTagDemos("face","face deco","face full","player.facePart.isDecorated")+".\n");
 		}
 		private function changeSkinType(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.skin.type = setIdx;
@@ -622,12 +624,38 @@ package classes.Scenes
 			"(26) SALAMANDER_FANGS",  // FACE_SALAMANDER_FANGS
 			"(27) YETI_FANGS",  // FACE_YETI_FANGS
 		];
+		private static const DECO_DESC_CONSTANTS:Array = [
+			"(0) NONE",
+			"(1) GENERIC",
+			"(2) OVERLAY",
+			"(3) TATTOO"
+		];
+		private static const DECO_ADJ_CONSTANTS:Array = [
+			"(none)", "magic", "glowing", "sexy",
+			"", "", "", "",
+			"mark", "burn", "scar"
+		];
 		private function changeFaceType(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.facePart.type = setIdx;
 			menu();
 			dumpPlayerData();
 			dumpPlayerFace();
 			showChangeOptions(page, FACE_TYPE_CONSTANTS, changeFaceType);
+		}
+		private function changeFaceDecoType(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.facePart.decoType = setIdx;
+			menu();
+			dumpPlayerData();
+			dumpPlayerFace();
+			showChangeOptions(page, DECO_DESC_CONSTANTS, changeFaceDecoType);
+		}
+		private function changeFaceDecoAdj(page:int=0,setIdx:int=-1):void {
+			if (setIdx==0) player.facePart.decoAdj = "";
+			if (setIdx>0) player.facePart.decoAdj = DECO_ADJ_CONSTANTS[setIdx];
+			menu();
+			dumpPlayerData();
+			dumpPlayerFace();
+			showChangeOptions(page, DECO_ADJ_CONSTANTS, changeFaceDecoAdj);
 		}
 		private function changeScorpionTail():void {
 			clearOutput();

@@ -2,15 +2,35 @@
  * Created by aimozg on 27.04.2017.
  */
 package classes.BodyParts {
+import classes.Appearance;
 import classes.Creature;
 import classes.internals.Utils;
 
 public class Face extends SaveableBodyPart {
 
+	private var _decoType:int = DECORATION_NONE;
+	public var decoAdj:String = "";
+
+	public function get decoType():int {
+		return _decoType;
+	}
+	public function set decoType(value:int):void {
+		_decoType = value;
+		if (value == DECORATION_NONE) decoAdj = "";
+		if (value == DECORATION_GENERIC && decoAdj == "") decoAdj = "something";
+	}
 	public function Face(creature:Creature) {
-		super(creature,"facePart",[]);
+		super(creature,"facePart",["decoType","decoAdj"]);
 	}
 
+	override public function restore(keepColor:Boolean = true):void {
+		super.restore(keepColor);
+		decoType = DECORATION_NONE;
+		decoAdj = "";
+	}
+	public function isDecorated():Boolean {
+		return decoType != DECORATION_NONE;
+	}
 	public function hasMuzzle():Boolean {
 		return [
 				   FACE_HORSE, FACE_DOG, FACE_CAT, FACE_LIZARD, FACE_KANGAROO,
@@ -70,13 +90,13 @@ public class Face extends SaveableBodyPart {
 	}
 
 	override public function descriptionFull():String {
-		return describe(false,true);
+		return describe(false, true);
 	}
 	/**
-	 * @param fem (default false): Describe femininity level
-	 * @param article (default false): Add an article a/an/the
+	 * @param article (default false): Add an article a/an/the (default false): Describe femininity level
+	 * @param deco (default false): If has decoration
 	 */
-	public function describe(article:Boolean=false,fem:Boolean=false):String {
+	public function describe(article:Boolean=false,deco:Boolean=false):String {
 		var femininity:Number = creature.femininity;
 		var a:String          = "", an:String = "", the:String = "";
 		if (article) {
@@ -84,53 +104,65 @@ public class Face extends SaveableBodyPart {
 			an  = "an ";
 			the = "the ";
 		}
-		if (!fem) {
-			return a + nounPhrase();
-		} else {
-			var faceo:String = "";
-			//0-10
-			if (femininity < 10) {
-				faceo = a + "square chin";
-				if (!hasBeard()) faceo += " and chiseled jawline";
-				else faceo += ", chiseled jawline, and " + beard();
-				return faceo;
-			}
-			//10+ -20
-			else if (femininity < 20) {
-				faceo = a + "rugged looking " + nounPhrase() + " ";
-				if (hasBeard()) faceo += "and " + beard();
-				return faceo + "that's surely handsome";
-			}
-			//21-28
-			else if (femininity < 28)
-				return a + "well-defined jawline and a fairly masculine profile";
-			//28+-35
-			else if (femininity < 35)
-				return a + "somewhat masculine, angular jawline";
-			//35-45
-			else if (femininity < 45)
-				return the + "barest hint of masculinity on its features";
-			//45-55
-			else if (femininity <= 55)
-				return an + "androgynous set of features that would look normal on a male or female";
-			//55+-65
-			else if (femininity <= 65)
-				return a + "tiny touch of femininity to it, with gentle curves";
-			//65+-72
-			else if (femininity <= 72)
-				return a + "nice set of cheekbones and lips that have the barest hint of pout";
-			//72+-80
-			else if (femininity <= 80)
-				return a + "beautiful, feminine shapeliness that's sure to draw the attention of males";
-			//81-90
-			else if (femininity <= 90)
-				return a + "gorgeous profile with full lips, a button nose, and noticeable eyelashes";
-			//91-100
-			else
-				return a + "jaw-droppingly feminine shape with full, pouting lips, an adorable nose, and long, beautiful eyelashes";
+		var withDec:String = "";
+		if (deco && decoType != DECORATION_NONE) {
+			withDec = " with " + describeDeco();
 		}
+		return a + nounPhrase()+withDec;
 	}
-
+	public function describeDeco():String {
+		return Appearance.describeDecoration(creature, decoType, decoAdj);
+	}
+	public function describeMF(article:Boolean=false):String {
+		var faceo:String = "";
+		var femininity:Number = creature.femininity;
+		var a:String          = "", an:String = "", the:String = "";
+		if (article) {
+			a   = "a ";
+			an  = "an ";
+			the = "the ";
+		}
+		//0-10
+		if (femininity < 10) {
+			faceo = a + "square chin";
+			if (!hasBeard()) faceo += " and chiseled jawline";
+			else faceo += ", chiseled jawline, and " + beard();
+			return faceo;
+		}
+		//10+ -20
+		else if (femininity < 20) {
+			faceo = a + "rugged looks ";
+			if (hasBeard()) faceo += "and " + beard();
+			return faceo + "that's surely handsome";
+		}
+		//21-28
+		else if (femininity < 28)
+			return a + "well-defined jawline and a fairly masculine profile";
+		//28+-35
+		else if (femininity < 35)
+			return a + "somewhat masculine, angular jawline";
+		//35-45
+		else if (femininity < 45)
+			return the + "barest hint of masculinity on its features";
+		//45-55
+		else if (femininity <= 55)
+			return an + "androgynous set of features that would look normal on a male or female";
+		//55+-65
+		else if (femininity <= 65)
+			return a + "tiny touch of femininity to it, with gentle curves";
+		//65+-72
+		else if (femininity <= 72)
+			return a + "nice set of cheekbones and lips that have the barest hint of pout";
+		//72+-80
+		else if (femininity <= 80)
+			return a + "beautiful, feminine shapeliness that's sure to draw the attention of males";
+		//81-90
+		else if (femininity <= 90)
+			return a + "gorgeous profile with full lips, a button nose, and noticeable eyelashes";
+		//91-100
+		else
+			return a + "jaw-droppingly feminine shape with full, pouting lips, an adorable nose, and long, beautiful eyelashes";
+	}
 	override protected function loadFromOldSave(savedata:Object):void {
 		type = intOr(savedata.faceType,FACE_HUMAN);
 	}
