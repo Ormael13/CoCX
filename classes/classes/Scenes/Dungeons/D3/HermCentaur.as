@@ -107,7 +107,7 @@ package classes.Scenes.Dungeons.D3
 		{
 			outputText("Turning about, the demonic centauress lifts her tail to reveal the slimy, lubricated lips of her puffy, black horse-cunt.  She arches her human body back to lie on her back, an incredible show of flexibility, allowing you to view the silhouette of her jutting nipples her tail lazily fans her corruption-enhanced pheromones in your direction.  The air temperature seems to spike by a few degrees as the fan of biological lust washes over you.  Fragrant female moisture seems to seep into your very pores, and in spite of your desire to win out, ");
 			
-			if (player.lust <= 50) outputText(" your [skin] grows feverishly hot.");
+			if (player.lust <= 50) outputText(" your " + player.skin() + " grows feverishly hot.");
 			else 
 			{
 				outputText(" blood rushes to your loins, invigorating");

@@ -789,7 +789,7 @@ package classes.Scenes.NPCs
 				outputText("mount her head");
 				if (!dick) outputText(", angling your clit forward along your stomach by pinning it against the anemone's forehead");
 			}
-			outputText("; her hair delivers tingles of venom where it brushes your skin even as her own hands dawdle playfully along your [skin].  Without another word, you force her head into your groin as you ram your distended ");
+			outputText("; her hair delivers tingles of venom where it brushes your skin even as her own hands dawdle playfully along your " + player.skin() + ".  Without another word, you force her head into your groin as you ram your distended ");
 			if (!dick) outputText("chick-");
 			outputText("prick into her eager face.");
 
@@ -811,7 +811,7 @@ package classes.Scenes.NPCs
 				outputText(", and her hair reaches forward to caress your [sack], delivering lancets of venom through the thin skin that send your arousal, and your production, into overdrive");
 				if (!player.hasCock()) outputText(".  As your [balls] swell with blood and seed, you can't help but groan; there'll be nowhere for the largess to go, and it will be with you until your body reabsorbs it - or you make an outlet");
 			}
-			outputText(".  Your hips take over, thrusting into her brutally and knocking her head back and forth.  Her tentacles fly wildly, brushing all along your stomach and hips as you pound her mouth, leaving little stripes of heat on your [skin] that seep into your body and only make you want to come even more.");
+			outputText(".  Your hips take over, thrusting into her brutally and knocking her head back and forth.  Her tentacles fly wildly, brushing all along your stomach and hips as you pound her mouth, leaving little stripes of heat on your " + player.skin() + " that seep into your body and only make you want to come even more.");
 
 			outputText("\n\nIt doesn't take long for the accommodating, self-adjusting passage to bring you to climax, aided by the touch of her stingers... you try to reduce the pace of your hips, to prolong the fun, but your lover is having none of it.  As you pull out slowly to ease yourself in again, her hair wraps around the shaft of your ");
 			if (dick) outputText("dick");

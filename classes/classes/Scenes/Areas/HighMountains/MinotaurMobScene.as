@@ -404,7 +404,7 @@ private function nonAddictMinotaurGangBang():void {
 //*[Loss - Very Pregnant, Lots of BJs] 
 private function loseToMinoMobVeryPregnant():void {
 	spriteSelect(94);
-	outputText("The largest stud grunts, \"<i>Heh.  Mom's body looks like it's about to pop.</i>\"  His brother pushes him aside and rubs his furred hand across the taut [skin] of your belly as he says, \"<i>", false);
+	outputText("The largest stud grunts, \"<i>Heh.  Mom's body looks like it's about to pop.</i>\"  His brother pushes him aside and rubs his furred hand across the taut " + player.skin() + " of your belly as he says, \"<i>", false);
 	if (player.pregnancyType != PregnancyStore.PREGNANCY_MINOTAUR) outputText("She doesn't know how to keep her hungry twat closed.  You can see the vermin squirming in her belly.  Disgusting.", false);
 	else outputText("I can feel our little brother.  It won't be long now.", false);
 	outputText("  Since your womb is full you'll have to take care of us with your other holes.  ...Don't look at me like that Mom - it's not my fault you're such a slut.</i>\"\n\n", false);

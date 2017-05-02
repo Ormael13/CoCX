@@ -111,38 +111,8 @@
 						}
 					}
 
-		};
-		private static function skinDescriptionFn(layer:String,noAdj:Boolean,noTone:Boolean):Function {
-			return function (thisPtr:*, aspect:*):* {
-				return kGAMECLASS.player.skin.describe(layer,noAdj,noTone)
 		}
-		}
-		public var skinLookups:Object = {
-			"skin": skinDescriptionFn("skin", false, false),
-			"noadj": skinDescriptionFn("skin", true, false),
-			"notone": skinDescriptionFn("skin", false, true),
-			"type": skinDescriptionFn("skin", true, true),
-			"base": skinDescriptionFn("base", false, false),
-			"base.noadj": skinDescriptionFn("base", true, false),
-			"base.notone": skinDescriptionFn("base", false, true),
-			"base.type": skinDescriptionFn("base", true, true),
-			"coat": skinDescriptionFn("coat", false, false),
-			"coat.noadj": skinDescriptionFn("coat", true, false),
-			"coat.notone": skinDescriptionFn("coat", false, true),
-			"coat.type": skinDescriptionFn("coat", true, true),
-			"full": skinDescriptionFn("full", false, false),
-			"full.noadj": skinDescriptionFn("full", true, false),
-			"full.notone": skinDescriptionFn("full", false, true),
-			"full.type": skinDescriptionFn("full", true, true)
-		};
-		public var faceLookups:Object = {
-			"deco": function(thisPtr:*,aspect:*):*{
-				return kGAMECLASS.player.facePart.describeDeco();
-			},
-			"full": function(thisPtr:*,aspect:*):*{
-				return kGAMECLASS.player.facePart.describe(false,true);
-			}
-		};
+
 		// These tags take an ascii attribute for lookup.
 		// [object attribute]
 		// if attribute cannot be cast to a number, the parser looks for "object" in twoWordTagsLookup,
@@ -157,8 +127,5 @@
 			// PC Attributes:
 
 			"cock"		: cockLookups,
-			"cockhead"	: cockHeadLookups,
-
-			"skin"      : skinLookups,
-			"face"      : faceLookups
+			"cockhead"	: cockHeadLookups
 		}

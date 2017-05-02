@@ -304,11 +304,12 @@ use namespace kGAMECLASS;
 				armorDef += (2 * (1 + newGamePlusMod()));
 			}
 			//Stacks on top of Thick Skin perk.
-			var p:Boolean = skin.isPartiallyCovered();
-			if(skin.hasFur()) armorDef += (p?1:2)*(1 + newGamePlusMod());
-			if(skin.hasChitin()) armorDef += (p?2:4)*(1 + newGamePlusMod());
-			if(skin.hasScales()) armorDef += (p?3:6)*(1 + newGamePlusMod()); //bee-morph (), mantis-morph (), scorpion-morph (wpisane), spider-morph (wpisane)
-			if(skin.hasBark()) armorDef += (p?4:8)*(1 + newGamePlusMod()); //może do 10 podnieść jak doda sie scales dla smoków?
+			if(skinType == SKIN_TYPE_PARTIAL_FUR) armorDef += (1 + newGamePlusMod());
+			if(skinType == SKIN_TYPE_FUR || skinType == SKIN_TYPE_PARTIAL_CHITIN) armorDef += (2 * (1 + newGamePlusMod()));
+			if(skinType == SKIN_TYPE_PARTIAL_SCALES) armorDef += (3 * (1 + newGamePlusMod()));
+			if(skinType == SKIN_TYPE_CHITIN || skinType == SKIN_TYPE_PARTIAL_BARK) armorDef += (4 * (1 + newGamePlusMod()));//bee-morph (), mantis-morph (), scorpion-morph (wpisane), spider-morph (wpisane)
+			if(skinType == SKIN_TYPE_SCALES) armorDef += (6 * (1 + newGamePlusMod()));
+			if(skinType == SKIN_TYPE_BARK) armorDef += (8 * (1 + newGamePlusMod()));//może do 10 podnieść jak doda sie scales dla smoków?
 			if(skinType == SKIN_TYPE_STONE) armorDef += (8 * (1 + newGamePlusMod()));//może do 10 podnieść jak doda sie scales dla smoków?
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorDef += (1 * (1 + newGamePlusMod()));
@@ -544,7 +545,7 @@ use namespace kGAMECLASS;
 		override public function get shieldBlock():Number {
 			var block:Number = _shield.block;
 			//miejce na sposoby boostowania block value like perks or status effects
-
+			
 			block = Math.round(block);
 			return block;
 		}
@@ -1286,7 +1287,7 @@ use namespace kGAMECLASS;
 				if (nagaScore() >= 8) race = "naga";
 				else race = "half-naga";
 			}
-
+				
 			if (phoenixScore() >= 10)
 			{
 				if (isTaur()) race = "phoenix-taur";
@@ -2566,7 +2567,7 @@ use namespace kGAMECLASS;
 				orcaCounter++;
 			return orcaCounter;
 		}
-
+		
 		//Determine Mutant Rating
 		public function mutantScore():Number
 		{
@@ -2713,7 +2714,7 @@ use namespace kGAMECLASS;
 				yetiCounter++;
 			return yetiCounter;
 		}
-
+		
 		//Centaur score
 		public function centaurScore():Number
 		{
@@ -2980,11 +2981,11 @@ use namespace kGAMECLASS;
 			if (armType == 7 || armType == 18)
 				yggdrasilCounter++;
 			//claws?
-
+			
 			if (wingType == WING_TYPE_PLANT)
 				yggdrasilCounter++;
 			//skin(fur(moss), scales(bark))
-
+			
 			if (tentacleCocks() > 0 || stamenCocks() > 0)
 				yggdrasilCounter++;
 			if (lowerBody == 38)
@@ -2993,7 +2994,7 @@ use namespace kGAMECLASS;
 				yggdrasilCounter++;
 			return yggdrasilCounter;
 		}
-
+		
 		//Wolf/Fenrir score
 		public function wolfScore():Number
 		{
@@ -3024,7 +3025,7 @@ use namespace kGAMECLASS;
 				wolfCounter += 1;
 			return wolfCounter;
 		}
-
+		
 		public function sirenScore():Number 
 		{
 			var sirenCounter:Number = 0;
@@ -3266,7 +3267,7 @@ use namespace kGAMECLASS;
 		//		prestigeJobs++;
 			return prestigeJobs;
 		}
-
+		
 		public function lactationQ():Number
 		{
 			if (biggestLactation() < 1)
@@ -3472,6 +3473,16 @@ use namespace kGAMECLASS;
 					.filter(function(item:StatusAffectType,index:int,array:Array):Boolean{
 						return this.findStatusAffect(item)>=0;},this)
 					.length;
+		}
+
+		public function hairDescript():String
+		{
+			return Appearance.hairDescription(this);
+		}
+
+		public function beardDescript():String
+		{
+			return Appearance.beardDescription(this);
 		}
 
 		public function armorDescript(nakedText:String = "gear"):String

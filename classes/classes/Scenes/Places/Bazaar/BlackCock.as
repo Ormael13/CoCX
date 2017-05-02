@@ -261,7 +261,7 @@ package classes.Scenes.Places.Bazaar
 				addButton(1, "Satyr", meetAndyMathis);
 			}
 			else {
-				outputText("You also see Andy Mathis, the waiter at The Black Cock. Unlike the table full of his beer-bellied kinsmen his waist is trim and his tall-standing horns are polished. His masculine face is framed by a cloud of curly brown hair. His goatee is also neatly trimmed and tastefully styled. He wears nothing more than a simple black shirt with the sleeves cut off; his heavy balls are visible just below the sheath that conceals his dog-like manhood.\n\n");
+				outputText("You also see Andy Mathis, the waiter at The Black Cock. Unlike the table full of his beer-bellied kinsmen his waist is trim and his tall-standing horns are polished. His masculine face is framed by a cloud of curly brown hair. His goatee is also neatly trimmed and tastefully styled. He wears nothing more than a simple black shirt with the sleeves cut off; his heavy balls are visible just below the sheath that conceals his dog-like manhood.\n\n")
 				addButton(1, "Andy", meetAndyMathis);
 			}
 			//Harry Roswell
@@ -1171,7 +1171,7 @@ package classes.Scenes.Places.Bazaar
 				}
 				else if (player.hasVagina()) { //Female
 					outputText("\n\nThe moment you think this, Harry reaches his free hand down beneath the table. When he reaches your [pussy] he dips a practiced finger into your snatch, sending tingles through your body. He begins to thrust his finger and hips at the same time, crushing you between his dick and powerful fingers in an oddly satisfying combination of sensations. He plays with your pussy, obviously quite experienced with pleasing a woman as he brings you to climax after climax using the dual sensations created by the belly of his hot dogging cock against your [asshole] and the expertise with which he plays with your [pussy]. Then his other hand travels southward and he uses both to tug at the tender lips of your vulva, gently stretching them before pushing them together. He begins to alternate hands, using one to get you off and then the other. ");
-					if (player.wetness() >= 4) outputText("Every time you gush fluid onto his fingers he vibrates his palm, sending uncontrollable shuddering screams into the air as the sensations intensify. ");
+					if (player.vaginas[0].wetness >= 4) outputText("Every time you gush fluid onto his fingers he vibrates his palm, sending uncontrollable shuddering screams into the air as the sensations intensify. ");
 					outputText("Once he's satisfied with the number of times you've spilled girl cum onto his kitchen floor he pulls his finger from your pleasantly tingling [pussy].");
 					outputText("\n\nThe Rhino puts a hand covered in your juices in front of your [face], \"<i>Lick it.</i>\" He commands and in your post-orgasmic state you don't even think about it, you just stick your [tongue] out and lap up a bit of your own cum. Before you finish he wraps the hand around your lips, smashing your cum into your face as his other wet hand pushes against your back. He begins hot dogging your upturned ass with brutal thrusts that send echoing claps through the room. You can't help clenching your ass cheeks as he roughly humps against you. He smacks your [ass] before the arm holding his cum scented palm to your face pulls back. With a hand now wrapped around your waist he increases the pace and when his thrusts become sloppy you know he's close.");
 				}
@@ -1467,7 +1467,7 @@ package classes.Scenes.Places.Bazaar
 			}
 			if (rand(4) == 0 && changes < changeLimit && player.skinType != SKIN_TYPE_SCALES && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.earType != EARS_ELFIN) {
 				outputText("\n\nYou feel an odd shifting sensation on the side of your head and, reaching up to inspect it, find a <b>pair of fleshy pointed ears</b>. "); 
-				if (player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_PARTIAL_FUR) outputText("As you examine your new elvish ears you feel fur grow around them, matching the rest of you.");
+				if (player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_PARTIAL_FUR) ("As you examine your new elvish ears you feel fur grow around them, matching the rest of you.");
 				player.earType = EARS_ELFIN;
 				changes++;
 			}
@@ -1660,10 +1660,10 @@ package classes.Scenes.Places.Bazaar
 			}
 			//Remove gills
 			if (rand(4) == 0 && changes < changeLimit && player.hasGills()) {
-				if (player.gillType == GILLS_ANEMONE) outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.");
+				if (player.gillType == CoC.GILLS_ANEMONE) outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.");
 				else outputText("\n\nYou feel your gills tighten, the slits seeming to close all at once. As you let out a choked gasp your gills shrink into nothingness, leaving only smooth skin behind. Seems you won't be able to stay in the water quite so long anymore.");
 				outputText("  <b>You no longer have gills!</b>");
-				player.gillType = GILLS_NONE;
+				player.gillType = CoC.GILLS_NONE;
 				changes++;
 			}
 			
@@ -1843,16 +1843,16 @@ package classes.Scenes.Places.Bazaar
 			}
 			//Remove gills
 			if (rand(3) == 0 && changes < changeLimit && player.hasGills()) {
-				if (player.gillType == GILLS_ANEMONE) outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.");
+				if (player.gillType == CoC.GILLS_ANEMONE) outputText("\n\nYour chest itches, and as you reach up to scratch it, you realize your gills have withdrawn into your skin.");
 				else outputText("\n\nYou feel your gills tighten, the slits seeming to close all at once. As you let out a choked gasp your gills shrink into nothingness, leaving only smooth skin behind. Seems you won't be able to stay in the water quite so long anymore.");
 				outputText("  <b>You no longer have gills!</b>");
-				player.gillType = GILLS_NONE;
+				player.gillType = CoC.GILLS_NONE;
 				changes++;
 			}
 			
 			if (rand(3) == 0 && changes < changeLimit && player.eyeType == EYES_FOUR_SPIDER_EYES) {
 				outputText("\n\nYour two forehead eyes start throbbing painfully, your sight in them eventually going dark. You touch your forehead to inspect your eyes, only to find out that they have disappeared. <b>You only have two eyes now!</b>");
-				player.eyeType = EYES_HUMAN;
+				player.eyeType == EYES_HUMAN;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.averageNipplesPerBreast() > 4) {

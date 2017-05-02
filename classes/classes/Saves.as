@@ -5,7 +5,6 @@
 	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.Scenes.Inventory;
 	import classes.Scenes.Places.TelAdre.Katherine;
-	import classes.internals.SimpleJsonable;
 
 	CONFIG::AIR 
 	{
@@ -60,8 +59,6 @@ public var loader:URLLoader;
 public var saveFileNames:Array = ["CoC_1", "CoC_2", "CoC_3", "CoC_4", "CoC_5", "CoC_6", "CoC_7", "CoC_8", "CoC_9", "CoC_10", "CoC_11", "CoC_12", "CoC_13", "CoC_14"];
 public var versionProperties:Object = { "legacy" : 100, "0.8.3f7" : 124, "0.8.3f8" : 125, "0.8.4.3":119, "latest" : 119 };
 public var savedGameDir:String = "data/com.fenoxo.coc";
-
-public var notes:String = "";
 
 public function cloneObj(obj:Object):Object
 {
@@ -287,7 +284,6 @@ public function saveScreen():void
 	mainView.nameBox.y = 620;
 	mainView.nameBox.width = 550;
 	mainView.nameBox.text = "";
-	mainView.nameBox.maxChars = 54;
 	mainView.nameBox.visible = true;
 	
 	// var test; // Disabling this variable because it seems to be unused.
@@ -567,7 +563,6 @@ public function loadGame(slot:String):void
 		clearOutput();
 
 		loadGameObject(saveFile, slot);
-		loadPermObject();
 		outputText("Game Loaded");
 		temp = 0;
 		
@@ -576,6 +571,7 @@ public function loadGame(slot:String):void
 			trace("Setting in-use save slot to: " + slot);
 			player.slotName = slot;
 		}
+		loadPermObject();
 		statScreenRefresh();
 		doNext(playerMenu);
 	}
@@ -750,11 +746,11 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 	if (mainView.nameBox.text != "")
 	{
 		saveFile.data.notes = mainView.nameBox.text;
-		notes = mainView.nameBox.text;
+		getGame().notes = mainView.nameBox.text;
 	}
 	else
 	{
-		saveFile.data.notes = notes;
+		saveFile.data.notes = getGame().notes;
 		mainView.nameBox.visible = false;
 	}
 	if (flags[kFLAGS.HARDCORE_MODE] > 0)
@@ -856,6 +852,9 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.thickness = player.thickness;
 		saveFile.data.tone = player.tone;
 		saveFile.data.tallness = player.tallness;
+		saveFile.data.furColor = player.furColor;
+		saveFile.data.scalesColor = player.scalesColor;
+		saveFile.data.chitinColor = player.chitinColor;
 		saveFile.data.hairColor = player.hairColor;
 		saveFile.data.hairType = player.hairType;
 		saveFile.data.gillType = player.gillType;
@@ -864,21 +863,25 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.beardLength = player.beardLength;
 		saveFile.data.eyeType = player.eyeType;
 		saveFile.data.beardStyle = player.beardStyle;
+		saveFile.data.skinType = player.skinType;
+		saveFile.data.skinTone = player.skinTone;
+		saveFile.data.skinDesc = player.skinDesc;
+		saveFile.data.skinAdj = player.skinAdj;
+		saveFile.data.faceType = player.faceType;
 		saveFile.data.tongueType = player.tongueType;
 		saveFile.data.earType = player.earType;
 		saveFile.data.earValue = player.earValue;
 		saveFile.data.antennae = player.antennae;
 		saveFile.data.horns = player.horns;
 		saveFile.data.hornType = player.hornType;
-		player.facePart.saveToSaveData(saveFile.data);
-		//player.underBody.saveToSaveData(saveFile.data);
-		player.lowerBodyPart.saveToSaveData(saveFile.data);
-		player.skin.saveToSaveData(saveFile.data);
-		player.tail.saveToSaveData(saveFile.data);
-		player.clawsPart.saveToSaveData(saveFile.data);
-
 		saveFile.data.wingDesc = player.wingDesc;
 		saveFile.data.wingType = player.wingType;
+		saveFile.data.lowerBody = player.lowerBody;
+		saveFile.data.legCount = player.legCount;
+		saveFile.data.tailType = player.tailType;
+		saveFile.data.tailCount = player.tailCount;
+		saveFile.data.tailVenum = player.tailVenom;
+		saveFile.data.tailRecharge = player.tailRecharge;
 		saveFile.data.hipRating = player.hipRating;
 		saveFile.data.buttRating = player.buttRating;
 		
@@ -888,6 +891,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.ballSize = player.ballSize;
 		saveFile.data.hoursSinceCum = player.hoursSinceCum;
 		saveFile.data.fertility = player.fertility;
+		saveFile.data.clitLength = player.clitLength;
 		
 		//Preggo stuff
 		saveFile.data.pregnancyIncubation = player.pregnancyIncubation;
@@ -947,8 +951,6 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			saveFile.data.vaginas[i].clitPierced = player.vaginas[i].clitPierced;
 			saveFile.data.vaginas[i].clitPShort = player.vaginas[i].clitPShort;
 			saveFile.data.vaginas[i].clitPLong = player.vaginas[i].clitPLong;
-			saveFile.data.vaginas[i].clitLength = player.vaginas[i].clitLength;
-			saveFile.data.vaginas[i].recoveryProgress = player.vaginas[i].recoveryProgress;
 		}
 		//NIPPLES
 		saveFile.data.nippleLength = player.nippleLength;
@@ -1032,6 +1034,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			saveFile.data.itemStorage[i].quantity = itemStorageGet()[i].quantity;
 			saveFile.data.itemStorage[i].unlocked = itemStorageGet()[i].unlocked;
 		}
+		
 		//Set gear slot array
 		for (i = 0; i < gearStorageGet().length; i++)
 		{
@@ -1382,21 +1385,6 @@ public function onDataLoaded(evt:Event):void
 	//playerMenu();
 }
 
-/**
- * Upgrade loaded saveFile.data object to most recent version
- * so the loadGameObject can proceed without hacks
- */
-private function unFuckSaveDataBeforeLoading(data:Object):void {
-	if (data.tail === undefined) {
-		var venomAsCount:Boolean = data.tailType == TAIL_TYPE_FOX;
-		data.tail = {
-			type    : data.tailType,
-			venom   : venomAsCount ? 0 : data.tailVenum,
-			recharge: data.tailRecharge,
-			count   : (data.tailType == 0) ? 0 : venomAsCount ? data.tailVenum : 1
-		}
-	}
-}
 public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 {
 	var game:CoC = getGame();
@@ -1410,11 +1398,10 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 	player.slotName = slot;
 
 	var counter:Number = player.cocks.length;
-	trace("Loading save!");
+	trace("Loading save!")
 	//Initialize the save file
 	//var saveFile:Object = loader.data.readObject();
 	var saveFile:* = saveData;
-	var data:Object = saveFile.data;
 	if (saveFile.data.exists)
 	{
 
@@ -1430,7 +1417,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		inventory.clearGearStorage();
 		player.short = saveFile.data.short;
 		player.a = saveFile.data.a;
-		notes = saveFile.data.notes;
+		game.notes = saveFile.data.notes;
 		
 		//flags
 		for (var i:int = 0; i < flags.length; i++)
@@ -1443,7 +1430,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			game.versionID = saveFile.data.versionID;
 			trace("Found internal versionID:", game.versionID);
 		}
-		unFuckSaveDataBeforeLoading(saveFile.data);
+		
 		//PIERCINGS
 		
 		//trace("LOADING PIERCINGS");
@@ -1656,7 +1643,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		//LEVEL STATS
 		player.XP = saveFile.data.XP;
 		player.level = saveFile.data.level;
-		player.gems = saveFile.data.gems || 0;
+		player.gems = saveFile.data.gems;
 		if (saveFile.data.perkPoints == undefined)
 			player.perkPoints = 0;
 		else
@@ -1675,6 +1662,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		//Appearance
 		if (saveFile.data.startingRace != undefined)
 			player.startingRace = saveFile.data.startingRace;
+		player.gender = saveFile.data.gender;
 		if (saveFile.data.femininity == undefined)
 			player.femininity = 50;
 		else
@@ -1704,6 +1692,18 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.thickness = saveFile.data.thickness;
 		
 		player.tallness = saveFile.data.tallness;
+		if (saveFile.data.furColor == undefined || saveFile.data.furColor == "no")
+			player.furColor = saveFile.data.hairColor;
+		else
+			player.furColor = saveFile.data.furColor;
+		if (saveFile.data.scalesColor == undefined || saveFile.data.scalesColor == "no")
+			player.scalesColor = saveFile.data.scalesColor;
+		else
+			player.scalesColor = saveFile.data.scalesColor;
+		if (saveFile.data.chitinColor == undefined || saveFile.data.chitinColor == "no")
+			player.chitinColor = saveFile.data.chitinColor;
+		else
+			player.chitinColor = saveFile.data.chitinColor;
 		player.hairColor = saveFile.data.hairColor;
 		if (saveFile.data.hairType == undefined)
 			player.hairType = 0;
@@ -1720,11 +1720,75 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.armType = saveFile.data.armType;
 		player.hairLength = saveFile.data.hairLength;
-		player.lowerBodyPart.loadFromSaveData(data);
-		player.skin.loadFromSaveData(data);
-		player.clawsPart.loadFromSaveData(data);
-		player.facePart.loadFromSaveData(data);
-		player.tail.loadFromSaveData(data);
+		player.skinType = saveFile.data.skinType;
+		if (saveFile.data.skinAdj == undefined)
+			player.skinAdj = "";
+		else
+			player.skinAdj = saveFile.data.skinAdj;
+		player.skinTone = saveFile.data.skinTone;
+		player.skinDesc = saveFile.data.skinDesc;
+		//Convert from old skinDesc to new skinAdj + skinDesc!
+		if (player.skinDesc.indexOf("smooth") != -1)
+		{
+			player.skinAdj = "smooth";
+			if (player.skinType == SKIN_TYPE_PLAIN)
+				player.skinDesc = "skin";
+			if (player.skinType == SKIN_TYPE_FUR)
+				player.skinDesc = "fur";
+			if (player.skinType == SKIN_TYPE_SCALES)
+				player.skinDesc = "scales";
+			if (player.skinType == SKIN_TYPE_GOO)
+				player.skinDesc = "goo";
+		}
+		if (player.skinDesc.indexOf("thick") != -1)
+		{
+			player.skinAdj = "thick";
+			if (player.skinType == SKIN_TYPE_PLAIN)
+				player.skinDesc = "skin";
+			if (player.skinType == SKIN_TYPE_FUR)
+				player.skinDesc = "fur";
+			if (player.skinType == SKIN_TYPE_SCALES)
+				player.skinDesc = "scales";
+			if (player.skinType == SKIN_TYPE_GOO)
+				player.skinDesc = "goo";
+		}
+		if (player.skinDesc.indexOf("rubber") != -1)
+		{
+			player.skinAdj = "rubber";
+			if (player.skinType == SKIN_TYPE_PLAIN)
+				player.skinDesc = "skin";
+			if (player.skinType == SKIN_TYPE_FUR)
+				player.skinDesc = "fur";
+			if (player.skinType == SKIN_TYPE_SCALES)
+				player.skinDesc = "scales";
+			if (player.skinType == SKIN_TYPE_GOO)
+				player.skinDesc = "goo";
+		}
+		if (player.skinDesc.indexOf("latex") != -1)
+		{
+			player.skinAdj = "latex";
+			if (player.skinType == SKIN_TYPE_PLAIN)
+				player.skinDesc = "skin";
+			if (player.skinType == SKIN_TYPE_FUR)
+				player.skinDesc = "fur";
+			if (player.skinType == SKIN_TYPE_SCALES)
+				player.skinDesc = "scales";
+			if (player.skinType == SKIN_TYPE_GOO)
+				player.skinDesc = "goo";
+		}
+		if (player.skinDesc.indexOf("slimey") != -1)
+		{
+			player.skinAdj = "slimey";
+			if (player.skinType == SKIN_TYPE_PLAIN)
+				player.skinDesc = "skin";
+			if (player.skinType == SKIN_TYPE_FUR)
+				player.skinDesc = "fur";
+			if (player.skinType == SKIN_TYPE_SCALES)
+				player.skinDesc = "scales";
+			if (player.skinType == SKIN_TYPE_GOO)
+				player.skinDesc = "goo";
+		}
+		player.faceType = saveFile.data.faceType;
 		if (saveFile.data.tongueType == undefined)
 			player.tongueType = TONUGE_HUMAN;
 		else
@@ -1754,15 +1818,50 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		
 		player.wingDesc = saveFile.data.wingDesc;
 		player.wingType = saveFile.data.wingType;
+		player.lowerBody = saveFile.data.lowerBody;
+		player.tailType = saveFile.data.tailType;
+		player.tailCount = saveFile.data.tailCount;
+		player.tailVenom = saveFile.data.tailVenum;
+		player.tailRecharge = saveFile.data.tailRecharge;
 		player.hipRating = saveFile.data.hipRating;
 		player.buttRating = saveFile.data.buttRating;
-
+		
+		if (saveFile.data.legCount == undefined) {
+			if (player.lowerBody == LOWER_BODY_TYPE_DRIDER_LOWER_BODY) {
+				player.legCount = 8;
+			}
+			else if (player.lowerBody == LOWER_BODY_TYPE_SCYLLA) {
+				player.legCount = 8;
+			}
+			else if (player.lowerBody == LOWER_BODY_TYPE_CENTAUR) {
+				player.legCount = 4;
+				player.lowerBody = LOWER_BODY_TYPE_HOOFED;
+			}
+			else if (player.lowerBody == LOWER_BODY_TYPE_PONY) {
+				player.legCount = 4;
+			}
+			else if (player.lowerBody == LOWER_BODY_TYPE_DEERTAUR) {
+				player.legCount = 4;
+				player.lowerBody = LOWER_BODY_TYPE_CLOVEN_HOOFED;
+			}
+			else if (player.lowerBody == LOWER_BODY_TYPE_NAGA) {
+				player.legCount = 1;
+			}
+			else if (player.lowerBody == LOWER_BODY_TYPE_GOO) {
+				player.legCount = 1;
+			}
+			else player.legCount = 2;
+		}
+		else
+			player.legCount = saveFile.data.legCount;
+		
 		//Sexual Stuff
 		player.balls = saveFile.data.balls;
 		player.cumMultiplier = saveFile.data.cumMultiplier;
 		player.ballSize = saveFile.data.ballSize;
 		player.hoursSinceCum = saveFile.data.hoursSinceCum;
 		player.fertility = saveFile.data.fertility;
+		player.clitLength = saveFile.data.clitLength;
 		
 		//Preggo stuff
 		player.knockUpForce(saveFile.data.pregnancyType, saveFile.data.pregnancyIncubation);
@@ -1823,17 +1922,15 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.vaginas[i].vaginalLooseness = saveFile.data.vaginas[i].vaginalLooseness;
 			player.vaginas[i].fullness = saveFile.data.vaginas[i].fullness;
 			player.vaginas[i].virgin = saveFile.data.vaginas[i].virgin;
-			if (saveFile.data.vaginas[i].type == undefined) player.vaginas[i].type = 0;
+			if(saveFile.data.vaginas[i].type == undefined) player.vaginas[i].type = 0;
 			else player.vaginas[i].type = saveFile.data.vaginas[i].type;
-			if (saveFile.data.vaginas[i].labiaPierced == undefined) {
+			if(saveFile.data.vaginas[i].labiaPierced == undefined) {
 				player.vaginas[i].labiaPierced = 0;
 				player.vaginas[i].labiaPShort = "";
 				player.vaginas[i].labiaPLong = "";
 				player.vaginas[i].clitPierced = 0;
 				player.vaginas[i].clitPShort = "";
 				player.vaginas[i].clitPLong = "";
-				player.vaginas[i].clitLength = VaginaClass.DEFAULT_CLIT_LENGTH;
-				player.vaginas[i].recoveryProgress = 0;
 			}
 			else
 			{
@@ -1843,21 +1940,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				player.vaginas[i].clitPierced = saveFile.data.vaginas[i].clitPierced;
 				player.vaginas[i].clitPShort = saveFile.data.vaginas[i].clitPShort;
 				player.vaginas[i].clitPLong = saveFile.data.vaginas[i].clitPLong;
-				player.vaginas[i].clitLength = saveFile.data.vaginas[i].clitLength;
-				player.vaginas[i].recoveryProgress = saveFile.data.vaginas[i].recoveryProgress;
-
-
-				// backwards compatibility
-				//TODO is there a better way to do this?
-				if(saveFile.data.vaginas[i].clitLength == undefined) {
-					player.vaginas[i].clitLength = VaginaClass.DEFAULT_CLIT_LENGTH;
-					trace("Clit length was not loaded, setting to default.");
-				}
-
-				if(saveFile.data.vaginas[i].recoveryProgress == undefined) {
-					player.vaginas[i].recoveryProgress = 0;
-					trace("Stretch counter was not loaded, setting to 0.");
-				}
 			}
 				//trace("LoadOne Vagina i(" + i + ")");
 		}
@@ -2147,7 +2229,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		if (saveFile.data.soulforce == undefined) player.soulforce = 25;
 		//Set wisdom
 		if (saveFile.data.wis == undefined) player.wis = 15;
-
+		
 		//player.cocks = saveFile.data.cocks;
 		player.ass.analLooseness = saveFile.data.ass.analLooseness;
 		player.ass.analWetness = saveFile.data.ass.analWetness;
@@ -2294,11 +2376,11 @@ public function unFuckSave():void
 	//Fixing shit!
 
 	// Fix duplicate elven bounty perks
-	if (player.findPerk(PerkLib.ElvenBounty) >= 0) {
+	if(player.findPerk(PerkLib.ElvenBounty) >= 0) {
 		//CLear duplicates
 		while(player.perkDuplicated(PerkLib.ElvenBounty)) player.removePerk(PerkLib.ElvenBounty);
 		//Fix fudged preggers value
-		if (player.perkv1(PerkLib.ElvenBounty) == 15) {
+		if(player.perkv1(PerkLib.ElvenBounty) == 15) {
 			player.setPerkValue(PerkLib.ElvenBounty,1,0);
 			player.addPerkValue(PerkLib.ElvenBounty,2,15);
 		}
@@ -2658,7 +2740,7 @@ public function loadText(saveText:String):void
 //*******
 //This is the modified if for initialising saveFile in saveGameObject(). It assumes the save type parameter passed is an int, that 0 means a slot-save, and is called saveType.
 /*
-   if (saveType != 0)
+   if(saveType != 0)
    {
    saveFile = new Object();
 

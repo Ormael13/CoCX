@@ -13,6 +13,7 @@ package classes.Scenes.Places.Prison
 			if (player.vaginas.length == 0) {
 				outputText("\nYou feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n", false);
 				player.createVagina();
+				player.genderCheck();
 			}
 			outputText("\nIt's time! You " + player.clothedOrNakedLower("remove your [lowergarment] and ") + "sit down at one of the corners and spread your [legs]. A sudden gush of fluids erupt from your [pussy] - your water just broke. You grunt painfully as you feel wriggling and squirming inside your belly, muscle contractions forcing it downwards. ");
 			//Various scenes

@@ -2223,6 +2223,8 @@ package classes.Scenes.NPCs
 			player.knockUpForce(); //Clear pregnancy
 			player.cuntChange(60, true,true,false);
 			if(player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) player.vaginas[0].vaginalWetness++;
+			if(player.gender == 1) player.gender = 3;
+			if(player.gender == 0) player.gender = 2;
 			player.orgasm();
 			dynStats("str", -1,"tou", -2, "spe", 3, "lib", 1, "sen", .5);
 			flags[kFLAGS.JOY_TWINS_BIRTHED]++;

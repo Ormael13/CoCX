@@ -259,6 +259,7 @@ package classes.Scenes.Dungeons
 				outputText("Her palm caresses your crotch, stoking the warmth inside you until it blazes white-hot with new sensation.  Your skin ripples and parts, ", false);
 				if(player.biggestTitSize() <= 1) {
 					outputText("pushed apart the thick flesh of a powerful demonic member, complete with two swollen balls.", false);
+					player.gender = 1;
 					player.createCock();
 					player.cocks[0].cockLength = 10;
 					player.cocks[0].cockThickness = 2;
@@ -268,6 +269,7 @@ package classes.Scenes.Dungeons
 				}
 				else {
 					outputText("gushing with fluids as it shapes itself into a hungry demonic cunt.", false);  
+					player.gender = 2;
 					player.createVagina();
 					player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLICK;
 				}
@@ -959,6 +961,7 @@ package classes.Scenes.Dungeons
 				player.cocks[0].cockType = CockTypesEnum.DEMON;
 				player.cocks[0].cockLength = 10;
 				player.cocks[0].cockThickness = 2;
+				player.genderCheck();
 			}
 			if(player.cocks.length == 1) {
 				if(player.demonCocks() < 1) {
@@ -1087,6 +1090,7 @@ package classes.Scenes.Dungeons
 			if(player.cocks.length > 1) {
 				outputText("Your " + multiCockDescriptLight() + " shiver and retract back towards your body.  When the process finishes you are left with only your " + cockDescript(0) + ".  ", false);
 				player.removeCock(1,player.cocks.length-1);
+				player.genderCheck();
 				temp++;
 			}
 			//Super long nerf
@@ -1151,6 +1155,7 @@ package classes.Scenes.Dungeons
 				}
 				temp++;
 				outputText("\n\n", false);
+				player.genderCheck();
 			}
 			//Reduce excessive anal wetness
 			if (player.ass.analWetness >= ANAL_WETNESS_SLIMY) { 

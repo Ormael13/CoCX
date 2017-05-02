@@ -1182,6 +1182,7 @@ package classes.Scenes.NPCs
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00220]++;
 			}
 			//Fix any gender mixmatches
+			player.genderCheck();
 			doNext(camp.returnToCampUseOneHour);
 		}
 

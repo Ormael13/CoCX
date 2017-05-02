@@ -520,7 +520,7 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 	while (timeQ > 0) {
 		timeQ--;
 		model.time.hours++;
-
+		genderCheck();
 		regeneration(false);
 		if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) soulforceregeneration(false);
 		//Inform all time aware classes that a new hour has arrived

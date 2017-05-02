@@ -469,6 +469,7 @@ public function bimboChampagne(player:Player,clearScreen:Boolean,intro:Boolean):
 		//(Player does not have vagina:
 		if(!player.hasVagina()) {
 			player.createVagina();
+			player.genderCheck();
 			outputText("\n\nYou can feel ");
 			if(player.hasCock()) outputText("the flesh under your cock[if (hasBalls = true)  and behind your [balls]]");
 			else outputText("the blank expanse of flesh that is your crotch");
@@ -482,6 +483,7 @@ public function bimboChampagne(player:Player,clearScreen:Boolean,intro:Boolean):
 			player.buttRating = 12;
 			if(player.hipRating < 10) player.hipRating = 10;
 		}
+		player.genderCheck();
 		dynStats("spe", -10, "lib", 1, "lus", 25);
 	}
 }
@@ -502,6 +504,7 @@ public function removeBimboChampagne():void {
 		outputText("  Of course, the added junk in your trunk fades too, leaving you back to having a [butt].");
 	}
 	player.removeStatusAffect(StatusAffects.BimboChampagne);
+	player.genderCheck();
 	outputText("\n");
 }
 

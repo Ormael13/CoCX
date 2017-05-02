@@ -266,6 +266,7 @@
 			}
 			//Demonic changes - higher chance with higher corruption.
 			if (rand(40) + player.cor / 3 > 35 && tainted) demonChanges(player);
+			player.genderCheck();
 			if (rand(4) == 0 && tainted) outputText(player.modFem(5, 2), false);
 			if (rand(4) == 0 && tainted) outputText(player.modThickness(30, 2), false);
 			player.refillHunger(10);
@@ -614,6 +615,7 @@
 							player.cocks[0].cockType = CockTypesEnum.HORSE;
 							player.clitLength = .25;
 						}
+						player.genderCheck();
 					}
 					changes++;
 				}
@@ -2549,6 +2551,7 @@
 				outputText(player.modFem(90, 1), false);
 				if (rand(3) == 0) outputText(player.modTone(20, 2), false);
 			}
+			player.genderCheck();
 			player.refillHunger(20);
 		}
 		
@@ -3145,6 +3148,7 @@
 						}
 					}
 				}
+				player.genderCheck();
 			}
 			//Knotty knot pepper!
 			if (type == 4) {
@@ -4007,6 +4011,7 @@
 				if (player.cocks.length > 0) {
 					player.killCocks(1);
 					outputText("\n\n", false);
+					player.genderCheck()
 				}
 				//remove balls
 				if (player.balls > 0) {
@@ -4033,6 +4038,7 @@
 				if (player.cocks.length > 0) {
 					player.killCocks(-1);
 					outputText("\n\n", false);
+					player.genderCheck();
 				}
 				if (player.balls > 0) {
 					player.balls = 0;
@@ -4064,6 +4070,7 @@
 					outputText("\n\nYour vagina clenches in pain, doubling you over.  You slip a hand down to check on it, only to feel the slit growing smaller and smaller until it disappears, taking your clit with it! <b> Your vagina is gone!</b>", false);
 					player.removeVagina(0, 1);
 					player.clitLength = .5;
+					player.genderCheck();
 				}
 				//Dickz
 				if (player.cocks.length > 0) {
@@ -4127,6 +4134,7 @@
 					if (player.bRows() > 1 || player.buttRating > 5 || player.hipRating > 5) outputText("  ", false);
 					player.removeVagina(0, 1);
 					player.clitLength = .5;
+					player.genderCheck();
 				}
 				//Kill extra boobages
 				if (player.bRows() > 1) {
@@ -4703,6 +4711,7 @@
 					}
 					else {
 						player.killCocks(1);
+						player.genderCheck();
 					}
 				}
 				//if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
@@ -4715,6 +4724,7 @@
 					outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + vaginaDescript(0) + "</b>!", false);
 
 					changes++;
+					player.genderCheck();
 					dynStats("lus", 10);
 				}
 			}
@@ -5544,6 +5554,7 @@
 				player.vaginas[0].vaginalWetness = VAGINA_WETNESS_DROOLING;
 				player.vaginas[0].vaginalLooseness = VAGINA_LOOSENESS_GAPING;
 				player.clitLength = .4;
+				player.genderCheck();
 				return;
 
 			}
@@ -5631,6 +5642,7 @@
 				player.createVagina();
 				player.clitLength = .25;
 				dynStats("sen", 10);
+				player.genderCheck();
 			}
 			//WANG GROWTH - TIGGERSHARK ONLY
 			if (type == 1 && (!player.hasCock()) && changes < changeLimit && rand(3) == 0) {
@@ -5646,6 +5658,7 @@
 				outputText("!", false);
 				player.createCock(7, 1.4);
 				dynStats("lib", 4, "sen", 5, "lus", 20);
+				player.genderCheck();
 				changes++;
 			}
 			//(Requires the player having two testicles)
@@ -6733,6 +6746,7 @@
 			if (player.cocks.length > 1 && rand(3) == 0 && changes < changeLimit) {
 				player.killCocks(1);
 				outputText("\n\nYou have a strange feeling as your crotch tingles.  Opening your " + player.armorName + ", <b>you realize that one of your cocks have vanished completely!</b>", false);
+				player.genderCheck()
 				changes++;
 			}
 			//Remove additional balls
@@ -8023,6 +8037,7 @@
 				player.createVagina();
 				player.clitLength = .25;
 				dynStats("sen", 10);
+				player.genderCheck();
 				changes++;
 			}
 			//WANG GROWTH
@@ -8039,6 +8054,7 @@
 				outputText("!", false);
 				player.createCock(7, 1.4);
 				dynStats("lib", 4, "sen", 5, "lus", 20);
+				player.genderCheck();
 				changes++;
 			}
 			//-Shrink tits if above DDs.
@@ -8668,6 +8684,7 @@
 				player.createVagina();
 				player.clitLength = .25;
 				dynStats("sen", 10);
+				player.genderCheck();
 			}
 			//-Remove extra breast rows
 			if (changes < changeLimit && player.breastRows.length > 1 && rand(3) == 0 && !flags[kFLAGS.HYPER_HAPPY]) {
@@ -9595,6 +9612,7 @@
 				player.createPerk(PerkLib.FutaForm, 0, 0, 0, 0);
 				player.createPerk(PerkLib.FutaFaculties, 0, 0, 0, 0);
 				outputText("(Gained Perks - Futa Form, Futa Faculties)</b>", false);
+				player.genderCheck();
 				return;
 			}
 			//HP restore for bros!
@@ -9679,6 +9697,7 @@
 				outputText("At the same time, your " + vaginaDescript(0) + " burns hot, nearly feeling on fire.  You cuss in a decidedly masculine way for a moment before the pain fades to a dull itch.  Scratching it, you discover your lady-parts are gone.  Only a sensitive patch of skin remains.\n\n", false);
 				player.removeVagina(0, 1);
 			}
+			player.genderCheck();
 			//(below max masculinity)
 			if (player.femininity > 0) {
 				outputText("Lastly, the change hits your face.  You can feel your jawbones shifting and sliding around, your skin changing to accommodate your face's new shape.  Once it's finished, you feel your impeccable square jaw and give a wide, easy-going grin.  You look awesome!\n\n", false);
@@ -10193,10 +10212,10 @@
 					if (tits) outputText("\n\nThey aren't the only pair to go through a change!  Another row of growing bosom goes through the process with its sisters, getting larger.");
 					else {
 						var select2:Number = rand(3);
-						if (select2 == 1) outputText("\n\nA faint warmth buzzes to the surface of your " + breastDescript(counter) + ", the fluttering tingles seeming to vibrate faster and faster just underneath your [skin].  Soon, the heat becomes uncomfortable, and that row of chest-flesh begins to feel tight, almost thrumming like a newly-stretched drum.  You " + nippleDescript(counter) + "s go rock hard, and though the discomforting feeling of being stretched fades, the pleasant, warm buzz remains.  It isn't until you cup your tingly tits that you realize they've grown larger, almost in envy of the pair above.");
+						if (select2 == 1) outputText("\n\nA faint warmth buzzes to the surface of your " + breastDescript(counter) + ", the fluttering tingles seeming to vibrate faster and faster just underneath your " + player.skin() + ".  Soon, the heat becomes uncomfortable, and that row of chest-flesh begins to feel tight, almost thrumming like a newly-stretched drum.  You " + nippleDescript(counter) + "s go rock hard, and though the discomforting feeling of being stretched fades, the pleasant, warm buzz remains.  It isn't until you cup your tingly tits that you realize they've grown larger, almost in envy of the pair above.");
 						else if (select2 == 2) outputText("\n\nA faintly muffled gurgle emanates from your " + breastDescript(counter) + " for a split-second, just before your flesh shudders and shakes, stretching your " + player.skinFurScales() + " outward with newly grown breast.  Idly, you cup your hands to your swelling bosom, and though it stops soon, you realize that your breasts have grown closer in size to the pair above.");
 						else {
-							outputText("\n\nAn uncomfortable stretching sensation spreads its way across the curves of your " + breastDescript(counter) + ", threads of heat tingling through your flesh.  It feels as though your heartbeat has been magnified tenfold within the expanding mounds, your [skin] growing flushed with arousal and your " + nippleDescript(counter) + " filling with warmth.  As the tingling heat gradually fades, a few more inches worth of jiggling breast spill forth.  Cupping them experimentally, you confirm that they have indeed grown to be a bit more in line with the size of the pair above.")
+							outputText("\n\nAn uncomfortable stretching sensation spreads its way across the curves of your " + breastDescript(counter) + ", threads of heat tingling through your flesh.  It feels as though your heartbeat has been magnified tenfold within the expanding mounds, your " + player.skin() + " growing flushed with arousal and your " + nippleDescript(counter) + " filling with warmth.  As the tingling heat gradually fades, a few more inches worth of jiggling breast spill forth.  Cupping them experimentally, you confirm that they have indeed grown to be a bit more in line with the size of the pair above.")
 						}
 					}
 					//Bigger change!
@@ -10821,7 +10840,7 @@
 					&& !InCollection(player.furColor, ["orange and white", "black and white", "red and white", "tan", "brown"])
 					)
 				|| player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_PARTIAL_SCALES && ((mystic) || (!mystic && rand(2) == 0))) {
-				outputText("\n\nYou begin to tingle all over your [skin], starting as a cool, pleasant sensation but gradually worsening until you are furiously itching all over.");
+				outputText("\n\nYou begin to tingle all over your " + player.skin() + ", starting as a cool, pleasant sensation but gradually worsening until you are furiously itching all over.");
 				if (player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_PARTIAL_FUR) outputText("  You stare in horror as you pull your fingers away holding a handful of " + player.furColor + " fur!  Your fur sloughs off your body in thick clumps, falling away to reveal patches of bare, " + player.skinTone + " skin.");
 				else if (player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_PARTIAL_SCALES) outputText("  You stare in horror as you pull your fingers away holding a handful of dried up scales!  Your scales continue to flake and peel off your skin in thick patches, revealing the tender " + player.skinTone + " skin underneath.");
 				outputText("  Your skin slowly turns raw and red under your severe scratching, the tingling sensations raising goosebumps across your whole body.  Over time, the itching fades, and your flushed skin resolves into a natural-looking ");
@@ -10830,23 +10849,23 @@
 				player.skinDesc = "skin";
 				if (!InCollection(player.skinTone, tone)) player.skinTone = randomChoice(tone);
 				outputText(player.skinTone + " complexion.");
-				outputText("  <b>You now have [skin]!</b>");
+				outputText("  <b>You now have " + player.skin() + "!</b>");
 				changes++;
 			}
 			//Change skin tone if not changed you!
 			else if (!InCollection(player.skinTone, tone) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
 				outputText("\n\nYou feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  Holding an arm up to your face, you discover that <b>you now have ");
 				player.skinTone = randomChoice(tone);
-				outputText("[skin]!</b>");
+				outputText(player.skin() + "!</b>");
 				changes++;
 			}
 			//[Change Skin Color: add "Tattoos"]
 			//From Tan, Olive, or Light skin tones
 			if (player.skinType == SKIN_TYPE_PLAIN && player.skinType != SKIN_TYPE_TATTOED && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nYou feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  You are caught by surprise when you are suddenly assaulted by a blinding flash issuing from areas of your skin, and when the spots finally clear from your vision, an assortment of glowing magical tattoos adorns your [skin].  The glow gradually fades, but the distinctive ");
+				outputText("\n\nYou feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  You are caught by surprise when you are suddenly assaulted by a blinding flash issuing from areas of your skin, and when the spots finally clear from your vision, an assortment of glowing magical tattoos adorns your " + player.skin() + ".  The glow gradually fades, but the distinctive ");
 				if (mystic) outputText("angular");
 				else outputText("curved");
-				outputText(" markings remain, as if etched into your skin. <b>You now have sexy tatooed [skin].</b>");
+				outputText(" markings remain, as if etched into your skin. <b>You now have sexy tatooed " + player.skin() + ".</b>");
 			//	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && player.findStatusAffect(StatusAffects.UnlockedTattoed) < 0) {
 			//		outputText("\n\n<b>Genetic Memory: Tattoed Skin - Memorized!</b>\n\n");
 			//		player.createStatusAffect(StatusAffects.UnlockedTattoed, 0, 0, 0, 0);
@@ -12686,6 +12705,7 @@
 					}
 					else {
 						player.killCocks(1);
+						player.genderCheck();
 					}
 				}
 				//if the last of the player's dicks are eliminated this way, they gain a virgin vagina;
@@ -12698,6 +12718,7 @@
 					outputText("\n\nAn itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new " + vaginaDescript(0) + "</b>!", false);
 
 					changes++;
+					player.genderCheck();
 					dynStats("lus", 10);
 				}
 			}
@@ -12723,6 +12744,7 @@
 							player.cocks[0].cockType = CockTypesEnum.HUMAN;
 							player.clitLength = .25;
 						}
+						player.genderCheck();
 					}
 					changes++;
 				}

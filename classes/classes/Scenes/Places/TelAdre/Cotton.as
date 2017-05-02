@@ -1463,6 +1463,7 @@ public function birthingCottonsKids():void {
 	if(player.vaginas.length == 0) {
 		outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ", false);
 		player.createVagina();
+		player.genderCheck();
 	}
 	outputText("You can feel movement underneath the skin, and watch as it bulges and shifts as another living being moves independently inside you.");
 	outputText("\n\nOddly, there's no pain as you sit up and spread your [legs] in a birthing stance.  A wave of peace and tranquility descends over you, reminding you of your yoga sessions with Cotton.  You take a deep breath and push as hard as you can, pausing only to take small gasps for air.  You feel a sudden pressure against your cervix as your child begins to push its way through little by little.");

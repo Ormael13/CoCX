@@ -286,7 +286,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 		addButton(8, "Wait", wait, null, null, null, "Take no action for this round.  Why would you do this?  This is a terrible idea.");
 		if (monster.findStatusAffect(StatusAffects.Level) >= 0) addButton(8, "Climb", wait, null, null, null, "Climb the sand to move away from the sand trap.");
 		addButton(9, "Fantasize", fantasize, null, null, null, "Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
-		//addButton(10, "Defend");if (player.findPerk(PerkLib.JobSoulCultivator) >= 0)
+		//addButton(10, "Defend");if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) 
 		if (monster is DriderIncubus)
 			{
 				m = monster as DriderIncubus;
@@ -1353,7 +1353,7 @@ public function multiArrowsStrike():void {
 				bowPerkUnlock();
 				doNext(endLustVictory);
 			}
-			outputText("\n");
+			outputText("\n");		
 		}
 		if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom < 10) {
 			outputText("  You do not have enough venom to apply on the ");
@@ -1942,7 +1942,7 @@ public function surrender():void {
 	doNext(combatMenu);
 	clearOutput();
 	temp3 += (player.maxLust() - player.lust);
-	outputText("You fill your mind with perverted thoughts about " + monster.a + monster.short + ", picturing " + monster.pronoun2 + " in all kinds of perverse situations with you.\n", true);
+	outputText("You fill your mind with perverted thoughts about " + monster.a + monster.short + ", picturing " + monster.pronoun2 + " in all kinds of perverse situations with you.\n", true);	
 	dynStats("lus", temp3, "resisted", false);
 	doNext(endLustLoss);
 }
@@ -5211,7 +5211,7 @@ public function tease(justText:Boolean = false):void {
 		//7 special Adjatha-crafted bend over bimbo times
 		case 7:
 			outputText("The glinting of light catches your eye and you whip around to inspect the glittering object, turning your back on " + monster.a + monster.short + ".  Locking your knees, you bend waaaaay over, " + chestDesc() + " swinging in the open air while your " + buttDescript() + " juts out at the " + monster.a + monster.short + ".  Your plump cheeks and " + hipDescript() + " form a jiggling heart-shape as you eagerly rub your thighs together.\n\n", false);
-			outputText("The clear, warm fluid of your happy excitement trickles down from your loins, polishing your [skin] to a glossy, inviting shine.  Retrieving the useless, though shiny, bauble, you hold your pose for just a moment longer, a sly little smile playing across your lips as you wiggle your cheeks one more time before straightening up and turning back around.", false);
+			outputText("The clear, warm fluid of your happy excitement trickles down from your loins, polishing your " + player.skin() + " to a glossy, inviting shine.  Retrieving the useless, though shiny, bauble, you hold your pose for just a moment longer, a sly little smile playing across your lips as you wiggle your cheeks one more time before straightening up and turning back around.", false);
 			vagina = true;
 			chance++;
 			damage += 2;
@@ -6013,7 +6013,7 @@ public function magicMenu():void {
 	clearOutput();
 	outputText("What spell will you use?\n\n");
 	//WHITE SHITZ
-	var whiteLustCap:int = getWhiteMagicLustCap();
+	var whiteLustCap:int = getWhiteMagicLustCap();	
 	if (player.lust >= whiteLustCap)
 		outputText("You are far too aroused to focus on white magic.\n\n");
 	else {
@@ -6058,7 +6058,7 @@ public function magicMenu2():void {
 	menu();
 	clearOutput();
 	outputText("What spell will you use?\n\n");
-	var whiteLustCap2:int = getWhiteMagicLustCap();
+	var whiteLustCap2:int = getWhiteMagicLustCap();	
 	if (player.lust >= whiteLustCap2)
 		outputText("You are far too aroused to focus on white magic.\n\n");
 	else {
@@ -9835,7 +9835,7 @@ public function magicalSpecials():void {
 	outputText("\n<b>Current soulpower:</b> " + player.soulforce + " / " + player.maxSoulforce() + " \n");
 	menu();
 	var button:int = 0;
-	if (player.findPerk(PerkLib.JobSorcerer) >= 0) {
+	if (player.findPerk(PerkLib.JobSorcerer) >= 0) {	
 		if (player.findPerk(PerkLib.StaffChanneling) >= 0 && player.weaponPerk == "Staff") addButton(button++, "M.Bolt", magicbolt, null, null, null, "Attempt to attack the enemy with magic bolt from your " + player.weaponName + ".  Damage done is determined by your intelligence and weapon.", "Magic Bolt");
 		else addButton(button++, "M.Bolt", magicbolt, null, null, null, "Attempt to attack the enemy with magic bolt.  Damage done is determined by your intelligence.", "Magic Bolt");
 	}
@@ -9882,7 +9882,7 @@ public function magicalSpecials():void {
 			addButton(button++, "PhoenixFire", phoenixfireBreath, null, null, null, "Unleash fire from your mouth. \n\nFatigue Cost: " + spellCost(40) + "  \n\nWould go into cooldown after use for: 5 rounds", "Phoenix Fire Breath");
 		}
 		else addButtonDisabled(button++, "PhoenixFire", "You need more time before you can use Phoenix Fire again.");
-
+		
 	}
 	if (player.harpyScore() >= 8 || player.sirenScore() >= 10) {
 		if (player.findStatusAffect(StatusAffects.CooldownCompellingAria) < 0) {
@@ -10031,7 +10031,7 @@ public function physicalSpecials():void {
 	if (player.tailType == TAIL_TYPE_SHARK || player.tailType == TAIL_TYPE_LIZARD || player.tailType == TAIL_TYPE_KANGAROO || player.tailType == TAIL_TYPE_DRACONIC || player.tailType == TAIL_TYPE_RACCOON) addButton(button++, "Tail Whip", tailWhipAttack, null, null, null, "Whip your foe with your tail to enrage them and lower their defense!");
 	if (player.tailType == TAIL_TYPE_SALAMANDER) addButton(button++, "Tail Slap", tailSlapAttack, null, null, null, "Set ablaze in red-hot flames your tail to whip your foe with it to hurt and burn them!  \n\n<b>AoE attack.</b>");
 	if (player.tailType == TAIL_TYPE_ORCA) {
-
+		
 		if (player.findStatusAffect(StatusAffects.CooldownTailSmack) < 0) {
 			addButton(button++, "Tail Smack", tailSmackAttack, null, null, null, "Smack your powerful tail at your opponent face.</b>");
 		}

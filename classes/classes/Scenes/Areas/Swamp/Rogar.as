@@ -774,6 +774,7 @@ private function takeDatBroBrewFromDaBigMeanOlOrc():void {
 		if(player.hasVagina()) {
 			player.removeVagina(0,1);
 		}
+		player.genderCheck();
 		//(below max masculinity)
 		if(player.femininity > 0) {
 			player.modFem(0,100);

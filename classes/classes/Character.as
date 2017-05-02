@@ -10,6 +10,47 @@ import classes.GlobalFlags.kFLAGS;
 	 */
 	public class Character extends Creature
 	{
+		private var _femininity:Number = 50;
+
+		// This is the easiest way I could think of to apply "flat" bonuses to certain stats without having to write a whole shitload of crazyshit
+		// I think a better long-term solution may be to hang function references off the end of the statusAffect class and move all of the value
+		// calculation into methods of ContentClasses, so rather than having walls of logic, we just call the method reference with a value, and get back the modified value.
+		// It's still shitty, but it would possibly be an improvement.
+		public function get femininity():Number
+		{
+			var fem:Number = _femininity;
+			var statIndex:int = this.findStatusAffect(StatusAffects.UmasMassage);
+
+			if (statIndex >= 0)
+			{
+				if (this.statusAffect(statIndex).value1 == UmasShop.MASSAGE_MODELLING_BONUS)
+				{
+					fem += this.statusAffect(statIndex).value2;
+				}
+			}
+			
+			if (fem > 100)
+			{
+				fem = 100;
+			}
+			
+			return fem;
+		}
+		
+		public function set femininity(value:Number):void
+		{
+			if (value > 100)
+			{
+				value = 100;
+			}
+			else if (value < 0)
+			{
+				value = 0;
+			}
+			
+			_femininity = value;
+		}
+
 		//BEARDS! Not used anywhere right now but WHO WANTS A BEARD?
 		//Kitteh6660: I want a beard! I'll code in obtainable beard. (DONE!)
 
@@ -45,6 +86,55 @@ import classes.GlobalFlags.kFLAGS;
 
 		//return total fertility
 
+		public function faceDesc():String
+		{
+			var faceo:String = "";
+			//0-10
+			if (femininity < 10)
+			{
+				faceo = "a square chin";
+				if (!hasBeard())
+					faceo += " and chiseled jawline";
+				else
+					faceo += ", chiseled jawline, and " + beard();
+			}
+			//10+ -20
+			else if (femininity < 20)
+			{
+				faceo = "a rugged looking " + face() + " ";
+				if (hasBeard())
+					faceo += "and " + beard();
+				faceo += "that's surely handsome";
+			}
+			//21-28
+			else if (femininity < 28)
+				faceo = "a well-defined jawline and a fairly masculine profile";
+			//28+-35 
+			else if (femininity < 35)
+				faceo = "a somewhat masculine, angular jawline";
+			//35-45
+			else if (femininity < 45)
+				faceo = "the barest hint of masculinity on its features";
+			//45-55
+			else if (femininity <= 55)
+				faceo = "an androgynous set of features that would look normal on a male or female";
+			//55+-65
+			else if (femininity <= 65)
+				faceo = "a tiny touch of femininity to it, with gentle curves";
+			//65+-72
+			else if (femininity <= 72)
+				faceo = "a nice set of cheekbones and lips that have the barest hint of pout";
+			//72+-80
+			else if (femininity <= 80)
+				faceo = "a beautiful, feminine shapeliness that's sure to draw the attention of males";
+			//81-90
+			else if (femininity <= 90)
+				faceo = "a gorgeous profile with full lips, a button nose, and noticeable eyelashes";
+			//91-100
+			else
+				faceo = "a jaw-droppingly feminine shape with full, pouting lips, an adorable nose, and long, beautiful eyelashes";
+			return faceo;
+		}
 		
 		//Modify femininity!
 		public function modFem(goal:Number, strength:Number = 1):String
@@ -229,13 +319,138 @@ import classes.GlobalFlags.kFLAGS;
 			}*/
 			return output;
 		}
-
-	public function hasBeard():Boolean{ return facePart.hasBeard(); }
-	public function beard():String{ return facePart.beard(); }
-	public function hasMuzzle():Boolean{ return facePart.hasMuzzle(); }
-	public function face():String { return facePart.describe(); }
-	public function faceDesc():String { return facePart.describeMF(); }
-	public function hasLongTail():Boolean { return tail.isLong(); }
+		
+		public function hasBeard():Boolean
+		{
+			return beardLength > 0;
+		}
+		
+		public function beard():String
+		{
+			if (hasBeard())
+				return "beard";
+			else
+			{
+				//CoC_Settings.error("");
+				return "ERROR: NO BEARD! <b>YOU ARE NOT A VIKING AND SHOULD TELL KITTEH IMMEDIATELY.</b>";
+			}
+		}
+		
+		public function skin(noAdj:Boolean = false, noTone:Boolean = false):String
+		{
+			var skinzilla:String = "";
+			//Only show stuff other than skinDesc if justSkin is false
+			if (!noAdj)
+			{
+				//Adjectives first!
+				if (skinAdj != "" && !noTone && skinTone != "rough gray")
+				{
+					skinzilla += skinAdj;
+					if (noTone)
+						skinzilla += " ";
+					else
+						skinzilla += ", ";
+				}
+			}
+			//added part for partial covered type of skins
+		//	if (skinType == 10 || skinType == 11 || skinType == 12 || skinType == 13)
+		//		skinzilla += "small patches of ";
+			if (!noTone)
+				skinzilla += skinTone + " ";
+			//Fur handled a little differently since it uses haircolor
+			if (skinType == 1 || skinType == 10 || skinType == 11 || skinType == 12 || skinType == 13)
+				skinzilla += "skin";
+			else
+				skinzilla += skinDesc;
+			return skinzilla;
+		}
+		
+		public function hasMuzzle():Boolean
+		{
+			if (faceType == FACE_HORSE || faceType == FACE_DOG || faceType == FACE_CAT || faceType == FACE_LIZARD || faceType == FACE_KANGAROO || faceType == FACE_FOX || faceType == FACE_DRAGON || faceType == FACE_RHINO || faceType == FACE_ECHIDNA || faceType == FACE_DEER)
+				return true;
+			return false;
+		}
+		
+		public function face():String
+		{
+			var stringo:String = "";
+			//0 - human
+			//5 - Human w/Naga fangz
+			//8 - bunnah faceahhh bunbun
+			//10 - spidah-face (humanish)
+			if (faceType == 0)
+				return "face";
+			//1 - horse
+			//2 - dogface
+			//6 - kittah face
+			//7 - lizard face (durned argonians!)
+			//9 - kangaface
+			if (hasMuzzle())
+			{
+				if (int(Math.random() * 3) == 0 && faceType == FACE_HORSE)
+					stringo = "long ";
+				if (int(Math.random() * 3) == 0 && faceType == FACE_CAT)
+					stringo = "feline ";
+				if (int(Math.random() * 3) == 0 && faceType == FACE_RHINO)
+					stringo = "rhino ";
+				if (int(Math.random() * 3) == 0 && (faceType == FACE_LIZARD || faceType == FACE_DRAGON))
+					stringo = "reptilian ";
+				switch(rand(3)) {
+					case 0:
+						return stringo + "muzzle";
+					case 1:
+						return stringo + "snout";
+					case 2:
+						return stringo + "face";
+					default:
+						return stringo + "face";
+				}
+			}
+			//3 - cowface
+			if (faceType == FACE_COW_MINOTAUR)
+			{
+				if (Math.floor(Math.random() * 4) == 0)
+					stringo = "bovine ";
+				if (int(Math.random() * 2) == 0)
+					return "muzzle";
+				return stringo + "face";
+			}
+			//4 - sharkface-teeth
+			if (faceType == FACE_SHARK_TEETH)
+			{
+				if (Math.floor(Math.random() * 4) == 0)
+					stringo = "angular ";
+				return stringo + "face";
+			}
+			if (faceType == FACE_PIG || faceType == FACE_BOAR)
+			{
+				if (Math.floor(Math.random() * 4) == 0)
+					stringo = (faceType == FACE_PIG ? "pig" : "boar") + "-like ";
+				if (Math.floor(Math.random() * 4) == 0)
+					return stringo + "snout";
+				return stringo + "face";
+			}
+			return "face";
+		}
+		
+		public function hasLongTail():Boolean
+		{
+			//7 - shark tail!
+			//8 - catTAIIIIIL
+			//9 - lizard tail
+			//10 - bunbuntail
+			//11 - harpybutt
+			//12 - rootail
+			//13 - foxtail
+			//14 - dagron tail
+			//20 - scorpion
+			if (isNaga())
+				return true;
+			if (tailType == 2 || tailType == 3 || tailType == 4 || tailType == 7 || tailType == 8 || tailType == 9 || tailType == 12 || tailType == 13 || tailType == 14 || tailType == 15 || tailType == 16 || tailType == 17 || tailType == 18 || tailType == 20)
+				return true;
+			return false;
+		}
 
 		public function isPregnant():Boolean { return _pregnancyType != 0; }
 
@@ -943,66 +1158,16 @@ import classes.GlobalFlags.kFLAGS;
 			if (max > 999) max = 999;//obecnie max to 895
 			return max;
 		}
+		
+		public function buttDescript():String
+		{
+			return Appearance.buttDescription(this);
+		}
 
-	public function hairOrFur():String
-	{
-		return Appearance.hairOrFur(this);
-	}
-
-	public function hairDescript():String
-	{
-		return Appearance.hairDescription(this);
-	}
-
-	public function beardDescript():String
-	{
-		return Appearance.beardDescription(this);
-	}
-
-	public function hipDescript():String
-	{
-		return Appearance.hipDescription(this);
-	}
-
-	public function assDescript():String
-	{
-		return buttDescript();
-	}
-
-	public function buttDescript():String
-	{
-		return Appearance.buttDescription(this);
-	}
-
-	public function tongueDescript():String
-	{
-		return Appearance.tongueDescription(this);
-	}
-
-	public function hornDescript():String
-	{
-		return Appearance.DEFAULT_HORNS_NAMES[hornType] + " horns";
-	}
-
-	public function tailDescript():String
-	{
-		return Appearance.tailDescript(this);
-	}
-
-	public function oneTailDescript():String
-	{
-		return Appearance.oneTailDescript(this);
-	}
-
-	public function wingsDescript():String
-	{
-		return Appearance.wingsDescript(this);
-	}
-
-	public function eyesDescript():String
-	{
-		return Appearance.eyesDescript(this);
-	}
+		public function hornDescript():String
+		{
+			return Appearance.DEFAULT_HORNS_NAMES[hornType] + " horns";
+		}
 
 	}
 
