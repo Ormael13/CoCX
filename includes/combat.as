@@ -2312,6 +2312,7 @@ public function attack():void {
 	if (player.findPerk(PerkLib.JobDervish) >= 0 && (player.weaponPerk != "Large" || player.weaponPerk != "Staff")) critChance += 10;
 	if (player.findPerk(PerkLib.WeaponMastery) >= 0 && player.weaponPerk == "Large" && player.str >= 100) critChance += 10;
 	if (player.findPerk(PerkLib.WeaponGrandMastery) >= 0 && player.weaponPerk == "Dual Large" && player.str >= 140) critChance += 10;
+	if (player.hasStatusAffect(StatusAffects.Rage)) critChance += player.statusAffectv1(StatusAffects.Rage);
 	if (rand(100) < critChance) {
 		crit = true;
 		damage *= 1.75;
@@ -2425,7 +2426,14 @@ public function attack():void {
 	}
 	else {
 		outputText("You hit " + monster.a + monster.short + "! ", false);
-		if(crit) outputText("<b>Critical hit! </b>");
+		if (crit == true) {
+			outputText("<b>Criticalh! </b>");
+			if (player.hasStatusAffect(StatusAffects.Rage)) player.removeStatusAffect(StatusAffects.Rage);
+		}
+		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusAffect(StatusAffects.Berzerking) || player.hasStatusAffect(StatusAffects.Lustzerking))) {
+			if (player.hasStatusAffect(StatusAffects.Rage) && player.statusAffectv1(StatusAffects.Rage) > 5 && player.statusAffectv1(StatusAffects.Rage) < 50) player.addStatusValue(StatusAffects.Rage, 1, 10);
+			else player.createStatusAffect(StatusAffects.Rage, 10, 0, 0, 0);
+		}
 		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
 		if(player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large") outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
 	}
@@ -2648,6 +2656,7 @@ public function mantisMultipleAttacks():void {
 		if (player.inte <= 100) critChance += (player.inte - 50) / 5;
 		if (player.inte > 100) critChance += 10;
 	}
+	if (player.hasStatusAffect(StatusAffects.Rage)) critChance += player.statusAffectv1(StatusAffects.Rage);
 	if (rand(100) < critChance) {
 		crit = true;
 		damage *= 1.75;
@@ -2656,7 +2665,14 @@ public function mantisMultipleAttacks():void {
 	damage *= (monster.damagePercent() / 100);
 	damage = doDamage(damage);
 	outputText("Your scythes swiftly sweeps against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
-	if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+	if (crit == true) {
+		outputText(" <b>*Critical Hit!*</b>");
+		if (player.hasStatusAffect(StatusAffects.Rage)) player.removeStatusAffect(StatusAffects.Rage);
+	}
+	if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusAffect(StatusAffects.Berzerking) || player.hasStatusAffect(StatusAffects.Lustzerking))) {
+		if (player.hasStatusAffect(StatusAffects.Rage) && player.statusAffectv1(StatusAffects.Rage) > 5 && player.statusAffectv1(StatusAffects.Rage) < 50) player.addStatusValue(StatusAffects.Rage, 1, 10);
+		else player.createStatusAffect(StatusAffects.Rage, 10, 0, 0, 0);
+	}
 	outputText("\n");
 	checkAchievementDamage(damage);
 	if (flags[kFLAGS.MULTIPLE_ATTACK_STYLE] == 0) {
@@ -9705,6 +9721,7 @@ public function whipping():void {
 		if (player.inte <= 100) critChance += (player.inte - 50) / 5;
 		if (player.inte > 100) critChance += 10;
 	}
+	if (player.hasStatusAffect(StatusAffects.Rage)) critChance += player.statusAffectv1(StatusAffects.Rage);
 	if (rand(100) < critChance) {
 		crit = true;
 		damage *= 1.75;
@@ -9724,7 +9741,14 @@ public function whipping():void {
 	damage *= (monster.damagePercent() / 100);
 	damage = doDamage(damage);
 	outputText("Your [weapon] whipped few of " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
-	if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+	if (crit == true) {
+		outputText(" <b>*Critical Hit!*</b>");
+		if (player.hasStatusAffect(StatusAffects.Rage)) player.removeStatusAffect(StatusAffects.Rage);
+	}
+	if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusAffect(StatusAffects.Berzerking) || player.hasStatusAffect(StatusAffects.Lustzerking))) {
+		if (player.hasStatusAffect(StatusAffects.Rage) && player.statusAffectv1(StatusAffects.Rage) > 5 && player.statusAffectv1(StatusAffects.Rage) < 50) player.addStatusValue(StatusAffects.Rage, 1, 10);
+		else player.createStatusAffect(StatusAffects.Rage, 10, 0, 0, 0);
+	}
 	checkAchievementDamage(damage);
 	outputText("\n\n");
 	enemyAI();
@@ -9788,6 +9812,7 @@ public function whirlwind():void {
 		if (player.inte <= 100) critChance += (player.inte - 50) / 5;
 		if (player.inte > 100) critChance += 10;
 	}
+	if (player.hasStatusAffect(StatusAffects.Rage)) critChance += player.statusAffectv1(StatusAffects.Rage);
 	if (rand(100) < critChance) {
 		crit = true;
 		damage *= 1.75;
@@ -9800,7 +9825,14 @@ public function whirlwind():void {
 	damage *= (monster.damagePercent() / 100);
 	damage = doDamage(damage);
 	outputText("Your [weapon] hits few of " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
-	if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+	if (crit == true) {
+		outputText(" <b>*Critical Hit!*</b>");
+		if (player.hasStatusAffect(StatusAffects.Rage)) player.removeStatusAffect(StatusAffects.Rage);
+	}
+	if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusAffect(StatusAffects.Berzerking) || player.hasStatusAffect(StatusAffects.Lustzerking))) {
+		if (player.hasStatusAffect(StatusAffects.Rage) && player.statusAffectv1(StatusAffects.Rage) > 5 && player.statusAffectv1(StatusAffects.Rage) < 50) player.addStatusValue(StatusAffects.Rage, 1, 10);
+		else player.createStatusAffect(StatusAffects.Rage, 10, 0, 0, 0);
+	}
 	checkAchievementDamage(damage);
 	outputText("\n\n");
 	enemyAI();
@@ -11458,6 +11490,7 @@ public function StoneClawAttack():void {
 		if (player.inte > 100) critChance += 10;
 	}
 	if (player.findPerk(PerkLib.Blademaster) >= 0) critChance += 5;
+	if (player.hasStatusAffect(StatusAffects.Rage)) critChance += player.statusAffectv1(StatusAffects.Rage);
 	if (rand(100) < critChance) {
 		crit = true;
 		damage *= 1.75;
@@ -11465,7 +11498,14 @@ public function StoneClawAttack():void {
 	damage = Math.round(damage);
 	damage = doDamage(damage);
 	outputText("You slash your adversary with your sharp stone claw dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!", false);
-	if (crit == true) outputText(" <b>*Critical Hit!*</b>", false);
+	if (crit == true) {
+		outputText(" <b>*Critical Hit!*</b>");
+		if (player.hasStatusAffect(StatusAffects.Rage)) player.removeStatusAffect(StatusAffects.Rage);
+	}
+	if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusAffect(StatusAffects.Berzerking) || player.hasStatusAffect(StatusAffects.Lustzerking))) {
+		if (player.hasStatusAffect(StatusAffects.Rage) && player.statusAffectv1(StatusAffects.Rage) > 5 && player.statusAffectv1(StatusAffects.Rage) < 50) player.addStatusValue(StatusAffects.Rage, 1, 10);
+		else player.createStatusAffect(StatusAffects.Rage, 10, 0, 0, 0);
+	}
 	checkAchievementDamage(damage);
 	outputText("\n\n", false);
 	enemyAI();
@@ -11556,6 +11596,7 @@ public function TailSlamAttack():void {
 		if (player.inte > 100) critChance += 10;
 	}
 	if (player.findPerk(PerkLib.Blademaster) >= 0) critChance += 5;
+	if (player.hasStatusAffect(StatusAffects.Rage)) critChance += player.statusAffectv1(StatusAffects.Rage);
 	if (rand(100) < critChance) {
 		crit = true;
 		damage *= 1.75;
@@ -11566,7 +11607,14 @@ public function TailSlamAttack():void {
 	monster.armorDef == 0;
 	monster.createStatusAffect(StatusAffects.Stunned, 2, 0, 0, 0);
 	outputText("You slam your mace like tail on your foe dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! The attack is so devastating your target is stunned by the crushing blow!", false);
-	if (crit == true) outputText(" <b>*Critical Hit!*</b>", false);
+	if (crit == true) {
+		outputText(" <b>*Critical Hit!*</b>");
+		if (player.hasStatusAffect(StatusAffects.Rage)) player.removeStatusAffect(StatusAffects.Rage);
+	}
+	if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusAffect(StatusAffects.Berzerking) || player.hasStatusAffect(StatusAffects.Lustzerking))) {
+		if (player.hasStatusAffect(StatusAffects.Rage) && player.statusAffectv1(StatusAffects.Rage) > 5 && player.statusAffectv1(StatusAffects.Rage) < 50) player.addStatusValue(StatusAffects.Rage, 1, 10);
+		else player.createStatusAffect(StatusAffects.Rage, 10, 0, 0, 0);
+	}
 	checkAchievementDamage(damage);
 	outputText("\n\n", false);
 	enemyAI();
@@ -11601,6 +11649,7 @@ public function WingBuffetAttack():void {
 		if (player.inte > 100) critChance += 10;
 	}
 	if (player.findPerk(PerkLib.Blademaster) >= 0) critChance += 5;
+	if (player.hasStatusAffect(StatusAffects.Rage)) critChance += player.statusAffectv1(StatusAffects.Rage);
 	if (rand(100) < critChance) {
 		crit = true;
 		damage *= 1.75;
@@ -11608,7 +11657,14 @@ public function WingBuffetAttack():void {
 	damage = Math.round(damage);
 	damage = doDamage(damage);
 	outputText("You buffet your foe with your massive wings dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!", false);
-	if (crit == true) outputText(" <b>*Critical Hit!*</b>", false);
+	if (crit == true) {
+		outputText(" <b>*Critical Hit!*</b>");
+		if (player.hasStatusAffect(StatusAffects.Rage)) player.removeStatusAffect(StatusAffects.Rage);
+	}
+	if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusAffect(StatusAffects.Berzerking) || player.hasStatusAffect(StatusAffects.Lustzerking))) {
+		if (player.hasStatusAffect(StatusAffects.Rage) && player.statusAffectv1(StatusAffects.Rage) > 5 && player.statusAffectv1(StatusAffects.Rage) < 50) player.addStatusValue(StatusAffects.Rage, 1, 10);
+		else player.createStatusAffect(StatusAffects.Rage, 10, 0, 0, 0);
+	}
 	monster.createStatusAffect(StatusAffects.Stunned, 1, 0, 0, 0);
 	checkAchievementDamage(damage);
 	outputText("\n\n", false);
@@ -11827,6 +11883,7 @@ public function TripleThrust():void {
 		if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 		if (player.inte > 100) critChance += 10;
 	}
+	if (player.hasStatusAffect(StatusAffects.Rage)) critChance += player.statusAffectv1(StatusAffects.Rage);
 	if (rand(100) < critChance) {
 		crit = true;
 		temp *= 1.75;
@@ -11835,7 +11892,14 @@ public function TripleThrust():void {
 	damage *= (monster.damagePercent() / 100);
 	damage = doDamage(damage);
 	outputText("Your [weapon] hits thrice against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
-	if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+	if (crit == true) {
+		outputText(" <b>*Critical Hit!*</b>");
+		if (player.hasStatusAffect(StatusAffects.Rage)) player.removeStatusAffect(StatusAffects.Rage);
+	}
+	if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusAffect(StatusAffects.Berzerking) || player.hasStatusAffect(StatusAffects.Lustzerking))) {
+		if (player.hasStatusAffect(StatusAffects.Rage) && player.statusAffectv1(StatusAffects.Rage) > 5 && player.statusAffectv1(StatusAffects.Rage) < 50) player.addStatusValue(StatusAffects.Rage, 1, 10);
+		else player.createStatusAffect(StatusAffects.Rage, 10, 0, 0, 0);
+	}
 	checkAchievementDamage(damage);
 	outputText("\n\n");
 	if(monster.HP < 1) doNext(endHpVictory);
@@ -11913,6 +11977,7 @@ public function DracoSweep():void {
 		if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 		if (player.inte > 100) critChance += 10;
 	}
+	if (player.hasStatusAffect(StatusAffects.Rage)) critChance += player.statusAffectv1(StatusAffects.Rage);
 	if (rand(100) < critChance) {
 		crit = true;
 		temp *= 1.75;
@@ -11921,7 +11986,14 @@ public function DracoSweep():void {
 	damage *= (monster.damagePercent() / 100);
 	damage = doDamage(damage);
 	outputText("Your [weapon] sweeps against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
-	if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+	if (crit == true) {
+		outputText(" <b>*Critical Hit!*</b>");
+		if (player.hasStatusAffect(StatusAffects.Rage)) player.removeStatusAffect(StatusAffects.Rage);
+	}
+	if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusAffect(StatusAffects.Berzerking) || player.hasStatusAffect(StatusAffects.Lustzerking))) {
+		if (player.hasStatusAffect(StatusAffects.Rage) && player.statusAffectv1(StatusAffects.Rage) > 5 && player.statusAffectv1(StatusAffects.Rage) < 50) player.addStatusValue(StatusAffects.Rage, 1, 10);
+		else player.createStatusAffect(StatusAffects.Rage, 10, 0, 0, 0);
+	}
 	checkAchievementDamage(damage);
 	outputText("\n\n");
 	if(monster.HP < 1) doNext(endHpVictory);

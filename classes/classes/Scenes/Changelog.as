@@ -87,7 +87,7 @@ package classes.Scenes
 			outputText("-New tier 2 wisdom lvl-up perk: Job: Monk. Req. 60+ wis. Effects: +15 to max wis, +10 to unarmed. Lighting Strikes perk will not work with fist attacks anymore.\n");
 			outputText("-New tier 2 wisdom lvl-up perk: Combo. Req. Job: Monk perk, 75+ wis and 50+ str. Effects: Second attack per turn using fist (weapon).\n");
 			outputText("-New tier 4 wisdom lvl-up perk: Combo Master: Monk. Req. Combo perk, 125+ wis and 100+ str. Effects: Third attack per turn using fist (weapon).\n");
-			outputText("-\n");
+			outputText("-New tier 7 strength lvl-up perk: Rage. Req. Prestige Job: Berserker. Effects: when under effect of bersekrer or lustzerker each time PC attack and not get crit hit with melee attack/secial will gain 1 stack of rage. Max 5 stack of rage and each stack increase crit chance of next melee attack/special by 10%. After each succesful crit hit any existing Rage stacks are removed.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

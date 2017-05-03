@@ -952,7 +952,14 @@ public function buildPerkList():Array {
 		if (player.maxPrestigeJobs() > 0 && player.findPerk(PerkLib.JobBarbarian) >= 0 && player.findPerk(PerkLib.JobGuardian) >= 0 && (player.findPerk(PerkLib.Berzerker) >= 0 || player.findPerk(PerkLib.Lustzerker) >= 0) && player.str >= 200) {
 			_add(new PerkClass(PerkLib.PrestigeJobBerserker));
 		}
+		if (player.findPerk(PerkLib.PrestigeJobBerserker) >= 0) {
+			_add(new PerkClass(PerkLib.Rage));
+		}
 	}
+	//Tier 8 Strength Perks
+//		Anger perk
+	//Tier 9 Strength Perks
+//		Too Angry to Die perk
 	//------------
 	// TOUGHNESS
 	//------------

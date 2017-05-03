@@ -267,7 +267,7 @@ package classes
 				"You choose the 'Combo' perk, gaining an extra attack with fist (weapon).");
 		public static const ComboMaster:PerkType = mk("Combo Master", "Combo Master",
 				"Gain another extra attack with fist (weapon).",
-				"You choose the 'Combo' perk, gaining another extra attack with fist (weapon).");
+				"You choose the 'Combo Master' perk, gaining another extra attack with fist (weapon).");
 		public static const CorruptedLibido:PerkType = mk("Corrupted Libido", "Corrupted Libido",
 				"Reduces lust gain by 10%.",
 				"You choose the 'Corrupted Libido' perk.  As a result of your body's corruption, you've become a bit harder to turn on. (Lust gain reduced by 10%!)");
@@ -699,6 +699,9 @@ package classes
 		public static const QuadrupleAttack:PerkType = mk("Quadruple Attack", "Quadruple Attack",
 				"Allows you to perform four melee attacks with non-large weapons per round.",
 				"You choose the 'Quadruple Attack' perk.  This allows you to make four melee attacks with non-large weapons.");
+		public static const Rage:PerkType = mk("Rage", "Rage",
+				"Increasing crit chance by up to 50% in berserk state that would reset after succesful crit attack.",
+				"You choose the 'Rage' perk, increasing crit chance by up to 50% in berserk state until next crit attack.");
 		public static const RagingInferno:PerkType = mk("Raging Inferno", "Raging Inferno",
 				"Cumulative 20% damage increase for every subsequent fire spell without interruption.",
 				"You choose the 'Raging Inferno' perk. Cumulative 20% damage increase for every subsequent fire spell without interruption.");
