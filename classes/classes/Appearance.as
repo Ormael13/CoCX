@@ -2364,25 +2364,26 @@
 					[GENDER_HERM, "hermaphrodite"]
 				]
 		);
-		private static const DEFAULT_SKIN_NAMES_DESCS_ADJS:Object = multipleMapsFromPairs([
-			[SKIN_TYPE_PLAIN, "PLAIN", "skin", ""],
-			[SKIN_TYPE_FUR, "FUR", "fur", ""],
-			[SKIN_TYPE_SCALES, "SCALES", "scales", ""],
-			[SKIN_TYPE_GOO, "GOO", "skin", "goopey"],
-			[SKIN_TYPE_CHITIN, "CHITIN", "chitin", ""],
-			[SKIN_TYPE_BARK, "BARK", "bark", ""],
-			[SKIN_TYPE_STONE, "STONE", "stone", ""],
-			[SKIN_TYPE_TATTOED, "TATTOED", "sexy tattoed skin",""],
-			[SKIN_TYPE_AQUA_SCALES, "AQUA_SCALES", "scales", ""],
-			[SKIN_TYPE_DRAGON_SCALES, "dragon scales", "dragon scales", ""],
-			[SKIN_TYPE_MOSS, "moss", "moss", ""],
-			[SKIN_TYPE_PARTIAL_DRAGON_SCALES, "partial dragon scales", "partial dragon scales", ""],
-			[SKIN_TYPE_PARTIAL_STONE, "partial stone", "partial stone", ""],
-			[SKIN_TYPE_PARTIAL_AQUA_SCALES, "partial fish scales", "partial fish scales", ""],
+		private static const DEFAULT_SKIN_NAMES_DESCS_ADJS_PLURAL:Object = multipleMapsFromPairs([
+			[SKIN_TYPE_PLAIN, "PLAIN", "skin", "",false],
+			[SKIN_TYPE_FUR, "FUR", "fur", "",false],
+			[SKIN_TYPE_SCALES, "SCALES", "scales", "",true],
+			[SKIN_TYPE_GOO, "GOO", "skin", "goopey",false],
+			[SKIN_TYPE_CHITIN, "CHITIN", "chitin", "",false],
+			[SKIN_TYPE_BARK, "BARK", "bark", "",false],
+			[SKIN_TYPE_STONE, "STONE", "stone", "",false],
+			[SKIN_TYPE_TATTOED, "TATTOED", "sexy tattoed skin","",false],
+			[SKIN_TYPE_AQUA_SCALES, "AQUA_SCALES", "scales", "",true],
+			[SKIN_TYPE_DRAGON_SCALES, "dragon scales", "dragon scales", "",true],
+			[SKIN_TYPE_MOSS, "moss", "moss", "",false],
+			[SKIN_TYPE_PARTIAL_DRAGON_SCALES, "partial dragon scales", "partial dragon scales", "",true],
+			[SKIN_TYPE_PARTIAL_STONE, "partial stone", "partial stone", "",false],
+			[SKIN_TYPE_PARTIAL_AQUA_SCALES, "partial fish scales", "partial fish scales", "",true],
 		]);
-		public static const DEFAULT_SKIN_NAMES:Object = DEFAULT_SKIN_NAMES_DESCS_ADJS[0];
-		public static const DEFAULT_SKIN_DESCS:Object = DEFAULT_SKIN_NAMES_DESCS_ADJS[1];
-		public static const DEFAULT_SKIN_ADJS:Object = DEFAULT_SKIN_NAMES_DESCS_ADJS[2];
+		public static const DEFAULT_SKIN_NAMES:Object = DEFAULT_SKIN_NAMES_DESCS_ADJS_PLURAL[0];
+		public static const DEFAULT_SKIN_DESCS:Object = DEFAULT_SKIN_NAMES_DESCS_ADJS_PLURAL[1];
+		public static const DEFAULT_SKIN_ADJS:Object = DEFAULT_SKIN_NAMES_DESCS_ADJS_PLURAL[2];
+		public static const DEFAULT_SKIN_PLURAL:Object = DEFAULT_SKIN_NAMES_DESCS_ADJS_PLURAL[3];
 		public static const DEFAULT_HAIR_NAMES:Object = createMapFromPairs(
 				[
 					[HAIR_NORMAL, "normal"],

@@ -623,10 +623,7 @@
 					outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ", false);
 					if (player.bRows() >= 3) outputText("abdomen", false);
 					else outputText("chest", false);
-					outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ", false);
-					if (player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_PARTIAL_FUR) outputText(player.hairColor + " " + player.skinDesc, false);
-					else outputText(player.skinTone + " " + player.skinDesc, false);
-					outputText(" remains. <b>You've lost a row of breasts!</b>", false);
+					outputText(". The " + nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but [skin] remains. <b>You've lost a row of breasts!</b>", false);
 					dynStats("sen", -5);
 					player.removeBreastRow(player.breastRows.length - 1, 1);
 				}

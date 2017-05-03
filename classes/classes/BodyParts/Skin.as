@@ -67,6 +67,13 @@ public class Skin extends SaveableBodyPart {
 	public function get adj():String {
 		return skinValue(base.adj, coat.adj);
 	}
+	/**
+	 * Returns `s` (default "is") if the skin main layer noun is singular (skin,fur,chitin)
+	 * and `p` (default "are") if plural (scales)
+	 */
+	public function isAre(s:String="is",p:String="are"):String {
+		return skinValue(base.isAre(s,p),coat.isAre(s,p));
+	}
 	override public function get type():int {
 		if (coverage >= COVERAGE_FULL) return coat.type;
 		return base.type;
@@ -121,7 +128,7 @@ public class Skin extends SaveableBodyPart {
 	 */
 	public function describe(layer:String = 'skin', noAdj:Boolean = false, noTone:Boolean = false):String {
 		var s_base:String = base.describe(noAdj, noTone);
-		var s_coat:String = coat.describe(noAdj,noTone);
+		var s_coat:String = coat.describe(noAdj, noTone);
 		switch (coverage) {
 			case COVERAGE_NONE:
 				return s_base;
@@ -145,9 +152,9 @@ public class Skin extends SaveableBodyPart {
 					case 'skin':
 						return s_base + " and " + s_coat;
 					case 'base':
-			default:
+					default:
 						return s_base;
-		}
+				}
 				break;
 			case COVERAGE_HIGH:
 				switch (layer) {
@@ -157,15 +164,14 @@ public class Skin extends SaveableBodyPart {
 						return s_base + " under " + s_coat;
 					case 'skin':
 					case 'coat':
-			default:
+					default:
 						return s_coat;
-		}
+				}
 				break;
 			case COVERAGE_FULL:
 			default:
 				return s_coat;
 		}
-
 	}
 	override public function descriptionFull():String {
 		return describe("full");

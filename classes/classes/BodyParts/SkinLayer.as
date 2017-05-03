@@ -34,6 +34,13 @@ public class SkinLayer extends BodyPart {
 		_desc      = "";
 		if (!_adj) _adj = defaultAdj();
 	}
+	/**
+	 * Returns `s` (default "is") if the skin main layer noun is singular (skin,fur,chitin)
+	 * and `p` (default "are") if plural (scales)
+	 */
+	public function isAre(s:String="is",p:String="are"):String {
+		return Appearance.DEFAULT_SKIN_PLURAL[type] ? p : s;
+	}
 	override public function restore(keepColor:Boolean = true):void {
 		super.restore(keepColor);
 		if (!keepColor) color = "no";

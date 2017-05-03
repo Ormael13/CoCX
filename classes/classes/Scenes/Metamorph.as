@@ -979,10 +979,7 @@ private function metamorphChitin():void {
 	if (rand(2) == 0) player.chitinColor = "pale white";
 	else player.chitinColor = "green";
 	if (player.skinType != SKIN_TYPE_PLAIN) {
-		outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your " + player.skinFurScales() + " ", false);
-		if (player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_PARTIAL_SCALES) outputText("are", false);
-		else outputText("is", false);
-		outputText(" falling to the ground, revealing flawless, " + player.chitinColor + " chitin underneath.", false);
+		outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your " + player.skinFurScales() + " "+player.skin.isAre()+" falling to the ground, revealing flawless, " + player.chitinColor + " chitin underneath.", false);
 	}
 	else outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your skin stating to harden turning slowly into chitin.", false);
 	outputText("  <b>You now have " + player.chitinColor + " chitin exoskeleton covering your body.</b>", false);

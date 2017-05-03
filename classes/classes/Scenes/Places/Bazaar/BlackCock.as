@@ -1444,7 +1444,7 @@ package classes.Scenes.Places.Bazaar
 				changes++;
 			}
 			//Transformations
-			if (rand(3) == 0 && changes < changeLimit && player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_PARTIAL_SCALES) {
+			if (rand(3) == 0 && changes < changeLimit && player.skin.hasAny(SKIN_TYPE_SCALES)) {
 				outputText("\n\nYou feel an odd rolling sensation as your scales begin to shift, spreading and reforming as they grow and disappear, <b>becoming normal human skin</b>.");
 				player.skinType = SKIN_TYPE_PLAIN;
 				changes++;
