@@ -345,7 +345,7 @@ private function cottonChat():void {
 	if(flags[kFLAGS.TIMES_FUCKED_URTA] > 0)
 		chats[chats.length] = 1;
 	//Edryn chance
-	if(player.findStatusAffect(StatusAffects.Edryn) >= 0)
+	if(player.hasStatusAffect(StatusAffects.Edryn))
 		chats[chats.length] = 2;
 	//(Scylla chat)
 	if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0)
@@ -1131,7 +1131,7 @@ public function nomSomeTitMilkCereal():void {
 	dynStats("lib", -0.5, "sen", -.5, "lus", -5);
 	player.boostLactation(0.05);
 	//You've now been milked, reset the timer for that
-	if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+	if(player.hasStatusAffect(StatusAffects.Feeder)) {
 		player.addStatusValue(StatusAffects.Feeder,1,1);
 		player.changeStatusValue(StatusAffects.Feeder,2,0);
 	}
@@ -1463,7 +1463,6 @@ public function birthingCottonsKids():void {
 	if(player.vaginas.length == 0) {
 		outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ", false);
 		player.createVagina();
-		player.genderCheck();
 	}
 	outputText("You can feel movement underneath the skin, and watch as it bulges and shifts as another living being moves independently inside you.");
 	outputText("\n\nOddly, there's no pain as you sit up and spread your [legs] in a birthing stance.  A wave of peace and tranquility descends over you, reminding you of your yoga sessions with Cotton.  You take a deep breath and push as hard as you can, pausing only to take small gasps for air.  You feel a sudden pressure against your cervix as your child begins to push its way through little by little.");
@@ -1849,7 +1848,7 @@ private function feedYourCottonKids():void {
 	outputText("\n\nYou kiss your equine lover, ruffle the sleeping child's hair, and quietly head back to camp, leaving Cotton to take care of things.");
 	dynStats("lus", -10);
 	//You've now been milked, reset the timer for that
-	if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+	if(player.hasStatusAffect(StatusAffects.Feeder)) {
 		player.addStatusValue(StatusAffects.Feeder,1,1);
 		player.changeStatusValue(StatusAffects.Feeder,2,0);
 	}

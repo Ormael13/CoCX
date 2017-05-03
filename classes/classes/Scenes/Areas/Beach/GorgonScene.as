@@ -15,7 +15,7 @@ package classes.Scenes.Areas.Beach
 public function gorgonEncounter():void {
 	//spriteSelect(45);
 	//Create status if needed
-	if(player.findStatusAffect(StatusAffects.Naga) < 0) player.createStatusAffect(StatusAffects.Naga,0,0,0,0);
+	if(!player.hasStatusAffect(StatusAffects.Naga)) player.createStatusAffect(StatusAffects.Naga,0,0,0,0);
 	clearOutput();
 	if(player.lowerBody == LOWER_BODY_TYPE_NAGA) {
 		//Set 'last fuck as naga'
@@ -139,7 +139,7 @@ public function gorgonEncounter():void {
 	}
 	//If player's last fight did not involve them being a naga
 	if(player.statusAffectv1(StatusAffects.Naga) == 0) {
-		if(player.findStatusAffect(StatusAffects.Naga) < 0) player.createStatusAffect(StatusAffects.Naga,0,0,0,0);
+		if(!player.hasStatusAffect(StatusAffects.Naga)) player.createStatusAffect(StatusAffects.Naga,0,0,0,0);
 		outputText("You are walking through the shifting sands of the beach when you hear a sudden hiss behind you.  Expecting to be attacked by a snake, you quickly leap forward and turn around.\n\n", false);
 		outputText("To your surprise, what you see is not exactly a snake; it's a gorgon - a half-human half-snake hybrid.  She surges up and hisses even louder than before, showing off a pair of formidable fangs dripping with venom. Gazing at her long and slender reptilian body swaying on the sand like quicksilver, you can only stand still in admiration of this terrible wonder.", false);
 	}

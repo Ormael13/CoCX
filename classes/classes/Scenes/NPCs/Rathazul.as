@@ -36,7 +36,7 @@
 		//End of Interface Implementation
 		
 		public function returnToRathazulMenu():void {
-			if (player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
+			if (player.hasStatusAffect(StatusAffects.CampRathazul))
 				campRathazul();
 			else encounterRathazul();
 		}
@@ -44,7 +44,7 @@
 public function encounterRathazul():void {
 	spriteSelect(49);
 	clearOutput();
-	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.findStatusAffect(StatusAffects.MetRathazul) >= 0)
+	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.hasStatusAffect(StatusAffects.MetRathazul))
 	{
 		marblePurification.visitRathazulToPurifyMarbleAfterLaBovaStopsWorkin();
 		return;
@@ -54,8 +54,8 @@ public function encounterRathazul():void {
 	if(player.lust > 30) dynStats("lus", -10);
 	//Introduction
 	outputText(images.showImage("rathazul-lake"));
-	if(player.findStatusAffect(StatusAffects.MetRathazul) >= 0) {
-		if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
+	if(player.hasStatusAffect(StatusAffects.MetRathazul)) {
+		if(player.hasStatusAffect(StatusAffects.CampRathazul))
 			outputText("You walk over to Rathazul's corner of the camp.  He seems as busy as usual, with his nose buried deep in some tome or alchemical creation, but he turns to face you as soon as you walk within a few paces of him.\n\n");
 		else
 			outputText("You spy the familiar sight of the alchemist Rathazul's camp along the lake.  The elderly rat seems to be oblivious to your presence as he scurries between his equipment, but you know him well enough to bet that he is entirely aware of your presence.\n\n");
@@ -95,7 +95,7 @@ private function rathazulMoveDecline():void {
 public function campRathazul():void {
 	spriteSelect(49);
 	clearOutput();
-	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.findStatusAffect(StatusAffects.MetRathazul) >= 0)
+	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.hasStatusAffect(StatusAffects.MetRathazul))
 	{
 		marblePurification.visitRathazulToPurifyMarbleAfterLaBovaStopsWorkin();
 		return;
@@ -112,7 +112,7 @@ public function campRathazul():void {
 	if(rand(6) == 0 && flags[kFLAGS.RATHAZUL_CAMP_INTERACTION_COUNTDOWN] == 0) {
 		flags[kFLAGS.RATHAZUL_CAMP_INTERACTION_COUNTDOWN] = 3;
 		//Pure jojo
-		if(flags[kFLAGS.JOJO_RATHAZUL_INTERACTION_COUNTER] == 0 && player.findStatusAffect(StatusAffects.PureCampJojo) >= 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
+		if(flags[kFLAGS.JOJO_RATHAZUL_INTERACTION_COUNTER] == 0 && player.hasStatusAffect(StatusAffects.PureCampJojo) && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
 			finter.jojoOffersRathazulMeditation();
 			return;
 		}
@@ -145,7 +145,7 @@ public function campRathazul():void {
 	offered = rathazulWorkOffer();
 	if (!offered) {
 		outputText("He sighs dejectedly, \"<i>I don't think there is.  Why don't you leave me be for a time, and I will see if I can find something to aid you.</i>\"", false);
-		if (player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
+		if (player.hasStatusAffect(StatusAffects.CampRathazul))
 			doNext(camp.campFollowers);
 		else doNext(playerMenu);
 	}
@@ -181,7 +181,7 @@ private function rathazulWorkOffer():Boolean {
 	}
 	//Item crafting offer
 	if(player.hasItem(useables.GREENGL)) {
-		if(player.findStatusAffect(StatusAffects.RathazulArmor) < 0) outputText("He pipes up with a bit of hope in his voice, \"<i>I can smell the essence of the tainted lake-slimes you've defeated, and if you'd let me, I could turn it into something a bit more useful to you.  You see, the slimes are filled with the tainted essence of the world-mother herself, and once the taint is burned away, the remaining substance remains very flexible but becomes nearly impossible to cut through.  With the gel of five defeated slimes I could craft you a durable suit of armor.</i>\"\n\n", false);
+		if(!player.hasStatusAffect(StatusAffects.RathazulArmor)) outputText("He pipes up with a bit of hope in his voice, \"<i>I can smell the essence of the tainted lake-slimes you've defeated, and if you'd let me, I could turn it into something a bit more useful to you.  You see, the slimes are filled with the tainted essence of the world-mother herself, and once the taint is burned away, the remaining substance remains very flexible but becomes nearly impossible to cut through.  With the gel of five defeated slimes I could craft you a durable suit of armor.</i>\"\n\n", false);
 		else outputText("He pipes up with a bit of excitement in his voice, \"<i>With just five pieces of slime-gel I could make another suit of armor...</i>\"\n\n", false);
 		spoken = true;
 		if (player.hasItem(useables.GREENGL,5)) {
@@ -277,7 +277,7 @@ private function rathazulWorkOffer():Boolean {
 		outputText("The rat mentions, \"<i>You know, I could make something new if you're willing to hand over two of vials labeled \"Equinum\", one vial of minotaur blood and one hundred gems. Or two vials of Bee Honey, two vials of Snake Oil and 100 gems. Or five bottles of Lactaid and two bottles of purified LaBova along with 250 gems.</i>\"\n\n");
 	}
 	//Reducto
-	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && player.statusAffectv2(StatusAffects.MetRathazul) >= 4) {
+	if(player.hasStatusAffect(StatusAffects.CampRathazul) && player.statusAffectv2(StatusAffects.MetRathazul) >= 4) {
 		outputText("The rat hurries over to his supplies and produces a container of paste, looking rather proud of himself, \"<i>Good news everyone!  I've developed a paste you could use to shrink down any, ah, oversized body parts.  The materials are expensive though, so I'll need ");
 		if(flags[kFLAGS.AMILY_MET_RATHAZUL] >= 2) outputText("50");
 		else outputText("100");
@@ -289,13 +289,13 @@ private function rathazulWorkOffer():Boolean {
 
 	
 	//Vines
-	if(player.keyItemv1("Marae's Lethicite") > 0 && player.findStatusAffect(StatusAffects.DefenseCanopy) < 0 && player.findStatusAffect(StatusAffects.CampRathazul) >= 0) {
+	if(player.keyItemv1("Marae's Lethicite") > 0 && !player.hasStatusAffect(StatusAffects.DefenseCanopy) && player.hasStatusAffect(StatusAffects.CampRathazul)) {
 		outputText("His eyes widen in something approaching shock when he sees the Lethicite crystal you took from Marae.  Rathazul stammers, \"<i>By the goddess... that's the largest piece of lethicite I've ever seen.  I don't know how you got it, but there is immense power in those crystals.  If you like, I know a way we could use its power to grow a canopy of thorny vines that would hide the camp and keep away imps.  Growing such a defense would use a third of that lethicite's power.</i>\"\n\n");
 		totalOffers++;
 		spoken = true;
 		lethiciteDefense = growLethiciteDefense;
 	}
-	if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0) {
+	if(player.hasStatusAffect(StatusAffects.CampRathazul)) {
 		if(flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED] == 0 && (sophieBimbo.bimboSophie() || player.findPerk(PerkLib.BroBrains) >= 0 || player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0)) {
 			rathazulDebimboOffer();
 			return true;
@@ -348,7 +348,7 @@ private function rathazulWorkOffer():Boolean {
 		}
 		if (player.statusAffectv2(StatusAffects.MetRathazul) >= 5) addButton(12, "Scorpinum", rathazulMakesScorpioPotion, null, null, null, "Ask him to brew a special potion that could aid in gaining scorpion tail. \n\nCost: 100 Gems \nNeeds 2 vials of Bee Honey and 2 vials of Snake Oil.");
 
-		if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
+		if(player.hasStatusAffect(StatusAffects.CampRathazul))
 			addButton(14,"Leave", camp.campFollowers);
 		else
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
@@ -641,7 +641,7 @@ public function chooseArmorOrRobes(robeType:int):void {
 	player.gems -= 500;
 	statScreenRefresh();
 	outputText("Rathazul grunts in response and goes back to work.  ", true);
-	if (player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
+	if (player.hasStatusAffect(StatusAffects.CampRathazul))
 	{
 		outputText("You turn back to the center of your camp", false);
 	}
@@ -820,7 +820,7 @@ private function craftOozeArmor():void {
 	player.destroyItems(useables.GREENGL, 5);
 	player.addStatusValue(StatusAffects.MetRathazul,2,1);
 	inventory.takeItem(armors.GELARMR, returnToRathazulMenu);
-	if(player.findStatusAffect(StatusAffects.RathazulArmor) < 0) player.createStatusAffect(StatusAffects.RathazulArmor,0,0,0,0);
+	if(!player.hasStatusAffect(StatusAffects.RathazulArmor)) player.createStatusAffect(StatusAffects.RathazulArmor,0,0,0,0);
 }
 
 private function craftCarapace():void {
@@ -958,7 +958,7 @@ private function craftEbonbloomArmorForReal(type:int = 0):void {
 			outputText(images.showImage("rathazul-craft-ebonweaverunejock"));
 			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging on the rack is a jock.  As you inspect it, you notice the dark grey cloth has an oily sheen.  ");
 			outputText("Adorning the cup is a rune seething with black magic.  ");
-			if (player.findStatusAffect(StatusAffects.KnowsArouse) >= 0) outputText("You blush, recognizing the rune to represent lust. In the context of acting upon it...  ");
+			if (player.hasStatusAffect(StatusAffects.KnowsArouse)) outputText("You blush, recognizing the rune to represent lust. In the context of acting upon it...  ");
 			outputText("Rubbing your hand through the garment, you can see that the fabric is smoother than Ingram’s finest cloth, yet has a strange slickness to it not reminiscent of any fabric you know of. You also note the jock is also elastic, allowing it to fit your form regardless of how large your “assets” are. You thank the rat and collect your new jock.", false);
 			itype = undergarments.R_JOCK;
 			break;
@@ -966,7 +966,7 @@ private function craftEbonbloomArmorForReal(type:int = 0):void {
 			outputText(images.showImage("rathazul-craft-ebonweaverunethong"));
 			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging on the rack is a thong.  As you inspect it, you notice the dark grey cloth has an oily sheen.  ");
 			outputText("Adorning the front is a rune seething with black magic.  ");
-			if (player.findStatusAffect(StatusAffects.KnowsArouse) >= 0) outputText("You blush, recognizing the rune to represent lust. In the context of acting upon it...  ");
+			if (player.hasStatusAffect(StatusAffects.KnowsArouse)) outputText("You blush, recognizing the rune to represent lust. In the context of acting upon it...  ");
 			outputText("Rubbing your hand through the garment, you can see that the fabric is smoother than Ingram’s finest cloth, yet has a strange slickness to it not reminiscent of any fabric you know of. You also note the thong is also elastic, allowing it to fit your form regardless of how large your “assets” are. You thank the rat and collect your new thong.", false);
 			itype = undergarments.R_THONG;
 			break;

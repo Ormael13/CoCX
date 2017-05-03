@@ -30,11 +30,11 @@ package classes.Scenes.Areas.GlacialRift
 			if (choice == 0) eAttack();
 			if (choice == 1) frostbite();
 			if (choice == 2) {
-				if (player.findStatusAffect(StatusAffects.WolfHold) < 0 && rand(2) == 0) wolfHold();
+				if (!player.hasStatusAffect(StatusAffects.WolfHold) && rand(2) == 0) wolfHold();
 				else frostbite();
 			}
 			if (choice == 3) {
-				if (findStatusAffect(StatusAffects.AbilityCooldown1) < 0) paw();
+				if (!hasStatusAffect(StatusAffects.AbilityCooldown1)) paw();
 				else frostbite();
 			}
 		}
@@ -43,7 +43,7 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("The wolf lunge, biting viciously at your leg.", false);
 			var dmgtaken:Number = 0;
 			var damage:Number = 0;
-			if(player.findStatusAffect(StatusAffects.Frostbite) < 0) {
+			if(!player.hasStatusAffect(StatusAffects.Frostbite)) {
 				outputText(" You feel the cold enter your body and shake you to the very core weakening your resolve just as much as slowing down your movement.", false);
 				if(player.str > 7) {
 					player.str -= 6;
@@ -95,7 +95,7 @@ package classes.Scenes.Areas.GlacialRift
 			player.takeDamage(str);
 			player.createStatusAffect(StatusAffects.Stunned, 1, 0, 0, 0);
 			createStatusAffect(StatusAffects.AbilityCooldown1, 3, 0, 0, 0);
-			if (player.findStatusAffect(StatusAffects.WolfHold) >= 0) player.removeStatusAffect(StatusAffects.WolfHold);
+			if (player.hasStatusAffect(StatusAffects.WolfHold)) player.removeStatusAffect(StatusAffects.WolfHold);
 			combatRoundOver();
 		}
 		

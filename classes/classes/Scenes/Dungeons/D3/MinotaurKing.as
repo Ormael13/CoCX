@@ -127,7 +127,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				_lastRoundStun = false;
 				// If the player is still stunned, use dickslap ohterwise fall through to regular AI.
-				if (player.findStatusAffect(StatusAffects.Stunned) >= 0)
+				if (player.hasStatusAffect(StatusAffects.Stunned))
 				{
 					dickslap();
 					return;
@@ -312,7 +312,7 @@ package classes.Scenes.Dungeons.D3
 
 		override protected function handleStun():Boolean
 		{
-			if (findStatusAffect(StatusAffects.MonsterAttacksDisabled) >= 0) {
+			if (hasStatusAffect(StatusAffects.MonsterAttacksDisabled)) {
 				return super.handleStun();
 			}
 			else {

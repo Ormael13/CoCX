@@ -47,8 +47,8 @@ package classes.Scenes.Explore {
 		}
 		
 		public function timeChangeLarge():Boolean {
-			if (checkedSuccubi++ == 0 && model.time.hours == 4 && player.findStatusAffect(StatusAffects.SuccubiNight) >= 0 && (player.hasCock() || player.gender == 0)) { //Call secksins!
-				if (player.findStatusAffect(StatusAffects.RepeatSuccubi) >= 0) {
+			if (checkedSuccubi++ == 0 && model.time.hours == 4 && player.hasStatusAffect(StatusAffects.SuccubiNight) && (player.hasCock() || player.gender == 0)) { //Call secksins!
+				if (player.hasStatusAffect(StatusAffects.RepeatSuccubi)) {
 					if (getGame().vapula.vapulaSlave() && player.hasCock() && flags[kFLAGS.VAPULA_THREESOMES] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) //VapulaSurprise
 						getGame().vapula.vapulaAssistsCeruleanSuccubus();
 					else nightSuccubiRepeat(); //Normal night succubi shit
@@ -73,7 +73,7 @@ package classes.Scenes.Explore {
 			if (kGAMECLASS.giacomo == 0) {
 				firstEncounter();
 			}
-			else if (player.findStatusAffect(StatusAffects.WormOffer) < 0 && player.findStatusAffect(StatusAffects.Infested) >= 0) { //If infested && no worm offer yet
+			else if (!player.hasStatusAffect(StatusAffects.WormOffer) && player.hasStatusAffect(StatusAffects.Infested)) { //If infested && no worm offer yet
 				outputText("Upon walking up to Giacomo's wagon, he turns to look at you and cocks an eyebrow in curiosity and mild amusement.\n\n");
 				outputText("\"<i>Been playing with creatures best left alone, I see</i>,\" he chuckles.  \"<i>Infestations of any kind are annoying, yet your plight is quite challenging given the magnitude of corrupt creatures around here.  It is not the first time I have seen one infested with THOSE worms.</i>\"\n\n");
 				outputText("You ask how he knows of your change and the merchant giggles heartily.\n\n");
@@ -95,12 +95,12 @@ package classes.Scenes.Explore {
 				outputText("You spy the merchant Giacomo in the distance.  He makes a beeline for you, setting up his shop in moments.  ");
 				outputText("Giacomo's grin is nothing short of creepy as he offers his wares to you. What are you interested in?");
 			}
-			//var deworm:Function = (player.findStatusAffect(StatusAffects.WormOffer) >= 0 && player.findStatusAffect(StatusAffects.Infested) >= 0 ? wormRemovalOffer : null);
+			//var deworm:Function = (player.hasStatusAffect(StatusAffects.WormOffer) && player.hasStatusAffect(StatusAffects.Infested) ? wormRemovalOffer : null);
 			menu();
 			addButton(0, "Potions", potionMenu);
 			addButton(1, "Books", bookMenu);
 			addButton(2, "Erotica", eroticaMenu);
-			if (player.findStatusAffect(StatusAffects.WormOffer) >= 0 && player.findStatusAffect(StatusAffects.Infested) >= 0) addButton(3, "Worm Cure", wormRemovalOffer);
+			if (player.hasStatusAffect(StatusAffects.WormOffer) && player.hasStatusAffect(StatusAffects.Infested)) addButton(3, "Worm Cure", wormRemovalOffer);
 			addButton(4, "Leave", camp.returnToCampUseOneHour);
 			statScreenRefresh();
 		}

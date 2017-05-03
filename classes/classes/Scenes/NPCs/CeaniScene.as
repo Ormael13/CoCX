@@ -97,7 +97,7 @@ public function basicarcherytraining2():void
 		outputText("You head back to camp resolving to visit her again tomorrow to resume your training.\n\n");
 		flags[kFLAGS.CEANI_ARCHERY_TRAINING] = 2;
 	//	flags[kFLAGS.CEANI_DAILY_TRAINING] = 1;
-		if (player.findStatusAffect(StatusAffects.Kelt) < 0) {
+		if (!player.hasStatusAffect(StatusAffects.Kelt)) {
 			player.createStatusAffect(StatusAffects.Kelt, 10, 0, 0, 0);
 		}
 		else bowSkill(10);

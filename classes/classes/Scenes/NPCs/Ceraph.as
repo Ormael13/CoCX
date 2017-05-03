@@ -12,7 +12,7 @@
 		private function ceraphSpecial1():void
 		{
 			game.spriteSelect(7);
-			if (findStatusAffect(StatusAffects.Uber) < 0) {
+			if (!hasStatusAffect(StatusAffects.Uber)) {
 				if (rand(2) == 0) {
 					outputText("Ceraph winks and says, \"<i>Have you ever cum without being touched? You will.</i>\"\n\n", false);
 				}
@@ -51,7 +51,7 @@
 //[SPECIAL] – Whip Binding
 		private function ceraphSpecial2():void
 		{
-			if (player.findStatusAffect(StatusAffects.Bound) < 0) {
+			if (!player.hasStatusAffect(StatusAffects.Bound)) {
 				outputText("Ceraph snaps her whip at you, lightning fast.  Unable to avoid the blinding speed of her attack, you find yourself wrapped from head to toe in the strong leather of her whip.  Remarkably, the fire dies out everywhere the whip touches you, leaving you bound but unharmed.", false);
 				//If player has l2 piercing
 				if (flags[kFLAGS.PC_FETISH] >= 2) {
@@ -149,7 +149,7 @@
 			//First hit!
 			doNext(game.playerMenu);
 			//Blind dodge change
-			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(10) != 9) {
+			if (hasStatusAffect(StatusAffects.Blind) && rand(10) != 9) {
 				outputText(capitalA + short + " completely misses you with a blind attack!", false);
 			}
 			//Determine if dodged!
@@ -196,7 +196,7 @@
 			outputText("\n", false);
 			//SECOND ATTACK HERE------
 			//Blind dodge change
-			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(10) != 9) {
+			if (hasStatusAffect(StatusAffects.Blind) && rand(10) != 9) {
 				outputText(capitalA + short + " completely misses you with a blind attack!", false);
 			}
 			//Determine if dodged!
@@ -247,11 +247,11 @@
 		override protected function performCombatAction():void
 		{
 			var choice:Number = rand(4);
-			if (player.findStatusAffect(StatusAffects.Bound) >= 0) {
+			if (player.hasStatusAffect(StatusAffects.Bound)) {
 				ceraphSpecial2();
 				return;
 			}
-			if (findStatusAffect(StatusAffects.Uber) >= 0) {
+			if (hasStatusAffect(StatusAffects.Uber)) {
 				ceraphSpecial1();
 				return;
 			}

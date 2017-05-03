@@ -455,7 +455,7 @@ private function acceptValeriasNeeds():void {
 	spriteSelect(79);
 	clearOutput();
 	outputText("You smile and tell Valeria that you're perfectly all right with her special needs");
-	if(player.findStatusAffect(StatusAffects.SlimeCraving) >= 0) outputText(" after all, you have the same ones");
+	if(player.hasStatusAffect(StatusAffects.SlimeCraving)) outputText(" after all, you have the same ones");
 	outputText(", as long as they don't interfere with your mission as Champion.");
 	outputText("\n\n\"<i>They won't, partner,</i>\" Valeria says with a little wink. \"<i>I give you my word.</i>\"");
 	outputText("\n\nNodding, you ruffle her gooey hair and get back to business.");

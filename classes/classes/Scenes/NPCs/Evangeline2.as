@@ -150,7 +150,7 @@ package classes.Scenes.NPCs
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
-			if (player.findStatusAffect(StatusAffects.Blizzard) >= 0) {
+			if (player.hasStatusAffect(StatusAffects.Blizzard)) {
 			player.addStatusValue(StatusAffects.Blizzard, 1, -1);
 			outputText("Evangeline narrows her eyes and focuses her mind with deadly intent. She snaps her fingers and you are enveloped in a flash of white flames!  Thanks to surrounding you ice shards this attack isn't at it peak power!  ");
 			damage *= 0.2;
@@ -238,7 +238,7 @@ package classes.Scenes.NPCs
 		override protected function performCombatAction():void
 		{
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 10 || flags[kFLAGS.EVANGELINE_LVL_UP] == 11) {
-				if (findStatusAffect(StatusAffects.ChargeWeapon) < 0) {
+				if (!hasStatusAffect(StatusAffects.ChargeWeapon)) {
 					ChargeWeaponMightSpell();
 					eAttack();
 				}
@@ -247,10 +247,10 @@ package classes.Scenes.NPCs
 					var choice3:Number = rand(2);
 					if (choice3 == 0) eAttack();
 					if (choice3 == 1) {
-						if ((this.lust < eMaxLust() * 0.75) && findStatusAffect(StatusAffects.ChargeArmor) < 0) ChargeArmorSpell();
-						else if (findStatusAffect(StatusAffects.Blink) < 0 && (fatigue < (eMaxFatigue() - spellCostBlink()))) BlinkSpell();
+						if ((this.lust < eMaxLust() * 0.75) && !hasStatusAffect(StatusAffects.ChargeArmor)) ChargeArmorSpell();
+						else if (!hasStatusAffect(StatusAffects.Blink) && (fatigue < (eMaxFatigue() - spellCostBlink()))) BlinkSpell();
 						else if (HPRatio() < .75 && (fatigue < (eMaxFatigue() - spellCostHeal()))) HealSpell();
-						else if ((this.lust < eMaxLust() * 0.75) && rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostBlind())) && player.findStatusAffect(StatusAffects.Blind) < 0) BlindSpell();
+						else if ((this.lust < eMaxLust() * 0.75) && rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostBlind())) && !player.hasStatusAffect(StatusAffects.Blind)) BlindSpell();
 						else if (rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostArouse()))) ArouseSpell();
 						else if ((this.lust < eMaxLust() * 0.75) && (fatigue < (eMaxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
 						else eAttack();
@@ -264,12 +264,12 @@ package classes.Scenes.NPCs
 				var choice2:Number = rand(2);
 				if (choice2 == 0) eAttack();
 				if (choice2 == 1) {
-					if ((this.lust < eMaxLust() * 0.75) && findStatusAffect(StatusAffects.ChargeWeapon) < 0) ChargeWeaponSpell();
-					else if (findStatusAffect(StatusAffects.Might) < 0 && (fatigue < (eMaxFatigue() - spellCostMight()))) MightSpell();
-					else if ((this.lust < eMaxLust() * 0.75) && findStatusAffect(StatusAffects.ChargeArmor) < 0) ChargeArmorSpell();
-					else if (findStatusAffect(StatusAffects.Blink) < 0 && (fatigue < (eMaxFatigue() - spellCostBlink()))) BlinkSpell();
+					if ((this.lust < eMaxLust() * 0.75) && !hasStatusAffect(StatusAffects.ChargeWeapon)) ChargeWeaponSpell();
+					else if (!hasStatusAffect(StatusAffects.Might) && (fatigue < (eMaxFatigue() - spellCostMight()))) MightSpell();
+					else if ((this.lust < eMaxLust() * 0.75) && !hasStatusAffect(StatusAffects.ChargeArmor)) ChargeArmorSpell();
+					else if (!hasStatusAffect(StatusAffects.Blink) && (fatigue < (eMaxFatigue() - spellCostBlink()))) BlinkSpell();
 					else if (HPRatio() < .75 && (fatigue < (eMaxFatigue() - spellCostHeal()))) HealSpell();
-					else if ((this.lust < eMaxLust() * 0.75) && rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostBlind())) && player.findStatusAffect(StatusAffects.Blind) < 0) BlindSpell();
+					else if ((this.lust < eMaxLust() * 0.75) && rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostBlind())) && !player.hasStatusAffect(StatusAffects.Blind)) BlindSpell();
 					else if (rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostArouse()))) ArouseSpell();
 					else if ((this.lust < eMaxLust() * 0.75) && (fatigue < (eMaxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
 					else eAttack();
@@ -283,21 +283,21 @@ package classes.Scenes.NPCs
 				if (choice1 == 0) eAttack();
 				if (choice1 == 1) {
 					if (this.lust > 50) {
-						if ((this.lust < eMaxLust() * 0.75) && findStatusAffect(StatusAffects.ChargeWeapon) < 0) ChargeWeaponSpell();
-						else if ((this.lust < eMaxLust() * 0.75) && findStatusAffect(StatusAffects.ChargeArmor) < 0) ChargeArmorSpell();
-						else if (findStatusAffect(StatusAffects.Might) < 0 && (fatigue < (eMaxFatigue() - spellCostMight()))) MightSpell();
-						else if (findStatusAffect(StatusAffects.Blink) < 0 && (fatigue < (eMaxFatigue() - spellCostBlink()))) BlinkSpell();
+						if ((this.lust < eMaxLust() * 0.75) && !hasStatusAffect(StatusAffects.ChargeWeapon)) ChargeWeaponSpell();
+						else if ((this.lust < eMaxLust() * 0.75) && !hasStatusAffect(StatusAffects.ChargeArmor)) ChargeArmorSpell();
+						else if (!hasStatusAffect(StatusAffects.Might) && (fatigue < (eMaxFatigue() - spellCostMight()))) MightSpell();
+						else if (!hasStatusAffect(StatusAffects.Blink) && (fatigue < (eMaxFatigue() - spellCostBlink()))) BlinkSpell();
 						else if (HPRatio() < .75 && (fatigue < (eMaxFatigue() - spellCostHeal()))) HealSpell();
-						else if ((this.lust < eMaxLust() * 0.75) && rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostBlind())) && player.findStatusAffect(StatusAffects.Blind) < 0) BlindSpell();
+						else if ((this.lust < eMaxLust() * 0.75) && rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostBlind())) && !player.hasStatusAffect(StatusAffects.Blind)) BlindSpell();
 						else if (rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostArouse()))) ArouseSpell();
 						else if ((this.lust < eMaxLust() * 0.75) && (fatigue < (eMaxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
 						else eAttack();
 					}
 					else {
-						if ((this.lust < eMaxLust() * 0.75) && findStatusAffect(StatusAffects.ChargeWeapon) < 0) ChargeWeaponSpell();
-						else if ((this.lust < eMaxLust() * 0.75) && findStatusAffect(StatusAffects.ChargeArmor) < 0) ChargeArmorSpell();
+						if ((this.lust < eMaxLust() * 0.75) && !hasStatusAffect(StatusAffects.ChargeWeapon)) ChargeWeaponSpell();
+						else if ((this.lust < eMaxLust() * 0.75) && !hasStatusAffect(StatusAffects.ChargeArmor)) ChargeArmorSpell();
 						else if ((this.lust < eMaxLust() * 0.75) && (fatigue < (eMaxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
-						else if ((this.lust < eMaxLust() * 0.75) && rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostBlind())) && player.findStatusAffect(StatusAffects.Blind) < 0) BlindSpell();
+						else if ((this.lust < eMaxLust() * 0.75) && rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostBlind())) && !player.hasStatusAffect(StatusAffects.Blind)) BlindSpell();
 						else eAttack();
 					}
 				}

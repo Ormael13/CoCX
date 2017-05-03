@@ -49,7 +49,7 @@ package classes.Scenes.Areas.HighMountains
 		{
 			if (player.inHeat) return true;
 			if (player.inRut) return true;
-			if (player.findStatusAffect(StatusAffects.Dysfunction)) return true;
+			if (player.hasStatusAffect(StatusAffects.Dysfunction)) return true;
 			return false;
 		}
 		
@@ -371,13 +371,13 @@ package classes.Scenes.Areas.HighMountains
 		// Update the duration of the pipe smoke effect
 		public function updateSmokeDuration(hours:int):void
 		{
-			var affectIndex:int = player.findStatusAffect(StatusAffects.IzumisPipeSmoke);
+			var sac:StatusAffectClass = player.statusAffectByType(StatusAffects.IzumisPipeSmoke);
 
-			if (affectIndex >= 0)
+			if (sac)
 			{
-				player.statusAffect(affectIndex).value1 -= hours;
+				sac.value1 -= hours;
 
-				if (player.statusAffect(affectIndex).value1 <= 0)
+				if (sac.value1 <= 0)
 				{
 					this.smokeEffectWearsOff();
 				}
@@ -387,13 +387,13 @@ package classes.Scenes.Areas.HighMountains
 		// Method to contain removal mechanics + scene text to spit out
 		protected function smokeEffectWearsOff():void
 		{
-			var affectIndex:int = player.findStatusAffect(StatusAffects.IzumisPipeSmoke);
+			var sac:StatusAffectClass = player.statusAffectByType(StatusAffects.IzumisPipeSmoke);
 
-			if (affectIndex >= 0)
+			if (sac)
 			{
-				player.spe += Math.abs(player.statusAffect(affectIndex).value2);
-				player.sens -= player.statusAffect(affectIndex).value3;
-				player.lib -= player.statusAffect(affectIndex).value4;
+				player.spe += Math.abs(sac.value2);
+				player.sens -= sac.value3;
+				player.lib -= sac.value4;
 				
 				if (player.sens > 100) player.sens = 100;
 				if (player.spe > player.getMaxStats("spe")) player.spe = player.getMaxStats("spe");
@@ -1036,7 +1036,7 @@ package classes.Scenes.Areas.HighMountains
 
 				if (player.lactationQ() > 0) outputText("You let out a moan of pleasure as a sudden jet of milk spurts from your heavy breasts, splattering across the rocky ground.  Izumi doesn’t let up though, instead working your nipple even harder, almost feverishly pinching and squeezing away, forcing more and more of the warm liquid to be coaxed free of your bust.\n\n");
 
-				if ((player.findStatusAffect(StatusAffects.BreastsMilked) > 0) && (player.lactationQ() > 750))
+				if ((player.hasStatusAffect(StatusAffects.BreastsMilked)) && (player.lactationQ() > 750))
 				{
 					outputText("You instinctively relax and lean back into the cushioned softness of Izumi’s breasts as the familiar sensation of being milked washes over you.  Your breasts respond readily to the repeated stimulation, great jets of milk answering the insistent urging of Izumi’s fingers.  Her other hand detaches itself from your groin temporarily to begin cupping and squeezing at your bust as well, much to your enjoyment.  You lay there in her arms, gazing down at your [chest] as you are being milked, and you can’t help but think to yourself");
 

@@ -18,7 +18,7 @@
 
 		public function encapsulationPodAI():void {
 			//[Round 1 Action]
-			if(findStatusAffect(StatusAffects.Round) < 0) {
+			if(!hasStatusAffect(StatusAffects.Round)) {
 				outputText("You shiver from the feeling of warm wetness crawling up your " + player.legs() + ".   Tentacles brush against your ", false);
 				if(player.balls > 0) {
 					outputText(ballsDescriptLight() + " ", false);
@@ -132,7 +132,7 @@
 				return;
 			}
 			//Set flags for rounds
-			if(findStatusAffect(StatusAffects.Round) < 0) {
+			if(!hasStatusAffect(StatusAffects.Round)) {
 				createStatusAffect(StatusAffects.Round,2,0,0,0);
 			}
 			else addStatusValue(StatusAffects.Round,1,1);
@@ -152,7 +152,7 @@
 		override public function get long():String {
 			//[Round 1 Description]
 			var _long:String;
-			if(findStatusAffect(StatusAffects.Round) < 0) _long = "You're totally trapped inside a pod!  The walls are slimy and oozing moisture that makes the air sickeningly sweet.  It makes you feel a little dizzy.  Tentacles are climbing up your " + game.player.legs() + " towards your crotch, doing their best to get under you " + game.player.armorName + ".  There's too many to try to pull away.  Your only chance of escape is to create a way out!";
+			if(!hasStatusAffect(StatusAffects.Round)) _long = "You're totally trapped inside a pod!  The walls are slimy and oozing moisture that makes the air sickeningly sweet.  It makes you feel a little dizzy.  Tentacles are climbing up your " + game.player.legs() + " towards your crotch, doing their best to get under you " + game.player.armorName + ".  There's too many to try to pull away.  Your only chance of escape is to create a way out!";
 			//[Round 2 Description]
 			else if(statusAffectv1(StatusAffects.Round) == 2) {
 				_long = "You're still trapped inside the pod!  By now the walls are totally soaked with some kind of viscous slime.  The smell of it is unbearably sweet and you have to put a hand against the wall to steady yourself.  Warm tentacles are curling and twisting underneath your armor, caressing every ";

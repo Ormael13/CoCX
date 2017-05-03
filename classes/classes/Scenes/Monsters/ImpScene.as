@@ -23,7 +23,7 @@ package classes.Scenes.Monsters
 		
 		public function impVictory():void {
 			clearOutput();
-			var canFeed:Boolean = (player.findStatusAffect(StatusAffects.Feeder) >= 0);
+			var canFeed:Boolean = (player.hasStatusAffect(StatusAffects.Feeder));
 			var canBikiniTits:Boolean = (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor);
 			outputText("You smile in satisfaction as " + monster.a + monster.short + " collapses and begins masturbating feverishly.");
 			menu();
@@ -622,7 +622,7 @@ package classes.Scenes.Monsters
 			if(player.isTaur()) {
 				if(rand(2) == 0 && (player.cockTotal() == 0 || player.gender == 3)) {
 					//(First encounter)
-					if(player.findStatusAffect(StatusAffects.ImpGangBang) < 0) {
+					if(!player.hasStatusAffect(StatusAffects.ImpGangBang)) {
 						outputText("The imps stand anywhere from two to four feet tall, with scrawny builds and tiny demonic wings. Their red and orange skin is dirty, and their dark hair looks greasy. Some are naked, but most are dressed in ragged loincloths that do little to hide their groins. They all have a " + monster.cockDescriptShort(0) + " as long and thick as a man's arm, far oversized for their bodies. Watching an imp trip over its " + monster.cockDescriptShort(0) + " would be funny, if you weren't surrounded by a horde of leering imps closing in from all sides...\n\n", false);
 						player.createStatusAffect(StatusAffects.ImpGangBang,0,0,0,0);
 						outputText("The imps leap forward just as you start to ready your " + player.weaponName + ", one sweaty imp clinging to your arm", false);
@@ -788,7 +788,7 @@ package classes.Scenes.Monsters
 				//Scene number 2 - male possible.
 				else {
 					//Scene 2 (Centaur, vaginal)
-					if(player.findStatusAffect(StatusAffects.ImpGangBang) >= 0) {
+					if(player.hasStatusAffect(StatusAffects.ImpGangBang)) {
 						//(Subsequent encounters - Low Corruption)
 						if(player.cor < 50) outputText("You can't tell if this is the same " + monster.short + " as last time or not. You're not racist, but all imps look alike to you. " + monster.capitalA  + " surges forward, grabbing at your legs and arms and running their hands over your body. You struggle, but there are just too many to fight. The result is the same as last time...\n\n", false);
 						//(Subsequent encounters - High Corruption)
@@ -971,7 +971,7 @@ package classes.Scenes.Monsters
 			else {
 				if(rand(2) == 0 && (player.cockTotal() == 0 || player.gender == 3)) {
 					//(First encounter)
-					if(player.findStatusAffect(StatusAffects.ImpGangBang) < 0) {
+					if(!player.hasStatusAffect(StatusAffects.ImpGangBang)) {
 						outputText("The imps stand anywhere from two to four feet tall, with scrawny builds and tiny demonic wings. Their red and orange skin is dirty, and their dark hair looks greasy. Some are naked, but most are dressed in ragged loincloths that do little to hide their groins. They all have a " + monster.cockDescriptShort(0) + " as long and thick as a man's arm, far oversized for their bodies. Watching an imp trip over its " + monster.cockDescriptShort(0) + " would be funny, if you weren't surrounded by a horde of leering imps closing in from all sides...\n\n", false);
 						player.createStatusAffect(StatusAffects.ImpGangBang,0,0,0,0);
 					}
@@ -1098,7 +1098,7 @@ package classes.Scenes.Monsters
 					//Tag-team
 					//Include milking alt text in separate blocks. 
 					//Work cock and multicock alt text directly into main text blocks.
-					if(player.findStatusAffect(StatusAffects.ImpGangBang) >= 0) {
+					if(player.hasStatusAffect(StatusAffects.ImpGangBang)) {
 						//(Subsequent encounters - Low Corruption)
 						if(player.cor < 50) outputText("You can't tell if this is the same " + monster.short + " as last time or not - all imps look alike to you.  The " + monster.capitalA  + " surges forward, grabbing at your " + player.legs() + " and arms and running their hands over your body. You struggle, but there are just too many to fight. The result is the same as last time...\n\n", false);
 						//(Subsequent encounters - High Corruption)

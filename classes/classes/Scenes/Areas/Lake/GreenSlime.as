@@ -11,7 +11,7 @@
 		{
 			outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.", true);
 			//Boobfeed.
-			if(player.findStatusAffect(StatusAffects.Feeder) >= 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if(player.hasStatusAffect(StatusAffects.Feeder) && flags[kFLAGS.SFW_MODE] <= 0) {
 				//Eligable to rape
 				if(player.lust >= 33 && player.gender > 0) {
 					outputText("\n\nYou're horny enough to try and rape it, though you'd rather see how much milk you can squirt into it.  What do you do?", false);

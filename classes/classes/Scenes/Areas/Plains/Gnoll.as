@@ -18,7 +18,7 @@ package classes.Scenes.Areas.Plains
 			//return to combat menu when finished
 			doNext(game.playerMenu);
 			//Blind dodge change
-			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
+			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 			}
 			//Determine if dodged!
@@ -131,7 +131,7 @@ package classes.Scenes.Areas.Plains
 //return to combat menu when finished
 			doNext(game.playerMenu);
 //Blind dodge change
-			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
+			if (hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 			}
 			//Determine if dodged!
@@ -205,13 +205,13 @@ package classes.Scenes.Areas.Plains
 
 		override protected function performCombatAction():void
 		{
-			if (findStatusAffect(StatusAffects.Stunned) >= 0) {
+			if (hasStatusAffect(StatusAffects.Stunned)) {
 				if (plural) outputText("Your foes are too dazed from your last hit to strike back!", false);
 				else outputText("Your foe is too dazed from your last hit to strike back!", false);
 				removeStatusAffect(StatusAffects.Stunned);
 				combatRoundOver();
 			}
-			if (findStatusAffect(StatusAffects.Fear) >= 0) {
+			if (hasStatusAffect(StatusAffects.Fear)) {
 				if (statusAffectv1(StatusAffects.Fear) == 0) {
 					if (plural) {
 						removeStatusAffect(StatusAffects.Fear);
@@ -232,11 +232,11 @@ package classes.Scenes.Areas.Plains
 			var select:Number = 1;
 			var rando:Number = 1;
 //Exgartuan gets to do stuff!
-			if (player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0 && rand(3) == 0) {
+			if (player.hasStatusAffect(StatusAffects.Exgartuan) && player.statusAffectv2(StatusAffects.Exgartuan) == 0 && rand(3) == 0) {
 				game.exgartuan.exgartuanCombatUpdate();
 				outputText("\n\n", false);
 			}
-			if (findStatusAffect(StatusAffects.Constricted) >= 0) {
+			if (hasStatusAffect(StatusAffects.Constricted)) {
 				//Enemy struggles -
 				outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.", false);
 				if (statusAffectv1(StatusAffects.Constricted) <= 0) {
@@ -270,7 +270,7 @@ package classes.Scenes.Areas.Plains
 //return to combat menu when finished
 				doNext(game.playerMenu);
 //Blind dodge change
-				if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
+				if (hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
 					outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 				}
 				//Determine if dodged!
@@ -348,7 +348,7 @@ package classes.Scenes.Areas.Plains
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(findStatusAffect(StatusAffects.PhyllaFight) >= 0) {
+			if(hasStatusAffect(StatusAffects.PhyllaFight)) {
 				removeStatusAffect(StatusAffects.PhyllaFight);
 				game.desert.antsScene.phyllaPCBeatsGnoll();
 				return;
@@ -358,7 +358,7 @@ package classes.Scenes.Areas.Plains
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(findStatusAffect(StatusAffects.PhyllaFight) >= 0) {
+			if(hasStatusAffect(StatusAffects.PhyllaFight)) {
 				removeStatusAffect(StatusAffects.PhyllaFight);
 				game.desert.antsScene.phyllaGnollBeatsPC();
 			} else if(pcCameWorms) {

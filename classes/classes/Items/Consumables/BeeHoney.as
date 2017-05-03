@@ -150,7 +150,7 @@ package classes.Items.Consumables
 			if (changes < changeLimit && player.lowerBody != CoC.LOWER_BODY_TYPE_GARGOYLE && (player.antennae == CoC.ANTENNAE_NONE || player.antennae == CoC.ANTENNAE_MANTIS) && player.horns == 0 && Utils.rand(3) == 0) {
 				if (player.antennae == CoC.ANTENNAE_MANTIS) outputText("\n\nYour head itches momentarily as your two long prehensile antennae changes slowly into floppy ones similar to those seen at bees.");
 				else outputText("\n\nYour head itches momentarily as two floppy antennae sprout from your " + getGame().hairDescript() + ".");
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && player.findStatusAffect(StatusAffects.UnlockedBeeAntennae) < 0) {
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedBeeAntennae)) {
 					outputText("\n\n<b>Genetic Memory: Bee Antennae - Memorized!</b>\n\n");
 					player.createStatusAffect(StatusAffects.UnlockedBeeAntennae, 0, 0, 0, 0);
 				}
@@ -167,7 +167,7 @@ package classes.Items.Consumables
 			//Bee Legs
 			if (changes < changeLimit && player.lowerBody != CoC.LOWER_BODY_TYPE_BEE && player.lowerBody != CoC.LOWER_BODY_TYPE_GARGOYLE && Utils.rand(4) == 0) {
 				outputText("\n\nYour legs tremble with sudden unbearable pain, as if they're being ripped apart from the inside out and being stitched together again all at once.  You scream in agony as you hear bones snapping and cracking.  A moment later the pain fades and you are able to turn your gaze down to your beautiful new legs, covered in shining black chitin from the thigh down, and downy yellow fuzz along your upper thighs.");
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && player.findStatusAffect(StatusAffects.UnlockedBeeLegs) < 0) {
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedBeeLegs)) {
 					outputText("\n\n<b>Genetic Memory: Bee Legs - Memorized!</b>\n\n");
 					player.createStatusAffect(StatusAffects.UnlockedBeeLegs, 0, 0, 0, 0);
 				}
@@ -187,7 +187,7 @@ package classes.Items.Consumables
 					if (player.armType == CoC.ARM_TYPE_SPIDER) outputText("On your upper arms slowly starting to grown yellow fuzz making them looks more like those of bee.");
 					if (player.armType == CoC.ARM_TYPE_MANTIS) outputText("The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>. Additionaly on your upper arms appear yellow fuzz.");
 				}
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && player.findStatusAffect(StatusAffects.UnlockedBeeArms) < 0) {
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedBeeArms)) {
 					outputText("\n\n<b>Genetic Memory: Bee Arms - Memorized!</b>\n\n");
 					player.createStatusAffect(StatusAffects.UnlockedBeeArms, 0, 0, 0, 0);
 				}
@@ -216,7 +216,7 @@ package classes.Items.Consumables
 			if (changes < changeLimit && player.tailType != CoC.TAIL_TYPE_BEE_ABDOMEN && player.lowerBody != CoC.LOWER_BODY_TYPE_GARGOYLE && (player.tailType == CoC.TAIL_TYPE_NONE || Utils.rand(1.5) == 0) && Utils.rand(4) == 0) {
 				if (player.tailType > CoC.TAIL_TYPE_NONE) outputText("\n\nPainful swelling just above your " + getGame().buttDescript() + " doubles you over, and you hear the sound of your tail dropping off onto the ground!  Before you can consider the implications, the pain gets worse, and you feel your backside bulge outward sickeningly, cracking and popping as a rounded bee-like abdomen grows in place of your old tail.  It grows large enough to be impossible to hide, and with a note of finality, your stinger slides free with an audible 'snick'.");
 				else outputText("\n\nPainful swelling just above your " + getGame().buttDescript() + " doubles you over.  It gets worse and worse as the swollen lump begins to protrude from your backside, swelling and rounding with a series of pops until you have a bulbous abdomen hanging just above your butt.  The whole thing is covered in a hard chitinous material, and large enough to be impossible to hide.  You sigh as your stinger slides into place with a 'snick', finishing the transformation.  <b>You have a bee's abdomen.</b>");
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && player.findStatusAffect(StatusAffects.UnlockedBeeTail) < 0) {
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedBeeTail)) {
 					outputText("\n\n<b>Genetic Memory: Bee Abdomen - Memorized!</b>\n\n");
 					player.createStatusAffect(StatusAffects.UnlockedBeeTail, 0, 0, 0, 0);
 				}
@@ -239,7 +239,7 @@ package classes.Items.Consumables
 			//Grow bigger bee wings!
 			if (changes < changeLimit && player.wingType == CoC.WING_TYPE_BEE_LIKE_SMALL && Utils.rand(4)) {
 				changes++;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && player.findStatusAffect(StatusAffects.UnlockedBeeWingsLarge) < 0) {
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedBeeWingsLarge)) {
 					outputText("\n\n<b>Genetic Memory: Bee Wings Large - Memorized!</b>\n\n");
 					player.createStatusAffect(StatusAffects.UnlockedBeeWingsLarge, 0, 0, 0, 0);
 				}
@@ -253,7 +253,7 @@ package classes.Items.Consumables
 				changes++;
 			//	if (player.wingType == CoC.WING_TYPE_SHARK_FIN) outputText("\n\nYou feel an itching on your large back-fin as something begins growing there.  You twist and contort yourself, trying to scratch and bring yourself relief, and failing miserably.  A sense of relief erupts from you as you feel something new grow out from your fin.  You hastily remove the top portion of your " + player.armorName + " and marvel as a pair of small bee-like wings sprout from your back, replacing the fin that once grew there.  Tenderly flexing your new muscles, you find you can flap them quite fast.  Unfortunately you can't seem to flap your little wings fast enough to fly, but they would certainly slow a fall.  A few quick modifications to your " + player.armorName + " later and you are ready to continue your journey with <b>your new bee wings</b>.");
 				outputText("\n\nYou feel an itching between your shoulder-blades as something begins growing there.  You twist and contort yourself, trying to scratch and bring yourself relief, and failing miserably.  A sense of relief erupts from you as you feel something new grow out from your body.  You hastily remove the top portion of your " + player.armorName + " and marvel as a pair of small bee-like wings sprout from your back.  Tenderly flexing your new muscles, you find you can flap them quite fast.  Unfortunately you can't seem to flap your little wings fast enough to fly, but they would certainly slow a fall.  A few quick modifications to your " + player.armorName + " later and you are ready to continue your journey with <b>your new bee wings</b>.");
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && player.findStatusAffect(StatusAffects.UnlockedBeeWingsSmall) < 0) {
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedBeeWingsSmall)) {
 					outputText("\n\n<b>Genetic Memory: Bee Wings Small - Memorized!</b>\n\n");
 					player.createStatusAffect(StatusAffects.UnlockedBeeWingsSmall, 0, 0, 0, 0);
 				}

@@ -61,7 +61,7 @@ package classes.Scenes.Areas.HighMountains
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			flags[kFLAGS.IZUMI_TIMES_LOST_FIGHT]++;
-			if (player.findStatusAffect(StatusAffects.Titsmother) >= 0)
+			if (player.hasStatusAffect(StatusAffects.Titsmother))
 			{
 				this.cleanup();
 				game.highMountains.izumiScenes.deathBySnuSnuIMeanGiantOniTits();
@@ -79,7 +79,7 @@ package classes.Scenes.Areas.HighMountains
 		override protected function performCombatAction():void
 		{
 			// Handle chokeslam mechanics
-			if (player.findStatusAffect(StatusAffects.Chokeslam) >= 0)
+			if (player.hasStatusAffect(StatusAffects.Chokeslam))
 			{
 				if (combatDebug) trace("ChokeSlam Rounds to Damage: " + player.statusAffectv1(StatusAffects.Chokeslam));
 				
@@ -96,7 +96,7 @@ package classes.Scenes.Areas.HighMountains
 			}
 			
 			// Handle groundpound
-			if (player.findStatusAffect(StatusAffects.Groundpound) >= 0)
+			if (player.hasStatusAffect(StatusAffects.Groundpound))
 			{
 				player.addStatusValue(StatusAffects.Groundpound,1,-1);
 				
@@ -107,7 +107,7 @@ package classes.Scenes.Areas.HighMountains
 			}
 			
 			// Handle titsmother
-			if (player.findStatusAffect(StatusAffects.Titsmother) >= 0)
+			if (player.hasStatusAffect(StatusAffects.Titsmother))
 			{
 				combatRoundOver();
 				return;
@@ -116,13 +116,13 @@ package classes.Scenes.Areas.HighMountains
 			// Titsmother toggle; gonna need to play with this, it should only be used once per fight
 			if (this.HPRatio() <= 0.25)
 			{
-				if (this.findStatusAffect(StatusAffects.UsedTitsmother) <= -1)
+				if (!this.hasStatusAffect(StatusAffects.UsedTitsmother))
 				{
 					trace("Could use titsmother...");
 				}
 			}
 			
-			if ((this.HPRatio() <= 0.25) && (this.findStatusAffect(StatusAffects.UsedTitsmother) <= -1))
+			if ((this.HPRatio() <= 0.25) && (!this.hasStatusAffect(StatusAffects.UsedTitsmother)))
 			{
 				if (combatDebug) trace("Using Titsmother!");
 				titSmother();
@@ -133,7 +133,7 @@ package classes.Scenes.Areas.HighMountains
 			{
 				var actions:Array = [straightJab, straightJab, straightJab, roundhouseKick, roundhouseKick, roundhouseKick, chokeSlam]; 
 				
-				if (player.findStatusAffect(StatusAffects.Groundpound) <= -1)
+				if (!player.hasStatusAffect(StatusAffects.Groundpound))
 				{
 					actions.push(groundPound);
 					actions.push(groundPound);
@@ -308,7 +308,7 @@ package classes.Scenes.Areas.HighMountains
 		// Remove the effect post-combat
 		public function cleanupChokeslam():void
 		{
-			if (player.findStatusAffect(StatusAffects.Chokeslam) >= 0)
+			if (player.hasStatusAffect(StatusAffects.Chokeslam))
 			{
 				trace("Removing chokeslam");
 				
@@ -342,7 +342,7 @@ package classes.Scenes.Areas.HighMountains
 		// Remove the effect post-combat, fixup stats
 		public function cleanupGroundpound():void
 		{
-			if (player.findStatusAffect(StatusAffects.Groundpound) >= 0)
+			if (player.hasStatusAffect(StatusAffects.Groundpound))
 			{
 				// Can't use dynStats to achieve this, as it can give back more speed than we originally took away due to perks
 				player.spe += player.statusAffectv2(StatusAffects.Groundpound);
@@ -374,7 +374,7 @@ package classes.Scenes.Areas.HighMountains
 		// Remove the effect post-combat
 		public function cleanupTitsmother():void
 		{
-			if (player.findStatusAffect(StatusAffects.Titsmother) >= 0)
+			if (player.hasStatusAffect(StatusAffects.Titsmother))
 			{
 				player.removeStatusAffect(StatusAffects.Titsmother);
 				if (combatDebug) trace("Removing Titsmother");

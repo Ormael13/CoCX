@@ -13,7 +13,7 @@ package classes.Scenes.Areas.Bog
 		{ 
 			var damage:int;
 			//Only the bunny, goat and horse forms make physical attacks
-			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
+			if (hasStatusAffect(StatusAffects.Blind) && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you due to his blindness!\n", false);
 			}
 			else if (PhoukaScene.phoukaForm == PhoukaScene.PHOUKA_FORM_BUNNY) {
@@ -80,7 +80,7 @@ package classes.Scenes.Areas.Bog
 		protected function phoukaFightSilence():void
 		{ //Reuses the statusAffect Web-Silence from the spiders
 			outputText(this.capitalA + this.short + " scoops up some muck from the ground and rams it down over his cock.  After a few strokes he forms the lump of mud and precum into a ball and whips it at your face.  ");
-			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2)
+			if (hasStatusAffect(StatusAffects.Blind) && rand(3) < 2)
 				outputText("Since he's blind the shot goes horribly wide, missing you entirely.");
 			else
 			{
@@ -105,8 +105,8 @@ package classes.Scenes.Areas.Bog
 
 		override protected function performCombatAction():void
 		{
-			var blinded:Boolean = findStatusAffect(StatusAffects.Blind) >= 0;
-			if ((!blinded) && player.findStatusAffect(StatusAffects.WebSilence) < 0 && rand(4) == 0) {
+			var blinded:Boolean = hasStatusAffect(StatusAffects.Blind);
+			if ((!blinded) && !player.hasStatusAffect(StatusAffects.WebSilence) && rand(4) == 0) {
 				phoukaTransformToPhouka(); //Change to faerie form so that it can lob the ball of muck at you
 				phoukaFightSilence();
 			}

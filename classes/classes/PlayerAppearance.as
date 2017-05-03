@@ -641,7 +641,7 @@ public class PlayerAppearance extends BaseContent {
 		outputText("  Of course, your " + player.legs() + " are partially transparent due to their ghostly nature.", false); // isn't goo transparent anyway?
 
 	outputText("\n", false);
-	if (player.findStatusAffect(StatusAffects.GooStuffed) >= 0)
+	if (player.hasStatusAffect(StatusAffects.GooStuffed))
 
 	{
 		outputText("\n<b>Your gravid-looking belly is absolutely stuffed full of goo. There's no way you can get pregnant like this, but at the same time, you look like some fat-bellied breeder.</b>\n");
@@ -964,7 +964,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  It is quite a sight to behold, coming well-equiped with four heads.");
 		}
 		//Worm flavor
-		if(player.findStatusAffect(StatusAffects.Infested) >= 0)
+		if(player.hasStatusAffect(StatusAffects.Infested))
 			outputText("  Every now and again a slimy worm coated in spunk slips partway out of your " + player.cockDescript(0) + ", tasting the air like a snake's tongue.", false);
 		if(player.cocks[temp].sock)
 			sockDescript(temp);
@@ -1135,14 +1135,14 @@ public class PlayerAppearance extends BaseContent {
 			if(rando > 3) rando = 0;
 		}
 		//Worm flavor
-		if(player.findStatusAffect(StatusAffects.Infested) >= 0)
+		if(player.hasStatusAffect(StatusAffects.Infested))
 			outputText("Every now and again slimy worms coated in spunk slip partway out of your " + player.multiCockDescriptLight() + ", tasting the air like tongues of snakes.\n", false);
 		//DONE WITH COCKS, moving on!
 	}
 	//Of Balls and Sacks!
 	if(player.balls > 0)
 	{
-		if(player.findStatusAffect(StatusAffects.Uniball) >= 0)
+		if(player.hasStatusAffect(StatusAffects.Uniball))
 		{
 			if(player.skinType != SKIN_TYPE_GOO)
 				outputText("Your [sack] clings tightly to your groin, holding " + ballsDescript() + " snugly against you.");

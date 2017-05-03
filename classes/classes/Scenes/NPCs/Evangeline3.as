@@ -105,7 +105,7 @@ package classes.Scenes.NPCs
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
-			if (player.findStatusAffect(StatusAffects.Blizzard) >= 0) {
+			if (player.hasStatusAffect(StatusAffects.Blizzard)) {
 			player.addStatusValue(StatusAffects.Blizzard, 1, -1);
 			outputText("Evangeline narrows her eyes and focuses her mind with deadly intent. She snaps her fingers and you are enveloped in a flash of white flames!  Thanks to surrounding you ice shards this attack isn't at it peak power!  ");
 			damage *= 0.2;
@@ -183,7 +183,7 @@ package classes.Scenes.NPCs
 		override protected function performCombatAction():void
 		{
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 12) {
-				if (findStatusAffect(StatusAffects.ChargeWeapon) < 0) {
+				if (!hasStatusAffect(StatusAffects.ChargeWeapon)) {
 					ChargeWeaponMightChargeArmorBlinkSpell();
 					eAttack();
 				}
@@ -193,7 +193,7 @@ package classes.Scenes.NPCs
 					if (choice1 == 0) eAttack();
 					if (choice1 == 1) {
 						if (HPRatio() < .75 && (fatigue < (eMaxFatigue() - spellCostHeal()))) HealSpell();
-						else if ((this.lust < eMaxLust() * 0.75) && rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostBlind())) && player.findStatusAffect(StatusAffects.Blind) < 0) BlindSpell();
+						else if ((this.lust < eMaxLust() * 0.75) && rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostBlind())) && !player.hasStatusAffect(StatusAffects.Blind)) BlindSpell();
 						else if (rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostArouse()))) ArouseSpell();
 						else if ((this.lust < eMaxLust() * 0.75) && rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
 						//else if (rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostWhitefire()))) WhiteFireSpell();miejsce na ice spike spell w AI

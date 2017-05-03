@@ -18,7 +18,7 @@
 		protected function harpyUberCharge():void
 		{
 			//(Harpy special attack 1, part one)
-			if (findStatusAffect(StatusAffects.Uber) < 0) {
+			if (!hasStatusAffect(StatusAffects.Uber)) {
 				createStatusAffect(StatusAffects.Uber, 0, 0, 0, 0);
 				outputText("Flapping her wings frantically, she flies away from you and gains height, hanging in the light before you.  She lets out a shrill and terrifying cry, narrowing her eyes as she focuses in on you!", false);
 			}
@@ -52,7 +52,7 @@
 		override protected function performCombatAction():void
 		{
 			var select:Number = 1;
-			if (findStatusAffect(StatusAffects.Uber) >= 0) {
+			if (hasStatusAffect(StatusAffects.Uber)) {
 				harpyUberCharge();
 				return;
 			}

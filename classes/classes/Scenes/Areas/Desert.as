@@ -49,7 +49,7 @@ package classes.Scenes.Areas
 				etnaScene.repeatYandereEnc();
 				return;
 			}
-			if ((player.exploredDesert == 5 && player.findStatusAffect(StatusAffects.TelAdre) < 0) || (rand(5) == 0 && player.statusAffectv1(StatusAffects.TelAdre) == 0)) {
+			if ((player.exploredDesert == 5 && !player.hasStatusAffect(StatusAffects.TelAdre)) || (rand(5) == 0 && player.statusAffectv1(StatusAffects.TelAdre) == 0)) {
 				kGAMECLASS.telAdre.discoverTelAdre();
 				return;
 			}

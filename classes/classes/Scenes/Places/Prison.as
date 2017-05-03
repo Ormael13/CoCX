@@ -1027,7 +1027,7 @@ package classes.Scenes.Places
 				player.itemSlot(i).emptySlot();
 			}
 			flags[kFLAGS.PRISON_DOOR_UNLOCKED] = 0;
-			if(player.findStatusAffect(StatusAffects.PrisonCaptorEllyStatus) < 0)
+			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyStatus))
 			{
 				player.createStatusAffect(StatusAffects.PrisonCaptorEllyStatus,0,0,0,0);
 			}
@@ -1299,7 +1299,7 @@ package classes.Scenes.Places
 					removeButton(4);
 				}
 				addButton(8, "Masturbate", getGame().masturbation.masturbateMenu);
-				if ((((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", getGame().masturbation.masturbateMenu);
+				if ((((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.hasStatusAffect(StatusAffects.Exgartuan) && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", getGame().masturbation.masturbateMenu);
 			}
 			//Alter menu depending on punishment.
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 1) {
@@ -1489,7 +1489,7 @@ package classes.Scenes.Places
 			dynStats("lus", 20);
 			changeObey(1, inPrison);
 			changeEsteem( -1, inPrison);
-			if (player.findStatusAffect(StatusAffects.BonusACapacity) < 0) {
+			if (!player.hasStatusAffect(StatusAffects.BonusACapacity)) {
 				player.createStatusAffect(StatusAffects.BonusACapacity, 2, 0, 0, 0);
 			}
 			else {
@@ -2655,7 +2655,7 @@ package classes.Scenes.Places
 			else
 			{
 				selector = rand(10);
-				if(player.findStatusAffect(StatusAffects.Heat) >= 0)
+				if(player.hasStatusAffect(StatusAffects.Heat))
 				{
 					selector = 6;
 				}
@@ -2745,7 +2745,7 @@ package classes.Scenes.Places
 			else
 			{
 				selector = rand(10);
-				if(player.findStatusAffect(StatusAffects.Heat) >= 0)
+				if(player.hasStatusAffect(StatusAffects.Heat))
 				{
 					selector = 6;
 				}
@@ -2800,7 +2800,7 @@ package classes.Scenes.Places
 					if(player.hasVagina())
 					{
 						outputText("(Placeholder) \"<i>You're going to get a special treat today, [boy], but first you need to beg me to put a baby in your dirty [cunt].</i>\" You petulantly refuse, ");
-						if(player.findStatusAffect(StatusAffects.Heat) >= 0)
+						if(player.hasStatusAffect(StatusAffects.Heat))
 						{
 							outputText("but she simply laughs, walks up to you, and begins to stroke her dick in your face. In a matter of seconds your raging hormones get the better of you and you coyly acquiesce, and ask her to fuck your [pussy]. She makes you present yourself like a bitch in heat while continuing to beg. Finally she gives you want you want, and fills your womb with her potent seed.\n\n");
 						}
@@ -2963,16 +2963,15 @@ package classes.Scenes.Places
 				{
 					if(player.pregnancyIncubation == 0)
 					{
-						if(player.findStatusAffect(StatusAffects.Heat) >= 0)
+						if(player.hasStatusAffect(StatusAffects.Heat))
 						{
 							outputText("Your mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.",false);
-							temp = player.findStatusAffect(StatusAffects.Heat);
 							if (player.statusAffectv1(StatusAffects.Heat) < 100) player.addStatusValue(StatusAffects.Heat, 1, 10);
 							if (player.statusAffectv2(StatusAffects.Heat) < 100) player.addStatusValue(StatusAffects.Heat, 2, 10);
 							if (player.statusAffectv3(StatusAffects.Heat) < 720) player.addStatusValue(StatusAffects.Heat, 3, 96);
 							dynStats("lib", 10);
 						}
-						if(player.findStatusAffect(StatusAffects.Heat) < 0)
+						if(!player.hasStatusAffect(StatusAffects.Heat))
 						{
 							outputText("Your mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as you realize <b>you have gone into heat</b>!", false);
 							player.createStatusAffect(StatusAffects.Heat, 20, 20, 96, 0);
@@ -2993,7 +2992,7 @@ package classes.Scenes.Places
 		
 		public function prisonCaptorTrainingStatusUpdate():void
 		{
-			if(player.findStatusAffect(StatusAffects.PrisonCaptorEllyStatus) < 0)
+			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyStatus))
 			{
 				player.createStatusAffect(StatusAffects.PrisonCaptorEllyStatus,1,0,0,0);
 			}
@@ -3158,7 +3157,7 @@ package classes.Scenes.Places
 					outputText("Normal");
 				}
 				outputText("\n",false);
-				if(player.findStatusAffect(StatusAffects.PrisonCaptorEllyStatus) > 0)
+				if(player.hasStatusAffect(StatusAffects.PrisonCaptorEllyStatus))
 				{
 					outputText("<b>Mistress Elly Training Level: </b>" + player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus) + " (",false);
 					switch(player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus))

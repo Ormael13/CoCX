@@ -389,7 +389,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			if (hungerRefill < 40) hungerRefill = 40;
 			outputText(images.showImage("behemoth-blowjob"), false);
 			outputText("Your eyes draw near the big bulge in his loincloth and you lick your lips as if you're hungry. ");
-			if (player.findStatusAffect(StatusAffects.LustyTongue) >= 0) {
+			if (player.hasStatusAffect(StatusAffects.LustyTongue)) {
 				outputText("Your body tingles with arousal as your " + tongueDescript() + " makes contact with your lips. ");
 				dynStats("lus", 30);
 			}

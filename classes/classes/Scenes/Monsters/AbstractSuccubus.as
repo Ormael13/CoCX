@@ -10,9 +10,9 @@ package classes.Scenes.Monsters
 	{
 		protected function whipAttack():void
 		{
-			if (findStatusAffect(StatusAffects.WhipReady) >= 0) {
+			if (hasStatusAffect(StatusAffects.WhipReady)) {
 				//Blind dodge change
-				if (findStatusAffect(StatusAffects.Blind) >= 0) {
+				if (hasStatusAffect(StatusAffects.Blind)) {
 					outputText(capitalA + short + " swings her whip at you wildly, totally missing due to her blindness!!", false);
 					combatRoundOver();
 					return;
@@ -148,7 +148,7 @@ package classes.Scenes.Monsters
 			//get hit
 			else {
 				outputText("  You start to dodge to the side, but she shifts direction expertly and plants a wet kiss on your lips.  She spins and dodges away with a ballet dancer's grace, leaving you to wonder what just happened.  ", false);
-				if (player.findStatusAffect(StatusAffects.KissOfDeath) < 0) player.createStatusAffect(StatusAffects.KissOfDeath, 0, 0, 0, 0);
+				if (!player.hasStatusAffect(StatusAffects.KissOfDeath)) player.createStatusAffect(StatusAffects.KissOfDeath, 0, 0, 0, 0);
 			}
 			combatRoundOver();
 		}

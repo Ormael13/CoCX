@@ -46,7 +46,7 @@ private function calledShot():void {
 	else {
 		outputText("\nOne of her arrows smacks right into your [leg], nearly bowling you over.  God DAMN that hurt! You're going to be limping for a while! ");
 		var affect:int = 20 + rand(5);
-		if(player.findStatusAffect(StatusAffects.CalledShot) >= 0) {
+		if(player.hasStatusAffect(StatusAffects.CalledShot)) {
 			while(affect > 0 && player.spe >= 2) {
 				affect--;
 				player.addStatusValue(StatusAffects.CalledShot,1,1);
@@ -90,7 +90,7 @@ private function calledShot():void {
 			else {
 				outputText("\nHer shield catches you right in the face, sending you tumbling to the ground and leaving you open to attack! ");
 				damage = player.takeDamage(damage, true);
-				if(rand(2) == 0 && player.findStatusAffect(StatusAffects.Stunned) < 0) {
+				if(rand(2) == 0 && !player.hasStatusAffect(StatusAffects.Stunned)) {
 					player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
 					outputText(" <b>The hit stuns you.</b>");
 				}

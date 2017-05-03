@@ -14,7 +14,7 @@
 public function nagaEncounter():void {
 	spriteSelect(45);
 	//Create status if needed
-	if(player.findStatusAffect(StatusAffects.Naga) < 0) player.createStatusAffect(StatusAffects.Naga,0,0,0,0);
+	if(!player.hasStatusAffect(StatusAffects.Naga)) player.createStatusAffect(StatusAffects.Naga,0,0,0,0);
 	clearOutput();
 	if(player.lowerBody == LOWER_BODY_TYPE_NAGA) {
 		//Set 'last fuck as naga'
@@ -138,7 +138,7 @@ public function nagaEncounter():void {
 	}
 	//If player's last fight did not involve them being a naga
 	if(player.statusAffectv1(StatusAffects.Naga) == 0) {
-		if(player.findStatusAffect(StatusAffects.Naga) < 0) player.createStatusAffect(StatusAffects.Naga,0,0,0,0);
+		if(!player.hasStatusAffect(StatusAffects.Naga)) player.createStatusAffect(StatusAffects.Naga,0,0,0,0);
 		outputText("You are walking through the shifting sands of the desert when you hear a sudden hiss behind you.  Expecting to be attacked by a snake, you quickly leap forward and turn around.\n\n", false);
 		outputText("To your surprise, what you see is not exactly a snake; it's a naga - a half-human half-snake hybrid.  She surges up and hisses even louder than before, showing off a pair of formidable fangs dripping with venom. Gazing at her long and slender reptilian body swaying on the sand like quicksilver, you can only stand still in admiration of this terrible wonder.", false);
 	}
@@ -498,7 +498,7 @@ private function nagaVictoryFemale():void {
 				outputText("As your prey falls to the ground, her body too filled with sexual desire to fight, you step over her, your tall frame towering over her own quivering body. She instantly grabs your shoulders, lust burning in her eyes. You wrap your arms around her, drawing her back against your chest and lifting her off the ground. She is facing away from you, but you can tell by the way she's responding that she is ready for whatever you're going to do to her. You begin by shifting one of your arms to hold her around her stomach, while your other hand begins working on her small but tender breasts. You begin to nibble at her ear, occasionally kissing her neck. The ", false);
 				if (flags[kFLAGS.NAGA_OR_GORGON] == 1) outputText("naga", false);
 				if (flags[kFLAGS.NAGA_OR_GORGON] == 2) outputText("gorgon", false);
-				outputText(" responds by wrapping her tail around your lower body, gently rubbing her sensitive underbelly against your " + player.skin() + ".", false);
+				outputText(" responds by wrapping her tail around your lower body, gently rubbing her sensitive underbelly against your [skin].", false);
 				//(If PC is Herm i.e. Has a cock(s))
 				if(player.gender == 3) outputText("  As her tail gently squeezes your body, it draws your own " + multiCockDescriptLight() + " up against your body, her soft underbelly stimulating the sensitive skin.", false);
 				outputText("  With the added support, you are able to move your arm away from her stomach, moving your hand down to her covered snatch. It isn't hard to find as there is practically a river of her juices dripping from it. You peel away the scaly covering, and reveal her soaking wet lovehole. As you begin to play with her engorged clit, her soft moans begin to become more pronounced and you can feel her tail begin to wrap more tightly around your body. You feel a strange sensation as her tail brushes past your own " + vaginaDescript(0) + ", causing you to tense up a bit. It seems that she noticed, because she does it again a few seconds later. As she begins to rub your " + vaginaDescript(0) + " with her tail, your body begins to betray your own lusts.\n\n", false);
@@ -539,7 +539,7 @@ private function nagaVictoryFemale():void {
 		}
 		//b) Corrupted
 		else {
-			if(player.findStatusAffect(StatusAffects.MeanToNaga) < 0) player.createStatusAffect(StatusAffects.MeanToNaga,0,0,0,0);
+			if(!player.hasStatusAffect(StatusAffects.MeanToNaga)) player.createStatusAffect(StatusAffects.MeanToNaga,0,0,0,0);
 			outputText("As you watch the writhing form of the defeated ", false);
 			if (flags[kFLAGS.NAGA_OR_GORGON] == 1) outputText("naga", false);
 			if (flags[kFLAGS.NAGA_OR_GORGON] == 2) outputText("gorgon", false);
@@ -683,7 +683,7 @@ private function nagaVictoryGenderless():void {
     }
     //b)Corrupted
 	else {
-		if(player.findStatusAffect(StatusAffects.MeanToNaga) < 0) player.createStatusAffect(StatusAffects.MeanToNaga,0,0,0,0);
+		if(!player.hasStatusAffect(StatusAffects.MeanToNaga)) player.createStatusAffect(StatusAffects.MeanToNaga,0,0,0,0);
         outputText("An evil grin crosses your face as you stand over the fallen snake woman, the thrum of your heartbeat pounding against your ears. A myriad of the terrible things you are about to do to her cross your mind as you start to take off your pants when you remember that you have nothing to do those things with. Your cries of damnation are loud enough to be heard from miles away.\n\n", false);
   		outputText("But you can't give up now. You've gotten this far, now you need to finish the deed. At the end of this, there WILL be sex.\n\n", false);
         outputText("You thrust yourself on top of her and roughly open the scaly covering at her crotch, revealing her awaiting pussy. You bring your mouth over her opening and thrust your tongue deep inside. A mix between a whimper and a moan escapes the ", false);
@@ -932,7 +932,7 @@ public function nagaFUCKSJOOOOOO():void {
 			if (flags[kFLAGS.NAGA_OR_GORGON] == 2) outputText("gorgon", false);
 			outputText(" pulls away, her tongue slowly sliding from your " + cockDescript(0) + " and dripping with cum, allowing the last few drops of cum to splash across her face and breasts. Her cheeks are still full of seed and  as she moves in closer, you wonder what she has planned. She grabs your shoulders with her still-slick hands, and leans in all the way for a final, passionate kiss. As your lips are pushed apart by her own, you feel a large amount of your still-warm sperm enter your mouth. You try to resist, but she begins to massage your throat, forcing you to swallow it all.\n\n", false);
     		//(If you've been a bad boy during victory scenes)
-			if(player.findStatusAffect(StatusAffects.MeanToNaga) >= 0) {
+			if(player.hasStatusAffect(StatusAffects.MeanToNaga)) {
 				outputText("As you gulp down a mouthful of your own seed, you notice something strange about it. The taste, there is something about it, it tastes almost like... POISON! You gag, but it's too late. The ", false);
 				if (flags[kFLAGS.NAGA_OR_GORGON] == 1) outputText("naga", false);
 				if (flags[kFLAGS.NAGA_OR_GORGON] == 2) outputText("gorgon", false);
@@ -1082,7 +1082,7 @@ public function nagaFUCKSJOOOOOO():void {
 			if (flags[kFLAGS.NAGA_OR_GORGON] == 2) outputText("gorgon", false);
 			outputText(" pokes her tongue a little bit deeper inside your mouth, reaching to the back of your throat.", false);
 			//(If you have been a bad girl in past encounters)
-			if(player.findStatusAffect(StatusAffects.MeanToNaga) >= 0)
+			if(player.hasStatusAffect(StatusAffects.MeanToNaga))
 			{
 				outputText("  Down this slippery rope, she drops only a few drops of her potent poison, which completely bypass your gag reflex and drop straight down your throat. You hardly notice, too busy bucking your hips against the massive tail buried within your " + vaginaDescript(0) + ". It's only as your vision fades that you realize that the ", false);
 			if (flags[kFLAGS.NAGA_OR_GORGON] == 1) outputText("naga", false);
@@ -1241,7 +1241,7 @@ public function nagaPlayerConstrict():void {
 	}
 	fatigue(10,2);
 	//Amily!
-	if(monster.findStatusAffect(StatusAffects.Concentration) >= 0) {
+	if(monster.hasStatusAffect(StatusAffects.Concentration)) {
 		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
 		kGAMECLASS.enemyAI();
 		return;
@@ -1299,7 +1299,7 @@ public function naggaSqueeze():void {
 public function naggaTease():void {
 	clearOutput();
 	//(if poisoned)
-	if(monster.findStatusAffect(StatusAffects.NagaVenom) >= 0)
+	if(monster.hasStatusAffect(StatusAffects.NagaVenom))
 	{
 		outputText("You attempt to stimulate " + monster.a + monster.short + " by rubbing " + monster.pronoun3 + " nether regions, but " + monster.pronoun3 + " seems too affected by your poison to react.\n\n", false);
 	}

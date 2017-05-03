@@ -87,7 +87,7 @@ public function encounter():void {
 	if (player.cor > 75)
 		outputText("You smile and stride forward, welcoming the pleasure you expect from such a monster.\n\n", false);
 	//Worms get nothing!
-	if (player.findStatusAffect(StatusAffects.Infested) >= 0)
+	if (player.hasStatusAffect(StatusAffects.Infested))
 	{
 		outputText("It stops itself completely in a moment and twitches, as if sniffing the air, before turning around and disappearing into the underbrush.", false);
 		doNext(camp.returnToCampUseOneHour);
@@ -271,15 +271,14 @@ internal function tentacleLossRape():void {
 	}
 	//Bad end + counter here
 	if(player.lust >= player.maxLust()) {
-		temp = player.findStatusAffect(StatusAffects.TentacleBadEndCounter);
-		if(temp < 0) {
+		var sac:StatusAffectClass = player.statusAffectByType(StatusAffects.TentacleBadEndCounter);
+		if(!sac) {
 			player.createStatusAffect(StatusAffects.TentacleBadEndCounter,0,0,0,0);
-		}
-		else {
+		} else {
 			//count up
-			player.statusAffect(temp).value1++;
+			sac.value1++;
 			//Bad end
-			if(player.statusAffect(temp).value1 >= 3 && player.cor > 50 && player.gender == 3) {
+			if(sac.value1 >= 3 && player.cor > 50 && player.gender == 3) {
 				futaTentacleBadEnd();
 				return;
 			}
@@ -289,7 +288,7 @@ internal function tentacleLossRape():void {
 	else if(player.isTaur()) {
 		outputText("Tentacles wrap around your legs before you can stop them.  They continue to coil up your legs, spreading an uncomfortable warmth through your equine half.  Another tentacle wraps around your torso, spreading that same warmth and fuzzing your mind.  You grab one you can reach and attempt to tear it off of you, but two thinner, translucent feelers immobilize your arms, pulling them up behind your head.\n\n", false);
 		player.slimeFeed();
-		outputText("They test your body, slipping about over your form.  A small tentacle finds its way into your mouth, coiling about your tongue and down your throat.  It's careful not to make you choke, seemingly as curious about your innards as it is about your shell.  You're given little time to think though, as a surge of fluid is deposited into your stomach, making your desire to cum grow even more.  The sharp spines coiled about you act similarly, spreading warmth about them wherever they touch your " + player.skin() + ".\n\n", false);
+		outputText("They test your body, slipping about over your form.  A small tentacle finds its way into your mouth, coiling about your tongue and down your throat.  It's careful not to make you choke, seemingly as curious about your innards as it is about your shell.  You're given little time to think though, as a surge of fluid is deposited into your stomach, making your desire to cum grow even more.  The sharp spines coiled about you act similarly, spreading warmth about them wherever they touch your [skin].\n\n", false);
 		// has at least 1 cock, engulfable:
 		if(player.hasCock()) {
 			if(player.cockArea(player.smallestCockIndex()) <= 50) {

@@ -14,7 +14,7 @@ package classes.Scenes.NPCs
 			outputText("Isabella snorts and lowers a shield a moment before she begins to charge towards you. Her hooves tear huge divots out of the ground as she closes the distance with surprising speed!  ", false);
 
 			//Blind dodge change
-			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
+			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
 				outputText("Isabella blindly tries to charge at you, but misses completely.\n", false);
 			}
 			//Determine if dodged!
@@ -53,7 +53,7 @@ package classes.Scenes.NPCs
 			outputText("Isabella spins her shield back at you in a potent, steel-assisted backhand.  ", false);
 
 			//Blind dodge change
-			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
+			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
 				outputText("Isabella blindly tries to charge at you, but misses completely.\n", false);
 			}
 			//Determine if dodged!
@@ -97,7 +97,7 @@ package classes.Scenes.NPCs
 			outputText("Isabella punches out from behind her shield in a punch aimed right at your throat!  ", false);
 
 			//Blind dodge change
-			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
+			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
 				outputText("Isabella blindly tries to charge at you, but misses completely.\n", false);
 			}
 			//Determine if dodged!
@@ -149,11 +149,11 @@ package classes.Scenes.NPCs
 			//-If below 70% HP, 50% chance of milk drinking
 			if (HPRatio() < .7 && rand(3) == 0) drankMalkYaCunt();
 			//if PC has spells and isn't silenced, 1/3 chance of silence.
-			else if (player.hasSpells() && player.findStatusAffect(StatusAffects.ThroatPunch) < 0 && rand(3) == 0) {
+			else if (player.hasSpells() && !player.hasStatusAffect(StatusAffects.ThroatPunch) && rand(3) == 0) {
 				isabellaThroatPunch();
 			}
 			//if PC isn't stunned, 1/4 chance of stun
-			else if (player.findStatusAffect(StatusAffects.IsabellaStunned) < 0 && rand(4) == 0) {
+			else if (!player.hasStatusAffect(StatusAffects.IsabellaStunned) && rand(4) == 0) {
 				isabellaStun();
 			}
 			else isabellaAttack();

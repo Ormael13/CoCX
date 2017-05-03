@@ -87,7 +87,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	addButton(5, "Credits", creditsScreen, null, null, null, "See a list of all the cool people who have contributed to content for this game!");
 	addButton(6, "Image Credits", imageCreditsScreen, null, null, null, "Check out who contributed to the image pack.");
 	//addButton(7, "Changelog", debugPane, null, null, null, "View changelog.");
-	//addButton(8, "Debug Info", debugPane, null, null, null, "View debug information.");
+	if (CoC_Settings.debugBuild) addButton(8, "Debug Info", debugPane, null, null, null, "View debug information.");
 	if (false)  // Conditionally jump into chaosmonkey IMMEDIATELY
 	{
 		this.monkey.throwOnSyntaxError = true;
@@ -417,19 +417,19 @@ public function toggleAutoLevel():void {
 public function fetishSubMenu():void {
 	menu();
 	addButton(0, "Watersports", toggleWatersports, null, null, null, "Toggles watersports scenes. (Scenes related to urine fetish)"); //Enables watersports.
-	if (player.findStatusAffect(StatusAffects.WormsOn) >= 0 || player.findStatusAffect(StatusAffects.WormsOff) >= 0) addButton(1, "Worms", toggleWormsMenu, null, null, null, "Enable or disable worms. This will NOT cure infestation, if you have any.");
+	if (player.hasStatusAffect(StatusAffects.WormsOn) || player.hasStatusAffect(StatusAffects.WormsOff)) addButton(1, "Worms", toggleWormsMenu, null, null, null, "Enable or disable worms. This will NOT cure infestation, if you have any.");
 	else addButtonDisabled(1, "Worms", "Find the sign depicting the worms in the mountains to unlock this.");
 	addButton(4, "Back", settingsScreenGameSettings);
 }
 
 private function toggleWormsMenu():void {
 	clearOutput();
-	if (player.findStatusAffect(StatusAffects.WormsOn) >= 0) {
+	if (player.hasStatusAffect(StatusAffects.WormsOn)) {
 		outputText("You have chosen to encounter worms as you find the mountains");
-		if (player.findStatusAffect(StatusAffects.WormsHalf) >= 0) outputText(" albeit at reduced encounter rate");
+		if (player.hasStatusAffect(StatusAffects.WormsHalf)) outputText(" albeit at reduced encounter rate");
 		outputText(". You can get infested.");
 	}
-	if (player.findStatusAffect(StatusAffects.WormsOff) >= 0) {
+	if (player.hasStatusAffect(StatusAffects.WormsOff)) {
 		outputText("You have chosen to avoid worms. You won't be able to get infested.");
 	}
 	menu();
@@ -441,9 +441,9 @@ private function toggleWormsMenu():void {
 
 private function setWorms(enabled:Boolean, half:Boolean):void {
 	//Clear status effects
-	if (player.findStatusAffect(StatusAffects.WormsOn) >= 0) player.removeStatusAffect(StatusAffects.WormsOn);
-	if (player.findStatusAffect(StatusAffects.WormsHalf) >= 0) player.removeStatusAffect(StatusAffects.WormsHalf);
-	if (player.findStatusAffect(StatusAffects.WormsOff) >= 0) player.removeStatusAffect(StatusAffects.WormsOff);
+	if (player.hasStatusAffect(StatusAffects.WormsOn)) player.removeStatusAffect(StatusAffects.WormsOn);
+	if (player.hasStatusAffect(StatusAffects.WormsHalf)) player.removeStatusAffect(StatusAffects.WormsHalf);
+	if (player.hasStatusAffect(StatusAffects.WormsOff)) player.removeStatusAffect(StatusAffects.WormsOff);
 	//Set status effects
 	if (enabled) {
 		player.createStatusAffect(StatusAffects.WormsOn, 0, 0, 0, 0);

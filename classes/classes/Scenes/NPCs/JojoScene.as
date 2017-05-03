@@ -20,12 +20,12 @@
 			if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) trace("\nJoy time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation);
 			else trace("\nJojo time change: Time is " + model.time.hours + ", butt incubation: " + pregnancy.buttIncubation);
 			if (flags[kFLAGS.JOJO_COCK_MILKING_COOLDOWN] > 0) flags[kFLAGS.JOJO_COCK_MILKING_COOLDOWN]--;
-			if (player.findStatusAffect(StatusAffects.NoJojo) >= 0) player.removeStatusAffect(StatusAffects.NoJojo);
+			if (player.hasStatusAffect(StatusAffects.NoJojo)) player.removeStatusAffect(StatusAffects.NoJojo);
 			if (pregnancy.isButtPregnant && pregnancy.buttIncubation == 0) {
 				jojoLaysEggs();
 				return true;
 			}
-			if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0 && inventory.hasItemInStorage(consumables.BIMBOLQ) && flags[kFLAGS.JOJO_BIMBO_STATE] == 0 && flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO] < 72) {
+			if (player.hasStatusAffect(StatusAffects.PureCampJojo) && inventory.hasItemInStorage(consumables.BIMBOLQ) && flags[kFLAGS.JOJO_BIMBO_STATE] == 0 && flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO] < 72) {
 				flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO]++;
 			}
 			if (flags[kFLAGS.JOJO_BIMBO_STATE] == 2 && flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO] < 24) {
@@ -83,11 +83,11 @@ private function faceMuzzle():String {
 	return "face";
 }
 public function tentacleJojo():Boolean {
-	return player.findStatusAffect(StatusAffects.TentacleJojo) >= 0;
+	return player.hasStatusAffect(StatusAffects.TentacleJojo);
 
 }
 override public function campCorruptJojo():Boolean {
-	return monk >= 5 && player.findStatusAffect(StatusAffects.NoJojo) < 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0;
+	return monk >= 5 && !player.hasStatusAffect(StatusAffects.NoJojo) && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0;
 }
 
 private function jojoMutationOffer():void {
@@ -117,17 +117,17 @@ public function corruptCampJojo():void {
 			return;
 		}
 		//Oh shit goes down! (Wiv Tentacles)
-		if(amilyScene.amilyFollower && flags[kFLAGS.AMILY_DISCOVERED_TENTATLE_JOJO] == 0 && rand(10) <= 1 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && player.findStatusAffect(StatusAffects.TentacleJojo) >= 0) {
+		if(amilyScene.amilyFollower && flags[kFLAGS.AMILY_DISCOVERED_TENTATLE_JOJO] == 0 && rand(10) <= 1 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && player.hasStatusAffect(StatusAffects.TentacleJojo)) {
 			finter.amilyDiscoversJojoWithTentaclesAndShitOhBoy();
 			return;
 		}
 		//Oh shit goes down! (No tentacles)
-		else if(flags[kFLAGS.AMILY_PISSED_PC_CORRUPED_JOJO] == 0 && rand(10) <= 1 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyScene.amilyFollower() && player.findStatusAffect(StatusAffects.TentacleJojo) < 0) {
+		else if(flags[kFLAGS.AMILY_PISSED_PC_CORRUPED_JOJO] == 0 && rand(10) <= 1 && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyScene.amilyFollower() && !player.hasStatusAffect(StatusAffects.TentacleJojo)) {
 			finter.amilyIsPissedAtYouForRuiningJojo();
 			return;
 		}
 		//Offer lethicite jojo tf if the player is ready
-		if(player.findStatusAffect(StatusAffects.JojoTFOffer) < 0 && player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemv2("Marae's Lethicite") < 3 && player.cor >= 75) {
+		if(!player.hasStatusAffect(StatusAffects.JojoTFOffer) && player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemv2("Marae's Lethicite") < 3 && player.cor >= 75) {
 			jojoMutationOffer();
 			player.createStatusAffect(StatusAffects.JojoTFOffer,0,0,0,0);
 			return;
@@ -196,7 +196,7 @@ public function corruptCampJojo():void {
 	var hairCare:Function = null;
 	var sex:Function = null;
 	if (player.gender > 0 && player.lust >= 33) sex = corruptJojoSexMenu;
-	if (player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0) hairCare = jojoPaysForPerms;
+	if (player.hasStatusAffect(StatusAffects.HairdresserMeeting)) hairCare = jojoPaysForPerms;
 	choices("Sex", sex, "TentacleSex", tent, "Milk Him", milkHim, "TentacleMilk", tentaMilk, "HairCare", hairCare, "Lay Eggs", eggs, "", null, "", null, "", null, "Back", camp.campSlavesMenu);
 	
 	if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_JOJO] == 0) addButton(6, "Farm Work", sendToFarm);
@@ -1055,7 +1055,7 @@ public function jojoFollowerMeditate():void {
 		public function jojoDefenseToggle():void {
 			jojoSprite();
 			clearOutput();
-			if (player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0) {
+			if (player.hasStatusAffect(StatusAffects.JojoNightWatch)) {
 				player.removeStatusAffect(StatusAffects.JojoNightWatch);
 				outputText("You tell Jojo that you no longer need him to watch the camp at night.  He nods, then speaks.  \"<i>Alright.  Please let me know if you require my help again.</i>\"");
 			}
@@ -1107,7 +1107,7 @@ public function jojoFollowerMeditate():void {
 			jojoSprite();
 			player.slimeFeed();
 			//Track Jojo rapeage
-			if (player.findStatusAffect(StatusAffects.EverRapedJojo) < 0)
+			if (!player.hasStatusAffect(StatusAffects.EverRapedJojo))
 				player.createStatusAffect(StatusAffects.EverRapedJojo, 1, 0, 0, 0);
 			else player.addStatusValue(StatusAffects.EverRapedJojo, 1, 1);
 			switch (monk) {
@@ -1703,7 +1703,7 @@ public function jojoFollowerMeditate():void {
 			clearOutput();
 			outputText("You feel the need to gain a little sexual relief and a mischievous idea comes to your mind, making you grin wickedly. You slip off into the jungle to seek out your monk mouse fuck toy, and when you find him, you practically pounce atop him, pinning him to his back. He struggles in surprise until he realizes that it is you, at which point he blushes and tries to look away, unable to help the erection that you are sitting against as you straddle him.  ");
 			outputText("You crawl further up his body and grin down at him as you press your already dripping pussy to his mouth and command sharply, \"<i>Start licking if you want to breathe.</i>\" His eyes go wide, but you can feel his tongue already starting to work at your lusty slit.  ");
-			if (player.vaginas.wetness > 4)
+			if (player.wetness() > 4)
 				outputText("You moan as he works, your juices flowing liberally across his muzzle and into his mouth and nose, making him struggle not to drown in your pleasure as he focuses on giving you even more so.  ");
 			else if (rand(2) == 0)
 				outputText("You grind your slit against him as he eats you out, moaning with pleasure and writhing above him. You lift off of his face every so often, giving him just enough of a break to catch his breath before cutting it off with your pussy once again.  ");
@@ -2321,7 +2321,7 @@ public function highCorruptionJojoEncounter():void {
 
 //Repeat encounter
 public function repeatJojoEncounter():void {
-	if (player.findStatusAffect(StatusAffects.Infested) >= 0) {
+	if (player.hasStatusAffect(StatusAffects.Infested)) {
 		kGAMECLASS.jojoScene.jojoSprite();
 		outputText("As you approach the serene monk, you see his nose twitch, disturbing his meditation.\n\n", true);
 		outputText("\"<i>It seems that the agents of corruption have taken residence within the temple that is your body.</i>\", Jojo says flatly. \"<i>This is a most unfortunate development. There is no reason to despair as there are always ways to fight the corruption. However, great effort will be needed to combat this form of corruption and may leave lasting impressions upon you. If you are ready, we can purge your being of the rogue creatures of lust.</i>\"\n\n", false);
@@ -2358,7 +2358,7 @@ public function meditateInForest():void {
 	
 	dynStats("str", .5, "tou", .5, "int", .5, "lib", -1, "lus", -5, "cor", (-1 - player.countCockSocks("alabaster")));
 	
-	if (player.findStatusAffect(StatusAffects.JojoMeditationCount) < 0)
+	if (!player.hasStatusAffect(StatusAffects.JojoMeditationCount))
 		player.createStatusAffect(StatusAffects.JojoMeditationCount, 1, 0, 0, 0);
 	else player.addStatusValue(StatusAffects.JojoMeditationCount, 1, 1);
 		
@@ -2401,7 +2401,7 @@ private var doClear:Boolean = true;
 
 public function acceptJojoIntoYourCamp():void {
 	jojoSprite();
-	if (player.findStatusAffect(StatusAffects.EverRapedJojo) >= 0 || flags[kFLAGS.JOJO_MOVE_IN_DISABLED] == 1) {
+	if (player.hasStatusAffect(StatusAffects.EverRapedJojo) || flags[kFLAGS.JOJO_MOVE_IN_DISABLED] == 1) {
 		outputText("You offer Jojo the chance to stay at your camp, but before you can finish your sentence he shakes his head 'no' and stalks off into the woods, remembering.");
 	}
 	else {
@@ -2447,7 +2447,7 @@ public function jojoCamp():void {
 		getGame().followerInteractions.catchRathazulNapping();
 		return;
 	}
-	if (player.findStatusAffect(StatusAffects.Infested) >= 0) { // Worms overrides everything else
+	if (player.hasStatusAffect(StatusAffects.Infested)) { // Worms overrides everything else
 		outputText("As you approach the serene monk, you see his nose twitch.\n\n");
 		outputText("\"<i>It seems that the agents of corruption have taken residence within the temple that is your body,</i>\" Jojo says flatly, \"<i>This is a most unfortunate development.  There is no reason to despair as there are always ways to fight the corruption.  However, great effort will be needed to combat this form of corruption and may have a lasting impact upon you.  If you are ready, we can purge your being of the rogue creatures of lust.</i>\"\n\n");
 		jojoCampMenu();
@@ -2483,7 +2483,7 @@ private function jojoCampMenu():void {
 //Normal Follower Choices
 //[Appearance] [Talk] [Train] [Meditate] [Night Watch toggle]
 	var jojoDefense:String = "N.Watch:";
-	if (player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0) {
+	if (player.hasStatusAffect(StatusAffects.JojoNightWatch)) {
 		outputText("(Jojo is currently watching for enemies at night.)\n\n");
 		jojoDefense += "On";
 	}
@@ -2493,8 +2493,8 @@ private function jojoCampMenu():void {
 	addButton(1, "Talk", talkMenu, null, null, null, "Discuss with him about topics.");
 	if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 1) addButton(2, "Train", apparantlyJojoDOESlift, null, null, null, "Join him in a training session.");
 	addButton(3, "Meditate", jojoFollowerMeditate);
-	addButton(4, jojoDefense, jojoDefenseToggle, null, null, null, (player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0 ? "Request him to stop guarding the camp.": "Request him to guard the camp at night."));
-	if (player.findStatusAffect(StatusAffects.Infested) >= 0) addButton(5, "Purge", wormRemoval, null, null, null, "Request him to purge the worms from your body.");
+	addButton(4, jojoDefense, jojoDefenseToggle, null, null, null, (player.hasStatusAffect(StatusAffects.JojoNightWatch) ? "Request him to stop guarding the camp.": "Request him to guard the camp at night."));
+	if (player.hasStatusAffect(StatusAffects.Infested)) addButton(5, "Purge", wormRemoval, null, null, null, "Request him to purge the worms from your body.");
 	if (player.cor > 10 && player.lust >= 33 && player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] <= 0) addButton(8, "Rape", jojoAtCampRape, null, null, null, "Rape the poor monk mouse-morph." + (player.cor < 25 ? "  Why would you do that?": ""));
 	if (player.lust >= 33 && monk <= -3) addButton(8, "Sex", pureJojoSexMenu, null, null, null, "Initiate sexy time with the mouse-morph.");
 	addButton(14, "Leave", camp.campFollowers);
@@ -2535,7 +2535,7 @@ public function talkMenu():void
 	if (player.cor <= 10 && player.lust >= 33) {
 		addButton(9, "Sex?", offerSexFirstTime, null, null, null, "Ask him if he's willing to have sex with you.");
 		if (flags[kFLAGS.TIMES_TALKED_WITH_JOJO] < 4) addButtonDisabled(9, "Sex?", "You should socialize with Jojo a bit more.");
-		//if (player.findStatusAffect(StatusAffects.EverRapedJojo) >= 0) addButtonDisabled(9, "Sex?". "You've raped Jojo in the past, now you can't ask him out.");
+		//if (player.hasStatusAffect(StatusAffects.EverRapedJojo)) addButtonDisabled(9, "Sex?". "You've raped Jojo in the past, now you can't ask him out.");
 	}
 	if (player.cor <= 10 && player.lust >= 33 && monk == -1) addButtonDisabled(9, "Sex?", "You need to spend more time with Jojo. \n\nTalk sessions: " + flags[kFLAGS.TIMES_TALKED_WITH_JOJO] + "/6 \nTraining sessions: " + flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] + "/10 \nMeditation sessions: " + player.statusAffectv1(StatusAffects.JojoMeditationCount) + "/10 \nYou must be pure enough and have sufficient lust as well.");
 	if (player.cor <= 10 && player.lust >= 33 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 6 && flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] >= 10 && player.statusAffectv1(StatusAffects.JojoMeditationCount) >= 10 && monk > -3) addButton(9, "Sex?", offerSexFirstTimeHighAffection, null, null, null, "You've spent quite the time with Jojo, maybe you can offer him if he's willing to have sex with you?"); //Will unlock consensual sex scenes.
@@ -3006,10 +3006,10 @@ public function apparantlyJojoDOESlift():void
 		enlightenedBlurbs.push("You can hear Jojo’s feet move through the campsite as he heads toward his rock, seeking rest after your training session.")
 
 		// Lookit all these different ways followers are tracked! fml.
-		if (player.findStatusAffect(StatusAffects.CampMarble) >= 0) enlightenedBlurbs.push("You can hear Marble humming a song to herself you can’t place.");
+		if (player.hasStatusAffect(StatusAffects.CampMarble)) enlightenedBlurbs.push("You can hear Marble humming a song to herself you can’t place.");
 		if (flags[kFLAGS.AMILY_FOLLOWER] > 0) enlightenedBlurbs.push("You can hear Amily changing the bedding to her nest.");
 		if (kGAMECLASS.emberScene.followerEmber()) enlightenedBlurbs.push("You can hear Ember cleaning" + emberScene.emberMF("his", "her") + "scales.");
-		if (player.findStatusAffect(StatusAffects.CampRathazul) >= 0) enlightenedBlurbs.push("You can hear Rathazul experimenting with surprisingly nimble fingers.");
+		if (player.hasStatusAffect(StatusAffects.CampRathazul)) enlightenedBlurbs.push("You can hear Rathazul experimenting with surprisingly nimble fingers.");
 		if (sophieFollower()) enlightenedBlurbs.push("You can hear Sophie breathing as she sleeps.");
 		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] > 0) enlightenedBlurbs.push("You can hear Izma flipping through the pages of a book."); // TODO: (if Izmael gets put in) you can hear Izmael doing push ups to stay fit.
 		if (kGAMECLASS.helScene.followerHel()) enlightenedBlurbs.push("You can hear Helia throwing her fists at nothing.");

@@ -446,10 +446,10 @@ public function doubleStrikeOptions():void {
 		else addButtonDisabled(7, "All Hexa", "You current range weapon not allow to use this option");
 	}
 	if (player.findPerk(PerkLib.ElementalArrows) >= 0 && flags[kFLAGS.ELEMENTAL_ARROWS] != 0) addButton(3, "None", normalArrows);
-	if (player.findPerk(PerkLib.ElementalArrows) >= 0 && player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0 && flags[kFLAGS.ELEMENTAL_ARROWS] != 1) addButton(8, "Fire", fireArrows);
-	if (player.findPerk(PerkLib.ElementalArrows) >= 0 && player.findStatusAffect(StatusAffects.KnowsIceSpike) >= 0 && flags[kFLAGS.ELEMENTAL_ARROWS] != 2) addButton(9, "Ice", iceArrows);
+	if (player.findPerk(PerkLib.ElementalArrows) >= 0 && player.hasStatusAffect(StatusAffects.KnowsWhitefire) && flags[kFLAGS.ELEMENTAL_ARROWS] != 1) addButton(8, "Fire", fireArrows);
+	if (player.findPerk(PerkLib.ElementalArrows) >= 0 && player.hasStatusAffect(StatusAffects.KnowsIceSpike) && flags[kFLAGS.ELEMENTAL_ARROWS] != 2) addButton(9, "Ice", iceArrows);
 	if (player.findPerk(PerkLib.Cupid) >= 0 && flags[kFLAGS.CUPID_ARROWS] != 0) addButton(10, "None", normalArrows2);
-	if (player.findPerk(PerkLib.Cupid) >= 0 && player.findStatusAffect(StatusAffects.KnowsArouse) >= 0 && flags[kFLAGS.CUPID_ARROWS] != 1) addButton(11, "Arouse", arouseArrows);
+	if (player.findPerk(PerkLib.Cupid) >= 0 && player.hasStatusAffect(StatusAffects.KnowsArouse) && flags[kFLAGS.CUPID_ARROWS] != 1) addButton(11, "Arouse", arouseArrows);
 	if (player.findPerk(PerkLib.EnvenomedBolt) >= 0 && flags[kFLAGS.ENVENOMED_BOLTS] != 0) addButton(12, "None", normalArrows3);
 	if (player.findPerk(PerkLib.EnvenomedBolt) >= 0 && (player.tailType == TAIL_TYPE_BEE_ABDOMEN || player.tailType == TAIL_TYPE_SCORPION || player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL || player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS) && flags[kFLAGS.ENVENOMED_BOLTS] != 1) addButton(13, "Venom", venomArrows);
 	
@@ -1265,13 +1265,13 @@ public function buildPerkList():Array {
 				_add(new PerkClass(PerkLib.PrestigeJobArcaneArcher));
 			}
 		}
-		if(player.findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0 && (player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0 || player.findStatusAffect(StatusAffects.KnowsIceSpike) >= 0)) {
+		if(player.findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0 && (player.hasStatusAffect(StatusAffects.KnowsWhitefire) || player.hasStatusAffect(StatusAffects.KnowsIceSpike))) {
 			_add(new PerkClass(PerkLib.ElementalArrows));
 		}
 	}
 	//Tier 8 Speed Perks
 	if (player.level >= 48) {
-		if(player.findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0 && player.findStatusAffect(StatusAffects.KnowsArouse) >= 0) {
+		if(player.findPerk(PerkLib.PrestigeJobArcaneArcher) >= 0 && player.hasStatusAffect(StatusAffects.KnowsArouse)) {
 			_add(new PerkClass(PerkLib.Cupid));
 		}
 	}
@@ -1342,7 +1342,7 @@ public function buildPerkList():Array {
 		}
 		if(player.inte >= 75) {
 				if (player.findPerk(PerkLib.Archmage) >= 0 && player.findPerk(PerkLib.Channeling) >= 0 &&
-				(player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0
+				(player.hasStatusAffect(StatusAffects.KnowsWhitefire)
 				|| player.findPerk(PerkLib.DragonFireBreath) >= 0
 				|| player.findPerk(PerkLib.FireLord) >= 0 
 				|| player.findPerk(PerkLib.Hellfire) >= 0 
@@ -1351,18 +1351,18 @@ public function buildPerkList():Array {
 					_add(new PerkClass(PerkLib.RagingInferno));
 				
 				if (player.findPerk(PerkLib.Archmage) >= 0 && player.findPerk(PerkLib.Channeling) >= 0 &&
-				(player.findStatusAffect(StatusAffects.KnowsIceSpike) >= 0
-				|| player.findStatusAffect(StatusAffects.KnowsIceRain) >= 0
+				(player.hasStatusAffect(StatusAffects.KnowsIceSpike)
+				|| player.hasStatusAffect(StatusAffects.KnowsIceRain)
 				|| player.findPerk(PerkLib.DragonIceBreath) >= 0))
 					_add(new PerkClass(PerkLib.GlacialStorm));
 		}
 		// Spell-boosting perks
 		// Battlemage: auto-use Might
-		if(player.findPerk(PerkLib.JobEnchanter) >= 0 && player.findPerk(PerkLib.Channeling) >= 0 && player.findStatusAffect(StatusAffects.KnowsMight) >= 0 && player.inte >= 80) {
+		if(player.findPerk(PerkLib.JobEnchanter) >= 0 && player.findPerk(PerkLib.Channeling) >= 0 && player.hasStatusAffect(StatusAffects.KnowsMight) && player.inte >= 80) {
 				_add(new PerkClass(PerkLib.Battlemage));
 		}
 		// Spellsword: auto-use Charge Weapon
-		if(player.findPerk(PerkLib.JobEnchanter) >= 0 && player.findPerk(PerkLib.Channeling) >= 0 && player.findStatusAffect(StatusAffects.KnowsCharge) >= 0 && player.inte >= 80) {
+		if(player.findPerk(PerkLib.JobEnchanter) >= 0 && player.findPerk(PerkLib.Channeling) >= 0 && player.hasStatusAffect(StatusAffects.KnowsCharge) && player.inte >= 80) {
 				_add(new PerkClass(PerkLib.Spellsword));
 		}
 		if(player.findPerk(PerkLib.MindOverBodyIII) >= 0 && player.inte >= 110 && player.newGamePlusMod() >= 3) {
@@ -1379,11 +1379,11 @@ public function buildPerkList():Array {
 		}
 		
 		// Battleflash: auto-use Blink
-		if(player.findPerk(PerkLib.Battlemage) >= 0 && player.findStatusAffect(StatusAffects.KnowsBlink) >= 0 && player.inte >= 90) {
+		if(player.findPerk(PerkLib.Battlemage) >= 0 && player.hasStatusAffect(StatusAffects.KnowsBlink) && player.inte >= 90) {
 				_add(new PerkClass(PerkLib.Battleflash));
 		}
 		// Spellarmor: auto-use Charge Armor
-		if(player.findPerk(PerkLib.Spellsword) >= 0 && player.findStatusAffect(StatusAffects.KnowsChargeA) >= 0 && player.inte >= 90) {
+		if(player.findPerk(PerkLib.Spellsword) >= 0 && player.hasStatusAffect(StatusAffects.KnowsChargeA) && player.inte >= 90) {
 				_add(new PerkClass(PerkLib.Spellarmor));
 		}
 	}
@@ -1506,7 +1506,7 @@ public function buildPerkList():Array {
 		if(player.lib >= 60 && player.inte >= 90 && player.findPerk(PerkLib.HalfStepToImprovedSelfControl) >= 0) {
 			_add(new PerkClass(PerkLib.ImprovedSelfControl));
 		}
-		if(player.findPerk(PerkLib.JobEromancer) >= 0 && player.findStatusAffect(StatusAffects.KnowsArouse) >= 0 && player.lib >= 50) {
+		if(player.findPerk(PerkLib.JobEromancer) >= 0 && player.hasStatusAffect(StatusAffects.KnowsArouse) && player.lib >= 50) {
 			_add(new PerkClass(PerkLib.Transference));
 		}
 	}
@@ -3045,7 +3045,7 @@ public function displayStats(e:MouseEvent = null):void
 	if (player.lactationQ() > 0)
 		bodyStats += "<b>Milk Production:</b> " + addComma(Math.round(player.lactationQ())) + "mL\n";
 	
-	if (player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+	if (player.hasStatusAffect(StatusAffects.Feeder)) {
 		bodyStats += "<b>Hours Since Last Time Breastfed Someone:</b>  " + player.statusAffectv2(StatusAffects.Feeder);
 		if (player.statusAffectv2(StatusAffects.Feeder) >= 72)
 			bodyStats += " (Too long! Sensitivity Increasing!)";
@@ -3088,7 +3088,7 @@ public function displayStats(e:MouseEvent = null):void
 	if (player.findPerk(PerkLib.SpiderOvipositor) >= 0 || player.findPerk(PerkLib.BeeOvipositor) >= 0)
 		bodyStats += "<b>Ovipositor Total Egg Count: " + player.eggs() + "\nOvipositor Fertilized Egg Count: " + player.fertilizedEggs() + "</b>\n";
 		
-	if (player.findStatusAffect(StatusAffects.SlimeCraving) >= 0) {
+	if (player.hasStatusAffect(StatusAffects.SlimeCraving)) {
 		if (player.statusAffectv1(StatusAffects.SlimeCraving) >= 18)
 			bodyStats += "<b>Slime Craving:</b> Active! You are currently losing strength and speed.  You should find fluids.\n";
 		else {
@@ -3244,7 +3244,7 @@ public function displayStats(e:MouseEvent = null):void
 		interpersonStats += "<b>Katherine Submissiveness:</b> " + telAdre.katherine.submissiveness() + "\n";
 	}
 
-	if (player.findStatusAffect(StatusAffects.Kelt) >= 0 && flags[kFLAGS.KELT_BREAK_LEVEL] == 0 && flags[kFLAGS.KELT_KILLED] == 0) {
+	if (player.hasStatusAffect(StatusAffects.Kelt) && flags[kFLAGS.KELT_BREAK_LEVEL] == 0 && flags[kFLAGS.KELT_KILLED] == 0) {
 		if (player.statusAffectv2(StatusAffects.Kelt) >= 130)
 			interpersonStats += "<b>Submissiveness To Kelt:</b> " + 100 + "%\n";
 		else
@@ -3457,17 +3457,17 @@ public function lustPercent():Number {
 	//DRAWBACKS TO JUSTIFY IT.
 	//++++++++++++++++++++++++++++++++++++++++++++++++++
 	//Bimbo body slows lust gains!
-	if((player.findStatusAffect(StatusAffects.BimboChampagne) >= 0 || player.findPerk(PerkLib.BimboBody) >= 0) && lust > 0) lust *= .75;
+	if((player.hasStatusAffect(StatusAffects.BimboChampagne) || player.findPerk(PerkLib.BimboBody) >= 0) && lust > 0) lust *= .75;
 	if(player.findPerk(PerkLib.BroBody) >= 0 && lust > 0) lust *= .75;
 	if(player.findPerk(PerkLib.FutaForm) >= 0 && lust > 0) lust *= .75;
 	//Omnibus' Gift reduces lust gain by 15%
 	if(player.findPerk(PerkLib.OmnibusGift) >= 0) lust *= .85;
 	//Luststick reduces lust gain by 10% to match increased min lust
 	if(player.findPerk(PerkLib.LuststickAdapted) >= 0) lust *= 0.9;
-	if(player.findStatusAffect(StatusAffects.Berzerking) >= 0) lust *= .6;
+	if(player.hasStatusAffect(StatusAffects.Berzerking)) lust *= .6;
 	if (player.findPerk(PerkLib.PureAndLoving) >= 0) lust *= 0.95;
 	//Berseking reduces lust gains by 10%
-	if(player.findStatusAffect(StatusAffects.Berzerking) >= 0) lust *= 0.9;
+	if(player.hasStatusAffect(StatusAffects.Berzerking)) lust *= 0.9;
 	
 	//Items
 	if (player.jewelryEffectId == JewelryLib.PURITY) lust *= 1 - (player.jewelryEffectMagnitude / 100);
@@ -3476,17 +3476,17 @@ public function lustPercent():Number {
 	if ((player.weapon == weapons.PURITAS) || (player.weapon == weapons.ASCENSU)) lust *= 0.9;
 	// Lust mods from Uma's content -- Given the short duration and the gem cost, I think them being multiplicative is justified.
 	// Changing them to an additive bonus should be pretty simple (check the static values in UmasShop.as)
-	var statIndex:int = player.findStatusAffect(StatusAffects.UmasMassage);
-	if (statIndex >= 0)
+	var sac:StatusAffectClass = player.statusAffectByType(StatusAffects.UmasMassage);
+	if (sac)
 	{
-		if (player.statusAffect(statIndex).value1 == UmasShop.MASSAGE_RELIEF || player.statusAffect(statIndex).value1 == UmasShop.MASSAGE_LUST)
+		if (sac.value1 == UmasShop.MASSAGE_RELIEF || sac.value1 == UmasShop.MASSAGE_LUST)
 		{
-			lust *= player.statusAffect(statIndex).value2;
+			lust *= sac.value2;
 		}
 	}
 	
 	lust = Math.round(lust);
-	if (player.findStatusAffect(StatusAffects.Lustzerking) >= 0 && player.findPerk(PerkLib.ColdLust) < 1) lust = 100;
+	if (player.hasStatusAffect(StatusAffects.Lustzerking) && player.findPerk(PerkLib.ColdLust) < 1) lust = 100;
 	return lust;
 }
 
@@ -3831,7 +3831,7 @@ public function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):voi
 	}        
 	//If cock is bigger than unmodified vagina can hold - 100% stretch!
 	if(player.vaginas[vIndex].capacity() <= monster.cocks[cIndex].cArea()) {
-		if(player.vaginas[vIndex] < 5) {
+		if(player.vaginas[vIndex].vaginalLooseness < 5) {
 			trace("CUNT STRETCHED: By cock larger than it's total capacity.");
 			if(display) {
 				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + vaginaDescript(0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ", false);
@@ -3845,7 +3845,7 @@ public function cuntChangeOld(cIndex:Number, vIndex:Number, display:Boolean):voi
 	}
 	//If cock is within 75% of max, streeeeetch 33% of the time
 	if(player.vaginas[vIndex].capacity() * .75 <= monster.cocks[cIndex].cArea()) {
-		if(player.vaginas[vIndex] < 5) {
+		if(player.vaginas[vIndex].vaginalLooseness < 5) {
 			trace("CUNT STRETCHED: By cock @ 75% of capacity.");
 			if(display) {
 				if(player.vaginas[vIndex].vaginalLooseness == VAGINA_LOOSENESS_GAPING_WIDE) outputText("<b>Your " + vaginaDescript(0) + " is stretched even further, capable of taking even the largest of demons and beasts.</b>  ", false);

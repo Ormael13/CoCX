@@ -256,8 +256,8 @@ private function etnaCome2Camp():void
 {
 	clearOutput();
 	outputText("As you enter the camp with the manticore your various friends notice her and jump out of their activities to go to the pair of you.\n\n");
-	if (player.findStatusAffect(StatusAffects.CampRathazul) >= 0) outputText("Rathazul almost drops a vial of purple liquid on the ground as he notices the manticore. \"<i>Is this what I think it is? Manticore venom is extremely potent. I could use it in alchemical concoctions, nice find! Just make sure to keep her in check...</i>\"\n\n");
-	if (player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) {
+	if (player.hasStatusAffect(StatusAffects.CampRathazul)) outputText("Rathazul almost drops a vial of purple liquid on the ground as he notices the manticore. \"<i>Is this what I think it is? Manticore venom is extremely potent. I could use it in alchemical concoctions, nice find! Just make sure to keep her in check...</i>\"\n\n");
+	if (player.hasStatusAffect(StatusAffects.PureCampJojo)) {
 		outputText("Jojo notices the manticore right away breaking into a defensive stance and reciting a few of his teachers mantra. \"<i>[name] that thing is a manticore! I seriously hope you know what you're doing. She reeks of serious demonic corruption, so make sure you meditate with me regularly.</i>\"\n\n");
 		outputText("You assure Jojo that you will and that Etna won't cause problems.\n\n");
 	}
@@ -308,7 +308,7 @@ public function etnaRapeYandere():void
 public function etnaRapeYandereBadEnd():void
 {
 	outputText("Too weak to fight or crawl your way out, you stay on the ground at the mercy of Etna. Maybe it isn’t such a bad thing. After all, she clearly loves you and if she is willing to go this far to keep you next to her, there isn’t much you can do about it. Etna will never let you leave the cave ever again and, as such, you give up on your quest in order to live with your somewhat obsessed lover. ");
-	if(player.findStatusAffect(StatusAffects.CampMarble) >= 0) outputText("Marble comes looking for you before long, but, instead of freeing you, she decides to help the manticore to hold you there for your own good. ");
+	if(player.hasStatusAffect(StatusAffects.CampMarble)) outputText("Marble comes looking for you before long, but, instead of freeing you, she decides to help the manticore to hold you there for your own good. ");
 	outputText("Your adventure seem to have come to an end but at least you will live the rest of your life showered with love.");
 	getGame().gameOver();
 }
@@ -491,7 +491,7 @@ public function manticoreTailRapeScene():void
 	outputText("Soon, your cumpump face turns to a tormented expression as your tail forcefully milks him of all his cum, regularly injecting more aphrodisiac to make him orgasm and leak constantly like a hose. Ironically and against his better judgment the stimulation of your vaginal wall causes his body to buck up and down in your tail, only making him cum more. On your end, you taste every drop of cum he deposits inside just like you would with your mouth. Delighted by the sensations from your tail pussy, you feel like singing and to your surprise a series of moans that sound like a song come out from your mouth. Only once his balls have shrunk to the point they look like a pair of raisins do you let go of what's left of him.\n\n");
 	outputText("You lick your lips feeling like you just had a five course meal fit for a queen as you leave the body of your passed out opponent on the ground at the mercy of other potential sexual predators.");
 	if (player.findPerk(PerkLib.ManticoreMetabolism) >= 0) {
-		if (player.findStatusAffect(StatusAffects.FeedingEuphoria) >= 0) {
+		if (player.hasStatusAffect(StatusAffects.FeedingEuphoria)) {
 			if (player.statusAffectv2(StatusAffects.FeedingEuphoria) < 30) { //Maximum speed gain is 30.
 				player.addStatusValue(StatusAffects.FeedingEuphoria, 2, 10);
 				dynStats("spe", 10);

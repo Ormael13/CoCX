@@ -188,7 +188,7 @@ package classes.Scenes.Areas.HighMountains
 		
 			outputText("It takes several moments for you to realize it when the basilisk steps away from you.  You are free of its spell!  Except... you can't move.  You are standing there, gazing into nothing, and you can't move.  You can feel your arms and legs and the breeze on your skin, but the ability to do anything with them is simply not there; it's as if the nerve connections have been severed, leaving you utterly paralyzed.  The most you can manage is a raspy half-moan through your still throat. You can't even follow the basilisk with your eyes; although you can feel it; it gives you cause to moan again.\n\n", false);
 			//Undo slow to determine if bad end time
-			if(player.findStatusAffect(StatusAffects.BasiliskSlow) >= 0) {
+			if(player.hasStatusAffect(StatusAffects.BasiliskSlow)) {
 				player.spe += player.statusAffectv1(StatusAffects.BasiliskSlow);
 				mainView.statsView.showStatUp( 'spe' );
 				// speUp.visible = true;
@@ -290,7 +290,6 @@ package classes.Scenes.Areas.HighMountains
 			if(player.vaginas.length == 0) {
 				outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n\n", false);
 				player.createVagina();
-				player.genderCheck();
 			}
 			if(player.findPerk(PerkLib.BasiliskWomb) >= 0) {
 				outputText("\nA sudden pressure in your belly wakes you, making you moan softly in pain as you feel your womb rippling and squeezing, the walls contracting around the ripe eggs inside you.  You drag yourself from your bedding, divesting yourself of your lower clothes and staggering out into the middle of the camp. Squatting upright, you inhale deeply and start to concentrate.");

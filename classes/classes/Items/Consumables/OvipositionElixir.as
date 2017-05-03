@@ -50,7 +50,7 @@ package classes.Items.Consumables
 			}
 			var changeOccurred:Boolean = false;
 			if (game.player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) { //If player already has eggs, chance of size increase!
-				if (game.player.findStatusAffect(StatusAffects.Eggs) >= 0) {
+				if (game.player.hasStatusAffect(StatusAffects.Eggs)) {
 					//If eggs are small, chance of increase!
 					if (game.player.statusAffectv2(StatusAffects.Eggs) == 0) {
 						//1 in 2 chance!

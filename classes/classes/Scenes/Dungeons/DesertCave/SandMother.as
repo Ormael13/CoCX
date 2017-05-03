@@ -9,16 +9,16 @@ package classes.Scenes.Dungeons.DesertCave
 		//Starts combat with sandstorm.  GigaFire's every fifth round.
 		//Whispers every fourth.
 		public function sandWitchMotherAI():void {
-			if(findStatusAffect(StatusAffects.Sandstorm) < 0) {
+			if(!hasStatusAffect(StatusAffects.Sandstorm)) {
 				sandStormAttack();
 				return;
 			}
-			if(findStatusAffect(StatusAffects.Gigafire) >= 0) {
+			if(hasStatusAffect(StatusAffects.Gigafire)) {
 				gigaFire2();
 				return;
 			}
 			var choices:Array = [];
-			if(player.findStatusAffect(StatusAffects.Whispered) < 0) choices[choices.length] = getWhispered;
+			if(!player.hasStatusAffect(StatusAffects.Whispered)) choices[choices.length] = getWhispered;
 			choices[choices.length] = eatALightningBolt;
 			choices[choices.length] = sandMotherTelekinesis;
 			choices[choices.length] = gigaFire;
@@ -44,7 +44,7 @@ package classes.Scenes.Dungeons.DesertCave
 			var damage:int = 40 + rand(11);
 			//Not interrupted:
 			if(statusAffectv1(StatusAffects.Gigafire) < 10) {
-				if (player.findStatusAffect(StatusAffects.Blizzard) >= 0) {
+				if (player.hasStatusAffect(StatusAffects.Blizzard)) {
 					outputText("The Sand Mother grabs her scepter in both hands, combining the flames that wreath them into an immense, blinding conflagration.  She points at you, and the fire washes out in a wave like a serpent, twisting at you as you try to avoid it, doubling back on itself whenever it misses.  It's unavoidable!  You're enveloped in the consuming fire that try to pierce surrounding you maelstorm of ice shards!");
 				}
 				else {
@@ -54,14 +54,14 @@ package classes.Scenes.Dungeons.DesertCave
 			}
 			//Interrupted:
 			else {
-				if (player.findStatusAffect(StatusAffects.Blizzard) >= 0) {
+				if (player.hasStatusAffect(StatusAffects.Blizzard)) {
 					outputText("Thumbling back to the ground from your damaging hit, the Sand Mother grabs at her head, one flame going out.  She recovers in time to grab the staff and fling it towards you, but it's at a fraction of the strength she intended.  Still, it burns all the same. ");
 				}
 				else {
 					outputText("Thumbling back to the ground from your damaging hit, the Sand Mother grabs at her head, one flame going out.  She recovers in time to grab the staff and fling it towards you, but it's at a fraction of the strength she intended.  Still, it burns all the same. ");
 				}
 			}
-			if (player.findStatusAffect(StatusAffects.Blizzard) >= 0) {
+			if (player.hasStatusAffect(StatusAffects.Blizzard)) {
 				player.addStatusValue(StatusAffects.Blizzard, 1, -1);
 				damage *= 0.2;
 				damage = Math.round(damage);
