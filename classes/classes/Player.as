@@ -423,35 +423,37 @@ use namespace kGAMECLASS;
 			if (findPerk(PerkLib.HiddenDualMomentum) >= 0 && weaponPerk == "Dual Large" && str >= 150 && spe >= 100) {
 				attack += (((str + spe) - 200) * 0.1);
 			}//20-60-100
-			if(findPerk(PerkLib.LightningStrikes) >= 0 && spe >= 60 && (weaponPerk != "Large" || weaponPerk != "Dual Large")) {
-				attack += ((spe - 50) * 0.3);//czy dodać wyjątek dla pieści?//dodać wyjąte dla dual weapons na pewno//wyjątek potem dodać dla daggers i innych assasins weapons i dać im lepszy przelicznik
+			if(findPerk(PerkLib.LightningStrikes) >= 0 && spe >= 60 && (weaponPerk != "Large" || weaponPerk != "Dual Large" || !isFistOrFistWeapon())) {
+				attack += ((spe - 50) * 0.3);//wyjątek dla pieści jest//dodać wyjąte dla dual weapons na pewno//wyjątek potem dodać dla daggers i innych assasins weapons i dać im lepszy przelicznik
 			}//45-105-165
-			if(findPerk(PerkLib.IronFistsI) >= 0 && str >= 50 && (weaponName == "fists" || weaponName == "hooked gauntlets" || weaponName == "spiked gauntlet")) {
-				attack += 10;
-			}
-			if(findPerk(PerkLib.IronFistsII) >= 0 && str >= 65 && (weaponName == "fists" || weaponName == "hooked gauntlets" || weaponName == "spiked gauntlet")) {
-				attack += 10;
-			}
-			if(findPerk(PerkLib.IronFistsIII) >= 0 && str >= 80 && (weaponName == "fists" || weaponName == "hooked gauntlets" || weaponName == "spiked gauntlet")) {
-				attack += 10;
-			}
-			if(findPerk(PerkLib.IronFistsIV) >= 0 && str >= 95 && (weaponName == "fists" || weaponName == "hooked gauntlets" || weaponName == "spiked gauntlet")) {
-				attack += 10;
-			}
-			if(findPerk(PerkLib.IronFistsV) >= 0 && str >= 110 && (weaponName == "fists" || weaponName == "hooked gauntlets" || weaponName == "spiked gauntlet")) {
-				attack += 10;
-			}
-			if(findPerk(PerkLib.JobBrawler) >= 0 && str >= 60 && (weaponName == "fists" || weaponName == "hooked gauntlets" || weaponName == "spiked gauntlet")) {
-				attack += (5 * (1 + newGamePlusMod()));
+			if (isFistOrFistWeapon()) {
+				if(findPerk(PerkLib.IronFistsI) >= 0 && str >= 50) {
+					attack += 10;
+				}
+				if(findPerk(PerkLib.IronFistsII) >= 0 && str >= 65) {
+					attack += 10;
+				}
+				if(findPerk(PerkLib.IronFistsIII) >= 0 && str >= 80) {
+					attack += 10;
+				}
+				if(findPerk(PerkLib.IronFistsIV) >= 0 && str >= 95) {
+					attack += 10;
+				}
+				if(findPerk(PerkLib.IronFistsV) >= 0 && str >= 110) {
+					attack += 10;
+				}	// && (weaponName == "fists" || weaponName == "hooked gauntlets" || weaponName == "spiked gauntlet")
+				if(findPerk(PerkLib.JobBrawler) >= 0 && str >= 60) {
+					attack += (5 * (1 + newGamePlusMod()));
+				}		// && (weaponName == "fists" || weaponName == "hooked gauntlets" || weaponName == "spiked gauntlet")
+				if(kGAMECLASS.unarmedAttack() > 0) {
+					attack += kGAMECLASS.unarmedAttack();
+				}
 			}
 			if(armType == ARM_TYPE_MANTIS && weaponName == "fists") {
 				attack += (15 * (1 + newGamePlusMod()));
 			}
 			if(armType == ARM_TYPE_YETI && weaponName == "fists") {
 				attack += (5 * (1 + newGamePlusMod()));
-			}
-			if(kGAMECLASS.unarmedAttack() > 0 && weaponName == "fists") {
-				attack += kGAMECLASS.unarmedAttack();
 			}
 			if(findStatusAffect(StatusAffects.Berzerking) >= 0) attack += (15 + (15 * (1 + newGamePlusMod())));
 			if(findStatusAffect(StatusAffects.Lustzerking) >= 0) attack += (15 + (15 * (1 + newGamePlusMod())));
@@ -4438,6 +4440,7 @@ use namespace kGAMECLASS;
 			}
 			if (findPerk(PerkLib.JobGuardian) >= 0) maxTou += (5 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.JobKnight) >= 0) maxTou += (10 * (1 + newGamePlusMod()));
+			if (findPerk(PerkLib.JobMonk) >= 0) maxWis += (15 * (1 + newGamePlusMod()));
 			if (findPerk(PerkLib.JobMunchkin) >= 0) {
 				maxStr += (25 * (1 + newGamePlusMod()));
 				maxTou += (25 * (1 + newGamePlusMod()));

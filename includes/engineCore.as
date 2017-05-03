@@ -309,7 +309,7 @@ public function displayPerks(e:MouseEvent = null):void {
 		outputText(" to spend.</b>", false);
 		addButton(button++, "Perk Up", perkBuyMenu);
 	}
-	if(player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0) {
+	if(player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0) {
 		outputText("\n<b>You can adjust your melee attack settings.</b>");
 		addButton(button++,"Melee Opt",doubleAttackOptions);
 	}
@@ -345,23 +345,23 @@ public function doubleAttackOptions():void {
 	outputText("\n\nYou can change it to different amount of attacks.");
 	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 0) addButton(0, "All Single", singleAttack);
 	if ((player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 1) {
-		if ((player.weaponPerk != "Large" || (player.weaponPerk == "Large" && player.findPerk(PerkLib.DoubleAttackLarge) < 0)) && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && player.weaponName != "fists") addButton(1, "All Double", doubleAttack);
-		else addButtonDisabled(1, "All Double", "You current melee weapon not allow to use this option");
+		if ((player.weaponPerk != "Large" || (player.weaponPerk == "Large" && player.findPerk(PerkLib.DoubleAttackLarge) < 0)) && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && (!player.isFistOrFistWeapon() || (player.isFistOrFistWeapon() && player.findPerk(PerkLib.Combo) < 0))) addButton(1, "All Double", doubleAttack);
+		else addButtonDisabled(1, "All Double", "You current melee weapon not allow to use this option");	//player.weaponName != "fists"
 	}
 	if ((player.findPerk(PerkLib.TripleAttack) >= 0 || player.findPerk(PerkLib.TripleAttackLarge) >= 0) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 2) {
-		if ((player.weaponPerk != "Large" || (player.weaponPerk == "Large" && player.findPerk(PerkLib.TripleAttackLarge) < 0)) && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && player.weaponName != "fists") addButton(5, "All Triple", tripleAttack);
-		else addButtonDisabled(5, "All Triple", "You current melee weapon not allow to use this option");
+		if ((player.weaponPerk != "Large" || (player.weaponPerk == "Large" && player.findPerk(PerkLib.TripleAttackLarge) < 0)) && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && (!player.isFistOrFistWeapon() || (player.isFistOrFistWeapon() && player.findPerk(PerkLib.ComboMaster) < 0))) addButton(5, "All Triple", tripleAttack);
+		else addButtonDisabled(5, "All Triple", "You current melee weapon not allow to use this option");	//player.weaponName != "fists"
 	}
 	if (player.findPerk(PerkLib.QuadrupleAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 3) {
-		if (player.weaponPerk != "Large" && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && player.weaponName != "fists") addButton(6, "All Quadruple", quadrupleAttack);
+		if (player.weaponPerk != "Large" && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && !player.isFistOrFistWeapon()) addButton(6, "All Quadruple", quadrupleAttack);
 		else addButtonDisabled(6, "All Quadruple", "You current melee weapon not allow to use this option");
 	}// && player.weaponName != "hooked gauntlets" && player.weaponName != "spiked gauntlet"
 	if (player.findPerk(PerkLib.PentaAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 4) {
-		if (player.weaponPerk != "Large" && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && player.weaponName != "fists") addButton(10, "All Penta", pentaAttack);
+		if (player.weaponPerk != "Large" && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && !player.isFistOrFistWeapon()) addButton(10, "All Penta", pentaAttack);
 		else addButtonDisabled(10, "All Penta", "You current melee weapon not allow to use this option");
 	}// && player.weaponName != "hooked gauntlets" && player.weaponName != "spiked gauntlet"
 	if (player.findPerk(PerkLib.HexaAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 5) {
-		if (player.weaponPerk != "Large" && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && player.weaponName != "fists") addButton(11, "All Hexe", hexaAttack);
+		if (player.weaponPerk != "Large" && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && !player.isFistOrFistWeapon()) addButton(11, "All Hexe", hexaAttack);
 		else addButtonDisabled(11, "All Hexe", "You current melee weapon not allow to use this option");
 	}// && player.weaponName != "hooked gauntlets" && player.weaponName != "spiked gauntlet"
 	
@@ -1410,7 +1410,24 @@ public function buildPerkList():Array {
 	//------------
 	// WISDOM
 	//------------
-	//Nope.avi
+	//Tier 1 Wisdom perks
+	//Tier 2 Wisdom perks
+	if (player.level >= 12) {
+		if (player.wis >= 60) {
+			_add(new PerkClass(PerkLib.JobMonk));
+		}
+		if (player.findPerk(PerkLib.JobMonk) >= 0 && player.wis >= 75 && player.str >= 50) {
+			_add(new PerkClass(PerkLib.Combo));	//DoubleAttackLarge
+		}
+	}
+	//Tier 3 Wisdom perks
+	
+	//Tier 4 Wisdom perks
+	if (player.level >= 24) {
+		if (player.findPerk(PerkLib.Combo) >= 0 && player.wis >= 125 && player.str >= 100) {
+			_add(new PerkClass(PerkLib.ComboMaster));	//TripleAttackLarge
+		}
+	}
 	//------------
 	// LIBIDO
 	//------------
@@ -1805,8 +1822,8 @@ public function buildPerkList():Array {
 //		if (player.internalChimeraScore() >= 16 && player.findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0) {
 //			_add(new PerkClass(PerkLib.ChimericalBodyUltimateStage));
 //		}
-		if (player.findPerk(PerkLib.JobHunter) > 0 && player.findPerk(PerkLib.JobEromancer) > 0 && player.findPerk(PerkLib.JobEnchanter) > 0 && player.findPerk(PerkLib.JobDervish) > 0 && player.findPerk(PerkLib.JobBarbarian) > 0 && player.findPerk(PerkLib.JobAllRounder) > 0 && player.str >= 150 && player.tou >= 150 && player.spe >= 150 && player.inte >= 150 && player.wis >= 150 &&
-		player.lib >= 90) {	//player.findPerk(PerkLib.JobEromancer) > 0 && player.findPerk(PerkLib.JobMonk) > 0 && 
+		if (player.findPerk(PerkLib.JobMonk) > 0 && player.findPerk(PerkLib.JobHunter) > 0 && player.findPerk(PerkLib.JobEromancer) > 0 && player.findPerk(PerkLib.JobEnchanter) > 0 && player.findPerk(PerkLib.JobDervish) > 0 && player.findPerk(PerkLib.JobBarbarian) > 0 && player.findPerk(PerkLib.JobAllRounder) > 0 && player.str >= 150 && player.tou >= 150 && player.spe >= 150 &&
+		player.inte >= 150 && player.wis >= 150 && player.lib >= 90) {	//player.findPerk(PerkLib.JobEromancer) > 0 && 
 			_add(new PerkClass(PerkLib.JobMunchkin));
 		}	//(Still need some other related stuff added to make PC true Munchkin
 //	}		//na razie jest perk GreyMage, potrzeba jeszcze pare innych perków tak z 3-5 innych jeszcze)
