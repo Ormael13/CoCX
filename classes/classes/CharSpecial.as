@@ -1220,7 +1220,7 @@ package classes
 			player.tailType = TAIL_TYPE_FOX;
 			player.tailCount = 2;
 			player.inte = 30;
-			if(player.findStatusAffect(StatusAffects.BonusVCapacity) < 0) player.createStatusAffect(StatusAffects.BonusVCapacity,0,0,0,0);
+			if(!player.hasStatusAffect(StatusAffects.BonusVCapacity)) player.createStatusAffect(StatusAffects.BonusVCapacity,0,0,0,0);
 			else player.addStatusValue(StatusAffects.BonusVCapacity,1,5+rand(10));
 			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
 		}
@@ -1620,7 +1620,7 @@ package classes
 			player.createVagina();
 			player.vaginas[0].vaginalLooseness = 0;
 			player.vaginas[0].vaginalWetness = 2; // wet
-			player.vaginas[0].virgin = 0;			
+			player.vaginas[0].virgin = false;
 			player.createStatusAffect(StatusAffects.BonusVCapacity, 8000, 0, 0, 0); // Vag of Holding kitsune trait
 			player.clitLength = 0.3;
 			player.fertility = 5;
@@ -1676,7 +1676,7 @@ package classes
 			if (player.weapon == WeaponLib.FISTS) player.setWeapon(weapons.SUCWHIP); // have succubus whip, to get corruption quickly when desired
 			//if (player.jewelry == JewelryLib.NOTHING) player.setJewelry(jewelries.PURERNG);
 			if (debug) {
-				if (player.findStatusAffect(StatusAffects.Kelt) < 0) player.createStatusAffect(StatusAffects.Kelt, 100, 0, 0, 0); // Kelt, you are dick.			
+				if (!player.hasStatusAffect(StatusAffects.Kelt)) player.createStatusAffect(StatusAffects.Kelt, 100, 0, 0, 0); // Kelt, you are dick.
 				player.setWeaponRange(weaponsrange.BOWOLD_);
 				flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 4; // Raphael is too picky, and also pretty much unfinished - you can't continue training after chase scene.			
 				if (player.teaseLevel < 3) player.teaseLevel = 3; }			
@@ -1754,8 +1754,8 @@ package classes
 			player.createVagina();
 			player.vaginas[0].vaginalLooseness = rand(4); // from tight to gaping
 			player.vaginas[0].vaginalWetness = rand(4)+1; // from normal to slavering
-			player.vaginas[0].virgin = 0;
-			
+			player.vaginas[0].virgin = false;
+
 			player.clitLength = rand(3) == 0 ? (rand(10)+1)*0.25 : 0.25; // from 0.25 to 2.5
 			player.fertility = (rand(5)+1)*5; // from 5 to 25 with 5 step
 			

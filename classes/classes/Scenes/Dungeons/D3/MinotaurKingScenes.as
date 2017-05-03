@@ -23,7 +23,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\n<i>“You’re strong, Champion, but your quest ends here,”</i> the brute promises. He snorts and extends a hand toward the crowd. <i>“Excellia, my weapon.”</i>");
 			outputText("\n\nA vision of curves and ripe sexuality emerges from the curtain of wet and wiggling flesh. She’s at least part cow, with upraised horns and a happily flicking tail - to say nothing of her egregiously supple breasts, still leaking milk from a recent suckle or their own overtly-abundant production. In her hands is a massive axe; it’s too large to be wielded by human hands.");
 			if (flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] != 0) outputText(" Even Isabella would struggle to wield such a weapon.");
-			else if (player.findStatusAffect(StatusAffects.CampMarble) >= 0) outputText(" Even Marble would struggle to wield such a weapon");
+			else if (player.hasStatusAffect(StatusAffects.CampMarble)) outputText(" Even Marble would struggle to wield such a weapon");
 			else if (getGame().helFollower.followerHel()) outputText(" Even Helia would struggle to wield such a weapon.");
 			outputText(" This poor cow-slut, this ‘Excellia’ can barely to bring it to her lord without tipping forward onto her too-large tits.");
 			outputText("\n\nTaking the gleaming metal shaft from his smaller slave, the proud beast stamps the butt-end into the worked stone floor, creating a spiderweb of cracks from brute strength alone.");

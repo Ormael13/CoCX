@@ -1384,7 +1384,7 @@ private function tenderTakeItUpTheAssFromUrta():void {
 		}
 	}
 	//Butt Stretched used to determine how long since last enlargement
-	if(player.findStatusAffect(StatusAffects.ButtStretched) < 0) player.createStatusAffect(StatusAffects.ButtStretched,0,0,0,0);
+	if(!player.hasStatusAffect(StatusAffects.ButtStretched)) player.createStatusAffect(StatusAffects.ButtStretched,0,0,0,0);
 	//Reset the timer on it to 0 when restretched.
 	else player.changeStatusValue(StatusAffects.ButtStretched,1,0);
 	if(player.totalCocks() > 0) {

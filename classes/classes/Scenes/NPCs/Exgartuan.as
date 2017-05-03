@@ -63,7 +63,7 @@
 		public function timeChange():Boolean {
 			var needNext:Boolean = false;
 			checkedExgartuan = 0; //Make sure we test just once in timeChangeLarge
-			if (player.findStatusAffect(StatusAffects.Exgartuan) >= 0) { //Update Exgartuan stuff
+			if (player.hasStatusAffect(StatusAffects.Exgartuan)) { //Update Exgartuan stuff
 				trace("EXGARTUAN V1: " + player.statusAffectv1(StatusAffects.Exgartuan) + " V2: " + player.statusAffectv2(StatusAffects.Exgartuan));
 				if (player.statusAffectv1(StatusAffects.Exgartuan) == 1 && (!player.hasCock() || player.cockArea(0) < 100)) { //If too small dick, remove him
 					outputText("\n<b>You suddenly feel the urge to urinate, and stop over by some bushes.  It takes wayyyy longer than normal, and once you've finished, you realize you're alone with yourself for the first time in a long time.  Perhaps you got too small for Exgartuan to handle?</b>\n");
@@ -88,7 +88,7 @@
 					}
 					else { //If not sleeping, stuff happens!
 						if (player.statusAffectv1(StatusAffects.Exgartuan) == 1) { //Dude stuff
-							if (player.findStatusAffect(StatusAffects.Infested) >= 0) {
+							if (player.hasStatusAffect(StatusAffects.Infested)) {
 								outputText("\n<b>");
 								exgartuanWormCure();
 								outputText("</b>\n");
@@ -157,7 +157,7 @@
 		}
 		
 		public function timeChangeLarge():Boolean {
-			if (checkedExgartuan++ == 0 && player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0 && model.time.hours == 4) {
+			if (checkedExgartuan++ == 0 && player.hasStatusAffect(StatusAffects.Exgartuan) && player.statusAffectv2(StatusAffects.Exgartuan) == 0 && model.time.hours == 4) {
 				//Exgartuan must be present, must be awake and it must be night time
 				if (player.hasCock() && player.statusAffectv1(StatusAffects.Exgartuan) == 1 && rand(3) == 0 && player.hoursSinceCum >= 24) { //Exgartuan night time surprise!
 					outputText("\n");
@@ -194,7 +194,7 @@ private function drinkFountainEndowment():void {
 		player.XP += 200;
 		changed = true;
 	}
-	if(player.findStatusAffect(StatusAffects.Exgartuan) < 0 && !changed && rand(2) == 0) {
+	if(!player.hasStatusAffect(StatusAffects.Exgartuan) && !changed && rand(2) == 0) {
 		var choices:Number = 0;
 		if(player.cockTotal() > 0) {
 			if(player.cockArea(0) >= 100) choices++;
@@ -743,7 +743,7 @@ public function exgartuanLactationAdjustment():void {
 	//(Lactating Already)
 	if(player.biggestLactation() > 1) {
 		//(Increase)
-		if(rand(2) == 0 || player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+		if(rand(2) == 0 || player.hasStatusAffect(StatusAffects.Feeder)) {
 			outputText("Your nipples grow warm and sensitive, then start dripping milk into your " + player.armorName + ".  Exgartuan appears to be having some fun with you again...", false);
 			player.boostLactation(player.breastRows.length);
 		}
@@ -924,7 +924,7 @@ private function exgartuanSleepSurprise():void {
 		outputText("  Liquid-hot pressure slides over the underside of your " + cockDescript(0) + ", licking wetly at the pulsating, need-filled demon-prick.  Your rogue tongue's attentions have the desired effect, and the cries of your pleasure are muffled by your own thick flesh and its rapidly distending urethra.\n\n", false);
 		
 		outputText("If someone were watching", false);
-		if(monk >= 5 && player.findStatusAffect(StatusAffects.NoJojo) < 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) outputText(", and judging by Jojo's high pitched whines, he certainly is,", false);
+		if(monk >= 5 && !player.hasStatusAffect(StatusAffects.NoJojo) && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) outputText(", and judging by Jojo's high pitched whines, he certainly is,", false);
 		outputText(" they'd see dick-flesh bulging with a heavy load as it's pumped into your lips.  The fully-inflated cum-tube distends your mouth, stretching your jaw painfully, and dumps its creamy cargo into its willing receptacle.  Your belly burbles as it adjusts to the ", false);
 		temp = player.cumQ();
 		if(temp < 50) outputText("surprisingly light", false);
@@ -947,7 +947,7 @@ private function exgartuanSleepSurprise():void {
 		}
 		outputText("\n\n", false);
 		
-		if(monk >= 5 && player.findStatusAffect(StatusAffects.NoJojo) < 0 && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
+		if(monk >= 5 && !player.hasStatusAffect(StatusAffects.NoJojo) && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
 			outputText("The splatter of mouse-cum erupting in the wood reaches your ears, bringing a wistful smile to your face.  That slutty mouse is such a peeping tom!  ", false);
 		}
 		outputText("Your eyes slowly roll back down while Exgartuan deflates, leaving a trail of pleased, white submission ", false);

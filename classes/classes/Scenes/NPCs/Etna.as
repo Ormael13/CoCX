@@ -27,7 +27,7 @@ package classes.Scenes.NPCs
 			if (rand(100) < (this.spe - player.spe) / 2) {
 				var tailspikedmg:Number = Math.round(this.str / 16);
 				var lustdmg:Number = Math.round(this.lib / 6);
-				if (player.findStatusAffect(StatusAffects.BasiliskSlow) >= 0) {
+				if (player.hasStatusAffect(StatusAffects.BasiliskSlow)) {
 					player.addStatusValue(StatusAffects.BasiliskSlow, 1, 2);
 					player.spe -= 2;
 				}
@@ -77,19 +77,19 @@ package classes.Scenes.NPCs
 			outputText(" making you yelp in surprise. She breaks out of the grapple grinning. You took ");
 			player.takeDamage(bitedmg, true);
 			outputText(" damage!");
-			if (findStatusAffect(StatusAffects.Constricted) >= 0) removeStatusAffect(StatusAffects.Constricted);
-			if (findStatusAffect(StatusAffects.ConstrictedScylla) >= 0) removeStatusAffect(StatusAffects.ConstrictedScylla);
+			if (hasStatusAffect(StatusAffects.Constricted)) removeStatusAffect(StatusAffects.Constricted);
+			if (hasStatusAffect(StatusAffects.ConstrictedScylla)) removeStatusAffect(StatusAffects.ConstrictedScylla);
 		}
 		
 		override protected function performCombatAction():void
 		{
-			if (findStatusAffect(StatusAffects.Constricted) >= 0 || findStatusAffect(StatusAffects.ConstrictedScylla) >= 0) {
+			if (hasStatusAffect(StatusAffects.Constricted) || hasStatusAffect(StatusAffects.ConstrictedScylla)) {
 				moveBite();
 			}
 			else if (statusAffectv1(StatusAffects.Flying) == 3) {
 				moveBoobCrash();
 			}
-			else if (findStatusAffect(StatusAffects.Flying) >= 0) {
+			else if (hasStatusAffect(StatusAffects.Flying)) {
 				moveTailSpike();
 			}
 			else {
@@ -120,13 +120,13 @@ package classes.Scenes.NPCs
 			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) {
 				this.a = "";
 				this.short = "Etna";
-				if (findStatusAffect(StatusAffects.Flying) >= 0) this.long = "Etna is circling you in the air readying a salvo of spike to throw at you.";
+				if (hasStatusAffect(StatusAffects.Flying)) this.long = "Etna is circling you in the air readying a salvo of spike to throw at you.";
 				else this.long = "Etna is currently circling you looking for an oppening to strike. She's actualy good on the eye and you would give her body more attention if not for the fact she's trying to beat you down and rape you.";
 			}
 			else {
 				this.a = "the ";
 				this.short = "manticore";
-				if (findStatusAffect(StatusAffects.Flying) >= 0) this.long = "The manticore is circling you in the air readying a salvo of spike to throw at you.";
+				if (hasStatusAffect(StatusAffects.Flying)) this.long = "The manticore is circling you in the air readying a salvo of spike to throw at you.";
 				else this.long = "The manticore is currently circling you looking for an oppening to strike. She's actualy good on the eye and you would give her body more attention if not for the fact she's trying to beat you down and rape you.";
 			}
 			createVagina(true,VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_TIGHT);

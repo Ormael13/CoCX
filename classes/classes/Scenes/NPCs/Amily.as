@@ -12,7 +12,7 @@
 
 		override protected function performCombatAction():void
 		{
-			if(findStatusAffect(StatusAffects.Concentration) < 0 && rand(4) == 0) amilyConcentration();
+			if(!hasStatusAffect(StatusAffects.Concentration) && rand(4) == 0) amilyConcentration();
 			else if(rand(3) == 0) amilyDartGo();
 			else if(rand(2) == 0) amilyDoubleAttack();
 			else amilyAttack();
@@ -25,7 +25,7 @@
 			//return to combat menu when finished
 			doNext(game.playerMenu);
 			//Blind dodge change
-			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
+			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 				game.combatRoundOver();
 				return;
@@ -92,7 +92,7 @@
 			//return to combat menu when finished
 			doNext(game.playerMenu);
 			//Blind dodge change
-			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
+			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
 				dodged++;
 			}
 			//Determine if dodged!
@@ -140,7 +140,7 @@
 		{
 			var dodged:Number = 0;
 			//Blind dodge change
-			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
+			if (hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack from her dartgun!\n", false);
 				game.combatRoundOver();
 				return;
@@ -188,7 +188,7 @@
 			else {
 				outputText("Amily dashes at you and swipes her knife at you, surprisingly slowly.  You easily dodge the attack; but it was a feint - her other hand tries to strike at you with a poisoned dart. However, she only manages to scratch you, only causing your muscles to grow slightly numb.", false);
 				//Set status
-				if (player.findStatusAffect(StatusAffects.AmilyVenom) < 0) player.createStatusAffect(StatusAffects.AmilyVenom, 0, 0, 0, 0);
+				if (!player.hasStatusAffect(StatusAffects.AmilyVenom)) player.createStatusAffect(StatusAffects.AmilyVenom, 0, 0, 0, 0);
 				var poison:Number = 2 + rand(5);
 				while (poison > 0) {
 					poison--;
@@ -227,7 +227,7 @@
 		//Deals big lust increase, despite her resistance.
 		override public function teased(lustDelta:Number):void
 		{
-			if(findStatusAffect(StatusAffects.Concentration) >= 0) {
+			if(hasStatusAffect(StatusAffects.Concentration)) {
 				outputText("Amily flushes hotly; her concentration only makes her pay more attention to your parts!", false);
 				lustDelta += 25+lustDelta;
 				removeStatusAffect(StatusAffects.Concentration);

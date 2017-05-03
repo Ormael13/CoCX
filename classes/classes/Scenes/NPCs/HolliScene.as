@@ -80,7 +80,7 @@ public function treeMenu(output:Boolean = true):void {
 	}
 	else if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 3) {
 		if(output) outputText("The familiar plant has blossomed into a nicely sized tree, though you doubt it has finished growing just yet.  It sports an outstretched canopy with nice, green leaves.  Unfortunately, you can still trace the corrupted veins on their undersides from below.  The vaginal flower is still there and is in full bloom, now several feet across and practically dripping with moisture.  Just up the trunk, there's a pair of small, roughly b-cup breasts bulging out of the bark.  They're exquisitely smooth and soft, and they ooze sweet-smelling sap that your tongue would love to taste.  In the canopy above, tentacle vines idly writhe about, though they show no sizes of aggression.");
-		if(player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0) {
+		if(player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.hasStatusAffect(StatusAffects.KnowsWhitefire)) {
 			if(output) outputText("\n\nIt could be burned down with your supernatural fire, but it would definitely tire you.");
 			burnIt = torchP3Tree;
 		}
@@ -381,7 +381,7 @@ public function flowerGrowsToP3():void {
 	outputText("\n\nThe first thing you notice is that the vaginal tentacle flower remains, affixed at waist height to the side of the tree.  It looks bigger, the petals huge and glossy, undoubtedly far more capable of swallowing dick than ever before.  The tree isn't that thick, just yet.  Glancing further up the smooth, knotless trunk, you see the most surprising thing of all - a pair of almond-colored nipples, perched upon small, tit-like bulges in the wood.  The bark on these globular protrusion is smoother and fairer than the surrounding surface.  On one of them, a trickle of sap has formed into a heavy bead, and it smells sweet, like maple syrup.");
 	outputText("\n\nA dollop of something moist landing in your hair startles you from your visual inspection.  Gingerly, you touch your fingers to the wet spot and come away with a thick, viscous fluid that smells faintly musky... and salty...  It's cum!  You recoil, looking up in time to see a half dozen tentacles curling between the branches rubbing against each other in what can only be described as an orgy of frotting cock-lust.  Well now, your little pet plant is growing up.  There's no easy way to get rid of it now");
 	var burnIt:Function = null;
-	if(player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0) {
+	if(player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.hasStatusAffect(StatusAffects.KnowsWhitefire)) {
 		outputText(", though you suppose you could burn it down with magical fire if you set your mind to it");
 		burnIt = torchP3Tree;
 	}
@@ -499,12 +499,12 @@ private function torchP3Tree():void {
 	//Requires fire-based attack and removes the tree.
 	outputText("This has gone on long enough!  This thing cannot continue to grow in your camp any longer, and you have just the means to remove it: fire.  ");
 	//[(nerdfire)
-	if(player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0) outputText("Closing your eyes to focus, you gather your energies, and unleash your white, supernatural flames upon the thing.");
+	if(player.hasStatusAffect(StatusAffects.KnowsWhitefire)) outputText("Closing your eyes to focus, you gather your energies, and unleash your white, supernatural flames upon the thing.");
 	//(bromancefire)
 	else if(player.findPerk(PerkLib.FireLord) >= 0) outputText("Sucking in your breath, you inflate your chest and stir the embers of the jaguar demon's gift.  Dredging up an enormous pine-green fireball, you exhale and launch it at the tree.");
 	else outputText("Sucking in your breath, you inflate your chest and stir the embers of your fiery gift.  Dredging up an enormous fireball, you exhale and launch it at the tree.");
 	outputText("  It goes up by the torch, though the fire starts to fade sooner than you would expect.  You huff, but repeat the action, layering a new blaze atop the previous one; you put all your concentration into this new conflagration, stoking the inferno with every ounce of your ");
-	if(player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0) outputText("magical will");
+	if(player.hasStatusAffect(StatusAffects.KnowsWhitefire)) outputText("magical will");
 	else outputText("breath");
 	outputText(".");
 	outputText("\n\nThis time, it stays suitably lit.  The tree makes a handy torch for a few hours while it burns to ash, but leaves behind a thick, cloying smoke that takes forever to dissipate.  At least that nuisance plant is gone for good.");
@@ -1041,7 +1041,7 @@ private function threatenHolli():void {
 	else outputText("Marae is likely beyond your power yet, but... you feel like she might not pressure you too hard if you can make a suitably credible threat.");
 	outputText("\n\n\"<i>Now, I hope you rest well in the knowledge that I'm going to stay firmly in my tree, no matter what.  Watching the vermin of this land walk over your bedroll while you try to sleep will be suitable recompense for your rudeness.</i>\"");
 	//[(kid a, thorn canopy, or other non-jojo watch is on)
-	if((player.gender > 0 && player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0 && player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) || flags[kFLAGS.ANEMONE_WATCH] > 0) {
+	if((player.gender > 0 && player.hasStatusAffect(StatusAffects.JojoNightWatch) && player.hasStatusAffect(StatusAffects.PureCampJojo)) || flags[kFLAGS.ANEMONE_WATCH] > 0) {
 		outputText("\n\nYeah, whatever.  She'll be waiting a while for that; you've got your back covered.  With a dismissive, pointed gesture, you leave the smug arboreal demon behind.");
 	}
 	//{No option to beg for night watch till PC has been imp raped}
@@ -1110,7 +1110,7 @@ internal function defeatHolli():void {
 	clearOutput();
 	flags[kFLAGS.FUCK_FLOWER_KILLED] = 1;
 	//Win without Jojo -Z
-	if(monster.findStatusAffect(StatusAffects.JojoIsAssisting) < 0) {
+	if(!monster.hasStatusAffect(StatusAffects.JojoIsAssisting)) {
 		outputText("Weary, the succubus godling folds into her tree, unwilling to allow you the sight of her defeat.  With her energy suppressed, you're free to ");
 		if(player.weaponName != "large axe") outputText("fetch an axe and ");
 		outputText("hack at her trunk, laboriously peeling bark and making wedge-shaped cuts in it as you try to fell the abomination.  It takes nearly eight hours, but eventually the gnarled tree topples.  No sooner does it fall than it shrivels and turns to ash.");
@@ -1178,7 +1178,7 @@ private function dontRecruitJojoToCamp():void {
 internal function enjoyYourBadEndBIYAAAATCH():void {
 	clearOutput();
 	outputText("Screeching in triumph, the demon holds your defeated form aloft and begins to shake you.  ");
-	if(monster.findStatusAffect(StatusAffects.JojoIsAssisting) >= 0) {
+	if(monster.hasStatusAffect(StatusAffects.JojoIsAssisting)) {
 		outputText("Jojo drops the firewood he's carrying and attempts to strike her, but she swats him aside brutally with a branch, leaving him clutching his stomach and retching as he stumbles away; she returns her attention to you, completely fixated.  Her oozing sap runs in streams as she heals the damage from the dwindling flames.  ");
 	}
 	outputText("\"<i>Oh, my little meat...</i>\" Holli coos dangerously.  \"<i>Was I not clear enough before?  You exist to worship me.  If you won't give your mind to me, I'll have your body, instead.</i>\"  A floral tendril descends from her upper branches, slipping into your mouth and beginning to drool a nectar down your throat.  Forced to drink or drown, you gulp unhappily, feeling increasingly light-headed with each swallow.");

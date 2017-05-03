@@ -10,7 +10,7 @@ package classes.Scenes.Areas.Plains
 		private function satyrAttack():void {
 			outputText("The satyr swings at you with one knuckled fist.  ");
 			//Blind dodge change
-			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
+			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind punch!\n", false);
 			}
 			//Evade: 
@@ -38,7 +38,7 @@ package classes.Scenes.Areas.Plains
 		
 		internal function satyrCharge():void {
 			outputText("Lowering his horns, the satyr digs his hooves on the ground and begins snorting; he's obviously up to something.  ");
-			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
+			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you due to blindness!\n", false);
 			}
 			else {
@@ -88,7 +88,7 @@ package classes.Scenes.Areas.Plains
 		//5:(Only executed at high lust) 
 		private function highLustChugRape():void {
 			outputText("Panting with barely-contained lust, the Satyr charges at you and tries to ram you into the ground.  ");
-			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
+			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you due to blindness!\n", false);
 			}
 			else if(player.getEvasionRoll()) {
@@ -110,7 +110,7 @@ package classes.Scenes.Areas.Plains
 				if(rand(2) == 0) satyrBate();
 				else bottleChug();
 			}
-			else if(findStatusAffect(StatusAffects.Charged) < 0) satyrCharge();
+			else if(!hasStatusAffect(StatusAffects.Charged)) satyrCharge();
 			else {
 				satyrAttack();
 				removeStatusAffect(StatusAffects.Charged);

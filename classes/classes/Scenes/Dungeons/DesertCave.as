@@ -2309,7 +2309,7 @@ package classes.Scenes.Dungeons
 			
 			outputText("\n\nSuddenly, the Queen jerks up, looking you in the eye with her strange, white-irised gaze.");
 			//(No new PG.  Corrupt version)
-			if(player.cor > player.inte || kGAMECLASS.monk >= 5 || player.findStatusAffect(StatusAffects.Exgartuan) >= 0 || kGAMECLASS.amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
+			if(player.cor > player.inte || kGAMECLASS.monk >= 5 || player.hasStatusAffect(StatusAffects.Exgartuan) || kGAMECLASS.amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
 				outputText("  \"<i>There is some truth to your tale, [name], but I am a Sand Mother.  We are schooled in the art of sussing out the corrupt or unclean.  If we could not detect disguised demons and demonic agents, we would not flourish as we do now, and this great desert would not be on the cusp of resurrection.</i>\"");
 				outputText("\n\nThe Sand Mother steps out of her throne, brandishing a shining scepter as she rises.  Her lips curve into a cruel smile and she challenges, \"<i>Fight me, [name], and fall like every demonic agent before you.  Do not fear, for when you lose, you shall be reborn to serve a just cause.  Your taint may yet be exorcised.</i>\"");
 				outputText("\n\nThere's no way out, it's a fight!");
@@ -3274,7 +3274,7 @@ package classes.Scenes.Dungeons
 		//*Take Fertile Pills ✓Kirbu
 		public function takeFertilePills():void {
 			clearOutput();
-			if(player.findStatusAffect(StatusAffects.Contraceptives) < 0) outputText("You aren't under the effects of a contraceptive, so taking a pink pill would do nothing.");
+			if(!player.hasStatusAffect(StatusAffects.Contraceptives)) outputText("You aren't under the effects of a contraceptive, so taking a pink pill would do nothing.");
 			//{Contraceptives}
 			else {
 				outputText("It doesn't take you long to figure out that the pink pill should cancel the effects of your contraceptives.  You pop it into your mouth and swallow, feeling a tingle near your crotch after a moment.  You should be capable of bearing children again");
@@ -3288,7 +3288,7 @@ package classes.Scenes.Dungeons
 		public function takeBarrenPills():void {
 			clearOutput();
 			//{Already contraceptive'ed} 
-			if(player.findStatusAffect(StatusAffects.Contraceptives) >= 0) outputText("You're already under the effects of contraceptives.  Taking one of the brown pills wouldn't do anything.");
+			if(player.hasStatusAffect(StatusAffects.Contraceptives)) outputText("You're already under the effects of contraceptives.  Taking one of the brown pills wouldn't do anything.");
 			//{TAKE DAT SHIT YO}
 			else {
 				outputText("You figure one of these brown pills should render you barren, and you pop it into your mouth, not wanting to be impregnated.");

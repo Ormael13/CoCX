@@ -91,7 +91,7 @@ package classes.Scenes.Areas
 				return;
 			}
 			//10% chance of hairdresser encounter if not found yet
-			if (rand(10) == 0 && player.findStatusAffect(StatusAffects.HairdresserMeeting) < 0) chooser = 4;
+			if (rand(10) == 0 && !player.hasStatusAffect(StatusAffects.HairdresserMeeting)) chooser = 4;
 			if ((rand(8) == 0 && flags[kFLAGS.MARAE_QUEST_START] >= 1) && flags[kFLAGS.FACTORY_FOUND] <= 0) {
 				trace("Dungeon start!")
 				kGAMECLASS.dungeons.enterFactory();
@@ -123,7 +123,7 @@ package classes.Scenes.Areas
 			//Minotauuuuur
 			if (chooser == 1) {
 				spriteSelect(44);
-				if (player.findStatusAffect(StatusAffects.TF2) < 0 && player.level <= 1 && player.str <= 40) {
+				if (!player.hasStatusAffect(StatusAffects.TF2) && player.level <= 1 && player.str <= 40) {
 					if (silly()) {
 						//(Ideally, this should occur the first time the player would normally get an auto-rape encounter with the minotaur. The idea is to give a breather encounter to serve as a warning of how dangerous the mountain is)
 						outputText("Crossing over the treacherous mountain paths, you walk past an ominous cave.  The bones and the smell of death convince you to hasten your pace.  However, as you walk by, you hear a deep bellow and a snort as a monstrous man with a bull's head steps out.  With hell in his eyes and a giant ax in his hand, he begins to approach you in clear rage.  As he comes out into the light, you see that he is completely naked and sports a monstrous erection as angry as the minotaur himself, freely leaking a steady stream of pre-cum as he stalks you.\n\n", true);
@@ -146,7 +146,7 @@ package classes.Scenes.Areas
 					return;
 				}
 				//Mino gangbang
-				if (player.findStatusAffect(StatusAffects.MinoPlusCowgirl) < 0 || rand(10) == 0) {
+				if (!player.hasStatusAffect(StatusAffects.MinoPlusCowgirl) || rand(10) == 0) {
 					if (flags[kFLAGS.HAS_SEEN_MINO_AND_COWGIRL] == 1 && player.cowScore() >= 4 && player.lactationQ() >= 200 && player.biggestTitSize() >= 3 && player.minotaurAddicted()) {
 						//PC must be a cowmorph (horns, legs, ears, tail, lactating, breasts at least C-cup)
 						//Must be addicted to minocum
@@ -177,7 +177,7 @@ package classes.Scenes.Areas
 						return;
 					}
 					flags[kFLAGS.HAS_SEEN_MINO_AND_COWGIRL] = 1;
-					if (player.findStatusAffect(StatusAffects.MinoPlusCowgirl) < 0) player.createStatusAffect(StatusAffects.MinoPlusCowgirl, 0, 0, 0, 0);
+					if (!player.hasStatusAffect(StatusAffects.MinoPlusCowgirl)) player.createStatusAffect(StatusAffects.MinoPlusCowgirl, 0, 0, 0, 0);
 					else player.addStatusValue(StatusAffects.MinoPlusCowgirl, 1, 1);
 					outputText("As you pass a shadowy cleft in the mountainside, you hear the sounds of a cow coming out from it. Wondering how a cow got up here, but mindful of this land's dangers, you cautiously sneak closer and peek around the corner.\n\n", true);
 					outputText("What you see is not a cow, but two large human-shaped creatures with pronounced bovine features -- tails, horns, muzzles, and hooves instead of feet. They're still biped, however, and their genders are obvious due to their stark nudity. One has massive, udder-like breasts and wide hips, the other a gigantic, horse-like dong and a heavy set of balls more appropriate to a breeding stud than a person. You've stumbled upon a cow-girl and a minotaur.\n\n", false);
@@ -214,8 +214,8 @@ package classes.Scenes.Areas
 			//Worms
 			if (chooser == 2) {
 				//If worms are on and not infested.
-				if (player.findStatusAffect(StatusAffects.WormsOn) >= 0 && player.findStatusAffect(StatusAffects.Infested) < 0) {
-					if (player.findStatusAffect(StatusAffects.WormsHalf) >= 0 && rand(2) == 0) {
+				if (player.hasStatusAffect(StatusAffects.WormsOn) && !player.hasStatusAffect(StatusAffects.Infested)) {
+					if (player.hasStatusAffect(StatusAffects.WormsHalf) && rand(2) == 0) {
 						if (player.cor < 90) {
 							outputText("Your hike in the mountains, while fruitless, reveals pleasant vistas and provides you with good exercise and relaxation.", true);
 							dynStats("tou", .25, "spe", .5, "lus", player.lib / 10 - 15);
@@ -231,8 +231,8 @@ package classes.Scenes.Areas
 				}
 				else {
 					//If worms are off or the PC is infested, no worms.
-					if (player.findStatusAffect(StatusAffects.WormsOff) >= 0 || player.findStatusAffect(StatusAffects.Infested) >= 0 || (rand(2) == 0 && player.findStatusAffect(StatusAffects.WormsHalf) >= 0)) {
-						if (player.findStatusAffect(StatusAffects.WormsOff) >= 0 && player.findStatusAffect(StatusAffects.MetWorms) < 0) {
+					if (player.hasStatusAffect(StatusAffects.WormsOff) || player.hasStatusAffect(StatusAffects.Infested) || (rand(2) == 0 && player.hasStatusAffect(StatusAffects.WormsHalf))) {
+						if (player.hasStatusAffect(StatusAffects.WormsOff) && !player.hasStatusAffect(StatusAffects.MetWorms)) {
 							wormsScene.wormEncounter(); //You can only encounter the worms once.
 							return;
 						}
@@ -254,9 +254,9 @@ package classes.Scenes.Areas
 			//Hellhound
 			if (chooser == 3) {
 				spriteSelect(27);
-				if (player.findStatusAffect(StatusAffects.WormsOn) >= 0 && rand(2) == 0) {
+				if (player.hasStatusAffect(StatusAffects.WormsOn) && rand(2) == 0) {
 					//If lowered encounter rate, 25% chance, otherwise 50%.
-					if (player.findStatusAffect(StatusAffects.WormsHalf) >= 0 && rand(2) == 0) {
+					if (player.hasStatusAffect(StatusAffects.WormsHalf) && rand(2) == 0) {
 						hellHoundScene.hellhoundEncounter();
 						return;
 					}
@@ -389,7 +389,7 @@ package classes.Scenes.Areas
 			//Chance to impregnate PC, get mino-fix, and maybe relief from feeder perk.
 			player.minoCumAddiction(10);
 			player.knockUp(PregnancyStore.PREGNANCY_MINOTAUR, PregnancyStore.INCUBATION_MINOTAUR);
-			if (player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+			if (player.hasStatusAffect(StatusAffects.Feeder)) {
 				//You've now been milked, reset the timer for that
 				player.addStatusValue(StatusAffects.Feeder, 1, 1);
 				player.changeStatusValue(StatusAffects.Feeder, 2, 0);

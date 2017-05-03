@@ -787,7 +787,7 @@
 		{
 			var attack:Boolean = true;
 			//Blind dodge change
-			if (findStatusAffect(StatusAffects.Blind) >= 0) {
+			if (hasStatusAffect(StatusAffects.Blind)) {
 				attack &&= handleBlind();
 			}
 			attack &&= !playerDodged();
@@ -942,20 +942,20 @@
 
 		public function doAI():void
 		{
-			if (findStatusAffect(StatusAffects.Stunned) >= 0 || findStatusAffect(StatusAffects.FreezingBreathStun) >= 0) {
+			if (hasStatusAffect(StatusAffects.Stunned) || hasStatusAffect(StatusAffects.FreezingBreathStun)) {
 				if (!handleStun()) return;
 			}
-			if (findStatusAffect(StatusAffects.Fear) >= 0) {
+			if (hasStatusAffect(StatusAffects.Fear)) {
 				if (!handleFear()) return;
 			}
 			//Exgartuan gets to do stuff!
-			if (game.player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && game.player.statusAffectv2(StatusAffects.Exgartuan) == 0 && rand(3) == 0) {
+			if (game.player.hasStatusAffect(StatusAffects.Exgartuan) && game.player.statusAffectv2(StatusAffects.Exgartuan) == 0 && rand(3) == 0) {
 				if (game.exgartuan.exgartuanCombatUpdate()) game.outputText("\n\n", false);
 			}
-			if (findStatusAffect(StatusAffects.Constricted) >= 0 || findStatusAffect(StatusAffects.ConstrictedScylla) >= 0 || findStatusAffect(StatusAffects.GooEngulf) >= 0) {
+			if (hasStatusAffect(StatusAffects.Constricted) || hasStatusAffect(StatusAffects.ConstrictedScylla) || hasStatusAffect(StatusAffects.GooEngulf)) {
 				if (!handleConstricted()) return;
 			}
-			if (findStatusAffect(StatusAffects.AbilityCooldown1) >= 0 ) {
+			if (hasStatusAffect(StatusAffects.AbilityCooldown1) ) {
 				if (statusAffectv1(StatusAffects.AbilityCooldown1) <= 0) {
 					removeStatusAffect(StatusAffects.AbilityCooldown1);
 				}
@@ -1053,9 +1053,9 @@
 		{
 			if (statusAffectv1(StatusAffects.Stunned) <= 0) removeStatusAffect(StatusAffects.Stunned);
 			else addStatusValue(StatusAffects.Stunned, 1, -1);
-			if (findStatusAffect(StatusAffects.InkBlind) >= 0) game.outputText("Your foe is busy trying to remove the ink and therefore does no other action then flay its hand about its face.", false);
-			else if (findStatusAffect(StatusAffects.FreezingBreathStun) >= 0) game.outputText("Your foe is too busy trying to break out of his icy prison to fight back.", false);
-			else if (findStatusAffect(StatusAffects.MonsterAttacksDisabled) >= 0) game.outputText(capitalA + short + " try to hit you but is unable to reach you!", false);
+			if (hasStatusAffect(StatusAffects.InkBlind)) game.outputText("Your foe is busy trying to remove the ink and therefore does no other action then flay its hand about its face.", false);
+			else if (hasStatusAffect(StatusAffects.FreezingBreathStun)) game.outputText("Your foe is too busy trying to break out of his icy prison to fight back.", false);
+			else if (hasStatusAffect(StatusAffects.MonsterAttacksDisabled)) game.outputText(capitalA + short + " try to hit you but is unable to reach you!", false);
 			else {
 			if (plural) game.outputText("Your foes are too dazed from your last hit to strike back!", false);
 			else game.outputText("Your foe is too dazed from your last hit to strike back!", false);
@@ -1152,7 +1152,7 @@
 			outputDefaultTeaseReaction(lustDelta);
 			if(lustDelta > 0) {
 				//Imp mob uber interrupt!
-			  	if(findStatusAffect(StatusAffects.ImpUber) >= 0) { // TODO move to proper class
+			  	if(hasStatusAffect(StatusAffects.ImpUber)) { // TODO move to proper class
 					outputText("\nThe imps in the back stumble over their spell, their loincloths tenting obviously as your display interrupts their casting.  One of them spontaneously orgasms, having managed to have his spell backfire.  He falls over, weakly twitching as a growing puddle of whiteness surrounds his defeated form.", false);
 					//(-5% of max enemy HP)
 					HP -= bonusHP * .05;
@@ -1317,17 +1317,18 @@
 
 		public function combatRoundUpdate():void
 		{
-			if(findStatusAffect(StatusAffects.MilkyUrta) >= 0) {
+			if(hasStatusAffect(StatusAffects.MilkyUrta)) {
 				game.urtaQuest.milkyUrtaTic();
 			}
 			//Countdown
-			if(findStatusAffect(StatusAffects.TentacleCoolDown) >= 0) {
-				addStatusValue(StatusAffects.TentacleCoolDown,1,-1);
-				if(statusAffect(findStatusAffect(StatusAffects.TentacleCoolDown)).value1 == 0) {
+			var sac:StatusAffectClass = statusAffectByType(StatusAffects.TentacleCoolDown);
+			if(sac) {
+				sac.value1 -= 1;
+				if (sac.value1 <= 0) {
 					removeStatusAffect(StatusAffects.TentacleCoolDown);
 				}
 			}
-			if(findStatusAffect(StatusAffects.CoonWhip) >= 0) {
+			if(hasStatusAffect(StatusAffects.CoonWhip)) {
 				if(statusAffectv2(StatusAffects.CoonWhip) <= 0) {
 					armorDef += statusAffectv1(StatusAffects.CoonWhip);
 					outputText("<b>Tail whip wears off!</b>\n\n");
@@ -1341,7 +1342,7 @@
 					outputText(" armor by " + statusAffectv1(StatusAffects.CoonWhip) + ".</b>\n\n")
 				}
 			}
-			if(findStatusAffect(StatusAffects.TailSlamWhip) >= 0) {
+			if(hasStatusAffect(StatusAffects.TailSlamWhip)) {
 				if(statusAffectv2(StatusAffects.TailSlamWhip) <= 0) {
 					armorDef += statusAffectv1(StatusAffects.TailSlamWhip);
 					outputText("<b>Tail slam wears off!</b>\n\n");
@@ -1355,7 +1356,7 @@
 					outputText(" armor to 0.</b>\n\n")
 				}
 			}
-			if(findStatusAffect(StatusAffects.Blind) >= 0) {
+			if(hasStatusAffect(StatusAffects.Blind)) {
 				addStatusValue(StatusAffects.Blind,1,-1);
 				if(statusAffectv1(StatusAffects.Blind) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer blind!</b>\n\n", false);
@@ -1363,7 +1364,7 @@
 				}
 				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently blind!</b>\n\n", false);
 			}
-			if(findStatusAffect(StatusAffects.InkBlind) >= 0) {
+			if(hasStatusAffect(StatusAffects.InkBlind)) {
 				addStatusValue(StatusAffects.InkBlind,1,-1);
 				if(statusAffectv1(StatusAffects.InkBlind) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer blind!</b>\n\n", false);
@@ -1371,7 +1372,7 @@
 				}
 				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently blind!</b>\n\n", false);
 			}
-			if(findStatusAffect(StatusAffects.FreezingBreathStun) >= 0) {
+			if(hasStatusAffect(StatusAffects.FreezingBreathStun)) {
 				addStatusValue(StatusAffects.FreezingBreathStun,1,-1);
 				if(statusAffectv1(StatusAffects.FreezingBreathStun) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer encased in the ice prison!</b>\n\n", false);
@@ -1379,19 +1380,19 @@
 				}
 				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently encased in the ice prison!</b>\n\n", false);
 			}
-			if(findStatusAffect(StatusAffects.Earthshield) >= 0) {
+			if(hasStatusAffect(StatusAffects.Earthshield)) {
 				outputText("<b>" + capitalA + short + " is protected by a shield of rocks!</b>\n\n");
 			}
-			if(findStatusAffect(StatusAffects.Flying) >= 0) {
+			if(hasStatusAffect(StatusAffects.Flying)) {
 				addStatusValue(StatusAffects.Flying,1,-1);
 				if(statusAffectv1(StatusAffects.Flying) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer flying!</b>\n\n", false);
 					removeStatusAffect(StatusAffects.Flying);
 				}
 			}
-			if(findStatusAffect(StatusAffects.Sandstorm) >= 0) {
+			if(hasStatusAffect(StatusAffects.Sandstorm)) {
 				//Blinded:
-				if(player.findStatusAffect(StatusAffects.Blind) >= 0) {
+				if(player.hasStatusAffect(StatusAffects.Blind)) {
 					outputText("<b>You blink the sand from your eyes, but you're sure that more will get you if you don't end it soon!</b>\n\n");
 					player.removeStatusAffect(StatusAffects.Blind);
 				}
@@ -1408,10 +1409,10 @@
 				}
 				addStatusValue(StatusAffects.Sandstorm,1,1);
 			}
-			if(findStatusAffect(StatusAffects.Stunned) >= 0) {
+			if(hasStatusAffect(StatusAffects.Stunned)) {
 				outputText("<b>" + capitalA + short + " is still stunned!</b>\n\n", false);
 			}
-			if(findStatusAffect(StatusAffects.Shell) >= 0) {
+			if(hasStatusAffect(StatusAffects.Shell)) {
 				if(statusAffectv1(StatusAffects.Shell) >= 0) {
 					outputText("<b>A wall of many hues shimmers around " + a + short + ".</b>\n\n");
 					addStatusValue(StatusAffects.Shell,1,-1);
@@ -1421,7 +1422,7 @@
 					removeStatusAffect(StatusAffects.Shell);
 				}
 			}
-			if(findStatusAffect(StatusAffects.IzmaBleed) >= 0) {
+			if(hasStatusAffect(StatusAffects.IzmaBleed)) {
 				//Countdown to heal
 				addStatusValue(StatusAffects.IzmaBleed,1,-1);
 				//Heal wounds
@@ -1437,7 +1438,7 @@
 					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n", false);
 				}
 			}
-			if(findStatusAffect(StatusAffects.SharkBiteBleed) >= 0) {
+			if(hasStatusAffect(StatusAffects.SharkBiteBleed)) {
 				//Countdown to heal
 				addStatusValue(StatusAffects.SharkBiteBleed,1,-1);
 				//Heal wounds
@@ -1453,12 +1454,12 @@
 					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your bite left behind. <b>(<font color=\"#800000\">" + store3 + "</font>)</b>\n\n", false);
 				}
 			}
-			if(findStatusAffect(StatusAffects.Timer) >= 0) {
+			if(hasStatusAffect(StatusAffects.Timer)) {
 				if(statusAffectv1(StatusAffects.Timer) <= 0)
 					removeStatusAffect(StatusAffects.Timer);
 				addStatusValue(StatusAffects.Timer,1,-1);
 			}
-			if(findStatusAffect(StatusAffects.LustStick) >= 0) {
+			if(hasStatusAffect(StatusAffects.LustStick)) {
 				//LoT Effect Messages:
 				switch(statusAffectv1(StatusAffects.LustStick)) {
 					//First:
@@ -1492,13 +1493,13 @@
 				//Reduced by lust vuln of course
 				lust += Math.round(lustVuln * (5 + statusAffectv2(StatusAffects.LustStick)));
 			}
-			if(findStatusAffect(StatusAffects.PCTailTangle) >= 0) {
+			if(hasStatusAffect(StatusAffects.PCTailTangle)) {
 				//when Entwined
 				outputText("You are bound tightly in the kitsune's tails.  <b>The only thing you can do is try to struggle free!</b>\n\n");
 				outputText("Stimulated by the coils of fur, you find yourself growing more and more aroused...\n\n");
 				game.dynStats("lus", 5+player.sens/10);
 			}
-			if(findStatusAffect(StatusAffects.QueenBind) >= 0) {
+			if(hasStatusAffect(StatusAffects.QueenBind)) {
 				outputText("You're utterly restrained by the Harpy Queen's magical ropes!\n\n");
 				if(flags[kFLAGS.PC_FETISH] >= 2) game.dynStats("lus", 3);
 			}
@@ -1510,7 +1511,7 @@
 				game.dynStats("lus", 1+rand(8));
 			}
 			//[LUST GAINED PER ROUND] - Omnibus
-			if(findStatusAffect(StatusAffects.LustAura) >= 0) {
+			if(hasStatusAffect(StatusAffects.LustAura)) {
 				if(player.lust < (player.maxLust() * 0.33)) outputText("Your groin tingles warmly.  The demon's aura is starting to get to you.\n\n", false);
 		 		if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("You blush as the demon's aura seeps into you, arousing you more and more.\n\n", false);
 		  		if(player.lust >= (player.maxLust() * 0.66)) {
@@ -1524,7 +1525,7 @@
 				game.dynStats("lus", (3 + int(player.lib/20 + player.cor/30)));
 			}
 			//immolation DoT
-			if (findStatusAffect(StatusAffects.ImmolationDoT) >= 0) {
+			if (hasStatusAffect(StatusAffects.ImmolationDoT)) {
 				//Countdown to heal
 				addStatusValue(StatusAffects.ImmolationDoT,1,-1);
 				//Heal wounds
@@ -1541,7 +1542,7 @@
 				}
 			}
 			//Burn DoT
-			if (findStatusAffect(StatusAffects.BurnDoT) >= 0) {
+			if (hasStatusAffect(StatusAffects.BurnDoT)) {
 				//Countdown to heal
 				addStatusValue(StatusAffects.BurnDoT,1,-1);
 				//Heal wounds

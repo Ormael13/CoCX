@@ -52,7 +52,7 @@ WIN:
 			//Reset if she finds someone to take it (random at high values)
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] >= 300 && model.time.hours == 1 && rand(5) == 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] = 1;
 			//hangover status stuff
-			if (player.findStatusAffect(StatusAffects.Hangover) >= 0) {
+			if (player.hasStatusAffect(StatusAffects.Hangover)) {
 			//Countdown
 				if (player.statusAffectv1(StatusAffects.Hangover) > 0) player.addStatusValue(StatusAffects.Hangover,1,-1);
 				else {
@@ -561,7 +561,7 @@ private function applyHangover():void {
 	//v4 = intelligence
 
 	//Already hungover?  Reset duration.
-	if(player.findStatusAffect(StatusAffects.Hangover) >= 0) player.changeStatusValue(StatusAffects.Hangover,1,8);
+	if(player.hasStatusAffect(StatusAffects.Hangover)) player.changeStatusValue(StatusAffects.Hangover,1,8);
 	//No hangover yet?  Create and yoink stats
 	else {
 		player.createStatusAffect(StatusAffects.Hangover,8,0,0,0);

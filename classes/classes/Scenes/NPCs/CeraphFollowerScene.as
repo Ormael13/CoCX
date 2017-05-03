@@ -166,7 +166,7 @@ package classes.Scenes.NPCs
 			var marbles:Function =null;
 			var dominika:Function =null;
 			if (flags[kFLAGS.TIMES_FUCKED_URTA] > 0 && (player.hasCock() || player.hasVagina()) && player.lust >= 33) urta = ceraphUrtaRoleplay;
-			if (player.hasCock() && player.cockThatFits(70) >= 0 && player.findStatusAffect(StatusAffects.Marble) >= 0 && player.lust >= 33) marbles = sweetieNOOOO;
+			if (player.hasCock() && player.cockThatFits(70) >= 0 && player.hasStatusAffect(StatusAffects.Marble) && player.lust >= 33) marbles = sweetieNOOOO;
 			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0 && player.lust >= 33 && player.hasCock()) dominika = cerminika;
 			if (player.lust < 33) outputText("\n\n<b>You aren't turned on enough for sex.</b>", false);
 			menu();

@@ -75,7 +75,7 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\nMarble hesitantly looks up at you, brows furrowed in thought. \"<i>Well, it’s the corruption that makes my milk addictive in the first place, so we need to find a way to purify me.  The most corrupted part of me is my milk, so that’s where we should start,</i>\" she suggests, rubbing her chin in thought.");
 	 	outputText("\n\nYou contemplate the possibilities, and make some suggestions on things that could reduce her corruption.");
 		if(player.hasItem(consumables.PURHONY)) outputText("  You then recall that bottle of honey the bee-girl gave you, and ask if maybe it might work?");
-		if(player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) outputText("  You remember how Jojo helped you become pure, and suggest maybe his meditations could assist Marble?");
+		if(player.hasStatusAffect(StatusAffects.PureCampJojo)) outputText("  You remember how Jojo helped you become pure, and suggest maybe his meditations could assist Marble?");
 
 	 	outputText("\n\nMarble shakes her head before continuing, \"<i>No, I think we should focus on something linked to my race.  Maybe we can use the LaBova stuff that my mother taught me to drink if I was ever turned into something else.  It’s probably corrupted in its raw form, but maybe there is some way it could be purified to counter the corrupt effects? I think you’d need an alchemist to purify it, though...</i>\" she trails off, musing at the possibility.");
 	 	outputText("\n\nYou point out that LaBova is very rare, and ask how you’d go about getting enough of it to help Marble.");
@@ -146,7 +146,7 @@ package classes.Scenes.NPCs {
 	{
 		clearOutput();
 		//if (Rathazul is not in camp)
-		if(player.findStatusAffect(StatusAffects.CampRathazul) < 0)
+		if(!player.hasStatusAffect(StatusAffects.CampRathazul))
 		{
 		 	outputText("You spot the elderly alchemist's camp on the lake once more.\n\n");
 		}
@@ -157,7 +157,7 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\nYou smile and thank him for the information, then turn to return to Marble, promising to be back with some of her milk as fast as you can.");
 		//if (Rathazul is not in camp)
 		//the quest is written under the assumption that Rath is in your camp.  I recently found out it is possible to lock him out of being a follower, so I added in this section to ensure that he is.
-		if(player.findStatusAffect(StatusAffects.CampRathazul) < 0)
+		if(!player.hasStatusAffect(StatusAffects.CampRathazul))
 		{
 		 	outputText("\n\n\"<i>Whoa, hold on there, " + player.mf("boy","girl") + ",</i>\" Rathazul stops you, \"<i>Hearing about your quest for purification makes my heart feel warm again for the first time in years.  In exchange for helping you out in this endeavor, please allow me stay at your camp.  I'm sure you'd appreciate saving yourself the trouble of going back and forth for each little thing.</i>\"");
 		 	outputText("\n\nConsidering just how important his help has been in purifying Marble, you doubt that you'd be able to get any further without his help, and agree to let him stay in your camp.");
@@ -330,7 +330,7 @@ package classes.Scenes.NPCs {
 			}
 			//if (pure Jojo is in camp)
 			//pure Jojo’s response to being asked to have tea
-			if(player.findStatusAffect(StatusAffects.PureCampJojo) >= 0)
+			if(player.hasStatusAffect(StatusAffects.PureCampJojo))
 			{
 			 	outputText("\n\nWhen you get to Jojo’s meditation spot and ask him if he is interested in coming to the campfire for tea, the murine monk looks surprised, but nods his head. <i>\"Tea would be delightful, thank you. It’s been a long time since I was able to enjoy a civil activity such as that.\"</i>");
 				//temp follower variable ++
@@ -437,7 +437,7 @@ package classes.Scenes.NPCs {
 	{
 		startCombat(new Clara());
 		player.createStatusAffect(StatusAffects.NoFlee,0,0,0,0);
-		if(inCamp && player.findStatusAffect(StatusAffects.ClaraFoughtInCamp) < 0) player.createStatusAffect(StatusAffects.ClaraFoughtInCamp,0,0,0,0);
+		if(inCamp && !player.hasStatusAffect(StatusAffects.ClaraFoughtInCamp)) player.createStatusAffect(StatusAffects.ClaraFoughtInCamp,0,0,0,0);
 	}
 	//Chose submit
 	public function voluntarilyChooseCowCuntBadEndYouBad():void
@@ -549,7 +549,7 @@ package classes.Scenes.NPCs {
 			 	outputText("\n\n\"<i>Little bitch!</i>\"  The cowgirl snarls, standing up to her full impressive height.  \"<i>I will teach you not to try something like this again.</i>\"  Isabella grabs her shield and brandishes it prominently, ready to use it for defense and to bludgeon.");
 			}
 			//if (Jojo is in camp)
-			if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0)
+			if(player.hasStatusAffect(StatusAffects.CampRathazul))
 			{
 			 	outputText("\n\n\"<i>I wouldn’t have done that if I were you,</i>\" Jojo says, rising off the ground and retrieving his staff.  Falling into a combat pose, his face contorts into an almost uncharacteristic visage of anger directed at the woman before you.");
 			}
@@ -844,14 +844,14 @@ package classes.Scenes.NPCs {
 		{
 			//Clara is taken out by Marble
 			//If the camp fight lasts 10 rounds
-			if(player.statusAffectv1(StatusAffects.ClaraCombatRounds) >= 10 && player.findStatusAffect(StatusAffects.ClaraFoughtInCamp) >= 0)
+			if(player.statusAffectv1(StatusAffects.ClaraCombatRounds) >= 10 && player.hasStatusAffect(StatusAffects.ClaraFoughtInCamp))
 			{
 				clearOutput();
 			 	outputText("A loud boom reverberates through the air as Marble uses her hammer to strike Clara on the back of the head, returning the favor that took her out earlier.  Your assailant drops to the ground instantly, ending the fight right there.  You consider asking if the young bovine will be all right, but given that Marble seems to have picked herself back up in a hurry, that is unlikely to be a problem.  Instead you ask your mate to see how she is holding up.  Other than a bump on the head, Marble tells you she'll be fine.  Bovine fortitude is once again proven to be formidable as Clara stirs on the ground.  In less than a minute, you and Marble are standing over the defeated, but conscious, form of your lover's sister.");
 			}
 			//Continue to common camp victory
 			//PC drags Clara back to camp, was originally planning on putting more rapes here, but 7 with Marble are probably enough.
-			else if(player.findStatusAffect(StatusAffects.ClaraFoughtInCamp) < 0)
+			else if(!player.hasStatusAffect(StatusAffects.ClaraFoughtInCamp))
 			{
 			 	outputText("Worried about the others, you head out of the cellar and drag Clara and her things with you.  Thanks to the strange way that travel works in this world, it doesn't take you long to find your way back to camp.  You catch your followers there just before they head out to go looking for you and dump your would be kidnaper before them.  Marble steps up next to you and looks down at her sister.");
 				//continue to common victory

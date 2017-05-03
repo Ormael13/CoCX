@@ -119,7 +119,7 @@ public function processJackFrostEvent():void {
 		doNext(camp.returnToCampUseEightHours);
 	}
 	//Rathazul
-	else if(player.findStatusAffect(StatusAffects.CampRathazul) >= 0 && flags[kFLAGS.JACK_FROST_PROGRESS] == 2) {
+	else if(player.hasStatusAffect(StatusAffects.CampRathazul) && flags[kFLAGS.JACK_FROST_PROGRESS] == 2) {
 		outputText("Rathazul approaches you.  \"<i>[name]?  What is going on?  It hasn't snowed in Mareth for years now.  And why only around the camp?  I wandered out to investigate, but outside there is no snow at all...</i>\" he asks, concerned.");
 		
 		outputText("\n\nYou tell Rathazul that you met a friendly... er... wizard up in the mountains who wanted to try and bring snow back to Mareth.  You offered to let him cast it out over your camp, so it's basically being flung from the mountains to land here.  But, really, why is he worrying about it?  This is the first time it's happened in years, doesn't he want to enjoy it while it lasts, before it melts away?");
@@ -160,9 +160,9 @@ public function processJackFrostEvent():void {
 		return;
 	}
 	//Jojo
-	else if((player.findStatusAffect(StatusAffects.PureCampJojo) >= 0 || jojoScene.campCorruptJojo()) && flags[kFLAGS.JACK_FROST_PROGRESS] <= 4) {
+	else if((player.hasStatusAffect(StatusAffects.PureCampJojo) || jojoScene.campCorruptJojo()) && flags[kFLAGS.JACK_FROST_PROGRESS] <= 4) {
 		//Pure
-		if(player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) {
+		if(player.hasStatusAffect(StatusAffects.PureCampJojo)) {
 			outputText("Jojo is sitting on his usual rock, one hand out to catch snowflakes with a beatific smile of awe on his face.  \"<i>Look, [name], snow!  I haven't seen snow since I was a very, very small boy.</i>\"  He tells you.");
 			
 			outputText("\n\nSo is he enjoying it?  You ask.  If so, then it was worth it getting someone to make it snow on your camp.");
@@ -295,7 +295,7 @@ public function processJackFrostEvent():void {
 		addButton(0,"Next",processJackFrostEvent);
 	}
 	//Marble (Written by TDM himself)
-	else if(flags[kFLAGS.JACK_FROST_PROGRESS] <= 7 && player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
+	else if(flags[kFLAGS.JACK_FROST_PROGRESS] <= 7 && player.hasStatusAffect(StatusAffects.CampMarble)) {
 		flags[kFLAGS.JACK_FROST_PROGRESS] = 8;
 		//With Kids
 		if(flags[kFLAGS.MARBLE_KIDS] > 0 && flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] >= 100) {

@@ -996,11 +996,11 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		for (i = 0; i < player.statusAffects.length; i++)
 		{
 			//trace("Populate One statusAffects");
-			saveFile.data.statusAffects[i].statusAffectName = player.statusAffect(i).stype.id;
-			saveFile.data.statusAffects[i].value1 = player.statusAffect(i).value1;
-			saveFile.data.statusAffects[i].value2 = player.statusAffect(i).value2;
-			saveFile.data.statusAffects[i].value3 = player.statusAffect(i).value3;
-			saveFile.data.statusAffects[i].value4 = player.statusAffect(i).value4;
+			saveFile.data.statusAffects[i].statusAffectName = player.statusAffectByIndex(i).stype.id;
+			saveFile.data.statusAffects[i].value1 = player.statusAffectByIndex(i).value1;
+			saveFile.data.statusAffects[i].value2 = player.statusAffectByIndex(i).value2;
+			saveFile.data.statusAffects[i].value3 = player.statusAffectByIndex(i).value3;
+			saveFile.data.statusAffects[i].value4 = player.statusAffectByIndex(i).value4;
 		}
 		//Set keyItem Array
 		for (i = 0; i < player.keyItems.length; i++)
@@ -2304,12 +2304,12 @@ public function unFuckSave():void
 		}
 	}
 	
-	if (player.findStatusAffect(StatusAffects.KnockedBack) >= 0)
+	if (player.hasStatusAffect(StatusAffects.KnockedBack))
 	{
 		player.removeStatusAffect(StatusAffects.KnockedBack);
 	}
 	
-	if (player.findStatusAffect(StatusAffects.Tentagrappled) >= 0)
+	if (player.hasStatusAffect(StatusAffects.Tentagrappled))
 	{
 		player.removeStatusAffect(StatusAffects.Tentagrappled);
 	}
@@ -2318,7 +2318,7 @@ public function unFuckSave():void
 	if (isNaN(model.time.hours)) model.time.hours = 0;
 	if (isNaN(model.time.days)) model.time.days = 0;
 
-	if (player.findStatusAffect(StatusAffects.SlimeCraving) >= 0 && player.statusAffectv4(StatusAffects.SlimeCraving) == 1) {
+	if (player.hasStatusAffect(StatusAffects.SlimeCraving) && player.statusAffectv4(StatusAffects.SlimeCraving) == 1) {
 		player.changeStatusValue(StatusAffects.SlimeCraving, 3, player.statusAffectv2(StatusAffects.SlimeCraving)); //Duplicate old combined strength/speed value
 		player.changeStatusValue(StatusAffects.SlimeCraving, 4, 1); //Value four indicates this tracks strength and speed separately
 	}
@@ -2438,8 +2438,8 @@ public function unFuckSave():void
 		}
 
 		if (flags[kFLAGS.TAMANI_PREGNANCY_TYPE] != 0) return; //Must be a new format save
-		if (player.findStatusAffect(StatusAffects.TamaniFemaleEncounter) >= 0) player.removeStatusAffect(StatusAffects.TamaniFemaleEncounter); //Wasn't used in previous code
-		if (player.findStatusAffect(StatusAffects.Tamani) >= 0) {
+		if (player.hasStatusAffect(StatusAffects.TamaniFemaleEncounter)) player.removeStatusAffect(StatusAffects.TamaniFemaleEncounter); //Wasn't used in previous code
+		if (player.hasStatusAffect(StatusAffects.Tamani)) {
 			if (player.statusAffectv1(StatusAffects.Tamani) == -500) { //This used to indicate that a player had met Tamani as a male
 				flags[kFLAGS.TAMANI_PREGNANCY_INCUBATION] = 0;
 				flags[kFLAGS.TAMANI_MET]                  = 1; //This now indicates the same thing

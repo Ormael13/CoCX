@@ -78,7 +78,7 @@ private function hasPinkEgg():Boolean {
 public function breakingKeltOptions():void {
 	clearOutput();
 	spriteSelect(35);
-	if((!player.hasCock() && flags[kFLAGS.KELT_BREAK_LEVEL] == 0) ||flags[kFLAGS.NEVER_RESIST_KELT] == 1 || player.statusAffectv2(StatusAffects.Kelt) >= 40 || player.findStatusAffect(StatusAffects.Kelt) < 0) {
+	if((!player.hasCock() && flags[kFLAGS.KELT_BREAK_LEVEL] == 0) ||flags[kFLAGS.NEVER_RESIST_KELT] == 1 || player.statusAffectv2(StatusAffects.Kelt) >= 40 || !player.hasStatusAffect(StatusAffects.Kelt)) {
 		farm.keltScene.keltEncounter();
 		return;
 	}

@@ -503,7 +503,7 @@ internal function defeatIzma():void {
 internal function IzmaWins():void {
 	clearOutput();
 	//(if Worms)
-	if(player.findStatusAffect(StatusAffects.Infested) >= 0) {
+	if(player.hasStatusAffect(StatusAffects.Infested)) {
 		kGAMECLASS.mountain.wormsScene.infestOrgasm();
 		outputText("\n\nIzma looks on in horror as you push out the load of wormy cargo onto the sand at her feet, only snapping out of her daze as several of the parasites begin climbing her ankle with an eye toward her cock.  She shrieks and jumps back, then drags her foot in the sand, dislodging or pulverizing the squirming vermin.  \"<i>" + player.short + ", that's nasty!  Get away!  Get away and don't talk to me again!  Ugh!</i>\"  She takes off, grabbing her chest of books and kicking sand up in her flight down the beach.", false);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00233] = 1;
@@ -1211,7 +1211,7 @@ private function acceptIzmaAsYourBitch():void {
 		//Flag that amily bitchfit has happened.
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00236] = -1;
 	}
-	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00237] == 0 && player.findStatusAffect(StatusAffects.CampMarble) >= 0) {
+	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00237] == 0 && player.hasStatusAffect(StatusAffects.CampMarble)) {
 		//[Marble is at camp when Izma arrives]
 		outputText("You smile warmly and place your hands on her shoulders, before pulling her in and kissing her deeply.  Practically melting at your touch and moaning into your mouth, she wraps her arms and tail around your waist.\n\n", false);
 
@@ -3145,7 +3145,7 @@ private function radarIzmaGasm():void {
 	//(Cum production High: 
 	else outputText("unleashing a cascade of steamy jizz into Izma's well fucked hole.  Your volume is so large that it causes a back draft of semen to rush out of her within mere seconds.");
 	//(If PC gave Izma a "goo job":
-	if(player.findStatusAffect(StatusAffects.Goojob) >= 0) {
+	if(player.hasStatusAffect(StatusAffects.Goojob)) {
 		player.removeStatusAffect(StatusAffects.Goojob);
 		outputText("  The sensation of being injected with her lover's seed is all the encouragement Izma's cock needs to finally erupt, shooting thick streams of steamy cum into your central mass; something your gooey form appreciates as it unconsciously works her load into your see through gut.");
 	}

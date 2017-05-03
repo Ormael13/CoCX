@@ -18,7 +18,7 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(findStatusAffect(StatusAffects.PhyllaFight) >= 0) {
+			if(hasStatusAffect(StatusAffects.PhyllaFight)) {
 				removeStatusAffect(StatusAffects.PhyllaFight);
 				outputText("You defeat a minotaur!  ", true);
 				game.desert.antsScene.phyllaBeatAMino();
@@ -29,7 +29,7 @@
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(findStatusAffect(StatusAffects.PhyllaFight) >= 0) {
+			if(hasStatusAffect(StatusAffects.PhyllaFight)) {
 				removeStatusAffect(StatusAffects.PhyllaFight);
 				game.desert.antsScene.phyllaPCLostToMino();
 			} else if (pcCameWorms){

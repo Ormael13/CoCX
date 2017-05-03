@@ -38,27 +38,27 @@ package classes.Scenes.Areas.Beach
 			if (choice == 0) eAttack();
 			if (choice == 1) gorgonPoisonBiteAttack();
 			if (choice == 2) {
-				if (player.findStatusAffect(StatusAffects.NagaBind) >= 0 || player.findStatusAffect(StatusAffects.Stunned) >= 0) TailWhip();
+				if (player.hasStatusAffect(StatusAffects.NagaBind) || player.hasStatusAffect(StatusAffects.Stunned)) TailWhip();
 				else gorgonConstrict();
 			}
 			if (choice == 3) {
-				if (player.findStatusAffect(StatusAffects.Stunned) >= 0) eAttack();
-				else if (player.findStatusAffect(StatusAffects.NagaBind) >= 0) gorgonPoisonBiteAttack();
+				if (player.hasStatusAffect(StatusAffects.Stunned)) eAttack();
+				else if (player.hasStatusAffect(StatusAffects.NagaBind)) gorgonPoisonBiteAttack();
 				else TailWhip();
 			}
 			if (choice == 4) {
-				if (player.findStatusAffect(StatusAffects.Stunned) >= 0) eAttack();
-				else if (player.findStatusAffect(StatusAffects.NagaBind) >= 0) {
+				if (player.hasStatusAffect(StatusAffects.Stunned)) eAttack();
+				else if (player.hasStatusAffect(StatusAffects.NagaBind)) {
 					if (rand(2) == 0) gorgonPoisonBiteAttack();
 					else TailWhip();
 				}
 				else {
-					if (findStatusAffect(StatusAffects.AbilityCooldown1) >= 0) {
+					if (hasStatusAffect(StatusAffects.AbilityCooldown1)) {
 						if (rand(2) == 0) gorgonPoisonBiteAttack();
 						else TailWhip();
 					}
 					else {
-						if (findStatusAffect(StatusAffects.Blind) >= 0) eAttack();
+						if (hasStatusAffect(StatusAffects.Blind)) eAttack();
 						else petrify();
 					}
 				}
@@ -69,7 +69,7 @@ package classes.Scenes.Areas.Beach
 			//(Deals damage over 4-5 turns, invariably reducing 
 			//your speed. It wears off once combat is over.)
 			outputText("The " + this.short + " strikes with the speed of a cobra, sinking her fangs into your flesh!  ", false);
-			if(player.findStatusAffect(StatusAffects.NagaVenom) < 0) {
+			if(!player.hasStatusAffect(StatusAffects.NagaVenom)) {
 				outputText("The venom's effects are almost instantaneous; your vision begins to blur and it becomes increasingly harder to stand.", false);
 				if(player.spe > 6) {
 					//stats(0,0,-3,0,0,0,0,0);
@@ -136,7 +136,7 @@ package classes.Scenes.Areas.Beach
 			outputText("With a moment of concentration she awakens normaly dormant snake hair that starts to hiss and then casual glance at you. Much to your suprise you noticing your fingers then hands starting to pertify... ", false);
 			player.createStatusAffect(StatusAffects.Stunned, 1, 0, 0, 0);
 			createStatusAffect(StatusAffects.AbilityCooldown1, 3, 0, 0, 0);
-			if (player.findStatusAffect(StatusAffects.NagaBind) >= 0) player.removeStatusAffect(StatusAffects.NagaBind);
+			if (player.hasStatusAffect(StatusAffects.NagaBind)) player.removeStatusAffect(StatusAffects.NagaBind);
 			combatRoundOver();
 		}
 		

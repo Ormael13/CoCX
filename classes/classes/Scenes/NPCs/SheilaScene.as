@@ -484,7 +484,7 @@ private function sheilaIsSorrySheRapedYou():void {
 	//[Forgive][Fight][Cast Arouse][Leave Me Alone]
 	addButton(0,"Forgive",sheilaIsSorryAndYouForgive);
 	addButton(1,"Fight",sheilaPologyFight);
-	if(player.findStatusAffect(StatusAffects.KnowsArouse) >= 0) addButton(2,"CastArouse",sheilaPologyCastArouse);
+	if(player.hasStatusAffect(StatusAffects.KnowsArouse)) addButton(2,"CastArouse",sheilaPologyCastArouse);
 	addButton(3,"LemmeAlone",sheilaIsSorryButLeaveMeAlone);
 	
 
@@ -2755,7 +2755,7 @@ private function forcedSheilaOral(dick:Boolean = true):void {
 		
 		outputText("\n\nYour [vagOrAss] squeezes around Sheila's hesitant tongue, turned on more by the spectacle of selling her body than by any of her poor efforts.  She squirms under you, rubbing her thighs together as you paint the worst pictures of her future you can imagine, and you climax");
 		//[(PC has met Lumi or Lynette)
-		if(player.findStatusAffect(StatusAffects.HairdresserMeeting) >= 0 || flags[kFLAGS.LUMI_MET] > 0) {
+		if(player.hasStatusAffect(StatusAffects.HairdresserMeeting) || flags[kFLAGS.LUMI_MET] > 0) {
 			outputText(" while imagining her turned over to the goblins for experiments, forced to drink potion after potion - most would be dedicated to growing cocks on her or increasing semen production, of course");
 		}
 		outputText(".  Your hole clenches and drools on her, and the woman's rude tongue retreats from the pressure, leaving you painfully empty.");
@@ -3610,9 +3610,9 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOutTOCAMP():void {
 	outputText("\n\n\"<i>Seems... nice,</i>\" Sheila says quietly, taking a seat, \"<i>but it's exposed - not to mention the big target sign.</i>\"  She looks at the portal, casting an ominous silhouette against the sky.  \"<i>I dunno about this.</i>\"");
 	
 	//[(if PC has thorn canopy on)
-	if(player.findStatusAffect(StatusAffects.DefenseCanopy) >= 0) outputText("\n\nYou shrug off her objections, pointing at the thorns already growing over your point of entry.  Sheila seems duly impressed by the quasi-magical display.");
+	if(player.hasStatusAffect(StatusAffects.DefenseCanopy)) outputText("\n\nYou shrug off her objections, pointing at the thorns already growing over your point of entry.  Sheila seems duly impressed by the quasi-magical display.");
 	//(else if PC has Jojo and Jojo's n.watch is on)
-	else if(player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0 || player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) {
+	else if(player.hasStatusAffect(StatusAffects.JojoNightWatch) || player.hasStatusAffect(StatusAffects.PureCampJojo)) {
 		outputText("\n\nYou wave Jojo over, introducing them and explaining that the monk watches the camp at night and you check it during the day.  The small white mouse bows politely to your guest, then seats himself nearby.  \"<i>Hello, Sheila,</i>\" he says.");
 	}
 	//(else if PC has Kid A and Kid's n.watch is on)
@@ -3628,14 +3628,14 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOutTOCAMP():void {
 	else outputText("You slip an arm around her, and ask if she's okay.");
 	outputText("  She nods mutely and pulls the food out of the fire.");
 	//[(if Jojo present)
-	if(player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0 || player.findStatusAffect(StatusAffects.PureCampJojo) >= 0) outputText("  She extends one bird to you and another to Jojo.  He raises his hand and shakes his head, but politely.");
+	if(player.hasStatusAffect(StatusAffects.JojoNightWatch) || player.hasStatusAffect(StatusAffects.PureCampJojo)) outputText("  She extends one bird to you and another to Jojo.  He raises his hand and shakes his head, but politely.");
 	else if(flags[kFLAGS.ANEMONE_WATCH] > 0) outputText("  Sheila offers you one of the birds, then extends another to your odd tenant.  The anemone's mouth tightens and she shakes her head vigorously, blushing a deep blue.");
 	outputText("  You eat in silence until the food is gone, and Sheila clears her throat.");
 	
 	outputText("\n\n\"<i>I need to go before dawn, so I'll get this out in case you're asleep when I do,</i>\" she announces, still looking at the ground.  \"<i>I appreciate the help... now, and from before.  Really, you're a bottler.</i>\"");
 	
 	//[(if no watch)
-	if(player.findStatusAffect(StatusAffects.JojoNightWatch) < 0 || player.findStatusAffect(StatusAffects.PureCampJojo) < 0 || flags[kFLAGS.ANEMONE_WATCH] == 0) outputText("\n\nShe gets to her feet as you grin, then makes her way over to your bedroll.  It doesn't take her long to fall asleep; you amuse yourself watching her toss and turn... and drool on your pillow.");
+	if(!player.hasStatusAffect(StatusAffects.JojoNightWatch) || !player.hasStatusAffect(StatusAffects.PureCampJojo) || flags[kFLAGS.ANEMONE_WATCH] == 0) outputText("\n\nShe gets to her feet as you grin, then makes her way over to your bedroll.  It doesn't take her long to fall asleep; you amuse yourself watching her toss and turn... and drool on your pillow.");
 	//(if watch)
 	else {
 		outputText("\n\nYou grin and get up, and Sheila tails you to your bed.  ");
@@ -4627,7 +4627,7 @@ private function sheilaAnalHateFuckAGoGo():void {
 	outputText("\n\n\"<i>[name]!  Finish in my pussy, please!  I want to raise your baby!  You're the only one that suits me!</i>\"");
 	
 	//if corruption >= 80 and PC has worms, present choices 
-	if(player.cor >= 80 && player.findStatusAffect(StatusAffects.Infested) >= 0) {
+	if(player.cor >= 80 && player.hasStatusAffect(StatusAffects.Infested)) {
 		menu();
 		//[No][Worms Suit You], else auto-output text from [No]
 		addButton(0,"No",sheilaAnalHateFuckAGoGoNO);

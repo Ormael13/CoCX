@@ -10,19 +10,19 @@
 		public function wandererRouter():void {
 	spriteSelect(42);
 	//First meeting...
-	if(player.findStatusAffect(StatusAffects.MeetWanderer) < 0) {
+	if(!player.hasStatusAffect(StatusAffects.MeetWanderer)) {
 		wandererFirstMeeting();
 		player.createStatusAffect(StatusAffects.MeetWanderer,0,0,0,0);
 	}
 	//Repeat offense!
 	else {
 		//Chosen demon ending
-		if(player.findStatusAffect(StatusAffects.WandererDemon) >= 0) {
+		if(player.hasStatusAffect(StatusAffects.WandererDemon)) {
 			wandererDemonEpilogue();
 			return;
 		}
 		//Chosen human ending
-		if(player.findStatusAffect(StatusAffects.WandererHuman) >= 0) {
+		if(player.hasStatusAffect(StatusAffects.WandererHuman)) {
 			wandererEpilogueHuman();
 			return;
 		}
@@ -85,7 +85,7 @@ private function wandererGoDemon():void {
 //Demonic epilogue v1
 private function wandererDemonEpilogue():void {
 	spriteSelect(42);
-	if(player.findStatusAffect(StatusAffects.WandererDemon) >= 0) {
+	if(player.hasStatusAffect(StatusAffects.WandererDemon)) {
 		//First time...
 		if(player.statusAffectv1(StatusAffects.WandererDemon) == 0) {
 			outputText("A winged shadow flashes by.  You look up, but can't find its source in the searing desert sun.   A tap on your shoulder is all the warning you get before a curvy body is pressed against you, stroking and touching you in all the right ways.\n\n", true);
@@ -94,7 +94,7 @@ private function wandererDemonEpilogue():void {
 			outputText("She steps away and blows a kiss as her wings unfurl.  With a powerful downstroke she scatters sand everywhere, forcing you to throw an arm in front of your eyes.  When the debris settles, she's gone.\n\n", false);
 			dynStats("lus", 5);
 			inventory.takeItem(consumables.SDELITE, camp.returnToCampUseOneHour);
-			player.statusAffect(player.findStatusAffect(StatusAffects.WandererDemon)).value1 = 1;
+			player.statusAffectByType(StatusAffects.WandererDemon).value1 = 1;
 		}
 		//Second Encounter
 		else if(player.statusAffectv1(StatusAffects.WandererDemon) == 1) {
@@ -115,7 +115,7 @@ private function wandererDemonEpilogue():void {
 //Human Epilogue 1
 private function wandererEpilogueHuman():void {
 	spriteSelect(42);
-	if(player.findStatusAffect(StatusAffects.WandererHuman) >= 0) {
+	if(player.hasStatusAffect(StatusAffects.WandererHuman)) {
 		//Human Epilogue 1
 		if(player.statusAffectv1(StatusAffects.WandererHuman) == 0) {
 			outputText("As you journey the desert, you see the twin figures of Marcus and his demonic companion, Lucia, in the distance.   Judging by the frantic bobbing of Lucia's head in Marcus's lap, she's just getting ready for a meal.  Closing the distance, you watch curiously as her throat bulges obscenely to keep up with the huge cum-load.  In time she flops back, a few huge globules of cum exploding onto her form like bursting water-balloons as Marcus' orgasm finishes, leaving her a cum-stained wreck.\n\n", true);
@@ -124,7 +124,7 @@ private function wandererEpilogueHuman():void {
 			else outputText("You openly leer at the crude display, whistling lewdly at the blissful couple.  Marcus looks up and gives a cocky smile, while Lucia licks her lips and gives you a predatory grin.", false);
 			dynStats("lus", 10);
 			//Value 1 is used to track the status of the end state.
-			player.statusAffect(player.findStatusAffect(StatusAffects.WandererHuman)).value1 = 1;
+			player.statusAffectByType(StatusAffects.WandererHuman).value1 = 1;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		//Human Epilogue 2

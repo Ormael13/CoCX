@@ -38,7 +38,7 @@ package classes.Scenes.Dungeons.HelDungeon
 		}
 		override protected function performCombatAction():void
 		{
-			if(player.findStatusAffect(StatusAffects.Stunned) >= 0) {
+			if(player.hasStatusAffect(StatusAffects.Stunned)) {
 				player.removeStatusAffect(StatusAffects.Stunned);
 				if(rand(2) == 0) BrigidAssGrind();
 				else brigidPoke();

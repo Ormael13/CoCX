@@ -16,22 +16,22 @@ package classes.Scenes.NPCs
 			if (choice == 0) eAttack();
 			if (choice == 1) medusaPoisonBiteAttack();
 			if (choice == 2) {
-				if (player.findStatusAffect(StatusAffects.NagaBind) >= 0 || player.findStatusAffect(StatusAffects.Stunned) >= 0) TailWhip();
+				if (player.hasStatusAffect(StatusAffects.NagaBind) || player.hasStatusAffect(StatusAffects.Stunned)) TailWhip();
 				else medusaConstrict();
 			}
 			if (choice == 3) {
-				if (player.findStatusAffect(StatusAffects.Stunned) >= 0) castSpell();
-				else if (player.findStatusAffect(StatusAffects.NagaBind) >= 0) medusaPoisonBiteAttack();
+				if (player.hasStatusAffect(StatusAffects.Stunned)) castSpell();
+				else if (player.hasStatusAffect(StatusAffects.NagaBind)) medusaPoisonBiteAttack();
 				else TailWhip();
 			}
 			if (choice == 4) {
-				if (player.findStatusAffect(StatusAffects.Stunned) >= 0) castSpell();
-				else if (player.findStatusAffect(StatusAffects.NagaBind) >= 0) {
+				if (player.hasStatusAffect(StatusAffects.Stunned)) castSpell();
+				else if (player.hasStatusAffect(StatusAffects.NagaBind)) {
 					if (rand(2) == 0) medusaPoisonBiteAttack();
 					else TailWhip();
 				}
 				else {
-					if (player.findStatusAffect(StatusAffects.AbilityCooldown1) >= 0) {
+					if (player.hasStatusAffect(StatusAffects.AbilityCooldown1)) {
 						if (rand(2) == 0) medusaPoisonBiteAttack();
 						else TailWhip();
 					}
@@ -48,7 +48,7 @@ package classes.Scenes.NPCs
 			if (game.flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin", false);
 			else outputText("The gorgon", false);
 			outputText("'s strikes with the speed of a cobra, sinking her fangs into your flesh!  ", false);
-			if(player.findStatusAffect(StatusAffects.MedusaVenom) < 0) {
+			if(!player.hasStatusAffect(StatusAffects.MedusaVenom)) {
 				outputText("The venom's effects are almost instantaneous; your body begins to weaken and even your mind becoming muddled.", false);
 				if(player.str > 8 && player.tou > 8 && player.spe > 8 && player.inte > 7) {
 					player.str -= 2;
@@ -175,7 +175,7 @@ package classes.Scenes.NPCs
 			outputText("With a moment of concentration she awakens normaly dormant snake hair that starts to hiss and then casual glance at you. Much to your suprise you noticing your fingers then hands starting to pertify... ", false);
 			player.createStatusAffect(StatusAffects.Stunned, 1, 0, 0, 0);
 			createStatusAffect(StatusAffects.AbilityCooldown1, 3, 0, 0, 0);
-			if (player.findStatusAffect(StatusAffects.NagaBind) >= 0) player.removeStatusAffect(StatusAffects.NagaBind);
+			if (player.hasStatusAffect(StatusAffects.NagaBind)) player.removeStatusAffect(StatusAffects.NagaBind);
 		}
 		
 		public function spellCostWhitefire():Number {
@@ -209,7 +209,7 @@ package classes.Scenes.NPCs
 			damage *= SpellMod();
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
-			if (player.findStatusAffect(StatusAffects.Blizzard) >= 0) {
+			if (player.hasStatusAffect(StatusAffects.Blizzard)) {
 			player.addStatusValue(StatusAffects.Blizzard, 1, -1);
 			if (game.flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin");
 			else outputText("The gorgon");

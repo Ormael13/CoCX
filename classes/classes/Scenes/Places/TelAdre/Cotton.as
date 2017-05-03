@@ -345,7 +345,7 @@ private function cottonChat():void {
 	if(flags[kFLAGS.TIMES_FUCKED_URTA] > 0)
 		chats[chats.length] = 1;
 	//Edryn chance
-	if(player.findStatusAffect(StatusAffects.Edryn) >= 0)
+	if(player.hasStatusAffect(StatusAffects.Edryn))
 		chats[chats.length] = 2;
 	//(Scylla chat)
 	if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0)
@@ -1131,7 +1131,7 @@ public function nomSomeTitMilkCereal():void {
 	dynStats("lib", -0.5, "sen", -.5, "lus", -5);
 	player.boostLactation(0.05);
 	//You've now been milked, reset the timer for that
-	if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+	if(player.hasStatusAffect(StatusAffects.Feeder)) {
 		player.addStatusValue(StatusAffects.Feeder,1,1);
 		player.changeStatusValue(StatusAffects.Feeder,2,0);
 	}
@@ -1848,7 +1848,7 @@ private function feedYourCottonKids():void {
 	outputText("\n\nYou kiss your equine lover, ruffle the sleeping child's hair, and quietly head back to camp, leaving Cotton to take care of things.");
 	dynStats("lus", -10);
 	//You've now been milked, reset the timer for that
-	if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+	if(player.hasStatusAffect(StatusAffects.Feeder)) {
 		player.addStatusValue(StatusAffects.Feeder,1,1);
 		player.changeStatusValue(StatusAffects.Feeder,2,0);
 	}

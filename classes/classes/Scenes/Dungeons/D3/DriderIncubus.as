@@ -133,7 +133,7 @@ package classes.Scenes.Dungeons.D3
 			else
 			{
 				var opts:Array = [arouseSpell, arouseSpell];
-				if (player.findStatusAffect(StatusAffects.TaintedMind) < 0 && !_seenResolute) opts.push(taintedMind);
+				if (!player.hasStatusAffect(StatusAffects.TaintedMind) && !_seenResolute) opts.push(taintedMind);
 				if (!_seenResolute) opts.push(purpleHaze);
 				opts[rand(opts.length)]();
 			}
@@ -215,9 +215,9 @@ package classes.Scenes.Dungeons.D3
 			var amount:Number;
 			
 			//Inflicts venom that reduces strength.
-			if (player.findStatusAffect(StatusAffects.Stunned) >= 0 || (player.spe <= 1 && player.findStatusAffect(StatusAffects.Web) >= 2))
+			if (player.hasStatusAffect(StatusAffects.Stunned) || (player.spe <= 1 && player.statusAffectv1(StatusAffects.Web) >= 2))
 			{
-				if (player.findStatusAffect(StatusAffects.DriderIncubusVenom) >= 0)
+				if (player.hasStatusAffect(StatusAffects.DriderIncubusVenom))
 				{
 					player.changeStatusValue(StatusAffects.DriderIncubusVenom, 1, 5);
 				}
@@ -262,7 +262,7 @@ package classes.Scenes.Dungeons.D3
 					
 					outputText("<i>“I do love watching you struggle.”</i> He flashes a crooked smile.");
 					
-					if (player.findStatusAffect(StatusAffects.DriderIncubusVenom) >= 0)
+					if (player.hasStatusAffect(StatusAffects.DriderIncubusVenom))
 					{
 						player.changeStatusValue(StatusAffects.DriderIncubusVenom, 1, 5);
 					}

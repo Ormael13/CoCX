@@ -14,14 +14,14 @@ package classes.Scenes.NPCs
 			var choice:Number = rand(2);
 			if (choice == 0) eAttack();
 			if (choice == 1) {
-				if (player.findStatusAffect(StatusAffects.IzmaBleed) < 0 && rand(2) == 0) Specials1();
+				if (!player.hasStatusAffect(StatusAffects.IzmaBleed) && rand(2) == 0) Specials1();
 				else eAttack();
 			}
 		}
 		
 		public function Specials1():void {
 			//Blind dodge change
-			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
+			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
 				outputText("J1c blindly tries to clinch you, but misses completely.\n", false);
 				return;
 			}

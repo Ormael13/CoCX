@@ -41,7 +41,7 @@ package classes.Scenes.NPCs
 		}
 		
 		private function initializeJoy():void {
-			if (player.findStatusAffect(StatusAffects.JojoNightWatch) >= 0) player.removeStatusAffect(StatusAffects.JojoNightWatch);
+			if (player.hasStatusAffect(StatusAffects.JojoNightWatch)) player.removeStatusAffect(StatusAffects.JojoNightWatch);
 			flags[kFLAGS.JOY_COCK_SIZE] = 5.5;
 			flags[kFLAGS.JOY_BREAST_SIZE] = BREAST_CUP_DD;
 			flags[kFLAGS.JOY_VAGINAL_WETNESS] = 3;
@@ -749,7 +749,7 @@ package classes.Scenes.NPCs
 			outputText("Once you've sat down Joy surprises you by sitting on your lap, the sudden movement startles you a bit, but it doesn't feel bad... specially since Joy's bottom is so... comfy...");
 			outputText("\n\nShe closes her eyes and instructs you to do the same, and clear your mind of all impure thoughts.");
 			//Exgartuan
-			if (player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) > 0) {
+			if (player.hasStatusAffect(StatusAffects.Exgartuan) && player.statusAffectv2(StatusAffects.Exgartuan) > 0) {
 				outputText("\n\nShe squeaks as a sudden stirring from your " + (player.statusAffectv1(StatusAffects.Exgartuan) == 1 ? "loins" : "breasts") + " knock her off-balance and she falls on her back.");
 				outputText("\n\n\"<i>What are you doing!?</i>\" a booming voice demands. \"<i>Why are you sitting there all dressed up when there's perfectly fine piece of mouse ass there " + (player.statusAffectv1(StatusAffects.Exgartuan) == 1 ? "for you to fuck" : "to massage your love-pillows") + "?</i>\"");
 				outputText("\n\n\"<i>W-What was that [name]?</i>\" Joy asks, confused as she hears the booming voice.");

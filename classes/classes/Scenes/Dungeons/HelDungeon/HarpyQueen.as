@@ -64,7 +64,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			var damage:int = inte + rand(50) * SpellMod();
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
-			if (player.findStatusAffect(StatusAffects.Blizzard) >= 0) {
+			if (player.hasStatusAffect(StatusAffects.Blizzard)) {
 			player.addStatusValue(StatusAffects.Blizzard, 1, -1);
 			outputText("Luckly protective ice maelstorm still surrounding you lessening amount of damage.  ");
 			damage *= 0.2;

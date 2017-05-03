@@ -184,7 +184,7 @@ package classes.Scenes.Monsters
 			clearOutput();
 			outputText("The shaman falls to her feet, smashing her titties against the ground. She looks up at you and sniffles.");
 			//If cant rape or breastfeed
-			if (player.lust < 30 && player.findStatusAffect(StatusAffects.Feeder) < 0) {
+			if (player.lust < 30 && !player.hasStatusAffect(StatusAffects.Feeder)) {
 				cleanupAfterCombat();
 				return;
 			}
@@ -222,7 +222,7 @@ package classes.Scenes.Monsters
 					spiderCondom = goblinCondomed;
 			}
 			//Breastfeed adds an option
-			if (player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+			if (player.hasStatusAffect(StatusAffects.Feeder)) {
 				feeder = giveGoblinAMilkMustache;
 			}
 			if (player.lust >= 33 && player.gender > 0 && (fitsFuck != null || cuntFuck != null || tooBig != null ||

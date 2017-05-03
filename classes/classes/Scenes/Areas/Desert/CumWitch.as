@@ -19,7 +19,7 @@ package classes.Scenes.Areas.Desert
 			if(player.hasCock()) choices[choices.length] = cumMagicAttack;
 			choices[choices.length] = bukkakeAttack;
 			choices[choices.length] = cocknosisAttack;
-			if(findStatusAffect(StatusAffects.Shell) < 0) {
+			if(!hasStatusAffect(StatusAffects.Shell)) {
 				choices[choices.length] = shellDefense;
 				choices[choices.length] = shellDefense;
 				choices[choices.length] = shellDefense;

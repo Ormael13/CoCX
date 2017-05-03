@@ -65,7 +65,7 @@ package classes.Scenes.Areas.HighMountains
 				if (player.armorDef > 0) outputText(", but your defense has been reduced");
 				outputText("! ");
 				player.takeDamage(damage, true);
-				if (findStatusAffect(StatusAffects.TailWhip) >= 0) addStatusValue(StatusAffects.TailWhip, 1, 10);
+				if (hasStatusAffect(StatusAffects.TailWhip)) addStatusValue(StatusAffects.TailWhip, 1, 10);
 				else createStatusAffect(StatusAffects.TailWhip, 10, 0, 0, 0);
 			}
 			combatRoundOver();
@@ -116,7 +116,7 @@ package classes.Scenes.Areas.HighMountains
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
-			if (player.findStatusAffect(StatusAffects.Blizzard) >= 0) {
+			if (player.hasStatusAffect(StatusAffects.Blizzard)) {
 				player.addStatusValue(StatusAffects.Blizzard,1,-1);
 				outputText("The siren holds her hand out, flashing you a cunning smirk and snapping her fingers.  Your entire body is engulfed in white-hot flames, searing flesh and burning your [armor].  The sudden flash of heat and fire elicit panic from deep within you, causing you to cry out and roll on the ground to put the fires out.  The burns aren't too severe due to surrounding your blizzard, but you know you can't keep getting hit like that! ");
 				damage *= 0.2;
@@ -152,7 +152,7 @@ package classes.Scenes.Areas.HighMountains
 		{
 			//The Siren's Song (2-part attack) (Rarely used or when she's desperate aka: Less than 10% hp)
 			//[part 1]
-			if (findStatusAffect(StatusAffects.SirenSong) < 0) {
+			if (!hasStatusAffect(StatusAffects.SirenSong)) {
 				outputText("Minerva begins to hum a pleasant tune.  It might be better to stand back to see what she's up to!");
 				createStatusAffect(StatusAffects.SirenSong, 0, 0, 0, 0);
 			}
@@ -173,7 +173,7 @@ package classes.Scenes.Areas.HighMountains
 
 		override protected function performCombatAction():void
 		{
-			if (findStatusAffect(StatusAffects.SirenSong) >= 0) sirensSong();
+			if (hasStatusAffect(StatusAffects.SirenSong)) sirensSong();
 			else if (rand(25) == 0 || (HP < 100 && rand(2) == 0)) sirensSong();
 			//Else choose randomly!
 			else {

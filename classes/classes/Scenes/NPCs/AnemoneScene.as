@@ -74,7 +74,7 @@ package classes.Scenes.NPCs
 				}
 				else if (flags[kFLAGS.KID_SITTER] == 2) flags[kFLAGS.KID_SITTER] = 1;
 			}
-			if (player.findStatusAffect(StatusAffects.AnemoneArousal) >= 0) {
+			if (player.hasStatusAffect(StatusAffects.AnemoneArousal)) {
 				if (player.pregnancyIncubation > 1) {
 					player.removeStatusAffect(StatusAffects.AnemoneArousal);
 					outputText("\n<b>The nigh-constant arousal forced upon you by the anemone-like creature in your body finally fades.  You stick a finger inside yourself and marvel in wonder - it's gone!  You aren't sure if it slipped out or your body somehow consumed it, but it's nice to have a clearer head.</b>\n", false);

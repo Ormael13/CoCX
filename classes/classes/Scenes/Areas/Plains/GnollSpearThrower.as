@@ -15,7 +15,7 @@ package classes.Scenes.Areas.Plains
 			//return to combat menu when finished
 			doNext(game.playerMenu);
 			//Blind dodge change
-			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
+			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 				//See below, removes the attack count once it hits rock bottom.
 				if(statusAffectv1(StatusAffects.Attacks) == 0) removeStatusAffect(StatusAffects.Attacks);
@@ -107,7 +107,7 @@ package classes.Scenes.Areas.Plains
 			var slow:Number = 0;
 			//<Hyena Attack 2 – Javelin – Unsuccessful – Dodged>
 			//Blind dodge change
-			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
+			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
 				outputText("The gnoll pulls a javelin from behind her and throws it at you, but blind as she is, it goes wide.", false);
 			}
 			//Determine if dodged!
@@ -136,7 +136,7 @@ package classes.Scenes.Areas.Plains
 			//<Hyena Attack 2 – Javelin – Successful – Player Entangled>
 			else if(rand(3) >= 1) {
 				outputText("The gnoll pulls a long, black javelin from over her shoulder.  Her spotted arm strikes forward, launching the missile through the air.  You attempt to dive to the side, but are too late.  The powerful shaft slams, hard, into your back.  Pain radiates from the powerful impact.  Instead of piercing you, however, the tip seems to explode into a sticky goo that instantly bonds with your " + player.armorName + ".  The four foot, heavy shaft pulls down on you awkwardly, catching at things and throwing your balance off.  You try to tug the javelin off of you but find that it has glued itself to you.  It will take time and effort to remove; making it impossible to do while a dominant hyena stalks you. ", false);
-				if(player.findStatusAffect(StatusAffects.GnollSpear) < 0) player.createStatusAffect(StatusAffects.GnollSpear,0,0,0,0);
+				if(!player.hasStatusAffect(StatusAffects.GnollSpear)) player.createStatusAffect(StatusAffects.GnollSpear,0,0,0,0);
 				slow = 15;
 				while(slow > 0 && player.spe > 2) {
 					slow--;
@@ -161,7 +161,7 @@ package classes.Scenes.Areas.Plains
 		private function hyenaSnapKicku():void {
 			var damage:Number = 0;
 			//Blind dodge change
-			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
+			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
 				outputText("The gnoll tries to catch you with a brutal snap-kick, but blind as she is, she completely misses.", false);
 			}
 			//Determine if dodged!
@@ -227,7 +227,7 @@ package classes.Scenes.Areas.Plains
 //return to combat menu when finished
 			doNext(game.playerMenu);
 //Blind dodge change
-			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 2) {
+			if (hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 				//See below, removes the attack count once it hits rock bottom.
 				if (statusAffectv1(StatusAffects.Attacks) == 0) removeStatusAffect(StatusAffects.Attacks);

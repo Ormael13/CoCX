@@ -208,10 +208,6 @@ public class Skin extends SaveableBodyPart {
 	public function hasNonLizardScales():Boolean {
 		return hasScales() && !hasLizardScales();
 	}
-	[Deprecated]
-	public function hasFurOrScales():Boolean {
-		return hasFur() || hasScales();
-	}
 	public function hasGooSkin():Boolean {
 		return hasAny(SKIN_TYPE_GOO);
 	}

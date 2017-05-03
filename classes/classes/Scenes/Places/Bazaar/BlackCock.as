@@ -29,7 +29,7 @@ package classes.Scenes.Places.Bazaar
 		}
 		
 		private function applyAndysSmokeEffect():void {
-			if (player.findStatusAffect(StatusAffects.AndysSmoke) >= 0) {
+			if (player.hasStatusAffect(StatusAffects.AndysSmoke)) {
 				if (player.statusAffectv2(StatusAffects.AndysSmoke) > -15) { //Maximum speed loss is -15.
 					player.addStatusValue(StatusAffects.AndysSmoke, 2, -5);
 					dynStats("spe", -5);
@@ -170,7 +170,7 @@ package classes.Scenes.Places.Bazaar
 				doNext(checkFoodMenu);
 				return;
 			}
-			if ((player.hunger >= 90 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.findStatusAffect(StatusAffects.Fullness) >= 0 && flags[kFLAGS.HUNGER_ENABLED] == 0)) {
+			if ((player.hunger >= 90 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.hasStatusAffect(StatusAffects.Fullness) && flags[kFLAGS.HUNGER_ENABLED] == 0)) {
 				outputText("<b>You are too full to consider eating that.</b>");
 				doNext(checkFoodMenu);
 				return;
@@ -235,7 +235,7 @@ package classes.Scenes.Places.Bazaar
 				default:
 					player.refillHunger(50);
 			}
-			if (player.findStatusAffect(StatusAffects.Fullness) < 0) player.createStatusAffect(StatusAffects.Fullness, 4, 0, 0, 0);
+			if (!player.hasStatusAffect(StatusAffects.Fullness)) player.createStatusAffect(StatusAffects.Fullness, 4, 0, 0, 0);
 			else player.changeStatusValue(StatusAffects.Fullness, 1, 4);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1249,7 +1249,7 @@ package classes.Scenes.Places.Bazaar
 				doNext(enterTheBlackCock);
 				return;
 			}
-			if ((player.hunger >= 90 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.findStatusAffect(StatusAffects.Fullness) >= 0 && flags[kFLAGS.HUNGER_ENABLED] == 0)) {
+			if ((player.hunger >= 90 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.hasStatusAffect(StatusAffects.Fullness) && flags[kFLAGS.HUNGER_ENABLED] == 0)) {
 				outputText("<b>You are too full to consider ordering that that.</b>");
 				doNext(enterTheBlackCock);
 				return;
@@ -1261,7 +1261,7 @@ package classes.Scenes.Places.Bazaar
 			player.refillHunger(35);
 			if (flags[kFLAGS.HUNGER_ENABLED] == 0) player.modThickness(100, 2);
 			player.modTone(0, 1);
-			if (player.findStatusAffect(StatusAffects.Fullness) < 0) player.createStatusAffect(StatusAffects.Fullness, 2, 0, 0, 0);
+			if (!player.hasStatusAffect(StatusAffects.Fullness)) player.createStatusAffect(StatusAffects.Fullness, 2, 0, 0, 0);
 			else player.changeStatusValue(StatusAffects.Fullness, 1, 2);
 			flags[kFLAGS.BLACK_COCK_FRIDAS_CAKE_EATEN_COUNTER]++;
 			doNext(camp.returnToCampUseOneHour);
@@ -1422,11 +1422,11 @@ package classes.Scenes.Places.Bazaar
 				if (player.cumMultiplier < 50) player.cumMultiplier += 0.5;
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.hasVagina() && player.findStatusAffect(StatusAffects.BonusVCapacity) >= 0) {
+			if (rand(3) == 0 && changes < changeLimit && player.hasVagina() && player.hasStatusAffect(StatusAffects.BonusVCapacity)) {
 				outputText("\n\nYou feel a tingling sensation in your vagina… that was weird.");
-				if (player.findStatusAffect(StatusAffects.BonusVCapacity) >= 0) {
+				if (player.hasStatusAffect(StatusAffects.BonusVCapacity)) {
 					player.addStatusValue(StatusAffects.BonusVCapacity, 1, -(rand(5) + 5));
-					if (player.findStatusAffect(StatusAffects.BonusVCapacity) <= 0) player.removeStatusAffect(StatusAffects.BonusVCapacity);
+					if (player.statusAffectv1(StatusAffects.BonusVCapacity) <= 0) player.removeStatusAffect(StatusAffects.BonusVCapacity);
 				}
 				changes++;
 			}
@@ -1770,7 +1770,7 @@ package classes.Scenes.Places.Bazaar
 			}
 			//Boost vaginal capacity without gaping
 			if (rand(3) == 0 && changes < changeLimit && player.hasVagina() && player.statusAffectv1(StatusAffects.BonusVCapacity) < 40) {
-				if (player.findStatusAffect(StatusAffects.BonusVCapacity) < 0) player.createStatusAffect(StatusAffects.BonusVCapacity, 0, 0, 0, 0);
+				if (!player.hasStatusAffect(StatusAffects.BonusVCapacity)) player.createStatusAffect(StatusAffects.BonusVCapacity, 0, 0, 0, 0);
 				player.addStatusValue(StatusAffects.BonusVCapacity, 1, 5);
 				outputText("\n\nThere is a sudden... emptiness within your " + vaginaDescript(0) + ". Somehow you know you could accommodate even larger... insertions.");
 				changes++;
@@ -1778,7 +1778,7 @@ package classes.Scenes.Places.Bazaar
 			//Boost anal capacity without gaping
 			if (rand(3) == 0 && changes < changeLimit && player.hasVagina() && player.statusAffectv1(StatusAffects.BonusVCapacity) < 60) {
 				if (player.statusAffectv1(StatusAffects.BonusACapacity) < 60) {
-					if (player.findStatusAffect(StatusAffects.BonusACapacity) < 0) player.createStatusAffect(StatusAffects.BonusACapacity, 0, 0, 0, 0);
+					if (!player.hasStatusAffect(StatusAffects.BonusACapacity)) player.createStatusAffect(StatusAffects.BonusACapacity, 0, 0, 0, 0);
 					player.addStatusValue(StatusAffects.BonusACapacity, 1, 5);
 					outputText("\n\nYou feel... more accommodating somehow. Your " + assholeDescript() + " is tingling a bit, and though it doesn't seem to have loosened, it has grown more elastic.", false);
 					changes++;

@@ -40,7 +40,7 @@ package classes.Scenes.Areas.Mountain
 			}
 			clearOutput();
 			//[BOTH INFESTED]
-			if (player.totalCocks() > 0 && player.findStatusAffect(StatusAffects.Infested) >= 0) {
+			if (player.totalCocks() > 0 && player.hasStatusAffect(StatusAffects.Infested)) {
 				//(LUST)
 				if (player.lust >= player.maxLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ", false);
@@ -61,7 +61,7 @@ package classes.Scenes.Areas.Mountain
 				cleanupAfterCombat();
 			}
 			//[PLAYER'S COCKS ARE BIG ENOUGH TO BE INFECTED]
-			else if (player.findStatusAffect(StatusAffects.Infested) < 0 && player.biggestCockArea() >= 40 && player.hasCock()) {
+			else if (!player.hasStatusAffect(StatusAffects.Infested) && player.biggestCockArea() >= 40 && player.hasCock()) {
 				//(LUST)
 				if (player.lust >= player.maxLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ", false);
@@ -151,7 +151,7 @@ package classes.Scenes.Areas.Mountain
 				//random chance of big lust boost as worms evacuate 
 				//your body.  When worms leave they take with them up 
 				//to 5 fertility, to a minimum of 10. 
-				if (player.findStatusAffect(StatusAffects.WormPlugged) >= 0)
+				if (player.hasStatusAffect(StatusAffects.WormPlugged))
 					player.addStatusValue(StatusAffects.WormPlugged, 1, 1 + rand(5));
 				else
 					player.createStatusAffect(StatusAffects.WormPlugged, 1 + rand(5), 0, 0, 0);

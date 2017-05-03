@@ -479,11 +479,11 @@
 			}
 			else
 			{
-				var statIndex:int = player.findStatusAffect(StatusAffects.UmasMassage);
+				var sac:StatusAffectClass = player.statusAffectByType(StatusAffects.UmasMassage);
 				var bonusValue:Number;
 				
 				// Remove the old massage bonus if present
-				if (statIndex >= 0)
+				if (sac)
 				{
 					player.removeStatusAffect(StatusAffects.UmasMassage);
 				}
@@ -528,13 +528,13 @@
 		 */
 		public function updateBonusDuration(hours:int):void
 		{
-			var statIndex:int = player.findStatusAffect(StatusAffects.UmasMassage);
+			var sac:StatusAffectClass = player.statusAffectByType(StatusAffects.UmasMassage);
 			
-			if (statIndex >= 0)
+			if (sac)
 			{
-				player.statusAffect(statIndex).value3 -= hours;
+				sac.value3 -= hours;
 				
-				if (player.statusAffect(statIndex).value3 <= 0)
+				if (sac.value3 <= 0)
 				{
 					bonusExpired();
 				}

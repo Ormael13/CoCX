@@ -125,7 +125,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nResigned to your fate, you curl up with Helia; who throws her cloak over the two of you.");
 			
 			//[If Marble is in camp:]
-			if(player.findStatusAffect(StatusAffects.CampMarble) >= 0 && silly()) {
+			if(player.hasStatusAffect(StatusAffects.CampMarble) && silly()) {
 				outputText("\n\nJust as you and Hel start to get intimate, you hear a familiar clopping of hooves. You poke your head out of the blanket, rather alarmed to see Marble standing over you.");
 				outputText("\n\n\"<i>S-Sweetie?</i>\" Marble says, aghast at Hel's presence in your arms.  \"<i>What... just what do you think you're doing!?</i>\"");
 				outputText("\n\nThis could be ba--");

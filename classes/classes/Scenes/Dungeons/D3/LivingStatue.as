@@ -59,7 +59,7 @@ package classes.Scenes.Dungeons.D3
 		
 		override protected function handleStun():Boolean
 		{
-			if (findStatusAffect(StatusAffects.MonsterAttacksDisabled) >= 0) {
+			if (hasStatusAffect(StatusAffects.MonsterAttacksDisabled)) {
 				return super.handleStun();
 			}
 			else {
@@ -85,7 +85,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("The giant raises his hammer for an obvious downward strike. His marble muscles flex as he swings it downward. You're able to hop out of the way of the clearly telegraphed attack, but nothing could prepare you for the shockwave it emits as it craters the ground. ");
 			
 			//Stun success
-			if (rand(2) == 0 && player.findStatusAffect(StatusAffects.Stunned) < 0)
+			if (rand(2) == 0 && !player.hasStatusAffect(StatusAffects.Stunned))
 			{
 				outputText("<b>The vibrations leave you rattled and stunned. It'll take you a moment to recover!</b> ");
 				player.createStatusAffect(StatusAffects.Stunned, 2, 0, 0, 0);
@@ -106,7 +106,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("The animated sculpture brings its right foot around, dragging it through the gardens at a high enough speed to tear a half score of bushes out by the root. A cloud of shrubbery and dirt washes over you!");
 			
 			//blind
-			if (rand(2) == 0 && player.findStatusAffect(StatusAffects.Blind) < 0)
+			if (rand(2) == 0 && !player.hasStatusAffect(StatusAffects.Blind))
 			{
 				player.createStatusAffect(StatusAffects.Blind, 2, 0, 0, 0);
 				outputText(" <b>You are blinded!</b>");
@@ -190,11 +190,11 @@ package classes.Scenes.Dungeons.D3
 		
 		override protected function performCombatAction():void
 		{
-			if (this.HPRatio() < 0.7 && this.findStatusAffect(StatusAffects.KnockedBack) < 0)
+			if (this.HPRatio() < 0.7 && !this.hasStatusAffect(StatusAffects.KnockedBack))
 			{
 				this.backhand();
 			}
-			else if (this.HPRatio() < 0.4 && this.findStatusAffect(StatusAffects.Disarmed) < 0 && player.weaponName != "fists")
+			else if (this.HPRatio() < 0.4 && !this.hasStatusAffect(StatusAffects.Disarmed) && player.weaponName != "fists")
 			{
 				this.disarm();
 			}
@@ -202,8 +202,8 @@ package classes.Scenes.Dungeons.D3
 			{
 				var opts:Array = [];
 				
-				if (player.findStatusAffect(StatusAffects.Blind) < 0 && player.findStatusAffect(StatusAffects.Stunned) < 0) opts.push(dirtKick);
-				if (player.findStatusAffect(StatusAffects.Blind) < 0 && player.findStatusAffect(StatusAffects.Stunned) < 0) opts.push(concussiveBlow);
+				if (!player.hasStatusAffect(StatusAffects.Blind) && !player.hasStatusAffect(StatusAffects.Stunned)) opts.push(dirtKick);
+				if (!player.hasStatusAffect(StatusAffects.Blind) && !player.hasStatusAffect(StatusAffects.Stunned)) opts.push(concussiveBlow);
 				opts.push(cycloneStrike);
 				opts.push(cycloneStrike);
 				opts.push(overhandSmash);

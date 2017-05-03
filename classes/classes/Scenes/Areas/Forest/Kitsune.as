@@ -59,7 +59,7 @@ package classes.Scenes.Areas.Forest
 			var damage:int = 5 + rand(20);
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
-			if (player.findStatusAffect(StatusAffects.Blizzard) >= 0) {
+			if (player.hasStatusAffect(StatusAffects.Blizzard)) {
 				player.addStatusValue(StatusAffects.Blizzard,1,-1);
 				outputText("\n\nThe flames burn furiously but power was negated by surround you blizzard, but still it leave you with an incredibly pleasant tingling sensation all over your body.  Your skin flushes with excitement, and you can feel blood rushing to your extremities, making you shudder with pleasure. ");
 				damage *= 0.2;
@@ -171,10 +171,10 @@ package classes.Scenes.Areas.Forest
 		override protected function performCombatAction():void
 		{
 			var moves:Array = [foxFireAttack, foxFireAttack, kitSuneTeases, kitSuneTeases];
-			if (player.findStatusAffect(StatusAffects.Sealed) < 0) moves.push(kitsuneSealAttack);
-			if (player.findStatusAffect(StatusAffects.Sealed) < 0) moves.push(kitsuneSealAttack);
-			if (findStatusAffect(StatusAffects.PCTailTangle) < 0) moves.push(kitsuneEntwine);
-			if (findStatusAffect(StatusAffects.Illusion) < 0) moves.push(illusionKitsuneAttack);
+			if (!player.hasStatusAffect(StatusAffects.Sealed)) moves.push(kitsuneSealAttack);
+			if (!player.hasStatusAffect(StatusAffects.Sealed)) moves.push(kitsuneSealAttack);
+			if (!hasStatusAffect(StatusAffects.PCTailTangle)) moves.push(kitsuneEntwine);
+			if (!hasStatusAffect(StatusAffects.Illusion)) moves.push(illusionKitsuneAttack);
 			moves[rand(moves.length)]();
 		}
 

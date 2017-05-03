@@ -98,7 +98,7 @@ package classes.Scenes.Dungeons.D3
 			if (player.cor >= 50) outputText(", you’ve let yourself become corrupted");
 			else outputText(", you’ve been sorely tempted by the rampant corruption of these lands");
 			outputText(".");
-			if (player.findStatusAffect(StatusAffects.FactoryOverload) >= 0) outputText(" You couldn’t even save one of the last pure spirits in this place, Marae.");
+			if (player.hasStatusAffect(StatusAffects.FactoryOverload)) outputText(" You couldn’t even save one of the last pure spirits in this place, Marae.");
 			outputText(" It’s only a matter of time until Tel’Adre falls,");
 			if (flags[kFLAGS.FARM_CORRUPTION_STARTED] == 0) outputText(" Whitney’s farm is consumed");
 			else outputText(" Lethice thanks you for preparing Whitney’s farm");
