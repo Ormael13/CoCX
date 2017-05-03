@@ -34,7 +34,7 @@
 				//Temporary heat
 				if(color == "red") {
 					outputText("\nThe red fluids hit you and instantly soak into your skin, disappearing.  Your skin flushes and you feel warm.  Oh no...\n", false);
-					if(player.findStatusAffect(StatusAffects.TemporaryHeat) < 0) player.createStatusAffect(StatusAffects.TemporaryHeat,0,0,0,0);
+					if(!player.hasStatusAffect(StatusAffects.TemporaryHeat)) player.createStatusAffect(StatusAffects.TemporaryHeat,0,0,0,0);
 				}
 				//Increase fatigue
 				if(color == "black") {
@@ -93,7 +93,7 @@
 		}
 		override protected function performCombatAction():void
 		{
-			if(player.findStatusAffect(StatusAffects.ClaraFoughtInCamp) >= 0 && player.statusAffectv1(StatusAffects.ClaraCombatRounds) >= 10) 
+			if(player.hasStatusAffect(StatusAffects.ClaraFoughtInCamp) && player.statusAffectv1(StatusAffects.ClaraCombatRounds) >= 10) 
 			{
 				HP = 0;
 				combatRoundOver();
@@ -101,7 +101,7 @@
 			if(HP < 50 && rand(2) == 0) {
 				notMurbleEnjoysTheLacticAcid();
 			}
-			else if(player.findStatusAffect(StatusAffects.Blind) >= 0)
+			else if(player.hasStatusAffect(StatusAffects.Blind))
 			{
 				claraGropesBlindPCs();
 			}
@@ -112,16 +112,16 @@
 				trace("ACTION SELECTED: " + action);
 				actions[action]();
 			}
-			if(player.findStatusAffect(StatusAffects.ClaraCombatRounds) < 0) player.createStatusAffect(StatusAffects.ClaraCombatRounds,1,0,0,0);
+			if(!player.hasStatusAffect(StatusAffects.ClaraCombatRounds)) player.createStatusAffect(StatusAffects.ClaraCombatRounds,1,0,0,0);
 			else player.addStatusValue(StatusAffects.ClaraCombatRounds,1,1);
 
 			//Bonus damage if not in camp
-			if(HP > 0 && lust < 100 && player.findStatusAffect(StatusAffects.ClaraFoughtInCamp) < 0) claraBonusBaseLustDamage();
+			if(HP > 0 && lust < 100 && !player.hasStatusAffect(StatusAffects.ClaraFoughtInCamp)) claraBonusBaseLustDamage();
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{
 			//PC wins via turn count
-			if(player.findStatusAffect(StatusAffects.ClaraFoughtInCamp) >= 0 && player.statusAffectv1(StatusAffects.ClaraCombatRounds) >= 10) {}
+			if(player.hasStatusAffect(StatusAffects.ClaraFoughtInCamp) && player.statusAffectv1(StatusAffects.ClaraCombatRounds) >= 10) {}
 			else {
 				clearOutput();
 				//PC wins via health

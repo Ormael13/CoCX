@@ -171,7 +171,7 @@ package classes.Scenes.Areas.Forest
 			else
 			{
 				outputText("The baying of hounds fills the air, and the trees echo with the distant thunder of hooves as the first of the creatures bursts through the fog.  Stooped and low, this beast-man is mostly canine, with a sharp-toothed muzzle spread wide and panting.  His red-black tongue dangles with each breath, steam rising up from his jaws.  The hound’s pelt is midnight black, covering his muscular frame.  Strong arms hang low, almost touching the ground, muscles flexing as his surprisingly human hands open and close restlessly.  His legs are distinctly dog-like, ending in wide, black-clawed paws.  Between its stocky legs; you catch a glimpse of an arm-thick sheath and a heavy sack behind.  A broad tail wags behind him, swinging slowly and menacingly");
-				if (player.findStatusAffect(StatusAffects.MetWhitney) >= 0) outputText(", and for a moment all you can think of are Whitney’s canine peppers");
+				if (player.hasStatusAffect(StatusAffects.MetWhitney)) outputText(", and for a moment all you can think of are Whitney’s canine peppers");
 				outputText(".\n\n");
 
 				outputText("His baleful red eyes glare at you from beneath a dark brow.  The hound takes in a deep breath, his nostrils flaring, then throws his head back to howl.  The deafening sound is answered instantly by the crashing of brush as another beast man leaps through the undergrowth.  The fog falls to shreds as he leaps out behind you, flanking you with his fellow Hound.\n\n");

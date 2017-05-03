@@ -54,7 +54,7 @@ outputText("Whitney marches up to you as soon as you approach the farm, a stoic 
 	//Farm not yet discovered
 	if(player.statusAffectv1(StatusAffects.MetWhitney) < 2) {
 		spriteSelect(62);
-		if(player.findStatusAffect(StatusAffects.MetWhitney) < 0) {
+		if(!player.hasStatusAffect(StatusAffects.MetWhitney)) {
 			player.createStatusAffect(StatusAffects.MetWhitney,0,0,0,0);
 			outputText("You find a quaint farmhouse on the far shores of the lake.  Around the homestead are a range of gardens, filled with delicious fruits and vegetables.  Your belly rumbles, aching with hunger, as you approach the dwelling.  A figure in a pepper patch rises up to greet you, waving you over.\n\nYou do your best to conceal your surprise as you realize the farmer is a woman... with fur and canine-like features!  She giggles happily and beckons you over, \"<i>Welcome stranger, it sure is pleasant to see a new face 'round here.  My name's Whitney, and it's mighty fine I don't have to pitchfork you like most guests!</i>\"  She fills you in about the lake and her farm, telling you how the demons can't seem to stay close for long, and monsters always seem weaker the few times they have approached her farm.  Whitney flushes and rapidly changes subject, \"<i>I've got to get back to work, but you help yourself to the peppers, hun!</i>\"\n\n", true);
 		}
@@ -93,12 +93,12 @@ outputText("Whitney marches up to you as soon as you approach the farm, a stoic 
 		var milkJojo:Number = 0;
 		var cockMilk:Number = 0;
 		var marble:Number = 0;
-		if(player.findStatusAffect(StatusAffects.Kelt) >= 0 && player.findStatusAffect(StatusAffects.KeltOff) < 0 && flags[kFLAGS.KELT_KILLED] <= 0) {
+		if(player.hasStatusAffect(StatusAffects.Kelt) && !player.hasStatusAffect(StatusAffects.KeltOff) && flags[kFLAGS.KELT_KILLED] <= 0) {
 			if(flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) addButton(1,"Kelly",kelly.breakingKeltOptions);
 			else addButton(1,"Kelt",kelly.breakingKeltOptions);
 		}
 		if(player.hasKeyItem("Breast Milker - Installed At Whitney's Farm") >= 0) {
-			if(player.findStatusAffect(StatusAffects.Milked) >= 0) {
+			if(player.hasStatusAffect(StatusAffects.Milked)) {
 				outputText("\n\n<b>Your " + nippleDescript(0) + "s are currently too sore to be milked.  You'll have to wait a while.</b>", false);
 			}
 			else if(flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(2,"Get Milked",getMilked);
@@ -109,7 +109,7 @@ outputText("Whitney marches up to you as soon as you approach the farm, a stoic 
 			
 			if(flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(5,"Milk Cock",cockPumping);
 		}
-		if(player.findStatusAffect(StatusAffects.MarbleRapeAttempted) < 0 && player.findStatusAffect(StatusAffects.NoMoreMarble) < 0 && player.findStatusAffect(StatusAffects.Marble) >= 0 && flags[kFLAGS.MARBLE_WARNING] == 0) {
+		if(!player.hasStatusAffect(StatusAffects.MarbleRapeAttempted) && !player.hasStatusAffect(StatusAffects.NoMoreMarble) && player.hasStatusAffect(StatusAffects.Marble) && flags[kFLAGS.MARBLE_WARNING] == 0) {
 			
 			if(flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 0) addButton(3,"Marble", meetMarble);
 		}
@@ -154,7 +154,7 @@ private function talkWhitney():void {
 	}
 	
 	// Requires: PC has met both Marble and Kelt
-	if (flags[kFLAGS.MURBLE_FARM_TALK_LEVELS] > 0 && player.findStatusAffect(StatusAffects.Kelt) >= 0 && flags[kFLAGS.WHITNEY_TALK_MURBLE_AND_KELT] == 0)
+	if (flags[kFLAGS.MURBLE_FARM_TALK_LEVELS] > 0 && player.hasStatusAffect(StatusAffects.Kelt) && flags[kFLAGS.WHITNEY_TALK_MURBLE_AND_KELT] == 0)
 	{
 		flags[kFLAGS.WHITNEY_TALK_MURBLE_AND_KELT] = 1;
 		
@@ -169,7 +169,7 @@ private function talkWhitney():void {
 	}
 	
 	// Requires: PC has entered Tel’Adre
-	if (player.findStatusAffect(StatusAffects.TelAdre) >= 0 && player.statusAffectv1(StatusAffects.TelAdre) >= 1 && flags[kFLAGS.WHITNEY_TALK_TELADRE] == 0 && flags[kFLAGS.WHITNEY_TALK_MURBLE_AND_KELT] == 1)
+	if (player.hasStatusAffect(StatusAffects.TelAdre) && player.statusAffectv1(StatusAffects.TelAdre) >= 1 && flags[kFLAGS.WHITNEY_TALK_TELADRE] == 0 && flags[kFLAGS.WHITNEY_TALK_MURBLE_AND_KELT] == 1)
 	{
 		flags[kFLAGS.WHITNEY_TALK_TELADRE] = 1;
 		
@@ -192,7 +192,7 @@ private function talkWhitney():void {
 		
 		outputText("You find Whitney outside the milking shed, carefully writing labels at a trestle table and sticking them on large bottles of milk.");
 		//[PC has used milking device:
-		if (player.findStatusAffect(StatusAffects.BreastsMilked) >= 0)
+		if (player.hasStatusAffect(StatusAffects.BreastsMilked))
 		{
 			outputText(" You are uncomfortably aware of the number of them which are labelled ‘[name]’, and a charged memory of strong suction on your [nipples] comes back to you.");
 		}
@@ -218,15 +218,15 @@ private function talkWhitney():void {
 		outputText("\n\n“<i>Centaurs ‘n goblins mainly,</i>” she replies. “<i>Sometimes even get the mountain folk coming down here to trade. Milk’s a rare enough commodity to a harpy or basilisk to get 'em to stop ruttin' an' fighting for two minutes and buy some.</i>” She sighs. “<i>Used to be you could talk with em, get news, but they mostly don’t even bother doing that anymore - just point at what they want, throw their gems down and leave. Gnolls and imps like milk too,</i>” she goes on in a harder tone, “<i>but they prefer tryin' stealin' it. Marble and Kelt deal with them.</i>”");
 		
 		// [PC has used milking device:
-		if (player.findStatusAffect(StatusAffects.BreastsMilked) >= 0)
+		if (player.hasStatusAffect(StatusAffects.BreastsMilked))
 		{
 			outputText("\n\nShe smiles at you. “<i>I charge top gem for your produce, of course. Human milk is a very rare commodity these days, and it has a powerful calming effect on most anyone. Folks love it for their kids.</i>”");
 		}
 		
 		//[PC has used cock milker: 
-		if (player.findStatusAffect(StatusAffects.CockPumped) >= 0)
+		if (player.hasStatusAffect(StatusAffects.CockPumped))
 		{
-			if (player.findStatusAffect(StatusAffects.BreastsMilked) < 0) outputText("\n\n");
+			if (!player.hasStatusAffect(StatusAffects.BreastsMilked)) outputText("\n\n");
 			
 			outputText("You notice a number of smaller bottles filled with a creamy fluid on the table, arranged in a cargo container. It takes you a moment to realize what it is. “<i>Why d’you think I pay you for it?</i> ” says Whitney with a laugh, catching your expression. “<i>I kin use some of it for my herd, but it’s just as easy to sell it to goblins ‘n harpies. Much better to buy it from me than to waste energy catching and beating it out of a satyr. 'Sides, how'd ya think I kept my hair so luxurious? Goblin hairdressers are top notch.</i>”");
 		}
@@ -359,15 +359,15 @@ public function workFarm():void {
 	var marbling:Number = 0;
 	clearOutput();
 	//In withdrawl odds are higher.
-	if(player.findStatusAffect(StatusAffects.NoMoreMarble) < 0 && player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
+	if(!player.hasStatusAffect(StatusAffects.NoMoreMarble) && player.hasStatusAffect(StatusAffects.MarbleWithdrawl)) {
 		if(player.statusAffectv3(StatusAffects.Marble) == 1) marbleScene.addictedEncounterHappy();
 		else marbleScene.encounterMarbleAshamedAddiction();
 		return;
 	}
 	//1/3 chance of marblez
-	if(rand(3) == 0 && player.findStatusAffect(StatusAffects.NoMoreMarble) < 0 && player.findStatusAffect(StatusAffects.Marble) > 0) {
+	if(rand(3) == 0 && !player.hasStatusAffect(StatusAffects.NoMoreMarble) && player.hasStatusAffect(StatusAffects.Marble)) {
 		//Rapez Override normal
-		if(player.findStatusAffect(StatusAffects.MarbleRapeAttempted) >= 0 || flags[kFLAGS.MARBLE_WARNING] == 3) {
+		if(player.hasStatusAffect(StatusAffects.MarbleRapeAttempted) || flags[kFLAGS.MARBLE_WARNING] == 3) {
 			marbleScene.marbleAfterRapeBattle();
 			player.createStatusAffect(StatusAffects.NoMoreMarble,0,0,0,0);
 			return;
@@ -377,7 +377,7 @@ public function workFarm():void {
 			marbleScene.marbleWarningStateMeeting();
 			return;
 		}
-		if(player.findStatusAffect(StatusAffects.Marble) >= 0) {
+		if(player.hasStatusAffect(StatusAffects.Marble)) {
 			//Pre-addiction events(explore events take 1 hour, working ones take 3)
 			if(player.statusAffectv3(StatusAffects.Marble) == 0) {
 				marbling = rand(2);
@@ -394,7 +394,7 @@ public function workFarm():void {
 					return;
 				}
 				if(player.statusAffectv3(StatusAffects.Marble) == 1) {
-					if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) marbling = 0;
+					if(player.hasStatusAffect(StatusAffects.MarbleWithdrawl)) marbling = 0;
 					else marbling = 1;
 					//While Addicted Events type 1 (Marble likes her addictive milk):
 					if(marbling == 0) marbleScene.addictedEncounterHappy();
@@ -403,7 +403,7 @@ public function workFarm():void {
 					return;
 				}
 				else {
-					if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) marbling = 0;
+					if(player.hasStatusAffect(StatusAffects.MarbleWithdrawl)) marbling = 0;
 					else marbling = 1;
 					//While Addicted Events type 2 (Marble is ashamed):
 					if(marbling == 0) marbleScene.encounterMarbleAshamedAddiction();
@@ -474,7 +474,7 @@ public function meetMarble():void {
 		}
 		//PC Likes it
 		if(player.statusAffectv3(StatusAffects.Marble) == 1) {
-			if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) marbling = 0;
+			if(player.hasStatusAffect(StatusAffects.MarbleWithdrawl)) marbling = 0;
 			else marbling = 1;
 			//While Addicted Events type 1 (Marble likes her addictive milk):
 			if(marbling == 0) marbleScene.addictedEncounterHappy();
@@ -482,7 +482,7 @@ public function meetMarble():void {
 			else marbleScene.marbleEncounterAddictedNonWithdrawl();
 		}
 		else {
-			if(player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) marbling = 0;
+			if(player.hasStatusAffect(StatusAffects.MarbleWithdrawl)) marbling = 0;
 			else marbling = 1;
 			//While Addicted Events type 2 (Marble is ashamed):
 			if(marbling == 0) marbleScene.encounterMarbleAshamedAddiction();
@@ -497,7 +497,7 @@ public function exploreFarm():void {
 	var explore:Number = 0;
 	
 	//Marble after-rape
-	if(player.findStatusAffect(StatusAffects.MarbleRapeAttempted) >= 0 && player.findStatusAffect(StatusAffects.NoMoreMarble) < 0) {
+	if(player.hasStatusAffect(StatusAffects.MarbleRapeAttempted) && !player.hasStatusAffect(StatusAffects.NoMoreMarble)) {
 		marbleScene.marbleAfterRapeBattle();
 		player.createStatusAffect(StatusAffects.NoMoreMarble,0,0,0,0);
 		return;
@@ -513,19 +513,19 @@ public function exploreFarm():void {
 		return;
 	}
 	//Meet Marble First Time
-	if(player.findStatusAffect(StatusAffects.Marble) < 0 && player.findStatusAffect(StatusAffects.NoMoreMarble) < 0) {
+	if(!player.hasStatusAffect(StatusAffects.Marble) && !player.hasStatusAffect(StatusAffects.NoMoreMarble)) {
 		doNext(camp.returnToCampUseOneHour);
 		marbleScene.encounterMarbleInitially();
 		return;
 	}
 	//Meet kelt 1st time
-	if(rand(2) == 0 && player.findStatusAffect(StatusAffects.Kelt) < 0 && player.findStatusAffect(StatusAffects.KeltOff) < 0) {
+	if(rand(2) == 0 && !player.hasStatusAffect(StatusAffects.Kelt) && !player.hasStatusAffect(StatusAffects.KeltOff)) {
 		doNext(camp.returnToCampUseOneHour);
 		keltScene.keltEncounter();
 		return;		
 	}
 	//In withdrawl odds are higher.
-	if(player.findStatusAffect(StatusAffects.NoMoreMarble) < 0 && player.findStatusAffect(StatusAffects.MarbleWithdrawl) >= 0) {
+	if(!player.hasStatusAffect(StatusAffects.NoMoreMarble) && player.hasStatusAffect(StatusAffects.MarbleWithdrawl)) {
 		if(player.statusAffectv3(StatusAffects.Marble) == 1) marbleScene.addictedEncounterHappy();
 		else marbleScene.encounterMarbleAshamedAddiction();
 		return;
@@ -620,7 +620,7 @@ public function getMilked():void {
 	clearOutput();
 	//First time barn entrance
 	outputText("The barn looms tall ahead of you as you step into its shadow.  ", false);
-	if(player.findStatusAffect(StatusAffects.BreastsMilked) < 0) {
+	if(!player.hasStatusAffect(StatusAffects.BreastsMilked)) {
 		if(player.cor < 50) outputText("You shiver nervously when you step inside.", false);
 		else outputText("You smile eagerly as you walk inside.", false);
 		outputText("  The barn is filled with the earthy smells of earth, wood, and grease.  It's clean for the most part, though the floor is just packed dirt and the stalls look old and well-used.  A bank of machinery along the wall thrums and pulses as if it's a living creature.  Hoses and cables run from it in a dozen places, disappearing into the walls.   There is even a set of stout wooden doorways along the west wall.  That must be where the farm's intelligent denizens stay.  You notice each of the stalls have name-plates on them, and there is even one that says " + player.short + ".  It must be for you.\n\n", false);
@@ -629,7 +629,7 @@ public function getMilked():void {
 	else {
 		outputText("You walk over to the barn, eagerly anticipating the opportunity to get milked.", false);
 		//If ilk withdrawl or high lactation no dicks
-		if(player.findStatusAffect(StatusAffects.LactationReduction) >= 0 && player.totalCocks() == 0) outputText("  Your " + nippleDescript(0) + "s are engorged and ready to be taken care of.", false);
+		if(player.hasStatusAffect(StatusAffects.LactationReduction) && player.totalCocks() == 0) outputText("  Your " + nippleDescript(0) + "s are engorged and ready to be taken care of.", false);
 		//If cocks
 		else if(player.totalCocks() > 0) {
 			outputText("Your " + multiCockDescriptLight() + " erect", false);
@@ -639,7 +639,7 @@ public function getMilked():void {
 			outputText(" with desire.", false);
 		}
 		//If both
-		if(player.findStatusAffect(StatusAffects.LactationReduction) >= 0 && player.cockTotal() > 0) {
+		if(player.hasStatusAffect(StatusAffects.LactationReduction) && player.cockTotal() > 0) {
 			outputText("Your " + nippleDescript(0) + "s and " + multiCockDescriptLight() + " grow", false);
 			outputText(" hard and ready of ", false);
 			outputText("their", false);
@@ -648,7 +648,7 @@ public function getMilked():void {
 		outputText("  The doors part easily, and you breeze into your stall in a rush.\n\n", false);
 	}
 	//Step into harness – first time only
-	if(player.findStatusAffect(StatusAffects.BreastsMilked) < 0) {
+	if(!player.hasStatusAffect(StatusAffects.BreastsMilked)) {
 		outputText("A harness hangs limply in the stall, there to hold the occupant in place while they are milked of every last drop.  You exhale slowly and force yourself to step into it.  As you puzzle out the straps, it gets easier and easier to get the rest of the harness into place.  As you snap the last one into position, machinery whirs and pulls it tight, lifting you off the ground and suspending you, facedown.  The breast milk pumps pulse and vibrate on a tray below you, twitching slightly as you hear the machinery activate.\n\n", false);
 	}
 	//REPEAT
@@ -659,8 +659,8 @@ public function getMilked():void {
 	//Super huge nips scene
 	if(player.nippleLength == 3 && rand(2) == 0) application = 3;
 	//Apply
-	if(player.findStatusAffect(StatusAffects.BreastsMilked) < 0 || application == 0) {
-		if(player.findStatusAffect(StatusAffects.BreastsMilked) < 0) player.createStatusAffect(StatusAffects.BreastsMilked,0,0,0,0);
+	if(!player.hasStatusAffect(StatusAffects.BreastsMilked) || application == 0) {
+		if(!player.hasStatusAffect(StatusAffects.BreastsMilked)) player.createStatusAffect(StatusAffects.BreastsMilked,0,0,0,0);
 		outputText("You manage to grab the suction cups in spite of your constrictive bindings and pull them to your " + nippleDescript(0) + "s.  They latch on immediately, ", false);
 		if(player.nippleLength <= 1.5) outputText("pulling each of your nipples entirely into the suction-tubes.  ", false);
 		else outputText("struggling to fit around each of your nipples as they slide into the suction-tubes.  ", false);
@@ -810,7 +810,7 @@ public function getMilked():void {
 		outputText("\n\nYou feel woozy and lightheaded from the intense milking, and have difficulty focusing on anything but the residue of fluids coating your " + allBreastsDescript() + ".", false);
 		//Being a cow makes you less dumb
 		//Somehow
-		if(player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+		if(player.hasStatusAffect(StatusAffects.Feeder)) {
 			dynStats("int", -1);
 			if(liters > 5) dynStats("int", -1);
 			if(liters > 10) dynStats("int", -1);
@@ -856,7 +856,7 @@ public function cockPumping():void {
 	var cumQ:Number = player.cumQ() * (rand(10) + 90) / 100;
 	clearOutput();
 	//First time barn entrance
-	if(player.findStatusAffect(StatusAffects.CockPumped) < 0) {
+	if(!player.hasStatusAffect(StatusAffects.CockPumped)) {
 		outputText("The barn looms tall ahead of you as you step into its shadow.  ", false);
 		if(player.cor < 50) outputText("You shiver nervously when you step inside.  ", false);
 		else outputText("You smile eagerly as you walk inside.  ", false);
@@ -877,7 +877,7 @@ public function cockPumping():void {
 		outputText(" all too well what's to come.  The doors part easily, and you breeze into your stall in a rush.\n\n", false);
 	}
 	//First time using cock milker – factory install
-	if(player.findStatusAffect(StatusAffects.CockPumped) < 0) {
+	if(!player.hasStatusAffect(StatusAffects.CockPumped)) {
 		outputText("<b>There is a note tacked to the door from Whitney:</b>\n\n<i>I got your machine all rigged up, and even made a few modifications to bring it up to speed with the machinery I use on the bulls.  Enjoy your 'milkings', and don't overdo it – there are certain messes even a farm-girl like me WON'T clean up.</i>\n\n", false);
 		//Step into harness – first time only
 		outputText("A harness hangs limply in the stall, there to hold the occupant in place while they are drained of every ounce of 'milk'.  You exhale slowly and force yourself to step into it.  As you puzzle out the straps, it gets easier and easier to get the rest into place.  You snap the last one in place, and machinery whirs and pulls them tight, lifting you off the ground and suspending you, facedown.  A hatch in the far wall slides open, revealing a mass of tubes, wires, and machinery.  A ", false);

@@ -27,7 +27,7 @@ package classes.Scenes.Areas.Ocean
 		public function applyVenom(str:Number = 1):void
 		{
 			//First application
-			if (player.findStatusAffect(StatusAffects.AnemoneVenom) < 0) player.createStatusAffect(StatusAffects.AnemoneVenom, 0, 0, 0, 0);
+			if (!player.hasStatusAffect(StatusAffects.AnemoneVenom)) player.createStatusAffect(StatusAffects.AnemoneVenom, 0, 0, 0, 0);
 			//Gain some lust
 			game.dynStats("lus", (4 * str));
 

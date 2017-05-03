@@ -8,7 +8,7 @@
 	{
 		protected function hellhoundFire():void {
 			//Blind dodge change
-			if(findStatusAffect(StatusAffects.Blind) >= 0) {
+			if(hasStatusAffect(StatusAffects.Blind)) {
 				outputText(capitalA + short + " completely misses you with a wave of dark fire! Thank the gods it's blind!", false);
 				combatRoundOver();
 				return;
@@ -35,7 +35,7 @@
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) temp *= 3;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) temp *= 0.3;
 				temp = Math.round(temp);
-				if (player.findStatusAffect(StatusAffects.Blizzard) >= 0) {
+				if (player.hasStatusAffect(StatusAffects.Blizzard)) {
 				player.addStatusValue(StatusAffects.Blizzard,1,-1);
 				temp *= 0.2;
 				outputText("Both the hellhound's heads breathe in deeply before blasting a wave of dark fire at you. While the flames don't burn much due to protection of blizzard, the unnatural heat fills your body with arousal. ", false);
@@ -59,7 +59,7 @@
 			doNext(game.playerMenu);
 		}
 		protected function hellhoundScent():void {
-			if(player.findStatusAffect(StatusAffects.NoFlee) >= 0) {
+			if(player.hasStatusAffect(StatusAffects.NoFlee)) {
 				if(spe == 100) {
 					hellhoundFire();
 					return;

@@ -32,6 +32,16 @@ package classes.Scenes.Dungeons.HiddenCave
 			combatRoundOver();
 		}
 		
+	//	override public function defeated(hpVictory:Boolean):void
+	//	{
+	//		game.dungeons.hiddencave.cumWitchDefeated();
+	//	}
+		
+		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
+		{
+			game.dungeons.hiddencave.defeatedByLoliBatGolem();
+		}
+		
 		public function LoliBatGolem() 
 		{
 			this.a = "the ";

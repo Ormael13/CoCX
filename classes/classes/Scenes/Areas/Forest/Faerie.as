@@ -53,7 +53,7 @@ public function encounterFaerie():void {
 private function faerieRAEP():void {
 	spriteSelect(17);
 	//Count secksins
-	if(player.findStatusAffect(StatusAffects.FaerieFemFuck) < 0) player.createStatusAffect(StatusAffects.FaerieFemFuck,1,0,0,0);
+	if(!player.hasStatusAffect(StatusAffects.FaerieFemFuck)) player.createStatusAffect(StatusAffects.FaerieFemFuck,1,0,0,0);
 	else player.addStatusValue(StatusAffects.FaerieFemFuck,1,1);
 	
 	outputText("You let the tiny faerie buzz closer to investigate, then with an explosion of movement, snatch her out of the air.  She squirms in your palm, struggling futilely in your grasp.  You poke between her legs with a finger, noting the flushed redness of the faerie's skin.  ", true);
@@ -215,7 +215,7 @@ private function disableFaerieEncounterForGood():void {
 //[YES] *make her pleasure you
 private function faerieCaptureHJ():void {
 	spriteSelect(17);
-	if(player.findStatusAffect(StatusAffects.FaerieFucked) >= 0) player.addStatusValue(StatusAffects.FaerieFucked,1,2);
+	if(player.hasStatusAffect(StatusAffects.FaerieFucked)) player.addStatusValue(StatusAffects.FaerieFucked,1,2);
 	else player.createStatusAffect(StatusAffects.FaerieFucked,2,0,0,0);
 	clearOutput();
 	if(player.statusAffectv1(StatusAffects.FaerieFucked) < 15) {
@@ -276,7 +276,7 @@ private function faerieCaptureHJ():void {
 		outputText("The faerie takes off, still dripping, and flying in something less than a straight line...", false);
 		player.orgasm();
 		dynStats("lib", -.5);
-		if(player.findStatusAffect(StatusAffects.Jizzpants) < 0 && player.armor.name != "nothing" && player.armor != armors.LTHCARM && player.armor != armors.GOOARMR) player.createStatusAffect(StatusAffects.Jizzpants,1,0,0,0);
+		if(!player.hasStatusAffect(StatusAffects.Jizzpants) && player.armor.name != "nothing" && player.armor != armors.LTHCARM && player.armor != armors.GOOARMR) player.createStatusAffect(StatusAffects.Jizzpants,1,0,0,0);
 		if (player.armor == armors.GOOARMR) {
 			outputText("\n\nFortunately, your jizz gets absorbed into the blue goo covering your body.");
 			getGame().valeria.feedValeria(player.cumQ() / 10);

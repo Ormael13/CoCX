@@ -117,7 +117,7 @@ package classes.Scenes.NPCs
 				else outputText("Vapula is busy caressing your corrupted mousette, Amily while softly kissing her breasts.  Her fingers are buried in your fuck-toy's pussy, and Amily is moaning whorishly and doesn't even bother to stop when she looks at you, her helpless eyes betraying her lack of control over her own lust.");
 			}
 			if (choice == 9) {
-				if (player.findStatusAffect(StatusAffects.CampRathazul) < 0) choice = 10;
+				if (!player.hasStatusAffect(StatusAffects.CampRathazul)) choice = 10;
 				else outputText("Vapula is having a very active conversation with Rathazul, the alchemist.  They seem to be discussing the chemical properties of demonic mixtures and the various taints that could occur from their ingestion.  The succubus is holding a bottle of a purplish white fluid that appears to be her own milk, probably waiting for an analysis.");
 			}
 			if (choice == 10) outputText("Vapula is resting on her stomach, a buttplug shoved into her ass.  She doesn't seem to notice you watching her butt jiggle under the effect of her unconscious anal contractions.");
@@ -386,7 +386,7 @@ package classes.Scenes.NPCs
 				haremT = "Don'tFuck";
 			}
 			//IF PC has cerulean succubused before
-			if (player.findStatusAffect(StatusAffects.RepeatSuccubi) >= 0) {
+			if (player.hasStatusAffect(StatusAffects.RepeatSuccubi)) {
 				if (flags[kFLAGS.VAPULA_THREESOMES] == 0) {
 					outputText("\n\nShe won't currently assist the cerulean succubus if you invite her over.");
 					threesomeT = "Assist On";
@@ -1144,7 +1144,7 @@ package classes.Scenes.NPCs
 		private function spankVapulaLikeABoss():void
 		{
 			clearOutput();
-			outputText("Without any warning, you grab the lusty succubus by the wrists and pull her into you, easily manhandling her surprised form until she's bent over your [leg], vulnerable and squealing like the gutter-slut she is.  Her wings batter at your face and chest, but after a little wrangling, you pin them flat against her back.  The best she can manage now is a few weak twitches at her wing-tips.  Her large, well-formed breasts jiggle and shake as she struggles, but all the trembling purple mountains accomplish is bringing a ready flush to your " + player.skin());
+			outputText("Without any warning, you grab the lusty succubus by the wrists and pull her into you, easily manhandling her surprised form until she's bent over your [leg], vulnerable and squealing like the gutter-slut she is.  Her wings batter at your face and chest, but after a little wrangling, you pin them flat against her back.  The best she can manage now is a few weak twitches at her wing-tips.  Her large, well-formed breasts jiggle and shake as she struggles, but all the trembling purple mountains accomplish is bringing a ready flush to your [skin]");
 			if (player.hasCock()) outputText(" and a healthy surge of blood to [eachCock]");
 			else if (player.hasVagina()) outputText(" and a teltale moistness to your nethers");
 			outputText(".");

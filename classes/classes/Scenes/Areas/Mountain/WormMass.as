@@ -46,7 +46,7 @@
 			else {
 				outputText("The worm colony shambles over to you and attempts to grapple you. Attempting to dodge, you fail to get away fast enough and fall to the ground engulfed by the mass. You are completely covered in the slimy worms!!! Incapable of avoiding any of their movements, you feel their slime coat every inch of your body and you feel the struggle and strain of each individual worm as they crawl all over you. You immediately begin flailing wildly as you cannot even breathe!", false);
 				//Chance of insta-loss if infested twice
-				if(player.findStatusAffect(StatusAffects.InfestAttempted) >= 0) {
+				if(player.hasStatusAffect(StatusAffects.InfestAttempted)) {
 					outputText("  Struggle as you might, the creatures overwhelm your body and prevent you from any conceivable opportunity to get them off you, Your head quickly becomes visible, allowing you to breathe as you stare helplessly at the cocoon of worms trapping you.\n\n", false);
 					game.mountain.wormsScene.infest1();
 					return;

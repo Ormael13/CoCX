@@ -103,7 +103,7 @@ package classes.Scenes.Areas.Forest
 				else outputText("We have already offered you what power we could.");
 				outputText(" But perhaps there is something more. This tree is naught but a shell, but millennia of focusing our song has imbued it with a fragment of our power. Granted it what you call “soulforce”.</i>\"\n\n");
 				outputText("You hear rumbling all around you. Its an earthquake! As you struggle to maintain your balance, branches fall around you from the darkness above. As the tremors still, you look around, and then up. You’re inside a tree, how did the branches get... there? \"<i>These twigs have power beyond mere wood. Take any piece you desire, ");
-				if (player.findStatusAffect(StatusAffects.CampRathazul) >= 0) outputText("you already know someone who can turn it into a weapon befitting a champion.</i>\"\n\n");
+				if (player.hasStatusAffect(StatusAffects.CampRathazul)) outputText("you already know someone who can turn it into a weapon befitting a champion.</i>\"\n\n");
 				else outputText("we have faith you will find a way to use it in our defense.</i>\"\n\n");
 				if (flags[kFLAGS.YGGDRASIL_BRANCH] < 1) flags[kFLAGS.YGGDRASIL_BRANCH]++;
 			}

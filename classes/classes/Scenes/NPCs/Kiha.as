@@ -30,7 +30,7 @@ package classes.Scenes.NPCs
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 				damage = Math.round(damage);
-				if (player.findStatusAffect(StatusAffects.Blizzard) >= 0) {
+				if (player.hasStatusAffect(StatusAffects.Blizzard)) {
 					player.addStatusValue(StatusAffects.Blizzard, 1, -1);
 					damage *= 0.2;
 					damage = Math.round(damage);
@@ -156,11 +156,11 @@ package classes.Scenes.NPCs
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(findStatusAffect(StatusAffects.spiderfight) >= 0)
+			if(hasStatusAffect(StatusAffects.spiderfight))
 				game.kihaFollower.playerBeatsUpKihaPreSpiderFight();
-			else if(findStatusAffect(StatusAffects.DomFight) >= 0)
+			else if(hasStatusAffect(StatusAffects.DomFight))
 				game.kihaFollower.pcWinsDomFight();
-			else if(findStatusAffect(StatusAffects.Spar) >= 0)
+			else if(hasStatusAffect(StatusAffects.Spar))
 				game.kihaFollower.winSparWithKiha();
 			else game.kihaScene.kihaVictoryIntroduction();
 		}
@@ -168,11 +168,11 @@ package classes.Scenes.NPCs
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(findStatusAffect(StatusAffects.spiderfight) >= 0)
+			if(hasStatusAffect(StatusAffects.spiderfight))
 				game.kihaFollower.loseKihaPreSpiderFight();
-			else if(findStatusAffect(StatusAffects.DomFight) >= 0)
+			else if(hasStatusAffect(StatusAffects.DomFight))
 				game.kihaFollower.pcLosesDomFight();
-			else if(findStatusAffect(StatusAffects.Spar) >= 0)
+			else if(hasStatusAffect(StatusAffects.Spar))
 				game.kihaFollower.sparWithFriendlyKihaLose();
 			else if (pcCameWorms){
 				outputText("\n\nKiha seems visibly disturbed by your infection, enough that she turns to leave.");

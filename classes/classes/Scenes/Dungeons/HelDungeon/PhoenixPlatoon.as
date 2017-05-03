@@ -22,7 +22,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			var damage:Number = 100 + rand(50);
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
-			if (player.findStatusAffect(StatusAffects.Blizzard) >= 0) {
+			if (player.hasStatusAffect(StatusAffects.Blizzard)) {
 			player.addStatusValue(StatusAffects.Blizzard, 1, -1);
 			outputText("Suddenly, the shield wall parts, revealing a single member of the platoon, a particularly muscular girl with a raging erection.  Before you can consider what's going on, she rears back and huffs at you.  To your horror, a great gout of fire erupts from her mouth, rolling towards you.  You dive, but are still caught partially in the inferno.  Luckly blizzard still surrounding you lowering amount of fire that pass throu it.");
 			damage *= 0.2;
@@ -43,7 +43,7 @@ package classes.Scenes.Dungeons.HelDungeon
 		}
 
 		public function phoenixPlatoonAI():void {
-			if(findStatusAffect(StatusAffects.Platoon) < 0) {
+			if(!hasStatusAffect(StatusAffects.Platoon)) {
 				phoenixPlatoonRush();
 				createStatusAffect(StatusAffects.Platoon,0,0,0,0);
 			}

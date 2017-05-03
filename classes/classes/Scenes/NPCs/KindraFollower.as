@@ -129,7 +129,7 @@ public function trainingArcheryWithKindra():void {
 				outputText("Kindra applaud you.\n\n");
 				outputText("\"<i>Well wow I didn’t expect you to not only manage this feat but also actually destroy the target in the process pup. I can hereby and without doubt call you one of Mareth best archer your training is complete.</i>\"\n\n");
 				outputText("\"<b>Learned Sidewinder ability!</b>\"\n\n");
-				if (player.findStatusAffect(StatusAffects.KnowsSidewinder) < 0) player.createStatusAffect(StatusAffects.KnowsSidewinder, 0, 0, 0, 0);
+				if (!player.hasStatusAffect(StatusAffects.KnowsSidewinder)) player.createStatusAffect(StatusAffects.KnowsSidewinder, 0, 0, 0, 0);
 				bowSkill(5);
 			}
 			else {
@@ -191,7 +191,7 @@ public function trainingArcheryWithKindra():void {
 				outputText("Kindra watch satisfied as your arrows hits the five consecutives targets right in their centers.\n\n");
 				outputText("\"<i>Good that will be all for today. I have a new training for you tomorrow that will push your skill to the limit. For now go rest pup you earned it.</i>\"\n\n");
 				outputText("\"<b>Learned Barrage ability!</b>\"\n\n");
-				if (player.findStatusAffect(StatusAffects.KnowsBarrage) < 0) player.createStatusAffect(StatusAffects.KnowsBarrage, 0, 0, 0, 0);
+				if (!player.hasStatusAffect(StatusAffects.KnowsBarrage)) player.createStatusAffect(StatusAffects.KnowsBarrage, 0, 0, 0, 0);
 				flags[kFLAGS.KINDRA_ADV_ARCHERY] = 3;
 			}
 			bowSkill(5);

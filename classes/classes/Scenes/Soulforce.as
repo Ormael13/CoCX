@@ -1022,9 +1022,9 @@ package classes.Scenes
 			player.earType = EARS_HUMAN;
 			player.gillType = GILLS_NONE;
 			player.rearBody = REAR_BODY_NONE;
-			if (player.findStatusAffect(StatusAffects.BlackNipples) >= 0) player.removeStatusAffect(StatusAffects.BlackNipples);
+			if (player.hasStatusAffect(StatusAffects.BlackNipples)) player.removeStatusAffect(StatusAffects.BlackNipples);
 		//	if (player.averageNipplesPerBreast() > 1) player.breastRows[x].nipplesPerBreast = 1;
-			if (player.findStatusAffect(StatusAffects.Feeder) >= 0) {
+			if (player.hasStatusAffect(StatusAffects.Feeder)) {
 				player.removeStatusAffect(StatusAffects.Feeder);
 				player.removePerk(PerkLib.Feeder);
 			}

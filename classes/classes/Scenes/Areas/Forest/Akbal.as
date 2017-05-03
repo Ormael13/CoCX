@@ -12,7 +12,7 @@
 			//Chances to miss:
 			var damage:Number = 0;
 			//Blind dodge change
-			if (findStatusAffect(StatusAffects.Blind) >= 0) {
+			if (hasStatusAffect(StatusAffects.Blind)) {
 				outputText(capitalA + short + " seems to have no problem guiding his attacks towards you, despite his blindness.\n", false);
 			}
 			//Determine if dodged!
@@ -84,7 +84,7 @@
 		public function akbalLustAttack():void
 		{
 			//*Lust Attack - 
-			if (player.findStatusAffect(StatusAffects.Whispered) < 0)
+			if (!player.hasStatusAffect(StatusAffects.Whispered))
 			{
 				outputText("You hear whispering in your head. Akbal begins speaking to you as he circles you, telling all the ways he'll dominate you once he beats the fight out of you.", false);
 				//(Lust increase)
@@ -110,7 +110,7 @@
 				outputText("Akbal's eyes fill with light, and a strange sense of fear begins to paralyze your limbs.", false);
 				//(Speed decrease)
 				game.dynStats("spe", speedChange);
-				if (player.findStatusAffect(StatusAffects.AkbalSpeed) >= 0)
+				if (player.hasStatusAffect(StatusAffects.AkbalSpeed))
 					player.addStatusValue(StatusAffects.AkbalSpeed, 1, speedChange);
 				else
 					player.createStatusAffect(StatusAffects.AkbalSpeed, speedChange, 0, 0, 0);
@@ -146,7 +146,7 @@
 					game.combatRoundOver();
 					return;
 				}
-				if (player.findStatusAffect(StatusAffects.Blizzard) >= 0) {
+				if (player.hasStatusAffect(StatusAffects.Blizzard)) {
 					player.addStatusValue(StatusAffects.Blizzard, 1, -1);
 					var damage2:int = inte / 5;
 					if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage2 *= 3;

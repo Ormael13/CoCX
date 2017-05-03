@@ -13,7 +13,7 @@ package classes.Scenes.Dungeons.DeepCave
 			//If afflicted by blind or whispered and over 50% lust,
 			//burns lust and clears statuses before continuing with 
 			//turn.
-			if(lust > 50 && (findStatusAffect(StatusAffects.Fear) >= 0 || findStatusAffect(StatusAffects.Blind) >= 0)) {
+			if(lust > 50 && (hasStatusAffect(StatusAffects.Fear) || hasStatusAffect(StatusAffects.Blind))) {
 				removeStatusAffect(StatusAffects.Fear);
 				removeStatusAffect(StatusAffects.Blind);
 				lust -= 10;
@@ -21,7 +21,7 @@ package classes.Scenes.Dungeons.DeepCave
 			}
 			
 			//STANDARD COMBAT STATUS AFFECTS HERE
-			if(findStatusAffect(StatusAffects.Stunned) >= 0) {
+			if(hasStatusAffect(StatusAffects.Stunned)) {
 				outputText("Your foe is too dazed from your last hit to strike back!", false);
 				removeStatusAffect(StatusAffects.Stunned);
 				combatRoundOver();
@@ -30,11 +30,11 @@ package classes.Scenes.Dungeons.DeepCave
 			var select:Number=1;
 			var rando:Number=1;
 			//Exgartuan gets to do stuff!
-			if(player.findStatusAffect(StatusAffects.Exgartuan) >= 0 && player.statusAffectv2(StatusAffects.Exgartuan) == 0 && rand(3) == 0) {
+			if(player.hasStatusAffect(StatusAffects.Exgartuan) && player.statusAffectv2(StatusAffects.Exgartuan) == 0 && rand(3) == 0) {
 				game.exgartuan.exgartuanCombatUpdate();
 				outputText("\n\n", false);
 			}
-			if(findStatusAffect(StatusAffects.Constricted) >= 0) {
+			if(hasStatusAffect(StatusAffects.Constricted)) {
 				//Enemy struggles - 
 				outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.", false);
 				if(statusAffectv1(StatusAffects.Constricted) <= 0) {
@@ -68,7 +68,7 @@ package classes.Scenes.Dungeons.DeepCave
 					else {
 						outputText("You try to avoid it, but the fragile glass shatters against you, coating you in sticky red liquid.  It seeps into your " + player.skinDesc + " and leaves a pleasant, residual tingle in its wake.  Oh no...", false);
 						//[Applies: "Temporary Heat" status]
-						if(player.findStatusAffect(StatusAffects.TemporaryHeat) < 0) player.createStatusAffect(StatusAffects.TemporaryHeat,0,0,0,0);
+						if(!player.hasStatusAffect(StatusAffects.TemporaryHeat)) player.createStatusAffect(StatusAffects.TemporaryHeat,0,0,0,0);
 					}
 				}
 				else if(attackChoice == 1) {
@@ -119,7 +119,7 @@ package classes.Scenes.Dungeons.DeepCave
 
 		
 		public function zetazTaunt():void {
-			if(findStatusAffect(StatusAffects.round) < 0) {
+			if(!hasStatusAffect(StatusAffects.round)) {
 				createStatusAffect(StatusAffects.round,1,0,0,0);
 				outputText("Zetaz asks, \"<i>Do you even realize how badly you fucked up my life, ", false);
 				if(player.humanScore() >= 4) outputText("human", false);

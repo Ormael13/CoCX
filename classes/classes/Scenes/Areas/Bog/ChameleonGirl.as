@@ -23,7 +23,7 @@ package classes.Scenes.Areas.Bog
 		public function chameleonClaws():void
 		{
 			//Blind dodge change
-			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
+			if (hasStatusAffect(StatusAffects.Blind) && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind claw-attack!\n", false);
 			}
 			//Evade:
@@ -45,7 +45,7 @@ package classes.Scenes.Areas.Bog
 		public function rollKickClawWhatTheFuckComboIsThisShit():void
 		{
 			//Blind dodge change
-			if (findStatusAffect(StatusAffects.Blind) >= 0 && rand(3) < 1) {
+			if (hasStatusAffect(StatusAffects.Blind) && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind roll-kick!\n", false);
 			}
 			//Evade:

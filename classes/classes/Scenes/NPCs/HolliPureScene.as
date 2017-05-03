@@ -43,7 +43,7 @@ public function treeMenu():void {
 	}
 	else if (flags[kFLAGS.FLOWER_LEVEL] == 3) {
 		outputText("The familiar plant has blossomed into a nicely sized tree, though you doubt it has finished growing just yet.  It sports an outstretched canopy with nice, green leaves.  The vaginal flower is still there and is in full bloom, now several feet across and practically dripping with moisture.  Just up the trunk, there's a pair of small, roughly b-cup breasts bulging out of the bark.  They're exquisitely smooth and soft, and they ooze sweet-smelling sap that your tongue would love to taste.  In the canopy above, tentacle vines idly writhe about, though they show no sizes of aggression.");
-		if(player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0) {
+		if(player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.hasStatusAffect(StatusAffects.KnowsWhitefire)) {
 			outputText("\n\nIt could be burned down with your supernatural fire, but it would definitely tire you.");
 		}
 		menu();
@@ -178,14 +178,14 @@ public function flowerGrowsToP3():void {
 	outputText("  The distinct sound of wood bowing and creaking under new weight catches your ears, and well before you can get to the plant, you can see a leafy canopy stretching towards the sky.  <b>It's grown into a small tree, with bark, leaves, and everything!</b>  Warily, you round one of the ancient standing stones to get a better look.");
 	outputText("\n\nThe first thing you notice is that the weird flower remains, affixed at waist height to the side of the tree.  Glancing further up the smooth, knotless trunk, you see the most surprising thing of all - a pair of almond-colored nipples, perched upon small, tit-like bulges in the wood.  The bark on these globular protrusion is smoother and fairer than the surrounding surface.  On one of them, a trickle of sap has formed into a heavy bead, and it smells sweet, like maple syrup");
 	outputText("\n\nA dollop of something moist landing in your hair startles you from your visual inspection.  Gingerly, you touch your fingers to the wet spot and come away with a thick, viscous fluid that smells faintly musky... and salty...  It's cum!  You recoil, looking up in time to see a half dozen tentacles curling between the branches rubbing against each other.  Well now, your little pet plant is growing up.  There's no easy way to get rid of it now");
-	if(player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0) {
+	if(player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.hasStatusAffect(StatusAffects.KnowsWhitefire)) {
 		outputText(", though you suppose you could burn it down with magical fire if you set your mind to it");
 	}
 	flags[kFLAGS.FLOWER_LEVEL] = 3;
 	flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] = 0;
 	outputText(".\n\n<b>What do you do?</b>");
 	menu();
-	if(player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0) addButton(0, "Torch It", torchP3Tree);
+	if(player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.hasStatusAffect(StatusAffects.KnowsWhitefire)) addButton(0, "Torch It", torchP3Tree);
 	addButton(1, "Leave It", playerMenu);
 }
 private function drinkThePlantGirlsSap():void {
@@ -206,12 +206,12 @@ private function torchP3Tree():void {
 	//Requires fire-based attack and removes the tree.
 	outputText("This has gone on long enough!  This thing cannot continue to grow in your camp any longer, and you have just the means to remove it: fire.  ");
 	//[(nerdfire)
-	if(player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0) outputText("Closing your eyes to focus, you gather your energies, and unleash your white, supernatural flames upon the thing.");
+	if(player.hasStatusAffect(StatusAffects.KnowsWhitefire)) outputText("Closing your eyes to focus, you gather your energies, and unleash your white, supernatural flames upon the thing.");
 	//(bromancefire)
 	else if(player.findPerk(PerkLib.FireLord) >= 0) outputText("Sucking in your breath, you inflate your chest and stir the embers of the jaguar demon's gift.  Dredging up an enormous pine-green fireball, you exhale and launch it at the tree.");
 	else outputText("Sucking in your breath, you inflate your chest and stir the embers of your fiery gift.  Dredging up an enormous fireball, you exhale and launch it at the tree.");
 	outputText("  It goes up by the torch, though the fire starts to fade sooner than you would expect.  You huff, but repeat the action, layering a new blaze atop the previous one; you put all your concentration into this new conflagration, stoking the inferno with every ounce of your ");
-	if(player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0) outputText("magical will");
+	if(player.hasStatusAffect(StatusAffects.KnowsWhitefire)) outputText("magical will");
 	else outputText("breath");
 	outputText(".");
 	outputText("\n\nThis time, it stays suitably lit.  The tree makes a handy torch for a few hours while it burns to ash, but leaves behind a thick, cloying smoke that takes forever to dissipate.  At least that nuisance plant is gone for good.");
@@ -392,7 +392,7 @@ private function haveAMapleSyrupSnack():void {
 	outputText("\n\nHolli gasps, \"<i>Not so hard!</i>\"");
 	outputText("\n\nLooking up at her concerned visage, you wink and bite down on the tender nipple, just hard enough to make her squeak in distress.  The pant-women body twists in your grip, but with your arm around the small of her back and her body part of the tree, she has nowhere to go.  You easily restrain her, allowing yourself to fully sample her treats.  Your throat bobs with each gulp of the free-flowing nectar and tingles as your tongue did before.  Soon, your whole body feels alight with energy, just as you finish the first breast.");
 	outputText("\n\nThe nipple pops out of your lips with a weak spray of 'milk', and its owner shudders slightly, her flower blooming against your [legs], weakly grasping.  You let your restraining arm go a bit lower to squeeze Holli's cute little butt.  Her smooth skin feels perfect in your hand, though you can feel that a little lower, her flesh joins with the wood of the tree, becoming quite rough.  How odd.");
-	outputText("\n\nYou quickly tire of fondling the proud creature's body and return to drinking her treasure straight from the tap, suckling hungrily to expedite the process.  Holli's pants can be heard above you, and the slick grinding of her petals over your [hips] adds to the eroticism in the air.  Your own blood is pumping harder and faster, flushing your " + player.skin() + ".  Drinking deeper, you realize you feel vibrantly alive, completely and utterly suffused with energy.  You swallow the last of Holli's syrup and shake slightly, breaking away from the intimate embrace you shared.");
+	outputText("\n\nYou quickly tire of fondling the proud creature's body and return to drinking her treasure straight from the tap, suckling hungrily to expedite the process.  Holli's pants can be heard above you, and the slick grinding of her petals over your [hips] adds to the eroticism in the air.  Your own blood is pumping harder and faster, flushing your [skin].  Drinking deeper, you realize you feel vibrantly alive, completely and utterly suffused with energy.  You swallow the last of Holli's syrup and shake slightly, breaking away from the intimate embrace you shared.");
 	player.refillHunger(20);
 	outputText("\n\nHolli is trembling and oozing lubricants from below, her pale-green skin flushed almost purple.  Eyelids hanging heavy over her dilated pupils, she gasps and pants... it appears that she was able to orgasm from that, but still wants more.");
 	outputText("\n\nPerhaps later.  You burp and walk off, having gotten just what you wanted.");

@@ -10,7 +10,7 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (player.findStatusAffect(StatusAffects.StoneLust))
+			if (player.hasStatusAffect(StatusAffects.StoneLust))
 			{
 				player.removeStatusAffect(StatusAffects.StoneLust);
 			}
@@ -34,7 +34,7 @@
 		
 		private function lustMagicAttack():void {
 			outputText("The sand witch points at you, drawing a circle in the air and mouthing strange words.\n\n");
-			if (player.findStatusAffect(StatusAffects.StoneLust) >= 0) {
+			if (player.hasStatusAffect(StatusAffects.StoneLust)) {
 				outputText("The orb inside you grows warm, almost hot, suffusing your body with heat and arousal.  ");
 				game.dynStats("lus", 4 + int(player.sens) / 10);
 			}

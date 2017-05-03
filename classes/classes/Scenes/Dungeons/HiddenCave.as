@@ -12,6 +12,7 @@ package classes.Scenes.Dungeons
 	import classes.Scenes.Dungeons.DungeonEngine;
 	import classes.Scenes.Dungeons.HiddenCave.*;
 	import classes.Scenes.NPCs.Ted;
+	import classes.PerkLib;
 	
 	public class HiddenCave extends DungeonAbstractContent
 	{
@@ -51,6 +52,23 @@ package classes.Scenes.Dungeons
 			outputText("You leave the cave behind and take off through the hills back towards camp.", true);
 			doNext(camp.returnToCampUseOneHour);
 		}
+		
+		public function defeatedByLoliBatGolem():void {
+			clearOutput();
+			outputText("As you fall defeated to the ground the construct continue to pummel you to death. By the time it's done there will be nothing left of you but a bloodstain on the stone floor.\n\n");
+			//[GAME OVER]
+			getGame().gameOver();
+			removeButton(1);
+		}
+		
+		public function defeatedByGuardianGolems():void {
+			clearOutput();
+			outputText("As you fall defeated to the ground the constructs continue to pummel you to death. By the time they are done there will be nothing left of you but a bloodstain on the stone floor.\n\n");
+			//[GAME OVER]
+			getGame().gameOver();
+			removeButton(1);
+		}
+		
 		//Rooms
 		public function roomEntrance():void {
 			kGAMECLASS.dungeonLoc = 39;
@@ -94,7 +112,7 @@ package classes.Scenes.Dungeons
 		public function roomNUP():void {
 			kGAMECLASS.dungeonLoc = 43;
 			outputText("<b><u>N Underground Passage</u></b>\n", true);
-			outputText("Placeholder room desc.");
+			outputText("This room was hidden by a secret passage. It leads down below.");
 			dungeons.setDungeonButtons(null, null, roomNWUP, roomNEUP);
 		}
 		public function roomSStaircase():void {
@@ -113,7 +131,7 @@ package classes.Scenes.Dungeons
 		public function roomSStorage():void {
 			kGAMECLASS.dungeonLoc = 46;
 			outputText("<b><u></u>Small Storage</b>\n", true);
-			outputText("Placeholder room desc.");
+			outputText("This room is filled with storage crates.");
 			dungeons.setDungeonButtons(roomSWUP, null, null, null);
 			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] < 1) {
 				outputText("\n\nA few of golem figures preset in storage suddenly starting to move forming a small group encirling you.");
@@ -196,7 +214,7 @@ package classes.Scenes.Dungeons
 		public function roomLStorageW():void {
 			kGAMECLASS.dungeonLoc = 53;
 			outputText("<b><u>Large Storage (W)</u></b>\n", true);
-			outputText("Placeholder room desc.");
+			outputText("A big heap of treasure is scattered around the room. For most gold and jewels.");
 			dungeons.setDungeonButtons(null, roomNTN, null, roomLStorageE);
 			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 1) {
 				outputText("\n\nA few of golem figures preset in storage suddenly starting to move forming a small group encirling you.");
@@ -249,7 +267,7 @@ package classes.Scenes.Dungeons
 		public function roomLStorageE():void {
 			kGAMECLASS.dungeonLoc = 54;
 			outputText("<b><u>Large Storage (E)</u></b>\n", true);
-			outputText("Placeholder room desc.");
+			outputText("A big heap of treasure is scattered around the room. For most gold and jewels.");
 			dungeons.setDungeonButtons(null, null, roomLStorageW, null);
 			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 2) {
 				outputText("\n\nA few of golem figures preset in storage suddenly starting to move forming a small group encirling you.");
@@ -303,7 +321,9 @@ package classes.Scenes.Dungeons
 		public function roomTedsLair():void {
 			kGAMECLASS.dungeonLoc = 59;
 			outputText("<b><u>Ted's Lair</u></b>\n", true);
-			outputText("Placeholder room desc.");
+			outputText("This room is huge. At the center is the throne where the dragon man used to sit. ");
+			if (player.findPerk(PerkLib.SoulSense) >= 0) outputText("There is a small suspicious lever on the right next to a bed. ");
+			outputText("On the left is a small tatami used for meditations.");
 			dungeons.setDungeonButtons(roomTunnel02, null, null, null);
 			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 4) {
 				outputText("\n\n\"<i>Did you come to worship me mortal?</i>\" A dommering voice reaching your ears moment you enter the room. Stunned you stopped to look around.");

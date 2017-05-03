@@ -101,7 +101,6 @@ package classes
 			player.createPerk(PerkLib.HistoryFighter,0,0,0,0);
 			player.createPerk(PerkLib.MessyOrgasms, 1.25, 0, 0, 0);
 			player.cumMultiplier = 20;
-			player.gender = 3;
 		}
 		
 		private function customAria():void {
@@ -120,7 +119,6 @@ package classes
 			player.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
 			player.skinTone = "pink";
 			player.skinType = SKIN_TYPE_FUR;
-			player.skinDesc = "fur";
 			player.hairColor = "pink";
 			player.hairLength = 50;
 			player.hipRating = 5;
@@ -168,7 +166,6 @@ package classes
 				player.vaginas[0].vaginalWetness = VAGINA_WETNESS_WET;
 				player.clitLength = 0.25;
 			}
-			player.gender = 3;
 			outputText("You're quite the foxy herm, and as different as you were compared to the rest of Ingnam, it's no surprise you were sent through first.");
 		}
 		
@@ -188,8 +185,7 @@ package classes
 			player.cocks[1].pShortDesc = "silver cock-ring";
 			player.cocks[0].pLongDesc = "Silver cock-ring";
 			player.cocks[1].pLongDesc = "Silver cock-ring";
-			//"Androgynous face, large brown eyes, long black hair down to about ass level, full lips, pirced with one silver ring ass itself is round and thick, chest is flat, only two nipples, about nickle sized pierced with silver studs, skin of a pale ghostly transparent complexion, rest of the body is not notably muscular or chubby in any definite way, feet seem to taper off into full transparency. Full body housed in the lewd Inquisitor Armor, wielding a Wizard Staff. Starting at level 5 with tank, regeneration, healing, smarts, channeling, mage and incorperability perks, a full knowledge of 
-			player.gender = 1;
+			//"Androgynous face, large brown eyes, long black hair down to about ass level, full lips, pirced with one silver ring ass itself is round and thick, chest is flat, only two nipples, about nickle sized pierced with silver studs, skin of a pale ghostly transparent complexion, rest of the body is not notably muscular or chubby in any definite way, feet seem to taper off into full transparency. Full body housed in the lewd Inquisitor Armor, wielding a Wizard Staff. Starting at level 5 with tank, regeneration, healing, smarts, channeling, mage and incorperability perks, a full knowledge of
 			player.tallness = 72;
 			player.femininity = 50;
 			player.hairLength = 35;
@@ -238,7 +234,6 @@ package classes
 			//Herm, Fox Cock: (27"l x 1.4"w, knot multiplier 3.6), No Balls, Cum Multiplier: 7,500, Vaginal Wetness: 5, Clit length: 0.5, Virgin, Fertility: 15	9-tailed "enlightened" kitsune( a pure-blooded kitsune with the "Enlightened Nine-tails" perk and magic specials) 
 			if(!player.hasCock()) player.createCock();
 			if(!player.hasVagina()) player.createVagina();
-			player.gender = 3;
 			player.cocks[0].cockLength = 27;
 			player.cocks[0].cockThickness = 1.4;
 			player.cocks[0].knotMultiplier = 3.6;
@@ -255,7 +250,6 @@ package classes
 			//if possible with fur, Hair color: "midnight black", Skin/Fur color: "ashen grayish-blue",  Height: 65", Tone: 100, Thickness: 0, Hip rating: 6, Butt rating: 3,Feminimity: 50,  ( 4 rows of breasts (Descending from the top ones: D,C,B,A), nipple length: 0.1", Fuckable, 1 nipple per breast, Tongue type: demon
 			player.hairColor = "midnight black";
 			player.skinType = SKIN_TYPE_FUR;
-			player.skinDesc = "fur";
 			player.skinTone = "ashen grayish-blue";
 			player.tallness = 65;
 			player.tone = 100;
@@ -283,7 +277,6 @@ package classes
 		
 		private function customCharlie():void {
 			outputText("You're strong, smart, fast, and tough.  It also helps that you've got four dongs well beyond what others have lurking in their trousers.  With your wings, bow, weapon, and tough armor, you're a natural for protecting the town.");
-			player.gender = 1;
 			player.tou +=2;
 			player.str += 3;
 			player.fertility = 5;
@@ -336,8 +329,6 @@ package classes
 			player.skinAdj = "freckled";
 			//10 Perk Points (if possible, feel free to make it less if you feel it necessary)
 			player.perkPoints = 10;
-			//Male
-			player.gender = 1;
 			//Would it be possible to code a cock type that morphs into different cock types? (i.e. it loads a different cock type description each sex scene) If so, I'd like him to have a pair of them, one 24 inches long and 3 inches wide and the second 12-inches long and 2 inches wide. If not, I'll take a dragon and horse cock at 24/3 each as well as a dog and cat cock at 12/2 each.
 			player.createCock();
 			player.createCock();
@@ -369,7 +360,6 @@ package classes
 			//-Cat with (black and orange tiger fur if possible) if not just Orange fur
 			player.hairColor = "black and orange";
 			player.skinType = SKIN_TYPE_FUR;
-			player.skinDesc = "fur";
 			//-Chainmail armor
 			player.setArmor(armors.FULLCHN);
 			//-Large Claymore (i understand 40 Strength is need so if he could start with that would be great if not hit the gyms)"
@@ -384,7 +374,6 @@ package classes
 				player.createVagina();
 				if(player.clitLength == 0) player.clitLength = 0.25;
 			}
-			kGAMECLASS.genderCheck();
 			//Hair length: Very long
 			player.hairLength = 22;
 			//Breast size: HH
@@ -441,7 +430,6 @@ package classes
 			player.breastRows[0].breastRating = 4;
 			player.hairLength = 10;
 			player.setArmor(armors.GELARMR);
-			player.gender = 3;
 		}
 		
 		private function customIsaac():void {
@@ -459,8 +447,6 @@ package classes
 			player.createPerk(PerkLib.HistorySmith,0,0,0,0);
 			//in my ar, Issac was born to a disgraced priestess (she was raped by marauders) and raised by her alone until she died from an illness and was pretty much left to fend for and earn a living for himself (hence the fighter and smith background's too) until, years later he was chosen as 'champion'~
 			//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			//sex - male
-			player.gender = 1;
 			player.balls = 2;
 			//- a pair of apple sized balls each measuring three inches across
 			player.ballSize = 3;
@@ -521,7 +507,6 @@ package classes
 			//Gender: Female	
 			if(!player.hasVagina()) {
 				player.createVagina();
-				kGAMECLASS.genderCheck();
 			}
 			//"Ears: Bunny
 			player.earType = EARS_BUNNY;
@@ -546,7 +531,6 @@ package classes
 			player.breastRows[0].breastRating = 4;
 			player.clitLength = .5;
 			player.fertility = 10;
-			player.gender = 2;
 			player.hipRating = 8;
 			player.buttRating = 8;
 			player.str = 15;
@@ -568,7 +552,6 @@ package classes
 			player.beardStyle = 0;
 			player.tone = 30;
 			player.thickness = 50;
-			player.skinDesc = "skin";
 			player.skinTone = "olive";
 			player.hairColor = "black";
 			player.balls = 0;
@@ -583,7 +566,6 @@ package classes
 			player.fatigue = 0;
 			player.horns = 0;
 			player.tallness = 67;
-			player.tailCount = 0;
 			player.tailVenom = 0;
 			player.tailRecharge = 0;
 			player.wingType = WING_TYPE_NONE;
@@ -624,7 +606,6 @@ package classes
 			player.cocks[0].knotMultiplier = 1.5;
 			player.createBreastRow();
 			player.breastRows[0].breastRating = 0;
-			player.gender = 1;
 			player.tallness = 71;
 			player.hipRating = 4;
 			player.buttRating = 4;
@@ -653,7 +634,6 @@ package classes
 			player.beardLength = 0;
 			player.beardStyle = 0;
 			player.thickness = 50;
-			player.skinDesc = "skin";
 			player.hoursSinceCum = 0;
 			player.clitLength = 0;
 			player.ass.analLooseness = 0;
@@ -662,7 +642,6 @@ package classes
 			player.fertility = 5;
 			player.fatigue = 0;
 			player.horns = 0;
-			player.tailCount = 0;
 			player.tailVenom = 0;
 			player.tailRecharge = 0;
 			player.wingType = WING_TYPE_NONE;
@@ -673,7 +652,6 @@ package classes
 			player.tailType = TAIL_TYPE_DRACONIC;
 			player.skinType = SKIN_TYPE_FUR;
 			player.hairColor = "blue";
-			player.skinDesc = "fur";
 			player.tone = 88;
 			player.tongueType = TONUGE_DRACONIC;
 			//gel plate armor, warhammer, 88 body tone, 1 breast row, flat manly breasts, 0.2 inch nipples, 1 on each breast, draconic tongue, short hair-blue, light skin."	Lukaz
@@ -685,7 +663,6 @@ package classes
 			//#226096893686530
 			//For the custom PC Profile can you make a Bimbo Bunny girl (no bunny feet) (named Mara) dont really care about clothes i can get what i want pretty quickly and I change from time to time.
 			outputText("You're a bunny-girl with bimbo-tier curves, jiggly and soft, a curvy, wet girl with a bit of a flirty past.");
-			player.gender = 2;
 			player.spe+=3;
 			player.inte+=2;
 			player.clitLength = .5;
@@ -743,7 +720,6 @@ package classes
 			player.faceType = FACE_CAT;
 			player.femininity = 100;
 			player.fertility = 85;
-			player.gender = 2;
 			player.hairColor = "blonde";
 			player.hairLength = 24;
 			player.hipRating = 6;
@@ -757,8 +733,6 @@ package classes
 			player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
 			player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
 			player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
-	
-			player.skinDesc = "fur";
 			player.skinTone = "ashen";
 			player.skinType = SKIN_TYPE_FUR;
 			player.tailType = TAIL_TYPE_CAT;
@@ -778,7 +752,6 @@ package classes
 		private function customMirvanna():void {
 			//Any equine or dragonny attributes accompanying it a big plus! As I'm a dragon-unicorn furry (Qilin~). Bonus points if you add a horn type for unicorn horn. 
 			outputText("You're an equine dragon-herm with a rather well-proportioned body.  Ingnam is certainly going to miss having you whoring yourself out around town.  You don't think they'll miss cleaning up all the messy sex, though.");
-			player.gender = 3;
 			player.spe+=3;
 			player.inte+=2;
 			player.str += 3;
@@ -813,7 +786,6 @@ package classes
 			player.skinTone = "brown";
 			player.skinType = SKIN_TYPE_FUR;
 			player.hairColor = "black";
-			player.skinDesc = "fur";
 			//Legs/Feet = Digigrade hooved 
 			player.lowerBody = LOWER_BODY_TYPE_HOOFED;
 			//Wing type = Dragon
@@ -861,7 +833,6 @@ package classes
 			//White Fur (if possible)
 			player.skinType = SKIN_TYPE_FUR;
 			player.hairColor = "white";
-			player.skinDesc = "fur";
 			//Body Thickness/breastsize/- As if I had selected the ""Average"" body type from the start.
 			player.createBreastRow();
 			player.breastRows[0].breastRating = 3;
@@ -885,8 +856,6 @@ package classes
 			player.createPerk(PerkLib.HistoryScholar,0,0,0,0);
 			player.itemSlot1.setItemAndQty(consumables.W__BOOK,1);
 			player.itemSlot2.setItemAndQty(consumables.B__BOOK,1);
-				
-			player.gender = 2;
 			player.tallness = 64;
 			player.femininity = 75;
 			player.buttRating = 7;
@@ -923,7 +892,6 @@ package classes
 			player.tallness = 93;
 			player.skinTone = "black";
 			player.skinType = SKIN_TYPE_FUR;
-			player.skinDesc = "fur";
 			player.hairColor = "silver";
 			player.faceType = FACE_FOX;
 			player.earType = EARS_FOX;
@@ -993,7 +961,6 @@ package classes
 			player.tongueType = TONUGE_DRACONIC;
 			player.hairLength = 45;
 			player.createPerk(PerkLib.EnlightenedNinetails,0,0,0,0);
-			player.gender = 3;
 		}
 		
 		private function customNixi():void {
@@ -1017,7 +984,6 @@ package classes
 			//virgin bum
 			//anal wetness 1
 			player.ass.analWetness = 2;
-			player.gender = 3;
 			player.createCock();
 			player.cocks[0].cockLength = 11;
 			player.cocks[0].cockThickness = 2;
@@ -1055,7 +1021,6 @@ package classes
 			player.tone = 75;
 			//25 thickness
 			player.thickness = 25;
-			player.skinDesc = "fur";
 			player.skinType = SKIN_TYPE_FUR;
 			player.skinTone = "light";
 			player.hairColor = "silver";
@@ -1074,7 +1039,6 @@ package classes
 			player.fatigue = 0;
 			player.horns = 0;
 			player.tallness = 82;
-			player.tailCount = 0;
 			player.tailVenom = 0;
 			player.tailRecharge = 0;
 			player.wingType = WING_TYPE_NONE;
@@ -1135,7 +1099,6 @@ package classes
 			player.hairLength = 22;
 			player.hairColor = "red";
 			player.skinTone = "light";
-			player.skinDesc = "skin";
 			player.skinType = SKIN_TYPE_PLAIN;
 			player.femininity = 100;
 			player.thickness = 25;
@@ -1148,14 +1111,12 @@ package classes
 			outputText("Despite outward appearances, you're actually something of a neuter, with shark-like teeth, an androgynous face, and a complete lack of genitalia.");
 			if(player.hasCock()) player.removeCock(0,1);
 			if(player.hasVagina()) player.removeVagina();
-			player.gender = 0;
 			player.femininity = 50;
 			player.faceType = FACE_SHARK_TEETH;
 		}
 		
 		private function customSera():void {
 			outputText("You're something of a shemale - three rows of C-cup breasts matched with three, plump, juicy cocks.  Some decent sized balls, bat wings, and cat-like ears round out the package.");
-			player.gender = 1;
 			player.tou +=2;
 			player.str += 3;
 			player.fertility = 5;
@@ -1211,7 +1172,6 @@ package classes
 		private function customSiveen():void {
 			//Female
 			//Virgin
-			player.gender = 2;
 			player.createVagina();
 			player.clitLength = 0.25;
 			//has a self-repairing hymen in her cunt"	"Angel
@@ -1260,7 +1220,7 @@ package classes
 			player.tailType = TAIL_TYPE_FOX;
 			player.tailCount = 2;
 			player.inte = 30;
-			if(player.findStatusAffect(StatusAffects.BonusVCapacity) < 0) player.createStatusAffect(StatusAffects.BonusVCapacity,0,0,0,0);
+			if(!player.hasStatusAffect(StatusAffects.BonusVCapacity)) player.createStatusAffect(StatusAffects.BonusVCapacity,0,0,0,0);
 			else player.addStatusValue(StatusAffects.BonusVCapacity,1,5+rand(10));
 			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
 		}
@@ -1275,7 +1235,6 @@ package classes
 		
 			player.clitLength = 0.5;
 			player.fertility = 50;
-			player.gender = 2;
 			player.hipRating = 6;
 			player.buttRating = 6;
 			player.str = 100;
@@ -1298,7 +1257,6 @@ package classes
 			player.beardStyle = 0;
 			player.tone = 0;
 			player.thickness = 100;
-			player.skinDesc = "skin";
 			player.skinTone = "pale";
 			player.hairColor = "black";
 			player.balls = 2;
@@ -1438,7 +1396,6 @@ package classes
 		private function customTyriana():void {
 			outputText("Your many, posh tits, incredible fertility, and well-used cunt made you more popular than the village bicycle.  With your cat-like ears, paws, and tail, you certainly had a feline appeal.  It's time to see how you fare in the next chapter of your life.");
 			//"Gender: Female
-			player.gender = 2;
 			//Vagina: Ridiculously loose, 3 inch clitoris, dripping constantly, fertile like a bunny on steroids and non-virgin
 			player.createVagina();
 			player.clitLength = 3;
@@ -1489,7 +1446,6 @@ package classes
 			player.breastRows[0].breastRating = 3;
 			player.clitLength = .5;
 			player.fertility = 10;
-			player.gender = 2;
 			player.hipRating = 6;
 			player.buttRating = 6;
 			player.str = 15;
@@ -1511,7 +1467,6 @@ package classes
 			player.beardStyle = 0;
 			player.tone = 30;
 			player.thickness = 50;
-			player.skinDesc = "skin";
 			player.skinTone = "light";
 			player.hairColor = "brown";
 			player.balls = 0;
@@ -1526,7 +1481,6 @@ package classes
 			player.fatigue = 0;
 			player.horns = 0;
 			player.tallness = 67;
-			player.tailCount = 0;
 			player.tailVenom = 0;
 			player.tailRecharge = 0;
 			player.wingType = WING_TYPE_NONE;
@@ -1604,7 +1558,6 @@ package classes
 			player.ballSize = 1;
 			player.cocks[0].cockThickness = 1;
 			player.cocks[0].cockLength = 5.8;
-			player.gender = 1;
 			player.tallness = 70;
 			player.femininity = 30;
 			player.hairLength = 1;
@@ -1613,7 +1566,7 @@ package classes
 			player.hipRating = 3;
 			player.createBreastRow();
 			player.skinTone = "fair";
-			
+
 			player.setArmor(armors.H_GARB_);
 			player.setShield(shields.BLASPHE);
 			player.setJewelry(jewelries.MSIGNIT);
@@ -1621,7 +1574,7 @@ package classes
 			player.createKeyItem("Dark Mage’s Grimoire",0,0,0,0);
 			if (player.hasKeyItem("Backpack") < 0) player.createKeyItem("Backpack", 3, 0, 0, 0);
 			player.itemSlot1.setItemAndQty(consumables.H_BISCU, 5);
-			
+
 			player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
 			player.createPerk(PerkLib.HistoryHealer, 0, 0, 0, 0);
 			player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
@@ -1667,7 +1620,7 @@ package classes
 			player.createVagina();
 			player.vaginas[0].vaginalLooseness = 0;
 			player.vaginas[0].vaginalWetness = 2; // wet
-			player.vaginas[0].virgin = 0;			
+			player.vaginas[0].virgin = false;
 			player.createStatusAffect(StatusAffects.BonusVCapacity, 8000, 0, 0, 0); // Vag of Holding kitsune trait
 			player.clitLength = 0.3;
 			player.fertility = 5;
@@ -1687,15 +1640,12 @@ package classes
 			player.createCock(12, 1.6, CockTypesEnum.TENTACLE); // as most kitsune you love tentackles
 			player.createCock(12, 1.6, CockTypesEnum.TENTACLE); // and while they aren't really fitting your body...
 			player.createCock(12, 1.6, CockTypesEnum.TENTACLE); // do anyone really need a reason to have TENTACLES?
-			player.genderCheck();
-			
 			player.tallness = 48; // 120 cm
 			player.hipRating = HIP_RATING_BOYISH;
 			player.buttRating = BUTT_RATING_TIGHT;
 			player.thickness = 20; // thin
 			player.tone = 20; // soft
 			player.skinType = SKIN_TYPE_PLAIN;
-			player.skinDesc = "skin";
 			player.skinAdj = "smooth"; // flawless skin, black egg effect
 			player.skinTone = "light";
 			player.hairColor = "silver blonde"; // not just flavor - it actually counts towards kitsune score
@@ -1707,7 +1657,7 @@ package classes
 			
 			player.earType = EARS_FOX;
 			player.tailType = TAIL_TYPE_FOX; // soft fur feels so lovely... too bad having too much fox fur would make you dumber, and while you would enjoy feline body, channeling magic using nine tails is great benefit which is hard to give up
-			player.tailCount = 9;			
+			player.tailCount = 9;
 			player.tongueType = TONUGE_DRACONIC; // tongue as long as your whole body height! almost tentackle! and so much fun to use!
 			player.hornType = HORNS_DRACONIC_X2; // draconic horns adds to your exotic look, counts towards dragon score and keeps your tentacle hair out of your face! and your partners can use them as handles on occasions, letting your delicate ears uncrumpled!
 			player.horns = 12;
@@ -1726,7 +1676,7 @@ package classes
 			if (player.weapon == WeaponLib.FISTS) player.setWeapon(weapons.SUCWHIP); // have succubus whip, to get corruption quickly when desired
 			//if (player.jewelry == JewelryLib.NOTHING) player.setJewelry(jewelries.PURERNG);
 			if (debug) {
-				if (player.findStatusAffect(StatusAffects.Kelt) < 0) player.createStatusAffect(StatusAffects.Kelt, 100, 0, 0, 0); // Kelt, you are dick.			
+				if (!player.hasStatusAffect(StatusAffects.Kelt)) player.createStatusAffect(StatusAffects.Kelt, 100, 0, 0, 0); // Kelt, you are dick.
 				player.setWeaponRange(weaponsrange.BOWOLD_);
 				flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 4; // Raphael is too picky, and also pretty much unfinished - you can't continue training after chase scene.			
 				if (player.teaseLevel < 3) player.teaseLevel = 3; }			
@@ -1804,8 +1754,8 @@ package classes
 			player.createVagina();
 			player.vaginas[0].vaginalLooseness = rand(4); // from tight to gaping
 			player.vaginas[0].vaginalWetness = rand(4)+1; // from normal to slavering
-			player.vaginas[0].virgin = 0;
-			
+			player.vaginas[0].virgin = false;
+
 			player.clitLength = rand(3) == 0 ? (rand(10)+1)*0.25 : 0.25; // from 0.25 to 2.5
 			player.fertility = (rand(5)+1)*5; // from 5 to 25 with 5 step
 			
@@ -1881,9 +1831,7 @@ package classes
 			
 			player.ass.analLooseness = rand(3);
 			player.ass.analWetness = rand(3)+1;
-			
-			player.gender = GENDER_HERM;
-			
+
 			// lean build
 			player.tallness = 47+rand(43); // 118-230 cm
 			player.hipRating = HIP_RATING_BOYISH;
@@ -1909,17 +1857,13 @@ package classes
 			var skin:Number = rand(100);			
 			if(skin < 50){
 				player.skinType = SKIN_TYPE_PLAIN; // skin, 50%
-				player.skinDesc = "skin";}
-			else if(skin < 80){
+			} else if(skin < 80){
 				player.skinType = SKIN_TYPE_FUR; // fur, 30%
-				player.skinDesc = "fur";}
-			else if(skin < 95){
+			} else if(skin < 95){
 				player.skinType = SKIN_TYPE_SCALES; // scales, 15%
-				player.skinDesc = "scales";}
-			else{
+			} else{
 				player.skinType = SKIN_TYPE_GOO; // goo, 5%
-				player.skinDesc = "skin";
-				player.skinAdj = "slimy";}
+			}
 					
 			if(rand(3) != 0) // 2/3 to have human face
 				player.faceType = FACE_HUMAN;

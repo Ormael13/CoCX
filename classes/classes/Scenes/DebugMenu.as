@@ -1,7 +1,8 @@
 package classes.Scenes 
 {
 	import classes.*;
-	import classes.Items.*
+import classes.BodyParts.Skin;
+import classes.BodyParts.SkinLayer;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.MainViewManager;
@@ -441,13 +442,13 @@ package classes.Scenes
 		private function statChangeMenu():void {
 			outputText("Which attribute would you like to alter?", true);
 			menu();
-			addButton(0, "Strength", statChangeAttributeMenu, "str")
-			addButton(1, "Toughness", statChangeAttributeMenu, "tou")
-			addButton(2, "Speed", statChangeAttributeMenu, "spe")
-			addButton(3, "Intelligence", statChangeAttributeMenu, "int")
-			addButton(5, "Libido", statChangeAttributeMenu, "lib")
-			addButton(6, "Sensitivity", statChangeAttributeMenu, "sen")
-			addButton(7, "Corruption", statChangeAttributeMenu, "cor")
+			addButton(0, "Strength", statChangeAttributeMenu, "str");
+			addButton(1, "Toughness", statChangeAttributeMenu, "tou");
+			addButton(2, "Speed", statChangeAttributeMenu, "spe");
+			addButton(3, "Intelligence", statChangeAttributeMenu, "int");
+			addButton(5, "Libido", statChangeAttributeMenu, "lib");
+			addButton(6, "Sensitivity", statChangeAttributeMenu, "sen");
+			addButton(7, "Corruption", statChangeAttributeMenu, "cor");
 			addButton(14, "Back", accessDebugMenu);
 		}
 		
@@ -474,7 +475,7 @@ package classes.Scenes
 		}
 		
 		private function styleHackMenu():void {
-			menu()
+			menu();
 			outputText("TEST STUFFZ", true);
 			addButton(0, "ASPLODE", styleHackMenu);
 			addButton(1, "Scorpion Tail", changeScorpionTail);
@@ -484,9 +485,211 @@ package classes.Scenes
 			addButton(5, "Tooltips Ahoy", kGAMECLASS.doNothing, null, null, null, "Ahoy! I'm a tooltip! I will show up a lot in future updates!", "Tooltip 2.0");
 			addButton(6, "Lights Out", startLightsOut, testVictoryFunc, testFailureFunc, null, "Test the lights out puzzle, fresh off TiTS!");
 			addButton(7, "Isabella Birth", kGAMECLASS.isabellaFollowerScene.isabellaGivesBirth, null, null, null, "Test Isabella giving birth for debugging purposes.", "Trigger Isabella Giving Birth");
+			addButton(8, "BodyPartEditor", bodyPartEditor,null,null,null, "Inspect and fine-tune the player body parts");
 			addButton(14, "Back", accessDebugMenu);
 		}
-		
+		private function generateTagDemos(...tags:Array):String {
+			return tags.map(function(tag:String,index:int,array:Array):String {
+				return "\\["+tag+"\\] = ["+tag+"]"
+			}).join(",\n");
+		}
+		private function showChangeOptions(page:int, constants:Array, functionPageIndex:Function):void {
+			var N:int = 12;
+			for (var i:int = N * page; i < constants.length && i < (page + 1) * N; i++) {
+				var e:* = constants[i];
+				if (!e) continue;
+				if (!(e is Array)) e = [i,e];
+				addButton(i % N, e[1], curry(functionPageIndex, page, e[0]));
+			}
+			if (page > 0) addButton(12, "PrevPage", curry(functionPageIndex, page - 1));
+			if ((page +1)*N < constants.length) addButton(13, "NextPage", curry(functionPageIndex, page + 1));
+			addButton(14, "Back", bodyPartEditor);
+		}
+		private function dumpPlayerData():void {
+			clearOutput();
+			var pa:PlayerAppearance = getGame().playerAppearance;
+			pa.describeFaceShape();
+			outputText("  It has " + player.faceDesc() + ".", false);
+			pa.describeEyes();
+			pa.describeHair();
+			outputText("[pg]");
+	/*		outputText("player.skin = " + JSON.stringify(player.skin.saveToObject())
+											  .replace(/":"/g,'":&nbsp; "')
+											  .replace(/,"/g, ', "') + "\n");
+			outputText("player.facePart = " + JSON.stringify(player.facePart.saveToObject()).replace(/,/g, ", ") + "\n");
+	*/	}
+		private var editBase:Boolean = true;
+		private function bodyPartEditor():void {
+			menu();
+			dumpPlayerData();
+			addButton(0,editBase?"Edit Coat":"Edit Base",editCoatBase);
+			var bc:String = editBase?"Base":"Coat";
+			addButton(1,bc+"Type",changeLayerType);
+			addButton(2,bc+"Tone",changeLayerColor);
+			addButton(3,bc+"Adj",changeLayerAdj);
+			addButton(4,bc+"Desc",changeLayerDesc);
+			addButton(5,"Skin Coverage",changeSkinCoverage);
+			addButton(6,"FaceType",changeFaceType);
+			addButton(7,"FaceDecoType",changeFaceDecoType);
+			addButton(8,"FaceDecoAdj",changeFaceDecoAdj);
+			addButton(14, "Back", accessDebugMenu);
+		}
+		private function editCoatBase():void {
+			editBase = !editBase;
+			bodyPartEditor();
+		}
+		private static const LAYER_TYPE_CONSTANTS:Array = [
+			[SKIN_TYPE_PLAIN,"(0) PLAIN"],
+			[SKIN_TYPE_FUR,"(1) FUR"],
+			[SKIN_TYPE_SCALES,"(2) SCALES"],
+			[SKIN_TYPE_GOO,"(3) GOO"],
+			// [SKIN_TYPE_UNDEFINED,"(4) UNDEFINED"],
+			[SKIN_TYPE_CHITIN,"(5) CHITIN"],
+			[SKIN_TYPE_BARK,"(6) BARK"],
+			[SKIN_TYPE_STONE,"(7) STONE"],
+			[SKIN_TYPE_TATTOED,"(8) TATTOED"],
+			[SKIN_TYPE_AQUA_SCALES,"(9) AQUA_SCALES"],
+			//"(10) PART_FUR", // SKIN_TYPE_PARTIAL_FUR
+			//"(11) PART_SCALES", // SKIN_TYPE_PARTIAL_SCALES
+			//"(12) PART_CHITIN", // SKIN_TYPE_PARTIAL_CHITIN
+			//"(13) PART_BARK" // SKIN_TYPE_PARTIAL_BARK
+			[SKIN_TYPE_DRAGON_SCALES,"(10) DRAGON_SCALES"],
+			[SKIN_TYPE_MOSS,"(11) MOSS"]
+		];
+		private static const SKIN_TONE_CONSTANTS:Array = [
+			"pale", "light", "dark", "green","gray",
+			"blue", "black", "white", "dirty red", "blueish yellow",
+			"ghostly pale", "bubblegum pink",
+		];
+		private static const SKIN_ADJ_CONSTANTS:Array = [
+			"(none)", "tough", "smooth", "rough", "sexy",
+			"freckled", "glistering", "shiny", "slimy","goopey",
+			"latex", "rubber"
+		];
+		private static const SKIN_DESC_CONSTANTS:Array = [
+			"(default)", "covering", "feathers", "hide",
+			"shell", "plastic", "skin", "fur",
+			"scales", "bark", "stone", "chitin"
+		];
+		private static const SKIN_COVERAGE_CONSTANTS:Array = [
+				[Skin.COVERAGE_NONE, "(0) NONE"],
+				[Skin.COVERAGE_LOW, "(1) LOW"],
+				[Skin.COVERAGE_MEDIUM, "(2) MEDIUM"],
+				[Skin.COVERAGE_HIGH, "(3) HIGH"],
+				[Skin.COVERAGE_FULL, "(4) FULL"]
+		];
+		private function dumpPlayerFace():void {
+			outputText("[pg]");
+			outputText(generateTagDemos(
+							"skin", "skin noadj", "skin notone", "skin type",
+							"skin base", "skin base.noadj", "skin base.notone", "skin base.type",
+							"skin coat", "skin coat.noadj", "skin coat.notone", "skin coat.type",
+							"skin full", "skin full.noadj", "skin full.notone", "skin full.type",
+							"skinfurscales", "skintone") + ".\n");
+			outputText(generateTagDemos("face","face deco","face full","player.facePart.isDecorated")+".\n");
+		}
+		private function changeLayerType(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) (editBase?player.skin.base:player.skin.coat).type = setIdx;
+			menu();
+			dumpPlayerData();
+			dumpPlayerFace();
+			showChangeOptions(page, LAYER_TYPE_CONSTANTS, changeLayerType);
+		}
+		private function changeLayerColor(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) (editBase?player.skin.base:player.skin.coat).color = SKIN_TONE_CONSTANTS[setIdx];
+			menu();
+			dumpPlayerData();
+			dumpPlayerFace();
+			showChangeOptions(page, SKIN_TONE_CONSTANTS, changeLayerColor);
+		}
+		private function changeLayerAdj(page:int=0,setIdx:int=-1):void {
+			var tgt:SkinLayer = (editBase?player.skin.base:player.skin.coat);
+			if (setIdx==0) tgt.adj = "";
+			if (setIdx>0) tgt.adj = SKIN_ADJ_CONSTANTS[setIdx];
+			menu();
+			dumpPlayerData();
+			dumpPlayerFace();
+			showChangeOptions(page, SKIN_ADJ_CONSTANTS, changeLayerAdj);
+		}
+		private function changeLayerDesc(page:int=0,setIdx:int=-1):void {
+			var tgt:SkinLayer = (editBase?player.skin.base:player.skin.coat);
+			if (setIdx==0) tgt.desc = "";
+			if (setIdx>0) tgt.desc = SKIN_DESC_CONSTANTS[setIdx];
+			menu();
+			dumpPlayerData();
+			dumpPlayerFace();
+			showChangeOptions(page, SKIN_DESC_CONSTANTS, changeLayerDesc);
+		}
+		private function changeSkinCoverage(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.skin.coverage = setIdx;
+			menu();
+			dumpPlayerData();
+			dumpPlayerFace();
+			showChangeOptions(page, SKIN_COVERAGE_CONSTANTS, changeSkinCoverage);
+		}
+		private static const FACE_TYPE_CONSTANTS:Array = [
+			[FACE_HUMAN,"(0) HUMAN"],
+			[FACE_HORSE,"(1) HORSE"],
+			[FACE_DOG,"(2) DOG"],
+			[FACE_COW_MINOTAUR,"(3) COW_MINOTAUR"],
+			[FACE_SHARK_TEETH,"(4) SHARK_TEETH"],
+			[FACE_SNAKE_FANGS,"(5) SNAKE_FANGS"],
+			[FACE_CAT,"(6) CAT"],
+			[FACE_LIZARD,"(7) LIZARD"],
+			[FACE_BUNNY,"(8) BUNNY"],
+			[FACE_KANGAROO,"(9) KANGAROO"],
+			[FACE_SPIDER_FANGS,"(10) SPIDER_FANGS"],
+			[FACE_FOX,"(11) FOX"],
+			[FACE_DRAGON,"(12) DRAGON"],
+			[FACE_RACCOON_MASK,"(13) RACCOON_MASK"],
+			[FACE_RACCOON,"(14) RACCOON"],
+			[FACE_BUCKTEETH,"(15) BUCKTEETH"],
+			[FACE_MOUSE,"(16) MOUSE"],
+			[FACE_FERRET_MASK,"(17) FERRET_MASK"],
+			[FACE_FERRET,"(18) FERRET"],
+			[FACE_PIG,"(19) PIG"],
+			[FACE_BOAR,"(20) BOAR"],
+			[FACE_RHINO,"(21) RHINO"],
+			[FACE_ECHIDNA,"(22) ECHIDNA"],
+			[FACE_DEER,"(23) DEER"],
+			[FACE_WOLF,"(24) WOLF"],
+			[FACE_MANTICORE,"(25) MANTICORE"],
+			[FACE_SALAMANDER_FANGS,"(26) SALAMANDER_FANGS"],
+			[FACE_YETI_FANGS,"(27) YETI_FANGS"],
+			[FACE_ORCA,"(28) ORCA"],
+			[FACE_PLANT_DRAGON,"(29) PLANT_DRAGON"]
+		];
+		private static const DECO_DESC_CONSTANTS:Array = [
+			[DECORATION_NONE,"(0) NONE"],
+			[DECORATION_GENERIC,"(1) GENERIC"],
+			[DECORATION_TATTOO,"(2) TATTOO"],
+		];
+		private static const DECO_ADJ_CONSTANTS:Array = [
+			"(none)", "magic", "glowing", "sexy","",
+			"", "", "mark", "burn", "scar"
+		];
+		private function changeFaceType(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.facePart.type = setIdx;
+			menu();
+			dumpPlayerData();
+			dumpPlayerFace();
+			showChangeOptions(page, FACE_TYPE_CONSTANTS, changeFaceType);
+		}
+		private function changeFaceDecoType(page:int=0,setIdx:int=-1):void {
+			if (setIdx>=0) player.facePart.decoType = setIdx;
+			menu();
+			dumpPlayerData();
+			dumpPlayerFace();
+			showChangeOptions(page, DECO_DESC_CONSTANTS, changeFaceDecoType);
+		}
+		private function changeFaceDecoAdj(page:int=0,setIdx:int=-1):void {
+			if (setIdx==0) player.facePart.decoAdj = "";
+			if (setIdx>0) player.facePart.decoAdj = DECO_ADJ_CONSTANTS[setIdx];
+			menu();
+			dumpPlayerData();
+			dumpPlayerFace();
+			showChangeOptions(page, DECO_ADJ_CONSTANTS, changeFaceDecoAdj);
+		}
 		private function changeScorpionTail():void {
 			clearOutput();
 			outputText("<b>Your tail is now that of a scorpion's. Currently, scorpion tail has no use but it will eventually be useful for stinging.</b>");

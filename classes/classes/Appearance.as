@@ -326,7 +326,7 @@
 					"slippery "];
 				description += randomChoice(options);
 			}
-			if (!haveDescription && i_creature.findStatusAffect(StatusAffects.BlackNipples) >= 0) {
+			if (!haveDescription && i_creature.hasStatusAffect(StatusAffects.BlackNipples)) {
 				options = ["black ",
 					"ebony ",
 					"sable "];
@@ -545,7 +545,7 @@
 			}
 			var isPierced:Boolean = (creature.cocks.length == 1) && (creature.cocks[cockIndex].isPierced); //Only describe as pierced or sock covered if the creature has just one cock
 			var hasSock:Boolean = (creature.cocks.length == 1) && (creature.cocks[cockIndex].sock != "");
-			var isGooey:Boolean = (creature.skinType == CoC.SKIN_TYPE_GOO);
+			var isGooey:Boolean = (creature.skin.hasGooSkin());
 			return cockDescription(cockType, creature.cocks[cockIndex].cockLength, creature.cocks[cockIndex].cockThickness, creature.lust, creature.cumQ(), isPierced, hasSock, isGooey);
 		}
 
@@ -1368,7 +1368,7 @@
 			var description:String = "";
 			var options:Array;
 
-			if (i_plural && (i_creature.findStatusAffect(StatusAffects.Uniball) < 0)) {
+			if (i_plural && (!i_creature.hasStatusAffect(StatusAffects.Uniball))) {
 				if (i_creature.balls == 1) {
 					if (i_withArticle) {
 						options = ["a single",
@@ -1450,7 +1450,7 @@
 
 			}
 			//UNIBALL
-			if (i_creature.findStatusAffect(StatusAffects.Uniball) >= 0) {
+			if (i_creature.hasStatusAffect(StatusAffects.Uniball)) {
 				if (description) description += " ";
 				options = ["tightly-compressed",
 					"snug",
@@ -1509,7 +1509,7 @@
 			description += randomChoice(options);
 			if (i_plural) description += "s";
 
-			if (i_creature.findStatusAffect(StatusAffects.Uniball) >= 0 && rand(2) == 0) {
+			if (i_creature.hasStatusAffect(StatusAffects.Uniball) && rand(2) == 0) {
 				if (rand(3) == 0)
 					description += " merged into a cute, spherical package";
 				else if (rand(2) == 0)
@@ -2192,6 +2192,10 @@
 		{
 			return DEFAULT_WING_NAMES[i_creature.wingType] + " wings";
 		}
+		public static function eyesDescript(i_creature:Creature):String
+		{
+			return DEFAULT_EYES_NAMES[i_creature.eyeType] + " eyes";
+		}
 
 /* All of these functions have been replaced with direct calls to the appropriate form of cockNoun().
 		private static function humanDescript(cockNum:Number):String
@@ -2350,12 +2354,7 @@
 			return defaultValue;
 		}
 
-		public static function createMapFromPairs(src:Array):Object
-		{
-			var result:Object = {};
-			for (var i:int = 0; i < src.length; i++) result[src[i][0]] = src[i][1];
-			return result;
-		}
+
 
 		public static const DEFAULT_GENDER_NAMES:Object = createMapFromPairs(
 				[
@@ -2365,52 +2364,25 @@
 					[GENDER_HERM, "hermaphrodite"]
 				]
 		);
-		public static const DEFAULT_SKIN_NAMES:Object = createMapFromPairs(
-				[
-					[SKIN_TYPE_PLAIN, "skin"],
-					[SKIN_TYPE_FUR, "fur"],
-					[SKIN_TYPE_SCALES, "scales"],
-					[SKIN_TYPE_GOO, "goo"],
-					[SKIN_TYPE_UNDEFINED, "undefined flesh"],
-					[SKIN_TYPE_CHITIN, "chitin"],
-					[SKIN_TYPE_BARK, "bark"],
-					[SKIN_TYPE_STONE, "stone"],
-					[SKIN_TYPE_TATTOED, "sexy tattoed"],
-					[SKIN_TYPE_AQUA_SCALES, "fish scales"],
-					[SKIN_TYPE_PARTIAL_FUR, "partial fur"],
-					[SKIN_TYPE_PARTIAL_SCALES, "partial scales"],
-					[SKIN_TYPE_PARTIAL_CHITIN, "partial chitin"],
-					[SKIN_TYPE_PARTIAL_BARK, "partial bark"],
-					[SKIN_TYPE_DRAGON_SCALES, "dragon scales"],
-					[SKIN_TYPE_MOSS, "moss"],
-					[SKIN_TYPE_PARTIAL_DRAGON_SCALES, "partial dragon scales"],
-					[SKIN_TYPE_PARTIAL_STONE, "partial stone"],
-					[SKIN_TYPE_PARTIAL_AQUA_SCALES, "partial fish scales"]
-				]
-		);
-		public static const DEFAULT_SKIN_DESCS:Object = createMapFromPairs(
-				[
-					[SKIN_TYPE_PLAIN, "skin"],
-					[SKIN_TYPE_FUR, "fur"],
-					[SKIN_TYPE_SCALES, "scales"],
-					[SKIN_TYPE_GOO, "skin"],
-					[SKIN_TYPE_UNDEFINED, "skin"],
-					[SKIN_TYPE_CHITIN, "chitin"],
-					[SKIN_TYPE_BARK, "bark"],
-					[SKIN_TYPE_STONE, "stone"],
-					[SKIN_TYPE_TATTOED, "sexy tattoed"],
-					[SKIN_TYPE_AQUA_SCALES, "fish scales"],
-					[SKIN_TYPE_PARTIAL_FUR, "small patches of fur"],
-					[SKIN_TYPE_PARTIAL_SCALES, "small patches of scales"],
-					[SKIN_TYPE_PARTIAL_CHITIN, "small patches of chitin"],
-					[SKIN_TYPE_PARTIAL_BARK, "small patches of bark"],
-					[SKIN_TYPE_DRAGON_SCALES, "dragon scales"],
-					[SKIN_TYPE_MOSS, "moss"],
-					[SKIN_TYPE_PARTIAL_DRAGON_SCALES, "partial dragon scales"],
-					[SKIN_TYPE_PARTIAL_STONE, "partial stone"],
-					[SKIN_TYPE_PARTIAL_AQUA_SCALES, "partial fish scales"]
-				]
-		);
+		private static const DEFAULT_SKIN_NAMES_DESCS_ADJS:Object = multipleMapsFromPairs([
+			[SKIN_TYPE_PLAIN, "PLAIN", "skin", ""],
+			[SKIN_TYPE_FUR, "FUR", "fur", ""],
+			[SKIN_TYPE_SCALES, "SCALES", "scales", ""],
+			[SKIN_TYPE_GOO, "GOO", "skin", "goopey"],
+			[SKIN_TYPE_CHITIN, "CHITIN", "chitin", ""],
+			[SKIN_TYPE_BARK, "BARK", "bark", ""],
+			[SKIN_TYPE_STONE, "STONE", "stone", ""],
+			[SKIN_TYPE_TATTOED, "TATTOED", "sexy tattoed skin",""],
+			[SKIN_TYPE_AQUA_SCALES, "AQUA_SCALES", "scales", ""],
+			[SKIN_TYPE_DRAGON_SCALES, "dragon scales", "dragon scales", ""],
+			[SKIN_TYPE_MOSS, "moss", "moss", ""],
+			[SKIN_TYPE_PARTIAL_DRAGON_SCALES, "partial dragon scales", "partial dragon scales", ""],
+			[SKIN_TYPE_PARTIAL_STONE, "partial stone", "partial stone", ""],
+			[SKIN_TYPE_PARTIAL_AQUA_SCALES, "partial fish scales", "partial fish scales", ""],
+		]);
+		public static const DEFAULT_SKIN_NAMES:Object = DEFAULT_SKIN_NAMES_DESCS_ADJS[0];
+		public static const DEFAULT_SKIN_DESCS:Object = DEFAULT_SKIN_NAMES_DESCS_ADJS[1];
+		public static const DEFAULT_SKIN_ADJS:Object = DEFAULT_SKIN_NAMES_DESCS_ADJS[2];
 		public static const DEFAULT_HAIR_NAMES:Object = createMapFromPairs(
 				[
 					[HAIR_NORMAL, "normal"],
@@ -2725,6 +2697,33 @@
 					[VAGINA_TYPE_BLACK_SAND_TRAP, "black sandtrap"]
 				]
 		);
+		public static const DECORATION_TYPENAMES_:Array         = multipleMapsFromPairs(
+				[
+					[DECORATION_NONE, "nothing", ""],
+					[DECORATION_GENERIC, "generic", ""],
+					[DECORATION_TATTOO, "tattoo", ""]
+				]
+		);
+		public static const DEFAULT_DECORATION_TYPENAMES:Object = DECORATION_TYPENAMES_[0];
+		//public static const DEFAULT_DECORATION_NAMES:Object = DEFAULT_DECORATION_TYPENAMES_NAMES[1];
+
+		/**
+		 * A substitute text to fill after "on your <body part> you have ..."
+		 */
+		public static function describeDecoration(creature:Creature,decoType:int,decoAdj:String):String {
+			if (decoAdj && decoType != DECORATION_GENERIC) decoAdj += " ";
+			switch (decoType) {
+				case DECORATION_NONE:
+					return "nothing";
+				case DECORATION_TATTOO:
+					return decoAdj+"tattoo";
+				case DECORATION_GENERIC:
+					return decoAdj ? decoAdj : "<b>empty decoAdj bug</b>";
+				default:
+					return "<b>decoType bug "+decoType+"</b>"
+			}
+		}
+
 		public static const DEFAULT_VAGINA_WETNESS_SCALES:Array = [
 			[VAGINA_WETNESS_DRY, "dry"],
 			[VAGINA_WETNESS_NORMAL, "normal"],

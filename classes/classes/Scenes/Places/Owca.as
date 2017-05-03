@@ -282,7 +282,7 @@ public function loseOrSubmitToVapula():void {
 		player.cuntChange(60,true,true,false);
 		outputText("  A dick found a way into your " +vaginaDescript(0)+ " and is pushing further inside.  Wait, what's this?  A second, and then a third!  There's no way these titanic columns of flesh will... this is too much... you fear you will be torn in half, but at the last moment, you feel someone spilling the content of a flask over your nether-lips.  As if you had lost control of your " +vaginaDescript(0)+ ", it automatically starts leaking girl-cum in prodigious amounts, and you let out a stifled moan as a delicious shiver runs teasingly across your body.  Your fuck-hole widens under the corrupting effect of the weird mixture you were administered.  ");
 		//[set vagstretch up a few levels]
-		if(player.findStatusAffect(StatusAffects.BonusVCapacity) < 0) player.createStatusAffect(StatusAffects.BonusVCapacity,0,0,0,0);
+		if(!player.hasStatusAffect(StatusAffects.BonusVCapacity)) player.createStatusAffect(StatusAffects.BonusVCapacity,0,0,0,0);
 		if(player.statusAffectv1(StatusAffects.BonusVCapacity) < 200) player.addStatusValue(StatusAffects.BonusVCapacity, 1, 15);
 		outputText("As soon as new space is created, it is immediately filled by a pussy-hungry cock.  The three cocks slide effortlessly inside you and start thrusting energetically, vying in intensity and ferocity with the peckers ramming your " +assholeDescript()+ ".  The penetration of both holes is almost too much too handle, but you finally get used to it as your own anal and vaginal muscles try their best to milk as much spunk as possible from these cum-tubes.  Even though you are being violated in every hole, the raw and powerful sensation is quite pleasurable; it feels so right to be used this way, so full of demon wang.  You don't have to focus on anything, just to enjoy the sheer amazing feeling of being pounded by many pistons at once.  You squirt over and over again as the dicks and the fluid force you into a series of wild female orgasms.");
 		//[crank up vaginal wetness one level, why not?]
@@ -334,7 +334,7 @@ public function loseOrSubmitToVapula():void {
 	flags[kFLAGS.VAPULA_SUBMISSIVENESS] += 10;
 	if(flags[kFLAGS.VAPULA_SUBMISSIVENESS] >= 90 && flags[kFLAGS.VAPULA_SUBMISSIVENESS] < 100) outputText("\n\n<b>You're starting to get dangerously used to this kind of treatment.  Your holes are being stretched to accommodate monstrous sizes and don't hurt that much anymore.  You feel like you could stand this as long as you need to with ease... maybe it's time to stop volunteering?</b>");
 	if(flags[kFLAGS.VAPULA_SUBMISSIVENESS] >= 100) doNext(slaveToVapulaBadEnd);
-	else if(player.findStatusAffect(StatusAffects.LostVillagerSpecial) >= 0) doNext(morningAfterRape);
+	else if(player.hasStatusAffect(StatusAffects.LostVillagerSpecial)) doNext(morningAfterRape);
 	else doNext(wakeUpAfterDemonGangBangs);//WAKE UP
 	player.orgasm();
 	dynStats("lib", 1, "sen", 2, "cor", 3);
@@ -365,7 +365,7 @@ public function defeetVapulasHorde():void {
 		return;
 	}
 	//Sacrificed and bound
-	if(monster.findStatusAffect(StatusAffects.AttackDisabled) >= 0) {
+	if(monster.hasStatusAffect(StatusAffects.AttackDisabled)) {
 	   if(monster.HP < 1) outputText("You grin wickedly as the last demons fall, defeated.  Some of the errant blows have broken and mangled the links of your chains, and you find you can get free with a bit of additional effort.");
 		//[if won by Lust]
 		else outputText("You grin wickedly as the demons give up the fight, too turned on to care about you.  One even begins unfastening your bindings, hopeful desperation glinting in her eyes as she attempts to entice you with her long, thick nipples and enormous, dripping gash.");
@@ -434,7 +434,7 @@ private function rapeZeVapula():void {
 		if(player.cumQ() > 1000) outputText(", expandable");
 		outputText(" cumdumpster and grab another slut.  This time you feel like you could use a blowjob to clean off the demonic sweat and slime from your cock; you forcefully open her jaw and shove your " +cockDescript(0)+ " down her throat without any care.  The sudden influx of dickflesh blocking her air-flow makes her choke and cough, but a withdrawal and a good cock-slap reminds her of her place.  \"<i>You fucking bitch!  You goddamn worthless slut!  What good are you if you can't even give proper head?  Lick, you whore!  I want your tongue all over my crotch!  You can breathe when you've properly moistened my ");
 		if(player.balls > 0) outputText("balls");
-		else outputText(player.skin());
+		else outputText(player.skinDescript());
 		outputText("!</i>\"  The poor demoness, cheek stained with semen, mutters an apology and proceeds to lick your " +cockDescript(0)+ ", suckling the tip, ");
 		if(player.balls > 0) outputText("fondling your " +ballsDescriptLight()+ ", ");
 		//[if multicocks] 
@@ -860,7 +860,7 @@ public function beatUpOwca():void {
 	outputText("The last of the villagers drops his improvised weapon.  They are all lying defenseless before you.  At last, you notice Rebecc, the only one still conscious, curled up as she weeps uncontrollably.  She is clearly oblivious of her surroundings, undoubtedly shocked by the violent fight.  Even if she calls herself your friend, you don't think you'd be able to reason with her after pummeling her kin.  What do you do?");
 	//Rape Rebbecc/Torch Village (needs Akbal's fire or Whitefire)/Leave
 	var torch:Function = null;
-	if(player.findStatusAffect(StatusAffects.KnowsWhitefire) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.DragonIceBreath) >= 0)
+	if(player.hasStatusAffect(StatusAffects.KnowsWhitefire) || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.DragonIceBreath) >= 0)
 		torch = torchOwcaMotherFuckers;
 	var rape:Function = null;
 	if(player.cor >= 60 && player.gender > 0 && player.lust >= 33) rape = createCallBackFunction(rapeRebecc,true);

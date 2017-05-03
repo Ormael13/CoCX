@@ -84,7 +84,7 @@ public var piercingType:Number = 0;
 
 public function discoverTelAdre():void {
 	clearOutput();
-	if(player.findStatusAffect(StatusAffects.TelAdre) < 0) {
+	if(!player.hasStatusAffect(StatusAffects.TelAdre)) {
 		outputText("The merciless desert sands grind uncomfortably under your " + player.feet() + " as you walk the dunes, searching the trackless sands to uncover their mysteries.  All of a sudden, you can see the outline of a small city in the distance, ringed in sandstone walls.  Strangely it wasn't there a few moments before.  It's probably just a mirage brought on by the heat.  Then again, you don't have any specific direction you're heading, what could it hurt to go that way?", false);
 		outputText("\n\nDo you investigate the city in the distance?", false);
 	}
@@ -97,7 +97,7 @@ public function discoverTelAdre():void {
 //player chose to approach the city in the distance
 private function encounterTelAdre():void {
 	clearOutput();
-	if(player.findStatusAffect(StatusAffects.TelAdre) < 0) {
+	if(!player.hasStatusAffect(StatusAffects.TelAdre)) {
 		outputText("You slog through the shifting sands for a long time, not really seeming to get that close.  Just when you're about to give up, you crest a large dune and come upon the walls of the city you saw before.  It's definitely NOT a mirage.  There are sandstone walls at least fifty feet tall ringing the entire settlement, and the only entrance you can see is a huge gate with thick wooden doors.  The entrance appears to be guarded by a female gray fox who's more busy sipping on something from a bottle than watching the desert.\n\n", false);
 		outputText("As if detecting your thoughts, she drops the bottle and pulls out a halberd much longer than she is tall.\n\n", false);
 		outputText("\"<i>Hold it!</i>\" barks the fox, her dark gray fur bristling in suspicion at your sudden appearance, \"<i>What's your business in the city of Tel'Adre?</i>\"\n\n", false);
@@ -116,9 +116,9 @@ private function encounterTelAdre():void {
 
 //Alignment crystal goooooo
 private function telAdreCrystal():void {
-	if(player.findStatusAffect(StatusAffects.TelAdre) < 0) player.createStatusAffect(StatusAffects.TelAdre,0,0,0,0);
+	if(!player.hasStatusAffect(StatusAffects.TelAdre)) player.createStatusAffect(StatusAffects.TelAdre,0,0,0,0);
 	//-70+ corruption, or possessed by exgartuan
-	if (player.findStatusAffect(StatusAffects.Exgartuan) >= 0 || player.cor >= 70 + player.corruptionTolerance()) {
+	if (player.hasStatusAffect(StatusAffects.Exgartuan) || player.cor >= 70 + player.corruptionTolerance()) {
 		outputText("The crystal pendant begins to vibrate in the air, swirling around and glowing dangerously black.  Edryn snatches her hand back and says, \"<i>I'm sorry, but you're too far gone to step foot into our city.  If by some miracle you can shake the corruption within you, return to us.</i>\"\n\n", false);
 		outputText("You shrug and step back.  You could probably defeat these two, but you know you'd have no hope against however many friends they had beyond the walls.  You turn around and leave, a bit disgruntled at their hospitality.  After walking partway down the dune you spare a glance over your shoulder and discover the city has vanished!  Surprised, you dash back up the dune, flinging sand everywhere, but when you crest the apex, the city is gone.", false);
 		doNext(camp.returnToCampUseOneHour);
@@ -289,7 +289,7 @@ public function houses():void {
 private function piercingStudio():void {
 	spriteSelect(63);
 	var about:Function = null;
-	if(player.findStatusAffect(StatusAffects.Yara) < 0) about = aboutYara;
+	if(!player.hasStatusAffect(StatusAffects.Yara)) about = aboutYara;
 	clearOutput();
 	outputText("The interior of the piercing studio is earthy, leaving the stone floors and walls uncovered, though the windows are covered with woven blankets, sewn from multicolored threads.  There are a number of cushy chairs facing a wall of mirrors, along with a shelf covered in needles, piercings, and strong alcohols.  A brunette prowls about the place, tidying it up during a lull in business.  You dully notice that unlike everyone else in this town, she's mostly human.  Perhaps she came through a portal as well?  She approaches you, and you see a cat tail waving behind her, and a pair of fuzzy feline ears, both covered in piercings, perched atop her head.  Clearly she's been here long enough to pick up some of the local flavor.\n\n", false);
 	outputText("She introduces herself, \"<i>Hello there " + player.mf("sir","cutie") + ", my name is Yara.  Would you like to get a piercing?</i>\"", false);
@@ -997,7 +997,7 @@ private function removeVulvaPierce():void {
 public function oswaldPawn():void {
 	spriteSelect(47);
 	clearOutput();
-	if(player.findStatusAffect(StatusAffects.Oswald) < 0) {
+	if(!player.hasStatusAffect(StatusAffects.Oswald)) {
 		outputText("Upon closer inspection, you realize the pawnbroker appears to be some kind of golden retriever.  He doesn't look entirely comfortable and he slouches, but he manages to smile the entire time.  His appearance is otherwise immaculate, including his classy suit-jacket and tie, though he doesn't appear to be wearing any pants.  Surprisingly, his man-bits are retracted.  ", false);
 		if(player.cor < 75) outputText("Who would've thought that seeing someone NOT aroused would ever shock you?", false);
 		else outputText("What a shame, but maybe you can give him a reason to stand up straight?", false);
@@ -1478,7 +1478,7 @@ public function tailorShoppe():void {
 	clearOutput();
 	spriteSelect(61);
 	outputText("The inside of the tailor's shop is far cleaner than anything else you've seen in the city.  The walls are painted muted gray, and the floor is carpeted with a sprawling, royal blue rug.  After glancing around, you realize WHY the walls and floor are so muted – the quiet backdrop makes the merchandise look even more amazing.  There are racks and racks of clothing, but much of it is plain comfortable clothing, and not worth spending much time investigating.  A high-pitched voice pipes up, \"<i>Can I help you?</i>\"\n\n", false);
-	if(player.findStatusAffect(StatusAffects.Victoria) < 0) {
+	if(!player.hasStatusAffect(StatusAffects.Victoria)) {
 		outputText("You turn around, ", false);
 		if(player.tallness > 60) outputText("looking for the source, eventually looking down and at a short but busty Corgi dog-girl.  ", false);
 		else outputText("coming face to face with a busty Corgi dog-girl.  ", false);
@@ -2274,7 +2274,7 @@ private function watchUrtaBeABadass():void {
 	outputText("The bigger canid charges, snarling, with his claws extended.  Urta sidesteps and pivots, her momentum carrying her foot around in a vicious kick.  Her foot hits the side of the beast's knee hard enough to buckle it, and the wolf goes down on his knees with an anguished cry.  Urta slips under his arm and twists, turning his slump into a fall.  A cloud of dust rises from the heavy thud of the beast's body as it slams into the cobblestone street.\n\n", false);
 
 	outputText("Now that it's immobile, you get can get a better look at the defeated combatant, and you're ", false);
-	if(player.findStatusAffect(StatusAffects.Infested) >= 0) outputText("aroused", false);
+	if(player.hasStatusAffect(StatusAffects.Infested)) outputText("aroused", false);
 	else if(player.cor < 50) outputText("horrified", false);
 	else outputText("confused", false);
 	outputText(" by what you see.  A pair of thick, demonic horns curve back over the beast's head, piercing through the bottoms of its wolf-like ears.  Its entire body is covered in rippling muscle, leaving you in no doubt of its strength.  Even with a broken knee, the wolf-man is clearly aroused: protruding from a bloated sheath, his massive dog-dick is fully erect, solid black in color, with an engorged knot.  Small white worms crawl over the surface of his penis, wriggling out of the tip and crawling down the length, leaving trails of slime behind them.\n\n", false);

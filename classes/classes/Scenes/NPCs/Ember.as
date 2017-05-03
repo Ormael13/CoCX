@@ -30,7 +30,7 @@ package classes.Scenes.NPCs
 			//Basic attack, average damage, average accuracy
 			outputText("With a growl, the dragon lashes out in a ferocious splay-fingered slash, "+ emberMF("his","her") + " claws poised to rip into your flesh.  ");
 			//Blind dodge change
-			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(2) == 0) {
+			if(hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) {
 				outputText(capitalA + short + " completely misses you with a blind attack!", false);
 			}
 			//Miss/dodge
@@ -48,7 +48,7 @@ package classes.Scenes.NPCs
 		
 		//Dragon Breath: Very rare attack, very high damage
 		private function embersSupahSpecialDragonBreath():void {
-			if(findStatusAffect(StatusAffects.Blind) >= 0 && rand(2) == 0) {
+			if(hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) {
 				//Blind Ember: 
 				outputText("The blinded dragon tracks you with difficulty as you sprint around the landscape; seeing an opportunity, you strafe around " + emberMF("his","her") + " side, planting yourself behind a large flat boulder near " + emberMF("him","her") + " and pelting " + emberMF("him","her") + " with a small rock.  The scream as the dragon turns the magical conflagration toward you, only to have it hit the rock and blow up in " + emberMF("his","her") + " face, is quite satisfying.");
 				//(Ember HP damage)
@@ -58,7 +58,7 @@ package classes.Scenes.NPCs
 				outputText("Ember inhales deeply, then "+ emberMF("his","her") + " jaws open up, releasing streams of fire, ice and lightning; magical rather than physical, the gaudy displays lose cohesion and amalgamate into a column of raw energy as they fly at you.");
 				if(player.getEvasionRoll()) outputText("  It's a narrow thing, but you manage to throw yourself aside at the last moment.  Fortunately, the energy whirling around and tearing up the soil blinds Ember to your escape until you have recovered and are ready to keep fighting.");
 				else {
-					if (player.findStatusAffect(StatusAffects.Blizzard) >= 0) {
+					if (player.hasStatusAffect(StatusAffects.Blizzard)) {
 						player.addStatusValue(StatusAffects.Blizzard, 1, -1);
 						outputText("  The pain as the deadly combination washes over you is indescribable.  Despite it wasn't pure fire attack surrounding you blizzard still managed to block prt of it power and you endure it somehow making even Ember looks amazed to see you still standing. ");
 						var damage2:Number = 70 + rand(70);
@@ -79,7 +79,7 @@ package classes.Scenes.NPCs
 		//Tailslap: Rare attack, high damage, low accuracy
 		private function emberTailSlap():void {
 			//Blind dodge change
-			if(findStatusAffect(StatusAffects.Blind) >= 0) {
+			if(hasStatusAffect(StatusAffects.Blind)) {
 				outputText(capitalA + short + " completely misses you with a blind tail-slap!", false);
 				combatRoundOver();
 				return;
@@ -126,7 +126,7 @@ package classes.Scenes.NPCs
 				emberReactsToLustiness();
 				return;
 			}
-			if (findStatusAffect(StatusAffects.StunCooldown) >= 0) {
+			if (hasStatusAffect(StatusAffects.StunCooldown)) {
 				addStatusValue(StatusAffects.StunCooldown, 1, -1);
 				if (statusAffectv1(StatusAffects.StunCooldown) <= 0) removeStatusAffect(StatusAffects.StunCooldown);
 			}

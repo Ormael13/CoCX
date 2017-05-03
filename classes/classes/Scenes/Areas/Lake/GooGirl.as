@@ -65,7 +65,7 @@ package classes.Scenes.Areas.Lake
 			else {
 				if (findPerk(PerkLib.Acid) >= 0) {
 					outputText("delivers a painful slap across your cheek.  You gasp when the light stinging becomes a searing burn that seems to get worse as time goes on! ", false);
-					if (player.findStatusAffect(StatusAffects.AcidSlap) < 0) player.createStatusAffect(StatusAffects.AcidSlap, 0, 0, 0, 0);
+					if (!player.hasStatusAffect(StatusAffects.AcidSlap)) player.createStatusAffect(StatusAffects.AcidSlap, 0, 0, 0, 0);
 				}
 				else outputText(", painfully smacking her gooey limbs against your head.  You shake your " + player.hairDescript() + ", clearing your head of the dazing slap. ", false);
 			}
@@ -104,7 +104,7 @@ package classes.Scenes.Areas.Lake
 		private function gooEngulph():void
 		{
 			outputText("The goo-girl gleefully throws her entire body at you and, before you can get out of the way, she has engulfed you in her oozing form! Tendrils of " + skinTone + " slime slide up your nostrils and through your lips, filling your lungs with the girl's muck. You begin suffocating!", false);
-			if (player.findStatusAffect(StatusAffects.GooBind) < 0) player.createStatusAffect(StatusAffects.GooBind, 0, 0, 0, 0);
+			if (!player.hasStatusAffect(StatusAffects.GooBind)) player.createStatusAffect(StatusAffects.GooBind, 0, 0, 0, 0);
 			combatRoundOver();
 		}
 
