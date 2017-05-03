@@ -185,7 +185,7 @@ import classes.BodyParts.UnderBody;
 
 	//	[Deprecated]
 		public function get furColor():String {
-			trace("[DEPRECATED] get furColor");
+			//trace("[DEPRECATED] get furColor");
 			var l:SkinLayer = skin.findLayer({
 				type:[SKIN_TYPE_FUR]
 			});
@@ -201,7 +201,7 @@ import classes.BodyParts.UnderBody;
 		}
 	//	[Deprecated]
 		public function get scalesColor():String {
-			trace("[DEPRECATED] get scalesColor");
+			//trace("[DEPRECATED] get scalesColor");
 			var l:SkinLayer = skin.findLayer({
 				type:[SKIN_TYPE_SCALES,SKIN_TYPE_DRAGON_SCALES,SKIN_TYPE_AQUA_SCALES]
 			});
@@ -217,7 +217,7 @@ import classes.BodyParts.UnderBody;
 		}
 	//	[Deprecated]
 		public function get chitinColor():String {
-			trace("[DEPRECATED] get chitinColor");
+			//trace("[DEPRECATED] get chitinColor");
 			var l:SkinLayer = skin.findLayer({
 				type:[SKIN_TYPE_CHITIN]
 			});

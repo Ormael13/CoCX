@@ -80,15 +80,15 @@
 				"sheath"					: function(thisPtr:*):* { return kGAMECLASS.player.sheathDescription(); },
 				"shield"					: function(thisPtr:*):* { return kGAMECLASS.player.shieldName; },
 				"skin"						: function(thisPtr:*):* {
-					trace("[DEPRECATED] tag [skin] was called");
+//					trace("[DEPRECATED] tag [skin] was called");
 					return kGAMECLASS.player.skin.describe();
 				},
 				"skinfurscales"				: function(thisPtr:*):* {
-					trace("[DEPRECATED] tag [skinfurscales] was called");
+//					trace("[DEPRECATED] tag [skinfurscales] was called");
 					return kGAMECLASS.player.skin.describe('coat');
 				},
 				"skintone"					: function(thisPtr:*):* {
-					trace("[DEPRECATED] tag [skintone] was called");
+//					trace("[DEPRECATED] tag [skintone] was called");
 					return kGAMECLASS.player.skinTone;
 				},
 				"teasetext"					: function(thisPtr:*):* { return kGAMECLASS.teaseText(); },
