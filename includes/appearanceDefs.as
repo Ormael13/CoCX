@@ -15,21 +15,21 @@ public static const SKIN_TYPE_PLAIN:int                                         
 public static const SKIN_TYPE_FUR:int                                               =    1;
 public static const SKIN_TYPE_SCALES:int                                            =    2;
 public static const SKIN_TYPE_GOO:int                                               =    3;
-[Deprecated] public static const SKIN_TYPE_UNDEFINED:int							=    4;
+public static const SKIN_TYPE_UNDEFINED:int											=    4;
 public static const SKIN_TYPE_CHITIN:int											=	 5;
 public static const SKIN_TYPE_BARK:int												=	 6;//niedokończone
 public static const SKIN_TYPE_STONE:int												=	 7;//niedokończone
-[Deprecated] public static const SKIN_TYPE_TATTOED:int								=	 8;
+public static const SKIN_TYPE_TATTOED:int											=	 8;
 public static const SKIN_TYPE_AQUA_SCALES:int										=	 9;//niedokończone
-[Deprecated] public static const SKIN_TYPE_PARTIAL_FUR:int							=	10;
-[Deprecated] public static const SKIN_TYPE_PARTIAL_SCALES:int						=	11;
-[Deprecated] public static const SKIN_TYPE_PARTIAL_CHITIN:int						=	12;//niedokończone
-[Deprecated] public static const SKIN_TYPE_PARTIAL_BARK:int							=	13;//niedokończone
+public static const SKIN_TYPE_PARTIAL_FUR:int										=	10;
+public static const SKIN_TYPE_PARTIAL_SCALES:int									=	11;
+public static const SKIN_TYPE_PARTIAL_CHITIN:int									=	12;//niedokończone
+public static const SKIN_TYPE_PARTIAL_BARK:int										=	13;//niedokończone
 public static const SKIN_TYPE_DRAGON_SCALES:int										=	14;//niedokończone
 public static const SKIN_TYPE_MOSS:int												=	15;
-[Deprecated] public static const SKIN_TYPE_PARTIAL_DRAGON_SCALES:int								=	16;//niedokończone
-[Deprecated] public static const SKIN_TYPE_PARTIAL_STONE:int										=	17;//niedokończone
-[Deprecated] public static const SKIN_TYPE_PARTIAL_AQUA_SCALES:int								=	18;//niedokończone
+public static const SKIN_TYPE_PARTIAL_DRAGON_SCALES:int								=	16;//niedokończone
+public static const SKIN_TYPE_PARTIAL_STONE:int										=	17;//niedokończone
+public static const SKIN_TYPE_PARTIAL_AQUA_SCALES:int								=	18;//niedokończone
 
 // hairType
 public static const HAIR_NORMAL:int                                                =     0;

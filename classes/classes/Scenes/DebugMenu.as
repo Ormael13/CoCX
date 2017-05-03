@@ -513,11 +513,11 @@ import classes.BodyParts.SkinLayer;
 			pa.describeEyes();
 			pa.describeHair();
 			outputText("[pg]");
-			outputText("player.skin = " + JSON.stringify(player.skin.saveToObject())
+	/*		outputText("player.skin = " + JSON.stringify(player.skin.saveToObject())
 											  .replace(/":"/g,'":&nbsp; "')
 											  .replace(/,"/g, ', "') + "\n");
 			outputText("player.facePart = " + JSON.stringify(player.facePart.saveToObject()).replace(/,/g, ", ") + "\n");
-		}
+	*/	}
 		private var editBase:Boolean = true;
 		private function bodyPartEditor():void {
 			menu();

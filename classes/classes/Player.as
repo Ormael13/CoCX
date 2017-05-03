@@ -454,8 +454,8 @@ use namespace kGAMECLASS;
 			if(armType == ARM_TYPE_YETI && weaponName == "fists") {
 				attack += (5 * (1 + newGamePlusMod()));
 			}
-			if(findStatusAffect(StatusAffects.Berzerking) >= 0) attack += (15 + (15 * (1 + newGamePlusMod())));
-			if(findStatusAffect(StatusAffects.Lustzerking) >= 0) attack += (15 + (15 * (1 + newGamePlusMod())));
+			if(hasStatusAffect(StatusAffects.Berzerking)) attack += (15 + (15 * (1 + newGamePlusMod())));
+			if(hasStatusAffect(StatusAffects.Lustzerking)) attack += (15 + (15 * (1 + newGamePlusMod())));
 			attack += Math.round(statusAffectv1(StatusAffects.ChargeWeapon));//zrobić modyfikacje na przypadek single/dual weapon charged tj. 2x wiecej bonusu za dual ale też koszt rzucania powinien wzrosnąć 2x
 			attack = Math.round(attack);
 			return attack;

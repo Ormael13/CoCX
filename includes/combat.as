@@ -11442,8 +11442,8 @@ public function StoneClawAttack():void {
 	if (player.findPerk(PerkLib.IronFistsV) >= 0) damage += 10;
 	if (player.findPerk(PerkLib.JobBrawler) >= 0) damage += (5 * (1 + player.newGamePlusMod()));
 	if (player.findPerk(PerkLib.JobMonk) >= 0) damage += (10 * (1 + player.newGamePlusMod()));
-	if (player.findStatusAffect(StatusAffects.Berzerking) >= 0) damage += (30 + (15 * player.newGamePlusMod()));
-	if (player.findStatusAffect(StatusAffects.Lustzerking) >= 0) damage += (30 + (15 * player.newGamePlusMod()));
+	if (player.hasStatusAffect(StatusAffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
+	if (player.hasStatusAffect(StatusAffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 	//multiplicative bonuses
 	if (player.findPerk(PerkLib.HoldWithBothHands) >= 0) damage *= 1.2;
 	if (player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80) damage *= 1.2;
@@ -11540,8 +11540,8 @@ public function TailSlamAttack():void {
 	if (player.findPerk(PerkLib.IronFistsV) >= 0) damage += 10;
 	if (player.findPerk(PerkLib.JobBrawler) >= 0) damage += (5 * (1 + player.newGamePlusMod()));
 	if (player.findPerk(PerkLib.JobMonk) >= 0) damage += (10 * (1 + player.newGamePlusMod()));
-	if (player.findStatusAffect(StatusAffects.Berzerking) >= 0) damage += (30 + (15 * player.newGamePlusMod()));
-	if (player.findStatusAffect(StatusAffects.Lustzerking) >= 0) damage += (30 + (15 * player.newGamePlusMod()));
+	if (player.hasStatusAffect(StatusAffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
+	if (player.hasStatusAffect(StatusAffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 	//multiplicative bonuses
 	if (player.findPerk(PerkLib.HoldWithBothHands) >= 0) damage *= 1.2;
 	if (player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80) damage *= 1.2;

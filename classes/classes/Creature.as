@@ -183,7 +183,7 @@ import classes.BodyParts.UnderBody;
 		public var hairColor:String = "no";
 		public var hairLength:Number = 0;
 
-		[Deprecated]
+	//	[Deprecated]
 		public function get furColor():String {
 			trace("[DEPRECATED] get furColor");
 			var l:SkinLayer = skin.findLayer({
@@ -191,7 +191,7 @@ import classes.BodyParts.UnderBody;
 			});
 			return l ? l.color : "no";
 		}
-		[Deprecated]
+	//	[Deprecated]
 		public function set furColor(value:String):void {
 			trace("[DEPRECATED] set furColor");
 			var l:SkinLayer = skin.findLayer({
@@ -199,7 +199,7 @@ import classes.BodyParts.UnderBody;
 			});
 			if (l) l.color = value;
 		}
-		[Deprecated]
+	//	[Deprecated]
 		public function get scalesColor():String {
 			trace("[DEPRECATED] get scalesColor");
 			var l:SkinLayer = skin.findLayer({
@@ -207,7 +207,7 @@ import classes.BodyParts.UnderBody;
 			});
 			return l ? l.color : "no"
 		}
-		[Deprecated]
+	//	[Deprecated]
 		public function set scalesColor(value:String):void {
 			trace("[DEPRECATED] set scalesColor");
 			var l:SkinLayer = skin.findLayer({
@@ -215,7 +215,7 @@ import classes.BodyParts.UnderBody;
 			});
 			if (l) l.color = value;
 		}
-		[Deprecated]
+	//	[Deprecated]
 		public function get chitinColor():String {
 			trace("[DEPRECATED] get chitinColor");
 			var l:SkinLayer = skin.findLayer({
@@ -223,7 +223,7 @@ import classes.BodyParts.UnderBody;
 			});
 			return l ? l.color : "no"
 		}
-		[Deprecated]
+	//	[Deprecated]
 		public function set chitinColor(value:String):void {
 			trace("[DEPRECATED] set chitinColor");
 			var l:SkinLayer = skin.findLayer({
@@ -241,26 +241,26 @@ import classes.BodyParts.UnderBody;
 				
 		public var skin:Skin;
 		public function get skinType():Number { return skin.type; }
-		[Deprecated]
+	//	[Deprecated]
 		public function set skinType(value:Number):void {
 			trace("[DEPRECATED] set skinType");
 			skin.type = value;
 		}
 		public function get skinTone():String { return skin.tone; }
-		[Deprecated]
+	//	[Deprecated]
 		public function set skinTone(value:String):void {
 			trace("[DEPRECATED] set skinTone");
 			skin.base.color = value;
 		}
 		public function get skinDesc():String { return skin.desc; }
-		[Deprecated]
+	//	[Deprecated]
 		public function set skinDesc(value:String):void {
 			trace("[DEPRECATED] set skinDesc");
 			if (skin.coverage >= Skin.COVERAGE_HIGH) skin.coat.desc = value;
 			else skin.base.desc = value;
 		}
 		public function get skinAdj():String { return skin.adj; }
-		[Deprecated]
+	//	[Deprecated]
 		public function set skinAdj(value:String):void {
 			trace("[DEPRECATED] set skinAdj");
 			if (skin.coverage >= Skin.COVERAGE_HIGH) skin.coat.adj = value;
@@ -957,7 +957,7 @@ import classes.BodyParts.UnderBody;
 			if (statusValueNum == 3) sac.value3 = newNum;
 			if (statusValueNum == 4) sac.value4 = newNum;
 		}
-		
+
 		public function addStatusValue(stype:StatusAffectType, statusValueNum:Number = 1, bonus:Number = 0):void
 		{
 			if (statusValueNum < 1 || statusValueNum > 4) {
@@ -2156,7 +2156,7 @@ import classes.BodyParts.UnderBody;
 			return false
 		}
 		
-		[Deprecated]
+	//	[Deprecated]
 		public function hasSock(arg:String = ""):Boolean
 		{
 			var index:int = cocks.length;
@@ -2419,7 +2419,7 @@ import classes.BodyParts.UnderBody;
 			breastRows.push(newBreastRow);
 			return true;
 		}
-		
+
 		//Remove cocks
 		public function removeCock(arraySpot:int, totalRemoved:int):void
 		{

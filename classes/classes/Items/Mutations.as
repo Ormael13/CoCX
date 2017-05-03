@@ -5911,38 +5911,38 @@
 				if (player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_PARTIAL_FUR) {
 					//set new skinTone
 					if (rand(10) == 0) {
-						if (rand(2) == 0) player.skinTone = "purple";
-						else player.skinTone = "silver";
+						if (rand(2) == 0) player.scalesColor = "purple";
+						else player.scalesColor = "silver";
 					}
 					//non rare skinTone
 					else {
 						temp = rand(5);
-						if (temp == 0) player.skinTone = "red";
-						else if (temp == 1) player.skinTone = "green";
-						else if (temp == 2) player.skinTone = "white";
-						else if (temp == 3) player.skinTone = "blue";
-						else player.skinTone = "black";
+						if (temp == 0) player.scalesColor = "red";
+						else if (temp == 1) player.scalesColor = "green";
+						else if (temp == 2) player.scalesColor = "white";
+						else if (temp == 3) player.scalesColor = "blue";
+						else player.scalesColor = "black";
 					}
-					outputText("\n\nYou scratch yourself, and come away with a large clump of " + player.furColor + " fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  You feel your skin shift as " + player.skinTone + " scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  The rest of the fur is easy to remove.  <b>Your body is now partially covered with small patches of scales!</b>", false);
+					outputText("\n\nYou scratch yourself, and come away with a large clump of " + player.furColor + " fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  You feel your skin shift as " + player.scalesColor + " scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  The rest of the fur is easy to remove.  <b>Your body is now partially covered with small patches of scales!</b>", false);
 				}
 				//(no fur)
 				else {
 					outputText("\n\nYou feel your skin shift as scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  <b>Your body is now partially covered with small patches of ", false);
 					//set new skinTone
 					if (rand(10) == 0) {
-						if (rand(2) == 0) player.skinTone = "purple";
-						else player.skinTone = "silver";
+						if (rand(2) == 0) player.scalesColor = "purple";
+						else player.scalesColor = "silver";
 					}
 					//non rare skinTone
 					else {
 						temp = rand(5);
-						if (temp == 0) player.skinTone = "red";
-						else if (temp == 1) player.skinTone = "green";
-						else if (temp == 2) player.skinTone = "white";
-						else if (temp == 3) player.skinTone = "blue";
-						else player.skinTone = "black";
+						if (temp == 0) player.scalesColor = "red";
+						else if (temp == 1) player.scalesColor = "green";
+						else if (temp == 2) player.scalesColor = "white";
+						else if (temp == 3) player.scalesColor = "blue";
+						else player.scalesColor = "black";
 					}
-					outputText(player.skinTone + " scales.</b>", false);
+					outputText(player.scalesColor + " scales.</b>", false);
 				}
 				player.skinType = SKIN_TYPE_PARTIAL_SCALES;
 				player.skinDesc = "scales";
