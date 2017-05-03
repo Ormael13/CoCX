@@ -2230,7 +2230,7 @@ import classes.BodyParts.UnderBody;
 		//Fists and fist weapons
 		public function isFistOrFistWeapon():Boolean
 		{
-			if (game.player.weaponName == "fists" || game.player.weapon == game.weapons.S_GAUNT)
+			if (game.player.weaponName == "fists" || game.player.weapon == game.weapons.S_GAUNT || game.player.weapon == game.weapons.H_GAUNT)
 				return true;
 			return false;
 		}

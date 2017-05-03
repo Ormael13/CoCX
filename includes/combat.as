@@ -310,7 +310,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 			}
 		}
 		else addButton(11, "Surrender", surrender, null, null, null, "Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
-		if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0) addButton(12,"M/R/S Options",meleeANDrangeANDmanaSubMenu);
+		if (player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0 || player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0) addButton(12,"M/R/S Options",meleeANDrangeANDmanaSubMenu);
 		if (CoC_Settings.debugBuild && !debug) addButton(13, "Inspect", debugInspect, null, null, null, "Use your debug powers to inspect your enemy.");
 		addButton (14, "Run", runAway, null, null, null, "Choosing to run will let you try to escape from your enemy. However, it will be hard to escape enemies that are faster than you and if you fail, your enemy will get a free attack.");
 	}
@@ -338,7 +338,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 			addButton(1, "Stop", stopChanneledSpecial, null, null, null, "Stop singing.");
 		}
 	}
-	if (monster.hasStatusAffect(StatusAffects.AttackDisabled)) 
+	if (monster.hasStatusAffect(StatusAffects.AttackDisabled))
 	{
 		if (monster is Lethice)
 		{
@@ -483,6 +483,7 @@ public function stopChanneledSpecial():void {
 
 public function unarmedAttack():Number {
 	var unarmed:Number = 0;
+	if (player.findPerk(PerkLib.JobMonk) >= 0 && player.wis >= 60) unarmed += 10 * (1 + player.newGamePlusMod());
 	if (player.findPerk(PerkLib.BodyCultivator) >= 0) unarmed += 2 * (1 + player.newGamePlusMod());
 	if (player.findPerk(PerkLib.FleshBodyApprenticeStage) >= 0) {
 		if (player.findPerk(PerkLib.SoulApprentice) >= 0) unarmed += 4 * (1 + player.newGamePlusMod());
@@ -519,7 +520,7 @@ public function basemeleeattacks():void {
 	if (urtaQuest.isUrta()) {
 		flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 	}
-	if (player.weaponPerk != "Large" && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && player.weaponName != "fists") {		// && player.weaponName != "hooked gauntlets" && player.weaponName != "spiked gauntlet"
+	if (player.weaponPerk != "Large" && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && !isWieldingRangedWeapon()) {
 		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
 			if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 5) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 6;
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 4) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 5;
@@ -554,7 +555,10 @@ public function basemeleeattacks():void {
 	}
 	if (player.weaponPerk == "Large") {
 		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
-			if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 2) {
+			if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 5) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
+			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 4) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
+			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 3) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
+			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 2) {
 				if (player.findPerk(PerkLib.TripleAttackLarge) >= 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			}
@@ -579,9 +583,39 @@ public function basemeleeattacks():void {
 		}
 		else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 	}
-	if (player.weaponPerk == "Dual Large" || player.weaponPerk == "Dual" || player.weaponPerk == "Staff" || player.weaponName == "fists") {		// || player.weaponName == "hooked gauntlets" || player.weaponName == "spiked gauntlet"
+	if (player.weaponPerk == "Dual Large" || player.weaponPerk == "Dual" || player.weaponPerk == "Staff") {
 	//	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 		flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+	}
+	if (player.isFistOrFistWeapon()) {		//player.weaponName == "fists" || player.weaponName == "hooked gauntlets" || player.weaponName == "spiked gauntlet"
+		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
+			if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 5) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
+			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 4) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
+			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 3) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
+			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 2) {
+				if (player.findPerk(PerkLib.ComboMaster) >= 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
+				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+			}
+			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1) {
+				if (player.findPerk(PerkLib.Combo) >= 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
+				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+			}
+			else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+			var mutlimeleefistattacksCost:Number = 0;
+			//multiple melee large attacks costs
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) mutlimeleefistattacksCost += 50;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) mutlimeleefistattacksCost += 20;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
+				if (player.fatigue + mutlimeleefistattacksCost <= player.maxFatigue()) {
+					fatigue(mutlimeleelargeattacksCost);
+				}
+				else {
+					outputText("You're too fatigued to attack more than once in this turn!\n\n");
+					flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+				}
+			}
+		}
+		else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 	}
 	attack();
 }
@@ -3499,7 +3533,7 @@ private function combatStatusesUpdate():void {
 		outputText("<b>You're pinned under a pile of webbing!  You should probably struggle out of it and get back in the fight!</b>\n\n", false);
 	if (player.hasStatusAffect(StatusAffects.Blind) && !monster.hasStatusAffect(StatusAffects.Sandstorm) && !player.hasStatusAffect(StatusAffects.PurpleHaze))
 	{
-		if (player.hasStatusAffect(StatusAffects.SheilaOil)) 
+		if (player.hasStatusAffect(StatusAffects.SheilaOil))
 		{
 			if(player.statusAffectv1(StatusAffects.Blind) <= 0) {
 				outputText("<b>You finish wiping the demon's tainted oils away from your eyes; though the smell lingers, you can at least see.  Sheila actually seems happy to once again be under your gaze.</b>\n\n", false);
@@ -4142,6 +4176,7 @@ public function startCombat(monster_:Monster, plotFight_:Boolean = false):void {
 	}
 	if (monster.findPerk(PerkLib.JobGuardian) >= 0) monster.tou += (5 * (1 + player.newGamePlusMod()));
 	if (monster.findPerk(PerkLib.JobKnight) >= 0) monster.tou += (10 * (1 + player.newGamePlusMod()));
+	if (monster.findPerk(PerkLib.JobMonk) >= 0) monster.wis += (15 * (1 + player.newGamePlusMod()));
 	if (monster.findPerk(PerkLib.JobMunchkin) >= 0) {
 		monster.str += (25 * (1 + player.newGamePlusMod()));
 		monster.tou += (25 * (1 + player.newGamePlusMod()));
@@ -6463,6 +6498,7 @@ public function spellMight(silent:Boolean = false):void {
 		if (player.findPerk(PerkLib.JobBrawler) >= 0) MightBoost -= 10;
 		if (player.findPerk(PerkLib.JobDervish) >= 0) MightBoost -= 10;
 		if (player.findPerk(PerkLib.IronFistsI) >= 0) MightBoost -= 10;
+		if (player.findPerk(PerkLib.JobMonk) >= 0) MightBoost -= 15;
 		if (player.findPerk(PerkLib.Berzerker) >= 0) MightBoost -= 15;
 		if (player.findPerk(PerkLib.Lustzerker) >= 0) MightBoost -= 15;
 		if (player.findPerk(PerkLib.WeaponMastery) >= 0) MightBoost -= 15;
@@ -6566,11 +6602,8 @@ public function spellBlink(silent:Boolean = false):void {
 		if (player.findPerk(PerkLib.JobBarbarian) >= 0) BlinkBoost -= 10;
 		if (player.findPerk(PerkLib.JobBrawler) >= 0) BlinkBoost -= 10;
 		if (player.findPerk(PerkLib.JobDervish) >= 0) BlinkBoost -= 10;
-		if (player.findPerk(PerkLib.JobGuardian) >= 0) BlinkBoost -= 5;
-		if (player.findPerk(PerkLib.JobRanger) >= 0) BlinkBoost -= 5;
-		if (player.findPerk(PerkLib.JobSeducer) >= 0) BlinkBoost -= 5;
-		if (player.findPerk(PerkLib.JobWarrior) >= 0) BlinkBoost -= 5;
 		if (player.findPerk(PerkLib.IronFistsI) >= 0) BlinkBoost -= 10;
+		if (player.findPerk(PerkLib.JobMonk) >= 0) BlinkBoost -= 15;
 		if (player.findPerk(PerkLib.Berzerker) >= 0) BlinkBoost -= 15;
 		if (player.findPerk(PerkLib.Lustzerker) >= 0) BlinkBoost -= 15;
 		if (player.findPerk(PerkLib.WeaponMastery) >= 0) BlinkBoost -= 15;
@@ -6955,6 +6988,7 @@ public function spellChargeWeapon(silent:Boolean = false):void {
 	if (player.findPerk(PerkLib.JobBrawler) >= 0) ChargeWeaponBoost -= 10;
 	if (player.findPerk(PerkLib.JobDervish) >= 0) ChargeWeaponBoost -= 10;
 	if (player.findPerk(PerkLib.IronFistsI) >= 0) ChargeWeaponBoost -= 10;
+	if (player.findPerk(PerkLib.JobMonk) >= 0) ChargeWeaponBoost -= 15;
 	if (player.findPerk(PerkLib.Berzerker) >= 0) ChargeWeaponBoost -= 15;
 	if (player.findPerk(PerkLib.Lustzerker) >= 0) ChargeWeaponBoost -= 15;
 	if (player.findPerk(PerkLib.WeaponMastery) >= 0) ChargeWeaponBoost -= 15;
@@ -7014,6 +7048,7 @@ public function spellChargeArmor(silent:Boolean = false):void {
 	if (player.findPerk(PerkLib.JobBrawler) >= 0) ChargeArmorBoost -= 10;
 	if (player.findPerk(PerkLib.JobDervish) >= 0) ChargeArmorBoost -= 10;
 	if (player.findPerk(PerkLib.IronFistsI) >= 0) ChargeArmorBoost -= 10;
+	if (player.findPerk(PerkLib.JobMonk) >= 0) ChargeArmorBoost -= 15;
 	if (player.findPerk(PerkLib.Berzerker) >= 0) ChargeArmorBoost -= 15;
 	if (player.findPerk(PerkLib.Lustzerker) >= 0) ChargeArmorBoost -= 15;
 	if (player.findPerk(PerkLib.WeaponMastery) >= 0) ChargeArmorBoost -= 15;
@@ -11406,8 +11441,9 @@ public function StoneClawAttack():void {
 	if (player.findPerk(PerkLib.IronFistsIV) >= 0) damage += 10;
 	if (player.findPerk(PerkLib.IronFistsV) >= 0) damage += 10;
 	if (player.findPerk(PerkLib.JobBrawler) >= 0) damage += (5 * (1 + player.newGamePlusMod()));
-	if (player.hasStatusAffect(StatusAffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
-	if (player.hasStatusAffect(StatusAffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
+	if (player.findPerk(PerkLib.JobMonk) >= 0) damage += (10 * (1 + player.newGamePlusMod()));
+	if (player.findStatusAffect(StatusAffects.Berzerking) >= 0) damage += (30 + (15 * player.newGamePlusMod()));
+	if (player.findStatusAffect(StatusAffects.Lustzerking) >= 0) damage += (30 + (15 * player.newGamePlusMod()));
 	//multiplicative bonuses
 	if (player.findPerk(PerkLib.HoldWithBothHands) >= 0) damage *= 1.2;
 	if (player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80) damage *= 1.2;
@@ -11503,8 +11539,9 @@ public function TailSlamAttack():void {
 	if (player.findPerk(PerkLib.IronFistsIV) >= 0) damage += 10;
 	if (player.findPerk(PerkLib.IronFistsV) >= 0) damage += 10;
 	if (player.findPerk(PerkLib.JobBrawler) >= 0) damage += (5 * (1 + player.newGamePlusMod()));
-	if (player.hasStatusAffect(StatusAffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
-	if (player.hasStatusAffect(StatusAffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
+	if (player.findPerk(PerkLib.JobMonk) >= 0) damage += (10 * (1 + player.newGamePlusMod()));
+	if (player.findStatusAffect(StatusAffects.Berzerking) >= 0) damage += (30 + (15 * player.newGamePlusMod()));
+	if (player.findStatusAffect(StatusAffects.Lustzerking) >= 0) damage += (30 + (15 * player.newGamePlusMod()));
 	//multiplicative bonuses
 	if (player.findPerk(PerkLib.HoldWithBothHands) >= 0) damage *= 1.2;
 	if (player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80) damage *= 1.2;

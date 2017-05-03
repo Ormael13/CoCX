@@ -262,6 +262,12 @@ package classes
 		public static const ColdLust:PerkType = mk("Cold Lust", "Cold Lust",
 				"Lustzerking does not reduce your lust resistance.",
 				"You choose the 'Cold Lust' perk, causing Lustzerking to not reduce your lust resistance.");
+		public static const Combo:PerkType = mk("Combo", "Combo",
+				"Gain an extra attack with fist (weapon).",
+				"You choose the 'Combo' perk, gaining an extra attack with fist (weapon).");
+		public static const ComboMaster:PerkType = mk("Combo Master", "Combo Master",
+				"Gain another extra attack with fist (weapon).",
+				"You choose the 'Combo' perk, gaining another extra attack with fist (weapon).");
 		public static const CorruptedLibido:PerkType = mk("Corrupted Libido", "Corrupted Libido",
 				"Reduces lust gain by 10%.",
 				"You choose the 'Corrupted Libido' perk.  As a result of your body's corruption, you've become a bit harder to turn on. (Lust gain reduced by 10%!)");

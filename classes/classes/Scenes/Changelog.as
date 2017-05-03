@@ -84,6 +84,13 @@ package classes.Scenes
 			outputText("-New tier 7 strength lvl-up perk: Prestige Job: Berserker Req. Job: Barbarian, Job: Guardian perks, 200+ str and either Berzerking or Lustzerking perk Effect: +60 to max str and +20 to max tou (scalable with NG tiers)\n");//powinno dodawać to wraith max bar niż fatigue
 			outputText("-New tier 7 intelligence lvl-up perk: Prestige Job: Seer Req. Grey Archmage, Soul Overlord perks and 200+ int Effect: +60 max int and +20 to max wis (scalable with NG tiers), +900 max Fatigue, +500 max Soulforce\n");
 			outputText("-New enemy perk: Beast or Animal-morph enemy type. Some of PC attack will deal more dmg to such enemies that atm is 27 diff enemeis with this perk ingame.\n");
+			outputText("-New tier 2 wisdom lvl-up perk: Job: Monk. Req. 60+ wis. Effects: +15 to max wis, +10 to unarmed. Lighting Strikes perk will not work with fist attacks anymore.\n");
+			outputText("-New tier 2 wisdom lvl-up perk: Combo. Req. Job: Monk perk, 75+ wis and 50+ str. Effects: Second attack per turn using fist (weapon).\n");
+			outputText("-New tier 4 wisdom lvl-up perk: Combo Master: Monk. Req. Combo perk, 125+ wis and 100+ str. Effects: Third attack per turn using fist (weapon).\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed bugs: Naming bug for demons, Too high normaly Goo score\n\n\n\n\n\n");/*ostatni punkt changelogu
@@ -95,6 +102,10 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");, Goo, Salamander, Phoenix, Siren, Naga, Gorgon, Vouivre, Couatl
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -135,6 +146,13 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): działający pasek soulforce na main stats
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
