@@ -405,6 +405,7 @@ package classes
 		public static const ParalyzeVenom:CombatStatusAffect = mk2("paralyze venom");
 		public static const PhysicalDisabled:CombatStatusAffect = mk2("Physical Disabled");
 		public static const Poison:CombatStatusAffect = mk2("Poison");
+		public static const Rage:CombatStatusAffect = mk2("Rage");
 		public static const Sandstorm:CombatStatusAffect = mk2("sandstorm");
 		public static const Sealed:CombatStatusAffect = mk2("Sealed");
 		public static const SharkBiteBleed:CombatStatusAffect = mk2("Shark Bite Bleed");

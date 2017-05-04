@@ -623,7 +623,9 @@ package classes.Scenes
 		
 		public function hiddencavediscovery():void {
 			flags[kFLAGS.HIDDEN_CAVE_FOUND] = 1;
-			outputText("While exploring hills (rest is placeholder atm).\n\n", true);
+			outputText("You aproach what looks like a cave at first but the shattered bones on the ground hint to something else. Still where theres bones and dead explorer is bound to be treasure. The entrance is decorated with a pair of fiery torch");
+			if (silly()) outputText(" and a sparkling arrow shaped sign post tell 'please come in adventurer, I'm in need of more bony decoration'");
+			outputText(".\n\n");
 			doNext(hiddencave.enterDungeon);
 		}
 		
