@@ -147,6 +147,48 @@ public function encounterMarae():void {
 	}
 }
 
+public function alraunezeMe():void {
+	spriteSelect(40);
+	outputText(images.showImage("marae-first-encounter"));
+	outputText("For some weird reason, you feel a growing need to visit Marae. Perhaps it’s a natural calling for plant morphs like yourself, tuned to the earth's voice as you have become, or perhaps there is a greater calling to it. Perhaps it’s just that getting into the good graces of the local plant goddess while being a plant yourself is common sense. You use the boat as usual and row to the island where Marae resides. It doesn’t take long for the goddess to notice your presence.\n\n", false);
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) {
+		outputText("Oh...I see you went through the trouble of eating Hollicynthia’s fruits to grow closer to me. I honestly didn’t expect you to show this level of devotion. Perhaps I misjudged you. In turn for services rendered, I think adopting you as a daughter of mine would, perhaps, not be beyond my grace. Will you, in turn, embrace the love of the goddess of fertility? What say you, my champion?</i>\"", false);
+	}
+	else {
+		outputText("Well, aren’t you sweet? So envious of me and Hollicyntia that you tried to become a flower yourself! Your level of devotion to your goddess is truly touching. How about I remake you, improve you, all while giving you what you truly desire? Then, adopt you as my fully fledged daughter? My first real convert to the new religion? Think of it as a... final reward.</i>\"", false);
+	}
+	menu();
+	addButton(0, "No", alraunezeMeNo, null, null, null, "");
+	addButton(1, "Yes", alraunezeMeYes, null, null, null, "");
+}
+
+private function alraunezeMeNo():void {
+	outputText("\n\nYou politely decline, telling her that you only wanted to pay a visit. Still, it is a tempting offer, one you will consider while you head back to camp. Such decisions are not to be taken in the heat of the moment. You tell her as much, which she accepts with a smile and a nod.", false);
+	doNext(camp.returnToCampUseOneHour);
+}
+
+private function alraunezeMeYes():void {
+	clearOutput();
+	outputText("PLACEHOLDER MAGIC SCENE WHEN PC IS ALRAUNEZED!\n\n", false);
+	outputText("Worried about being stuck, you try and move something, anything, and to your surprise, you discover you can actually walk around using the vine-like tentacle stamens that seem to sprout from the base of your body. It feels weird at first, but you think you will get used to it soon enough. <b>Your lower body has turned into an Alraune flower, towering above a mass of tentacle vines!</b>\n\n", false);
+	outputText("PLACEHOLDER MAGIC SCENE WHEN PC IS ALRAUNEZED!\n\n", false);
+	if (player.cockTotal() == 0) {
+		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+		player.cocks[0].cockType = CockTypesEnum.STAMEN;
+	}
+	if (player.cockTotal() == 1) {
+		player.cocks[0].cockType = CockTypesEnum.STAMEN;
+	}
+	if (player.cockTotal() > 1) {
+		player.killCocks( -1);
+		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+		player.cocks[0].cockType = CockTypesEnum.STAMEN;
+	}
+	player.lowerBody = LOWER_BODY_TYPE_PLANT_FLOWER;
+	player.legCount = 4;
+	doNext(camp.returnToCampUseTwoHours);
+}
+
 //Prompts
 private function promptFightMarae1():void {
 	outputText("Are you sure you want to fight Marae? She is the life-goddess of Mareth. This is going to be extremely difficult battle.", true)

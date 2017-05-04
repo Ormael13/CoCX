@@ -2095,7 +2095,6 @@
 				dynStats("str", 1);
 				changes++;
 			}
-			
 			//-Increase toughness up to 100.
 			if (player.tou < 100 && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYour body suddenly feels tougher and more resilient just like a tree.", false);
@@ -2127,6 +2126,49 @@
 				if (rand(3) == 0 && changes < changeLimit && player.buttRating < 8) {
 					outputText("\n\nWhen you stand back, up your [ass] jiggles with a good bit of extra weight.");
 					player.buttRating++;
+					changes++;
+				}
+				if (player.vaginas.length > 0) {
+					outputText("\n\n", false);
+					//0 = dry, 1 = wet, 2 = extra wet, 3 = always slick, 4 = drools constantly, 5 = female ejaculator
+					if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING) {
+						if (player.vaginas.length == 1) outputText("Your " + vaginaDescript(0) + " gushes fluids down your leg as you spontaneously orgasm.", false);
+						else outputText("Your " + vaginaDescript(0) + "s gush fluids down your legs as you spontaneously orgasm, leaving a thick puddle of pussy-juice on the ground.  It is rapidly absorbed by the earth.", false);
+						player.orgasm();
+					}
+					if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING) {
+						outputText("After the last times, you thought that the sudden arousal weakened with each use of the fruit, with the last time having caused you almost no noticeable increase in it. Clearly, you were wrong, as the sudden spike of arousal obligingly points out to you.  ", false);
+						if (player.vaginas.length == 1) outputText("You cannot resist as your hands dive into your " + vaginaDescript(0) + ".  ", false);
+						if (player.vaginas.length > 1) outputText("You cannot resist plunging your hands inside your " + vaginaDescript(0) + "s.  ", false);
+						outputText("Your orgasm comes mercifully quickly, accompanied by an impressive spray of your fluids.  Still high from the aphrodisiac effects of the fruit, you cannot help to be delighted at this new development.  <b>You are now a squirter</b>.", false);
+						player.orgasm();
+					}
+					if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) {
+						outputText("You suddenly feel something trickling down your leg. The strong smell of fish slams into your poor unprepared nose, cluing you in as to the nature of the liquid, but getting used to the idea of smelling like a fishing port, the smell begins to change to a far lighter and sweeter one, which you recognize as that of the fruit. Your " + vaginaDescript(0) + " now constantly drools lubricant down your leg, filling the air with a pleasant scent that most would mistake for perfume.", false);
+					}
+					if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) {
+						outputText("Once more, the fruit’s effects make themselves known, leaving you hornier and wetter than you began as, the later of which is likely to be permanent. At least this time you were already expecting it, so you weren’t forced to relieve yourself on the spot like the last time.", false);
+					}
+					if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) {
+						outputText("Suddenly your arousal spikes, feeling as if you had downed several lust drafts while already in heat or rut, forcing you to masturbate furiously on the spot.  ", false);
+						if (player.vaginas.length == 1) outputText("You realize afterwards that your " + vaginaDescript(0) + " felt much wetter than normal.", false);
+						else outputText("You realize afterwards that your " + vaginaDescript(0) + " were much wetter than normal.", false);
+						outputText("  Will you eventually become as juicy as the fruit was?", false);
+					}
+					if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DRY) {
+						outputText("You feel a tingling in your crotch, but cannot identify it.", false);
+					}
+					temp = player.vaginas.length;
+					while (temp > 0) {
+						temp--;
+						if (player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLAVERING) player.vaginas[temp].vaginalWetness++;
+					}
+					changes++;
+				}
+				//Fertility boost
+				if (player.vaginas.length > 0 && player.fertility < 40) {
+					outputText("You feel your womb start giving off a pleasant warmth, instinctively knowing it has become more fertile. Plants <b>are</b> known for their fertility, and you <b>are</b> trying to become somewhat closer to them, so this was to be expected. Perhaps being as fertile as this once verdant land won’t be so bad. Might as well try to give the goddess a run for her money.\n\n", false);
+					player.fertility += 5;
 					changes++;
 				}
 			}
@@ -2281,12 +2323,19 @@
 				outputText("\n\nAnother violent sneeze escapes you.  It hurt!  You feel your nose and discover your face has changed back into a more normal look.  <b>You have a human looking face again!</b>", false);
 			}
 			//Leaf Hair
-			if (player.hairColor == "green" && player.hairType != HAIR_LEAF && player.skinType != SKIN_TYPE_STONE && rand(3) == 0 && changes < changeLimit)
+			if (player.hairColor == "green" && (player.hairType != HAIR_LEAF || player.hairType != HAIR_GRASS) && player.skinType != SKIN_TYPE_STONE && rand(3) == 0 && changes < changeLimit)
 			{
-				outputText("\n\nYour " + hairDescript() + " begins to fall out in globs, eventually leaving you with a bald head.  Your head is not left bald for long, though.  Within moments, a full head of leaf sprouts from the skin of your scalp.  You run your hands through your new growth, sighing at the pleasure of being able to feel each individual leaf.  <b>Your hair turned into thin leafs replacing your current hair!</b>");
-				player.hairType = HAIR_LEAF;
+				if (rand(2) == 0) {
+					outputText("\n\nYour " + hairDescript() + " begins to fall out in clumps, eventually leaving your scalp completely bald.  Although, thankfully, it does not remain like that for long.  Within moments a full head of grass sprouts from the skin of your scalp, protecting it from the chilly wind which was starting to annoy you.  You run your hands through your newly grown hair-like grass, stifling a moan at how sensitive the thousands of long, soft and leafy blades that replaced your hair are.  <b>Your hair has been replaced by grass, your scalp is now covered with soft blades of verdant greenery...</b>");
+					player.hairType = HAIR_GRASS;
+				}
+				else {
+					outputText("\n\nYour " + hairDescript() + " begins to fall out in globs, eventually leaving you with a bald head.  Your head is not left bald for long, though.  Within moments, a full head of leaf sprouts from the skin of your scalp.  You run your hands through your new growth, sighing at the pleasure of being able to feel each individual leaf.  <b>Your hair turned into thin leafs replacing your current hair!</b>");
+					player.hairType = HAIR_LEAF;
+				}
 				changes++;
 			}
+			//green hair
 			if (player.hairColor != "green" && player.skinType != SKIN_TYPE_STONE && rand(3) == 0 && changes < changeLimit)
 			{
 				outputText("\n\nAt first it looks like nothing changed but then you realize all the hair on your body has shifted to a verdant green color.  <b>You now have green hair.</b>");
@@ -6088,7 +6137,7 @@
 				changes++;
 			}
 			//Snake eyes
-			if (player.skinType == SKIN_TYPE_PARTIAL_SCALES && player.eyeType != EYES_SNAKE && rand(4) == 0 && changes < changeLimit) {
+			if (player.skinType == SKIN_TYPE_PARTIAL_SCALES && player.eyeType != EYES_SNAKE && player.eyeType != EYES_GORGON && rand(4) == 0 && changes < changeLimit) {
 				player.eyeType = EYES_SNAKE;
 				outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a snake.  <b>You now have snake eyes!</b>.", false);
 				changes++;
@@ -6112,7 +6161,7 @@
 				changes++;
 			}
 			//Gorgon eyes
-			if (type == 0 && player.hairType == HAIR_GORGON && player.eyeType != EYES_GORGON && rand(4) == 0 && changes < changeLimit) {
+			if (type == 0 && player.hairType == HAIR_GORGON && player.eyeType == EYES_SNAKE && player.eyeType != EYES_GORGON && rand(4) == 0 && changes < changeLimit) {
 				player.eyeType = EYES_GORGON;
 				outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, all seems to be fine until at least it seems so. But when moment later, when you casualy look at your hands pondering if there is drinking this vial of oil maybe have some other effect the numbing sensation starts to spread starting from your hands fingers. Worried you focus your gaze at them to notice, that they typical texture becoming grey colored much similar to that of... stone? And slowy you realize the more you look at them, the faster change. Panicked for a moment you look away and then this numbing feeling starting to slowly receed. But looking back at them causing it to return. After moment, and closing eyelids, you conclude that your eyes must have gained an useful ability.  <b>Your eyes has turned into gorgon eyes.</b>.", false);
 				changes++;

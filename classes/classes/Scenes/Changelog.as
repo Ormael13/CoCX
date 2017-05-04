@@ -57,7 +57,7 @@ package classes.Scenes
 			outputText("-Having Orca face unlocks Bite p. special that work same as shark bite. Having Orca tail allow to use Tail Smack p. special that stunns enemy for 2 turns.\n");
 			outputText("-New body part - eyes: Snake Eyes Req. Partial Scales skin\n");
 			outputText("-New body part - ears: Snake Ears Req. Snake Eyes\n");
-			outputText("-In Snake Oil and Gorgon Oil has been added three new TF effects. After PC get naga tail next TF will be partila scales, then next one is snake eyes and then snake ears. For snake oil it's last tf in chain while for gorgon oil it continue to gorgon hair tf with rest of gorgon related tf happening in normal order.\n");
+			outputText("-In Snake Oil and Gorgon Oil has been added three new TF effects. After PC get naga tail next TF will be partila scales, then next one is snake eyes and then snake ears. For snake oil it's last tf in chain while for gorgon oil it continue to gorgon hair tf with rest of gorgon related tf happening in normal order (gorgon eyes tf effect got additional req. of having snake eyes).\n");
 			outputText("-Changes to naga races. Naga is it own race with half (4+) and full score (8+). Bonuses are respectively: +20 to max str, +40 to max spe and +40 to max str, +20 to max tou and +60 to max spe (all scalable). On those bonuses can be addeded bnus from been naga.\n");
 			outputText("-Gorgon race become one of possible paths of evolution of naga with 11+ in racial score for scalable bonuses: +50 to max str, +45 to max tou and +70 to max spe.\n");
 			outputText("-Two new naga evolution paths both req. 11+ pts it they racial scores to give bonuses: Vouivre (+60 to max Str, +30 to max Tou, +45 to max Spe, +30 max Int) and Couatl (+40 to max Str, +25 to max Tou, +100 to max Spe)\n");
@@ -92,8 +92,8 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: Naming bug for demons, Too high normaly Goo score\n\n\n\n\n\n");/*ostatni punkt changelogu
+			outputText("-New hair type: Grass hair. Result of using Mara fruit. Hair TF for Mara fruit will be now have 50% to give leaf or grass hair.\n");
+			outputText("-Fixed bugs: Naming bug for demons, Too high normaly Goo score, Corrupted Marae fight.\n\n\n\n\n\n");/*ostatni punkt changelogu
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-Hooked Gauntlets and Spiked Gauntlet weapons are removed from pool of weapons working with mutliattack due to been put in same group of weapons that would benefits form perks affecting fists attacks.\n");później jak bede dodawać fist attack perks przeios je do tej grupy
 			outputText("-\n");

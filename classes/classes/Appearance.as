@@ -88,6 +88,7 @@
 				else if (i_creature.hairType == HAIR_GORGON) description += "snakes that replaced your ";
 				else if (i_creature.hairType == HAIR_LEAF) description += "leaf-";
 				else if (i_creature.hairType == HAIR_FLUFFY) description += "fluffy ";
+				else if (i_creature.hairType == HAIR_GRASS) description += "grass-";
 				description += "mane";
 				return description;
 			}
@@ -106,6 +107,7 @@
 			else if (i_creature.hairType == HAIR_GORGON) description += "snakes that replaced your ";
 			else if (i_creature.hairType == HAIR_LEAF) description += "leaf-";
 			else if (i_creature.hairType == HAIR_FLUFFY) description += "fluffy ";
+			else if (i_creature.hairType == HAIR_GRASS) description += "grass-";
 			description += "hair";
 
 			return description;
@@ -2394,7 +2396,8 @@
 					[HAIR_QUILL, "quill"],
 					[HAIR_GORGON, "snake-like"],
 					[HAIR_LEAF, "leaf"],
-					[HAIR_FLUFFY, "fluffy"]
+					[HAIR_FLUFFY, "fluffy"],
+					[HAIR_GRASS, "grass"]
 				]
 		);
 		public static const DEFAULT_BEARD_NAMES:Object = createMapFromPairs(

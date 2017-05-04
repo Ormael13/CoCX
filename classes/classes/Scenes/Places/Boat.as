@@ -8,6 +8,7 @@ package classes.Scenes.Places
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Areas.Lake.*;
 	import classes.Scenes.Places.Boat.*;
+	import classes.Player;
 	import classes.Scenes.NPCs.Etna;
 	import classes.Scenes.NPCs.EtnaFollower;
 
@@ -51,6 +52,11 @@ package classes.Scenes.Places
 				return;
 			}
 			outputText("You set out, wondering if you'll find any strange islands or creatures in the lake.\n\n", false);
+			//Alraune
+			if (rand(5) <= 2 && player.plantScore() >= 7) {
+				marae.alraunezeMe();
+				return;
+			}
 			//40% chance if not done with marae of meeting her.
 			if (rand(5) <= 2 && flags[kFLAGS.MARAE_QUEST_COMPLETE] <= 0 && flags[kFLAGS.MET_MARAE_CORRUPTED] <= 0) {
 				marae.encounterMarae();
@@ -72,6 +78,7 @@ package classes.Scenes.Places
 			//Done to allow player who has both perks to fight Marae.
 			if ((debug || rand(5) == 0) && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] == 2 && flags[kFLAGS.MET_MARAE_CORRUPTED] > 0 && player.gender > 0 && flags[kFLAGS.CORRUPTED_MARAE_KILLED] <= 0) {
 				marae.level3MaraeEncounter();
+				return;
 			}
 			//BUILD LIST OF CHOICES
 			var choice:Array = [0, 1, 2, 3];

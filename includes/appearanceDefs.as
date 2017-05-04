@@ -41,6 +41,7 @@ public static const HAIR_QUILL:int                                              
 public static const HAIR_GORGON:int												   =	 6;
 public static const HAIR_LEAF:int												   =	 7;
 public static const HAIR_FLUFFY:int												   =	 8;
+public static const HAIR_GRASS:int												   =	 9;
 
 // beardType
 public static const BEARD_NORMAL:int                                               =     0;

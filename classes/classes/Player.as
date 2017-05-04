@@ -1301,14 +1301,17 @@ use namespace kGAMECLASS;
 			if (plantScore() >= 4)
 			{
 				if (isTaur()) {
-					if (plantScore() >= 6 && lowerBody == 34) race = "Alraune";
-					else if (plantScore() >= 6) race = mf("treant-taur", "dryad-taur");
+					if (plantScore() >= 6) race = mf("treant-taur", "dryad-taur");
 					else race = "plant-taur";
 				}
 				else {
 					if (plantScore() >= 6) race = mf("treant", "dryad");
 					else race = "plant-morph";
 				}
+			}
+			if (alrauneScore() >= 10)
+			{
+				race = "Alraune";
 			}
 			//<mod>
 			if (pigScore() >= 4) 
@@ -2949,7 +2952,7 @@ use namespace kGAMECLASS;
 				plantCounter++;
 			if (earType == 4)
 				plantCounter++;
-			if (hairType == 7 && hairColor == "green")
+			if ((hairType == 7 || hairType == 9) && hairColor == "green")
 				plantCounter++;
 			if (skinType == 0 && (skinTone == "leaf green" || skinTone == "lime green" || skinTone == "turquoise"))
 				plantCounter++;
@@ -2963,8 +2966,6 @@ use namespace kGAMECLASS;
 				}
 				plantCounter++;
 			}
-			if (lowerBody == 34)
-				plantCounter += 3;
 			if (wingType == WING_TYPE_PLANT)
 				plantCounter++;
 		//	if (scorpionCounter > 0 && findPerk(PerkLib.TrachealSystemEvolved) >= 0)
@@ -2972,6 +2973,30 @@ use namespace kGAMECLASS;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && plantCounter >= 3)
 				plantCounter += 1;
 			return plantCounter;
+		}
+		
+		public function alrauneScore():Number
+		{
+			var alrauneCounter:Number = 0;
+			if (faceType == 0)
+				alrauneCounter++;
+			if (eyeType == 0)
+				alrauneCounter++;
+			if (earType == 4)
+				alrauneCounter++;
+			if ((hairType == 7 || hairType == 9) && hairColor == "green")
+				alrauneCounter++;
+			if (skinType == 0 && (skinTone == "leaf green" || skinTone == "lime green" || skinTone == "turquoise"))
+				alrauneCounter++;
+			if (armType == 7)
+				alrauneCounter++;
+			if (wingType == 0)
+				alrauneCounter++;
+			if (lowerBody == 34)
+				alrauneCounter += 2;
+			if (stamenCocks() > 0)
+				alrauneCounter++;
+			return alrauneCounter;
 		}
 		
 		public function yggdrasilScore():Number
@@ -4208,6 +4233,11 @@ use namespace kGAMECLASS;
 					maxSpe -= (10 * (1 + newGamePlusMod()));
 				}
 			}//+20(40)(60)(75)/10-20(30-40)(50-60)(70-80)
+			if (alrauneScore() >= 10) {
+				maxTou += (100 * (1 + newGamePlusMod()));
+				maxSpe -= (50 * (1 + newGamePlusMod()));
+				maxLib += (100 * (1 + newGamePlusMod()));
+			}
 			if (yggdrasilScore() >= 10) {
 				maxTou += (30 * (1 + newGamePlusMod()));
 				maxSpe -= (10 * (1 + newGamePlusMod()));
