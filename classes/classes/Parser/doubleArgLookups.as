@@ -5,6 +5,7 @@
 		// =!= NOTE: MUST BE IMPORTED BEFORE "./doubleArgLookups.as" =!=
 		// 
 		//Calls are now made through kGAMECLASS rather than thisPtr. This allows the compiler to detect if/when a function is inaccessible.
+		import classes.BodyParts.Skin;
 		import classes.GlobalFlags.kGAMECLASS;
 		include "./npcLookups.as";
 
@@ -122,14 +123,29 @@
 			"noadj": skinDescriptionFn("skin", true, false),
 			"notone": skinDescriptionFn("skin", false, true),
 			"type": skinDescriptionFn("skin", true, true),
+			"color": function (thisPtr:*, aspect:*):* {
+				return kGAMECLASS.player.skin.tone;
+			},
+			"vs": function (thisPtr:*, aspect:*):* {
+				var skin:Skin = kGAMECLASS.player.skin;
+				if (skin.coverage < Skin.COVERAGE_MEDIUM) return skin.base.isAre("s","");
+				if (skin.coverage > Skin.COVERAGE_MEDIUM) return skin.coat.isAre("s","");
+				return "";
+			},
 			"base": skinDescriptionFn("base", false, false),
 			"base.noadj": skinDescriptionFn("base", true, false),
 			"base.notone": skinDescriptionFn("base", false, true),
 			"base.type": skinDescriptionFn("base", true, true),
+			"base.vs": function (thisPtr:*, aspect:*):* {
+				return kGAMECLASS.player.skin.base.isAre("s", "");
+			},
 			"coat": skinDescriptionFn("coat", false, false),
 			"coat.noadj": skinDescriptionFn("coat", true, false),
 			"coat.notone": skinDescriptionFn("coat", false, true),
 			"coat.type": skinDescriptionFn("coat", true, true),
+			"coat.vs": function (thisPtr:*, aspect:*):* {
+				return kGAMECLASS.player.skin.coat.isAre("s", "");
+			},
 			"full": skinDescriptionFn("full", false, false),
 			"full.noadj": skinDescriptionFn("full", true, false),
 			"full.notone": skinDescriptionFn("full", false, true),

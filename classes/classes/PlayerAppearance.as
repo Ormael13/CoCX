@@ -1,4 +1,5 @@
 ﻿package classes {
+import classes.BodyParts.Skin;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kGAMECLASS;
 
@@ -154,8 +155,11 @@ public class PlayerAppearance extends BaseContent {
 	}
 	//BODY PG HERE
 	outputText("\n\nYou have a humanoid shape with the usual body", false);
-	if (player.skinType == SKIN_TYPE_PARTIAL_FUR || player.skinType == SKIN_TYPE_PARTIAL_SCALES) outputText(" partialy covered with " + player.skinFurScales() + "", false);
-	if (player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_CHITIN) outputText(" covered with " + player.skinFurScales() + "", false);
+	if (player.skin.coverage == Skin.COVERAGE_LOW) {
+		outputText(" partialy covered with [skin coat.full]");
+	} else if (player.skin.coverage >= Skin.COVERAGE_MEDIUM) {
+		outputText(" covered with [skin coat.full]");
+	}
 	outputText(", arms, hands and fingers.", false);
 	if (player.skinType == SKIN_TYPE_PLAIN && player.skinAdj == "glossy" && player.skinTone == "white and black") outputText(" However your skin is pitch black with a white underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.", false);
 	//WINGS!
@@ -561,10 +565,7 @@ public class PlayerAppearance extends BaseContent {
 	}
 	else if (player.tailType == TAIL_TYPE_YGGDRASIL)
 	{
-		outputText("  A thin prehensile reptilian tail swings behind, covered by ");
-		if(player.skinType == SKIN_TYPE_TATTOED) outputText("magical tattoo");
-		if(player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_CHITIN || player.skinType == SKIN_TYPE_PARTIAL_SCALES || player.skinType == SKIN_TYPE_PARTIAL_FUR) outputText("" + player.skinFurScales() + "");
-		else outputText("[skin]");
+		outputText("  A thin prehensile reptilian tail swings behind, covered by [skin coat]");
 		outputText(".  Adorning the tip of your tail is a leaf, bobbing with each of your tail’s movements.");
 	}
 	//</mod>
@@ -1155,11 +1156,11 @@ public class PlayerAppearance extends BaseContent {
 				outputText("A " + sackDescript() + " with " + ballsDescript() + " swings heavily under where a penis would normally grow.", false);
 			if(player.skinType == SKIN_TYPE_TATTOED)
 				outputText("A " + sackDescript() + " covered by magical tattoo with " + ballsDescript() + " swings heavily under where a penis would normally grow.", false);
-			if(player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_PARTIAL_FUR)
+			if(player.hasFur())
 				outputText("A fuzzy " + sackDescript() + " filled with " + ballsDescript() + " swings low under where a penis would normally grow.", false);
 			if(player.skinType == SKIN_TYPE_CHITIN || player.skinType == SKIN_TYPE_PARTIAL_CHITIN)
 				outputText("A chitin " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.", false);
-			if(player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_PARTIAL_SCALES)
+			if(player.hasScales())
 				outputText("A scaley " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.", false);
 			if(player.skinType == SKIN_TYPE_STONE)
 				outputText("A stone-solid sack with " + ballsDescript() + " swings heavily under where a penis would normally grow.", false);
@@ -1172,11 +1173,11 @@ public class PlayerAppearance extends BaseContent {
 				outputText("A " + sackDescript() + " with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
 			if(player.skinType == SKIN_TYPE_TATTOED)
 				outputText("A " + sackDescript() + " covered by magical tattoo with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
-			if(player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_PARTIAL_FUR)
+			if(player.hasFur())
 				outputText("A fuzzy " + sackDescript() + " filled with " + ballsDescript() + " swings low under your " + player.multiCockDescriptLight() + ".", false);
 			if(player.skinType == SKIN_TYPE_CHITIN || player.skinType == SKIN_TYPE_PARTIAL_CHITIN)
 				outputText("A chitin " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.", false);
-			if(player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_PARTIAL_SCALES)
+			if(player.hasScales())
 				outputText("A scaley " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.", false);
 			if(player.skinType == SKIN_TYPE_STONE)
 				outputText("A stone-solid sack with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
@@ -1500,7 +1501,7 @@ public class PlayerAppearance extends BaseContent {
 				skinAndSomething = " and mousey buckteeth";
 				odd++;
 			}
-			if (player.skin.hasSmoothSkinType()) {
+			if (player.skin.coverage<Skin.COVERAGE_COMPLETE) {
 				outputText("  Your face is human in shape and structure, with [skin]"+skinAndSomething);
 				if (player.skinType == SKIN_TYPE_TATTOED) {
 					outputText(" covered with magical tattoo");
@@ -1551,176 +1552,141 @@ public class PlayerAppearance extends BaseContent {
 			}
 		} else if (player.faceType == FACE_FERRET) {
 			if (player.skin.hasPlainSkinOnly()) outputText("  Your face is an adorable cross between human and ferret features, complete with a wet nose and whiskers.  The only oddity is your lack of fur, leaving only [skin] visible on your ferret-like face.", false);
-			else if (player.skinType == SKIN_TYPE_TATTOED) outputText("  Your face is an adorable cross between human and ferret features, complete with a wet nose and whiskers.  The only oddity is your lack of fur, leaving only [skin] covered with magical tattoo visible on your ferret-like face.", false);
-			else if (player.skinType == SKIN_TYPE_FUR) outputText("  Your face is coated in " + player.furColor + " fur with [skin] underneath, an adorable cross between human and ferret features.  It is complete with a wet nose and whiskers.");
-			else if (player.skinType == SKIN_TYPE_PARTIAL_SCALES || player.skinType == SKIN_TYPE_PARTIAL_FUR) outputText("  Your face is an adorable cross between human and ferret features, complete with a wet nose and whiskers.  The only oddity is [skin] covered with " + player.skinFurScales() + ".", false);
+			else if (player.hasFullCoatOfType(SKIN_TYPE_FUR)) outputText("  Your face is coated in [skin coat] with [skin base] underneath, an adorable cross between human and ferret features.  It is complete with a wet nose and whiskers.");
+			else if (player.hasCoat()) outputText("  Your face is an adorable cross between human and ferret features, complete with a wet nose and whiskers.  The only oddity is [skin base] covered with [skin coat].", false);
 			else outputText("  Your face is an adorable cross between human and ferret features, complete with a wet nose and whiskers.  The only oddity is your lack of fur, leaving only [skin] visible on your ferret-like face.", false);
 		}
 		else if (player.faceType == FACE_RACCOON_MASK) {
-			//appearance for skinheads
-			if (player.skinType != SKIN_TYPE_FUR && player.skinType != SKIN_TYPE_PARTIAL_FUR && player.skinType != SKIN_TYPE_SCALES && player.skinType != SKIN_TYPE_PARTIAL_SCALES && player.skinType != SKIN_TYPE_CHITIN && player.skinType != SKIN_TYPE_PARTIAL_CHITIN) {
-				outputText("  Your face is human in shape and structure, with [skin]");
-				if ((player.skinTone == "ebony" || player.skinTone == "black") && (player.skinType == SKIN_TYPE_PLAIN || player.skinType == SKIN_TYPE_GOO))
+			if (!player.hasCoat()) { //appearance for skinheads
+				outputText("  Your face is human in shape and structure, with [skin bases");
+				if (InCollection(player.skin.base.color, "ebony", "black"))
 					outputText(", though with your dusky hue, the black raccoon mask you sport isn't properly visible.");
 				else if (player.skinType == SKIN_TYPE_TATTOED) outputText(" covered with magical tattoo, though it is decorated with a sly-looking raccoon mask over your eyes.");
 				else outputText(", though it is decorated with a sly-looking raccoon mask over your eyes.");
-			}
-			//appearance furscales
-			else {
+			} else { //appearance furscales
 				//(black/midnight furscales)
-				if (((player.furColor == "black" || player.furColor == "midnight" || player.scalesColor == "black" || player.scalesColor == "midnight" || player.chitinColor == "black" || player.chitinColor == "midnight") && player.skinType != SKIN_TYPE_PARTIAL_SCALES && (player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_CHITIN || player.skinType == SKIN_TYPE_PARTIAL_CHITIN)))
-					outputText("  Under your " + player.skinFurScales() + " hides a black raccoon mask, barely visible due to your inky hue, and");
-				else outputText("  Your " + player.skinFurScales() + " are decorated with a sly-looking raccoon mask, and under them");
-				outputText(" you have a human-shaped head with [skin.noadj].");
+				if (InCollection(player.skin.base.color, "black", "midnight", "black", "midnight", "black", "midnight"))
+					outputText("  Under your [skin coat] hides a black raccoon mask, barely visible due to your inky hue, and");
+				else outputText("  Your [skin coat] are decorated with a sly-looking raccoon mask, and under them");
+				outputText(" you have a human-shaped head with [skin base].");
 			}
 		}
 		else if (player.faceType == FACE_RACCOON) {
-			outputText("  You have a triangular raccoon face, replete with sensitive whiskers and a little black nose; a mask shades the space around your eyes, set apart from your " + player.skinFurScales() + " by a band of white.");
+			outputText("  You have a triangular raccoon face, replete with sensitive whiskers and a little black nose; a mask shades the space around your eyes, set apart from your [skin coat] by a band of white.");
 			//(if skin)
-			if (player.skinType == SKIN_TYPE_PLAIN)
+			if (player.hasPlainSkinOnly()) {
 				outputText("  It looks a bit strange with only the skin and no fur.");
-			else if (player.skinType == SKIN_TYPE_TATTOED)
+			} else if (player.skinType == SKIN_TYPE_TATTOED) {
 				outputText("  It looks a bit strange with only the skin covered with magical tattoo and no fur.");
-			else if (player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_PARTIAL_SCALES)
+			} else if (player.hasScales()) {
 				outputText("  The presence of said scales gives your visage an eerie look, more reptile than mammal.");
-			else if (player.skinType == SKIN_TYPE_CHITIN || player.skinType == SKIN_TYPE_PARTIAL_CHITIN)
+			} else if (player.skin.hasChitin()) {
 				outputText("  The presence of said chitin gives your visage an eerie look, more insect than mammal.");
+			}
 		}
 		else if (player.faceType == FACE_FOX) {
 			outputText("  You have a tapered, shrewd-looking vulpine face with a speckling of downward-curved whiskers just behind the nose.");
-			if (player.skinType == SKIN_TYPE_PLAIN)
-				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just " + player.skinFurScales() + ".");
-			else if (player.skinType == SKIN_TYPE_TATTOED)
-				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just " + player.skinFurScales() + " covered with magical tattoo.");
-			else if (player.skinType == SKIN_TYPE_FUR)
-				outputText("  A coat of " + player.skinFurScales() + " decorates your muzzle.");
-			else if (player.skinType == SKIN_TYPE_PARTIAL_SCALES || player.skinType == SKIN_TYPE_PARTIAL_FUR)
-				outputText("  Strangely, " + player.skinFurScales() + " adorn your animalistic visage.");
-			else if (player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_CHITIN || player.skinType == SKIN_TYPE_PARTIAL_CHITIN)
-				outputText("  Strangely, " + player.skinFurScales() + " adorn every inch of your animalistic visage.");
-		}else if (player.faceType == FACE_MOUSE) {
+			if (!player.hasCoat()) {
+				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat].");
+			} else if (player.skinType == SKIN_TYPE_TATTOED) {
+				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat] covered with magical tattoo.");
+			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
+				outputText("  A coat of [skin coat] decorates your muzzle.");
+			} else if (player.skin.isCoverLowMid()) {
+				outputText("  Strangely, [skin coat] adorn your animalistic visage.");
+			} else {
+				outputText("  Strangely, [skin coat] adorn every inch of your animalistic visage.");
+			}
+		} else if (player.faceType == FACE_MOUSE) {
 			//appearance
-			outputText("  You have a snubby, tapered mouse's face, with whiskers, a little pink nose, and ");
-			if (player.skinType != SKIN_TYPE_FUR && player.skinType != SKIN_TYPE_SCALES && player.skinType != SKIN_TYPE_CHITIN || player.skinType != SKIN_TYPE_PARTIAL_SCALES || player.skinType != SKIN_TYPE_PARTIAL_FUR)
-				outputText(player.skinDescript());
-			else if (player.skinType == SKIN_TYPE_PARTIAL_SCALES || player.skinType == SKIN_TYPE_PARTIAL_FUR) outputText(player.skinFurScales());
-			else outputText(player.skinDescript() + " under your " + player.skinFurScales());
-			if (player.skinType == SKIN_TYPE_TATTOED) outputText(" covered with magical tattoo");
+			outputText("  You have a snubby, tapered mouse's face, with whiskers, a little pink nose, and [skin full]");
 			outputText(".  Two large incisors complete it.");
 		}
 		//horse-face
 		if (player.faceType == FACE_HORSE) {
-			if (player.skinType == SKIN_TYPE_PLAIN || player.skinType == SKIN_TYPE_TATTOED || player.skinType == SKIN_TYPE_GOO) {
-				outputText("  Your face is equine in shape and structure.  The odd visage is hairless and covered with " + player.skinFurScales() + "");
-				if (player.skinType == SKIN_TYPE_TATTOED) outputText(" covered with magical tattoo");
-				outputText(".", false);
+			if (!player.hasCoat()) {
+				outputText("  Your face is equine in shape and structure.  The odd visage is hairless and covered with [skin base].");
+			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
+				outputText("  Your face is almost entirely equine in appearance, even having [skin coat].  Underneath the fur, you believe you have [skin base].", false);
+			} else {
+				outputText("  You have the face and head structure of a horse, overlaid with glittering [skin coat].", false);
 			}
-			if (player.skinType == SKIN_TYPE_FUR)
-				outputText("  Your face is almost entirely equine in appearance, even having " + player.skinFurScales() + ".  Underneath the fur, you believe you have [skin.noadj].", false);
-			if (player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_CHITIN || player.skinType == SKIN_TYPE_PARTIAL_SCALES || player.skinType == SKIN_TYPE_PARTIAL_FUR)
-				outputText("  You have the face and head structure of a horse, overlaid with glittering " + player.skinFurScales() + ".", false);
 		}
 		//dog-face
 		if (player.faceType == FACE_DOG) {
-			if (player.skinType == SKIN_TYPE_PLAIN || player.skinType == SKIN_TYPE_TATTOED || player.skinType == SKIN_TYPE_GOO) {
-				outputText("  You have a dog-like face, complete with a wet nose.  The odd visage is hairless and covered with " + player.skinFurScales() + "");
-				if (player.skinType == SKIN_TYPE_TATTOED) outputText(" covered with magical tattoo");
-				outputText(".", false);
+			if (!player.hasCoat()) {
+				outputText("  You have a dog-like face, complete with a wet nose.  The odd visage is hairless and covered with [skin base].");
+			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
+				outputText("  You have a dog's face, complete with wet nose and panting tongue.  You've got [skin coat], hiding your [skin base] underneath your furry visage.", false);
+			} else {
+				outputText("  You have the facial structure of a dog, wet nose and all, but overlaid with glittering [skin coat]", false);
 			}
-			if (player.skinType == SKIN_TYPE_FUR)
-				outputText("  You have a dog's face, complete with wet nose and panting tongue.  You've got " + player.skinFurScales() + ", hiding your [skin.noadj] underneath your furry visage.", false);
-			if (player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_CHITIN || player.skinType == SKIN_TYPE_PARTIAL_SCALES || player.skinType == SKIN_TYPE_PARTIAL_FUR)
-				outputText("  You have the facial structure of a dog, wet nose and all, but overlaid with glittering " + player.skinFurScales() + ".", false);
 		}
 		//wolf-face
 		if (player.faceType == FACE_WOLF) {
-			if (player.skinType == SKIN_TYPE_PLAIN || player.skinType == SKIN_TYPE_TATTOED || player.skinType == SKIN_TYPE_GOO) {
+			if (!player.hasCoat()) {
 				outputText("  You have a wolf-like face, complete with a wet nose.  ", false);
 				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ", false);
-				outputText("The odd visage is hairless and covered with " + player.skinFurScales() + "");
+				outputText("The odd visage is hairless and covered with [skin coat]");
 				if (player.skinType == SKIN_TYPE_TATTOED) outputText(" covered with magical tattoo");
 				outputText(".", false);
-			}
-			if (player.skinType == SKIN_TYPE_FUR) {
+			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
 				outputText("  You have a wolf’s face, complete with wet nose a panting tongue and threatening teeths.  ", false);
 				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ", false);
-				outputText("You've got " + player.skinFurScales() + ", hiding your [skin.noadj] underneath your furry visage.", false);
-			}
-			if (player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_CHITIN || player.skinType == SKIN_TYPE_PARTIAL_SCALES || player.skinType == SKIN_TYPE_PARTIAL_FUR) {
-				outputText("  You have the facial structure of a wolf, wet nose and all, but overlaid with glittering " + player.skinFurScales() + ".", false);
+				outputText("You've got [skin coat], hiding your [skin.noadj] underneath your furry visage.", false);
+			} else {
+				outputText("  You have the facial structure of a wolf, wet nose and all, but overlaid with glittering [skin coat].", false);
 				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("  Cold blue mist seems to periodically escape from your mouth.", false);
 			}
 		}
 		//cat-face
 		if (player.faceType == FACE_CAT) {
-			if (player.skinType == SKIN_TYPE_PLAIN || player.skinType == SKIN_TYPE_TATTOED || player.skinType == SKIN_TYPE_GOO) {
+			if (!player.hasCoat()) {
 				outputText("  You have a cat-like face, complete with a cute, moist nose and whiskers.  The [skin] that is revealed by your lack of fur looks quite unusual on so feline a face");
 				if (player.skinType == SKIN_TYPE_TATTOED) outputText(" covered with magical tattoo");
 				outputText(".", false);
-			}
-			if (player.skinType == SKIN_TYPE_FUR)
+			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
 				outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your " + player.skinDesc + " is " + player.furColor + ", hiding your [skin.noadj] underneath.", false);
-			if (player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_CHITIN || player.skinType == SKIN_TYPE_PARTIAL_SCALES || player.skinType == SKIN_TYPE_PARTIAL_FUR)
-				outputText("  Your facial structure blends humanoid features with those of a cat.  A moist nose and whiskers are included, but overlaid with glittering " + player.skinFurScales() + ".");
+			} else {
+				outputText("  Your facial structure blends humanoid features with those of a cat.  A moist nose and whiskers are included, but overlaid with glittering [skin coat].");
+			}
 		}
 		//Minotaaaauuuur-face
 		if (player.faceType == FACE_COW_MINOTAUR) {
-			if (player.skinType == SKIN_TYPE_PLAIN || player.skinType == SKIN_TYPE_TATTOED || player.skinType == SKIN_TYPE_GOO) {
-				outputText("  You have a face resembling that of a minotaur, with cow-like features, particularly a squared off wet nose.  Despite your lack of fur elsewhere, your visage does have a short layer of " + player.furColor + " fuzz");
-				if (player.skinType == SKIN_TYPE_TATTOED) outputText(" covered with magical tattoo");
-				outputText(".", false);
+			if (!player.hasCoat()) {
+				outputText("  You have a face resembling that of a minotaur, with cow-like features, particularly a squared off wet nose.  Despite your lack of fur elsewhere, your visage does have a short layer of [haircolor] fuzz.");
+			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
+				outputText("  You have a face resembling that of a minotaur, with cow-like features, particularly a squared off wet nose.  Your [skin coat] thickens noticeably on your head, looking shaggy and more than a little monstrous once laid over your visage.");
+			} else if (player.hasFullCoat()) {
+				outputText("  Your face resembles a minotaur's, though strangely it is covered in shimmering [skin coat], right up to the flat cow-like nose that protrudes from your face.");
+			} else {
+				outputText("  Your face resembles a minotaur's, though strangely it is covered small patches of shimmering [skin coat], right up to the flat cow-like nose that protrudes from your face.");
 			}
-			if (player.skinType == SKIN_TYPE_FUR)
-				outputText("  You have a face resembling that of a minotaur, with cow-like features, particularly a squared off wet nose.  Your " + player.skinFurScales() + " thickens noticeably on your head, looking shaggy and more than a little monstrous once laid over your visage.", false);
-			if (player.skinType == SKIN_TYPE_PARTIAL_SCALES || player.skinType == SKIN_TYPE_PARTIAL_FUR || player.skinType == SKIN_TYPE_PARTIAL_FUR)
-				outputText("  Your face resembles a minotaur's, though strangely it is covered small patches of shimmering ", false);
-			if (player.skinType == SKIN_TYPE_PARTIAL_FUR) outputText("fur", false);
-			if (player.skinType == SKIN_TYPE_PARTIAL_SCALES) outputText("scales", false);
-			if (player.skinType == SKIN_TYPE_PARTIAL_CHITIN) outputText("chitin", false);
-			outputText(", right up to the flat cow-like nose that protrudes from your face.", false);
-			if (player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_CHITIN)
-				outputText("  Your face resembles a minotaur's, though strangely it is covered in shimmering ", false);
-			if (player.skinType == SKIN_TYPE_SCALES) outputText("scales", false);
-			if (player.skinType == SKIN_TYPE_CHITIN) outputText("chitin", false);
-			outputText(", right up to the flat cow-like nose that protrudes from your face.", false);
 		}
 		//Lizard-face
 		if (player.faceType == FACE_LIZARD) {
-			if (player.skinType == SKIN_TYPE_PLAIN || player.skinType == SKIN_TYPE_TATTOED || player.skinType == SKIN_TYPE_GOO) {
-				outputText("  You have a face resembling that of a lizard, and with your toothy maw, you have quite a fearsome visage.  The reptilian visage does look a little odd with just [skin]");
-				if (player.skinType == SKIN_TYPE_TATTOED) outputText(" covered with magical tattoo");
-				outputText(".", false);
+			if (!player.hasCoat()) {
+				outputText("  You have a face resembling that of a lizard, and with your toothy maw, you have quite a fearsome visage.  The reptilian visage does look a little odd with just [skin].", false);
+			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
+				outputText("  You have a face resembling that of a lizard.  Between the toothy maw, pointed snout, and the layer of [skin coat] covering your face, you have quite the fearsome visage.", false);
+			} else if (player.hasFullCoat()) {
+				outputText("  Your face is that of a lizard, complete with a toothy maw and pointed snout.  Reflective [skin coat] complete the look, making you look quite fearsome.", false);
+			} else {
+				outputText("  You have a face resembling that of a lizard, and with your toothy maw, you have quite a fearsome visage.  The reptilian visage does look a little odd with just [skin coat].", false);
 			}
-			if (player.skinType == SKIN_TYPE_PARTIAL_SCALES || player.skinType == SKIN_TYPE_PARTIAL_FUR) {
-				outputText("  You have a face resembling that of a lizard, and with your toothy maw, you have quite a fearsome visage.  The reptilian visage does look a little odd with just " + player.skinFurScales() + ".", false);
-			}
-			if (player.skinType == SKIN_TYPE_FUR)
-				outputText("  You have a face resembling that of a lizard.  Between the toothy maw, pointed snout, and the layer of " + player.skinFurScales() + " covering your face, you have quite the fearsome visage.", false);
-			if (player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_CHITIN)
-				outputText("  Your face is that of a lizard, complete with a toothy maw and pointed snout.  Reflective " + player.skinFurScales() + " complete the look, making you look quite fearsome.", false);
 		}
 		if (player.faceType == FACE_DRAGON) {
-			outputText("  Your face is a narrow, reptilian muzzle.  It looks like a predatory lizard's, at first glance, but with an unusual array of spikes along the under-jaw.  It gives you a regal but fierce visage.  Opening your mouth reveals several rows of dagger-like sharp teeth.  The fearsome visage is ");
-			if (player.skinType == SKIN_TYPE_TATTOED) outputText(" covered with magical tattoo");
-			if (player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_CHITIN || player.skinType == SKIN_TYPE_PARTIAL_SCALES || player.skinType == SKIN_TYPE_PARTIAL_FUR) outputText("decorated by " + player.skinFurScales() + "");
-			if (player.skinType != SKIN_TYPE_TATTOED && player.skinType != SKIN_TYPE_FUR && player.skinType != SKIN_TYPE_SCALES && player.skinType != SKIN_TYPE_CHITIN && player.skinType != SKIN_TYPE_PARTIAL_SCALES && player.skinType != SKIN_TYPE_PARTIAL_FUR) outputText("decorated by [skin]");
-			outputText(".");
+			outputText("  Your face is a narrow, reptilian muzzle.  It looks like a predatory lizard's, at first glance, but with an unusual array of spikes along the under-jaw.  It gives you a regal but fierce visage.  Opening your mouth reveals several rows of dagger-like sharp teeth.  The fearsome visage is decorated by [skin coat].");
 		}
 		if (player.faceType == FACE_PLANT_DRAGON) {
-			outputText("  Your face is a narrow, reptilian and regal, reminiscent of a dragon.  ");
-			if (player.skinType == SKIN_TYPE_TATTOED) outputText("Magical tattoo");
-			if (player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_CHITIN || player.skinType == SKIN_TYPE_PARTIAL_SCALES || player.skinType == SKIN_TYPE_PARTIAL_FUR) outputText("A " + player.skinFurScales() + "");
-			if (player.skinType != SKIN_TYPE_TATTOED && player.skinType != SKIN_TYPE_FUR && player.skinType != SKIN_TYPE_SCALES && player.skinType != SKIN_TYPE_CHITIN && player.skinType != SKIN_TYPE_PARTIAL_SCALES && player.skinType != SKIN_TYPE_PARTIAL_FUR) outputText("A [skin]");
-			outputText("decorates your visage.");
+			outputText("  Your face is a narrow, reptilian and regal, reminiscent of a dragon.  A [skin coat] decorates your visage.");
 		}
 		if (player.faceType == FACE_KANGAROO) {
 			outputText("  Your face is ", false);
-			if (player.skinType == SKIN_TYPE_PLAIN || player.skinType == SKIN_TYPE_TATTOED) {
+			if (!player.hasCoat()) {
 				outputText("bald");
-				if (player.skinType == SKIN_TYPE_TATTOED) outputText(" covered with magical tattoo");
-				outputText("", false);
-			}
-			else outputText("covered with " + player.skinFurScales(), false);
+				if (player.skin.base.adj == "tattooed") outputText(" covered with magical tattoo");
+			} else outputText("covered with [skin coat]");
 			outputText(" and shaped like that of a kangaroo, somewhat rabbit-like except for the extreme length of your odd visage.", false);
 		}
 		//<mod>
@@ -1741,49 +1707,48 @@ public class PlayerAppearance extends BaseContent {
 				outputText(".");
 			}
 			else
-				outputText(" with a long muzzle and a horn on your nose.  Oddly, your face is also covered in " + player.skinFurScales() + ".");
+				outputText(" with a long muzzle and a horn on your nose.  Oddly, your face is also covered in [skin coat].");
 		}
 		if (player.faceType == FACE_ECHIDNA) {
 			outputText("  Your odd visage consists of a long, thin echidna snout.");
-			if (player.skinType == SKIN_TYPE_PLAIN || player.skinType == SKIN_TYPE_TATTOED) {
+			if (!player.hasCoat()) {
 				outputText("  The [skin]");
 				if (player.skinType == SKIN_TYPE_TATTOED) outputText(" covered with magical tattoo");
 				outputText(" that is revealed by your lack of fur looks quite unusual.");
+			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
+				outputText("  It's covered in [skin coat].");
+			} else {
+				outputText("  It's covered in [skin coat], making your face even more unusual.");
 			}
-			else if (player.skinType == SKIN_TYPE_FUR)
-				outputText("  It's covered in " + player.skinFurScales() + ".");
-			else if (player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_CHITIN || player.skinType == SKIN_TYPE_PARTIAL_SCALES || player.skinType == SKIN_TYPE_PARTIAL_FUR)
-				outputText("  It's covered in " + player.skinFurScales() + ", making your face even more unusual.");
 		}
 		if (player.faceType == FACE_DEER) {
 			outputText("  Your face is like that of a deer, with a nose at the end of your muzzle.");
-			if (player.skinType == SKIN_TYPE_PLAIN || player.skinType == SKIN_TYPE_TATTOED) {
+			if (!player.hasCoat()) {
 				outputText("  The [skin]");
 				if (player.skinType == SKIN_TYPE_TATTOED) outputText(" covered with magical tattoo");
 				outputText(" that is revealed by your lack of fur looks quite unusual.");
+			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
+				outputText("  It's covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
+			} else {
+				outputText("  It's covered in [skin coat], making your face looks more unusual.");
 			}
-			else if (player.skinType == SKIN_TYPE_FUR)
-				outputText("  It's covered in " + player.skinFurScales() + " that covers your " + player.skinTone + " skin underneath.");
-			else if (player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_CHITIN || player.skinType == SKIN_TYPE_PARTIAL_SCALES || player.skinType == SKIN_TYPE_PARTIAL_FUR)
-				outputText("  It's covered in " + player.skinFurScales() + ", making your face looks more unusual.");
 		}
 		if (player.faceType == FACE_ORCA) {
-			if (player.skinType == SKIN_TYPE_PLAIN && player.skinAdj == "glossy" && player.skinTone == "white and black")
+			if (player.skin.hasPlainSkinOnly() && player.skinAdj == "glossy" && player.skinTone == "white and black")
 				outputText("  Your face is fairly human in shape save for a wider yet adorable nose. Your skin is pitch black with a white underbelly. From your neck up to your mouth and lower cheeks your face is white with two extra white circles right under and above your eyes. While at first one could mistake it for human skin, it has a glossy shine only found on sea animals.", false);
-			if ((player.skinType == SKIN_TYPE_PLAIN || player.skinType == SKIN_TYPE_TATTOED || player.skinType == SKIN_TYPE_GOO || player.skinType == SKIN_TYPE_PARTIAL_SCALES || player.skinType == SKIN_TYPE_PARTIAL_FUR) && player.skinAdj != "glossy" && player.skinTone != "white and black") {
-				if (player.skinType == SKIN_TYPE_PARTIAL_SCALES || player.skinType == SKIN_TYPE_PARTIAL_FUR) {
-					outputText("  You have a fairly normal face, with [skin]. On your cheek you have " + player.skinFurScales() + "");
-				}
-				else {
-					outputText("  You have a fairly normal face, with [skin]");
+			else if (!player.hasFullCoat()) {
+				if (player.skin.hasCoatOfType(SKIN_COAT_SCALES, SKIN_COAT_FUR)) {
+					outputText("  You have a fairly normal face, with [skin base]. On your cheek you have [skin coat]");
+				} else {
+					outputText("  You have a fairly normal face, with [skin base]");
 					if (player.skinType == SKIN_TYPE_TATTOED) outputText(" covered with magical tattoo");
 				}
 				outputText(".  In addition you have a wide nose similar to that of an orca, which goes well with your sharp toothed mouth, giving you a cute look.", false);
+			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
+				outputText("  Under your [skin coat] you have a human-shaped head with [skin base].  In addition you have a wide nose similar to that of an orca, which goes well with your sharp toothed mouth, giving you a cute look.", false);
+			} else {
+				outputText("  Your face is fairly human in shape, but is covered in [skin coat].  In addition you have a wide nose similar to that of an orca, which goes well with your sharp toothed mouth, giving you a cute look.", false);
 			}
-			if (player.skinType == SKIN_TYPE_FUR)
-				outputText("  Under your " + player.skinFurScales() + " you have a human-shaped head with [skin.noadj].  In addition you have a wide nose similar to that of an orca, which goes well with your sharp toothed mouth, giving you a cute look.", false);
-			if (player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_CHITIN)
-				outputText("  Your face is fairly human in shape, but is covered in " + player.skinFurScales() + ".  In addition you have a wide nose similar to that of an orca, which goes well with your sharp toothed mouth, giving you a cute look.", false);
 		}
 		//</mod>
 	}

@@ -186,18 +186,12 @@ import classes.BodyParts.UnderBody;
 	//	[Deprecated]
 		public function get furColor():String {
 			//trace("[DEPRECATED] get furColor");
-			var l:SkinLayer = skin.findLayer({
-				type:[SKIN_TYPE_FUR]
-			});
-			return l ? l.color : hairColor;
+			return hasCoatOfType(SKIN_COAT_FUR) ? skin.coat.color : hairColor;
 		}
 		[Deprecated]
 		public function set furColor(value:String):void {
 			trace("[DEPRECATED] set furColor");
-			var l:SkinLayer = skin.findLayer({
-				type:[SKIN_TYPE_FUR]
-			});
-			if (l) l.color = value;
+			if (hasCoatOfType(SKIN_COAT_FUR)) skin.coat.color = value;
 		}
 	//	[Deprecated]
 		public function get scalesColor():String {
@@ -247,6 +241,14 @@ import classes.BodyParts.UnderBody;
 			skin.type = value;
 		}
 		public function get skinTone():String { return skin.tone; }
+		public function hasCoat():Boolean { return skin.hasCoat(); }
+		public function hasFullCoat():Boolean { return skin.hasFullCoat(); }
+		/**
+		 * @return -1 if hasCoat(), skin.coat.type otherwise
+		 */
+		public function coatType():int { return skin.coatType(); }
+		public function hasCoatOfType(...types:Array):Boolean { return skin.hasCoatOfType(types); }
+		public function hasFullCoatOfType(...types:Array):Boolean { return skin.hasFullCoatOfType(types); }
 	//	[Deprecated]
 		public function set skinTone(value:String):void {
 			trace("[DEPRECATED] set skinTone");

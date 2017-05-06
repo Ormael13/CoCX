@@ -117,8 +117,7 @@ package classes
 			player.breastRows[0].breastRating = 5;
 			player.femininity = 100;
 			player.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
-			player.skinTone = "pink";
-			player.skinType = SKIN_TYPE_FUR;
+			player.skin.growFur({color:"pink"});
 			player.hairColor = "pink";
 			player.hairLength = 50;
 			player.hipRating = 5;
@@ -249,8 +248,8 @@ package classes
 			player.createPerk(PerkLib.EnlightenedNinetails,0,0,0,0);
 			//if possible with fur, Hair color: "midnight black", Skin/Fur color: "ashen grayish-blue",  Height: 65", Tone: 100, Thickness: 0, Hip rating: 6, Butt rating: 3,Feminimity: 50,  ( 4 rows of breasts (Descending from the top ones: D,C,B,A), nipple length: 0.1", Fuckable, 1 nipple per breast, Tongue type: demon
 			player.hairColor = "midnight black";
-			player.skinType = SKIN_TYPE_FUR;
-			player.skinTone = "ashen grayish-blue";
+			player.skin.growFur({});
+			player.skin.base.color = "ashen grayish-blue";
 			player.tallness = 65;
 			player.tone = 100;
 			player.thickness = 0;
@@ -359,7 +358,7 @@ package classes
 			//well to start off the name would be Cody
 			//-Cat with (black and orange tiger fur if possible) if not just Orange fur
 			player.hairColor = "black and orange";
-			player.skinType = SKIN_TYPE_FUR;
+			player.skin.growFur({});
 			//-Chainmail armor
 			player.setArmor(armors.FULLCHN);
 			//-Large Claymore (i understand 40 Strength is need so if he could start with that would be great if not hit the gyms)"
@@ -650,8 +649,8 @@ package classes
 			player.faceType = FACE_DOG;
 			player.earType = EARS_DOG;
 			player.tailType = TAIL_TYPE_DRACONIC;
-			player.skinType = SKIN_TYPE_FUR;
 			player.hairColor = "blue";
+			player.skin.growFur({});
 			player.tone = 88;
 			player.tongueType = TONUGE_DRACONIC;
 			//gel plate armor, warhammer, 88 body tone, 1 breast row, flat manly breasts, 0.2 inch nipples, 1 on each breast, draconic tongue, short hair-blue, light skin."	Lukaz
@@ -784,8 +783,8 @@ package classes
 			player.faceType = FACE_HORSE;
 			//Skin type = Black Fur
 			player.skinTone = "brown";
-			player.skinType = SKIN_TYPE_FUR;
 			player.hairColor = "black";
+			player.skin.growFur({});
 			//Legs/Feet = Digigrade hooved 
 			player.lowerBody = LOWER_BODY_TYPE_HOOFED;
 			//Wing type = Dragon
@@ -831,8 +830,8 @@ package classes
 			//Lower body- Canine
 			player.lowerBody = LOWER_BODY_TYPE_DOG;
 			//White Fur (if possible)
-			player.skinType = SKIN_TYPE_FUR;
 			player.hairColor = "white";
+			player.skin.growFur({});
 			//Body Thickness/breastsize/- As if I had selected the ""Average"" body type from the start.
 			player.createBreastRow();
 			player.breastRows[0].breastRating = 3;
@@ -891,8 +890,8 @@ package classes
 			//Appearence: 7ft 9in tall covered in thick shining silver fur, has a vulpine head and ears, eight breast all the same size at DD, dragon like wings, tail, and legs. With a large mare like pussy, 6 dicks, two equine, two dragon, two vulpine, all 15in long and 3 in wide, and four nuts 5 in across
 			player.tallness = 93;
 			player.skinTone = "black";
-			player.skinType = SKIN_TYPE_FUR;
 			player.hairColor = "silver";
+			player.skin.growFur({});
 			player.faceType = FACE_FOX;
 			player.earType = EARS_FOX;
 			player.createBreastRow();
@@ -1021,7 +1020,7 @@ package classes
 			player.tone = 75;
 			//25 thickness
 			player.thickness = 25;
-			player.skinType = SKIN_TYPE_FUR;
+			player.skin.growFur({});
 			player.skinTone = "light";
 			player.hairColor = "silver";
 			player.hairLength=10;
@@ -1859,11 +1858,11 @@ package classes
 			if(skin < 50){
 				player.skinType = SKIN_TYPE_PLAIN; // skin, 50%
 			} else if(skin < 80){
-				player.skinType = SKIN_TYPE_FUR; // fur, 30%
+				player.skin.growFur();// fur, 30%
 			} else if(skin < 95){
-				player.skinType = SKIN_TYPE_SCALES; // scales, 15%
+				player.skin.growCoat(SKIN_TYPE_SCALES); // scales, 15%
 			} else{
-				player.skinType = SKIN_TYPE_GOO; // goo, 5%
+				player.skin.base.type = SKIN_TYPE_GOO; // goo, 5%
 			}
 					
 			if(rand(3) != 0) // 2/3 to have human face

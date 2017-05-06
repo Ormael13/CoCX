@@ -27,7 +27,7 @@ public class BodyPart extends SimpleJsonable {
 	public function set type(value:int):void {_type = value;}
 
 	public function isAny(...args:Array):Boolean {
-		if (args.length == 1 && args[0] is Array) args = args[0];
+		while (args.length == 1 && args[0] is Array) args = args[0];
 		for each (var i_type:int in args) if (type == i_type) return true;
 		return false;
 	}

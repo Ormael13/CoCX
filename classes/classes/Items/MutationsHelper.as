@@ -1,7 +1,8 @@
 package classes.Items 
 {
 	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Skin;
+import classes.GlobalFlags.kFLAGS;
 	
 	/**
 	 * Helper class to get rid of the copy&paste-mess in classes.Items.Mutations
@@ -16,7 +17,21 @@ package classes.Items
 		public var changeLimit:int = 1;
 
 		public function MutationsHelper() { }
-	
+
+		public function humanizeSkin():void {
+			switch (player.coatType()) {
+				case SKIN_COAT_FUR:
+					outputText("\n\nYour fur itches incessantly, so you start scratching it.  It starts coming off in big clumps before the whole mess begins sloughing off your body.  In seconds, your skin is nude.  <b>You've lost your fur!</b>");
+					break;
+				case SKIN_COAT_SCALES:
+					outputText("\n\nYour scales itch incessantly, so you scratch at them.  They start falling off wholesale, leaving you standing in a pile of scales after only a few moments.  <b>You've lost your scales!</b>");
+					break;
+				default:
+					outputText("\n\nYour [skin.noadj] itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin.  <b>Your skin is once again normal!</b>");
+			}
+			player.skin.setBaseOnly({type:SKIN_BASE_PLAIN});
+		}
+
 		public function updateGills(newGillType:int = GILLS_NONE):int
 		{
 			trace("Called updateGills(" + newGillType + ")");

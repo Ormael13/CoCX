@@ -33,6 +33,7 @@ public static const SKIN_TYPE_PARTIAL_AQUA_SCALES:int								=	18;//niedokończo
 
 public static const SKIN_BASE_PLAIN:int                                             =    SKIN_TYPE_PLAIN;
 public static const SKIN_BASE_GOO:int                                               =    SKIN_TYPE_GOO;
+public static const SKIN_BASE_STONE:int                                             =    SKIN_TYPE_STONE;
 
 public static const SKIN_COAT_FUR:int                                               =    SKIN_TYPE_FUR;
 public static const SKIN_COAT_SCALES:int                                            =    SKIN_TYPE_SCALES;

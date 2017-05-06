@@ -541,6 +541,7 @@ import classes.BodyParts.SkinLayer;
 		private static const SKIN_BASE_TYPES:Array = [
 			[SKIN_TYPE_PLAIN,"(0) PLAIN"],
 			[SKIN_TYPE_GOO,"(3) GOO"]
+			[SKIN_TYPE_STONE,"(7) STONE"]
 		];
 		private static const SKIN_COAT_TYPES:Array = [
 			[SKIN_TYPE_FUR,"(1) FUR"],
@@ -554,7 +555,7 @@ import classes.BodyParts.SkinLayer;
 			[SKIN_TYPE_MOSS,"(11) MOSS"]
 		];
 		private static const SKIN_TONE_CONSTANTS:Array = [
-			"pale", "light", "dark", "green","gray",
+			"pale", "light", "dark", "green", "gray",
 			"blue", "black", "white", "dirty red", "blueish yellow",
 			"ghostly pale", "bubblegum pink",
 		];
@@ -569,11 +570,11 @@ import classes.BodyParts.SkinLayer;
 			"scales", "bark", "stone", "chitin"
 		];
 		private static const SKIN_COVERAGE_CONSTANTS:Array = [
-				[Skin.COVERAGE_NONE, "(0) NONE"],
-				[Skin.COVERAGE_LOW, "(1) LOW"],
-				[Skin.COVERAGE_MEDIUM, "(2) MEDIUM"],
-				[Skin.COVERAGE_HIGH, "(3) HIGH"],
-				[Skin.COVERAGE_FULL, "(4) FULL"]
+				[Skin.COVERAGE_NONE, "NONE (0)"],
+				[Skin.COVERAGE_LOW, "LOW (1, partial)"],
+				[Skin.COVERAGE_MEDIUM, "MEDIUM (2, mixed)"],
+				[Skin.COVERAGE_HIGH, "HIGH (3, full)"],
+				[Skin.COVERAGE_COMPLETE, "COMPLETE (4, full+face)"]
 		];
 		private function dumpPlayerFace():void {
 			outputText("[pg]");

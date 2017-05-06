@@ -3,7 +3,8 @@
  */
 package classes.Items.Consumables
 {
-	import classes.GlobalFlags.*;
+import classes.BaseContent;
+import classes.GlobalFlags.*;
 	import classes.internals.Utils;
 	import classes.Items.Consumable;
 	import classes.CoC;
@@ -140,7 +141,7 @@ package classes.Items.Consumables
 				if (player.bRows() >= 3) outputText("abdomen");
 				else outputText("chest");
 				outputText(". The " + getGame().nippleDescript(player.breastRows.length - 1) + "s even fade until nothing but ");
-				if (player.skinType == CoC.SKIN_TYPE_FUR) outputText(player.hairColor + " " + player.skinDesc);
+				if (player.hasFur()) outputText(player.skin.coat.color + " " + player.skinDesc);
 				else outputText(player.skinTone + " " + player.skinDesc);
 				outputText(" remains. <b>You've lost a row of breasts!</b>");
 				getGame().dynStats("sen", -5);

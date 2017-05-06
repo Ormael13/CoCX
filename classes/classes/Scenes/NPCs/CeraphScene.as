@@ -865,10 +865,7 @@ package classes.Scenes.NPCs
 			if (player.cor > 66) outputText("and without a second thought you disrobe, tossing your " + player.armorName + " to the side.  It thumps heavily in the dry mountain dust.", false);
 			else if (player.cor > 33) outputText("and you squirm and writhe within your " + player.armorName + ", the material itching on your skin.  Ultimately, you manage to resist.", false);
 			else outputText("and you stifle a laugh at the ridiculous thought, ignoring your fingers while they scratch at the itch under your gear.", false);
-			outputText("  Your ", false);
-			if (player.skinType <= SKIN_TYPE_FUR) outputText("skin burns", false);
-			else if (player.skinType == SKIN_TYPE_SCALES) outputText("scales burn", false);
-			else outputText(player.skinDesc + " burns", false);
+			outputText("  Your [skin] burn[skin vs]", false);
 			outputText(" hot, raging from fetish-enhanced lust and daydreams, but you shake your head in time to see a pair of inky black orbs rising from behind a nearby boulder.\n\n", false);
 
 			outputText("You wrench your gaze from the treacherous, alien eyes and glance lower, but it doesn't help.  There's nothing but flawless, sweat-moistened demon-skin, jutting purple breasts, and a crotch that combines the finest attributes of both genders.  It's the demon, Ceraph!\n\n", false);

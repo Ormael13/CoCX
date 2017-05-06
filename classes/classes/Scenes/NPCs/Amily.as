@@ -257,9 +257,7 @@
 			this.tallness = 4*12;
 			this.hipRating = HIP_RATING_AMPLE;
 			this.buttRating = BUTT_RATING_TIGHT;
-			this.skinTone = "tawny";
-			this.skinType = SKIN_TYPE_FUR;
-			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_FUR];
+			this.skin.growFur({color:"tawny"});
 			this.hairColor = "brown";
 			this.hairLength = 5;
 			initStrTouSpeInte(40, 40, 120, 80);

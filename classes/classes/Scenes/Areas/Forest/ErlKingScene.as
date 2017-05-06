@@ -498,7 +498,7 @@ package classes.Scenes.Areas.Forest
 
 			outputText("The words rumble through you, and you feel a warm heat building in your stomach.  Something about your arms and legs feel... off... but you can’t take your eyes away from the Erlking’s, not even when pain lances through your body, your muscles swelling, your [armor] tearing and falling away.  The Erlking releases his hold on you and you look down immediately at your body.\n\n");
 
-			if (player.skinType == SKIN_TYPE_FUR) outputText("Your fur turns jet black.");
+			if (player.hasFullCoatOfType(SKIN_COAT_FUR)) outputText("Your fur turns jet black.");
 			else outputText("Black fur runs down your body like a tide coming in.");
 			outputText("  Your muscles bulge and swell beneath the midnight coat.");
 			if (player.hasBreasts()) outputText("  Your chest first flattens out, then swells, as");

@@ -380,8 +380,8 @@ private function joeysMassageWithEXTRASpooge():void {
 	outputText("\n\n", false);
 	
 	outputText("The bunny-boy springs back atop you, landing hard just below your hips.  His dripping seed washes over " + sMultiCockDesc() + ", and the sudden onslaught of fresh, liquid warmth on your groin sets off a small explosion of jism that splatters into your chin, leaving a long trail of slime behind like a snail.  The long-eared girly-boy smiles and shifts to rub his small cock against your " + cockDescript(0) + ", frotting you aggressively while you both spray cum like faucets with the knobs torn off.  You don't mind that he seems to have forgotten the massage, and you run your hands up and down your " + chestDesc() + " to smear the heavy loads ", false);
-	if(player.skinType != SKIN_TYPE_FUR) outputText("over your " + player.skinDesc, false);
-	else outputText("through your fur", false);
+	if (player.hasFur()) outputText("through your fur", false);
+	else outputText("over your [skin]", false);
 	outputText(".\n\n", false);
 	
 	outputText("The special potion makes it so your orgasm is long and languid, oozing out for minutes instead of seconds, and the small chamber is filled with breathy, exultant cries of passion.  Joey leans forward and grabs hold of your " + nippleDescript(0) + "s, ", false);
