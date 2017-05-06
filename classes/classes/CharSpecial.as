@@ -1585,6 +1585,7 @@ package classes
 			player.createPerk(PerkLib.DarkCharm, 0, 0, 0, 0);
 			player.createPerk(PerkLib.BlackHeart, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Pervert, 0, 0, 0, 0);
+			player.createPerk(PerkLib.Ambition, 0.2, 0.15, 0, 0);
 			player.createStatusAffect(StatusAffects.KnowsArouse,0,0,0,0);
 			player.createStatusAffect(StatusAffects.KnowsHeal,0,0,0,0);
 			player.createStatusAffect(StatusAffects.KnowsManyBirds,0,0,0,0);

@@ -32,8 +32,8 @@ package classes.Scenes
 			outputText("-Added in current version race effects to Metamorph perk: Spider, Shark\n");
 			outputText("-New preset PC with short history: Zavos\n");
 			outputText("-New Armors: \n");
-			outputText("-New Shield: \n");
-			outputText("-New Ring: \n");
+			outputText("-New Shield: Blasphemy (block: 1, 200 gems, increase spell power by 20% and increase power/lower cost of black magic by 15%)\n");
+			outputText("-New Ring: Medius Signet (200 gems, increase spell power by 20% and increase power/lower cost of white magic by 15%)\n");
 			outputText("-Swapped bonuses for Channeling and Spellpower perks. Magic bolt have scalling similar like melee attack but based on int. With perk Staff Channeling and using any staff as melee weapon m. blt will have added bonus for used weapon.\n");
 			outputText("-Charge Weapon, Charge Armor, Might, Blink spells moved to subpage of spells called Buffs and formula to count how strong effect each will have replaced part for PC intelligence with flat values based how many mage related perks PC have. Base power of each buff was slight increased.\n");
 			outputText("-Ceani affection meter added to stats page.\n");
