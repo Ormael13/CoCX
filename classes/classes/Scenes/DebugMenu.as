@@ -538,21 +538,18 @@ import classes.BodyParts.SkinLayer;
 			editBase = !editBase;
 			bodyPartEditor();
 		}
-		private static const LAYER_TYPE_CONSTANTS:Array = [
+		private static const SKIN_BASE_TYPES:Array = [
 			[SKIN_TYPE_PLAIN,"(0) PLAIN"],
+			[SKIN_TYPE_GOO,"(3) GOO"]
+		];
+		private static const SKIN_COAT_TYPES:Array = [
 			[SKIN_TYPE_FUR,"(1) FUR"],
 			[SKIN_TYPE_SCALES,"(2) SCALES"],
-			[SKIN_TYPE_GOO,"(3) GOO"],
-			// [SKIN_TYPE_UNDEFINED,"(4) UNDEFINED"],
 			[SKIN_TYPE_CHITIN,"(5) CHITIN"],
 			[SKIN_TYPE_BARK,"(6) BARK"],
 			[SKIN_TYPE_STONE,"(7) STONE"],
 			[SKIN_TYPE_TATTOED,"(8) TATTOED"],
 			[SKIN_TYPE_AQUA_SCALES,"(9) AQUA_SCALES"],
-			//"(10) PART_FUR", // SKIN_TYPE_PARTIAL_FUR
-			//"(11) PART_SCALES", // SKIN_TYPE_PARTIAL_SCALES
-			//"(12) PART_CHITIN", // SKIN_TYPE_PARTIAL_CHITIN
-			//"(13) PART_BARK" // SKIN_TYPE_PARTIAL_BARK
 			[SKIN_TYPE_DRAGON_SCALES,"(10) DRAGON_SCALES"],
 			[SKIN_TYPE_MOSS,"(11) MOSS"]
 		];
@@ -593,7 +590,7 @@ import classes.BodyParts.SkinLayer;
 			menu();
 			dumpPlayerData();
 			dumpPlayerFace();
-			showChangeOptions(page, LAYER_TYPE_CONSTANTS, changeLayerType);
+			showChangeOptions(page, editBase?SKIN_BASE_TYPES:SKIN_COAT_TYPES, changeLayerType);
 		}
 		private function changeLayerColor(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) (editBase?player.skin.base:player.skin.coat).color = SKIN_TONE_CONSTANTS[setIdx];

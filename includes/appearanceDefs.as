@@ -31,6 +31,18 @@ public static const SKIN_TYPE_PARTIAL_DRAGON_SCALES:int								=	16;//niedokońc
 public static const SKIN_TYPE_PARTIAL_STONE:int										=	17;//niedokończone
 public static const SKIN_TYPE_PARTIAL_AQUA_SCALES:int								=	18;//niedokończone
 
+public static const SKIN_BASE_PLAIN:int                                             =    SKIN_TYPE_PLAIN;
+public static const SKIN_BASE_GOO:int                                               =    SKIN_TYPE_GOO;
+
+public static const SKIN_COAT_FUR:int                                               =    SKIN_TYPE_FUR;
+public static const SKIN_COAT_SCALES:int                                            =    SKIN_TYPE_SCALES;
+public static const SKIN_COAT_CHITIN:int                                            =    SKIN_TYPE_CHITIN;
+public static const SKIN_COAT_BARK:int                                              =    SKIN_TYPE_BARK;
+public static const SKIN_COAT_AQUA_SCALES:int                                       =    SKIN_TYPE_AQUA_SCALES;
+public static const SKIN_COAT_DRAGON_SCALES:int                                     =    SKIN_TYPE_DRAGON_SCALES;
+public static const SKIN_COAT_MOSS:int                                              =    SKIN_TYPE_MOSS;
+public static const SKIN_COAT_STONE:int                                             =    SKIN_TYPE_STONE;
+
 // hairType
 public static const HAIR_NORMAL:int                                                =     0;
 public static const HAIR_FEATHER:int                                               =     1;

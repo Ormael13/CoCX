@@ -250,7 +250,8 @@ import classes.BodyParts.UnderBody;
 	//	[Deprecated]
 		public function set skinTone(value:String):void {
 			trace("[DEPRECATED] set skinTone");
-			skin.base.color = value;
+			if (skin.coverage >= Skin.COVERAGE_HIGH) skin.coat.color = value;
+			else skin.base.color = value;
 		}
 		public function get skinDesc():String { return skin.desc; }
 	//	[Deprecated]
@@ -1277,51 +1278,41 @@ import classes.BodyParts.UnderBody;
 			return cocks[index].cockLength;
 		}
 		
-		//Find the biggest cock that fits inside a given value
-		public function cockThatFits(i_fits:Number = 0, type:String = "area"):Number
+		//Find the biggest cock that fits inside a given range
+		public function cockThatFits(i_fits:Number, type:String = "area", i_min:Number = 0):Number
 		{
 			if (cocks.length <= 0)
 				return -1;
-			var cockIdxPtr:int = cocks.length;
+			var i:int = cocks.length;
 			//Current largest fitter
-			var cockIndex:int = -1;
-			while (cockIdxPtr > 0)
+			var best:int = -1;
+			while (i > 0)
 			{
-				cockIdxPtr--;
-				if (type == "area")
-				{
-					if (cockArea(cockIdxPtr) <= i_fits)
-					{
-						//If one already fits
-						if (cockIndex >= 0)
-						{
-							//See if the newcomer beats the saved small guy
-							if (cockArea(cockIdxPtr) > cockArea(cockIndex))
-								cockIndex = cockIdxPtr;
-						}
-						//Store the index of fitting dick
-						else
-							cockIndex = cockIdxPtr;
-					}
+				i--;
+				var ival:Number;
+				var bestval:Number;
+				if (type == "area") {
+					ival   = cockArea(i);
+					bestval = cockArea(best);
+				} else if (type == "length") {
+					ival = cocks[i].cockLength;
+					bestval = cocks[best].cockLength;
 				}
-				else if (type == "length")
+				if (i_min <= ival && ival <= i_fits)
 				{
-					if (cocks[cockIdxPtr].cockLength <= i_fits)
+					//If one already fits
+					if (best >= 0)
 					{
-						//If one already fits
-						if (cockIndex >= 0)
-						{
-							//See if the newcomer beats the saved small guy
-							if (cocks[cockIdxPtr].cockLength > cocks[cockIndex].cockLength)
-								cockIndex = cockIdxPtr;
-						}
-						//Store the index of fitting dick
-						else
-							cockIndex = cockIdxPtr;
+						//See if the newcomer beats the saved small guy
+						if (ival > bestval)
+							best = i;
 					}
+					//Store the index of fitting dick
+					else
+						best = i;
 				}
 			}
-			return cockIndex;
+			return best;
 		}
 		
 		//Find the 2nd biggest cock that fits inside a given value
