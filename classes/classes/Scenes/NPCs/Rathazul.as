@@ -132,9 +132,9 @@ public function campRathazul():void {
 	var offered:Boolean;
 	//Rat is definitely not sexy!
 	if(player.lust > 30) dynStats("lus", -1);
-	if(player.lust > 50) dynStats("lus", -5);
-	if(player.lust > 100) dynStats("lus", -5);
-	if(player.lust > 150) dynStats("lus", -5);
+	if(player.lust > 50) dynStats("lus", -2);
+	if(player.lust > 100) dynStats("lus", -3);
+	if(player.lust > 150) dynStats("lus", -4);
 	if(player.lust > 200) dynStats("lus", -5);
 	if(player.lust > 300) dynStats("lus", -5);
 	if(player.lust > 400) dynStats("lus", -5);
@@ -217,8 +217,10 @@ private function rathazulWorkOffer():Boolean {
 		totalOffers++;
 		outputText("\"<i>Oooh, is that dragon scale? If you happen to have five of these, I can work them into armor,</i>\" Rathazul says.\n\n");
 	}
-	//
+	//Ebonbloom
 	if (player.hasItem(useables.EBONBLO)) showArmorMenu = true;
+	//World Tree branch
+	if (player.hasItem(useables.WT_BRAN)) showArmorMenu = true;
 	//Marae bark armor
 	if (player.hasItem(useables.TBAPLAT) || player.hasItem(useables.DBAPLAT)) showArmorMenu = true;
 	var pCounter:int = 0;
@@ -571,6 +573,9 @@ public function rathazulArmorMenu():void {
 	}
 	if (player.hasItem(useables.TBAPLAT) && player.hasItem(weapons.PURITAS)) {
 		addButton(9, "Ascensus", chooseStaffWeapon, 13, null, null, weapons.ASCENSU.description);
+	}
+	if (player.hasItem(useables.WT_BRAN)) {
+		addButton(6, "W.T. Branch", craftWorldTreeWeapon, true);
 	}
 	
 	addButton(14, "Back", returnToRathazulMenu);
@@ -1061,6 +1066,60 @@ private function craftMaraeArmor(divine:Boolean = false):void {
 		player.destroyItems(useables.DBAPLAT, 1);
 		inventory.takeItem(armors.DBARMOR, returnToRathazulMenu);
 	}
+}
+
+private function craftWorldTreeWeapon():void {
+	spriteSelect(49);
+	clearOutput();
+	outputText("You show Rathazul the branch from Yggdrasil and ask for his opinion. He gives you a tired look. \"<i>With the right treatment, i could make a regal looking show piece, but if you want me to make you a <b>weapon</b>, i will need something more. A branch from a mageboon trent, perhaps?</i>\" You assure him that the wood is suitable. When you see his doubt, you give him a quick explanation on where the wood comes from. That Yggdrasil’s wood is every bit as suitable as mageboon wood. When mention that the branch has soulforce, you get his full attention at once. ")
+	outputText("\"<i>Well, why didn’t you say so? There are few materials that possess natural soulforce, it usually dissipates on its former owner’s...  demise...  and needs to be artificially infused. And natural soulforce in wood? Why that is simply unheard of. I have a few ideas for how to use this. With the right treatments-</i>\"\n\n");
+	outputText("You grimace at his words as the old rat runs his hands over the wood eagerly. \"<i>Don’t give me that look! I mean real, weaponizing treatments. With those we can turn this into a conduit for your own soulforce. I could even mold this into a <b>sword</b>, if you want me to.</i>\" Well, damn. Looks like you have plenty of options to choose from. Decisions, decisions...\n\n");
+	menu();
+//	addButton(0, "G.Sword", craftWorldTreeWeaponForReal, 21, null, null, armors.DSCLARM.description);
+//	addButton(1, "Sword", craftWorldTreeWeaponForReal, 22, null, null, armors.DSCLROB.description);
+//	addButton(2, "Bow", craftWorldTreeWeaponForReal, 23, null, null, armors.INDEDSR.description);
+//	addButton(3, "Staff", craftWorldTreeWeaponForReal, 24, null, null, undergarments.DS_BRA.description);
+	addButton(14, "Nevermind", rathazulArmorMenu);
+}
+private function craftWorldTreeWeaponForReal(type:int = 0):void {
+	spriteSelect(49);
+	player.destroyItems(useables.WT_BRAN, 1);
+	clearOutput();
+	var itype:ItemType;
+	switch(type) {
+		case 21: //Rune Thong
+			outputText(images.showImage("rathazul-craft-ebonweaverunethong"));
+			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging on the rack is a thong.  As you inspect it, you notice the dark grey cloth has an oily sheen.  ");
+			outputText("Adorning the front is a rune seething with black magic.  ");
+			if (player.hasStatusAffect(StatusAffects.KnowsArouse)) outputText("You blush, recognizing the rune to represent lust. In the context of acting upon it...  ");
+			outputText("Rubbing your hand through the garment, you can see that the fabric is smoother than Ingram’s finest cloth, yet has a strange slickness to it not reminiscent of any fabric you know of. You also note the thong is also elastic, allowing it to fit your form regardless of how large your “assets” are. You thank the rat and collect your new thong.", false);
+			itype = undergarments.R_THONG;
+			break;
+		case 22: //Corset
+			outputText(images.showImage("rathazul-craft-ebonweavecorset"));
+			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging on the rack is a corset.  As you inspect it, you notice the dark grey cloth has an oily sheen.  ");
+			outputText("Rubbing your hand through the garment, you can see that the fabric is smoother than Ingram’s finest cloth, yet has a strange slickness to it not reminiscent of any fabric you know of. You also note the corset is also elastic, allowing it to fit your form regardless of how large your “assets” are. You thank the rat and collect your new corset.", false);
+			itype = undergarments.EW_CORS;
+			break;
+		case 23: //Vest
+			outputText(images.showImage("rathazul-craft-ebonweavevest"));
+			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging on the rack is a vest.  As you inspect it, you notice the dark grey cloth has an oily sheen.  ");
+			outputText("Rubbing your hand through the garment, you can see that the fabric is smoother than Ingram’s finest cloth, yet has a strange slickness to it not reminiscent of any fabric you know of. You also note the vest is also elastic, allowing it to fit your form regardless of how large your “assets” are. You thank the rat and collect your new vest.", false);
+			itype = undergarments.EW_VEST;
+			break;
+		case 24: //Jock
+			outputText(images.showImage("rathazul-craft-ebonweavejock"));
+			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging on the rack is a jock.  As you inspect it, you notice the dark grey cloth has an oily sheen.  ");
+			outputText("Rubbing your hand through the garment, you can see that the fabric is smoother than Ingram’s finest cloth, yet has a strange slickness to it not reminiscent of any fabric you know of. You also note the jock is also elastic, allowing it to fit your form regardless of how large your “assets” are. You thank the rat and collect your new jock.", false);
+			itype = undergarments.EW_JOCK;
+			break;
+		default:
+			outputText("Something bugged! Please report this bug to Ormael.");
+			itype = armors.EWJACK_;
+			break;
+	}
+	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+	inventory.takeItem(itype, returnToRathazulMenu);
 }
 
 //Hair dyes

@@ -972,7 +972,8 @@ package classes
 		public static const PhallicRestraint:PerkType = mk("Phallic Restraint", "Phallic Restraint",
 				"Reduces the effects of penis-enlarging transformations.");
 
-		// Armor & Shield perks
+		// Equipment perks
+		public static const Ambition:AmbitionPerk = new AmbitionPerk();
 		public static const BloodMage:PerkType = mk("Blood Mage", "Blood Mage",
 				"Spellcasting now consumes health instead of fatigue!",null,true);
 		public static const Obsession:ObsessionPerk = new ObsessionPerk();

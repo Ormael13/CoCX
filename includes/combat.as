@@ -6189,6 +6189,9 @@ public function spellMod():Number {
 	if(player.findPerk(PerkLib.Obsession) >= 0) {
 		mod += player.perkv1(PerkLib.Obsession);
 	}
+	if(player.findPerk(PerkLib.Ambition) >= 0) {
+		mod += player.perkv1(PerkLib.Ambition);
+	}
 	if(player.findPerk(PerkLib.WizardsFocus) >= 0) {
 		mod += player.perkv1(PerkLib.WizardsFocus);
 	}
@@ -6199,7 +6202,6 @@ public function spellMod():Number {
 	if (player.shieldName == "spirit focus") mod += .2;
 	if (player.shieldName == "mana bracer") mod += .5;
 	if (player.weaponName == "Ascensus") mod += .15;
-	if (player.jewelryName == "medius signet") mod += .2;
 	return mod;
 }
 public function spellModWhite():Number {
@@ -6212,6 +6214,9 @@ public function spellModWhite():Number {
 	if(player.findPerk(PerkLib.JobSorcerer) >= 0 && player.inte >= 25) mod += .1;
 	if(player.findPerk(PerkLib.Mage) >= 0 && player.inte >= 50) mod += .2;
 	if(player.findPerk(PerkLib.Spellpower) >= 0 && player.inte >= 50) mod += .1;
+	if(player.findPerk(PerkLib.Ambition) >= 0) {
+		mod += player.perkv2(PerkLib.Ambition);
+	}
 	if(player.findPerk(PerkLib.WizardsFocus) >= 0) {
 		mod += player.perkv1(PerkLib.WizardsFocus);
 	}
@@ -6247,7 +6252,6 @@ public function spellModBlack():Number {
 	if (player.shieldName == "spirit focus") mod += .2;
 	if (player.shieldName == "mana bracer") mod += .5;
 	if (player.weaponName == "Depravatio" || player.weaponName == "Ascensus") mod += .15;
-	if (player.jewelryName == "medius signet") mod += .15;
 	return mod;
 }
 

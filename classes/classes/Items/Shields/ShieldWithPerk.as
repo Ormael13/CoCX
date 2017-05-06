@@ -45,6 +45,9 @@ package classes.Items.Shields
 			desc += "\nBlock: " + String(block);
 			//Value
 			desc += "\nBase value: " + String(value);
+			//Perk
+			desc += "\nSpecial: " + playerPerk.name;
+			if (playerPerk == PerkLib.Obsession) desc += " (+" + (playerPerkV1 * 100) + "% spell effect multiplier, " + (playerPerkV2 * 100) + "% power boost/cost reduction for black magic)";
 			return desc;
 		}
 	}
