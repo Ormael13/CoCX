@@ -1867,10 +1867,7 @@ package classes.Scenes.Places.Bazaar
 			//Change to fur
 			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.skinType != SKIN_TYPE_FUR) {
 				outputText("\n\nYou shiver, feeling a bit cold. Just as you begin to wish for something to cover up with, it seems your request is granted; <b>fur begins to grow all over your body!</b> You tug at the tufts in alarm, but they're firmly rooted and... actually pretty soft. Huh. ");
-				player.skinAdj = "";
-				player.skinDesc = "fur";
-				player.skinType = SKIN_TYPE_FUR;
-				player.furColor = "brown";
+				player.skin.growFur().color = "brown";
 				changes++;
 			}
 			//Gain Echidna ears

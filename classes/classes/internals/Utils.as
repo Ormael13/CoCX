@@ -49,6 +49,9 @@ package classes.internals
 		public static function objectOr(input:*,def:Object=null):Object {
 			return (input is Object && input !== null) ? input : def;
 		}
+		public static function boundInt(min:int, x:int, max:int):int {
+			return x < min ? min : x > max ? max : x;
+		}
 		/**
 		 * Performs a shallow copy of properties from `src` to `dest`.
 		 * A `hasOwnProperties` check is performed.

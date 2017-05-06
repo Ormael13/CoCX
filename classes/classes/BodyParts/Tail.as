@@ -40,7 +40,7 @@ public class Tail extends SaveableBodyPart {
 	}
 
 	override protected function loadFromOldSave(savedata:Object):void {
-		count = savedata.tailVenum;
+		count = savedata.tailCount || savedata.tailVenum;
 		venom = savedata.tailVenum;
 		recharge = savedata.tailRecharge;
 		type = savedata.tailType;

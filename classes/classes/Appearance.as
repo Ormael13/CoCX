@@ -2374,7 +2374,7 @@
 			[SKIN_TYPE_CHITIN, "CHITIN", "chitin", "",false],
 			[SKIN_TYPE_BARK, "BARK", "bark", "",false],
 			[SKIN_TYPE_STONE, "STONE", "stone", "",false],
-			[SKIN_TYPE_TATTOED, "TATTOED", "sexy tattoed skin","",false],
+			[SKIN_TYPE_TATTOED, "TATTOED", "tattoed skin","",false],
 			[SKIN_TYPE_AQUA_SCALES, "AQUA_SCALES", "scales", "",true],
 			[SKIN_TYPE_DRAGON_SCALES, "dragon scales", "dragon scales", "",true],
 			[SKIN_TYPE_MOSS, "moss", "moss", "",false],

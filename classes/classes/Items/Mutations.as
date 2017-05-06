@@ -10860,13 +10860,13 @@
 			}
 			var tone:Array = mystic ? ["dark", "ebony", "ashen", "sable", "milky white"] : ["tan", "olive", "light"];
 			//[Change Skin Type: remove fur or scales, change skin to Tan, Olive, or Light]
-			if ((player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_PARTIAL_FUR 
+			if (player.skin.hasCoatOfType(SKIN_TYPE_FUR)
 					&& player.skinType != SKIN_TYPE_TATTOED
 					&& !InCollection(player.furColor, KitsuneScene.basicKitsuneFur)
 					&& !InCollection(player.furColor, KitsuneScene.elderKitsuneColors)
 					&& !InCollection(player.furColor, ["orange and white", "black and white", "red and white", "tan", "brown"])
-					)
-				|| player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_PARTIAL_SCALES && ((mystic) || (!mystic && rand(2) == 0))) {
+					|| player.skinType == SKIN_TYPE_SCALES
+					|| player.skinType == SKIN_TYPE_PARTIAL_SCALES && ((mystic) || (!mystic && rand(2) == 0))) {
 				outputText("\n\nYou begin to tingle all over your [skin], starting as a cool, pleasant sensation but gradually worsening until you are furiously itching all over.");
 				if (player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_PARTIAL_FUR) outputText("  You stare in horror as you pull your fingers away holding a handful of " + player.furColor + " fur!  Your fur sloughs off your body in thick clumps, falling away to reveal patches of bare, " + player.skinTone + " skin.");
 				else if (player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_PARTIAL_SCALES) outputText("  You stare in horror as you pull your fingers away holding a handful of dried up scales!  Your scales continue to flake and peel off your skin in thick patches, revealing the tender " + player.skinTone + " skin underneath.");
@@ -10892,7 +10892,7 @@
 				outputText("\n\nYou feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  You are caught by surprise when you are suddenly assaulted by a blinding flash issuing from areas of your skin, and when the spots finally clear from your vision, an assortment of glowing magical tattoos adorns your [skin].  The glow gradually fades, but the distinctive ");
 				if (mystic) outputText("angular");
 				else outputText("curved");
-				outputText(" markings remain, as if etched into your skin. <b>You now have sexy tatooed [skin].</b>");
+				outputText(" markings remain, as if etched into your skin. <b>You now have [skin].</b>");
 			//	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedTattoed)) {
 			//		outputText("\n\n<b>Genetic Memory: Tattoed Skin - Memorized!</b>\n\n");
 			//		player.createStatusAffect(StatusAffects.UnlockedTattoed, 0, 0, 0, 0);

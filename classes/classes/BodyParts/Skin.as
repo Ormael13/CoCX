@@ -1,6 +1,7 @@
 package classes.BodyParts {
 import classes.Appearance;
 import classes.Creature;
+import classes.internals.Utils;
 
 /**
  * Container class for the players skin
@@ -12,7 +13,7 @@ import classes.Creature;
  * `(1) COVERAGE_LOW` : coat layer exists, but its descriptions appear only when explicitly called
  * `(2) COVERAGE_MEDIUM` : coat layer exists, descriptions use mixed "[base] and [coat]", can explicitly check either
  * `(3) COVERAGE_HIGH` : coat layer exists and is used as a default layer when describing skin; base description appear only when explicitly called
- * `(4) COVERAGE_FULL` : this is virtual state which should automatically reset the `{base:A, cover:B, coverage:FULL}` to `{base:B, coverage: NONE}`.
+ * `(4) COVERAGE_FULL` : same as COVERAGE_HIGH
  * tattoos should be moved to body part-level or character-level
  *
  * @since December 27, 2016
@@ -46,14 +47,7 @@ public class Skin extends SaveableBodyPart {
 		return _coverage;
 	}
 	public function set coverage(value:int):void {
-		if (value <= COVERAGE_NONE) {
-			_coverage = COVERAGE_NONE;
-		} else if (value >= COVERAGE_FULL) {
-			base.setAllProps(coat, false);
-			_coverage = COVERAGE_NONE;
-		} else {
-			_coverage = value;
-		}
+		_coverage = boundInt(COVERAGE_NONE,value,COVERAGE_FULL);
 	}
 	public function get tone():String {
 		return color;
@@ -122,6 +116,11 @@ public class Skin extends SaveableBodyPart {
 		this.coat.setProps(coat);
 		this.base.setProps(base);
 	}
+	public function growFur(coverage:int=COVERAGE_HIGH):SkinLayer {
+		this.coverage = coverage;
+		this.coat.setProps({color:creature.hairColor,type:SKIN_TYPE_FUR});
+		return this.coat;
+	}
 	/**
 	 * @param layer 'base','coat','skin' (both layer if MEDIUM, else major),'full' (both layers if present)
 	 * @return
@@ -159,7 +158,7 @@ public class Skin extends SaveableBodyPart {
 			case COVERAGE_HIGH:
 				switch (layer) {
 					case 'base':
-						return s_coat;
+						return s_base;
 					case 'full':
 						return s_base + " under " + s_coat;
 					case 'skin':
@@ -169,6 +168,17 @@ public class Skin extends SaveableBodyPart {
 				}
 				break;
 			case COVERAGE_FULL:
+				switch (layer) {
+					case 'base':
+						return s_base;
+					case 'full':
+						return s_base + " under " + s_coat;
+					case 'skin':
+					case 'coat':
+					default:
+						return s_coat;
+				}
+				break;
 			default:
 				return s_coat;
 		}
@@ -181,38 +191,41 @@ public class Skin extends SaveableBodyPart {
 		return (coverage < COVERAGE_FULL && base.isAny(types)) ||
 			   (coverage > COVERAGE_NONE && coat.isAny(types));
 	}
-	public function hasFur():Boolean {
-		return hasAny(SKIN_TYPE_FUR);
-	}
-	public function hasChitin():Boolean {
-		return hasAny(SKIN_TYPE_CHITIN);
-	}
-	public function hasBark():Boolean {
-		return hasAny(SKIN_TYPE_BARK);
-	}
-	public function isPartiallyCovered():Boolean {
+	public function isCoverLowMid():Boolean {
 		return coverage > COVERAGE_NONE && coverage < COVERAGE_HIGH;
 	}
-	public function isCovered():Boolean {
-		return coverage > COVERAGE_NONE && coverage < COVERAGE_FULL;
+	public function hasCoat():Boolean {
+		return coverage > COVERAGE_NONE && coverage <= COVERAGE_FULL;
 	}
-	public function isFacePartiallyCovered():Boolean {
-		return coverage == COVERAGE_HIGH;
+	public function hasCoatOfType(...types:Array):Boolean {
+		return hasCoat() && coat.isAny(types);
+	}
+	public function hasFur():Boolean {
+		return hasCoatOfType(SKIN_TYPE_FUR);
+	}
+	public function get fur():SkinLayer {
+		return hasFur() ? coat : null;
+	}
+	public function hasChitin():Boolean {
+		return hasCoatOfType(SKIN_TYPE_CHITIN);
 	}
 	public function hasScales():Boolean {
-		return hasAny(SKIN_TYPE_SCALES, SKIN_TYPE_AQUA_SCALES, SKIN_TYPE_DRAGON_SCALES);
+		return hasCoatOfType(SKIN_TYPE_SCALES, SKIN_TYPE_AQUA_SCALES, SKIN_TYPE_DRAGON_SCALES);
 	}
 	public function hasReptileScales():Boolean {
-		return hasAny(SKIN_TYPE_SCALES,SKIN_TYPE_DRAGON_SCALES);
+		return hasCoatOfType(SKIN_TYPE_SCALES,SKIN_TYPE_DRAGON_SCALES);
 	}
 	public function hasDragonScales():Boolean {
-		return hasAny(SKIN_TYPE_DRAGON_SCALES);
+		return hasCoatOfType(SKIN_TYPE_DRAGON_SCALES);
 	}
 	public function hasLizardScales():Boolean {
-		return hasAny(SKIN_TYPE_SCALES);
+		return hasCoatOfType(SKIN_TYPE_SCALES);
 	}
 	public function hasNonLizardScales():Boolean {
 		return hasScales() && !hasLizardScales();
+	}
+	public function hasBark():Boolean {
+		return hasAny(SKIN_TYPE_BARK);
 	}
 	public function hasGooSkin():Boolean {
 		return hasAny(SKIN_TYPE_GOO);
@@ -328,6 +341,8 @@ public class Skin extends SaveableBodyPart {
 			base.color = (type == SKIN_TYPE_SCALES && scalesColor) ? scalesColor : tone;
 			base.adj   = adj;
 			base.desc  = desc;
+			coat.type  = SKIN_TYPE_FUR;
+			if (coat.color == "no") coat.color = savedata.hairColor;
 		} else {
 			coverage = COVERAGE_HIGH;
 			if (type in PARTIAL_TO_FULL) {

@@ -1506,7 +1506,7 @@ public class PlayerAppearance extends BaseContent {
 					outputText(" covered with magical tattoo");
 					odd++;
 				}
-				if (player.skin.isPartiallyCovered()) {
+				if (player.skin.isCoverLowMid()) {
 					outputText(".");
 					outputText("  On your cheek you have [skin coat]");
 					odd++;
@@ -1514,7 +1514,7 @@ public class PlayerAppearance extends BaseContent {
 			} else if (player.skinType == SKIN_TYPE_FUR) {
 				odd++;
 				outputText("  Under your [skin coat] you have a human-shaped head with [skin base]"+skinAndSomething);
-			} else if (player.skin.isCovered() && !skinAndSomething) {
+			} else if (player.skin.hasCoat() && !skinAndSomething) {
 				odd++;
 				outputText("  Your face is fairly human in shape, but is covered in [skin coat]");
 			} else outputText("  Your face is human in shape and structure, with [skin full]"+skinAndSomething);

@@ -304,7 +304,7 @@ use namespace kGAMECLASS;
 				armorDef += (2 * (1 + newGamePlusMod()));
 			}
 			//Stacks on top of Thick Skin perk.
-			var p:Boolean = skin.isPartiallyCovered();
+			var p:Boolean = skin.isCoverLowMid();
 			if(skin.hasFur()) armorDef += (p?1:2)*(1 + newGamePlusMod());
 			if(skin.hasChitin()) armorDef += (p?2:4)*(1 + newGamePlusMod());
 			if(skin.hasScales()) armorDef += (p?3:6)*(1 + newGamePlusMod()); //bee-morph (), mantis-morph (), scorpion-morph (wpisane), spider-morph (wpisane)

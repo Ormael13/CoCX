@@ -189,9 +189,9 @@ import classes.BodyParts.UnderBody;
 			var l:SkinLayer = skin.findLayer({
 				type:[SKIN_TYPE_FUR]
 			});
-			return l ? l.color : "no";
+			return l ? l.color : hairColor;
 		}
-	//	[Deprecated]
+		[Deprecated]
 		public function set furColor(value:String):void {
 			trace("[DEPRECATED] set furColor");
 			var l:SkinLayer = skin.findLayer({
@@ -207,7 +207,7 @@ import classes.BodyParts.UnderBody;
 			});
 			return l ? l.color : "no"
 		}
-	//	[Deprecated]
+		[Deprecated]
 		public function set scalesColor(value:String):void {
 			trace("[DEPRECATED] set scalesColor");
 			var l:SkinLayer = skin.findLayer({
@@ -223,7 +223,7 @@ import classes.BodyParts.UnderBody;
 			});
 			return l ? l.color : "no"
 		}
-	//	[Deprecated]
+		[Deprecated]
 		public function set chitinColor(value:String):void {
 			trace("[DEPRECATED] set chitinColor");
 			var l:SkinLayer = skin.findLayer({
