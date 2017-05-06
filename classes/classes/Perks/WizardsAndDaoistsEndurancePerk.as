@@ -7,7 +7,7 @@ package classes.Perks
 	import classes.PerkClass;
 	import classes.PerkType;
 
-	public class WizardsAndSoulcultivatorsEndurancePerk extends PerkType
+	public class WizardsAndDaoistsEndurancePerk extends PerkType
 	{
 		
 		override public function desc(params:PerkClass = null):String
@@ -15,9 +15,9 @@ package classes.Perks
 			return "Reduces fatigue cost of spells by " + params.value1 + "% and soulforce cost of soulskills by " + params.value2 + "%.";
 		}
 
-		public function WizardsAndSoulcultivatorsEndurancePerk() 
+		public function WizardsAndDaoistsEndurancePerk() 
 		{
-			super("Wizard's and Soul Cultivator's Endurance", "Wizard's and Soul Cultivator's Endurance",
+			super("Wizard's and Daoists's Endurance", "Wizard's and Daoists's Endurance",
 					"Your equipment makes it harder for spell-casting to fatigue you or souskills to drain your soulforce!");
 		}
 		

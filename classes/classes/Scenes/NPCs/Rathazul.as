@@ -1075,47 +1075,44 @@ private function craftWorldTreeWeapon():void {
 	outputText("\"<i>Well, why didn’t you say so? There are few materials that possess natural soulforce, it usually dissipates on its former owner’s...  demise...  and needs to be artificially infused. And natural soulforce in wood? Why that is simply unheard of. I have a few ideas for how to use this. With the right treatments-</i>\"\n\n");
 	outputText("You grimace at his words as the old rat runs his hands over the wood eagerly. \"<i>Don’t give me that look! I mean real, weaponizing treatments. With those we can turn this into a conduit for your own soulforce. I could even mold this into a <b>sword</b>, if you want me to.</i>\" Well, damn. Looks like you have plenty of options to choose from. Decisions, decisions...\n\n");
 	menu();
-//	addButton(0, "G.Sword", craftWorldTreeWeaponForReal, 21, null, null, armors.DSCLARM.description);
-//	addButton(1, "Sword", craftWorldTreeWeaponForReal, 22, null, null, armors.DSCLROB.description);
-//	addButton(2, "Bow", craftWorldTreeWeaponForReal, 23, null, null, armors.INDEDSR.description);
-//	addButton(3, "Staff", craftWorldTreeWeaponForReal, 24, null, null, undergarments.DS_BRA.description);
+	addButton(0, "G.Sword", craftWorldTreeWeaponForReal, 21, null, null, weapons.WGSWORD.description);
+//	addButton(1, "Sword", craftWorldTreeWeaponForReal, 22, null, null, weapons.DSCLROB.description);
+//	addButton(2, "Bow", craftWorldTreeWeaponForReal, 23, null, null, weapons.INDEDSR.description);
+//	addButton(3, "Staff", craftWorldTreeWeaponForReal, 24, null, null, weapons.DS_BRA.description);
 	addButton(14, "Nevermind", rathazulArmorMenu);
 }
 private function craftWorldTreeWeaponForReal(type:int = 0):void {
 	spriteSelect(49);
 	player.destroyItems(useables.WT_BRAN, 1);
-	clearOutput();
+	outputText(images.showImage("rathazul-craft-worldtreeweapon"));
+	outputText("\"<i>Of course, of course, leave it to me. I’ll have your new weapon ready soon, just you wait!</i>\" The old rat cackles with glee and rushes back to his lab and begins to work at a feverish pace. Who would have thought something as simple as soulforce imbued wood would excite him so much?\n\n");
+	outputText("<b>BOOM</b>\n\n");
+	outputText("Yup, Rath just caused something to explode. You hope he doesn't damage your weapon to be too much...\n\n");
 	var itype:ItemType;
 	switch(type) {
-		case 21: //Rune Thong
-			outputText(images.showImage("rathazul-craft-ebonweaverunethong"));
-			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging on the rack is a thong.  As you inspect it, you notice the dark grey cloth has an oily sheen.  ");
-			outputText("Adorning the front is a rune seething with black magic.  ");
-			if (player.hasStatusAffect(StatusAffects.KnowsArouse)) outputText("You blush, recognizing the rune to represent lust. In the context of acting upon it...  ");
-			outputText("Rubbing your hand through the garment, you can see that the fabric is smoother than Ingram’s finest cloth, yet has a strange slickness to it not reminiscent of any fabric you know of. You also note the thong is also elastic, allowing it to fit your form regardless of how large your “assets” are. You thank the rat and collect your new thong.", false);
-			itype = undergarments.R_THONG;
+		case 21: //G.Sword
+			outputText("The old rat cackles as he beckons you over to one of his small benches, procuring a sword. \"<i>It’s done. This should serve you quite well.</i>\" He hands you the sword and you take a moment to appraise it. It's... made of wood.  Will this truly stand up to the heat of battle?\n\n");
+			outputText("\"<i>Of course it will!  Not only is it flame resistant, but it also has regenerative properties. With all the treatments it's been through, it will be stronger and more resilient than most metals.</i>\" Your new greatsword is leaf shaped, perfectly balanced, and bears a soulmetal hilt. The grip looks like carved wood, but when you touch it, it feels slightly spongy. Overall, it looks unimpressive, but appearances can be deceiving. Beyond the somewhat simple, yet obscure appearance, you can feel Yggdrasil’s song resonate within the blade.  Perhaps you can use it to your advantage.");
+			itype = weapons.WGSWORD;
 			break;
-		case 22: //Corset
-			outputText(images.showImage("rathazul-craft-ebonweavecorset"));
-			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging on the rack is a corset.  As you inspect it, you notice the dark grey cloth has an oily sheen.  ");
-			outputText("Rubbing your hand through the garment, you can see that the fabric is smoother than Ingram’s finest cloth, yet has a strange slickness to it not reminiscent of any fabric you know of. You also note the corset is also elastic, allowing it to fit your form regardless of how large your “assets” are. You thank the rat and collect your new corset.", false);
-			itype = undergarments.EW_CORS;
+		case 22: //Sword
+			outputText("The old rat cackles as he beckons you over to one of his small benches, procuring a sword. \"<i>It’s done. This should serve you quite well.</i>\" He hands you the sword and you take a moment to appraise it. It's... made of wood.  Will this truly stand up to the heat of battle?\n\n");
+			outputText("\"<i>Of course it will!  Not only is it flame resistant, but it also has regenerative properties. With all the treatments it's been through, it will be stronger and more resilient than most metals.</i>\" Your new sword is leaf shaped, perfectly balanced, and bears a soulmetal hilt. The grip looks like carved wood, but when you touch it, it feels slightly spongy. Overall, it looks unimpressive, but appearances can be deceiving. Beyond the somewhat simple, yet obscure appearance, you can feel Yggdrasil’s song resonate within the blade.  Perhaps you can use it to your advantage.");
+		//	itype = weapons.EW_CORS;
 			break;
-		case 23: //Vest
-			outputText(images.showImage("rathazul-craft-ebonweavevest"));
-			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging on the rack is a vest.  As you inspect it, you notice the dark grey cloth has an oily sheen.  ");
-			outputText("Rubbing your hand through the garment, you can see that the fabric is smoother than Ingram’s finest cloth, yet has a strange slickness to it not reminiscent of any fabric you know of. You also note the vest is also elastic, allowing it to fit your form regardless of how large your “assets” are. You thank the rat and collect your new vest.", false);
-			itype = undergarments.EW_VEST;
+		case 23: //Bow
+			outputText("The old rat cackles as he beckons you over to one of his small benches, procuring a bow. \"<i>It’s done. This should serve you quite well.</i>\" He hands you the bow and you take a moment to appraise it. You identify this weapon as a recurve bow, which tend to be more powerful than normal bows of their size. It dawns on you that the recurves seem...  exaggerated.\n\n");
+			outputText("\"<i>Don’t worry about the recurves. The bow, for lack of a better explanation, seems to shift to comply with your desires.</i>\" He hands you a bowstring (<i>\"treated spider silk, highest quality!</i>\") and you string the bow, noting that it is indeed far easier than the recurve would suggest. Under your fingers, you can feel the wood shift to its previous state, becoming sturdy enough to provide considerable power for every shot. Beyond the somewhat simple, yet obscure appearance, you can feel Yggdrasil’s song resonate within the bow.  Perhaps you can use it to your advantage.");
+		//	itype = weapons.EW_VEST;
 			break;
-		case 24: //Jock
-			outputText(images.showImage("rathazul-craft-ebonweavejock"));
-			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging on the rack is a jock.  As you inspect it, you notice the dark grey cloth has an oily sheen.  ");
-			outputText("Rubbing your hand through the garment, you can see that the fabric is smoother than Ingram’s finest cloth, yet has a strange slickness to it not reminiscent of any fabric you know of. You also note the jock is also elastic, allowing it to fit your form regardless of how large your “assets” are. You thank the rat and collect your new jock.", false);
-			itype = undergarments.EW_JOCK;
+		case 24: //Staff
+			outputText("The old rat cackles as he beckons you over to one of his small benches, procuring a staff. \"<i>It’s done. This should serve you quite well.</i>\" He hands you the staff and you take a moment to appraise it. The staff is straight, though somewhat gnarled and generally ordinary looking up until the tip. There is a clear crystal at the top, encased in rootlike tendrils that seem to have grown out of the staff’s body. It pulses softly, the gem glowing with a soft prismatic light.\n\n");
+			outputText("\"<i>Most staves are good for either magic or soul channeling, you should take the demons by surprise when you wield both side by side.</i>\" Beyond the somewhat simple, yet obscure appearance, you can feel Yggdrasil’s song resonate within the staff.  Perhaps you can use it to your advantage.");
+		//	itype = weapons.EW_JOCK;
 			break;
 		default:
 			outputText("Something bugged! Please report this bug to Ormael.");
-			itype = armors.EWJACK_;
+			itype = weapons.WGSWORD;
 			break;
 	}
 	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);

@@ -2513,7 +2513,7 @@ public function attack():void {
 				}
 			}
 		}
-		
+		if (player.hasStatusAffect(StatusAffects.BeatOfWar)) outputText("\n\nYou feel the beat shift the song’s tempo slightly, taking a twist towards the ominous. This attunement augments your strength.");
 	}
 	
 	if (monster is JeanClaude && !player.hasStatusAffect(StatusAffects.FirstAttack))
@@ -11791,6 +11791,9 @@ public function soulforceSpecials():void {
 		}
 		else addButton(10, "Deactiv VPT", DeactivateVioletPupilTransformation, null, null, null, "Deactivate Violet Pupil Transformation.\n");
 	}
+	if (player.weaponName == "Warden’s greatsword") {
+		addButton(13, "Many Birds", ManyBirds, null, null, null, "Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.\n\nSoulforce cost: " + 50 * soulskillCost() * soulskillcostmulti());
+	}
 	addButton(14, "Back", combatMenu, false);
 }
 
@@ -11822,6 +11825,7 @@ public function soulskillMod():Number {
 	if (player.level >= 24 && player.findPerk(PerkLib.HclassHeavenTribulationSurvivor) >= 0) modss += .1;
 	if (player.level >= 42 && player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) modss += .1;
 	if (player.level >= 60) modss += .1;	//dostosować wymaganie poziomu do poziomu odbycia 6-in-9 a potem dodać "&& player.findPerk(PerkLib.perk po przejściu 9-in-9 heaven tribulation) >= 0"
+	if (player.findPerk(PerkLib.DaoistsFocus) >= 0) modss += player.perkv1(PerkLib.DaoistsFocus);
 	if (player.findPerk(PerkLib.AscensionSpiritualEnlightenment) >= 0) modss *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
 	if (player.shieldName == "spirit focus") modss += .2;
 	return modss;
@@ -11848,7 +11852,7 @@ public function soulskillcostmulti():Number {
 public function soulskillCost():Number {
 	var modssc:Number = 1;
 	if (player.findPerk(PerkLib.DaoistCultivator) >= 0) modssc -= .1;
-	if (player.findPerk(PerkLib.WizardsAndSoulcultivatorsEndurance) >= 0) modssc -= (0.01 * player.perkv2(PerkLib.WizardsAndSoulcultivatorsEndurance));
+	if (player.findPerk(PerkLib.WizardsAndDaoistsEndurance) >= 0) modssc -= (0.01 * player.perkv2(PerkLib.WizardsAndDaoistsEndurance));
 	if (player.jewelryName == "fox hairpin") modssc -= .2;
 	return modssc;
 }
@@ -12200,6 +12204,34 @@ public function DeactivateVioletPupilTransformation():void {
 	outputText("Deciding you not need for now to constantly using Violet Pupil Transformation you concentrate and deactivating it.");
 	player.removeStatusAffect(StatusAffects.VioletPupilTransformation);
 	enemyAI();
+}
+
+public function BeatOfWar():void {
+	clearOutput();
+	if (player.soulforce < 50 * soulskillCost() * soulskillcostmulti()) {
+		outputText("<b>Your current soulforce is too low.</b>");
+		doNext(combatMenu);
+		return;
+	}
+	var tempStr:Number = 0;
+	var soulforcecost:int = 50 * soulskillCost() * soulskillcostmulti();
+	player.soulforce -= soulforcecost;
+	var BeatOfWarBoost:Number = (player.str - player.statusAffectv1(StatusAffects.BeatOfWar)) * 0.15;
+	if (BeatOfWarBoost < 1) BeatOfWarBoost = 1;
+	BeatOfWarBoost = Math.round(BeatOfWarBoost);
+	if (player.hasStatusAffect(StatusAffects.BeatOfWar)) player.addStatusValue(StatusAffects.BeatOfWar, 1, BeatOfWarBoost);
+	else player.createStatusAffect(StatusAffects.BeatOfWar,BeatOfWarBoost,0,0,0);
+	temp = BeatOfWarBoost;
+	tempStr = temp;
+	//if(player.str + temp > 100) tempStr = 100 - player.str;
+	//if(player.tou + temp > 100) tempTou = 100 - player.tou;
+	player.changeStatusValue(StatusAffects.BeatOfWar,1,tempStr);
+	mainView.statsView.showStatUp('str');
+	// strUp.visible = true;
+	// strDown.visible = false;
+	player.str += player.statusAffectv1(StatusAffects.BeatOfWar);
+	statScreenRefresh();
+	basemeleeattacks();
 }
 /*
 //Mantis Omni Slash (AoE attack) - przerobić to na soulskilla zużywającego jak inne soulforce z rosnącym kosztem im wyższy lvl postaci ^^ owinno wciąż jakoś być powiązane z posiadaniem mantis arms czy też ulepszonych mantis arms (czyt. versji 2.0 tych ramion z TF bdącego soul evolution of Mantis) ^^

@@ -2642,11 +2642,10 @@ public function bowCost(mod:Number):Number {
 public function spellCostBlack(mod:Number):Number {
 	//Addiditive mods
 	var costPercent:Number = 100;
-	if (player.findPerk(PerkLib.Ambition) >= 0) costPercent -= (100 * player.perkv2(PerkLib.Ambition));
 	if (player.findPerk(PerkLib.Obsession) >= 0) costPercent -= (100 * player.perkv2(PerkLib.Obsession));
 	if (player.findPerk(PerkLib.SpellcastingAffinity) >= 0) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
 	if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
-	if (player.findPerk(PerkLib.WizardsAndSoulcultivatorsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsAndSoulcultivatorsEndurance);
+	if (player.findPerk(PerkLib.WizardsAndDaoistsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
 	if (player.findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
 	if (player.jewelryName == "fox hairpin") costPercent -= 20;
 	if (player.weaponName == "Depravatio" || player.weaponName == "Ascensus") costPercent -= 15;
@@ -2665,9 +2664,10 @@ public function spellCostBlack(mod:Number):Number {
 public function spellCostWhite(mod:Number):Number {
 	//Addiditive mods
 	var costPercent:Number = 100;
+	if (player.findPerk(PerkLib.Ambition) >= 0) costPercent -= (100 * player.perkv2(PerkLib.Ambition));
 	if (player.findPerk(PerkLib.SpellcastingAffinity) >= 0) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
 	if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
-	if (player.findPerk(PerkLib.WizardsAndSoulcultivatorsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsAndSoulcultivatorsEndurance);
+	if (player.findPerk(PerkLib.WizardsAndDaoistsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
 	if (player.findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
 	if (player.jewelryName == "fox hairpin") costPercent -= 20;
 	if (player.weaponName == "Puritas" || player.weaponName == "Ascensus") costPercent -= 15;
@@ -2688,7 +2688,7 @@ public function spellCost(mod:Number):Number {
 	var costPercent:Number = 100;
 	if (player.findPerk(PerkLib.SpellcastingAffinity) >= 0) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
 	if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
-	if (player.findPerk(PerkLib.WizardsAndSoulcultivatorsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsAndSoulcultivatorsEndurance);
+	if (player.findPerk(PerkLib.WizardsAndDaoistsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
 	if (player.findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
 	if (player.jewelryName == "fox hairpin") costPercent -= 20;
 	if (player.weaponName == "Ascensus") costPercent -= 15;

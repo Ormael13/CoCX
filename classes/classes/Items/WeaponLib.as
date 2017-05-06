@@ -54,7 +54,8 @@ package classes.Items
 		public const TRASAXE:Weapon = new Weapon("TraSAxe","Train.S.Axe", "training soul axe", "a training soul axe", "cleave", 1, 80, "This axe was specialy forged and enhanted to help novice soul cultivatiors to train their soulforce.  Still if situation calls for it it could be used as a normal weapon.");
 		public const W_STAFF:WizardsStaff = new WizardsStaff();
 		public const WARHAMR:HugeWarhammer = new HugeWarhammer();
-		public const WHIP   :Weapon = new Weapon("Whip   ","Whip","coiled whip","a coiled whip","whip-crack",5,200,"A coiled length of leather designed to lash your foes into submission.  There's a chance the bondage inclined might enjoy it!");
+		public const WHIP   :Weapon = new Weapon("Whip   ", "Whip", "coiled whip", "a coiled whip", "whip-crack", 5, 200, "A coiled length of leather designed to lash your foes into submission.  There's a chance the bondage inclined might enjoy it!");
+		public const WGSWORD:Wardensgreatsword = new Wardensgreatsword();
 		
 		/*
 		private static function mk(id:String,shortName:String,name:String,longName:String,verb:String,attack:Number,value:Number,description:String,perk:String=""):Weapon {

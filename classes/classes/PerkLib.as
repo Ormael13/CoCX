@@ -972,7 +972,7 @@ package classes
 		public static const PhallicRestraint:PerkType = mk("Phallic Restraint", "Phallic Restraint",
 				"Reduces the effects of penis-enlarging transformations.");
 
-		// Equipment perks
+		// Non-weapon equipment perks
 		public static const Ambition:AmbitionPerk = new AmbitionPerk();
 		public static const BloodMage:PerkType = mk("Blood Mage", "Blood Mage",
 				"Spellcasting now consumes health instead of fatigue!",null,true);
@@ -981,13 +981,16 @@ package classes
 		public static const WellspringOfLust:PerkType = mk("Wellspring of Lust", "Wellspring of Lust",
 				"At the beginning of combat, gain lust up to black magic threshold if lust is bellow black magic threshold.",null,true);
 		public static const WizardsEnduranceAndSluttySeduction:WizardsEnduranceAndSluttySeductionPerk = new WizardsEnduranceAndSluttySeductionPerk();
-		public static const WizardsAndSoulcultivatorsEndurance:WizardsAndSoulcultivatorsEndurancePerk = new WizardsAndSoulcultivatorsEndurancePerk();
+		public static const WizardsAndDaoistsEndurance:WizardsAndDaoistsEndurancePerk = new WizardsAndDaoistsEndurancePerk();
 		public static const WizardsEndurance:WizardsEndurancePerk = new WizardsEndurancePerk();
 
-		// Weapon melee & range perks
-		public static const WizardsFocus:WizardsFocusPerk = new WizardsFocusPerk();
+		// Melee & Range weapon perks
 		public static const Accuracy1:Accuracy1Perk = new Accuracy1Perk();
 		public static const Accuracy2:Accuracy2Perk = new Accuracy2Perk();
+		public static const DaoistsFocus:DaoistsFocusPerk = new DaoistsFocusPerk();
+		public static const StrifeWarden:PerkType = mk("Strife-Warden", "Strife-Warden",
+				"Enables Beat of War soul skill while equipped: Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.",null,true);
+		public static const WizardsFocus:WizardsFocusPerk = new WizardsFocusPerk();
 
 		// Achievement perks
 		public static const BowShooting:BowShootingPerk = new BowShootingPerk();

@@ -81,7 +81,7 @@ public function basicarcherytraining2():void
 		outputText("\"<i>Well you're free to go, I can’t teach you more anyway, and, there's a barrel of fish by that otter girl fisherwoman just waiting for me. Come back tomorrow for more training.</i>\"\n\n");
 		outputText("You head back to camp resolving to visit her again to resume training.\n\n");
 		if (flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 2) flags[kFLAGS.CEANI_ARCHERY_TRAINING] = 3;
-	//	flags[kFLAGS.CEANI_DAILY_TRAINING] = 1;
+		flags[kFLAGS.CEANI_DAILY_TRAINING] = 1;
 		bowSkill(10);
 		doNext(camp.returnToCampUseTwoHours);
 	}
@@ -96,7 +96,7 @@ public function basicarcherytraining2():void
 		outputText("\"<i>Well you're free to go, I can’t teach you more anyway, and, there's a barrel of fish by that otter girl fisherwoman just waiting for me. Come back tomorrow for more training.</i>\"\n\n");
 		outputText("You head back to camp resolving to visit her again tomorrow to resume your training.\n\n");
 		flags[kFLAGS.CEANI_ARCHERY_TRAINING] = 2;
-	//	flags[kFLAGS.CEANI_DAILY_TRAINING] = 1;
+		flags[kFLAGS.CEANI_DAILY_TRAINING] = 1;
 		if (!player.hasStatusAffect(StatusAffects.Kelt)) {
 			player.createStatusAffect(StatusAffects.Kelt, 10, 0, 0, 0);
 		}
@@ -143,21 +143,10 @@ public function beachInteractionsAfterArcheryTraining():void
 		outputText("Ceani pick up the fish from your hands and sniffs it before taking a bite and starting to cry.\n\n");
 		outputText("\"<i>I just can’t swim in the lake with all those crazed shark girls but the fish there are so tasty! Thank you so much!</i>\"\n\n");
 		player.destroyItems(consumables.FISHFIL, 1);
-		var x:int;
-		var y:int = -1;
-		temp = 0;
-		while (temp < player.cockTotal()) {
-			if (player.cocks[temp].cockLength < 37) {
-				if (y < 0) y = temp;
-				else if (player.cocks[temp].cockLength > player.cocks[y].cockLength) y = temp;
-			}
-			temp++;
-		}
-		if (y < 0) y = player.smallestCockIndex();
-		x = y;
+		var x:int = player.cockThatFits(36, "length");
 		menu();
 		addButton(0, "Talk", beachInteractionsTalk);
-		if (player.gender > 1 || (player.hasCock() && player.cocks[x].cockLength >= 15 && player.cocks[x].cockLength < 37)) addButton(1, "Date", beachInteractionsDate);
+		if (player.gender > 1 || (player.hasCock() && player.cocks[x].cockLength >= 15)) addButton(1, "Date", beachInteractionsDate);
 	}
 	else {
 		outputText("You find Ceani lazily resting on the beach and head out to say hello.\n\n");
@@ -180,21 +169,10 @@ public function oceanInteractionsAfterArcheryTraining():void
 		outputText("Ceani pick up the fish from your hands and sniffs it before taking a bite and starting to cry.\n\n");
 		outputText("\"<i>I just can’t swim in the lake with all those crazed shark girls but the fish there are so tasty! Thank you so much!</i>\"\n\n");
 		player.destroyItems(consumables.FISHFIL, 1);
-		var x:int;
-		var y:int = -1;
-		temp = 0;
-		while (temp < player.cockTotal()) {
-			if (player.cocks[temp].cockLength < 37) {
-				if (y < 0) y = temp;
-				else if (player.cocks[temp].cockLength > player.cocks[y].cockLength) y = temp;
-			}
-			temp++;
-		}
-		if (y < 0) y = player.smallestCockIndex();
-		x = y;
+		var x:int = player.cockThatFits(36, "length");
 		menu();
 		addButton(0, "Talk", beachInteractionsTalk);
-		if (player.gender > 1 || (player.hasCock() && player.cocks[x].cockLength >= 15 && player.cocks[x].cockLength < 37)) addButton(1, "Date", beachInteractionsDate);
+		if (player.gender > 1 || (player.hasCock() && player.cocks[x].cockLength >= 15)) addButton(1, "Date", oceanInteractionsDate);
 	}
 	else {
 		outputText("You tell her your latest accomplishment as she smile widely. However her belly rumble and she sigh as she prepare to leave to go back on her hunt.\n\n");
@@ -257,17 +235,40 @@ public function beachInteractionsDate():void
 	outputText("You ask the Orca if she would like to go on a date with you?\n\n");
 	outputText("\"<i>Sure! but I can’t leave the sea for too long. I prefer to stay close to my food if possible.</i>\"\n\n");
 	menu();
-	if (player.canSwimUnderwater()) addButton(0, "Underwater", beachInteractionsDateUnderwater);
-	addButton(1, "On the Beach", beachInteractionsDateOnTheBeach);
+	if (player.canSwimUnderwater()) addButton(0, "Underwater", beachInteractionsDateUnderwater0);
+	addButton(1, "On the Beach", beachInteractionsDateOnTheBeach0);
 }
 
-public function beachInteractionsDateUnderwater():void
+public function oceanInteractionsDate():void
+{
+	clearOutput();
+	outputText("You ask the Orca if she would like to go on a date with you?\n\n");
+	outputText("\"<i>Sure! but I can’t leave the sea for too long. I prefer to stay close to my food if possible.</i>\"\n\n");
+	menu();
+	if (player.canSwimUnderwater()) addButton(0, "Underwater", beachInteractionsDateUnderwater1);
+	addButton(1, "On the Beach", beachInteractionsDateOnTheBeach1);
+}
+
+public function beachInteractionsDateUnderwater0():void
 {
 	clearOutput();
 	outputText("You propose the two of you move underwater and have a trip out at sea.\n\n");
 	outputText("\"<i>Oh, so you want us to swim together? Sure I was done sunbathing anyway.</i>\"\n\n");
 	outputText("Sunbathing? Her? It's not like she will get a bronzage with that black skin, heck, she look charred enough already. She notice your confusion then sigh looking to the sky.\n\n");
 	outputText("\"<i>Everybody can dream.</i>\"\n\n");
+	beachInteractionsDateUnderwater2();
+}
+
+public function beachInteractionsDateUnderwater1():void
+{
+	clearOutput();
+	outputText("Why go anywhere else? The water here is pleasant enough and the two of you could go sightseeing.\n\n");
+	outputText("\"<i>I agree and I think I know just the places too.</i>\"\n\n");
+	beachInteractionsDateUnderwater2();
+}
+
+public function beachInteractionsDateUnderwater2():void
+{
 	if (player.findPerk(PerkLib.AquaticAffinity) >= 0) {
 		outputText("You and Ceani dive into the waves, the both of you racing underwater and playing as you try to be the first to reach the coral barrier.\n\n");
 		outputText("Ceani is just as fast as you if not faster ");
@@ -301,30 +302,21 @@ public function beachInteractionsDateUnderwater():void
 
 public function underwaterDateMaleVer():void
 {
-	var x:int;
-	var y:int = -1;
-	temp = 0;
-	while (temp < player.cockTotal()) {
-		if (player.cocks[temp].cockLength < 37) {
-			if (y < 0) y = temp;
-			else if (player.cocks[temp].cockLength > player.cocks[y].cockLength) y = temp;
-		}
-		temp++;
-	}
-	if (y < 0) y = player.smallestCockIndex();
-	x = y;
+	var x:int = player.cockThatFits(36, "length");
 	outputText("You barely register Ceani hand moving down to your cock as she begins to stroke it.\n\n");
 	outputText("\"<i>Mmmm... since we are underwater we won’t need lubrication as I am pretty much as wet as I can be.</i>\"\n\n");
 	if (player.cocks[x].cockLength >= 22) {
 		outputText("Ceani makes a wide delighted smile as she watch your beast of a dick grow up to full mast, licking her lip in obvious anticipation.\n\n");
 		outputText("\"<i>This kind of treasure is rare under the sea. Even males orca don’t exactly always have the biggest one’s even for their sizes. So when I find one of these I reaaally have to try it out!</i>\"\n\n");
 	}
-	outputText("Her other hands runs under your balls, cupping and playing with them for a moment before she swim under, you still gripping your cock, and start to suckle on your orbs one after the other. Ceani takes a look at your cock give it a lick then swim back up wrapping her two legs around your waist and her two arms against your shoulders as she slowly grind her pussy against you dick. You moan as your glan/flare is toyed by her cunt lips. ");
+	outputText("Her other hands runs under your balls, cupping and playing with them for a moment before she swim under you, still gripping your [cock], and start to suckle on your [balls] one after the other. Ceani takes a look at your cock give it a playful lick and begin to suck on your lenght, her agile tongue playing with your tip. You moan as she suck you for a fair minute then swim back up, wrapping her two legs around your waist as she slowly grind her pussy against you dick sliding the glan between her vaginal lips. ");
+	outputText("She isn’t exactly the best at sex due to the sheer size of her cunt but she makes for it with raw skills, making sure to vice grip around your length so you can feel the entirety of her vagina. You moan as your glan/flare is teased by her cunt lips never truly going in but never breaking contact either. She play with your tip for a fair minute before giggling.\n\n");
+	outputText("\"<i>You want it in, don’t you? Mmmmmm. Don’t worry, I am done playing.</i>\"\n\n");
 	outputText("She finally lower herself down on your prick, sighing in delight as your dick fills her. Her insides feels like a wet glove, it's so lubricated you almost instantly get your full length in. However comes the question of how you will fuck her. Ceani doesn’t seem to see any issue there, as she get her tail in position.\n\n");
-	outputText("\"<i>Don’t worry about moving, just let your big girl do the job for you.”</i>\"\n\n");
-	outputText("Thanks to the low gravity underwater, she manage to slide on your cock at a very slow pace making you gasp as she slowly move up and down using her tail as a lift. Heck you are glad you are underwater otherwise you are not sure you could properly lift her through the fact that her tail is doing most of the work helps. ");
-	if (player.cocks[x].cockLength >= 22) outputText("Ceani looks to be lost in the pleasure of your cock her spasming pussy desperately trying milk your dick. She really must not get a decent fuck this often and you almost feel bad for her. ");
-	outputText("Soon however you can feel the telltale sign of your own climax as your dick begin to twitch. You and Ceani moans in ecstasy as you fill up full of semen the same color as her belly.\n\n");
+	outputText("\"<i>Don’t worry about moving, just let your big girl do the job for you.</i>\"\n\n");
+	outputText("Thanks to the low gravity underwater, she manage to slide on your [cock] at a very slow pace making you gasp as she slowly move up and down using her tail as a lift. Heck you are glad you are underwater otherwise you are not sure you could properly lift her through the fact that her tail is doing most of the work helps. ");
+	if (player.cocks[x].cockLength >= 22) outputText("Ceani looks to be lost in the pleasure of your [cock], her spasming pussy desperately trying to milk your [cock] as it hits her cervix on every trust. She really must not get a decent fuck this often and you almost feel bad for her. ");
+	outputText("Her cun’t is as hungry as she is relentlessly devouring your [cock] massaging your flesh to the best of her ability. Soon however you can feel the telltale sign of your own climax as your dick begin to twitch. You and Ceani moans in ecstasy as you fill up full of semen the same color as her belly.\n\n");
 	outputText("\"<i>Mhhmmmmm [name] I wonder if you have any idea how delicious it feels to be filled like this underwater. ");
 	if (player.gender == 3) outputText("Perhaps you should try a man underwater one day and see it for yourself.");
 	else outputText("But again, you don’t have a pussy so I guess it’s not something you could understand.");
@@ -332,7 +324,9 @@ public function underwaterDateMaleVer():void
 	outputText("Ceani indeed looks to be positively beaming with delight. While you are very tempted to give her another shot you are too tired to do so this early so the two of you lay down on the seafloor to rest.\n\n");
 	outputText("When you wake up, Ceani is by your side and you are back on the beach. You can only guess the orca brought you out of the water. You think you could prolong your session of earlier but you are interrupted by Ceani’s stomach rumble.\n\n");
 	outputText("\"<i>Well I guess it’s time for me to go back to fishing. Come back anytime [name]!</i>\"\n\n");
-	outputText("On these words she puts back her bikini on and head to the water and dive, disappearing under the waves. You dress up and head back to camp thinking that you should visit more often.\n\n");
+	outputText("On these words she puts back her bikini on and head to the water and dive, disappearing under the waves. You dress up and head back to camp thinking that you should visit more often.");
+	if (player.cocks[x].cockLength < 22) outputText(" Still something tells you if your cock was bigger Ceani might like it more. Your dick felt like a small key trying to fit an oversized lock.");
+	outputText("\n\n");
 	player.orgasm();
 	ceaniAffection(6);
 	doNext(camp.returnToCampUseTwoHours);
@@ -356,10 +350,25 @@ public function underwaterDateFemaleVer():void
 	doNext(camp.returnToCampUseTwoHours);
 }
 
-public function beachInteractionsDateOnTheBeach():void
+public function beachInteractionsDateOnTheBeach0():void
 {
 	clearOutput();
-	outputText("How about a walk? It's not like she spend that much time out of the water anyway. The both of you take a stroll on the beach discussing your daily activities. There isn’t anyone aside from you two in the area and soon Ceani realise this.\n\n");
+	outputText("How about a walk? It's not like she spend that much time out of the water anyway. The both of you take a stroll on the beach");
+	beachInteractionsDateOnTheBeach2();
+}
+
+public function beachInteractionsDateOnTheBeach1():void
+{
+	clearOutput();
+	outputText("How about a walk? It's not like she spend that much time out of the water anyway.\n\n");
+	outputText("\"<i>Well I guess you’re right. I spend most of my day underwater. A walk wouldn’t hurt.</i>\"\n\n");
+	outputText("The two of you head back to the surface toward the beach and take a stroll");
+	beachInteractionsDateOnTheBeach2();
+}
+
+public function beachInteractionsDateOnTheBeach2():void
+{
+	outputText(" discussing your daily activities. There isn’t anyone aside from you two in the area and soon Ceani realise this.\n\n");
 	if (player.tallness < 96) outputText("\"<i>Say... uh... I know I’m a big girl but.. is it ok if we hold hands?</i>\"\n\n");
 	else outputText("\"<i>Say... uh... would you mind if we held hands?</i>\"\n\n");
 	outputText("You reply that it’s ok, you don’t mind. You both hold hands for an hour resuming your walk when Ceani suddenly surprise you by tripping and pulling you to the ground with her. Your face ends up falling right in the middle of her massive JJ cup. You try to lift up but she hold you still next to her.\n\n");
@@ -368,8 +377,15 @@ public function beachInteractionsDateOnTheBeach():void
 	outputText("You slowly begin to untie Ceani bikini as her tail wrap around your left leg. ");
 //	if (player.armor != NOTHING) outputText("Ceani isn’t staying idle either slowly taking care of your some of your equipment. ");
 	outputText("Once this is done, Ceani makes a smitten smile.\n\n");
-	if (player.tallness < 96) outputText("\"<i>I have been eyeing you since the trainings but i wasn’t sure you were into... girls above a certain size... furthermore, I was to shy to ask.</i>\"\n\n");
-	else outputText("\"<i>I have been eyeing you since the trainings but I wasn’t sure you were interested...furthermore I was too shy to ask you out.</i>\"\n\n");
+	if (flags[kFLAGS.CEANI_AFFECTION] < 21) {
+		if (player.tallness < 96) outputText("\"<i>I have been eyeing you since the trainings but i wasn’t sure you were into... girls above a certain size... furthermore, I was to shy to ask.</i>\"\n\n");
+		else outputText("\"<i>I have been eyeing you since the trainings but I wasn’t sure you were interested...furthermore I was too shy to ask you out.</i>\"\n\n");
+	}
+	else {
+		outputText("\"<i>How about the two of us do something else my lower body seems to know exactly what it would want right now.</i>\"\n\n");
+		outputText("You ask her to elaborate.\n\n");
+		outputText("\"<i>Look must I spell it out for you? I’d like you and I to fuck.</i>\"\n\n");
+	}
 	outputText("Oh, so that explains her behavior all along. Well there's no way you will miss on a chance to have a nice time with her, right? You begin to caress her smooth, white underbelly with your hand making Ceani coo. You slowly slide your hands all the way up to her massive breast circling her nipples and drawing her contour. You wonder if whales morph can produce milk like other mammals and begin to suckle on her tit to make sure. ");
 	outputText("Ceani hands pulls you closer as she moan at your attentions. After a few seconds of suckling you indeed find milk although she clearly won’t produce like a cow. You unplug your mouth from her now erect nipple as you head to her face for a gentle kiss. Ceani smile in rapture as the two of you begin a long duel of tongues.\n\n");
 	outputText("Ceani can’t wait any longer and ");
@@ -386,33 +402,30 @@ public function beachInteractionsDateOnTheBeach():void
 }
 
 public function beachDateMaleVer():void {
-	var x:int;
-	var y:int = -1;
-	temp = 0;
-	while (temp < player.cockTotal()) {
-		if (player.cocks[temp].cockLength < 37) {
-			if (y < 0) y = temp;
-			else if (player.cocks[temp].cockLength > player.cocks[y].cockLength) y = temp;
-		}
-		temp++;
-	}
-	if (y < 0) y = player.smallestCockIndex();
-	x = y;
+	var x:int = player.cockThatFits(36, "length");
 	if (player.cocks[x].cockLength >= 22) {
 		outputText("Ceani licks her lips as she eye your massive [cock], truth be told, finding someone with a cock large enough to fit her pussy up to the cervix must be a difficult task.\n\n");
 		outputText("\"<i>Mmmmmm... you have quite the beast you know? Do you realise how hard it is to find a dick that can properly fit in my cunny? I had wet dreams about this one...</i>\"\n\n");
 	}
-	outputText("Ceani, holding off her formidable, strength gently push you on your back and get in position her tail swishing left and right as she take your prick in her mouth wrapping her large tongue around it. For someone equipped with dagger like teeth you're surprised she can do a blowjob this well. You moan in pleasure as she slowly brings your cock to its full length. Soon Ceani is done lubing your ship mast as she slowly ");
-	outputText("pull her mouth off your still dripping cock, a thin strand of saliva still covering your glan. She lay on her back so you can have a full view of her drooling snatch and white erect nipples. You move on to her, slowly inserting yourself in her drooling snatch.");
+	outputText("Ceani, holding off her formidable, strength gently push you on your back and get in position her tail swishing left and right as she take your [cock] in her mouth wrapping her large tongue around it. For someone equipped with dagger like teeth you're surprised she can do a blowjob this well. You moan in pleasure as she slowly brings your [cock] to its full length, coating it entirely with her salty saliva. Soon Ceani is done lubing your ship mast as she slowly ");
+	outputText("pull her mouth off your still dripping cock, a thin strand of saliva still covering your glan. She giggle as she begins to pull away to change position.\n\n");
+	outputText("\"<i>Hmmm your manhood seems nice and ready but look at my pussy, I think It’s more then just the water. Care to have a look?</i>\"\n\n");
+	outputText("She lay on her back so you can have a full view of her drooling snatch and white erect nipples. You approach her cunt and take a whiff of her smell. Mmmmm looks like a female in heat and she’s all the more ready for you to breed. You get in position above her, slowly inserting yourself in her drooling snatch.");
 	if (player.cocks[x].cockLength >= 22) {
-		outputText("Ceani eyes grows wide as your cock fill her to the brim moaning from your insertion alone.\n\n");
-		outputText("\"<i>Ahhhh It's so freaking big! Fuck me! Please fuck my brain’s out!”</i>\"");
+		outputText("Ceani eyes grows wide as your [cock] fill her to the brim moaning from your insertion alone as her cunt begin to grip on your [cock] like a vice.\n\n");
+		outputText("\"<i>Ahhhh It's so freaking big! Fuck me! Please fuck my brain’s out!</i>\"");
 	}
-	outputText("\n\nCeani moan in delight as you begin to move in her cunt, her arms making large holes in the sand while her tail flail wildly behind you. You're pretty sure a slap of this thing would send anything smaller then her flying, but what you're concentrated on right now is your desire to fill this female with your cum. Ceani snatch is clamping like a clam around your dick, trying to milk you of all of your semen ");
-	outputText("as you piston in and out of her, the orca girl wailing as you finally ejaculate in her needy pussy. The two of you finally dose off as you lay your head on Ceani pillowy breasts.\n\n");
+	outputText("\n\nCeani moan in delight as you begin to move in her cunt, her arms making large holes in the sand while her tail flail wildly behind you. You're pretty sure a slap of this thing would send anything smaller then her flying, but what you're concentrated on right now is your desire to fill this female with your cum as she begins to buck her hips against your [cock]. Her cunt is just like her hunger, ravenous, and you are not sure how long you will be able to hold ");
+	outputText("against her constant onslaught before the dam breaks. Ceani snatch is clamping like a clam around your [cock], trying to milk you of all of your semen as you piston in and out of her, the orca girl wailing like the whales she ressemble.\n\n");
+	outputText("\"<i>Iiiiiiiihh! [name]! Aaaaah...AHHhhn! I’m CUUuumiiing!!!</i>\"\n\n");
+	outputText("Ceani cunt drench your legs as you finally ejaculate in her needy pussy");
+	if(player.cumQ() >= 2000) outputText(", the sand below you darkening from the sheer amount of fluids you both produced");
+	outputText(". The two of you finally dose off as you lay your head on Ceani pillowy breasts.\n\n");
 	outputText("You wake up still hugging her and the two of you stay like that, smiling for a moment, until Ceani’s stomach starts to rumble.\n\n");
 	outputText("\"<i>Well I guess it’s time that I go back to fishing. Come back anytime [name]!</i>\"\n\n");
-	outputText("On these words she puts her bikini on and head to the water to dive, disappearing under the waves. You dress up and head back to camp thinking that you should visit more often.\n\n");
+	outputText("On these words she puts her bikini on and head to the water to dive, disappearing under the waves. You dress up and head back to camp thinking that you should visit more often.");
+	if (player.cocks[x].cockLength < 22) outputText(" Still something tells you if your cock was bigger Ceani might like it more. Your dick felt like a small key trying to fit an oversized lock.");
+	outputText("\n\n");
 	player.orgasm();
 	ceaniAffection(6);
 	doNext(camp.returnToCampUseTwoHours);
