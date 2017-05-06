@@ -540,7 +540,7 @@ import classes.BodyParts.SkinLayer;
 		}
 		private static const SKIN_BASE_TYPES:Array = [
 			[SKIN_TYPE_PLAIN,"(0) PLAIN"],
-			[SKIN_TYPE_GOO,"(3) GOO"]
+			[SKIN_TYPE_GOO,"(3) GOO"],
 			[SKIN_TYPE_STONE,"(7) STONE"]
 		];
 		private static const SKIN_COAT_TYPES:Array = [
