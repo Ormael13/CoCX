@@ -22,7 +22,7 @@ package classes.Items
 		public const BIMBOSK:ArmorWithPerk = new ArmorWithPerk("BimboSk","BimboSk","bimbo skirt","a skirt that looks like it belongs on a bimbo",1,40,"A tight, cleavage-inducing halter top and an extremely short miniskirt.  The sexual allure of this item is undoubtable.","Light",
 				PerkLib.SluttySeduction,10,0,0,0,"Your delightfully slutty yet upbeat garb helps you seduce your foes!", false, false);
 		public const BKIMONO:ArmorWithPerk = new ArmorWithPerk("B.Kimono","B.Kimono","blue kimono","a blue kimono",1,200,"This lovely blue kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light",
-				PerkLib.WizardsAndSoulcultivatorsEndurance,20,20,0,0);
+				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
 		public const BONSTRP:ArmorWithPerk = new ArmorWithPerk("BonStrp","BonStrp","barely-decent bondage straps","a set of bondage straps",0,40,"These leather straps and well-placed hooks are actually designed in such a way as to be worn as clothing.  While they technically would cover your naughty bits, virtually every other inch of your body would be exposed.","Light",
 				PerkLib.SluttySeduction,10,0,0,0,"Your fetishy bondage outfit allows you access to an improved form of 'Tease'.", false, false);
 		public const C_CLOTH:ComfortableClothes = new ComfortableClothes();
@@ -67,12 +67,12 @@ package classes.Items
 				PerkLib.SluttySeduction,8,0,0,0,"Your fetishy nurse outfit allows you access to an improved form of 'Tease'.");
 		public const OVERALL:Armor = new Armor("Overall", "Overalls", "white shirt and overalls", "a white shirt and overalls", 0, 25, "A simple white shirt and overalls.", "Light", true);
 		public const PKIMONO:ArmorWithPerk = new ArmorWithPerk("P.Kimono","P.Kimono","purple kimono","a purple kimono",1,200,"This lovely purple kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light",
-				PerkLib.WizardsAndSoulcultivatorsEndurance,20,20,0,0);
+				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
 		public const R_BDYST:Armor = new Armor("R.BdySt","R.BdySt","red, high-society bodysuit","a red bodysuit for high society",1,50,"A high society bodysuit. It is as easy to mistake it for ballroom apparel as it is for boudoir lingerie. The thin transparent fabric is so light and airy that it makes avoiding blows a second nature.","Light", true, false);
 		public const RBBRCLT:ArmorWithPerk = new ArmorWithPerk("RbbrClt","Rbbr Fetish","rubber fetish clothes","a set of revealing rubber fetish clothes",3,150,"A revealing set of fetish-wear.  Upgrades your tease attack with the \"Slutty Seduction\" perk.","Light",
 				PerkLib.SluttySeduction,8,0,0,0,"Your fetishy rubberwear allows you access to 'Seduce', an improved form of 'Tease'.", true, false);
 		public const RKIMONO:ArmorWithPerk = new ArmorWithPerk("R.Kimono","R.Kimono","red kimono","a red kimono",1,200,"This lovely red kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light",
-				PerkLib.WizardsAndSoulcultivatorsEndurance,20,20,0,0);
+				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
 		public const S_SWMWR:SluttySwimwear = new SluttySwimwear();
 		public const SCALEML:Armor = new Armor("ScaleMl","Scale Mail","scale-mail armor","a set of scale-mail armor",12,720,"This suit of scale-mail covers the entire body with layered steel scales, providing flexibility and protection.","Heavy");
 		public const SEDUCTA:SeductiveArmor = new SeductiveArmor();
@@ -88,7 +88,7 @@ package classes.Items
 		public const W_ROBES:ArmorWithPerk = new ArmorWithPerk("W.Robes","W.Robes","wizard's robes","a wizard's robes",1,50,"These robes appear to have once belonged to a female wizard.  They're long with a slit up the side and full billowing sleeves.  The top is surprisingly low cut.  Somehow you know wearing it would aid your spellcasting.","Light",
 				PerkLib.WizardsEndurance,25,0,0,0);
 		public const WKIMONO:ArmorWithPerk = new ArmorWithPerk("W.Kimono","W.Kimono","white kimono","a white kimono",1,200,"This lovely white kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light",
-				PerkLib.WizardsAndSoulcultivatorsEndurance,20,20,0,0);
+				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
 
 		/*
 		private static function mk(id:String,shortName:String,name:String,longName:String,def:Number,value:Number,description:String,perk:String=""):Armor {

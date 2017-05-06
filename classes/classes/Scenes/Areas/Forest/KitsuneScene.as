@@ -4,8 +4,8 @@
 package classes.Scenes.Areas.Forest
 {
 	import classes.*;
-import classes.BodyParts.SkinLayer;
-import classes.GlobalFlags.kFLAGS;
+	import classes.BodyParts.SkinLayer;
+	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Armors.LustyMaidensArmor;
 	import classes.Scenes.Monsters.Imp;
 

@@ -1711,7 +1711,7 @@ public class PlayerAppearance extends BaseContent {
 			if (player.skinType == SKIN_TYPE_TATTOED) outputText("Magical tattoo");
 			if (player.skinType == SKIN_TYPE_FUR || player.skinType == SKIN_TYPE_SCALES || player.skinType == SKIN_TYPE_CHITIN || player.skinType == SKIN_TYPE_PARTIAL_SCALES || player.skinType == SKIN_TYPE_PARTIAL_FUR) outputText("A " + player.skinFurScales() + "");
 			if (player.skinType != SKIN_TYPE_TATTOED && player.skinType != SKIN_TYPE_FUR && player.skinType != SKIN_TYPE_SCALES && player.skinType != SKIN_TYPE_CHITIN && player.skinType != SKIN_TYPE_PARTIAL_SCALES && player.skinType != SKIN_TYPE_PARTIAL_FUR) outputText("A [skin]");
-			outputText("decorates your visage.");
+			outputText(" decorates your visage.");
 		}
 		if (player.faceType == FACE_KANGAROO) {
 			outputText("  Your face is ", false);

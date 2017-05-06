@@ -354,6 +354,7 @@ package classes
 		public static const BasiliskCompulsion:CombatStatusAffect = mk2("Basilisk Compulsion");
 		public static const BasiliskSlow:CombatStatusAffect = mk2("BasiliskSlow");
 		public static const BathedInHotSpring:CombatStatusAffect = mk2("Bathed In Hot Spring");
+		public static const BeatOfWar:CombatStatusAffect = mk2("Beat of War");
 		public static const Berzerking:CombatStatusAffect = mk2("Berzerking");
 		public static const Blind:CombatStatusAffect = mk2("Blind");
 		public static const Blink:CombatStatusAffect = mk2("Blink");

@@ -4580,6 +4580,10 @@ use namespace kGAMECLASS;
 			if (hasStatusAffect(StatusAffects.Blink)) {
 				maxSpe += statusAffectv1(StatusAffects.Blink);
 			}
+			//Beat of War
+			if (hasStatusAffect(StatusAffects.BeatOfWar)) {
+				maxStr += statusAffectv1(StatusAffects.BeatOfWar);
+			}
 			if (hasStatusAffect(StatusAffects.AndysSmoke)) {
 				maxSpe -= statusAffectv2(StatusAffects.AndysSmoke);
 				maxInt += statusAffectv3(StatusAffects.AndysSmoke);
@@ -4759,6 +4763,10 @@ use namespace kGAMECLASS;
 			}
 			if(hasStatusAffect(StatusAffects.Blizzard)) {
 				removeStatusAffect(StatusAffects.Blizzard);
+			}
+			if(hasStatusAffect(StatusAffects.BeatOfWar)) {
+				kGAMECLASS.dynStats("str", -statusAffectv1(StatusAffects.BeatOfWar));
+				removeStatusAffect(StatusAffects.BeatOfWar);
 			}
 			if(hasStatusAffect(StatusAffects.UnderwaterCombatBoost)) {
 				kGAMECLASS.dynStats("str", -statusAffectv1(StatusAffects.UnderwaterCombatBoost),"spe", -statusAffectv2(StatusAffects.UnderwaterCombatBoost));

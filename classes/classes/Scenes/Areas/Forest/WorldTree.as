@@ -282,7 +282,10 @@ package classes.Scenes.Areas.Forest
 			}
 			//Plant Dragon face
 			if (player.lowerBody == LOWER_BODY_TYPE_YGG_ROOT_CLAWS && player.faceType != FACE_PLANT_DRAGON && changes < changeLimit) {
-				outputText("The familiar tingle of transformation spreads across your face. Your face shifts into a vaguely triangular shape, something that would look at home on a predatory reptile...  or a dragon. You feel pride swell within you as you look at your reflection inh a puddle at your feet, your new look now resembles a majestic creature of the old myths. <b>Your face is now a dragonlike muzzle!</b>\n\n", false);
+				outputText("The familiar tingle of transformation spreads across your face. Your ", false);
+				if (player.hasMuzzle()) outputText("muzzle", false);
+				else outputText("face", false);
+				outputText(" shifts into a vaguely triangular shape, something that would look at home on a predatory reptile...  or a dragon. You feel pride swell within you as you look at your reflection inh a puddle at your feet, your new look now resembles a majestic creature of the old myths. <b>Your face is now a dragonlike muzzle!</b>\n\n", false);
 				player.faceType = FACE_PLANT_DRAGON;
 				changes++;
 			}

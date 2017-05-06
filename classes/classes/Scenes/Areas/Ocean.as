@@ -35,10 +35,10 @@ package classes.Scenes.Areas
 			if (rand(4) == 0) choice[choice.length] = 1;	 //Find nothing! The rand will be removed from this once the Ocean is populated with more encounters.
 			
 			//Ceani
-		//	if ((model.time.hours >= 12 && model.time.hours <= 22) && flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 4) {
-		//		ceaniScene.oceanInteractionsAfterArcheryTraining();
-		//		return;
-		//	}
+			if ((model.time.hours >= 12 && model.time.hours <= 22) && flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 4) {
+				ceaniScene.oceanInteractionsAfterArcheryTraining();
+				return;
+			}
 			
 			select = choice[rand(choice.length)];
 			switch(select) {
