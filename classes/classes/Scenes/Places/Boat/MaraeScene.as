@@ -152,10 +152,10 @@ public function alraunezeMe():void {
 	outputText(images.showImage("marae-first-encounter"));
 	outputText("For some weird reason, you feel a growing need to visit Marae. Perhaps it’s a natural calling for plant morphs like yourself, tuned to the earth's voice as you have become, or perhaps there is a greater calling to it. Perhaps it’s just that getting into the good graces of the local plant goddess while being a plant yourself is common sense. You use the boat as usual and row to the island where Marae resides. It doesn’t take long for the goddess to notice your presence.\n\n", false);
 	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) {
-		outputText("Oh...I see you went through the trouble of eating Hollicynthia’s fruits to grow closer to me. I honestly didn’t expect you to show this level of devotion. Perhaps I misjudged you. In turn for services rendered, I think adopting you as a daughter of mine would, perhaps, not be beyond my grace. Will you, in turn, embrace the love of the goddess of fertility? What say you, my champion?</i>\"", false);
+		outputText("<i>\"Oh...I see you went through the trouble of eating Hollicynthia’s fruits to grow closer to me. I honestly didn’t expect you to show this level of devotion. Perhaps I misjudged you. In return for services rendered, I think adopting you as a daughter of mine would, perhaps, not be beyond my grace. Will you, in turn, embrace the love of the goddess of fertility? What say you, my champion?</i>\"", false);
 	}
 	else {
-		outputText("Well, aren’t you sweet? So envious of me and Hollicyntia that you tried to become a flower yourself! Your level of devotion to your goddess is truly touching. How about I remake you, improve you, all while giving you what you truly desire? Then, adopt you as my fully fledged daughter? My first real convert to the new religion? Think of it as a... final reward.</i>\"", false);
+		outputText("<i>\"Well, aren’t you sweet? So envious of me and Hollicyntia that you tried to become a flower yourself! Your level of devotion to your goddess is truly touching. How about I remake you, improve you, all while giving you what you truly desire? Then, adopt you as my fully fledged daughter? My first real convert to the new religion? Think of it as a... final reward.</i>\"", false);
 	}
 	menu();
 	addButton(0, "No", alraunezeMeNo, null, null, null, "");
@@ -169,8 +169,30 @@ private function alraunezeMeNo():void {
 
 private function alraunezeMeYes():void {
 	clearOutput();
-	outputText("PLACEHOLDER MAGIC SCENE WHEN PC IS ALRAUNEZED!\n\n", false);
-	outputText("Worried about being stuck, you try and move something, anything, and to your surprise, you discover you can actually walk around using the vine-like tentacle stamens that seem to sprout from the base of your body. It feels weird at first, but you think you will get used to it soon enough. <b>Your lower body has turned into an Alraune flower, towering above a mass of tentacle vines!</b>\n\n", false);
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) {
+		outputText("You can barely believe your ears. You? A fully fledged daughter to the goddess of fertility herself? You would have to be a fool to refuse.\n\n", false);
+		outputText("<i>\"So be it. Let me welcome you as my newest daughter, then.</i>\"\n\n", false);
+		outputText("You feel something tugging at your feet, which makes itself known by pulling you into the ground all of a sudden, Marae's roots drawing you into a motherly hug. You feel Marae’s warmth spread to you from the loving roots of the goddess, making you close your eyes to appreciate the feeling of the sun on your vegetal skin, losing yourself in the sensation of her divine love engulfing you. You feel sleepy... so sleepy that it's hard to stand still, but stand still you do, not wanting to ruin this perfect moment. Even as the light around you begins to fade and you let yourself finally doze off, you remain calm, listening to the slow chorus of nature.\n\n", false);
+	}
+	else {
+		outputText("You look at Marae’s lovely tentacles and that perfect body of hers, only growing all the more jealous of her glorious form and nod. You want to become like her - a perfect embodiment of verdant beauty and lust.\n\n", false);
+		outputText("<i>\"Very well. But first, my lovely daughter to be, you will have to earn your place at my side.</i>\"\n\n", false);
+		outputText("Marae coos with pleasure and allows a nectar-slicked tentacle to slip free of her flower. Her sweet, corrupted smell fills the air, like pollen carried on a spring breeze, clinging to your senses like a heavenly blanket. The goddess' fingers trace the outline of her budding clit, and you watch, enraptured, as it swells up turning purple as it peeks out of her floral slit. A clear ridge forms underneath the tip, delineating the underside of a newly grown cock-tip. Marae bats her eyelashes and strokes the newly-formed growth as it fills out, surpassing the length of any mortal man. ", false);
+		outputText("The crown is a shiny, almost slick purple color, fading to green the further down the stalk-like shaft it goes. She climbs to her feet, fingernails tracing the outline of the newly-formed urethral bulge on her shaft as she glides closer to you.\n\n", false);
+		outputText("PLACEHOLDER MAGIC SCENE WHEN PC IS ALRAUNEZED!\n\n", false);
+		outputText("PLACEHOLDER MAGIC SCENE WHEN PC IS ALRAUNEZED!\n\n", false);
+		outputText("Marae grunts and pulls on your [hair], shoving her thick clit-cock deep inside your throat. You reflexively swallow down the bulging fuck-meat and struggle to suppress your gag reflex as her cock grows thick in your mouth, dumping its cream down your wanton gullet. The slippery tentacle goes into overdrive while Marae cums, pumping away at your snatch with incredibly violent fervor. Your belly bubbles as it’s stuffed full of goddess-cum, and your pussy clamps down hard on its invader while it spurts out its own syrupy load into your womb. Swooning with lust, you orgasm from the twin violations, squirming on Marae’s rod while she packs you with nectar.\n\n", false);
+		outputText("The goddess pulls back with a satisfied sigh, dragging her length out of your throat and shivering from the sensations of your hot, oral vice on her twitching member. You look up at her with eyes full of adoration, feeling your gut churn from the quantity of her deposit, a gift you are most grateful for. Marae ruffles your hair and pulls the tentacle back with a suddenness that makes you feel empty and void. You feel a little drowsy, finally giving in and closing your eyes while your goddess watches over you. Everything is perfect...\n\n", false);
+	}
+	alraunezeMeYes0();
+}
+
+private function alraunezeMeYes0():void {
+	outputText("You open your eyes a few hours later, starkly aware of the absence of light. Did you truly sleep for so long? Apparently not, something seems to be blocking the rays of the sun like a velvet curtain. You push the heavy, silky curtain away with your hand, which easily opens... or rather blooms? Bloom it does indeed, as you find yourself resting on a huge flower, the petals alone large enough to engulf you entirely. Distracted as you are with the sudden changes, the sudden spike of arousal catches you off-guard, eliciting a moan and causing you to cum on the spot, your pussy starting to drip a steady flow of nectar that, after a while, fills the bottom of the flower, hiding everything below your waist in amber syrup, its gentle but arousing fragrance coating ", false);
+	outputText("You try and move out of the nectar bath, and fail miserably, discovering the cause to be your feet being attached to the same spot at the bottom of the flower, or rather that the bottom of the flower has effectively become your feet. Worried about being stuck, you try and move something, anything, and to your surprise, you discover you can actually walk around using the vine-like tentacle stamens that seem to sprout from the base of your body. It feels weird at first, but you think you will get used to it soon enough. <b>Your lower body has turned into an Alraune flower, towering above a mass of tentacle vines!</b>\n\n", false);
+	outputText("You barely finish examining the new changes before daydreams of luring and laying both men and women alike suddenly assault your mind. Images of waiting holes thirsting for your seed or hard stamens begging you to impale yourself on race through your mind, driving your arousal to new heights as you blush wildly. As it reaches it’s peak, your body lets out a massive cloud of pollen in the air to let everyone know you're in season. Still high on whatever aphrodisiac effect caused this, you can’t help but be delighted by this new development.\n\n", false);// <b>You gained the Alraune pollen ability!</b>
+	outputText("Marae has been quietly watching as you got... acquainted with your new changes, her roots still hugging your vines, entwined together as she gently supports you. You realise what she has done for you and try to find the most appropriate words for the situation, so you can properly thank her. Sadly, you draw a blank, unable to find any words that would properly communicate the full extent of your thankfulness. Instead, you settle for something much simpler, a single word:\n\n", false);
+	outputText("<i>\"Mother...?</i>\"\n\n", false);
 	outputText("PLACEHOLDER MAGIC SCENE WHEN PC IS ALRAUNEZED!\n\n", false);
 	if (player.cockTotal() == 0) {
 		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
@@ -184,6 +206,7 @@ private function alraunezeMeYes():void {
 		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
 		player.cocks[0].cockType = CockTypesEnum.STAMEN;
 	}
+	if (player.wingType == WING_TYPE_PLANT) player.wingType = WING_TYPE_NONE;
 	player.lowerBody = LOWER_BODY_TYPE_PLANT_FLOWER;
 	player.legCount = 4;
 	doNext(camp.returnToCampUseTwoHours);

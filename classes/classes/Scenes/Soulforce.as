@@ -324,6 +324,7 @@ package classes.Scenes
 			addButton(2, "Stone", AddStone, null, null, null, "Add 100 Stone (game not check for limits so not go overboard with using this cheat).");
 			addButton(3, "SpiderSilk", AddSpiderSilk, null, null, null, "Add 1 Spider Silk.");
 			addButton(4, "Ebonbloom", AddEbonbloom, null, null, null, "Add 1 Ebonbloom.");
+			addButton(5, "WorldTreeB.", AddWorldTreeBranch, null, null, null, "Add 1 World Tree Branch.");
 			addButton(14, "Back", SoulforceCheats);
 		}
 		public function EnemiesMenu():void {
@@ -388,6 +389,10 @@ package classes.Scenes
 		public function AddEbonbloom():void {
 			outputText("\n\n<b>(Gained 1 Ebonbloom!)</b>\n\n");
 			inventory.takeItem(useables.EBONBLO, MaterialMenu);
+		}
+		public function AddWorldTreeBranch():void {
+			outputText("\n\n<b>(Gained 1 Wold Tree branch!)</b>\n\n");
+			inventory.takeItem(useables.WT_BRAN, MaterialMenu);
 		}
 		public function AddTheStaffs():void {
 			outputText("\n\n<b>(Gained set of items to make Ascensus!)</b>\n\n");

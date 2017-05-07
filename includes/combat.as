@@ -1283,6 +1283,7 @@ public function multiArrowsStrike():void {
 			outputText(".  It's clearly very painful. <b>(<font color=\"#800000\">" + String(damage) + "</font>)</b>");
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		}
+		if (player.hasStatusAffect(StatusAffects.ResonanceVolley)) outputText("  Your bow nudges as you ready the next shot, helping you keep your aimed at " + monster.short + ".");
 		if (flags[kFLAGS.CUPID_ARROWS] == 1) {
 			outputText("  ");
 			if(monster.lustVuln == 0) {
@@ -1422,7 +1423,8 @@ public function multiArrowsStrike():void {
 	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 2) {
 		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
 			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
-			flags[kFLAGS.ARROWS_ACCURACY] += 15;
+			if (player.hasStatusAffect(StatusAffects.ResonanceVolley)) flags[kFLAGS.ARROWS_ACCURACY] += 5;
+			else flags[kFLAGS.ARROWS_ACCURACY] += 15;
 			multiArrowsStrike();
 		}
 		else {
@@ -1433,7 +1435,8 @@ public function multiArrowsStrike():void {
 	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 3) {
 		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
 			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
-			flags[kFLAGS.ARROWS_ACCURACY] += 15;
+			if (player.hasStatusAffect(StatusAffects.ResonanceVolley)) flags[kFLAGS.ARROWS_ACCURACY] += 5;
+			else flags[kFLAGS.ARROWS_ACCURACY] += 15;
 			multiArrowsStrike();
 		}
 		else {
@@ -1444,7 +1447,8 @@ public function multiArrowsStrike():void {
 	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 4) {
 		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
 			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
-			flags[kFLAGS.ARROWS_ACCURACY] += 15;
+			if (player.hasStatusAffect(StatusAffects.ResonanceVolley)) flags[kFLAGS.ARROWS_ACCURACY] += 5;
+			else flags[kFLAGS.ARROWS_ACCURACY] += 15;
 			multiArrowsStrike();
 		}
 		else {
@@ -1455,7 +1459,8 @@ public function multiArrowsStrike():void {
 	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 5) {
 		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
 			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
-			flags[kFLAGS.ARROWS_ACCURACY] += 15;
+			if (player.hasStatusAffect(StatusAffects.ResonanceVolley)) flags[kFLAGS.ARROWS_ACCURACY] += 5;
+			else flags[kFLAGS.ARROWS_ACCURACY] += 15;
 			multiArrowsStrike();
 		}
 		else {
@@ -1466,7 +1471,8 @@ public function multiArrowsStrike():void {
 	if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 6) {
 		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
 			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
-			flags[kFLAGS.ARROWS_ACCURACY] += 15;
+			if (player.hasStatusAffect(StatusAffects.ResonanceVolley)) flags[kFLAGS.ARROWS_ACCURACY] += 5;
+			else flags[kFLAGS.ARROWS_ACCURACY] += 15;
 			multiArrowsStrike();
 		}
 		else {
@@ -4021,6 +4027,8 @@ private function combatStatusesUpdate():void {
 			player.addStatusValue(StatusAffects.CooldownCompellingAria,1,-1);
 		}
 	}
+	if (player.hasStatusAffect(StatusAffects.BladeDance)) player.removeStatusAffect(StatusAffects.BladeDance);
+	if (player.hasStatusAffect(StatusAffects.ResonanceVolley)) player.removeStatusAffect(StatusAffects.ResonanceVolley);
 	regeneration(true);
 	if(player.lust >= player.maxLust()) doNext(endLustLoss);
 	if(player.HP <= 0) doNext(endHpLoss);
@@ -11792,8 +11800,17 @@ public function soulforceSpecials():void {
 		else addButton(10, "Deactiv VPT", DeactivateVioletPupilTransformation, null, null, null, "Deactivate Violet Pupil Transformation.\n");
 	}
 	if (player.weaponName == "Warden’s greatsword") {
-		addButton(13, "Many Birds", ManyBirds, null, null, null, "Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.\n\nSoulforce cost: " + 50 * soulskillCost() * soulskillcostmulti());
+		addButton(13, "Beat of War", BeatOfWar, null, null, null, "Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.\n\nSoulforce cost: " + 50 * soulskillCost() * soulskillcostmulti());
 	}
+//	if (player.weaponName == "Warden’s greatsword") {
+//		addButton(13, "Blade Dance", BeatOfWar, null, null, null, "Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.\n\nSoulforce cost: " + 50 * soulskillCost() * soulskillcostmulti());
+//	}
+	if (player.weaponRangeName == "Warden’s bow") {
+		addButton(13, "ResonanceVolley", ResonanceVolley, null, null, null, "Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.\n\nSoulforce cost: 150");
+	}
+//	if (player.weaponName == "Warden’s greatsword") {
+//		addButton(13, "Beat of War", BeatOfWar, null, null, null, "Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.\n\nSoulforce cost: " + 50 * soulskillCost() * soulskillcostmulti());
+//	}
 	addButton(14, "Back", combatMenu, false);
 }
 
@@ -12232,6 +12249,30 @@ public function BeatOfWar():void {
 	player.str += player.statusAffectv1(StatusAffects.BeatOfWar);
 	statScreenRefresh();
 	basemeleeattacks();
+}
+public function BladeDance():void {
+	clearOutput();
+	if (player.soulforce < 100 * soulskillCost() * soulskillcostmulti()) {
+		outputText("<b>Your current soulforce is too low.</b>");
+		doNext(combatMenu);
+		return;
+	}
+	outputText("You momentarily attune yourself to the song of the mother tree, and dance forward, darting your blade around your enemy.\n");
+	player.createStatusAffect(StatusAffects.BladeDance,0,0,0,0);
+	doNext(combatMenu);
+	return;
+}
+public function ResonanceVolley():void {
+	clearOutput();
+	if (player.soulforce < 150) {
+		outputText("<b>Your current soulforce is too low.</b>");
+		doNext(combatMenu);
+		return;
+	}
+	outputText("You ready your bow, infusing it with a figment of soulforce. The energy awakens the wood’s connection to the world tree, causing the bow to pulse beneath your fingers.\n");
+	player.createStatusAffect(StatusAffects.ResonanceVolley,0,0,0,0);
+	doNext(combatMenu);
+	return;
 }
 /*
 //Mantis Omni Slash (AoE attack) - przerobić to na soulskilla zużywającego jak inne soulforce z rosnącym kosztem im wyższy lvl postaci ^^ owinno wciąż jakoś być powiązane z posiadaniem mantis arms czy też ulepszonych mantis arms (czyt. versji 2.0 tych ramion z TF bdącego soul evolution of Mantis) ^^

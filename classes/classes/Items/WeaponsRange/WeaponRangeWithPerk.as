@@ -45,10 +45,7 @@ package classes.Items.WeaponsRange
 			else if (perk == "Crossbow") desc += "(Crossbow)";
 			else if (perk == "Pistol") desc += "(Pistol)";
 			else if (perk == "Rifle") desc += "(Rifle)";
-		//	else if (verb == "slash" || verb == "keen cut") desc += "(Sword)";
-		//	else if (verb == "stab") desc += "(Dagger)";
-		//	else if (verb == "smash") desc += "(Blunt)";
-		//	else if (name.indexOf("staff") >= 0) desc += "(Staff)";
+			else if (perk == "Throwing") desc += "(Throwing)";
 			//Attack
 			desc += "\nRange Attack: " + String(attack);
 			//Value

@@ -356,6 +356,7 @@ package classes
 		public static const BathedInHotSpring:CombatStatusAffect = mk2("Bathed In Hot Spring");
 		public static const BeatOfWar:CombatStatusAffect = mk2("Beat of War");
 		public static const Berzerking:CombatStatusAffect = mk2("Berzerking");
+		public static const BladeDance:CombatStatusAffect = mk2("Blade Dance");
 		public static const Blind:CombatStatusAffect = mk2("Blind");
 		public static const Blink:CombatStatusAffect = mk2("Blink");
 		public static const Blizzard:CombatStatusAffect = mk2("Blizzard");
@@ -407,6 +408,7 @@ package classes
 		public static const PhysicalDisabled:CombatStatusAffect = mk2("Physical Disabled");
 		public static const Poison:CombatStatusAffect = mk2("Poison");
 		public static const Rage:CombatStatusAffect = mk2("Rage");
+		public static const ResonanceVolley:CombatStatusAffect = mk2("Resonance Volley");
 		public static const Sandstorm:CombatStatusAffect = mk2("sandstorm");
 		public static const Sealed:CombatStatusAffect = mk2("Sealed");
 		public static const SharkBiteBleed:CombatStatusAffect = mk2("Shark Bite Bleed");
