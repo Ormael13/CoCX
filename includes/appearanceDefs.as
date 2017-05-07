@@ -191,6 +191,16 @@ public static const ARM_TYPE_YETI:int												=  16;
 public static const ARM_TYPE_ORCA:int												=  17;
 public static const ARM_TYPE_PLANT2:int												=  18;
 
+// clawType
+public static const CLAW_TYPE_NORMAL:int                                            =   0;
+public static const CLAW_TYPE_LIZARD:int                                            =   1;
+public static const CLAW_TYPE_DRAGON:int                                            =   2;
+public static const CLAW_TYPE_SALAMANDER:int                                        =   3;
+public static const CLAW_TYPE_CAT:int                                               =   4; // NYI! Placeholder for now!! (See http://tiny.cc/coc-revamp-claws)
+public static const CLAW_TYPE_DOG:int                                               =   5; // NYI! Placeholder for now!! (See http://tiny.cc/coc-revamp-claws)
+public static const CLAW_TYPE_RAPTOR:int                                            =   6; // NYI! Placeholder for now!! (See http://tiny.cc/coc-revamp-claws) Giev teh Rapturs :-)
+public static const CLAW_TYPE_MANTIS:int                                            =   7; // NYI! Placeholder for Xianxia mod (See http://tiny.cc/coc-xianxia-mod)
+
 // tailType
 public static const TAIL_TYPE_NONE:int                                              =   0;
 public static const TAIL_TYPE_HORSE:int                                             =   1;

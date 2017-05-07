@@ -16,7 +16,7 @@
     <option name="launcherParameters">
       <LauncherParameters>
         <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
-        <option name="launcherType" value="Player" />
+        <option name="launcherType" value="OSDefault" />
         <option name="newPlayerInstance" value="false" />
         <option name="playerPath" value="$FLEX_SDK$/runtimes/player/11.1/win/FlashPlayerDebugger.exe" />
       </LauncherParameters>

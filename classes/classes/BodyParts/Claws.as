@@ -7,15 +7,6 @@ import classes.Creature;
 import classes.internals.Utils;
 
 public class Claws extends SaveableBodyPart {
-	public static const TYPE_NORMAL:int     = 0;
-	public static const TYPE_LIZARD:int     = 1;
-	public static const TYPE_DRAGON:int     = 2;
-	public static const TYPE_SALAMANDER:int = 3;
-	public static const TYPE_CAT:int        = 4; // NYI! Placeholder for now!! (See http://tiny.cc/coc-revamp-claws)
-	public static const TYPE_DOG:int        = 5; // NYI! Placeholder for now!! (See http://tiny.cc/coc-revamp-claws)
-	public static const TYPE_RAPTOR:int     = 6; // NYI! Placeholder for now!! (See http://tiny.cc/coc-revamp-claws) Giev teh Rapturs :-)
-	public static const TYPE_MANTIS:int     = 7; // NYI! Placeholder for Xianxia mod (See http://tiny.cc/coc-xianxia-mod)
-
 	public var tone:String                  = "";
 
 	public function Claws(creature:Creature) {
@@ -30,16 +21,16 @@ public class Claws extends SaveableBodyPart {
 	override public function descriptionFull():String {
 		var toneText:String = tone == "" ? " " : (", " + tone + " ");
 		switch (type) {
-			case TYPE_NORMAL: return "fingernails";
-			case TYPE_LIZARD: return "short curved" + toneText + "claws";
-			case TYPE_DRAGON: return "powerful, thick curved" + toneText + "claws";
+			case CLAW_TYPE_NORMAL: return "fingernails";
+			case CLAW_TYPE_LIZARD: return "short curved" + toneText + "claws";
+			case CLAW_TYPE_DRAGON: return "powerful, thick curved" + toneText + "claws";
 			// Since mander arms are hardcoded and the others are NYI, we're done here for now
 		}
 		return "fingernails";
 	}
 
 	override protected function loadFromOldSave(savedata:Object):void {
-		type = intOr(savedata.clawType,TYPE_NORMAL);
+		type = intOr(savedata.clawType,CLAW_TYPE_NORMAL);
 		tone = stringOr(savedata.clawTone,"");
 	}
 	override protected function saveToOldSave(savedata:Object):void {

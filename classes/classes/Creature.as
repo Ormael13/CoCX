@@ -225,11 +225,7 @@ import classes.BodyParts.UnderBody;
 			});
 			if (l) l.color = value;
 		}
-		/*Beardstyle
-		0- normal
-		1- goatee
-		2- clean-cut
-		3- mountain-man*/
+
 		public var beardStyle:Number = BEARD_NORMAL;
 		public var beardLength:Number = 0;
 				
@@ -283,50 +279,10 @@ import classes.BodyParts.UnderBody;
 		// </mod>
 		public var underBody:UnderBody;
 
-		/*EarType
-		-1 - none!
-		0 - human
-		1 - horse
-		2 - dog
-		3 - cow
-		4 - elf
-		5 - catzilla
-		6 - Snakezilla
-		7 - Bunbunz
-		8 - Roo Ears
-		9 - fox ears
-		10 - dragon
-		11 - coon
-		12 - mouse*/
 		public var earType:Number = EARS_HUMAN;
 		public var earValue:Number = 0;
-		
-		/*Horntype
-		1 - demonic
-		2 - minotaur (cowlike)
-		3 - Draconic/Lizard
-		4 - Double draconic
-		5 - Antlers
-		6 - Goat*/
 		public var hornType:Number = HORNS_NONE;
 		public var horns:Number = 0;
-
-		/*Wingtype
-		0 - none
-		1 - bee
-		2 - large bee
-		3 - faerie?
-		4 - avian
-		5 - dragoooon?
-		6 - demon/bat
-		7 - large demon/bat
-		8 - shark wing lolololol
-		9 - harpy
-		10 - small dagron
-		11 - trogdor wings
-		12 - sandtrap wings
-		13 - large demon/bat (2 sets)
-		14 - huge dragon wings*/
 		private var _wingType:Number = WING_TYPE_NONE;
 		public var wingDesc:String = "non-existant";
 		public function get wingType():Number { return _wingType; }

@@ -126,18 +126,24 @@
 			"color": function (thisPtr:*, aspect:*):* {
 				return kGAMECLASS.player.skin.tone;
 			},
+			"isare": function (thisPtr:*, aspect:*):* {
+				return kGAMECLASS.player.skin.isAre();
+			},
 			"vs": function (thisPtr:*, aspect:*):* {
-				var skin:Skin = kGAMECLASS.player.skin;
-				if (skin.coverage < Skin.COVERAGE_MEDIUM) return skin.base.isAre("s","");
-				if (skin.coverage > Skin.COVERAGE_MEDIUM) return skin.coat.isAre("s","");
-				return "";
+				return kGAMECLASS.player.skin.isAre("s","");
 			},
 			"base": skinDescriptionFn("base", false, false),
 			"base.noadj": skinDescriptionFn("base", true, false),
 			"base.notone": skinDescriptionFn("base", false, true),
 			"base.type": skinDescriptionFn("base", true, true),
+			"base.color": function (thisPtr:*, aspect:*):* {
+				return kGAMECLASS.player.skin.base.color;
+			},
 			"base.vs": function (thisPtr:*, aspect:*):* {
 				return kGAMECLASS.player.skin.base.isAre("s", "");
+			},
+			"base.isare": function (thisPtr:*, aspect:*):* {
+				return kGAMECLASS.player.skin.base.isAre();
 			},
 			"coat": skinDescriptionFn("coat", false, false),
 			"coat.noadj": skinDescriptionFn("coat", true, false),
@@ -145,6 +151,12 @@
 			"coat.type": skinDescriptionFn("coat", true, true),
 			"coat.vs": function (thisPtr:*, aspect:*):* {
 				return kGAMECLASS.player.skin.coat.isAre("s", "");
+			},
+			"coat.isare": function (thisPtr:*, aspect:*):* {
+				return kGAMECLASS.player.skin.coat.isAre();
+			},
+			"coat.color": function (thisPtr:*, aspect:*):* {
+				return kGAMECLASS.player.skin.coat.color;
 			},
 			"full": skinDescriptionFn("full", false, false),
 			"full.noadj": skinDescriptionFn("full", true, false),
