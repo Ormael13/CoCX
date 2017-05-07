@@ -2137,17 +2137,17 @@ import classes.CockTypesEnum;
 						outputText("After the last times, you thought that the sudden arousal weakened with each use of the fruit, with the last time having caused you almost no noticeable increase in it. Clearly, you were wrong, as the sudden spike of arousal obligingly points out to you.  ", false);
 						if (player.vaginas.length == 1) outputText("You cannot resist as your hands dive into your " + vaginaDescript(0) + ".  ", false);
 						if (player.vaginas.length > 1) outputText("You cannot resist plunging your hands inside your " + vaginaDescript(0) + "s.  ", false);
-						outputText("Your orgasm comes mercifully quickly, accompanied by an impressive spray of your fluids.  Still high from the aphrodisiac effects of the fruit, you cannot help to be delighted at this new development.  <b>You are now a squirter</b>.", false);
+						outputText("Your orgasm comes mercifully quickly, accompanied by an impressive spray of your fluids.  Still high from the aphrodisiac effects of the fruit, you cannot help but be delighted at this new development.  <b>You are now a squirter</b>.", false);
 						player.orgasm();
 					}
 					if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK) {
-						outputText("You suddenly feel something trickling down your leg. The strong smell of fish slams into your poor unprepared nose, cluing you in as to the nature of the liquid, but getting used to the idea of smelling like a fishing port, the smell begins to change to a far lighter and sweeter one, which you recognize as that of the fruit. Your " + vaginaDescript(0) + " now constantly drools lubricant down your leg, filling the air with a pleasant scent that most would mistake for perfume.", false);
+						outputText("You suddenly feel something trickling down your leg. The strong smell of fish slams into your poor unprepared nose, clueing you in as to the nature of the liquid. But just when are getting used to the idea of smelling like a fishing port, the smell begins to change to a far lighter and sweeter one, which you recognize as that of the fruit. Your " + vaginaDescript(0) + " now constantly drools lubricant down your leg, filling the air with a pleasant scent that most would mistake for perfume.", false);
 					}
 					if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET) {
 						outputText("Once more, the fruit’s effects make themselves known, leaving you hornier and wetter than you began as, the later of which is likely to be permanent. At least this time you were already expecting it, so you weren’t forced to relieve yourself on the spot like the last time.", false);
 					}
 					if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) {
-						outputText("Suddenly your arousal spikes, feeling as if you had downed several lust drafts while already in heat or rut, forcing you to masturbate furiously on the spot.  ", false);
+						outputText("Suddenly your arousal spikes, you feel as if you had downed several lust drafts while already in heat or rut, forcing you to masturbate furiously on the spot.  ", false);
 						if (player.vaginas.length == 1) outputText("You realize afterwards that your " + vaginaDescript(0) + " felt much wetter than normal.", false);
 						else outputText("You realize afterwards that your " + vaginaDescript(0) + " were much wetter than normal.", false);
 						outputText("  Will you eventually become as juicy as the fruit was?", false);
@@ -2164,7 +2164,7 @@ import classes.CockTypesEnum;
 				}
 				//Fertility boost
 				if (player.vaginas.length > 0 && player.fertility < 40) {
-					outputText("You feel your womb start giving off a pleasant warmth, instinctively knowing it has become more fertile. Plants <b>are</b> known for their fertility, and you <b>are</b> trying to become somewhat closer to them, so this was to be expected. Perhaps being as fertile as this once verdant land won’t be so bad. Might as well try to give the goddess a run for her money.\n\n", false);
+					outputText("You feel your womb start to give off a pleasant warmth, instinctively knowing it has become more fertile. Plants <b>are</b> known for their fertility, and you <b>are</b> trying to become somewhat closer to them, so this was to be expected. Perhaps being as fertile as this once verdant land won’t be so bad. Might as well try to give the goddess a run for her money.\n\n", false);
 					player.fertility += 5;
 					changes++;
 				}

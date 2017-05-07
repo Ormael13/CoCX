@@ -40,6 +40,7 @@ package classes.Items
 		public const TRJAVEL:WeaponRange = new WeaponRange("TrJavel", "Tra.Javelins", "training javelins", "a training javelins", "shot", 5, 250, "A standard training javelin for ranged combat. You can carry up to 10 on you and need to retrieve them after battles.", "Throwing");
 		public const TRSXBOW:WeaponRangeWithPerk = new WeaponRangeWithPerk("TrSXBow", "Tra.S.Xbow", "training soul crossbow", "a training soul crossbow", "shot", 1, 50, "This crossbow was specialy forged and enhanted to help novice soul cultivatiors to train their soulforce.  Still if situation calls for it it could be used as a normal range weapon.", "Crossbow",
 				PerkLib.Accuracy1,5,0,0,0);
+		public const WARDBOW:Wardensbow = new Wardensbow();
 		
 		/*
 		private static function mk(id:String,shortName:String,name:String,longName:String,verb:String,attack:Number,value:Number,description:String,perk:String=""):Weapon {

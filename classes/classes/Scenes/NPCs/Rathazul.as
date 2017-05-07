@@ -575,7 +575,7 @@ public function rathazulArmorMenu():void {
 		addButton(9, "Ascensus", chooseStaffWeapon, 13, null, null, weapons.ASCENSU.description);
 	}
 	if (player.hasItem(useables.WT_BRAN)) {
-		addButton(6, "W.T. Branch", craftWorldTreeWeapon, true);
+		addButton(10, "W.T. Branch", craftWorldTreeWeapon);
 	}
 	
 	addButton(14, "Back", returnToRathazulMenu);
@@ -1077,7 +1077,7 @@ private function craftWorldTreeWeapon():void {
 	menu();
 	addButton(0, "G.Sword", craftWorldTreeWeaponForReal, 21, null, null, weapons.WGSWORD.description);
 //	addButton(1, "Sword", craftWorldTreeWeaponForReal, 22, null, null, weapons.DSCLROB.description);
-//	addButton(2, "Bow", craftWorldTreeWeaponForReal, 23, null, null, weapons.INDEDSR.description);
+	addButton(2, "Bow", craftWorldTreeWeaponForReal, 23, null, null, weaponsrange.WARDBOW.description);
 //	addButton(3, "Staff", craftWorldTreeWeaponForReal, 24, null, null, weapons.DS_BRA.description);
 	addButton(14, "Nevermind", rathazulArmorMenu);
 }
@@ -1092,22 +1092,22 @@ private function craftWorldTreeWeaponForReal(type:int = 0):void {
 	switch(type) {
 		case 21: //G.Sword
 			outputText("The old rat cackles as he beckons you over to one of his small benches, procuring a sword. \"<i>It’s done. This should serve you quite well.</i>\" He hands you the sword and you take a moment to appraise it. It's... made of wood.  Will this truly stand up to the heat of battle?\n\n");
-			outputText("\"<i>Of course it will!  Not only is it flame resistant, but it also has regenerative properties. With all the treatments it's been through, it will be stronger and more resilient than most metals.</i>\" Your new greatsword is leaf shaped, perfectly balanced, and bears a soulmetal hilt. The grip looks like carved wood, but when you touch it, it feels slightly spongy. Overall, it looks unimpressive, but appearances can be deceiving. Beyond the somewhat simple, yet obscure appearance, you can feel Yggdrasil’s song resonate within the blade.  Perhaps you can use it to your advantage.");
+			outputText("\"<i>Of course it will!  Not only is it flame resistant, but it also has regenerative properties. With all the treatments it's been through, it will be stronger and more resilient than most metals.</i>\" Your new greatsword is leaf shaped, perfectly balanced, and bears a soulmetal hilt. The grip looks like carved wood, but when you touch it, it feels slightly spongy. Overall, it looks unimpressive, but appearances can be deceiving. Beyond the somewhat simple, yet obscure appearance, you can feel Yggdrasil’s song resonate within the blade.  Perhaps you can use it to your advantage.\n\n");
 			itype = weapons.WGSWORD;
 			break;
 		case 22: //Sword
 			outputText("The old rat cackles as he beckons you over to one of his small benches, procuring a sword. \"<i>It’s done. This should serve you quite well.</i>\" He hands you the sword and you take a moment to appraise it. It's... made of wood.  Will this truly stand up to the heat of battle?\n\n");
-			outputText("\"<i>Of course it will!  Not only is it flame resistant, but it also has regenerative properties. With all the treatments it's been through, it will be stronger and more resilient than most metals.</i>\" Your new sword is leaf shaped, perfectly balanced, and bears a soulmetal hilt. The grip looks like carved wood, but when you touch it, it feels slightly spongy. Overall, it looks unimpressive, but appearances can be deceiving. Beyond the somewhat simple, yet obscure appearance, you can feel Yggdrasil’s song resonate within the blade.  Perhaps you can use it to your advantage.");
+			outputText("\"<i>Of course it will!  Not only is it flame resistant, but it also has regenerative properties. With all the treatments it's been through, it will be stronger and more resilient than most metals.</i>\" Your new sword is leaf shaped, perfectly balanced, and bears a soulmetal hilt. The grip looks like carved wood, but when you touch it, it feels slightly spongy. Overall, it looks unimpressive, but appearances can be deceiving. Beyond the somewhat simple, yet obscure appearance, you can feel Yggdrasil’s song resonate within the blade.  Perhaps you can use it to your advantage.\n\n");
 		//	itype = weapons.EW_CORS;
 			break;
 		case 23: //Bow
 			outputText("The old rat cackles as he beckons you over to one of his small benches, procuring a bow. \"<i>It’s done. This should serve you quite well.</i>\" He hands you the bow and you take a moment to appraise it. You identify this weapon as a recurve bow, which tend to be more powerful than normal bows of their size. It dawns on you that the recurves seem...  exaggerated.\n\n");
-			outputText("\"<i>Don’t worry about the recurves. The bow, for lack of a better explanation, seems to shift to comply with your desires.</i>\" He hands you a bowstring (<i>\"treated spider silk, highest quality!</i>\") and you string the bow, noting that it is indeed far easier than the recurve would suggest. Under your fingers, you can feel the wood shift to its previous state, becoming sturdy enough to provide considerable power for every shot. Beyond the somewhat simple, yet obscure appearance, you can feel Yggdrasil’s song resonate within the bow.  Perhaps you can use it to your advantage.");
-		//	itype = weapons.EW_VEST;
+			outputText("\"<i>Don’t worry about the recurves. The bow, for lack of a better explanation, seems to shift to comply with your desires.</i>\" He hands you a bowstring (<i>\"treated spider silk, highest quality!</i>\") and you string the bow, noting that it is indeed far easier than the recurve would suggest. Under your fingers, you can feel the wood shift to its previous state, becoming sturdy enough to provide considerable power for every shot. Beyond the somewhat simple, yet obscure appearance, you can feel Yggdrasil’s song resonate within the bow.  Perhaps you can use it to your advantage.\n\n");
+			itype = weaponsrange.WARDBOW;
 			break;
 		case 24: //Staff
 			outputText("The old rat cackles as he beckons you over to one of his small benches, procuring a staff. \"<i>It’s done. This should serve you quite well.</i>\" He hands you the staff and you take a moment to appraise it. The staff is straight, though somewhat gnarled and generally ordinary looking up until the tip. There is a clear crystal at the top, encased in rootlike tendrils that seem to have grown out of the staff’s body. It pulses softly, the gem glowing with a soft prismatic light.\n\n");
-			outputText("\"<i>Most staves are good for either magic or soul channeling, you should take the demons by surprise when you wield both side by side.</i>\" Beyond the somewhat simple, yet obscure appearance, you can feel Yggdrasil’s song resonate within the staff.  Perhaps you can use it to your advantage.");
+			outputText("\"<i>Most staves are good for either magic or soul channeling, you should take the demons by surprise when you wield both side by side.</i>\" Beyond the somewhat simple, yet obscure appearance, you can feel Yggdrasil’s song resonate within the staff.  Perhaps you can use it to your advantage.\n\n");
 		//	itype = weapons.EW_JOCK;
 			break;
 		default:

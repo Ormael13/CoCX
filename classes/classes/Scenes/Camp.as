@@ -1810,6 +1810,11 @@ public function rest():void {
 			if (timeQ != 1) outputText("You head into your cabin to rest. You lie down on your bed to rest for " + num2Text(timeQ) + " hours.\n", false);
 			else outputText("You head into your cabin to rest. You lie down on your bed to rest for an hour.\n", false);
 		}
+		else if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER)
+		{
+			if (timeQ != 1) outputText("You lie down in your pitcher, closing off your petals as you get comfortable for " + num2Text(timeQ) + " hours.\n", false);
+			else outputText("You lie down in your pitcher, closing off your petals as you get comfortable for an hour.\n", false);
+		}
 		else 
 		{
 			if (timeQ != 1) outputText("You lie down to rest for " + num2Text(timeQ) + " hours.\n", false);
@@ -1858,25 +1863,11 @@ public function doWait():void {
 	var fatRecovery:Number = 2;
 	if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatRecovery *= 1.5;
 	if (player.findPerk(PerkLib.ControlledBreath) >= 0) fatRecovery *= 1.1;
-	/*
-	var soulmultiplier:Number = 0;
-	var soulRecovery:Number = 2;
-	if (player.findPerk(PerkLib.JobSoulCultivator) >= 0)
-		soulmultiplier += 1;
-	if (player.findPerk(PerkLib.SoulApprentice) >= 0)
-		soulmultiplier += 1;
-	if (player.findPerk(PerkLib.SoulPersonage) >= 0)
-		soulmultiplier += 1;
-	if (player.findPerk(PerkLib.SoulWarrior) >= 0)
-		soulmultiplier += 1;
-	if (player.findPerk(PerkLib.SoulSprite) >= 0)
-		soulmultiplier += 1;
-	player.soulforce += (timeQ * soulRecovery * soulmultiplier);
-	*/
 	if (timeQ == 0) {
 		timeQ = 4;
 		if (flags[kFLAGS.SHIFT_KEY_DOWN] > 0) timeQ = 21 - model.time.hours;
-		outputText("You wait " + num2Text(timeQ) + " hours...\n", false);
+		if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) outputText("You lie down in your pitcher, closing off your petals as you get comfortable for " + num2Text(timeQ) + " hours...\n", false);
+		else outputText("You wait " + num2Text(timeQ) + " hours...\n", false);
 		//Marble withdrawl
 		if(player.hasStatusAffect(StatusAffects.MarbleWithdrawl)) {
 			outputText("\nYour time spent waiting is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
@@ -2112,6 +2103,9 @@ public function sleepRecovery(display:Boolean = false):void {
 	//Starved goo armor
 	if (player.armor == armors.GOOARMR && flags[kFLAGS.VALERIA_FLUIDS] <= 0) {
 		outputText("\nYou feel the fluid-starved goo rubbing all over your groin as if Valeria wants you to feed her.\n");
+	}
+	if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) {
+		outputText("You lie down in your pitcher, dozing off for the night as you close off your petals to sleep.\n", false);
 	}
 	//REGULAR HP/FATIGUE RECOVERY
 	HPChange(timeQ * hpRecovery * multiplier, display);
