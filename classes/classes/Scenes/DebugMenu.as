@@ -498,7 +498,6 @@ import classes.BodyParts.SkinLayer;
 			var N:int = 12;
 			for (var i:int = N * page; i < constants.length && i < (page + 1) * N; i++) {
 				var e:* = constants[i];
-				if (!e) continue;
 				if (!(e is Array)) e = [i,e];
 				addButton(i % N, e[1], curry(functionPageIndex, page, e[0]));
 			}
@@ -618,7 +617,7 @@ import classes.BodyParts.SkinLayer;
 			"rainbow", "seven-colored",
 		];
 		private static const HAIR_LENGTH_CONSTANTS:Array = [
-			[0,""],[0.5,"0.5"],1,2,4,
+			0,0.5,1,2,4,
 			8,12,24,32,40,
 			64,72
 		];
@@ -687,7 +686,7 @@ import classes.BodyParts.SkinLayer;
 			showChangeOptions(bodyPartEditorSkin, page, HAIR_COLOR_CONSTANTS, changeHairColor);
 		}
 		private function changeHairLength(page:int=0,setIdx:int=-1):void {
-			if (setIdx>=0) player.beardLength = HAIR_LENGTH_CONSTANTS[setIdx];
+			if (setIdx>=0) player.hairLength = HAIR_LENGTH_CONSTANTS[setIdx];
 			menu();
 			dumpPlayerData();
 			showChangeOptions(bodyPartEditorSkin, page, HAIR_LENGTH_CONSTANTS, changeHairLength);
@@ -833,7 +832,7 @@ import classes.BodyParts.SkinLayer;
 			[BEARD_MOUNTAINMAN,"(3) MOUNTAINMAN"],
 		];
 		private static const BEARD_LENGTH_CONSTANTS:Array = [
-			[0,""],[0.1,"0.1"],[0.3,"0.3"],2,4,
+			0,0.1,0.3,2,4,
 			8,12,16,32,64,
 		];
 		private function changeFaceType(page:int=0,setIdx:int=-1):void {
@@ -993,7 +992,7 @@ import classes.BodyParts.SkinLayer;
 			[TAIL_TYPE_YGGDRASIL, "(32) YGGDRASIL"],
 		];
 		private static const TAIL_COUNT_CONSTANTS:Array = [
-			0,1,2,3,4,
+			[0,"0"],1,2,3,4,
 			5,6,7,8,9,
 			10,16
 		];
