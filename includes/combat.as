@@ -523,20 +523,44 @@ public function basemeleeattacks():void {
 	}
 	if (player.weaponPerk != "Large" && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && !isWieldingRangedWeapon()) {
 		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
-			if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 5) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 6;
-			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 4) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 5;
-			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 3) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 4;
+			if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 5) {
+				if (player.hasStatusAffect(StatusAffects.BladeDance)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 12;
+				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 6;
+			}
+			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 4) {
+				if (player.hasStatusAffect(StatusAffects.BladeDance)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 10;
+				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 5;
+			}
+			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 3) {
+				if (player.hasStatusAffect(StatusAffects.BladeDance)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 8;
+				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 4;
+			}
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 2) {
-				if (player.findPerk(PerkLib.TripleAttack) >= 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
+				if (player.findPerk(PerkLib.TripleAttack) >= 0) {
+					if (player.hasStatusAffect(StatusAffects.BladeDance)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 6;
+					else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
+				}
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			}
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 1) {
-				if (player.findPerk(PerkLib.DoubleAttack) >= 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
+				if (player.findPerk(PerkLib.DoubleAttack) >= 0) {
+					if (player.hasStatusAffect(StatusAffects.BladeDance)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 4;
+					else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
+				}
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			}
-			else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+			else {
+				if (player.hasStatusAffect(StatusAffects.BladeDance)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
+				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+			}
 			var mutlimeleeattacksCost:Number = 0;
 			//multiple melee attacks costs
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 12) mutlimeleeattacksCost += 385;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 11) mutlimeleeattacksCost += 325;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 10) mutlimeleeattacksCost += 270;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 9) mutlimeleeattacksCost += 220;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 8) mutlimeleeattacksCost += 170;
+			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 7) mutlimeleeattacksCost += 135;
 			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 6) mutlimeleeattacksCost += 100;
 			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 5) mutlimeleeattacksCost += 70;
 			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 4) mutlimeleeattacksCost += 45;
@@ -2573,29 +2597,125 @@ public function meleeattackdamage():void {
 		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) {
-		flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
-	//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
-		attack();
+		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
+		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
+			attack();
+		}
+		else {
+			if(monster.HP <= 0) doNext(endHpVictory);
+			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 3) {
-		flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
-	//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
-		attack();
+		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
+		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
+			attack();
+		}
+		else {
+			if(monster.HP <= 0) doNext(endHpVictory);
+			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 4) {
-		flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
-	//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
-		attack();
+		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
+		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
+			attack();
+		}
+		else {
+			if(monster.HP <= 0) doNext(endHpVictory);
+			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 5) {
-		flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
-	//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
-		attack();
+		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
+		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
+			attack();
+		}
+		else {
+			if(monster.HP <= 0) doNext(endHpVictory);
+			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+		}
 	}
 	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 6) {
-		flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
-	//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
-		attack();
+		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
+		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
+			attack();
+		}
+		else {
+			if(monster.HP <= 0) doNext(endHpVictory);
+			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+		}
+	}
+	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 7) {
+		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
+		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
+			attack();
+		}
+		else {
+			if(monster.HP <= 0) doNext(endHpVictory);
+			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+		}
+	}
+	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 8) {
+		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
+		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
+			attack();
+		}
+		else {
+			if(monster.HP <= 0) doNext(endHpVictory);
+			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+		}
+	}
+	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 9) {
+		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
+		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
+			attack();
+		}
+		else {
+			if(monster.HP <= 0) doNext(endHpVictory);
+			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+		}
+	}
+	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 10) {
+		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
+		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
+			attack();
+		}
+		else {
+			if(monster.HP <= 0) doNext(endHpVictory);
+			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+		}
+	}
+	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 11) {
+		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
+		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
+			attack();
+		}
+		else {
+			if(monster.HP <= 0) doNext(endHpVictory);
+			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+		}
+	}
+	if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 12) {
+		if (monster.HP > 0 && monster.lust < monster.eMaxLust()) {
+			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] -= 1;
+		//	flags[kFLAGS.ATTACKS_ACCURACY] += 15;
+			attack();
+		}
+		else {
+			if(monster.HP <= 0) doNext(endHpVictory);
+			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
+		}
 	}
 }
 //Mantis Omni Slash (AoE attack) 
@@ -3633,6 +3753,9 @@ private function combatStatusesUpdate():void {
 			if(!monster.plural) outputText("The effects of your aura are quite pronounced on " + monster.a + monster.short + " as " + monster.pronoun1 + " begins to shake and steal glances at your body.\n\n", false);
 			else outputText("The effects of your aura are quite pronounced on " + monster.a + monster.short + " as " + monster.pronoun1 + " begin to shake and steal glances at your body.\n\n", false);
 		}
+		monster.lust += monster.lustVuln * (2 + rand(4));
+	}
+	if(player.hasStatusAffect(StatusAffects.AlraunePollen)) {
 		monster.lust += monster.lustVuln * (2 + rand(4));
 	}
 	if(player.hasStatusAffect(StatusAffects.Bound) && flags[kFLAGS.PC_FETISH] >= 2) {
@@ -10189,6 +10312,10 @@ public function physicalSpecials():void {
 			addButton(button++, "Barrage", archerBarrage, null, null, null, "Draw multiple arrow and shoot them all at the same time to hit several target.  \n\n<b>AoE attack.</b>");
 		}
 	}
+	if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) {
+		if (!player.hasStatusAffect(StatusAffects.AlraunePollen)) addButton(button++, "AlraunePollen", AlraunePollen, null, null, null, "Release a cloud of your pollen in the air to arouse your foe.");
+		else if (player.hasStatusAffect(StatusAffects.AlraunePollen)) outputText("<b>You already spread your pollen over battlefield.</b>\n\n");
+	}
 	if (player.armType == ARM_TYPE_GARGOYLE && player.shield == ShieldLib.NOTHING && player.weaponPerk != "Large") {
 		if (!player.hasStatusAffect(StatusAffects.CooldownStoneClaw)) {
 			addButton(button++, "Stone Claw", StoneClawAttack, null, null, null, "Rend your foe using your sharp stone claw (available if you have no shield and use a one handed weapon).  \n\nWould go into cooldown after use for: 3 rounds");
@@ -11448,6 +11575,16 @@ public function shieldBash():void {
 	enemyAI();
 }
 
+public function AlraunePollen():void {
+	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+	var pollen:Number = monster.lustVuln * (2 + rand(4));
+	monster.lust += pollen;
+	outputText("You send a cloud of your pollen outward into the air, smiling lustfully at your opponent. Sneezing slightly as they inhale the potent pollen, they begin showing clear signs of arousal. Just how long can they resist coming to pollinate you now? Not for long, you hope. " + pollen + "");
+	outputText("\n\n");
+	player.createStatusAffect(StatusAffects.AlraunePollen,0,0,0,0);
+	enemyAI();
+}
+
 public function StoneClawAttack():void {
 	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 	clearOutput();
@@ -11456,7 +11593,6 @@ public function StoneClawAttack():void {
 		doNext(combatMenu);
 		return;
 	}
-	doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 	fatigue(60,1);
 	player.createStatusAffect(StatusAffects.CooldownStoneClaw,3,0,0,0);
@@ -11562,7 +11698,6 @@ public function TailSlamAttack():void {
 		doNext(combatMenu);
 		return;
 	}
-	doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 	fatigue(30,1);
 	player.createStatusAffect(StatusAffects.CooldownTailSlam,5,0,0,0);
@@ -11671,7 +11806,6 @@ public function WingBuffetAttack():void {
 		doNext(combatMenu);
 		return;
 	}
-	doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 	fatigue(30,1);
 	player.createStatusAffect(StatusAffects.CooldownWingBuffet,5,0,0,0);
@@ -11802,14 +11936,14 @@ public function soulforceSpecials():void {
 	if (player.weaponName == "Warden’s greatsword") {
 		addButton(13, "Beat of War", BeatOfWar, null, null, null, "Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.\n\nSoulforce cost: " + 50 * soulskillCost() * soulskillcostmulti());
 	}
-//	if (player.weaponName == "Warden’s greatsword") {
-//		addButton(13, "Blade Dance", BeatOfWar, null, null, null, "Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.\n\nSoulforce cost: " + 50 * soulskillCost() * soulskillcostmulti());
-//	}
+	if (player.weaponName == "Warden’s blade") {
+		addButton(13, "Blade Dance", BladeDance, null, null, null, "Attack twice (four times if double attack is active, six times if triple attack is active and etc.).\n\nSoulforce cost: " + 50 * soulskillCost() * (1 + flags[kFLAGS.DOUBLE_ATTACK_STYLE]));
+	}
 	if (player.weaponRangeName == "Warden’s bow") {
 		addButton(13, "ResonanceVolley", ResonanceVolley, null, null, null, "Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.\n\nSoulforce cost: 150");
 	}
 //	if (player.weaponName == "Warden’s greatsword") {
-//		addButton(13, "Beat of War", BeatOfWar, null, null, null, "Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.\n\nSoulforce cost: " + 50 * soulskillCost() * soulskillcostmulti());
+//		addButton(13, "AvatarOfTheSong", AvatarOfTheSong, null, null, null, "Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.\n\nSoulforce cost: " + 50 * soulskillCost() * soulskillcostmulti());
 //	}
 	addButton(14, "Back", combatMenu, false);
 }
@@ -12242,7 +12376,7 @@ public function BeatOfWar():void {
 	tempStr = temp;
 	//if(player.str + temp > 100) tempStr = 100 - player.str;
 	//if(player.tou + temp > 100) tempTou = 100 - player.tou;
-	player.changeStatusValue(StatusAffects.BeatOfWar,1,tempStr);
+	//player.changeStatusValue(StatusAffects.BeatOfWar,1,tempStr);
 	mainView.statsView.showStatUp('str');
 	// strUp.visible = true;
 	// strDown.visible = false;
@@ -12252,15 +12386,14 @@ public function BeatOfWar():void {
 }
 public function BladeDance():void {
 	clearOutput();
-	if (player.soulforce < 100 * soulskillCost() * soulskillcostmulti()) {
+	if (player.soulforce < 50 * soulskillCost() * (1 + flags[kFLAGS.DOUBLE_ATTACK_STYLE])) {
 		outputText("<b>Your current soulforce is too low.</b>");
 		doNext(combatMenu);
 		return;
 	}
 	outputText("You momentarily attune yourself to the song of the mother tree, and dance forward, darting your blade around your enemy.\n");
 	player.createStatusAffect(StatusAffects.BladeDance,0,0,0,0);
-	doNext(combatMenu);
-	return;
+	basemeleeattacks();
 }
 public function ResonanceVolley():void {
 	clearOutput();
@@ -12271,8 +12404,18 @@ public function ResonanceVolley():void {
 	}
 	outputText("You ready your bow, infusing it with a figment of soulforce. The energy awakens the wood’s connection to the world tree, causing the bow to pulse beneath your fingers.\n");
 	player.createStatusAffect(StatusAffects.ResonanceVolley,0,0,0,0);
-	doNext(combatMenu);
-	return;
+	fireBow();
+}
+public function AvatarOfTheSong():void {
+	clearOutput();
+	if (player.soulforce < 150) {
+		outputText("<b>Your current soulforce is too low.</b>");
+		doNext(combatMenu);
+		return;
+	}
+	outputText("You ready your bow, infusing it with a figment of soulforce. The energy awakens the wood’s connection to the world tree, causing the bow to pulse beneath your fingers.\n");
+	player.createStatusAffect(StatusAffects.ResonanceVolley,0,0,0,0);
+	fireBow();
 }
 /*
 //Mantis Omni Slash (AoE attack) - przerobić to na soulskilla zużywającego jak inne soulforce z rosnącym kosztem im wyższy lvl postaci ^^ owinno wciąż jakoś być powiązane z posiadaniem mantis arms czy też ulepszonych mantis arms (czyt. versji 2.0 tych ramion z TF bdącego soul evolution of Mantis) ^^

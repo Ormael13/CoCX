@@ -13,7 +13,32 @@ package classes.Items.Weapons
 		
 		public function Wardensblade() 
 		{
-			super("WGSword", "WardenGSword", "Warden’s greatsword", "a Warden’s greatsword", "slash", 30, 2400, "Wrought from alchemy, not the forge, this sword is made from sacred wood and resonates with Yggdrasil’s song.", "Large", PerkLib.DaoistsFocus, 0.4, 0, 0, 0);
+			super("WDBlade", "WardensBlade", "Warden’s blade", "a Warden’s blade", "slash", 15, 1200, "Wrought from alchemy, not the forge, this sword is made from sacred wood and resonates with Yggdrasil’s song.", "Daoist's Focus", PerkLib.DaoistsFocus, 0.4, 0, 0, 0);
+		}
+		
+		override public function get description():String {
+			var desc:String = _description;
+			//Type
+			desc += "\n\nType: Weapon (Sword)";
+			//Attack
+			desc += "\nAttack: " + String(attack);
+			//Value
+			desc += "\nBase value: " + String(value);
+			//Perk
+			desc += "\nSpecial: Daoist's Focus (+40% Soulskill Power)";
+			desc += "\nSpecial: Blade-Warden (enables Blade Dance soul skill)";
+			return desc;
+		}
+		
+		override public function playerEquip():Weapon {
+			while (game.player.findPerk(PerkLib.BladeWarden) >= 0) game.player.removePerk(PerkLib.BladeWarden);
+			game.player.createPerk(PerkLib.BladeWarden,0,0,0,0);
+			return super.playerEquip();
+		}
+		
+		override public function playerRemove():Weapon {
+			while (game.player.findPerk(PerkLib.BladeWarden) >= 0) game.player.removePerk(PerkLib.BladeWarden);
+			return super.playerRemove();
 		}
 		
 	}

@@ -1076,7 +1076,7 @@ private function craftWorldTreeWeapon():void {
 	outputText("You grimace at his words as the old rat runs his hands over the wood eagerly. \"<i>Don’t give me that look! I mean real, weaponizing treatments. With those we can turn this into a conduit for your own soulforce. I could even mold this into a <b>sword</b>, if you want me to.</i>\" Well, damn. Looks like you have plenty of options to choose from. Decisions, decisions...\n\n");
 	menu();
 	addButton(0, "G.Sword", craftWorldTreeWeaponForReal, 21, null, null, weapons.WGSWORD.description);
-//	addButton(1, "Sword", craftWorldTreeWeaponForReal, 22, null, null, weapons.DSCLROB.description);
+	addButton(1, "Sword", craftWorldTreeWeaponForReal, 22, null, null, weapons.WDBLADE.description);
 	addButton(2, "Bow", craftWorldTreeWeaponForReal, 23, null, null, weaponsrange.WARDBOW.description);
 //	addButton(3, "Staff", craftWorldTreeWeaponForReal, 24, null, null, weapons.DS_BRA.description);
 	addButton(14, "Nevermind", rathazulArmorMenu);
@@ -1098,7 +1098,7 @@ private function craftWorldTreeWeaponForReal(type:int = 0):void {
 		case 22: //Sword
 			outputText("The old rat cackles as he beckons you over to one of his small benches, procuring a sword. \"<i>It’s done. This should serve you quite well.</i>\" He hands you the sword and you take a moment to appraise it. It's... made of wood.  Will this truly stand up to the heat of battle?\n\n");
 			outputText("\"<i>Of course it will!  Not only is it flame resistant, but it also has regenerative properties. With all the treatments it's been through, it will be stronger and more resilient than most metals.</i>\" Your new sword is leaf shaped, perfectly balanced, and bears a soulmetal hilt. The grip looks like carved wood, but when you touch it, it feels slightly spongy. Overall, it looks unimpressive, but appearances can be deceiving. Beyond the somewhat simple, yet obscure appearance, you can feel Yggdrasil’s song resonate within the blade.  Perhaps you can use it to your advantage.\n\n");
-		//	itype = weapons.EW_CORS;
+			itype = weapons.WDBLADE;
 			break;
 		case 23: //Bow
 			outputText("The old rat cackles as he beckons you over to one of his small benches, procuring a bow. \"<i>It’s done. This should serve you quite well.</i>\" He hands you the bow and you take a moment to appraise it. You identify this weapon as a recurve bow, which tend to be more powerful than normal bows of their size. It dawns on you that the recurves seem...  exaggerated.\n\n");
