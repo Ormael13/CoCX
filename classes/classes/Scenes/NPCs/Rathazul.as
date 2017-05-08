@@ -1078,7 +1078,7 @@ private function craftWorldTreeWeapon():void {
 	addButton(0, "G.Sword", craftWorldTreeWeaponForReal, 21, null, null, weapons.WGSWORD.description);
 	addButton(1, "Sword", craftWorldTreeWeaponForReal, 22, null, null, weapons.WDBLADE.description);
 	addButton(2, "Bow", craftWorldTreeWeaponForReal, 23, null, null, weaponsrange.WARDBOW.description);
-//	addButton(3, "Staff", craftWorldTreeWeaponForReal, 24, null, null, weapons.DS_BRA.description);
+	addButton(3, "Staff", craftWorldTreeWeaponForReal, 24, null, null, weapons.WDSTAFF.description);
 	addButton(14, "Nevermind", rathazulArmorMenu);
 }
 private function craftWorldTreeWeaponForReal(type:int = 0):void {
@@ -1108,7 +1108,7 @@ private function craftWorldTreeWeaponForReal(type:int = 0):void {
 		case 24: //Staff
 			outputText("The old rat cackles as he beckons you over to one of his small benches, procuring a staff. \"<i>It’s done. This should serve you quite well.</i>\" He hands you the staff and you take a moment to appraise it. The staff is straight, though somewhat gnarled and generally ordinary looking up until the tip. There is a clear crystal at the top, encased in rootlike tendrils that seem to have grown out of the staff’s body. It pulses softly, the gem glowing with a soft prismatic light.\n\n");
 			outputText("\"<i>Most staves are good for either magic or soul channeling, you should take the demons by surprise when you wield both side by side.</i>\" Beyond the somewhat simple, yet obscure appearance, you can feel Yggdrasil’s song resonate within the staff.  Perhaps you can use it to your advantage.\n\n");
-		//	itype = weapons.EW_JOCK;
+			itype = weapons.WDSTAFF;
 			break;
 		default:
 			outputText("Something bugged! Please report this bug to Ormael.");

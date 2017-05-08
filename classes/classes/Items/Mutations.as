@@ -2164,7 +2164,7 @@ import classes.CockTypesEnum;
 				}
 				//Fertility boost
 				if (player.vaginas.length > 0 && player.fertility < 40) {
-					outputText("You feel your womb start to give off a pleasant warmth, instinctively knowing it has become more fertile. Plants <b>are</b> known for their fertility, and you <b>are</b> trying to become somewhat closer to them, so this was to be expected. Perhaps being as fertile as this once verdant land won’t be so bad. Might as well try to give the goddess a run for her money.\n\n", false);
+					outputText("\n\nYou feel your womb start to give off a pleasant warmth, instinctively knowing it has become more fertile. Plants <b>are</b> known for their fertility, and you <b>are</b> trying to become somewhat closer to them, so this was to be expected. Perhaps being as fertile as this once verdant land won’t be so bad. Might as well try to give the goddess a run for her money.", false);
 					player.fertility += 5;
 					changes++;
 				}
