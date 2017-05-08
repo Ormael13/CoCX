@@ -55,6 +55,7 @@ package classes.Items
 		public const W_STAFF:WizardsStaff = new WizardsStaff();
 		public const WARHAMR:HugeWarhammer = new HugeWarhammer();
 		public const WHIP   :Weapon = new Weapon("Whip   ", "Whip", "coiled whip", "a coiled whip", "whip-crack", 5, 200, "A coiled length of leather designed to lash your foes into submission.  There's a chance the bondage inclined might enjoy it!");
+		public const WDBLADE:Wardensblade = new Wardensblade();
 		public const WGSWORD:Wardensgreatsword = new Wardensgreatsword();
 		
 		/*

@@ -4775,6 +4775,9 @@ use namespace kGAMECLASS;
 			if(hasStatusAffect(StatusAffects.VioletPupilTransformation)) {
 				removeStatusAffect(StatusAffects.VioletPupilTransformation);
 			}
+			if(hasStatusAffect(StatusAffects.AlraunePollen)) {
+				removeStatusAffect(StatusAffects.AlraunePollen);
+			}
 			if(hasStatusAffect(StatusAffects.EzekielCurse) && flags[kFLAGS.EVANGELINE_AFFECTION] >= 3 && findPerk(PerkLib.EzekielBlessing) >= 0) {
 				removeStatusAffect(StatusAffects.EzekielCurse);
 			}

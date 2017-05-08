@@ -34,8 +34,8 @@ package classes.Scenes
 			outputText("-New Armors: Heretic‘s Garb (light, armor: 6, Wizard's and Daoist's Endurance perk, bulge compatibile), Ebonweave Heretic‘s Garb (light, armor: 20, Wizard's and Daoist's Endurance perk, bulge compatibile)\n");
 			outputText("-New Shield: Blasphemy (block: 1, 200 gems, increase spell power by 20% and increase power/lower cost of black magic by 15%)\n");
 			outputText("-New Ring: Medius Signet (200 gems, increase spell power by 20% and increase power/lower cost of white magic by 15%)\n");
-			outputText("-New Melee Weapons: Warden’s greatsword (large, atk: 30, Daoist's Focus and Strife-Warden perks), \n");
-			outputText("-New Range Weapon: ()\n");
+			outputText("-New Melee Weapons: Warden’s greatsword (large, atk: 30, Daoist's Focus and Strife-Warden perks), Warden’s blade (atk: 15, Daoist's Focus and Blade-Warden perks)\n");
+			outputText("-New Range Weapon: Warden’s Bow (atk: 20, +5% Acc, Daoist's Focus and Wild-Warden perks)\n");
 			outputText("-Swapped bonuses for Channeling and Spellpower perks. Magic bolt have scalling similar like melee attack but based on int. With perk Staff Channeling and using any staff as melee weapon m. blt will have added bonus for used weapon.\n");
 			outputText("-Charge Weapon, Charge Armor, Might, Blink spells moved to subpage of spells called Buffs and formula to count how strong effect each will have replaced part for PC intelligence with flat values based how many mage related perks PC have. Base power of each buff was slight increased.\n");
 			outputText("-Ceani affection meter added to stats page.\n");
@@ -90,17 +90,17 @@ package classes.Scenes
 			outputText("-New tier 2 wisdom lvl-up perk: Combo. Req. Job: Monk perk, 75+ wis and 50+ str. Effects: Second attack per turn using fist (weapon).\n");
 			outputText("-New tier 4 wisdom lvl-up perk: Combo Master: Monk. Req. Combo perk, 125+ wis and 100+ str. Effects: Third attack per turn using fist (weapon).\n");
 			outputText("-New tier 7 strength lvl-up perk: Rage. Req. Prestige Job: Berserker. Effects: when under effect of bersekrer or lustzerker each time PC attack and not get crit hit with melee attack/secial will gain 1 stack of rage. Max 5 stack of rage and each stack increase crit chance of next melee attack/special by 10%. After each succesful crit hit any existing Rage stacks are removed.\n");
-			outputText("-New weapon perks: Strife-Warden (enable use of Beat of War soulskill), , Wild-Warden (enable use of Resonance Volley soulskill), .\n");
+			outputText("-New weapon perks: Strife-Warden (enable use of Beat of War soulskill), Blade-Warden (enable use of Blade Dance soulskill), Wild-Warden (enable use of Resonance Volley soulskill), Mage-Warden (enable use of Avatar of the Song soulskill).\n");
 			outputText("-New Soulskill: Beat of War (Req. Warden’s greatsword equiped) Effect: Boost PC str by 15% of base value with each use. Stackable with other buffs.\n");
-			outputText("-New Soulskill:  (Req. Warden’s  equiped) Effect: \n");
+			outputText("-New Soulskill: Blade Dance (Req. Warden’s blade equiped) Effect: Doubles the amount of attacks for one round.\n");
 			outputText("-New Soulskill: Resonance Volley (Req. Warden’s bow equiped) Effect: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.\n");
+			outputText("-New Soulskill: Avatar of the Song (Req. Warden’s staff equiped) Effect: Doublecast Charged Weapon and Might. Casts blind if charged weapon is already active. Casts Heal if Might is already active.\n");
 			outputText("-Hooked Gauntlets and Spiked Gauntlet weapons are removed from pool of weapons working with mutliattack due to been put in same group of weapons that would benefits from perks affecting fists attacks.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-New hair type: Grass hair. Result of using Mara fruit. Hair TF for Mara fruit will be now have 50% to give leaf or grass hair.\n");
 			outputText("-Fixed bugs: Naming bug for demons, Too high normaly Goo score, Corrupted Marae fight.\n\n\n\n\n\n");/*ostatni punkt changelogu
-			outputText("-New Soulskill: Avatar of the Song (Req. Warden’s staff equiped) Effect: Doublecast Charged Weapon and Might. Casts blind if charged weapon is already active. Casts Heal if Might is already active.\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-\n");
 			outputText("-\n");
