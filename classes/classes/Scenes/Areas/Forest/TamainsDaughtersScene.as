@@ -59,7 +59,6 @@
 		public function timeChange():Boolean
 		{
 			pregnancy.pregnancyAdvance(); //Preg should be 7*24, ends at 0 to -48 --> 9*24, ends at 0
-			trace("\nTamani's Daughters time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (pregnancy.isPregnant && pregnancy.incubation == 0) {
 				flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] += flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT];
 				flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT] = 0;

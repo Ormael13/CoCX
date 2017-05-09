@@ -64,7 +64,6 @@ package classes.Scenes.Areas.Desert
 		public function timeChange():Boolean
 		{
 			pregnancy.pregnancyAdvance();
-			trace("\nPhylla time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (flags[kFLAGS.PHYLLA_EGG_LAYING] > 0 && rand(5) == 0 && flags[kFLAGS.ANT_KIDS] < 5000) flags[kFLAGS.ANT_KIDS]++;
 			if (model.time.hours > 23) {
 				//The pregnancyStore doesn't handle Phylla's ant eggs because they are continuous. The regular egg production is all handled here.

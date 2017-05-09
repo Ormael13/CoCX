@@ -65,7 +65,6 @@
 		{
 			var needNext:Boolean = false;
 			pregnancy.pregnancyAdvance();
-			trace("\nMinerva time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (pregnancy.incubation == 0 && pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) {
 				minervaPurification.minervaGivesBirth();
 				needNext = true;

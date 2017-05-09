@@ -66,7 +66,6 @@
 			var needNext:Boolean = false;
 			drainedByKath = false; //This var will only be set true after Kath licks Urta out - it stops you from going back immediately for more Urta sex
 			pregnancy.pregnancyAdvance();
-			trace("\nUrta time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (flags[kFLAGS.NEED_URTA_LETTER] == 1 && model.time.hours == 6) urtaPregs.getUrtaLetter(); //Urta Letters
 			if (pregnancy.incubation == 0 && (pregnancy.type == PregnancyStore.PREGNANCY_BEE_EGGS || PregnancyStore.PREGNANCY_DRIDER_EGGS)) {
 				pregnancy.knockUpForce(); //Silently clear Urta's egg pregnancy

@@ -55,7 +55,6 @@ Special abilities: A lightly corrupted creature with most of the corruption cent
 			var needNext:Boolean = false;
 			checkedMarbleMilk = 0;
 			pregnancy.pregnancyAdvance();
-			trace("\nMarble time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (player.hasStatusAffect(StatusAffects.CampMarble)) {
 				//Marble stuff pt I
 				if (flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] > 0) {

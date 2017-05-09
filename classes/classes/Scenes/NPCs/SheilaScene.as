@@ -90,7 +90,6 @@
 			if (model.time.hours > 23) {
 				if (flags[kFLAGS.SHEILA_CLOCK] < 0) flags[kFLAGS.SHEILA_CLOCK]++;
 			}
-			trace("\nShiela time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation);
 			return false;
 		}
 	

@@ -20,7 +20,6 @@
 		{
 			var needNext:Boolean = false;
 			pregnancy.pregnancyAdvance();
-			trace("\Kiha time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (pregnancy.isPregnant) {
 				if (kihaPregUpdate()) needNext = true;
 				if (pregnancy.incubation == 0) {

@@ -25,7 +25,6 @@ package classes.Scenes.Areas.Swamp
 		{
 			pregnancy.pregnancyAdvance();
 			if (pregnancy.isPregnant && pregnancy.incubation == 0) pregnancy.knockUpForce(); //Silently clear the spider morph's pregnancy if the player doesn't see the egg sac in time
-			trace("\nFemale Spidermorph time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			return false;
 		}
 	

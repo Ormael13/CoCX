@@ -36,6 +36,7 @@ import classes.BodyParts.SkinLayer;
 		}
 		
 		public function accessDebugMenu():void {
+			LogProfilingReport();
 			//buildArray();
 			if (!getGame().inCombat) {
 				hideMenus();

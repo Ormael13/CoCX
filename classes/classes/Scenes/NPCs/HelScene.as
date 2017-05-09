@@ -22,7 +22,6 @@ package classes.Scenes.NPCs{
 		{
 			checkedHeliaIsabellaThreesome = 0; //Make sure we test just once in timeChangeLarge
 			pregnancy.pregnancyAdvance();
-			trace("\nHelia time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event, false);
 			if (model.time.hours > 23) {
 				if (flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] > 0) flags[kFLAGS.HELSPAWN_GROWUP_COUNTER]++;
 				if (flags[kFLAGS.HEL_RAPED_TODAY] == 1) flags[kFLAGS.HEL_RAPED_TODAY] = 0;

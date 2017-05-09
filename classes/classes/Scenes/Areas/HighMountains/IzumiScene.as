@@ -396,7 +396,8 @@ package classes.Scenes.Areas.HighMountains
 				player.lib -= sac.value4;
 				
 				if (player.sens > 100) player.sens = 100;
-				if (player.spe > player.getMaxStats("spe")) player.spe = player.getMaxStats("spe");
+				var max:int = player.getMaxStats("spe");
+				if (player.spe > max) player.spe = max;
 				if (player.lib <= 0) player.lib = 1;
 				
 				showStatUp('spe');

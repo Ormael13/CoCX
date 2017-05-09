@@ -1,6 +1,7 @@
 ﻿import classes.BodyParts.Skin;
 import classes.Monster;
 import classes.Player;
+import classes.Scenes.API.FnHelpers;
 import classes.Scenes.Areas.Beach.Gorgon;
 import classes.Scenes.Areas.Desert.Naga;
 import classes.Scenes.Areas.HighMountains.Izumi;
@@ -2458,7 +2459,7 @@ public function attack():void {
 	else {
 		outputText("You hit " + monster.a + monster.short + "! ", false);
 		if (crit == true) {
-			outputText("<b>Criticalh! </b>");
+			outputText("<b>Critical! </b>");
 			if (player.hasStatusAffect(StatusAffects.Rage)) player.removeStatusAffect(StatusAffects.Rage);
 		}
 		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusAffect(StatusAffects.Berzerking) || player.hasStatusAffect(StatusAffects.Lustzerking))) {
@@ -6647,8 +6648,14 @@ public function spellHealEffect():void {
 	if (crit == true) outputText(" <b>*Critical Heal!*</b>", false);
 	HPChange(temp,false);
 }
-
-//(25) Might – increases strength/toughness by 5 * (Int / 10) * spellMod, up to a 
+/**
+ * Generates from (x1,x2,x3,y1,y2) log-scale parameters (a,b,c) that will return:
+ * y1= 10 at x1=  10
+ * y2= 55 at x2= 100
+ * y3=100 at x3=1000
+ */
+private static const MightABC:Object = FnHelpers.FN.buildLogScaleABC(10,100,1000,10,100);
+//(25) Might – increases strength/toughness by 5 * (Int / 10) * spellMod, up to a
 //maximum of 15, allows it to exceed the maximum.  Chance of backfiring 
 //and increasing lust by 15.
 public function spellMight(silent:Boolean = false):void {
@@ -6684,6 +6691,7 @@ public function spellMight(silent:Boolean = false):void {
 		if (MightBoost < 10) MightBoost = 10;
 		if (player.findPerk(PerkLib.JobEnchanter) >= 0) MightBoost *= 1.2;
 		MightBoost *= spellModBlack();
+		MightBoost = FnHelpers.FN.logScale(MightBoost,MightABC,10);
 		MightBoost = Math.round(MightBoost);
 		player.createStatusAffect(StatusAffects.Might,0,0,0,0);
 		temp = MightBoost;
@@ -6753,7 +6761,14 @@ public function spellMight(silent:Boolean = false):void {
 	return;
 }
 
-//(25) Blink – increases speed by 5 * (Int / 10) * spellMod, up to a 
+/**
+ * Generates from (x1,x2,x3,y1,y2) log-scale parameters (a,b,c) that will return:
+ * y1= 10 at x1=  10
+ * y2= 55 at x2= 100
+ * y3=100 at x3=1000
+ */
+private static const BlinkABC:Object = FnHelpers.FN.buildLogScaleABC(10,100,1000,10,100);
+//(25) Blink – increases speed by 5 * (Int / 10) * spellMod, up to a
 //maximum of 15, allows it to exceed the maximum.  Chance of backfiring 
 //and increasing lust by 15.
 public function spellBlink(silent:Boolean = false):void {
@@ -6790,6 +6805,7 @@ public function spellBlink(silent:Boolean = false):void {
 		BlinkBoost *= 1.2;
 		if (player.findPerk(PerkLib.JobEnchanter) >= 0) BlinkBoost *= 1.25;
 		BlinkBoost *= spellModBlack();
+		BlinkBoost = FnHelpers.FN.logScale(BlinkBoost,BlinkABC,10);
 		BlinkBoost = Math.round(BlinkBoost);
 		player.createStatusAffect(StatusAffects.Blink,0,0,0,0);
 		temp = BlinkBoost;
@@ -7142,6 +7158,13 @@ public function spellFireStorm():void {
 	else enemyAI();
 }
 
+/**
+ * Generates from (x1,x2,x3,y1,y2) log-scale parameters (a,b,c) that will return:
+ * y1= 10 at x1=  10
+ * y2= 55 at x2= 100
+ * y3=100 at x3=1000
+ */
+private static const ChargeWeaponABC:Object = FnHelpers.FN.buildLogScaleABC(10,100,1000,10,100);
 //(15) Charge Weapon – boosts your weapon attack value by 5 + (player.inte/10) * SpellMod till the end of combat.
 public function spellChargeWeapon(silent:Boolean = false):void {
 	var ChargeWeaponBoost:Number = 10;
@@ -7175,6 +7198,7 @@ public function spellChargeWeapon(silent:Boolean = false):void {
 	ChargeWeaponBoost *= 1.5;
 	if (player.findPerk(PerkLib.JobEnchanter) >= 0) ChargeWeaponBoost *= 1.2;
 	ChargeWeaponBoost *= spellModWhite();
+	ChargeWeaponBoost = FnHelpers.FN.logScale(ChargeWeaponBoost,ChargeWeaponABC,10);
 	ChargeWeaponBoost = Math.round(ChargeWeaponBoost);
 	if (silent) {
 		player.createStatusAffect(StatusAffects.ChargeWeapon,ChargeWeaponBoost,0,0,0);

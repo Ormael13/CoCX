@@ -17,8 +17,6 @@
 		public function timeChange():Boolean
 		{
 			pregnancy.pregnancyAdvance();
-			if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) trace("\nJoy time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation);
-			else trace("\nJojo time change: Time is " + model.time.hours + ", butt incubation: " + pregnancy.buttIncubation);
 			if (flags[kFLAGS.JOJO_COCK_MILKING_COOLDOWN] > 0) flags[kFLAGS.JOJO_COCK_MILKING_COOLDOWN]--;
 			if (player.hasStatusAffect(StatusAffects.NoJojo)) player.removeStatusAffect(StatusAffects.NoJojo);
 			if (pregnancy.isButtPregnant && pregnancy.buttIncubation == 0) {

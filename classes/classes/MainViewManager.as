@@ -333,6 +333,7 @@ package classes
 		// REFRESH
 		//------------
 		public function refreshStats():void {
+			Begin("MainViewManager","refreshStats");
 			var baseHeight:Number = 26;
 			var baseWidth:Number = 170;
 			//var universalAlpha:Number = 0.4;
@@ -341,6 +342,7 @@ package classes
 				initializeMarkers();
 			}
 			//showSoulforceBar()
+			Begin("MainViewManager","refreshStats.showHideBars");
 			showHungerBar();
 			showExperienceBar();
 			showMinLustBar();	
@@ -352,28 +354,43 @@ package classes
 				hidePrisonBar();
 				showExperienceBar();
 			}
+			End("MainViewManager","refreshStats.showHideBars");
+			Begin("MainViewManager","refreshStats.calc");
+			var maxes:Object = player.getAllMaxStats();
+			var maxStr:int        = maxes.str;
+			var maxTou:int        = maxes.tou;
+			var maxSpe:int        = maxes.spe;
+			var maxInt:int        = maxes.inte;
+			var maxLib:int        = maxes.lib;
+			var maxHP:Number      = player.maxHP();
+			var maxLust:Number    = player.maxLust();
+			var maxFatigue:Number = player.maxFatigue();
+			var maxHunger:Number  = player.maxHunger();
+			var requiredXP:int    = player.requiredXP();
+			End("MainViewManager","refreshStats.calc");
 			//Set bars
-			mainView.strBar.width = (player.str * (baseWidth / player.getMaxStats("str")));
-			mainView.touBar.width = (player.tou * (baseWidth / player.getMaxStats("tou")));
-			mainView.speBar.width = (player.spe * (baseWidth / player.getMaxStats("spe")));
-			mainView.inteBar.width = (player.inte * (baseWidth / player.getMaxStats("inte")));
-			mainView.libBar.width = (player.lib * (baseWidth / player.getMaxStats("lib")));
+			Begin("MainViewManager","refreshStats.bars");
+			mainView.strBar.width  = (player.str * (baseWidth / maxStr));
+			mainView.touBar.width  = (player.tou * (baseWidth / maxTou));
+			mainView.speBar.width  = (player.spe * (baseWidth / maxSpe));
+			mainView.inteBar.width = (player.inte * (baseWidth / maxInt));
+			mainView.libBar.width  = (player.lib * (baseWidth / maxLib));
 			mainView.sensBar.width = (player.sens * (baseWidth / 100));
-			mainView.corBar.width = (player.cor * (baseWidth / 100));
+			mainView.corBar.width  = (player.cor * (baseWidth / 100));
 
-			mainView.HPBar.width = ((player.HP / player.maxHP() * 100) * (baseWidth / 100));
-			mainView.lustBar.width = ((player.lust / player.maxLust() * 100) * (baseWidth / 100));
-			mainView.minLustBar.width = ((player.minLust() / player.maxLust() * 100) * (baseWidth / 100));
-			mainView.fatigueBar.width = ((player.fatigue / player.maxFatigue() * 100) * (baseWidth / 100));
+			mainView.HPBar.width      = ((player.HP / maxHP * 100) * (baseWidth / 100));
+			mainView.lustBar.width    = ((player.lust / maxLust * 100) * (baseWidth / 100));
+			mainView.minLustBar.width = ((player.minLust() / maxLust * 100) * (baseWidth / 100));
+			mainView.fatigueBar.width = ((player.fatigue / maxFatigue * 100) * (baseWidth / 100));
 			//mainView.soulforceBar.width = ((player.soulforce / player.maxSoulforce() * 100) * (baseWidth / 100));
 			
 			//Hunger bar
-			mainView.hungerBar.width = ((player.hunger / player.maxHunger() * 100) * (baseWidth / 100));
+			mainView.hungerBar.width = ((player.hunger / maxHunger * 100) * (baseWidth / 100));
 			//Experience bar.
 			if (!prison.inPrison) {
-				if (player.level < kGAMECLASS.levelCap) mainView.xpBar.width = (((player.XP / player.requiredXP()) * 100) * (baseWidth / 100));
+				if (player.level < kGAMECLASS.levelCap) mainView.xpBar.width = (((player.XP / requiredXP) * 100) * (baseWidth / 100));
 				else mainView.xpBar.width = (100 * (baseWidth / 100)); //Display XP bar at 100% if level is capped.
-				if (player.XP >= player.requiredXP()) mainView.xpBar.width = baseWidth; //Set to 100% if XP exceeds the requirement.
+				if (player.XP >= requiredXP) mainView.xpBar.width = baseWidth; //Set to 100% if XP exceeds the requirement.
 			}
 			//Prison bars
 			else {
@@ -381,7 +398,8 @@ package classes
 				mainView.willBar.width = (player.will * (baseWidth / 100));
 				mainView.obeyBar.width = (player.obey * (baseWidth / 100));
 			}
-			
+			End("MainViewManager","refreshStats.bars");
+			Begin("MainViewManager","refreshStats.stats");
 			mainView.strNum.text = String(Math.floor(player.str));
 			mainView.touNum.text = String(Math.floor(player.tou));
 			mainView.speNum.text = String(Math.floor(player.spe));
@@ -391,15 +409,15 @@ package classes
 			mainView.corNum.text = String(Math.floor(player.cor));
 			//Old interface is removed for now.
 			//if (flags[kFLAGS.USE_OLD_INTERFACE] <= 0) 
-			mainView.HPNum.text = Math.floor(player.HP) + "/" + Math.floor(player.maxHP());
+			mainView.HPNum.text = Math.floor(player.HP) + "/" + Math.floor(maxHP);
 			//else mainView.HPNum.text = "" + Math.floor(player.HP);
 			
 			//if (flags[kFLAGS.USE_OLD_INTERFACE] <= 0) 
-			mainView.lustNum.text = Math.floor(player.lust) + "/" + player.maxLust();
+			mainView.lustNum.text = Math.floor(player.lust) + "/" + maxLust;
 			//else mainView.lustNum.text = "" + Math.floor(player.lust);
 			
 			//if (flags[kFLAGS.USE_OLD_INTERFACE] <= 0) 
-			mainView.fatigueNum.text = Math.floor(player.fatigue) + "/" + player.maxFatigue();
+			mainView.fatigueNum.text = Math.floor(player.fatigue) + "/" + maxFatigue;
 			//else Math.floor(player.fatigue);
 			
 			/*if (player.findPerk(PerkLib.JobSoulCultivator) >= 0 && flags[kFLAGS.URTA_QUEST_STATUS] != 0.75 && flags[kFLAGS.USE_OLD_INTERFACE] <= 0) {
@@ -412,11 +430,13 @@ package classes
 			*/
 			if ((flags[kFLAGS.HUNGER_ENABLED] > 0 || prison.inPrison) && flags[kFLAGS.URTA_QUEST_STATUS] != 0.75 && flags[kFLAGS.USE_OLD_INTERFACE] <= 0) {
 				showHungerBar();
-				mainView.hungerNum.text = Math.floor(player.hunger) + "/" + player.maxHunger();
+				mainView.hungerNum.text = Math.floor(player.hunger) + "/" + maxHunger;
 			}
 			else {
 				hideHungerBar();
 			}
+			End("MainViewManager","refreshStats.stats");
+			Begin("MainViewManager","refreshStats.hacks");
 			if (prison.inPrison) {
 				showPrisonBar();
 				mainView.willNum.text = Math.floor(player.will) + ""; //"/" + 100;
@@ -428,7 +448,7 @@ package classes
 			}
 			//Display experience numbers.
 			mainView.levelNum.text = String(player.level);
-			if (player.level < kGAMECLASS.levelCap) mainView.xpNum.text = Math.floor(player.XP) + "/" + Math.floor(player.requiredXP());
+			if (player.level < kGAMECLASS.levelCap) mainView.xpNum.text = Math.floor(player.XP) + "/" + Math.floor(requiredXP);
 			else mainView.xpNum.text = "MAX";
 			mainView.gemsNum.text = addComma(Math.floor(player.gems)) + "";
 			
@@ -466,6 +486,8 @@ package classes
 			else mainView.advancementText.htmlText = "<b>Advancement</b>";
 			
 			//Time display
+			End("MainViewManager","refreshStats.hacks");
+			Begin("MainViewManager","refreshStats.time");
 			mainView.timeBG.alpha = 0;
 			var minutesDisplay:String = "";
 			if (model.time.minutes < 10) minutesDisplay = "0" + model.time.minutes;
@@ -485,9 +507,13 @@ package classes
 				}
 			}
 			//if (timeTextFormat != null) mainView.timeText.setTextFormat(timeTextFormat);
-			
+
+			End("MainViewManager","refreshStats.time");
+			Begin("MainViewManager","setTheme");
 			//Set theme!
 			setTheme();
+			End("MainViewManager","setTheme");
+			End("MainViewManager","refreshStats");
 		}
 		
 		//Show/hide stats bars.

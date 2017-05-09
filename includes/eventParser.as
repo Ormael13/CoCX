@@ -507,13 +507,26 @@ public function errorPrint(details:* = null):void
 //Argument is time passed.  Pass to event parser if nothing happens.
 // The time argument is never actually used atm, everything is done with timeQ instead...
 public function goNext(time:Number, needNext:Boolean):Boolean  {
+	Utils.Begin("eventParser","goNext",time);
+	var x:Boolean = goNextWrapped(time,needNext);
+	Utils.End("eventParser","goNext");
+	return x;
+}
+private function goNextWrapped(time:Number, needNext:Boolean):Boolean  {
 	//Update system time
 	//date = new Date();
 	//trace ("MONTH: " + date.month + " DATE: " + date.date + " MINUTES: " + date.minutes);
 	//clearOutput();
 	if (timeAwareLargeLastEntry >= 0) { //Finish calling timeChangeLarge before advancing the hour again
 		for (; timeAwareLargeLastEntry < _timeAwareClassList.length; timeAwareLargeLastEntry++) {
-			if (_timeAwareClassList[timeAwareLargeLastEntry].timeChangeLarge()) return true;
+			var item:TimeAwareInterface   = _timeAwareClassList[timeAwareLargeLastEntry];
+			var classname:String = flash.utils.getQualifiedClassName(item);
+			Utils.Begin("TimeAwareInterface", classname + ".timeChangeLarge");
+			if (item.timeChangeLarge()){
+				Utils.End("TimeAwareInterface", classname + ".timeChangeLarge");
+				return true;
+			}
+			Utils.End("TimeAwareInterface", classname + ".timeChangeLarge");
 		}
 		timeAwareLargeLastEntry = -1;
 	}
@@ -524,17 +537,21 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 		regeneration(false);
 		if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) soulforceregeneration(false);
 		//Inform all time aware classes that a new hour has arrived
-		for (var tac:int = 0; tac < _timeAwareClassList.length; tac++) if (_timeAwareClassList[tac].timeChange()) needNext = true;
+		for (var tac:int = 0; tac < _timeAwareClassList.length; tac++) {
+			item   = _timeAwareClassList[tac];
+			classname = flash.utils.getQualifiedClassName(item);
+			Utils.Begin("TimeAwareInterface", classname + ".timeChange");
+			if (item.timeChange()) needNext = true;
+			Utils.End("TimeAwareInterface", classname + ".timeChange");
+		}
 		if (model.time.hours > 23) {
 			model.time.hours = 0;
 			model.time.days++;
-		}
-		else if (model.time.hours == 21) {
+		} else if (model.time.hours == 21) {
 			if (flags[kFLAGS.LETHICE_DEFEATED] <= 0) outputText("\nThe sky darkens as a starless night falls.  The blood-red moon slowly rises up over the horizon.\n");
 			else outputText("\nThe sky darkens as a starry night falls.  The blood-red moon slowly rises up over the horizon.\n");
 			needNext = true;
-		}
-		else if (model.time.hours == 6) {
+		} else if (model.time.hours == 6) {
 			outputText("\nThe sky begins to grow brighter as the moon descends over distant mountains, casting a few last ominous shadows before they burn away in the light.\n");
 			needNext = true;
 		}
@@ -547,236 +564,34 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 		   of the clock, so any updates should happen in timeChange and any timeChangeLarge events need to make sure they cannot repeat within the same hour.
 		   In effect these are the same rules the existing code acted under. */
 		for (timeAwareLargeLastEntry = 0; timeAwareLargeLastEntry < _timeAwareClassList.length; timeAwareLargeLastEntry++) {
-			if (_timeAwareClassList[timeAwareLargeLastEntry].timeChangeLarge()) return true;
+			item   = _timeAwareClassList[timeAwareLargeLastEntry];
+			classname = flash.utils.getQualifiedClassName(item);
+			Utils.Begin("TimeAwareInterface", classname + ".timeChangeLarge");
+			if (item.timeChangeLarge()){
+				Utils.End("TimeAwareInterface", classname + ".timeChangeLarge");
+				return true;
+			}
+			Utils.End("TimeAwareInterface", classname + ".timeChangeLarge");
 		}
 		timeAwareLargeLastEntry = -1; //If this var is -1 then this function has called timeChangeLarge for all entries in the _timeAwareClassList
 
-		//IMP GANGBAAAAANGA
-		//The more imps you create, the more often you get gangraped.
-		temp = player.statusAffectv1(StatusAffects.BirthedImps) * 2;
-		if (temp > 7) temp = 7;
-		if (player.findPerk(PerkLib.PiercedLethite) >= 0) temp += 4;
-		if (player.inHeat) temp += 2;
-		if (vapula.vapulaSlave()) temp += 7;
-		//Reduce chance
-		if (flags[kFLAGS.CAMP_WALL_PROGRESS] > 0) temp /= 1 + (flags[kFLAGS.CAMP_WALL_PROGRESS] / 100);
-		if (flags[kFLAGS.CAMP_WALL_GATE] > 0) temp /= 2;
-		if (flags[kFLAGS.CAMP_WALL_SKULLS] > 0) temp *= 1 - (flags[kFLAGS.CAMP_WALL_SKULLS] / 100);
-		if (model.time.hours == 2) {
-			if (model.time.days % 30 == 0 && flags[kFLAGS.ANEMONE_KID] > 0 && player.hasCock() && flags[kFLAGS.ANEMONE_WATCH] > 0 && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 40) {
-				anemoneScene.goblinNightAnemone();
-				needNext = true;
-			}
-			else if (temp > rand(100) && !player.hasStatusAffect(StatusAffects.DefenseCanopy)) {
-				if (player.gender > 0 && (!player.hasStatusAffect(StatusAffects.JojoNightWatch) || !player.hasStatusAffect(StatusAffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !kihaFollower.followerKiha()) && !(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "")) && (flags[kFLAGS.IN_INGNAM] == 0 && flags[kFLAGS.IN_PRISON] == 0)) {
-					impScene.impGangabangaEXPLOSIONS();
-					doNext(playerMenu);
-					return true;
-				}
-				else if (flags[kFLAGS.KIHA_CAMP_WATCH] > 0 && kihaFollower.followerKiha()) {
-					outputText("\n<b>You find charred imp carcasses all around the camp once you wake.  It looks like Kiha repelled a swarm of the little bastards.</b>\n");
-					needNext = true;
-				}
-				else if (flags[kFLAGS.HEL_GUARDING] > 0 && helFollower.followerHel()) {
-					outputText("\n<b>Helia informs you over a mug of beer that she whupped some major imp asshole last night.  She wiggles her tail for emphasis.</b>\n");
-					needNext = true;
-				}
-				else if (player.gender > 0 && player.hasStatusAffect(StatusAffects.JojoNightWatch) && player.hasStatusAffect(StatusAffects.PureCampJojo)) {
-					outputText("\n<b>Jojo informs you that he dispatched a crowd of imps as they tried to sneak into camp in the night.</b>\n");
-					needNext = true;
-				}
-				else if (flags[kFLAGS.HOLLI_DEFENSE_ON] > 0 && flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4) {
-					outputText("\n<b>During the night, you hear distant screeches of surprise, followed by orgasmic moans.  It seems some imps found their way into Holli's canopy...</b>\n");
-					needNext = true;
-				}
-				else if (flags[kFLAGS.HOLLI_DEFENSE_ON] > 0 && flags[kFLAGS.FLOWER_LEVEL] == 4) {
-					outputText("\n<b>During the night, you hear distant screeches of surprise, followed by screams of pain.  It seems some imps found their way into Holli's canopy...</b>\n");
-					needNext = true;
-				}
-				else if (flags[kFLAGS.ANEMONE_WATCH] > 0) {
-					outputText("\n<b>Your sleep is momentarily disturbed by the sound of tiny clawed feet skittering away in all directions.  When you sit up, you can make out Kid A holding a struggling, concussed imp in a headlock and wearing a famished expression.  You catch her eye and she sheepishly retreats to a more urbane distance before beginning her noisy meal.</b>\n");
-					needNext = true;
-				}
-				else if(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "") && (player.inte / 5) >= rand(15)) {
-					outputText("\n<b>Your sleep is momentarily disturbed by the sound of imp hands banging against your cabin door. Fortunately, you've locked the door before you've went to sleep.</b>\n");
-					needNext = true;
-				}
-			}
-			//wormgasms
-			else if (flags[kFLAGS.EVER_INFESTED] == 1 && rand(100) <= 4 && player.hasCock() && !player.hasStatusAffect(StatusAffects.Infested)) {
-				if (player.hasCock() && (!player.hasStatusAffect(StatusAffects.JojoNightWatch) || !player.hasStatusAffect(StatusAffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && flags[kFLAGS.SLEEP_WITH] == "")) {
-					kGAMECLASS.mountain.wormsScene.nightTimeInfestation();
-					return true;
-				}
-				else if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && flags[kFLAGS.SLEEP_WITH] == "") {
-					outputText("\n<b>You hear the sound of a horde of worms banging against the door. Good thing you locked it before you went to sleep!</b>\n");
-					needNext
-				}
-				else if (flags[kFLAGS.HEL_GUARDING] > 0 && helFollower.followerHel()) {
-					outputText("\n<b>Helia informs you over a mug of beer that she stomped a horde of gross worms into paste.  She shudders after at the memory.</b>\n");
-					needNext = true;
-				}
-				else if (player.gender > 0 && player.hasStatusAffect(StatusAffects.JojoNightWatch) && player.hasStatusAffect(StatusAffects.PureCampJojo)) {
-					outputText("\n<b>Jojo informs you that he dispatched a horde of tiny, white worms as they tried to sneak into camp in the night.</b>\n");
-					needNext = true;
-				}
-				else if (flags[kFLAGS.ANEMONE_WATCH] > 0) {
-					outputText("\n<b>Kid A seems fairly well fed in the morning, and you note a trail of slime leading off in the direction of the lake.</b>\n"); // Yeah, blah blah travel weirdness. Quickfix so it seems logically correct.
-					needNext = true;
-				}
-			}
-		}
-		//No diapause?  Normal!
-		if (player.findPerk(PerkLib.Diapause) < 0) {
-			if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-			if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-				flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-				return true;
-			}
-			//DOUBLE PREGGERS SPEED
-			if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0) {
-				if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-			}
-			//DOUBLE PREGGERS SPEED
-			if (player.findPerk(PerkLib.MagicalFertility) >= 0) {
-				if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-			}
-			if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-				flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-				return true;
-			}
-			if (player.findPerk(PerkLib.FerasBoonBreedingBitch) >= 0) {
-				if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-			}
-			if (player.findPerk(PerkLib.FerasBoonWideOpen) >= 0 || player.findPerk(PerkLib.FerasBoonMilkingTwat) >= 0) {
-				if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-			}
-			if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-				flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-				return true;
-			}
-			//DOUBLE PREGGERS SPEED
-			if (player.findPerk(PerkLib.BroodMother) >= 0) {
-				if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-			}
-			if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-				flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-				return true;
-			}
-		}
-		//Diapause!
-		else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] > 0 && (player.pregnancyIncubation > 0 || player.buttPregnancyIncubation > 0)) {
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] == 1) {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 0;
-				outputText("\n\nYour body reacts to the influx of nutrition, accelerating your pregnancy. Your belly bulges outward slightly.", false);
-				needNext = true;
-			}
-			if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-				flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-				return true;
-			}
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228]--;
-			if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-			if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-				flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-				return true;
-			}
-			if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-			if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-				flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-				return true;
-			}
-			if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-			if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-				flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-				return true;
-			}
-			//DOUBLE PREGGERS SPEED
-			if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0) {
-				if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-			}
-			//DOUBLE PREGGERS SPEED
-			if (player.findPerk(PerkLib.MagicalFertility) >= 0) {
-				if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-			}
-			if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-				flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-				return true;
-			}
-			if (player.findPerk(PerkLib.FerasBoonBreedingBitch) >= 0) {
-				if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-			}
-			if (player.findPerk(PerkLib.FerasBoonWideOpen) >= 0 || player.findPerk(PerkLib.FerasBoonMilkingTwat) >= 0) {
-				if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-			}
-			if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-				flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-				return true;
-			}
-			//DOUBLE PREGGERS SPEED
-			if (player.findPerk(PerkLib.BroodMother) >= 0) {
-				if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
-			}
-			if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
-				flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
-				return true;
-			}
-		}
-		//Egg loot!
-		if(player.hasStatusAffect(StatusAffects.LootEgg)) {
-			trace("EGG LOOT HAS");
-			if (!player.hasStatusAffect(StatusAffects.Eggs)) { //Handling of errors.
-				outputText("Oops, looks like something went wrong with the coding regarding gathering eggs after pregnancy. Hopefully this should never happen again. If you encounter this again, please let Kitteh6660 know so he can fix it.");
-				player.removeStatusAffect(StatusAffects.LootEgg);
-				doNext(playerMenu);
-				return true;
-			}
-			//default
-			var itypes:Array = [
-				[
-					consumables.BROWNEG,
-					consumables.PURPLEG,
-					consumables.BLUEEGG,
-					consumables.PINKEGG,
-					consumables.WHITEEG,
-					consumables.BLACKEG
-				],
-				[
-					consumables.L_BRNEG,
-					consumables.L_PRPEG,
-					consumables.L_BLUEG,
-					consumables.L_PNKEG,
-					consumables.L_WHTEG,
-					consumables.L_BLKEG
-				]
-			];
-			
-			var sEgg:ItemType = null;
-			
-			if (player.hasStatusAffect(StatusAffects.Eggs))
-			{
-				var size:int = player.statusAffectv2(StatusAffects.Eggs);
-				
-				if (size < 0 || size > 1) size = rand(2);
-				
-				var col:int = player.statusAffectv1(StatusAffects.Eggs);
-				
-				if (col < 0 || col > 5) col = rand(6);
-				
-				sEgg =  itypes[size][col];
-			}
-			else
-			{
-				sEgg = consumables.BROWNEG;
-			}
-			player.removeStatusAffect(StatusAffects.LootEgg);
-			player.removeStatusAffect(StatusAffects.Eggs);
-			trace("TAKEY NAU");
-			inventory.takeItem(sEgg, playerMenu);
-			return true;
-		}
-		// Benoit preggers update
-		if (flags[kFLAGS.FEMOIT_EGGS] > 0) flags[kFLAGS.FEMOIT_INCUBATION]--; // We're not capping it, we're going to use negative values to figure out diff events
+		Utils.Begin("eventParser","impGangBangProgress");
+		var igb:int = impGangBangProgress();
+		Utils.End("eventParser","impGangBangProgress");
+		if (igb==1) needNext = true;
+		if (igb==2) return true;
+
+		Utils.Begin("eventParser","pregnancyProgress");
+		igb = pregnancyProgress();
+		Utils.End("eventParser","pregnancyProgress");
+		if (igb==1) needNext = true;
+		if (igb==2) return true;
+
+		Utils.Begin("eventParser","eggLoot");
+		igb = eggLootProgress();
+		Utils.End("eventParser","eggLoot");
+		if (igb==1) needNext = true;
+		if (igb==2) return true;
 	}
 	
 	// Hanging the Uma massage update here, I think it should work...
@@ -902,6 +717,244 @@ public function goNext(time:Number, needNext:Boolean):Boolean  {
 	}
 	playerMenu();
 	return false;
+}
+// 0: nothing, 1: needNext, 2: return true
+private function eggLootProgress():int {
+	//Egg loot!
+	if(player.hasStatusAffect(StatusAffects.LootEgg)) {
+		trace("EGG LOOT HAS");
+		if (!player.hasStatusAffect(StatusAffects.Eggs)) { //Handling of errors.
+			outputText("Oops, looks like something went wrong with the coding regarding gathering eggs after pregnancy. Hopefully this should never happen again. If you encounter this again, please let Kitteh6660 know so he can fix it.");
+			player.removeStatusAffect(StatusAffects.LootEgg);
+			doNext(playerMenu);
+			return 2;
+		}
+		//default
+		var itypes:Array = [
+			[
+				consumables.BROWNEG,
+				consumables.PURPLEG,
+				consumables.BLUEEGG,
+				consumables.PINKEGG,
+				consumables.WHITEEG,
+				consumables.BLACKEG
+			],
+			[
+				consumables.L_BRNEG,
+				consumables.L_PRPEG,
+				consumables.L_BLUEG,
+				consumables.L_PNKEG,
+				consumables.L_WHTEG,
+				consumables.L_BLKEG
+			]
+		];
+
+		var sEgg:ItemType = null;
+
+		if (player.hasStatusAffect(StatusAffects.Eggs))
+		{
+			var size:int = player.statusAffectv2(StatusAffects.Eggs);
+
+			if (size < 0 || size > 1) size = rand(2);
+
+			var col:int = player.statusAffectv1(StatusAffects.Eggs);
+
+			if (col < 0 || col > 5) col = rand(6);
+
+			sEgg =  itypes[size][col];
+		}
+		else
+		{
+			sEgg = consumables.BROWNEG;
+		}
+		player.removeStatusAffect(StatusAffects.LootEgg);
+		player.removeStatusAffect(StatusAffects.Eggs);
+		trace("TAKEY NAU");
+		inventory.takeItem(sEgg, playerMenu);
+		return 2;
+	}
+	// Benoit preggers update
+	if (flags[kFLAGS.FEMOIT_EGGS] > 0) flags[kFLAGS.FEMOIT_INCUBATION]--; // We're not capping it, we're going to use negative values to figure out diff events
+	return 0;
+}
+// 0: nothing, 1: needNext, 2: return true
+private function pregnancyProgress():int {
+	var needNext:Boolean = false;
+	//No diapause?  Normal!
+	if (player.findPerk(PerkLib.Diapause) < 0) {
+		if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+		if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
+			flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
+			return 2;
+		}
+		//DOUBLE PREGGERS SPEED
+		if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0) {
+			if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+		}
+		//DOUBLE PREGGERS SPEED
+		if (player.findPerk(PerkLib.MagicalFertility) >= 0) {
+			if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+		}
+		if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
+			flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
+			return 2;
+		}
+		if (player.findPerk(PerkLib.FerasBoonBreedingBitch) >= 0) {
+			if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+		}
+		if (player.findPerk(PerkLib.FerasBoonWideOpen) >= 0 || player.findPerk(PerkLib.FerasBoonMilkingTwat) >= 0) {
+			if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+		}
+		if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
+			flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
+			return 2;
+		}
+		//DOUBLE PREGGERS SPEED
+		if (player.findPerk(PerkLib.BroodMother) >= 0) {
+			if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+		}
+		if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
+			flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
+			return 2;
+		}
+	}
+	//Diapause!
+	else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] > 0 && (player.pregnancyIncubation > 0 || player.buttPregnancyIncubation > 0)) {
+		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] == 1) {
+			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 0;
+			outputText("\n\nYour body reacts to the influx of nutrition, accelerating your pregnancy. Your belly bulges outward slightly.", false);
+			needNext = true;
+		}
+		if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
+			flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
+			return 2;
+		}
+		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228]--;
+		if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+		if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
+			flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
+			return 2;
+		}
+		if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+		if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
+			flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
+			return 2;
+		}
+		if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+		if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
+			flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
+			return 2;
+		}
+		//DOUBLE PREGGERS SPEED
+		if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0) {
+			if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+		}
+		//DOUBLE PREGGERS SPEED
+		if (player.findPerk(PerkLib.MagicalFertility) >= 0) {
+			if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+		}
+		if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
+			flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
+			return 2;
+		}
+		if (player.findPerk(PerkLib.FerasBoonBreedingBitch) >= 0) {
+			if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+		}
+		if (player.findPerk(PerkLib.FerasBoonWideOpen) >= 0 || player.findPerk(PerkLib.FerasBoonMilkingTwat) >= 0) {
+			if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+		}
+		if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
+			flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
+			return 2;
+		}
+		//DOUBLE PREGGERS SPEED
+		if (player.findPerk(PerkLib.BroodMother) >= 0) {
+			if (player.pregnancyAdvance()) needNext = true; //Make sure pregnancy texts aren't hidden
+		}
+		if (flags[kFLAGS.EVENT_PARSER_ESCAPE] == 1) {
+			flags[kFLAGS.EVENT_PARSER_ESCAPE] = 0;
+			return 2;
+		}
+	}
+	return needNext?1:0;
+}
+// 0: nothing, 1: needNext, 2: return true
+private function impGangBangProgress():int {
+	//IMP GANGBAAAAANGA
+	//The more imps you create, the more often you get gangraped.
+	temp = player.statusAffectv1(StatusAffects.BirthedImps) * 2;
+	if (temp > 7) temp = 7;
+	if (player.findPerk(PerkLib.PiercedLethite) >= 0) temp += 4;
+	if (player.inHeat) temp += 2;
+	if (vapula.vapulaSlave()) temp += 7;
+	//Reduce chance
+	if (flags[kFLAGS.CAMP_WALL_PROGRESS] > 0) temp /= 1 + (flags[kFLAGS.CAMP_WALL_PROGRESS] / 100);
+	if (flags[kFLAGS.CAMP_WALL_GATE] > 0) temp /= 2;
+	if (flags[kFLAGS.CAMP_WALL_SKULLS] > 0) temp *= 1 - (flags[kFLAGS.CAMP_WALL_SKULLS] / 100);
+	if (model.time.hours == 2) {
+		if (model.time.days % 30 == 0 && flags[kFLAGS.ANEMONE_KID] > 0 && player.hasCock() && flags[kFLAGS.ANEMONE_WATCH] > 0 && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 40) {
+			anemoneScene.goblinNightAnemone();
+			return 1;
+		} else if (temp > rand(100) && !player.hasStatusAffect(StatusAffects.DefenseCanopy)) {
+			if (player.gender > 0 && (!player.hasStatusAffect(StatusAffects.JojoNightWatch) || !player.hasStatusAffect(StatusAffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !kihaFollower.followerKiha()) && !(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "")) && (flags[kFLAGS.IN_INGNAM] == 0 && flags[kFLAGS.IN_PRISON] == 0)) {
+				impScene.impGangabangaEXPLOSIONS();
+				doNext(playerMenu);
+				return 2;
+			}
+			else if (flags[kFLAGS.KIHA_CAMP_WATCH] > 0 && kihaFollower.followerKiha()) {
+				outputText("\n<b>You find charred imp carcasses all around the camp once you wake.  It looks like Kiha repelled a swarm of the little bastards.</b>\n");
+				return 1;
+			}
+			else if (flags[kFLAGS.HEL_GUARDING] > 0 && helFollower.followerHel()) {
+				outputText("\n<b>Helia informs you over a mug of beer that she whupped some major imp asshole last night.  She wiggles her tail for emphasis.</b>\n");
+				return 1;
+			}
+			else if (player.gender > 0 && player.hasStatusAffect(StatusAffects.JojoNightWatch) && player.hasStatusAffect(StatusAffects.PureCampJojo)) {
+				outputText("\n<b>Jojo informs you that he dispatched a crowd of imps as they tried to sneak into camp in the night.</b>\n");
+				return 1;
+			}
+			else if (flags[kFLAGS.HOLLI_DEFENSE_ON] > 0 && flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4) {
+				outputText("\n<b>During the night, you hear distant screeches of surprise, followed by orgasmic moans.  It seems some imps found their way into Holli's canopy...</b>\n");
+				return 1;
+			}
+			else if (flags[kFLAGS.HOLLI_DEFENSE_ON] > 0 && flags[kFLAGS.FLOWER_LEVEL] == 4) {
+				outputText("\n<b>During the night, you hear distant screeches of surprise, followed by screams of pain.  It seems some imps found their way into Holli's canopy...</b>\n");
+				return 1;
+			}
+			else if (flags[kFLAGS.ANEMONE_WATCH] > 0) {
+				outputText("\n<b>Your sleep is momentarily disturbed by the sound of tiny clawed feet skittering away in all directions.  When you sit up, you can make out Kid A holding a struggling, concussed imp in a headlock and wearing a famished expression.  You catch her eye and she sheepishly retreats to a more urbane distance before beginning her noisy meal.</b>\n");
+				return 1;
+			}
+			else if(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "") && (player.inte / 5) >= rand(15)) {
+				outputText("\n<b>Your sleep is momentarily disturbed by the sound of imp hands banging against your cabin door. Fortunately, you've locked the door before you've went to sleep.</b>\n");
+				return 1;
+			}
+		}
+		//wormgasms
+		else if (flags[kFLAGS.EVER_INFESTED] == 1 && rand(100) <= 4 && player.hasCock() && !player.hasStatusAffect(StatusAffects.Infested)) {
+			if (player.hasCock() && (!player.hasStatusAffect(StatusAffects.JojoNightWatch) || !player.hasStatusAffect(StatusAffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && flags[kFLAGS.SLEEP_WITH] == "")) {
+				kGAMECLASS.mountain.wormsScene.nightTimeInfestation();
+				return 2;
+			}
+			else if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && flags[kFLAGS.SLEEP_WITH] == "") {
+				outputText("\n<b>You hear the sound of a horde of worms banging against the door. Good thing you locked it before you went to sleep!</b>\n");
+				return 1;
+			}
+			else if (flags[kFLAGS.HEL_GUARDING] > 0 && helFollower.followerHel()) {
+				outputText("\n<b>Helia informs you over a mug of beer that she stomped a horde of gross worms into paste.  She shudders after at the memory.</b>\n");
+				return 1;
+			}
+			else if (player.gender > 0 && player.hasStatusAffect(StatusAffects.JojoNightWatch) && player.hasStatusAffect(StatusAffects.PureCampJojo)) {
+				outputText("\n<b>Jojo informs you that he dispatched a horde of tiny, white worms as they tried to sneak into camp in the night.</b>\n");
+				return 1;
+			}
+			else if (flags[kFLAGS.ANEMONE_WATCH] > 0) {
+				outputText("\n<b>Kid A seems fairly well fed in the morning, and you note a trail of slime leading off in the direction of the lake.</b>\n"); // Yeah, blah blah travel weirdness. Quickfix so it seems logically correct.
+				return 1;
+			}
+		}
+	}
+	return 0;
 }
 
 public function cheatTime(time:Number, needNext:Boolean = false):void {

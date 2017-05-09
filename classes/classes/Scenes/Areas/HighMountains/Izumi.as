@@ -346,7 +346,8 @@ package classes.Scenes.Areas.HighMountains
 			{
 				// Can't use dynStats to achieve this, as it can give back more speed than we originally took away due to perks
 				player.spe += player.statusAffectv2(StatusAffects.Groundpound);
-				if (player.spe > player.getMaxStats("spe")) player.spe = player.getMaxStats("spe");
+				var max:int = player.getMaxStats("spe");
+				if (player.spe > max) player.spe = max;
 				
 				player.removeStatusAffect(StatusAffects.Groundpound);
 				

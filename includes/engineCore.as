@@ -613,42 +613,43 @@ public function levelUpGo(e:MouseEvent = null):void {
 
 //Attribute menu
 private function attributeMenu():void {
+	var maxes:Object = player.getAllMaxStats();
 	clearOutput();
 	outputText("You have <b>" + (player.statPoints) + "</b> left to spend.\n\n");
 	
 	outputText("Strength: ");
-	if (player.str < player.getMaxStats("str")) outputText("" + Math.floor(player.str) + " + <b>" + player.tempStr + "</b> → " + Math.floor(player.str + player.tempStr) + "\n");
+	if (player.str < maxes.str) outputText("" + Math.floor(player.str) + " + <b>" + player.tempStr + "</b> → " + Math.floor(player.str + player.tempStr) + "\n");
 	else outputText("" + Math.floor(player.str) + " (Maximum)\n");
 	
 	outputText("Toughness: ");
-	if (player.tou < player.getMaxStats("tou")) outputText("" + Math.floor(player.tou) + " + <b>" + player.tempTou + "</b> → " + Math.floor(player.tou + player.tempTou) + "\n");
+	if (player.tou < maxes.tou) outputText("" + Math.floor(player.tou) + " + <b>" + player.tempTou + "</b> → " + Math.floor(player.tou + player.tempTou) + "\n");
 	else outputText("" + Math.floor(player.tou) + " (Maximum)\n");
 	
 	outputText("Speed: ");
-	if (player.spe < player.getMaxStats("spe")) outputText("" + Math.floor(player.spe) + " + <b>" + player.tempSpe + "</b> → " + Math.floor(player.spe + player.tempSpe) + "\n");
+	if (player.spe < maxes.spe) outputText("" + Math.floor(player.spe) + " + <b>" + player.tempSpe + "</b> → " + Math.floor(player.spe + player.tempSpe) + "\n");
 	else outputText("" + Math.floor(player.spe) + " (Maximum)\n");
 	
 	outputText("Intelligence: ");
-	if (player.inte < player.getMaxStats("int")) outputText("" + Math.floor(player.inte) + " + <b>" + player.tempInt + "</b> → " + Math.floor(player.inte + player.tempInt) + "\n");
+	if (player.inte < maxes.inte) outputText("" + Math.floor(player.inte) + " + <b>" + player.tempInt + "</b> → " + Math.floor(player.inte + player.tempInt) + "\n");
 	else outputText("" + Math.floor(player.inte) + " (Maximum)\n");
 	
 	outputText("Wisdom: ");
-	if (player.wis < player.getMaxStats("wis")) outputText("" + Math.floor(player.wis) + " + <b>" + player.tempWis + "</b> → " + Math.floor(player.wis + player.tempWis) + "\n");
+	if (player.wis < maxes.wis) outputText("" + Math.floor(player.wis) + " + <b>" + player.tempWis + "</b> → " + Math.floor(player.wis + player.tempWis) + "\n");
 	else outputText("" + Math.floor(player.wis) + " (Maximum)\n");
 	
 	outputText("Libido: ");
-	if (player.lib < player.getMaxStats("lib")) outputText("" + Math.floor(player.lib) + " + <b>" + player.tempLib + "</b> → " + Math.floor(player.lib + player.tempLib) + "\n");
+	if (player.lib < maxes.lib) outputText("" + Math.floor(player.lib) + " + <b>" + player.tempLib + "</b> → " + Math.floor(player.lib + player.tempLib) + "\n");
 	else outputText("" + Math.floor(player.lib) + " (Maximum)\n");
 
 	menu();
 	//Add
 	if (player.statPoints > 0) {
-		if ((player.str + player.tempStr) < player.getMaxStats("str")) addButton(0, "Add STR", addAttribute, "str", null, null, "Add 1 point to Strength.", "Add Strength");
-		if ((player.tou + player.tempTou) < player.getMaxStats("tou")) addButton(1, "Add TOU", addAttribute, "tou", null, null, "Add 1 point to Toughness.", "Add Toughness");
-		if ((player.spe + player.tempSpe) < player.getMaxStats("spe")) addButton(2, "Add SPE", addAttribute, "spe", null, null, "Add 1 point to Speed.", "Add Speed");
-		if ((player.inte + player.tempInt) < player.getMaxStats("int")) addButton(3, "Add INT", addAttribute, "int", null, null, "Add 1 point to Intelligence.", "Add Intelligence");
-		if ((player.wis + player.tempWis) < player.getMaxStats("wis")) addButton(4, "Add WIS", addAttribute, "wis", null, null, "Add 1 point to Wisdom.", "Add Wisdom");
-		if ((player.lib + player.tempLib) < player.getMaxStats("lib")) addButton(10, "Add LIB", addAttribute, "lib", null, null, "Add 1 point to Libido.", "Add Libido");
+		if ((player.str + player.tempStr) < maxes.str) addButton(0, "Add STR", addAttribute, "str", null, null, "Add 1 point to Strength.", "Add Strength");
+		if ((player.tou + player.tempTou) < maxes.tou) addButton(1, "Add TOU", addAttribute, "tou", null, null, "Add 1 point to Toughness.", "Add Toughness");
+		if ((player.spe + player.tempSpe) < maxes.spe) addButton(2, "Add SPE", addAttribute, "spe", null, null, "Add 1 point to Speed.", "Add Speed");
+		if ((player.inte + player.tempInt) < maxes.inte) addButton(3, "Add INT", addAttribute, "int", null, null, "Add 1 point to Intelligence.", "Add Intelligence");
+		if ((player.wis + player.tempWis) < maxes.wis) addButton(4, "Add WIS", addAttribute, "wis", null, null, "Add 1 point to Wisdom.", "Add Wisdom");
+		if ((player.lib + player.tempLib) < maxes.lib) addButton(10, "Add LIB", addAttribute, "lib", null, null, "Add 1 point to Libido.", "Add Libido");
 	}
 	//Subtract
 	if (player.tempStr > 0) addButton(5, "Sub STR", subtractAttribute, "str", null, null, "Subtract 1 point from Strength.", "Subtract Strength");
@@ -2577,8 +2578,10 @@ public function invertGo():void{
  * Used to update the display of statistics
  */
 public function statScreenRefresh():void {
+	Utils.Begin("engineCore","statScreenRefresh");
 	mainView.statsView.show(); // show() method refreshes.
 	mainViewManager.refreshStats();
+	Utils.End("engineCore","statScreenRefresh");
 }
 /**
  * Show the stats pane. (Name, stats and attributes)
@@ -2871,14 +2874,15 @@ public function displayStats(e:MouseEvent = null):void
 	if (player.teaseLevel < 5)
 		combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / 5 (Exp: " + player.teaseXP + " / "+ (10 + (player.teaseLevel + 1) * 5 * (player.teaseLevel + 1))+ ")\n";
 	else
-		combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / 5 (Exp: MAX)\n";	
-	
-	combatStats += "<b>Strength Cap:</b> " + player.getMaxStats("str") + "\n";
-	combatStats += "<b>Toughness Cap:</b> " + player.getMaxStats("tou") + "\n";
-	combatStats += "<b>Speed Cap:</b> " + player.getMaxStats("spe") + "\n";
-	combatStats += "<b>Intelligence Cap:</b> " + player.getMaxStats("inte") + "\n";
-	combatStats += "<b>Wisdom Cap:</b> " + player.getMaxStats("wis") + "\n";
-	combatStats += "<b>Libido Cap:</b> " + player.getMaxStats("lib") + "\n";
+		combatStats += "<b>Tease Skill:</b>  " + player.teaseLevel + " / 5 (Exp: MAX)\n";
+
+	var maxes:Object = player.getAllMaxStats();
+	combatStats += "<b>Strength Cap:</b> " + maxes.str + "\n";
+	combatStats += "<b>Toughness Cap:</b> " + maxes.tou + "\n";
+	combatStats += "<b>Speed Cap:</b> " + maxes.spe + "\n";
+	combatStats += "<b>Intelligence Cap:</b> " + maxes.inte + "\n";
+	combatStats += "<b>Wisdom Cap:</b> " + maxes.wis + "\n";
+	combatStats += "<b>Libido Cap:</b> " + maxes.lib + "\n";
 	
 	if (combatStats != "")
 		outputText("<b><u>Combat Stats</u></b>\n" + combatStats, false);
@@ -3717,17 +3721,18 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 	//Keep stats in bounds
 	if(player.cor < 0) player.cor = 0;
 	if(player.cor > 100) player.cor= 100;
-	if(player.str > player.getMaxStats("str")) player.str = player.getMaxStats("str");
+	var maxes:Object = player.getAllMaxStats();
+	if(player.str > maxes.str) player.str = maxes.str;
 	if(player.str < 1) player.str = 1;
-	if(player.tou > player.getMaxStats("tou")) player.tou = player.getMaxStats("tou");
+	if(player.tou > maxes.tou) player.tou = maxes.tou;
 	if(player.tou < 1) player.tou = 1;
-	if(player.spe > player.getMaxStats("spe")) player.spe = player.getMaxStats("spe");
+	if(player.spe > maxes.spe) player.spe = maxes.spe;
 	if(player.spe < 1) player.spe = 1;
-	if(player.inte > player.getMaxStats("inte")) player.inte = player.getMaxStats("inte");
+	if(player.inte > maxes.inte) player.inte = maxes.inte;
 	if(player.inte < 1) player.inte = 1;
-	if(player.wis > player.getMaxStats("wis")) player.wis = player.getMaxStats("wis");
+	if(player.wis > maxes.wis) player.wis = maxes.wis;
 	if(player.wis < 1) player.wis = 1;
-	if(player.lib > player.getMaxStats("lib")) player.lib = player.getMaxStats("lib");
+	if(player.lib > maxes.lib) player.lib = maxes.lib;
 	if(player.lib < 0) player.lib = 0;
 	//Minimum libido. Rewritten.
 	var minLib:Number = 0;
@@ -3797,6 +3802,7 @@ public function stats(stre:Number, toug:Number, spee:Number, intel:Number, libi:
 }
 	
 public function showUpDown():void { //Moved from StatsView.
+	Utils.Begin("engineCore","showUpDown");
 	function _oldStatNameFor(statName:String):String {
 		return 'old' + statName.charAt(0).toUpperCase() + statName.substr(1);
 	}
@@ -3820,6 +3826,7 @@ public function showUpDown():void { //Moved from StatsView.
 			mainView.statsView.showStatDown(statName);
 		}
 	}
+	Utils.End("engineCore","showUpDown");
 }
 
 public function range(min:Number, max:Number, round:Boolean = false):Number 

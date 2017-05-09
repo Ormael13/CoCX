@@ -26,7 +26,6 @@
 			var needNext:Boolean = false;
 			checkedSophie = 0;
 			pregnancy.pregnancyAdvance();
-			trace("\nSophie time change: Time is " + model.time.hours + ", incubation: " + pregnancy.incubation + ", event: " + pregnancy.event);
 			if (flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] > 0) flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER]--;
 			if (flags[kFLAGS.SOPHIES_DAUGHTERS_DEBIMBOED] == 1 && sophieFollowerScene.sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 				sophieFollowerScene.sophieDaughterDebimboUpdate();

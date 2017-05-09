@@ -329,37 +329,81 @@ package classes.internals
 			return n + " " + pluralForm;
 		}
 
-		/* None of these functions are called anymore
-		// lazy(obj,arg1,...,argN)() = obj[arg1]...[argN]
-		public static function lazyIndex(obj:*,...args):Function{
-			return function():*{
-				while(args.length>0)
-					obj=obj[args.shift()];
-				return obj;
-			};
+		private static var PF_NAME:Array  = [];
+		private static var PF_START:Array = [];
+		private static var PF_ARGS:Array = [];
+		private static var PF_COUNT:Object  = {};
+		private static var PF_TIME:Object  = {};
+		private static var PF_DEPTH:int   = 0;
+		private static function shouldProfile(classname:String,methodName:String):Boolean {
+			return true;
 		}
-		// lazy2(func,arg1,...,argN)() = func()[arg1]...[argN]
-		public static function lazyCallIndex(func:Function,...args):Function{
-			var _args:Array = args.slice();
-			return function():*{
-				var obj:*=func();
-				var __args:Array = _args.slice();
-				while(__args.length>0)
-					obj=obj[__args.shift()];
-				return obj
-			};
+		private static function shouldReportProfiling(classname:String,origMethodName:String,dt:Number, pfcount:int):Boolean {
+			return dt > 100;
 		}
-		// lazy2(func,arg1,...,argN)(args2) = func()[arg1]...[argN](args2)
-		public static function lazyCallIndexCall(func:Function,...args):Function{
-			var _args:Array = args.slice();
-			return function (...fargs):*{
-				var obj:*=func();
-				var __args:Array = _args.slice();
-				while(__args.length>0)
-					obj=obj[__args.shift()];
-				return obj.apply(null,fargs);
-			};
+		public static function LogProfilingReport():void {
+			for (var key:String in PF_COUNT) {
+				var s:String = "[PROFILE] ";
+				s+= key;
+				var pfcount:int = PF_COUNT[key];
+				s += ", called " + pfcount + " times";
+				var pftime:* = PF_TIME[key];
+				s += ", total time ";
+				if (pftime > 10000) s += Math.floor(pftime/1000)+"s";
+				else s += pftime + "ms";
+				if (pftime>0 && pfcount>0) {
+					s += ", avg time " + (pftime / pfcount).toFixed(1) + "ms";
+				}
+				trace(s);
+			}
 		}
-		*/
+		public static function Begin(classname:String, methodName:String, ...rest:Array):void {
+			if (!shouldProfile(classname,methodName)) return;
+			methodName = classname+"."+methodName;
+			PF_NAME[PF_DEPTH] = methodName;
+			PF_START[PF_DEPTH] = new Date().getTime();
+			PF_ARGS[PF_DEPTH] = rest;
+			PF_COUNT[methodName] = (PF_COUNT[methodName]|0)+1;
+			PF_DEPTH++;
+		}
+		public static function End(classname:String, methodName:String):void {
+			if (!shouldProfile(classname,methodName)) return;
+			var origMethodName:String = methodName;
+			methodName = classname+"."+methodName;
+			var t1:Number   = new Date().getTime();
+			PF_DEPTH--;
+			while (PF_DEPTH>=0 && PF_NAME[PF_DEPTH]!=methodName) {
+				trace("[ERROR] Inconsistent callstack, expected '"+methodName+"', got '"+PF_NAME[PF_DEPTH]+"'("+
+					  PF_ARGS[PF_DEPTH].join()+")");
+				PF_DEPTH--;
+			}
+			if (PF_DEPTH < 0){
+				trace("[ERROR] Empty callstack, expected '"+methodName+"'");
+				PF_DEPTH = 0;
+				return;
+			}
+			var dt:Number = t1 - PF_START[PF_DEPTH];
+			PF_TIME[methodName] = (PF_TIME[methodName]|0)+dt;
+			var pfcount:int   = PF_COUNT[methodName];
+			var args:Array = PF_ARGS[PF_DEPTH];
+			if (shouldReportProfiling(classname,origMethodName,dt, pfcount)) {
+				var s:String = "[PROFILE] ";
+				for (var i:int=PF_DEPTH;i-->0;) s+="  ";
+				s+= methodName;
+				if (args.length>0) s+="("+args.join(", ")+")";
+				s += " " + dt + "ms";
+				if (pfcount > 1) {
+					s += ", called " + pfcount + " times";
+					var pftime:* = PF_TIME[methodName];
+					if (pftime>0) {
+						s += ", total time ";
+						if (pftime > 10000) s += Math.floor(pftime/1000)+"s";
+						else s += pftime + "ms";
+						s += ", avg time " + (pftime / pfcount).toFixed(1) + "ms";
+					}
+				}
+				trace(s);
+			}
+		}
 	}
 }

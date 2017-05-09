@@ -101,17 +101,58 @@ public class FnHelpers extends BaseContent {
 								bound:Boolean = true,
 								min:Number    = Number.NEGATIVE_INFINITY,
 								max:Number    = Number.POSITIVE_INFINITY):Function {
-		const factor:Number = (valueB - valueA) / (levelB - levelA);
-		return function():Number {
-			const x:Number = player.level;
-			if (bound) {
-				if (x <= levelA) return valueA;
-				if (x >= levelB) return valueB;
-			}
-			if (levelA == levelB) return (valueA+valueB)/2;
-			const y:Number = valueA + (x - levelA) * factor;
-			return Math.min(max,Math.max(min,y));
+		return function ():Number {
+			return lerp(player.level, levelA, levelB, valueA, valueB, bound, min, max);
 		}
+	}
+
+	/**
+	 * A linear interpolation of values xA..xB to yA..yB
+	 * - if bound==true (default), for x < xA returns xA, for x > xB returns xB
+	 * - if bound==false, continues the interpolation outside the xA..xB interval,
+	 * optionally capped between min and max
+	 */
+	public function lerp(x:Number, xA:int, xB:int, yA:Number, yB:Number,
+						 bound:Boolean = true, min:Number = Number.NEGATIVE_INFINITY, max:Number = Number.POSITIVE_INFINITY):Number {
+			if (bound) {
+			if (x <= xA) return yA;
+			if (x >= xB) return yB;
+			}
+		if (xA == xB) return (yA + yB) / 2;
+		const y:Number = yA + (x - xA) * (yB - yA) / (xB - xA);
+		return Math.min(max, Math.max(min, y));
+	}
+
+	/**
+	 * Solves
+	 *   a * ln(x1 - c) + b = y1
+	 *   a * ln(x2 - c) + b = y2 = (y3 + y1) / 2
+	 *   a * ln(x3 - c) + b = y3
+	 * for a,b,c
+	 * @return Object{a:Number,b:Number,c:Number}
+	 */
+	public function buildLogScaleABC(x1:Number, x2:Number, x3:Number, y1:Number, y3:Number):Object {
+		const dy:Number = (y3 - y1) / 2;
+		/*
+		 * subtract one equation from another
+		 * y3 - y2 = a * ln[(x3 - c) / (x2 - c)]
+		 * y2 - y1 = a * ln[(x2 - c) / (x1 - c)]
+		 * (x2 - c) / (x1 - c) = (x3 - c) / (x2 - c) = exp(dy / a)
+		 * x & c part reduces into c*(2*x2 - x1 - x3) = x2*x2 - x1*x3
+		 */
+		const c:Number = (x2 * x2 - x1 * x3) / (2 * x2 - x1 - x3);
+		const a:Number = dy / Math.log((x2 - c) / (x1 - c));
+		const b:Number = y1 - a*Math.log(x1 - c);
+		return {a:a,b:b,c:c};
+	}
+
+	/**
+	 * @param abc Object{a:Number,b:Number,c:Number}
+	 * @return a * ln(x - c) + b, clamped into [min..max]
+	 */
+	public function logScale(x:Number, abc:Object, min:Number = Number.NEGATIVE_INFINITY, max:Number = Number.POSITIVE_INFINITY):Number {
+		const y:Number = abc.a * Math.log(x - abc.c) + abc.b;
+		return Math.min(max, Math.max(min, y));
 	}
 
 	/**
