@@ -6334,6 +6334,9 @@ public function spellMod():Number {
 	if(player.findPerk(PerkLib.WizardsFocus) >= 0) {
 		mod += player.perkv1(PerkLib.WizardsFocus);
 	}
+	if(player.findPerk(PerkLib.WizardsAndDaoistsFocus) >= 0) {
+		mod += player.perkv1(PerkLib.WizardsAndDaoistsFocus);
+	}
 	if (player.findPerk(PerkLib.ChiReflowMagic) >= 0) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 	if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 	if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
@@ -6359,6 +6362,9 @@ public function spellModWhite():Number {
 	if(player.findPerk(PerkLib.WizardsFocus) >= 0) {
 		mod += player.perkv1(PerkLib.WizardsFocus);
 	}
+	if(player.findPerk(PerkLib.WizardsAndDaoistsFocus) >= 0) {
+		mod += player.perkv1(PerkLib.WizardsAndDaoistsFocus);
+	}
 	if (player.findPerk(PerkLib.ChiReflowMagic) >= 0) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 	if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 	if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
@@ -6383,6 +6389,9 @@ public function spellModBlack():Number {
 	}
 	if(player.findPerk(PerkLib.WizardsFocus) >= 0) {
 		mod += player.perkv1(PerkLib.WizardsFocus);
+	}
+	if(player.findPerk(PerkLib.WizardsAndDaoistsFocus) >= 0) {
+		mod += player.perkv1(PerkLib.WizardsAndDaoistsFocus);
 	}
 	if (player.findPerk(PerkLib.ChiReflowMagic) >= 0) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 	if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
@@ -6583,52 +6592,7 @@ public function spellHeal():void {
 		if(player.gender == 3) outputText(vaginaDescript(0) + " and " + player.multiCockDescriptLight() + " overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.", false);
 		dynStats("lib", .25, "lus", 15);
 	}
-	else {
-		temp = 0;
-		if (player.inte >= 21 && player.inte < 41) temp += (player.inte / 2 + rand((player.inte * 3) / 4));
-		if (player.inte >= 41 && player.inte < 61) temp += ((player.inte * 2) / 3 + rand(player.inte));
-		if (player.inte >= 61 && player.inte < 81) temp += ((player.inte * 5) / 6 + rand(player.inte * 1.25));
-		if (player.inte >= 81 && player.inte < 101) temp += (player.inte + rand(player.inte * 1.5));
-		if (player.inte >= 101 && player.inte < 151) temp += ((player.inte * 1.25) + rand(player.inte * 1.75));
-		if (player.inte >= 151 && player.inte < 201) temp += ((player.inte * 1.5) + rand(player.inte * 2));
-		if (player.inte >= 201 && player.inte < 251) temp += ((player.inte * 1.75) + rand(player.inte * 2.25));
-		if (player.inte >= 251 && player.inte < 301) temp += ((player.inte * 2) + rand(player.inte * 2.5));
-		if (player.inte >= 301 && player.inte < 351) temp += ((player.inte * 2.25) + rand(player.inte * 2.75));
-		if (player.inte >= 351 && player.inte < 401) temp += ((player.inte * 2.5) + rand(player.inte * 3));
-		if (player.inte >= 401 && player.inte < 451) temp += ((player.inte * 2.75) + rand(player.inte * 3.25));
-		if (player.inte >= 451 && player.inte < 501) temp += ((player.inte * 3) + rand(player.inte * 3.5));
-		if (player.inte >= 501 && player.inte < 551) temp += ((player.inte * 3.25) + rand(player.inte * 3.75));
-		if (player.inte >= 551 && player.inte < 601) temp += ((player.inte * 3.5) + rand(player.inte * 4));
-		if (player.inte >= 601 && player.inte < 651) temp += ((player.inte * 3.75) + rand(player.inte * 4.25));
-		if (player.inte >= 651 && player.inte < 701) temp += ((player.inte * 4) + rand(player.inte * 4.5));
-		if (player.inte >= 701 && player.inte < 751) temp += ((player.inte * 4.25) + rand(player.inte * 4.75));
-		if (player.inte >= 751 && player.inte < 801) temp += ((player.inte * 4.5) + rand(player.inte * 5));
-		if (player.inte >= 801 && player.inte < 851) temp += ((player.inte * 4.75) + rand(player.inte * 5.25));
-		if (player.inte >= 851 && player.inte < 901) temp += ((player.inte * 5) + rand(player.inte * 5.5));
-		if (player.inte >= 901 && player.inte < 951) temp += ((player.inte * 5.25) + rand(player.inte * 5.75));
-		if (player.inte >= 951) temp += ((player.inte * 5.5) + rand(player.inte * 6));
-		else temp += (player.inte/3 + rand(player.inte/2));
-		temp *= spellModBlack();
-		if (player.unicornScore() >= 5) temp *= ((player.unicornScore() - 4) * 0.5);
-		if (player.alicornScore() >= 6) temp *= ((player.alicornScore() - 5) * 0.5);
-		if (player.armorName == "skimpy nurse's outfit") temp *= 1.2;
-		//Determine if critical heal!
-		var crit:Boolean = false;
-		var critHeal:int = 5;
-		if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
-			if (player.inte <= 100) critHeal += (player.inte - 50) / 50;
-			if (player.inte > 100) critHeal += 10;
-		}
-		if (rand(100) < critHeal) {
-			crit = true;
-			temp *= 1.75;
-		}
-		temp = Math.round(temp);
-		outputText("You flush with success as your wounds begin to knit <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.", false);
-		if (crit == true) outputText(" <b>*Critical Heal!*</b>", false);
-		HPChange(temp,false);
-	}
-	
+	else spellHealEffect();	
 	outputText("\n\n", false);
 	statScreenRefresh();
 	flags[kFLAGS.SPELLS_CAST]++;
@@ -6636,6 +6600,52 @@ public function spellHeal():void {
 	if(player.lust >= player.maxLust()) doNext(endLustLoss);
 	else enemyAI();
 	return;
+}
+
+public function spellHealEffect():void {
+	temp = 0;
+	if (player.inte >= 21 && player.inte < 41) temp += (player.inte / 2 + rand((player.inte * 3) / 4));
+	if (player.inte >= 41 && player.inte < 61) temp += ((player.inte * 2) / 3 + rand(player.inte));
+	if (player.inte >= 61 && player.inte < 81) temp += ((player.inte * 5) / 6 + rand(player.inte * 1.25));
+	if (player.inte >= 81 && player.inte < 101) temp += (player.inte + rand(player.inte * 1.5));
+	if (player.inte >= 101 && player.inte < 151) temp += ((player.inte * 1.25) + rand(player.inte * 1.75));
+	if (player.inte >= 151 && player.inte < 201) temp += ((player.inte * 1.5) + rand(player.inte * 2));
+	if (player.inte >= 201 && player.inte < 251) temp += ((player.inte * 1.75) + rand(player.inte * 2.25));
+	if (player.inte >= 251 && player.inte < 301) temp += ((player.inte * 2) + rand(player.inte * 2.5));
+	if (player.inte >= 301 && player.inte < 351) temp += ((player.inte * 2.25) + rand(player.inte * 2.75));
+	if (player.inte >= 351 && player.inte < 401) temp += ((player.inte * 2.5) + rand(player.inte * 3));
+	if (player.inte >= 401 && player.inte < 451) temp += ((player.inte * 2.75) + rand(player.inte * 3.25));
+	if (player.inte >= 451 && player.inte < 501) temp += ((player.inte * 3) + rand(player.inte * 3.5));
+	if (player.inte >= 501 && player.inte < 551) temp += ((player.inte * 3.25) + rand(player.inte * 3.75));
+	if (player.inte >= 551 && player.inte < 601) temp += ((player.inte * 3.5) + rand(player.inte * 4));
+	if (player.inte >= 601 && player.inte < 651) temp += ((player.inte * 3.75) + rand(player.inte * 4.25));
+	if (player.inte >= 651 && player.inte < 701) temp += ((player.inte * 4) + rand(player.inte * 4.5));
+	if (player.inte >= 701 && player.inte < 751) temp += ((player.inte * 4.25) + rand(player.inte * 4.75));
+	if (player.inte >= 751 && player.inte < 801) temp += ((player.inte * 4.5) + rand(player.inte * 5));
+	if (player.inte >= 801 && player.inte < 851) temp += ((player.inte * 4.75) + rand(player.inte * 5.25));
+	if (player.inte >= 851 && player.inte < 901) temp += ((player.inte * 5) + rand(player.inte * 5.5));
+	if (player.inte >= 901 && player.inte < 951) temp += ((player.inte * 5.25) + rand(player.inte * 5.75));
+	if (player.inte >= 951) temp += ((player.inte * 5.5) + rand(player.inte * 6));
+	else temp += (player.inte/3 + rand(player.inte/2));
+	temp *= spellModBlack();
+	if (player.unicornScore() >= 5) temp *= ((player.unicornScore() - 4) * 0.5);
+	if (player.alicornScore() >= 6) temp *= ((player.alicornScore() - 5) * 0.5);
+	if (player.armorName == "skimpy nurse's outfit") temp *= 1.2;
+	//Determine if critical heal!
+	var crit:Boolean = false;
+	var critHeal:int = 5;
+	if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+	if (player.inte <= 100) critHeal += (player.inte - 50) / 50;
+		if (player.inte > 100) critHeal += 10;
+	}
+	if (rand(100) < critHeal) {
+		crit = true;
+		temp *= 1.75;
+	}
+	temp = Math.round(temp);
+	outputText("You flush with success as your wounds begin to knit <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.", false);
+	if (crit == true) outputText(" <b>*Critical Heal!*</b>", false);
+	HPChange(temp,false);
 }
 
 //(25) Might – increases strength/toughness by 5 * (Int / 10) * spellMod, up to a 
@@ -11577,10 +11587,10 @@ public function shieldBash():void {
 
 public function AlraunePollen():void {
 	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+	clearOutput();
 	var pollen:Number = monster.lustVuln * (2 + rand(4));
 	monster.lust += pollen;
-	outputText("You send a cloud of your pollen outward into the air, smiling lustfully at your opponent. Sneezing slightly as they inhale the potent pollen, they begin showing clear signs of arousal. Just how long can they resist coming to pollinate you now? Not for long, you hope. " + pollen + "");
-	outputText("\n\n");
+	outputText("You send a cloud of your pollen outward into the air, smiling lustfully at your opponent. Sneezing slightly as they inhale the potent pollen, they begin showing clear signs of arousal. Just how long can they resist coming to pollinate you now? Not for long, you hope. (" + pollen + ")\n\n");
 	player.createStatusAffect(StatusAffects.AlraunePollen,0,0,0,0);
 	enemyAI();
 }
@@ -11942,9 +11952,9 @@ public function soulforceSpecials():void {
 	if (player.weaponRangeName == "Warden’s bow") {
 		addButton(13, "ResonanceVolley", ResonanceVolley, null, null, null, "Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.\n\nSoulforce cost: 150");
 	}
-//	if (player.weaponName == "Warden’s greatsword") {
-//		addButton(13, "AvatarOfTheSong", AvatarOfTheSong, null, null, null, "Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.\n\nSoulforce cost: " + 50 * soulskillCost() * soulskillcostmulti());
-//	}
+	if (player.weaponName == "Warden’s staff") {
+		addButton(13, "AvatarOfTheSong", AvatarOfTheSong, null, null, null, "Doublecast Charged Weapon and Might. Casts blind if charged weapon is already active. Casts Heal if Might is already active.\n\nSoulforce cost: 200");
+	}
 	addButton(14, "Back", combatMenu, false);
 }
 
@@ -11977,6 +11987,7 @@ public function soulskillMod():Number {
 	if (player.level >= 42 && player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) modss += .1;
 	if (player.level >= 60) modss += .1;	//dostosować wymaganie poziomu do poziomu odbycia 6-in-9 a potem dodać "&& player.findPerk(PerkLib.perk po przejściu 9-in-9 heaven tribulation) >= 0"
 	if (player.findPerk(PerkLib.DaoistsFocus) >= 0) modss += player.perkv1(PerkLib.DaoistsFocus);
+	if (player.findPerk(PerkLib.WizardsAndDaoistsFocus) >= 0) modss += player.perkv2(PerkLib.WizardsAndDaoistsFocus);
 	if (player.findPerk(PerkLib.AscensionSpiritualEnlightenment) >= 0) modss *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
 	if (player.shieldName == "spirit focus") modss += .2;
 	return modss;
@@ -12376,12 +12387,12 @@ public function BeatOfWar():void {
 	tempStr = temp;
 	//if(player.str + temp > 100) tempStr = 100 - player.str;
 	//if(player.tou + temp > 100) tempTou = 100 - player.tou;
-	//player.changeStatusValue(StatusAffects.BeatOfWar,1,tempStr);
 	mainView.statsView.showStatUp('str');
 	// strUp.visible = true;
 	// strDown.visible = false;
 	player.str += player.statusAffectv1(StatusAffects.BeatOfWar);
 	statScreenRefresh();
+	outputText("You momentarily attune yourself to the song of the mother tree, and prepare to add a note of your own to it’s rhythm.\n\n");
 	basemeleeattacks();
 }
 public function BladeDance():void {
@@ -12391,7 +12402,7 @@ public function BladeDance():void {
 		doNext(combatMenu);
 		return;
 	}
-	outputText("You momentarily attune yourself to the song of the mother tree, and dance forward, darting your blade around your enemy.\n");
+	outputText("You momentarily attune yourself to the song of the mother tree, and dance forward, darting your blade around your enemy.\n\n");
 	player.createStatusAffect(StatusAffects.BladeDance,0,0,0,0);
 	basemeleeattacks();
 }
@@ -12402,20 +12413,48 @@ public function ResonanceVolley():void {
 		doNext(combatMenu);
 		return;
 	}
-	outputText("You ready your bow, infusing it with a figment of soulforce. The energy awakens the wood’s connection to the world tree, causing the bow to pulse beneath your fingers.\n");
+	outputText("You ready your bow, infusing it with a figment of soulforce. The energy awakens the wood’s connection to the world tree, causing the bow to pulse beneath your fingers.\n\n");
 	player.createStatusAffect(StatusAffects.ResonanceVolley,0,0,0,0);
 	fireBow();
 }
 public function AvatarOfTheSong():void {
 	clearOutput();
-	if (player.soulforce < 150) {
+	if (player.soulforce < 200) {
 		outputText("<b>Your current soulforce is too low.</b>");
 		doNext(combatMenu);
 		return;
 	}
-	outputText("You ready your bow, infusing it with a figment of soulforce. The energy awakens the wood’s connection to the world tree, causing the bow to pulse beneath your fingers.\n");
-	player.createStatusAffect(StatusAffects.ResonanceVolley,0,0,0,0);
-	fireBow();
+	outputText("You feel the song of the mother tree all around you, and using your staff as a beacon, you unify it with the flow of magic through your body,");
+	if (!player.hasStatusAffect(StatusAffects.Might)) {
+		outputText("drawing strength from it");
+		spellMight(true);
+		flags[kFLAGS.SPELLS_CAST]++;
+		spellPerkUnlock();
+	}
+	else {
+		outputText("feeling it mend your wounds");
+		fatigue(30, 8);
+		spellHealEffect();
+		flags[kFLAGS.SPELLS_CAST]++;
+		spellPerkUnlock();
+	}
+	if (!monster.hasStatusAffect(StatusAffects.Blind)) {
+		outputText(". The residual power ");
+		if (!player.hasStatusAffect(StatusAffects.ChargeWeapon)) {
+			outputText("makes your staff glow with barely contained energy");
+			spellChargeWeapon(true);
+			flags[kFLAGS.SPELLS_CAST]++;
+			spellPerkUnlock();
+		}
+		else {
+			outputText("makes your staff flare up, as the energy escapes as a radiant flash");
+			spellBlind();
+			flags[kFLAGS.SPELLS_CAST]++;
+			spellPerkUnlock();
+		}
+	}
+	outputText(".\n\n");
+	enemyAI();
 }
 /*
 //Mantis Omni Slash (AoE attack) - przerobić to na soulskilla zużywającego jak inne soulforce z rosnącym kosztem im wyższy lvl postaci ^^ owinno wciąż jakoś być powiązane z posiadaniem mantis arms czy też ulepszonych mantis arms (czyt. versji 2.0 tych ramion z TF bdącego soul evolution of Mantis) ^^
