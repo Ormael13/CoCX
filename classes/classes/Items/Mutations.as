@@ -10834,7 +10834,7 @@ import classes.CockTypesEnum;
 			var tone:Array = mystic ? ["dark", "ebony", "ashen", "sable", "milky white"] : ["tan", "olive", "light"];
 			//[Change Skin Type: remove fur or scales, change skin to Tan, Olive, or Light]
 			if (player.skin.hasFur()
-					&& player.skinType != SKIN_TYPE_TATTOED
+					&& !player.skin.hasMagicalTattoo()
 					&& !InCollection(player.furColor, KitsuneScene.basicKitsuneFur)
 					&& !InCollection(player.furColor, KitsuneScene.elderKitsuneColors)
 					&& !InCollection(player.furColor, ["orange and white", "black and white", "red and white", "tan", "brown"])
@@ -10861,7 +10861,7 @@ import classes.CockTypesEnum;
 			}
 			//[Change Skin Color: add "Tattoos"]
 			//From Tan, Olive, or Light skin tones
-			if (player.skinType == SKIN_TYPE_PLAIN && player.skinType != SKIN_TYPE_TATTOED && changes < changeLimit && rand(3) == 0) {
+			if (player.skin.base.type == SKIN_TYPE_PLAIN && !player.skin.hasMagicalTattoo() && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  You are caught by surprise when you are suddenly assaulted by a blinding flash issuing from areas of your skin, and when the spots finally clear from your vision, an assortment of glowing magical tattoos adorns your [skin].  The glow gradually fades, but the distinctive ");
 				if (mystic) outputText("angular");
 				else outputText("curved");
@@ -10870,7 +10870,7 @@ import classes.CockTypesEnum;
 			//		outputText("\n\n<b>Genetic Memory: Tattoed Skin - Memorized!</b>\n\n");
 			//		player.createStatusAffect(StatusAffects.UnlockedTattoed, 0, 0, 0, 0);
 			//	}
-				player.skinType = SKIN_TYPE_TATTOED;
+				player.skin.base.adj = "sexy tattooed";
 				changes++;
 			}
 			//Nipples Turn Back:

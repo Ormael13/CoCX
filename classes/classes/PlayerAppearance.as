@@ -541,7 +541,7 @@ public class PlayerAppearance extends BaseContent {
 		{
 			if(player.skinType == SKIN_TYPE_PLAIN)
 				outputText("A " + sackDescript() + " with " + ballsDescript() + " swings heavily under where a penis would normally grow.", false);
-			if(player.skinType == SKIN_TYPE_TATTOED)
+			if(player.skin.hasMagicalTattoo())
 				outputText("A " + sackDescript() + " covered by magical tattoo with " + ballsDescript() + " swings heavily under where a penis would normally grow.", false);
 			if(player.hasFur())
 				outputText("A fuzzy " + sackDescript() + " filled with " + ballsDescript() + " swings low under where a penis would normally grow.", false);
@@ -558,7 +558,7 @@ public class PlayerAppearance extends BaseContent {
 		{
 			if(player.skinType == SKIN_TYPE_PLAIN)
 				outputText("A " + sackDescript() + " with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
-			if(player.skinType == SKIN_TYPE_TATTOED)
+			if(player.skin.hasMagicalTattoo())
 				outputText("A " + sackDescript() + " covered by magical tattoo with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
 			if(player.hasFur())
 				outputText("A fuzzy " + sackDescript() + " filled with " + ballsDescript() + " swings low under your " + player.multiCockDescriptLight() + ".", false);
@@ -1341,7 +1341,7 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  You have no hair, only a thin layer of fur atop of your head.  ", false);
 			else {
 				outputText("  You are totally bald, showing only shiny " + player.skinTone + " " + player.skinDesc + "");
-				if(player.skinType == SKIN_TYPE_TATTOED) outputText(" covered with magical tattoo");
+				if(player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
 				outputText(" where your hair should be.", false);
 			}
 			if(player.earType == EARS_HORSE)
@@ -1474,7 +1474,7 @@ public class PlayerAppearance extends BaseContent {
 			}
 			if (player.skin.coverage<Skin.COVERAGE_COMPLETE) {
 				outputText("  Your face is human in shape and structure, with [skin]"+skinAndSomething);
-				if (player.skinType == SKIN_TYPE_TATTOED) {
+				if (player.skin.hasMagicalTattoo()) {
 					outputText(" covered with magical tattoo");
 					odd++;
 				}
@@ -1532,7 +1532,7 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  Your face is human in shape and structure, with [skin bases");
 				if (InCollection(player.skin.base.color, "ebony", "black"))
 					outputText(", though with your dusky hue, the black raccoon mask you sport isn't properly visible.");
-				else if (player.skinType == SKIN_TYPE_TATTOED) outputText(" covered with magical tattoo, though it is decorated with a sly-looking raccoon mask over your eyes.");
+				else if (player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo, though it is decorated with a sly-looking raccoon mask over your eyes.");
 				else outputText(", though it is decorated with a sly-looking raccoon mask over your eyes.");
 			} else { //appearance furscales
 				//(black/midnight furscales)
@@ -1547,7 +1547,7 @@ public class PlayerAppearance extends BaseContent {
 			//(if skin)
 			if (player.hasPlainSkinOnly()) {
 				outputText("  It looks a bit strange with only the skin and no fur.");
-			} else if (player.skinType == SKIN_TYPE_TATTOED) {
+			} else if (player.skin.hasMagicalTattoo()) {
 				outputText("  It looks a bit strange with only the skin covered with magical tattoo and no fur.");
 			} else if (player.hasScales()) {
 				outputText("  The presence of said scales gives your visage an eerie look, more reptile than mammal.");
@@ -1559,7 +1559,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  You have a tapered, shrewd-looking vulpine face with a speckling of downward-curved whiskers just behind the nose.");
 			if (!player.hasCoat()) {
 				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat].");
-			} else if (player.skinType == SKIN_TYPE_TATTOED) {
+			} else if (player.skin.hasMagicalTattoo()) {
 				outputText("  Oddly enough, there's no fur on your animalistic muzzle, just [skin coat] covered with magical tattoo.");
 			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
 				outputText("  A coat of [skin coat] decorates your muzzle.");
@@ -1599,7 +1599,7 @@ public class PlayerAppearance extends BaseContent {
 				outputText("  You have a wolf-like face, complete with a wet nose.  ", false);
 				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ", false);
 				outputText("The odd visage is hairless and covered with [skin coat]");
-				if (player.skinType == SKIN_TYPE_TATTOED) outputText(" covered with magical tattoo");
+				if (player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
 				outputText(".", false);
 			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
 				outputText("  You have a wolf’s face, complete with wet nose a panting tongue and threatening teeths.  ", false);
@@ -1614,7 +1614,7 @@ public class PlayerAppearance extends BaseContent {
 		if (player.faceType == FACE_CAT) {
 			if (!player.hasCoat()) {
 				outputText("  You have a cat-like face, complete with a cute, moist nose and whiskers.  The [skin] that is revealed by your lack of fur looks quite unusual on so feline a face");
-				if (player.skinType == SKIN_TYPE_TATTOED) outputText(" covered with magical tattoo");
+				if (player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
 				outputText(".", false);
 			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
 				outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your " + player.skinDesc + " is " + player.furColor + ", hiding your [skin.noadj] underneath.", false);
@@ -1672,9 +1672,9 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (player.faceType == FACE_RHINO) {
 			outputText("  Your face is like that of a rhino");
-			if (player.skinType == SKIN_TYPE_PLAIN || player.skinType == SKIN_TYPE_TATTOED) {
+			if (player.skinType == SKIN_TYPE_PLAIN || player.skin.hasMagicalTattoo()) {
 				outputText(", with [skin], complete with a long muzzle and a horn on your nose");
-				if (player.skinType == SKIN_TYPE_TATTOED) outputText(" covered with magical tattoo");
+				if (player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
 				outputText(".");
 			}
 			else
@@ -1684,7 +1684,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your odd visage consists of a long, thin echidna snout.");
 			if (!player.hasCoat()) {
 				outputText("  The [skin]");
-				if (player.skinType == SKIN_TYPE_TATTOED) outputText(" covered with magical tattoo");
+				if (player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
 				outputText(" that is revealed by your lack of fur looks quite unusual.");
 			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
 				outputText("  It's covered in [skin coat].");
@@ -1696,7 +1696,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  Your face is like that of a deer, with a nose at the end of your muzzle.");
 			if (!player.hasCoat()) {
 				outputText("  The [skin]");
-				if (player.skinType == SKIN_TYPE_TATTOED) outputText(" covered with magical tattoo");
+				if (player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
 				outputText(" that is revealed by your lack of fur looks quite unusual.");
 			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
 				outputText("  It's covered in [skin coat] that covers your " + player.skinTone + " skin underneath.");
@@ -1712,7 +1712,7 @@ public class PlayerAppearance extends BaseContent {
 					outputText("  You have a fairly normal face, with [skin base]. On your cheek you have [skin coat]");
 				} else {
 					outputText("  You have a fairly normal face, with [skin base]");
-					if (player.skinType == SKIN_TYPE_TATTOED) outputText(" covered with magical tattoo");
+					if (player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
 				}
 				outputText(".  In addition you have a wide nose similar to that of an orca, which goes well with your sharp toothed mouth, giving you a cute look.", false);
 			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {

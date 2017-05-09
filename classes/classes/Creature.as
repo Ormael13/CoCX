@@ -1251,10 +1251,10 @@ import classes.BodyParts.UnderBody;
 				var bestval:Number;
 				if (type == "area") {
 					ival   = cockArea(i);
-					bestval = cockArea(best);
+					bestval = best==-1?0:cockArea(best);
 				} else if (type == "length") {
 					ival = cocks[i].cockLength;
-					bestval = cocks[best].cockLength;
+					bestval = best==-1?0:cocks[best].cockLength;
 				}
 				if (i_min <= ival && ival <= i_fits)
 				{

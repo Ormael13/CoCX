@@ -234,8 +234,8 @@ public class Skin extends SaveableBodyPart {
 	public function hasPlainSkin():Boolean {
 		return coverage < COVERAGE_COMPLETE && base.type == SKIN_BASE_PLAIN;
 	}
-	public function hasSmoothSkinType():Boolean {
-		return isAny(SKIN_BASE_PLAIN, SKIN_BASE_GOO, SKIN_BASE_STONE);
+	public function hasMagicalTattoo():Boolean {
+		return base.adj == "sexy tattooed";
 	}
 	override public function restore(keepTone:Boolean = true):void {
 		coverage = COVERAGE_NONE;

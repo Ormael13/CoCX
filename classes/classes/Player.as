@@ -2206,7 +2206,7 @@ use namespace kGAMECLASS;
 				kitsuneCounter += 4;
 			if (tailType != TAIL_TYPE_FOX || (tailType == TAIL_TYPE_FOX && tailCount < 2))
 				kitsuneCounter -= 7;
-			if (skinType == SKIN_TYPE_TATTOED || skinType == SKIN_TYPE_FUR)
+			if (skin.base.adj == "sexy tattooed" || hasFur())
 				kitsuneCounter++;
 			//If the character has fur, scales, or gooey skin, -1
 		//	if (skinType == SKIN_TYPE_FUR && !InCollection(furColor, KitsuneScene.basicKitsuneFur) && !InCollection(furColor, KitsuneScene.elderKitsuneColors))
