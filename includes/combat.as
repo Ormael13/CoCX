@@ -7226,6 +7226,14 @@ public function spellChargeWeapon(silent:Boolean = false):void {
 	spellPerkUnlock();
 	enemyAI();
 }
+
+/**
+ * Generates from (x1,x2,x3,y1,y2) log-scale parameters (a,b,c) that will return:
+ * y1= 10 at x1=  10
+ * y2= 55 at x2= 100
+ * y3=100 at x3=1000
+ */
+private static const ChargeArmorABC:Object = FnHelpers.FN.buildLogScaleABC(10,100,1000,10,100);
 //(35) Charge Armor – boosts your armor value by 5 + (player.inte/10) * SpellMod till the end of combat.
 public function spellChargeArmor(silent:Boolean = false):void {
 	var ChargeArmorBoost:Number = 10;
@@ -7258,6 +7266,7 @@ public function spellChargeArmor(silent:Boolean = false):void {
 	if (ChargeArmorBoost < 10) ChargeArmorBoost = 10;
 	if (player.findPerk(PerkLib.JobEnchanter) >= 0) ChargeArmorBoost *= 1.2;
 	ChargeArmorBoost *= spellModWhite();
+	ChargeArmorBoost = FnHelpers.FN.logScale(ChargeArmorBoost,ChargeArmorABC,10);
 	ChargeArmorBoost = Math.round(ChargeArmorBoost);
 	if (silent) {
 		player.createStatusAffect(StatusAffects.ChargeArmor,ChargeArmorBoost,0,0,0);

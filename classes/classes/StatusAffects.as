@@ -97,6 +97,7 @@ package classes
 		public static const KnowsHeal:StatusAffectType = mk("Knows Heal");
 		public static const KnowsIceRain:StatusAffectType = mk("Knows Ice Rain");
 		public static const KnowsIceSpike:StatusAffectType = mk("Knows Ice Spike");
+		public static const KnowsLightningBolt:StatusAffectType = mk("Knows Lightning Bolt");
 		public static const KnowsManyBirds:StatusAffectType = mk("Knows Many Birds");
 		public static const KnowsMight:StatusAffectType = mk("Knows Might");
 		public static const KnowsSidewinder:StatusAffectType = mk("Knows Sidewinder");
