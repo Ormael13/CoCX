@@ -132,7 +132,11 @@ package classes.Scenes.Camp
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 4;
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
+		public function canGatherWoods():Boolean {
+			return flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4
+				   && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < 100;
+		}
 		//STAGE 4 - Gather woods, explore forest to encounter.
 		public function gatherWoods():void {
 			cleanupAfterCombat();

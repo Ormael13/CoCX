@@ -65,7 +65,7 @@ package classes.Scenes
 			hideMenus();
 			menu();
 			addButton(0, "Explore", tryDiscover, null, null, null, "Explore to find new regions and visit any discovered regions.");
-			if (player.exploredForest > 0) addButton(1, "Forest", kGAMECLASS.forest.exploreForest, null, null, null, "Visit the lush forest. \n\nRecommended level: 1" + (player.level < 12 ? "\n\nBeware of Tentacle Beasts!" : "") + (debug ? "\n\nTimes explored: " + player.exploredForest : ""));
+			if (kGAMECLASS.forest.isDiscovered()) addButton(1, "Forest", kGAMECLASS.forest.exploreForest, null, null, null, "Visit the lush forest. \n\nRecommended level: 1" + (player.level < 12 ? "\n\nBeware of Tentacle Beasts!" : "") + (debug ? "\n\nTimes explored: " + kGAMECLASS.forest.timesExplored() : ""));
 			if (player.exploredLake > 0) addButton(2, "Lake", kGAMECLASS.lake.exploreLake, null, null, null, "Visit the lake and explore the beach. \n\nRecommended level: 1" + (player.level < 3 ? "\n\nLooks like it's still quiet here!" : "") + (debug ? "\n\nTimes explored: " + player.exploredLake : ""));
 			if (player.exploredDesert > 0) addButton(3, "Desert", kGAMECLASS.desert.exploreDesert, null, null, null, "Visit the dry desert. \n\nRecommended level: 5" + (debug ? "\n\nTimes explored: " + player.exploredDesert : ""));
 			
@@ -88,7 +88,7 @@ package classes.Scenes
 		{
 			flags[kFLAGS.EXPLORATION_PAGE] = 2;
 			menu();
-			if (player.hasStatusAffect(StatusAffects.ExploredDeepwoods)) addButton(0, "Deepwoods", kGAMECLASS.forest.exploreDeepwoods, null, null, null, "Visit the dark, bioluminescent deepwoods. \n\nRecommended level: 12" + (debug ? "\n\nTimes explored: " + player.statusAffectv1(StatusAffects.ExploredDeepwoods) : ""));
+			if (kGAMECLASS.forest.deepwoodsDiscovered()) addButton(0, "Deepwoods", kGAMECLASS.forest.exploreDeepwoods, null, null, null, "Visit the dark, bioluminescent deepwoods. \n\nRecommended level: 12" + (debug ? "\n\nTimes explored: " + kGAMECLASS.forest.timesExploredDeepwoods() : ""));
 			if (flags[kFLAGS.DISCOVERED_OCEAN] > 0) addButton(1, "Ocean", ocean.exploreOcean, null, null, null, "Explore the ocean surface. But beware of... sharks. \n\nRecommended level: 30" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OCEAN] : ""));
 			if (flags[kFLAGS.DISCOVERED_OCEAN] <= 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0) addButtonDisabled(1, "Ocean", "You need to find first some way to sail over the water surface to explore this area.");
 			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(2, "High Mountain", kGAMECLASS.highMountains.exploreHighMountain, null, null, null, "Visit the high mountains where basilisks and harpies are found. \n\nRecommended level: 20" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] : ""));

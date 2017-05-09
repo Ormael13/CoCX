@@ -730,9 +730,9 @@ public class PlayerAppearance extends BaseContent {
 	public function describeBodyShape():void {
 		outputText("You have a humanoid shape with the usual body", false);
 		if (player.skin.coverage == Skin.COVERAGE_LOW) {
-			outputText(" partialy covered with [skin coat.full]");
+			outputText(" partialy covered with [skin coat]");
 		} else if (player.skin.coverage >= Skin.COVERAGE_MEDIUM) {
-			outputText(" covered with [skin coat.full]");
+			outputText(" covered with [skin coat]");
 		}
 		outputText(", arms, hands and fingers.", false);
 		if (player.skinType == SKIN_TYPE_PLAIN && player.skinAdj == "glossy" && player.skinTone == "white and black") outputText(" However your skin is pitch black with a white underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.", false);

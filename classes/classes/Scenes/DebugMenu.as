@@ -639,14 +639,14 @@ import classes.BodyParts.SkinLayer;
 			menu();
 			dumpPlayerData();
 			tagDemosSkin();
-			showChangeOptions(bodyPartEditorSkin, page, editBase?SKIN_BASE_TYPES:SKIN_COAT_TYPES, changeLayerType);
+			showChangeOptions(bodyPartEditorSkin, page, editBase?SKIN_BASE_TYPES:SKIN_COAT_TYPES, curry(changeLayerType,editBase));
 		}
 		private function changeLayerColor(editBase:Boolean,page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) (editBase?player.skin.base:player.skin.coat).color = SKIN_TONE_CONSTANTS[setIdx];
 			menu();
 			dumpPlayerData();
 			tagDemosSkin();
-			showChangeOptions(bodyPartEditorSkin, page, SKIN_TONE_CONSTANTS, changeLayerColor);
+			showChangeOptions(bodyPartEditorSkin, page, SKIN_TONE_CONSTANTS, curry(changeLayerColor,editBase));
 		}
 		private function changeLayerAdj(editBase:Boolean,page:int=0,setIdx:int=-1):void {
 			var tgt:SkinLayer = (editBase?player.skin.base:player.skin.coat);
@@ -655,7 +655,7 @@ import classes.BodyParts.SkinLayer;
 			menu();
 			dumpPlayerData();
 			tagDemosSkin();
-			showChangeOptions(bodyPartEditorSkin, page, SKIN_ADJ_CONSTANTS, changeLayerAdj);
+			showChangeOptions(bodyPartEditorSkin, page, SKIN_ADJ_CONSTANTS, curry(changeLayerAdj,editBase));
 		}
 		private function changeLayerDesc(editBase:Boolean,page:int=0,setIdx:int=-1):void {
 			var tgt:SkinLayer = (editBase?player.skin.base:player.skin.coat);
@@ -664,7 +664,7 @@ import classes.BodyParts.SkinLayer;
 			menu();
 			dumpPlayerData();
 			tagDemosSkin();
-			showChangeOptions(bodyPartEditorSkin, page, SKIN_DESC_CONSTANTS, changeLayerDesc);
+			showChangeOptions(bodyPartEditorSkin, page, SKIN_DESC_CONSTANTS, curry(changeLayerDesc,editBase));
 		}
 		private function changeSkinCoverage(page:int=0,setIdx:int=-1):void {
 			if (setIdx>=0) player.skin.coverage = setIdx;
