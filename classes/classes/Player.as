@@ -3596,7 +3596,7 @@ use namespace kGAMECLASS;
 
 		public function spellCount():Number
 		{
-			return [StatusAffects.KnowsArouse,StatusAffects.KnowsHeal,StatusAffects.KnowsMight,StatusAffects.KnowsCharge,StatusAffects.KnowsBlind,StatusAffects.KnowsWhitefire,StatusAffects.KnowsChargeA,StatusAffects.KnowsBlink,StatusAffects.KnowsBlizzard,StatusAffects.KnowsIceSpike,StatusAffects.KnowsFireStorm,StatusAffects.KnowsIceRain]
+			return [StatusAffects.KnowsArouse,StatusAffects.KnowsHeal,StatusAffects.KnowsMight,StatusAffects.KnowsCharge,StatusAffects.KnowsBlind,StatusAffects.KnowsWhitefire,StatusAffects.KnowsChargeA,StatusAffects.KnowsBlink,StatusAffects.KnowsBlizzard,StatusAffects.KnowsIceSpike,StatusAffects.KnowsLightningBolt,StatusAffects.KnowsDarknessShard,StatusAffects.KnowsFireStorm,StatusAffects.KnowsIceRain]
 					.filter(function(item:StatusAffectType,index:int,array:Array):Boolean{
 						return this.hasStatusAffect(item);},this)
 					.length;

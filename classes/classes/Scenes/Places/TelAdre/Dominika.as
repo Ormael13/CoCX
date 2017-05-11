@@ -136,7 +136,7 @@ private function acceptDominikasKnowledge():void {
 		outputText("\"<i>Now then,</i>\" she says. Her hands glow with a brief sense of power, and many of the tattoos shine with equal illumination. She gestures with her hand and the lamps all acquire an unearthly light, as green glowing circles appear interlinked on the floor. \"<i>How much do you know about magic?</i>\"\n\n", false);
 
 		//[If player knows all spells]
-		if(player.spellCount() == 10) {
+		if(player.spellCount() == 12) {
 			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00154] == 0) {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00154]++;
 				outputText("You blink, then casually mention that you actually know quite a bit about magic. Dominika listens to you explain your skill in white and black magic, then coughs awkwardly and glances to the side. \"<i>O-oh,</i>\" she says, \"<i>Well. Uhm. I guess we can talk about magical theory, maybe?</i>\"\n\n", false);
@@ -190,7 +190,15 @@ private function acceptDominikasKnowledge():void {
 			}
 			else if(!player.hasStatusAffect(StatusAffects.KnowsIceSpike)) {
 				player.createStatusAffect(StatusAffects.KnowsIceSpike,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Ice Rain</b>", false);
+				outputText("\n\n<b>New White Magic Spell Learned: Ice Spike</b>", false);
+			}
+			else if(!player.hasStatusAffect(StatusAffects.KnowsLightningBolt)) {
+				player.createStatusAffect(StatusAffects.KnowsLightningBolt,0,0,0,0);
+				outputText("\n\n<b>New White Magic Spell Learned: Lightning Bolt</b>", false);
+			}
+			else if(!player.hasStatusAffect(StatusAffects.KnowsDarknessShard)) {
+				player.createStatusAffect(StatusAffects.KnowsDarknessShard,0,0,0,0);
+				outputText("\n\n<b>New White Magic Spell Learned: Darkness Shard</b>", false);
 			}
 			else outputText("==SOMETHING FUCKED UP.  TELL FEN VIA EMAIL (fenoxo@gmail.com) OR POST ON THE BUG FORUMS==", false);
 			dynStats("int", 2);

@@ -5108,6 +5108,11 @@ import classes.CockTypesEnum;
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Ice Spike.</b>", false);
 				player.createStatusAffect(StatusAffects.KnowsIceSpike, 0, 0, 0, 0);
 			}
+			//Smart enough for darkness shard and doesnt have it
+			if (player.inte >= 45 && !player.hasStatusAffect(StatusAffects.KnowsDarknessShard)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Darkness Shard.</b>", false);
+				player.createStatusAffect(StatusAffects.KnowsDarknessShard, 0, 0, 0, 0);
+			}
 		}
 
 		public function greySpellbook(player:Player):void
@@ -5193,6 +5198,11 @@ import classes.CockTypesEnum;
 			if (player.inte >= 40 && !player.hasStatusAffect(StatusAffects.KnowsBlizzard)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blizzard.</b>", false);
 				player.createStatusAffect(StatusAffects.KnowsBlizzard, 0, 0, 0, 0);
+			}
+			//Smart enough for lightning bolt and doesnt have it
+			if (player.inte >= 45 && !player.hasStatusAffect(StatusAffects.KnowsLightningBolt)) {
+				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Lightning Bolt.</b>", false);
+				player.createStatusAffect(StatusAffects.KnowsLightningBolt, 0, 0, 0, 0);
 			}
 		}
 

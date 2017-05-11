@@ -6213,21 +6213,14 @@ public function magicMenu():void {
 	else {
 		if (player.hasStatusAffect(StatusAffects.KnowsBlind)) {
 			if (!monster.hasStatusAffect(StatusAffects.Blind))
-				addButton(2, "Blind", spellBlind, null, null, null, "Blind is a fairly self-explanatory spell.  It will create a bright flash just in front of the victim's eyes, blinding them for a time.  However if they blink it will be wasted.  \n\nFatigue Cost: " + spellCostWhite(30) + "");
+				addButton(0, "Blind", spellBlind, null, null, null, "Blind is a fairly self-explanatory spell.  It will create a bright flash just in front of the victim's eyes, blinding them for a time.  However if they blink it will be wasted.  \n\nFatigue Cost: " + spellCostWhite(30) + "");
 			else {
 				outputText("<b>" + monster.capitalA + monster.short + " is already affected by blind.</b>\n\n");
-				addButtonDisabled(2, "Blind", "Enemy still blinded");
+				addButtonDisabled(0, "Blind", "Enemy still blinded");
 			}
 		}
-		if (player.hasStatusAffect(StatusAffects.KnowsWhitefire)) addButton(3, "Whitefire", spellWhitefire, null, null, null, "Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.  \n\nFatigue Cost: " + spellCostWhite(40) + "");
-		if (player.hasStatusAffect(StatusAffects.KnowsBlizzard)) {
-			if (!player.hasStatusAffect(StatusAffects.Blizzard))
-				addButton(4, "Blizzard", spellBlizzard, null, null, null, "Blizzard is a potent ice based defense spell that will reduce power of any fire based attack used against the user.  \n\nFatigue Cost: " + spellCostWhite(50) + "");
-			else {
-				outputText("<b>Blizzard is already active and cannot be cast again.</b>\n\n");
-				addButtonDisabled(4, "Blizzard", "Active");
-			}
-		}
+		if (player.hasStatusAffect(StatusAffects.KnowsWhitefire)) addButton(2, "Whitefire", spellWhitefire, null, null, null, "Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.  \n\nFatigue Cost: " + spellCostWhite(40) + "");
+		if (player.hasStatusAffect(StatusAffects.KnowsLightningBolt)) addButton(3, "LightningBolt", spellLightningBolt, null, null, null, "Lightning Bolt is a basic lightning attack that will electrocute your foe with a single bolt of lightning.  \n\nFatigue Cost: " + spellCostWhite(40) + "");
 	}
 	//BLACK MAGICSKS
 	if (player.lust < 50 && player.findPerk(PerkLib.GreyMage) < 0)
@@ -6237,9 +6230,10 @@ public function magicMenu():void {
 	else {
 		if (player.hasStatusAffect(StatusAffects.KnowsArouse)) addButton(5, "Arouse", spellArouse, null, null, null, "The arouse spell draws on your own inner lust in order to enflame the enemy's passions.  \n\nFatigue Cost: " + spellCostBlack(20) + "");
 		if (player.hasStatusAffect(StatusAffects.KnowsHeal)) addButton(6, "Heal", spellHeal, null, null, null, "Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nFatigue Cost: " + spellCostBlack(30) + "");
-		if (player.hasStatusAffect(StatusAffects.KnowsIceSpike)) addButton(9, "Ice Spike", spellIceSpike, null, null, null, "Drawning your own lust to concentrate it into chilling spike of ice that will attack your enemies.  \n\nFatigue Cost: " + spellCostBlack(40) + "");
+		if (player.hasStatusAffect(StatusAffects.KnowsIceSpike)) addButton(7, "Ice Spike", spellIceSpike, null, null, null, "Drawning your own lust to concentrate it into chilling spike of ice that will attack your enemies.  \n\nFatigue Cost: " + spellCostBlack(40) + "");
+		if (player.hasStatusAffect(StatusAffects.KnowsDarknessShard)) addButton(8, "DarknessShard", spellDarknessShard, null, null, null, "Drawning your own lust to condense part of the the ambivalent darkness into a shard to attack your enemies.  \n\nFatigue Cost: " + spellCostBlack(40) + "");
 	}
-	addButton(10, "Buffs", magicMenu2, null, null, null, "Cast one of buff spells.");
+	addButton(10, "Support", magicMenu2, null, null, null, "Cast one of support spells.");
 	if (player.findPerk(PerkLib.GreyMage) >= 0) addButton(11, "Grey Spells", magicMenu3, null, null, null, "Cast one of Grey Magic spells.");
 	// JOJO ABILITIES -- kind makes sense to stuff it in here along side the white magic shit (also because it can't fit into M. Specials :|
 	if (player.findPerk(PerkLib.CleansingPalm) >= 0 && player.cor < (10 + player.corruptionTolerance())) {
@@ -6251,7 +6245,7 @@ public function magicMenu():void {
 public function magicMenu2():void {
 	menu();
 	clearOutput();
-	outputText("What spell will you use?\n\n");
+	outputText("What supportive spell will you use?\n\n");
 	var whiteLustCap2:int = getWhiteMagicLustCap();
 	if (player.lust >= whiteLustCap2)
 		outputText("You are far too aroused to focus on white magic.\n\n");
@@ -6270,6 +6264,14 @@ public function magicMenu2():void {
 			else {
 				outputText("<b>Charge armor is already active and cannot be cast again.</b>\n\n");
 				addButtonDisabled(1, "Charge A.", "Active");
+			}
+		}
+		if (player.hasStatusAffect(StatusAffects.KnowsBlizzard)) {
+			if (!player.hasStatusAffect(StatusAffects.Blizzard))
+				addButton(4, "Blizzard", spellBlizzard, null, null, null, "Blizzard is a potent ice based defense spell that will reduce power of any fire based attack used against the user.  \n\nFatigue Cost: " + spellCostWhite(50) + "");
+			else {
+				outputText("<b>Blizzard is already active and cannot be cast again.</b>\n\n");
+				addButtonDisabled(4, "Blizzard", "Active");
 			}
 		}
 	}
@@ -6301,7 +6303,7 @@ public function magicMenu2():void {
 public function magicMenu3():void {
 	menu();
 	clearOutput();
-	outputText("What spell will you use?\n\n");
+	outputText("What grey spell will you use?\n\n");
 	if (player.lust < 50 || player.lust > (player.maxLust() - 50))
 		outputText("You can't use any grey magics.\n\n");
 	else {
@@ -6719,7 +6721,7 @@ public function spellMight(silent:Boolean = false):void {
 	
 	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue()) {
 		outputText("You are too tired to cast this spell.", true);
-		doNext(magicMenu);
+		doNext(magicMenu2);
 		return;
 	}
 	doNext(combatMenu);
@@ -6826,7 +6828,7 @@ public function spellBlink(silent:Boolean = false):void {
 	
 	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(40) > player.maxFatigue()) {
 		outputText("You are too tired to cast this spell.", true);
-		doNext(magicMenu);
+		doNext(magicMenu2);
 		return;
 	}
 	doNext(combatMenu);
@@ -6963,6 +6965,102 @@ public function spellIceSpike():void {
 	else enemyAI();
 }
 
+//(45) Darkness Shard
+public function spellDarknessShard():void {
+	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+	clearOutput();
+	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(40) > player.maxFatigue()) {
+		outputText("You are too tired to cast this spell.", true);
+		doNext(magicMenu);
+		return;
+	}
+	doNext(combatMenu);
+//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+	fatigue(40,6);
+	if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
+		flags[kFLAGS.SPELLS_CAST]++;
+		spellPerkUnlock();
+		enemyAI();
+		return;
+	}
+	//if (monster is Doppleganger)
+	//{
+		//(monster as Doppleganger).handleSpellResistance("whitefire");
+		//flags[kFLAGS.SPELLS_CAST]++;
+		//spellPerkUnlock();
+		//return;
+	//}
+	if (monster is FrostGiant && player.hasStatusAffect(StatusAffects.GiantBoulder)) {
+		(monster as FrostGiant).giantBoulderHit(2);
+		enemyAI();
+		return;
+	}
+	outputText("You narrow your eyes, focusing your own lust with deadly intent.  At the palm of your hand form a shard from pure darkness that shots toward " + monster.a + monster.short + " !\n", true);
+	temp = 0;
+	if (player.inte >= 21 && player.inte < 41) temp += (player.inte / 2 + rand((player.inte * 3) / 4));
+	if (player.inte >= 41 && player.inte < 61) temp += ((player.inte * 2) / 3 + rand(player.inte));
+	if (player.inte >= 61 && player.inte < 81) temp += ((player.inte * 5) / 6 + rand(player.inte * 1.25));
+	if (player.inte >= 81 && player.inte < 101) temp += (player.inte + rand(player.inte * 1.5));
+	if (player.inte >= 101 && player.inte < 151) temp += ((player.inte * 1.25) + rand(player.inte * 1.75));
+	if (player.inte >= 151 && player.inte < 201) temp += ((player.inte * 1.5) + rand(player.inte * 2));
+	if (player.inte >= 201 && player.inte < 251) temp += ((player.inte * 1.75) + rand(player.inte * 2.25));
+	if (player.inte >= 251 && player.inte < 301) temp += ((player.inte * 2) + rand(player.inte * 2.5));
+	if (player.inte >= 301 && player.inte < 351) temp += ((player.inte * 2.25) + rand(player.inte * 2.75));
+	if (player.inte >= 351 && player.inte < 401) temp += ((player.inte * 2.5) + rand(player.inte * 3));
+	if (player.inte >= 401 && player.inte < 451) temp += ((player.inte * 2.75) + rand(player.inte * 3.25));
+	if (player.inte >= 451 && player.inte < 501) temp += ((player.inte * 3) + rand(player.inte * 3.5));
+	if (player.inte >= 501 && player.inte < 551) temp += ((player.inte * 3.25) + rand(player.inte * 3.75));
+	if (player.inte >= 551 && player.inte < 601) temp += ((player.inte * 3.5) + rand(player.inte * 4));
+	if (player.inte >= 601 && player.inte < 651) temp += ((player.inte * 3.75) + rand(player.inte * 4.25));
+	if (player.inte >= 651 && player.inte < 701) temp += ((player.inte * 4) + rand(player.inte * 4.5));
+	if (player.inte >= 701 && player.inte < 751) temp += ((player.inte * 4.25) + rand(player.inte * 4.75));
+	if (player.inte >= 751 && player.inte < 801) temp += ((player.inte * 4.5) + rand(player.inte * 5));
+	if (player.inte >= 801 && player.inte < 851) temp += ((player.inte * 4.75) + rand(player.inte * 5.25));
+	if (player.inte >= 851 && player.inte < 901) temp += ((player.inte * 5) + rand(player.inte * 5.5));
+	if (player.inte >= 901 && player.inte < 951) temp += ((player.inte * 5.25) + rand(player.inte * 5.75));
+	if (player.inte >= 951) temp += ((player.inte * 5.5) + rand(player.inte * 6));
+	else temp += (player.inte/3 + rand(player.inte/2));
+	temp *= spellModBlack();
+	//Determine if critical hit!
+	var crit:Boolean = false;
+	var critChance:int = 5;
+	if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+		if (player.inte <= 100) critChance += (player.inte - 50) / 50;
+		if (player.inte > 100) critChance += 10;
+	}
+	if (rand(100) < critChance) {
+		crit = true;
+		temp *= 1.75;
+	}
+	//High damage to goes.
+//	temp = calcGlacialMod(temp);
+//	if (monster.findPerk(PerkLib.IceNature) >= 0) temp *= 0.2;
+//	if (monster.findPerk(PerkLib.FireVulnerability) >= 0) temp *= 0.5;
+//	if (monster.findPerk(PerkLib.IceVulnerability) >= 0) temp *= 2;
+//	if (monster.findPerk(PerkLib.FireNature) >= 0) temp *= 5;
+//	if (player.findPerk(PerkLib.ColdMastery) >= 0) temp *= 2;
+//	if (player.findPerk(PerkLib.ColdAffinity) >= 0) temp *= 2;
+	temp = Math.round(temp);
+	//if (monster.short == "goo-girl") temp = Math.round(temp * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
+	//if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
+	outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.", false);
+	//Using fire attacks on the goo]
+	//if(monster.short == "goo-girl") {
+		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.", false);
+		//if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
+	//}
+	if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+	outputText("\n\n", false);
+	checkAchievementDamage(temp);
+	flags[kFLAGS.SPELLS_CAST]++;
+	spellPerkUnlock();
+	monster.HP -= temp;
+	statScreenRefresh();
+	if(monster.HP < 1) doNext(endHpVictory);
+	else enemyAI();
+}
+
 //(100) Ice Rain - AoE Ice spell
 public function spellIceRain():void {
 	if (rand(2) == 0) flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
@@ -6970,7 +7068,7 @@ public function spellIceRain():void {
 	clearOutput();
 	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(200) > player.maxFatigue()) {
 		outputText("You are too tired to cast this spell.", true);
-		doNext(magicMenu);
+		doNext(magicMenu3);
 		return;
 	}
 	doNext(combatMenu);
@@ -7068,7 +7166,7 @@ public function spellFireStorm():void {
 	clearOutput();
 	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(200) > player.maxFatigue()) {
 		outputText("You are too tired to cast this spell.", true);
-		doNext(magicMenu);
+		doNext(magicMenu3);
 		return;
 	}
 	doNext(combatMenu);
@@ -7208,7 +7306,7 @@ public function spellChargeWeapon(silent:Boolean = false):void {
 	
 	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(30) > player.maxFatigue()) {
 		outputText("You are too tired to cast this spell.", true);
-		doNext(magicMenu);
+		doNext(magicMenu2);
 		return;
 	}
 	doNext(combatMenu);
@@ -7276,7 +7374,7 @@ public function spellChargeArmor(silent:Boolean = false):void {
 	
 	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(40) > player.maxFatigue()) {
 		outputText("You are too tired to cast this spell.", true);
-		doNext(magicMenu);
+		doNext(magicMenu2);
 		return;
 	}
 	doNext(combatMenu);
@@ -7547,12 +7645,108 @@ public function spellWhitefire():void {
 	}
 }
 
+//(45) Lightning Bolt - base lighting spell
+public function spellLightningBolt():void {
+	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+	clearOutput();
+	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(40) > player.maxFatigue()) {
+		outputText("You are too tired to cast this spell.", true);
+		doNext(magicMenu);
+		return;
+	}
+	doNext(combatMenu);
+//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+	fatigue(40,5);
+	if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
+		flags[kFLAGS.SPELLS_CAST]++;
+		spellPerkUnlock();
+		enemyAI();
+		return;
+	}
+	//if (monster is Doppleganger)
+	//{
+		//(monster as Doppleganger).handleSpellResistance("whitefire");
+		//flags[kFLAGS.SPELLS_CAST]++;
+		//spellPerkUnlock();
+		//return;
+	//}
+	if (monster is FrostGiant && player.hasStatusAffect(StatusAffects.GiantBoulder)) {
+		(monster as FrostGiant).giantBoulderHit(2);
+		enemyAI();
+		return;
+	}
+	outputText("You charge out energy in your hand and fire it out in the form of a powerful bolt of lightning at " + monster.a + monster.short + " !\n", true);
+	temp = 0;
+	if (player.inte >= 21 && player.inte < 41) temp += (player.inte / 2 + rand((player.inte * 3) / 4));
+	if (player.inte >= 41 && player.inte < 61) temp += ((player.inte * 2) / 3 + rand(player.inte));
+	if (player.inte >= 61 && player.inte < 81) temp += ((player.inte * 5) / 6 + rand(player.inte * 1.25));
+	if (player.inte >= 81 && player.inte < 101) temp += (player.inte + rand(player.inte * 1.5));
+	if (player.inte >= 101 && player.inte < 151) temp += ((player.inte * 1.25) + rand(player.inte * 1.75));
+	if (player.inte >= 151 && player.inte < 201) temp += ((player.inte * 1.5) + rand(player.inte * 2));
+	if (player.inte >= 201 && player.inte < 251) temp += ((player.inte * 1.75) + rand(player.inte * 2.25));
+	if (player.inte >= 251 && player.inte < 301) temp += ((player.inte * 2) + rand(player.inte * 2.5));
+	if (player.inte >= 301 && player.inte < 351) temp += ((player.inte * 2.25) + rand(player.inte * 2.75));
+	if (player.inte >= 351 && player.inte < 401) temp += ((player.inte * 2.5) + rand(player.inte * 3));
+	if (player.inte >= 401 && player.inte < 451) temp += ((player.inte * 2.75) + rand(player.inte * 3.25));
+	if (player.inte >= 451 && player.inte < 501) temp += ((player.inte * 3) + rand(player.inte * 3.5));
+	if (player.inte >= 501 && player.inte < 551) temp += ((player.inte * 3.25) + rand(player.inte * 3.75));
+	if (player.inte >= 551 && player.inte < 601) temp += ((player.inte * 3.5) + rand(player.inte * 4));
+	if (player.inte >= 601 && player.inte < 651) temp += ((player.inte * 3.75) + rand(player.inte * 4.25));
+	if (player.inte >= 651 && player.inte < 701) temp += ((player.inte * 4) + rand(player.inte * 4.5));
+	if (player.inte >= 701 && player.inte < 751) temp += ((player.inte * 4.25) + rand(player.inte * 4.75));
+	if (player.inte >= 751 && player.inte < 801) temp += ((player.inte * 4.5) + rand(player.inte * 5));
+	if (player.inte >= 801 && player.inte < 851) temp += ((player.inte * 4.75) + rand(player.inte * 5.25));
+	if (player.inte >= 851 && player.inte < 901) temp += ((player.inte * 5) + rand(player.inte * 5.5));
+	if (player.inte >= 901 && player.inte < 951) temp += ((player.inte * 5.25) + rand(player.inte * 5.75));
+	if (player.inte >= 951) temp += ((player.inte * 5.5) + rand(player.inte * 6));
+	else temp += (player.inte/3 + rand(player.inte/2));
+	temp *= spellModWhite();
+	//Determine if critical hit!
+	var crit:Boolean = false;
+	var critChance:int = 5;
+	if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+		if (player.inte <= 100) critChance += (player.inte - 50) / 50;
+		if (player.inte > 100) critChance += 10;
+	}
+	if (rand(100) < critChance) {
+		crit = true;
+		temp *= 1.75;
+	}
+	//High damage to goes.
+//	temp = calcGlacialMod(temp);
+//	if (monster.findPerk(PerkLib.IceNature) >= 0) temp *= 0.2;
+//	if (monster.findPerk(PerkLib.FireVulnerability) >= 0) temp *= 0.5;
+//	if (monster.findPerk(PerkLib.IceVulnerability) >= 0) temp *= 2;
+//	if (monster.findPerk(PerkLib.FireNature) >= 0) temp *= 5;
+//	if (player.findPerk(PerkLib.ColdMastery) >= 0) temp *= 2;
+//	if (player.findPerk(PerkLib.ColdAffinity) >= 0) temp *= 2;
+	temp = Math.round(temp);
+	//if (monster.short == "goo-girl") temp = Math.round(temp * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
+	//if (monster.short == "tentacle beast") temp = Math.round(temp * 1.2); - tak samo przemyśleć czy bedą dodatkowo ranione
+	outputText(monster.capitalA + monster.short + " takes <b><font color=\"#800000\">" + temp + "</font></b> damage.", false);
+	//Using fire attacks on the goo]
+	//if(monster.short == "goo-girl") {
+		//outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.", false);
+		//if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
+	//}
+	if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+	outputText("\n\n", false);
+	checkAchievementDamage(temp);
+	flags[kFLAGS.SPELLS_CAST]++;
+	spellPerkUnlock();
+	monster.HP -= temp;
+	statScreenRefresh();
+	if(monster.HP < 1) doNext(endHpVictory);
+	else enemyAI();
+}
+
 //(35) Blizzard
 public function spellBlizzard():void {
 	clearOutput();
 	if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue()) {
 		outputText("You are too tired to cast this spell.", true);
-		doNext(magicMenu);
+		doNext(magicMenu2);
 		return;
 	}
 	doNext(combatMenu);

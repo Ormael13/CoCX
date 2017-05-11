@@ -59,8 +59,8 @@ package classes.Scenes
 		}
 		//Ensures that none of the codex entries can be Lost Forever.
 		public function setFlags():void {
-			if (player.hasStatusAffect(StatusAffects.KnowsCharge) || player.hasStatusAffect(StatusAffects.KnowsBlind) || player.hasStatusAffect(StatusAffects.KnowsWhitefire) || player.hasStatusAffect(StatusAffects.KnowsArouse) || player.hasStatusAffect(StatusAffects.KnowsHeal) || player.hasStatusAffect(StatusAffects.KnowsMight)
-			|| player.hasStatusAffect(StatusAffects.KnowsBlink) || player.hasStatusAffect(StatusAffects.KnowsBlizzard) || player.hasStatusAffect(StatusAffects.KnowsChargeA) || player.hasStatusAffect(StatusAffects.KnowsFireStorm) || player.hasStatusAffect(StatusAffects.KnowsIceRain) || player.hasStatusAffect(StatusAffects.KnowsIceSpike))
+			if (player.hasStatusAffect(StatusAffects.KnowsCharge) || player.hasStatusAffect(StatusAffects.KnowsBlind) || player.hasStatusAffect(StatusAffects.KnowsWhitefire) || player.hasStatusAffect(StatusAffects.KnowsArouse) || player.hasStatusAffect(StatusAffects.KnowsHeal) || player.hasStatusAffect(StatusAffects.KnowsMight) || player.hasStatusAffect(StatusAffects.KnowsBlink)
+			|| player.hasStatusAffect(StatusAffects.KnowsBlizzard) || player.hasStatusAffect(StatusAffects.KnowsChargeA) || player.hasStatusAffect(StatusAffects.KnowsFireStorm) || player.hasStatusAffect(StatusAffects.KnowsIceRain) || player.hasStatusAffect(StatusAffects.KnowsIceSpike) || player.hasStatusAffect(StatusAffects.KnowsLightningBolt) || player.hasStatusAffect(StatusAffects.KnowsDarknessShard))
 			{
 				if (flags[kFLAGS.CODEX_ENTRY_MAGIC] <= 0) {
 					flags[kFLAGS.CODEX_ENTRY_MAGIC] = 1;

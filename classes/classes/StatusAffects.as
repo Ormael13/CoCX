@@ -92,6 +92,7 @@ package classes
 		public static const KnowsCharge:StatusAffectType = mk("Knows Charge");//Charge Weapon
 		public static const KnowsChargeA:StatusAffectType = mk("Knows Charge Armor");
 		public static const KnowsComet:StatusAffectType = mk("Knows Comet");
+		public static const KnowsDarknessShard:StatusAffectType = mk("Knows Darkness Shard");
 		public static const KnowsDracoSweep:StatusAffectType = mk("Knows Draco Sweep");
 		public static const KnowsFireStorm:StatusAffectType = mk("Knows Fire Storm");
 		public static const KnowsHeal:StatusAffectType = mk("Knows Heal");
