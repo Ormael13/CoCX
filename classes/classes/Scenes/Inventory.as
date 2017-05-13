@@ -96,20 +96,27 @@ package classes.Scenes
 					foundItem = true;
 				}
 			}
-			
-			if (!getGame().inCombat && inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0 && ((getGame().nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) || (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && ((flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4) || (flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4))) || player.hasKeyItem("Dragon Egg") >= 0 || flags[kFLAGS.ANEMONE_KID] > 0)) {
-				if (getGame().nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) {
-					if (flags[kFLAGS.NIEVE_STAGE] == 1)
-						outputText("\nThere's some odd snow here that you could do something with...\n");
-					else outputText("\nYou have a snow" + getGame().nieveMF("man", "woman") + " here that seems like it could use a little something...\n");
+
+			if (!getGame().inCombat && inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
+				var miscNieve:Boolean = getGame().nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5;
+				var miscHolli:Boolean         = flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4 || flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4);
+				if (miscNieve
+					|| miscHolli
+					|| player.hasKeyItem("Dragon Egg") >= 0
+					|| flags[kFLAGS.ANEMONE_KID] > 0) {
+					if (miscNieve) {
+						if (flags[kFLAGS.NIEVE_STAGE] == 1)
+							outputText("\nThere's some odd snow here that you could do something with...\n");
+						else outputText("\nYou have a snow" + getGame().nieveMF("man", "woman") + " here that seems like it could use a little something...\n");
+					}
+					if (player.hasKeyItem("Dragon Egg") >= 0) {
+						getGame().emberScene.emberCampDesc();
+					}
+					if (flags[kFLAGS.ANEMONE_KID] > 0) {
+						kGAMECLASS.anemoneScene.anemoneBarrelDescription();
+					}
+					addButton(13, "Misc.", miscitemsMenu);
 				}
-				if (player.hasKeyItem("Dragon Egg") >= 0) {
-					getGame().emberScene.emberCampDesc();
-				}
-				if (flags[kFLAGS.ANEMONE_KID] > 0) {
-					kGAMECLASS.anemoneScene.anemoneBarrelDescription();
-				}
-				addButton(13, "Misc.", miscitemsMenu);
 			}
 			if (!getGame().inCombat) {
 				addButton(10, "Unequip", manageEquipment);
@@ -120,26 +127,14 @@ package classes.Scenes
 					addButton(12, "Sky P. Pearl", SkyPoisonPearlMenu);
 				}
 			}
-			if (!foundItem) {
-				outputText("\nYou have no usable items.");
-				doNext(playerMenu);
-				if (!getGame().inCombat) {
-					addButton(10, "Unequip", manageEquipment);
+			if (foundItem) {
+				if (getGame().inCombat && player.hasStatusAffect(StatusAffects.Sealed) && player.statusAffectv1(StatusAffects.Sealed) == 3) {
+					outputText("\nYou reach for your items, but you just can't get your pouches open.  <b>Your ability to use items was sealed, and now you've wasted a chance to attack!</b>\n\n");
+					getGame().enemyAI();
+					return;
 				}
-				if (player.hasKeyItem("Bag of Cosmos") >= 0) {
-					addButton(11, "Bag of Cosmos", BagOfCosmosMenu);
-				}
-				if (player.hasKeyItem("Sky Poison Pearl") >= 0) {
-					addButton(12, "Sky P. Pearl", SkyPoisonPearlMenu);
-				}
-				return;
+				outputText("\nWhich item will you use? (To discard unwanted items, hold Shift then click the item.)");
 			}
-			if (getGame().inCombat && player.hasStatusAffect(StatusAffects.Sealed) && player.statusAffectv1(StatusAffects.Sealed) == 3) {
-				outputText("\nYou reach for your items, but you just can't get your pouches open.  <b>Your ability to use items was sealed, and now you've wasted a chance to attack!</b>\n\n");
-				getGame().enemyAI();
-				return;
-			}
-			outputText("\nWhich item will you use? (To discard unwanted items, hold Shift then click the item.)");
 			outputText("\n<b>Capacity:</b> " + getOccupiedSlots() + " / " + getMaxSlots());
 			if (getGame().inCombat)
 				addButton(14, "Back", kGAMECLASS.combatMenu, false); //Player returns to the combat menu on cancel

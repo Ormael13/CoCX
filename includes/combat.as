@@ -265,7 +265,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 		if (player.weaponRangePerk == "Crossbow")
 			addButton(1, "Crossbow", fireBow, null, null, null, "Attempt to attack the enemy with your " + player.weaponRangeName + ".  Damage done is determined only by your weapon.");
 		if (player.weaponRangePerk == "Throwing") {
-			if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0 && player.weaponRangeName != "sea huntress harpoons") addButtonDisabled(0, "Throw", "You have used all your throwing weapons in this fight.");
+			if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0 && player.weaponRangeName != "sea huntress harpoons") addButtonDisabled(1, "Throw", "You have used all your throwing weapons in this fight.");
 			else addButton(1, "Throw", fireBow, null, null, null, "Attempt to throw " + player.weaponRangeName + " at enemy.  Damage done is determined by your strength and weapon.");
 		}
 		if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle") {
