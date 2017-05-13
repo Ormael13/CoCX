@@ -1039,10 +1039,14 @@ package classes
 				"Allows access to demons charm attacks.");
 		public static const Diapause:PerkType = mk("Diapause", "Diapause",
 				"Pregnancy does not advance normally, but develops quickly after taking in fluids.");
+		public static const DragonDarknessBreath:PerkType = mk("Dragon darkness breath", "Dragon darkness breath",
+				"Allows access to a dragon darkness breath attack.");
 		public static const DragonFireBreath:PerkType = mk("Dragon fire breath", "Dragon fire breath",
 				"Allows access to a dragon fire breath attack.");
 		public static const DragonIceBreath:PerkType = mk("Dragon ice breath", "Dragon ice breath",
 				"Allows access to a dragon ice breath attack.");
+		public static const DragonLightningBreath:PerkType = mk("Dragon lightning breath", "Dragon lightning breath",
+				"Allows access to a dragon lightning breath attack.");
 		public static const EnlightenedKitsune:PerkType = mk("Enlightened Kitsune", "Enlightened Kitsune",
 				"The mystical energy of the kitsunes surges through you, filling you with phenomenal cosmic power!  Your boundless magic allows you to recover quickly after casting spells.",null,true);
 		public static const EnlightenedNinetails:PerkType = mk("Enlightened Nine-tails", "Enlightened Nine-tails",

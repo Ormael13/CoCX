@@ -1605,7 +1605,7 @@ public function lottieFuck():void {
 	var tentacle:Function = null;
 	var thirtyMinute:Function = null;
 	if(silly() && player.hasCock()) thirtyMinute = lottiesThirtyMinutePigGasm;
-	if(player.tentacleCocks() > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00306] == 2) tentacle = tentaDickLottieButtFuckbuttFuckButtFUCKBUTTFUCKBUTTFUCK;
+	if((player.tentacleCocks() > 0 || player.stamenCocks() > 0) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00306] == 2) tentacle = tentaDickLottieButtFuckbuttFuckButtFUCKBUTTFUCKBUTTFUCK;
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
 	clearOutput();
@@ -1923,7 +1923,7 @@ public function tentaDickLottieButtFuckbuttFuckButtFUCKBUTTFUCKBUTTFUCK():void {
 
 	//[if a single, lonely tentapenis]
 	outputText("You firmly squeeze your ", false);
-	if(player.tentacleCocks() > 1) outputText("first ", false);
+	if(player.tentacleCocks() > 1 || player.stamenCocks() > 1) outputText("first ", false);
 	outputText("writhing member as it stretches out, snaking towards Lottie's genitals and probing her moistened lips.  The tip of your vine-like length wriggles vertically along her eager hole, vibrating against her hardening clit and causing the sweating pig-whore to oink in pleasure.  She struggles to move her arms towards her aching need, desperate to relieve herself from the thick, stretching snake pushing against her slick cunt.  Without a word of warning, the hardened tentacle presses the side of its slick length firmly against her entrance, before whipping itself backwards and plunging into her heated hole.\n\n", false);
 
 	outputText("Lottie groans from pleasure while your thickened, snake-like cock lies pulsing inside her, trapped within the tightening walls of her womb.  You force the bestial length to curl back outwards, before pumping back with incredible force - plowing your girl with fevered abandon as the insatiable vine pushes her face into the mattress soaked with her saliva.\n\n", false);

@@ -61,10 +61,10 @@ package classes.Scenes {
 			if (player.hasVagina() && player.isScylla()) {
 				addButton(button++, "Tentacle Fun", tentacleSelfFuck2);
 			}
-			if (player.tentacleCocks() > 0 && player.hasVagina()) {
+			if ((player.tentacleCocks() > 0 || player.stamenCocks() > 0) && player.hasVagina()) {
 				addButton(button++, "Tentapussy", tentacleSelfFuck);
 			}
-			if (player.tentacleCocks() > 0) {
+			if (player.tentacleCocks() > 0 || player.stamenCocks() > 0) {
 				addButton(button++, "Tentabutt", tentacleGoesUpYerPooperNewsAtEleven);
 			}
 			if (player.canOvipositBee() && player.lust >= 33 && player.biggestCockArea() > 100) {
@@ -423,7 +423,7 @@ package classes.Scenes {
 						outputText("You stroke quickly, reveling in your sensitive horseflesh, darting down to fondle your sensitive sheath.  ");
 					else if (player.dogCocks() >= 1)
 						outputText("You stroke quickly, pleasuring your sensitive, canine erection, darting down to fondle the sensitive sheath at the base of your cock.  ");
-					else if (player.tentacleCocks() >= 1)
+					else if (player.tentacleCocks() >= 1 || player.stamenCocks() > 0)
 						outputText("You stroke quickly, pleasuring the supple length of your tentacular endowment, fondling every inhuman nodule as you slide along every inch of twisting length.  ");
 					else if (player.demonCocks() >= 1)
 						outputText("You stroke quickly, pleasuring the bumpy ridges of your demonic tool, fondling every inhuman nodule as you slide along the entire twitching length.  ");
@@ -444,7 +444,7 @@ package classes.Scenes {
 						outputText("You delight in teasing the sensitive flared tip of your " + player.cockDescript() + ", rubbing it at the end of each stroke, squeezing out dollops of pre to smear over it and tease yourself with.  It seems to pulse and ripple with each stroke, responding to every touch.  ");
 					else if (player.dogCocks() >= 1)
 						outputText("You delight in teasing the pointed tip of your " + player.cockDescript() + ", rubbing it at the end of each stroke, squeezing out dollops of pre to smear over it and tease yourself with.  Your knot seems to pulse and twitch with each stroke, reacting to every touch.  ");
-					else if (player.tentacleCocks() >= 1)
+					else if (player.tentacleCocks() >= 1 || player.stamenCocks() > 0)
 						outputText("You delight in teasing the over-sized mushroom-like tip of your " + player.cockDescript() + ", caressing it after every stroke as you squeeze out dollops of pre to smear along its slimy length.  It writhes and twists in your hands of it's own volition, lengthening and shortening with each set of strokes.  ");
 					else if (player.demonCocks() >= 1)
 						outputText("You delight in teasing the larger bumps that form a ring around the crown of your " + player.cockDescript() + ", watching as they twitch and spasm in time with the dollops of pre you're squeezing out and smearing over the entire length.  ");
@@ -465,7 +465,7 @@ package classes.Scenes {
 						outputText("The flared tip of your " + player.cockDescript() + " wobbles towards your face as you masturbate, a dollop of pre slowly growing atop it.  ");
 					else if (player.dogCocks() >= 1)
 						outputText("The pointed tip of your " + player.cockDescript() + " angles towards your face as you masturbate, a dollop of pre slowly leaking from it.  ");
-					else if (player.tentacleCocks() >= 1)
+					else if (player.tentacleCocks() >= 1 || player.stamenCocks() > 0)
 						outputText("The overly wide head of your " + player.cockDescript() + " bumps against your lips as you masturbate, waving back and forth like a snake as it searches for an orifice.  ");
 					else if (player.demonCocks() >= 1)
 						outputText("The purplish head of your " + player.cockDescript() + " bumps against your lips as you masturbate, flushing darkly with every beat of your heart.  ");
@@ -501,7 +501,7 @@ package classes.Scenes {
 						outputText("The flared tip of your " + player.cockDescript() + " wobbles over, bumping your face and smearing your lips with its copious pre-cum.  You are unable to resist opening your mouth and sucking it down, filling your mouth with horsemeat.  ");
 					else if (player.dogCocks() >= 1)
 						outputText("The head of your " + player.cockDescript() + " wobbles over, bumping your face and smearing your lips with its copious pre-cum.  You are unable to resist opening your mouth and sucking it down, filling your mouth with your " + player.cockDescript() + ".  ");
-					else if (player.tentacleCocks() >= 1)
+					else if (player.tentacleCocks() >= 1 || player.stamenCocks() > 0)
 						outputText("The bulbous, mushroom-like head of your " + player.cockDescript() + " pushes against your face eagerly, smearing pre-cum over your lips as it seeks entrance to the nearest orifice.  You're unable to resist opening your mouth to suck it down, filling your mouth with slick rubbery cock-tentacle.  ");
 					else if (player.demonCocks() >= 1)
 						outputText("The tainted swollen head of your " + player.cockDescript() + " pushes against your face, smearing sweet pre-cum over your lips.  You're unable to resist opening wide and taking in the demonic member, submitting wholly to the desire to pleasure your corrupted body-parts.  ");
@@ -532,7 +532,7 @@ package classes.Scenes {
 								outputText("The thick animalistic scent fills your nostrils as you force inch after inch into your mouth, deepthroating as much of yourself as you can.  ");
 							else if (player.dogCocks() >= 1)
 								outputText("The strong animal scent of your cock fills your nostrils as you force inch after inch into your mouth, deepthroating as much of yourself as you can.  ");
-							else if (player.tentacleCocks() >= 1)
+							else if (player.tentacleCocks() >= 1 || player.stamenCocks() > 0)
 								outputText("The sweet scent of your " + player.cockDescript() + " fills your nostrils as inch after inch of tentacle forces its way down your throat.  You struggle briefly with it, wrestling to keep it from pushing the whole way into your gut, swooning with the pleasure that fighting with your own cock induces.  ");
 							else if (player.demonCocks() >= 1)
 								outputText("The spicy demonic odor your " + player.cockDescript() + " radiates fills your nostrils as you force inch after inch of tainted meat down your throat.  You struggle briefly, but your " + player.cockDescript() + " quickly overwhelms your resistance and your gag reflex momentarily seems to disappear.  ");
@@ -1496,7 +1496,7 @@ package classes.Scenes {
 						outputText("girl-lube pours out of your swollen nipple over your " + player.cockDescript() + " and hands, pooling on the ground below you. ");
 					else if (player.hasSheath() > 0)
 						outputText("girl-lube drizzles down the length of your " + player.cockDescript() + " in thick streams, pooling in and around your sheath. ");
-					else if (player.tentacleCocks() > 0)
+					else if (player.tentacleCocks() > 0 || player.stamenCocks() > 0)
 						outputText("girl-lube pours out of your swollen nipple over your " + player.cockDescript() + " and hands, pooling on the ground below you. ");
 					else if (player.demonCocks() > 0)
 						outputText("girl-lube pours out of your swollen nipple over your " + player.cockDescript() + " and hands, pooling on the ground below you. ");
@@ -1736,7 +1736,7 @@ package classes.Scenes {
 						outputText("swelling, bulbous knot.  You feel it growing tighter and tighter until it's nearly twice the width of your " + player.cockDescript() + ".  The pressure is an agonizing pleasure that only builds higher and higher as you come closer and closer to orgasm.  ");
 					else if (player.horseCocks() == 1)
 						outputText("swollen equine sheath, slowly beginning to work its way up your shaft.  Pre-cum begins pouring from your " + player.cockDescript() + ", slicking your " + player.cockDescript() + " as you get ready to blow.  ");
-					else if (player.tentacleCocks() == 1)
+					else if (player.tentacleCocks() == 1 || player.stamenCocks() == 1)
 						outputText("wiggling vine-like cock, growing rapidly.  You feel the rubbery surface of your tentacle prick contracting as it nears release.  Thick bulges of fluids collect and travel along the length of your " + player.cockDescript() + ", the first of which is almost to your oversized tip.  ");
 					else if (player.demonCocks() == 1)
 						outputText("tainted man-meat, growing rapidly.  You feel the nodules close to the base swell and pulse, starting a rippling wave of pleasure that migrates upwards.  The ring of bumps around your crown double in size, flaring out as your " + player.cockDescript() + " prepares to unload.  ");
@@ -3189,9 +3189,9 @@ package classes.Scenes {
 			outputText(".");
 			if (player.lactationQ() >= 250) outputText("  Milk squirts from your engorged teat almost immediately to fall in a moist, creamy rain across your writhing form.");
 			//{no new PG}  Three + Tentalce fork - one in mouth
-			if (player.tentacleCocks() >= 3) {
+			if (player.tentacleCocks() >= 3 || player.stamenCocks() > 2) {
 				outputText("  The pleasured noises that have been issuing forth from your 'O'-gaped lips are cut off by a sudden intrusion from another of your arboreal phalluses.   This one punches straight into your throat without pause, sliding so smoothly across your tongue that you barely care about gagging when it feels so good.  Trickles of your sweet pre-cum are dribbling out from [eachCock] into your holes");
-				if (player.tentacleCocks() < player.cocks.length) outputText(" and the open air");
+				if ((player.tentacleCocks() || player.stamenCocks()) < player.cocks.length) outputText(" and the open air");
 				outputText(".");
 				if (player.biggestTitSize() >= 4) outputText("  Laying right between your boobs, it doesn't take long for the shaft to extend far enough to loop around each tit, sliding slowly encircling each curvy mound as it presses them together around itself, getting a titfuck while it plows your unresisting mouth.");
 			}
@@ -3203,13 +3203,13 @@ package classes.Scenes {
 				}
 			}
 			//MORE
-			if (player.tentacleCocks() >= 6) {
+			if (player.tentacleCocks() >= 6 || player.stamenCocks() > 5) {
 				outputText("\n\nThe excess green tools rise up above you.  They survey the view before them in a crude approximation of a sentient surveyor, seeming to take in the shifting, squiggling view of your ardent masturbation.  In truth, you're just trying to think of where to stick them.  A few droplets of liquid lust leak from their tips in sympathetic pleasure, and it gives you an idea for just what to do with them.  They stretch out towards your torso, veering to the sides at the last second.  Dripping onto your shoulders, the pulsating plant-pricks slowly push into your armpit, lubricating your " + player.skinFurScales() + " with their amorous liquid.");
-				if (player.tentacleCocks() >= 7) outputText("  They pile in there, really squirming against each other as much as you, frotting against your sweat-slick flesh.  ");
+				if (player.tentacleCocks() >= 7 || player.stamenCocks() > 6) outputText("  They pile in there, really squirming against each other as much as you, frotting against your sweat-slick flesh.  ");
 				outputText("  You're fucking your armpits, and it feels divine, so good that your pits are swampy pits of sex within moments.");
 			}
 			//One more:
-			else if (player.tentacleCocks() >= 4) {
+			else if (player.tentacleCocks() >= 4 || player.stamenCocks() > 3) {
 				outputText("\n\nThe last green tool rises up above you.  It surveys the view before it in a crude approximation of a sentient surveyor, seeming to take in the shifting, squiggling view of your ardent masturbation.  In truth, you're just trying to think of where to stick it.  A droplet of liquid lust leaks from the tip in sympathetic pleasure, and it gives you an idea for just what to do with it.  It stretches out towards your torso but veers left at the last second.  Dripping onto your shoulder, the pulsating plant-prick slowly pushes into your armpit, lubricating your " + player.skinFurScales() + " with its amorous liquid.  You're fucking your armpit and it feels divine, so good that you quickly slick your pit and twist the spare cock around yourself so that it can double-fuck both sides.");
 			}
 			
@@ -3219,19 +3219,19 @@ package classes.Scenes {
 				outputText("balls");
 			else outputText("groin");
 			outputText(".  Orgasm is rapidly closing in, and there's no slowing your frenzied flora at this point.  You ");
-			if (player.tentacleCocks() >= 3)
+			if (player.tentacleCocks() >= 3 || player.stamenCocks() > 2)
 				outputText("gurgle");
 			else outputText("moan");
 			outputText(" as your inner muscles begin to contract into tight knots, the pressure building to a turgid, throbbing peak.  Then, as you");
-			if (player.tentacleCocks() >= 3)
+			if (player.tentacleCocks() >= 3 || player.stamenCocks() > 2)
 				outputText("r multitude of penises");
 			outputText(" thrust deep inside yourself, a volcano of pleasure erupts, pumping thick flows of white goo straight into your snatch");
-			if (player.tentacleCocks() == 2)
+			if (player.tentacleCocks() == 2 || player.stamenCocks() == 2)
 				outputText(" and ass");
-			else if (player.tentacleCocks() > 2)
+			else if (player.tentacleCocks() > 2 || player.stamenCocks() > 2)
 				outputText(", ass, and mouth");
 			outputText(".");
-			if (player.tentacleCocks() >= 3) {
+			if (player.tentacleCocks() >= 3 || player.stamenCocks() > 2) {
 				outputText("  You gulp the salty flow down as best you are able");
 				if (player.cumQ() >= 500) {
 					outputText(".  That doesn't really count for much with how heavy your load is, ");
@@ -3242,9 +3242,9 @@ package classes.Scenes {
 				outputText(".");
 			}
 			outputText("  Your birth canal is quickly flooded with white spooge");
-			if (player.tentacleCocks() >= 2) outputText(", while your [ass]'s interior is painted bright white");
+			if (player.tentacleCocks() >= 2 || player.stamenCocks() > 1) outputText(", while your [ass]'s interior is painted bright white");
 			outputText(".");
-			if (player.tentacleCocks() == 2) {
+			if (player.tentacleCocks() == 2 || player.stamenCocks() == 2) {
 				outputText("  Your untended " + cockDescript(y) + " blows spunk over you ");
 				if (player.cumQ() < 50)
 					outputText("in small spurts");
@@ -3266,34 +3266,34 @@ package classes.Scenes {
 					outputText(".  The sensations coming from your prehensile penises are just so overwhelming that it's like a whole-body-gasm.");
 				}
 			}
-			else if (player.tentacleCocks() >= 4) {
+			else if (player.tentacleCocks() >= 4 || player.stamenCocks() > 3) {
 				outputText("  Meanwhile, the purple tip");
-				if (player.tentacleCocks() == 4)
+				if (player.tentacleCocks() == 4 || player.stamenCocks() == 4)
 					outputText("s swell");
 				else outputText(" swells");
 				outputText(" in your armpit");
-				if (player.tentacleCocks() >= 5) outputText("s");
+				if (player.tentacleCocks() >= 5 || player.stamenCocks() > 4) outputText("s");
 				outputText(", engorging immensely as they press right into the soft, concave flesh within, the semen squirting out in pressured, arm-soaking jets.");
 			}
 			
 			outputText("\n\nAt once, your whole body sags back, limp and drained.  The elongated tentacle");
-			if (player.tentacleCocks() > 1)
+			if (player.tentacleCocks() > 1 || player.stamenCocks() > 1)
 				outputText("s retract");
 			else outputText(" retracts");
 			outputText(" back to ");
-			if (player.tentacleCocks() == 1)
+			if (player.tentacleCocks() == 1 || player.stamenCocks() == 1)
 				outputText("its");
 			else outputText("their");
 			outputText(" normal length, popping out of your vagina");
-			if (player.tentacleCocks() == 2)
+			if (player.tentacleCocks() == 2 || player.stamenCocks() == 2)
 				outputText(" and ass");
-			else if (player.tentacleCocks() > 2) outputText(", ass, and mouth");
+			else if (player.tentacleCocks() > 2 || player.stamenCocks() > 2) outputText(", ass, and mouth");
 			outputText(", leaving your orifice");
-			if (player.tentacleCocks() > 1) outputText("s");
+			if (player.tentacleCocks() > 1 || player.stamenCocks() > 1) outputText("s");
 			outputText(" to dribble the spent passion on the ground.  Damn, that was satisfying.");
 			//(-2 sens + 1 per tentacle dick, -100 lust)
 			player.orgasm();
-			dynStats("sen", (-1*(1 + player.tentacleCocks())));
+			dynStats("sen", (-1*(1 + (player.tentacleCocks() + player.stamenCocks()))));
 			doNext(camp.returnToCampUseOneHour);
 		}
 		

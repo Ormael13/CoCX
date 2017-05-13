@@ -154,7 +154,7 @@ public function alraunezeMe():void {
 	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) {
 		outputText("<i>\"Oh...I see you went through the trouble of eating Hollicynthia’s fruits to grow closer to me. I honestly didn’t expect you to show this level of devotion. Perhaps I misjudged you. In return for services rendered, I think adopting you as a daughter of mine would, perhaps, not be beyond my grace. Will you, in turn, embrace the love of the goddess of fertility? What say you, my champion?</i>\"", false);
 	}
-	else {
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
 		outputText("<i>\"Well, aren’t you sweet? So envious of me and Hollicyntia that you tried to become a flower yourself! Your level of devotion to your goddess is truly touching. How about I remake you, improve you, all while giving you what you truly desire? Then, adopt you as my fully fledged daughter? My first real convert to the new religion? Think of it as a... final reward.</i>\"", false);
 	}
 	menu();
@@ -174,13 +174,30 @@ private function alraunezeMeYes():void {
 		outputText("<i>\"So be it. Let me welcome you as my newest daughter, then.</i>\"\n\n", false);
 		outputText("You feel something tugging at your feet, which makes itself known by pulling you into the ground all of a sudden, Marae's roots drawing you into a motherly hug. You feel Marae’s warmth spread to you from the loving roots of the goddess, making you close your eyes to appreciate the feeling of the sun on your vegetal skin, losing yourself in the sensation of her divine love engulfing you. You feel sleepy... so sleepy that it's hard to stand still, but stand still you do, not wanting to ruin this perfect moment. Even as the light around you begins to fade and you let yourself finally doze off, you remain calm, listening to the slow chorus of nature.\n\n", false);
 	}
-	else {
+	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
 		outputText("You look at Marae’s lovely tentacles and that perfect body of hers, only growing all the more jealous of her glorious form and nod. You want to become like her - a perfect embodiment of verdant beauty and lust.\n\n", false);
 		outputText("<i>\"Very well. But first, my lovely daughter to be, you will have to earn your place at my side.</i>\"\n\n", false);
 		outputText("Marae coos with pleasure and allows a nectar-slicked tentacle to slip free of her flower. Her sweet, corrupted smell fills the air, like pollen carried on a spring breeze, clinging to your senses like a heavenly blanket. The goddess' fingers trace the outline of her budding clit, and you watch, enraptured, as it swells up turning purple as it peeks out of her floral slit. A clear ridge forms underneath the tip, delineating the underside of a newly grown cock-tip. Marae bats her eyelashes and strokes the newly-formed growth as it fills out, surpassing the length of any mortal man. ", false);
 		outputText("The crown is a shiny, almost slick purple color, fading to green the further down the stalk-like shaft it goes. She climbs to her feet, fingernails tracing the outline of the newly-formed urethral bulge on her shaft as she glides closer to you.\n\n", false);
-		outputText("PLACEHOLDER MAGIC SCENE WHEN PC IS ALRAUNEZED!\n\n", false);
-		outputText("PLACEHOLDER MAGIC SCENE WHEN PC IS ALRAUNEZED!\n\n", false);
+		outputText("Paralyzed by worry (yet somehow aroused), you don’t manage a single backwards step before the warm bulge is rubbing at your crotch insistently, and her sap-drooling teats are crushed into your\n\n", false);
+		if (player.tallness > 96) outputText("chest", false);
+		else outputText("face", false);
+		outputText(". Unbidden, your own nipples grow hard ", false);
+		if (!player.isNaked()) outputText(" under your [armor]", false);
+		outputText(", rubbing against the ", false);
+		if (!player.isNaked()) outputText("cloth", false);
+		else outputText("smooth flesh of the goddess", false);
+		outputText(". Marae glances down knowingly ", false);
+		if (!player.isNaked()) outputText("and begins to undo your gear, tossing it aside", false);
+		else outputText("regarding you", false);
+		outputText(" with almost bored contempt. The sharp edges of her fingernails trace down your abdomen, circling your belly-button, and then slide down to caress your [hips]. The unexpected shift makes you gasp and rock against her, trying to get her fingertips between your legs. The goddess laughs and whispers, <i>\"No dear, that’s a dick’s job.</i>\"\n\n", false);
+		outputText("Your heart hammers in your chest, flushing your skin with heat from the goddess' presence and perfect, knowing touches. There’s no way you could resist her at this point even if you wanted to. Her smooth, flawless hands grab your shoulders and push down with a gentle but firm pressure that meets no resistance. Your legs fold underneath Marae’s guidance, allowing you to take a proper, worshipful stance. A confused, half-formed thought claws its way out of the arousal that’s fogging up your brain, but you shake your head in irritation and begin to lick your lips while you gawk at Marae’s proud new shaft.\n\n", false);
+		outputText("Marae runs her slender fingers through your [hair], pulling your face closer and closer until you can smell the fragrance of her nectar and make out every detail of her impeccably smooth penis. The goddess commands you, sternness in her motherly voice, <i>\"Worship it as you would worship me.</i>\" You nod, feeling remarkably obedient as you lean forwards to take her in your mouth. A bead of moisture rolls down the tip, smearing over your lower lip, as you open up to encapsulate the suddenly hermaphroditic goddess' prick. Her pre is sweet, though it doesn’t surprise you considering it’s coming from part of a flower.  It reminds you a little of honey, though there is an undercurrent of something else that you can’t quite place.\n\n", false);
+		outputText("Bobbing back and forth, you begin to fellate the goddess of fertility with unthinking, flawless precision. Marae’s hands continue to toy with your -hair descript-, wrenching it painfully once when you accidentally bump her with your teeth. You whimper submissively and work harder, and your goddess rewards you by snaking a tentacle to your groin. ", false);
+		if (player.lowerGarmentName == "nothing") outputText("", false);
+		else outputText("The rounded tip nuzzles against you through your -lower armor descript- like a familiar friend, but quickly angles itself to slip inside causing you to jump a little in shock at the way it now presses against your bare flesh. ", false);
+		outputText("It curls around your body, coating you with slippery fluids as it works its way back towards your [cunt].\n\n", false);
+		outputText("The tentacle squirts something slippery and warm over your outer lips before arching up to slip inside you. A half-articulated hum of pleasure escapes through your throat, causing it to vibrate around Marae’s plant-like prick. She grunts and deposits a fat bead of nectar in your mouth, and trickles of the goddess sticky vaginal fluids start to slide down her inner thighs. Marae’s hips start to pump into you in time with the tentacle that’s worming its way inside your [cunt]. (tightness/virginity modifications here) Both the tentacle and the goddess' cock are dripping and giving tiny squirts of sweet pleasure that simultaneously dull the mind and reinforce your worship of this sexually-charged deity.\n\n", false);
 		outputText("Marae grunts and pulls on your [hair], shoving her thick clit-cock deep inside your throat. You reflexively swallow down the bulging fuck-meat and struggle to suppress your gag reflex as her cock grows thick in your mouth, dumping its cream down your wanton gullet. The slippery tentacle goes into overdrive while Marae cums, pumping away at your snatch with incredibly violent fervor. Your belly bubbles as it’s stuffed full of goddess-cum, and your pussy clamps down hard on its invader while it spurts out its own syrupy load into your womb. Swooning with lust, you orgasm from the twin violations, squirming on Marae’s rod while she packs you with nectar.\n\n", false);
 		outputText("The goddess pulls back with a satisfied sigh, dragging her length out of your throat and shivering from the sensations of your hot, oral vice on her twitching member. You look up at her with eyes full of adoration, feeling your gut churn from the quantity of her deposit, a gift you are most grateful for. Marae ruffles your hair and pulls the tentacle back with a suddenness that makes you feel empty and void. You feel a little drowsy, finally giving in and closing your eyes while your goddess watches over you. Everything is perfect...\n\n", false);
 	}
@@ -193,22 +210,48 @@ private function alraunezeMeYes0():void {
 	outputText("You barely finish examining the new changes before daydreams of luring and laying both men and women alike suddenly assault your mind. Images of waiting holes thirsting for your seed or hard stamens begging you to impale yourself on race through your mind, driving your arousal to new heights as you blush wildly. As it reaches it’s peak, your body lets out a massive cloud of pollen in the air to let everyone know you're in season. Still high on whatever aphrodisiac effect caused this, you can’t help but be delighted by this new development. <b>You gained the Alraune pollen ability!</b>\n\n", false);
 	outputText("Marae has been quietly watching as you got... acquainted with your new changes, her roots still hugging your vines, entwined together as she gently supports you. You realise what she has done for you and try to find the most appropriate words for the situation, so you can properly thank her. Sadly, you draw a blank, unable to find any words that would properly communicate the full extent of your thankfulness. Instead, you settle for something much simpler, a single word:\n\n", false);
 	outputText("<i>\"Mother...?</i>\"\n\n", false);
-	outputText("PLACEHOLDER MAGIC SCENE WHEN PC IS ALRAUNEZED!\n\n", false);
+	outputText("Marae warmly responds. <i>\"Good morning, my new daughter. I am glad that you appreciate your new form. I took the liberty of making you a body as close to my own as possible, within reason, of course, not hindering your ability to move around, for instance. Otherwise, it would have been difficult to continue your mission as my emissary.</i>\"\n\n", false);
+	outputText("You nod, appreciative of what she has done for you, as you feel as if you are now connected to her by some sort of invisible link. Knowing what must be done, you head back to your camp, leaving your newly acquired second mother to her affairs.\n\n", false);
+	if (player.findPerk(PerkLib.MaraesGiftFertility) < 0) {
+		outputText("<b>(New Perk Gained: Marae's Gift – Fertility)</b>\n", false);
+		player.createPerk(PerkLib.MaraesGiftFertility,0,0,0,0);
+	}
+	if (player.findPerk(PerkLib.MaraesGiftButtslut) < 0) {
+		outputText("<b>(New Perk Gained: Marae's Gift – Buttslut)</b>\n", false);
+		player.createPerk(PerkLib.MaraesGiftButtslut,0,0,0,0);
+	}
+	if (player.findPerk(PerkLib.MaraesGiftStud) < 0) {
+		outputText("<b>(New Perk Gained: Marae's Gift – Stud)</b>\n", false);
+		player.createPerk(PerkLib.MaraesGiftStud,0,0,0,0);
+	}
+	if (player.findPerk(PerkLib.MaraesGiftProfractory) < 0) {
+		outputText("<b>(New Perk Gained: Marae's Gift – Profractory)</b>\n", false);
+		player.createPerk(PerkLib.MaraesGiftProfractory,0,0,0,0);
+	}
 	if (player.cockTotal() == 0) {
 		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-		player.cocks[0].cockType = CockTypesEnum.STAMEN;
-	}
-	if (player.cockTotal() == 1) {
-		player.cocks[0].cockType = CockTypesEnum.STAMEN;
-	}
-	if (player.cockTotal() > 1) {
-		player.killCocks( -1);
+		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
 		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
 		player.cocks[0].cockType = CockTypesEnum.STAMEN;
+		player.cocks[1].cockType = CockTypesEnum.STAMEN;
+		player.cocks[2].cockType = CockTypesEnum.STAMEN;
+		player.cocks[3].cockType = CockTypesEnum.STAMEN;
+	}
+	if (player.cockTotal() > 0) {
+		player.killCocks( -1);
+		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+		player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
+		player.cocks[0].cockType = CockTypesEnum.STAMEN;
+		player.cocks[1].cockType = CockTypesEnum.STAMEN;
+		player.cocks[2].cockType = CockTypesEnum.STAMEN;
+		player.cocks[3].cockType = CockTypesEnum.STAMEN;
 	}
 	if (player.wingType == WING_TYPE_PLANT) player.wingType = WING_TYPE_NONE;
 	player.lowerBody = LOWER_BODY_TYPE_PLANT_FLOWER;
-	player.legCount = 4;
+	player.legCount = 12;
 	doNext(camp.returnToCampUseTwoHours);
 }
 

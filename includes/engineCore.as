@@ -460,6 +460,14 @@ public function doubleStrikeOptions():void {
 	else addButton(14, "Back", displayPerks);
 }
 
+public function darknessArrows():void {
+	flags[kFLAGS.ELEMENTAL_ARROWS] = 4;
+	doubleStrikeOptions();
+}
+public function lightningArrows():void {
+	flags[kFLAGS.ELEMENTAL_ARROWS] = 3;
+	doubleStrikeOptions();
+}
 public function iceArrows():void {
 	flags[kFLAGS.ELEMENTAL_ARROWS] = 2;
 	doubleStrikeOptions();
@@ -1722,7 +1730,7 @@ public function buildPerkList():Array {
 	if (player.catScore() >= 4 && player.findPerk(PerkLib.Flexibility) > 0) {
 		_add(new PerkClass(PerkLib.CatlikeNimbleness));
 	}
-	if (player.dragonScore() >= 6 && player.findPerk(PerkLib.DragonFireBreath) > 0 && player.findPerk(PerkLib.DragonIceBreath) > 0) {
+	if (player.dragonScore() >= 4 && player.findPerk(PerkLib.DragonFireBreath) > 0 && player.findPerk(PerkLib.DragonIceBreath) > 0 && player.findPerk(PerkLib.DragonLightningBreath) > 0 && player.findPerk(PerkLib.DragonDarknessBreath) > 0) {
 		_add(new PerkClass(PerkLib.DraconicLungs));
 	}
 	if (player.gorgonScore() >= 5 && player.eyeType == 4) {

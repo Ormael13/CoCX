@@ -134,8 +134,7 @@ package classes.Scenes.Camp
 		}
 
 		public function canGatherWoods():Boolean {
-			return flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4
-				   && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < 100;
+			return flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4 && (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < 300 || (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < 900));
 		}
 		//STAGE 4 - Gather woods, explore forest to encounter.
 		public function gatherWoods():void {

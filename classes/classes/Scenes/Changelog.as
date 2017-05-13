@@ -44,6 +44,7 @@ package classes.Scenes
 			outputText("-New core stat added: Wisdom. It can be rised using stat pints form lvl-ups. Currently how high it's can be checked in Soulforce menu only.\n");
 			outputText("-Each of perk with word Soul in name aside first of line Job: Soul Cultivator have now added min wisdom req. that is stage of cultivation x20 so newest one added cultivation stage Soul Overlord req. to have 120+ wisdom. Also job: Soul Cultivator similary like other base job perks will be giving stat bonus now too: +5 to max Wis (scalable with NG tiers).\n");
 			outputText("-Perks like Ezekiel Blessing, Job: All-Rounder, Chimerical Body: Basic Stage or asc perk Transhumanism will also grat bonuses to max Wis of the same amount as intelligent bonuses. Humanity bonuses due to addition of wisdom lowered to +60 to max str/tou/spe and +65 to max int/wis/lib at 25 pts in humanity score with loosing each point of humanity to get 10 points from bonuses still happening.\n");
+			outputText("-Kitsune racial bonuses changed to: Half-Kitsune (-35 strength +20 speed +30 intelligence +40 wisdom +20 libido), Kitsune/9 Tailed Kitsune (-50 strength +40 speed +70 intelligence +100 wisdom +20 libido). Rest of racial bonuses unchanged.\n");
 			outputText("-Job: Arcane Archer perk has been renamed to Job: Hunter with new req. been: perk Job: Ranger and Archers Stamina I and 80+ speed.\n");
 			outputText("-Perks Elemental Arrows and Cupid was moved from currently newly named Job: Hunter group (old Job: Arcane Archer) to new group under perk Prestige Job: Arcane Archer keeping all previous req. aside min. lvl that was rised for first to lvl 42+ and second to lvl 48+\n");
 			outputText("-Options for multiattacks inmelee and range menu will be grey out if currnetly used weapon not allow them like 4-6 melee attack when PC use large weapon.\n");
@@ -96,7 +97,6 @@ package classes.Scenes
 			outputText("-New Soulskill: Resonance Volley (Req. Warden’s bow equiped) Effect: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.\n");
 			outputText("-New Soulskill: Avatar of the Song (Req. Warden’s staff equiped) Effect: Doublecast Charged Weapon and Might. Casts blind if charged weapon is already active. Casts Heal if Might is already active.\n");
 			outputText("-Hooked Gauntlets and Spiked Gauntlet weapons are removed from pool of weapons working with mutliattack due to been put in same group of weapons that would benefits from perks affecting fists attacks.\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-New hair type: Grass hair. Result of using Mara fruit. Hair TF for Mara fruit will be now have 50% to give leaf or grass hair.\n");

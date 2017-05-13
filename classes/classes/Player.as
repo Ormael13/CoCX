@@ -2281,10 +2281,14 @@ use namespace kGAMECLASS;
 				dragonCounter++;
 		//	if (dragonCocks() > 0)
 		//		dragonCounter++;
-		//	if (findPerk(PerkLib.DragonFireBreath) >= 0)
-		//		dragonCounter++;
-		//	if (findPerk(PerkLib.DragonIceBreath) >= 0)
-		//		dragonCounter++;
+			if (findPerk(PerkLib.DragonFireBreath) >= 0 && dragonCounter >= 4)
+				dragonCounter++;
+			if (findPerk(PerkLib.DragonIceBreath) >= 0 && dragonCounter >= 4)
+				dragonCounter++;
+			if (findPerk(PerkLib.DragonLightningBreath) >= 0 && dragonCounter >= 4)
+				dragonCounter++;
+			if (findPerk(PerkLib.DragonDarknessBreath) >= 0 && dragonCounter >= 4)
+				dragonCounter++;
 			if (findPerk(PerkLib.DraconicLungs) >= 0)
 				dragonCounter++;
 		//	if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
@@ -2441,9 +2445,13 @@ use namespace kGAMECLASS;
 				vouivreCounter++;
 			if (wingType == 10 || wingType == 11 || wingType == 14)
 				vouivreCounter += 2;
-			if (findPerk(PerkLib.DragonFireBreath) >= 0)
+			if (findPerk(PerkLib.DragonFireBreath) >= 0 && vouivreCounter >= 11)
 				vouivreCounter++;
-			if (findPerk(PerkLib.DragonIceBreath) >= 0)
+			if (findPerk(PerkLib.DragonIceBreath) >= 0 && vouivreCounter >= 11)
+				vouivreCounter++;
+			if (findPerk(PerkLib.DragonLightningBreath) >= 0 && vouivreCounter >= 11)
+				vouivreCounter++;
+			if (findPerk(PerkLib.DragonDarknessBreath) >= 0 && vouivreCounter >= 11)
 				vouivreCounter++;
 			if (findPerk(PerkLib.DraconicLungs) >= 0)
 				vouivreCounter++;
@@ -4061,25 +4069,31 @@ use namespace kGAMECLASS;
 				if (dragonScore() >= 16) {
 				maxStr += (80 * (1 + newGamePlusMod));
 				maxTou += (80 * (1 + newGamePlusMod));
-				maxSpe += (30 * (1 + newGamePlusMod));
-				maxInt += (50 * (1 + newGamePlusMod));
+				maxSpe += (20 * (1 + newGamePlusMod));
+				maxInt += (25 * (1 + newGamePlusMod));
+				maxWis += (25 * (1 + newGamePlusMod));
+				maxLib += (10 * (1 + newGamePlusMod));
 				}
 				else if (dragonScore() >= 12 && dragonScore() < 16) {
 				maxStr += (60 * (1 + newGamePlusMod));
 				maxTou += (60 * (1 + newGamePlusMod));
-				maxSpe += (20 * (1 + newGamePlusMod));
-				maxInt += (40 * (1 + newGamePlusMod));
+				maxSpe += (10 * (1 + newGamePlusMod));
+				maxInt += (20 * (1 + newGamePlusMod));
+				maxWis += (20 * (1 + newGamePlusMod));
+				maxLib += (10 * (1 + newGamePlusMod));
 				}
 				else if (dragonScore() >= 8 && dragonScore() < 12) {
-				maxStr += (50 * (1 + newGamePlusMod));
+				maxStr += (40 * (1 + newGamePlusMod));
 				maxTou += (30 * (1 + newGamePlusMod));
 				maxSpe += (10 * (1 + newGamePlusMod));
-				maxInt += (30 * (1 + newGamePlusMod));
+				maxInt += (20 * (1 + newGamePlusMod));
+				maxWis += (20 * (1 + newGamePlusMod));
 				}
 				else {
-				maxStr += (30 * (1 + newGamePlusMod));
+				maxStr += (15 * (1 + newGamePlusMod));
 				maxTou += (15 * (1 + newGamePlusMod));
 				maxInt += (15 * (1 + newGamePlusMod));
+				maxWis += (15 * (1 + newGamePlusMod));
 				}
 			}//+60/50-60
 			if (dogScore() >= 4) {
@@ -4155,16 +4169,18 @@ use namespace kGAMECLASS;
 			}//+20/10-20
 			if (kitsuneScore() >= 5) {
 				if (kitsuneScore() >= 12 && tailType == 13 && tailCount == 9) {
-					maxStr -= (40 * (1 + newGamePlusMod));
-					maxSpe += (60 * (1 + newGamePlusMod));
-					maxInt += (100 * (1 + newGamePlusMod));
-					maxLib += (40 * (1 + newGamePlusMod));
+					maxStr -= (50 * (1 + newGamePlusMod));
+					maxSpe += (40 * (1 + newGamePlusMod));
+					maxInt += (70 * (1 + newGamePlusMod));
+					maxWis += (100 * (1 + newGamePlusMod));
+					maxLib += (20 * (1 + newGamePlusMod));
 				}
 				else {
-					maxStr -= (40 * (1 + newGamePlusMod));
+					maxStr -= (35 * (1 + newGamePlusMod));
 					maxSpe += (20 * (1 + newGamePlusMod));
-					maxInt += (50 * (1 + newGamePlusMod));
-					maxLib += (40 * (1 + newGamePlusMod));
+					maxInt += (30 * (1 + newGamePlusMod));
+					maxWis += (40 * (1 + newGamePlusMod));
+					maxLib += (20 * (1 + newGamePlusMod));
 				}
 			}//+50/50-60
 		/*	if (kitshooScore() >= 6) {
