@@ -73,15 +73,10 @@ use namespace kGAMECLASS;
 					}, {
 						//Helia monogamy fucks
 						name  : "helcommon",
-						call  : kGAMECLASS.helScene.helSexualAmbush,
+						call  : game.helScene.helSexualAmbush,
 						chance: 0.2,
-						when  : function():Boolean {
-							return flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1
-								   && flags[kFLAGS.HEL_RAPED_TODAY] == 0
-								   && player.gender > 0
-								   && !kGAMECLASS.helScene.followerHel();
-						}
-					},{
+						when  : game.helScene.helSexualAmbushCondition
+					}, {
 						name  : "deepwoods",
 						call  : discoverDeepwoods,
 						when  : function ():Boolean {
@@ -89,7 +84,6 @@ use namespace kGAMECLASS;
 						},
 						chance: Encounters.ALWAYS
 					},  {
-						//Tamani 25% of all goblin encounters encounter rate
 						name  : "Tamani",
 						chance: 0.1,
 						call  : function ():void {
@@ -204,158 +198,112 @@ use namespace kGAMECLASS;
 		}
 		private var _deepwoodsEncounter:Encounter = null;
 		public function get deepwoodsEncounter():Encounter { // lateinit because it references getGame()
+			const game:CoC     = getGame();
 			return _deepwoodsEncounter ||= Encounters.group(/*kGAMECLASS.commonEncounters,*/ {
+				name: "shrine",
+				when: function():Boolean {
+					return flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] < 1;
+				},
+				call: kitsuneScene.kitsuneShrine
+			}, {
+				//Helia monogamy fucks
+				name  : "helcommon",
+				call  : game.helScene.helSexualAmbush,
+				chance: 0.2,
+				when  : game.helScene.helSexualAmbushCondition
+			}, {
+				name  : "etna",
+				when  : function():Boolean {
+					return flags[kFLAGS.ETNA_FOLLOWER] < 1
+						   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2;
+				},
+				call  : etnaScene.repeatYandereEnc
+			}, {
 				name: "kitsune",
-				call: kitsuneScene
-			}, /*{ // [INTERMOD:8chan]
+				when: function():Boolean {
+					return flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] < 4;
+				},
+				call: kitsuneScene.enterTheTrickster
+			},/*{ // [INTERMOD:8chan]
 			 name: "dullahan",
 			 call: dullahanScene
 			 }, */{
 				name: "akbal",
-				call: akbalScene
+				call: akbalScene.supahAkabalEdition
 			}, {
-				name: "tamani",
-				call: tamaniScene
+				name  : "Tamani",
+				chance: 0.1,
+				call  : function ():void {
+					if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0
+						&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 24) {
+						tamaniDaughtersScene.encounterTamanisDaughters();
+					} else {
+						tamaniScene.encounterTamani();
+					}
+				},
+				when  : function ():Boolean {
+					return flags[kFLAGS.TAMANI_TIME_OUT] == 0
+						   && player.gender > 0
+						   && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)
+						   && flags[kFLAGS.SOUL_SENSE_TAMANI] < 4;
+				}
 			}, {
 				name: "faerie",
-				call: faerie
+				when: faerie.isEnabled,
+				call: faerie.encounterFaerie
 			}, {
 				name: "erlking",
-				call: erlkingScene
-			}, /*{
-				name: "fera",
-				call: getGame().fera
-			}, */{
+				when: function():Boolean {
+					return flags[kFLAGS.ERLKING_DISABLED] == 0;
+				},
+				call: erlkingScene.encounterWildHunt
+			}, {
+				name: "fera_1",
+				when: function():Boolean {
+					return isHalloween()
+						   && player.findPerk(PerkLib.FerasBoonBreedingBitch) < 0
+						   && player.findPerk(PerkLib.FerasBoonAlpha) < 0
+						   && date.fullYear > flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE];
+				},
+				call: game.pumpkinFuckEncounter
+			}, {
+				name: "fera_2",
+				when: function():Boolean {
+					return isHalloween()
+						   && flags[kFLAGS.FERAS_TRAP_SPRUNG_YEAR] == 0
+						   && date.fullYear > flags[kFLAGS.FERAS_GLADE_EXPLORED_YEAR];
+				},
+				call: game.feraSceneTwoIntroduction
+			},{
 				name  : "woods",
 				call  : camp.cabinProgress.gatherWoods,
 				chance: 0.50,
 				when  : camp.cabinProgress.canGatherWoods
 			}, {
-				name  : "glade",
+				name  : "corrGlade",
 				call  : corruptedGladeFn,
-				chance: 2
+				when  : function():Boolean {
+					return flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100;
+				},
+				chance: function():Number {
+					return (100 - 0.75*(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]||0))/100;
+				}
 			}, {
 				name: "tentabeast",
 				call: tentacleBeastDeepwoodsEncounterFn,
 				when: Encounters.fn.ifLevelMin(2)
-			}, /*{
+			}, {
 				name: "dungeon",
 				call: getGame().dungeons.enterDeepCave,
 				when: getGame().dungeons.canFindDeepCave
-			}, */{
+			}, {
 				name  : "walk",
 				call  : deepwoodsWalkFn,
 				chance: 0.01
 			});
 		}
 		public function exploreDeepwoods():void {
-			var choice:Array = [];
-			var select:int;
-			
-			//Build choice list!
-			if (flags[kFLAGS.FAERIE_ENCOUNTER_DISABLED] <= 0) choice[choice.length] = 0; //Faerie
-			if (player.level >= 2) choice[choice.length] = 1; //Tentacle Beast
-			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100 && rand(100) >= Math.round(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] * 0.5)) choice[choice.length] = 2; //Corrupted Glade
-			choice[choice.length] = 3; //Akbal
-			choice[choice.length] = 4; //Kitsunes or Gather woods
-			if (flags[kFLAGS.TAMANI_TIME_OUT] == 0 && player.gender > 0 && (player.totalCocks() > 0 || player.hasKeyItem("Deluxe Dildo") < 0)) choice[choice.length] = 5; //Tamani
-			if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < 100 && rand(2) == 0) choice[choice.length] = 6; //Gather woods
-			
-			//Every tenth exploration finds a pumpkin if eligible!
-			if (player.statusAffectv1(StatusAffects.ExploredDeepwoods) % 10 == 0 && isHalloween()) {
-				//If Fera isn't free yet...
-				if (player.findPerk(PerkLib.FerasBoonBreedingBitch) < 0 && player.findPerk(PerkLib.FerasBoonAlpha) < 0) {
-					if (date.fullYear > flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE]) {
-						awardAchievement("Pump-kin-kin-kin", kACHIEVEMENTS.HOLIDAY_HALLOWEEN_I);
-						kGAMECLASS.pumpkinFuckEncounter();
-						return;
-					}
-				}
-				//Fera is free!
-				else {
-					if (flags[kFLAGS.FERAS_TRAP_SPRUNG_YEAR] == 0) {
-						if (date.fullYear > flags[kFLAGS.FERAS_GLADE_EXPLORED_YEAR]) {
-							kGAMECLASS.feraSceneTwoIntroduction();
-							return;
-						}
-					}
-				}
-			}
-			//Hel jumps you for sex.
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helScene.followerHel()) {
-				kGAMECLASS.helScene.helSexualAmbush();
-				return;
-			}
-			//Etna
-			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && rand(5) == 0) {
-				etnaScene.repeatYandereEnc();
-				return;
-			}
-			//Every 5th exploration encounters d2 if hasnt been met yet and factory done
-			if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] == 0 && player.statusAffectv1(StatusAffects.ExploredDeepwoods) % 5 == 0 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0) {
-				kGAMECLASS.dungeons.enterDeepCave();
-				return;
-			}
-			if (flags[kFLAGS.ERLKING_DISABLED] == 0 && flags[kFLAGS.ERLKING_ENCOUNTER_COUNTER] == 4)
-			{
-				flags[kFLAGS.ERLKING_ENCOUNTER_COUNTER] = 0;
-				erlkingScene.encounterWildHunt();
-				return;
-			}
-			else
-			{
-				flags[kFLAGS.ERLKING_ENCOUNTER_COUNTER]++;
-			}
-			
-			select = choice[rand(choice.length)];
-			//==============================
-			//EVENTS GO HERE!
-			//==============================
-			switch(select) {
-				case 0: //Faerie
-					faerie.encounterFaerie();
-					break;
-				case 1: //Tentacle beasts
-					tentacleBeastDeepwoodsEncounterFn();
-					break;
-				case 2: //Corrupted Glade
-					if (rand(4) == 0) {
-						trappedSatyr();
-						return;
-					}
-					corruptedGlade.intro();
-					break;
-				case 3: //Akbal
-					akbalScene.supahAkabalEdition();
-					break;
-				case 4: //Kitsunes or Gather wood
-					if (rand(3) == 0) {
-						if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] < 1) kitsuneScene.kitsuneShrine();
-						else camp.cabinProgress.gatherWoods();
-					}
-					else {
-						if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] < 4) kitsuneScene.enterTheTrickster();
-						else camp.cabinProgress.gatherWoods();
-					}
-					break;
-				case 5: //Tamani
-					if (player.totalCocks() > 0 && flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0 && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 24) {
-						if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 4) tamaniDaughtersScene.encounterTamanisDaughters();
-						else kGAMECLASS.exploration.genericGolGobImpEncounters();
-					}
-					else {
-						if (flags[kFLAGS.SOUL_SENSE_TAMANI] < 4) tamaniScene.encounterTamani();
-						else kGAMECLASS.exploration.genericGolGobImpEncounters();
-					}
-					break;
-				case 6: //Gather wood
-					camp.cabinProgress.gatherWoods();
-					break;
-				default: //Failsafe mechanism
-					deepwoodsWalkFn();
-					break;
-			}
-			// deepwoodsEncounter.execEncounter();
+			deepwoodsEncounter.execEncounter();
 		}
 
 		public function tripOnARoot():void {

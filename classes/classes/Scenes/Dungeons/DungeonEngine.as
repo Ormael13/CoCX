@@ -179,6 +179,10 @@ package classes.Scenes.Dungeons
 		public function enterFactory():void {
 			factory.enterDungeon();
 		}
+		public function canFindDeepCave():Boolean {
+			return flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] == 0
+				   && flags[kFLAGS.FACTORY_SHUTDOWN] > 0;
+		}
 		public function enterDeepCave():void {
 			deepcave.enterDungeon();
 		}

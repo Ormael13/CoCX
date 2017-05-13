@@ -1888,6 +1888,12 @@ private function satisfyHelSoSheStopsMinoFucking():void {
 	helFuckMenu();
 }
 
+	public function helSexualAmbushCondition():Boolean {
+		return flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1
+			   && flags[kFLAGS.HEL_RAPED_TODAY] == 0
+			   && player.gender > 0
+			   && !kGAMECLASS.helScene.followerHel();
+	}
 //Hel Sexual Ambush
 //(Proc's once per day when [Exploring] anywhere)
 public function helSexualAmbush():void {

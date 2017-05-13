@@ -18,7 +18,10 @@ package classes.Scenes.Camp
 	public class CabinProgress extends BaseContent {
 		
 		public var maxNailSupply:int = 600;
-		public var maxWoodSupply:int = 900;
+		public function get maxWoodSupply():int {
+			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) return 900;
+			return 300;
+		}
 		public var maxStoneSupply:int = 900;
 		
 		public function CabinProgress() {
@@ -135,7 +138,7 @@ package classes.Scenes.Camp
 
 		public function canGatherWoods():Boolean {
 			return flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 4
-				   && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < 100;
+				   && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] < maxWoodSupply;
 		}
 		//STAGE 4 - Gather woods, explore forest to encounter.
 		public function gatherWoods():void {
@@ -242,12 +245,8 @@ package classes.Scenes.Camp
 		public function incrementWoodSupply(amount:int):void {
 			outputText("<b>(+" + amount + " wood!");
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += amount;
-			if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= maxWoodSupply && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) {
+			if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= maxWoodSupply) {
 				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = maxWoodSupply;
-				outputText(" Your wood capacity is full.")
-			}
-			else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 300 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) {
-				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = 300;
 				outputText(" Your wood capacity is full.")
 			}
 			outputText(")</b>");

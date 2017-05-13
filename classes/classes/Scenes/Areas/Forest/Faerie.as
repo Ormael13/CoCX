@@ -8,6 +8,10 @@
 	{
 	}
 
+		public function isEnabled():Boolean {
+			return flags[kFLAGS.FAERIE_ENCOUNTER_DISABLED] <= 0;
+		}
+
 //faerie Encounter
 public function encounterFaerie():void {
 	spriteSelect(17);
