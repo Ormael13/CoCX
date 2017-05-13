@@ -43,7 +43,7 @@ package classes.Scenes
 			outputText("-New 6th stage of soul cultivation: Soul Overlord (req. lvl 36+ and Soul Exalt perk).\n");
 			outputText("-New core stat added: Wisdom. It can be rised using stat pints form lvl-ups. Currently how high it's can be checked in Soulforce menu only.\n");
 			outputText("-Each of perk with word Soul in name aside first of line Job: Soul Cultivator have now added min wisdom req. that is stage of cultivation x20 so newest one added cultivation stage Soul Overlord req. to have 120+ wisdom. Also job: Soul Cultivator similary like other base job perks will be giving stat bonus now too: +5 to max Wis (scalable with NG tiers).\n");
-			outputText("-Perks like Ezekiel Blessing, Job: All-Rounder or asc perk Transhumanism will also grat bonuses to max Wis of the same amount as intelligent bonuses. Huanity bonuses due to addition of wisdom lowered to +60 to max str/tou/spe and +65 to max int/wis/lib at 25 pts in humanity score with loosing each point of hunaity to get 10 points from bonuses still happening.\n");
+			outputText("-Perks like Ezekiel Blessing, Job: All-Rounder, Chimerical Body: Basic Stage or asc perk Transhumanism will also grat bonuses to max Wis of the same amount as intelligent bonuses. Humanity bonuses due to addition of wisdom lowered to +60 to max str/tou/spe and +65 to max int/wis/lib at 25 pts in humanity score with loosing each point of humanity to get 10 points from bonuses still happening.\n");
 			outputText("-Job: Arcane Archer perk has been renamed to Job: Hunter with new req. been: perk Job: Ranger and Archers Stamina I and 80+ speed.\n");
 			outputText("-Perks Elemental Arrows and Cupid was moved from currently newly named Job: Hunter group (old Job: Arcane Archer) to new group under perk Prestige Job: Arcane Archer keeping all previous req. aside min. lvl that was rised for first to lvl 42+ and second to lvl 48+\n");
 			outputText("-Options for multiattacks inmelee and range menu will be grey out if currnetly used weapon not allow them like 4-6 melee attack when PC use large weapon.\n");
@@ -65,7 +65,7 @@ package classes.Scenes
 			outputText("-Two new naga evolution paths both req. 11+ pts it they racial scores to give bonuses: Vouivre (+60 to max Str, +30 to max Tou, +45 to max Spe, +30 max Int) and Couatl (+40 to max Str, +25 to max Tou, +100 to max Spe)\n");
 			outputText("-Two new TF that Evangelin can craft: Vouivre Oil (1 Snake Oil, 1 Drake Heart, 15 gems) and Couatl Oil (1 Snake Oil, 1 Golden Seed, 10 gems)\n");
 			outputText("-Prices for soul recovery pills slight changed with slight increase to amount of recovered soulforce after use.\n");
-			outputText("-New High-grde Soul Recovery Pill buyable at He'Xin'Dao for 180 gems and req. to be at least Soul Overlord to be able to purchase it.\n");
+			outputText("-New High-grade Soul Recovery Pill buyable at He'Xin'Dao for 180 gems and req. to be at least Soul Overlord to be able to purchase it.\n");
 			outputText("-Soulforce would naturaly recover over time (non cultivators with ~1 point per hour - daily recovery happening at the time when all other daily flags reset aka during sleep, for cultivators it's 1 + (2 * stage of cultivation) + other possible bonuses rate per hour/half of hourly rate per combat turn)\n");
 			outputText("-In Stats page there was added new 6 trackers to show how high is current max cap for all base stats: Str, Tou, Spe, Int, Wis, Lib.\n");
 			outputText("-Job: Eromancer req. changed as follows: instead of 30+ need 60+ int and no longer need to have perk Job: Sorcerer.\n");

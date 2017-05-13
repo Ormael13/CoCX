@@ -1113,7 +1113,7 @@ package classes {
 					if (player.beardLength > 0 && player.beardLength < 12) getGame().growBeard(0.02);
 				}
 				//Clear dragon breath cooldown!
-				if (player.hasStatusAffect(StatusAffects.DragonBreathCooldown)) player.removeStatusAffect(StatusAffects.DragonBreathCooldown);
+				if (player.hasStatusAffect(StatusAffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungs) < 0) player.removeStatusAffect(StatusAffects.DragonBreathCooldown);
 				//Reset Mara Fruit daily counter
 				if (flags[kFLAGS.DAILY_MARA_FRUIT_COUNTER] > 0) flags[kFLAGS.DAILY_MARA_FRUIT_COUNTER] = 0;
 				//Reset SelfSustain & RepresLust daily counter

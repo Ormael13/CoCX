@@ -994,7 +994,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		addButton(1, "Arian", arianScene.visitAriansHouse);
 	}
 	//Cai'Lin
-	addButtonDisabled(2, "???", "Look into my eyes and answer me: Am I beautiful?");
+//	addButtonDisabled(2, "???", "Look into my eyes and answer me: Am I beautiful?");
 	//Etna
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0) {
 		outputText("Etna is resting lazily on a rug in a very cat-like manner. She’s looking at you always with this adorable expression of hers, her tail wagging expectantly at your approach.\n\n");
@@ -1212,7 +1212,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		addButton(9,"Phylla", getGame().desert.antsScene.introductionToPhyllaFollower);
 	}
 	//Samirah
-	addButtonDisabled(10, "???", "We have been entangled since the beginning.");
+//	addButtonDisabled(10, "???", "We have been entangled since the beginning.");
 	//Nieve (jako, ze jest sezonowym camp member powinna byc na koncu listy...chyba, ze zrobie cos w stylu utworzenia mini lodowej jaskini dla niej)
 	if(flags[kFLAGS.NIEVE_STAGE] == 5) {
 		kGAMECLASS.nieveCampDescs();

@@ -4857,6 +4857,7 @@ public function tease(justText:Boolean = false):void {
 	//43 Cowgirl teases
 	//44 Bikini Mail Tease
 	//45 Lethicite Armor Tease
+	//46 Alraune Tease
 	//==============================
 	//BUILD UP LIST OF TEASE CHOICES!
 	//==============================
@@ -5257,6 +5258,13 @@ public function tease(justText:Boolean = false):void {
 		choices[choices.length] = 45;
 		choices[choices.length] = 45;
 	}
+	//46 - Alraune Tease
+	if (player.hasStatusAffect(StatusAffects.AlrauneEntangle)) {
+		choices[choices.length] = 46;
+		choices[choices.length] = 46;
+		choices[choices.length] = 46;
+		choices[choices.length] = 46;
+	}
 	//=======================================================
 	//    CHOOSE YOUR TEASE AND DISPLAY IT!
 	//=======================================================
@@ -5265,6 +5273,9 @@ public function tease(justText:Boolean = false):void {
 	{
 		if(player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.cowScore() >= 3 && player.tailType == TAIL_TYPE_COW)
 			select = 43;
+	}
+	if (player.hasStatusAffect(StatusAffects.AlrauneEntangle)) {
+		select = 46;
 	}
 	//Lets do zis!
 	switch(select) {
@@ -5829,8 +5840,19 @@ public function tease(justText:Boolean = false):void {
 				default:
 					outputText("Whoops, something derped! Please let Kitteh6660 know! Anyways, you put on a tease show.");
 			}
-			
 			break;
+		//alraune teases
+		case 46:
+			outputText("You let your vines crawl around your opponent, teasing all of " + monster.a + monster.short + " erogenous zones.  " + monster.capitalA + monster.short + " gasps in involuntary arousal at your ministrations, relishing the way your vines seek out all " + monster.a + monster.short + " pleasurable spots and relentlessly assaults them.");
+		/*	if () {//ps is Lilalrune
+				outputText(" Meanwhile you and your twin smile in understanding coming up with the same idea as you begin to kiss, slathering your respective bodies with sweet syrupy nectar and mashing your breasts against each other in order to give a lewd show to " + monster.a + monster.short +  as the both of you pull a nectar dripping hand out in invitation to your entangled opponent.\n\n");
+				outputText("\"<i>Can't you see what delights you're missing out on?\n\n");
+				outputText("Just give up and we'll give you a good time.</i>\"");
+				breasts = true;
+				chance += 3;
+				damage += 10;
+			}
+		*/	break;
 	}
 	//===========================
 	//BUILD BONUSES IF APPLICABLE
@@ -10544,7 +10566,7 @@ public function physicalSpecials():void {
 	if (monster.plural) {
 		if (player.weaponName == "flail" || player.weaponName == "flaming whip" || player.weaponName == "succubi whip" || player.weaponName == "coiled whip" || player.weaponName == "long ribbon" || player.weaponName == "eldritch ribbon") addButton(button++, "Whipping", whipping, null, null, null, "Attack multiple opponent with your held weapon.  \n\n<b>AoE attack.</b>");
 		if (player.weaponName == "big fucking sword" || player.weaponName == "large claymore" || player.weaponName == "halberd" || player.weaponName == "fiery double-bladed axe" || player.weaponName == "large axe"
-		|| player.weaponName == "large hammer" || player.weaponName == "training soul axe" || player.weaponName == "huge warhammer" || player.weaponName == "nodachi") addButton(button++, "Whirlwind", whirlwind, null, null, null, "Spin your weapon around to attack multiple enemies at once.  \n\n<b>AoE attack.</b>");
+		|| player.weaponName == "large hammer" || player.weaponName == "training soul axe" || player.weaponName == "huge warhammer" || player.weaponName == "nodachi" || player.weaponName == "Warden’s greatsword") addButton(button++, "Whirlwind", whirlwind, null, null, null, "Spin your weapon around to attack multiple enemies at once.  \n\n<b>AoE attack.</b>");
 		if (player.weaponRangePerk == "Bow" && player.hasStatusAffect(StatusAffects.KnowsBarrage)) {
 			addButton(button++, "Barrage", archerBarrage, null, null, null, "Draw multiple arrow and shoot them all at the same time to hit several target.  \n\n<b>AoE attack.</b>");
 		}
@@ -10552,6 +10574,12 @@ public function physicalSpecials():void {
 	if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) {
 		if (!player.hasStatusAffect(StatusAffects.AlraunePollen)) addButton(button++, "AlraunePollen", AlraunePollen, null, null, null, "Release a cloud of your pollen in the air to arouse your foe.");
 		else if (player.hasStatusAffect(StatusAffects.AlraunePollen)) outputText("<b>You already spread your pollen over battlefield.</b>\n\n");
+		if (!player.hasStatusAffect(StatusAffects.AlrauneEntangle)) addButton(button++, "Entangle", AlrauneEntangle, null, null, null, "Use your vines to hinder your opponent.");
+		else if (player.hasStatusAffect(StatusAffects.AlrauneEntangle)) outputText("<b>You already entangle your opponent.</b>\n\n");
+	}
+	if (player.hasStatusAffect(StatusAffects.AlrauneEntangle)) {
+		if (monster.tallness > 120 || monster.findPerk(PerkLib.EnemyGigantType) > 0) outputText("<b>Your opponent is too tall for Strangulate to have any effect on it.</b>\n\n");
+		else addButton(button++, "Strangulate", AlrauneStrangulate, null, null, null, "Strangle your opponent with your vines.");
 	}
 	if (player.armType == ARM_TYPE_GARGOYLE && player.shield == ShieldLib.NOTHING && player.weaponPerk != "Large") {
 		if (!player.hasStatusAffect(StatusAffects.CooldownStoneClaw)) {
@@ -11819,6 +11847,65 @@ public function AlraunePollen():void {
 	monster.lust += pollen;
 	outputText("You send a cloud of your pollen outward into the air, smiling lustfully at your opponent. Sneezing slightly as they inhale the potent pollen, they begin showing clear signs of arousal. Just how long can they resist coming to pollinate you now? Not for long, you hope. (" + pollen + ")\n\n");
 	player.createStatusAffect(StatusAffects.AlraunePollen,0,0,0,0);
+	enemyAI();
+}
+
+public function AlrauneEntangle():void {
+	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+	clearOutput();
+	outputText("You coil your vines around " + monster.a + monster.short + "'s body, slowing them down and hindering ");
+	if(!monster.plural) outputText("its");
+	else outputText("their");
+	outputText(" movement.\n\n");
+	var EntangleStrNerf:Number = 0;
+	var EntangleSpeNerf:Number = 0;
+	EntangleStrNerf = Math.round(monster.str * .5);
+	EntangleSpeNerf = Math.round(monster.spe * .5);
+	monster.str -= EntangleStrNerf;
+	monster.spe -= EntangleSpeNerf;
+	if(monster.str < 1) monster.str = 1;
+	if(monster.spe < 1) monster.spe = 1;
+	player.createStatusAffect(StatusAffects.AlrauneEntangle,EntangleStrNerf,EntangleSpeNerf,0,0);
+	enemyAI();
+}
+
+public function AlrauneStrangulate():void {
+	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+	clearOutput();
+	if(player.fatigue + physicalCost(60) > player.maxFatigue()) {
+		outputText("You are too tired to strangulate enemy.", true);
+		doNext(combatMenu);
+		return;
+	}
+//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+	fatigue(60,1);
+	var damage:Number = 0;
+	damage += player.tou;
+	if (player.tou >= 21) damage += ((player.tou - 20) * 0.5);
+	if (player.tou >= 41) damage += ((player.tou - 40) * 0.5);
+	if (player.tou >= 61) damage += ((player.tou - 60) * 0.5);
+	if (player.tou >= 81) damage += ((player.tou - 80) * 0.5);
+	if (player.tou >= 101) damage += ((player.tou - 100) * 0.5);
+	if (player.tou >= 151) damage += ((player.tou - 150) * 0.5);
+	if (player.tou >= 201) damage += ((player.tou - 200) * 0.5);
+	if (player.tou >= 251) damage += ((player.tou - 250) * 0.5);
+	if (player.tou >= 301) damage += ((player.tou - 300) * 0.5);
+	if (player.tou >= 351) damage += ((player.tou - 350) * 0.5);
+	if (player.tou >= 401) damage += ((player.tou - 400) * 0.5);
+	if (player.tou >= 451) damage += ((player.tou - 450) * 0.5);
+	if (player.tou >= 501) damage += ((player.tou - 500) * 0.5);
+	if (player.tou >= 551) damage += ((player.tou - 550) * 0.5);
+	if (player.tou >= 601) damage += ((player.tou - 600) * 0.5);
+	if (player.tou >= 651) damage += ((player.tou - 650) * 0.5);
+	if (player.tou >= 701) damage += ((player.tou - 700) * 0.5);
+	if (player.tou >= 751) damage += ((player.tou - 750) * 0.5);
+	if (player.tou >= 801) damage += ((player.tou - 800) * 0.5);
+	if (player.tou >= 851) damage += ((player.tou - 850) * 0.5);
+	if (player.tou >= 901) damage += ((player.tou - 900) * 0.5);
+	if (player.tou >= 951) damage += ((player.tou - 950) * 0.5);
+	damage = Math.round(damage);
+	damage = doDamage(damage);
+	outputText("You tighten your vines around your opponent's neck to strangle it. " + monster.capitalA + monster.short + " struggles against your natural noose, getting obvious marks on its neck and " + damage + " damage for their trouble.\n\n");
 	enemyAI();
 }
 

@@ -4433,20 +4433,6 @@ use namespace kGAMECLASS;
 					maxInt += (80 * (1 + newGamePlusMod));
 				}
 			}
-			if (findPerk(PerkLib.SalamanderAdrenalGlands) > 0) {
-				maxTou += (5 * (1 + newGamePlusMod));
-				maxLib += (5 * (1 + newGamePlusMod));
-			}
-			if (findPerk(PerkLib.ScyllaInkGlands) > 0) {
-				maxStr += (10 * (1 + newGamePlusMod));
-			}
-			if (findPerk(PerkLib.MantislikeAgility) > 0) {
-				if (skinType == SKIN_TYPE_CHITIN && findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (20 * (1 + newGamePlusMod));
-				if (skinType == SKIN_TYPE_SCALES && findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (15 * (1 + newGamePlusMod));
-				if (skinType == SKIN_TYPE_CHITIN) maxSpe += (15 * (1 + newGamePlusMod));
-				if (skinType == SKIN_TYPE_SCALES) maxSpe += (10 * (1 + newGamePlusMod));
-				if (findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (5 * (1 + newGamePlusMod));
-			}
 			if (humanScore() == 25) {
 				maxStr += (60 * (1 + newGamePlusMod));
 				maxTou += (60 * (1 + newGamePlusMod));
@@ -4503,15 +4489,7 @@ use namespace kGAMECLASS;
 				maxWis += (5 * (1 + newGamePlusMod));
 				maxLib += (5 * (1 + newGamePlusMod));
 			}
-		/*	if (humanScore() == 18) {
-				maxStr += (0 * (1 + newGamePlusMod));
-				maxTou += (0 * (1 + newGamePlusMod));
-				maxSpe += (0 * (1 + newGamePlusMod));
-				maxInt += (5 * (1 + newGamePlusMod));
-				maxWis += (5 * (1 + newGamePlusMod));
-				maxLib += (5 * (1 + newGamePlusMod));
-			}
-		*/	if (internalChimeraScore() >= 1) {
+			if (internalChimeraScore() >= 1) {
 				maxStr += (5 * internalChimeraScore() * (1 + newGamePlusMod));
 				maxTou += (5 * internalChimeraScore() * (1 + newGamePlusMod));
 				maxSpe += (5 * internalChimeraScore() * (1 + newGamePlusMod));
@@ -4529,21 +4507,42 @@ use namespace kGAMECLASS;
 				maxStr += (5 * (1 + newGamePlusMod));
 				maxSpe += (5 * (1 + newGamePlusMod));
 				maxInt += (5 * (1 + newGamePlusMod));
+				maxWis += (5 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.ChimericalBodyAdvancedStage) > 0) {
-				maxStr += (5 * (1 + newGamePlusMod));
-				maxSpe += (5 * (1 + newGamePlusMod));
-				maxInt += (5 * (1 + newGamePlusMod));
+				maxStr += (10 * (1 + newGamePlusMod));
+				maxTou += (10 * (1 + newGamePlusMod));
+				maxSpe += (10 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) > 0) {
-				maxStr += (5 * (1 + newGamePlusMod));
-				maxSpe += (5 * (1 + newGamePlusMod));
-				maxInt += (5 * (1 + newGamePlusMod));
+				maxInt += (10 * (1 + newGamePlusMod));
+				maxWis += (10 * (1 + newGamePlusMod));
+				maxLib += (10 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.ChimericalBodyUltimateStage) > 0) {
-				maxStr += (5 * (1 + newGamePlusMod));
+				maxStr += (10 * (1 + newGamePlusMod));
+				maxTou += (10 * (1 + newGamePlusMod));
+				maxSpe += (10 * (1 + newGamePlusMod));
+				maxInt += (10 * (1 + newGamePlusMod));
+				maxWis += (10 * (1 + newGamePlusMod));
+				maxLib += (10 * (1 + newGamePlusMod));
+			}
+			if (findPerk(PerkLib.SalamanderAdrenalGlands) > 0) {
+				maxTou += (5 * (1 + newGamePlusMod));
+				maxLib += (5 * (1 + newGamePlusMod));
+			}
+			if (findPerk(PerkLib.ScyllaInkGlands) > 0) {
+				maxStr += (10 * (1 + newGamePlusMod));
+			}
+			if (findPerk(PerkLib.MantislikeAgility) > 0) {
+				if (skinType == SKIN_TYPE_CHITIN && findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (20 * (1 + newGamePlusMod));
+				if (skinType == SKIN_TYPE_SCALES && findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (15 * (1 + newGamePlusMod));
+				if (skinType == SKIN_TYPE_CHITIN) maxSpe += (15 * (1 + newGamePlusMod));
+				if (skinType == SKIN_TYPE_SCALES) maxSpe += (10 * (1 + newGamePlusMod));
+				if (findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (5 * (1 + newGamePlusMod));
+			}
+			if (findPerk(PerkLib.DraconicLungs) >= 0) {
 				maxSpe += (5 * (1 + newGamePlusMod));
-				maxInt += (5 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.EzekielBlessing) > 0) {
 				maxStr += (5 * (1 + newGamePlusMod));
@@ -4901,8 +4900,14 @@ use namespace kGAMECLASS;
 			if(hasStatusAffect(StatusAffects.AlraunePollen)) {
 				removeStatusAffect(StatusAffects.AlraunePollen);
 			}
+			if(hasStatusAffect(StatusAffects.AlrauneEntangle)) {
+				removeStatusAffect(StatusAffects.AlrauneEntangle);
+			}
 			if(hasStatusAffect(StatusAffects.EzekielCurse) && flags[kFLAGS.EVANGELINE_AFFECTION] >= 3 && findPerk(PerkLib.EzekielBlessing) >= 0) {
 				removeStatusAffect(StatusAffects.EzekielCurse);
+			}
+			if(hasStatusAffect(StatusAffects.DragonBreathCooldown) && findPerk(PerkLib.DraconicLungs) >= 0) {
+				removeStatusAffect(StatusAffects.DragonBreathCooldown);
 			}
 			if(hasStatusAffect(StatusAffects.CooldownInkSpray)) {
 				removeStatusAffect(StatusAffects.CooldownInkSpray);

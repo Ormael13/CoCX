@@ -350,6 +350,7 @@ package classes
 		// combat
 		public static const AcidSlap:CombatStatusAffect = mk2("Acid Slap");
 		public static const AkbalSpeed:CombatStatusAffect = mk2("Akbal Speed");
+		public static const AlrauneEntangle:CombatStatusAffect = mk2("Alraune Entangle");
 		public static const AlraunePollen:CombatStatusAffect = mk2("Alraune Pollen");
 		public static const AmilyVenom:CombatStatusAffect = mk2("Amily Venom");
 		public static const AnemoneVenom:CombatStatusAffect = mk2("Anemone Venom");

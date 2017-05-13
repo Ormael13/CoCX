@@ -413,6 +413,8 @@ public function doubleStrikeOptions():void {
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 0) outputText("\n\nElemental effect added: <b>None</b>");
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) outputText("\n\nElemental effect added: <b>Fire</b>");
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) outputText("\n\nElemental effect added: <b>Ice</b>");
+		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) outputText("\n\nElemental effect added: <b>Lightning</b>");
+		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) outputText("\n\nElemental effect added: <b>Dakness</b>");
 	}
 	if (player.findPerk(PerkLib.Cupid) >= 0) {
 		outputText("\n\nIf you learned specific black magical you could add it effects to the projectiles. (Working only with bows and crosbows)");
