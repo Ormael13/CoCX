@@ -108,6 +108,7 @@ use namespace kGAMECLASS;
 								   && flags[kFLAGS.JOJO_DEAD_OR_GONE] <= 0
 								   && (kGAMECLASS.monk < 2 || rand(2) == 0);
 						},
+						mod   : [fn.ifLevelMin(4)],
 						chance: function ():Number {
 							//Extra chance of Jojo encounter.
 							return (player.findPerk(PerkLib.PiercedFurrite) >= 0
@@ -575,14 +576,8 @@ use namespace kGAMECLASS;
 			clearOutput();
 			if (kGAMECLASS.monk == 0 && !player.hasStatusAffect(StatusAffects.PureCampJojo)) {
 				if (player.cor < 25) {
-					if (player.level >= 4) {
-						kGAMECLASS.monk = 1;
-						kGAMECLASS.jojoScene.lowCorruptionJojoEncounter();
-					} else {
-						outputText("You enjoy a peaceful walk in the woods.  It gives you time to think over the recent, disturbing events.", true);
-						dynStats("tou", .5, "int", 1);
-						doNext(camp.returnToCampUseOneHour);
-					}
+					kGAMECLASS.monk = 1;
+					kGAMECLASS.jojoScene.lowCorruptionJojoEncounter();
 				}
 				else kGAMECLASS.jojoScene.highCorruptionJojoEncounter();
 			} else if (kGAMECLASS.monk == 1 || kGAMECLASS.monk < 0) { //Negative monk value indicates rape is disabled.

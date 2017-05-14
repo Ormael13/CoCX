@@ -344,7 +344,7 @@ public function doubleAttackOptions():void {
 	outputText(".");
 	outputText("\n\nYou can change it to different amount of attacks.");
 	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 0) addButton(0, "All Single", singleAttack);
-	if ((player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 1) {
+	if ((player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 1) {
 		if ((player.weaponPerk != "Large" || (player.weaponPerk == "Large" && player.findPerk(PerkLib.DoubleAttackLarge) < 0)) && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && (!player.isFistOrFistWeapon() || (player.isFistOrFistWeapon() && player.findPerk(PerkLib.Combo) < 0))) addButton(1, "All Double", doubleAttack);
 		else addButtonDisabled(1, "All Double", "You current melee weapon not allow to use this option");	//player.weaponName != "fists"
 	}

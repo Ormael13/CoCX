@@ -46,33 +46,33 @@ package classes.Scenes.Camp
 			if (player.fatigue <= player.maxFatigue() - 50)
 			{
 				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 1) { 
-					startWork() 
+					startWork();
 					return; 
 				}
 				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 2) { 
-					startLayout() 
+					startLayout();
 					return; 
 				}
 				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 3) { 
-					startThinkingOfMaterials() 
+					startThinkingOfMaterials();
 					return; 
 				}
 				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 4) { 
-					checkToolbox() 
+					checkToolbox();
 					return; 
 				}
 				//For stage 4, explore forest.
 				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 5) { 
-					startCabinPart2() 
+					startCabinPart2();
 					return;
 				}
 				//Build cabin!
 				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 6) { 
-					buildCabinPart1() 
+					buildCabinPart1();
 					return; 
 				}
 				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 7) { 
-					buildCabinPart2() 
+					buildCabinPart2();
 					return; 
 				}
 				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 8) {
@@ -107,14 +107,14 @@ package classes.Scenes.Camp
 		
 		//STAGE 1 - A wild idea appears!
 		public function startWork():void {
-			outputText("You wander around your camp for a good few moments when suddenly, something crosses your mind. Yes, that's it! A cabin! Just what you would need to live comfortably instead of your tent. You wander for a good while until you find a suitable location to build your cabin. You memorize the location.")
+			outputText("You wander around your camp for a good few moments when suddenly, something crosses your mind. Yes, that's it! A cabin! Just what you would need to live comfortably instead of your tent. You wander for a good while until you find a suitable location to build your cabin. You memorize the location.");
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 2;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		//STAGE 2 - Survey and clear area for cabin site.
 		private function startLayout():void {
-			outputText("You finally decide to begin your project: a cabin.  A comfortable cabin, come complete with a bed and nightstand along with some furniture. \n\nYou begin clearing away loose debris by picking up loose rocks and sticks and move them somewhere. It takes one hour and you feel a bit exhausted but you've finished creating a space.")
+			outputText("You finally decide to begin your project: a cabin.  A comfortable cabin, come complete with a bed and nightstand along with some furniture. \n\nYou begin clearing away loose debris by picking up loose rocks and sticks and move them somewhere. It takes one hour and you feel a bit exhausted but you've finished creating a space.");
 			fatigue(50);
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 3;
 			doNext(camp.returnToCampUseOneHour);
@@ -152,22 +152,22 @@ package classes.Scenes.Camp
 			}
 			if (player.hasItem(weapons.L__AXE) || player.weaponName == "large axe") 
 			{
-				outputText("You are carrying a large axe with you.") 
+				outputText("You are carrying a large axe with you.");
 				addButton(0, "Axe", cutTreeTIMBER);
 			}
 			if (player.hasKeyItem("Carpenter's Toolbox") >= 0) 
 			{
-				outputText("You are carrying carpenter's box with you. It contains an axe.\n") 
+				outputText("You are carrying carpenter's box with you. It contains an axe.\n");
 				addButton(0, "Axe", cutTreeTIMBER);
 			}
 			if (camp.followerKiha()) 
 			{
-				outputText("You have someone who might help you. Kiha might be able to assist you.\n") 
+				outputText("You have someone who might help you. Kiha might be able to assist you.\n");
 				addButton(1, "Kiha", getHelpFromKiha);
 			}
 			if (silly() && player.str >= 70) 
 			{
-				outputText("You suddenly have the strange urge to punch trees. Do you punch the tree? \n") 
+				outputText("You suddenly have the strange urge to punch trees. Do you punch the tree? \n");
 				addButton(2, "Punch Tree", punchTreeMinecraftStyle);
 			}
 			if (!(buttonIsVisible(0) || buttonIsVisible(1) || buttonIsVisible(2))) {
@@ -196,8 +196,8 @@ package classes.Scenes.Camp
 		//Cut down the tree yourself with large axe.
 		private function cutTreeTIMBER():void {
 			clearOutput();
-			if (player.weaponName == "large axe") outputText("You ready your oversized axe. ")
-			else outputText("You ready your axe. ")
+			if (player.weaponName == "large axe") outputText("You ready your oversized axe. ");
+			else outputText("You ready your axe. ");
 			outputText("With your strength, you hack away at the tree, making wedge-shaped cuts. After ten strikes, you yell \"<i>TIMMMMMMMMBER!</i>\" as the tree falls and lands on the ground with a loud crash. You are quite the fine lumberjack! You then cut the felled tree into pieces and you haul the wood back to your camp.\n\n");
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_DEFORESTER] += (10 + Math.floor(player.str / 8));
 			incrementWoodSupply(10 + Math.floor(player.str / 8));
@@ -217,12 +217,12 @@ package classes.Scenes.Camp
 			{
 				outputText("You are missing a toolbox. Maybe one of the shops sell these? \n\n");
 			}
-			//doNext(camp.returnToCampUseOneHour); - wadą tego etapu to brak menu lub menu za wcześnie?
+			doNext(camp.returnToCampUseOneHour); //- wadą tego etapu to brak menu lub menu za wcześnie?
 		}	
 		
 		//Get help from Kiha.
 		private function getHelpFromKiha():void {
-			outputText("You recall Kiha wields an oversized axe. You call out for her. After a minute, she walks over to you and says \"<i>Yes, my idiot?</i>\" You tell her that you would like her to cut down some trees so you can haul the wood. She nods and yells \"<i>Stand back!</i>\" as you stand back while you watch her easily cut down not one but two trees! With the trees cut down, you and Kiha haul the wood back to your camp. ")
+			outputText("You recall Kiha wields an oversized axe. You call out for her. After a minute, she walks over to you and says \"<i>Yes, my idiot?</i>\" You tell her that you would like her to cut down some trees so you can haul the wood. She nods and yells \"<i>Stand back!</i>\" as you stand back while you watch her easily cut down not one but two trees! With the trees cut down, you and Kiha haul the wood back to your camp. ");
 			if (player.str < 33) outputText("It's a daunting task as you can only carry few of the wood at a time. Even Kiha is far superior to your carrying capacity as she can carry a lot of wood. \n\n");
 			if (player.str >= 33 && player.str < 66) outputText("It's quite the chore. Though you can carry several pieces of wood at a time, Kiha is still superior to you when it comes to carrying wood. \n\n");
 			if (player.str >= 66) outputText("You easily tackle the task of carrying wood. You even manage to carry five pieces of wood at a time!\n\n");
@@ -324,7 +324,7 @@ package classes.Scenes.Camp
 			if (camp.companionsCount() > 0) outputText("You announce that yes, you're building a cabin.\n\n");
 			outputText("You nail the frames together and finally you secure the frame to the foundation.\n\n");
 			outputText("Finally, you construct a wooden frame for the roof. This takes few hours.\n\n");
-			if (player.canFly() && player.str >= 80) outputText("You use your wings, lift the roof frame and carefully place it on the frame. ")
+			if (player.canFly() && player.str >= 80) outputText("You use your wings, lift the roof frame and carefully place it on the frame. ");
 			else outputText("You construct a temporary ramp to push the roof frame into place. ");
 			outputText("You then hammer nails in place to secure the roof frame.\n\n");
 			outputText("<b>You have finished framing the cabin! You can work on constructing wall.</b>\n\n");
