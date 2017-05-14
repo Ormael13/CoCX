@@ -1050,7 +1050,7 @@ private function heliaRoughSex(output:Boolean = true):void {
 		addButton(buttons,"Possess",heliaCampPossession);
 		buttons++;
 	}
-	if(player.lust >= 33 && player.tentacleCocks() > 6) {
+	if(player.lust >= 33 && (player.tentacleCocks() > 6 || player.stamenCocks() > 6)) {
 		addButton(buttons,"Tentacles",heliaFollowerTentafuck);
 		buttons++;	
 	}

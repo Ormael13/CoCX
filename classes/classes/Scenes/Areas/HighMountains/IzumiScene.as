@@ -1621,7 +1621,7 @@ package classes.Scenes.Areas.HighMountains
 				addButton(3, "RevengeAnal", gonnaGetMeSomeRevengeButtsexin);
 				addButton(4, "RevengeOral", sayThatsAPrettyFaceBeAShameIfSomebodyJizzedAllOverIt);
 
-				if (player.tentacleCocks() >= 8) addButton(5, "Tentacruel", tentacruelRevengeFux);
+				if (player.tentacleCocks() >= 8 || player.stamenCocks() >= 8) addButton(5, "Tentacruel", tentacruelRevengeFux);
 			}
 		}
 
@@ -1933,7 +1933,7 @@ package classes.Scenes.Areas.HighMountains
 			outputText("You’re not satisfied just with that though, particularly when the main event is displayed so tantalizingly before you.  Raising yet another tentacle, you plunge forwards and force yourself into Izumi’s pussy, penetrating her fully.  Despite her increased size, she’s surprisingly tight, but you’re still able to comfortably push in deeper than you’d probably be able to with a smaller partner.  Izumi grunts and sways in the impromptu sling you’ve set up, rocking backwards and forwards as you pump into her from two different angles.  It’s an interesting experience to say the least, double-dicking an amazonian monster-woman while simultaneously ensuring she can’t fight back by molesting her magical horn.  For good measure, you give the horn another quick squeeze and roll the coiled tentacle wrapping it around a little, eliciting a high pitched squeal from Izumi, her entire body going momentarily tense.\n\n");
 
 			outputText("When she relaxes, her face is completely flushed, her eyes looking distinctly fogged with arousal.  She isn’t struggling or resisting anymore; in fact, you realize, she’s even begun to roll her hips in time with your thrusts, helping you to penetrate her deeper, harder, stronger.  She seems to be functioning almost on automatic, stretching her neck forwards to accept more of your length as you thrust into her mouth, then twisting her head to the side as you pull out, stimulating more of your member than your previous thrusting.  Even her moaning seems quieter, more submissive, as though she’s accepted her role in the proceedings - or at least blocked out everything but the sensations she’s feeling enough to enjoy them.");
-			if (player.tentacleCocks() >= 10) outputText("  You decide to test the theory, snaking another prehensile appendage into each of her open, outstretched palms.  Sure enough, after a few fumbling attempts, Izumi manages to grasp the concept of a handjob and awkwardly starts to jerk them off.");
+			if (player.tentacleCocks() >= 10 || player.stamenCocks() >= 10) outputText("  You decide to test the theory, snaking another prehensile appendage into each of her open, outstretched palms.  Sure enough, after a few fumbling attempts, Izumi manages to grasp the concept of a handjob and awkwardly starts to jerk them off.");
 
 			outputText("\n\nRegardless, you’re still not finished.  After all, there’s still one hole left unaccounted for, and after all the trouble she’s given you, it hardly seems fair that she should just get to check out and enjoy the ride.  Izumi’s eyes widen as she feels your final tentacock slide between her buttcheeks, rubbing against the slick flesh, tracing an ominous ring around her hole before prodding demandingly at the entrance to her ass.\n\n");
 

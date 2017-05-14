@@ -1775,9 +1775,19 @@ public function RacialScores():void {
 	if (player.dogScore() >= 4) outputText("\n<font color=\"#0000a0\">Dog-morph: " + player.dogScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, -" + (5 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
 	else if (player.dogScore() >= 1 && player.dogScore() < 4) outputText("\n<font color=\"#008000\">Dog-morph: " + player.dogScore() + "</font>", false);
 	else if (player.dogScore() < 1) outputText("\n<font color=\"#ff0000\">Dog-morph: 0</font>", false);
-	if (player.dragonScore() >= 12) outputText("\n<font color=\"#0000a0\">Dragon: " + player.dragonScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
-	else if (player.dragonScore() >= 8 && player.dragonScore() < 12) outputText("\n<font color=\"#0000a0\">Dragon: " + player.dragonScore() + " (+" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
-	else if (player.dragonScore() >= 4 && player.dragonScore() < 8) outputText("\n<font color=\"#0000a0\">Half-Dragon: " + player.dragonScore() + " (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
+	if (player.dragonScore() >= 16) {
+		outputText("\n<font color=\"#0000a0\">Dragon: " + player.dragonScore() + " (+" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Wis, ", false);
+		outputText("+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
+	}
+	else if (player.dragonScore() >= 12 && player.dragonScore() < 16) {
+		outputText("\n<font color=\"#0000a0\">Dragon: " + player.dragonScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Wis, ", false);
+		outputText("+" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
+	}
+	else if (player.dragonScore() >= 8 && player.dragonScore() < 12) {
+		outputText("\n<font color=\"#0000a0\">Dragon: " + player.dragonScore() + " (+" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Wis, ", false);
+		outputText("+" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
+	}
+	else if (player.dragonScore() >= 4 && player.dragonScore() < 8) outputText("\n<font color=\"#0000a0\">Half-Dragon: " + player.dragonScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Tou, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Wis, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max HP)</font>", false);
 	else if (player.dragonScore() >= 1 && player.dragonScore() < 4) outputText("\n<font color=\"#008000\">Half-Dragon: " + player.dragonScore() + "</font>", false);
 	else if (player.dragonScore() < 1) outputText("\n<font color=\"#ff0000\">Half-Dragon: 0</font>", false);
 	outputText("\nDragonne: " + player.dragonneScore(), false);
@@ -1837,7 +1847,7 @@ public function RacialScores():void {
 		if (player.tailType == 13 && player.tailCount >= 2 && player.kitsuneScore() >= 12) {
 			if (player.tailCount < 9) outputText("\n<font color=\"#0000a0\">Kitsune:", false);
 			else if (player.tailCount == 9) outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune:", false);
-			outputText(" " + player.kitsuneScore() + " (-" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, ", false);
+			outputText(" " + player.kitsuneScore() + " (-" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Wis, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, ", false);
 			if (player.tailCount < 9) {
 				outputText("+" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue, +20% max Soulforce)</font>", false);
 			}
@@ -1851,7 +1861,7 @@ public function RacialScores():void {
 		}
 	}
 	else if (player.kitsuneScore() >= 5) {
-		outputText("\n<font color=\"#0000a0\">Half Kitsune: " + player.kitsuneScore() + " (-" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, ", false);
+		outputText("\n<font color=\"#0000a0\">Half Kitsune: " + player.kitsuneScore() + " (-" + (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Spe, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int, +" + (40 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Lib, ", false);
 		outputText("+" + (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Fatigue, +20% max Soulforce)</font>", false);
 	}
 	else if (player.kitsuneScore() >= 1 && player.kitsuneScore() < 5) outputText("\n<font color=\"#008000\">Half Kitsune: " + player.kitsuneScore() + "</font>", false);

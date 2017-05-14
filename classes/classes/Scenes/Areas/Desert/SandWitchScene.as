@@ -466,9 +466,9 @@ private function SWCentaurMore(argument:Number):Boolean {
 			}
 			outputText("You grab the witch and knock her down into the sand, quickly lowering your " + cockDescript(0) + " to be against her buttocks. ", false);
 			//[1 cock, non-tentacle]
-			if(player.cockTotal() == 1 && player.tentacleCocks() == 0) outputText("With a single thrust, you push deep into one of her cunts, ", false);
+			if(player.cockTotal() == 1 && player.tentacleCocks() == 0 && player.stamenCocks() == 0) outputText("With a single thrust, you push deep into one of her cunts, ", false);
 			//[1 cock, tentacle]
-			if(player.cockTotal() == 1 && player.tentacleCocks() == 1) outputText("Your " + cockDescript(0) + " caresses her anus teasingly, causing her to whimper in a mixture of arousal and denial.  With a single savage thrust, you push past her clenched muscles, ", false);
+			if(player.cockTotal() == 1 && (player.tentacleCocks() == 1 || player.stamenCocks() == 1)) outputText("Your " + cockDescript(0) + " caresses her anus teasingly, causing her to whimper in a mixture of arousal and denial.  With a single savage thrust, you push past her clenched muscles, ", false);
 			//[two cocks] 
 			if(player.cockTotal() == 2) outputText("After aligning your " + multiCockDescriptLight() + " to her twin cunts, you push yourself deeply into her, ", false);
 			//[3+ cocks]
@@ -489,7 +489,7 @@ private function SWCentaurMore(argument:Number):Boolean {
 				outputText("Her mouth opens in a soundless and agonizing cry when you finally push past. ", false);
 			}
 			//[1 cock, tentacle] 
-			if(player.tentacleCocks() == 1 && player.cockTotal() == 1) {
+			if((player.tentacleCocks() == 1 || player.stamenCocks() == 1) && player.cockTotal() == 1) {
 				outputText("Her body surrenders more and more as your " + cockDescript(0) + " pushes deep into her bowels, snaking its way further into her body as it fucks her insides. ", false);
 			}
 			outputText("It feels like you have been pushing yourself into her for hours", false);
@@ -508,7 +508,7 @@ private function SWCentaurMore(argument:Number):Boolean {
 			else outputText("pushing your sperm ", false);
 			outputText("deep into her ", false);
 			//[1 cock, tentacle]
-			if(player.cockTotal() == 1 && player.tentacleCocks() == 1) outputText("anus", false);
+			if(player.cockTotal() == 1 && (player.tentacleCocks() == 1 || player.stamenCocks() == 1)) outputText("anus", false);
 			else {
 				//[largest cock is not wide and/or long]
 				if(player.cocks[0].cockLength >= 12 || player.cocks[0].cockThickness >= 3) {

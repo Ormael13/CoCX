@@ -1809,6 +1809,20 @@ package classes.Scenes.NPCs
 				if (emberAffection() >= 75 && !drakesHeart) outputText("\n\nEmber immediately dives back in to soothe your battered throat and mouth with another kiss.");
 				changes++;
 			}
+			if (player.dragonScore() >= 4 && changes < changeLimit && player.findPerk(PerkLib.DragonLightningBreath) < 0) {
+				outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
+				outputText("\n\nIt seems " + (drakesHeart ? "the flower" : "Ember's dragon blood") + " has awaked some kind of power within you... your throat and chest feel like it was electrocuted, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon lightning breath!</b>)");
+				player.createPerk(PerkLib.DragonLightningBreath, 0, 0, 0, 0);
+				if (emberAffection() >= 75 && !drakesHeart) outputText("\n\nEmber immediately dives back in to soothe your battered throat and mouth with another kiss.");
+				changes++;
+			}
+			if (player.dragonScore() >= 4 && changes < changeLimit && player.findPerk(PerkLib.DragonDarknessBreath) < 0) {
+				outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
+				outputText("\n\nIt seems " + (drakesHeart ? "the flower" : "Ember's dragon blood") + " has awaked some kind of power within you... your throat and chest feel very... strange and you can't put a finger what this feeling exactly is, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon darkness breath!</b>)");
+				player.createPerk(PerkLib.DragonDarknessBreath, 0, 0, 0, 0);
+				if (emberAffection() >= 75 && !drakesHeart) outputText("\n\nEmber immediately dives back in to soothe your battered throat and mouth with another kiss.");
+				changes++;
+			}
 			//grow up to 11 feet tall
 			if (changes < changeLimit && rand(2) == 0 && player.tallness < 132) {
 				temp = rand(5) + 3;

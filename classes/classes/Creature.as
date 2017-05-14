@@ -2184,6 +2184,14 @@ import classes.BodyParts.UnderBody;
 			return false;
 		}
 
+		//Naked
+		public function isNaked():Boolean
+		{
+			if (game.player.armorName == "nothing" && game.player.upperGarmentName == "nothing" && game.player.lowerGarmentName == "nothing")
+				return true;
+			return false;
+		}
+
 		//check for vagoo
 		public function hasVagina():Boolean
 		{

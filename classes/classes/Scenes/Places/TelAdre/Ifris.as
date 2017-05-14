@@ -296,7 +296,7 @@ private function ifrisDP():void {
 		outputText("Your hips begin to rock and thrust, and no matter what you try to do, you cannot seem to still your body, your animal instincts owning your waist as you inseminate your seductive, teasing lover's body.  ", false);
 	}
 	//(Tentacle pistoning + head-mushrooming)
-	else if(player.tentacleCocks() >= 2) {
+	else if(player.tentacleCocks() >= 2 || player.stamenCocks() > 1) {
 		outputText("Both your plant-like pricks explode inside Ifris, the purplish tips swelling up inside her to disproportionate sizes.  A moment later, the vine-dicks explode out twin pillars of ropey seed, painting her inner walls with spunk.  ", false);
 		if(player.cumQ() >= 1000) outputText("She groans and moans as she's filled, her body distending to deal with the unholy amount of seed your cocks can spew.  ", false);
 		outputText("At the same time, both tentacle-shafts curl and piston, winding around in other in the space between your bodies, curling and thrusting to rub every inch of your sensitive, prehensile shafts against Ifris' pussy-walls.  You shake and shudder, feeling more like a tentacle beast than a " + player.mf("man","woman") + ".  ", false);

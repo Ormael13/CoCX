@@ -6254,6 +6254,18 @@ import classes.CockTypesEnum;
 				player.createPerk(PerkLib.DragonIceBreath, 0, 0, 0, 0);
 				changes++;
 			}
+			if (type == 1 && player.dragonScore() >= 4 && changes < changeLimit && player.findPerk(PerkLib.DragonLightningBreath) < 0) {
+				outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
+				outputText("\n\nIt seems vouivre oil has awaked some kind of power within you... your throat and chest feel like it was electrocuted, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon fire breath!</b>)");
+				player.createPerk(PerkLib.DragonLightningBreath, 0, 0, 0, 0);
+				changes++;
+			}
+			if (type == 1 && player.dragonScore() >= 4 && changes < changeLimit && player.findPerk(PerkLib.DragonDarknessBreath) < 0) {
+				outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... with enough force that clods of dirt and shattered gravel are sent flying all around.  You look at the small crater you have literally blasted into the landscape with a mixture of awe and surprise.");
+				outputText("\n\nIt seems vouivre oil has awaked some kind of power within you... your throat and chest feel very... strange and you can't put a finger what this feeling exactly is, however; you doubt you can force out more than one such blast before resting.  (<b>Gained Perk: Dragon ice breath!</b>)");
+				player.createPerk(PerkLib.DragonDarknessBreath, 0, 0, 0, 0);
+				changes++;
+			}
 			//Propah Wings
 			if (type == 2 && player.wingType == WING_TYPE_NONE && changes < changeLimit && (type == 1 || player.armType == ARM_TYPE_HARPY) && rand(4) == 0) {
 				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your " + player.skinDesc + ". It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your " + player.armorName + ". Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, " + player.hairColor + " wings.</b>", false);

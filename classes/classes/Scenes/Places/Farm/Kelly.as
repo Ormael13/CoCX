@@ -785,7 +785,7 @@ private function kellySexMenu():void {
 			else if (!player.isTaur()) addButton(0,"Fuck Cunt",fuckKellysCunt);
 			else addButton(0,"Fuck Cunt",taurOnTaurSexKelly);
 			if (flags[kFLAGS.KELLY_VAGINALLY_FUCKED_COUNT] == 0) addButton(0,"VirginFuck",takeKellysVirginity);
-			if (player.tentacleCocks() >= 2) addButton(1,"TentaFuck",tentaFuckKelly);
+			if (player.tentacleCocks() >= 2 || player.stamenCocks() > 1) addButton(1,"TentaFuck",tentaFuckKelly);
 		}
 		else outputText("\n<b>You're too big to fuck her vagina.</b>");
 		if (flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] == 0 && player.cockThatFits(18,"length") < 0 && !player.isTaur()) {
@@ -961,7 +961,7 @@ private function tentaFuckKelly():void {
 		outputText("\n\nKelly still has a free hand, and your " + cockDescript(five) + " is left alone, flustered.  The squirming tentacle quickly finds a comfortable spot near her boob, but this time you don't need to do anything; the eager slut catches the vegetal rod and begins to stroke it furiously.  Her hands pump along your lengths in turn; both pricks are so hard that you don't know which one will cum first.  Her fingers move across the surface of your meaty green dongs with expert care, teasing you more and more.  You enjoy the double handjob, your duo of plant-like dongs ready to explode in a mess of cum.");
 	}
 	//[if (cocks > 5)
-	if(player.tentacleCocks() > 5) {
+	if(player.tentacleCocks() > 5 || player.stamenCocks() > 5) {
 		outputText("\n\nSadly, there is no body part to fill or grind against for your remaining tentacle junk; you just wrap it around her horny body, crawling against every spot of skin that isn't occupied by some tentacle dong.");
 	}
 	outputText("\n\nEventually the slutty mare's holes and flesh are starting to drain your stamina; a pressure builds in your crotch as the imminent release arrives. With a raging grunt, you pump harder and faster, not caring in the least about the fuck-toy within your tentacle embrace.  [EachCock] jiggles in extreme arousal as they have their way with the quivering lump of horny flesh that you call Kelly.  At last the pressure is too much to bear, and you blast her with everything you have.  Torrents of spunk boil as they find their way up your urethras and utterly fill the centauress' holes.  Her lips contract lewdly around your " + cockDescript(one) + ", ready to swallow everything it squirts.  At the same time, her tight twat seems to be crunching your " + cockDescript(two) + " like a vice; you can't help but pump more and more ropes of jism into the slut's waiting womb.");

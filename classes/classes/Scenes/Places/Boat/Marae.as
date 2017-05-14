@@ -171,9 +171,9 @@ package classes.Scenes.Places.Boat
 				this.newgamebonusHP = 62500;//dodane this.str/tou/spe/inte/lib a nastepnie pomnożone przez 100 (dla lvl 90-99, dla każdego kolejnego przedziału 10 lvl kolejne 10 x wiecej)
 			}
 			this.weaponPerk = "";
-			this.weaponValue = 35;
+			this.weaponValue = 70 + (15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.armorName = "bark";
-			this.armorDef = 117 + (12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			this.armorDef = 140 + (15 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			this.bonusHP = 5000;
 			if (game.flags[kFLAGS.FACTORY_SHUTDOWN] == 1) {
 				this.bonusHP += 3000;
