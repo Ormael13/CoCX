@@ -539,36 +539,36 @@ public class PlayerAppearance extends BaseContent {
 		}
 		else if(player.cockTotal() == 0)
 		{
-			if(player.skinType == SKIN_TYPE_PLAIN)
-				outputText("A " + sackDescript() + " with " + ballsDescript() + " swings heavily under where a penis would normally grow.", false);
 			if(player.skin.hasMagicalTattoo())
 				outputText("A " + sackDescript() + " covered by magical tattoo with " + ballsDescript() + " swings heavily under where a penis would normally grow.", false);
-			if(player.hasFur())
+			else if(player.skinType == SKIN_TYPE_PLAIN)
+				outputText("A " + sackDescript() + " with " + ballsDescript() + " swings heavily under where a penis would normally grow.", false);
+			else if(player.hasFur())
 				outputText("A fuzzy " + sackDescript() + " filled with " + ballsDescript() + " swings low under where a penis would normally grow.", false);
-			if(player.hasCoatOfType(SKIN_COAT_CHITIN))
+			else if(player.hasCoatOfType(SKIN_COAT_CHITIN))
 				outputText("A chitin " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.", false);
-			if(player.hasScales())
+			else if(player.hasScales())
 				outputText("A scaley " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.", false);
-			if(player.skinType == SKIN_TYPE_STONE)
+			else if(player.skinType == SKIN_TYPE_STONE)
 				outputText("A stone-solid sack with " + ballsDescript() + " swings heavily under where a penis would normally grow.", false);
-			if(player.skinType == SKIN_TYPE_GOO)
+			else if(player.skinType == SKIN_TYPE_GOO)
 				outputText("An oozing, semi-solid sack with " + ballsDescript() + " swings heavily under where a penis would normally grow.", false);
 		}
 		else
 		{
-			if(player.skinType == SKIN_TYPE_PLAIN)
-				outputText("A " + sackDescript() + " with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
 			if(player.skin.hasMagicalTattoo())
 				outputText("A " + sackDescript() + " covered by magical tattoo with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
-			if(player.hasFur())
+			else if(player.skinType == SKIN_TYPE_PLAIN)
+				outputText("A " + sackDescript() + " with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
+			else if(player.hasFur())
 				outputText("A fuzzy " + sackDescript() + " filled with " + ballsDescript() + " swings low under your " + player.multiCockDescriptLight() + ".", false);
-			if(player.hasCoatOfType(SKIN_COAT_CHITIN))
+			else if(player.hasCoatOfType(SKIN_COAT_CHITIN))
 				outputText("A chitin " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.", false);
-			if(player.hasScales())
+			else if(player.hasScales())
 				outputText("A scaley " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.", false);
-			if(player.skinType == SKIN_TYPE_STONE)
+			else if(player.skinType == SKIN_TYPE_STONE)
 				outputText("A stone-solid sack with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
-			if(player.skinType == SKIN_TYPE_GOO)
+			else if(player.skinType == SKIN_TYPE_GOO)
 				outputText("An oozing, semi-solid sack with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
 		}
 		outputText("  You estimate each of them to be about " + num2Text(Math.round(player.ballSize)) + " ", false);

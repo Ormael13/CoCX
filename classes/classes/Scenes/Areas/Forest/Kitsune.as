@@ -20,7 +20,7 @@ package classes.Scenes.Areas.Forest
 			combatRoundOver();
 		}
 
-		//Struggle - event 5077 in combat.as
+		//Struggle - event 5077 in Combat.as
 		public function kitsuneStruggle():void
 		{
 			clearOutput();

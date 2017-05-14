@@ -117,7 +117,7 @@ package classes.Scenes.Areas.Forest
 				else game.forest.tamaniScene.tamaniSexLetHer();
 				} else {
 					outputText("You give into your lusts and masturbate, but Tamani doesn't seem to care.  She kicks and punches you over and over, screaming, \"<i>You dummy, why'd you get rid of the fun parts?</i>\"", true);
-					game.takeDamage(10000);
+					game.combat.takeDamage(10000);
 					game.cleanupAfterCombat();
 				}
 			}

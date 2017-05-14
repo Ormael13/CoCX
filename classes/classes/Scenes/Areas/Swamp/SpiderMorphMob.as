@@ -132,8 +132,8 @@ package classes.Scenes.Areas.Swamp
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 23;
 			this.gems = rand(50)+100;
-			this.special1 = game.packAttack;
-			this.special2 = game.lustAttack;
+			this.special1 = game.combat.packAttack;
+			this.special2 = game.combat.lustAttack;
 			this.tailType = TAIL_TYPE_SPIDER_ADBOMEN;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);

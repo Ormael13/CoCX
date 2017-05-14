@@ -186,7 +186,7 @@ package classes.Scenes.Areas.Mountain
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00233] = 1;
 				//clear status
 				kGAMECLASS.inCombat = false;
-				kGAMECLASS.clearStatuses(false);
+				clearStatuses(false);
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}

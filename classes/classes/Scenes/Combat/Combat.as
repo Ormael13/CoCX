@@ -1,24 +1,37 @@
-﻿import classes.BodyParts.Skin;
+﻿package classes.Scenes.Combat {
+import classes.BaseContent;
+import classes.BodyParts.Skin;
+import classes.CoC_Settings;
+import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.ItemType;
+import classes.Items.JewelryLib;
+import classes.Items.ShieldLib;
+import classes.Items.UndergarmentLib;
+import classes.Items.WeaponLib;
 import classes.Monster;
+import classes.PerkLib;
 import classes.Player;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.Areas.Beach.Gorgon;
 import classes.Scenes.Areas.Desert.Naga;
+import classes.Scenes.Areas.Desert.SandTrap;
+import classes.Scenes.Areas.Forest.BeeGirl;
+import classes.Scenes.Areas.Forest.Kitsune;
+import classes.Scenes.Areas.HighMountains.Basilisk;
+import classes.Scenes.Areas.HighMountains.Harpy;
 import classes.Scenes.Areas.HighMountains.Izumi;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
-import classes.Scenes.Dungeons.D3.Doppleganger;
-import classes.Scenes.Dungeons.D3.DriderIncubus;
-import classes.Scenes.Dungeons.D3.JeanClaude;
-import classes.Scenes.Dungeons.D3.Lethice;
-import classes.Scenes.Dungeons.D3.LethiceScenes;
-import classes.Scenes.Dungeons.D3.LivingStatue;
-import classes.Scenes.Dungeons.D3.LivingStatueScenes;
-import classes.Scenes.Dungeons.D3.SuccubusGardener;
-import classes.Scenes.NPCs.Anemone;
-import classes.Scenes.NPCs.CaiLin;
-import classes.Scenes.NPCs.Etna;
+import classes.Scenes.Dungeons.D3.*;
+import classes.Scenes.Dungeons.HelDungeon.HarpyMob;
+import classes.Scenes.Dungeons.HelDungeon.HarpyQueen;
+import classes.Scenes.NPCs.*;
+import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.StatusAffectClass;
+import classes.StatusAffects;
 
 import coc.view.MainView;
 import classes.Saves;
@@ -26,6 +39,30 @@ import classes.internals.Utils;
 
 import flash.net.SharedObject;
 
+public class Combat extends BaseContent {
+	
+	private function get inCombat():Boolean {
+		return getGame().inCombat;
+	}
+	private function set inCombat(value:Boolean):void {
+		getGame().inCombat = value;
+	}
+	private function spellCost(mod:Number):Number {
+		return getGame().spellCost(mod);
+	}
+	private function spellCostWhite(mod:Number):Number {
+		return getGame().spellCostWhite(mod);
+	}
+	private function spellCostBlack(mod:Number):Number {
+		return getGame().spellCostBlack(mod);
+	}
+	private function physicalCost(mod:Number):Number {
+		return getGame().physicalCost(mod);
+	}
+	private function bowCost(mod:Number):Number {
+		return getGame().bowCost(mod);
+	}
+	
 public function endHpVictory():void
 {
 	monster.defeated_(true);
@@ -45,7 +82,7 @@ public function endLustLoss():void
 {
 	if (player.hasStatusAffect(StatusAffects.Infested) && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
 		flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 1;
-		mountain.wormsScene.infestOrgasm();
+		getGame().mountain.wormsScene.infestOrgasm();
 		monster.won_(false,true);
 	} else {
 		monster.won_(false,false);
@@ -53,7 +90,7 @@ public function endLustLoss():void
 }
 
 //combat is over. Clear shit out and go to main
-public function cleanupAfterCombat(nextFunc:Function = null):void {
+public function cleanupAfterCombatImpl(nextFunc:Function = null):void {
 	fireMagicLastTurn = -100;
 	iceMagicLastTurn = -100;
 	if (nextFunc == null) nextFunc = camp.returnToCampUseOneHour;
@@ -247,7 +284,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	if (combatRoundOver()) return;
 	menu();
 	var attacks:Function = normalAttack;
-	if (!urtaQuest.isUrta() && !player.hasStatusAffect(StatusAffects.ChanneledAttack)) {
+	if (!kGAMECLASS.urtaQuest.isUrta() && !player.hasStatusAffect(StatusAffects.ChanneledAttack)) {
 		//Standard menu before modifications.
 		if(!player.hasStatusAffect(StatusAffects.Flying) && !monster.hasStatusAffect(StatusAffects.Flying))
 			addButton(0, "Attack", basemeleeattacks, null, null, null, "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.");
@@ -317,7 +354,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 		addButton (14, "Run", runAway, null, null, null, "Choosing to run will let you try to escape from your enemy. However, it will be hard to escape enemies that are faster than you and if you fail, your enemy will get a free attack.");
 	}
 	//Modify menus.
-	if (urtaQuest.isUrta()) {
+	if (kGAMECLASS.urtaQuest.isUrta()) {
 		addButton(0, "Attack", basemeleeattacks, null, null, null, "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.");
 		addButton(1, "P. Specials", physicalSpecials, null, null, null, "Physical special attack menu.", "Physical Specials");
 		addButton(2, "M. Specials", magicalSpecials, null, null, null, "Mental and supernatural special attack menu.", "Magical Specials");
@@ -437,9 +474,9 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	}
 	else if (monster.hasStatusAffect(StatusAffects.Constricted)) {
 		menu();
-		addButton(0, "Squeeze", desert.nagaScene.naggaSqueeze, null, null, null, "Squeeze some HP out of your opponent! \n\nFatigue Cost: " + physicalCost(20) + "");
-		addButton(1, "Tease", desert.nagaScene.naggaTease);
-		addButton(4, "Release", desert.nagaScene.nagaLeggoMyEggo);
+		addButton(0, "Squeeze", kGAMECLASS.desert.nagaScene.naggaSqueeze, null, null, null, "Squeeze some HP out of your opponent! \n\nFatigue Cost: " + physicalCost(20) + "");
+		addButton(1, "Tease", kGAMECLASS.desert.nagaScene.naggaTease);
+		addButton(4, "Release", kGAMECLASS.desert.nagaScene.nagaLeggoMyEggo);
 	}
 	else if (monster.hasStatusAffect(StatusAffects.ConstrictedScylla)) {
 		menu();
@@ -519,7 +556,7 @@ private function normalAttack():void {
 }
 public function basemeleeattacks():void {
 	clearOutput();
-	if (urtaQuest.isUrta()) {
+	if (kGAMECLASS.urtaQuest.isUrta()) {
 		flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 	}
 	if (player.weaponPerk != "Large" && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && !isWieldingRangedWeapon()) {
@@ -633,7 +670,7 @@ public function basemeleeattacks():void {
 			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] == 2) mutlimeleefistattacksCost += 20;
 			if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
 				if (player.fatigue + mutlimeleefistattacksCost <= player.maxFatigue()) {
-					fatigue(mutlimeleelargeattacksCost);
+					fatigue(mutlimeleefistattacksCost);
 				}
 				else {
 					outputText("You're too fatigued to attack more than once in this turn!\n\n");
@@ -745,7 +782,7 @@ private function wait():void {
 	else if (player.hasStatusAffect(StatusAffects.GooBind)) {
 		clearOutput();
 		outputText("You writhe uselessly, trapped inside the goo girl's warm, seething body. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girl's pulsing body around yours.");
-		temp = takeDamage(.35 * maxHP(), true);
+		temp = takeDamage(.35 * player.maxHP(), true);
 		combatRoundOver();
 	}
 	else if (player.hasStatusAffect(StatusAffects.GooArmorBind)) {
@@ -754,8 +791,8 @@ private function wait():void {
 		player.addStatusValue(StatusAffects.GooArmorBind, 1, 1);
 		if (player.statusAffectv1(StatusAffects.GooArmorBind) >= 5) {
 			if (monster.hasStatusAffect(StatusAffects.Spar))
-				valeria.pcWinsValeriaSparDefeat();
-			else dungeons.heltower.gooArmorBeatsUpPC();
+				kGAMECLASS.valeria.pcWinsValeriaSparDefeat();
+			else kGAMECLASS.dungeons.heltower.gooArmorBeatsUpPC();
 			return;
 		}
 		combatRoundOver();
@@ -861,7 +898,7 @@ private function struggle():void {
 		//Failed struggle
 		else {
 			outputText("You writhe uselessly, trapped inside the goo girl's warm, seething body. Darkness creeps at the edge of your vision as you are lulled into surrendering by the rippling vibrations of the girl's pulsing body around yours. ");
-			temp = takeDamage(.15 * maxHP(), true);
+			temp = takeDamage(.15 * player.maxHP(), true);
 		}
 		combatRoundOver();
 	}
@@ -1074,7 +1111,7 @@ public function fireBow():void {
 			if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2) outputText("s");
 			outputText(" thunks into Isabella's shield, completely blocked by the wall of steel.\n\n");
 		}
-		if (isabellaFollowerScene.isabellaAccent())
+		if (kGAMECLASS.isabellaFollowerScene.isabellaAccent())
 			outputText("\"<i>You remind me of ze horse-people.  They cannot deal vith mein shield either!</i>\" cheers Isabella.\n\n");
 		else outputText("\"<i>You remind me of the horse-people.  They cannot deal with my shield either!</i>\" cheers Isabella.\n\n");
 		enemyAI();
@@ -2145,7 +2182,7 @@ public function attack():void {
 		enemyAI();
 		return;
 	}
-	if(flags[kFLAGS.PC_FETISH] >= 3 && !urtaQuest.isUrta() && !isWieldingRangedWeapon()) {
+	if(flags[kFLAGS.PC_FETISH] >= 3 && !kGAMECLASS.urtaQuest.isUrta() && !isWieldingRangedWeapon()) {
 		outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal melee attack impossible!  Maybe you could try something else?\n\n", false);
 		enemyAI();
 		return;
@@ -2171,7 +2208,7 @@ public function attack():void {
 	}*/
 	//"Brawler perk". Urta only. Thanks to Fenoxo for pointing this out... Even though that should have been obvious :<
 	//Urta has fists and the Brawler perk. Don't check for that because Urta can't drop her fists or lose the perk!
-	else if(urtaQuest.isUrta()) {
+	else if(kGAMECLASS.urtaQuest.isUrta()) {
 		if(player.hasStatusAffect(StatusAffects.FirstAttack)) {
 			player.removeStatusAffect(StatusAffects.FirstAttack);
 		}
@@ -3328,7 +3365,7 @@ public function takeDamage(damage:Number, display:Boolean = false):Number {
 	return player.takeDamage(damage, display);
 }
 //ENEMYAI!
-public function enemyAI():void {
+public function enemyAIImpl():void {
 	monster.doAI();
 	//Violet Pupil Transformation
 	if (player.hasStatusAffect(StatusAffects.VioletPupilTransformation)) {
@@ -3381,7 +3418,7 @@ public function dropItem(monster:Monster, nextFunc:Function = null):void {
 						else itype = consumables.SDELITE;
 					}
 					//Not too tall, dont rob of axe!
-					else plotFight = true;
+					else kGAMECLASS.plotFight = true;
 				}
 				else outputText("\nThe minotaur's axe appears to have been broken during the fight, rendering it useless.  ", false);
 			}
@@ -3396,7 +3433,7 @@ public function dropItem(monster:Monster, nextFunc:Function = null):void {
 			flags[kFLAGS.FORCE_BEE_TO_PRODUCE_HONEY] = 0;
 		}
 	}
-	if(monster is Jojo && monk > 4) {
+	if(monster is Jojo && kGAMECLASS.monk > 4) {
 		if(rand(2) == 0) itype = consumables.INCUBID;
 		else {
 			if(rand(2) == 0) itype = consumables.B__BOOK;
@@ -3409,16 +3446,16 @@ public function dropItem(monster:Monster, nextFunc:Function = null):void {
 		else itype = consumables.GLDSEED;
 	}
 	//Chance of armor if at level 1 pierce fetish
-	if(!plotFight && !(monster is Ember) && !(monster is Kiha) && !(monster is Hel) && !(monster is Isabella)
-			&& flags[kFLAGS.PC_FETISH] == 1 && rand(10) == 0 && !player.hasItem(armors.SEDUCTA, 1) && !ceraphFollowerScene.ceraphIsFollower()) {
+	if(!kGAMECLASS.plotFight && !(monster is Ember) && !(monster is Kiha) && !(monster is Hel) && !(monster is Isabella)
+	   && flags[kFLAGS.PC_FETISH] == 1 && rand(10) == 0 && !player.hasItem(armors.SEDUCTA, 1) && !kGAMECLASS.ceraphFollowerScene.ceraphIsFollower()) {
 		itype = armors.SEDUCTA;
 	}
-
-	if(!plotFight && rand(200) == 0 && player.level >= 7) itype = consumables.BROBREW;
-	if(!plotFight && rand(200) == 0 && player.level >= 7) itype = consumables.BIMBOLQ;
-	if(!plotFight && rand(1000) == 0 && player.level >= 7) itype = consumables.RAINDYE;
+	
+	if(!kGAMECLASS.plotFight && rand(200) == 0 && player.level >= 7) itype = consumables.BROBREW;
+	if(!kGAMECLASS.plotFight && rand(200) == 0 && player.level >= 7) itype = consumables.BIMBOLQ;
+	if(!kGAMECLASS.plotFight && rand(1000) == 0 && player.level >= 7) itype = consumables.RAINDYE;
 	//Chance of eggs if Easter!
-	if(!plotFight && rand(6) == 0 && isEaster()) {
+	if(!kGAMECLASS.plotFight && rand(6) == 0 && isEaster()) {
 		temp = rand(13);
 		if(temp == 0) itype =consumables.BROWNEG;
 		if(temp == 1) itype =consumables.L_BRNEG;
@@ -3484,10 +3521,6 @@ public function awardPlayer(nextFunc:Function = null):void
 	dynStats("lust", 0, "resisted", false); //Forces up arrow.
 }
 
-//Clear statuses
-public function clearStatuses(visibility:Boolean):void {
-	player.clearStatuses(visibility);
-}
 //Update combat status effects
 private function combatStatusesUpdate():void {
 	//old outfit used for fetish cultists
@@ -3736,7 +3769,7 @@ private function combatStatusesUpdate():void {
 		}
 	}
 	if(player.hasStatusAffect(StatusAffects.AcidSlap)) {
-		var slap:Number = 3 + (maxHP() * 0.02);
+		var slap:Number = 3 + (player.maxHP() * 0.02);
 		outputText("<b>Your muscles twitch in agony as the acid keeps burning you. <b>(<font color=\"#800000\">" + slap + "</font>)</b></b>\n\n", false);
 	}
 	if(player.findPerk(PerkLib.ArousingAura) >= 0 && monster.lustVuln > 0 && player.cor >= 70) {
@@ -3939,7 +3972,7 @@ private function combatStatusesUpdate():void {
 		}
 		else {
 			outputText("The poison continues to work on your body, wracking you with pain!\n\n", false);
-			takeDamage(8+rand(maxHP()/20) * player.statusAffectv2(StatusAffects.Poison));
+			takeDamage(8+rand(player.maxHP()/20) * player.statusAffectv2(StatusAffects.Poison));
 		}
 	}
 	//Bondage straps + bondage fetish
@@ -4172,7 +4205,7 @@ public function regeneration(combat:Boolean = true):void {
 			if (player.findPerk(PerkLib.Regeneration5) >= 0) healingPercent += 0.5;
 		}
 		if (player.armor.name == "skimpy nurse's outfit") healingPercent += 0.5;
-		if (player.armor == armors.GOOARMR) healingPercent += (valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
+		if (player.armor == armors.GOOARMR) healingPercent += (kGAMECLASS.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
 		if (player.findPerk(PerkLib.LustyRegeneration) >= 0) healingPercent += 0.5;
 		if (player.findPerk(PerkLib.LizanRegeneration) >= 0) healingPercent += 1.5;
 		if (player.findPerk(PerkLib.LizanMarrow) >= 0) healingPercent += 0.5;
@@ -4181,7 +4214,7 @@ public function regeneration(combat:Boolean = true):void {
 		if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 1.5;
 		if ((player.internalChimeraRating() >= 1 && player.hunger < 1 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.internalChimeraRating() >= 1 && flags[kFLAGS.HUNGER_ENABLED] <= 0)) healingPercent -= (0.5 * player.internalChimeraRating());
 		if (healingPercent > maximumRegeneration()) healingPercent = maximumRegeneration();
-		HPChange(Math.round(maxHP() * healingPercent / 100), false);
+		HPChange(Math.round(player.maxHP() * healingPercent / 100), false);
 	}
 	else {
 		//Regeneration
@@ -4195,7 +4228,7 @@ public function regeneration(combat:Boolean = true):void {
 			if (player.findPerk(PerkLib.Regeneration5) >= 0) healingPercent += 1;
 		}
 		if (player.armorName == "skimpy nurse's outfit") healingPercent += 1;
-		if (player.armorName == "goo armor") healingPercent += (valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 16 : 3) : 3);
+		if (player.armorName == "goo armor") healingPercent += (kGAMECLASS.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 16 : 3) : 3);
 		if (player.findPerk(PerkLib.LustyRegeneration) >= 0) healingPercent += 1;
 		if (player.findPerk(PerkLib.LizanRegeneration) >= 0) healingPercent += 3;
 		if (player.findPerk(PerkLib.LizanMarrow) >= 0) healingPercent += 1;
@@ -4204,7 +4237,7 @@ public function regeneration(combat:Boolean = true):void {
 		if (player.findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) healingPercent += 3;
 		if ((player.internalChimeraRating() >= 1 && player.hunger < 1 && flags[kFLAGS.HUNGER_ENABLED] > 0) || (player.internalChimeraRating() >= 1 && flags[kFLAGS.HUNGER_ENABLED] <= 0)) healingPercent -= player.internalChimeraRating();
 		if (healingPercent > (maximumRegeneration() * 2)) healingPercent = (maximumRegeneration() * 2);
-		HPChange(Math.round(maxHP() * healingPercent / 100), false);
+		HPChange(Math.round(player.maxHP() * healingPercent / 100), false);
 	}
 }
 
@@ -4222,7 +4255,7 @@ public function soulforceregeneration(combat:Boolean = true):void {
 		if (player.findPerk(PerkLib.SoulTyrant) >= 0) gainedsoulforce += 1;
 		if (player.findPerk(PerkLib.SoulKing) >= 0) gainedsoulforce += 1;
 		if (player.findPerk(PerkLib.SoulEmperor) >= 0) gainedsoulforce += 1;
-		SoulforceChange(gainedsoulforce, false);
+		kGAMECLASS.SoulforceChange(gainedsoulforce, false);
 	}
 	else {
 		if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) gainedsoulforce += 2;
@@ -4236,7 +4269,7 @@ public function soulforceregeneration(combat:Boolean = true):void {
 		if (player.findPerk(PerkLib.SoulTyrant) >= 0) gainedsoulforce += 2;
 		if (player.findPerk(PerkLib.SoulKing) >= 0) gainedsoulforce += 2;
 		if (player.findPerk(PerkLib.SoulEmperor) >= 0) gainedsoulforce += 2;
-		SoulforceChange(gainedsoulforce, false);
+		kGAMECLASS.SoulforceChange(gainedsoulforce, false);
 	}
 }
 
@@ -4254,9 +4287,9 @@ public function maximumRegeneration():Number {
 }
 
 private var combatRound:int = 0;
-public function startCombat(monster_:Monster, plotFight_:Boolean = false):void {
+public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):void {
 	combatRound = 0;
-	plotFight = plotFight_;
+	kGAMECLASS.plotFight = plotFight_;
 	mainView.hideMenuButton( MainView.MENU_DATA );
 	mainView.hideMenuButton( MainView.MENU_APPEARANCE );
 	mainView.hideMenuButton( MainView.MENU_LEVEL );
@@ -4267,9 +4300,9 @@ public function startCombat(monster_:Monster, plotFight_:Boolean = false):void {
 	inCombat = true;
 	monster = monster_;
 	if(monster.short == "Ember") {
-		monster.pronoun1 = emberScene.emberMF("he","she");
-		monster.pronoun2 = emberScene.emberMF("him","her");
-		monster.pronoun3 = emberScene.emberMF("his","her");
+		monster.pronoun1 = kGAMECLASS.emberScene.emberMF("he","she");
+		monster.pronoun2 = kGAMECLASS.emberScene.emberMF("him","her");
+		monster.pronoun3 = kGAMECLASS.emberScene.emberMF("his","her");
 	}
 	//Reduce enemy def if player has precision!
 	if(player.findPerk(PerkLib.Precision) >= 0 && player.inte >= 25) {
@@ -4390,9 +4423,9 @@ public function startCombat(monster_:Monster, plotFight_:Boolean = false):void {
 	}
 	doNext(playerMenu);
 }
-public function startCombatImmediate(monster_:Monster, _plotFight:Boolean):void
+public function startCombatImmediateImpl(monster_:Monster, _plotFight:Boolean):void
 {
-	plotFight = _plotFight;
+	kGAMECLASS.plotFight = _plotFight;
 	mainView.hideMenuButton( MainView.MENU_DATA );
 	mainView.hideMenuButton( MainView.MENU_APPEARANCE );
 	mainView.hideMenuButton( MainView.MENU_LEVEL );
@@ -4401,9 +4434,9 @@ public function startCombatImmediate(monster_:Monster, _plotFight:Boolean):void
 	inCombat = true;
 	monster = monster_;
 	if(monster.short == "Ember") {
-		monster.pronoun1 = emberScene.emberMF("he","she");
-		monster.pronoun2 = emberScene.emberMF("him","her");
-		monster.pronoun3 = emberScene.emberMF("his","her");
+		monster.pronoun1 = kGAMECLASS.emberScene.emberMF("he","she");
+		monster.pronoun2 = kGAMECLASS.emberScene.emberMF("him","her");
+		monster.pronoun3 = kGAMECLASS.emberScene.emberMF("his","her");
 	}
 	//Reduce enemy def if player has precision!
 	if(player.findPerk(PerkLib.Precision) >= 0 && player.inte >= 25) {
@@ -5208,7 +5241,7 @@ public function tease(justText:Boolean = false):void {
 		choices[choices.length] = 41;
 	}
 	//42 Urta teases!
-	if(urtaQuest.isUrta()) {
+	if(kGAMECLASS.urtaQuest.isUrta()) {
 		choices[choices.length] = 42;
 		choices[choices.length] = 42;
 		choices[choices.length] = 42;
@@ -6124,7 +6157,7 @@ public function tease(justText:Boolean = false):void {
 		else if (monster is Doppleganger && !monster.hasStatusAffect(StatusAffects.Stunned)) (monster as Doppleganger).mirrorTease(damage, true);
 		else if (!justText) monster.teased(damage);
 		
-		if (flags[kFLAGS.PC_FETISH] >= 1 && !urtaQuest.isUrta()) 
+		if (flags[kFLAGS.PC_FETISH] >= 1 && !kGAMECLASS.urtaQuest.isUrta())
 		{
 			if(player.lust < (player.maxLust() * 0.75)) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.", false);
 			else outputText("\nIf you keep exposing yourself you're going to get too horny to fight back.  This exhibitionism fetish makes it hard to resist just stripping naked and giving up.", false);
@@ -6132,11 +6165,11 @@ public function tease(justText:Boolean = false):void {
 		}
 		
 		// Similar to fetish check, only add XP if the player IS the player...
-		if (!justText && !urtaQuest.isUrta()) teaseXP(1);
+		if (!justText && !kGAMECLASS.urtaQuest.isUrta()) teaseXP(1);
 	}
 	//Nuttin honey
 	else {
-		if (!justText && !urtaQuest.isUrta()) teaseXP(5);
+		if (!justText && !kGAMECLASS.urtaQuest.isUrta()) teaseXP(5);
 		
 		if (monster is JeanClaude) (monster as JeanClaude).handleTease(0, false);
 		else if (monster is Doppleganger) (monster as Doppleganger).mirrorTease(0, false);
@@ -6159,7 +6192,7 @@ public function teaseXP(XP:Number = 0):void {
 }
 
 //VICTORY OR DEATH?
-public function combatRoundOver():Boolean { //Called after the monster's action
+public function combatRoundOverImpl():Boolean { //Called after the monster's action
 	combatRound++;
 	statScreenRefresh();
 	flags[kFLAGS.ENEMY_CRITICAL] = 0;
@@ -6174,7 +6207,7 @@ public function combatRoundOver():Boolean { //Called after the monster's action
 	}
 	if(monster.hasStatusAffect(StatusAffects.Level)) {
 		if((monster as SandTrap).trapLevel() <= 1) {
-			desert.sandTrapScene.sandtrapmentLoss();
+			kGAMECLASS.desert.sandTrapScene.sandtrapmentLoss();
 			return true;
 		}
 	}
@@ -6212,8 +6245,8 @@ public function getWhiteMagicLustCap():Number {
 public function meleeANDrangeANDmanaSubMenu():void {
 	menu();
 	clearOutput();
-	if (player.findPerk(PerkLib.DoubleAttack) >= 0) addButton(0,"Melee Opt",doubleAttackOptions);
-	if (player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0) addButton(1,"Range Opt",doubleStrikeOptions);
+	if (player.findPerk(PerkLib.DoubleAttack) >= 0) addButton(0,"Melee Opt",kGAMECLASS.doubleAttackOptions);
+	if (player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0) addButton(1,"Range Opt",kGAMECLASS.doubleStrikeOptions);
 //	if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(2,"Mana",ManaAndSoulforce);
 	addButton(14, "Back", combatMenu, false);
 }
@@ -7495,7 +7528,7 @@ public function spellBlind():void {
 			else outputText("is blinded!</b>", false);
 			monster.createStatusAffect(StatusAffects.Blind,2+player.inte/20,0,0,0);
 			if(monster.short == "Isabella")
-				if (isabellaFollowerScene.isabellaAccent()) outputText("\n\n\"<i>Nein! I cannot see!</i>\" cries Isabella.", false);
+				if (kGAMECLASS.isabellaFollowerScene.isabellaAccent()) outputText("\n\n\"<i>Nein! I cannot see!</i>\" cries Isabella.", false);
 				else outputText("\n\n\"<i>No! I cannot see!</i>\" cries Isabella.", false);
 			if(monster.short == "Kiha") outputText("\n\n\"<i>You think blindness will slow me down?  Attacks like that are only effective on those who don't know how to see with their other senses!</i>\" Kiha cries defiantly.", false);
 			if(monster.short == "plain girl") {
@@ -7962,7 +7995,7 @@ public function hellFire():void {
 	}
 	if(monster.short == "Isabella" && !monster.hasStatusAffect(StatusAffects.Stunned)) {
 		outputText("  Isabella shoulders her shield into the path of the crimson flames.  They burst over the wall of steel, splitting around the impenetrable obstruction and washing out harmlessly to the sides.\n\n", false);
-		if (isabellaFollowerScene.isabellaAccent()) outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n", false);
+		if (kGAMECLASS.isabellaFollowerScene.isabellaAccent()) outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n", false);
 		else outputText("\"<i>Is that all you've got?  It'll take more than a flashy magic trick to beat Isabella!</i>\" taunts the cow-girl.\n\n", false);
 		enemyAI();
 		return;
@@ -8839,14 +8872,14 @@ public function superWhisperAttack():void {
 	}
 	if(monster.short == "pod" || monster.inte == 0) {
 		outputText("You reach for the enemy's mind, but cannot find anything.  You frantically search around, but there is no consciousness as you know it in the room.\n\n", true);
-		changeFatigue(1);
+		fatigue(1);
 		enemyAI();
 		return;
 	}
 	if (monster is LivingStatue)
 	{
 		outputText("There is nothing inside the golem to whisper to.");
-		changeFatigue(1);
+		fatigue(1);
 		enemyAI();
 		return;
 	}
@@ -8865,14 +8898,14 @@ public function superWhisperAttack():void {
 	//Enemy too strong or multiplesI think you 
 	if(player.inte < monster.inte || monster.plural) {
 		outputText("You reach for your enemy's mind, but can't break through.\n", false);
-		changeFatigue(10);
+		fatigue(10);
 		enemyAI();
 		return;
 	}
 	//[Failure] 
 	if(rand(10) == 0) {
 		outputText("As you reach for your enemy's mind, you are distracted and the chorus of voices screams out all at once within your mind. You're forced to hastily silence the voices to protect yourself.", false);
-		changeFatigue(10);
+		fatigue(10);
 		enemyAI();
 		return;
 	}
@@ -9511,7 +9544,7 @@ public function fireballuuuuu():void {
 		return;
 	}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
-	changeFatigue(20);
+	fatigue(20);
 	
 	//[Failure]
 	//(high damage to self, +10 fatigue on top of ability cost)
@@ -9519,7 +9552,7 @@ public function fireballuuuuu():void {
 		if(player.hasStatusAffect(StatusAffects.WebSilence)) outputText("You reach for the terrestrial fire, but as you ready to release a torrent of flame, it backs up in your throat, blocked by the webbing across your mouth.  It causes you to cry out as the sudden, heated force explodes in your own throat. ", false);
 		else if(player.hasStatusAffect(StatusAffects.GooArmorSilence)) outputText("You reach for the terrestrial fire but as you ready the torrent, it erupts prematurely, causing you to cry out as the sudden heated force explodes in your own throat.  The slime covering your mouth bubbles and pops, boiling away where the escaping flame opens small rents in it.  That wasn't as effective as you'd hoped, but you can at least speak now. ");
 		else outputText("You reach for the terrestrial fire, but as you ready to release a torrent of flame, the fire inside erupts prematurely, causing you to cry out as the sudden heated force explodes in your own throat. ", false);
-		changeFatigue(10);
+		fatigue(10);
 		takeDamage(10 + rand(20), true);
 		outputText("\n\n");
 		enemyAI();
@@ -9569,7 +9602,7 @@ public function fireballuuuuu():void {
 
 	if(monster.short == "Isabella" && !monster.hasStatusAffect(StatusAffects.Stunned)) {
 		outputText("Isabella shoulders her shield into the path of the emerald flames.  They burst over the wall of steel, splitting around the impenetrable obstruction and washing out harmlessly to the sides.\n\n", false);
-		if (isabellaFollowerScene.isabellaAccent()) outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n", false);
+		if (kGAMECLASS.isabellaFollowerScene.isabellaAccent()) outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n", false);
 		else outputText("\"<i>Is that all you've got?  It'll take more than a flashy magic trick to beat Isabella!</i>\" taunts the cow-girl.\n\n", false);
 		enemyAI();
 		return;
@@ -9800,7 +9833,7 @@ public function runAway(callHook:Boolean = true):void {
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
-	if(monster.hasStatusAffect(StatusAffects.GenericRunDisabled) || urtaQuest.isUrta()) {
+	if(monster.hasStatusAffect(StatusAffects.GenericRunDisabled) || kGAMECLASS.urtaQuest.isUrta()) {
 		outputText("You can't escape from this fight!");
 //Pass false to combatMenu instead:		menuLoc = 3;
 //		doNext(combatMenu);
@@ -9867,7 +9900,7 @@ public function runAway(callHook:Boolean = true):void {
 	}
 	if (monster.short == "lizan rogue") {
 		outputText("As you retreat the lizan doesn't even attempt to stop you. When you look back to see if he's still there you find nothing but the empty bog around you.");
-		gameState = 0;
+		kGAMECLASS.inCombat = false;
 		clearStatuses(false);
 		doNext(camp.returnToCampUseOneHour);
 		return;
@@ -9981,7 +10014,7 @@ public function runAway(callHook:Boolean = true):void {
 		}
 		//Fail: 
 		else {
-			outputText("Despite some impressive jinking, " + emberScene.emberMF("he","she") + " catches you, tackling you to the ground.\n\n");
+			outputText("Despite some impressive jinking, " + kGAMECLASS.emberScene.emberMF("he","she") + " catches you, tackling you to the ground.\n\n");
 			enemyAI();
 		}
 		return;
@@ -10314,8 +10347,8 @@ public function anemoneSting():void {
 // M. SPECIALS
 //------------
 public function magicalSpecials():void {
-	if(urtaQuest.isUrta()) {
-		urtaQuest.urtaMSpecials();
+	if(kGAMECLASS.urtaQuest.isUrta()) {
+		kGAMECLASS.urtaQuest.urtaMSpecials();
 		return;
 	}
 	if (inCombat && player.hasStatusAffect(StatusAffects.Sealed) && player.statusAffectv2(StatusAffects.Sealed) == 6) {
@@ -10444,8 +10477,8 @@ public function magicalSpecials():void {
 // P. SPECIALS
 //------------
 public function physicalSpecials():void {
-	if(urtaQuest.isUrta()) {
-		urtaQuest.urtaSpecials();
+	if(kGAMECLASS.urtaQuest.isUrta()) {
+		kGAMECLASS.urtaQuest.urtaSpecials();
 		return;
 	}
 	if (inCombat && player.hasStatusAffect(StatusAffects.Sealed) && player.statusAffectv2(StatusAffects.Sealed) == 5) {
@@ -10477,7 +10510,7 @@ public function physicalSpecials():void {
 	}
 	//Constrict
 	if (player.lowerBody == LOWER_BODY_TYPE_NAGA) {
-		addButton(button++, "Constrict", desert.nagaScene.nagaPlayerConstrict, null, null, null, "Attempt to bind an enemy in your long snake-tail.");
+		addButton(button++, "Constrict", kGAMECLASS.desert.nagaScene.nagaPlayerConstrict, null, null, null, "Attempt to bind an enemy in your long snake-tail.");
 	}
 	//Grapple
 	if (player.lowerBody == LOWER_BODY_TYPE_SCYLLA) {
@@ -10504,7 +10537,7 @@ public function physicalSpecials():void {
 	}
 	//Infest if infested
 	if (player.hasStatusAffect(StatusAffects.Infested) && player.statusAffectv1(StatusAffects.Infested) == 5 && player.hasCock()) {
-		addButton(button++, "Infest", mountain.wormsScene.playerInfest, null, null, null, "The infest attack allows you to cum at will, launching a stream of semen and worms at your opponent in order to infest them.  Unless your foe is very aroused they are likely to simply avoid it.  Only works on males or herms. \n\nAlso great for reducing your lust.");
+		addButton(button++, "Infest", kGAMECLASS.mountain.wormsScene.playerInfest, null, null, null, "The infest attack allows you to cum at will, launching a stream of semen and worms at your opponent in order to infest them.  Unless your foe is very aroused they are likely to simply avoid it.  Only works on males or herms. \n\nAlso great for reducing your lust.");
 	}
 	//Kiss supercedes bite.
 	if (player.hasStatusAffect(StatusAffects.LustStickApplied)) {
@@ -11346,7 +11379,7 @@ public function kitsuneTerror():void {
 	}
 	if(monster.short == "pod" || monster.inte == 0) {
 		outputText("You reach for the enemy's mind, but cannot find anything.  You frantically search around, but there is no consciousness as you know it in the room.\n\n", true);
-		changeFatigue(1);
+		fatigue(1);
 		enemyAI();
 		return;
 	}
@@ -11377,7 +11410,7 @@ public function kitsuneIllusion():void {
 	}
 	if(monster.short == "pod" || monster.inte == 0) {
 		outputText("In the tight confines of this pod, there's no use making such an attack!\n\n", true);
-		changeFatigue(1);
+		fatigue(1);
 		enemyAI();
 		return;
 	}
@@ -11517,7 +11550,7 @@ public function Fascinate():void {
 	}
 	if(monster.short == "pod" || monster.inte == 0) {
 		outputText("You reach for the enemy's mind, but cannot find anything.  You frantically search around, but there is no consciousness as you know it in the room.\n\n", true);
-		changeFatigue(1);
+		fatigue(1);
 		enemyAI();
 		return;
 	}
@@ -12189,7 +12222,7 @@ public function immolationSpell():void {
 	temp = doDamage(temp);
 	outputText(" <b>(<font color=\"#800000\">" + temp + "</font>)</b>\n\n");
 	player.removeStatusAffect(StatusAffects.ImmolationSpell);
-	arianScene.clearTalisman();
+	kGAMECLASS.arianScene.clearTalisman();
 	monster.createStatusAffect(StatusAffects.ImmolationDoT,3,0,0,0);
 	enemyAI();
 }
@@ -12199,7 +12232,7 @@ public function shieldingSpell():void {
 	outputText("You gather energy in your Talisman and unleash the spell contained within.  A barrier of light engulfs you, before turning completely transparent.  Your defense has been increased.\n\n");
 	player.createStatusAffect(StatusAffects.Shielding,0,0,0,0);
 	player.removeStatusAffect(StatusAffects.ShieldingSpell);
-	arianScene.clearTalisman();
+	kGAMECLASS.arianScene.clearTalisman();
 	enemyAI();
 }
 
@@ -12219,7 +12252,7 @@ public function iceprisonSpell():void {
 	temp = doDamage(temp);
 	outputText(" <b>(<font color=\"#800000\">" + temp + "</font>)</b>\n\n");
 	player.removeStatusAffect(StatusAffects.IcePrisonSpell);
-	arianScene.clearTalisman();
+	kGAMECLASS.arianScene.clearTalisman();
 	monster.createStatusAffect(StatusAffects.Stunned,3,0,0,0);
 	enemyAI();
 }
@@ -12984,3 +13017,5 @@ public function tripleThrust():void {
 	if(monster.HP < 1) doNext(endHpVictory);
 	else enemyAI();
 }*/
+}
+}

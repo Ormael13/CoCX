@@ -83,7 +83,7 @@
 			game.dynStats("lus", (player.lib/10 + player.cor/20)+4);
 			if (player.lust >= player.maxLust())
 				doNext(game.endLustLoss);
-			else doNext(game.combatMenu);
+			else doNext(game.combat.combatMenu);
 		}
 		private function cultistLustTransfer():void {
 			if(lust <= 30 || rand(2) == 0) {
@@ -109,7 +109,7 @@
 			}
 			if (player.lust >= player.maxLust())
 				doNext(game.endLustLoss);
-			else doNext(game.combatMenu);
+			else doNext(game.combat.combatMenu);
 		}
 		
 

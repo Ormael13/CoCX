@@ -16,7 +16,7 @@ public function playerMenu():void {
 	mainView.setMenuButton(MainView.MENU_NEW_MAIN, "New Game", charCreation.newGameGo);
 	mainView.nameBox.visible = false;
 	if (gameState == 1 || gameState == 2) {
-		combatMenu();
+		combat.combatMenu();
 		return;
 	}
 	//Clear restriction on item overlaps if not in combat
@@ -534,8 +534,8 @@ private function goNextWrapped(time:Number, needNext:Boolean):Boolean  {
 		timeQ--;
 		model.time.hours++;
 
-		regeneration(false);
-		if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) soulforceregeneration(false);
+		combat.regeneration(false);
+		if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) combat.soulforceregeneration(false);
 		//Inform all time aware classes that a new hour has arrived
 		for (var tac:int = 0; tac < _timeAwareClassList.length; tac++) {
 			item   = _timeAwareClassList[tac];

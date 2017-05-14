@@ -137,7 +137,7 @@ package classes.Scenes
 			}
 			outputText("\n<b>Capacity:</b> " + getOccupiedSlots() + " / " + getMaxSlots());
 			if (getGame().inCombat)
-				addButton(14, "Back", kGAMECLASS.combatMenu, false); //Player returns to the combat menu on cancel
+				addButton(14, "Back", kGAMECLASS.combat.combatMenu, false); //Player returns to the combat menu on cancel
 			else addButton(14, "Back", playerMenu);
 //Gone			menuLoc = 1;
 		}

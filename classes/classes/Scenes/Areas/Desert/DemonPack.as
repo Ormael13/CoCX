@@ -130,8 +130,8 @@
 							consumables.INCUBID,
 							consumables.OVIELIX,
 							consumables.B__BOOK);
-			this.special1 = game.packAttack;
-			this.special2 = game.lustAttack;
+			this.special1 = game.combat.packAttack;
+			this.special2 = game.combat.lustAttack;
 			this.tailType = TAIL_TYPE_DEMONIC;
 			this.hornType = HORNS_DEMON;
 			this.horns = 2;

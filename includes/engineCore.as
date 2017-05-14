@@ -345,7 +345,7 @@ public function doubleAttackOptions():void {
 	outputText("\n\nYou can change it to different amount of attacks.");
 	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 0) addButton(0, "All Single", singleAttack);
 	if ((player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 1) {
-		if ((player.weaponPerk != "Large" || (player.weaponPerk == "Large" && player.findPerk(PerkLib.DoubleAttackLarge) < 0)) && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && (player.isFistOrFistWeapon() && player.findPerk(PerkLib.Combo) < 0)) addButton(1, "All Double", doubleAttack);
+		if ((player.weaponPerk != "Large" || (player.weaponPerk == "Large" && player.findPerk(PerkLib.DoubleAttackLarge) < 0)) && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && (player.isFistOrFistWeapon() && player.findPerk(PerkLib.Combo) >= 0)) addButton(1, "All Double", doubleAttack);
 		else addButtonDisabled(1, "All Double", "You current melee weapon not allow to use this option");	//player.weaponName != "fists"
 	}
 	if ((player.findPerk(PerkLib.TripleAttack) >= 0 || player.findPerk(PerkLib.TripleAttackLarge) >= 0) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 2) {
@@ -366,7 +366,7 @@ public function doubleAttackOptions():void {
 	}// && player.weaponName != "hooked gauntlets" && player.weaponName != "spiked gauntlet"
 	
 	var e:MouseEvent;
-	if (inCombat) addButton(14, "Back", combatMenu);
+	if (inCombat) addButton(14, "Back", combat.combatMenu);
 	else addButton(14, "Back", displayPerks);
 }
 
@@ -456,7 +456,7 @@ public function doubleStrikeOptions():void {
 	if (player.findPerk(PerkLib.EnvenomedBolt) >= 0 && (player.tailType == TAIL_TYPE_BEE_ABDOMEN || player.tailType == TAIL_TYPE_SCORPION || player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL || player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SPIDER_FANGS) && flags[kFLAGS.ENVENOMED_BOLTS] != 1) addButton(13, "Venom", venomArrows);
 	
 	var e:MouseEvent;
-	if (inCombat) addButton(14, "Back", combatMenu);
+	if (inCombat) addButton(14, "Back", combat.combatMenu);
 	else addButton(14, "Back", displayPerks);
 }
 
@@ -1326,7 +1326,7 @@ public function buildPerkList():Array {
 		}
 		if(player.inte >= 50)
 			_add(new PerkClass(PerkLib.Tactician));
-		if(spellCount() > 0 && player.findPerk(PerkLib.Spellpower) >= 0 && player.findPerk(PerkLib.Mage) >= 0 && player.inte >= 60) {
+		if(combat.spellCount() > 0 && player.findPerk(PerkLib.Spellpower) >= 0 && player.findPerk(PerkLib.Mage) >= 0 && player.inte >= 60) {
 			_add(new PerkClass(PerkLib.Channeling));
 		}
 		if(player.inte >= 60) {
@@ -2734,7 +2734,7 @@ public function fatigue(mod:Number,type:Number  = 0):void {
 		mod = spellCost(mod);
 		//Blood mages use HP for spells
 		if(player.findPerk(PerkLib.BloodMage) >= 0) {
-			takeDamage(mod);
+			combat.takeDamage(mod);
 			statScreenRefresh();
 			return;
 		}                
@@ -2753,7 +2753,7 @@ public function fatigue(mod:Number,type:Number  = 0):void {
 		mod = spellCostWhite(mod);
 		//Blood mages use HP for spells
 		if(player.findPerk(PerkLib.BloodMage) >= 0) {
-			takeDamage(mod);
+			combat.takeDamage(mod);
 			statScreenRefresh();
 			return;
 		} 
@@ -2762,7 +2762,7 @@ public function fatigue(mod:Number,type:Number  = 0):void {
 		mod = spellCostBlack(mod);
 		//Blood mages use HP for spells
 		if(player.findPerk(PerkLib.BloodMage) >= 0) {
-			takeDamage(mod);
+			combat.takeDamage(mod);
 			statScreenRefresh();
 			return;
 		} 
@@ -2839,19 +2839,19 @@ public function displayStats(e:MouseEvent = null):void
 
 	combatStats += "<b>Lust Resistance:</b> " + (100 - Math.round(lustPercent())) + "% (Higher is better.)\n";
 	
-	combatStats += "<b>Spell Effect Multiplier:</b> " + Math.round(100 * spellMod()) + "%\n";
+	combatStats += "<b>Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellMod()) + "%\n";
 	
 	combatStats += "<b>Spell Cost:</b> " + spellCost(100) + "%\n";
 	
-	combatStats += "<b>White Spell Effect Multiplier:</b> " + Math.round(100 * spellModWhite()) + "%\n";
+	combatStats += "<b>White Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellModWhite()) + "%\n";
 	
 	combatStats += "<b>White Spell Cost:</b> " + spellCostWhite(100) + "%\n";
 	
-	combatStats += "<b>Black Spell Effect Multiplier:</b> " + Math.round(100 * spellModBlack()) + "%\n";
+	combatStats += "<b>Black Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellModBlack()) + "%\n";
 	
 	combatStats += "<b>Black Spell Cost:</b> " + spellCostBlack(100) + "%\n";
 	
-	combatStats += "<b>Unarmed:</b> +" + unarmedAttack() + "\n";
+	combatStats += "<b>Unarmed:</b> +" + combat.unarmedAttack() + "\n";
 	
 	if (player.statusAffectv1(StatusAffects.Kelt) > 0) {
 		if (player.statusAffectv1(StatusAffects.Kindra) < 1)
@@ -2862,21 +2862,21 @@ public function displayStats(e:MouseEvent = null):void
 	
 	combatStats += "<b>Arrow/Bolt Cost:</b> " + bowCost(100) + "%\n";
 	
-	combatStats += "<b>Accuracy (1st range attack):</b> " + (arrowsAccuracy() / 2) + "%\n";
+	combatStats += "<b>Accuracy (1st range attack):</b> " + (combat.arrowsAccuracy() / 2) + "%\n";
 	
-	if (player.findPerk(PerkLib.DoubleStrike) >= 0) combatStats += "<b>Accuracy (2nd range attack):</b> " + ((arrowsAccuracy() / 2) - 15) + "%\n";
+	if (player.findPerk(PerkLib.DoubleStrike) >= 0) combatStats += "<b>Accuracy (2nd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 15) + "%\n";
 	
-	if (player.findPerk(PerkLib.Manyshot) >= 0) combatStats += "<b>Accuracy (3rd range attack):</b> " + ((arrowsAccuracy() / 2) - 30) + "%\n";
+	if (player.findPerk(PerkLib.Manyshot) >= 0) combatStats += "<b>Accuracy (3rd range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 30) + "%\n";
 	
-	if (player.findPerk(PerkLib.TripleStrike) >= 0) combatStats += "<b>Accuracy (4th range attack):</b> " + ((arrowsAccuracy() / 2) - 45) + "%\n";
+	if (player.findPerk(PerkLib.TripleStrike) >= 0) combatStats += "<b>Accuracy (4th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 45) + "%\n";
 	
-	if (player.findPerk(PerkLib.WildQuiver) >= 0) combatStats += "<b>Accuracy (5th range attack):</b> " + ((arrowsAccuracy() / 2) - 60) + "%\n";
+	if (player.findPerk(PerkLib.WildQuiver) >= 0) combatStats += "<b>Accuracy (5th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 60) + "%\n";
 	
-	if (player.findPerk(PerkLib.Multishot) >= 0) combatStats += "<b>Accuracy (6th range attack):</b> " + ((arrowsAccuracy() / 2) - 75) + "%\n";
+	if (player.findPerk(PerkLib.Multishot) >= 0) combatStats += "<b>Accuracy (6th range attack):</b> " + ((combat.arrowsAccuracy() / 2) - 75) + "%\n";
 	
-	combatStats += "<b>Soulskill Effect Multiplier:</b> " + Math.round(100 * soulskillMod()) + "%\n";
+	combatStats += "<b>Soulskill Effect Multiplier:</b> " + Math.round(100 * combat.soulskillMod()) + "%\n";
 	
-	combatStats += "<b>Soulskill Cost:</b> " + Math.round(100 * soulskillCost()) + "%\n";
+	combatStats += "<b>Soulskill Cost:</b> " + Math.round(100 * combat.soulskillCost()) + "%\n";
 	
 	if (flags[kFLAGS.RAPHAEL_RAPIER_TRANING] > 0)
 		combatStats += "<b>Rapier Skill:</b> " + flags[kFLAGS.RAPHAEL_RAPIER_TRANING] + " / 4\n";

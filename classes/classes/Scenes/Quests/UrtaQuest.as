@@ -188,7 +188,7 @@ private function resetToPC():void {
 public function startUrtaQuest():void {
 	showStats();
 	clearOutput();
-	trace("Cloning PC's items")
+	trace("Cloning PC's items");
 	// *SERIALIZE* out the players current Player object + items
 	urtaQItems1 = player.itemSlot1;
 	urtaQItems2 = player.itemSlot2;
@@ -509,7 +509,7 @@ private function visitPCPreUrtaQuest(truth:Boolean):void {
 	}
 	//[SEX OPTIONS GO HURRRR]
 	//Snuggle, put cock in cocked PC ass, ride PC cock vaginally, Fuck Girlvag with yer dick, maybe a sixtynine?
-	var buttonFuckVagText:String = "Fuck" + player2.mf("His","Her") + "Vag"
+	var buttonFuckVagText:String = "Fuck" + player2.mf("His","Her") + "Vag";
 	menu();
 	addButton(0,"Cuddle",snuggleWithUrta, truth);
 	//Put Urta dick in girl PC's vag(C)*
@@ -738,11 +738,11 @@ private function putUrtasWangInPCsCunt(truth:Boolean):void {
 	outputText(" dome, until at last you finally spend the last of your spunk.");
 	//Hermaphrodite cums!
 	if (player2.hasCock()) {
-		outputText("\n\nYour lover suddenly achieves orgasm at last.  ")
-		if (player2.cumQ() < 50) outputText("Ropes of seed shoot from " + player2.mf("his", "her") + " prick.  After a few shots of cum, " + player2.mf("his", "her") + " cock stops leaking at once.")
-		else if (player2.cumQ() < 250) outputText("Thick ropes of seed shoot from " + player2.mf("his", "her") + " prick.  " + player2.mf("He", "She") + " definitely made a bit of mess. ")
-		else if (player2.cumQ() < 1000) outputText("Thick ropes of seed shoot from " + player2.mf("his", "her") + " prick.  This continues for a while and eventually, " + player2.mf("he", "she") + " stops after " + player2.mf("he", "she") + " made a large puddle of cum.")
-		else if (player2.cumQ() < 2500) outputText("Torrents of cum blast from " + player2.mf("his", "her") + " prick.  This continues for a while and eventually, " + player2.mf("he", "she") + " stops after " + player2.mf("he", "she") + " made a large puddle of cum.")
+		outputText("\n\nYour lover suddenly achieves orgasm at last.  ");
+		if (player2.cumQ() < 50) outputText("Ropes of seed shoot from " + player2.mf("his", "her") + " prick.  After a few shots of cum, " + player2.mf("his", "her") + " cock stops leaking at once.");
+		else if (player2.cumQ() < 250) outputText("Thick ropes of seed shoot from " + player2.mf("his", "her") + " prick.  " + player2.mf("He", "She") + " definitely made a bit of mess. ");
+		else if (player2.cumQ() < 1000) outputText("Thick ropes of seed shoot from " + player2.mf("his", "her") + " prick.  This continues for a while and eventually, " + player2.mf("he", "she") + " stops after " + player2.mf("he", "she") + " made a large puddle of cum.");
+		else if (player2.cumQ() < 2500) outputText("Torrents of cum blast from " + player2.mf("his", "her") + " prick.  This continues for a while and eventually, " + player2.mf("he", "she") + " stops after " + player2.mf("he", "she") + " made a large puddle of cum.");
 		else outputText("Torrents of cum blast from " + player2.mf("his", "her") + " prick.  This continues for a few minutes and eventually, " + player2.mf("he", "she") + " stops after " + player2.mf("he", "she") + " made a huge puddle of cum.")
 	}
 	outputText("\n\nYou lay down on " + player2.mf("his","her") + " back, exhausted, and " + player2.mf("he","she") + " rolls onto " + player2.mf("his","her") + " side, taking you with " + player2.mf("his","her") + ".  Snuggled together, genitals still locked and dripping, the two of your doze off together, whispering sweet nothings into the still, night air.");
@@ -981,7 +981,7 @@ public function urtaSpecials():void {
 	addButton(3, "Dirt Kick", urtaDirtKick, null, null, null, "Attempt to blind your foe with a spray of kicked dirt. \n\nFatigue cost: 5");
 	addButton(4, "Metabolize", urtaMetabolize, null, null, null, "Convert 10% of your maximum HP into fatigue.");
 	addButton(5, "SecondWind", urtaSecondWind, null, null, null, "Regain 50% of your HP, 150 fatigue, and reduce lust by 100 once per fight.", "Second Wind");
-	addButton(14, "Back", getGame().combatMenu, false);
+	addButton(14, "Back", combat.combatMenu, false);
 }
 
 public function urtaMSpecials():void {
@@ -995,7 +995,7 @@ public function urtaMSpecials():void {
 	if (player.findPerk(PerkLib.Berzerker) >= 0) {
 		addButton(0, "Berserk", berzerk, null, null, null, "Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense is reduced to zero!");
 	}
-	addButton(14, "Back", getGame().combatMenu, false);
+	addButton(14, "Back", combat.combatMenu, false);
 }
 
 private function berzerk():void {
@@ -1003,7 +1003,7 @@ private function berzerk():void {
 	if(player.hasStatusAffect(StatusAffects.Berzerking)) {
 		outputText("You're already pretty goddamn mad!", true);
 		menu();
-		addButton(0, "Next", kGAMECLASS.combatMenu, false);
+		addButton(0, "Next", combat.combatMenu, false);
 		return;
 	}
 	outputText("You roar and unleash your savage fury, forgetting about defense in order to destroy your foe!\n\n", true);
@@ -1024,9 +1024,9 @@ private function urtaSecondWind():void {
 	if(monster.hasStatusAffect(StatusAffects.UrtaSecondWinded)) {
 		outputText("You've already pushed yourself as hard as you can!");
 //Gone		menuLoc = 3;
-//		doNext(getGame().combatMenu);
+//		doNext(combat.combatMenu);
 		menu();
-		addButton(0, "Next", kGAMECLASS.combatMenu, false);
+		addButton(0, "Next", combat.combatMenu, false);
 		return;
 	}
 	monster.createStatusAffect(StatusAffects.UrtaSecondWinded,0,0,0,0);
@@ -1044,9 +1044,9 @@ private function urtaComboAttack():void {
 		if(player.fatigue + 50 > player.maxFatigue()) {
 			outputText("You are too fatigued to use that attack!");
 //Gone			menuLoc = 3;
-//			doNext(getGame().combatMenu);
+//			doNext(combat.combatMenu);
 			menu();
-			addButton(0, "Next", kGAMECLASS.combatMenu, false);
+			addButton(0, "Next", combat.combatMenu, false);
 			return;
 		}
 		fatigue(25);
@@ -1180,9 +1180,9 @@ private function urtaDirtKick():void {
 	if(player.fatigue + 5 > player.maxFatigue()) {
 		outputText("You are too fatigued to use that ability!");
 //Gone		menuLoc = 3;
-//		doNext(getGame().combatMenu);
+//		doNext(combat.combatMenu);
 		menu();
-		addButton(0, "Next", kGAMECLASS.combatMenu, false);
+		addButton(0, "Next", combat.combatMenu, false);
 		return;
 	}
 	fatigue(5);
@@ -1213,9 +1213,9 @@ private function urtaSidewinder():void {
 	if(player.fatigue + 15 > player.maxFatigue()) {
 		outputText("You are too fatigued to use that attack!");
 //Gone		menuLoc = 3;
-//		doNext(getGame().combatMenu);
+//		doNext(combat.combatMenu);
 		menu();
-		addButton(0, "Next", kGAMECLASS.combatMenu, false);
+		addButton(0, "Next", combat.combatMenu, false);
 		return;
 	}
 	fatigue(10);
@@ -1322,7 +1322,7 @@ private function urtaSidewinder():void {
 	//Kick back to main if no damage occured!
 	if(monster.HP >= 1 && monster.lust <= 99) {
 		if(player.hasStatusAffect(StatusAffects.FirstAttack)) {
-			kGAMECLASS.attack();
+			combat.attack();
 			return;
 		}
 		outputText("\n", false);
@@ -1341,9 +1341,9 @@ private function urtaVaultAttack():void {
 	if(player.fatigue + 30 > player.maxFatigue()) {
 		outputText("You are too fatigued to use that attack!");
 //Gone		menuLoc = 3;
-//		doNext(getGame().combatMenu);
+//		doNext(combat.combatMenu);
 		menu();
-		addButton(0, "Next", kGAMECLASS.combatMenu, false);
+		addButton(0, "Next", combat.combatMenu, false);
 		return;
 	}
 	fatigue(20);
@@ -1365,11 +1365,11 @@ private function urtaVaultAttack():void {
 		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
 		outputText("\n", false);
 		if(player.hasStatusAffect(StatusAffects.FirstAttack)) {
-			kGAMECLASS.attack();
+			combat.attack();
 			return;
 		}
 		else outputText("\n", false);
-		kGAMECLASS.enemyAI();
+		enemyAI();
 		return;
 	}
 	//Determine damage
@@ -1451,11 +1451,11 @@ private function urtaVaultAttack():void {
 	//Kick back to main if no damage occured!
 	if(monster.HP >= 1 && monster.lust <= 99) {
 		if(player.hasStatusAffect(StatusAffects.FirstAttack)) {
-			kGAMECLASS.attack();
+			combat.attack();
 			return;
 		}
 		outputText("\n", false);
-		kGAMECLASS.enemyAI();
+		combat.enemyAIImpl();
 	}
 	else {
 		if(monster.HP <= 0) doNext(kGAMECLASS.endHpVictory);

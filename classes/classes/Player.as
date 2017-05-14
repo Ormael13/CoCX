@@ -446,8 +446,8 @@ use namespace kGAMECLASS;
 				if(findPerk(PerkLib.JobBrawler) >= 0 && str >= 60) {
 					attack += (5 * (1 + newGamePlusMod));
 				}		// && (weaponName == "fists" || weaponName == "hooked gauntlets" || weaponName == "spiked gauntlet")
-				if(kGAMECLASS.unarmedAttack() > 0) {
-					attack += kGAMECLASS.unarmedAttack();
+				if(kGAMECLASS.combat.unarmedAttack() > 0) {
+					attack += kGAMECLASS.combat.unarmedAttack();
 				}
 			}
 			if(armType == ARM_TYPE_MANTIS && weaponName == "fists") {

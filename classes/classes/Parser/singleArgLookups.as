@@ -91,7 +91,7 @@
 //					trace("[DEPRECATED] tag [skintone] was called");
 					return kGAMECLASS.player.skinTone;
 				},
-				"teasetext"					: function(thisPtr:*):* { return kGAMECLASS.teaseText(); },
+				"teasetext"					: function(thisPtr:*):* { return kGAMECLASS.combat.teaseText(); },
 				"tongue"					: function(thisPtr:*):* { return kGAMECLASS.tongueDescript(); },
 				"uppergarment"				: function(thisPtr:*):* { return kGAMECLASS.player.upperGarmentName; },
 				"vag"						: function(thisPtr:*):* { return kGAMECLASS.player.vaginaDescript(); },

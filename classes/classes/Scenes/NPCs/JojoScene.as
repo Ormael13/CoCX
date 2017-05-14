@@ -1085,7 +1085,7 @@ public function jojoFollowerMeditate():void {
 				doYesNo(postCombatRape, getGame().cleanupAfterCombat);
 			}
 			else {
-				getGame().finishCombat();
+				combat.finishCombat();
 			}
 		}
 		

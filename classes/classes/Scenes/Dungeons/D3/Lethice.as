@@ -214,11 +214,11 @@ package classes.Scenes.Dungeons.D3
 			}
 			outputText(" spray forth a torrent of white flame, burning the shadowy constructs away in the light of your pure, focused fire. In the span of seconds, Lethice’s spell is gone.");
 
-			game.doNext(game.combatMenu);
+			game.doNext(game.combat.combatMenu);
 			game.fatigue(30,1);
 			outputText("\n\n", false);
 			flags[kFLAGS.SPELLS_CAST]++;
-			game.spellPerkUnlock();
+			game.combat.spellPerkUnlock();
 			game.statScreenRefresh();
 			game.enemyAI();
 		}
@@ -598,7 +598,7 @@ package classes.Scenes.Dungeons.D3
 		{
 			clearOutput();
 			outputText("Drawing on your magic, you use the opportunity to mend your wounds. No foe dares challenge you during the brief lull in battle, enabling you to maintain perfect concentration. With your flesh freshly knit and ready for battle, you look to Lethice.");
-			var temp:Number = int((player.inte / (2 + rand(3)) * game.spellMod()) * (player.maxHP() / 150));
+			var temp:Number = int((player.inte / (2 + rand(3)) * game.combat.spellMod()) * (player.maxHP() / 150));
 			if(player.armorName == "skimpy nurse's outfit") temp *= 1.2;
 			game.HPChange(temp,false);
 

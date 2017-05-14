@@ -51,13 +51,13 @@
 			game.doNext(eventNo);
 		}
 		protected final function combatMiss():Boolean {
-			return game.combatMiss();
+			return game.combat.combatMiss();
 		}
 		protected final function combatParry():Boolean {
-			return game.combatParry();
+			return game.combat.combatParry();
 		}
 		protected final function combatBlock(doFatigue:Boolean = false):Boolean {
-			return game.combatBlock(doFatigue);
+			return game.combat.combatBlock(doFatigue);
 		}
 		protected function get consumables():ConsumableLib{
 			return game.consumables;
@@ -1087,7 +1087,7 @@
 		 */
 		public function defeated(hpVictory:Boolean):void
 		{
-			game.finishCombat();
+			game.combat.finishCombat();
 		}
 
 		/**

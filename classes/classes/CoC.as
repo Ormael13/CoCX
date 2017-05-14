@@ -9,6 +9,7 @@ package classes
 {
 	// BREAKING ALL THE RULES.
 	import classes.GlobalFlags.kFLAGS; // This file contains most of the persistent gamestate flags.
+	import classes.Scenes.Combat.Combat;
 	import classes.GlobalFlags.kGAMECLASS; // This file creates the gameclass that the game will run within.
 	import classes.GlobalFlags.kACHIEVEMENTS; // This file creates the flags for the achievements system.
 	import classes.Scenes.Areas.Beach.Gorgon;
@@ -116,18 +117,14 @@ the text from being too boring.
 	{
 
 		// Include the functions. ALL THE FUNCTIONS
-//No longer needed. Added into CharCreation.as:		include "../../includes/customCharCreation.as";
-		
+
 		include "../../includes/descriptors.as";
 
-//No longer needed:		include "../../includes/InitialiseUI.as";
 		include "../../includes/input.as";
 		include "../../includes/OnLoadVariables.as";
 		include "../../includes/startUp.as";
 		include "../../includes/debug.as";
 		
-		include "../../includes/combat.as";
-//No longer needed. This file has been chopped up and spread throughout the codebase:		include "../../includes/doEvent.as";
 		include "../../includes/eventParser.as";
 		
 
@@ -182,6 +179,7 @@ the text from being too boring.
 		public var miscItems:MiscItemLib = new MiscItemLib();
 		// Scenes/
 		public var camp:Camp = new Camp(campInitialize);
+		public var combat:Combat = new Combat();
 		public var exploration:Exploration = new Exploration();
 		public var followerInteractions:FollowerInteractions = new FollowerInteractions();
 		public var inventory:Inventory = new Inventory(saves);
@@ -370,7 +368,38 @@ the text from being too boring.
 		public function get inCombat():Boolean { return gameState == 1; }
 		
 		public function set inCombat(value:Boolean):void { gameState = (value ? 1 : 0); }
-		
+
+	public function cleanupAfterCombat(nextFunc:Function = null):void {
+		combat.cleanupAfterCombatImpl(nextFunc);
+	}
+
+	public function combatRoundOver():void {
+		combat.combatRoundOverImpl();
+	}
+
+	public function enemyAI():void {
+		combat.enemyAIImpl();
+	}
+	public function endHpLoss():void {
+		combat.endHpLoss();
+	}
+	public function endLustLoss():void {
+		combat.endLustLoss();
+	}
+	public function endHpVictory():void {
+		combat.endHpVictory();
+	}
+	public function endLustVictory():void {
+		combat.endLustVictory();
+	}
+	public function clearStatuses(visibility: Boolean):void
+	{
+		player.clearStatuses(visibility);
+	}
+	public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+		return combat.doDamage(damage,apply,display);
+	}
+
 		private function gameStateDirectGet():int { return gameState; }
 		
 		private function gameStateDirectSet(value:int):void { gameState = value; }

@@ -3,7 +3,8 @@
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.*;
 	import classes.Scenes.Camp;
-	import classes.Scenes.Places.Ingnam;
+import classes.Scenes.Combat.Combat;
+import classes.Scenes.Places.Ingnam;
 	import classes.Scenes.Places.Prison;
 	import classes.Scenes.Dungeons.D3.D3;
 	import classes.Scenes.Inventory;
@@ -165,19 +166,28 @@
 			kGAMECLASS.statScreenRefresh();
 		}
 
+		protected function get combat():Combat {
+			return kGAMECLASS.combat;
+		}
+
 		protected function cleanupAfterCombat(nextFunc:Function = null):void
 		{
-			kGAMECLASS.cleanupAfterCombat(nextFunc);
+			kGAMECLASS.combat.cleanupAfterCombatImpl(nextFunc);
 		}
 
 		protected function combatRoundOver():void
 		{
-			kGAMECLASS.combatRoundOver();
+			kGAMECLASS.combat.combatRoundOverImpl();
 		}
 
 		protected function enemyAI():void
 		{
-			kGAMECLASS.enemyAI();
+			kGAMECLASS.combat.enemyAIImpl();
+		}
+
+		protected function clearStatuses(visibility: Boolean):void
+		{
+			player.clearStatuses(visibility);
 		}
 
 		protected function spriteSelect(choice:Number = 0):void
@@ -227,7 +237,7 @@
 		}
 
 		protected function startCombat(monster_:Monster,plotFight_:Boolean=false):void{
-			kGAMECLASS.startCombat(monster_,plotFight_);
+			kGAMECLASS.combat.startCombatImpl(monster_,plotFight_);
 		}
 
 		protected function doSFWloss():Boolean {
@@ -240,7 +250,7 @@
 		
 		protected function startCombatImmediate(monster:Monster, _plotFight:Boolean = false):void
 		{
-			kGAMECLASS.startCombatImmediate(monster, _plotFight);
+			kGAMECLASS.combat.startCombatImmediateImpl(monster, _plotFight);
 		}
 
 		// Needed in a few rare cases for dumping text coming from a source that can't properly escape it's brackets

@@ -31,7 +31,7 @@
 				game.simpleChoices("B. Feed", game.forest.beeGirlScene.milkAndHoneyAreKindaFunny, "", null, "", null, "", null, "Leave", leaveAfterDefeating);
 			}
 			else {
-                game.finishCombat();
+                game.combat.finishCombat();
             }
 		}
 		
