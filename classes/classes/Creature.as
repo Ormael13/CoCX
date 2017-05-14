@@ -217,7 +217,7 @@ import classes.BodyParts.UnderBody;
 			});
 			return l ? l.color : "no"
 		}
-		[Deprecated]
+	//	[Deprecated]
 		public function set chitinColor(value:String):void {
 			trace("[DEPRECATED] set chitinColor");
 			var l:SkinLayer = skin.findLayer({
@@ -3220,8 +3220,13 @@ import classes.BodyParts.UnderBody;
 			
 			//--STATUS AFFECTS--
 			//Black cat beer = 25% reduction!
-			if (statusAffectv1(StatusAffects.BlackCatBeer) > 0)
+			if (statusAffectv1(StatusAffects.BlackCatBeer) > 0) {
 				mult *= 0.75;
+			}
+			//Defend = 50-(99)% reduction
+			if (hasStatusAffect(StatusAffects.Defend)) {
+				mult *= 0.5;//potem doda sie efekty perkow zwiekszajace redukcje obrazen
+			}
 			// Uma's Massage bonuses
 			var sac:StatusAffectClass = statusAffectByType(StatusAffects.UmasMassage);
 			if (sac && sac.value1 == UmasShop.MASSAGE_RELAXATION) {
@@ -3229,7 +3234,7 @@ import classes.BodyParts.UnderBody;
 			}
 			//Round things off.
 			mult = Math.round(mult);
-			//Caps damage reduction at 95%.
+			//Caps damage reduction at 95%.		(when using defend with upgrading it perks would allow temporaly reach 99% xD)
 			if (mult < 5) mult = 5;
 			return mult;
 		}

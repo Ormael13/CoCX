@@ -325,7 +325,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 		addButton(8, "Wait", wait, null, null, null, "Take no action for this round.  Why would you do this?  This is a terrible idea.");
 		if (monster.hasStatusAffect(StatusAffects.Level)) addButton(8, "Climb", wait, null, null, null, "Climb the sand to move away from the sand trap.");
 		addButton(9, "Fantasize", fantasize, null, null, null, "Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
-		//addButton(10, "Defend");if (player.findPerk(PerkLib.JobSoulCultivator) >= 0)
+		if (player.findPerk(PerkLib.JobDefender) >= 0) addButton(10, "Defend", defendpose, null, null, null, "Take no offensive action for this round.  Why would you do this?  Maybe because you will assume defensive pose?");
 		if (monster is DriderIncubus)
 			{
 				m = monster as DriderIncubus;
@@ -650,7 +650,7 @@ public function basemeleeattacks():void {
 	//	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 		flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 	}
-	if (player.isFistOrFistWeapon()) {		//player.weaponName == "fists" || player.weaponName == "hooked gauntlets" || player.weaponName == "spiked gauntlet"
+	if (player.isFistOrFistWeapon()) {
 		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
 			if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 5) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
 			else if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 4) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 3;
@@ -2039,6 +2039,12 @@ public function fantasize():void {
 		}
 	}
 	enemyAI();	
+}
+public function defendpose():void {
+	clearOutput();
+	outputText("You decide not to take any offensive action this round preparing for " + monster.a + monster.short + " attack assuming defensive pose.\n\n");
+	player.createStatusAffect(StatusAffects.Defend,0,0,0,0);
+	enemyAI();
 }
 public function surrender():void {
 	var temp3:Number = 0;
@@ -4186,6 +4192,7 @@ private function combatStatusesUpdate():void {
 	}
 	if (player.hasStatusAffect(StatusAffects.BladeDance)) player.removeStatusAffect(StatusAffects.BladeDance);
 	if (player.hasStatusAffect(StatusAffects.ResonanceVolley)) player.removeStatusAffect(StatusAffects.ResonanceVolley);
+	if (player.hasStatusAffect(StatusAffects.Defend)) player.removeStatusAffect(StatusAffects.Defend);
 	regeneration(true);
 	if(player.lust >= player.maxLust()) doNext(endLustLoss);
 	if(player.HP <= 0) doNext(endHpLoss);

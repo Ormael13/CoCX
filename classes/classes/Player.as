@@ -548,8 +548,8 @@ use namespace kGAMECLASS;
 		}
 		override public function get shieldBlock():Number {
 			var block:Number = _shield.block;
+			if (findPerk(PerkLib.JobKnight) >= 0) block += 3;
 			//miejce na sposoby boostowania block value like perks or status effects
-
 			block = Math.round(block);
 			return block;
 		}

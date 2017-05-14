@@ -373,6 +373,7 @@ package classes
 		public static const ChargeWeapon:CombatStatusAffect = mk2("Charge Weapon");
 		public static const Chokeslam:CombatStatusAffect = mk2("Chokeslam");
 		public static const Confusion:CombatStatusAffect = mk2("Confusion");
+		public static const Defend:StatusAffectType = mk("Defend");
 		public static const DemonSeed:CombatStatusAffect = mk2("DemonSeed");
 		public static const Disarmed:CombatStatusAffect = mk2("Disarmed");
 		public static const DriderKiss:CombatStatusAffect = mk2("Drider Kiss");
