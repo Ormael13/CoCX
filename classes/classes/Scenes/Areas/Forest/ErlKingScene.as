@@ -1014,12 +1014,9 @@ package classes.Scenes.Areas.Forest
 				changes++;
 			}
 			//Gain fur
-			if (rand(4) == 0 && changes < changeLimit && player.horns > 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.skinType != SKIN_TYPE_FUR) {
+			if (rand(4) == 0 && changes < changeLimit && player.horns > 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && !player.hasFullCoatOfType(SKIN_COAT_FUR)) {
 				outputText("\n\nFor a moment, it looks like a ray of sunlight has shimmered through the canopy. You blink and realize that your fur has become dappled, with lighter, sun-speckled spots highlighting it.");
-				player.skinType = SKIN_TYPE_FUR;
-				player.skinAdj = "";
-				player.skinDesc = "fur";
-				player.furColor = "brown";
+				player.skin.growCoat(SKIN_COAT_FUR,{color:"brown"});
 				changes++;
 			}
 			//Change face to normal

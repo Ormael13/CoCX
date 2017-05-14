@@ -1,5 +1,5 @@
-How to work with the BodyParts-classes
-======================================
+(outdated) How to work with the BodyParts-classes
+=================================================
 
 Preface
 -------

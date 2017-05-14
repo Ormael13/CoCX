@@ -1004,7 +1004,7 @@ private function metamorphScales():void {
 			else if (temp == 3) player.skinTone = "blue";
 			else player.skinTone = "black";
 		}
-		outputText("\n\nYou scratch yourself, and come away with a large clump of " + player.furColor + " fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + player.skinTone + " scales covering most of your body.  The rest of the fur is easy to remove.  <b>You're now covered in scales from head to toe.</b>", false);
+		outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + player.skinTone + " scales covering most of your body.  The rest of the fur is easy to remove.  <b>You're now covered in scales from head to toe.</b>", false);
 	}
 	else {
 		outputText("\n\nYou idly reach back to scratch yourself and nearly jump out of your " + player.armorName + " when you hit something hard.  A quick glance down reveals that scales are growing out of your " + player.skinTone + " skin with alarming speed.  As you watch, the surface of your skin is covered in smooth scales.  They interlink together so well that they may as well be seamless.  You peel back your " + player.armorName + " and the transformation has already finished on the rest of your body.  <b>You're covered from head to toe in shiny ", false);
@@ -1102,7 +1102,7 @@ private function restoreHumanArms():void {
 		outputText("arms' fin suddenly fell down, leaving " + player.skinDesc + " behind.  Also webbing between your fingers slowly disappearing.", false);
 	}
 	if (player.armType == ARM_TYPE_WOLF || player.armType == ARM_TYPE_FOX) {
-		outputText("arms' " + player.furColor + " fur is flaking away, leaving " + player.skinDesc + " behind.  Also the claws on your fingers reverts back into ordinary nails.", false);
+		outputText("arms' [skin coat.color] fur is flaking away, leaving " + player.skinDesc + " behind.  Also the claws on your fingers reverts back into ordinary nails.", false);
 	}
 	if (player.armType == ARM_TYPE_KITSUNE) {
 		outputText("arms' claws retracting back into ordinary nails. You hand looks human again.", false);

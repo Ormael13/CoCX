@@ -1403,10 +1403,8 @@ import classes.CockTypesEnum;
 					outputText(" " + player.skinDesc + ".  At last the itching stops as <b>you brush a few more loose scales from your new coat of fur.</b>", false);
 				}
 				changes++;
-				player.skinType = SKIN_TYPE_FUR;
-				player.skinDesc = "fur";
-				if (type == 0) player.setFurColor(["brown", "chocolate", "auburn", "sandy brown", "caramel", "peach", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "brown and white", "black and white"]);
-				else player.setFurColor(["white"]);
+				if (type == 0) player.skin.growCoat(SKIN_COAT_FUR,{color:randomChoice(["brown", "chocolate", "auburn", "sandy brown", "caramel", "peach", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "brown and white", "black and white"])});
+				else player.skin.growCoat(SKIN_COAT_FUR,{color:"white"});
 			}
 			//Ears - requires tail
 			if (player.earType != EARS_HORSE && player.tailType == TAIL_TYPE_HORSE && player.tailType != TAIL_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
@@ -1917,7 +1915,7 @@ import classes.CockTypesEnum;
 			if (changes < changeLimit && !player.hasCoatOfType(SKIN_COAT_CHITIN) && player.skinType != SKIN_TYPE_STONE && player.tailType == TAIL_TYPE_SCORPION && rand(2) == 0) {
 				if (player.skinType == SKIN_TYPE_PLAIN) outputText("\n\nAn itchy feeling springs up over every inch of your skin.  As you scratch yourself madly, you feel your skin hardening until <b>you are wholy covered in chitin.</b>", false);
 				if (player.hasFur()) outputText("Your skin suddenly feels itchy as your fur begins falling out in clumps, <b>revealing smooth chitin</b> underneath.", false);
-				if (player.hasScales()) outputText("\n\nYour " + player.scalesColor + " scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of " + player.skinDesc + ".  At last the itching stops as <b>you brush a few more loose scales from your new chitin exoskeleton.</b>", false);
+				if (player.hasScales()) outputText("\n\nYour [skin coat.color] scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of " + player.skinDesc + ".  At last the itching stops as <b>you brush a few more loose scales from your new chitin exoskeleton.</b>", false);
 				player.skin.growCoat(SKIN_COAT_CHITIN,{color:"green"});
 				changes++;
 			}
@@ -2880,17 +2878,21 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//Winter wolf fur
-			if (rand(3) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_WOLF && player.tailType == TAIL_TYPE_WOLF && player.earType == EARS_WOLF && player.skinType != SKIN_TYPE_FUR && (player.hairColor != "glacial white" || player.furColor != "glacial white")) {
+			if (rand(3) == 0
+				&& changes < changeLimit
+				&& player.lowerBody == LOWER_BODY_TYPE_WOLF
+				&& player.tailType == TAIL_TYPE_WOLF
+				&& player.earType == EARS_WOLF
+				&& player.skinType != SKIN_TYPE_FUR
+				&& (player.hairColor != "glacial white" || player.coatColor != "glacial white")) {
 				player.hairColor = "glacial white";
-				player.furColor = player.hairColor;
-				if (player.skinType == SKIN_TYPE_PLAIN) outputText("\n\nYour skin itches intensely. You gaze down as more and more hairs break forth from your skin quickly transforming into a coat of glacial white fur which despite its external temperature feels warm inside.  <b>You are now covered in " + player.furColor + " fur from head to toe.</b>", false);
-				if (player.hasScales()) outputText("\n\nYour scales itch incessantly.  You scratch, feeling them flake off to reveal a coat of " + player.furColor + " fur growing out from below!  <b>You are now covered in " + player.furColor + " fur from head to toe.</b>", false);
-				if (player.skinType > SKIN_TYPE_SCALES && player.skinType != SKIN_TYPE_PARTIAL_SCALES) outputText("\n\nYour skin itch incessantly.  You scratch, feeling it current form shifting into a coat of glacial white fur which despite its external temperature feels warm inside.  <b>You are now covered in " + player.furColor + " fur from head to toe.</b>", false);
-				player.skinType = SKIN_TYPE_FUR;
-				player.skinDesc = "fur";
+				if (!player.hasCoat()) outputText("\n\nYour skin itches intensely. You gaze down as more and more hairs break forth from your skin quickly transforming into a coat of glacial white fur which despite its external temperature feels warm inside.  <b>You are now covered in " + player.hairColor + " fur from head to toe.</b>", false);
+				else if (player.hasScales()) outputText("\n\nYour scales itch incessantly.  You scratch, feeling them flake off to reveal a coat of " + player.hairColor + " fur growing out from below!  <b>You are now covered in " + player.hairColor + " fur from head to toe.</b>", false);
+				else outputText("\n\nYour skin itch incessantly.  You scratch, feeling it current form shifting into a coat of glacial white fur which despite its external temperature feels warm inside.  <b>You are now covered in " + player.hairColor + " fur from head to toe.</b>", false);
+				player.skin.growCoat(SKIN_COAT_FUR,{color:player.hairColor});
 				changes++;
 			}
-			if (rand(2) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_WOLF && player.tailType == TAIL_TYPE_WOLF && player.earType == EARS_WOLF && player.hasFullCoatOfType(SKIN_COAT_FUR) && (player.hairColor != "glacial white" || player.furColor != "glacial white")) {
+			if (rand(2) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_WOLF && player.tailType == TAIL_TYPE_WOLF && player.earType == EARS_WOLF && player.hasFullCoatOfType(SKIN_COAT_FUR) && (player.hairColor != "glacial white" || player.coatColor != "glacial white")) {
 				outputText("<b>\n\nYour fur and hair tingles, growing in thicker than ever as coldness begins to spread from the roots, turning it glacial white.</b>", false);
 				player.hairColor = "glacial white";
 				player.skin.coat.color = player.hairColor;
@@ -3626,19 +3628,18 @@ import classes.CockTypesEnum;
 			if (type == 3 && player.hairColor != "midnight black" && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE) {
 				if (player.hasFur()) outputText("<b>\n\nYour fur and hair tingles, growing in thicker than ever as darkness begins to spread from the roots, turning it midnight black.</b>", false);
 				else outputText("<b>\n\nYour " + player.skinDesc + " itches like crazy as fur grows out from it, coating your body.  It's incredibly dense and black as the middle of a moonless night.</b>", false);
-				player.skinType = SKIN_TYPE_FUR;
-				player.skinAdj = "thick";
-				player.skinDesc = "fur";
-				player.hairColor = "midnight black";
-				player.furColor = player.hairColor;
+				player.skin.growCoat(SKIN_COAT_FUR,{color:player.hairColor,adj:"thick"});
 			}
 			//Become furred - requires paws and tail
 			if (rand(4) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_DOG && player.tailType == TAIL_TYPE_DOG && player.skinType != SKIN_TYPE_FUR && player.skinType != SKIN_TYPE_STONE) {
-				if (player.skinType == SKIN_TYPE_PLAIN) outputText("\n\nYour skin itches intensely.  You gaze down as more and more hairs break forth from your skin, quickly transforming into a soft coat of fur.  <b>You are now covered in " + player.furColor + " fur from head to toe.</b>", false);
-				if (player.hasScales()) outputText("\n\nYour scales itch incessantly.  You scratch, feeling them flake off to reveal a coat of " + player.furColor + " fur growing out from below!  <b>You are now covered in " + player.furColor + " fur from head to toe.</b>", false);
-				player.skinType = SKIN_TYPE_FUR;
-				player.skinDesc = "fur";
-				player.setFurColor(["brown", "chocolate", "auburn", "caramel", "orange", "black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white"]);
+				if (player.skinType == SKIN_TYPE_PLAIN) outputText("\n\nYour skin itches intensely.  You gaze down as more and more hairs break forth from your skin, quickly transforming into a soft coat of fur.  <b>You are now covered in [skin coat.color] fur from head to toe.</b>", false);
+				if (player.hasScales()) outputText("\n\nYour scales itch incessantly.  You scratch, feeling them flake off to reveal a coat of [skin coat.color] fur growing out from below!  <b>You are now covered in [skin coat.color] fur from head to toe.</b>", false);
+				player.skin.growCoat(SKIN_COAT_FUR,{
+					color:randomChoice([
+						"brown", "chocolate", "auburn", "caramel", "orange", "black", "dark gray", "gray",
+						"light gray", "silver", "white", "orange and white", "brown and white", "black and white"
+					])
+				});
 				changes++;
 			}
 			//Change to paws - requires tail and ears
@@ -4970,14 +4971,11 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//enhanced get shitty fur
-			if (enhanced && (player.skinDesc != "fur" || player.furColor != "black and white spotted") && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE) {
+			if (enhanced && (player.skinDesc != "fur" || player.coatColor != "black and white spotted") && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE) {
 				if (player.skinDesc != "fur") outputText("\n\nYour " + player.skinDesc + " itches intensely.  You scratch and scratch, but it doesn't bring any relief.  Fur erupts between your fingers, and you watch open-mouthed as it fills in over your whole body.  The fur is patterned in black and white, like that of a cow.  The color of it even spreads to your hair!  <b>You have cow fur!</b>", false);
 				else outputText("\n\nA ripple spreads through your fur as some patches darken and others lighten.  After a few moments you're left with a black and white spotted pattern that goes the whole way up to the hair on your head!  <b>You've got cow fur!</b>", false);
-				player.skinDesc = "fur";
-				player.skinAdj = "";
-				player.skinType = SKIN_TYPE_FUR;
 				player.hairColor = "black and white spotted";
-				player.furColor = player.hairColor;
+				player.skin.growCoat(SKIN_COAT_FUR,{color:player.hairColor});
 			}
 			//if enhanced to probova give a shitty cow face
 			else if (enhanced && player.faceType != FACE_COW_MINOTAUR && player.tailType != TAIL_TYPE_GARGOYLE) {
@@ -5941,44 +5939,22 @@ import classes.CockTypesEnum;
 			//Partial scales with color changes to red, green, white, blue, or black.  Rarely: purple or silver.
 			if (player.skinType != SKIN_TYPE_PARTIAL_SCALES && player.lowerBody == LOWER_BODY_TYPE_NAGA && changes < changeLimit && rand(5) == 0) {
 				//(fur)
+				var color:String;
+				if (rand(10) == 0) {
+					color = randomChoice("purple","silver");
+				} else {
+					color = randomChoice("red","green","white","blue","black");
+				}
 				if (player.hasFur()) {
 					//set new skinTone
-					if (rand(10) == 0) {
-						if (rand(2) == 0) player.scalesColor = "purple";
-						else player.scalesColor = "silver";
-					}
-					//non rare skinTone
-					else {
-						temp = rand(5);
-						if (temp == 0) player.scalesColor = "red";
-						else if (temp == 1) player.scalesColor = "green";
-						else if (temp == 2) player.scalesColor = "white";
-						else if (temp == 3) player.scalesColor = "blue";
-						else player.scalesColor = "black";
-					}
-					outputText("\n\nYou scratch yourself, and come away with a large clump of " + player.furColor + " fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  You feel your skin shift as " + player.scalesColor + " scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  The rest of the fur is easy to remove.  <b>Your body is now partially covered with small patches of scales!</b>", false);
+					player.skin.growCoat(SKIN_COAT_SCALES,{color:color});
+					outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  You feel your skin shift as " + color + " scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  The rest of the fur is easy to remove.  <b>Your body is now partially covered with small patches of scales!</b>", false);
 				}
 				//(no fur)
 				else {
-					outputText("\n\nYou feel your skin shift as scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  <b>Your body is now partially covered with small patches of ", false);
-					//set new skinTone
-					if (rand(10) == 0) {
-						if (rand(2) == 0) player.scalesColor = "purple";
-						else player.scalesColor = "silver";
-					}
-					//non rare skinTone
-					else {
-						temp = rand(5);
-						if (temp == 0) player.scalesColor = "red";
-						else if (temp == 1) player.scalesColor = "green";
-						else if (temp == 2) player.scalesColor = "white";
-						else if (temp == 3) player.scalesColor = "blue";
-						else player.scalesColor = "black";
-					}
-					outputText(player.scalesColor + " scales.</b>", false);
+					outputText("\n\nYou feel your skin shift as scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  <b>Your body is now partially covered with small patches of "+color+" scales.</b>", false);
 				}
-				player.skinType = SKIN_TYPE_PARTIAL_SCALES;
-				player.skinDesc = "scales";
+				player.skin.growCoat(SKIN_COAT_SCALES,{color:color},Skin.COVERAGE_MEDIUM);
 				changes++;
 			}
 			//Snake eyes
@@ -6083,44 +6059,20 @@ import classes.CockTypesEnum;
 			//Partial scales with color changes to red, green, white, blue, or black.  Rarely: purple or silver.
 			if (player.skinType != SKIN_TYPE_PARTIAL_SCALES && player.lowerBody == LOWER_BODY_TYPE_NAGA && changes < changeLimit && rand(5) == 0) {
 				//(fur)
+				var color:String;
+				if (rand(10) == 0) {
+					color = randomChoice("purple","silver");
+				} else {
+					color = randomChoice("red","green","white","blue","black");
+				}
 				if (player.hasFur()) {
-					//set new skinTone
-					if (rand(10) == 0) {
-						if (rand(2) == 0) player.scalesColor = "purple";
-						else player.scalesColor = "silver";
-					}
-					//non rare skinTone
-					else {
-						temp = rand(5);
-						if (temp == 0) player.scalesColor = "red";
-						else if (temp == 1) player.scalesColor = "green";
-						else if (temp == 2) player.scalesColor = "white";
-						else if (temp == 3) player.scalesColor = "blue";
-						else player.scalesColor = "black";
-					}
-					outputText("\n\nYou scratch yourself, and come away with a large clump of " + player.furColor + " fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  You feel your skin shift as " + player.scalesColor + " scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  The rest of the fur is easy to remove.  <b>Your body is now partially covered with small patches of scales!</b>", false);
+					outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  You feel your skin shift as " + color + " scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  The rest of the fur is easy to remove.  <b>Your body is now partially covered with small patches of scales!</b>");
 				}
 				//(no fur)
 				else {
-					outputText("\n\nYou feel your skin shift as scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  <b>Your body is now partially covered with small patches of ", false);
-					//set new skinTone
-					if (rand(10) == 0) {
-						if (rand(2) == 0) player.scalesColor = "purple";
-						else player.scalesColor = "silver";
-					}
-					//non rare skinTone
-					else {
-						temp = rand(5);
-						if (temp == 0) player.scalesColor = "red";
-						else if (temp == 1) player.scalesColor = "green";
-						else if (temp == 2) player.scalesColor = "white";
-						else if (temp == 3) player.scalesColor = "blue";
-						else player.scalesColor = "black";
-					}
-					outputText(player.scalesColor + " scales.</b>", false);
+					outputText("\n\nYou feel your skin shift as scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.  <b>Your body is now partially covered with small patches of "+color+" scales.</b>", false);
 				}
-				player.skinType = SKIN_TYPE_PARTIAL_SCALES;
-				player.skinDesc = "scales";
+				player.skin.growCoat(SKIN_COAT_SCALES,{color:color},Skin.COVERAGE_LOW);
 				changes++;
 			}
 			//Snake eyes
@@ -6322,7 +6274,7 @@ import classes.CockTypesEnum;
 						else if (temp == 3) player.skinTone = "blue";
 						else player.skinTone = "black";
 					}
-					outputText("\n\nYou scratch yourself, and come away with a large clump of " + player.furColor + " fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + player.skinTone + " scales covering most of your body.  The rest of the fur is easy to remove.  <b>You're now covered in scales from head to waist.</b>", false);
+					outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + player.skinTone + " scales covering most of your body.  The rest of the fur is easy to remove.  <b>You're now covered in scales from head to waist.</b>", false);
 				}
 				//(no fur)
 				else {
@@ -6563,7 +6515,7 @@ import classes.CockTypesEnum;
 			if ((player.skinTone != "tan" && player.skinTone != "olive" && player.skinTone != "dark" && player.skinTone != "light") && player.skinType != SKIN_TYPE_STONE && changes < changeLimit && rand(5) == 0) {
 				changes++;
 				outputText("\n\nIt takes a while for you to notice, but <b>", false);
-				if (player.hasFur()) outputText("the skin under your " + player.furColor + " " + player.skinDesc, false);
+				if (player.hasFur()) outputText("the skin under your [skin coat.color] " + player.skinDesc, false);
 				else outputText("your " + player.skinDesc, false);
 				outputText(" has changed to become ", false);
 				temp = rand(4);
@@ -6629,7 +6581,7 @@ import classes.CockTypesEnum;
 			}
 			//-Remove wolf-arms, fox-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
 			if (changes < changeLimit && (player.armType == ARM_TYPE_WOLF || player.armType == ARM_TYPE_FOX) && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' " + player.furColor + " fur is flaking away, leaving " + player.skinDesc + " behind.  Also the claws on your fingers reverts back into ordinary nails.", false);
+				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving " + player.skinDesc + " behind.  Also the claws on your fingers reverts back into ordinary nails.", false);
 				player.armType = ARM_TYPE_HUMAN;
 				changes++;
 			}
@@ -7148,7 +7100,7 @@ import classes.CockTypesEnum;
 					temp = rand(3);
 					if (temp == 0) outputText("\n\nA pressure builds in your backside. You feel under your " + player.armorName + " and discover an odd bump that seems to be growing larger by the moment. In seconds it passes between your fingers, bursts out the back of your clothes and grows most of the way to the ground. A thick coat of fur springs up to cover your new tail. You instinctively keep adjusting it to improve your balance. <b>You now have a cat-tail.</b>", false);
 					if (temp == 1) outputText("\n\nYou feel your backside shift and change, flesh molding and displacing into a long, flexible tail! <b>You now have a cat tail.</b>", false);
-					if (temp == 2) outputText("\n\nYou feel an odd tingling in your spine and your tail bone starts to throb and then swell. Within a few moments it begins to grow, adding new bones to your spine. Before you know it, you have a tail. Just before you think it's over, the tail begins to sprout soft, glossy " + player.furColor + " fur. <b>You now have a cat tail.</b>", false);
+					if (temp == 2) outputText("\n\nYou feel an odd tingling in your spine and your tail bone starts to throb and then swell. Within a few moments it begins to grow, adding new bones to your spine. Before you know it, you have a tail. Just before you think it's over, the tail begins to sprout soft, glossy [skin coat.color] fur. <b>You now have a cat tail.</b>", false);
 				}
 				else outputText("\n\nYou pause and tilt your head... something feels different.  Ah, that's what it is; you turn around and look down at your tail as it starts to change shape, narrowing and sprouting glossy fur. <b>You now have a cat tail.</b>", false);
 				player.tailType = TAIL_TYPE_CAT;
@@ -7174,10 +7126,8 @@ import classes.CockTypesEnum;
 			//TURN INTO A FURRAH!  OH SHIT
 			if (player.tailType == TAIL_TYPE_CAT && player.earType == EARS_CAT && rand(5) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_CAT && player.skinType != SKIN_TYPE_FUR) {
 				outputText("\n\nYour " + player.skinDesc + " begins to tingle, then itch. ");
-				player.skinType = SKIN_TYPE_FUR;
-				player.skinDesc = "fur";
-				player.setFurColor(["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"]);
-				outputText("You reach down to scratch your arm absent-mindedly and pull your fingers away to find strands of " + player.furColor + " fur. Wait, fur?  What just happened?! You spend a moment examining yourself and discover that <b>you are now covered in glossy, soft fur.</b>");
+				player.skin.growCoat(SKIN_COAT_FUR,{color:randomChoice(["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"])});
+				outputText("You reach down to scratch your arm absent-mindedly and pull your fingers away to find strands of [skin coat.color] fur. Wait, fur?  What just happened?! You spend a moment examining yourself and discover that <b>you are now covered in glossy, soft fur.</b>");
 				changes++;
 			}
 			//CAT-FACE!  FULL ON FURRY!  RAGE AWAY NEKOZ
@@ -7351,10 +7301,8 @@ import classes.CockTypesEnum;
 			//-Grows second lizard dick if only 1 dick
 			if (player.lizardCocks() == 1 && player.cocks.length == 1 && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nA knot of pressure forms in your groin, forcing you off your " + player.feet() + " as you try to endure it.  You examine the affected area and see a lump starting to bulge under your " + player.skinDesc + ", adjacent to your " + cockDescript(0) + ".  The flesh darkens, turning purple", false);
-				if (player.hasFur())
-					outputText(" and shedding " + player.furColor, false);
-				if (player.hasScales())
-					outputText(" and shedding " + player.scalesColor, false);
+				if (player.hasCoat())
+					outputText(" and shedding " + player.coatColor);
 				outputText(" as the bulge lengthens, pushing out from your body.  Too surprised to react, you can only pant in pain and watch as the fleshy lump starts to take on a penis-like appearance.  <b>You're growing a second lizard-cock!</b>  It doesn't stop growing until it's just as long as its brother and the same shade of shiny purple.  A dribble of cum oozes from its tip, and you feel relief at last.", false);
 
 				player.createCock();
@@ -7596,49 +7544,25 @@ import classes.CockTypesEnum;
 			}
 			//-Scales – color changes to red, green, white, blue, or black.  Rarely: purple or silver.
 			if (player.skinType != SKIN_TYPE_SCALES && player.earType == EARS_LIZARD && player.tailType == TAIL_TYPE_LIZARD && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(5) == 0) {
+				var color:String;
+				if (rand(10) == 0) {
+					color = randomChoice("purple","silver");
+				} else {
+					color = randomChoice("red","green","white","blue","black");
+				}
 				//(fur)
 				if (player.hasFur()) {
-					//set new scalesColor
-					if (rand(10) == 0) {
-						if (rand(2) == 0) player.scalesColor = "purple";
-						else player.scalesColor = "silver";
-					}
-					//non rare scalesColor
-					else {
-						temp = rand(5);
-						if (temp == 0) player.scalesColor = "red";
-						else if (temp == 1) player.scalesColor = "green";
-						else if (temp == 2) player.scalesColor = "white";
-						else if (temp == 3) player.scalesColor = "blue";
-						else player.scalesColor = "black";
-					}
-					outputText("\n\nYou scratch yourself, and come away with a large clump of " + player.furColor + " fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + player.scalesColor + " scales covering most of your body.  The rest of the fur is easy to remove.  <b>You're now covered in scales from head to toe.</b>", false);
+					outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + color + " scales covering most of your body.  The rest of the fur is easy to remove.  <b>You're now covered in scales from head to toe.</b>", false);
 				}
 				//(no fur)
 				else {
-					outputText("\n\nYou idly reach back to scratch yourself and nearly jump out of your " + player.armorName + " when you hit something hard.  A quick glance down reveals that scales are growing out of your " + player.skinTone + " skin with alarming speed.  As you watch, the surface of your skin is covered in smooth scales.  They interlink together so well that they may as well be seamless.  You peel back your " + player.armorName + " and the transformation has already finished on the rest of your body.  <b>You're covered from head to toe in shiny ", false);
-					//set new skinTone
-					if (rand(10) == 0) {
-						if (rand(2) == 0) player.scalesColor = "purple";
-						else player.scalesColor = "silver";
-					}
-					//non rare skinTone
-					else {
-						temp = rand(5);
-						if (temp == 0) player.scalesColor = "red";
-						else if (temp == 1) player.scalesColor = "green";
-						else if (temp == 2) player.scalesColor = "white";
-						else if (temp == 3) player.scalesColor = "blue";
-						else player.scalesColor = "black";
-					}
-					outputText(player.scalesColor + " scales.</b>", false);
+					outputText("\n\nYou idly reach back to scratch yourself and nearly jump out of your " + player.armorName + " when you hit something hard.  A quick glance down reveals that scales are growing out of your " + player.skinTone + " skin with alarming speed.  As you watch, the surface of your skin is covered in smooth scales.  They interlink together so well that they may as well be seamless.  You peel back your " + player.armorName + " and the transformation has already finished on the rest of your body.  <b>You're covered from head to toe in shiny " + color + " scales.</b>", false);
 				}
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedScales)) {
 					outputText("\n\n<b>Genetic Memory: Scales - Memorized!</b>\n\n");
 					player.createStatusAffect(StatusAffects.UnlockedScales, 0, 0, 0, 0);
 				}
-				player.skinType = SKIN_TYPE_SCALES;
-				player.skinDesc = "scales";
+				player.skin.growCoat(SKIN_COAT_SCALES,{color:color});
 				changes++;
 			}
 			//-Lizard-like face.
@@ -7898,9 +7822,7 @@ import classes.CockTypesEnum;
 			if (player.skinType == SKIN_TYPE_PLAIN && player.skinType != SKIN_TYPE_PARTIAL_SCALES && rand(3) == 0) {
 				outputText("\n\nYou feel your skin shift as scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.", false);
 				outputText("  <b>Your body is now partially covered with small patches of scales!</b>", false);
-				player.skinDesc = "scales";
-				player.scalesColor = "red";
-				player.skinType = SKIN_TYPE_PARTIAL_SCALES;
+				player.skin.growCoat(SKIN_COAT_SCALES,{color:"red"},Skin.COVERAGE_LOW);
 				changes++;
 			}
 			if (player.skinType != SKIN_TYPE_PLAIN && player.skinType != SKIN_TYPE_PARTIAL_SCALES && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(4) == 0) {
@@ -9159,10 +9081,8 @@ import classes.CockTypesEnum;
 			if (player.skinType != SKIN_TYPE_FUR && (player.lowerBody == LOWER_BODY_TYPE_KANGAROO || type == 1) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
 				changes++;
 				outputText("\n\nYour " + player.skinDesc + " itches terribly all over and you try cartoonishly to scratch everywhere at once.  ");
-				player.skinType = SKIN_TYPE_FUR;
-				player.skinDesc = "fur";
-				player.furColor = "brown";
-				outputText("As you pull your hands in, you notice " + player.furColor + " fur growing on the backs of them.  All over your body the scene is repeated, covering you in the stuff.  <b>You now have fur!</b>");
+				player.skin.growCoat(SKIN_COAT_FUR,{color:"brown"});
+				outputText("As you pull your hands in, you notice [skin coat.color] fur growing on the backs of them.  All over your body the scene is repeated, covering you in the stuff.  <b>You now have fur!</b>");
 			}
 			//-Roo footsies (Req: Tail)
 			if (player.lowerBody != LOWER_BODY_TYPE_KANGAROO && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && (type == 1 || player.tailType == TAIL_TYPE_KANGAROO) && changes < changeLimit && rand(4) == 0) {
@@ -10259,19 +10179,17 @@ import classes.CockTypesEnum;
 				if (player.hasScales()) outputText("\n\nYour skin shifts and every scale stands on end, sending you into a mild panic.  No matter how you tense, you can't seem to flatten them again.  The uncomfortable sensation continues for some minutes until, as one, every scale falls from your body and a fine coat of fur pushes out.  You briefly consider collecting them, but when you pick one up, it's already as dry and brittle as if it were hundreds of years old.  <b>Oh well; at least you won't need to sun yourself as much with your new fur.</b>");
 				//from skin
 				else outputText("\n\nYour skin itches all over, the sudden intensity and uniformity making you too paranoid to scratch.  As you hold still through an agony of tiny tingles and pinches, fine, luxuriant fur sprouts from every bare inch of your skin!  <b>You'll have to get used to being furry...</b>");
-				player.skinType = SKIN_TYPE_FUR;
-				player.skinAdj = "";
-				player.skinDesc = "fur";
+				player.skin.growCoat(SKIN_COAT_FUR);
 				if (player.kitsuneScore() >= 4)
-					if(InCollection(player.hairColor, KitsuneScene.basicKitsuneFur) || InCollection(player.hairColor, KitsuneScene.elderKitsuneColors))
-						player.furColor = player.hairColor;
-					else
+					if(InCollection(player.hairColor, KitsuneScene.basicKitsuneFur) || InCollection(player.hairColor, KitsuneScene.elderKitsuneColors)) {
+						player.skin.coat.color = player.hairColor;
+					} else
 						if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 9)
-							player.furColor = randomChoice(KitsuneScene.elderKitsuneColors);
+							player.skin.coat.color = randomChoice(KitsuneScene.elderKitsuneColors);
 						else
-							player.furColor = randomChoice(KitsuneScene.basicKitsuneFur);
+							player.skin.coat.color = randomChoice(KitsuneScene.basicKitsuneFur);
 				else
-					player.furColor = randomChoice("orange and white", "orange and white", "orange and white", "red and white", "black and white", "white", "tan", "brown");
+					player.skin.coat.color = randomChoice("orange and white", "orange and white", "orange and white", "red and white", "black and white", "white", "tan", "brown");
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFur)) {
 					outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
 					player.createStatusAffect(StatusAffects.UnlockedFur, 0, 0, 0, 0);
@@ -10821,7 +10739,7 @@ import classes.CockTypesEnum;
 			}
 			//-Remove wolf-arms, fox-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
 			if (changes < changeLimit && (player.armType == ARM_TYPE_WOLF || player.armType == ARM_TYPE_FOX) && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' " + player.furColor + " fur is flaking away, leaving " + player.skinDesc + " behind.  Also the claws on your fingers reverts back into ordinary nails.", false);
+				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving " + player.skinDesc + " behind.  Also the claws on your fingers reverts back into ordinary nails.", false);
 				player.armType = ARM_TYPE_HUMAN;
 				changes++;
 			}
@@ -10849,13 +10767,13 @@ import classes.CockTypesEnum;
 			//[Change Skin Type: remove fur or scales, change skin to Tan, Olive, or Light]
 			if (player.skin.hasFur()
 					&& !player.skin.hasMagicalTattoo()
-					&& !InCollection(player.furColor, KitsuneScene.basicKitsuneFur)
-					&& !InCollection(player.furColor, KitsuneScene.elderKitsuneColors)
-					&& !InCollection(player.furColor, ["orange and white", "black and white", "red and white", "tan", "brown"])
+					&& !InCollection(player.coatColor, KitsuneScene.basicKitsuneFur)
+					&& !InCollection(player.coatColor, KitsuneScene.elderKitsuneColors)
+					&& !InCollection(player.coatColor, ["orange and white", "black and white", "red and white", "tan", "brown"])
 					|| player.skinType == SKIN_TYPE_SCALES
 					|| player.skinType == SKIN_TYPE_PARTIAL_SCALES && ((mystic) || (!mystic && rand(2) == 0))) {
 				outputText("\n\nYou begin to tingle all over your [skin], starting as a cool, pleasant sensation but gradually worsening until you are furiously itching all over.");
-				if (player.hasFur()) outputText("  You stare in horror as you pull your fingers away holding a handful of " + player.furColor + " fur!  Your fur sloughs off your body in thick clumps, falling away to reveal patches of bare, " + player.skinTone + " skin.");
+				if (player.hasFur()) outputText("  You stare in horror as you pull your fingers away holding a handful of [skin coat.color] fur!  Your fur sloughs off your body in thick clumps, falling away to reveal patches of bare, " + player.skinTone + " skin.");
 				else if (player.hasScales()) outputText("  You stare in horror as you pull your fingers away holding a handful of dried up scales!  Your scales continue to flake and peel off your skin in thick patches, revealing the tender " + player.skinTone + " skin underneath.");
 				outputText("  Your skin slowly turns raw and red under your severe scratching, the tingling sensations raising goosebumps across your whole body.  Over time, the itching fades, and your flushed skin resolves into a natural-looking ");
 				player.skinType = SKIN_TYPE_PLAIN;
@@ -11530,11 +11448,8 @@ import classes.CockTypesEnum;
 			//gain fur
 			if ((player.lowerBody == LOWER_BODY_TYPE_RACCOON && player.earType == EARS_RACCOON) && player.skinType != SKIN_TYPE_FUR && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYou shiver, feeling a bit cold.  Just as you begin to wish for something to cover up with, it seems your request is granted; thick, bushy fur begins to grow all over your body!  You tug at the tufts in alarm, but they're firmly rooted and... actually pretty soft.  Huh.  ");
-				player.skinType = SKIN_TYPE_FUR;
-				player.skinAdj = "";
-				player.skinDesc = "fur";
-				player.furColor = "gray";
-				outputText("<b>You now have a warm coat of " + player.furColor + " raccoon fur!</b>");
+				player.skin.growCoat(SKIN_COAT_FUR,{color:"gray"});
+				outputText("<b>You now have a warm coat of [skin coat.color] raccoon fur!</b>");
 				changes++;
 			}
 			//gain coon ears
@@ -11769,44 +11684,30 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//get fur
-			if ((player.skinType != SKIN_TYPE_FUR || (player.skinType == SKIN_TYPE_FUR && (player.furColor != "brown" && player.furColor != "white"))) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
+			if ((player.skinType != SKIN_TYPE_FUR || (player.skinType == SKIN_TYPE_FUR && (player.coatColor != "brown" && player.coatColor != "white"))) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
+				var color:String;
+				temp = rand(10);
+				if (temp < 8) {
+					color = "brown";
+				} else {
+					color = "white";
+				}
 				//from skinscales
 				if (player.skinType != SKIN_TYPE_FUR) {
 					outputText("\n\nYour " + player.skinFurScales() + " itch");
 					if (player.skinType > SKIN_TYPE_PLAIN) outputText("es");
 					outputText(" all over");
 					if (player.tailType > TAIL_TYPE_NONE) outputText(", except on your tail");
-					outputText(".  Alarmed and suspicious, you tuck in your hands, trying to will yourself not to scratch, but it doesn't make much difference.  Tufts of ");
-					temp = rand(10);
-					if (temp < 8) {
-						outputText("brown");
-						player.furColor = "brown";
-					}
-					else {
-						outputText("white");
-						player.furColor = "white";
-					}
-					outputText(" fur begin to force through your skin");
+					outputText(".  Alarmed and suspicious, you tuck in your hands, trying to will yourself not to scratch, but it doesn't make much difference.  Tufts of "+color+" fur begin to force through your skin");
 					if (player.hasScales()) outputText(", pushing your scales out with little pinches");
 					outputText(", resolving the problem for you.  <b>You now have fur.</b>");
+					player.skin.growCoat(SKIN_COAT_FUR,{color:color});
 				}
 				//from other color fur
 				else {
-					outputText("\n\nYour fur stands on end, as if trying to leap from your body - which it does next.  You watch, dumb with shock, as your covering deserts you, but it's quickly replaced with another layer of ");
-					temp = rand(10);
-					if (temp < 8) {
-						outputText("brown");
-						player.furColor = "brown";
-					}
-					else {
-						outputText("white");
-						player.furColor = "white";
-					}
-					outputText(" fuzz coming in behind it that soon grows to full-fledged fur.");
+					outputText("\n\nYour fur stands on end, as if trying to leap from your body - which it does next.  You watch, dumb with shock, as your covering deserts you, but it's quickly replaced with another layer of "+color+" fuzz coming in behind it that soon grows to full-fledged fur.");
+					player.skin.coat.color = color;
 				}
-				player.skinAdj = "";
-				player.skinDesc = "fur";
-				player.skinType = SKIN_TYPE_FUR;
 				changes++;
 			}
 			player.refillHunger(10);
@@ -11953,7 +11854,7 @@ import classes.CockTypesEnum;
 			}
 			//-Remove wolf-arms, fox-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
 			if (changes < changeLimit && (player.armType == ARM_TYPE_WOLF || player.armType == ARM_TYPE_FOX) && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' " + player.furColor + " fur is flaking away, leaving " + player.skinDesc + " behind.  Also the claws on your fingers reverts back into ordinary nails.", false);
+				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving " + player.skinDesc + " behind.  Also the claws on your fingers reverts back into ordinary nails.", false);
 				player.armType = ARM_TYPE_HUMAN;
 				changes++;
 			}
@@ -12296,9 +12197,8 @@ import classes.CockTypesEnum;
 					else player.hairColor = "brown";
 					outputText(".");
 				}
-				player.skinType = SKIN_TYPE_FUR;
-				player.furColor = player.hairColor;
-				outputText("  <b>You now have " + player.furColor + " fur!</b>");
+				player.skin.growCoat(SKIN_COAT_FUR,{color:player.hairColor});
+				outputText("  <b>You now have [skin coat.color] fur!</b>");
 				changes++;
 			}
 			//Tail TFs!

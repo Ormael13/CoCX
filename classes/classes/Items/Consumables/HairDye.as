@@ -1,6 +1,7 @@
 package classes.Items.Consumables 
 {
-	import classes.GlobalFlags.kGAMECLASS;
+import classes.Creature;
+import classes.GlobalFlags.kGAMECLASS;
 	import classes.internals.Utils;
 	import classes.Items.Consumable;
 	import classes.Items.ConsumableLib;
@@ -35,9 +36,9 @@ package classes.Items.Consumables
 				game.addButtonDisabled(0, "Hair", "You are bald!");
 			}
 			
-			if (game.player.skinType == 1) {
-				outputText("\n\nYou have " + game.player.furColor + " fur.");
-				if (game.player.furColor != _color) game.addButton(1, "Fur", dyeFur);
+			if (game.player.hasCoatOfType(Creature.SKIN_COAT_FUR)) {
+				outputText("\n\nYou have [skin coat].");
+				if (game.player.coatColor != _color) game.addButton(1, "Fur", dyeFur);
 				else game.addButtonDisabled(1, "Fur", "Your already have " + _color + " fur!");
 			} else {
 				outputText("\n\nYou have no fur.");
@@ -71,8 +72,8 @@ package classes.Items.Consumables
 		private function dyeFur():void {
 			clearOutput();
 			outputText("You rub the dye into your fur, then use a bucket of cool lakewater to rinse clean a few minutes later.  ");
-			game.player.furColor = _color;
-			outputText("You now have " + game.player.furColor + " fur.");
+			game.player.skin.coat.color = _color;
+			outputText("You now have [skin coat].");
 			if (game.player.lust > 50) {
 				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
 				game.dynStats("lus", -15);

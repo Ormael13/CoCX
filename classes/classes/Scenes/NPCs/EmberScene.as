@@ -1688,22 +1688,14 @@ package classes.Scenes.NPCs
 			//Gain Dragon Scales
 			if (player.skinType != SKIN_TYPE_SCALES && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nPrickling discomfort suddenly erupts all over your body, like every last inch of your skin has suddenly developed pins and needles.  You scratch yourself, hoping for relief; and when you look at your hands you notice small fragments of your " + player.skinFurScales() + " hanging from your fingers.  Nevertheless you continue to scratch yourself, and when you're finally done, you look yourself over. New shield-like scales have grown to replace your peeled off " + player.skinFurScales() + ".  They are smooth and look nearly as tough as iron. ");
-				player.skinType = SKIN_TYPE_SCALES;
-				player.skinAdj = "";
-				player.skinDesc = "scales";
+				var color:String;
 				if (rand(10) == 0) {
-					if (rand(2) == 0) player.scalesColor = "purple";
-					else player.scalesColor = "silver";
+					color = randomChoice("purple","silver");
+				} else {
+					color = randomChoice("red","green","white","blue","black");
 				}
-				else {
-					temp = rand(5);
-					if (temp == 0) player.scalesColor = "red";
-					else if (temp == 1) player.scalesColor = "green";
-					else if (temp == 2) player.scalesColor = "white";
-					else if (temp == 3) player.scalesColor = "blue";
-					else player.scalesColor = "black";
-				}
-				outputText("<b>Your body is now covered in " + player.scalesColor + " shield-shaped dragon scales.</b>");
+				player.skin.growCoat(SKIN_COAT_SCALES,{color:color});
+				outputText("<b>Your body is now covered in " + color + " shield-shaped dragon scales.</b>");
 				changes++;
 			}
 			//Gain Dragon Legs

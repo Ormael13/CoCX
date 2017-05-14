@@ -183,47 +183,13 @@ import classes.BodyParts.UnderBody;
 		public var hairColor:String = "no";
 		public var hairLength:Number = 0;
 
-	//	[Deprecated]
-		public function get furColor():String {
-			//trace("[DEPRECATED] get furColor");
-			return hasCoatOfType(SKIN_COAT_FUR) ? skin.coat.color : hairColor;
+		public function get coatColor():String {
+			if (!skin.hasCoat()) trace("[WARNING] get coatColor() called with no coat");
+			return skin.coat.color;
 		}
-		[Deprecated]
-		public function set furColor(value:String):void {
-			trace("[DEPRECATED] set furColor");
-			if (hasCoatOfType(SKIN_COAT_FUR)) skin.coat.color = value;
-		}
-	//	[Deprecated]
-		public function get scalesColor():String {
-			//trace("[DEPRECATED] get scalesColor");
-			var l:SkinLayer = skin.findLayer({
-				type:[SKIN_TYPE_SCALES,SKIN_TYPE_DRAGON_SCALES,SKIN_TYPE_AQUA_SCALES]
-			});
-			return l ? l.color : "no"
-		}
-		[Deprecated]
-		public function set scalesColor(value:String):void {
-			trace("[DEPRECATED] set scalesColor");
-			var l:SkinLayer = skin.findLayer({
-				type:[SKIN_TYPE_SCALES,SKIN_TYPE_DRAGON_SCALES,SKIN_TYPE_AQUA_SCALES]
-			});
-			if (l) l.color = value;
-		}
-		[Deprecated]
-		public function get chitinColor():String {
-			//trace("[DEPRECATED] get chitinColor");
-			var l:SkinLayer = skin.findLayer({
-				type:[SKIN_TYPE_CHITIN]
-			});
-			return l ? l.color : "no"
-		}
-		[Deprecated]
-		public function set chitinColor(value:String):void {
-			trace("[DEPRECATED] set chitinColor");
-			var l:SkinLayer = skin.findLayer({
-				type:[SKIN_TYPE_CHITIN]
-			});
-			if (l) l.color = value;
+		public function set coatColor(value:String):void {
+			if (!skin.hasCoat()) trace("[WARNING] set coatColor() called with no coat");
+			skin.coat.color = value;
 		}
 
 		public var beardStyle:Number = BEARD_NORMAL;
@@ -231,7 +197,7 @@ import classes.BodyParts.UnderBody;
 				
 		public var skin:Skin;
 		public function get skinType():Number { return skin.type; }
-	//	[Deprecated]
+		[Deprecated]
 		public function set skinType(value:Number):void {
 			trace("[DEPRECATED] set skinType");
 			skin.type = value;

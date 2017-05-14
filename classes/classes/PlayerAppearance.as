@@ -922,7 +922,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.lowerBody == LOWER_BODY_TYPE_FERRET)
 			outputText("  " + Num2Text(player.legCount) + " furry, digitigrade legs form below your [hips].  The fur is thinner on the feet, and your toes are tipped with claws.", false);
 		else if (player.lowerBody == LOWER_BODY_TYPE_HOOFED)
-			outputText("  Your " + num2Text(player.legCount) + " legs are muscled and jointed oddly, covered in " + player.furColor + " fur, and end in a bestial hooves.", false);
+			outputText("  Your " + num2Text(player.legCount) + " legs are muscled and jointed oddly, covered in [skin coat.color] fur, and end in a bestial hooves.", false);
 		else if (player.lowerBody == LOWER_BODY_TYPE_DOG)
 			outputText("  " + Num2Text(player.legCount) + " digitigrade legs grow downwards from your waist, ending in dog-like hind-paws.", false);
 		else if (player.lowerBody == LOWER_BODY_TYPE_WOLF)
@@ -947,7 +947,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.lowerBody == LOWER_BODY_TYPE_BUNNY)
 			outputText("  Your " + num2Text(player.legCount) + " legs thicken below the waist as they turn into soft-furred rabbit-like legs.  You even have large bunny feet that make hopping around a little easier than walking.", false);
 		else if (player.lowerBody == LOWER_BODY_TYPE_HARPY)
-			outputText("  Your " + num2Text(player.legCount) + " legs are covered with " + player.furColor + " plumage.  Thankfully the thick, powerful thighs are perfect for launching you into the air, and your feet remain mostly human, even if they are two-toed and tipped with talons.", false);
+			outputText("  Your " + num2Text(player.legCount) + " legs are covered with [skin coat.color] plumage.  Thankfully the thick, powerful thighs are perfect for launching you into the air, and your feet remain mostly human, even if they are two-toed and tipped with talons.", false);
 		else if (player.lowerBody == LOWER_BODY_TYPE_KANGAROO)
 			outputText("  Your " + num2Text(player.legCount) + " furry legs have short thighs and long calves, with even longer feet ending in prominently-nailed toes.", false);
 		else if (player.lowerBody == LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS)
@@ -989,11 +989,11 @@ public class PlayerAppearance extends BaseContent {
 	}
 	public function describeTail():void {
 		if (player.tailType == TAIL_TYPE_HORSE)
-			outputText("  A long " + player.furColor + " horsetail hangs from your " + buttDescript() + ", smooth and shiny.", false);
+			outputText("  A long [skin coat.color] horsetail hangs from your " + buttDescript() + ", smooth and shiny.", false);
 		if (player.tailType == TAIL_TYPE_FERRET)
-			outputText("  A long ferret tail sprouts from above your [butt].  It is thin, tapered, and covered in shaggy " + player.furColor + " fur.", false);
+			outputText("  A long ferret tail sprouts from above your [butt].  It is thin, tapered, and covered in shaggy [skin coat.color] fur.", false);
 		if (player.tailType == TAIL_TYPE_DOG)
-			outputText("  A fuzzy " + player.furColor + " dogtail sprouts just above your " + buttDescript() + ", wagging to and fro whenever you are happy.", false);
+			outputText("  A fuzzy [skin coat.color] dogtail sprouts just above your " + buttDescript() + ", wagging to and fro whenever you are happy.", false);
 		if (player.tailType == TAIL_TYPE_DEMONIC)
 			outputText("  A narrow tail ending in a spaded tip curls down from your " + buttDescript() + ", wrapping around your " + player.leg() + " sensually at every opportunity.", false);
 		if (player.tailType == TAIL_TYPE_COW)
@@ -1035,7 +1035,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  A long shark-tail trails down from your backside, swaying to and fro while giving you a dangerous air.", false);
 		}
 		if (player.tailType == TAIL_TYPE_CAT) {
-			outputText("  A soft " + player.furColor + " cat-tail sprouts just above your " + buttDescript() + ", curling and twisting with every step to maintain perfect balance.", false);
+			outputText("  A soft [skin coat.color] cat-tail sprouts just above your " + buttDescript() + ", curling and twisting with every step to maintain perfect balance.", false);
 		}
 		if (player.tailType == TAIL_TYPE_LIZARD) {
 			outputText("  A tapered tail hangs down from just above your " + assDescript() + ".  It sways back and forth, assisting you with keeping your balance.", false);
@@ -1051,20 +1051,20 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  A conical, ", false);
 			if (player.skinType == SKIN_TYPE_GOO)
 				outputText("gooey, " + player.skinTone, false);
-			else outputText("furry, " + player.furColor, false);
+			else outputText("furry, " + player.coatColor, false);
 			outputText(", tail extends from your " + assDescript() + ", bouncing up and down as you move and helping to counterbalance you.", false);
 		}
 		else if (player.tailType == TAIL_TYPE_FOX) {
 			if (player.tailCount <= 1)
-				outputText("  A swishing " + player.furColor + " fox's brush extends from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
-			else outputText("  " + Num2Text(player.tailCount) + " swishing " + player.furColor + " fox's tails extend from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
+				outputText("  A swishing [skin coat.color] fox's brush extends from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
+			else outputText("  " + Num2Text(player.tailCount) + " swishing [skin coat.color] fox's tails extend from your " + assDescript() + ", curling around your body - the soft fur feels lovely.");
 		}
 		else if (player.tailType == TAIL_TYPE_DRACONIC) {
 			outputText("  A thin, scaly, prehensile reptilian tail, almost as long as you are tall, swings behind you like a living bullwhip.  Its tip menaces with spikes of bone, meant to deliver painful blows.");
 		}
 		//appearance
 		else if (player.tailType == TAIL_TYPE_RACCOON) {
-			outputText("  A black-and-" + player.furColor + "-ringed raccoon tail waves behind you.");
+			outputText("  A black-and-[skin coat.color]-ringed raccoon tail waves behind you.");
 		}
 		else if (player.tailType == TAIL_TYPE_MOUSE) {
 			//appearance
@@ -1090,7 +1090,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  A very short, stubby deer tail sprouts from just above your butt.");
 		}
 		else if (player.tailType == TAIL_TYPE_WOLF) {
-			outputText("  A bushy " + player.furColor + " wolf tail sprouts just above your " + assDescript() + ", wagging to and fro whenever you are happy.");
+			outputText("  A bushy [skin coat.color] wolf tail sprouts just above your " + assDescript() + ", wagging to and fro whenever you are happy.");
 		}
 		else if (player.tailType == TAIL_TYPE_GARGOYLE) {
 			outputText("  A long spiked tail hang down from just above your " + assDescript() + ". It sways back and forth assisting in keeping your balance.");
@@ -1177,9 +1177,9 @@ public class PlayerAppearance extends BaseContent {
 		if (player.wingType == WING_TYPE_MANTICORE_LIKE_LARGE)
 			outputText("  A pair of large ominous leathery wings covered with fur expand from your back. You can open them wide to soar high in search of your next prey.", false);
 		if (player.wingType == WING_TYPE_FEATHERED_LARGE)
-			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the " + player.furColor + "-colored wings folded close, they can unfurl to allow you to soar as gracefully as a harpy.", false);
+			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the [skin coat.color]-colored wings folded close, they can unfurl to allow you to soar as gracefully as a harpy.", false);
 		if (player.wingType == WING_TYPE_FEATHERED_ALICORN)
-			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the " + player.furColor + "-colored wings folded close, they can unfurl to allow you to soar as gracefully as an alicorn.", false);
+			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the [skin coat.color]-colored wings folded close, they can unfurl to allow you to soar as gracefully as an alicorn.", false);
 		if (player.wingType == WING_TYPE_FEATHERED_PHOENIX)
 			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the crimson-colored wings folded close, they can unfurl to allow you to soar as gracefully as a phoenix.", false);
 		if (player.wingType == WING_TYPE_DRACONIC_SMALL)
@@ -1483,7 +1483,7 @@ public class PlayerAppearance extends BaseContent {
 					outputText("  On your cheek you have [skin coat]");
 					odd++;
 				}
-			} else if (player.skinType == SKIN_TYPE_FUR) {
+			} else if (player.skin.hasCoatOfType(SKIN_TYPE_FUR)) {
 				odd++;
 				outputText("  Under your [skin coat] you have a human-shaped head with [skin base]"+skinAndSomething);
 			} else if (player.skin.hasCoat() && !skinAndSomething) {
@@ -1617,7 +1617,7 @@ public class PlayerAppearance extends BaseContent {
 				if (player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
 				outputText(".", false);
 			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
-				outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your " + player.skinDesc + " is " + player.furColor + ", hiding your [skin.noadj] underneath.", false);
+				outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your " + player.skinDesc + " is [skin coat.color], hiding your [skin.noadj] underneath.", false);
 			} else {
 				outputText("  Your facial structure blends humanoid features with those of a cat.  A moist nose and whiskers are included, but overlaid with glittering [skin coat].");
 			}
@@ -1667,7 +1667,7 @@ public class PlayerAppearance extends BaseContent {
 		if (player.faceType == FACE_BOAR) {
 			outputText("  Your face is like that of a boar, ");
 			if (player.skinType == SKIN_TYPE_FUR)
-				outputText("with " + player.skinTone + " skin underneath your " + player.furColor + " fur");
+				outputText("with " + player.skinTone + " skin underneath your [skin coat.color] fur");
 			outputText(", complete with tusks and a snout that is always wiggling.");
 		}
 		if (player.faceType == FACE_RHINO) {
@@ -1972,7 +1972,7 @@ public function RacialScores():void {
 	else if (player.spiderScore() >= 1 && player.spiderScore() < 4) outputText("\n<font color=\"#008000\">Half Spider-morph: " + player.spiderScore() + "</font>", false);
 	else if (player.spiderScore() < 1) outputText("\n<font color=\"#ff0000\">Half Spider-morph: 0</font>", false);
 	if (player.wolfScore() >= 10) outputText("\n<font color=\"#0000a0\">Fenrir: " + player.wolfScore() + " (+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxTou, +" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxSpe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
-	else if (player.wolfScore() >= 7 && player.furColor == "glacial white") outputText("\n<font color=\"#0000a0\">Winter wolf: " + player.wolfScore() + " (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxTou, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxSpe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
+	else if (player.wolfScore() >= 7 && player.coatColor == "glacial white") outputText("\n<font color=\"#0000a0\">Winter wolf: " + player.wolfScore() + " (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxTou, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxSpe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
 	else if (player.wolfScore() >= 6) outputText("\n<font color=\"#0000a0\">Wolf-morph: " + player.wolfScore() + " (+" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxTou, +" + (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxSpe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
 	else if (player.wolfScore() >= 4 && player.wolfScore() < 6) outputText("\n<font color=\"#0000a0\">Wolf girl/boy: " + player.wolfScore() + " (+" + (15 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, +" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " maxSpe, -" + (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Int)</font>", false);
 	else if (player.wolfScore() >= 1 && player.wolfScore() < 4) outputText("\n<font color=\"#008000\">Wolf girl/boy: " + player.wolfScore() + "</font>", false);

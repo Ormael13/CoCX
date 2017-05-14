@@ -3144,7 +3144,7 @@ private function furColorSelection2():void {
 private function chooseFurColorSaveUpdate(color:String):void {
 	clearOutput();
 	outputText("You now have " + color + " fur. You will be returned to your camp now and you can continue your usual gameplay.");
-	player.furColor = color;
+	player.skin.coat.color = color;
 	doNext(doCamp);
 }
 
@@ -3165,7 +3165,7 @@ private function scaleColorSelection1():void {
 private function chooseScalesColorSaveUpdate(color:String):void {
 	clearOutput();
 	outputText("You now have " + color + " scales. You will be returned to your camp now and you can continue your usual gameplay.");
-	player.scalesColor = color;
+	player.coatColor = color;
 	doNext(doCamp);
 }
 /*
