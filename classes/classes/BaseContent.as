@@ -175,9 +175,9 @@ import classes.Scenes.Places.Ingnam;
 			kGAMECLASS.combat.cleanupAfterCombatImpl(nextFunc);
 		}
 
-		protected function combatRoundOver():void
+		protected function combatRoundOver():Boolean
 		{
-			kGAMECLASS.combat.combatRoundOverImpl();
+			return kGAMECLASS.combat.combatRoundOverImpl();
 		}
 
 		protected function enemyAI():void

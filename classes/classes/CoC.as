@@ -373,8 +373,8 @@ the text from being too boring.
 		combat.cleanupAfterCombatImpl(nextFunc);
 	}
 
-	public function combatRoundOver():void {
-		combat.combatRoundOverImpl();
+	public function combatRoundOver():Boolean {
+		return combat.combatRoundOverImpl();
 	}
 
 	public function enemyAI():void {

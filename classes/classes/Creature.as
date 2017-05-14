@@ -392,10 +392,18 @@ import classes.BodyParts.UnderBody;
 		public var vaginas:Vector.<VaginaClass>;
 		//Fertility is a % out of 100. 
 		public var fertility:Number = 10;
-		public var clitLength:Number = .5;
 		public var nippleLength:Number = .25;
 		public var breastRows:Array;
 		public var ass:AssClass = new AssClass();
+
+		public function get clitLength():Number {
+			return vaginas[0].clitLength;
+		}
+
+		public function set clitLength(value:Number):void {
+			vaginas[0].clitLength = value;
+		}
+
 		//Constructor
 		public function Creature()
 		{
@@ -424,35 +432,6 @@ import classes.BodyParts.UnderBody;
 			if (!hasVagina()) {
 				throw new IllegalOperationError("Creature does not have vagina.")
 			}
-		}
-
-		/**
-		 * Get the clit length for the selected vagina (defaults to the first vagina).
-		 * @param	vaginaIndex the vagina to query for the clit length
-		 * @return the clit length of the vagina
-		 * @throws IllegalOperationError if the Creature does not have a vagina
-		 * @throws IllegalOperationError if the Creature does not have a vagina
-		 * @throws RangeError if the selected vagina cannot be found
-		 */
-		public function getClitLength(vaginaIndex : int = 0) : Number {
-			checkVaginaPresent();
-
-			return vaginas[vaginaIndex].clitLength;
-		}
-
-		/**
-		 * Set the clit length for the selected vagina (defaults to the first vagina).
-		 * @param clitLength the clit length to set for the vagina
-		 * @param vaginaIndex the vagina on witch to set the clit length
-		 * @return the clit length of the vagina
-		 * @throws IllegalOperationError if the Creature does not have a vagina
-		 * @throws RangeError if the selected vagina cannot be found
-		 */
-		public function setClitLength(clitLength:Number, vaginaIndex : int = 0) : Number {
-			checkVaginaPresent();
-
-			vaginas[vaginaIndex].clitLength = clitLength;
-			return getClitLength(vaginaIndex);
 		}
 
 		/**
