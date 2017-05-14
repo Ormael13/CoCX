@@ -3059,12 +3059,12 @@ private function promptSaveUpdate():void {
 			player.perkPoints = player.perkPoints + 1;
 		}
 		//Update chitin
-		if (player.skinType == SKIN_TYPE_CHITIN) {
-			if (player.mantisScore() >= 5) player.chitinColor = "green";
-			if (player.spiderScore() >= 5) player.chitinColor = "pale white";
+		if (player.hasCoatOfType(SKIN_COAT_CHITIN)) {
+			if (player.mantisScore() >= 5) player.skin.coat.color = "green";
+			if (player.spiderScore() >= 5) player.skin.coat.color = "pale white";
 			if (player.mantisScore() < 5 && player.spiderScore() < 5) {
-				if (rand(2) == 1) player.chitinColor = "green";
-				else player.chitinColor = "pale white";
+				if (rand(2) == 1) player.skin.coat.color = "green";
+				else player.skin.coat.color = "pale white";
 			}
 		}
 		doNext(doCamp);

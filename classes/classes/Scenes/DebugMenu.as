@@ -563,20 +563,19 @@ import classes.BodyParts.SkinLayer;
 			addButton(14, "Back", bodyPartEditorRoot);
 		}
 		private static const SKIN_BASE_TYPES:Array = [
-			[SKIN_TYPE_PLAIN,"(0) PLAIN"],
-			[SKIN_TYPE_GOO,"(3) GOO"],
-			[SKIN_TYPE_STONE,"(7) STONE"]
+			[SKIN_BASE_PLAIN,"(0) PLAIN"],
+			[SKIN_BASE_GOO,"(3) GOO"],
+			[SKIN_BASE_STONE,"(7) STONE"]
 		];
 		private static const SKIN_COAT_TYPES:Array = [
-			[SKIN_TYPE_FUR,"(1) FUR"],
-			[SKIN_TYPE_SCALES,"(2) SCALES"],
-			[SKIN_TYPE_CHITIN,"(5) CHITIN"],
-			[SKIN_TYPE_BARK,"(6) BARK"],
-			[SKIN_TYPE_STONE,"(7) STONE"],
-			[SKIN_TYPE_TATTOED,"(8) TATTOED"],
-			[SKIN_TYPE_AQUA_SCALES,"(9) AQUA_SCALES"],
-			[SKIN_TYPE_DRAGON_SCALES,"(10) DRAGON_SCALES"],
-			[SKIN_TYPE_MOSS,"(11) MOSS"]
+			[SKIN_COAT_FUR,"(1) FUR"],
+			[SKIN_COAT_SCALES,"(2) SCALES"],
+			[SKIN_COAT_CHITIN,"(5) CHITIN"],
+			[SKIN_COAT_BARK,"(6) BARK"],
+			[SKIN_COAT_STONE,"(7) STONE"],
+			[SKIN_COAT_AQUA_SCALES,"(9) AQUA_SCALES"],
+			[SKIN_COAT_DRAGON_SCALES,"(10) DRAGON_SCALES"],
+			[SKIN_COAT_MOSS,"(11) MOSS"]
 		];
 		private static const SKIN_TONE_CONSTANTS:Array = [
 			"pale", "light", "dark", "green", "gray",

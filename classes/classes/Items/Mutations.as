@@ -1914,13 +1914,11 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//Gain chitin skin
-			if (changes < changeLimit && player.skinType != SKIN_TYPE_CHITIN && player.skinType != SKIN_TYPE_STONE && player.tailType == TAIL_TYPE_SCORPION && rand(2) == 0) {
+			if (changes < changeLimit && !player.hasCoatOfType(SKIN_COAT_CHITIN) && player.skinType != SKIN_TYPE_STONE && player.tailType == TAIL_TYPE_SCORPION && rand(2) == 0) {
 				if (player.skinType == SKIN_TYPE_PLAIN) outputText("\n\nAn itchy feeling springs up over every inch of your skin.  As you scratch yourself madly, you feel your skin hardening until <b>you are wholy covered in chitin.</b>", false);
 				if (player.hasFur()) outputText("Your skin suddenly feels itchy as your fur begins falling out in clumps, <b>revealing smooth chitin</b> underneath.", false);
 				if (player.hasScales()) outputText("\n\nYour " + player.scalesColor + " scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of " + player.skinDesc + ".  At last the itching stops as <b>you brush a few more loose scales from your new chitin exoskeleton.</b>", false);
-				player.skinType = SKIN_TYPE_CHITIN;
-				player.skinDesc = "chitin";
-				player.chitinColor = "green";
+				player.skin.growCoat(SKIN_COAT_CHITIN,{color:"green"});
 				changes++;
 			}
 		}
@@ -9360,18 +9358,12 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//(Fur/Scales fall out replaced by chitin)
-			if (player.skinType != SKIN_TYPE_CHITIN && (player.earType == EARS_HUMAN || player.earType == EARS_ELFIN) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(4) == 0 && changes < changeLimit) {
-				if (player.skinType != SKIN_TYPE_PLAIN) {
-					outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your " + player.skinFurScales() + " ", false);
-					if (player.hasScales()) outputText("are", false);
-					else outputText("is", false);
-					outputText(" falling to the ground, revealing flawless, almost pearly-white chitin underneath.", false);
-				}
-				else outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your skin stating to harden turning slowly into chitin.", false);
+			if (!player.hasCoatOfType(SKIN_COAT_CHITIN) && (player.earType == EARS_HUMAN || player.earType == EARS_ELFIN) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+				if (player.hasCoat()) {
+					outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your [skin coat] [skin coat.isare] falling to the ground, revealing flawless, almost pearly-white chitin underneath.", false);
+				} else outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your skin stating to harden turning slowly into chitin.", false);
 				outputText("  <b>You now have pale white chitin exoskeleton covering your body.</b>", false);
-				player.chitinColor = "pale white";
-				player.skinAdj = "";
-				player.skinType = SKIN_TYPE_CHITIN;
+				player.skin.growCoat(SKIN_COAT_CHITIN,{color:"pale white"});
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedChitin)) {
 					outputText("\n\n<b>Genetic Memory: Chitin - Memorized!</b>\n\n");
 					player.createStatusAffect(StatusAffects.UnlockedChitin, 0, 0, 0, 0);
@@ -9379,7 +9371,7 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//(Gain human face)
-			if (player.skinType == SKIN_TYPE_CHITIN && (player.faceType != FACE_SPIDER_FANGS && player.faceType != FACE_HUMAN) && changes < changeLimit && rand(4) == 0) {
+			if (player.hasCoatOfType(SKIN_COAT_CHITIN) && (player.faceType != FACE_SPIDER_FANGS && player.faceType != FACE_HUMAN) && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nWracked by pain, your face slowly reforms into a perfect human shape.  Awed by the transformation, you run your fingers delicately over the new face, marvelling at the change.  <b>You have a human face again!</b>", false);
 				player.faceType = FACE_HUMAN;
 				changes++;
@@ -9415,7 +9407,7 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//eyes!
-			if (player.skinType == SKIN_TYPE_CHITIN && (player.faceType != FACE_SPIDER_FANGS || player.faceType != FACE_HUMAN) && player.eyeType == EYES_HUMAN && rand(4) == 0 && changes < changeLimit) {
+			if (player.hasCoatOfType(SKIN_COAT_CHITIN) && (player.faceType != FACE_SPIDER_FANGS || player.faceType != FACE_HUMAN) && player.eyeType == EYES_HUMAN && rand(4) == 0 && changes < changeLimit) {
 				player.eyeType = EYES_FOUR_SPIDER_EYES;
 				changes++;
 				outputText("\n\nYou suddenly get the strangest case of double vision.  Stumbling and blinking around, you clutch at your face, but you draw your hands back when you poke yourself in the eye.  Wait, those fingers were on your forehead!  You tentatively run your fingertips across your forehead, not quite believing what you felt.  <b>There's a pair of eyes on your forehead, positioned just above your normal ones!</b>  This will take some getting used to!", false);
@@ -9426,7 +9418,7 @@ import classes.CockTypesEnum;
 				dynStats("int", 5);
 			}
 			//(Gain spider fangs)
-			if (player.faceType == FACE_HUMAN && player.skinType == SKIN_TYPE_CHITIN && changes < changeLimit && rand(4) == 0) {
+			if (player.faceType == FACE_HUMAN && player.hasCoatOfType(SKIN_COAT_CHITIN) && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nTension builds within your upper gum, just above your canines.  You open your mouth and prod at the affected area, pricking your finger on the sharpening tooth.  It slides down while you're touching it, lengthening into a needle-like fang.  You check the other side and confirm your suspicions.  <b>You now have a pair of pointy spider-fangs, complete with their own venom!</b>", false);
 				player.faceType = FACE_SPIDER_FANGS;
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedSpiderFangs)) {
@@ -13543,13 +13535,11 @@ import classes.CockTypesEnum;
 			}
 			
 			//Chitin skin
-			if (changes < changeLimit && player.skinType != SKIN_TYPE_CHITIN && player.tailType == TAIL_TYPE_MANTIS_ABDOMEN && rand(2) == 0) {
+			if (changes < changeLimit && !player.hasCoatOfType(SKIN_COAT_CHITIN) && player.tailType == TAIL_TYPE_MANTIS_ABDOMEN && rand(2) == 0) {
 				if (player.skinType == SKIN_TYPE_PLAIN) outputText("\n\nAn itchy feeling springs up over every inch of your skin.  As you scratch yourself madly, you feel your skin hardening until <b>you are wholy covered in chitin.</b>", false);
 				if (player.hasFur()) outputText("\n\nYour skin suddenly feels itchy as your fur begins falling out in clumps, <b>revealing smooth chitin</b> underneath.", false);
 				if (player.hasScales()) outputText("\n\nYour " + player.skinTone + " scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of " + player.skinDesc + ".  At last the itching stops as <b>you brush a few more loose scales from your new chitin exoskeleton.</b>", false);
-				player.skinType = SKIN_TYPE_CHITIN;
-				player.skinDesc = "chitin";
-				player.chitinColor = "green";
+				player.skin.growCoat(SKIN_COAT_CHITIN,{color:"green"});
 				changes++;
 			}
 			

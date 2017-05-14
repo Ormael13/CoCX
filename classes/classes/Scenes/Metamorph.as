@@ -58,9 +58,9 @@ private function accessSkinMenu():void {
 	else if (player.hasStatusAffect(StatusAffects.UnlockedScales) && player.skinType == SKIN_TYPE_SCALES) addButtonDisabled(1, "Scales", "You already have scales.");
 	else if (player.hasStatusAffect(StatusAffects.UnlockedScales) && player.skinType != SKIN_TYPE_SCALES && player.soulforce < 100) addButtonDisabled(1, "Scales", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(1, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusAffect(StatusAffects.UnlockedChitin) && player.skinType != SKIN_TYPE_CHITIN && player.soulforce >= 100) addButton(3, "Chitin", metamorphChitin);
-	else if (player.hasStatusAffect(StatusAffects.UnlockedChitin) && player.skinType == SKIN_TYPE_CHITIN) addButtonDisabled(3, "Chitin", "You already have chitin.");
-	else if (player.hasStatusAffect(StatusAffects.UnlockedChitin) && player.skinType != SKIN_TYPE_CHITIN && player.soulforce < 100) addButtonDisabled(3, "Chitin", "You not have enough Soulforce for this metamorphosis.");
+	if (player.hasStatusAffect(StatusAffects.UnlockedChitin) && !player.hasCoatOfType(SKIN_COAT_CHITIN) && player.soulforce >= 100) addButton(3, "Chitin", metamorphChitin);
+	else if (player.hasStatusAffect(StatusAffects.UnlockedChitin) && player.hasCoatOfType(SKIN_COAT_CHITIN)) addButtonDisabled(3, "Chitin", "You already have chitin.");
+	else if (player.hasStatusAffect(StatusAffects.UnlockedChitin) && !player.hasCoatOfType(SKIN_COAT_CHITIN) && player.soulforce < 100) addButtonDisabled(3, "Chitin", "You not have enough Soulforce for this metamorphosis.");
 	else addButtonDisabled(3, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
@@ -976,15 +976,16 @@ private function metamorphFishGills():void {
 private function metamorphChitin():void {
 	clearOutput();
 	player.soulforce -= 100;
-	if (rand(2) == 0) player.chitinColor = "pale white";
-	else player.chitinColor = "green";
-	if (player.skinType != SKIN_TYPE_PLAIN) {
-		outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your " + player.skinFurScales() + " "+player.skin.isAre()+" falling to the ground, revealing flawless, " + player.chitinColor + " chitin underneath.", false);
+	var chitinColor:String;
+	if (rand(2) == 0) chitinColor = "pale white";
+	else chitinColor = "green";
+	if (player.hasCoat()) {
+		outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your [skin coat] [skin coat.isare] falling to the ground, revealing flawless, " + chitinColor + " chitin underneath.", false);
+	} else {
+		outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your skin stating to harden turning slowly into chitin.", false);
 	}
-	else outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your skin stating to harden turning slowly into chitin.", false);
-	outputText("  <b>You now have " + player.chitinColor + " chitin exoskeleton covering your body.</b>", false);
-	player.skinAdj = "";
-	player.skinType = SKIN_TYPE_CHITIN;
+	outputText("  <b>You now have " + chitinColor + " chitin exoskeleton covering your body.</b>", false);
+	player.skin.growCoat(SKIN_COAT_CHITIN,{adj:"",color:chitinColor});
 	doNext(accessMetamorphMenu);
 }
 private function metamorphScales():void {

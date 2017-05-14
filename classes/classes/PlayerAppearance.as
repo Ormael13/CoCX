@@ -545,7 +545,7 @@ public class PlayerAppearance extends BaseContent {
 				outputText("A " + sackDescript() + " covered by magical tattoo with " + ballsDescript() + " swings heavily under where a penis would normally grow.", false);
 			if(player.hasFur())
 				outputText("A fuzzy " + sackDescript() + " filled with " + ballsDescript() + " swings low under where a penis would normally grow.", false);
-			if(player.skinType == SKIN_TYPE_CHITIN || player.skinType == SKIN_TYPE_PARTIAL_CHITIN)
+			if(player.hasCoatOfType(SKIN_COAT_CHITIN))
 				outputText("A chitin " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.", false);
 			if(player.hasScales())
 				outputText("A scaley " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.", false);
@@ -562,7 +562,7 @@ public class PlayerAppearance extends BaseContent {
 				outputText("A " + sackDescript() + " covered by magical tattoo with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".", false);
 			if(player.hasFur())
 				outputText("A fuzzy " + sackDescript() + " filled with " + ballsDescript() + " swings low under your " + player.multiCockDescriptLight() + ".", false);
-			if(player.skinType == SKIN_TYPE_CHITIN || player.skinType == SKIN_TYPE_PARTIAL_CHITIN)
+			if(player.hasCoatOfType(SKIN_COAT_CHITIN))
 				outputText("A chitin " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.", false);
 			if(player.hasScales())
 				outputText("A scaley " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.", false);
@@ -1870,9 +1870,9 @@ public function RacialScores():void {
 	if (player.mantisScore() >= 5) {
 		outputText("\n<font color=\"#0000a0\">Mantis-morph: " + player.mantisScore() + " (-" + (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " max Str, ", false);
 		if (player.findPerk(PerkLib.MantislikeAgility) >= 0) {
-			if (player.skinType == SKIN_TYPE_CHITIN && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("+" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
+			if (player.hasCoatOfType(SKIN_COAT_CHITIN) && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("+" + (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
 			else if (player.skinType == SKIN_TYPE_SCALES && player.findPerk(PerkLib.ThickSkin) >= 0) outputText("+" + (65 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
-			else if (player.skinType == SKIN_TYPE_CHITIN) outputText("+" + (65 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
+			else if (player.hasCoatOfType(SKIN_COAT_CHITIN)) outputText("+" + (65 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
 			else if (player.skinType == SKIN_TYPE_SCALES) outputText("+" + (60 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
 			else if (player.findPerk(PerkLib.ThickSkin) >= 0) outputText("+" + (55 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);
 			else outputText("+" + (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL])) + " ", false);

@@ -205,11 +205,11 @@ import classes.BodyParts.UnderBody;
 		public function set scalesColor(value:String):void {
 			trace("[DEPRECATED] set scalesColor");
 			var l:SkinLayer = skin.findLayer({
-				type:[SKIN_TYPE_CHITIN]
+				type:[SKIN_TYPE_SCALES,SKIN_TYPE_DRAGON_SCALES,SKIN_TYPE_AQUA_SCALES]
 			});
 			if (l) l.color = value;
 		}
-	//	[Deprecated]
+		[Deprecated]
 		public function get chitinColor():String {
 			//trace("[DEPRECATED] get chitinColor");
 			var l:SkinLayer = skin.findLayer({

@@ -2140,9 +2140,9 @@ use namespace kGAMECLASS;
 				spiderCounter += 2;
 			if (tailType == 5)
 				spiderCounter++;
-			if (skinType != 5 && spiderCounter > 0)
+			if (!hasCoatOfType(SKIN_COAT_CHITIN) && spiderCounter > 0)
 				spiderCounter--;
-			if (skinType == 5)
+			if (hasCoatOfType(SKIN_COAT_CHITIN))
 				spiderCounter++;
 			if (spiderCounter > 0 && findPerk(PerkLib.TrachealSystem) >= 0)
 				spiderCounter++;
@@ -2211,7 +2211,7 @@ use namespace kGAMECLASS;
 			//If the character has fur, scales, or gooey skin, -1
 		//	if (skinType == SKIN_TYPE_FUR && !InCollection(furColor, KitsuneScene.basicKitsuneFur) && !InCollection(furColor, KitsuneScene.elderKitsuneColors))
 		//		kitsuneCounter--;
-			if (skinType == SKIN_TYPE_SCALES || skinType == SKIN_TYPE_CHITIN)
+			if (hasCoat() && !hasCoatOfType(SKIN_COAT_FUR))
 				kitsuneCounter -= 2;
 			if (skinType == SKIN_TYPE_GOO)
 				kitsuneCounter -= 3;
@@ -2990,7 +2990,7 @@ use namespace kGAMECLASS;
 		//		kitshooCounter--;
 		//	if (skinType == SKIN_TYPE_SCALES)
 		//		kitshooCounter -= 2; - czy bedzie pozytywny do wyniku czy tez nie?
-			if (skinType == SKIN_TYPE_CHITIN)
+			if (hasCoatOfType(SKIN_COAT_CHITIN))
 				kitshooCounter -= 2;
 			if (skinType == SKIN_TYPE_GOO)
 				kitshooCounter -= 3;
@@ -4535,9 +4535,9 @@ use namespace kGAMECLASS;
 				maxStr += (10 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.MantislikeAgility) > 0) {
-				if (skinType == SKIN_TYPE_CHITIN && findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (20 * (1 + newGamePlusMod));
+				if (hasCoatOfType(SKIN_COAT_CHITIN) && findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (20 * (1 + newGamePlusMod));
 				if (skinType == SKIN_TYPE_SCALES && findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (15 * (1 + newGamePlusMod));
-				if (skinType == SKIN_TYPE_CHITIN) maxSpe += (15 * (1 + newGamePlusMod));
+				if (hasCoatOfType(SKIN_COAT_CHITIN)) maxSpe += (15 * (1 + newGamePlusMod));
 				if (skinType == SKIN_TYPE_SCALES) maxSpe += (10 * (1 + newGamePlusMod));
 				if (findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (5 * (1 + newGamePlusMod));
 			}
