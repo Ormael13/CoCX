@@ -72,8 +72,7 @@
 			this.hipRating = HIP_RATING_AVERAGE;
 			this.buttRating = BUTT_RATING_AVERAGE;
 			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
-			this.skinTone = furColor;
-			this.skinType = SKIN_TYPE_FUR;
+			this.skin.growFur({color:furColor});
 			this.skinDesc = "shaggy fur";
 			this.hairColor = furColor;
 			this.hairLength = 3;

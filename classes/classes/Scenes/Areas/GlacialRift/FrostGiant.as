@@ -232,9 +232,7 @@ package classes.Scenes.Areas.GlacialRift
 			this.tallness = 20*12;
 			this.hipRating = HIP_RATING_BOYISH;
 			this.buttRating = BUTT_RATING_TIGHT;
-			this.skinTone = "deep blue";
-			this.skinType = SKIN_TYPE_FUR;
-			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_FUR];
+			this.skin.growFur({color:"deep blue"});
 			this.hairColor = "white";
 			this.hairLength = 8;
 			initStrTouSpeInte(280, 220, 100, 80);

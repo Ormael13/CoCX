@@ -164,10 +164,7 @@ package classes.Scenes.Areas.Lake
 			this.buttRating = BUTT_RATING_LARGE;
 			this.lowerBody = LOWER_BODY_TYPE_GOO;
 			var tone:String = randomChoice("blue", "purple", "crystal");
-			this.skinTone = tone;
-			this.skinType = SKIN_TYPE_GOO;
-			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_GOO];
-			this.skinAdj = "goopey";
+			this.skin.setBaseOnly({color:tone,type:SKIN_BASE_GOO});
 			this.hairColor = tone;
 			this.hairLength = 12 + rand(10);
 			initStrTouSpeInte(32, 40, 20, 30);

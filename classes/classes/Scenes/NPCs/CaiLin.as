@@ -5,7 +5,8 @@
 package classes.Scenes.NPCs 
 {
 	import classes.*;
-	import classes.internals.*;
+import classes.BodyParts.Skin;
+import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
 	
 	public class CaiLin extends Monster
@@ -298,8 +299,7 @@ package classes.Scenes.NPCs
 			this.hipRating = HIP_RATING_AMPLE;//hip size - ostatecznie size 15 (używać eggs jak Amily)
 			this.buttRating = BUTT_RATING_NOTICEABLE;//butt size -  ostatecznie size 12 (używać eggs jak Amily)
 			this.lowerBody = LOWER_BODY_TYPE_NAGA;
-			this.skinTone = "seven-colored";
-			this.skinType = SKIN_TYPE_SCALES;
+			this.skin.growCoat(SKIN_COAT_SCALES,{color:"seven-colored"},Skin.COVERAGE_COMPLETE);
 			this.hairColor = "seven-colored";
 			this.weaponName = "claws";
 			this.weaponVerb="claw-slash";

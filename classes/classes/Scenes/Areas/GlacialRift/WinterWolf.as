@@ -116,9 +116,7 @@ package classes.Scenes.Areas.GlacialRift
 			this.tallness = 10*12;
 			this.hipRating = HIP_RATING_BOYISH;
 			this.buttRating = BUTT_RATING_TIGHT;
-			this.skinTone = "glacial white";
-			this.skinType = SKIN_TYPE_FUR;
-			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_FUR];
+			this.skin.growFur({color:"glacial white"});
 			this.hairColor = "glacial white";
 			this.hairLength = 8;
 			initStrTouSpeInte(130, 160, 80, 90);

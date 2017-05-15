@@ -1,7 +1,8 @@
 package classes.Scenes.NPCs
 {
 	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.BodyParts.Skin;
+import classes.GlobalFlags.kFLAGS;
 	import classes.internals.ChainedDrop;
 
 	public class Kiha extends Monster
@@ -203,9 +204,10 @@ package classes.Scenes.NPCs
 			this.hipRating = HIP_RATING_AMPLE;
 			this.buttRating = BUTT_RATING_AVERAGE+1;
 			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
-			this.skinTone = "dark";
-			this.skinType = SKIN_TYPE_SCALES;
-			this.skinDesc = "skin and scales";
+			this.skin.coverage = Skin.COVERAGE_MEDIUM;
+			this.skin.base.color = "dark";
+			this.skin.coat.color = "red";
+			this.skin.coat.type = SKIN_COAT_SCALES;
 			this.hairColor = "red";
 			this.hairLength = 3;
 			initStrTouSpeInte(85, 80, 85, 60);

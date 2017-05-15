@@ -227,7 +227,7 @@ package classes.Scenes.Dungeons.D3
 			initLibSensCor(player.lib, player.sens, player.cor);
 			if (cor < 50) cor = 50;
 			faceType = player.faceType;
-			skinType = player.skinType;
+			skin.setAllProps(player.skin.saveToObject());
 			this.bonusHP = 500;
 			this.bonusLust = 40;
 			this.weaponName = player.weaponName;

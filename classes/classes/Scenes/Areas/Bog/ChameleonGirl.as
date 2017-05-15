@@ -135,10 +135,7 @@ package classes.Scenes.Areas.Bog
 			this.tallness = rand(2) + 68;
 			this.hipRating = HIP_RATING_AMPLE + 2;
 			this.buttRating = BUTT_RATING_LARGE;
-			this.skinTone = skinToneAdj[0];
-			this.skinType = SKIN_TYPE_PLAIN;
-			this.skinDesc = "skin";
-			this.skinAdj = skinToneAdj[1];
+			this.skin.setBaseOnly({color:skinToneAdj[0],adj:skinToneAdj[1],type:SKIN_BASE_PLAIN});
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(120, 120, 105, 95);

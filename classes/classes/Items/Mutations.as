@@ -1383,7 +1383,7 @@ import classes.CockTypesEnum;
 			}
 			//Alicorn wings
 			if (type == 2 && player.wingType == WING_TYPE_NONE && changes < changeLimit && player.hornType == HORNS_UNICORN && rand(4) == 0) {
-				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your " + player.skinDesc + ". It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your " + player.armorName + ". Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, white wings.</b>", false);
+				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your " + player.skinDesc + ". It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, white wings.</b>", false);
 				player.wingType = WING_TYPE_FEATHERED_ALICORN;
 				player.wingDesc = "large white feathered";
 				changes++;
@@ -2921,7 +2921,7 @@ import classes.CockTypesEnum;
 						if (player.cockTotal() == 0) {
 							player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
 							player.createCock(7 + rand(7), 1.5 + rand(10) / 10);
-							outputText("\n\nA painful lump forms on your groin, nearly doubling you over as it presses against your " + player.armorName + ".  You rip open your gear and watch, horrified as the discolored skin splits apart, revealing a pair of red-tipped points.  A feeling of relief, and surprising lust grows as they push forward, glistening red and thickening.  The skin bunches up into an animal-like sheath, while a pair of fat bulges pop free.  You now have two nice thick dog-cocks, with decent sized knots.  Both pulse and dribble animal-pre, arousing you in spite of your attempts at self-control.", false);
+							outputText("\n\nA painful lump forms on your groin, nearly doubling you over as it presses against your [armor].  You rip open your gear and watch, horrified as the discolored skin splits apart, revealing a pair of red-tipped points.  A feeling of relief, and surprising lust grows as they push forward, glistening red and thickening.  The skin bunches up into an animal-like sheath, while a pair of fat bulges pop free.  You now have two nice thick dog-cocks, with decent sized knots.  Both pulse and dribble animal-pre, arousing you in spite of your attempts at self-control.", false);
 							player.cocks[0].knotMultiplier = 1.7;
 							player.cocks[0].cockType = CockTypesEnum.DOG;
 							player.cocks[1].knotMultiplier = 1.7;
@@ -2941,7 +2941,7 @@ import classes.CockTypesEnum;
 						}
 						//2 dicks+ - convert first 2 to doggie-dom
 						else {
-							outputText("\n\nYour crotch twitches, and you pull open your " + player.armorName + " to get a better look.  You watch in horror and arousal as your " + cockDescript(0) + " and " + cockDescript(1) + " both warp and twist, becoming red and pointed, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.", false);
+							outputText("\n\nYour crotch twitches, and you pull open your [armor] to get a better look.  You watch in horror and arousal as your " + cockDescript(0) + " and " + cockDescript(1) + " both warp and twist, becoming red and pointed, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.", false);
 							player.cocks[0].cockType = CockTypesEnum.DOG;
 							player.cocks[1].cockType = CockTypesEnum.DOG;
 							player.cocks[0].knotMultiplier = 1.4;
@@ -2963,13 +2963,13 @@ import classes.CockTypesEnum;
 						if (player.cockTotal() >= 1) {
 							//if first dick is already doggi'ed
 							if (player.cocks[0].cockType == CockTypesEnum.DOG) {
-								outputText("\n\nYour crotch twitches, and you pull open your " + player.armorName + " to get a better look.  You watch in horror and arousal as your " + cockDescript(1) + " warps and twists, becoming red and pointed, just like other dog-dick, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.", false);
+								outputText("\n\nYour crotch twitches, and you pull open your [armor] to get a better look.  You watch in horror and arousal as your " + cockDescript(1) + " warps and twists, becoming red and pointed, just like other dog-dick, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.", false);
 								player.cocks[1].cockType = CockTypesEnum.DOG;
 								player.cocks[1].knotMultiplier = 1.4;
 							}
 							//first dick is not dog
 							else {
-								outputText("\n\nYour crotch twitches, and you pull open your " + player.armorName + " to get a better look.  You watch in horror and arousal as your " + cockDescript(0) + " warps and twists, becoming red and pointed, just like other dog-dick, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.", false);
+								outputText("\n\nYour crotch twitches, and you pull open your [armor] to get a better look.  You watch in horror and arousal as your " + cockDescript(0) + " warps and twists, becoming red and pointed, just like other dog-dick, growing thick bulges near the base.  When it stops you have two dog-cocks and an animal-like sheath.  The whole episode turns you on far more than it should, leaving you dripping animal pre and ready to breed.", false);
 								player.cocks[0].cockType = CockTypesEnum.DOG;
 								player.cocks[0].knotMultiplier = 1.4;
 							}
@@ -3582,7 +3582,7 @@ import classes.CockTypesEnum;
 			if (player.balls < 2 && changes < changeLimit && rand(4) == 0) {
 				if (player.balls == 0) {
 					player.balls = 2;
-					outputText("\n\nIncredible pain scythes through your crotch, doubling you over.  You stagger around, struggling to pull open your " + player.armorName + ".  In shock, you barely register the sight before your eyes: <b>You have balls!</b>", false);
+					outputText("\n\nIncredible pain scythes through your crotch, doubling you over.  You stagger around, struggling to pull open your [armor].  In shock, you barely register the sight before your eyes: <b>You have balls!</b>", false);
 					player.ballSize = 1;
 				}
 				changes++;
@@ -3657,11 +3657,11 @@ import classes.CockTypesEnum;
 			if (player.balls < 4) {
 				if (player.balls > 0) {
 					player.balls = 4;
-					outputText("\n\nIncredible pain scythes through your crotch, doubling you over.  You stagger around, struggling to pull open your " + player.armorName + ".  In shock, you barely register the sight before your eyes: <b>You have four balls.</b>", false);
+					outputText("\n\nIncredible pain scythes through your crotch, doubling you over.  You stagger around, struggling to pull open your [armor].  In shock, you barely register the sight before your eyes: <b>You have four balls.</b>", false);
 				}
 				if (player.balls == 0) {
 					player.balls = 2;
-					outputText("\n\nIncredible pain scythes through your crotch, doubling you over.  You stagger around, struggling to pull open your " + player.armorName + ".  In shock, you barely register the sight before your eyes: <b>You have balls!</b>", false);
+					outputText("\n\nIncredible pain scythes through your crotch, doubling you over.  You stagger around, struggling to pull open your [armor].  In shock, you barely register the sight before your eyes: <b>You have balls!</b>", false);
 					player.ballSize = 1;
 				}
 				changes++;
@@ -4037,7 +4037,7 @@ import classes.CockTypesEnum;
 			if (!large) {
 				//Grow nipples
 				if (player.nippleLength < 3 && player.biggestTitSize() > 0) {
-					outputText("\n\nYour nipples engorge, prodding hard against the inside of your " + player.armorName + ".  Abruptly you realize they've gotten almost a quarter inch longer.", false);
+					outputText("\n\nYour nipples engorge, prodding hard against the inside of your [armor].  Abruptly you realize they've gotten almost a quarter inch longer.", false);
 					player.nippleLength += .2;
 					dynStats("lus", 15);
 				}
@@ -4047,7 +4047,7 @@ import classes.CockTypesEnum;
 			else {
 				//Grow nipples
 				if (player.nippleLength < 3 && player.biggestTitSize() > 0) {
-					outputText("\n\nYour nipples engorge, prodding hard against the inside of your " + player.armorName + ".  Abruptly you realize they've grown more than an additional quarter-inch.", false);
+					outputText("\n\nYour nipples engorge, prodding hard against the inside of your [armor].  Abruptly you realize they've grown more than an additional quarter-inch.", false);
 					player.nippleLength += (rand(2) + 3) / 10;
 					dynStats("lus", 15);
 				}
@@ -4080,10 +4080,8 @@ import classes.CockTypesEnum;
 					else if (player.hasFur()) outputText(" falls out in clumps, revealing smooth skin underneath.", false);
 					else if (player.hasScales()) outputText(" begins dropping to the ground in a pile around you, revealing smooth skin underneath.", false);
 					else outputText(" shifts and changes into flawless smooth skin.", false);
-					player.skinDesc = "skin";
-					player.skinAdj = "smooth";
-					if (player.skinTone == "rough gray") player.skinTone = "gray";
-					player.skinType = SKIN_TYPE_PLAIN;
+					player.skin.setBaseOnly({type:SKIN_BASE_PLAIN,adj:"smooth"});
+					if (player.skin.base.color == "rough gray") player.skin.base.color = "gray";
 				}
 				//chance of hair change
 				else {
@@ -4133,10 +4131,8 @@ import classes.CockTypesEnum;
 					else if (player.hasFur()) outputText(" falls out in clumps, revealing smooth skin underneath.", false);
 					else if (player.hasScales()) outputText(" begins dropping to the ground in a pile around you, revealing smooth skin underneath.", false);
 					else outputText(" shifts and changes into flawless smooth skin.", false);
-					player.skinDesc = "skin";
-					player.skinAdj = "smooth";
-					if (player.skinTone == "rough gray") player.skinTone = "gray";
-					player.skinType = SKIN_TYPE_PLAIN;
+					player.skin.setBaseOnly({type:SKIN_BASE_PLAIN,adj:"smooth"});
+					if (player.skin.base.color == "rough gray") player.skin.base.color = "gray";
 				}
 				//chance of hair change
 				else {
@@ -4584,7 +4580,7 @@ import classes.CockTypesEnum;
 				if (player.breastRows[0].nipplesPerBreast == 1) {
 					changes++;
 					player.breastRows[0].nipplesPerBreast = 4;
-					outputText("\n\nYour " + nippleDescript(0) + "s tingle and itch.  You pull back your " + player.armorName + " and watch in shock as they split into four distinct nipples!  <b>You now have four nipples on each side of your chest!</b>", false);
+					outputText("\n\nYour " + nippleDescript(0) + "s tingle and itch.  You pull back your [armor] and watch in shock as they split into four distinct nipples!  <b>You now have four nipples on each side of your chest!</b>", false);
 					if (player.breastRows.length >= 2 && player.breastRows[1].nipplesPerBreast == 1) {
 						outputText("A moment later your second row of " + breastDescript(1) + " does the same.  <b>You have sixteen nipples now!</b>", false);
 						player.breastRows[1].nipplesPerBreast = 4;
@@ -4608,19 +4604,19 @@ import classes.CockTypesEnum;
 				//QUAD DAMAGE IF WEIRD SHIT BROKE BEFORE
 				else if (player.breastRows.length > 1 && player.breastRows[1].nipplesPerBreast == 1) {
 					if (player.breastRows[1].nipplesPerBreast == 1) {
-						outputText("\n\nYour second row of " + breastDescript(1) + " tingle and itch.  You pull back your " + player.armorName + " and watch in shock as your " + nippleDescript(1) + " split into four distinct nipples!  <b>You now have four nipples on each breast in your second row of breasts</b>.", false);
+						outputText("\n\nYour second row of " + breastDescript(1) + " tingle and itch.  You pull back your [armor] and watch in shock as your " + nippleDescript(1) + " split into four distinct nipples!  <b>You now have four nipples on each breast in your second row of breasts</b>.", false);
 						player.breastRows[1].nipplesPerBreast = 4;
 					}
 				}
 				else if (player.breastRows.length > 2 && player.breastRows[2].nipplesPerBreast == 1) {
 					if (player.breastRows[2].nipplesPerBreast == 1) {
-						outputText("\n\nYour third row of " + breastDescript(2) + " tingle and itch.  You pull back your " + player.armorName + " and watch in shock as your " + nippleDescript(2) + " split into four distinct nipples!  <b>You now have four nipples on each breast in your third row of breasts</b>.", false);
+						outputText("\n\nYour third row of " + breastDescript(2) + " tingle and itch.  You pull back your [armor] and watch in shock as your " + nippleDescript(2) + " split into four distinct nipples!  <b>You now have four nipples on each breast in your third row of breasts</b>.", false);
 						player.breastRows[2].nipplesPerBreast = 4;
 					}
 				}
 				else if (player.breastRows.length > 3 && player.breastRows[3].nipplesPerBreast == 1) {
 					if (player.breastRows[3].nipplesPerBreast == 1) {
-						outputText("\n\nYour fourth row of " + breastDescript(3) + " tingle and itch.  You pull back your " + player.armorName + " and watch in shock as your " + nippleDescript(3) + " split into four distinct nipples!  <b>You now have four nipples on each breast in your fourth row of breasts</b>.", false);
+						outputText("\n\nYour fourth row of " + breastDescript(3) + " tingle and itch.  You pull back your [armor] and watch in shock as your " + nippleDescript(3) + " split into four distinct nipples!  <b>You now have four nipples on each breast in your fourth row of breasts</b>.", false);
 						player.breastRows[3].nipplesPerBreast = 4;
 					}
 				}
@@ -5006,7 +5002,7 @@ import classes.CockTypesEnum;
 			}
 			//ORGAZMO
 			if (player.lust >= player.maxLust() && !kGAMECLASS.inCombat) {
-				outputText("\n\nThe arousal from the potion overwhelms your senses and causes you to spontaneously orgasm.  You rip off your " + player.armorName + " and look down as your ", false);
+				outputText("\n\nThe arousal from the potion overwhelms your senses and causes you to spontaneously orgasm.  You rip off your [armor] and look down as your ", false);
 				if (player.cocks.length > 0) {
 					outputText(multiCockDescriptLight() + " erupts in front of you, liberally spraying the ground around you.  ", false);
 				}
@@ -5278,7 +5274,7 @@ import classes.CockTypesEnum;
 			if (player.hairType == 3 && !player.hasGooSkin()) {
 				if (player.hasPlainSkinOnly()) outputText("\n\nYou sigh, feeling your [armor] sink into you as your skin becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!", false);
 				else if (player.hasFur()) outputText("\n\nYou sigh, suddenly feeling your fur become hot and wet.  You look down as your [armor] sinks partway into you.  With a start you realize your fur has melted away, melding into the slime-like coating that now serves as your skin.  You've become partly liquid and incredibly gooey!", false);
-				else if (player.hasScales()) outputText("\n\nYou sigh, feeling slippery wetness over your scales.  You reach to scratch it and come away with a slippery wet coating.  Your scales have transformed into a slimy goop!  Looking closer, you realize your entire body has become far more liquid in nature, and is semi-solid.  Your " + player.armorName + " has even sunk partway into you.", false);
+				else if (player.hasScales()) outputText("\n\nYou sigh, feeling slippery wetness over your scales.  You reach to scratch it and come away with a slippery wet coating.  Your scales have transformed into a slimy goop!  Looking closer, you realize your entire body has become far more liquid in nature, and is semi-solid.  Your [armor] has even sunk partway into you.", false);
 				else if (player.skin.base.type != SKIN_BASE_GOO) outputText("\n\nYou sigh, feeling your [armor] sink into you as your [skin] becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!", false);
 				player.skin.setBaseOnly({adj:"slimy",type:SKIN_BASE_GOO});
 				if (!InCollection(player.skin.base.color,gooSkinColors)) {
@@ -5391,7 +5387,7 @@ import classes.CockTypesEnum;
 				//(dick)
 				else if (player.hasCock()) outputText("\n\nAn itch starts on your groin, just below your " + multiCockDescriptLight() + ". You pull the manhood aside to give you a better view, and you're able to watch as <b>your skin splits to give you a new vagina, complete with a tiny clit.</b>", false);
 				//(neither)
-				else outputText("\n\nAn itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your " + player.armorName + " to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>", false);
+				else outputText("\n\nAn itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your [armor] to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>", false);
 				player.createVagina();
 				player.clitLength = .25;
 				dynStats("sen", 10);
@@ -5447,7 +5443,7 @@ import classes.CockTypesEnum;
 			//Tail TF
 			if (player.tailType != TAIL_TYPE_SHARK && player.tailType != TAIL_TYPE_GARGOYLE && rand(3) == 0 && changes < changeLimit) {
 				changes++;
-				if (player.tailType == TAIL_TYPE_NONE) outputText("\n\nJets of pain shoot down your spine, causing you to gasp in surprise and fall to your hands and knees. Feeling a bulging at the end of your back, you lower your " + player.armorName + " down just in time for a fully formed shark tail to burst through. You swish it around a few times, surprised by how flexible it is. After some modifications to your clothing, you're ready to go with your brand new shark tail.", false);
+				if (player.tailType == TAIL_TYPE_NONE) outputText("\n\nJets of pain shoot down your spine, causing you to gasp in surprise and fall to your hands and knees. Feeling a bulging at the end of your back, you lower your [armor] down just in time for a fully formed shark tail to burst through. You swish it around a few times, surprised by how flexible it is. After some modifications to your clothing, you're ready to go with your brand new shark tail.", false);
 				else outputText("\n\nJets of pain shoot down your spine into your tail.  You feel the tail bulging out until it explodes into a large and flexible shark-tail.  You swish it about experimentally, and find it quite easy to control.", false);
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedSharkTail)) {
 					outputText("\n\n<b>Genetic Memory: Shark Tail - Memorized!</b>\n\n");
@@ -5477,16 +5473,12 @@ import classes.CockTypesEnum;
 				else if (player.skinType == SKIN_TYPE_PLAIN) outputText("You abruptly stop moving and gasp sharply as a shudder goes up your entire frame. Your skin begins to shift and morph, growing slightly thicker and became covered with a tiny shiny grey scales.  ", false);
 				if (type == 0) {
 					outputText("It feels oddly rough too, comparable to that of a marine mammal. You smile and run your hands across your new shark skin.", false);
-					player.skinType = SKIN_TYPE_SCALES;
-					player.skinDesc = "scales";
-					player.skinTone = "rough gray";
+					player.skin.growCoat(SKIN_COAT_SCALES,{color:"rough gray"});
 					changes++;
 				}
 				else {
 					outputText("Your scales begins to tingle and itch, before rapidly shifting to a shiny orange color, marked by random black scales looking like a stripes. You take a quick look in a nearby pool of water, to see your skin has morphed in appearance and texture to become more like a tigershark!", false);
-					player.skinType = SKIN_TYPE_SCALES;
-					player.skinDesc = "scales";
-					player.skinTone = "orange and black";
+					player.skin.growCoat(SKIN_COAT_SCALES,{color:"orange and black"});
 					changes++;
 				}
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedScales)) {
@@ -5510,7 +5502,7 @@ import classes.CockTypesEnum;
 			}
 			//Arms
 			if (player.lowerBody == LOWER_BODY_TYPE_SHARK && !InCollection(player.armType, ARM_TYPE_SHARK, ARM_TYPE_GARGOYLE) && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nYou watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form with exception places between your finger which starting show signs to growing webbing. Soon after you start sweating profusely and panting loudly, feeling the space near your elbows shifting about. You hastily remove your " + player.armorName + " just in time before a strange fin-like structure bursts from your forearms. You examine them carefully and make a few modifications to your " + player.armorName + " to accommodate your new fins. <b>You now have shark arms.</b>", false);
+				outputText("\n\nYou watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form with exception places between your finger which starting show signs to growing webbing. Soon after you start sweating profusely and panting loudly, feeling the space near your elbows shifting about. You hastily remove your [armor] just in time before a strange fin-like structure bursts from your forearms. You examine them carefully and make a few modifications to your [armor] to accommodate your new fins. <b>You now have shark arms.</b>", false);
 				player.armType = ARM_TYPE_SHARK;
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedSharkArms)) {
 					outputText("\n\n<b>Genetic Memory: Shark Arms - Memorized!</b>\n\n");
@@ -5521,7 +5513,7 @@ import classes.CockTypesEnum;
 			//FINZ
 			if (player.rearBody != REAR_BODY_SHARK_FIN && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\n", false);
-				outputText("You groan and slump down in pain, almost instantly regretting eating the tooth. You start sweating profusely and panting loudly, feeling the space between your shoulder blades shifting about. You hastily remove your " + player.armorName + " just in time before a strange fin-like structure bursts from in-between your shoulders. You examine it carefully and make a few modifications to your " + player.armorName + " to accommodate your new fin.", false);
+				outputText("You groan and slump down in pain, almost instantly regretting eating the tooth. You start sweating profusely and panting loudly, feeling the space between your shoulder blades shifting about. You hastily remove your [armor] just in time before a strange fin-like structure bursts from in-between your shoulders. You examine it carefully and make a few modifications to your [armor] to accommodate your new fin.", false);
 				player.rearBody = REAR_BODY_SHARK_FIN;
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedSharkFin)) {
 					outputText("\n\n<b>Genetic Memory: Shark Fin - Memorized!</b>\n\n");
@@ -5914,7 +5906,7 @@ import classes.CockTypesEnum;
 			}
 			//Propah Wings
 			if (type == 2 && player.wingType == WING_TYPE_NONE && changes < changeLimit && (type == 1 || player.armType == ARM_TYPE_HARPY) && rand(4) == 0) {
-				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your " + player.skinDesc + ". It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your " + player.armorName + ". Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, " + player.hairColor + " wings.</b>", false);
+				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your " + player.skinDesc + ". It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, " + player.hairColor + " wings.</b>", false);
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedHarpyWings)) {
 					outputText("\n\n<b>Genetic Memory: Harpy Wings - Memorized!</b>\n\n");
 					player.createStatusAffect(StatusAffects.UnlockedHarpyWings, 0, 0, 0, 0);
@@ -5950,45 +5942,22 @@ import classes.CockTypesEnum;
 			}
 			//Scales with color changes to red, green, white, blue, or black.  Rarely: purple or silver.
 			if (player.skinType != SKIN_TYPE_SCALES && ((type == 0 && player.eyeType == EYES_GORGON) || (type == 1 && player.wingType == WING_TYPE_DRACONIC_LARGE) || (type == 2 && player.hairType == 1)) && changes < changeLimit && rand(5) == 0) {
-				//(fur)
+				//set new skinTone
+				if (rand(10) == 0) {
+					color = randomChoice("purple", "silver");
+				}
+				//non rare skinTone
+				else {
+					color = randomChoice("red", "green", "white", "blue", "black");
+				}
 				if (player.hasFur()) {
-					//set new skinTone
-					if (rand(10) == 0) {
-						if (rand(2) == 0) player.skinTone = "purple";
-						else player.skinTone = "silver";
-					}
-					//non rare skinTone
-					else {
-						temp = rand(5);
-						if (temp == 0) player.skinTone = "red";
-						else if (temp == 1) player.skinTone = "green";
-						else if (temp == 2) player.skinTone = "white";
-						else if (temp == 3) player.skinTone = "blue";
-						else player.skinTone = "black";
-					}
-					outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + player.skinTone + " scales covering most of your body.  The rest of the fur is easy to remove.  <b>You're now covered in scales from head to waist.</b>", false);
+					outputText("\n\nYou scratch yourself, and come away with a large clump of [skin coat.color] fur.  Panicked, you look down and realize that your fur is falling out in huge clumps.  It itches like mad, and you scratch your body relentlessly, shedding the remaining fur with alarming speed.  Underneath the fur your skin feels incredibly smooth, and as more and more of the stuff comes off, you discover a seamless layer of " + color + " scales covering most of your body.  The rest of the fur is easy to remove.  <b>You're now covered in scales from head to waist.</b>", false);
 				}
 				//(no fur)
 				else {
-					outputText("\n\nYou idly reach back to scratch yourself and nearly jump out of your " + player.armorName + " when you hit something hard.  A quick glance down reveals that scales are growing out of your " + player.skinTone + " skin with alarming speed.  As you watch, the surface of your skin is covered in smooth scales.  They interlink together so well that they may as well be seamless.  You peel back your " + player.armorName + " and the transformation has already finished on the rest of your body.  <b>You're covered from head to waist in shiny ", false);
-					//set new skinTone
-					if (rand(10) == 0) {
-						if (rand(2) == 0) player.skinTone = "purple";
-						else player.skinTone = "silver";
-					}
-					//non rare skinTone
-					else {
-						temp = rand(5);
-						if (temp == 0) player.skinTone = "red";
-						else if (temp == 1) player.skinTone = "green";
-						else if (temp == 2) player.skinTone = "white";
-						else if (temp == 3) player.skinTone = "blue";
-						else player.skinTone = "black";
-					}
-					outputText(player.skinTone + " scales.</b>", false);
+					outputText("\n\nYou idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard.  A quick glance down reveals that scales are growing out of your " + color + " skin with alarming speed.  As you watch, the surface of your skin is covered in smooth scales.  They interlink together so well that they may as well be seamless.  You peel back your [armor] and the transformation has already finished on the rest of your body.  <b>You're covered from head to waist in shiny ", false);
 				}
-				player.skinType = SKIN_TYPE_SCALES;
-				player.skinDesc = "scales";
+				player.skin.growCoat(SKIN_COAT_SCALES,{color:color});
 				changes++;
 			}
 			if (changes == 0) {
@@ -6189,8 +6158,7 @@ import classes.CockTypesEnum;
 				if (player.hasScales()) outputText("are", false);
 				else outputText("is", false);
 				outputText(" falling to the ground, revealing flawless skin below.  <b>You now have normal skin.</b>", false);
-				player.skinType = SKIN_TYPE_PLAIN;
-				player.skinDesc = "skin";
+				player.skin.setBaseOnly({type:SKIN_BASE_PLAIN});
 				changes++;
 			}
 			//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
@@ -6326,7 +6294,7 @@ import classes.CockTypesEnum;
 			//Remove additional cocks
 			if (player.cocks.length > 1 && rand(3) == 0 && changes < changeLimit) {
 				player.killCocks(1);
-				outputText("\n\nYou have a strange feeling as your crotch tingles.  Opening your " + player.armorName + ", <b>you realize that one of your cocks have vanished completely!</b>", false);
+				outputText("\n\nYou have a strange feeling as your crotch tingles.  Opening your [armor], <b>you realize that one of your cocks have vanished completely!</b>", false);
 				changes++;
 			}
 			//Remove additional balls
@@ -6345,7 +6313,7 @@ import classes.CockTypesEnum;
 			//Change cock back to normal
 			if (player.hasCock() && changes < changeLimit) {
 				if (rand(3) == 0 && player.cocks[0].cockType != CockTypesEnum.HUMAN) {
-					outputText("\n\nA strange tingling begins behind your " + cockDescript(0) + ", slowly crawling up across its entire length.  While neither particularly arousing nor uncomfortable, you do shift nervously as the feeling intensifies.  You resist the urge to undo your " + player.armorName + " to check, but by the feel of it, your penis is shifting form.  Eventually the transformative sensation fades, <b>leaving you with a completely human penis.</b>", false);
+					outputText("\n\nA strange tingling begins behind your " + cockDescript(0) + ", slowly crawling up across its entire length.  While neither particularly arousing nor uncomfortable, you do shift nervously as the feeling intensifies.  You resist the urge to undo your [armor] to check, but by the feel of it, your penis is shifting form.  Eventually the transformative sensation fades, <b>leaving you with a completely human penis.</b>", false);
 					player.cocks[0].cockType = CockTypesEnum.HUMAN;
 					changes++;
 				}
@@ -6695,7 +6663,7 @@ import classes.CockTypesEnum;
 			if (player.tailType != TAIL_TYPE_CAT && player.earType == EARS_CAT && rand(5) == 0 && changes < changeLimit) {
 				if (player.tailType == TAIL_TYPE_NONE) {
 					temp = rand(3);
-					if (temp == 0) outputText("\n\nA pressure builds in your backside. You feel under your " + player.armorName + " and discover an odd bump that seems to be growing larger by the moment. In seconds it passes between your fingers, bursts out the back of your clothes and grows most of the way to the ground. A thick coat of fur springs up to cover your new tail. You instinctively keep adjusting it to improve your balance. <b>You now have a cat-tail.</b>", false);
+					if (temp == 0) outputText("\n\nA pressure builds in your backside. You feel under your [armor] and discover an odd bump that seems to be growing larger by the moment. In seconds it passes between your fingers, bursts out the back of your clothes and grows most of the way to the ground. A thick coat of fur springs up to cover your new tail. You instinctively keep adjusting it to improve your balance. <b>You now have a cat-tail.</b>", false);
 					if (temp == 1) outputText("\n\nYou feel your backside shift and change, flesh molding and displacing into a long, flexible tail! <b>You now have a cat tail.</b>", false);
 					if (temp == 2) outputText("\n\nYou feel an odd tingling in your spine and your tail bone starts to throb and then swell. Within a few moments it begins to grow, adding new bones to your spine. Before you know it, you have a tail. Just before you think it's over, the tail begins to sprout soft, glossy [skin coat.color] fur. <b>You now have a cat tail.</b>", false);
 				}
@@ -6850,7 +6818,7 @@ import classes.CockTypesEnum;
 					//Stop loopahn when dick be found
 					if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
 				}
-				outputText("\n\nA slow tingle warms your groin.  Before it can progress any further, you yank back your " + player.armorName + " to investigate.  Your " + cockDescript(temp2) + " is changing!  It ripples loosely from ", false);
+				outputText("\n\nA slow tingle warms your groin.  Before it can progress any further, you yank back your [armor] to investigate.  Your " + cockDescript(temp2) + " is changing!  It ripples loosely from ", false);
 				if (player.hasSheath()) outputText("sheath ", false);
 				else outputText("base ", false);
 				outputText("to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker ", false);
@@ -6874,7 +6842,7 @@ import classes.CockTypesEnum;
 			//(CHANGE OTHER DICK)
 			//Requires 1 lizard cock, multiple cocks
 			if (player.cockTotal() > 1 && player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
-				outputText("\n\nA familiar tingle starts in your crotch, and before you can miss the show, you pull open your " + player.armorName + ".  As if operating on a cue, ", false);
+				outputText("\n\nA familiar tingle starts in your crotch, and before you can miss the show, you pull open your [armor].  As if operating on a cue, ", false);
 				for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
 					//Stop loopahn when dick be found
 					if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
@@ -6958,7 +6926,7 @@ import classes.CockTypesEnum;
 			}
 			//-Nipples reduction to 1 per tit.
 			if (player.averageNipplesPerBreast() > 1 && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nA chill runs over your " + allBreastsDescript() + " and vanishes.  You stick a hand under your " + player.armorName + " and discover that your extra nipples are missing!  You're down to just one per ", false);
+				outputText("\n\nA chill runs over your " + allBreastsDescript() + " and vanishes.  You stick a hand under your [armor] and discover that your extra nipples are missing!  You're down to just one per ", false);
 				if (player.biggestTitSize() < 1) outputText("'breast'.", false);
 				else outputText("breast.", false);
 				changes++;
@@ -7145,7 +7113,7 @@ import classes.CockTypesEnum;
 				}
 				//(no fur)
 				else {
-					outputText("\n\nYou idly reach back to scratch yourself and nearly jump out of your " + player.armorName + " when you hit something hard.  A quick glance down reveals that scales are growing out of your " + player.skinTone + " skin with alarming speed.  As you watch, the surface of your skin is covered in smooth scales.  They interlink together so well that they may as well be seamless.  You peel back your " + player.armorName + " and the transformation has already finished on the rest of your body.  <b>You're covered from head to toe in shiny " + color + " scales.</b>", false);
+					outputText("\n\nYou idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard.  A quick glance down reveals that scales are growing out of your " + player.skinTone + " skin with alarming speed.  As you watch, the surface of your skin is covered in smooth scales.  They interlink together so well that they may as well be seamless.  You peel back your [armor] and the transformation has already finished on the rest of your body.  <b>You're covered from head to toe in shiny " + color + " scales.</b>", false);
 				}
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedScales)) {
 					outputText("\n\n<b>Genetic Memory: Scales - Memorized!</b>\n\n");
@@ -7257,7 +7225,7 @@ import classes.CockTypesEnum;
 					//Stop loopahn when dick be found
 					if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
 				}
-				outputText("\n\nA slow tingle warms your groin.  Before it can progress any further, you yank back your " + player.armorName + " to investigate.  Your " + cockDescript(temp2) + " is changing!  It ripples loosely from ", false);
+				outputText("\n\nA slow tingle warms your groin.  Before it can progress any further, you yank back your [armor] to investigate.  Your " + cockDescript(temp2) + " is changing!  It ripples loosely from ", false);
 				if (player.hasSheath()) outputText("sheath ", false);
 				else outputText("base ", false);
 				outputText("to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker ", false);
@@ -7281,7 +7249,7 @@ import classes.CockTypesEnum;
 			//(CHANGE OTHER DICK)
 			//Requires 1 lizard cock, multiple cocks
 			if (player.cockTotal() > 1 && player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
-				outputText("\n\nA familiar tingle starts in your crotch, and before you can miss the show, you pull open your " + player.armorName + ".  As if operating on a cue, ", false);
+				outputText("\n\nA familiar tingle starts in your crotch, and before you can miss the show, you pull open your [armor].  As if operating on a cue, ", false);
 				for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
 					//Stop loopahn when dick be found
 					if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
@@ -7324,7 +7292,7 @@ import classes.CockTypesEnum;
 			}
 			//-Nipples reduction to 1 per tit.
 			if (player.averageNipplesPerBreast() > 1 && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nA chill runs over your " + allBreastsDescript() + " and vanishes.  You stick a hand under your " + player.armorName + " and discover that your extra nipples are missing!  You're down to just one per ", false);
+				outputText("\n\nA chill runs over your " + allBreastsDescript() + " and vanishes.  You stick a hand under your [armor] and discover that your extra nipples are missing!  You're down to just one per ", false);
 				if (player.biggestTitSize() < 1) outputText("'breast'.", false);
 				else outputText("breast.", false);
 				changes++;
@@ -7507,7 +7475,7 @@ import classes.CockTypesEnum;
 					//Stop loopahn when dick be found
 					if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
 				}
-				outputText("\n\nA slow tingle warms your groin.  Before it can progress any further, you yank back your " + player.armorName + " to investigate.  Your " + cockDescript(temp2) + " is changing!  It ripples loosely from ", false);
+				outputText("\n\nA slow tingle warms your groin.  Before it can progress any further, you yank back your [armor] to investigate.  Your " + cockDescript(temp2) + " is changing!  It ripples loosely from ", false);
 				if (player.hasSheath()) outputText("sheath ", false);
 				else outputText("base ", false);
 				outputText("to tip, undulating and convulsing as its color lightens, darkens, and finally settles on a purplish hue.  Your " + Appearance.cockNoun(CockTypesEnum.HUMAN) + " resolves itself into a bulbous form, with a slightly pointed tip.  The 'bulbs' throughout its shape look like they would provide an interesting ride for your sexual partners, but the perverse, alien pecker ", false);
@@ -7531,7 +7499,7 @@ import classes.CockTypesEnum;
 			//(CHANGE OTHER DICK)
 			//Requires 1 lizard cock, multiple cocks
 			if (player.cockTotal() > 1 && player.lizardCocks() > 0 && player.cockTotal() > player.lizardCocks() && rand(4) == 0 && changes < changeLimit) {
-				outputText("\n\nA familiar tingle starts in your crotch, and before you can miss the show, you pull open your " + player.armorName + ".  As if operating on a cue, ", false);
+				outputText("\n\nA familiar tingle starts in your crotch, and before you can miss the show, you pull open your [armor].  As if operating on a cue, ", false);
 				for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
 					//Stop loopahn when dick be found
 					if (player.cocks[temp2].cockType != CockTypesEnum.LIZARD) break;
@@ -7559,7 +7527,7 @@ import classes.CockTypesEnum;
 				//(dick)
 				else if (player.hasCock()) outputText("\n\nAn itch starts on your groin, just below your " + multiCockDescriptLight() + ". You pull the manhood aside to give you a better view, and you're able to watch as <b>your skin splits to give you a new vagina, complete with a tiny clit.</b>", false);
 				//(neither)
-				else outputText("\n\nAn itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your " + player.armorName + " to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>", false);
+				else outputText("\n\nAn itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your [armor] to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>", false);
 				player.createVagina();
 				player.clitLength = .25;
 				dynStats("sen", 10);
@@ -7600,7 +7568,7 @@ import classes.CockTypesEnum;
 			//-Grow tits to a B-cup if below.
 			if (changes < changeLimit && player.breastRows[0].breastRating < 2 && rand(4) == 0) {
 				changes++;
-				outputText("\n\nYour chest starts to tingle, the " + player.skinDesc + " warming under your " + player.armorName + ". Reaching inside to feel the tender flesh, you're quite surprised when it puffs into your fingers, growing larger and larger until it settles into a pair of B-cup breasts.", false);
+				outputText("\n\nYour chest starts to tingle, the " + player.skinDesc + " warming under your [armor]. Reaching inside to feel the tender flesh, you're quite surprised when it puffs into your fingers, growing larger and larger until it settles into a pair of B-cup breasts.", false);
 				if (player.breastRows[0].breastRating < 1) outputText("  <b>You have breasts now!</b>", false);
 				player.breastRows[0].breastRating = 2;
 			}
@@ -7620,7 +7588,7 @@ import classes.CockTypesEnum;
 			if (player.buttRating < 8 && changes < changeLimit && rand(4) == 0) {
 				player.buttRating++;
 				changes++;
-				outputText("\n\nA slight jiggle works through your rear, but instead of stopping it starts again. You can actually feel your " + player.armorName + " being filled out by the growing cheeks. When it stops, you find yourself the proud owner of a " + buttDescript() + ".", false);
+				outputText("\n\nA slight jiggle works through your rear, but instead of stopping it starts again. You can actually feel your [armor] being filled out by the growing cheeks. When it stops, you find yourself the proud owner of a " + buttDescript() + ".", false);
 			}
 			//-Narrow booty if crazy huge.
 			if (player.buttRating >= 14 && changes < changeLimit && rand(4) == 0) {
@@ -7661,7 +7629,7 @@ import classes.CockTypesEnum;
 			}
 			//Wings
 			if (player.wingType == WING_TYPE_NONE && changes < changeLimit && player.armType == ARM_TYPE_PHOENIX && rand(4) == 0) {
-				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your " + player.skinDesc + ". It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your " + player.armorName + ". Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, crimson wings.</b>", false);
+				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your " + player.skinDesc + ". It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, crimson wings.</b>", false);
 				player.wingType = WING_TYPE_FEATHERED_PHOENIX;
 				player.wingDesc = "large crimson feathered";
 				changes++;
@@ -7811,10 +7779,10 @@ import classes.CockTypesEnum;
 					outputText("\n\nYou fan your neck and start to pant as your " + player.skinTone + " skin begins to flush red with heat", false);
 					if (player.skinType > SKIN_TYPE_PLAIN) outputText(" through your " + player.skinDesc, false);
 					outputText(".  ", false);
-					if (player.gender == 1) outputText("Compression tightens down on " + sMultiCockDesc() + " as it strains against your " + player.armorName + ".  You struggle to fight down your heightened libido, but it's hard – so very hard.", false);
+					if (player.gender == 1) outputText("Compression tightens down on " + sMultiCockDesc() + " as it strains against your [armor].  You struggle to fight down your heightened libido, but it's hard – so very hard.", false);
 					else if (player.gender == 0) outputText("Sexual hunger seems to gnaw at your " + assholeDescript() + ", demanding it be filled, but you try to resist your heightened libido.  It's so very, very hard.", false);
 					else if (player.gender == 2) outputText("Moisture grows between your rapidly-engorging vulva, making you squish and squirm as you try to fight down your heightened libido, but it's hard – so very hard.", false);
-					else outputText("Steamy moisture and tight compression war for your awareness in your groin as " + sMultiCockDesc() + " starts to strain against your " + player.armorName + ".  Your vulva engorges with blood, growing slicker and wetter.  You try so hard to fight down your heightened libido, but it's so very, very hard.  The urge to breed lingers in your mind, threatening to rear its ugly head.", false);
+					else outputText("Steamy moisture and tight compression war for your awareness in your groin as " + sMultiCockDesc() + " starts to strain against your [armor].  Your vulva engorges with blood, growing slicker and wetter.  You try so hard to fight down your heightened libido, but it's so very, very hard.  The urge to breed lingers in your mind, threatening to rear its ugly head.", false);
 				}
 				//MEGALIBIDO
 				else {
@@ -7840,7 +7808,7 @@ import classes.CockTypesEnum;
 				//(BIG boost 1/3 chance)
 				else {
 					dynStats("sen", 15);
-					outputText("Every movement of your body seems to bring heightened waves of sensation that make you woozy.  Your " + player.armorName + " rubs your " + nippleDescript(0) + "s deliciously", false);
+					outputText("Every movement of your body seems to bring heightened waves of sensation that make you woozy.  Your [armor] rubs your " + nippleDescript(0) + "s deliciously", false);
 					if (player.hasFuckableNipples()) {
 						outputText(", sticking to the ", false);
 						if (player.biggestLactation() > 2) outputText("milk-leaking nipple-twats", false);
@@ -8051,10 +8019,10 @@ import classes.CockTypesEnum;
 					outputText("\n\nYou fan your neck and start to pant as your " + player.skinTone + " skin begins to flush red with heat", false);
 					if (player.skinType > SKIN_TYPE_PLAIN) outputText(" through your " + player.skinDesc, false);
 					outputText(".  ", false);
-					if (player.gender == 1) outputText("Compression tightens down on " + sMultiCockDesc() + " as it strains against your " + player.armorName + ".  You struggle to fight down your heightened libido, but it's hard – so very hard.", false);
+					if (player.gender == 1) outputText("Compression tightens down on " + sMultiCockDesc() + " as it strains against your [armor].  You struggle to fight down your heightened libido, but it's hard – so very hard.", false);
 					else if (player.gender == 0) outputText("Sexual hunger seems to gnaw at your " + assholeDescript() + ", demanding it be filled, but you try to resist your heightened libido.  It's so very, very hard.", false);
 					else if (player.gender == 2) outputText("Moisture grows between your rapidly-engorging vulva, making you squish and squirm as you try to fight down your heightened libido, but it's hard – so very hard.", false);
-					else outputText("Steamy moisture and tight compression war for your awareness in your groin as " + sMultiCockDesc() + " starts to strain against your " + player.armorName + ".  Your vulva engorges with blood, growing slicker and wetter.  You try so hard to fight down your heightened libido, but it's so very, very hard.  The urge to breed lingers in your mind, threatening to rear its ugly head.", false);
+					else outputText("Steamy moisture and tight compression war for your awareness in your groin as " + sMultiCockDesc() + " starts to strain against your [armor].  Your vulva engorges with blood, growing slicker and wetter.  You try so hard to fight down your heightened libido, but it's so very, very hard.  The urge to breed lingers in your mind, threatening to rear its ugly head.", false);
 				}
 				//MEGALIBIDO
 				else {
@@ -8156,12 +8124,12 @@ import classes.CockTypesEnum;
 								if (player.cockTotal() > 2) outputText("es rub ", false);
 								else outputText("rubs ", false);
 								outputText("the skin over her taut, empty belly, drooling your need atop her.  ", false);
-								outputText("You jolt from the vision unexpectedly, finding your " + sMultiCockDesc() + " is as hard as it was in the dream. The inside of your " + player.armorName + " is quite messy from all the pre-cum you've drooled. Perhaps you can find a harpy nearby to lie with.", false);
+								outputText("You jolt from the vision unexpectedly, finding your " + sMultiCockDesc() + " is as hard as it was in the dream. The inside of your [armor] is quite messy from all the pre-cum you've drooled. Perhaps you can find a harpy nearby to lie with.", false);
 							}
 						}
 						//(male 2)
 						else {
-							outputText("In your fantasy you're lying back in the nest your harem built for you, stroking your dick and watching the sexy bird-girl spread her thighs to deposit another egg onto the pile. The lewd moans do nothing to sate your need, and you beckon for another submissive harpy to approach. She does, her thick thighs swaying to show her understanding of your needs. The bird-woman crawls into your lap, sinking down atop your shaft to snuggle it with her molten heat. She begins kissing you, smearing your mouth with her drugged lipstick until you release the first of many loads. You sigh, riding the bliss, secure in the knowledge that this 'wife' won't let up until she's gravid with another egg. Then it'll be her sister-wife's turn. The tightness of " + sMultiCockDesc() + " inside your " + player.armorName + " rouses you from the dream, reminding you that you're just standing there, leaking your need into your gear.", false);
+							outputText("In your fantasy you're lying back in the nest your harem built for you, stroking your dick and watching the sexy bird-girl spread her thighs to deposit another egg onto the pile. The lewd moans do nothing to sate your need, and you beckon for another submissive harpy to approach. She does, her thick thighs swaying to show her understanding of your needs. The bird-woman crawls into your lap, sinking down atop your shaft to snuggle it with her molten heat. She begins kissing you, smearing your mouth with her drugged lipstick until you release the first of many loads. You sigh, riding the bliss, secure in the knowledge that this 'wife' won't let up until she's gravid with another egg. Then it'll be her sister-wife's turn. The tightness of " + sMultiCockDesc() + " inside your [armor] rouses you from the dream, reminding you that you're just standing there, leaking your need into your gear.", false);
 						}
 					}
 					//Cunts!
@@ -8172,11 +8140,11 @@ import classes.CockTypesEnum;
 							if (player.hasFuckableNipples()) outputText("and pussy leaking over ", false);
 							else if (player.biggestLactation() >= 1.5) outputText("dripping milk inside ", false);
 							else outputText("rubbing inside ", false);
-							outputText("your " + player.armorName + " shocks you from the dream, leaving you with nothing but the moistness of your loins for company. Maybe next year you'll find the mate of your dreams?", false);
+							outputText("your [armor] shocks you from the dream, leaving you with nothing but the moistness of your loins for company. Maybe next year you'll find the mate of your dreams?", false);
 						}
 						//(female 2)
 						else {
-							outputText("In your fantasy you're sprawled on your back, thick thighs splayed wide while you're taken by a virile male. The poor stud was wandering the desert all alone, following some map, but soon you had his bright red rod sliding between your butt-cheeks, the pointed tip releasing runnels of submission to lubricate your loins. You let him mount your pussy before you grabbed him with your powerful thighs and took off. He panicked at first, but the extra blood flow just made him bigger. He soon forgot his fear and focused on the primal needs of all males – mating with a gorgeous harpy. You look back at him and wink, feeling his knot build inside you. Your aching, tender " + nippleDescript(0) + "s pull you out of the fantasy as they rub inside your " + player.armorName + ". Maybe once your quest is over you'll be able to find a shy, fertile male to mold into the perfect cum-pump.", false);
+							outputText("In your fantasy you're sprawled on your back, thick thighs splayed wide while you're taken by a virile male. The poor stud was wandering the desert all alone, following some map, but soon you had his bright red rod sliding between your butt-cheeks, the pointed tip releasing runnels of submission to lubricate your loins. You let him mount your pussy before you grabbed him with your powerful thighs and took off. He panicked at first, but the extra blood flow just made him bigger. He soon forgot his fear and focused on the primal needs of all males – mating with a gorgeous harpy. You look back at him and wink, feeling his knot build inside you. Your aching, tender " + nippleDescript(0) + "s pull you out of the fantasy as they rub inside your [armor]. Maybe once your quest is over you'll be able to find a shy, fertile male to mold into the perfect cum-pump.", false);
 						}
 					}
 				}
@@ -8192,7 +8160,7 @@ import classes.CockTypesEnum;
 				//(dick)
 				else if (player.hasCock()) outputText("\n\nAn itch starts on your groin, just below your " + multiCockDescriptLight() + ". You pull your manhood aside to give you a better view, and you're able to watch as <b>your skin splits to give you a new vagina, complete with a tiny clit.</b>", false);
 				//(neither)
-				else outputText("\n\nAn itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your " + player.armorName + " to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>", false);
+				else outputText("\n\nAn itch starts on your groin and fades before you can take action. Curious about the intermittent sensation, <b>you peek under your [armor] to discover your brand new vagina, complete with pussy lips and a tiny clit.</b>", false);
 				player.createVagina();
 				player.clitLength = .25;
 				dynStats("sen", 10);
@@ -8229,14 +8197,14 @@ import classes.CockTypesEnum;
 			//-Grow tits to a B-cup if below.
 			if (changes < changeLimit && player.breastRows[0].breastRating < 2 && rand(3) == 0) {
 				changes++;
-				outputText("\n\nYour chest starts to tingle, the " + player.skinDesc + " warming under your " + player.armorName + ". Reaching inside to feel the tender flesh, you're quite surprised when it puffs into your fingers, growing larger and larger until it settles into a pair of B-cup breasts.", false);
+				outputText("\n\nYour chest starts to tingle, the " + player.skinDesc + " warming under your [armor]. Reaching inside to feel the tender flesh, you're quite surprised when it puffs into your fingers, growing larger and larger until it settles into a pair of B-cup breasts.", false);
 				if (player.breastRows[0].breastRating < 1) outputText("  <b>You have breasts now!</b>", false);
 				player.breastRows[0].breastRating = 2;
 			}
 			//Change cock if you have a penis.
 			if (changes < changeLimit && player.hasCock() && player.countCocksOfType(CockTypesEnum.AVIAN) < player.cockTotal() && rand(type == 1 ? 4 : 10) == 0 ) { //2.5x chance if magic seed.
 				changes++;
-				outputText("\n\nYou feel a strange tingling sensation in your cock as erection forms. You " + player.clothedOrNakedLower("open up your " + player.armorName + " and", "") + " look down to see " + (player.cockTotal() == 1 ? "your cock" : "one of your cocks") + " shifting! By the time the transformation's complete, you notice it's tapered, red, and ends in a tip. When you're not aroused, your cock rests nicely in a newly-formed sheath. <b>You now have an avian penis!</b>");
+				outputText("\n\nYou feel a strange tingling sensation in your cock as erection forms. You " + player.clothedOrNakedLower("open up your [armor] and", "") + " look down to see " + (player.cockTotal() == 1 ? "your cock" : "one of your cocks") + " shifting! By the time the transformation's complete, you notice it's tapered, red, and ends in a tip. When you're not aroused, your cock rests nicely in a newly-formed sheath. <b>You now have an avian penis!</b>");
 				for (var i:int = 0; i < player.cocks.length; i++) {
 					if (player.cocks[i].cockType != CockTypesEnum.AVIAN) {
 						player.cocks[i].cockType = CockTypesEnum.AVIAN;
@@ -8282,7 +8250,7 @@ import classes.CockTypesEnum;
 			if (player.buttRating < 8 && changes < changeLimit && rand(3) == 0) {
 				player.buttRating++;
 				changes++;
-				outputText("\n\nA slight jiggle works through your rear, but instead of stopping it starts again. You can actually feel your " + player.armorName + " being filled out by the growing cheeks. When it stops, you find yourself the proud owner of a " + buttDescript() + ".", false);
+				outputText("\n\nA slight jiggle works through your rear, but instead of stopping it starts again. You can actually feel your [armor] being filled out by the growing cheeks. When it stops, you find yourself the proud owner of a " + buttDescript() + ".", false);
 			}
 			//-Narrow booty if crazy huge.
 			if (player.buttRating >= 14 && changes < changeLimit && rand(4) == 0) {
@@ -8334,7 +8302,7 @@ import classes.CockTypesEnum;
 			}
 			//-Propah Wings
 			if (player.wingType == WING_TYPE_NONE && changes < changeLimit && (type == 1 || player.armType == ARM_TYPE_HARPY) && rand(4) == 0) {
-				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your " + player.skinDesc + ". It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your " + player.armorName + ". Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, " + player.hairColor + " wings.</b>", false);
+				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your " + player.skinDesc + ". It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, " + player.hairColor + " wings.</b>", false);
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedHarpyWings)) {
 					outputText("\n\n<b>Genetic Memory: Harpy Wings - Memorized!</b>\n\n");
 					player.createStatusAffect(StatusAffects.UnlockedHarpyWings, 0, 0, 0, 0);
@@ -8755,7 +8723,7 @@ import classes.CockTypesEnum;
 				}
 				//If something got thickened
 				if (temp == 1) {
-					outputText("\n\nYou can feel your " + multiCockDescriptLight() + " filling out in your " + player.armorName + ". Pulling ", false);
+					outputText("\n\nYou can feel your " + multiCockDescriptLight() + " filling out in your [armor]. Pulling ", false);
 					if (player.cockTotal() == 1) outputText("it", false);
 					else outputText("them", false);
 					outputText(" out, you look closely.  ", false);
@@ -8825,7 +8793,7 @@ import classes.CockTypesEnum;
 			}
 			//-Nipples reduction to 1 per tit.
 			if (player.averageNipplesPerBreast() > 1 && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nA chill runs over your " + allBreastsDescript() + " and vanishes.  You stick a hand under your " + player.armorName + " and discover that your extra nipples are missing!  You're down to just one per ", false);
+				outputText("\n\nA chill runs over your " + allBreastsDescript() + " and vanishes.  You stick a hand under your [armor] and discover that your extra nipples are missing!  You're down to just one per ", false);
 				if (player.biggestTitSize() < 1) outputText("'breast'.", false);
 				else outputText("breast.", false);
 				changes++;
@@ -8992,7 +8960,7 @@ import classes.CockTypesEnum;
 
 				//female
 				if (!player.hasCock()) {
-					outputText("The beverage isn't done yet, however, and it makes it perfectly clear with a building pleasure in your groin.  You can only cry in ecstasy and loosen the bottoms of your " + player.armorName + " just in time for a little penis to spring forth.  You watch, enthralled, as blood quickly stiffens the shaft to its full length – then keeps on going!  Before long, you have a quivering 10-inch maleness, just ready to stuff into a welcoming box.", false);
+					outputText("The beverage isn't done yet, however, and it makes it perfectly clear with a building pleasure in your groin.  You can only cry in ecstasy and loosen the bottoms of your [armor] just in time for a little penis to spring forth.  You watch, enthralled, as blood quickly stiffens the shaft to its full length – then keeps on going!  Before long, you have a quivering 10-inch maleness, just ready to stuff into a welcoming box.", false);
 					player.createCock();
 					player.cocks[0].cockLength = 10;
 					player.cocks[0].cockThickness = 2;
@@ -9095,7 +9063,7 @@ import classes.CockTypesEnum;
 			}
 			//(No dick)
 			else {
-				outputText("You hear a straining, tearing noise before you realize it's coming from your underwear.  Pulling open your " + player.armorName + ", you gasp in surprise at the huge, throbbing manhood that now lies between your " + hipDescript() + ".  It rapidly stiffens to a full, ten inches, and goddamn, it feels fucking good.  You should totally find a warm hole to fuck!", false);
+				outputText("You hear a straining, tearing noise before you realize it's coming from your underwear.  Pulling open your [armor], you gasp in surprise at the huge, throbbing manhood that now lies between your " + hipDescript() + ".  It rapidly stiffens to a full, ten inches, and goddamn, it feels fucking good.  You should totally find a warm hole to fuck!", false);
 				if (player.balls == 0) outputText("  Two rounded orbs drop down below, filling out a new, fleshy sac above your " + player.legs() + ".  Sweet!  You can probably cum buckets with balls like these.", false);
 				outputText("\n\n", false);
 				player.createCock();
@@ -9116,7 +9084,7 @@ import classes.CockTypesEnum;
 				outputText("Lastly, the change hits your face.  You can feel your jawbones shifting and sliding around, your skin changing to accommodate your face's new shape.  Once it's finished, you feel your impeccable square jaw and give a wide, easy-going grin.  You look awesome!\n\n", false);
 				player.modFem(0, 100);
 			}
-			outputText("You finish admiring yourself and adjust your " + player.armorName + " to better fit your new physique.  Maybe there's some bitches around you can fuck.  Hell, as good as you look, you might have other dudes wanting you to fuck them too, no homo.\n\n", false);
+			outputText("You finish admiring yourself and adjust your [armor] to better fit your new physique.  Maybe there's some bitches around you can fuck.  Hell, as good as you look, you might have other dudes wanting you to fuck them too, no homo.\n\n", false);
 			//max tone.  Thickness + 50
 			player.modTone(100, 100);
 			player.modThickness(100, 50);
@@ -9183,7 +9151,7 @@ import classes.CockTypesEnum;
 			//Effect script a:  (human wang)
 			if (player.hasCock() && changes < changeLimit) {
 				if (rand(3) == 0 && player.cocks[0].cockType != CockTypesEnum.HUMAN) {
-					outputText("\n\nA strange tingling begins behind your " + cockDescript(0) + ", slowly crawling up across its entire length.  While neither particularly arousing nor uncomfortable, you do shift nervously as the feeling intensifies.  You resist the urge to undo your " + player.armorName + " to check, but by the feel of it, your penis is shifting form.  Eventually the transformative sensation fades, <b>leaving you with a completely human penis.</b>", false);
+					outputText("\n\nA strange tingling begins behind your " + cockDescript(0) + ", slowly crawling up across its entire length.  While neither particularly arousing nor uncomfortable, you do shift nervously as the feeling intensifies.  You resist the urge to undo your [armor] to check, but by the feel of it, your penis is shifting form.  Eventually the transformative sensation fades, <b>leaving you with a completely human penis.</b>", false);
 					player.cocks[0].cockType = CockTypesEnum.HUMAN;
 					changes++;
 				}
@@ -9197,20 +9165,19 @@ import classes.CockTypesEnum;
 			}
 			//Skin
 			if (rand(4) == 0 && changes < changeLimit && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && (player.skinTone != "sable" && player.skinTone != "white")) {
+				outputText("\n\nA warmth begins in your belly, slowly spreading through your torso and appendages. The heat builds, becoming uncomfortable, then painful, then nearly unbearable. Your eyes unfocus from the pain, and by the time the burning sensation fades, you can already tell something's changed. ");
+				var tone:String;
+				var adj:String;
 				if (rand(2) == 0) {
-					outputText("\n\nA warmth begins in your belly, slowly spreading through your torso and appendages. The heat builds, becoming uncomfortable, then painful, then nearly unbearable. Your eyes unfocus from the pain, and by the time the burning sensation fades, you can already tell something's changed. You raise a hand, staring at the milky-white flesh. Your eyes are drawn to the veins in the back of your hand, darkening to a jet black as you watch. <b>You have white skin, with black veins!</b>", false);
-					player.skinTone = "white";
-					player.skinAdj = "milky";
-					player.skinDesc = "skin";
-					player.skinType = SKIN_TYPE_PLAIN;
+					tone = "white";
+					adj = "milky";
+					outputText("You raise a hand, staring at the milky-white flesh. Your eyes are drawn to the veins in the back of your hand, darkening to a jet black as you watch. <b>You have white skin, with black veins!</b>", false);
+				} else {
+					outputText("You raise a hand, staring at the sable flesh. Your eyes are drawn to the veins in the back of your hand, brightening to an ashen tone as you watch.  <b>You have black skin, with white veins!</b>", false);
+					tone = "sable";
+					adj = "ashen";
 				}
-				else {
-					outputText("\n\nA warmth begins in your belly, slowly spreading through your torso and appendages. The heat builds, becoming uncomfortable, then painful, then nearly unbearable. Your eyes unfocus from the pain, and by the time the burning sensation fades, you can already tell something's changed. You raise a hand, staring at the sable flesh. Your eyes are drawn to the veins in the back of your hand, brightening to an ashen tone as you watch.  <b>You have black skin, with white veins!</b>", false);
-					player.skinTone = "sable";
-					player.skinAdj = "ashen";
-					player.skinDesc = "skin";
-					player.skinType = SKIN_TYPE_PLAIN;
-				}
+				player.skin.setBaseOnly({type:SKIN_BASE_PLAIN,color:tone,adj:adj});
 				changes++;
 			}
 			//Legs
@@ -9440,7 +9407,7 @@ import classes.CockTypesEnum;
 					outputText("\n\nWrithing on the ground, you clutch your hand to your chest, looking on in horror through tear-streaked eyes as the bones in your fingers pop and fuse, rearranging themselves into a dainty paw covered in coarse black fur, fading to a ruddy orange further up.  You desperately try to call out to someone - anyone - for help, but all that comes out is a high-pitched, ear-splitting yap.");
 					if (player.tailCount > 1) outputText("  Your tails thrash around violently as they begin to fuse painfully back into one, the fur bristling back out with a flourish.");
 					outputText("\n\nA sharp spark of pain jolts through your spinal column as the bones shift themselves around, the joints in your hips migrating forward.  You continue to howl in agony even as you feel your intelligence slipping away.  In a way, it's a blessing - as your thoughts grow muddied, the pain is dulled, until you are finally left staring blankly at the sky above, tilting your head curiously.");
-					outputText("\n\nYou roll over and crawl free of the " + player.armorName + " covering you, pawing the ground for a few moments before a pang of hunger rumbles through your stomach.  Sniffing the wind, you bound off into the wilderness, following the telltale scent of a farm toward the certain bounty of a chicken coop.");
+					outputText("\n\nYou roll over and crawl free of the [armor] covering you, pawing the ground for a few moments before a pang of hunger rumbles through your stomach.  Sniffing the wind, you bound off into the wilderness, following the telltale scent of a farm toward the certain bounty of a chicken coop.");
 					getGame().gameOver();
 					return;
 				}
@@ -9599,7 +9566,7 @@ import classes.CockTypesEnum;
 				outputText("\n\nYour belly rumbles unpleasantly for a second as the ");
 				if (!enhanced) outputText("berry ");
 				else outputText("drink ");
-				outputText("settles deeper inside you.  A second later, the unpleasant gut-gurgle passes, and you let out a tiny burp of relief.  Before you finish taking a few breaths, there's an itching below your " + allChestDesc() + ".  You idly scratch at it, but gods be damned, it hurts!  You peel off part of your " + player.armorName + " to inspect the unwholesome itch, ");
+				outputText("settles deeper inside you.  A second later, the unpleasant gut-gurgle passes, and you let out a tiny burp of relief.  Before you finish taking a few breaths, there's an itching below your " + allChestDesc() + ".  You idly scratch at it, but gods be damned, it hurts!  You peel off part of your [armor] to inspect the unwholesome itch, ");
 				if (player.biggestTitSize() >= 8) outputText("it's difficult to see past the wall of tits obscuring your view.");
 				else outputText("it's hard to get a good look at.");
 				outputText("  A few gentle prods draw a pleasant gasp from your lips, and you realize that you didn't have an itch - you were growing new nipples!");
@@ -10065,7 +10032,7 @@ import classes.CockTypesEnum;
 			if (player.tailType != TAIL_TYPE_FOX && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(4) == 0))) {
 				//if PC has no tail
 				if (player.tailType == TAIL_TYPE_NONE) {
-					outputText("\n\nA pressure builds on your backside.  You feel under your " + player.armorName + " and discover a strange nodule growing there that seems to be getting larger by the second.  With a sudden flourish of movement, it bursts out into a long and bushy tail that sways hypnotically, as if it has a mind of its own.  <b>You now have a fox-tail.</b>");
+					outputText("\n\nA pressure builds on your backside.  You feel under your [armor] and discover a strange nodule growing there that seems to be getting larger by the second.  With a sudden flourish of movement, it bursts out into a long and bushy tail that sways hypnotically, as if it has a mind of its own.  <b>You now have a fox-tail.</b>");
 				}
 				//if PC has another type of tail
 				else if (player.tailType != TAIL_TYPE_FOX) {
@@ -10199,20 +10166,17 @@ import classes.CockTypesEnum;
 			}
 			var tone:Array = mystic ? ["dark", "ebony", "ashen", "sable", "milky white"] : ["tan", "olive", "light"];
 			//[Change Skin Type: remove fur or scales, change skin to Tan, Olive, or Light]
-			if (player.skin.hasFur()
+			if ((player.skin.hasFur()
 					&& !player.skin.hasMagicalTattoo()
 					&& !InCollection(player.coatColor, KitsuneScene.basicKitsuneFur)
 					&& !InCollection(player.coatColor, KitsuneScene.elderKitsuneColors)
 					&& !InCollection(player.coatColor, ["orange and white", "black and white", "red and white", "tan", "brown"])
-					|| player.skinType == SKIN_TYPE_SCALES
-					|| player.skinType == SKIN_TYPE_PARTIAL_SCALES && ((mystic) || (!mystic && rand(2) == 0))) {
+					|| !player.skin.hasFur() && player.skin.hasCoat()) && ((mystic) || (!mystic && rand(2) == 0))) {
 				outputText("\n\nYou begin to tingle all over your [skin], starting as a cool, pleasant sensation but gradually worsening until you are furiously itching all over.");
 				if (player.hasFur()) outputText("  You stare in horror as you pull your fingers away holding a handful of [skin coat.color] fur!  Your fur sloughs off your body in thick clumps, falling away to reveal patches of bare, " + player.skinTone + " skin.");
 				else if (player.hasScales()) outputText("  You stare in horror as you pull your fingers away holding a handful of dried up scales!  Your scales continue to flake and peel off your skin in thick patches, revealing the tender " + player.skinTone + " skin underneath.");
 				outputText("  Your skin slowly turns raw and red under your severe scratching, the tingling sensations raising goosebumps across your whole body.  Over time, the itching fades, and your flushed skin resolves into a natural-looking ");
-				player.skinType = SKIN_TYPE_PLAIN;
-				player.skinAdj = "";
-				player.skinDesc = "skin";
+				player.skin.setBaseOnly({type:SKIN_BASE_PLAIN});
 				if (!InCollection(player.skinTone, tone)) player.skinTone = randomChoice(tone);
 				outputText(player.skinTone + " complexion.");
 				outputText("  <b>You now have [skin]!</b>");
@@ -11223,12 +11187,11 @@ import classes.CockTypesEnum;
 					player.faceType = FACE_HUMAN;
 				}
 				//De-fur
-				else if (player.skinType != SKIN_TYPE_PLAIN) {
+				else if (!player.hasPlainSkinOnly()) {
 					outputText("\n\n", false);
 					if (player.hasFur()) outputText("Your skin suddenly feels itchy as your fur begins falling out in clumps, <b>revealing inhumanly smooth skin</b> underneath.", false);
 					if (player.hasScales()) outputText("Your scales begin to itch as they begin falling out in droves, <b>revealing your inhumanly smooth " + player.skinTone + " skin</b> underneath.", false);
-					player.skinType = SKIN_TYPE_PLAIN;
-					player.skinDesc = "skin";
+					player.skin.setBaseOnly({type:SKIN_BASE_PLAIN});
 				}
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
@@ -11325,7 +11288,7 @@ import classes.CockTypesEnum;
 				//No wings
 				else if (player.wingType == WING_TYPE_NONE) {
 					outputText("\n\n", false);
-					outputText("A knot of pain forms in your shoulders as they tense up.  With a surprising force, a pair of small demonic wings sprout from your back, ripping a pair of holes in the back of your " + player.armorName + ".  <b>You now have tiny demonic wings</b>.", false);
+					outputText("A knot of pain forms in your shoulders as they tense up.  With a surprising force, a pair of small demonic wings sprout from your back, ripping a pair of holes in the back of your [armor].  <b>You now have tiny demonic wings</b>.", false);
 					if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedDemonTinyBatWings)) {
 						outputText("\n\n<b>Genetic Memory: Demon Tiny Bat Wings - Memorized!</b>\n\n");
 						player.createStatusAffect(StatusAffects.UnlockedDemonTinyBatWings, 0, 0, 0, 0);
@@ -12173,8 +12136,7 @@ import classes.CockTypesEnum;
 				else if (player.hasScales()) outputText("You suddenly start sweating abundantly as your scales fall off leaving bare the smooth skin underneath.  ", false);
 				else if (player.skinType == SKIN_TYPE_PLAIN) outputText("You suddenly start sweating abundantly.  ", false);
 				outputText("As much as you try to dry your skin using a cloth it remains slimy and slippery to the touch as if constantly wet! Your skin is now slippery like the one of a sea creature!", false);
-				player.skinType = SKIN_TYPE_PLAIN;
-				player.skinAdj = "slippery";
+				player.skin.setBaseOnly({type:SKIN_BASE_PLAIN,adj:"slippery"});
 				changes++;
 			}
 			//Face
@@ -12510,9 +12472,7 @@ import classes.CockTypesEnum;
 				if (player.skinType == SKIN_TYPE_GOO) outputText("Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Then you start sweating abundantly. ", false);
 				if (player.hasScales()) outputText("You suddenly start sweating abundantly as your scales fall off leaving bare the smooth skin underneath.  ", false);
 				outputText("Your skin starts to change, turning darker and darker until it is pitch black. Your underbelly, on the other hand , turns pure white. Just as you thought it was over, your skin takes on a glossy shine similar to that of a whale. <b>Your body is now black with a white underbelly running on the underside of your limbs and up to your mouth in a color pattern similar to an orca’s.</b>", false);
-				player.skinType = SKIN_TYPE_PLAIN;
-				player.skinAdj = "glossy";
-				player.skinTone = "white and black";
+				player.skin.setBaseOnly({type:SKIN_BASE_PLAIN,adj:"glossy",color:"white and black"});
 				changes++;
 			}
 			//legs
@@ -12720,7 +12680,7 @@ import classes.CockTypesEnum;
 				}
 				//If something got thickened
 				if (temp == 1) {
-					outputText("\n\nYou can feel your " + multiCockDescriptLight() + " filling out in your " + player.armorName + ". Pulling ", false);
+					outputText("\n\nYou can feel your " + multiCockDescriptLight() + " filling out in your [armor]. Pulling ", false);
 					if (player.cockTotal() == 1) outputText("it", false);
 					else outputText("them", false);
 					outputText(" out, you look closely.  ", false);
@@ -12795,7 +12755,7 @@ import classes.CockTypesEnum;
 				//Grow small mantis wings if player has none.
 				else if (player.wingType == WING_TYPE_NONE) {
 					outputText("\n\nYou feel an itching between your shoulder-blades as something begins growing there.  You twist and contort yourself, trying to scratch and bring yourself relief, and failing miserably.  A sense of relief erupts from you as you feel something new grow out from your body.");
-					outputText("\nYou hastily remove the top portion of your " + player.armorName + " and marvel as a pair of small Insectile wings sprout from your back.  Tenderly flexing your new muscles, you find you can flap them quite fast.  Unfortunately you can’t seem to flap your little wings fast enough to fly, but they would certainly slow a fall.  A few quick modifications to your " + player.armorName + " later and you are ready to continue your journey with <b>your new mantis wings</b>.");
+					outputText("\nYou hastily remove the top portion of your [armor] and marvel as a pair of small Insectile wings sprout from your back.  Tenderly flexing your new muscles, you find you can flap them quite fast.  Unfortunately you can’t seem to flap your little wings fast enough to fly, but they would certainly slow a fall.  A few quick modifications to your [armor] later and you are ready to continue your journey with <b>your new mantis wings</b>.");
 					player.wingType = WING_TYPE_MANTIS_LIKE_SMALL;
 					player.wingDesc = "small mantis-like";
 				}

@@ -1022,8 +1022,7 @@ private function metamorphScales():void {
 		}
 		outputText(player.skinTone + " scales.</b>", false);
 	}
-	player.skinType = SKIN_TYPE_SCALES;
-	player.skinDesc = "scales";
+	player.skin.growCoat(SKIN_COAT_SCALES);
 	doNext(accessMetamorphMenu);
 }
 private function metamorphFur():void {
@@ -1031,9 +1030,7 @@ private function metamorphFur():void {
 	player.soulforce -= 100;
 	if (player.skinType == SKIN_TYPE_SCALES) outputText("Your skin shifts and every scale stands on end, sending you into a mild panic.  No matter how you tense, you can't seem to flatten them again.  The uncomfortable sensation continues for some minutes until, as one, every scale falls from your body and a fine coat of fur pushes out.  You briefly consider collecting them, but when you pick one up, it's already as dry and brittle as if it were hundreds of years old.  <b>Oh well; at least you won't need to sun yourself as much with your new fur.</b>");
 	else outputText("Your skin itches all over, the sudden intensity and uniformity making you too paranoid to scratch.  As you hold still through an agony of tiny tingles and pinches, fine, luxuriant fur sprouts from every bare inch of your skin!  <b>You'll have to get used to being furry...</b>");
-	player.skinType = SKIN_TYPE_FUR;
-	player.skinAdj = "";
-	player.skinDesc = "fur";
+	player.skin.growFur();
 	doNext(accessMetamorphMenu);
 }
 

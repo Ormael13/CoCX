@@ -316,7 +316,7 @@ package classes.Scenes.NPCs
 				createBreastRow(Appearance.breastCupInverse("E"));
 				this.tallness = 90;
 				this.hairColor = "platinum blonde";
-				this.skinType = SKIN_TYPE_PLAIN;
+				this.skin.setBaseOnly({color:"olive"});
 				this.hipRating = HIP_RATING_CURVY+2;//hipRating = 12
 				this.buttRating = BUTT_RATING_JIGGLY+2;//buttRating = 12
 				initStrTouSpeInte(29, 34, 45, 50);
@@ -343,7 +343,7 @@ package classes.Scenes.NPCs
 				createBreastRow(Appearance.breastCupInverse("E"));
 				this.tallness = 90;
 				this.hairColor = "platinum blonde";
-				this.skinType = SKIN_TYPE_PLAIN;
+				this.skin.restore();
 				this.hipRating = HIP_RATING_CURVY+2;
 				this.buttRating = BUTT_RATING_JIGGLY+2;
 				initStrTouSpeInte(41, 46, 55, 50);
@@ -371,7 +371,7 @@ package classes.Scenes.NPCs
 				createBreastRow(Appearance.breastCupInverse("E"));
 				this.tallness = 90;
 				this.hairColor = "platinum crimson";
-				this.skinType = SKIN_TYPE_PLAIN;
+				this.skin.setBaseOnly({});
 				this.hipRating = HIP_RATING_CURVY+2;
 				this.buttRating = BUTT_RATING_JIGGLY+2;
 				initStrTouSpeInte(41, 46, 55, 50);
@@ -400,7 +400,7 @@ package classes.Scenes.NPCs
 				createBreastRow(Appearance.breastCupInverse("F"));
 				this.tallness = 96;
 				this.hairColor = "crimson platinum";
-				this.skinType = SKIN_TYPE_FUR;
+				this.skin.growFur();
 				this.hipRating = HIP_RATING_FERTILE+3;//hipRating = 18
 				this.buttRating = BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(41, 46, 70, 50);
@@ -431,7 +431,7 @@ package classes.Scenes.NPCs
 				createBreastRow(Appearance.breastCupInverse("F"));//succubus milk może teoretycznie w nieskończoność zwiekszać rozmiar biustu
 				this.tallness = 96;
 				this.hairColor = "crimson platinum";
-				this.skinType = SKIN_TYPE_FUR;
+				this.skin.growFur();
 				this.hipRating = HIP_RATING_FERTILE+3;//hipRating = 18
 				this.buttRating = BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(41, 46, 80, 50);

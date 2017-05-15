@@ -1,7 +1,8 @@
 package classes.Scenes.Areas.HighMountains
 {
 	import classes.*;
-	import classes.internals.ChainedDrop;
+import classes.BodyParts.Skin;
+import classes.internals.ChainedDrop;
 	import classes.GlobalFlags.*
 	
 	/**
@@ -106,9 +107,7 @@ package classes.Scenes.Areas.HighMountains
 			this.hipRating = HIP_RATING_SLENDER+1;
 			this.buttRating = BUTT_RATING_AVERAGE;
 			this.lowerBody = LOWER_BODY_TYPE_LIZARD;
-			this.skinTone = "gray";
-			this.skinType = SKIN_TYPE_SCALES;
-			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_SCALES];
+			this.skin.growCoat(SKIN_COAT_SCALES,{color:"gray"},Skin.COVERAGE_COMPLETE);
 			this.hairColor = "none";
 			this.hairLength = 0;
 			initStrTouSpeInte(98, 107, 45, 80);

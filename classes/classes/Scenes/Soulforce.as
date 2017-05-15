@@ -973,9 +973,7 @@ package classes.Scenes
 			player.horns = 0;
 			player.hornType = HORNS_NONE;
 			player.earType = EARS_HUMAN;
-			player.skinType = SKIN_TYPE_PLAIN;
-			player.skinDesc = "skin";
-			player.skinAdj = "";
+			player.skin.restore();
 			clearOutput();
 			outputText("You have become fully human again.");
 			doNext(SoulforceCheats);
@@ -1010,7 +1008,7 @@ package classes.Scenes
 			doNext(GargoyleBodyChanges);
 		}
 		public function GargoyleBodyChanges():void {
-			player.skinType = SKIN_TYPE_STONE;
+			player.skin.setBaseOnly({type:SKIN_TYPE_STONE});
 			player.hairType = HAIR_NORMAL;
 			player.faceType = FACE_HUMAN;
 			player.hornType = HORNS_GARGOYLE;

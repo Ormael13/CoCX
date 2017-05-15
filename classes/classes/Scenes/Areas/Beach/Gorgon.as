@@ -157,8 +157,7 @@ package classes.Scenes.Areas.Beach
 			this.hipRating = HIP_RATING_AMPLE+2;
 			this.buttRating = BUTT_RATING_LARGE;
 			this.lowerBody = LOWER_BODY_TYPE_NAGA;
-			this.skinTone = "green";
-			this.skinType = SKIN_TYPE_SCALES;
+			this.skin.growCoat(SKIN_COAT_SCALES,{color:"green"});
 			this.hairColor = "green";
 			this.hairLength = 16;
 			initStrTouSpeInte(91, 125, 110, 75);

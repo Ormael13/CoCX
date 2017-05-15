@@ -75,8 +75,7 @@
 			this.tallness = 4*12;
 			this.hipRating = HIP_RATING_SLENDER;
 			this.buttRating = BUTT_RATING_TIGHT;
-			this.skinTone = "white";
-			this.skinType = SKIN_TYPE_FUR;
+			this.skin.growFur({color:"white"});
 			this.skinDesc = "fur";
 			this.hairColor = "white";
 			this.hairLength = 2;

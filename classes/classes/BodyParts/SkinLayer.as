@@ -29,6 +29,16 @@ public class SkinLayer extends BodyPart {
 	public function set adj(value:String):void {
 		_adj = value == defaultAdj() ? "" : value;
 	}
+	[Deprecated("Use color, not tone")]
+	public function get tone():String {
+		trace("[DEPRECATED] SkinLayer.tone get");
+		return color;
+	}
+	[Deprecated("Use color, not tone")]
+	public function set tone(value:String) {
+		trace("[DEPRECATED] SkinLayer.tone = "+value);
+		this.color = value;
+	}
 	override public function set type(value:int):void {
 		super.type = value;
 		_desc      = "";

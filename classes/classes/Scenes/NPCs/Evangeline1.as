@@ -472,8 +472,7 @@ package classes.Scenes.NPCs
 			this.tallness = 90;
 			this.hipRating = HIP_RATING_BOYISH;
 			this.buttRating = BUTT_RATING_BUTTLESS;
-			this.skinTone = "olive";
-			this.skinType = SKIN_TYPE_PLAIN;
+			this.skin.setBaseOnly({color:"olive"});
 			this.hairColor = "red";
 			this.hairLength = 6;
 			initLibSensCor(10, 10, 100);

@@ -1160,8 +1160,8 @@ import classes.BodyParts.SkinLayer;
 			player.earType = EARS_CAT;
 			player.lowerBody = LOWER_BODY_TYPE_CAT;
 			player.legCount = 2;
-			player.skinType = SKIN_TYPE_FUR;
-			player.skinDesc = "fur";
+			player.skin.restore();
+			player.skin.growFur();
 			//Draconic TF
 			player.hornType = HORNS_DRACONIC_X2;
 			player.horns = 4;
@@ -1183,8 +1183,8 @@ import classes.BodyParts.SkinLayer;
 			player.lowerBody = LOWER_BODY_TYPE_CAT;
 			player.legCount = 2;
 			//Draconic TF
-			player.skinType = SKIN_TYPE_SCALES;
-			player.skinDesc = "scales";
+			player.skin.restore();
+			player.skin.growCoat(SKIN_COAT_SCALES);
 			player.tongueType = TONUGE_DRACONIC;
 			player.hornType = HORNS_DRACONIC_X2;
 			player.horns = 4;

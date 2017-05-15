@@ -542,7 +542,7 @@ package classes
 			kGAMECLASS.notes = "No Notes Available.";
 			player.HP = kGAMECLASS.maxHP();
 			player.hairLength=13;
-			player.skinType = SKIN_TYPE_PLAIN;
+			player.skin.restore();
 			player.faceType = FACE_HUMAN;
 			player.tailType = TAIL_TYPE_NONE;
 			player.tongueType = TONUGE_HUMAN;
@@ -623,8 +623,7 @@ package classes
 			kGAMECLASS.notes = "No Notes Available.";
 			player.HP = kGAMECLASS.maxHP();
 			player.hairLength = 1;
-			player.skinType = SKIN_TYPE_PLAIN;
-			player.skinTone = "light";
+			player.skin.setAllProps({base:{color:"light"}});
 			player.hairColor = "brown";
 			player.faceType = FACE_HUMAN;
 			player.tailType = TAIL_TYPE_NONE;
@@ -732,8 +731,7 @@ package classes
 			player.createPerk(PerkLib.Fertile, 1.5, 0, 0, 0);
 			player.createPerk(PerkLib.Flexibility, 0, 0, 0, 0);
 			player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
-			player.skinTone = "ashen";
-			player.skinType = SKIN_TYPE_FUR;
+			player.skin.growFur({color:"ashen"});
 			player.tailType = TAIL_TYPE_CAT;
 			player.tallness = 55;
 			player.teaseLevel = 4;
@@ -1008,8 +1006,7 @@ package classes
 			player.cor = 0;
 			kGAMECLASS.notes = "No Notes Available.";
 			player.HP = kGAMECLASS.maxHP();
-			
-			player.skinType = SKIN_TYPE_PLAIN;
+			player.skin.restore();
 			player.faceType = FACE_HUMAN;
 			player.tailType = TAIL_TYPE_NONE;
 			player.tongueType = TONUGE_HUMAN;
@@ -1097,8 +1094,7 @@ package classes
 			player.nippleLength = 0.5;
 			player.hairLength = 22;
 			player.hairColor = "red";
-			player.skinTone = "light";
-			player.skinType = SKIN_TYPE_PLAIN;
+			player.skin.setAllProps({base:{color:"light"}});
 			player.femininity = 100;
 			player.thickness = 25;
 			player.tone = 65;
@@ -1246,7 +1242,7 @@ package classes
 			kGAMECLASS.notes = "Cheater!";
 			player.HP = kGAMECLASS.maxHP();
 			player.hairLength = 10;
-			player.skinType = SKIN_TYPE_PLAIN;
+			player.skin.restore();
 			player.faceType = FACE_HUMAN;
 			player.tailType = TAIL_TYPE_FOX;
 			player.tailCount = 4;
@@ -1457,7 +1453,7 @@ package classes
 			kGAMECLASS.notes = "No Notes Available.";
 			player.HP = kGAMECLASS.maxHP();
 			player.hairLength = 10;
-			player.skinType = SKIN_TYPE_PLAIN;
+			player.skin.restore();
 			player.faceType = FACE_HUMAN;
 			player.tailType = TAIL_TYPE_NONE;
 			player.tongueType = TONUGE_HUMAN;
@@ -1645,9 +1641,7 @@ package classes
 			player.buttRating = BUTT_RATING_TIGHT;
 			player.thickness = 20; // thin
 			player.tone = 20; // soft
-			player.skinType = SKIN_TYPE_PLAIN;
-			player.skinAdj = "smooth"; // flawless skin, black egg effect
-			player.skinTone = "light";
+			player.skin.setAllProps({base:{adj:"smooth",color:"light"}});
 			player.hairColor = "silver blonde"; // not just flavor - it actually counts towards kitsune score
 			player.hairType = HAIR_ANEMONE; flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 1; // tentacle hair... never can have enough tentacles!
 			player.hairLength = 42; // obscenely long, you still can use ext serum to get more, but they would drag the floor, and this wouldn't be pleasant
@@ -1856,13 +1850,13 @@ package classes
 
 			var skin:Number = rand(100);			
 			if(skin < 50){
-				player.skinType = SKIN_TYPE_PLAIN; // skin, 50%
+				player.skin.restore(); // skin, 50%
 			} else if(skin < 80){
 				player.skin.growFur();// fur, 30%
 			} else if(skin < 95){
-				player.skin.growCoat(SKIN_TYPE_SCALES); // scales, 15%
+				player.skin.growCoat(SKIN_COAT_SCALES); // scales, 15%
 			} else{
-				player.skin.base.type = SKIN_TYPE_GOO; // goo, 5%
+				player.skin.base.type = SKIN_BASE_GOO; // goo, 5%
 			}
 					
 			if(rand(3) != 0) // 2/3 to have human face

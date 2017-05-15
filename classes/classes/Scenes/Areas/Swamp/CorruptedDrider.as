@@ -167,9 +167,7 @@ package classes.Scenes.Areas.Swamp
 			this.hipRating = HIP_RATING_CURVY+2;
 			this.buttRating = BUTT_RATING_LARGE+1;
 			this.lowerBody = LOWER_BODY_TYPE_DRIDER_LOWER_BODY;
-			this.skinTone = skinTone;
-			this.skinType = SKIN_TYPE_PLAIN;
-			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_PLAIN];
+			player.skin.restore();
 			this.hairColor = hairColor;
 			this.hairLength = 24;
 			initStrTouSpeInte(110, 75, 70, 100);

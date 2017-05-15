@@ -450,7 +450,7 @@ import classes.BodyParts.UnderBody;
 			error += Utils.validateNonNegativeNumberFields(this,"Monster.validate",[
 				"balls", "ballSize", "cumMultiplier", "hoursSinceCum",
 				"tallness", "hipRating", "buttRating", "lowerBody", "armType",
-				"skinType", "hairLength", "hairType",
+				"hairLength", "hairType",
 				"faceType", "earType", "tongueType", "eyeType",
 				"str", "tou", "spe", "inte", "wis", "lib", "sens", "cor",
 				// Allow weaponAttack to be negative as a penalty to strength-calculated damage

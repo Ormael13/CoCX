@@ -166,9 +166,7 @@
 			this.hipRating = HIP_RATING_AVERAGE;
 			this.buttRating = BUTT_RATING_AVERAGE+1;
 			this.lowerBody = LOWER_BODY_TYPE_DOG;
-			this.skinTone = "black";
-			this.skinType = SKIN_TYPE_FUR;
-			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_FUR];
+			this.skin.growFur({color:"black"});
 			this.hairColor = "red";
 			this.hairLength = 3;
 			initStrTouSpeInte(64, 64, 50, 1);

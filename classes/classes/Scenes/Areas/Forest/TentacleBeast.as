@@ -122,8 +122,7 @@
 			this.tallness = rand(9) + 70;
 			this.hipRating = HIP_RATING_BOYISH;
 			this.buttRating = BUTT_RATING_BUTTLESS;
-			this.skinTone = "green";
-			this.skinType = SKIN_TYPE_PLAIN;
+			this.skin.setBaseOnly({color:"green"});
 			this.skinDesc = "bark";
 			this.hairColor = "green";
 			this.hairLength = 1;

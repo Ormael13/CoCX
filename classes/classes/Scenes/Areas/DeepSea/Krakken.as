@@ -28,8 +28,7 @@ package classes.Scenes
 			this.hipRating = HIP_RATING_AMPLE;
 			this.buttRating = BUTT_RATING_NOTICEABLE;
 			this.lowerBody = LOWER_BODY_TYPE_SCYLLA;
-			this.skinTone = "slippery";
-			this.skinType = SKIN_TYPE_PLAIN;
+			this.skin.setBaseOnly({color:"slippery"});
 			this.hairColor = "brown";
 			this.hairLength = 5;
 			initStrTouSpeInte(150, 100, 50, 100);

@@ -278,8 +278,7 @@
 			this.tallness = 5*12+5;
 			this.hipRating = HIP_RATING_INHUMANLY_WIDE;
 			this.buttRating = BUTT_RATING_EXPANSIVE;
-			this.skinTone = "pink";
-			this.skinType = SKIN_TYPE_PLAIN;
+			this.skin.setBaseOnly({color:"pink"});
 			this.skinDesc = "feathers";
 			this.hairColor = "pink";
 			this.hairLength = 16;

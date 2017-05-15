@@ -112,10 +112,7 @@ package classes.Scenes.NPCs
 			this.tallness = rand(8) + 70;
 			this.hipRating = HIP_RATING_AMPLE+2;
 			this.buttRating = BUTT_RATING_LARGE;
-			this.skinTone = "blue";
-			this.skinType = SKIN_TYPE_GOO;
-			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_GOO];
-			this.skinAdj = "goopey";
+			this.skin.setBaseOnly({color:"blue",type:SKIN_BASE_GOO});
 			this.hairColor = "black";
 			this.hairLength = 15;
 			this.hairType = HAIR_GOO;

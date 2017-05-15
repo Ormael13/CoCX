@@ -1066,10 +1066,9 @@ package classes.Scenes.Dungeons
 				player.breastRows[0].fuckable = false;
 				temp++;
 			}
-			if(player.skinType != SKIN_TYPE_PLAIN) {
+			if(!player.skin.hasPlainSkinOnly()) {
 				outputText("The skin on your body itches intensely as it sheds it's " + player.skinDesc + ", revealing " + player.skinTone + " skin.  ", false);
-				player.skinDesc = "skin";
-				player.skinType = SKIN_TYPE_PLAIN;
+				player.skin.restore();
 				temp++;
 			}
 			//Nothing changed

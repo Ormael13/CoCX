@@ -115,9 +115,7 @@
 			this.tallness = 47;
 			this.hipRating = HIP_RATING_AVERAGE;
 			this.buttRating = BUTT_RATING_AVERAGE + 1;
-			this.skinTone = "black";
-			this.skinType = SKIN_TYPE_FUR;
-			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_FUR];
+			this.skin.growFur({color:"black"});
 			this.hairColor = "red";
 			this.hairLength = 3;
 			initStrTouSpeInte(75, 64, 50, 1);

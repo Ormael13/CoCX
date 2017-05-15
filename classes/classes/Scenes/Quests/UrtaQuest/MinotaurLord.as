@@ -178,8 +178,7 @@ package classes.Scenes.Quests.UrtaQuest
 			this.hipRating = HIP_RATING_AVERAGE;
 			this.buttRating = BUTT_RATING_AVERAGE+1;
 			this.lowerBody = LOWER_BODY_TYPE_HOOFED;
-			this.skinTone = "red";
-			this.skinType = SKIN_TYPE_FUR;
+			this.skin.growFur({color:"red"});
 			this.skinDesc = "shaggy fur";
 			this.hairColor = randomChoice("black","brown");
 			this.hairLength = 3;

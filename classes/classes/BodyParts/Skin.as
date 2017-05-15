@@ -242,6 +242,11 @@ public class Skin extends SaveableBodyPart {
 		base.restore(keepTone);
 		coat.restore(keepTone);
 	}
+	override public function setProps(p:Object):void {
+		super.setProps(p);
+		if ("base" in p) base.setProps(p.base);
+		if ("coat" in p) base.setProps(p.coat);
+	}
 	private function skinValue(inBase:String, inCoat:String):String {
 		switch (coverage) {
 			case COVERAGE_NONE:

@@ -53,8 +53,7 @@ package classes.Scenes.NPCs
 			this.tallness = 78;
 			this.hipRating = HIP_RATING_SLENDER;
 			this.buttRating = BUTT_RATING_TIGHT;
-			this.skinTone = "white";
-			this.skinType = SKIN_TYPE_PLAIN;
+			this.skin.setBaseOnly({color:"white"});
 			this.skinDesc = "skin";
 			this.hairColor = "brown";
 			this.hairLength = 2;

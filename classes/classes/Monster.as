@@ -714,12 +714,6 @@
 			super.tallness = value;
 		}
 
-		override public function set skinType(value:Number):void
-		{
-			if (!_checkCalled) { this.skinDesc = Appearance.DEFAULT_SKIN_DESCS[value];}
-			super.skinType = value;
-		}
-
 		protected function initStrTouSpeInte(str:Number, tou:Number, spe:Number, inte:Number):void
 		{
 			this.str = str;

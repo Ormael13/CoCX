@@ -164,7 +164,7 @@
 			}
 			player.HP = player.maxHP();
 			player.hairLength = 5;
-			player.skinType = SKIN_TYPE_PLAIN;
+			player.skin.restore();
 			player.faceType = FACE_HUMAN;
 			player.tailType = TAIL_TYPE_NONE;
 			player.tongueType = TONUGE_HUMAN;

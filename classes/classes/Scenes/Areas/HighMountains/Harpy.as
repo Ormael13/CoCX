@@ -108,8 +108,7 @@
 			this.hipRating = HIP_RATING_INHUMANLY_WIDE;
 			this.buttRating = BUTT_RATING_EXPANSIVE;
 			this.lowerBody = LOWER_BODY_TYPE_HARPY;
-			this.skinTone = "pink";
-			this.skinType = SKIN_TYPE_PLAIN;
+			this.skin.setBaseOnly({color:"pink"});
 			this.skinDesc = "feathers";
 			this.hairColor = "blue";
 			this.hairLength = 16;

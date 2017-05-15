@@ -96,8 +96,7 @@ package classes.Scenes.Areas.Bog
 		public function LizanRogue() 
 		{
 			var skinToneAdj:String = randomChoice(SKIN_VARIATIONS);
-			this.skinTone = skinToneAdj;
-			this.skinType = SKIN_TYPE_SCALES;
+			this.skin.growCoat(SKIN_COAT_SCALES,{color:skinToneAdj});
 			this.a = "the ";
 			this.short = "lizan rogue";
 			this.imageName = "lizanrogue";

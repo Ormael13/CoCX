@@ -384,9 +384,7 @@ package classes.Scenes.Areas.Plains
 			this.tallness = 6*12;
 			this.hipRating = HIP_RATING_AMPLE;
 			this.buttRating = BUTT_RATING_TIGHT;
-			this.skinTone = "tawny";
-			this.skinType = SKIN_TYPE_FUR;
-			//this.skinDesc = Appearance.Appearance.DEFAULT_SKIN_DESCS[SKIN_TYPE_FUR];
+			this.skin.growFur({color:"tawny"});
 			this.hairColor = "black";
 			this.hairLength = 22;
 			initStrTouSpeInte(90, 75, 75, 60);

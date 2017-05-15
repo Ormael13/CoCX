@@ -138,9 +138,8 @@ package classes.Scenes.Areas.HighMountains
 			this.hipRating = HIP_RATING_CURVY;
 			this.buttRating = BUTT_RATING_JIGGLY;
 			this.lowerBody = LOWER_BODY_TYPE_SALAMANDER;
-			this.skinTone = "light";
-			this.skinType = SKIN_TYPE_SCALES;
-			this.skinDesc = "crimson";
+			this.skin.growCoat(SKIN_COAT_SCALES,{color:"crimson"});
+			this.skin.base.color = "light";
 			this.hairColor = "red";
 			this.hairLength = 16;
 			initStrTouSpeInte(125, 110, 120, 84);

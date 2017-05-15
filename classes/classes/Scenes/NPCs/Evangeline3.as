@@ -214,7 +214,7 @@ package classes.Scenes.NPCs
 				this.long = "You are currently fighting Evangeline, which is a eight feet tall cow-succubus hybryd with traces of taking in the past bimbo liquer. She's wearing lusty maiden's armor and using inscribed spellblade to attack.";
 				createBreastRow(Appearance.breastCupInverse("F"));//succubus milk może teoretycznie w nieskończoność zwiekszać rozmiar biustu
 				this.tallness = 96;
-				this.skinType = SKIN_TYPE_PLAIN;
+				this.skin.setBaseOnly({});
 				this.hipRating = HIP_RATING_FERTILE+3;//hipRating = 18
 				this.buttRating = BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(41, 46, 80, 50);
@@ -242,7 +242,7 @@ package classes.Scenes.NPCs
 				this.long = "You are currently fighting Evangeline, which is a eight feet tall cow-succubus hybryd with traces of taking in the past bimbo liquer. She's wearing lusty maiden's armor and using inscribed spellblade to attack.";
 				createBreastRow(Appearance.breastCupInverse("F"));
 				this.tallness = 96;
-				this.skinType = SKIN_TYPE_PLAIN;
+				this.skin.setBaseOnly({});
 				this.hipRating = HIP_RATING_FERTILE+3;//hipRating = 18
 				this.buttRating = BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(46, 46, 80, 50);
@@ -271,7 +271,7 @@ package classes.Scenes.NPCs
 				this.long = "You are currently fighting Evangeline, which is a eight feet tall cow-succubus-kitsune hybryd with traces of taking in the past bimbo liquer. She's wearing lusty maiden's armor and using inscribed spellblade to attack.";
 				createBreastRow(Appearance.breastCupInverse("F"));
 				this.tallness = 96;
-				this.skinType = SKIN_TYPE_PLAIN;
+				this.skin.setBaseOnly({});
 				this.hipRating = HIP_RATING_FERTILE+3;//hipRating = 18
 				this.buttRating = BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(46, 46, 80, 50);
@@ -302,7 +302,7 @@ package classes.Scenes.NPCs
 				this.long = "You are currently fighting Evangeline, which is a eight feet tall cow-succubus-kitsune hybryd with traces of taking in the past bimbo liquer. She's wearing lusty maiden's armor and using inscribed spellblade to attack.";
 				createBreastRow(Appearance.breastCupInverse("F"));
 				this.tallness = 96;
-				this.skinType = SKIN_TYPE_PLAIN;
+				this.skin.setBaseOnly({});
 				this.hipRating = HIP_RATING_FERTILE+3;//hipRating = 18
 				this.buttRating = BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(46, 46, 80, 50);
@@ -334,7 +334,7 @@ package classes.Scenes.NPCs
 				this.long = "You are currently fighting Evangeline, which is a eight feet tall multiracial chimera with traces of taking in the past bimbo liquer. She's wearing lusty maiden's armor and using inscribed spellblade to attack.";
 				createBreastRow(Appearance.breastCupInverse("F"));
 				this.tallness = 96;
-				this.skinType = SKIN_TYPE_PLAIN;
+				this.skin.setBaseOnly({});
 				this.hipRating = HIP_RATING_FERTILE+3;//hipRating = 18
 				this.buttRating = BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(46, 46, 80, 50);
@@ -368,7 +368,7 @@ package classes.Scenes.NPCs
 				this.long = "You are currently fighting Evangeline, which is a eight feet tall multiracial chimera with traces of taking in the past bimbo liquer. She's wearing lusty maiden's armor and using inscribed spellblade to attack.";
 				createBreastRow(Appearance.breastCupInverse("F"));//succubus milk może teoretycznie w nieskończoność zwiekszać rozmiar biustu
 				this.tallness = 96;
-				this.skinType = SKIN_TYPE_PLAIN;
+				this.skin.setBaseOnly({});
 				this.hipRating = HIP_RATING_FERTILE+3;//hipRating = 18
 				this.buttRating = BUTT_RATING_EXPANSIVE+1;//buttRating = 14
 				initStrTouSpeInte(46, 46, 80, 50);
