@@ -1037,7 +1037,7 @@ use namespace kGAMECLASS;
 			}
 			if (ferretScore() >= 4)
 			{
-				if (skinType == 1)
+				if (hasFur())
 					race = "ferret-morph";
 				else
 					race = "ferret-" + mf("morph", "girl");
@@ -1945,7 +1945,7 @@ use namespace kGAMECLASS;
 			if (breastRows.length > 3)
 				dogCounter--;
 			//Fur only counts if some canine features are present
-			if (skinType == 1 && dogCounter > 0)
+			if (hasFur() && dogCounter > 0)
 				dogCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				dogCounter += 10;
@@ -1968,7 +1968,7 @@ use namespace kGAMECLASS;
 			if (faceType == 16)
 				coonCounter += 2;
 			//Fur only counts if some canine features are present
-			if (skinType == 1 && coonCounter > 0)
+			if (hasFur() && coonCounter > 0)
 				coonCounter++;
 
 			if (tallness < 55 && coonCounter > 0)
@@ -1996,7 +1996,7 @@ use namespace kGAMECLASS;
 			if (coonCounter > 0 && balls > 0)
 				coonCounter++;
 			//Fur only counts if some canine features are present
-			if (skinType == 1 && coonCounter > 0)
+			if (hasFur() && coonCounter > 0)
 				coonCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				coonCounter += 10;
@@ -2034,7 +2034,7 @@ use namespace kGAMECLASS;
 			if (breastRows.length == 4 && foxCounter > 0)
 				foxCounter++;
 			//Fur only counts if some canine features are present
-			if (skinType == 1 && foxCounter > 0)
+			if (hasFur() && foxCounter > 0)
 				foxCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				foxCounter += 10;
@@ -2069,7 +2069,7 @@ use namespace kGAMECLASS;
 			if (breastRows.length > 3)
 				catCounter -= 2;
 			//Fur only counts if some canine features are present
-			if (skinType == 1 && catCounter > 0)
+			if (hasFur() && catCounter > 0)
 				catCounter++;
 			if (hornType == HORNS_DEMON || hornType == HORNS_DRACONIC_X2 || hornType == HORNS_DRACONIC_X4_12_INCH_LONG)
 					catCounter -= 2;
@@ -2174,7 +2174,7 @@ use namespace kGAMECLASS;
 			if (hasVagina() && vaginaType() == 1)
 				horseCounter++;
 			//Fur only counts if some equine features are present
-			if (skinType == 1 && horseCounter > 0)
+			if (hasFur() && horseCounter > 0)
 				horseCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				horseCounter += 10;
@@ -2567,7 +2567,7 @@ use namespace kGAMECLASS;
 				kanga++;
 			if (faceType == 9)
 				kanga++;
-			if (kanga >= 2 && skinType == 1)
+			if (kanga >= 2 && hasFur())
 				kanga++;
 			
 			End("Player","racialScore");
@@ -2660,14 +2660,14 @@ use namespace kGAMECLASS;
 				mutantCounter++;
 			if (faceType == 1)
 			{
-				if (skinType == 1)
+				if (hasFur())
 					mutantCounter--;
 				if (tailType == 1)
 					mutantCounter--;
 			}
 			if (faceType == 2)
 			{
-				if (skinType == 1)
+				if (hasFur())
 					mutantCounter--;
 				if (tailType == 2)
 					mutantCounter--;
@@ -3129,7 +3129,7 @@ use namespace kGAMECLASS;
 				wolfCounter++;
 			if (tailType == 29)
 				wolfCounter++;
-			if (skinType == 1)
+			if (hasFur())
 				wolfCounter++;
 			if (hairColor == "glacial white" && hasFur() && coatColor == "glacial white")
 				wolfCounter++;
@@ -3344,7 +3344,7 @@ use namespace kGAMECLASS;
 		//			manticoreCounter += 3;
 		//	}
 			//Fur only counts if some canine features are present
-		//	if (skinType == 1 && manticoreCounter > 2)
+		//	if (hasFur() && manticoreCounter > 2)
 		//		manticoreCounter++;
 			if (findPerk(PerkLib.ManticoreMetabolism) >= 0)
 				manticoreCounter++;
