@@ -23,9 +23,10 @@ import classes.GlobalFlags.kFLAGS;
 			else if (player.isGoo()) outputText("\n\nYour lower body rushes inward, molding into two leg-like shapes that gradually stiffen up.  In moments they solidify into normal-looking legs, complete with regular, human feet.  <b>You now have normal feet!</b>");
 			else if (player.isNaga()) outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>");
 			else if (player.isScylla()) outputText("\n\nYou collapse as your tentacle legs starts to merge.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>");
-			else /*if (player.isBiped()) */outputText("\n\nYou collapse as your legs shift and twist.  By the time the pain subsides, you notice that you have normal legs and normal feet.  <b>You now have normal feet!</b>", false);
+			else /*if (player.isBiped()) */outputText("\n\nYou collapse as your legs shift and twist.  By the time the pain subsides, you notice that you have normal legs and normal feet.  <b>You now have normal feet!</b>");
 			player.lowerBody = LOWER_BODY_TYPE_HUMAN;
 			player.legCount = 2;
+			changes++;
 		}
 
 		public function humanizeSkin():void {
@@ -40,13 +41,97 @@ import classes.GlobalFlags.kFLAGS;
 					outputText("\n\nYour [skin noadj] itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin.  <b>Your skin is once again normal!</b>");
 			}
 			player.skin.setBaseOnly({type:SKIN_BASE_PLAIN});
+			changes++;
+		}
+
+		public function humanizeEars():void {
+			outputText("\n\nOuch, your head aches! It feels like your ears are being yanked out of your head, and when you reach up to hold your aching noggin, you find they've vanished! Swooning and wobbling with little sense of balance, you nearly fall a half-dozen times before <b>a pair of normal, human ears sprout from the sides of your head.</b> You had almost forgotten what human ears felt like!");
+			player.earType = EARS_HUMAN;
+			changes++;
+		}
+
+		public function humanizeFace():void {
+			outputText("\n\nSudden agony sweeps over your [face], your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, human face.");
+			player.faceType = FACE_HUMAN;
+			changes++;
+		}
+
+		public function humanizeEyes():void {
+			if (player.eyeType == EYES_BLACK_EYES_SAND_TRAP) {
+				outputText("\n\nYou feel a twinge in your eyes and you blink.  It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
+			}
+			else {
+				outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.");
+				if (player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>");
+				outputText("  <b>You have normal, humanoid eyes again.</b>");
+			}
+			player.eyeType = EYES_HUMAN;
+			changes++;
+		}
+
+		public function humanizeArms(degargoylize:Boolean=false):void {
+			switch (player.armType) {
+				case ARM_TYPE_HUMAN:
+					return;
+				case ARM_TYPE_WOLF:
+				case ARM_TYPE_FOX:
+				case ARM_TYPE_LION:
+				case ARM_TYPE_YETI:
+					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving [skin base.type] behind.  Also the claws on your fingers reverts back into ordinary nails.");
+					break;
+				case ARM_TYPE_KITSUNE:
+					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' claws retracting back into ordinary nails. You hand looks human again.");
+					break;
+				case ARM_TYPE_SHARK:
+				case ARM_TYPE_ORCA:
+					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' fin suddenly fell down, leaving [skin base.type] behind.  Also webbing between your fingers slowly disappearing.");
+					break;
+				case ARM_TYPE_PLANT:
+				case ARM_TYPE_PLANT2:
+					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' vines are withering.  Leaves also falling donw, leaving [skin base.type] behind.");
+					break;
+				case ARM_TYPE_SALAMANDER:
+				case ARM_TYPE_LIZARD:
+				case ARM_TYPE_DRAGON:
+					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' scales are flaking away.  The leathery [skin coat.noadj] [skin coat.isare] soon gone, leaving [skin base.type] behind.");
+					break;
+				case ARM_TYPE_BEE:
+					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering and fuzz is flaking away.  The glossy black and yellow coating is soon gone, leaving [skin base.type] behind.");
+					break;
+				case ARM_TYPE_MANTIS:
+					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away and scythe shrinking until it vanish completly.  The glossy green coating is soon gone, leaving [skin base.type] behind.");
+					break;
+				case ARM_TYPE_SPIDER:
+					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving [skin base.type] behind.");
+					break;
+				case ARM_TYPE_HARPY:
+				case ARM_TYPE_PHOENIX:
+					outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving " + player.skinDesc + " behind.");
+					break;
+				case ARM_TYPE_GARGOYLE:
+					if (!degargoylize) return;
+					outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
+					break;
+				default:
+					outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
+					break;
+			}
+			player.armType = ARM_TYPE_HUMAN;
+			changes++;
+		}
+
+		public function removeWings():void {
+			outputText("\n\nSensation fades from your " + player.wingDesc + " wings slowly but surely, leaving them dried out husks that break off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.");
+			player.wingType = WING_TYPE_NONE;
+			player.wingDesc = "non-existant";
+			changes++;
 		}
 
 		public function updateGills(newGillType:int = GILLS_NONE):int
 		{
 			trace("Called updateGills(" + newGillType + ")");
 			var oldgillType:int = player.gillType;
-			if (player.gillType == newGillType) return 0; // no change
+			if (oldgillType == newGillType) return 0; // no change
 
 			player.gillType = newGillType;
 			changes++;

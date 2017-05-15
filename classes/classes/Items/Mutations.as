@@ -528,57 +528,11 @@ import classes.CockTypesEnum;
 				}
 				changes++;
 			}
-			//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && (player.armType == ARM_TYPE_HARPY || player.armType == ARM_TYPE_PHOENIX) && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove chitin-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SPIDER && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove mantis-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_MANTIS && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away and scythe shrinking until it vanish completly.  The glossy green coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove bee-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_BEE && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering and fuzz is flaking away.  The glossy black and yellow coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove salamander-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && (player.armType == ARM_TYPE_SALAMANDER || player.armType == ARM_TYPE_LIZARD || player.armType == ARM_TYPE_DRAGON) && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' scales are flaking away.  The leathery ", false);
-				if (player.armType == ARM_TYPE_SALAMANDER) outputText("red ", false);
-				outputText("scales are soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove plant-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_PLANT && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' vines are withering.  Leaves also falling donw, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove shark-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SHARK && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' fin suddenly fell down, leaving " + player.skinDesc + " behind.  Also webbing between your fingers slowly disappearing.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove kitsune arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_KITSUNE && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' claws retracting back into ordinary nails. You hand looks human again.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
 			//+hooves
+			if (changes < changeLimit && !InCollection(player.armType, ARM_TYPE_HUMAN, ARM_TYPE_GARGOYLE) && rand(4) == 0) {
+				humanizeArms();
+				changes++;
+			}
 			if (player.lowerBody != LOWER_BODY_TYPE_HOOFED && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE) {
 				if (changes < changeLimit && rand(3) == 0) {
 					changes++;
@@ -1041,53 +995,8 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && (player.armType == ARM_TYPE_HARPY || player.armType == ARM_TYPE_PHOENIX) && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove chitin-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SPIDER && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove mantis-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_MANTIS && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away and scythe shrinking until it vanish completly.  The glossy green coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove bee-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_BEE && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering and fuzz is flaking away.  The glossy black and yellow coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove salamander-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && (player.armType == ARM_TYPE_SALAMANDER || player.armType == ARM_TYPE_LIZARD || player.armType == ARM_TYPE_DRAGON) && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' scales are flaking away.  The leathery ", false);
-				if (player.armType == ARM_TYPE_SALAMANDER) outputText("red ", false);
-				outputText("scales are soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove plant-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_PLANT && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' vines are withering.  Leaves also falling donw, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove shark-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SHARK && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' fin suddenly fell down, leaving " + player.skinDesc + " behind.  Also webbing between your fingers slowly disappearing.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove kitsune arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_KITSUNE && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' claws retracting back into ordinary nails. You hand looks human again.", false);
-				player.armType = ARM_TYPE_HUMAN;
+			if (changes < changeLimit && !InCollection(player.armType, ARM_TYPE_HUMAN, ARM_TYPE_GARGOYLE) && rand(4) == 0) {
+				humanizeArms();
 				changes++;
 			}
 			//-Remove feathery hair (copy for equinum, canine peppers, Labova)
@@ -1370,15 +1279,7 @@ import classes.CockTypesEnum;
 			}
 			//Remove odd eyes
 			if (changes < changeLimit && rand(5) == 0 && player.eyeType > EYES_HUMAN) {
-				if (player.eyeType == EYES_BLACK_EYES_SAND_TRAP) {
-					outputText("\n\nYou feel a twinge in your eyes and you blink.  It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
-				}
-				else {
-					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.", false);
-					if (player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>", false);
-					outputText("  <b>You have normal, humanoid eyes again.</b>", false);
-				}
-				player.eyeType = EYES_HUMAN;
+				humanizeEyes();
 				changes++;
 			}
 			//HorseFace - Req's Fur && Ears
@@ -1489,9 +1390,7 @@ import classes.CockTypesEnum;
 			}
 			//Remove old wings
 			if (type == 2 && player.wingType != WING_TYPE_FEATHERED_ALICORN && player.wingType != WING_TYPE_GARGOYLE_LIKE_LARGE && player.wingType > WING_TYPE_NONE && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nSensation fades from your " + player.wingDesc + " wings slowly but surely, leaving them dried out husks that break off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.", false);
-				player.wingType = WING_TYPE_NONE;
-				player.wingDesc = "non-existant";
+				removeWings();
 				changes++;
 			}
 			if (rand(3) == 0) outputText(player.modTone(60, 1), false);
@@ -1806,65 +1705,18 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && (player.armType == ARM_TYPE_HARPY || player.armType == ARM_TYPE_PHOENIX) && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove chitin-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.skinType == SKIN_TYPE_PLAIN && player.armType == ARM_TYPE_SPIDER && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove mantis-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.skinType == SKIN_TYPE_PLAIN && player.armType == ARM_TYPE_MANTIS && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away and scythe shrinking until it vanish completly.  The glossy green coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove bee-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.skinType == SKIN_TYPE_PLAIN && player.armType == ARM_TYPE_BEE && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering and fuzz is flaking away.  The glossy black and yellow coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove salamander-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && (player.armType == ARM_TYPE_SALAMANDER || player.armType == ARM_TYPE_LIZARD || player.armType == ARM_TYPE_DRAGON) && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' scales are flaking away.  The leathery ", false);
-				if (player.armType == ARM_TYPE_SALAMANDER) outputText("red ", false);
-				outputText("scales are soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove plant-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_PLANT && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' vines are withering.  Leaves also falling donw, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove shark-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SHARK && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' fin suddenly fell down, leaving " + player.skinDesc + " behind.  Also webbing between your fingers slowly disappearing.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove kitsune arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_KITSUNE && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' claws retracting back into ordinary nails. You hand looks human again.", false);
-				player.armType = ARM_TYPE_HUMAN;
+			if (changes < changeLimit && !InCollection(player.armType, ARM_TYPE_HUMAN, ARM_TYPE_GARGOYLE) && rand(4) == 0) {
+				humanizeArms();
 				changes++;
 			}
 			//Human ears
 			if (player.armType == ARM_TYPE_HUMAN && player.earType != EARS_HUMAN && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nOuch, your head aches! It feels like your ears are being yanked out of your head, and when you reach up to hold your aching noggin, you find they've vanished! Swooning and wobbling with little sense of balance, you nearly fall a half-dozen times before <b>a pair of normal, human ears sprout from the sides of your head.</b> You had almost forgotten what human ears felt like!", false);
-				player.earType = EARS_HUMAN;
+				humanizeEars();
 				changes++;
 			}
 			//Human face
 			if (player.earType == EARS_HUMAN && player.faceType != FACE_HUMAN && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nSudden agony sweeps over your " + player.face() + ", your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, human face.", false);
-				player.faceType = FACE_HUMAN;
+				humanizeFace();
 				changes++;
 			}
 			if (rand(3) == 0) outputText(player.modTone(60, 1), false);
@@ -1976,7 +1828,7 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//Arms
-			if (player.lowerBody == LOWER_BODY_TYPE_LION && player.armType != ARM_TYPE_LION && player.armType != ARM_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
+			if (player.lowerBody == LOWER_BODY_TYPE_LION && !InCollection(player.armType, ARM_TYPE_GARGOYLE, ARM_TYPE_LION) && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\n", false);
 				if (player.armType != ARM_TYPE_HUMAN) outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ", false);
 				outputText("Your hands suddenly start to hurt as your arms grows a thick coat of dark fur up to your shoulders where it turns white. You watch enthralled as your nails fall off your fingers, feline claws taking their place on your now five-fingered paw-like hands. <b>You now have leonine paw hands.</b>", false);
@@ -2014,9 +1866,7 @@ import classes.CockTypesEnum;
 				}
 				//Remove old wings
 				else {
-					outputText("\n\nSensation fades from your " + player.wingDesc + " wings slowly but surely, leaving them dried out husks that break off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.", false);
-					player.wingType = WING_TYPE_NONE;
-					player.wingDesc = "non-existant";
+					removeWings();
 				}
 				changes++;
 			}
@@ -2033,8 +1883,7 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			if (player.rearBody == REAR_BODY_LION_MANE && player.earType != EARS_HUMAN && player.earType != EARS_LION && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nOuch, your head aches! It feels like your ears are being yanked out of your head, and when you reach up to hold your aching noggin, you find they've vanished! Swooning and wobbling with little sense of balance, you nearly fall a half-dozen times before <b>a pair of normal, human ears sprout from the sides of your head.</b> You had almost forgotten what human ears felt like!", false);
-				player.earType = EARS_HUMAN;
+				humanizeEars();
 				changes++;
 			}
 			//Face
@@ -2283,7 +2132,7 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//Arms
-			if ((player.lowerBody == LOWER_BODY_TYPE_PLANT_HIGH_HEELS || player.lowerBody == LOWER_BODY_TYPE_PLANT_ROOT_CLAWS) && player.armType != ARM_TYPE_PLANT && changes < changeLimit && rand(3) == 0) {
+			if ((player.lowerBody == LOWER_BODY_TYPE_PLANT_HIGH_HEELS || player.lowerBody == LOWER_BODY_TYPE_PLANT_ROOT_CLAWS) && !InCollection(player.armType, ARM_TYPE_GARGOYLE, ARM_TYPE_PLANT) && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>", false);
 				player.armType = ARM_TYPE_PLANT;
 				changes++;
@@ -2898,59 +2747,14 @@ import classes.CockTypesEnum;
 				player.skin.coat.color = player.hairColor;
 				changes++;
 			}
-			if (changes < changeLimit && player.armType == ARM_TYPE_HUMAN && player.armType != ARM_TYPE_WOLF && player.armType != ARM_TYPE_GARGOYLE && rand(2) == 0) {
+			if (changes < changeLimit && player.armType == ARM_TYPE_HUMAN && rand(2) == 0) {
 				outputText("\n\nYour arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into wolf like claws so no wonder you felt it that much. <b>You now have pawed hands.</b>", false);
 				player.armType = ARM_TYPE_WOLF;
 				changes++;
 			}
 			//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && (player.armType == ARM_TYPE_HARPY || player.armType == ARM_TYPE_PHOENIX) && player.armType != ARM_TYPE_GARGOYLE && rand(3) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove chitin-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SPIDER && player.armType != ARM_TYPE_GARGOYLE && rand(3) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove mantis-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_MANTIS && player.armType != ARM_TYPE_GARGOYLE && rand(3) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away and scythe shrinking until it vanish completly.  The glossy green coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove bee-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_BEE && player.armType != ARM_TYPE_GARGOYLE && rand(3) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering and fuzz is flaking away.  The glossy black and yellow coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove salamander-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && (player.armType == ARM_TYPE_SALAMANDER || player.armType == ARM_TYPE_LIZARD || player.armType == ARM_TYPE_DRAGON) && player.armType != ARM_TYPE_GARGOYLE && rand(3) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' scales are flaking away.  The leathery ", false);
-				if (player.armType == ARM_TYPE_SALAMANDER) outputText("red ", false);
-				outputText("scales are soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove plant-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_PLANT && player.armType != ARM_TYPE_GARGOYLE && rand(3) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' vines are withering.  Leaves also falling donw, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove shark-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SHARK && player.armType != ARM_TYPE_GARGOYLE && rand(3) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' fin suddenly fell down, leaving " + player.skinDesc + " behind.  Also webbing between your fingers slowly disappearing.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove kitsune arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_KITSUNE && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' claws retracting back into ordinary nails. You hand looks human again.", false);
-				player.armType = ARM_TYPE_HUMAN;
+			if (changes < changeLimit && !InCollection(player.armType, ARM_TYPE_HUMAN, ARM_TYPE_GARGOYLE, ARM_TYPE_WOLF) && rand(4) == 0) {
+				humanizeArms();
 				changes++;
 			}
 			//Wolf paws
@@ -2974,8 +2778,7 @@ import classes.CockTypesEnum;
 					changes++;
 				}
 				if (player.earType != EARS_HUMAN && player.earType != EARS_WOLF && player.tailType == TAIL_TYPE_WOLF) {
-					outputText("\n\nOuch, your head aches! It feels like your ears are being yanked out of your head, and when you reach up to hold your aching noggin, you find they've vanished! Swooning and wobbling with little sense of balance, you nearly fall a half-dozen times before <b>a pair of normal, human ears sprout from the sides of your head.</b> You had almost forgotten what human ears felt like!", false);
-					player.earType = EARS_HUMAN;
+					humanizeEars();
 					changes++;
 				}
 			}
@@ -3581,15 +3384,7 @@ import classes.CockTypesEnum;
 			}
 			//Remove odd eyes
 			if (changes < changeLimit && rand(5) == 0 && player.eyeType > EYES_HUMAN && type != 6) {
-				if (player.eyeType == EYES_BLACK_EYES_SAND_TRAP) {
-					outputText("\n\nYou feel a twinge in your eyes and you blink.  It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
-				}
-				else {
-					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.", false);
-					if (player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>", false);
-					outputText("  <b>You have normal, humanoid eyes again.</b>", false);
-				}
-				player.eyeType = EYES_HUMAN;
+				humanizeEyes();
 				changes++;
 			}
 			//Master Furry Appearance Order:
@@ -5283,53 +5078,8 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && (player.armType == ARM_TYPE_HARPY || player.armType == ARM_TYPE_PHOENIX) && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove chitin-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SPIDER && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove mantis-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_MANTIS && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away and scythe shrinking until it vanish completly.  The glossy green coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove bee-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_BEE && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering and fuzz is flaking away.  The glossy black and yellow coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove salamander-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && (player.armType == ARM_TYPE_SALAMANDER || player.armType == ARM_TYPE_LIZARD || player.armType == ARM_TYPE_DRAGON) && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' scales are flaking away.  The leathery ", false);
-				if (player.armType == ARM_TYPE_SALAMANDER) outputText("red ", false);
-				outputText("scales are soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove plant-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_PLANT && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' vines are withering.  Leaves also falling donw, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove shark-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SHARK && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' fin suddenly fell down, leaving " + player.skinDesc + " behind.  Also webbing between your fingers slowly disappearing.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove kitsune arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_KITSUNE && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' claws retracting back into ordinary nails. You hand looks human again.", false);
-				player.armType = ARM_TYPE_HUMAN;
+			if (changes < changeLimit && !InCollection(player.armType, ARM_TYPE_HUMAN, ARM_TYPE_GARGOYLE) && rand(4) == 0) {
+				humanizeArms();
 				changes++;
 			}
 			//SEXYTIEMS
@@ -5383,15 +5133,7 @@ import classes.CockTypesEnum;
 			}
 			//Remove odd eyes
 			if (changes < changeLimit && rand(5) == 0 && player.eyeType > EYES_HUMAN) {
-				if (player.eyeType == EYES_BLACK_EYES_SAND_TRAP) {
-					outputText("\n\nYou feel a twinge in your eyes and you blink.  It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
-				}
-				else {
-					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.", false);
-					if (player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>", false);
-					outputText("  <b>You have normal, humanoid eyes again.</b>", false);
-				}
-				player.eyeType = EYES_HUMAN;
+				humanizeEyes();
 				changes++;
 			}
 			//-Remove extra breast rows
@@ -5702,15 +5444,7 @@ import classes.CockTypesEnum;
 			}
 			//Remove odd eyes
 			if (changes < changeLimit && rand(5) == 0 && player.eyeType != EYES_HUMAN) {
-				if (player.eyeType == EYES_BLACK_EYES_SAND_TRAP) {
-					outputText("\n\nYou feel a twinge in your eyes and you blink.  It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
-				}
-				else {
-					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.", false);
-					if (player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>", false);
-					outputText("  <b>You have normal, humanoid eyes again.</b>", false);
-				}
-				player.eyeType = EYES_HUMAN;
+				humanizeEyes();
 				changes++;
 			}
 			//Tail TF
@@ -5778,7 +5512,7 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//Arms
-			if (player.lowerBody == LOWER_BODY_TYPE_SHARK && player.armType != ARM_TYPE_SHARK && changes < changeLimit && rand(3) == 0) {
+			if (player.lowerBody == LOWER_BODY_TYPE_SHARK && !InCollection(player.armType, ARM_TYPE_SHARK, ARM_TYPE_GARGOYLE) && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form with exception places between your finger which starting show signs to growing webbing. Soon after you start sweating profusely and panting loudly, feeling the space near your elbows shifting about. You hastily remove your " + player.armorName + " just in time before a strange fin-like structure bursts from your forearms. You examine them carefully and make a few modifications to your " + player.armorName + " to accommodate your new fins. <b>You now have shark arms.</b>", false);
 				player.armType = ARM_TYPE_SHARK;
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedSharkArms)) {
@@ -6195,13 +5929,11 @@ import classes.CockTypesEnum;
 			}
 			//Remove old wings
 			if (type == 2 && player.wingType != WING_TYPE_FEATHERED_LARGE && player.wingType > WING_TYPE_NONE && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nSensation fades from your " + player.wingDesc + " wings slowly but surely, leaving them dried out husks that break off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.", false);
-				player.wingType = WING_TYPE_NONE;
-				player.wingDesc = "non-existant";
+				removeWings();
 				changes++;
 			}
 			//Feathery Arms
-			if (type == 2 && player.armType != ARM_TYPE_HARPY && player.earType == EARS_SNAKE && changes < changeLimit && rand(4) == 0) {
+			if (type == 2 && !InCollection(player.armType, ARM_TYPE_GARGOYLE, ARM_TYPE_HARPY) && player.earType == EARS_SNAKE && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nWhen you go to wipe your mouth form remains of the oil, instead of the usual texture of your " + player.skinDesc + " on your lips, you feel feathers! You look on in horror while more of the avian plumage sprouts from your " + player.skinDesc + ", covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.", false);
 				changes++;
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedHarpyArms)) {
@@ -6348,10 +6080,7 @@ import classes.CockTypesEnum;
 			player.horns = 0;
 			player.hornType = HORNS_NONE;
 			player.earType = EARS_HUMAN;
-			player.skinType = SKIN_TYPE_PLAIN;
-			player.skinDesc = "skin";
-			player.skinAdj = "";
-			player.armType = ARM_TYPE_HUMAN;
+			player.skin.setBaseOnly();
 			player.tongueType = TONUGE_HUMAN;
 			player.eyeType = EYES_HUMAN;
 			if (player.fertility > 15) player.fertility = 15;
@@ -6469,59 +6198,8 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && (player.armType == ARM_TYPE_HARPY || player.armType == ARM_TYPE_PHOENIX) && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove chitin-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SPIDER && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove mantis-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_MANTIS && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away and scythe shrinking until it vanish completly.  The glossy green coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove bee-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_BEE && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering and fuzz is flaking away.  The glossy black and yellow coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove salamander-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && (player.armType == ARM_TYPE_SALAMANDER || player.armType == ARM_TYPE_LIZARD || player.armType == ARM_TYPE_DRAGON) && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' scales are flaking away.  The leathery ", false);
-				if (player.armType == ARM_TYPE_SALAMANDER) outputText("red ", false);
-				outputText("scales are soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove plant-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_PLANT && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' vines are withering.  Leaves also falling donw, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove shark-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SHARK && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' fin suddenly fell down, leaving " + player.skinDesc + " behind.  Also webbing between your fingers slowly disappearing.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove wolf-arms, fox-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && (player.armType == ARM_TYPE_WOLF || player.armType == ARM_TYPE_FOX) && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving " + player.skinDesc + " behind.  Also the claws on your fingers reverts back into ordinary nails.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove kitsune arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_KITSUNE && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' claws retracting back into ordinary nails. You hand looks human again.", false);
-				player.armType = ARM_TYPE_HUMAN;
+			if (changes < changeLimit && !InCollection(player.armType, ARM_TYPE_HUMAN, ARM_TYPE_GARGOYLE) && rand(4) == 0) {
+				humanizeArms();
 				changes++;
 			}
 			//-----------------------
@@ -6529,8 +6207,7 @@ import classes.CockTypesEnum;
 			//-----------------------
 			//-Human face
 			if (player.faceType != FACE_HUMAN && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nSudden agony sweeps over your " + player.face() + ", your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, human face.", false);
-				player.faceType = FACE_HUMAN;
+				humanizeFace();
 				changes++;
 			}
 			//-Human tongue
@@ -6541,21 +6218,12 @@ import classes.CockTypesEnum;
 			}
 			//Remove odd eyes
 			if (changes < changeLimit && rand(5) == 0 && player.eyeType > EYES_HUMAN) {
-				if (player.eyeType == EYES_BLACK_EYES_SAND_TRAP) {
-					outputText("\n\nYou feel a twinge in your eyes and you blink.  It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
-				}
-				else {
-					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.", false);
-					if (player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>", false);
-					outputText("  <b>You have normal, humanoid eyes again.</b>", false);
-				}
-				player.eyeType = EYES_HUMAN;
+				humanizeEyes();
 				changes++;
 			}
 			//-Gain human ears (If you have human face)
 			if ((player.earType != EARS_HUMAN && player.faceType == FACE_HUMAN) && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nOuch, your head aches! It feels like your ears are being yanked out of your head, and when you reach up to hold your aching noggin, you find they've vanished! Swooning and wobbling with little sense of balance, you nearly fall a half-dozen times before <b>a pair of normal, human ears sprout from the sides of your head.</b> You had almost forgotten what human ears felt like!", false);
-				player.earType = EARS_HUMAN;
+				humanizeEars();
 				changes++;
 			}
 			// Remove gills
@@ -7420,7 +7088,7 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//Arms
-			if (player.armType != ARM_TYPE_LIZARD && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(3) == 0) {
+			if (!InCollection(ARM_TYPE_GARGOYLE, ARM_TYPE_LIZARD) && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of lizard one with leathery scales and short claws replacing your fingernails.  <b>You now have a lizard arms.</b>", false);
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedLizardArms)) {
 					outputText("\n\n<b>Genetic Memory: Lizard Arms - Memorized!</b>\n\n");
@@ -7454,15 +7122,7 @@ import classes.CockTypesEnum;
 			}
 			//Remove odd eyes
 			if (changes < changeLimit && rand(5) == 0 && player.eyeType > EYES_HUMAN && player.eyeType != EYES_REPTILIAN) {
-				if (player.eyeType == EYES_BLACK_EYES_SAND_TRAP) {
-					outputText("\n\nYou feel a twinge in your eyes and you blink.  It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
-				}
-				else {
-					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.", false);
-					if (player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>", false);
-					outputText("  <b>You have normal, humanoid eyes again.</b>", false);
-				}
-				player.eyeType = EYES_HUMAN;
+				humanizeEyes();
 				changes++;
 			}
 			//-Ears become smaller nub-like openings?
@@ -7710,7 +7370,7 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//Arms
-			if (player.armType != ARM_TYPE_SALAMANDER && player.lowerBody == LOWER_BODY_TYPE_SALAMANDER && changes < changeLimit && rand(3) == 0) {
+			if (!InCollection(ARM_TYPE_GARGOYLE, ARM_TYPE_SALAMANDER) && player.lowerBody == LOWER_BODY_TYPE_SALAMANDER && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of salamander one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>", false);
 				player.armType = ARM_TYPE_SALAMANDER;
 				changes++;
@@ -7723,15 +7383,7 @@ import classes.CockTypesEnum;
 			}
 			//Remove odd eyes
 			if (changes < changeLimit && rand(4) == 0 && player.eyeType > EYES_HUMAN && player.eyeType != EYES_REPTILIAN) {
-				if (player.eyeType == EYES_BLACK_EYES_SAND_TRAP) {
-					outputText("\n\nYou feel a twinge in your eyes and you blink.  It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
-				}
-				else {
-					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.", false);
-					if (player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>", false);
-					outputText("  <b>You have normal, humanoid eyes again.</b>", false);
-				}
-				player.eyeType = EYES_HUMAN;
+				humanizeEyes();
 				changes++;
 			}
 			//Fanged face
@@ -7741,14 +7393,12 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			if (player.faceType != FACE_HUMAN && player.faceType != FACE_SALAMANDER_FANGS && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nSudden agony sweeps over your " + player.face() + ", your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, human face.", false);
-				player.faceType = FACE_HUMAN;
+				humanizeFace();
 				changes++;
 			}
 			//Human ears
 			if (player.faceType == FACE_SALAMANDER_FANGS && player.earType != EARS_HUMAN && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nOuch, your head aches! It feels like your ears are being yanked out of your head, and when you reach up to hold your aching noggin, you find they've vanished! Swooning and wobbling with little sense of balance, you nearly fall a half-dozen times before <b>a pair of normal, human ears sprout from the sides of your head.</b> You had almost forgotten what human ears felt like!", false);
-				player.earType = EARS_HUMAN;
+				humanizeEars();
 				changes++;
 			}
 			//Partial scaled skin
@@ -8008,7 +7658,7 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//Arms
-			if (player.armType != ARM_TYPE_PHOENIX && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_SALAMANDER && rand(4) == 0) {
+			if (!InCollection(ARM_TYPE_GARGOYLE, ARM_TYPE_PHOENIX) && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_SALAMANDER && rand(4) == 0) {
 				outputText("\n\nYou smile impishly as you lick the remains of the liqueur from your teeth, but when you go to wipe your mouth, instead of the usual texture of your " + player.skinDesc + " on your lips, you feel feathers! You look on in horror while more of the crimson colored avian plumage sprouts from your " + player.skinDesc + ", covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.", false);
 				changes++;
 				player.armType = ARM_TYPE_PHOENIX;
@@ -8022,9 +7672,7 @@ import classes.CockTypesEnum;
 			}
 			//Remove old wings
 			if (player.wingType != WING_TYPE_FEATHERED_PHOENIX && player.wingType > WING_TYPE_NONE && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nSensation fades from your " + player.wingDesc + " wings slowly but surely, leaving them dried out husks that break off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.", false);
-				player.wingType = WING_TYPE_NONE;
-				player.wingDesc = "non-existant";
+				removeWings();
 				changes++;
 			}
 			//-Feathery Hair
@@ -8035,27 +7683,17 @@ import classes.CockTypesEnum;
 			}
 			//Remove odd eyes
 			if (changes < changeLimit && rand(4) == 0 && player.eyeType > EYES_HUMAN) {
-				if (player.eyeType == EYES_BLACK_EYES_SAND_TRAP) {
-					outputText("\n\nYou feel a twinge in your eyes and you blink.  It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
-				}
-				else {
-					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.", false);
-					if (player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>", false);
-					outputText("  <b>You have normal, humanoid eyes again.</b>", false);
-				}
-				player.eyeType = EYES_HUMAN;
+				humanizeEyes();
 				changes++;
 			}
 			//Human face
 			if (player.faceType != FACE_HUMAN && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nSudden agony sweeps over your " + player.face() + ", your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, human face.", false);
-				player.faceType = FACE_HUMAN;
+				humanizeFace();
 				changes++;
 			}
 			//Human ears
 			if (player.faceType == FACE_HUMAN && player.earType != EARS_HUMAN && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nOuch, your head aches! It feels like your ears are being yanked out of your head, and when you reach up to hold your aching noggin, you find they've vanished! Swooning and wobbling with little sense of balance, you nearly fall a half-dozen times before <b>a pair of normal, human ears sprout from the sides of your head.</b> You had almost forgotten what human ears felt like!", false);
-				player.earType = EARS_HUMAN;
+				humanizeEars();
 				changes++;
 			}
 			// Remove gills
@@ -8076,7 +7714,7 @@ import classes.CockTypesEnum;
 			player.refillHunger(20);
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
 		}
-		
+
 /*
 		public function wingStick(player:Player):void
 		{
@@ -8663,15 +8301,7 @@ import classes.CockTypesEnum;
 			}
 			//Remove odd eyes
 			if (changes < changeLimit && rand(5) == 0 && player.eyeType > EYES_HUMAN) {
-				if (player.eyeType == EYES_BLACK_EYES_SAND_TRAP) {
-					outputText("\n\nYou feel a twinge in your eyes and you blink.  It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
-				}
-				else {
-					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.", false);
-					if (player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>", false);
-					outputText("  <b>You have normal, humanoid eyes again.</b>", false);
-				}
-				player.eyeType = EYES_HUMAN;
+				humanizeEyes();
 				changes++;
 			}
 			//****************
@@ -8719,13 +8349,11 @@ import classes.CockTypesEnum;
 			}
 			//-Remove old wings
 			if (player.wingType != WING_TYPE_FEATHERED_LARGE && player.wingType > WING_TYPE_NONE && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nSensation fades from your " + player.wingDesc + " wings slowly but surely, leaving them dried out husks that break off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.", false);
-				player.wingType = WING_TYPE_NONE;
-				player.wingDesc = "non-existant";
+				removeWings();
 				changes++;
 			}
 			//-Feathery Arms
-			if (player.armType != ARM_TYPE_HARPY && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && (type == 1 || player.hairType == 1) && rand(4) == 0) {
+			if (!InCollection(ARM_TYPE_GARGOYLE, ARM_TYPE_HARPY) && changes < changeLimit && (type == 1 || player.hairType == 1) && rand(4) == 0) {
 				outputText("\n\nYou smile impishly as you lick the last bits of the nut from your teeth, but when you go to wipe your mouth, instead of the usual texture of your " + player.skinDesc + " on your lips, you feel feathers! You look on in horror while more of the avian plumage sprouts from your " + player.skinDesc + ", covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.", false);
 				changes++;
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedHarpyArms)) {
@@ -8746,14 +8374,12 @@ import classes.CockTypesEnum;
 			}
 			//-Human face
 			if (player.faceType != FACE_HUMAN && changes < changeLimit && (type == 1 || (player.earType == EARS_HUMAN || player.earType == EARS_ELFIN)) && rand(4) == 0) {
-				outputText("\n\nSudden agony sweeps over your " + player.face() + ", your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, human face.", false);
-				player.faceType = FACE_HUMAN;
+				humanizeFace();
 				changes++;
 			}
 			//-Gain human ears (keep elf ears)
 			if ((player.earType != EARS_HUMAN && player.earType != EARS_ELFIN) && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nOuch, your head aches! It feels like your ears are being yanked out of your head, and when you reach up to hold your aching noggin, you find they've vanished! Swooning and wobbling with little sense of balance, you nearly fall a half-dozen times before <b>a pair of normal, human ears sprout from the sides of your head.</b> You had almost forgotten what human ears felt like!", false);
-				player.earType = EARS_HUMAN;
+				humanizeEars();
 				changes++;
 			}
 			// Remove gills
@@ -8869,53 +8495,8 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && (player.armType == ARM_TYPE_HARPY || player.armType == ARM_TYPE_PHOENIX) && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove chitin-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SPIDER && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove mantis-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_MANTIS && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away and scythe shrinking until it vanish completly.  The glossy green coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove bee-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_BEE && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering and fuzz is flaking away.  The glossy black and yellow coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove salamander-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && (player.armType == ARM_TYPE_SALAMANDER || player.armType == ARM_TYPE_LIZARD || player.armType == ARM_TYPE_DRAGON) && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' scales are flaking away.  The leathery ", false);
-				if (player.armType == ARM_TYPE_SALAMANDER) outputText("red ", false);
-				outputText("scales are soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove plant-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_PLANT && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' vines are withering.  Leaves also falling donw, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove shark-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SHARK && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' fin suddenly fell down, leaving " + player.skinDesc + " behind.  Also webbing between your fingers slowly disappearing.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove kitsune arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_KITSUNE && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' claws retracting back into ordinary nails. You hand looks human again.", false);
-				player.armType = ARM_TYPE_HUMAN;
+			if (changes < changeLimit && !InCollection(player.armType, ARM_TYPE_HUMAN, ARM_TYPE_GARGOYLE) && rand(4) == 0) {
+				humanizeArms();
 				changes++;
 			}
 			//-Remove feathery hair (copy for equinum, canine peppers, Labova)
@@ -8938,15 +8519,7 @@ import classes.CockTypesEnum;
 			}
 			//Remove odd eyes
 			if (changes < changeLimit && rand(5) == 0 && player.eyeType > EYES_HUMAN) {
-				if (player.eyeType == EYES_BLACK_EYES_SAND_TRAP) {
-					outputText("\n\nYou feel a twinge in your eyes and you blink.  It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
-				}
-				else {
-					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.", false);
-					if (player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>", false);
-					outputText("  <b>You have normal, humanoid eyes again.</b>", false);
-				}
-				player.eyeType = EYES_HUMAN;
+				humanizeEyes();
 				changes++;
 			}
 			//****************
@@ -9294,7 +8867,7 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//(Arms to carapace-covered arms)
-			if (player.armType != ARM_TYPE_SPIDER && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
+			if (!InCollection(ARM_TYPE_GARGOYLE, ARM_TYPE_SPIDER) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\n", false);
 				if (player.armType == ARM_TYPE_HARPY || player.armType == ARM_TYPE_HUMAN) {
 					//(Bird pretext)
@@ -10594,7 +10167,7 @@ import classes.CockTypesEnum;
 				player.eyeType = EYES_FOX;
 			}
 			//Kitsune arms
-			if (changes < changeLimit && player.armType == ARM_TYPE_HUMAN && player.armType != ARM_TYPE_KITSUNE && rand(2) == 0) {
+			if (changes < changeLimit && player.armType == ARM_TYPE_HUMAN && rand(2) == 0) {
 				outputText("\n\n Your finger tingle as your nails sharpen to point. You run them on a tree bark and they feel way harder than your old human nails. <b>You will be able to claw at your opponent with your sharp kitsune nails.</b>", false);
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedKitsuneArms)) {
 					outputText("\n\n<b>Genetic Memory: Kitsune Arms - Memorized!</b>\n\n");
@@ -10604,53 +10177,8 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && (player.armType == ARM_TYPE_HARPY || player.armType == ARM_TYPE_PHOENIX) && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove chitin-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SPIDER && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove mantis-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_MANTIS && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away and scythe shrinking until it vanish completly.  The glossy green coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove bee-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_BEE && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering and fuzz is flaking away.  The glossy black and yellow coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove salamander-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && (player.armType == ARM_TYPE_SALAMANDER || player.armType == ARM_TYPE_LIZARD || player.armType == ARM_TYPE_DRAGON) && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' scales are flaking away.  The leathery ", false);
-				if (player.armType == ARM_TYPE_SALAMANDER) outputText("red ", false);
-				outputText("scales are soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove plant-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_PLANT && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' vines are withering.  Leaves also falling donw, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove shark-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SHARK && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' fin suddenly fell down, leaving " + player.skinDesc + " behind.  Also webbing between your fingers slowly disappearing.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove wolf-arms, fox-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && (player.armType == ARM_TYPE_WOLF || player.armType == ARM_TYPE_FOX) && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving " + player.skinDesc + " behind.  Also the claws on your fingers reverts back into ordinary nails.", false);
-				player.armType = ARM_TYPE_HUMAN;
+			if (changes < changeLimit && !InCollection(player.armType, ARM_TYPE_HUMAN, ARM_TYPE_GARGOYLE, ARM_TYPE_FOX, ARM_TYPE_KITSUNE) && rand(4) == 0) {
+				humanizeArms();
 				changes++;
 			}
 			//[Grow Fox Ears]
@@ -11719,59 +11247,8 @@ import classes.CockTypesEnum;
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
 			//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && (player.armType == ARM_TYPE_HARPY || player.armType == ARM_TYPE_PHOENIX) && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating.  The wing-like shape your arms once had is gone in a matter of moments, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove chitin-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SPIDER && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away.  The glossy black coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove mantis-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_MANTIS && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering is flaking away and scythe shrinking until it vanish completly.  The glossy green coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove bee-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_BEE && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' chitinous covering and fuzz is flaking away.  The glossy black and yellow coating is soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove salamander-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && (player.armType == ARM_TYPE_SALAMANDER || player.armType == ARM_TYPE_LIZARD || player.armType == ARM_TYPE_DRAGON) && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' scales are flaking away.  The leathery ", false);
-				if (player.armType == ARM_TYPE_SALAMANDER) outputText("red ", false);
-				outputText("scales are soon gone, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove plant-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_PLANT && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' vines are withering.  Leaves also falling donw, leaving " + player.skinDesc + " behind.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove shark-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_SHARK && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' fin suddenly fell down, leaving " + player.skinDesc + " behind.  Also webbing between your fingers slowly disappearing.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove wolf-arms, fox-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && (player.armType == ARM_TYPE_WOLF || player.armType == ARM_TYPE_FOX) && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' [skin coat.color] fur is flaking away, leaving " + player.skinDesc + " behind.  Also the claws on your fingers reverts back into ordinary nails.", false);
-				player.armType = ARM_TYPE_HUMAN;
-				changes++;
-			}
-			//-Remove kitsune arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && player.armType == ARM_TYPE_KITSUNE && player.armType != ARM_TYPE_GARGOYLE && rand(4) == 0) {
-				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  Glancing down in irritation, you discover that your arms' claws retracting back into ordinary nails. You hand looks human again.", false);
-				player.armType = ARM_TYPE_HUMAN;
+			if (changes < changeLimit && !InCollection(player.armType, ARM_TYPE_HUMAN, ARM_TYPE_GARGOYLE) && rand(4) == 0) {
+				humanizeArms();
 				changes++;
 			}
 			//foot changes - requires furless
@@ -12706,8 +12183,7 @@ import classes.CockTypesEnum;
 			}
 			//Face
 			if (player.skinType == SKIN_TYPE_PLAIN && player.skinTone == "slippery" && player.faceType != FACE_HUMAN && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nSudden agony sweeps over your " + player.face() + ", your visage turning hideous as bones twist and your jawline shifts. The pain slowly vanishes, leaving you weeping into your fingers. When you pull your hands away you realize you've been left with a completely normal, human face.", false);
-				player.faceType = FACE_HUMAN;
+				humanizeFace();
 				changes++;
 			}
 			//Ears
@@ -12905,7 +12381,7 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//Arms
-			if (player.lowerBody == LOWER_BODY_TYPE_YETI && player.armType != ARM_TYPE_YETI && changes < changeLimit && rand(4) == 0) {
+			if (player.lowerBody == LOWER_BODY_TYPE_YETI && !InCollection(player.armType, ARM_TYPE_GARGOYLE, ARM_TYPE_YETI) && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYour arms start to become excessively hairy down almost to your hands. They're so hairy, you can no longer see your skin. As the fur growth stops, your hands enlarge to twice their size. They look like huge monkey paws. Well, you guess punching people will be easy with your enormous <b>yeti hands!</b>", false);
 				player.armType = ARM_TYPE_YETI;
 				changes++;
@@ -12939,15 +12415,7 @@ import classes.CockTypesEnum;
 			}
 			//Eyes
 			if (changes < changeLimit && rand(3) == 0 && player.eyeType > EYES_HUMAN) {
-				if (player.eyeType == EYES_BLACK_EYES_SAND_TRAP) {
-					outputText("\n\nYou feel a twinge in your eyes and you blink.  It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
-				}
-				else {
-					outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.", false);
-					if (player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>", false);
-					outputText("  <b>You have normal, humanoid eyes again.</b>", false);
-				}
-				player.eyeType = EYES_HUMAN;
+				humanizeEyes();
 				changes++;
 			}
 			//hips
@@ -13063,7 +12531,7 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//arms
-			if (player.lowerBody == LOWER_BODY_TYPE_ORCA && player.armType != ARM_TYPE_ORCA && changes < changeLimit && rand(4) == 0) {
+			if (player.lowerBody == LOWER_BODY_TYPE_ORCA && !InCollection(player.armType, ARM_TYPE_GARGOYLE, ARM_TYPE_ORCA) && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYour fingers suddenly are forced together. When you stretch them back you discover they are now webbed, ready for swimming. You are still examining your hands when something not unlike a pair of fins grow out of your forearms. <b>You can only guess those Orca arms will help you to swim at high speeds!</b>", false);
 				player.armType = ARM_TYPE_ORCA;
 				changes++;
@@ -13302,7 +12770,7 @@ import classes.CockTypesEnum;
 			}
 			
 			//Arms
-			if (player.lowerBody == LOWER_BODY_TYPE_MANTIS && player.armType != ARM_TYPE_MANTIS && changes < changeLimit && rand(3) == 0) {
+			if (player.lowerBody == LOWER_BODY_TYPE_MANTIS && !InCollection(player.armType, ARM_TYPE_GARGOYLE, ARM_TYPE_MANTIS) && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, turning the " + player.skinDesc + " into a shiny green carapace.", false);
 				outputText("\nA moment later the pain fades and you are able to turn your gaze down to your beautiful new arms, covered in shining green chitin from the upper arm down.", false);
 				outputText("\nThe transformation end as down the lenght of your forearms you grow a pair of massive scythe like appendage just like a mantis.", false);
@@ -13337,9 +12805,7 @@ import classes.CockTypesEnum;
 				}
 				//Remove old wings
 				else {
-					outputText("\n\nSensation fades from your " + player.wingDesc + " wings slowly but surely, leaving them dried out husks that break off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.", false);
-					player.wingType = WING_TYPE_NONE;
-					player.wingDesc = "non-existant";
+					removeWings();
 				}
 				changes++;
 			}
