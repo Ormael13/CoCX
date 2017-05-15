@@ -2962,13 +2962,7 @@ import classes.CockTypesEnum;
 					changes++;
 				}
 				if (player.lowerBody != LOWER_BODY_TYPE_HUMAN && player.lowerBody != LOWER_BODY_TYPE_WOLF) {
-					if (player.isTaur()) outputText("\n\nYour quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of human legs</b>!", false);
-					if (player.isGoo()) outputText("\n\nYour lower body rushes inward, molding into two leg-like shapes that gradually stiffen up.  In moments they solidify into normal-looking legs, complete with regular, human feet.  <b>You now have normal feet!</b>", false);
-					if (player.isNaga()) outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>", false);
-					if (player.isScylla()) outputText("\n\nYou collapse as your tentacle legs starts to merge.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>", false);
-					if (player.isBiped() && player.lowerBody != LOWER_BODY_TYPE_HUMAN) outputText("\n\nYou collapse as your legs shift and twist.  By the time the pain subsides, you notice that you have normal legs and normal feet.  <b>You now have normal feet!</b>", false);
-					player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-					player.legCount = 2;
+					humanizeLowerBody();
 					changes++;
 				}
 			}
@@ -5779,38 +5773,8 @@ import classes.CockTypesEnum;
 				}
 				changes++;
 			}
-			if (player.isTaur() && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nYour quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of human legs</b>!", false);
-				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-				player.legCount = 2;
-				changes++;
-			}
-			//(Goo -> Normal Human Legs) (copy from elsewhere)
-			if (player.isGoo() && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nYour lower body rushes inward, molding into two leg-like shapes that gradually stiffen up.  In moments they solidify into normal-looking legs, complete with regular, human feet.  <b>You now have normal feet!</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-				player.legCount = 2;
-				changes++;
-			}
-			//(Naga -> Normal Human Legs) (copy from elsewhere)
-			if (player.isNaga() && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-				player.legCount = 2;
-				changes++;
-			}
-			//(Scylla -> Normal Human Legs) (copy from elsewhere)
-			if (player.isScylla() && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nYou collapse as your tentacle legs starts to merge.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-				player.legCount = 2;
-				changes++;
-			}
-			//(Non-human Non-shark -> Normal Human Legs)
-			if (player.isBiped() && player.lowerBody != LOWER_BODY_TYPE_HUMAN && player.lowerBody != LOWER_BODY_TYPE_SHARK && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nYou collapse as your legs shift and twist.  By the time the pain subsides, you notice that you have normal legs and normal feet.  <b>You now have normal feet!</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-				player.legCount = 2;
+			if (player.lowerBody != LOWER_BODY_TYPE_SHARK && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
+				humanizeLowerBody();
 				changes++;
 			}
 			//Arms
@@ -6470,39 +6434,8 @@ import classes.CockTypesEnum;
 			// MAJOR TRANSFORMATIONS
 			//-----------------------
 			//1st priority: Change lower body to bipedal.
-			//(Centaurs -> Normal Human Legs) (copy from elsewhere)
-			if (player.isTaur() && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYour quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of human legs</b>!", false);
-				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-				player.legCount = 2;
-				changes++;
-			}
-			//(Goo -> Normal Human Legs) (copy from elsewhere)
-			if (player.isGoo() && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYour lower body rushes inward, molding into two leg-like shapes that gradually stiffen up.  In moments they solidify into normal-looking legs, complete with regular, human feet.  <b>You now have normal feet!</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-				player.legCount = 2;
-				changes++;
-			}
-			//(Naga -> Normal Human Legs) (copy from elsewhere)
-			if (player.isNaga() && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-				player.legCount = 2;
-				changes++;
-			}
-			//(Scylla -> Normal Human Legs) (copy from elsewhere)
-			if (player.isScylla() && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYou collapse as your tentacle legs starts to merge.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-				player.legCount = 2;
-				changes++;
-			}
-			//(Non-human -> Normal Human Legs)
-			if (player.isBiped() && player.lowerBody != LOWER_BODY_TYPE_HUMAN && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYou collapse as your legs shift and twist.  By the time the pain subsides, you notice that you have normal legs and normal feet.  <b>You now have normal feet!</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-				player.legCount = 2;
+			if (player.lowerBody != LOWER_BODY_TYPE_HUMAN && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
+				humanizeLowerBody();
 				changes++;
 			}
 			//Remove Incorporeality Perk
@@ -9380,32 +9313,9 @@ import classes.CockTypesEnum;
 				}
 				changes++;
 			}
-			//(Centaurs -> Normal Human Legs) (copy from elsewhere)
-			if (player.isTaur() && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYour quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of human legs</b>!", false);
-				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-				player.legCount = 2;
-				changes++;
-			}
-			//(Goo -> Normal Human Legs) (copy from elsewhere)
-			if (player.isGoo() && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYour lower body rushes inward, molding into two leg-like shapes that gradually stiffen up.  In moments they solidify into normal-looking legs, complete with regular, human feet.  <b>You now have normal feet!</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-				player.legCount = 2;
-				changes++;
-			}
-			//(Naga -> Normal Human Legs) (copy from elsewhere)
-			if (player.isNaga() && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-				player.legCount = 2;
-				changes++;
-			}
-			//(Scylla -> Normal Human Legs) (copy from elsewhere)
-			if (player.isScylla() && changes < changeLimit && rand(4) == 0) {
-				outputText("\n\nYou collapse as your tentacle legs starts to merge.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-				player.legCount = 2;
+			if ((player.isTaur() || player.isGoo() || player.isNaga() || player.isScylla())
+				&& changes < changeLimit && rand(4) == 0) {
+				humanizeLowerBody();
 				changes++;
 			}
 			//Drider butt
@@ -12990,13 +12900,7 @@ import classes.CockTypesEnum;
 					player.lowerBody = LOWER_BODY_TYPE_YETI;
 				}
 				else {
-					if (player.isTaur()) outputText("\n\nYour quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of human legs</b>!", false);
-					if (player.isGoo()) outputText("\n\nYour lower body rushes inward, molding into two leg-like shapes that gradually stiffen up.  In moments they solidify into normal-looking legs, complete with regular, human feet.  <b>You now have normal feet!</b>", false);
-					if (player.isNaga()) outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>", false);
-					if (player.isScylla()) outputText("\n\nYou collapse as your tentacle legs starts to merge.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>", false);
-					if (player.isBiped()) outputText("\n\nYou collapse as your legs shift and twist.  By the time the pain subsides, you notice that you have normal legs and normal feet.  <b>You now have normal feet!</b>", false);
-					player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-					player.legCount = 2;
+					humanizeLowerBody();
 				}
 				changes++;
 			}
@@ -13154,13 +13058,7 @@ import classes.CockTypesEnum;
 					player.lowerBody = LOWER_BODY_TYPE_ORCA;
 				}
 				else {
-					if (player.isTaur()) outputText("\n\nYour quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of human legs</b>!", false);
-					if (player.isGoo()) outputText("\n\nYour lower body rushes inward, molding into two leg-like shapes that gradually stiffen up.  In moments they solidify into normal-looking legs, complete with regular, human feet.  <b>You now have normal feet!</b>", false);
-					if (player.isNaga()) outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>", false);
-					if (player.isScylla()) outputText("\n\nYou collapse as your tentacle legs starts to merge.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>", false);
-					if (player.isBiped()) outputText("\n\nYou collapse as your legs shift and twist.  By the time the pain subsides, you notice that you have normal legs and normal feet.  <b>You now have normal feet!</b>", false);
-					player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-					player.legCount = 2;
+					humanizeLowerBody();
 				}
 				changes++;
 			}
