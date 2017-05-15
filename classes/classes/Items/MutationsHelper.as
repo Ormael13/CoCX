@@ -44,6 +44,14 @@ import classes.GlobalFlags.kFLAGS;
 			changes++;
 		}
 
+		public function growChitin(color:String,coverage:int=Skin.COVERAGE_HIGH):void {
+			if (player.hasScales()) outputText("\n\nYour [skin coat.color] scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of [skin coat.type].  At last the itching stops as <b>you brush a few more loose scales from your new chitin exoskeleton.</b>", false);
+			else if (player.hasCoat()) if (player.hasFur()) outputText("Your skin suddenly feels itchy as your [skin coat.type] begins falling out in clumps, <b>revealing smooth chitin</b> underneath.", false);
+			else outputText("\n\nAn itchy feeling springs up over every inch of your [skin.type].  As you scratch yourself madly, you feel your skin hardening until <b>you are wholy covered in chitin.</b>", false);
+			player.skin.growCoat(SKIN_COAT_CHITIN,{color:color},coverage);
+			changes++;
+		}
+
 		public function humanizeEars():void {
 			outputText("\n\nOuch, your head aches! It feels like your ears are being yanked out of your head, and when you reach up to hold your aching noggin, you find they've vanished! Swooning and wobbling with little sense of balance, you nearly fall a half-dozen times before <b>a pair of normal, human ears sprout from the sides of your head.</b> You had almost forgotten what human ears felt like!");
 			player.earType = EARS_HUMAN;
@@ -120,8 +128,17 @@ import classes.GlobalFlags.kFLAGS;
 			changes++;
 		}
 
-		public function removeWings():void {
-			outputText("\n\nSensation fades from your " + player.wingDesc + " wings slowly but surely, leaving them dried out husks that break off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.");
+		public function removeWings(degargoylize:Boolean=false):void {
+			if (player.wingType == WING_TYPE_GARGOYLE_LIKE_LARGE && !degargoylize) return;
+			if (player.wingType == WING_TYPE_NONE) return;
+			switch(rand(2)) {
+				case 0:
+					outputText("\n\nSensation fades from your " + player.wingDesc + " wings slowly but surely, leaving them dried out husks that break off to fall on the ground. Your back closes up to conceal the loss, as smooth and unbroken as the day you entered the portal.");
+					break;
+				case 1:
+					outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades.  After a moment the pain passes, though your wings are gone!");
+					break;
+			}
 			player.wingType = WING_TYPE_NONE;
 			player.wingDesc = "non-existant";
 			changes++;

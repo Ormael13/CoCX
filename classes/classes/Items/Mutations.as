@@ -1765,10 +1765,7 @@ import classes.CockTypesEnum;
 			}
 			//Gain chitin skin
 			if (changes < changeLimit && !player.hasCoatOfType(SKIN_COAT_CHITIN) && player.skinType != SKIN_TYPE_STONE && player.tailType == TAIL_TYPE_SCORPION && rand(2) == 0) {
-				if (player.skinType == SKIN_TYPE_PLAIN) outputText("\n\nAn itchy feeling springs up over every inch of your skin.  As you scratch yourself madly, you feel your skin hardening until <b>you are wholy covered in chitin.</b>", false);
-				if (player.hasFur()) outputText("Your skin suddenly feels itchy as your fur begins falling out in clumps, <b>revealing smooth chitin</b> underneath.", false);
-				if (player.hasScales()) outputText("\n\nYour [skin coat.color] scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of " + player.skinDesc + ".  At last the itching stops as <b>you brush a few more loose scales from your new chitin exoskeleton.</b>", false);
-				player.skin.growCoat(SKIN_COAT_CHITIN,{color:"green"});
+				growChitin("green");
 				changes++;
 			}
 		}
@@ -5585,9 +5582,8 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//Removes wings
-			if (player.wingType > WING_TYPE_NONE && player.wingType != WING_TYPE_GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
-				outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades.  After a moment the pain passes, though your wings are gone!", false);
-				player.wingType = WING_TYPE_NONE;
+			if (!InCollection(player.wingType, WING_TYPE_NONE, WING_TYPE_GARGOYLE_LIKE_LARGE) && rand(3) == 0 && changes < changeLimit) {
+				removeWings();
 				changes++;
 			}
 			//Removes antennae
@@ -6289,7 +6285,7 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//Removes wings
-			if (player.wingType > WING_TYPE_NONE && player.wingType != WING_TYPE_GARGOYLE_LIKE_LARGE && rand(5) == 0 && changes < changeLimit) {
+			if (!InCollection(player.wingType, WING_TYPE_GARGOYLE_LIKE_LARGE, WING_TYPE_NONE) && rand(5) == 0 && changes < changeLimit) {
 			//	if (player.wingType == WING_TYPE_SHARK_FIN) outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into your spine.  After a moment the pain passes, though your fin is gone!", false);
 				outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades.  After a moment the pain passes, though your wings are gone!", false);
 				player.wingType = WING_TYPE_NONE;
@@ -10756,7 +10752,7 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//Dragonfly Wings:
-			if (player.wingType != WING_TYPE_GIANT_DRAGONFLY && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+			if (!InCollection(player.wingType, WING_TYPE_GARGOYLE_LIKE_LARGE, WING_TYPE_GIANT_DRAGONFLY) && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nYou scream and fall to your knees as incredible pain snags at your shoulders, as if needle like hooks were being sunk into your flesh just below your shoulder blades.  After about five seconds of white hot, keening agony it is with almost sexual relief that something splits out of your upper back.  You clench the dirt as you slide what feel like giant leaves of paper into the open air.  Eventually the sensation passes and you groggily get to your feet.  You can barely believe what you can see by craning your neck behind you - <b>you've grown a set of four giant dragonfly wings</b>, thinner, longer and more pointed than the ones you've seen upon the forest bee girls, but no less diaphanous and beautiful.  You cautiously flex the new muscle groups in your shoulder blades and gasp as your new wings whirr and lift you several inches off the ground.  What fun this is going to be!");
 				//Wings Fall Out: You feel a sharp pinching sensation in your shoulders and you cringe slightly.  Your former dragonfly wings make soft, papery sounds as they fall into the dirt behind you.
 				changes++;
@@ -11280,7 +11276,7 @@ import classes.CockTypesEnum;
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
 			//Grow demon wings
-			if (player.wingType != WING_TYPE_BAT_LIKE_LARGE_2 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(6) == 0 && player.cor >= 50) {
+			if (!InCollection(player.wingType, WING_TYPE_GARGOYLE_LIKE_LARGE, WING_TYPE_BAT_LIKE_LARGE_2) && rand(6) == 0 && player.cor >= 50) {
 				//grow smalls to large
 				if (player.wingType == WING_TYPE_BAT_LIKE_TINY && player.cor >= 75) {
 					outputText("\n\n", false);
@@ -12789,7 +12785,7 @@ import classes.CockTypesEnum;
 			}
 			
 			//Wings
-			if (player.wingType != WING_TYPE_MANTIS_LIKE_LARGE && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
+			if (!InCollection(player.wingType, WING_TYPE_GARGOYLE_LIKE_LARGE, WING_TYPE_MANTIS_LIKE_LARGE) && changes < changeLimit && rand(4) == 0) {
 				//Grow bigger mantis wings!
 				if (player.wingType == WING_TYPE_MANTIS_LIKE_SMALL) {
 					outputText("\n\nYour wings tingle as they grow, filling out covering your back abdomen until they are large enough to lift you from the ground and allow you to fly!  You give a few experimental flaps and begin hovering in place, a giddy smile plastered on your face by the thrill of flight.  <b>You now have large Mantis wings!</b>");
@@ -12812,10 +12808,7 @@ import classes.CockTypesEnum;
 			
 			//Chitin skin
 			if (changes < changeLimit && !player.hasCoatOfType(SKIN_COAT_CHITIN) && player.tailType == TAIL_TYPE_MANTIS_ABDOMEN && rand(2) == 0) {
-				if (player.skinType == SKIN_TYPE_PLAIN) outputText("\n\nAn itchy feeling springs up over every inch of your skin.  As you scratch yourself madly, you feel your skin hardening until <b>you are wholy covered in chitin.</b>", false);
-				if (player.hasFur()) outputText("\n\nYour skin suddenly feels itchy as your fur begins falling out in clumps, <b>revealing smooth chitin</b> underneath.", false);
-				if (player.hasScales()) outputText("\n\nYour " + player.skinTone + " scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of " + player.skinDesc + ".  At last the itching stops as <b>you brush a few more loose scales from your new chitin exoskeleton.</b>", false);
-				player.skin.growCoat(SKIN_COAT_CHITIN,{color:"green"});
+				growChitin("green");
 				changes++;
 			}
 			
