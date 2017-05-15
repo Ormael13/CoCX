@@ -80,15 +80,30 @@
 				"sheath"					: function(thisPtr:*):* { return kGAMECLASS.player.sheathDescription(); },
 				"shield"					: function(thisPtr:*):* { return kGAMECLASS.player.shieldName; },
 				"skin"						: function(thisPtr:*):* {
-//					trace("[DEPRECATED] tag [skin] was called");
-					return kGAMECLASS.player.skin.describe();
+					return kGAMECLASS.player.skin.describe('skin',false,false);
+				},
+				"skin.noadj": function(thisPtr:*):* {
+					return kGAMECLASS.player.skin.describe('skin',true,false);
+				},
+				"skin.notone": function(thisPtr:*):* {
+					return kGAMECLASS.player.skin.describe('skin',false,true);
+				},
+				"skin.type": function(thisPtr:*):* {
+					return kGAMECLASS.player.skin.describe('skin',true,true);
+				},
+				"skin.color": function (thisPtr:*, aspect:*):* {
+					return kGAMECLASS.player.skin.tone;
+				},
+				"skin.isare": function (thisPtr:*, aspect:*):* {
+					return kGAMECLASS.player.skin.isAre();
+				},
+				"skin.vs": function (thisPtr:*, aspect:*):* {
+					return kGAMECLASS.player.skin.isAre("s","");
 				},
 				"skinfurscales"				: function(thisPtr:*):* {
-//					trace("[DEPRECATED] tag [skinfurscales] was called");
 					return kGAMECLASS.player.skin.describe('coat');
 				},
 				"skintone"					: function(thisPtr:*):* {
-//					trace("[DEPRECATED] tag [skintone] was called");
 					return kGAMECLASS.player.skinTone;
 				},
 				"teasetext"					: function(thisPtr:*):* { return kGAMECLASS.combat.teaseText(); },

@@ -587,7 +587,7 @@ import classes.CockTypesEnum;
 					if (player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!", false);
 					//Catch-all
 					if (player.lowerBody > LOWER_BODY_TYPE_NAGA) outputText("\n\nYou stagger as your " + player.feet() + " change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!", false);
-					if (player.skinType != SKIN_TYPE_FUR) outputText("  A fine coat of fur grows out below your waist, itching briefly as it fills in.");
+					if (!player.hasFur()) outputText("  A fine coat of fur grows out below your waist, itching briefly as it fills in.");
 					outputText("<b>  You now have hooves in place of your feet!</b>", false);
 					player.lowerBody = LOWER_BODY_TYPE_HOOFED;
 					player.legCount = 2;
@@ -1389,7 +1389,7 @@ import classes.CockTypesEnum;
 				player.faceType = FACE_HORSE;
 			}
 			//Fur - if has horsetail && ears and not at changelimit
-			if (player.skinType != SKIN_TYPE_FUR && player.skinType != SKIN_TYPE_STONE && changes < changeLimit && rand(4) == 0 && player.tailType == TAIL_TYPE_HORSE) {
+			if (!player.hasFur() && player.skinType != SKIN_TYPE_STONE && changes < changeLimit && rand(4) == 0 && player.tailType == TAIL_TYPE_HORSE) {
 				if (player.skinType == SKIN_TYPE_PLAIN) {
 					outputText("\n\nAn itchy feeling springs up over every inch of your skin.  As you scratch yourself madly, you feel fur grow out of your skin until <b>you have a fine coat of ", false);
 					if (type == 0) outputText("" + player.hairColor + "-colored fur.</b>", false);
@@ -2883,7 +2883,7 @@ import classes.CockTypesEnum;
 				&& player.lowerBody == LOWER_BODY_TYPE_WOLF
 				&& player.tailType == TAIL_TYPE_WOLF
 				&& player.earType == EARS_WOLF
-				&& player.skinType != SKIN_TYPE_FUR
+				&& !player.hasFur()
 				&& (player.hairColor != "glacial white" || player.coatColor != "glacial white")) {
 				player.hairColor = "glacial white";
 				if (!player.hasCoat()) outputText("\n\nYour skin itches intensely. You gaze down as more and more hairs break forth from your skin quickly transforming into a coat of glacial white fur which despite its external temperature feels warm inside.  <b>You are now covered in " + player.hairColor + " fur from head to toe.</b>", false);
@@ -3631,7 +3631,7 @@ import classes.CockTypesEnum;
 				player.skin.growCoat(SKIN_COAT_FUR,{color:player.hairColor,adj:"thick"});
 			}
 			//Become furred - requires paws and tail
-			if (rand(4) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_DOG && player.tailType == TAIL_TYPE_DOG && player.skinType != SKIN_TYPE_FUR && player.skinType != SKIN_TYPE_STONE) {
+			if (rand(4) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_DOG && player.tailType == TAIL_TYPE_DOG && !player.hasFur() && player.skinType != SKIN_TYPE_STONE) {
 				if (player.skinType == SKIN_TYPE_PLAIN) outputText("\n\nYour skin itches intensely.  You gaze down as more and more hairs break forth from your skin, quickly transforming into a soft coat of fur.  <b>You are now covered in [skin coat.color] fur from head to toe.</b>", false);
 				if (player.hasScales()) outputText("\n\nYour scales itch incessantly.  You scratch, feeling them flake off to reveal a coat of [skin coat.color] fur growing out from below!  <b>You are now covered in [skin coat.color] fur from head to toe.</b>", false);
 				player.skin.growCoat(SKIN_COAT_FUR,{
@@ -7124,14 +7124,14 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//TURN INTO A FURRAH!  OH SHIT
-			if (player.tailType == TAIL_TYPE_CAT && player.earType == EARS_CAT && rand(5) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_CAT && player.skinType != SKIN_TYPE_FUR) {
+			if (player.tailType == TAIL_TYPE_CAT && player.earType == EARS_CAT && rand(5) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_CAT && !player.hasCoatOfType(SKIN_COAT_FUR,SKIN_COAT_SCALES)) {
 				outputText("\n\nYour " + player.skinDesc + " begins to tingle, then itch. ");
 				player.skin.growCoat(SKIN_COAT_FUR,{color:randomChoice(["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"])});
 				outputText("You reach down to scratch your arm absent-mindedly and pull your fingers away to find strands of [skin coat.color] fur. Wait, fur?  What just happened?! You spend a moment examining yourself and discover that <b>you are now covered in glossy, soft fur.</b>");
 				changes++;
 			}
 			//CAT-FACE!  FULL ON FURRY!  RAGE AWAY NEKOZ
-			if (player.tailType == TAIL_TYPE_CAT && player.earType == EARS_CAT && rand(5) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_CAT && (player.skinType == SKIN_TYPE_FUR || (player.skinType == SKIN_TYPE_SCALES && player.dragonneScore() >= 4)) && player.faceType != FACE_CAT) {
+			if (player.tailType == TAIL_TYPE_CAT && player.earType == EARS_CAT && rand(5) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_CAT && (player.hasFur() || player.hasScales() && player.dragonneScore() >= 4) && player.faceType != FACE_CAT) {
 				//Gain cat face, replace old face
 				temp = rand(3);
 				if (temp == 0) outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something... different. You find a puddle to view your reflection and discover <b>your face is now a cross between human and feline features.</b>", false);
@@ -7148,7 +7148,7 @@ import classes.CockTypesEnum;
 			}
 			
 			//DAT EYES
-			if (player.tailType == TAIL_TYPE_CAT && player.earType == EARS_CAT && rand(5) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_CAT && (player.skinType == SKIN_TYPE_FUR || (player.skinType == SKIN_TYPE_SCALES && player.dragonneScore() >= 4)) && player.faceType == FACE_CAT && player.eyeType != EYES_CAT_SLITS) {
+			if (player.tailType == TAIL_TYPE_CAT && player.earType == EARS_CAT && rand(5) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_CAT && (player.hasFur() || (player.skinType == SKIN_TYPE_SCALES && player.dragonneScore() >= 4)) && player.faceType == FACE_CAT && player.eyeType != EYES_CAT_SLITS) {
 				//Gain cat-like eyes
 				outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.  <b>Your eyes has turned into those of cat with vertical slit</b>.", false);
 				player.eyeType = EYES_CAT_SLITS;
@@ -9069,7 +9069,7 @@ import classes.CockTypesEnum;
 			//type 1 ignores normal restrictions
 			//****************
 			//-Face (Req: Fur + Feet)
-			if (player.faceType != FACE_KANGAROO && ((player.skinType == SKIN_TYPE_FUR && player.lowerBody == LOWER_BODY_TYPE_KANGAROO) || type == 1) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
+			if (player.faceType != FACE_KANGAROO && ((player.hasFur() && player.lowerBody == LOWER_BODY_TYPE_KANGAROO) || type == 1) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
 				//gain roo face from human/naga/shark/bun:
 				if (player.faceType == FACE_HUMAN || player.faceType == FACE_SNAKE_FANGS || player.faceType == FACE_SHARK_TEETH || player.faceType == FACE_BUNNY) outputText("\n\nThe base of your nose suddenly hurts, as though someone were pinching and pulling at it.  As you shut your eyes against the pain and bring your hands to your face, you can feel your nose and palate shifting and elongating.  This continues for about twenty seconds as you stand there, quaking.  When the pain subsides, you run your hands all over your face; what you feel is a long muzzle sticking out, whiskered at the end and with a cleft lip under a pair of flat nostrils.  You open your eyes and receive confirmation. <b>You now have a kangaroo face!  Crikey!</b>", false);
 				//gain roo face from other snout:
@@ -9078,7 +9078,7 @@ import classes.CockTypesEnum;
 				player.faceType = FACE_KANGAROO;
 			}
 			//-Fur (Req: Footsies)
-			if (player.skinType != SKIN_TYPE_FUR && (player.lowerBody == LOWER_BODY_TYPE_KANGAROO || type == 1) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
+			if (!player.hasFur() && (player.lowerBody == LOWER_BODY_TYPE_KANGAROO || type == 1) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
 				changes++;
 				outputText("\n\nYour " + player.skinDesc + " itches terribly all over and you try cartoonishly to scratch everywhere at once.  ");
 				player.skin.growCoat(SKIN_COAT_FUR,{color:"brown"});
@@ -9948,7 +9948,7 @@ import classes.CockTypesEnum;
 			//Used for dick and boob TFs
 			var counter:int = 0;
 
-			if (player.faceType == FACE_FOX && player.tailType == TAIL_TYPE_FOX && player.earType == EARS_FOX && player.lowerBody == LOWER_BODY_TYPE_FOX && player.skinType == SKIN_TYPE_FUR && rand(3) == 0 && player.findPerk(PerkLib.TransformationResistance) < 0) {
+			if (player.faceType == FACE_FOX && player.tailType == TAIL_TYPE_FOX && player.earType == EARS_FOX && player.lowerBody == LOWER_BODY_TYPE_FOX && player.hasFur() && rand(3) == 0 && player.findPerk(PerkLib.TransformationResistance) < 0) {
 				if (flags[kFLAGS.FOX_BAD_END_WARNING] == 0) {
 					outputText("\n\nYou get a massive headache and a craving to raid a henhouse.  Thankfully, both pass in seconds, but <b>maybe you should cut back on the vulpine items...</b>");
 					flags[kFLAGS.FOX_BAD_END_WARNING] = 1;
@@ -10174,7 +10174,7 @@ import classes.CockTypesEnum;
 			}
 			//[Grow Fur]
 			//FOURTH
-			if ((enhanced || player.lowerBody == LOWER_BODY_TYPE_FOX) && player.skinType != SKIN_TYPE_FUR && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
+			if ((enhanced || player.lowerBody == LOWER_BODY_TYPE_FOX) && !player.hasFur() && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
 				//from scales
 				if (player.hasScales()) outputText("\n\nYour skin shifts and every scale stands on end, sending you into a mild panic.  No matter how you tense, you can't seem to flatten them again.  The uncomfortable sensation continues for some minutes until, as one, every scale falls from your body and a fine coat of fur pushes out.  You briefly consider collecting them, but when you pick one up, it's already as dry and brittle as if it were hundreds of years old.  <b>Oh well; at least you won't need to sun yourself as much with your new fur.</b>");
 				//from skin
@@ -11419,7 +11419,7 @@ import classes.CockTypesEnum;
 					dynStats("lib", 1);
 				}
 				//gain balls up to 2 (only if full-coon face and fur; no dick required)
-				if (player.balls == 0 && player.skinType == SKIN_TYPE_FUR && 9999 == 9999 && rand(3) == 0 && changes < changeLimit) {
+				if (player.balls == 0 && player.hasFur() && 9999 == 9999 && rand(3) == 0 && changes < changeLimit) {
 					outputText("\n\nAs you eat, you contemplate your masked appearance; it strikes you that you're dangerously close to the classic caricature of a thief.  Really, all it would take is a big, nondescript sack and a hurried gait and everyone would immediately think the worst of you.  In a brief fit of pique, you wish you had such a bag to store your things in, eager to challenge a few assumptions.  A few minutes into that line of thought, a twisting ache in your lower gut bends you double, and you expose yourself hurriedly to examine the region.  As you watch, a balloon of flesh forms on your crotch, and two lumps migrate from below your navel down into it.  <b>Looks like you have a sack, after all.</b>");
 					player.balls = 2;
 					player.ballSize = 1;
@@ -11446,7 +11446,7 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//gain fur
-			if ((player.lowerBody == LOWER_BODY_TYPE_RACCOON && player.earType == EARS_RACCOON) && player.skinType != SKIN_TYPE_FUR && changes < changeLimit && rand(4) == 0) {
+			if ((player.lowerBody == LOWER_BODY_TYPE_RACCOON && player.earType == EARS_RACCOON) && !player.hasFur() && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYou shiver, feeling a bit cold.  Just as you begin to wish for something to cover up with, it seems your request is granted; thick, bushy fur begins to grow all over your body!  You tug at the tufts in alarm, but they're firmly rooted and... actually pretty soft.  Huh.  ");
 				player.skin.growCoat(SKIN_COAT_FUR,{color:"gray"});
 				outputText("<b>You now have a warm coat of [skin coat.color] raccoon fur!</b>");
@@ -11485,7 +11485,7 @@ import classes.CockTypesEnum;
 				//from human, demon, paw feet
 				else {
 					outputText("\n\nYour toes wiggle of their own accord, drawing your attention.  Looking down, you can see them changing from their current shape, stretching into oblongs.  When they finish, your foot appears humanoid, but with long, prehesile toes!  ");
-					if ((player.lowerBody == LOWER_BODY_TYPE_HUMAN || player.lowerBody == LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS || player.lowerBody == LOWER_BODY_TYPE_DEMONIC_CLAWS || player.lowerBody == LOWER_BODY_TYPE_DEMONIC_CLAWS || player.lowerBody == LOWER_BODY_TYPE_PLANT_HIGH_HEELS) && player.skinType != SKIN_TYPE_FUR) outputText("The sensation of walking around on what feels like a second pair of hands is so weird that you miss noticing the itchy fur growing in over your legs...  ");
+					if ((player.lowerBody == LOWER_BODY_TYPE_HUMAN || player.lowerBody == LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS || player.lowerBody == LOWER_BODY_TYPE_DEMONIC_CLAWS || player.lowerBody == LOWER_BODY_TYPE_DEMONIC_CLAWS || player.lowerBody == LOWER_BODY_TYPE_PLANT_HIGH_HEELS) && !player.hasFur()) outputText("The sensation of walking around on what feels like a second pair of hands is so weird that you miss noticing the itchy fur growing in over your legs...  ");
 					outputText("<b>You now have raccoon paws!</b>");
 				}
 				player.lowerBody = LOWER_BODY_TYPE_RACCOON;
@@ -11521,7 +11521,7 @@ import classes.CockTypesEnum;
 			}
 			//gain full-coon face (requires half-coon and fur)
 			//from humanoid - should be the only one possible
-			else if (player.faceType == FACE_RACCOON_MASK && player.lowerBody == LOWER_BODY_TYPE_RACCOON && player.skinType == SKIN_TYPE_FUR && rand(4) == 0 && changes < changeLimit) {
+			else if (player.faceType == FACE_RACCOON_MASK && player.lowerBody == LOWER_BODY_TYPE_RACCOON && player.hasFur() && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nYour face pinches with tension, and you rub the bridge of your nose to release it.  The action starts a miniature slide in your bone structure, and your nose extends out in front of you!  You shut your eyes, waiting for the sinus pressure to subside, and when you open them, a triangular, pointed snout dotted with whiskers and capped by a black nose greets you!  <b>You now have a raccoon's face!</b>");
 				//from muzzleoid - should not be possible, but included if things change
 				//Your face goes numb, and you can see your snout shifting into a medium-long, tapered shape.  Closing your eyes, you rub at your forehead to try and get sensation back into it; it takes several minutes before full feeling returns.  <b>When it does, you look again at yourself and see a raccoon's pointy face, appointed with numerous whiskers and a black nose!</b>
@@ -11678,13 +11678,13 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//get mouse muzzle from mouse teeth or other muzzle
-			if (player.skinType == SKIN_TYPE_FUR && player.faceType != FACE_MOUSE && (player.faceType != FACE_HUMAN || player.faceType != FACE_SHARK_TEETH || player.faceType != FACE_BUNNY || player.faceType != FACE_SPIDER_FANGS || player.faceType != FACE_RACCOON_MASK) && rand(4) == 0 && changes < changeLimit) {
+			if (player.hasFur() && player.faceType != FACE_MOUSE && (player.faceType != FACE_HUMAN || player.faceType != FACE_SHARK_TEETH || player.faceType != FACE_BUNNY || player.faceType != FACE_SPIDER_FANGS || player.faceType != FACE_RACCOON_MASK) && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nA wave of light-headedness hits you, and you black out.  In your unconsciousness, you dream of chewing - food, wood, cloth, paper, leather, even metal... whatever you can fit in your mouth, even if it doesn't taste like anything much.  For several minutes you just chew and chew your way through a parade of ordinary objects, savoring the texture of each one against your teeth, until finally you awaken.  Your teeth work, feeling longer and more prominent than before, and you hunt up your reflection.  <b>Your face has shifted to resemble a mouse's, down to the whiskers!</b>");
 				player.faceType = FACE_MOUSE;
 				changes++;
 			}
 			//get fur
-			if ((player.skinType != SKIN_TYPE_FUR || (player.skinType == SKIN_TYPE_FUR && (player.coatColor != "brown" && player.coatColor != "white"))) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
+			if ((!player.hasFur() || (player.hasFur() && (player.coatColor != "brown" && player.coatColor != "white"))) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
 				var color:String;
 				temp = rand(10);
 				if (temp < 8) {
@@ -11693,7 +11693,7 @@ import classes.CockTypesEnum;
 					color = "white";
 				}
 				//from skinscales
-				if (player.skinType != SKIN_TYPE_FUR) {
+				if (!player.hasFur()) {
 					outputText("\n\nYour " + player.skinFurScales() + " itch");
 					if (player.skinType > SKIN_TYPE_PLAIN) outputText("es");
 					outputText(" all over");
@@ -12163,7 +12163,7 @@ import classes.CockTypesEnum;
 				}
 			}
 			//Turn ferret mask to full furface.
-			if(player.faceType == FACE_FERRET_MASK && player.skinType == SKIN_TYPE_FUR && player.earType == EARS_FERRET && player.tailType == TAIL_TYPE_FERRET && player.lowerBody == LOWER_BODY_TYPE_FERRET && rand(4) == 0 && changes < changeLimit)
+			if(player.faceType == FACE_FERRET_MASK && player.hasFur() && player.earType == EARS_FERRET && player.tailType == TAIL_TYPE_FERRET && player.lowerBody == LOWER_BODY_TYPE_FERRET && rand(4) == 0 && changes < changeLimit)
 			{
 				outputText("\n\nYou cry out in pain as the bones in your face begin to break and rearrange.  You rub your face furiously in an attempt to ease the pain, but to no avail.  As the sensations pass, you examine your face in a nearby puddle.  <b>You nearly gasp in shock at the sight of your new ferret face!</b>");
 				player.faceType = FACE_FERRET;
@@ -12184,7 +12184,7 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//No fur, has ferret ears, tail, and legs:
-			if(player.skinType != SKIN_TYPE_FUR && player.earType == EARS_FERRET && player.tailType == TAIL_TYPE_FERRET && player.lowerBody == LOWER_BODY_TYPE_FERRET && rand(4) == 0 && changes < changeLimit)
+			if(!player.hasFur() && player.earType == EARS_FERRET && player.tailType == TAIL_TYPE_FERRET && player.lowerBody == LOWER_BODY_TYPE_FERRET && rand(4) == 0 && changes < changeLimit)
 			{
 				outputText("\n\nYour skin starts to itch like crazy as a thick coat of fur sprouts out of your skin.");
 				//If hair was not sandy brown, silver, white, or brown

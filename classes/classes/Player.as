@@ -1019,7 +1019,7 @@ use namespace kGAMECLASS;
 					race = "wolf-taur";
 				else if (wolfScore() >= 10)
 					race = "Fenrir";
-				else if (wolfScore() >= 7 && coatColor == "glacial white")
+				else if (wolfScore() >= 7 && hasFur() && coatColor == "glacial white")
 					race = "winter wolf";
 				else if (wolfScore() >= 6)
 					race = "wolf-morph";
@@ -2784,7 +2784,7 @@ use namespace kGAMECLASS;
 				yetiCounter++;
 			if (skinType == 10)
 				yetiCounter++;
-			if (coatColor == "white")
+			if (hasFur() && coatColor == "white")
 				yetiCounter++;
 			if (tallness >= 78)
 				yetiCounter++;
@@ -2849,7 +2849,7 @@ use namespace kGAMECLASS;
 			if (hasVagina() && vaginaType() == 1)
 				unicornCounter++;
 			//Fur and hair color only counts if some unicorn features are present and it's white colored
-			if (unicornCounter > 0 && skinType == 1 && coatColor == "white")
+			if (unicornCounter > 0 && hasFur() && coatColor == "white")
 				unicornCounter++;
 			if (unicornCounter > 0 && hairColor == "white")
 				unicornCounter++;
@@ -2887,7 +2887,7 @@ use namespace kGAMECLASS;
 			if (hasVagina() && vaginaType() == 1)
 				alicornCounter++;
 			//Fur and hair color only counts if some alicorn features are present and it's white colored
-			if (alicornCounter > 0 && skinType == 1 && coatColor == "white")
+			if (alicornCounter > 0 && hasFur() && coatColor == "white")
 				alicornCounter++;
 			if (alicornCounter > 0 && hairColor == "white")
 				alicornCounter++;
@@ -2988,7 +2988,7 @@ use namespace kGAMECLASS;
 				kitshooCounter++;
 			//If the character's kitshoo score is greater than 1 and:
 			//If the character has "blonde","black","red","white", or "silver" hair, +1
-			if (kitshooCounter > 0 && (InCollection(coatColor, KitsuneScene.basicKitsuneHair) || InCollection(coatColor, KitsuneScene.elderKitsuneColors)))
+			if (kitshooCounter > 0 && hasFur() && (InCollection(coatColor, KitsuneScene.basicKitsuneHair) || InCollection(coatColor, KitsuneScene.elderKitsuneColors)))
 				kitshooCounter++;
 			//If the character's femininity is 40 or higher, +1
 		//	if (kitshooCounter > 0 && femininity >= 40)
@@ -3131,7 +3131,7 @@ use namespace kGAMECLASS;
 				wolfCounter++;
 			if (skinType == 1)
 				wolfCounter++;
-			if (hairColor == "glacial white" && coatColor == "glacial white")
+			if (hairColor == "glacial white" && hasFur() && coatColor == "glacial white")
 				wolfCounter++;
 			if (rearBody == 3)
 				wolfCounter++;
@@ -4107,7 +4107,7 @@ use namespace kGAMECLASS;
 					maxSpe += (60 * (1 + newGamePlusMod));
 					maxInt -= (10 * (1 + newGamePlusMod));
 				}
-				else if (wolfScore() >= 7 && coatColor == "glacial white") {
+				else if (wolfScore() >= 7 && hasFur() && coatColor == "glacial white") {
 					maxStr += (30 * (1 + newGamePlusMod));
 					maxTou += (20 * (1 + newGamePlusMod));
 					maxSpe += (30 * (1 + newGamePlusMod));

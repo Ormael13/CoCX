@@ -79,7 +79,7 @@ Always returns the players skin description, even if its hidden behind fur. Sett
 | Example call                          |   Parser tag   | Example result                       |
 |---------------------------------------|----------------|--------------------------------------|
 | `player.skin.description()`           | `[skin]`       | "You have **smooth, green scales**." |
-| `player.skin.description(true)`       | `[skin.noadj]` | "You have **green scales**."         |
+| `player.skin.description(true)`       | `[skin noadj]` | "You have **green scales**."         |
 | `player.skin.description(true, true)` | `――――――――――――` | "You have **scales**."               |
 
 

@@ -122,6 +122,7 @@
 			"skin": skinDescriptionFn("skin", false, false),
 			"noadj": skinDescriptionFn("skin", true, false),
 			"notone": skinDescriptionFn("skin", false, true),
+			"nocolor": skinDescriptionFn("skin", false, true),
 			"type": skinDescriptionFn("skin", true, true),
 			"color": function (thisPtr:*, aspect:*):* {
 				return kGAMECLASS.player.skin.tone;
@@ -135,6 +136,7 @@
 			"base": skinDescriptionFn("base", false, false),
 			"base.noadj": skinDescriptionFn("base", true, false),
 			"base.notone": skinDescriptionFn("base", false, true),
+			"base.nocolor": skinDescriptionFn("base", false, true),
 			"base.type": skinDescriptionFn("base", true, true),
 			"base.color": function (thisPtr:*, aspect:*):* {
 				return kGAMECLASS.player.skin.base.color;
@@ -148,6 +150,7 @@
 			"coat": skinDescriptionFn("coat", false, false),
 			"coat.noadj": skinDescriptionFn("coat", true, false),
 			"coat.notone": skinDescriptionFn("coat", false, true),
+			"coat.nocolor": skinDescriptionFn("coat", false, true),
 			"coat.type": skinDescriptionFn("coat", true, true),
 			"coat.vs": function (thisPtr:*, aspect:*):* {
 				return kGAMECLASS.player.skin.coat.isAre("s", "");
@@ -161,6 +164,7 @@
 			"full": skinDescriptionFn("full", false, false),
 			"full.noadj": skinDescriptionFn("full", true, false),
 			"full.notone": skinDescriptionFn("full", false, true),
+			"full.nocolor": skinDescriptionFn("full", false, true),
 			"full.type": skinDescriptionFn("full", true, true)
 		};
 		public var faceLookups:Object = {

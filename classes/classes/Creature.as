@@ -363,10 +363,18 @@ import classes.BodyParts.UnderBody;
 		public var ass:AssClass = new AssClass();
 
 		public function get clitLength():Number {
+			if (vaginas.length==0) {
+				trace("[ERROR] get clitLength called with no vaginas present");
+				return VaginaClass.DEFAULT_CLIT_LENGTH;
+			}
 			return vaginas[0].clitLength;
 		}
 
 		public function set clitLength(value:Number):void {
+			if (vaginas.length==0) {
+				trace("[ERROR] set clitLength called with no vaginas present");
+				return;
+			}
 			vaginas[0].clitLength = value;
 		}
 

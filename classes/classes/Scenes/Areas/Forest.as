@@ -108,7 +108,7 @@ use namespace kGAMECLASS;
 								   && flags[kFLAGS.JOJO_DEAD_OR_GONE] <= 0
 								   && (kGAMECLASS.monk < 2 || rand(2) == 0);
 						},
-						mod   : [fn.ifLevelMin(4)],
+						mods  : [fn.ifLevelMin(4)],
 						chance: function ():Number {
 							//Extra chance of Jojo encounter.
 							return (player.findPerk(PerkLib.PiercedFurrite) >= 0

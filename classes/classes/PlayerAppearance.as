@@ -1049,9 +1049,8 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  A tail of feathers fans out from just above your " + assDescript() + ", twitching instinctively to help guide you if you were to take flight.", false);
 		else if (player.tailType == TAIL_TYPE_KANGAROO) {
 			outputText("  A conical, ", false);
-			if (player.skinType == SKIN_TYPE_GOO)
-				outputText("gooey, " + player.skinTone, false);
-			else outputText("furry, " + player.coatColor, false);
+			if (player.hasFur()) outputText("furry, " + player.coatColor, false);
+			else outputText("gooey, " + player.skinTone, false);
 			outputText(", tail extends from your " + assDescript() + ", bouncing up and down as you move and helping to counterbalance you.", false);
 		}
 		else if (player.tailType == TAIL_TYPE_FOX) {
@@ -1522,8 +1521,7 @@ public class PlayerAppearance extends BaseContent {
 				}
 			}
 		} else if (player.faceType == FACE_FERRET) {
-			if (player.skin.hasPlainSkinOnly()) outputText("  Your face is an adorable cross between human and ferret features, complete with a wet nose and whiskers.  The only oddity is your lack of fur, leaving only [skin] visible on your ferret-like face.", false);
-			else if (player.hasFullCoatOfType(SKIN_TYPE_FUR)) outputText("  Your face is coated in [skin coat] with [skin base] underneath, an adorable cross between human and ferret features.  It is complete with a wet nose and whiskers.");
+			if (player.hasFullCoatOfType(SKIN_TYPE_FUR)) outputText("  Your face is coated in [skin coat] with [skin base] underneath, an adorable cross between human and ferret features.  It is complete with a wet nose and whiskers.");
 			else if (player.hasCoat()) outputText("  Your face is an adorable cross between human and ferret features, complete with a wet nose and whiskers.  The only oddity is [skin base] covered with [skin coat].", false);
 			else outputText("  Your face is an adorable cross between human and ferret features, complete with a wet nose and whiskers.  The only oddity is your lack of fur, leaving only [skin] visible on your ferret-like face.", false);
 		}
@@ -1604,7 +1602,7 @@ public class PlayerAppearance extends BaseContent {
 			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
 				outputText("  You have a wolf’s face, complete with wet nose a panting tongue and threatening teeths.  ", false);
 				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ", false);
-				outputText("You've got [skin coat], hiding your [skin.noadj] underneath your furry visage.", false);
+				outputText("You've got [skin coat], hiding your [skin noadj] underneath your furry visage.", false);
 			} else {
 				outputText("  You have the facial structure of a wolf, wet nose and all, but overlaid with glittering [skin coat].", false);
 				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("  Cold blue mist seems to periodically escape from your mouth.", false);
@@ -1617,7 +1615,7 @@ public class PlayerAppearance extends BaseContent {
 				if (player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
 				outputText(".", false);
 			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
-				outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your " + player.skinDesc + " is [skin coat.color], hiding your [skin.noadj] underneath.", false);
+				outputText("  You have a cat-like face, complete with moist nose and whiskers.  Your [skin coat.nocolor] is [skin coat.color], hiding your [skin base] underneath.", false);
 			} else {
 				outputText("  Your facial structure blends humanoid features with those of a cat.  A moist nose and whiskers are included, but overlaid with glittering [skin coat].");
 			}
@@ -1672,7 +1670,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		if (player.faceType == FACE_RHINO) {
 			outputText("  Your face is like that of a rhino");
-			if (player.skinType == SKIN_TYPE_PLAIN || player.skin.hasMagicalTattoo()) {
+			if (!player.hasCoat()) {
 				outputText(", with [skin], complete with a long muzzle and a horn on your nose");
 				if (player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
 				outputText(".");
@@ -1683,7 +1681,7 @@ public class PlayerAppearance extends BaseContent {
 		if (player.faceType == FACE_ECHIDNA) {
 			outputText("  Your odd visage consists of a long, thin echidna snout.");
 			if (!player.hasCoat()) {
-				outputText("  The [skin]");
+				outputText("  The [skin base]");
 				if (player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
 				outputText(" that is revealed by your lack of fur looks quite unusual.");
 			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {

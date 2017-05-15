@@ -27,7 +27,7 @@ import classes.GlobalFlags.kFLAGS;
 					outputText("\n\nYour scales itch incessantly, so you scratch at them.  They start falling off wholesale, leaving you standing in a pile of scales after only a few moments.  <b>You've lost your scales!</b>");
 					break;
 				default:
-					outputText("\n\nYour [skin.noadj] itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin.  <b>Your skin is once again normal!</b>");
+					outputText("\n\nYour [skin noadj] itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin.  <b>Your skin is once again normal!</b>");
 			}
 			player.skin.setBaseOnly({type:SKIN_BASE_PLAIN});
 		}
