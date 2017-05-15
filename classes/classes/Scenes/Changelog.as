@@ -75,22 +75,24 @@ package classes.Scenes
 			outputText("-Shield mastery perk req. now additionaly perk Job: Knight. Immovable object, Resolute and Heavy Armor Profcienty perks now all are tier lvl perks and req. 75+ tou and perk Job: Defender.\n");
 			outputText("-New tier 0 soulforce lvl-up perk: Daoist Cultivator. Req. Job: Soul Cultivator perk. Effects: +10 to recovered soulforce during meditation, +10% to soulskill power, +25 max soulforce, -10% to soulskils costs\n");
 			outputText("-New tier 1 soulforce lvl-up perk: Daoist: Apprentice Stage. Req. Daoist Cultivator perk. Effects: +10 to recovered soulforce during meditation, +20% to soulskill power, +30 max soulforce (all gained each time PC gets one of these perks: Soul Apprentice, Soul Personage, Soul Warrior)\n");
-			outputText("-New tier 2 misc lvl-up perk: Whipping. Req. perk Job: Eromancer. Effects: adds dmg scalling based on current PC str and increase bonus for fighting group enemies from 5x to 6x.\n");
-			outputText("-New tier 2 misc lvl-up perk: Whirlwind. Req. perk Job: Barbarian. Effects: adds dmg scalling based on current PC str and increase bonus for fighting group enemies from 5x to 6x.\n");
+			outputText("-New tier 2 toughness lvl-up perk: Job: Knight. Req. Job: Guardian perk and 50+ tou. Effects: +10 to max tou, increase by 3 points shield's block rate.\n");
+			outputText("-New tier 2 toughness lvl-up perk: Job: Defender. Req. Job: Guardian perk and 75+ tou. Effects: +15 to max tou, unlock new combat move Defend (addititional 50% phys dmg reduction for 1 round cumulative with other phys dmg reduction effects)\n");
 			outputText("-New tier 2 speed lvl-up perk: Deadly Throw. Req. Job: Hunter Effect: adds speed modifier to throwing weapons.\n");
-			outputText("-New tier 3 libido lvl-up perk: Cold Lust Req. Lustzerker, Improved Self-Control perks and 75+ lib Effect: Lustzerking no longer reduce PC lust resistance to 0.\n");
-			outputText("-New tier 3 speed lvl-up perk: Envenomed Bolt. Req. Job: Hunter and one of venom producing tail types (bee, scorpion, manticore). Allows to apply lust inducing venom on arrow/bolt tip.\n");
-			outputText("-New tier 4 soulforce lvl-up perk: Daoist: Warrior Stage. Req. Daoist: Apprentice Stage perk. Effects: +10 to recovered soulforce during meditation, +30% to soulskill power, +40 max soulforce (all gained each time PC gets one of these perks: Soul Sprite, Soul Exalt, Soul Overlord)\n");
-			outputText("-New tier 5 speed lvl-up perk: Multishot Req. Wild Quiver and 150+ speed. Addes toggle option for 6 arrows shoot in one attack.\n");
-			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
-			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Arcane Archer Req. Job: Sorcerer, Job: Hunter perks, 150+ int and 200+ spe Effect: +40 to max spe and int (scalable with NG tiers), +600 to max Fatigue\n");
-			outputText("-New tier 7 strength lvl-up perk: Prestige Job: Berserker Req. Job: Barbarian, Job: Guardian perks, 200+ str and either Berzerking or Lustzerking perk Effect: +60 to max str and +20 to max tou (scalable with NG tiers)\n");//powinno dodawać to wraith max bar niż fatigue
-			outputText("-New tier 7 intelligence lvl-up perk: Prestige Job: Seer Req. Grey Archmage, Soul Overlord perks and 200+ int Effect: +60 max int and +20 to max wis (scalable with NG tiers), +900 max Fatigue, +500 max Soulforce\n");
-			outputText("-New enemy perk: Beast or Animal-morph enemy type. Some of PC attack will deal more dmg to such enemies that atm is 27 diff enemeis with this perk ingame.\n");
 			outputText("-New tier 2 wisdom lvl-up perk: Job: Monk. Req. 60+ wis. Effects: +15 to max wis, +10 to unarmed. Lighting Strikes perk will not work with fist attacks anymore.\n");
 			outputText("-New tier 2 wisdom lvl-up perk: Combo. Req. Job: Monk perk, 75+ wis and 50+ str. Effects: Second attack per turn using fist (weapon).\n");
+			outputText("-New tier 3 libido lvl-up perk: Cold Lust Req. Lustzerker, Improved Self-Control perks and 75+ lib Effect: Lustzerking no longer reduce PC lust resistance to 0.\n");
+			outputText("-New tier 2 misc lvl-up perk: Whipping. Req. perk Job: Eromancer. Effects: adds dmg scalling based on current PC str and increase bonus for fighting group enemies from 5x to 6x.\n");
+			outputText("-New tier 2 misc lvl-up perk: Whirlwind. Req. perk Job: Barbarian. Effects: adds dmg scalling based on current PC str and increase bonus for fighting group enemies from 5x to 6x.\n");
+			outputText("-New tier 3 speed lvl-up perk: Envenomed Bolt. Req. Job: Hunter and one of venom producing tail types (bee, scorpion, manticore). Allows to apply lust inducing venom on arrow/bolt tip.\n");
 			outputText("-New tier 4 wisdom lvl-up perk: Combo Master: Monk. Req. Combo perk, 125+ wis and 100+ str. Effects: Third attack per turn using fist (weapon).\n");
+			outputText("-New tier 4 soulforce lvl-up perk: Daoist: Warrior Stage. Req. Daoist: Apprentice Stage perk. Effects: +10 to recovered soulforce during meditation, +30% to soulskill power, +40 max soulforce (all gained each time PC gets one of these perks: Soul Sprite, Soul Exalt, Soul Overlord)\n");
+			outputText("-New tier 5 speed lvl-up perk: Multishot Req. Wild Quiver and 150+ speed. Addes toggle option for 6 arrows shoot in one attack.\n");
+			outputText("-New tier 7 strength lvl-up perk: Prestige Job: Berserker Req. Job: Barbarian, Job: Guardian perks, 200+ str and either Berzerking or Lustzerking perk Effect: +60 to max str and +20 to max tou (scalable with NG tiers)\n");//powinno dodawać to wraith max bar niż fatigue
 			outputText("-New tier 7 strength lvl-up perk: Rage. Req. Prestige Job: Berserker. Effects: when under effect of bersekrer or lustzerker each time PC attack and not get crit hit with melee attack/secial will gain 1 stack of rage. Max 5 stack of rage and each stack increase crit chance of next melee attack/special by 10%. After each succesful crit hit any existing Rage stacks are removed.\n");
+			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
+			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Arcane Archer Req. Job: Sorcerer, Job: Hunter perks, 150+ int and 200+ spe Effect: +40 to max spe and int (scalable with NG tiers), +600 to max Fatigue\n");
+			outputText("-New tier 7 intelligence lvl-up perk: Prestige Job: Seer Req. Grey Archmage, Soul Overlord perks and 200+ int Effect: +60 max int and +20 to max wis (scalable with NG tiers), +900 max Fatigue, +500 max Soulforce\n");
+			outputText("-New enemy perk: Beast or Animal-morph enemy type. Some of PC attack will deal more dmg to such enemies that atm is 27 diff enemeis with this perk ingame.\n");
 			outputText("-New weapon perks: Strife-Warden (enable use of Beat of War soulskill), Blade-Warden (enable use of Blade Dance soulskill), Wild-Warden (enable use of Resonance Volley soulskill), Mage-Warden (enable use of Avatar of the Song soulskill).\n");
 			outputText("-New Soulskill: Beat of War (Req. Warden’s greatsword equiped) Effect: Boost PC str by 15% of base value with each use. Stackable with other buffs.\n");
 			outputText("-New Soulskill: Blade Dance (Req. Warden’s blade equiped) Effect: Doubles the amount of attacks for one round.\n");
@@ -99,14 +101,26 @@ package classes.Scenes
 			outputText("-Hooked Gauntlets and Spiked Gauntlet weapons are removed from pool of weapons working with mutliattack due to been put in same group of weapons that would benefits from perks affecting fists attacks.\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-New hair type: Grass hair. Result of using Mara fruit. Hair TF for Mara fruit will be now have 50% to give leaf or grass hair.\n");
 			outputText("-Fixed bugs: Naming bug for demons, Too high normaly Goo score, Corrupted Marae fight.\n\n\n\n\n\n");/*ostatni punkt changelogu
-			outputText("-Added in current version race effects to Metamorph perk: \n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");, Goo, Salamander, Phoenix, Siren, Naga, Gorgon, Vouivre, Couatl
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");, Goo, Salamander, Phoenix, Siren, Naga, Gorgon, Vouivre, Couatl
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("-New tier 1 misc lvl-up perk: Dual Wield. Effect: allows to use dual weapons (only with 'Dual' weapon tag not others that may have word Dual in it).\n");
@@ -146,8 +160,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): działający pasek soulforce na main stats
 			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bdą one wcześniej już za czesto wypadać
 			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
