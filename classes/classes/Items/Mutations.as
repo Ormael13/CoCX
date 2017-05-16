@@ -7406,7 +7406,7 @@ import classes.CockTypesEnum;
 			//clear screen
 			clearOutput();
 			outputText("You uncork the bottle and drink it down.  The taste is actualy quite sweet, like an alcohol but with a hint of hazelnuts flavor.  Would it change anything about you than making feeling of warmth spreading inside?", false);
-
+			
 			//Statistical changes:
 			//-Raises speed up to 90.
 			if (changes < changeLimit && rand(3) == 0 && player.spe < 90) {
@@ -7645,6 +7645,16 @@ import classes.CockTypesEnum;
 				player.hairType = 1;
 				changes++;
 			}
+			//Lizard eyes
+			if (changes < changeLimit && rand(4) == 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.eyeType == EYES_HUMAN) {
+				outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a reptile taking on a yellow hue.  <b>You now have reptilian eyes!</b>");
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedLizardEyes)) {
+					outputText("\n\n<b>Genetic Memory: Lizard Eyes - Memorized!</b>\n\n");
+					player.createStatusAffect(StatusAffects.UnlockedLizardEyes, 0, 0, 0, 0);
+				}
+				player.eyeType = EYES_REPTILIAN;
+				changes++;
+			}
 			//Remove odd eyes
 			if (changes < changeLimit && rand(4) == 0 && player.eyeType > EYES_HUMAN) {
 				humanizeEyes();
@@ -7658,6 +7668,17 @@ import classes.CockTypesEnum;
 			//Human ears
 			if (player.faceType == FACE_HUMAN && player.earType != EARS_HUMAN && changes < changeLimit && rand(4) == 0) {
 				humanizeEars();
+				changes++;
+			}
+			//Partial scaled skin
+			if (player.skinType == SKIN_TYPE_PLAIN && player.skinType != SKIN_TYPE_PARTIAL_SCALES && rand(4) == 0) {
+				outputText("\n\nYou feel your skin shift as scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.", false);
+				outputText("  <b>Your body is now partially covered with small patches of scales!</b>", false);
+				player.skin.growCoat(SKIN_COAT_SCALES,{color:"red"},Skin.COVERAGE_LOW);
+				changes++;
+			}
+			if (player.skinType != SKIN_TYPE_PLAIN && player.skinType != SKIN_TYPE_PARTIAL_SCALES && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(4) == 0) {
+				humanizeSkin();
 				changes++;
 			}
 			// Remove gills
@@ -12494,7 +12515,7 @@ import classes.CockTypesEnum;
 			}
 			//tail
 			if (player.armType == ARM_TYPE_ORCA && player.tailType != TAIL_TYPE_ORCA && changes < changeLimit && rand(3) == 0) {
-				outputText("\n\nA large bump starts to grow out of your “Assdescript”, making you groan as your spine lengthens for this whole new appendage to form. You finally grow a tail black as midnight with a white underside and a smaller fin closer to your body, likely for hydrodynamism sake. ", false);
+				outputText("\n\nA large bump starts to grow out of your " + assDescript() + ", making you groan as your spine lengthens for this whole new appendage to form. You finally grow a tail black as midnight with a white underside and a smaller fin closer to your body, likely for hydrodynamism sake. ", false);
 				outputText("You swing your tail a few times, battering the ground with it and smile as you rush to the stream to take a dip. With the help of your mighty tail you easily reach such a high swim speed you even manage to jump several meters out of the water, laughing with delight at the trill of this aquatic experience. ", false);
 				outputText("<b>You're going to have a lot of fun swimming with your new Orca tail.</b>", false);
 				player.tailType = TAIL_TYPE_ORCA;

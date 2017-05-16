@@ -35,7 +35,7 @@ public class SkinLayer extends BodyPart {
 		return color;
 	}
 	[Deprecated("Use color, not tone")]
-	public function set tone(value:String) {
+	public function set tone(value:String):void {
 		trace("[DEPRECATED] SkinLayer.tone = "+value);
 		this.color = value;
 	}

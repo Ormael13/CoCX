@@ -10,6 +10,24 @@ package classes.Scenes.Areas.Forest
 
 	public class Alraune extends Monster
 	{
+		public function trapLevel(adjustment:Number = 0):Number {
+			if(!hasStatusAffect(StatusAffects.Level)) createStatusAffect(StatusAffects.Level,4,0,0,0);
+			if(adjustment != 0) {
+				addStatusValue(StatusAffects.Level,1,adjustment);
+				//Keep in bounds ya lummox
+				if(statusAffectv1(StatusAffects.Level) < 1) changeStatusValue(StatusAffects.Level,1,1);
+				if(statusAffectv1(StatusAffects.Level) > 4) changeStatusValue(StatusAffects.Level,1,4);
+			}
+			return statusAffectv1(StatusAffects.Level);
+		}
+		
+		public function alraunePollenCloud():void {
+			outputText("The alraune giggles as she unleashes a thick cloud of pollen in your general direction.");
+			outputText("\"<i>Just give in to me. I will make it so pleasurable for you.</i>\"");
+			outputText("There is no way you will be able to not breathe it in and you feel your desire rise as the insidious aphrodisiac does its dirty work.\n\n");
+			createStatusAffect(StatusAffects.LustAura, 0, 0, 0, 0);
+			combatRoundOver();
+		}
 		
 		public function alrauneTeaseAttack():void {
 			if (rand(2) == 1) {
@@ -21,7 +39,7 @@ package classes.Scenes.Areas.Forest
 				outputText("\"<i>Mmmmmmm I so love being covered in sticky fluids. How about you?</i>\"\n\n", false);
 			}
 			outputText("Unable to take your gaze away from her lewd show, you feel yourself getting more aroused. ", false);
-			var lustDmg:int = rand(player.lib / 10) + 8;
+			var lustDmg:int = rand(player.lib / 10) + 20;
 			game.dynStats("lus", lustDmg);
 			outputText("\n\n", false);
 			combatRoundOver();
@@ -37,8 +55,8 @@ package classes.Scenes.Areas.Forest
 				else */alrauneTeaseAttack();
 			}
 			if (choice == 3) {
-			/*	if (!hasStatusAffect(StatusAffects.AbilityCooldown1)) paw();
-				else */alrauneTeaseAttack();
+				if (!hasStatusAffect(StatusAffects.LustAura)) alraunePollenCloud();
+				else alrauneTeaseAttack();
 			}
 		}
 		
@@ -70,8 +88,8 @@ package classes.Scenes.Areas.Forest
 			this.skinTone = "light green";
 			this.hairColor = "dark green";
 			this.hairLength = 6;
-			initStrTouSpeInte(10, 110, 10, 40);
-			initLibSensCor(80, 50, 0);
+			initStrTouSpeInte(10, 120, 10, 60);
+			initLibSensCor(100, 50, 0);
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
 			this.weaponAttack = 1 + (1 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
@@ -88,16 +106,16 @@ package classes.Scenes.Areas.Forest
 				//	.add(consumables.W__BOOK, 1 / 4)
 				//	.add(consumables.BEEHONY, 1 / 2)
 				//	.elseDrop(useables.B_CHITN);
-		//	this.antennae = ANTENNAE_BEE;
-		//	this.wingType = WING_TYPE_BEE_LIKE_SMALL;
-		//	this.tailType = TAIL_TYPE_BEE_ABDOMEN;
+			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
+			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
 			this.createStatusAffect(StatusAffects.GenericRunDisabled, 0, 0, 0, 0);
+			createStatusAffect(StatusAffects.Level,4,0,0,0);
 			this.str += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.tou += 22 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.tou += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.inte += 8 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
-			this.lib += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			this.newgamebonusHP = 500;//x10
+			this.inte += 12 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];			
+			this.lib += 20 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
+			this.newgamebonusHP = 600;//x10
 			checkMonster();
 		}
 		

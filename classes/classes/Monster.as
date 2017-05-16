@@ -10,6 +10,8 @@
 	import classes.Items.WeaponRangeLib;
 	import classes.Items.ShieldLib;
 	import classes.Items.UndergarmentLib;
+	import classes.Scenes.Areas.Forest.Alraune;
+	import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
 	import classes.Scenes.Dungeons.Factory.SecretarialSuccubus;
 	import classes.Scenes.NPCs.Kiha;
 	import classes.Scenes.Quests.UrtaQuest.MilkySuccubus;
@@ -1506,15 +1508,22 @@
 			}
 			//[LUST GAINED PER ROUND] - Omnibus
 			if(hasStatusAffect(StatusAffects.LustAura)) {
-				if(player.lust < (player.maxLust() * 0.33)) outputText("Your groin tingles warmly.  The demon's aura is starting to get to you.\n\n", false);
-		 		if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("You blush as the demon's aura seeps into you, arousing you more and more.\n\n", false);
-		  		if(player.lust >= (player.maxLust() * 0.66)) {
-					outputText("You flush bright red with desire as the lust in the air worms its way inside you.  ", false);
-					temp = rand(4);
-					if(temp == 0) outputText("You have a hard time not dropping to your knees to service her right now.\n\n", false);
-					if(temp == 2) outputText("The urge to bury your face in her breasts and suckle her pink nipples nearly overwhelms you.\n\n", false);
-					if(temp == 1) outputText("You swoon and lick your lips, tasting the scent of the demon's pussy in the air.\n\n", false);
-					if(temp == 3) outputText("She winks at you and licks her lips, and you can't help but imagine her tongue sliding all over your body.  You regain composure moments before throwing yourself at her.  That was close.\n\n", false);
+				if(this is OmnibusOverseer) {
+					if(player.lust < (player.maxLust() * 0.33)) outputText("Your groin tingles warmly.  The demon's aura is starting to get to you.\n\n", false);
+					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("You blush as the demon's aura seeps into you, arousing you more and more.\n\n", false);
+					if(player.lust >= (player.maxLust() * 0.66)) {
+						outputText("You flush bright red with desire as the lust in the air worms its way inside you.  ", false);
+						temp = rand(4);
+						if(temp == 0) outputText("You have a hard time not dropping to your knees to service her right now.\n\n", false);
+						if(temp == 2) outputText("The urge to bury your face in her breasts and suckle her pink nipples nearly overwhelms you.\n\n", false);
+						if(temp == 1) outputText("You swoon and lick your lips, tasting the scent of the demon's pussy in the air.\n\n", false);
+						if(temp == 3) outputText("She winks at you and licks her lips, and you can't help but imagine her tongue sliding all over your body.  You regain composure moments before throwing yourself at her.  That was close.\n\n", false);
+					}
+				}
+				if (this is Alraune) {
+					if(player.lust < (player.maxLust() * 0.33)) outputText("The pollen in the air gradually increase your arousal.\n\n", false);
+					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("The pollen in the air is getting to you.\n\n", false);
+					if(player.lust >= (player.maxLust() * 0.66)) outputText("You flush bright red with desire as the lust in the air worms its way inside you.\n\n", false);
 				}
 				game.dynStats("lus", (3 + int(player.lib/20 + player.cor/30)));
 			}
