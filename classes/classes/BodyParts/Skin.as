@@ -69,7 +69,7 @@ public class Skin extends SaveableBodyPart {
 		return skinValue(base.isAre(s, p), coat.isAre(s, p));
 	}
 	override public function get type():int {
-		if (coverage >= COVERAGE_COMPLETE) return coat.type;
+		if (coverage >= COVERAGE_HIGH) return coat.type;
 		return base.type;
 	}
 	/**

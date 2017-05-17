@@ -6153,7 +6153,7 @@ import classes.CockTypesEnum;
 				outputText(player.skinTone + " colored.</b>", false);
 			}
 			//Change skin to normal
-			if (player.skinType != SKIN_TYPE_PLAIN && player.skinType != SKIN_TYPE_STONE && (player.earType == EARS_HUMAN || player.earType == EARS_ELFIN) && rand(4) == 0 && changes < changeLimit) {
+			if (player.hasCoat() && player.skin.base.isAny(SKIN_BASE_PLAIN, SKIN_BASE_STONE) && (player.earType == EARS_HUMAN || player.earType == EARS_ELFIN) && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your " + player.skinFurScales() + " ", false);
 				if (player.hasScales()) outputText("are", false);
 				else outputText("is", false);
@@ -6713,7 +6713,7 @@ import classes.CockTypesEnum;
 			}
 			
 			//DAT EYES
-			if (player.tailType == TAIL_TYPE_CAT && player.earType == EARS_CAT && rand(5) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_CAT && (player.hasFur() || (player.skinType == SKIN_TYPE_SCALES && player.dragonneScore() >= 4)) && player.faceType == FACE_CAT && player.eyeType != EYES_CAT_SLITS) {
+			if (player.tailType == TAIL_TYPE_CAT && player.earType == EARS_CAT && rand(5) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_CAT && (player.hasFur() || (player.hasCoatOfType(SKIN_COAT_SCALES) && player.dragonneScore() >= 4)) && player.faceType == FACE_CAT && player.eyeType != EYES_CAT_SLITS) {
 				//Gain cat-like eyes
 				outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.  <b>Your eyes has turned into those of cat with vertical slit</b>.", false);
 				player.eyeType = EYES_CAT_SLITS;
@@ -8245,7 +8245,7 @@ import classes.CockTypesEnum;
 			if ((player.skinTone != "tan" && player.skinTone != "olive" && player.skinTone != "dark" && player.skinTone != "light") && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(5) == 0) {
 				changes++;
 				outputText("\n\nIt takes a while for you to notice, but <b>", false);
-				if (player.hasFur()) outputText("the skin under your " + player.hairColor + " " + player.skinDesc, false);
+				if (player.hasFur()) outputText("the skin under your " + player.coatColor + " " + player.skinDesc, false);
 				else outputText("your " + player.skinDesc, false);
 				outputText(" has changed to become ", false);
 				temp = rand(4);
@@ -8338,7 +8338,7 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//-Feathery Arms
-			if (!InCollection(ARM_TYPE_GARGOYLE, ARM_TYPE_HARPY) && changes < changeLimit && (type == 1 || player.hairType == 1) && rand(4) == 0) {
+			if (!InCollection(player.armType, ARM_TYPE_GARGOYLE, ARM_TYPE_HARPY) && changes < changeLimit && (type == 1 || player.hairType == 1) && rand(4) == 0) {
 				outputText("\n\nYou smile impishly as you lick the last bits of the nut from your teeth, but when you go to wipe your mouth, instead of the usual texture of your " + player.skinDesc + " on your lips, you feel feathers! You look on in horror while more of the avian plumage sprouts from your " + player.skinDesc + ", covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.", false);
 				changes++;
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedHarpyArms)) {
