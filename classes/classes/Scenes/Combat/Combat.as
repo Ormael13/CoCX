@@ -1885,13 +1885,111 @@ public function reloadWeapon():void {
 	}
 }
 
+public function archerSidewinder():void {
+	flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+	clearOutput();
+	if (player.fatigue + bowCost(300) > player.maxFatigue()) {
+		outputText("You are too tired to attack " + monster.a + " " + monster.short + ".");
+		addButton(0, "Next", combatMenu, false);
+		return;
+	}
+	outputText("You draw but a single arrow infusing a massive amount of magical energy in the bolt which begin to emit a ");
+	if (player.cor > 50) outputText("red");
+	else if (player.cor < 50) outputText("white");
+	else {
+		if (rand(2) == 1) outputText("red");
+		else outputText("white");
+	}
+	outputText(" light and grow turning into a huge spear of condensed energy.  ");
+	fatigue(300,4);
+	var damage:Number = 0;
+	damage += player.spe;
+	if (player.spe >= 21) damage += ((player.spe - 20) * 0.2);
+	if (player.spe >= 41) damage += ((player.spe - 40) * 0.2);
+	if (player.spe >= 61) damage += ((player.spe - 60) * 0.2);
+	if (player.spe >= 81) damage += ((player.spe - 80) * 0.2);
+	if (player.spe >= 101) damage += ((player.spe - 100) * 0.2);
+	if (player.spe >= 151) damage += ((player.spe - 150) * 0.2);
+	if (player.spe >= 201) damage += ((player.spe - 200) * 0.2);
+	if (player.spe >= 251) damage += ((player.spe - 250) * 0.2);
+	if (player.spe >= 301) damage += ((player.spe - 300) * 0.2);
+	if (player.spe >= 351) damage += ((player.spe - 350) * 0.2);
+	if (player.spe >= 401) damage += ((player.spe - 400) * 0.2);
+	if (player.spe >= 451) damage += ((player.spe - 450) * 0.2);
+	if (player.spe >= 501) damage += ((player.spe - 500) * 0.2);
+	if (player.spe >= 551) damage += ((player.spe - 550) * 0.2);
+	if (player.spe >= 601) damage += ((player.spe - 600) * 0.2);
+	if (player.spe >= 651) damage += ((player.spe - 650) * 0.2);
+	if (player.spe >= 701) damage += ((player.spe - 700) * 0.2);
+	if (player.spe >= 751) damage += ((player.spe - 750) * 0.2);
+	if (player.spe >= 801) damage += ((player.spe - 800) * 0.2);
+	if (player.spe >= 851) damage += ((player.spe - 850) * 0.2);
+	if (player.spe >= 901) damage += ((player.spe - 900) * 0.2);
+	if (player.spe >= 951) damage += ((player.spe - 950) * 0.2);
+	if (player.spe < 10) damage = 10;
+	if (player.findPerk(PerkLib.DeadlyAim) < 0) damage *= (monster.damagePercent() / 100);//jak ten perk o ignorowaniu armora bedzie czy coś to tu dać jak nie ma tego perku to sie dolicza
+	//Weapon addition!
+	if (player.weaponRangeAttack < 51) damage *= (1 + (player.weaponRangeAttack * 0.03));
+	else if (player.weaponRangeAttack >= 51 && player.weaponRangeAttack < 101) damage *= (2.5 + ((player.weaponRangeAttack - 50) * 0.025));
+	else if (player.weaponRangeAttack >= 101 && player.weaponRangeAttack < 151) damage *= (3.75 + ((player.weaponRangeAttack - 100) * 0.02));
+	else if (player.weaponRangeAttack >= 151 && player.weaponRangeAttack < 201) damage *= (4.75 + ((player.weaponRangeAttack - 150) * 0.015));
+	else damage *= (5.5 + ((player.weaponRangeAttack - 200) * 0.01));
+	//add bonus for attacking animal-morph or beast enemy
+	if (monster.findPerk(PerkLib.EnemyBeastOrAnimalMorphType) >= 0) damage *= 15;
+	//Determine if critical hit!
+	var crit:Boolean = false;
+	var critChance:int = 5;
+	if (player.findPerk(PerkLib.Tactician) >= 0 && player.inte >= 50) {
+		if (player.inte <= 100) critChance += (player.inte - 50) / 5;
+		if (player.inte > 100) critChance += 10;
+	}
+	if (player.findPerk(PerkLib.VitalShot) >= 0 && player.inte >= 50) critChance += 10;
+	if (rand(100) < critChance) {
+		crit = true;
+		damage *= 1.75;
+	}
+	if (player.findPerk(PerkLib.HistoryScout) >= 0 || player.findPerk(PerkLib.PastLifeScout) >= 0) damage *= 1.1;
+	if (player.findPerk(PerkLib.JobRanger) >= 0) damage *= 1.05;
+	if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
+		damage += player.inte * 0.2;
+		if (player.inte >= 50) damage += player.inte * 0.1;
+		if (player.inte >= 100) damage += player.inte * 0.1;
+		if (player.inte >= 150) damage += player.inte * 0.1;
+		if (player.inte >= 200) damage += player.inte * 0.1;
+		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
+		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 2;
+		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 0.5;
+		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 0.2;
+	}
+	if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
+		damage += player.inte * 0.2;
+		if (player.inte >= 50) damage += player.inte * 0.1;
+		if (player.inte >= 100) damage += player.inte * 0.1;
+		if (player.inte >= 150) damage += player.inte * 0.1;
+		if (player.inte >= 200) damage += player.inte * 0.1;
+		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 0.5;
+		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 0.2;
+		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 5;
+		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 2;
+	}
+	damage = Math.round(damage);
+	damage = doDamage(damage);
+	outputText("You shoot the projectile toward your opponent the bolt flying at such speed and velocity all you see is a flash of light as it reach " + monster.a + monster.short + " and explode the blast projecting dirt and rock everywhere. It takes an entire minute for the smoke to settle. (<b><font color=\"#800000\">" + damage + "</font></b>) ");
+	if (crit == true) outputText(" <b>*Critical Hit!*</b>");
+	outputText("\n\n");
+	flags[kFLAGS.ARROWS_SHOT]++;
+	bowPerkUnlock();
+	checkAchievementDamage(damage);
+	enemyAI();
+}
+
 public function archerBarrage():void {
 	flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 	clearOutput();
 	if (player.fatigue + bowCost(300) > player.maxFatigue()) {
-			outputText("You are too tired to attack " + monster.a + " " + monster.short + ".");
-			addButton(0, "Next", combatMenu, false);
-			return;
+		outputText("You are too tired to attack " + monster.a + " " + monster.short + ".");
+		addButton(0, "Next", combatMenu, false);
+		return;
 	}
 	outputText("You ready your [weapon] and prepare to spin it around trying to hit as many " + monster.a + monster.short + " as possible.  ");
 	fatigue(300,4);
@@ -10602,6 +10700,9 @@ public function physicalSpecials():void {
 	}
 	if (player.shield != ShieldLib.NOTHING) {
 		addButton(button++, "Shield Bash", shieldBash, null, null, null, "Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again.");
+	}
+	if (player.weaponRangePerk == "Bow" && player.hasStatusAffect(StatusAffects.KnowsSidewinder)) {
+		addButton(button++, "Sidewinder", archerSidewinder, null, null, null, "The pinacle art of the hunter. Once per day draw on your fatigue to shoot a single heavily infused arrow at a beast or animal morph. This attack never miss.");
 	}
 	if (monster.plural) {
 		if (player.weaponName == "flail" || player.weaponName == "flaming whip" || player.weaponName == "succubi whip" || player.weaponName == "coiled whip" || player.weaponName == "long ribbon" || player.weaponName == "eldritch ribbon") addButton(button++, "Whipping", whipping, null, null, null, "Attack multiple opponent with your held weapon.  \n\n<b>AoE attack.</b>");

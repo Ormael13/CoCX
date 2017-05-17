@@ -11,9 +11,9 @@ package classes.Scenes.Areas
 	import classes.Scenes.API.Encounters;
 	import classes.Scenes.API.FnHelpers;
 	import classes.Scenes.Areas.Forest.*;
-import classes.Scenes.NPCs.EtnaFollower;
+	import classes.Scenes.NPCs.EtnaFollower;
 
-use namespace kGAMECLASS;
+	use namespace kGAMECLASS;
 
 	public class Forest extends BaseContent
 	{
@@ -28,6 +28,7 @@ use namespace kGAMECLASS;
 		public var tentacleBeastScene:TentacleBeastScene = new TentacleBeastScene();
 		public var erlkingScene:ErlKingScene = new ErlKingScene();
 		public var etnaScene:EtnaFollower = new EtnaFollower();
+		public var alrauneScene:AlrauneScene = new AlrauneScene();
 		// public var dullahanScene:DullahanScene = new DullahanScene(); // [INTERMOD:8chan]
 
 		public function Forest() { }
@@ -293,6 +294,10 @@ use namespace kGAMECLASS;
 				name: "tentabeast",
 				call: tentacleBeastDeepwoodsEncounterFn,
 				when: Encounters.fn.ifLevelMin(2)
+			}, {
+				name: "alraune",
+				call: alrauneEncounterFn,
+				when: Encounters.fn.ifLevelMin(3)
 			}, {
 				name: "dungeon",
 				call: getGame().dungeons.enterDeepCave,
@@ -593,9 +598,25 @@ use namespace kGAMECLASS;
 			if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
 				trace("TENTACLE'S AVOIDED DUE TO BOOK!");
 				outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n", false);
-				simpleChoices("Continue", tentacleBeastScene.encounter, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+				addButton(0, "Continue", tentacleBeastScene.encounter);
+				addButton(1, "Leave", camp.returnToCampUseOneHour);
+			//	simpleChoices("Continue", tentacleBeastScene.encounter, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 			} else {
 				tentacleBeastScene.encounter();
+			}
+		}
+		private function alrauneEncounterFn():void {
+			clearOutput();
+			//Oh noes, tentacles!
+			//Alraune avoidance chance due to dangerous plants
+			if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
+			//	trace("TENTACLE'S AVOIDED DUE TO BOOK!");		//should it be comented out for alru?
+				outputText("You can smell the thick scent of particularly strong pollen in the air. The book mentioned something about this but you don’t recall exactly what. Do you turn back to camp?\n\n", false);
+				addButton(0, "Yes", camp.returnToCampUseOneHour);
+				addButton(1, "No", alrauneScene.alrauneDeepwoods);
+			//	simpleChoices("Continue", tentacleBeastScene.encounter, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+			} else {
+				alrauneScene.alrauneDeepwoods();
 			}
 		}
 		public function discoverDeepwoods():void {

@@ -2922,10 +2922,12 @@ use namespace kGAMECLASS;
 				phoenixCounter++;
 			if (tailType == TAIL_TYPE_SALAMANDER)
 				phoenixCounter++;
+			if (skinType == 11)
+				phoenixCounter++;
 			if (lizardCocks() > 0)
 				phoenixCounter++;
-		//	if (findPerk(PerkLib.SalamanderAdrenalGlands) >= 0)
-		//		phoenixCounter++;
+			if (findPerk(PerkLib.PhoenixFireBreath) >= 0)
+				phoenixCounter++;
 			if (findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0)
 				phoenixCounter += 10;
 			if (findPerk(PerkLib.AscensionHybridTheory) >= 0 && phoenixCounter >= 3)
