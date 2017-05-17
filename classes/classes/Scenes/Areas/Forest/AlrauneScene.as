@@ -22,6 +22,7 @@ package classes.Scenes.Areas.Forest
 		outputText("\"<i>Mmmmmm such a nice catch... come closer into my pitcher.</i>\"\n\n");
 		outputText("There's no way you will let this thing pull you in!\n\n");
 		startCombat(new Alraune());
+		playerMenu();
 	}
 	
 	public function alrauneDeepwoodsWon():void {
@@ -62,6 +63,7 @@ package classes.Scenes.Areas.Forest
 			//put alru pregnance start here
 		}
 		player.orgasm();
+		dynStats("lib", 15, "sen", 5);
 		cleanupAfterCombat();
 	}
 	

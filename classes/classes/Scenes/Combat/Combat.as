@@ -17,6 +17,7 @@ import classes.Scenes.API.FnHelpers;
 import classes.Scenes.Areas.Beach.Gorgon;
 import classes.Scenes.Areas.Desert.Naga;
 import classes.Scenes.Areas.Desert.SandTrap;
+import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Forest.BeeGirl;
 import classes.Scenes.Areas.Forest.Kitsune;
 import classes.Scenes.Areas.HighMountains.Basilisk;
@@ -323,7 +324,13 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 		addButton(6, "M. Specials", magicalSpecials, null, null, null, "Mental and supernatural special attack menu.", "Magical Specials");
 		addButton(7, "Soulforce", soulforceSpecials, null, null, null, "Soulforce attacks menu.", "Soulforce Specials");
 		addButton(8, "Wait", wait, null, null, null, "Take no action for this round.  Why would you do this?  This is a terrible idea.");
-		if (monster.hasStatusAffect(StatusAffects.Level)) addButton(8, "Climb", wait, null, null, null, "Climb the sand to move away from the sand trap.");
+		if (monster.hasStatusAffect(StatusAffects.Level)) {
+			if (monster is SandTrap) addButton(8, "Climb", wait, null, null, null, "Climb the sand to move away from the sand trap.");
+			if (monster is Alraune) {
+				if (player.fatigue + 50 <= player.maxFatigue()) addButton(8, "Struggle", wait, null, null, null, "Struggle to forcefully pull yourself a good distance away from plant woman.");
+				else addButtonDisabled(8, "Struggle", "You're too tired to struggle.");
+			}
+		}
 		addButton(9, "Fantasize", fantasize, null, null, null, "Fantasize about your opponent in a sexual way.  Its probably a pretty bad idea to do this unless you want to end up getting raped.");
 		if (player.findPerk(PerkLib.JobDefender) >= 0) addButton(10, "Defend", defendpose, null, null, null, "Take no offensive action for this round.  Why would you do this?  Maybe because you will assume defensive pose?");
 		if (monster is DriderIncubus)
@@ -755,7 +762,12 @@ private function wait():void {
 		(monster as Kitsune).kitsuneWait();
 	}
 	else if (monster.hasStatusAffect(StatusAffects.Level)) {
-		(monster as SandTrap).sandTrapWait();
+		if (monster is SandTrap) {
+			(monster as SandTrap).sandTrapWait();
+		}
+		if (monster is Alraune) {
+			(monster as Alraune).alrauneWait();
+		}
 	}
 	else if (monster.hasStatusAffect(StatusAffects.MinotaurEntangled)) {
 		clearOutput();
@@ -2298,8 +2310,14 @@ public function attack():void {
 		return;
 	}
 	if(monster.hasStatusAffect(StatusAffects.Level) && !player.hasStatusAffect(StatusAffects.FirstAttack) && !isWieldingRangedWeapon()) {
-		outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
-		(monster as SandTrap).trapLevel(-4);
+		if (monster is SandTrap) {
+			outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
+			(monster as SandTrap).trapLevel(-4);
+		}
+		if (monster is Alraune) {
+			outputText("It’s all or nothing!  If this leafy woman is so keen on pulling you in, you will let her do just that!  You use her own strength against her, using it to increase your momentum as you leap towards her and smash into her with your weapon!  ");
+			(monster as Alraune).trapLevel(-4);
+		}
 	}
 	/*if(player.findPerk(PerkLib.DoubleAttack) >= 0 && player.spe >= 50 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] < 2) {
 		if(player.hasStatusAffect(StatusAffects.FirstAttack)) player.removeStatusAffect(StatusAffects.FirstAttack);
@@ -2455,7 +2473,7 @@ public function attack():void {
 	else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
 	else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
 	//Bonus sand trap damage!
-	if (monster.hasStatusAffect(StatusAffects.Level)) damage = Math.round(damage * 1.75);
+	if (monster.hasStatusAffect(StatusAffects.Level) && monster is SandTrap) damage = Math.round(damage * 1.75);
 	//All special wepaon effects like...flames/ice
 	if (player.weaponName == "flaming whip") {
 		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
@@ -4585,12 +4603,20 @@ public function display():void {
 		//Bonus sand trap stuff
 		if(monster.hasStatusAffect(StatusAffects.Level)) {
 			temp = monster.statusAffectv1(StatusAffects.Level);
-			//[(new PG for PC height levels)PC level 4: 
-			if(temp == 4) outputText("You are right at the edge of its pit.  If you can just manage to keep your footing here, you'll be safe.");
-			else if(temp == 3) outputText("The sand sinking beneath your feet has carried you almost halfway into the creature's pit.");
-			else outputText("The dunes tower above you and the hissing of sand fills your ears.  <b>The leering sandtrap is almost on top of you!</b>");
-			//no new PG)
-			outputText("  You could try attacking it with your " + player.weaponName + ", but that will carry you straight to the bottom.  Alternately, you could try to tease it or hit it at range, or wait and maintain your footing until you can clamber up higher.");
+			if (monster is SandTrap) {
+				//[(new PG for PC height levels)PC level 4: 
+				if(temp == 4) outputText("You are right at the edge of its pit.  If you can just manage to keep your footing here, you'll be safe.");
+				else if(temp == 3) outputText("The sand sinking beneath your feet has carried you almost halfway into the creature's pit.");
+				else outputText("The dunes tower above you and the hissing of sand fills your ears.  <b>The leering sandtrap is almost on top of you!</b>");
+				//no new PG)
+				outputText("  You could try attacking it with your " + player.weaponName + ", but that will carry you straight to the bottom.  Alternately, you could try to tease it or hit it at range, or wait and maintain your footing until you can clamber up higher.");
+			}
+			if (monster is Alraune) {
+				if (temp == 4) outputText("The " + monster.short + " keeps pulling you ever closer. You are a fair distance from her for now but she keeps drawing you in.");
+				else if(temp == 3) outputText("The " + monster.short + " keeps pulling you ever closer. You are getting dangerously close to her.");
+				else outputText("The " + monster.short + " keeps pulling you ever closer. You are almost in the pitcher, the plant woman smiling and waiting with open arms to help you in.  <b>You need to get some distance or you will be grabbed and drawn inside her flower!</b>");
+				outputText("  You could try attacking it with your " + player.weaponName + ", but that will carry you straight to the pitcher.  Alternately, you could try to tease it or hit it at range.");
+			}
 			outputText("\n\n");
 		}
 		if(monster.plural) {
@@ -6314,6 +6340,9 @@ public function combatRoundOverImpl():Boolean { //Called after the monster's act
 		if((monster as SandTrap).trapLevel() <= 1) {
 			kGAMECLASS.desert.sandTrapScene.sandtrapmentLoss();
 			return true;
+		}if((monster as Alraune).trapLevel() <= 1) {
+			kGAMECLASS.forest.alrauneScene.alrauneDeepwoodsLost();
+			return true;
 		}
 	}
 	if(monster.short == "basilisk" && player.spe <= 1) {
@@ -6357,9 +6386,10 @@ public function meleeANDrangeANDmanaSubMenu():void {
 }
 public function magicMenu():void {
 //Pass false to combatMenu instead:	menuLoc = 3;
-	if (inCombat && player.hasStatusAffect(StatusAffects.Sealed) && player.statusAffectv2(StatusAffects.Sealed) == 2) {
+	if (inCombat && player.hasStatusAffect(StatusAffects.Sealed) && (player.statusAffectv2(StatusAffects.Sealed) == 2 || player.statusAffectv2(StatusAffects.Sealed) == 10)) {
 		clearOutput();
-		outputText("You reach for your magic, but you just can't manage the focus necessary.  <b>Your ability to use magic was sealed, and now you've wasted a chance to attack!</b>\n\n");
+		if (player.statusAffectv2(StatusAffects.Sealed) == 2) outputText("You reach for your magic, but you just can't manage the focus necessary.  <b>Your ability to use magic was sealed, and now you've wasted a chance to attack!</b>\n\n");
+		if (player.statusAffectv2(StatusAffects.Sealed) == 10) outputText("You try to use magic but you are currently silenced by the alraune vines!\n\n");
 		enemyAI();
 		return;
 	}
@@ -9930,7 +9960,7 @@ public function runAway(callHook:Boolean = true):void {
 		addButton(0, "Next", combatMenu, false);
 		return;
 	}
-	if(monster.hasStatusAffect(StatusAffects.Level) && player.canFly()) {
+	if(monster.hasStatusAffect(StatusAffects.Level) && player.canFly() && monster is SandTrap) {
 		clearOutput();
 		outputText("You flex the muscles in your back and, shaking clear of the sand, burst into the air!  Wasting no time you fly free of the sandtrap and its treacherous pit.  \"One day your wings will fall off, little ant,\" the snarling voice of the thwarted androgyne carries up to you as you make your escape.  \"And I will be waiting for you when they do!\"");
 		inCombat = false;
@@ -9946,7 +9976,7 @@ public function runAway(callHook:Boolean = true):void {
 		addButton(0, "Next", combatMenu, false);
 		return;
 	}
-	if(monster.hasStatusAffect(StatusAffects.Level) && monster.statusAffectv1(StatusAffects.Level) < 4) {
+	if(monster.hasStatusAffect(StatusAffects.Level) && monster.statusAffectv1(StatusAffects.Level) < 4 && monster is SandTrap) {
 		outputText("You're too deeply mired to escape!  You'll have to <b>climb</b> some first!");
 //Pass false to combatMenu instead:		menuLoc = 3;
 //		doNext(combatMenu);
@@ -10456,9 +10486,10 @@ public function magicalSpecials():void {
 		kGAMECLASS.urtaQuest.urtaMSpecials();
 		return;
 	}
-	if (inCombat && player.hasStatusAffect(StatusAffects.Sealed) && player.statusAffectv2(StatusAffects.Sealed) == 6) {
+	if (inCombat && player.hasStatusAffect(StatusAffects.Sealed) && (player.statusAffectv2(StatusAffects.Sealed) == 6 || player.statusAffectv2(StatusAffects.Sealed) == 10)) {
 		clearOutput();
-		outputText("You try to ready a special ability, but wind up stumbling dizzily instead.  <b>Your ability to use magical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
+		if (player.statusAffectv2(StatusAffects.Sealed) == 6) outputText("You try to ready a special ability, but wind up stumbling dizzily instead.  <b>Your ability to use magical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
+		if (player.statusAffectv2(StatusAffects.Sealed) == 10) outputText("You try to use a magical ability but you are currently silenced by the alraune vines!\n\n");
 		enemyAI();
 		return;
 	}

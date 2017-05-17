@@ -18,6 +18,7 @@ package classes.Scenes
 	import classes.Scenes.Areas.Forest.WorldTree;
 	import classes.Scenes.NPCs.Sonya;
 	import classes.Scenes.NPCs.RyuBiDragon;
+	import classes.Scenes.Areas.Forest.Alraune;
 	
 	use namespace kGAMECLASS;
 	
@@ -333,6 +334,7 @@ package classes.Scenes
 			addButton(1, "MaraeFight", FightMarae, null, null, null, "Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
 			addButton(2, "SonyaFight", FightSonya, null, null, null, "Test fight with Sonya.");
 			addButton(3, "RyuBiFight", FightRyuBi, null, null, null, "Test fight with RyuBi.");
+			addButton(4, "Alraune", FightAlraune, null, null, null, "Test fight with Alraune.");
 			addButton(10, "LvLUP Eva", LvLUPEva, null, null, null, "LvL UP forcefully Evangeline for testing purpose up to the limit.");
 			addButton(11, "DELvL Eva", DELvLEva, null, null, null, "DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
 			addButton(14, "Back", SoulforceCheats);
@@ -821,6 +823,11 @@ package classes.Scenes
 			clearOutput();
 			outputText("Entering battle with RyuBi! Enjoy ^^");
 			startCombat(new RyuBiDragon());
+		}
+		public function FightAlraune():void {
+			clearOutput();
+			outputText("Entering battle with Alraune! Enjoy ^^");
+			startCombat(new Alraune());
 		}
 		public function LvLUPEva():void {
 			outputText("\n\n<b>Evangeline get stronger! (cheat stop working when she reach max possible lvl for now (atm it's lvl 42))</b>");

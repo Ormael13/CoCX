@@ -14,19 +14,31 @@ package classes.Scenes.Areas.Forest
 			if(!hasStatusAffect(StatusAffects.Level)) createStatusAffect(StatusAffects.Level,4,0,0,0);
 			if(adjustment != 0) {
 				addStatusValue(StatusAffects.Level,1,adjustment);
-				//Keep in bounds ya lummox
 				if(statusAffectv1(StatusAffects.Level) < 1) changeStatusValue(StatusAffects.Level,1,1);
 				if(statusAffectv1(StatusAffects.Level) > 4) changeStatusValue(StatusAffects.Level,1,4);
 			}
 			return statusAffectv1(StatusAffects.Level);
 		}
 		
+		public function alrauneWait():void {
+			clearOutput();
+			outputText("You struggle against the alraune vines, forcefully pulling yourself a good distance away from her.\n\n");
+			trapLevel(2);
+			player.fatigue -= 50;
+		//	doAI();
+		}
+		
 		public function alraunePollenCloud():void {
-			outputText("The alraune giggles as she unleashes a thick cloud of pollen in your general direction.");
-			outputText("\"<i>Just give in to me. I will make it so pleasurable for you.</i>\"");
+			outputText("The alraune giggles as she unleashes a thick cloud of pollen in your general direction.\n\n");
+			outputText("\"<i>Just give in to me. I will make it so pleasurable for you.</i>\"\n\n");
 			outputText("There is no way you will be able to not breathe it in and you feel your desire rise as the insidious aphrodisiac does its dirty work.\n\n");
 			createStatusAffect(StatusAffects.LustAura, 0, 0, 0, 0);
-			combatRoundOver();
+		}
+		
+		public function alrauneStrangulate():void {
+			outputText("The Alraune’s vines suddenly wrap tight around your neck and strangle you, preventing you from pronouncing any incantations. The plant woman gives you an annoyed glare.");
+			outputText("\"<i>I’m done with your magic. Be a good " + player.mf("boy", "girl") + " and just give in.</i>\"");
+			player.createStatusAffect(StatusAffects.Sealed, 2, 10, 0, 0);
 		}
 		
 		public function alrauneTeaseAttack():void {
@@ -42,22 +54,29 @@ package classes.Scenes.Areas.Forest
 			var lustDmg:int = rand(player.lib / 10) + 20;
 			game.dynStats("lus", lustDmg);
 			outputText("\n\n", false);
-			combatRoundOver();
 		}
 		
 		override protected function performCombatAction():void
 		{
-			var choice:Number = rand(4);
-			if (choice == 0) alrauneTeaseAttack();
-			if (choice == 1) alrauneTeaseAttack();
-			if (choice == 2) {
-			/*	if (!player.hasStatusAffect(StatusAffects.WolfHold) && rand(2) == 0) wolfHold();
-				else */alrauneTeaseAttack();
+			if (hasStatusAffect(StatusAffects.Level)) {
+				var choice:Number = rand(3);
+				if (choice == 0) alrauneTeaseAttack();
+				if (choice == 1) {
+				/*	if (!player.hasStatusAffect(StatusAffects.WolfHold) && rand(2) == 0) alrauneStrangulate();
+					else */alrauneTeaseAttack();
+				}
+				if (choice == 2) {
+					if (!hasStatusAffect(StatusAffects.LustAura)) alraunePollenCloud();
+					else alrauneTeaseAttack();
+				}
+				if (!hasStatusAffect(StatusAffects.Climbed)) {
+					outputText("\n\nMeanwhile the vines keep pulling you toward the pitcher.");
+					trapLevel(-1);
+				}
+				else removeStatusAffect(StatusAffects.Climbed);
+				combatRoundOver();
 			}
-			if (choice == 3) {
-				if (!hasStatusAffect(StatusAffects.LustAura)) alraunePollenCloud();
-				else alrauneTeaseAttack();
-			}
+			else super.performCombatAction();
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
@@ -74,7 +93,7 @@ package classes.Scenes.Areas.Forest
 		{
 			super();
 			this.a = "an ";
-			this.short = "Alraune";
+			this.short = "alraune";
 			this.imageName = "alraune";
 			this.long = "You are fighting against an alraune, an intelligent plant with the torso of a woman and the lower body of a giant flower. She seems really keen on raping you.";
 			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_GAPING);
