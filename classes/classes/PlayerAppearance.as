@@ -947,7 +947,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.lowerBody == LOWER_BODY_TYPE_BUNNY)
 			outputText("  Your " + num2Text(player.legCount) + " legs thicken below the waist as they turn into soft-furred rabbit-like legs.  You even have large bunny feet that make hopping around a little easier than walking.", false);
 		else if (player.lowerBody == LOWER_BODY_TYPE_HARPY)
-			outputText("  Your " + num2Text(player.legCount) + " legs are covered with [skin coat.color] plumage.  Thankfully the thick, powerful thighs are perfect for launching you into the air, and your feet remain mostly human, even if they are two-toed and tipped with talons.", false);
+			outputText("  Your " + num2Text(player.legCount) + " legs are covered with [haircolor] plumage.  Thankfully the thick, powerful thighs are perfect for launching you into the air, and your feet remain mostly human, even if they are two-toed and tipped with talons.", false);
 		else if (player.lowerBody == LOWER_BODY_TYPE_KANGAROO)
 			outputText("  Your " + num2Text(player.legCount) + " furry legs have short thighs and long calves, with even longer feet ending in prominently-nailed toes.", false);
 		else if (player.lowerBody == LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS)
@@ -1176,9 +1176,9 @@ public class PlayerAppearance extends BaseContent {
 		if (player.wingType == WING_TYPE_MANTICORE_LIKE_LARGE)
 			outputText("  A pair of large ominous leathery wings covered with fur expand from your back. You can open them wide to soar high in search of your next prey.", false);
 		if (player.wingType == WING_TYPE_FEATHERED_LARGE)
-			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the [skin coat.color]-colored wings folded close, they can unfurl to allow you to soar as gracefully as a harpy.", false);
+			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as a harpy.", false);
 		if (player.wingType == WING_TYPE_FEATHERED_ALICORN)
-			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the [skin coat.color]-colored wings folded close, they can unfurl to allow you to soar as gracefully as an alicorn.", false);
+			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the [haircolor]-colored wings folded close, they can unfurl to allow you to soar as gracefully as an alicorn.", false);
 		if (player.wingType == WING_TYPE_FEATHERED_PHOENIX)
 			outputText("  A pair of large, feathery wings sprout from your back.  Though you usually keep the crimson-colored wings folded close, they can unfurl to allow you to soar as gracefully as a phoenix.", false);
 		if (player.wingType == WING_TYPE_DRACONIC_SMALL)
