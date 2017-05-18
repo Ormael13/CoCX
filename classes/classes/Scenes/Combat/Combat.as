@@ -6337,10 +6337,10 @@ public function combatRoundOverImpl():Boolean { //Called after the monster's act
 		return true;
 	}
 	if(monster.hasStatusAffect(StatusAffects.Level)) {
-		if((monster as SandTrap).trapLevel() <= 1) {
+		if(monster is SandTrap && (monster as SandTrap).trapLevel() <= 1) {
 			kGAMECLASS.desert.sandTrapScene.sandtrapmentLoss();
 			return true;
-		}if((monster as Alraune).trapLevel() <= 1) {
+		} else if(monster is Alraune &&(monster as Alraune).trapLevel() <= 1) {
 			kGAMECLASS.forest.alrauneScene.alrauneDeepwoodsLost();
 			return true;
 		}
