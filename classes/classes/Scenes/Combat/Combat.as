@@ -4440,24 +4440,28 @@ public function startCombatImpl(monster_:Monster, plotFight_:Boolean = false):vo
 		spellChargeWeapon(true);
 		fatigue(30,1);
 		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock(); // XXX: message?
 	}
 	if (player.findPerk(PerkLib.Spellarmor) >= 0 && player.lust < getWhiteMagicLustCap() && player.fatigue + spellCost(40) < player.maxFatigue() && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] == 0) {
 		spellChargeArmor(true);
 		fatigue(40,1);
 		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock(); // XXX: message?
 	}
 	if (player.findPerk(PerkLib.Battlemage) >= 0 && (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30 || player.lust >= 50) && player.fatigue + spellCost(50) < player.maxFatigue() && flags[kFLAGS.AUTO_CAST_MIGHT] == 0) {
 		spellMight(true);
 		fatigue(50,1);
 		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock(); // XXX: message?
 	}
 	if (player.findPerk(PerkLib.Battleflash) >= 0 && (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30 || player.lust >= 50) && player.fatigue + spellCost(40) < player.maxFatigue() && flags[kFLAGS.AUTO_CAST_BLINK] == 0) {
 		spellBlink(true);
 		fatigue(40,1);
 		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock(); // XXX: message?
 	}
 	//Bonus stats from monster perks
@@ -6337,10 +6341,10 @@ public function combatRoundOverImpl():Boolean { //Called after the monster's act
 		return true;
 	}
 	if(monster.hasStatusAffect(StatusAffects.Level)) {
-		if((monster as SandTrap).trapLevel() <= 1) {
+		if(monster is SandTrap && (monster as SandTrap).trapLevel() <= 1) {
 			kGAMECLASS.desert.sandTrapScene.sandtrapmentLoss();
 			return true;
-		}if((monster as Alraune).trapLevel() <= 1) {
+		} else if(monster is Alraune &&(monster as Alraune).trapLevel() <= 1) {
 			kGAMECLASS.forest.alrauneScene.alrauneDeepwoodsLost();
 			return true;
 		}
@@ -6688,6 +6692,7 @@ public function spellArouse():void {
 	if(monster.hasStatusAffect(StatusAffects.Shell)) {
 		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		enemyAI();
 		return;
@@ -6698,6 +6703,7 @@ public function spellArouse():void {
 		outputText("The worms appear to be unaffected by your magic!", false);
 		outputText("\n\n", false);
 		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		doNext(playerMenu);
 		if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
@@ -6707,6 +6713,7 @@ public function spellArouse():void {
 	if(monster.lustVuln == 0) {
 		outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n", false);
 		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		enemyAI();
 		return;
@@ -6748,6 +6755,7 @@ public function spellArouse():void {
 	outputText("\n\n", false);
 	doNext(playerMenu);
 	flags[kFLAGS.SPELLS_CAST]++;
+	if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 	spellPerkUnlock();
 	if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
 	else enemyAI();
@@ -6789,6 +6797,7 @@ public function spellHeal():void {
 	outputText("\n\n", false);
 	statScreenRefresh();
 	flags[kFLAGS.SPELLS_CAST]++;
+	if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 	spellPerkUnlock();
 	if(player.lust >= player.maxLust()) doNext(endLustLoss);
 	else enemyAI();
@@ -6947,6 +6956,7 @@ public function spellMight(silent:Boolean = false):void {
 	}
 	outputText("\n\n", false);
 	flags[kFLAGS.SPELLS_CAST]++;
+	if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 	spellPerkUnlock();
 	if(player.lust >= player.maxLust()) doNext(endLustLoss);
 	else enemyAI();
@@ -7053,6 +7063,7 @@ public function spellBlink(silent:Boolean = false):void {
 	}
 	outputText("\n\n", false);
 	flags[kFLAGS.SPELLS_CAST]++;
+	if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 	spellPerkUnlock();
 	if(player.lust >= player.maxLust()) doNext(endLustLoss);
 	else enemyAI();
@@ -7074,6 +7085,7 @@ public function spellIceSpike():void {
 	if(monster.hasStatusAffect(StatusAffects.Shell)) {
 		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		enemyAI();
 		return;
@@ -7082,6 +7094,7 @@ public function spellIceSpike():void {
 	//{
 		//(monster as Doppleganger).handleSpellResistance("whitefire");
 		//flags[kFLAGS.SPELLS_CAST]++;
+		//if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		//spellPerkUnlock();
 		//return;
 	//}
@@ -7148,6 +7161,7 @@ public function spellIceSpike():void {
 	outputText("\n\n", false);
 	checkAchievementDamage(temp);
 	flags[kFLAGS.SPELLS_CAST]++;
+	if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 	spellPerkUnlock();
 	monster.HP -= temp;
 	statScreenRefresh();
@@ -7170,6 +7184,7 @@ public function spellDarknessShard():void {
 	if(monster.hasStatusAffect(StatusAffects.Shell)) {
 		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		enemyAI();
 		return;
@@ -7178,6 +7193,7 @@ public function spellDarknessShard():void {
 	//{
 		//(monster as Doppleganger).handleSpellResistance("whitefire");
 		//flags[kFLAGS.SPELLS_CAST]++;
+		//if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		//spellPerkUnlock();
 		//return;
 	//}
@@ -7225,10 +7241,10 @@ public function spellDarknessShard():void {
 	}
 	//High damage to goes.
 //	temp = calcGlacialMod(temp);
-//	if (monster.findPerk(PerkLib.IceNature) >= 0) temp *= 0.2;
-//	if (monster.findPerk(PerkLib.FireVulnerability) >= 0) temp *= 0.5;
-//	if (monster.findPerk(PerkLib.IceVulnerability) >= 0) temp *= 2;
-//	if (monster.findPerk(PerkLib.FireNature) >= 0) temp *= 5;
+	if (monster.findPerk(PerkLib.DarknessNature) >= 0) temp *= 0.2;
+	if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) temp *= 0.5;
+	if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) temp *= 2;
+	if (monster.findPerk(PerkLib.LightningNature) >= 0) temp *= 5;
 //	if (player.findPerk(PerkLib.ColdMastery) >= 0) temp *= 2;
 //	if (player.findPerk(PerkLib.ColdAffinity) >= 0) temp *= 2;
 	temp = Math.round(temp);
@@ -7244,6 +7260,7 @@ public function spellDarknessShard():void {
 	outputText("\n\n", false);
 	checkAchievementDamage(temp);
 	flags[kFLAGS.SPELLS_CAST]++;
+	if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 	spellPerkUnlock();
 	monster.HP -= temp;
 	statScreenRefresh();
@@ -7267,6 +7284,7 @@ public function spellIceRain():void {
 	if(monster.hasStatusAffect(StatusAffects.Shell)) {
 		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		enemyAI();
 		return;
@@ -7275,6 +7293,7 @@ public function spellIceRain():void {
 	//{
 		//(monster as Doppleganger).handleSpellResistance("whitefire");
 		//flags[kFLAGS.SPELLS_CAST]++;
+		//if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		//spellPerkUnlock();
 		//return;
 	//}
@@ -7342,6 +7361,7 @@ public function spellIceRain():void {
 	outputText("\n\n", false);
 	checkAchievementDamage(temp);
 	flags[kFLAGS.SPELLS_CAST]++;
+	if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 	spellPerkUnlock();
 	monster.HP -= temp;
 	statScreenRefresh();
@@ -7365,6 +7385,7 @@ public function spellFireStorm():void {
 	if(monster.hasStatusAffect(StatusAffects.Shell)) {
 		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		enemyAI();
 		return;
@@ -7373,6 +7394,7 @@ public function spellFireStorm():void {
 	//{
 		//(monster as Doppleganger).handleSpellResistance("whitefire");
 		//flags[kFLAGS.SPELLS_CAST]++;
+		//if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		//spellPerkUnlock();
 		//return;
 	//}
@@ -7439,6 +7461,7 @@ public function spellFireStorm():void {
 	outputText("\n\n", false);
 	checkAchievementDamage(temp);
 	flags[kFLAGS.SPELLS_CAST]++;
+	if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 	spellPerkUnlock();
 	monster.HP -= temp;
 	statScreenRefresh();
@@ -7511,6 +7534,7 @@ public function spellChargeWeapon(silent:Boolean = false):void {
 	player.createStatusAffect(StatusAffects.ChargeWeapon,ChargeWeaponBoost,0,0,0);
 	statScreenRefresh();
 	flags[kFLAGS.SPELLS_CAST]++;
+	if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 	spellPerkUnlock();
 	enemyAI();
 }
@@ -7579,6 +7603,7 @@ public function spellChargeArmor(silent:Boolean = false):void {
 	player.createStatusAffect(StatusAffects.ChargeArmor,ChargeArmorBoost,0,0,0);
 	statScreenRefresh();
 	flags[kFLAGS.SPELLS_CAST]++;
+	if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 	spellPerkUnlock();
 	enemyAI();
 }
@@ -7601,6 +7626,7 @@ public function spellBlind():void {
 		if (monster.hasStatusAffect(StatusAffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
+			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 			enemyAI();
 			return;
@@ -7633,6 +7659,7 @@ public function spellBlind():void {
 				return;
 			}
 			flags[kFLAGS.SPELLS_CAST]++;
+			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 			if(monster.HP < 1) doNext(endHpVictory);
 			else enemyAI();
@@ -7647,6 +7674,7 @@ public function spellBlind():void {
 			monster.createStatusAffect(StatusAffects.Blind, 5 * spellModWhite(), 0, 0, 0);
 			outputText("\n\n", false);
 			flags[kFLAGS.SPELLS_CAST]++;
+			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 			statScreenRefresh();
 			enemyAI();
@@ -7675,6 +7703,7 @@ public function spellBlind():void {
 	else outputText(monster.capitalA + monster.short + " blinked!", false);	
 	outputText("\n\n", false);
 	flags[kFLAGS.SPELLS_CAST]++;
+	if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 	spellPerkUnlock();
 	statScreenRefresh();
 	enemyAI();
@@ -7694,6 +7723,7 @@ public function spellWhitefire():void {
 	if(monster.hasStatusAffect(StatusAffects.Shell)) {
 		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		enemyAI();
 		return;
@@ -7702,6 +7732,7 @@ public function spellWhitefire():void {
 	{
 		(monster as Doppleganger).handleSpellResistance("whitefire");
 		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		return;
 	}
@@ -7817,6 +7848,7 @@ public function spellWhitefire():void {
 	outputText("\n\n", false);
 	checkAchievementDamage(temp);
 	flags[kFLAGS.SPELLS_CAST]++;
+	if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 	spellPerkUnlock();
 	monster.HP -= temp;
 	statScreenRefresh();
@@ -7850,6 +7882,7 @@ public function spellLightningBolt():void {
 	if(monster.hasStatusAffect(StatusAffects.Shell)) {
 		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		enemyAI();
 		return;
@@ -7858,6 +7891,7 @@ public function spellLightningBolt():void {
 	//{
 		//(monster as Doppleganger).handleSpellResistance("whitefire");
 		//flags[kFLAGS.SPELLS_CAST]++;
+		//if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		//spellPerkUnlock();
 		//return;
 	//}
@@ -7905,11 +7939,10 @@ public function spellLightningBolt():void {
 	}
 	//High damage to goes.
 //	temp = calcGlacialMod(temp);
-//	if (monster.findPerk(PerkLib.IceNature) >= 0) temp *= 0.2;
-//	if (monster.findPerk(PerkLib.FireVulnerability) >= 0) temp *= 0.5;
-//	if (monster.findPerk(PerkLib.IceVulnerability) >= 0) temp *= 2;
-//	if (monster.findPerk(PerkLib.FireNature) >= 0) temp *= 5;
-//	if (player.findPerk(PerkLib.ColdMastery) >= 0) temp *= 2;
+	if (monster.findPerk(PerkLib.DarknessNature) >= 0) temp *= 0.2;
+	if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) temp *= 0.5;
+	if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) temp *= 2;
+	if (monster.findPerk(PerkLib.LightningNature) >= 0) temp *= 5;
 //	if (player.findPerk(PerkLib.ColdAffinity) >= 0) temp *= 2;
 	temp = Math.round(temp);
 	//if (monster.short == "goo-girl") temp = Math.round(temp * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
@@ -7924,6 +7957,7 @@ public function spellLightningBolt():void {
 	outputText("\n\n", false);
 	checkAchievementDamage(temp);
 	flags[kFLAGS.SPELLS_CAST]++;
+	if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 	spellPerkUnlock();
 	monster.HP -= temp;
 	statScreenRefresh();
@@ -7956,6 +7990,7 @@ public function spellBlizzard():void {
 	}
 	statScreenRefresh();
 	flags[kFLAGS.SPELLS_CAST]++;
+	if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 	spellPerkUnlock();
 	enemyAI();
 }
@@ -7975,6 +8010,7 @@ public function spellCleansingPalm():void
 	if(monster.hasStatusAffect(StatusAffects.Shell)) {
 		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		enemyAI();
 		return;
@@ -7987,6 +8023,7 @@ public function spellCleansingPalm():void
 		{
 			outputText("You thrust your palm forward, sending a blast of pure energy towards Jojo. At the last second he sends a blast of his own against yours canceling it out\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
+			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 			enemyAI();
 			return;
@@ -7997,6 +8034,7 @@ public function spellCleansingPalm():void
 	{
 		outputText("You thrust your palm forward, causing a blast of pure energy to slam against the giant stone statue- to no effect!");
 		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		enemyAI();
 		return;
@@ -8039,6 +8077,7 @@ public function spellCleansingPalm():void
 	}
 	
 	flags[kFLAGS.SPELLS_CAST]++;
+	if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 	spellPerkUnlock();
 	monster.HP -= temp;
 	statScreenRefresh();
@@ -9669,6 +9708,210 @@ public function dragoniceBreath():void {
 	else combatRoundOver();
 }
 
+public function dragonlightningBreath():void {
+	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+	clearOutput();
+	if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue())
+	{
+		outputText("You are too tired to breathe lightning.", true);
+		doNext(combatMenu);
+		return;
+	}
+	//Not Ready Yet:
+	if(player.hasStatusAffect(StatusAffects.DragonBreathCooldown)) {
+		outputText("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
+		doNext(combatMenu);
+		return;
+	}
+//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+	fatigue(50, 1);
+	player.createStatusAffect(StatusAffects.DragonBreathCooldown,0,0,0,0);
+	var damage:Number = int(player.level * (8 + player.dragonScore()) + rand(60));
+	
+//	damage = calcGlacialMod(damage);
+	
+	if(player.hasStatusAffect(StatusAffects.DragonBreathBoost)) {
+		player.removeStatusAffect(StatusAffects.DragonBreathBoost);
+		damage *= 1.5;
+	}
+/*	if (player.findPerk(PerkLib.DraconicLungs) >= 0) {
+		damage *= 3;
+	}
+*/	if (monster.findPerk(PerkLib.LightningNature) >= 0) damage *= 0.2;
+	if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) damage *= 0.5;
+	if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) damage *= 2;
+	if (monster.findPerk(PerkLib.DarknessNature) >= 0) damage *= 5;
+//	if (player.findPerk(PerkLib.ColdMastery) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 2;
+	damage = Math.round(damage);
+	//Shell
+	if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
+		enemyAI();
+		return;
+	}
+	//Amily!
+	if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
+		enemyAI();
+		return;
+	}
+	if (monster is LivingStatue)
+	{
+		outputText("The lightning courses by the stone skin harmlessly. Thou it does leave the surface of the statue sparkling with a few residual lighting discharges.");
+		enemyAI();
+		return;
+	}
+	outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around " + monster.pronoun2 + ".  " + monster.capitalA + monster.short + " does " + monster.pronoun3 + " best to avoid it, but the wave of force is too fast.");
+	//Miss: 
+	if((player.hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
+		outputText("  Despite the heavy impact caused by your roar, " + monster.a + monster.short + " manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
+	}
+	//Special enemy avoidances
+	else if(monster.short == "Vala" && !monster.hasStatusAffect(StatusAffects.Stunned)) {
+		outputText("Vala beats her wings with surprising strength, blowing the lightning bolt back at you! ", false);		
+		if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
+			outputText("You dive out of the way and evade it!", false);
+		}
+		else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(4) == 0) {
+			outputText("You use your flexibility to barely fold your body out of the way!", false);
+		}
+		//Determine if blocked!
+		else if (combatBlock(true)) {
+			outputText("You manage to block your own lightning with your " + player.shieldName + "!");
+		}
+		else {
+			damage = takeDamage(damage);
+			outputText("Your own lightning smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
+		}
+		outputText("\n\n", false);
+	}
+	else {
+		if(monster.findPerk(PerkLib.Resolute) < 0) {
+			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+			monster.createStatusAffect(StatusAffects.Stunned,1,0,0,0);
+		}
+		else {
+			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+			if(!monster.plural) outputText("is ");
+			else outputText("are");
+			outputText("too resolute to be stunned by your attack.</b>");
+		}
+		damage = doDamage(damage);
+		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+	}
+	outputText("\n\n");
+	checkAchievementDamage(damage);
+	if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+	{
+		outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+		monster.createStatusAffect(StatusAffects.Shell, 2, 0, 0, 0);
+		enemyAI();
+	}
+	else combatRoundOver();
+}
+
+public function dragondarknessBreath():void {
+	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+	clearOutput();
+	if (player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + spellCost(50) > player.maxFatigue())
+	{
+		outputText("You are too tired to breathe dakness.", true);
+		doNext(combatMenu);
+		return;
+	}
+	//Not Ready Yet:
+	if(player.hasStatusAffect(StatusAffects.DragonBreathCooldown)) {
+		outputText("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
+		doNext(combatMenu);
+		return;
+	}
+//This is now automatic - newRound arg defaults to true:	menuLoc = 0;
+	fatigue(50, 1);
+	player.createStatusAffect(StatusAffects.DragonBreathCooldown,0,0,0,0);
+	var damage:Number = int(player.level * (8 + player.dragonScore()) + rand(60));
+	
+//	damage = calcGlacialMod(damage);
+	
+	if(player.hasStatusAffect(StatusAffects.DragonBreathBoost)) {
+		player.removeStatusAffect(StatusAffects.DragonBreathBoost);
+		damage *= 1.5;
+	}
+/*	if (player.findPerk(PerkLib.DraconicLungs) >= 0) {
+		damage *= 3;
+	}
+*/	if (monster.findPerk(PerkLib.DarknessNature) >= 0) damage *= 0.2;
+	if (monster.findPerk(PerkLib.LightningVulnerability) >= 0) damage *= 0.5;
+	if (monster.findPerk(PerkLib.DarknessVulnerability) >= 0) damage *= 2;
+	if (monster.findPerk(PerkLib.LightningNature) >= 0) damage *= 5;
+//	if (player.findPerk(PerkLib.ColdMastery) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 2;
+	damage = Math.round(damage);
+	//Shell
+	if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
+		enemyAI();
+		return;
+	}
+	//Amily!
+	if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
+		enemyAI();
+		return;
+	}
+	if (monster is LivingStatue)
+	{
+		outputText("The darkness courses by the stone skin harmlessly. Thou it does leave the surface of the statue with a thin layer of dark glow.");
+		enemyAI();
+		return;
+	}
+	outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around " + monster.pronoun2 + ".  " + monster.capitalA + monster.short + " does " + monster.pronoun3 + " best to avoid it, but the wave of force is too fast.");
+	//Miss: 
+	if((player.hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
+		outputText("  Despite the heavy impact caused by your roar, " + monster.a + monster.short + " manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
+	}
+	//Special enemy avoidances
+	else if(monster.short == "Vala" && !monster.hasStatusAffect(StatusAffects.Stunned)) {
+		outputText("Vala beats her wings with surprising strength, blowing the darkness shard back at you! ", false);		
+		if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
+			outputText("You dive out of the way and evade it!", false);
+		}
+		else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(4) == 0) {
+			outputText("You use your flexibility to barely fold your body out of the way!", false);
+		}
+		//Determine if blocked!
+		else if (combatBlock(true)) {
+			outputText("You manage to block your own darkness with your " + player.shieldName + "!");
+		}
+		else {
+			damage = takeDamage(damage);
+			outputText("Your own darkness smacks into your face! <b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
+		}
+		outputText("\n\n", false);
+	}
+	else {
+		if(monster.findPerk(PerkLib.Resolute) < 0) {
+			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
+			monster.createStatusAffect(StatusAffects.Stunned,1,0,0,0);
+		}
+		else {
+			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
+			if(!monster.plural) outputText("is ");
+			else outputText("are");
+			outputText("too resolute to be stunned by your attack.</b>");
+		}
+		damage = doDamage(damage);
+		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+	}
+	outputText("\n\n");
+	checkAchievementDamage(damage);
+	if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+	{
+		outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+		monster.createStatusAffect(StatusAffects.Shell, 2, 0, 0, 0);
+		enemyAI();
+	}
+	else combatRoundOver();
+}
+
 //* Terrestrial Fire
 public function fireballuuuuu():void {
 	flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
@@ -9725,6 +9968,7 @@ public function fireballuuuuu():void {
 	{
 		(monster as Doppleganger).handleSpellResistance("fireball");
 		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		return;
 	}
@@ -10538,6 +10782,12 @@ public function magicalSpecials():void {
 	if (player.findPerk(PerkLib.DragonIceBreath) >= 0) {
 		addButton(button++, "DragonIce", dragoniceBreath, null, null, null, "Unleash ice from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Ice Breath");
 	}
+	if (player.findPerk(PerkLib.DragonLightningBreath) >= 0) {
+		addButton(button++, "DragonLightning", dragonlightningBreath, null, null, null, "Unleash lightning from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Lightning Breath");
+	}
+	if (player.findPerk(PerkLib.DragonDarknessBreath) >= 0) {
+		addButton(button++, "DragonDarkness", dragondarknessBreath, null, null, null, "Unleash dakness from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Darkness Breath");
+	}
 	if (player.findPerk(PerkLib.PhoenixFireBreath) >= 0) {
 		if (!player.hasStatusAffect(StatusAffects.CooldownPhoenixFireBreath)) {
 			addButton(button++, "PhoenixFire", phoenixfireBreath, null, null, null, "Unleash fire from your mouth. \n\nFatigue Cost: " + spellCost(40) + "  \n\nWould go into cooldown after use for: 5 rounds", "Phoenix Fire Breath");
@@ -10788,6 +11038,7 @@ public function magicbolt():void {
 	if(monster.hasStatusAffect(StatusAffects.Shell)) {
 		outputText("As soon as your magic bolt touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		enemyAI();
 		return;
@@ -11060,6 +11311,7 @@ public function foxFire2():void {
 	outputText("\n\n", false);
 	statScreenRefresh();
 	flags[kFLAGS.SPELLS_CAST]++;
+	if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 	spellPerkUnlock();
 	if(monster.HP > 0 && monster.lust < monster.eMaxLust()) enemyAI();
 	else {
@@ -11202,6 +11454,7 @@ public function corruptedFoxFire2():void {
 	outputText("\n\n", false);
 	statScreenRefresh();
 	flags[kFLAGS.SPELLS_CAST]++;
+	if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 	spellPerkUnlock();
 	if(monster.HP > 0 && monster.lust < monster.eMaxLust()) enemyAI();
 	else {
@@ -11344,6 +11597,7 @@ public function fusedFoxFire2():void {
 	outputText("\n\n", false);
 	statScreenRefresh();
 	flags[kFLAGS.SPELLS_CAST]++;
+	if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 	spellPerkUnlock();
 	if(monster.HP > 0 && monster.lust < monster.eMaxLust()) enemyAI();
 	else {
@@ -11489,6 +11743,7 @@ public function pureFoxFire2():void {
 	outputText("\n\n", false);
 	statScreenRefresh();
 	flags[kFLAGS.SPELLS_CAST]++;
+	if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 	spellPerkUnlock();
 	if(monster.HP > 0 && monster.lust < monster.eMaxLust()) enemyAI();
 	else {
@@ -12915,6 +13170,7 @@ public function AvatarOfTheSong():void {
 		outputText("drawing strength from it");
 		spellMight(true);
 		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 	}
 	else {
@@ -12922,6 +13178,7 @@ public function AvatarOfTheSong():void {
 		fatigue(30, 8);
 		spellHealEffect();
 		flags[kFLAGS.SPELLS_CAST]++;
+		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 	}
 	if (!monster.hasStatusAffect(StatusAffects.Blind)) {
@@ -12930,12 +13187,14 @@ public function AvatarOfTheSong():void {
 			outputText("makes your staff glow with barely contained energy");
 			spellChargeWeapon(true);
 			flags[kFLAGS.SPELLS_CAST]++;
+			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 		}
 		else {
 			outputText("makes your staff flare up, as the energy escapes as a radiant flash");
 			spellBlind();
 			flags[kFLAGS.SPELLS_CAST]++;
+			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 		}
 	}

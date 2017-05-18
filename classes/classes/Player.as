@@ -360,7 +360,7 @@ use namespace kGAMECLASS;
 			if (findPerk(PerkLib.GclassHeavenTribulationSurvivor) >= 0) armorDef += 9 * (1 + newGamePlusMod);
 			//Agility boosts armor ratings!
 			var speedBonus:int = 0;
-			if(findPerk(PerkLib.Agility) >= 0) {
+			if (findPerk(PerkLib.Agility) >= 0) {
 				if (armorPerk == "Light" || _armor.name == "nothing") {
 					speedBonus += Math.round(spe / 10);
 				}
@@ -369,6 +369,7 @@ use namespace kGAMECLASS;
 				}
 			}
 			armorDef += speedBonus;
+			if (findPerk(PerkLib.PrestigeJobSentinel) >= 0 && armorPerk == "Heavy") armorDef += _armor.def;
 			//Acupuncture effect
 			if (findPerk(PerkLib.ChiReflowDefense) >= 0) armorDef *= UmasShop.NEEDLEWORK_DEFENSE_DEFENSE_MULTI;
 			if (findPerk(PerkLib.ChiReflowAttack) >= 0) armorDef *= UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI;
@@ -3394,6 +3395,8 @@ use namespace kGAMECLASS;
 				prestigeJobs--;
 			if (findPerk(PerkLib.PrestigeJobSeer) >= 0)
 				prestigeJobs--;
+			if (findPerk(PerkLib.PrestigeJobSentinel) >= 0)
+				prestigeJobs--;
 			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0)
 				prestigeJobs--;
 			if (findPerk(PerkLib.JobMunchkin) >= 0)
@@ -4620,6 +4623,10 @@ use namespace kGAMECLASS;
 				maxInt += (60 * (1 + newGamePlusMod));
 				maxWis += (20 * (1 + newGamePlusMod));
 			}
+			if (findPerk(PerkLib.PrestigeJobSentinel) >= 0) {
+				maxStr += (20 * (1 + newGamePlusMod));
+				maxTou += (60 * (1 + newGamePlusMod));
+			}
 			if (findPerk(PerkLib.PrestigeJobSoulArcher) >= 0) {
 				maxSpe += (40 * (1 + newGamePlusMod));
 				maxWis += (40 * (1 + newGamePlusMod));
@@ -4907,6 +4914,9 @@ use namespace kGAMECLASS;
 			if(hasStatusAffect(StatusAffects.BeatOfWar)) {
 				kGAMECLASS.dynStats("str", -statusAffectv1(StatusAffects.BeatOfWar));
 				removeStatusAffect(StatusAffects.BeatOfWar);
+			}
+			if(hasStatusAffect(StatusAffects.CastedSpell)) {
+				removeStatusAffect(StatusAffects.CastedSpell);
 			}
 			if(hasStatusAffect(StatusAffects.UnderwaterCombatBoost)) {
 				kGAMECLASS.dynStats("str", -statusAffectv1(StatusAffects.UnderwaterCombatBoost),"spe", -statusAffectv2(StatusAffects.UnderwaterCombatBoost));

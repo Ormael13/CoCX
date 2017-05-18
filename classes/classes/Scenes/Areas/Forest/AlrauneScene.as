@@ -22,7 +22,7 @@ package classes.Scenes.Areas.Forest
 		outputText("\"<i>Mmmmmm such a nice catch... come closer into my pitcher.</i>\"\n\n");
 		outputText("There's no way you will let this thing pull you in!\n\n");
 		startCombat(new Alraune());
-		playerMenu();
+	//	playerMenu();
 	}
 	
 	public function alrauneDeepwoodsWon():void {

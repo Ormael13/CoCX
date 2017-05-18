@@ -367,6 +367,7 @@ package classes
 		public static const Bound:CombatStatusAffect = mk2("Bound");
 		public static const BurnDoT:CombatStatusAffect = mk2("Burn DoT");
 		public static const CalledShot:CombatStatusAffect = mk2("Called Shot");
+		public static const CastedSpell:CombatStatusAffect = mk2("Casted Spell");
 		public static const ChanneledAttack:CombatStatusAffect = mk2("Channeled Attack");
 		public static const ChanneledAttackType:CombatStatusAffect = mk2("Channeled Attack Type");
 		public static const ChargeArmor:CombatStatusAffect = mk2("Charge Armor");

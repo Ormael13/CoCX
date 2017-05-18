@@ -349,7 +349,7 @@ public function doubleAttackOptions():void {
 		else addButtonDisabled(1, "All Double", "You current melee weapon not allow to use this option");	//player.weaponName != "fists"
 	}
 	if ((player.findPerk(PerkLib.TripleAttack) >= 0 || player.findPerk(PerkLib.TripleAttackLarge) >= 0) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 2) {
-		if ((player.weaponPerk != "Large" || (player.weaponPerk == "Large" && player.findPerk(PerkLib.TripleAttackLarge) < 0)) && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && (!player.isFistOrFistWeapon() || (player.isFistOrFistWeapon() && player.findPerk(PerkLib.ComboMaster) < 0))) addButton(5, "All Triple", tripleAttack);
+		if ((player.weaponPerk != "Large" || (player.weaponPerk == "Large" && player.findPerk(PerkLib.TripleAttackLarge) < 0)) && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && (player.isFistOrFistWeapon() && player.findPerk(PerkLib.ComboMaster) >= 0)) addButton(5, "All Triple", tripleAttack);
 		else addButtonDisabled(5, "All Triple", "You current melee weapon not allow to use this option");	//player.weaponName != "fists"
 	}
 	if (player.findPerk(PerkLib.QuadrupleAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 3) {
@@ -1094,6 +1094,9 @@ public function buildPerkList():Array {
 	if(player.level >= 42) {
 		if(player.tou >= 240 && player.str >= 160 && player.findPerk(PerkLib.SuperiorEndurance) >= 0) {
 			_add(new PerkClass(PerkLib.HalfStepToPeerlessEndurance));
+		}
+		if (player.maxPrestigeJobs() > 0 && player.findPerk(PerkLib.JobKnight) >= 0 && player.findPerk(PerkLib.JobWarrior) >= 0 && player.tou >= 200) {
+			_add(new PerkClass(PerkLib.PrestigeJobSentinel));
 		}
 	}
 	//Tier 8 Toughness Perks
@@ -1840,8 +1843,8 @@ public function buildPerkList():Array {
 //		if (player.internalChimeraScore() >= 16 && player.findPerk(PerkLib.ChimericalBodyPerfectStage) >= 0) {
 //			_add(new PerkClass(PerkLib.ChimericalBodyUltimateStage));
 //		}
-		if (player.findPerk(PerkLib.JobMonk) > 0 && player.findPerk(PerkLib.JobHunter) > 0 && player.findPerk(PerkLib.JobEromancer) > 0 && player.findPerk(PerkLib.JobEnchanter) > 0 && player.findPerk(PerkLib.JobDervish) > 0 && player.findPerk(PerkLib.JobBarbarian) > 0 && player.findPerk(PerkLib.JobAllRounder) > 0 && player.str >= 150 && player.tou >= 150 && player.spe >= 150 &&
-		player.inte >= 150 && player.wis >= 150 && player.lib >= 90) {	//player.findPerk(PerkLib.JobEromancer) > 0 && 
+		if (player.findPerk(PerkLib.JobMonk) > 0 && player.findPerk(PerkLib.JobKnight) > 0 && player.findPerk(PerkLib.JobHunter) > 0 && player.findPerk(PerkLib.JobEromancer) > 0 && player.findPerk(PerkLib.JobEnchanter) > 0 && player.findPerk(PerkLib.JobDervish) > 0 && player.findPerk(PerkLib.JobDefender) > 0 && player.findPerk(PerkLib.JobBarbarian) > 0 && player.findPerk(PerkLib.JobAllRounder) > 0 &&
+		player.str >= 150 && player.tou >= 150 && player.spe >= 150 && player.inte >= 150 && player.wis >= 150 && player.lib >= 90) {	//player.findPerk(PerkLib.JobEromancer) > 0 && 
 			_add(new PerkClass(PerkLib.JobMunchkin));
 		}	//(Still need some other related stuff added to make PC true Munchkin
 //	}		//na razie jest perk GreyMage, potrzeba jeszcze pare innych perków tak z 3-5 innych jeszcze)

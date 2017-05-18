@@ -89,6 +89,7 @@ package classes.Scenes
 			outputText("-New tier 5 speed lvl-up perk: Multishot Req. Wild Quiver and 150+ speed. Addes toggle option for 6 arrows shoot in one attack.\n");
 			outputText("-New tier 7 strength lvl-up perk: Prestige Job: Berserker Req. Job: Barbarian, Job: Guardian perks, 200+ str and either Berzerking or Lustzerking perk Effect: +60 to max str and +20 to max tou (scalable with NG tiers)\n");//powinno dodawać to wraith max bar niż fatigue
 			outputText("-New tier 7 strength lvl-up perk: Rage. Req. Prestige Job: Berserker. Effects: when under effect of bersekrer or lustzerker each time PC attack and not get crit hit with melee attack/secial will gain 1 stack of rage. Max 5 stack of rage and each stack increase crit chance of next melee attack/special by 10%. After each succesful crit hit any existing Rage stacks are removed.\n");
+			outputText("-New tier 7 toughness lvl-up perk: Prestige Job: Sentinel Req. Job: Knight, Job: Warrior perks and 200+ tou Effect: +20 to max str and +60 to max tou (scalable with NG tiers), double base armor value for heavy armors.\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Arcane Archer Req. Job: Sorcerer, Job: Hunter perks, 150+ int and 200+ spe Effect: +40 to max spe and int (scalable with NG tiers), +600 to max Fatigue\n");
 			outputText("-New tier 7 intelligence lvl-up perk: Prestige Job: Seer Req. Grey Archmage, Soul Overlord perks and 200+ int Effect: +60 max int and +20 to max wis (scalable with NG tiers), +900 max Fatigue, +500 max Soulforce\n");
@@ -103,11 +104,10 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-Lowered Slutt Seduction effect pwoer on few armors: Arcane Bangle, tease type light armors (dragonscale, ebonweave, spider silk ones)\n");
 			outputText("-New hair type: Grass hair. Result of using Mara fruit. Hair TF for Mara fruit will be now have 50% to give leaf or grass hair.\n");
 			outputText("-Fixed bugs: Naming bug for demons, Too high normaly Goo score, Corrupted Marae fight.\n\n\n\n\n\n");/*ostatni punkt changelogu
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

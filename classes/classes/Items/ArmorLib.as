@@ -16,7 +16,7 @@ package classes.Items
 		public const A_ROBE_:ArmorWithPerk = new ArmorWithPerk("A.Robe","A.Robe","apprentice's robe","an apprentice's robe",1,25,"This drab robe lacks adornment, yet retains an air of mysticality. The low quality of the fabric coupled with its mystic air suggests that it is a garment meant for mages in training.","Light",
 				PerkLib.WizardsEndurance,10,0,0,0);
 		public const ARCBANG:ArmorWithPerk = new ArmorWithPerk("ArcaBangl","ArcaneBangles","arcane bangles","a set of arcane bangles",1,150,"Silver bangles to be worn from the wrists and ankles, inscribed with arcane runes.  For some reason, you feel like wearing these with armor or clothes is somehow wrong.","Light",
-				PerkLib.WizardsEnduranceAndSluttySeduction,30,5,0,0,"Your arcane bangles allows you access to 'Seduce', an improved form of 'Tease'.");
+				PerkLib.WizardsEnduranceAndSluttySeduction,20,5,0,0,"Your arcane bangles allows you access to 'Seduce', an improved form of 'Tease'.");
 		public const B_DRESS:Armor = new Armor("B.Dress","Long Dress","long ballroom dress patterned with sequins","a ballroom dress patterned with sequins",0,40,"A long ballroom dress patterned with sequins.  Perfect for important occassions.","Medium");
 		public const BEEARMR:Armor = new BeeArmor();
 		public const BIMBOSK:ArmorWithPerk = new ArmorWithPerk("BimboSk","BimboSk","bimbo skirt","a skirt that looks like it belongs on a bimbo",1,40,"A tight, cleavage-inducing halter top and an extremely short miniskirt.  The sexual allure of this item is undoubtable.","Light",
@@ -50,11 +50,11 @@ package classes.Items
 		public const INDECST:ArmorWithPerk = new ArmorWithPerk("IndecSt","Indec StAr","practically indecent steel armor","a suit of practically indecent steel armor",5,400,"This suit of steel 'armor' has two round disks that barely cover the nipples, a tight chainmail bikini, and circular butt-plates.","Medium",
 				PerkLib.SluttySeduction,6,0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.");
 		public const INDEDSR:ArmorWithPerk = new ArmorWithPerk("IndeDSR","Indec D.Scale Robe","indecent dragonscale robe","an indecent dragonscale robe",4,400,"More of a longcoat than a robe, this outfit is crafted from dragon scales. Discrete straps centered around the belt keep the front perpetually open, displaying your groin and any cleavage you might have. The dragonscale is treated to be durable yet remain comfortable.","Light",
-				PerkLib.WizardsEnduranceAndSluttySeduction,20,5,0,0,"Your indecent dragonscale robe allows you access to 'Seduce', an improved form of 'Tease'.");
+				PerkLib.WizardsEnduranceAndSluttySeduction,15,5,0,0,"Your indecent dragonscale robe allows you access to 'Seduce', an improved form of 'Tease'.");
 		public const INDEEWR:ArmorWithPerk = new ArmorWithPerk("IndeEWR","Indec. E.W. Robe","indecent ebonweave robe","an indecent ebonweave robe",6,600,"More of a longcoat than a robe, this outfit is crafted from refined ebonbloom petals. Discrete straps centered around the belt keep the front perpetually open, displaying your groin and any cleavage you might have. The cloth has a mystic aura, helpful when working magic.","Light",
-				PerkLib.WizardsEnduranceAndSluttySeduction,30,5,0,0,"Your indecent ebonweave robe allows you access to 'Seduce', an improved form of 'Tease'.");
+				PerkLib.WizardsEnduranceAndSluttySeduction,20,5,0,0,"Your indecent ebonweave robe allows you access to 'Seduce', an improved form of 'Tease'.");
 		public const INDESSR:ArmorWithPerk = new ArmorWithPerk("IndeSSR","Indec S.S. Robe","indecent spider silk robe","an indecent spider silk robe",2,200,"More of a longcoat than a robe, this outfit is crafted from alchemically treated spider silk. Discrete straps centered around the belt keep the front perpetually open, displaying your groin and any cleavage you might have.","Light",
-				PerkLib.WizardsEnduranceAndSluttySeduction,30,5,0,0,"Your indecent spider silk robe allows you access to 'Seduce', an improved form of 'Tease'.");
+				PerkLib.WizardsEnduranceAndSluttySeduction,15,5,0,0,"Your indecent spider silk robe allows you access to 'Seduce', an improved form of 'Tease'.");
 		public const LEATHRA:Armor = new Armor("LeathrA","LeathrA","leather armor segments","a set of leather armor",5,100,"This is a suit of well-made leather armor.  It looks fairly rugged.","Light");
 		public const URTALTA:LeatherArmorSegments = new LeatherArmorSegments();
 		public const LMARMOR:LustyMaidensArmor = new LustyMaidensArmor();
