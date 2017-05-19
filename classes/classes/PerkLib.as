@@ -690,12 +690,15 @@ package classes
 		public static const PrestigeJobBerserker:PerkType = mk("Prestige Job: Berserker", "Prestige Job: Berserker",
 				"You've trained in prestige art of perfect mastery over all forms of berserking.",
 				"You choose 'Prestige Job: Berserker' perk, training yourself to became Berserker.");
-		public static const PrestigeJobSoulArcher:PerkType = mk("Prestige Job: Soul Archer", "Prestige Job: Soul Archer",
-				"You've trained in prestige art of combining soulforce and arrows.",
-				"You choose 'Prestige Job: Soul Archer' perk, training yourself to became Soul Archer.");
 		public static const PrestigeJobSeer:PerkType = mk("Prestige Job: Seer", "Prestige Job: Seer",
 				"You've trained in prestige art of combining soulforce and magic.",
 				"You choose 'Prestige Job: Seer' perk, training yourself to became Seer.");
+		public static const PrestigeJobSentinel:PerkType = mk("Prestige Job: Sentinel", "Prestige Job: Sentinel",
+				"You've trained in prestige art that brings 'tanking' to a whole new level.",
+				"You choose 'Prestige Job: Sentinel' perk, training yourself to became Sentinel.");
+		public static const PrestigeJobSoulArcher:PerkType = mk("Prestige Job: Soul Archer", "Prestige Job: Soul Archer",
+				"You've trained in prestige art of combining soulforce and arrows.",
+				"You choose 'Prestige Job: Soul Archer' perk, training yourself to became Soul Archer.");
 		public static const QuadrupleAttack:PerkType = mk("Quadruple Attack", "Quadruple Attack",
 				"Allows you to perform four melee attacks with non-large weapons per round.",
 				"You choose the 'Quadruple Attack' perk.  This allows you to make four melee attacks with non-large weapons.");
@@ -1179,6 +1182,8 @@ package classes
 
 		// Monster perks
 		public static const Acid:PerkType = mk("Acid", "Acid", "");
+		public static const DarknessNature:PerkType = mk("Darkness Nature", "Darkness Nature", "");
+		public static const DarknessVulnerability:PerkType = mk("Darkness Vulnerability", "Darkness Vulnerability", "");
 		public static const EnemyBeastOrAnimalMorphType:PerkType = mk("Beast or Animal-morph enemy type", "Beast or Animal-morph enemy type", "");
 		public static const EnemyBossType:PerkType = mk("Boss-type enemy", "Boss-type enemy", "");
 		public static const EnemyGigantType:PerkType = mk("Gigant-sized type enemy", "Gigant-sized type enemy", "");
@@ -1188,11 +1193,9 @@ package classes
 		public static const FireVulnerability:PerkType = mk("Fire Vulnerability", "Fire Vulnerability", "");
 		public static const IceNature:PerkType = mk("Ice Nature", "Ice Nature", "");
 		public static const IceVulnerability:PerkType = mk("Ice Vulnerability", "Ice Vulnerability", "");
+		public static const LightningNature:PerkType = mk("Lightning Nature", "Lightning Nature", "");
+		public static const LightningVulnerability:PerkType = mk("Lightning Vulnerability", "Lightning Vulnerability", "");
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
-		//public static const LightningNature:PerkType = mk("Lightning Nature", "Lightning Nature", "");
-		//public static const LightningVulnerability:PerkType = mk("Lightning Vulnerability", "Lightning Vulnerability", "");
-		//public static const DarknessNature:PerkType = mk("Darkness Nature", "Darkness Nature", "");
-		//public static const DarknessVulnerability:PerkType = mk("Darkness Vulnerability", "Darkness Vulnerability", "");
 		//public static const :PerkType = mk("", "", "");
 		//public static const :PerkType = mk("", "", "");
 		//public static const :PerkType = mk("", "", "");

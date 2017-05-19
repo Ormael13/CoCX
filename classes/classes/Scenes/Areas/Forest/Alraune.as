@@ -25,7 +25,7 @@ package classes.Scenes.Areas.Forest
 			outputText("You struggle against the alraune vines, forcefully pulling yourself a good distance away from her.\n\n");
 			trapLevel(2);
 			player.fatigue -= 50;
-		//	doAI();
+			doAI();
 		}
 		
 		public function alraunePollenCloud():void {
@@ -38,6 +38,7 @@ package classes.Scenes.Areas.Forest
 		public function alrauneStrangulate():void {
 			outputText("The Alraune’s vines suddenly wrap tight around your neck and strangle you, preventing you from pronouncing any incantations. The plant woman gives you an annoyed glare.");
 			outputText("\"<i>I’m done with your magic. Be a good " + player.mf("boy", "girl") + " and just give in.</i>\"");
+			player.removeStatusAffect(StatusAffects.CastedSpell);
 			player.createStatusAffect(StatusAffects.Sealed, 2, 10, 0, 0);
 		}
 		
@@ -59,15 +60,14 @@ package classes.Scenes.Areas.Forest
 		override protected function performCombatAction():void
 		{
 			if (hasStatusAffect(StatusAffects.Level)) {
-				var choice:Number = rand(3);
-				if (choice == 0) alrauneTeaseAttack();
-				if (choice == 1) {
-				/*	if (!player.hasStatusAffect(StatusAffects.WolfHold) && rand(2) == 0) alrauneStrangulate();
-					else */alrauneTeaseAttack();
-				}
-				if (choice == 2) {
-					if (!hasStatusAffect(StatusAffects.LustAura)) alraunePollenCloud();
-					else alrauneTeaseAttack();
+				if (!hasStatusAffect(StatusAffects.Stunned) && player.hasStatusAffect(StatusAffects.CastedSpell)) alrauneStrangulate();
+				else {
+					var choice:Number = rand(2);
+					if (choice == 0) alrauneTeaseAttack();
+					if (choice == 1) {
+						if (!hasStatusAffect(StatusAffects.LustAura)) alraunePollenCloud();
+						else alrauneTeaseAttack();
+					}
 				}
 				if (!hasStatusAffect(StatusAffects.Climbed)) {
 					outputText("\n\nMeanwhile the vines keep pulling you toward the pitcher.");

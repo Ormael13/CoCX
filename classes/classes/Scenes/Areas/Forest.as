@@ -598,9 +598,9 @@ package classes.Scenes.Areas
 			if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
 				trace("TENTACLE'S AVOIDED DUE TO BOOK!");
 				outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n", false);
+				menu();
 				addButton(0, "Continue", tentacleBeastScene.encounter);
 				addButton(1, "Leave", camp.returnToCampUseOneHour);
-			//	simpleChoices("Continue", tentacleBeastScene.encounter, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 			} else {
 				tentacleBeastScene.encounter();
 			}
@@ -612,9 +612,9 @@ package classes.Scenes.Areas
 			if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
 			//	trace("TENTACLE'S AVOIDED DUE TO BOOK!");		//should it be comented out for alru?
 				outputText("You can smell the thick scent of particularly strong pollen in the air. The book mentioned something about this but you don’t recall exactly what. Do you turn back to camp?\n\n", false);
+				menu();
 				addButton(0, "Yes", camp.returnToCampUseOneHour);
 				addButton(1, "No", alrauneScene.alrauneDeepwoods);
-			//	simpleChoices("Continue", tentacleBeastScene.encounter, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 			} else {
 				alrauneScene.alrauneDeepwoods();
 			}
