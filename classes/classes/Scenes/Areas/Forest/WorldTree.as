@@ -129,7 +129,7 @@ package classes.Scenes.Areas.Forest
 			if (flags[kFLAGS.YGGDRASIL_TF] < 1) outputText("... your adoptive mother");
 			outputText(". After some time getting used to your form, you leave the tree and return to your camp.\n\n");
 			if (flags[kFLAGS.YGGDRASIL_TF] < 1) flags[kFLAGS.YGGDRASIL_TF]++;
-			doNext(camp.returnToCampUseOneHour);
+			doNext(YggdrasilMainMenu);
 		}
 		
 		public function DeclineWolrdTreeOffer():void {
@@ -146,6 +146,8 @@ package classes.Scenes.Areas.Forest
 		{
 			var changes:Number = 0;
 			var changeLimit:Number = 1;
+			if (rand(2) == 0) changeLimit++;
+			if (rand(2) == 0) changeLimit++;
 			clearOutput();
 			//staman/tentacle cock
 			if (player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {

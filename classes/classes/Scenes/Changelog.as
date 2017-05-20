@@ -100,7 +100,7 @@ package classes.Scenes
 			outputText("-New Soulskill: Resonance Volley (Req. Warden’s bow equiped) Effect: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.\n");
 			outputText("-New Soulskill: Avatar of the Song (Req. Warden’s staff equiped) Effect: Doublecast Charged Weapon and Might. Casts blind if charged weapon is already active. Casts Heal if Might is already active.\n");
 			outputText("-Hooked Gauntlets and Spiked Gauntlet weapons are removed from pool of weapons working with mutliattack due to been put in same group of weapons that would benefits from perks affecting fists attacks.\n");
-			outputText("-Perk Draconic Lungs changed to grant +5 max speed (scalable) and allow to reset dragon breath attacks cooldown form once a day to after each fight.\n");
+			outputText("-Perk Draconic Lungs changed to grant +5 max speed (scalable) and allow to reset dragon breath attacks cooldown from 'once a day' to 'after each fight'.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
