@@ -2582,17 +2582,18 @@ package classes.Scenes.Areas.Forest
 					player.createKeyItem("Kitsune Star Sphere", 0, 0, 0, 0);
 					player.consumeItem(consumables.FOXJEWL);
 					doNext(camp.returnToCampUseOneHour);
-				} else if (player.tailCount == 8 && player.level >= 42 && player.inte >= 180 && notANineTail) {
-					// && (player.findPerk(PerkLib.CorruptedKitsune) < 0 || player.perkv4(PerkLib.CorruptedKitsune) > 0)
-					//20% chance if PC has fox ears, 1 or more fox tails, carries a Fox Jewel, and meets level & INT requirements for the next tail:
+				} else if (player.tailCount == 8 && player.level >= 42 && player.inte >= 120 && player.wis >= 120 && notANineTail) {
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
-					outputText("As the mystical flames wash over you, your mind is assaulted by a maelstrom of otherworldly knowledge and power.  For a moment it feels as though your mind will be torn asunder, but you are ready.  Your travels and meditations have prepared you well, and you open your mind to accept enlightenment.\n\n");
-					outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into nine tails.  <b>You are now a nine-tails!  Untold cosmic power radiates from your very being!  Use it wisely...</b>");
-					//Increment tail by 1, consume Fox Jewel, -2 COR, -20 LUST, +2 INT, Advance 1 hr and return to camp.
 					//Apply Nine-Tails perk if applicable.
-					player.tailCount = 9;
+					if (player.findPerk(PerkLib.EnlightenedNinetails) < 0) {
+						outputText("As the mystical flames wash over you, your mind is assaulted by a maelstrom of otherworldly knowledge and power.  For a moment it feels as though your mind will be torn asunder, but you are ready.  Your travels and meditations have prepared you well, and you open your mind to accept enlightenment.\n\n");
+						outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into nine tails.  <b>You are now a nine-tails!  Untold cosmic power radiates from your very being!  Use it wisely...</b>");
+						outputText("\n\nYou pause for a moment to reflect on your newfound wisdom, and with a vastly renewed vigor for your quest, you stand and set off for camp.");
+						dynStats("int", 2, "lus", -20, "cor", -2);
+						player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);
+					}
+					else outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tails begins to glow with an eerie, ghostly light, and with a crackle of electrical energy, splits into " + (player.tailCount + 1) + "!");
 					var fur:SkinLayer = player.skin.fur;
-					if (player.findPerk(PerkLib.EnlightenedNinetails) < 0) player.createPerk(PerkLib.EnlightenedNinetails, 0, 0, 0, 0);
 					// Nine tail kitsunes have their fur/hair color golden, silver or pure white
 					if (!InCollection(player.hairColor, elderKitsuneColors)) {
 						// wrong hair color
@@ -2621,35 +2622,36 @@ package classes.Scenes.Areas.Forest
 							outputText("\n\nNow you have [haircolor] fur matching your hair, like true kitsune elder. You look really regal!");
 						}
 					}
-					outputText("\n\nYou pause for a moment to reflect on your newfound wisdom, and with a vastly renewed vigor for your quest, you stand and set off for camp.");
-					dynStats("int", 2, "lus", -20, "cor", -2);
+					player.tailCount = 9;
 					player.consumeItem(consumables.FOXJEWL);
-				} else if (player.tailCount == 7 && player.level >= 36 && player.inte >= 160 && notANineTail && (player.findPerk(PerkLib.CorruptedKitsune) < 0 || player.perkv4(PerkLib.CorruptedKitsune) > 0)) {
+				} else if (player.tailCount == 7 && player.level >= 36 && player.inte >= 105 && player.wis >= 105 && notANineTail && (player.findPerk(PerkLib.CorruptedKitsune) < 0 || player.perkv4(PerkLib.CorruptedKitsune) > 0)) {
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
 					outputText("As the mystical flames wash over you, your mind is assaulted by an otherworldly knowledge and power.\n\n");
 					outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tails begins to glow with an eerie, ghostly light, and with a crackle of electrical energy, splits into " + (player.tailCount + 1) + "!");
-					//Apply Kitsune perk if applicable.
-					player.tailCount = 8;
 					outputText("\n\nYou pause for a moment to reflect on your new wisdom, and with a renewed vigor for your quest, you stand and set off for camp.");
 					dynStats("int", 1, "lus", -10, "cor", -1);
 					player.consumeItem(consumables.FOXJEWL);
 					doNext(camp.returnToCampUseOneHour);
-				} else if (player.tailCount == 6 && player.level >= 30 && player.inte >= 140 && notANineTail && (player.findPerk(PerkLib.CorruptedKitsune) < 0 || player.perkv4(PerkLib.CorruptedKitsune) > 0)) {
+					player.tailCount++;
+				} else if (player.tailCount == 6 && player.level >= 30 && player.inte >= 90 &&  player.inte >= 90 && notANineTail && (player.findPerk(PerkLib.CorruptedKitsune) < 0 || player.perkv4(PerkLib.CorruptedKitsune) > 0)) {
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
-					outputText("As the mystical flames wash over you, your mind is assaulted by an otherworldly knowledge and power.\n\n");
-					outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into seven tails.  <b>You are now a seven-tails!  Weak cosmic power radiates from you!  Cultivate it wisely...</b>");
 					//Apply Kitsune perk if applicable.
+					if (player.findPerk(PerkLib.EnlightenedKitsune) < 0) {
+						outputText("As the mystical flames wash over you, your mind is assaulted by an otherworldly knowledge and power.\n\n");
+						outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into seven tails.  <b>You are now a seven-tails!  Weak cosmic power radiates from you!  Cultivate it wisely...</b>");
+						outputText("\n\nYou pause for a moment to reflect on your new wisdom, and with a renewed vigor for your quest, you stand and set off for camp.");
+						player.createPerk(PerkLib.EnlightenedKitsune, 0, 0, 0, 0);
+						dynStats("int", 1, "lus", -10, "cor", -1);
+					}
+					else outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tails begins to glow with an eerie, ghostly light, and with a crackle of electrical energy, splits into " + (player.tailCount + 1) + "!");
 					player.tailCount = 7;
-					if (player.findPerk(PerkLib.EnlightenedKitsune) < 0) player.createPerk(PerkLib.EnlightenedKitsune, 0, 0, 0, 0);
-					outputText("\n\nYou pause for a moment to reflect on your new wisdom, and with a renewed vigor for your quest, you stand and set off for camp.");
-					dynStats("int", 1, "lus", -10, "cor", -1);
 					player.consumeItem(consumables.FOXJEWL);
-				} else if ((2 <= player.tailCount && player.tailCount <= 5) && player.tailCount - 1 <= player.level / 6 && player.tailCount <= player.inte / 20) {
+				} else if ((2 <= player.tailCount && player.tailCount <= 5) && player.tailCount - 1 <= player.level / 6 && player.tailCount <= player.inte / 15 && player.tailCount <= player.wis / 15) {
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
 					outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tails begins to glow with an eerie, ghostly light, and with a crackle of electrical energy, splits into " + (player.tailCount + 1) + "!");
 					player.consumeItem(consumables.FOXJEWL);
 					player.tailCount++;
-				} else if (player.inte >= 20 && player.tailCount == 1) {
+				} else if (player.inte >= 15 && player.wis >= 15 && player.tailCount == 1) {
 					outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing fire within, the jewel begins to dissolve in your hand, the pale flames within spilling out and spreading over your body.\n\n");
 					outputText("Sitting in a silent reverie, you allow the flames to wash over you, and begin to feel a bit more...  enlightened.  Your bushy tail begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into " + (player.tailCount + 1) + "!");
 					player.consumeItem(consumables.FOXJEWL);

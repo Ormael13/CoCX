@@ -1989,7 +1989,7 @@ import classes.CockTypesEnum;
 						outputText("Once more, the fruit’s effects make themselves known, leaving you hornier and wetter than you began as, the later of which is likely to be permanent. At least this time you were already expecting it, so you weren’t forced to relieve yourself on the spot like the last time.", false);
 					}
 					if (player.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL) {
-						outputText("Suddenly your arousal spikes, you feel as if you had downed several lust drafts while already in heat or rut, forcing you to masturbate furiously on the spot.  ", false);
+						outputText("Suddenly your arousal spikes. You feel as if you had downed several lust drafts while already in heat or rut, forcing you to masturbate furiously on the spot.  ", false);
 						if (player.vaginas.length == 1) outputText("You realize afterwards that your " + vaginaDescript(0) + " felt much wetter than normal.", false);
 						else outputText("You realize afterwards that your " + vaginaDescript(0) + " were much wetter than normal.", false);
 						outputText("  Will you eventually become as juicy as the fruit was?", false);
@@ -10072,7 +10072,7 @@ import classes.CockTypesEnum;
 			}
 			//[Grow Addtl. Fox Tail]
 			//(rare effect, up to max of 8 tails, requires PC level and int*10 = number of tail to be added)
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 1 && player.inte >= 20 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
+			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 1 && player.inte >= 15 && player.wis >= 15 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
 				outputText("\n\nA tingling pressure builds on your backside, and your bushy tail begins to glow with an eerie, ghostly light.  With a crackle of electrical energy, your tail splits into two!  <b>You now have a pair of fox-tails.</b>");
 				player.tailCount++;
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxTail2nd)) {
@@ -10081,7 +10081,7 @@ import classes.CockTypesEnum;
 				}
 				changes++;
 			}
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 2 && player.level >= 6 && player.inte >= 40 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
+			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 2 && player.level >= 6 && player.inte >= 30 && player.wis >= 30 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
 				outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
 				player.tailCount++;
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxTail3rd)) {
@@ -10090,7 +10090,7 @@ import classes.CockTypesEnum;
 				}
 				changes++;
 			}
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 3 && player.level >= 12 && player.inte >= 60 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
+			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 3 && player.level >= 12 && player.inte >= 45 && player.wis >= 45 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
 				outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
 				player.tailCount++;
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxTail4th)) {
@@ -10099,7 +10099,7 @@ import classes.CockTypesEnum;
 				}
 				changes++;
 			}
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 4 && player.level >= 18 && player.inte >= 80 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
+			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 4 && player.level >= 18 && player.inte >= 60 && player.wis >= 60 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
 				outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
 				player.tailCount++;
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxTail5th)) {
@@ -10108,7 +10108,7 @@ import classes.CockTypesEnum;
 				}
 				changes++;
 			}
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 5 && player.level >= 24 && player.inte >= 100 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
+			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 5 && player.level >= 24 && player.inte >= 75 && player.wis >= 75 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
 				outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
 				player.tailCount++;
 				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxTail6th)) {
@@ -10117,26 +10117,32 @@ import classes.CockTypesEnum;
 				}
 				changes++;
 			}
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 6 && player.level >= 30 && player.inte >= 120 && mystic && rand(3) == 0 && changes < changeLimit && player.earType == EARS_FOX && (player.findPerk(PerkLib.EnlightenedKitsune) < 0 || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (player.findPerk(PerkLib.EnlightenedNinetails) < 0 || player.perkv4(PerkLib.EnlightenedNinetails) > 0)) {
-				outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into seven tails.  <b>You are now a seven-tails!  But something is wrong...  The cosmic power radiating from your body feels...  tainted somehow.  The corruption pouring off your body feels...  good.</b>");
-				outputText("\n\n(Perk Gained: Corrupted Kitsune - Grants Corrupted Fox Fire and Terror special attacks.)");
-				if (player.findPerk(PerkLib.CorruptedKitsune) < 0) player.createPerk(PerkLib.CorruptedKitsune, 0, 0, 0, 0);
-				dynStats("lib", 1, "lus", 5, "cor", 5);
+			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 6 && player.level >= 30 && player.inte >= 90 && player.wis >= 90 && mystic && rand(3) == 0 && changes < changeLimit && player.earType == EARS_FOX && (player.findPerk(PerkLib.EnlightenedKitsune) < 0 || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (player.findPerk(PerkLib.EnlightenedNinetails) < 0 || player.perkv4(PerkLib.EnlightenedNinetails) > 0)) {
+				if (player.findPerk(PerkLib.CorruptedKitsune) < 0) {
+					outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into seven tails.  <b>You are now a seven-tails!  But something is wrong...  The cosmic power radiating from your body feels...  tainted somehow.  The corruption pouring off your body feels...  good.</b>");
+					outputText("\n\n(Perk Gained: Corrupted Kitsune - Grants Corrupted Fox Fire and Terror special attacks.)");
+					player.createPerk(PerkLib.CorruptedKitsune, 0, 0, 0, 0);
+					dynStats("lib", 1, "lus", 5, "cor", 5);
+				}
+				else outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
 				player.tailCount = 7;
 				changes++;
 			}
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 7 && player.level >= 36 && player.inte >= 140 && mystic && rand(4) == 0 && changes < changeLimit && player.earType == EARS_FOX) {
+			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 7 && player.level >= 36 && player.inte >= 105 && player.wis >= 105 && mystic && rand(4) == 0 && changes < changeLimit && player.earType == EARS_FOX && (player.findPerk(PerkLib.EnlightenedKitsune) < 0 || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (player.findPerk(PerkLib.EnlightenedNinetails) < 0 || player.perkv4(PerkLib.EnlightenedNinetails) > 0)) {
 				outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
 				player.tailCount++;
 				changes++;
 			}
 			//[Grow 9th tail and gain Corrupted Nine-tails perk]
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 8 && player.level >= 42 && player.inte >= 160 && mystic && rand(4) == 0 && changes < changeLimit && player.earType == EARS_FOX && player.findPerk(PerkLib.CorruptedNinetails) < 0 && (player.findPerk(PerkLib.EnlightenedNinetails) < 0 || player.perkv4(PerkLib.EnlightenedNinetails) > 0)) {
-				outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into nine tails.  <b>You are now a nine-tails!  But something is strange...  The cosmic power radiating from your body feels...  somehow more tainted than before.  The corruption pouring off your body feels...  amazing good.</b>");
-				outputText("\n\nYou have the inexplicable urge to set fire to the world, just to watch it burn.  With your newfound power, it's a goal that is well within reach.");
-				outputText("\n\n(Perk Gained: Corrupted Nine-tails - Grants boosts to your racial special attacks.)");
-				if (player.findPerk(PerkLib.CorruptedNinetails) < 0) player.createPerk(PerkLib.CorruptedNinetails, 0, 0, 0, 0);
-				dynStats("lib", 2, "lus", 10, "cor", 10);
+			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 8 && player.level >= 42 && player.inte >= 120 && player.wis >= 120 && mystic && rand(4) == 0 && changes < changeLimit && player.earType == EARS_FOX && (player.findPerk(PerkLib.EnlightenedNinetails) < 0 || player.perkv4(PerkLib.EnlightenedNinetails) > 0)) {
+				if (player.findPerk(PerkLib.CorruptedNinetails) < 0) {
+					outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into nine tails.  <b>You are now a nine-tails!  But something is strange...  The cosmic power radiating from your body feels...  somehow more tainted than before.  The corruption pouring off your body feels...  amazing good.</b>");
+					outputText("\n\nYou have the inexplicable urge to set fire to the world, just to watch it burn.  With your newfound power, it's a goal that is well within reach.");
+					outputText("\n\n(Perk Gained: Corrupted Nine-tails - Grants boosts to your racial special attacks.)");
+					player.createPerk(PerkLib.CorruptedNinetails, 0, 0, 0, 0);
+					dynStats("lib", 2, "lus", 10, "cor", 10);
+				}
+				else outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
 				player.tailCount = 9;
 				changes++;
 			}

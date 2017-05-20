@@ -57,7 +57,9 @@ package classes.Scenes.Areas
 			if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
 				trace("TENTACLE'S AVOIDED DUE TO BOOK!");
 				outputText("Using the knowledge contained in your 'Dangerous Plants' book, you determine a tentacle beast's lair is nearby, do you continue?  If not you could return to camp.\n\n", true);
-				simpleChoices("Continue", tentacleBeastScene.encounter, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+				menu();
+				addButton(0, "Continue", tentacleBeastScene.encounter);
+				addButton(1, "Leave", camp.returnToCampUseOneHour);
 			} else {
 				tentacleBeastScene.encounter();
 			}
@@ -607,7 +609,6 @@ package classes.Scenes.Areas
 		}
 		private function alrauneEncounterFn():void {
 			clearOutput();
-			//Oh noes, tentacles!
 			//Alraune avoidance chance due to dangerous plants
 			if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
 			//	trace("TENTACLE'S AVOIDED DUE TO BOOK!");		//should it be comented out for alru?
