@@ -1845,18 +1845,21 @@
 				else addButtonDisabled(13, "MilkMaid", "MilkMaid");
 			}
 			if (page == 3) {
-				if (player.findPerk(PerkLib.OneTrackMind) > 0 && player.perkv4(PerkLib.OneTrackMind) < 1) addButton(0, "OneTrackMind", permanentizePerk, PerkLib.OneTrackMind);
-				else if (player.findPerk(PerkLib.OneTrackMind) > 0 && player.perkv4(PerkLib.OneTrackMind) > 0) addButtonDisabled(0, "OneTrackMind", "This perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(0, "OneTrackMind", "OneTrackMind");
-				if (player.findPerk(PerkLib.PureAndLoving) > 0 && player.perkv4(PerkLib.PureAndLoving) < 1) addButton(1, "PureAndLoving", permanentizePerk, PerkLib.PureAndLoving);
-				else if (player.findPerk(PerkLib.PureAndLoving) > 0 && player.perkv4(PerkLib.PureAndLoving) > 0) addButtonDisabled(1, "PureAndLoving", "This perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(1, "PureAndLoving", "PureAndLoving");
-				if (player.findPerk(PerkLib.PurityBlessing) > 0 && player.perkv4(PerkLib.PurityBlessing) < 1) addButton(2, "PurityBlessing", permanentizePerk, PerkLib.PurityBlessing);
-				else if (player.findPerk(PerkLib.PurityBlessing) > 0 && player.perkv4(PerkLib.PurityBlessing) > 0) addButtonDisabled(2, "PurityBlessing", "This perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(2, "PurityBlessing", "PurityBlessing");
-				if (player.findPerk(PerkLib.SensualLover) > 0 && player.perkv4(PerkLib.SensualLover) < 1) addButton(3, "SensualLover", permanentizePerk, PerkLib.SensualLover);
-				else if (player.findPerk(PerkLib.SensualLover) > 0 && player.perkv4(PerkLib.SensualLover) > 0) addButtonDisabled(3, "SensualLover", "This perk is already made permanent and will carry over in all subsequent ascensions.");
-				else addButtonDisabled(3, "SensualLover", "SensualLover");
+				if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) < 1) addButton(0, "9T KitsuneOfBalance", permanentizePerk, PerkLib.NinetailsKitsuneOfBalance);
+				else if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) > 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) addButtonDisabled(0, "9T KitsuneOfBalance", "This perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(0, "9T KitsuneOfBalance", "9T KitsuneOfBalance");
+				if (player.findPerk(PerkLib.OneTrackMind) > 0 && player.perkv4(PerkLib.OneTrackMind) < 1) addButton(1, "OneTrackMind", permanentizePerk, PerkLib.OneTrackMind);
+				else if (player.findPerk(PerkLib.OneTrackMind) > 0 && player.perkv4(PerkLib.OneTrackMind) > 0) addButtonDisabled(1, "OneTrackMind", "This perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(1, "OneTrackMind", "OneTrackMind");
+				if (player.findPerk(PerkLib.PureAndLoving) > 0 && player.perkv4(PerkLib.PureAndLoving) < 1) addButton(2, "PureAndLoving", permanentizePerk, PerkLib.PureAndLoving);
+				else if (player.findPerk(PerkLib.PureAndLoving) > 0 && player.perkv4(PerkLib.PureAndLoving) > 0) addButtonDisabled(2, "PureAndLoving", "This perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(2, "PureAndLoving", "PureAndLoving");
+				if (player.findPerk(PerkLib.PurityBlessing) > 0 && player.perkv4(PerkLib.PurityBlessing) < 1) addButton(3, "PurityBlessing", permanentizePerk, PerkLib.PurityBlessing);
+				else if (player.findPerk(PerkLib.PurityBlessing) > 0 && player.perkv4(PerkLib.PurityBlessing) > 0) addButtonDisabled(3, "PurityBlessing", "This perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(3, "PurityBlessing", "PurityBlessing");
+				if (player.findPerk(PerkLib.SensualLover) > 0 && player.perkv4(PerkLib.SensualLover) < 1) addButton(4, "SensualLover", permanentizePerk, PerkLib.SensualLover);
+				else if (player.findPerk(PerkLib.SensualLover) > 0 && player.perkv4(PerkLib.SensualLover) > 0) addButtonDisabled(4, "SensualLover", "This perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(4, "SensualLover", "SensualLover");
 				addButton(9, "Previous", ascensionPermeryMenu, page - 1);
 			}
 			addButton(14, "Back", ascensionMenu);

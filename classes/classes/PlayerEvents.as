@@ -405,6 +405,15 @@ package classes {
 				player.removePerk(PerkLib.CorruptedNinetails);
 				needNext = true;
 			}
+			if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 && player.perkv4(PerkLib.EnlightenedNinetails) > 0 && player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.perkv4(PerkLib.CorruptedNinetails) > 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) {
+				outputText("\n<b>With your nine tails you suddenly feel something beyond merely two paths of corruption and true enlightenment. A third way, the way of treading a fragile path of balance between other two paths. \n\n(Gained Perk: Nine-tails Kitsune of Balance)</b>\n");
+				player.createPerk(PerkLib.NinetailsKitsuneOfBalance, 0, 0, 0, 0);
+			}
+			if (player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) == 0 && (player.tailType != TAIL_TYPE_FOX || player.tailCount < 9)) {
+				outputText("\n<b>Without your tails, the balance is disturbed and you loosing insigns in third path.</b>\n");
+				player.removePerk(PerkLib.NinetailsKitsuneOfBalance);
+				needNext = true;
+			}
 			if (player.lowerBody == LOWER_BODY_TYPE_HARPY && player.tailType == TAIL_TYPE_HARPY && player.findPerk(PerkLib.HarpyWomb) >= 0) { //Make eggs big if harpied!
 				if (player.hasStatusAffect(StatusAffects.Eggs) && player.statusAffectv2(StatusAffects.Eggs) == 0) {
 					player.changeStatusValue(StatusAffects.Eggs, 2, 1);

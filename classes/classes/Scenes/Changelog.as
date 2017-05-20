@@ -90,9 +90,11 @@ package classes.Scenes
 			outputText("-New tier 7 strength lvl-up perk: Prestige Job: Berserker Req. Job: Barbarian, Job: Guardian perks, 200+ str and either Berzerking or Lustzerking perk Effect: +60 to max str and +20 to max tou (scalable with NG tiers)\n");//powinno dodawać to wraith max bar niż fatigue
 			outputText("-New tier 7 strength lvl-up perk: Rage. Req. Prestige Job: Berserker. Effects: when under effect of bersekrer or lustzerker each time PC attack and not get crit hit with melee attack/secial will gain 1 stack of rage. Max 5 stack of rage and each stack increase crit chance of next melee attack/special by 10%. After each succesful crit hit any existing Rage stacks are removed.\n");
 			outputText("-New tier 7 toughness lvl-up perk: Prestige Job: Sentinel Req. Job: Knight, Job: Warrior perks and 200+ tou Effect: +20 to max str and +60 to max tou (scalable with NG tiers), double base armor value for heavy armors.\n");
+			outputText("-New tier 7 toughness lvl-up perk: Steel Impact Req. Prestige Job: Sentinel perk Effect: add part of PC toughness to weapon and shield (Shiled Bash special) damage similary like Lightning Strikes.\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Arcane Archer Req. Job: Sorcerer, Job: Hunter perks, 150+ int and 200+ spe Effect: +40 to max spe and int (scalable with NG tiers), +600 to max Fatigue\n");
 			outputText("-New tier 7 intelligence lvl-up perk: Prestige Job: Seer Req. Grey Archmage, Soul Overlord perks and 200+ int Effect: +60 max int and +20 to max wis (scalable with NG tiers), +900 max Fatigue, +500 max Soulforce\n");
+			outputText("-New mutation perk: Nine-tails Kitsune of Balance. Req. to have both corrupted and enlighted 9 tails perks permed and having 9 fox tails. Effects: allow use Fused Foxfire, increase by 3 fatigue recover during combat, at 9 tails increase by 20% lust dmg and by 25% phys dmg from foxfire or by 40/50% for fused foxfire.\n");
 			outputText("-New enemy perk: Beast or Animal-morph enemy type. Some of PC attack will deal more dmg to such enemies that atm is 27 diff enemeis with this perk ingame.\n");
 			outputText("-New weapon perks: Strife-Warden (enable use of Beat of War soulskill), Blade-Warden (enable use of Blade Dance soulskill), Wild-Warden (enable use of Resonance Volley soulskill), Mage-Warden (enable use of Avatar of the Song soulskill).\n");
 			outputText("-New Soulskill: Beat of War (Req. Warden’s greatsword equiped) Effect: Boost PC str by 15% of base value with each use. Stackable with other buffs.\n");
@@ -101,9 +103,7 @@ package classes.Scenes
 			outputText("-New Soulskill: Avatar of the Song (Req. Warden’s staff equiped) Effect: Doublecast Charged Weapon and Might. Casts blind if charged weapon is already active. Casts Heal if Might is already active.\n");
 			outputText("-Hooked Gauntlets and Spiked Gauntlet weapons are removed from pool of weapons working with mutliattack due to been put in same group of weapons that would benefits from perks affecting fists attacks.\n");
 			outputText("-Perk Draconic Lungs changed to grant +5 max speed (scalable) and allow to reset dragon breath attacks cooldown from 'once a day' to 'after each fight'.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Perk Kitsune Thyroid Gland changed to reduce Terror/Ilussion specials by 3 turns, increase fatigue regeneration in combat by 1 and giving +5 to max speed cap scalable)\n");
 			outputText("-\n");
 			outputText("-Lowered Slutt Seduction effect pwoer on few armors: Arcane Bangle, tease type light armors (dragonscale, ebonweave, spider silk ones)\n");
 			outputText("-New hair type: Grass hair. Result of using Mara fruit. Hair TF for Mara fruit will be now have 50% to give leaf or grass hair.\n");
