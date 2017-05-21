@@ -1,9 +1,10 @@
-package classes.Items 
-{
+package classes.Items {
 	import classes.*;
-import classes.BodyParts.Skin;
-import classes.GlobalFlags.kFLAGS;
-	
+	import classes.BodyParts.Skin;
+	import classes.GlobalFlags.kFLAGS;
+	import classes.StatusAffects;
+	import classes.StatusAffects;
+
 	/**
 	 * Helper class to get rid of the copy&paste-mess in classes.Items.Mutations
 	 * @since July 8, 2016
@@ -25,7 +26,7 @@ import classes.GlobalFlags.kFLAGS;
 			else if (player.isScylla()) outputText("\n\nYou collapse as your tentacle legs starts to merge.  The pain is immense, particularly where your new feet are forming.  <b>You have human legs again.</b>");
 			else /*if (player.isBiped()) */outputText("\n\nYou collapse as your legs shift and twist.  By the time the pain subsides, you notice that you have normal legs and normal feet.  <b>You now have normal feet!</b>");
 			player.lowerBody = LOWER_BODY_TYPE_HUMAN;
-			player.legCount = 2;
+			player.legCount  = 2;
 			changes++;
 		}
 
@@ -40,7 +41,7 @@ import classes.GlobalFlags.kFLAGS;
 				default:
 					outputText("\n\nYour [skin noadj] itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin.  <b>Your skin is once again normal!</b>");
 			}
-			player.skin.setBaseOnly({type:SKIN_BASE_PLAIN});
+			player.skin.setBaseOnly({type: SKIN_BASE_PLAIN});
 			changes++;
 		}
 
@@ -124,7 +125,7 @@ import classes.GlobalFlags.kFLAGS;
 					outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ");
 					break;
 			}
-			player.armType = ARM_TYPE_HUMAN;
+			setArmType(ARM_TYPE_HUMAN);
 			changes++;
 		}
 
@@ -150,7 +151,7 @@ import classes.GlobalFlags.kFLAGS;
 			var oldgillType:int = player.gillType;
 			if (oldgillType == newGillType) return 0; // no change
 
-			player.gillType = newGillType;
+			setGillType(newGillType);
 			changes++;
 
 			// for now, we only have anemone gills on the chest
@@ -207,7 +208,400 @@ import classes.GlobalFlags.kFLAGS;
 			}
 		}
 
-		
+	/**
+	 * Initializes changes=0 and changeLimit to (1..maxChanges) + perk bonuses
+	 * @param name
+	 * @param maxChanges
+	 * @return
+	 */
+	protected function mutationStart(name:String, maxChanges:int):int {
+		changes     = 0;
+		changeLimit = 1;
+		for (var i:int = 2; i <= maxChanges; i++) {
+			if (rand(i) == 0) changeLimit++;
+		}
+		if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
+		if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+		return changes;
 	}
+	/**
+	 * If:
+	 * * changes < changeLimit
+	 * * `condition` is 'true'
+	 * * random*rarity < 1  (equivalent to (rand(rarity) = 0) for `rarity:int`)
+	 * Then:
+	 * * call `code`
+	 * * changes++
+	 * * return true
+	 * Else:
+	 * * return false
+	 */
+	protected function mutationStep(condition:Boolean, rarity:Number, code:Function):Boolean {
+		if (changes < changeLimit
+			&& condition
+			&& Math.random() * rarity < 1) {
+			code();
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// =================================
+	// Metamorph-aware mutation methods
+	// ---------------------------------
+	// * Change player.something to `newType`.
+	// * Update genetic memory, if present.
+	// * No mutation flavour text is displayed
+	// * @return true if added genetic memory (displayed "genetic memory unlocked" text)
+	// =================================
+
+	public function setArmType(armType:int):Boolean {
+		return setBodyPartType("armType", METAMORPH_ARMS, armType);
+	}
+	private const METAMORPH_ARMS:Object = createMapFromPairs([
+		[ARM_TYPE_BEE, StatusAffects.UnlockedBeeArms],
+		[ARM_TYPE_DRAGON, null],
+		[ARM_TYPE_FOX, StatusAffects.UnlockedFoxArms],
+		[ARM_TYPE_GARGOYLE, null],
+		[ARM_TYPE_HARPY, StatusAffects.UnlockedHarpyArms],
+		[ARM_TYPE_HUMAN, null],
+		[ARM_TYPE_KITSUNE, StatusAffects.UnlockedKitsuneArms],
+		[ARM_TYPE_LION, null],
+		[ARM_TYPE_LIZARD, StatusAffects.UnlockedLizardArms],
+		[ARM_TYPE_MANTIS, null],
+		[ARM_TYPE_ORCA, null],
+		[ARM_TYPE_PHOENIX, null],
+		[ARM_TYPE_PLANT, null],
+		[ARM_TYPE_PLANT2, null],
+		[ARM_TYPE_SALAMANDER, null],
+		[ARM_TYPE_SHARK, StatusAffects.UnlockedSharkArms],
+		[ARM_TYPE_SPIDER, StatusAffects.UnlockedSpiderArms],
+		[ARM_TYPE_WOLF, null],
+		[ARM_TYPE_YETI, null],
+	]);
+
+	public function setEarType(earType:int):Boolean {
+		return setBodyPartType("earType", METAMORPH_EARS, earType);
+	}
+	private const METAMORPH_EARS:Object = createMapFromPairs([
+		[EARS_BUNNY, null],
+		[EARS_CAT, null],
+		[EARS_COW, null],
+		[EARS_DEER, null],
+		[EARS_DOG, null],
+		[EARS_DRAGON, null],
+		[EARS_ECHIDNA, null],
+		[EARS_ELFIN, StatusAffects.UnlockedElfinEars],
+		[EARS_FERRET, null],
+		[EARS_FOX, StatusAffects.UnlockedFoxEars],
+		[EARS_HORSE, null],
+		[EARS_HUMAN, null],
+		[EARS_KANGAROO, null],
+		[EARS_LION, null],
+		[EARS_LIZARD, StatusAffects.UnlockedLizardEars],
+		[EARS_MOUSE, null],
+		[EARS_ORCA, null],
+		[EARS_PIG, null],
+		[EARS_RACCOON, null],
+		[EARS_RHINO, null],
+		[EARS_SNAKE, null],
+		[EARS_WOLF, null],
+		[EARS_YETI, null],
+	]);
+
+	public function setEyeType(eyeType:int):Boolean {
+		return setBodyPartType("eyeType", METAMORPH_EYES, eyeType);
+	}
+	private const METAMORPH_EYES:Object = createMapFromPairs([
+		[EYES_BLACK_EYES_SAND_TRAP, null],
+		[EYES_CAT_SLITS, null],
+		[EYES_DRAGON, null],
+		[EYES_FENRIR, null],
+		[EYES_FOUR_SPIDER_EYES, StatusAffects.UnlockedSpiderFourEyes],
+		[EYES_FOX, StatusAffects.UnlockedFoxEyes],
+		[EYES_GORGON, null],
+		[EYES_HUMAN, null],
+		[EYES_MANTICORE, null],
+		[EYES_REPTILIAN, StatusAffects.UnlockedLizardEyes],
+		[EYES_SNAKE, null],
+	]);
+
+	public function setFaceType(faceType:int):Boolean {
+		return setBodyPartType("faceType", METAMORPH_FACES, faceType);
+	}
+	private const METAMORPH_FACES:Object = createMapFromPairs([
+		[FACE_BOAR, null],
+		[FACE_BUCKTEETH, null],
+		[FACE_BUNNY, null],
+		[FACE_CAT, null],
+		[FACE_COW_MINOTAUR, null],
+		[FACE_DEER, null],
+		[FACE_DOG, null],
+		[FACE_DRAGON, null],
+		[FACE_ECHIDNA, null],
+		[FACE_FERRET, null],
+		[FACE_FERRET_MASK, null],
+		[FACE_FOX, null],
+		[FACE_HORSE, null],
+		[FACE_HUMAN, null],
+		[FACE_KANGAROO, null],
+		[FACE_LIZARD, StatusAffects.UnlockedLizardFace],
+		[FACE_MANTICORE, null],
+		[FACE_MOUSE, null],
+		[FACE_ORCA, null],
+		[FACE_PIG, null],
+		[FACE_PLANT_DRAGON, null],
+		[FACE_RACCOON, null],
+		[FACE_RACCOON_MASK, null],
+		[FACE_RHINO, null],
+		[FACE_SALAMANDER_FANGS, null],
+		[FACE_SHARK_TEETH, StatusAffects.UnlockedSharkTeeth],
+		[FACE_SNAKE_FANGS, null],
+		[FACE_SPIDER_FANGS, StatusAffects.UnlockedSpiderFangs],
+		[FACE_WOLF, null],
+		[FACE_YETI_FANGS, null],
+	]);
+
+	public function setGillType(gillType:int):Boolean {
+		return setBodyPartType("gillType", METAMORPH_GILLS, gillType);
+	}
+	private const METAMORPH_GILLS:Object = createMapFromPairs([
+		[GILLS_ANEMONE, null],
+		[GILLS_FISH, StatusAffects.UnlockedFishGills],
+		[GILLS_IN_TENTACLE_LEGS, null],
+		[GILLS_NONE, null],
+	]);
+
+	public function setHairType(hairType:int):Boolean {
+		return setBodyPartType("hairType", METAMORPH_HAIR_TYPES, hairType);
+	}
+	private const METAMORPH_HAIR_TYPES:Object = createMapFromPairs([
+		[HAIR_ANEMONE, null],
+		[HAIR_FEATHER, StatusAffects.UnlockedHarpyHair],
+		[HAIR_FLUFFY, null],
+		[HAIR_GHOST, null],
+		[HAIR_GOO, null],
+		[HAIR_GORGON, null],
+		[HAIR_GRASS, null],
+		[HAIR_LEAF, null],
+		[HAIR_NORMAL, null],
+		[HAIR_QUILL, null],
+	]);
+
+	/**
+	 * @param hornType HORN_TYPE_xxxx
+	 * @param hornCount New horn count; -1 if "don't change"
+	 */
+	public function setHornType(hornType:int, hornCount:int = -1):Boolean {
+		var a:Boolean = setBodyPartType("hornType", METAMORPH_HORNS, hornType);
+		if (hornCount >= 0) player.horns = hornCount;
+		return a;
+	}
+	private const METAMORPH_HORNS:Object = createMapFromPairs([
+		[HORNS_ANTLERS, null],
+		[HORNS_COW_MINOTAUR, null],
+		[HORNS_DEMON, StatusAffects.UnlockedDemonHorns],
+		[HORNS_DRACONIC_X2, StatusAffects.UnlockedDraconicX2],
+		[HORNS_DRACONIC_X4_12_INCH_LONG, StatusAffects.UnlockedDraconicX4],
+		[HORNS_GARGOYLE, null],
+		[HORNS_GOAT, null],
+		[HORNS_NONE, null],
+		[HORNS_OAK, null],
+		[HORNS_ORCHID, null],
+		[HORNS_RHINO, null],
+		[HORNS_UNICORN, null],
+	]);
+
+	public function setLowerBody(lowerBody:int):Boolean {
+		return setBodyPartType("lowerBody", METAMORPH_LOWER_BODIES, lowerBody);
+	}
+	private const METAMORPH_LOWER_BODIES:Object = createMapFromPairs([
+		[LOWER_BODY_TYPE_BEE, StatusAffects.UnlockedBeeLegs],
+		[LOWER_BODY_TYPE_BUNNY, null],
+		[LOWER_BODY_TYPE_CAT, null],
+		[LOWER_BODY_TYPE_CENTAUR, null],
+		[LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS, StatusAffects.UnlockedSpiderLegs],
+		[LOWER_BODY_TYPE_CLOVEN_HOOFED, null],
+		[LOWER_BODY_TYPE_DEERTAUR, null],
+		[LOWER_BODY_TYPE_DEMONIC_CLAWS, StatusAffects.UnlockedDemonClawedLegs],
+		[LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS, StatusAffects.UnlockedDemonHighHeels],
+		[LOWER_BODY_TYPE_DOG, null],
+		[LOWER_BODY_TYPE_DRAGON, null],
+		[LOWER_BODY_TYPE_DRIDER_LOWER_BODY, StatusAffects.UnlockedDriderLegs],
+		[LOWER_BODY_TYPE_ECHIDNA, null],
+		[LOWER_BODY_TYPE_FERRET, null],
+		[LOWER_BODY_TYPE_FOX, StatusAffects.UnlockedFoxLowerBody],
+		[LOWER_BODY_TYPE_GARGOYLE, null],
+		[LOWER_BODY_TYPE_GOO, null],
+		[LOWER_BODY_TYPE_HARPY, StatusAffects.UnlockedHarpyLegs],
+		[LOWER_BODY_TYPE_HOOFED, null],
+		[LOWER_BODY_TYPE_HUMAN, null],
+		[LOWER_BODY_TYPE_KANGAROO, null],
+		[LOWER_BODY_TYPE_LION, null],
+		[LOWER_BODY_TYPE_LIZARD, StatusAffects.UnlockedLizardLegs],
+		[LOWER_BODY_TYPE_MANTIS, null],
+		[LOWER_BODY_TYPE_NAGA, null],
+		[LOWER_BODY_TYPE_ORCA, null],
+		[LOWER_BODY_TYPE_PLANT_FLOWER, null],
+		[LOWER_BODY_TYPE_PLANT_HIGH_HEELS, null],
+		[LOWER_BODY_TYPE_PLANT_ROOT_CLAWS, null],
+		[LOWER_BODY_TYPE_PONY, null],
+		[LOWER_BODY_TYPE_RACCOON, null],
+		[LOWER_BODY_TYPE_SALAMANDER, null],
+		[LOWER_BODY_TYPE_SCYLLA, null],
+		[LOWER_BODY_TYPE_SHARK, StatusAffects.UnlockedSharkLegs],
+		[LOWER_BODY_TYPE_WOLF, null],
+		[LOWER_BODY_TYPE_YETI, null],
+		[LOWER_BODY_TYPE_YGG_ROOT_CLAWS, null],
+	]);
+
+	public function setRearBody(rearBody:int):Boolean {
+		return setBodyPartType("rearBody", METAMORPH_REAR_BODIES, rearBody);
+	}
+	private const METAMORPH_REAR_BODIES:Object = createMapFromPairs([
+		[REAR_BODY_BEHEMOTH, null],
+		[REAR_BODY_DRACONIC_MANE, null],
+		[REAR_BODY_DRACONIC_SPIKES, null],
+		[REAR_BODY_FENRIR_ICE_SPIKES, null],
+		[REAR_BODY_LION_MANE, null],
+		[REAR_BODY_NONE, null],
+		[REAR_BODY_ORCA_BLOWHOLE, null],
+		[REAR_BODY_SHARK_FIN, StatusAffects.UnlockedSharkFin],
+	]);
+
+	public function setTongueType(tongueType:int):Boolean {
+		return setBodyPartType("tongueType", METAMORPH_TONGUES, tongueType);
+	}
+	// Here we override flavour text because it is 'tonuge' in StatusAffect id
+	// but changing that would break the saves
+	private const METAMORPH_TONGUES:Object = createMapFromPairs([
+		[TONUGE_CAT, [null, "Cat Tongue"]],
+		[TONUGE_DEMONIC, [StatusAffects.UnlockedDemonTonuge, "Demonic Tongue"]],
+		[TONUGE_DRACONIC, [null, "Draconic Tongue"]],
+		[TONUGE_ECHIDNA, [null, "Echidna Tongue"]],
+		[TONUGE_HUMAN, [null, "Human Tongue"]],
+		[TONUGE_SNAKE, [null, "Snake Tongue"]],
+	]);
+
+	/**
+	 * @param tailType TAIL_TYPE_xxx
+	 * @param tailCount new tail count, -1 means "do not change"
+	 */
+	public function setTailType(tailType:int, tailCount:int = -1):Boolean {
+		var a:Boolean = setBodyPartType("tailType", METAMORPH_TAILS, tailType);
+		if (tailCount < 0) return a;
+		if (tailType == TAIL_TYPE_FOX) {
+			var b:Boolean = setBodyPartType("tailCount", METAMORPH_FOX_TAILS, tailCount);
+			return a || b;
+		} else {
+			player.tailCount = tailCount;
+			return a;
+		}
+	}
+	private const METAMORPH_TAILS:Object     = createMapFromPairs([
+		[TAIL_TYPE_BEE_ABDOMEN, StatusAffects.UnlockedBeeTail],
+		[TAIL_TYPE_BEHEMOTH, null],
+		[TAIL_TYPE_CAT, null],
+		[TAIL_TYPE_COW, null],
+		[TAIL_TYPE_DEER, null],
+		[TAIL_TYPE_DEMONIC, StatusAffects.UnlockedDemonTail],
+		[TAIL_TYPE_DOG, null],
+		[TAIL_TYPE_DRACONIC, null],
+		[TAIL_TYPE_ECHIDNA, null],
+		[TAIL_TYPE_FERRET, null],
+		[TAIL_TYPE_FOX, StatusAffects.UnlockedFoxTail],
+		[TAIL_TYPE_GARGOYLE, null],
+		[TAIL_TYPE_GOAT, null],
+		[TAIL_TYPE_HARPY, StatusAffects.UnlockedHarpyTail],
+		[TAIL_TYPE_HORSE, null],
+		[TAIL_TYPE_KANGAROO, null],
+		[TAIL_TYPE_KITSHOO, null],
+		[TAIL_TYPE_LIZARD, StatusAffects.UnlockedLizardTail],
+		[TAIL_TYPE_MANTICORE_PUSSYTAIL, null],
+		[TAIL_TYPE_MANTIS_ABDOMEN, null],
+		[TAIL_TYPE_MOUSE, null],
+		[TAIL_TYPE_NONE, null],
+		[TAIL_TYPE_ORCA, null],
+		[TAIL_TYPE_PIG, null],
+		[TAIL_TYPE_RABBIT, null],
+		[TAIL_TYPE_RACCOON, null],
+		[TAIL_TYPE_RHINO, null],
+		[TAIL_TYPE_SALAMANDER, null],
+		[TAIL_TYPE_SCORPION, null],
+		[TAIL_TYPE_SHARK, StatusAffects.UnlockedSharkTail],
+		[TAIL_TYPE_SPIDER_ADBOMEN, StatusAffects.UnlockedSpiderTail],
+		[TAIL_TYPE_WOLF, null],
+		[TAIL_TYPE_YGGDRASIL, null],
+	]);
+	private const METAMORPH_FOX_TAILS:Object = createMapFromPairs([
+		[1, StatusAffects.UnlockedFoxTail],
+		[2, StatusAffects.UnlockedFoxTail2nd],
+		[3, StatusAffects.UnlockedFoxTail3rd],
+		[4, StatusAffects.UnlockedFoxTail4th],
+		[5, StatusAffects.UnlockedFoxTail5th],
+		[6, StatusAffects.UnlockedFoxTail6th]
+	]);
+
+	public function setWingType(wingType:int, wingDesc:String):Boolean {
+		var a:Boolean   = setBodyPartType("wingType", METAMORPH_WINGS, wingType);
+		player.wingDesc = wingDesc;
+		return a;
+	}
+	private const METAMORPH_WINGS:Object = createMapFromPairs([
+		[WING_TYPE_BAT_LIKE_LARGE, StatusAffects.UnlockedDemonLargeBatWings],
+		[WING_TYPE_BAT_LIKE_LARGE_2, StatusAffects.UnlockedDemonLargeBatWings2],
+		[WING_TYPE_BAT_LIKE_TINY, StatusAffects.UnlockedDemonTinyBatWings],
+		[WING_TYPE_BEE_LIKE_LARGE, StatusAffects.UnlockedBeeWingsLarge],
+		[WING_TYPE_BEE_LIKE_SMALL, StatusAffects.UnlockedBeeWingsSmall],
+		[WING_TYPE_DRACONIC_HUGE, null],
+		[WING_TYPE_DRACONIC_LARGE, null],
+		[WING_TYPE_DRACONIC_SMALL, null],
+		[WING_TYPE_FEATHERED_ALICORN, null],
+		[WING_TYPE_FEATHERED_LARGE, StatusAffects.UnlockedHarpyWings],
+		[WING_TYPE_FEATHERED_PHOENIX, null],
+		[WING_TYPE_GARGOYLE_LIKE_LARGE, null],
+		[WING_TYPE_GIANT_DRAGONFLY, null],
+		[WING_TYPE_HARPY, null],
+		[WING_TYPE_IMP, null],
+		[WING_TYPE_MANTICORE_LIKE_LARGE, null],
+		[WING_TYPE_MANTICORE_LIKE_SMALL, null],
+		[WING_TYPE_MANTIS_LIKE_LARGE, null],
+		[WING_TYPE_MANTIS_LIKE_LARGE_2, null],
+		[WING_TYPE_MANTIS_LIKE_SMALL, null],
+		[WING_TYPE_NONE, null],
+		[WING_TYPE_PLANT, null],
+		[WING_TYPE_SHARK_FIN, null],
+	]);
+
+	/**
+	 * Change player[key] to `tgtType`.
+	 * Update genetic memory using `dict`, if perk present and body type registered.
+	 * No mutation flavour text is displayed
+	 * @return true if added genetic memory (displayed "genetic memory unlocked" text)
+	 */
+	private function setBodyPartType(key:String, dict:Object, tgtType:int):Boolean {
+		if (player[key] == tgtType) return false;
+		player[key] = tgtType;
+		if (player.findPerk(PerkLib.GeneticMemory) < 0) return false;
+		var sat:StatusAffectType;
+		var flavour:String;
+		var o:* = dict[tgtType];
+		if (o instanceof Array) {
+			sat     = o[0];
+			flavour = o[1];
+		} else {
+			sat     = o;
+			flavour = sat.id.replace("Unlocked ", "");
+		}
+		if (sat != null && !player.hasStatusAffect(sat)) {
+			outputText("\n\n<b>Genetic Memory: " + flavour + " - Memorized!</b>\n\n");
+			player.createStatusAffect(sat, 0, 0, 0, 0);
+			return true;
+		}
+		return false;
+	}
+}
 
 }

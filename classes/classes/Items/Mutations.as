@@ -543,7 +543,7 @@ import classes.CockTypesEnum;
 					if (player.lowerBody > LOWER_BODY_TYPE_NAGA) outputText("\n\nYou stagger as your " + player.feet() + " change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!", false);
 					if (!player.hasFur()) outputText("  A fine coat of fur grows out below your waist, itching briefly as it fills in.");
 					outputText("<b>  You now have hooves in place of your feet!</b>", false);
-					player.lowerBody = LOWER_BODY_TYPE_HOOFED;
+					setLowerBody(LOWER_BODY_TYPE_HOOFED);
 					player.legCount = 2;
 					dynStats("spe", 1);
 					changes++;
@@ -730,7 +730,7 @@ import classes.CockTypesEnum;
 				if (player.faceType != FACE_COW_MINOTAUR) {
 					outputText("\n\nBones shift and twist painfully as your visage twists and morphs to resemble that of the beast whose blood you now drink.  <b>You now have a minotaur-like face.</b>", false);
 					changes++;
-					player.faceType = FACE_COW_MINOTAUR;
+					setFaceType(FACE_COW_MINOTAUR);
 				}
 			}
 			//+mino horns require ears/tail
@@ -779,22 +779,21 @@ import classes.CockTypesEnum;
 					//If no horns yet..
 					else {
 						outputText("\n\nWith painful pressure, the skin on your forehead splits around two tiny nub-like horns, similar to those you would see on the cattle back in your homeland.", false);
-						player.hornType = HORNS_COW_MINOTAUR;
-						player.horns = 2;
+						setHornType(HORNS_COW_MINOTAUR, 2);
 						changes++;
 					}
 				}
 				//Not mino horns, change to cow-horns
 				if ((player.hornType == HORNS_DEMON || player.hornType > HORNS_COW_MINOTAUR) && player.hornType != HORNS_ORCHID) {
 					outputText("\n\nYour horns vibrate and shift as if made of clay, reforming into two horns with a bovine-like shape.", false);
-					player.hornType = HORNS_COW_MINOTAUR;
+					setHornType(HORNS_COW_MINOTAUR);
 					changes++;
 				}
 			}
 			//+cow ears	- requires tail
 			if (player.earType != EARS_COW && changes < changeLimit && player.tailType == TAIL_TYPE_COW && player.tailType != TAIL_TYPE_GARGOYLE && rand(2) == 0) {
 				outputText("\n\nYou feel your ears tug on your scalp as they twist shape, becoming oblong and cow-like.  <b>You now have cow ears.</b>", false);
-				player.earType = EARS_COW;
+				setEarType(EARS_COW);
 				changes++;
 			}
 			//+cow tail
@@ -809,7 +808,7 @@ import classes.CockTypesEnum;
 						outputText("\n\nYour insect-like abdomen tingles pleasantly as it begins shrinking and softening, chitin morphing and reshaping until it looks exactly like a <b>cow tail</b>.", false);
 					}
 				}
-				player.tailType = TAIL_TYPE_COW;
+				setTailType(TAIL_TYPE_COW);
 				changes++;
 			}
 			// Remove gills
@@ -1006,7 +1005,7 @@ import classes.CockTypesEnum;
 				//(short)
 				else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your feathers.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer feathery!</b>", false);
 				changes++;
-				player.hairType = HAIR_NORMAL;
+				setHairType(HAIR_NORMAL);
 			}
 			//-Remove leaf hair (copy for equinum, canine peppers, Labova)
 			if (changes < changeLimit && player.hairType == 7 && rand(4) == 0) {
@@ -1015,7 +1014,7 @@ import classes.CockTypesEnum;
 				//(short)
 				else outputText("\n\nYou run your fingers through your leaf-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your leafs.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer leaf-like!</b>", false);
 				changes++;
-				player.hairType = HAIR_NORMAL;
+				setHairType(HAIR_NORMAL);
 			}
 			//
 			//SEXUAL CHARACTERISTICS
@@ -1273,7 +1272,7 @@ import classes.CockTypesEnum;
 					if (player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("\n\nYou collapse as your sinuous snake-tail tears in half, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!", false);
 					else if (player.lowerBody == LOWER_BODY_TYPE_DOG) outputText("\n\nYou stagger as your paws change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!", false);
 					else outputText("\n\nA coat of beastial fur springs up below your waist, itching as it fills in.<b>  You now have hooves in place of your feet!</b>", false);
-					player.lowerBody = LOWER_BODY_TYPE_HOOFED;
+					setLowerBody(LOWER_BODY_TYPE_HOOFED);
 					changes++;
 				}
 			}
@@ -1287,7 +1286,7 @@ import classes.CockTypesEnum;
 				if (player.faceType == FACE_DOG) outputText("\n\nMind-numbing pain shatters through you as you feel your facial bones rearranging.  You clutch at your face in agony as your skin crawls and shifts, your visage reshaping to replace your dog-like characteristics with those of a horse.  <b>You now have a horse's face.</b>", false);
 				else outputText("\n\nMind-numbing pain shatters through you as you feel your facial bones breaking and shifting.  You clutch at yourself in agony as you feel your skin crawl and elongate under your fingers.  Eventually the pain subsides, leaving you with a face that seamlessly blends human and equine features.  <b>You have a very equine-looking face.</b>", false);
 				changes++;
-				player.faceType = FACE_HORSE;
+				setFaceType(FACE_HORSE);
 			}
 			//Fur - if has horsetail && ears and not at changelimit
 			if (!player.hasFur() && player.skinType != SKIN_TYPE_STONE && changes < changeLimit && rand(4) == 0 && player.tailType == TAIL_TYPE_HORSE) {
@@ -1313,7 +1312,7 @@ import classes.CockTypesEnum;
 				if (player.earType == EARS_HUMAN) outputText("\n\nYour ears tug painfully on your face as they begin shifting, moving upwards to the top of your head and transforming into a upright animalistic ears.  ", false);
 				if (player.earType == EARS_DOG) outputText("\n\nYour ears change shape, morphing into from their doglike shape into equine-like ears!  ", false);
 				if (player.earType > EARS_DOG) outputText("\n\nYour ears change shape, morphing into teardrop-shaped horse ears!  ", false);
-				player.earType = EARS_HORSE;
+				setEarType(EARS_HORSE);
 				player.earValue = 0;
 				outputText("<b>You now have horse ears.</b>", false);
 				changes++;
@@ -1336,8 +1335,7 @@ import classes.CockTypesEnum;
 					outputText("\n\nPain lances up your " + assholeDescript() + " as your tail shifts and morphs disgustingly.  With one last wave of pain, it splits into hundreds of tiny filaments, transforming into a horsetail.", false);
 				}
 				outputText("  <b>You now have a horse-tail.</b>", false);
-				player.tailType = TAIL_TYPE_HORSE;
-				player.tailCount = 1;
+				setTailType(TAIL_TYPE_HORSE, 1);
 				player.tailVenom = 0;
 				player.tailRecharge = 0;
 				changes++;
@@ -1369,23 +1367,21 @@ import classes.CockTypesEnum;
 					//If no horns yet..
 					else {
 						outputText("\n\nWith painful pressure, the skin on your forehead splits around tiny nub-like horn, a little bit similar to that you would see on the cattle back in your homeland.", false);
-						player.hornType = HORNS_COW_MINOTAUR;
-						player.horns = 2;
+						setHornType(HORNS_COW_MINOTAUR, 2);
 						changes++;
 					}
 				}
 				//Not uni/ali horn, change to uni/ali-horn
 				if (player.hornType != HORNS_UNICORN && player.hornType != HORNS_ORCHID) {
 					outputText("\n\nYour horns vibrate and shift as if made of clay, reforming into horn with a unicorn-like shape.", false);
-					player.hornType = HORNS_UNICORN;
+					setHornType(HORNS_UNICORN);
 					changes++;
 				}
 			}
 			//Alicorn wings
 			if (type == 2 && player.wingType == WING_TYPE_NONE && changes < changeLimit && player.hornType == HORNS_UNICORN && rand(4) == 0) {
 				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your " + player.skinDesc + ". It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, white wings.</b>", false);
-				player.wingType = WING_TYPE_FEATHERED_ALICORN;
-				player.wingDesc = "large white feathered";
+				setWingType(WING_TYPE_FEATHERED_ALICORN, "large white feathered");
 				changes++;
 			}
 			//Remove old wings
@@ -1643,7 +1639,7 @@ import classes.CockTypesEnum;
 					outputText("  After taking a moment to get used to your new body, you notice that your genitals now reside between the back legs on your centaur body.", false);
 				}
 				dynStats("spe", 3);
-				player.lowerBody = LOWER_BODY_TYPE_HOOFED;
+				setLowerBody(LOWER_BODY_TYPE_HOOFED);
 				player.legCount = 4;
 			}
 			//generic version
@@ -1658,12 +1654,12 @@ import classes.CockTypesEnum;
 						if (player.lowerBody == LOWER_BODY_TYPE_SCYLLA) {
 							outputText("\n\nYou collapse as your tentacle legs starts to merge in pairs, shifting into legs.  The pain is immense, particularly in your new feet as they curl inward and transform into hooves!", false);
 						}
-						player.lowerBody = LOWER_BODY_TYPE_HOOFED;
+						setLowerBody(LOWER_BODY_TYPE_HOOFED);
 					}
 					//Catch-all
 					else {	
 						if (player.lowerBody == LOWER_BODY_TYPE_HUMAN)
-							player.lowerBody = LOWER_BODY_TYPE_HOOFED;
+							setLowerBody(LOWER_BODY_TYPE_HOOFED);
 						outputText("\n\nImmense pain overtakes you as you feel your backbone snap.  The agony doesn't stop, blacking you out as your spine lengthens, growing with new flesh from your backside as the bones of your legs flex and twist.  Muscle groups shift and rearrange themselves as the change completes, the pain dying away as your consciousness returns.  <b>You now have the lower body of a feral beast!</b>", false);
 					}
 					if (player.gender > 0)
@@ -1693,8 +1689,7 @@ import classes.CockTypesEnum;
 					outputText("\n\nPain lances up your " + assholeDescript() + " as your tail shifts and morphs disgustingly.  With one last wave of pain, it splits into hundreds of tiny filaments, transforming into a horsetail.", false);
 				}
 				outputText("  <b>You now have a horse-tail.</b>", false);
-				player.tailType = TAIL_TYPE_HORSE;
-				player.tailCount = 1;
+				setTailType(TAIL_TYPE_HORSE, 1);
 				player.tailVenom = 0;
 				player.tailRecharge = 0;
 				changes++;
@@ -1748,7 +1743,7 @@ import classes.CockTypesEnum;
 			if (changes < changeLimit && player.tailType != TAIL_TYPE_SCORPION && player.tailType != TAIL_TYPE_GARGOYLE && rand(2) == 0) {
 				if (player.tailType != TAIL_TYPE_NONE) outputText("\n\nPainful swelling just above your " + getGame().buttDescript() + " doubles you over, and you hear the sound of your tail dropping off onto the ground!  Before you can consider the implications, the pain gets worse, and you feel your backside bulge outward sickeningly, cracking and popping as a segmented scorpion-like tail grows in place of your old one.  It grows large enough to be impossible to hide, and with a note of finality, your stinger slides free with an audible 'snick'.  <b>You have a scorpion tail.</b>");
 				else outputText("\n\nPainful swelling just above your " + getGame().buttDescript() + " doubles you over.  It gets worse and worse as the swollen lump begins to protrude from your backside, swelling and extending with a series of pops until you have a segmented tail hanging just above your butt.  The whole thing is covered in a hard chitinous material, and large enough to be impossible to hide.  You sigh as your stinger slides into place with a 'snick', finishing the transformation.  <b>You have a scorpion tail.</b>");
-				player.tailType = TAIL_TYPE_SCORPION;
+				setTailType(TAIL_TYPE_SCORPION);
 				player.tailVenom = 15;
 				player.tailRecharge = 3;
 				changes++;
@@ -1820,7 +1815,7 @@ import classes.CockTypesEnum;
 				outputText("\n\n", false);
 				if (player.lowerBody != LOWER_BODY_TYPE_HUMAN) outputText("You watch, spellbound, while your legs gradually change its entire outer structure into a plain human-like form. ", false);
 				outputText("Your legs suddenly shift, painfully forcing you down on all fours as the bone of your feet changes shape into something entirely different. You feel hairs growing at a rapid rate all over your legs. Something juts out of your toe as they clench into the ground. As you feel the pain recede, you sit and take a look at your " + player.feet() + "; or rather, your large leonine hind paws, now armed with sharp, retractable claws. <b>You now have leonine paws.</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_LION;
+				setLowerBody(LOWER_BODY_TYPE_LION);
 				player.legCount = 2;
 				changes++;
 			}
@@ -1829,14 +1824,14 @@ import classes.CockTypesEnum;
 				outputText("\n\n", false);
 				if (player.armType != ARM_TYPE_HUMAN) outputText("You watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. ", false);
 				outputText("Your hands suddenly start to hurt as your arms grows a thick coat of dark fur up to your shoulders where it turns white. You watch enthralled as your nails fall off your fingers, feline claws taking their place on your now five-fingered paw-like hands. <b>You now have leonine paw hands.</b>", false);
-				player.armType = ARM_TYPE_LION;
+				setArmType(ARM_TYPE_LION);
 				changes++;
 			}
 			//Scorpion tail
 			if (player.armType == ARM_TYPE_LION && changes < changeLimit && player.tailType != TAIL_TYPE_GARGOYLE && player.tailType != TAIL_TYPE_SCORPION && player.tailType != TAIL_TYPE_MANTICORE_PUSSYTAIL && rand(2) == 0) {
 				if (player.tailType != TAIL_TYPE_NONE) outputText("\n\nPainful swelling just above your " + getGame().buttDescript() + " doubles you over, and you hear the sound of your tail dropping off onto the ground!  Before you can consider the implications, the pain gets worse, and you feel your backside bulge outward sickeningly, cracking and popping as a segmented scorpion-like tail grows in place of your old one.  It grows large enough to be impossible to hide, and with a note of finality, your stinger slides free with an audible 'snick'.  <b>You have a scorpion tail.</b>");
 				else outputText("\n\nPainful swelling just above your " + getGame().buttDescript() + " doubles you over.  It gets worse and worse as the swollen lump begins to protrude from your backside, swelling and extending with a series of pops until you have a segmented tail hanging just above your butt.  The whole thing is covered in a hard chitinous material, and large enough to be impossible to hide.  You sigh as your stinger slides into place with a 'snick', finishing the transformation.  <b>You have a scorpion tail.</b>");
-				player.tailType = TAIL_TYPE_SCORPION;
+				setTailType(TAIL_TYPE_SCORPION);
 				player.tailVenom = 15;
 				player.tailRecharge = 3;
 				changes++;
@@ -1844,7 +1839,7 @@ import classes.CockTypesEnum;
 			//PussyTail (only females)
 			if ((player.gender == 2 || (player.gender == 3 && player.mf("m", "f") == "f")) && player.tailType == TAIL_TYPE_SCORPION && changes < changeLimit && player.tailType != TAIL_TYPE_MANTICORE_PUSSYTAIL && rand(2) == 0) {
 				outputText("\n\nYour scorpion tail starts shifting as your stinger falls to the ground, leaving you with a wide hole at the tip of your tail. You have a feeling of emptiness in your tail, like if it was hollowed from the inside. The end of your tail where the stinger used to be suddenly explode into a flower-like bulb of flesh. The petals opening into what looks like the inside of a pussy, its folds moist and well lubricated. Right after the previous transformation’s finished, spikes starts to grow out of the bulbous tip giving your tail tip the appearance of a spiked bulb. Flinging your tail randomly to test your new appendage you shoot one of them straight into a nearby tree. You idly wonder what it will feels like to milk men with this.  <b>It seems you've grown the tail of a manticore.</b>");
-				player.tailType = TAIL_TYPE_MANTICORE_PUSSYTAIL;
+				setTailType(TAIL_TYPE_MANTICORE_PUSSYTAIL);
 				changes++;
 			}
 			//Wings
@@ -1852,14 +1847,12 @@ import classes.CockTypesEnum;
 				//Grow bigger manticore wings!
 				if (player.wingType == WING_TYPE_MANTICORE_LIKE_SMALL) {
 					outputText("\n\nYour feel your wings growing larger by the seconds. They keep growing until they reach three time their original size. The transformation finally stop as your wings reach a span of twice your arms length. These will be really useful should you want to fly around in search of a meal.  <b>You now have fully grown manticore wings.</b>");
-					player.wingType = WING_TYPE_MANTICORE_LIKE_LARGE;
-					player.wingDesc = "large manticore-like";
+					setWingType(WING_TYPE_MANTICORE_LIKE_LARGE, "large manticore-like");
 				}
 				//Grow small manticore wings if player has none.
 				else if (player.wingType == WING_TYPE_NONE) {
 					outputText("\n\nYou scream something akin to a roar from the tremendous amount of pain you're suddenly experiencing as something starts to push out from your back. Your claws start digging large marks into the ground as the things stretch out and burst through your skin. Large bones covered in a thin, yet sturdy layer of skin, forming a pair of small bat-like wings slowly push out before finally staying in place. They are too small right now to allow you to take flight but they sure look good on you.  <b>You now have small manticore wings.</b>.");
-					player.wingType = WING_TYPE_MANTICORE_LIKE_SMALL;
-					player.wingDesc = "small manticore-like";
+					setWingType(WING_TYPE_MANTICORE_LIKE_SMALL, "small manticore-like");
 				}
 				//Remove old wings
 				else {
@@ -1870,13 +1863,13 @@ import classes.CockTypesEnum;
 			//Back(Rear) body
 			if ((player.wingType == WING_TYPE_MANTICORE_LIKE_SMALL || player.wingType == WING_TYPE_MANTICORE_LIKE_LARGE) && player.rearBody != REAR_BODY_LION_MANE && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou suddenly feel hair growing all around your neck at a crazy pace. It soon get so thick it almost looks as if you're wearing a white fur collar. <b>You now have a full lion mane around your neck.</b>", false);
-				player.rearBody = REAR_BODY_LION_MANE;
+				setRearBody(REAR_BODY_LION_MANE);
 				changes++;
 			}
 			//Ears
 			if (player.rearBody == REAR_BODY_LION_MANE && player.earType == EARS_HUMAN && player.earType != EARS_LION && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYour ears suddenly stretch painfully, making you scream in pain as they move toward the top of your head, growing rounder and bigger. Putting your hands to your ears you discover they are now covered with a fair amount of dark fur. <b>You now have lion ears.</b>", false);
-				player.earType = EARS_LION;
+				setEarType(EARS_LION);
 				changes++;
 			}
 			if (player.rearBody == REAR_BODY_LION_MANE && player.earType != EARS_HUMAN && player.earType != EARS_LION && changes < changeLimit && rand(3) == 0) {
@@ -1888,19 +1881,19 @@ import classes.CockTypesEnum;
 				outputText("\n\nY", false);
 				if (player.faceType != FACE_HUMAN) outputText("our face suddenly mold back into it’s former human shape. However y", false);
 				outputText("ou feel your canines changing, elongating into sharp dagger-like teeth capable of causing severe injuries. Funnily, your face remained relatively human even after the change. You feel the need to roar like a lion, to show the world how ferocious you look. <b>Your mouth is now filled with dagger-like canines.</b>", false);
-				player.faceType = FACE_MANTICORE;
+				setFaceType(FACE_MANTICORE);
 				changes++;
 			}
 			//Eyes
 			if (player.faceType == FACE_MANTICORE && player.eyeType != EYES_MANTICORE && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nFor a moment your sight shifts as the ambient light suddenly turns extremely bright, almost blinding you. You walk around disoriented for a moment until the luminosity fades back to normal. You run to a water puddle to check your reflection and quickly notice your pupils have become cat-like. While you do see way better in the dark, these red pupils are extremely intimidating and clearly don't belong on any normal feline. <b>You now have manticore eyes.</b>", false);
-				player.eyeType = EYES_MANTICORE;
+				setEyeType(EYES_MANTICORE);
 				changes++;
 			}
 			//Cat tounge
 			if (player.faceType == FACE_MANTICORE && player.tongueType != TONUGE_CAT && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\nYour tongue suddenly feel weird. You try to stick it out to see what’s going on and discover it changed to look similar to the tongue of a cat. At least you will be able to groom yourself properly with <b>your new cat tongue.</b>", false);
-				player.tongueType = TONUGE_CAT;
+				setTongueType(TONUGE_CAT);
 				changes++;
 			}
 			//Venom Increase
@@ -2112,7 +2105,7 @@ import classes.CockTypesEnum;
 						outputText("\n\n", false);
 						if (player.lowerBody != LOWER_BODY_TYPE_HUMAN) outputText("You watch, spellbound, while your legs gradually change its entire outer structure into a plain human-like form. ", false);
 						outputText("Every muscle and sinew below your hip tingles and you begin to stagger. Seconds after you sit down, pain explodes in your " + player.feet() + ". In few places the skin on your feet breaks up to reveal... a root-like skin underneath. Gradually the rest of the skin around the ankle is shed of uncovering your new feet shape, that are roots arranged in a way to loosely reassemble feet. <b>Your feet are now formed into roots.</b>", false);
-						player.lowerBody = LOWER_BODY_TYPE_PLANT_ROOT_CLAWS;
+						setLowerBody(LOWER_BODY_TYPE_PLANT_ROOT_CLAWS);
 						player.legCount = 2;
 					}
 				}
@@ -2122,7 +2115,7 @@ import classes.CockTypesEnum;
 						outputText("\n\n", false);
 						if (player.lowerBody != LOWER_BODY_TYPE_HUMAN) outputText("You watch, spellbound, while your legs gradually change its entire outer structure into a plain human-like form. ", false);
 						outputText("Soon after you start to feel something new tickling and crawling its way into being, this time on your tights, working its way down your legs.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your thighs and shank all the way down to your ankles. <b>You now have vine-covered legs.</b>", false);
-						player.lowerBody = LOWER_BODY_TYPE_PLANT_HIGH_HEELS;
+						setLowerBody(LOWER_BODY_TYPE_PLANT_HIGH_HEELS);
 						player.legCount = 2;
 					}
 				}
@@ -2131,7 +2124,7 @@ import classes.CockTypesEnum;
 			//Arms
 			if ((player.lowerBody == LOWER_BODY_TYPE_PLANT_HIGH_HEELS || player.lowerBody == LOWER_BODY_TYPE_PLANT_ROOT_CLAWS) && !InCollection(player.armType, ARM_TYPE_GARGOYLE, ARM_TYPE_PLANT) && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form. Soon after you start feel something new tickling and crawling its way into being, this time on your shoulders, working its way down your arms.  Looking on them you can see a thin, delicate vines, with spade-shaped leaves unfolding from them as they curl snugly around your biceps and deltoids all the way down to your wrists. <b>You now have vine-covered arms.</b>", false);
-				player.armType = ARM_TYPE_PLANT;
+				setArmType(ARM_TYPE_PLANT);
 				changes++;
 			}
 			//Wings slot aka tentacle cockvine wings
@@ -2141,19 +2134,19 @@ import classes.CockTypesEnum;
 				}
 				outputText("\n\nPressure is building in multiple spots on your upper back. It feels more like several over-eager erections trapped in incredibly tight undies. You can’t help but groan with relief when finally the pressure peaks and many thick protrusions burst impatiently out of your " + player.skinDesc + ". The hot, thick, vine-like growths thrust their way into being, feet of oily green tentacles, alarmingly energetic and prehensile, thrashing around your " + hipDescript() + ".");
 				outputText(" After a moment of concentration you cause one of these growths to rear around into your hand to take a closer look at it. It feels unmistakably dick-like - bulging, tender flesh under the fibrous skin, with quite a bit of flexible, able to bend all along its length and dart its wet, distended head in any direction you wish. <b>You now have cockvine wings.</b>");
-				player.wingType = WING_TYPE_PLANT;
+				setWingType(WING_TYPE_PLANT, "cockvine");
 				changes++;
 			}
 			//Ears
 			if (player.earType != EARS_ELFIN && player.skinType != SKIN_TYPE_STONE && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nA weird tingling runs through your scalp as your " + hairDescript() + " shifts slightly.  You reach up to touch and bump <b>your new pointed elfin ears</b>.  You bet they look cute!", false);
 				changes++;
-				player.earType = EARS_ELFIN;
+				setEarType(EARS_ELFIN);
 			}
 			//Face
 			if (player.faceType != FACE_HUMAN && changes < changeLimit && rand(4) == 0 && player.earType == EARS_ELFIN) {
 				changes++;
-				player.faceType = FACE_HUMAN;
+				setFaceType(FACE_HUMAN);
 				outputText("\n\nAnother violent sneeze escapes you.  It hurt!  You feel your nose and discover your face has changed back into a more normal look.  <b>You have a human looking face again!</b>", false);
 			}
 			//Leaf Hair
@@ -2161,11 +2154,11 @@ import classes.CockTypesEnum;
 			{
 				if (rand(2) == 0) {
 					outputText("\n\nYour " + hairDescript() + " begins to fall out in clumps, eventually leaving your scalp completely bald.  Although, thankfully, it does not remain like that for long.  Within moments a full head of grass sprouts from the skin of your scalp, protecting it from the chilly wind which was starting to annoy you.  You run your hands through your newly grown hair-like grass, stifling a moan at how sensitive the thousands of long, soft and leafy blades that replaced your hair are.  <b>Your hair has been replaced by grass, your scalp is now covered with soft blades of verdant greenery...</b>");
-					player.hairType = HAIR_GRASS;
+					setHairType(HAIR_GRASS);
 				}
 				else {
 					outputText("\n\nYour " + hairDescript() + " begins to fall out in globs, eventually leaving you with a bald head.  Your head is not left bald for long, though.  Within moments, a full head of leaf sprouts from the skin of your scalp.  You run your hands through your new growth, sighing at the pleasure of being able to feel each individual leaf.  <b>Your hair turned into thin leafs replacing your current hair!</b>");
-					player.hairType = HAIR_LEAF;
+					setHairType(HAIR_LEAF);
 				}
 				changes++;
 			}
@@ -2181,26 +2174,22 @@ import classes.CockTypesEnum;
 				if (player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
 					if (player.horns == 0) {
 						outputText("\n\nYou hear the sound of cracking branches erupting from the tip of your skull.  Small bulges on either side of your head advance outwards in a straight line, eventually spreading out in multiple directions like a miniature tree.  Investigating the exotic additions sprouting from your head, the situation becomes clear.  <b>You've grown oak horns!</b>");
-						player.hornType = HORNS_OAK;
-						player.horns = 4 + rand(4);
+						setHornType(HORNS_OAK, 4 + rand(4));
 					}
 					if (player.horns > 0 && player.hornType != HORNS_OAK) {
 						outputText("\n\nYou hear the sound of cracking branches erupting from the tip of your skull.  The horns on your head begin to twist and turn fanatically, their texture and size morphing considerably until they resemble something more like trees than anything else.  Branching out rebelliously, you've come to the conclusion that <b>you've somehow gained oak horns!</b>");
-						player.hornType = HORNS_OAK;
-						player.horns = 4 + rand(4);
+						setHornType(HORNS_OAK, 4 + rand(4));
 					}
 				}
 				//Females/futa get orchid flowers
 				else {
 					if (player.horns == 0 && player.hornType == HORNS_NONE) {
 						outputText("\n\nA spot on each side of your head has been getting steadily sorer.  You’re beginning to think about finding somewhere quiet to take a look at it when it suddenly and rather shockingly bursts, allowing something hand-sized to bloom out from your " + hairDescript() + ". A huge orchids is now flourishing their floppy petals and stamen above your head!  <b>You've grown twin orchid flowers!</b>");
-						player.hornType = HORNS_ORCHID;
-						player.horns = 2;
+						setHornType(HORNS_ORCHID, 2);
 					}
 					if (player.horns > 0 && player.hornType != HORNS_ORCHID) {
 						outputText("\n\nYour old horns slowly crumbling away until nothing is left.  Then a spot on each side of your head has been getting steadily sorer.  You’re beginning to think about finding somewhere quiet to take a look at it when it suddenly and rather shockingly bursts, allowing something hand-sized to bloom out from your " + hairDescript() + ". A huge pair of orchids is now flourishing their floppy petals and stamen above your head!  <b>You've grown a pair of orchid flowers!</b>");
-						player.hornType = HORNS_ORCHID;
-						player.horns = 2;
+						setHornType(HORNS_ORCHID, 2);
 					}
 				}
 				changes++;
@@ -2215,9 +2204,9 @@ import classes.CockTypesEnum;
 					else outputText(" Your tail", false);
 					outputText(" recede back into your body disappearing entirely into your backside as if it never existed.", false);
 				}
-				if (player.tailType != 0) player.tailType = 0;
-				player.wingType = WING_TYPE_NONE;
-				player.lowerBody = LOWER_BODY_TYPE_PLANT_FLOWER;
+				if (player.tailType != 0) setTailType(0);
+				setWingType(WING_TYPE_NONE);
+				setLowerBody(LOWER_BODY_TYPE_PLANT_FLOWER);
 				player.legCount = 4;
 				changes++;
 			}
@@ -2720,7 +2709,7 @@ import classes.CockTypesEnum;
 			//Wolf face
 			if (rand(2) == 0 && changes < changeLimit && player.faceType != FACE_WOLF && player.hasFullCoatOfType(SKIN_COAT_FUR)) {
 				outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting reforming into something... different, your screams turning into a howl as the change ends. You go to find a puddle in order to view your reflection...  <b>Your face looks like the one of a feral looking wolf composed of a maw jagged with threatening canines a wet muzzle and a animalistic tongue.</b>", false);
-				player.faceType = FACE_WOLF;
+				setFaceType(FACE_WOLF);
 				changes++;
 			}
 			//Winter wolf fur
@@ -2746,7 +2735,7 @@ import classes.CockTypesEnum;
 			}
 			if (changes < changeLimit && player.armType == ARM_TYPE_HUMAN && rand(2) == 0) {
 				outputText("\n\nYour arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into wolf like claws so no wonder you felt it that much. <b>You now have pawed hands.</b>", false);
-				player.armType = ARM_TYPE_WOLF;
+				setArmType(ARM_TYPE_WOLF);
 				changes++;
 			}
 			//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
@@ -2758,7 +2747,7 @@ import classes.CockTypesEnum;
 			if (rand(2) == 0 && player.lowerBody != LOWER_BODY_TYPE_WOLF && player.tailType == TAIL_TYPE_WOLF && player.earType == EARS_WOLF && changes < changeLimit) {
 				if (player.isBiped() && player.lowerBody == LOWER_BODY_TYPE_HUMAN) {
 					outputText("\n\nYou scream in agony as you feel the bones in your feets break and rearrange into bestial paws. Soon your legs cover up with fur from the waist down. The fur is cold to the touch and yet you feel warm and comfortable under it. <b>You now have wolf paw.</b>", false);
-					player.lowerBody = LOWER_BODY_TYPE_WOLF;
+					setLowerBody(LOWER_BODY_TYPE_WOLF);
 					player.legCount = 2;
 					changes++;
 				}
@@ -2770,8 +2759,8 @@ import classes.CockTypesEnum;
 			//Wolf ears
 			if (rand(2) == 0 && player.earType != EARS_WOLF && player.tailType == TAIL_TYPE_WOLF && changes < changeLimit) {
 				if (player.earType == EARS_HUMAN) {
-					outputText("\n\nThe skin on the sides of your face stretches painfully as your ears migrate upwards, toward the top of your head. They shift and elongate becoming lupine in nature. You won't have much trouble hearing through the howling blizzards of the glacial rift with <b>your new Lupine ears.</b>  ", false);player.earType = EARS_WOLF;
-					player.earType = EARS_WOLF;
+					outputText("\n\nThe skin on the sides of your face stretches painfully as your ears migrate upwards, toward the top of your head. They shift and elongate becoming lupine in nature. You won't have much trouble hearing through the howling blizzards of the glacial rift with <b>your new Lupine ears.</b>  ", false);
+					setEarType(EARS_WOLF);
 					changes++;
 				}
 				if (player.earType != EARS_HUMAN && player.earType != EARS_WOLF && player.tailType == TAIL_TYPE_WOLF) {
@@ -2784,13 +2773,12 @@ import classes.CockTypesEnum;
 				if (player.tailType == TAIL_TYPE_NONE) {
 					outputText("\n\nA pressure builds in your backside. You feel under your clothes and discover an odd bump that seems to be growing larger by the moment. In seconds it passes between your fingers, bursts out the back of your clothes, and grow most of the way to the ground. A thick coat of fur cold to the touch yet warm on your tail skin cover it entirely from the base to the tip.  ", false);
 					outputText("<b>You now have a wolf-tail.</b>", false);
-					player.tailType = TAIL_TYPE_WOLF;
+					setTailType(TAIL_TYPE_WOLF);
 					changes++;
 				}
 				if (player.tailType != TAIL_TYPE_NONE && player.tailType != TAIL_TYPE_WOLF) {
 					outputText("\n\nYou feel something shifting in your backside. Then something detaches from your backside and it falls onto the ground.  <b>You no longer have a tail!</b>", false);
-					player.tailType = TAIL_TYPE_NONE;
-					player.tailCount = 0;
+					setTailType(TAIL_TYPE_NONE, 0);
 					player.tailVenom = 0;
 					player.tailRecharge = 5;
 					changes++;
@@ -3390,7 +3378,7 @@ import classes.CockTypesEnum;
 			if (rand(4) == 0 && changes < changeLimit && player.faceType != FACE_DOG && player.hasFullCoatOfType(SKIN_COAT_FUR) && player.lowerBody == LOWER_BODY_TYPE_DOG) {
 				if (player.faceType == FACE_HORSE) outputText("\n\nYour face is wracked with pain.  You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something else.  <b>Your horse-like features rearrange to take on many canine aspects.</b>", false);
 				else outputText("\n\nYour face is wracked with pain.  You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something... different.  You find a puddle to view your reflection...<b>your face is now a cross between human and canine features.</b>", false);
-				player.faceType = FACE_DOG;
+				setFaceType(FACE_DOG);
 				changes++;
 			}
 			//-Remove feathery hair (copy for equinum, canine peppers, Labova)
@@ -3400,7 +3388,7 @@ import classes.CockTypesEnum;
 				//(short)
 				else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your feathers.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer feathery!</b>", false);
 				changes++;
-				player.hairType = HAIR_NORMAL;
+				setHairType(HAIR_NORMAL);
 			}
 			//-Remove leaf hair (copy for equinum, canine peppers, Labova)
 			if (changes < changeLimit && player.hairType == 7 && rand(4) == 0) {
@@ -3409,7 +3397,7 @@ import classes.CockTypesEnum;
 				//(short)
 				else outputText("\n\nYou run your fingers through your leaf-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your leafs.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer leaf-like!</b>", false);
 				changes++;
-				player.hairType = HAIR_NORMAL;
+				setHairType(HAIR_NORMAL);
 			}
 			if (type == 3 && player.hairColor != "midnight black" && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE) {
 				if (player.hasFur()) outputText("<b>\n\nYour fur and hair tingles, growing in thicker than ever as darkness begins to spread from the roots, turning it midnight black.</b>", false);
@@ -3435,7 +3423,7 @@ import classes.CockTypesEnum;
 				//Hooves -> Paws
 				else if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) outputText("\n\nYou feel your hooves suddenly splinter, growing into five unique digits.  Their flesh softens as your hooves reshape into furred paws.", false);
 				else outputText("\n\nYour lower body is wracked by pain!  Once it passes, you discover that you're standing on fur-covered paws!  <b>You now have paws</b>.", false);
-				player.lowerBody = LOWER_BODY_TYPE_DOG;
+				setLowerBody(LOWER_BODY_TYPE_DOG);
 				player.legCount = 2;
 				changes++;
 			}
@@ -3445,7 +3433,7 @@ import classes.CockTypesEnum;
 				if (player.earType == EARS_HUMAN) outputText("\n\nThe skin on the sides of your face stretches painfully as your ears migrate upwards, towards the top of your head.  They shift and elongate, becoming canine in nature.  ", false);
 				if (player.earType == EARS_HORSE) outputText("\n\nYour equine ears twist as they transform into canine versions.  ", false);
 				if (player.earType > EARS_DOG) outputText("\n\nYour ears transform, becoming more canine in appearance.  ", false);
-				player.earType = EARS_DOG;
+				setEarType(EARS_DOG);
 				player.earValue = 2;
 				outputText("<b>You now have dog ears.</b>", false);
 				changes++;
@@ -3461,7 +3449,7 @@ import classes.CockTypesEnum;
 				if (player.tailType >= TAIL_TYPE_COW && type != 6) outputText("\n\nYou feel your backside shift and change, flesh molding and displacing into a long puffy tail!  ", false);
 				changes++;
 				outputText("<b>You now have a dog-tail.</b>", false);
-				player.tailType = TAIL_TYPE_DOG;
+				setTailType(TAIL_TYPE_DOG);
 			}
 			// Remove gills
 			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
@@ -4556,7 +4544,7 @@ import classes.CockTypesEnum;
 				//(short)
 				else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your feathers.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer feathery!</b>", false);
 				changes++;
-				player.hairType = HAIR_NORMAL;
+				setHairType(HAIR_NORMAL);
 			}
 			//-Remove leaf hair (copy for equinum, canine peppers, Labova)
 			if (changes < changeLimit && player.hairType == 7 && rand(4) == 0) {
@@ -4565,7 +4553,7 @@ import classes.CockTypesEnum;
 				//(short)
 				else outputText("\n\nYou run your fingers through your leaf-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your leafs.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer leaf-like!</b>", false);
 				changes++;
-				player.hairType = HAIR_NORMAL;
+				setHairType(HAIR_NORMAL);
 			}
 			//If breasts are D or bigger and are not lactating, they also start lactating:
 			if (player.biggestTitSize() >= 4 && player.breastRows[0].lactationMultiplier < 1 && changes < changeLimit && (rand(3) == 0 || boobsGrew || enhanced)) {
@@ -4706,13 +4694,13 @@ import classes.CockTypesEnum;
 						outputText("\n\nYour insect-like abdomen tingles pleasantly as it begins shrinking and softening, chitin morphing and reshaping until it looks exactly like a <b>cow tail</b>.", false);
 					}
 				}
-				player.tailType = TAIL_TYPE_COW;
+				setTailType(TAIL_TYPE_COW);
 				changes++;
 			}
 			//Give the player bovine ears, same as the minotaur
 			if (tainted && player.earType != EARS_COW && changes < changeLimit && rand(4) == 0 && player.tailType == TAIL_TYPE_COW) {
 				outputText("\n\nYou feel your ears tug on your scalp as they twist shape, becoming oblong and cow-like.  <b>You now have cow ears.</b>", false);
-				player.earType = EARS_COW;
+				setEarType(EARS_COW);
 				changes++;
 			}
 			//If the player is under 7 feet in height, increase their height, similar to the minotaur
@@ -4739,7 +4727,7 @@ import classes.CockTypesEnum;
 					//Catch-all
 					if (player.lowerBody > LOWER_BODY_TYPE_NAGA) outputText("\n\nYou stagger as your " + player.feet() + " change, curling up into painful angry lumps of flesh.  They get tighter and tighter, harder and harder, until at last they solidify into hooves!", false);
 					outputText("  A coat of beastial fur springs up below your waist, itching as it fills in.<b>  You now have hooves in place of your feet!</b>", false);
-					player.lowerBody = LOWER_BODY_TYPE_HOOFED;
+					setLowerBody(LOWER_BODY_TYPE_HOOFED);
 					player.legCount = 2;
 					dynStats("cor", 0);
 					changes++;
@@ -4749,7 +4737,7 @@ import classes.CockTypesEnum;
 			if (!enhanced && player.lowerBody == LOWER_BODY_TYPE_HOOFED && player.faceType != FACE_HUMAN && changes < changeLimit && rand(4) == 0) {
 				//Remove face before fur!
 				outputText("\n\nYour visage twists painfully, returning to a normal human shape.  <b>Your face is human again!</b>", false);
-				player.faceType = FACE_HUMAN;
+				setFaceType(FACE_HUMAN);
 				changes++;
 			}
 			//enhanced get shitty fur
@@ -4762,7 +4750,7 @@ import classes.CockTypesEnum;
 			//if enhanced to probova give a shitty cow face
 			else if (enhanced && player.faceType != FACE_COW_MINOTAUR && player.tailType != TAIL_TYPE_GARGOYLE) {
 				outputText("\n\nYour visage twists painfully, warping and crackling as your bones are molded into a new shape.  Once it finishes, you reach up to touch it, and you discover that <b>your face is like that of a cow!</b>", false);
-				player.faceType = FACE_COW_MINOTAUR;
+				setFaceType(FACE_COW_MINOTAUR);
 				changes++;
 			}
 			//Give the player bovine horns, or increase their size, same as the minotaur
@@ -4782,21 +4770,19 @@ import classes.CockTypesEnum;
 					//If no horns yet..
 					if (player.hornType == HORNS_NONE || player.horns == 0) {
 						outputText("\n\nWith painful pressure, the skin on your forehead splits around two tiny nub-like horns, similar to those you would see on the cattle back in your homeland.", false);
-						player.hornType = HORNS_COW_MINOTAUR;
-						player.horns = 1;
+						setHornType(HORNS_COW_MINOTAUR, 1);
 						changes++;
 					}
 					//TF other horns
 					if (player.hornType != HORNS_NONE && player.hornType != HORNS_COW_MINOTAUR && player.hornType != HORNS_ORCHID && player.horns > 0) {
 						outputText("\n\nYour horns twist, filling your skull with agonizing pain for a moment as they transform into cow-horns.", false);
-						player.hornType = HORNS_COW_MINOTAUR;
+						setHornType(HORNS_COW_MINOTAUR);
 					}
 				}
 				//Not mino horns, change to cow-horns
 				if ((player.hornType == HORNS_DEMON || player.hornType > HORNS_COW_MINOTAUR) && player.hornType != HORNS_ORCHID) {
 					outputText("\n\nYour horns vibrate and shift as if made of clay, reforming into two small bovine nubs.", false);
-					player.hornType = HORNS_COW_MINOTAUR;
-					player.horns = 2;
+					setHornType(HORNS_COW_MINOTAUR, 2);
 					changes++;
 				}
 			}
@@ -5055,7 +5041,7 @@ import classes.CockTypesEnum;
 			if (changes < changeLimit && player.hairType == 4 && rand(2) == 0) {
 				//-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
 				outputText("\n\nAs you down the potent ale, your head begins to feel heavier - and not just from the alcohol!  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels smooth, silky, and fibrous; you watch as it dissolves into many thin, hair-like strands.  <b>Your hair is now back to normal!</b>", false);
-				player.hairType = HAIR_NORMAL;
+				setHairType(HAIR_NORMAL);
 				changes++;
 			}
 			//Shrink
@@ -5115,7 +5101,7 @@ import classes.CockTypesEnum;
 			//Removes wings!
 			if ((player.wingType == WING_TYPE_BEE_LIKE_SMALL || player.wingType == WING_TYPE_BEE_LIKE_LARGE || player.wingType >= WING_TYPE_HARPY) && player.wingType != WING_TYPE_GARGOYLE_LIKE_LARGE && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYour shoulders tingle, feeling lighter.  Something lands behind you with a 'thump', and when you turn to look you see your wings have fallen off.  This might be the best (and worst) booze you've ever had!  <b>You no longer have wings!</b>", false);
-				player.wingType = WING_TYPE_NONE;
+				setWingType(WING_TYPE_NONE, "non-existant");
 				changes++;
 			}
 			//Removes antennaes!
@@ -5163,14 +5149,14 @@ import classes.CockTypesEnum;
 			//Face!
 			if (player.faceType != FACE_HUMAN && changes < changeLimit && rand(4) == 0 && player.earType == EARS_ELFIN) {
 				changes++;
-				player.faceType = FACE_HUMAN;
+				setFaceType(FACE_HUMAN);
 				outputText("\n\nAnother violent sneeze escapes you.  It hurt!  You feel your nose and discover your face has changed back into a more normal look.  <b>You have a human looking face again!</b>", false);
 			}
 			//Ears!
 			if (player.earType != EARS_ELFIN && player.skinType != SKIN_TYPE_STONE && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nA weird tingling runs through your scalp as your " + hairDescript() + " shifts slightly.  You reach up to touch and bump <b>your new pointed elfin ears</b>.  You bet they look cute!", false);
 				changes++;
-				player.earType = EARS_ELFIN;
+				setEarType(EARS_ELFIN);
 			}
 			// Remove gills
 			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
@@ -5230,18 +5216,18 @@ import classes.CockTypesEnum;
 			//Remove wings
 			if (player.wingType > WING_TYPE_NONE) {
 				outputText("\n\nYou sigh, feeling a hot wet tingling down your back.  It tickles slightly as you feel your wings slowly turn to sludge, dripping to the ground as your body becomes more goo-like.", false);
-				player.wingType = WING_TYPE_NONE;
+				setWingType(WING_TYPE_NONE, "non-existant");
 				return;
 			}
 			//Human face
 			if (player.faceType != FACE_HUMAN && rand(2) == 0) {
 				outputText("\n\nAnother violent sneeze escapes you.  It hurt!  You feel your nose and discover your face has changed back into a more normal look.  <b>You have a human looking face again!</b>", false);
-				player.faceType = FACE_HUMAN;
+				setFaceType(FACE_HUMAN);
 				return;
 			}
 			//Goopy hair
 			if (player.hairType != 3 && player.skinType != SKIN_TYPE_STONE) {
-				player.hairType = 3;
+				setHairType(HAIR_GOO);
 				//if bald
 				if (player.hairLength <= 0) {
 					outputText("\n\nYour head buzzes pleasantly, feeling suddenly hot and wet.  You instinctively reach up to feel the source of your wetness, and discover you've grown some kind of gooey hair.  From time to time it drips, running down your back to the crack of your " + buttDescript() + ".", false);
@@ -5293,7 +5279,7 @@ import classes.CockTypesEnum;
 					player.tallness = 36;
 					outputText("  The goo firms up and you return to your previous height.  It would truly be hard to get any shorter than you already are!", false);
 				}
-				player.lowerBody = LOWER_BODY_TYPE_GOO;
+				setLowerBody(LOWER_BODY_TYPE_GOO);
 				player.legCount = 1;
 				return;
 			}
@@ -5427,12 +5413,8 @@ import classes.CockTypesEnum;
 			if (player.faceType != FACE_SHARK_TEETH && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\n", false);
 				if (player.faceType > FACE_HUMAN && player.faceType != FACE_SHARK_TEETH) outputText("Your " + player.face() + " explodes with agony, reshaping into a more human-like visage.  ", false);
-				player.faceType = FACE_SHARK_TEETH;
 				outputText("You firmly grasp your mouth, an intense pain racking your oral cavity. Your gums shift around and the bones in your jaw reset. You blink a few times wondering what just happened. You move over to a puddle to catch sight of your reflection, and you are thoroughly surprised by what you see. A set of retractable shark fangs have grown in front of your normal teeth, and your face has elongated slightly to accommodate them!  They even scare you a little.\n(Gain: 'Bite' special attack)", false);
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedSharkTeeth)) {
-					outputText("\n\n<b>Genetic Memory: Shark Teeth - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedSharkTeeth, 0, 0, 0, 0);
-				}
+				setFaceType(FACE_SHARK_TEETH);
 				changes++;
 			}
 			//Remove odd eyes
@@ -5445,19 +5427,11 @@ import classes.CockTypesEnum;
 				changes++;
 				if (player.tailType == TAIL_TYPE_NONE) outputText("\n\nJets of pain shoot down your spine, causing you to gasp in surprise and fall to your hands and knees. Feeling a bulging at the end of your back, you lower your [armor] down just in time for a fully formed shark tail to burst through. You swish it around a few times, surprised by how flexible it is. After some modifications to your clothing, you're ready to go with your brand new shark tail.", false);
 				else outputText("\n\nJets of pain shoot down your spine into your tail.  You feel the tail bulging out until it explodes into a large and flexible shark-tail.  You swish it about experimentally, and find it quite easy to control.", false);
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedSharkTail)) {
-					outputText("\n\n<b>Genetic Memory: Shark Tail - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedSharkTail, 0, 0, 0, 0);
-				}
-				player.tailType = TAIL_TYPE_SHARK;
+				setTailType(TAIL_TYPE_SHARK);
 			}
 			//Gills TF
 			if (player.gillType != GILLS_FISH && player.tailType == TAIL_TYPE_SHARK && player.faceType == FACE_SHARK_TEETH && changes < changeLimit && rand(3) == 0)
 				updateGills(GILLS_FISH);
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFishGills)) {
-					outputText("\n\n<b>Genetic Memory: Fish Gills - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedFishGills, 0, 0, 0, 0);
-				}
 			//Hair
 			if (player.hairColor != "silver" && player.tailType != TAIL_TYPE_GARGOYLE && rand(4) == 0 && changes < changeLimit) {
 				changes++;
@@ -5489,11 +5463,7 @@ import classes.CockTypesEnum;
 			//Legs
 			if (player.lowerBody == LOWER_BODY_TYPE_HUMAN && player.lowerBody != LOWER_BODY_TYPE_SHARK && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou feel something change in your feets as webing form between your toes. Well this is sure to help you swim faster. <b>You now have webed feet!</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_SHARK;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedSharkLegs)) {
-					outputText("\n\n<b>Genetic Memory: Shark Legs - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedSharkLegs, 0, 0, 0, 0);
-				}
+				setLowerBody(LOWER_BODY_TYPE_SHARK);
 				changes++;
 			}
 			if (player.lowerBody != LOWER_BODY_TYPE_SHARK && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
@@ -5503,22 +5473,14 @@ import classes.CockTypesEnum;
 			//Arms
 			if (player.lowerBody == LOWER_BODY_TYPE_SHARK && !InCollection(player.armType, ARM_TYPE_SHARK, ARM_TYPE_GARGOYLE) && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou watch, spellbound, while your arms gradually changing it entire outer structure into plain human-like form with exception places between your finger which starting show signs to growing webbing. Soon after you start sweating profusely and panting loudly, feeling the space near your elbows shifting about. You hastily remove your [armor] just in time before a strange fin-like structure bursts from your forearms. You examine them carefully and make a few modifications to your [armor] to accommodate your new fins. <b>You now have shark arms.</b>", false);
-				player.armType = ARM_TYPE_SHARK;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedSharkArms)) {
-					outputText("\n\n<b>Genetic Memory: Shark Arms - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedSharkArms, 0, 0, 0, 0);
-				}
+				setArmType(ARM_TYPE_SHARK);
 				changes++;
 			}
 			//FINZ
 			if (player.rearBody != REAR_BODY_SHARK_FIN && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\n", false);
 				outputText("You groan and slump down in pain, almost instantly regretting eating the tooth. You start sweating profusely and panting loudly, feeling the space between your shoulder blades shifting about. You hastily remove your [armor] just in time before a strange fin-like structure bursts from in-between your shoulders. You examine it carefully and make a few modifications to your [armor] to accommodate your new fin.", false);
-				player.rearBody = REAR_BODY_SHARK_FIN;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedSharkFin)) {
-					outputText("\n\n<b>Genetic Memory: Shark Fin - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedSharkFin, 0, 0, 0, 0);
-				}
+				setRearBody(REAR_BODY_SHARK_FIN);
 				changes++;
 			}
 			if (changes == 0) {
@@ -5588,7 +5550,7 @@ import classes.CockTypesEnum;
 			if (changes == 0 && player.tongueType != TONUGE_SNAKE && player.wingType != WING_TYPE_GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
 				if (player.tongueType == TONUGE_HUMAN) outputText("\n\nYour taste-buds start aching as they swell to an uncomfortably large size. Trying to understand what in the world could have provoked such a reaction, you bring your hands up to your mouth, your tongue feeling like it's trying to push its way past your lips. The soreness stops and you stick out your tongue to try and see what would have made it feel the way it did. As soon as you stick your tongue out you realize that it sticks out much further than it did before, and now appears to have split at the end, creating a forked tip. The scents in the air are much more noticeable to you with your snake-like tongue.", false);
 				else outputText("\n\nYour inhuman tongue shortens, pulling tight in the very back of your throat.  After a moment the bunched-up tongue-flesh begins to flatten out, then extend forwards.  By the time the transformation has finished, your tongue has changed into a long, forked snake-tongue.", false);
-				player.tongueType = TONUGE_SNAKE;
+				setTongueType(TONUGE_SNAKE);
 				dynStats("sen", 5);
 				changes++;
 			}
@@ -5598,7 +5560,7 @@ import classes.CockTypesEnum;
 				if (player.faceType != FACE_HUMAN && player.faceType != FACE_SHARK_TEETH && player.faceType != FACE_BUNNY && player.faceType != FACE_SPIDER_FANGS) {
 					outputText("  As the change progresses, your " + player.face() + " reshapes.  The sensation is far more pleasant than teeth cutting into gums, and as the tingling transformation completes, <b>you've gained with a normal-looking, human visage.</b>");
 				}
-				player.faceType = FACE_SNAKE_FANGS;
+				setFaceType(FACE_SNAKE_FANGS);
 				if (player.tailRecharge < 5) player.tailRecharge = 5;
 				changes++;
 			}
@@ -5618,7 +5580,7 @@ import classes.CockTypesEnum;
 				outputText("\n\nWondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs.", false);
 				if (player.balls > 0 && player.ballSize > 10) outputText("  You're happy not to have to drag those testicles around with you anymore.", false);
 				outputText("  But then, scales start to form on the surface of your skin, slowly becoming visible, recoloring all of your body from the waist down in a snake-like pattern. The feeling is... not that bad actually, kind of like callous, except on your whole lower body. The transformation complete, you get up, standing on your newly formed snake tail. You can't help feeling proud of this majestic new body of yours.", false);
-				player.lowerBody = LOWER_BODY_TYPE_NAGA;
+				setLowerBody(LOWER_BODY_TYPE_NAGA);
 				player.legCount = 1;
 				changes++;
 			}
@@ -5645,7 +5607,7 @@ import classes.CockTypesEnum;
 			}
 			//Snake eyes
 			if (player.skinType == SKIN_TYPE_PARTIAL_SCALES && player.eyeType != EYES_SNAKE && rand(4) == 0 && changes < changeLimit) {
-				player.eyeType = EYES_SNAKE;
+				setEyeType(EYES_SNAKE);
 				outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a snake.  <b>You now have snake eyes!</b>.", false);
 				changes++;
 			}
@@ -5653,7 +5615,7 @@ import classes.CockTypesEnum;
 			if (player.earType != EARS_SNAKE && player.eyeType == EYES_SNAKE && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nA weird tingling runs through your scalp as your " + hairDescript() + " shifts slightly.  You reach up to touch and bump <b>your new pointed ears covered in small scales</b>.  You bet they look cute!", false);
 				changes++;
-				player.earType = EARS_SNAKE;
+				setEarType(EARS_SNAKE);
 			}
 			// Remove gills
 			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
@@ -5711,7 +5673,7 @@ import classes.CockTypesEnum;
 			if (changes == 0 && player.tongueType != TONUGE_SNAKE && player.wingType != WING_TYPE_GARGOYLE_LIKE_LARGE && rand(3) == 0 && changes < changeLimit) {
 				if (player.tongueType == TONUGE_HUMAN) outputText("\n\nYour taste-buds start aching as they swell to an uncomfortably large size. Trying to understand what in the world could have provoked such a reaction, you bring your hands up to your mouth, your tongue feeling like it's trying to push its way past your lips. The soreness stops and you stick out your tongue to try and see what would have made it feel the way it did. As soon as you stick your tongue out you realize that it sticks out much further than it did before, and now appears to have split at the end, creating a forked tip. The scents in the air are much more noticeable to you with your snake-like tongue.", false);
 				else outputText("\n\nYour inhuman tongue shortens, pulling tight in the very back of your throat.  After a moment the bunched-up tongue-flesh begins to flatten out, then extend forwards.  By the time the transformation has finished, your tongue has changed into a long, forked snake-tongue.", false);
-				player.tongueType = TONUGE_SNAKE;
+				setTongueType(TONUGE_SNAKE);
 				dynStats("sen", 5);
 				changes++;
 			}
@@ -5721,7 +5683,7 @@ import classes.CockTypesEnum;
 				if (player.faceType != FACE_HUMAN && player.faceType != FACE_SHARK_TEETH && player.faceType != FACE_BUNNY && player.faceType != FACE_SPIDER_FANGS) {
 					outputText("  As the change progresses, your " + player.face() + " reshapes.  The sensation is far more pleasant than teeth cutting into gums, and as the tingling transformation completes, <b>you've gained with a normal-looking, human visage.</b>");
 				}
-				player.faceType = FACE_SNAKE_FANGS;
+				setFaceType(FACE_SNAKE_FANGS);
 				if (player.tailRecharge < 5) player.tailRecharge = 5;
 				changes++;
 			}
@@ -5738,7 +5700,7 @@ import classes.CockTypesEnum;
 				outputText("\n\nWondering what happened to your sex, you pass your hand down the front of your body until you find a large, horizontal slit around your pelvic area, which contains all of your sexual organs.", false);
 				if (player.balls > 0 && player.ballSize > 10) outputText("  You're happy not to have to drag those testicles around with you anymore.", false);
 				outputText("  But then, scales start to form on the surface of your skin, slowly becoming visible, recoloring all of your body from the waist down in a snake-like pattern. The feeling is... not that bad actually, kind of like callous, except on your whole lower body. The transformation complete, you get up, standing on your <b>newly formed snake tail.</b> You can't help feeling proud of this majestic new body of yours.", false);
-				player.lowerBody = LOWER_BODY_TYPE_NAGA;
+				setLowerBody(LOWER_BODY_TYPE_NAGA);
 				player.legCount = 1;
 				changes++;
 			}
@@ -5763,7 +5725,7 @@ import classes.CockTypesEnum;
 			}
 			//Snake eyes
 			if (player.skinType == SKIN_TYPE_PARTIAL_SCALES && player.eyeType != EYES_SNAKE && player.eyeType != EYES_GORGON && rand(4) == 0 && changes < changeLimit) {
-				player.eyeType = EYES_SNAKE;
+				setEyeType(EYES_SNAKE);
 				outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a snake.  <b>You now have snake eyes!</b>.", false);
 				changes++;
 			}
@@ -5771,7 +5733,7 @@ import classes.CockTypesEnum;
 			if ((type == 0 || type == 2) && player.earType != EARS_SNAKE && player.eyeType == EYES_SNAKE && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nA weird tingling runs through your scalp as your " + hairDescript() + " shifts slightly.  You reach up to touch and bump <b>your new pointed ears covered in small scales</b>.  You bet they look cute!", false);
 				changes++;
-				player.earType = EARS_SNAKE;
+				setEarType(EARS_SNAKE);
 			}
 			//Gorgon hair
 			if (type == 0 && player.earType == EARS_SNAKE && player.hairType != HAIR_GORGON && changes < changeLimit && rand(4) == 0) {
@@ -5782,12 +5744,12 @@ import classes.CockTypesEnum;
 				}
 				outputText(" What even more worrisome seems at the ends of each strands form something that is similar to very small snake head.  Taking one of your hair 'strands' confirm your suspicions.  Your hair turned into bunch of tiny snakes similary to those possesed normaly by gorgons.  <b>Your hair turned into thin snakes replacing your current hair!</b>", false);
 				if (player.hairLength < 6) player.hairLength = 6;
-				player.hairType = HAIR_GORGON;
+				setHairType(HAIR_GORGON);
 				changes++;
 			}
 			//Gorgon eyes
 			if (type == 0 && player.hairType == HAIR_GORGON && player.eyeType == EYES_SNAKE && player.eyeType != EYES_GORGON && rand(4) == 0 && changes < changeLimit) {
-				player.eyeType = EYES_GORGON;
+				setEyeType(EYES_GORGON);
 				outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, all seems to be fine until at least it seems so. But when moment later, when you casualy look at your hands pondering if there is drinking this vial of oil maybe have some other effect the numbing sensation starts to spread starting from your hands fingers. Worried you focus your gaze at them to notice, that they typical texture becoming grey colored much similar to that of... stone? And slowy you realize the more you look at them, the faster change. Panicked for a moment you look away and then this numbing feeling starting to slowly receed. But looking back at them causing it to return. After moment, and closing eyelids, you conclude that your eyes must have gained an useful ability.  <b>Your eyes has turned into gorgon eyes.</b>.", false);
 				changes++;
 			}
@@ -5800,12 +5762,11 @@ import classes.CockTypesEnum;
 						//High quantity demon horns
 						if (player.hornType == HORNS_DEMON && player.horns > 4) {
 							outputText("\n\nYour horns condense, twisting around each other and merging into larger, pointed protrusions.  By the time they finish you have four draconic-looking horns, each about twelve inches long.", false);
-							player.horns = 12;
-							player.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
+							setHornType(HORNS_DRACONIC_X4_12_INCH_LONG, 12);
 						}
 						else {
 							outputText("\n\nYou feel your horns changing and warping, and reach back to touch them.  They have a slight curve and a gradual taper.  They must look something like the horns the dragons in your village's legends always had.", false);
-							player.hornType = HORNS_DRACONIC_X2;
+							setHornType(HORNS_DRACONIC_X2);
 							if (player.horns > 13) {
 								outputText("  The change seems to have shrunken the horns, they're about a foot long now.", false);
 								player.horns = 12;
@@ -5817,8 +5778,7 @@ import classes.CockTypesEnum;
 					else {
 						//-If no horns, grow a pair
 						outputText("\n\nWith painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns.  They're angled back in such a way as to resemble those you saw on the dragons in your village's legends.  A few inches of horn sprout from your head before stopping.  <b>You have about four inches of dragon-like horn.</b>", false);
-						player.horns = 4;
-						player.hornType = HORNS_DRACONIC_X2;
+						setHornType(HORNS_DRACONIC_X2, 4);
 						changes++;
 					}
 				}
@@ -5841,7 +5801,7 @@ import classes.CockTypesEnum;
 						else {
 							//--Next horn growth adds second row and brings length up to 12\"
 							outputText("\n\nA second row of horns erupts under the first, and though they are narrower, they grow nearly as long as your first row before they stop.  A sense of finality settles over you.  <b>You have as many horns as a vouivre can grow.</b>", false);
-							player.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
+							setHornType(HORNS_DRACONIC_X4_12_INCH_LONG);
 							changes++;
 						}
 					}
@@ -5849,7 +5809,7 @@ import classes.CockTypesEnum;
 			}
 			//Gain Dragon Ears
 			if (type == 1 && changes < changeLimit && rand(3) == 0 && player.eyeType == EYES_SNAKE && player.earType != EARS_DRAGON) {
-				player.earType = EARS_DRAGON;
+				setEarType(EARS_DRAGON);
 				outputText("\n\nA prickling sensation suddenly fills your ears; unpleasant, but hardly painful.  It grows and grows until you can't stand it any more, and reach up to scratch at them.  To your surprise, you find them melting away like overheated candles.  You panic as they fade into nothingness, leaving you momentarily deaf and dazed, stumbling around in confusion.  Then, all of a sudden, hearing returns to you.  Gratefully investigating, you find you now have a pair of reptilian ear-holes, one on either side of your head.  A sudden pain strikes your temples, and you feel bony spikes bursting through the sides of your head, three on either side, which are quickly sheathed in folds of skin to resemble fins.  With a little patience, you begin to adjust these fins just like ears to aid your hearing.  <b>You now have dragon ears!</b>");
 				changes++;
 			}
@@ -5857,26 +5817,22 @@ import classes.CockTypesEnum;
 			if (type == 1 && player.wingType != WING_TYPE_DRACONIC_HUGE && player.earType == EARS_DRAGON && changes < changeLimit && rand(3) == 0) {
 				if (player.wingType == WING_TYPE_NONE) {
 					outputText("\n\nYou double over as waves of pain suddenly fill your shoulderblades; your back feels like it's swelling, flesh and muscles ballooning.  A sudden sound of tearing brings with it relief and you straighten up.  Upon your back now sit small, leathery wings, not unlike a bat's. <b>You now have small dragon wings.  They're not big enough to fly with, but they look adorable.</b>");
-					player.wingType = WING_TYPE_DRACONIC_SMALL;
-					player.wingDesc = "small, draconic";
+					setWingType(WING_TYPE_DRACONIC_SMALL, "small, draconic");
 				}
 				//(If Small Dragon Wings Present)
 				else if (player.wingType == WING_TYPE_DRACONIC_SMALL) {
 					outputText("\n\nA not-unpleasant tingling sensation fills your wings, almost but not quite drowning out the odd, tickly feeling as they swell larger and stronger.  You spread them wide - they stretch further than your arms do - and beat them experimentally, the powerful thrusts sending gusts of wind, and almost lifting you off your feet.  <b>You now have fully-grown dragon wings, capable of winging you through the air elegantly!</b>");
-					player.wingType = WING_TYPE_DRACONIC_LARGE;
-					player.wingDesc = "large, draconic";
+					setWingType(WING_TYPE_DRACONIC_LARGE, "large, draconic");
 				}
 				//even larger dragon wings ^^
 				else if (player.wingType == WING_TYPE_DRACONIC_LARGE) {
 					outputText("\n\nA not-unpleasant tingling sensation again fills your wings, almost but not quite drowning out the odd, tickly feeling as they swell larger and stronger than before.  You spread them wide - they stretch now more than twice further than your arms do - and beat them experimentally, the powerful thrusts sending gusts of wind, and lifting you off your feet effortlesly.  <b>You now have fully-grown majestic dragon wings, capable of winging you through the air elegantly!</b>");
-					player.wingType = WING_TYPE_DRACONIC_HUGE;
-					player.wingDesc = "large, majestic draconic";
+					setWingType(WING_TYPE_DRACONIC_HUGE, "large, majestic draconic");
 				}
 				//(If other wings present)
 				else {
 					outputText("\n\nA sensation of numbness suddenly fills your wings.  When it dies away, they feel... different.  Looking back, you realize that they have been replaced by new, small wings, ones that you can only describe as draconic.  <b>Your wings have changed into dragon wings.</b>");
-					player.wingType = WING_TYPE_DRACONIC_SMALL;
-					player.wingDesc = "small, draconic";
+					setWingType(WING_TYPE_DRACONIC_SMALL, "small, draconic");
 				}
 				changes++;
 			}
@@ -5907,12 +5863,7 @@ import classes.CockTypesEnum;
 			//Propah Wings
 			if (type == 2 && player.wingType == WING_TYPE_NONE && changes < changeLimit && (type == 1 || player.armType == ARM_TYPE_HARPY) && rand(4) == 0) {
 				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your " + player.skinDesc + ". It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, " + player.hairColor + " wings.</b>", false);
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedHarpyWings)) {
-					outputText("\n\n<b>Genetic Memory: Harpy Wings - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedHarpyWings, 0, 0, 0, 0);
-				}
-				player.wingType = WING_TYPE_FEATHERED_LARGE;
-				player.wingDesc = "large, feathered";
+				setWingType(WING_TYPE_FEATHERED_LARGE, "large, feathered");
 				changes++;
 			}
 			//Remove old wings
@@ -5923,21 +5874,13 @@ import classes.CockTypesEnum;
 			//Feathery Arms
 			if (type == 2 && !InCollection(player.armType, ARM_TYPE_GARGOYLE, ARM_TYPE_HARPY) && player.earType == EARS_SNAKE && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nWhen you go to wipe your mouth form remains of the oil, instead of the usual texture of your " + player.skinDesc + " on your lips, you feel feathers! You look on in horror while more of the avian plumage sprouts from your " + player.skinDesc + ", covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.", false);
+				setArmType(ARM_TYPE_HARPY);
 				changes++;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedHarpyArms)) {
-					outputText("\n\n<b>Genetic Memory: Harpy Arms - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedHarpyArms, 0, 0, 0, 0);
-				}
-				player.armType = ARM_TYPE_HARPY;
 			}
 			//Feathery Hair
 			if (type == 2 && player.hairType != 1 && player.wingType == WING_TYPE_FEATHERED_LARGE && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nA tingling starts in your scalp, getting worse and worse until you're itching like mad, the feathery strands of your hair tickling your fingertips while you scratch like a dog itching a flea. When you pull back your hand, you're treated to the sight of downy fluff trailing from your fingernails. A realization dawns on you - you have feathers for hair, just like a couatl!", false);
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedHarpyHair)) {
-					outputText("\n\n<b>Genetic Memory: Harpy Hair - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedHarpyHair, 0, 0, 0, 0);
-				}
-				player.hairType = 1;
+				setHairType(HAIR_FEATHER);
 				changes++;
 			}
 			//Scales with color changes to red, green, white, blue, or black.  Rarely: purple or silver.
@@ -6040,14 +5983,12 @@ import classes.CockTypesEnum;
 			player.wingType = WING_TYPE_NONE;
 			player.wingDesc = "non-existant";
 			player.tailType = TAIL_TYPE_NONE;
-			player.tongueType = TONUGE_HUMAN;
 			player.tailRecharge = 0;
 			player.horns = 0;
 			player.hornType = HORNS_NONE;
 			player.earType = EARS_HUMAN;
 			player.skin.setBaseOnly();
 			player.tongueType = TONUGE_HUMAN;
-			player.eyeType = EYES_HUMAN;
 			if (player.fertility > 15) player.fertility = 15;
 			if (player.cumMultiplier > 50) player.cumMultiplier = 50;
 			var virgin:Boolean = false;
@@ -6177,7 +6118,7 @@ import classes.CockTypesEnum;
 			//-Human tongue
 			if (player.tongueType != TONUGE_HUMAN && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYou feel something strange inside your face as your tongue shrinks and recedes until it feels smooth and rounded.  <b>You realize your tongue has changed back into human tongue!</b>", false);
-				player.tongueType = TONUGE_HUMAN;
+				setTongueType(TONUGE_HUMAN);
 				changes++;
 			}
 			//Remove odd eyes
@@ -6205,13 +6146,13 @@ import classes.CockTypesEnum;
 				//(short)
 				else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your feathers.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer feathery!</b>", false);
 				changes++;
-				player.hairType = HAIR_NORMAL;
+				setHairType(HAIR_NORMAL);
 			}
 			//Remove anemone hair
 			if (changes < changeLimit && player.hairType == HAIR_ANEMONE && rand(3) == 0) {
 				//-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
 				outputText("\n\nYou feel something strange going in on your head. You reach your hands up to feel your tentacle-hair, only to find out that the tentacles have vanished and replaced with normal hair.  <b>Your hair is normal again!</b>");
-				player.hairType = HAIR_NORMAL;
+				setHairType(HAIR_NORMAL);
 				changes++;
 			}
 			//Remove goo hair
@@ -6219,7 +6160,7 @@ import classes.CockTypesEnum;
 				outputText("\n\nYour gooey hair begins to fall out in globs, eventually leaving you with a bald head.  Your head is not left bald for long, though.  Within moments, a full head of hair sprouts from the skin of your scalp.  <b>Your hair is normal again!</b>");
 				//Turn hair growth on.
 				flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
-				player.hairType = HAIR_NORMAL;
+				setHairType(HAIR_NORMAL);
 				changes++;
 			}
 			//Restart hair growth
@@ -6227,7 +6168,7 @@ import classes.CockTypesEnum;
 				outputText("\n\nYou feel an itching sensation in your scalp as you realize the change. <b>Your hair is growing normally again!</b>");
 				//Turn hair growth on.
 				flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
-				player.hairType = HAIR_NORMAL;
+				setHairType(HAIR_NORMAL);
 				changes++;
 			}
 			//-----------------------
@@ -6241,8 +6182,7 @@ import classes.CockTypesEnum;
 			}
 			//Removes horns
 			if (changes < changeLimit && player.horns > 0 && player.hornType != HORNS_GARGOYLE && rand(5) == 0) {
-				player.horns = 0;
-				player.hornType = HORNS_NONE;
+				setHornType(HORNS_NONE, 0);
 				if (player.hornType == HORNS_ORCHID) {
 					outputText("\n\nYour orchid flowers crumble, falling apart");
 				}
@@ -6256,14 +6196,13 @@ import classes.CockTypesEnum;
 			if (!InCollection(player.wingType, WING_TYPE_GARGOYLE_LIKE_LARGE, WING_TYPE_NONE) && rand(5) == 0 && changes < changeLimit) {
 			//	if (player.wingType == WING_TYPE_SHARK_FIN) outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into your spine.  After a moment the pain passes, though your fin is gone!", false);
 				outputText("\n\nA wave of tightness spreads through your back, and it feels as if someone is stabbing a dagger into each of your shoulder-blades.  After a moment the pain passes, though your wings are gone!", false);
-				player.wingType = WING_TYPE_NONE;
+				setWingType(WING_TYPE_NONE, "non-existant");
 				changes++;
 			}
 			//Removes tail
 			if(player.tailType > TAIL_TYPE_NONE && player.tailType != TAIL_TYPE_GARGOYLE && rand(5) == 0 && changes < changeLimit) {
 				outputText("\n\nYou feel something shifting in your backside. Then something detaches from your backside and it falls onto the ground.  <b>You no longer have a tail!</b>", false);
-				player.tailType = TAIL_TYPE_NONE;
-				player.tailCount = 0;
+				setTailType(TAIL_TYPE_NONE, 0);
 				player.tailVenom = 0;
 				player.tailRecharge = 5;
 				changes++;
@@ -6656,7 +6595,7 @@ import classes.CockTypesEnum;
 					if (rand(2) == 0) outputText("\n\nYour ears change shape, morphing into pointed, feline ears!  They swivel about reflexively as you adjust to them.  <b>You now have cat ears.</b>", false);
 					else outputText("\n\nYour ears tingle and begin to change shape. Within a few moments, they've become long and feline.  Thanks to the new fuzzy organs, you find yourself able to hear things that eluded your notice up until now. <b>You now have cat ears.</b>", false);
 				}
-				player.earType = EARS_CAT;
+				setEarType(EARS_CAT);
 				changes++;
 			}
 			//DA TAIL (IF ALREADY HAZ URZ)
@@ -6668,7 +6607,7 @@ import classes.CockTypesEnum;
 					if (temp == 2) outputText("\n\nYou feel an odd tingling in your spine and your tail bone starts to throb and then swell. Within a few moments it begins to grow, adding new bones to your spine. Before you know it, you have a tail. Just before you think it's over, the tail begins to sprout soft, glossy [skin coat.color] fur. <b>You now have a cat tail.</b>", false);
 				}
 				else outputText("\n\nYou pause and tilt your head... something feels different.  Ah, that's what it is; you turn around and look down at your tail as it starts to change shape, narrowing and sprouting glossy fur. <b>You now have a cat tail.</b>", false);
-				player.tailType = TAIL_TYPE_CAT;
+				setTailType(TAIL_TYPE_CAT);
 				changes++;
 			}
 			//Da paws (if already haz ears & tail)
@@ -6684,7 +6623,7 @@ import classes.CockTypesEnum;
 				}
 				//non hoof to cat:
 				else outputText("\n\nYou scream in agony as you feel the bones in your " + player.feet() + " break and begin to rearrange. When the pain fades, you feel surprisingly well-balanced. <b>You now have cat paws.</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_CAT;
+				setLowerBody(LOWER_BODY_TYPE_CAT);
 				player.legCount = 2;
 				changes++;
 			}
@@ -6702,13 +6641,13 @@ import classes.CockTypesEnum;
 				if (temp == 0) outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something... different. You find a puddle to view your reflection and discover <b>your face is now a cross between human and feline features.</b>", false);
 				else if (temp == 1) outputText("\n\nMind-numbing pain courses through you as you feel your facial bones rearranging.  You clutch at your face in agony as your skin crawls and shifts, your visage reshaping to replace your facial characteristics with those of a feline. <b>You now have an anthropomorphic cat-face.</b>", false);
 				else outputText("\n\nYour face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something else. <b>Your facial features rearrange to take on many feline aspects.</b>", false);
-				player.faceType = FACE_CAT;
+				setFaceType(FACE_CAT);
 				changes++;
 			}
 			//CAT TOUNGE CUZ WHY NOT?
 			if (player.faceType == FACE_CAT && player.tongueType != TONUGE_CAT && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\nYour tongue suddenly feel weird. You try to stick it out to see what’s going on and discover it changed to look similar to the tongue of a cat. At least you will be able to groom yourself properly with <b>your new cat tongue.</b>", false);
-				player.tongueType = TONUGE_CAT;
+				setTongueType(TONUGE_CAT);
 				changes++;
 			}
 			
@@ -6716,7 +6655,7 @@ import classes.CockTypesEnum;
 			if (player.tailType == TAIL_TYPE_CAT && player.earType == EARS_CAT && rand(5) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_CAT && (player.hasFur() || (player.hasCoatOfType(SKIN_COAT_SCALES) && player.dragonneScore() >= 4)) && player.faceType == FACE_CAT && player.eyeType != EYES_CAT_SLITS) {
 				//Gain cat-like eyes
 				outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.  <b>Your eyes has turned into those of cat with vertical slit</b>.", false);
-				player.eyeType = EYES_CAT_SLITS;
+				setEyeType(EYES_CAT_SLITS);
 				changes++;
 			}
 			// Remove gills
@@ -6953,20 +6892,11 @@ import classes.CockTypesEnum;
 						//High quantity demon horns
 						if (player.hornType == HORNS_DEMON && player.horns > 4) {
 							outputText("\n\nYour horns condense, twisting around each other and merging into larger, pointed protrusions.  By the time they finish you have four draconic-looking horns, each about twelve inches long.", false);
-							if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedDraconicX4)) {
-								outputText("\n\n<b>Genetic Memory: Draconic Horns (2nd pair) - Memorized!</b>\n\n");
-								player.createStatusAffect(StatusAffects.UnlockedDraconicX4, 0, 0, 0, 0);
-							}
-							player.horns = 12;
-							player.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
+							setHornType(HORNS_DRACONIC_X4_12_INCH_LONG, 12);
 						}
 						else {
 							outputText("\n\nYou feel your horns changing and warping, and reach back to touch them.  They have a slight curve and a gradual taper.  They must look something like the horns the dragons in your village's legends always had.", false);
-							if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedDraconicX2)) {
-								outputText("\n\n<b>Genetic Memory: Draconic Horns - Memorized!</b>\n\n");
-								player.createStatusAffect(StatusAffects.UnlockedDraconicX2, 0, 0, 0, 0);
-							}
-							player.hornType = HORNS_DRACONIC_X2;
+							setHornType(HORNS_DRACONIC_X2);
 							if (player.horns > 13) {
 								outputText("  The change seems to have shrunken the horns, they're about a foot long now.", false);
 								player.horns = 12;
@@ -6979,12 +6909,7 @@ import classes.CockTypesEnum;
 					else {
 						//-If no horns, grow a pair
 						outputText("\n\nWith painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns.  They're angled back in such a way as to resemble those you saw on the dragons in your village's legends.  A few inches of horn sprout from your head before stopping.  <b>You have about four inches of dragon-like horn.</b>", false);
-						if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedDraconicX2)) {
-							outputText("\n\n<b>Genetic Memory: Draconic Horns - Memorized!</b>\n\n");
-							player.createStatusAffect(StatusAffects.UnlockedDraconicX2, 0, 0, 0, 0);
-						}
-						player.horns = 4;
-						player.hornType = HORNS_DRACONIC_X2;
+						setHornType(HORNS_DRACONIC_X2, 4);
 						changes++;
 					}
 				}
@@ -7007,11 +6932,7 @@ import classes.CockTypesEnum;
 						else {
 							//--Next horn growth adds second row and brings length up to 12\"
 							outputText("\n\nA second row of horns erupts under the first, and though they are narrower, they grow nearly as long as your first row before they stop.  A sense of finality settles over you.  <b>You have as many horns as a lizan can grow.</b>", false);
-							if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedDraconicX4)) {
-								outputText("\n\n<b>Genetic Memory: Draconic Horns (2nd pair) - Memorized!</b>\n\n");
-								player.createStatusAffect(StatusAffects.UnlockedDraconicX4, 0, 0, 0, 0);
-							}
-							player.hornType = HORNS_DRACONIC_X4_12_INCH_LONG;
+							setHornType(HORNS_DRACONIC_X4_12_INCH_LONG);
 							changes++;
 						}
 					}
@@ -7043,22 +6964,14 @@ import classes.CockTypesEnum;
 				//Else –
 				else outputText("\n\nPain rips through your " + player.legs() + ", morphing and twisting them until the bones rearrange into a digitigrade configuration.  The strange legs have three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.", false);
 				outputText("  <b>You have reptilian legs and claws!</b>", false);
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedLizardLegs)) {
-					outputText("\n\n<b>Genetic Memory: Lizard Legs - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedLizardLegs, 0, 0, 0, 0);
-				}
-				player.lowerBody = LOWER_BODY_TYPE_LIZARD;
+				setLowerBody(LOWER_BODY_TYPE_LIZARD);
 				player.legCount = 2;
 				changes++;
 			}
 			//Arms
 			if (!InCollection(ARM_TYPE_GARGOYLE, ARM_TYPE_LIZARD) && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of lizard one with leathery scales and short claws replacing your fingernails.  <b>You now have a lizard arms.</b>", false);
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedLizardArms)) {
-					outputText("\n\n<b>Genetic Memory: Lizard Arms - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedLizardArms, 0, 0, 0, 0);
-				}
-				player.armType = ARM_TYPE_LIZARD;
+				setArmType(ARM_TYPE_LIZARD);
 				changes++;
 			}
 			//-Tail – sinuous lizard tail
@@ -7067,21 +6980,13 @@ import classes.CockTypesEnum;
 				if (player.tailType == TAIL_TYPE_NONE) outputText("\n\nYou drop onto the ground as your spine twists and grows, forcing the flesh above your " + assDescript() + " to bulge out.  New bones form, one after another, building a tapered, prehensile tail onto the back of your body.  <b>You now have a reptilian tail!</b>", false);
 				//Yes tail
 				else outputText("\n\nYou drop to the ground as your tail twists and grows, changing its shape in order to gradually taper to a point.  It flicks back and forth, prehensile and totally under your control.  <b>You now have a reptilian tail.</b>", false);
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedLizardTail)) {
-					outputText("\n\n<b>Genetic Memory: Lizard Tail - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedLizardTail, 0, 0, 0, 0);
-				}
-				player.tailType = TAIL_TYPE_LIZARD;
+				setTailType(TAIL_TYPE_LIZARD);
 				changes++;
 			}
 			//Lizard eyes
 			if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.eyeType == EYES_HUMAN) {
 				outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a reptile taking on a yellow hue.  <b>You now have reptilian eyes!</b>");
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedLizardEyes)) {
-					outputText("\n\n<b>Genetic Memory: Lizard Eyes - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedLizardEyes, 0, 0, 0, 0);
-				}
-				player.eyeType = EYES_REPTILIAN;
+				setEyeType(EYES_REPTILIAN);
 				changes++;
 			}
 			//Remove odd eyes
@@ -7092,11 +6997,7 @@ import classes.CockTypesEnum;
 			//-Ears become smaller nub-like openings?
 			if (player.earType != EARS_LIZARD && player.tailType == TAIL_TYPE_LIZARD && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(5) == 0) {
 				outputText("\n\nTightness centers on your scalp, pulling your ears down from their normal, fleshy shape into small, scaley bumps with holes in their centers.  <b>You have reptilian ears!</b>", false);
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedLizardEars)) {
-					outputText("\n\n<b>Genetic Memory: Lizard Ears - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedLizardEars, 0, 0, 0, 0);
-				}
-				player.earType = EARS_LIZARD;
+				setEarType(EARS_LIZARD);
 				changes++;
 			}
 			//-Scales – color changes to red, green, white, blue, or black.  Rarely: purple or silver.
@@ -7125,11 +7026,8 @@ import classes.CockTypesEnum;
 			//-Lizard-like face.
 			if (player.faceType != FACE_LIZARD && player.skinType == SKIN_TYPE_SCALES && player.earType == EARS_LIZARD && player.tailType == TAIL_TYPE_LIZARD && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(5) == 0) {
 				outputText("\n\nTerrible agony wracks your " + player.face() + " as bones crack and shift.  Your jawbone rearranges while your cranium shortens.  The changes seem to last forever; once they've finished, no time seems to have passed.  Your fingers brush against your toothy snout as you get used to your new face.  It seems <b>you have a toothy, reptilian visage now.</b>", false);
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedLizardFace)) {
-					outputText("\n\n<b>Genetic Memory: Lizard Face - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedLizardFace, 0, 0, 0, 0);
-				}
-				player.faceType = FACE_LIZARD;
+				setFaceType(FACE_LIZARD);
+				changes++;
 			}
 			// Remove gills
 			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
@@ -7315,7 +7213,7 @@ import classes.CockTypesEnum;
 				if (player.tailType == TAIL_TYPE_NONE) outputText("\n\nYou drop onto the ground as your spine twists and grows, forcing the flesh above your " + assDescript() + " to bulge out.  New bones form, one after another, building a tapered, prehensile tail onto the back of your body.  For a brief moment it tip ignite with a red-colored flame that with as little as your merely thought vanish moment later.  Still you somehow know you can set ablaze any part or whole your tail at any moment and even use it to burn enemies after lashing them with your tail.  <b>You now have a salamander tail!</b>", false);
 				//Yes tail
 				else outputText("\n\nYou drop to the ground as your tail twists and grows, changing its shape in order to gradually taper to a point.  It flicks back and forth, prehensile and totally under your control.  For a brief moment it tip ignite with a red-colored flame that with as little as your merely thought vanish moment later.  Still you somehow know you can set ablaze any part or whole your tail at any moment and even use it to burn enemies after lashing them with your tail.  <b>You now have a salamander tail.</b>", false);
-				player.tailType = TAIL_TYPE_SALAMANDER;
+				setTailType(TAIL_TYPE_SALAMANDER);
 				changes++;
 			}
 			//Legs
@@ -7329,20 +7227,20 @@ import classes.CockTypesEnum;
 				//Else –
 				else outputText("\n\nPain rips through your " + player.legs() + ", morphing and twisting them until the bones rearrange into a digitigrade configuration.  The strange legs have three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.", false);
 				outputText("  <b>You have salamander legs and claws!</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_SALAMANDER;
+				setLowerBody(LOWER_BODY_TYPE_SALAMANDER);
 				player.legCount = 2;
 				changes++;
 			}
 			//Arms
 			if (!InCollection(ARM_TYPE_GARGOYLE, ARM_TYPE_SALAMANDER) && player.lowerBody == LOWER_BODY_TYPE_SALAMANDER && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of salamander one with leathery, red scales and short claws replacing your fingernails.  <b>You now have a salamander arms.</b>", false);
-				player.armType = ARM_TYPE_SALAMANDER;
+				setArmType(ARM_TYPE_SALAMANDER);
 				changes++;
 			}
 			//Lizard eyes
 			if (changes < changeLimit && rand(3) == 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.eyeType == EYES_HUMAN) {
 				outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a reptile taking on a yellow hue.  <b>You now have reptilian eyes!</b>");
-				player.eyeType = EYES_REPTILIAN;
+				setEyeType(EYES_REPTILIAN);
 				changes++;
 			}
 			//Remove odd eyes
@@ -7353,7 +7251,7 @@ import classes.CockTypesEnum;
 			//Fanged face
 			if (player.faceType == FACE_HUMAN && player.faceType != FACE_SALAMANDER_FANGS && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYour tooth's suddenly hurt as you feel them changing. Your canines getting sharper and more adapted to eating meat.  <b>You now have fangs.</b>", false);
-				player.faceType = FACE_SALAMANDER_FANGS;
+				setFaceType(FACE_SALAMANDER_FANGS);
 				changes++;
 			}
 			if (player.faceType != FACE_HUMAN && player.faceType != FACE_SALAMANDER_FANGS && changes < changeLimit && rand(4) == 0) {
@@ -7603,7 +7501,7 @@ import classes.CockTypesEnum;
 				if (player.tailType == TAIL_TYPE_NONE) outputText("\n\nYou drop onto the ground as your spine twists and grows, forcing the flesh above your " + assDescript() + " to bulge out.  New bones form, one after another, building a tapered, prehensile tail onto the back of your body.  For a brief moment it tip ignite with a red-colored flame that with as little as your merely thought vanish moment later.  Still you somehow know you can set ablaze any part or whole your tail at any moment and even use it to burn enemies after lashing them with your tail.  <b>You now have a salamander tail!</b>", false);
 				//Yes tail
 				else outputText("\n\nYou drop to the ground as your tail twists and grows, changing its shape in order to gradually taper to a point.  It flicks back and forth, prehensile and totally under your control.  For a brief moment it tip ignite with a red-colored flame that with as little as your merely thought vanish moment later.  Still you somehow know you can set ablaze any part or whole your tail at any moment and even use it to burn enemies after lashing them with your tail.  <b>You now have a salamander tail.</b>", false);
-				player.tailType = TAIL_TYPE_SALAMANDER;
+				setTailType(TAIL_TYPE_SALAMANDER);
 				changes++;
 			}
 			//Legs
@@ -7617,7 +7515,7 @@ import classes.CockTypesEnum;
 				//Else –
 				else outputText("\n\nPain rips through your " + player.legs() + ", morphing and twisting them until the bones rearrange into a digitigrade configuration.  The strange legs have three-toed, clawed feet, complete with a small vestigial claw-toe on the back for added grip.", false);
 				outputText("  <b>You have salamander legs and claws!</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_SALAMANDER;
+				setLowerBody(LOWER_BODY_TYPE_SALAMANDER);
 				player.legCount = 2;
 				changes++;
 			}
@@ -7625,13 +7523,12 @@ import classes.CockTypesEnum;
 			if (!InCollection(ARM_TYPE_GARGOYLE, ARM_TYPE_PHOENIX) && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_SALAMANDER && rand(4) == 0) {
 				outputText("\n\nYou smile impishly as you lick the remains of the liqueur from your teeth, but when you go to wipe your mouth, instead of the usual texture of your " + player.skinDesc + " on your lips, you feel feathers! You look on in horror while more of the crimson colored avian plumage sprouts from your " + player.skinDesc + ", covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.", false);
 				changes++;
-				player.armType = ARM_TYPE_PHOENIX;
+				setArmType(ARM_TYPE_PHOENIX);
 			}
 			//Wings
 			if (player.wingType == WING_TYPE_NONE && changes < changeLimit && player.armType == ARM_TYPE_PHOENIX && rand(4) == 0) {
 				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your " + player.skinDesc + ". It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, crimson wings.</b>", false);
-				player.wingType = WING_TYPE_FEATHERED_PHOENIX;
-				player.wingDesc = "large crimson feathered";
+				setWingType(WING_TYPE_FEATHERED_PHOENIX, "large crimson feathered");
 				changes++;
 			}
 			//Remove old wings
@@ -7642,17 +7539,13 @@ import classes.CockTypesEnum;
 			//-Feathery Hair
 			if (player.hairType != 1 && changes < changeLimit && player.faceType == FACE_HUMAN && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(4) == 0) {
 				outputText("\n\nA tingling starts in your scalp, getting worse and worse until you're itching like mad, the feathery strands of your hair tickling your fingertips while you scratch like a dog itching a flea. When you pull back your hand, you're treated to the sight of downy fluff trailing from your fingernails. A realization dawns on you - you have feathers for hair, just like a harpy!", false);
-				player.hairType = 1;
+				setHairType(HAIR_FEATHER);
 				changes++;
 			}
 			//Lizard eyes
 			if (changes < changeLimit && rand(4) == 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.eyeType == EYES_HUMAN) {
 				outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a reptile taking on a yellow hue.  <b>You now have reptilian eyes!</b>");
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedLizardEyes)) {
-					outputText("\n\n<b>Genetic Memory: Lizard Eyes - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedLizardEyes, 0, 0, 0, 0);
-				}
-				player.eyeType = EYES_REPTILIAN;
+				setEyeType(EYES_REPTILIAN);
 				changes++;
 			}
 			//Remove odd eyes
@@ -7971,7 +7864,7 @@ import classes.CockTypesEnum;
 					outputText(" while the change works its way through you.  Once it finishes, <b>you discover that you now have fuzzy bunny feet and legs</b>!", false);
 				}
 				changes++;
-				player.lowerBody = LOWER_BODY_TYPE_BUNNY;
+				setLowerBody(LOWER_BODY_TYPE_BUNNY);
 				player.legCount = 2;
 			}
 			//BUN FACE!  REQUIREZ EARZ
@@ -7982,19 +7875,19 @@ import classes.CockTypesEnum;
 				if (player.faceType == FACE_HUMAN || player.faceType == FACE_SHARK_TEETH) outputText("You catch your nose twitching on its own at the bottom of your vision, but as soon as you focus on it, it stops.  A moment later, some of your teeth tingle and brush past your lips, exposing a white pair of buckteeth!  <b>Your face has taken on some rabbit-like characteristics!</b>", false);
 				//Crazy furry TF shit
 				else outputText("You grunt as your " + player.face() + " twists and reforms.  Even your teeth ache as their positions are rearranged to match some new, undetermined order.  When the process finishes, <b>you're left with a perfectly human looking face, save for your constantly twitching nose and prominent buck-teeth.</b>", false);
-				player.faceType = FACE_BUNNY;
+				setFaceType(FACE_BUNNY);
 			}
 			//DAH BUNBUN EARZ - requires poofbutt!
 			if (player.earType != EARS_BUNNY && changes < changeLimit && rand(3) == 0 && player.tailType == TAIL_TYPE_RABBIT) {
 				outputText("\n\nYour ears twitch and curl in on themselves, sliding around on the flesh of your head.  They grow warmer and warmer before they finally settle on the top of your head and unfurl into long, fluffy bunny-ears.  <b>You now have a pair of bunny ears.</b>", false);
-				player.earType = EARS_BUNNY;
+				setEarType(EARS_BUNNY);
 				changes++;
 			}
 			//DAH BUNBUNTAILZ
 			if (player.tailType != TAIL_TYPE_RABBIT && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(2) == 0 && changes < changeLimit) {
 				if (player.tailType > TAIL_TYPE_NONE) outputText("\n\nYour tail burns as it shrinks, pulling tighter and tighter to your backside until it's the barest hint of a stub.  At once, white, poofy fur explodes out from it.  <b>You've got a white bunny-tail!  It even twitches when you aren't thinking about it.</b>", false);
 				else outputText("\n\nA burning pressure builds at your spine before dissipating in a rush of relief. You reach back and discover a small, fleshy tail that's rapidly growing long, poofy fur.  <b>You have a rabbit tail!</b>", false);
-				player.tailType = TAIL_TYPE_RABBIT;
+				setTailType(TAIL_TYPE_RABBIT);
 				changes++;
 			}
 			// Remove gills
@@ -8100,7 +7993,7 @@ import classes.CockTypesEnum;
 			if (changes < changeLimit && player.hairType == 4 && rand(2) == 0) {
 				//-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
 				outputText("\n\nAs you down the seed, your head begins to feel heavier.  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels soft and fluffy, almost feathery; you watch as it dissolves into many thin, feathery strands.  <b>Your hair is now like that of a harpy!</b>", false);
-				player.hairType = 1;
+				setHairType(HAIR_FEATHER);
 				changes++;
 			}
 			//-Strength increase to 70
@@ -8298,11 +8191,7 @@ import classes.CockTypesEnum;
 				if (!player.isGoo()) outputText("\n\nYour " + player.legs() + " creak ominously a split-second before they go weak and drop you on the ground. They go completely limp, twisting and reshaping before your eyes in ways that make you wince. Your lower body eventually stops, but the form it's settled on is quite thick in the thighs. Even your " + player.feet() + " have changed.  ", false);
 				//goo
 				else outputText("\n\nYour gooey undercarriage loses some of its viscosity, dumping you into the puddle that was once your legs. As you watch, the fluid pulls together into a pair of distinctly leg-like shapes, solidifying into a distinctly un-gooey form. You've even regained a pair of feet!  ", false);
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedHarpyLegs)) {
-					outputText("\n\n<b>Genetic Memory: Harpy Legs - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedHarpyLegs, 0, 0, 0, 0);
-				}
-				player.lowerBody = LOWER_BODY_TYPE_HARPY;
+				setLowerBody(LOWER_BODY_TYPE_HARPY);
 				player.legCount = 2;
 				changes++;
 				//(cont)
@@ -8314,22 +8203,13 @@ import classes.CockTypesEnum;
 				if (player.tailType > TAIL_TYPE_NONE) outputText("\n\nYour tail shortens, folding into the crack of your " + buttDescript() + " before it disappears. A moment later, a fan of feathers erupts in its place, fluffing up and down instinctively every time the breeze shifts. <b>You have a feathery harpy tail!</b>", false);
 				//(no tail)
 				else outputText("\n\nA tingling tickles the base of your spine, making you squirm in place. A moment later, it fades, but a fan of feathers erupts from your " + player.skinDesc + " in its place. The new tail fluffs up and down instinctively with every shift of the breeze. <b>You have a feathery harpy tail!</b>", false);
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedHarpyTail)) {
-					outputText("\n\n<b>Genetic Memory: Harpy Tail - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedHarpyTail, 0, 0, 0, 0);
-				}
-				player.tailType = TAIL_TYPE_HARPY;
+				setTailType(TAIL_TYPE_HARPY);
 				changes++;
 			}
 			//-Propah Wings
 			if (player.wingType == WING_TYPE_NONE && changes < changeLimit && (type == 1 || player.armType == ARM_TYPE_HARPY) && rand(4) == 0) {
 				outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your " + player.skinDesc + ". It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, " + player.hairColor + " wings.</b>", false);
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedHarpyWings)) {
-					outputText("\n\n<b>Genetic Memory: Harpy Wings - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedHarpyWings, 0, 0, 0, 0);
-				}
-				player.wingType = WING_TYPE_FEATHERED_LARGE;
-				player.wingDesc = "large, feathered";
+				setWingType(WING_TYPE_FEATHERED_LARGE, "large, feathered");
 				changes++;
 			}
 			//-Remove old wings
@@ -8340,21 +8220,13 @@ import classes.CockTypesEnum;
 			//-Feathery Arms
 			if (!InCollection(player.armType, ARM_TYPE_GARGOYLE, ARM_TYPE_HARPY) && changes < changeLimit && (type == 1 || player.hairType == 1) && rand(4) == 0) {
 				outputText("\n\nYou smile impishly as you lick the last bits of the nut from your teeth, but when you go to wipe your mouth, instead of the usual texture of your " + player.skinDesc + " on your lips, you feel feathers! You look on in horror while more of the avian plumage sprouts from your " + player.skinDesc + ", covering your forearms until <b>your arms look vaguely like wings</b>. Your hands remain unchanged thankfully. It'd be impossible to be a champion without hands! The feathery limbs might help you maneuver if you were to fly, but there's no way they'd support you alone.", false);
+				setArmType(ARM_TYPE_HARPY);
 				changes++;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedHarpyArms)) {
-					outputText("\n\n<b>Genetic Memory: Harpy Arms - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedHarpyArms, 0, 0, 0, 0);
-				}
-				player.armType = ARM_TYPE_HARPY;
 			}
 			//-Feathery Hair
 			if (player.hairType != 1 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && (type == 1 || player.faceType == FACE_HUMAN) && rand(4) == 0) {
 				outputText("\n\nA tingling starts in your scalp, getting worse and worse until you're itching like mad, the feathery strands of your hair tickling your fingertips while you scratch like a dog itching a flea. When you pull back your hand, you're treated to the sight of downy fluff trailing from your fingernails. A realization dawns on you - you have feathers for hair, just like a harpy!", false);
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedHarpyHair)) {
-					outputText("\n\n<b>Genetic Memory: Harpy Hair - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedHarpyHair, 0, 0, 0, 0);
-				}
-				player.hairType = 1;
+				setHairType(HAIR_FEATHER);
 				changes++;
 			}
 			//-Human face
@@ -8491,7 +8363,7 @@ import classes.CockTypesEnum;
 				//(short)
 				else outputText("\n\nYou run your fingers through your downy-soft feather-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your feathers.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer feathery!</b>", false);
 				changes++;
-				player.hairType = HAIR_NORMAL;
+				setHairType(HAIR_NORMAL);
 			}
 			//-Remove leaf hair (copy for equinum, canine peppers, Labova)
 			if (changes < changeLimit && player.hairType == 7 && rand(4) == 0) {
@@ -8500,7 +8372,7 @@ import classes.CockTypesEnum;
 				//(short)
 				else outputText("\n\nYou run your fingers through your leaf-hair while you await the effects of the item you just ingested.  While your hand is up there, it detects a change in the texture of your leafs.  They're completely disappearing, merging down into strands of regular hair.  <b>Your hair is no longer leaf-like!</b>", false);
 				changes++;
-				player.hairType = HAIR_NORMAL;
+				setHairType(HAIR_NORMAL);
 			}
 			//Remove odd eyes
 			if (changes < changeLimit && rand(5) == 0 && player.eyeType > EYES_HUMAN) {
@@ -8566,7 +8438,7 @@ import classes.CockTypesEnum;
 				//gain roo face from other snout:
 				else outputText("\n\nYour nose tingles. As you focus your eyes toward the end of it, it twitches and shifts into a muzzle similar to a stretched-out rabbit's, complete with harelip and whiskers.  <b>You now have a kangaroo face!</b>", false);
 				changes++;
-				player.faceType = FACE_KANGAROO;
+				setFaceType(FACE_KANGAROO);
 			}
 			//-Fur (Req: Footsies)
 			if (!player.hasFur() && (player.lowerBody == LOWER_BODY_TYPE_KANGAROO || type == 1) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
@@ -8585,7 +8457,7 @@ import classes.CockTypesEnum;
 				else if (player.lowerBody == LOWER_BODY_TYPE_GOO) outputText("\n\nYour mounds of goo shrink and part involuntarily, exposing your crotch.  Modesty overwhelms you and you try to pull them together, but the shrinkage is continuing faster than you can shift your gooey body around.  Before long you've run out of goo to move, and your lower body now ends in a pair of slippery digitigrade legs with long narrow feet.  They dry in the air and a bit of fur begins to sprout as you look for something to cover up with.  <b>You now have kangaroo legs!</b> You sigh.  Guess this means it's back to wearing underpants again.", false);
 				//gain roo feet from human/bee/demon/paw/lizard:
 				else outputText("\n\nYour feet begin to crack and shift as the metatarsal bones lengthen.  Your knees buckle from the pain of your bones rearranging themselves, and you fall over.  After fifteen seconds of what feels like your feet being racked, the sensation stops.  You look down at your legs; they've taken a roughly dog-leg shape, but they have extremely long feet with a prominent middle toe!  As you stand up you find that you're equally comfortable standing flat on your feet as you are on the balls of them!  <b>You now have kangaroo legs!</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_KANGAROO;
+				setLowerBody(LOWER_BODY_TYPE_KANGAROO);
 				player.legCount = 2;
 				changes++;
 			}
@@ -8604,7 +8476,7 @@ import classes.CockTypesEnum;
 				else {
 					outputText("\n\nYour tail twitches as you eat.  It begins to feel fat and swollen, and you try to look at your own butt as best you can.  What you see matches what you feel as your tail thickens and stretches out into a long cone shape.  <b>You now have a kangaroo tail!</b>", false);
 				}
-				player.tailType = TAIL_TYPE_KANGAROO;
+				setTailType(TAIL_TYPE_KANGAROO);
 				changes++;
 			}
 			//-Roo ears
@@ -8614,7 +8486,7 @@ import classes.CockTypesEnum;
 				//Everybody else?  Yeah lazy.
 				else outputText("\n\nYour ears twist painfully as though being yanked upwards and you clap your hands to your head.  Feeling them out, you discover them growing!  They stretch upwards, reaching past your fingertips, and then the tugging stops.  You cautiously feel along their lengths; they're long and stiff, but pointed outwards now, and they swivel around as you listen.  <b>You now have a pair of kangaroo ears!</b>", false);
 				changes++;
-				player.earType = EARS_KANGAROO;
+				setEarType(EARS_KANGAROO);
 			}
 			//UBEROOOO
 			//kangaroo perk: - any liquid or food intake will accelerate a pregnancy, but it will not progress otherwise
@@ -8773,11 +8645,7 @@ import classes.CockTypesEnum;
 			//(Ears become pointed if not human)
 			if (player.earType != EARS_HUMAN && player.earType != EARS_ELFIN && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nYour ears twitch once, twice, before starting to shake and tremble madly.  They migrate back towards where your ears USED to be, so long ago, finally settling down before twisting and stretching, changing to become <b>new, pointed elfin ears.</b>", false);
-				player.earType = EARS_ELFIN;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedElfinEars)) {
-					outputText("\n\n<b>Genetic Memory: Elfin Ears - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedElfinEars, 0, 0, 0, 0);
-				}
+				setEarType(EARS_ELFIN);
 				changes++;
 			}
 			//(Fur/Scales fall out replaced by chitin)
@@ -8796,7 +8664,7 @@ import classes.CockTypesEnum;
 			//(Gain human face)
 			if (player.hasCoatOfType(SKIN_COAT_CHITIN) && (player.faceType != FACE_SPIDER_FANGS && player.faceType != FACE_HUMAN) && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nWracked by pain, your face slowly reforms into a perfect human shape.  Awed by the transformation, you run your fingers delicately over the new face, marvelling at the change.  <b>You have a human face again!</b>", false);
-				player.faceType = FACE_HUMAN;
+				setFaceType(FACE_HUMAN);
 				changes++;
 			}
 			//-Remove breast rows over 2.
@@ -8831,23 +8699,15 @@ import classes.CockTypesEnum;
 			}
 			//eyes!
 			if (player.hasCoatOfType(SKIN_COAT_CHITIN) && (player.faceType != FACE_SPIDER_FANGS || player.faceType != FACE_HUMAN) && player.eyeType == EYES_HUMAN && rand(4) == 0 && changes < changeLimit) {
-				player.eyeType = EYES_FOUR_SPIDER_EYES;
-				changes++;
 				outputText("\n\nYou suddenly get the strangest case of double vision.  Stumbling and blinking around, you clutch at your face, but you draw your hands back when you poke yourself in the eye.  Wait, those fingers were on your forehead!  You tentatively run your fingertips across your forehead, not quite believing what you felt.  <b>There's a pair of eyes on your forehead, positioned just above your normal ones!</b>  This will take some getting used to!", false);
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedSpiderFourEyes)) {
-					outputText("\n\n<b>Genetic Memory: Spider Four Eyes - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedSpiderFourEyes, 0, 0, 0, 0);
-				}
+				setEyeType(EYES_FOUR_SPIDER_EYES);
 				dynStats("int", 5);
+				changes++;
 			}
 			//(Gain spider fangs)
 			if (player.faceType == FACE_HUMAN && player.hasCoatOfType(SKIN_COAT_CHITIN) && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nTension builds within your upper gum, just above your canines.  You open your mouth and prod at the affected area, pricking your finger on the sharpening tooth.  It slides down while you're touching it, lengthening into a needle-like fang.  You check the other side and confirm your suspicions.  <b>You now have a pair of pointy spider-fangs, complete with their own venom!</b>", false);
-				player.faceType = FACE_SPIDER_FANGS;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedSpiderFangs)) {
-					outputText("\n\n<b>Genetic Memory: Spider Fangs - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedSpiderFangs, 0, 0, 0, 0);
-				}
+				setFaceType(FACE_SPIDER_FANGS);
 				if (player.tailRecharge < 5) player.tailRecharge = 5;
 				changes++;
 			}
@@ -8864,11 +8724,7 @@ import classes.CockTypesEnum;
 					if (player.armType == ARM_TYPE_SALAMANDER || player.armType == ARM_TYPE_LIZARD || player.armType == ARM_TYPE_DRAGON) outputText("The scales covering your upper arms starting to fall down leaving only shiny black chitin clad arms.", false);
 					if (player.armType == ARM_TYPE_MANTIS) outputText("The long scythe extending from your wrist crumbling, while chitin covering your mantis arms slowly starting to change colors, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>.", false);
 				}
-				player.armType = ARM_TYPE_SPIDER;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedSpiderArms)) {
-					outputText("\n\n<b>Genetic Memory: Spider Arms - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedSpiderArms, 0, 0, 0, 0);
-				}
+				setArmType(ARM_TYPE_SPIDER);
 				changes++;
 			}
 			if ((player.isTaur() || player.isGoo() || player.isNaga() || player.isScylla())
@@ -8895,12 +8751,8 @@ import classes.CockTypesEnum;
 			//(Normal Biped Legs -> Carapace-Clad Legs)
 			if (((type == 1 && player.lowerBody != LOWER_BODY_TYPE_DRIDER_LOWER_BODY && player.lowerBody != LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS) || (type != 1 && player.lowerBody != LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS)) && (!player.isGoo() && !player.isNaga() && !player.isTaur() && !player.isScylla()) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nStarting at your " + player.feet() + ", a tingle runs up your " + player.legs() + ", not stopping until it reaches your thighs.  From the waist down, your strength completely deserts you, leaving you to fall hard on your " + buttDescript() + " in the dirt.  With nothing else to do, you look down, only to be mesmerized by the sight of black exoskeleton creeping up a perfectly human-looking calf.  It crests up your knee to envelop the joint in a many-faceted onyx coating.  Then, it resumes its slow upward crawl, not stopping until it has girded your thighs in glittery, midnight exoskeleton.  From a distance it would look almost like a black, thigh-high boot, but you know the truth.  <b>You now have human-like legs covered in a black, arachnid exoskeleton.</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS;
+				setLowerBody(LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS);
 				player.legCount = 2;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedSpiderLegs)) {
-					outputText("\n\n<b>Genetic Memory: Spider Legs - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedSpiderLegs, 0, 0, 0, 0);
-				}
 				changes++;
 			}
 			//(Tail becomes spider abdomen GRANT WEB ATTACK)
@@ -8910,24 +8762,16 @@ import classes.CockTypesEnum;
 				if (player.tailType > TAIL_TYPE_NONE) outputText("Your tail shudders as heat races through it, twitching violently until it feels almost as if it's on fire.  You jump from the pain at your " + buttDescript() + " and grab at it with your hands.  It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape.  The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen!  With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones.  That may prove useful.  <b>You now have a spider's abdomen hanging from above your " + buttDescript() + "!</b>\n\n", false);
 				//(No tail)
 				else outputText("A burst of pain hits you just above your " + buttDescript() + ", coupled with a sensation of burning heat and pressure.  You can feel your " + player.skinFurScales() + " tearing as something forces its way out of your body.  Reaching back, you grab at it with your hands.  It's huge... and you can feel it hardening under your touches, firming up until the whole tail has become rock-hard and spherical in shape.  The heat fades, leaving behind a gentle warmth, and you realize your tail has become a spider's abdomen!  With one experimental clench, you even discover that it can shoot webs from some of its spinnerets, both sticky and non-adhesive ones.  That may prove useful.  <b>You now have a spider's abdomen hanging from above your " + buttDescript() + "!</b>", false);
-				player.tailType = TAIL_TYPE_SPIDER_ADBOMEN;
+				setTailType(TAIL_TYPE_SPIDER_ADBOMEN);
 				player.tailVenom = 5;
 				player.tailRecharge = 5;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedSpiderTail)) {
-					outputText("\n\n<b>Genetic Memory: Spider Abdomen - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedSpiderTail, 0, 0, 0, 0);
-				}
 				changes++;
 			}
 			//(Drider Item Only: Carapace-Clad Legs to Drider Legs)
 			if (type == 1 && player.lowerBody == LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS && rand(4) == 0 && player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) {
 				outputText("\n\nJust like when your legs changed to those of a spider-morph, you find yourself suddenly paralyzed below the waist.  Your dark, reflective legs splay out and drop you flat on your back.   Before you can sit up, you feel tiny feelers of pain mixed with warmth and tingling running through them.  Terrified at the thought of all the horrible changes that could be wracking your body, you slowly sit up, expecting to find yourself turned into some incomprehensible monstrosity from the waist down.  As if to confirm your suspicions, the first thing you see is that your legs have transformed into eight long, spindly legs.  Instead of joining directly with your hips, they now connect with the spider-like body that has sprouted in place of where your legs would normally start.  Your abdomen has gotten even larger as well.  Once the strength returns to your new, eight-legged lower body, you struggle up onto your pointed 'feet', and wobble around, trying to get your balance.  As you experiment with your new form, you find you're even able to twist the spider half of your body down between your legs in an emulation of your old, bipedal stance.  That might prove useful should you ever want to engage in 'normal' sexual positions, particularly since your " + buttDescript() + " is still positioned just above the start of your arachnid half.  <b>You're now a drider.</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_DRIDER_LOWER_BODY;
+				setLowerBody(LOWER_BODY_TYPE_DRIDER_LOWER_BODY);
 				player.legCount = 8;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedDriderLegs)) {
-					outputText("\n\n<b>Genetic Memory: Drider Legs - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedDriderLegs, 0, 0, 0, 0);
-				}
 				changes++;
 			}
 			// Remove gills
@@ -9181,7 +9025,7 @@ import classes.CockTypesEnum;
 			//Hair
 			if (rand(4) == 0 && changes < changeLimit && player.hairType != 2) {
 				outputText("\n\nA sensation of weightlessness assaults your scalp. You reach up and grab a handful of hair, confused. Your perplexion only heightens when you actually feel the follicles becoming lighter in your grasp, before you can hardly tell you're holding anything.  Plucking a strand, you hold it up before you, surprised to see... it's completely transparent!  You have transparent hair!", false);
-				player.hairType = 2;
+				setHairType(HAIR_GHOST);
 				changes++;
 			}
 			//Skin
@@ -9273,20 +9117,19 @@ import classes.CockTypesEnum;
 			//- may randomly remove bee abdomen, if present; always checks and does so when any changes to hair might happen
 			if (rand(4) == 0 && changes < changeLimit && player.tailType == TAIL_TYPE_BEE_ABDOMEN) {
 				outputText("\n\nAs the gentle tingling of the tentacle's remaining venom spreads through your body, it begins to collect and intensify above the crack of your butt.  Looking back, you notice your abdomen shivering and contracting; with a snap, the chitinous appendage parts smoothly from your backside and falls to the ground.  <b>You no longer have a bee abdomen!</b>\n\n", false);
-				player.tailType = TAIL_TYPE_NONE;
+				setTailType(TAIL_TYPE_NONE);
 				changes++;
 			}
 			//-may randomly remove bee wings:
 			if (rand(4) == 0 && (player.wingType == WING_TYPE_BEE_LIKE_SMALL || player.wingType == WING_TYPE_BEE_LIKE_LARGE) && changes < changeLimit) {
 				outputText("\n\nYour wings twitch and flap involuntarily.  You crane your neck to look at them as best you are able; from what you can see, they seem to be shriveling and curling up.  They're starting to look a lot like they did when they first popped out, wet and new.  <b>As you watch, they shrivel all the way, then recede back into your body.</b>", false);
-				player.wingType = WING_TYPE_NONE;
-				player.wingDesc = "non-existent";
+				setWingType(WING_TYPE_NONE, "non-existent");
 				changes++;
 			}
 			//-hair morphs to anemone tentacles, retains color, hair shrinks back to med-short('shaggy') and stops growing, lengthening treatments don't work and goblins won't cut it, but more anemone items can lengthen it one level at a time
 			if (player.gillType == GILLS_ANEMONE && player.hairType != 4 && changes < changeLimit && rand(5) == 0) {
 				outputText("\n\nYour balance slides way off, and you plop down on the ground as mass concentrates on your head.  Reaching up, you give a little shriek as you feel a disturbingly thick, squirming thing where your hair should be.  Pulling it down in front of your eyes, you notice it's still attached to your head; what's more, it's the same color as your hair used to be.  <b>You now have squirming tentacles in place of hair!</b>  As you gaze at it, a gentle heat starts to suffuse your hand.  The tentacles must be developing their characteristic stingers!  You quickly let go; you'll have to take care to keep them from rubbing on your skin at all hours.  On the other hand, they're quite short and you find you can now flex and extend them as you would any other muscle, so that shouldn't be too hard.  You settle on a daring, windswept look for now.", false);
-				player.hairType = 4;
+				setHairType(HAIR_ANEMONE);
 				player.hairLength = 5;
 				if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) {
 					outputText("  <b>(Your hair has stopped growing.)</b>", false);
@@ -9493,7 +9336,7 @@ import classes.CockTypesEnum;
 			if (changes < changeLimit && player.hairType == 4 && rand(3) == 0) {
 				//-insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
 				outputText("\n\nEerie flames of the jewel migrate up your body to your head, where they cover your [hair].  Though they burned nowhere else in their lazy orbit, your head begins to heat up as they congregate.  Fearful, you raise your hands to it just as the temperature peaks, but as you touch your hair, the searing heat is suddenly gone - along with your tentacles!  <b>Your hair is normal again!</b>");
-				player.hairType = HAIR_NORMAL;
+				setHairType(HAIR_NORMAL);
 				changes++;
 			}
 			//[Adjust hair length toward range of 16-26 – very long to ass-length]
@@ -9683,22 +9526,14 @@ import classes.CockTypesEnum;
 					if (player.lowerBody == LOWER_BODY_TYPE_BEE) outputText(", while a hideous cracking fills the air");
 					outputText(".  When the spasms subside and you can once again stand, <b>you find that your legs have been changed to those of a fox!</b>");
 				}
-				player.lowerBody = LOWER_BODY_TYPE_FOX;
+				setLowerBody(LOWER_BODY_TYPE_FOX);
 				player.legCount = 2;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxLowerBody)) {
-					outputText("\n\n<b>Genetic Memory: Fox Lower Body - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedFoxLowerBody, 0, 0, 0, 0);
-				}
 				changes++;
 			}
 			//Grow Fox Arms
 			if (changes < changeLimit && player.armType == ARM_TYPE_HUMAN && player.armType != ARM_TYPE_FOX && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(2) == 0) {
 				outputText("\n\nYour arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into wolf like claws so no wonder you felt it that much. <b>You now have pawed hands.</b>", false);
-				player.armType = ARM_TYPE_FOX;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxArms)) {
-					outputText("\n\n<b>Genetic Memory: Fox Arms - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedFoxArms, 0, 0, 0, 0);
-				}
+				setArmType(ARM_TYPE_FOX);
 				changes++;
 			}
 			//Grow Fox Ears]
@@ -9712,11 +9547,7 @@ import classes.CockTypesEnum;
 				else {
 					outputText("\n\nYour ears change, shifting from their current shape to become vulpine in nature.  <b>You now have fox ears.</b>");
 				}
-				player.earType = EARS_FOX;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxEars)) {
-					outputText("\n\n<b>Genetic Memory: Fox Ears - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedFoxEars, 0, 0, 0, 0);
-				}
+				setEarType(EARS_FOX);
 				changes++;
 			}
 			//[Grow Fox Tail](fairly common)
@@ -9726,12 +9557,7 @@ import classes.CockTypesEnum;
 				if (player.tailType == TAIL_TYPE_NONE) outputText("\n\nA pressure builds on your backside.  You feel under your [armor] and discover a strange nodule growing there that seems to be getting larger by the second.  With a sudden flourish of movement, it bursts out into a long and bushy tail that sways hypnotically, as if it had a mind of its own.  <b>You now have a fox's tail!</b>");
 				//from another type of tail
 				else outputText("\n\nPain lances through your lower back as your tail shifts violently.  With one final aberrant twitch, it fluffs out into a long, bushy fox tail that whips around in an almost hypnotic fashion.  <b>You now have a fox's tail!</b>");
-				player.tailType = TAIL_TYPE_FOX;
-				player.tailCount = 1;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxTail)) {
-					outputText("\n\n<b>Genetic Memory: Fox Tail - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedFoxTail, 0, 0, 0, 0);
-				}
+				setTailType(TAIL_TYPE_FOX,1);
 				changes++;
 			}
 			//[Grow Fox Face]
@@ -9740,22 +9566,14 @@ import classes.CockTypesEnum;
 			if (player.tailType == TAIL_TYPE_FOX && player.faceType != FACE_FOX && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYour face pinches and you clap your hands to it.  Within seconds, your nose is poking through those hands, pushing them slightly to the side as new flesh and bone build and shift behind it, until it stops in a clearly defined, tapered, and familiar point you can see even without the aid of a mirror.  <b>Looks like you now have a fox's face.</b>");
 				if (silly()) outputText("  And they called you crazy...");
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxFace)) {
-					outputText("\n\n<b>Genetic Memory: Fox Face - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedFoxFace, 0, 0, 0, 0);
-				}
+				setFaceType(FACE_FOX);
 				changes++;
-				player.faceType = FACE_FOX;
 			}
 			//Fox Eyes
 			if (player.faceType == FACE_FOX && player.eyeType != EYES_FOX && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYou blink for an instant as the light and darkness seems to shift within your vision. You head to a pool to check it up and notice your pupils shifted to look more fox-like in a fashion similar to the kitsunes.  <b>You now have fox pupils.</b>");
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxEyes)) {
-					outputText("\n\n<b>Genetic Memory: Fox Eyes - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedFoxEyes, 0, 0, 0, 0);
-				}
+				setEyeType(EYES_FOX);
 				changes++;
-				player.eyeType = EYES_FOX;
 			}
 			if (player.tone > 40 && changes < changeLimit && rand(2) == 0) {
 				outputText("\n\nMoving brings with it a little more jiggle than you're used to.  You don't seem to have gained weight, but your muscles seem less visible, and various parts of you are pleasantly softer.");
@@ -9927,14 +9745,8 @@ import classes.CockTypesEnum;
 		public function foxJewel(mystic:Boolean,player:Player):void
 		{
 			clearOutput();
-			var changes:int = 0;
-			var changeLimit:int = 1;
-			if (rand(2) == 0) changeLimit++;
-			if (rand(3) == 0) changeLimit++;
+			mutationStart("foxJewel" + (mystic ? "M" : ""), 3);
 			if (mystic) changeLimit += 2;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
 			if (mystic) outputText("You examine the jewel for a bit, rolling it around in your hand as you ponder its mysteries.  You hold it up to the light with fascinated curiosity, watching the eerie purple flame dancing within.  Without warning, the gem splits down the center, dissolving into nothing in your hand.  As the pale lavender flames swirl around you, the air is filled with a sickly sweet scent that drips with the bitter aroma of licorice, filling you with a dire warmth.");
 			else outputText("You examine the jewel for a bit, rolling it around in your hand as you ponder its mysteries.  You hold it up to the light with fascinated curiosity, watching the eerie blue flame dancing within.  Without warning, the gem splits down the center, dissolving into nothing in your hand.  As the pale azure flames swirl around you, the air is filled with a sweet scent that drips with the aroma of wintergreen, sending chills down your spine.");
 
@@ -9942,37 +9754,34 @@ import classes.CockTypesEnum;
 			//BASIC STATS
 			//**********************
 			//[increase Intelligence, Libido and Sensitivity]
-			if (player.inte < 100 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(4) == 0))) {
+			mutationStep(player.inte < 100, mystic ? 2 : 4, function ():void {
 				outputText("\n\nYou close your eyes, smirking to yourself mischievously as you suddenly think of several new tricks to try on your opponents; you feel quite a bit more cunning.  The mental image of them helpless before your cleverness makes you shudder a bit, and you lick your lips and stroke yourself as you feel your skin tingling from an involuntary arousal.");
 				//Raise INT, Lib, Sens. and +10 LUST
 				dynStats("int", 2, "lib", 1, "sen", 2, "lus", 10);
-				changes++;
-			}
+			});
 			//[decrease Strength toward 15]
-			if (player.str > 15 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
+			mutationStep(player.str > 15, mystic ? 2 : 3, function ():void {
 				outputText("\n\nYou can feel your muscles softening as they slowly relax, becoming a tad weaker than before.  Who needs physical strength when you can outwit your foes with trickery and mischief?  You tilt your head a bit, wondering where that thought came from.");
 				dynStats("str", -1);
 				if (player.str > 70) dynStats("str", -1);
 				if (player.str > 50) dynStats("str", -1);
 				if (player.str > 30) dynStats("str", -1);
-				changes++;
-			}
+			});
 			//[decrease Toughness toward 20]
-			if (player.tou > 20 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
+			mutationStep(player.tou > 20, mystic ? 2 : 3, function ():void {
 				//from 66 or less toughness
 				if (player.tou <= 66) outputText("\n\nYou feel your " + player.skinFurScales() + " becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your " + player.skinFurScales() + " won't offer you much protection.");
 				//from 66 or greater toughness
 				else outputText("\n\nYou feel your " + player.skinFurScales() + " becoming noticeably softer.  A gentle exploratory pinch on your arm confirms it - your hide isn't quite as tough as it used to be.");
 				dynStats("tou", -1);
 				if (player.tou > 66) dynStats("tou", -1);
-				changes++;
-			}
-			if (mystic && changes < changeLimit && rand(2) == 0 && player.cor < 100) {
+			});
+			mutationStep(mystic && player.cor < 100, 2, function ():void {
 				if (player.cor < 33) outputText("\n\nA sense of dirtiness comes over you, like the magic of this gem is doing some perverse impropriety to you.");
 				else if (player.cor < 66) outputText("\n\nA tingling wave of sensation rolls through you, but you have no idea what exactly just changed.  It must not have been that important.");
 				else outputText("\n\nThoughts of mischief roll across your consciousness, unbounded by your conscience or any concern for others.  You should really have some fun - who cares who it hurts, right?");
 				dynStats("cor", 1);
-			}
+			});
 
 
 			//**********************
@@ -9983,38 +9792,34 @@ import classes.CockTypesEnum;
 			//Your facial features soften as your body becomes more androgynous.
 			//from high to low
 			//Your facial features harden as your body becomes more androgynous.
-			if (((mystic && rand(2) == 0) || (!mystic && rand(4) == 0)) && changes < changeLimit && player.femininity != 50) {
+			mutationStep(player.femininity != 50, mystic?2:4, function(): void {
 				outputText(player.modFem(50, 2), false);
-				changes++;
-			}
+			});
 			//[decrease muscle tone toward 40]
-			if (player.tone >= 40 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(4) == 0))) {
+			mutationStep(player.tone >= 40, mystic?2:4, function(): void {
 				outputText("\n\nMoving brings with it a little more jiggle than you're used to.  You don't seem to have gained weight, but your muscles seem less visible, and various parts of you are pleasantly softer.");
 				player.tone -= 2 + rand(3);
-				changes++;
-			}
+			});
 
 			//[Adjust hips toward 10 – wide/curvy/flared]
 			//from narrow to wide
-			if (player.hipRating < 10 && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0)) && changes < changeLimit) {
+			mutationStep(player.hipRating < 10, mystic?2:3, function ():void {
 				player.hipRating++;
 				if (player.hipRating < 7) player.hipRating++;
 				if (player.hipRating < 4) player.hipRating++;
 				outputText("\n\nYou stumble a bit as the bones in your pelvis rearrange themselves painfully.  Your hips have widened nicely!");
-				changes++;
-			}
+			});
 			//from wide to narrower
-			if (player.hipRating > 10 && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0)) && changes < changeLimit) {
+			mutationStep(player.hipRating > 10, mystic?2:3, function ():void {
 				player.hipRating--;
 				if (player.hipRating > 14) player.hipRating--;
 				if (player.hipRating > 19) player.hipRating--;
 				if (player.hipRating > 24) player.hipRating--;
 				outputText("\n\nYou stumble a bit as the bones in your pelvis rearrange themselves painfully.  Your hips have narrowed.");
-				changes++;
-			}
+			});
 
 			//[Adjust hair length toward range of 16-26 – very long to ass-length]
-			if ((player.hairLength < 16 || player.hairLength > 26) && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0)) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit) {
+			mutationStep((player.hairLength < 16 || player.hairLength > 26) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE, mystic ? 2 : 3, function():void {
 				//from short to long
 				if (player.hairLength < 16) {
 					player.hairLength += 3 + rand(3);
@@ -10025,32 +9830,29 @@ import classes.CockTypesEnum;
 					player.hairLength -= 3 + rand(3);
 					outputText("\n\nYou experience a tingling sensation in your scalp.  Feeling a bit off-balance, you discover your hair has shed a bit of its length, becoming " + hairDescript() + ".");
 				}
-				changes++;
-			}
+			});
 			//[Increase Vaginal Capacity] - requires vagina, of course
-			if (player.hasVagina() && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0)) && player.statusAffectv1(StatusAffects.BonusVCapacity) < 200 && changes < changeLimit) {
+			mutationStep(player.hasVagina() && player.statusAffectv1(StatusAffects.BonusVCapacity) < 200, mystic?2:3, function(): void {
 				outputText("\n\nA gurgling sound issues from your abdomen, and you double over as a trembling ripple passes through your womb.  The flesh of your stomach roils as your internal organs begin to shift, and when the sensation finally passes, you are instinctively aware that your " + vaginaDescript(0) + " is a bit deeper than it was before.");
 				if (!player.hasStatusAffect(StatusAffects.BonusVCapacity)) {
 					player.createStatusAffect(StatusAffects.BonusVCapacity, 0, 0, 0, 0);
 				}
 				player.addStatusValue(StatusAffects.BonusVCapacity, 1, 5 + rand(10));
-				changes++;
-			}
+			});
 			//[Vag of Holding] - rare effect, only if PC has high vaginal looseness
-			else if (player.hasVagina() && ((mystic) || (!mystic && rand(5) == 0)) && player.statusAffectv1(StatusAffects.BonusVCapacity) >= 200 && player.statusAffectv1(StatusAffects.BonusVCapacity) < 8000 && changes < changeLimit) {
+			mutationStep(player.hasVagina() && player.statusAffectv1(StatusAffects.BonusVCapacity) >= 200 && player.statusAffectv1(StatusAffects.BonusVCapacity) < 8000, mystic?1:5, function(): void{
 				outputText("\n\nYou clutch your stomach with both hands, dropping to the ground in pain as your internal organs begin to twist and shift violently inside you.  As you clench your eyes shut in agony, you are overcome with a sudden calm.  The pain in your abdomen subsides, and you feel at one with the unfathomable infinity of the universe, warmth radiating through you from the vast swirling cosmos contained within your womb.");
 				if (silly()) outputText("  <b>Your vagina has become a universe unto itself, capable of accepting colossal insertions beyond the scope of human comprehension!</b>");
 				else outputText("  <b>Your vagina is now capable of accepting even the most ludicrously sized insertions with no ill effects.</b>");
 				player.changeStatusValue(StatusAffects.BonusVCapacity, 1, 8000);
-				changes++;
-			}
+			});
 
 
 			//**********************
 			//BIG APPEARANCE CHANGES
 			//**********************
 			//[Grow Fox Tail]
-			if (player.tailType != TAIL_TYPE_FOX && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(4) == 0))) {
+			mutationStep(player.tailType != TAIL_TYPE_FOX && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE, mystic ? 2 : 4, function():void {
 				//if PC has no tail
 				if (player.tailType == TAIL_TYPE_NONE) {
 					outputText("\n\nA pressure builds on your backside.  You feel under your [armor] and discover a strange nodule growing there that seems to be getting larger by the second.  With a sudden flourish of movement, it bursts out into a long and bushy tail that sways hypnotically, as if it has a mind of its own.  <b>You now have a fox-tail.</b>");
@@ -10059,65 +9861,35 @@ import classes.CockTypesEnum;
 				else if (player.tailType != TAIL_TYPE_FOX) {
 					outputText("\n\nPain lances through your lower back as your tail shifts and twitches violently.  With one final aberrant twitch, it fluffs out into a long, bushy fox tail that whips around in an almost hypnotic fashion.  <b>You now have a fox-tail.</b>");
 				}
-				player.tailType = TAIL_TYPE_FOX;
-				player.tailCount = 1;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxTail)) {
-					outputText("\n\n<b>Genetic Memory: Fox Tail - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedFoxTail, 0, 0, 0, 0);
-				}
-				changes++;
-			}
-			if (!mystic && player.earType == EARS_FOX && player.tailType == TAIL_TYPE_FOX && player.tailCount == 8 && rand(3) == 0) {
+				setTailType(TAIL_TYPE_FOX, 1);
+			});
+			var nFoxTails:int = (player.earType == EARS_FOX && player.tailType == TAIL_TYPE_FOX) ? player.tailCount : 0;
+			if (nFoxTails == 8 && !mystic && rand(3) == 0) {
 				outputText("\n\nYou have the feeling that if you could grow a ninth tail you would be much more powerful, but you would need to find a way to enhance one of these gems or meditate with one to have a chance at unlocking your full potential.");
 			}
 			//[Grow Addtl. Fox Tail]
 			//(rare effect, up to max of 8 tails, requires PC level and int*10 = number of tail to be added)
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 1 && player.inte >= 15 && player.wis >= 15 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
+			mutationStep(nFoxTails == 1 && player.inte >= 15 && player.wis >= 15, mystic ? 2 : 3, function(): void {
 				outputText("\n\nA tingling pressure builds on your backside, and your bushy tail begins to glow with an eerie, ghostly light.  With a crackle of electrical energy, your tail splits into two!  <b>You now have a pair of fox-tails.</b>");
-				player.tailCount++;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxTail2nd)) {
-					outputText("\n\n<b>Genetic Memory: Fox Tail 2nd - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedFoxTail2nd, 0, 0, 0, 0);
-				}
-				changes++;
-			}
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 2 && player.level >= 6 && player.inte >= 30 && player.wis >= 30 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
+				setTailType(TAIL_TYPE_FOX, 2);
+			});
+			mutationStep(nFoxTails == 2 && player.level >= 6 && player.inte >= 30 && player.wis >= 30, mystic ? 2 : 3, function(): void {
 				outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
-				player.tailCount++;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxTail3rd)) {
-					outputText("\n\n<b>Genetic Memory: Fox Tail 3rd - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedFoxTail3rd, 0, 0, 0, 0);
-				}
-				changes++;
-			}
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 3 && player.level >= 12 && player.inte >= 45 && player.wis >= 45 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
+				setTailType(TAIL_TYPE_FOX, 3);
+			});
+			mutationStep(nFoxTails == 3 && player.level >= 12 && player.inte >= 45 && player.wis >= 45, mystic ? 2 : 3, function(): void {
 				outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
-				player.tailCount++;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxTail4th)) {
-					outputText("\n\n<b>Genetic Memory: Fox Tail 4th - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedFoxTail4th, 0, 0, 0, 0);
-				}
-				changes++;
-			}
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 4 && player.level >= 18 && player.inte >= 60 && player.wis >= 60 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
+				setTailType(TAIL_TYPE_FOX, 4);
+			});
+			mutationStep(nFoxTails == 4 && player.level >= 18 && player.inte >= 60 && player.wis >= 60, mystic ? 2 : 3, function(): void {
 				outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
-				player.tailCount++;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxTail5th)) {
-					outputText("\n\n<b>Genetic Memory: Fox Tail 5th - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedFoxTail5th, 0, 0, 0, 0);
-				}
-				changes++;
-			}
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 5 && player.level >= 24 && player.inte >= 75 && player.wis >= 75 && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
+				setTailType(TAIL_TYPE_FOX, 5);
+			});
+			mutationStep(nFoxTails == 5 && player.level >= 24 && player.inte >= 75 && player.wis >= 75, mystic ? 2 : 3, function(): void {
 				outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
-				player.tailCount++;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxTail6th)) {
-					outputText("\n\n<b>Genetic Memory: Fox Tail 6th - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedFoxTail6th, 0, 0, 0, 0);
-				}
-				changes++;
-			}
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 6 && player.level >= 30 && player.inte >= 90 && player.wis >= 90 && mystic && rand(3) == 0 && changes < changeLimit && player.earType == EARS_FOX && (player.findPerk(PerkLib.EnlightenedKitsune) < 0 || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (player.findPerk(PerkLib.EnlightenedNinetails) < 0 || player.perkv4(PerkLib.EnlightenedNinetails) > 0)) {
+				setTailType(TAIL_TYPE_FOX, 6);
+			});
+			mutationStep(nFoxTails == 6 && player.level >= 30 && player.inte >= 90 && player.wis >= 90 && (player.findPerk(PerkLib.EnlightenedKitsune) < 0 || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (player.findPerk(PerkLib.EnlightenedNinetails) < 0 || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 3, function(): void {
 				if (player.findPerk(PerkLib.CorruptedKitsune) < 0) {
 					outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into seven tails.  <b>You are now a seven-tails!  But something is wrong...  The cosmic power radiating from your body feels...  tainted somehow.  The corruption pouring off your body feels...  good.</b>");
 					outputText("\n\n(Perk Gained: Corrupted Kitsune - Grants Corrupted Fox Fire and Terror special attacks.)");
@@ -10127,16 +9899,14 @@ import classes.CockTypesEnum;
 				else outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
 				player.tailCount = 7;
 				//add tomorrow genetic memory unlock for this tail when PC got permed 9 tail of balance
-				changes++;
-			}
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 7 && player.level >= 36 && player.inte >= 105 && player.wis >= 105 && mystic && rand(4) == 0 && changes < changeLimit && player.earType == EARS_FOX && (player.findPerk(PerkLib.EnlightenedKitsune) < 0 || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (player.findPerk(PerkLib.EnlightenedNinetails) < 0 || player.perkv4(PerkLib.EnlightenedNinetails) > 0)) {
+			});
+			mutationStep(nFoxTails == 7 && player.level >= 36 && player.inte >= 105 && player.wis >= 105 && (player.findPerk(PerkLib.EnlightenedKitsune) < 0 || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (player.findPerk(PerkLib.EnlightenedNinetails) < 0 || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 4, function(): void {
 				outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
 				player.tailCount++;
 				//add tomorrow genetic memory unlock for this tail when PC got permed 9 tail of balance
-				changes++;
-			}
+			});
 			//[Grow 9th tail and gain Corrupted Nine-tails perk]
-			else if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 8 && player.level >= 42 && player.inte >= 120 && player.wis >= 120 && mystic && rand(4) == 0 && changes < changeLimit && player.earType == EARS_FOX && (player.findPerk(PerkLib.EnlightenedNinetails) < 0 || player.perkv4(PerkLib.EnlightenedNinetails) > 0)) {
+			mutationStep(nFoxTails == 8 && player.level >= 42 && player.inte >= 120 && player.wis >= 120 && (player.findPerk(PerkLib.EnlightenedNinetails) < 0 || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 4, function(): void {
 				if (player.findPerk(PerkLib.CorruptedNinetails) < 0) {
 					outputText("Your bushy tails begin to glow with an eerie, ghostly light, and with a crackle of electrical energy, split into nine tails.  <b>You are now a nine-tails!  But something is strange...  The cosmic power radiating from your body feels...  somehow more tainted than before.  The corruption pouring off your body feels...  amazing good.</b>");
 					outputText("\n\nYou have the inexplicable urge to set fire to the world, just to watch it burn.  With your newfound power, it's a goal that is well within reach.");
@@ -10147,61 +9917,44 @@ import classes.CockTypesEnum;
 				else outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
 				player.tailCount = 9;
 				//add tomorrow genetic memory unlock for this tail when PC got permed 9 tail of balance
-				changes++;
-			}
+
+			});
 			//Fox Eyes
-			if (player.earType == EARS_FOX && player.eyeType != EYES_FOX && changes < changeLimit && rand(3) == 0) {
+			mutationStep(player.earType == EARS_FOX && player.eyeType != EYES_FOX, 3, function(): void {
 				outputText("\n\nYou blink for an instant as the light and darkness seems to shift within your vision. You head to a pool to check it up and notice your pupils shifted to look more fox-like in a fashion similar to the kitsunes.  <b>You now have fox pupils.</b>");
-				changes++;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxEyes)) {
-					outputText("\n\n<b>Genetic Memory: Fox Eyes - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedFoxEyes, 0, 0, 0, 0);
-				}
-				player.eyeType = EYES_FOX;
-			}
+				setEyeType(EYES_FOX);
+			});
 			//Kitsune arms
-			if (changes < changeLimit && player.armType == ARM_TYPE_HUMAN && rand(2) == 0) {
+			mutationStep(player.armType == ARM_TYPE_HUMAN, 2, function(): void {
 				outputText("\n\n Your finger tingle as your nails sharpen to point. You run them on a tree bark and they feel way harder than your old human nails. <b>You will be able to claw at your opponent with your sharp kitsune nails.</b>", false);
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedKitsuneArms)) {
-					outputText("\n\n<b>Genetic Memory: Kitsune Arms - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedKitsuneArms, 0, 0, 0, 0);
-				}
-				player.armType = ARM_TYPE_KITSUNE;
-				changes++;
-			}
+				setArmType(ARM_TYPE_KITSUNE);
+			});
 			//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
-			if (changes < changeLimit && !InCollection(player.armType, ARM_TYPE_HUMAN, ARM_TYPE_GARGOYLE, ARM_TYPE_FOX, ARM_TYPE_KITSUNE) && rand(4) == 0) {
+			mutationStep(!InCollection(player.armType, ARM_TYPE_HUMAN, ARM_TYPE_GARGOYLE, ARM_TYPE_FOX, ARM_TYPE_KITSUNE), 4, function(): void {
 				humanizeArms();
-				changes++;
-			}
+			});
 			//[Grow Fox Ears]
-			if (player.tailType == TAIL_TYPE_FOX && ((mystic && rand(2) == 0) || (!mystic && rand(4) == 0)) && player.earType != EARS_FOX && changes < changeLimit) {
+			mutationStep(player.tailType == TAIL_TYPE_FOX && player.earType != EARS_FOX, mystic ? 2 : 4, function(): void {
 				//if PC has non-animal ears
 				if (player.earType == EARS_HUMAN) outputText("\n\nThe sides of your face painfully stretch as your ears morph and begin to migrate up past your hairline, toward the top of your head.  They elongate, becoming large vulpine triangles covered in bushy fur.  <b>You now have fox ears.</b>");
 				//if PC has animal ears
 				else outputText("\n\nYour ears change shape, shifting from their current shape to become vulpine in nature.  <b>You now have fox ears.</b>");
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxEars)) {
-					outputText("\n\n<b>Genetic Memory: Fox Ears - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedFoxEars, 0, 0, 0, 0);
-				}
-				player.earType = EARS_FOX;
-				changes++;
-			}
+				setEarType(EARS_FOX);
+			});
 			//[Change Hair Color: Golden-blonde, SIlver Blonde, White, Black, Red]
-			if (((mystic && rand(2) == 0) || (!mystic && rand(4) == 0)) && changes < changeLimit && !InCollection(player.hairColor, KitsuneScene.basicKitsuneHair) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && !InCollection(player.hairColor, KitsuneScene.elderKitsuneColors)) {
+			mutationStep(!InCollection(player.hairColor, KitsuneScene.basicKitsuneHair) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && !InCollection(player.hairColor, KitsuneScene.elderKitsuneColors), mystic ? 2 : 4, function(): void {
 				if (player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) player.hairColor = randomChoice(KitsuneScene.elderKitsuneColors);
 				else player.hairColor = randomChoice(KitsuneScene.basicKitsuneHair);
 				outputText("\n\nYour scalp begins to tingle, and you gently grasp a strand, pulling it forward to check it.  Your hair has become the same " + player.hairColor + " as a kitsune's!");
-				changes++;
-			}
+			});
 			var tone:Array = mystic ? ["dark", "ebony", "ashen", "sable", "milky white"] : ["tan", "olive", "light"];
 			//[Change Skin Type: remove fur or scales, change skin to Tan, Olive, or Light]
-			if ((player.skin.hasFur()
+			var changed:Boolean = mutationStep(player.skin.hasFur()
 					&& !player.skin.hasMagicalTattoo()
 					&& !InCollection(player.coatColor, KitsuneScene.basicKitsuneFur)
 					&& !InCollection(player.coatColor, KitsuneScene.elderKitsuneColors)
 					&& !InCollection(player.coatColor, ["orange and white", "black and white", "red and white", "tan", "brown"])
-					|| !player.skin.hasFur() && player.skin.hasCoat()) && ((mystic) || (!mystic && rand(2) == 0))) {
+					|| !player.skin.hasFur() && player.skin.hasCoat(), mystic ? 1 : 2, function(): void {
 				outputText("\n\nYou begin to tingle all over your [skin], starting as a cool, pleasant sensation but gradually worsening until you are furiously itching all over.");
 				if (player.hasFur()) outputText("  You stare in horror as you pull your fingers away holding a handful of [skin coat.color] fur!  Your fur sloughs off your body in thick clumps, falling away to reveal patches of bare, " + player.skinTone + " skin.");
 				else if (player.hasScales()) outputText("  You stare in horror as you pull your fingers away holding a handful of dried up scales!  Your scales continue to flake and peel off your skin in thick patches, revealing the tender " + player.skinTone + " skin underneath.");
@@ -10210,18 +9963,16 @@ import classes.CockTypesEnum;
 				if (!InCollection(player.skinTone, tone)) player.skinTone = randomChoice(tone);
 				outputText(player.skinTone + " complexion.");
 				outputText("  <b>You now have [skin]!</b>");
-				changes++;
-			}
+			});
 			//Change skin tone if not changed you!
-			else if (!InCollection(player.skinTone, tone) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && ((mystic && rand(2) == 0) || (!mystic && rand(3) == 0))) {
+			if (!changed) mutationStep(!InCollection(player.skinTone, tone) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE, mystic ? 2 : 3, function(): void {
 				outputText("\n\nYou feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  Holding an arm up to your face, you discover that <b>you now have ");
 				player.skinTone = randomChoice(tone);
 				outputText("[skin]!</b>");
-				changes++;
-			}
+			});
 			//[Change Skin Color: add "Tattoos"]
 			//From Tan, Olive, or Light skin tones
-			if (player.skin.base.type == SKIN_TYPE_PLAIN && !player.skin.hasMagicalTattoo() && changes < changeLimit && rand(3) == 0) {
+			mutationStep(player.skin.base.type == SKIN_TYPE_PLAIN && !player.skin.hasMagicalTattoo(), 3, function(): void {
 				outputText("\n\nYou feel a crawling sensation on the surface of your skin, starting at the small of your back and spreading to your extremities, ultimately reaching your face.  You are caught by surprise when you are suddenly assaulted by a blinding flash issuing from areas of your skin, and when the spots finally clear from your vision, an assortment of glowing magical tattoos adorns your [skin].  The glow gradually fades, but the distinctive ");
 				if (mystic) outputText("angular");
 				else outputText("curved");
@@ -10231,20 +9982,18 @@ import classes.CockTypesEnum;
 			//		player.createStatusAffect(StatusAffects.UnlockedTattoed, 0, 0, 0, 0);
 			//	}
 				player.skin.base.adj = "sexy tattooed";
-				changes++;
-			}
+
+			});
 			//Nipples Turn Back:
-			if (player.hasStatusAffect(StatusAffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
+			mutationStep(player.hasStatusAffect(StatusAffects.BlackNipples), 3, function(): void {
 				outputText("\n\nSomething invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
-				changes++;
 				player.removeStatusAffect(StatusAffects.BlackNipples);
-			}
+			});
 			//Debugcunt
-			if (changes < changeLimit && rand(3) == 0 && player.vaginaType() == 5 && player.hasVagina()) {
+			mutationStep(player.vaginaType() == 5 && player.hasVagina(), 3, function(): void {
 				outputText("\n\nSomething invisible brushes against your sex, making you twinge.  Undoing your clothes, you take a look at your vagina and find that it has turned back to its natural flesh colour.");
 				player.vaginaType(0);
-				changes++;
-			}
+			});
 			if (changes == 0) {
 				outputText("\n\nOdd.  You don't feel any different.");
 			}
@@ -10722,12 +10471,12 @@ import classes.CockTypesEnum;
 				if (player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>", false);
 				else if (player.eyeType == EYES_CAT_SLITS) outputText("  Your cat-like eyes are gone!</b>", false);
 				outputText("  <b>You have normal, humanoid eyes again.</b>", false);
-				player.eyeType = EYES_HUMAN;
+				setEyeType(EYES_HUMAN);
 				changes++;
 			}
 			//PC Trap Effects
 			if (player.eyeType != EYES_BLACK_EYES_SAND_TRAP && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(4) == 0 && changes < changeLimit) {
-				player.eyeType = EYES_BLACK_EYES_SAND_TRAP;
+				setEyeType(EYES_BLACK_EYES_SAND_TRAP);
 				//Eyes Turn Black:
 				outputText("\n\nYou blink, and then blink again.  It feels like something is irritating your eyes.  Panic sets in as black suddenly blooms in the corner of your left eye and then your right, as if drops of ink were falling into them.  You calm yourself down with the thought that rubbing at your eyes will certainly make whatever is happening to them worse; through force of will you hold your hands behind your back and wait for the strange affliction to run its course.  The strange inky substance pools over your entire vision before slowly fading, thankfully taking the irritation with it.  As soon as it goes you stride quickly over to the stream and stare at your reflection.  <b>Your pupils, your irises, your entire eye has turned a liquid black</b>, leaving you looking vaguely like the many half insect creatures which inhabit these lands.  You find you are merely grateful the change apparently hasn't affected your vision.");
 				changes++;
@@ -10750,8 +10499,7 @@ import classes.CockTypesEnum;
 				outputText("\n\nYou scream and fall to your knees as incredible pain snags at your shoulders, as if needle like hooks were being sunk into your flesh just below your shoulder blades.  After about five seconds of white hot, keening agony it is with almost sexual relief that something splits out of your upper back.  You clench the dirt as you slide what feel like giant leaves of paper into the open air.  Eventually the sensation passes and you groggily get to your feet.  You can barely believe what you can see by craning your neck behind you - <b>you've grown a set of four giant dragonfly wings</b>, thinner, longer and more pointed than the ones you've seen upon the forest bee girls, but no less diaphanous and beautiful.  You cautiously flex the new muscle groups in your shoulder blades and gasp as your new wings whirr and lift you several inches off the ground.  What fun this is going to be!");
 				//Wings Fall Out: You feel a sharp pinching sensation in your shoulders and you cringe slightly.  Your former dragonfly wings make soft, papery sounds as they fall into the dirt behind you.
 				changes++;
-				player.wingType = WING_TYPE_GIANT_DRAGONFLY;
-				player.wingDesc = "giant dragonfly";
+				setWingType(WING_TYPE_GIANT_DRAGONFLY, "giant dragonfly");
 			}
 			if (changes == 0) {
 				outputText("\n\nWell... that didn't amount to much.");
@@ -10870,7 +10618,7 @@ import classes.CockTypesEnum;
 				else {
 					outputText("\n\nYour tail goes rigid with pain, and soon your body follows.  It feels as though your spine is trying to push the growth off of your body... barely, you manage to turn your head to see almost exactly that!  A new ringed, fluffy tail is growing in behind its predecessor, dark bands after light.  Soon it reaches full length and a tear comes to your eye as your old tail parts from its end and drops to the ground like overripe fruit, dissolving.  <b>You now have a raccoon tail!</b>");
 				}
-				player.tailType = TAIL_TYPE_RACCOON;
+				setTailType(TAIL_TYPE_RACCOON);
 				changes++;
 			}
 			//gain fur
@@ -10888,7 +10636,7 @@ import classes.CockTypesEnum;
 				else if (player.earType == EARS_HORSE || player.earType == EARS_COW || player.earType == EARS_CAT) outputText("\n\nYour ears tingle.  Huh.  Do they feel a bit rounder at the tip now?  <b>Looks like you have raccoon ears.</b>");
 				//from human, goblin, lizard or other short ears
 				else outputText("\n\nYour ears prick and stretch uncomfortably, poking up through your " + hairDescript() + ".  Covering them with your hands, you feel them shaping into little eggdrop ornaments resting atop your head.  <b>You have raccoon ears!</b>");
-				player.earType = EARS_RACCOON;
+				setEarType(EARS_RACCOON);
 				changes++;
 			}
 			//gain feet-coon
@@ -10916,7 +10664,7 @@ import classes.CockTypesEnum;
 					if ((player.lowerBody == LOWER_BODY_TYPE_HUMAN || player.lowerBody == LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS || player.lowerBody == LOWER_BODY_TYPE_DEMONIC_CLAWS || player.lowerBody == LOWER_BODY_TYPE_DEMONIC_CLAWS || player.lowerBody == LOWER_BODY_TYPE_PLANT_HIGH_HEELS) && !player.hasFur()) outputText("The sensation of walking around on what feels like a second pair of hands is so weird that you miss noticing the itchy fur growing in over your legs...  ");
 					outputText("<b>You now have raccoon paws!</b>");
 				}
-				player.lowerBody = LOWER_BODY_TYPE_RACCOON;
+				setLowerBody(LOWER_BODY_TYPE_RACCOON);
 				player.legCount = 2;
 				changes++;
 			}
@@ -10944,7 +10692,7 @@ import classes.CockTypesEnum;
 					else if ((player.skinTone == "ebony" || player.skinTone == "black") && (player.skinType == SKIN_TYPE_PLAIN || player.skinType == SKIN_TYPE_GOO)) outputText("your face apparently returned to normal shape.  You look closer and discover a darker, mask-line outline on your already inky visage.  <b>You now have a barely-visible raccoon mask on your normal human face.</b>");
 					else outputText("your face returned to human dimensions, but shaded by a black mask around the eyes and over the nose!  <b>You now have a humanoid face with a raccoon mask!</b>");
 				}
-				player.faceType = FACE_RACCOON_MASK;
+				setFaceType(FACE_RACCOON_MASK);
 				changes++;
 			}
 			//gain full-coon face (requires half-coon and fur)
@@ -10954,7 +10702,7 @@ import classes.CockTypesEnum;
 				//from muzzleoid - should not be possible, but included if things change
 				//Your face goes numb, and you can see your snout shifting into a medium-long, tapered shape.  Closing your eyes, you rub at your forehead to try and get sensation back into it; it takes several minutes before full feeling returns.  <b>When it does, you look again at yourself and see a raccoon's pointy face, appointed with numerous whiskers and a black nose!</b>
 				changes++;
-				player.faceType = FACE_RACCOON;
+				setFaceType(FACE_RACCOON);
 			}
 			//fatigue damage (only if face change was not triggered)
 			else if (rand(2) == 0 && changes < changeLimit && (player.faceType != FACE_RACCOON_MASK && player.faceType != FACE_RACCOON)) {
@@ -11080,7 +10828,7 @@ import classes.CockTypesEnum;
 				if (player.earType == EARS_HORSE || player.earType == EARS_COW || player.earType == EARS_DOG || player.earType == EARS_BUNNY || player.earType == EARS_KANGAROO) outputText("shrink suddenly");
 				else outputText("pull away from your head");
 				outputText(", like they're being pinched, and you can distinctly feel the auricles taking a rounded shape through the pain.  Reaching up to try and massage away their stings, <b>you're not terribly surprised when you find a pair of fuzzy mouse's ears poking through your " + hairDescript() + ".</b>");
-				player.earType = EARS_MOUSE;
+				setEarType(EARS_MOUSE);
 				changes++;
 			}
 			//gain tail
@@ -11094,7 +10842,7 @@ import classes.CockTypesEnum;
 					outputText(" into a long, thin line.  With a shudder, it begins to shed until it's completely, starkly nude.  <b>Your new mouse tail looks a bit peaked.</b>");
 				}
 				else outputText("\n\nA small nub pokes from your backside, and you turn to look at it.  When you do, your neck aches as if whiplashed, and you groan as your spine shifts smoothly downward like a rope being pulled, growing new vertebra behind it and expanding the nub into a naked, thin, tapered shape.  <b>Rubbing at your sore neck, you stare at your new mouse tail.</b>");
-				player.tailType = TAIL_TYPE_MOUSE;
+				setTailType(TAIL_TYPE_MOUSE);
 				changes++;
 			}
 			//get teeth - from human, bunny, coonmask, or other humanoid teeth faces
@@ -11102,13 +10850,13 @@ import classes.CockTypesEnum;
 				outputText("\n\nYour teeth grind on their own, and you feel a strange, insistent pressure just under your nose.  As you open your mouth and run your tongue along them, you can feel ");
 				if (player.faceType != FACE_HUMAN) outputText("the sharp teeth receding and ");
 				outputText("your incisors lengthening.  It's not long before they're twice as long as their neighbors and the obvious growth stops, but the pressure doesn't go away completely.  <b>Well, you now have mouse incisors and your face aches a tiny bit - wonder if they're going to keep growing?</b>");
-				player.faceType = FACE_BUCKTEETH;
+				setFaceType(FACE_BUCKTEETH);
 				changes++;
 			}
 			//get mouse muzzle from mouse teeth or other muzzle
 			if (player.hasFur() && player.faceType != FACE_MOUSE && (player.faceType != FACE_HUMAN || player.faceType != FACE_SHARK_TEETH || player.faceType != FACE_BUNNY || player.faceType != FACE_SPIDER_FANGS || player.faceType != FACE_RACCOON_MASK) && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nA wave of light-headedness hits you, and you black out.  In your unconsciousness, you dream of chewing - food, wood, cloth, paper, leather, even metal... whatever you can fit in your mouth, even if it doesn't taste like anything much.  For several minutes you just chew and chew your way through a parade of ordinary objects, savoring the texture of each one against your teeth, until finally you awaken.  Your teeth work, feeling longer and more prominent than before, and you hunt up your reflection.  <b>Your face has shifted to resemble a mouse's, down to the whiskers!</b>");
-				player.faceType = FACE_MOUSE;
+				setFaceType(FACE_MOUSE);
 				changes++;
 			}
 			//get fur
@@ -11164,40 +10912,26 @@ import classes.CockTypesEnum;
 				}
 				else outputText("\n\nA pain builds in your backside... growing more and more pronounced.  The pressure suddenly disappears with a loud ripping and tearing noise.  <b>You realize you now have a demon tail</b>... complete with a cute little spade.", false);
 				dynStats("cor", 4);
-				player.tailType = TAIL_TYPE_DEMONIC;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedDemonTail)) {
-					outputText("\n\n<b>Genetic Memory: Demon Tail - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedDemonTail, 0, 0, 0, 0);
-				}
+				setTailType(TAIL_TYPE_DEMONIC);
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
 			//grow horns!
 			if (player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && (player.horns == 0 || (rand(player.horns + 3) == 0))) {
-				if (player.horns < 12 && (player.hornType == HORNS_NONE || player.hornType == HORNS_DEMON)) {
+				if (player.hornType == HORNS_NONE) {
+					outputText("A small pair of demon horns erupts from your forehead.  They actually look kind of cute.  <b>You have horns!</b>", false);
+					setHornType(HORNS_DEMON, 2);
+				} else if (player.horns < 12 && player.hornType == HORNS_DEMON) {
 					outputText("\n\n", false);
-					if (player.horns == 0) {
-						outputText("A small pair of demon horns erupts from your forehead.  They actually look kind of cute.  <b>You have horns!</b>", false);
-					}
-					else outputText("Another pair of demon horns, larger than the last, forms behind the first row.", false);
-					if (player.hornType == HORNS_NONE) player.hornType = HORNS_DEMON;
+					outputText("Another pair of demon horns, larger than the last, forms behind the first row.", false);
 					player.horns++;
 					player.horns++;
-					if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedDemonHorns)) {
-						outputText("\n\n<b>Genetic Memory: Demon Horns - Memorized!</b>\n\n");
-						player.createStatusAffect(StatusAffects.UnlockedDemonHorns, 0, 0, 0, 0);
-					}
 					dynStats("cor", 3);
 				}
 				//Text for shifting horns
-				else if (player.hornType > HORNS_DEMON && player.hornType != HORNS_ORCHID) {
+				else if (player.hornType != HORNS_DEMON && player.hornType != HORNS_ORCHID) {
 					outputText("\n\n", false);
 					outputText("Your horns shift, shrinking into two small demonic-looking horns.", false);
-					player.horns = 2;
-					player.hornType = HORNS_DEMON;
-					if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedDemonHorns)) {
-						outputText("\n\n<b>Genetic Memory: Demon Horns - Memorized!</b>\n\n");
-						player.createStatusAffect(StatusAffects.UnlockedDemonHorns, 0, 0, 0, 0);
-					}
+					setHornType(HORNS_DEMON, 2);
 					dynStats("cor", 3);
 				}
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
@@ -11214,7 +10948,7 @@ import classes.CockTypesEnum;
 				if (player.faceType != FACE_HUMAN) {
 					outputText("\n\n", false);
 					outputText("Your visage twists painfully, returning to a more normal human shape, albeit with flawless skin.  <b>Your face is human again!</b>", false);
-					player.faceType = FACE_HUMAN;
+					setFaceType(FACE_HUMAN);
 				}
 				//De-fur
 				else if (!player.hasPlainSkinOnly()) {
@@ -11228,11 +10962,7 @@ import classes.CockTypesEnum;
 			//Demon tongue
 			if (player.tongueType == TONUGE_SNAKE && rand(3) == 0) {
 				outputText("\n\nYour snake-like tongue tingles, thickening in your mouth until it feels more like your old human tongue, at least for the first few inches.  It bunches up inside you, and when you open up your mouth to release it, roughly two feet of tongue dangles out.  You find it easy to move and control, as natural as walking.  <b>You now have a long demon-tongue.</b>", false);
-				player.tongueType = TONUGE_DEMONIC;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedDemonTonuge)) {
-					outputText("\n\n<b>Genetic Memory: Demonic Tonuge - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedDemonTonuge, 0, 0, 0, 0);
-				}
+				setTongueType(TONUGE_DEMONIC);
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
 			//-Remove feather-arms (copy this for goblin ale, mino blood, equinum, centaurinum, canine pepps, demon items)
@@ -11247,11 +10977,7 @@ import classes.CockTypesEnum;
 					if (player.lowerBody != LOWER_BODY_TYPE_DEMONIC_CLAWS) {
 						outputText("\n\n", false);
 						outputText("Every muscle and sinew below your hip tingles and you begin to stagger. Seconds after you sit down, pain explodes in your " + player.feet() + ". Something hard breaks through your sole from the inside out as your toes splinter and curve cruelly. The pain slowly diminishes and your eyes look along a human leg that splinters at the foot into a claw with sharp black nails. When you relax, your feet grip the ground easily. <b>Your feet are now formed into demonic claws.</b>", false);
-						if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedDemonClawedLegs)) {
-							outputText("\n\n<b>Genetic Memory: Demon Clawed Legs - Memorized!</b>\n\n");
-							player.createStatusAffect(StatusAffects.UnlockedDemonClawedLegs, 0, 0, 0, 0);
-						}
-						player.lowerBody = LOWER_BODY_TYPE_DEMONIC_CLAWS;
+						setLowerBody(LOWER_BODY_TYPE_DEMONIC_CLAWS);
 						player.legCount = 2;
 					}
 				}
@@ -11259,11 +10985,7 @@ import classes.CockTypesEnum;
 				else if (player.lowerBody != LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS) {
 					outputText("\n\n", false);
 					outputText("Every muscle and sinew below your hip tingles and you begin to stagger. Seconds after you sit down, pain explodes in your " + player.feet() + ". Something hard breaks through your sole from the inside out. The pain slowly diminishes and your eyes look along a human leg to a thin and sharp horn protruding from the heel. When you relax, your feet are pointing down and their old posture is only possible with an enormous effort. <b>Your feet are now formed into demonic high-heels.</b> Tentatively you stand up and try to take a few steps. To your surprise you feel as if you were born with this and stride vigorously forward, hips swaying.", false);
-					if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedDemonHighHeels)) {
-						outputText("\n\n<b>Genetic Memory: Demon High Heels - Memorized!</b>\n\n");
-						player.createStatusAffect(StatusAffects.UnlockedDemonHighHeels, 0, 0, 0, 0);
-					}
-					player.lowerBody = LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS;
+					setLowerBody(LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS);
 					player.legCount = 2;
 				}
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
@@ -11274,44 +10996,24 @@ import classes.CockTypesEnum;
 				if (player.wingType == WING_TYPE_BAT_LIKE_TINY && player.cor >= 75) {
 					outputText("\n\n", false);
 					outputText("Your small demonic wings stretch and grow, tingling with the pleasure of being attached to such a tainted body.  You stretch over your shoulder to stroke them as they unfurl, turning into full-sized demon-wings.  <b>Your demonic wings have grown!</b>", false);
-					if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedDemonLargeBatWings)) {
-						outputText("\n\n<b>Genetic Memory: Demon Large Bat Wings - Memorized!</b>\n\n");
-						player.createStatusAffect(StatusAffects.UnlockedDemonLargeBatWings, 0, 0, 0, 0);
-					}
-					player.wingType = WING_TYPE_BAT_LIKE_LARGE;
-					player.wingDesc = "large, bat-like";
+					setWingType(WING_TYPE_BAT_LIKE_LARGE, "large, bat-like");
 				}
 				//split large wings to two pairs
 				else if (player.wingType == WING_TYPE_BAT_LIKE_LARGE && player.cor >= 75) {
 					outputText("\n\n", false);
 					outputText("Your large demonic wings starts to tremble and then starts to split from the tip.  You stretch over your shoulder to stroke them as they divide, turning into two pairs of full-sized demon-wings.  <b>Your demonic wings have splited into two pairs!</b>", false);
-					if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedDemonLargeBatWings2)) {
-						outputText("\n\n<b>Genetic Memory: Demon Large Bat Wings (2nd pair) - Memorized!</b>\n\n");
-						player.createStatusAffect(StatusAffects.UnlockedDemonLargeBatWings2, 0, 0, 0, 0);
-					}
-					player.wingType = WING_TYPE_BAT_LIKE_LARGE_2;
-					player.wingDesc = "two large pairs of bat-like";
+					setWingType(WING_TYPE_BAT_LIKE_LARGE_2, "two large pairs of bat-like");
 				}
 				else if (player.wingType == WING_TYPE_BEE_LIKE_SMALL || player.wingType == WING_TYPE_BEE_LIKE_LARGE) {
 					outputText("\n\n", false);
 					outputText("The muscles around your shoulders bunch up uncomfortably, changing to support your wings as you feel their weight increasing.  You twist your head as far as you can for a look and realize they've changed into ", false);
 					if (player.wingType == WING_TYPE_BEE_LIKE_SMALL) {
 						outputText("small ", false);
-						if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedDemonTinyBatWings)) {
-							outputText("\n\n<b>Genetic Memory: Demon Tiny Bat Wings - Memorized!</b>\n\n");
-							player.createStatusAffect(StatusAffects.UnlockedDemonTinyBatWings, 0, 0, 0, 0);
-						}
-						player.wingType = WING_TYPE_BAT_LIKE_TINY;
-						player.wingDesc = "tiny, bat-like";
+						setWingType(WING_TYPE_BAT_LIKE_TINY, "tiny, bat-like");
 					}
 					else {
 						outputText("large ", false);
-						if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedDemonLargeBatWings)) {
-							outputText("\n\n<b>Genetic Memory: Demon Large Bat Wings - Memorized!</b>\n\n");
-							player.createStatusAffect(StatusAffects.UnlockedDemonLargeBatWings, 0, 0, 0, 0);
-						}
-						player.wingType = WING_TYPE_BAT_LIKE_LARGE;
-						player.wingDesc = "large, bat-like";
+						setWingType(WING_TYPE_BAT_LIKE_LARGE, "large, bat-like");
 					}
 					outputText("<b>bat-like demon-wings!</b>", false);
 				}
@@ -11319,12 +11021,7 @@ import classes.CockTypesEnum;
 				else if (player.wingType == WING_TYPE_NONE) {
 					outputText("\n\n", false);
 					outputText("A knot of pain forms in your shoulders as they tense up.  With a surprising force, a pair of small demonic wings sprout from your back, ripping a pair of holes in the back of your [armor].  <b>You now have tiny demonic wings</b>.", false);
-					if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedDemonTinyBatWings)) {
-						outputText("\n\n<b>Genetic Memory: Demon Tiny Bat Wings - Memorized!</b>\n\n");
-						player.createStatusAffect(StatusAffects.UnlockedDemonTinyBatWings, 0, 0, 0, 0);
-					}
-					player.wingType = WING_TYPE_BAT_LIKE_TINY;
-					player.wingDesc = "tiny, bat-like";
+					setWingType(WING_TYPE_BAT_LIKE_TINY, "tiny, bat-like");
 				}
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
@@ -11513,7 +11210,7 @@ import classes.CockTypesEnum;
 				outputText("\n\nYour head feels strange as the tentacles you have for hair begin to recede back into your scalp, eventually leaving you with a bald head.  Your head is not left bald for long, though.  Within moments, a full head of hair sprouts from the skin of your scalp.  <b>Your hair is normal again!</b>");
 				//Turn hair growth on.
 				flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
-				player.hairType = HAIR_NORMAL;
+				setHairType(HAIR_NORMAL);
 				changes++;
 			}
 			//If the PC has goo hair:
@@ -11522,14 +11219,14 @@ import classes.CockTypesEnum;
 				outputText("\n\nYour gooey hair begins to fall out in globs, eventually leaving you with a bald head.  Your head is not left bald for long, though.  Within moments, a full head of hair sprouts from the skin of your scalp.  <b>Your hair is normal again!</b>");
 				//Turn hair growth on.
 				flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
-				player.hairType = HAIR_NORMAL;
+				setHairType(HAIR_NORMAL);
 				changes++;
 			}
 			//If the PC has four eyes:
 			if(player.eyeType == EYES_FOUR_SPIDER_EYES && rand(3) == 0 && changes < changeLimit)
 			{
 				outputText("\n\nYour two forehead eyes start throbbing painfully, your sight in them eventually going dark.  You touch your forehead to inspect your eyes, only to find out that they have disappeared.  <b>You only have two eyes now!</b>");
-				player.eyeType = 0;
+				humanizeEyes();
 				changes++;
 			}
 			//Go into heat
@@ -11542,21 +11239,21 @@ import classes.CockTypesEnum;
 			if(player.faceType == FACE_FERRET_MASK && player.hasFur() && player.earType == EARS_FERRET && player.tailType == TAIL_TYPE_FERRET && player.lowerBody == LOWER_BODY_TYPE_FERRET && rand(4) == 0 && changes < changeLimit)
 			{
 				outputText("\n\nYou cry out in pain as the bones in your face begin to break and rearrange.  You rub your face furiously in an attempt to ease the pain, but to no avail.  As the sensations pass, you examine your face in a nearby puddle.  <b>You nearly gasp in shock at the sight of your new ferret face!</b>");
-				player.faceType = FACE_FERRET;
+				setFaceType(FACE_FERRET);
 				changes++;
 			}
 			//If face is human:
 			if(player.faceType == 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(3) == 0 && changes < changeLimit)
 			{
 				outputText("\n\nA horrible itching begins to encompass the area around your eyes.  You grunt annoyedly, rubbing furiously at the afflicted area.  Once the feeling passes, you make your way to the nearest reflective surface to see if anything has changed.  Your suspicions are confirmed.  The [skinFurScales] around your eyes has darkened.  <b>You now have a ferret mask!</b>");
-				player.faceType = FACE_FERRET_MASK;
+				setFaceType(FACE_FERRET_MASK);
 				changes++;
 			}
 			//If face is not ferret, has ferret ears, tail, and legs:
 			if(player.faceType != FACE_HUMAN && player.faceType != FACE_FERRET_MASK && player.faceType != FACE_FERRET && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(3) == 0 && changes < changeLimit)
 			{
 				outputText("\n\nYou groan uncomfortably as the bones in your [face] begin to rearrange.  You grab your head with both hands, rubbing at your temples in an attempt to ease the pain.  As the shifting stops, you frantically feel at your face.  The familiar feeling is unmistakable.  <b>Your face is human again!</b>");
-				player.faceType = 0;
+				setFaceType(FACE_HUMAN);
 				changes++;
 			}
 			//No fur, has ferret ears, tail, and legs:
@@ -11611,7 +11308,7 @@ import classes.CockTypesEnum;
 				//If tail is mouse, has ferret ears:
 				else if(player.tailType == TAIL_TYPE_MOUSE) outputText("\n\nYour tail begins to itch as its bald surface begins to sprout a thick layer of fur.  It also appears to have lost a bit of its former length.  <b>You now have a ferret tail!</b>");
 				else outputText("\n\nYour tail begins to itch a moment before it starts writhing, your back muscles spasming as it changes shape. Before you know it, <b>your tail has reformed into a narrow, ferret's tail.</b>");
-				player.tailType = TAIL_TYPE_FERRET;
+				setTailType(TAIL_TYPE_FERRET);
 				changes++;
 			}
 			//If naga, has ferret ears:
@@ -11620,7 +11317,7 @@ import classes.CockTypesEnum;
 			{
 				outputText("\n\nYou scream in agony as a horrible pain racks the entire length of your snake-like coils.  Unable to take it anymore, you pass out.  When you wake up, you’re shocked to find that you no longer have the lower body of a snake.  Instead, you have soft, furry legs that resemble that of a ferret’s.  <b>You now have ferret legs!</b>");
 				changes++;
-				player.lowerBody = LOWER_BODY_TYPE_FERRET;
+				setLowerBody(LOWER_BODY_TYPE_FERRET);
 				player.legCount = 2;
 			}
 			//If legs are not ferret, has ferret ears and tail
@@ -11631,14 +11328,14 @@ import classes.CockTypesEnum;
 
 				outputText("\n\nYou scream in agony as the bones in your legs begin to break and rearrange.  Even as the pain passes, an uncomfortable combination of heat and throbbing continues even after the transformation is over.  You rest for a moment, allowing the sensations to subside.  Now feeling more comfortable, <b>you stand up, ready to try out your new ferret legs!</b>");
 				changes++;
-				player.lowerBody = LOWER_BODY_TYPE_FERRET;
+				setLowerBody(LOWER_BODY_TYPE_FERRET);
 				player.legCount = 2;
 			}
 			//If ears are not ferret:
 			if(player.earType != EARS_FERRET && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(3) == 0 && changes < changeLimit)
 			{
 				outputText("\n\nYou squint as you feel a change in your ears.  Inspecting your reflection in a nearby puddle you find that <b>your ears have become small, fuzzy, and rounded, just like a ferret’s!</b>");
-				player.earType = EARS_FERRET;
+				setEarType(EARS_FERRET);
 				changes++;
 			}
 			//If no other effect occurred, fatigue decreases:
@@ -11735,7 +11432,7 @@ import classes.CockTypesEnum;
 			//Gain pig ears!
 			if (rand(boar ? 3 : 4) == 0 && changes < changeLimit && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.earType != EARS_PIG) {
 				outputText("\n\nYou feel a pressure on your ears as they begin to reshape. Once the changes finish, you flick them about experimentally, <b>and you’re left with pointed, floppy pig ears.</b>");
-				player.earType = EARS_PIG;
+				setEarType(EARS_PIG);
 				changes++;
 			}
 			//Gain pig tail if you already have pig ears!
@@ -11744,13 +11441,13 @@ import classes.CockTypesEnum;
 					outputText("\n\nYou feel a pinching sensation in your [tail] as it begins to warp in change. When the sensation dissipates, <b>you are left with a small, curly pig tail.</b>");
 				else //If you don't have a tail. 
 					outputText("\n\nYou feel a tug at the base of your spine as it lengthens ever so slightly. Looking over your shoulder, <b>you find that you have sprouted a small, curly pig tail.</b>");
-				player.tailType = TAIL_TYPE_PIG;
+				setTailType(TAIL_TYPE_PIG);
 				changes++;
 			}
 			//Gain pig tail even when centaur, needs pig ears.
 			if (rand(boar ? 2 : 3) == 0 && changes < changeLimit && player.earType == EARS_PIG && player.tailType != TAIL_TYPE_PIG && player.isTaur() && (player.lowerBody == LOWER_BODY_TYPE_HOOFED || player.lowerBody == LOWER_BODY_TYPE_PONY)) {
 				outputText("\n\nThere is a tingling in your [tail] as it begins to warp and change. When the sensation dissipates, <b>you are left with a small, curly pig tail.</b> This new, mismatched tail looks a bit odd on your horse lower body.");
-				player.tailType = TAIL_TYPE_PIG;
+				setTailType(TAIL_TYPE_PIG);
 				changes++;
 			}
 			//Turn your lower body into pig legs if you have pig ears and tail.
@@ -11761,20 +11458,20 @@ import classes.CockTypesEnum;
 					outputText("\n\nYou scream in agony as a horrible pain racks the entire length of your snake-like coils. Unable to take it anymore, you pass out. When you wake up, you’re shocked to find that you no longer have the lower body of a snake. Instead, you only have two legs. They are digitigrade and end in cloven hooves. <b>You now have pig legs!</b>");
 				else //Bipedal
 					outputText("\n\nYou scream in agony as the bones in your legs break and rearrange. Once the pain subsides, you inspect your legs, finding that they are digitigrade and ending in cloven hooves. <b>You now have pig legs!</b>");
-				player.lowerBody = LOWER_BODY_TYPE_CLOVEN_HOOFED;
+				setLowerBody(LOWER_BODY_TYPE_CLOVEN_HOOFED);
 				player.legCount = 2;
 				changes++;
 			}
 			//Gain pig face when you have the first three pig TFs.
 			if (rand(boar ? 2 : 3) == 0 && changes < changeLimit && player.earType == EARS_PIG && player.tailType == TAIL_TYPE_PIG && player.lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED && (player.faceType != FACE_PIG && player.faceType != FACE_BOAR)) {
 				outputText("\n\nYou cry out in pain as the bones in your face begin to break and rearrange. You rub your face furiously in an attempt to ease the pain, but to no avail. As the sensations pass, you examine your face in a nearby puddle. <b>You nearly gasp in shock at the sight of your new pig face!</b>");
-				player.faceType = FACE_PIG;
+				setFaceType(FACE_PIG);
 				changes++;
 			}
 			//Gain boar face if you have pig face.
 			if (rand(3) == 0 && changes < changeLimit && player.earType == EARS_PIG && player.tailType == TAIL_TYPE_PIG && player.lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED && player.faceType == FACE_PIG) {
 				outputText("\n\nYou cry out in pain as the bones in your face begin to break and rearrange. You rub your face furiously in an attempt to ease the pain, but to no avail. Your bottom teeth ache as well. What’s happening to you? As the sensations pass, you examine your face in a nearby puddle. <b>You nearly gasp in shock at the sight of your new tusky boar face!</b>");
-				player.faceType = FACE_BOAR;
+				setFaceType(FACE_BOAR);
 				changes++;
 			}
 			//Change skin colour
@@ -11816,16 +11513,14 @@ import classes.CockTypesEnum;
 			if(player.horns == 0 && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(2) == 0) {
 				outputText("\n\nYou hear the sound of cracking branches erupting from the tip of your skull.  Small bulges on either side of your head advance outwards in a straight line, eventually spreading out in multiple directions like a miniature tree.  Investigating the exotic additions sprouting from your head, the situation becomes clear.  <b>You've grown antlers!</b>");
 				//[Player horn type changed to Antlers.]
-				player.hornType = HORNS_ANTLERS;
-				player.horns = 4 + rand(12);
+				setHornType(HORNS_ANTLERS, 4 + rand(12));
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
 			//[Show this description instead if the player already had horns when the transformation occurred.] 
 			else if(player.horns > 0 && player.hornType != HORNS_ANTLERS && player.hornType != HORNS_ORCHID && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(2) == 0) {
 				outputText("\n\nYou hear the sound of cracking branches erupting from the tip of your skull.  The horns on your head begin to twist and turn fanatically, their texture and size morphing considerably until they resemble something more like trees than anything else.  Branching out rebelliously, you've come to the conclusion that <b>you've somehow gained antlers!</b>");
 				//[Player horn type changed to Antlers.]
-				player.hornType = HORNS_ANTLERS;
-				player.horns = 4 + rand(12);
+				setHornType(HORNS_ANTLERS, 4 + rand(12));
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
 			if (returnToBakery) {
@@ -12182,7 +11877,7 @@ import classes.CockTypesEnum;
 				else {
 					outputText("\n\nA weird tingling runs through your scalp as your " + hairDescript() + " shifts slightly.  You reach up to touch and bump <b>your new pointed elfin ears</b>.  You bet they look cute!", false);
 				}
-				player.earType = EARS_ELFIN;
+				setEarType(EARS_ELFIN);
 				changes++;
 			}
 			//Ink spray attack
@@ -12205,7 +11900,7 @@ import classes.CockTypesEnum;
 					if (player.lowerBody == LOWER_BODY_TYPE_CLOVEN_HOOFED) outputText("\n\nYour lower half suddenly transform back into two human legs. You so missed having normal legs like before.", false);
 					if (player.lowerBody == LOWER_BODY_TYPE_NAGA) outputText("\n\nYour tail split in two and turn into a pair of legs. You missed behing able to walk instead of slithering around.", false);
 					outputText("<b>  You now have human legs in place of your feet!</b>", false);
-					player.lowerBody = LOWER_BODY_TYPE_HUMAN;
+					setLowerBody(LOWER_BODY_TYPE_HUMAN);
 					player.legCount = 2;
 					dynStats("spe", 1);
 					changes++;
@@ -12224,11 +11919,10 @@ import classes.CockTypesEnum;
 				if (type == 0) outputText(" Looking for your privates you notice your pussy is right under your 8 legs just like the center of a fleshy flower and became about huge like a mouth ready to engulf anything.", false);
 				if (type == 2) outputText(" Looking for your privates you notice your cock is right between your 2 front 'legs' looking almost like another tentacle.", false);
 				outputText(" As you lift yourself standing on your tentacles not only can you still walk somewhat but heck don't you feel like grabbing something and squeezing it in your pleasurable new legs!", false);
-				player.lowerBody = LOWER_BODY_TYPE_SCYLLA;
+				setLowerBody(LOWER_BODY_TYPE_SCYLLA);
 				player.legCount = 8;
-				if (player.tailType != 0) {
-					player.tailType = 0;
-					player.tailCount = 0;
+				if (player.tailType != TAIL_TYPE_NONE) {
+					setTailType(TAIL_TYPE_NONE, 0);
 				}
 				changes++;
 			}
@@ -12361,7 +12055,7 @@ import classes.CockTypesEnum;
 			if (player.lowerBody != LOWER_BODY_TYPE_YETI && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
 				if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) {
 					outputText("\n\nYour legs start becoming excessively hairy down to your feet. They’re so hairy you can no longer see your skin. Just as you thought the transformation was over, you see your feet enlarging to twice their size. They look like those of a huge monkey. Well, you guess people can call you Bigfoot now with your enormous <b>yeti feet!</b>", false);
-					player.lowerBody = LOWER_BODY_TYPE_YETI;
+					setLowerBody(LOWER_BODY_TYPE_YETI);
 				}
 				else {
 					humanizeLowerBody();
@@ -12371,25 +12065,25 @@ import classes.CockTypesEnum;
 			//Arms
 			if (player.lowerBody == LOWER_BODY_TYPE_YETI && !InCollection(player.armType, ARM_TYPE_GARGOYLE, ARM_TYPE_YETI) && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYour arms start to become excessively hairy down almost to your hands. They're so hairy, you can no longer see your skin. As the fur growth stops, your hands enlarge to twice their size. They look like huge monkey paws. Well, you guess punching people will be easy with your enormous <b>yeti hands!</b>", false);
-				player.armType = ARM_TYPE_YETI;
+				setArmType(ARM_TYPE_YETI);
 				changes++;
 			}
 			//Ears
 			if (player.armType == ARM_TYPE_YETI && player.earType != EARS_YETI && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYou feel your ears as though they’re growing bigger for a moment. It feels weird, but when you touch them to check what happened they still feel somewhat human. Looking down in a puddle you notice the term human isn’t correct, in your case they look more like those of a monkey. <b>You now have yeti ears.</b>", false);
-				player.earType = EARS_YETI;
+				setEarType(EARS_YETI);
 				changes++;
 			}
 			//Face
 			if (player.earType == EARS_YETI && player.faceType != FACE_YETI_FANGS && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYou feel your canines elongate and sharpen. Your mouth feels somewhat like a human one still, but when you feel your teeth with your tongue you discover that your canines have pretty much turned into proper fangs. <b>You now have yeti fangs.</b>", false);
-				player.faceType = FACE_YETI_FANGS;
+				setFaceType(FACE_YETI_FANGS);
 				changes++;
 			}
 			//Hair
 			if (player.faceType == FACE_YETI_FANGS && player.hairType != HAIR_FLUFFY && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYour hair starts to grow longer and fluffier. It covers all sides of your head perfectly, like a furry helmet keeping it warm. Only your face and neck are devoid of this hairy armor which still manage to look like a nice short haircut. While it looks like hair at first, touching it proves it to be like a very thick coat of fluff. You now have <b>yeti fluffy " + player.hairColor + " hairs.</b>", false);
-				player.hairType = HAIR_FLUFFY;
+				setHairType(HAIR_FLUFFY);
 				changes++;
 			}
 			//Fur
@@ -12509,7 +12203,7 @@ import classes.CockTypesEnum;
 			if (player.skinAdj == "glossy" && player.skinType == SKIN_TYPE_PLAIN && player.lowerBody != LOWER_BODY_TYPE_ORCA && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
 				if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) {
 					outputText("\n\nYour toes suddenly are forced together. When you stretch them back you discover they are now webbed, ready for swimming. <b>You can only guess those Orca legs will help you to swim at great speed.</b>", false);
-					player.lowerBody = LOWER_BODY_TYPE_ORCA;
+					setLowerBody(LOWER_BODY_TYPE_ORCA);
 				}
 				else {
 					humanizeLowerBody();
@@ -12519,7 +12213,7 @@ import classes.CockTypesEnum;
 			//arms
 			if (player.lowerBody == LOWER_BODY_TYPE_ORCA && !InCollection(player.armType, ARM_TYPE_GARGOYLE, ARM_TYPE_ORCA) && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYour fingers suddenly are forced together. When you stretch them back you discover they are now webbed, ready for swimming. You are still examining your hands when something not unlike a pair of fins grow out of your forearms. <b>You can only guess those Orca arms will help you to swim at high speeds!</b>", false);
-				player.armType = ARM_TYPE_ORCA;
+				setArmType(ARM_TYPE_ORCA);
 				changes++;
 			}
 			//tail
@@ -12527,13 +12221,13 @@ import classes.CockTypesEnum;
 				outputText("\n\nA large bump starts to grow out of your " + assDescript() + ", making you groan as your spine lengthens for this whole new appendage to form. You finally grow a tail black as midnight with a white underside and a smaller fin closer to your body, likely for hydrodynamism sake. ", false);
 				outputText("You swing your tail a few times, battering the ground with it and smile as you rush to the stream to take a dip. With the help of your mighty tail you easily reach such a high swim speed you even manage to jump several meters out of the water, laughing with delight at the trill of this aquatic experience. ", false);
 				outputText("<b>You're going to have a lot of fun swimming with your new Orca tail.</b>", false);
-				player.tailType = TAIL_TYPE_ORCA;
+				setTailType(TAIL_TYPE_ORCA);
 				changes++;
 			}
 			//ears
 			if (player.tailType == TAIL_TYPE_ORCA && player.earType != EARS_ORCA && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYour ears suddenly begin to lengthen, growing bigger and bigger until their length reaches your shoulders. When you examine them you discover they have grown into a pair of large fins, easily twice as big as your head. <b>Orienting yourself underwater will be easy with your large orca fin ears.</b>", false);
-				player.earType = EARS_ORCA;
+				setEarType(EARS_ORCA);
 				changes++;
 			}
 			//blowhole
@@ -12542,17 +12236,13 @@ import classes.CockTypesEnum;
 				if (player.rearBody > REAR_BODY_NONE) outputText("Your wings fold into themselves, merging together with your back.  ", false);
 				outputText("Pain rushes just behind your shoulder blades as a hole opens up, air rushing in. The hole is burning making you groan in pain as air flows in and out. Eventually you get accustomed to breathing from your back like whales do, but it sure was a weird experience.", false);
 				if (silly()) outputText("  Well it doesn't matter because now you can break the world record of the longest breath holding by sitting on the ocean floor for more than 90 minutes.");
-				player.rearBody = REAR_BODY_ORCA_BLOWHOLE;
-			//	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedSharkFin)) {
-			//		outputText("\n\n<b>Genetic Memory: Shark Fin - Memorized!</b>\n\n");
-			//		player.createStatusAffect(StatusAffects.UnlockedSharkFin, 0, 0, 0, 0);
-			//	}
+				setRearBody(REAR_BODY_ORCA_BLOWHOLE);
 				changes++;
 			}
 			//face
 			if (player.rearBody == REAR_BODY_ORCA_BLOWHOLE && player.faceType != FACE_ORCA && changes < changeLimit && rand(4) == 0) {
 				outputText("\n\nYour nose starts to tingle, getting bigger and rounder as your facial features take on a bombed shape. Your nasal hole disappears entirely as you feel your mouth change, your dentition turning into pointed teeth fit for an orca. You go look at your reflection in the water to be sure, and discover your face is now similar in shape to that of a killer whale. Um… you could use a fish or two, you are getting pretty hungry. <b>Taking a bite out of fresh fish would be great with your new orca face.</b>", false);
-				player.faceType = FACE_ORCA;
+				setFaceType(FACE_ORCA);
 				changes++;
 			}
 			//tallness
@@ -12732,8 +12422,7 @@ import classes.CockTypesEnum;
 			}
 			//Horns
 			if (changes < changeLimit && player.horns > 0 && player.hornType != HORNS_ORCHID && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(3) == 0) {
-				player.horns = 0; 
-				player.hornType = HORNS_NONE;
+				setHornType(HORNS_NONE, 0);
 				outputText("\n\nYour horns crumble, falling apart in large chunks until they flake away to nothing.");
 				changes++;
 			}
@@ -12750,7 +12439,7 @@ import classes.CockTypesEnum;
 			if (player.lowerBody != LOWER_BODY_TYPE_MANTIS && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYour legs tremble with sudden unbearable pain, as if they’re being ripped apart from the inside out and being stitched together again all at once.", false);
 				outputText("\nYou scream in agony as you hear bones snapping and cracking. A moment later the pain fades and you are able to turn your gaze down to your beautiful new legs, covered in shining green chitin from the thigh down. <b>You now have mantis feet.</b>", false);
-				player.lowerBody = LOWER_BODY_TYPE_MANTIS;
+				setLowerBody(LOWER_BODY_TYPE_MANTIS);
 				player.legCount = 2;
 				changes++;
 			}
@@ -12761,7 +12450,7 @@ import classes.CockTypesEnum;
 				outputText("\nA moment later the pain fades and you are able to turn your gaze down to your beautiful new arms, covered in shining green chitin from the upper arm down.", false);
 				outputText("\nThe transformation end as down the lenght of your forearms you grow a pair of massive scythe like appendage just like a mantis.", false);
 				outputText("\nYou nonchalantly run them across a young tree slicing the plant trunk in half. This might prove a deadly weapon if used as part of your unarmed strikes. <b>You now have mantis arms.</b>", false);
-				player.armType = ARM_TYPE_MANTIS;
+				setArmType(ARM_TYPE_MANTIS);
 				changes++;
 			}
 			
@@ -12770,7 +12459,7 @@ import classes.CockTypesEnum;
 				outputText("\n\nPainful swelling just above your firm backside doubles you over.", false);
 				outputText("\nIt gets worse and worse as the swollen lump begins to protrude from your backside, swelling and elongating with a series of pops until you have a bulbous abdomen hanging just above your butt.", false);
 				outputText("\nThe whole thing is covered in a hard greenish chitinous material, and large enough to be impossible to hide. <b>You have a Mantis abdomen.</b>", false);
-				player.tailType = TAIL_TYPE_MANTIS_ABDOMEN;
+				setTailType(TAIL_TYPE_MANTIS_ABDOMEN);
 				changes++;
 			}
 			
@@ -12779,15 +12468,13 @@ import classes.CockTypesEnum;
 				//Grow bigger mantis wings!
 				if (player.wingType == WING_TYPE_MANTIS_LIKE_SMALL) {
 					outputText("\n\nYour wings tingle as they grow, filling out covering your back abdomen until they are large enough to lift you from the ground and allow you to fly!  You give a few experimental flaps and begin hovering in place, a giddy smile plastered on your face by the thrill of flight.  <b>You now have large Mantis wings!</b>");
-					player.wingType = WING_TYPE_MANTIS_LIKE_LARGE;
-					player.wingDesc = "large mantis-like";
+					setWingType(WING_TYPE_MANTIS_LIKE_LARGE, "large mantis-like");
 				}
 				//Grow small mantis wings if player has none.
 				else if (player.wingType == WING_TYPE_NONE) {
 					outputText("\n\nYou feel an itching between your shoulder-blades as something begins growing there.  You twist and contort yourself, trying to scratch and bring yourself relief, and failing miserably.  A sense of relief erupts from you as you feel something new grow out from your body.");
 					outputText("\nYou hastily remove the top portion of your [armor] and marvel as a pair of small Insectile wings sprout from your back.  Tenderly flexing your new muscles, you find you can flap them quite fast.  Unfortunately you can’t seem to flap your little wings fast enough to fly, but they would certainly slow a fall.  A few quick modifications to your [armor] later and you are ready to continue your journey with <b>your new mantis wings</b>.");
-					player.wingType = WING_TYPE_MANTIS_LIKE_SMALL;
-					player.wingDesc = "small mantis-like";
+					setWingType(WING_TYPE_MANTIS_LIKE_SMALL, "small mantis-like");
 				}
 				//Remove old wings
 				else {
