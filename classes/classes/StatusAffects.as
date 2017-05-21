@@ -341,7 +341,9 @@ package classes
 	//	public static const UnlockedGoo:StatusAffectType = mk("Unlocked Goo ");
 		public static const UnlockedDraconicX2:StatusAffectType = mk("Unlocked Draconic Horns");
 		public static const UnlockedDraconicX4:StatusAffectType = mk("Unlocked Draconic Horns (2nd pair)");
-	//	public static const Unlocked:StatusAffectType = mk("Unlocked ");
+		public static const UnlockedFoxTail7th:StatusAffectType = mk("Unlocked Fox Tail 7th");
+		public static const UnlockedFoxTail8th:StatusAffectType = mk("Unlocked Fox Tail 8th");
+		public static const UnlockedFoxTail9th:StatusAffectType = mk("Unlocked Fox Tail 9th");
 	//	public static const Unlocked:StatusAffectType = mk("Unlocked ");
 	//	public static const Unlocked:StatusAffectType = mk("Unlocked ");
 	//	public static const Unlocked:StatusAffectType = mk("Unlocked ");

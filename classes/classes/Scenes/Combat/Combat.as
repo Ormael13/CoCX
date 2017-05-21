@@ -1208,7 +1208,10 @@ public function fireBow():void {
 		enemyAI();
 		return;
 	}
-	if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") multiArrowsStrike();
+	if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") {
+		if (player.hasStatusAffect(StatusAffects.ResonanceVolley)) outputText("Your bow nudges as you ready the next shot, helping you keep your aimed at " + monster.short + ".\n\n");
+		multiArrowsStrike();
+	}
 	if (player.weaponRangePerk == "Throwing") throwWeapon();
 	if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle") shootWeapon();
 }
@@ -1368,7 +1371,6 @@ public function multiArrowsStrike():void {
 			outputText(".  It's clearly very painful. <b>(<font color=\"#800000\">" + String(damage) + "</font>)</b>");
 			if (crit == true) outputText(" <b>*Critical Hit!*</b>");
 		}
-		if (player.hasStatusAffect(StatusAffects.ResonanceVolley)) outputText("  Your bow nudges as you ready the next shot, helping you keep your aimed at " + monster.short + ".");
 		if (flags[kFLAGS.CUPID_ARROWS] == 1) {
 			outputText("  ");
 			if(monster.lustVuln == 0) {
@@ -2659,7 +2661,6 @@ public function attack():void {
 				}
 			}
 		}
-		if (player.hasStatusAffect(StatusAffects.BeatOfWar)) outputText("\n\nYou feel the beat shift the song’s tempo slightly, taking a twist towards the ominous. This attunement augments your strength.");
 	}
 	
 	if (monster is JeanClaude && !player.hasStatusAffect(StatusAffects.FirstAttack))
@@ -12314,16 +12315,16 @@ public function soulforceSpecials():void {
 		else addButton(10, "Deactiv VPT", DeactivateVioletPupilTransformation, null, null, null, "Deactivate Violet Pupil Transformation.\n");
 	}
 	if (player.weaponName == "Warden’s greatsword") {
-		addButton(13, "Beat of War", BeatOfWar, null, null, null, "Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.\n\nSoulforce cost: " + 50 * soulskillCost() * soulskillcostmulti());
+		addButton(12, "Beat of War", BeatOfWar, null, null, null, "Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.\n\nSoulforce cost: " + 50 * soulskillCost() * soulskillcostmulti());
 	}
 	if (player.weaponName == "Warden’s blade") {
-		addButton(13, "Blade Dance", BladeDance, null, null, null, "Attack twice (four times if double attack is active, six times if triple attack is active and etc.).\n\nSoulforce cost: " + 50 * soulskillCost() * (1 + flags[kFLAGS.DOUBLE_ATTACK_STYLE]));
+		addButton(12, "Blade Dance", BladeDance, null, null, null, "Attack twice (four times if double attack is active, six times if triple attack is active and etc.).\n\nSoulforce cost: " + 50 * soulskillCost() * (1 + flags[kFLAGS.DOUBLE_ATTACK_STYLE]));
+	}
+	if (player.weaponName == "Warden’s staff") {
+		addButton(12, "AvatarOfTheSong", AvatarOfTheSong, null, null, null, "Doublecast Charged Weapon and Might. Casts blind if charged weapon is already active. Casts Heal if Might is already active.\n\nSoulforce cost: 200");
 	}
 	if (player.weaponRangeName == "Warden’s bow") {
 		addButton(13, "ResonanceVolley", ResonanceVolley, null, null, null, "Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.\n\nSoulforce cost: 150");
-	}
-	if (player.weaponName == "Warden’s staff") {
-		addButton(13, "AvatarOfTheSong", AvatarOfTheSong, null, null, null, "Doublecast Charged Weapon and Might. Casts blind if charged weapon is already active. Casts Heal if Might is already active.\n\nSoulforce cost: 200");
 	}
 	addButton(14, "Back", combatMenu, false);
 }
@@ -12684,14 +12685,14 @@ public function BeatOfWar():void {
 	var BeatOfWarBoost:Number = (player.str - player.statusAffectv1(StatusAffects.BeatOfWar)) * 0.15;
 	if (BeatOfWarBoost < 1) BeatOfWarBoost = 1;
 	BeatOfWarBoost = Math.round(BeatOfWarBoost);
-	if (player.hasStatusAffect(StatusAffects.BeatOfWar)) player.addStatusValue(StatusAffects.BeatOfWar, 1, BeatOfWarBoost);
-	else player.createStatusAffect(StatusAffects.BeatOfWar,BeatOfWarBoost,0,0,0);
+	if (!player.hasStatusAffect(StatusAffects.BeatOfWar)) player.createStatusAffect(StatusAffects.BeatOfWar,0,0,0,0);//player.addStatusValue(StatusAffects.BeatOfWar, 1, BeatOfWarBoost);
 	temp = BeatOfWarBoost;
 	tempStr = temp;
+	player.addStatusValue(StatusAffects.BeatOfWar,1,tempStr);
 	mainView.statsView.showStatUp('str');
-	player.str += player.statusAffectv1(StatusAffects.BeatOfWar);
+	player.str += BeatOfWarBoost;			//player.statusAffectv1(StatusAffects.BeatOfWar);
 	statScreenRefresh();
-	outputText("You momentarily attune yourself to the song of the mother tree, and prepare to add a note of your own to it’s rhythm.\n\n");
+	outputText("You momentarily attune yourself to the song of the mother tree, and prepare to add a note of your own to it’s rhythm. You feel the beat shift the song’s tempo slightly, taking a twist towards the ominous. This attunement augments your strength.\n\n");
 	basemeleeattacks();
 }
 public function BladeDance():void {
