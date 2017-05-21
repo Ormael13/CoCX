@@ -242,6 +242,7 @@ package classes.Items {
 			&& condition
 			&& Math.random() * rarity < 1) {
 			code();
+			changes++;
 			return true;
 		} else {
 			return false;
@@ -257,6 +258,12 @@ package classes.Items {
 	// * @return true if added genetic memory (displayed "genetic memory unlocked" text)
 	// =================================
 
+	public function setAntennae(antennae:int):Boolean {
+		return setBodyPartType("antennae", METAMORPH_ANTENNAE, antennae);
+	}
+	private const METAMORPH_ANTENNAE:Object = createMapFromPairs([
+		[ANTENNAE_BEE, StatusAffects.UnlockedBeeAntennae],
+	]);
 	public function setArmType(armType:int):Boolean {
 		return setBodyPartType("armType", METAMORPH_ARMS, armType);
 	}
