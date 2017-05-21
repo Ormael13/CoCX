@@ -426,8 +426,11 @@ use namespace kGAMECLASS;
 				attack += (((str + spe) - 200) * 0.1);
 			}//20-60-100
 			if(findPerk(PerkLib.LightningStrikes) >= 0 && spe >= 60 && (weaponPerk != "Large" || weaponPerk != "Dual Large" || !isFistOrFistWeapon())) {
-				attack += ((spe - 50) * 0.3);//wyjątek dla pieści jest//dodać wyjąte dla dual weapons na pewno//wyjątek potem dodać dla daggers i innych assasins weapons i dać im lepszy przelicznik
+				attack += ((spe - 50) * 0.3);//wyjątek potem dodać dla daggers i innych assasins weapons i dać im lepszy przelicznik
 			}//45-105-165
+			if(findPerk(PerkLib.SteelImpact) >= 0) {
+				attack += ((tou - 50) * 0.3);
+			}
 			if (isFistOrFistWeapon()) {
 				if(findPerk(PerkLib.IronFistsI) >= 0 && str >= 50) {
 					attack += 10;
@@ -4563,6 +4566,9 @@ use namespace kGAMECLASS;
 				if (findPerk(PerkLib.ThickSkin) >= 0) maxSpe += (5 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.DraconicLungs) >= 0) {
+				maxSpe += (5 * (1 + newGamePlusMod));
+			}
+			if (findPerk(PerkLib.KitsuneThyroidGland) >= 0) {
 				maxSpe += (5 * (1 + newGamePlusMod));
 			}
 			if (findPerk(PerkLib.EzekielBlessing) > 0) {

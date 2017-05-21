@@ -3225,6 +3225,7 @@ import classes.BodyParts.UnderBody;
 			if (findPerk(PerkLib.Unhindered) >= 0 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing")) chance += 10;
 			if (hasStatusAffect(StatusAffects.Illusion)) chance += 10;
 			if (hasStatusAffect(StatusAffects.Flying)) chance += 20;
+			if (hasStatusAffect(StatusAffects.BladeDance)) chance += 30;
 			return chance;
 		}
 	   
@@ -3260,6 +3261,7 @@ import classes.BodyParts.UnderBody;
 			if (findPerk(PerkLib.Unhindered) >= 0 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing") && (roll < 10)) return "Unhindered";
 			if (hasStatusAffect(StatusAffects.Illusion) && (roll < 10)) return "Illusion";
 			if (hasStatusAffect(StatusAffects.Flying) && (roll < 20)) return "Flying";
+			if (hasStatusAffect(StatusAffects.BladeDance) && (roll < 30)) return "Blade Dance";
 			return null;
 		}
 	   

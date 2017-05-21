@@ -1098,6 +1098,9 @@ public function buildPerkList():Array {
 		if (player.maxPrestigeJobs() > 0 && player.findPerk(PerkLib.JobKnight) >= 0 && player.findPerk(PerkLib.JobWarrior) >= 0 && player.tou >= 200) {
 			_add(new PerkClass(PerkLib.PrestigeJobSentinel));
 		}
+		if (player.findPerk(PerkLib.PrestigeJobSentinel) >= 0) {
+			_add(new PerkClass(PerkLib.SteelImpact));
+		}
 	}
 	//Tier 8 Toughness Perks
 	if(player.level >= 48) {
