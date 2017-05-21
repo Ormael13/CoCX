@@ -592,18 +592,18 @@ package classes.Items {
 		if (player[key] == tgtType) return false;
 		player[key] = tgtType;
 		if (player.findPerk(PerkLib.GeneticMemory) < 0) return false;
-		var sat:StatusAffectType;
-		var flavour:String;
 		var o:* = dict[tgtType];
 		if (o instanceof Array) {
-			sat     = o[0];
-			flavour = o[1];
+			return addGeneticMemory(o[0], o[1]);
 		} else {
-			sat     = o;
-			flavour = sat.id.replace("Unlocked ", "");
+			var sat:StatusAffectType = o;
+			return addGeneticMemory(sat, sat.id.replace("Unlocked ", ""));
 		}
+	}
+	public function addGeneticMemory(sat:StatusAffectType, name:String = null):Boolean {
+		if (player.findPerk(PerkLib.GeneticMemory) < 0) return false;
 		if (sat != null && !player.hasStatusAffect(sat)) {
-			outputText("\n\n<b>Genetic Memory: " + flavour + " - Memorized!</b>\n\n");
+			outputText("\n\n<b>Genetic Memory: " + name + " - Memorized!</b>\n\n");
 			player.createStatusAffect(sat, 0, 0, 0, 0);
 			return true;
 		}
