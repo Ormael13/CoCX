@@ -9898,12 +9898,18 @@ import classes.CockTypesEnum;
 				}
 				else outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
 				player.tailCount = 7;
-				//add tomorrow genetic memory unlock for this tail when PC got permed 9 tail of balance
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxTail7th) && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+					outputText("\n\n<b>Genetic Memory: 7th Fox Tail - Memorized!</b>\n\n");
+					player.createStatusAffect(StatusAffects.UnlockedFoxTail7th, 0, 0, 0, 0);
+				}
 			});
 			mutationStep(nFoxTails == 7 && player.level >= 36 && player.inte >= 105 && player.wis >= 105 && (player.findPerk(PerkLib.EnlightenedKitsune) < 0 || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (player.findPerk(PerkLib.EnlightenedNinetails) < 0 || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 4, function(): void {
 				outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
 				player.tailCount++;
-				//add tomorrow genetic memory unlock for this tail when PC got permed 9 tail of balance
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxTail8th) && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+					outputText("\n\n<b>Genetic Memory: 8th Fox Tail - Memorized!</b>\n\n");
+					player.createStatusAffect(StatusAffects.UnlockedFoxTail8th, 0, 0, 0, 0);
+				}
 			});
 			//[Grow 9th tail and gain Corrupted Nine-tails perk]
 			mutationStep(nFoxTails == 8 && player.level >= 42 && player.inte >= 120 && player.wis >= 120 && (player.findPerk(PerkLib.EnlightenedNinetails) < 0 || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 4, function(): void {
@@ -9916,7 +9922,10 @@ import classes.CockTypesEnum;
 				}
 				else outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
 				player.tailCount = 9;
-				//add tomorrow genetic memory unlock for this tail when PC got permed 9 tail of balance
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxTail9th) && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+					outputText("\n\n<b>Genetic Memory: 9th Fox Tail - Memorized!</b>\n\n");
+					player.createStatusAffect(StatusAffects.UnlockedFoxTail9th, 0, 0, 0, 0);
+				}
 
 			});
 			//Fox Eyes

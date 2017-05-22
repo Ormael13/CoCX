@@ -345,25 +345,25 @@ public function doubleAttackOptions():void {
 	outputText("\n\nYou can change it to different amount of attacks.");
 	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 0) addButton(0, "All Single", singleAttack);
 	if ((player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 1) {
-		if ((player.weaponPerk != "Large" || (player.weaponPerk == "Large" && player.findPerk(PerkLib.DoubleAttackLarge) < 0)) && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && (player.isFistOrFistWeapon() && player.findPerk(PerkLib.Combo) >= 0)) addButton(1, "All Double", doubleAttack);
-		else addButtonDisabled(1, "All Double", "You current melee weapon not allow to use this option");	//player.weaponName != "fists"
+		if ((player.weaponPerk == "Large" && player.findPerk(PerkLib.DoubleAttackLarge) < 0) || player.weaponPerk == "Dual Large" || player.weaponPerk == "Dual" || player.weaponPerk == "Staff" || (player.isFistOrFistWeapon() && player.findPerk(PerkLib.Combo) < 0)) addButtonDisabled(1, "All Double", "You current melee weapon not allow to use this option");
+		else addButton(1, "All Double", doubleAttack);
 	}
 	if ((player.findPerk(PerkLib.TripleAttack) >= 0 || player.findPerk(PerkLib.TripleAttackLarge) >= 0) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 2) {
-		if ((player.weaponPerk != "Large" || (player.weaponPerk == "Large" && player.findPerk(PerkLib.TripleAttackLarge) < 0)) && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && (player.isFistOrFistWeapon() && player.findPerk(PerkLib.ComboMaster) >= 0)) addButton(5, "All Triple", tripleAttack);
-		else addButtonDisabled(5, "All Triple", "You current melee weapon not allow to use this option");	//player.weaponName != "fists"
+		if ((player.weaponPerk == "Large" && player.findPerk(PerkLib.TripleAttackLarge) < 0) || player.weaponPerk == "Dual Large" || player.weaponPerk == "Dual" || player.weaponPerk == "Staff" || (player.isFistOrFistWeapon() && player.findPerk(PerkLib.ComboMaster) < 0)) addButtonDisabled(5, "All Triple", "You current melee weapon not allow to use this option");
+		else addButton(5, "All Triple", tripleAttack);
 	}
 	if (player.findPerk(PerkLib.QuadrupleAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 3) {
-		if (player.weaponPerk != "Large" && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && !player.isFistOrFistWeapon()) addButton(6, "All Quadruple", quadrupleAttack);
-		else addButtonDisabled(6, "All Quadruple", "You current melee weapon not allow to use this option");
-	}// && player.weaponName != "hooked gauntlets" && player.weaponName != "spiked gauntlet"
+		if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large" || player.weaponPerk == "Dual" || player.weaponPerk == "Staff" || player.isFistOrFistWeapon()) addButtonDisabled(6, "All Quadruple", "You current melee weapon not allow to use this option");
+		else addButton(6, "All Quadruple", quadrupleAttack);
+	}
 	if (player.findPerk(PerkLib.PentaAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 4) {
-		if (player.weaponPerk != "Large" && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && !player.isFistOrFistWeapon()) addButton(10, "All Penta", pentaAttack);
-		else addButtonDisabled(10, "All Penta", "You current melee weapon not allow to use this option");
-	}// && player.weaponName != "hooked gauntlets" && player.weaponName != "spiked gauntlet"
+		if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large" || player.weaponPerk == "Dual" || player.weaponPerk == "Staff" || player.isFistOrFistWeapon()) addButtonDisabled(10, "All Penta", "You current melee weapon not allow to use this option");
+		else addButton(10, "All Penta", pentaAttack);
+	}
 	if (player.findPerk(PerkLib.HexaAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 5) {
-		if (player.weaponPerk != "Large" && player.weaponPerk != "Dual Large" && player.weaponPerk != "Dual" && player.weaponPerk != "Staff" && !player.isFistOrFistWeapon()) addButton(11, "All Hexe", hexaAttack);
-		else addButtonDisabled(11, "All Hexe", "You current melee weapon not allow to use this option");
-	}// && player.weaponName != "hooked gauntlets" && player.weaponName != "spiked gauntlet"
+		if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large" || player.weaponPerk == "Dual" || player.weaponPerk == "Staff" || player.isFistOrFistWeapon()) addButtonDisabled(11, "All Hexe", "You current melee weapon not allow to use this option");
+		else addButton(11, "All Hexe", hexaAttack);
+	}
 	
 	var e:MouseEvent;
 	if (inCombat) addButton(14, "Back", combat.combatMenu);
@@ -399,6 +399,7 @@ public function doubleStrikeOptions():void {
 	clearOutput();
 	menu();
 	outputText("You will always shoot ");
+	if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 5) outputText("six");
 	if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 4) outputText("five");
 	if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 3) outputText("four");
 	if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] == 2) outputText("three");
