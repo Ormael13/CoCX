@@ -210,7 +210,7 @@
 			this.tallness = 120;
 			this.hipRating = HIP_RATING_SLENDER;
 			this.buttRating = BUTT_RATING_BUTTLESS;
-			player.skin.setBaseOnly({type:SKIN_BASE_PLAIN,color:"purple",desc:"covering"});
+			this.skin.setBaseOnly({type:SKIN_BASE_PLAIN,color:"purple",desc:"covering"});
 			this.hairColor = "black";
 			this.hairLength = 0;
 			initStrTouSpeInte(180, 1, 1, 1);
