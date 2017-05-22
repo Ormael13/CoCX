@@ -99,28 +99,27 @@ import flash.utils.Dictionary;
 		 *   // additional depending on type
 		 * }
 		 */
-		public var conditions:Array = [];
-
+		public var requirements:Array = [];
 
 		/**
-		 * @return "condition1, condition2, ..."
+		 * @return "requirement1, requirement2, ..."
 		 */
-		public function conditionsText():String {
+		public function allRequirementDesc():String {
 			var s:Array = [];
-			for each (var c:Object in conditions) {
+			for each (var c:Object in requirements) {
 				if (c.text) s.push(c.text);
 			}
 			return s.join(", ");
 		}
 		public function available(player:Player):Boolean {
-			for each (var c: Object in conditions) {
+			for each (var c: Object in requirements) {
 				if (!c.fn(player)) return false;
 			}
 			return true;
 		}
 
 		public function requireCustomFunction(playerToBoolean:Function, requirementText:String, internalType:String = "custom"):PerkType {
-			conditions.push({
+			requirements.push({
 				fn  : playerToBoolean,
 				text: requirementText,
 				type: internalType
@@ -129,7 +128,7 @@ import flash.utils.Dictionary;
 		}
 
 		public function requireLevel(value:int):PerkType {
-			conditions.push({
+			requirements.push({
 				fn  : fnRequireAttr("level", value),
 				text: "Level " + value,
 				type: "level",
@@ -138,7 +137,7 @@ import flash.utils.Dictionary;
 			return this;
 		}
 		public function requireStr(value:int):PerkType {
-			conditions.push({
+			requirements.push({
 				fn  : fnRequireAttr("str", value),
 				text: "Strength " + value,
 				type: "attr",
@@ -148,7 +147,7 @@ import flash.utils.Dictionary;
 			return this;
 		}
 		public function requireTou(value:int):PerkType {
-			conditions.push({
+			requirements.push({
 				fn  : fnRequireAttr("tou", value),
 				text: "Toughness " + value,
 				type: "attr",
@@ -158,7 +157,7 @@ import flash.utils.Dictionary;
 			return this;
 		}
 		public function requireSpe(value:int):PerkType {
-			conditions.push({
+			requirements.push({
 				fn  : fnRequireAttr("spe", value),
 				text: "Speed " + value,
 				type: "attr",
@@ -168,7 +167,7 @@ import flash.utils.Dictionary;
 			return this;
 		}
 		public function requireInt(value:int):PerkType {
-			conditions.push({
+			requirements.push({
 				fn  : fnRequireAttr("inte", value),
 				text: "Intellect " + value,
 				type: "attr",
@@ -178,7 +177,7 @@ import flash.utils.Dictionary;
 			return this;
 		}
 		public function requireWis(value:int):PerkType {
-			conditions.push({
+			requirements.push({
 				fn  : fnRequireAttr("wis", value),
 				text: "Wisdom " + value,
 				type: "attr",
@@ -188,7 +187,7 @@ import flash.utils.Dictionary;
 			return this;
 		}
 		public function requireLib(value:int):PerkType {
-			conditions.push({
+			requirements.push({
 				fn  : fnRequireAttr("lib", value),
 				text: "Libido " + value,
 				type: "attr",
@@ -198,7 +197,7 @@ import flash.utils.Dictionary;
 			return this;
 		}
 		public function requireCor(value:int):PerkType {
-			conditions.push({
+			requirements.push({
 				fn  : fnRequireAttr("cor", value),
 				text: "Corruption " + value,
 				type: "attr",
@@ -208,19 +207,19 @@ import flash.utils.Dictionary;
 			return this;
 		}
 		public function requireLibLessThan(value:int):PerkType {
-			conditions.push({
+			requirements.push({
 				fn  : function(player:Player):Boolean {
 					return player.lib < value;
 				},
-				text: "Libido < " + value,
-				type: "attr<",
+				text: "Libido &lt; " + value,
+				type: "attr-lt",
 				attr: "lib",
 				value: value
 			});
 			return this;
 		}
 		public function requireNGPlus(value:int):PerkType {
-			conditions.push({
+			requirements.push({
 				fn  : function(player:Player):Boolean {
 					return player.newGamePlusMod() >= value;
 				},
@@ -231,7 +230,7 @@ import flash.utils.Dictionary;
 			return this;
 		}
 		public function requirePrestigeJobSlot():PerkType {
-			conditions.push({
+			requirements.push({
 				fn  : function(player:Player):Boolean {
 					return player.maxPrestigeJobs() > 0;
 				},
@@ -241,7 +240,7 @@ import flash.utils.Dictionary;
 			return this;
 		}
 		public function requireHungerEnabled():PerkType {
-			conditions.push({
+			requirements.push({
 				fn  : function(player:Player):Boolean {
 					return kGAMECLASS.flags[kFLAGS.HUNGER_ENABLED] > 0;
 				},
@@ -251,7 +250,7 @@ import flash.utils.Dictionary;
 			return this;
 		}
 		public function requireMinLust(value:int):PerkType {
-			conditions.push({
+			requirements.push({
 				fn  : function(player:Player):Boolean {
 					return kGAMECLASS.minLust() >= value;
 				},
@@ -262,7 +261,7 @@ import flash.utils.Dictionary;
 			return this;
 		}
 		public function requireMaxSoulforce(value:int):PerkType {
-			conditions.push({
+			requirements.push({
 				fn  : function(player:Player):Boolean {
 					return player.maxSoulforce() >= value;
 				},
@@ -278,7 +277,7 @@ import flash.utils.Dictionary;
 			};
 		}
 		public function requireStatusEffect(effect:StatusAffectType, text:String):PerkType {
-			conditions.push({
+			requirements.push({
 				fn  : function (player:Player):Boolean {
 					return player.hasStatusAffect(effect);
 				},
@@ -289,7 +288,7 @@ import flash.utils.Dictionary;
 			return this;
 		}
 		public function requirePerk(perk:PerkType):PerkType {
-			conditions.push({
+			requirements.push({
 				fn  : function (player:Player):Boolean {
 					return player.findPerk(perk) >= 0;
 				},
@@ -303,9 +302,9 @@ import flash.utils.Dictionary;
 			if (perks.length == 0) throw ("Incorrect call of requireAnyPerk() - should NOT be empty");
 			var text:Array = [];
 			for each (var perk:PerkType in perks) {
-				text.push(perk.conditionsText());
+				text.push(perk.allRequirementDesc());
 			}
-			conditions.push({
+			requirements.push({
 				fn  : function (player:Player):Boolean {
 					for each (var perk:PerkType in perks) {
 						if (player.findPerk(perk) >= 0) return true;

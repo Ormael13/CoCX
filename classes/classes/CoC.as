@@ -8,7 +8,10 @@
 package classes
 {
 	// BREAKING ALL THE RULES.
-	import classes.GlobalFlags.kFLAGS; // This file contains most of the persistent gamestate flags.
+	import classes.GlobalFlags.kFLAGS;
+import classes.display.PerkMenu;
+
+// This file contains most of the persistent gamestate flags.
 	import classes.Scenes.Combat.Combat;
 	import classes.GlobalFlags.kGAMECLASS; // This file creates the gameclass that the game will run within.
 	import classes.GlobalFlags.kACHIEVEMENTS; // This file creates the flags for the achievements system.
@@ -277,6 +280,7 @@ the text from being too boring.
 		private var _updateHack:Sprite = new Sprite();
 		
 		public var mainViewManager:MainViewManager = new MainViewManager();
+		public var perkMenu:PerkMenu = new PerkMenu();
 
 		public var perkTree:PerkTree = new PerkTree();
 		// Other scenes
@@ -448,7 +452,7 @@ the text from being too boring.
 			this.mainView.onAppearanceClick = playerAppearance.appearance;
 			this.mainView.onDataClick = saves.saveLoad;
 			this.mainView.onLevelClick = levelUpGo;
-			this.mainView.onPerksClick = displayPerks;
+			this.mainView.onPerksClick = perkMenu.displayPerks;
 			this.mainView.onStatsClick = displayStats;
 
 			// Set up all the messy global stuff:

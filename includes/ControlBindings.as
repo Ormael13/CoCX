@@ -245,7 +245,7 @@ inputManager.AddBindableControl(
 	function():void {
 		if (mainView.menuButtonIsVisible(MainView.MENU_PERKS))
 		{
-			displayPerks(undefined);
+			perkMenu.displayPerks(null);
 		}
 	});
 

@@ -18,12 +18,12 @@ public class PerkTree extends BaseContent {
 			//var perk:PerkType = library[k];
 			pdata[perk.id] = {
 				perk   : perk,
-				ctxt   : perk.conditionsText(),
+				ctxt   : perk.allRequirementDesc(),
 				unlocks: []
 			};
 		}
 		for each(perk in library) {
-			for each (var c:Object in perk.conditions) {
+			for each (var c:Object in perk.requirements) {
 				switch (c.type) {
 					case "perk":
 						var p2:PerkType = c.perk;
@@ -36,12 +36,11 @@ public class PerkTree extends BaseContent {
 				}
 			}
 		}
-		for each(var pd:Object in pdata) {
+		/*for each(var pd:Object in pdata) {
 			var s:Array = [];
 			for each (perk in pd.unlocks) s.push(perk.name);
-			if (s.length>0 || pd.ctxt) trace("Perk " + pd.perk.name + (pd.ctxt ? "; requires " + pd.ctxt : "") +
-				  (s.length > 0 ? "; unlocks " + s.join(", ") : ""));
-		}
+			if (s.length>0 || pd.ctxt) trace("Perk " + pd.perk.name + (pd.ctxt ? "; requires " + pd.ctxt : "") + (s.length > 0 ? "; unlocks " + s.join(", ") : ""));
+		}*/
 	}
 	/**
 	 * Returns Array of PerkType
@@ -55,11 +54,11 @@ public class PerkTree extends BaseContent {
 	public static function obtainablePerks():Array {
 		var rslt:Array=[];
 		for each(var perk:PerkType in PerkType.getPerkLibrary()) {
-			if (perk.conditions.length > 0) {
+			if (perk.requirements.length > 0) {
 				rslt.push(perk);
 			}
 		}
-		return rslt;
+		return rslt.sortOn("name");
 	}
 	/**
 	 * Returns Array of PerkType

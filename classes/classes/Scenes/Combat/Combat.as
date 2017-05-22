@@ -6320,8 +6320,8 @@ public function getWhiteMagicLustCap():Number {
 public function meleeANDrangeANDmanaSubMenu():void {
 	menu();
 	clearOutput();
-	if (player.findPerk(PerkLib.DoubleAttack) >= 0) addButton(0,"Melee Opt",kGAMECLASS.doubleAttackOptions);
-	if (player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0) addButton(1,"Range Opt",kGAMECLASS.doubleStrikeOptions);
+	if (player.findPerk(PerkLib.DoubleAttack) >= 0) addButton(0,"Melee Opt",kGAMECLASS.perkMenu.doubleAttackOptions);
+	if (player.findPerk(PerkLib.DoubleStrike) >= 0 || player.findPerk(PerkLib.ElementalArrows) >= 0 || player.findPerk(PerkLib.Cupid) >= 0) addButton(1,"Range Opt",kGAMECLASS.perkMenu.doubleStrikeOptions);
 //	if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(2,"Mana",ManaAndSoulforce);
 	addButton(14, "Back", combatMenu, false);
 }

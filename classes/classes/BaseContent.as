@@ -270,6 +270,10 @@ import classes.Scenes.Places.Ingnam;
 			kGAMECLASS.currentText = "";
 			kGAMECLASS.mainView.clearOutputText();
 		}
+		protected function displayHeader(string:String):void
+		{
+			kGAMECLASS.displayHeader(string);
+		}
 		
 		protected function flushOutputTextToGUI():void {
 			kGAMECLASS.flushOutputTextToGUI();
