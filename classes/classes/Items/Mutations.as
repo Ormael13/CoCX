@@ -2195,7 +2195,7 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//
-		/*	if (player.gender == 2 && player.plantScore() >= 7 && player.wingType == WING_TYPE_PLANT && player.lowerBody == LOWER_BODY_TYPE_PLANT_HIGH_HEELS && changes < changeLimit && rand(2) == 0) {
+			if (player.plantScore() >= 7 && player.wingType == WING_TYPE_PLANT && player.hasStatusAffect(StatusAffects.AlrauneFlower) && changes < changeLimit && rand(2) == 0) {
 				outputText("\n\nYour close your eyes to appreciate the feeling of the sun on your vegetal skin, losing yourself in the sensation. That is short lived as your feet suddenly tingle with a weird feeling. Opening your eye you look down in panic as your feet roots themselves in the ground and start to merge together up to your pussy into a trunk which turn a shade of green darker than the rest of your body. Your tentacle wings have also moved down to your feet tips but the weirdest happen when everything below your waist grow bloated easily becoming twice as large as you are. ");
 				outputText("Your legs almost look... like a flower about to bloom? Bloom it does indeed as everything below your waist explode in a orchid of enormous size with petal large enough to engulf you entirely. Worried about being rooted in place you try and move and to your surprise you pretty much discover you can actually walk around on the vine like tentacle cocks at the base of your body. It feels weird at first but you think you will get used to walking on pseudo vines.");
 				if (player.tailType != 0) {
@@ -2205,12 +2205,12 @@ import classes.CockTypesEnum;
 					outputText(" recede back into your body disappearing entirely into your backside as if it never existed.", false);
 				}
 				if (player.tailType != 0) setTailType(0);
-				setWingType(WING_TYPE_NONE);
+				setWingType(WING_TYPE_NONE, "non-existant");
 				setLowerBody(LOWER_BODY_TYPE_PLANT_FLOWER);
-				player.legCount = 4;
+				player.legCount = 12;
 				changes++;
 			}
-		*/	player.refillHunger(10);
+			player.refillHunger(10);
 		}
 		
 		public function succubiMilk(tainted:Boolean,player:Player):void
@@ -8727,7 +8727,7 @@ import classes.CockTypesEnum;
 				setArmType(ARM_TYPE_SPIDER);
 				changes++;
 			}
-			if ((player.isTaur() || player.isGoo() || player.isNaga() || player.isScylla())
+			if ((player.isTaur() || player.isGoo() || player.isNaga() || player.isScylla() || player.isAlraune())
 				&& changes < changeLimit && rand(4) == 0) {
 				humanizeLowerBody();
 				changes++;

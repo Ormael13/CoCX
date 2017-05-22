@@ -249,6 +249,7 @@ private function alraunezeMeYes0():void {
 		player.cocks[2].cockType = CockTypesEnum.STAMEN;
 		player.cocks[3].cockType = CockTypesEnum.STAMEN;
 	}
+	if (!player.hasStatusAffect(StatusAffects.AlrauneFlower)) player.createStatusAffect(StatusAffects.AlrauneFlower,0,0,0,0);
 	if (player.wingType == WING_TYPE_PLANT) player.wingType = WING_TYPE_NONE;
 	player.lowerBody = LOWER_BODY_TYPE_PLANT_FLOWER;
 	player.legCount = 12;

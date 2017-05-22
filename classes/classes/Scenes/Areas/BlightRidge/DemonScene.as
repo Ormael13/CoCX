@@ -10,14 +10,14 @@ package classes.Scenes.Areas.BlightRidge
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Scenes.Dungeons.Factory;
-	import classes.Scenes.NPCs.EtnaFollower;
+	import classes.Scenes.UniqueSexScenes;
 	
 	//use namespace kGAMECLASS;
 	
 	public class DemonScene extends BaseContent
 	{
 		public var FactoryScene:Factory = new Factory();
-		public var etnaScene:EtnaFollower = new EtnaFollower();
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
 		public function DemonScene() 
 		{
@@ -50,7 +50,6 @@ package classes.Scenes.Areas.BlightRidge
 					addButton (1, "F. Fuck", IncubusGetsRapedByFemale);
 					addButton (2, "Service Him", GiveIncubusOral);
 					addButton (3, "Catch Anal", FactoryScene.doRideIncubusAnally);
-					if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(5, "Tail Rape", etnaScene.manticoreTailRapeScene);
 				}
 				if(player.gender == 3) {
 					addButton (0, "M. Fuck", IncubusGetsRapedByMale);
@@ -58,9 +57,11 @@ package classes.Scenes.Areas.BlightRidge
 					addButton (2, "Service Him", GiveIncubusOral);
 					addButton (3, "Catch Anal", FactoryScene.doRideIncubusAnally);
 				}
+				if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(7, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 			}
 			addButton (4, "Leave", cleanupAfterCombat);
-			if(monster.HP < 1) addButton (5, "Kill Him", killDemon);
+			if (monster.HP < 1) addButton (5, "Kill Him", killDemon);
+			if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(6, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
 		}
 		
 		public function lustyPaizuri():void {
@@ -304,7 +305,11 @@ package classes.Scenes.Areas.BlightRidge
 			if (player.lust>=33 && player.gender > 0) {
 				outputText("\nNow would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you fuck her?");
 				if (player.gender == 1 || player.gender == 3) addButton (0, "M. Fuck", OmnibusGetsRapedByMale);
-				if (player.gender == 2 || player.gender == 3) addButton (0, "F. Fuck", OmnibusGetsRapedByFemale);
+				if (player.gender == 2 || player.gender == 3) addButton (1, "F. Fuck", OmnibusGetsRapedByFemale);
+				if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) {
+					addButton(2, "Seeding", uniquuuesexscene.alrauneSeedingScene);
+					addButton(3, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
+				}
 			}
 			addButton (4, "Leave", cleanupAfterCombat);
 			if(monster.HP < 1) addButton (5, "Kill Her", killDemon);
@@ -580,6 +585,7 @@ package classes.Scenes.Areas.BlightRidge
 					addButton (0, "M. Fuck", SuccubusGetsRapedByMale);
 					addButton (1, "F. Fuck", SuccubusGetsRapedByFemale);
 				}
+				if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(2, "Seeding", uniquuuesexscene.alrauneSeedingScene);
 			}
 			addButton (4, "Leave", cleanupAfterCombat);
 			if(monster.HP < 1) addButton (5, "Kill Her", killDemon);

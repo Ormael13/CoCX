@@ -475,44 +475,6 @@ public function etnaSparsWithPC():void
 	startCombat(new Etna());
 }
 
-public function cumOmeter(changes:Number = 0):Number
-{
-	flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] += changes;
-	if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 100) flags[kFLAGS.ETNA_AFFECTION] = 100;
-	return flags[kFLAGS.SEXUAL_FLUIDS_LEVEL];
-}
-
-public function manticoreTailRapeScene():void
-{
-	clearOutput();
-	outputText("While your defeated foe is laying on the ground, you make a sadistic grin as you contemplate the situation. This came just as you got hungry or rather, just as your tail did.\n\n");
-	outputText("Kicking him on his back you proceed to sit on his legs to prevent him from moving. You push everything out of the way as your eyes zero in on their target, his cock. You sting your victim a few times, injecting him with a pint worth of aphrodisiac. For several seconds, he try and get you of him but your poison eventually kicks in and he falls limp on the ground at your mercy. Soon enough, his cock is standing throbbing and erect. Licking your lips, you take it upon yourself to relieve your victim of his pent-up lust, opening your tail and swallowing his entire length inside.\n\n");
-	outputText("Smirking with malicious cruelty you whisper softly in your terrified victims ear. \"<i>Does me eating you whole make it feel like you're dying? Don't worry, I will make you die over and over again until you're dry as an empty husk!</i>\"\n\n");
-	outputText("Soon, your cumpump face turns to a tormented expression as your tail forcefully milks him of all his cum, regularly injecting more aphrodisiac to make him orgasm and leak constantly like a hose. Ironically and against his better judgment the stimulation of your vaginal wall causes his body to buck up and down in your tail, only making him cum more. On your end, you taste every drop of cum he deposits inside just like you would with your mouth. Delighted by the sensations from your tail pussy, you feel like singing and to your surprise a series of moans that sound like a song come out from your mouth. Only once his balls have shrunk to the point they look like a pair of raisins do you let go of what's left of him.\n\n");
-	outputText("You lick your lips feeling like you just had a five course meal fit for a queen as you leave the body of your passed out opponent on the ground at the mercy of other potential sexual predators.");
-	if (player.findPerk(PerkLib.ManticoreMetabolism) >= 0) {
-		if (player.hasStatusAffect(StatusAffects.FeedingEuphoria)) {
-			if (player.statusAffectv2(StatusAffects.FeedingEuphoria) < 30) { //Maximum speed gain is 30.
-				player.addStatusValue(StatusAffects.FeedingEuphoria, 2, 10);
-				dynStats("spe", 10);
-			}
-			player.changeStatusValue(StatusAffects.FeedingEuphoria, 1, 10);
-		}
-		else {
-			player.createStatusAffect(StatusAffects.FeedingEuphoria, 10, 10, 0, 0);
-			dynStats("spe", 10);
-		}
-	}
-	HPChange(Math.round(player.maxHP() * .2), true);
-	cumOmeter(40);
-	player.cor += 2;
-	player.refillHunger(100);
-	player.orgasm();
-	statScreenRefresh();
-	cleanupAfterCombat();
-	return;
-}
-
 	}
 
 }

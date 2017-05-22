@@ -9,13 +9,13 @@ package classes.Scenes.Monsters
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armors.LustyMaidensArmor;
 	import classes.Scenes.Camp.ImpGang;
-	import classes.Scenes.NPCs.EtnaFollower;
+	import classes.Scenes.UniqueSexScenes;
 
 	use namespace kGAMECLASS;
 
 	public class ImpScene extends BaseContent
 	{
-		public var etnaScene:EtnaFollower = new EtnaFollower();
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
 		public function ImpScene()
 		{
@@ -69,8 +69,9 @@ package classes.Scenes.Monsters
 			if (canBikiniTits) addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 			if (maleRape == rapeImpWithDick && player.hasItem(useables.CONDOM)) addButton(5, "Use Condom", rapeImpWithDick, 1);
 			addButton(6, "Kill Him", killImp);
-			if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(7, "Tail Rape", etnaScene.manticoreTailRapeScene);
+			if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(7, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
 			if (player.canOvipositBee()) addButton(8, "Oviposit", putBeeEggsInAnImpYouMonster);
+			if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(9, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 			addButton(14, "Leave", cleanupAfterCombat);
 			
 		}
@@ -1554,7 +1555,7 @@ package classes.Scenes.Monsters
 					cleanupAfterCombat();
 					return;
 				}
-				if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(1, "Tail Rape", etnaScene.manticoreTailRapeScene);
+				if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(1, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
 				addButton(4, "Leave", cleanupAfterCombat);
 			}
 			else {
@@ -1562,7 +1563,7 @@ package classes.Scenes.Monsters
 				//Leave // Rape]
 				menu();
 				if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) addButton(0, "Sex", sexAnImpLord);
-				if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(1, "Tail Rape", etnaScene.manticoreTailRapeScene);
+				if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(1, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
 				addButton(4,"Leave",cleanupAfterCombat);
 			}
 		}
@@ -1594,6 +1595,7 @@ package classes.Scenes.Monsters
 				if(player.hasVagina()) addButton(2,"Ride Cock",femaleVagRape);
 				if(player.findPerk(PerkLib.Feeder) >= 0 && monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape);
 				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+				if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(5, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 			}
 			addButton(14,"Leave",cleanupAfterCombat);
 		}

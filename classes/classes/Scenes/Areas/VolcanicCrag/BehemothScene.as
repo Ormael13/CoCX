@@ -4,11 +4,11 @@ package classes.Scenes.Areas.VolcanicCrag
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.Scenes.NPCs.EtnaFollower;
+	import classes.Scenes.UniqueSexScenes;
 	
 	public class BehemothScene extends BaseContent
 	{
-		public var etnaScene:EtnaFollower = new EtnaFollower();
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
 		public function BehemothScene() 
 		{
@@ -193,7 +193,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			}
 			menu();
 			if (player.lust >= 33) addButton(0, "Sex", behemothSexMenu, true, null, null, "Initiate sexy time with the Behemoth.");
-			if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(1, "Tail Rape", etnaScene.manticoreTailRapeScene);
+			if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(1, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
 			addButton(4, "Leave", cleanupAfterCombat);
 		}
 		
@@ -268,6 +268,7 @@ package classes.Scenes.Areas.VolcanicCrag
 				if (timesSexed() >= 3) addButton(5, "Watersports", watersportsWithBehemoth, null, null, null, "Do some urine activity with him.");
 				else addButtonDisabled(5, "Watersports", "Have sex with the behemoth enough times to unlock this!");
 			}
+			if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(6, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 			if (!kGAMECLASS.inCombat) addButton(14, "Nevermind", camp.returnToCampUseOneHour);
 			else addButton(14, "Nevermind", cleanupAfterCombat);
 		}

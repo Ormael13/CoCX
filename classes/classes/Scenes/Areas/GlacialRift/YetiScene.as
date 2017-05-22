@@ -4,11 +4,11 @@ package classes.Scenes.Areas.GlacialRift
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import classes.Scenes.NPCs.EtnaFollower;
+	import classes.Scenes.UniqueSexScenes;
 	
 	public class YetiScene extends BaseContent
 	{
-		public var etnaScene:EtnaFollower = new EtnaFollower();
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
 		public function YetiScene() 
 		{
@@ -78,7 +78,8 @@ package classes.Scenes.Areas.GlacialRift
 					addButton(1, "RideHisCock", rideYetisCock);
 				}
 			}
-			if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(2, "Tail Rape", etnaScene.manticoreTailRapeScene);
+			if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(2, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
+			if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(3, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 			addButton(4, "Leave", cleanupAfterCombat);
 		}
 		

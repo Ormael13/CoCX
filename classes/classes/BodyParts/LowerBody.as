@@ -294,6 +294,9 @@ public class LowerBody extends SaveableBodyPart {
 	public function isScylla():Boolean {
 		return type == LOWER_BODY_TYPE_SCYLLA;
 	}
+	public function isAlraune():Boolean {
+		return type == LOWER_BODY_TYPE_PLANT_FLOWER;
+	}
 	public function legs():String {
 		var select:Number = 0;
 		//lowerBody:
@@ -302,6 +305,8 @@ public class LowerBody extends SaveableBodyPart {
 			return num2Text(legCount) + " spider legs";
 		if (isTaur())
 			return num2Text(legCount) + " legs";
+		if (isAlraune())
+			return num2Text(legCount) + " vine-like tentacle stamens";
 
 		switch (type) {
 			case LOWER_BODY_TYPE_HUMAN:

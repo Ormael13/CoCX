@@ -2593,6 +2593,7 @@ import classes.BodyParts.UnderBody;
 		public function isNaga():Boolean { return lowerBodyPart.isNaga(); }
 		public function isTaur():Boolean { return lowerBodyPart.isTaur(); }
 		public function isScylla():Boolean { return lowerBodyPart.isScylla(); }
+		public function isAlraune():Boolean { return lowerBodyPart.isAlraune(); }
 
 		public function canOvipositSpider():Boolean
 		{

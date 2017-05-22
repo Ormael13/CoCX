@@ -7,11 +7,11 @@ package classes.Scenes.Areas.Swamp
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armors.LustyMaidensArmor;
-	import classes.Scenes.NPCs.EtnaFollower;
+	import classes.Scenes.UniqueSexScenes;
 
 	public class MaleSpiderMorphScene extends BaseContent
 	{
-		public var etnaScene:EtnaFollower = new EtnaFollower();
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
 		public function MaleSpiderMorphScene()
 		{
@@ -91,7 +91,8 @@ package classes.Scenes.Areas.Swamp
 				if (player.biggestCockArea() > monster.analCapacity()) addButton(2, "Frot", victoryFrotTheSpoidah);
 			}
 			addButton(3, "B.Titfuck", bikiniTits);
-			if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(5, "Tail Rape", etnaScene.manticoreTailRapeScene);
+			if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(5, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
+			if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(6, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 			addButton(9, "Leave", cleanupAfterCombat);
 		}
 

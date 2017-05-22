@@ -10,6 +10,7 @@ package classes
 	{
 		// Non-combat player perks
 		public static const AllNaturalOnaholeUsed:StatusAffectType = mk("all-natural onahole used");
+		public static const AlrauneFlower:StatusAffectType = mk("Alraune Flower");
 		public static const AndysSmoke:StatusAffectType = mk("Andy's Smoke"); //v1: Hours; v2: Speed; v3: Intelligence
 		public static const AteEgg:StatusAffectType = mk("ateEgg");
 		public static const AnemoneArousal:StatusAffectType = mk("Anemone Arousal");

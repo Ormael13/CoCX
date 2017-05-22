@@ -3,11 +3,11 @@
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.Items.Armors.LustyMaidensArmor;
-	import classes.Scenes.NPCs.EtnaFollower;
+	import classes.Scenes.UniqueSexScenes;
 
 	public class MinotaurScene extends BaseContent {
 
-		public var etnaScene:EtnaFollower = new EtnaFollower();
+		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		
 		public function MinotaurScene()
 		{
@@ -125,8 +125,9 @@ public function minoVictoryRapeChoices():void {
 		if(player.canOvipositSpider() || (player.canOvipositBee() && player.gender > 0)) addButton(8, "Lay Eggs", layEggsInAMinotaurSpiderLike);
 		if((temp2 == null || rand(2) == 0) && player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(9, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 		if (player.findPerk(PerkLib.Feeder) >= 0) addButton(10, "Nurse", minotaurDrinksMilkNewsAtEleven);
+		if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) addButton(12, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 	}
-	if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(13, "Tail Rape", etnaScene.manticoreTailRapeScene);
+	if (player.tailType == TAIL_TYPE_MANTICORE_PUSSYTAIL) addButton(13, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
 	addButton(14, "Leave", cleanupAfterCombat);
 	if(x < 0 && player.hasCock()) outputText("\nSadly, you're too well endowed to penetrate the minotaur.", false);
 	if(player.gender == 3 && player.isTaur()) outputText("\nIf you had a different body type you might be able to penetrate him while taking him, but as a centaur that's not an option.", false);

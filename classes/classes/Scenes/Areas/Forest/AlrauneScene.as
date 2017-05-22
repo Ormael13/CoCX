@@ -34,7 +34,7 @@ package classes.Scenes.Areas.Forest
 	public function alrauneDeepwoodsLost():void {
 		clearOutput();
 		if (player.gender == 1) {
-		//	if () outputText("Your desire finally breaks your resolve as you stop struggling and make a dopey lust drunk face while the vines bring you to their mistress. ");
+			if (monster.statusAffectv1(StatusAffects.Level) > 2) outputText("Your desire finally breaks your resolve as you stop struggling and make a dopey lust drunk face while the vines bring you to their mistress. ");
 			outputText("You don’t recall when or how you ended up in her nectar bath, but there you are and your cock is throbbing with burning desire for this female.\n\n");
 			outputText("\"<i>Aw you poor thing. Let me comfort this pained stamen of yours with my nectar gushing pussy.</i>\"\n\n");
 			outputText("She begins to run her hands all over your body, making you shiver at the touch. She grabs you by the shoulders and brings you closer to her as she begins to kiss you, her sweet nectar flowing from her mouth to yours. It tastes wonderful yet is packed with powerful aphrodisiac; so before you know it your desire to mate intensifies and your cock is now aching to be used. You begin to drool mindlessly as her hands caress your throbbing cock.\n\n");
@@ -46,7 +46,7 @@ package classes.Scenes.Areas.Forest
 			outputText("When you wake up you are in a different area with your gear packed up next to you. Seems some thief made off with a small amount of your gems though.\n\n");
 		}
 		else {
-		//	if () outputText("Your desire finally breaks your resolve as you stop struggling and make a dopey lust drunk face while the vines bring you to their mistress. ");
+			if (monster.statusAffectv1(StatusAffects.Level) > 2) outputText("Your desire finally breaks your resolve as you stop struggling and make a dopey lust drunk face while the vines bring you to their mistress. ");
 			outputText("You don’t recall when or how you ended up naked in her nectar bath but there you are, fawning in the arms of the plant woman.\n\n");
 			outputText("\"<i>Mmmmm aren’t you a eager girl? Let’s start at the beginning then.</i>\"\n\n");
 			outputText("She begins to run her hands all over your body, making you shiver at every touch. She grabs you by the shoulders and brings you closer to her as she begins to kiss you, her sweet nectar flowing into your mouth. It tastes wonderful yet is packed with a powerful aphrodisiac. Before you know it, your desire for her only skyrockets. You break the kiss, a thin strand of syrupy nectar still connecting your lips as she moves a hand to your breasts, ");
