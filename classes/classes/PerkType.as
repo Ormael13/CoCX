@@ -3,7 +3,10 @@
  */
 package classes
 {
-	import flash.utils.Dictionary;
+import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kGAMECLASS;
+
+import flash.utils.Dictionary;
 
 	public class PerkType extends BaseContent
 	{
@@ -23,6 +26,10 @@ package classes
 		private var _desc:String;
 		private var _longDesc:String;
 		private var _keepOnAscension:Boolean;
+		public var defaultValue1:Number = 0;
+		public var defaultValue2:Number = 0;
+		public var defaultValue3:Number = 0;
+		public var defaultValue4:Number = 0;
 
 		/**
 		 * Unique perk id, should be kept in future game versions
@@ -81,6 +88,235 @@ package classes
 		public function toString():String
 		{
 			return "\""+_id+"\"";
+		}
+
+		/**
+		 * Array of:
+		 * {
+		 *   fn: (Player)=>Boolean,
+		 *   text: String,
+		 *   type: String
+		 *   // additional depending on type
+		 * }
+		 */
+		public var conditions:Array = [];
+
+
+		/**
+		 * @return "condition1, condition2, ..."
+		 */
+		public function conditionsText():String {
+			var s:Array = [];
+			for each (var c:Object in conditions) {
+				if (c.text) s.push(c.text);
+			}
+			return s.join(", ");
+		}
+		public function available(player:Player):Boolean {
+			for each (var c: Object in conditions) {
+				if (!c.fn(player)) return false;
+			}
+			return true;
+		}
+
+		public function requireCustomFunction(playerToBoolean:Function, requirementText:String, internalType:String = "custom"):PerkType {
+			conditions.push({
+				fn  : playerToBoolean,
+				text: requirementText,
+				type: internalType
+			});
+			return this;
+		}
+
+		public function requireLevel(value:int):PerkType {
+			conditions.push({
+				fn  : fnRequireAttr("level", value),
+				text: "Level " + value,
+				type: "level",
+				value: value
+			});
+			return this;
+		}
+		public function requireStr(value:int):PerkType {
+			conditions.push({
+				fn  : fnRequireAttr("str", value),
+				text: "Strength " + value,
+				type: "attr",
+				attr: "str",
+				value: value
+			});
+			return this;
+		}
+		public function requireTou(value:int):PerkType {
+			conditions.push({
+				fn  : fnRequireAttr("tou", value),
+				text: "Toughness " + value,
+				type: "attr",
+				attr: "tou",
+				value: value
+			});
+			return this;
+		}
+		public function requireSpe(value:int):PerkType {
+			conditions.push({
+				fn  : fnRequireAttr("spe", value),
+				text: "Speed " + value,
+				type: "attr",
+				attr: "spe",
+				value: value
+			});
+			return this;
+		}
+		public function requireInt(value:int):PerkType {
+			conditions.push({
+				fn  : fnRequireAttr("inte", value),
+				text: "Intellect " + value,
+				type: "attr",
+				attr: "inte",
+				value: value
+			});
+			return this;
+		}
+		public function requireWis(value:int):PerkType {
+			conditions.push({
+				fn  : fnRequireAttr("wis", value),
+				text: "Wisdom " + value,
+				type: "attr",
+				attr: "wis",
+				value: value
+			});
+			return this;
+		}
+		public function requireLib(value:int):PerkType {
+			conditions.push({
+				fn  : fnRequireAttr("lib", value),
+				text: "Libido " + value,
+				type: "attr",
+				attr: "lib",
+				value: value
+			});
+			return this;
+		}
+		public function requireCor(value:int):PerkType {
+			conditions.push({
+				fn  : fnRequireAttr("cor", value),
+				text: "Corruption " + value,
+				type: "attr",
+				attr: "cor",
+				value: value
+			});
+			return this;
+		}
+		public function requireLibLessThan(value:int):PerkType {
+			conditions.push({
+				fn  : function(player:Player):Boolean {
+					return player.lib < value;
+				},
+				text: "Libido < " + value,
+				type: "attr<",
+				attr: "lib",
+				value: value
+			});
+			return this;
+		}
+		public function requireNGPlus(value:int):PerkType {
+			conditions.push({
+				fn  : function(player:Player):Boolean {
+					return player.newGamePlusMod() >= value;
+				},
+				text: "New Game+ " + value,
+				type: "ng+",
+				value: value
+			});
+			return this;
+		}
+		public function requirePrestigeJobSlot():PerkType {
+			conditions.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxPrestigeJobs() > 0;
+				},
+				text: "Free Prestige Job Slot",
+				type: "prestige"
+			});
+			return this;
+		}
+		public function requireHungerEnabled():PerkType {
+			conditions.push({
+				fn  : function(player:Player):Boolean {
+					return kGAMECLASS.flags[kFLAGS.HUNGER_ENABLED] > 0;
+				},
+				text: "Hunger enabled",
+				type: "hungerflag"
+			});
+			return this;
+		}
+		public function requireMinLust(value:int):PerkType {
+			conditions.push({
+				fn  : function(player:Player):Boolean {
+					return kGAMECLASS.minLust() >= value;
+				},
+				text: "Min. Lust "+value,
+				type: "minlust",
+				value: value
+			});
+			return this;
+		}
+		public function requireMaxSoulforce(value:int):PerkType {
+			conditions.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxSoulforce() >= value;
+				},
+				text: "Max. Soulforce "+value,
+				type: "soulforce",
+				value: value
+			});
+			return this;
+		}
+		private function fnRequireAttr(attrname:String,value:int):Function {
+			return function(player:Player):Boolean {
+				return player[attrname] >= value;
+			};
+		}
+		public function requireStatusEffect(effect:StatusAffectType, text:String):PerkType {
+			conditions.push({
+				fn  : function (player:Player):Boolean {
+					return player.hasStatusAffect(effect);
+				},
+				text: text,
+				type: "effect",
+				effect: effect
+			});
+			return this;
+		}
+		public function requirePerk(perk:PerkType):PerkType {
+			conditions.push({
+				fn  : function (player:Player):Boolean {
+					return player.findPerk(perk) >= 0;
+				},
+				text: perk.name,
+				type: "perk",
+				perk: perk
+			});
+			return this;
+		}
+		public function requireAnyPerk(...perks:Array):PerkType {
+			if (perks.length == 0) throw ("Incorrect call of requireAnyPerk() - should NOT be empty");
+			var text:Array = [];
+			for each (var perk:PerkType in perks) {
+				text.push(perk.conditionsText());
+			}
+			conditions.push({
+				fn  : function (player:Player):Boolean {
+					for each (var perk:PerkType in perks) {
+						if (player.findPerk(perk) >= 0) return true;
+					}
+					return false;
+				},
+				text: text.join(" or "),
+				type: "anyperk",
+				perks: perks
+			});
+			return this;
 		}
 	}
 }

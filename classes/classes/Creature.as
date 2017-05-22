@@ -706,6 +706,9 @@ import classes.BodyParts.UnderBody;
 			}
 			return -1;
 		}
+		public function hasPerk(ptype:PerkType):Boolean {
+			return findPerk(ptype) >= 0;
+		}
 		
 		//Duplicate perk
 		//Deprecated?

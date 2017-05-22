@@ -277,6 +277,8 @@ the text from being too boring.
 		private var _updateHack:Sprite = new Sprite();
 		
 		public var mainViewManager:MainViewManager = new MainViewManager();
+
+		public var perkTree:PerkTree = new PerkTree();
 		// Other scenes
 
 		include "../../includes/april_fools.as";
