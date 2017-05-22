@@ -10,7 +10,7 @@ package classes.Scenes.Monsters
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
 	
-	public class GolemDummySuperior extends Monster
+	public class GolemDummySuperior extends AbstractGolem
 	{
 		public function backhand():void {
 			outputText("The golem's visage twists into a grimace of irritation, and it swings its hand at you in a vicious backhand.");
@@ -34,17 +34,14 @@ package classes.Scenes.Monsters
 		
 		public function GolemDummySuperior() 
 		{
+			super(false);
 			this.a = "the ";
 			this.short = "superior dummy golem";
 			this.imageName = "superior dummy golem";
 			this.long = "You're currently fighting superior dummy golem. It's seven feet tall without any sexual characteristics, it stone body covered in cracks and using it bare stone fists to smash enemies.";
-			this.plural = false;
 			initStrTouSpeInte(80, 80, 40, 10);
 			initLibSensCor(10, 10, 50);
-			this.lustVuln = 0;
 			this.tallness = 84;
-			this.createBreastRow(0, 1);
-			initGenderless();
 			this.drop = new ChainedDrop()
 					.add(useables.GOLCORE, 1/4);
 			this.level = 24;
