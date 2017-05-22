@@ -293,7 +293,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 			addButtonDisabled(0, "Attack", "No way you could reach enemy in air with melee attacks.");
 		else if (player.hasStatusAffect(StatusAffects.Flying))
 		{
-			if (player.weaponName != "deadly spear") addButtonDisabled(0, "Attack", "No way you could reach enemy with melee attacks while flying.");
+			if (player.weapon != weapons.SPEAR) addButtonDisabled(0, "Attack", "No way you could reach enemy with melee attacks while flying.");
 			else addButton(0, "Attack", basemeleeattacks, null, null, null, "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.");
 		}
 		//Bow attack
@@ -491,12 +491,12 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 			addButton(0, "Squeeze", ScyllaSqueeze, null, null, null, "Squeeze your foes with your tentacles attempting to break them appart! \n\nFatigue Cost: " + physicalCost(50) + "");
 		}
 		else addButton(0, "Squeeze", ScyllaSqueeze, null, null, null, "Squeeze your foe with your tentacle attempting to break it appart! \n\nFatigue Cost: " + physicalCost(20) + "");
-		addButton(1, "Tease", ScyllaTease, null, null, null, "Use a free limb to caress and pleasure your grappled foe. \n\nFatigue Cost: " + physicalCost(20) + ""),
+		addButton(1, "Tease", ScyllaTease, null, null, null, "Use a free limb to caress and pleasure your grappled foe. \n\nFatigue Cost: " + physicalCost(20) + "");
 		addButton(4, "Release", ScyllaLeggoMyEggo);
 	}
 	else if (monster.hasStatusAffect(StatusAffects.GooEngulf)) {
 		menu();
-		addButton(0, "Tease", GooTease, null, null, null, "Use a free limb to caress and pleasure your grappled foe (Liadri what your idea on new tooltip for this?). \n\nFatigue Cost: " + physicalCost(20) + ""),
+		addButton(0, "Tease", GooTease, null, null, null, "Use a free limb to caress and pleasure your grappled foe (Liadri what your idea on new tooltip for this?). \n\nFatigue Cost: " + physicalCost(20) + "");
 		addButton(4, "Release", GooLeggoMyEggo);
 	}
 }
@@ -2189,8 +2189,8 @@ public function bite():void {
 	if(damage >= 30) {
 		outputText("Your powerful bite <b>mutilates</b> " + monster.a + monster.short + "! ", false);
 	}
-	if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
-	else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>", false)
+	if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
+	else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>", false);
 	outputText(" " + monster.capitalA + monster.short + " bleeds profusely from the many bloody bite marks you leave behind.", false);
 	outputText("\n\n", false);
 	checkAchievementDamage(damage);
@@ -2433,19 +2433,19 @@ public function attack():void {
 	//Bonus sand trap damage!
 	if (monster.hasStatusAffect(StatusAffects.Level) && monster is SandTrap) damage = Math.round(damage * 1.75);
 	//All special wepaon effects like...flames/ice
-	if (player.weaponName == "flaming whip") {
+	if (player.weapon == weapons.L_WHIP) {
 		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
 		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 0.5;
 		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 0.2;
 	}
-	if (player.weaponName == "ruby claymore" && player.hasStatusAffect(StatusAffects.ChargeWeapon)) {
+	if (player.weapon == weapons.RCLAYMO && player.hasStatusAffect(StatusAffects.ChargeWeapon)) {
 		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
 		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 0.5;
 		if (monster.findPerk(PerkLib.FireNature) >= 0) damage *= 0.2;
 	}
-	if (player.weaponName == "sapphire claymore" && player.hasStatusAffect(StatusAffects.ChargeWeapon)) {
+	if (player.weapon == weapons.SCLAYMO && player.hasStatusAffect(StatusAffects.ChargeWeapon)) {
 		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 0.5;
 		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 0.2;
 		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 5;
@@ -2583,7 +2583,7 @@ public function attack():void {
 			if (player.hasStatusAffect(StatusAffects.Rage) && player.statusAffectv1(StatusAffects.Rage) > 5 && player.statusAffectv1(StatusAffects.Rage) < 50) player.addStatusValue(StatusAffects.Rage, 1, 10);
 			else player.createStatusAffect(StatusAffects.Rage, 10, 0, 0, 0);
 		}
-		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
+		outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false);
 		if(player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large") outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>", false)
 	}
 	if(player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
@@ -2616,38 +2616,51 @@ public function attack():void {
 		
 		//Lust raising weapon bonuses
 		if(monster.lustVuln > 0) {
-			if(player.weaponPerk == "Aphrodisiac Weapon" || player.weaponName == "Depravatio" || player.weaponName == "Ascensus") {
+			if(player.weaponPerk == "Aphrodisiac Weapon" || player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) {
 				outputText("\n" + monster.capitalA + monster.short + " shivers as your weapon's 'poison' goes to work.", false);
 				monster.teased(monster.lustVuln * (5 + player.cor / 10));
 			}
-			if(player.weaponName == "coiled whip" && rand(2) == 0) {		
-				if(!monster.plural) outputText("\n" + monster.capitalA + monster.short + " shivers and gets turned on from the whipping.", false);
-				else outputText("\n" + monster.capitalA + monster.short + " shiver and get turned on from the whipping.", false);
-				if(player.findPerk(PerkLib.ArcaneLash) >= 0) monster.teased(monster.lustVuln * (5 + player.cor / 12) * 1.4);
-				else monster.teased(monster.lustVuln * (5 + player.cor / 12));
+			var whipLustDmg:Number = 0;
+			var whipCorSelf:Number = 0;
+			var whipLustSelf:Number = 0;
+			var hasArcaneLash:Boolean = player.hasPerk(PerkLib.ArcaneLash);
+			if (player.weapon == weapons.WHIP && rand(2) == 0) {
+				whipLustDmg = (5 + player.cor / 12) * (hasArcaneLash ? 1.4 : 1); // 5-13.3 (7-18.7 w/perk)
+				whipCorSelf = 0;
+				whipLustSelf = 0;
+			} else if (player.weapon == weapons.SUCWHIP) {
+				whipLustDmg = (20 + player.cor / 15) * (hasArcaneLash ? 1.8 : 1); // 20-26.7 (36-48 w/perk)
+				whipCorSelf = 0.3;
+				whipLustSelf = (rand(2) == 0)?0:1; // 50% +1
+			} else if (player.weapon == weapons.L_WHIP) {
+				whipLustDmg = (10 + player.cor / 5) * (hasArcaneLash ? 2.0 : 1); // 10-30 (20-60 w/perk)
+				whipCorSelf = 0.6;
+				whipLustSelf = (rand(4) == 0) ? 0 : 1; // 75% +1
 			}
-			if(player.weaponName == "succubi whip") {
-				if(player.cor < 90) dynStats("cor", .3);
-				if(!monster.plural) outputText("\n" + monster.capitalA + monster.short + " shivers and moans involuntarily from the whip's touches.", false);
-				else outputText("\n" + monster.capitalA + monster.short + " shiver and moan involuntarily from the whip's touches.", false);
-				if(player.findPerk(PerkLib.ArcaneLash) >= 0) monster.teased(monster.lustVuln * (20 + player.cor / 15) * 1.8);
-				else monster.teased(monster.lustVuln * (20 + player.cor / 15));
-				if(rand(2) == 0) {
-					outputText(" You get a sexual thrill from it. ", false);
-					dynStats("lus", 1);
+			if (whipLustDmg > 0) {
+				var s:String = monster.plural?"":"s";
+				if (rand(2) == 0) {
+					outputText("\n" + monster.capitalA + monster.short + " shiver" +s+" and get" +s +" turned on from the whipping.");
+				} else {
+					outputText("\n" + monster.capitalA + monster.short + " shiver" +s +" and moan" +s +" involuntarily from the whip's touches.");
 				}
-				
+				if(whipCorSelf > 0 && player.cor < 90) dynStats("cor", whipCorSelf);
+				monster.teased(monster.lustVuln * whipLustDmg);
+				if(whipLustSelf > 0) {
+					outputText(" You get a sexual thrill from it. ");
+					dynStats("lus", whipLustSelf);
+				}
 			}
 		}
 		//Weapon Procs!
-		if(player.weaponName == "huge warhammer" || player.weaponName == "spiked gauntlet" || player.weaponName == "hooked gauntlets") {
+		if(player.weapon == weapons.WARHAMR || player.weapon == weapons.S_GAUNT || player.weapon == weapons.H_GAUNT) {
 			//10% chance
 			if(rand(10) == 0 && monster.findPerk(PerkLib.Resolute) < 0) {
 				outputText("\n" + monster.capitalA + monster.short + " reels from the brutal blow, stunned.", false);
 				if (!monster.hasStatusAffect(StatusAffects.Stunned)) monster.createStatusAffect(StatusAffects.Stunned,rand(2),0,0,0);
 			}
 			//50% Bleed chance
-			if (player.weaponName == "hooked gauntlets" && rand(2) == 0 && monster.armorDef < 10 && !monster.hasStatusAffect(StatusAffects.IzmaBleed))
+			if (player.weapon == weapons.H_GAUNT && rand(2) == 0 && monster.armorDef < 10 && !monster.hasStatusAffect(StatusAffects.IzmaBleed))
 			{
 				if (monster is LivingStatue)
 				{
@@ -3324,7 +3337,7 @@ public function playerTailSpike():void {
 	//if (!monster.hasStatusAffect(StatusAffects.lustvenom)) monster.createStatusAffect(StatusAffects.lustvenom, 0, 0, 0, 0);
 	//New line before monster attack
 	outputText("\n\n");
-	monster.spe -= (2+rand(3))
+	monster.spe -= (2+rand(3));
 	if(monster.spe < 1) monster.spe = 1;
 	//Use tail mp
 	player.tailVenom -= 25;
@@ -3362,7 +3375,7 @@ public function combatBlock(doFatigue:Boolean = false):Boolean {
 	if (player.findPerk(PerkLib.ShieldMastery) >= 0 && player.tou >= 50) blockChance += (player.tou - 50) / 5;
 	if (blockChance < 10) blockChance = 10;
 	//Fatigue limit
-	var fatigueLimit:int = player.maxFatigue() - physicalCost(10);;
+	var fatigueLimit:int = player.maxFatigue() - physicalCost(10);
 	if (blockChance >= (rand(100) + 1) && player.fatigue <= fatigueLimit && player.shieldName != "nothing") {
 		if (doFatigue) fatigue(10, 2);
 		return true;
@@ -4634,7 +4647,7 @@ public function display():void {
 				outputText(", lashing you with strokes of red-hot desire. If you don’t take him down fast, you’re going to become his bitch.\n");
 			}
 		}
-		outputText("\n\n<b><u>" + capitalizeFirstLetter(monster.short) + "'s Stats</u></b>\n")
+		outputText("\n\n<b><u>" + capitalizeFirstLetter(monster.short) + "'s Stats</u></b>\n");
 		outputText("Level: " + monster.level + "\n", false);
 		outputText("HP: " + hpDisplay + "\n", false);
 		outputText("Lust: " + lustDisplay + "\n", false);
@@ -5187,7 +5200,7 @@ public function tease(justText:Boolean = false):void {
 		choices[choices.length] = 23;
 	}
 	//24 Poledance - req's staff! - Req's gender!  Req's TITS!
-	if(player.weaponName == "wizard's staff" && player.biggestTitSize() >= 1 && player.gender > 0) {
+	if(player.weapon == weapons.W_STAFF && player.biggestTitSize() >= 1 && player.gender > 0) {
 		choices[choices.length] = 24;
 		choices[choices.length] = 24;
 		choices[choices.length] = 24;
@@ -6477,7 +6490,7 @@ public function spellMod():Number {
 	if (player.findPerk(PerkLib.AscensionMysticality) >= 0) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 	if (player.shieldName == "spirit focus") mod += .2;
 	if (player.shieldName == "mana bracer") mod += .5;
-	if (player.weaponName == "Ascensus") mod += .15;
+	if (player.weapon == weapons.ASCENSU) mod += .15;
 	return mod;
 }
 public function spellModWhite():Number {
@@ -6505,7 +6518,7 @@ public function spellModWhite():Number {
 	if (player.findPerk(PerkLib.AscensionMysticality) >= 0) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 	if (player.shieldName == "spirit focus") mod += .2;
 	if (player.shieldName == "mana bracer") mod += .5;
-	if (player.weaponName == "Puritas" || player.weaponName == "Ascensus") mod += .15;
+	if (player.weapon == weapons.PURITAS || player.weapon == weapons.ASCENSU) mod += .15;
 	return mod;
 }
 public function spellModBlack():Number {
@@ -6533,7 +6546,7 @@ public function spellModBlack():Number {
 	if (player.findPerk(PerkLib.AscensionMysticality) >= 0) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 	if (player.shieldName == "spirit focus") mod += .2;
 	if (player.shieldName == "mana bracer") mod += .5;
-	if (player.weaponName == "Depravatio" || player.weaponName == "Ascensus") mod += .15;
+	if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) mod += .15;
 	return mod;
 }
 
@@ -10293,7 +10306,7 @@ public function runAway(callHook:Boolean = true):void {
 }
 
 public function whipping():void {
-	if (player.weaponName == "flaming whip") flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+	if (player.weapon == weapons.L_WHIP) flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 	else flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 	clearOutput();
 	if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
@@ -10340,7 +10353,7 @@ public function whipping():void {
 	damage *= 5;
 	if (player.findPerk(PerkLib.Whipping) >= 0) damage *= 1.2;
 	//flame whip
-	if (player.weaponName == "flaming whip") {
+	if (player.weapon == weapons.L_WHIP) {
 		if (monster.findPerk(PerkLib.IceNature) >= 0) damage *= 5;
 		if (monster.findPerk(PerkLib.FireVulnerability) >= 0) damage *= 2;
 		if (monster.findPerk(PerkLib.IceVulnerability) >= 0) damage *= 0.5;
@@ -10736,9 +10749,8 @@ public function physicalSpecials():void {
 		addButton(button++, "Sidewinder", archerSidewinder, null, null, null, "The pinacle art of the hunter. Once per day draw on your fatigue to shoot a single heavily infused arrow at a beast or animal morph. This attack never miss.");
 	}
 	if (monster.plural) {
-		if (player.weaponName == "flail" || player.weaponName == "flaming whip" || player.weaponName == "succubi whip" || player.weaponName == "coiled whip" || player.weaponName == "long ribbon" || player.weaponName == "eldritch ribbon") addButton(button++, "Whipping", whipping, null, null, null, "Attack multiple opponent with your held weapon.  \n\n<b>AoE attack.</b>");
-		if (player.weaponName == "big fucking sword" || player.weaponName == "large claymore" || player.weaponName == "halberd" || player.weaponName == "fiery double-bladed axe" || player.weaponName == "large axe"
-		|| player.weaponName == "large hammer" || player.weaponName == "training soul axe" || player.weaponName == "huge warhammer" || player.weaponName == "nodachi" || player.weaponName == "Warden’s greatsword") addButton(button++, "Whirlwind", whirlwind, null, null, null, "Spin your weapon around to attack multiple enemies at once.  \n\n<b>AoE attack.</b>");
+		if (player.weapon == weapons.FLAIL || player.weapon == weapons.L_WHIP || player.weapon == weapons.SUCWHIP || player.weapon == weapons.WHIP || player.weapon == weapons.RIBBON || player.weapon == weapons.ERIBBON) addButton(button++, "Whipping", whipping, null, null, null, "Attack multiple opponent with your held weapon.  \n\n<b>AoE attack.</b>");
+		if (player.weapon == weapons.BFSWORD || player.weapon == weapons.CLAYMOR || player.weapon == weapons.URTAHLB || player.weapon == weapons.KIHAAXE || player.weapon == weapons.L__AXE || player.weapon == weapons.L_HAMMR || player.weapon == weapons.TRASAXE || player.weapon == weapons.WARHAMR || player.weapon == weapons.NODACHI || player.weapon == weapons.WGSWORD) addButton(button++, "Whirlwind", whirlwind, null, null, null, "Spin your weapon around to attack multiple enemies at once.  \n\n<b>AoE attack.</b>");
 		if (player.weaponRangePerk == "Bow" && player.hasStatusAffect(StatusAffects.KnowsBarrage)) {
 			addButton(button++, "Barrage", archerBarrage, null, null, null, "Draw multiple arrow and shoot them all at the same time to hit several target.  \n\n<b>AoE attack.</b>");
 		}
@@ -12314,13 +12326,13 @@ public function soulforceSpecials():void {
 		}
 		else addButton(10, "Deactiv VPT", DeactivateVioletPupilTransformation, null, null, null, "Deactivate Violet Pupil Transformation.\n");
 	}
-	if (player.weaponName == "Warden’s greatsword") {
+	if (player.weapon == weapons.WGSWORD) {
 		addButton(12, "Beat of War", BeatOfWar, null, null, null, "Attack with low-moderate additional soul damage, gain strength equal to 15% your base strength until end of battle. This effect stacks.\n\nSoulforce cost: " + 50 * soulskillCost() * soulskillcostmulti());
 	}
-	if (player.weaponName == "Warden’s blade") {
+	if (player.weapon == weapons.WDBLADE) {
 		addButton(12, "Blade Dance", BladeDance, null, null, null, "Attack twice (four times if double attack is active, six times if triple attack is active and etc.).\n\nSoulforce cost: " + 50 * soulskillCost() * (1 + flags[kFLAGS.DOUBLE_ATTACK_STYLE]));
 	}
-	if (player.weaponName == "Warden’s staff") {
+	if (player.weapon == weapons.WDSTAFF) {
 		addButton(12, "AvatarOfTheSong", AvatarOfTheSong, null, null, null, "Doublecast Charged Weapon and Might. Casts blind if charged weapon is already active. Casts Heal if Might is already active.\n\nSoulforce cost: 200");
 	}
 	if (player.weaponRangeName == "Warden’s bow") {

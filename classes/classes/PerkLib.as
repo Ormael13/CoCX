@@ -2061,7 +2061,7 @@ package classes
 			return player.salamanderScore() >= 4
 		}, "Salamander race");
 		ScyllaInkGlands.requirePerk(InkSpray).requireCustomFunction(function (player:Player):Boolean {
-			return player.scyllaScore()
+			return player.scyllaScore() >= 5
 		}, "Scylla race");
 		TrachealSystem.requireCustomFunction(function (player:Player):Boolean {
 			return player.beeScore() >= 4 || player.mantisScore() >= 5 || player.scorpionScore() >= 4 || player.spiderScore() >= 4;

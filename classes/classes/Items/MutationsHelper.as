@@ -593,7 +593,7 @@ package classes.Items {
 		player[key] = tgtType;
 		if (player.findPerk(PerkLib.GeneticMemory) < 0) return false;
 		var o:* = dict[tgtType];
-		if (o instanceof Array) {
+		if (o is Array) {
 			return addGeneticMemory(o[0], o[1]);
 		} else {
 			var sat:StatusAffectType = o;
