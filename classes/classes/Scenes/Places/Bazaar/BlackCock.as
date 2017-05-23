@@ -1596,10 +1596,10 @@ import classes.GlobalFlags.*;
 
 					}
 				} else switch(player.skin.base.type){
-					case SKIN_TYPE_GOO:
+					case SKIN_BASE_GOO:
 						outputText("You feel an itchy sensation as your gooey skin solidifies and thickens, <b>becoming tough gray skin</b>.");
 						break;
-					case SKIN_TYPE_PLAIN:
+					case SKIN_BASE_PLAIN:
 					default:
 						outputText("You feel an itchy sensation as your [skin base] thickens, <b>becoming tough gray skin</b>.");
 						break;

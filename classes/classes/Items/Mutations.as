@@ -1290,12 +1290,11 @@ import classes.CockTypesEnum;
 			}
 			//Fur - if has horsetail && ears and not at changelimit
 			if (!player.hasFur() && player.skinType != SKIN_TYPE_STONE && changes < changeLimit && rand(4) == 0 && player.tailType == TAIL_TYPE_HORSE) {
-				if (player.skinType == SKIN_TYPE_PLAIN) {
-					outputText("\n\nAn itchy feeling springs up over every inch of your skin.  As you scratch yourself madly, you feel fur grow out of your skin until <b>you have a fine coat of ", false);
+				if (!player.hasScales()) {
+					outputText("\n\nAn itchy feeling springs up over every inch of your [skin base].  As you scratch yourself madly, you feel fur grow out of your [skin base] until <b>you have a fine coat of ", false);
 					if (type == 0) outputText("" + player.hairColor + "-colored fur.</b>", false);
 					else outputText("white-colored fur.</b>", false);
-				}
-				if (player.hasScales()) {
+				} else {
 					player.skinDesc = "fur";
 					outputText("\n\nYour " + player.skinTone + " scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of ", false);
 					if (type == 0) outputText("" + player.hairColor + "", false);
@@ -1695,7 +1694,7 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//Human skin	
-			if (player.tailType == TAIL_TYPE_HORSE && player.skinType != SKIN_TYPE_PLAIN && player.skinType != SKIN_TYPE_STONE && changes < changeLimit && rand(4) == 0) {
+			if (player.tailType == TAIL_TYPE_HORSE && !player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0) {
 				humanizeSkin();
 				changes++;
 			}
@@ -2083,11 +2082,11 @@ import classes.CockTypesEnum;
 				}
 			}
 			//Skin
-			if (player.skinType != SKIN_TYPE_PLAIN && player.skinType != SKIN_TYPE_STONE && changes < changeLimit && rand(4) == 0 && player.faceType == FACE_HUMAN) {
+			if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.faceType == FACE_HUMAN) {
 				humanizeSkin();
 				changes++;
 			}
-			if (player.skinType == SKIN_TYPE_PLAIN && player.skinTone != "leaf green" && player.skinTone != "lime green" && player.skinTone != "turquoise" && changes < changeLimit && rand(2) == 0) {
+			if (player.hasPlainSkinOnly() && player.skinTone != "leaf green" && player.skinTone != "lime green" && player.skinTone != "turquoise" && changes < changeLimit && rand(2) == 0) {
 				if (rand(10) == 0) player.skinTone = "turquoise";
 				else {
 					if (rand(5) == 0) player.skinTone = "lime green";
@@ -2098,7 +2097,7 @@ import classes.CockTypesEnum;
 			}
 			//insert here turning into bark skin so it req. at least 2x use of mara fruit a także dodać wymaganie posiadanie już plant arms i legs
 			//Legs
-			if (player.skinType == SKIN_TYPE_PLAIN && (player.skinTone == "leaf green" || player.skinTone == "lime green" || player.skinTone == "turquoise") && changes < changeLimit && rand(3) == 0) {
+			if (player.skin.hasPlainSkinOnly() && (player.skinTone == "leaf green" || player.skinTone == "lime green" || player.skinTone == "turquoise") && changes < changeLimit && rand(3) == 0) {
 				//Males/genderless get clawed feet
 				if (player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
 					if (player.lowerBody != LOWER_BODY_TYPE_PLANT_ROOT_CLAWS) {
@@ -3406,14 +3405,15 @@ import classes.CockTypesEnum;
 			}
 			//Become furred - requires paws and tail
 			if (rand(4) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_DOG && player.tailType == TAIL_TYPE_DOG && !player.hasFur() && player.skinType != SKIN_TYPE_STONE) {
-				if (player.skinType == SKIN_TYPE_PLAIN) outputText("\n\nYour skin itches intensely.  You gaze down as more and more hairs break forth from your skin, quickly transforming into a soft coat of fur.  <b>You are now covered in [skin coat.color] fur from head to toe.</b>", false);
-				if (player.hasScales()) outputText("\n\nYour scales itch incessantly.  You scratch, feeling them flake off to reveal a coat of [skin coat.color] fur growing out from below!  <b>You are now covered in [skin coat.color] fur from head to toe.</b>", false);
+				if (player.hasScales()) outputText("\n\nYour scales itch incessantly.  You scratch, feeling them flake off to reveal a coat of [skin coat.color] fur growing out from below!");
+				else outputText("\n\nYour [skin base] itches intensely.  You gaze down as more and more hairs break forth from your [skin base], quickly transforming into a soft coat of fur.");
 				player.skin.growCoat(SKIN_COAT_FUR,{
 					color:randomChoice([
 						"brown", "chocolate", "auburn", "caramel", "orange", "black", "dark gray", "gray",
 						"light gray", "silver", "white", "orange and white", "brown and white", "black and white"
 					])
 				});
+				outputText("  <b>You are now covered in [skin coat.color] fur from head to toe.</b>");
 				changes++;
 			}
 			//Change to paws - requires tail and ears
@@ -5129,7 +5129,7 @@ import classes.CockTypesEnum;
 				player.removeBreastRow(player.breastRows.length - 1, 1);
 			}
 			//Skin/fur
-			if (player.skinType != SKIN_TYPE_PLAIN && player.skinType != SKIN_TYPE_STONE && changes < changeLimit && rand(4) == 0 && player.faceType == FACE_HUMAN) {
+			if (!player.hasPlainSkinOnly() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.faceType == FACE_HUMAN) {
 				humanizeSkin();
 				changes++;
 			}
@@ -5442,9 +5442,10 @@ import classes.CockTypesEnum;
 			if (((player.skinTone != "rough gray" && player.skinTone != "orange and black striped") || player.skinType != SKIN_TYPE_SCALES) && player.skinType != SKIN_TYPE_STONE && rand(7) == 0 && changes < changeLimit) {
 				outputText("\n\n", false);
 				if (player.hasFur()) outputText("Your " + player.skinDesc + " falls out, collecting on the floor and exposing your scale covered skin underneath.  ", false);
-				else if (player.skinType == SKIN_TYPE_GOO) outputText("Your gooey skin solidifies, thickening up as your body starts to solidy into a more normal form. ", false);
+				else if (player.hasGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidy into a more normal form. ", false);
 				else if (player.hasScales()) outputText("Your skin itches and tingles starting to sheed your current scales. Underneath them you can see new smaller gray colored scales.  ", false);
-				else if (player.skinType == SKIN_TYPE_PLAIN) outputText("You abruptly stop moving and gasp sharply as a shudder goes up your entire frame. Your skin begins to shift and morph, growing slightly thicker and became covered with a tiny shiny grey scales.  ", false);
+				else if (player.hasCoat()) outputText("Your skin itches and tingles starting to sheed your [skin coat]. Underneath them you can see new smaller gray colored scales.  ", false);
+				else outputText("You abruptly stop moving and gasp sharply as a shudder goes up your entire frame. Your skin begins to shift and morph, growing slightly thicker and became covered with a tiny shiny grey scales.  ", false);
 				if (type == 0) {
 					outputText("It feels oddly rough too, comparable to that of a marine mammal. You smile and run your hands across your new shark skin.", false);
 					player.skin.growCoat(SKIN_COAT_SCALES,{color:"rough gray"});
@@ -7264,13 +7265,13 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//Partial scaled skin
-			if (player.skinType == SKIN_TYPE_PLAIN && player.skinType != SKIN_TYPE_PARTIAL_SCALES && rand(3) == 0) {
+			if (player.hasPlainSkinOnly() && rand(3) == 0) {
 				outputText("\n\nYou feel your skin shift as scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.", false);
 				outputText("  <b>Your body is now partially covered with small patches of scales!</b>", false);
 				player.skin.growCoat(SKIN_COAT_SCALES,{color:"red"},Skin.COVERAGE_LOW);
 				changes++;
 			}
-			if (player.skinType != SKIN_TYPE_PLAIN && player.skinType != SKIN_TYPE_PARTIAL_SCALES && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(4) == 0) {
+			if (!player.hasPartialCoat(SKIN_COAT_SCALES) && !player.isGargoyle() && rand(4) == 0) {
 				humanizeSkin();
 				changes++;
 			}
@@ -7564,13 +7565,13 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			//Partial scaled skin
-			if (player.skinType == SKIN_TYPE_PLAIN && player.skinType != SKIN_TYPE_PARTIAL_SCALES && rand(4) == 0) {
+			if (player.hasPlainSkinOnly() && rand(4) == 0) {
 				outputText("\n\nYou feel your skin shift as scales grow in various place over your body. It doesn’t cover your skin entirely but should provide excellent protection regardless. Funnily it doesn’t look half bad on you.", false);
 				outputText("  <b>Your body is now partially covered with small patches of scales!</b>", false);
 				player.skin.growCoat(SKIN_COAT_SCALES,{color:"red"},Skin.COVERAGE_LOW);
 				changes++;
 			}
-			if (player.skinType != SKIN_TYPE_PLAIN && player.skinType != SKIN_TYPE_PARTIAL_SCALES && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(4) == 0) {
+			if (!player.hasPartialCoat(SKIN_COAT_SCALES) && rand(4) == 0) {
 				humanizeSkin();
 				changes++;
 			}

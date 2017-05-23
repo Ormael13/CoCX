@@ -2573,9 +2573,12 @@ import classes.BodyParts.UnderBody;
 		public function hasLizardScales():Boolean { return skin.hasLizardScales(); }
 		public function hasNonLizardScales():Boolean { return skin.hasNonLizardScales(); }
 		public function hasFur():Boolean { return skin.hasFur(); }
+		public function hasMostlyPlainSkin():Boolean { return skin.hasMostlyPlainSkin(); }
 		public function hasPlainSkinOnly():Boolean { return skin.hasPlainSkinOnly(); }
+		public function hasPartialCoat(coat_type:int):Boolean { return skin.hasPartialCoat(coat_type); }
 		public function hasPlainSkin():Boolean { return skin.hasPlainSkin(); }
 		public function hasGooSkin():Boolean { return skin.hasGooSkin(); }
+		public function isGargoyle():Boolean { return skin.hasBaseOnly(SKIN_BASE_STONE); }
 		public function skinDescript():String { return skin.describe('basic'); }
 		public function skinFurScales():String { return skin.describe('cover'); }
 

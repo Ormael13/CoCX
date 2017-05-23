@@ -183,6 +183,9 @@ public class Skin extends SaveableBodyPart {
 	public function coatType():int {
 		return hasCoat() ? coat.type : -1;
 	}
+	public function baseType():int {
+		return base.type;
+	}
 	public function hasCoat():Boolean {
 		return coverage > COVERAGE_NONE && coverage <= COVERAGE_COMPLETE;
 	}
@@ -194,6 +197,9 @@ public class Skin extends SaveableBodyPart {
 	}
 	public function hasCoatOfType(...types:Array):Boolean {
 		return hasCoat() && coat.isAny(types);
+	}
+	public function hasPartialCoat(coat_type:int):Boolean {
+		return coverage == COVERAGE_LOW && coat.type == coat_type;
 	}
 	public function hasFur():Boolean {
 		return hasCoatOfType(SKIN_COAT_FUR);
@@ -224,6 +230,9 @@ public class Skin extends SaveableBodyPart {
 	}
 	public function hasGooSkin():Boolean {
 		return base.isAny(SKIN_BASE_GOO);
+	}
+	public function hasMostlyPlainSkin():Boolean {
+		return coverage <= COVERAGE_LOW && base.type == SKIN_BASE_PLAIN;
 	}
 	public function hasPlainSkinOnly():Boolean {
 		return coverage == COVERAGE_NONE && base.type == SKIN_BASE_PLAIN;
