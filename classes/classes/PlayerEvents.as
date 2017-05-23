@@ -1125,6 +1125,9 @@ package classes {
 				if (player.hasStatusAffect(StatusAffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungs) < 0) player.removeStatusAffect(StatusAffects.DragonBreathCooldown);
 				//Reset Mara Fruit daily counter
 				if (flags[kFLAGS.DAILY_MARA_FRUIT_COUNTER] > 0) flags[kFLAGS.DAILY_MARA_FRUIT_COUNTER] = 0;
+				//Alraune flags
+				if (flags[kFLAGS.ALRAUNE_DAILY_WATERING] > 0) flags[kFLAGS.ALRAUNE_DAILY_WATERING] = 0;
+				if (flags[kFLAGS.ALRAUNE_GROWING] > 0 && flags[kFLAGS.ALRAUNE_GROWING] < 15) flags[kFLAGS.ALRAUNE_GROWING]++;
 				//Reset SelfSustain & RepresLust daily counter
 				if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] > 0) flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] = 0;
 				//Reset Etna Venom Vial daiy limit

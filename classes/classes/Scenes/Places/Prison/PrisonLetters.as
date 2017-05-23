@@ -17,7 +17,7 @@ package classes.Scenes.Places.Prison
 			outputText("\nIt's time! You " + player.clothedOrNakedLower("remove your [lowergarment] and ") + "sit down at one of the corners and spread your [legs]. A sudden gush of fluids erupt from your [pussy] - your water just broke. You grunt painfully as you feel wriggling and squirming inside your belly, muscle contractions forcing it downwards. ");
 			//Various scenes
 			if (player.pregnancyType == PregnancyStore.PREGNANCY_MARBLE) {
-				outputText("\n\nEventually, a newborn cow-girl comes out of your womb and into your cell; Marble would love to see them. You call for Mistress Elly and she rushes to your cell to see the newborn sirens. \"<i>Don't worry. I promise your newborn cow-girl will be delivered to Marble. I've ordered two imps to carry her,</i>\" she says. Two imp guards come into your cell to take away the newborn cow-girl. Hopefully you'll receive a letter.");
+				outputText("\n\nEventually, a newborn cow-girl comes out of your womb and into your cell; Marble would love to see them. You call for Mistress Elly and she rushes to your cell to see the newborn cow-girl. \"<i>Don't worry. I promise your newborn cow-girl will be delivered to Marble. I've ordered two imps to carry her,</i>\" she says. Two imp guards come into your cell to take away the newborn cow-girl. Hopefully you'll receive a letter.");
 				outputText("\n\n<b>Some time passes...</b>");
 				letterFromMarbleAfterGivingBirth();
 				flags[kFLAGS.MINERVA_CHILDREN] += 2;
@@ -29,7 +29,7 @@ package classes.Scenes.Places.Prison
 				flags[kFLAGS.MINERVA_CHILDREN] += 2;
 			}
 			if (player.pregnancyType == PregnancyStore.PREGNANCY_BEHEMOTH) {
-				outputText("\n\nEventually, the purple creature comes out of your womb and into your cell; Behemoth would love to see him. You call for Mistress Elly and she rushes to your cell to see the newborn sirens. \"<i>Don't worry. I promise your newborn behemoth will be delivered to Behemoth. I've ordered two imps to carry him,</i>\" she says. Two imp guards come into your cell to take away the newborn behemoth. Hopefully you'll receive a letter.");
+				outputText("\n\nEventually, the purple creature comes out of your womb and into your cell; Behemoth would love to see him. You call for Mistress Elly and she rushes to your cell to see the newborn behemoth. \"<i>Don't worry. I promise your newborn behemoth will be delivered to Behemoth. I've ordered two imps to carry him,</i>\" she says. Two imp guards come into your cell to take away the newborn behemoth. Hopefully you'll receive a letter.");
 				outputText("\n\n<b>Some time passes...</b>");
 				letterFromMinervaAfterGivingBirth();
 				flags[kFLAGS.BEHEMOTH_CHILDREN]++;

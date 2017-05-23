@@ -1736,6 +1736,10 @@ public function displayStats(e:MouseEvent = null):void
 	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] > 0)
 		childStats += "<b>Number of Adult Minotaur Offspring:</b> " + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + "\n";
 	
+	//Alraune daughters
+	if (flags[kFLAGS.ALRAUNE_SEEDS] > 0)
+		childStats += "<b>Alraune daughters:</b> " + flags[kFLAGS.ALRAUNE_SEEDS] + " <b>(Oldest ones: " + (flags[kFLAGS.ALRAUNE_GROWING] - 1) + " days)</b>\n";
+	
 	if (childStats != "")
 		outputText("\n<b><u>Children</u></b>\n" + childStats, false);
 	// End Children Stats

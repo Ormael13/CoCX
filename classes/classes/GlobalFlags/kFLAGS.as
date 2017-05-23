@@ -2500,9 +2500,9 @@ public static const VENOM_TIMES_USED:int                	                       
 public static const YGGDRASIL_GENERAL:int                                   		= 2492;
 public static const YGGDRASIL_TF:int                                   				= 2493;
 public static const YGGDRASIL_BRANCH:int                                   			= 2494;
-public static const UNKNOWN_FLAG_NUMBER_02495:int                                   = 2495;
-public static const UNKNOWN_FLAG_NUMBER_02496:int                                   = 2496;
-public static const UNKNOWN_FLAG_NUMBER_02497:int                                   = 2497;
+public static const ALRAUNE_SEEDS:int                                   			= 2495;
+public static const ALRAUNE_GROWING:int                                   			= 2496;
+public static const ALRAUNE_DAILY_WATERING:int                                   	= 2497;
 public static const UNKNOWN_FLAG_NUMBER_02498:int                                   = 2498;
 public static const UNKNOWN_FLAG_NUMBER_02499:int                                   = 2499;
 public static const UNKNOWN_FLAG_NUMBER_02500:int                                   = 2500;

@@ -62,7 +62,8 @@ public function alrauneGetPollinatedScene():void
 	outputText("Highly satisfied, you deposit him back on the ground with little ceremony, half conscious from the massive drugged induced orgasm your pollen claimed from him. You can’t help but hope it took, daydreaming of your children to come as you seal your vagina shut to prevent the load from escaping.");
 	player.orgasm();
 	statScreenRefresh();
-	cleanupAfterCombat();	//dodac gdzies tu pregnancy start - alraune type
+	player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
+	cleanupAfterCombat();
 	return;
 }
 
@@ -76,7 +77,8 @@ public function alrauneSeedingScene():void
 	outputText("Your own belly isn’t any better, and you fantasise at the idea of giving birth hoping it took as you head back to camp.");
 	player.orgasm();
 	statScreenRefresh();
-	cleanupAfterCombat();	//dodac gdzies tu pregnancy start - alraune type
+	player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
+	cleanupAfterCombat();
 	return;
 }
 
