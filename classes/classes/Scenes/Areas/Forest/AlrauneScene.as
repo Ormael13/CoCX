@@ -60,7 +60,7 @@ package classes.Scenes.Areas.Forest
 			outputText("Her stamen bulbs open inside of your cunt and ass and your eyes go wide as you are struck by yet another orgasm. She begins to wildly fuck you, your mouth drooling and your eyes rolling back as you lose the ability to make coherent words. She fills you over and over with her liquid pollen, making your belly swell to the size of a heavily pregnant woman as you buck your hips mindlessly. ");
 			outputText("You barely recall her gently lifting you out of her bath and depositing you to the ground as you lose consciousness.\n\n");
 			outputText("When you wake up you are in a different area with your gear packed up next to you. Seems some thief made off with a small amount of your gems though.\n\n");
-			//put alru pregnance start here
+			player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
 		}
 		player.orgasm();
 		dynStats("lib", 15, "sen", 5);

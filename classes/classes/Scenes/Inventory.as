@@ -22,6 +22,7 @@ package classes.Scenes
 	import classes.Items.UndergarmentLib;
 	import classes.Scenes.NPCs.HolliPureScene;
 	import classes.Scenes.Dungeons.DungeonEngine;
+	import classes.Scenes.Camp.UniqueCampScenes;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
 
@@ -38,6 +39,7 @@ package classes.Scenes
 		private var callOnAbandon:Function;	//They simplify dealing with items that have a sub menu. Set in inventoryMenu and in takeItem
 		private var currentItemSlot:ItemSlotClass;	//The slot previously occupied by the current item - only needed for stashes and items with a sub menu.
 		public var HolliPure:HolliPureScene = new HolliPureScene();
+		public var Gardening:UniqueCampScenes = new UniqueCampScenes();
 		
 		public function Inventory(saveSystem:Saves) {
 			itemStorage = [];
@@ -103,7 +105,8 @@ package classes.Scenes
 				if (miscNieve
 					|| miscHolli
 					|| player.hasKeyItem("Dragon Egg") >= 0
-					|| flags[kFLAGS.ANEMONE_KID] > 0) {
+					|| flags[kFLAGS.ANEMONE_KID] > 0
+					|| flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
 					if (miscNieve) {
 						if (flags[kFLAGS.NIEVE_STAGE] == 1)
 							outputText("\nThere's some odd snow here that you could do something with...\n");
@@ -114,6 +117,9 @@ package classes.Scenes
 					}
 					if (flags[kFLAGS.ANEMONE_KID] > 0) {
 						kGAMECLASS.anemoneScene.anemoneBarrelDescription();
+					}
+					if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
+						outputText("\nI'm 99,9% sure Liadri will think about what text should be shwed up here...\n");
 					}
 					addButton(13, "Misc.", miscitemsMenu);
 				}
@@ -164,6 +170,9 @@ package classes.Scenes
 				if (flags[kFLAGS.ANEMONE_KID] > 0) {
 					//kGAMECLASS.anemoneScene.anemoneBarrelDescription();
 					if (model.time.hours >= 6) addButton(4, "Anemone", kGAMECLASS.anemoneScene.approachAnemoneBarrel);
+				}
+				if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
+					if (model.time.hours >= 6) addButton(5, "Garden", Gardening.manageuyourgarden, null, null, null, "Visit your plant offspring");
 				}
 				addButton(14, "Back", inventoryMenu);
 		}
