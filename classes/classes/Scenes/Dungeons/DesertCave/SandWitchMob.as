@@ -67,7 +67,7 @@ package classes.Scenes.Dungeons.DesertCave
 					//If PC has 1 cock:
 					if(player.cockTotal() == 1) outputText("  A stone crawls onto your [cock].");
 					//[If PC has multi-cocks: 
-					if(player.cockTotal() > 1) outputText("  A bunch of the stones crawl onto your " + multiCockDescriptLight() + ".");
+					if(player.cockTotal() > 1) outputText("  A bunch of the stones crawl onto your " + player.multiCockDescriptLight() + ".");
 					if(player.hasCock()) bonus++;
 					//[If PC has cunt]
 					if(player.hasVagina()) {
