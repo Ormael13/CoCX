@@ -599,10 +599,10 @@ package classes.Items {
 		var o:* = dict[tgtType];
 		if (o is Array) {
 			return addGeneticMemory(o[0], o[1]);
-		} else {
+		} else if (o != null) {
 			var sat:StatusAffectType = o;
 			return addGeneticMemory(sat, sat.id.replace("Unlocked ", ""));
-		}
+		} else return null;
 	}
 	public function addGeneticMemory(sat:StatusAffectType, name:String = null):Boolean {
 		if (player.findPerk(PerkLib.GeneticMemory) < 0) return false;
