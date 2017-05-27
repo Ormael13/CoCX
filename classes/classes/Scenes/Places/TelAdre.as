@@ -1564,17 +1564,19 @@ public function armorShop():void {
 	outputText("The interior of the armory is blisteringly hot, filled with intense heat from the massive forge dominating the far side of the shop.  The bellows are blowing hard as a tall german-shepherd woman works the forge.  Incredibly, she's wearing nothing aside from a ragged leather apron.  It bulges from the front, barely containing her obscene proportions as it protects them from the heat of her forge.  She pulls a piece of metal from the forge and strikes it a few times with a hammer bigger than your head, then tosses it in a bucket filled with water, steam boiling out of it from the hot metal.  At last, the sweating forgemistress notices you and turns around, her breasts jiggling wildly.\n\n", true);
 	//outputText("\"<i>Vat can Yvonne make for you?  Ze platemail?  Or someting a bit lighter?</i>\" she asks you.", false);
 	outputText("\"<i>What can I make for you?  Platemail?  Or something that breathes a little easier?</i>\" Yvonne asks, fanning herself.");
-	
-	choices(armors.CHBIKNI.shortName,createCallBackFunction(armorBuy, armors.CHBIKNI),
-			armors.FULLCHN.shortName,createCallBackFunction(armorBuy, armors.FULLCHN),
-			armors.FULLPLT.shortName,createCallBackFunction(armorBuy, armors.FULLPLT),
-			armors.INDECST.shortName,createCallBackFunction(armorBuy, armors.INDECST),
-			armors.LTHRROB.shortName,createCallBackFunction(armorBuy, armors.LTHRROB),
-			armors.SCALEML.shortName,createCallBackFunction(armorBuy, armors.SCALEML),
-			shields.BUCKLER.shortName, createCallBackFunction(armorBuy, shields.BUCKLER),
-			shields.KITE_SH.shortName, createCallBackFunction(armorBuy, shields.KITE_SH),
-			shields.GREATSH.shortName, createCallBackFunction(armorBuy, shields.GREATSH),
-			shields.TOWERSH.shortName, createCallBackFunction(armorBuy, shields.TOWERSH));
+
+	menu();
+	addButton(0, armors.CHBIKNI.shortName, armorBuy, armors.CHBIKNI);
+	addButton(1, armors.FULLCHN.shortName, armorBuy, armors.FULLCHN);
+	addButton(2, armors.FULLPLT.shortName, armorBuy, armors.FULLPLT);
+	addButton(3, armors.INDECST.shortName, armorBuy, armors.INDECST);
+	addButton(4, armors.LTHRROB.shortName, armorBuy, armors.LTHRROB);
+	addButton(5, armors.SCALEML.shortName, armorBuy, armors.SCALEML);
+	addButton(6, armors.SAMUARM.shortName, armorBuy, armors.SAMUARM);
+	addButton(7, shields.BUCKLER.shortName, armorBuy, shields.BUCKLER);
+	addButton(8, shields.KITE_SH.shortName, armorBuy, shields.KITE_SH);
+	addButton(9, shields.GREATSH.shortName, armorBuy, shields.GREATSH);
+	addButton(10, shields.TOWERSH.shortName, armorBuy, shields.TOWERSH);
 			
 	var egg:Function =null;
 	if(player.hasKeyItem("Dragon Eggshell") >= 0) {
@@ -1582,7 +1584,7 @@ public function armorShop():void {
 		if(player.gems < 200) {
 			outputText("\n\nYou can't afford that!");
 		}
-		else addButton(10, "Eggshell", kGAMECLASS.emberScene.getSomeStuff);
+		else addButton(12, "Eggshell", kGAMECLASS.emberScene.getSomeStuff);
 	}
 	addButton(13, "Flirt", yvonneFlirt);
 	addButton(14, "Leave", telAdreMenu);

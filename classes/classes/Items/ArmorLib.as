@@ -17,7 +17,7 @@ package classes.Items
 				PerkLib.WizardsEndurance,10,0,0,0);
 		public const ARCBANG:ArmorWithPerk = new ArmorWithPerk("ArcaBangl","ArcaneBangles","arcane bangles","a set of arcane bangles",1,150,"Silver bangles to be worn from the wrists and ankles, inscribed with arcane runes.  For some reason, you feel like wearing these with armor or clothes is somehow wrong.","Light",
 				PerkLib.WizardsEnduranceAndSluttySeduction,20,5,0,0,"Your arcane bangles allows you access to 'Seduce', an improved form of 'Tease'.");
-		public const B_DRESS:Armor = new Armor("B.Dress","Long Dress","long ballroom dress patterned with sequins","a ballroom dress patterned with sequins",0,40,"A long ballroom dress patterned with sequins.  Perfect for important occassions.","Medium");
+		public const B_DRESS:Armor = new Armor("B.Dress","Long Dress","long ballroom dress patterned with sequins","a ballroom dress patterned with sequins",0,40,"A long ballroom dress patterned with sequins.  Perfect for important occasions.","Medium");
 		public const BEEARMR:Armor = new BeeArmor();
 		public const BIMBOSK:ArmorWithPerk = new ArmorWithPerk("BimboSk","BimboSk","bimbo skirt","a skirt that looks like it belongs on a bimbo",1,40,"A tight, cleavage-inducing halter top and an extremely short miniskirt.  The sexual allure of this item is undoubtable.","Light",
 				PerkLib.SluttySeduction,10,0,0,0,"Your delightfully slutty yet upbeat garb helps you seduce your foes!", false, false);
@@ -74,6 +74,7 @@ package classes.Items
 		public const RKIMONO:ArmorWithPerk = new ArmorWithPerk("R.Kimono","R.Kimono","red kimono","a red kimono",1,200,"This lovely red kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light",
 				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
 		public const S_SWMWR:SluttySwimwear = new SluttySwimwear();
+		public const SAMUARM:Armor = new Armor("SamuArm","Samu.Armor","samurai armor","a suit of samurai armor",18,300,"This suit of armor is originally worn by the Samurai, the warriors from the far East.","Heavy");
 		public const SCALEML:Armor = new Armor("ScaleMl","Scale Mail","scale-mail armor","a set of scale-mail armor",12,720,"This suit of scale-mail covers the entire body with layered steel scales, providing flexibility and protection.","Heavy");
 		public const SEDUCTA:SeductiveArmor = new SeductiveArmor();
 		public const SEDUCTU:SeductiveArmorUntrapped = new SeductiveArmorUntrapped();
