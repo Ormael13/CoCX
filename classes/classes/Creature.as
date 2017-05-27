@@ -2221,21 +2221,23 @@ import classes.BodyParts.UnderBody;
 			else
 				return mf(male, female);
 		}
-		
+		public function looksMale():Boolean {
+			return !looksFemale();
+		}
+		public function looksFemale():Boolean {
+			if (hasCock() && hasVagina()) // herm
+				return (biggestTitSize() >= 2 || biggestTitSize() == 1 && femininity >= 50 || femininity >= 75);
+			if (hasCock()) // male
+				return (biggestTitSize() >= 1 && femininity > 55 || femininity >= 75);
+				if (hasVagina()) // pure female
+				return (biggestTitSize() > 1 || femininity >= 45);
+			// genderless
+			return (biggestTitSize() >= 3 || femininity >= 75);
+		}
 		//Rewritten!
 		public function mf(male:String, female:String):String
 		{
-			if (hasCock() && hasVagina()) // herm
-				return (biggestTitSize() >= 2 || biggestTitSize() == 1 && femininity >= 50 || femininity >= 75) ? female : male;
-
-			if (hasCock()) // male
-				return (biggestTitSize() >= 1 && femininity > 55 || femininity >= 75) ? female : male;
-
-				if (hasVagina()) // pure female
-				return (biggestTitSize() > 1 || femininity >= 45) ? female : male;
-		
-			// genderless
-			return (biggestTitSize() >= 3 || femininity >= 75) ? female : male;
+			return looksMale() ? male : female;
 		}
 		
 		public function maleFemaleHerm(caps:Boolean = false):String

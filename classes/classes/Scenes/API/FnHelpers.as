@@ -82,8 +82,14 @@ public class FnHelpers extends BaseContent {
 	 */
 	public function ifLevelMin(level:int, daysPerLevel:int =6, iftrue:* =1, iffalse:* =0):Function {
 		return function():* {
-			return (player.level>=level || time.days>=level*daysPerLevel) ? iftrue : iffalse;
+			return isLevelMin(level, daysPerLevel) ? iftrue : iffalse;
 		}
+	}
+	/**
+	 * @return Function returning `true` if player is at least `minLevel` or at least `daysPerLevel`*`minLevel` days have passed
+	 */
+	public static function isLevelMin(minLevel:int, daysPerLevel:int = 6):Boolean {
+		return (kGAMECLASS.player.level>=minLevel || kGAMECLASS.time.days>=minLevel*daysPerLevel);
 	}
 	/**
 	 * @return Function returning Number, linearly dependent on player level:
@@ -112,7 +118,7 @@ public class FnHelpers extends BaseContent {
 	 * - if bound==false, continues the interpolation outside the xA..xB interval,
 	 * optionally capped between min and max
 	 */
-	public function lerp(x:Number, xA:int, xB:int, yA:Number, yB:Number,
+	public static function lerp(x:Number, xA:int, xB:int, yA:Number, yB:Number,
 						 bound:Boolean = true, min:Number = Number.NEGATIVE_INFINITY, max:Number = Number.POSITIVE_INFINITY):Number {
 			if (bound) {
 			if (x <= xA) return yA;

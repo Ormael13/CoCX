@@ -64,7 +64,7 @@ public class BodyPart extends SimpleJsonable {
 	 * player.skin.checkProps({
 	 *     coverage: [0, 1, 2], // either none, low, or mid coverage
 	 *     base: {
-	 *         type: SKIN_BASE_PLAIN,
+	 *         type: SKIN_TYPE_PLAIN,
 	 *         color: ["blue", "light blue"]
 	 *     }
 	 * });

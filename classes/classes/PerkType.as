@@ -302,7 +302,7 @@ import flash.utils.Dictionary;
 			if (perks.length == 0) throw ("Incorrect call of requireAnyPerk() - should NOT be empty");
 			var text:Array = [];
 			for each (var perk:PerkType in perks) {
-				text.push(perk.allRequirementDesc());
+				text.push(perk.name);
 			}
 			requirements.push({
 				fn  : function (player:Player):Boolean {

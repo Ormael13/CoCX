@@ -4277,7 +4277,7 @@ public function regeneration(combat:Boolean = true):void {
 			if (player.findPerk(PerkLib.Regeneration4) >= 0) healingPercent += 0.5;
 			if (player.findPerk(PerkLib.Regeneration5) >= 0) healingPercent += 0.5;
 		}
-		if (player.armor.name == "skimpy nurse's outfit") healingPercent += 0.5;
+		if (player.armor == armors.NURSECL) healingPercent += 0.5;
 		if (player.armor == armors.GOOARMR) healingPercent += (kGAMECLASS.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
 		if (player.findPerk(PerkLib.LustyRegeneration) >= 0) healingPercent += 0.5;
 		if (player.findPerk(PerkLib.LizanRegeneration) >= 0) healingPercent += 1.5;
@@ -4301,7 +4301,8 @@ public function regeneration(combat:Boolean = true):void {
 			if (player.findPerk(PerkLib.Regeneration5) >= 0) healingPercent += 1;
 		}
 		if (player.armorName == "skimpy nurse's outfit") healingPercent += 1;
-		if (player.armorName == "goo armor") healingPercent += (kGAMECLASS.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 16 : 3) : 3);
+		if (player.armor == armors.NURSECL) healingPercent += 1;
+		if (player.armor == armors.GOOARMR) healingPercent += (kGAMECLASS.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 16 : 3) : 3);
 		if (player.findPerk(PerkLib.LustyRegeneration) >= 0) healingPercent += 1;
 		if (player.findPerk(PerkLib.LizanRegeneration) >= 0) healingPercent += 3;
 		if (player.findPerk(PerkLib.LizanMarrow) >= 0) healingPercent += 1;

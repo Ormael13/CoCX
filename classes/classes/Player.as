@@ -282,7 +282,9 @@ use namespace kGAMECLASS;
 			if (value == null) value = "";
 			_modArmorName = value;
 		}
-
+		public function isWearingArmor():Boolean {
+			return armor != ArmorLib.COMFORTABLE_UNDERCLOTHES && armor != ArmorLib.NOTHING;
+		}
 		//override public function get armors
 		override public function get armorName():String {
 			if (_modArmorName.length > 0) return modArmorName;
