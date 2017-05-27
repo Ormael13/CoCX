@@ -3,14 +3,33 @@
  */
 package classes.Items
 {
-	import classes.CoC_Settings;
+	import classes.GlobalFlags.*;
+	import classes.Scenes.Camp;
+	import classes.Scenes.Places.Prison;
+	import classes.DefaultDict;
 	import classes.Player;
+import classes.internals.Utils;
 
 /**
 	 * An item, that is consumed by player, and disappears after use. Direct subclasses should override "doEffect" method
 	 * and NOT "useItem" method.
 	 */
-	public class Consumable extends Useable {
+	public class Consumable extends Useable
+	{
+		include "../../../includes/appearanceDefs.as";
+
+		protected function get mutations():Mutations { return kGAMECLASS.mutations; }
+		protected function get changes():int { return mutations.changes; }
+		protected function set changes(val:int):void { mutations.changes = val; }
+		protected function get changeLimit():int { return mutations.changeLimit; }
+		protected function set changeLimit(val:int):void { mutations.changeLimit = val; }
+
+		protected function get player():Player { return kGAMECLASS.player; }
+		protected function get prison():Prison { return kGAMECLASS.prison; }
+		protected function get flags():DefaultDict { return kGAMECLASS.flags; }
+		protected function get camp():Camp { return kGAMECLASS.camp; }
+		protected function doNext(eventNo:Function):void { kGAMECLASS.doNext(eventNo); }
+		protected function rand(n:Number):int { return Utils.rand(n); }
 		
 		public function Consumable(id:String, shortName:String = null, longName:String = null, value:Number = 0, description:String = null) {
 			super(id, shortName, longName, value, description);
@@ -31,6 +50,14 @@ package classes.Items
 			return desc;
 		}
 		
+		/**
+		 * Delegate function for legacy 'Mutations.as' code.
+		 * @param	... args stat change parameters
+		 */
+		protected function dynStats(... args):void {
+			game.dynStats.apply(null, args);
+		}
+
 /*
 		public function canUse(player:Player,output:Boolean):Boolean
 		{

@@ -157,11 +157,12 @@ private function rathazulWorkOffer():Boolean {
 	var totalOffers:int = 0;
 	var spoken:Boolean = false;
 	var showArmorMenu:Boolean = false;
-	var purify:Function = null;
-	var debimbo:int = 0;
-	var reductos:Function = null;
+	var purify:Boolean = false;
+	var philters:Boolean = false;
+	var debimbo:Boolean = false;
+	var reductos:Boolean = false;
 	var lethiciteDefense:Function = null;
-	var dyes:Function = null;
+	var dyes:Boolean = false;
 	if(flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 10) {
 		collectRathazulArmor();
 		return true;
@@ -226,49 +227,54 @@ private function rathazulWorkOffer():Boolean {
 	var pCounter:int = 0;
 	//Item purification offer
 	if(player.hasItem(consumables.INCUBID)) {
-		purify = purifySomething;
+		purify = true;
 		totalOffers++;
 		pCounter++;
 	}
 	if(player.hasItem(consumables.SUCMILK)) {
-		purify = purifySomething;
+		purify = true;
 		totalOffers++;
 		pCounter++;
 	}
 	if(player.hasItem(consumables.SDELITE)) {
-		purify = purifySomething;
+		purify = true;
 		totalOffers++;
 		pCounter++;
 	}
 	if(player.hasItem(consumables.LABOVA_)) {
-		purify = purifySomething;
+		purify = true;
 		totalOffers++;
 		pCounter++;
 	}
 	if(player.hasItem(consumables.MINOCUM)) {
-		purify = purifySomething;
+		purify = true;
 		totalOffers++;
 		pCounter++;
 	}
-	//Single Offer
-	if(pCounter == 1) {
-		outputText("The rat mentions, \"<i>I see you have at least one tainted item on you... for 20 gems I could remove most of the taint, making it a good deal safer to use.  Of course, who knows what kind of freakish transformations it would cause...</i>\"\n\n", false);
+	if (pCounter > 0) {
+		if (pCounter == 1)
+			outputText("The rat mentions, \"<i>I see you have at least one tainted item on you... for 20 gems I could remove most of the taint, making it a good deal safer to use.  Of course, who knows what kind of freakish transformations it would cause...</i>\"\n\n");
+		else
+			outputText("The rat mentions, \"<i>I see you have a number of demonic items on your person.  For 20 gems I could attempt to remove the taint from one of them, rendering it a good deal safer for consumption.  Of course it would not remove most of the transformative properties of the item...</i>\"\n\n");
+		purify = true;
 		spoken = true;
-		totalOffers++;
-	}
-	if(pCounter > 1) {
-		outputText("The rat mentions, \"<i>I see you have a number of demonic items on your person.  For 20 gems I could attempt to remove the taint from one of them, rendering it a good deal safer for consumption.  Of course it would not remove most of the transformative properties of the item...</i>\"\n\n", false);
-		spoken = true;
-		totalOffers+=2;
+		totalOffers += pCounter;
 	}
 	//Offer dyes if offering something else.
 	if(player.gems >= 50) {
 		outputText("Rathazul offers, \"<i>Since you have enough gems to cover the cost of materials for my dyes as well, you could buy one of my dyes for your hair.  ", false);
 		if (player.statusAffectv2(StatusAffects.MetRathazul) >= 8) outputText("I should be able to make exotic-colored dyes if you're interested.  ");
 		outputText("Or if you want some changes to your skin, I have skin oils and body lotions.  I will need 50 gems up-front.</i>\"\n\n");
+		dyes = true;
 		spoken = true;
 		totalOffers++;
-		dyes = buyDyes;
+	}
+	//Offer purity philter and numbing oil.
+	if (player.gems >= 100) {
+		outputText("Rathazul offers, \"<i>I can make something for you. Something to counter the corruption of this realm and if you're feeling too sensitive, I have these oils. I'll need 100 gems up-front.</i>\"");
+		philters = true;
+		spoken = true;
+		totalOffers++;
 	}
 	//Bee honey
 	if (player.hasItem(consumables.BEEHONY)) {
@@ -283,10 +289,10 @@ private function rathazulWorkOffer():Boolean {
 		outputText("The rat hurries over to his supplies and produces a container of paste, looking rather proud of himself, \"<i>Good news everyone!  I've developed a paste you could use to shrink down any, ah, oversized body parts.  The materials are expensive though, so I'll need ");
 		if(flags[kFLAGS.AMILY_MET_RATHAZUL] >= 2) outputText("50");
 		else outputText("100");
-		outputText(" gems for each jar of ointment you want.</i>\"\n\n");
+		outputText(" gems for each jar of ointment you want. And if you're, ah, not feeling big enough, I've also developed a liquid that you inject. The materials are expensive too so it's the same price for each needle.</i>\"\n\n");
 		totalOffers++;
 		spoken = true;
-		reductos = buyReducto;
+		reductos = true;
 	}
 
 	
@@ -306,7 +312,7 @@ private function rathazulWorkOffer():Boolean {
 			outputText("You recall that Rathazul is willing to make something to cure bimbo liqueur for 250 gems and five Scholar's Teas.");
 			if(player.hasItem(consumables.SMART_T,5) && player.gems >= 250) {
 				totalOffers++;
-				debimbo = 1; 
+				debimbo = true;
 			}
 			else if(!player.hasItem(consumables.SMART_T,5)) outputText("  You should probably find some if you want that...");
 			else outputText("  You need more gems to afford that, though.");
@@ -331,19 +337,18 @@ private function rathazulWorkOffer():Boolean {
 		//In camp has no time passage if left.
 		menu();
 		if (showArmorMenu) addButton(0, "Armor&Weap", rathazulArmorMenu, null, null, null, "Ask Rathazul to make an armour or weapon for you.");
-		if (dyes != null) {
-			addButton(1, "Buy Dye", buyDyes, null, null, null, "Ask him to make a dye for you. \n\nCost: 50 Gems.");
-			addButton(2, "Buy Oil", buyOils, null, null, null, "Ask him to make a skin oil for you. \n\nCost: 50 Gems.");
-			addButton(3, "Buy Lotion", buyLotions, null, null, null, "Ask him to make a body lotion for you. \n\nCost: 50 Gems.");
-		}
-		addButton(4, "Purify", purify, null, null, null, "Ask him to purify any tainted potions. \n\nCost: 20 Gems.");
+		//Shop sub-menu
+		if (dyes || philters || reductos)
+			addButton(1, "Shop", rathazulShopMenu, dyes, philters, reductos, "Check Rathazul's wares.");
+		else
+			addButtonDisabled(1, "Shop", "You can't afford anything Rathazul has to offer.");
+		addButton(4, "Purify", purifySomething, null, null, null, "Ask him to purify any tainted potions. \n\nCost: 20 Gems.");
 		
-		if (debimbo > 0) addButton(5, "Debimbo", makeADeBimboDraft, null, null, null, "Ask Rathazul to make a debimbofying potion for you. \n\nCost: 250 Gems \nNeeds 5 Scholar Teas.");
+		if (debimbo) addButton(5, "Debimbo", makeADeBimboDraft, null, null, null, "Ask Rathazul to make a debimbofying potion for you. \n\nCost: 250 Gems \nNeeds 5 Scholar Teas.");
 		if (player.hasItem(consumables.BEEHONY)) addButton(6, consumables.PURHONY.shortName, rathazulMakesPureHoney, null, null, null, "Ask him to distill a vial of bee honey into a pure honey. \n\nCost: 25 Gems \nNeeds 1 vial of Bee Honey");
 		if (player.statusAffectv2(StatusAffects.MetRathazul) >= 5) addButton(7, "ProLactaid", rathazulMakesMilkPotion, null, null, null, "Ask him to brew a special lactation potion. \n\nCost: 250 Gems \nNeeds 5 Lactaids and 2 Purified LaBovas.");
-		if (dyes != null) addButton(8, "Make Dye", makeDyes, null, null, null, "Ask him to make a special dye for you. \n\nCost: 50 Gems.");
-		if (reductos != null) addButton(9, "Reducto", reductos);
-		
+		if (dyes) addButton(8, "Make Dye", makeDyes, null, null, null, "Ask him to make a special dye for you. \n\nCost: 50 Gems.");
+
 		if (lethiciteDefense != null) addButton(10, "Lethicite", lethiciteDefense, null, null, null, "Ask him if he can make use of that lethicite you've obtained from Marae.");
 		if (player.hasItem(consumables.PURHONY, 1) && player.hasItem(consumables.C__MINT, 1) && player.hasItem(consumables.PURPEAC, 1) && player.hasKeyItem("Rathazul's Purity Potion") < 0 &&(flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 2 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10)) {
 			addButton(11, "Pure Potion", rathazulMakesPurifyPotion, null, null, null, "Ask him to brew a purification potion for Minerva.");
@@ -1119,6 +1124,44 @@ private function craftWorldTreeWeaponForReal(type:int = 0):void {
 	inventory.takeItem(itype, returnToRathazulMenu);
 }
 
+//------------
+// SHOP
+//------------
+private function rathazulShopMenu(dyes:Boolean = false, philters:Boolean = false, reductos:Boolean = false):void {
+	menu();
+	//Dyes
+	if (dyes) {
+		addButton(0, "Hair Dyes", buyDyes, null, null, null, "Ask him to make a dye for you. \n\nCost: 50 Gems.");
+		addButton(1, "Skin Oils", buyOils, null, null, null, "Ask him to make a skin oil for you. \n\nCost: 50 Gems.");
+		addButton(2, "Body Lotions", buyLotions, null, null, null, "Ask him to make a body lotion for you. \n\nCost: 50 Gems.");
+	}
+	else {
+		addButtonDisabled(0, "Hair Dyes", "You can't afford to buy dyes. \n\n50 gems required.");
+		addButtonDisabled(1, "Skin Oils", "You can't afford to buy oil. \n\n50 gems required.");
+		addButtonDisabled(2, "Body Lotions", "You can't afford to buy lotions. \n\n50 gems required.");
+	}
+	//Reducto & GroPlus
+	if (reductos) {
+		addButton(3, "Reducto", buyReducto);
+		addButton(4, "GroPlus", buyGroPlus);
+	}
+	else {
+		addButtonDisabled(3, "Reducto", "Rathazul isn't currently producing this item.");
+		addButtonDisabled(4, "GroPlus", "Rathazul isn't currently producing this item.");
+	}
+	//Philters
+	if (philters) {
+		addButton(5, consumables.H_PILL.shortName, buyPuritySomething, consumables.H_PILL);
+		addButton(6, consumables.PPHILTR.shortName, buyPuritySomething, consumables.PPHILTR);
+		addButton(7, consumables.NUMBOIL.shortName, buyPuritySomething, consumables.NUMBOIL);
+	}
+	else {
+		addButtonDisabled(5, consumables.H_PILL.shortName, "You can't afford to buy this.\n\n100 gems required.");
+		addButtonDisabled(6, consumables.PPHILTR.shortName, "You can't afford to buy this.\n\n100 gems required.");
+		addButtonDisabled(7, consumables.NUMBOIL.shortName, "You can't afford to buy this.\n\n100 gems required.");
+	}
+	addButton(14, "Back", returnToRathazulMenu);
+}
 //Hair dyes
 private function buyDyes():void {
 	spriteSelect(49);
@@ -1309,6 +1352,53 @@ private function buyLotionNevermind():void {
 	doNext(returnToRathazulMenu);
 }
 
+//Reducto
+private function buyReducto():void {
+	spriteSelect(49);
+	clearOutput();
+	var cost:int = (flags[kFLAGS.AMILY_MET_RATHAZUL] >= 2 ? 50 : 100);
+	if (player.gems >= cost) {
+		outputText(images.showImage("rathazul-buy-reducto"));
+		outputText("Rathazul hands you the Reducto with a nod before returning to his work.\n\n");
+		player.gems -= cost;
+		inventory.takeItem(consumables.REDUCTO, returnToRathazulMenu);
+		statScreenRefresh();
+		player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+	}
+	else {
+		outputText("\"<i>I'm sorry, but you lack the gems I need to make the trade,</i>\" apologizes Rathazul.");
+		doNext(returnToRathazulMenu);
+	}
+}
+
+//GroPlus
+private function buyGroPlus():void {
+	spriteSelect(49);
+	clearOutput();
+	var cost:int = (flags[kFLAGS.AMILY_MET_RATHAZUL] >= 2 ? 50 : 100);
+	if (player.gems >= cost) {
+		outputText(images.showImage("rathazul-buy-groplus"));
+		outputText("Rathazul hands you the GroPlus with a nod before returning to his work.\n\n");
+		player.gems -= cost;
+		inventory.takeItem(consumables.GROPLUS, returnToRathazulMenu);
+		statScreenRefresh();
+		player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+	}
+	else {
+		outputText("\"<i>I'm sorry, but you lack the gems I need to make the trade,</i>\" apologizes Rathazul.");
+		doNext(returnToRathazulMenu);
+	}
+}
+
+
+	private function buyPuritySomething(item:ItemType):void {
+		clearOutput();
+		player.gems -= 100;
+		statScreenRefresh();
+		inventory.takeItem(item, returnToRathazulMenu);
+		player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+	}
+
 //Turn several ingredients into a special potion/consumable.
 private function rathazulMakesPureHoney():void {
 	clearOutput();
@@ -1371,23 +1461,7 @@ private function rathazulMakesScorpioPotion():void {
 	inventory.takeItem(consumables.SCORICO, returnToRathazulMenu);
 }
 
-private function buyReducto():void {
-	spriteSelect(49);
-	clearOutput();
-	var cost:int = (flags[kFLAGS.AMILY_MET_RATHAZUL] >= 2 ? 50 : 100);
-	if (player.gems >= cost) {
-		outputText(images.showImage("rathazul-buy-reducto"));
-		outputText("Rathazul hands you the Reducto with a nod before returning to his work.\n\n");
-		player.gems -= cost;
-		inventory.takeItem(consumables.REDUCTO, returnToRathazulMenu);
-		statScreenRefresh();
-		player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
-	}
-	else {
-		outputText("\"<i>I'm sorry, but you lack the gems I need to make the trade,</i>\" apologizes Rathazul.");
-		doNext(returnToRathazulMenu);
-	}
-}
+
 
 private function growLethiciteDefense():void {
 	spriteSelect(49);

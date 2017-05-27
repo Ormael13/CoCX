@@ -21,33 +21,6 @@ import classes.CockTypesEnum;
 //const EGGS_BOUGHT:int = 653;
 //const BIKINI_ARMOR_BONUS:int = 769;
 
-//Cerulean P.
-		public function ceruleanPotion(player:Player):void
-		{
-			
-			player.slimeFeed();
-			//Repeat genderless encounters
-			if (player.gender == 0 && flags[kFLAGS.CERULEAN_POTION_NEUTER_ATTEMPTED] > 0) {
-				outputText("You take another sip of the Cerulean Potion.  You find it soothing and become very excited about the possibility of another visit from the succubus.", true);
-			}
-			else if (player.gender == 3 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00111] > 0) {
-				outputText("With anticipation, you chug down another bottle of the Cerulean Potion. A warm sensation radiates out from your stomach as you feel the potion course through your body.", true);
-			}
-			//All else
-			else {
-				outputText("The liquid tastes rather bland and goes down easily. ", true);
-				//Special repeat texts
-				if (player.hasStatusAffect(StatusAffects.RepeatSuccubi)) outputText("You look forwards to tonight's encounter.", false);
-				//First timer huh?
-				else outputText("You do not notice any real effects.  Did the merchant con you?", false);
-			}
-			if (player.hasStatusAffect(StatusAffects.SuccubiNight)) {
-				if (player.statusAffectv1(StatusAffects.SuccubiNight) < 3) player.addStatusValue(StatusAffects.SuccubiNight,1,1);
-			}
-			else player.createStatusAffect(StatusAffects.SuccubiNight, 1, 0, 0, 0);
-			player.refillHunger(20);
-		}
-
 //ManUp Beer
 		public function manUpBeer(player:Player):void
 		{
@@ -55,16 +28,6 @@ import classes.CockTypesEnum;
 			outputText("You open the can and bottom up hoping it wasn’t just a scam to buy an overpriced beer. Woa that’s one hell of a manly beverage! The alcohol in the beer is so strong you actually feel like you could lift bigger things now. No...wait, you actually do as your muscle seems to surge with new raw power.", true);
 			dynStats("str", 1 + rand(2));
 			if (rand(3) == 0) outputText(player.modTone(95, 3), false);
-			player.refillHunger(10);
-		}
-
-//Vitality Tincture
-		public function vitalityTincture(player:Player):void
-		{
-			player.slimeFeed();
-			outputText("You down the contents of the bottle. The liquid is thick and tastes remarkably like cherries. Within moments, you feel much more healthy.", true);
-			dynStats("tou", 1 + rand(2));
-			if (HPChange(50, false)) outputText("  Any aches, pains and bruises you have suffered no longer hurt and you feel much better.", false);
 			player.refillHunger(10);
 		}
 
@@ -76,18 +39,6 @@ import classes.CockTypesEnum;
 			dynStats("spe", 1 + rand(2));
 			if (rand(3) == 0) outputText(player.modTone(95, 3), false);
 			player.refillHunger(5);
-		}
-
-//Scholar's Tea
-		public function scholarsTea(player:Player):void
-		{
-			player.slimeFeed();
-			outputText("Following the merchant's instructions, you steep and drink the tea. Its sharp taste fires up your palate and in moments, you find yourself more alert and insightful. As your mind wanders, a creative, if somewhat sordid, story comes to mind. It is a shame that you do not have writing implements as you feel you could make a coin or two off what you have conceived. The strange seller was not lying about the power of the tea.", true);
-			if (rand(3) == 0) outputText(player.modTone(15, 1), false);
-			if (player.inte < 50) dynStats("int", 1 + rand(4));
-			else if (player.inte < 100) dynStats("int", 1 + rand(3));
-			else dynStats("int", 1 + rand(2));
-			player.refillHunger(10);
 		}
 
 //Vixen Tea
@@ -4279,78 +4230,6 @@ import classes.CockTypesEnum;
 				return;
 			}
 		}
-		
-		public function lactaid(player:Player):void
-		{
-			player.slimeFeed();
-			var i:Number = 0;
-			outputText("You gulp down the bottle of lactaid, easily swallowing the creamy liquid.", true);
-			//Bump up size!
-			if (player.averageBreastSize() < 8) {
-				outputText("\n\n", false);
-				if (player.breastRows.length == 1) player.growTits((1 + rand(5)), 1, true, 1);
-				else player.growTits(1 + rand(2), player.breastRows.length, true, 1);
-			}
-			//Player doesn't lactate
-			if (player.biggestLactation() < 1) {
-				outputText("\n\n", false);
-				outputText("You feel your " + nippleDescript(0) + "s become tight and engorged.  A single droplet of milk escapes each, rolling down the curves of your breasts.  <b>You are now lactating!</b>", false);
-				for (i = 0; i < player.breastRows.length; i++) {
-					player.breastRows[i].lactationMultiplier += 2;
-				}
-			}
-			//Boost lactation
-			else {
-				outputText("\n\n", false);
-				outputText("Milk leaks from your " + nippleDescript(0) + "s in thick streams.  You're lactating even more!", false);
-				for (i = 0; i < player.breastRows.length; i++) {
-					player.breastRows[i].lactationMultiplier += 1 + rand(10) / 10;
-				}
-			}
-			dynStats("lus", 10);
-			if (rand(3) == 0) {
-				outputText(player.modFem(95, 1), false);
-			}
-		}
-		public function milkPotion(player:Player):void
-		{
-			player.slimeFeed();
-			var i:Number = 0;
-			outputText("You drink the milk potion.  It tastes like milk.", true);
-			//Player doesn't lactate
-			if (player.biggestLactation() < 1) {
-				outputText("\n\n", false);
-				outputText("You feel your " + nippleDescript(0) + "s become tight and engorged.  A single droplet of milk escapes each, rolling down the curves of your breasts.  <b>You are now lactating!</b>", false);
-				for (i = 0; i < player.breastRows.length; i++) {
-					player.breastRows[i].lactationMultiplier += 5;
-				}
-			}
-			//Boost lactation
-			else {
-				outputText("\n\n", false);
-				outputText("Milk leaks from your " + nippleDescript(0) + "s in thick streams.  You're lactating even more!", false);
-				for (i = 0; i < player.breastRows.length; i++) {
-					player.breastRows[i].lactationMultiplier += 2 + rand(30) / 10;
-				}
-			}
-			//Grant perk or rank it up
-			if (rand(1) == 0 && player.findPerk(PerkLib.MilkMaid) < 0) {
-				outputText("\n\n", false);
-				outputText("You can feel something inside your " + player.chestDesc() + " as they feel more dense. Your entire body tingles with a strange feel. Somehow, you know you won't be able to stop lactating.\n");
-				outputText("<b>Gained Perk: Milk Maid! (Your milk production is increased by 200mL and you won't stop lactating.)</b>");
-				player.createPerk(PerkLib.MilkMaid, 1, 0, 0, 0);
-			}
-			else if (rand(player.perkv1(PerkLib.MilkMaid)) == 0 && player.perkv1(PerkLib.MilkMaid) < 10) {
-				outputText("\n\n", false);
-				outputText("You can feel something inside your " + player.chestDesc() + " as they feel even more dense. Your entire body tingles with a strange feel. Seems like you're going to lactate more milk.\n");
-				outputText("<b>Perk Ranked Up: Milk Maid! (Your milk production is increased by additional 100mL.)</b>");
-				player.addPerkValue(PerkLib.MilkMaid, 1, 1);
-			}
-			else if (player.perkv1(PerkLib.MilkMaid) >= 10) {
-				outputText("\n\n", false);
-				outputText("You can feel something tingling inside your " + player.chestDesc() + " but nothing special happens. <b>Maybe you've already maxed out your permanent boost to lactation?</b>\n");
-			}
-		}
 
 		public function useMarbleMilk(player:Player):void
 		{
@@ -6336,34 +6215,6 @@ import classes.CockTypesEnum;
 				changes++;
 			}
 			flags[kFLAGS.TIMES_TRANSFORMED] += changes;
-		}
-
-
-		public function coal(player:Player):void
-		{
-			var changes:Number = 0;
-			clearOutput();
-			outputText("You handle the coal rocks experimentally and they crumble to dust in your hands!  You cough as you breathe in the cloud, sputtering and wheezing.  After a minute of terrible coughing, you recover and realize there's no remaining trace of the rocks, not even a sooty stain on your hands!", false);
-			//Try to go into intense heat
-			if(player.goIntoHeat(true, 2)) {
-				changes++;
-			}
-			//Males go into rut
-			else if(player.goIntoRut(true)) {
-				changes++;
-			}
-			else {
-				//Boost anal capacity without gaping
-				if (player.statusAffectv1(StatusAffects.BonusACapacity) < 80) {
-					if (!player.hasStatusAffect(StatusAffects.BonusACapacity)) player.createStatusAffect(StatusAffects.BonusACapacity, 0, 0, 0, 0);
-					player.addStatusValue(StatusAffects.BonusACapacity, 1, 5);
-					outputText("\n\nYou feel... more accommodating somehow.  Your " + assholeDescript() + " is tingling a bit, and though it doesn't seem to have loosened, it has grown more elastic.", false);
-					changes++;
-				}
-				else {
-					outputText("\n\nYour whole body tingles for a moment but it passes.  It doesn't look like the coal can do anything to you at this point.", false);
-				}
-			}
 		}
 
 		public function catTransformation(player:Player):void
@@ -9166,83 +9017,6 @@ import classes.CockTypesEnum;
 
 //ITEMS START
 
-//Numb Rocks
-		public function numbRocks(player:Player):void
-		{
-			clearOutput();
-			//Numb rocks lower lust significantly but have a chance of inducing the masturbation preventing effect from minotaur.
-			outputText("You pop open the package of numb rocks and dump it into your waiting mouth.  The strange candy fizzes and pops, leaving the nerves on your tongue feeling a bit deadened as you swallow the sweet mess.", false);
-
-			if (player.lust >= 33) {
-				outputText("\n\nThe numbness spreads through your body, bringing with it a sense of calm that seems to muffle your sexual urges.", false);
-				player.lust -= 20 + rand(40);
-			}
-			if (rand(5) == 0) {
-				if (!player.hasStatusAffect(StatusAffects.Dysfunction)) {
-					outputText("\n\nUnfortunately, the skin of ", false);
-					if (player.cockTotal() > 0) {
-						outputText(sMultiCockDesc(), false);
-						if (player.hasVagina()) outputText(" and", false);
-						outputText(" ", false);
-					}
-					if (player.hasVagina()) {
-						if (!player.hasCock()) outputText("your ");
-						outputText(vaginaDescript(0) + " ", false);
-					}
-					if (!(player.hasCock() || player.hasVagina())) outputText(assholeDescript() + " ", false);
-					outputText(" numbs up too.  You give yourself a gentle touch, but are quite disturbed when you realize you can barely feel it.  You can probably still fuck something to get off, but regular masturbation is out of the question...", false);
-					player.createStatusAffect(StatusAffects.Dysfunction, 50 + rand(100), 0, 0, 0);
-				}
-				else {
-					outputText("\n\nSadly your groin becomes even more deadened to sensation.  You wonder how much longer you'll have to wait until you can please yourself again.", false);
-					player.addStatusValue(StatusAffects.Dysfunction, 1, 50 + rand(100));
-				}
-			}
-			else if (rand(4) == 0 && player.inte > 15) {
-				outputText("\n\nNumbness clouds your mind, making you feel slow witted and dull.  Maybe these candies weren't such a exceptio... fantas... good idea.", false);
-				dynStats("int", -(1 + rand(5)));
-			}
-			if (player.findPerk(PerkLib.ThickSkin) < 0 && player.sens < 30 && rand(4) == 0) {
-				outputText("Slowly, ", false);
-				if (player.skinType == SKIN_TYPE_PLAIN) outputText("your skin", false);
-				else outputText("the skin under your " + player.skinDesc, false);
-				outputText(" begins to feel duller, almost... thicker.  You pinch yourself and find that your epidermis feels more resistant to damage, almost like natural armor!\n<b>(Thick Skin - Perk Gained!)</b>", false);
-				player.createPerk(PerkLib.ThickSkin, 0, 0, 0, 0);
-			}
-			outputText("\n\nAfter the sensations pass, your " + player.skinDesc + " feels a little less receptive to touch.", false);
-			dynStats("sen", -3);
-			if (player.sens < 1) player.sens = 1;
-			player.refillHunger(20);
-		}
-
-//2. Sensitivity Draft
-		public function sensitivityDraft(player:Player):void
-		{
-			player.slimeFeed();
-			clearOutput();
-			outputText("You pop the cork on this small vial and drink down the clear liquid.  It makes your lips and tongue tingle strangely, letting you feel each globule of spit in your mouth and each breath of air as it slides past your lips.", false);
-
-			if (player.hasStatusAffect(StatusAffects.Dysfunction)) {
-				outputText("\n\nThankfully, the draft invigorates your groin, replacing the numbness with waves of raw sensation.  It seems your crotch is back to normal and <b>you can masturbate again!</b>", false);
-				player.removeStatusAffect(StatusAffects.Dysfunction);
-			}
-			if (rand(4) == 0 && !player.hasStatusAffect(StatusAffects.LustyTongue)) {
-				outputText("The constant tingling in your mouth grows and grows, particularly around your lips, until they feel as sensitive as ", false);
-				if (player.hasVagina()) outputText("your", false);
-				else outputText("a woman's", false);
-				outputText(" lower lips.  You'll have to be careful not to lick them!", false);
-				//(Lustytongue status)
-				player.createStatusAffect(StatusAffects.LustyTongue, 25, 0, 0, 0);
-			}
-			outputText("\n\nAfter the wave of sensation passes, your " + player.skinDesc + " feels a little more receptive to touch.  ", false);
-			if (player.lust > 70 || player.lib > 70) {
-				outputText("You shiver and think of how much better it'll make sex and masturbation.", false);
-			}
-			else outputText("You worry it'll make it harder to resist the attentions of a demon.", false);
-			dynStats("sen", 10, "lus", 5);
-			player.refillHunger(5);
-		}
-
 		public function foxTF(enhanced:Boolean,player:Player):void
 		{
 			clearOutput();
@@ -9681,33 +9455,6 @@ import classes.CockTypesEnum;
 			player.refillHunger(10);
 			if(player.cor > 50) dynStats("cor", -1);
 			if(player.cor > 75) dynStats("cor", -1);
-		}
-		
-		public function calmMint(player:Player):void
-		{
-			outputText("Eating the sprig of raw mint is a bit of a stretch, but you manage to gulp it down.  As the strong minty flavor overwhelms your taste buds, your mind feels calmer, and a relaxed sensation spreads through your body.", true);
-			dynStats("lib", -1, "lust", -10, "inte", 0.5, "resisted", false);
-			player.refillHunger(5);
-		}
-		
-		public function iceShard(player:Player):void
-		{
-			outputText("You give the icicle a tentative lick, careful not to stick your tongue to it. It tastes refreshing, like cool, clear glacier water.  The ice readily dissolves against the heat of your mouth as you continue to lick away at it.  Before long, the icicle has dwindled into a sliver small enough to pop into your mouth.  As the pinprick of ice melts you slide your chilled tongue around your mouth, savoring the crisp feeling.\n\n", true)
-			if (rand(2) == 0 && (player.str < 75 || player.tou < 75)) {
-				outputText("The rush of cold tenses your muscles and fortifies your body, making you feel hardier than ever.  ", false)
-				if (player.str < 75) dynStats("str", ((1 + rand(5)) / 5))
-				if (player.tou < 75) dynStats("tou", ((1 + rand(5)) / 5))
-			}
-			if (rand(2) == 0 && (player.spe > 25)) {
-				outputText("You feel a chill spread through you; when it passes, you feel more slothful and sluggish.  ", false)
-				if (player.spe > 25) dynStats("spe", -((1 + rand(5)) / 5))
-			}
-			if (rand(2) == 0) {
-				outputText("You also feel a little numb all over, in more ways than one...  ")
-				dynStats("lib", -((1 + rand(2)) / 2))
-				dynStats("sen", -((1 + rand(2)) / 2))
-			}
-			player.refillHunger(5);
 		}
 		
 		public function akbalSaliva(player:Player):void
@@ -11035,44 +10782,6 @@ import classes.CockTypesEnum;
 				}
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
-		}
-		
-		public function herbalContraceptive(player:Player):void
-		{
-			clearOutput();
-			
-			// Placeholder, sue me
-			outputText("You chew on the frankly awfully bitter leaves as quickly as possible before swallowing them down.");
-			
-			player.createStatusAffect(StatusAffects.Contraceptives, 1, 48, 0, 0);
-		}
-		
-		public function princessPucker(player:Player):void
-		{
-			clearOutput();
-			
-			outputText("You uncork the bottle, and sniff it experimentally.  The fluid is slightly pink, full of flecks of gold, and smelling vaguely of raspberries.  Princess Gwynn said it was drinkable.\n\n");
-			outputText("You down the bottle, hiccuping a bit at the syrupy-sweet raspberry flavor.  Immediately following the sweet is a bite of sour, like sharp lime.  You pucker your lips, and feel your head clear a bit from the intensity of flavor.  You wonder what Gwynn makes this out of.\n\n");
-			outputText("Echoing the sensation in your head is an answering tingle in your body.  The sudden shock of citrusy sour has left you slightly less inclined to fuck, a little more focused on your priorities.\n\n");
-			
-			if (rand(2) == 0)
-			{
-				dynStats("lus-", 20, "lib-", 2);
-			}
-			else
-			{
-				dynStats("lus-", 20, "sen-", 2);
-			}
-			
-			if (player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.hairColor != "pink")
-			{
-				if (rand(5) == 0)
-				{
-					outputText("A slight tingle across your scalp draws your attention to your hair.  It seems your " + player.hairColor + " is rapidly gaining a distinctly pink hue, growing in from the roots!\n\n");
-					player.hairColor = "pink";
-				}
-			}
-			player.refillHunger(15);
 		}
 		
 		//Ferret Fruit

@@ -2,7 +2,8 @@ package classes.Scenes.Places.Farm
 {
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Items.ConsumableLib;
+import classes.Items.Consumable;
+import classes.Items.ConsumableLib;
 	import classes.Items.Consumables.SimpleConsumable;
 	import classes.ItemSlotClass;
 	import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
@@ -201,7 +202,7 @@ package classes.Scenes.Places.Farm
 			// Branding
 			if (flags[kFLAGS.QUEUE_BRANDING_UPGRADE] != 0)
 			{
-				flags[kFLAGS.QUEUE_BRANDING_UPGRADE]++
+				flags[kFLAGS.QUEUE_BRANDING_UPGRADE]++;
 
 				if (flags[kFLAGS.QUEUE_BRANDING_UPGRADE] > 2)
 				{
@@ -390,7 +391,7 @@ package classes.Scenes.Places.Farm
 			addButton(14, "Back", rootScene);
 		}
 		
-		private function getItemObj(flag:int):SimpleConsumable
+		private function getItemObj(flag:int):Consumable
 		{
 			if (flag == kFLAGS.FARM_SUCCUMILK_STORED) return consumables.SUCMILK;
 			if (flag == kFLAGS.FARM_INCUDRAFT_STORED) return consumables.INCUBID;
@@ -403,7 +404,7 @@ package classes.Scenes.Places.Farm
 		
 		private function takeItems(flag:int):void
 		{
-			var item:SimpleConsumable = getItemObj(flag);
+			var item:Consumable = getItemObj(flag);
 			
 			if (flag == kFLAGS.FARM_EGG_STORED) flags[kFLAGS.FARM_EGG_COUNTDOWN] = 7;
 			flags[flag]--;
@@ -745,7 +746,7 @@ package classes.Scenes.Places.Farm
 			// Whitney not corrupt
 			if (!whitneyCorrupt())
 			{
-				outputText("You stand on the rise you’ve taken to using to look down on the farm which you are invested in.")
+				outputText("You stand on the rise you’ve taken to using to look down on the farm which you are invested in.");
 				
 				if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1) outputText(" A large machine, bulky and rotund with a conical top, has been built into the milking barn. Fat pipes crawl up onto the roof from it like metal ivy, and white smoke billows busily out of its whistle chimney.");
 				
@@ -1251,7 +1252,7 @@ package classes.Scenes.Places.Farm
 			if (whitneyHasTattoo())
 			{
 				if (numTattoos("whitney") > 1) outputText("\nShe has the following tattoos emblazoned across her body:\n");
-				else outputText("\nShe has ")
+				else outputText("\nShe has ");
 				if (flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] != 0) outputText(flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] + "\n");
 				if (flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] != 0) outputText(flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] + "\n");
 				if (flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] != 0) outputText(flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] + "\n");
@@ -1373,7 +1374,7 @@ package classes.Scenes.Places.Farm
 
 			menu();
 			if (player.gems >= 1000) addButton(0, "Do it", doCockMilkerInvestment);
-			else addButton(0, "Do it", turnDownInvestment, true)
+			else addButton(0, "Do it", turnDownInvestment, true);
 			addButton(1, "No", turnDownInvestment);
 		}
 
@@ -2255,10 +2256,10 @@ package classes.Scenes.Places.Farm
 					if (player.cocks.length == 2) outputText(" twin");
 					else if (player.cocks.length == 3) outputText(" triple");
 					else outputText(" transcendent");
-					outputText(" high;")
+					outputText(" high;");
 					if (player.cocks.length > 2) outputText(" they paint");
 					else outputText(" it paints");
-					outputText(" her skirt with")
+					outputText(" her skirt with");
 					if (player.cocks.length > 2) outputText(" their");
 					else outputText(" its");
 					outputText(" generous discharge. ");
@@ -3825,7 +3826,7 @@ package classes.Scenes.Places.Farm
 		public function brandSlotSelect():void
 		{
 			menu();
-			if (flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] == 0) addButton(0, "Collarbone", brandSelect, 0)
+			if (flags[kFLAGS.WHITNEY_TATTOO_COLLARBONE] == 0) addButton(0, "Collarbone", brandSelect, 0);
 			if (flags[kFLAGS.WHITNEY_TATTOO_SHOULDERS] == 0) addButton(1, "Shoulders", brandSelect, 1);
 			if (flags[kFLAGS.WHITNEY_TATTOO_LOWERBACK] == 0) addButton(2, "Lower Back", brandSelect, 2);
 			if (flags[kFLAGS.WHITNEY_TATTOO_BUTT] == 0) addButton(3, "Butt", brandSelect, 3);
@@ -3834,7 +3835,7 @@ package classes.Scenes.Places.Farm
 		public function amilyBrandSlotSelect():void
 		{
 			menu();
-			if (flags[kFLAGS.AMILY_TATTOO_COLLARBONE] == 0) addButton(0, "Collarbone", amilyBrandSelect, 0)
+			if (flags[kFLAGS.AMILY_TATTOO_COLLARBONE] == 0) addButton(0, "Collarbone", amilyBrandSelect, 0);
 			if (flags[kFLAGS.AMILY_TATTOO_SHOULDERS] == 0) addButton(1, "Shoulders", amilyBrandSelect, 1);
 			if (flags[kFLAGS.AMILY_TATTOO_LOWERBACK] == 0) addButton(2, "Lower Back", amilyBrandSelect, 2);
 			if (flags[kFLAGS.AMILY_TATTOO_BUTT] == 0) addButton(3, "Butt", amilyBrandSelect, 3);
@@ -3843,7 +3844,7 @@ package classes.Scenes.Places.Farm
 		public function jojoBrandSlotSelect():void
 		{
 			menu();
-			if (flags[kFLAGS.JOJO_TATTOO_COLLARBONE] == 0) addButton(0, "Collarbone", jojoBrandSelect, 0)
+			if (flags[kFLAGS.JOJO_TATTOO_COLLARBONE] == 0) addButton(0, "Collarbone", jojoBrandSelect, 0);
 			if (flags[kFLAGS.JOJO_TATTOO_SHOULDERS] == 0) addButton(1, "Shoulders", jojoBrandSelect, 1);
 			if (flags[kFLAGS.JOJO_TATTOO_LOWERBACK] == 0) addButton(2, "Lower Back", jojoBrandSelect, 2);
 			if (flags[kFLAGS.JOJO_TATTOO_BUTT] == 0) addButton(3, "Butt", jojoBrandSelect, 3);
@@ -3852,7 +3853,7 @@ package classes.Scenes.Places.Farm
 		public function bimboSophieSlotSelect():void
 		{
 			menu();
-			if (flags[kFLAGS.SOPHIE_TATTOO_COLLARBONE] == 0) addButton(0, "Collarbone", bimboSophieBrandSelect, 0)
+			if (flags[kFLAGS.SOPHIE_TATTOO_COLLARBONE] == 0) addButton(0, "Collarbone", bimboSophieBrandSelect, 0);
 			if (flags[kFLAGS.SOPHIE_TATTOO_SHOULDERS] == 0) addButton(1, "Shoulders", bimboSophieBrandSelect, 1);
 			if (flags[kFLAGS.SOPHIE_TATTOO_LOWERBACK] == 0) addButton(2, "Lower Back", bimboSophieBrandSelect, 2);
 			if (flags[kFLAGS.SOPHIE_TATTOO_BUTT] == 0) addButton(3, "Butt", bimboSophieBrandSelect, 3);
@@ -3861,7 +3862,7 @@ package classes.Scenes.Places.Farm
 		public function vapulaSlotSelect():void
 		{
 			menu();
-			if (flags[kFLAGS.VAPULA_TATTOO_COLLARBONE] == 0) addButton(0, "Collarbone", vapulaBrandSelect, 0)
+			if (flags[kFLAGS.VAPULA_TATTOO_COLLARBONE] == 0) addButton(0, "Collarbone", vapulaBrandSelect, 0);
 			if (flags[kFLAGS.VAPULA_TATTOO_SHOULDERS] == 0) addButton(1, "Shoulders", vapulaBrandSelect, 1);
 			if (flags[kFLAGS.VAPULA_TATTOO_LOWERBACK] == 0) addButton(2, "Lower Back", vapulaBrandSelect, 2);
 			if (flags[kFLAGS.VAPULA_TATTOO_BUTT] == 0) addButton(3, "Butt", vapulaBrandSelect, 3);
@@ -3870,7 +3871,7 @@ package classes.Scenes.Places.Farm
 		public function kellySlotSelect():void
 		{
 			menu();
-			if (flags[kFLAGS.KELLY_TATTOO_COLLARBONE] == 0) addButton(0, "Collarbone", kellyBrandSelect, 0)
+			if (flags[kFLAGS.KELLY_TATTOO_COLLARBONE] == 0) addButton(0, "Collarbone", kellyBrandSelect, 0);
 			if (flags[kFLAGS.KELLY_TATTOO_SHOULDERS] == 0) addButton(1, "Shoulders", kellyBrandSelect, 1);
 			if (flags[kFLAGS.KELLY_TATTOO_LOWERBACK] == 0) addButton(2, "Lower Back", kellyBrandSelect, 2);
 			if (flags[kFLAGS.KELLY_TATTOO_BUTT] == 0) addButton(3, "Butt", kellyBrandSelect, 3);
@@ -3879,7 +3880,7 @@ package classes.Scenes.Places.Farm
 		public function smallMilkySlotSelect():void
 		{
 			menu();
-			if (flags[kFLAGS.MILKY_TATTOO_COLLARBONE] == 0) addButton(0, "Collarbone", smallMilkyBrandSelect, 0)
+			if (flags[kFLAGS.MILKY_TATTOO_COLLARBONE] == 0) addButton(0, "Collarbone", smallMilkyBrandSelect, 0);
 			if (flags[kFLAGS.MILKY_TATTOO_SHOULDERS] == 0) addButton(1, "Shoulders", smallMilkyBrandSelect, 1);
 			if (flags[kFLAGS.MILKY_TATTOO_LOWERBACK] == 0) addButton(2, "Lower Back", smallMilkyBrandSelect, 2);
 			if (flags[kFLAGS.MILKY_TATTOO_BUTT] == 0) addButton(3, "Butt", smallMilkyBrandSelect, 3);
@@ -3888,7 +3889,7 @@ package classes.Scenes.Places.Farm
 		public function bigMilkySlotSelect():void
 		{
 			menu();
-			if (flags[kFLAGS.MILKY_TATTOO_COLLARBONE] == 0) addButton(0, "Collarbone", bigMilkyBrandSelect, 0)
+			if (flags[kFLAGS.MILKY_TATTOO_COLLARBONE] == 0) addButton(0, "Collarbone", bigMilkyBrandSelect, 0);
 			if (flags[kFLAGS.MILKY_TATTOO_SHOULDERS] == 0) addButton(1, "Shoulders", bigMilkyBrandSelect, 1);
 			if (flags[kFLAGS.MILKY_TATTOO_LOWERBACK] == 0) addButton(2, "Lower Back", bigMilkyBrandSelect, 2);
 			if (flags[kFLAGS.MILKY_TATTOO_BUTT] == 0) addButton(3, "Butt", bigMilkyBrandSelect, 3);
@@ -6343,7 +6344,7 @@ package classes.Scenes.Places.Farm
 
 					outputText(" There must be a direct nerve link leading right from the bottom of your body up to your groin because my word, that really shouldn’t feel as good as it does. She swirls her thumbs across the rougher pads of your feet, dipping her warm fingers in and around the valleys of your");
 					if (player.lowerBody == LOWER_BODY_TYPE_DEMONIC_CLAWS || player.lowerBody == LOWER_BODY_TYPE_LIZARD || player.lowerBody == LOWER_BODY_TYPE_HARPY || player.lowerBody == LOWER_BODY_TYPE_DRAGON) outputText(" claws");
-					else outputText(" toes")
+					else outputText(" toes");
 					outputText(", before returning deliberately to stroke at your arch, indulging that nervous link until you are deep in the unexpected bliss of it... before slowly releasing, leaving you to wallow delightfully in the knowledge that that same slow, delicious attention is about to be lavished on your other [foot].")
 				}
 				else

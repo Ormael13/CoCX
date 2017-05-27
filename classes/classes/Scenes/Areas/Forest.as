@@ -148,6 +148,10 @@ package classes.Scenes.Areas
 						call  : findChitin,
 						chance: 0.05
 					}, {
+						name  : "healpill",
+						call  : findHPill,
+						chance: 0.10
+					}, {
 						name  : "woods",
 						call  : camp.cabinProgress.gatherWoods,
 						chance: 0.50,
@@ -322,6 +326,10 @@ package classes.Scenes.Areas
 		public function findTruffle():void {
 			outputText("You spot something unusual. Taking a closer look, it's definitely a truffle of some sort. ");
 			inventory.takeItem(consumables.PIGTRUF, camp.returnToCampUseOneHour);
+		}
+		public function findHPill():void {
+			outputText("You find a pill stamped with the letter 'H' discarded on the ground. ");
+			inventory.takeItem(consumables.H_PILL, camp.returnToCampUseOneHour);
 		}
 		public function findChitin():void {
 			outputText("You find a large piece of insectile carapace obscured in the ferns to your left.  It's mostly black with a thin border of bright yellow along the outer edge.  There's still a fair portion of yellow fuzz clinging to the chitinous shard.  It feels strong and flexible - maybe someone can make something of it.  ", true);

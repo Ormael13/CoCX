@@ -138,30 +138,33 @@ package classes.Items
 		
 		//NON-TRANSFORMATIVE ITEMS
 		public const AGILI_E:SimpleConsumable = mk("Agil.E.", "Agility E.", "an agility elixir", m.agilityElixir, "This greenish elixir is supposed to increase the imbiber natural swiftness and agility.");
-		public const AKBALSL:SimpleConsumable = mk("AkbalSl","AkbalSlv", "a vial of Akbal's saliva", m.akbalSaliva,"This corked vial of Akbal's saliva is said to contain healing properties. ");
+		public const AKBALSL:Consumable = new AkbalSaliva();
 		public const BANGB_M:MiniBangBall = new MiniBangBall();
 		//public const BANGBM1:BngBall = new BangBll();//BangBall mark 1 - nastpne powinny mieć coś ala mk 2 itd. nazwy w kodzie :P
-		public const C__MINT:SimpleConsumable = mk("C. Mint","C. Mint", "a calm mint", m.calmMint,"This is a sprig of silver-colored mint.  Its strong scent makes you feel calmer and less lustful.");
-		public const CERUL_P:SimpleConsumable = mk("Cerul P","Cerulean P.", "a cerulean-tinted potion", m.ceruleanPotion, "This is a mysterious bottle filled with a sky-blue liquid that sloshes gently inside.  Supposedly it will make you irresistible, though to what or who you cannot say.");
-		public const COAL___:SimpleConsumable = mk("Coal   ","Coal", "two pieces of coal", m.coal, "These two pieces of coal may look ordinary but it makes you wonder what happens when you rub them.");
+		public const C__MINT:Consumable = new Mint();
+		public const CERUL_P:Consumable = new CeruleanPotion();
+		public const COAL___:Consumable = new Coal();
 		public const DEBIMBO:DeBimbo = new DeBimbo();
 		public const EXTSERM:HairExtensionSerum = new HairExtensionSerum();
 		public const F_DRAFT:SimpleConsumable = mk("F.Draft","FuckDraft", "a vial of roiling red fluid labeled \"Fuck Draft\"", curry(m.lustDraft, true), "This vial of red fluid bubbles constantly inside the glass, as if eager to escape.  It smells very strongly, though its odor is difficult to identify.  The word \"Fuck\" is inscribed on the side of the vial.");
-		public const HRBCNT:SimpleConsumable  = mk("HrblCnt", "HrblCnt", "a bundle of verdant green leaves", m.herbalContraceptive, "A small bundle of verdant green leaves.");
-		public const ICICLE_:SimpleConsumable = mk("Icicle ","Icicle", "an ice shard", m.iceShard,"An icicle that seems to be incapable of melting.  It numbs your hands as you hold it. ");
+		public const H_PILL:Consumable = new HealPill();
+		public const HRBCNT:Consumable = new HerbalContraceptive();
+		public const ICICLE_:Consumable = new IceShard();
 		public const KITGIFT:KitsuneGift		= new KitsuneGift();
 		public const L_DRAFT:SimpleConsumable = mk("L.Draft","LustDraft", "a vial of roiling bubble-gum pink fluid", curry(m.lustDraft,false), "This vial of bright pink fluid bubbles constantly inside the glass, as if eager to escape.  It smells very sweet, and has \"Lust\" inscribed on the side of the vial.", 20);
-		public const LACTAID:SimpleConsumable = mk("Lactaid","Lactaid", "a pink bottle labelled \"Lactaid\"", m.lactaid, "Judging by the name printed on this bottle, 'Lactaid' probably has an effect on the ability to lactate, and you doubt that effect is a reduction.");
+		public const LACTAID:Consumable = new Lactaid();
 		public const LUSTSTK:LustStick        = new LustStick();
 		public const MANUP_B:SimpleConsumable = mk("ManUp B", "ManUp B.", "a ManUp beer", m.manUpBeer, "A beverage made for people who believe brawn is better than brain.");
-		public const MILKPTN:SimpleConsumable = mk("MilkPtn","ProLactaid", "a bottle labelled \"Pro Lactaid\"", m.milkPotion, "A bottle filled with white liquid which is distilled from Lactaid and LaBovas.  Rathazul mentioned that this potion will greatly improve your lactation. There's the possibility of permanently lactating, even if you're a male.", 120);
-		public const NUMBROX:SimpleConsumable = mk("NumbRox","Numb Rox", "a strange packet of candy called 'Numb Rocks'", m.numbRocks, "This packet of innocuous looking 'candy' guarantees to reduce troublesome sensations and taste delicious.", 15);
+		public const MILKPTN:Consumable = new MilkPotion();
+		public const NUMBROX:Consumable = new NumbRocks();
+		public const NUMBOIL:Consumable = new NumbingOil();
 		public const OVIELIX:OvipositionElixir = new OvipositionElixir();
 		public const PEPPWHT:SimpleConsumable = mk("PeppWht","PeppWht", "a vial of peppermint white", function(player:Player):void{getGame().peppermintWhite(player)}, "This tightly corked glass bottle gives of a pepperminty smell and reminds you of the winter holidays.  How odd.", 120);
-		public const PRNPKR :SimpleConsumable  = mk("PrnsPkr", "P.Pucker", "a vial of pinkish fluid", m.princessPucker, "A vial filled with a viscous pink liquid. A label reads \"Princess Pucker\".");
-		public const SENSDRF:SimpleConsumable = mk("SensDrf","SensDraft", "a bottle of sensitivity draft", m.sensitivityDraft, "This carefully labelled potion is a 'Sensitivity Draft', and if the diagrams are any indication, it will make your body more sensitive.", 15);
-		public const SMART_T:SimpleConsumable = mk("Smart T","Scholars T.", "a cup of scholar's tea", m.scholarsTea, "This powerful brew supposedly has mind-strengthening effects.");
-		public const VITAL_T:SimpleConsumable = mk("Vital T", "Vitality T.", "a vitality tincture", m.vitalityTincture, "This potent tea is supposedly good for the strengthening the body.");
+		public const PPHILTR:Consumable = new PurityPhilter();
+		public const PRNPKR :Consumable = new PrincessPucker();
+		public const SENSDRF:Consumable = new SensitivityDraft();
+		public const SMART_T:Consumable = new ScholarsTea();
+		public const VITAL_T:Consumable = new VitalityTincture();
 		public const VIXEN_T:SimpleConsumable = mk("Vixen T", "Vixen T.", "a cup of vixen tea", m.vixenTea, "An exotic tea made by kitsunes. This herbal infusion is rumored to improve your expertise and expand your sexual knowledge.");
 		public const W_STICK:WingStick = new WingStick();
 		//Aqua Seed - prawdopodobnie nazwa dla Siren TF ; Bubble Lemonade - nazwa dla Dark Slime TF
