@@ -118,34 +118,42 @@ public function treeMenu(output:Boolean = true):void {
 				if(flags[kFLAGS.HOLLI_FRUIT_EXPLAINED] > 0) outputText("  A very small, strange part of you actually feels proud to have made something like that with the tree-woman.");
 			}
 		}
+		// [Fuck]		[Ride]		[Tentacle]	[Drink]		[HolliFruit]
+		// [MaraFruit]	[Guard		[]			[]			[Farm]
+		// []			[]			[]			[]			[Leave]
+		menu();
+		if(player.hasCock() && player.lust >= 33) {
+			addButton(0, "Fuck Holli", flags[kFLAGS.HOLLI_SUBMISSIVE] == 0 ? fuckHolliInZeFlowerPuss : holliGetsDickDommed)
+		} else {
+			addButtonDisabled(0, "FuckHolli");
+		}
+		if(player.hasVagina() && player.lust >= 33) {
+			addButton(1,"Ride Tentacles", flags[kFLAGS.HOLLI_SUBMISSIVE] == 0 ? level4RideHollisTentacruels : vaginalDomHollisTentacruels);
+		} else {
+			addButtonDisabled(1, "RideTentacles");
+		}
+		if (flags[kFLAGS.HOLLI_SUBMISSIVE] == 0) {
+			if ((player.tentacleCocks() >= 10 || player.stamenCocks() > 9) && player.lust >= 33) {
+				addButton(2, "TentacleBone", fullOnTentacleTasticGangBangForHolli);
+			} else {
+				addButtonDisabled(2, "TentacleBone", "Requires <i>a lot</i> of tentacle or stamen cocks");
+			}
+		} else {
+			addButtonDisabled(2, "TentacleBone");
+		}
+		addButton(3,"Drink Sap", haveAMapleSyrupSnack);
+		if(flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(4,"Eat A Fruit", eatHolliFruit);
+		else addButtonDisabled(4,"Eat A Fruit");
+		if(flags[kFLAGS.DAILY_MARA_FRUIT_COUNTER] < 1) addButton(5, "Mara Fruit", getMaraFruit);
+		else addButtonDisabled(5, "Mara Fruit");
 		if(flags[kFLAGS.HOLLI_SUBMISSIVE] == 0) {
-			var eat:Function = null;
-			if(flags[kFLAGS.HOLLI_FRUIT] > 0) eat = eatHolliFruit;
-			if(player.hasCock() && player.lust >= 33) fuck = fuckHolliInZeFlowerPuss;
-			if(player.hasVagina() && player.lust >= 33) ride = level4RideHollisTentacruels;
-			
-			var guardT:String = "";
-			if(flags[kFLAGS.HOLLI_DEFENSE_ON] == 1) guardT = "Stop Guarding";
-			else guardT = "Guard Camp";
-			burnIt = askHolliToWatch;
-			
-			//[Fuck Her] [Drink] [Tentacle Ride] {Guard Camp} {Threaten} [Leave]
-			choices("Fuck Holli", fuck, "Drink Sap", haveAMapleSyrupSnack, "Ride Tentacles", ride, guardT, burnIt, "Eat A Fruit", eat,
-				"", null, "", null, "", null, "", null, "Leave", inventory.inventoryMenu);
+			if(flags[kFLAGS.HOLLI_DEFENSE_ON] == 1) addButton(6,"Stop Guarding", askHolliToWatch);
+			else addButton(6,"Guard Camp", askHolliToWatch);
+		} else {
+			addButton(6, "Guarding", askBrokenHolliToGuard);
 		}
-		else {
-			menu();
-			if(player.hasCock() && player.lust >= 33) addButton(0, "Fuck Holli", holliGetsDickDommed);
-			if((player.tentacleCocks() >= 10 || player.stamenCocks() > 9) && player.lust >= 33) addButton(1, "TentacleBone", fullOnTentacleTasticGangBangForHolli);
-			if(player.hasVagina() && player.lust >= 33) addButton(2, "Ride Holli", vaginalDomHollisTentacruels);
-			addButton(3, "Drink Sap", haveAMapleSyrupSnack);
-			if(flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(4, "Eat A Fruit", eatHolliFruit);
-			addButton(5, "Guarding", askBrokenHolliToGuard);
-			if(flags[kFLAGS.DAILY_MARA_FRUIT_COUNTER] < 1) addButton(6, "Mara Fruit", getMaraFruit);
-			addButton(14, "Leave", camp.campFollowers);
-		}
-		
-		if (flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(6, "Farm Help", helpWithFarm);
+		if (flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(9, "Farm Help", helpWithFarm);
+		addButton(14, "Leave", camp.campFollowers);
 	}
 }
 
