@@ -45,7 +45,8 @@ import classes.BodyParts.SkinLayer;
 				mainView.nameBox.maxChars = 16;
 				mainView.nameBox.restrict = null;
 				mainView.nameBox.width = 140;
-				outputText("Welcome to the super secret debug menu!", true);
+				clearOutput();
+				outputText("Welcome to the super secret debug menu!");
 				menu();
 				addButton(0, "Spawn Items", itemSpawnMenu, null, null, null, "Spawn any items of your choice, including items usually not obtainable through gameplay.");
 				addButton(1, "Change Stats", statChangeMenu, null, null, null, "Change your core stats.");
@@ -54,16 +55,24 @@ import classes.BodyParts.SkinLayer;
 				//addButton(5, "Event Trigger", eventTriggerMenu);
 				//addButton(6, "MeaninglessCorr", toggleMeaninglessCorruption, null, null, null, "Toggles the Meaningless Corruption flag. If enabled, all corruption requirements are disabled for scenes.");
 				if (player.isPregnant()) addButton(4, "Abort Preg", abortPregnancy);
+				addButton(5, "DumpEffects", dumpEffectsMenu, null, null, null, "Display your status effects");
 				addButton(7, "HACK STUFFZ", styleHackMenu, null, null, null, "H4X0RZ");
 				addButton(14, "Exit", playerMenu);
 			}
 			if (getGame().inCombat) {
 				clearOutput();
-				outputText("You raise the wand but nothing happens. Seems like it only works when you're not in the middle of a battle.");
+				outputText("You raise the wand and give it a twirl but nothing happens. Seems like it only works when you're not in the middle of a battle.");
 				doNext(playerMenu);
 			}
 		}
-		
+		private function  dumpEffectsMenu():void {
+			clearOutput();
+			for each (var effect:StatusAffectClass in player.statusAffects) {
+				outputText("'"+effect.stype.id+"': "+effect.value1+" "+effect.value2+" "+effect.value3+" "+effect.value4+"\n");
+			}
+			doNext(playerMenu);
+		}
+
 		//Spawn items menu
 		private function itemSpawnMenu():void {
 			setItemArrays();
@@ -90,7 +99,7 @@ import classes.BodyParts.SkinLayer;
 			var buttonPos:int = 0; //Button positions 4 and 9 are reserved for next and previous.
 			for (var i:int = 0; i < 12; i++) {
 				if (array[((page-1) * 12) + i] != undefined) {
-					if (array[((page-1) * 12) + i] != null) addButton(buttonPos, array[((page-1) * 12) + i].shortName, inventory.takeItem, array[((page-1) * 12) + i], createCallBackFunction2(displayItemPage, array, page));
+					if (array[((page-1) * 12) + i] != null) addButton(buttonPos, array[((page-1) * 12) + i].shortName, inventory.takeItem, array[((page-1) * 12) + i], curry(displayItemPage, array, page));
 				}
 				buttonPos++;
 				if (buttonPos == 4 || buttonPos == 9) buttonPos++;
@@ -200,24 +209,27 @@ import classes.BodyParts.SkinLayer;
 			consumableArray.push(consumables.EXTSERM);
 			consumableArray.push(consumables.F_DRAFT);
 			consumableArray.push(consumables.GROPLUS);
+			consumableArray.push(consumables.H_PILL);
 			consumableArray.push(consumables.HRBCNT);
 			consumableArray.push(consumables.ICICLE_);
 			consumableArray.push(consumables.KITGIFT);
-			consumableArray.push(consumables.L_DRAFT);
 			//Page 2
+			consumableArray.push(consumables.L_DRAFT);
 			consumableArray.push(consumables.LACTAID);
 			consumableArray.push(consumables.LUSTSTK);
 			consumableArray.push(consumables.MILKPTN);
+			consumableArray.push(consumables.NUMBOIL);
 			consumableArray.push(consumables.NUMBROX);
 			consumableArray.push(consumables.OVIELIX);
 			consumableArray.push(consumables.PEPPWHT);
+			consumableArray.push(consumables.PPHILTR);
 			consumableArray.push(consumables.PRNPKR);
 			consumableArray.push(consumables.REDUCTO);
 			consumableArray.push(consumables.SENSDRF);
+			//Page 3
 			consumableArray.push(consumables.SMART_T);
 			consumableArray.push(consumables.VITAL_T);
 			consumableArray.push(consumables.B__BOOK);
-			//Page 3
 			consumableArray.push(consumables.W__BOOK);
 			consumableArray.push(consumables.G__BOOK);
 			consumableArray.push(consumables.BC_BEER);
@@ -227,10 +239,10 @@ import classes.BodyParts.SkinLayer;
 			consumableArray.push(consumables.CCUPCAK);
 			consumableArray.push(consumables.FISHFIL);
 			consumableArray.push(consumables.FR_BEER);
+			//Page 4
 			consumableArray.push(consumables.GODMEAD);
 			consumableArray.push(consumables.H_BISCU);
 			consumableArray.push(consumables.IZYMILK);
-			//Page 4
 			consumableArray.push(consumables.M__MILK);
 			consumableArray.push(consumables.MINOCUM);
 			consumableArray.push(consumables.P_BREAD);
@@ -240,10 +252,10 @@ import classes.BodyParts.SkinLayer;
 			consumableArray.push(consumables.S_WATER);
 			consumableArray.push(consumables.NPNKEGG);
 			consumableArray.push(consumables.DRGNEGG);
+			//Page 5
 			consumableArray.push(consumables.W_PDDNG);
 			consumableArray.push(consumables.TRAILMX);
 			consumableArray.push(consumables.URTACUM);
-			//Page 5
 			consumableArray.push(consumables.BLACKEG);
 			consumableArray.push(consumables.L_BLKEG);
 			consumableArray.push(consumables.BLUEEGG);
@@ -253,6 +265,7 @@ import classes.BodyParts.SkinLayer;
 			consumableArray.push(consumables.PINKEGG);
 			consumableArray.push(consumables.L_PNKEG);
 			consumableArray.push(consumables.PURPLEG);
+			//Page 6
 			consumableArray.push(consumables.L_PRPEG);
 			consumableArray.push(consumables.WHITEEG);
 			consumableArray.push(consumables.L_WHTEG);
@@ -389,6 +402,7 @@ import classes.BodyParts.SkinLayer;
 			armourArray.push(armors.R_BDYST);
 			armourArray.push(armors.RBBRCLT);
 			armourArray.push(armors.S_SWMWR);
+			armourArray.push(armors.SAMUARM);
 			armourArray.push(armors.SCALEML);
 			armourArray.push(armors.SEDUCTA);
 			armourArray.push(armors.SEDUCTU);
@@ -441,7 +455,8 @@ import classes.BodyParts.SkinLayer;
 
 		
 		private function statChangeMenu():void {
-			outputText("Which attribute would you like to alter?", true);
+			clearOutput();
+			outputText("Which attribute would you like to alter?");
 			menu();
 			addButton(0, "Strength", statChangeAttributeMenu, "str");
 			addButton(1, "Toughness", statChangeAttributeMenu, "tou");
@@ -455,7 +470,8 @@ import classes.BodyParts.SkinLayer;
 		
 		private function statChangeAttributeMenu(stats:String = ""):void {
 			var attribute:* = stats;
-			outputText("Increment or decrement by how much?", true);
+			clearOutput();
+			outputText("Increment or decrement by how much?");
 			addButton(0, "Add 1", statChangeApply, stats, 1);
 			addButton(1, "Add 5", statChangeApply, stats, 5);
 			addButton(2, "Add 10", statChangeApply, stats, 10);
@@ -477,7 +493,8 @@ import classes.BodyParts.SkinLayer;
 		
 		private function styleHackMenu():void {
 			menu();
-			outputText("TEST STUFFZ", true);
+			clearOutput();
+			outputText("TEST STUFFZ");
 			addButton(0, "ASPLODE", styleHackMenu);
 			addButton(1, "Scorpion Tail", changeScorpionTail);
 			addButton(2, "Be Manticore", getManticoreKit, null, null, null, "Gain everything needed to become a Manticore-morph.");

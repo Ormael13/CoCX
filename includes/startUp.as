@@ -87,13 +87,7 @@ public function mainMenu(e:MouseEvent = undefined):void
 	addButton(5, "Credits", creditsScreen, null, null, null, "See a list of all the cool people who have contributed to content for this game!");
 	addButton(6, "Image Credits", imageCreditsScreen, null, null, null, "Check out who contributed to the image pack.");
 	//addButton(7, "Changelog", debugPane, null, null, null, "View changelog.");
-	if (CoC_Settings.debugBuild) addButton(8, "Debug Info", debugPane, null, null, null, "View debug information.");
-	if (false)  // Conditionally jump into chaosmonkey IMMEDIATELY
-	{
-		this.monkey.throwOnSyntaxError = true;
-		this.monkey.excludeMenuKeys = true;			// Syntax checking monkey should ignore the menu keys (they're irrelevant to it's functions)
-		this.initiateTheMonkey()
-	}
+	if (CoC_Settings.debugBuild) addButton(8, "Debug Info", debugInfoMenu.debugPane, null, null, null, "View debug information.");
 }
 
 public function startupScreenBody():void

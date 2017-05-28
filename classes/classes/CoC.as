@@ -9,6 +9,7 @@ package classes
 {
 	// BREAKING ALL THE RULES.
 	import classes.GlobalFlags.kFLAGS;
+import classes.display.DebugInfo;
 import classes.display.PerkMenu;
 
 // This file contains most of the persistent gamestate flags.
@@ -122,21 +123,11 @@ the text from being too boring.
 		// Include the functions. ALL THE FUNCTIONS
 
 		include "../../includes/descriptors.as";
-
 		include "../../includes/input.as";
 		include "../../includes/OnLoadVariables.as";
 		include "../../includes/startUp.as";
-		include "../../includes/debug.as";
-		
 		include "../../includes/eventParser.as";
-		
-
-		include "../../includes/eventTest.as";
-		
-		
-		
 		include "../../includes/engineCore.as";
-
 		// Lots of constants
 		include "../../includes/appearanceDefs.as";
 
@@ -281,6 +272,7 @@ the text from being too boring.
 		
 		public var mainViewManager:MainViewManager = new MainViewManager();
 		public var perkMenu:PerkMenu = new PerkMenu();
+		public var debugInfoMenu:DebugInfo = new DebugInfo();
 
 		public var perkTree:PerkTree = new PerkTree();
 		// Other scenes
