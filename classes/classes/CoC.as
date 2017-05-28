@@ -709,5 +709,21 @@ the text from being too boring.
 				_updateHack.removeEventListener(Event.ENTER_FRAME, moveHackUpdate);
 			}
 		}
+
+	public function spriteSelect(choice:Object = 0):void {
+		// Inlined call from lib/src/coc/view/MainView.as
+		// TODO: When flags goes away, if it goes away, replace this with the appropriate settings thing.
+		if (choice <= 0 || choice == null || flags[kFLAGS.SHOW_SPRITES_FLAG] == 1) {
+			mainViewManager.hideSprite();
+		} else {
+			if (choice is Class) {
+				mainViewManager.showSpriteBitmap(SpriteDb.bitmapData(choice as Class));
+			} else if (choice is Number) {
+				mainViewManager.showSpriteBitmap(SpriteDb.bitmapDataFromIndex(int(choice)));
+			} else {
+				mainViewManager.hideSprite();
+			}
+		}
 	}
+}
 }

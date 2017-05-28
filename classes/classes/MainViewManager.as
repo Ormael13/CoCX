@@ -4,7 +4,9 @@ package classes
 	import classes.*
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kGAMECLASS;
-	import flash.display.Shape;
+
+import flash.display.BitmapData;
+import flash.display.Shape;
 	import flash.display.GradientType;
 	import flash.events.Event;
 	import flash.events.TimerEvent;
@@ -328,7 +330,49 @@ package classes
 			}
 			
 		}
-		
+
+		public function hideSprite():void {
+			// Inlined from lib/src/coc/view/MainView.as
+			mainView.sprite.visible = false;
+			mainView.spriteOld.visible = false;
+		}
+		public function showSpriteFrame(frame:int):void {
+			// Inlined from lib/src/coc/view/MainView.as
+			var type:Boolean = flags[kFLAGS.SPRITE_STYLE] == 0;
+			var element:MovieClip;
+			var other:MovieClip;
+			if (type) {
+				other = mainView.spriteOld;
+				element = mainView.sprite;
+			} else if (type == 1) {
+				other = mainView.sprite;
+				element = mainView.spriteOld;
+			} else {
+				return;
+			}
+			other.visible = false;
+			element.visible = true;
+			element.gotoAndStop(frame);
+			rescaleSprite(element);
+		}
+		public function showSpriteBitmap(bmp:BitmapData):void {
+			mainView.spriteOld.visible = false;
+			var element:MovieClip = mainView.sprite;
+			element.gotoAndStop(200);
+			element.visible = true;
+			element.scaleX = 1;
+			element.scaleY = 1;
+			element.graphics.clear();
+			element.graphics.beginBitmapFill(bmp,null,false,false);
+			element.graphics.drawRect(0, 0, bmp.width, bmp.height);
+			element.graphics.endFill();
+			rescaleSprite(element);
+		}
+		private function rescaleSprite(element:MovieClip):void {
+			var scale:Number = 80 / element.height;
+			element.scaleX = scale;
+			element.scaleY = scale;
+		}
 		//------------
 		// REFRESH
 		//------------
