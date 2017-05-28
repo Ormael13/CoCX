@@ -3124,7 +3124,8 @@ package classes.Scenes {
 			var y:int = -1;
 			temp = 0;
 			while (temp < player.cocks.length) {
-				if (player.cocks[temp].cockType == CockTypesEnum.TENTACLE) {
+				if (player.cocks[temp].cockType == CockTypesEnum.TENTACLE  ||
+					player.cocks[temp].cockType == CockTypesEnum.STAMEN) {
 					if (x == -1) x = temp;
 				}
 				temp++;
@@ -3137,7 +3138,8 @@ package classes.Scenes {
 						y = temp;
 					else if (rand(2) == 0 && player.cocks[y].cockType != CockTypesEnum.TENTACLE)
 						y = temp;
-					else if (player.cocks[temp].cockType == CockTypesEnum.TENTACLE)
+					else if (player.cocks[temp].cockType == CockTypesEnum.TENTACLE ||
+							 player.cocks[temp].cockType == CockTypesEnum.STAMEN)
 						y = temp;
 				}
 				temp++;
@@ -3302,10 +3304,12 @@ package classes.Scenes {
 		private function tentacleGoesUpYerPooperNewsAtEleven():void {
 			var tentacle:int;
 			for (tentacle = 0; tentacle < player.cocks.length; tentacle++) {
-				if (player.cocks[tentacle].cockType == CockTypesEnum.TENTACLE) break;
+				if (player.cocks[tentacle].cockType == CockTypesEnum.TENTACLE ||
+					player.cocks[tentacle].cockType == CockTypesEnum.STAMEN) break;
 			}
 			for (var x:int = tentacle + 1; x < player.cocks.length; x++) { //Find the biggest tentacle cock you've got
-				if (player.cocks[x].cockType == CockTypesEnum.TENTACLE && player.cocks[x].cArea() > player.cocks[tentacle].cArea()) tentacle = x;
+				if ((player.cocks[x].cockType == CockTypesEnum.TENTACLE  ||
+					 player.cocks[tentacle].cockType == CockTypesEnum.STAMEN) && player.cocks[x].cArea() > player.cocks[tentacle].cArea()) tentacle = x;
 			}
 			clearOutput();
 			//[Standard text for stripping off goes here]

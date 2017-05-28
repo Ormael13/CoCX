@@ -285,13 +285,13 @@ package classes.internals
 			return false;
 		}
 		
-		public static function rand(max:Number):Number
+		public static function rand(max:Number):int
 		{
 			return int(Math.random() * max);
 		}
-		public static function trueOnceInN(n:int):Boolean
+		public static function trueOnceInN(n:Number):Boolean
 		{
-			return rand(n) == 0;
+			return Math.random()*n < 1;
 		}
 
 		public static function validateNonNegativeNumberFields(o:Object, func:String, nnf:Array):String
