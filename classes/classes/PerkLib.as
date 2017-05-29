@@ -1612,12 +1612,12 @@ package classes
 				 .requireLevel(30);
 		//Tier 6 Speed Perks
 		//Tier 7 Speed Perks
-		PrestigeJobSoulArcher.requirePerk(SoulOverlord)
+/*		PrestigeJobSoulArcher.requirePerk(SoulOverlord)
 							 .requirePrestigeJobSlot()
 							 .requirePerk(JobHunter)
 							 .requireSpe(200)
 							 .requireLevel(42);
-		PrestigeJobArcaneArcher.requirePerk(JobSorcerer)
+*/		PrestigeJobArcaneArcher.requirePerk(JobSorcerer)
 							   .requireInt(150)
 							   .requirePrestigeJobSlot()
 							   .requirePerk(JobHunter)
@@ -2010,7 +2010,7 @@ package classes
 					.requireWis(120)
 					.requireLevel(36);
 		//Tier 7
-		SoulTyrant.requireLevel(42)
+/*		SoulTyrant.requireLevel(42)
 				  .requirePerk(SoulOverlord)
 				  .requireWis(140);// && requirePerk(GclassHeavenTribulationSurvivor)
 		FleshBodyOverlordStage.requireLevel(42)
@@ -2026,7 +2026,7 @@ package classes
 		SoulEmperor.requirePerk(SoulKing)
 				   .requireWis(180)
 				   .requireLevel(54);
-		//------------
+*/		//------------
 		// MISCELLANEOUS
 		//------------
 		//Tier 0
@@ -2156,7 +2156,7 @@ package classes
 		//		if (player.internalChimeraScore() >= 16 && requirePerk(ChimericalBodyPerfectStage)) {
 		//			ChimericalBodyUltimateStage;
 		//		}
-		JobMunchkin.requirePerk(JobMonk)
+/*		JobMunchkin.requirePerk(JobMonk)
 				   .requirePerk(JobKnight)
 				   .requirePerk(JobHunter)
 				   .requirePerk(JobEromancer)
@@ -2171,7 +2171,7 @@ package classes
 				   .requireInt(150)
 				   .requireWis(150)
 				   .requireLib(90); //requirePerk(JobEromancer)
-		//(Still need some other related stuff added to make PC true Munchkin
+*/		//(Still need some other related stuff added to make PC true Munchkin
 		//na razie jest perk GreyMage, potrzeba jeszcze pare innych perków tak z 3-5 innych jeszcze)
 		//Tier 6
 		//if (requireMinLevel(36)) {
