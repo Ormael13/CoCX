@@ -1353,86 +1353,6 @@ public function hideUpDown():void {
 	oldStats.oldHunger = 0;
 }
 
-public function physicalCost(mod:Number):Number {
-	var costPercent:Number = 100;
-	if(player.findPerk(PerkLib.IronMan) >= 0) costPercent -= 50;
-	mod *= costPercent/100;
-	return mod;
-}
-
-public function bowCost(mod:Number):Number {
-	var costPercent:Number = 100;
-	if(player.findPerk(PerkLib.BowShooting) >= 0) costPercent -= player.perkv1(PerkLib.BowShooting);
-	//if(player.findPerk(PerkLib.) >= 0) costPercent -= x0; ((tu umieścić perk dający zmniejszenie % kosztu użycia łuku jak IronMan dla fiz specjali ^^))
-	mod *= costPercent/100;
-	return mod;
-}
-
-public function spellCostBlack(mod:Number):Number {
-	//Addiditive mods
-	var costPercent:Number = 100;
-	if (player.findPerk(PerkLib.Obsession) >= 0) costPercent -= (100 * player.perkv2(PerkLib.Obsession));
-	if (player.findPerk(PerkLib.SpellcastingAffinity) >= 0) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
-	if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
-	if (player.findPerk(PerkLib.WizardsAndDaoistsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
-	if (player.findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-	if (player.jewelryName == "fox hairpin") costPercent -= 20;
-	if (player.weaponName == "Depravatio" || player.weaponName == "Ascensus") costPercent -= 15;
-	//Limiting it and multiplicative mods
-	if(player.findPerk(PerkLib.BloodMage) >= 0 && costPercent < 50) costPercent = 50;
-	mod *= costPercent/100;
-	if (player.findPerk(PerkLib.HistoryScholar) >= 0 || player.findPerk(PerkLib.PastLifeScholar) >= 0) {
-		if(mod > 2) mod *= .8;
-	}
-	if (player.findPerk(PerkLib.BloodMage) >= 0 && mod < 5) mod = 5;
-	else if(mod < 2) mod = 2;
-	mod = Math.round(mod * 100)/100;
-	return mod;
-}
-
-public function spellCostWhite(mod:Number):Number {
-	//Addiditive mods
-	var costPercent:Number = 100;
-	if (player.findPerk(PerkLib.Ambition) >= 0) costPercent -= (100 * player.perkv2(PerkLib.Ambition));
-	if (player.findPerk(PerkLib.SpellcastingAffinity) >= 0) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
-	if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
-	if (player.findPerk(PerkLib.WizardsAndDaoistsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
-	if (player.findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-	if (player.jewelryName == "fox hairpin") costPercent -= 20;
-	if (player.weaponName == "Puritas" || player.weaponName == "Ascensus") costPercent -= 15;
-	//Limiting it and multiplicative mods
-	if(player.findPerk(PerkLib.BloodMage) >= 0 && costPercent < 50) costPercent = 50;
-	mod *= costPercent/100;
-	if (player.findPerk(PerkLib.HistoryScholar) >= 0 || player.findPerk(PerkLib.PastLifeScholar) >= 0) {
-		if(mod > 2) mod *= .8;
-	}
-	if (player.findPerk(PerkLib.BloodMage) >= 0 && mod < 5) mod = 5;
-	else if(mod < 2) mod = 2;
-	mod = Math.round(mod * 100)/100;
-	return mod;
-}
-
-public function spellCost(mod:Number):Number {
-	//Addiditive mods
-	var costPercent:Number = 100;
-	if (player.findPerk(PerkLib.SpellcastingAffinity) >= 0) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
-	if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
-	if (player.findPerk(PerkLib.WizardsAndDaoistsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
-	if (player.findPerk(PerkLib.WizardsEndurance) >= 0) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
-	if (player.jewelryName == "fox hairpin") costPercent -= 20;
-	if (player.weaponName == "Ascensus") costPercent -= 15;
-	//Limiting it and multiplicative mods
-	if(player.findPerk(PerkLib.BloodMage) >= 0 && costPercent < 50) costPercent = 50;
-	mod *= costPercent/100;
-	if (player.findPerk(PerkLib.HistoryScholar) >= 0 || player.findPerk(PerkLib.PastLifeScholar) >= 0) {
-		if(mod > 2) mod *= .8;
-	}
-	if (player.findPerk(PerkLib.BloodMage) >= 0 && mod < 5) mod = 5;
-	else if(mod < 2) mod = 2;
-	mod = Math.round(mod * 100)/100;
-	return mod;
-}
-
 //Modify fatigue
 //types:
 //  0 - normal
@@ -1445,94 +1365,7 @@ public function spellCost(mod:Number):Number {
 //	7 - non-bloodmage white magic
 //	8 - non-bloodmage black magic
 public function fatigue(mod:Number,type:Number  = 0):void {
-	//Spell reductions
-	if(type == 1) {
-		mod = spellCost(mod);
-		//Blood mages use HP for spells
-		if(player.findPerk(PerkLib.BloodMage) >= 0) {
-			combat.takeDamage(mod);
-			statScreenRefresh();
-			return;
-		}                
-	}
-	//Physical special reductions
-	if(type == 2) {
-		mod = physicalCost(mod);
-	}
-	if(type == 3) {
-		mod = spellCost(mod);
-	}
-	if (type == 4) {
-		mod = bowCost(mod);
-	}
-	if (type == 5) {
-		mod = spellCostWhite(mod);
-		//Blood mages use HP for spells
-		if(player.findPerk(PerkLib.BloodMage) >= 0) {
-			combat.takeDamage(mod);
-			statScreenRefresh();
-			return;
-		} 
-	}
-	if (type == 6) {
-		mod = spellCostBlack(mod);
-		//Blood mages use HP for spells
-		if(player.findPerk(PerkLib.BloodMage) >= 0) {
-			combat.takeDamage(mod);
-			statScreenRefresh();
-			return;
-		} 
-	}
-	if (type == 7) {
-		mod = spellCostWhite(mod);
-	}
-	if (type == 8) {
-		mod = spellCostBlack(mod);
-	}
-	if(player.fatigue >= player.maxFatigue() && mod > 0) return;
-	if(player.fatigue <= 0 && mod < 0) return;
-	//Fatigue restoration buffs!
-	if (mod < 0) {
-		var multi:Number = 1;
-		
-		if (player.findPerk(PerkLib.HistorySlacker) >= 0 || player.findPerk(PerkLib.PastLifeSlacker) >= 0) multi += 0.2;
-		if (player.findPerk(PerkLib.ControlledBreath) >= 0 && player.cor < (30 + player.corruptionTolerance())) multi += 0.1;
-		if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) multi += 0.5;
-		if (player.findPerk(PerkLib.GreyArchmage) >= 0) multi += 1;
-		if (player.findPerk(PerkLib.ManaAffinityI) >= 0) multi += 0.1;
-		if (player.findPerk(PerkLib.ManaAffinityII) >= 0) multi += 0.1;
-		if (player.findPerk(PerkLib.ManaAffinityIII) >= 0) multi += 0.1;
-		if (player.findPerk(PerkLib.ManaAffinityIV) >= 0) multi += 0.1;
-		if (player.findPerk(PerkLib.ManaAffinityV) >= 0) multi += 0.1;
-		if (player.findPerk(PerkLib.NaturesSpringI) >= 0) multi += 0.05;
-		if (player.findPerk(PerkLib.NaturesSpringII) >= 0) multi += 0.05;
-		if (player.findPerk(PerkLib.NaturesSpringIII) >= 0) multi += 0.05;
-		if (player.findPerk(PerkLib.NaturesSpringIV) >= 0) multi += 0.05;
-		if (player.findPerk(PerkLib.NaturesSpringV) >= 0) multi += 0.05;
-		if (player.alicornScore() >= 6) multi += 0.1;
-		if (player.kitsuneScore() >= 5) {
-			if (player.kitsuneScore() >= 10) multi += 1;
-			else multi += 0.5;
-		}
-		if (player.unicornScore() >= 5) multi += 0.05;
-		
-		mod *= multi;
-	}
-	player.fatigue += mod;
-	if(mod > 0) {
-		mainView.statsView.showStatUp( 'fatigue' );
-		// fatigueUp.visible = true;
-		// fatigueDown.visible = false;
-	}
-	if(mod < 0) {
-		mainView.statsView.showStatDown( 'fatigue' );
-		// fatigueDown.visible = true;
-		// fatigueUp.visible = false;
-	}
-	dynStats("lus", 0, "resisted", false); //Force display fatigue up/down by invoking zero lust change.
-	if(player.fatigue > player.maxFatigue()) player.fatigue = player.maxFatigue();
-	if(player.fatigue < 0) player.fatigue = 0;
-	statScreenRefresh();
+	combat.fatigueImpl(mod,type);
 }
 //function changeFatigue
 public function changeFatigue(changeF:Number):void {
@@ -1557,15 +1390,15 @@ public function displayStats(e:MouseEvent = null):void
 	
 	combatStats += "<b>Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellMod()) + "%\n";
 	
-	combatStats += "<b>Spell Cost:</b> " + spellCost(100) + "%\n";
+	combatStats += "<b>Spell Cost:</b> " + combat.spellCost(100) + "%\n";
 	
 	combatStats += "<b>White Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellModWhite()) + "%\n";
 	
-	combatStats += "<b>White Spell Cost:</b> " + spellCostWhite(100) + "%\n";
+	combatStats += "<b>White Spell Cost:</b> " + combat.spellCostWhite(100) + "%\n";
 	
 	combatStats += "<b>Black Spell Effect Multiplier:</b> " + Math.round(100 * combat.spellModBlack()) + "%\n";
 	
-	combatStats += "<b>Black Spell Cost:</b> " + spellCostBlack(100) + "%\n";
+	combatStats += "<b>Black Spell Cost:</b> " + combat.spellCostBlack(100) + "%\n";
 	
 	combatStats += "<b>Unarmed:</b> +" + combat.unarmedAttack() + "\n";
 	
@@ -1576,7 +1409,7 @@ public function displayStats(e:MouseEvent = null):void
 			combatStats += "<b>Bow Skill:</b> " + (Math.round(player.statusAffectv1(StatusAffects.Kelt)) + Math.round(player.statusAffectv1(StatusAffects.Kindra))) + " / 250\n";
 	}
 	
-	combatStats += "<b>Arrow/Bolt Cost:</b> " + bowCost(100) + "%\n";
+	combatStats += "<b>Arrow/Bolt Cost:</b> " + combat.bowCost(100) + "%\n";
 	
 	combatStats += "<b>Accuracy (1st range attack):</b> " + (combat.arrowsAccuracy() / 2) + "%\n";
 	

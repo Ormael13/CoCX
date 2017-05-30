@@ -170,7 +170,7 @@ package classes.Scenes.Areas.Mountain
 			spriteSelect(76);
 			//Keep logic sane if this attack brings victory
 		//Gone	menuLoc = 0;
-			if(player.fatigue + kGAMECLASS.physicalCost(40) > player.maxFatigue()) {
+			if(player.fatigue + combat.physicalCost(40) > player.maxFatigue()) {
 				outputText("You try to summon up an orgasm, but you're too tired and waste your time trying!");
 				fatigue(100-player.fatigue);
 				enemyAI();

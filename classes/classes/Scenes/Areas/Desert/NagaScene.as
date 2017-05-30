@@ -1218,7 +1218,7 @@ public function nagaRapeChoice():void {
 public function nagaPlayerConstrict():void {
 	flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 	clearOutput();
-	if(player.fatigue + kGAMECLASS.physicalCost(10) > player.maxFatigue()) {
+	if(player.fatigue + combat.physicalCost(10) > player.maxFatigue()) {
 		outputText("You just don't have the energy to wrap yourself so tightly around someone right now...", true);
 //Gone		menuLoc = 1;
 		menu();
@@ -1273,7 +1273,7 @@ public function nagaPlayerConstrict():void {
 
 public function naggaSqueeze():void {
 	clearOutput();
-	if (player.fatigue + kGAMECLASS.physicalCost(20) > player.maxFatigue()) {
+	if (player.fatigue + combat.physicalCost(20) > player.maxFatigue()) {
 		outputText("You are too tired to squeeze " + monster.a + " " + monster.short + ".");
 		addButton(0, "Next", kGAMECLASS.combat.combatMenu, false);
 		return;
