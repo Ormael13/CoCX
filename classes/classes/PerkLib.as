@@ -3,7 +3,8 @@
  */
 package classes
 {
-	import classes.Perks.*;
+import classes.GlobalFlags.kGAMECLASS;
+import classes.Perks.*;
 	import classes.GlobalFlags.*;
 	import classes.Creature;
 
@@ -1662,7 +1663,7 @@ package classes
 				  .requirePerk(Mage)
 				  .requireInt(60)
 				  .requireCustomFunction(function (player:Player):Boolean {
-					  return kGAMECLASS.combat.spellCount() > 0;
+					  return player.spellCount() > 0;
 				  }, "Any spell")
 				  .requireLevel(6);
 		Medicine.requireInt(60);
