@@ -64,7 +64,7 @@ package classes.Scenes.Areas
 		//	}
 			
 			//Ceani
-			if (flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_DAILY_TRAINING] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] < 4 && player.gems >= 50) {	//( && rand(3) == 0)
+			if (flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_DAILY_TRAINING] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] < 4 && player.gems >= 50 && rand(3) == 0) {
 				if (flags[kFLAGS.CEANI_AFFECTION] >= 2 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] < 4) {
 					ceaniScene.basicarcherytraining();
 					return;
@@ -74,7 +74,7 @@ package classes.Scenes.Areas
 					return;
 				}
 			}
-			if (flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 4) {	//(model.time.hours >= 6 && model.time.hours <= 11) && 
+			if ((model.time.hours >= 6 && model.time.hours <= 11) && flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 4) {
 				ceaniScene.beachInteractionsAfterArcheryTraining();
 				return;
 			}

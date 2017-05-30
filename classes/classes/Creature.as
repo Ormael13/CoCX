@@ -1,13 +1,13 @@
 ﻿//CoC Creature.as
 package classes
 {
-import classes.BodyParts.Claws;
-import classes.BodyParts.Face;
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.Skin;
-import classes.BodyParts.SkinLayer;
-import classes.BodyParts.Tail;
-import classes.BodyParts.UnderBody;
+	import classes.BodyParts.Claws;
+	import classes.BodyParts.Face;
+	import classes.BodyParts.LowerBody;
+	import classes.BodyParts.Skin;
+	import classes.BodyParts.SkinLayer;
+	import classes.BodyParts.Tail;
+	import classes.BodyParts.UnderBody;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.PerkType;

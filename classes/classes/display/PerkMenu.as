@@ -155,11 +155,11 @@ public class PerkMenu extends BaseContent {
 		}
 		if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 0) addButton(0, "All Single", singleStrike);
 		if (player.findPerk(PerkLib.DoubleStrike) >= 0 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 1) {
-			if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") addButton(1, "All Double", doubleStrike);
+			if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow" || player.weaponRangePerk == "Throwing") addButton(1, "All Double", doubleStrike);
 			else addButtonDisabled(1, "All Double", "You current range weapon not allow to use this option");
 		}
 		if (player.findPerk(PerkLib.TripleStrike) >= 0 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 2) {
-			if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") addButton(2, "All Triple", tripleStrike);
+			if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow" || player.weaponRangePerk == "Throwing") addButton(2, "All Triple", tripleStrike);
 			else addButtonDisabled(2, "All Triple", "You current range weapon not allow to use this option");
 		}
 		if (player.findPerk(PerkLib.Manyshot) >= 0 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 3) {

@@ -137,7 +137,7 @@ public function trainingArcheryWithKindra():void {
 				outputText("Your aim is true but no matter how you do it your arrows tend to only shoot around the absolute center rather than in it. At least you improved your accuracy a little today.\n\n");
 				outputText("Kindra watch passively all the while but eventually calling it off for the day you both head back to camp.\n\n");
 			}
-		//	flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
+			flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
 			doNext(camp.returnToCampUseFourHours);
 		}
 		if (player.statusAffectv1(StatusAffects.Kindra) >= 100 && player.statusAffectv1(StatusAffects.Kindra) < 145) {
@@ -165,7 +165,7 @@ public function trainingArcheryWithKindra():void {
 			}
 			if (player.spe >= 150 && player.inte >= 120) flags[kFLAGS.KINDRA_ADV_ARCHERY] = 5;
 			bowSkill(5);
-		//	flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
+			flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
 			doNext(camp.returnToCampUseFourHours);
 		}
 		if (player.statusAffectv1(StatusAffects.Kindra) >= 50 && player.statusAffectv1(StatusAffects.Kindra) < 100) {
@@ -195,7 +195,7 @@ public function trainingArcheryWithKindra():void {
 				flags[kFLAGS.KINDRA_ADV_ARCHERY] = 3;
 			}
 			bowSkill(5);
-		//	flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
+			flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
 			doNext(camp.returnToCampUseFourHours);
 		}
 		if (player.statusAffectv1(StatusAffects.Kelt) >= 100 && player.statusAffectv1(StatusAffects.Kindra) < 50) {
@@ -221,7 +221,7 @@ public function trainingArcheryWithKindra():void {
 			}
 			if (player.statusAffectv1(StatusAffects.Kindra) < 5) player.createStatusAffect(StatusAffects.Kindra,5,0,0,0);
 			else bowSkill(5);
-		//	flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
+			flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
 			doNext(camp.returnToCampUseFourHours);
 		}
 		if (player.statusAffectv1(StatusAffects.Kelt) < 100) {
