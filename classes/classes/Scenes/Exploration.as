@@ -412,7 +412,7 @@ package classes.Scenes
 				pearldiscovery();
 				return;
 			}
-			if (player.level > 5 && flags[kFLAGS.HIDDEN_CAVE_FOUND] < 1 && rand(10) == 0) {
+/*			if (player.level > 5 && flags[kFLAGS.HIDDEN_CAVE_FOUND] < 1 && rand(10) == 0) {
 				hiddencavediscovery();
 				return;
 			}
@@ -424,7 +424,7 @@ package classes.Scenes
 				ryubirepenc();
 				return;
 			}
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helFollower.followerHel()) {
+*/			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !kGAMECLASS.helFollower.followerHel()) {
 				kGAMECLASS.helScene.helSexualAmbush();
 				return;
 			}

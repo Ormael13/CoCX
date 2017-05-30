@@ -1,8 +1,8 @@
 ﻿package classes.Items
 {
 	import classes.*;
-import classes.BodyParts.Skin;
-import classes.CockTypesEnum;
+	import classes.BodyParts.Skin;
+	import classes.CockTypesEnum;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Inventory;
 	import classes.Scenes.Areas.Forest.KitsuneScene;
