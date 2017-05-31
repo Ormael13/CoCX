@@ -602,7 +602,7 @@ package classes.Items {
 		} else if (o != null) {
 			var sat:StatusAffectType = o;
 			return addGeneticMemory(sat, sat.id.replace("Unlocked ", ""));
-		} else return null;
+		} else return false;
 	}
 	public function addGeneticMemory(sat:StatusAffectType, name:String = null):Boolean {
 		if (player.findPerk(PerkLib.GeneticMemory) < 0) return false;
