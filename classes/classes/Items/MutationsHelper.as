@@ -552,7 +552,10 @@ package classes.Items {
 		[3, StatusAffects.UnlockedFoxTail3rd],
 		[4, StatusAffects.UnlockedFoxTail4th],
 		[5, StatusAffects.UnlockedFoxTail5th],
-		[6, StatusAffects.UnlockedFoxTail6th]
+		[6, StatusAffects.UnlockedFoxTail6th],
+		[7, StatusAffects.UnlockedFoxTail7th],
+		[8, StatusAffects.UnlockedFoxTail8th],
+		[9, StatusAffects.UnlockedFoxTail9th]
 	]);
 
 	public function setWingType(wingType:int, wingDesc:String):Boolean {

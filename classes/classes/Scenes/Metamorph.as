@@ -244,26 +244,41 @@ private function accessPage2TailMenu():void {
 	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail2nd) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 1 && player.soulforce < 200) addButtonDisabled(0, "Fox 2nd", "You not have enough Soulforce for this metamorphosis.");
 	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail2nd) && player.tailType != TAIL_TYPE_FOX && player.tailCount != 1) addButtonDisabled(0, "Fox 2nd", "You not have proper type and amount of tails for this metamorphosis.");
 	else addButtonDisabled(0, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail3rd) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 2 && player.soulforce >= 300) addButton(1, "Fox 3rd", metamorphTailFox2nd);
+	if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail3rd) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 2 && player.soulforce >= 300) addButton(1, "Fox 3rd", metamorphTailFox3rd);
 	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail3rd) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 3) addButtonDisabled(1, "Fox 3rd", "You already have three fox tails.");
 	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail3rd) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 2 && player.soulforce < 300) addButtonDisabled(1, "Fox 3rd", "You not have enough Soulforce for this metamorphosis.");
 	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail3rd) && player.tailType != TAIL_TYPE_FOX && player.tailCount != 2) addButtonDisabled(1, "Fox 3rd", "You not have proper type and amount of tails for this metamorphosis.");
 	else addButtonDisabled(1, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail4th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 3 && player.soulforce >= 400) addButton(2, "Fox 4th", metamorphTailFox2nd);
+	if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail4th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 3 && player.soulforce >= 400) addButton(2, "Fox 4th", metamorphTailFox4th);
 	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail4th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 4) addButtonDisabled(2, "Fox 4th", "You already have four fox tails.");
 	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail4th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 3 && player.soulforce < 400) addButtonDisabled(2, "Fox 4th", "You not have enough Soulforce for this metamorphosis.");
 	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail4th) && player.tailType != TAIL_TYPE_FOX && player.tailCount != 3) addButtonDisabled(2, "Fox 4th", "You not have proper type and amount of tails for this metamorphosis.");
 	else addButtonDisabled(2, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail5th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 4 && player.soulforce >= 500) addButton(3, "Fox 5th", metamorphTailFox2nd);
+	if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail5th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 4 && player.soulforce >= 500) addButton(3, "Fox 5th", metamorphTailFox5th);
 	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail5th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 5) addButtonDisabled(3, "Fox 5th", "You already have five fox tails.");
 	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail5th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 4 && player.soulforce < 500) addButtonDisabled(3, "Fox 5th", "You not have enough Soulforce for this metamorphosis.");
 	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail5th) && player.tailType != TAIL_TYPE_FOX && player.tailCount != 4) addButtonDisabled(3, "Fox 5th", "You not have proper type and amount of tails for this metamorphosis.");
 	else addButtonDisabled(3, "???", "You not yet unlocked this metamorphosis!");
-	if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail6th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 5 && player.soulforce >= 600) addButton(4, "Fox 6th", metamorphTailFox2nd);
+	if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail6th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 5 && player.soulforce >= 600) addButton(4, "Fox 6th", metamorphTailFox6th);
 	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail6th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 6) addButtonDisabled(4, "Fox 6th", "You already have six fox tails.");
 	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail6th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 5 && player.soulforce < 600) addButtonDisabled(4, "Fox 6th", "You not have enough Soulforce for this metamorphosis.");
 	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail6th) && player.tailType != TAIL_TYPE_FOX && player.tailCount != 5) addButtonDisabled(4, "Fox 6th", "You not have proper type and amount of tails for this metamorphosis.");
 	else addButtonDisabled(4, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail7th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 6 && player.soulforce >= 700) addButton(5, "Fox 7th", metamorphTailFox7th);
+	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail7th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 7) addButtonDisabled(5, "Fox 7th", "You already have seven fox tails.");
+	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail7th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 6 && player.soulforce < 700) addButtonDisabled(5, "Fox 7th", "You not have enough Soulforce for this metamorphosis.");
+	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail7th) && player.tailType != TAIL_TYPE_FOX && player.tailCount != 6) addButtonDisabled(5, "Fox 7th", "You not have proper type and amount of tails for this metamorphosis.");
+	else addButtonDisabled(5, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail8th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 7 && player.soulforce >= 800) addButton(6, "Fox 8th", metamorphTailFox8th);
+	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail8th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 8) addButtonDisabled(6, "Fox 8th", "You already have eight fox tails.");
+	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail8th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 7 && player.soulforce < 800) addButtonDisabled(6, "Fox 8th", "You not have enough Soulforce for this metamorphosis.");
+	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail8th) && player.tailType != TAIL_TYPE_FOX && player.tailCount != 7) addButtonDisabled(6, "Fox 8th", "You not have proper type and amount of tails for this metamorphosis.");
+	else addButtonDisabled(6, "???", "You not yet unlocked this metamorphosis!");
+	if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail9th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 8 && player.soulforce >= 900) addButton(7, "Fox 9th", metamorphTailFox9th);
+	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail9th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 9) addButtonDisabled(7, "Fox 9th", "You already have nine fox tails.");
+	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail9th) && player.tailType == TAIL_TYPE_FOX && player.tailCount == 8 && player.soulforce < 900) addButtonDisabled(7, "Fox 9th", "You not have enough Soulforce for this metamorphosis.");
+	else if (player.hasStatusAffect(StatusAffects.UnlockedFoxTail9th) && player.tailType != TAIL_TYPE_FOX && player.tailCount != 8) addButtonDisabled(7, "Fox 9th", "You not have proper type and amount of tails for this metamorphosis.");
+	else addButtonDisabled(7, "???", "You not yet unlocked this metamorphosis!");
 	addButton(14, "Back", accessPage1MetamorphMenu);
 }
 
@@ -847,6 +862,27 @@ private function metamorphKitsuneArms():void {
 	if (player.armType != ARM_TYPE_HUMAN) restoreHumanArms();
 	outputText("\n\n Your finger tingle as your nails sharpen to point. You run them on a tree bark and they feel way harder than your old human nails. <b>You will be able to claw at your opponent with your sharp kitsune nails.</b>", false);
 	player.armType = ARM_TYPE_KITSUNE;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphTailFox9th():void {
+	clearOutput();
+	player.soulforce -= 900;
+	outputText("A tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
+	player.tailCount++;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphTailFox8th():void {
+	clearOutput();
+	player.soulforce -= 800;
+	outputText("A tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
+	player.tailCount++;
+	doNext(accessMetamorphMenu);
+}
+private function metamorphTailFox7th():void {
+	clearOutput();
+	player.soulforce -= 700;
+	outputText("A tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
+	player.tailCount++;
 	doNext(accessMetamorphMenu);
 }
 private function metamorphTailFox6th():void {

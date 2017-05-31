@@ -2304,6 +2304,7 @@ public function unFuckSave():void
 		}
 	}
 	while (player.perkDuplicated(PerkLib.NinetailsKitsuneOfBalance)) player.removePerk(PerkLib.NinetailsKitsuneOfBalance);
+	while (player.perkDuplicated(PerkLib.KitsuneThyroidGland)) player.removePerk(PerkLib.KitsuneThyroidGland);
 	
 	if (player.hasStatusAffect(StatusAffects.KnockedBack))
 	{
