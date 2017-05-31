@@ -2249,7 +2249,7 @@ package classes.Scenes.Dungeons
 				if(player.hasVagina()) addButton(1,"Scissor",scissorAndDrink, null, null, null, "Get into some female-on-female action and drink some milk.");
 				if(player.tentacleCocks() >= 5 || player.stamenCocks() > 4) addButton(2,"TentacleBang",tentacleGangBang, null, null, null, "Fuck the Sand Mother with your tentacle cocks.", "Tentacle Bang");
 				if(player.hasCock()) {
-					if(player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(3,"Fuck Her",fuckTheSandMothersCunt, "Fuck the Sand Mother's cunt with your cock.");
+					if(player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(3,"Fuck Her",fuckTheSandMothersCunt,null,null,null, "Fuck the Sand Mother's cunt with your cock.");
 				}
 			}
 			if(flags[kFLAGS.SAND_WITCH_LOOT_TAKEN] < 5) {

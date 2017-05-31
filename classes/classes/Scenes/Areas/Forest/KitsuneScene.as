@@ -2299,7 +2299,7 @@ package classes.Scenes.Areas.Forest
 			if (flags[kFLAGS.AYANE_FOLLOWER] == 1) {
 				addButton(6, "Servant", AyaneServant);
 			}
-			if (player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.inte >= 100 && player.cor >= 50) addButton(7, "Slave", AyaneSlave);
+			if (player.findPerk(PerkLib.CorruptedNinetails) >= 0 && player.inte >= 100 && player.cor >= 50 && flags[kFLAGS.AYANE_FOLLOWER] < 2) addButton(7, "Slave", AyaneSlave);
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 
@@ -2676,7 +2676,7 @@ package classes.Scenes.Areas.Forest
 		private function meditateLikeAKitsuneEhQuestionMark():void
 		{
 			var tailz:int = meditateAtKitsuneShrine();
-			if (tailz == 9) {
+			if (tailz == 9 && flags[kFLAGS.AYANE_FOLLOWER] == 0) {
 				outputText("\n\nAyane approaches and bows to you in reverence. \"<i>You have acquired a near deific status [name], as a priestess of Taoth it would be an honor to serve as your attendant. That is, if you would allow me to follow and assist you.</i>\"");
 				outputText("\n\nA little surprised, you ask Ayane why she wants to serve you.");
 				outputText("\n\n\"<i>Nine-tailed kitsunes are, in every aspect, divine messengers of Taoth in the mortal world. By serving you I follow the fox god's teachings and uphold his will. It would be an honor with no equal for me.</i>\"");
