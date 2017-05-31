@@ -2303,6 +2303,7 @@ public function unFuckSave():void
 			player.addPerkValue(PerkLib.ElvenBounty,2,15);
 		}
 	}
+	while (player.perkDuplicated(PerkLib.NinetailsKitsuneOfBalance)) player.removePerk(PerkLib.NinetailsKitsuneOfBalance);
 	
 	if (player.hasStatusAffect(StatusAffects.KnockedBack))
 	{
