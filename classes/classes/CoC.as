@@ -471,7 +471,7 @@ the text from being too boring.
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_0.8d";
-			version = ver + " (<b></b>)";
+			version = ver + " (<b>Race rebalancing (part 3), Metamorph (part 2), Archery Rework (part 5), Orca TF, New snake subraces (with TF's), Perk-o-calipse and Soul Overlord</b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;
