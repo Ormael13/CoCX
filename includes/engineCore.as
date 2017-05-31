@@ -244,11 +244,6 @@ public function rawOutputText(output:String, purgeText:Boolean = false):void
 }
 
 
-public function outputHistory():void {
-	mainView.hideTestInputPanel();
-	mainView.setOutputText( textHistory.join("<hr>") );
-	mainView.mainText.scrollV = mainView.mainText.maxScrollV;
-}
 
 /**
  * Output the text on main text interface.
