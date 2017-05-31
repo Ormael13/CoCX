@@ -33,6 +33,7 @@ package classes.Scenes
 			outputText("-Aimozg made another change to buffs that I decided to put version of buffs before applying this change into debug mode so if anyone want to compare both would need to fight the same enemy with and without debug to compare buffs power. Then you all can post your reflections on this tests on forum or discord channel for mod.\n");
 			outputText("-Ceani affection meter added to stats page.\n");
 			outputText("-Surrender option: Rising lust to max and triggering lust defeat end of fight. Put in place of button used only to dispel one of Lethice special and free goblin option - in both fights losing isn’t a good solution anyway.\n");
+			outputText("-New option to use soulforce in Soulforce menu in camp: Adj. Corruption (now PC can rise or lower corruption - Req. Soul Apprentice perk to be unlocked).\n");
 			outputText("-New 6th stage of soul cultivation: Soul Overlord (req. lvl 36+ and Soul Exalt perk).\n");
 			outputText("-New core stat added: Wisdom. It can be raised using stat points from lvl-ups. Currently how high it’s can be checked in Soulforce menu only.\n");
 			outputText("-Each of perk with word Soul in name aside first of line Job: Soul Cultivator have now added min wisdom req. that is stage of cultivation x20 so newest one added cultivation stage Soul Overlord req. to have 120+ wisdom. Also job: Soul Cultivator similarly like other base job perks will be giving stat bonus now too: +5 to max Wis (scalable with NG tiers).\n");
@@ -102,7 +103,6 @@ package classes.Scenes
 			outputText("-New hair type: Grass hair. Result of using Mara fruit. Hair TF for Mara fruit will be now have 50% to give leaf or grass hair.\n");
 			outputText("-Due to huge help form aimozg there is few items form Revamp ported to Xianixa: Samurai Armor (Tel’Adre) and three items at Rathazul (generally Rath menu was slightly changed so if you see any weirdness that still linger around let me know on discord or forum thread for mod).\n");
 			outputText("-Fixed bugs: Naming bug for demons, Too high normally Goo score, Corrupted Marae fight.\n\n\n\n\n\n");/*ostatni punkt changelogu
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
