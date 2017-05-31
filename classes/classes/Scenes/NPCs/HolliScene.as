@@ -132,8 +132,8 @@ public function treeMenu(output:Boolean = true):void {
 		} else {
 			addButtonDisabled(1, "RideTentacles");
 		}
-		if (flags[kFLAGS.HOLLI_SUBMISSIVE] == 0) {
-			if ((player.tentacleCocks() >= 10 || player.stamenCocks() > 9) && player.lust >= 33) {
+		if (flags[kFLAGS.HOLLI_SUBMISSIVE] == 1) {
+			if ((player.tentacleCocks() + player.stamenCocks()) >= 10 && player.lust >= 33) {
 				addButton(2, "TentacleBone", fullOnTentacleTasticGangBangForHolli);
 			} else {
 				addButtonDisabled(2, "TentacleBone", "Requires <i>a lot</i> of tentacle or stamen cocks");
