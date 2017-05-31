@@ -54,6 +54,9 @@ public class LowerBody extends SaveableBodyPart {
 			case LOWER_BODY_TYPE_DRIDER_LOWER_BODY:
 				legCount = 8;
 				break;
+			case LOWER_BODY_TYPE_PLANT_FLOWER:
+				legCount = 12;
+				break;
 		}
 	}
 	public function LowerBody(creature:Creature) {

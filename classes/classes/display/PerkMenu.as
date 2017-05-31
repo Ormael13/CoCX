@@ -70,28 +70,53 @@ public class PerkMenu extends BaseContent {
 		outputText(".");
 		outputText("\n\nYou can change it to different amount of attacks.");
 		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 0) addButton(0, "All Single", singleAttack);
-		if ((player.findPerk(PerkLib.DoubleAttack) >= 0 || player.findPerk(PerkLib.DoubleAttackLarge) >= 0 || player.findPerk(PerkLib.Combo) >= 0) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 1) {
-			if ((player.weaponPerk == "Large" && player.findPerk(PerkLib.DoubleAttackLarge) < 0) || player.weaponPerk == "Dual Large" || player.weaponPerk == "Dual" || player.weaponPerk == "Staff" || (player.isFistOrFistWeapon() && player.findPerk(PerkLib.Combo) < 0)) addButtonDisabled(1, "All Double", "You current melee weapon not allow to use this option");
+		var maxFistAttacks:int;
+		var maxLargeAttacks:int;
+		var maxCommonAttacks:int;
+
+		if (player.hasPerk(PerkLib.ComboMaster)) maxFistAttacks = 3;
+		else if (player.hasPerk(PerkLib.Combo)) maxFistAttacks = 2;
+		else maxFistAttacks = 1;
+
+		if (player.hasPerk(PerkLib.TripleAttackLarge)) maxLargeAttacks = 3;
+		else if (player.hasPerk(PerkLib.DoubleAttackLarge)) maxLargeAttacks = 2;
+		else maxLargeAttacks =1;
+
+		if (player.hasPerk(PerkLib.HexaAttack)) maxCommonAttacks = 6;
+		else if (player.hasPerk(PerkLib.PentaAttack)) maxCommonAttacks = 5;
+		else if (player.hasPerk(PerkLib.QuadrupleAttack)) maxCommonAttacks = 4;
+		else if (player.hasPerk(PerkLib.TripleAttack)) maxCommonAttacks = 3;
+		else if (player.hasPerk(PerkLib.DoubleAttack)) maxCommonAttacks = 2;
+		else maxCommonAttacks = 1;
+
+		var maxAttacks:int = Math.max(maxFistAttacks,maxLargeAttacks,maxCommonAttacks);
+		var maxCurrentAttacks:int;
+		if (player.weaponPerk == "Dual Large" || player.weaponPerk == "Dual" || player.weaponPerk == "Staff") maxCurrentAttacks = 1;
+		else if (player.weaponPerk == "Large") maxCurrentAttacks = maxLargeAttacks;
+		else if (player.isFistOrFistWeapon()) maxCurrentAttacks = maxFistAttacks;
+		else maxCurrentAttacks = maxCommonAttacks;
+
+		if (maxAttacks >= 2 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 1) {
+			if (maxCurrentAttacks < 2) addButtonDisabled(1, "All Double", "You current melee weapon not allow to use this option");
 			else addButton(1, "All Double", doubleAttack);
 		}
-		if ((player.findPerk(PerkLib.TripleAttack) >= 0 || player.findPerk(PerkLib.TripleAttackLarge) >= 0) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 2) {
-			if ((player.weaponPerk == "Large" && player.findPerk(PerkLib.TripleAttackLarge) < 0) || player.weaponPerk == "Dual Large" || player.weaponPerk == "Dual" || player.weaponPerk == "Staff" || (player.isFistOrFistWeapon() && player.findPerk(PerkLib.ComboMaster) < 0)) addButtonDisabled(5, "All Triple", "You current melee weapon not allow to use this option");
+		if (maxAttacks >= 3 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 2) {
+			if (maxCurrentAttacks < 3) addButtonDisabled(5, "All Triple", "You current melee weapon not allow to use this option");
 			else addButton(5, "All Triple", tripleAttack);
 		}
-		if (player.findPerk(PerkLib.QuadrupleAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 3) {
-			if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large" || player.weaponPerk == "Dual" || player.weaponPerk == "Staff" || player.isFistOrFistWeapon()) addButtonDisabled(6, "All Quadruple", "You current melee weapon not allow to use this option");
+		if (maxAttacks >= 4 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 3) {
+			if (maxCurrentAttacks < 4) addButtonDisabled(6, "All Quadruple", "You current melee weapon not allow to use this option");
 			else addButton(6, "All Quadruple", quadrupleAttack);
 		}
-		if (player.findPerk(PerkLib.PentaAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 4) {
-			if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large" || player.weaponPerk == "Dual" || player.weaponPerk == "Staff" || player.isFistOrFistWeapon()) addButtonDisabled(10, "All Penta", "You current melee weapon not allow to use this option");
+		if (maxAttacks >= 5 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 4) {
+			if (maxCurrentAttacks < 5) addButtonDisabled(10, "All Penta", "You current melee weapon not allow to use this option");
 			else addButton(10, "All Penta", pentaAttack);
 		}
-		if (player.findPerk(PerkLib.HexaAttack) >= 0 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 5) {
-			if (player.weaponPerk == "Large" || player.weaponPerk == "Dual Large" || player.weaponPerk == "Dual" || player.weaponPerk == "Staff" || player.isFistOrFistWeapon()) addButtonDisabled(11, "All Hexe", "You current melee weapon not allow to use this option");
+		if (maxAttacks >= 6 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 5) {
+			if (maxCurrentAttacks < 6) addButtonDisabled(11, "All Hexe", "You current melee weapon not allow to use this option");
 			else addButton(11, "All Hexe", hexaAttack);
 		}
 
-		var e:MouseEvent;
 		if (getGame().inCombat) addButton(14, "Back", combat.combatMenu);
 		else addButton(14, "Back", displayPerks);
 	}
