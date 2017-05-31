@@ -87,7 +87,7 @@ package classes.Scenes.Dungeons.D3
 			clearOutput();
 
 			outputText("Your bindings are cut from you by something short and sharp, the point pressing hard enough that you worry it will score your [skin]");
-			if (player.skinType != 0) outputText(" through your [skinFurScales]");
+			if (player.hasCoat()) outputText(" through your [skinFurScales]");
 			outputText(". It doesn’t. Lethice is too skilled to physically damage what she sees as her future property. To think, you believed you’d be able to defeat her all by yourself, and now you’re on the floor, unable to stop her from handling your supine form as she will.");
 			outputText("\n\nThe webbing falls away, and a firm hand rolls you to your back for your first good look at your captor. She’s beautiful. You want to hate her. You want her to be an ugly, wretched hag, but she isn’t. Her face is perfectly proportioned and topped with luxurious purple hair. Curling demonic crowns grow from her temples like two halves of a majestic, white crown while smaller, nubbier growths protrude cutely from her forehead.");
 			outputText("\n\nHer eyes capture your own inside their inky, black-rimmed depths, stopping your searching gaze from wandering any farther down her form. They’re beautiful and terrible, like the eyes of a great hunting beast, yellow and vertically split. When you look into them, it’s obvious that you’re seeing a predator - something whose entire purpose is preying upon mankind");

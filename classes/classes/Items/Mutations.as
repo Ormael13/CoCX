@@ -1233,14 +1233,14 @@
 				changes++;
 			}
 			//HorseFace - Req's Fur && Ears
-			if (player.faceType != FACE_HORSE && player.skinType != SKIN_TYPE_STONE && player.hasFur() && changes < changeLimit && rand(5) == 0 && player.earType == EARS_HORSE) {
+			if (player.faceType != FACE_HORSE && !player.isGargoyle() && player.hasFur() && changes < changeLimit && rand(5) == 0 && player.earType == EARS_HORSE) {
 				if (player.faceType == FACE_DOG) outputText("\n\nMind-numbing pain shatters through you as you feel your facial bones rearranging.  You clutch at your face in agony as your skin crawls and shifts, your visage reshaping to replace your dog-like characteristics with those of a horse.  <b>You now have a horse's face.</b>", false);
 				else outputText("\n\nMind-numbing pain shatters through you as you feel your facial bones breaking and shifting.  You clutch at yourself in agony as you feel your skin crawl and elongate under your fingers.  Eventually the pain subsides, leaving you with a face that seamlessly blends human and equine features.  <b>You have a very equine-looking face.</b>", false);
 				changes++;
 				setFaceType(FACE_HORSE);
 			}
 			//Fur - if has horsetail && ears and not at changelimit
-			if (!player.hasFur() && player.skinType != SKIN_TYPE_STONE && changes < changeLimit && rand(4) == 0 && player.tailType == TAIL_TYPE_HORSE) {
+			if (!player.hasFur() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.tailType == TAIL_TYPE_HORSE) {
 				if (!player.hasScales()) {
 					outputText("\n\nAn itchy feeling springs up over every inch of your [skin base].  As you scratch yourself madly, you feel fur grow out of your [skin base] until <b>you have a fine coat of ", false);
 					if (type == 0) outputText("" + player.hairColor + "-colored fur.</b>", false);
@@ -1709,7 +1709,7 @@
 				changes++;
 			}
 			//Gain chitin skin
-			if (changes < changeLimit && !player.hasCoatOfType(SKIN_COAT_CHITIN) && player.skinType != SKIN_TYPE_STONE && player.tailType == TAIL_TYPE_SCORPION && rand(2) == 0) {
+			if (changes < changeLimit && !player.hasCoatOfType(SKIN_COAT_CHITIN) && !player.isGargoyle() && player.tailType == TAIL_TYPE_SCORPION && rand(2) == 0) {
 				growChitin("green");
 				changes++;
 			}
@@ -2088,7 +2088,7 @@
 				changes++;
 			}
 			//Ears
-			if (player.earType != EARS_ELFIN && player.skinType != SKIN_TYPE_STONE && changes < changeLimit && rand(3) == 0) {
+			if (player.earType != EARS_ELFIN && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nA weird tingling runs through your scalp as your " + hairDescript() + " shifts slightly.  You reach up to touch and bump <b>your new pointed elfin ears</b>.  You bet they look cute!", false);
 				changes++;
 				setEarType(EARS_ELFIN);
@@ -2100,7 +2100,7 @@
 				outputText("\n\nAnother violent sneeze escapes you.  It hurt!  You feel your nose and discover your face has changed back into a more normal look.  <b>You have a human looking face again!</b>", false);
 			}
 			//Leaf Hair
-			if (player.hairColor == "green" && (player.hairType != HAIR_LEAF && player.hairType != HAIR_GRASS) && player.skinType != SKIN_TYPE_STONE && rand(3) == 0 && changes < changeLimit)
+			if (player.hairColor == "green" && (player.hairType != HAIR_LEAF && player.hairType != HAIR_GRASS) && !player.isGargoyle() && rand(3) == 0 && changes < changeLimit)
 			{
 				if (rand(2) == 0) {
 					outputText("\n\nYour " + hairDescript() + " begins to fall out in clumps, eventually leaving your scalp completely bald.  Although, thankfully, it does not remain like that for long.  Within moments a full head of grass sprouts from the skin of your scalp, protecting it from the chilly wind which was starting to annoy you.  You run your hands through your newly grown hair-like grass, stifling a moan at how sensitive the thousands of long, soft and leafy blades that replaced your hair are.  <b>Your hair has been replaced by grass, your scalp is now covered with soft blades of verdant greenery...</b>");
@@ -2113,7 +2113,7 @@
 				changes++;
 			}
 			//green hair
-			if (player.hairColor != "green" && player.skinType != SKIN_TYPE_STONE && rand(3) == 0 && changes < changeLimit)
+			if (player.hairColor != "green" && !player.isGargoyle() && rand(3) == 0 && changes < changeLimit)
 			{
 				outputText("\n\nAt first it looks like nothing changed but then you realize all the hair on your body has shifted to a verdant green color.  <b>You now have green hair.</b>");
 				player.hairColor = "green";
@@ -3355,7 +3355,7 @@
 				player.skin.growCoat(SKIN_COAT_FUR,{color:player.hairColor,adj:"thick"});
 			}
 			//Become furred - requires paws and tail
-			if (rand(4) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_DOG && player.tailType == TAIL_TYPE_DOG && !player.hasFur() && player.skinType != SKIN_TYPE_STONE) {
+			if (rand(4) == 0 && changes < changeLimit && player.lowerBody == LOWER_BODY_TYPE_DOG && player.tailType == TAIL_TYPE_DOG && !player.hasFur() && !player.isGargoyle()) {
 				if (player.hasScales()) outputText("\n\nYour scales itch incessantly.  You scratch, feeling them flake off to reveal a coat of [skin coat.color] fur growing out from below!");
 				else outputText("\n\nYour [skin base] itches intensely.  You gaze down as more and more hairs break forth from your [skin base], quickly transforming into a soft coat of fur.");
 				player.skin.growCoat(SKIN_COAT_FUR,{
@@ -3439,7 +3439,7 @@
 					player.tallness -= 1 + rand(3);
 				}
 				//Red skin!
-				if (rand(30) == 0 && player.skinTone != "red" && player.skinType != SKIN_TYPE_STONE) {
+				if (rand(30) == 0 && player.skinTone != "red" && !player.isGargoyle()) {
 					if (player.hasFur()) outputText("\n\nUnderneath your fur, your skin ", false);
 					else outputText("\n\nYour " + player.skinDesc + " ", false);
 					if (rand(2) == 0) player.skinTone = "red";
@@ -3455,7 +3455,7 @@
 				dynStats("lus", 3, "cor", 1);
 			}
 			//Red skin!
-			if (rand(30) == 0 && player.skinTone != "red" && player.skinType != SKIN_TYPE_STONE) {
+			if (rand(30) == 0 && player.skinTone != "red" && !player.isGargoyle()) {
 				if (player.hasFur()) outputText("\n\nUnderneath your fur, your skin ", false);
 				else outputText("\n\nYour " + player.skinDesc + " ", false);
 				if (rand(2) == 0) player.skinTone = "red";
@@ -5013,7 +5013,7 @@
 				changes++;
 			}
 			//skinTone
-			if (player.skinTone != "green" && player.skinTone != "grayish-blue" && player.skinTone != "dark green" && player.skinTone != "pale yellow" && player.skinType != SKIN_TYPE_STONE && changes < changeLimit && rand(2) == 0) {
+			if (player.skinTone != "green" && player.skinTone != "grayish-blue" && player.skinTone != "dark green" && player.skinTone != "pale yellow" && !player.isGargoyle() && changes < changeLimit && rand(2) == 0) {
 				if (rand(10) != 0) player.skinTone = "dark green";
 				else {
 					if (rand(2) == 0) player.skinTone = "pale yellow";
@@ -5032,7 +5032,7 @@
 				outputText("\n\nAnother violent sneeze escapes you.  It hurt!  You feel your nose and discover your face has changed back into a more normal look.  <b>You have a human looking face again!</b>", false);
 			}
 			//Ears!
-			if (player.earType != EARS_ELFIN && player.skinType != SKIN_TYPE_STONE && changes < changeLimit && rand(3) == 0) {
+			if (player.earType != EARS_ELFIN && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nA weird tingling runs through your scalp as your " + hairDescript() + " shifts slightly.  You reach up to touch and bump <b>your new pointed elfin ears</b>.  You bet they look cute!", false);
 				changes++;
 				setEarType(EARS_ELFIN);
@@ -5105,7 +5105,7 @@
 				return;
 			}
 			//Goopy hair
-			if (player.hairType != 3 && player.skinType != SKIN_TYPE_STONE) {
+			if (player.hairType != 3 && !player.isGargoyle()) {
 				setHairType(HAIR_GOO);
 				//if bald
 				if (player.hairLength <= 0) {
@@ -5318,7 +5318,7 @@
 				player.hairColor = "silver";
 			}
 			//Skin
-			if (((player.skinTone != "rough gray" && player.skinTone != "orange and black striped") || player.skinType != SKIN_TYPE_SCALES) && player.skinType != SKIN_TYPE_STONE && rand(7) == 0 && changes < changeLimit) {
+			if (((player.skinTone != "rough gray" && player.skinTone != "orange and black striped") || !player.hasScales()) && !player.isGargoyle() && rand(7) == 0 && changes < changeLimit) {
 				outputText("\n\n", false);
 				if (player.hasFur()) outputText("Your " + player.skinDesc + " falls out, collecting on the floor and exposing your scale covered skin underneath.  ", false);
 				else if (player.hasGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidy into a more normal form. ", false);
@@ -5465,7 +5465,7 @@
 				changes++;
 			}
 			//Partial scales with color changes to red, green, white, blue, or black.  Rarely: purple or silver.
-			if (player.skinType != SKIN_TYPE_PARTIAL_SCALES && player.lowerBody == LOWER_BODY_TYPE_NAGA && changes < changeLimit && rand(5) == 0) {
+			if (!player.hasPartialCoat(SKIN_COAT_SCALES) && player.lowerBody == LOWER_BODY_TYPE_NAGA && changes < changeLimit && rand(5) == 0) {
 				//(fur)
 				var color:String;
 				if (rand(10) == 0) {
@@ -5486,7 +5486,7 @@
 				changes++;
 			}
 			//Snake eyes
-			if (player.skinType == SKIN_TYPE_PARTIAL_SCALES && player.eyeType != EYES_SNAKE && rand(4) == 0 && changes < changeLimit) {
+			if (player.hasPartialCoat(SKIN_COAT_SCALES) && player.eyeType != EYES_SNAKE && rand(4) == 0 && changes < changeLimit) {
 				setEyeType(EYES_SNAKE);
 				outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a snake.  <b>You now have snake eyes!</b>.", false);
 				changes++;
@@ -5585,7 +5585,7 @@
 				changes++;
 			}
 			//Partial scales with color changes to red, green, white, blue, or black.  Rarely: purple or silver.
-			if (player.skinType != SKIN_TYPE_PARTIAL_SCALES && player.lowerBody == LOWER_BODY_TYPE_NAGA && changes < changeLimit && rand(5) == 0) {
+			if (!player.hasPartialCoat(SKIN_COAT_SCALES) && player.lowerBody == LOWER_BODY_TYPE_NAGA && changes < changeLimit && rand(5) == 0) {
 				//(fur)
 				var color:String;
 				if (rand(10) == 0) {
@@ -5604,7 +5604,7 @@
 				changes++;
 			}
 			//Snake eyes
-			if (player.skinType == SKIN_TYPE_PARTIAL_SCALES && player.eyeType != EYES_SNAKE && player.eyeType != EYES_GORGON && rand(4) == 0 && changes < changeLimit) {
+			if (player.hasPartialCoat(SKIN_COAT_SCALES) && player.eyeType != EYES_SNAKE && player.eyeType != EYES_GORGON && rand(4) == 0 && changes < changeLimit) {
 				setEyeType(EYES_SNAKE);
 				outputText("\n\nYou suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a snake.  <b>You now have snake eyes!</b>.", false);
 				changes++;
@@ -5764,7 +5764,7 @@
 				changes++;
 			}
 			//Scales with color changes to red, green, white, blue, or black.  Rarely: purple or silver.
-			if (player.skinType != SKIN_TYPE_SCALES && ((type == 0 && player.eyeType == EYES_GORGON) || (type == 1 && player.wingType == WING_TYPE_DRACONIC_LARGE) || (type == 2 && player.hairType == 1)) && changes < changeLimit && rand(5) == 0) {
+			if (!player.hasFullCoatOfType(SKIN_COAT_SCALES) && ((type == 0 && player.eyeType == EYES_GORGON) || (type == 1 && player.wingType == WING_TYPE_DRACONIC_LARGE) || (type == 2 && player.hairType == 1)) && changes < changeLimit && rand(5) == 0) {
 				//set new skinTone
 				if (rand(10) == 0) {
 					color = randomChoice("purple", "silver");
@@ -5960,7 +5960,7 @@
 				changes++;
 			}
 			//-Skin color change – tan, olive, dark, light
-			if ((player.skinTone != "tan" && player.skinTone != "olive" && player.skinTone != "dark" && player.skinTone != "light") && player.skinType != SKIN_TYPE_STONE && changes < changeLimit && rand(5) == 0) {
+			if ((player.skinTone != "tan" && player.skinTone != "olive" && player.skinTone != "dark" && player.skinTone != "light") && !player.isGargoyle() && changes < changeLimit && rand(5) == 0) {
 				changes++;
 				outputText("\n\nIt takes a while for you to notice, but <b>", false);
 				if (player.hasFur()) outputText("the skin under your [skin coat.color] " + player.skinDesc, false);
@@ -6853,7 +6853,7 @@
 				changes++;
 			}
 			//-Scales – color changes to red, green, white, blue, or black.  Rarely: purple or silver.
-			if (player.skinType != SKIN_TYPE_SCALES && player.earType == EARS_LIZARD && player.tailType == TAIL_TYPE_LIZARD && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(5) == 0) {
+			if (player.hasFullCoatOfType(SKIN_TYPE_SCALES) && player.earType == EARS_LIZARD && player.tailType == TAIL_TYPE_LIZARD && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(5) == 0) {
 				var color:String;
 				if (rand(10) == 0) {
 					color = randomChoice("purple","silver");
@@ -6876,7 +6876,7 @@
 				changes++;
 			}
 			//-Lizard-like face.
-			if (player.faceType != FACE_LIZARD && player.skinType == SKIN_TYPE_SCALES && player.earType == EARS_LIZARD && player.tailType == TAIL_TYPE_LIZARD && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(5) == 0) {
+			if (player.faceType != FACE_LIZARD && player.hasScales() && player.earType == EARS_LIZARD && player.tailType == TAIL_TYPE_LIZARD && player.lowerBody == LOWER_BODY_TYPE_LIZARD && changes < changeLimit && rand(5) == 0) {
 				outputText("\n\nTerrible agony wracks your " + player.face() + " as bones crack and shift.  Your jawbone rearranges while your cranium shortens.  The changes seem to last forever; once they've finished, no time seems to have passed.  Your fingers brush against your toothy snout as you get used to your new face.  It seems <b>you have a toothy, reptilian visage now.</b>", false);
 				setFaceType(FACE_LIZARD);
 				changes++;
@@ -7543,7 +7543,7 @@
 				//Libido over 60? FUCK YEAH!
 				else if (player.lib < 80) {
 					outputText("\n\nYou fan your neck and start to pant as your " + player.skinTone + " skin begins to flush red with heat", false);
-					if (player.skinType > SKIN_TYPE_PLAIN) outputText(" through your " + player.skinDesc, false);
+					if (player.hasCoat()) outputText(" through your " + player.skinDesc, false);
 					outputText(".  ", false);
 					if (player.gender == 1) outputText("Compression tightens down on " + sMultiCockDesc() + " as it strains against your [armor].  You struggle to fight down your heightened libido, but it's hard – so very hard.", false);
 					else if (player.gender == 0) outputText("Sexual hunger seems to gnaw at your " + assholeDescript() + ", demanding it be filled, but you try to resist your heightened libido.  It's so very, very hard.", false);
@@ -7783,7 +7783,7 @@
 				//Libido over 60? FUCK YEAH!
 				else if (player.lib < 80) {
 					outputText("\n\nYou fan your neck and start to pant as your " + player.skinTone + " skin begins to flush red with heat", false);
-					if (player.skinType > SKIN_TYPE_PLAIN) outputText(" through your " + player.skinDesc, false);
+					if (player.hasCoat()) outputText(" through your " + player.skinDesc, false);
 					outputText(".  ", false);
 					if (player.gender == 1) outputText("Compression tightens down on " + sMultiCockDesc() + " as it strains against your [armor].  You struggle to fight down your heightened libido, but it's hard – so very hard.", false);
 					else if (player.gender == 0) outputText("Sexual hunger seems to gnaw at your " + assholeDescript() + ", demanding it be filled, but you try to resist your heightened libido.  It's so very, very hard.", false);
@@ -10436,7 +10436,7 @@
 					}
 					outputText("Shaking your head a bit, you wait for your energy to return, then examine your appearance.  ");
 					//(if player skinTone = ebony/black/ebony with tats and no fur/scales or if black/midnight fur or if black scales
-					if (((player.skinTone == "ebony" || player.skinTone == "black") && (player.skinType == SKIN_TYPE_PLAIN || player.skinType == SKIN_TYPE_GOO)) || ((player.hairColor == "black" || player.hairColor == "midnight") && (player.hasFur() || player.hasScales()))) {
+					if (((player.skinTone == "ebony" || player.skinTone == "black") && !player.hasCoat()) || ((player.hairColor == "black" || player.hairColor == "midnight") && (player.hasFur() || player.hasScales()))) {
 						outputText("Nothing seems different at first.  Strange... you look closer and discover a darker, mask-line outline on your already inky visage.  <b>You now have a barely-visible raccoon mask.</b>");
 					}
 					else outputText("A dark, almost black mask shades the " + player.skinFurScales() + " around your eyes and over the topmost portion of your nose, lending you a criminal air!  <b>You now have a raccoon mask!</b>");
@@ -10446,7 +10446,7 @@
 					outputText("\n\nA sudden migraine sweeps over you and you clutch your head in agony as your nose collapses back to human dimensions.  A worrying numb spot grows around your eyes, and you entertain several horrible premonitions until it passes as suddenly as it came.  Checking your reflection in your water barrel, you find ");
 					//[(if black/midnight fur or if black scales)
 					if (((player.hairColor == "black" || player.hairColor == "midnight") && (player.hasFur() || player.hasScales()))) outputText("your face apparently returned to normal shape, albeit still covered in " + player.skinFurScales() + ".  You look closer and discover a darker, mask-line outline on your already inky visage.  <b>You now have a barely-visible raccoon mask on your otherwise normal human face.</b>");
-					else if ((player.skinTone == "ebony" || player.skinTone == "black") && (player.skinType == SKIN_TYPE_PLAIN || player.skinType == SKIN_TYPE_GOO)) outputText("your face apparently returned to normal shape.  You look closer and discover a darker, mask-line outline on your already inky visage.  <b>You now have a barely-visible raccoon mask on your normal human face.</b>");
+					else if ((player.skinTone == "ebony" || player.skinTone == "black") && (!player.hasCoat())) outputText("your face apparently returned to normal shape.  You look closer and discover a darker, mask-line outline on your already inky visage.  <b>You now have a barely-visible raccoon mask on your normal human face.</b>");
 					else outputText("your face returned to human dimensions, but shaded by a black mask around the eyes and over the nose!  <b>You now have a humanoid face with a raccoon mask!</b>");
 				}
 				setFaceType(FACE_RACCOON_MASK);
@@ -10627,9 +10627,7 @@
 				}
 				//from skinscales
 				if (!player.hasFur()) {
-					outputText("\n\nYour " + player.skinFurScales() + " itch");
-					if (player.skinType > SKIN_TYPE_PLAIN) outputText("es");
-					outputText(" all over");
+					outputText("\n\nYour [skin] "+player.skin.isAre("itches","itch")+outputText(" all over"));
 					if (player.tailType > TAIL_TYPE_NONE) outputText(", except on your tail");
 					outputText(".  Alarmed and suspicious, you tuck in your hands, trying to will yourself not to scratch, but it doesn't make much difference.  Tufts of "+color+" fur begin to force through your skin");
 					if (player.hasScales()) outputText(", pushing your scales out with little pinches");
@@ -10700,7 +10698,7 @@
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
 			//remove fur
-			if ((player.faceType != FACE_HUMAN || player.skinType != SKIN_TYPE_PLAIN) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(3) == 0) {
+			if ((player.faceType != FACE_HUMAN || !player.hasPlainSkinOnly()) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(3) == 0) {
 				//Remove face before fur!
 				if (player.faceType != FACE_HUMAN) {
 					outputText("\n\n", false);
@@ -10728,7 +10726,7 @@
 				changes++;
 			}
 			//foot changes - requires furless
-			if (player.skinType == SKIN_TYPE_PLAIN && rand(4) == 0) {
+			if (player.hasPlainSkinOnly() && rand(4) == 0) {
 				//Males/genderless get clawed feet
 				if (player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
 					if (player.lowerBody != LOWER_BODY_TYPE_DEMONIC_CLAWS) {
@@ -11573,18 +11571,18 @@
 			
 			//Physical changes:
 			//Skin
-			if ((player.skinAdj != "slippery" || player.skinType != SKIN_TYPE_PLAIN) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+			if ((player.skinAdj != "slippery" || !player.hasPlainSkinOnly()) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\n", false);
 				if (player.hasFur()) outputText("You suddenly start sweating abundantly as your " + player.skinDesc + " fall off leaving bare the smooth skin underneath.  ", false);
-				else if (player.skinType == SKIN_TYPE_GOO) outputText("Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Then you start sweating abundantly. ", false);
+				else if (player.hasGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Then you start sweating abundantly. ", false);
 				else if (player.hasScales()) outputText("You suddenly start sweating abundantly as your scales fall off leaving bare the smooth skin underneath.  ", false);
-				else if (player.skinType == SKIN_TYPE_PLAIN) outputText("You suddenly start sweating abundantly.  ", false);
+				else if (player.hasPlainSkinOnly()) outputText("You suddenly start sweating abundantly.  ", false);
 				outputText("As much as you try to dry your skin using a cloth it remains slimy and slippery to the touch as if constantly wet! Your skin is now slippery like the one of a sea creature!", false);
 				player.skin.setBaseOnly({type:SKIN_BASE_PLAIN,adj:"slippery"});
 				changes++;
 			}
 			//Face
-			if (player.skinType == SKIN_TYPE_PLAIN && player.skinTone == "slippery" && player.faceType != FACE_HUMAN && changes < changeLimit && rand(4) == 0) {
+			if (player.hasPlainSkinOnly() && player.skinTone == "slippery" && player.faceType != FACE_HUMAN && changes < changeLimit && rand(4) == 0) {
 				humanizeFace();
 				changes++;
 			}
@@ -11909,17 +11907,17 @@
 				outputText("\n\nShivering without warning, you nearly trip over yourself as you walk.  A few tries later you realize your muscles have become faster.", false);
 			}
 			//skin
-			if ((player.skinAdj != "glossy" || player.skinType != SKIN_TYPE_PLAIN) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+			if ((player.skinAdj != "glossy" || !player.hasPlainSkinOnly()) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(3) == 0 && changes < changeLimit) {
 				outputText("\n\n", false);
 				if (player.hasFur()) outputText("You suddenly start sweating abundantly as your " + player.skinDesc + " fall off leaving bare the smooth skin underneath.  ", false);
-				if (player.skinType == SKIN_TYPE_GOO) outputText("Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Then you start sweating abundantly. ", false);
+				if (player.hasGooSkin()) outputText("Your gooey skin solidifies, thickening up as your body starts to solidify into a more normal form. Then you start sweating abundantly. ", false);
 				if (player.hasScales()) outputText("You suddenly start sweating abundantly as your scales fall off leaving bare the smooth skin underneath.  ", false);
 				outputText("Your skin starts to change, turning darker and darker until it is pitch black. Your underbelly, on the other hand , turns pure white. Just as you thought it was over, your skin takes on a glossy shine similar to that of a whale. <b>Your body is now black with a white underbelly running on the underside of your limbs and up to your mouth in a color pattern similar to an orca’s.</b>", false);
 				player.skin.setBaseOnly({type:SKIN_BASE_PLAIN,adj:"glossy",color:"white and black"});
 				changes++;
 			}
 			//legs
-			if (player.skinAdj == "glossy" && player.skinType == SKIN_TYPE_PLAIN && player.lowerBody != LOWER_BODY_TYPE_ORCA && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
+			if (player.skinAdj == "glossy" && player.hasPlainSkinOnly() && player.lowerBody != LOWER_BODY_TYPE_ORCA && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(4) == 0) {
 				if (player.lowerBody == LOWER_BODY_TYPE_HUMAN) {
 					outputText("\n\nYour toes suddenly are forced together. When you stretch them back you discover they are now webbed, ready for swimming. <b>You can only guess those Orca legs will help you to swim at great speed.</b>", false);
 					setLowerBody(LOWER_BODY_TYPE_ORCA);

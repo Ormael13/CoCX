@@ -1467,7 +1467,7 @@ import classes.GlobalFlags.*;
 				player.faceType = FACE_HUMAN;
 				changes++;
 			}
-			if (rand(4) == 0 && changes < changeLimit && player.skinType != SKIN_TYPE_SCALES && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.earType != EARS_ELFIN) {
+			if (rand(4) == 0 && changes < changeLimit && !player.hasScales() && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.earType != EARS_ELFIN) {
 				outputText("\n\nYou feel an odd shifting sensation on the side of your head and, reaching up to inspect it, find a <b>pair of fleshy pointed ears</b>. "); 
 				if (player.hasFur()) outputText("As you examine your new elvish ears you feel fur grow around them, matching the rest of you.");
 				player.earType = EARS_ELFIN;
@@ -1867,7 +1867,7 @@ import classes.GlobalFlags.*;
 			// Main TFs
 			//------------
 			//Change to fur
-			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.skinType != SKIN_TYPE_FUR) {
+			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && !player.hasFur()) {
 				outputText("\n\nYou shiver, feeling a bit cold. Just as you begin to wish for something to cover up with, it seems your request is granted; <b>fur begins to grow all over your body!</b> You tug at the tufts in alarm, but they're firmly rooted and... actually pretty soft. Huh. ");
 				player.skin.growFur({color:"brown"});
 				changes++;

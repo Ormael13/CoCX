@@ -901,7 +901,7 @@ private function exgartuanSleepSurprise():void {
 				else if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_DROOLING) outputText("glistening", false);
 				else outputText("dripping", false);
 				outputText(" skin of your outer lips is engorged and ready, but there's no pleasure to be had for your greedy gash.  Cool night air washes over the exposed ", false);
-				if(player.skinType == SKIN_TYPE_SCALES) outputText("scales", false);
+				if(player.hasScales()) outputText("scales", false);
 				else outputText("skin", false);
 				outputText(" surrounding your sex, teasing you with the barest hint of sensation while your ignorant hands maul your " + cockDescript(0) + " at Exgartuan's behest.  If only you had taken care of yourself earlier, you might have had the control to slip a digit into your " + vaginaDescript(0), false);
 				if(player.clitLength > 3) outputText(" or stroke your " + clitDescript(), false);

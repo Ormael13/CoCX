@@ -1026,13 +1026,13 @@ package classes.Scenes.Areas.Forest
 				changes++;
 			}
 			//Gain deer face
-			if (rand(4) == 0 && changes < changeLimit && player.skinType == SKIN_TYPE_FUR && player.earType == EARS_DEER && player.tailType == TAIL_TYPE_DEER && player.faceType != FACE_DEER) {
+			if (rand(4) == 0 && changes < changeLimit && player.hasFur() && player.earType == EARS_DEER && player.tailType == TAIL_TYPE_DEER && player.faceType != FACE_DEER) {
 				outputText("\n\nYou feel a grinding noise from your jaw, and a massive pressure in your sinuses, as your cheeks pinch in, followed immediately by a pointing of the lower half of your face.  You frantically (and gently) feel your face, discovering, to your surprise, that you’ve <b>gained the delicate facial features of a deer.</b>");
 				player.faceType = FACE_DEER;
 				changes++;
 			}
 			//Change legs to cloven hooves
-			if (rand(4) == 0 && changes < changeLimit && player.earType == EARS_DEER && player.tailType == TAIL_TYPE_DEER && player.skinType == SKIN_TYPE_FUR && (player.lowerBody != LOWER_BODY_TYPE_DEERTAUR && player.lowerBody != LOWER_BODY_TYPE_CLOVEN_HOOFED)) {
+			if (rand(4) == 0 && changes < changeLimit && player.earType == EARS_DEER && player.tailType == TAIL_TYPE_DEER && player.hasFur() && (player.lowerBody != LOWER_BODY_TYPE_DEERTAUR && player.lowerBody != LOWER_BODY_TYPE_CLOVEN_HOOFED)) {
 				if (player.lowerBody == LOWER_BODY_TYPE_HOOFED) {
 					outputText("\n\nYou feel a sharp stinging sensation from your hooves, accompanied by a loud CRACK.  You look down in alarm, prancing from one hooved foot to another, realizing that your solid, heavy hooves have been replaced with delicate, cloven hooves.  You squint, also noting a subtle thinness across your legs in general--if you had to guess, you’d hazard that you’re looking <b>more deer-like than horse-like</b>.");
 				}

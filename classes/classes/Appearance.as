@@ -26,7 +26,7 @@
 
 		public static function hairOrFur(i_creature:Creature):String
 		{
-			if (i_creature.skinType == 1)
+			if (i_creature.hasCoatOfType(SKIN_COAT_FUR))
 				return "fur";
 			else
 				return "hair";
@@ -79,7 +79,7 @@
 			// HAIR WORDS
 			//
 			//If furry and longish hair sometimes call it a mane (50%)
-			if (i_creature.skinType == 1 && i_creature.hairLength > 3 && rand(2) == 0) {
+			if (i_creature.hasFur() == 1 && i_creature.hairLength > 3 && rand(2) == 0) {
 				if (i_creature.hairType == HAIR_FEATHER) description += "feather-";
 				else if (i_creature.hairType == HAIR_GHOST) description += "transparent ";
 				else if (i_creature.hairType == HAIR_GOO) description += "goo-";
@@ -322,7 +322,7 @@
 				else description += "pierced ";
 				haveDescription = true;
 			}
-			if (!haveDescription && i_creature.skinType == 3) {
+			if (!haveDescription && i_creature.hasGooSkin()) {
 				options = ["slime-slick ",
 					"goopy ",
 					"slippery "];
@@ -1486,7 +1486,7 @@
 
 			}
 			//Slimy skin
-			if (i_creature.skinType == 3) {
+			if (i_creature.hasGooSkin()) {
 				if (description) description += " ";
 				options = ["goopey",
 					"gooey",
@@ -1610,7 +1610,7 @@
 				if (description != "") description += ", ";
 				description += "pierced";
 			}
-			if (description == "" && i_creature.skinType == 3) {
+			if (description == "" && i_creature.hasGooSkin()) {
 				if (description != "")
 					description += ", ";
 				if (rand(2) == 0)
@@ -1701,7 +1701,7 @@
 			if (rand(2) == 0) {
 				//Doggie descriptors - 50%
 				//TODO Conditionals don't make sense, need to introduce a class variable to keep of "something" or move race or Creature/Character
-				if (i_creature.skinType == 1 > 2 && !haveDescription && rand(2) == 0) {
+				if (i_creature.hasFur() > 2 && !haveDescription && rand(2) == 0) {
 					description += "bitch-";
 					haveDescription = true;
 				}

@@ -89,74 +89,68 @@ package classes.Items.Consumables
 				game.HPChange(10, true);
 			}
 			else {
-				if (game.player.skinType != 3) { //If skin is goo, don't change.
+				if (game.player.hasGooSkin()) { //If skin is goo, don't change.
 					if (_adj != "clear") game.player.skinAdj = _adj;
 					else game.player.skinAdj = "";
 				}
-				switch(game.player.skinType) {
-					case 0: //Plain
-						outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the flask of lotion and rubbing", "uncork the flask of lotion and rub") + " the " + liquidDesc() + " across your body. As you rub the mixture into your arms and [chest], your whole body begins to tingle pleasantly. ");
-						switch(_adj) {
-							case "smooth":
-								outputText("Soon your skin is smoother but in a natural healthy way.");
-								break;
-							case "rough":
-								outputText("Soon your skin is rougher as if you’ve just finished a long day’s work.");
-								break;
-							case "sexy":
-								outputText("Soon your skin is so sexy you find it hard to keep your hands off yourself.");
-								break;
-							case "clear":
-								outputText("Soon the natural beauty of your " + game.player.skinFurScales() + " is revealed without anything extra or unnecessary.");
-								break;
-							default: //Failsafe
-								outputText("<b>This text should not happen. Please let Kitteh6660 know.</b>");
-						}
-						break;
-					case 1: //Fur
-						outputText("" + game.player.clothedOrNaked("Once you’ve disrobed you take the lotion and", "You take the lotion and") + " begin massaging it into your skin despite yourself being covered with fur. It takes little effort but once you’ve finished... nothing happens. A few moments pass and then your skin begins to tingle. ");
-						switch(_adj) {
-							case "smooth":
-								outputText("Soon you part your fur to reveal smooth skin that still appears natural.");
-								break;
-							case "rough":
-								outputText("Soon you part your fur to reveal rough skin that still appears natural.");
-								break;
-							case "sexy":
-								outputText("Soon you part your fur to reveal sexy skin that makes you want to kiss yourself.");
-								break;
-							case "clear":
-								outputText("Soon you part your fur to reveal the natural beauty of your " + game.player.skinFurScales() + " skin.");
-								break;
-							default: //Failsafe
-								outputText("<b>This text should not happen. Please let Kitteh6660 know.</b>");
-						}
-						break;
-					case 2: //Scales
-						outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the flask of lotion and rubbing", "uncork the flask of lotion and rub") + " the " + liquidDesc() + " across your body. As you rub the mixture into your arms and [chest], your whole body begins to tingle pleasantly.");
-						switch(_adj) {
-							case "smooth":
-								outputText("Soon you part your fur to reveal smooth skin that still appears natural.");
-								break;
-							case "rough":
-								outputText("Soon you part your fur to reveal rough skin that still appears natural.");
-								break;
-							case "sexy":
-								outputText("Soon you part your fur to reveal sexy skin that makes you want to kiss yourself.");
-								break;
-							case "clear":
-								outputText("Soon you part your fur to reveal the natural beauty of your " + game.player.skinFurScales() + " skin.");
-								break;
-							default: //Failsafe
-								outputText("<b>This text should not happen. Please let Kitteh6660 know.</b>");
-						}
-						break;
-					case 3: //Goo
-						outputText("You take the lotion and pour the " + liquidDesc() + " into yourself. The concoction dissolves, leaving your gooey epidermis unchanged. As a matter of fact nothing happens at all.");
-						//No changes due to gooey skin.
-						break;
-					default:
-						outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the bottle of oil and rubbing", "uncork the bottle of oil and rub") + " the smooth liquid across your body. Even before you’ve covered your arms and [chest] your skin begins to tingle pleasantly all over. After your skin darkens a little, it begins to change until you have " + _adj + " skin.");
+				if (game.player.hasPlainSkinOnly() === 0) {
+					outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the flask of lotion and rubbing", "uncork the flask of lotion and rub") + " the " + liquidDesc() + " across your body. As you rub the mixture into your arms and [chest], your whole body begins to tingle pleasantly. ");
+					switch (_adj) {
+						case "smooth":
+							outputText("Soon your skin is smoother but in a natural healthy way.");
+							break;
+						case "rough":
+							outputText("Soon your skin is rougher as if you’ve just finished a long day’s work.");
+							break;
+						case "sexy":
+							outputText("Soon your skin is so sexy you find it hard to keep your hands off yourself.");
+							break;
+						case "clear":
+							outputText("Soon the natural beauty of your " + game.player.skinFurScales() + " is revealed without anything extra or unnecessary.");
+							break;
+						default: //Failsafe
+							outputText("<b>This text should not happen. Please let Kitteh6660 know.</b>");
+					}
+				} else if (game.player.hasFur()) {
+					outputText("" + game.player.clothedOrNaked("Once you’ve disrobed you take the lotion and", "You take the lotion and") + " begin massaging it into your skin despite yourself being covered with fur. It takes little effort but once you’ve finished... nothing happens. A few moments pass and then your skin begins to tingle. ");
+					switch (_adj) {
+						case "smooth":
+							outputText("Soon you part your fur to reveal smooth skin that still appears natural.");
+							break;
+						case "rough":
+							outputText("Soon you part your fur to reveal rough skin that still appears natural.");
+							break;
+						case "sexy":
+							outputText("Soon you part your fur to reveal sexy skin that makes you want to kiss yourself.");
+							break;
+						case "clear":
+							outputText("Soon you part your fur to reveal the natural beauty of your " + game.player.skinFurScales() + " skin.");
+							break;
+						default: //Failsafe
+							outputText("<b>This text should not happen. Please let Kitteh6660 know.</b>");
+					}
+				} else if (game.player.hasScales()) {
+					outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the flask of lotion and rubbing", "uncork the flask of lotion and rub") + " the " + liquidDesc() + " across your body. As you rub the mixture into your arms and [chest], your whole body begins to tingle pleasantly.");
+					switch (_adj) {
+						case "smooth":
+							outputText("Soon you part your fur to reveal smooth skin that still appears natural.");
+							break;
+						case "rough":
+							outputText("Soon you part your fur to reveal rough skin that still appears natural.");
+							break;
+						case "sexy":
+							outputText("Soon you part your fur to reveal sexy skin that makes you want to kiss yourself.");
+							break;
+						case "clear":
+							outputText("Soon you part your fur to reveal the natural beauty of your " + game.player.skinFurScales() + " skin.");
+							break;
+						default: //Failsafe
+							outputText("<b>This text should not happen. Please let Kitteh6660 know.</b>");
+					}
+				} else if (game.player.hasGooSkin()) {
+					outputText("You take the lotion and pour the " + liquidDesc() + " into yourself. The concoction dissolves, leaving your gooey epidermis unchanged. As a matter of fact nothing happens at all.");
+				} else {
+					outputText("You " + game.player.clothedOrNaked("take a second to disrobe before uncorking the bottle of oil and rubbing", "uncork the bottle of oil and rub") + " the smooth liquid across your body. Even before you’ve covered your arms and [chest] your skin begins to tingle pleasantly all over. After your skin darkens a little, it begins to change until you have " + _adj + " skin.");
 				}
 			}
 			game.inventory.itemGoNext();

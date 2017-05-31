@@ -312,7 +312,7 @@ use namespace kGAMECLASS;
 			if(skin.hasChitin()) armorDef += (p?2:4)*(1 + newGamePlusMod);
 			if(skin.hasScales()) armorDef += (p?3:6)*(1 + newGamePlusMod); //bee-morph (), mantis-morph (), scorpion-morph (wpisane), spider-morph (wpisane)
 			if(skin.hasBark()) armorDef += (p?4:8)*(1 + newGamePlusMod); //może do 10 podnieść jak doda sie scales dla smoków?
-			if(skinType == SKIN_TYPE_STONE) armorDef += (8 * (1 + newGamePlusMod));//może do 10 podnieść jak doda sie scales dla smoków?
+			if(skin.hasBaseOnly(SKIN_BASE_STONE)) armorDef += (8 * (1 + newGamePlusMod));//może do 10 podnieść jak doda sie scales dla smoków?
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorDef += (1 * (1 + newGamePlusMod));
 			//Plant score bonuses
@@ -1423,7 +1423,7 @@ use namespace kGAMECLASS;
 		public function humanScore():Number {
 			Begin("Player","racialScore","human");
 			var humanCounter:Number = 0;
-			if (skinType == 0 && skinTone != "slippery")
+			if (hasPlainSkinOnly() && skinTone != "slippery")
 				humanCounter++;
 			if (faceType == 0)
 				humanCounter++;
@@ -1449,7 +1449,7 @@ use namespace kGAMECLASS;
 				humanCounter++;
 			if (normalCocks() >= 1 || (hasVagina() && vaginaType() == 0))
 				humanCounter++;
-			if (breastRows.length == 1 && skinType == 0 && skinTone != "slippery")
+			if (breastRows.length == 1 && hasPlainSkinOnly() && skinTone != "slippery")
 				humanCounter++;
 			if (findPerk(PerkLib.BlackHeart) < 0)
 				humanCounter++;
@@ -1767,7 +1767,7 @@ use namespace kGAMECLASS;
 				demonCounter += 4;
 			if (tongueType == 2)
 				demonCounter++;
-			if (cor >= 50 && skinType == 0 && skinTone != "slippery")
+			if (cor >= 50 && hasPlainSkinOnly() && skinTone != "slippery")
 				demonCounter++;
 			if (cor >= 50 && faceType == 0)
 				demonCounter++;
@@ -1925,7 +1925,7 @@ use namespace kGAMECLASS;
 			if (earType == EARS_FERRET) counter++;
 			if (tailType == TAIL_TYPE_FERRET) counter++;
 			if (lowerBody == LOWER_BODY_TYPE_FERRET) counter++;
-			if (skinType == SKIN_TYPE_FUR && counter > 0) counter++;
+			if (hasFur() && counter > 0) counter++;
 			
 			End("Player","racialScore");
 			return counter;
@@ -2112,7 +2112,7 @@ use namespace kGAMECLASS;
 				lizardCounter++;
 			if (horns > 0 && (hornType == 3 || hornType == 4))
 				lizardCounter++;
-			if (skinType == 2)
+			if (hasScales())
 				lizardCounter++;
 			if (lizardCocks() > 0)
 				lizardCounter++;
@@ -2219,7 +2219,7 @@ use namespace kGAMECLASS;
 		//		kitsuneCounter--;
 			if (hasCoat() && !hasCoatOfType(SKIN_COAT_FUR))
 				kitsuneCounter -= 2;
-			if (skinType == SKIN_TYPE_GOO)
+			if (skin.base.type != SKIN_BASE_PLAIN)
 				kitsuneCounter -= 3;
 			if (armType == 0 || armType == 12)
 				kitsuneCounter++;
@@ -2338,7 +2338,7 @@ use namespace kGAMECLASS;
 			var gooCounter:Number = 0;
 			if (hairType == 3)
 				gooCounter++;
-			if (skinType == 3 && skinAdj == "slimy") {
+			if (hasGooSkin() && skinAdj == "slimy") {
 				gooCounter++;
 				if (faceType == 0)
 					gooCounter++;
@@ -2375,7 +2375,7 @@ use namespace kGAMECLASS;
 				nagaCounter++;
 			if (armType == 0)
 				nagaCounter++;
-			if (skinType == 11)
+			if (hasPartialCoat(SKIN_COAT_SCALES))
 				nagaCounter++;
 			if (eyeType == 9)
 				nagaCounter++;
@@ -2405,7 +2405,7 @@ use namespace kGAMECLASS;
 				gorgonCounter++;
 			if (armType == 0)
 				gorgonCounter++;
-			if (skinType == 2 || skinType == 11)
+			if (hasCoatOfType(SKIN_COAT_SCALES))
 				gorgonCounter++;
 			if (earType == 22)
 				gorgonCounter++;
@@ -2441,7 +2441,7 @@ use namespace kGAMECLASS;
 				vouivreCounter++;
 			if (armType == 0)
 				vouivreCounter++;
-			if (skinType == 2 || skinType == 11)
+			if (hasCoatOfType(SKIN_COAT_SCALES))
 				vouivreCounter++;
 			if (eyeType == 9)
 				vouivreCounter++;
@@ -2477,7 +2477,7 @@ use namespace kGAMECLASS;
 				couatlCounter++;
 			if (armType == 1)
 				couatlCounter++;
-			if (skinType == 2 || skinType == 11)
+			if (hasCoatOfType(SKIN_COAT_SCALES))
 				couatlCounter++;
 			if (earType == 22)
 				couatlCounter++;
@@ -2508,7 +2508,7 @@ use namespace kGAMECLASS;
 			if (balls > 2 && bunnyCounter > 0)
 				bunnyCounter--;
 			//Human skin on bunmorph adds
-			if (skinType == 0 && bunnyCounter > 1 && skinTone != "slippery")
+			if (hasPlainSkin() && bunnyCounter > 1 && skinTone != "slippery")
 				bunnyCounter++;
 			//No wings and antennae a plus
 			if (bunnyCounter > 0 && antennae == 0)
@@ -2600,9 +2600,9 @@ use namespace kGAMECLASS;
 				sharkCounter++;
 			if (hairType == 0 && hairColor == "silver")
 				sharkCounter++;
-			if (skinType == 2 && (skinTone == "rough gray" || skinTone == "orange and black"))
+			if (hasScales() && InCollection(skin.coat.color, "rough gray","orange and black"))
 				sharkCounter++;
-			if (eyeType == 0 && hairType == 0 && hairColor == "silver" && skinType == 2 && (skinTone == "rough gray" || skinTone == "orange and black"))
+			if (eyeType == 0 && hairType == 0 && hairColor == "silver" && hasScales() && InCollection(skin.coat.color, "rough gray","orange and black"))
 				sharkCounter++;
 			if (vaginas.length > 0 && cocks.length > 0)
 				sharkCounter++;
@@ -2631,7 +2631,7 @@ use namespace kGAMECLASS;
 				orcaCounter++;
 			if (rearBody == REAR_BODY_ORCA_BLOWHOLE)
 				orcaCounter++;
-			if (skinType == 0 && skinAdj == "glossy")
+			if (hasPlainSkinOnly() && skinAdj == "glossy")
 				orcaCounter++;
 			if (skinTone == "white and black")
 				orcaCounter++;
@@ -2652,7 +2652,7 @@ use namespace kGAMECLASS;
 			var mutantCounter:Number = 0;
 			if (faceType > 0)
 				mutantCounter++;
-			if (skinType > 0)
+			if (!hasPlainSkinOnly())
 				mutantCounter++;
 			if (tailType > 0)
 				mutantCounter++;
@@ -2686,7 +2686,7 @@ use namespace kGAMECLASS;
 		public function scorpionScore():Number {
 			Begin("Player","racialScore","scorpion");
 			var scorpionCounter:Number = 0;
-			if (skinType == 5)
+			if (hasCoatOfType(SKIN_COAT_CHITIN))
 				scorpionCounter++;
 			if (tailType == TAIL_TYPE_SCORPION)
 				scorpionCounter++;
@@ -2703,7 +2703,7 @@ use namespace kGAMECLASS;
 		public function mantisScore():Number {
 			Begin("Player","racialScore","mantis");
 			var mantisCounter:Number = 0;
-			if (skinType == 5)
+			if (hasCoatOfType(SKIN_COAT_CHITIN))
 				mantisCounter++;
 			if (antennae == 1)
 			{
@@ -2739,7 +2739,7 @@ use namespace kGAMECLASS;
 		public function salamanderScore():Number {
 			Begin("Player","racialScore","salamander");
 			var salamanderCounter:Number = 0;
-			if (skinType == 11)
+			if (hasPartialCoat(SKIN_COAT_SCALES))
 				salamanderCounter++;
 			if (faceType == 26)
 				salamanderCounter++;
@@ -2788,7 +2788,7 @@ use namespace kGAMECLASS;
 				yetiCounter++;
 			if (hairColor == "white")
 				yetiCounter++;
-			if (skinType == 10)
+			if (hasPartialCoat(SKIN_COAT_FUR))
 				yetiCounter++;
 			if (hasFur() && coatColor == "white")
 				yetiCounter++;
@@ -2811,7 +2811,7 @@ use namespace kGAMECLASS;
 					centaurCounter += 2;
 				if (tailType == 1 && (lowerBody == 1 || lowerBody == 21))
 					centaurCounter++;
-				if (skinType == 0 && (lowerBody == 1 || lowerBody == 21))
+				if (hasPlainSkinOnly() && (lowerBody == 1 || lowerBody == 21))
 					centaurCounter++;
 				if (armType == 0 && (lowerBody == 1 || lowerBody == 21))
 					centaurCounter++;
@@ -2928,7 +2928,7 @@ use namespace kGAMECLASS;
 				phoenixCounter++;
 			if (tailType == TAIL_TYPE_SALAMANDER)
 				phoenixCounter++;
-			if (skinType == 11)
+			if (hasPartialCoat(SKIN_COAT_SCALES))
 				phoenixCounter++;
 			if (lizardCocks() > 0)
 				phoenixCounter++;
@@ -2952,7 +2952,7 @@ use namespace kGAMECLASS;
 				scyllaCounter--;
 			if (earType == EARS_ELFIN)
 				scyllaCounter++;
-			if (skinType == 0 && skinAdj == "slippery")
+			if (hasPlainSkinOnly() && skinAdj == "slippery")
 				scyllaCounter++;
 			if (isScylla())
 				scyllaCounter += 2;
@@ -3008,7 +3008,7 @@ use namespace kGAMECLASS;
 		//		kitshooCounter -= 2; - czy bedzie pozytywny do wyniku czy tez nie?
 			if (hasCoatOfType(SKIN_COAT_CHITIN))
 				kitshooCounter -= 2;
-			if (skinType == SKIN_TYPE_GOO)
+			if (hasGooSkin())
 				kitshooCounter -= 3;
 			//If the character has abnormal legs, -1
 		//	if (lowerBody != LOWER_BODY_TYPE_HUMAN && lowerBody != LOWER_BODY_TYPE_FOX)
@@ -3049,7 +3049,7 @@ use namespace kGAMECLASS;
 				plantCounter++;
 			if ((hairType == 7 || hairType == 9) && hairColor == "green")
 				plantCounter++;
-			if (skinType == 0 && (skinTone == "leaf green" || skinTone == "lime green" || skinTone == "turquoise"))
+			if (hasPlainSkinOnly() && (skinTone == "leaf green" || skinTone == "lime green" || skinTone == "turquoise"))
 				plantCounter++;
 		//	if (skinType == 6)/zielona skóra +1, bark skin +2
 		//		plantCounter += 2;

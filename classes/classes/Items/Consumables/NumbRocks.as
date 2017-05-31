@@ -53,8 +53,8 @@ package classes.Items.Consumables
 			}
 			if (player.findPerk(PerkLib.ThickSkin) < 0 && player.sens < 30 && rand(4) == 0) {
 				outputText("Slowly, ");
-				if (player.skinType == SKIN_TYPE_PLAIN) outputText("your skin");
-				else outputText("the skin under your " + player.skinDesc);
+				if (!player.hasCoat()) outputText("your [skin base]");
+				else outputText("the skin under your [skin coat]");
 				outputText(" begins to feel duller, almost... thicker.  You pinch yourself and find that your epidermis feels more resistant to damage, almost like natural armor!\n<b>(Thick Skin - Perk Gained!)</b>");
 				player.createPerk(PerkLib.ThickSkin, 0, 0, 0, 0);
 			}

@@ -49,7 +49,7 @@ package classes.Scenes.Areas
 			if ((flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 || flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] > 0) && flags[kFLAGS.VALARIA_AT_CAMP] == 0 && player.armor != armors.GOOARMR) choice[choice.length] = 4; //Valeria
 			if (rand(3) == 0) choice[choice.length] = 5; //Freebie items!
 			if (rand(15) == 0 && player.hasKeyItem("Camp - Ornate Chest") < 0) choice[choice.length] = 6; //Ornate Chest
-			if (player.faceType == 24 && player.earType == 18 && player.armType == 10 && player.lowerBody == 33 && player.tailType == 29 && player.skinType == 1 && player.hairColor == "glacial white" && player.coatColor == "glacial white" && player.hasKeyItem("Fenrir Collar") < 0) choice[choice.length] = 7; //Fenrir ruined shrine
+			if (player.faceType == 24 && player.earType == 18 && player.armType == 10 && player.lowerBody == 33 && player.tailType == 29 && player.hasFur() && player.hairColor == "glacial white" && player.coatColor == "glacial white" && player.hasKeyItem("Fenrir Collar") < 0) choice[choice.length] = 7; //Fenrir ruined shrine
 			choice[choice.length] = 8; //Ice True Golems
 			choice[choice.length] = 9; //Find nothing!
 			
