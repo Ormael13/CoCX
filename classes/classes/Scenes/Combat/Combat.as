@@ -587,7 +587,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	}
 	else if (monster.hasStatusAffect(StatusAffects.GooEngulf)) {
 		menu();
-		addButton(0, "Tease", GooTease, null, null, null, "Use a free limb to caress and pleasure your grappled foe (Liadri what your idea on new tooltip for this?). \n\nFatigue Cost: " + physicalCost(20) + "");
+		addButton(0, "Tease", GooTease, null, null, null, "Mold limb to caress and pleasure your grappled foe. \n\nFatigue Cost: " + physicalCost(20) + "");
 		addButton(4, "Release", GooLeggoMyEggo);
 	}
 }

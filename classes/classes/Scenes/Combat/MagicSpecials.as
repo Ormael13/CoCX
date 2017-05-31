@@ -100,9 +100,9 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.CorruptedKitsune) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount >= 7) {
 			addButton(button++, "C.FoxFire", corruptedFoxFire, null, null, null, "Unleash a corrupted purple flame at your opponent for high damage. Less effective against corrupted enemies. \n\nFatigue Cost: " + spellCost(100) + "\nSoulforce cost: " + 40 * soulskillCost() * soulskillcostmulti() + "");
 			if (!player.hasStatusAffect(StatusAffects.CooldownTerror)) {
-				if (player.tailCount == 9 && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Terror", kitsuneTerror, null, null, null, "Instill fear into your opponent with eldritch horrors. The more you cast this in a battle, the lesser effective it becomes.  \n\nWould go into cooldown after use for: 3 rounds  \n\nFatigue Cost: " + spellCost(200));
-				else if (player.tailCount == 9 || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Terror", kitsuneTerror, null, null, null, "Instill fear into your opponent with eldritch horrors. The more you cast this in a battle, the lesser effective it becomes.  \n\nWould go into cooldown after use for: 6 rounds  \n\nFatigue Cost: " + spellCost(100));
-				else addButton(button++, "Terror", kitsuneTerror, null, null, null, "Instill fear into your opponent with eldritch horrors. The more you cast this in a battle, the lesser effective it becomes.  \n\nWould go into cooldown after use for: 9 rounds  \n\nFatigue Cost: " + spellCost(50));
+				if (player.tailCount == 9 && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Terror", kitsuneTerror, null, null, null, "Instill fear into your opponent with eldritch horrors. The more you cast this in a battle, the lesser effective it becomes.  \n\nWould go into cooldown after use for: 3 rounds  \n\nFatigue Cost: " + spellCost(200) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
+				else if (player.tailCount == 9 || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Terror", kitsuneTerror, null, null, null, "Instill fear into your opponent with eldritch horrors. The more you cast this in a battle, the lesser effective it becomes.  \n\nWould go into cooldown after use for: 6 rounds  \n\nFatigue Cost: " + spellCost(100) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
+				else addButton(button++, "Terror", kitsuneTerror, null, null, null, "Instill fear into your opponent with eldritch horrors. The more you cast this in a battle, the lesser effective it becomes.  \n\nWould go into cooldown after use for: 9 rounds  \n\nFatigue Cost: " + spellCost(50) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
 			}
 			else if (player.hasStatusAffect(StatusAffects.CooldownTerror)) {
 				outputText("<b>You need more time before you can use Terror again.</b>\n\n");
@@ -111,9 +111,9 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.EnlightenedKitsune) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount >= 7) {
 			addButton(button++, "P.FoxFire", pureFoxFire, null, null, null, "Unleash an ethereal blue flame at your opponent for high damage. More effective against corrupted enemies. \n\nFatigue Cost: " + spellCost(100) + "\nSoulforce cost: " + 40 * soulskillCost() * soulskillcostmulti() + "");
 			if (!player.hasStatusAffect(StatusAffects.CooldownIllusion)) {
-				if (player.tailCount == 9 && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Illusion", kitsuneIllusion, null, null, null, "Warp the reality around your opponent to temporary boost your evasion for 3 round and arouse target slightly.  \n\nWould go into cooldown after use for: 3 rounds  \n\nFatigue Cost: " + spellCost(200));
-				else if (player.tailCount == 9 || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Illusion", kitsuneIllusion, null, null, null, "Warp the reality around your opponent to temporary boost your evasion for 3 round and arouse target slightly.  \n\nWould go into cooldown after use for: 6 rounds  \n\nFatigue Cost: " + spellCost(100));
-				else addButton(button++, "Illusion", kitsuneIllusion, null, null, null, "Warp the reality around your opponent to temporary boost your evasion for 3 round and arouse target slightly.  \n\nWould go into cooldown after use for: 9 rounds  \n\nFatigue Cost: " + spellCost(50));
+				if (player.tailCount == 9 && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Illusion", kitsuneIllusion, null, null, null, "Warp the reality around your opponent to temporary boost your evasion for 3 round and arouse target slightly.  \n\nWould go into cooldown after use for: 3 rounds  \n\nFatigue Cost: " + spellCost(200) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
+				else if (player.tailCount == 9 || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Illusion", kitsuneIllusion, null, null, null, "Warp the reality around your opponent to temporary boost your evasion for 3 round and arouse target slightly.  \n\nWould go into cooldown after use for: 6 rounds  \n\nFatigue Cost: " + spellCost(100) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
+				else addButton(button++, "Illusion", kitsuneIllusion, null, null, null, "Warp the reality around your opponent to temporary boost your evasion for 3 round and arouse target slightly.  \n\nWould go into cooldown after use for: 9 rounds  \n\nFatigue Cost: " + spellCost(50) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
 			}
 			else if (player.hasStatusAffect(StatusAffects.CooldownIllusion)) {
 				outputText("<b>You need more time before you can use Illusion again.</b>\n\n");
@@ -1962,7 +1962,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function kitsuneTerror():void {
 		clearOutput();
 		//Fatigue Cost: 25
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + (spellCost(50) * kitsuneskillCost()) > player.maxFatigue()) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + (spellCost(50) * kitsuneskillCost()) > player.maxFatigue() || (player.soulforce < 20 * soulskillCost() * soulskillcostmulti())) {
 			outputText("You are too tired to use this ability.", true);
 			doNext(msMenu);
 			return;
@@ -1983,6 +1983,11 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
+		var soulforcecost:int = 20 * soulskillCost() * soulskillcostmulti();
+		player.soulforce -= soulforcecost;
+		kitsuneTerror2();
+	}
+	public function kitsuneTerror2():void {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		if (player.tailCount == 9 && player.tailType == TAIL_TYPE_FOX && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) {
 			player.createStatusAffect(StatusAffects.CooldownTerror, 3, 0, 0, 0);
@@ -2006,7 +2011,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function kitsuneIllusion():void {
 		clearOutput();
 		//Fatigue Cost: 25
-		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + (spellCost(50) * kitsuneskillCost()) > player.maxFatigue()) {
+		if(player.findPerk(PerkLib.BloodMage) < 0 && player.fatigue + (spellCost(50) * kitsuneskillCost()) > player.maxFatigue() || (player.soulforce < 20 * soulskillCost() * soulskillcostmulti())) {
 			outputText("You are too tired to use this ability.", true);
 			doNext(msMenu);
 			return;
@@ -2022,6 +2027,11 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
+		var soulforcecost:int = 20 * soulskillCost() * soulskillcostmulti();
+		player.soulforce -= soulforcecost;
+		kitsuneIllusion2();
+	}
+	public function kitsuneIllusion2():void {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		if (player.tailCount == 9 && player.tailType == TAIL_TYPE_FOX && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) {
 			player.createStatusAffect(StatusAffects.CooldownIllusion,3,0,0,0);
