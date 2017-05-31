@@ -70,31 +70,11 @@ public class PerkMenu extends BaseContent {
 		outputText(".");
 		outputText("\n\nYou can change it to different amount of attacks.");
 		if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 0) addButton(0, "All Single", singleAttack);
-		var maxFistAttacks:int;
-		var maxLargeAttacks:int;
-		var maxCommonAttacks:int;
-
-		if (player.hasPerk(PerkLib.ComboMaster)) maxFistAttacks = 3;
-		else if (player.hasPerk(PerkLib.Combo)) maxFistAttacks = 2;
-		else maxFistAttacks = 1;
-
-		if (player.hasPerk(PerkLib.TripleAttackLarge)) maxLargeAttacks = 3;
-		else if (player.hasPerk(PerkLib.DoubleAttackLarge)) maxLargeAttacks = 2;
-		else maxLargeAttacks =1;
-
-		if (player.hasPerk(PerkLib.HexaAttack)) maxCommonAttacks = 6;
-		else if (player.hasPerk(PerkLib.PentaAttack)) maxCommonAttacks = 5;
-		else if (player.hasPerk(PerkLib.QuadrupleAttack)) maxCommonAttacks = 4;
-		else if (player.hasPerk(PerkLib.TripleAttack)) maxCommonAttacks = 3;
-		else if (player.hasPerk(PerkLib.DoubleAttack)) maxCommonAttacks = 2;
-		else maxCommonAttacks = 1;
-
+		var maxFistAttacks:int = combat.maxFistAttacks();
+		var maxLargeAttacks:int = combat.maxLargeAttacks();
+		var maxCommonAttacks:int = combat.maxCommonAttacks();
+		var maxCurrentAttacks:int = combat.maxCurrentAttacks();
 		var maxAttacks:int = Math.max(maxFistAttacks,maxLargeAttacks,maxCommonAttacks);
-		var maxCurrentAttacks:int;
-		if (player.weaponPerk == "Dual Large" || player.weaponPerk == "Dual" || player.weaponPerk == "Staff") maxCurrentAttacks = 1;
-		else if (player.weaponPerk == "Large") maxCurrentAttacks = maxLargeAttacks;
-		else if (player.isFistOrFistWeapon()) maxCurrentAttacks = maxFistAttacks;
-		else maxCurrentAttacks = maxCommonAttacks;
 
 		if (maxAttacks >= 2 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] != 1) {
 			if (maxCurrentAttacks < 2) addButtonDisabled(1, "All Double", "You current melee weapon not allow to use this option");

@@ -85,7 +85,32 @@ public class Combat extends BaseContent {
 	public function spellModBlack():Number {
 		return magic.spellModBlackImpl();
 	}
-public function endHpVictory():void
+	public function maxFistAttacks():int {
+		if (player.hasPerk(PerkLib.ComboMaster)) return 3;
+		else if (player.hasPerk(PerkLib.Combo)) return 2;
+		else return 1;
+	}
+	public function maxLargeAttacks():int {
+		if (player.hasPerk(PerkLib.TripleAttackLarge)) return 3;
+		else if (player.hasPerk(PerkLib.DoubleAttackLarge)) return 2;
+		else return 1;
+	}
+	public function maxCommonAttacks():int {
+		if (player.hasPerk(PerkLib.HexaAttack)) return 6;
+		else if (player.hasPerk(PerkLib.PentaAttack)) return 5;
+		else if (player.hasPerk(PerkLib.QuadrupleAttack)) return 4;
+		else if (player.hasPerk(PerkLib.TripleAttack)) return 3;
+		else if (player.hasPerk(PerkLib.DoubleAttack)) return 2;
+		else return 1;
+	}
+	public function maxCurrentAttacks():int {
+		if (player.weaponPerk == "Dual Large" || player.weaponPerk == "Dual" || player.weaponPerk == "Staff") return 1;
+		else if (player.weaponPerk == "Large") return maxLargeAttacks();
+		else if (player.isFistOrFistWeapon()) return maxFistAttacks();
+		else return maxCommonAttacks();
+	}
+
+	public function endHpVictory():void
 {
 	monster.defeated_(true);
 }

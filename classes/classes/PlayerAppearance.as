@@ -1600,7 +1600,7 @@ public class PlayerAppearance extends BaseContent {
 				if (player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
 				outputText(".", false);
 			} else if (player.hasFullCoatOfType(SKIN_COAT_FUR)) {
-				outputText("  You have a wolf’s face, complete with wet nose a panting tongue and threatening teeths.  ", false);
+				outputText("  You have a wolf’s face, complete with wet nose a panting tongue and threatening teeth.  ", false);
 				if (player.hasKeyItem("Fenrir Collar") >= 0) outputText("Cold blue mist seems to periodically escape from your mouth.   ", false);
 				outputText("You've got [skin coat], hiding your [skin noadj] underneath your furry visage.", false);
 			} else {
