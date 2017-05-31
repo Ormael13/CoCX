@@ -746,7 +746,7 @@ public class SpriteDb {
 	[Embed(source="../../../res/sprites8bit/whitney-old.png")]
 	public static var s_whitney_8bit:Class;
 	public static function get s_whitney(): Class {
-		return is8bit ? s_whitney_8bit : null;
+		return s_whitney_8bit;
 	}
 	[Embed(source="../../../res/sprites/weaponsmith.png")]
 	public static var s_weaponsmith_16bit:Class;

@@ -2100,7 +2100,7 @@
 				outputText("\n\nAnother violent sneeze escapes you.  It hurt!  You feel your nose and discover your face has changed back into a more normal look.  <b>You have a human looking face again!</b>", false);
 			}
 			//Leaf Hair
-			if (player.hairColor == "green" && (player.hairType != HAIR_LEAF || player.hairType != HAIR_GRASS) && player.skinType != SKIN_TYPE_STONE && rand(3) == 0 && changes < changeLimit)
+			if (player.hairColor == "green" && (player.hairType != HAIR_LEAF && player.hairType != HAIR_GRASS) && player.skinType != SKIN_TYPE_STONE && rand(3) == 0 && changes < changeLimit)
 			{
 				if (rand(2) == 0) {
 					outputText("\n\nYour " + hairDescript() + " begins to fall out in clumps, eventually leaving your scalp completely bald.  Although, thankfully, it does not remain like that for long.  Within moments a full head of grass sprouts from the skin of your scalp, protecting it from the chilly wind which was starting to annoy you.  You run your hands through your newly grown hair-like grass, stifling a moan at how sensitive the thousands of long, soft and leafy blades that replaced your hair are.  <b>Your hair has been replaced by grass, your scalp is now covered with soft blades of verdant greenery...</b>");
