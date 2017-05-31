@@ -337,6 +337,7 @@ the text from being too boring.
 //No longer used:		public var itemSubMenu:Boolean;
 //No longer used:		public var supressGoNext:Boolean = false;
 		public var time :TimeModel;
+		public var textHistory:Array;
 		public var currentText:String;
 
 		public var explored:Boolean;
@@ -579,7 +580,8 @@ the text from being too boring.
 
 			//The string holds all the "story" text, mainly used in engineCore
 			currentText = "";
-			//}endregion 
+			textHistory = [];
+			//}endregion
 
 			/**
 			 * Item variables
