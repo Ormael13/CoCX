@@ -296,7 +296,7 @@ private function gooNagaRape():void {
 			outputText(", your girlcum gushing out and pooling on the stomach of the ");
 			if (flags[kFLAGS.NAGA_OR_GORGON] == 1) outputText("naga");
 			if (flags[kFLAGS.NAGA_OR_GORGON] == 2) outputText("gorgon");
-			outputText("", false);
+			outputText("");
 		}
 		outputText(".");
 	}
@@ -571,7 +571,7 @@ private function nagaVictoryFemale():void {
 			outputText("'s tongue eventually finds its way inside your " + vaginaDescript(0) + ", its forked tip tickling your soft walls as it advances forwards. All the while the ", false);
 			if (flags[kFLAGS.NAGA_OR_GORGON] == 1) outputText("naga");
 			if (flags[kFLAGS.NAGA_OR_GORGON] == 2) outputText("gorgon");
-			outputText("", false);
+			outputText("");
 			if (flags[kFLAGS.NAGA_OR_GORGON] == 1) outputText("naga");
 			if (flags[kFLAGS.NAGA_OR_GORGON] == 2) outputText("gorgon");
 			outputText(" is desperately sucking at your " + clitDescript() + ", in an attempt to satisfy you, and possibly save herself. Your eyes roll back in your head and you throw your head back as an orgasm finally takes your body. You yell with delight as the ", false);

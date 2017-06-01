@@ -2914,7 +2914,7 @@ package classes.Scenes.Places
 					outputText("You know you are expected to eat it without complaint and it is almost second nature to do so despite the foul ");
 					if(player.cor < 50)
 					{
-						outputText("",false);
+						outputText("");
 					}
 					else
 					{
@@ -3227,7 +3227,7 @@ package classes.Scenes.Places
 					trainingFeed.prisonCaptorFeedingQuestTrainingStatusText();
 				if (trainingFeed.prisonCaptorFeedingQuestOptedOut()) 
 					outputText("<b>Quests Disabled</b>\n");
-				outputText("",false);
+				outputText("");
 			}
 		}
 		

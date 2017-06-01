@@ -1637,7 +1637,7 @@ private function swimInStreamPrank1():void {
 	}
 	/*if (rand(prankRoll) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0 && pranked == false && amilyJoinsStream == true)
 	{
-		outputText("", false);
+		outputText("");
 		pranked = true;
 	}*/
 	if (pranked == false) outputText("  No one managed to swim past where you left the warm spot before it dissipated. You feel a bit disappointed and just go back to swimming.");
