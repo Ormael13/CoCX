@@ -473,8 +473,8 @@ the text from being too boring.
 			//model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8d";
-			version = ver + " (<b>Race rebalancing (part 3), Metamorph (part 2), Archery Rework (part 5), Orca TF, New snake subraces (with TF's), Perk-o-calipse and Soul Overlord</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8d2";
+			version = ver + " (<b></b>)";
 
 			//Indicates if building for mobile?
 			mobile = false;

@@ -1203,7 +1203,7 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 			{
 				file = new FileReference();
 				file.save(bytes, null);
-				outputText("Attempted to save to file.", true);
+				outputText("Attempted to save to file.");//, true
 			}
 		}
 	}
