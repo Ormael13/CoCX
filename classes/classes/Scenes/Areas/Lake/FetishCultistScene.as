@@ -673,8 +673,8 @@ package classes.Scenes.Areas.Lake
 			player.orgasm();
 			dynStats("lib", .2);
 			//You've now been milked, reset the timer for that
-			player.addStatusValue(StatusAffects.Feeder, 1, 1);
-			player.changeStatusValue(StatusAffects.Feeder, 2, 0);
+			player.addStatusValue(StatusEffects.Feeder, 1, 1);
+			player.changeStatusValue(StatusEffects.Feeder, 2, 0);
 			cleanupAfterCombat();
 		}
 	}

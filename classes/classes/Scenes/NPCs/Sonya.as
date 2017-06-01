@@ -42,11 +42,11 @@ package classes.Scenes.NPCs
 				this.long = "The glacial bull is twelve feet tall, much taller and muscular than any other bull you've seen before. Additionaly it seems to be heavy corrupted havins much less human traits than other minotaurs you meet. Weirdly he seems to have his chest covered by piece of cloth too in addition to typicaly used by his brothers loincloth, but that not distracts you from the pair of large hammers it wields.";
 			}
 			createVagina(true,VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_TIGHT);
-			this.createStatusAffect(StatusAffects.BonusVCapacity,60,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity,60,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("flat"));
 			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,10,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 144;
 			this.hipRating = HIP_RATING_CURVY+2;
 			this.buttRating = BUTT_RATING_LARGE+1;

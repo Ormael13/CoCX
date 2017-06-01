@@ -90,7 +90,7 @@ package classes.Scenes.NPCs
 			spriteSelect(7);
 			clearOutput();
 			//UBER-Fullbodypenetration
-			if (!player.isTaur() && player.biggestCockArea() > 500 && (player.statusAffectv1(StatusAffects.Exgartuan) == 1 || monk >= 5)) {
+			if (!player.isTaur() && player.biggestCockArea() > 500 && (player.statusEffectv1(StatusEffects.Exgartuan) == 1 || monk >= 5)) {
 				hugeCorruptionForceFuckCeraph();
 				return;
 			}
@@ -768,7 +768,7 @@ package classes.Scenes.NPCs
 			outputText("You drop the swollen mass of dick-flesh on top her, pinning her under the weight of your lust.  Ceraph gasps in shock and pain, but her hard nipples are pressing tightly into your " + cockDescript(x) + "'s underside.  The slut is loving it – could she secretly be a submissive?  It doesn't matter one way or the other; this demon is going to pay.  You shimmy back, dragging the elephantine fuck-stick over the defeated demon's body until the bloated tip is resting on her purplish demon-snatch.  She screams, \"<i>OH FUCK NO!  That would kill me!  Please, don't!</i>\"\n\n", false);
 
 			outputText("Please?  She said the magic words.  ", false);
-			if (player.statusAffectv1(StatusAffects.Exgartuan) == 1) outputText("You pat your " + cockDescript(x) + " and say, \"<i>A little help please, Exgartuan?</i>\"  ", false);
+			if (player.statusEffectv1(StatusEffects.Exgartuan) == 1) outputText("You pat your " + cockDescript(x) + " and say, \"<i>A little help please, Exgartuan?</i>\"  ", false);
 			else outputText("You blink your eyes closed and focus your corruptive powers in your crotch.  ", false);
 			outputText("Pleasure blooms in your midsection, spreading through your over-sized prick until it begins to dribble from the tip in the form of black ooze.  The viscous, dark substance splashes into Ceraph's demonic cunt, wicking into her drippy hole in an instant.  She moans, probably getting off on the influx of perverse magic.  The effect is immediate and gravity is able to pull your tip into her unassisted.  The demon's corrupted cunt starts to stretch around you, and you haven't even started to push!\n\n", false);
 
@@ -816,10 +816,10 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.PC_FETISH] > 0) outputText("I'll remove some of my magic from you if you want, and I'll even let you keep the piercing.  Would you like that?", false);
 			else outputText("I'd be willing to give you a few extra gems to keep you motivated to do something like this again.  I LIKE surprises. How about it?", false);
 			outputText("</i>\"\n\n", false);
-			if (player.statusAffectv1(StatusAffects.Exgartuan) == 1) {
+			if (player.statusEffectv1(StatusEffects.Exgartuan) == 1) {
 				outputText("Exgartuan mumbles, \"<i>Yeah I love me too.  Now while you two bitches kiss and make up, I'm gonna take a nap.</i>\"\n\n", false);
 				//Put Exgartuan to bed.  Awww he's so cute!
-				player.addStatusValue(StatusAffects.Exgartuan, 2, 5);
+				player.addStatusValue(StatusEffects.Exgartuan, 2, 5);
 			}
 			outputText("(Do you accept Ceraph's Offer?)", false);
 			//Y/N – remove 1 fetish level or +10 gems
@@ -979,7 +979,7 @@ package classes.Scenes.NPCs
 			clearOutput();
 			spriteSelect(7);
 			//(EXGARTUAN PISSED) 
-			if (player.statusAffectv1(StatusAffects.Exgartuan) == 1) {
+			if (player.statusEffectv1(StatusEffects.Exgartuan) == 1) {
 				outputText("A disembodied voice roars out, \"<i>FUCK NO!  You are NOT giving me to that crazy bitch!</i>\"  Exgartuan doesn't seem to want to run the risk of being taken by Ceraph, and he completely assumes control of your " + player.legs() + " to make you flee with all due haste.  He taunts, \"<i>Rip off your own little dick, why doncha!  You'd look better with just a pussy anyhow ya dried out old sow!</i>\"\n\n", false);
 				outputText("Ceraph seems perturbed but doesn't bother to pursue you.", false);
 				dynStats("lus", -20);
@@ -1099,7 +1099,7 @@ package classes.Scenes.NPCs
 					player.balls = 0;
 					player.ballSize = 1;
 				}
-				if (player.cockTotal() == 1) player.removeStatusAffect(StatusAffects.Infested);
+				if (player.cockTotal() == 1) player.removeStatusEffect(StatusEffects.Infested);
 				outputText(" in her hand!  At the base there's smooth flesh and an arcane mark, somehow keeping the disembodied dick alive to pulse and squirm in her grasp.  The place on your groin is left completely smooth and featureless, as if it had never been there at all.\n\n", false);
 
 				outputText("Ceraph runs a finger up and down the length, setting off fireworks in your brain – you can still feel it!  The demoness laughs and says, \"<i>Don't worry, you won't feel the sensations constantly once I bond it elsewhere, though you may get a hint of feeling when unconscious.  For now, enjoy the pleasure!  Oh, I packed that tasty fetish into the cock for later.  Ta-ta, my pet!  Now go find me some more delicious dicks!</i>\"\n\n", false);

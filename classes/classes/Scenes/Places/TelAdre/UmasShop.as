@@ -468,7 +468,7 @@
 	public static const MAX_MASSAGE_BONUS_DURATION:int = 24;			// Duration of the bonus
 		/**
 		 * Apply massage bonus. Bonuses are replaced when a new effect is placed on the player.
-		 * StatusAffects.UmasMassage for all bonuses
+		 * StatusEffects.UmasMassage for all bonuses
 		 * @param	selectedMassage
 		 */
 		public function applyMassageBonus(selectedMassage:int):void
@@ -479,13 +479,13 @@
 			}
 			else
 			{
-				var sac:StatusAffectClass = player.statusAffectByType(StatusAffects.UmasMassage);
+				var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
 				var bonusValue:Number;
 				
 				// Remove the old massage bonus if present
 				if (sac)
 				{
-					player.removeStatusAffect(StatusAffects.UmasMassage);
+					player.removeStatusEffect(StatusEffects.UmasMassage);
 				}
 				
 				if (selectedMassage == MASSAGE_RELIEF)
@@ -516,7 +516,7 @@
 				
 				if (bonusValue != 0)
 				{
-					player.createStatusAffect(StatusAffects.UmasMassage, selectedMassage, bonusValue, MAX_MASSAGE_BONUS_DURATION, 0);
+					player.createStatusEffect(StatusEffects.UmasMassage, selectedMassage, bonusValue, MAX_MASSAGE_BONUS_DURATION, 0);
 					flags[kFLAGS.UMA_TIMES_MASSAGED]++;
 				}
 			}
@@ -528,7 +528,7 @@
 		 */
 		public function updateBonusDuration(hours:int):void
 		{
-			var sac:StatusAffectClass = player.statusAffectByType(StatusAffects.UmasMassage);
+			var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
 			
 			if (sac)
 			{
@@ -548,7 +548,7 @@
 		{
 			outputText("\n<b>You groan softly as a feeling of increased tension washes over you, no longer as loose as you were before.  It looks like the effects of Uma's massage have worn off.</b>\n");
 			
-			player.removeStatusAffect(StatusAffects.UmasMassage);
+			player.removeStatusEffect(StatusEffects.UmasMassage);
 		}
 		
 		/**

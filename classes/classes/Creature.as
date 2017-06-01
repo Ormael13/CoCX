@@ -11,7 +11,7 @@ package classes
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.PerkType;
-	import classes.StatusAffectType;
+	import classes.StatusEffectType;
 	import classes.Items.JewelryLib;
 	import classes.internals.Utils;
 	import classes.VaginaClass;
@@ -389,11 +389,11 @@ package classes
 			tail = new Tail(this);
 			//cocks = new Array();
 			//The world isn't ready for typed Arrays just yet.
-			cocks = [];
-			vaginas = new Vector.<VaginaClass>();
-			breastRows = [];
-			_perks = [];
-			statusAffects = [];
+			cocks         = [];
+			vaginas       = new Vector.<VaginaClass>();
+			breastRows    = [];
+			_perks        = [];
+			statusEffects = [];
 			//keyItems = new Array();
 		}
 
@@ -424,8 +424,8 @@ package classes
 
 		private var _femininity:Number = 50;
 		public function get femininity():Number {
-			var fem:Number = _femininity;
-			const effect:StatusAffectClass = statusAffectByType(StatusAffects.UmasMassage);
+			var fem:Number                 = _femininity;
+			const effect:StatusEffectClass = statusEffectByType(StatusEffects.UmasMassage);
 			if (effect != null && effect.value1 == UmasShop.MASSAGE_MODELLING_BONUS) {
 				fem += effect.value2;
 			}
@@ -518,7 +518,7 @@ package classes
 		//Current status effects. This has got very muddy between perks and status effects. Will have to look into it.
 		//Someone call the grammar police!
 		//TODO: Move monster status effects into perks. Needs investigation though.
-		public var statusAffects:Array;
+		public var statusEffects:Array;
 
 
 		//Functions			
@@ -821,50 +821,50 @@ package classes
 		
 		//{region StatusEffects
 		//Create a status
-		public function createStatusAffect(stype:StatusAffectType, value1:Number, value2:Number, value3:Number, value4:Number):void
+		public function createStatusEffect(stype:StatusEffectType, value1:Number, value2:Number, value3:Number, value4:Number):void
 		{
-			var newStatusAffect:StatusAffectClass = new StatusAffectClass(stype,value1,value2,value3,value4);
-			statusAffects.push(newStatusAffect);
-			//trace("createStatusAffect -> "+statusAffects.join(","));
+			var newStatusAffect:StatusEffectClass = new StatusEffectClass(stype,value1,value2,value3,value4);
+			statusEffects.push(newStatusAffect);
+			//trace("createStatusEffect -> "+statusEffects.join(","));
 			//trace("NEW STATUS APPLIED TO PLAYER!: " + statusName);
 		}
 		
 		//Remove a status
-		public function removeStatusAffect(stype:StatusAffectType):void
+		public function removeStatusEffect(stype:StatusEffectType):void
 		{
-			var counter:Number = indexOfStatusAffect(stype);
+			var counter:Number = indexOfStatusEffect(stype);
 			if (counter < 0) return;
-			statusAffects.splice(counter, 1);
-			//trace("removeStatusAffect -> "+statusAffects.join(","));
+			statusEffects.splice(counter, 1);
+			//trace("removeStatusEffect -> "+statusEffects.join(","));
 		}
-		public function indexOfStatusAffect(stype:StatusAffectType):int {
-			for (var counter:int = 0; counter < statusAffects.length; counter++) {
-				if ((statusAffects[counter] as StatusAffectClass).stype == stype)
+		public function indexOfStatusEffect(stype:StatusEffectType):int {
+			for (var counter:int = 0; counter < statusEffects.length; counter++) {
+				if ((statusEffects[counter] as StatusEffectClass).stype == stype)
 					return counter;
 			}
 			return -1;
 		}
-		[Deprecated(replacement="indexOfStatusAffect(), statusAffectByType(), or hasStatusAffect() instead")]
-		public function findStatusAffect(stype:StatusAffectType):int {
-			return indexOfStatusAffect(stype);
+		[Deprecated(replacement="indexOfStatusEffect(), statusEffectByType(), or hasStatusEffect() instead")]
+		public function findStatusAffect(stype:StatusEffectType):int {
+			return indexOfStatusEffect(stype);
 		}
-		public function statusAffectByType(stype:StatusAffectType):StatusAffectClass {
-			var idx:int = indexOfStatusAffect(stype);
-			return idx<0 ? null : statusAffects[idx];
+		public function statusEffectByType(stype:StatusEffectType):StatusEffectClass {
+			var idx:int = indexOfStatusEffect(stype);
+			return idx<0 ? null : statusEffects[idx];
 		}
-		public function hasStatusAffect(stype:StatusAffectType):Boolean {
-			return indexOfStatusAffect(stype) >= 0;
+		public function hasStatusEffect(stype:StatusEffectType):Boolean {
+			return indexOfStatusEffect(stype) >= 0;
 		}
 		//}endregion
 		
 		
-		public function changeStatusValue(stype:StatusAffectType, statusValueNum:Number = 1, newNum:Number = 0):void
+		public function changeStatusValue(stype:StatusEffectType, statusValueNum:Number = 1, newNum:Number = 0):void
 		{
 			if (statusValueNum < 1 || statusValueNum > 4) {
 				CoC_Settings.error("ChangeStatusValue called with invalid status value number.");
 				return;
 			}
-			var sac:StatusAffectClass = statusAffectByType(stype);
+			var sac:StatusEffectClass = statusEffectByType(stype);
 			//Various Errors preventing action
 			if (!sac)return;
 			if (statusValueNum == 1) sac.value1 = newNum;
@@ -873,13 +873,13 @@ package classes
 			if (statusValueNum == 4) sac.value4 = newNum;
 		}
 
-		public function addStatusValue(stype:StatusAffectType, statusValueNum:Number = 1, bonus:Number = 0):void
+		public function addStatusValue(stype:StatusEffectType, statusValueNum:Number = 1, bonus:Number = 0):void
 		{
 			if (statusValueNum < 1 || statusValueNum > 4) {
 				CoC_Settings.error("ChangeStatusValue called with invalid status value number.");
 				return;
 			}
-			var sac:StatusAffectClass = statusAffectByType(stype);
+			var sac:StatusEffectClass = statusEffectByType(stype);
 			//Various Errors preventing action
 			if (!sac)return;
 			if (statusValueNum == 1) sac.value1 += bonus;
@@ -888,43 +888,37 @@ package classes
 			if (statusValueNum == 4) sac.value4 += bonus;
 		}
 
-		public function statusAffectByIndex(idx:int):StatusAffectClass {
-			return statusAffects[idx];
+		public function statusEffectByIndex(idx:int):StatusEffectClass {
+			return statusEffects[idx];
 		}
 
-		[Deprecated("Use statusAffectByIndex")]
-		public function statusAffect(idx:int):StatusAffectClass
+		public function statusEffectv1(stype:StatusEffectType):Number
 		{
-			return statusAffects [idx];
-		}
-		
-		public function statusAffectv1(stype:StatusAffectType):Number
-		{
-			var sac:StatusAffectClass = statusAffectByType(stype);
+			var sac:StatusEffectClass = statusEffectByType(stype);
 			return sac?sac.value1:0;
 		}
 		
-		public function statusAffectv2(stype:StatusAffectType):Number
+		public function statusEffectv2(stype:StatusEffectType):Number
 		{
-			var sac:StatusAffectClass = statusAffectByType(stype);
+			var sac:StatusEffectClass = statusEffectByType(stype);
 			return sac?sac.value2:0
 		}
 
-		public function statusAffectv3(stype:StatusAffectType):Number
+		public function statusEffectv3(stype:StatusEffectType):Number
 		{
-			var sac:StatusAffectClass = statusAffectByType(stype);
+			var sac:StatusEffectClass = statusEffectByType(stype);
 			return sac?sac.value3:0
 		}
 
-		public function statusAffectv4(stype:StatusAffectType):Number
+		public function statusEffectv4(stype:StatusEffectType):Number
 		{
-			var sac:StatusAffectClass = statusAffectByType(stype);
+			var sac:StatusEffectClass = statusEffectByType(stype);
 			return sac?sac.value4:0
 		}
 
 		public function removeStatuses():void
 		{
-			statusAffects = [];
+			statusEffects = [];
 		}
 		
 		public function biggestTitSize():Number
@@ -1515,7 +1509,7 @@ package classes
 				bonus += 25;
 			if(findPerk(PerkLib.FerasBoonMilkingTwat) >= 0)
 				bonus += 40;
-			total = (bonus + statusAffectv1(StatusAffects.BonusVCapacity) + 8 * vaginas[0].vaginalLooseness * vaginas[0].vaginalLooseness) * (1 + vaginas[0].vaginalWetness / 10);
+			total = (bonus + statusEffectv1(StatusEffects.BonusVCapacity) + 8 * vaginas[0].vaginalLooseness * vaginas[0].vaginalLooseness) * (1 + vaginas[0].vaginalWetness / 10);
 			return total;
 		}
 		
@@ -1533,7 +1527,7 @@ package classes
 				bonus += 10;
 			if (ass.analWetness > 0)
 				bonus += 15;
-			return ((bonus + statusAffectv1(StatusAffects.BonusACapacity) + 6 * ass.analLooseness * ass.analLooseness) * (1 + ass.analWetness / 10));
+			return ((bonus + statusEffectv1(StatusEffects.BonusACapacity) + 6 * ass.analLooseness * ass.analLooseness) * (1 + ass.analWetness / 10));
 		}
 		
 		public function hasFuckableNipples():Boolean
@@ -1604,21 +1598,21 @@ package classes
 		}
 		public function milked():void
 		{
-			if (hasStatusAffect(StatusAffects.LactationReduction))
-				changeStatusValue(StatusAffects.LactationReduction, 1, 0);
-			if (hasStatusAffect(StatusAffects.LactationReduc0))
-				removeStatusAffect(StatusAffects.LactationReduc0);
-			if (hasStatusAffect(StatusAffects.LactationReduc1))
-				removeStatusAffect(StatusAffects.LactationReduc1);
-			if (hasStatusAffect(StatusAffects.LactationReduc2))
-				removeStatusAffect(StatusAffects.LactationReduc2);
-			if (hasStatusAffect(StatusAffects.LactationReduc3))
-				removeStatusAffect(StatusAffects.LactationReduc3);
+			if (hasStatusEffect(StatusEffects.LactationReduction))
+				changeStatusValue(StatusEffects.LactationReduction, 1, 0);
+			if (hasStatusEffect(StatusEffects.LactationReduc0))
+				removeStatusEffect(StatusEffects.LactationReduc0);
+			if (hasStatusEffect(StatusEffects.LactationReduc1))
+				removeStatusEffect(StatusEffects.LactationReduc1);
+			if (hasStatusEffect(StatusEffects.LactationReduc2))
+				removeStatusEffect(StatusEffects.LactationReduc2);
+			if (hasStatusEffect(StatusEffects.LactationReduc3))
+				removeStatusEffect(StatusEffects.LactationReduc3);
 			if (findPerk(PerkLib.Feeder) >= 0)
 			{
 				//You've now been milked, reset the timer for that
-				addStatusValue(StatusAffects.Feeder,1,1);
-				changeStatusValue(StatusAffects.Feeder, 2, 0);
+				addStatusValue(StatusEffects.Feeder,1,1);
+				changeStatusValue(StatusEffects.Feeder, 2, 0);
 			}
 		}
 		public function boostLactation(todo:Number):Number
@@ -1632,16 +1626,16 @@ package classes
 			//Prevent lactation decrease if lactating.
 			if (todo >= 0)
 			{
-				if (hasStatusAffect(StatusAffects.LactationReduction))
-					changeStatusValue(StatusAffects.LactationReduction, 1, 0);
-				if (hasStatusAffect(StatusAffects.LactationReduc0))
-					removeStatusAffect(StatusAffects.LactationReduc0);
-				if (hasStatusAffect(StatusAffects.LactationReduc1))
-					removeStatusAffect(StatusAffects.LactationReduc1);
-				if (hasStatusAffect(StatusAffects.LactationReduc2))
-					removeStatusAffect(StatusAffects.LactationReduc2);
-				if (hasStatusAffect(StatusAffects.LactationReduc3))
-					removeStatusAffect(StatusAffects.LactationReduc3);
+				if (hasStatusEffect(StatusEffects.LactationReduction))
+					changeStatusValue(StatusEffects.LactationReduction, 1, 0);
+				if (hasStatusEffect(StatusEffects.LactationReduc0))
+					removeStatusEffect(StatusEffects.LactationReduc0);
+				if (hasStatusEffect(StatusEffects.LactationReduc1))
+					removeStatusEffect(StatusEffects.LactationReduc1);
+				if (hasStatusEffect(StatusEffects.LactationReduc2))
+					removeStatusEffect(StatusEffects.LactationReduc2);
+				if (hasStatusEffect(StatusEffects.LactationReduc3))
+					removeStatusEffect(StatusEffects.LactationReduc3);
 			}
 			if (todo > 0)
 			{
@@ -1825,7 +1819,7 @@ package classes
 				quantity += 200;
 			if (findPerk(PerkLib.SatyrSexuality) >= 0)
 				quantity += 50;
-			quantity += statusAffectv1(StatusAffects.Rut);
+			quantity += statusEffectv1(StatusEffects.Rut);
 			quantity *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
 			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY)
 				quantity *= (1 + (jewelryEffectMagnitude / 100));
@@ -1864,7 +1858,7 @@ package classes
 			if (findPerk(PerkLib.FerasBoonSeeder) >= 0) cumCap += 1000;
 			cumCap += perkv1(PerkLib.ElvenBounty);
 			if (findPerk(PerkLib.BroBody) >= 0) cumCap += 200;
-			cumCap += statusAffectv1(StatusAffects.Rut);
+			cumCap += statusEffectv1(StatusEffects.Rut);
 			cumCap *= (1 + (2 * perkv1(PerkLib.PiercedFertite)) / 100);
 			//Alter capacity by accessories.
 			if (jewelryEffectId == JewelryLib.MODIFIER_FERTILITY) cumCap *= (1 + (jewelryEffectMagnitude / 100));
@@ -2110,7 +2104,7 @@ package classes
 		public function canFly():Boolean
 		{
 			//web also makes false!
-			if (hasStatusAffect(StatusAffects.Web))
+			if (hasStatusEffect(StatusEffects.Web))
 				return false;
 			return canFlyWings.indexOf(_wingType) != -1;
 
@@ -2465,7 +2459,7 @@ package classes
 				else ass.analLooseness++;
 				stretched = true;
 				//Reset butt stretchin recovery time
-				if(hasStatusAffect(StatusAffects.ButtStretched)) changeStatusValue(StatusAffects.ButtStretched,1,0);
+				if(hasStatusEffect(StatusEffects.ButtStretched)) changeStatusValue(StatusEffects.ButtStretched,1,0);
 			}
 			//If within top 10% of capacity, 25% stretch
 			if(cArea < analCapacity() && cArea >= .9*analCapacity() && rand(4) == 0) {
@@ -2485,9 +2479,9 @@ package classes
 			//Delay un-stretching
 			if(cArea >= .5 * analCapacity()) {
 				//Butt Stretched used to determine how long since last enlargement
-				if(!hasStatusAffect(StatusAffects.ButtStretched)) createStatusAffect(StatusAffects.ButtStretched,0,0,0,0);
+				if(!hasStatusEffect(StatusEffects.ButtStretched)) createStatusEffect(StatusEffects.ButtStretched,0,0,0,0);
 				//Reset the timer on it to 0 when restretched.
-				else changeStatusValue(StatusAffects.ButtStretched,1,0);
+				else changeStatusValue(StatusEffects.ButtStretched,1,0);
 			}
 			if(stretched) {
 				trace("BUTT STRETCHED TO " + (ass.analLooseness) + ".");
@@ -2523,9 +2517,9 @@ package classes
 			//Delay anti-stretching
 			if(cArea >= .5 * vaginalCapacity()) {
 				//Cunt Stretched used to determine how long since last enlargement
-				if(!hasStatusAffect(StatusAffects.CuntStretched)) createStatusAffect(StatusAffects.CuntStretched,0,0,0,0);
+				if(!hasStatusEffect(StatusEffects.CuntStretched)) createStatusEffect(StatusEffects.CuntStretched,0,0,0,0);
 				//Reset the timer on it to 0 when restretched.
-				else changeStatusValue(StatusAffects.CuntStretched,1,0);
+				else changeStatusValue(StatusEffects.CuntStretched,1,0);
 			}
 			if(stretched) {
 				trace("CUNT STRETCHED TO " + (vaginas[0].vaginalLooseness) + ".");
@@ -2534,18 +2528,18 @@ package classes
 		}
 		
 		public function get inHeat():Boolean {
-			return hasStatusAffect(StatusAffects.Heat);
+			return hasStatusEffect(StatusEffects.Heat);
 		}
 		
 		public function get inRut():Boolean {
-			return hasStatusAffect(StatusAffects.Rut);
+			return hasStatusEffect(StatusEffects.Rut);
 		}
 
 		public function bonusFertility():Number
 		{
 			var counter:Number = 0;
 			if (inHeat)
-				counter += statusAffectv1(StatusAffects.Heat);
+				counter += statusEffectv1(StatusEffects.Heat);
 			if (findPerk(PerkLib.FertilityPlus) >= 0)
 				counter += 15;
 			if (findPerk(PerkLib.FertilityMinus) >= 0 && lib < 25)
@@ -3203,15 +3197,15 @@ package classes
 			
 			//--STATUS AFFECTS--
 			//Black cat beer = 25% reduction!
-			if (statusAffectv1(StatusAffects.BlackCatBeer) > 0) {
+			if (statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
 				mult *= 0.75;
 			}
 			//Defend = 50-(99)% reduction
-			if (hasStatusAffect(StatusAffects.Defend)) {
+			if (hasStatusEffect(StatusEffects.Defend)) {
 				mult *= 0.5;//potem doda sie efekty perkow zwiekszajace redukcje obrazen
 			}
 			// Uma's Massage bonuses
-			var sac:StatusAffectClass = statusAffectByType(StatusAffects.UmasMassage);
+			var sac:StatusEffectClass = statusEffectByType(StatusEffects.UmasMassage);
 			if (sac && sac.value1 == UmasShop.MASSAGE_RELAXATION) {
 				mult *= sac.value2;
 			}
@@ -3232,9 +3226,9 @@ package classes
 			if (findPerk(PerkLib.Flexibility) >= 0) chance += 6;
 			if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit") chance += 10;
 			if (findPerk(PerkLib.Unhindered) >= 0 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing")) chance += 10;
-			if (hasStatusAffect(StatusAffects.Illusion)) chance += 10;
-			if (hasStatusAffect(StatusAffects.Flying)) chance += 20;
-			if (hasStatusAffect(StatusAffects.BladeDance)) chance += 30;
+			if (hasStatusEffect(StatusEffects.Illusion)) chance += 10;
+			if (hasStatusEffect(StatusEffects.Flying)) chance += 20;
+			if (hasStatusEffect(StatusEffects.BladeDance)) chance += 30;
 			return chance;
 		}
 	   
@@ -3268,9 +3262,9 @@ package classes
 			if (findPerk(PerkLib.Flexibility) >= 0 && (roll < 6)) return "Flexibility";
 			if (findPerk(PerkLib.Misdirection) >= 0 && armorName == "red, high-society bodysuit" && (roll < 10)) return "Misdirection";
 			if (findPerk(PerkLib.Unhindered) >= 0 && (armorName == "arcane bangles" || armorName == "practically indecent steel armor" || armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps" || armorName == "nothing") && (roll < 10)) return "Unhindered";
-			if (hasStatusAffect(StatusAffects.Illusion) && (roll < 10)) return "Illusion";
-			if (hasStatusAffect(StatusAffects.Flying) && (roll < 20)) return "Flying";
-			if (hasStatusAffect(StatusAffects.BladeDance) && (roll < 30)) return "Blade Dance";
+			if (hasStatusEffect(StatusEffects.Illusion) && (roll < 10)) return "Illusion";
+			if (hasStatusEffect(StatusEffects.Flying) && (roll < 20)) return "Flying";
+			if (hasStatusEffect(StatusEffects.BladeDance) && (roll < 30)) return "Blade Dance";
 			return null;
 		}
 	   

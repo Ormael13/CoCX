@@ -102,7 +102,7 @@ public function EzekielCurseQuickFix():void
 	clearOutput();
 	outputText("Like with a magic wand touch some divine being has blessed you. And before leaving meantioned about never again selling or discarding odd fruits.", true);
 	if (player.findPerk(PerkLib.EzekielBlessing) < 0) player.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
-	if (player.hasStatusAffect(StatusAffects.EzekielCurse)) player.removeStatusAffect(StatusAffects.EzekielCurse);
+	if (player.hasStatusEffect(StatusEffects.EzekielCurse)) player.removeStatusEffect(StatusEffects.EzekielCurse);
 	statScreenRefresh();
 	dynStats("str", 5, "tou", 5, "spe", 5, "inte", 5, "lib", 5);
 	doCamp();
@@ -129,14 +129,14 @@ private function doCamp():void { //Only called by playerMenu
 	}
 	//trace("Current fertility: " + player.totalFertility());
 	mainView.showMenuButton( MainView.MENU_NEW_MAIN );
-	if(player.hasStatusAffect(StatusAffects.PostAkbalSubmission)) {
-		player.removeStatusAffect(StatusAffects.PostAkbalSubmission);
+	if(player.hasStatusEffect(StatusEffects.PostAkbalSubmission)) {
+		player.removeStatusEffect(StatusEffects.PostAkbalSubmission);
 		kGAMECLASS.forest.akbalScene.akbalSubmissionFollowup();
 		return;
 	}
-	if(player.hasStatusAffect(StatusAffects.PostAnemoneBeatdown)) {
+	if(player.hasStatusEffect(StatusEffects.PostAnemoneBeatdown)) {
 		HPChange(Math.round(player.maxHP()/2),false);
-		player.removeStatusAffect(StatusAffects.PostAnemoneBeatdown);
+		player.removeStatusEffect(StatusEffects.PostAnemoneBeatdown);
 	}
 /* Can't happen - playerMenu will call dungeon appropriate menu instead of doCamp while inDungeon is true
 	if (kGAMECLASS.inDungeon) {
@@ -236,7 +236,7 @@ private function doCamp():void { //Only called by playerMenu
 		kGAMECLASS.processJackFrostEvent();
 		return;
 	}
-	if(player.hasKeyItem("Super Reducto") < 0 && milkSlave() && player.hasStatusAffect(StatusAffects.CampRathazul) && player.statusAffectv2(StatusAffects.MetRathazul) >= 4) {
+	if(player.hasKeyItem("Super Reducto") < 0 && milkSlave() && player.hasStatusEffect(StatusEffects.CampRathazul) && player.statusEffectv2(StatusEffects.MetRathazul) >= 4) {
 		hideMenus();
 		milkWaifu.ratducto();
 		return;
@@ -406,7 +406,7 @@ private function doCamp():void { //Only called by playerMenu
 		}
 	}
 	//Jojo treeflips!
-	if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && player.hasStatusAffect(StatusAffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) {
+	if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) {
 		holliScene.JojoTransformAndRollOut();
 		hideMenus();
 		return;
@@ -424,18 +424,18 @@ private function doCamp():void { //Only called by playerMenu
 		return;
 	}
 	//Anemone birth followup!
-	if(player.hasStatusAffect(StatusAffects.CampAnemoneTrigger)) {
-		player.removeStatusAffect(StatusAffects.CampAnemoneTrigger);
+	if(player.hasStatusEffect(StatusEffects.CampAnemoneTrigger)) {
+		player.removeStatusEffect(StatusEffects.CampAnemoneTrigger);
 		anemoneScene.anemoneKidBirthPtII();
 		hideMenus();
 		return;
 	}
 	//Exgartuan clearing
-	if(player.statusAffectv1(StatusAffects.Exgartuan) == 1 && (player.cockArea(0) < 100 || player.cocks.length == 0)) {
+	if(player.statusEffectv1(StatusEffects.Exgartuan) == 1 && (player.cockArea(0) < 100 || player.cocks.length == 0)) {
 		exgartuanCampUpdate();
 		return;
 	}
-	else if(player.statusAffectv1(StatusAffects.Exgartuan) == 2 && player.biggestTitSize() < 12) {
+	else if(player.statusEffectv1(StatusEffects.Exgartuan) == 2 && player.biggestTitSize() < 12) {
 		exgartuanCampUpdate();
 		return;
 	}
@@ -451,7 +451,7 @@ private function doCamp():void { //Only called by playerMenu
 		return;
 	}
 	//Marble meets follower izzy when moving in
-	if(flags[kFLAGS.ISABELLA_MURBLE_BLEH] == 1 && isabellaFollower() && player.hasStatusAffect(StatusAffects.CampMarble)) {
+	if(flags[kFLAGS.ISABELLA_MURBLE_BLEH] == 1 && isabellaFollower() && player.hasStatusEffect(StatusEffects.CampMarble)) {
 		isabellaFollowerScene.angryMurble();
 		hideMenus();
 		return;
@@ -482,13 +482,13 @@ private function doCamp():void { //Only called by playerMenu
 		return;
 	}
 	//Bimbo Jojo warning
-	if (player.hasStatusAffect(StatusAffects.PureCampJojo) && inventory.hasItemInStorage(consumables.BIMBOLQ) && flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO] >= 72 && flags[kFLAGS.JOJO_BIMBO_STATE] == 0) {
+	if (player.hasStatusEffect(StatusEffects.PureCampJojo) && inventory.hasItemInStorage(consumables.BIMBOLQ) && flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO] >= 72 && flags[kFLAGS.JOJO_BIMBO_STATE] == 0) {
 		joyScene.jojoPromptsAboutThief();
 		hideMenus();
 		return;
 	}
 	//Jojo gets bimbo'ed!
-	if (player.hasStatusAffect(StatusAffects.PureCampJojo) && flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO] >= 24 && flags[kFLAGS.JOJO_BIMBO_STATE] == 2) {
+	if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.BIMBO_LIQUEUR_STASH_COUNTER_FOR_JOJO] >= 24 && flags[kFLAGS.JOJO_BIMBO_STATE] == 2) {
 		joyScene.jojoGetsBimbofied();
 		hideMenus();
 		return;
@@ -499,7 +499,7 @@ private function doCamp():void { //Only called by playerMenu
 		return;
 	}
 	//Rathazul freaks out about jojo
-	if(flags[kFLAGS.RATHAZUL_CORRUPT_JOJO_FREAKOUT] == 0 && rand(5) == 0 && player.hasStatusAffect(StatusAffects.CampRathazul) && campCorruptJojo()) {
+	if(flags[kFLAGS.RATHAZUL_CORRUPT_JOJO_FREAKOUT] == 0 && rand(5) == 0 && player.hasStatusEffect(StatusEffects.CampRathazul) && campCorruptJojo()) {
 		finter.rathazulFreaksOverJojo();
 		hideMenus();
 		return;
@@ -517,18 +517,18 @@ private function doCamp():void { //Only called by playerMenu
 		return;
 	}
 	//Amily/Marble Freakout
-	if(flags[kFLAGS.AMILY_NOT_FREAKED_OUT] == 0 && player.hasStatusAffect(StatusAffects.CampMarble) && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyScene.amilyFollower() && marbleScene.marbleAtCamp()) {
+	if(flags[kFLAGS.AMILY_NOT_FREAKED_OUT] == 0 && player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.AMILY_FOLLOWER] == 1 && amilyScene.amilyFollower() && marbleScene.marbleAtCamp()) {
 		finter.marbleVsAmilyFreakout();
 		hideMenus();
 		return;
 	}
 	//Amily and/or Jojo freakout about Vapula!!
-	if(vapulaSlave() && ((player.hasStatusAffect(StatusAffects.PureCampJojo) && flags[kFLAGS.KEPT_PURE_JOJO_OVER_VAPULA] <= 0) || (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt() && flags[kFLAGS.KEPT_PURE_AMILY_OVER_VAPULA] <= 0))) {
+	if(vapulaSlave() && ((player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.KEPT_PURE_JOJO_OVER_VAPULA] <= 0) || (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt() && flags[kFLAGS.KEPT_PURE_AMILY_OVER_VAPULA] <= 0))) {
 		//Jojo but not Amily (Must not be bimbo!)
-		if((player.hasStatusAffect(StatusAffects.PureCampJojo)) && !(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) && flags[kFLAGS.KEPT_PURE_JOJO_OVER_VAPULA] == 0)
+		if((player.hasStatusEffect(StatusEffects.PureCampJojo)) && !(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) && flags[kFLAGS.KEPT_PURE_JOJO_OVER_VAPULA] == 0)
 			vapula.mouseWaifuFreakout(false,true);
 		//Amily but not Jojo
-		else if ((amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) && !player.hasStatusAffect(StatusAffects.PureCampJojo) && flags[kFLAGS.KEPT_PURE_AMILY_OVER_VAPULA] == 0) {
+		else if ((amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) && !player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.KEPT_PURE_AMILY_OVER_VAPULA] == 0) {
 			vapula.mouseWaifuFreakout(true,false);
 		}
 		//Both
@@ -556,7 +556,7 @@ private function doCamp():void { //Only called by playerMenu
 	flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] = 0;
 	campQ = false;
 	//Clear stuff
-	if(player.hasStatusAffect(StatusAffects.SlimeCravingOutput)) player.removeStatusAffect(StatusAffects.SlimeCravingOutput);
+	if(player.hasStatusEffect(StatusEffects.SlimeCravingOutput)) player.removeStatusEffect(StatusEffects.SlimeCravingOutput);
 	//Reset luststick display status (see event parser)
 	flags[kFLAGS.PC_CURRENTLY_LUSTSTICK_AFFECTED] = 0;
 	//Display Proper Buttons
@@ -614,7 +614,7 @@ private function doCamp():void { //Only called by playerMenu
 	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 5) outputText("There's warehouse and second one warehouse half finished construction connected by granary located in the east section of your campsite.\n\n", false)
 	if(flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("There's two warehouses and granary connecting them located in the east section of your campsite.\n\n", false)
 	//Nursery
-	if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 100 && player.hasStatusAffect(StatusAffects.CampMarble)) {
+	if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] == 100 && player.hasStatusEffect(StatusEffects.CampMarble)) {
 		outputText("Marble has built a fairly secure nursery amongst the rocks to house your ",false);
 		if(flags[kFLAGS.MARBLE_KIDS] == 0) outputText("future children", false);
 		else {
@@ -657,7 +657,7 @@ private function doCamp():void { //Only called by playerMenu
 		outputText("\n\n");
 	}
 	//Traps
-	if(player.hasStatusAffect(StatusAffects.DefenseCanopy)) {
+	if(player.hasStatusEffect(StatusEffects.DefenseCanopy)) {
 		outputText("A thorny tree has sprouted near the center of the camp, growing a protective canopy of spiky vines around the portal and your camp.  ", false);
 	}
 	if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 && flags[kFLAGS.CAMP_WALL_PROGRESS] < 100) {
@@ -727,9 +727,9 @@ private function doCamp():void { //Only called by playerMenu
 	campSlavesMenu(true);
 
 	//Clear bee-status
-	if(player.hasStatusAffect(StatusAffects.ParalyzeVenom)) {
-		dynStats("str", player.statusAffectv1(StatusAffects.ParalyzeVenom),"spe", player.statusAffectv2(StatusAffects.ParalyzeVenom));
-		player.removeStatusAffect(StatusAffects.ParalyzeVenom);
+	if(player.hasStatusEffect(StatusEffects.ParalyzeVenom)) {
+		dynStats("str", player.statusEffectv1(StatusEffects.ParalyzeVenom),"spe", player.statusEffectv2(StatusEffects.ParalyzeVenom));
+		player.removeStatusEffect(StatusEffects.ParalyzeVenom);
 		outputText("<b>You feel quicker and stronger as the paralyzation venom in your veins wears off.</b>\n\n", false);
 	}
 	
@@ -748,7 +748,7 @@ private function doCamp():void { //Only called by playerMenu
 	
 	//The uber horny
 	if(player.lust >= player.maxLust()) {
-		if(player.hasStatusAffect(StatusAffects.Dysfunction)) {
+		if(player.hasStatusEffect(StatusEffects.Dysfunction)) {
 			outputText("<b>You are debilitatingly aroused, but your sexual organs are so numbed the only way to get off would be to find something tight to fuck or get fucked...</b>\n\n", false);
 		}
 		else if(flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] > 0 && player.isTaur()) {
@@ -817,10 +817,10 @@ private function doCamp():void { //Only called by playerMenu
 	addButton(8, "Camp Actions", campActions, null, null, null, "Interact with the camp surroundings and also read your codex.");	//dodać potem w opisie "or questlog"
 	if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(9, "Enter Cabin", cabinProgress.initiateCabin, null, null, null, "Enter your cabin."); //Enter cabin for furnish.
 	if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) addButton(10, "Soulforce", soulforce.accessSoulforceMenu, null, null, null, "Spend some time on the cultivation or spend some of the soulforce.");
-	var canFap:Boolean = !player.hasStatusAffect(StatusAffects.Dysfunction) && (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] == 0 && !player.isTaur());
+	var canFap:Boolean = !player.hasStatusEffect(StatusEffects.Dysfunction) && (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] == 0 && !player.isTaur());
 	if (player.lust >= 30) {
 		addButton(11, "Masturbate", kGAMECLASS.masturbation.masturbateMenu);
-		if ((((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.hasStatusAffect(StatusAffects.Exgartuan) && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(11, "Meditate", kGAMECLASS.masturbation.masturbateMenu);
+		if ((((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(11, "Meditate", kGAMECLASS.masturbation.masturbateMenu);
 	}
 	addButton(12, "Wait", doWait, null, null, null, "Wait for four hours.\n\nShift-click to wait until the night comes.");
 	if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(12, "Rest", rest, null, null, null, "Rest for four hours.\n\nShift-click to rest until fully healed or night comes.");
@@ -870,7 +870,7 @@ private function doCamp():void { //Only called by playerMenu
 		}
 	}
 	//Min Lust Bad End (Must not have any removable/temporary min lust.)
-	if (player.minLust() >= player.maxLust() && !flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= 168 && !player.eggs() >= 20 && !player.hasStatusAffect(StatusAffects.BimboChampagne) && !player.hasStatusAffect(StatusAffects.Luststick) && player.jewelryEffectId != 1)
+	if (player.minLust() >= player.maxLust() && !flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= 168 && !player.eggs() >= 20 && !player.hasStatusEffect(StatusEffects.BimboChampagne) && !player.hasStatusEffect(StatusEffects.Luststick) && player.jewelryEffectId != 1)
 	{
 		badEndMinLust();
 		return;
@@ -889,8 +889,8 @@ public function followersCount():Number {
 	var counter:Number = 0;
 	if(emberScene.followerEmber()) counter++;
 	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) counter++;
-	if(player.hasStatusAffect(StatusAffects.PureCampJojo)) counter++;
-	if(player.hasStatusAffect(StatusAffects.CampRathazul)) counter++;
+	if(player.hasStatusEffect(StatusEffects.PureCampJojo)) counter++;
+	if(player.hasStatusEffect(StatusEffects.CampRathazul)) counter++;
 	if(followerShouldra()) counter++;
 	if(sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
 	if(flags[kFLAGS.EVANGELINE_FOLLOWER] >= 1) counter++;
@@ -924,7 +924,7 @@ public function loversCount():Number {
 	//Izma!
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
 	if(isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
-	if(player.hasStatusAffect(StatusAffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
+	if(player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
 	if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
 	if(followerKiha()) counter++;
 	if(flags[kFLAGS.NIEVE_STAGE] == 5) counter++;
@@ -941,7 +941,7 @@ public function loversHotBathCount():Number {
 	if(followerHel()) counter++;
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
 	if(isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
-	if(player.hasStatusAffect(StatusAffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
+	if(player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
 	if(amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) counter++;
 	if(followerKiha()) counter++;
 	if(flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_COCK_SIZE] < 1) counter++;
@@ -974,7 +974,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		temp = rand(6);
 		if(temp == 0) {
 			outputText("dripping water and stark naked from a bath in the stream", false);
-			if(player.hasStatusAffect(StatusAffects.CampRathazul)) outputText(".  Rathazul glances over and immediately gets a nosebleed", false);
+			if(player.hasStatusEffect(StatusEffects.CampRathazul)) outputText(".  Rathazul glances over and immediately gets a nosebleed", false);
 		}
 		else if(temp == 1) outputText("slouching in the shade of some particularly prominent rocks, whittling twigs to create darts for her blowpipe", false);
 		else if(temp == 2) outputText("dipping freshly-made darts into a jar of something that looks poisonous", false);
@@ -1037,9 +1037,9 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 			outputText("Isabella ", false);
 			var izzyCreeps:Array = [];
 			//Build array of choices for izzy to talk to
-			if(player.hasStatusAffect(StatusAffects.CampRathazul))
+			if(player.hasStatusEffect(StatusEffects.CampRathazul))
 				izzyCreeps[izzyCreeps.length] = 0;
-			if(player.hasStatusAffect(StatusAffects.PureCampJojo))
+			if(player.hasStatusEffect(StatusEffects.PureCampJojo))
 				izzyCreeps[izzyCreeps.length] = 1;
 			if(amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0)
 				izzyCreeps[izzyCreeps.length] = 2;
@@ -1133,7 +1133,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		addButton(7, "Kiha", kihaScene.encounterKiha);
 	}
 	//MARBLE
-	if(player.hasStatusAffect(StatusAffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
+	if(player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
 		temp = rand(5);
 		outputText("A second bedroll rests next to yours; a large two handed hammer sometimes rests against it, depending on whether or not its owner needs it at the time.  ", false);
 		//Normal Murbles
@@ -1148,7 +1148,7 @@ public function campLoversMenu(descOnly:Boolean = false):void {
 		//at 6-7 in the morning, scene always displays at this time
 		else if(model.time.hours == 6 || model.time.hours == 7) outputText("Marble is off in an open area to the side of your camp right now.  She is practicing with her large hammer, going through her daily training.");
 		//after nightfall, scene always displays at this time unless PC is wormed
-		else if(model.time.hours >= 21 && !player.hasStatusAffect(StatusAffects.Infested)) {
+		else if(model.time.hours >= 21 && !player.hasStatusEffect(StatusEffects.Infested)) {
 			outputText("Marble is hanging around her bedroll waiting for you to come to bed.  However, sometimes she lies down for a bit, and sometimes she paces next to it.");
 			if(flags[kFLAGS.MARBLE_LUST] > 30) outputText("  She seems to be feeling antsy.");
 		}
@@ -1309,7 +1309,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 		addButton(1, "Sophie", sophieFollowerScene.followerSophieMainScreen, null, null, null, "Check up on Sophie the harpy.");
 	}
 	//Pure Jojo
-	if (player.hasStatusAffect(StatusAffects.PureCampJojo)) {
+	if (player.hasStatusEffect(StatusEffects.PureCampJojo)) {
 		if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) {
 			outputText("Joy's tent is set up in a quiet corner of the camp, close to a boulder. Inside the tent, you can see a chest holding her belongings, as well as a few clothes and books spread about her bedroll. ");
 			if (flags[kFLAGS.JOJO_LITTERS] > 0 && model.time.hours >= 16 && model.time.hours < 19) outputText("You spot the little mice you had with Joy playing about close to her tent.");
@@ -1351,7 +1351,7 @@ public function campFollowers(descOnly:Boolean = false):void {
 	}
 	//RATHAZUL
 	//if rathazul has joined the camp
-	if (player.hasStatusAffect(StatusAffects.CampRathazul)) {
+	if (player.hasStatusEffect(StatusEffects.CampRathazul)) {
 		if(flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] <= 1) {
 			outputText("Tucked into a shaded corner of the rocks is a bevy of alchemical devices and equipment.  ", false);
 			if (!(model.time.hours > 4 && model.time.hours < 23)) outputText("The alchemist is absent from his usual work location. He must be sleeping right now.", false);
@@ -1452,7 +1452,7 @@ private function campActions():void {
 	//addButton(11, "Questlog", , null, null, null, "Check your questlog.");
 	if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(11, "Kitsune Shrine", campScenes.KitsuneShrine, null, null, null, "Meditate at camp Kitsune Shrine.");
 	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(12, "Hot Spring", campScenes.HotSpring, null, null, null, "Visit Hot Spring.");
-	if (player.hasStatusAffect(StatusAffects.KnowsHeal)) addButton(13, "Heal", spellHealcamp, null, null, null, "Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nFatigue Cost: 30");
+	if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(13, "Heal", spellHealcamp, null, null, null, "Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nFatigue Cost: 30");
 	addButton(14, "Back", playerMenu);
 }
 
@@ -1583,7 +1583,7 @@ private function swimInStream():void {
 		emberJoinsStream = true;
 	}
 	//Rathazul (RARE)
-	if (rand(10) == 0 && player.hasStatusAffect(StatusAffects.CampRathazul))
+	if (rand(10) == 0 && player.hasStatusEffect(StatusEffects.CampRathazul))
 	{
 		outputText("\n\nYou spot Rathazul walking into the shallow section of stream, most likely taking a bath to get rid of the smell.", false)
 		rathazulJoinsStream = true;
@@ -1776,12 +1776,12 @@ public function rest():void {
 	if (player.findPerk(PerkLib.Medicine) >= 0) hpRecovery *= 1.5;
 	
 	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) fatRecovery *= 2;
-	if (player.hasStatusAffect(StatusAffects.BathedInHotSpring)) fatRecovery *= 1.2;
+	if (player.hasStatusEffect(StatusEffects.BathedInHotSpring)) fatRecovery *= 1.2;
 	
 	if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && !prison.inPrison && !ingnam.inIngnam)
 		multiplier += 0.5;
 	//Marble withdrawal
-	if(player.hasStatusAffect(StatusAffects.MarbleWithdrawl))
+	if(player.hasStatusEffect(StatusEffects.MarbleWithdrawl))
 		multiplier /= 2;
 	//Hungry
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25)
@@ -1826,7 +1826,7 @@ public function rest():void {
 			else outputText("\nYou tell Ayane you wish to rest for a hour. The devoted priestess assists your recovery by bandaging your wounds and preparing a meditation tea ceremony.\n");
 		}
 		//Marble withdrawal
-		if(player.hasStatusAffect(StatusAffects.MarbleWithdrawl)) {
+		if(player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
 			outputText("\nYour rest is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
 			dynStats("tou", -.1, "int", -.1);
 		}
@@ -1869,7 +1869,7 @@ public function doWait():void {
 		if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) outputText("You lie down in your pitcher, closing off your petals as you get comfortable for " + num2Text(timeQ) + " hours...\n", false);
 		else outputText("You wait " + num2Text(timeQ) + " hours...\n", false);
 		//Marble withdrawl
-		if(player.hasStatusAffect(StatusAffects.MarbleWithdrawl)) {
+		if(player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
 			outputText("\nYour time spent waiting is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
 			//fatigue
 			fatRecovery /= 2;
@@ -1945,7 +1945,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 			return;
 		}
 		//Shouldra xgartuan fight
-		if(player.hasCock() && followerShouldra() && player.statusAffectv1(StatusAffects.Exgartuan) == 1) {
+		if(player.hasCock() && followerShouldra() && player.statusEffectv1(StatusEffects.Exgartuan) == 1) {
 			if(flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 0) {
 				shouldraFollower.shouldraAndExgartumonFightGottaCatchEmAll();
 				sleepRecovery(false);
@@ -1970,7 +1970,7 @@ public function doSleep(clrScreen:Boolean = true):void {
 			outputText("You enter your cabin to turn yourself in for the night. ")
 		}
 		//Marble Sleepies
-		if(marbleScene.marbleAtCamp() && player.hasStatusAffect(StatusAffects.CampMarble) && flags[kFLAGS.SLEEP_WITH] == "Marble" && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
+		if(marbleScene.marbleAtCamp() && player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.SLEEP_WITH] == "Marble" && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
 			if(marbleScene.marbleNightSleepFlavor()) {
 				sleepRecovery(false);
 				return;
@@ -2071,7 +2071,7 @@ public function sleepRecovery(display:Boolean = false):void {
 		multiplier += 0.5;
 	}
 	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) fatRecovery *= 2;
-	if (player.hasStatusAffect(StatusAffects.BathedInHotSpring)) fatRecovery *= 1.2;
+	if (player.hasStatusEffect(StatusEffects.BathedInHotSpring)) fatRecovery *= 1.2;
 	if (flags[kFLAGS.HUNGER_ENABLED] > 0)
 	{
 		if (player.hunger < 25)
@@ -2086,7 +2086,7 @@ public function sleepRecovery(display:Boolean = false):void {
 		else outputText("\nYou tell Ayane you are planning to sleep for an hour. The devoted priestess pulls a magnificent bed out of her bag of infinite holding and tends to your wounds if any.\n");
 	}
 	//Marble withdrawl
-	if(player.hasStatusAffect(StatusAffects.MarbleWithdrawl)) {
+	if(player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
 		if(display) outputText("\nYour sleep is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n", false);
 		multiplier *= 0.5;
 		dynStats("tou", -.1, "int", -.1);
@@ -2122,7 +2122,7 @@ public function badEndGIANTBALLZ():void {
 		outputText("\n\nFortunately, you have some Reducto.  You can shrink your balls and get back to your adventures!", false)
 		addButton(1, "Reducto", applyReductoAndEscapeBadEnd);
 	}
-	else if (player.hasStatusAffect(StatusAffects.CampRathazul)) {
+	else if (player.hasStatusEffect(StatusEffects.CampRathazul)) {
 		outputText("\n\nYou could call for Rathazul to help you.", false)
 		addButton(2, "Rathazul", callRathazulAndEscapeBadEnd);		
 	}
@@ -2215,7 +2215,7 @@ private function dungeonFound():Boolean { //Returns true as soon as any known du
 }
 
 private function farmFound():Boolean { //Returns true as soon as any known dungeon is found
-	if (player.hasStatusAffect(StatusAffects.MetWhitney) && player.statusAffectv1(StatusAffects.MetWhitney) > 1) {
+	if (player.hasStatusEffect(StatusEffects.MetWhitney) && player.statusEffectv1(StatusEffects.MetWhitney) > 1) {
 		if (flags[kFLAGS.FARM_DISABLED] == 0) return true;
 		if (player.cor >= 70 && player.level >= 12 && getGame().farm.farmCorruption.corruptFollowers() >= 2 && flags[kFLAGS.FARM_CORRUPTION_DISABLED] == 0) return true;
 	}
@@ -2230,13 +2230,13 @@ private function placesKnown():Boolean { //Returns true as soon as any known pla
 	if (placesCount() > 0) return true;
 	//No need for redundant code!
 	/*if (flags[kFLAGS.BAZAAR_ENTERED] > 0) return true;
-	if (player.hasStatusAffect(StatusAffects.BoatDiscovery)) return true;
+	if (player.hasStatusEffect(StatusEffects.BoatDiscovery)) return true;
 	if (flags[kFLAGS.FOUND_CATHEDRAL] == 1) return true;
 	if (dungeonFound()) return true;
 	if (farmFound()) return true;
 	if (flags[kFLAGS.OWCA_UNLOCKED] == 1) return true;
-	if (player.hasStatusAffect(StatusAffects.HairdresserMeeting)) return true;
-	if (player.statusAffectv1(StatusAffects.TelAdre) >= 1) return true;
+	if (player.hasStatusEffect(StatusEffects.HairdresserMeeting)) return true;
+	if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) return true;
 	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) return true;
 	if (flags[kFLAGS.MET_MINERVA] >= 4) return true;
 	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) return true;*/
@@ -2246,13 +2246,13 @@ private function placesKnown():Boolean { //Returns true as soon as any known pla
 public function placesCount():int {
 	var places:int = 0;
 	if (flags[kFLAGS.BAZAAR_ENTERED] > 0) places++;
-	if (player.hasStatusAffect(StatusAffects.BoatDiscovery)) places++;
+	if (player.hasStatusEffect(StatusEffects.BoatDiscovery)) places++;
 	if (flags[kFLAGS.FOUND_CATHEDRAL] > 0) places++;
 	if (flags[kFLAGS.FACTORY_FOUND] >= 0 || flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0 || flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) places++;
 	if (farmFound()) places++; 
 	if (flags[kFLAGS.OWCA_UNLOCKED] > 0) places++;
-	if (player.hasStatusAffect(StatusAffects.HairdresserMeeting)) places++;
-	if (player.statusAffectv1(StatusAffects.TelAdre) >= 1) places++;
+	if (player.hasStatusEffect(StatusEffects.HairdresserMeeting)) places++;
+	if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) places++;
 	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) places++;
 	if (flags[kFLAGS.MET_MINERVA] >= 4) places++;
 	if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0) places++;
@@ -2274,9 +2274,9 @@ public function places():Boolean {
 	//Build menu
 	menu();
 	if (dungeonFound()) addButton(0, "Dungeons", dungeons, null, null, null, "Delve into dungeons.");
-	if (player.hasStatusAffect(StatusAffects.BoatDiscovery)) addButton(3, "Boat", kGAMECLASS.boat.boatExplore, null, null, null, "Get on the boat and explore the lake. \n\nRecommended level: 12");
+	if (player.hasStatusEffect(StatusEffects.BoatDiscovery)) addButton(3, "Boat", kGAMECLASS.boat.boatExplore, null, null, null, "Get on the boat and explore the lake. \n\nRecommended level: 12");
 	
-	if (player.statusAffectv1(StatusAffects.TelAdre) >= 1) addButton(5, "Tel'Adre", kGAMECLASS.telAdre.telAdreMenu, null, null, null, "Visit the city of Tel'Adre in desert, easily recognized by the massive tower.");
+	if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) addButton(5, "Tel'Adre", kGAMECLASS.telAdre.telAdreMenu, null, null, null, "Visit the city of Tel'Adre in desert, easily recognized by the massive tower.");
 	if (flags[kFLAGS.BAZAAR_ENTERED] > 0) addButton(6, "Bazaar", kGAMECLASS.bazaar.enterTheBazaar, null, null, null, "Visit the Bizarre Bazaar where the demons and corrupted beings hang out.");
 	if (flags[kFLAGS.OWCA_UNLOCKED] == 1) addButton(7, "Owca", kGAMECLASS.owca.gangbangVillageStuff, null, null, null, "Visit the sheep village of Owca, known for its pit where a person is hung on the pole weekly to be gang-raped by the demons.");
 	
@@ -2296,7 +2296,7 @@ private function placesPage2():void {
 	}
 	if (farmFound()) addButton(1, "Farm", kGAMECLASS.farm.farmExploreEncounter, null, null, null, "Visit Whitney's farm.");
 	if (flags[kFLAGS.AMILY_VILLAGE_ACCESSIBLE] > 0) addButton(2, "Town Ruins", kGAMECLASS.amilyScene.exploreVillageRuin, null, null, null, "Visit the village ruins. \n\nRecommended level: 12");
-	if (player.hasStatusAffect(StatusAffects.HairdresserMeeting)) addButton(3, "Salon", kGAMECLASS.mountain.salon.salonGreeting, null, null, null, "Visit the salon for hair services.");
+	if (player.hasStatusEffect(StatusEffects.HairdresserMeeting)) addButton(3, "Salon", kGAMECLASS.mountain.salon.salonGreeting, null, null, null, "Visit the salon for hair services.");
 
 	if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0) addButton(5, "Shrine", kGAMECLASS.kitsuneScene.kitsuneShrine, null, null, null, "Visit the kitsune shrine in the deepwoods.");
 	if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(6, "Oasis Tower", kGAMECLASS.highMountains.minervaScene.encounterMinerva, null, null, null, "Visit the ruined tower in the high mountains where Minerva resides.");
@@ -2330,25 +2330,25 @@ private function dungeons():void {
 
 private function exgartuanCampUpdate():void {
 	//Update Exgartuan stuff
-	if(player.hasStatusAffect(StatusAffects.Exgartuan))
+	if(player.hasStatusEffect(StatusEffects.Exgartuan))
 	{
-		trace("EXGARTUAN V1: " + player.statusAffectv1(StatusAffects.Exgartuan) + " V2: " + player.statusAffectv2(StatusAffects.Exgartuan));
+		trace("EXGARTUAN V1: " + player.statusEffectv1(StatusEffects.Exgartuan) + " V2: " + player.statusEffectv2(StatusEffects.Exgartuan));
 		//if too small dick, remove him
-		if(player.statusAffectv1(StatusAffects.Exgartuan) == 1 && (player.cockArea(0) < 100 || player.cocks.length == 0))
+		if(player.statusEffectv1(StatusEffects.Exgartuan) == 1 && (player.cockArea(0) < 100 || player.cocks.length == 0))
 		{
 			clearOutput();
 			outputText("<b>You suddenly feel the urge to urinate, and stop over by some bushes.  It takes wayyyy longer than normal, and once you've finished, you realize you're alone with yourself for the first time in a long time.", false);
 			if(player.hasCock()) outputText("  Perhaps you got too small for Exgartuan to handle?</b>\n", false);
 			else outputText("  It looks like the demon didn't want to stick around without your manhood.</b>\n", false);
-			player.removeStatusAffect(StatusAffects.Exgartuan);
+			player.removeStatusEffect(StatusEffects.Exgartuan);
 			awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE, true);
 		}
 		//Tit removal
-		else if(player.statusAffectv1(StatusAffects.Exgartuan) == 2 && player.biggestTitSize() < 12)
+		else if(player.statusEffectv1(StatusEffects.Exgartuan) == 2 && player.biggestTitSize() < 12)
 		{
 			clearOutput();
 			outputText("<b>Black milk dribbles from your " + nippleDescript(0) + ".  It immediately dissipates into the air, leaving you feeling alone.  It looks like you became too small for Exgartuan!\n</b>", false);
-			player.removeStatusAffect(StatusAffects.Exgartuan);
+			player.removeStatusEffect(StatusEffects.Exgartuan);
 		}		
 	}
 	doNext(playerMenu);
@@ -2787,59 +2787,59 @@ public function getCampPopulation():int {
 
 private function fixFlags():void {
 	//Marae
-	if (player.hasStatusAffect(StatusAffects.MetMarae)) {
+	if (player.hasStatusEffect(StatusEffects.MetMarae)) {
 		flags[kFLAGS.MET_MARAE] = 1
-		player.removeStatusAffect(StatusAffects.MetMarae);		
+		player.removeStatusEffect(StatusEffects.MetMarae);
 	}
-	if (player.hasStatusAffect(StatusAffects.MaraesQuestStart)) {
+	if (player.hasStatusEffect(StatusEffects.MaraesQuestStart)) {
 		flags[kFLAGS.MARAE_QUEST_START] = 1
-		player.removeStatusAffect(StatusAffects.MaraesQuestStart);
+		player.removeStatusEffect(StatusEffects.MaraesQuestStart);
 	}
-	if (player.hasStatusAffect(StatusAffects.MaraeComplete)) {
+	if (player.hasStatusEffect(StatusEffects.MaraeComplete)) {
 		flags[kFLAGS.MARAE_QUEST_COMPLETE] = 1
-		player.removeStatusAffect(StatusAffects.MaraeComplete);		
+		player.removeStatusEffect(StatusEffects.MaraeComplete);
 	}
-	if (player.hasStatusAffect(StatusAffects.MaraesLethicite)) {
+	if (player.hasStatusEffect(StatusEffects.MaraesLethicite)) {
 		player.createKeyItem("Marae's Lethicite", 3, 0, 0, 0);
-		player.removeStatusAffect(StatusAffects.MaraesLethicite);
+		player.removeStatusEffect(StatusEffects.MaraesLethicite);
 	}
 	//Factory Demons
-	if (player.hasStatusAffect(StatusAffects.FactorySuccubusDefeated)) {
+	if (player.hasStatusEffect(StatusEffects.FactorySuccubusDefeated)) {
 		flags[kFLAGS.FACTORY_SUCCUBUS_DEFEATED] = 1;
-		player.removeStatusAffect(StatusAffects.FactorySuccubusDefeated);
+		player.removeStatusEffect(StatusEffects.FactorySuccubusDefeated);
 	}
-	if (player.hasStatusAffect(StatusAffects.FactoryIncubusDefeated)) {
+	if (player.hasStatusEffect(StatusEffects.FactoryIncubusDefeated)) {
 		flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] = 1;
-		player.removeStatusAffect(StatusAffects.FactoryIncubusDefeated);
+		player.removeStatusEffect(StatusEffects.FactoryIncubusDefeated);
 	}
-	if (player.hasStatusAffect(StatusAffects.FactoryOmnibusDefeated)) {
+	if (player.hasStatusEffect(StatusEffects.FactoryOmnibusDefeated)) {
 		flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] = 1;
-		player.removeStatusAffect(StatusAffects.FactoryOmnibusDefeated);
+		player.removeStatusEffect(StatusEffects.FactoryOmnibusDefeated);
 	}
 	//Factory Variables
-	if (player.hasStatusAffect(StatusAffects.FoundFactory)) {
+	if (player.hasStatusEffect(StatusEffects.FoundFactory)) {
 		flags[kFLAGS.FACTORY_FOUND] = 1;
-		player.removeStatusAffect(StatusAffects.FoundFactory);
+		player.removeStatusEffect(StatusEffects.FoundFactory);
 	}
-	if (player.hasStatusAffect(StatusAffects.IncubusBribed)) {
+	if (player.hasStatusEffect(StatusEffects.IncubusBribed)) {
 		flags[kFLAGS.FACTORY_INCUBUS_BRIBED] = 1;
-		player.removeStatusAffect(StatusAffects.IncubusBribed);
+		player.removeStatusEffect(StatusEffects.IncubusBribed);
 	}
-	if (player.hasStatusAffect(StatusAffects.DungeonShutDown)) {
+	if (player.hasStatusEffect(StatusEffects.DungeonShutDown)) {
 		flags[kFLAGS.FACTORY_SHUTDOWN] = 1;
-		player.removeStatusAffect(StatusAffects.DungeonShutDown);
+		player.removeStatusEffect(StatusEffects.DungeonShutDown);
 	}
-	if (player.hasStatusAffect(StatusAffects.FactoryOverload)) {
+	if (player.hasStatusEffect(StatusEffects.FactoryOverload)) {
 		flags[kFLAGS.FACTORY_SHUTDOWN] = 2;
-		player.removeStatusAffect(StatusAffects.FactoryOverload);
+		player.removeStatusEffect(StatusEffects.FactoryOverload);
 	}
-	if (player.hasStatusAffect(StatusAffects.TakenLactaid)) {
-		flags[kFLAGS.FACTORY_TAKEN_LACTAID] = 5 - (player.statusAffectv1(StatusAffects.TakenLactaid))
-		player.removeStatusAffect(StatusAffects.TakenLactaid);
+	if (player.hasStatusEffect(StatusEffects.TakenLactaid)) {
+		flags[kFLAGS.FACTORY_TAKEN_LACTAID] = 5 - (player.statusEffectv1(StatusEffects.TakenLactaid))
+		player.removeStatusEffect(StatusEffects.TakenLactaid);
 	}
-	if (player.hasStatusAffect(StatusAffects.TakenGroPlus)) {
-		flags[kFLAGS.FACTORY_TAKEN_GROPLUS] = 5 - (player.statusAffectv1(StatusAffects.TakenGroPlus))
-		player.removeStatusAffect(StatusAffects.TakenGroPlus);
+	if (player.hasStatusEffect(StatusEffects.TakenGroPlus)) {
+		flags[kFLAGS.FACTORY_TAKEN_GROPLUS] = 5 - (player.statusEffectv1(StatusEffects.TakenGroPlus))
+		player.removeStatusEffect(StatusEffects.TakenGroPlus);
 	}
 	if (kGAMECLASS.dungeons.checkPhoenixTowerClear()) flags[kFLAGS.CLEARED_HEL_TOWER] = 1;
 }
@@ -2876,10 +2876,10 @@ private function promptSaveUpdate():void {
 	}
 	if (flags[kFLAGS.MOD_SAVE_VERSION] == 4) {
 		flags[kFLAGS.MOD_SAVE_VERSION] = 5;
-		if (flags[kFLAGS.KELT_KILLED] > 0 && player.statusAffectv1(StatusAffects.Kelt) <= 0) {
+		if (flags[kFLAGS.KELT_KILLED] > 0 && player.statusEffectv1(StatusEffects.Kelt) <= 0) {
 			clearOutput();
 			outputText("Due to a bug where your bow skill got reset after you've slain Kelt, your bow skill got reset. Fortunately, this is now fixed. As a compensation, your bow skill is now instantly set to 100!");
-			if (player.statusAffectv1(StatusAffects.Kelt) <= 0) player.createStatusAffect(StatusAffects.Kelt, 100, 0, 0, 0);
+			if (player.statusEffectv1(StatusEffects.Kelt) <= 0) player.createStatusEffect(StatusEffects.Kelt, 100, 0, 0, 0);
 			doNext(doCamp);
 			return;
 		}
@@ -3232,7 +3232,7 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.LETHICE_DEFEATED] > 0) awardAchievement("Demon Slayer", kACHIEVEMENTS.STORY_FINALBOSS);
 	
 	//Zones
-	if (player.exploredForest > 0 && player.exploredLake > 0 && player.exploredDesert > 0 && player.exploredMountain > 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0 && flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0 && player.hasStatusAffect(StatusAffects.ExploredDeepwoods) && flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0 && flags[kFLAGS.BOG_EXPLORED] > 0) awardAchievement("Explorer", kACHIEVEMENTS.ZONE_EXPLORER);
+	if (player.exploredForest > 0 && player.exploredLake > 0 && player.exploredDesert > 0 && player.exploredMountain > 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0 && flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0 && player.hasStatusEffect(StatusEffects.ExploredDeepwoods) && flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0 && flags[kFLAGS.BOG_EXPLORED] > 0) awardAchievement("Explorer", kACHIEVEMENTS.ZONE_EXPLORER);
 	if (placesCount() >= 10) awardAchievement("Sightseer", kACHIEVEMENTS.ZONE_SIGHTSEER);
 	if (player.explored >= 1) awardAchievement("Where am I?", kACHIEVEMENTS.ZONE_WHERE_AM_I);
 	if (player.exploredDesert >= 100) awardAchievement("Dehydrated", kACHIEVEMENTS.ZONE_DEHYDRATED);
@@ -3245,15 +3245,15 @@ private function updateAchievements():void {
 	if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] >= 100) awardAchievement("Frozen", kACHIEVEMENTS.ZONE_FROZEN);
 	if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] >= 100) awardAchievement("Roasted", kACHIEVEMENTS.ZONE_ROASTED);
 	
-	if (player.statusAffectv1(StatusAffects.ExploredDeepwoods) >= 100) awardAchievement("We Need to Go Deeper", kACHIEVEMENTS.ZONE_WE_NEED_TO_GO_DEEPER);
+	if (player.statusEffectv1(StatusEffects.ExploredDeepwoods) >= 100) awardAchievement("We Need to Go Deeper", kACHIEVEMENTS.ZONE_WE_NEED_TO_GO_DEEPER);
 	if (flags[kFLAGS.DISCOVERED_BEACH] >= 100) awardAchievement("Sunburned", kACHIEVEMENTS.ZONE_SUNBURNED);
 	if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] >= 100) awardAchievement("Light-headed", kACHIEVEMENTS.ZONE_LIGHT_HEADED);
 	if (flags[kFLAGS.BOG_EXPLORED] >= 100) awardAchievement("All murky", kACHIEVEMENTS.ZONE_ALL_MURKY);
 	if (flags[kFLAGS.DISCOVERED_OCEAN] >= 100) awardAchievement("Sea-Legs", kACHIEVEMENTS.ZONE_SAILOR);
 	if (flags[kFLAGS.DISCOVERED_DEEP_SEA] >= 100) awardAchievement("Diver", kACHIEVEMENTS.ZONE_DIVER);
 	
-	if (player.statusAffectv1(StatusAffects.BoatDiscovery) >= 15) awardAchievement("Sailor", kACHIEVEMENTS.ZONE_SEA_LEGS);
-	if (player.statusAffectv1(StatusAffects.MetWhitney) >= 30) awardAchievement("Farmer", kACHIEVEMENTS.ZONE_FARMER);
+	if (player.statusEffectv1(StatusEffects.BoatDiscovery) >= 15) awardAchievement("Sailor", kACHIEVEMENTS.ZONE_SEA_LEGS);
+	if (player.statusEffectv1(StatusEffects.MetWhitney) >= 30) awardAchievement("Farmer", kACHIEVEMENTS.ZONE_FARMER);
 	if (flags[kFLAGS.AMILY_VILLAGE_EXPLORED] >= 15) awardAchievement("Archaeologist", kACHIEVEMENTS.ZONE_ARCHAEOLOGIST);
 	
 	//Levels
@@ -3332,10 +3332,10 @@ private function updateAchievements():void {
 	if (player.gems >= 1000000) awardAchievement("Millionaire", kACHIEVEMENTS.WEALTH_MILLIONAIRE);
 	
 	//Combat
-	if (player.hasStatusAffect(StatusAffects.KnowsCharge) && player.hasStatusAffect(StatusAffects.KnowsChargeA) && player.hasStatusAffect(StatusAffects.KnowsBlind) && player.hasStatusAffect(StatusAffects.KnowsWhitefire) && player.hasStatusAffect(StatusAffects.KnowsBlizzard) && player.hasStatusAffect(StatusAffects.KnowsLightningBolt) ) awardAchievement("Gandalf", kACHIEVEMENTS.COMBAT_GANDALF);
-	if (player.hasStatusAffect(StatusAffects.KnowsArouse) && player.hasStatusAffect(StatusAffects.KnowsHeal) && player.hasStatusAffect(StatusAffects.KnowsMight) && player.hasStatusAffect(StatusAffects.KnowsBlink) && player.hasStatusAffect(StatusAffects.KnowsIceSpike) && player.hasStatusAffect(StatusAffects.KnowsDarknessShard) ) awardAchievement("Sauron", kACHIEVEMENTS.COMBAT_SAURON);
-	if (player.hasStatusAffect(StatusAffects.KnowsCharge) && player.hasStatusAffect(StatusAffects.KnowsChargeA) && player.hasStatusAffect(StatusAffects.KnowsBlind) && player.hasStatusAffect(StatusAffects.KnowsWhitefire) && player.hasStatusAffect(StatusAffects.KnowsBlizzard) && player.hasStatusAffect(StatusAffects.KnowsArouse) && player.hasStatusAffect(StatusAffects.KnowsHeal) && player.hasStatusAffect(StatusAffects.KnowsMight) &&
-	player.hasStatusAffect(StatusAffects.KnowsBlink) && player.hasStatusAffect(StatusAffects.KnowsIceSpike) && player.hasStatusAffect(StatusAffects.KnowsLightningBolt) && player.hasStatusAffect(StatusAffects.KnowsDarknessShard) ) awardAchievement("Merlin", kACHIEVEMENTS.COMBAT_WIZARD);
+	if (player.hasStatusEffect(StatusEffects.KnowsCharge) && player.hasStatusEffect(StatusEffects.KnowsChargeA) && player.hasStatusEffect(StatusEffects.KnowsBlind) && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && player.hasStatusEffect(StatusEffects.KnowsBlizzard) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt) ) awardAchievement("Gandalf", kACHIEVEMENTS.COMBAT_GANDALF);
+	if (player.hasStatusEffect(StatusEffects.KnowsArouse) && player.hasStatusEffect(StatusEffects.KnowsHeal) && player.hasStatusEffect(StatusEffects.KnowsMight) && player.hasStatusEffect(StatusEffects.KnowsBlink) && player.hasStatusEffect(StatusEffects.KnowsIceSpike) && player.hasStatusEffect(StatusEffects.KnowsDarknessShard) ) awardAchievement("Sauron", kACHIEVEMENTS.COMBAT_SAURON);
+	if (player.hasStatusEffect(StatusEffects.KnowsCharge) && player.hasStatusEffect(StatusEffects.KnowsChargeA) && player.hasStatusEffect(StatusEffects.KnowsBlind) && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && player.hasStatusEffect(StatusEffects.KnowsBlizzard) && player.hasStatusEffect(StatusEffects.KnowsArouse) && player.hasStatusEffect(StatusEffects.KnowsHeal) && player.hasStatusEffect(StatusEffects.KnowsMight) &&
+		player.hasStatusEffect(StatusEffects.KnowsBlink) && player.hasStatusEffect(StatusEffects.KnowsIceSpike) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt) && player.hasStatusEffect(StatusEffects.KnowsDarknessShard) ) awardAchievement("Merlin", kACHIEVEMENTS.COMBAT_WIZARD);
 	if (flags[kFLAGS.SPELLS_CAST] >= 1 ) awardAchievement("Are you a Wizard?", kACHIEVEMENTS.COMBAT_ARE_YOU_A_WIZARD);
 	
 	//Realistic

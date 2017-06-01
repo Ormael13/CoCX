@@ -255,7 +255,7 @@ private function alraunezeMeYes0():void {
 		player.cocks[2].cockType = CockTypesEnum.STAMEN;
 		player.cocks[3].cockType = CockTypesEnum.STAMEN;
 	}
-	if (!player.hasStatusAffect(StatusAffects.AlrauneFlower)) player.createStatusAffect(StatusAffects.AlrauneFlower,0,0,0,0);
+	if (!player.hasStatusEffect(StatusEffects.AlrauneFlower)) player.createStatusEffect(StatusEffects.AlrauneFlower,0,0,0,0);
 	if (player.wingType == WING_TYPE_PLANT) player.wingType = WING_TYPE_NONE;
 	player.lowerBody = LOWER_BODY_TYPE_PLANT_FLOWER;
 	player.legCount = 12;
@@ -319,7 +319,7 @@ public function winAgainstMarae():void {
 		{
 			outputText("\n\n<b>Did you just punch out Cthulhu? Or in this case, Marae?</b>\n\n", false);
 		}
-		if (player.hasStatusAffect(StatusAffects.KnowsWhitefire) || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0)
+		if (player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0)
 		{
 			outputText("You summon your magical fire and finish off Marae for the last time. You can hear her screaming as she's withering and shriveling up. While she's on fire, you turn your attention elsewhere.", false);
 		}
@@ -371,7 +371,7 @@ private function maraeBadEnd():void {
 	outputText(".  She giggles and presses your face into her one of her verdant nipples.  You open your mouth to accept the purplish-green bud, licking and suckling it, encouraging her sweet sap to flow into your hungry mouth.  She gushes fluids and pulls you tightly against her tits, crushing you with soft flesh.\n\n", false);
 
 	outputText("The sap inside you makes your throat and belly tingle warmly, as if you had taken a strong drink.   Her milk-sap flows so quickly that you have to gulp it down to keep up.  Tiny burps escape your mouth every now and then as you work to gulp down the tainted treat.  You feel happy and secure, nestled in the bosom of a lust goddess.  ", false);
-	if(player.statusAffectv3(StatusAffects.Marble) > 0) outputText("Any thought or need to drink Marble's milk vanishes from your mind and body.  ", false);
+	if(player.statusEffectv3(StatusEffects.Marble) > 0) outputText("Any thought or need to drink Marble's milk vanishes from your mind and body.  ", false);
 	outputText("Foggy euphoria seems to float into your mind, making it difficult to think of anything but emptying the nipple in front of you.   You feel the last few drops splash on your tongue before unnatural strength breaks the seal, yanking you away and forcing a fresh dripping tit into your lips.\n\n", false);
 
 	if(player.cocks.length == 0) {
@@ -407,7 +407,7 @@ private function maraeBadEnd():void {
 	outputText("You don't really know what's going on anymore.  You're leaning against a tree while your crotch is forcefully double-teaming both of a goddess' holes.  You're too full of warmth and arousal to do anything about it, so you slump down and enjoy it.  Marae cries and moans like a bitch in heat, clearly enjoying the two wriggling tendrils working her over.  Sap leaks from her nipples, and a few spare tentacles immediately latch on, their tips forming into twisted lips.  You can <b>taste</b> the flavor... with your tentacles.  The fog in your mind thickens, and you squeeze another tentacle into her ass without thinking about it.   One more erupts from the bundle at your crotch, and latches onto the goddess' clit, locking her in a state of near-constant orgasm.   Her orgasms milk your cocks with violent muscle contracts, actually managing to pull the member buried inside her through her cervix and into her womb.  It's too much and you start to cum, blacking out from the intensity of it.\n\n", false);
 	outputText("<b>Some time passes...</b>\n\n", false);
 	outputText("You're still on the island with Marae impaled on two of the wriggling monstrosities you call your cocks.    You haven't pulled free in days, but why would you?  Your bodies are made for each other, a pile of wriggling fuckmeat with holes that drink your cum like the desert drinks water, and a once-hero who lives to sate his mass of seething tentacles.   The two of you are two halves of the same puzzle, locked together in an endless orgy.  You fondly remember watching the shining liquid that was once your soul drip from the wet folds of her flower-petals, crystallizing into a tiny rock much smaller than Marae's own.", false);
-	if(player.hasStatusAffect(StatusAffects.CampMarble)) outputText("\n\nOn the shore, Marble looks out on the lake, wondering what happened to the one whom she loved.", false);
+	if(player.hasStatusEffect(StatusEffects.CampMarble)) outputText("\n\nOn the shore, Marble looks out on the lake, wondering what happened to the one whom she loved.", false);
 	getGame().gameOver();
 }
 

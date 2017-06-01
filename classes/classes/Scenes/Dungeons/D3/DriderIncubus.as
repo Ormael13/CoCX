@@ -3,11 +3,11 @@ package classes.Scenes.Dungeons.D3
 	import classes.Monster;
 	import classes.Appearance;
 	import classes.Scenes.Areas.Swamp.AbstractSpiderMorph;
-	import classes.StatusAffects;
+	import classes.StatusEffects;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.CockTypesEnum;
-	import classes.StatusAffects;
+	import classes.StatusEffects;
 	import classes.PerkLib;
 
 	public class DriderIncubus extends AbstractSpiderMorph
@@ -133,7 +133,7 @@ package classes.Scenes.Dungeons.D3
 			else
 			{
 				var opts:Array = [arouseSpell, arouseSpell];
-				if (!player.hasStatusAffect(StatusAffects.TaintedMind) && !_seenResolute) opts.push(taintedMind);
+				if (!player.hasStatusEffect(StatusEffects.TaintedMind) && !_seenResolute) opts.push(taintedMind);
 				if (!_seenResolute) opts.push(purpleHaze);
 				opts[rand(opts.length)]();
 			}
@@ -215,15 +215,15 @@ package classes.Scenes.Dungeons.D3
 			var amount:Number;
 			
 			//Inflicts venom that reduces strength.
-			if (player.hasStatusAffect(StatusAffects.Stunned) || (player.spe <= 1 && player.statusAffectv1(StatusAffects.Web) >= 2))
+			if (player.hasStatusEffect(StatusEffects.Stunned) || (player.spe <= 1 && player.statusEffectv1(StatusEffects.Web) >= 2))
 			{
-				if (player.hasStatusAffect(StatusAffects.DriderIncubusVenom))
+				if (player.hasStatusEffect(StatusEffects.DriderIncubusVenom))
 				{
-					player.changeStatusValue(StatusAffects.DriderIncubusVenom, 1, 5);
+					player.changeStatusValue(StatusEffects.DriderIncubusVenom, 1, 5);
 				}
 				else
 				{
-					player.createStatusAffect(StatusAffects.DriderIncubusVenom, 5, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.DriderIncubusVenom, 5, 0, 0, 0);
 				}					
 				
 				amount = 30;
@@ -235,7 +235,7 @@ package classes.Scenes.Dungeons.D3
 				
 				player.str -= amount;
 				showStatDown('str');
-				player.addStatusValue(StatusAffects.DriderIncubusVenom, 2, amount);
+				player.addStatusValue(StatusEffects.DriderIncubusVenom, 2, amount);
 					
 				//Alternate if PC cannot move
 				outputText("Taking his time, the arachnid demon bares his fangs, easily biting deeply into you. His tongue slides sensually around the wounds as he pumps you full of venom, tasting your fear and desperation. You wince while the venom robs you of your strength.");
@@ -262,13 +262,13 @@ package classes.Scenes.Dungeons.D3
 					
 					outputText("<i>“I do love watching you struggle.”</i> He flashes a crooked smile.");
 					
-					if (player.hasStatusAffect(StatusAffects.DriderIncubusVenom))
+					if (player.hasStatusEffect(StatusEffects.DriderIncubusVenom))
 					{
-						player.changeStatusValue(StatusAffects.DriderIncubusVenom, 1, 5);
+						player.changeStatusValue(StatusEffects.DriderIncubusVenom, 1, 5);
 					}
 					else
 					{
-						player.createStatusAffect(StatusAffects.DriderIncubusVenom, 5, 0, 0, 0);
+						player.createStatusEffect(StatusEffects.DriderIncubusVenom, 5, 0, 0, 0);
 					}					
 					
 					amount = 30;
@@ -280,7 +280,7 @@ package classes.Scenes.Dungeons.D3
 					
 					player.str -= amount;
 					showStatDown('str');
-					player.addStatusValue(StatusAffects.DriderIncubusVenom, 2, amount);
+					player.addStatusValue(StatusEffects.DriderIncubusVenom, 2, amount);
 				}				
 			}
 		}
@@ -349,7 +349,7 @@ package classes.Scenes.Dungeons.D3
 					if (player.findPerk(PerkLib.Resolute) < 0)
 					{
 						outputText(" <b>You’re left stunned by the blow!</b> It’ll be a moment before you can regain your wits.");
-						player.createStatusAffect(StatusAffects.Stunned, 0, 0, 0, 0);
+						player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 					}
 					
 					outputText(" (" + damage + ")");
@@ -421,7 +421,7 @@ package classes.Scenes.Dungeons.D3
 			// 9999
 			if (player.cor <= 33) outputText(" What did he mean about fighting like a demon?");
 			
-			player.createStatusAffect(StatusAffects.TaintedMind, 4, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.TaintedMind, 4, 0, 0, 0);
 		}
 		
 		public function taintedMindAttackAttempt():void
@@ -447,7 +447,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				outputText(" The intensity overwhelms your ability to act, arousing and stunning you.");
 				game.dynStats("lus", (player.lib / 15 + player.cor / 15) + 15);
-				player.createStatusAffect(StatusAffects.Stunned, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 			}
 		}
 		
@@ -470,8 +470,8 @@ package classes.Scenes.Dungeons.D3
 				//Fail
 				outputText(" You concentrate to try and throw it off, but he overwhelms your mental defenses. Clouds of swirling pink filled with unsubtle erotic silhouettes fill your vision, effectively blinding you!");
 				game.dynStats("lus", 25);
-				player.createStatusAffect(StatusAffects.PurpleHaze, 2 + rand(2), 0, 0, 0);
-				player.createStatusAffect(StatusAffects.Blind, player.statusAffectv1(StatusAffects.PurpleHaze), 0, 0, 0);
+				player.createStatusEffect(StatusEffects.PurpleHaze, 2 + rand(2), 0, 0, 0);
+				player.createStatusEffect(StatusEffects.Blind, player.statusEffectv1(StatusEffects.PurpleHaze), 0, 0, 0);
 			}
 		}
 		

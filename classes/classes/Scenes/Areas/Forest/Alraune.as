@@ -11,13 +11,13 @@ package classes.Scenes.Areas.Forest
 	public class Alraune extends Monster
 	{
 		public function trapLevel(adjustment:Number = 0):Number {
-			if(!hasStatusAffect(StatusAffects.Level)) createStatusAffect(StatusAffects.Level,4,0,0,0);
+			if(!hasStatusEffect(StatusEffects.Level)) createStatusEffect(StatusEffects.Level,4,0,0,0);
 			if(adjustment != 0) {
-				addStatusValue(StatusAffects.Level,1,adjustment);
-				if(statusAffectv1(StatusAffects.Level) < 1) changeStatusValue(StatusAffects.Level,1,1);
-				if(statusAffectv1(StatusAffects.Level) > 4) changeStatusValue(StatusAffects.Level,1,4);
+				addStatusValue(StatusEffects.Level,1,adjustment);
+				if(statusEffectv1(StatusEffects.Level) < 1) changeStatusValue(StatusEffects.Level,1,1);
+				if(statusEffectv1(StatusEffects.Level) > 4) changeStatusValue(StatusEffects.Level,1,4);
 			}
-			return statusAffectv1(StatusAffects.Level);
+			return statusEffectv1(StatusEffects.Level);
 		}
 		
 		public function alrauneWait():void {
@@ -32,14 +32,14 @@ package classes.Scenes.Areas.Forest
 			outputText("The alraune giggles as she unleashes a thick cloud of pollen in your general direction.\n\n");
 			outputText("\"<i>Just give in to me. I will make it so pleasurable for you.</i>\"\n\n");
 			outputText("There is no way you will be able to not breathe it in and you feel your desire rise as the insidious aphrodisiac does its dirty work.\n\n");
-			createStatusAffect(StatusAffects.LustAura, 0, 0, 0, 0);
+			createStatusEffect(StatusEffects.LustAura, 0, 0, 0, 0);
 		}
 		
 		public function alrauneStrangulate():void {
 			outputText("The Alraune’s vines suddenly wrap tight around your neck and strangle you, preventing you from pronouncing any incantations. The plant woman gives you an annoyed glare.");
 			outputText("\"<i>I’m done with your magic. Be a good " + player.mf("boy", "girl") + " and just give in.</i>\"");
-			player.removeStatusAffect(StatusAffects.CastedSpell);
-			player.createStatusAffect(StatusAffects.Sealed, 2, 10, 0, 0);
+			player.removeStatusEffect(StatusEffects.CastedSpell);
+			player.createStatusEffect(StatusEffects.Sealed, 2, 10, 0, 0);
 		}
 		
 		public function alrauneTeaseAttack():void {
@@ -59,21 +59,21 @@ package classes.Scenes.Areas.Forest
 		
 		override protected function performCombatAction():void
 		{
-			if (hasStatusAffect(StatusAffects.Level)) {
-				if (!hasStatusAffect(StatusAffects.Stunned) && player.hasStatusAffect(StatusAffects.CastedSpell)) alrauneStrangulate();
+			if (hasStatusEffect(StatusEffects.Level)) {
+				if (!hasStatusEffect(StatusEffects.Stunned) && player.hasStatusEffect(StatusEffects.CastedSpell)) alrauneStrangulate();
 				else {
 					var choice:Number = rand(2);
 					if (choice == 0) alrauneTeaseAttack();
 					if (choice == 1) {
-						if (!hasStatusAffect(StatusAffects.LustAura)) alraunePollenCloud();
+						if (!hasStatusEffect(StatusEffects.LustAura)) alraunePollenCloud();
 						else alrauneTeaseAttack();
 					}
 				}
-				if (!hasStatusAffect(StatusAffects.Climbed)) {
+				if (!hasStatusEffect(StatusEffects.Climbed)) {
 					outputText("\n\nMeanwhile the vines keep pulling you toward the pitcher.");
 					trapLevel(-1);
 				}
-				else removeStatusAffect(StatusAffects.Climbed);
+				else removeStatusEffect(StatusEffects.Climbed);
 				combatRoundOver();
 			}
 			else super.performCombatAction();
@@ -127,8 +127,8 @@ package classes.Scenes.Areas.Forest
 				//	.elseDrop(useables.B_CHITN);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
-			this.createStatusAffect(StatusAffects.GenericRunDisabled, 0, 0, 0, 0);
-			createStatusAffect(StatusAffects.Level,4,0,0,0);
+			this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
+			createStatusEffect(StatusEffects.Level,4,0,0,0);
 			this.str += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 24 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 2 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

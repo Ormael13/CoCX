@@ -8,7 +8,7 @@ import classes.CockTypesEnum;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
 import classes.PerkLib;
-import classes.StatusAffects;
+import classes.StatusEffects;
 
 public class AbstractEquinum extends Consumable {
 	public function AbstractEquinum(type:Number, id:String, shortName:String, longName:String, value:Number, description:String) {
@@ -48,20 +48,20 @@ public class AbstractEquinum extends Consumable {
 		if (type == 0 && player.hasFur() && player.faceType == FACE_HORSE && player.tailType == TAIL_TYPE_HORSE && (player.lowerBody != LOWER_BODY_TYPE_HOOFED)) {
 			//WARNINGS
 			//Repeat warnings
-			if (player.hasStatusAffect(StatusAffects.HorseWarning) && rand(3) == 0) {
-				if (player.statusAffectv1(StatusAffects.HorseWarning) == 0) outputText("<b>\n\nYou feel a creeping chill down your back as your entire body shivers, as if rejecting something foreign.  Maybe you ought to cut back on the horse potions.</b>");
-				if (player.statusAffectv1(StatusAffects.HorseWarning) > 0) outputText("<b>\n\nYou wonder how many more of these you can drink before you become a horse...</b>");
-				player.addStatusValue(StatusAffects.HorseWarning, 1, 1);
+			if (player.hasStatusEffect(StatusEffects.HorseWarning) && rand(3) == 0) {
+				if (player.statusEffectv1(StatusEffects.HorseWarning) == 0) outputText("<b>\n\nYou feel a creeping chill down your back as your entire body shivers, as if rejecting something foreign.  Maybe you ought to cut back on the horse potions.</b>");
+				if (player.statusEffectv1(StatusEffects.HorseWarning) > 0) outputText("<b>\n\nYou wonder how many more of these you can drink before you become a horse...</b>");
+				player.addStatusValue(StatusEffects.HorseWarning, 1, 1);
 			}
 			//First warning
-			if (!player.hasStatusAffect(StatusAffects.HorseWarning)) {
+			if (!player.hasStatusEffect(StatusEffects.HorseWarning)) {
 				outputText("<b>\n\nWhile you drink the tasty potion, you realize how horse-like you already are, and wonder what else the potion could possibly change...</b>");
-				player.createStatusAffect(StatusAffects.HorseWarning, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.HorseWarning, 0, 0, 0, 0);
 			}
 			//Bad End
-			if (rand(4) == 0 && player.hasStatusAffect(StatusAffects.HorseWarning) && player.findPerk(PerkLib.TransformationResistance) < 0) {
+			if (rand(4) == 0 && player.hasStatusEffect(StatusEffects.HorseWarning) && player.findPerk(PerkLib.TransformationResistance) < 0) {
 				//Must have been warned first...
-				if (player.statusAffectv1(StatusAffects.HorseWarning) > 0) {
+				if (player.statusEffectv1(StatusEffects.HorseWarning) > 0) {
 					//If player has dicks check for horsedicks
 					if (player.cockTotal() > 0) {
 						//If player has horsedicks
@@ -392,7 +392,7 @@ public class AbstractEquinum extends Consumable {
 					changes++;
 				}
 			}
-			if (player.statusAffectv2(StatusAffects.Heat) < 30 && rand(2) == 0 && changes < changeLimit) {
+			if (player.statusEffectv2(StatusEffects.Heat) < 30 && rand(2) == 0 && changes < changeLimit) {
 				if (player.goIntoHeat(true)) {
 					changes++;
 				}

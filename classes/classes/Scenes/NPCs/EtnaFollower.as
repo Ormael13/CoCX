@@ -256,8 +256,8 @@ private function etnaCome2Camp():void
 {
 	clearOutput();
 	outputText("As you enter the camp with the manticore your various friends notice her and jump out of their activities to go to the pair of you.\n\n");
-	if (player.hasStatusAffect(StatusAffects.CampRathazul)) outputText("Rathazul almost drops a vial of purple liquid on the ground as he notices the manticore. \"<i>Is this what I think it is? Manticore venom is extremely potent. I could use it in alchemical concoctions, nice find! Just make sure to keep her in check...</i>\"\n\n");
-	if (player.hasStatusAffect(StatusAffects.PureCampJojo)) {
+	if (player.hasStatusEffect(StatusEffects.CampRathazul)) outputText("Rathazul almost drops a vial of purple liquid on the ground as he notices the manticore. \"<i>Is this what I think it is? Manticore venom is extremely potent. I could use it in alchemical concoctions, nice find! Just make sure to keep her in check...</i>\"\n\n");
+	if (player.hasStatusEffect(StatusEffects.PureCampJojo)) {
 		outputText("Jojo notices the manticore right away breaking into a defensive stance and reciting a few of his teachers mantra. \"<i>[name] that thing is a manticore! I seriously hope you know what you're doing. She reeks of serious demonic corruption, so make sure you meditate with me regularly.</i>\"\n\n");
 		outputText("You assure Jojo that you will and that Etna won't cause problems.\n\n");
 	}
@@ -308,7 +308,7 @@ public function etnaRapeYandere():void
 public function etnaRapeYandereBadEnd():void
 {
 	outputText("Too weak to fight or crawl your way out, you stay on the ground at the mercy of Etna. Maybe it isn’t such a bad thing. After all, she clearly loves you and if she is willing to go this far to keep you next to her, there isn’t much you can do about it. Etna will never let you leave the cave ever again and, as such, you give up on your quest in order to live with your somewhat obsessed lover. ");
-	if(player.hasStatusAffect(StatusAffects.CampMarble)) outputText("Marble comes looking for you before long, but, instead of freeing you, she decides to help the manticore to hold you there for your own good. ");
+	if(player.hasStatusEffect(StatusEffects.CampMarble)) outputText("Marble comes looking for you before long, but, instead of freeing you, she decides to help the manticore to hold you there for your own good. ");
 	outputText("Your adventure seem to have come to an end but at least you will live the rest of your life showered with love.");
 	getGame().gameOver();
 }

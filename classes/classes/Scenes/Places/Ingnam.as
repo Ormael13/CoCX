@@ -67,7 +67,7 @@ package classes.Scenes.Places
 					removeButton(4);
 				}
 				addButton(8, "Masturbate", kGAMECLASS.masturbation.masturbateMenu);
-				if ((((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.hasStatusAffect(StatusAffects.Exgartuan) && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", kGAMECLASS.masturbation.masturbateMenu);
+				if ((((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", kGAMECLASS.masturbation.masturbateMenu);
 			}
 			//Show wait/rest/sleep depending on conditions.
 			addButton(9, "Wait", kGAMECLASS.camp.doWait);
@@ -452,20 +452,20 @@ package classes.Scenes.Places
 			outputText("\n\nYou kick back and drink the beer slowly. ");
 			dynStats("lus", 20);
 			player.refillHunger(10);
-			if (!player.hasStatusAffect(StatusAffects.Drunk)) {
-				player.createStatusAffect(StatusAffects.Drunk, 2, 1, 1, 0);
+			if (!player.hasStatusEffect(StatusEffects.Drunk)) {
+				player.createStatusEffect(StatusEffects.Drunk, 2, 1, 1, 0);
 				dynStats("str", 0.1);
 				dynStats("inte", -0.5);
 				dynStats("lib", 0.25);
 			}
 			else {
-				player.addStatusValue(StatusAffects.Drunk, 2, 1);
-				if (player.statusAffectv1(StatusAffects.Drunk) < 2) player.addStatusValue(StatusAffects.Drunk, 1, 1);
-				if (player.statusAffectv2(StatusAffects.Drunk) == 2) {
+				player.addStatusValue(StatusEffects.Drunk, 2, 1);
+				if (player.statusEffectv1(StatusEffects.Drunk) < 2) player.addStatusValue(StatusEffects.Drunk, 1, 1);
+				if (player.statusEffectv2(StatusEffects.Drunk) == 2) {
 					outputText("\n\n<b>You feel a bit drunk. Maybe you should cut back on the beers?</b>");
 				}
 				//Get so drunk you end up peeing! Genderless can still urinate.
-				if (player.statusAffectv2(StatusAffects.Drunk) >= 3) {
+				if (player.statusEffectv2(StatusEffects.Drunk) >= 3) {
 					outputText("\n\nYou feel so drunk. Your vision is blurry and you realize something's not feeling right. Gasp! You have to piss like a racehorse! You stumble toward the back door and go outside. ")
 					if (player.hasVagina() && !player.hasCock()) outputText("You open up your [armor] and squat down while you release your pressure onto the ground. ");
 					else outputText("You open up your [armor] and lean against the wall using one of your arms for support while you release your pressure onto the wall. ");
@@ -473,7 +473,7 @@ package classes.Scenes.Places
 					awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE, true, true, false);
 					awardAchievement("Smashed", kACHIEVEMENTS.GENERAL_SMASHED, true, true, false);
 					outputText("\n\nIt seems to take forever but it eventually stops. You look down to see that your urine has been absorbed into the ground. You close up your [armor] and head back inside.");
-					player.removeStatusAffect(StatusAffects.Drunk);
+					player.removeStatusEffect(StatusEffects.Drunk);
 					cheatTime(1/12);
 				}
 			}

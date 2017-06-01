@@ -55,7 +55,7 @@ To better understand which function to override for monster behaviour customizat
          `handleFear()`, `handleConstricted()` methods are called. If they `return true`, said effect is ignored.
          1. Their default implementations just
             * display messages like _"your foe is stunned"_ etc;
-            * decrease statusAffect round counter by one and until it reaches zero;
+            * decrease statusEffect round counter by one and until it reaches zero;
             * `return false;` (skip turn).
     3. Somewhere here Exgartuan (if present) gets his chance to comment the situation by `game.exgartuan.exgartuanCombatUpdate()`
     4. From this point monster should decide its action and `Monster.performCombatAction()` (overrideable) is called.
@@ -63,7 +63,7 @@ To better understand which function to override for monster behaviour customizat
     5. A (evenly distributed) random action is chosen from `Monster.eAttack()` and all non-null non-zero `special`1..3.
     6. Description of `special`s was given before, supppose, `Monster.eAttack()` was called from `performCombatAction()`.
          By default:
-    7. In case the monster represents a mob, `statusAffectv1(StatusAffects.attacks)` is checked for number of attacks to perform.
+    7. In case the monster represents a mob, `statusEffectv1(StatusEffects.attacks)` is checked for number of attacks to perform.
          For each attack:
          1. An `Monster.attackSucceeded()` is called, which by default:
             1. If monster is blind, try `Monster.handleBlind()` (`true` means continue attack). Default implementation

@@ -154,7 +154,7 @@
 			createBreastRow(0);
 			this.ass.analLooseness = ANAL_LOOSENESS_LOOSE;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,40,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,40,0,0,0);
 			this.tallness = 6*12;
 			this.hipRating = HIP_RATING_BOYISH+1;
 			this.buttRating = BUTT_RATING_TIGHT;

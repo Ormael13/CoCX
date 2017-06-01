@@ -23,11 +23,11 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorBillieOptedOut():Boolean
 		{
 			var testVal:* = undefined;
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyBillie))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyBillie,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
-			testVal = player.statusAffectv1(StatusAffects.PrisonCaptorEllyBillie);
+			testVal = player.statusEffectv1(StatusEffects.PrisonCaptorEllyBillie);
 			if(testVal < 0)
 			{
 				return true;
@@ -37,30 +37,30 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorBillieMet():Number
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyBillie))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyBillie,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
-			return player.statusAffectv1(StatusAffects.PrisonCaptorEllyBillie);
+			return player.statusEffectv1(StatusEffects.PrisonCaptorEllyBillie);
 		}
 		
 		public function prisonCaptorBillieMetSet(newVal:Number):void
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyBillie))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyBillie,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyBillie,1,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyBillie,1,newVal);
 		}
 		
 		public function prisonCaptorBillieMetChange(changeVal:Number):void
 		{
 			var newVal:* = undefined;
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyBillie))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyBillie,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
-			newVal = player.statusAffectv1(StatusAffects.PrisonCaptorEllyBillie) + changeVal;
+			newVal = player.statusEffectv1(StatusEffects.PrisonCaptorEllyBillie) + changeVal;
 			if(newVal < 0)
 			{
 				newVal = 0;
@@ -69,64 +69,64 @@ package classes.Scenes.Places.Prison
 			{
 				newVal = 100;
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyBillie,1,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyBillie,1,newVal);
 		}
 		
 		public function prisonCaptorBillieHappiness():Number
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyBillie))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyBillie,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
-			return player.statusAffectv2(StatusAffects.PrisonCaptorEllyBillie);
+			return player.statusEffectv2(StatusEffects.PrisonCaptorEllyBillie);
 		}
 		
 		public function prisonCaptorBillieHappinessSet(newVal:Number):void
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyBillie))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyBillie,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyBillie,2,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyBillie,2,newVal);
 		}
 		
 		public function prisonCaptorBillieHappinessChange(changeVal:Number):void
 		{
 			var newVal:* = undefined;
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyBillie))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyBillie,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
-			newVal = player.statusAffectv2(StatusAffects.PrisonCaptorEllyBillie) + changeVal;
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyBillie,2,newVal);
+			newVal = player.statusEffectv2(StatusEffects.PrisonCaptorEllyBillie) + changeVal;
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyBillie,2,newVal);
 		}
 		
 		public function prisonCaptorBillieEvent():Number
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyBillie))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyBillie,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
-			return player.statusAffectv3(StatusAffects.PrisonCaptorEllyBillie);
+			return player.statusEffectv3(StatusEffects.PrisonCaptorEllyBillie);
 		}
 		
 		public function prisonCaptorBillieEventSet(newVal:Number):void
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyBillie))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyBillie,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyBillie,3,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyBillie,3,newVal);
 		}
 		
 		public function prisonCaptorBillieEventChange(changeVal:Number):void
 		{
 			var newVal:int = 0;
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyBillie))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyBillie,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
-			newVal = player.statusAffectv3(StatusAffects.PrisonCaptorEllyBillie) + changeVal;
+			newVal = player.statusEffectv3(StatusEffects.PrisonCaptorEllyBillie) + changeVal;
 			if(newVal < 0)
 			{
 				newVal = 0;
@@ -135,35 +135,35 @@ package classes.Scenes.Places.Prison
 			{
 				newVal = 100;
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyBillie,3,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyBillie,3,newVal);
 		}
 		
 		public function prisonCaptorBillieScratch():Number
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyBillie))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyBillie,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
-			return player.statusAffectv4(StatusAffects.PrisonCaptorEllyBillie);
+			return player.statusEffectv4(StatusEffects.PrisonCaptorEllyBillie);
 		}
 		
 		public function prisonCaptorBillieScratchSet(newVal:Number):void
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyBillie))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyBillie,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyBillie,4,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyBillie,4,newVal);
 		}
 		
 		public function prisonCaptorBillieScratchChange(changeVal:Number):void
 		{
 			var newVal:* = undefined;
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyBillie))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyBillie))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyBillie,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyBillie,0,0,0,0);
 			}
-			newVal = player.statusAffectv4(StatusAffects.PrisonCaptorEllyBillie) + changeVal;
+			newVal = player.statusEffectv4(StatusEffects.PrisonCaptorEllyBillie) + changeVal;
 			if(newVal < 0)
 			{
 				newVal = 0;
@@ -172,7 +172,7 @@ package classes.Scenes.Places.Prison
 			{
 				newVal = 100;
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyBillie,4,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyBillie,4,newVal);
 		}
 		
 		public function prisonCaptorBilliePityFuck(branchChoice:String = "choose"):void

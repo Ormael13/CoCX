@@ -987,20 +987,20 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		}
 		
 		//Set Status Array
-		for (i = 0; i < player.statusAffects.length; i++)
+		for (i = 0; i < player.statusEffects.length; i++)
 		{
 			saveFile.data.statusAffects.push([]);
-				//trace("Saveone statusAffects");
+				//trace("Saveone statusEffects");
 		}
 		//Populate Status Array
-		for (i = 0; i < player.statusAffects.length; i++)
+		for (i = 0; i < player.statusEffects.length; i++)
 		{
-			//trace("Populate One statusAffects");
-			saveFile.data.statusAffects[i].statusAffectName = player.statusAffectByIndex(i).stype.id;
-			saveFile.data.statusAffects[i].value1 = player.statusAffectByIndex(i).value1;
-			saveFile.data.statusAffects[i].value2 = player.statusAffectByIndex(i).value2;
-			saveFile.data.statusAffects[i].value3 = player.statusAffectByIndex(i).value3;
-			saveFile.data.statusAffects[i].value4 = player.statusAffectByIndex(i).value4;
+			//trace("Populate One statusEffects");
+			saveFile.data.statusAffects[i].statusAffectName = player.statusEffectByIndex(i).stype.id;
+			saveFile.data.statusAffects[i].value1 = player.statusEffectByIndex(i).value1;
+			saveFile.data.statusAffects[i].value2 = player.statusEffectByIndex(i).value2;
+			saveFile.data.statusAffects[i].value3 = player.statusEffectByIndex(i).value3;
+			saveFile.data.statusAffects[i].value4 = player.statusEffectByIndex(i).value4;
 		}
 		//Set keyItem Array
 		for (i = 0; i < player.keyItems.length; i++)
@@ -2027,17 +2027,16 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		for (i = 0; i < saveFile.data.statusAffects.length; i++)
 		{
 			if (saveFile.data.statusAffects[i].statusAffectName == "Lactation EnNumbere") continue; // ugh...
-			var stype:StatusAffectType = StatusAffectType.lookupStatusAffect(saveFile.data.statusAffects[i].statusAffectName);
+			var stype:StatusEffectType = StatusEffectType.lookupStatusAffect(saveFile.data.statusAffects[i].statusAffectName);
 			if (stype == null){
 				CoC_Settings.error("Cannot find status affect '"+saveFile.data.statusAffects[i].statusAffectName+"'");
 				continue;
 			}
-			player.createStatusAffect(stype,
+			player.createStatusEffect(stype,
 					saveFile.data.statusAffects[i].value1,
 					saveFile.data.statusAffects[i].value2,
 					saveFile.data.statusAffects[i].value3,
 					saveFile.data.statusAffects[i].value4);
-				//trace("StatusAffect " + player.statusAffect(i).stype.id + " loaded.");
 		}
 		//Make sure keyitems exist!
 		if (saveFile.data.keyItems != undefined)
@@ -2306,23 +2305,23 @@ public function unFuckSave():void
 	while (player.perkDuplicated(PerkLib.NinetailsKitsuneOfBalance)) player.removePerk(PerkLib.NinetailsKitsuneOfBalance);
 	while (player.perkDuplicated(PerkLib.KitsuneThyroidGland)) player.removePerk(PerkLib.KitsuneThyroidGland);
 	
-	if (player.hasStatusAffect(StatusAffects.KnockedBack))
+	if (player.hasStatusEffect(StatusEffects.KnockedBack))
 	{
-		player.removeStatusAffect(StatusAffects.KnockedBack);
+		player.removeStatusEffect(StatusEffects.KnockedBack);
 	}
 	
-	if (player.hasStatusAffect(StatusAffects.Tentagrappled))
+	if (player.hasStatusEffect(StatusEffects.Tentagrappled))
 	{
-		player.removeStatusAffect(StatusAffects.Tentagrappled);
+		player.removeStatusEffect(StatusEffects.Tentagrappled);
 	}
 
 	if (isNaN(model.time.minutes)) model.time.minutes = 0;
 	if (isNaN(model.time.hours)) model.time.hours = 0;
 	if (isNaN(model.time.days)) model.time.days = 0;
 
-	if (player.hasStatusAffect(StatusAffects.SlimeCraving) && player.statusAffectv4(StatusAffects.SlimeCraving) == 1) {
-		player.changeStatusValue(StatusAffects.SlimeCraving, 3, player.statusAffectv2(StatusAffects.SlimeCraving)); //Duplicate old combined strength/speed value
-		player.changeStatusValue(StatusAffects.SlimeCraving, 4, 1); //Value four indicates this tracks strength and speed separately
+	if (player.hasStatusEffect(StatusEffects.SlimeCraving) && player.statusEffectv4(StatusEffects.SlimeCraving) == 1) {
+		player.changeStatusValue(StatusEffects.SlimeCraving, 3, player.statusEffectv2(StatusEffects.SlimeCraving)); //Duplicate old combined strength/speed value
+		player.changeStatusValue(StatusEffects.SlimeCraving, 4, 1); //Value four indicates this tracks strength and speed separately
 	}
 	
 	// Fix issues with corrupt cockTypes caused by a error in the serialization code.
@@ -2436,22 +2435,22 @@ public function unFuckSave():void
 		if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] > 0) {
 			flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_TYPE]   = PregnancyStore.PREGNANCY_PLAYER;
 			flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] *= 24; //Convert pregnancy to days
-			flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]  = player.statusAffectv3(StatusAffects.Tamani);
+			flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT]  = player.statusEffectv3(StatusEffects.Tamani);
 		}
 
 		if (flags[kFLAGS.TAMANI_PREGNANCY_TYPE] != 0) return; //Must be a new format save
-		if (player.hasStatusAffect(StatusAffects.TamaniFemaleEncounter)) player.removeStatusAffect(StatusAffects.TamaniFemaleEncounter); //Wasn't used in previous code
-		if (player.hasStatusAffect(StatusAffects.Tamani)) {
-			if (player.statusAffectv1(StatusAffects.Tamani) == -500) { //This used to indicate that a player had met Tamani as a male
+		if (player.hasStatusEffect(StatusEffects.TamaniFemaleEncounter)) player.removeStatusEffect(StatusEffects.TamaniFemaleEncounter); //Wasn't used in previous code
+		if (player.hasStatusEffect(StatusEffects.Tamani)) {
+			if (player.statusEffectv1(StatusEffects.Tamani) == -500) { //This used to indicate that a player had met Tamani as a male
 				flags[kFLAGS.TAMANI_PREGNANCY_INCUBATION] = 0;
 				flags[kFLAGS.TAMANI_MET]                  = 1; //This now indicates the same thing
 			}
-			else flags[kFLAGS.TAMANI_PREGNANCY_INCUBATION] = player.statusAffectv1(StatusAffects.Tamani) * 24; //Convert pregnancy to days
-			flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] = player.statusAffectv2(StatusAffects.Tamani);
-			flags[kFLAGS.TAMANI_PREGNANCY_COUNT]     = player.statusAffectv3(StatusAffects.Tamani);
-			flags[kFLAGS.TAMANI_TIMES_IMPREGNATED]   = player.statusAffectv4(StatusAffects.Tamani);
+			else flags[kFLAGS.TAMANI_PREGNANCY_INCUBATION] = player.statusEffectv1(StatusEffects.Tamani) * 24; //Convert pregnancy to days
+			flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] = player.statusEffectv2(StatusEffects.Tamani);
+			flags[kFLAGS.TAMANI_PREGNANCY_COUNT]     = player.statusEffectv3(StatusEffects.Tamani);
+			flags[kFLAGS.TAMANI_TIMES_IMPREGNATED]   = player.statusEffectv4(StatusEffects.Tamani);
 			if (flags[kFLAGS.TAMANI_PREGNANCY_INCUBATION] > 0) flags[kFLAGS.TAMANI_PREGNANCY_TYPE] = PregnancyStore.PREGNANCY_PLAYER;
-			player.removeStatusAffect(StatusAffects.Tamani);
+			player.removeStatusEffect(StatusEffects.Tamani);
 		}
 
 		if (flags[kFLAGS.EGG_WITCH_TYPE] == PregnancyStore.PREGNANCY_BEE_EGGS || flags[kFLAGS.EGG_WITCH_TYPE] == PregnancyStore.PREGNANCY_DRIDER_EGGS) return; //Must be a new format save

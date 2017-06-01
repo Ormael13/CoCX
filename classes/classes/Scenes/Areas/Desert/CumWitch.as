@@ -19,7 +19,7 @@ package classes.Scenes.Areas.Desert
 			if(player.hasCock()) choices[choices.length] = cumMagicAttack;
 			choices[choices.length] = bukkakeAttack;
 			choices[choices.length] = cocknosisAttack;
-			if(!hasStatusAffect(StatusAffects.Shell)) {
+			if(!hasStatusEffect(StatusEffects.Shell)) {
 				choices[choices.length] = shellDefense;
 				choices[choices.length] = shellDefense;
 				choices[choices.length] = shellDefense;
@@ -103,7 +103,7 @@ package classes.Scenes.Areas.Desert
 			outputText("Touching her alabaster staff to her brow, just under the brim of her hat, the Cum Witch makes a brief incantation and fixes you with her gaze.  Her eyes flash blindingly white, and then you feel her inside you, rifling through your memories, digging up memories of your childhood, your past, and throwing them against you.  ");
 			if(player.inte/5 + rand(20) + player.level/2 < 18) {
 				outputText("She batters your consciousness with conflicting memories of your gender, utterly dazing you.  How can you fight when you can barely tell who you are anymore?");
-				player.createStatusAffect(StatusAffects.Confusion,0,0,0,0);
+				player.createStatusEffect(StatusEffects.Confusion,0,0,0,0);
 			}
 			else {
 				outputText("You parse the flood of information with mental focus and expel the intruder from your mind with a clenching of your sizable intellect.");
@@ -114,7 +114,7 @@ package classes.Scenes.Areas.Desert
 		public function shellDefense():void {
 			//*Grants immunity to all magic-based attacks for the next two turns.
 			outputText("The Cum Witch holds her staff in both hands and rotates it in a circle, chanting all the while.  Her voice rises in pitch and intensity until she's screaming out unwords of power.  With one final cry, she slams her staff down into the ground hard enough to kick up a puff of sandy dust.  It quickly settles, but the Cum Witch has some kind of glittering, reflective shield around herself now!");
-			createStatusAffect(StatusAffects.Shell,3,0,0,0);
+			createStatusEffect(StatusEffects.Shell,3,0,0,0);
 			combatRoundOver();
 		}
 
@@ -181,7 +181,7 @@ package classes.Scenes.Areas.Desert
 			this.cumMultiplier = 3;
 			this.hoursSinceCum = 20;
 			this.createVagina(false, VAGINA_WETNESS_WET, VAGINA_LOOSENESS_LOOSE);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 20, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
 			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_NORMAL;

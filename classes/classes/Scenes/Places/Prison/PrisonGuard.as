@@ -35,7 +35,7 @@ package classes.Scenes.Places.Prison
 		{
 			hideMenus();
 			clearOutput();
-			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] == 0 && player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus) <= 1)
+			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] == 0 && player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus) <= 1)
 			{
 				return prison.prisonCaptorRandomEventSounds();
 			}
@@ -161,7 +161,7 @@ package classes.Scenes.Places.Prison
 			outputText("You flip the bird to the " + guardType + " to put a warning signal that you do not want " + guardPronoun2 + " to mess with you. You WANT Elly, not some random guards messing with your body.");
 			outputText("\n\nThe " + guardType + " gets angry and storms off, leaving your cell and locking the cell door.");
 			if (flags[kFLAGS.PRISON_DOOR_UNLOCKED] > 0) flags[kFLAGS.PRISON_DOOR_UNLOCKED] = 0;
-			player.changeStatusValue(StatusAffects.PrisonRestraints, 1, 1);
+			player.changeStatusValue(StatusEffects.PrisonRestraints, 1, 1);
 			doNext(playerMenu);
 		}
 		

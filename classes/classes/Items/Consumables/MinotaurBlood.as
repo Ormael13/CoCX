@@ -7,7 +7,7 @@ import classes.CockTypesEnum;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
 import classes.PerkLib;
-import classes.StatusAffects;
+import classes.StatusEffects;
 
 public class MinotaurBlood extends Consumable {
 	public function MinotaurBlood() {
@@ -285,11 +285,11 @@ public class MinotaurBlood extends Consumable {
 		}
 
 		//Anti-masturbation status
-		if (rand(4) == 0 && changes < changeLimit && !player.hasStatusAffect(StatusAffects.Dysfunction)) {
+		if (rand(4) == 0 && changes < changeLimit && !player.hasStatusEffect(StatusEffects.Dysfunction)) {
 			if (player.cocks.length > 0) outputText("\n\nYour " + game.cockDescript(0) + " tingles abruptly, then stops.  Worried, you reach down to check it, only to discover that it feels... numb.  It will be very hard to masturbate like this.");
 			else if (player.hasVagina()) outputText("\n\nYour " + game.vaginaDescript(0) + " tingles abruptly, then stops.  Worried, you reach down to check it, only to discover that it feels... numb.  It will be very hard to masturbate like this.");
 			if (player.cocks.length > 0 || player.hasVagina()) {
-				player.createStatusAffect(StatusAffects.Dysfunction, 96, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.Dysfunction, 96, 0, 0, 0);
 				changes++;
 			}
 		}

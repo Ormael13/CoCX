@@ -23,7 +23,7 @@
 			game.sophieBimbo.sophieSprite();
 			outputText("Sophie bobs and weaves as she closes the distance between you in an instant.  ", false);
 			//Blind dodge change
-			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
+			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " looks like she's trying to kiss you, but it's easy to avoid the blind harpy!\n", false);
 				return;
 			}
@@ -51,7 +51,7 @@
 			outputText("Before you can react, she gives you a chaste peck on the lips.  The harpy pulls back with a sultry smile, watching you expectantly.", false);
 			
 			//Already affected by it
-			if(player.hasStatusAffect(StatusAffects.Luststick)) {
+			if(player.hasStatusEffect(StatusEffects.Luststick)) {
 				outputText("  Blood rushes to " + player.sMultiCockDesc() + " as you grow so hard so fast that it hurts.  ", false);
 				game.sophieScene.luststickApplication(2);
 				game.dynStats("lus", (12+player.lib/10));
@@ -82,7 +82,7 @@
 			game.sophieBimbo.sophieSprite();
 			outputText(capitalA + short + " flaps her wings and launches herself forwards with her talons up.  ", false);
 			//Blind dodge change
-			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
+			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + "'s talons are easy to avoid thanks to her blindness!\n", false);
 				return;
 			}
@@ -139,7 +139,7 @@
 			outputText("Sophie pulls her leg up, cocking her thigh dangerously.  Look out!  ", false);
 			var damage:Number = 0;
 			//Blind dodge change
-			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
+			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + "'s talons are easy to avoid thanks to her blindness!\n", false);
 				return;
 			}
@@ -208,7 +208,7 @@
 			var select:Number = 1;
 			var rando:Number = 1;
 //Update attacks for girls/neuters
-			if (!player.hasCock() || hasStatusAffect(StatusAffects.BimboBrawl)) {
+			if (!player.hasCock() || hasStatusEffect(StatusEffects.BimboBrawl)) {
 				//Talons
 				special1 = talonsSophie;
 				//Batter
@@ -231,7 +231,7 @@
 				combatRoundOver();
 				return;
 			}
-			if (player.hasCock() && !hasStatusAffect(StatusAffects.BimboBrawl)) rando = 1 + rand(3);
+			if (player.hasCock() && !hasStatusEffect(StatusEffects.BimboBrawl)) rando = 1 + rand(3);
 			else rando = 1 + rand(2);
 			if (rando == 1) special1();
 			if (rando == 2) special2();
@@ -241,7 +241,7 @@
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(hasStatusAffect(StatusAffects.BimboBrawl))
+			if(hasStatusEffect(StatusEffects.BimboBrawl))
 				game.sophieFollowerScene.beatUpDebimboSophie();
 			else
 				game.sophieScene.sophieLostCombat();
@@ -249,7 +249,7 @@
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(hasStatusAffect(StatusAffects.BimboBrawl))
+			if(hasStatusEffect(StatusEffects.BimboBrawl))
 				game.sophieFollowerScene.debimboSophieBeatsYouUp();
 			else if (pcCameWorms) {
 				outputText("\n\nYour foe seems disgusted by the display and leaves you to recover alone...");
@@ -270,11 +270,11 @@
 			this.long = "Sophie is approximately the size of a normal human woman, not counting the large feathery wings that sprout from her back.  Her face is gorgeous, with large rounded eyes and glimmering amber lip-gloss painted on her lush, kissable lips.  In spite of her beauty, it's clear from the barely discernible laugh lines around her mouth that she's been around long to enough to have quite a few children.  Her feathers are light pink, though the downy plumage that comprises her 'hair' is brighter than the rest.  She moves with practiced grace despite the large, jiggling breasts that hang from her chest.  Judging from her confident movements, she's an experienced fighter.";
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_GAPING_WIDE);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 40, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("DD"));
 			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,10,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 5*12+5;
 			this.hipRating = HIP_RATING_INHUMANLY_WIDE;
 			this.buttRating = BUTT_RATING_EXPANSIVE;

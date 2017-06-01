@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.Dungeons.D3 
 {
 	import classes.BaseContent;
-	import classes.StatusAffects;
+	import classes.StatusEffects;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.CockTypesEnum;
 	

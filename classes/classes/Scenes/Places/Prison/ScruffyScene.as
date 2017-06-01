@@ -23,11 +23,11 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorScruffyOptedOut():Boolean
 		{
 			var testVal:* = undefined;
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyScruffy))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyScruffy,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
-			testVal = player.statusAffectv1(StatusAffects.PrisonCaptorEllyScruffy);
+			testVal = player.statusEffectv1(StatusEffects.PrisonCaptorEllyScruffy);
 			if(testVal < 0)
 			{
 				return true;
@@ -37,30 +37,30 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorScruffyMet():Number
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyScruffy))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyScruffy,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
-			return player.statusAffectv1(StatusAffects.PrisonCaptorEllyScruffy);
+			return player.statusEffectv1(StatusEffects.PrisonCaptorEllyScruffy);
 		}
 		
 		public function prisonCaptorScruffyMetSet(newVal:Number):void
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyScruffy))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyScruffy,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyScruffy,1,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyScruffy,1,newVal);
 		}
 		
 		public function prisonCaptorScruffyMetChange(changeVal:Number):void
 		{
 			var newVal:* = undefined;
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyScruffy))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyScruffy,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
-			newVal = player.statusAffectv1(StatusAffects.PrisonCaptorEllyScruffy) + changeVal;
+			newVal = player.statusEffectv1(StatusEffects.PrisonCaptorEllyScruffy) + changeVal;
 			if(newVal < 0)
 			{
 				newVal = 0;
@@ -69,64 +69,64 @@ package classes.Scenes.Places.Prison
 			{
 				newVal = 100;
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyScruffy,1,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyScruffy,1,newVal);
 		}
 		
 		public function prisonCaptorScruffyHappiness():Number
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyScruffy))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyScruffy,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
-			return player.statusAffectv2(StatusAffects.PrisonCaptorEllyScruffy);
+			return player.statusEffectv2(StatusEffects.PrisonCaptorEllyScruffy);
 		}
 		
 		public function prisonCaptorScruffyHappinessSet(newVal:Number):void
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyScruffy))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyScruffy,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyScruffy,2,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyScruffy,2,newVal);
 		}
 		
 		public function prisonCaptorScruffyHappinessChange(changeVal:Number):void
 		{
 			var newVal:* = undefined;
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyScruffy))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyScruffy,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
-			newVal = player.statusAffectv2(StatusAffects.PrisonCaptorEllyScruffy) + changeVal;
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyScruffy,2,newVal);
+			newVal = player.statusEffectv2(StatusEffects.PrisonCaptorEllyScruffy) + changeVal;
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyScruffy,2,newVal);
 		}
 		
 		public function prisonCaptorScruffyEvent():Number
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyScruffy))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyScruffy,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
-			return player.statusAffectv3(StatusAffects.PrisonCaptorEllyScruffy);
+			return player.statusEffectv3(StatusEffects.PrisonCaptorEllyScruffy);
 		}
 		
 		public function prisonCaptorScruffyEventSet(newVal:Number):void
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyScruffy))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyScruffy,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyScruffy,3,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyScruffy,3,newVal);
 		}
 		
 		public function prisonCaptorScruffyEventChange(changeVal:Number):void
 		{
 			var newVal:* = undefined;
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyScruffy))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyScruffy,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
-			newVal = player.statusAffectv3(StatusAffects.PrisonCaptorEllyScruffy) + changeVal;
+			newVal = player.statusEffectv3(StatusEffects.PrisonCaptorEllyScruffy) + changeVal;
 			if(newVal < 0)
 			{
 				newVal = 0;
@@ -135,35 +135,35 @@ package classes.Scenes.Places.Prison
 			{
 				newVal = 100;
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyScruffy,3,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyScruffy,3,newVal);
 		}
 		
 		public function prisonCaptorScruffyScratch():Number
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyScruffy))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyScruffy,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
-			return player.statusAffectv4(StatusAffects.PrisonCaptorEllyScruffy);
+			return player.statusEffectv4(StatusEffects.PrisonCaptorEllyScruffy);
 		}
 		
 		public function prisonCaptorScruffyScratchSet(newVal:Number):void
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyScruffy))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyScruffy,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyScruffy,4,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyScruffy,4,newVal);
 		}
 		
 		public function prisonCaptorScruffyScratchChange(changeVal:Number):void
 		{
 			var newVal:* = undefined;
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyScruffy))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyScruffy))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyScruffy,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScruffy,0,0,0,0);
 			}
-			newVal = player.statusAffectv4(StatusAffects.PrisonCaptorEllyScruffy) + changeVal;
+			newVal = player.statusEffectv4(StatusEffects.PrisonCaptorEllyScruffy) + changeVal;
 			if(newVal < 0)
 			{
 				newVal = 0;
@@ -172,7 +172,7 @@ package classes.Scenes.Places.Prison
 			{
 				newVal = 100;
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyScruffy,4,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyScruffy,4,newVal);
 		}
 		
 		public function prisonCaptorRandomEventJizzJanitor():Boolean
@@ -190,12 +190,12 @@ package classes.Scenes.Places.Prison
 			if (flags[kFLAGS.PRISON_DIRT_ENABLED] > 0)
 			{
 				outputText(prison.prisonCaptor.captorPronoun1 + "'s givin' you a break today sending me in to help clean out this pigsty of a cell that you seem to be content to live in.",false);
-				newCleanliness = player.statusAffectv2(StatusAffects.PrisonCaptorEllyStatus) - 50;
+				newCleanliness = player.statusEffectv2(StatusEffects.PrisonCaptorEllyStatus) - 50;
 				if(newCleanliness < 0)
 				{
 					newCleanliness = 0;
 				}
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,2,newCleanliness);
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,2,newCleanliness);
 			}
 			else
 			{
@@ -281,7 +281,7 @@ package classes.Scenes.Places.Prison
 			else
 			{
 				outputText("You realize that this was probably the closest thing to a friendly gesture you are likely to encounter in this place, so you ",false);
-				if(player.statusAffectv4(StatusAffects.PrisonRestraints) == 0)
+				if(player.statusEffectv4(StatusEffects.PrisonRestraints) == 0)
 				{
 					outputText("politely but firmly turn down the offer. ",false);
 				}
@@ -301,9 +301,9 @@ package classes.Scenes.Places.Prison
 					player.buttChange(20,true,true,false);
 				}
 				player.slimeFeed();
-				player.changeStatusValue(StatusAffects.PrisonRestraints,2,2);
-				player.changeStatusValue(StatusAffects.PrisonRestraints,3,2);
-				player.changeStatusValue(StatusAffects.PrisonRestraints, 4, 0);
+				player.changeStatusValue(StatusEffects.PrisonRestraints,2,2);
+				player.changeStatusValue(StatusEffects.PrisonRestraints,3,2);
+				player.changeStatusValue(StatusEffects.PrisonRestraints, 4, 0);
 				player.refillHunger(10);
 				prison.changeEsteem(5,prison.inPrison);
 				prison.changeObey(-1,prison.inPrison);
@@ -318,7 +318,7 @@ package classes.Scenes.Places.Prison
 			clearOutput();
 			outputText("Acknowledging how true it is that a good meal is hard to come by in your current situation, you decide that it wouldn't hurt to (as the imp put it) show a bit of gratitude in exchange for some extra food, especially considering that relative to your other experiences in this place Scruffy's offer was downright good natured. ",false);
 			outputText("Your mind made up, you assume a subservient posture and meeky communicate your acceptance ",true);
-			if(player.statusAffectv4(StatusAffects.PrisonRestraints) == 0)
+			if(player.statusEffectv4(StatusEffects.PrisonRestraints) == 0)
 			{
 				outputText("with a mumbled word. ",false);
 			}
@@ -329,9 +329,9 @@ package classes.Scenes.Places.Prison
 			outputText("\n\n(Placeholder)  Scruffy puts on/switches you to an open mouth gag because he doesn't want you biting but removes other bindings, doesn't find your performance good enough and fucks your [face]. He leaves you telling you to improve your performance, and your body via the item he gives you.",false);
 			outputText("\n\n\"<i>Well, at least you show you understand that you are only here to be used by your betters. Put some effort into it next time and maybe I'll give you a little something extra as well. Be sure to eat what I have given you, though -- it'll help make your body more pleasing to old Scruffy the next time I come around.</i>\"",false);
 			player.slimeFeed();
-			player.changeStatusValue(StatusAffects.PrisonRestraints,2,0);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,3,0);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,4,4);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,2,0);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,3,0);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,4,4);
 			prison.changeEsteem(-5,prison.inPrison);
 			outputText("\n\n", false);
 			inventory.takeItem(consumables.SUCMILK, camp.returnToCampUseOneHour);
@@ -358,7 +358,7 @@ package classes.Scenes.Places.Prison
 			else
 			{
 				outputText("An attempt at kindness or not, the offer is humiliating in a way you aren't willing to accept at the moment. Gathering your courage, ",false);
-				if(player.statusAffectv4(StatusAffects.PrisonRestraints) == 0)
+				if(player.statusEffectv4(StatusEffects.PrisonRestraints) == 0)
 				{
 					outputText("you unleash a verbal stream of pent up aggression on the scrawny imp janitor, flatly rejecting his deal. ",false);
 				}
@@ -367,7 +367,7 @@ package classes.Scenes.Places.Prison
 					outputText("you assume a defensive posture and scream your rejection of the deal through your gag. ",false);
 				}
 				outputText("\n\nBefore you can even begin to react, you see his face turn to a mask of rage as he hammers you over the head with the bucket he was so recently using to clean up your filth. You momentarily black out, and when you come to you realize that ",false);
-				if(player.statusAffectv2(StatusAffects.PrisonRestraints) != 2)
+				if(player.statusEffectv2(StatusEffects.PrisonRestraints) != 2)
 				{
 					outputText("he has hogtied you. ",false);
 				}
@@ -378,9 +378,9 @@ package classes.Scenes.Places.Prison
 				outputText("You also notice that his dick has gone limp and wonder how that bodes for your fortunes. The answer comes quickly enough.\n\n ",false);
 				outputText("\"<i>You ungrateful little bitch. Normally I'd teach you a lesson in humility and obedience more directly, but somehow you've managed to kill my mood.</i>\" He punctuates the sentence by delivering a swift kick to your ribs, and then dramatically draws the largest dildo gag you've ever seen from behind his back. \"<i>Well, I suppose this will have to suffice for your reeducation today. Perhaps the next time you see me you'll remember how much better off you would have been with my prick in your mouth instead.</i>\"",false);
 				outputText("\n\nAnd with that he forces the monstrous rubber phallus into your mouth, locks the straps behind your head, grabs his mop and bucket and leaves the room in an exaggerated huff. You manage to take some solace in the fact that you stood up for yourself and avoided servicing the little jizz janitor, but you are unsure if the price was worth it.\n",false);
-				player.changeStatusValue(StatusAffects.PrisonRestraints,2,2);
-				player.changeStatusValue(StatusAffects.PrisonRestraints,3,2);
-				player.changeStatusValue(StatusAffects.PrisonRestraints,4,3);
+				player.changeStatusValue(StatusEffects.PrisonRestraints,2,2);
+				player.changeStatusValue(StatusEffects.PrisonRestraints,3,2);
+				player.changeStatusValue(StatusEffects.PrisonRestraints,4,3);
 				prison.changeEsteem(10,prison.inPrison);
 				prison.changeObey(-2,prison.inPrison);
 				prison.changeWill(-prison.prisonWillCost(15));
@@ -405,9 +405,9 @@ package classes.Scenes.Places.Prison
 			}
 			outputText("</i>\"",false);
 			player.slimeFeed();
-			player.changeStatusValue(StatusAffects.PrisonRestraints,2,0);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,3,0);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,4,4);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,2,0);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,3,0);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,4,4);
 			prison.changeEsteem(-7,prison.inPrison);
 			prison.changeObey(1,prison.inPrison);
 			outputText("\n\n",false);
@@ -446,9 +446,9 @@ package classes.Scenes.Places.Prison
 			else outputText("<b>You are too aroused to continue fighting. You give in.</b>");
 			outputText("\n\n\"<i>You ungrateful little bitch. Normally I'd teach you a lesson in humility and obedience more directly, but somehow you've managed to kill my mood.</i>\" He punctuates the sentence by delivering a swift kick to your ribs, and then dramatically draws the largest dildo gag you've ever seen from behind his back. \"<i>Well, I suppose this will have to suffice for your reeducation today. Perhaps the next time you see me you'll remember how much better off you would have been with my prick in your mouth instead.</i>\"",false);
 			outputText("\n\nAnd with that he forces the monstrous rubber phallus into your mouth, locks the straps behind your head, grabs his mop and bucket and leaves the room in an exaggerated huff. You manage to take some solace in the fact that you stood up for yourself and avoided servicing the little jizz janitor, but you are unsure if the price was worth it.\n",false);
-			player.changeStatusValue(StatusAffects.PrisonRestraints, 2, 2);
-			player.changeStatusValue(StatusAffects.PrisonRestraints, 3, 2);
-			player.changeStatusValue(StatusAffects.PrisonRestraints, 4, 3);
+			player.changeStatusValue(StatusEffects.PrisonRestraints, 2, 2);
+			player.changeStatusValue(StatusEffects.PrisonRestraints, 3, 2);
+			player.changeStatusValue(StatusEffects.PrisonRestraints, 4, 3);
 			cleanupAfterCombat();
 		}
 	}

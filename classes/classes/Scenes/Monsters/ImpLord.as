@@ -13,8 +13,8 @@
 			var damage:int = 40 + rand(10);
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
-			if (player.hasStatusAffect(StatusAffects.Blizzard)) {
-			player.addStatusValue(StatusAffects.Blizzard, 1, -1);
+			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
+			player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 			outputText("The imp mutters something to himself. Before you have time to react the demonic creature's hand is filled with a bright red fire that he hurls at you.  The flames lick at your body leaving a small burn on you torso due to protedction of blizzard, as well as an arousing heat in your groin. ");
 			damage *= 0.2;
 			}

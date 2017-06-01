@@ -2,7 +2,7 @@ package classes.Items.Consumables
 {
 	import classes.Items.Consumable;
 	import classes.Items.ConsumableLib;
-	import classes.StatusAffects;
+	import classes.StatusEffects;
 	
 	/**
 	 * Triggers heat or rut and increases anal capacity.
@@ -29,9 +29,9 @@ package classes.Items.Consumables
 			}
 			else {
 				//Boost anal capacity without gaping
-				if (player.statusAffectv1(StatusAffects.BonusACapacity) < 80) {
-					if (!player.hasStatusAffect(StatusAffects.BonusACapacity)) player.createStatusAffect(StatusAffects.BonusACapacity, 0, 0, 0, 0);
-					player.addStatusValue(StatusAffects.BonusACapacity, 1, 5);
+				if (player.statusEffectv1(StatusEffects.BonusACapacity) < 80) {
+					if (!player.hasStatusEffect(StatusEffects.BonusACapacity)) player.createStatusEffect(StatusEffects.BonusACapacity, 0, 0, 0, 0);
+					player.addStatusValue(StatusEffects.BonusACapacity, 1, 5);
 					outputText("\n\nYou feel... more accommodating somehow.  Your " + player.assholeDescript() + " is tingling a bit, and though it doesn't seem to have loosened, it has grown more elastic.");
 					changes++;
 				}

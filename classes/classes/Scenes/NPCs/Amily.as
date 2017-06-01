@@ -12,7 +12,7 @@
 
 		override protected function performCombatAction():void
 		{
-			if(!hasStatusAffect(StatusAffects.Concentration) && rand(4) == 0) amilyConcentration();
+			if(!hasStatusEffect(StatusEffects.Concentration) && rand(4) == 0) amilyConcentration();
 			else if(rand(3) == 0) amilyDartGo();
 			else if(rand(2) == 0) amilyDoubleAttack();
 			else amilyAttack();
@@ -25,7 +25,7 @@
 			//return to combat menu when finished
 			doNext(game.playerMenu);
 			//Blind dodge change
-			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
+			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 				game.combatRoundOver();
 				return;
@@ -92,7 +92,7 @@
 			//return to combat menu when finished
 			doNext(game.playerMenu);
 			//Blind dodge change
-			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
+			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				dodged++;
 			}
 			//Determine if dodged!
@@ -140,7 +140,7 @@
 		{
 			var dodged:Number = 0;
 			//Blind dodge change
-			if (hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
+			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack from her dartgun!\n", false);
 				game.combatRoundOver();
 				return;
@@ -188,7 +188,7 @@
 			else {
 				outputText("Amily dashes at you and swipes her knife at you, surprisingly slowly.  You easily dodge the attack; but it was a feint - her other hand tries to strike at you with a poisoned dart. However, she only manages to scratch you, only causing your muscles to grow slightly numb.", false);
 				//Set status
-				if (!player.hasStatusAffect(StatusAffects.AmilyVenom)) player.createStatusAffect(StatusAffects.AmilyVenom, 0, 0, 0, 0);
+				if (!player.hasStatusEffect(StatusEffects.AmilyVenom)) player.createStatusEffect(StatusEffects.AmilyVenom, 0, 0, 0, 0);
 				var poison:Number = 2 + rand(5);
 				while (poison > 0) {
 					poison--;
@@ -197,14 +197,14 @@
 						showStatDown("str");
 						// strDown.visible = true;
 						// strUp.visible = false;
-						player.addStatusValue(StatusAffects.AmilyVenom, 1, 1);
+						player.addStatusValue(StatusEffects.AmilyVenom, 1, 1);
 					}
 					if (player.spe >= 2) {
 						player.spe--;
 						showStatDown("spe");
 						// speDown.visible = true;
 						// speUp.visible = false;
-						player.addStatusValue(StatusAffects.AmilyVenom, 2, 1);
+						player.addStatusValue(StatusEffects.AmilyVenom, 2, 1);
 					}
 				}
 				//If PC is reduced to 0 Speed and Strength, normal defeat by HP plays.
@@ -219,7 +219,7 @@
 		//Concentrate: always avoids the next attack. Can be disrupted by tease/seduce.
 		private function amilyConcentration():void {
 			outputText("Amily takes a deep breath and attempts to concentrate on your movements.", false);
-			createStatusAffect(StatusAffects.Concentration,0,0,0,0);
+			createStatusEffect(StatusEffects.Concentration,0,0,0,0);
 			game.combatRoundOver();
 		}
 
@@ -227,10 +227,10 @@
 		//Deals big lust increase, despite her resistance.
 		override public function teased(lustDelta:Number):void
 		{
-			if(hasStatusAffect(StatusAffects.Concentration)) {
+			if(hasStatusEffect(StatusEffects.Concentration)) {
 				outputText("Amily flushes hotly; her concentration only makes her pay more attention to your parts!", false);
 				lustDelta += 25+lustDelta;
-				removeStatusAffect(StatusAffects.Concentration);
+				removeStatusEffect(StatusEffects.Concentration);
 				applyTease(lustDelta);
 			} else {
 				super.teased(lustDelta);
@@ -250,7 +250,7 @@
 			this.long = "You are currently fighting Amily. The mouse-morph is dressed in rags and glares at you in rage, knife in hand. She keeps herself close to the ground, ensuring she can quickly close the distance between you two or run away.";
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_NORMAL);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 48, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 48, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("C"));
 			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
 			this.ass.analWetness = ANAL_WETNESS_DRY;

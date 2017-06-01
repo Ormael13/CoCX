@@ -3,10 +3,10 @@ package classes.Scenes.Dungeons.D3
 	import classes.Monster;
 	import classes.Appearance;
 	import classes.Scenes.Areas.Swamp.AbstractSpiderMorph;
-	import classes.StatusAffects;
+	import classes.StatusEffects;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.CockTypesEnum;
-	import classes.StatusAffects;
+	import classes.StatusEffects;
 	import classes.PerkLib;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.internals.WeightedDrop;
@@ -64,11 +64,11 @@ package classes.Scenes.Dungeons.D3
 			else if (_fightPhase == 2)
 			{
 				str += "You're completely surrounded by demons! The members of Lethice's corrupted court have flooded the throne hall like a sea of tainted flesh, crushing in on you with the sheer weight of bodies being thrown against you. Incubi, succubi, and forms between and combining them all grasp and thrust at you, trying to overwhelm you with desire for their inhuman bodies and the unspeakable pleasures only demons command."
-				if (hasStatusAffect(StatusAffects.Blind))
+				if (hasStatusEffect(StatusEffects.Blind))
 				{
 					str += " The demons have relented somewhat, clutching at their eyes and screaming in frustration and panic thanks to your potent spell!";
 				}
-				else if (hasStatusAffect(StatusAffects.OnFire))
+				else if (hasStatusEffect(StatusEffects.OnFire))
 				{
 					str += " More than a few of the court are screaming in terror, rolling on the ground and trying desperately to put out the flames you've bathed them in! Turns out Marethian demons aren't all that immune to fire!";
 				}
@@ -86,11 +86,11 @@ package classes.Scenes.Dungeons.D3
 				}
 			}
 
-			if (player.hasStatusAffect(StatusAffects.LethicesRapeTentacles))
+			if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles))
 			{
 				str += "\n\n<b>A forest of black tentacles sprout from the floor, snaring any demons unlucky enough to venture close - or any champions unlucky enough to be in the center of it all.";
-				if (player.statusAffectv3(StatusAffects.LethicesRapeTentacles) != 0) outputText(" Unfortunately, they’ve grabbed you. You need to break free to do anything!");
-				if (player.hasStatusAffect(StatusAffects.KnowsWhitefire))
+				if (player.statusEffectv3(StatusEffects.LethicesRapeTentacles) != 0) outputText(" Unfortunately, they’ve grabbed you. You need to break free to do anything!");
+				if (player.hasStatusEffect(StatusEffects.KnowsWhitefire))
 				{
 					str += " A blast of white-fire could probably dispel them, or you could rely on your";
 					if (player.canFly()) str += " flight";
@@ -99,12 +99,12 @@ package classes.Scenes.Dungeons.D3
 				}
 			}
 
-			if (game.monster.hasStatusAffect(StatusAffects.Shell))
+			if (game.monster.hasStatusEffect(StatusEffects.Shell))
 			{
 				str += "\n\n<b>Lethice is surrounded by a shimmering dome of magical energy. Spells and ranged attacks will be ineffective!</b>";
 			}
 
-			if (player.hasStatusAffect(StatusAffects.PigbysHands))
+			if (player.hasStatusEffect(StatusEffects.PigbysHands))
 			{
 				str += "\n\nInvisible hands roam over your body, stroking you in ways that no one but a lover ever should. They won’t stop, and they won’t slow. You’ll have to try to ignore their arousing caresses.";
 			}
@@ -157,7 +157,7 @@ package classes.Scenes.Dungeons.D3
 		{
 			var atks:Array = [demonicArouse, demonfire];
 			if (_roundCount % 10 == 3) atks.push(rapetacles);
-			if (!player.hasStatusAffect(StatusAffects.Blind)) atks.push(wingbuffet);
+			if (!player.hasStatusEffect(StatusEffects.Blind)) atks.push(wingbuffet);
 			atks[rand(atks.length)]();
 		}
 
@@ -165,7 +165,7 @@ package classes.Scenes.Dungeons.D3
 		{
 			outputText("Lethice’s hands blur in a familiar set of arcane motions, similar to the magical gestures you’ve seen from the imps. Hers are a thousand times more intricate. Her slender fingers move with all the precision of a master artist’s brush, wreathed in sparks of black energy.");
 			var l:Number = player.lib / 10 + player.cor / 10 + 25;
-			if (player.hasStatusAffect(StatusAffects.MinotaurKingsTouch)) l *= 1.25;
+			if (player.hasStatusEffect(StatusEffects.MinotaurKingsTouch)) l *= 1.25;
 			game.dynStats("lus", l);
 	
 			if (player.lust <= 30) outputText("\n\nYou feel strangely warm.");
@@ -187,24 +187,24 @@ package classes.Scenes.Dungeons.D3
 			if (player.canFly())
 			{
 				outputText("\n\nYou laugh as you fly out of their reach, immune to their touches.");
-				player.createStatusAffect(StatusAffects.LethicesRapeTentacles, 4 + rand(2), 0, 0, 0);
+				player.createStatusEffect(StatusEffects.LethicesRapeTentacles, 4 + rand(2), 0, 0, 0);
 			}
 			else if (combatMiss() || player.findPerk(PerkLib.Flexibility) >= 0 || player.findPerk(PerkLib.Evade) >= 0)
 			{
 				outputText("\n\nYou manage to sidestep the grasping tentacles with ease.");
-				player.createStatusAffect(StatusAffects.LethicesRapeTentacles, 4 + rand(2), 0, 0, 0);
+				player.createStatusEffect(StatusEffects.LethicesRapeTentacles, 4 + rand(2), 0, 0, 0);
 			}
 			else
 			{
 				outputText("\n\nYou aren’t fast enough to avoid them. They yank your arms and [legs] taut. Some burrow under your [armor], crawling toward your most sensitive, forbidden places.");
-				player.createStatusAffect(StatusAffects.LethicesRapeTentacles, 4 + rand(2), 0, 1, 0);
+				player.createStatusEffect(StatusEffects.LethicesRapeTentacles, 4 + rand(2), 0, 1, 0);
 			}
 		}
 
 		public function dispellRapetacles():void
 		{
 			clearOutput();
-			if (player.statusAffectv3(StatusAffects.LethicesRapeTentacles) == 0)
+			if (player.statusEffectv3(StatusEffects.LethicesRapeTentacles) == 0)
 			{
 				outputText("You raise your arm and");
 			}
@@ -248,7 +248,7 @@ package classes.Scenes.Dungeons.D3
 			else
 			{
 				outputText(" The cloying smoke gets in your eyes and your mouth, making you cough and sputter. Worst of all, you can’t see anything!");
-				player.createStatusAffect(StatusAffects.Blind, 2, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.Blind, 2, 0, 0, 0);
 				player.takeDamage(1);
 				outputText(" (1)");
 			}
@@ -343,8 +343,8 @@ package classes.Scenes.Dungeons.D3
 			pronoun2 = "them";
 			pronoun3 = "their";
 			
-			if (hasStatusAffect(StatusAffects.PhysicalDisabled)) removeStatusAffect(StatusAffects.PhysicalDisabled);
-			if (hasStatusAffect(StatusAffects.AttackDisabled)) removeStatusAffect(StatusAffects.AttackDisabled);
+			if (hasStatusEffect(StatusEffects.PhysicalDisabled)) removeStatusEffect(StatusEffects.PhysicalDisabled);
+			if (hasStatusEffect(StatusEffects.AttackDisabled)) removeStatusEffect(StatusEffects.AttackDisabled);
 			
 			combatRoundOver();
 		}
@@ -352,7 +352,7 @@ package classes.Scenes.Dungeons.D3
 		private function phase2():void
 		{
 			var atks:Array = [demonLustMagic, dirtyDancing, hornyPoke, crushingBodies];
-			if (rand(10) == 0 && !player.hasStatusAffect(StatusAffects.Blind)) atks.push(bukkakeTime);
+			if (rand(10) == 0 && !player.hasStatusEffect(StatusEffects.Blind)) atks.push(bukkakeTime);
 
 			atks[rand(atks.length)]();
 			combatRoundOver();
@@ -371,21 +371,21 @@ package classes.Scenes.Dungeons.D3
 			{
 				outputText("\n\nYou try your hardest to push back the lustful, submissive thoughts that begin to permeate your mind, but against so many concentrated wills... even you can't hold back. You moan as the first hints of arousal spread through you, burning in your loins. What you wouldn't give for a fuck about now!");
 				l = player.lib / 10 + player.cor / 10 + 10;
-				if (player.hasStatusAffect(StatusAffects.MinotaurKingsTouch)) l *= 1.25;
+				if (player.hasStatusEffect(StatusEffects.MinotaurKingsTouch)) l *= 1.25;
 				game.dynStats("lus", l);
 			}
 			else if (player.lust <= 66)
 			{
 				outputText("\n\nAt first, you try to think of something else... but in your state, that just ends up being sex: hot, dirty, sweaty fucking surrounded by a sea of bodies. With a gasp, you realize you've left yourself open to the demons, and they're all too happy to flood your mind with images of submission and wanton debauchery, trying to trick you into letting them take you!");
 				l = player.lib / 10 + player.cor / 10 + 10;
-				if (player.hasStatusAffect(StatusAffects.MinotaurKingsTouch)) l *= 1.25;
+				if (player.hasStatusEffect(StatusEffects.MinotaurKingsTouch)) l *= 1.25;
 				game.dynStats("lus", l);
 			}
 			else
 			{
 				outputText("\n\nYou don't even try to resist anymore -- your mind is already a cornucopia of lustful thoughts, mixed together with desire that burns in your veins and swells in your loins, all but crippling your ability to resist. The demons only add to it, fueling your wanton imagination with images of hedonistic submission, of all the wondrous things they could do to you if you only gave them the chance. It's damn hard not to.");
 				l = player.lib / 10 + player.cor / 10 + 10
-				if (player.hasStatusAffect(StatusAffects.MinotaurKingsTouch)) l *= 1.25;
+				if (player.hasStatusEffect(StatusEffects.MinotaurKingsTouch)) l *= 1.25;
 				game.dynStats("lus", l);
 			}
 		}
@@ -403,7 +403,7 @@ package classes.Scenes.Dungeons.D3
 				else if (player.lust <= 66) outputText("\n\nTry as you might to resist, the demons are having an effect on you! Your whole body is flushed with unbidden arousal, burning with lust for the demonic sluts pressing against you. The temptresses are almost enough to want to make you lay down your arms and bend one of them double for a good, hard fuck!");
 				else outputText("\n\nOh gods! The way their bodies undulate, caressing and cumming, moaning as they're fucked from behind and transfer all of that energy to you, makes your body burn with desire. It's almost too much to bear!");
 				var l:Number = player.lib / 10 + player.cor / 10 + 10;
-				if (player.hasStatusAffect(StatusAffects.MinotaurKingsTouch)) l *= 1.25;
+				if (player.hasStatusEffect(StatusEffects.MinotaurKingsTouch)) l *= 1.25;
 				game.dynStats("lus", l);
 			}
 		}
@@ -477,7 +477,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				outputText(" You take a huge, fat, musky glob of spunk right to the eyes! You yelp in alarm, trying to wipe the salty, burning demonic cock-cream out, but it's simply too thick! Yuck!");
 				game.dynStats("lus", 5);
-				player.createStatusAffect(StatusAffects.Blind, 2 + rand(2), 0, 0, 0);
+				player.createStatusEffect(StatusEffects.Blind, 2 + rand(2), 0, 0, 0);
 			}
 		}
 
@@ -497,7 +497,7 @@ package classes.Scenes.Dungeons.D3
 
 			game.menu();
 			if (player.hasCock() || player.hasVagina()) game.addButton(0, "DemonFuck", p2DemonFuck, hpVictory);
-			if (player.hasStatusAffect(StatusAffects.KnowsHeal)) game.addButton(1, "Heal", p2Heal);
+			if (player.hasStatusEffect(StatusEffects.KnowsHeal)) game.addButton(1, "Heal", p2Heal);
 			game.addButton(2, "Next", p2Next);
 		}
 
@@ -670,7 +670,7 @@ package classes.Scenes.Dungeons.D3
 			else
 			{
 				var atks:Array = [parasiteThrowingStars, whiptrip, sonicwhip];
-				if (!player.hasStatusAffect(StatusAffects.WhipSilence)) atks.push(whipchoke);
+				if (!player.hasStatusEffect(StatusEffects.WhipSilence)) atks.push(whipchoke);
 
 				atks[rand(atks.length)]();
 			}
@@ -699,7 +699,7 @@ package classes.Scenes.Dungeons.D3
 			else
 			{
 				var l:Number = player.lib / 10 + player.cor / 10 + 10
-				if (player.hasStatusAffect(StatusAffects.MinotaurKingsTouch)) l *= 1.25;
+				if (player.hasStatusEffect(StatusEffects.MinotaurKingsTouch)) l *= 1.25;
 				game.dynStats("lus", l);
 				
 				var damage:Number = str + weaponAttack - rand(player.tou);
@@ -751,7 +751,7 @@ package classes.Scenes.Dungeons.D3
 				if (player.findPerk(PerkLib.Resolute) < 0 && rand(player.tou) <= 25)
 				{
 					outputText(" The ground rushes up at you awful fast. Lethice has tripped you, <b>stunning you!</b>");
-					player.createStatusAffect(StatusAffects.Stunned, 1, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 				}
 				else
 				{
@@ -811,7 +811,7 @@ package classes.Scenes.Dungeons.D3
 				var damage:Number = weaponAttack + 25 - rand(player.tou);
 				damage = player.takeDamage(damage);
 
-				player.createStatusAffect(StatusAffects.WhipSilence, 3, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.WhipSilence, 3, 0, 0, 0);
 
 				outputText(" (" + damage +")");
 			}
@@ -844,7 +844,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("<i>“Let’s see how you fight while you’re being groped, shall we? A shame Pigby isn’t around to see how I’ve improved his hands,”</i> Lethice murmurs. Cupping her hands into a parody of lecher’s grip, the corruptive Queen squeezes and chants. Immediately, you feel phantasmal hands all over your body, reaching through your armor to fondle your bare [skinFurScales]. Digits slip into your [butt]. Fingertips brush your [nipples]. Warm palms slide down your quivering belly toward your vulnerable loins.");
 			outputText("\n\nYou glare daggers at Lethice, but she merely laughs. <i>“A shame I never got to convince him that his hands were so much more effective when used like this.”</i>");
 			game.dynStats("lus", 5);
-			player.createStatusAffect(StatusAffects.PigbysHands, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.PigbysHands, 0, 0, 0, 0);
 		}
 	}
 }

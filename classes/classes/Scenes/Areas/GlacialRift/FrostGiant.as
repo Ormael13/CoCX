@@ -8,7 +8,7 @@ package classes.Scenes.Areas.GlacialRift
 	{
 		private function giantStrengthLoss(magnitude:int = 0):void {
 			game.dynStats("str", -magnitude);
-			player.addStatusValue(StatusAffects.GiantStrLoss, 2, magnitude);
+			player.addStatusValue(StatusEffects.GiantStrLoss, 2, magnitude);
 		}
 		
 		public function giantAttackPunch():void {
@@ -46,12 +46,12 @@ package classes.Scenes.Areas.GlacialRift
 				HP -= giantDmg;
 				outputText("The giant takes <b><font color=\"#800000\">" + giantDmg + "</font></b> damage from his impact.  ");
 				outputText("<b>The giant is stunned!</b>");
-				createStatusAffect(StatusAffects.Stunned, 1, 0, 0, 0);
+				createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			}
 			else {
 				outputText("Your attempt to make way fails, and the giant grabs you in his very large, very cold, very strong hands. \"<i>Now, you die!</i>\"");
-				player.createStatusAffect(StatusAffects.GiantGrabbed, 2, 0, 0, 0);
-				if (!player.hasStatusAffect(StatusAffects.GiantStrLoss)) player.createStatusAffect(StatusAffects.GiantStrLoss, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.GiantGrabbed, 2, 0, 0, 0);
+				if (!player.hasStatusEffect(StatusEffects.GiantStrLoss)) player.createStatusEffect(StatusEffects.GiantStrLoss, 0, 0, 0, 0);
 			}
 			combatRoundOver();
 		}
@@ -104,7 +104,7 @@ package classes.Scenes.Areas.GlacialRift
 				case 1:
 				case 2: //Taunt
 					outputText("\"<i>Ha, ha, ha! Puny little " + player.race() + "! You cannot escape my grasp!</i>\" He flicks your head, nearly snapping your neck, and you see stars for a moment. ")
-					player.removeStatusAffect(StatusAffects.GiantGrabbed);
+					player.removeStatusEffect(StatusEffects.GiantGrabbed);
 					damage = 50 + rand(str * 0.4);
 					damage = player.reduceDamage(damage);
 					player.takeDamage(damage, true);
@@ -114,7 +114,7 @@ package classes.Scenes.Areas.GlacialRift
 				case 4: //Ground Pound
 					outputText("The giant brings you to his face to yell at you. His scream is probably the loudest thing you've ever heard, and while your ears are still ringing he raises you up, and up, and up and then punches the ground with all his might. ");
 					outputText("The force of the punch leaves you reeling for a time; you come to your senses before he tries to do anything else. ");
-					player.removeStatusAffect(StatusAffects.GiantGrabbed);
+					player.removeStatusEffect(StatusEffects.GiantGrabbed);
 					damage = 180 + rand(str * 1.2);
 					damage = player.reduceDamage(damage);
 					player.takeDamage(damage, true);
@@ -122,8 +122,8 @@ package classes.Scenes.Areas.GlacialRift
 					break;
 				case 5: //Throw
 					outputText("\"<i>Oh, little " + player.race() + " wants to be let go? Ha! Then GO!</i>\" He rears back and chucks you as hard as he can against the nearest rock face. Fortunately, his aim is off and he throws you into a patch of snow. The snow helps cushion the impact, but you're still very disoriented. ");
-					player.removeStatusAffect(StatusAffects.GiantGrabbed);
-					player.createStatusAffect(StatusAffects.Stunned, 1 + rand(3), 0, 0, 0);
+					player.removeStatusEffect(StatusEffects.GiantGrabbed);
+					player.createStatusEffect(StatusEffects.Stunned, 1 + rand(3), 0, 0, 0);
 					damage = 50 + rand(str * 0.8);
 					damage = player.reduceDamage(damage);
 					if (damage < 50) damage = 50;
@@ -144,14 +144,14 @@ package classes.Scenes.Areas.GlacialRift
 			if (player.str < 40) {
 				outputText("Struggling with every fiber of your being, you manage to tickle the giant into dropping you. Slightly embarrassed, you get as far away from the giant without running away as you can, and ready your weapon. You think it wise to try to escape. ");
 			}
-			player.removeStatusAffect(StatusAffects.GiantGrabbed);
+			player.removeStatusEffect(StatusEffects.GiantGrabbed);
 			combatRoundOver();
 		}
 		
 		public function giantBoulderThrow():void {
 			outputText("The giant walks over to a boulder much larger than you and hefts it up. You had better wait and be ready to dodge, or this could be very bad. ");
 			outputText("<b>With a grunt and a shove, the giant throws the boulder directly at you!</b>")
-			if (!player.hasStatusAffect(StatusAffects.GiantBoulder)) player.createStatusAffect(StatusAffects.GiantBoulder, 0, 0, 0, 0);
+			if (!player.hasStatusEffect(StatusEffects.GiantBoulder)) player.createStatusEffect(StatusEffects.GiantBoulder, 0, 0, 0, 0);
 			combatRoundOver();
 		}
 		public function giantBoulderFantasize():void {
@@ -177,7 +177,7 @@ package classes.Scenes.Areas.GlacialRift
 			if (mode == 0) outputText("You charge at the giant, running as fast as you can, hoping to get to him before he can throw the huge rock. However, you getting closer just makes it easier for him to hit you, and he does, the full force of the boulder hitting your upper body square-on, whipping you directly down into the snow while the boulder mercifully lands some yards away. ");
 			else if (mode == 1) outputText(", but you do look up just in time to nearly avoid the large boulder he chucked your way. Scrambling to react, you jump to the side, only to realize you chose the wrong side. The boulder hits you in the back, propelling you.  Battered, beaten, bruised, you struggle to stand, when the giant picks you up, laughs in his deep, mighty bellow, and punts you over a mountain. You land several feet deep in a snowbank, and see something flying toward you before passing out. ");
 			else outputText("You begin to cast, focusing intently on summoning your magic. Too focused, though, as the giant propels the boulder in an arc to you. You notice the boulder just in time to not be crushed by it, though it still hits you and you fly several dozen yards before hitting a nice, jagged rock face. ");
-			if (player.hasStatusAffect(StatusAffects.GiantBoulder)) player.removeStatusAffect(StatusAffects.GiantBoulder);
+			if (player.hasStatusEffect(StatusEffects.GiantBoulder)) player.removeStatusEffect(StatusEffects.GiantBoulder);
 			var damage:int = (str * 2) + 200 + rand(100);
 			damage = player.reduceDamage(damage);
 			if (damage < 200) damage = 200;
@@ -188,7 +188,7 @@ package classes.Scenes.Areas.GlacialRift
 		public function giantBoulderMiss():void {
 			clearOutput();
 			outputText("His aim was perfect, if you had stood still. Watching him throw it at you gave you all the time you needed to avoid the large rock, though the debris from the impact might leave some bruises. ");
-			if (player.hasStatusAffect(StatusAffects.GiantBoulder)) player.removeStatusAffect(StatusAffects.GiantBoulder);
+			if (player.hasStatusEffect(StatusEffects.GiantBoulder)) player.removeStatusEffect(StatusEffects.GiantBoulder);
 			var damage:int = 10 + rand(str / 2);
 			damage = player.reduceDamage(damage);
 			player.takeDamage(damage, true);

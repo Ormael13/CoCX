@@ -2,7 +2,7 @@ package classes.Items.Consumables
 {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.Consumable;
-	import classes.StatusAffects;
+	import classes.StatusEffects;
 
 	/**
 	 * Item that triggers succubus events.
@@ -31,14 +31,14 @@ package classes.Items.Consumables
 			else {
 				outputText("The liquid tastes rather bland and goes down easily. ");
 				//Special repeat texts
-				if (player.hasStatusAffect(StatusAffects.RepeatSuccubi)) outputText("You look forwards to tonight's encounter.");
+				if (player.hasStatusEffect(StatusEffects.RepeatSuccubi)) outputText("You look forwards to tonight's encounter.");
 				//First timer huh?
 				else outputText("You do not notice any real effects.  Did the merchant con you?");
 			}
-			if (player.hasStatusAffect(StatusAffects.SuccubiNight)) {
-				if (player.statusAffectv1(StatusAffects.SuccubiNight) < 3) player.addStatusValue(StatusAffects.SuccubiNight,1,1);
+			if (player.hasStatusEffect(StatusEffects.SuccubiNight)) {
+				if (player.statusEffectv1(StatusEffects.SuccubiNight) < 3) player.addStatusValue(StatusEffects.SuccubiNight,1,1);
 			}
-			else player.createStatusAffect(StatusAffects.SuccubiNight, 1, 0, 0, 0);
+			else player.createStatusEffect(StatusEffects.SuccubiNight, 1, 0, 0, 0);
 			player.refillHunger(20);
 			
 			return false;

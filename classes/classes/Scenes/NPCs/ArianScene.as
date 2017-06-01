@@ -1120,13 +1120,13 @@ private function arianMagicLessons():void {
 		else outputText(", exiting [Arian eir] tent and going about your business.");
 		
 		//(if PC doesn't know Charge Weapon)
-		if(!player.hasStatusAffect(StatusAffects.KnowsCharge)) {
+		if(!player.hasStatusEffect(StatusEffects.KnowsCharge)) {
 			outputText("\n\nAs you ");
 			if(!player.isNaga()) outputText("walk");
 			else outputText("slither");
 			outputText(" away, you start pondering Arian's lesson of the day.  You wonder if you could perhaps apply the channeling principle to strengthen your [weapon] in combat.");
 			outputText("\n\nThat would be very helpful; you'll have to try it sometime.");
-			player.createStatusAffect(StatusAffects.KnowsCharge,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsCharge,0,0,0,0);
 		}
 	}
 	else if (player.inte < 75) {
@@ -1138,12 +1138,12 @@ private function arianMagicLessons():void {
 		outputText("\n\nArian wasn't kidding; this is quite a complex subject...");
 		outputText("\n\n\"<i>Now to finish our lesson, I'll give you a practical example of how to effectively use conjuration to defend yourself.  So pay attention, [name].  Conjured objects are generally weaker than real objects, so conjuring a shield or a suit of armor or even a weapon is no good.  Not to mention it's quite complicated.  A suit of armor is made not only of metal, but of other components as well - you'd have to conjure and maintain each individually.  Instead, conjure a simple element that can turn the tide of the battle in your favor.</i>\"");
 		//(if PC doesn't know Blind)
-		if(!player.hasStatusAffect(StatusAffects.KnowsBlind)) {
+		if(!player.hasStatusEffect(StatusEffects.KnowsBlind)) {
 			outputText("\n\nLike what?  You ask in curiosity.");
 			outputText("\n\nArian lifts a closed fist.  \"<i>Mind your eyes.</i>\"  You nod.  Arian points [Arian eir] fist towards a nearby wall and opens [Arian eir] hand.  A bright flash of light shoots out of [Arian eir] hand to hit the wall harmlessly.  \"<i>This was the element of light.  I produced a bright light capable of temporarily blinding whomever happens to be looking at it when it's exposed.</i>\"");
 			outputText("\n\nYou note how such a spell could be useful for you in combat.  Arian grins at you.  \"<i>I'm glad this lesson was helpful, [name].  Come here and I'll teach you how to properly conjure it.</i>\"");
 			outputText("\n\nYou spend a few minutes learning how to properly use the spell, and after some practice you can reliably use the spell whenever you want to.  You thank Arian for the lesson and for teaching you a new spell.  Then bidding farewell to the grinning lizan, you leave, promising to visit [Arian em] again soon.");
-			player.createStatusAffect(StatusAffects.KnowsBlind,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsBlind,0,0,0,0);
 			//Return to camp.
 		}
 		else {
@@ -1167,10 +1167,10 @@ private function arianMagicLessons():void {
 		if(!arianFollower()) outputText("begin the trek home.");
 		else outputText("exit [Arian eir] tent.");
 		//(if PC doesn't know Whitefire)
-		if(!player.hasStatusAffect(StatusAffects.KnowsWhitefire)) {
+		if(!player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
 			outputText("\n\nAs you walk, you ponder what you discussed with Arian and conclude that by combining conjuration with alteration, you could quickly and easily create an expanding conflagration of flames, burning your foes in combat.");
 			outputText("\n\nYou should put that into practice sometime soon.");
-			player.createStatusAffect(StatusAffects.KnowsWhitefire,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsWhitefire,0,0,0,0);
 		}
 	}
 	flags[kFLAGS.ARIAN_LESSONS]++;
@@ -3526,19 +3526,19 @@ private function arianSpellPlace(spell:String):void {
 	outputText("\n\n(<b>Your talisman has been imbued with the " + spell + ". You can use it from the M. Specials menu in combat.</b>)\n\n");
 	clearCharges();
 	if(spell == "Shielding Spell") {
-		player.createStatusAffect(StatusAffects.ShieldingSpell,0,0,0,0);
+		player.createStatusEffect(StatusEffects.ShieldingSpell,0,0,0,0);
 		//Shielding Spell: 2x Black Chitin and 1x Tough Silk. - Increases defense for the duration of the battle.
 		player.consumeItem(useables.B_CHITN,2);
 		player.consumeItem(useables.T_SSILK);
 	}
 	if(spell == "Immolation Spell") {
-		player.createStatusAffect(StatusAffects.ImmolationSpell,0,0,0,0);
+		player.createStatusEffect(StatusEffects.ImmolationSpell,0,0,0,0);
 		//Immolation Spell: 2x Goblin Ale and 1x Sweet Gossamer. - Deals fire damage over time.
 		player.consumeItem(consumables.GOB_ALE,2);
 		player.consumeItem(consumables.S_GOSSR);
 	}
 	if (spell == "Ice Prison Spell") {
-		player.createStatusAffect(StatusAffects.IcePrisonSpell,0,0,0,0);
+		player.createStatusEffect(StatusEffects.IcePrisonSpell,0,0,0,0);
 		//Immolation Spell: 2x Icicle and 1x Numb Rock. - Deals ice damage and feeze (stuns).
 		player.consumeItem(consumables.ICICLE_,2);
 		player.consumeItem(consumables.NUMBROX);
@@ -3551,8 +3551,8 @@ private function arianSpellPlace(spell:String):void {
 	doNext(camp.returnToCampUseOneHour);
 }
 private function clearCharges():void {
-	if(player.hasStatusAffect(StatusAffects.ShieldingSpell)) player.removeStatusAffect(StatusAffects.ShieldingSpell);
-	if(player.hasStatusAffect(StatusAffects.ImmolationSpell)) player.removeStatusAffect(StatusAffects.ImmolationSpell);
+	if(player.hasStatusEffect(StatusEffects.ShieldingSpell)) player.removeStatusEffect(StatusEffects.ShieldingSpell);
+	if(player.hasStatusEffect(StatusEffects.ImmolationSpell)) player.removeStatusEffect(StatusEffects.ImmolationSpell);
 }
 public function clearTalisman():void {
 	player.removeKeyItem("Arian's Charged Talisman");

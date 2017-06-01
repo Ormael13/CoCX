@@ -80,7 +80,7 @@ package classes.Scenes.NPCs
 		public function BlindSpell():void {
 			outputText("Evangeline glare at you and point at you.  A bright flash erupts before you!\n");
 			if (player.findPerk(PerkLib.GorgonsEyes) < 0 && rand(100) > 20) {
-				player.createStatusAffect(StatusAffects.Blind,2,0,0,0);
+				player.createStatusEffect(StatusEffects.Blind,2,0,0,0);
 			}
 			else if (player.findPerk(PerkLib.GorgonsEyes) >= 0) {
 				outputText("Your mutated eyes not been affected at all by this flash!");
@@ -105,8 +105,8 @@ package classes.Scenes.NPCs
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
-			if (player.hasStatusAffect(StatusAffects.Blizzard)) {
-			player.addStatusValue(StatusAffects.Blizzard, 1, -1);
+			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
+			player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 			outputText("Evangeline narrows her eyes and focuses her mind with deadly intent. She snaps her fingers and you are enveloped in a flash of white flames!  Thanks to surrounding you ice shards this attack isn't at it peak power!  ");
 			damage *= 0.2;
 			}
@@ -154,7 +154,7 @@ package classes.Scenes.NPCs
 		public function BlinkSpell():void {
 			outputText("She flushes, drawing on her body's desires to empower her muscles and hasten her up.");
 			outputText("The rush of success and power flows through her body.  <b>She looks like she can move faster!</b>", false);
-			createStatusAffect(StatusAffects.Blink, 50, 0, 0, 0);
+			createStatusEffect(StatusEffects.Blink, 50, 0, 0, 0);
 			this.spe += (5 + (inte / 10)) * 1.5 * SpellMod();
 			fatigue += spellCostBlink();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
@@ -162,19 +162,19 @@ package classes.Scenes.NPCs
 		*/
 		public function ChargeWeaponMightChargeArmorBlinkSpell():void {
 			outputText("Evangeline utters word of power, summoning an electrical charge around her weapon. <b>It looks like she'll deal more physical damage now!</b>\n\n");
-			createStatusAffect(StatusAffects.ChargeWeapon, 50, 0, 0, 0);
+			createStatusEffect(StatusEffects.ChargeWeapon, 50, 0, 0, 0);
 			this.weaponAttack += (5 + (inte / 10)) * 1.2 * SpellMod();
 			outputText("She flushes, drawing on her body's desires to empower her muscles and toughen her up.");
 			outputText("The rush of success and power flows through her body.  <b>She looks like she can do anything!</b>\n\n", false);
-			createStatusAffect(StatusAffects.Might, 50, 0, 0, 0);
+			createStatusEffect(StatusEffects.Might, 50, 0, 0, 0);
 			this.str += (5 + (inte / 10)) * 1.2 * SpellMod();
 			this.tou += (5 + (inte / 10)) * 1.2 * SpellMod();
 			outputText("Evangeline utters word of power, summoning an electrical charge around her armor. <b>It looks like her armor will be reducing some of incoming damage now!</b>\n\n");
-			createStatusAffect(StatusAffects.ChargeArmor, 50, 0, 0, 0);
+			createStatusEffect(StatusEffects.ChargeArmor, 50, 0, 0, 0);
 			this.armorDef += (4 + (inte / 15)) * 1.2 * SpellMod();
 			outputText("She flushes, drawing on her body's desires to empower her muscles and hasten her up.");
 			outputText("The rush of success and power flows through her body.  <b>She looks like she can move faster!</b>\n\n", false);
-			createStatusAffect(StatusAffects.Blink, 50, 0, 0, 0);
+			createStatusEffect(StatusEffects.Blink, 50, 0, 0, 0);
 			this.spe += (5 + (inte / 10)) * 1.5 * SpellMod();
 			fatigue += spellCostChargeWeaponMightChargeArmorBlink();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED] += 4;
@@ -183,7 +183,7 @@ package classes.Scenes.NPCs
 		override protected function performCombatAction():void
 		{
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 12) {
-				if (!hasStatusAffect(StatusAffects.ChargeWeapon)) {
+				if (!hasStatusEffect(StatusEffects.ChargeWeapon)) {
 					ChargeWeaponMightChargeArmorBlinkSpell();
 					eAttack();
 				}
@@ -193,7 +193,7 @@ package classes.Scenes.NPCs
 					if (choice1 == 0) eAttack();
 					if (choice1 == 1) {
 						if (HPRatio() < .75 && (fatigue < (eMaxFatigue() - spellCostHeal()))) HealSpell();
-						else if ((this.lust < eMaxLust() * 0.75) && rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostBlind())) && !player.hasStatusAffect(StatusAffects.Blind)) BlindSpell();
+						else if ((this.lust < eMaxLust() * 0.75) && rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostBlind())) && !player.hasStatusEffect(StatusEffects.Blind)) BlindSpell();
 						else if (rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostArouse()))) ArouseSpell();
 						else if ((this.lust < eMaxLust() * 0.75) && rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostWhitefire()))) WhiteFireSpell();
 						//else if (rand(2) == 0 && (fatigue < (eMaxFatigue() - spellCostWhitefire()))) WhiteFireSpell();miejsce na ice spike spell w AI

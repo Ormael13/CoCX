@@ -32,7 +32,7 @@ private function helspawnTwinStrikes():void {
 	//if Bowmander
 	if(flags[kFLAGS.HELSPAWN_WEAPON] == "bow") outputText(flags[kFLAGS.HELSPAWN_NAME] + " leaps back out of your reach and nocks a pair of blunted arrows, drawing them back together and loosing them at once!\n");
 	else outputText(flags[kFLAGS.HELSPAWN_NAME] + " lunges at you, scimitar cleaving through the air toward your throat!\n");
-	createStatusAffect(StatusAffects.Attacks,0,0,0,0);
+	createStatusEffect(StatusEffects.Attacks,0,0,0,0);
 	eAttack();
 }
 
@@ -46,10 +46,10 @@ private function calledShot():void {
 	else {
 		outputText("\nOne of her arrows smacks right into your [leg], nearly bowling you over.  God DAMN that hurt! You're going to be limping for a while! ");
 		var affect:int = 20 + rand(5);
-		if(player.hasStatusAffect(StatusAffects.CalledShot)) {
+		if(player.hasStatusEffect(StatusEffects.CalledShot)) {
 			while(affect > 0 && player.spe >= 2) {
 				affect--;
-				player.addStatusValue(StatusAffects.CalledShot,1,1);
+				player.addStatusValue(StatusEffects.CalledShot,1,1);
 				player.spe--;
 				showStatDown( 'spe' );
 				// speDown.visible = true;
@@ -57,10 +57,10 @@ private function calledShot():void {
 			}
 		}
 		else {
-			player.createStatusAffect(StatusAffects.CalledShot,0,0,0,0);
+			player.createStatusEffect(StatusEffects.CalledShot,0,0,0,0);
 			while(affect > 0 && player.spe >= 2) {
 				affect--;
-				player.addStatusValue(StatusAffects.CalledShot,1,1);
+				player.addStatusValue(StatusEffects.CalledShot,1,1);
 				player.spe--;
 				showStatDown( 'spe' );
 				// speDown.visible = true;
@@ -90,8 +90,8 @@ private function calledShot():void {
 			else {
 				outputText("\nHer shield catches you right in the face, sending you tumbling to the ground and leaving you open to attack! ");
 				damage = player.takeDamage(damage, true);
-				if(rand(2) == 0 && !player.hasStatusAffect(StatusAffects.Stunned)) {
-					player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
+				if(rand(2) == 0 && !player.hasStatusEffect(StatusEffects.Stunned)) {
+					player.createStatusEffect(StatusEffects.Stunned,0,0,0,0);
 					outputText(" <b>The hit stuns you.</b>");
 				}
 			}
@@ -167,11 +167,11 @@ private function calledShot():void {
 							".  Pacing around you, the well-built young warrior intently studies her mentor's defenses, readying for your next attack.";
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_NORMAL);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 85, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 85, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E+"));
 			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,85,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,85,0,0,0);
 			this.tallness = 90;
 			this.hipRating = HIP_RATING_CURVY+2;
 			this.buttRating = BUTT_RATING_LARGE+1;
@@ -199,7 +199,7 @@ private function calledShot():void {
 			this.gems = 10 + rand(5);
 			this.tailType = TAIL_TYPE_SALAMANDER;
 			this.tailRecharge = 0;
-			this.createStatusAffect(StatusAffects.Keen, 0, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.Keen, 0, 0, 0, 0);
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			if (flags[kFLAGS.HELSPAWN_WEAPON] == "scimitar and shield") this.createPerk(PerkLib.ShieldWielder, 0, 0, 0, 0);

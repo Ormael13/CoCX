@@ -33,11 +33,11 @@ public class CombatTeases extends BaseContent {
 	public function tease(justText:Boolean = false):void {
 		if (!justText) clearOutput();
 		//You cant tease a blind guy!
-		if (monster.hasStatusAffect(StatusAffects.Blind) || monster.hasStatusAffect(StatusAffects.InkBlind)) {
+		if (monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind)) {
 			outputText("You do your best to tease " + monster.a + monster.short + " with your body.  It doesn't work - you blinded " + monster.pronoun2 + ", remember?\n\n", true);
 			return;
 		}
-		if (player.hasStatusAffect(StatusAffects.Sealed) && player.statusAffectv2(StatusAffects.Sealed) == 1) {
+		if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 1) {
 			outputText("You do your best to tease " + monster.a + monster.short + " with your body.  Your artless twirls have no effect, as <b>your ability to tease is sealed.</b>\n\n", true);
 			return;
 		}
@@ -430,7 +430,7 @@ public class CombatTeases extends BaseContent {
 			choices[choices.length] = 25;
 		}
 		//26 SMART PEEPS! 70+ int, arouse spell!
-		if (player.inte >= 70 && player.hasStatusAffect(StatusAffects.KnowsArouse)) {
+		if (player.inte >= 70 && player.hasStatusEffect(StatusEffects.KnowsArouse)) {
 			choices[choices.length] = 26;
 			choices[choices.length] = 26;
 			choices[choices.length] = 26;
@@ -591,7 +591,7 @@ public class CombatTeases extends BaseContent {
 			choices[choices.length] = 45;
 		}
 		//46 - Alraune Tease
-		if (player.hasStatusAffect(StatusAffects.AlrauneEntangle)) {
+		if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) {
 			choices[choices.length] = 46;
 			choices[choices.length] = 46;
 			choices[choices.length] = 46;
@@ -605,7 +605,7 @@ public class CombatTeases extends BaseContent {
 			if (player.hasVagina() && player.lactationQ() >= 500 && player.biggestTitSize() >= 6 && player.cowScore() >= 3 && player.tailType == TAIL_TYPE_COW)
 				select = 43;
 		}
-		if (player.hasStatusAffect(StatusAffects.AlrauneEntangle)) {
+		if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) {
 			select = 46;
 		}
 		//Lets do zis!
@@ -1453,7 +1453,7 @@ public class CombatTeases extends BaseContent {
 			damage = (damage + rand(bonusDamage)) * monster.lustVuln;
 
 			if (monster is JeanClaude) (monster as JeanClaude).handleTease(damage, true);
-			else if (monster is Doppleganger && !monster.hasStatusAffect(StatusAffects.Stunned)) (monster as Doppleganger).mirrorTease(damage, true);
+			else if (monster is Doppleganger && !monster.hasStatusEffect(StatusEffects.Stunned)) (monster as Doppleganger).mirrorTease(damage, true);
 			else if (!justText) monster.teased(damage);
 
 			if (flags[kFLAGS.PC_FETISH] >= 1 && !kGAMECLASS.urtaQuest.isUrta()) {

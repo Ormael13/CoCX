@@ -784,7 +784,7 @@ package classes.Scenes.Places.Prison
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
 			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && player.obey > 45 + rand(6) - (flags[kFLAGS.PRISON_TRAINING_LEVEL] * 2))
 			{
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,4);
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,1,4);
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 0;
 			}
 			flags[kFLAGS.PRISON_TRAIN_SELF_CONTROL_UNLOCKED] = 1;
@@ -807,7 +807,7 @@ package classes.Scenes.Places.Prison
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
 			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && player.obey > 45 + rand(3) - (flags[kFLAGS.PRISON_TRAINING_LEVEL] * 2))
 			{
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,4);
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,1,4);
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 0;
 			}
 			flags[kFLAGS.PRISON_TRAIN_SELF_CONTROL_UNLOCKED] = 1;
@@ -831,7 +831,7 @@ package classes.Scenes.Places.Prison
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
 			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && player.obey > 70 + rand(6) - (flags[kFLAGS.PRISON_TRAINING_LEVEL] * 2))
 			{
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,5);
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,1,5);
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 0;
 			}
 			flags[kFLAGS.PRISON_TRAIN_ANAL_CAPACITY_UNLOCKED] = 1;
@@ -856,7 +856,7 @@ package classes.Scenes.Places.Prison
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
 			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && player.obey > 70 + rand(3) - (flags[kFLAGS.PRISON_TRAINING_LEVEL] * 2))
 			{
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,5);
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,1,5);
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 0;
 			}
 			flags[kFLAGS.PRISON_TRAIN_ANAL_CAPACITY_UNLOCKED] = 1;
@@ -873,7 +873,7 @@ package classes.Scenes.Places.Prison
 				return true;
 			}
 			prison.prisonCaptorTrainingStatusUpdate();
-			switch(player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus))
+			switch(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus))
 			{
 				case 0:
 				case 1:
@@ -909,7 +909,7 @@ package classes.Scenes.Places.Prison
 				{
 					prison.changeEsteem(2,prison.inPrison);
 					outputText("\n\n",false);
-					switch(player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus))
+					switch(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus))
 					{
 						case 1:
 							prisonCaptorFeedingTitleTrainingAccept();
@@ -936,7 +936,7 @@ package classes.Scenes.Places.Prison
 					outputText(" In fact, while a second ago you thought you had the desire to refuse, now the thought of debasing yourself for her approval is filling you with an overwheling desire to do the exact opposite and put all your heart into doing as you gave been told.\n\n",false);
 					prison.changeEsteem(2,prison.inPrison);
 					outputText("\n\n",false);
-					switch(player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus))
+					switch(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus))
 					{
 						case 1:
 							prisonCaptorFeedingTitleTrainingPerform();
@@ -963,10 +963,10 @@ package classes.Scenes.Places.Prison
 			{
 				if(prisonCaptorFeedingQuestTrainingExists())
 				{
-					player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,1,0);
-					player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,2,0);
-					player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,3,0);
-					player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,4,0);
+					player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,1,0);
+					player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,2,0);
+					player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,3,0);
+					player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,4,0);
 				}
 				prison.changeWill(-prison.prisonWillCost(5));
 				outputText("Though you are unwilling to obey [if (obey <= 25) your captor][if (obey > 25) your Mistress] in this moment, ",false);
@@ -1087,7 +1087,7 @@ package classes.Scenes.Places.Prison
 					outputText("you hope that she knows how sorry you are to require her discipline.",false);
 				}
 				
-				if(player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus) == 3)
+				if(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus) == 3)
 				{
 					outputText("You remove her cock from your mouth, but continue to hold it gently in your hand. Then, assuming an apologetic tone, you ");
 				}
@@ -1248,7 +1248,7 @@ package classes.Scenes.Places.Prison
 				{
 					prison.changeEsteem(2,prison.inPrison);
 					outputText("\n\n",false);
-					switch(player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus))
+					switch(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus))
 					{
 						case 1:
 							prisonCaptorFeedingTitleTrainingAccept();
@@ -1275,7 +1275,7 @@ package classes.Scenes.Places.Prison
 					outputText(" In fact, while a second ago you thought you had the desire to refuse, now the thought of debasing yourself for her approval is filling you with an overwheling desire to do the exact opposite and put all your heart into doing as you gave been told.\n\n",false);
 					prison.changeEsteem(2,prison.inPrison);
 					outputText("\n\n",false);
-					switch(player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus))
+					switch(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus))
 					{
 						case 1:
 							prisonCaptorFeedingTitleTrainingPerform();
@@ -1302,10 +1302,10 @@ package classes.Scenes.Places.Prison
 			{
 				if(prisonCaptorFeedingQuestTrainingExists())
 				{
-					player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,1,0);
-					player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,2,0);
-					player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,3,0);
-					player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,4,0);
+					player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,1,0);
+					player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,2,0);
+					player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,3,0);
+					player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,4,0);
 				}
 				prison.changeWill(-prison.prisonWillCost(15));
 				outputText("Mistress Elly has simply asked too much from you -- you can't bring yourself to do as you have been instructed. What's more, ",false);
@@ -1430,7 +1430,7 @@ package classes.Scenes.Places.Prison
 					outputText("you know you will have to be rude about it to ensure you get the punishment you crave for your failure to live up to your true nature.",false);
 				}
 				
-				if(player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus) == 3)
+				if(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus) == 3)
 				{
 					outputText(" You pull her cock from your mouth and shrink away, assume a combative tone, and ");
 				}
@@ -1556,7 +1556,7 @@ package classes.Scenes.Places.Prison
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
 			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 3 && player.obey > 10 + rand(6))
 			{
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,2);
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,1,2);
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 0;
 			}
 			flags[kFLAGS.PRISON_STUDY_MANNERS_UNLOCKED] = 1;
@@ -1605,7 +1605,7 @@ package classes.Scenes.Places.Prison
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
 			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 3 && player.obey > 10 + rand(3))
 			{
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,2);
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,1,2);
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 0;
 			}
 			flags[kFLAGS.PRISON_STUDY_MANNERS_UNLOCKED] = 1;
@@ -2091,7 +2091,7 @@ package classes.Scenes.Places.Prison
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
 			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && ((fastLearner && player.obey >= 25) || (player.obey > 25 + rand(6) - (flags[kFLAGS.PRISON_TRAINING_LEVEL] * 2))))
 			{
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,3);
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,1,3);
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 0;
 			}
 			flags[kFLAGS.PRISON_STUDY_BREATHING_UNLOCKED] = 1;
@@ -2844,7 +2844,7 @@ package classes.Scenes.Places.Prison
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
 			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && player.obey > 25 + rand(3) - (flags[kFLAGS.PRISON_TRAINING_LEVEL] * 2))
 			{
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,3);
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,1,3);
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 0;
 			}
 			flags[kFLAGS.PRISON_STUDY_BREATHING_UNLOCKED] = 1;
@@ -3732,9 +3732,9 @@ package classes.Scenes.Places.Prison
 			var accept:Function = prisonCaptorFeedingQuestTrainingAccept;
 			var reject:Function = prisonCaptorFeedingTrainingReject;
 			var perform:Function = null;
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyQuest))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyQuest,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyQuest,0,0,0,0);
 			}
 			if((prisonCaptorFeedingQuestTrainingExists()) && ((prisonCaptorFeedingQuestTrainingIsComplete()) || (prisonCaptorFeedingQuestTrainingIsTimeUp())))
 			{
@@ -3812,7 +3812,7 @@ package classes.Scenes.Places.Prison
 			clearOutput();
 			outputText("(Placeholder) You angrily reject the quest and state that you'll NEVER do such humiliating quest, no matter how much of a slut and no matter how obedient you may be. You WANT her, not those other corrupt creatures.\n\n");
 			outputText("(Placeholder) Mistress Elly looks down at you. \"<i>Fine. I respect your preferences. I will not assign those quests again. But I still must punish you for your disobedience.</i>\"");
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest, 1, -1);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest, 1, -1);
 			prison.changeObey(-5);
 			prison.changeEsteem(5);
 			prison.prisonPunishment(80);
@@ -3824,10 +3824,10 @@ package classes.Scenes.Places.Prison
 			if (prisonCaptorFeedingQuestOptedOut()) return;
 			outputText("(Placeholder) She assigns you a random humiliating thing to go out into the world and do, and tells you how long you will have to do it.\n\n");
 			outputText("(Placeholder) For testing and demonstration purposes, your quest is to go out and get fucked by at least five monsters in the next four days. And no, it doesn't count if you beat them up first.\n\n");
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,1,1);
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,2,96);
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,3,0);
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,4,0);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,1,1);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,2,96);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,3,0);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,4,0);
 		}
 		
 		public function prisonCaptorFeedingFullyTrained():void
@@ -3887,17 +3887,17 @@ package classes.Scenes.Places.Prison
 			if(prison.prisonIsRestrained())
 			{
 			}
-			player.changeStatusValue(StatusAffects.PrisonRestraints,1,0);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,2,0);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,3,0);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,4,0);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,1,0);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,2,0);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,3,0);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,4,0);
 			flags[kFLAGS.PRISON_DOOR_UNLOCKED] = 1;
 			prison.changeEsteem(-5, prison.inPrison);
 			prison.changeObey(2.5, prison.inPrison);
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
 			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && player.obey > 90)
 			{
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,6);
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,1,6);
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 0;
 			}
 			inventory.takeItem(consumables.C_BREAD, camp.returnToCampUseOneHour);
@@ -3905,15 +3905,15 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorFeedingQuestTrainingIsComplete():Boolean
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyQuest))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest))
 			{
 				return false;
 			}
-			switch(player.statusAffectv1(StatusAffects.PrisonCaptorEllyQuest))
+			switch(player.statusEffectv1(StatusEffects.PrisonCaptorEllyQuest))
 			{
 				case 1:
-					trace("CHECKING FUCK QUEST " + player.statusAffectv3(StatusAffects.PrisonCaptorEllyQuest) + "");
-					if(player.statusAffectv3(StatusAffects.PrisonCaptorEllyQuest) >= 5)
+					trace("CHECKING FUCK QUEST " + player.statusEffectv3(StatusEffects.PrisonCaptorEllyQuest) + "");
+					if(player.statusEffectv3(StatusEffects.PrisonCaptorEllyQuest) >= 5)
 					{
 						trace("\nQUEST COMPLETE\n");
 						return true;
@@ -3927,7 +3927,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorFeedingQuestOptedOut():Boolean
 		{
-			if(player.hasStatusAffect(StatusAffects.PrisonCaptorEllyQuest) && player.statusAffectv1(StatusAffects.PrisonCaptorEllyQuest) < 0)
+			if(player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest) && player.statusEffectv1(StatusEffects.PrisonCaptorEllyQuest) < 0)
 			{
 				return true;
 			}
@@ -3936,7 +3936,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorFeedingQuestTrainingExists():Boolean
 		{
-			if(player.hasStatusAffect(StatusAffects.PrisonCaptorEllyQuest) && player.statusAffectv1(StatusAffects.PrisonCaptorEllyQuest) > 0)
+			if(player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest) && player.statusEffectv1(StatusEffects.PrisonCaptorEllyQuest) > 0)
 			{
 				return true;
 			}
@@ -3945,7 +3945,7 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorFeedingQuestTrainingIsTimeUp():Boolean
 		{
-			if(player.hasStatusAffect(StatusAffects.PrisonCaptorEllyQuest) && player.statusAffectv2(StatusAffects.PrisonCaptorEllyQuest) <= 0)
+			if(player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest) && player.statusEffectv2(StatusEffects.PrisonCaptorEllyQuest) <= 0)
 			{
 				return true;
 			}
@@ -3955,45 +3955,45 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorFeedingQuestTrainingStatusText():void
 		{
 			outputText("<b>Mistress Elly\'s Quest: </b>");
-			switch(player.statusAffectv1(StatusAffects.PrisonCaptorEllyQuest))
+			switch(player.statusEffectv1(StatusEffects.PrisonCaptorEllyQuest))
 			{
 				case 1:
 					outputText("Get fucked by five monsters\n");
-					outputText("<b>Quest Progress: </b>" + player.statusAffectv3(StatusAffects.PrisonCaptorEllyQuest) + " monster(s)\n");
+					outputText("<b>Quest Progress: </b>" + player.statusEffectv3(StatusEffects.PrisonCaptorEllyQuest) + " monster(s)\n");
 					break;
 				default:
 					outputText("No current quest!\n");
 			}
-			outputText("<b>Quest Time Remaining: </b>" + player.statusAffectv2(StatusAffects.PrisonCaptorEllyQuest) + " hours\n");
+			outputText("<b>Quest Time Remaining: </b>" + player.statusEffectv2(StatusEffects.PrisonCaptorEllyQuest) + " hours\n");
 		}
 		
 		public function prisonCaptorFeedingQuestTrainingDecrementTime():void
 		{
 			var newVal:* = undefined;
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyQuest))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest))
 			{
 				return;
 			}
-			newVal = player.statusAffectv2(StatusAffects.PrisonCaptorEllyQuest) - 1;
+			newVal = player.statusEffectv2(StatusEffects.PrisonCaptorEllyQuest) - 1;
 			if(newVal < 0)
 			{
 				newVal = 0;
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,2,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,2,newVal);
 		}
 		
 		public function prisonCaptorFeedingQuestTrainingProgress(questID:Number, val1:Number = 0, val2:Number = 0):void
 		{
 			var newval1:* = undefined;
 			var newval2:* = undefined;
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyQuest) || !(player.statusAffectv1(StatusAffects.PrisonCaptorEllyQuest) == questID))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyQuest) || !(player.statusEffectv1(StatusEffects.PrisonCaptorEllyQuest) == questID))
 			{
 				return;
 			}
-			newval1 = player.statusAffectv3(StatusAffects.PrisonCaptorEllyQuest) + val1;
-			newval2 = player.statusAffectv4(StatusAffects.PrisonCaptorEllyQuest) + val2;
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,3,newval1);
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,4,newval2);
+			newval1 = player.statusEffectv3(StatusEffects.PrisonCaptorEllyQuest) + val1;
+			newval2 = player.statusEffectv4(StatusEffects.PrisonCaptorEllyQuest) + val2;
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,3,newval1);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,4,newval2);
 		}
 		
 		public function prisonCaptorFeedingQuestTrainingResolve():void
@@ -4002,7 +4002,7 @@ package classes.Scenes.Places.Prison
 			//prison.prisonCaptor.updateNextFeedingEvent(model.time.hours, model.time.days);
 			if(prisonCaptorFeedingQuestTrainingIsComplete())
 			{
-				switch(player.statusAffectv1(StatusAffects.PrisonCaptorEllyQuest))
+				switch(player.statusEffectv1(StatusEffects.PrisonCaptorEllyQuest))
 				{
 					case 1:
 						outputText("(Placeholder) You got fucked by five monsters in just four days. Congratulations! Mistress Elly is very proud of her obedient little slut. \n\n");
@@ -4010,10 +4010,10 @@ package classes.Scenes.Places.Prison
 					default:
 						outputText("Somehow you finished an unknown quest. Well done, I guess? (This is a bug, by the way.)\n\n");
 				}
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,1,0);
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,2,0);
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,3,0);
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,4,0);
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,1,0);
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,2,0);
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,3,0);
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,4,0);
 				outputText("(Placeholder) As a reward you get a bowl of cum, since that\'s pretty much what you want at this point, right?\n\n");
 				outputText("\n\nOut of thin air she produces a pitiful loaf of bread and crumbles it into a bowl. With a smile of supreme satisfaction, she begins to milk her cock into it. Before long, the bowl is overflowing with her sticky seed. She sets it on the ground and gives you a playful wink before leaving you alone in the cell.\n\n",false);
 				prison.changeEsteem(-7, prison.inPrison);
@@ -4023,10 +4023,10 @@ package classes.Scenes.Places.Prison
 			}
 			outputText("(Placeholder) Mistress Elly is not pleased with your failure to do as instructed. Punishment time! (For now, an equal chance of light vs heavy punishment. Might be good to case this on quest difficulty or something. \n\n");
 			prison.changeEsteem(3, prison.inPrison);
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,1,0);
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,2,0);
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,3,0);
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyQuest,4,0);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,1,0);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,2,0);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,3,0);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyQuest,4,0);
 			prison.prisonPunishment(80);
 		}
 		

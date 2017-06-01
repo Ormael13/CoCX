@@ -10,7 +10,7 @@
 		public function sandTrapWait():void {
 			clearOutput();
 			game.spriteSelect(97);
-			if(!hasStatusAffect(StatusAffects.Climbed)) createStatusAffect(StatusAffects.Climbed,0,0,0,0);
+			if(!hasStatusEffect(StatusEffects.Climbed)) createStatusEffect(StatusEffects.Climbed,0,0,0,0);
 			outputText("Instead of attacking, you turn away from the monster and doggedly attempt to climb back up the pit, digging all of your limbs into the soft powder as you climb against the sandslide.");
 			if(trapLevel() == 4) {
 				outputText("\n\nYou eye the ground above you.  The edge of the pit is too sheer, the ground too unstable... although it looks like you can fight against the currents carrying you further down, it seems impossible to gain freedom with the sand under the monster's spell.");
@@ -33,14 +33,14 @@
 		}
 
 		public function trapLevel(adjustment:Number = 0):Number {
-			if(!hasStatusAffect(StatusAffects.Level)) createStatusAffect(StatusAffects.Level,4,0,0,0);
+			if(!hasStatusEffect(StatusEffects.Level)) createStatusEffect(StatusEffects.Level,4,0,0,0);
 			if(adjustment != 0) {
-				addStatusValue(StatusAffects.Level,1,adjustment);
+				addStatusValue(StatusEffects.Level,1,adjustment);
 				//Keep in bounds ya lummox
-				if(statusAffectv1(StatusAffects.Level) < 1) changeStatusValue(StatusAffects.Level,1,1);
-				if(statusAffectv1(StatusAffects.Level) > 4) changeStatusValue(StatusAffects.Level,1,4);
+				if(statusEffectv1(StatusEffects.Level) < 1) changeStatusValue(StatusEffects.Level,1,1);
+				if(statusEffectv1(StatusEffects.Level) > 4) changeStatusValue(StatusEffects.Level,1,4);
 			}
-			return statusAffectv1(StatusAffects.Level);
+			return statusEffectv1(StatusEffects.Level);
 		}
 
 
@@ -73,21 +73,21 @@
 				outputText("  You can't get free in time and in a panic you realize you are now practically wading in sand.  Attempting to climb free now is going to be very difficult.");
 				if(player.canFly()) outputText("  You try to wrench yourself free by flapping your wings, but it is hopeless.  You are well and truly snared.");
 				trapLevel(-1);
-				if(!hasStatusAffect(StatusAffects.Climbed)) createStatusAffect(StatusAffects.Climbed,0,0,0,0);
+				if(!hasStatusEffect(StatusEffects.Climbed)) createStatusEffect(StatusEffects.Climbed,0,0,0,0);
 			}
 		}
 
 		override protected function performCombatAction():void
 		{
-			if (hasStatusAffect(StatusAffects.Level)) {
-				if (trapLevel() == 4 && !hasStatusAffect(StatusAffects.Climbed)) nestleQuikSandAttack();
+			if (hasStatusEffect(StatusEffects.Level)) {
+				if (trapLevel() == 4 && !hasStatusEffect(StatusEffects.Climbed)) nestleQuikSandAttack();
 				else sandTrapPheremones();
 //PC sinks a level (end of any turn in which player didn't successfully \"<i>Wait</i>\"):
-				if (!hasStatusAffect(StatusAffects.Climbed)) {
+				if (!hasStatusEffect(StatusEffects.Climbed)) {
 					outputText("\n\nRivulets of sand run past you as you continue to sink deeper into both the pit and the sand itself.");
 					trapLevel(-1);
 				}
-				else removeStatusAffect(StatusAffects.Climbed);
+				else removeStatusEffect(StatusEffects.Climbed);
 				combatRoundOver();
 			} else super.performCombatAction();
 		}
@@ -110,7 +110,7 @@
 		public function SandTrap()
 		{
 			//1/3 have fertilized eggs!
-			if(rand(3) == 0) this.createStatusAffect(StatusAffects.Fertilized,0,0,0,0);
+			if(rand(3) == 0) this.createStatusEffect(StatusEffects.Fertilized,0,0,0,0);
 			this.a = "the ";
 			if (game.silly())
 				this.short = "sand tarp";
@@ -149,7 +149,7 @@
 			this.gems = 5 + rand(5);
 			this.drop = new ChainedDrop(consumables.TRAPOIL).add(consumables.OVIELIX,1/3);
 			this.tailType = TAIL_TYPE_DEMONIC;
-			createStatusAffect(StatusAffects.Level,4,0,0,0);
+			createStatusEffect(StatusEffects.Level,4,0,0,0);
 			this.str += 11 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 3 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.spe += 9 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

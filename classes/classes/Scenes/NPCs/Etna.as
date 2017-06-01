@@ -16,7 +16,7 @@ package classes.Scenes.NPCs
 		public var etnaScene:EtnaFollower = new EtnaFollower();
 		
 		public function moveClawCombo():void {
-			createStatusAffect(StatusAffects.Attacks,2,0,0,0);
+			createStatusEffect(StatusEffects.Attacks,2,0,0,0);
 			eAttack();
 		}
 		
@@ -27,12 +27,12 @@ package classes.Scenes.NPCs
 			if (rand(100) < (this.spe - player.spe) / 2) {
 				var tailspikedmg:Number = Math.round(this.str / 16);
 				var lustdmg:Number = Math.round(this.lib / 6);
-				if (player.hasStatusAffect(StatusAffects.BasiliskSlow)) {
-					player.addStatusValue(StatusAffects.BasiliskSlow, 1, 2);
+				if (player.hasStatusEffect(StatusEffects.BasiliskSlow)) {
+					player.addStatusValue(StatusEffects.BasiliskSlow, 1, 2);
 					player.spe -= 2;
 				}
 				else {
-					player.createStatusAffect(StatusAffects.BasiliskSlow, 3, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.BasiliskSlow, 3, 0, 0, 0);
 					player.spe -= 3;
 				}
 				showStatDown( 'spe' );
@@ -51,7 +51,7 @@ package classes.Scenes.NPCs
 			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) outputText("Etna");
 			else outputText("The manticore");
 			outputText(" takes flight aiming with her tail as she prepare to unleash a volley of spikes at you!");
-			createStatusAffect(StatusAffects.Flying,7,0,0,0);
+			createStatusEffect(StatusEffects.Flying,7,0,0,0);
 		}
 		
 		public function moveBoobCrash():void {
@@ -63,8 +63,8 @@ package classes.Scenes.NPCs
 			game.dynStats("lus", lustdmg, "resisted", false);
 			outputText(" <b>(<font color=\"#ff00ff\">" + lustdmg + "</font>)</b>");
 			player.takeDamage(boobcrashdmg, true);
-			player.createStatusAffect(StatusAffects.Stunned,1,0,0,0);
-			removeStatusAffect(StatusAffects.Flying);
+			player.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
+			removeStatusEffect(StatusEffects.Flying);
 		}
 		
 		public function moveBite():void {
@@ -77,19 +77,19 @@ package classes.Scenes.NPCs
 			outputText(" making you yelp in surprise. She breaks out of the grapple grinning. You took ");
 			player.takeDamage(bitedmg, true);
 			outputText(" damage!");
-			if (hasStatusAffect(StatusAffects.Constricted)) removeStatusAffect(StatusAffects.Constricted);
-			if (hasStatusAffect(StatusAffects.ConstrictedScylla)) removeStatusAffect(StatusAffects.ConstrictedScylla);
+			if (hasStatusEffect(StatusEffects.Constricted)) removeStatusEffect(StatusEffects.Constricted);
+			if (hasStatusEffect(StatusEffects.ConstrictedScylla)) removeStatusEffect(StatusEffects.ConstrictedScylla);
 		}
 		
 		override protected function performCombatAction():void
 		{
-			if (hasStatusAffect(StatusAffects.Constricted) || hasStatusAffect(StatusAffects.ConstrictedScylla)) {
+			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla)) {
 				moveBite();
 			}
-			else if (statusAffectv1(StatusAffects.Flying) == 3) {
+			else if (statusEffectv1(StatusEffects.Flying) == 3) {
 				moveBoobCrash();
 			}
-			else if (hasStatusAffect(StatusAffects.Flying)) {
+			else if (hasStatusEffect(StatusEffects.Flying)) {
 				moveTailSpike();
 			}
 			else {
@@ -120,21 +120,21 @@ package classes.Scenes.NPCs
 			if (game.flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1) {
 				this.a = "";
 				this.short = "Etna";
-				if (hasStatusAffect(StatusAffects.Flying)) this.long = "Etna is circling you in the air readying a salvo of spike to throw at you.";
+				if (hasStatusEffect(StatusEffects.Flying)) this.long = "Etna is circling you in the air readying a salvo of spike to throw at you.";
 				else this.long = "Etna is currently circling you looking for an oppening to strike. She's actualy good on the eye and you would give her body more attention if not for the fact she's trying to beat you down and rape you.";
 			}
 			else {
 				this.a = "the ";
 				this.short = "manticore";
-				if (hasStatusAffect(StatusAffects.Flying)) this.long = "The manticore is circling you in the air readying a salvo of spike to throw at you.";
+				if (hasStatusEffect(StatusEffects.Flying)) this.long = "The manticore is circling you in the air readying a salvo of spike to throw at you.";
 				else this.long = "The manticore is currently circling you looking for an oppening to strike. She's actualy good on the eye and you would give her body more attention if not for the fact she's trying to beat you down and rape you.";
 			}
 			createVagina(true,VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_TIGHT);
-			this.createStatusAffect(StatusAffects.BonusVCapacity,60,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity,60,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("E"));
 			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,20,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = 72;
 			this.hipRating = HIP_RATING_CURVY+2;
 			this.buttRating = BUTT_RATING_LARGE+1;

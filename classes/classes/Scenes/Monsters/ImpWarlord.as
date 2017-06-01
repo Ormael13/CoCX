@@ -39,7 +39,7 @@ package classes.Scenes.Monsters
 				if (damage < 20) damage = 20; //Min-cap damage.
 				if (damage >= 50) {
 					outputText("You let out a cry in pain and you swear you could see your wounds bleeding. ");
-					player.createStatusAffect(StatusAffects.IzmaBleed, 2, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
 				}
 				else {
 					outputText("Thankfully the wounds aren't that serious. ");

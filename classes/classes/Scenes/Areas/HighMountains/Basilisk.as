@@ -18,8 +18,8 @@ import classes.internals.ChainedDrop;
 				if(amount < 0) amount = 0;
 			}
 			player.spe -= amount;
-			if(player.hasStatusAffect(StatusAffects.BasiliskSlow)) player.addStatusValue(StatusAffects.BasiliskSlow,1,amount);
-			else player.createStatusAffect(StatusAffects.BasiliskSlow,amount,0,0,0);
+			if(player.hasStatusEffect(StatusEffects.BasiliskSlow)) player.addStatusValue(StatusEffects.BasiliskSlow,1,amount);
+			else player.createStatusEffect(StatusEffects.BasiliskSlow,amount,0,0,0);
 			showStatDown( 'spe' );
 			// speUp.visible = false;
 			// speDown.visible = true;
@@ -41,7 +41,7 @@ import classes.internals.ChainedDrop;
 					game.dynStats("lus", 3);
 					//apply status here
 					basiliskSpeed(player,20);
-					player.createStatusAffect(StatusAffects.BasiliskCompulsion,0,0,0,0);
+					player.createStatusEffect(StatusEffects.BasiliskCompulsion,0,0,0,0);
 					if (player.findPerk(PerkLib.GorgonsEyes) >= 0) flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 4;
 					else flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] += 2;
 				}
@@ -69,7 +69,7 @@ import classes.internals.ChainedDrop;
 
 		override protected function performCombatAction():void
 		{
-			if(!player.hasStatusAffect(StatusAffects.BasiliskCompulsion) && rand(3) == 0 && !hasStatusAffect(StatusAffects.Blind)) compulsion();
+			if(!player.hasStatusEffect(StatusEffects.BasiliskCompulsion) && rand(3) == 0 && !hasStatusEffect(StatusEffects.Blind)) compulsion();
 			else if(rand(3) == 0) basiliskTailSwipe();
 			else eAttack();
 		}
@@ -102,7 +102,7 @@ import classes.internals.ChainedDrop;
 			createBreastRow(0);
 			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,30,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 6*12+2;
 			this.hipRating = HIP_RATING_SLENDER+1;
 			this.buttRating = BUTT_RATING_AVERAGE;

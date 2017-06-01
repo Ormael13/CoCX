@@ -860,7 +860,7 @@ private function tamaniDaughtersBadEndChoice():void {
 	
 	outputText("A goblin leans over your face and hugs her jiggling breasts against you as she gushes, \"<i>Thank you so much daddy!   You probably can't see with all the straps holding you down, but you got me and my sisters totally pregnant.  There's even enough of your spunk left over to knock us up a few more times!  We decided that even though we don't need you to cum right now, we'd let you keep coming forever.  Do you want that?</i>\"\n\n", false);
 	
-	if(player.statusAffectv1(StatusAffects.Exgartuan) == 1) outputText("Exgartuan barks, \"<i>Hell yes I do!</i>\" but the goblin only smirks down for a moment before looking back at you.\n\n", false);
+	if(player.statusEffectv1(StatusEffects.Exgartuan) == 1) outputText("Exgartuan barks, \"<i>Hell yes I do!</i>\" but the goblin only smirks down for a moment before looking back at you.\n\n", false);
 	
 	outputText("(Options: Yes, No, I'd rather fill your cunts individually & personally)", false);
 	simpleChoices("Yes", tamaniDaughtersYesBadEndMePlease, "No", tamaniDaughtersDeclineBadEnd, "Individual", tamanisDaughtersFillIndividuallyBADEND, "", null, "", null);
@@ -873,7 +873,7 @@ private function tamaniDaughtersYesBadEndMePlease():void {
 	outputText("\"<i>Wonderful!</i>\" cries the excited pregnant slut.   She gives you a quick peck on the cheek as she prances back over to the machine.  You brace yourself in anticipation, eager to lose yourself to an eternal orgasm.  A switch clicks, and a dial whirs as it's turned up to the maximum.  The fluids pumping into your backside and directly into your veins suddenly jump in pressure, stinging painfully for a moment before the pleasure returns.  Your eyes slowly roll back, your jaw goes slack, and your " + multiCockDescriptLight() + " spew", false);
 	if(player.totalCocks() == 1) outputText("s", false);
 	outputText(" cum into the tubes.\n\n", false);
-	if(player.statusAffectv1(StatusAffects.Exgartuan) == 1) outputText("Exgartuan moans, \"<i>Ohhhhhh yeeeeaaaaahhhh...</i>\" before slipping into silence.\n\n", false);
+	if(player.statusEffectv1(StatusEffects.Exgartuan) == 1) outputText("Exgartuan moans, \"<i>Ohhhhhh yeeeeaaaaahhhh...</i>\" before slipping into silence.\n\n", false);
 	
 	outputText("You spend the rest of your life trapped in orgasm, constantly feeding the growth of what becomes the biggest goblin tribe in all the land of Mareth.  Even when every single one of them is pregnant, they let you enjoy your reward.  Over time your capacity for memory, morals, or anything other feeling besides pleasure dwindles.  Trapped in a heaven of your own choosing, you gave up everything that you were for never-ending bliss.", false);
 	getGame().gameOver();
@@ -1071,7 +1071,7 @@ internal function loseToDaughters():void {
 	spriteSelect(57);
 	if(player.lust >= player.maxLust()) {
 		//worms r gross mmmmkay?
-		if(player.hasStatusAffect(StatusAffects.Infested)) {
+		if(player.hasStatusEffect(StatusEffects.Infested)) {
 			kGAMECLASS.mountain.wormsScene.infestOrgasm();
 			outputText("\n\nThe goblins sigh and say, \"<i>Dad, that's just gross.  Don't get me wrong, we're still gonna have you knock us up, but I hate the feeling of those worms inside me.</i>\"", false);
 			player.orgasm();

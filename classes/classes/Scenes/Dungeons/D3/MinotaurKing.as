@@ -2,7 +2,7 @@ package classes.Scenes.Dungeons.D3
 {
 	import classes.Monster;
 	import classes.Appearance;
-	import classes.StatusAffects;
+	import classes.StatusEffects;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.CockTypesEnum;
 	import classes.PerkLib;
@@ -127,7 +127,7 @@ package classes.Scenes.Dungeons.D3
 			{
 				_lastRoundStun = false;
 				// If the player is still stunned, use dickslap ohterwise fall through to regular AI.
-				if (player.hasStatusAffect(StatusAffects.Stunned))
+				if (player.hasStatusEffect(StatusEffects.Stunned))
 				{
 					dickslap();
 					return;
@@ -200,7 +200,7 @@ package classes.Scenes.Dungeons.D3
 				if (player.findPerk(PerkLib.Resolute) < 0)
 				{
 					outputText(" <b>You're left stunned by the force of the blow!</b>");
-					player.createStatusAffect(StatusAffects.Stunned, 0, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 				}
 			}
 		}
@@ -312,7 +312,7 @@ package classes.Scenes.Dungeons.D3
 
 		override protected function handleStun():Boolean
 		{
-			if (hasStatusAffect(StatusAffects.MonsterAttacksDisabled)) {
+			if (hasStatusEffect(StatusEffects.MonsterAttacksDisabled)) {
 				return super.handleStun();
 			}
 			else {

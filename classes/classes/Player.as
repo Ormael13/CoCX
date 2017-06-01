@@ -377,16 +377,16 @@ use namespace kGAMECLASS;
 			if (findPerk(PerkLib.ChiReflowAttack) >= 0) armorDef *= UmasShop.NEEDLEWORK_ATTACK_DEFENSE_MULTI;
 			armorDef = Math.round(armorDef);
 			//Berzerking removes armor
-			if(hasStatusAffect(StatusAffects.Berzerking) && findPerk(PerkLib.ColdFury) < 1) {
+			if(hasStatusEffect(StatusEffects.Berzerking) && findPerk(PerkLib.ColdFury) < 1) {
 				armorDef = 0;
 			}
-			if(hasStatusAffect(StatusAffects.Lustzerking)) {
+			if(hasStatusEffect(StatusEffects.Lustzerking)) {
 				armorDef = Math.round(armorDef * 1.1);
 				armorDef += 1;
 			}
-			armorDef += Math.round(statusAffectv1(StatusAffects.ChargeArmor));
-			if (kGAMECLASS.monster.hasStatusAffect(StatusAffects.TailWhip)) {
-				armorDef -= kGAMECLASS.monster.statusAffectv1(StatusAffects.TailWhip);
+			armorDef += Math.round(statusEffectv1(StatusEffects.ChargeArmor));
+			if (kGAMECLASS.monster.hasStatusEffect(StatusEffects.TailWhip)) {
+				armorDef -= kGAMECLASS.monster.statusEffectv1(StatusEffects.TailWhip);
 				if(armorDef < 0) armorDef = 0;
 			}
 			armorDef = Math.round(armorDef);
@@ -462,9 +462,9 @@ use namespace kGAMECLASS;
 			if(armType == ARM_TYPE_YETI && weaponName == "fists") {
 				attack += (5 * (1 + newGamePlusMod));
 			}
-			if(hasStatusAffect(StatusAffects.Berzerking)) attack += (15 + (15 * (1 + newGamePlusMod)));
-			if(hasStatusAffect(StatusAffects.Lustzerking)) attack += (15 + (15 * (1 + newGamePlusMod)));
-			attack += Math.round(statusAffectv1(StatusAffects.ChargeWeapon));//zrobić modyfikacje na przypadek single/dual weapon charged tj. 2x wiecej bonusu za dual ale też koszt rzucania powinien wzrosnąć 2x
+			if(hasStatusEffect(StatusEffects.Berzerking)) attack += (15 + (15 * (1 + newGamePlusMod)));
+			if(hasStatusEffect(StatusEffects.Lustzerking)) attack += (15 + (15 * (1 + newGamePlusMod)));
+			attack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));//zrobić modyfikacje na przypadek single/dual weapon charged tj. 2x wiecej bonusu za dual ale też koszt rzucania powinien wzrosnąć 2x
 			attack = Math.round(attack);
 			return attack;
 		}
@@ -515,9 +515,9 @@ use namespace kGAMECLASS;
 			if(armType == ARM_TYPE_MANTIS && weaponRangeName == "fists") {
 				rangeattack += (15 * (1 + newGamePlusMod));
 			}
-			if(hasStatusAffect(StatusAffects.Berzerking)) rangeattack += (30 + (15 * newGamePlusMod));
-			if(hasStatusAffect(StatusAffects.Lustzerking)) rangeattack += (30 + (15 * newGamePlusMod));
-			if(findPerk(PerkLib.) >= 0) rangeattack += Math.round(statusAffectv1(StatusAffects.ChargeWeapon));
+			if(hasStatusEffect(StatusEffects.Berzerking)) rangeattack += (30 + (15 * newGamePlusMod));
+			if(hasStatusEffect(StatusEffects.Lustzerking)) rangeattack += (30 + (15 * newGamePlusMod));
+			if(findPerk(PerkLib.) >= 0) rangeattack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
 		*/	rangeattack = Math.round(rangeattack);
 			return rangeattack;
 		}
@@ -784,7 +784,7 @@ use namespace kGAMECLASS;
 				damage *= 1.75;
 				flags[kFLAGS.ENEMY_CRITICAL] = 1;
 			}
-			if (hasStatusAffect(StatusAffects.Shielding)) {
+			if (hasStatusEffect(StatusEffects.Shielding)) {
 				damage -= 30;
 				if (damage < 1) damage = 1;
 			}
@@ -1861,9 +1861,9 @@ use namespace kGAMECLASS;
 		public function sandTrapScore():int {
 			Begin("Player","racialScore","sandTrap");
 			var counter:int = 0;
-			if (hasStatusAffect(StatusAffects.BlackNipples))
+			if (hasStatusEffect(StatusEffects.BlackNipples))
 				counter++;
-			if (hasStatusAffect(StatusAffects.Uniball))
+			if (hasStatusEffect(StatusEffects.Uniball))
 				counter++;
 			if (hasVagina() && vaginaType() == 5)
 				counter++;
@@ -1871,7 +1871,7 @@ use namespace kGAMECLASS;
 				counter++;
 			if (wingType == 12)
 				counter++;
-			if (hasStatusAffect(StatusAffects.Uniball))
+			if (hasStatusEffect(StatusEffects.Uniball))
 				counter++;
 			End("Player","racialScore");
 			return counter;
@@ -2351,7 +2351,7 @@ use namespace kGAMECLASS;
 				gooCounter += 2;
 			if (vaginalCapacity() > 9000)
 				gooCounter++;
-			if (hasStatusAffect(StatusAffects.SlimeCraving))
+			if (hasStatusEffect(StatusEffects.SlimeCraving))
 				gooCounter++;
 			if (findPerk(PerkLib.SlimeCore) >= 0)
 				gooCounter++;
@@ -3422,12 +3422,12 @@ use namespace kGAMECLASS;
 			//(Large – 0.8 - Size 10 + 4 Multi)
 			//(HUGE – 2.4 - Size 12 + 5 Multi + 4 tits)
 			var total:Number;
-			if (!hasStatusAffect(StatusAffects.LactationEndurance))
-				createStatusAffect(StatusAffects.LactationEndurance, 1, 0, 0, 0);
-			total = biggestTitSize() * 10 * averageLactation() * statusAffectv1(StatusAffects.LactationEndurance) * totalBreasts();
+			if (!hasStatusEffect(StatusEffects.LactationEndurance))
+				createStatusEffect(StatusEffects.LactationEndurance, 1, 0, 0, 0);
+			total = biggestTitSize() * 10 * averageLactation() * statusEffectv1(StatusEffects.LactationEndurance) * totalBreasts();
 			if (findPerk(PerkLib.MilkMaid) >= 0)
 				total += 200 + (perkv1(PerkLib.MilkMaid) * 100);
-			if (statusAffectv1(StatusAffects.LactationReduction) >= 48)
+			if (statusEffectv1(StatusEffects.LactationReduction) >= 48)
 				total = total * 1.5;
 			if (total > int.MAX_VALUE)
 				total = int.MAX_VALUE;
@@ -3560,12 +3560,12 @@ use namespace kGAMECLASS;
 		}
 
 		public function slimeFeed():void{
-			if(hasStatusAffect(StatusAffects.SlimeCraving)) {
+			if(hasStatusEffect(StatusEffects.SlimeCraving)) {
 				//Reset craving value
-				changeStatusValue(StatusAffects.SlimeCraving,1,0);
+				changeStatusValue(StatusEffects.SlimeCraving,1,0);
 				//Flag to display feed update and restore stats in event parser
-				if(!hasStatusAffect(StatusAffects.SlimeCravingFeed)) {
-					createStatusAffect(StatusAffects.SlimeCravingFeed,0,0,0,0);
+				if(!hasStatusEffect(StatusEffects.SlimeCravingFeed)) {
+					createStatusEffect(StatusEffects.SlimeCravingFeed,0,0,0,0);
 				}
 			}
 			if(findPerk(PerkLib.Diapause) >= 0) {
@@ -3614,8 +3614,8 @@ use namespace kGAMECLASS;
 
 		public function spellCount():Number
 		{
-			return [StatusAffects.KnowsArouse,StatusAffects.KnowsHeal,StatusAffects.KnowsMight,StatusAffects.KnowsCharge,StatusAffects.KnowsBlind,StatusAffects.KnowsWhitefire,StatusAffects.KnowsChargeA,StatusAffects.KnowsBlink,StatusAffects.KnowsBlizzard,StatusAffects.KnowsIceSpike,StatusAffects.KnowsLightningBolt,StatusAffects.KnowsDarknessShard,StatusAffects.KnowsFireStorm,StatusAffects.KnowsIceRain]
-					.filter(function(item:StatusAffectType,index:int,array:Array):Boolean{
+			return [StatusEffects.KnowsArouse,StatusEffects.KnowsHeal,StatusEffects.KnowsMight,StatusEffects.KnowsCharge,StatusEffects.KnowsBlind,StatusEffects.KnowsWhitefire,StatusEffects.KnowsChargeA,StatusEffects.KnowsBlink,StatusEffects.KnowsBlizzard,StatusEffects.KnowsIceSpike,StatusEffects.KnowsLightningBolt,StatusEffects.KnowsDarknessShard,StatusEffects.KnowsFireStorm,StatusEffects.KnowsIceRain]
+					.filter(function(item:StatusEffectType, index:int, array:Array):Boolean{
 						return this.hasStatusAffect(item);},this)
 					.length;
 		}
@@ -3892,7 +3892,7 @@ use namespace kGAMECLASS;
 			var min:Number = 0;
 			var minCap:Number = 100;
 			//Bimbo body boosts minimum lust by 40
-			if(hasStatusAffect(StatusAffects.BimboChampagne) || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) {
+			if(hasStatusEffect(StatusEffects.BimboChampagne) || findPerk(PerkLib.BimboBody) >= 0 || findPerk(PerkLib.BroBody) >= 0 || findPerk(PerkLib.FutaForm) >= 0) {
 				if(min > 40) min += 10;
 				else if(min >= 20) min += 20;
 				else min += 40;
@@ -3910,7 +3910,7 @@ use namespace kGAMECLASS;
 				else min += 30;
 			}
 			//Oh noes anemone!
-			if(hasStatusAffect(StatusAffects.AnemoneArousal)) {
+			if(hasStatusEffect(StatusEffects.AnemoneArousal)) {
 				if(min >= 40) min += 10;
 				else if(min >= 20) min += 20;
 				else min += 30;
@@ -3924,7 +3924,7 @@ use namespace kGAMECLASS;
 				if(min < 50) min += 10;
 				else min += 5;
 			}
-			if(hasStatusAffect(StatusAffects.Infested)) {
+			if(hasStatusEffect(StatusEffects.Infested)) {
 				if(min < 50) min = 50;
 			}
 			//Add points for Crimstone
@@ -3949,7 +3949,7 @@ use namespace kGAMECLASS;
 				minCap -= 10;
 			}
 			//Harpy Lipstick status forces minimum lust to be at least 50.
-			if(min < 50 && hasStatusAffect(StatusAffects.Luststick)) min = 50;
+			if(min < 50 && hasStatusEffect(StatusEffects.Luststick)) min = 50;
 			//SHOULDRA BOOSTS
 			//+20
 			if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -168 && flags[kFLAGS.URTA_QUEST_STATUS] != 0.75) {
@@ -4724,28 +4724,28 @@ use namespace kGAMECLASS;
 			maxWis += 5 * perkv1(PerkLib.AscensionTranshumanism);
 			maxLib += 5 * perkv1(PerkLib.AscensionTranshumanism);
 			//Might
-			if (hasStatusAffect(StatusAffects.Might)) {
-				maxStr += statusAffectv1(StatusAffects.Might);
-				maxTou += statusAffectv2(StatusAffects.Might);
+			if (hasStatusEffect(StatusEffects.Might)) {
+				maxStr += statusEffectv1(StatusEffects.Might);
+				maxTou += statusEffectv2(StatusEffects.Might);
 			}
 			//Blink
-			if (hasStatusAffect(StatusAffects.Blink)) {
-				maxSpe += statusAffectv1(StatusAffects.Blink);
+			if (hasStatusEffect(StatusEffects.Blink)) {
+				maxSpe += statusEffectv1(StatusEffects.Blink);
 			}
 			//Beat of War
-			if (hasStatusAffect(StatusAffects.BeatOfWar)) {
-				maxStr += statusAffectv1(StatusAffects.BeatOfWar);
+			if (hasStatusEffect(StatusEffects.BeatOfWar)) {
+				maxStr += statusEffectv1(StatusEffects.BeatOfWar);
 			}
-			if (hasStatusAffect(StatusAffects.AndysSmoke)) {
-				maxSpe -= statusAffectv2(StatusAffects.AndysSmoke);
-				maxInt += statusAffectv3(StatusAffects.AndysSmoke);
+			if (hasStatusEffect(StatusEffects.AndysSmoke)) {
+				maxSpe -= statusEffectv2(StatusEffects.AndysSmoke);
+				maxInt += statusEffectv3(StatusEffects.AndysSmoke);
 			}
-			if (hasStatusAffect(StatusAffects.FeedingEuphoria)) {
-				maxSpe += statusAffectv2(StatusAffects.FeedingEuphoria);
+			if (hasStatusEffect(StatusEffects.FeedingEuphoria)) {
+				maxSpe += statusEffectv2(StatusEffects.FeedingEuphoria);
 			}
-			if (hasStatusAffect(StatusAffects.UnderwaterCombatBoost)) {
-				maxStr += statusAffectv1(StatusAffects.UnderwaterCombatBoost);
-				maxSpe += statusAffectv2(StatusAffects.UnderwaterCombatBoost);
+			if (hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
+				maxStr += statusEffectv1(StatusEffects.UnderwaterCombatBoost);
+				maxSpe += statusEffectv2(StatusEffects.UnderwaterCombatBoost);
 			}
 			End("Player","getAllMaxStats.effects");
 			End("Player","getAllMaxStats");
@@ -4774,206 +4774,206 @@ use namespace kGAMECLASS;
 
 		public function clearStatuses(visibility:Boolean):void
 		{
-			if (hasStatusAffect(StatusAffects.DriderIncubusVenom))
+			if (hasStatusEffect(StatusEffects.DriderIncubusVenom))
 			{
-				str += statusAffectv2(StatusAffects.DriderIncubusVenom);
-				removeStatusAffect(StatusAffects.DriderIncubusVenom);
+				str += statusEffectv2(StatusEffects.DriderIncubusVenom);
+				removeStatusEffect(StatusEffects.DriderIncubusVenom);
 				kGAMECLASS.mainView.statsView.showStatUp('str');
 			}
-			while(hasStatusAffect(StatusAffects.Web)) {
-				spe += statusAffectv1(StatusAffects.Web);
+			while(hasStatusEffect(StatusEffects.Web)) {
+				spe += statusEffectv1(StatusEffects.Web);
 				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
 				// speUp.visible = true;
 				// speDown.visible = false;
-				removeStatusAffect(StatusAffects.Web);
+				removeStatusEffect(StatusEffects.Web);
 			}
-			if(hasStatusAffect(StatusAffects.Shielding)) removeStatusAffect(StatusAffects.Shielding);
-			if(hasStatusAffect(StatusAffects.HolliConstrict)) removeStatusAffect(StatusAffects.HolliConstrict);
-			if(hasStatusAffect(StatusAffects.LustStones)) removeStatusAffect(StatusAffects.LustStones);
-			if(kGAMECLASS.monster.hasStatusAffect(StatusAffects.Sandstorm)) kGAMECLASS.monster.removeStatusAffect(StatusAffects.Sandstorm);
-			if(hasStatusAffect(StatusAffects.Sealed)) {
-				removeStatusAffect(StatusAffects.Sealed);
+			if(hasStatusEffect(StatusEffects.Shielding)) removeStatusEffect(StatusEffects.Shielding);
+			if(hasStatusEffect(StatusEffects.HolliConstrict)) removeStatusEffect(StatusEffects.HolliConstrict);
+			if(hasStatusEffect(StatusEffects.LustStones)) removeStatusEffect(StatusEffects.LustStones);
+			if(kGAMECLASS.monster.hasStatusEffect(StatusEffects.Sandstorm)) kGAMECLASS.monster.removeStatusEffect(StatusEffects.Sandstorm);
+			if(hasStatusEffect(StatusEffects.Sealed)) {
+				removeStatusEffect(StatusEffects.Sealed);
 			}
-			if(hasStatusAffect(StatusAffects.Berzerking)) {
-				removeStatusAffect(StatusAffects.Berzerking);
+			if(hasStatusEffect(StatusEffects.Berzerking)) {
+				removeStatusEffect(StatusEffects.Berzerking);
 			}
-			if(hasStatusAffect(StatusAffects.Lustzerking)) {
-				removeStatusAffect(StatusAffects.Lustzerking);
+			if(hasStatusEffect(StatusEffects.Lustzerking)) {
+				removeStatusEffect(StatusEffects.Lustzerking);
 			}
-			if(kGAMECLASS.monster.hasStatusAffect(StatusAffects.TailWhip)) {
-				kGAMECLASS.monster.removeStatusAffect(StatusAffects.TailWhip);
+			if(kGAMECLASS.monster.hasStatusEffect(StatusEffects.TailWhip)) {
+				kGAMECLASS.monster.removeStatusEffect(StatusEffects.TailWhip);
 			}
-			if(hasStatusAffect(StatusAffects.UBERWEB)) removeStatusAffect(StatusAffects.UBERWEB);
-			if(hasStatusAffect(StatusAffects.DriderKiss)) removeStatusAffect(StatusAffects.DriderKiss);
-			if(hasStatusAffect(StatusAffects.WebSilence)) removeStatusAffect(StatusAffects.WebSilence);
-			if(hasStatusAffect(StatusAffects.GooArmorSilence)) removeStatusAffect(StatusAffects.GooArmorSilence);
-			if(hasStatusAffect(StatusAffects.Bound)) removeStatusAffect(StatusAffects.Bound);
-			if(hasStatusAffect(StatusAffects.GooArmorBind)) removeStatusAffect(StatusAffects.GooArmorBind);
-			if(hasStatusAffect(StatusAffects.WolfHold)) removeStatusAffect(StatusAffects.WolfHold);
-			if(hasStatusAffect(StatusAffects.Whispered)) removeStatusAffect(StatusAffects.Whispered);
-			if(hasStatusAffect(StatusAffects.AkbalSpeed)) {
-				kGAMECLASS.dynStats("spe", statusAffectv1(StatusAffects.AkbalSpeed) * -1);
-				removeStatusAffect(StatusAffects.AkbalSpeed);
+			if(hasStatusEffect(StatusEffects.UBERWEB)) removeStatusEffect(StatusEffects.UBERWEB);
+			if(hasStatusEffect(StatusEffects.DriderKiss)) removeStatusEffect(StatusEffects.DriderKiss);
+			if(hasStatusEffect(StatusEffects.WebSilence)) removeStatusEffect(StatusEffects.WebSilence);
+			if(hasStatusEffect(StatusEffects.GooArmorSilence)) removeStatusEffect(StatusEffects.GooArmorSilence);
+			if(hasStatusEffect(StatusEffects.Bound)) removeStatusEffect(StatusEffects.Bound);
+			if(hasStatusEffect(StatusEffects.GooArmorBind)) removeStatusEffect(StatusEffects.GooArmorBind);
+			if(hasStatusEffect(StatusEffects.WolfHold)) removeStatusEffect(StatusEffects.WolfHold);
+			if(hasStatusEffect(StatusEffects.Whispered)) removeStatusEffect(StatusEffects.Whispered);
+			if(hasStatusEffect(StatusEffects.AkbalSpeed)) {
+				kGAMECLASS.dynStats("spe", statusEffectv1(StatusEffects.AkbalSpeed) * -1);
+				removeStatusEffect(StatusEffects.AkbalSpeed);
 			}
-			if(hasStatusAffect(StatusAffects.AmilyVenom)) {
-				kGAMECLASS.dynStats("str", statusAffectv1(StatusAffects.AmilyVenom),"spe", statusAffectv2(StatusAffects.AmilyVenom));
-				removeStatusAffect(StatusAffects.AmilyVenom);
+			if(hasStatusEffect(StatusEffects.AmilyVenom)) {
+				kGAMECLASS.dynStats("str", statusEffectv1(StatusEffects.AmilyVenom),"spe", statusEffectv2(StatusEffects.AmilyVenom));
+				removeStatusEffect(StatusEffects.AmilyVenom);
 			}
-			while(hasStatusAffect(StatusAffects.Blind)) {
-				removeStatusAffect(StatusAffects.Blind);
+			while(hasStatusEffect(StatusEffects.Blind)) {
+				removeStatusEffect(StatusEffects.Blind);
 			}
-			if(hasStatusAffect(StatusAffects.SheilaOil)) {
-				removeStatusAffect(StatusAffects.SheilaOil);
+			if(hasStatusEffect(StatusEffects.SheilaOil)) {
+				removeStatusEffect(StatusEffects.SheilaOil);
 			}
-			if(kGAMECLASS.monster.hasStatusAffect(StatusAffects.TwuWuv)) {
-				inte += kGAMECLASS.monster.statusAffectv1(StatusAffects.TwuWuv);
+			if(kGAMECLASS.monster.hasStatusEffect(StatusEffects.TwuWuv)) {
+				inte += kGAMECLASS.monster.statusEffectv1(StatusEffects.TwuWuv);
 				kGAMECLASS.statScreenRefresh();
 				kGAMECLASS.mainView.statsView.showStatUp( 'inte' );
 			}
-			if(hasStatusAffect(StatusAffects.NagaVenom)) {
-				spe += statusAffectv1(StatusAffects.NagaVenom);
+			if(hasStatusEffect(StatusEffects.NagaVenom)) {
+				spe += statusEffectv1(StatusEffects.NagaVenom);
 				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
-				//stats(0,0,statusAffectv1(StatusAffects.NagaVenom),0,0,0,0,0);
-				removeStatusAffect(StatusAffects.NagaVenom);
+				//stats(0,0,statusEffectv1(StatusEffects.NagaVenom),0,0,0,0,0);
+				removeStatusEffect(StatusEffects.NagaVenom);
 			}
-			if(hasStatusAffect(StatusAffects.MedusaVenom)) {
-				str += statusAffectv1(StatusAffects.MedusaVenom);
-				tou += statusAffectv2(StatusAffects.MedusaVenom);
-				spe += statusAffectv3(StatusAffects.MedusaVenom);
-				inte += statusAffectv4(StatusAffects.MedusaVenom);
+			if(hasStatusEffect(StatusEffects.MedusaVenom)) {
+				str += statusEffectv1(StatusEffects.MedusaVenom);
+				tou += statusEffectv2(StatusEffects.MedusaVenom);
+				spe += statusEffectv3(StatusEffects.MedusaVenom);
+				inte += statusEffectv4(StatusEffects.MedusaVenom);
 				kGAMECLASS.mainView.statsView.showStatUp( 'str' );
 				kGAMECLASS.mainView.statsView.showStatUp( 'tou' );
 				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
 				kGAMECLASS.mainView.statsView.showStatUp( 'inte' );
-				//stats(0,0,statusAffectv1(StatusAffects.NagaVenom),0,0,0,0,0);
-				removeStatusAffect(StatusAffects.MedusaVenom);
+				//stats(0,0,statusEffectv1(StatusEffects.NagaVenom),0,0,0,0,0);
+				removeStatusEffect(StatusEffects.MedusaVenom);
 			}
-			if(hasStatusAffect(StatusAffects.Frostbite)) {
-				str += statusAffectv1(StatusAffects.Frostbite);
+			if(hasStatusEffect(StatusEffects.Frostbite)) {
+				str += statusEffectv1(StatusEffects.Frostbite);
 				kGAMECLASS.mainView.statsView.showStatUp( 'str' );
-				//stats(0,0,statusAffectv1(StatusAffects.Frostbite),0,0,0,0,0);
-				removeStatusAffect(StatusAffects.Frostbite);
+				//stats(0,0,statusEffectv1(StatusEffects.Frostbite),0,0,0,0,0);
+				removeStatusEffect(StatusEffects.Frostbite);
 			}
-			if(hasStatusAffect(StatusAffects.TentacleBind)) removeStatusAffect(StatusAffects.TentacleBind);
-			if(hasStatusAffect(StatusAffects.NagaBind)) removeStatusAffect(StatusAffects.NagaBind);
-			if(hasStatusAffect(StatusAffects.StoneLust)) {
-				removeStatusAffect(StatusAffects.StoneLust);
+			if(hasStatusEffect(StatusEffects.TentacleBind)) removeStatusEffect(StatusEffects.TentacleBind);
+			if(hasStatusEffect(StatusEffects.NagaBind)) removeStatusEffect(StatusEffects.NagaBind);
+			if(hasStatusEffect(StatusEffects.StoneLust)) {
+				removeStatusEffect(StatusEffects.StoneLust);
 			}
-			removeStatusAffect(StatusAffects.FirstAttack);
-			if(hasStatusAffect(StatusAffects.TemporaryHeat)) removeStatusAffect(StatusAffects.TemporaryHeat);
-			if(hasStatusAffect(StatusAffects.NoFlee)) removeStatusAffect(StatusAffects.NoFlee);
-			if(hasStatusAffect(StatusAffects.Poison)) removeStatusAffect(StatusAffects.Poison);
-			if(hasStatusAffect(StatusAffects.IsabellaStunned)) removeStatusAffect(StatusAffects.IsabellaStunned);
-			if(hasStatusAffect(StatusAffects.Stunned)) removeStatusAffect(StatusAffects.Stunned);
-			if(hasStatusAffect(StatusAffects.Confusion)) removeStatusAffect(StatusAffects.Confusion);
-			if(hasStatusAffect(StatusAffects.ThroatPunch)) removeStatusAffect(StatusAffects.ThroatPunch);
-			if(hasStatusAffect(StatusAffects.KissOfDeath)) removeStatusAffect(StatusAffects.KissOfDeath);
-			if(hasStatusAffect(StatusAffects.AcidSlap)) removeStatusAffect(StatusAffects.AcidSlap);
-			if(hasStatusAffect(StatusAffects.GooBind)) removeStatusAffect(StatusAffects.GooBind);
-			if(hasStatusAffect(StatusAffects.HarpyBind)) removeStatusAffect(StatusAffects.HarpyBind);
-			if(hasStatusAffect(StatusAffects.CalledShot)) {
-				spe += statusAffectv1(StatusAffects.CalledShot);
+			removeStatusEffect(StatusEffects.FirstAttack);
+			if(hasStatusEffect(StatusEffects.TemporaryHeat)) removeStatusEffect(StatusEffects.TemporaryHeat);
+			if(hasStatusEffect(StatusEffects.NoFlee)) removeStatusEffect(StatusEffects.NoFlee);
+			if(hasStatusEffect(StatusEffects.Poison)) removeStatusEffect(StatusEffects.Poison);
+			if(hasStatusEffect(StatusEffects.IsabellaStunned)) removeStatusEffect(StatusEffects.IsabellaStunned);
+			if(hasStatusEffect(StatusEffects.Stunned)) removeStatusEffect(StatusEffects.Stunned);
+			if(hasStatusEffect(StatusEffects.Confusion)) removeStatusEffect(StatusEffects.Confusion);
+			if(hasStatusEffect(StatusEffects.ThroatPunch)) removeStatusEffect(StatusEffects.ThroatPunch);
+			if(hasStatusEffect(StatusEffects.KissOfDeath)) removeStatusEffect(StatusEffects.KissOfDeath);
+			if(hasStatusEffect(StatusEffects.AcidSlap)) removeStatusEffect(StatusEffects.AcidSlap);
+			if(hasStatusEffect(StatusEffects.GooBind)) removeStatusEffect(StatusEffects.GooBind);
+			if(hasStatusEffect(StatusEffects.HarpyBind)) removeStatusEffect(StatusEffects.HarpyBind);
+			if(hasStatusEffect(StatusEffects.CalledShot)) {
+				spe += statusEffectv1(StatusEffects.CalledShot);
 				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
 				// speDown.visible = false;
 				// speUp.visible = true;
-				removeStatusAffect(StatusAffects.CalledShot);
+				removeStatusEffect(StatusEffects.CalledShot);
 			}
-			if(hasStatusAffect(StatusAffects.DemonSeed)) {
-				removeStatusAffect(StatusAffects.DemonSeed);
+			if(hasStatusEffect(StatusEffects.DemonSeed)) {
+				removeStatusEffect(StatusEffects.DemonSeed);
 			}
-			if(hasStatusAffect(StatusAffects.ParalyzeVenom)) {
-				str += statusAffectv1(StatusAffects.ParalyzeVenom);
-				spe += statusAffectv2(StatusAffects.ParalyzeVenom);
-				removeStatusAffect(StatusAffects.ParalyzeVenom);
+			if(hasStatusEffect(StatusEffects.ParalyzeVenom)) {
+				str += statusEffectv1(StatusEffects.ParalyzeVenom);
+				spe += statusEffectv2(StatusEffects.ParalyzeVenom);
+				removeStatusEffect(StatusEffects.ParalyzeVenom);
 			}
-			if(hasStatusAffect(StatusAffects.lustvenom)) {
-				removeStatusAffect(StatusAffects.lustvenom);
+			if(hasStatusEffect(StatusEffects.lustvenom)) {
+				removeStatusEffect(StatusEffects.lustvenom);
 			}
-			if(hasStatusAffect(StatusAffects.InfestAttempted)) {
-				removeStatusAffect(StatusAffects.InfestAttempted);
+			if(hasStatusEffect(StatusEffects.InfestAttempted)) {
+				removeStatusEffect(StatusEffects.InfestAttempted);
 			}
-			if(hasStatusAffect(StatusAffects.Flying)) {
-				removeStatusAffect(StatusAffects.Flying);
-				if(hasStatusAffect(StatusAffects.FlyingNoStun)) {
-					removeStatusAffect(StatusAffects.FlyingNoStun);
+			if(hasStatusEffect(StatusEffects.Flying)) {
+				removeStatusEffect(StatusEffects.Flying);
+				if(hasStatusEffect(StatusEffects.FlyingNoStun)) {
+					removeStatusEffect(StatusEffects.FlyingNoStun);
 					removePerk(PerkLib.Resolute);
 				}
 			}
-			if(hasStatusAffect(StatusAffects.ChanneledAttack)) {
-				removeStatusAffect(StatusAffects.ChanneledAttack);
+			if(hasStatusEffect(StatusEffects.ChanneledAttack)) {
+				removeStatusEffect(StatusEffects.ChanneledAttack);
 			}
-			if(hasStatusAffect(StatusAffects.Might)) {
-				kGAMECLASS.dynStats("str", -statusAffectv1(StatusAffects.Might),"tou", -statusAffectv2(StatusAffects.Might));
-				removeStatusAffect(StatusAffects.Might);
+			if(hasStatusEffect(StatusEffects.Might)) {
+				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.Might),"tou", -statusEffectv2(StatusEffects.Might));
+				removeStatusEffect(StatusEffects.Might);
 			}
-			if(hasStatusAffect(StatusAffects.Blink)) {
-				kGAMECLASS.dynStats("spe", -statusAffectv1(StatusAffects.Blink));
-				removeStatusAffect(StatusAffects.Blink);
+			if(hasStatusEffect(StatusEffects.Blink)) {
+				kGAMECLASS.dynStats("spe", -statusEffectv1(StatusEffects.Blink));
+				removeStatusEffect(StatusEffects.Blink);
 			}
-			if(hasStatusAffect(StatusAffects.ChargeWeapon)) {
-				removeStatusAffect(StatusAffects.ChargeWeapon);
+			if(hasStatusEffect(StatusEffects.ChargeWeapon)) {
+				removeStatusEffect(StatusEffects.ChargeWeapon);
 			}
-			if(hasStatusAffect(StatusAffects.ChargeArmor)) {
-				removeStatusAffect(StatusAffects.ChargeArmor);
+			if(hasStatusEffect(StatusEffects.ChargeArmor)) {
+				removeStatusEffect(StatusEffects.ChargeArmor);
 			}
-			if(hasStatusAffect(StatusAffects.Blizzard)) {
-				removeStatusAffect(StatusAffects.Blizzard);
+			if(hasStatusEffect(StatusEffects.Blizzard)) {
+				removeStatusEffect(StatusEffects.Blizzard);
 			}
-			if(hasStatusAffect(StatusAffects.BeatOfWar)) {
-				kGAMECLASS.dynStats("str", -statusAffectv1(StatusAffects.BeatOfWar));
-				removeStatusAffect(StatusAffects.BeatOfWar);
+			if(hasStatusEffect(StatusEffects.BeatOfWar)) {
+				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.BeatOfWar));
+				removeStatusEffect(StatusEffects.BeatOfWar);
 			}
-			if(hasStatusAffect(StatusAffects.CastedSpell)) {
-				removeStatusAffect(StatusAffects.CastedSpell);
+			if(hasStatusEffect(StatusEffects.CastedSpell)) {
+				removeStatusEffect(StatusEffects.CastedSpell);
 			}
-			if(hasStatusAffect(StatusAffects.UnderwaterCombatBoost)) {
-				kGAMECLASS.dynStats("str", -statusAffectv1(StatusAffects.UnderwaterCombatBoost),"spe", -statusAffectv2(StatusAffects.UnderwaterCombatBoost));
-				removeStatusAffect(StatusAffects.UnderwaterCombatBoost);
+			if(hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
+				kGAMECLASS.dynStats("str", -statusEffectv1(StatusEffects.UnderwaterCombatBoost),"spe", -statusEffectv2(StatusEffects.UnderwaterCombatBoost));
+				removeStatusEffect(StatusEffects.UnderwaterCombatBoost);
 			}
-			if(hasStatusAffect(StatusAffects.VioletPupilTransformation)) {
-				removeStatusAffect(StatusAffects.VioletPupilTransformation);
+			if(hasStatusEffect(StatusEffects.VioletPupilTransformation)) {
+				removeStatusEffect(StatusEffects.VioletPupilTransformation);
 			}
-			if(hasStatusAffect(StatusAffects.AlraunePollen)) {
-				removeStatusAffect(StatusAffects.AlraunePollen);
+			if(hasStatusEffect(StatusEffects.AlraunePollen)) {
+				removeStatusEffect(StatusEffects.AlraunePollen);
 			}
-			if(hasStatusAffect(StatusAffects.AlrauneEntangle)) {
-				removeStatusAffect(StatusAffects.AlrauneEntangle);
+			if(hasStatusEffect(StatusEffects.AlrauneEntangle)) {
+				removeStatusEffect(StatusEffects.AlrauneEntangle);
 			}
-			if(hasStatusAffect(StatusAffects.EzekielCurse) && flags[kFLAGS.EVANGELINE_AFFECTION] >= 3 && findPerk(PerkLib.EzekielBlessing) >= 0) {
-				removeStatusAffect(StatusAffects.EzekielCurse);
+			if(hasStatusEffect(StatusEffects.EzekielCurse) && flags[kFLAGS.EVANGELINE_AFFECTION] >= 3 && findPerk(PerkLib.EzekielBlessing) >= 0) {
+				removeStatusEffect(StatusEffects.EzekielCurse);
 			}
-			if(hasStatusAffect(StatusAffects.DragonBreathCooldown) && findPerk(PerkLib.DraconicLungs) >= 0) {
-				removeStatusAffect(StatusAffects.DragonBreathCooldown);
+			if(hasStatusEffect(StatusEffects.DragonBreathCooldown) && findPerk(PerkLib.DraconicLungs) >= 0) {
+				removeStatusEffect(StatusEffects.DragonBreathCooldown);
 			}
-			if(hasStatusAffect(StatusAffects.CooldownInkSpray)) {
-				removeStatusAffect(StatusAffects.CooldownInkSpray);
+			if(hasStatusEffect(StatusEffects.CooldownInkSpray)) {
+				removeStatusEffect(StatusEffects.CooldownInkSpray);
 			}
-			if(hasStatusAffect(StatusAffects.CooldownTailSmack)) {
-				removeStatusAffect(StatusAffects.CooldownTailSmack);
+			if(hasStatusEffect(StatusEffects.CooldownTailSmack)) {
+				removeStatusEffect(StatusEffects.CooldownTailSmack);
 			}
-			if(hasStatusAffect(StatusAffects.CooldownStoneClaw)) {
-				removeStatusAffect(StatusAffects.CooldownStoneClaw);
+			if(hasStatusEffect(StatusEffects.CooldownStoneClaw)) {
+				removeStatusEffect(StatusEffects.CooldownStoneClaw);
 			}
-			if(hasStatusAffect(StatusAffects.CooldownTailSlam)) {
-				removeStatusAffect(StatusAffects.CooldownTailSlam);
+			if(hasStatusEffect(StatusEffects.CooldownTailSlam)) {
+				removeStatusEffect(StatusEffects.CooldownTailSlam);
 			}
-			if(hasStatusAffect(StatusAffects.CooldownWingBuffet)) {
-				removeStatusAffect(StatusAffects.CooldownWingBuffet);
+			if(hasStatusEffect(StatusEffects.CooldownWingBuffet)) {
+				removeStatusEffect(StatusEffects.CooldownWingBuffet);
 			}
-			if(hasStatusAffect(StatusAffects.CooldownIllusion)) {
-				removeStatusAffect(StatusAffects.CooldownIllusion);
+			if(hasStatusEffect(StatusEffects.CooldownIllusion)) {
+				removeStatusEffect(StatusEffects.CooldownIllusion);
 			}
-			if(hasStatusAffect(StatusAffects.CooldownTerror)) {
-				removeStatusAffect(StatusAffects.CooldownTerror);
+			if(hasStatusEffect(StatusEffects.CooldownTerror)) {
+				removeStatusEffect(StatusEffects.CooldownTerror);
 			}
-			if(hasStatusAffect(StatusAffects.CooldownFascinate)) {
-				removeStatusAffect(StatusAffects.CooldownFascinate);
+			if(hasStatusEffect(StatusEffects.CooldownFascinate)) {
+				removeStatusEffect(StatusEffects.CooldownFascinate);
 			}
-			if(hasStatusAffect(StatusAffects.CooldownCompellingAria)) {
-				removeStatusAffect(StatusAffects.CooldownCompellingAria);
+			if(hasStatusEffect(StatusEffects.CooldownCompellingAria)) {
+				removeStatusEffect(StatusEffects.CooldownCompellingAria);
 			}
-			if(hasStatusAffect(StatusAffects.Disarmed)) {
-				removeStatusAffect(StatusAffects.Disarmed);
+			if(hasStatusEffect(StatusEffects.Disarmed)) {
+				removeStatusEffect(StatusEffects.Disarmed);
 				if (weapon == WeaponLib.FISTS) {
 //					weapon = ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon;
 //					(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon).doEffect(this, false);
@@ -4983,9 +4983,9 @@ use namespace kGAMECLASS;
 					flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID];
 				}
 			}
-			if(hasStatusAffect(StatusAffects.AnemoneVenom)) {
-				str += statusAffectv1(StatusAffects.AnemoneVenom);
-				spe += statusAffectv2(StatusAffects.AnemoneVenom);
+			if(hasStatusEffect(StatusEffects.AnemoneVenom)) {
+				str += statusEffectv1(StatusEffects.AnemoneVenom);
+				spe += statusEffectv2(StatusEffects.AnemoneVenom);
 				//Make sure nothing got out of bounds
 				kGAMECLASS.dynStats("cor", 0);
 
@@ -4993,73 +4993,73 @@ use namespace kGAMECLASS;
 				kGAMECLASS.mainView.statsView.showStatUp( 'str' );
 				// speUp.visible = true;
 				// strUp.visible = true;
-				removeStatusAffect(StatusAffects.AnemoneVenom);
+				removeStatusEffect(StatusEffects.AnemoneVenom);
 			}
-			if(hasStatusAffect(StatusAffects.GnollSpear)) {
-				spe += statusAffectv1(StatusAffects.GnollSpear);
+			if(hasStatusEffect(StatusEffects.GnollSpear)) {
+				spe += statusEffectv1(StatusEffects.GnollSpear);
 				//Make sure nothing got out of bounds
 				kGAMECLASS.dynStats("cor", 0);
 				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
 				// speUp.visible = true;
 				// speDown.visible = false;
-				removeStatusAffect(StatusAffects.GnollSpear);
+				removeStatusEffect(StatusEffects.GnollSpear);
 			}
-			if(hasStatusAffect(StatusAffects.BasiliskCompulsion)) removeStatusAffect(StatusAffects.BasiliskCompulsion);
-			if(hasStatusAffect(StatusAffects.BasiliskSlow)) {
-				spe += statusAffectv1(StatusAffects.BasiliskSlow);
+			if(hasStatusEffect(StatusEffects.BasiliskCompulsion)) removeStatusEffect(StatusEffects.BasiliskCompulsion);
+			if(hasStatusEffect(StatusEffects.BasiliskSlow)) {
+				spe += statusEffectv1(StatusEffects.BasiliskSlow);
 				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
 				// speUp.visible = true;
 				// speDown.visible = false;
-				removeStatusAffect(StatusAffects.BasiliskSlow);
+				removeStatusEffect(StatusEffects.BasiliskSlow);
 			}
-			if (hasStatusAffect(StatusAffects.GiantGrabbed)) removeStatusAffect(StatusAffects.GiantGrabbed);
-			if (hasStatusAffect(StatusAffects.GiantBoulder)) removeStatusAffect(StatusAffects.GiantBoulder);
-			if (hasStatusAffect(StatusAffects.GiantStrLoss)) {
-				str += statusAffectv1(StatusAffects.GiantStrLoss);
-				removeStatusAffect(StatusAffects.GiantStrLoss);
+			if (hasStatusEffect(StatusEffects.GiantGrabbed)) removeStatusEffect(StatusEffects.GiantGrabbed);
+			if (hasStatusEffect(StatusEffects.GiantBoulder)) removeStatusEffect(StatusEffects.GiantBoulder);
+			if (hasStatusEffect(StatusEffects.GiantStrLoss)) {
+				str += statusEffectv1(StatusEffects.GiantStrLoss);
+				removeStatusEffect(StatusEffects.GiantStrLoss);
 			}
-			if (hasStatusAffect(StatusAffects.LizanBlowpipe)) {
-				str += statusAffectv1(StatusAffects.LizanBlowpipe);
-				tou += statusAffectv2(StatusAffects.LizanBlowpipe);
-				spe += statusAffectv3(StatusAffects.LizanBlowpipe);
-				sens -= statusAffectv4(StatusAffects.LizanBlowpipe);
-				removeStatusAffect(StatusAffects.LizanBlowpipe);
+			if (hasStatusEffect(StatusEffects.LizanBlowpipe)) {
+				str += statusEffectv1(StatusEffects.LizanBlowpipe);
+				tou += statusEffectv2(StatusEffects.LizanBlowpipe);
+				spe += statusEffectv3(StatusEffects.LizanBlowpipe);
+				sens -= statusEffectv4(StatusEffects.LizanBlowpipe);
+				removeStatusEffect(StatusEffects.LizanBlowpipe);
 			}
-			while (hasStatusAffect(StatusAffects.IzmaBleed)) removeStatusAffect(StatusAffects.IzmaBleed);
-			if (hasStatusAffect(StatusAffects.GardenerSapSpeed))
+			while (hasStatusEffect(StatusEffects.IzmaBleed)) removeStatusEffect(StatusEffects.IzmaBleed);
+			if (hasStatusEffect(StatusEffects.GardenerSapSpeed))
 			{
-				spe += statusAffectv1(StatusAffects.GardenerSapSpeed);
+				spe += statusEffectv1(StatusEffects.GardenerSapSpeed);
 				kGAMECLASS.mainView.statsView.showStatUp('spe');
-				removeStatusAffect(StatusAffects.GardenerSapSpeed);
+				removeStatusEffect(StatusEffects.GardenerSapSpeed);
 			}
-			if (hasStatusAffect(StatusAffects.KnockedBack)) removeStatusAffect(StatusAffects.KnockedBack);
-			if (hasStatusAffect(StatusAffects.RemovedArmor)) removeStatusAffect(StatusAffects.KnockedBack);
-			if (hasStatusAffect(StatusAffects.JCLustLevel)) removeStatusAffect(StatusAffects.JCLustLevel);
-			if (hasStatusAffect(StatusAffects.MirroredAttack)) removeStatusAffect(StatusAffects.MirroredAttack);
-			if (hasStatusAffect(StatusAffects.Tentagrappled)) removeStatusAffect(StatusAffects.Tentagrappled);
-			if (hasStatusAffect(StatusAffects.TentagrappleCooldown)) removeStatusAffect(StatusAffects.TentagrappleCooldown);
-			if (hasStatusAffect(StatusAffects.ShowerDotEffect)) removeStatusAffect(StatusAffects.ShowerDotEffect);
-			if (hasStatusAffect(StatusAffects.GardenerSapSpeed))
+			if (hasStatusEffect(StatusEffects.KnockedBack)) removeStatusEffect(StatusEffects.KnockedBack);
+			if (hasStatusEffect(StatusEffects.RemovedArmor)) removeStatusEffect(StatusEffects.KnockedBack);
+			if (hasStatusEffect(StatusEffects.JCLustLevel)) removeStatusEffect(StatusEffects.JCLustLevel);
+			if (hasStatusEffect(StatusEffects.MirroredAttack)) removeStatusEffect(StatusEffects.MirroredAttack);
+			if (hasStatusEffect(StatusEffects.Tentagrappled)) removeStatusEffect(StatusEffects.Tentagrappled);
+			if (hasStatusEffect(StatusEffects.TentagrappleCooldown)) removeStatusEffect(StatusEffects.TentagrappleCooldown);
+			if (hasStatusEffect(StatusEffects.ShowerDotEffect)) removeStatusEffect(StatusEffects.ShowerDotEffect);
+			if (hasStatusEffect(StatusEffects.GardenerSapSpeed))
 			{
-				spe += statusAffectv1(StatusAffects.GardenerSapSpeed);
+				spe += statusEffectv1(StatusEffects.GardenerSapSpeed);
 				kGAMECLASS.mainView.statsView.showStatUp( 'spe' );
-				removeStatusAffect(StatusAffects.GardenerSapSpeed);
+				removeStatusEffect(StatusEffects.GardenerSapSpeed);
 			}
-			if (hasStatusAffect(StatusAffects.VineHealUsed)) removeStatusAffect(StatusAffects.VineHealUsed);
-			if (hasStatusAffect(StatusAffects.DriderIncubusVenom))
+			if (hasStatusEffect(StatusEffects.VineHealUsed)) removeStatusEffect(StatusEffects.VineHealUsed);
+			if (hasStatusEffect(StatusEffects.DriderIncubusVenom))
 			{
-				str += statusAffectv2(StatusAffects.DriderIncubusVenom);
-				removeStatusAffect(StatusAffects.DriderIncubusVenom);
+				str += statusEffectv2(StatusEffects.DriderIncubusVenom);
+				removeStatusEffect(StatusEffects.DriderIncubusVenom);
 			}
-			if (hasStatusAffect(StatusAffects.TaintedMind)) removeStatusAffect(StatusAffects.TaintedMind);
-			if (hasStatusAffect(StatusAffects.PurpleHaze)) removeStatusAffect(StatusAffects.PurpleHaze);
-			if (hasStatusAffect(StatusAffects.MinotaurKingMusk)) removeStatusAffect(StatusAffects.MinotaurKingMusk);
-			if (hasStatusAffect(StatusAffects.MinotaurKingsTouch)) removeStatusAffect(StatusAffects.MinotaurKingsTouch);
-			if (hasStatusAffect(StatusAffects.LethicesRapeTentacles)) removeStatusAffect(StatusAffects.LethicesRapeTentacles);
-			if (hasStatusAffect(StatusAffects.OnFire)) removeStatusAffect(StatusAffects.OnFire);
-			if (hasStatusAffect(StatusAffects.LethicesShell)) removeStatusAffect(StatusAffects.LethicesShell);
-			if (hasStatusAffect(StatusAffects.WhipSilence)) removeStatusAffect(StatusAffects.WhipSilence);
-			if (hasStatusAffect(StatusAffects.PigbysHands)) removeStatusAffect(StatusAffects.PigbysHands);
+			if (hasStatusEffect(StatusEffects.TaintedMind)) removeStatusEffect(StatusEffects.TaintedMind);
+			if (hasStatusEffect(StatusEffects.PurpleHaze)) removeStatusEffect(StatusEffects.PurpleHaze);
+			if (hasStatusEffect(StatusEffects.MinotaurKingMusk)) removeStatusEffect(StatusEffects.MinotaurKingMusk);
+			if (hasStatusEffect(StatusEffects.MinotaurKingsTouch)) removeStatusEffect(StatusEffects.MinotaurKingsTouch);
+			if (hasStatusEffect(StatusEffects.LethicesRapeTentacles)) removeStatusEffect(StatusEffects.LethicesRapeTentacles);
+			if (hasStatusEffect(StatusEffects.OnFire)) removeStatusEffect(StatusEffects.OnFire);
+			if (hasStatusEffect(StatusEffects.LethicesShell)) removeStatusEffect(StatusEffects.LethicesShell);
+			if (hasStatusEffect(StatusEffects.WhipSilence)) removeStatusEffect(StatusEffects.WhipSilence);
+			if (hasStatusEffect(StatusEffects.PigbysHands)) removeStatusEffect(StatusEffects.PigbysHands);
 		}
 
 		public function consumeItem(itype:ItemType, amount:int = 1):Boolean {
@@ -5301,7 +5301,7 @@ use namespace kGAMECLASS;
 			if (removed == 1) {
 				if (cocks.length == 0) {
 					outputText("<b>Your manhood shrinks into your body, disappearing completely.</b>", false);
-					if (hasStatusAffect(StatusAffects.Infested)) outputText("  Like rats fleeing a sinking ship, a stream of worms squirts free from your withering member, slithering away.", false);
+					if (hasStatusEffect(StatusEffects.Infested)) outputText("  Like rats fleeing a sinking ship, a stream of worms squirts free from your withering member, slithering away.", false);
 				}
 				if (cocks.length == 1) {
 					outputText("<b>Your smallest penis disappears, shrinking into your body and leaving you with just one " + cockDescript(0) + ".</b>", false);
@@ -5313,7 +5313,7 @@ use namespace kGAMECLASS;
 			if (removed > 1) {
 				if (cocks.length == 0) {
 					outputText("<b>All your male endowments shrink smaller and smaller, disappearing one at a time.</b>", false);
-					if (hasStatusAffect(StatusAffects.Infested)) outputText("  Like rats fleeing a sinking ship, a stream of worms squirts free from your withering member, slithering away.", false);
+					if (hasStatusEffect(StatusEffects.Infested)) outputText("  Like rats fleeing a sinking ship, a stream of worms squirts free from your withering member, slithering away.", false);
 				}
 				if (cocks.length == 1) {
 					outputText("<b>You feel " + num2Text(removed) + " cocks disappear into your groin, leaving you with just your " + cockDescript(0) + ".", false);
@@ -5323,7 +5323,7 @@ use namespace kGAMECLASS;
 				}
 			}
 			//remove infestation if cockless
-			if (cocks.length == 0) removeStatusAffect(StatusAffects.Infested);
+			if (cocks.length == 0) removeStatusEffect(StatusEffects.Infested);
 			if (cocks.length == 0 && balls > 0) {
 				outputText("  <b>Your " + sackDescript() + " and " + ballsDescriptLight() + " shrink and disappear, vanishing into your groin.</b>", false);
 				balls = 0;
@@ -5398,7 +5398,7 @@ use namespace kGAMECLASS;
 				if(output) {
 					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.", false);
 				}
-				var sac:StatusAffectClass = statusAffectByType(StatusAffects.Heat);
+				var sac:StatusEffectClass = statusEffectByType(StatusEffects.Heat);
 				sac.value1 += 5 * intensity;
 				sac.value2 += 5 * intensity;
 				sac.value3 += 48 * intensity;
@@ -5409,7 +5409,7 @@ use namespace kGAMECLASS;
 				if(output) {
 					outputText("\n\nYour mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as <b>you realize you have gone into heat!</b>", false);
 				}
-				createStatusAffect(StatusAffects.Heat, 10 * intensity, 15 * intensity, 48 * intensity, 0);
+				createStatusEffect(StatusEffects.Heat, 10 * intensity, 15 * intensity, 48 * intensity, 0);
 				game.dynStats("lib", 15 * intensity, "resisted", false, "noBimbo", true);
 			}
 			return true;
@@ -5434,9 +5434,9 @@ use namespace kGAMECLASS;
 					outputText("\n\nYour " + cockDescript(0) + " throbs and dribbles as your desire to mate intensifies.  You know that <b>you've sunken deeper into rut</b>, but all that really matters is unloading into a cum-hungry cunt.", false);
 				}
 				
-				addStatusValue(StatusAffects.Rut, 1, 100 * intensity);
-				addStatusValue(StatusAffects.Rut, 2, 5 * intensity);
-				addStatusValue(StatusAffects.Rut, 3, 48 * intensity);
+				addStatusValue(StatusEffects.Rut, 1, 100 * intensity);
+				addStatusValue(StatusEffects.Rut, 2, 5 * intensity);
+				addStatusValue(StatusEffects.Rut, 3, 48 * intensity);
 				game.dynStats("lib", 5 * intensity, "resisted", false, "noBimbo", true);
 			}
 			else {
@@ -5447,7 +5447,7 @@ use namespace kGAMECLASS;
 				//v1 - bonus cum production
 				//v2 - bonus libido
 				//v3 - time remaining!
-				createStatusAffect(StatusAffects.Rut, 150 * intensity, 5 * intensity, 100 * intensity, 0);
+				createStatusEffect(StatusEffects.Rut, 150 * intensity, 5 * intensity, 100 * intensity, 0);
 				game.dynStats("lib", 5 * intensity, "resisted", false, "noBimbo", true);
 			}
 			

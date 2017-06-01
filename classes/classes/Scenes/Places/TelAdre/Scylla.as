@@ -618,7 +618,7 @@ private function scyllaPtVLeave():void {
 //[Take Advantage]	(First time and Repeat)
 private function scyllaPtVTakeAdvantage():void {
 	scyllaSprite();
-	if(player.hasStatusAffect(StatusAffects.Exgartuan) && player.statusAffectv2(StatusAffects.Exgartuan) == 0) {
+	if(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) {
 		flags[kFLAGS.TIMES_MET_SCYLLA_IN_ADDICTION_GROUP]++;
 		flags[kFLAGS.TIMES_SCYLLA_ADDICT_GROUP_EXPLOITED]++;
 		scyllaVTakeAdvantageWithExgartuan();
@@ -734,7 +734,7 @@ private function scyllaVTakeAdvantageWithExgartuan4():void {
 	outputText("  You try to gather your strength and wince in pain as you rise to your feet. The girls are strewn around the room, thoroughly sated. The goblin absently licks at the cum puddle she's lying in, her ass still wiggling and raised in the air, her sphincter clenching and opening like a babbling mouth. The nun's head barely pokes over her massive tits and belly, her clothes torn to shreds by her distended body, black stocking-clad legs barely poking out under her cum-inflated girth. Pastie is trapped in a sticky shell of your sperm, rubbing her belly and head with equal satisfaction and regret, black-out drunk on booze, jizz, and lust. \"<i>Good fuckin' job,</i>\" Exgartuan compliments, his voice slowly fading with satisfaction. \"<i>There's hope for you yet.</i>\" You leave before anybody can suggest you chip in for the cleaning bill.", false);
 	dynStats("cor", 1);
 	player.cumMultiplier += 2;
-	player.changeStatusValue(StatusAffects.Exgartuan,2,24);
+	player.changeStatusValue(StatusEffects.Exgartuan,2,24);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -762,7 +762,7 @@ private function scyllaPtVShare():void {
 	outputText("What addiction would you like to discuss?", false);
 	//Set choices
 	var milk:Function = null;
-	if((player.findPerk(PerkLib.MarblesMilk) >= 0 || player.statusAffectv3(StatusAffects.Marble) > 0) && player.findPerk(PerkLib.MarbleResistant) < 0)
+	if((player.findPerk(PerkLib.MarblesMilk) >= 0 || player.statusEffectv3(StatusEffects.Marble) > 0) && player.findPerk(PerkLib.MarbleResistant) < 0)
 		milk = scyllaPtVMilk;
 	var cum:Function = null;
 	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 50 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0) cum = scyllaPtVCum;

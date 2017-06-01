@@ -50,11 +50,11 @@ package classes.Scenes.Dungeons.HiddenCave
 			this.long = "You're currently fighting loli bat golem. It's four feet tall bat that looks like twelves years old girl, her stone body is smooth and polished and she's using bare stone claws to fight. In the middle of her forehead there is tatto'd a big letter A.";
 			this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_NORMAL, VAGINA_LOOSENESS_NORMAL);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 100, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 100, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("A"));
 			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,100,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,100,0,0,0);
 			initStrTouSpeInte(30, 30, 50, 10);
 			initLibSensCor(10, 10, 50);
 			this.hipRating = HIP_RATING_AMPLE+2;

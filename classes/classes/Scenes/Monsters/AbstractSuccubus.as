@@ -10,9 +10,9 @@ package classes.Scenes.Monsters
 	{
 		protected function whipAttack():void
 		{
-			if (hasStatusAffect(StatusAffects.WhipReady)) {
+			if (hasStatusEffect(StatusEffects.WhipReady)) {
 				//Blind dodge change
-				if (hasStatusAffect(StatusAffects.Blind)) {
+				if (hasStatusEffect(StatusEffects.Blind)) {
 					outputText(capitalA + short + " swings her whip at you wildly, totally missing due to her blindness!!", false);
 					combatRoundOver();
 					return;
@@ -121,7 +121,7 @@ package classes.Scenes.Monsters
 				if (this.short == "omnibus") outputText("omnibus", false);
 				else outputText("succubus", false);
 				outputText(" flicks her wrist, allowing a whip-like cord to slither out from the palm of her clawed hand.  She cracks the whip experimentally, cackling with glee.", false);
-				createStatusAffect(StatusAffects.WhipReady, 0, 0, 0, 0);
+				createStatusEffect(StatusEffects.WhipReady, 0, 0, 0, 0);
 				str += 20;
 				this.weaponName = "whip";
 				this.weaponVerb = "brutal whip-crack";
@@ -148,7 +148,7 @@ package classes.Scenes.Monsters
 			//get hit
 			else {
 				outputText("  You start to dodge to the side, but she shifts direction expertly and plants a wet kiss on your lips.  She spins and dodges away with a ballet dancer's grace, leaving you to wonder what just happened.  ", false);
-				if (!player.hasStatusAffect(StatusAffects.KissOfDeath)) player.createStatusAffect(StatusAffects.KissOfDeath, 0, 0, 0, 0);
+				if (!player.hasStatusEffect(StatusEffects.KissOfDeath)) player.createStatusEffect(StatusEffects.KissOfDeath, 0, 0, 0, 0);
 			}
 			combatRoundOver();
 		}

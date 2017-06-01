@@ -40,12 +40,12 @@ package classes.Scenes.Areas.Mountain
 		public function wormEncounter():void {
 			spriteSelect(76);
 			clearOutput();
-			if (!player.hasStatusAffect(StatusAffects.MetWorms)) { //First encounter
+			if (!player.hasStatusEffect(StatusEffects.MetWorms)) { //First encounter
 				outputText("As you are exploring, a rather pungent, peaty smell assails your nostrils. You hear a strange rustling and an off-kilter squishing noise in the distance. As you explore the area you come upon a most grotesque sight. Before you is a cohesive mass of writhing, wriggling worms! While normally solitary creatures, these appear to have coalesced into a monstrous living colony!\n\n");
 				outputText("You have never before seen such a bizarre freak of nature. You see the mass of annelids creep about across your path. It stops and spreads slightly in your direction before halting. The stench of the mass is indescribable and a thick, viscous slime covers each of the countless worms forming the collective.\n\n");
 				outputText("You stop dead in your tracks, wondering what this swarm will do. After a few tense moments, the mass crawls away in a direction opposite of both you and your current path. You breathe a sigh of relief as you are confident that no good could have come from confronting such a zoological travesty.");
 				dynStats("lus", -10);
-				player.createStatusAffect(StatusAffects.MetWorms, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.MetWorms, 0, 0, 0, 0);
 				doNext(camp.returnToCampUseOneHour);
 			}
 			else if (player.hasCock()) {
@@ -70,7 +70,7 @@ package classes.Scenes.Areas.Mountain
 			clearOutput();
 			outputText("You actually think it's kind of a hot idea, and wonder if such creatures actually exist in this land as you make your way back to camp.");
 			outputText("\n\n<b>If you ever change your mind, you can toggle from Fetishes menu in game settings.</b>");
-			player.createStatusAffect(StatusAffects.WormsOn, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.WormsOn, 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -78,8 +78,8 @@ package classes.Scenes.Areas.Mountain
 			clearOutput();
 			outputText("You shrug and keep walking, not sure how you feel about the strange sign.");
 			outputText("\n\n<b>If you ever change your mind, you can toggle from Fetishes menu in game settings.</b>");
-			player.createStatusAffect(StatusAffects.WormsOn, 0, 0, 0, 0);
-			player.createStatusAffect(StatusAffects.WormsHalf, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.WormsOn, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.WormsHalf, 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -87,7 +87,7 @@ package classes.Scenes.Areas.Mountain
 			clearOutput();
 			outputText("You shudder in revulsion and figure the sign to be the result of someone's perverted fantasy.");
 			outputText("\n\n<b>If you ever change your mind, you can toggle from Fetishes menu in game settings.</b>");
-			player.createStatusAffect(StatusAffects.WormsOff, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.WormsOff, 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
 		}
 			
@@ -127,10 +127,10 @@ package classes.Scenes.Areas.Mountain
 				player.cor = 25;
 			}
 			trace("GET INFESTED HERE");
-			if(player.hasStatusAffect(StatusAffects.Infested)) {trace("BWUH?");}
+			if(player.hasStatusEffect(StatusEffects.Infested)) {trace("BWUH?");}
 			else {
 				if(flags[kFLAGS.EVER_INFESTED] == 0) flags[kFLAGS.EVER_INFESTED] = 1;
-				player.createStatusAffect(StatusAffects.Infested,0,0,0,0);
+				player.createStatusEffect(StatusEffects.Infested,0,0,0,0);
 				dynStats("cor", 0);
 			}
 			cleanupAfterCombat();
@@ -142,13 +142,13 @@ package classes.Scenes.Areas.Mountain
 			outputText("The ceaseless squirming of your uninvited guests send your body into paroxysms. Collapsing to your knees, you immediately begin pushing gouts of dick milk out of your body. You feel tremendous pressure in your pelvis and in your cock as you realize that you are pushing worms out with each torrent of cum! Stream upon stream of cum breaks free from the prison of your body, carrying some of the worms inside you with it. Once the orgasm passes, you collapse to the ground, totally spent. Before you pass out, you feel the unfortunate presence of the fat worm still in your body.", true);
 			player.orgasm();
 			//Check infestation and update it
-			if(player.hasStatusAffect(StatusAffects.Infested)) {
+			if(player.hasStatusEffect(StatusEffects.Infested)) {
 				//Increment infestation number
-				if(player.statusAffectv1(StatusAffects.Infested) < 5) {
-					player.addStatusValue(StatusAffects.Infested,1,1);
+				if(player.statusEffectv1(StatusEffects.Infested) < 5) {
+					player.addStatusValue(StatusEffects.Infested,1,1);
 					player.cumMultiplier+=0.5;
 					//fifth time is the charm!
-					if(player.statusAffectv1(StatusAffects.Infested) == 5) {
+					if(player.statusEffectv1(StatusEffects.Infested) == 5) {
 						//Futaz
 						if(player.balls == 0) {
 							outputText("\n\nAfter you empty yourself, you feel your body shift. The presence of the large worm is no longer discomforting. It is as if your seminal bladder has enlarged to accommodate the new thing inside you. Likewise, your ejaculations have become truly monstrous and the amount of worms you expel has also increased. You realize that the large worm has become a part of you and you can now <b>infest</b> your enemies much in the same manner as you have been infested, yourself. All you need now is some poor fool to overwhelm with your new 'pets'.", false);
@@ -190,7 +190,7 @@ package classes.Scenes.Areas.Mountain
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
-			if(monster.hasStatusAffect(StatusAffects.TwuWuv)) {
+			if(monster.hasStatusEffect(StatusEffects.TwuWuv)) {
 				outputText("You expose yourself and attempt to focus on expelling your squirming pets toward Sheila but as you picture launching a flood of parasites from [eachCock], the fantasy she sent returns to you, breaking your concentration!  Your hand darts automatically to your crotch, stroking [oneCock] as you imagine unloading into her cunt... only with effort do you pull it away!\n\n");
 				outputText("\"<i>Oh, my,</i>\" the demon teases.  \"<i>You don't have to masturbate yourself, [name]... I'll be happy to do it for you.</i>\"\n\n");
 				dynStats("lus", 5 + player.sens/10, "resisted", false);
@@ -277,9 +277,9 @@ package classes.Scenes.Areas.Mountain
 			outputText("\n\nYou relax in the afterglow, pondering just how you'll handle living with the constant desire, barely noticing the colony slinking off, freshly lubricated by your sexual fluids.  You drink into a lusty slumber, absently fingering [oneCock].");
 			outputText("\n\n<b>You are infested, again!</b>");
 			//Reinfest
-			if(player.hasStatusAffect(StatusAffects.Infested)) {trace("BWUH?");}
+			if(player.hasStatusEffect(StatusEffects.Infested)) {trace("BWUH?");}
 			else {
-				player.createStatusAffect(StatusAffects.Infested,0,0,0,0);
+				player.createStatusEffect(StatusEffects.Infested,0,0,0,0);
 				dynStats("cor", 0);
 			}
 			if(player.cor < 25) {

@@ -32,15 +32,15 @@ package classes.Scenes.Dungeons.DeepCave
 			outputText("  She releases her breasts, shaking them back and forth for your benefit, and flutters her wings, blowing shiny, glitter-like flakes at you.  They stick to the milk on your skin, leaving you coated in milk and faerie-dust.", false);
 			outputText("\nVala says, \"<i>Now you can be sexy like Vala!</i>\"\n", false);
 
-			if(hasStatusAffect(StatusAffects.Milk)) {
-				addStatusValue(StatusAffects.Milk,1,5);
+			if(hasStatusEffect(StatusEffects.Milk)) {
+				addStatusValue(StatusEffects.Milk,1,5);
 				outputText("Your " + player.skinDesc + " tingles pleasantly, making you feel sexy and exposed.  Oh no!  It seems each coating of milk and glitter is stronger than the last!", false);
 			}
 			else {
-				createStatusAffect(StatusAffects.Milk,5,0,0,0);
+				createStatusEffect(StatusEffects.Milk,5,0,0,0);
 				outputText("You aren't sure if there's something in her milk, the dust, or just watching her squirt and shake for you, but it's turning you on.", false);
 			}
-			game.dynStats("lus", statusAffectv1(StatusAffects.Milk) + player.lib/20);
+			game.dynStats("lus", statusEffectv1(StatusEffects.Milk) + player.lib / 20);
 			combatRoundOver();
 		}
 		//Masturbation
@@ -53,17 +53,17 @@ package classes.Scenes.Dungeons.DeepCave
 
 		//[Fight dialog]
 		public function valaCombatDialogue():void {
-			if(!hasStatusAffect(StatusAffects.Vala)) {
+			if(!hasStatusEffect(StatusEffects.Vala)) {
 				outputText("\"<i>Sluts needs to service the masters!</i>\" the fairy wails, flying high. \"<i>If they are not pleased, Bitch doesn't get any cum!</i>\"", false);
-				createStatusAffect(StatusAffects.Vala,0,0,0,0);
+				createStatusEffect(StatusEffects.Vala,0,0,0,0);
 			}
 			else {
-				addStatusValue(StatusAffects.Vala,1,1);
-				if(statusAffectv1(StatusAffects.Vala) == 1) outputText("\"<i>If you won't fuck Bitch, you must not be a master,</i>\" she realizes, the fight invigorating her lust-deadened brain. \"<i>You get to be a pet for the masters, too!</i>\"", false);
-				else if(statusAffectv1(StatusAffects.Vala) == 2) outputText("\"<i>If the masters like you, maybe they will let Bitch keep you for herself! Won't you like that?</i>\"", false);
-				else if(statusAffectv1(StatusAffects.Vala) == 3) outputText("\"<i>We obey the masters. They fed Bitch until she became big enough to please them. The masters love their pets so much, you'll see.</i>\"", false);
-				else if(statusAffectv1(StatusAffects.Vala) == 4) outputText("\"<i>Thoughts are so hard. Much easier to be a toy slut. Won't you like being a toy? All that nasty memory fucked out of your head.</i>\"", false);
-				else if(statusAffectv1(StatusAffects.Vala) == 5) outputText("\"<i>Bitch has given birth to many of the masters' children. She will teach you to please the masters. Maybe you can birth more masters for us to fuck?</i>\"", false);
+				addStatusValue(StatusEffects.Vala,1,1);
+				if(statusEffectv1(StatusEffects.Vala) == 1) outputText("\"<i>If you won't fuck Bitch, you must not be a master,</i>\" she realizes, the fight invigorating her lust-deadened brain. \"<i>You get to be a pet for the masters, too!</i>\"", false);
+				else if(statusEffectv1(StatusEffects.Vala) == 2) outputText("\"<i>If the masters like you, maybe they will let Bitch keep you for herself! Won't you like that?</i>\"", false);
+				else if(statusEffectv1(StatusEffects.Vala) == 3) outputText("\"<i>We obey the masters. They fed Bitch until she became big enough to please them. The masters love their pets so much, you'll see.</i>\"", false);
+				else if(statusEffectv1(StatusEffects.Vala) == 4) outputText("\"<i>Thoughts are so hard. Much easier to be a toy slut. Won't you like being a toy? All that nasty memory fucked out of your head.</i>\"", false);
+				else if(statusEffectv1(StatusEffects.Vala) == 5) outputText("\"<i>Bitch has given birth to many of the masters' children. She will teach you to please the masters. Maybe you can birth more masters for us to fuck?</i>\"", false);
 				else outputText("\"<i>Bitch loves when her children use her as their fathers did. Sluts belong to them. Slut love them. You will love them too!</i>\"", false);
 			}
 		}
@@ -105,11 +105,11 @@ package classes.Scenes.Dungeons.DeepCave
 			this.long = "While the fey girl is whip-thin, her breasts are disproportionately huge. They'd be at least a DD-cup on a normal human, but for her height and body type, they're practically as large as her head. They jiggle at her slow, uneven breathing, tiny drops of milk bubbling at her nipples with every heartbeat.  She seems fixated on mating with you, and won't take no for an answer.";
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_GAPING_WIDE);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 25, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 25, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
 			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,10,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 4*12;
 			this.hipRating = HIP_RATING_CURVY;
 			this.buttRating = BUTT_RATING_LARGE;

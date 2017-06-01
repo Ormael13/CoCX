@@ -13,7 +13,7 @@ package classes.Scenes.NPCs
 		//[Special Attacks]
 		private function IzmaSpecials1():void {
 			//Blind dodge change
-			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
+			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText("Izma attempts to close the distance with you, but misses completely because of her blindness.\n", false);
 				return;
 			}
@@ -44,7 +44,7 @@ package classes.Scenes.NPCs
 
 		private function IzmaSpecials2():void {
 			//Blind dodge change
-			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
+			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText("Izma blindly tries to clinch you, but misses completely.\n", false);
 				return;
 			}
@@ -75,7 +75,7 @@ package classes.Scenes.NPCs
 			if(player.armorDef >= 10 || damage == 0) {
 				//(armor-dependent Health damage, fullplate, chain, scale, and bee chitin armor are unaffected, has a chance to inflict 'Bleed' damage which removes 4-10% of health for the next three turns if successful)
 				outputText("writhe as she painfully drags the blades of her glove down your back", false);
-				player.createStatusAffect(StatusAffects.IzmaBleed,3,0,0,0);
+				player.createStatusEffect(StatusEffects.IzmaBleed,3,0,0,0);
 			}
 			else outputText("laugh as her blades scape uselessly at your armor-clad back", false);
 			outputText(" before breaking her embrace and leaping away. ", false);
@@ -150,11 +150,11 @@ package classes.Scenes.NPCs
 			this.balls = 4;
 			this.ballSize = 3;
 			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_LOOSE);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 45, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 45, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("DD"));
 			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,30,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 5*12+5;
 			this.hipRating = HIP_RATING_CURVY;
 			this.buttRating = BUTT_RATING_NOTICEABLE;

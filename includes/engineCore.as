@@ -1416,11 +1416,11 @@ public function displayStats(e:MouseEvent = null):void
 	
 	combatStats += "<b>Unarmed:</b> +" + combat.unarmedAttack() + "\n";
 	
-	if (player.statusAffectv1(StatusAffects.Kelt) > 0) {
-		if (player.statusAffectv1(StatusAffects.Kindra) < 1)
-			combatStats += "<b>Bow Skill:</b> " + Math.round(player.statusAffectv1(StatusAffects.Kelt)) + " / 100\n";
-		if (player.statusAffectv1(StatusAffects.Kindra) > 0)
-			combatStats += "<b>Bow Skill:</b> " + (Math.round(player.statusAffectv1(StatusAffects.Kelt)) + Math.round(player.statusAffectv1(StatusAffects.Kindra))) + " / 250\n";
+	if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
+		if (player.statusEffectv1(StatusEffects.Kindra) < 1)
+			combatStats += "<b>Bow Skill:</b> " + Math.round(player.statusEffectv1(StatusEffects.Kelt)) + " / 100\n";
+		if (player.statusEffectv1(StatusEffects.Kindra) > 0)
+			combatStats += "<b>Bow Skill:</b> " + (Math.round(player.statusEffectv1(StatusEffects.Kelt)) + Math.round(player.statusEffectv1(StatusEffects.Kindra))) + " / 250\n";
 	}
 	
 	combatStats += "<b>Arrow/Bolt Cost:</b> " + combat.bowCost(100) + "%\n";
@@ -1466,8 +1466,8 @@ public function displayStats(e:MouseEvent = null):void
 	// Begin Children Stats
 	var childStats:String = "";
 	
-	if (player.statusAffectv1(StatusAffects.Birthed) > 0)
-		childStats += "<b>Times Given Birth:</b> " + player.statusAffectv1(StatusAffects.Birthed) + "\n";
+	if (player.statusEffectv1(StatusEffects.Birthed) > 0)
+		childStats += "<b>Times Given Birth:</b> " + player.statusEffectv1(StatusEffects.Birthed) + "\n";
 		
 	if (flags[kFLAGS.AMILY_MET] > 0)
 		childStats += "<b>Litters With Amily:</b> " + (flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]) + "\n";
@@ -1633,9 +1633,9 @@ public function displayStats(e:MouseEvent = null):void
 	if (player.lactationQ() > 0)
 		bodyStats += "<b>Milk Production:</b> " + addComma(Math.round(player.lactationQ())) + "mL\n";
 	
-	if (player.hasStatusAffect(StatusAffects.Feeder)) {
-		bodyStats += "<b>Hours Since Last Time Breastfed Someone:</b>  " + player.statusAffectv2(StatusAffects.Feeder);
-		if (player.statusAffectv2(StatusAffects.Feeder) >= 72)
+	if (player.hasStatusEffect(StatusEffects.Feeder)) {
+		bodyStats += "<b>Hours Since Last Time Breastfed Someone:</b>  " + player.statusEffectv2(StatusEffects.Feeder);
+		if (player.statusEffectv2(StatusEffects.Feeder) >= 72)
 			bodyStats += " (Too long! Sensitivity Increasing!)";
 		
 		bodyStats += "\n";
@@ -1676,14 +1676,14 @@ public function displayStats(e:MouseEvent = null):void
 	if (player.findPerk(PerkLib.SpiderOvipositor) >= 0 || player.findPerk(PerkLib.BeeOvipositor) >= 0)
 		bodyStats += "<b>Ovipositor Total Egg Count: " + player.eggs() + "\nOvipositor Fertilized Egg Count: " + player.fertilizedEggs() + "</b>\n";
 		
-	if (player.hasStatusAffect(StatusAffects.SlimeCraving)) {
-		if (player.statusAffectv1(StatusAffects.SlimeCraving) >= 18)
+	if (player.hasStatusEffect(StatusEffects.SlimeCraving)) {
+		if (player.statusEffectv1(StatusEffects.SlimeCraving) >= 18)
 			bodyStats += "<b>Slime Craving:</b> Active! You are currently losing strength and speed.  You should find fluids.\n";
 		else {
 			if (player.findPerk(PerkLib.SlimeCore) >= 0)
-				bodyStats += "<b>Slime Stored:</b> " + ((17 - player.statusAffectv1(StatusAffects.SlimeCraving)) * 2) + " hours until you start losing strength.\n";
+				bodyStats += "<b>Slime Stored:</b> " + ((17 - player.statusEffectv1(StatusEffects.SlimeCraving)) * 2) + " hours until you start losing strength.\n";
 			else
-				bodyStats += "<b>Slime Stored:</b> " + (17 - player.statusAffectv1(StatusAffects.SlimeCraving)) + " hours until you start losing strength.\n";
+				bodyStats += "<b>Slime Stored:</b> " + (17 - player.statusEffectv1(StatusEffects.SlimeCraving)) + " hours until you start losing strength.\n";
 		}
 	}
 	
@@ -1753,10 +1753,10 @@ public function displayStats(e:MouseEvent = null):void
 	// Begin Addition Stats
 	var addictStats:String = "";
 	//Marble Milk Addition
-	if (player.statusAffectv3(StatusAffects.Marble) > 0) {
+	if (player.statusEffectv3(StatusEffects.Marble) > 0) {
 		addictStats += "<b>Marble Milk:</b> ";
 		if (player.findPerk(PerkLib.MarbleResistant) < 0 && player.findPerk(PerkLib.MarblesMilk) < 0)
-			addictStats += Math.round(player.statusAffectv2(StatusAffects.Marble)) + "%\n";
+			addictStats += Math.round(player.statusEffectv2(StatusEffects.Marble)) + "%\n";
 		else if (player.findPerk(PerkLib.MarbleResistant) >= 0)
 			addictStats += "0%\n";
 		else
@@ -1832,11 +1832,11 @@ public function displayStats(e:MouseEvent = null):void
 		interpersonStats += "<b>Katherine Submissiveness:</b> " + telAdre.katherine.submissiveness() + "\n";
 	}
 
-	if (player.hasStatusAffect(StatusAffects.Kelt) && flags[kFLAGS.KELT_BREAK_LEVEL] == 0 && flags[kFLAGS.KELT_KILLED] == 0) {
-		if (player.statusAffectv2(StatusAffects.Kelt) >= 130)
+	if (player.hasStatusEffect(StatusEffects.Kelt) && flags[kFLAGS.KELT_BREAK_LEVEL] == 0 && flags[kFLAGS.KELT_KILLED] == 0) {
+		if (player.statusEffectv2(StatusEffects.Kelt) >= 130)
 			interpersonStats += "<b>Submissiveness To Kelt:</b> " + 100 + "%\n";
 		else
-			interpersonStats += "<b>Submissiveness To Kelt:</b> " + Math.round(player.statusAffectv2(StatusAffects.Kelt) / 130 * 100) + "%\n";
+			interpersonStats += "<b>Submissiveness To Kelt:</b> " + Math.round(player.statusEffectv2(StatusEffects.Kelt) / 130 * 100) + "%\n";
 			
 	}
 	
@@ -1939,40 +1939,40 @@ public function displayStats(e:MouseEvent = null):void
 	var statEffects:String = "";
 	
 	if (player.inHeat)
-		statEffects += "Heat - " + Math.round(player.statusAffectv3(StatusAffects.Heat)) + " hours remaining\n";
+		statEffects += "Heat - " + Math.round(player.statusEffectv3(StatusEffects.Heat)) + " hours remaining\n";
 		
 	if (player.inRut)
-		statEffects += "Rut - " + Math.round(player.statusAffectv3(StatusAffects.Rut)) + " hours remaining\n";
+		statEffects += "Rut - " + Math.round(player.statusEffectv3(StatusEffects.Rut)) + " hours remaining\n";
 		
-	if (player.statusAffectv1(StatusAffects.Luststick) > 0)
-		statEffects += "Luststick - " + Math.round(player.statusAffectv1(StatusAffects.Luststick)) + " hours remaining\n";
+	if (player.statusEffectv1(StatusEffects.Luststick) > 0)
+		statEffects += "Luststick - " + Math.round(player.statusEffectv1(StatusEffects.Luststick)) + " hours remaining\n";
 		
-	if (player.statusAffectv1(StatusAffects.LustStickApplied) > 0)
-		statEffects += "Luststick Application - " + Math.round(player.statusAffectv1(StatusAffects.LustStickApplied)) + " hours remaining\n";
+	if (player.statusEffectv1(StatusEffects.LustStickApplied) > 0)
+		statEffects += "Luststick Application - " + Math.round(player.statusEffectv1(StatusEffects.LustStickApplied)) + " hours remaining\n";
 		
-	if (player.statusAffectv1(StatusAffects.LustyTongue) > 0)
-		statEffects += "Lusty Tongue - " + Math.round(player.statusAffectv1(StatusAffects.LustyTongue)) + " hours remaining\n";
+	if (player.statusEffectv1(StatusEffects.LustyTongue) > 0)
+		statEffects += "Lusty Tongue - " + Math.round(player.statusEffectv1(StatusEffects.LustyTongue)) + " hours remaining\n";
 		
-	if (player.statusAffectv1(StatusAffects.BlackCatBeer) > 0)
-		statEffects += "Black Cat Beer - " + player.statusAffectv1(StatusAffects.BlackCatBeer) + " hours remaining (Lust resistance 20% lower, physical resistance 25% higher.)\n";
+	if (player.statusEffectv1(StatusEffects.BlackCatBeer) > 0)
+		statEffects += "Black Cat Beer - " + player.statusEffectv1(StatusEffects.BlackCatBeer) + " hours remaining (Lust resistance 20% lower, physical resistance 25% higher.)\n";
 
-	if (player.statusAffectv1(StatusAffects.AndysSmoke) > 0)
-		statEffects += "Andy's Pipe Smoke - " + player.statusAffectv1(StatusAffects.AndysSmoke) + " hours remaining (Speed temporarily lowered, intelligence temporarily increased.)\n";
+	if (player.statusEffectv1(StatusEffects.AndysSmoke) > 0)
+		statEffects += "Andy's Pipe Smoke - " + player.statusEffectv1(StatusEffects.AndysSmoke) + " hours remaining (Speed temporarily lowered, intelligence temporarily increased.)\n";
 		
-	if (player.statusAffectv1(StatusAffects.FeedingEuphoria) > 0)
-		statEffects += "Feeding Euphoria - " + player.statusAffectv1(StatusAffects.FeedingEuphoria) + " hours remaining (Speed temporarily increased.)\n";
+	if (player.statusEffectv1(StatusEffects.FeedingEuphoria) > 0)
+		statEffects += "Feeding Euphoria - " + player.statusEffectv1(StatusEffects.FeedingEuphoria) + " hours remaining (Speed temporarily increased.)\n";
 		
-	if (player.statusAffectv1(StatusAffects.IzumisPipeSmoke) > 0) 
-		statEffects += "Izumi's Pipe Smoke - " + player.statusAffectv1(StatusAffects.IzumisPipeSmoke) + " hours remaining. (Speed temporarily lowered.)\n";
+	if (player.statusEffectv1(StatusEffects.IzumisPipeSmoke) > 0)
+		statEffects += "Izumi's Pipe Smoke - " + player.statusEffectv1(StatusEffects.IzumisPipeSmoke) + " hours remaining. (Speed temporarily lowered.)\n";
 
-	if (player.statusAffectv1(StatusAffects.UmasMassage) > 0) 
-		statEffects += "Uma's Massage - " + player.statusAffectv3(StatusAffects.UmasMassage) + " hours remaining.\n";
+	if (player.statusEffectv1(StatusEffects.UmasMassage) > 0)
+		statEffects += "Uma's Massage - " + player.statusEffectv3(StatusEffects.UmasMassage) + " hours remaining.\n";
 		
-	if (player.statusAffectv1(StatusAffects.BathedInHotSpring) > 0) 
-		statEffects += "Bathed in Hot Spring - " + player.statusAffectv1(StatusAffects.BathedInHotSpring) + " hours remaining. (Fatigue recovery rate 20% higher)\n";
+	if (player.statusEffectv1(StatusEffects.BathedInHotSpring) > 0)
+		statEffects += "Bathed in Hot Spring - " + player.statusEffectv1(StatusEffects.BathedInHotSpring) + " hours remaining. (Fatigue recovery rate 20% higher)\n";
 		
-	if (player.statusAffectv1(StatusAffects.Dysfunction) > 0) 
-		statEffects += "Dysfunction - " + player.statusAffectv1(StatusAffects.Dysfunction) + " hours remaining. (Disables masturbation)\n";
+	if (player.statusEffectv1(StatusEffects.Dysfunction) > 0)
+		statEffects += "Dysfunction - " + player.statusEffectv1(StatusEffects.Dysfunction) + " hours remaining. (Disables masturbation)\n";
 
 	if (statEffects != "")
 		outputText("\n<b><u>Ongoing Status Effects</u></b>\n" + statEffects, false);
@@ -2034,7 +2034,7 @@ public function lustPercent():Number {
 	if(player.findPerk(PerkLib.ResistanceV) >= 0) lust -= 5;
 	if(player.findPerk(PerkLib.ChiReflowLust) >= 0) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
 	if(lust < minLustCap) lust = minLustCap;
-	if(player.statusAffectv1(StatusAffects.BlackCatBeer) > 0) {
+	if(player.statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
 		if(lust >= 80) lust = 100;
 		else lust += 20;
 	}
@@ -2045,17 +2045,17 @@ public function lustPercent():Number {
 	//DRAWBACKS TO JUSTIFY IT.
 	//++++++++++++++++++++++++++++++++++++++++++++++++++
 	//Bimbo body slows lust gains!
-	if((player.hasStatusAffect(StatusAffects.BimboChampagne) || player.findPerk(PerkLib.BimboBody) >= 0) && lust > 0) lust *= .75;
+	if((player.hasStatusEffect(StatusEffects.BimboChampagne) || player.findPerk(PerkLib.BimboBody) >= 0) && lust > 0) lust *= .75;
 	if(player.findPerk(PerkLib.BroBody) >= 0 && lust > 0) lust *= .75;
 	if(player.findPerk(PerkLib.FutaForm) >= 0 && lust > 0) lust *= .75;
 	//Omnibus' Gift reduces lust gain by 15%
 	if(player.findPerk(PerkLib.OmnibusGift) >= 0) lust *= .85;
 	//Luststick reduces lust gain by 10% to match increased min lust
 	if(player.findPerk(PerkLib.LuststickAdapted) >= 0) lust *= 0.9;
-	if(player.hasStatusAffect(StatusAffects.Berzerking)) lust *= .6;
+	if(player.hasStatusEffect(StatusEffects.Berzerking)) lust *= .6;
 	if (player.findPerk(PerkLib.PureAndLoving) >= 0) lust *= 0.95;
 	//Berseking reduces lust gains by 10%
-	if(player.hasStatusAffect(StatusAffects.Berzerking)) lust *= 0.9;
+	if(player.hasStatusEffect(StatusEffects.Berzerking)) lust *= 0.9;
 	
 	//Items
 	if (player.jewelryEffectId == JewelryLib.PURITY) lust *= 1 - (player.jewelryEffectMagnitude / 100);
@@ -2064,7 +2064,7 @@ public function lustPercent():Number {
 	if ((player.weapon == weapons.PURITAS) || (player.weapon == weapons.ASCENSU)) lust *= 0.9;
 	// Lust mods from Uma's content -- Given the short duration and the gem cost, I think them being multiplicative is justified.
 	// Changing them to an additive bonus should be pretty simple (check the static values in UmasShop.as)
-	var sac:StatusAffectClass = player.statusAffectByType(StatusAffects.UmasMassage);
+	var sac:StatusEffectClass = player.statusEffectByType(StatusEffects.UmasMassage);
 	if (sac)
 	{
 		if (sac.value1 == UmasShop.MASSAGE_RELIEF || sac.value1 == UmasShop.MASSAGE_LUST)
@@ -2074,7 +2074,7 @@ public function lustPercent():Number {
 	}
 	
 	lust = Math.round(lust);
-	if (player.hasStatusAffect(StatusAffects.Lustzerking) && player.findPerk(PerkLib.ColdLust) < 1) lust = 100;
+	if (player.hasStatusEffect(StatusEffects.Lustzerking) && player.findPerk(PerkLib.ColdLust) < 1) lust = 100;
 	return lust;
 }
 

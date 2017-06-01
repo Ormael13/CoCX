@@ -17,10 +17,10 @@ public class MagicSpecials extends BaseCombatContent {
 			kGAMECLASS.urtaQuest.urtaMSpecials();
 			return;
 		}
-		if (inCombat && player.hasStatusAffect(StatusAffects.Sealed) && (player.statusAffectv2(StatusAffects.Sealed) == 6 || player.statusAffectv2(StatusAffects.Sealed) == 10)) {
+		if (inCombat && player.hasStatusEffect(StatusEffects.Sealed) && (player.statusEffectv2(StatusEffects.Sealed) == 6 || player.statusEffectv2(StatusEffects.Sealed) == 10)) {
 			clearOutput();
-			if (player.statusAffectv2(StatusAffects.Sealed) == 6) outputText("You try to ready a special ability, but wind up stumbling dizzily instead.  <b>Your ability to use magical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
-			if (player.statusAffectv2(StatusAffects.Sealed) == 10) outputText("You try to use a magical ability but you are currently silenced by the alraune vines!\n\n");
+			if (player.statusEffectv2(StatusEffects.Sealed) == 6) outputText("You try to ready a special ability, but wind up stumbling dizzily instead.  <b>Your ability to use magical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
+			if (player.statusEffectv2(StatusEffects.Sealed) == 10) outputText("You try to use a magical ability but you are currently silenced by the alraune vines!\n\n");
 			enemyAI();
 			return;
 		}
@@ -44,13 +44,13 @@ public class MagicSpecials extends BaseCombatContent {
 			addButton(button++, "Petrify", petrify, null, null, null, "Use your gaze to temporally turn your enemy into a stone. \n\nFatigue Cost: " + spellCost(100));
 		}
 		if (player.faceType == FACE_WOLF && player.hasKeyItem("Fenrir Collar") >= 0) {
-			if (!player.hasStatusAffect(StatusAffects.CooldownFreezingBreath)) {
+			if (!player.hasStatusEffect(StatusEffects.CooldownFreezingBreath)) {
 				addButton(button++, "FreezingBreath", fenrirFreezingBreath, null, null, null, "Freeze your foe solid with a powerful breath attack. \n\nFatigue Cost: " + spellCost(150) + "  \n\nWould go into cooldown after use for: 10 rounds  \n\n<b>AoE attack.</b>");
 			}
 			else addButtonDisabled(button++, "FreezingBreath", "You need more time before you can use Freezing Breath again.");
 		}
 		if (player.findPerk(PerkLib.FreezingBreathYeti) >= 0) {
-			if (!player.hasStatusAffect(StatusAffects.CooldownFreezingBreathYeti)) {
+			if (!player.hasStatusEffect(StatusEffects.CooldownFreezingBreathYeti)) {
 				addButton(button++, "FreezingBreath", yetiFreezingBreath, null, null, null, "Freeze your foe solid with a powerful breath attack. \n\nFatigue Cost: " + spellCost(50) + "  \n\nWould go into cooldown after use for: 10 rounds");
 			}
 			else addButtonDisabled(button++, "FreezingBreath", "You need more time before you can use Freezing Breath again.");
@@ -74,17 +74,17 @@ public class MagicSpecials extends BaseCombatContent {
 			addButton(button++, "DragonDarkness", dragondarknessBreath, null, null, null, "Unleash dakness from your mouth. This can only be done once a day. \n\nFatigue Cost: " + spellCost(50), "Dragon Darkness Breath");
 		}
 		if (player.findPerk(PerkLib.PhoenixFireBreath) >= 0) {
-			if (!player.hasStatusAffect(StatusAffects.CooldownPhoenixFireBreath)) {
+			if (!player.hasStatusEffect(StatusEffects.CooldownPhoenixFireBreath)) {
 				addButton(button++, "PhoenixFire", phoenixfireBreath, null, null, null, "Unleash fire from your mouth. \n\nFatigue Cost: " + spellCost(40) + "  \n\nWould go into cooldown after use for: 5 rounds", "Phoenix Fire Breath");
 			}
 			else addButtonDisabled(button++, "PhoenixFire", "You need more time before you can use Phoenix Fire again.");
 
 		}
 		if (player.harpyScore() >= 8 || player.sirenScore() >= 10) {
-			if (!player.hasStatusAffect(StatusAffects.CooldownCompellingAria)) {
+			if (!player.hasStatusEffect(StatusEffects.CooldownCompellingAria)) {
 				addButton(button++, "Compelling Aria", singCompellingAria, null, null, null, "Sing for a moment.");
 			}
-			else if (player.hasStatusAffect(StatusAffects.CooldownCompellingAria)) {
+			else if (player.hasStatusEffect(StatusEffects.CooldownCompellingAria)) {
 				outputText("<b>You need more time before you can use Compelling Aria again.</b>\n\n");
 			}
 		}
@@ -99,23 +99,23 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.findPerk(PerkLib.CorruptedKitsune) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount >= 7) {
 			addButton(button++, "C.FoxFire", corruptedFoxFire, null, null, null, "Unleash a corrupted purple flame at your opponent for high damage. Less effective against corrupted enemies. \n\nFatigue Cost: " + spellCost(100) + "\nSoulforce cost: " + 40 * soulskillCost() * soulskillcostmulti() + "");
-			if (!player.hasStatusAffect(StatusAffects.CooldownTerror)) {
+			if (!player.hasStatusEffect(StatusEffects.CooldownTerror)) {
 				if (player.tailCount == 9 && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Terror", kitsuneTerror, null, null, null, "Instill fear into your opponent with eldritch horrors. The more you cast this in a battle, the lesser effective it becomes.  \n\nWould go into cooldown after use for: 3 rounds  \n\nFatigue Cost: " + spellCost(200) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
 				else if (player.tailCount == 9 || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Terror", kitsuneTerror, null, null, null, "Instill fear into your opponent with eldritch horrors. The more you cast this in a battle, the lesser effective it becomes.  \n\nWould go into cooldown after use for: 6 rounds  \n\nFatigue Cost: " + spellCost(100) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
 				else addButton(button++, "Terror", kitsuneTerror, null, null, null, "Instill fear into your opponent with eldritch horrors. The more you cast this in a battle, the lesser effective it becomes.  \n\nWould go into cooldown after use for: 9 rounds  \n\nFatigue Cost: " + spellCost(50) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
 			}
-			else if (player.hasStatusAffect(StatusAffects.CooldownTerror)) {
+			else if (player.hasStatusEffect(StatusEffects.CooldownTerror)) {
 				outputText("<b>You need more time before you can use Terror again.</b>\n\n");
 			}
 		}
 		if (player.findPerk(PerkLib.EnlightenedKitsune) >= 0 && player.tailType == TAIL_TYPE_FOX && player.tailCount >= 7) {
 			addButton(button++, "P.FoxFire", pureFoxFire, null, null, null, "Unleash an ethereal blue flame at your opponent for high damage. More effective against corrupted enemies. \n\nFatigue Cost: " + spellCost(100) + "\nSoulforce cost: " + 40 * soulskillCost() * soulskillcostmulti() + "");
-			if (!player.hasStatusAffect(StatusAffects.CooldownIllusion)) {
+			if (!player.hasStatusEffect(StatusEffects.CooldownIllusion)) {
 				if (player.tailCount == 9 && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Illusion", kitsuneIllusion, null, null, null, "Warp the reality around your opponent to temporary boost your evasion for 3 round and arouse target slightly.  \n\nWould go into cooldown after use for: 3 rounds  \n\nFatigue Cost: " + spellCost(200) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
 				else if (player.tailCount == 9 || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) addButton(button++, "Illusion", kitsuneIllusion, null, null, null, "Warp the reality around your opponent to temporary boost your evasion for 3 round and arouse target slightly.  \n\nWould go into cooldown after use for: 6 rounds  \n\nFatigue Cost: " + spellCost(100) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
 				else addButton(button++, "Illusion", kitsuneIllusion, null, null, null, "Warp the reality around your opponent to temporary boost your evasion for 3 round and arouse target slightly.  \n\nWould go into cooldown after use for: 9 rounds  \n\nFatigue Cost: " + spellCost(50) + "\nSoulforce cost: " + 20 * soulskillCost() * soulskillcostmulti() + "");
 			}
-			else if (player.hasStatusAffect(StatusAffects.CooldownIllusion)) {
+			else if (player.hasStatusEffect(StatusEffects.CooldownIllusion)) {
 				outputText("<b>You need more time before you can use Illusion again.</b>\n\n");
 			}
 		}
@@ -123,10 +123,10 @@ public class MagicSpecials extends BaseCombatContent {
 		 addButton(button++, "FoxFire", foxFire, null, null, null, "Unleash a fox flame at your opponent for high damage. \n\nFatigue Cost: " + spellCost(60) + "\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti() + "");
 		 }	//przerobic potem na ghost fire dla nekomata race special also combining fatigue and soulfroce
 		 */	if (player.findPerk(PerkLib.DarkCharm) >= 0) {
-			if (!player.hasStatusAffect(StatusAffects.CooldownFascinate)) {
+			if (!player.hasStatusEffect(StatusEffects.CooldownFascinate)) {
 				addButton(button++, "Fascinate", Fascinate, null, null, null, "Put on a sexy display capting the target attention, arrousing it and maybe even stunning for a short moment. \n\nFatigue Cost: " + spellCost(30));
 			}
-			else if (player.hasStatusAffect(StatusAffects.CooldownFascinate)) {
+			else if (player.hasStatusEffect(StatusEffects.CooldownFascinate)) {
 				outputText("<b>You need more time before you can use Fascinate again.</b>\n\n");
 			}
 			if (player.findPerk(PerkLib.BlackHeart) >= 0) {
@@ -137,9 +137,9 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.Transference) >= 0) {
 			addButton(button++, "Transfer", lustTransfer, null, null, null, "Transfer some of your own arousal to your opponent. \n\nFatigue Cost: " + spellCost(40) + "");
 		}
-		if (player.hasStatusAffect(StatusAffects.ShieldingSpell)) addButton(13, "Shielding", shieldingSpell);
-		if (player.hasStatusAffect(StatusAffects.ImmolationSpell)) addButton(13, "Immolation", immolationSpell);
-		if (player.hasStatusAffect(StatusAffects.IcePrisonSpell)) addButton(13, "Ice Prison", iceprisonSpell);
+		if (player.hasStatusEffect(StatusEffects.ShieldingSpell)) addButton(13, "Shielding", shieldingSpell);
+		if (player.hasStatusEffect(StatusEffects.ImmolationSpell)) addButton(13, "Immolation", immolationSpell);
+		if (player.hasStatusEffect(StatusEffects.IcePrisonSpell)) addButton(13, "Ice Prison", iceprisonSpell);
 		addButton(14, "Back", combatMenu, false);
 	}
 
@@ -161,7 +161,7 @@ public class MagicSpecials extends BaseCombatContent {
 			doNext(combatMenu);
 			return;
 		}
-		if(player.hasStatusAffect(StatusAffects.ThroatPunch) || player.hasStatusAffect(StatusAffects.WebSilence)) {
+		if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
 			outputText("You cannot focus to reach the enemy's mind while you're having so much difficult breathing.", true);
 			doNext(combatMenu);
 			return;
@@ -181,7 +181,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(10, 1);
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
 			return;
@@ -206,7 +206,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		outputText("You reach for your enemy's mind, watching as its sudden fear petrifies your foe.\n\n", false);
-		monster.createStatusAffect(StatusAffects.Fear,1,0,0,0);
+		monster.createStatusEffect(StatusEffects.Fear,1,0,0,0);
 		enemyAI();
 	}
 
@@ -221,7 +221,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(150, 1);
-		player.createStatusAffect(StatusAffects.CooldownFreezingBreath,10,0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownFreezingBreath,10,0,0,0);
 		var damage:Number = int(player.level * (8 + player.wolfScore()) + rand(60));
 		damage = calcGlacialMod(damage);
 		if (monster.findPerk(PerkLib.EnemyGroupType) >= 0) damage *= 5;
@@ -234,13 +234,13 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = Math.round(damage);
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, a powerful wave of cold blasting the area in front of you.  " + monster.capitalA + monster.short + " does " + monster.pronoun3 + " best to avoid it, but the wave of freezing air is too fast.");
 		//Shell
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
 			return;
 		}
 		//Amily!
-		if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
 			enemyAI();
 			return;
@@ -252,7 +252,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		//Special enemy avoidances
-		if(monster.short == "Vala" && !monster.hasStatusAffect(StatusAffects.Stunned)) {
+		if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
 			outputText("Vala beats her wings with surprising strength, blowing the ice wave back at you! ", false);
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
 				outputText("You dive out of the way and evade it!", false);
@@ -273,7 +273,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else {
 			if(monster.findPerk(PerkLib.Resolute) < 0) {
 				outputText("  " + monster.capitalA + monster.short + " scream for an instant as it is flash frozen solid by the wave along with everything around it! Your opponent now trapped in a block of ice tries very hard to burst out and get free of its glacial prison.");
-				monster.createStatusAffect(StatusAffects.FreezingBreathStun,3,0,0,0);
+				monster.createStatusEffect(StatusEffects.FreezingBreathStun,3,0,0,0);
 			}
 			else {
 				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
@@ -289,7 +289,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
 			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
-			monster.createStatusAffect(StatusAffects.Shell, 2, 0, 0, 0);
+			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			enemyAI();
 		}
 		else combatRoundOver();
@@ -306,7 +306,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(50, 1);
-		player.createStatusAffect(StatusAffects.CooldownFreezingBreathYeti,10,0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownFreezingBreathYeti,10,0,0,0);
 		var damage:Number = 0;
 		if (player.tou >= 21 && player.tou < 41) damage += (player.tou / 2 + rand((player.tou * 3) / 4));
 		if (player.tou >= 41 && player.tou < 61) damage += ((player.tou * 2) / 3 + rand(player.tou));
@@ -341,13 +341,13 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = Math.round(damage);
 		outputText("You inhale deeply, then blow a freezing breath attack at your opponent, encasing it in ice!");
 		//Shell
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
 			return;
 		}
 		//Amily!
-		if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
 			enemyAI();
 			return;
@@ -359,7 +359,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		//Special enemy avoidances
-		if(monster.short == "Vala" && !monster.hasStatusAffect(StatusAffects.Stunned)) {
+		if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
 			outputText("Vala beats her wings with surprising strength, blowing the ice wave back at you! ", false);
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
 				outputText("You dive out of the way and evade it!", false);
@@ -383,7 +383,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if(!monster.plural) outputText("is ");
 				else outputText("are");
 				outputText(" frozen solid!");
-				monster.createStatusAffect(StatusAffects.FreezingBreathStun,3,0,0,0);
+				monster.createStatusEffect(StatusEffects.FreezingBreathStun,3,0,0,0);
 			}
 			else {
 				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
@@ -399,7 +399,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
 			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
-			monster.createStatusAffect(StatusAffects.Shell, 2, 0, 0, 0);
+			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			enemyAI();
 		}
 		else combatRoundOver();
@@ -408,27 +408,27 @@ public class MagicSpecials extends BaseCombatContent {
 	public function singCompellingAria():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		if (player.statusAffectv1(StatusAffects.ChanneledAttack) == 2) {
+		if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 2) {
 			outputText("You end your theme with a powerful finale compelling everyone around adore and love you.", true);
 			var lustDmgF:Number = monster.lustVuln * 3 * (player.inte / 5 * player.teaseLevel + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 			if (player.findPerk(PerkLib.ArcaneLash) >= 0) lustDmgF *= 1.5;
 			if (monster.findPerk(PerkLib.EnemyGroupType) >= 0) lustDmgF *= 5;
 			lustDmgF = Math.round(lustDmgF);
 			monster.teased(lustDmgF);
-			if(monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusAffect(StatusAffects.Stunned,4,0,0,0);
-			player.createStatusAffect(StatusAffects.CooldownCompellingAria,10,0,0,0);
-			player.removeStatusAffect(StatusAffects.ChanneledAttack);
-			player.removeStatusAffect(StatusAffects.ChanneledAttackType);
+			if(monster.findPerk(PerkLib.Resolute) < 0) monster.createStatusEffect(StatusEffects.Stunned,4,0,0,0);
+			player.createStatusEffect(StatusEffects.CooldownCompellingAria,10,0,0,0);
+			player.removeStatusEffect(StatusEffects.ChanneledAttack);
+			player.removeStatusEffect(StatusEffects.ChanneledAttackType);
 			outputText("\n\n", false);
 			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 			{
 				outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
-				monster.createStatusAffect(StatusAffects.Shell, 2, 0, 0, 0);
+				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 				enemyAI();
 			}
 			else enemyAI();
 		}
-		else if (player.statusAffectv1(StatusAffects.ChanneledAttack) == 1) {
+		else if (player.statusEffectv1(StatusEffects.ChanneledAttack) == 1) {
 			outputText("You are still singing. Your compelling aria reaches far up to your opponent");
 			if(monster.plural) outputText("s");
 			outputText(" ears.");
@@ -436,7 +436,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.findPerk(PerkLib.ArcaneLash) >= 0) lustDmg2 *= 1.5;
 			lustDmg2 = Math.round(lustDmg2);
 			monster.teased(lustDmg2);
-			player.addStatusValue(StatusAffects.ChanneledAttack, 1, 1);
+			player.addStatusValue(StatusEffects.ChanneledAttack, 1, 1);
 			outputText("\n\n");
 			enemyAI();
 		}
@@ -454,8 +454,8 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.findPerk(PerkLib.ArcaneLash) >= 0) lustDmg *= 1.5;
 			lustDmg = Math.round(lustDmg);
 			monster.teased(lustDmg);
-			player.createStatusAffect(StatusAffects.ChanneledAttack, 1, 0, 0, 0);
-			player.createStatusAffect(StatusAffects.ChanneledAttackType, 1, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.ChanneledAttackType, 1, 0, 0, 0);
 			outputText("\n\n", false);
 			enemyAI();
 		}
@@ -472,7 +472,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(40, 1);
-		player.createStatusAffect(StatusAffects.CooldownPhoenixFireBreath,5,0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownPhoenixFireBreath,5,0,0,0);
 		var damage:Number = 0;
 		damage += 50 + rand(20);
 		damage += (player.level * 10);
@@ -487,13 +487,13 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 2;
 		damage = Math.round(damage);
 		//Shell
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
 			return;
 		}
 		//Amily!
-		if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
 			enemyAI();
 			return;
@@ -508,10 +508,10 @@ public class MagicSpecials extends BaseCombatContent {
 		{
 			//Attack gains burn DoT for 2-3 turns.
 			outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!\n\n");
-			monster.createStatusAffect(StatusAffects.OnFire, 2 + rand(2), 0, 0, 0);
+			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
 			damage = int(player.level * 8 + 25 + rand(10));
-			if(player.hasStatusAffect(StatusAffects.DragonBreathBoost)) {
-				player.removeStatusAffect(StatusAffects.DragonBreathBoost);
+			if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
+				player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 				damage *= 1.5;
 			}
 			damage *= 1.75;
@@ -521,16 +521,16 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around " + monster.pronoun2 + ".  " + monster.capitalA + monster.short + " does " + monster.pronoun3 + " best to avoid it, but the wave of force is too fast.");
-		if(monster.hasStatusAffect(StatusAffects.Sandstorm)) {
+		if(monster.hasStatusEffect(StatusEffects.Sandstorm)) {
 			outputText("  <b>Your breath is massively dissipated by the swirling vortex, causing it to hit with far less force!</b>");
 			damage = Math.round(0.5 * damage);
 		}
 		//Miss:
-		if((player.hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
+		if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			outputText("  Despite the heavy impact caused by your attack, " + monster.a + monster.short + " manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusAffect(StatusAffects.Stunned)) {
+		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
 			outputText("Vala beats her wings with surprising strength, blowing the fireball back at you! ", false);
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
 				outputText("You dive out of the way and evade it!", false);
@@ -538,9 +538,9 @@ public class MagicSpecials extends BaseCombatContent {
 			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(4) == 0) {
 				outputText("You use your flexibility to barely fold your body out of the way!", false);
 			}
-			else if(player.hasStatusAffect(StatusAffects.Blizzard)) {
+			else if(player.hasStatusEffect(StatusEffects.Blizzard)) {
 				outputText("  <b>Surrounding you blizzard at the cost of loosing some of it remaining power massively dissipated most of the fireball energy, causing it to hit with far less force!</b>");
-				player.addStatusValue(StatusAffects.Blizzard,1,-1);
+				player.addStatusValue(StatusEffects.Blizzard,1,-1);
 				damage = Math.round(0.2 * damage);
 			}
 			//Determine if blocked!
@@ -567,7 +567,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if(monster.findPerk(PerkLib.Resolute) < 0) {
 			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
-			monster.createStatusAffect(StatusAffects.Stunned,1,0,0,0);
+			monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 		}
 		else {
 			outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
@@ -577,11 +577,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
-		if (monster is Holli && !monster.hasStatusAffect(StatusAffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+		if (monster is Holli && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
 			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
-			monster.createStatusAffect(StatusAffects.Shell, 2, 0, 0, 0);
+			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			enemyAI();
 		}
 		else combatRoundOver();
@@ -601,20 +601,20 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		//Not Ready Yet:
-		if(player.hasStatusAffect(StatusAffects.DragonBreathCooldown)) {
+		if(player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) {
 			outputText("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
 			doNext(combatMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(50, 1);
-		player.createStatusAffect(StatusAffects.DragonBreathCooldown,0,0,0,0);
+		player.createStatusEffect(StatusEffects.DragonBreathCooldown,0,0,0,0);
 		var damage:Number = int(player.level * (8 + player.dragonScore()) + rand(60));
 
 		damage = calcInfernoMod(damage);
 
-		if(player.hasStatusAffect(StatusAffects.DragonBreathBoost)) {
-			player.removeStatusAffect(StatusAffects.DragonBreathBoost);
+		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
+			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
 		/*	if (player.findPerk(PerkLib.DraconicLungs) >= 0) {
@@ -627,13 +627,13 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 2;
 		damage = Math.round(damage);
 		//Shell
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
 			return;
 		}
 		//Amily!
-		if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
 			enemyAI();
 			return;
@@ -648,10 +648,10 @@ public class MagicSpecials extends BaseCombatContent {
 		{
 			//Attack gains burn DoT for 2-3 turns.
 			outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!\n\n");
-			monster.createStatusAffect(StatusAffects.OnFire, 2 + rand(2), 0, 0, 0);
+			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
 			damage = int(player.level * 8 + 25 + rand(10));
-			if(player.hasStatusAffect(StatusAffects.DragonBreathBoost)) {
-				player.removeStatusAffect(StatusAffects.DragonBreathBoost);
+			if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
+				player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 				damage *= 1.5;
 			}
 			damage *= 1.75;
@@ -661,16 +661,16 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around " + monster.pronoun2 + ".  " + monster.capitalA + monster.short + " does " + monster.pronoun3 + " best to avoid it, but the wave of force is too fast.");
-		if(monster.hasStatusAffect(StatusAffects.Sandstorm)) {
+		if(monster.hasStatusEffect(StatusEffects.Sandstorm)) {
 			outputText("  <b>Your breath is massively dissipated by the swirling vortex, causing it to hit with far less force!</b>");
 			damage = Math.round(0.5 * damage);
 		}
 		//Miss:
-		if((player.hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
+		if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			outputText("  Despite the heavy impact caused by your roar, " + monster.a + monster.short + " manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusAffect(StatusAffects.Stunned)) {
+		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
 			outputText("Vala beats her wings with surprising strength, blowing the fireball back at you! ", false);
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
 				outputText("You dive out of the way and evade it!", false);
@@ -678,9 +678,9 @@ public class MagicSpecials extends BaseCombatContent {
 			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(4) == 0) {
 				outputText("You use your flexibility to barely fold your body out of the way!", false);
 			}
-			else if(player.hasStatusAffect(StatusAffects.Blizzard)) {
+			else if(player.hasStatusEffect(StatusEffects.Blizzard)) {
 				outputText("  <b>Surrounding you blizzard at the cost of loosing some of it remaining power massively dissipated most of the fireball energy, causing it to hit with far less force!</b>");
-				player.addStatusValue(StatusAffects.Blizzard,1,-1);
+				player.addStatusValue(StatusEffects.Blizzard,1,-1);
 				damage = Math.round(0.2 * damage);
 			}
 			//Determine if blocked!
@@ -699,13 +699,13 @@ public class MagicSpecials extends BaseCombatContent {
 			if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 			damage = Math.round(damage * 1.5);
 			damage = doDamage(damage);
-			monster.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
+			monster.createStatusEffect(StatusEffects.Stunned,0,0,0,0);
 			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n", false);
 		}
 		else {
 			if(monster.findPerk(PerkLib.Resolute) < 0) {
 				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
-				monster.createStatusAffect(StatusAffects.Stunned,1,0,0,0);
+				monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 			}
 			else {
 				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
@@ -718,11 +718,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
-		if (monster is Holli && !monster.hasStatusAffect(StatusAffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+		if (monster is Holli && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
 			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
-			monster.createStatusAffect(StatusAffects.Shell, 2, 0, 0, 0);
+			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			enemyAI();
 		}
 		else combatRoundOver();
@@ -738,20 +738,20 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		//Not Ready Yet:
-		if(player.hasStatusAffect(StatusAffects.DragonBreathCooldown)) {
+		if(player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) {
 			outputText("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
 			doNext(combatMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(50, 1);
-		player.createStatusAffect(StatusAffects.DragonBreathCooldown,0,0,0,0);
+		player.createStatusEffect(StatusEffects.DragonBreathCooldown,0,0,0,0);
 		var damage:Number = int(player.level * (8 + player.dragonScore()) + rand(60));
 
 		damage = calcGlacialMod(damage);
 
-		if(player.hasStatusAffect(StatusAffects.DragonBreathBoost)) {
-			player.removeStatusAffect(StatusAffects.DragonBreathBoost);
+		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
+			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
 		/*	if (player.findPerk(PerkLib.DraconicLungs) >= 0) {
@@ -764,13 +764,13 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.ColdMastery) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 2;
 		damage = Math.round(damage);
 		//Shell
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
 			return;
 		}
 		//Amily!
-		if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
 			enemyAI();
 			return;
@@ -783,11 +783,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around " + monster.pronoun2 + ".  " + monster.capitalA + monster.short + " does " + monster.pronoun3 + " best to avoid it, but the wave of force is too fast.");
 		//Miss:
-		if((player.hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
+		if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			outputText("  Despite the heavy impact caused by your roar, " + monster.a + monster.short + " manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusAffect(StatusAffects.Stunned)) {
+		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
 			outputText("Vala beats her wings with surprising strength, blowing the iceball back at you! ", false);
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
 				outputText("You dive out of the way and evade it!", false);
@@ -808,7 +808,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else {
 			if(monster.findPerk(PerkLib.Resolute) < 0) {
 				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
-				monster.createStatusAffect(StatusAffects.Stunned,1,0,0,0);
+				monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 			}
 			else {
 				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
@@ -824,7 +824,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
 			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
-			monster.createStatusAffect(StatusAffects.Shell, 2, 0, 0, 0);
+			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			enemyAI();
 		}
 		else combatRoundOver();
@@ -840,20 +840,20 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		//Not Ready Yet:
-		if(player.hasStatusAffect(StatusAffects.DragonBreathCooldown)) {
+		if(player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) {
 			outputText("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
 			doNext(combatMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(50, 1);
-		player.createStatusAffect(StatusAffects.DragonBreathCooldown,0,0,0,0);
+		player.createStatusEffect(StatusEffects.DragonBreathCooldown,0,0,0,0);
 		var damage:Number = int(player.level * (8 + player.dragonScore()) + rand(60));
 
 //	damage = calcGlacialMod(damage);
 
-		if(player.hasStatusAffect(StatusAffects.DragonBreathBoost)) {
-			player.removeStatusAffect(StatusAffects.DragonBreathBoost);
+		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
+			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
 		/*	if (player.findPerk(PerkLib.DraconicLungs) >= 0) {
@@ -866,13 +866,13 @@ public class MagicSpecials extends BaseCombatContent {
 //	if (player.findPerk(PerkLib.ColdMastery) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 2;
 		damage = Math.round(damage);
 		//Shell
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
 			return;
 		}
 		//Amily!
-		if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
 			enemyAI();
 			return;
@@ -885,11 +885,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around " + monster.pronoun2 + ".  " + monster.capitalA + monster.short + " does " + monster.pronoun3 + " best to avoid it, but the wave of force is too fast.");
 		//Miss:
-		if((player.hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
+		if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			outputText("  Despite the heavy impact caused by your roar, " + monster.a + monster.short + " manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusAffect(StatusAffects.Stunned)) {
+		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
 			outputText("Vala beats her wings with surprising strength, blowing the lightning bolt back at you! ", false);
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
 				outputText("You dive out of the way and evade it!", false);
@@ -910,7 +910,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else {
 			if(monster.findPerk(PerkLib.Resolute) < 0) {
 				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
-				monster.createStatusAffect(StatusAffects.Stunned,1,0,0,0);
+				monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 			}
 			else {
 				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
@@ -926,7 +926,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
 			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
-			monster.createStatusAffect(StatusAffects.Shell, 2, 0, 0, 0);
+			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			enemyAI();
 		}
 		else combatRoundOver();
@@ -942,20 +942,20 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		//Not Ready Yet:
-		if(player.hasStatusAffect(StatusAffects.DragonBreathCooldown)) {
+		if(player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) {
 			outputText("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
 			doNext(combatMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(50, 1);
-		player.createStatusAffect(StatusAffects.DragonBreathCooldown,0,0,0,0);
+		player.createStatusEffect(StatusEffects.DragonBreathCooldown,0,0,0,0);
 		var damage:Number = int(player.level * (8 + player.dragonScore()) + rand(60));
 
 //	damage = calcGlacialMod(damage);
 
-		if(player.hasStatusAffect(StatusAffects.DragonBreathBoost)) {
-			player.removeStatusAffect(StatusAffects.DragonBreathBoost);
+		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
+			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
 		}
 		/*	if (player.findPerk(PerkLib.DraconicLungs) >= 0) {
@@ -968,13 +968,13 @@ public class MagicSpecials extends BaseCombatContent {
 //	if (player.findPerk(PerkLib.ColdMastery) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 2;
 		damage = Math.round(damage);
 		//Shell
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
 			return;
 		}
 		//Amily!
-		if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
 			enemyAI();
 			return;
@@ -987,11 +987,11 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around " + monster.pronoun2 + ".  " + monster.capitalA + monster.short + " does " + monster.pronoun3 + " best to avoid it, but the wave of force is too fast.");
 		//Miss:
-		if((player.hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
+		if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			outputText("  Despite the heavy impact caused by your roar, " + monster.a + monster.short + " manages to take it at an angle and remain on " + monster.pronoun3 + " feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusAffect(StatusAffects.Stunned)) {
+		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
 			outputText("Vala beats her wings with surprising strength, blowing the darkness shard back at you! ", false);
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
 				outputText("You dive out of the way and evade it!", false);
@@ -1012,7 +1012,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else {
 			if(monster.findPerk(PerkLib.Resolute) < 0) {
 				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " crashing to the ground, too dazed to strike back.");
-				monster.createStatusAffect(StatusAffects.Stunned,1,0,0,0);
+				monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 			}
 			else {
 				outputText("  " + monster.capitalA + monster.short + " reels as your wave of force slams into " + monster.pronoun2 + " like a ton of rock!  The impact sends " + monster.pronoun2 + " staggering back, but <b>" + monster.pronoun1 + " ");
@@ -1028,7 +1028,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 		{
 			outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
-			monster.createStatusAffect(StatusAffects.Shell, 2, 0, 0, 0);
+			monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			enemyAI();
 		}
 		else combatRoundOver();
@@ -1047,9 +1047,9 @@ public class MagicSpecials extends BaseCombatContent {
 
 		//[Failure]
 		//(high damage to self, +10 fatigue on top of ability cost)
-		if(rand(5) == 0 || player.hasStatusAffect(StatusAffects.WebSilence)) {
-			if(player.hasStatusAffect(StatusAffects.WebSilence)) outputText("You reach for the terrestrial fire, but as you ready to release a torrent of flame, it backs up in your throat, blocked by the webbing across your mouth.  It causes you to cry out as the sudden, heated force explodes in your own throat. ", false);
-			else if(player.hasStatusAffect(StatusAffects.GooArmorSilence)) outputText("You reach for the terrestrial fire but as you ready the torrent, it erupts prematurely, causing you to cry out as the sudden heated force explodes in your own throat.  The slime covering your mouth bubbles and pops, boiling away where the escaping flame opens small rents in it.  That wasn't as effective as you'd hoped, but you can at least speak now. ");
+		if(rand(5) == 0 || player.hasStatusEffect(StatusEffects.WebSilence)) {
+			if(player.hasStatusEffect(StatusEffects.WebSilence)) outputText("You reach for the terrestrial fire, but as you ready to release a torrent of flame, it backs up in your throat, blocked by the webbing across your mouth.  It causes you to cry out as the sudden, heated force explodes in your own throat. ", false);
+			else if(player.hasStatusEffect(StatusEffects.GooArmorSilence)) outputText("You reach for the terrestrial fire but as you ready the torrent, it erupts prematurely, causing you to cry out as the sudden heated force explodes in your own throat.  The slime covering your mouth bubbles and pops, boiling away where the escaping flame opens small rents in it.  That wasn't as effective as you'd hoped, but you can at least speak now. ");
 			else outputText("You reach for the terrestrial fire, but as you ready to release a torrent of flame, the fire inside erupts prematurely, causing you to cry out as the sudden heated force explodes in your own throat. ", false);
 			fatigue(10);
 			takeDamage(10 + rand(20), true);
@@ -1068,13 +1068,13 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 2;
 		damage = Math.round(damage);
 
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
 			return;
 		}
 		//Amily!
-		if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
 			enemyAI();
 			return;
@@ -1089,25 +1089,25 @@ public class MagicSpecials extends BaseCombatContent {
 		{
 			(monster as Doppleganger).handleSpellResistance("fireball");
 			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 			return;
 		}
-		if(player.hasStatusAffect(StatusAffects.GooArmorSilence)) {
+		if(player.hasStatusEffect(StatusEffects.GooArmorSilence)) {
 			outputText("<b>A growl rumbles from deep within as you charge the terrestrial fire, and you force it from your chest and into the slime.  The goop bubbles and steams as it evaporates, drawing a curious look from your foe, who pauses in her onslaught to lean in and watch.  While the tension around your mouth lessens and your opponent forgets herself more and more, you bide your time.  When you can finally work your jaw enough to open your mouth, you expel the lion's - or jaguar's? share of the flame, inflating an enormous bubble of fire and evaporated slime that thins and finally pops to release a superheated cloud.  The armored girl screams and recoils as she's enveloped, flailing her arms.</b> ", false);
-			player.removeStatusAffect(StatusAffects.GooArmorSilence);
+			player.removeStatusEffect(StatusEffects.GooArmorSilence);
 			damage += 25;
 		}
 		else outputText("A growl rumbles deep with your chest as you charge the terrestrial fire.  When you can hold it no longer, you release an ear splitting roar and hurl a giant green conflagration at your enemy. ", false);
 
-		if(monster.short == "Isabella" && !monster.hasStatusAffect(StatusAffects.Stunned)) {
+		if(monster.short == "Isabella" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
 			outputText("Isabella shoulders her shield into the path of the emerald flames.  They burst over the wall of steel, splitting around the impenetrable obstruction and washing out harmlessly to the sides.\n\n", false);
 			if (kGAMECLASS.isabellaFollowerScene.isabellaAccent()) outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n", false);
 			else outputText("\"<i>Is that all you've got?  It'll take more than a flashy magic trick to beat Isabella!</i>\" taunts the cow-girl.\n\n", false);
 			enemyAI();
 			return;
 		}
-		else if(monster.short == "Vala" && !monster.hasStatusAffect(StatusAffects.Stunned)) {
+		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
 			outputText("Vala beats her wings with surprising strength, blowing the fireball back at you! ", false);
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
 				outputText("You dive out of the way and evade it!", false);
@@ -1115,9 +1115,9 @@ public class MagicSpecials extends BaseCombatContent {
 			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(4) == 0) {
 				outputText("You use your flexibility to barely fold your body out of the way!", false);
 			}
-			else if(player.hasStatusAffect(StatusAffects.Blizzard)) {
+			else if(player.hasStatusEffect(StatusEffects.Blizzard)) {
 				outputText("  <b>Surrounding you blizzard at the cost of loosing some of it remaining power massively dissipated most of the fireball energy, causing it to hit with far less force!</b>");
-				player.addStatusValue(StatusAffects.Blizzard,1,-1);
+				player.addStatusValue(StatusEffects.Blizzard,1,-1);
 				damage = Math.round(0.2 * damage);
 			}
 			else {
@@ -1136,7 +1136,7 @@ public class MagicSpecials extends BaseCombatContent {
 		{
 			//Attack gains burn DoT for 2-3 turns.
 			outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!\n\n");
-			monster.createStatusAffect(StatusAffects.OnFire, 2 + rand(2), 0, 0, 0);
+			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
 			damage = int(player.level * 10 + 45 + rand(10));
 			damage *= 1.75;
 			outputText(" (" + damage + ")");
@@ -1157,13 +1157,13 @@ public class MagicSpecials extends BaseCombatContent {
 				if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 				damage = Math.round(damage * 1.5);
 			}
-			if(monster.hasStatusAffect(StatusAffects.Sandstorm)) {
+			if(monster.hasStatusEffect(StatusEffects.Sandstorm)) {
 				outputText("<b>Your breath is massively dissipated by the swirling vortex, causing it to hit with far less force!</b>  ");
 				damage = Math.round(0.5 * damage);
 			}
 			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n", false);
 			monster.HP -= damage;
-			if(monster.short == "Holli" && !monster.hasStatusAffect(StatusAffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+			if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 		}
 		checkAchievementDamage(damage);
 		if(monster.HP < 1) {
@@ -1189,7 +1189,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var damage:Number = (player.level * 8 + rand(10) + player.inte / 2 + player.cor / 5);
 		damage = calcInfernoMod(damage);
 		//Amily!
-		if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n", true);
 			enemyAI();
 			return;
@@ -1205,7 +1205,7 @@ public class MagicSpecials extends BaseCombatContent {
 		{
 			//Attack gains burn DoT for 2-3 turns.
 			outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!");
-			monster.createStatusAffect(StatusAffects.OnFire, 2 + rand(2), 0, 0, 0);
+			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
 			damage = int(player.level * 8 + rand(10) + player.cor / 5);
 			damage *= 1.75;
 			outputText(" (" + damage + ")");
@@ -1220,25 +1220,25 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 
-		if(!player.hasStatusAffect(StatusAffects.GooArmorSilence)) outputText("You take in a deep breath and unleash a wave of corrupt red flames from deep within.", false);
+		if(!player.hasStatusEffect(StatusEffects.GooArmorSilence)) outputText("You take in a deep breath and unleash a wave of corrupt red flames from deep within.", false);
 
-		if(player.hasStatusAffect(StatusAffects.WebSilence)) {
+		if(player.hasStatusEffect(StatusEffects.WebSilence)) {
 			outputText("  <b>The fire burns through the webs blocking your mouth!</b>", false);
-			player.removeStatusAffect(StatusAffects.WebSilence);
+			player.removeStatusEffect(StatusEffects.WebSilence);
 		}
-		if(player.hasStatusAffect(StatusAffects.GooArmorSilence)) {
+		if(player.hasStatusEffect(StatusEffects.GooArmorSilence)) {
 			outputText("  <b>A growl rumbles from deep within as you charge the terrestrial fire, and you force it from your chest and into the slime.  The goop bubbles and steams as it evaporates, drawing a curious look from your foe, who pauses in her onslaught to lean in and watch.  While the tension around your mouth lessens and your opponent forgets herself more and more, you bide your time.  When you can finally work your jaw enough to open your mouth, you expel the lion's - or jaguar's? share of the flame, inflating an enormous bubble of fire and evaporated slime that thins and finally pops to release a superheated cloud.  The armored girl screams and recoils as she's enveloped, flailing her arms.</b>", false);
-			player.removeStatusAffect(StatusAffects.GooArmorSilence);
+			player.removeStatusEffect(StatusEffects.GooArmorSilence);
 			damage += 25;
 		}
-		if(monster.short == "Isabella" && !monster.hasStatusAffect(StatusAffects.Stunned)) {
+		if(monster.short == "Isabella" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
 			outputText("  Isabella shoulders her shield into the path of the crimson flames.  They burst over the wall of steel, splitting around the impenetrable obstruction and washing out harmlessly to the sides.\n\n", false);
 			if (kGAMECLASS.isabellaFollowerScene.isabellaAccent()) outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n", false);
 			else outputText("\"<i>Is that all you've got?  It'll take more than a flashy magic trick to beat Isabella!</i>\" taunts the cow-girl.\n\n", false);
 			enemyAI();
 			return;
 		}
-		else if(monster.short == "Vala" && !monster.hasStatusAffect(StatusAffects.Stunned)) {
+		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
 			outputText("  Vala beats her wings with surprising strength, blowing the fireball back at you!  ", false);
 			if(player.findPerk(PerkLib.Evade) >= 0 && rand(2) == 0) {
 				outputText("You dive out of the way and evade it!", false);
@@ -1246,9 +1246,9 @@ public class MagicSpecials extends BaseCombatContent {
 			else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(4) == 0) {
 				outputText("You use your flexibility to barely fold your body out of the way!", false);
 			}
-			else if(player.hasStatusAffect(StatusAffects.Blizzard)) {
+			else if(player.hasStatusEffect(StatusEffects.Blizzard)) {
 				outputText("  <b>Surrounding you blizzard at the cost of loosing some of it remaining power massively dissipated most of the fireball energy, causing it to hit with far less force!</b>");
-				player.addStatusValue(StatusAffects.Blizzard,1,-1);
+				player.addStatusValue(StatusEffects.Blizzard,1,-1);
 				damage = Math.round(0.2 * damage);
 			}
 			else {
@@ -1283,7 +1283,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		outputText("\n", false);
-		if(monster.short == "Holli" && !monster.hasStatusAffect(StatusAffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 		if(monster.HP < 1) {
 			doNext(endHpVictory);
 		}
@@ -1295,7 +1295,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 			{
 				outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
-				monster.createStatusAffect(StatusAffects.Shell, 2, 0, 0, 0);
+				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			}
 			enemyAI();
 		}
@@ -1305,10 +1305,10 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 //	fatigue(40,1);
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic bolt touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 			enemyAI();
 			return;
@@ -1381,7 +1381,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 			{
 				outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
-				monster.createStatusAffect(StatusAffects.Shell, 2, 0, 0, 0);
+				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			}
 			enemyAI();
 		}
@@ -1394,7 +1394,7 @@ public class MagicSpecials extends BaseCombatContent {
 
 	public function berzerk():void {
 		clearOutput();
-		if(player.hasStatusAffect(StatusAffects.Berzerking)) {
+		if(player.hasStatusEffect(StatusEffects.Berzerking)) {
 			outputText("You're already pretty goddamn mad!", true);
 			doNext(msMenu);
 			return;
@@ -1404,20 +1404,20 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("You roar and unleash your savage fury in order to destroy your foe!\n\n", true);
 		}
 		else outputText("You roar and unleash your savage fury, forgetting about defense in order to destroy your foe!\n\n", true);
-		player.createStatusAffect(StatusAffects.Berzerking,0,0,0,0);
+		player.createStatusEffect(StatusEffects.Berzerking,0,0,0,0);
 		enemyAI();
 	}
 
 	public function lustzerk():void {
 		clearOutput();
-		if(player.hasStatusAffect(StatusAffects.Lustzerking)) {
+		if(player.hasStatusEffect(StatusEffects.Lustzerking)) {
 			outputText("You're already pretty goddamn mad & lustfull!", true);
 			doNext(msMenu);
 			return;
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		outputText("You roar and unleash your lustful fury, forgetting about defense from any sexual attacks in order to destroy your foe!\n\n", true);
-		player.createStatusAffect(StatusAffects.Lustzerking,0,0,0,0);
+		player.createStatusEffect(StatusEffects.Lustzerking,0,0,0,0);
 		enemyAI();
 	}
 
@@ -1438,13 +1438,13 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("With a moment of concentration you activating petrifying properties of your gaze");
 			if (player.hairType == HAIR_GORGON) outputText(" and awaken normaly dormant snake hair that starts to hiss ");
 			outputText(" and then casual glance at enemies.  Due to many of them your petrifying power spread on too many targets to be much effective. Still few of them petrified for a short moment and rest scared or suprised by such turn of events also refrain from attacking you for a moment.\n\n");
-			if (!monster.hasStatusAffect(StatusAffects.Stunned)) monster.createStatusAffect(StatusAffects.Stunned, 1, 0, 0, 0);
+			if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		}
 		else {
 			outputText("With a moment of concentration you activating petrifying properties of your gaze");
 			if (player.hairType == HAIR_GORGON) outputText(" and awaken normaly dormant snake hair that starts to hiss ");
 			outputText(" and then casual glance at enemy.  Caught off guard " + monster.a + monster.short + " petrify.\n\n");
-			if (!monster.hasStatusAffect(StatusAffects.Stunned)) monster.createStatusAffect(StatusAffects.Stunned, 3, 0, 0, 0);
+			if (!monster.hasStatusEffect(StatusEffects.Stunned)) monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
 		}
 		enemyAI();
 	}
@@ -1458,7 +1458,7 @@ public class MagicSpecials extends BaseCombatContent {
 	 doNext(msMenu);
 	 return;
 	 }
-	 if(player.hasStatusAffect(StatusAffects.ThroatPunch) || player.hasStatusAffect(StatusAffects.WebSilence)) {
+	 if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
 	 outputText("You cannot focus to use this ability while you're having so much difficult breathing.", true);
 	 doNext(msMenu);
 	 return;
@@ -1470,7 +1470,7 @@ public class MagicSpecials extends BaseCombatContent {
 	 public function foxFire2():void {
 	 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 	 fatigue(60, 1);
-	 if(monster.hasStatusAffect(StatusAffects.Shell)) {
+	 if(monster.hasStatusEffect(StatusEffects.Shell)) {
 	 outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 	 enemyAI();
 	 return;
@@ -1563,7 +1563,7 @@ public class MagicSpecials extends BaseCombatContent {
 	 outputText("\n\n", false);
 	 statScreenRefresh();
 	 flags[kFLAGS.SPELLS_CAST]++;
-	 if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+	 if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 	 spellPerkUnlock();
 	 if(monster.HP > 0 && monster.lust < monster.eMaxLust()) enemyAI();
 	 else {
@@ -1581,7 +1581,7 @@ public class MagicSpecials extends BaseCombatContent {
 			doNext(msMenu);
 			return;
 		}
-		if(player.hasStatusAffect(StatusAffects.ThroatPunch) || player.hasStatusAffect(StatusAffects.WebSilence)) {
+		if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
 			outputText("You cannot focus to use this ability while you're having so much difficult breathing.", true);
 			doNext(msMenu);
 			return;
@@ -1690,7 +1690,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n", false);
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		if(monster.HP > 0 && monster.lust < monster.eMaxLust()) enemyAI();
 		else {
@@ -1707,7 +1707,7 @@ public class MagicSpecials extends BaseCombatContent {
 			doNext(msMenu);
 			return;
 		}
-		if(player.hasStatusAffect(StatusAffects.ThroatPunch) || player.hasStatusAffect(StatusAffects.WebSilence)) {
+		if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
 			outputText("You cannot focus to use this ability while you're having so much difficult breathing.", true);
 			doNext(msMenu);
 			return;
@@ -1719,7 +1719,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function fusedFoxFire2():void {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue((250 * kitsuneskillCost()),1);
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
 			return;
@@ -1813,7 +1813,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n", false);
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		if(monster.HP > 0 && monster.lust < monster.eMaxLust()) enemyAI();
 		else {
@@ -1830,7 +1830,7 @@ public class MagicSpecials extends BaseCombatContent {
 			doNext(msMenu);
 			return;
 		}
-		if(player.hasStatusAffect(StatusAffects.ThroatPunch) || player.hasStatusAffect(StatusAffects.WebSilence)) {
+		if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
 			outputText("You cannot focus to use this ability while you're having so much difficult breathing.", true);
 			doNext(msMenu);
 			return;
@@ -1842,7 +1842,7 @@ public class MagicSpecials extends BaseCombatContent {
 	public function pureFoxFire2():void {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue((100 * kitsuneskillCost()),1);
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
 			return;
@@ -1942,7 +1942,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n", false);
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		if(monster.HP > 0 && monster.lust < monster.eMaxLust()) enemyAI();
 		else {
@@ -1967,12 +1967,12 @@ public class MagicSpecials extends BaseCombatContent {
 			doNext(msMenu);
 			return;
 		}
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
 			return;
 		}
-		if(player.hasStatusAffect(StatusAffects.ThroatPunch) || player.hasStatusAffect(StatusAffects.WebSilence)) {
+		if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
 			outputText("You cannot focus to reach the enemy's mind while you're having so much difficult breathing.", true);
 			doNext(msMenu);
 			return;
@@ -1990,20 +1990,20 @@ public class MagicSpecials extends BaseCombatContent {
 	public function kitsuneTerror2():void {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		if (player.tailCount == 9 && player.tailType == TAIL_TYPE_FOX && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) {
-			player.createStatusAffect(StatusAffects.CooldownTerror, 3, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.CooldownTerror, 3, 0, 0, 0);
 			fatigue(200,1);
 		}
 		else if ((player.tailCount == 9 && player.tailType == TAIL_TYPE_FOX) || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) {
-			player.createStatusAffect(StatusAffects.CooldownTerror, 6, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.CooldownTerror, 6, 0, 0, 0);
 			fatigue(100,1);
 		}
 		else {
-			player.createStatusAffect(StatusAffects.CooldownTerror, 9, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.CooldownTerror, 9, 0, 0, 0);
 			fatigue(50,1);
 		}
 		//Inflicts fear and reduces enemy SPD.
 		outputText("The world goes dark, an inky shadow blanketing everything in sight as you fill " + monster.a + monster.short + "'s mind with visions of otherworldly terror that defy description.  They cower in horror as they succumb to your illusion, believing themselves beset by eldritch horrors beyond their wildest nightmares.\n\n");
-		monster.createStatusAffect(StatusAffects.Fear, 2, 0, 0, 0);
+		monster.createStatusEffect(StatusEffects.Fear, 2, 0, 0, 0);
 		enemyAI();
 	}
 
@@ -2016,7 +2016,7 @@ public class MagicSpecials extends BaseCombatContent {
 			doNext(msMenu);
 			return;
 		}
-		if(player.hasStatusAffect(StatusAffects.ThroatPunch) || player.hasStatusAffect(StatusAffects.WebSilence)) {
+		if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
 			outputText("You cannot focus to use this ability while you're having so much difficult breathing.", true);
 			doNext(msMenu);
 			return;
@@ -2034,32 +2034,32 @@ public class MagicSpecials extends BaseCombatContent {
 	public function kitsuneIllusion2():void {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		if (player.tailCount == 9 && player.tailType == TAIL_TYPE_FOX && player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) {
-			player.createStatusAffect(StatusAffects.CooldownIllusion,3,0,0,0);
+			player.createStatusEffect(StatusEffects.CooldownIllusion,3,0,0,0);
 			fatigue(200,1);
 		}
 		else if ((player.tailCount == 9 && player.tailType == TAIL_TYPE_FOX) || player.findPerk(PerkLib.KitsuneThyroidGland) >= 0) {
-			player.createStatusAffect(StatusAffects.CooldownIllusion,6,0,0,0);
+			player.createStatusEffect(StatusEffects.CooldownIllusion,6,0,0,0);
 			fatigue(100,1);
 		}
 		else {
-			player.createStatusAffect(StatusAffects.CooldownIllusion,9,0,0,0);
+			player.createStatusEffect(StatusEffects.CooldownIllusion,9,0,0,0);
 			fatigue(50,1);
 		}
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
 			return;
 		}
 		//Decrease enemy speed and increase their susceptibility to lust attacks if already 110% or more
 		outputText("The world begins to twist and distort around you as reality bends to your will, " + monster.a + monster.short + "'s mind blanketed in the thick fog of your illusions.");
-		player.createStatusAffect(StatusAffects.Illusion,3,0,0,0);
+		player.createStatusEffect(StatusEffects.Illusion,3,0,0,0);
 //	//Check for success rate. Maximum 100% with over 90 Intelligence difference between PC and monster. There are diminishing returns. The more you cast, the harder it is to apply another layer of illusion.
-//	if(player.inte/10 + rand(20) > monster.inte/10 + 9 + monster.statusAffectv1(StatusAffects.Illusion) * 2) {
+//	if(player.inte/10 + rand(20) > monster.inte/10 + 9 + monster.statusEffectv1(StatusEffects.Illusion) * 2) {
 //	//Reduce speed down to -20. Um, are there many monsters with 110% lust vulnerability?
 //		outputText("  They stumble humorously to and fro, unable to keep pace with the shifting illusions that cloud their perceptions.\n\n");
-//		if (monster.statusAffectv1(StatusAffects.Illusion) > 0) monster.addStatusValue(StatusAffects.Illusion, 1, 1);
-//		else monster.createStatusAffect(StatusAffects.Illusion, 1, 0, 0, 0);
-//		if (monster.spe >= 0) monster.spe -= (20 - (monster.statusAffectv1(StatusAffects.Illusion) * 5));
+//		if (monster.statusEffectv1(StatusEffects.Illusion) > 0) monster.addStatusValue(StatusEffects.Illusion, 1, 1);
+//		else monster.createStatusEffect(StatusEffects.Illusion, 1, 0, 0, 0);
+//		if (monster.spe >= 0) monster.spe -= (20 - (monster.statusEffectv1(StatusEffects.Illusion) * 5));
 //		if (monster.lustVuln >= 1.1) monster.lustVuln += .1;
 //		if (monster.spe < 1) monster.spe = 1;
 //	}
@@ -2169,7 +2169,7 @@ public class MagicSpecials extends BaseCombatContent {
 			doNext(msMenu);
 			return;
 		}
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
 			return;
@@ -2180,13 +2180,13 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if(player.hasStatusAffect(StatusAffects.Stunned)) {
+		if(player.hasStatusEffect(StatusEffects.Stunned)) {
 			outputText("You cannot focus to reach the enemy's mind with your charming display while you can't even move.", true);
 			doNext(msMenu);
 			return;
 		}
 		fatigue(30, 1);
-		player.createStatusAffect(StatusAffects.CooldownFascinate,4,0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownFascinate,4,0,0,0);
 		outputText("You start with first pose to attract " + monster.a + monster.short + " attention.  Then you follow with second and then third pose of your enchanting dance.");
 		var lustDmg:Number = 5;
 		if (player.findPerk(PerkLib.BlackHeart) >= 0) lustDmg += 5;
@@ -2227,11 +2227,11 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		monster.teased(lustDmg);
-		if (!monster.hasStatusAffect(StatusAffects.Stunned)) {
+		if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
 			outputText(" <b>Your erotic show aside slight arousing manages to put " + monster.a + monster.short + " into dazze caused by too strong sexual stimulation!</b> ");
-			monster.createStatusAffect(StatusAffects.Stunned, 1, 0, 0, 0);
-			if (!monster.hasStatusAffect(StatusAffects.TimesCharmed)) monster.createStatusAffect(StatusAffects.TimesCharmed, player.findPerk(PerkLib.DarkCharm) >= 0 ? 0.5 : 1, 0, 0, 0);
-			else monster.addStatusValue(StatusAffects.TimesCharmed, 1, player.findPerk(PerkLib.DarkCharm) >= 0 ? 0.5 : 1);
+			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			if (!monster.hasStatusEffect(StatusEffects.TimesCharmed)) monster.createStatusEffect(StatusEffects.TimesCharmed, player.findPerk(PerkLib.DarkCharm) >= 0 ? 0.5 : 1, 0, 0, 0);
+			else monster.addStatusValue(StatusEffects.TimesCharmed, 1, player.findPerk(PerkLib.DarkCharm) >= 0 ? 0.5 : 1);
 		}
 		outputText("\n\n", false);
 		doNext(playerMenu);
@@ -2248,12 +2248,12 @@ public class MagicSpecials extends BaseCombatContent {
 			doNext(msMenu);
 			return;
 		}
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
 			return;
 		}
-		if(player.hasStatusAffect(StatusAffects.ThroatPunch) || player.hasStatusAffect(StatusAffects.WebSilence)) {
+		if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
 			outputText("You cannot focus on drawing symbols while you're having so much difficult breathing.", true);
 			doNext(msMenu);
 			return;
@@ -2351,17 +2351,17 @@ public class MagicSpecials extends BaseCombatContent {
 		temp = Math.round(temp);
 		temp = doDamage(temp);
 		outputText(" <b>(<font color=\"#800000\">" + temp + "</font>)</b>\n\n");
-		player.removeStatusAffect(StatusAffects.ImmolationSpell);
+		player.removeStatusEffect(StatusEffects.ImmolationSpell);
 		kGAMECLASS.arianScene.clearTalisman();
-		monster.createStatusAffect(StatusAffects.ImmolationDoT,3,0,0,0);
+		monster.createStatusEffect(StatusEffects.ImmolationDoT,3,0,0,0);
 		enemyAI();
 	}
 
 	public function shieldingSpell():void {
 		clearOutput();
 		outputText("You gather energy in your Talisman and unleash the spell contained within.  A barrier of light engulfs you, before turning completely transparent.  Your defense has been increased.\n\n");
-		player.createStatusAffect(StatusAffects.Shielding,0,0,0,0);
-		player.removeStatusAffect(StatusAffects.ShieldingSpell);
+		player.createStatusEffect(StatusEffects.Shielding,0,0,0,0);
+		player.removeStatusEffect(StatusEffects.ShieldingSpell);
 		kGAMECLASS.arianScene.clearTalisman();
 		enemyAI();
 	}
@@ -2381,9 +2381,9 @@ public class MagicSpecials extends BaseCombatContent {
 		temp = Math.round(temp);
 		temp = doDamage(temp);
 		outputText(" <b>(<font color=\"#800000\">" + temp + "</font>)</b>\n\n");
-		player.removeStatusAffect(StatusAffects.IcePrisonSpell);
+		player.removeStatusEffect(StatusEffects.IcePrisonSpell);
 		kGAMECLASS.arianScene.clearTalisman();
-		monster.createStatusAffect(StatusAffects.Stunned,3,0,0,0);
+		monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
 		enemyAI();
 	}
 

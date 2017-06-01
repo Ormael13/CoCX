@@ -60,7 +60,7 @@ package classes.Scenes.Places
 			//Show events
 			if (flags[kFLAGS.IN_PRISON] > 0) {
 				//Increment dirtiness level
-				if (player.statusAffectv2(StatusAffects.PrisonCaptorEllyStatus) < 100) player.addStatusValue(StatusAffects.PrisonCaptorEllyStatus, 2, 1);
+				if (player.statusEffectv2(StatusEffects.PrisonCaptorEllyStatus) < 100) player.addStatusValue(StatusEffects.PrisonCaptorEllyStatus, 2, 1);
 				//Tick cooldowns
 				if (flags[kFLAGS.PRISON_EVENT_TIMEOUT] > 0) flags[kFLAGS.PRISON_EVENT_TIMEOUT]--;
 				if (heardPrisonerScreamCooldown > 0) heardPrisonerScreamCooldown--;
@@ -76,7 +76,7 @@ package classes.Scenes.Places
 				if (randomCooldownPet > 0) randomCooldownPet--;
 				if (randomCooldownPetDream > 0) randomCooldownPetDream--;
 				
-				if (player.statusAffectv3(StatusAffects.PrisonCaptorEllyStatus) > 0) player.addStatusValue(StatusAffects.PrisonCaptorEllyStatus, 3, -1);
+				if (player.statusEffectv3(StatusEffects.PrisonCaptorEllyStatus) > 0) player.addStatusValue(StatusEffects.PrisonCaptorEllyStatus, 3, -1);
 				//Fire events
 				if (heardPrisonerScreamCooldown <= 0 && rand(10) == 0) {
 					heardPrisonerScreamCooldown = 9 + rand(4);
@@ -84,7 +84,7 @@ package classes.Scenes.Places
 					needNext = true;
 					return needNext;
 				}
-				if ((flags[kFLAGS.PRISON_DIRT_ENABLED] > 0 && model.time.hours == 16 && randomCooldownRoomCheck <= 0) || (player.statusAffectv2(StatusAffects.PrisonCaptorEllyStatus) >= 50 && flags[kFLAGS.PRISON_DIRT_ENABLED] == 0)) {
+				if ((flags[kFLAGS.PRISON_DIRT_ENABLED] > 0 && model.time.hours == 16 && randomCooldownRoomCheck <= 0) || (player.statusEffectv2(StatusEffects.PrisonCaptorEllyStatus) >= 50 && flags[kFLAGS.PRISON_DIRT_ENABLED] == 0)) {
 					randomCooldownRoomCheck = 6 + rand(18);
 					prisonCaptorRandomEventCleaningCheck();
 					needNext = true;
@@ -100,7 +100,7 @@ package classes.Scenes.Places
 			}
 			if (trainingFeed.prisonCaptorFeedingQuestTrainingExists()) {
 				//Decrement quest timer
-				if (player.statusAffectv2(StatusAffects.PrisonCaptorEllyQuest) > 0) player.addStatusValue(StatusAffects.PrisonCaptorEllyQuest, 2, -1);
+				if (player.statusEffectv2(StatusEffects.PrisonCaptorEllyQuest) > 0) player.addStatusValue(StatusEffects.PrisonCaptorEllyQuest, 2, -1);
 			}
 			prisonCombatAutoLose = false;
 			//Tick
@@ -257,17 +257,17 @@ package classes.Scenes.Places
 		public function prisonRestraintLevel():Number
 		{
 			var restraintLevel:int = 0;
-			if(player.statusAffectv4(StatusAffects.PrisonRestraints) > 0)
+			if(player.statusEffectv4(StatusEffects.PrisonRestraints) > 0)
 			{
 				restraintLevel++;
 			}
-			else if(player.statusAffectv2(StatusAffects.PrisonRestraints) > 0)
+			else if(player.statusEffectv2(StatusEffects.PrisonRestraints) > 0)
 			{
-				restraintLevel = restraintLevel + player.statusAffectv2(StatusAffects.PrisonRestraints);
+				restraintLevel = restraintLevel + player.statusEffectv2(StatusEffects.PrisonRestraints);
 			}
-			else if(player.statusAffectv3(StatusAffects.PrisonRestraints) > 0)
+			else if(player.statusEffectv3(StatusEffects.PrisonRestraints) > 0)
 			{
-				restraintLevel = restraintLevel + player.statusAffectv3(StatusAffects.PrisonRestraints);
+				restraintLevel = restraintLevel + player.statusEffectv3(StatusEffects.PrisonRestraints);
 			}
 			
 			return restraintLevel;
@@ -276,21 +276,21 @@ package classes.Scenes.Places
 		public function prisonRestraintMouthLevel():Number
 		{
 			var restraintLevel:int = 0;
-			restraintLevel = player.statusAffectv4(StatusAffects.PrisonRestraints);
+			restraintLevel = player.statusEffectv4(StatusEffects.PrisonRestraints);
 			return restraintLevel;
 		}
 		
 		public function prisonRestraintBodyLevel():Number
 		{
 			var restraintLevel:int = 0;
-			restraintLevel = player.statusAffectv2(StatusAffects.PrisonRestraints);
+			restraintLevel = player.statusEffectv2(StatusEffects.PrisonRestraints);
 			return restraintLevel;
 		}
 		
 		public function prisonRestraintArmLevel():Number
 		{
 			var restraintLevel:int = 0;
-			restraintLevel = player.statusAffectv2(StatusAffects.PrisonRestraints);
+			restraintLevel = player.statusEffectv2(StatusEffects.PrisonRestraints);
 			return restraintLevel;
 		}
 		
@@ -298,21 +298,21 @@ package classes.Scenes.Places
 		{
 			while(reduceLevels > 0)
 			{
-				if(player.statusAffectv4(StatusAffects.PrisonRestraints) > 0)
+				if(player.statusEffectv4(StatusEffects.PrisonRestraints) > 0)
 				{
-					player.changeStatusValue(StatusAffects.PrisonRestraints,4,0);
+					player.changeStatusValue(StatusEffects.PrisonRestraints,4,0);
 				}
-				else if(player.statusAffectv2(StatusAffects.PrisonRestraints) > 1)
+				else if(player.statusEffectv2(StatusEffects.PrisonRestraints) > 1)
 				{
-					player.changeStatusValue(StatusAffects.PrisonRestraints,2,1);
+					player.changeStatusValue(StatusEffects.PrisonRestraints,2,1);
 				}
-				else if(player.statusAffectv3(StatusAffects.PrisonRestraints) > 0)
+				else if(player.statusEffectv3(StatusEffects.PrisonRestraints) > 0)
 				{
-					player.changeStatusValue(StatusAffects.PrisonRestraints,3,0);
+					player.changeStatusValue(StatusEffects.PrisonRestraints,3,0);
 				}
-				else if(player.statusAffectv2(StatusAffects.PrisonRestraints) > 0)
+				else if(player.statusEffectv2(StatusEffects.PrisonRestraints) > 0)
 				{
-					player.changeStatusValue(StatusAffects.PrisonRestraints,2,0);
+					player.changeStatusValue(StatusEffects.PrisonRestraints,2,0);
 				}
 				reduceLevels--;
 			}
@@ -321,9 +321,9 @@ package classes.Scenes.Places
 		public function prisonRestraintText(longOutput:Boolean = false):void
 		{
 			//outputText("\n\n", false);
-			/*if(prisonCaptor.restraintDescriptionsV1[player.statusAffectv1(StatusAffects.PrisonRestraints)])
+			/*if(prisonCaptor.restraintDescriptionsV1[player.statusEffectv1(StatusEffects.PrisonRestraints)])
 			{
-				outputText(prisonCaptor.restraintDescriptionsV1[player.statusAffectv1(StatusAffects.PrisonRestraints)],false);
+				outputText(prisonCaptor.restraintDescriptionsV1[player.statusEffectv1(StatusEffects.PrisonRestraints)],false);
 			}
 			else
 			{
@@ -334,12 +334,12 @@ package classes.Scenes.Places
 				outputText("\n\nThe door is locked securely.");
 			}
 			//Body restraints
-			if (player.statusAffectv2(StatusAffects.PrisonRestraints) > 0) {
+			if (player.statusEffectv2(StatusEffects.PrisonRestraints) > 0) {
 				outputText("\n\n");
-				if (player.statusAffectv2(StatusAffects.PrisonRestraints) == 1) {
+				if (player.statusEffectv2(StatusEffects.PrisonRestraints) == 1) {
 					outputText("Your legs are fettered and chained securely to the wall.");
 				}
-				else if (player.statusAffectv2(StatusAffects.PrisonRestraints) >= 2) {
+				else if (player.statusEffectv2(StatusEffects.PrisonRestraints) >= 2) {
 					outputText("You are hogtied and chained to the wall. ");
 					if (longOutput) {
 						outputText(" You find this demoralizing and fatiguing");
@@ -349,16 +349,16 @@ package classes.Scenes.Places
 				}
 			}
 			//Legs restraints
-			if (player.statusAffectv3(StatusAffects.PrisonRestraints) > 0) {
+			if (player.statusEffectv3(StatusEffects.PrisonRestraints) > 0) {
 				outputText("\n\n");
 				outputText("Your arms are bound behind your back.");
 			}
 			//Mouth restraints
-			if (player.statusAffectv4(StatusAffects.PrisonRestraints) > 0) {
+			if (player.statusEffectv4(StatusEffects.PrisonRestraints) > 0) {
 				outputText("\n\n");
 				outputText("Your jaw is forced open by the large ring gag that is locked and fastened around your head. Your tongue lolls about obscenely, but at least you can still eat and drink.");
 				if (longOutput) {
-					if (player.statusAffectv4(StatusAffects.PrisonRestraints) == 2)
+					if (player.statusEffectv4(StatusEffects.PrisonRestraints) == 2)
 					{
 						outputText(" You find this demoralizing",false);
 						if(player.cor > 40 || player.obey > 45)
@@ -367,7 +367,7 @@ package classes.Scenes.Places
 						}
 						outputText(".",false);
 					}
-					if (player.statusAffectv4(StatusAffects.PrisonRestraints) > 2)
+					if (player.statusEffectv4(StatusEffects.PrisonRestraints) > 2)
 					{
 						outputText(" You find this exceptionally demoralizing and fatiguing",false);
 						if(player.cor > 40 || player.obey > 45)
@@ -379,22 +379,22 @@ package classes.Scenes.Places
 				}
 			}
 			//OLD CODE
-			/*if(player.statusAffectv2(StatusAffects.PrisonRestraints) > 0)
+			/*if(player.statusEffectv2(StatusEffects.PrisonRestraints) > 0)
 			{
 				if(longOutput)
 				{
 					outputText("\n",false);
 				}
-				if(prisonCaptor.restraintDescriptionsV2[player.statusAffectv2(StatusAffects.PrisonRestraints)])
+				if(prisonCaptor.restraintDescriptionsV2[player.statusEffectv2(StatusEffects.PrisonRestraints)])
 				{
-					outputText("\n" + prisonCaptor.restraintDescriptionsV2[player.statusAffectv2(StatusAffects.PrisonRestraints)],false);
+					outputText("\n" + prisonCaptor.restraintDescriptionsV2[player.statusEffectv2(StatusEffects.PrisonRestraints)],false);
 				}
 				else
 				{
 					outputText("\n" + prisonCaptor.restraintDescriptionsV2[1],false);
 				}
 			}
-			if((longOutput) && player.statusAffectv2(StatusAffects.PrisonRestraints) > 1)
+			if((longOutput) && player.statusEffectv2(StatusEffects.PrisonRestraints) > 1)
 			{
 				outputText(" You find this demoralizing and fatiguing",false);
 				if(player.cor > 40 || player.obey > 45)
@@ -403,37 +403,37 @@ package classes.Scenes.Places
 				}
 				outputText(".",false);
 			}
-			if(player.statusAffectv3(StatusAffects.PrisonRestraints) > 0)
+			if(player.statusEffectv3(StatusEffects.PrisonRestraints) > 0)
 			{
 				if(longOutput)
 				{
 					outputText("\n",false);
 				}
-				if(prisonCaptor.restraintDescriptionsV3[player.statusAffectv3(StatusAffects.PrisonRestraints)])
+				if(prisonCaptor.restraintDescriptionsV3[player.statusEffectv3(StatusEffects.PrisonRestraints)])
 				{
-					outputText("\n" + prisonCaptor.restraintDescriptionsV3[player.statusAffectv3(StatusAffects.PrisonRestraints)],false);
+					outputText("\n" + prisonCaptor.restraintDescriptionsV3[player.statusEffectv3(StatusEffects.PrisonRestraints)],false);
 				}
 				else
 				{
 					outputText("\n" + prisonCaptor.restraintDescriptionsV3[1],false);
 				}
 			}
-			if(player.statusAffectv4(StatusAffects.PrisonRestraints) > 0)
+			if(player.statusEffectv4(StatusEffects.PrisonRestraints) > 0)
 			{
 				if(longOutput)
 				{
 					outputText("\n",false);
 				}
-				if(prisonCaptor.restraintDescriptionsV4[player.statusAffectv4(StatusAffects.PrisonRestraints)])
+				if(prisonCaptor.restraintDescriptionsV4[player.statusEffectv4(StatusEffects.PrisonRestraints)])
 				{
-					outputText("\n" + prisonCaptor.restraintDescriptionsV4[player.statusAffectv4(StatusAffects.PrisonRestraints)],false);
+					outputText("\n" + prisonCaptor.restraintDescriptionsV4[player.statusEffectv4(StatusEffects.PrisonRestraints)],false);
 				}
 				else
 				{
 					outputText("\n" + prisonCaptor.restraintDescriptionsV4[1],false);
 				}
 			}
-			if((longOutput) && player.statusAffectv4(StatusAffects.PrisonRestraints) == 2)
+			if((longOutput) && player.statusEffectv4(StatusEffects.PrisonRestraints) == 2)
 			{
 				outputText(" You find this demoralizing",false);
 				if(player.cor > 40 || player.obey > 45)
@@ -442,7 +442,7 @@ package classes.Scenes.Places
 				}
 				outputText(".",false);
 			}
-			if((longOutput) && player.statusAffectv4(StatusAffects.PrisonRestraints) > 2)
+			if((longOutput) && player.statusEffectv4(StatusEffects.PrisonRestraints) > 2)
 			{
 				outputText(" You find this exceptionally demoralizing and fatiguing",false);
 				if(player.cor > 40 || player.obey > 45)
@@ -455,7 +455,7 @@ package classes.Scenes.Places
 		
 		public function prisonIsRestrained():Boolean
 		{
-			if(player.statusAffectv2(StatusAffects.PrisonRestraints) > 0 || player.statusAffectv3(StatusAffects.PrisonRestraints) > 0 || player.statusAffectv3(StatusAffects.PrisonRestraints) > 0)
+			if(player.statusEffectv2(StatusEffects.PrisonRestraints) > 0 || player.statusEffectv3(StatusEffects.PrisonRestraints) > 0 || player.statusEffectv3(StatusEffects.PrisonRestraints) > 0)
 			{
 				return true;
 			}
@@ -464,7 +464,7 @@ package classes.Scenes.Places
 		
 		public function prisonCanMasturbate(verbose:Boolean = true):Boolean
 		{
-			if(player.statusAffectv3(StatusAffects.PrisonRestraints) > 1 || player.statusAffectv2(StatusAffects.PrisonRestraints) > 1)
+			if(player.statusEffectv3(StatusEffects.PrisonRestraints) > 1 || player.statusEffectv2(StatusEffects.PrisonRestraints) > 1)
 			{
 				if(verbose)
 				{
@@ -477,7 +477,7 @@ package classes.Scenes.Places
 		
 		public function prisonCanRestraintBreakDoor(verbose:Boolean = true):Boolean
 		{
-			if(player.statusAffectv2(StatusAffects.PrisonRestraints) > 0)
+			if(player.statusEffectv2(StatusEffects.PrisonRestraints) > 0)
 			{
 				if(verbose)
 				{
@@ -490,7 +490,7 @@ package classes.Scenes.Places
 		
 		public function prisonCanRestraintBreakMouth(verbose:Boolean = true):Boolean
 		{
-			if(player.statusAffectv3(StatusAffects.PrisonRestraints) > 1 || player.statusAffectv2(StatusAffects.PrisonRestraints) > 0)
+			if(player.statusEffectv3(StatusEffects.PrisonRestraints) > 1 || player.statusEffectv2(StatusEffects.PrisonRestraints) > 0)
 			{
 				if(verbose)
 				{
@@ -504,7 +504,7 @@ package classes.Scenes.Places
 		public function prisonRestraintsMenu():void
 		{
 			clearOutput();
-			if(player.statusAffectv1(StatusAffects.PrisonRestraints) == 0 && player.statusAffectv2(StatusAffects.PrisonRestraints) == 0 && player.statusAffectv3(StatusAffects.PrisonRestraints) == 0 && player.statusAffectv4(StatusAffects.PrisonRestraints) == 0)
+			if(player.statusEffectv1(StatusEffects.PrisonRestraints) == 0 && player.statusEffectv2(StatusEffects.PrisonRestraints) == 0 && player.statusEffectv3(StatusEffects.PrisonRestraints) == 0 && player.statusEffectv4(StatusEffects.PrisonRestraints) == 0)
 			{
 				outputText("You aren't restrained in any way.",false);
 			}
@@ -513,16 +513,16 @@ package classes.Scenes.Places
 				outputText("You consider whether you might be able to escape your restraints.");
 			}
 			prisonRestraintText(true);
-			if(player.statusAffectv1(StatusAffects.PrisonRestraints) > 0 || player.statusAffectv2(StatusAffects.PrisonRestraints) > 0 || player.statusAffectv3(StatusAffects.PrisonRestraints) > 0 || player.statusAffectv4(StatusAffects.PrisonRestraints) > 0)
+			if(player.statusEffectv1(StatusEffects.PrisonRestraints) > 0 || player.statusEffectv2(StatusEffects.PrisonRestraints) > 0 || player.statusEffectv3(StatusEffects.PrisonRestraints) > 0 || player.statusEffectv4(StatusEffects.PrisonRestraints) > 0)
 			{
 				outputText("\n\nDo you want to attempt to free yourself from any of your restraints? " + prisonWillCostDescript(10) + "\n\n");
 			}
 			//prisonRestraintChoices(choiceEvents, choiceTexts);
 			menu();
-			if (player.statusAffectv1(StatusAffects.PrisonRestraints) > 0) addButton(0, "Door", doPrisonRestraintsDoor);
-			if (player.statusAffectv2(StatusAffects.PrisonRestraints) > 0) addButton(1, "Body", doPrisonRestraintsBody);
-			if (player.statusAffectv3(StatusAffects.PrisonRestraints) > 0) addButton(2, "Arms", doPrisonRestraintsArms);
-			if (player.statusAffectv4(StatusAffects.PrisonRestraints) > 0) addButton(3, "Mouth", doPrisonRestraintsMouth);
+			if (player.statusEffectv1(StatusEffects.PrisonRestraints) > 0) addButton(0, "Door", doPrisonRestraintsDoor);
+			if (player.statusEffectv2(StatusEffects.PrisonRestraints) > 0) addButton(1, "Body", doPrisonRestraintsBody);
+			if (player.statusEffectv3(StatusEffects.PrisonRestraints) > 0) addButton(2, "Arms", doPrisonRestraintsArms);
+			if (player.statusEffectv4(StatusEffects.PrisonRestraints) > 0) addButton(3, "Mouth", doPrisonRestraintsMouth);
 			addButton(14, "Back", playerMenu);
 		}
 		
@@ -560,13 +560,13 @@ package classes.Scenes.Places
 			outputText("You inspect the restraints on your body.\n\n",true);
 			if(debug)
 			{
-				if(player.statusAffectv2(StatusAffects.PrisonRestraints) >= 2)
+				if(player.statusEffectv2(StatusEffects.PrisonRestraints) >= 2)
 				{
-					player.changeStatusValue(StatusAffects.PrisonRestraints,2,0);
+					player.changeStatusValue(StatusEffects.PrisonRestraints,2,0);
 				}
 				else
 				{
-					player.changeStatusValue(StatusAffects.PrisonRestraints,2,player.statusAffectv2(StatusAffects.PrisonRestraints) + 1);
+					player.changeStatusValue(StatusEffects.PrisonRestraints,2, player.statusEffectv2(StatusEffects.PrisonRestraints) + 1);
 				}
 			}
 			else if(player.will > prisonWillCost(10))
@@ -592,13 +592,13 @@ package classes.Scenes.Places
 			outputText("You inspect the restraints on your arms.\n\n",true);
 			if(debug)
 			{
-				if(player.statusAffectv3(StatusAffects.PrisonRestraints) >= 2)
+				if(player.statusEffectv3(StatusEffects.PrisonRestraints) >= 2)
 				{
-					player.changeStatusValue(StatusAffects.PrisonRestraints,3,0);
+					player.changeStatusValue(StatusEffects.PrisonRestraints,3,0);
 				}
 				else
 				{
-					player.changeStatusValue(StatusAffects.PrisonRestraints,3,player.statusAffectv3(StatusAffects.PrisonRestraints) + 1);
+					player.changeStatusValue(StatusEffects.PrisonRestraints,3, player.statusEffectv3(StatusEffects.PrisonRestraints) + 1);
 				}
 			}
 			else if(player.will > prisonWillCost(10))
@@ -629,13 +629,13 @@ package classes.Scenes.Places
 			outputText("You inspect the gag in your mouth.\n\n",true);
 			if(debug)
 			{
-				if(player.statusAffectv4(StatusAffects.PrisonRestraints) >= 4)
+				if(player.statusEffectv4(StatusEffects.PrisonRestraints) >= 4)
 				{
-					player.changeStatusValue(StatusAffects.PrisonRestraints,4,0);
+					player.changeStatusValue(StatusEffects.PrisonRestraints,4,0);
 				}
 				else
 				{
-					player.changeStatusValue(StatusAffects.PrisonRestraints,4,player.statusAffectv4(StatusAffects.PrisonRestraints) + 1);
+					player.changeStatusValue(StatusEffects.PrisonRestraints,4, player.statusEffectv4(StatusEffects.PrisonRestraints) + 1);
 				}
 			}
 			else if(player.will > prisonWillCost(10))
@@ -669,11 +669,11 @@ package classes.Scenes.Places
 				outputText("You manage to work up the courage to approach the door and spend a few minutes of examining the lock. But before long you find yourself overwhelmed by the hopelessness of your situation and with fear of what your " + prisonCaptor.captorTitle + " would do if you were caught in the act of trying to escape. You quickly decide not to press your luck any further.",false);
 				return true;
 			}
-			if(player.statusAffectv1(StatusAffects.PrisonRestraints) > 1)
+			if(player.statusEffectv1(StatusEffects.PrisonRestraints) > 1)
 			{
 				outputText("Since the door is both locked and barred, you don't even attempt to pick the lock. ",false);
 			}
-			else if(player.statusAffectv3(StatusAffects.PrisonRestraints) > 1)
+			else if(player.statusEffectv3(StatusEffects.PrisonRestraints) > 1)
 			{
 				outputText("Since your arms are bound in a way that makes your hands unusable, you don't even attempt to try to pick the lock. ",false);
 			}
@@ -683,7 +683,7 @@ package classes.Scenes.Places
 				if(rand(player.inte + player.spe + 40) > 120)
 				{
 					outputText("and after a great deal of trial and error your wits and dexterity prevail over the lock.",false);
-					player.changeStatusValue(StatusAffects.PrisonRestraints, 1, 0);
+					player.changeStatusValue(StatusEffects.PrisonRestraints, 1, 0);
 					flags[kFLAGS.PRISON_DOOR_UNLOCKED] = 1;
 					return true;
 				}
@@ -704,10 +704,10 @@ package classes.Scenes.Places
 				prisonGuard.prisonGuardAttack();
 				return false;
 			}
-			if(rand(player.tou + player.str + 60) > 120 + 10 * player.statusAffectv1(StatusAffects.PrisonRestraints))
+			if(rand(player.tou + player.str + 60) > 120 + 10 * player.statusEffectv1(StatusEffects.PrisonRestraints))
 			{
 				outputText("and after a great deal of pounding your power and endurance win out and the door breaks open.",false);
-				player.changeStatusValue(StatusAffects.PrisonRestraints, 1, 0);
+				player.changeStatusValue(StatusEffects.PrisonRestraints, 1, 0);
 				flags[kFLAGS.PRISON_DOOR_UNLOCKED] = 1;
 				return true;
 			}
@@ -718,13 +718,13 @@ package classes.Scenes.Places
 		public function prisonRestraintBreakBody():Boolean
 		{
 			var successChance:int = 5 + rand(5);
-			if (player.statusAffectv2(StatusAffects.PrisonRestraints) == 1) {
+			if (player.statusEffectv2(StatusEffects.PrisonRestraints) == 1) {
 				successChance += (player.str + player.tou) * 0.5;
-				successChance -= (player.statusAffectv3(StatusAffects.PrisonRestraints) * 10);
+				successChance -= (player.statusEffectv3(StatusEffects.PrisonRestraints) * 10);
 			}
 			else {
 				successChance += (player.spe + player.tou) * 0.5;
-				successChance -= (5 * player.statusAffectv2(StatusAffects.PrisonRestraints)) + (5 * player.statusAffectv3(StatusAffects.PrisonRestraints));
+				successChance -= (5 * player.statusEffectv2(StatusEffects.PrisonRestraints)) + (5 * player.statusEffectv3(StatusEffects.PrisonRestraints));
 			}
 			if (successChance < 5) successChance = 5;
 			
@@ -740,7 +740,7 @@ package classes.Scenes.Places
 				outputText("You spend a few minutes struggling with your bindings, but before long you find yourself overwhelmed by the hopelessness of your situation and with fear of what your " + prisonCaptor.captorTitle + " would do if you were caught in the act of trying to escape. You quickly decide not to press your luck any further.",false);
 				return true;
 			}
-			if(player.statusAffectv2(StatusAffects.PrisonRestraints) == 1)
+			if(player.statusEffectv2(StatusEffects.PrisonRestraints) == 1)
 			{
 				outputText("The only thing you can think to try to free your [legs] is brute force, ",false);
 				if(rand(100) < prisonGuard.guardNoiseDetectionChance)
@@ -753,7 +753,7 @@ package classes.Scenes.Places
 				if(rand(100) < successChance)
 				{
 					outputText("and after a great deal of hammering and smashing and tearing your power and endurance win out and the restraints come free.",false);
-					player.changeStatusValue(StatusAffects.PrisonRestraints,2,0);
+					player.changeStatusValue(StatusEffects.PrisonRestraints,2,0);
 					return true;
 				}
 				outputText("but no matter how go about hammering at your restraints, they simply won't come free. ",false);
@@ -764,8 +764,8 @@ package classes.Scenes.Places
 				if(rand(100) < successChance)
 				{
 					outputText(" It requires an almost supernatural feat of strength and dexterity, but somehow you manage to squirm free of your bindings. Now only your leg restraints and the chain to the wall remain.",false);
-					player.changeStatusValue(StatusAffects.PrisonRestraints,2,1);
-					player.changeStatusValue(StatusAffects.PrisonRestraints,3,0);
+					player.changeStatusValue(StatusEffects.PrisonRestraints,2,1);
+					player.changeStatusValue(StatusEffects.PrisonRestraints,3,0);
 					return true;
 				}
 				outputText(" Unfortunately, no matter how you twist and turn and struggle, your strength and dexterity just aren't up to the task of freeing yourself. ",false);
@@ -777,7 +777,7 @@ package classes.Scenes.Places
 		{
 			var successChance:int = 5 + rand(5);
 			successChance += (player.spe + player.str) * 0.5;
-			successChance -= (5 * player.statusAffectv2(StatusAffects.PrisonRestraints)) + (5 * player.statusAffectv3(StatusAffects.PrisonRestraints));
+			successChance -= (5 * player.statusEffectv2(StatusEffects.PrisonRestraints)) + (5 * player.statusEffectv3(StatusEffects.PrisonRestraints));
 			if (successChance < 5) successChance = 5;
 			/*if(prisonCaptor.restraintBreakArmsFunc != "NOFUNC")
 			{
@@ -794,11 +794,11 @@ package classes.Scenes.Places
 			if(rand(100) < successChance)
 			{
 				outputText("It requires an almost supernatural feat of strength and dexterity, but somehow you manage to squirm free of your bindings.",false);
-				if(player.statusAffectv2(StatusAffects.PrisonRestraints) > 1)
+				if(player.statusEffectv2(StatusEffects.PrisonRestraints) > 1)
 				{
-					player.changeStatusValue(StatusAffects.PrisonRestraints,2,1);
+					player.changeStatusValue(StatusEffects.PrisonRestraints,2,1);
 				}
-				player.changeStatusValue(StatusAffects.PrisonRestraints,3,0);
+				player.changeStatusValue(StatusEffects.PrisonRestraints,3,0);
 				return true;
 			}
 			outputText("No matter how you twist and turn and struggle, your strength and dexterity just aren't up to the task of freeing yourself. ",false);
@@ -822,18 +822,18 @@ package classes.Scenes.Places
 				outputText("You spend a few minutes struggling with your gag, but before long you find yourself overwhelmed by the hopelessness of your situation and with fear of what your " + prisonCaptor.captorTitle + " would do if you were caught in the act of trying to escape. You quickly decide not to press your luck any further.",false);
 				return true;
 			}
-			if(player.statusAffectv4(StatusAffects.PrisonRestraints) == 1 && player.statusAffectv2(StatusAffects.PrisonRestraints) < 2 && player.statusAffectv3(StatusAffects.PrisonRestraints) < 2)
+			if(player.statusEffectv4(StatusEffects.PrisonRestraints) == 1 && player.statusEffectv2(StatusEffects.PrisonRestraints) < 2 && player.statusEffectv3(StatusEffects.PrisonRestraints) < 2)
 			{
 				outputText("With your arms able to reach your mouth, it doesn't take too much effort to remove your simple gag.",false);
-				player.changeStatusValue(StatusAffects.PrisonRestraints, 4, 0);
+				player.changeStatusValue(StatusEffects.PrisonRestraints, 4, 0);
 			}
-			else if(player.statusAffectv2(StatusAffects.PrisonRestraints) < 2 && player.statusAffectv3(StatusAffects.PrisonRestraints) < 2)
+			else if(player.statusEffectv2(StatusEffects.PrisonRestraints) < 2 && player.statusEffectv3(StatusEffects.PrisonRestraints) < 2)
 			{
 				outputText("You fumble about at the complex locking straps and bindings that are holding your gag in place, ",false);
 				if(rand(100) < successChance)
 				{
 					outputText("and after a great deal of trial and error your wits and dexterity prevail and you are able to remove it from your head.",false);
-					player.changeStatusValue(StatusAffects.PrisonRestraints, 4, 0);
+					player.changeStatusValue(StatusEffects.PrisonRestraints, 4, 0);
 				}
 				else
 				{
@@ -853,7 +853,7 @@ package classes.Scenes.Places
 		//------------
 		public function prisonCanEscapeFight(verbose:Boolean = true):Boolean
 		{
-			if(player.statusAffectv3(StatusAffects.PrisonRestraints) > 0 || player.statusAffectv2(StatusAffects.PrisonRestraints) > 0)
+			if(player.statusEffectv3(StatusEffects.PrisonRestraints) > 0 || player.statusEffectv2(StatusEffects.PrisonRestraints) > 0)
 			{
 				if(verbose)
 				{
@@ -866,7 +866,7 @@ package classes.Scenes.Places
 		
 		public function prisonCanEscapeSeduce():Boolean
 		{
-			if(player.statusAffectv4(StatusAffects.PrisonRestraints) > 0)
+			if(player.statusEffectv4(StatusEffects.PrisonRestraints) > 0)
 			{
 				outputText("You consider trying to seduce your guard, but you realize you wouldn't be able to communicate gagged as you are.",true);
 				return false;
@@ -876,7 +876,7 @@ package classes.Scenes.Places
 		
 		public function prisonCanEscapeBribe():Boolean
 		{
-			if(player.statusAffectv4(StatusAffects.PrisonRestraints) > 0)
+			if(player.statusEffectv4(StatusEffects.PrisonRestraints) > 0)
 			{
 				outputText("You consider trying to bribe your guard, but you realize you wouldn't be able to communicate gagged as you are.",true);
 				return false;
@@ -886,7 +886,7 @@ package classes.Scenes.Places
 		
 		public function prisonCanEscapeSneak():Boolean
 		{
-			if(player.statusAffectv2(StatusAffects.PrisonRestraints) > 0)
+			if(player.statusEffectv2(StatusEffects.PrisonRestraints) > 0)
 			{
 				outputText("Because of the way you are restrained you would be unable carry out a stealthy escape.",true);
 				return false;
@@ -896,12 +896,12 @@ package classes.Scenes.Places
 		
 		public function prisonCanEscapeRun():Boolean
 		{
-			if(player.statusAffectv1(StatusAffects.PrisonRestraints) > 0)
+			if(player.statusEffectv1(StatusEffects.PrisonRestraints) > 0)
 			{
 				outputText("The door is locked, so simply running is not an option.",true);
 				return false;
 			}
-			if(player.statusAffectv2(StatusAffects.PrisonRestraints) > 0)
+			if(player.statusEffectv2(StatusEffects.PrisonRestraints) > 0)
 			{
 				outputText("Even though the door is unlocked, without the free use of your legs simply running away is not an option.",true);
 				return false;
@@ -911,7 +911,7 @@ package classes.Scenes.Places
 		
 		public function prisonCanTrainWorkout():Boolean
 		{
-			if(player.statusAffectv3(StatusAffects.PrisonRestraints) > 0 || player.statusAffectv2(StatusAffects.PrisonRestraints) > 1)
+			if(player.statusEffectv3(StatusEffects.PrisonRestraints) > 0 || player.statusEffectv2(StatusEffects.PrisonRestraints) > 1)
 			{
 				outputText("Without the free use of your arms, you are unable to do strength training.",true);
 				return false;
@@ -921,7 +921,7 @@ package classes.Scenes.Places
 		
 		public function prisonCanTrainCardio():Boolean
 		{
-			if(player.statusAffectv2(StatusAffects.PrisonRestraints) > 0)
+			if(player.statusEffectv2(StatusEffects.PrisonRestraints) > 0)
 			{
 				outputText("Without the free use of your [legs], you are unable to do cardio training.",true);
 				return false;
@@ -948,7 +948,7 @@ package classes.Scenes.Places
 		
 		public function prisonCanEat():Boolean
 		{
-			if(player.statusAffectv4(StatusAffects.PrisonRestraints) > 0 && !(player.statusAffectv4(StatusAffects.PrisonRestraints) == 4))
+			if(player.statusEffectv4(StatusEffects.PrisonRestraints) > 0 && !(player.statusEffectv4(StatusEffects.PrisonRestraints) == 4))
 			{
 				outputText("Because your mouth is gagged you are unable to eat at this time.",true);
 				return false;
@@ -958,7 +958,7 @@ package classes.Scenes.Places
 		
 		public function prisonCanEquip():Boolean
 		{
-			if(player.statusAffectv3(StatusAffects.PrisonRestraints) > 1 || player.statusAffectv2(StatusAffects.PrisonRestraints) > 1)
+			if(player.statusEffectv3(StatusEffects.PrisonRestraints) > 1 || player.statusEffectv2(StatusEffects.PrisonRestraints) > 1)
 			{
 				outputText("Because of the way your arms are bound you are unable to equip items at this time.",true);
 				return false;
@@ -989,7 +989,7 @@ package classes.Scenes.Places
 			//Set flags
 			flags[kFLAGS.IN_PRISON] = 1;
 			if (involuntary) flags[kFLAGS.PRISON_CAPTURE_COUNTER]++;
-			player.createStatusAffect(StatusAffects.PrisonRestraints, 1, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.PrisonRestraints, 1, 0, 0, 0);
 			//Scene GOOOOOOOOOOO!
 			clearOutput();
 			if (involuntary) {
@@ -1027,9 +1027,9 @@ package classes.Scenes.Places
 				player.itemSlot(i).emptySlot();
 			}
 			flags[kFLAGS.PRISON_DOOR_UNLOCKED] = 0;
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyStatus))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyStatus))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyStatus,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyStatus,0,0,0,0);
 			}
 			
 			if((trainingFeed.prisonCaptorFeedingQuestTrainingExists()) && ((trainingFeed.prisonCaptorFeedingQuestTrainingIsComplete()) || (trainingFeed.prisonCaptorFeedingQuestTrainingIsTimeUp())))
@@ -1044,7 +1044,7 @@ package classes.Scenes.Places
 				inventory.takeItem(consumables.C_BREAD, camp.returnToCampUseOneHour);
 				return true;
 			}
-			if(player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus) > 0)
+			if(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus) > 0)
 			{
 				outputText("\n\nMomentarily she breaks her piercing stare and speaks. \"<i>Welcome back, slave</i>\" she intones in a voice every bit as beautiful and compelling as her face, \"<i>I take it your field education went well. Did you give yourself a lesson about fighting back by letting a few nice minotaurs rape you? Or maybe you went for some 'archery lessons' with that centaur fellow.</i>\" She leans in close to you gives your " + assDescript() + " a fierce but playful slap. \"<i>You could certainly learn some useful things from him.</i>\" She closes the distance further, and her natural, musky, alluring scent washes over you. For a moment you aren't sure if you want to fall to your knees and embrace her or cower pitifully in the shadow of her overpowering presence. Your gaze becomes transfixed on the mesmerizing movements of her deliciously pouty crimson lips.",false);
 				outputText("\n\n\"<i>Whatever you may have been doing, I'm pleased that you've decided to come back and continue your formal education with me. I know you are eager for it to be complete, but rememeber it takes time to understand that you are...</i>\" Defying all reason, she somehow moves even closer to you.",false);
@@ -1079,7 +1079,7 @@ package classes.Scenes.Places
 				inventory.takeItem(consumables.C_BREAD, camp.returnToCampUseOneHour);
 				return false;
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,1);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,1,1);
 			//flags[kFLAGS.PRISON_TRAINING_LEVEL] = 0;
 			outputText("\n\nAfter an uncomfortable period of being <i>examined</i>, you watch the demon's violet, almond eyes finally settle -- on your own. Her gaze is beyond piercing, seeming to both physically and mentally enfeeble you. You find yourself unable to escape it, and your fortitude steadily wanes. The moment begins to extend into a dense, stifling eternity, when suddenly -- she speaks. \"<i>Hello, Champion.</i>\" To your almost embarrassing surprise, her voice is every bit as beautiful and compelling as her face, and you barely notice that her eyes have moved on.  \"<i>I am your new owner. My name is Elly, but <b>you</b> will call me Mistress.</i>\" She says it with impartial conviction, as if it were a trivial matter of fact, and for an eerie moment, your mind absorbs it as truth. ",false);
 			outputText("\n\n\"<i>By now, any number of monsters and demons must have tried to make you their property, so you no doubt assume that my intentions are the same. In one sense they surely are. The others wanted to own your body, as I now do.</i>\" She emphasizes this point by kicking you onto your back and resting her spiked boot on your [chest]. \"<i>The difference is that where they aim to merely destroy your mind so they can claim your body, I will instead own your mind and you will willingly give me your body. The process of you learning that you are my property will be slow, subtle, and humiliating... but when it is complete, you will beg me to let you experience it again.</i>\" Smiling wickedly, she slides her foot down your torso and begins using her boot covered toe to gently caress your ",false);
@@ -1128,7 +1128,7 @@ package classes.Scenes.Places
 		//------------
 		public function prisonRoom(allowsEvents:Boolean = true):void {
 			//Workaround to force update prison door. The old prison code surely was messy.
-			if (player.statusAffectv1(StatusAffects.PrisonRestraints) > 0) flags[kFLAGS.PRISON_DOOR_UNLOCKED] = 0;
+			if (player.statusEffectv1(StatusEffects.PrisonRestraints) > 0) flags[kFLAGS.PRISON_DOOR_UNLOCKED] = 0;
 			else flags[kFLAGS.PRISON_DOOR_UNLOCKED] = 1;
 			//Start!
 			hideUpDown();
@@ -1161,7 +1161,7 @@ package classes.Scenes.Places
 			prisonRestraintText();
 			if (flags[kFLAGS.PRISON_DIRT_ENABLED] > 0) {
 				outputText("\n\nThe room is ",false);
-				var cleanlinessLevel:int = Math.floor(player.statusAffectv2(StatusAffects.PrisonCaptorEllyStatus) / 25);
+				var cleanlinessLevel:int = Math.floor(player.statusEffectv2(StatusEffects.PrisonCaptorEllyStatus) / 25);
 				switch(cleanlinessLevel)
 				{
 					case 0:
@@ -1196,7 +1196,7 @@ package classes.Scenes.Places
 				return;
 			}
 			//Expire punishment.
-			if(player.statusAffectv3(StatusAffects.PrisonCaptorEllyStatus) <= 0)
+			if(player.statusEffectv3(StatusEffects.PrisonCaptorEllyStatus) <= 0)
 			{
 				if(flags[kFLAGS.PRISON_PUNISHMENT] == 1)
 				{
@@ -1299,7 +1299,7 @@ package classes.Scenes.Places
 					removeButton(4);
 				}
 				addButton(8, "Masturbate", getGame().masturbation.masturbateMenu);
-				if ((((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.hasStatusAffect(StatusAffects.Exgartuan) && player.statusAffectv2(StatusAffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", getGame().masturbation.masturbateMenu);
+				if ((((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", getGame().masturbation.masturbateMenu);
 			}
 			//Alter menu depending on punishment.
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 1) {
@@ -1489,18 +1489,18 @@ package classes.Scenes.Places
 			dynStats("lus", 20);
 			changeObey(1, inPrison);
 			changeEsteem( -1, inPrison);
-			if (!player.hasStatusAffect(StatusAffects.BonusACapacity)) {
-				player.createStatusAffect(StatusAffects.BonusACapacity, 2, 0, 0, 0);
+			if (!player.hasStatusEffect(StatusEffects.BonusACapacity)) {
+				player.createStatusEffect(StatusEffects.BonusACapacity, 2, 0, 0, 0);
 			}
 			else {
-				if (player.statusAffectv1(StatusAffects.BonusACapacity) < 20) {
-					player.addStatusValue(StatusAffects.BonusACapacity, 1, 2);
+				if (player.statusEffectv1(StatusEffects.BonusACapacity) < 20) {
+					player.addStatusValue(StatusEffects.BonusACapacity, 1, 2);
 				}
-				else if (player.statusAffectv1(StatusAffects.BonusACapacity) < 35) {
-					player.addStatusValue(StatusAffects.BonusACapacity, 1, 1);
+				else if (player.statusEffectv1(StatusEffects.BonusACapacity) < 35) {
+					player.addStatusValue(StatusEffects.BonusACapacity, 1, 1);
 				}
-				else if (player.statusAffectv1(StatusAffects.BonusACapacity) < 50) {
-					player.addStatusValue(StatusAffects.BonusACapacity, 1, 0.5);
+				else if (player.statusEffectv1(StatusEffects.BonusACapacity) < 50) {
+					player.addStatusValue(StatusEffects.BonusACapacity, 1, 0.5);
 				}
 			}
 			doNext(camp.returnToCampUseTwoHours);
@@ -1598,13 +1598,13 @@ package classes.Scenes.Places
 			clearOutput();
 			var newCleanliness:int = 0;
 			outputText("You decide to spend some time cleaning your cell, fearing what your " + prisonCaptor.captorTitle + " might do if you let it get too messy.",false);
-			newCleanliness = player.statusAffectv2(StatusAffects.PrisonCaptorEllyStatus) - 5;
-			if(player.statusAffectv2(StatusAffects.PrisonRestraints) > 1)
+			newCleanliness = player.statusEffectv2(StatusEffects.PrisonCaptorEllyStatus) - 5;
+			if(player.statusEffectv2(StatusEffects.PrisonRestraints) > 1)
 			{
 				outputText(" Since you can barely move and are forced to find creative ways to mash the sponge around the floor, you hardly achieve anything at all. On top of that, you feel particularly undignified while making the attempt.",false);
 				changeEsteem(-1,inPrison);
 			}
-			else if(player.statusAffectv2(StatusAffects.PrisonRestraints) > 0 || player.statusAffectv3(StatusAffects.PrisonRestraints) > 1)
+			else if(player.statusEffectv2(StatusEffects.PrisonRestraints) > 0 || player.statusEffectv3(StatusEffects.PrisonRestraints) > 1)
 			{
 				outputText(" Since your range of motion is somewhat restricted, you don't manage to clean nearly as much as you had hoped to.",false);
 				newCleanliness = newCleanliness - 10;
@@ -1614,7 +1614,7 @@ package classes.Scenes.Places
 				newCleanliness = newCleanliness - 20;
 			}
 			
-			if(player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus) > 2 && rand(player.lust + player.cor - player.esteem) > 125 || player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus) > 4 && rand(player.lust + player.cor - player.esteem) > 75)
+			if(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus) > 2 && rand(player.lust + player.cor - player.esteem) > 125 || player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus) > 4 && rand(player.lust + player.cor - player.esteem) > 75)
 			{
 				outputText("\n\n(Placeholder) You encounter a pool of cum on the floor, and you can't help but feel aroused daydreaming about how it came to be there. A thought strikes you: your " + prisonCaptor.captorTitle + " wouldn't be pleased if you wasted it by simply mopping it up with your sponge, and before your mind can react your instincts kick in and you find yourself licking the pool of cum off the floor",false);
 				player.slimeFeed();
@@ -1625,7 +1625,7 @@ package classes.Scenes.Places
 			{
 				newCleanliness = 0;
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,2,newCleanliness);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,2,newCleanliness);
 			changeObey(0.2,inPrison);
 			doNext(camp.returnToCampUseTwoHours);
 		}
@@ -1919,12 +1919,12 @@ package classes.Scenes.Places
 				bribeCost = 1000 + Math.round((player.gems - 1000) / 2);
 				player.gems = player.gems - bribeCost;
 				outputText("Overcome with greed, the " + prisonGuard.guardType + " communicates " + prisonGuard.guardPronoun3 + " agreement with a nod and leaves the room. When " + prisonGuard.guardPronoun1 + " returns " + prisonGuard.guardPronoun1 + " has a bag that contains somewhere around " + bribeCost + " of your gems. Keeping up " + prisonGuard.guardPronoun3 + " end of the bargain " + prisonGuard.guardPronoun1,false);
-				if(player.statusAffectv2(StatusAffects.PrisonRestraints) > 0 || player.statusAffectv3(StatusAffects.PrisonRestraints) > 0 || player.statusAffectv4(StatusAffects.PrisonRestraints) > 0)
+				if(player.statusEffectv2(StatusEffects.PrisonRestraints) > 0 || player.statusEffectv3(StatusEffects.PrisonRestraints) > 0 || player.statusEffectv4(StatusEffects.PrisonRestraints) > 0)
 				{
 					outputText(" removes your restraints and ",false);
-					player.changeStatusValue(StatusAffects.PrisonRestraints,2,0);
-					player.changeStatusValue(StatusAffects.PrisonRestraints,3,0);
-					player.changeStatusValue(StatusAffects.PrisonRestraints,4,0);
+					player.changeStatusValue(StatusEffects.PrisonRestraints,2,0);
+					player.changeStatusValue(StatusEffects.PrisonRestraints,3,0);
+					player.changeStatusValue(StatusEffects.PrisonRestraints,4,0);
 				}
 				outputText(" gives you a key, then leaves you to your own devices.",false);
 				prisonEscapeSuccessText();
@@ -2008,7 +2008,7 @@ package classes.Scenes.Places
 		public function prisonEscapeSuccessText():void
 		{
 			outputText("\n\nAs you leave your former cell, ",false);
-			if(player.statusAffectv2(StatusAffects.PrisonRestraints) > 0 || player.statusAffectv3(StatusAffects.PrisonRestraints) > 0 || player.statusAffectv4(StatusAffects.PrisonRestraints) > 0)
+			if(player.statusEffectv2(StatusEffects.PrisonRestraints) > 0 || player.statusEffectv3(StatusEffects.PrisonRestraints) > 0 || player.statusEffectv4(StatusEffects.PrisonRestraints) > 0)
 			{
 				outputText("you hastily remove your remaining restraints. Nearby ",false);
 			}
@@ -2018,7 +2018,7 @@ package classes.Scenes.Places
 		public function prisonEscapeFinalePart1():void
 		{
 			var textArray:Array = [];
-			player.removeStatusAffect(StatusAffects.PrisonRestraints);
+			player.removeStatusEffect(StatusEffects.PrisonRestraints);
 			prisonItemsRetrieve();
 			if (flags[kFLAGS.PRISON_STORAGE_ARMOR] != 0) {
 				textArray.push(prisonArmorRetrieve());
@@ -2247,7 +2247,7 @@ package classes.Scenes.Places
 			var willChange:Number = 0;
 			var lustChange:Number = 0;
 			var needNext:Boolean = false;
-			if(player.statusAffectv4(StatusAffects.PrisonRestraints) < 1)
+			if(player.statusEffectv4(StatusEffects.PrisonRestraints) < 1)
 			{
 				willChange = willChange - (0.3 - player.obey * 0.005);
 				if(player.cor > 40)
@@ -2259,7 +2259,7 @@ package classes.Scenes.Places
 					lustChange = lustChange + player.obey * 0.005;
 				}
 			}
-			if(player.statusAffectv4(StatusAffects.PrisonRestraints) < 2)
+			if(player.statusEffectv4(StatusEffects.PrisonRestraints) < 2)
 			{
 				willChange = willChange - 0.2;
 				if(player.obey > 70)
@@ -2268,7 +2268,7 @@ package classes.Scenes.Places
 				}
 				fatigueChange = fatigueChange + 0.01;
 			}
-			if(player.statusAffectv2(StatusAffects.PrisonRestraints) < 1)
+			if(player.statusEffectv2(StatusEffects.PrisonRestraints) < 1)
 			{
 				willChange = willChange - (0.3 - player.obey * 0.005);
 				if(player.cor > 40)
@@ -2295,25 +2295,25 @@ package classes.Scenes.Places
 			var statusVal:int = 0;
 			if (flags[kFLAGS.PRISON_DIRT_ENABLED] > 0)
 			{
-				newCleanliness = player.statusAffectv2(StatusAffects.PrisonCaptorEllyStatus) + 1;
+				newCleanliness = player.statusEffectv2(StatusEffects.PrisonCaptorEllyStatus) + 1;
 				if(newCleanliness > 100)
 				{
 					newCleanliness = 100;
 				}
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus, 2, newCleanliness);
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus, 2, newCleanliness);
 			}
 			if(flags[kFLAGS.PRISON_PUNISHMENT] > 0 && flags[kFLAGS.PRISON_PUNISHMENT] <= 3)
 			{
-				newVal = player.statusAffectv3(StatusAffects.PrisonCaptorEllyStatus) - 1;
+				newVal = player.statusEffectv3(StatusEffects.PrisonCaptorEllyStatus) - 1;
 				if(newVal < 0)
 				{
 					newVal = 0;
 				}
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,3,newVal);
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3,newVal);
 			}
 			if(flags[kFLAGS.PRISON_PUNISHMENT] == 4)
 			{
-				newVal = player.statusAffectv3(StatusAffects.PrisonCaptorEllyStatus);
+				newVal = player.statusEffectv3(StatusEffects.PrisonCaptorEllyStatus);
 				if(newVal < 0)
 				{
 					newVal++;
@@ -2323,11 +2323,11 @@ package classes.Scenes.Places
 					newVal--;
 				}
 				
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus, 3, newVal);
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus, 3, newVal);
 			}
 			if(flags[kFLAGS.PRISON_PUNISHMENT] == 2)
 			{
-				statusVal = player.statusAffectv4(StatusAffects.PrisonCaptorEllyStatus);
+				statusVal = player.statusEffectv4(StatusEffects.PrisonCaptorEllyStatus);
 				if(statusVal <= 3)
 				{
 					fatigue((20 - statusVal) * 0.35);
@@ -2486,7 +2486,7 @@ package classes.Scenes.Places
 			//Punishments
 			if(flags[kFLAGS.PRISON_PUNISHMENT] == 1)
 			{
-				if(player.statusAffectv3(StatusAffects.PrisonCaptorEllyStatus) == 0)
+				if(player.statusEffectv3(StatusEffects.PrisonCaptorEllyStatus) == 0)
 				{
 					punishments.prisonCaptorPunishmentStockadesFreedom();
 					return true;
@@ -2494,7 +2494,7 @@ package classes.Scenes.Places
 			}
 			if(flags[kFLAGS.PRISON_PUNISHMENT] == 2)
 			{
-				if(player.statusAffectv3(StatusAffects.PrisonCaptorEllyStatus) == 0)
+				if(player.statusEffectv3(StatusEffects.PrisonCaptorEllyStatus) == 0)
 				{
 					punishments.prisonCaptorPunishmentConfinementFreedom();
 					return true;
@@ -2502,7 +2502,7 @@ package classes.Scenes.Places
 			}
 			if(flags[kFLAGS.PRISON_PUNISHMENT] == 3)
 			{
-				if(player.statusAffectv3(StatusAffects.PrisonCaptorEllyStatus) == 0)
+				if(player.statusEffectv3(StatusEffects.PrisonCaptorEllyStatus) == 0)
 				{
 					punishments.prisonCaptorPunishmentBJTrainerTimesup();
 					return true;
@@ -2524,12 +2524,12 @@ package classes.Scenes.Places
 				outputText("\n\n<b>From now on, Elly will check your cell every day at 4pm.</b>");
 				flags[kFLAGS.PRISON_DIRT_ENABLED] = 1;
 				prisonCaptorTrainingStatusUpdate();
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,2,51);
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,2,51);
 				doNext(playerMenu);
 				return;
 			}
 			outputText("From the look on " + prisonCaptor.captorPronoun3 + " face you know immediately that ",false);
-			cleanlinessLevel = Math.floor(player.statusAffectv2(StatusAffects.PrisonCaptorEllyStatus) / 25);
+			cleanlinessLevel = Math.floor(player.statusEffectv2(StatusEffects.PrisonCaptorEllyStatus) / 25);
 			switch(cleanlinessLevel)
 			{
 				case 0:
@@ -2556,25 +2556,25 @@ package classes.Scenes.Places
 		
 		public function prisonCaptorPunishmentRestrain():void
 		{
-			if(player.statusAffectv2(StatusAffects.PrisonRestraints) == 0)
+			if(player.statusEffectv2(StatusEffects.PrisonRestraints) == 0)
 			{
-				player.changeStatusValue(StatusAffects.PrisonRestraints,2,1);
+				player.changeStatusValue(StatusEffects.PrisonRestraints,2,1);
 			}
-			else if(player.statusAffectv3(StatusAffects.PrisonRestraints) < 2)
+			else if(player.statusEffectv3(StatusEffects.PrisonRestraints) < 2)
 			{
-				player.changeStatusValue(StatusAffects.PrisonRestraints,3,player.statusAffectv2(StatusAffects.PrisonRestraints) + 1);
+				player.changeStatusValue(StatusEffects.PrisonRestraints,3, player.statusEffectv2(StatusEffects.PrisonRestraints) + 1);
 			}
-			else if(player.statusAffectv4(StatusAffects.PrisonRestraints) == 0)
+			else if(player.statusEffectv4(StatusEffects.PrisonRestraints) == 0)
 			{
-				player.changeStatusValue(StatusAffects.PrisonRestraints,4,0);
+				player.changeStatusValue(StatusEffects.PrisonRestraints,4,0);
 			}
-			else if(player.statusAffectv2(StatusAffects.PrisonRestraints) < 2)
+			else if(player.statusEffectv2(StatusEffects.PrisonRestraints) < 2)
 			{
-				player.changeStatusValue(StatusAffects.PrisonRestraints,2,2);
+				player.changeStatusValue(StatusEffects.PrisonRestraints,2,2);
 			}
-			else if(player.statusAffectv4(StatusAffects.PrisonRestraints) < 3)
+			else if(player.statusEffectv4(StatusEffects.PrisonRestraints) < 3)
 			{
-				player.changeStatusValue(StatusAffects.PrisonRestraints,4,player.statusAffectv4(StatusAffects.PrisonRestraints) + 1);
+				player.changeStatusValue(StatusEffects.PrisonRestraints,4, player.statusEffectv4(StatusEffects.PrisonRestraints) + 1);
 			}
 			else
 			{
@@ -2588,12 +2588,12 @@ package classes.Scenes.Places
 	  
 		public function prisonCaptorRestraintCheckEvent():Boolean
 		{
-			if(player.statusAffectv2(StatusAffects.PrisonRestraints) == 0 && player.statusAffectv3(StatusAffects.PrisonRestraints) == 0 && player.statusAffectv4(StatusAffects.PrisonRestraints) == 0)
+			if(player.statusEffectv2(StatusEffects.PrisonRestraints) == 0 && player.statusEffectv3(StatusEffects.PrisonRestraints) == 0 && player.statusEffectv4(StatusEffects.PrisonRestraints) == 0)
 			{
-				if(player.obey >= 95 && player.statusAffectv1(StatusAffects.PrisonRestraints) > 0)
+				if(player.obey >= 95 && player.statusEffectv1(StatusEffects.PrisonRestraints) > 0)
 				{
 					outputText("\nYour " + prisonCaptor.captorTitle + " enters the room and looks pensive for a moment, then " + prisonCaptor.captorPronoun1 + " declares decisively, \"<i>I don't think we need to bother keeping the door locked anymore. Even if you do somehow work up the nerve to walk out the door, you'll soon find your way back to where you know you belong.</i>\"\n",false);
-					player.changeStatusValue(StatusAffects.PrisonRestraints, 1, 0);
+					player.changeStatusValue(StatusEffects.PrisonRestraints, 1, 0);
 					flags[kFLAGS.PRISON_DOOR_UNLOCKED] = 1;
 					doNext(playerMenu);
 					return true;
@@ -2648,14 +2648,14 @@ package classes.Scenes.Places
 		{
 			var selector:* = undefined;
 			selector = 0;
-			if(player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus) < 3)
+			if(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus) < 3)
 			{
 				selector = rand(3);
 			}
 			else
 			{
 				selector = rand(10);
-				if(player.hasStatusAffect(StatusAffects.Heat))
+				if(player.hasStatusEffect(StatusEffects.Heat))
 				{
 					selector = 6;
 				}
@@ -2665,7 +2665,7 @@ package classes.Scenes.Places
 				case 0:
 				case 1:
 				case 2:
-					if(player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus) < 3)
+					if(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus) < 3)
 					{
 						outputText("(Placeholder) \"<i>You haven't yet earned the privilege of getting fucked by my cock.");
 					}
@@ -2738,14 +2738,14 @@ package classes.Scenes.Places
 		{
 			var selector:* = undefined;
 			selector = 0;
-			if(player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus) < 3)
+			if(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus) < 3)
 			{
 				selector = rand(3);
 			}
 			else
 			{
 				selector = rand(10);
-				if(player.hasStatusAffect(StatusAffects.Heat))
+				if(player.hasStatusEffect(StatusEffects.Heat))
 				{
 					selector = 6;
 				}
@@ -2755,7 +2755,7 @@ package classes.Scenes.Places
 				case 0:
 				case 1:
 				case 2:
-					if(player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus) < 3)
+					if(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus) < 3)
 					{
 						outputText("(Placeholder) \"<i>You haven't yet earned the privilege of getting fucked by my cock.");
 					}
@@ -2765,7 +2765,7 @@ package classes.Scenes.Places
 					}
 					outputText(" Perhaps you will be worthy of it next time. But don't worry, we'll still have plenty of fun.</i>\" She directs you to grab hold of a ring hanging from the ceiling, but you petulantly remain seated. This angers her, and she quickly binds your hands above your head and hangs you from a hook. She then expertly teases your erogenous zones with her skillful hands until you become weak in the knees and find yourself trying to support your weight any way you can. She allows you to struggle for a bit, then coerces you into begging for help. \n\n");
 					outputText("When you do, she wraps straps around your knees, fastens then to nearby hooks, and draws them up so that you are half reclined with your legs drawn upward and outward beside your torso and you swing uncomfortably from your three supports. With you completely at her mercy, she begins to works the fingers of one hand into your [asshole] while teasing your genitals with the other. \n\n");
-					if(player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus) > 2 && rand(2) == 1)
+					if(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus) > 2 && rand(2) == 1)
 					{
 						outputText("With four fingers in your bum and you teetering on the agonizing edge of orgasm, she decides to give you a second chance. She gives you a chance to beg her for her cock, and you take it. She then stands between your legs, replaces the fingers in your ass with the tip of her enormous cock. However, instead of fucking you, she tells you that you will need to show your contrition and fuck yourself. Overwhelmed by lust, you immediately respond, clumsily shifting your weight forward and backward until you find your self swinging wildly, stuffing yourself brutally with her fleshy shaft. Before long your exertion pays off and you orgasm.\n\n");
 						player.buttChange(32,true,true,false);
@@ -2800,7 +2800,7 @@ package classes.Scenes.Places
 					if(player.hasVagina())
 					{
 						outputText("(Placeholder) \"<i>You're going to get a special treat today, [boy], but first you need to beg me to put a baby in your dirty [cunt].</i>\" You petulantly refuse, ");
-						if(player.hasStatusAffect(StatusAffects.Heat))
+						if(player.hasStatusEffect(StatusEffects.Heat))
 						{
 							outputText("but she simply laughs, walks up to you, and begins to stroke her dick in your face. In a matter of seconds your raging hormones get the better of you and you coyly acquiesce, and ask her to fuck your [pussy]. She makes you present yourself like a bitch in heat while continuing to beg. Finally she gives you want you want, and fills your womb with her potent seed.\n\n");
 						}
@@ -2835,7 +2835,7 @@ package classes.Scenes.Places
 			}
 			outputText("(Placeholder) Afterwards, " + prisonCaptor.captorPronoun1 + " leaves you hogtied to help you remember to obey in the future. ",false);
 			player.slimeFeed();
-			player.changeStatusValue(StatusAffects.PrisonRestraints,2,2);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,2,2);
 			player.orgasm();
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -2963,18 +2963,18 @@ package classes.Scenes.Places
 				{
 					if(player.pregnancyIncubation == 0)
 					{
-						if(player.hasStatusAffect(StatusAffects.Heat))
+						if(player.hasStatusEffect(StatusEffects.Heat))
 						{
 							outputText("Your mind clouds as your " + vaginaDescript(0) + " moistens.  Despite already being in heat, the desire to copulate constantly grows even larger.",false);
-							if (player.statusAffectv1(StatusAffects.Heat) < 100) player.addStatusValue(StatusAffects.Heat, 1, 10);
-							if (player.statusAffectv2(StatusAffects.Heat) < 100) player.addStatusValue(StatusAffects.Heat, 2, 10);
-							if (player.statusAffectv3(StatusAffects.Heat) < 720) player.addStatusValue(StatusAffects.Heat, 3, 96);
+							if (player.statusEffectv1(StatusEffects.Heat) < 100) player.addStatusValue(StatusEffects.Heat, 1, 10);
+							if (player.statusEffectv2(StatusEffects.Heat) < 100) player.addStatusValue(StatusEffects.Heat, 2, 10);
+							if (player.statusEffectv3(StatusEffects.Heat) < 720) player.addStatusValue(StatusEffects.Heat, 3, 96);
 							dynStats("lib", 10);
 						}
-						if(!player.hasStatusAffect(StatusAffects.Heat))
+						if(!player.hasStatusEffect(StatusEffects.Heat))
 						{
 							outputText("Your mind clouds as your " + vaginaDescript(0) + " moistens.  Your hands begin stroking your body from top to bottom, your sensitive skin burning with desire.  Fantasies about bending over and presenting your needy pussy to a male overwhelm you as you realize <b>you have gone into heat</b>!", false);
-							player.createStatusAffect(StatusAffects.Heat, 20, 20, 96, 0);
+							player.createStatusEffect(StatusEffects.Heat, 20, 20, 96, 0);
 							dynStats("sens", 10);
 						}
 					}
@@ -2992,11 +2992,11 @@ package classes.Scenes.Places
 		
 		public function prisonCaptorTrainingStatusUpdate():void
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyStatus))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyStatus))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyStatus,1,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyStatus,1,0,0,0);
 			}
-			switch(player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus))
+			switch(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus))
 			{
 				case 0:
 				case 1:
@@ -3004,7 +3004,7 @@ package classes.Scenes.Places
 				case 2:
 					if(player.obey < 10)
 					{
-						player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,1);
+						player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,1,1);
 						if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 0)
 						{
 							flags[kFLAGS.PRISON_TRAINING_LEVEL] = -1;
@@ -3018,7 +3018,7 @@ package classes.Scenes.Places
 				case 3:
 					if(player.obey < 25)
 					{
-						player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,2);
+						player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,1,2);
 						if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 0)
 						{
 							flags[kFLAGS.PRISON_TRAINING_LEVEL] = -1;
@@ -3032,7 +3032,7 @@ package classes.Scenes.Places
 				case 4:
 					if(player.obey < 45)
 					{
-						player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,3);
+						player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,1,3);
 						if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 0)
 						{
 							flags[kFLAGS.PRISON_TRAINING_LEVEL] = -1;
@@ -3046,7 +3046,7 @@ package classes.Scenes.Places
 				case 5:
 					if(player.obey < 70)
 					{
-						player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,4);
+						player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,1,4);
 						if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 0)
 						{
 							flags[kFLAGS.PRISON_TRAINING_LEVEL] = -1;
@@ -3060,7 +3060,7 @@ package classes.Scenes.Places
 				case 6:
 					if(player.obey < 90)
 					{
-						player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,5);
+						player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,1,5);
 						if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 0)
 						{
 							flags[kFLAGS.PRISON_TRAINING_LEVEL] = -1;
@@ -3157,10 +3157,10 @@ package classes.Scenes.Places
 					outputText("Normal");
 				}
 				outputText("\n",false);
-				if(player.hasStatusAffect(StatusAffects.PrisonCaptorEllyStatus))
+				if(player.hasStatusEffect(StatusEffects.PrisonCaptorEllyStatus))
 				{
-					outputText("<b>Mistress Elly Training Level: </b>" + player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus) + " (",false);
-					switch(player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus))
+					outputText("<b>Mistress Elly Training Level: </b>" + player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus) + " (",false);
+					switch(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus))
 					{
 						case 0:
 						case 1:
@@ -3187,7 +3187,7 @@ package classes.Scenes.Places
 				trainingLevelCounter = flags[kFLAGS.PRISON_TRAINING_LEVEL] - 1;
 				if(trainingLevelCounter > 0)
 				{
-					switch(player.statusAffectv1(StatusAffects.PrisonCaptorEllyStatus))
+					switch(player.statusEffectv1(StatusEffects.PrisonCaptorEllyStatus))
 					{
 						case 0:
 						case 1:

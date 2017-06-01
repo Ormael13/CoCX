@@ -14,14 +14,14 @@ package classes.Scenes.NPCs
 			var choice:Number = rand(2);
 			if (choice == 0) eAttack();
 			if (choice == 1) {
-				if (!player.hasStatusAffect(StatusAffects.IzmaBleed) && rand(2) == 0) Specials1();
+				if (!player.hasStatusEffect(StatusEffects.IzmaBleed) && rand(2) == 0) Specials1();
 				else eAttack();
 			}
 		}
 		
 		public function Specials1():void {
 			//Blind dodge change
-			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
+			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText("J1c blindly tries to clinch you, but misses completely.\n", false);
 				return;
 			}
@@ -52,7 +52,7 @@ package classes.Scenes.NPCs
 			if(player.armorDef >= 10 || damage == 0) {
 				//(armor-dependent Health damage, fullplate, chain, scale, and bee chitin armor are unaffected, has a chance to inflict 'Bleed' damage which removes 4-10% of health for the next three turns if successful)
 				outputText("writhe as she painfully drags the sharp end of the metal shards on her golem forearm down your back", false);
-				player.createStatusAffect(StatusAffects.IzmaBleed,3,0,0,0);
+				player.createStatusEffect(StatusEffects.IzmaBleed,3,0,0,0);
 			}
 			else outputText("laugh as her blades scape uselessly at your armor-clad back", false);
 			outputText(" before breaking her embrace and leaping away. ", false);

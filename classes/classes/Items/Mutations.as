@@ -962,7 +962,7 @@
 				outputText("You eat the pepper, even the two orb-like growths that have grown out from the base.  It's delicious!");
 			}
 			//OVERDOSE Bad End!
-			if (type <= 0 && crit > 1 && player.hasFullCoatOfType(SKIN_COAT_FUR) && player.faceType == FACE_DOG && player.earType == EARS_DOG && player.lowerBody == LOWER_BODY_TYPE_DOG && player.tailType == TAIL_TYPE_DOG && rand(2) == 0 && player.hasStatusAffect(StatusAffects.DogWarning) && player.findPerk(PerkLib.TransformationResistance) < 0) {
+			if (type <= 0 && crit > 1 && player.hasFullCoatOfType(SKIN_COAT_FUR) && player.faceType == FACE_DOG && player.earType == EARS_DOG && player.lowerBody == LOWER_BODY_TYPE_DOG && player.tailType == TAIL_TYPE_DOG && rand(2) == 0 && player.hasStatusEffect(StatusEffects.DogWarning) && player.findPerk(PerkLib.TransformationResistance) < 0) {
 				temp = rand(2);
 				if (temp == 0) {
 					outputText("\n\nAs you swallow the pepper, you note that the spicy hotness on your tongue seems to be spreading. Your entire body seems to tingle and burn, making you feel far warmer than normal, feverish even. Unable to stand it any longer you tear away your clothes, hoping to cool down a little. Sadly, this does nothing to aid you with your problem. On the bright side, the sudden feeling of vertigo you've developed is more than enough to take your mind off your temperature issues. You fall forward onto your hands and knees, well not really hands and knees to be honest. More like paws and knees. That can't be good, you think for a moment, before the sensation of your bones shifting into a quadrupedal configuration robs you of your concentration. After that, it is only a short time before your form is remade completely into that of a large dog, or perhaps a wolf. The distinction would mean little to you now, even if you were capable of comprehending it. ");
@@ -974,12 +974,12 @@
 				return;
 			}
 			//WARNING, overdose VERY close!
-			if (type <= 0 && player.hasFullCoatOfType(SKIN_COAT_FUR) && player.faceType == FACE_DOG && player.tailType == TAIL_TYPE_DOG && player.earType == EARS_DOG && player.lowerBody == LOWER_BODY_TYPE_DOG && player.hasStatusAffect(StatusAffects.DogWarning) && rand(3) == 0) {
+			if (type <= 0 && player.hasFullCoatOfType(SKIN_COAT_FUR) && player.faceType == FACE_DOG && player.tailType == TAIL_TYPE_DOG && player.earType == EARS_DOG && player.lowerBody == LOWER_BODY_TYPE_DOG && player.hasStatusEffect(StatusEffects.DogWarning) && rand(3) == 0) {
 				outputText("<b>\n\nEating the pepper, you realize how dog-like you've become, and you wonder what else the peppers could change...</b>");
 			}
 			//WARNING, overdose is close!
-			if (type <= 0 && player.hasFullCoatOfType(SKIN_COAT_FUR) && player.faceType == FACE_DOG && player.tailType == TAIL_TYPE_DOG && player.earType == EARS_DOG && player.lowerBody == LOWER_BODY_TYPE_DOG && !player.hasStatusAffect(StatusAffects.DogWarning)) {
-				player.createStatusAffect(StatusAffects.DogWarning, 0, 0, 0, 0);
+			if (type <= 0 && player.hasFullCoatOfType(SKIN_COAT_FUR) && player.faceType == FACE_DOG && player.tailType == TAIL_TYPE_DOG && player.earType == EARS_DOG && player.lowerBody == LOWER_BODY_TYPE_DOG && !player.hasStatusEffect(StatusEffects.DogWarning)) {
+				player.createStatusEffect(StatusEffects.DogWarning, 0, 0, 0, 0);
 				outputText("<b>\n\nEating the pepper, you realize how dog-like you've become, and you wonder what else the peppers could change...</b>");
 			}
 			if (type == 3) {
@@ -1845,12 +1845,12 @@
 			}
 			//If player already has eggs, chance of size increase!
 			if (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
-				if (player.hasStatusAffect(StatusAffects.Eggs)) {
+				if (player.hasStatusEffect(StatusEffects.Eggs)) {
 					//If eggs are small, chance of increase!
-					if (player.statusAffectv2(StatusAffects.Eggs) == 0) {
+					if (player.statusEffectv2(StatusEffects.Eggs) == 0) {
 						//1 in 2 chance!
 						if (rand(3) == 0) {
-							player.addStatusValue(StatusAffects.Eggs,2,1);
+							player.addStatusValue(StatusEffects.Eggs,2,1);
 							outputText("\n\nYour pregnant belly suddenly feels heavier and more bloated than before.  You wonder what the elixir just did.");
 							changes++;
 						}
@@ -1858,7 +1858,7 @@
 					//Chance of quantity increase!
 					if (rand(2) == 0) {
 						outputText("\n\nA rumble radiates from your uterus as it shifts uncomfortably and your belly gets a bit larger.");
-						player.addStatusValue(StatusAffects.Eggs,3,rand(4) + 1);
+						player.addStatusValue(StatusEffects.Eggs,3,rand(4) + 1);
 						changes++;
 					}
 				}
@@ -1870,7 +1870,7 @@
 				//v1 = egg type.
 				//v2 = size - 0 for normal, 1 for large
 				//v3 = quantity
-				player.createStatusAffect(StatusAffects.Eggs, rand(6), 0, (5 + rand(3)), 0);
+				player.createStatusEffect(StatusEffects.Eggs, rand(6), 0, (5 + rand(3)), 0);
 				changes++;
 			}
 			//If no changes, speed up pregnancy.
@@ -2333,12 +2333,12 @@
 		{
 			clearOutput();
 			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Triple Thrust.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-			if (!player.hasStatusAffect(StatusAffects.KnowsTripleThrust)) {
+			if (!player.hasStatusEffect(StatusEffects.KnowsTripleThrust)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Triple Thrust.</b>");
-				player.createStatusAffect(StatusAffects.KnowsTripleThrust, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsTripleThrust, 0, 0, 0, 0);
 				return;
 			}
-			if (player.hasStatusAffect(StatusAffects.KnowsTripleThrust)) {
+			if (player.hasStatusEffect(StatusEffects.KnowsTripleThrust)) {
 				outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
 				player.soulforce += 20;
 				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
@@ -2348,12 +2348,12 @@
 		{
 			clearOutput();
 			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Draco Sweep.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-			if (!player.hasStatusAffect(StatusAffects.KnowsDracoSweep)) {
+			if (!player.hasStatusEffect(StatusEffects.KnowsDracoSweep)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Draco Sweep.</b>");
-				player.createStatusAffect(StatusAffects.KnowsDracoSweep, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsDracoSweep, 0, 0, 0, 0);
 				return;
 			}
-			if (player.hasStatusAffect(StatusAffects.KnowsDracoSweep)) {
+			if (player.hasStatusEffect(StatusEffects.KnowsDracoSweep)) {
 				outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
 				player.soulforce += 20;
 				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
@@ -2363,12 +2363,12 @@
 		{
 			clearOutput();
 			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Many Birds.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-			if (!player.hasStatusAffect(StatusAffects.KnowsManyBirds)) {
+			if (!player.hasStatusEffect(StatusEffects.KnowsManyBirds)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Many Birds.</b>");
-				player.createStatusAffect(StatusAffects.KnowsManyBirds, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsManyBirds, 0, 0, 0, 0);
 				return;
 			}
-			if (player.hasStatusAffect(StatusAffects.KnowsManyBirds)) {
+			if (player.hasStatusEffect(StatusEffects.KnowsManyBirds)) {
 				outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
 				player.soulforce += 20;
 				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
@@ -2378,12 +2378,12 @@
 		{
 			clearOutput();
 			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Comet.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-			if (!player.hasStatusAffect(StatusAffects.KnowsComet)) {
+			if (!player.hasStatusEffect(StatusEffects.KnowsComet)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Comet.</b>");
-				player.createStatusAffect(StatusAffects.KnowsComet, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsComet, 0, 0, 0, 0);
 				return;
 			}
-			if (player.hasStatusAffect(StatusAffects.KnowsComet)) {
+			if (player.hasStatusEffect(StatusEffects.KnowsComet)) {
 				outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
 				player.soulforce += 100;
 				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
@@ -2393,12 +2393,12 @@
 		{
 			clearOutput();
 			outputText("You open the manual, and discover it to be an instructional on how the use a soul skill.  Most of it is filled with generic information on poses and channeling soulforce while performing Violet Pupil Transformation.  In no time at all you've read the whole thing, but it disappears into thin air before you can put it away.");
-			if (!player.hasStatusAffect(StatusAffects.KnowsVioletPupilTransformation)) {
+			if (!player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new soul skill: Violet Pupil Transformation.</b>");
-				player.createStatusAffect(StatusAffects.KnowsVioletPupilTransformation, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsVioletPupilTransformation, 0, 0, 0, 0);
 				return;
 			}
-			if (player.hasStatusAffect(StatusAffects.KnowsVioletPupilTransformation)) {
+			if (player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
 				outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
 				player.soulforce += 100;
 				if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
@@ -2413,10 +2413,10 @@
 			clearOutput();
 			//Text for when the player uses the bottle:
 			//[before the player is addicted, Addiction < 30]
-			if (player.statusAffectv2(StatusAffects.Marble) < 30 && player.statusAffectv3(StatusAffects.Marble) == 0) outputText("You gulp down the bottle's contents; Marble makes some good tasting milk.\n\n", false);
+			if (player.statusEffectv2(StatusEffects.Marble) < 30 && player.statusEffectv3(StatusEffects.Marble) == 0) outputText("You gulp down the bottle's contents; Marble makes some good tasting milk.\n\n", false);
 			//[before the player is addicted, Addiction < 50]
-			else if (player.statusAffectv3(StatusAffects.Marble) <= 0) outputText("You gulp down the bottle's contents; Marble makes some really good tasting milk.\n\n", false);
-			else if (player.statusAffectv3(StatusAffects.Marble) > 0) {
+			else if (player.statusEffectv3(StatusEffects.Marble) <= 0) outputText("You gulp down the bottle's contents; Marble makes some really good tasting milk.\n\n", false);
+			else if (player.statusEffectv3(StatusEffects.Marble) > 0) {
 				//[player is completely addicted]
 				if (player.findPerk(PerkLib.MarblesMilk) >= 0) outputText("You gulp down the bottle's contents; it's no substitute for the real thing, but it's a nice pick me up.\n\n", false);
 				else {
@@ -2430,8 +2430,8 @@
 			kGAMECLASS.marbleScene.marbleStatusChange(0, 5);
 			//Does not apply the 'Marble's Milk' effect
 			//Purge withdrawl
-			if (player.hasStatusAffect(StatusAffects.MarbleWithdrawl)) {
-				player.removeStatusAffect(StatusAffects.MarbleWithdrawl);
+			if (player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
+				player.removeStatusEffect(StatusEffects.MarbleWithdrawl);
 				dynStats("tou", 5, "int", 5);
 				outputText("You no longer feel the symptoms of withdrawal.\n\n");
 			}
@@ -2440,10 +2440,10 @@
 			//Restores a portion of fatigue (once implemented)
 			kGAMECLASS.changeFatigue(-25);
 			//If the player is addicted, this item negates the withdrawal effects for a few hours (suggest 6), there will need to be a check here to make sure the withdrawal effect doesn't reactivate while the player is under the effect of 'Marble's Milk'.
-			if (player.hasStatusAffect(StatusAffects.BottledMilk)) {
-				player.addStatusValue(StatusAffects.BottledMilk, 1, (6 + rand(6)));
+			if (player.hasStatusEffect(StatusEffects.BottledMilk)) {
+				player.addStatusValue(StatusEffects.BottledMilk, 1, (6 + rand(6)));
 			}
-			else player.createStatusAffect(StatusAffects.BottledMilk, 12, 0, 0, 0);
+			else player.createStatusEffect(StatusEffects.BottledMilk, 12, 0, 0, 0);
 			player.refillHunger(20);
 		}
 
@@ -2699,7 +2699,7 @@
 						}
 						changes++;
 					}
-					if ((player.breastRows[0].lactationMultiplier > 2 && player.hasStatusAffect(StatusAffects.Feeder)) || player.breastRows[0].lactationMultiplier > 5) {
+					if ((player.breastRows[0].lactationMultiplier > 2 && player.hasStatusEffect(StatusEffects.Feeder)) || player.breastRows[0].lactationMultiplier > 5) {
 						if (rand(2) == 0) outputText("\n\nYour breasts suddenly feel less full, it seems you aren't lactating at quite the level you were.");
 						else outputText("\n\nThe insides of your breasts suddenly feel bloated.  There is a spray of milk from them, and they settle closer to a more natural level of lactation.");
 						changes++;
@@ -2713,9 +2713,9 @@
 			//apply an effect where the player really wants
 			//to give their milk to other creatures
 			//(capable of getting them addicted):
-			if (!player.hasStatusAffect(StatusAffects.Feeder) && player.biggestLactation() >= 3 && rand(2) == 0 && player.biggestTitSize() >= 5 && player.cor >= 35) {
+			if (!player.hasStatusEffect(StatusEffects.Feeder) && player.biggestLactation() >= 3 && rand(2) == 0 && player.biggestTitSize() >= 5 && player.cor >= 35) {
 				outputText("\n\nYou start to feel a strange desire to give your milk to other creatures.  For some reason, you know it will be very satisfying.\n\n<b>(You have gained the 'Feeder' perk!)</b>");
-				player.createStatusAffect(StatusAffects.Feeder, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.Feeder, 0, 0, 0, 0);
 				player.createPerk(PerkLib.Feeder, 0, 0, 0, 0);
 				changes++;
 			}
@@ -2727,9 +2727,9 @@
 					outputText("\n\nYou feel a relaxing sensation in your groin.  On further inspection you discover your [vagina] has somehow relaxed, permanently loosening.");
 					player.vaginas[0].vaginalLooseness++;
 					//Cunt Stretched used to determine how long since last enlargement
-					if (!player.hasStatusAffect(StatusAffects.CuntStretched)) player.createStatusAffect(StatusAffects.CuntStretched, 0, 0, 0, 0);
+					if (!player.hasStatusEffect(StatusEffects.CuntStretched)) player.createStatusEffect(StatusEffects.CuntStretched, 0, 0, 0, 0);
 					//Reset the timer on it to 0 when restretched.
-					else player.changeStatusValue(StatusAffects.CuntStretched, 1, 0);
+					else player.changeStatusValue(StatusEffects.CuntStretched, 1, 0);
 					player.vaginas[0].vaginalLooseness++;
 					changes++;
 					dynStats("lus", 10);
@@ -2860,10 +2860,10 @@
 				}
 			}
 			//Nipples Turn Back:
-			if (player.hasStatusAffect(StatusAffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
+			if (player.hasStatusEffect(StatusEffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nSomething invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
 				changes++;
-				player.removeStatusAffect(StatusAffects.BlackNipples);
+				player.removeStatusEffect(StatusEffects.BlackNipples);
 			}
 			//Debugcunt
 			if (changes < changeLimit && rand(3) == 0 && player.vaginaType() == 5 && player.hasVagina()) {
@@ -2899,38 +2899,38 @@
 				dynStats("int", .6);
 			}
 			//Smart enough for arouse and doesnt have it
-			if (player.inte >= 20 && !player.hasStatusAffect(StatusAffects.KnowsArouse)) {
+			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsArouse)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Arouse.</b>");
-				player.createStatusAffect(StatusAffects.KnowsArouse, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsArouse, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for heal and doesnt have it
-			if (player.inte >= 25 && !player.hasStatusAffect(StatusAffects.KnowsHeal)) {
+			if (player.inte >= 25 && !player.hasStatusEffect(StatusEffects.KnowsHeal)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Heal.</b>");
-				player.createStatusAffect(StatusAffects.KnowsHeal, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsHeal, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for might and doesnt have it
-			if (player.inte >= 30 && !player.hasStatusAffect(StatusAffects.KnowsMight)) {
+			if (player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsMight)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Might.</b>");
-				player.createStatusAffect(StatusAffects.KnowsMight, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsMight, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for blink and doesnt have it
-			if (player.inte >= 35 && !player.hasStatusAffect(StatusAffects.KnowsBlink)) {
+			if (player.inte >= 35 && !player.hasStatusEffect(StatusEffects.KnowsBlink)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blink.</b>");
-				player.createStatusAffect(StatusAffects.KnowsBlink, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsBlink, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for ice spike and doesnt have it
-			if (player.inte >= 40 && !player.hasStatusAffect(StatusAffects.KnowsIceSpike)) {
+			if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsIceSpike)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Ice Spike.</b>");
-				player.createStatusAffect(StatusAffects.KnowsIceSpike, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsIceSpike, 0, 0, 0, 0);
 			}
 			//Smart enough for darkness shard and doesnt have it
-			if (player.inte >= 45 && !player.hasStatusAffect(StatusAffects.KnowsDarknessShard)) {
+			if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Darkness Shard.</b>");
-				player.createStatusAffect(StatusAffects.KnowsDarknessShard, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsDarknessShard, 0, 0, 0, 0);
 			}
 		}
 
@@ -2957,17 +2957,17 @@
 			//Smart enough for (single target fire spell) and doesnt have it (player.inte >= 120)
 
 			//Smart enough for fire storm and doesnt have it
-			if (player.inte >= 125 && !player.hasStatusAffect(StatusAffects.KnowsFireStorm)) {
+			if (player.inte >= 125 && !player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Fire Storm.</b>");
-				player.createStatusAffect(StatusAffects.KnowsFireStorm, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsFireStorm, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for (single target ice spell) and doesnt have it (player.inte >= 120)
 
 			//Smart enough for ice rain and doesnt have it
-			if (player.inte >= 125 && !player.hasStatusAffect(StatusAffects.KnowsIceRain)) {
+			if (player.inte >= 125 && !player.hasStatusEffect(StatusEffects.KnowsIceRain)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Ice Rain.</b>");
-				player.createStatusAffect(StatusAffects.KnowsIceRain, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsIceRain, 0, 0, 0, 0);
 			}
 		}
 
@@ -2992,38 +2992,38 @@
 				dynStats("int", .6);
 			}
 			//Smart enough for charge weapon and doesnt have it
-			if (player.inte >= 20 && !player.hasStatusAffect(StatusAffects.KnowsCharge)) {
+			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsCharge)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Weapon.</b>");
-				player.createStatusAffect(StatusAffects.KnowsCharge, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsCharge, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for charge armor and doesnt have it
-			if (player.inte >= 25 && !player.hasStatusAffect(StatusAffects.KnowsChargeA)) {
+			if (player.inte >= 25 && !player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Armor.</b>");
-				player.createStatusAffect(StatusAffects.KnowsChargeA, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsChargeA, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for blind and doesnt have it
-			if (player.inte >= 30 && !player.hasStatusAffect(StatusAffects.KnowsBlind)) {
+			if (player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsBlind)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blind.</b>");
-				player.createStatusAffect(StatusAffects.KnowsBlind, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsBlind, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for whitefire and doesnt have it
-			if (player.inte >= 35 && !player.hasStatusAffect(StatusAffects.KnowsWhitefire)) {
+			if (player.inte >= 35 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Whitefire.</b>");
-				player.createStatusAffect(StatusAffects.KnowsWhitefire, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsWhitefire, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for blizzard and doesnt have it
-			if (player.inte >= 40 && !player.hasStatusAffect(StatusAffects.KnowsBlizzard)) {
+			if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blizzard.</b>");
-				player.createStatusAffect(StatusAffects.KnowsBlizzard, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsBlizzard, 0, 0, 0, 0);
 			}
 			//Smart enough for lightning bolt and doesnt have it
-			if (player.inte >= 45 && !player.hasStatusAffect(StatusAffects.KnowsLightningBolt)) {
+			if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) {
 				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Lightning Bolt.</b>");
-				player.createStatusAffect(StatusAffects.KnowsLightningBolt, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.KnowsLightningBolt, 0, 0, 0, 0);
 			}
 		}
 
@@ -3128,9 +3128,9 @@
 				changes++;
 			}
 			//Boost vaginal capacity without gaping
-			if (changes < changeLimit && rand(3) == 0 && player.hasVagina() && player.statusAffectv1(StatusAffects.BonusVCapacity) < 40) {
-				if (!player.hasStatusAffect(StatusAffects.BonusVCapacity)) player.createStatusAffect(StatusAffects.BonusVCapacity, 0, 0, 0, 0);
-				player.addStatusValue(StatusAffects.BonusVCapacity, 1, 5);
+			if (changes < changeLimit && rand(3) == 0 && player.hasVagina() && player.statusEffectv1(StatusEffects.BonusVCapacity) < 40) {
+				if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity, 0, 0, 0, 0);
+				player.addStatusValue(StatusEffects.BonusVCapacity, 1, 5);
 				outputText("\n\nThere is a sudden... emptiness within your [vagina].  Somehow you know you could accommodate even larger... insertions.");
 				changes++;
 			}
@@ -3221,10 +3221,10 @@
 			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
 
 			//Nipples Turn Back:
-			if (player.hasStatusAffect(StatusAffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
+			if (player.hasStatusEffect(StatusEffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nSomething invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
 				changes++;
-				player.removeStatusAffect(StatusAffects.BlackNipples);
+				player.removeStatusEffect(StatusEffects.BlackNipples);
 			}
 			//Debugcunt
 			if (changes < changeLimit && rand(3) == 0 && player.vaginaType() == 5 && player.hasVagina()) {
@@ -3355,8 +3355,8 @@
 			}
 			//3b.Infinite Vagina
 			if (player.vaginalCapacity() < 9000) {
-				if (!player.hasStatusAffect(StatusAffects.BonusVCapacity)) player.createStatusAffect(StatusAffects.BonusVCapacity, 9000, 0, 0, 0);
-				else player.addStatusValue(StatusAffects.BonusVCapacity, 1, 9000);
+				if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity, 9000, 0, 0, 0);
+				else player.addStatusValue(StatusEffects.BonusVCapacity, 1, 9000);
 				outputText("\n\nYour [vagina]'s internal walls feel a tingly wave of strange tightness.  Experimentally, you slip a few fingers, then your hand, then most of your forearm inside yourself.  <b>It seems you're now able to accommodate just about ANYTHING inside your sex.</b>");
 				return;
 			}
@@ -3367,13 +3367,13 @@
 			}
 			//Big slime girl
 			else {
-				if (!player.hasStatusAffect(StatusAffects.SlimeCraving)) {
+				if (!player.hasStatusEffect(StatusEffects.SlimeCraving)) {
 					outputText("\n\nYou feel a growing gnawing in your gut.  You feel... hungry, but not for food.  No, you need something wet and goopy pumped into you.  You NEED it.  You can feel it in your bones.  <b>If you don't feed that need... you'll get weaker and maybe die.</b>");
-					player.createStatusAffect(StatusAffects.SlimeCraving, 0, 0, 0, 1); //Value four indicates this tracks strength and speed separately
+					player.createStatusEffect(StatusEffects.SlimeCraving, 0, 0, 0, 1); //Value four indicates this tracks strength and speed separately
 				}
 				else {
 					outputText("\n\nYou feel full for a moment, but you know it's just a temporary respite from your constant need to be 'injected' with fluid.");
-					player.changeStatusValue(StatusAffects.SlimeCraving, 1, 0);
+					player.changeStatusValue(StatusEffects.SlimeCraving, 1, 0);
 				}
 			}
 			if (rand(2) == 0) outputText(player.modFem(85, 3));
@@ -3521,9 +3521,9 @@
 					player.skin.growCoat(SKIN_COAT_SCALES,{color:"orange and black"});
 					changes++;
 				}
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedScales)) {
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedScales)) {
 					outputText("\n\n<b>Genetic Memory: Scales - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedScales, 0, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.UnlockedScales, 0, 0, 0, 0);
 				}
 			}
 			//Legs
@@ -4105,8 +4105,8 @@
 			else player.breastRows[0].breastRating = 0;
 			player.gillType = GILLS_NONE;
 			player.rearBody = REAR_BODY_NONE;
-			player.removeStatusAffect(StatusAffects.Uniball);
-			player.removeStatusAffect(StatusAffects.BlackNipples);
+			player.removeStatusEffect(StatusEffects.Uniball);
+			player.removeStatusEffect(StatusEffects.BlackNipples);
 			player.vaginaType(0);
 		}
 
@@ -4200,10 +4200,10 @@
 			// Remove gills
 			if (rand(4) == 0 && player.hasGills() && changes < changeLimit) updateGills();
 			//Nipples Turn Back:
-			if (player.hasStatusAffect(StatusAffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
+			if (player.hasStatusEffect(StatusEffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nSomething invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
 				changes++;
-				player.removeStatusAffect(StatusAffects.BlackNipples);
+				player.removeStatusEffect(StatusEffects.BlackNipples);
 			}
 			//Remove feathery hair (copy for equinum, canine peppers, Labova)
 			if (changes < changeLimit && player.hairType == HAIR_FEATHER && rand(4) == 0) {
@@ -4856,11 +4856,11 @@
 			}
 			//--Worms leave if 100% lizard dicks?
 			//Require mammals?
-			if (player.lizardCocks() == player.cockTotal() && changes < changeLimit && player.hasStatusAffect(StatusAffects.Infested)) {
+			if (player.lizardCocks() == player.cockTotal() && changes < changeLimit && player.hasStatusEffect(StatusEffects.Infested)) {
 				outputText("\n\nLike rats from a sinking ship, worms escape from your body in a steady stream.  Surprisingly, the sensation is remarkably pleasant, similar to the pleasure of sexual release in a way.  Though they seem inexhaustible, the tiny, cum-slimed invertebrates slow to a trickle.  The larger worm-kin inside you stirs as if disturbed from a nap, coming loose from whatever moorings it had attached itself to in the interior of your form.  It slowly works its way up your urethra, stretching to an almost painful degree with every lurching motion.  Your dick bloats out around the base, stretched like the ovipositor on a bee-girl in order to handle the parasitic creature, but thankfully, the ordeal is a brief one.");
 				if (player.balls > 1) outputText("  The remaining " + num2Text(player.balls - 1) + " slither out the pre-stretched holes with ease, though the last one hangs from your tip for a moment before dropping to the ground.");
 				outputText("  The white creature joins its kin on the ground and slowly slithers away.  Perhaps they prefer mammals? In any event, <b>you are no longer infected with worms</b>.");
-				player.removeStatusAffect(StatusAffects.Infested);
+				player.removeStatusEffect(StatusEffects.Infested);
 				changes++;
 			}
 			//-Breasts vanish to 0 rating if male
@@ -4890,10 +4890,10 @@
 				outputText(" nipples relax.  It's a strange feeling, and you pull back your top to touch one.  It feels fine, though there doesn't seem to be any milk leaking out.  You give it a squeeze and marvel when nothing ");
 				if (player.hasFuckableNipples()) outputText("but sexual fluid ");
 				outputText("escapes it.  <b>You are no longer lactating.</b>  That makes sense, only mammals lactate!  Smiling, you muse at how much time this will save you when cleaning your gear.");
-				if (player.findPerk(PerkLib.Feeder) >= 0 || player.hasStatusAffect(StatusAffects.Feeder)) {
+				if (player.findPerk(PerkLib.Feeder) >= 0 || player.hasStatusEffect(StatusEffects.Feeder)) {
 					outputText("\n\n(<b>Feeder perk lost!</b>)");
 					player.removePerk(PerkLib.Feeder);
-					player.removeStatusAffect(StatusAffects.Feeder);
+					player.removeStatusEffect(StatusEffects.Feeder);
 				}
 				changes++;
 				//Loop through and reset lactation
@@ -5054,9 +5054,9 @@
 				else {
 					outputText("\n\nYou idly reach back to scratch yourself and nearly jump out of your [armor] when you hit something hard.  A quick glance down reveals that scales are growing out of your " + player.skinTone + " skin with alarming speed.  As you watch, the surface of your skin is covered in smooth scales.  They interlink together so well that they may as well be seamless.  You peel back your [armor] and the transformation has already finished on the rest of your body.  <b>You're covered from head to toe in shiny " + color + " scales.</b>");
 				}
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedScales)) {
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedScales)) {
 					outputText("\n\n<b>Genetic Memory: Scales - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedScales, 0, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.UnlockedScales, 0, 0, 0, 0);
 				}
 				player.skin.growCoat(SKIN_COAT_SCALES,{color:color});
 				changes++;
@@ -6294,10 +6294,10 @@
 				changes++;
 			}
 			//Nipples Turn Back:
-			if (player.hasStatusAffect(StatusAffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
+			if (player.hasStatusEffect(StatusEffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nSomething invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
 				changes++;
-				player.removeStatusAffect(StatusAffects.BlackNipples);
+				player.removeStatusEffect(StatusEffects.BlackNipples);
 			}
 			//Debugcunt
 			if (changes < changeLimit && rand(3) == 0 && player.vaginaType() == 5 && player.hasVagina()) {
@@ -6694,9 +6694,9 @@
 				} else outputText("\n\nA slowly-building itch spreads over your whole body, and as you idly scratch yourself, you find that your skin stating to harden turning slowly into chitin.");
 				outputText("  <b>You now have pale white chitin exoskeleton covering your body.</b>");
 				player.skin.growCoat(SKIN_COAT_CHITIN,{color:"pale white"});
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedChitin)) {
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedChitin)) {
 					outputText("\n\n<b>Genetic Memory: Chitin - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedChitin, 0, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.UnlockedChitin, 0, 0, 0, 0);
 				}
 				changes++;
 			}
@@ -6731,9 +6731,9 @@
 				}
 			}
 			//Nipples Turn Black:
-			if (!player.hasStatusAffect(StatusAffects.BlackNipples) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(6) == 0 && changes < changeLimit) {
+			if (!player.hasStatusEffect(StatusEffects.BlackNipples) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(6) == 0 && changes < changeLimit) {
 				outputText("\n\nA tickling sensation plucks at your nipples and you cringe, trying not to giggle.  Looking down you are in time to see the last spot of flesh tone disappear from your [nipples].  They have turned an onyx black!");
-				player.createStatusAffect(StatusAffects.BlackNipples, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.BlackNipples, 0, 0, 0, 0);
 				changes++;
 			}
 			//eyes!
@@ -6828,13 +6828,13 @@
 		public function applyLustStick(player:Player):void
 		{
 			clearOutput();
-			if (player.hasStatusAffect(StatusAffects.LustStickApplied)) {
-				player.addStatusValue(StatusAffects.LustStickApplied, 1, 12 + rand(12));
+			if (player.hasStatusEffect(StatusEffects.LustStickApplied)) {
+				player.addStatusValue(StatusEffects.LustStickApplied, 1, 12 + rand(12));
 				outputText("You carefully open the sweet-smelling tube and smear the lipstick over the coat you already have on your lips.  <b>No doubt another layer will make it last even longer!</b>  ");
 				outputText("You finish and pucker your lips, feeling fairly sexy with your new, thicker makeup on.\n\n");
 			}
 			else {
-				player.createStatusAffect(StatusAffects.LustStickApplied, 24, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.LustStickApplied, 24, 0, 0, 0);
 				outputText("You carefully open the sweet-smelling tube and smear the lipstick over your lips.  ");
 				if (player.hasCock()) outputText("It tingles a little, but the drugs have little to no effect on you now.");
 				else outputText("Honestly, it amazes you that something as little as a kiss can make a man putty in your hands.");
@@ -6931,7 +6931,7 @@
 				player.breastRows[0].fuckable = false;
 				if (player.nippleLength > .5) player.nippleLength = .25;
 				player.breastRows[0].lactationMultiplier = 0;
-				player.removeStatusAffect(StatusAffects.Feeder);
+				player.removeStatusEffect(StatusEffects.Feeder);
 				player.removePerk(PerkLib.Feeder);
 				outputText("All too soon, your boobs are gone.  Whoa!\n\n");
 			}
@@ -7439,7 +7439,7 @@
 				}
 			}
 			//HEAT!
-			if (player.statusAffectv2(StatusAffects.Heat) < 30 && rand(6) == 0 && changes < changeLimit) {
+			if (player.statusEffectv2(StatusEffects.Heat) < 30 && rand(6) == 0 && changes < changeLimit) {
 				if(player.goIntoHeat(true)) {
 						changes++;
 				}
@@ -7462,9 +7462,9 @@
 							player.skin.coat.color = randomChoice(KitsuneScene.basicKitsuneFur);
 				else
 					player.skin.coat.color = randomChoice("orange and white", "orange and white", "orange and white", "red and white", "black and white", "white", "tan", "brown");
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFur)) {
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFur)) {
 					outputText("\n\n<b>Genetic Memory: Fur - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedFur, 0, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.UnlockedFur, 0, 0, 0, 0);
 				}
 				changes++;
 			}
@@ -7542,10 +7542,10 @@
 				player.tone -= 4;
 			}
 			//Nipples Turn Back:
-			if (player.hasStatusAffect(StatusAffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
+			if (player.hasStatusEffect(StatusEffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nSomething invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
 				changes++;
-				player.removeStatusAffect(StatusAffects.BlackNipples);
+				player.removeStatusEffect(StatusEffects.BlackNipples);
 			}
 			//Debugcunt
 			if (changes < changeLimit && rand(3) == 0 && player.vaginaType() == 5 && player.hasVagina()) {
@@ -7662,9 +7662,9 @@
 			//Boosts the special effect of Dragonbreath by 20% for 1 use. ie: if Tainted's breath weapon has a 80% chance to stun on hit, +20% equals 100% chance to stun.
 			outputText("You crack the shell easily and swallow the large yolk and the copious amounts of albumen - the yolk is blue, while the rest is crimson-tinted.  It tastes like... well, it tastes mostly of spiced mint, you think.");
 			if (player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.DragonIceBreath) >= 0) {
-				if (player.hasStatusAffect(StatusAffects.DragonBreathCooldown)) player.removeStatusAffect(StatusAffects.DragonBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
 				else {
-					if (!player.hasStatusAffect(StatusAffects.DragonBreathBoost)) player.createStatusAffect(StatusAffects.DragonBreathBoost, 0, 0, 0, 0);
+					if (!player.hasStatusEffect(StatusEffects.DragonBreathBoost)) player.createStatusEffect(StatusEffects.DragonBreathBoost, 0, 0, 0, 0);
 				}
 				//(if PC has breath weapon)
 				outputText("\n\nA sudden surge of energy fills your being and you feel like you could blast anything to atoms with a single breath, like the mighty dragons of legends.");
@@ -7769,19 +7769,19 @@
 				}
 			});
 			//[Increase Vaginal Capacity] - requires vagina, of course
-			mutationStep(player.hasVagina() && player.statusAffectv1(StatusAffects.BonusVCapacity) < 200, mystic?2:3, function(): void {
+			mutationStep(player.hasVagina() && player.statusEffectv1(StatusEffects.BonusVCapacity) < 200, mystic?2:3, function(): void {
 				outputText("\n\nA gurgling sound issues from your abdomen, and you double over as a trembling ripple passes through your womb.  The flesh of your stomach roils as your internal organs begin to shift, and when the sensation finally passes, you are instinctively aware that your [vagina] is a bit deeper than it was before.");
-				if (!player.hasStatusAffect(StatusAffects.BonusVCapacity)) {
-					player.createStatusAffect(StatusAffects.BonusVCapacity, 0, 0, 0, 0);
+				if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) {
+					player.createStatusEffect(StatusEffects.BonusVCapacity, 0, 0, 0, 0);
 				}
-				player.addStatusValue(StatusAffects.BonusVCapacity, 1, 5 + rand(10));
+				player.addStatusValue(StatusEffects.BonusVCapacity, 1, 5 + rand(10));
 			});
 			//[Vag of Holding] - rare effect, only if PC has high vaginal looseness
-			mutationStep(player.hasVagina() && player.statusAffectv1(StatusAffects.BonusVCapacity) >= 200 && player.statusAffectv1(StatusAffects.BonusVCapacity) < 8000, mystic?1:5, function(): void{
+			mutationStep(player.hasVagina() && player.statusEffectv1(StatusEffects.BonusVCapacity) >= 200 && player.statusEffectv1(StatusEffects.BonusVCapacity) < 8000, mystic?1:5, function(): void{
 				outputText("\n\nYou clutch your stomach with both hands, dropping to the ground in pain as your internal organs begin to twist and shift violently inside you.  As you clench your eyes shut in agony, you are overcome with a sudden calm.  The pain in your abdomen subsides, and you feel at one with the unfathomable infinity of the universe, warmth radiating through you from the vast swirling cosmos contained within your womb.");
 				if (silly()) outputText("  <b>Your vagina has become a universe unto itself, capable of accepting colossal insertions beyond the scope of human comprehension!</b>");
 				else outputText("  <b>Your vagina is now capable of accepting even the most ludicrously sized insertions with no ill effects.</b>");
-				player.changeStatusValue(StatusAffects.BonusVCapacity, 1, 8000);
+				player.changeStatusValue(StatusEffects.BonusVCapacity, 1, 8000);
 			});
 
 
@@ -7835,17 +7835,17 @@
 				}
 				else outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
 				player.tailCount = 7;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxTail7th) && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail7th) && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
 					outputText("\n\n<b>Genetic Memory: 7th Fox Tail - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedFoxTail7th, 0, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.UnlockedFoxTail7th, 0, 0, 0, 0);
 				}
 			});
 			mutationStep(nFoxTails == 7 && player.level >= 36 && player.inte >= 105 && player.wis >= 105 && (player.findPerk(PerkLib.EnlightenedKitsune) < 0 || player.perkv4(PerkLib.EnlightenedKitsune) > 0) && (player.findPerk(PerkLib.EnlightenedNinetails) < 0 || player.perkv4(PerkLib.EnlightenedNinetails) > 0), mystic ? 1 : 4, function(): void {
 				outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
 				player.tailCount++;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxTail8th) && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail8th) && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
 					outputText("\n\n<b>Genetic Memory: 8th Fox Tail - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedFoxTail8th, 0, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.UnlockedFoxTail8th, 0, 0, 0, 0);
 				}
 			});
 			//[Grow 9th tail and gain Corrupted Nine-tails perk]
@@ -7859,9 +7859,9 @@
 				}
 				else outputText("\n\nA tingling pressure builds on your backside, and your bushy tails begin to glow with an eerie, ghostly light.  With a crackle of electrical energy, one of your tails splits in two, giving you " + num2Text(player.tailCount + 1) + "!  <b>You now have a cluster of " + num2Text(player.tailCount + 1) + " fox-tails.</b>");
 				player.tailCount = 9;
-				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedFoxTail9th) && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
+				if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedFoxTail9th) && player.findPerk(PerkLib.NinetailsKitsuneOfBalance) >= 0 && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
 					outputText("\n\n<b>Genetic Memory: 9th Fox Tail - Memorized!</b>\n\n");
-					player.createStatusAffect(StatusAffects.UnlockedFoxTail9th, 0, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.UnlockedFoxTail9th, 0, 0, 0, 0);
 				}
 
 			});
@@ -7923,17 +7923,17 @@
 				if (mystic) outputText("angular");
 				else outputText("curved");
 				outputText(" markings remain, as if etched into your skin. <b>You now have [skin].</b>");
-			//	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedTattoed)) {
+			//	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedTattoed)) {
 			//		outputText("\n\n<b>Genetic Memory: Tattoed Skin - Memorized!</b>\n\n");
-			//		player.createStatusAffect(StatusAffects.UnlockedTattoed, 0, 0, 0, 0);
+			//		player.createStatusEffect(StatusEffects.UnlockedTattoed, 0, 0, 0, 0);
 			//	}
 				player.skin.base.adj = "sexy tattooed";
 
 			});
 			//Nipples Turn Back:
-			mutationStep(player.hasStatusAffect(StatusAffects.BlackNipples), 3, function(): void {
+			mutationStep(player.hasStatusEffect(StatusEffects.BlackNipples), 3, function(): void {
 				outputText("\n\nSomething invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
-				player.removeStatusAffect(StatusAffects.BlackNipples);
+				player.removeStatusEffect(StatusEffects.BlackNipples);
 			});
 			//Debugcunt
 			mutationStep(player.vaginaType() == 5 && player.hasVagina(), 3, function(): void {
@@ -8302,7 +8302,7 @@
 				changes++;
 			}
 			//Testicle Reduction:
-			if (player.balls > 0 && player.hasCock() && (player.ballSize > 1 || !player.hasStatusAffect(StatusAffects.Uniball)) && rand(4) == 0 && changes < changeLimit) {
+			if (player.balls > 0 && player.hasCock() && (player.ballSize > 1 || !player.hasStatusEffect(StatusEffects.Uniball)) && rand(4) == 0 && changes < changeLimit) {
 				outputText("\n\nYou feel a delicate tightening sensation around your [balls].  The sensation upon this most sensitive part of your anatomy isn't painful, but the feeling of your balls getting smaller is intense enough that you stifle anything more than a sharp intake of breath only with difficulty.");
 				player.ballSize--;
 				if (player.ballSize > 8) player.ballSize--;
@@ -8311,11 +8311,11 @@
 				if (player.ballSize > 15) player.ballSize--;
 				if (player.ballSize > 20) player.ballSize--;
 				//Testicle Reduction final:
-				if (player.ballSize < 1 && !player.hasStatusAffect(StatusAffects.Uniball)) {
+				if (player.ballSize < 1 && !player.hasStatusEffect(StatusEffects.Uniball)) {
 					outputText("  You whimper as once again, your balls tighten and shrink.  Your eyes widen when you feel the gentle weight of your testicles pushing against the top of your [hips], and a few hesitant swings of your rear confirm what you can feel - you've tightened your balls up so much they no longer hang beneath your " + multiCockDescriptLight() + ", but press perkily upwards.  Heat ringing your ears, you explore your new sack with a careful hand.  You are deeply grateful you apparently haven't reversed puberty, but you discover that though you still have " + num2Text(player.balls) + ", your balls now look and feel like one: one cute, tight little sissy parcel, its warm, insistent pressure upwards upon the joining of your thighs a never-ending reminder of it.");
 					//[Note: Balls description should no longer say “swings heavily beneath”.  For simplicity's sake sex scenes should continue to assume two balls]
 					player.ballSize = 1;
-					player.createStatusAffect(StatusAffects.Uniball, 0, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.Uniball, 0, 0, 0, 0);
 				}
 				else if (player.ballSize < 1) player.ballSize = 1;
 				changes++;
@@ -8406,9 +8406,9 @@
 				}
 			}
 			//Nipples Turn Black:
-			if (!player.hasStatusAffect(StatusAffects.BlackNipples) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(6) == 0 && changes < changeLimit) {
+			if (!player.hasStatusEffect(StatusEffects.BlackNipples) && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && rand(6) == 0 && changes < changeLimit) {
 				outputText("\n\nA tickling sensation plucks at your nipples and you cringe, trying not to giggle.  Looking down you are in time to see the last spot of flesh tone disappear from your [nipples].  They have turned an onyx black!");
-				player.createStatusAffect(StatusAffects.BlackNipples, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.BlackNipples, 0, 0, 0, 0);
 				changes++;
 			}
 			//Remove odd eyes
@@ -8727,18 +8727,18 @@
 				//adds some lust
 				dynStats("lus", 10 + player.sens / 5);
 				if (player.vaginalCapacity() < 100 && player.hasVagina()) {
-					if (!player.hasStatusAffect(StatusAffects.BonusVCapacity)) player.createStatusAffect(StatusAffects.BonusVCapacity, 0, 0, 0, 0);
-					player.addStatusValue(StatusAffects.BonusVCapacity, 1, 5);
+					if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity, 0, 0, 0, 0);
+					player.addStatusValue(StatusEffects.BonusVCapacity, 1, 5);
 				}
 				else {
-					if (!player.hasStatusAffect(StatusAffects.BonusACapacity)) player.createStatusAffect(StatusAffects.BonusACapacity, 0, 0, 0, 0);
-					player.addStatusValue(StatusAffects.BonusACapacity, 1, 5);
+					if (!player.hasStatusEffect(StatusEffects.BonusACapacity)) player.createStatusEffect(StatusEffects.BonusACapacity, 0, 0, 0, 0);
+					player.addStatusValue(StatusEffects.BonusACapacity, 1, 5);
 				}
 				changes++;
 			}
 			//fem fertility up and heat (suppress if pregnant)
 			//not already in heat (add heat and lust)
-			if (player.statusAffectv2(StatusAffects.Heat) < 30 && rand(2) == 0 && changes < changeLimit) {
+			if (player.statusEffectv2(StatusEffects.Heat) < 30 && rand(2) == 0 && changes < changeLimit) {
 
         var intensified:Boolean = player.inHeat;
         if(player.goIntoHeat(false)) {
@@ -8881,9 +8881,9 @@
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
 			//Nipples Turn Back:
-			if (player.hasStatusAffect(StatusAffects.BlackNipples) && rand(3) == 0) {
+			if (player.hasStatusEffect(StatusEffects.BlackNipples) && rand(3) == 0) {
 				outputText("\n\nSomething invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
-				player.removeStatusAffect(StatusAffects.BlackNipples);
+				player.removeStatusEffect(StatusEffects.BlackNipples);
 				flags[kFLAGS.TIMES_TRANSFORMED]++;
 			}
 			//remove fur
@@ -9697,9 +9697,9 @@
 			}
 			
 			//Boost vaginal capacity without gaping
-			if ((type == 0 || type == 1) && changes < changeLimit && rand(3) == 0 && player.hasVagina() && player.statusAffectv1(StatusAffects.BonusVCapacity) < 200) {
-				if (!player.hasStatusAffect(StatusAffects.BonusVCapacity)) player.createStatusAffect(StatusAffects.BonusVCapacity, 0, 0, 0, 0);
-				player.addStatusValue(StatusAffects.BonusVCapacity, 1, 5);
+			if ((type == 0 || type == 1) && changes < changeLimit && rand(3) == 0 && player.hasVagina() && player.statusEffectv1(StatusEffects.BonusVCapacity) < 200) {
+				if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity, 0, 0, 0, 0);
+				player.addStatusValue(StatusEffects.BonusVCapacity, 1, 5);
 				outputText("\n\nThere is a sudden... emptiness within your [vagina].  Somehow you know you could accommodate even larger... insertions.");
 				changes++;
 			}
@@ -10413,20 +10413,20 @@
 			outputText("Feeling parched, you twist the metal cap from the clear green bottle and chug it down. ");
 			dynStats("lus", 15);
 			player.refillHunger(10, false);
-			if (!player.hasStatusAffect(StatusAffects.Drunk)) {
-				player.createStatusAffect(StatusAffects.Drunk, 2, 1, 1, 0);
+			if (!player.hasStatusEffect(StatusEffects.Drunk)) {
+				player.createStatusEffect(StatusEffects.Drunk, 2, 1, 1, 0);
 				dynStats("str", 0.1);
 				dynStats("inte", -0.5);
 				dynStats("lib", 0.25);
 			}
 			else {
-				player.addStatusValue(StatusAffects.Drunk, 2, 1);
-				if (player.statusAffectv1(StatusAffects.Drunk) < 2) player.addStatusValue(StatusAffects.Drunk, 1, 1);
-				if (player.statusAffectv2(StatusAffects.Drunk) == 2) {
+				player.addStatusValue(StatusEffects.Drunk, 2, 1);
+				if (player.statusEffectv1(StatusEffects.Drunk) < 2) player.addStatusValue(StatusEffects.Drunk, 1, 1);
+				if (player.statusEffectv2(StatusEffects.Drunk) == 2) {
 					outputText("\n\n<b>You feel a bit drunk. Maybe you should cut back on the beers?</b>");
 				}
 				//Get so drunk you end up peeing! Genderless can still urinate.
-				if (player.statusAffectv2(StatusAffects.Drunk) >= 3) {
+				if (player.statusEffectv2(StatusEffects.Drunk) >= 3) {
 					outputText("\n\nYou feel so drunk; your vision is blurry and you realize something's not feeling right. Gasp! You have to piss like a racehorse! You stumble toward the nearest bush");
 					if (player.hasVagina() && !player.hasCock()) outputText(player.clothedOrNakedLower(", open up your [armor]") + " and release your pressure onto the ground. ");
 					else outputText(player.clothedOrNakedLower(", open up your [armor]") + " and release your pressure onto the wall. ");
@@ -10434,7 +10434,7 @@
 					awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE, true, true, false);
 					awardAchievement("Smashed", kACHIEVEMENTS.GENERAL_SMASHED, true, true, false);
 					outputText("\n\nIt seems to take forever but it eventually stops. You look down to see that your urine has been absorbed into the ground.");
-					player.removeStatusAffect(StatusAffects.Drunk);
+					player.removeStatusEffect(StatusEffects.Drunk);
 					cheatTime(1/12);
 				}
 			}

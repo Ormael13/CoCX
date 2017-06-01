@@ -12,7 +12,7 @@
 			//Chances to miss:
 			var damage:Number = 0;
 			//Blind dodge change
-			if (hasStatusAffect(StatusAffects.Blind)) {
+			if (hasStatusEffect(StatusEffects.Blind)) {
 				outputText(capitalA + short + " seems to have no problem guiding his attacks towards you, despite his blindness.\n", false);
 			}
 			//Determine if dodged!
@@ -84,12 +84,12 @@
 		public function akbalLustAttack():void
 		{
 			//*Lust Attack - 
-			if (!player.hasStatusAffect(StatusAffects.Whispered))
+			if (!player.hasStatusEffect(StatusEffects.Whispered))
 			{
 				outputText("You hear whispering in your head. Akbal begins speaking to you as he circles you, telling all the ways he'll dominate you once he beats the fight out of you.", false);
 				//(Lust increase)
 				game.dynStats("lus", 7 + (100 - player.inte) / 10);
-				player.createStatusAffect(StatusAffects.Whispered,0,0,0,0);
+				player.createStatusEffect(StatusEffects.Whispered,0,0,0,0);
 			}
 			//Continuous Lust Attack - 
 			else
@@ -110,10 +110,10 @@
 				outputText("Akbal's eyes fill with light, and a strange sense of fear begins to paralyze your limbs.", false);
 				//(Speed decrease)
 				game.dynStats("spe", speedChange);
-				if (player.hasStatusAffect(StatusAffects.AkbalSpeed))
-					player.addStatusValue(StatusAffects.AkbalSpeed, 1, speedChange);
+				if (player.hasStatusEffect(StatusEffects.AkbalSpeed))
+					player.addStatusValue(StatusEffects.AkbalSpeed, 1, speedChange);
 				else
-					player.createStatusAffect(StatusAffects.AkbalSpeed, speedChange, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.AkbalSpeed, speedChange, 0, 0, 0);
 			}
 			//*Special Attack B - 
 			else
@@ -146,8 +146,8 @@
 					game.combatRoundOver();
 					return;
 				}
-				if (player.hasStatusAffect(StatusAffects.Blizzard)) {
-					player.addStatusValue(StatusAffects.Blizzard, 1, -1);
+				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
+					player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 					var damage2:int = inte / 5;
 					if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage2 *= 3;
 					if (player.findPerk(PerkLib.FireAffinity) >= 0) damage2 *= 0.3;

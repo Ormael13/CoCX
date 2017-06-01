@@ -20,18 +20,18 @@ package classes.Scenes.Monsters
 			//Makes sure to not stack spell effects.
 			if (lust < 50) spellChooser = rand(3);
 			if (lust > 75) spellChooser = rand(3) + 3;
-			if (spellChooser == 0 && hasStatusAffect(StatusAffects.ChargeWeapon)) {
+			if (spellChooser == 0 && hasStatusEffect(StatusEffects.ChargeWeapon)) {
 				spellChooser = rand(5) + 1;
 			}
-			if (spellChooser == 5 && hasStatusAffect(StatusAffects.Might)) {
+			if (spellChooser == 5 && hasStatusEffect(StatusEffects.Might)) {
 				spellChooser = rand(5);
-				if (spellChooser == 0 && hasStatusAffect(StatusAffects.ChargeWeapon)) spellChooser++;
+				if (spellChooser == 0 && hasStatusEffect(StatusEffects.ChargeWeapon)) spellChooser++;
 			}
 			//Spell time!
 			//Charge Weapon
 			if (spellChooser == 0 && fatigue <= (eMaxFatigue() - spellCostCharge)) {
 				outputText("The imp utters word of power, summoning an electrical charge around his scimitar. <b>It looks like he'll deal more physical damage now!</b>");
-				createStatusAffect(StatusAffects.ChargeWeapon, 25, 0, 0, 0);
+				createStatusEffect(StatusEffects.ChargeWeapon, 25, 0, 0, 0);
 				this.weaponAttack += 25;
 				fatigue += spellCostCharge;
 			}
@@ -40,7 +40,7 @@ package classes.Scenes.Monsters
 				outputText("The imp glares at you and points at you! A bright flash erupts before you!  ");
 				if (player.findPerk(PerkLib.GorgonsEyes) < 0 && rand(player.inte / 5) <= 4) {
 					outputText("<b>You are blinded!</b>");
-					player.createStatusAffect(StatusAffects.Blind, 1 + rand(3), 0, 0, 0);
+					player.createStatusEffect(StatusEffects.Blind, 1 + rand(3), 0, 0, 0);
 				}
 				else if (player.findPerk(PerkLib.GorgonsEyes) >= 0) {
 					outputText("Your mutated eyes not been affected at all by this flash!");
@@ -55,8 +55,8 @@ package classes.Scenes.Monsters
 				var damage:int = inte + rand(50);
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
-				if (player.hasStatusAffect(StatusAffects.Blizzard)) {
-				player.addStatusValue(StatusAffects.Blizzard, 1, -1);
+				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
+				player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 				outputText("The imp narrows his eyes and focuses his mind with deadly intent. He snaps his fingers and you are enveloped in a flash of white flames!  Thanks to surrounding you ice shards this attack isn't at it peak power!  ");
 				damage *= 0.2;
 				}
@@ -92,7 +92,7 @@ package classes.Scenes.Monsters
 			else if (spellChooser == 5 && fatigue <= (eMaxFatigue() - spellCostMight)) {
 				outputText("He flushes, drawing on his body's desires to empower his muscles and toughen his up.");
 				outputText("The rush of success and power flows through his body.  He feels like he can do anything!", false);
-				createStatusAffect(StatusAffects.Might, 20, 20, 0, 0);
+				createStatusEffect(StatusEffects.Might, 20, 20, 0, 0);
 				fatigue += spellCostMight;
 			}
 			combatRoundOver();
@@ -187,7 +187,7 @@ package classes.Scenes.Monsters
 				if (damage < 30) damage = 30; //Min-cap damage.
 				if (damage >= 50) {
 					outputText("You let out a cry in pain and you swear you could see your wounds bleeding. ");
-					player.createStatusAffect(StatusAffects.IzmaBleed, 2, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
 				}
 				else {
 					outputText("Thankfully the wounds aren't that serious. ");

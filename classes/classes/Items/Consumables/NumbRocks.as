@@ -2,7 +2,7 @@ package classes.Items.Consumables
 {
 	import classes.Items.Consumable;
 	import classes.PerkLib;
-	import classes.StatusAffects;
+	import classes.StatusEffects;
 	
 	/**
 	 * Lower lust significantly but has a chance of inducing the masturbation preventing effect from minotaur.
@@ -27,7 +27,7 @@ package classes.Items.Consumables
 				player.lust -= 20 + rand(40);
 			}
 			if (rand(5) == 0) {
-				if (!player.hasStatusAffect(StatusAffects.Dysfunction)) {
+				if (!player.hasStatusEffect(StatusEffects.Dysfunction)) {
 					outputText("\n\nUnfortunately, the skin of ");
 					if (player.cockTotal() > 0) {
 						outputText(player.sMultiCockDesc());
@@ -40,11 +40,11 @@ package classes.Items.Consumables
 					}
 					if (!(player.hasCock() || player.hasVagina())) outputText(player.assholeDescript() + " ");
 					outputText(" numbs up too.  You give yourself a gentle touch, but are quite disturbed when you realize you can barely feel it.  You can probably still fuck something to get off, but regular masturbation is out of the question...");
-					player.createStatusAffect(StatusAffects.Dysfunction, 50 + rand(100), 0, 0, 0);
+					player.createStatusEffect(StatusEffects.Dysfunction, 50 + rand(100), 0, 0, 0);
 				}
 				else {
 					outputText("\n\nSadly your groin becomes even more deadened to sensation.  You wonder how much longer you'll have to wait until you can please yourself again.");
-					player.addStatusValue(StatusAffects.Dysfunction, 1, 50 + rand(100));
+					player.addStatusValue(StatusEffects.Dysfunction, 1, 50 + rand(100));
 				}
 			}
 			else if (rand(4) == 0 && player.inte > 15) {

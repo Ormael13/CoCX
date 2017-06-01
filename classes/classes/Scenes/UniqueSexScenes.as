@@ -31,15 +31,15 @@ public function manticoreTailRapeScene():void
 	outputText("Soon, your cumpump face turns to a tormented expression as your tail forcefully milks him of all his cum, regularly injecting more aphrodisiac to make him orgasm and leak constantly like a hose. Ironically and against his better judgment the stimulation of your vaginal wall causes his body to buck up and down in your tail, only making him cum more. On your end, you taste every drop of cum he deposits inside just like you would with your mouth. Delighted by the sensations from your tail pussy, you feel like singing and to your surprise a series of moans that sound like a song come out from your mouth. Only once his balls have shrunk to the point they look like a pair of raisins do you let go of what's left of him.\n\n");
 	outputText("You lick your lips feeling like you just had a five course meal fit for a queen as you leave the body of your passed out opponent on the ground at the mercy of other potential sexual predators.");
 	if (player.findPerk(PerkLib.ManticoreMetabolism) >= 0) {
-		if (player.hasStatusAffect(StatusAffects.FeedingEuphoria)) {
-			if (player.statusAffectv2(StatusAffects.FeedingEuphoria) < 30) { //Maximum speed gain is 30.
-				player.addStatusValue(StatusAffects.FeedingEuphoria, 2, 10);
+		if (player.hasStatusEffect(StatusEffects.FeedingEuphoria)) {
+			if (player.statusEffectv2(StatusEffects.FeedingEuphoria) < 30) { //Maximum speed gain is 30.
+				player.addStatusValue(StatusEffects.FeedingEuphoria, 2, 10);
 				dynStats("spe", 10);
 			}
-			player.changeStatusValue(StatusAffects.FeedingEuphoria, 1, 10);
+			player.changeStatusValue(StatusEffects.FeedingEuphoria, 1, 10);
 		}
 		else {
-			player.createStatusAffect(StatusAffects.FeedingEuphoria, 10, 10, 0, 0);
+			player.createStatusEffect(StatusEffects.FeedingEuphoria, 10, 10, 0, 0);
 			dynStats("spe", 10);
 		}
 	}

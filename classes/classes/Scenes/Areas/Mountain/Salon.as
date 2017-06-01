@@ -36,13 +36,13 @@ public function hairDresser():void {
 	doYesNo(salonGreeting,camp.returnToCampUseOneHour);
 }
 public function salonGreeting():void{
-	if (player.hasStatusAffect(StatusAffects.HairdresserMeeting))
+	if (player.hasStatusEffect(StatusEffects.HairdresserMeeting))
 	{
 		hairDresserRepeatGreeting();
 	}
 	else
 	{
-		player.createStatusAffect(StatusAffects.HairdresserMeeting, 0, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.HairdresserMeeting, 0, 0, 0, 0);
 		hairDresserGreeting();
 	}
 }

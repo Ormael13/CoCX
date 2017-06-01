@@ -1480,85 +1480,85 @@ public function soularenaChallenge():void {
 
 public function dummygolem():void {
 	startCombat(new GolemDummy());
-	monster.createStatusAffect(StatusAffects.NoLoot, 0, 0, 0, 0);
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function improveddummygolem():void {
 	startCombat(new GolemDummyImproved());
-	monster.createStatusAffect(StatusAffects.NoLoot, 0, 0, 0, 0);
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function advanceddummygolem():void {
 	startCombat(new GolemDummyAdvanced());
-	monster.createStatusAffect(StatusAffects.NoLoot, 0, 0, 0, 0);
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function superiordummygolem():void {
 	startCombat(new GolemDummySuperior());
-	monster.createStatusAffect(StatusAffects.NoLoot, 0, 0, 0, 0);
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function basictruegolem():void {
 	startCombat(new GolemTrueBasic());
-	monster.createStatusAffect(StatusAffects.NoLoot, 0, 0, 0, 0);
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function improvedtruegolem():void {
 	startCombat(new GolemTrueImproved());
-	monster.createStatusAffect(StatusAffects.NoLoot, 0, 0, 0, 0);
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function advancedtruegolem():void {
 	startCombat(new GolemTrueAdvanced());
-	monster.createStatusAffect(StatusAffects.NoLoot, 0, 0, 0, 0);
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function dummygolems():void {
 	startCombat(new GolemsDummy());
-	monster.createStatusAffect(StatusAffects.NoLoot, 0, 0, 0, 0);
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function improveddummygolems():void {
 	startCombat(new GolemsDummyImproved());
-	monster.createStatusAffect(StatusAffects.NoLoot, 0, 0, 0, 0);
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function advanceddummygolems():void {
 	startCombat(new GolemsDummyAdvanced());
-	monster.createStatusAffect(StatusAffects.NoLoot, 0, 0, 0, 0);
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function superiordummygolems():void {
 	startCombat(new GolemsDummySuperior());
-	monster.createStatusAffect(StatusAffects.NoLoot, 0, 0, 0, 0);
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function basictruegolems():void {
 	startCombat(new GolemsTrueBasic());
-	monster.createStatusAffect(StatusAffects.NoLoot, 0, 0, 0, 0);
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function improvedtruegolems():void {
 	startCombat(new GolemsTrueImproved());
-	monster.createStatusAffect(StatusAffects.NoLoot, 0, 0, 0, 0);
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 
 public function advancedtruegolems():void {
 	startCombat(new GolemsTrueAdvanced());
-	monster.createStatusAffect(StatusAffects.NoLoot, 0, 0, 0, 0);
+	monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 	monster.XP = Math.round(monster.XP / 2);
 }
 

@@ -3,7 +3,7 @@ package classes.Scenes.Dungeons.D3
 	import classes.PerkLib;
 	import classes.Monster;
 	import classes.Appearance;
-	import classes.StatusAffects;
+	import classes.StatusEffects;
 	import classes.GlobalFlags.kGAMECLASS;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.CockTypesEnum;
@@ -70,7 +70,7 @@ package classes.Scenes.Dungeons.D3
 		// Gonna handle this a little differently than usual.
 		// This is one of the advantages of containing monster detail in this manner, and encapsulating the
 		// combat implemenation thereof with it- we can easily make use of the object to store things
-		// we would normally use StatusAffects for, in instances where the only thing that will care 
+		// we would normally use StatusEffects for, in instances where the only thing that will care
 		// about those Affects are the user/consumer of them.
 		
 		private var _usedGottaCum:Boolean = false;

@@ -1383,9 +1383,9 @@ private function tenderTakeItUpTheAssFromUrta():void {
 		}
 	}
 	//Butt Stretched used to determine how long since last enlargement
-	if(!player.hasStatusAffect(StatusAffects.ButtStretched)) player.createStatusAffect(StatusAffects.ButtStretched,0,0,0,0);
+	if(!player.hasStatusEffect(StatusEffects.ButtStretched)) player.createStatusEffect(StatusEffects.ButtStretched,0,0,0,0);
 	//Reset the timer on it to 0 when restretched.
-	else player.changeStatusValue(StatusAffects.ButtStretched,1,0);
+	else player.changeStatusValue(StatusEffects.ButtStretched,1,0);
 	if(player.totalCocks() > 0) {
 		outputText("  The bumps and veins keep rubbing against your prostate, and ", false);
 		if(cocks > 1) outputText("each of ", false);
@@ -1500,7 +1500,7 @@ private function comfortUrtaAfterTellinTruuf():void {
 	if(((player.isTaur() && player.totalCocks() > 0) ||
 		player.horseCocks() > 0 ||
 		(player.totalCocks() > 0 && player.cor > 50)) &&
-	  	player.statusAffectv1(StatusAffects.Edryn) >= 4)
+	   player.statusEffectv1(StatusEffects.Edryn) >= 4)
 		outputText("  Urta even suggests that the two of you take turns at Edryn sometime.", false);
 	//Slight love loss
 	urtaLove(-4);
@@ -3243,7 +3243,7 @@ private function urtaDiscussesEdrynRomance():void {
 			else outputText("her expression sobers when you make no response");
 			outputText(".");
 			//(If player can now sleep with Edryn for free:
-			if(player.statusAffectv1(StatusAffects.Edryn) >= 5) {
+			if(player.statusEffectv1(StatusEffects.Edryn) >= 5) {
 				outputText("  \"<i>Of course, you know that firsthand, don't you?</i>\" she grins.  \"<i>Did hearing that I was having sex with her make you curious about what it was like?");
 				//(If player has fathered at least 1 child on Edryn:
 				if(flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0) outputText("  Still, I can't believe you actually knocked her up - I had to pick my jaw up off the floor when she told me that the foal kicking inside her ballooning gut was yours.  I mean, those herbs are supposed to be foolproof...</i>\" She shakes her head, half in disbelief of your sheer virility, half in awe of it.");
@@ -3278,7 +3278,7 @@ private function urtaDiscussesEdrynRomance():void {
  			outputText("\n\nYou burst out laughing.  Urta simply slumps into her seat and stares fixedly at her drink, clearly sulking. You sling an arm around her shoulders and kiss her until she kisses you back, then apologize for teasing her like that.");
 			outputText("\"<i>Hmph!  So you should be!</i>\" Urta says, sticking her nose up in the air in an indignant huff... but she can't keep a straight face for more than a few moments.  \"<i>I still can't believe you took it so well when I told you - I really am a lucky girl to have someone like you, aren't I?</i>\" she says.");
 			//(If Edryn is doing the player for free:
-			if(player.statusAffectv1(StatusAffects.Edryn) >= 5) outputText("  \"<i>Though I have to admit I was still a little jealous when Edryn told me you were having sex with her too.  Still, I guess that's just another thing we have in common, yeah?  A mutual taste in sexy ladies.</i>\"  She laughs, and mockingly shapes her hands through the air as if caressing Edryn's sizable boobs.");
+			if(player.statusEffectv1(StatusEffects.Edryn) >= 5) outputText("  \"<i>Though I have to admit I was still a little jealous when Edryn told me you were having sex with her too.  Still, I guess that's just another thing we have in common, yeah?  A mutual taste in sexy ladies.</i>\"  She laughs, and mockingly shapes her hands through the air as if caressing Edryn's sizable boobs.");
 			//(If Edryn has had at least one baby:
 			if(flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] > 0) {
 				if(flags[kFLAGS.URTA_QUEST_STATUS] == 1) {

@@ -6,9 +6,9 @@ package classes.Scenes.Dungeons.DesertCave
 	public class SandWitchMob extends Monster
 	{
 		public function sandWitchMobAI():void {
-			if(!hasStatusAffect(StatusAffects.Sandstorm)) sandStormAttack();
+			if(!hasStatusEffect(StatusEffects.Sandstorm)) sandStormAttack();
 			else if(HPRatio() < .5) drankSomeMialk();
-			else if(hasStatusAffect(StatusAffects.Sandstorm) && rand(2) == 0 && !player.hasStatusAffect(StatusAffects.LustStones)) sandstonesAreCool();
+			else if(hasStatusEffect(StatusEffects.Sandstorm) && rand(2) == 0 && !player.hasStatusEffect(StatusEffects.LustStones)) sandstonesAreCool();
 			else if(rand(3) == 0) headbuttABitch();
 			else gangrush();
 		}
@@ -20,7 +20,7 @@ package classes.Scenes.Dungeons.DesertCave
 			outputText("The witches close ranks and advance with raised fists, intent on beating you into submission!\n");
 			//3-5 attacks.at half strength
 			str -= 10;
-			createStatusAffect(StatusAffects.Attacks,2 + rand(3),0,0,0);
+			createStatusEffect(StatusEffects.Attacks, 2 + rand(3),0,0,0);
 			eAttack();
 			str += 10;
 			
@@ -103,14 +103,14 @@ package classes.Scenes.Dungeons.DesertCave
 					bonus = 5;
 					
 				}
-				player.createStatusAffect(StatusAffects.LustStones,bonus,0,0,0);
+				player.createStatusEffect(StatusEffects.LustStones,bonus,0,0,0);
 				game.dynStats("lus", bonus * 2 + 5 + player.sens/7);
 			}
 			//[If attack misses]
 			else {
 				outputText("\nThe stones then make a ninety degree turn into the purple fire, and then nothing.  One sand-witch smacks another upside the head, yelling something about focusing.");
 			}
-			removeStatusAffect(StatusAffects.Sandstorm);
+			removeStatusEffect(StatusEffects.Sandstorm);
 			combatRoundOver();
 		}
 		
@@ -129,7 +129,7 @@ package classes.Scenes.Dungeons.DesertCave
 		//Creates a sandstorm that blinds the PC one out of every 3 rounds.  Used first turn. Deals light HP damage every turn.  Reduces breath attacks damage by 80%.  Makes bow miss 50% of the time.
 		public function sandStormAttack():void {
 			outputText("The witches link their hands together and begin to chant together, lifting their voices high as loose sand trickles in from every corner, every doorway, even the ceiling.  \"<i>Enevretni llahs tresed eht!</i>\"  Swirling around the chamber, a cloud of biting, stinging sand clouds your vision and bites into your skin.  It's going to keep blinding you and hurting you every round!");
-			createStatusAffect(StatusAffects.Sandstorm,0,0,0,0);
+			createStatusEffect(StatusEffects.Sandstorm,0,0,0,0);
 			combatRoundOver();
 		}
 		

@@ -17,14 +17,14 @@ package classes.Scenes.Places.Prison
 			outputText("(Placeholder)\"<i>Since you seem reluctant to accept what you are, I think it's time for a bit of a crash course. When you have shown you truly understand that your only value is as a source of pleasure and entertainment for others, I will give you a chance to apologize for your impertinance. Until then, you will remain hanging by your ass locked in my stockades, and you will <b>learn</b> from it. And then, if I feel like it, you will hang there some more for no other reason than because it gives <b>me</b> pleasure to see squirm. And you will learn from that, too.</i>\"",false);
 			
 			// dont really know what this does 
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,3,12 + rand(4));
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,4,0);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3, 12 + rand(4));
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,4,0);
 			
 			// Add Restriants
-			player.changeStatusValue(StatusAffects.PrisonRestraints,1,0);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,2,0);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,3,1);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,4,4);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,1,0);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,2,0);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,3,1);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,4,4);
 			
 			//Add a flag indicating the player is in the stockades
 			flags[kFLAGS.PRISON_PUNISHMENT] = 1;
@@ -57,14 +57,14 @@ package classes.Scenes.Places.Prison
 			{
 				case 0:
 					outputText("(Placeholder) A passing guard sees your predicament, and decides to \"help\" by feeding you his cock. With your head securely clamped in the stocks and the ring gag holding your mouth wide open, all you can do is drool and look up plaintively as he stuffs your throat, and leaves you with a stomach full of sperm.",false);
-					player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,4,player.statusAffectv4(StatusAffects.PrisonCaptorEllyStatus) + 1);
+					player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,4, player.statusEffectv4(StatusEffects.PrisonCaptorEllyStatus) + 1);
 					player.slimeFeed();
 					player.refillHunger(15);
 					prison.changeEsteem(-1,prison.inPrison);
 					break;
 				case 1:
 					outputText("(Placeholder) A passing guard sees your predicament, and decides to \"help\" by feeding you his cock. With your head securely clamped in the stocks and the ring gag holding your mouth wide open, all you can do is drool and look up plaintively as he stuffs your throat. However, at the last moment he says that the " + prison.prisonCaptor.captorTitle + " probably wouldn't be happy if he provided you with extra \"nutrition\" right now, so instead he pulls out of your mouth and coats your [face] instead. He cums for what seems like minutes, not only covering your face in a thick layer of jizz but soaking your " + hairDescript() + " as well. He leaves you to drown in your humiliation while spunk drips from your chin, slides down your neck, and dries into a sticky crust in your hair and on your face.",false);
-					player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,4,player.statusAffectv4(StatusAffects.PrisonCaptorEllyStatus) + 1);
+					player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,4, player.statusEffectv4(StatusEffects.PrisonCaptorEllyStatus) + 1);
 					prison.changeEsteem(-5,prison.inPrison);
 					prison.changeObey(0.5,prison.inPrison);
 					break;
@@ -89,7 +89,7 @@ package classes.Scenes.Places.Prison
 						player.buttChange(20,true,true,false);
 					}
 					outputText("\n\n");
-					player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,4,player.statusAffectv4(StatusAffects.PrisonCaptorEllyStatus) + 2);
+					player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,4, player.statusEffectv4(StatusEffects.PrisonCaptorEllyStatus) + 2);
 					player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 					player.slimeFeed();
 					player.refillHunger(25);
@@ -113,10 +113,10 @@ package classes.Scenes.Places.Prison
 			var rejectEvent:Function = null;
 			
 			//Check to see if the player is ready to be released
-			if(player.statusAffectv4(StatusAffects.PrisonCaptorEllyStatus) < 2 + rand(5))
+			if(player.statusEffectv4(StatusEffects.PrisonCaptorEllyStatus) < 2 + rand(5))
 			{
 				outputText("(Placeholder) Your " + prison.prisonCaptor.captorTitle + " enters and briefly considers giving you a chance to beg for your release, but decides against it. \"<i>Before I can consider letting you apologize for your behavior, you need to try harder to atone for your actions and learn your place. If you truly want to be released from these stocks, suck a few more cocks and be ready to be truly penitent when I return.</i>\"",false);
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,3,8 + rand(4));
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3, 8 + rand(4));
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
@@ -159,7 +159,7 @@ package classes.Scenes.Places.Prison
 				return;
 			}
 			outputText("(Placeholder) You refuse your " + prison.prisonCaptor.captorTitle + "'s terms, and thus must endure more time in the stockades.",false);
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,3,12 + rand(4));
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3, 12 + rand(4));
 			prison.changeEsteem(10,prison.inPrison);
 			prison.changeObey(-2.5,prison.inPrison);
 			prison.changeWill(-prison.prisonWillCost(15));
@@ -186,7 +186,7 @@ package classes.Scenes.Places.Prison
 			if(rand(4) == 1)
 			{
 				outputText("\n\n(Placeholder) Your " + prison.prisonCaptor.captorTitle + " isn't satisfied that you've learned your lesson, and decides to leave you in the stockades a bit longer. ",false);
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,3,2 + rand(4));
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3, 2 + rand(4));
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
@@ -209,10 +209,10 @@ package classes.Scenes.Places.Prison
 			prison.prisonCaptor.updateNextRoomRandomEvent(model.time.hours, model.time.days);
 			
 			//Remove Restraints 
-			player.changeStatusValue(StatusAffects.PrisonRestraints,1,2);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,2,1);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,3,1);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,4,4);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,1,2);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,2,1);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,3,1);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,4,4);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -258,12 +258,12 @@ package classes.Scenes.Places.Prison
 				outputText(" and " + vaginaDescript(),false);
 			}
 			outputText(". And with you properly strapped into the hellish box, " + prison.prisonCaptor.captorTitle + " " + prison.prisonCaptor.captorName + " shoves a penis gag down your throat, straps it in place, and closes the stone door without another word. You are left in complete darkness and silence with nothing to keep you company but your panicked thoughts and the ravenous shafts between your legs.",false);
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,3,12 + rand(4));
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,4,0.5 + rand(2));
-			player.changeStatusValue(StatusAffects.PrisonRestraints,1,2);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,2,0);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,3,2);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,4,3);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3, 12 + rand(4));
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,4, 0.5 + rand(2));
+			player.changeStatusValue(StatusEffects.PrisonRestraints,1,2);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,2,0);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,3,2);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,4,3);
 			flags[kFLAGS.PRISON_PUNISHMENT] = 2;
 			doNext(playerMenu);
 		}
@@ -273,7 +273,7 @@ package classes.Scenes.Places.Prison
 			clearOutput();
 			var newVal:Number = 0;
 			outputText("(Placeholder) You try to save some dignity by standing up off the dildos beneath you. ",false);
-			newVal = player.statusAffectv4(StatusAffects.PrisonCaptorEllyStatus) - rand(3) - 2;
+			newVal = player.statusEffectv4(StatusEffects.PrisonCaptorEllyStatus) - rand(3) - 2;
 			if(newVal < 0)
 			{
 				newVal = 0.5;
@@ -282,7 +282,7 @@ package classes.Scenes.Places.Prison
 			{
 				newVal = 20;
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,4,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,4,newVal);
 			prisonCaptorPunishmentConfinementDescribeStatus();
 			if(player.hasVagina())
 			{
@@ -306,7 +306,7 @@ package classes.Scenes.Places.Prison
 		{
 			clearOutput();
 			var newVal:Number = 0;
-			newVal = player.statusAffectv4(StatusAffects.PrisonCaptorEllyStatus) + rand(4) + 1;
+			newVal = player.statusEffectv4(StatusEffects.PrisonCaptorEllyStatus) + rand(4) + 1;
 			if(newVal < 0)
 			{
 				newVal = 0.5;
@@ -315,7 +315,7 @@ package classes.Scenes.Places.Prison
 			{
 				newVal = 20;
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,4,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,4,newVal);
 			prisonCaptorPunishmentConfinementDescribeStatus();
 			if(player.hasVagina())
 			{
@@ -338,7 +338,7 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorPunishmentConfinementDescribeStatus(verbose:Boolean = false):void
 		{
 			var statusVal:Number = 0;
-			statusVal = player.statusAffectv4(StatusAffects.PrisonCaptorEllyStatus);
+			statusVal = player.statusEffectv4(StatusEffects.PrisonCaptorEllyStatus);
 			if(statusVal <= 1)
 			{
 				outputText("There is now less than an inch of dildo wriggling around inside your " + assholeDescript(),false);
@@ -402,12 +402,12 @@ package classes.Scenes.Places.Prison
 		{
 			var newVal:Number = 0;
 			outputText("(Placeholder) Overcome with lust, you masturbate on the dildos beneath you. You are filled with shame for letting the device get the better of you, and the sheer helplessness of your situation overwhelms you, damaging your will to resist your " + prison.prisonCaptor.captorTitle + ".",false);
-			newVal = player.statusAffectv4(StatusAffects.PrisonCaptorEllyStatus) + 4.5;
+			newVal = player.statusEffectv4(StatusEffects.PrisonCaptorEllyStatus) + 4.5;
 			if(newVal > 20)
 			{
 				newVal = 20;
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,4,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,4,newVal);
 			if(player.hasVagina())
 			{
 				player.cuntChange(1.7 * newVal,true,true,false);
@@ -463,7 +463,7 @@ package classes.Scenes.Places.Prison
 				return;
 			}
 			outputText("(Placeholder) You refuse your " + prison.prisonCaptor.captorTitle + "'s terms, and thus must endure more time in the stone box.",false);
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,3,12 + rand(4));
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3, 12 + rand(4));
 			prison.changeEsteem(10,prison.inPrison);
 			prison.changeObey(-2.5,prison.inPrison);
 			prison.changeWill(-prison.prisonWillCost(15));
@@ -488,7 +488,7 @@ package classes.Scenes.Places.Prison
 			if(rand(4) == 1)
 			{
 				outputText("\n\n(Placeholder) Your " + prison.prisonCaptor.captorTitle + " isn't satisfied that you've learned your lesson, and decides to leave you in the confinement box a bit longer. ",false);
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,3,2 + rand(4));
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3, 2 + rand(4));
 				doNext(playerMenu);
 				return;
 			}
@@ -500,10 +500,10 @@ package classes.Scenes.Places.Prison
 			outputText("\n\n(Placeholder) In exchange, you are released from the confinement box. Apology or not, you are left bound and gagged, but for the time being you are just happy to be free of the darkness and unending physical stress of the box.",false);
 			prison.prisonCaptor.updateNextWaitRandomEvent(model.time.hours, model.time.days);
 			prison.prisonCaptor.updateNextRoomRandomEvent(model.time.hours, model.time.days);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,1,2);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,2,1);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,3,2);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,4,3);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,1,2);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,2,1);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,3,2);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,4,3);
 			flags[kFLAGS.PRISON_PUNISHMENT] = 0;
 			doNext(playerMenu);
 		}
@@ -547,12 +547,12 @@ package classes.Scenes.Places.Prison
 			outputText("Your eyes follow the tube across the room to the larger container, which " + prison.prisonCaptor.captorPronoun1 + " has had the imps set up about six feet away from the basin with the keys inside. The cask seems to have no obvious opening on top, but where the tube connects to the container there is a complicated valve with, unsurprisingly, a large, thick dildo attached. You notice that in addition to an opening at the tip, about six or seven inches down the shaft of the dildo there are a series of holes spread around the girthy circumfrence of the thing. You realize that sucking only on the head of the cock will do nothing thanks to those holes -- you will have to swallow the shaft to the point where the holes are all inside your mouth if you want anything to come of your efforts. You are starting to get a good idea of what you are meant to do with this contraption, but " + prison.prisonCaptor.captorTitle + " " + prison.prisonCaptor.captorName + " wants to be sure you fully understand and spells it out for you.\n\n",false);
 			outputText("\"<i>Form a good seal around the holes on this dick and suck hard, and the fluid you need will come out. Suck enough fluid through that valve, and the pressure generated will cause the pneumatic tube to open the lid to the basin giving you a few moments to deliver the fluid in your mouth to the basin. Do be careful not to waste the opportunity; it takes quite a while for my men to fill one of these casks with cum so you won't get another chance any time soon. Repeat this process until the basin is full, and you earn your freedom. Simple, yes?</i>\" As " + prison.prisonCaptor.captorPronoun1 + " continues speaking, she binds your arms behind your back and hobbles your legs.\n\n ",false);
 			outputText("\"<i>A small extra degree of difficulty. I do want you to feel like you've really earned it, after all. But don't worry, you'll have plenty of time to work at it. Ten hours should suffice, I think. Maybe even a little more if I feel generous. In any case, it will be more than enough time for a person who truly craves freedom to fill the basin and get the keys. But as I said, deep down you don't want freedom. Deep down you love being nothing more than a piece of flesh here to entertain me. I have no doubt that you will spend the next half a day sucking on that dildo and crawling back and forth to that basin with your mouth full of jizz, ostensibly to reach those keys. But really, you will be doing it because you enjoy the abject humiliation of the act. And that, ultimately, will be the lesson you learn today.</i>\" And with that " + prison.prisonCaptor.captorPronoun1 + " leaves you alone in your cell once again.\n\n ",false);
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,3,10 + rand(3));
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,4,0);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,1,1);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,2,2);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,3,2);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,4,0);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3, 10 + rand(3));
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,4,0);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,1,1);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,2,2);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,3,2);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,4,0);
 			flags[kFLAGS.PRISON_PUNISHMENT] = 3;
 			doNext(playerMenu);
 		}
@@ -562,13 +562,13 @@ package classes.Scenes.Places.Prison
 			clearOutput();
 			var fillVal:int = 0;
 			var selector:int = 0;
-			if(player.statusAffectv4(StatusAffects.PrisonRestraints) > 0 && !(player.statusAffectv4(StatusAffects.PrisonRestraints) == 4))
+			if(player.statusEffectv4(StatusEffects.PrisonRestraints) > 0 && !(player.statusEffectv4(StatusEffects.PrisonRestraints) == 4))
 			{
 				outputText("Because of the way your mouth is gagged you are unable to suck on the dildo. You are consumed by the thought that the next time you are given the chance to earn your freedom this way, it might be wise to avoid doing things that would earn you a gag.",true);
 				doNext(playerMenu);
 				return;
 			}
-			if(player.statusAffectv2(StatusAffects.PrisonRestraints) > 1)
+			if(player.statusEffectv2(StatusEffects.PrisonRestraints) > 1)
 			{
 				outputText("(Placeholder) You squirm your way over to the cask, prop yourself up on your knees, ",false);
 			}
@@ -585,10 +585,10 @@ package classes.Scenes.Places.Prison
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
-			fillVal = player.statusAffectv4(StatusAffects.PrisonCaptorEllyStatus) + 5 + rand(10);
+			fillVal = player.statusEffectv4(StatusEffects.PrisonCaptorEllyStatus) + 5 + rand(10);
 			outputText("You slavishly struggle to cram the simulated cock into your throat, and eventually manage to swallow enough to form a proper seal around the holes that dot the shaft about seven inches down. You then begin to pump away, and before long a steady stream of cum begins pouring through the thing. With the hole at the tip of the cock so far down your throat the majority of it flows directly into your stomach. Nevertheless, your mouth is full to bursting with spunk several minutes later when you finally hear a loud click from the valve at the base of the dildo, followed by the sound of the basin's lid clanging open from the pressure you've induced on the pneumatic tube. \n\n",false);
 			outputText("As quick as you can you extract the dong from your gullet, ",false);
-			if(player.statusAffectv2(StatusAffects.PrisonRestraints) > 1)
+			if(player.statusEffectv2(StatusEffects.PrisonRestraints) > 1)
 			{
 				outputText("wriggle your way across the six feet between you and the basin, ",false);
 			}
@@ -639,14 +639,14 @@ package classes.Scenes.Places.Prison
 			prison.changeObey(0.5,prison.inPrison);
 			prison.changeEsteem(-0.5,prison.inPrison);
 			player.refillHunger(5);
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,4,fillVal);
-			if(player.statusAffectv4(StatusAffects.PrisonCaptorEllyStatus) > 100)
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,4,fillVal);
+			if(player.statusEffectv4(StatusEffects.PrisonCaptorEllyStatus) > 100)
 			{
 				outputText("\n\n(Placeholder) The basin is now full enough that you can see the keys bobbing around in the vat of cum above the narrow neck. You quickly scramble around to reach your hands inside, and pull the keys free. Elated and triumphant, you hastily remove your bindings and unlock the door, then consider what to do next.",false);
-				player.changeStatusValue(StatusAffects.PrisonRestraints,1,0);
-				player.changeStatusValue(StatusAffects.PrisonRestraints,2,0);
-				player.changeStatusValue(StatusAffects.PrisonRestraints,3,0);
-				player.changeStatusValue(StatusAffects.PrisonRestraints,4,0);
+				player.changeStatusValue(StatusEffects.PrisonRestraints,1,0);
+				player.changeStatusValue(StatusEffects.PrisonRestraints,2,0);
+				player.changeStatusValue(StatusEffects.PrisonRestraints,3,0);
+				player.changeStatusValue(StatusEffects.PrisonRestraints,4,0);
 				flags[kFLAGS.PRISON_PUNISHMENT] = 0;
 				flags[kFLAGS.PRISON_DOOR_UNLOCKED] = 1;
 				prison.changeEsteem(10,prison.inPrison);
@@ -661,7 +661,7 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorPunishmentBJTrainerDescribeStatus(verbose:Boolean = false):void
 		{
 			var statusVal:int = 0;
-			statusVal = player.statusAffectv4(StatusAffects.PrisonCaptorEllyStatus);
+			statusVal = player.statusEffectv4(StatusEffects.PrisonCaptorEllyStatus);
 			outputText("The basin containing the keys is ",false);
 			if(statusVal <= 10)
 			{

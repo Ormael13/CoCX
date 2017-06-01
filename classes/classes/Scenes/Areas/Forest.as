@@ -40,10 +40,10 @@ package classes.Scenes.Areas
 			return player.exploredForest;
 		}
 		public function deepwoodsDiscovered():Boolean {
-			return player.hasStatusAffect(StatusAffects.ExploredDeepwoods);
+			return player.hasStatusEffect(StatusEffects.ExploredDeepwoods);
 		}
 		public function timesExploredDeepwoods():int {
-			return player.statusAffectv1(StatusAffects.ExploredDeepwoods);
+			return player.statusEffectv1(StatusEffects.ExploredDeepwoods);
 		}
 
 		private function deepwoodsWalkFn():void {
@@ -83,7 +83,7 @@ package classes.Scenes.Areas
 						name  : "deepwoods",
 						call  : discoverDeepwoods,
 						when  : function ():Boolean {
-							return (player.exploredForest >= 20) && !player.hasStatusAffect(StatusAffects.ExploredDeepwoods);
+							return (player.exploredForest >= 20) && !player.hasStatusEffect(StatusEffects.ExploredDeepwoods);
 						},
 						chance: Encounters.ALWAYS
 					},  {
@@ -106,7 +106,7 @@ package classes.Scenes.Areas
 					}, {
 						name  : "Jojo",
 						when  : function ():Boolean {
-							return !player.hasStatusAffect(StatusAffects.PureCampJojo)
+							return !player.hasStatusEffect(StatusEffects.PureCampJojo)
 								   && !camp.campCorruptJojo()
 								   && flags[kFLAGS.JOJO_DEAD_OR_GONE] <= 0
 								   && (kGAMECLASS.monk < 2 || rand(2) == 0);
@@ -162,9 +162,9 @@ package classes.Scenes.Areas
 						when  : function ():Boolean {
 							//can be triggered one time after Marble has been met, but before the addiction quest starts.
 							return player.exploredForest > 0
-								   && !player.hasStatusAffect(StatusAffects.MarbleRapeAttempted)
-								   && !player.hasStatusAffect(StatusAffects.NoMoreMarble)
-								   && player.hasStatusAffect(StatusAffects.Marble)
+								   && !player.hasStatusEffect(StatusEffects.MarbleRapeAttempted)
+								   && !player.hasStatusEffect(StatusEffects.NoMoreMarble)
+								   && player.hasStatusEffect(StatusEffects.Marble)
 								   && flags[kFLAGS.MARBLE_WARNING] == 0;
 						},
 						chance: 0.05
@@ -589,7 +589,7 @@ package classes.Scenes.Areas
 		}
 		private function jojoEncounter():void {
 			clearOutput();
-			if (kGAMECLASS.monk == 0 && !player.hasStatusAffect(StatusAffects.PureCampJojo)) {
+			if (kGAMECLASS.monk == 0 && !player.hasStatusEffect(StatusEffects.PureCampJojo)) {
 				if (player.cor < 25) {
 					kGAMECLASS.monk = 1;
 					kGAMECLASS.jojoScene.lowCorruptionJojoEncounter();
@@ -629,7 +629,7 @@ package classes.Scenes.Areas
 			}
 		}
 		public function discoverDeepwoods():void {
-			player.createStatusAffect(StatusAffects.ExploredDeepwoods, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.ExploredDeepwoods, 0, 0, 0, 0);
 			outputText("After exploring the forest so many times, you decide to really push it, and plunge deeper and deeper into the woods.  The further you go the darker it gets, but you courageously press on.  The plant-life changes too, and you spot more and more lichens and fungi, many of which are luminescent.  Finally, a wall of tree-trunks as wide as houses blocks your progress.  There is a knot-hole like opening in the center, and a small sign marking it as the entrance to the 'Deepwoods'.  You don't press on for now, but you could easily find your way back to explore the Deepwoods.\n\n<b>Deepwoods exploration unlocked!</b>", true);
 			doNext(camp.returnToCampUseOneHour);
 		}

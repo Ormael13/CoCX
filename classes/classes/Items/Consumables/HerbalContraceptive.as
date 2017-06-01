@@ -2,7 +2,7 @@ package classes.Items.Consumables
 {
 	import classes.Items.Consumable;
 	import classes.Items.ConsumableLib;
-	import classes.StatusAffects;
+	import classes.StatusEffects;
 	
 	public class HerbalContraceptive extends Consumable 
 	{
@@ -18,7 +18,7 @@ package classes.Items.Consumables
 			// Placeholder, sue me
 			outputText("You chew on the frankly awfully bitter leaves as quickly as possible before swallowing them down.");
 
-			player.createStatusAffect(StatusAffects.Contraceptives, 1, 48, 0, 0);
+			player.createStatusEffect(StatusEffects.Contraceptives, 1, 48, 0, 0);
 			
 			return false;
 		}

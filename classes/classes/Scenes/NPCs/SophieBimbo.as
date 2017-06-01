@@ -147,7 +147,7 @@ private function acceptBimboSophie():void {
 	
 	outputText("You sigh and show the bimbo around.  She seems extremely pleased by the arrangements, and once the tour is complete, she prances off to touch up her make-up, though you see her masturbating the whole time.", false);
 	
-	if (player.hasStatusAffect(StatusAffects.CampRathazul))
+	if (player.hasStatusEffect(StatusEffects.CampRathazul))
 	{
 		outputText("  Afterwards, she offers to suck Rathazul's cock.  The old rat looked about ready to have a heart attack, but he managed to decline her offer with some amount of dignity, after a few moments of stammering.", false);
 	}
@@ -161,11 +161,11 @@ private function acceptBimboSophie():void {
 		if(flags[kFLAGS.AMILY_FOLLOWER] == 1) outputText("flushes hotly and denies the bimbo's request with a terse 'no'.", false);
 		else outputText("flushes hotly and wiggles her hips Sophie's way.  The slutty, corrupted mouse and Sophie will clearly be helping to sate each other's needs in your absence.", false);
 	}
-	else if (monk >= 5 && !player.hasStatusAffect(StatusAffects.NoJojo) && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0)
+	else if (monk >= 5 && !player.hasStatusEffect(StatusEffects.NoJojo) && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0)
 	{
 		outputText("  Afterwards, she offers to suck Jojo's cock.  The corrupted slut-mouse nods and stiffens in delight, though he keeps glancing back your way.  Those two will probably spend a lot of time together...", false);
 	}
-	else if (player.hasStatusAffect(StatusAffects.PureCampJojo))
+	else if (player.hasStatusEffect(StatusEffects.PureCampJojo))
 	{
 		outputText("  Afterwards, she offers to suck Jojo's cock.  The chaste mouse's jaw drops, but when he picks it up, he answers, \"<i>Never.  My body is as pure as my soul!</i>\"", false);
 	}

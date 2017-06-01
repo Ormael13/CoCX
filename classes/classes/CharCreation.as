@@ -310,13 +310,13 @@
 			
 			//Clear Statuses
 			var statusTemp:Array = [];
-			for (var i:int = 0; i < player.statusAffects.length; i++) {
-				if (isSpell(player.statusAffects[i].stype)) statusTemp.push(player.statusAffects[i]);
+			for (var i:int = 0; i < player.statusEffects.length; i++) {
+				if (isSpell(player.statusEffects[i].stype)) statusTemp.push(player.statusEffects[i]);
 			}
 			player.removeStatuses();
 			if (statusTemp.length > 0) {
 				for (i = 0; i < statusTemp.length; i++) {
-					player.createStatusAffect(statusTemp[i].stype, statusTemp[i].value1, statusTemp[i].value2, statusTemp[i].value3, statusTemp[i].value4);
+					player.createStatusEffect(statusTemp[i].stype, statusTemp[i].value1, statusTemp[i].value2, statusTemp[i].value3, statusTemp[i].value4);
 				}
 			}
 			//Clear perks
@@ -1973,7 +1973,7 @@
 		}
 
 		private function isSpell(statusEffect:* = null):Boolean {	
-			return (statusEffect == StatusAffects.KnowsWereBeast);	//na razie jest tu tylko werebeast
+			return (statusEffect == StatusEffects.KnowsWereBeast);	//na razie jest tu tylko werebeast
 		}	//ale potem zamienić to naspecialne soulskills z każdego z klanów
 	}
 }

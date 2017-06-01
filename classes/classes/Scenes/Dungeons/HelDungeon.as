@@ -125,7 +125,7 @@ package classes.Scenes.Dungeons
 			outputText("\n\nResigned to your fate, you curl up with Helia; who throws her cloak over the two of you.");
 			
 			//[If Marble is in camp:]
-			if(player.hasStatusAffect(StatusAffects.CampMarble) && silly()) {
+			if(player.hasStatusEffect(StatusEffects.CampMarble) && silly()) {
 				outputText("\n\nJust as you and Hel start to get intimate, you hear a familiar clopping of hooves. You poke your head out of the blanket, rather alarmed to see Marble standing over you.");
 				outputText("\n\n\"<i>S-Sweetie?</i>\" Marble says, aghast at Hel's presence in your arms.  \"<i>What... just what do you think you're doing!?</i>\"");
 				outputText("\n\nThis could be ba--");
@@ -845,7 +845,7 @@ package classes.Scenes.Dungeons
 			//v1 = egg type.
 			//v2 = size - 0 for normal, 1 for large
 			//v3 = quantity
-			player.createStatusAffect(StatusAffects.Eggs,rand(6),0,(5+rand(3)),0);
+			player.createStatusEffect(StatusEffects.Eggs,rand(6),0,(5 + rand(3)),0);
 			//(Return to Mezzanine main menu)
 			player.orgasm();
 			doNext(playerMenu);

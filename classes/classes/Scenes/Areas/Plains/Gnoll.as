@@ -18,7 +18,7 @@ package classes.Scenes.Areas.Plains
 			//return to combat menu when finished
 			doNext(game.playerMenu);
 			//Blind dodge change
-			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
+			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 			}
 			//Determine if dodged!
@@ -131,7 +131,7 @@ package classes.Scenes.Areas.Plains
 //return to combat menu when finished
 			doNext(game.playerMenu);
 //Blind dodge change
-			if (hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
+			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 			}
 			//Determine if dodged!
@@ -205,25 +205,25 @@ package classes.Scenes.Areas.Plains
 
 		override protected function performCombatAction():void
 		{
-			if (hasStatusAffect(StatusAffects.Stunned)) {
+			if (hasStatusEffect(StatusEffects.Stunned)) {
 				if (plural) outputText("Your foes are too dazed from your last hit to strike back!", false);
 				else outputText("Your foe is too dazed from your last hit to strike back!", false);
-				removeStatusAffect(StatusAffects.Stunned);
+				removeStatusEffect(StatusEffects.Stunned);
 				combatRoundOver();
 			}
-			if (hasStatusAffect(StatusAffects.Fear)) {
-				if (statusAffectv1(StatusAffects.Fear) == 0) {
+			if (hasStatusEffect(StatusEffects.Fear)) {
+				if (statusEffectv1(StatusEffects.Fear) == 0) {
 					if (plural) {
-						removeStatusAffect(StatusAffects.Fear);
+						removeStatusEffect(StatusEffects.Fear);
 						outputText("Your foes shake free of their fear and ready themselves for battle.", false);
 					}
 					else {
-						removeStatusAffect(StatusAffects.Fear);
+						removeStatusEffect(StatusEffects.Fear);
 						outputText("Your foe shakes free of its fear and readies itself for battle.", false);
 					}
 				}
 				else {
-					addStatusValue(StatusAffects.Fear, 1, -1);
+					addStatusValue(StatusEffects.Fear, 1, -1);
 					if (plural) outputText(capitalA + short + " are too busy shivering with fear to fight.", false);
 					else outputText(capitalA + short + " is too busy shivering with fear to fight.", false);
 				}
@@ -232,18 +232,18 @@ package classes.Scenes.Areas.Plains
 			var select:Number = 1;
 			var rando:Number = 1;
 //Exgartuan gets to do stuff!
-			if (player.hasStatusAffect(StatusAffects.Exgartuan) && player.statusAffectv2(StatusAffects.Exgartuan) == 0 && rand(3) == 0) {
+			if (player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
 				game.exgartuan.exgartuanCombatUpdate();
 				outputText("\n\n", false);
 			}
-			if (hasStatusAffect(StatusAffects.Constricted)) {
+			if (hasStatusEffect(StatusEffects.Constricted)) {
 				//Enemy struggles -
 				outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.", false);
-				if (statusAffectv1(StatusAffects.Constricted) <= 0) {
+				if (statusEffectv1(StatusEffects.Constricted) <= 0) {
 					outputText("  " + capitalA + short + " proves to be too much for your tail to handle, breaking free of your tightly bound coils.", false);
-					removeStatusAffect(StatusAffects.Constricted);
+					removeStatusEffect(StatusEffects.Constricted);
 				}
-				addStatusValue(StatusAffects.Constricted, 1, -1);
+				addStatusValue(StatusEffects.Constricted, 1, -1);
 				combatRoundOver();
 			}
 //If grappling...
@@ -270,7 +270,7 @@ package classes.Scenes.Areas.Plains
 //return to combat menu when finished
 				doNext(game.playerMenu);
 //Blind dodge change
-				if (hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
+				if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 					outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 				}
 				//Determine if dodged!
@@ -348,8 +348,8 @@ package classes.Scenes.Areas.Plains
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(hasStatusAffect(StatusAffects.PhyllaFight)) {
-				removeStatusAffect(StatusAffects.PhyllaFight);
+			if(hasStatusEffect(StatusEffects.PhyllaFight)) {
+				removeStatusEffect(StatusEffects.PhyllaFight);
 				game.desert.antsScene.phyllaPCBeatsGnoll();
 				return;
 			}
@@ -358,8 +358,8 @@ package classes.Scenes.Areas.Plains
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(hasStatusAffect(StatusAffects.PhyllaFight)) {
-				removeStatusAffect(StatusAffects.PhyllaFight);
+			if(hasStatusEffect(StatusEffects.PhyllaFight)) {
+				removeStatusEffect(StatusEffects.PhyllaFight);
 				game.desert.antsScene.phyllaGnollBeatsPC();
 			} else if(pcCameWorms) {
 				outputText("\n\nYour foe doesn't seem put off enough to leave...");
@@ -380,7 +380,7 @@ package classes.Scenes.Areas.Plains
 			createBreastRow(Appearance.breastCupInverse("C"));
 			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,25,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,25,0,0,0);
 			this.tallness = 6*12;
 			this.hipRating = HIP_RATING_AMPLE;
 			this.buttRating = BUTT_RATING_TIGHT;

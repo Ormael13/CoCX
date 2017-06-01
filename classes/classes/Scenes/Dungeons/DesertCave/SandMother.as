@@ -9,16 +9,16 @@ package classes.Scenes.Dungeons.DesertCave
 		//Starts combat with sandstorm.  GigaFire's every fifth round.
 		//Whispers every fourth.
 		public function sandWitchMotherAI():void {
-			if(!hasStatusAffect(StatusAffects.Sandstorm)) {
+			if(!hasStatusEffect(StatusEffects.Sandstorm)) {
 				sandStormAttack();
 				return;
 			}
-			if(hasStatusAffect(StatusAffects.Gigafire)) {
+			if(hasStatusEffect(StatusEffects.Gigafire)) {
 				gigaFire2();
 				return;
 			}
 			var choices:Array = [];
-			if(!player.hasStatusAffect(StatusAffects.Whispered)) choices[choices.length] = getWhispered;
+			if(!player.hasStatusEffect(StatusEffects.Whispered)) choices[choices.length] = getWhispered;
 			choices[choices.length] = eatALightningBolt;
 			choices[choices.length] = sandMotherTelekinesis;
 			choices[choices.length] = gigaFire;
@@ -29,7 +29,7 @@ package classes.Scenes.Dungeons.DesertCave
 		public function earthShield():void {
 			//Surrounds the witch a vortex of stones, raising her defense greatly and conferring 25% block to standard attacks.
 			outputText("Lowering her scepter towards the ground, the eight-foot tall sorceress suddenly grunts, lifting it as if carrying great weight.  As the small staff passes her chest, bits of stone and rock begin to lift out of the ground, accelerating into a vortex of earth that spins around her.  <b>It's going to be harder to hit her with physical attacks now!</b>");
-			createStatusAffect(StatusAffects.Earthshield,0,0,0,0);
+			createStatusEffect(StatusEffects.Earthshield,0,0,0,0);
 			combatRoundOver();
 		}
 		//*GigaFire
@@ -37,14 +37,14 @@ package classes.Scenes.Dungeons.DesertCave
 			//Begins focusing into her staff, which floats in front of her.  PC disrupt attack by attacking.  Attack hits at half strength if disrupted.
 			outputText("Releasing the scepter, the Sand Mother spreads her hands, each glowing with eldritch, white flames.  Her heels slowly float up off the ground as she closes her eyes in concentration.  You can sense the power and heat rolling off her in waves, and if you don't do something to disrupt her, you'll likely be burned to a crisp.");
 			if(player.inte > 40) outputText("  She's not even looking at you and seems steeled against lusty interruptions.  Perhaps you can hit her hard enough to shatter her concentration.");
-			createStatusAffect(StatusAffects.Gigafire,0,0,0,0);
+			createStatusEffect(StatusEffects.Gigafire,0,0,0,0);
 			combatRoundOver();
 		}
 		public function gigaFire2():void {
 			var damage:int = 40 + rand(11);
 			//Not interrupted:
-			if(statusAffectv1(StatusAffects.Gigafire) < 10) {
-				if (player.hasStatusAffect(StatusAffects.Blizzard)) {
+			if(statusEffectv1(StatusEffects.Gigafire) < 10) {
+				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 					outputText("The Sand Mother grabs her scepter in both hands, combining the flames that wreath them into an immense, blinding conflagration.  She points at you, and the fire washes out in a wave like a serpent, twisting at you as you try to avoid it, doubling back on itself whenever it misses.  It's unavoidable!  You're enveloped in the consuming fire that try to pierce surrounding you maelstorm of ice shards!");
 				}
 				else {
@@ -54,15 +54,15 @@ package classes.Scenes.Dungeons.DesertCave
 			}
 			//Interrupted:
 			else {
-				if (player.hasStatusAffect(StatusAffects.Blizzard)) {
+				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 					outputText("Thumbling back to the ground from your damaging hit, the Sand Mother grabs at her head, one flame going out.  She recovers in time to grab the staff and fling it towards you, but it's at a fraction of the strength she intended.  Still, it burns all the same. ");
 				}
 				else {
 					outputText("Thumbling back to the ground from your damaging hit, the Sand Mother grabs at her head, one flame going out.  She recovers in time to grab the staff and fling it towards you, but it's at a fraction of the strength she intended.  Still, it burns all the same. ");
 				}
 			}
-			if (player.hasStatusAffect(StatusAffects.Blizzard)) {
-				player.addStatusValue(StatusAffects.Blizzard, 1, -1);
+			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
+				player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 				damage *= 0.2;
 				damage = Math.round(damage);
 			}
@@ -70,7 +70,7 @@ package classes.Scenes.Dungeons.DesertCave
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 			damage = Math.round(damage);
 			damage = player.takeDamage(damage, true);
-			removeStatusAffect(StatusAffects.Gigafire);
+			removeStatusEffect(StatusEffects.Gigafire);
 			combatRoundOver();
 		}
 			
@@ -109,13 +109,13 @@ package classes.Scenes.Dungeons.DesertCave
 		//As ackbal, stuns the PC 1 round.  Cannot be resisted.
 		public function getWhispered():void {
 			outputText("Mouthing, \"<i>Can you hear me?</i>\" the witch's voice intrudes into your mind, matching her mouth word for word.  She floods your psyche with words and thoughts, all of your defeat or submission, each more degrading and more humiliating than the last.  Perhaps the worst are the ones where she turns you over to Lethice after you're broken...  The tumultous thoughts and emotions both stun and arouse you, preventing you from attacking while you try to clear your beleaguered consciousness.");
-			player.createStatusAffect(StatusAffects.Whispered,0,0,0,0);
+			player.createStatusEffect(StatusEffects.Whispered,0,0,0,0);
 			game.dynStats("lus", 15);
 			combatRoundOver();
 		}
 		public function sandStormAttack():void {
 			outputText("With a smirk, the Sand Mother decrees, \"<i>You fight not just me, but the shifting sands as well.</i>\"  She casually flicks her wrist, and sand rises up from the floors, the walls, everywhere really.  It begins to spin about, blown by an unseen wind, and the entire chamber is wreathed in a shifting sandstorm.  The grit constantly tries to get into your eyes.  It's likely you're going to be blinded by it every now and then.");
-			createStatusAffect(StatusAffects.Sandstorm,0,0,0,0);
+			createStatusEffect(StatusEffects.Sandstorm,0,0,0,0);
 			combatRoundOver();
 		}
 		
@@ -137,12 +137,12 @@ package classes.Scenes.Dungeons.DesertCave
 			this.long = "The Sand Mother is a towering woman of imposing stature and bust.  She wears a much silkier, regal-looking robe than her sisters, and it barely serves to contain her four milk-laden breasts, straining under their jiggling weight.  Dangling around her in a way that reminds you oddly of a halo, the Sand Mother's blonde-white hair fans around her, hanging long behind her.  The queen witch is brandishing a pearly white scepter rather threateningly, though from the way she holds it, it's clear she doesn't intend to use it as a physical weapon.";
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_WET, VAGINA_LOOSENESS_LOOSE);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 70, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 70, 0, 0, 0);
 			this.createBreastRow(Appearance.breastCupInverse("DD"));
 			this.createBreastRow(Appearance.breastCupInverse("DD"));
 			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_NORMAL;
-			this.createStatusAffect(StatusAffects.BonusACapacity,50,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,50,0,0,0);
 			this.tallness = 8*12+6;
 			this.hipRating = HIP_RATING_CURVY;
 			this.buttRating = BUTT_RATING_LARGE;

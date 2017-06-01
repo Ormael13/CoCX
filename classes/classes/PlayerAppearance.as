@@ -29,7 +29,7 @@ public class PlayerAppearance extends BaseContent {
 		describeLowerBody();
 
 		outputText("\n", false);
-	if (player.hasStatusAffect(StatusAffects.GooStuffed))
+	if (player.hasStatusEffect(StatusEffects.GooStuffed))
 
 	{
 		outputText("\n<b>Your gravid-looking belly is absolutely stuffed full of goo. There's no way you can get pregnant like this, but at the same time, you look like some fat-bellied breeder.</b>\n");
@@ -41,7 +41,7 @@ public class PlayerAppearance extends BaseContent {
 		{
 			outputText("<b>", false);
 			//Compute size
-			temp = player.statusAffectv3(StatusAffects.Eggs) + player.statusAffectv2(StatusAffects.Eggs) * 10;
+			temp = player.statusEffectv3(StatusEffects.Eggs) + player.statusEffectv2(StatusEffects.Eggs) * 10;
 			if(player.pregnancyIncubation <= 50 && player.pregnancyIncubation > 20)
 			{
 				outputText("Your swollen pregnant belly is as large as a ", false);
@@ -352,7 +352,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText("  It is quite a sight to behold, coming well-equiped with four heads.");
 		}
 		//Worm flavor
-		if(player.hasStatusAffect(StatusAffects.Infested))
+		if(player.hasStatusEffect(StatusEffects.Infested))
 			outputText("  Every now and again a slimy worm coated in spunk slips partway out of your " + player.cockDescript(0) + ", tasting the air like a snake's tongue.", false);
 		if(player.cocks[temp].sock)
 			sockDescript(temp);
@@ -523,14 +523,14 @@ public class PlayerAppearance extends BaseContent {
 			if(rando > 3) rando = 0;
 		}
 		//Worm flavor
-		if(player.hasStatusAffect(StatusAffects.Infested))
+		if(player.hasStatusEffect(StatusEffects.Infested))
 			outputText("Every now and again slimy worms coated in spunk slip partway out of your " + player.multiCockDescriptLight() + ", tasting the air like tongues of snakes.\n", false);
 		//DONE WITH COCKS, moving on!
 	}
 	//Of Balls and Sacks!
 	if(player.balls > 0)
 	{
-		if(player.hasStatusAffect(StatusAffects.Uniball))
+		if(player.hasStatusEffect(StatusEffects.Uniball))
 		{
 			if(player.skinType != SKIN_TYPE_GOO)
 				outputText("Your [sack] clings tightly to your groin, holding " + ballsDescript() + " snugly against you.");

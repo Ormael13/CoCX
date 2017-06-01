@@ -5,11 +5,11 @@ package classes
 {
 	import flash.utils.Dictionary;
 
-	public class StatusAffectType
+	public class StatusEffectType
 	{
 			private static var STATUSAFFECT_LIBRARY:Dictionary = new Dictionary();
 
-			public static function lookupStatusAffect(id:String):StatusAffectType{
+			public static function lookupStatusAffect(id:String):StatusEffectType{
 				return STATUSAFFECT_LIBRARY[id];
 			}
 
@@ -28,7 +28,7 @@ package classes
 				return _id;
 			}
 
-			public function StatusAffectType(id:String)
+			public function StatusEffectType(id:String)
 			{
 				this._id = id;
 				if (STATUSAFFECT_LIBRARY[id] != null) {

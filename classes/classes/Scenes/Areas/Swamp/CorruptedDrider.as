@@ -16,7 +16,7 @@ package classes.Scenes.Areas.Swamp
 			var temp:int;
 			outputText("The corrupted drider closes in on your web-bound form, cooing happily at you while you struggle with the sticky fibers.\n\n", false);
 			//Blind dodge change
-			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 2) {
+			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText("She's too blind to get anywhere near you.\n", false);
 			}
 			//Dodge
@@ -56,7 +56,7 @@ package classes.Scenes.Areas.Swamp
 				else outputText("Just look at my glossy, dripping lips.  Imagine how great it would feel to have them locked against you.  Why resist?</i>\"\n", false);
 			}
 			
-			else if(!player.hasStatusAffect(StatusAffects.DriderKiss)) {
+			else if(!player.hasStatusEffect(StatusEffects.DriderKiss)) {
 				//(HIT? + 10 lust)
 				game.dynStats("lus", 10);
 				outputText("Before you can move, she's right on top of you, leaning ", false);
@@ -64,12 +64,12 @@ package classes.Scenes.Areas.Swamp
 				else outputText("over", false);
 				outputText(" to plant a sloppy, wet kiss upon your lips.  Her glossy lip-venom oozes everywhere, dribbling down your collective chins and sliding into your mouth.  You shudder, trying to resist, but your tongue betrays you.  It slides between her moist, puffy entrance, lapping at her venom and making love to her tongue.", false);
 				if(player.lust <= 99) outputText("  Somehow, you work up the willpower to back away, but your body slowly begins to burn hotter and harder, afflicted with a slowly-building lust.", false);
-				player.createStatusAffect(StatusAffects.DriderKiss,0,0,0,0);
+				player.createStatusEffect(StatusEffects.DriderKiss,0,0,0,0);
 			}
 			//Get hit 2nd time) 
 			else {
-				player.addStatusValue(StatusAffects.DriderKiss,1,1);
-				if(player.statusAffectv1(StatusAffects.DriderKiss) == 1) {
+				player.addStatusValue(StatusEffects.DriderKiss,1,1);
+				if(player.statusEffectv1(StatusEffects.DriderKiss) == 1) {
 					//(HIT? + 15 lust)
 					game.dynStats("lus", 15);
 					outputText("Again, the drider ties your mouth up in her syrupy lip-lock, seeming to bind your mouth as effectively as her webs bind your body.  Her sweet venom bubbles and froths at the corners of the oral embrace, dripping over her many-breasted bosom and your " + player.chestDesc() + ".", false);
@@ -114,15 +114,15 @@ package classes.Scenes.Areas.Swamp
 			game.spriteSelect(77);
 			if (lust > 70 && rand(4) == 0) driderMasturbate();
 			//1/4 chance of silence if pc knows spells
-			else if (player.hasSpells() && !player.hasStatusAffect(StatusAffects.WebSilence) && rand(4) == 0) {
+			else if (player.hasSpells() && !player.hasStatusEffect(StatusEffects.WebSilence) && rand(4) == 0) {
 				spiderSilence();
 			}
 			//1/4 chance of disarm
-			else if (!player.hasStatusAffect(StatusAffects.Disarmed) && player.weaponName != "fists" && rand(4) == 0) {
+			else if (!player.hasStatusEffect(StatusEffects.Disarmed) && player.weaponName != "fists" && rand(4) == 0) {
 				spiderDisarm();
 			}
 			//Always web unless already webbed
-			else if (player.spe >= 2 && (!player.hasStatusAffect(StatusAffects.Web) || rand(2) == 0)) {
+			else if (player.spe >= 2 && (!player.hasStatusEffect(StatusEffects.Web) || rand(2) == 0)) {
 				spiderMorphWebAttack();
 			}
 			//Kiss!
@@ -158,11 +158,11 @@ package classes.Scenes.Areas.Swamp
 			// this.plural = false;
 			this.createCock(9,2,CockTypesEnum.DEMON);
 			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_GAPING);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 70, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 70, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("DD"));
 			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,70,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,70,0,0,0);
 			this.tallness = 10*12;
 			this.hipRating = HIP_RATING_CURVY+2;
 			this.buttRating = BUTT_RATING_LARGE+1;

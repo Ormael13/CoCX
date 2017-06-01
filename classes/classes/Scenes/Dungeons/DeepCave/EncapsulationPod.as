@@ -18,7 +18,7 @@
 
 		public function encapsulationPodAI():void {
 			//[Round 1 Action]
-			if(!hasStatusAffect(StatusAffects.Round)) {
+			if(!hasStatusEffect(StatusEffects.Round)) {
 				outputText("You shiver from the feeling of warm wetness crawling up your " + player.legs() + ".   Tentacles brush against your ", false);
 				if(player.balls > 0) {
 					outputText(ballsDescriptLight() + " ", false);
@@ -34,7 +34,7 @@
 				}
 			}
 			//[Round 2 Action]
-			else if(statusAffectv1(StatusAffects.Round) == 2) {
+			else if(statusEffectv1(StatusEffects.Round) == 2) {
 				outputText("The tentacles under your " + player.armorName + " squirm against you, seeking out openings to penetrate and genitalia to caress.  ", false);
 				if(player.balls > 0) outputText("One of them wraps itself around the top of your " + player.sackDescript() + " while its tip slithers over your " + player.ballsDescriptLight() + ".  Another ", false);
 				else outputText("One ", false);
@@ -78,7 +78,7 @@
 				}
 			}
 			//[Round 3 Action]
-			else if(statusAffectv1(StatusAffects.Round) == 3) {
+			else if(statusEffectv1(StatusEffects.Round) == 3) {
 				outputText("The wet, warm pressure of the fungus' protrusion working their way up your body feels better than it has any right to be.  It's like a combination of a warm bath and a gentle massage, and when combined with the thought-numbing scent in the air, it's nigh-impossible to resist relaxing a little.  In seconds the mass of tentacles is underneath your " + player.armorName + " and rubbing over your chest and " + nippleDescript(0) + "s.  You swoon from the sensation and lean back against the wall while they stroke and caress you, teasing your sensitive " + nippleDescript(0) + ".", false);
 				if(player.hasFuckableNipples()) outputText("  Proof of your arousal leaks from each " + nippleDescript(0) + " as their entrances part for the probing tentacles.  They happily dive inside to begin fucking your breasts, doubling your pleasure.", false);
 				outputText("  Moans escape your mouth as your hips begin to rock in time with the tentacles and the pulsing luminance of your fungus-pod.  It would be easy to lose yourself here.  You groan loudly enough to startle yourself back to attention.  You've got to get out!\n\n", false);
@@ -132,10 +132,10 @@
 				return;
 			}
 			//Set flags for rounds
-			if(!hasStatusAffect(StatusAffects.Round)) {
-				createStatusAffect(StatusAffects.Round,2,0,0,0);
+			if(!hasStatusEffect(StatusEffects.Round)) {
+				createStatusEffect(StatusEffects.Round,2,0,0,0);
 			}
-			else addStatusValue(StatusAffects.Round,1,1);
+			else addStatusValue(StatusEffects.Round,1,1);
 			combatRoundOver();
 		}
 		
@@ -152,16 +152,16 @@
 		override public function get long():String {
 			//[Round 1 Description]
 			var _long:String;
-			if(!hasStatusAffect(StatusAffects.Round)) _long = "You're totally trapped inside a pod!  The walls are slimy and oozing moisture that makes the air sickeningly sweet.  It makes you feel a little dizzy.  Tentacles are climbing up your " + game.player.legs() + " towards your crotch, doing their best to get under you " + game.player.armorName + ".  There's too many to try to pull away.  Your only chance of escape is to create a way out!";
+			if(!hasStatusEffect(StatusEffects.Round)) _long = "You're totally trapped inside a pod!  The walls are slimy and oozing moisture that makes the air sickeningly sweet.  It makes you feel a little dizzy.  Tentacles are climbing up your " + game.player.legs() + " towards your crotch, doing their best to get under you " + game.player.armorName + ".  There's too many to try to pull away.  Your only chance of escape is to create a way out!";
 			//[Round 2 Description]
-			else if(statusAffectv1(StatusAffects.Round) == 2) {
+			else if(statusEffectv1(StatusEffects.Round) == 2) {
 				_long = "You're still trapped inside the pod!  By now the walls are totally soaked with some kind of viscous slime.  The smell of it is unbearably sweet and you have to put a hand against the wall to steady yourself.  Warm tentacles are curling and twisting underneath your armor, caressing every ";
 				if(player.hasFullCoatOfType(SKIN_COAT_FUR)) _long += "furry ";
 				if(player.hasFullCoatOfType(SKIN_COAT_SCALES)) _long += "scaley ";
 				_long += "inch of your " + player.legs() + ", crotch, and " + game.assDescript() + ".";
 			}
 			//[Round 3 Description]
-			else if(statusAffectv1(StatusAffects.Round) == 3) {
+			else if(statusEffectv1(StatusEffects.Round) == 3) {
 				_long = "You're trapped inside the pod and being raped by its many tentacles!   The pooling slime is constantly rising, and in a few moments it will have reached your groin.  The viscous sludge makes it hard to move and the smell of it is making it even harder to think or stand up.  The tentacles assaulting your groin don't stop moving for an instant, and in spite of yourself, some part of you wants them to make you cum quite badly.";
 			}
 			//[Round 4 Description]

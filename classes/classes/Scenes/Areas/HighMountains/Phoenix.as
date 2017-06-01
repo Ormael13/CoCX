@@ -30,9 +30,9 @@ package classes.Scenes.Areas.HighMountains
 		}
 		
 		protected function phoenixFireBreath():void {
-			if (!hasStatusAffect(StatusAffects.Uber)) {
+			if (!hasStatusEffect(StatusEffects.Uber)) {
 				outputText("Suddenly the phoenix disengages from you and loops through the air, giving out a loud cry before she starts to barrel down at you. She’s clearly building up for something, so you’d better wait until she makes her move if you want a chance to dodge!");
-				createStatusAffect(StatusAffects.Uber, 0, 0, 0, 0);
+				createStatusEffect(StatusEffects.Uber, 0, 0, 0, 0);
 			}
 			else {
 				if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) {
@@ -44,8 +44,8 @@ package classes.Scenes.Areas.HighMountains
 					if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 					if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 					damage = Math.round(damage);
-					if (player.hasStatusAffect(StatusAffects.Blizzard)) {
-						player.addStatusValue(StatusAffects.Blizzard, 1, -1);
+					if (player.hasStatusEffect(StatusEffects.Blizzard)) {
+						player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 						outputText("As she zooms over you a great gout of flame erupts from the phoenix’s mouth! You dive out of the way, but all too late. The wall of fire rolls over covering you blizzard you as you leap through it, the brief contact with the inferno searing both you and your " + player.armorName + " slightly due to still swirling around you ice shards. ", false);
 						damage *= 0.2;
 					}
@@ -56,7 +56,7 @@ package classes.Scenes.Areas.HighMountains
 					damage = player.reduceDamage(damage);
 					player.takeDamage(damage, true);
 				}
-				removeStatusAffect(StatusAffects.Uber);
+				removeStatusEffect(StatusEffects.Uber);
 			}
 			combatRoundOver();
 		}
@@ -82,7 +82,7 @@ package classes.Scenes.Areas.HighMountains
 		override protected function performCombatAction():void
 		{
 			var choice:Number = rand(4);
-			if (hasStatusAffect(StatusAffects.Uber)) {
+			if (hasStatusEffect(StatusEffects.Uber)) {
 				phoenixFireBreath();
 				return;
 			}
@@ -128,11 +128,11 @@ package classes.Scenes.Areas.HighMountains
 			// this.plural = false;
 			this.createCock(8, 1.2, CockTypesEnum.LIZARD);
 			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_LOOSE);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 40, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("D"));
 			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_MOIST;
-			this.createStatusAffect(StatusAffects.BonusACapacity,20,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,20,0,0,0);
 			this.tallness = 6 * 12 + 6;
 			this.tailType = TAIL_TYPE_SALAMANDER;
 			this.hipRating = HIP_RATING_CURVY;

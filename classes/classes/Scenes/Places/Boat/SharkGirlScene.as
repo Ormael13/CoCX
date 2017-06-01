@@ -42,8 +42,8 @@ Sex Life: The shark girls treat sex like a game or a sport, constantly battling 
 public function sharkGirlEncounter(exploreLoc:Number = 0):void {
 	//Set 'PC met Sharkgirls' for Izma stuff
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00230] == 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00230] = 1;
-	if(!player.hasStatusAffect(StatusAffects.SharkGirl)) player.createStatusAffect(StatusAffects.SharkGirl,0,0,0,0);
-	else if(player.statusAffectv1(StatusAffects.SharkGirl) >= 7 && player.totalCocks() > 0) {
+	if(!player.hasStatusEffect(StatusEffects.SharkGirl)) player.createStatusEffect(StatusEffects.SharkGirl,0,0,0,0);
+	else if(player.statusEffectv1(StatusEffects.SharkGirl) >= 7 && player.totalCocks() > 0) {
 		spriteSelect(70);
 		sharkBadEnd();
 		return;
@@ -103,7 +103,7 @@ internal function sharkWinChoices():void {
 
 //Male and Herm: 
 private function sharkgirlDickFuck():void {
-	player.addStatusValue(StatusAffects.SharkGirl,1,1);
+	player.addStatusValue(StatusEffects.SharkGirl,1,1);
 	clearOutput();
 	spriteSelect(70);
 	//Naga get a different version of this scene.

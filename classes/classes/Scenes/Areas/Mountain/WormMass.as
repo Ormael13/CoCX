@@ -46,7 +46,7 @@
 			else {
 				outputText("The worm colony shambles over to you and attempts to grapple you. Attempting to dodge, you fail to get away fast enough and fall to the ground engulfed by the mass. You are completely covered in the slimy worms!!! Incapable of avoiding any of their movements, you feel their slime coat every inch of your body and you feel the struggle and strain of each individual worm as they crawl all over you. You immediately begin flailing wildly as you cannot even breathe!", false);
 				//Chance of insta-loss if infested twice
-				if(player.hasStatusAffect(StatusAffects.InfestAttempted)) {
+				if(player.hasStatusEffect(StatusEffects.InfestAttempted)) {
 					outputText("  Struggle as you might, the creatures overwhelm your body and prevent you from any conceivable opportunity to get them off you, Your head quickly becomes visible, allowing you to breathe as you stare helplessly at the cocoon of worms trapping you.\n\n", false);
 					game.mountain.wormsScene.infest1();
 					return;
@@ -54,7 +54,7 @@
 				//Escaped!
 				else {
 					outputText("\n\nYou struggle wildly as you fight the worm colony for both air and to get the things off you. The sticky slime secreted by the individual worms greatly increases your task. After freeing one of your arms, you uncover your face, allowing you to breathe, and begin sweeping the beasts from your body. Stunned by your renewed vigor, the mass loses its cohesion, allowing your to quickly clear the worms from your body. The disbanded colony retreats a distance from you and begins reforming itself as you purge your body of the annelids.", false);
-					player.createStatusAffect(StatusAffects.InfestAttempted,0,0,0,0);
+					player.createStatusEffect(StatusEffects.InfestAttempted,0,0,0,0);
 				}
 			}
 			combatRoundOver();

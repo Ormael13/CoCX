@@ -210,7 +210,7 @@ package classes.Scenes.Monsters
 			clearOutput();
 			outputText("The elder falls to her feet, smashing her titties against the confines of her armor. She looks up at you and sniffles.");
 			//If cant rape or breastfeed
-			if (player.lust < 30 && !player.hasStatusAffect(StatusAffects.Feeder)) {
+			if (player.lust < 30 && !player.hasStatusEffect(StatusEffects.Feeder)) {
 				cleanupAfterCombat();
 				return;
 			}
@@ -248,7 +248,7 @@ package classes.Scenes.Monsters
 					spiderCondom = goblinCondomed;
 			}
 			//Breastfeed adds an option
-			if (player.hasStatusAffect(StatusAffects.Feeder)) {
+			if (player.hasStatusEffect(StatusEffects.Feeder)) {
 				feeder = giveGoblinAMilkMustache;
 			}
 			if (player.lust >= 33 && player.gender > 0 && (fitsFuck != null || cuntFuck != null || tooBig != null ||
@@ -281,8 +281,8 @@ package classes.Scenes.Monsters
 			//set lust to 0, increase sensitivity slightly
 			dynStats("lib", .2, "lus", -50);
 			//You've now been milked, reset the timer for that
-			player.addStatusValue(StatusAffects.Feeder,1,1);
-			player.changeStatusValue(StatusAffects.Feeder,2,0);
+			player.addStatusValue(StatusEffects.Feeder,1,1);
+			player.changeStatusValue(StatusEffects.Feeder,2,0);
 			cleanupAfterCombat();
 		}
 		private function gobboButtSecks():void

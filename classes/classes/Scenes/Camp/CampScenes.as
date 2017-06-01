@@ -11,7 +11,7 @@ package classes.Scenes.Camp
 	import classes.Scenes.Camp;
 	import classes.Scenes.Camp.*;
 	import classes.Scenes.NPCs.*;
-	import classes.StatusAffects;
+	import classes.StatusEffects;
 	
 	import coc.view.MainView;
 	
@@ -65,8 +65,8 @@ public function HotSpring():void {
 public function HaveABoysBath():void {
 	clearOutput();
 	outputText("You decide to take a bath to rest your weary adventurer body.\n\n");
-	if (player.hasStatusAffect(StatusAffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) outputText("Jojo isn’t exactly what you would call muscular but his size and lean frame fits his mouse outlook.\n\n");
-	if (player.hasStatusAffect(StatusAffects.CampRathazul)) outputText("You're almost glad you don’t see anything of Rathazul body beyond the hip level but again It’s not like you are this interested into knowing.\n\n");
+	if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) outputText("Jojo isn’t exactly what you would call muscular but his size and lean frame fits his mouse outlook.\n\n");
+	if (player.hasStatusEffect(StatusEffects.CampRathazul)) outputText("You're almost glad you don’t see anything of Rathazul body beyond the hip level but again It’s not like you are this interested into knowing.\n\n");
 	if (flags[kFLAGS.ARIAN_VAGINA] < 1 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) outputText("Arian doesn’t seem to hate the water. He's likely cold blooded and must be enjoying it.\n\n");
 	if (emberScene.followerEmber() && flags[kFLAGS.EMBER_GENDER] == 1) outputText("Ember body and maleness could easily give all the other boys inferiority complex.\n\n");
 	if (camp.loversHotBathCount() > 0) {
@@ -79,22 +79,22 @@ public function HaveABoysBath():void {
 	}
 }
 public function LeaveAfterMaleBath():void {
-	if (player.statusAffectv1(StatusAffects.BathedInHotSpring) < 73) {
-		player.removeStatusAffect(StatusAffects.BathedInHotSpring);
-		player.createStatusAffect(StatusAffects.BathedInHotSpring, 73, 0, 0, 0);
+	if (player.statusEffectv1(StatusEffects.BathedInHotSpring) < 73) {
+		player.removeStatusEffect(StatusEffects.BathedInHotSpring);
+		player.createStatusEffect(StatusEffects.BathedInHotSpring, 73, 0, 0, 0);
 	}
-	else player.createStatusAffect(StatusAffects.BathedInHotSpring, 73, 0, 0, 0);	
+	else player.createStatusEffect(StatusEffects.BathedInHotSpring, 73, 0, 0, 0);
 	doNext(camp.returnToCampUseOneHour);
 }
 
 public function PeepingTom1():void {
 	clearOutput();
 	outputText("As usual your many female lovers and followers head for their daily bath and you search the wooden wall for a hole to peep through. Now that's what you wanted to see!\n\n");
-	if (player.statusAffectv1(StatusAffects.BathedInHotSpring) < 73) {
-		player.removeStatusAffect(StatusAffects.BathedInHotSpring);
-		player.createStatusAffect(StatusAffects.BathedInHotSpring, 73, 0, 0, 0);
+	if (player.statusEffectv1(StatusEffects.BathedInHotSpring) < 73) {
+		player.removeStatusEffect(StatusEffects.BathedInHotSpring);
+		player.createStatusEffect(StatusEffects.BathedInHotSpring, 73, 0, 0, 0);
 	}
-	else player.createStatusAffect(StatusAffects.BathedInHotSpring, 73, 0, 0, 0);
+	else player.createStatusEffect(StatusEffects.BathedInHotSpring, 73, 0, 0, 0);
 	if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] < 5) flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] += 1;
 	PeepingTom3();
 }
@@ -109,7 +109,7 @@ public function PeepingTom3():void {
 	if (followerKiha()) outputText("Kiha definitely doesn’t have a size complex, with her huge breasts leaving most of the other girls in the shade.\n\n");
 //	 outputText("Chi Chi, while small, easily sports a bigger cup than Amily.\n\n");//Chi Chi
 //	 outputText("Alvina does not seem to care about her breast size. Her dark charms and unholy attraction aura does everything for her. Naturally nobody but you can see she’s there as usual.\n\n");//Alvina
-	if (player.hasStatusAffect(StatusAffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) outputText("Marble easily has the largest pair here, beating all of the other girls without contest. They’re probably the milkiest too.\n\n");
+	if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) outputText("Marble easily has the largest pair here, beating all of the other girls without contest. They’re probably the milkiest too.\n\n");
 	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) outputText("Isabella sings as she bathes, which is not surprising. You assume they’re folk songs from her home.\n\n");
 	if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 		outputText("Sophie, while not having the largest breasts, easily outshines every other girl when it comes to her hips. Her matronly build and egg bearing hips fit her stern confidence as she bathes");
@@ -135,11 +135,11 @@ public function PeepingTom3():void {
 		outputText("\"<i>Since " + player.short + " wants to see us naked that badly, let’s offer him a show he won’t forget!</i>\"\n\n");
 		outputText("You are shoved to the ground, each of your angry lovers taking turns to rape you. It’s gonna take a full day for your cock to stop burning from the abuse your lovers gave it.\n\n");
 		player.orgasm();
-		if (player.statusAffectv1(StatusAffects.Dysfunction) < 25) {
-			player.removeStatusAffect(StatusAffects.Dysfunction);
-			player.createStatusAffect(StatusAffects.Dysfunction, 25, 0, 0, 0);
+		if (player.statusEffectv1(StatusEffects.Dysfunction) < 25) {
+			player.removeStatusEffect(StatusEffects.Dysfunction);
+			player.createStatusEffect(StatusEffects.Dysfunction, 25, 0, 0, 0);
 		}
-		else player.createStatusAffect(StatusAffects.Dysfunction, 25, 0, 0, 0);
+		else player.createStatusEffect(StatusEffects.Dysfunction, 25, 0, 0, 0);
 	}
 	else {
 		outputText("You grin as you watch them for hours, masturbating in the background, and leave without anyone knowing.");
@@ -156,7 +156,7 @@ public function HaveAGirlBath():void {
 	if (followerKiha()) outputText("Kiha definitely doesn’t have a size complex, with her huge breasts leaving most of the other girls in the shade.\n\n");
 //	 outputText("Chi Chi, while small, easily sports a bigger cup than Amily.\n\n");//Chi Chi
 //	 outputText("Alvina does not seem to care about her breast size. Her dark charms and unholy attraction aura does everything for her. Naturally nobody but you can see she’s there as usual.\n\n");//Alvina
-	if (player.hasStatusAffect(StatusAffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) outputText("Marble easily has the largest pair here, beating all of the other girls without contest, They’re probably the milkiest too.\n\n");
+	if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) outputText("Marble easily has the largest pair here, beating all of the other girls without contest, They’re probably the milkiest too.\n\n");
 	if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) outputText("Isabella sings as she bathes, which is not surprising. You assume they’re folk songs from her home.\n\n");
 	if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 		outputText("Sophie, while not having the largest breasts, easily outshines every other girl when it comes to her hips.Her matronly build and egg bearing hips fit her stern confidence as she bathes");
@@ -179,7 +179,7 @@ public function HaveAGirlBath():void {
 	}
 	if (emberScene.followerEmber() && flags[kFLAGS.EMBER_GENDER] == 2) {
 		outputText("While Ember's size is impressive, her breasts are, simply put, intimidating");
-		if (player.hasStatusAffect(StatusAffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) outputText(". You still can’t help but wonder how come Marble can sit right next to her and act like everything is ok");
+		if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) outputText(". You still can’t help but wonder how come Marble can sit right next to her and act like everything is ok");
 		outputText(".\n\n");
 	}
 	if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) {
@@ -190,13 +190,13 @@ public function HaveAGirlBath():void {
 		outputText("A hand trails to your pussy and, in the confusion of the moment, you join in starting to finger your neighbor. Your communal bath quickly takes a lewder turn when everyone starts playing with each other, devolving into a heated orgy. Amidst this confusion, you kiss your nearest neighbor and abandon yourself to the heat of the moment.\n\n");
 	}
 	if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 || flags[kFLAGS.FLOWER_LEVEL] >= 4) outputText("At some point during the orgy, you hear Holli yelling that it’s unfair she’s rooted in place at the other edge of the camp while everyone is enjoying themselves.\n\n");
-	if (player.hasStatusAffect(StatusAffects.CampRathazul)) outputText("You can hear a half muffled chuckle from behind the wall. You could swear it was Rathazul, but you’re sure the old rat wouldn’t stoop so low as to peep on the lot of you, right?\n\n");
+	if (player.hasStatusEffect(StatusEffects.CampRathazul)) outputText("You can hear a half muffled chuckle from behind the wall. You could swear it was Rathazul, but you’re sure the old rat wouldn’t stoop so low as to peep on the lot of you, right?\n\n");
 	outputText("An hour later you all get out of the hot spring, still giggling.");
-	if (player.statusAffectv1(StatusAffects.BathedInHotSpring) < 73) {
-		player.removeStatusAffect(StatusAffects.BathedInHotSpring);
-		player.createStatusAffect(StatusAffects.BathedInHotSpring, 73, 0, 0, 0);
+	if (player.statusEffectv1(StatusEffects.BathedInHotSpring) < 73) {
+		player.removeStatusEffect(StatusEffects.BathedInHotSpring);
+		player.createStatusEffect(StatusEffects.BathedInHotSpring, 73, 0, 0, 0);
 	}
-	else player.createStatusAffect(StatusAffects.BathedInHotSpring, 73, 0, 0, 0);
+	else player.createStatusEffect(StatusEffects.BathedInHotSpring, 73, 0, 0, 0);
 	doNext(camp.returnToCampUseOneHour);
 }
 

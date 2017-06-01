@@ -75,7 +75,7 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\nMarble hesitantly looks up at you, brows furrowed in thought. \"<i>Well, it’s the corruption that makes my milk addictive in the first place, so we need to find a way to purify me.  The most corrupted part of me is my milk, so that’s where we should start,</i>\" she suggests, rubbing her chin in thought.");
 	 	outputText("\n\nYou contemplate the possibilities, and make some suggestions on things that could reduce her corruption.");
 		if(player.hasItem(consumables.PURHONY)) outputText("  You then recall that bottle of honey the bee-girl gave you, and ask if maybe it might work?");
-		if(player.hasStatusAffect(StatusAffects.PureCampJojo)) outputText("  You remember how Jojo helped you become pure, and suggest maybe his meditations could assist Marble?");
+		if(player.hasStatusEffect(StatusEffects.PureCampJojo)) outputText("  You remember how Jojo helped you become pure, and suggest maybe his meditations could assist Marble?");
 
 	 	outputText("\n\nMarble shakes her head before continuing, \"<i>No, I think we should focus on something linked to my race.  Maybe we can use the LaBova stuff that my mother taught me to drink if I was ever turned into something else.  It’s probably corrupted in its raw form, but maybe there is some way it could be purified to counter the corrupt effects? I think you’d need an alchemist to purify it, though...</i>\" she trails off, musing at the possibility.");
 	 	outputText("\n\nYou point out that LaBova is very rare, and ask how you’d go about getting enough of it to help Marble.");
@@ -101,16 +101,16 @@ package classes.Scenes.NPCs {
 		if(flags[kFLAGS.TIMES_GIVEN_MARBLE_PURE_LABOVA] == 0)
 		{
 			//Marble’s corruption is reduced by 4
-			player.addStatusValue(StatusAffects.Marble, 4, -4);
+			player.addStatusValue(StatusEffects.Marble, 4, -4);
 			outputText("\n\nYour bovine lover meets your eyes calmly and nods, holding out her hand for the vial, which you hand over to her. She opens the bottle of creamy, milk-based fluid and chugs it down without hesitation.");
 		 	outputText("\n\nShe promptly drops the empty bottle on the ground, where it smashes, her hands going to her stomach and pressing themselves against it. She grimaces in pain, her stomach audibly gurgling as it rebels against the alien fluid she’s forced herself to drink. She arches her back and lets out a pained moan as her ");
-			if(player.statusAffectv2(StatusAffects.MarbleSpecials) == 4) outputText("eight");
+			if(player.statusEffectv2(StatusEffects.MarbleSpecials) == 4) outputText("eight");
 			else outputText("two");
 		 	outputText(" nipples suddenly discharge themselves, soaking her shirt and actually managing to spurt visible arcs of milk through the fabric. Minutes go past as the milk sprays everywhere, but then it stops as suddenly as it started. Marble sighs in relief and pats her belly. \"<i>That really didn’t feel very good... hope I don’t have to go through that too often.</i>\" She then realizes her shirt is sopping wet. \"<i>Aw, no, my shirt! I haven’t milked myself since I was a little girl,</i>\" she complains, pulling the milk-sodden garment off of herself and eyeing it sadly. \"<i>I’ll need to hang this out to dry and wear one of my spares...</i>\" she mumbles, even as you politely leave her to take care of that.");
 		}
 		//P.Labova doesn’t work any more
 		//Play this scene automatically when PC gives Marble the first Labova after reaching her "quota"
-		else if(player.statusAffectv4(StatusAffects.MarbleSpecials) <= 30)
+		else if(player.statusEffectv4(StatusEffects.MarbleSpecials) <= 30)
 		{
 		 	outputText("\n\nWithout ceremony, you pass the bottle of purified LaBova to Marble, who chugs it down. You wait for the usual reaction, but, to your surprise, nothing happens. You ask the cowgirl if she feels all right.");
 		 	outputText("\n\n\"<i>I... don’t feel different in the slightest, sweetie,</i>\" Marble replies, looking as confused as you feel. \"<i>I guess this stuff just isn’t working any more - I must need something with more potency than that to fully purify myself,</i>\" she muses.");
@@ -122,12 +122,12 @@ package classes.Scenes.NPCs {
 		else
 		{
 			//Marble’s corruption is reduced by 4
-			player.addStatusValue(StatusAffects.Marble, 4, -4);
+			player.addStatusValue(StatusEffects.Marble, 4, -4);
 			outputText("\n\nYour bovine lover meets your eyes calmly and nods, holding out her hand for the vial, which you hand over to her. She opens the bottle of creamy, milk-based fluid and chugs it down without hesitation.");
 		 	outputText("\n\nShe quickly hurries to remove her shirt lest she stain it again, allowing her great, heavy");
 			if(flags[kFLAGS.MARBLE_BOVA_LEVEL] > 1) outputText(", fur covered");
 		 	outputText(" breasts to dangle freely. Stoically she bears the pain as her stomach loudly rumbles and groans, holding her breasts up proudly as her ");
-			if(player.statusAffectv2(StatusAffects.MarbleSpecials) == 4) outputText("eight");
+			if(player.statusEffectv2(StatusEffects.MarbleSpecials) == 4) outputText("eight");
 			else outputText("two");
 		 	outputText(" nipples begin spray milk everywhere - you have to take a step back to avoid being squirted yourself. Finally, Marble’s breasts stop their spraying, leaving the two of you standing in a milky puddle of mud. The cowgirl pulls her shirt back on over her body. \"<i>That stuff still tastes vile, but I guess it’s worth it. I just hope it finishes working soon.</i>\" she tells you. You assure her that you believe in her ability to get through this, and then head back to the main part of your camp.");
 		}
@@ -146,7 +146,7 @@ package classes.Scenes.NPCs {
 	{
 		clearOutput();
 		//if (Rathazul is not in camp)
-		if(!player.hasStatusAffect(StatusAffects.CampRathazul))
+		if(!player.hasStatusEffect(StatusEffects.CampRathazul))
 		{
 		 	outputText("You spot the elderly alchemist's camp on the lake once more.\n\n");
 		}
@@ -157,13 +157,13 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\nYou smile and thank him for the information, then turn to return to Marble, promising to be back with some of her milk as fast as you can.");
 		//if (Rathazul is not in camp)
 		//the quest is written under the assumption that Rath is in your camp.  I recently found out it is possible to lock him out of being a follower, so I added in this section to ensure that he is.
-		if(!player.hasStatusAffect(StatusAffects.CampRathazul))
+		if(!player.hasStatusEffect(StatusEffects.CampRathazul))
 		{
 		 	outputText("\n\n\"<i>Whoa, hold on there, " + player.mf("boy","girl") + ",</i>\" Rathazul stops you, \"<i>Hearing about your quest for purification makes my heart feel warm again for the first time in years.  In exchange for helping you out in this endeavor, please allow me stay at your camp.  I'm sure you'd appreciate saving yourself the trouble of going back and forth for each little thing.</i>\"");
 		 	outputText("\n\nConsidering just how important his help has been in purifying Marble, you doubt that you'd be able to get any further without his help, and agree to let him stay in your camp.");
 		 	outputText("\n\n<i>\"Then let me gather my things, and you can show me your camp.\"</i>  This takes very little time, and in very short order the two of you have arrived in your camp.  \"<i>I'll set my stuff up while you go talk to your mate.</i>\"");
 			//Rathazul is set as a follower
-			player.createStatusAffect(StatusAffects.CampRathazul, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.CampRathazul, 0, 0, 0, 0);
 		}
 		//{Next}
 		menu();
@@ -330,7 +330,7 @@ package classes.Scenes.NPCs {
 			}
 			//if (pure Jojo is in camp)
 			//pure Jojo’s response to being asked to have tea
-			if(player.hasStatusAffect(StatusAffects.PureCampJojo))
+			if(player.hasStatusEffect(StatusEffects.PureCampJojo))
 			{
 			 	outputText("\n\nWhen you get to Jojo’s meditation spot and ask him if he is interested in coming to the campfire for tea, the murine monk looks surprised, but nods his head. <i>\"Tea would be delightful, thank you. It’s been a long time since I was able to enjoy a civil activity such as that.\"</i>");
 				//temp follower variable ++
@@ -436,8 +436,8 @@ package classes.Scenes.NPCs {
 	public function startCombatWithMarbleSister(inCamp:Boolean = true):void
 	{
 		startCombat(new Clara());
-		player.createStatusAffect(StatusAffects.NoFlee,0,0,0,0);
-		if(inCamp && !player.hasStatusAffect(StatusAffects.ClaraFoughtInCamp)) player.createStatusAffect(StatusAffects.ClaraFoughtInCamp,0,0,0,0);
+		player.createStatusEffect(StatusEffects.NoFlee,0,0,0,0);
+		if(inCamp && !player.hasStatusEffect(StatusEffects.ClaraFoughtInCamp)) player.createStatusEffect(StatusEffects.ClaraFoughtInCamp,0,0,0,0);
 	}
 	//Chose submit
 	public function voluntarilyChooseCowCuntBadEndYouBad():void
@@ -549,7 +549,7 @@ package classes.Scenes.NPCs {
 			 	outputText("\n\n\"<i>Little bitch!</i>\"  The cowgirl snarls, standing up to her full impressive height.  \"<i>I will teach you not to try something like this again.</i>\"  Isabella grabs her shield and brandishes it prominently, ready to use it for defense and to bludgeon.");
 			}
 			//if (Jojo is in camp)
-			if(player.hasStatusAffect(StatusAffects.CampRathazul))
+			if(player.hasStatusEffect(StatusEffects.CampRathazul))
 			{
 			 	outputText("\n\n\"<i>I wouldn’t have done that if I were you,</i>\" Jojo says, rising off the ground and retrieving his staff.  Falling into a combat pose, his face contorts into an almost uncharacteristic visage of anger directed at the woman before you.");
 			}
@@ -618,7 +618,7 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\nAlmost as if on cue, you feel her presence getting closer to you, and your captor steps inside the room.  \"<i>Ah, yoour awake then?</i>\" she coos, \"<i>Feeling up for some milk, I hope?</i>\"  You can’t help yourself, you need that milk, so you nod.  \"<i>Goood, keeping you asleep for a while loooks like it was the right chooice.</i>\"  She laughs uproariously.");
 	 	outputText("\n\n\"<i>Now, my milk slave, aren’t you going to come over here and get that milk?  Oh that’s right, you can’t without my permission, can you?</i>\" she laughs again at you, as you continue to stare at her.  ");
 		//if (PC said to Marble they wanted to get addicted)
-		if(player.statusAffectv3(StatusAffects.Marble) == 1)
+		if(player.statusEffectv3(StatusEffects.Marble) == 1)
 		{
 		 	outputText("\"<i>Oh?  Wondering how I know about that?  Marble told me when she was explaining about you breaking free of the addiction.  Unlike her, I’m going to make sure you behave yourself.</i>\"  ");
 		} 
@@ -844,14 +844,14 @@ package classes.Scenes.NPCs {
 		{
 			//Clara is taken out by Marble
 			//If the camp fight lasts 10 rounds
-			if(player.statusAffectv1(StatusAffects.ClaraCombatRounds) >= 10 && player.hasStatusAffect(StatusAffects.ClaraFoughtInCamp))
+			if(player.statusEffectv1(StatusEffects.ClaraCombatRounds) >= 10 && player.hasStatusEffect(StatusEffects.ClaraFoughtInCamp))
 			{
 				clearOutput();
 			 	outputText("A loud boom reverberates through the air as Marble uses her hammer to strike Clara on the back of the head, returning the favor that took her out earlier.  Your assailant drops to the ground instantly, ending the fight right there.  You consider asking if the young bovine will be all right, but given that Marble seems to have picked herself back up in a hurry, that is unlikely to be a problem.  Instead you ask your mate to see how she is holding up.  Other than a bump on the head, Marble tells you she'll be fine.  Bovine fortitude is once again proven to be formidable as Clara stirs on the ground.  In less than a minute, you and Marble are standing over the defeated, but conscious, form of your lover's sister.");
 			}
 			//Continue to common camp victory
 			//PC drags Clara back to camp, was originally planning on putting more rapes here, but 7 with Marble are probably enough.
-			else if(!player.hasStatusAffect(StatusAffects.ClaraFoughtInCamp))
+			else if(!player.hasStatusEffect(StatusEffects.ClaraFoughtInCamp))
 			{
 			 	outputText("Worried about the others, you head out of the cellar and drag Clara and her things with you.  Thanks to the strange way that travel works in this world, it doesn't take you long to find your way back to camp.  You catch your followers there just before they head out to go looking for you and dump your would be kidnaper before them.  Marble steps up next to you and looks down at her sister.");
 				//continue to common victory
@@ -1156,7 +1156,7 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\n\"<i>The day when I met you, I felt that you were just one of the cutest things that I've ever seen.  I immediately took a liking to you after you helped me out with my breasts.  You spent time with me, talked to me, worked alongside me, and every day my affection for you grew stronger.  I didn't think it was love at first, but everyday I looked forward to a visit from you.</i>\"  You give a warm smile hearing those words from her, happy to know your feelings were mutual as your relationship advanced.  \"<i>I was so happy when you agreed to drink the milk directly from my breasts.  It made me so happy to nurse someone like that again and remember the utter bliss I felt from that.</i>\"");
 	 	outputText("\n\n<i>\"Unfortunately that time didn't last long and before I knew it I had addicted you.  ");
 		//if (PC said they wanted to be addicted)
-		if(player.statusAffectv3(StatusAffects.Marble) == 1)
+		if(player.statusEffectv3(StatusEffects.Marble) == 1)
 		{
 		 	outputText("When you said that you wanted to rely on my milk, it felt like you'd just given me the world.  Then, the power I suddenly held over you made my instincts kick in, and I started to turn into something like my mom.  When you resisted, it felt like a betrayal, but my love for you proved stronger than that.  The day you stopped me from slipping away for good, when you revealed your feelings for me, that you cared more about me than my milk, I felt wonderful, and my love for you blossomed full bloom that day.  ");
 		}
@@ -1350,7 +1350,7 @@ package classes.Scenes.NPCs {
 		//Marble corruption is set to 10
 		flags[kFLAGS.MARBLE_PURIFICATION_STAGE] = 5;
 		flags[kFLAGS.MARBLE_PURIFIED] = 1;
-		player.changeStatusValue(StatusAffects.Marble,4,10);
+		player.changeStatusValue(StatusEffects.Marble,4,10);
 		getGame().inCombat = false;
 		player.clearStatuses(false);
 		//Marble's breast size is set to 0 (integer, 0=DD cups, 1=G cups, 2=HH, 3=J)
@@ -1554,7 +1554,7 @@ package classes.Scenes.NPCs {
 	 	outputText("\n\nSo, the woman whom you helped escape from the grip of corruption, leaves you behind, driven away thanks to your own fall to the very same force from which you freed her.");
 		//Marble and her kids (if any) are removed from the farm and camp, she will only return once the PC's corruption is below 40, and Vapula, Holi, Corrupted Jojo, and Corrupted Amily are not in camp.
 		flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] = 1;
-		player.removeStatusAffect(StatusAffects.CampMarble);
+		player.removeStatusEffect(StatusEffects.CampMarble);
 		doNext(camp.returnToCampUseOneHour);
 	}
 	//Marble comes back after your corruption drops below 40
@@ -1571,7 +1571,7 @@ package classes.Scenes.NPCs {
 
 	 	outputText("\n\nShe excitedly runs up to you and gives you a big hug, holding you very tightly to her chest.  After several moment of embracing you, Marble gently whispers in your ear, \"<i>I'm so glad you managed to free yourself from the worst of the taint.</i>\"  She pulls back from you and asks if you mind if she moves back into the camp.  How could you say no to her?");
 		//re-add Marble and her kids to the camp and farm
-		player.createStatusAffect(StatusAffects.CampMarble,0,0,0,0);
+		player.createStatusEffect(StatusEffects.CampMarble,0,0,0,0);
 		flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] = 0;
 		flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] = 0;
 		flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;

@@ -276,10 +276,10 @@ import flash.utils.Dictionary;
 				return player[attrname] >= value;
 			};
 		}
-		public function requireStatusEffect(effect:StatusAffectType, text:String):PerkType {
+		public function requireStatusEffect(effect:StatusEffectType, text:String):PerkType {
 			requirements.push({
 				fn  : function (player:Player):Boolean {
-					return player.hasStatusAffect(effect);
+					return player.hasStatusEffect(effect);
 				},
 				text: text,
 				type: "effect",

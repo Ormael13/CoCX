@@ -5,7 +5,7 @@ package classes.Scenes.Places.TelAdre {
 
 	public class Edryn extends TelAdreAbstractContent implements TimeAwareInterface {
 //VARS
-//player.statusAffectv1(StatusAffects.Edryn) >= 4 = FREE SEX
+//player.statusEffectv1(StatusEffects.Edryn) >= 4 = FREE SEX
 // EDRYN_TIMES_HEL_THREESOMED:int = 404;
 // HEL_EDRYN_OFFER:int = 405;
 // EDRYN_PREGNANCY_INCUBATION:int = 68;
@@ -52,7 +52,7 @@ package classes.Scenes.Places.TelAdre {
 
 public function edrynBarTalk():void {
 	spriteSelect(14);
-	if(!player.hasStatusAffect(StatusAffects.Edryn)) player.createStatusAffect(StatusAffects.Edryn,0,0,0,0);
+	if(!player.hasStatusEffect(StatusEffects.Edryn)) player.createStatusEffect(StatusEffects.Edryn,0,0,0,0);
 	clearOutput();
 	outputText(images.showImage("edryn-bar-chat"));
 	
@@ -196,7 +196,7 @@ public function edrynBarTalk():void {
 		//Non horsedick
 		else {
 			outputText("but the potent musky scent only reminds you of how different things are here.", false);
-			if(player.cor > 50 || player.statusAffectv1(StatusAffects.Edryn) > 0 || flags[kFLAGS.LOW_STANDARDS_FOR_ALL]) {
+			if(player.cor > 50 || player.statusEffectv1(StatusEffects.Edryn) > 0 || flags[kFLAGS.LOW_STANDARDS_FOR_ALL]) {
 				outputText("  Unbidden, your mind wonders what her juicy horse-snatch would feel like, and your " + cockDescript(0) + " responds immediately, thickening with readiness.  You squirm uncomfortably from how constricting your " + player.armorName + " feels.\n\n", false);
 				outputText("You give the rapidly dissipating scent a sniff and note that it isn't unpleasant, just strong, and once again you find yourself imagining standing ", false);
 				if(player.tallness < 60) outputText("on a stool ", false);
@@ -235,7 +235,7 @@ public function edrynBarTalk():void {
 private function edrynOffer():void {
 	spriteSelect(14);
 	var cost:Number = 0;
-	switch(player.statusAffectv1(StatusAffects.Edryn)) {
+	switch(player.statusEffectv1(StatusEffects.Edryn)) {
 		case 0:
 			cost = 200;
 			break;
@@ -358,7 +358,7 @@ private function edrynOffer():void {
 public function edrynSexSelecter():void {
 	spriteSelect(14);
 	var cost:Number = 0;
-	switch(player.statusAffectv1(StatusAffects.Edryn)) {
+	switch(player.statusEffectv1(StatusEffects.Edryn)) {
 		case 0:
 			cost = 200;
 			break;
@@ -390,7 +390,7 @@ public function edrynSexSelecter():void {
 	//Actually choose the sex scene
 	edrynFucktroduction();
 	//Increment sex count
-	player.addStatusValue(StatusAffects.Edryn,1,1);
+	player.addStatusValue(StatusEffects.Edryn,1,1);
 }
 private function fuckEdrynTaur():void {
 	spriteSelect(14);
@@ -428,12 +428,12 @@ private function fuckEdrynTaur():void {
 		outputText("Her cunt keeps milking you even after.", false);
 	}
 
-	if(player.statusAffectv1(StatusAffects.Edryn) <= 1) outputText("\n\nYou pull out with a wet pop, and watch the mixed centaur-cum pour from her puffy lips in a waterfall.  It splatters onto the floor wetly as Edryn at last relaxes, dropping herself heavily onto a pile of pillows.  She shakes her head and puts her palms on the floor alongside her body, steadying herself as she attempts to regain her balance.  Edryn gives you a tired smile and says, \"<i>Ohhhh that was nice.  Most of my customers can't get me off like that.  Don't worry about filling me full of fillies either, I take some herbs to prevent that.  You should come back sometime, okay?</i>\"", false);
-	else if(player.statusAffectv1(StatusAffects.Edryn) <= 3) outputText("\n\nShe sighs happily and looks down at you, \"<i>Ooh " + player.short + ", you're the best.  We should do this again soon.  Oh goddess, I can feel my juices starting just thinking about it.</i>\"", false);
-	else if(player.statusAffectv1(StatusAffects.Edryn) == 4) outputText("\n\nShe sighs happily and says, \"<i>Oh baby, you know what?  I'm never charging you again.  Just keep getting me off like that and we can do it anytime.</i>\"", false);
+	if(player.statusEffectv1(StatusEffects.Edryn) <= 1) outputText("\n\nYou pull out with a wet pop, and watch the mixed centaur-cum pour from her puffy lips in a waterfall.  It splatters onto the floor wetly as Edryn at last relaxes, dropping herself heavily onto a pile of pillows.  She shakes her head and puts her palms on the floor alongside her body, steadying herself as she attempts to regain her balance.  Edryn gives you a tired smile and says, \"<i>Ohhhh that was nice.  Most of my customers can't get me off like that.  Don't worry about filling me full of fillies either, I take some herbs to prevent that.  You should come back sometime, okay?</i>\"", false);
+	else if(player.statusEffectv1(StatusEffects.Edryn) <= 3) outputText("\n\nShe sighs happily and looks down at you, \"<i>Ooh " + player.short + ", you're the best.  We should do this again soon.  Oh goddess, I can feel my juices starting just thinking about it.</i>\"", false);
+	else if(player.statusEffectv1(StatusEffects.Edryn) == 4) outputText("\n\nShe sighs happily and says, \"<i>Oh baby, you know what?  I'm never charging you again.  Just keep getting me off like that and we can do it anytime.</i>\"", false);
 	else outputText("\n\nShe sighs contentedly and says, \"<i>Mmm, never stop visiting, okay?</i>\"", false);
 	outputText("\n\nThe two of you wipe up as best you can, redress, and head back out to the bar.  You're consciously aware of how strongly your groin reeks of centaur-slut.  Your body, happy with the scent and scrutiny of the bar's patrons, refuses to go soft, providing a wonderful view of your cum-slicked member.  Giggles and laughter break out around you as you leave, though more than a few of those taking notice have hard nipples or tents of their own.", false);
-	if(player.statusAffectv1(StatusAffects.Edryn) >= 4) edrynPregChance();
+	if(player.statusEffectv1(StatusEffects.Edryn) >= 4) edrynPregChance();
 	player.orgasm();
 	dynStats("sen", -3);
 	if(player.lust < 30) player.lust = 30;
@@ -485,12 +485,12 @@ private function fuckEdrynNonTaur():void {
 	else outputText("slowly rises up off of you, ", false);
 	outputText("and like a dam being broken, a wave of mixed sexual fluids dumps from her puffy lips onto you.  Edryn sighs happily, and you realize her tongue is hanging from her mouth with her eyes slightly rolled back.  You realize that though she endeavors to act restrained, her body is determined to be a wanton slut.\n\n", false);
 
-	if(player.statusAffectv1(StatusAffects.Edryn) <= 1) outputText("She sighs happily and looks down at you, \"<i>Ohhhh that was nice.  Most of my customers can't get me off like that.  I hope you're ok!  Don't worry about me getting pregnant either, I take some herbs to prevent that sort of thing until I'm ready for it.</i>\"\n\n", false);
-	else if(player.statusAffectv1(StatusAffects.Edryn) <= 3) outputText("She sighs happily and looks down at you, \"<i>Ooh " + player.short + ", you're the best.  We should do this again soon.  Oh goddess, I can feel my juices starting just thinking about it.</i>\"\n\n", false);
-	else if(player.statusAffectv1(StatusAffects.Edryn) == 4) outputText("She sighs happily and says, \"<i>Oh baby, you know what?  I'm never charging you again.  Just keep getting me off like that and we can do it anytime.</i>\"\n\n", false);
+	if(player.statusEffectv1(StatusEffects.Edryn) <= 1) outputText("She sighs happily and looks down at you, \"<i>Ohhhh that was nice.  Most of my customers can't get me off like that.  I hope you're ok!  Don't worry about me getting pregnant either, I take some herbs to prevent that sort of thing until I'm ready for it.</i>\"\n\n", false);
+	else if(player.statusEffectv1(StatusEffects.Edryn) <= 3) outputText("She sighs happily and looks down at you, \"<i>Ooh " + player.short + ", you're the best.  We should do this again soon.  Oh goddess, I can feel my juices starting just thinking about it.</i>\"\n\n", false);
+	else if(player.statusEffectv1(StatusEffects.Edryn) == 4) outputText("She sighs happily and says, \"<i>Oh baby, you know what?  I'm never charging you again.  Just keep getting me off like that and we can do it anytime.</i>\"\n\n", false);
 	else outputText("She sighs contentedly and says, \"<i>Mmm, never stop visiting ok?</i>\"\n\n", false);
 	outputText("The two of you clean up as best you can, redress, and head back out to the bar.  You're consciously aware of how strongly you reek of centaur-slut.  Your body, happy with the scent and the scrutiny of the bar's patrons, refuses to go soft, providing a more-than-ample tent.  Giggles and laughter break out around you as you leave, though more than a few of those taking notice have hard nipples or tents of their own.", false);
-	if(player.statusAffectv1(StatusAffects.Edryn) >= 4) edrynPregChance();
+	if(player.statusEffectv1(StatusEffects.Edryn) >= 4) edrynPregChance();
 	player.orgasm();
 	dynStats("sen", -3);
 	if(player.lust < 30) player.lust = 30;
@@ -540,7 +540,7 @@ public function approachHelAtZeBitch():void {
 	clearOutput();
 	outputText(images.showImage("hel-chat-at-bar"));
 	var edryn:Function = null;
-	if(edrynBar() && player.cockThatFits(300) >= 0 && player.statusAffectv1(StatusAffects.Edryn) >= 4)
+	if(edrynBar() && player.cockThatFits(300) >= 0 && player.statusEffectv1(StatusEffects.Edryn) >= 4)
 		edryn = helEdrynThreeSomeStartYerEngines;
 
 	if(edryn != null && flags[kFLAGS.HEL_EDRYN_OFFER] == 0) {
@@ -1042,7 +1042,7 @@ private function edrynFucktroduction():void {
 	var x:Number = player.cockThatFits(300);
 	if(x < 0) x = 0;
 	var cost:Number = 0;
-	switch(player.statusAffectv1(StatusAffects.Edryn)) {
+	switch(player.statusEffectv1(StatusEffects.Edryn)) {
 		case 0:
 			cost = 200;
 			break;

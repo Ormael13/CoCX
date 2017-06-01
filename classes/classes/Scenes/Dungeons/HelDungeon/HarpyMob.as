@@ -15,7 +15,7 @@ package classes.Scenes.Dungeons.HelDungeon
 		public function harpyHordeClawFlurry():void {
 			outputText("The harpies lunge at you, a veritable storm of talons and claws raining down around you.  You stumble back, trying desperately to deflect some of the attacks, but there are simply too many to block them all!  Only a single harpy in the brood seems to be holding back...\n");
 			//(Effect: Multiple light attacks)
-			createStatusAffect(StatusAffects.Attacks,3+rand(3),0,0,0);
+			createStatusEffect(StatusEffects.Attacks, 3 + rand(3),0,0,0);
 			eAttack();
 			combatRoundOver();
 		}
@@ -23,7 +23,7 @@ package classes.Scenes.Dungeons.HelDungeon
 		//ATTACK TWO: Gangbang
 		public function harpyHordeGangBangAttack():void {
 			outputText("Suddenly, a pair of harpies grabs you from behind, holding your arms to keep you from fighting back! Taking advantage of your open state, the other harpies leap at you, hammering your chest with punches and kicks - only one hangs back from the gang assault.\n\n");
-			player.createStatusAffect(StatusAffects.HarpyBind,0,0,0,0);
+			player.createStatusEffect(StatusEffects.HarpyBind,0,0,0,0);
 			//(PC must struggle:
 			harpyHordeGangBangStruggle(false);
 		}
@@ -39,7 +39,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			}
 			//Success: 
 			else {
-				player.removeStatusAffect(StatusAffects.HarpyBind);
+				player.removeStatusEffect(StatusEffects.HarpyBind);
 				outputText("With a mighty roar, you throw off the harpies grabbing you and return to the fight!");
 			}
 			combatRoundOver();

@@ -117,7 +117,7 @@ package classes.Scenes.NPCs
 				else outputText("Vapula is busy caressing your corrupted mousette, Amily while softly kissing her breasts.  Her fingers are buried in your fuck-toy's pussy, and Amily is moaning whorishly and doesn't even bother to stop when she looks at you, her helpless eyes betraying her lack of control over her own lust.");
 			}
 			if (choice == 9) {
-				if (!player.hasStatusAffect(StatusAffects.CampRathazul)) choice = 10;
+				if (!player.hasStatusEffect(StatusEffects.CampRathazul)) choice = 10;
 				else outputText("Vapula is having a very active conversation with Rathazul, the alchemist.  They seem to be discussing the chemical properties of demonic mixtures and the various taints that could occur from their ingestion.  The succubus is holding a bottle of a purplish white fluid that appears to be her own milk, probably waiting for an analysis.");
 			}
 			if (choice == 10) outputText("Vapula is resting on her stomach, a buttplug shoved into her ass.  She doesn't seem to notice you watching her butt jiggle under the effect of her unconscious anal contractions.");
@@ -161,8 +161,8 @@ package classes.Scenes.NPCs
 					if (flags[kFLAGS.JOJO_BIMBO_STATE] < 3) {
 						outputText("\n\n\"<i>I'm leaving, " + player.short + ",</i>\" Jojo says.  \"<i>I only hope for your sake that you come to your senses soon... I will return to my place in the forest when you require assistance in freeing your soul of taint.</i>\"");
 						flags[kFLAGS.JOJO_MOVE_IN_DISABLED] = 1;
-						player.removeStatusAffect(StatusAffects.JojoNightWatch);
-						player.removeStatusAffect(StatusAffects.PureCampJojo);
+						player.removeStatusEffect(StatusEffects.JojoNightWatch);
+						player.removeStatusEffect(StatusEffects.PureCampJojo);
 					}
 					else {
 						outputText("\n\n\"<i>Ew! She's, like, covered in black icky stuff! I'm staying but please keep her away from me,</i>\" Joy pleads at you then makes a disgusted face at Vapula, tongue out.");
@@ -386,7 +386,7 @@ package classes.Scenes.NPCs
 				haremT = "Don'tFuck";
 			}
 			//IF PC has cerulean succubused before
-			if (player.hasStatusAffect(StatusAffects.RepeatSuccubi)) {
+			if (player.hasStatusEffect(StatusEffects.RepeatSuccubi)) {
 				if (flags[kFLAGS.VAPULA_THREESOMES] == 0) {
 					outputText("\n\nShe won't currently assist the cerulean succubus if you invite her over.");
 					threesomeT = "Assist On";

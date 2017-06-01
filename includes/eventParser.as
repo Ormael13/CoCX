@@ -596,15 +596,15 @@ private function goNextWrapped(time:Number, needNext:Boolean):Boolean  {
 	
 	// Hanging the Uma massage update here, I think it should work...
 	telAdre.umasShop.updateBonusDuration(time);
-	if (player.hasStatusAffect(StatusAffects.UmasMassage))
+	if (player.hasStatusEffect(StatusEffects.UmasMassage))
 	{
-		trace("Uma's massage bonus time remaining: " + player.statusAffectv3(StatusAffects.UmasMassage));
+		trace("Uma's massage bonus time remaining: " + player.statusEffectv3(StatusEffects.UmasMassage));
 	}
 	
 	highMountains.izumiScenes.updateSmokeDuration(time);
-	if (player.hasStatusAffect(StatusAffects.IzumisPipeSmoke))
+	if (player.hasStatusEffect(StatusEffects.IzumisPipeSmoke))
 	{
-		trace("Izumis pipe smoke time remaining: " + player.statusAffectv1(StatusAffects.IzumisPipeSmoke));
+		trace("Izumis pipe smoke time remaining: " + player.statusEffectv1(StatusEffects.IzumisPipeSmoke));
 	}
 	
 	//Drop axe if too short!
@@ -721,11 +721,11 @@ private function goNextWrapped(time:Number, needNext:Boolean):Boolean  {
 // 0: nothing, 1: needNext, 2: return true
 private function eggLootProgress():int {
 	//Egg loot!
-	if(player.hasStatusAffect(StatusAffects.LootEgg)) {
+	if(player.hasStatusEffect(StatusEffects.LootEgg)) {
 		trace("EGG LOOT HAS");
-		if (!player.hasStatusAffect(StatusAffects.Eggs)) { //Handling of errors.
+		if (!player.hasStatusEffect(StatusEffects.Eggs)) { //Handling of errors.
 			outputText("Oops, looks like something went wrong with the coding regarding gathering eggs after pregnancy. Hopefully this should never happen again. If you encounter this again, please let Kitteh6660 know so he can fix it.");
-			player.removeStatusAffect(StatusAffects.LootEgg);
+			player.removeStatusEffect(StatusEffects.LootEgg);
 			doNext(playerMenu);
 			return 2;
 		}
@@ -751,13 +751,13 @@ private function eggLootProgress():int {
 
 		var sEgg:ItemType = null;
 
-		if (player.hasStatusAffect(StatusAffects.Eggs))
+		if (player.hasStatusEffect(StatusEffects.Eggs))
 		{
-			var size:int = player.statusAffectv2(StatusAffects.Eggs);
+			var size:int = player.statusEffectv2(StatusEffects.Eggs);
 
 			if (size < 0 || size > 1) size = rand(2);
 
-			var col:int = player.statusAffectv1(StatusAffects.Eggs);
+			var col:int = player.statusEffectv1(StatusEffects.Eggs);
 
 			if (col < 0 || col > 5) col = rand(6);
 
@@ -767,8 +767,8 @@ private function eggLootProgress():int {
 		{
 			sEgg = consumables.BROWNEG;
 		}
-		player.removeStatusAffect(StatusAffects.LootEgg);
-		player.removeStatusAffect(StatusAffects.Eggs);
+		player.removeStatusEffect(StatusEffects.LootEgg);
+		player.removeStatusEffect(StatusEffects.Eggs);
 		trace("TAKEY NAU");
 		inventory.takeItem(sEgg, playerMenu);
 		return 2;
@@ -882,7 +882,7 @@ private function pregnancyProgress():int {
 private function impGangBangProgress():int {
 	//IMP GANGBAAAAANGA
 	//The more imps you create, the more often you get gangraped.
-	temp = player.statusAffectv1(StatusAffects.BirthedImps) * 2;
+	temp = player.statusEffectv1(StatusEffects.BirthedImps) * 2;
 	if (temp > 7) temp = 7;
 	if (player.findPerk(PerkLib.PiercedLethite) >= 0) temp += 4;
 	if (player.inHeat) temp += 2;
@@ -895,8 +895,8 @@ private function impGangBangProgress():int {
 		if (model.time.days % 30 == 0 && flags[kFLAGS.ANEMONE_KID] > 0 && player.hasCock() && flags[kFLAGS.ANEMONE_WATCH] > 0 && flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 40) {
 			anemoneScene.goblinNightAnemone();
 			return 1;
-		} else if (temp > rand(100) && !player.hasStatusAffect(StatusAffects.DefenseCanopy)) {
-			if (player.gender > 0 && (!player.hasStatusAffect(StatusAffects.JojoNightWatch) || !player.hasStatusAffect(StatusAffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !kihaFollower.followerKiha()) && !(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "")) && (flags[kFLAGS.IN_INGNAM] == 0 && flags[kFLAGS.IN_PRISON] == 0)) {
+		} else if (temp > rand(100) && !player.hasStatusEffect(StatusEffects.DefenseCanopy)) {
+			if (player.gender > 0 && (!player.hasStatusEffect(StatusEffects.JojoNightWatch) || !player.hasStatusEffect(StatusEffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !kihaFollower.followerKiha()) && !(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "")) && (flags[kFLAGS.IN_INGNAM] == 0 && flags[kFLAGS.IN_PRISON] == 0)) {
 				impScene.impGangabangaEXPLOSIONS();
 				doNext(playerMenu);
 				return 2;
@@ -909,7 +909,7 @@ private function impGangBangProgress():int {
 				outputText("\n<b>Helia informs you over a mug of beer that she whupped some major imp asshole last night.  She wiggles her tail for emphasis.</b>\n");
 				return 1;
 			}
-			else if (player.gender > 0 && player.hasStatusAffect(StatusAffects.JojoNightWatch) && player.hasStatusAffect(StatusAffects.PureCampJojo)) {
+			else if (player.gender > 0 && player.hasStatusEffect(StatusEffects.JojoNightWatch) && player.hasStatusEffect(StatusEffects.PureCampJojo)) {
 				outputText("\n<b>Jojo informs you that he dispatched a crowd of imps as they tried to sneak into camp in the night.</b>\n");
 				return 1;
 			}
@@ -931,8 +931,8 @@ private function impGangBangProgress():int {
 			}
 		}
 		//wormgasms
-		else if (flags[kFLAGS.EVER_INFESTED] == 1 && rand(100) <= 4 && player.hasCock() && !player.hasStatusAffect(StatusAffects.Infested)) {
-			if (player.hasCock() && (!player.hasStatusAffect(StatusAffects.JojoNightWatch) || !player.hasStatusAffect(StatusAffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && flags[kFLAGS.SLEEP_WITH] == "")) {
+		else if (flags[kFLAGS.EVER_INFESTED] == 1 && rand(100) <= 4 && player.hasCock() && !player.hasStatusEffect(StatusEffects.Infested)) {
+			if (player.hasCock() && (!player.hasStatusEffect(StatusEffects.JojoNightWatch) || !player.hasStatusEffect(StatusEffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && flags[kFLAGS.SLEEP_WITH] == "")) {
 				kGAMECLASS.mountain.wormsScene.nightTimeInfestation();
 				return 2;
 			}
@@ -944,7 +944,7 @@ private function impGangBangProgress():int {
 				outputText("\n<b>Helia informs you over a mug of beer that she stomped a horde of gross worms into paste.  She shudders after at the memory.</b>\n");
 				return 1;
 			}
-			else if (player.gender > 0 && player.hasStatusAffect(StatusAffects.JojoNightWatch) && player.hasStatusAffect(StatusAffects.PureCampJojo)) {
+			else if (player.gender > 0 && player.hasStatusEffect(StatusEffects.JojoNightWatch) && player.hasStatusEffect(StatusEffects.PureCampJojo)) {
 				outputText("\n<b>Jojo informs you that he dispatched a horde of tiny, white worms as they tried to sneak into camp in the night.</b>\n");
 				return 1;
 			}

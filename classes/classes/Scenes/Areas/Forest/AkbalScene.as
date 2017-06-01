@@ -865,7 +865,7 @@ package classes.Scenes.Areas.Forest
 					outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accomodate the demon's wishes...", false);
 					player.buttRating++;
 				}
-				player.createStatusAffect(StatusAffects.PostAkbalSubmission, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.PostAkbalSubmission, 0, 0, 0, 0);
 				doNext(camp.returnToCampUseEightHours);
 				return;
 			}
@@ -943,7 +943,7 @@ package classes.Scenes.Areas.Forest
 					outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accomodate the demon's wishes...", false);
 					player.buttRating++;
 				}
-				player.createStatusAffect(StatusAffects.PostAkbalSubmission, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.PostAkbalSubmission, 0, 0, 0, 0);
 				doNext(camp.returnToCampUseEightHours);
 				return;
 			}
@@ -1023,7 +1023,7 @@ package classes.Scenes.Areas.Forest
 				outputText("\n\nIn your sleep, your ass plumps up slightly, growing to accomodate the demon's wishes...", false);
 				player.buttRating++;
 			}
-			player.createStatusAffect(StatusAffects.PostAkbalSubmission, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.PostAkbalSubmission, 0, 0, 0, 0);
 			doNext(camp.returnToCampUseEightHours);
 		}
 
@@ -1162,7 +1162,7 @@ package classes.Scenes.Areas.Forest
 			player.orgasm();
 			dynStats("cor", 5);
 			player.slimeFeed();
-			player.createStatusAffect(StatusAffects.PostAkbalSubmission, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.PostAkbalSubmission, 0, 0, 0, 0);
 			doNext(camp.returnToCampUseEightHours);
 		}
 

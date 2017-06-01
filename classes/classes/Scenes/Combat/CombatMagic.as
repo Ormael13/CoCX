@@ -15,7 +15,7 @@ import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.NPCs.Holli;
 import classes.Scenes.Places.TelAdre.UmasShop;
-import classes.StatusAffects;
+import classes.StatusEffects;
 
 public class CombatMagic extends BaseCombatContent {
 	public function CombatMagic() {
@@ -25,28 +25,28 @@ public class CombatMagic extends BaseCombatContent {
 			spellChargeWeapon(true);
 			fatigue(30,1);
 			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock(); // XXX: message?
 		}
 		if (player.findPerk(PerkLib.Spellarmor) >= 0 && player.lust < getWhiteMagicLustCap() && player.fatigue + spellCost(40) < player.maxFatigue() && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] == 0) {
 			spellChargeArmor(true);
 			fatigue(40,1);
 			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock(); // XXX: message?
 		}
 		if (player.findPerk(PerkLib.Battlemage) >= 0 && (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30 || player.lust >= 50) && player.fatigue + spellCost(50) < player.maxFatigue() && flags[kFLAGS.AUTO_CAST_MIGHT] == 0) {
 			spellMight(true);
 			fatigue(50,1);
 			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock(); // XXX: message?
 		}
 		if (player.findPerk(PerkLib.Battleflash) >= 0 && (player.findPerk(PerkLib.GreyMage) >= 0 && player.lust >= 30 || player.lust >= 50) && player.fatigue + spellCost(40) < player.maxFatigue() && flags[kFLAGS.AUTO_CAST_BLINK] == 0) {
 			spellBlink(true);
 			fatigue(40,1);
 			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock(); // XXX: message?
 		}
 	}
@@ -291,10 +291,10 @@ public class CombatMagic extends BaseCombatContent {
 
 	public function magicMenu():void {
 	//Pass false to combatMenu instead:	menuLoc = 3;
-		if (inCombat && player.hasStatusAffect(StatusAffects.Sealed) && (player.statusAffectv2(StatusAffects.Sealed) == 2 || player.statusAffectv2(StatusAffects.Sealed) == 10)) {
+		if (inCombat && player.hasStatusEffect(StatusEffects.Sealed) && (player.statusEffectv2(StatusEffects.Sealed) == 2 || player.statusEffectv2(StatusEffects.Sealed) == 10)) {
 			clearOutput();
-			if (player.statusAffectv2(StatusAffects.Sealed) == 2) outputText("You reach for your magic, but you just can't manage the focus necessary.  <b>Your ability to use magic was sealed, and now you've wasted a chance to attack!</b>\n\n");
-			if (player.statusAffectv2(StatusAffects.Sealed) == 10) outputText("You try to use magic but you are currently silenced by the alraune vines!\n\n");
+			if (player.statusEffectv2(StatusEffects.Sealed) == 2) outputText("You reach for your magic, but you just can't manage the focus necessary.  <b>Your ability to use magic was sealed, and now you've wasted a chance to attack!</b>\n\n");
+			if (player.statusEffectv2(StatusEffects.Sealed) == 10) outputText("You try to use magic but you are currently silenced by the alraune vines!\n\n");
 			enemyAI();
 			return;
 		}
@@ -306,16 +306,16 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.lust >= whiteLustCap)
 			outputText("You are far too aroused to focus on white magic.\n\n");
 		else {
-			if (player.hasStatusAffect(StatusAffects.KnowsBlind)) {
-				if (!monster.hasStatusAffect(StatusAffects.Blind))
+			if (player.hasStatusEffect(StatusEffects.KnowsBlind)) {
+				if (!monster.hasStatusEffect(StatusEffects.Blind))
 					addButton(0, "Blind", spellBlind, null, null, null, "Blind is a fairly self-explanatory spell.  It will create a bright flash just in front of the victim's eyes, blinding them for a time.  However if they blink it will be wasted.  \n\nFatigue Cost: " + spellCostWhite(30) + "");
 				else {
 					outputText("<b>" + monster.capitalA + monster.short + " is already affected by blind.</b>\n\n");
 					addButtonDisabled(0, "Blind", "Enemy still blinded");
 				}
 			}
-			if (player.hasStatusAffect(StatusAffects.KnowsWhitefire)) addButton(2, "Whitefire", spellWhitefire, null, null, null, "Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.  \n\nFatigue Cost: " + spellCostWhite(40) + "");
-			if (player.hasStatusAffect(StatusAffects.KnowsLightningBolt)) addButton(3, "LightningBolt", spellLightningBolt, null, null, null, "Lightning Bolt is a basic lightning attack that will electrocute your foe with a single bolt of lightning.  \n\nFatigue Cost: " + spellCostWhite(40) + "");
+			if (player.hasStatusEffect(StatusEffects.KnowsWhitefire)) addButton(2, "Whitefire", spellWhitefire, null, null, null, "Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.  \n\nFatigue Cost: " + spellCostWhite(40) + "");
+			if (player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) addButton(3, "LightningBolt", spellLightningBolt, null, null, null, "Lightning Bolt is a basic lightning attack that will electrocute your foe with a single bolt of lightning.  \n\nFatigue Cost: " + spellCostWhite(40) + "");
 		}
 		//BLACK MAGICSKS
 		if (player.lust < 50 && player.findPerk(PerkLib.GreyMage) < 0)
@@ -323,10 +323,10 @@ public class CombatMagic extends BaseCombatContent {
 		else if (player.lust < 30 && player.findPerk(PerkLib.GreyMage) >= 0)
 			outputText("You aren't turned on enough to use any black magics.\n\n");
 		else {
-			if (player.hasStatusAffect(StatusAffects.KnowsArouse)) addButton(5, "Arouse", spellArouse, null, null, null, "The arouse spell draws on your own inner lust in order to enflame the enemy's passions.  \n\nFatigue Cost: " + spellCostBlack(20) + "");
-			if (player.hasStatusAffect(StatusAffects.KnowsHeal)) addButton(6, "Heal", spellHeal, null, null, null, "Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nFatigue Cost: " + spellCostBlack(30) + "");
-			if (player.hasStatusAffect(StatusAffects.KnowsIceSpike)) addButton(7, "Ice Spike", spellIceSpike, null, null, null, "Drawning your own lust to concentrate it into chilling spike of ice that will attack your enemies.  \n\nFatigue Cost: " + spellCostBlack(40) + "");
-			if (player.hasStatusAffect(StatusAffects.KnowsDarknessShard)) addButton(8, "DarknessShard", spellDarknessShard, null, null, null, "Drawning your own lust to condense part of the the ambivalent darkness into a shard to attack your enemies.  \n\nFatigue Cost: " + spellCostBlack(40) + "");
+			if (player.hasStatusEffect(StatusEffects.KnowsArouse)) addButton(5, "Arouse", spellArouse, null, null, null, "The arouse spell draws on your own inner lust in order to enflame the enemy's passions.  \n\nFatigue Cost: " + spellCostBlack(20) + "");
+			if (player.hasStatusEffect(StatusEffects.KnowsHeal)) addButton(6, "Heal", spellHeal, null, null, null, "Heal will attempt to use black magic to close your wounds and restore your body, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  \n\nFatigue Cost: " + spellCostBlack(30) + "");
+			if (player.hasStatusEffect(StatusEffects.KnowsIceSpike)) addButton(7, "Ice Spike", spellIceSpike, null, null, null, "Drawning your own lust to concentrate it into chilling spike of ice that will attack your enemies.  \n\nFatigue Cost: " + spellCostBlack(40) + "");
+			if (player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) addButton(8, "DarknessShard", spellDarknessShard, null, null, null, "Drawning your own lust to condense part of the the ambivalent darkness into a shard to attack your enemies.  \n\nFatigue Cost: " + spellCostBlack(40) + "");
 		}
 		addButton(10, "Support", magicMenu2, null, null, null, "Cast one of support spells.");
 		if (player.findPerk(PerkLib.GreyMage) >= 0) addButton(11, "Grey Spells", magicMenu3, null, null, null, "Cast one of Grey Magic spells.");
@@ -345,24 +345,24 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.lust >= whiteLustCap2)
 			outputText("You are far too aroused to focus on white magic.\n\n");
 		else {
-			if (player.hasStatusAffect(StatusAffects.KnowsCharge)) {
-				if (!player.hasStatusAffect(StatusAffects.ChargeWeapon))
+			if (player.hasStatusEffect(StatusEffects.KnowsCharge)) {
+				if (!player.hasStatusEffect(StatusEffects.ChargeWeapon))
 					addButton(0, "Charge W.", spellChargeWeapon, null, null, null, "The Charge Weapon spell will surround your weapon in electrical energy, causing it to do even more damage.  The effect lasts for the entire combat.  \n\nFatigue Cost: " + spellCostWhite(30) + "", "Charge Weapon");
 				else {
 					outputText("<b>Charge weapon is already active and cannot be cast again.</b>\n\n");
 					addButtonDisabled(0, "Charge W.", "Active");
 				}
 			}
-			if (player.hasStatusAffect(StatusAffects.KnowsChargeA)) {
-				if (!player.hasStatusAffect(StatusAffects.ChargeArmor))
+			if (player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
+				if (!player.hasStatusEffect(StatusEffects.ChargeArmor))
 					addButton(1, "Charge A.", spellChargeArmor, null, null, null, "The Charge Armor spell will surround your armor with electrical energy, causing it to do provide additional protection.  The effect lasts for the entire combat.  \n\nFatigue Cost: " + spellCostWhite(40) + "", "Charge Armor");
 				else {
 					outputText("<b>Charge armor is already active and cannot be cast again.</b>\n\n");
 					addButtonDisabled(1, "Charge A.", "Active");
 				}
 			}
-			if (player.hasStatusAffect(StatusAffects.KnowsBlizzard)) {
-				if (!player.hasStatusAffect(StatusAffects.Blizzard))
+			if (player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
+				if (!player.hasStatusEffect(StatusEffects.Blizzard))
 					addButton(4, "Blizzard", spellBlizzard, null, null, null, "Blizzard is a potent ice based defense spell that will reduce power of any fire based attack used against the user.  \n\nFatigue Cost: " + spellCostWhite(50) + "");
 				else {
 					outputText("<b>Blizzard is already active and cannot be cast again.</b>\n\n");
@@ -375,16 +375,16 @@ public class CombatMagic extends BaseCombatContent {
 		else if (player.lust < 30 && player.findPerk(PerkLib.GreyMage) >= 0)
 			outputText("You aren't turned on enough to use any black magics.\n\n");
 		else {
-			if (player.hasStatusAffect(StatusAffects.KnowsMight)) {
-				if (!player.hasStatusAffect(StatusAffects.Might))
+			if (player.hasStatusEffect(StatusEffects.KnowsMight)) {
+				if (!player.hasStatusEffect(StatusEffects.Might))
 					addButton(5, "Might", spellMight, null, null, null, "The Might spell draws upon your lust and uses it to fuel a temporary increase in muscle size and power.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  \n\nFatigue Cost: " + spellCostBlack(50) + "");
 				else {
 					outputText("<b>You are already under the effects of Might and cannot cast it again.</b>\n\n");
 					addButtonDisabled(5, "Might", "Active");
 				}
 			}
-			if (player.hasStatusAffect(StatusAffects.KnowsBlink)) {
-				if (!player.hasStatusAffect(StatusAffects.Blink))
+			if (player.hasStatusEffect(StatusEffects.KnowsBlink)) {
+				if (!player.hasStatusEffect(StatusEffects.Blink))
 					addButton(6, "Blink", spellBlink, null, null, null, "The Blink spell draws upon your lust and uses it to fuel a temporary increase in moving speed and if it's needed teleport over short distances.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.  \n\nFatigue Cost: " + spellCostBlack(40) + "");
 				else {
 					outputText("<b>You are already under the effects of Blink and cannot cast it again.</b>\n\n");
@@ -402,13 +402,13 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.lust < 50 || player.lust > (player.maxLust() - 50))
 			outputText("You can't use any grey magics.\n\n");
 		else {
-			/*	if (player.hasStatusAffect(StatusAffects.Knows)) addButton(2, "	1st spell (non-fire or non-ice based) goes here
-			 if (player.hasStatusAffect(StatusAffects.Knows)) addButton(2, "	2nd spell (non-fire or non-ice based) goes here
-			 if (player.hasStatusAffect(StatusAffects.KnowsWereBeast)) addButton(2, "Were-beast",	were-beast spell goes here
-			 */	if (player.hasStatusAffect(StatusAffects.KnowsFireStorm)) addButton(5, "Fire Storm", spellFireStorm, null, null, null, "Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Fire Storm that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nFatigue Cost: " + spellCost(200) + "");
-			//	if (player.hasStatusAffect(StatusAffects.Knows)) addButton(6, "	fire single target spell goes here
-			if (player.hasStatusAffect(StatusAffects.KnowsIceRain)) addButton(10, "Ice Rain", spellIceRain, null, null, null, "Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Ice Rain that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nFatigue Cost: " + spellCost(200) + "");
-			//	if (player.hasStatusAffect(StatusAffects.Knows)) addButton(11, "	ice single target spell goes here
+			/*	if (player.hasStatusEffect(StatusEffects.Knows)) addButton(2, "	1st spell (non-fire or non-ice based) goes here
+			 if (player.hasStatusEffect(StatusEffects.Knows)) addButton(2, "	2nd spell (non-fire or non-ice based) goes here
+			 if (player.hasStatusEffect(StatusEffects.KnowsWereBeast)) addButton(2, "Were-beast",	were-beast spell goes here
+			 */	if (player.hasStatusEffect(StatusEffects.KnowsFireStorm)) addButton(5, "Fire Storm", spellFireStorm, null, null, null, "Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Fire Storm that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nFatigue Cost: " + spellCost(200) + "");
+			//	if (player.hasStatusEffect(StatusEffects.Knows)) addButton(6, "	fire single target spell goes here
+			if (player.hasStatusEffect(StatusEffects.KnowsIceRain)) addButton(10, "Ice Rain", spellIceRain, null, null, null, "Drawning your own lust and force of the willpower to fuel radical change in the surrounding you can call forth an Ice Rain that will attack enemies in a wide area.  Despite been grey magic it still does carry the risk of backfiring and raising lust.  \n\n<b>AoE Spell.</b>  \n\nFatigue Cost: " + spellCost(200) + "");
+			//	if (player.hasStatusEffect(StatusEffects.Knows)) addButton(11, "	ice single target spell goes here
 		}
 		addButton(14, "Back", magicMenu);
 	}
@@ -424,15 +424,15 @@ public class CombatMagic extends BaseCombatContent {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(20,6);
 		statScreenRefresh();
-		if (monster is FrostGiant && player.hasStatusAffect(StatusAffects.GiantBoulder)) {
+		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
 			return;
 		}
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 			enemyAI();
 			return;
@@ -443,7 +443,7 @@ public class CombatMagic extends BaseCombatContent {
 			outputText("The worms appear to be unaffected by your magic!", false);
 			outputText("\n\n", false);
 			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 			doNext(playerMenu);
 			if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
@@ -453,7 +453,7 @@ public class CombatMagic extends BaseCombatContent {
 		if(monster.lustVuln == 0) {
 			outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n", false);
 			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 			enemyAI();
 			return;
@@ -495,7 +495,7 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("\n\n", false);
 		doNext(playerMenu);
 		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		if(monster.lust >= monster.eMaxLust()) doNext(endLustVictory);
 		else enemyAI();
@@ -509,7 +509,7 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(30, 8);
-		if (monster is FrostGiant && player.hasStatusAffect(StatusAffects.GiantBoulder)) {
+		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
 			return;
@@ -536,7 +536,7 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("\n\n", false);
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		if(player.lust >= player.maxLust()) doNext(endLustLoss);
 		else enemyAI();
@@ -610,22 +610,22 @@ public class CombatMagic extends BaseCombatContent {
 			MightBoost *= spellModBlack();
 			if (debug) MightBoost = FnHelpers.FN.logScale(MightBoost,MightABC,10);
 			MightBoost = Math.round(MightBoost);
-			player.createStatusAffect(StatusAffects.Might,0,0,0,0);
+			player.createStatusEffect(StatusEffects.Might,0,0,0,0);
 			temp = MightBoost;
 			tempStr = temp;
 			tempTou = temp;
 			//if(player.str + temp > 100) tempStr = 100 - player.str;
 			//if(player.tou + temp > 100) tempTou = 100 - player.tou;
-			player.changeStatusValue(StatusAffects.Might,1,tempStr);
-			player.changeStatusValue(StatusAffects.Might,2,tempTou);
+			player.changeStatusValue(StatusEffects.Might,1,tempStr);
+			player.changeStatusValue(StatusEffects.Might,2,tempTou);
 			mainView.statsView.showStatUp('str');
 			// strUp.visible = true;
 			// strDown.visible = false;
 			mainView.statsView.showStatUp('tou');
 			// touUp.visible = true;
 			// touDown.visible = false;
-			player.str += player.statusAffectv1(StatusAffects.Might);
-			player.tou += player.statusAffectv2(StatusAffects.Might);
+			player.str += player.statusEffectv1(StatusEffects.Might);
+			player.tou += player.statusEffectv2(StatusEffects.Might);
 			statScreenRefresh();
 		};
 
@@ -644,7 +644,7 @@ public class CombatMagic extends BaseCombatContent {
 		fatigue(50,6);
 		var tempStr:Number = 0;
 		var tempTou:Number = 0;
-		if (monster is FrostGiant && player.hasStatusAffect(StatusAffects.GiantBoulder)) {
+		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
 			return;
@@ -672,7 +672,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		outputText("\n\n", false);
 		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		if(player.lust >= player.maxLust()) doNext(endLustLoss);
 		else enemyAI();
@@ -724,15 +724,15 @@ public class CombatMagic extends BaseCombatContent {
 			BlinkBoost *= spellModBlack();
 			if (debug) BlinkBoost = FnHelpers.FN.logScale(BlinkBoost,BlinkABC,10);
 			BlinkBoost = Math.round(BlinkBoost);
-			player.createStatusAffect(StatusAffects.Blink,0,0,0,0);
+			player.createStatusEffect(StatusEffects.Blink,0,0,0,0);
 			temp = BlinkBoost;
 			tempSpe = temp;
 			//if(player.spe + temp > 100) tempSpe = 100 - player.spe;
-			player.changeStatusValue(StatusAffects.Blink,1,tempSpe);
+			player.changeStatusValue(StatusEffects.Blink,1,tempSpe);
 			mainView.statsView.showStatUp('spe');
 			// strUp.visible = true;
 			// strDown.visible = false;
-			player.spe += player.statusAffectv1(StatusAffects.Blink);
+			player.spe += player.statusEffectv1(StatusEffects.Blink);
 			statScreenRefresh();
 		};
 
@@ -750,7 +750,7 @@ public class CombatMagic extends BaseCombatContent {
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(40,6);
 		var tempSpe:Number = 0;
-		if (monster is FrostGiant && player.hasStatusAffect(StatusAffects.GiantBoulder)) {
+		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
 			return;
@@ -778,7 +778,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		outputText("\n\n", false);
 		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		if(player.lust >= player.maxLust()) doNext(endLustLoss);
 		else enemyAI();
@@ -796,10 +796,10 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(40,6);
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 			enemyAI();
 			return;
@@ -808,11 +808,11 @@ public class CombatMagic extends BaseCombatContent {
 		//{
 		//(monster as Doppleganger).handleSpellResistance("whitefire");
 		//flags[kFLAGS.SPELLS_CAST]++;
-		//if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		//if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		//spellPerkUnlock();
 		//return;
 		//}
-		if (monster is FrostGiant && player.hasStatusAffect(StatusAffects.GiantBoulder)) {
+		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
 			return;
@@ -853,7 +853,7 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("\n\n", false);
 		checkAchievementDamage(temp);
 		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		monster.HP -= temp;
 		statScreenRefresh();
@@ -873,10 +873,10 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(40,6);
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 			enemyAI();
 			return;
@@ -885,11 +885,11 @@ public class CombatMagic extends BaseCombatContent {
 		//{
 		//(monster as Doppleganger).handleSpellResistance("whitefire");
 		//flags[kFLAGS.SPELLS_CAST]++;
-		//if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		//if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		//spellPerkUnlock();
 		//return;
 		//}
-		if (monster is FrostGiant && player.hasStatusAffect(StatusAffects.GiantBoulder)) {
+		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
 			return;
@@ -930,7 +930,7 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("\n\n", false);
 		checkAchievementDamage(temp);
 		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		monster.HP -= temp;
 		statScreenRefresh();
@@ -951,10 +951,10 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(200,1);
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 			enemyAI();
 			return;
@@ -963,11 +963,11 @@ public class CombatMagic extends BaseCombatContent {
 		//{
 		//(monster as Doppleganger).handleSpellResistance("whitefire");
 		//flags[kFLAGS.SPELLS_CAST]++;
-		//if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		//if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		//spellPerkUnlock();
 		//return;
 		//}
-		if (monster is FrostGiant && player.hasStatusAffect(StatusAffects.GiantBoulder)) {
+		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
 			return;
@@ -1009,7 +1009,7 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("\n\n", false);
 		checkAchievementDamage(temp);
 		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		monster.HP -= temp;
 		statScreenRefresh();
@@ -1030,10 +1030,10 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(200,1);
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 			enemyAI();
 			return;
@@ -1042,11 +1042,11 @@ public class CombatMagic extends BaseCombatContent {
 		//{
 		//(monster as Doppleganger).handleSpellResistance("whitefire");
 		//flags[kFLAGS.SPELLS_CAST]++;
-		//if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		//if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		//spellPerkUnlock();
 		//return;
 		//}
-		if (monster is FrostGiant && player.hasStatusAffect(StatusAffects.GiantBoulder)) {
+		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
 			return;
@@ -1087,7 +1087,7 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("\n\n", false);
 		checkAchievementDamage(temp);
 		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		monster.HP -= temp;
 		statScreenRefresh();
@@ -1138,7 +1138,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (debug) ChargeWeaponBoost = FnHelpers.FN.logScale(ChargeWeaponBoost,ChargeWeaponABC,10);
 		ChargeWeaponBoost = Math.round(ChargeWeaponBoost);
 		if (silent) {
-			player.createStatusAffect(StatusAffects.ChargeWeapon,ChargeWeaponBoost,0,0,0);
+			player.createStatusEffect(StatusEffects.ChargeWeapon,ChargeWeaponBoost,0,0,0);
 			statScreenRefresh();
 			return;
 		}
@@ -1151,16 +1151,16 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(30, 5);
-		if (monster is FrostGiant && player.hasStatusAffect(StatusAffects.GiantBoulder)) {
+		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
 			return;
 		}
 		outputText("You utter words of power, summoning an electrical charge around your " + player.weaponName + ".  It crackles loudly, ensuring you'll do more damage with it for the rest of the fight.\n\n", true);
-		player.createStatusAffect(StatusAffects.ChargeWeapon,ChargeWeaponBoost,0,0,0);
+		player.createStatusEffect(StatusEffects.ChargeWeapon,ChargeWeaponBoost,0,0,0);
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		enemyAI();
 	}
@@ -1207,7 +1207,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (debug) ChargeArmorBoost = FnHelpers.FN.logScale(ChargeArmorBoost,ChargeArmorABC,10);
 		ChargeArmorBoost = Math.round(ChargeArmorBoost);
 		if (silent) {
-			player.createStatusAffect(StatusAffects.ChargeArmor,ChargeArmorBoost,0,0,0);
+			player.createStatusEffect(StatusEffects.ChargeArmor,ChargeArmorBoost,0,0,0);
 			statScreenRefresh();
 			return;
 		}
@@ -1220,16 +1220,16 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(40, 5);
-		if (monster is FrostGiant && player.hasStatusAffect(StatusAffects.GiantBoulder)) {
+		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
 			return;
 		}
 		outputText("You utter words of power, summoning an electrical charge around your " + player.armorName + ".  It crackles loudly, ensuring you'll have more protection for the rest of the fight.\n\n", true);
-		player.createStatusAffect(StatusAffects.ChargeArmor,ChargeArmorBoost,0,0,0);
+		player.createStatusEffect(StatusEffects.ChargeArmor,ChargeArmorBoost,0,0,0);
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		enemyAI();
 	}
@@ -1249,10 +1249,10 @@ public class CombatMagic extends BaseCombatContent {
 		successrate -= (player.inte * 0.4);
 		if (successrate > 20) successrate = 20;
 		if (rand(100) > successrate) {
-			if (monster.hasStatusAffect(StatusAffects.Shell)) {
+			if (monster.hasStatusEffect(StatusEffects.Shell)) {
 				outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 				flags[kFLAGS.SPELLS_CAST]++;
-				if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+				if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 				spellPerkUnlock();
 				enemyAI();
 				return;
@@ -1277,15 +1277,15 @@ public class CombatMagic extends BaseCombatContent {
 
 					outputText("\n\n“<i>The taste of your own medicine, it is not so nice, eh? I will show you much nicer things in there in time intrus, don’t worry. Once you have learnt your place.</i>”");
 
-					player.createStatusAffect(StatusAffects.Blind, 2 + player.inte/20, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.Blind, 2 + player.inte / 20, 0, 0, 0);
 				}
-				if (monster is FrostGiant && player.hasStatusAffect(StatusAffects.GiantBoulder)) {
+				if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 					(monster as FrostGiant).giantBoulderHit(2);
 					enemyAI();
 					return;
 				}
 				flags[kFLAGS.SPELLS_CAST]++;
-				if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+				if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 				spellPerkUnlock();
 				if(monster.HP < 1) doNext(endHpVictory);
 				else enemyAI();
@@ -1297,10 +1297,10 @@ public class CombatMagic extends BaseCombatContent {
 
 				outputText("\n\n<i>“Damn you, fight!”</i> Lethice screams, grabbing her whip and lashing out at the back-most demons, driving them forward -- and causing the middle bunch to be crushed between competing forces of retreating demons! <i>“Fight, or you'll be in the submission tanks for the rest of your miserable lives!”</i>");
 
-				monster.createStatusAffect(StatusAffects.Blind, 5 * spellModWhite(), 0, 0, 0);
+				monster.createStatusEffect(StatusEffects.Blind, 5 * spellModWhite(), 0, 0, 0);
 				outputText("\n\n", false);
 				flags[kFLAGS.SPELLS_CAST]++;
-				if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+				if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 				spellPerkUnlock();
 				statScreenRefresh();
 				enemyAI();
@@ -1315,21 +1315,21 @@ public class CombatMagic extends BaseCombatContent {
 				outputText(" <b>" + monster.capitalA + monster.short + " ", false);
 				if(monster.plural && monster.short != "imp horde") outputText("are blinded!</b>", false);
 				else outputText("is blinded!</b>", false);
-				monster.createStatusAffect(StatusAffects.Blind,2+player.inte/20,0,0,0);
+				monster.createStatusEffect(StatusEffects.Blind, 2 + player.inte / 20,0,0,0);
 				if(monster.short == "Isabella")
 					if (kGAMECLASS.isabellaFollowerScene.isabellaAccent()) outputText("\n\n\"<i>Nein! I cannot see!</i>\" cries Isabella.", false);
 					else outputText("\n\n\"<i>No! I cannot see!</i>\" cries Isabella.", false);
 				if(monster.short == "Kiha") outputText("\n\n\"<i>You think blindness will slow me down?  Attacks like that are only effective on those who don't know how to see with their other senses!</i>\" Kiha cries defiantly.", false);
 				if(monster.short == "plain girl") {
 					outputText("  Remarkably, it seems as if your spell has had no effect on her, and you nearly get clipped by a roundhouse as you stand, confused. The girl flashes a radiant smile at you, and the battle continues.", false);
-					monster.removeStatusAffect(StatusAffects.Blind);
+					monster.removeStatusEffect(StatusEffects.Blind);
 				}
 			}
 		}
 		else outputText(monster.capitalA + monster.short + " blinked!", false);
 		outputText("\n\n", false);
 		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		statScreenRefresh();
 		enemyAI();
@@ -1346,10 +1346,10 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(40,5);
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 			enemyAI();
 			return;
@@ -1358,11 +1358,11 @@ public class CombatMagic extends BaseCombatContent {
 		{
 			(monster as Doppleganger).handleSpellResistance("whitefire");
 			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 			return;
 		}
-		if (monster is FrostGiant && player.hasStatusAffect(StatusAffects.GiantBoulder)) {
+		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
 			return;
@@ -1371,7 +1371,7 @@ public class CombatMagic extends BaseCombatContent {
 		{
 			//Attack gains burn DoT for 2-3 turns.
 			outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!");
-			monster.createStatusAffect(StatusAffects.OnFire, 2 + rand(2), 0, 0, 0);
+			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
 			temp = 0;
 			temp += inteligencescalingbonus();
 			temp *= spellModWhite();
@@ -1425,11 +1425,11 @@ public class CombatMagic extends BaseCombatContent {
 				if(monster.findPerk(PerkLib.Acid) < 0) monster.createPerk(PerkLib.Acid,0,0,0,0);
 			}
 		}
-		if(monster.short == "Holli" && !monster.hasStatusAffect(StatusAffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 		outputText("\n\n", false);
 		checkAchievementDamage(temp);
 		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		monster.HP -= temp;
 		statScreenRefresh();
@@ -1442,7 +1442,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 			{
 				outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
-				monster.createStatusAffect(StatusAffects.Shell, 2, 0, 0, 0);
+				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			}
 			enemyAI();
 		}
@@ -1460,10 +1460,10 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(40,5);
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 			enemyAI();
 			return;
@@ -1472,11 +1472,11 @@ public class CombatMagic extends BaseCombatContent {
 		//{
 		//(monster as Doppleganger).handleSpellResistance("whitefire");
 		//flags[kFLAGS.SPELLS_CAST]++;
-		//if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		//if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		//spellPerkUnlock();
 		//return;
 		//}
-		if (monster is FrostGiant && player.hasStatusAffect(StatusAffects.GiantBoulder)) {
+		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
 			return;
@@ -1516,7 +1516,7 @@ public class CombatMagic extends BaseCombatContent {
 		outputText("\n\n", false);
 		checkAchievementDamage(temp);
 		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		monster.HP -= temp;
 		statScreenRefresh();
@@ -1535,21 +1535,21 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(50,5);
-		if (monster is FrostGiant && player.hasStatusAffect(StatusAffects.GiantBoulder)) {
+		if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
 			(monster as FrostGiant).giantBoulderHit(2);
 			enemyAI();
 			return;
 		}
 		outputText("You utter words of power, summoning an ice storm.  It swirls arounds you, ensuring that you'll have more protection from the fire attacks for a few moments.\n\n", true);
 		if (player.findPerk(PerkLib.ColdMastery) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) {
-			player.createStatusAffect(StatusAffects.Blizzard,2+player.inte/10,0,0,0);
+			player.createStatusEffect(StatusEffects.Blizzard, 2 + player.inte / 10,0,0,0);
 		}
 		else {
-			player.createStatusAffect(StatusAffects.Blizzard,1+player.inte/25,0,0,0);
+			player.createStatusEffect(StatusEffects.Blizzard, 1 + player.inte / 25,0,0,0);
 		}
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		enemyAI();
 	}
@@ -1566,10 +1566,10 @@ public class CombatMagic extends BaseCombatContent {
 		doNext(combatMenu);
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(30,1);
-		if(monster.hasStatusAffect(StatusAffects.Shell)) {
+		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around " + monster.a + monster.short + ", it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 			enemyAI();
 			return;
@@ -1582,7 +1582,7 @@ public class CombatMagic extends BaseCombatContent {
 			{
 				outputText("You thrust your palm forward, sending a blast of pure energy towards Jojo. At the last second he sends a blast of his own against yours canceling it out\n\n");
 				flags[kFLAGS.SPELLS_CAST]++;
-				if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+				if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 				spellPerkUnlock();
 				enemyAI();
 				return;
@@ -1593,7 +1593,7 @@ public class CombatMagic extends BaseCombatContent {
 		{
 			outputText("You thrust your palm forward, causing a blast of pure energy to slam against the giant stone statue- to no effect!");
 			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 			enemyAI();
 			return;
@@ -1636,7 +1636,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 
 		flags[kFLAGS.SPELLS_CAST]++;
-		if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
 		monster.HP -= temp;
 		statScreenRefresh();

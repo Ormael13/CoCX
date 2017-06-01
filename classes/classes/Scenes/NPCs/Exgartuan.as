@@ -63,23 +63,23 @@
 		public function timeChange():Boolean {
 			var needNext:Boolean = false;
 			checkedExgartuan = 0; //Make sure we test just once in timeChangeLarge
-			if (player.hasStatusAffect(StatusAffects.Exgartuan)) { //Update Exgartuan stuff
-				trace("EXGARTUAN V1: " + player.statusAffectv1(StatusAffects.Exgartuan) + " V2: " + player.statusAffectv2(StatusAffects.Exgartuan));
-				if (player.statusAffectv1(StatusAffects.Exgartuan) == 1 && (!player.hasCock() || player.cockArea(0) < 100)) { //If too small dick, remove him
+			if (player.hasStatusEffect(StatusEffects.Exgartuan)) { //Update Exgartuan stuff
+				trace("EXGARTUAN V1: " + player.statusEffectv1(StatusEffects.Exgartuan) + " V2: " + player.statusEffectv2(StatusEffects.Exgartuan));
+				if (player.statusEffectv1(StatusEffects.Exgartuan) == 1 && (!player.hasCock() || player.cockArea(0) < 100)) { //If too small dick, remove him
 					outputText("\n<b>You suddenly feel the urge to urinate, and stop over by some bushes.  It takes wayyyy longer than normal, and once you've finished, you realize you're alone with yourself for the first time in a long time.  Perhaps you got too small for Exgartuan to handle?</b>\n");
 					awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE, true, false, true);
-					player.removeStatusAffect(StatusAffects.Exgartuan);
+					player.removeStatusEffect(StatusEffects.Exgartuan);
 					needNext = true;
 				}
-				else if (player.statusAffectv1(StatusAffects.Exgartuan) == 2 && player.biggestTitSize() < 12) { //Tit removal
+				else if (player.statusEffectv1(StatusEffects.Exgartuan) == 2 && player.biggestTitSize() < 12) { //Tit removal
 					outputText("\n<b>Black milk dribbles from your " + getGame().nippleDescript(0) + ".  It immediately dissipates into the air, leaving you feeling alone.  It looks like you became too small for Exgartuan!\n</b>");
-					player.removeStatusAffect(StatusAffects.Exgartuan);
+					player.removeStatusEffect(StatusEffects.Exgartuan);
 					needNext = true;
 				}		
 				else {
-					if (player.statusAffectv2(StatusAffects.Exgartuan) > 0) { //if sleeping, decrement sleep timer.
-						player.addStatusValue(StatusAffects.Exgartuan, 2, -1);
-						if (player.statusAffectv2(StatusAffects.Exgartuan) == 0) { //The demon awakens!
+					if (player.statusEffectv2(StatusEffects.Exgartuan) > 0) { //if sleeping, decrement sleep timer.
+						player.addStatusValue(StatusEffects.Exgartuan, 2, -1);
+						if (player.statusEffectv2(StatusEffects.Exgartuan) == 0) { //The demon awakens!
 							outputText("\n<b>");
 							exgartuanBored();
 							outputText("</b>\n");
@@ -87,8 +87,8 @@
 						}
 					}
 					else { //If not sleeping, stuff happens!
-						if (player.statusAffectv1(StatusAffects.Exgartuan) == 1) { //Dude stuff
-							if (player.hasStatusAffect(StatusAffects.Infested)) {
+						if (player.statusEffectv1(StatusEffects.Exgartuan) == 1) { //Dude stuff
+							if (player.hasStatusEffect(StatusEffects.Infested)) {
 								outputText("\n<b>");
 								exgartuanWormCure();
 								outputText("</b>\n");
@@ -126,7 +126,7 @@
 							}
 							else dynStats("lus", 1 + rand(2));
 						}
-						if (player.statusAffectv1(StatusAffects.Exgartuan) == 2 && player.biggestTitSize() >= 12) { //Chick stuff
+						if (player.statusEffectv1(StatusEffects.Exgartuan) == 2 && player.biggestTitSize() >= 12) { //Chick stuff
 							if (model.time.hours % 9 == 0) { //Only once every 9 hours or so.
 								if (rand(3) == 0) { //lactation messing with!
 									outputText("\n<b>");
@@ -157,14 +157,14 @@
 		}
 		
 		public function timeChangeLarge():Boolean {
-			if (checkedExgartuan++ == 0 && player.hasStatusAffect(StatusAffects.Exgartuan) && player.statusAffectv2(StatusAffects.Exgartuan) == 0 && model.time.hours == 4) {
+			if (checkedExgartuan++ == 0 && player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0 && model.time.hours == 4) {
 				//Exgartuan must be present, must be awake and it must be night time
-				if (player.hasCock() && player.statusAffectv1(StatusAffects.Exgartuan) == 1 && rand(3) == 0 && player.hoursSinceCum >= 24) { //Exgartuan night time surprise!
+				if (player.hasCock() && player.statusEffectv1(StatusEffects.Exgartuan) == 1 && rand(3) == 0 && player.hoursSinceCum >= 24) { //Exgartuan night time surprise!
 					outputText("\n");
 					exgartuanSleepSurprise();
 					return true;
 				}
-				if (player.statusAffectv1(StatusAffects.Exgartuan) == 2 && rand(3) == 0) { //Boobgartuan night time surprise!
+				if (player.statusEffectv1(StatusEffects.Exgartuan) == 2 && rand(3) == 0) { //Boobgartuan night time surprise!
 					outputText("\n");
 					boobGartuanSURPRISE();
 					return true;
@@ -194,7 +194,7 @@ private function drinkFountainEndowment():void {
 		player.XP += 200;
 		changed = true;
 	}
-	if(!player.hasStatusAffect(StatusAffects.Exgartuan) && !changed && rand(2) == 0) {
+	if(!player.hasStatusEffect(StatusEffects.Exgartuan) && !changed && rand(2) == 0) {
 		var choices:Number = 0;
 		if(player.cockTotal() > 0) {
 			if(player.cockArea(0) >= 100) choices++;
@@ -276,7 +276,7 @@ private function exgartuanInfestDick():void {
 		player.cocks[0].cockLength += 1;
 		player.cocks[0].cockThickness += .5;
 	}
-	player.createStatusAffect(StatusAffects.Exgartuan,1,0,0,0);
+	player.createStatusEffect(StatusEffects.Exgartuan,1,0,0,0);
 }
 private function exgartuanInfestTits():void {
 	outputText("\n\nYour " + allBreastsDescript() + " jiggle as they grow MUCH larger, turning into obscene mounds that shake with every motion of your body.  All your " + nippleDescript(0) + "s puff up with them, gaining volume to match their new, larger homes.  They feel hot and ache to be touched.", false);
@@ -291,7 +291,7 @@ private function exgartuanInfestTits():void {
 	outputText("\n\nThe ground hits your " + buttDescript() + " hard as you fall backwards, too surprised to maintain your footing.  Are your breasts really talking to you?", false);
 	outputText("\n\n\"<i>Yes I am,</i>\" mutters Exgartuan, spurting a trickle of milk from your " + nippleDescript(0) + "s for emphasis, \"<i>and you had better take me back to that lovely camp I can see in your memories and give me a nice long massage.</i>\"", false);
 	outputText("\n\nWell now... this was certainly unexpected.  Perhaps there's a way to be rid of this thing?", false);
-	player.createStatusAffect(StatusAffects.Exgartuan,2,0,0,0);
+	player.createStatusEffect(StatusEffects.Exgartuan,2,0,0,0);
 }
 
 
@@ -300,7 +300,7 @@ private function exgartuanInfestTits():void {
 //[Masturbate while he's awake in dick]
 public function exgartuanMasturbation():void {
 	clearOutput();
-	if(player.statusAffectv1(StatusAffects.Exgartuan) == 1) {
+	if(player.statusEffectv1(StatusEffects.Exgartuan) == 1) {
 		spriteSelect(15);
 		//Early prep
 		if(player.cor < 15) outputText("You sheepishly find some rocks to hide in, where you remove your clothes.  Exgartuan loudly grumbles, \"<i>Quit fucking around and hiding.  I WANT someone to walk in on this!</i>\"\n\nDisgusting...\n\n", false);
@@ -361,7 +361,7 @@ public function exgartuanMasturbation():void {
 		dynStats("lib", .25, "cor", 1);
 	}
 	//TITURBATION
-	else if(player.statusAffectv1(StatusAffects.Exgartuan) == 2) {
+	else if(player.statusEffectv1(StatusEffects.Exgartuan) == 2) {
 		if(player.cor < 50) {
 			outputText("You shrug off your top, preparing to give into the demon's demands.  'At least I'll get to enjoy it too,' you muse, as you finish stripping the offending material from your torso.  You look down over your " + allBreastsDescript() + ", and they don't look particularly evil.  Yet you know that within those wonderful mounds of breast-flesh lurks a great force of corruption, and worse yet, you know you're giving it exactly what it wants.\n\n", false);
 		}
@@ -393,7 +393,7 @@ public function exgartuanMasturbation():void {
 		if(player.biggestLactation() > 1) outputText("As you calm down you realize your " + nippleDescript(0) + "s are dribbling streams of milk, and judging from the pools of whiteness in the soil, you turned into quite the little milk-sprinkler.  ", false);
 		outputText("You blush and redress, noting that Exgartuan seems to be silent and sleeping...  maybe you'll get a little peace now?", false);
 	}
-	player.changeStatusValue(StatusAffects.Exgartuan,2,(12+rand(7)));
+	player.changeStatusValue(StatusEffects.Exgartuan,2,(12 + rand(7)));
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -401,7 +401,7 @@ public function exgartuanMasturbation():void {
 //(NOT PLAYED WITH RECENTLY: +LUST MESSAGE)
 public function exgartuanBored():void {
 	var select:Number = 0;
-	if(player.statusAffectv1(StatusAffects.Exgartuan) == 1 && player.cockArea(0) >= 100) {
+	if(player.statusEffectv1(StatusEffects.Exgartuan) == 1 && player.cockArea(0) >= 100) {
 		select = rand(9);
 		if(select == 0) {
 			outputText("A muffled voice pipes up, \"<i>Hey!  You forgetting about me?  Fucking champions think they're so good, but you're ignoring your best body part!  Can't you feel all that cum boiling ", false);
@@ -438,7 +438,7 @@ public function exgartuanBored():void {
 			outputText("  Find me somewhere to deliver it or I'll be shoving it down your throat, champion!</i>\"", false);
 		}
 	}
-	else if(player.statusAffectv1(StatusAffects.Exgartuan) == 2 && player.biggestTitSize() >= 12) {
+	else if(player.statusEffectv1(StatusEffects.Exgartuan) == 2 && player.biggestTitSize() >= 12) {
 		select = rand(8);
 		switch(select) {
 			case 0:
@@ -475,12 +475,12 @@ public function exgartuanCombatUpdate():Boolean {
 	if(monster.short == "tentacle beast" || monster.short == "worms" || monster.short == "demons") return false;
 	//VARS
 	var select:Number = 0;
-	if(player.statusAffectv1(StatusAffects.Exgartuan) == 1) {
+	if(player.statusEffectv1(StatusEffects.Exgartuan) == 1) {
 		//[USE MAGIC TO MAKE GOBLINS COOCHIES STRETCHIER!]
 		if(monster.short == "goblin" && rand(3) == 0) {
 			outputText("A strangely harmonic voice chants gibberish, rising in volume and pitch.  It's coming from your groin!  The goblin girl giggles and squeals, \"<i>Stop that!  It's using magic on my coo-chiieeeeeee!!!</i>\"", false);
 			//(+20 or 10% of cocksize, whichever is greater to vag capacity
-			monster.addStatusValue(StatusAffects.BonusVCapacity,1,player.cockArea(0)*.1);
+			monster.addStatusValue(StatusEffects.BonusVCapacity,1, player.cockArea(0) * .1);
 			monster.lust += 10;
 			return true;
 		}
@@ -576,7 +576,7 @@ public function exgartuanCombatUpdate():Boolean {
 		}
 	}
 	//Exgartuan in tittays!
-	else if(player.statusAffectv1(StatusAffects.Exgartuan) == 2) {
+	else if(player.statusEffectv1(StatusEffects.Exgartuan) == 2) {
 		if(monster.totalCocks() > 0) {
 			select = rand(8);
 			switch(select) {
@@ -735,7 +735,7 @@ public function exgartuanWormCure():void {
 	else outputText("groin", false);
 	outputText(" begins to grow warm... no, hot.  You feel it moving and squirming with discomfort as the worms inside you wriggle about, agitated by something.  The heat intensifies and you watch in a mixture of shock and horror as they start crawling out your urethra, sliding down to the ground on a river of thick seminal fluid.  You double over in pain as something stretches you wide, and you feel the main worm pushing itself through your " + cockDescript(0) + ", desperate to escape.  It crests the tip, wiggling and stuck for a moment as it struggles to pull free.  At last it pops out and drops to the ground, crawling away.  Exgartuan roars, \"<i>AND STAY OUT!</i>\"", false);
 	outputText("\n\nYou guess there was only enough room for one or the other...", false);
-	player.removeStatusAffect(StatusAffects.Infested);
+	player.removeStatusEffect(StatusEffects.Infested);
 }
 
 public function exgartuanLactationAdjustment():void {
@@ -743,7 +743,7 @@ public function exgartuanLactationAdjustment():void {
 	//(Lactating Already)
 	if(player.biggestLactation() > 1) {
 		//(Increase)
-		if(rand(2) == 0 || player.hasStatusAffect(StatusAffects.Feeder)) {
+		if(rand(2) == 0 || player.hasStatusEffect(StatusEffects.Feeder)) {
 			outputText("Your nipples grow warm and sensitive, then start dripping milk into your " + player.armorName + ".  Exgartuan appears to be having some fun with you again...", false);
 			player.boostLactation(player.breastRows.length);
 		}
@@ -924,7 +924,7 @@ private function exgartuanSleepSurprise():void {
 		outputText("  Liquid-hot pressure slides over the underside of your " + cockDescript(0) + ", licking wetly at the pulsating, need-filled demon-prick.  Your rogue tongue's attentions have the desired effect, and the cries of your pleasure are muffled by your own thick flesh and its rapidly distending urethra.\n\n", false);
 		
 		outputText("If someone were watching", false);
-		if(monk >= 5 && !player.hasStatusAffect(StatusAffects.NoJojo) && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) outputText(", and judging by Jojo's high pitched whines, he certainly is,", false);
+		if(monk >= 5 && !player.hasStatusEffect(StatusEffects.NoJojo) && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) outputText(", and judging by Jojo's high pitched whines, he certainly is,", false);
 		outputText(" they'd see dick-flesh bulging with a heavy load as it's pumped into your lips.  The fully-inflated cum-tube distends your mouth, stretching your jaw painfully, and dumps its creamy cargo into its willing receptacle.  Your belly burbles as it adjusts to the ", false);
 		temp = player.cumQ();
 		if(temp < 50) outputText("surprisingly light", false);
@@ -947,7 +947,7 @@ private function exgartuanSleepSurprise():void {
 		}
 		outputText("\n\n", false);
 		
-		if(monk >= 5 && !player.hasStatusAffect(StatusAffects.NoJojo) && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
+		if(monk >= 5 && !player.hasStatusEffect(StatusEffects.NoJojo) && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
 			outputText("The splatter of mouse-cum erupting in the wood reaches your ears, bringing a wistful smile to your face.  That slutty mouse is such a peeping tom!  ", false);
 		}
 		outputText("Your eyes slowly roll back down while Exgartuan deflates, leaving a trail of pleased, white submission ", false);
@@ -964,7 +964,7 @@ private function exgartuanSleepSurprise():void {
 		flags[kFLAGS.TIMES_AUTOFELLATIOED_EXGARTUAN]++;
 		player.slimeFeed();
 	}
-	player.changeStatusValue(StatusAffects.Exgartuan,2,25);
+	player.changeStatusValue(StatusEffects.Exgartuan,2,25);
 	doNext(playerMenu);
 }
 private function exgartuanBulgeTortureII():void {
@@ -1067,7 +1067,7 @@ private function exgartuanBulgeTortureIII():void {
 	outputText(" hits you square in the face.  The surprising force of the blow sends you reeling, your hands clearing from the mighty demon as he points skyward, showering everything around you in black, warm ejaculate.  You care little, however, being too busy convulsing and indulging on every ounce of pleasure radiating through it.  It doesn't take long for you to black out, drawing an end to your excruciating experience.\n\n", false);
 	//[new page. lust resets to 0. corruption raises by 2. player gains ailment \"<i>Jizzpants</i>\"]
 	player.orgasm();
-	player.createStatusAffect(StatusAffects.Jizzpants, 1, 0, 0, 0);
+	player.createStatusEffect(StatusEffects.Jizzpants, 1, 0, 0, 0);
 	dynStats("cor", 2);
 	doNext(exgartuanBulgeTortureIV);
 }
@@ -1087,7 +1087,7 @@ private function exgartuanBulgeTortureIV():void {
 	else outputText("  You glance around at your " + camp.homeDesc() + ", searching for anything that may clue you in on what transpired last night.  After a few moments, however, you decide it better to just move on with your day.", false);
 	outputText("  You pay one more glance to Exgartuan, the " + cockDescript(0) + " comfortably resting away in your outfit.\n\n", false);
 	outputText("Damn demons.", false);
-	player.changeStatusValue(StatusAffects.Exgartuan,2,25);
+	player.changeStatusValue(StatusEffects.Exgartuan,2,25);
 	doNext(playerMenu);
 }
 
@@ -1332,7 +1332,7 @@ private function boobgartuanSurprise3():void {
 	//[corruption +2, lust +5] 
 	dynStats("lus", 5, "cor", 2);
 	flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT]++;
-	player.changeStatusValue(StatusAffects.Exgartuan,2,25);
+	player.changeStatusValue(StatusEffects.Exgartuan,2,25);
 	doNext(playerMenu);
 }
 
@@ -1431,7 +1431,7 @@ public function exgartuanNagaStoleMyMasturbation():void {
 	outputText(" load working its way up your " + cockDescript(0) + "... and stop.  You sit up in an involuntary attempt to release the pressure, only to be met by your coiled-up shaft bending to greet your face, its urethra spread wide open...\n\n", false);
 
 	outputText("Having coated your face and upper torso in a demonic jism assault, Exgartuan returns to your serpent's slit.  His grasp on your tail lifts, leaving you to undo the tangled mess he left behind.  But you're too busy laying back decompressing.  No thoughts, no musings, no questions, no doubts... nothing is going on in your cum-soaked head.  What is there to say?", false);
-	player.changeStatusValue(StatusAffects.Exgartuan,2,(16+rand(7)));
+	player.changeStatusValue(StatusEffects.Exgartuan,2,(16 + rand(7)));
 	player.orgasm();
 	dynStats("lib", .25);
 	doNext(camp.returnToCampUseOneHour);

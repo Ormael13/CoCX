@@ -1464,7 +1464,7 @@ internal function loseToMinerva():void {
 		outputText("\n\nThe friendly siren smiles down at you as she cares for you.  \"<i>I thought you did well!  You put up a real fight, but looks like Minerva came out on top this time!</i>\" she chirps happily with a proud look on her face.  After healing your wounds, Minerva helps you up and holds toward you a freshly picked peach.  \"<i>Here, eat this.  It will help you recover your strength.</i>\" she says, sending you on your way.  ");
 		// return PC to options- no combat option
 		// PC gains 1 Purity peach
-		monster.createStatusAffect(StatusAffects.PeachLootLoss,0,0,0,0);
+		monster.createStatusEffect(StatusEffects.PeachLootLoss,0,0,0,0);
 		inventory.takeItem(consumables.PURPEAC, camp.returnToCampUseOneHour);
 		cleanupAfterCombat();
 	}

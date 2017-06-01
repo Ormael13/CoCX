@@ -1835,7 +1835,7 @@ private function telHelToGetOffTheMInoCock():void {
 	outputText("\n\n\"<i>Hmm?</i>\" she answers, cocking an eyebrow at you.  \"<i>What do you mean 'addictive?'  How the hell is bullspunk addictive; the fuck kinda sense does that make?</i>\"");
 	
 	outputText("\n\nYou shrug and tell her that's just how it is");
-	if(player.hasStatusAffect(StatusAffects.CampMarble)) outputText(", just like how Cowgirls have addictive breastmilk");
+	if(player.hasStatusEffect(StatusEffects.CampMarble)) outputText(", just like how Cowgirls have addictive breastmilk");
 	outputText(".");
 	
 	outputText("\n\n\"<i>Well, shit, [name].  I don't wanna get hooked on minotaur cum, but... now what the fuck am I supposed to do? Those bulls are the best fucks around... present company excluded, of course,</i>\" she adds with a little wink.");

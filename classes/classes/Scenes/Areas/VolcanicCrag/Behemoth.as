@@ -19,8 +19,8 @@ package classes.Scenes.Areas.VolcanicCrag
 				damage = player.reduceDamage(damage)
 				player.takeDamage(damage, true);
 			}
-			if (hasStatusAffect(StatusAffects.TailWhip)) addStatusValue(StatusAffects.TailWhip, 1, 5);
-			else createStatusAffect(StatusAffects.TailWhip, 5, 0, 0, 0);
+			if (hasStatusEffect(StatusEffects.TailWhip)) addStatusValue(StatusEffects.TailWhip, 1, 5);
+			else createStatusEffect(StatusEffects.TailWhip, 5, 0, 0, 0);
 			combatRoundOver();
 		}
 		

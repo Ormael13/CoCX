@@ -1084,7 +1084,7 @@ public function brookeSpecialMediumSceneContinued():void {
 		//[if (hasBalls = true)
 		if(player.balls > 0)
 		{
-			if (!player.hasStatusAffect(StatusAffects.Uniball))
+			if (!player.hasStatusEffect(StatusEffects.Uniball))
 			{
 				outputText("  Your [sack] swings with every pump, slapping onto the firm skin of Brooke\'s vulva every time you bottom out.  You feel no pain, and in fact the smoothness of her fur around her genitals tickles the cum out of your [balls] all the faster.");
 			}

@@ -15,9 +15,9 @@
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
-			if (player.statusAffectv1(StatusAffects.GooStuffed) > 0) {
-				player.addStatusValue(StatusAffects.GooStuffed,1,-1);
-				if (player.statusAffectv1(StatusAffects.GooStuffed) <= 0)
+			if (player.statusEffectv1(StatusEffects.GooStuffed) > 0) {
+				player.addStatusValue(StatusEffects.GooStuffed,1,-1);
+				if (player.statusEffectv1(StatusEffects.GooStuffed) <= 0)
 				{
 					valeria.birthOutDatGooSlut();
 					return true;
@@ -81,7 +81,7 @@ private function valeriaSpar():void {
 	outputText("\n\nYou take Valeria out to the fringe of camp and ready your [weapon] as she forms a gooey greatsword in her hands.");
 	//(Play normal combat scenes, with EXP rewards. No rape options, however; use the following outtros:)
 	startCombat(new GooArmor());
-	monster.createStatusAffect(StatusAffects.Spar,0,0,0,0);
+	monster.createStatusEffect(StatusEffects.Spar,0,0,0,0);
 	monster.gems = 0;
 	doNext(playerMenu);
 }
@@ -455,7 +455,7 @@ private function acceptValeriasNeeds():void {
 	spriteSelect(79);
 	clearOutput();
 	outputText("You smile and tell Valeria that you're perfectly all right with her special needs");
-	if(player.hasStatusAffect(StatusAffects.SlimeCraving)) outputText(" after all, you have the same ones");
+	if(player.hasStatusEffect(StatusEffects.SlimeCraving)) outputText(" after all, you have the same ones");
 	outputText(", as long as they don't interfere with your mission as Champion.");
 	outputText("\n\n\"<i>They won't, partner,</i>\" Valeria says with a little wink. \"<i>I give you my word.</i>\"");
 	outputText("\n\nNodding, you ruffle her gooey hair and get back to business.");
@@ -682,28 +682,28 @@ private function valeriaGooRapeII():void {
 	//v2 = cock fill = 1, balls fill = 2
 	//v3 = cunt fill?
 	//v4 = tit fill?
-	player.createStatusAffect(StatusAffects.GooStuffed, 10 + rand(300), 0, 0, 0);
+	player.createStatusEffect(StatusEffects.GooStuffed, 10 + rand(300), 0, 0, 0);
 	player.buttKnockUpForce(PregnancyStore.PREGNANCY_GOO_STUFFED, 500); //Blocks other pregnancies - Way higher than GooStuffed status can last. Cleared when GooStuffed removed
 	if (player.hasVagina()) {
-		player.changeStatusValue(StatusAffects.GooStuffed, 3, 1);
+		player.changeStatusValue(StatusEffects.GooStuffed, 3, 1);
 		player.knockUpForce(PregnancyStore.PREGNANCY_GOO_STUFFED, 500); //Blocks other pregnancies - Way higher than GooStuffed status can last. Cleared when GooStuffed removed
 	}
 	if(player.hasCock()) {
-		if(player.balls > 0) player.changeStatusValue(StatusAffects.GooStuffed,2,2);
-		else player.changeStatusValue(StatusAffects.GooStuffed,2,1);
+		if(player.balls > 0) player.changeStatusValue(StatusEffects.GooStuffed,2,2);
+		else player.changeStatusValue(StatusEffects.GooStuffed,2,1);
 	}
-	if(player.biggestTitSize() >= 5 && player.hasFuckableNipples()) player.changeStatusValue(StatusAffects.GooStuffed,4,1);
+	if(player.biggestTitSize() >= 5 && player.hasFuckableNipples()) player.changeStatusValue(StatusEffects.GooStuffed,4,1);
 	cleanupAfterCombat();
 }
 
 //Random Goo-girl Cum-Out:
 public function birthOutDatGooSlut():void {
 	outputText("\n<b>Something odd happens...</b>\nA sudden, violent lurch in your gut nearly knocks you off your [feet]! You lower yourself to the ground before the quaking in your middle can upend you and cradle your slime-bloated belly, wondering if you're finally going to get relief from walking around with a gutful of goo.");
-	if(player.statusAffectv4(StatusAffects.GooStuffed) > 0) outputText(" Your tits are even wobbling around wildly, shaking and jiggling obscenely inside your [armor] in a way that makes you your [nipples] more than a little leaky.");
+	if(player.statusEffectv4(StatusEffects.GooStuffed) > 0) outputText(" Your tits are even wobbling around wildly, shaking and jiggling obscenely inside your [armor] in a way that makes you your [nipples] more than a little leaky.");
 	outputText("\n\nYou get your answer when your [asshole] opens up to expose the goo-girl's slick core, forcing you to shudder with ecstasy as it gradually slips through your stretching anus and unleashes a torrent of slime. You bend down onto your hands, letting it pass, cumming unexpectedly at the way it caresses you as it exits your body and moaning like a some ");
 	if(player.skinType == SKIN_TYPE_FUR) outputText("furry ");
 	outputText("bitch in heat. Gods, there's so much!");
-	if(player.statusAffectv4(StatusAffects.GooStuffed) > 0) {
+	if(player.statusEffectv4(StatusEffects.GooStuffed) > 0) {
 		outputText("\n\n");
 		if(!player.hasFuckableNipples()) outputText("Stiffening up");
 		else outputText("Opening up");
@@ -712,18 +712,18 @@ public function birthOutDatGooSlut():void {
 		if(player.bRows() > 2) outputText(", and so on");
 		outputText(", working out every drop of thick, body-filling slime while your ass is still busy draining. Even after they empty, they don't seem to lose a single bit of the size they've gained....");
 	}
-	if(player.hasCock() && player.statusAffectv2(StatusAffects.GooStuffed) > 0) {
+	if(player.hasCock() && player.statusEffectv2(StatusEffects.GooStuffed) > 0) {
 		outputText("\n\n[EachCock] suddenly fills to twitching tumescence and explodes in a completely untelegraphed orgasm, throwing huge strands of odd-colored cum in ");
 		if(player.balls > 0) outputText("ball-clenching");
 		else outputText("body-clenching");
 		outputText(" quivers of beatific enjoyment. It's so thick, and there's so much that your blissful explosions soon turn into a constantly flowing river of ejaculatory ecstasy. You grab hold with one hand and squeeze to milk out every last drop, throbbing long after you empty. A few trickles of white ooze out after, but that's all the proper spunk you see.");
-		if(player.statusAffectv2(StatusAffects.GooStuffed) >= 2) outputText("  Your balls keep their enhanced sized. Odd.");
+		if(player.statusEffectv2(StatusEffects.GooStuffed) >= 2) outputText("  Your balls keep their enhanced sized. Odd.");
 	}
-	if(player.hasVagina() && player.statusAffectv3(StatusAffects.GooStuffed) > 0) {
+	if(player.hasVagina() && player.statusEffectv3(StatusEffects.GooStuffed) > 0) {
 		outputText("\n\nBirthing out a geyser of slime, your [vagina] practically glows with the pleasure of releasing its slimy package into the congealing puddle below. Your lips grow so puffy and sensitive from the experience that your pussy looks obscenely bloated, like it's been suckled for hours upon hours, but all it's doing is cumming nonstop while it releases its long-held burden.");
 	}
 	outputText("\n\nYou pant to try and catch your breath as the fluid gathers up beside you and grows a friendly, smiling face. It gives you a simple smile and a kiss on your brow before leaving you to recover, heading in the direction of the lake.\n");
-	player.removeStatusAffect(StatusAffects.GooStuffed);
+	player.removeStatusEffect(StatusEffects.GooStuffed);
 	player.knockUpForce(); //Clear the false pregnancy
 	player.buttKnockUpForce(); //Clear the false pregnancy
 }

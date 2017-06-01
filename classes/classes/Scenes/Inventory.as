@@ -134,7 +134,7 @@ package classes.Scenes
 				}
 			}
 			if (foundItem) {
-				if (getGame().inCombat && player.hasStatusAffect(StatusAffects.Sealed) && player.statusAffectv1(StatusAffects.Sealed) == 3) {
+				if (getGame().inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv1(StatusEffects.Sealed) == 3) {
 					outputText("\nYou reach for your items, but you just can't get your pouches open.  <b>Your ability to use items was sealed, and now you've wasted a chance to attack!</b>\n\n");
 					getGame().enemyAI();
 					return;

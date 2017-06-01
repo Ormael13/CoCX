@@ -18,11 +18,11 @@ package classes.Scenes.NPCs
 			this.imageName = "ryubihuman";
 			this.long = "You are currently 'battling' RyuBi in human form, in a playfight.  At least, that was the intention.  The way she lashes her tail along the ground, with claws spread and teeth bared ferociously, makes you wonder.";
 			createVagina(true,VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_NORMAL);
-			createStatusAffect(StatusAffects.BonusVCapacity,10,0,0,0);
+			createStatusEffect(StatusEffects.BonusVCapacity,10,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("F"));
 			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,10,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = rand(8) + 70;
 			this.hipRating = HIP_RATING_AMPLE+2;
 			this.buttRating = BUTT_RATING_LARGE;

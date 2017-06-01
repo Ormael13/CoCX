@@ -74,13 +74,13 @@ package classes.Scenes.NPCs
 				}
 				else if (flags[kFLAGS.KID_SITTER] == 2) flags[kFLAGS.KID_SITTER] = 1;
 			}
-			if (player.hasStatusAffect(StatusAffects.AnemoneArousal)) {
+			if (player.hasStatusEffect(StatusEffects.AnemoneArousal)) {
 				if (player.pregnancyIncubation > 1) {
-					player.removeStatusAffect(StatusAffects.AnemoneArousal);
+					player.removeStatusEffect(StatusEffects.AnemoneArousal);
 					outputText("\n<b>The nigh-constant arousal forced upon you by the anemone-like creature in your body finally fades.  You stick a finger inside yourself and marvel in wonder - it's gone!  You aren't sure if it slipped out or your body somehow consumed it, but it's nice to have a clearer head.</b>\n", false);
 				}
 				else if(!player.hasVagina()) {
-					player.removeStatusAffect(StatusAffects.AnemoneArousal);
+					player.removeStatusEffect(StatusEffects.AnemoneArousal);
 					outputText("\n<b>The nigh-constant arousal forced upon you by the anemone-like creature in your body finally fades.  You aren't sure if it was somehow consumed by the removal of your vagina or if it escaped during the process, but it's nice to have a clear head for a change.</b>\n", false);
 				}
 				needNext = true;
@@ -1556,7 +1556,7 @@ package classes.Scenes.NPCs
 				outputText("\n\n\"<i>Um... hi.</i>\"");
 				//(lose 8 hours, restore HP amount consonant with 8hrs rest)
 				doNext(camp.returnToCampUseEightHours);
-				player.createStatusAffect(StatusAffects.PostAnemoneBeatdown, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.PostAnemoneBeatdown, 0, 0, 0, 0);
 				return;
 			}
 			//Sex scenes, post dream

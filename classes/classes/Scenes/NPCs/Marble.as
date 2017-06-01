@@ -10,7 +10,7 @@
 			//Special1: Heavy overhead swing, high chance of being avoided with evasion, does heavy damage if it hits.
 			var damage:Number = 0;
 			//Blind dodge change
-			if(hasStatusAffect(StatusAffects.Blind)) {
+			if(hasStatusEffect(StatusEffects.Blind)) {
 				outputText("Marble unwisely tries to make a massive swing while blinded, which you are easily able to avoid.", false);
 				combatRoundOver();
 				return;
@@ -45,7 +45,7 @@
 			//Special2: Wide sweep; very high hit chance, does low damage.
 			var damage:Number = 0;
 			//Blind dodge change
-			if(hasStatusAffect(StatusAffects.Blind)) {
+			if(hasStatusEffect(StatusEffects.Blind)) {
 				outputText("Marble makes a wide sweeping attack with her hammer, which is difficult to avoid even from a blinded opponent.\n", false);
 			}
 			//Determine if evaded

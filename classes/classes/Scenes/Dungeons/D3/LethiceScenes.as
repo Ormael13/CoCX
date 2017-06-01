@@ -2,7 +2,7 @@ package classes.Scenes.Dungeons.D3
 {
 	import classes.BaseContent;
 	import classes.Monster;
-	import classes.StatusAffects;
+	import classes.StatusEffects;
 	import classes.Items.WeaponLib;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.GlobalFlags.kACHIEVEMENTS;
@@ -118,12 +118,12 @@ package classes.Scenes.Dungeons.D3
 			var m:Lethice = new Lethice();
 			if (player.wingType != 0)
 			{
-				m.createStatusAffect(StatusAffects.PhysicalDisabled, 0, 0, 0, 0);
-				m.createStatusAffect(StatusAffects.AttackDisabled, 0, 0, 0, 0);
+				m.createStatusEffect(StatusEffects.PhysicalDisabled, 0, 0, 0, 0);
+				m.createStatusEffect(StatusEffects.AttackDisabled, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.MINOTAURKINGS_TOUCH] == 1)
 			{
-				player.createStatusAffect(StatusAffects.MinotaurKingsTouch, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.MinotaurKingsTouch, 0, 0, 0, 0);
 			}
 			startCombat(m);
 		}
@@ -149,7 +149,7 @@ package classes.Scenes.Dungeons.D3
 			addButton(2, "Boob Play", boobPlay, hpVictory);
 
 			//var hasLethicite:Boolean = (player.hasKeyItem("Sheila's Lethicite") > 0) || (player.hasKeyItem("Stone Statue Lethicite") > 0);
-			//if (hasLethicite && player.hasStatusAffect(StatusAffects.MetMarae) && !player.hasStatusAffect(StatusAffects.FactoryOverload))
+			//if (hasLethicite && player.hasStatusEffect(StatusEffects.MetMarae) && !player.hasStatusEffect(StatusEffects.FactoryOverload))
 			if ((player.hasKeyItem("Sheila's Lethicite") > 0) || (player.hasKeyItem("Stone Statue Lethicite") > 0) && flags[kFLAGS.MET_MARAE] == 1 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1)
 			{
 				addButton(5, "Redemption", redemption, hpVictory);
@@ -774,7 +774,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nThe girl blinks, the rage on her face replaced by confusion. <i>“W-what are you talking about, demon?”</i> she murmurs, looking up for the first time. You glance down at her from your place at Mistress’s side, really looking at this... this <i>“Champion”</i> for the first time. You feel a vague sense of recognition when you look at her, even as dirty and cum-slathered as she is, though you can’t place her. You squint, but trying to think more about it just makes your head hurt, and so you instead look down at those perky tits of hers, letting yourself get hard again at the thought of grabbing onto them and fucking her as your next bitch.");
 			
 			outputText("\n\n<i>“You’re lucky,”</i> Mistress smirks, standing. <i>“");
-			if (player.hasStatusAffect(StatusAffects.DungeonShutDown)) outputText("Your predecessor destroyed our welcoming facility. Otherwise I’m sure a certain imp would have revealed the truth to you long ago, before joining you with our breeding machines.");
+			if (player.hasStatusEffect(StatusEffects.DungeonShutDown)) outputText("Your predecessor destroyed our welcoming facility. Otherwise I’m sure a certain imp would have revealed the truth to you long ago, before joining you with our breeding machines.");
 			else
 			{
 				outputText("How did you escape from the factory, I wonder? And so clean and pure, too... you’re belly’s not yet swollen with imps, and your breasts are so small. Did you slip through");
@@ -961,7 +961,7 @@ package classes.Scenes.Dungeons.D3
 			var levelOfFuckedness:Number = 0;
 
 			//Marae corrupt +50
-			if (player.hasStatusAffect(StatusAffects.FactoryOverload)) levelOfFuckedness += 50;
+			if (player.hasStatusEffect(StatusEffects.FactoryOverload)) levelOfFuckedness += 50;
 
 			//Sheila demon + 10
 			if (flags[kFLAGS.SHEILA_DEMON] == 1) levelOfFuckedness += 10;
@@ -1006,7 +1006,7 @@ package classes.Scenes.Dungeons.D3
 			if (flags[kFLAGS.OWCA_SACRIFICE_DISABLED] == 1) levelOfFuckedness -= 10;
 
 			//Marcus (Wheelbarrow balls guy) turned into demon +10
-			if (player.hasStatusAffect(StatusAffects.WandererDemon)) levelOfFuckedness += 10;
+			if (player.hasStatusEffect(StatusEffects.WandererDemon)) levelOfFuckedness += 10;
 
 			//Amily corrupted +10
 			if (flags[kFLAGS.AMILY_FOLLOWER] == 2) levelOfFuckedness += 10;
@@ -1049,20 +1049,20 @@ package classes.Scenes.Dungeons.D3
 			if (getGame().camp.followerKiha()) levelOfFuckedness -= 15;
 
 			//Pure Jojo recruited -5
-			if (player.hasStatusAffect(StatusAffects.PureCampJojo)) levelOfFuckedness -= 5;
+			if (player.hasStatusEffect(StatusEffects.PureCampJojo)) levelOfFuckedness -= 5;
 
 			//Kath got a job with the watch -5
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] == 4) levelOfFuckedness -= 5;
 
 			//Rathazul recruited -5
-			if (player.hasStatusAffect(StatusAffects.CampRathazul)) levelOfFuckedness -= 5;
+			if (player.hasStatusEffect(StatusEffects.CampRathazul)) levelOfFuckedness -= 5;
 
 			return levelOfFuckedness;
 		}
 
 		private function hasChildren():Boolean
 		{
-			if (player.statusAffectv1(StatusAffects.Birthed) > 0) return true;
+			if (player.statusEffectv1(StatusEffects.Birthed) > 0) return true;
 			if (flags[kFLAGS.AMILY_BIRTH_TOTAL] > 0 || flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] > 0) return true;
 			if (flags[kFLAGS.BENOIT_EGGS] > 0) return true;
 			if (flags[kFLAGS.COTTON_KID_COUNT] > 0) return true;
@@ -1101,7 +1101,7 @@ package classes.Scenes.Dungeons.D3
 				outputText("\n\nBy necessity, your campaign is brutal. So long as demons yet live, they’ll sow their corruption into those around them, who will in turn carry it inside them, like a plague. But you aren’t alone in this endeavor. Corruption can be cleansed by magic or will, and those fetid abominations that spread it can be killed once and for all.");
 				outputText("\n\nThe campaign wages on for the better part of a year, but inevitably, the demons crumble before your forces. You singlehandedly claimed their fortress, leaving them no strong points save for a few factories - structures that were never really built to stand up to a siege. They could not trick your armies, for you would not make the mistake of negotiating with them, as you learned the goblins did.");
 				outputText("\n\nIn time, peace came to Mareth.");
-				if (!player.hasStatusAffect(StatusAffects.FactoryOverload)) outputText(" Marae reclaimed the full network of her roots and single-handedly purged the last holdouts of corruption from the lands, choking it out of her world like weeds from a garden.");
+				if (!player.hasStatusEffect(StatusEffects.FactoryOverload)) outputText(" Marae reclaimed the full network of her roots and single-handedly purged the last holdouts of corruption from the lands, choking it out of her world like weeds from a garden.");
 				else outputText(" Marae fought for a time, but even corrupted goddesses cannot hold back your tide of purity. Her fall was the biggest blight on your campaign, a sad footnote on an otherwise successful reclamation.");
 				outputText("\n\n<b>You ended the demon threat forever and saved Mareth.</b>");
 				flags[kFLAGS.GAME_END] = GAME_END_PURGE_0_50;
@@ -1111,11 +1111,11 @@ package classes.Scenes.Dungeons.D3
 				outputText("\n\nBy necessity, your campaign is brutal. There are so many demons, and they’re so skilled at sowing their corruption into everything around them that wiping them out seems an impossible task. Even with the return of the rains, this world is still filled with hundreds of festering blights. Yes, you can cleanse corruption with your magic or your will, but there’s so much of it. The world is so infected that the task before you seems almost impossible at times.");
 				outputText("\n\nYou do not let that deter you, not when your campaign drags into its tenth season or even its twentieth. You may have been a champion in name only, but you live up to the title. Again and again, you break the demon’s fortresses and holds. You burn what cannot be purified and wipe clean those few things that can. They run and rebuild, but you chase them, tirelessly scouring them from the face of this warped planet.");
 				outputText("\n\n");
-				if (!player.hasStatusAffect(StatusAffects.FactoryOverload)) outputText("Marae is a wonderful aid in your quest, always able to manifest in her newly purified roots and offer words of wisdom or encouragement. Her magical might is a rock you can lean upon when times are tough. You aren’t sure how long you could keep this up without her.");
+				if (!player.hasStatusEffect(StatusEffects.FactoryOverload)) outputText("Marae is a wonderful aid in your quest, always able to manifest in her newly purified roots and offer words of wisdom or encouragement. Her magical might is a rock you can lean upon when times are tough. You aren’t sure how long you could keep this up without her.");
 				else outputText("Marae is always there, always lending her power to the demons, even when you dig her roots out of the ground with shovels and axes, burning the greasy lumber into nothingness. This task would be so much easier if the goddess was on your side, but still, you persevere.");
 				outputText("\n\nSlowly but steadily, you make headway. On your fortieth birthday, you receive word that Tel’Adre has been restored to its full strength. On your forty-fifth, you realize that you’re close to winning. Those few demons that remain are madly spawning imps, but the flimsy fliers are no match for a hail of flaming arrows or arcs of magic.");
 				outputText("\n\nYou are well into your fifties by the time you’re ready to declare victory.");
-				if (!player.hasStatusAffect(StatusAffects.FactoryOverload)) outputText(" Those few pockets that escaped your armies could not escape Marae’s all-encompassing roots. Mareth is purified once more.");
+				if (!player.hasStatusEffect(StatusEffects.FactoryOverload)) outputText(" Those few pockets that escaped your armies could not escape Marae’s all-encompassing roots. Mareth is purified once more.");
 				else outputText(" A few places are tainted still, but it’s impossible to cleanse every cave. Instead, you make instructions to maintain the army. Should evidence of corruption arise anywhere, your forces will swiftly put it to flame.");
 				outputText(" Peace returns to the land. You did it. You saved this world.");
 				outputText("\n\nThe champions that followed you through the portal year after year find a way home in the abandoned texts inside your keep. You go with them, for a time, but you’ve lived too long in Mareth to stay anywhere else. The twisted reality of the once-demonic realm is your home. Besides, you’ve made too many friends here to abandon them.");

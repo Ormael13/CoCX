@@ -444,7 +444,7 @@
 			///*OPTIONAL*/ //this.hoursSinceCum = ; // default 0
 			//// 2.2. Female
 			///*REQUIRED*/ this.createVagina(virgin=true|false,VAGINA_WETNESS_,VAGINA_LOOSENESS_); // default true,normal,tight
-			///*OPTIONAL*/ //this.createStatusAffect(StatusAffects.BonusVCapacity, bonus, 0, 0, 0);
+			///*OPTIONAL*/ //this.createStatusEffect(StatusEffects.BonusVCapacity, bonus, 0, 0, 0);
 			//// 2.3. Hermaphrodite
 			//// Just create cocks and vaginas. Last call determines pronouns.
 			//// 2.4. Genderless
@@ -472,7 +472,7 @@
 			//// 4. Ass
 			///*OPTIONAL*/ //this.ass.analLooseness = ANAL_LOOSENESS_; // default TIGHT
 			///*OPTIONAL*/ //this.ass.analWetness = ANAL_WETNESS_; // default DRY
-			///*OPTIONAL*/ //this.createStatusAffect(StatusAffects.BonusACapacity, bonus, 0, 0, 0);
+			///*OPTIONAL*/ //this.createStatusEffect(StatusEffects.BonusACapacity, bonus, 0, 0, 0);
 			//// 5. Body
 			///*REQUIRED*/ this.tallness = ;
 			///*OPTIONAL*/ //this.hipRating = HIP_RATING_; // default boyish
@@ -783,7 +783,7 @@
 		{
 			var attack:Boolean = true;
 			//Blind dodge change
-			if (hasStatusAffect(StatusAffects.Blind)) {
+			if (hasStatusEffect(StatusEffects.Blind)) {
 				attack &&= handleBlind();
 			}
 			attack &&= !playerDodged();
@@ -792,7 +792,7 @@
 		}
 
 		public function eAttack():void {
-			var attacks:int = statusAffectv1(StatusAffects.Attacks);
+			var attacks:int = statusEffectv1(StatusEffects.Attacks);
 			if (attacks == 0) attacks = 1;
 			while (attacks>0){
 				if (attackSucceeded()){
@@ -802,12 +802,12 @@
 					game.statScreenRefresh();
 					outputText("\n", false);
 				}
-				if (statusAffectv1(StatusAffects.Attacks) >= 0) {
-					addStatusValue(StatusAffects.Attacks, 1, -1);
+				if (statusEffectv1(StatusEffects.Attacks) >= 0) {
+					addStatusValue(StatusEffects.Attacks, 1, -1);
 				}
 				attacks--;
 			}
-			removeStatusAffect(StatusAffects.Attacks);
+			removeStatusEffect(StatusEffects.Attacks);
 //			if (!game.combatRoundOver()) game.doNext(1);
 			game.combatRoundOver(); //The doNext here was not required
 		}
@@ -938,25 +938,25 @@
 
 		public function doAI():void
 		{
-			if (hasStatusAffect(StatusAffects.Stunned) || hasStatusAffect(StatusAffects.FreezingBreathStun)) {
+			if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FreezingBreathStun)) {
 				if (!handleStun()) return;
 			}
-			if (hasStatusAffect(StatusAffects.Fear)) {
+			if (hasStatusEffect(StatusEffects.Fear)) {
 				if (!handleFear()) return;
 			}
 			//Exgartuan gets to do stuff!
-			if (game.player.hasStatusAffect(StatusAffects.Exgartuan) && game.player.statusAffectv2(StatusAffects.Exgartuan) == 0 && rand(3) == 0) {
+			if (game.player.hasStatusEffect(StatusEffects.Exgartuan) && game.player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
 				if (game.exgartuan.exgartuanCombatUpdate()) game.outputText("\n\n", false);
 			}
-			if (hasStatusAffect(StatusAffects.Constricted) || hasStatusAffect(StatusAffects.ConstrictedScylla) || hasStatusAffect(StatusAffects.GooEngulf)) {
+			if (hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf)) {
 				if (!handleConstricted()) return;
 			}
-			if (hasStatusAffect(StatusAffects.AbilityCooldown1) ) {
-				if (statusAffectv1(StatusAffects.AbilityCooldown1) <= 0) {
-					removeStatusAffect(StatusAffects.AbilityCooldown1);
+			if (hasStatusEffect(StatusEffects.AbilityCooldown1) ) {
+				if (statusEffectv1(StatusEffects.AbilityCooldown1) <= 0) {
+					removeStatusEffect(StatusEffects.AbilityCooldown1);
 				}
 				else {
-					addStatusValue(StatusAffects.AbilityCooldown1,1,-1);
+					addStatusValue(StatusEffects.AbilityCooldown1,1,-1);
 				}
 			}
 			//If grappling... TODO implement grappling
@@ -988,31 +988,31 @@
 		{
 			if (player.lowerBody == 26) {
 			game.outputText("Your prey pushes at your tentacles, twisting and writhing in an effort to escape from your tentacle's tight bonds.", false);
-			if (statusAffectv1(StatusAffects.ConstrictedScylla) <= 0) {
+			if (statusEffectv1(StatusEffects.ConstrictedScylla) <= 0) {
 				game.outputText("  " + capitalA + short + " proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.", false);
-				removeStatusAffect(StatusAffects.ConstrictedScylla);
+				removeStatusEffect(StatusEffects.ConstrictedScylla);
 			}
-			addStatusValue(StatusAffects.ConstrictedScylla, 1, -1);
+			addStatusValue(StatusEffects.ConstrictedScylla, 1, -1);
 			game.combatRoundOver();
 			return false;
 			}
 			else if (player.lowerBody == 8) {
 			game.outputText("" + capitalA + short + " struggle in your fluid form kicking and screaming to try and get out.", false);
-			if (statusAffectv1(StatusAffects.GooEngulf) <= 0) {
+			if (statusEffectv1(StatusEffects.GooEngulf) <= 0) {
 				game.outputText("  " + capitalA + short + " proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.", false);
-				removeStatusAffect(StatusAffects.GooEngulf);
+				removeStatusEffect(StatusEffects.GooEngulf);
 			}
-			addStatusValue(StatusAffects.GooEngulf, 1, -1);
+			addStatusValue(StatusEffects.GooEngulf, 1, -1);
 			game.combatRoundOver();
 			return false;
 			}
 			else {
 			game.outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.", false);
-			if (statusAffectv1(StatusAffects.Constricted) <= 0) {
+			if (statusEffectv1(StatusEffects.Constricted) <= 0) {
 				game.outputText("  " + capitalA + short + " proves to be too much for your tail to handle, breaking free of your tightly bound coils.", false);
-				removeStatusAffect(StatusAffects.Constricted);
+				removeStatusEffect(StatusEffects.Constricted);
 			}
-			addStatusValue(StatusAffects.Constricted, 1, -1);
+			addStatusValue(StatusEffects.Constricted, 1, -1);
 			game.combatRoundOver();
 			return false;
 			}
@@ -1023,18 +1023,18 @@
 		 */
 		protected function handleFear():Boolean
 		{
-			if (statusAffectv1(StatusAffects.Fear) == 0) {
+			if (statusEffectv1(StatusEffects.Fear) == 0) {
 				if (plural) {
-					removeStatusAffect(StatusAffects.Fear);
+					removeStatusEffect(StatusEffects.Fear);
 					game.outputText("Your foes shake free of their fear and ready themselves for battle.", false);
 				}
 				else {
-					removeStatusAffect(StatusAffects.Fear);
+					removeStatusEffect(StatusEffects.Fear);
 					game.outputText("Your foe shakes free of its fear and readies itself for battle.", false);
 				}
 			}
 			else {
-				addStatusValue(StatusAffects.Fear, 1, -1);
+				addStatusValue(StatusEffects.Fear, 1, -1);
 				if (plural) game.outputText(capitalA + short + " are too busy shivering with fear to fight.", false);
 				else game.outputText(capitalA + short + " is too busy shivering with fear to fight.", false);
 			}
@@ -1047,11 +1047,11 @@
 		 */
 		protected function handleStun():Boolean
 		{
-			if (statusAffectv1(StatusAffects.Stunned) <= 0) removeStatusAffect(StatusAffects.Stunned);
-			else addStatusValue(StatusAffects.Stunned, 1, -1);
-			if (hasStatusAffect(StatusAffects.InkBlind)) game.outputText("Your foe is busy trying to remove the ink and therefore does no other action then flay its hand about its face.", false);
-			else if (hasStatusAffect(StatusAffects.FreezingBreathStun)) game.outputText("Your foe is too busy trying to break out of his icy prison to fight back.", false);
-			else if (hasStatusAffect(StatusAffects.MonsterAttacksDisabled)) game.outputText(capitalA + short + " try to hit you but is unable to reach you!", false);
+			if (statusEffectv1(StatusEffects.Stunned) <= 0) removeStatusEffect(StatusEffects.Stunned);
+			else addStatusValue(StatusEffects.Stunned, 1, -1);
+			if (hasStatusEffect(StatusEffects.InkBlind)) game.outputText("Your foe is busy trying to remove the ink and therefore does no other action then flay its hand about its face.", false);
+			else if (hasStatusEffect(StatusEffects.FreezingBreathStun)) game.outputText("Your foe is too busy trying to break out of his icy prison to fight back.", false);
+			else if (hasStatusEffect(StatusEffects.MonsterAttacksDisabled)) game.outputText(capitalA + short + " try to hit you but is unable to reach you!", false);
 			else {
 			if (plural) game.outputText("Your foes are too dazed from your last hit to strike back!", false);
 			else game.outputText("Your foe is too dazed from your last hit to strike back!", false);
@@ -1148,13 +1148,13 @@
 			outputDefaultTeaseReaction(lustDelta);
 			if(lustDelta > 0) {
 				//Imp mob uber interrupt!
-			  	if(hasStatusAffect(StatusAffects.ImpUber)) { // TODO move to proper class
+			  	if(hasStatusEffect(StatusEffects.ImpUber)) { // TODO move to proper class
 					outputText("\nThe imps in the back stumble over their spell, their loincloths tenting obviously as your display interrupts their casting.  One of them spontaneously orgasms, having managed to have his spell backfire.  He falls over, weakly twitching as a growing puddle of whiteness surrounds his defeated form.", false);
 					//(-5% of max enemy HP)
 					HP -= bonusHP * .05;
 					lust -= 15;
-					removeStatusAffect(StatusAffects.ImpUber);
-					createStatusAffect(StatusAffects.ImpSkip,0,0,0,0);
+					removeStatusEffect(StatusEffects.ImpUber);
+					createStatusEffect(StatusEffects.ImpSkip,0,0,0,0);
 				}
 			}
 			applyTease(lustDelta);
@@ -1265,8 +1265,8 @@
 				result += ", "+Appearance.describeByScale(vagina.vaginalWetness,Appearance.DEFAULT_VAGINA_WETNESS_SCALES,"drier than","wetter than");
 				if (vagina.labiaPierced) result += ". Labia are pierced with "+vagina.labiaPLong;
 				if (vagina.clitPierced) result += ". Clit is pierced with "+vagina.clitPLong;
-				if (statusAffectv1(StatusAffects.BonusVCapacity)>0){
-					result+="; vaginal capacity is increased by "+statusAffectv1(StatusAffects.BonusVCapacity);
+				if (statusEffectv1(StatusEffects.BonusVCapacity) > 0){
+					result+= "; vaginal capacity is increased by " + statusEffectv1(StatusEffects.BonusVCapacity);
 				}
 				result+=".\n";
 			}
@@ -1281,8 +1281,8 @@
 				}
 			}
 			result += Pronoun3+" ass is "+Appearance.describeByScale(ass.analLooseness,Appearance.DEFAULT_ANAL_LOOSENESS_SCALES,"tighter than","looser than")+", "+Appearance.describeByScale(ass.analWetness,Appearance.DEFAULT_ANAL_WETNESS_SCALES,"drier than","wetter than");
-			if (statusAffectv1(StatusAffects.BonusACapacity)>0){
-				result += "; anal capacity is increased by "+statusAffectv1(StatusAffects.BonusACapacity);
+			if (statusEffectv1(StatusEffects.BonusACapacity) > 0){
+				result += "; anal capacity is increased by " + statusEffectv1(StatusEffects.BonusACapacity);
 			}
 			result +=".\n\n";
 
@@ -1316,88 +1316,88 @@
 
 		public function combatRoundUpdate():void
 		{
-			if(hasStatusAffect(StatusAffects.MilkyUrta)) {
+			if(hasStatusEffect(StatusEffects.MilkyUrta)) {
 				game.urtaQuest.milkyUrtaTic();
 			}
 			//Countdown
-			var sac:StatusAffectClass = statusAffectByType(StatusAffects.TentacleCoolDown);
+			var sac:StatusEffectClass = statusEffectByType(StatusEffects.TentacleCoolDown);
 			if(sac) {
 				sac.value1 -= 1;
 				if (sac.value1 <= 0) {
-					removeStatusAffect(StatusAffects.TentacleCoolDown);
+					removeStatusEffect(StatusEffects.TentacleCoolDown);
 				}
 			}
-			if(hasStatusAffect(StatusAffects.CoonWhip)) {
-				if(statusAffectv2(StatusAffects.CoonWhip) <= 0) {
-					armorDef += statusAffectv1(StatusAffects.CoonWhip);
+			if(hasStatusEffect(StatusEffects.CoonWhip)) {
+				if(statusEffectv2(StatusEffects.CoonWhip) <= 0) {
+					armorDef += statusEffectv1(StatusEffects.CoonWhip);
 					outputText("<b>Tail whip wears off!</b>\n\n");
-					removeStatusAffect(StatusAffects.CoonWhip);
+					removeStatusEffect(StatusEffects.CoonWhip);
 				}
 				else {
-					addStatusValue(StatusAffects.CoonWhip,2,-1);
+					addStatusValue(StatusEffects.CoonWhip,2,-1);
 					outputText("<b>Tail whip is currently reducing your foe");
 					if(plural) outputText("s'");
 					else outputText("'s");
-					outputText(" armor by " + statusAffectv1(StatusAffects.CoonWhip) + ".</b>\n\n")
+					outputText(" armor by " + statusEffectv1(StatusEffects.CoonWhip) + ".</b>\n\n")
 				}
 			}
-			if(hasStatusAffect(StatusAffects.TailSlamWhip)) {
-				if(statusAffectv2(StatusAffects.TailSlamWhip) <= 0) {
-					armorDef += statusAffectv1(StatusAffects.TailSlamWhip);
+			if(hasStatusEffect(StatusEffects.TailSlamWhip)) {
+				if(statusEffectv2(StatusEffects.TailSlamWhip) <= 0) {
+					armorDef += statusEffectv1(StatusEffects.TailSlamWhip);
 					outputText("<b>Tail slam wears off!</b>\n\n");
-					removeStatusAffect(StatusAffects.TailSlamWhip);
+					removeStatusEffect(StatusEffects.TailSlamWhip);
 				}
 				else {
-					addStatusValue(StatusAffects.TailSlamWhip,2,-1);
+					addStatusValue(StatusEffects.TailSlamWhip,2,-1);
 					outputText("<b>Tail slam is currently reducing your foe");
 					if(plural) outputText("s'");
 					else outputText("'s");
 					outputText(" armor to 0.</b>\n\n")
 				}
 			}
-			if(hasStatusAffect(StatusAffects.Blind)) {
-				addStatusValue(StatusAffects.Blind,1,-1);
-				if(statusAffectv1(StatusAffects.Blind) <= 0) {
+			if(hasStatusEffect(StatusEffects.Blind)) {
+				addStatusValue(StatusEffects.Blind,1,-1);
+				if(statusEffectv1(StatusEffects.Blind) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer blind!</b>\n\n", false);
-					removeStatusAffect(StatusAffects.Blind);
+					removeStatusEffect(StatusEffects.Blind);
 				}
 				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently blind!</b>\n\n", false);
 			}
-			if(hasStatusAffect(StatusAffects.InkBlind)) {
-				addStatusValue(StatusAffects.InkBlind,1,-1);
-				if(statusAffectv1(StatusAffects.InkBlind) <= 0) {
+			if(hasStatusEffect(StatusEffects.InkBlind)) {
+				addStatusValue(StatusEffects.InkBlind,1,-1);
+				if(statusEffectv1(StatusEffects.InkBlind) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer blind!</b>\n\n", false);
-					removeStatusAffect(StatusAffects.InkBlind);
+					removeStatusEffect(StatusEffects.InkBlind);
 				}
 				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently blind!</b>\n\n", false);
 			}
-			if(hasStatusAffect(StatusAffects.FreezingBreathStun)) {
-				addStatusValue(StatusAffects.FreezingBreathStun,1,-1);
-				if(statusAffectv1(StatusAffects.FreezingBreathStun) <= 0) {
+			if(hasStatusEffect(StatusEffects.FreezingBreathStun)) {
+				addStatusValue(StatusEffects.FreezingBreathStun,1,-1);
+				if(statusEffectv1(StatusEffects.FreezingBreathStun) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer encased in the ice prison!</b>\n\n", false);
-					removeStatusAffect(StatusAffects.FreezingBreathStun);
+					removeStatusEffect(StatusEffects.FreezingBreathStun);
 				}
 				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently encased in the ice prison!</b>\n\n", false);
 			}
-			if(hasStatusAffect(StatusAffects.Earthshield)) {
+			if(hasStatusEffect(StatusEffects.Earthshield)) {
 				outputText("<b>" + capitalA + short + " is protected by a shield of rocks!</b>\n\n");
 			}
-			if(hasStatusAffect(StatusAffects.Flying)) {
-				addStatusValue(StatusAffects.Flying,1,-1);
-				if(statusAffectv1(StatusAffects.Flying) <= 0) {
+			if(hasStatusEffect(StatusEffects.Flying)) {
+				addStatusValue(StatusEffects.Flying,1,-1);
+				if(statusEffectv1(StatusEffects.Flying) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer flying!</b>\n\n", false);
-					removeStatusAffect(StatusAffects.Flying);
+					removeStatusEffect(StatusEffects.Flying);
 				}
 			}
-			if(hasStatusAffect(StatusAffects.Sandstorm)) {
+			if(hasStatusEffect(StatusEffects.Sandstorm)) {
 				//Blinded:
-				if(player.hasStatusAffect(StatusAffects.Blind)) {
+				if(player.hasStatusEffect(StatusEffects.Blind)) {
 					outputText("<b>You blink the sand from your eyes, but you're sure that more will get you if you don't end it soon!</b>\n\n");
-					player.removeStatusAffect(StatusAffects.Blind);
+					player.removeStatusEffect(StatusEffects.Blind);
 				}
 				else {
-					if(statusAffectv1(StatusAffects.Sandstorm) == 0 || statusAffectv1(StatusAffects.Sandstorm) % 4 == 0) {
-						player.createStatusAffect(StatusAffects.Blind,0,0,0,0);
+					if(statusEffectv1(StatusEffects.Sandstorm) == 0 || statusEffectv1(StatusEffects.Sandstorm) % 4 == 0) {
+						player.createStatusEffect(StatusEffects.Blind,0,0,0,0);
 						outputText("<b>The sand is in your eyes!  You're blinded this turn!</b>\n\n");
 					}
 					else {
@@ -1406,28 +1406,28 @@
 						outputText("</b>\n\n");
 					}
 				}
-				addStatusValue(StatusAffects.Sandstorm,1,1);
+				addStatusValue(StatusEffects.Sandstorm,1,1);
 			}
-			if(hasStatusAffect(StatusAffects.Stunned)) {
+			if(hasStatusEffect(StatusEffects.Stunned)) {
 				outputText("<b>" + capitalA + short + " is still stunned!</b>\n\n", false);
 			}
-			if(hasStatusAffect(StatusAffects.Shell)) {
-				if(statusAffectv1(StatusAffects.Shell) >= 0) {
+			if(hasStatusEffect(StatusEffects.Shell)) {
+				if(statusEffectv1(StatusEffects.Shell) >= 0) {
 					outputText("<b>A wall of many hues shimmers around " + a + short + ".</b>\n\n");
-					addStatusValue(StatusAffects.Shell,1,-1);
+					addStatusValue(StatusEffects.Shell,1,-1);
 				}
 				else {
 					outputText("<b>The magical barrier " + a + short + " erected fades away to nothing at last.</b>\n\n");
-					removeStatusAffect(StatusAffects.Shell);
+					removeStatusEffect(StatusEffects.Shell);
 				}
 			}
-			if(hasStatusAffect(StatusAffects.IzmaBleed)) {
+			if(hasStatusEffect(StatusEffects.IzmaBleed)) {
 				//Countdown to heal
-				addStatusValue(StatusAffects.IzmaBleed,1,-1);
+				addStatusValue(StatusEffects.IzmaBleed,1,-1);
 				//Heal wounds
-				if(statusAffectv1(StatusAffects.IzmaBleed) <= 0) {
+				if(statusEffectv1(StatusEffects.IzmaBleed) <= 0) {
 					outputText("The wounds you left on " + a + short + " stop bleeding so profusely.\n\n", false);
-					removeStatusAffect(StatusAffects.IzmaBleed);
+					removeStatusEffect(StatusEffects.IzmaBleed);
 				}
 				//Deal damage if still wounded.
 				else {
@@ -1437,13 +1437,13 @@
 					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your weapon left behind. <b>(<font color=\"#800000\">" + store + "</font>)</b>\n\n", false);
 				}
 			}
-			if(hasStatusAffect(StatusAffects.SharkBiteBleed)) {
+			if(hasStatusEffect(StatusEffects.SharkBiteBleed)) {
 				//Countdown to heal
-				addStatusValue(StatusAffects.SharkBiteBleed,1,-1);
+				addStatusValue(StatusEffects.SharkBiteBleed,1,-1);
 				//Heal wounds
-				if(statusAffectv1(StatusAffects.SharkBiteBleed) <= 0) {
+				if(statusEffectv1(StatusEffects.SharkBiteBleed) <= 0) {
 					outputText("The bite wounds you left on " + a + short + " stop bleeding so profusely.\n\n", false);
-					removeStatusAffect(StatusAffects.SharkBiteBleed);
+					removeStatusEffect(StatusEffects.SharkBiteBleed);
 				}
 				//Deal damage if still wounded.
 				else {
@@ -1453,14 +1453,14 @@
 					else outputText(capitalA + short + " bleeds profusely from the jagged wounds your bite left behind. <b>(<font color=\"#800000\">" + store3 + "</font>)</b>\n\n", false);
 				}
 			}
-			if(hasStatusAffect(StatusAffects.Timer)) {
-				if(statusAffectv1(StatusAffects.Timer) <= 0)
-					removeStatusAffect(StatusAffects.Timer);
-				addStatusValue(StatusAffects.Timer,1,-1);
+			if(hasStatusEffect(StatusEffects.Timer)) {
+				if(statusEffectv1(StatusEffects.Timer) <= 0)
+					removeStatusEffect(StatusEffects.Timer);
+				addStatusValue(StatusEffects.Timer,1,-1);
 			}
-			if(hasStatusAffect(StatusAffects.LustStick)) {
+			if(hasStatusEffect(StatusEffects.LustStick)) {
 				//LoT Effect Messages:
-				switch(statusAffectv1(StatusAffects.LustStick)) {
+				switch(statusEffectv1(StatusEffects.LustStick)) {
 					//First:
 					case 1:
 						if(plural) outputText("One of " + a + short + " pants and crosses " + mf("his","her") + " eyes for a moment.  " + mf("His","Her") + " dick flexes and bulges, twitching as " + mf("he","she") + " loses himself in a lipstick-fueled fantasy.  When " + mf("he","she") + " recovers, you lick your lips and watch " + mf("his","her") + " blush spread.\n\n", false);
@@ -1487,18 +1487,18 @@
 						else outputText("Drops of pre-cum roll steadily out of " + a + short + "'s dick.  It's a marvel " + pronoun1 + " hasn't given in to " + pronoun3 + " lust yet.\n\n", false);
 						break;
 				}
-				addStatusValue(StatusAffects.LustStick,1,1);
+				addStatusValue(StatusEffects.LustStick,1,1);
 				//Damage = 5 + bonus score minus
 				//Reduced by lust vuln of course
-				lust += Math.round(lustVuln * (5 + statusAffectv2(StatusAffects.LustStick)));
+				lust += Math.round(lustVuln * (5 + statusEffectv2(StatusEffects.LustStick)));
 			}
-			if(hasStatusAffect(StatusAffects.PCTailTangle)) {
+			if(hasStatusEffect(StatusEffects.PCTailTangle)) {
 				//when Entwined
 				outputText("You are bound tightly in the kitsune's tails.  <b>The only thing you can do is try to struggle free!</b>\n\n");
 				outputText("Stimulated by the coils of fur, you find yourself growing more and more aroused...\n\n");
 				game.dynStats("lus", 5+player.sens/10);
 			}
-			if(hasStatusAffect(StatusAffects.QueenBind)) {
+			if(hasStatusEffect(StatusEffects.QueenBind)) {
 				outputText("You're utterly restrained by the Harpy Queen's magical ropes!\n\n");
 				if(flags[kFLAGS.PC_FETISH] >= 2) game.dynStats("lus", 3);
 			}
@@ -1510,7 +1510,7 @@
 				game.dynStats("lus", 1+rand(8));
 			}
 			//[LUST GAINED PER ROUND] - Omnibus
-			if(hasStatusAffect(StatusAffects.LustAura)) {
+			if(hasStatusEffect(StatusEffects.LustAura)) {
 				if(this is OmnibusOverseer) {
 					if(player.lust < (player.maxLust() * 0.33)) outputText("Your groin tingles warmly.  The demon's aura is starting to get to you.\n\n", false);
 					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("You blush as the demon's aura seeps into you, arousing you more and more.\n\n", false);
@@ -1531,13 +1531,13 @@
 				game.dynStats("lus", (3 + int(player.lib/20 + player.cor/30)));
 			}
 			//immolation DoT
-			if (hasStatusAffect(StatusAffects.ImmolationDoT)) {
+			if (hasStatusEffect(StatusEffects.ImmolationDoT)) {
 				//Countdown to heal
-				addStatusValue(StatusAffects.ImmolationDoT,1,-1);
+				addStatusValue(StatusEffects.ImmolationDoT,1,-1);
 				//Heal wounds
-				if(statusAffectv1(StatusAffects.ImmolationDoT) <= 0) {
+				if(statusEffectv1(StatusEffects.ImmolationDoT) <= 0) {
 					outputText("Flames left by immolation spell " + a + short + " finally stop burning.\n\n", false);
-					removeStatusAffect(StatusAffects.ImmolationDoT);
+					removeStatusEffect(StatusEffects.ImmolationDoT);
 				}
 				//Deal damage if still wounded.
 				else {
@@ -1548,13 +1548,13 @@
 				}
 			}
 			//Burn DoT
-			if (hasStatusAffect(StatusAffects.BurnDoT)) {
+			if (hasStatusEffect(StatusEffects.BurnDoT)) {
 				//Countdown to heal
-				addStatusValue(StatusAffects.BurnDoT,1,-1);
+				addStatusValue(StatusEffects.BurnDoT,1,-1);
 				//Heal wounds
-				if(statusAffectv1(StatusAffects.BurnDoT) <= 0) {
+				if(statusEffectv1(StatusEffects.BurnDoT) <= 0) {
 					outputText("Flames left by Burn " + a + short + " finally stop burning.\n\n", false);
-					removeStatusAffect(StatusAffects.BurnDoT);
+					removeStatusEffect(StatusEffects.BurnDoT);
 				}
 				//Deal damage if still wounded.
 				else {

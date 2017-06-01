@@ -31,8 +31,8 @@ import classes.GlobalFlags.kFLAGS;
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
 				damage = Math.round(damage);
-				if (player.hasStatusAffect(StatusAffects.Blizzard)) {
-					player.addStatusValue(StatusAffects.Blizzard, 1, -1);
+				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
+					player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 					damage *= 0.2;
 					damage = Math.round(damage);
 				}
@@ -121,7 +121,7 @@ import classes.GlobalFlags.kFLAGS;
 		*/
 		override protected function handleFear():Boolean
 		{
-			removeStatusAffect(StatusAffects.Fear);
+			removeStatusEffect(StatusEffects.Fear);
 			outputText("Kiha shudders for a moment, then looks your way with a clear head.  \"<i>Fear was the first thing the demons taught us to overcome.  Do you think it would stay my blade?</i>\"\n", false);
 			return true;
 		}
@@ -157,11 +157,11 @@ import classes.GlobalFlags.kFLAGS;
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(hasStatusAffect(StatusAffects.spiderfight))
+			if(hasStatusEffect(StatusEffects.spiderfight))
 				game.kihaFollower.playerBeatsUpKihaPreSpiderFight();
-			else if(hasStatusAffect(StatusAffects.DomFight))
+			else if(hasStatusEffect(StatusEffects.DomFight))
 				game.kihaFollower.pcWinsDomFight();
-			else if(hasStatusAffect(StatusAffects.Spar))
+			else if(hasStatusEffect(StatusEffects.Spar))
 				game.kihaFollower.winSparWithKiha();
 			else game.kihaScene.kihaVictoryIntroduction();
 		}
@@ -169,11 +169,11 @@ import classes.GlobalFlags.kFLAGS;
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if(hasStatusAffect(StatusAffects.spiderfight))
+			if(hasStatusEffect(StatusEffects.spiderfight))
 				game.kihaFollower.loseKihaPreSpiderFight();
-			else if(hasStatusAffect(StatusAffects.DomFight))
+			else if(hasStatusEffect(StatusEffects.DomFight))
 				game.kihaFollower.pcLosesDomFight();
-			else if(hasStatusAffect(StatusAffects.Spar))
+			else if(hasStatusEffect(StatusEffects.Spar))
 				game.kihaFollower.sparWithFriendlyKihaLose();
 			else if (pcCameWorms){
 				outputText("\n\nKiha seems visibly disturbed by your infection, enough that she turns to leave.");
@@ -195,11 +195,11 @@ import classes.GlobalFlags.kFLAGS;
 				this.long += "Her vagina constantly glistens with moisture, regardless of her state of arousal.  Despite her nudity, Kiha stands with the confidence and poise of a trained fighter.";
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 40, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("D"));
 			this.ass.analLooseness = ANAL_LOOSENESS_LOOSE;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,40,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,40,0,0,0);
 			this.tallness = 6*12+1;
 			this.hipRating = HIP_RATING_AMPLE;
 			this.buttRating = BUTT_RATING_AVERAGE+1;

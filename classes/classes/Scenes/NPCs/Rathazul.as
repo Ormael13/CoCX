@@ -36,7 +36,7 @@
 		//End of Interface Implementation
 		
 		public function returnToRathazulMenu():void {
-			if (player.hasStatusAffect(StatusAffects.CampRathazul))
+			if (player.hasStatusEffect(StatusEffects.CampRathazul))
 				campRathazul();
 			else encounterRathazul();
 		}
@@ -44,7 +44,7 @@
 public function encounterRathazul():void {
 	spriteSelect(49);
 	clearOutput();
-	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.hasStatusAffect(StatusAffects.MetRathazul))
+	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.hasStatusEffect(StatusEffects.MetRathazul))
 	{
 		marblePurification.visitRathazulToPurifyMarbleAfterLaBovaStopsWorkin();
 		return;
@@ -54,22 +54,22 @@ public function encounterRathazul():void {
 	if(player.lust > 30) dynStats("lus", -10);
 	//Introduction
 	outputText(images.showImage("rathazul-lake"));
-	if(player.hasStatusAffect(StatusAffects.MetRathazul)) {
-		if(player.hasStatusAffect(StatusAffects.CampRathazul))
+	if(player.hasStatusEffect(StatusEffects.MetRathazul)) {
+		if(player.hasStatusEffect(StatusEffects.CampRathazul))
 			outputText("You walk over to Rathazul's corner of the camp.  He seems as busy as usual, with his nose buried deep in some tome or alchemical creation, but he turns to face you as soon as you walk within a few paces of him.\n\n");
 		else
 			outputText("You spy the familiar sight of the alchemist Rathazul's camp along the lake.  The elderly rat seems to be oblivious to your presence as he scurries between his equipment, but you know him well enough to bet that he is entirely aware of your presence.\n\n");
 	}
 	else {
 		outputText("You encounter a hunched figure working as you come around a large bush.  Clothed in tattered robes that obscure most his figure, you can nontheless see a rat-like muzzle protruding from the shadowy hood that conceals most of his form.  A simple glance behind him confirms your suspicions - this is some kind of rat-person.  He seems oblivious to your presence as he stirs a cauldron of viscous fluid with one hand; a neat stack of beakers and phials sit in the dirt to his left.  You see a smile break across his aged visage, and he says, \"<i>Come closer child.  I will not bite.</i>\"\n\nApprehensive of the dangers of this unknown land, you cautiously approach.\n\n\"<i>I am Rathazul the Alchemist.  Once I was famed for my miracle cures.  Now I idle by this lake, helpless to do anything but measure the increasing amounts of corruption that taint its waters,</i>\" he says as he pulls back his hood, revealing the entirety of his very bald and wrinkled head.\n\n");
-		player.createStatusAffect(StatusAffects.MetRathazul,0,0,0,0);
+		player.createStatusEffect(StatusEffects.MetRathazul,0,0,0,0);
 	}
 	//Camp offer!
-	if(player.statusAffectv2(StatusAffects.MetRathazul) >= 3 && player.statusAffectv3(StatusAffects.MetRathazul) != 1 && player.cor < 75) {
+	if(player.statusEffectv2(StatusEffects.MetRathazul) >= 3 && player.statusEffectv3(StatusEffects.MetRathazul) != 1 && player.cor < 75) {
 		outputText("\"<i>You know, I think I might be able to do this worn-out world a lot more good from your camp than by wandering around this lake.  What do you say?</i>\" asks the rat.\n\n(Move Rathazul into your camp?)", false);
 		doYesNo(rathazulMoveToCamp, rathazulMoveDecline);
 		//Set rathazul flag that he has offered to move in (1 time offer)
-		player.changeStatusValue(StatusAffects.MetRathazul,3,1);
+		player.changeStatusValue(StatusEffects.MetRathazul,3,1);
 		return;
 	}
 	offered = rathazulWorkOffer();
@@ -82,7 +82,7 @@ public function encounterRathazul():void {
 private function rathazulMoveToCamp():void {
 	clearOutput();
 	outputText("Rathazul smiles happily back at you and begins packing up his equipment.  He mutters over his shoulder, \"<i>It will take me a while to get my equipment moved over, but you head on back and I'll see you within the hour.  Oh my, yes.</i>\"\n\nHe has the look of someone experiencing hope for the first time in a long time.");
-	player.createStatusAffect(StatusAffects.CampRathazul, 0, 0, 0, 0);
+	player.createStatusEffect(StatusEffects.CampRathazul, 0, 0, 0, 0);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -95,7 +95,7 @@ private function rathazulMoveDecline():void {
 public function campRathazul():void {
 	spriteSelect(49);
 	clearOutput();
-	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.hasStatusAffect(StatusAffects.MetRathazul))
+	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.hasStatusEffect(StatusEffects.MetRathazul))
 	{
 		marblePurification.visitRathazulToPurifyMarbleAfterLaBovaStopsWorkin();
 		return;
@@ -112,7 +112,7 @@ public function campRathazul():void {
 	if(rand(6) == 0 && flags[kFLAGS.RATHAZUL_CAMP_INTERACTION_COUNTDOWN] == 0) {
 		flags[kFLAGS.RATHAZUL_CAMP_INTERACTION_COUNTDOWN] = 3;
 		//Pure jojo
-		if(flags[kFLAGS.JOJO_RATHAZUL_INTERACTION_COUNTER] == 0 && player.hasStatusAffect(StatusAffects.PureCampJojo) && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
+		if(flags[kFLAGS.JOJO_RATHAZUL_INTERACTION_COUNTER] == 0 && player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_DEAD_OR_GONE] == 0) {
 			finter.jojoOffersRathazulMeditation();
 			return;
 		}
@@ -141,11 +141,11 @@ public function campRathazul():void {
 	//Introduction
 	outputText(images.showImage("rathazul-camp"));
 	outputText("Rathazul looks up from his equipment and gives you an uncertain smile.\n\n\"<i>Oh, don't mind me,</i>\" he says, \"<i>I'm just running some tests here.  Was there something you needed, " + player.short + "?</i>\"\n\n");
-	//player.createStatusAffect(StatusAffects.metRathazul,0,0,0,0);
+	//player.createStatusEffect(StatusEffects.metRathazul,0,0,0,0);
 	offered = rathazulWorkOffer();
 	if (!offered) {
 		outputText("He sighs dejectedly, \"<i>I don't think there is.  Why don't you leave me be for a time, and I will see if I can find something to aid you.</i>\"", false);
-		if (player.hasStatusAffect(StatusAffects.CampRathazul))
+		if (player.hasStatusEffect(StatusEffects.CampRathazul))
 			doNext(camp.campFollowers);
 		else doNext(playerMenu);
 	}
@@ -182,7 +182,7 @@ private function rathazulWorkOffer():Boolean {
 	}
 	//Item crafting offer
 	if(player.hasItem(useables.GREENGL)) {
-		if(!player.hasStatusAffect(StatusAffects.RathazulArmor)) outputText("He pipes up with a bit of hope in his voice, \"<i>I can smell the essence of the tainted lake-slimes you've defeated, and if you'd let me, I could turn it into something a bit more useful to you.  You see, the slimes are filled with the tainted essence of the world-mother herself, and once the taint is burned away, the remaining substance remains very flexible but becomes nearly impossible to cut through.  With the gel of five defeated slimes I could craft you a durable suit of armor.</i>\"\n\n", false);
+		if(!player.hasStatusEffect(StatusEffects.RathazulArmor)) outputText("He pipes up with a bit of hope in his voice, \"<i>I can smell the essence of the tainted lake-slimes you've defeated, and if you'd let me, I could turn it into something a bit more useful to you.  You see, the slimes are filled with the tainted essence of the world-mother herself, and once the taint is burned away, the remaining substance remains very flexible but becomes nearly impossible to cut through.  With the gel of five defeated slimes I could craft you a durable suit of armor.</i>\"\n\n", false);
 		else outputText("He pipes up with a bit of excitement in his voice, \"<i>With just five pieces of slime-gel I could make another suit of armor...</i>\"\n\n", false);
 		spoken = true;
 		if (player.hasItem(useables.GREENGL,5)) {
@@ -263,7 +263,7 @@ private function rathazulWorkOffer():Boolean {
 	//Offer dyes if offering something else.
 	if(player.gems >= 50) {
 		outputText("Rathazul offers, \"<i>Since you have enough gems to cover the cost of materials for my dyes as well, you could buy one of my dyes for your hair.  ", false);
-		if (player.statusAffectv2(StatusAffects.MetRathazul) >= 8) outputText("I should be able to make exotic-colored dyes if you're interested.  ");
+		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 8) outputText("I should be able to make exotic-colored dyes if you're interested.  ");
 		outputText("Or if you want some changes to your skin, I have skin oils and body lotions.  I will need 50 gems up-front.</i>\"\n\n");
 		dyes = true;
 		spoken = true;
@@ -281,11 +281,11 @@ private function rathazulWorkOffer():Boolean {
 		outputText("Rathazul offers, \"<i>If you're in need of a pure honey, I can distill the regular bee honey. You'll also need 25 gems up front.</i>\"\n\n");
 	}
 	//Pro Lactaid & Centaurinum & Scorpinum
-	if (player.statusAffectv2(StatusAffects.MetRathazul) >= 5) {
+	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) {
 		outputText("The rat mentions, \"<i>You know, I could make something new if you're willing to hand over two of vials labeled \"Equinum\", one vial of minotaur blood and one hundred gems. Or two vials of Bee Honey, two vials of Snake Oil and 100 gems. Or five bottles of Lactaid and two bottles of purified LaBova along with 250 gems.</i>\"\n\n");
 	}
 	//Reducto
-	if(player.hasStatusAffect(StatusAffects.CampRathazul) && player.statusAffectv2(StatusAffects.MetRathazul) >= 4) {
+	if(player.hasStatusEffect(StatusEffects.CampRathazul) && player.statusEffectv2(StatusEffects.MetRathazul) >= 4) {
 		outputText("The rat hurries over to his supplies and produces a container of paste, looking rather proud of himself, \"<i>Good news everyone!  I've developed a paste you could use to shrink down any, ah, oversized body parts.  The materials are expensive though, so I'll need ");
 		if(flags[kFLAGS.AMILY_MET_RATHAZUL] >= 2) outputText("50");
 		else outputText("100");
@@ -297,13 +297,13 @@ private function rathazulWorkOffer():Boolean {
 
 	
 	//Vines
-	if(player.keyItemv1("Marae's Lethicite") > 0 && !player.hasStatusAffect(StatusAffects.DefenseCanopy) && player.hasStatusAffect(StatusAffects.CampRathazul)) {
+	if(player.keyItemv1("Marae's Lethicite") > 0 && !player.hasStatusEffect(StatusEffects.DefenseCanopy) && player.hasStatusEffect(StatusEffects.CampRathazul)) {
 		outputText("His eyes widen in something approaching shock when he sees the Lethicite crystal you took from Marae.  Rathazul stammers, \"<i>By the goddess... that's the largest piece of lethicite I've ever seen.  I don't know how you got it, but there is immense power in those crystals.  If you like, I know a way we could use its power to grow a canopy of thorny vines that would hide the camp and keep away imps.  Growing such a defense would use a third of that lethicite's power.</i>\"\n\n");
 		totalOffers++;
 		spoken = true;
 		lethiciteDefense = growLethiciteDefense;
 	}
-	if(player.hasStatusAffect(StatusAffects.CampRathazul)) {
+	if(player.hasStatusEffect(StatusEffects.CampRathazul)) {
 		if(flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED] == 0 && (sophieBimbo.bimboSophie() || player.findPerk(PerkLib.BroBrains) >= 0 || player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0)) {
 			rathazulDebimboOffer();
 			return true;
@@ -346,16 +346,16 @@ private function rathazulWorkOffer():Boolean {
 		
 		if (debimbo) addButton(5, "Debimbo", makeADeBimboDraft, null, null, null, "Ask Rathazul to make a debimbofying potion for you. \n\nCost: 250 Gems \nNeeds 5 Scholar Teas.");
 		if (player.hasItem(consumables.BEEHONY)) addButton(6, consumables.PURHONY.shortName, rathazulMakesPureHoney, null, null, null, "Ask him to distill a vial of bee honey into a pure honey. \n\nCost: 25 Gems \nNeeds 1 vial of Bee Honey");
-		if (player.statusAffectv2(StatusAffects.MetRathazul) >= 5) addButton(7, "ProLactaid", rathazulMakesMilkPotion, null, null, null, "Ask him to brew a special lactation potion. \n\nCost: 250 Gems \nNeeds 5 Lactaids and 2 Purified LaBovas.");
+		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) addButton(7, "ProLactaid", rathazulMakesMilkPotion, null, null, null, "Ask him to brew a special lactation potion. \n\nCost: 250 Gems \nNeeds 5 Lactaids and 2 Purified LaBovas.");
 		if (dyes) addButton(8, "Make Dye", makeDyes, null, null, null, "Ask him to make a special dye for you. \n\nCost: 50 Gems.");
 
 		if (lethiciteDefense != null) addButton(10, "Lethicite", lethiciteDefense, null, null, null, "Ask him if he can make use of that lethicite you've obtained from Marae.");
 		if (player.hasItem(consumables.PURHONY, 1) && player.hasItem(consumables.C__MINT, 1) && player.hasItem(consumables.PURPEAC, 1) && player.hasKeyItem("Rathazul's Purity Potion") < 0 &&(flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 2 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10)) {
 			addButton(11, "Pure Potion", rathazulMakesPurifyPotion, null, null, null, "Ask him to brew a purification potion for Minerva.");
 		}
-		if (player.statusAffectv2(StatusAffects.MetRathazul) >= 5) addButton(12, "Scorpinum", rathazulMakesScorpioPotion, null, null, null, "Ask him to brew a special potion that could aid in gaining scorpion tail. \n\nCost: 100 Gems \nNeeds 2 vials of Bee Honey and 2 vials of Snake Oil.");
+		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) addButton(12, "Scorpinum", rathazulMakesScorpioPotion, null, null, null, "Ask him to brew a special potion that could aid in gaining scorpion tail. \n\nCost: 100 Gems \nNeeds 2 vials of Bee Honey and 2 vials of Snake Oil.");
 
-		if(player.hasStatusAffect(StatusAffects.CampRathazul))
+		if(player.hasStatusEffect(StatusEffects.CampRathazul))
 			addButton(14,"Leave", camp.campFollowers);
 		else
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
@@ -401,7 +401,7 @@ private function rathazulPurifyIncubiDraft():void {
 	inventory.takeItem(consumables.P_DRAFT, returnToRathazulMenu);
 	player.gems -= 20;
 	statScreenRefresh();
-	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 }
 
 //For Minerva purification.
@@ -447,7 +447,7 @@ private function rathazulPurifySuccubiMilk():void {
 	inventory.takeItem(consumables.P_S_MLK, returnToRathazulMenu);
 	player.gems -= 20;
 	statScreenRefresh();
-	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 }
 
 
@@ -463,7 +463,7 @@ private function rathazulPurifySuccubiDelight():void {
 	inventory.takeItem(consumables.PSDELIT, returnToRathazulMenu);
 	player.gems -= 20;
 	statScreenRefresh();
-	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 }
 
 
@@ -479,7 +479,7 @@ private function rathazulPurifyLaBova():void {
 	inventory.takeItem(consumables.P_LBOVA, returnToRathazulMenu);
 	player.gems -= 20;
 	statScreenRefresh();
-	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 }
 
 private function rathazulDebimboOffer():void {
@@ -521,7 +521,7 @@ private function makeADeBimboDraft():void {
 	player.gems -= 250;
 	player.consumeItem(consumables.SMART_T,5);
 	statScreenRefresh();
-	player.addStatusValue(StatusAffects.MetRathazul,2,1);
+	player.addStatusValue(StatusEffects.MetRathazul,2,1);
 	inventory.takeItem(consumables.DEBIMBO, returnToRathazulMenu);
 }
 
@@ -538,7 +538,7 @@ private function purifyMinoCum():void{
 	inventory.takeItem(consumables.P_M_CUM, returnToRathazulMenu);
 	player.gems -= 20;
 	statScreenRefresh();
-	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 }
 
 public function rathazulArmorMenu():void {
@@ -651,7 +651,7 @@ public function chooseArmorOrRobes(robeType:int):void {
 	player.gems -= 500;
 	statScreenRefresh();
 	outputText("Rathazul grunts in response and goes back to work.  ", true);
-	if (player.hasStatusAffect(StatusAffects.CampRathazul))
+	if (player.hasStatusEffect(StatusEffects.CampRathazul))
 	{
 		outputText("You turn back to the center of your camp", false);
 	}
@@ -723,7 +723,7 @@ private function collectRathazulArmor():void {
 			itype = armors.SS_ROBE;
 	}
 	//Reset counters
-	player.addStatusValue(StatusAffects.MetRathazul,2,1);
+	player.addStatusValue(StatusEffects.MetRathazul,2,1);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
 	flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] = 0;
 	inventory.takeItem(itype, returnToRathazulMenu);
@@ -816,7 +816,7 @@ private function collectRathazulWeapon():void {
 			itype = weapons.DEPRAVA;
 	}
 	//Reset counters
-	player.addStatusValue(StatusAffects.MetRathazul,2,1);
+	player.addStatusValue(StatusEffects.MetRathazul,2,1);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
 	flags[kFLAGS.RATHAZUL_SILK_ARMOR_COUNTDOWN] = 0;
 	inventory.takeItem(itype, returnToRathazulMenu);
@@ -828,9 +828,9 @@ private function craftOozeArmor():void {
 	outputText(images.showImage("rathazul-craft-gelarmor"));
 	outputText("Rathazul takes the green gel from you and drops it into an empty cauldron.  With speed well beyond what you'd expect from such an elderly creature, he nimbly unstops a number of vials and pours them into the cauldron.  He lets the mixture come to a boil, readying a simple humanoid-shaped mold from what you had thought was piles of junk material.  In no time at all, he has cast the boiling liquid into the mold, and after a few more minutes he cracks it open, revealing a suit of glistening armor.\n\n");
 	player.destroyItems(useables.GREENGL, 5);
-	player.addStatusValue(StatusAffects.MetRathazul,2,1);
+	player.addStatusValue(StatusEffects.MetRathazul,2,1);
 	inventory.takeItem(armors.GELARMR, returnToRathazulMenu);
-	if(!player.hasStatusAffect(StatusAffects.RathazulArmor)) player.createStatusAffect(StatusAffects.RathazulArmor,0,0,0,0);
+	if(!player.hasStatusEffect(StatusEffects.RathazulArmor)) player.createStatusEffect(StatusEffects.RathazulArmor,0,0,0,0);
 }
 
 private function craftCarapace():void {
@@ -844,7 +844,7 @@ private function craftCarapace():void {
 	if(player.cockTotal() > 0 && player.biggestCockArea() >= 40) outputText("The silken material does little to hide the bulge of your groin, if anything it looks a little lewd.  Rathazul mumbles and looks away, shaking his head.\n\n", false);
 	if(player.biggestTitSize() >= 8) outputText("Your " + biggestBreastSizeDescript() + " barely fit into the breastplate, leaving you displaying a large amount of jiggling cleavage.\n\n", false);
 	player.destroyItems(useables.B_CHITN, 5);
-	player.addStatusValue(StatusAffects.MetRathazul,2,1);
+	player.addStatusValue(StatusEffects.MetRathazul,2,1);
 	inventory.takeItem(armors.BEEARMR, returnToRathazulMenu);
 }
 
@@ -923,7 +923,7 @@ private function craftDragonscaleArmorForReal(type:int = 0):void {
 			itype = armors.DSCLARM;
 			break;
 	}
-	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 	inventory.takeItem(itype, returnToRathazulMenu);
 }
 
@@ -968,7 +968,7 @@ private function craftEbonbloomArmorForReal(type:int = 0):void {
 			outputText(images.showImage("rathazul-craft-ebonweaverunejock"));
 			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging on the rack is a jock.  As you inspect it, you notice the dark grey cloth has an oily sheen.  ");
 			outputText("Adorning the cup is a rune seething with black magic.  ");
-			if (player.hasStatusAffect(StatusAffects.KnowsArouse)) outputText("You blush, recognizing the rune to represent lust. In the context of acting upon it...  ");
+			if (player.hasStatusEffect(StatusEffects.KnowsArouse)) outputText("You blush, recognizing the rune to represent lust. In the context of acting upon it...  ");
 			outputText("Rubbing your hand through the garment, you can see that the fabric is smoother than Ingram’s finest cloth, yet has a strange slickness to it not reminiscent of any fabric you know of. You also note the jock is also elastic, allowing it to fit your form regardless of how large your “assets” are. You thank the rat and collect your new jock.", false);
 			itype = undergarments.R_JOCK;
 			break;
@@ -976,7 +976,7 @@ private function craftEbonbloomArmorForReal(type:int = 0):void {
 			outputText(images.showImage("rathazul-craft-ebonweaverunethong"));
 			outputText("The rat takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Ratzhul is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging on the rack is a thong.  As you inspect it, you notice the dark grey cloth has an oily sheen.  ");
 			outputText("Adorning the front is a rune seething with black magic.  ");
-			if (player.hasStatusAffect(StatusAffects.KnowsArouse)) outputText("You blush, recognizing the rune to represent lust. In the context of acting upon it...  ");
+			if (player.hasStatusEffect(StatusEffects.KnowsArouse)) outputText("You blush, recognizing the rune to represent lust. In the context of acting upon it...  ");
 			outputText("Rubbing your hand through the garment, you can see that the fabric is smoother than Ingram’s finest cloth, yet has a strange slickness to it not reminiscent of any fabric you know of. You also note the thong is also elastic, allowing it to fit your form regardless of how large your “assets” are. You thank the rat and collect your new thong.", false);
 			itype = undergarments.R_THONG;
 			break;
@@ -1040,7 +1040,7 @@ private function craftEbonbloomArmorForReal(type:int = 0):void {
 			itype = armors.EWJACK_;
 			break;
 	}
-	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 	inventory.takeItem(itype, returnToRathazulMenu);
 }
 
@@ -1120,7 +1120,7 @@ private function craftWorldTreeWeaponForReal(type:int = 0):void {
 			itype = weapons.WGSWORD;
 			break;
 	}
-	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 	inventory.takeItem(itype, returnToRathazulMenu);
 }
 
@@ -1178,14 +1178,14 @@ private function buyDyes():void {
 	addButton(4, "Red", buyDye, consumables.RED_DYE);
 	addButton(5, "White", buyDye, consumables.WHITEDY);
 	addButton(6, "Gray", buyDye, consumables.GRAYDYE);
-	if (player.statusAffectv2(StatusAffects.MetRathazul) >= 8) {
+	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 8) {
 		addButton(7, "Blue", buyDye, consumables.BLUEDYE);
 		addButton(8, "Green", buyDye, consumables.GREEN_D);
 		addButton(9, "Orange", buyDye, consumables.ORANGDY);
 		addButton(10, "Purple", buyDye, consumables.PURPDYE);
 		addButton(11, "Pink", buyDye, consumables.PINKDYE);
 	}
-	if (player.statusAffectv2(StatusAffects.MetRathazul) >= 12) {
+	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 12) {
 		addButton(12, "Rainbow", buyDye, consumables.RAINDYE);
 	}
 	addButton(14, "Nevermind", buyDyeNevermind);
@@ -1197,7 +1197,7 @@ private function buyDye(dye:ItemType):void {
 	outputText(images.showImage("rathazul-buy-dye"));
 	inventory.takeItem(dye, returnToRathazulMenu);
 	statScreenRefresh();
-	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 }
 
 private function buyDyeNevermind():void {
@@ -1234,7 +1234,7 @@ private function makeDye1():void {
 	player.destroyItems(consumables.WHITEDY, 1);
 	outputText(images.showImage("rathazul-buy-dye"));
 	statScreenRefresh();
-	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 	inventory.takeItem(useables.VIALCLE, returnToRathazulMenu);
 }
 
@@ -1245,7 +1245,7 @@ private function makeDye2():void {
 	player.destroyItems(consumables.BLUEDYE, 1);
 	outputText(images.showImage("rathazul-buy-dye"));
 	statScreenRefresh();
-	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 	inventory.takeItem(useables.VIALTUR, returnToRathazulMenu);
 }
 
@@ -1256,7 +1256,7 @@ private function makeDye3():void {
 	player.destroyItems(consumables.PINKDYE, 1);
 	outputText(images.showImage("rathazul-buy-dye"));
 	statScreenRefresh();
-	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 	inventory.takeItem(useables.VIALPIN, returnToRathazulMenu);
 }
 
@@ -1267,7 +1267,7 @@ private function makeDye4():void {
 	player.destroyItems(consumables.RAINDYE, 1);
 	outputText(images.showImage("rathazul-buy-dye"));
 	statScreenRefresh();
-	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 	inventory.takeItem(useables.VIALRAI, returnToRathazulMenu);
 }
 
@@ -1306,7 +1306,7 @@ private function buyOil(oil:ItemType):void {
 	outputText(images.showImage("rathazul-buy-oil"));
 	inventory.takeItem(oil, returnToRathazulMenu);
 	statScreenRefresh();
-	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 }
 
 private function buyOilNevermind():void {
@@ -1340,7 +1340,7 @@ private function buyLotion(lotion:ItemType):void {
 	outputText(images.showImage("rathazul-buy-lotion"));
 	inventory.takeItem(lotion, returnToRathazulMenu);
 	statScreenRefresh();
-	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 }
 
 private function buyLotionNevermind():void {
@@ -1363,7 +1363,7 @@ private function buyReducto():void {
 		player.gems -= cost;
 		inventory.takeItem(consumables.REDUCTO, returnToRathazulMenu);
 		statScreenRefresh();
-		player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+		player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 	}
 	else {
 		outputText("\"<i>I'm sorry, but you lack the gems I need to make the trade,</i>\" apologizes Rathazul.");
@@ -1382,7 +1382,7 @@ private function buyGroPlus():void {
 		player.gems -= cost;
 		inventory.takeItem(consumables.GROPLUS, returnToRathazulMenu);
 		statScreenRefresh();
-		player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+		player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 	}
 	else {
 		outputText("\"<i>I'm sorry, but you lack the gems I need to make the trade,</i>\" apologizes Rathazul.");
@@ -1396,7 +1396,7 @@ private function buyGroPlus():void {
 		player.gems -= 100;
 		statScreenRefresh();
 		inventory.takeItem(item, returnToRathazulMenu);
-		player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+		player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 	}
 
 //Turn several ingredients into a special potion/consumable.
@@ -1457,7 +1457,7 @@ private function rathazulMakesScorpioPotion():void {
 	statScreenRefresh();
 	outputText("You hand over two vials of Bee Honey, two vials of Snake Oil and one hundred gems to Rathazul, which he gingerly takes them and proceeds to make a special potion for you.");
 	outputText("\n\nAfter a while, the rat hands you a vial labeled \"Scorpinum\" and nods.");
-	player.addStatusValue(StatusAffects.MetRathazul, 2, 1);
+	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 	inventory.takeItem(consumables.SCORICO, returnToRathazulMenu);
 }
 
@@ -1474,7 +1474,7 @@ private function growLethiciteDefenseYesYesYes():void {
 	spriteSelect(49);
 	clearOutput();
 	outputText("Rathazul nods and produces a mallet and chisel from his robes.  With surprisingly steady hands for one so old, he holds the chisel against the crystal and taps it, easily cracking off a large shard.  Rathazul gathers it into his hands before slamming it down into the dirt, until only the smallest tip of the crystal is visible.  He produces vials of various substances from his robe, as if by magic, and begins pouring them over the crystal.  In a few seconds, he finishes, and runs back towards his equipment.\n\n\"<i>You may want to take a step back,</i>\" he warns, but before you have a chance to do anything, a thick trunk covered in thorny vines erupts from the ground.  Thousands of vine-like branches split off the main trunk as it reaches thirty feet in the air, radiating away from the trunk and intertwining with their neighbors as they curve back towards the ground.  In the span of a few minutes, your camp gained a thorn tree and a thick mesh of barbed vines preventing access from above.");
-	player.createStatusAffect(StatusAffects.DefenseCanopy, 0, 0, 0, 0);
+	player.createStatusEffect(StatusEffects.DefenseCanopy, 0, 0, 0, 0);
 	player.addKeyValue("Marae's Lethicite", 1, -1);
 	doNext(playerMenu);
 }

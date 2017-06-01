@@ -27,7 +27,7 @@ package classes.Scenes.Areas.Ocean
 		public function applyVenom(str:Number = 1):void
 		{
 			//First application
-			if (!player.hasStatusAffect(StatusAffects.AnemoneVenom)) player.createStatusAffect(StatusAffects.AnemoneVenom, 0, 0, 0, 0);
+			if (!player.hasStatusEffect(StatusEffects.AnemoneVenom)) player.createStatusEffect(StatusEffects.AnemoneVenom, 0, 0, 0, 0);
 			//Gain some lust
 			game.dynStats("lus", (4 * str));
 
@@ -42,7 +42,7 @@ package classes.Scenes.Areas.Ocean
 					// strDown.visible = true;
 					// strUp.visible = false;
 					player.str--;
-					player.addStatusValue(StatusAffects.AnemoneVenom, 1, 2);
+					player.addStatusValue(StatusEffects.AnemoneVenom, 1, 2);
 				}
 				//Spe bottomed out, convert to lust
 				if (player.spe < 4) game.dynStats("lus", 4);
@@ -52,7 +52,7 @@ package classes.Scenes.Areas.Ocean
 					// speDown.visible = true;
 					// speUp.visible = false;
 					player.spe--;
-					player.addStatusValue(StatusAffects.AnemoneVenom, 2, 2);
+					player.addStatusValue(StatusEffects.AnemoneVenom, 2, 2);
 				}
 			}
 			game.statScreenRefresh();
@@ -88,11 +88,11 @@ package classes.Scenes.Areas.Ocean
 			// this.plural = false;
 			this.createCock(7,1,CockTypesEnum.ANEMONE);
 			this.createVagina(false, VAGINA_WETNESS_SLICK, VAGINA_LOOSENESS_LOOSE);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 5, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 5, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("B"));
 			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,10,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.tallness = 5*12+5;
 			this.hipRating = HIP_RATING_CURVY;
 			this.buttRating = BUTT_RATING_NOTICEABLE;

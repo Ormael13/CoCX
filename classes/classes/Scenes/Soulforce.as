@@ -1032,10 +1032,10 @@ package classes.Scenes
 			player.earType = EARS_HUMAN;
 			player.gillType = GILLS_NONE;
 			player.rearBody = REAR_BODY_NONE;
-			if (player.hasStatusAffect(StatusAffects.BlackNipples)) player.removeStatusAffect(StatusAffects.BlackNipples);
+			if (player.hasStatusEffect(StatusEffects.BlackNipples)) player.removeStatusEffect(StatusEffects.BlackNipples);
 		//	if (player.averageNipplesPerBreast() > 1) player.breastRows[x].nipplesPerBreast = 1;
-			if (player.hasStatusAffect(StatusAffects.Feeder)) {
-				player.removeStatusAffect(StatusAffects.Feeder);
+			if (player.hasStatusEffect(StatusEffects.Feeder)) {
+				player.removeStatusEffect(StatusEffects.Feeder);
 				player.removePerk(PerkLib.Feeder);
 			}
 			doNext(SoulforceCheats);

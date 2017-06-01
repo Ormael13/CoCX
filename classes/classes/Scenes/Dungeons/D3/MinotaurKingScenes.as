@@ -3,7 +3,7 @@ package classes.Scenes.Dungeons.D3
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Appearance;
-	import classes.StatusAffects;
+	import classes.StatusEffects;
 	import classes.PerkLib;
 	import classes.Items.WeaponLib;
 
@@ -23,7 +23,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\n<i>“You’re strong, Champion, but your quest ends here,”</i> the brute promises. He snorts and extends a hand toward the crowd. <i>“Excellia, my weapon.”</i>");
 			outputText("\n\nA vision of curves and ripe sexuality emerges from the curtain of wet and wiggling flesh. She’s at least part cow, with upraised horns and a happily flicking tail - to say nothing of her egregiously supple breasts, still leaking milk from a recent suckle or their own overtly-abundant production. In her hands is a massive axe; it’s too large to be wielded by human hands.");
 			if (flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] != 0) outputText(" Even Isabella would struggle to wield such a weapon.");
-			else if (player.hasStatusAffect(StatusAffects.CampMarble)) outputText(" Even Marble would struggle to wield such a weapon");
+			else if (player.hasStatusEffect(StatusEffects.CampMarble)) outputText(" Even Marble would struggle to wield such a weapon");
 			else if (getGame().helFollower.followerHel()) outputText(" Even Helia would struggle to wield such a weapon.");
 			outputText(" This poor cow-slut, this ‘Excellia’ can barely to bring it to her lord without tipping forward onto her too-large tits.");
 			outputText("\n\nTaking the gleaming metal shaft from his smaller slave, the proud beast stamps the butt-end into the worked stone floor, creating a spiderweb of cracks from brute strength alone.");
@@ -31,7 +31,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nEars twitching in irritation, the royal brute inclines his head ever so slightly. <i>“Your property, yes. I’ll not damage your precious floors, but this one... this Champion... "+ player.mf("he", "she") +" will be mine.”</i> The corners of the minotaur’s lips quirk upward in time with his tremendous erection. <i>“Do not make this more painful than it has to be.”</i>");
 			outputText("\n\nYou’ve got a metric fuckton of muscle in between you and the end of this sick, twisted journey. Once more, you’ll have to fight.");
 
-			player.createStatusAffect(StatusAffects.MinotaurKingMusk, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.MinotaurKingMusk, 0, 0, 0, 0);
 			startCombat(new MinotaurKing());
 		}
 
@@ -289,7 +289,7 @@ package classes.Scenes.Dungeons.D3
 			outputText("\n\nWith that fantasy firmly in mind, you stand up and fix your [armor]. You can still do this, right?");
 			player.orgasm();
 			dynStats("lus", 5, "resisted", false);
-			player.createStatusAffect(StatusAffects.MinotaurKingsTouch, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.MinotaurKingsTouch, 0, 0, 0, 0);
 			flags[kFLAGS.MINOTAURKINGS_TOUCH] = 1;
 			cleanupAfterCombat(getGame().d3.resumeFromFight);
 		}

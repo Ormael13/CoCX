@@ -22,9 +22,9 @@ public function ceaniAffection(changes:Number = 0):Number
 }
 
 private function bowSkill(diff:Number):Number {
-	player.addStatusValue(StatusAffects.Kelt,1,diff);
-	if(player.statusAffectv1(StatusAffects.Kelt) >= 100) player.changeStatusValue(StatusAffects.Kelt,1,100);
-	return player.statusAffectv1(StatusAffects.Kelt);
+	player.addStatusValue(StatusEffects.Kelt,1,diff);
+	if(player.statusEffectv1(StatusEffects.Kelt) >= 100) player.changeStatusValue(StatusEffects.Kelt,1,100);
+	return player.statusEffectv1(StatusEffects.Kelt);
 }
 
 public function firstmeetingCeani():void
@@ -63,7 +63,7 @@ public function basicarcherytraining1():void
 public function basicarcherytraining2():void
 {
 	player.gems -= 50;
-	if (flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 3 && player.statusAffectv1(StatusAffects.Kelt) >= 90) {
+	if (flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 3 && player.statusEffectv1(StatusEffects.Kelt) >= 90) {
 		outputText("You seek out Ceani and ask her if she could resume your training. The both of you head to the training ground. Once there she help you to position yourself properly and show you how to throw the javelins. You do so for a few hours moving to recover your weapon every few shots. ");
 		outputText("All the while you have a good show of Ceani sexy glossy skin and JJ cup breast held by her pink bikini. Somehow you manage to ignore the distraction and focus anyway hitting bullseye several time.\n\n");
 		outputText("\"<i>You got it! Yeah just like that! I think this will likely be our last session together, but before you go, I got a special gift for you to commemorate your graduation.</i>\"\n\n");
@@ -98,8 +98,8 @@ public function basicarcherytraining2():void
 		outputText("You head back to camp resolving to visit her again tomorrow to resume your training.\n\n");
 		flags[kFLAGS.CEANI_ARCHERY_TRAINING] = 2;
 		flags[kFLAGS.CEANI_DAILY_TRAINING] = 1;
-		if (!player.hasStatusAffect(StatusAffects.Kelt)) {
-			player.createStatusAffect(StatusAffects.Kelt, 10, 0, 0, 0);
+		if (!player.hasStatusEffect(StatusEffects.Kelt)) {
+			player.createStatusEffect(StatusEffects.Kelt, 10, 0, 0, 0);
 		}
 		else bowSkill(10);
 		inventory.takeItem(weaponsrange.TRJAVEL, camp.returnToCampUseTwoHours);
@@ -109,7 +109,7 @@ public function basicarcherytraining2():void
 public function beachInteractionsAfterArcheryTraining():void
 {
 	clearOutput();
-	if (player.statusAffectv1(StatusAffects.Kindra) > 145 && player.weaponRange == weaponsrange.SHUNHAR && flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 4) {
+	if (player.statusEffectv1(StatusEffects.Kindra) > 145 && player.weaponRange == weaponsrange.SHUNHAR && flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 4) {
 		outputText("You have gone a long way in learning how to use various ranged weapons. It occurs to you Ceani could learn a thing or two from you, and, as you spot the orca girl lazily resting on the beach you give her a wave.\n\n");
 		outputText("\"<i>Hey it’s [name] long time no see! How has the demon fishing been going?</i>\"\n\n");
 		outputText("You laugh and tell her that you’re doing well. As a matter of fact you even learned more tricks since you left out. The orca make a playful smile.\n\n");

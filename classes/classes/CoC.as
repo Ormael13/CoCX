@@ -52,7 +52,7 @@ the text from being too boring.
 	import classes.Creature; // Creates basic information for all characters in CoC. Contains many descriptors.
 	import classes.ItemSlotClass; // Creates item slots
 	import classes.PerkClass; // The function in this file pulls perk information from PerkLib for later querying
-	import classes.StatusAffectClass; // Similar to PerkClass, but for status effects in combat.
+	import classes.StatusEffectClass;// Similar to PerkClass, but for status effects in combat.
 	import classes.VaginaClass; // Creates vaginas
 	import classes.ImageManager; // Image voodoo for sprites
 	import classes.internals.Utils; // This file contains much voodoo for randomizing item arrays and other useful functions.
@@ -157,17 +157,17 @@ the text from being too boring.
 		private static function campInitialize(passDoCamp:Function):void { doCamp = passDoCamp; }
 		
 		// /
-		private var _perkLib:PerkLib = new PerkLib();// to init the static
-		private var _statusAffects:StatusAffects = new StatusAffects();// to init the static
-		public var charCreation:CharCreation = new CharCreation();
-		public var saves:Saves = new Saves(gameStateDirectGet, gameStateDirectSet);
+		private var _perkLib:PerkLib                 = new PerkLib();// to init the static
+		private var _statusAffects:StatusEffects     = new StatusEffects();// to init the static
+		public var charCreation:CharCreation         = new CharCreation();
+		public var saves:Saves                       = new Saves(gameStateDirectGet, gameStateDirectSet);
 		public var playerAppearance:PlayerAppearance = new PlayerAppearance();
 		// Items/
-		public var mutations:Mutations = new Mutations();
-		public var consumables:ConsumableLib = new ConsumableLib();
+		public var mutations:Mutations               = new Mutations();
+		public var consumables:ConsumableLib         = new ConsumableLib();
 		public var useables:UseableLib;
-		public var weapons:WeaponLib = new WeaponLib();
-		public var weaponsrange:WeaponRangeLib = new WeaponRangeLib();
+		public var weapons:WeaponLib                 = new WeaponLib();
+		public var weaponsrange:WeaponRangeLib       = new WeaponRangeLib();
 		public var armors:ArmorLib = new ArmorLib();
 		public var undergarments:UndergarmentLib = new UndergarmentLib();
 		public var jewelries:JewelryLib = new JewelryLib();
@@ -670,7 +670,7 @@ the text from being too boring.
 			registerClassAlias("KeyItemClass", KeyItemClass);
 			registerClassAlias("Monster", Monster);
 			registerClassAlias("Player", Player);
-			registerClassAlias("StatusAffectClass", StatusAffectClass);
+			registerClassAlias("StatusEffectClass", StatusEffectClass);
 			registerClassAlias("VaginaClass", VaginaClass);
 			//registerClassAlias("Enum", Enum);
 

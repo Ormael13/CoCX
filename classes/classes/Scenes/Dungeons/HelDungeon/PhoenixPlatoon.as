@@ -11,7 +11,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			outputText("You fall back under a hail of scimitar attacks.  The sheer number of phoenixes attacking is bad enough, but their attacks are perfectly coordinated, leaving virtually no room for escape or maneuver without getting hit!\n");
 			//(Effect: Multiple medium-damage attacks)
 			//(Effect: Multiple light attacks)
-			createStatusAffect(StatusAffects.Attacks,2+rand(3),0,0,0);
+			createStatusEffect(StatusEffects.Attacks, 2 + rand(3),0,0,0);
 			eAttack();
 			combatRoundOver();
 		}
@@ -22,8 +22,8 @@ package classes.Scenes.Dungeons.HelDungeon
 			var damage:Number = 100 + rand(50);
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
-			if (player.hasStatusAffect(StatusAffects.Blizzard)) {
-			player.addStatusValue(StatusAffects.Blizzard, 1, -1);
+			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
+			player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 			outputText("Suddenly, the shield wall parts, revealing a single member of the platoon, a particularly muscular girl with a raging erection.  Before you can consider what's going on, she rears back and huffs at you.  To your horror, a great gout of fire erupts from her mouth, rolling towards you.  You dive, but are still caught partially in the inferno.  Luckly blizzard still surrounding you lowering amount of fire that pass throu it.");
 			damage *= 0.2;
 			}
@@ -43,17 +43,17 @@ package classes.Scenes.Dungeons.HelDungeon
 		}
 
 		public function phoenixPlatoonAI():void {
-			if(!hasStatusAffect(StatusAffects.Platoon)) {
+			if(!hasStatusEffect(StatusEffects.Platoon)) {
 				phoenixPlatoonRush();
-				createStatusAffect(StatusAffects.Platoon,0,0,0,0);
+				createStatusEffect(StatusEffects.Platoon,0,0,0,0);
 			}
-			else if(statusAffectv1(StatusAffects.Platoon) == 0) {
+			else if(statusEffectv1(StatusEffects.Platoon) == 0) {
 				phoenixPlatoonFireBreath();
-				addStatusValue(StatusAffects.Platoon,1,1);
+				addStatusValue(StatusEffects.Platoon,1,1);
 			}
 			else {
 				phoenixPlatoonLustbang()
-				removeStatusAffect(StatusAffects.Platoon);
+				removeStatusEffect(StatusEffects.Platoon);
 			}
 		}
 		

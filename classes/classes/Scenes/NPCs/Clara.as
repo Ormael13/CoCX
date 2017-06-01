@@ -34,7 +34,7 @@
 				//Temporary heat
 				if(color == "red") {
 					outputText("\nThe red fluids hit you and instantly soak into your skin, disappearing.  Your skin flushes and you feel warm.  Oh no...\n", false);
-					if(!player.hasStatusAffect(StatusAffects.TemporaryHeat)) player.createStatusAffect(StatusAffects.TemporaryHeat,0,0,0,0);
+					if(!player.hasStatusEffect(StatusEffects.TemporaryHeat)) player.createStatusEffect(StatusEffects.TemporaryHeat,0,0,0,0);
 				}
 				//Increase fatigue
 				if(color == "black") {
@@ -65,7 +65,7 @@
 			if(player.findPerk(PerkLib.GorgonsEyes) < 0 && player.inte / 5 + rand(20) + 1 < 14)
 			{
 				outputText("\nA bright flash of light erupts in your face, blinding you!  You desperately blink and rub your eyes while Clara cackles with glee.");
-				player.createStatusAffect(StatusAffects.Blind,1,0,0,0);
+				player.createStatusEffect(StatusEffects.Blind,1,0,0,0);
 			}
 			else if (player.findPerk(PerkLib.GorgonsEyes) >= 0) {
 					outputText("Your mutated eyes not been affected at all by this flash!");
@@ -93,7 +93,7 @@
 		}
 		override protected function performCombatAction():void
 		{
-			if(player.hasStatusAffect(StatusAffects.ClaraFoughtInCamp) && player.statusAffectv1(StatusAffects.ClaraCombatRounds) >= 10) 
+			if(player.hasStatusEffect(StatusEffects.ClaraFoughtInCamp) && player.statusEffectv1(StatusEffects.ClaraCombatRounds) >= 10)
 			{
 				HP = 0;
 				combatRoundOver();
@@ -101,7 +101,7 @@
 			if(HP < 50 && rand(2) == 0) {
 				notMurbleEnjoysTheLacticAcid();
 			}
-			else if(player.hasStatusAffect(StatusAffects.Blind))
+			else if(player.hasStatusEffect(StatusEffects.Blind))
 			{
 				claraGropesBlindPCs();
 			}
@@ -112,16 +112,16 @@
 				trace("ACTION SELECTED: " + action);
 				actions[action]();
 			}
-			if(!player.hasStatusAffect(StatusAffects.ClaraCombatRounds)) player.createStatusAffect(StatusAffects.ClaraCombatRounds,1,0,0,0);
-			else player.addStatusValue(StatusAffects.ClaraCombatRounds,1,1);
+			if(!player.hasStatusEffect(StatusEffects.ClaraCombatRounds)) player.createStatusEffect(StatusEffects.ClaraCombatRounds,1,0,0,0);
+			else player.addStatusValue(StatusEffects.ClaraCombatRounds,1,1);
 
 			//Bonus damage if not in camp
-			if(HP > 0 && lust < 100 && !player.hasStatusAffect(StatusAffects.ClaraFoughtInCamp)) claraBonusBaseLustDamage();
+			if(HP > 0 && lust < 100 && !player.hasStatusEffect(StatusEffects.ClaraFoughtInCamp)) claraBonusBaseLustDamage();
 		}
 		override public function defeated(hpVictory:Boolean):void
 		{
 			//PC wins via turn count
-			if(player.hasStatusAffect(StatusAffects.ClaraFoughtInCamp) && player.statusAffectv1(StatusAffects.ClaraCombatRounds) >= 10) {}
+			if(player.hasStatusEffect(StatusEffects.ClaraFoughtInCamp) && player.statusEffectv1(StatusEffects.ClaraCombatRounds) >= 10) {}
 			else {
 				clearOutput();
 				//PC wins via health

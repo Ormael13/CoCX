@@ -6,7 +6,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.ShieldLib;
 import classes.Items.WeaponLib;
 import classes.PerkLib;
-import classes.StatusAffects;
+import classes.StatusEffects;
 
 public class CombatSoulskills extends BaseCombatContent {
 	public function CombatSoulskills() {
@@ -15,7 +15,7 @@ public class CombatSoulskills extends BaseCombatContent {
 // S. SPECIALS
 //------------
 	public function soulforceSpecials():void {
-		//if (inCombat && player.hasStatusAffect(StatusAffects.Sealed) && player.statusAffectv2(StatusAffects.Sealed) == 5) {
+		//if (inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 5) {
 		//clearOutput();
 		//outputText("You try to ready a special attack, but wind up stumbling dizzily instead.  <b>Your ability to use physical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
 		//enemyAI();
@@ -24,20 +24,20 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("\n<b>Current soulpower:</b> " + player.soulforce + " / " + player.maxSoulforce() + " \n");
 		menu();
 		var button:int = 0;
-		if (player.hasStatusAffect(StatusAffects.KnowsTripleThrust)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsTripleThrust)) {
 			addButton(0, "Triple Thrust", TripleThrust, null, null, null, "Use a little bit of soulforce to infuse your weapon and thrust three times toward your enemy.\n\nSoulforce cost: " + 30 * soulskillCost() * soulskillcostmulti());
 		}
-		if (player.hasStatusAffect(StatusAffects.KnowsDracoSweep)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsDracoSweep)) {
 			addButton(1, "Draco Sweep", DracoSweep, null, null, null, "Use a little bit of soulforce to infuse your weapon and then sweep ahead hitting as many enemies as possible.\n\nSoulforce cost: " + 50 * soulskillCost() * soulskillcostmulti());
 		}
-		if (player.hasStatusAffect(StatusAffects.KnowsManyBirds)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsManyBirds)) {
 			addButton(2, "Many Birds", ManyBirds, null, null, null, "Project a figment of your soulforce as a crystal traveling at extreme speeds.\n\nSoulforce cost: " + 10 * soulskillCost() * soulskillcostmulti());
 		}
-		if (player.hasStatusAffect(StatusAffects.KnowsComet)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsComet)) {
 			addButton(5, "Comet", Comet, null, null, null, "Project a shard of soulforce, which will come crashing down upon your opponent as a crystalline comet.\n\nSoulforce cost: " + 60 * soulskillCost() * soulskillcostmulti());
 		}
-		if (player.hasStatusAffect(StatusAffects.KnowsVioletPupilTransformation)) {
-			if (!player.hasStatusAffect(StatusAffects.VioletPupilTransformation)) {
+		if (player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
+			if (!player.hasStatusEffect(StatusEffects.VioletPupilTransformation)) {
 				if ((player.unicornScore() >= 5) && (player.alicornScore() >= 6)) addButton(10, "V P Trans", VioletPupilTransformation, null, null, null, "Violet Pupil Transformation is a regenerating oriented soul art that at the cost of constant using fixed amount of soulforce would be healing user.  Usualy it would ends when caster run out of soulforce to substain it or situation that casused it activation is over.\n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>" + (200 + ((player.unicornScore() - 4) * 25) + ((player.alicornScore() - 5) * 25)) + " HP</b> per turn.");
 				else if (player.unicornScore() >= 5) addButton(10, "V P Trans", VioletPupilTransformation, null, null, null, "Violet Pupil Transformation is a regenerating oriented soul art that at the cost of constant using fixed amount of soulforce would be healing user.  Usualy it would ends when caster run out of soulforce to substain it or situation that casused it activation is over.\n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>" + (200 + ((player.unicornScore() - 4) * 25)) + " HP</b> per turn.");
 				else addButton(10, "V P Trans", VioletPupilTransformation, null, null, null, "Violet Pupil Transformation is a regenerating oriented soul art that at the cost of constant using fixed amount of soulforce would be healing user.  Usualy it would ends when caster run out of soulforce to substain it or situation that casused it activation is over.\n\nSoulforce cost: <i>100 soulforce</i> regenerating <b>200 HP</b> per turn.");
@@ -67,7 +67,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			return;
 		}
 		outputText("You ready your [weapon] and prepare to thrust it towards " + monster.a + monster.short + ".  ");
-		if ((player.hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > 80)) {
+		if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
 			if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
@@ -102,7 +102,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 			if (player.inte > 100) critChance += 10;
 		}
-		if (player.hasStatusAffect(StatusAffects.Rage)) critChance += player.statusAffectv1(StatusAffects.Rage);
+		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
 		if (rand(100) < critChance) {
 			crit = true;
 			temp *= 1.75;
@@ -113,11 +113,11 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("Your [weapon] hits thrice against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
 		if (crit == true) {
 			outputText(" <b>*Critical Hit!*</b>");
-			if (player.hasStatusAffect(StatusAffects.Rage)) player.removeStatusAffect(StatusAffects.Rage);
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
 		}
-		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusAffect(StatusAffects.Berzerking) || player.hasStatusAffect(StatusAffects.Lustzerking))) {
-			if (player.hasStatusAffect(StatusAffects.Rage) && player.statusAffectv1(StatusAffects.Rage) > 5 && player.statusAffectv1(StatusAffects.Rage) < 50) player.addStatusValue(StatusAffects.Rage, 1, 10);
-			else player.createStatusAffect(StatusAffects.Rage, 10, 0, 0, 0);
+		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
@@ -134,7 +134,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			return;
 		}
 		outputText("You ready your [weapon] and prepare to sweep it towards " + monster.a + monster.short + ".  ");
-		if ((player.hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > 80)) {
+		if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
 			if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
@@ -169,7 +169,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.inte <= 100) critChance += (player.inte - 50) / 50;
 			if (player.inte > 100) critChance += 10;
 		}
-		if (player.hasStatusAffect(StatusAffects.Rage)) critChance += player.statusAffectv1(StatusAffects.Rage);
+		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
 		if (rand(100) < critChance) {
 			crit = true;
 			temp *= 1.75;
@@ -180,11 +180,11 @@ public class CombatSoulskills extends BaseCombatContent {
 		outputText("Your [weapon] sweeps against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
 		if (crit == true) {
 			outputText(" <b>*Critical Hit!*</b>");
-			if (player.hasStatusAffect(StatusAffects.Rage)) player.removeStatusAffect(StatusAffects.Rage);
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
 		}
-		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusAffect(StatusAffects.Berzerking) || player.hasStatusAffect(StatusAffects.Lustzerking))) {
-			if (player.hasStatusAffect(StatusAffects.Rage) && player.statusAffectv1(StatusAffects.Rage) > 5 && player.statusAffectv1(StatusAffects.Rage) < 50) player.addStatusValue(StatusAffects.Rage, 1, 10);
-			else player.createStatusAffect(StatusAffects.Rage, 10, 0, 0, 0);
+		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
@@ -201,7 +201,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			return;
 		}
 		outputText("You thrust your hand outwards with deadly intent, and in the blink of an eye a crystal shoots towards " + monster.a + monster.short + ".  ");
-		if ((player.hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > 80)) {
+		if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids crystal!", false);
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges crystal with superior quickness!", false);
 			if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids crystal.", false);
@@ -250,7 +250,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		outputText("You focus for a moment, projecting a fragment of your soulforce above you.  A moment later, a prismatic comet crashes down on your opponents " + monster.a + monster.short + ".  ");
 		if (monster.plural == true) outputText("Shattering into thousands of fragments that shower anything and everything around you.  ");
-		if ((player.hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > 80)) {
+		if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids comet fragments!", false);
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges comet fragments with superior quickness!", false);
 			if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids comet fragments.", false);
@@ -298,14 +298,14 @@ public class CombatSoulskills extends BaseCombatContent {
 			return;
 		}
 		outputText("Deciding you need additional regeneration during current fight you spend moment to concentrate and activate Violet Pupil Transformation.  Your eyes starting to glow with a violet hua and you can feel refreshing feeling spreading all over your body.\n");
-		player.createStatusAffect(StatusAffects.VioletPupilTransformation,0,0,0,0);
+		player.createStatusEffect(StatusEffects.VioletPupilTransformation,0,0,0,0);
 		enemyAI();
 	}
 
 	public function DeactivateVioletPupilTransformation():void {
 		clearOutput();
 		outputText("Deciding you not need for now to constantly using Violet Pupil Transformation you concentrate and deactivating it.");
-		player.removeStatusAffect(StatusAffects.VioletPupilTransformation);
+		player.removeStatusEffect(StatusEffects.VioletPupilTransformation);
 		enemyAI();
 	}
 
@@ -319,15 +319,15 @@ public class CombatSoulskills extends BaseCombatContent {
 		var tempStr:Number = 0;
 		var soulforcecost:int = 50 * soulskillCost() * soulskillcostmulti();
 		player.soulforce -= soulforcecost;
-		var BeatOfWarBoost:Number = (player.str - player.statusAffectv1(StatusAffects.BeatOfWar)) * 0.15;
+		var BeatOfWarBoost:Number = (player.str - player.statusEffectv1(StatusEffects.BeatOfWar)) * 0.15;
 		if (BeatOfWarBoost < 1) BeatOfWarBoost = 1;
 		BeatOfWarBoost = Math.round(BeatOfWarBoost);
-		if (!player.hasStatusAffect(StatusAffects.BeatOfWar)) player.createStatusAffect(StatusAffects.BeatOfWar,0,0,0,0);//player.addStatusValue(StatusAffects.BeatOfWar, 1, BeatOfWarBoost);
+		if (!player.hasStatusEffect(StatusEffects.BeatOfWar)) player.createStatusEffect(StatusEffects.BeatOfWar,0,0,0,0);//player.addStatusValue(StatusEffects.BeatOfWar, 1, BeatOfWarBoost);
 		temp = BeatOfWarBoost;
 		tempStr = temp;
-		player.addStatusValue(StatusAffects.BeatOfWar,1,tempStr);
+		player.addStatusValue(StatusEffects.BeatOfWar,1,tempStr);
 		mainView.statsView.showStatUp('str');
-		player.str += BeatOfWarBoost;			//player.statusAffectv1(StatusAffects.BeatOfWar);
+		player.str += BeatOfWarBoost;			//player.statusEffectv1(StatusEffects.BeatOfWar);
 		statScreenRefresh();
 		outputText("You momentarily attune yourself to the song of the mother tree, and prepare to add a note of your own to it’s rhythm. You feel the beat shift the song’s tempo slightly, taking a twist towards the ominous. This attunement augments your strength.\n\n");
 		combat.basemeleeattacks();
@@ -340,7 +340,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			return;
 		}
 		outputText("You momentarily attune yourself to the song of the mother tree, and dance forward, darting your blade around your enemy.\n\n");
-		player.createStatusAffect(StatusAffects.BladeDance,0,0,0,0);
+		player.createStatusEffect(StatusEffects.BladeDance,0,0,0,0);
 		combat.basemeleeattacks();
 	}
 	public function ResonanceVolley():void {
@@ -351,7 +351,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			return;
 		}
 		outputText("You ready your bow, infusing it with a figment of soulforce. The energy awakens the wood’s connection to the world tree, causing the bow to pulse beneath your fingers.\n\n");
-		player.createStatusAffect(StatusAffects.ResonanceVolley,0,0,0,0);
+		player.createStatusEffect(StatusEffects.ResonanceVolley,0,0,0,0);
 		combat.fireBow();
 	}
 	public function AvatarOfTheSong():void {
@@ -362,11 +362,11 @@ public class CombatSoulskills extends BaseCombatContent {
 			return;
 		}
 		outputText("You feel the song of the mother tree all around you, and using your staff as a beacon, you unify it with the flow of magic through your body,");
-		if (!player.hasStatusAffect(StatusAffects.Might)) {
+		if (!player.hasStatusEffect(StatusEffects.Might)) {
 			outputText("drawing strength from it");
 			combat.magic.spellMight(true);
 			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 		}
 		else {
@@ -374,23 +374,23 @@ public class CombatSoulskills extends BaseCombatContent {
 			fatigue(30, 8);
 			combat.magic.spellHealEffect();
 			flags[kFLAGS.SPELLS_CAST]++;
-			if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 			spellPerkUnlock();
 		}
-		if (!monster.hasStatusAffect(StatusAffects.Blind)) {
+		if (!monster.hasStatusEffect(StatusEffects.Blind)) {
 			outputText(". The residual power ");
-			if (!player.hasStatusAffect(StatusAffects.ChargeWeapon)) {
+			if (!player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
 				outputText("makes your staff glow with barely contained energy");
 				combat.magic.spellChargeWeapon(true);
 				flags[kFLAGS.SPELLS_CAST]++;
-				if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+				if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 				spellPerkUnlock();
 			}
 			else {
 				outputText("makes your staff flare up, as the energy escapes as a radiant flash");
 				combat.magic.spellBlind();
 				flags[kFLAGS.SPELLS_CAST]++;
-				if(!player.hasStatusAffect(StatusAffects.CastedSpell)) player.createStatusAffect(StatusAffects.CastedSpell,0,0,0,0);
+				if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 				spellPerkUnlock();
 			}
 		}
@@ -421,13 +421,13 @@ public class CombatSoulskills extends BaseCombatContent {
 	 }
 	 else fatigue(24, 2);
 	 //Amily!
-	 if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+	 if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 	 outputText("Amily easily glides around your attacks thanks to her complete concentration on your movements.\n\n");
 	 enemyAI();
 	 return;
 	 }
 	 outputText("You ready your wrists mounted scythes and prepare to sweep them towards " + monster.a + monster.short + ".\n\n");
-	 if ((player.hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > 80)) {
+	 if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > 80)) {
 	 if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attacks!\n\n", false);
 	 if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attacks with superior quickness!\n\n", false);
 	 if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attacks.\n\n", false);
@@ -531,7 +531,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	 return;
 	 }
 	 outputText("You ready your [weapon] and prepare to thrust it towards " + monster.a + monster.short + ".  ");
-	 if ((player.hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > 80)) {
+	 if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > 80)) {
 	 if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
 	 if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
 	 if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);

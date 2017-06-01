@@ -46,7 +46,7 @@ public function enterTheEvangeline():void
 		flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
 		outputText("\n\n<b>New codex entry unlocked: Imps!</b>")
 	}
-	player.createStatusAffect(StatusAffects.EzekielCurse, 0, 0, 0, 0);
+	player.createStatusEffect(StatusEffects.EzekielCurse, 0, 0, 0, 0);
 	startCombat(new Imp());
 	doNext(playerMenu);
 }
@@ -84,7 +84,7 @@ public function Tak():void
 	flags[kFLAGS.EVANGELINE_GEMS_PURSE] = 0;
 	flags[kFLAGS.EVANGELINE_SPELLS_CASTED] = 0;
 	flags[kFLAGS.EVANGELINE_TALKS] = 0;
-	if (player.hasStatusAffect(StatusAffects.EzekielCurse)) player.removeStatusAffect(StatusAffects.EzekielCurse);
+	if (player.hasStatusEffect(StatusEffects.EzekielCurse)) player.removeStatusEffect(StatusEffects.EzekielCurse);
 	inventory.takeItem(consumables.EZEKFRU, camp.returnToCampUseOneHour);
 }
 
@@ -527,7 +527,7 @@ private function LvLUp():void {
 	if (player.level >= 3 && flags[kFLAGS.EVANGELINE_LVL_UP] == 3 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 206) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
 	if (player.level >= 4 && flags[kFLAGS.EVANGELINE_LVL_UP] == 4 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 400) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
 	if (player.level >= 5 && flags[kFLAGS.EVANGELINE_LVL_UP] == 5 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 640) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
-	//if (player.level >= 6 && flags[kFLAGS.EVANGELINE_LVL_UP] == 6 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 1250 && player.hasStatusAffect(StatusAffects.CampRathazul)) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
+	//if (player.level >= 6 && flags[kFLAGS.EVANGELINE_LVL_UP] == 6 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 1250 && player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
 	//if (player.level >= 7 && flags[kFLAGS.EVANGELINE_LVL_UP] == 7 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 400) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
 	//if (player.level >= 8 && flags[kFLAGS.EVANGELINE_LVL_UP] == 8 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 150) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");
 	//if (player.level >= 9 && flags[kFLAGS.EVANGELINE_LVL_UP] == 9 && flags[kFLAGS.EVANGELINE_GEMS_PURSE] >= 0) addButton(5, "Just Do It!", JustDoIt, null, null, null, "JUST DO IT!");

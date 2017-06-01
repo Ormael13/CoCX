@@ -12,7 +12,7 @@ package classes.Scenes.NPCs
 			//return to combat menu when finished
 			doNext(game.playerMenu);
 			//Blind dodge change
-			if (hasStatusAffect(StatusAffects.Blind) && rand(3) < 1) {
+			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 			}
 			//Determine if dodged!
@@ -65,7 +65,7 @@ package classes.Scenes.NPCs
 			//return to combat menu when finished
 			doNext(game.playerMenu);
 			//Blind dodge change
-			if(hasStatusAffect(StatusAffects.Blind) && rand(3) < 1) {
+			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
 				outputText(capitalA + short + " completely misses you with a blind attack!\n", false);
 				return;
 			}
@@ -153,7 +153,7 @@ package classes.Scenes.NPCs
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if(hasStatusAffect(StatusAffects.Sparring)) game.helFollower.PCBeatsUpSalamanderSparring();
+			if(hasStatusEffect(StatusEffects.Sparring)) game.helFollower.PCBeatsUpSalamanderSparring();
 			else game.helScene.beatUpHel();
 		}
 
@@ -163,7 +163,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nHelia waits it out in stoic silence...");
 				doNext(game.endLustLoss);
 			} else {
-				if(hasStatusAffect(StatusAffects.Sparring)) game.helFollower.loseToSparringHeliaLikeAButtRapedChump();
+				if(hasStatusEffect(StatusEffects.Sparring)) game.helFollower.loseToSparringHeliaLikeAButtRapedChump();
 				else game.helScene.loseToSalamander();
 			}
 		}
@@ -180,11 +180,11 @@ package classes.Scenes.NPCs
 			this.imageName = "hel";
 			this.long = "You are fighting a (literally) smoking hot salamander – a seven foot tall woman with crimson scales covering her legs, back, and forearms, with a tail swishing menacingly behind her, ablaze with a red-hot fire.  Her red hair whips wildly around her slender shoulders, occasionally flitting over her hefty E-cup breasts, only just concealed within a scale-covered bikini top.  Bright red eyes focus on you from an almost-human face as she circles you, ready to close in for the kill.  Her brutal, curved sword is raised to her side, feinting at you between genuine attacks.";
 			createVagina(true,VAGINA_WETNESS_NORMAL,VAGINA_LOOSENESS_NORMAL);
-			createStatusAffect(StatusAffects.BonusVCapacity,85,0,0,0);
+			createStatusEffect(StatusEffects.BonusVCapacity,85,0,0,0);
 			createBreastRow(Appearance.breastCupInverse("E+"));
 			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,85,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,85,0,0,0);
 			this.tallness = 90;
 			this.hipRating = HIP_RATING_CURVY+2;
 			this.buttRating = BUTT_RATING_LARGE+1;
@@ -213,7 +213,7 @@ package classes.Scenes.NPCs
 					add(consumables.SALAMFW,0.7);
 			this.tailType = TAIL_TYPE_SALAMANDER;
 			this.tailRecharge = 0;
-			this.createStatusAffect(StatusAffects.Keen, 0, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.Keen, 0, 0, 0, 0);
 			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			this.str += 18 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 			this.tou += 16 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];

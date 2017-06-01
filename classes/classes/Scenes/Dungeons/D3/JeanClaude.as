@@ -14,7 +14,7 @@ package classes.Scenes.Dungeons.D3
 		private function doubleAttack():void
 		{
 			outputText("The monstrous basilisk suddenly lunges forward, snarling wordlessly as he swings his cutlass at you twice, the blows of a savage yet expert swordsman.\n\n");
-			createStatusAffect(StatusAffects.Attacks, 2, 0, 0, 0);
+			createStatusEffect(StatusEffects.Attacks, 2, 0, 0, 0);
 			eAttack();
 			combatRoundOver();
 		}
@@ -36,7 +36,7 @@ package classes.Scenes.Dungeons.D3
 		
 		public function handleTease(lustDelta:Number, successful:Boolean):void
 		{
-			if (!player.hasStatusAffect(StatusAffects.RemovedArmor) && player.armor != ArmorLib.NOTHING)
+			if (!player.hasStatusEffect(StatusEffects.RemovedArmor) && player.armor != ArmorLib.NOTHING)
 			{
 				outputText("\n\nJean-Claude stops circling you, looking mildly surprised as you attempt to entice him with your body.");
 
@@ -53,16 +53,16 @@ package classes.Scenes.Dungeons.D3
 					outputText("\n\n“<i>Very nice, interloper,</i>” Jean-Claude breathes. His wide smile turns ugly. “<i>Look forward to seeing that every night. I hope it is not too chilly in here for you.</i>” The basilisks which surround you snigger and you blink, the scales falling from your eyes as you realize what you have just done. There is no time to claw your clothes back on: Jean-Claude is upon you, forcing you to fall back, and you will have to fight the rest of this battle in the buff!");
 
 					// (JC arousal up one level, PC’s armor removed for rest of battle)
-					player.createStatusAffect(StatusAffects.RemovedArmor, 0, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.RemovedArmor, 0, 0, 0, 0);
 					
-					if (!this.hasStatusAffect(StatusAffects.JCLustLevel))
+					if (!this.hasStatusEffect(StatusEffects.JCLustLevel))
 					{
-						this.createStatusAffect(StatusAffects.JCLustLevel, 1, 0, 0, 0);
+						this.createStatusEffect(StatusEffects.JCLustLevel, 1, 0, 0, 0);
 						lustVuln += 0.1;
 					}
 					else
 					{
-						this.addStatusValue(StatusAffects.JCLustLevel, 1, 1);
+						this.addStatusValue(StatusEffects.JCLustLevel, 1, 1);
 					}
 					
 					applyTease(lustDelta);

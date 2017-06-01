@@ -19,21 +19,21 @@ package classes.Scenes.Monsters
 			//Makes sure to not stack spell effects.
 			if (lust < 50) spellChooser = rand(3);
 			if (lust > 75) spellChooser = rand(3) + 3;
-			if (spellChooser == 0 && hasStatusAffect(StatusAffects.ChargeWeapon)) {
+			if (spellChooser == 0 && hasStatusEffect(StatusEffects.ChargeWeapon)) {
 				spellChooser = rand(5) + 1;
 			}
 			if (spellChooser == 4 && HPRatio() >= 0.7) {
 				spellChooser++;
 			}
-			if (spellChooser == 5 && hasStatusAffect(StatusAffects.Might)) {
+			if (spellChooser == 5 && hasStatusEffect(StatusEffects.Might)) {
 				spellChooser = rand(5);
-				if (spellChooser == 0 && hasStatusAffect(StatusAffects.ChargeWeapon)) spellChooser++;
+				if (spellChooser == 0 && hasStatusEffect(StatusEffects.ChargeWeapon)) spellChooser++;
 			}
 			//Spell time!
 			//Charge Weapon
 			if (spellChooser == 0 && fatigue <= (100 - spellCostCharge)) {
 				outputText("The goblin utters word of power, summoning an electrical charge around her staff. <b>It looks like she'll deal more physical damage now!</b>");
-				createStatusAffect(StatusAffects.ChargeWeapon, 25 * spellMultiplier(), 0, 0, 0);
+				createStatusEffect(StatusEffects.ChargeWeapon, 25 * spellMultiplier(), 0, 0, 0);
 				this.weaponAttack += 25 * spellMultiplier();
 				fatigue += spellCostCharge;
 			}
@@ -42,7 +42,7 @@ package classes.Scenes.Monsters
 				outputText("The goblin glares at you and points at you! A bright flash erupts before you!  ");
 				if (player.findPerk(PerkLib.GorgonsEyes) < 0 && rand(player.inte / 5) <= 4) {
 					outputText("<b>You are blinded!</b>");
-					player.createStatusAffect(StatusAffects.Blind, 1 + rand(3), 0, 0, 0);
+					player.createStatusEffect(StatusEffects.Blind, 1 + rand(3), 0, 0, 0);
 				}
 				else if (player.findPerk(PerkLib.GorgonsEyes) >= 0) {
 					outputText("Your mutated eyes not been affected at all by this flash!");
@@ -58,8 +58,8 @@ package classes.Scenes.Monsters
 				var damage:int = inte + rand(50) * spellMultiplier();
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
-				if (player.hasStatusAffect(StatusAffects.Blizzard)) {
-				player.addStatusValue(StatusAffects.Blizzard, 1, -1);
+				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
+				player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 				outputText("Luckly protective ice maelstorm still surrounding you lessening amount of damage.  ");
 				damage *= 0.2;
 				}
@@ -96,7 +96,7 @@ package classes.Scenes.Monsters
 			else if (spellChooser == 5 && fatigue <= (100 - spellCostMight)) {
 				outputText("She flushes, drawing on her body's desires to empower her muscles and toughen her up.");
 				outputText("The rush of success and power flows through her body.  She feels like she can do anything!", false);
-				createStatusAffect(StatusAffects.Might, 20 * spellMultiplier(), 20 * spellMultiplier(), 0, 0);
+				createStatusEffect(StatusEffects.Might, 20 * spellMultiplier(), 20 * spellMultiplier(), 0, 0);
 				str += 20 * spellMultiplier();
 				tou += 20 * spellMultiplier();
 				fatigue += spellCostMight;
@@ -141,11 +141,11 @@ package classes.Scenes.Monsters
 			this.long = "The goblin before you stands approximately three feet and a half. Her ears appear to be pierced more times than the amount of piercings a typical goblin has. Her hair is deep indigo. She’s unlike most of the goblins you’ve seen. She’s wielding a staff in her right hand. In addition to the straps covering her body, she’s wearing a necklace seemingly carved with what looks like shark teeth. She’s also wearing a tattered loincloth, unlike most goblins who would show off their pussies. From the looks of one end of her staff glowing, she’s clearly a shaman!";
 			if (player.hasCock()) this.long += "  She's clearly intent on casting you into submission just so she can forcibly make you impregnate her.";
 			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_NORMAL);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 40, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
 			this.ass.analLooseness = ANAL_LOOSENESS_TIGHT;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,30,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,30,0,0,0);
 			this.tallness = 44 + rand(7);
 			this.hipRating = HIP_RATING_AMPLE+2;
 			this.buttRating = BUTT_RATING_LARGE;

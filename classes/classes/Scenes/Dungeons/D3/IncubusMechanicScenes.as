@@ -2,7 +2,7 @@ package classes.Scenes.Dungeons.D3
 {
 	import classes.BaseContent;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.StatusAffects;
+	import classes.StatusEffects;
 	import classes.PerkLib;
 	import classes.Scenes.Dungeons.Factory.IncubusMechanic;
 	import classes.CockTypesEnum;

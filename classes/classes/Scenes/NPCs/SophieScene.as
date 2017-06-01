@@ -587,9 +587,9 @@ private function cramANippleInIt():void {
 		cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 	//You've now been milked, reset the timer for that
-	if(player.hasStatusAffect(StatusAffects.Feeder)) {
-		player.addStatusValue(StatusAffects.Feeder,1,1);
-		player.changeStatusValue(StatusAffects.Feeder,2,0);
+	if(player.hasStatusEffect(StatusEffects.Feeder)) {
+		player.addStatusValue(StatusEffects.Feeder,1,1);
+		player.changeStatusValue(StatusEffects.Feeder,2,0);
 	}
 }
 
@@ -751,7 +751,7 @@ private function postSophieSexSnuggle():void {
 	if(player.cor > 50) outputText("nearly give her a good-bye kiss, but catch yourself at the last moment.  She quips, \"<i>Too bad, it was nice.</i>\"\n\n", false);
 	else outputText("give her a kiss on the cheek, knowing all-too-well the dangers of her lips.  She quips, \"<i>Ohh, too bad.  I wanted to stroke you to sleep.</i>\"\n\n", false);
 	//Remove luststick
-	player.removeStatusAffect(StatusAffects.Luststick);
+	player.removeStatusEffect(StatusEffects.Luststick);
 	dynStats("lib=", flags[kFLAGS.LUSTSTICK_LIBIDO_INITIAL]);
 	//(+sensitivity, +libido
 	dynStats("lib", 1, "sen", 1);
@@ -887,24 +887,24 @@ public function luststickApplication(hours:Number = 4):void {
 	//Max of 20.
 	if(hours > 20) hours = 20;
 	//Add duration if under effects
-	if(player.hasStatusAffect(StatusAffects.Luststick)) {
+	if(player.hasStatusEffect(StatusEffects.Luststick)) {
 		//Max?
-		if(player.statusAffectv1(StatusAffects.Luststick) >= 20)
+		if(player.statusEffectv1(StatusEffects.Luststick) >= 20)
 		{}
 		//Not maxed - increase duration
 		else {
 			//lower hours if it pushes it too high.
-			if(player.statusAffectv1(StatusAffects.Luststick) + hours > 20) {
-				hours = 20 - player.statusAffectv1(StatusAffects.Luststick);
+			if(player.statusEffectv1(StatusEffects.Luststick) + hours > 20) {
+				hours = 20 - player.statusEffectv1(StatusEffects.Luststick);
 			}
 			//increase!
-			player.addStatusValue(StatusAffects.Luststick,1,hours);
+			player.addStatusValue(StatusEffects.Luststick,1,hours);
 		}
 	}
 	//Apply a little of doctor L (thats Dr Lipstick you tard!)
 	else {
 		flags[kFLAGS.LUSTSTICK_LIBIDO_INITIAL] = player.lib;
-		player.createStatusAffect(StatusAffects.Luststick, hours, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.Luststick, hours, 0, 0, 0);
 	}
 }
 

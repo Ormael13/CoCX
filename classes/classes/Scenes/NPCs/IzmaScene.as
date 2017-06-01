@@ -113,7 +113,7 @@ public function meetIzmaAtLake():void {
 			outputText("<b>New codex entry unlocked: Shark-girls & Tigershark-girls!</b>\n\n")
 		}
 		outputText("\"<i>It's a mutation among shark-people.  We're stronger, tougher, faster... and we have some other... err, 'qualities' our sisters lack,</i>\" she explains, with a glance to subtly discourage you from probing the matter further.  Instead, you follow up by asking her where she got her books.  \"<i>These?  Scavenged from around the place.  It's so hard to find recorded knowledge around here, and even some of this stuff isn't in great condition... you know?</i>\"  You agree; that meager pile of books in the chest is still the biggest library you've seen ", false);
-		if(player.statusAffectv1(StatusAffects.TelAdre) >= 1) outputText("outside the safety of Tel'Adre", false);
+		if(player.statusEffectv1(StatusEffects.TelAdre) >= 1) outputText("outside the safety of Tel'Adre", false);
 		else outputText("since you arrived", false);
 		outputText(".  Perhaps imagining you a kindred spirit, she presses the topic.  \"<i>I could let you borrow some... for a small usage fee. And you'd stay in sight, of course.</i>\"  You contrive to look hurt.  \"<i>Nothing personal, but I'd like to expand my collection, not reduce it,</i>\" she adds.  Still... an appealing offer.  You could do with as much knowledge as you can get.\n\n", false);
 
@@ -502,7 +502,7 @@ internal function defeatIzma():void {
 internal function IzmaWins():void {
 	clearOutput();
 	//(if Worms)
-	if(player.hasStatusAffect(StatusAffects.Infested)) {
+	if(player.hasStatusEffect(StatusEffects.Infested)) {
 		kGAMECLASS.mountain.wormsScene.infestOrgasm();
 		outputText("\n\nIzma looks on in horror as you push out the load of wormy cargo onto the sand at her feet, only snapping out of her daze as several of the parasites begin climbing her ankle with an eye toward her cock.  She shrieks and jumps back, then drags her foot in the sand, dislodging or pulverizing the squirming vermin.  \"<i>" + player.short + ", that's nasty!  Get away!  Get away and don't talk to me again!  Ugh!</i>\"  She takes off, grabbing her chest of books and kicking sand up in her flight down the beach.", false);
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00233] = 1;
@@ -1210,7 +1210,7 @@ private function acceptIzmaAsYourBitch():void {
 		//Flag that amily bitchfit has happened.
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00236] = -1;
 	}
-	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00237] == 0 && player.hasStatusAffect(StatusAffects.CampMarble)) {
+	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00237] == 0 && player.hasStatusEffect(StatusEffects.CampMarble)) {
 		//[Marble is at camp when Izma arrives]
 		outputText("You smile warmly and place your hands on her shoulders, before pulling her in and kissing her deeply.  Practically melting at your touch and moaning into your mouth, she wraps her arms and tail around your waist.\n\n", false);
 
@@ -3124,7 +3124,7 @@ private function gooJob():void {
 	clearOutput();
 	outputText("Concentrating on moving your mass forward, you manage to envelop Izma's entire back side.  Slowly but surely, you are able to harden your goo around Izma's rock hard cock, and begin to pump her penile member with gusto. Now that she's been jerked off, and the fact that she's ");
 	radarIzmaSpanking(false);
-	player.createStatusAffect(StatusAffects.Goojob,0,0,0,0);
+	player.createStatusEffect(StatusEffects.Goojob,0,0,0,0);
 }
 //[Spanking and orgasm]
 private function radarIzmaSpanking(newSentence:Boolean = true):void {
@@ -3144,8 +3144,8 @@ private function radarIzmaGasm():void {
 	//(Cum production High: 
 	else outputText("unleashing a cascade of steamy jizz into Izma's well fucked hole.  Your volume is so large that it causes a back draft of semen to rush out of her within mere seconds.");
 	//(If PC gave Izma a "goo job":
-	if(player.hasStatusAffect(StatusAffects.Goojob)) {
-		player.removeStatusAffect(StatusAffects.Goojob);
+	if(player.hasStatusEffect(StatusEffects.Goojob)) {
+		player.removeStatusEffect(StatusEffects.Goojob);
 		outputText("  The sensation of being injected with her lover's seed is all the encouragement Izma's cock needs to finally erupt, shooting thick streams of steamy cum into your central mass; something your gooey form appreciates as it unconsciously works her load into your see through gut.");
 	}
 	outputText("\n\nYour exhausted partner swoons as she cradles her ");
@@ -3320,18 +3320,18 @@ private function radarIzmaJustDick(choice:int = 0):void {
 	//Just dick
 	if(choice == 0) {
 		outputText("To answer the question her peepers pose to you, you slide another pre-cum drenched tentacle cock down her tail and onto her pelvis, coiling around her engorged member tightly until your huge, perverted dick runs out of length... which suits you just fine as you grind your cock against the head of her own, ferociously crossing swords with her as she wails in overwhelmed joy at the bizarre but perverted felicity of your efforts.");
-		player.createStatusAffect(StatusAffects.JerkingIzma,0,0,0,0);
+		player.createStatusEffect(StatusEffects.JerkingIzma,0,0,0,0);
 	}
 	//[(Just) Blowjob]: 
 	else if(choice == 1) {
 		outputText("To answer the question her peepers pose to you, you project another one of your tentacle cocks down her tail and up her moist back, briskly gliding past her cheeks and against her lips as it slams into her kisser like a battering ram against a wooden castle door.  Recoiling at the sudden forceful impact, Izma arcs her head back and hastily drops her jaw, sticking her tongue out readily to cradle your member.  With another vigorous thrust, you dart into her mouth and slide along her wet, humid tongue; Izma's lips crash down on your shaft in a desperate effort to keep your wonderful cock in her mouth, apathetic to any discomfort on her part as you batter her mouth with your vine like prick.");
-		player.createStatusAffect(StatusAffects.IzmaBlowing,0,0,0,0);
+		player.createStatusEffect(StatusEffects.IzmaBlowing,0,0,0,0);
 	}
 	//[Both]
 	else {
 		outputText("You ponder for a moment where you can put one of your dicks, and then slam your palm into your forehead; ONE?  What's wrong with me?  I've got more than one that needs release, you think to yourself. Grinning, you slide another pre-cum drenched tentacle cock down her tail and onto her pelvis, coiling around her engorged member tightly until your huge, perverted dick runs out of length... which suits you just fine as you grind your cock against the head of her own, ferociously crossing swords with her as she wails in overwhelmed joy at the bizarre but perverted felicity of your efforts.");
-		player.createStatusAffect(StatusAffects.IzmaBlowing,0,0,0,0);
-		player.createStatusAffect(StatusAffects.JerkingIzma,0,0,0,0);
+		player.createStatusEffect(StatusEffects.IzmaBlowing,0,0,0,0);
+		player.createStatusEffect(StatusEffects.JerkingIzma,0,0,0,0);
 		outputText("\n\nReadying another one of your obscenely long cocks, you project another one of your tentacle cocks down her tail and up her moist back, briskly gliding past her cheeks and against her lips as it slams into her kisser like a battering ram against a wooden castle door.  Recoiling at the sudden forceful impact, Izma arcs her head back and hastily drops her jaw, sticking her tongue out readily to cradle your member.  With another vigorous thrust, you dart into her mouth and slide along her wet, humid tongue; Izma's lips crash down on your shaft in a desperate effort to keep your wonderful cock in her mouth, apathetic to any discomfort on her part as you batter her mouth with your vine like prick.");
 	}
 	//(Continues to [anal fuck sexing], if PC has only 4-5 dicks or does not met INT requirements for subsequent scenes)
@@ -3347,16 +3347,16 @@ private function analFuckRadarEnding():void {
 	//(If PC penetrated her pussy:
 	if(player.tentacleCocks() > 2) outputText("\n\nEach gyration and pivot of the dick lodged in her slick cunt manipulates and twitches the muscles in Izma's body against her will, essentially turning her into a sort of cock sleeve puppet as your dick flows back and forth along her smooth vaginal walls, like a flash flood along a smooth rock; her feelers struggle to keep up with your erratic appendage as you playfully dodge across her vagina, like a seagull zig-zagging from its brethren with the spoils of sustenance in its craw.  Her pussy will have to wait for it's just desserts.");
 	//(If PC put a TD in Izma's mouth:
-	if(player.hasStatusAffect(StatusAffects.IzmaBlowing) >= 0) outputText("\n\nThe idea of weirding Izma out cracks like lightning across your mind, and you decide this is too good to pass up; to her apparent bewilderment, the ropey appendage in her mouth begins to swivel around, like debris in a wind tunnel as it hits every contour of her mouth, pulling out briefly and smearing your saliva covered dick across her face before plunging back in to further abuse her tongue.");
+	if(player.hasStatusEffect(StatusEffects.IzmaBlowing) >= 0) outputText("\n\nThe idea of weirding Izma out cracks like lightning across your mind, and you decide this is too good to pass up; to her apparent bewilderment, the ropey appendage in her mouth begins to swivel around, like debris in a wind tunnel as it hits every contour of her mouth, pulling out briefly and smearing your saliva covered dick across her face before plunging back in to further abuse her tongue.");
 
 	//Izma's Orgasm
 	outputText("Without warning, Izma ");
-	if(player.hasStatusAffect(StatusAffects.IzmaBlowing) < 0) outputText("screams");
+	if(player.hasStatusEffect(StatusEffects.IzmaBlowing) < 0) outputText("screams");
 	else outputText("releases a maleficiently muffled moan");
 	outputText(" and shakes with what you assume to be a distinctly powerful orgasm, given that the cock you worked her pussy with is damn near sizzling with her lady cum.");
 
 	//(If the PC "crossed swords" with Izma: 
-	if(player.hasStatusAffect(StatusAffects.JerkingIzma) >= 0) outputText("\n\nThe rumbling in her rod comes shortly after, signaling the releases of her jizzum as you stroke her lovingly with the head of your cock while pumping her with your coiled shaft.  Her cum flies straight into the ground and spasms in your tight grip as you hold her member close to comfort it during her release.");
+	if(player.hasStatusEffect(StatusEffects.JerkingIzma) >= 0) outputText("\n\nThe rumbling in her rod comes shortly after, signaling the releases of her jizzum as you stroke her lovingly with the head of your cock while pumping her with your coiled shaft.  Her cum flies straight into the ground and spasms in your tight grip as you hold her member close to comfort it during her release.");
 
 The vocal and passionate display of her release drives you over the edge, and you know that you can't hold on much longer. 
 	[proceeds to Tentacle Cumming, if PC only has one-two TD's; If PC has more than two 	TD's, the scene transitions to the TD group cumming]

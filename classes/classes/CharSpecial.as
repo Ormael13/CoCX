@@ -211,12 +211,12 @@ package classes
 			player.createPerk(PerkLib.Mage, 0, 0, 0, 0);
 			player.createPerk(PerkLib.HistoryHealer, 0, 0, 0, 0);
 			player.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
-			player.createStatusAffect(StatusAffects.KnowsArouse,0,0,0,0);
-			player.createStatusAffect(StatusAffects.KnowsHeal,0,0,0,0);
-			player.createStatusAffect(StatusAffects.KnowsMight,0,0,0,0);
-			player.createStatusAffect(StatusAffects.KnowsCharge,0,0,0,0);
-			player.createStatusAffect(StatusAffects.KnowsBlind,0,0,0,0);
-			player.createStatusAffect(StatusAffects.KnowsWhitefire,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsArouse,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsHeal,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsMight,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsCharge,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsBlind,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsWhitefire,0,0,0,0);
 			//magic, 50 Int, 50 tough, Speed 15, Str 10, 30 corruption, 30 libido, 10 sensitivity.
 			player.inte = 50;
 			player.tou = 50;
@@ -322,7 +322,7 @@ package classes
 			//player.createKeyItem("Bow",0,0,0,0);
 			player.setWeaponRange(weaponsrange.BOWOLD_);
 			//Bow skill 100 (Sorry Kelt, I can't hear your insults over my mad Robin Hood skillz)
-			player.createStatusAffect(StatusAffects.Kelt,100,0,0,0);
+			player.createStatusEffect(StatusEffects.Kelt,100,0,0,0);
 			//Is it possible to get extra starting perks added? If so, I'd like History: Religious added to whatever is selected on creation. If not, please ignore this line.
 			//Freckled skinAdj
 			player.skinAdj = "freckled";
@@ -383,7 +383,7 @@ package classes
 			player.tallness = 64;
 	
 			//Perks: Feeder, Strong Back, Strong Back 2
-			player.createStatusAffect(StatusAffects.Feeder,0,0,0,0);
+			player.createStatusEffect(StatusEffects.Feeder,0,0,0,0);
 			player.createPerk(PerkLib.Feeder, 0, 0, 0, 0);
 	
 			player.createPerk(PerkLib.StrongBack, 0, 0, 0, 0);
@@ -590,7 +590,7 @@ package classes
 			player.breastRows[0].breastRating = 4;
 			player.skinTone = "light";
 			//Bow skill 100 (Sorry Kelt, I can't hear your insults over my mad Robin Hood skillz)
-			player.createStatusAffect(StatusAffects.Kelt,100,0,0,0);
+			player.createStatusEffect(StatusEffects.Kelt,100,0,0,0);
 			//player.createKeyItem("Bow",0,0,0,0);
 			player.setWeaponRange(weaponsrange.BOWOLD_);
 		}
@@ -836,7 +836,7 @@ package classes
 			//Muscle Tone- A bit above average enough to trigger a mention of it in the desc.
 			player.tone = 55;
 			//Nipples-  As above on size but the black sand trap nipples.
-			player.createStatusAffect(StatusAffects.BlackNipples,0,0,0,0);
+			player.createStatusEffect(StatusEffects.BlackNipples,0,0,0,0);
 			//Hair Length- Long
 			player.hairLength = 16;
 			//Hair Color- Black
@@ -948,7 +948,7 @@ package classes
 			//for wetness a squirter, looseness a 2 and capacity at 140.
 			if(!player.hasVagina()) player.createVagina();
 			player.vaginas[0].vaginalWetness = VAGINA_WETNESS_SLAVERING;
-			player.createStatusAffect(StatusAffects.BonusVCapacity,132,0,0,0);
+			player.createStatusEffect(StatusEffects.BonusVCapacity,132,0,0,0);
 			//Virgin, high fertility like in the email I sent before.  dragon wings, nine fox tails,  dragon legs, eight DD breasts with four fuckable nipples each, dragon tongue, waist length hair, large dragon wings.
 			player.wingType = WING_TYPE_DRACONIC_LARGE;
 			player.wingDesc = "large, draconic";
@@ -1215,8 +1215,8 @@ package classes
 			player.tailType = TAIL_TYPE_FOX;
 			player.tailCount = 2;
 			player.inte = 30;
-			if(!player.hasStatusAffect(StatusAffects.BonusVCapacity)) player.createStatusAffect(StatusAffects.BonusVCapacity,0,0,0,0);
-			else player.addStatusValue(StatusAffects.BonusVCapacity,1,5+rand(10));
+			if(!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity,0,0,0,0);
+			else player.addStatusValue(StatusEffects.BonusVCapacity,1, 5 + rand(10));
 			outputText("As a Kitsune, you always got weird looks, but none could doubt your affinity for magic...");
 		}
 		
@@ -1276,7 +1276,7 @@ package classes
 			player.hairLength = 69.2;
 			player.hairType = 4;
 			//Bow skill 100 (Sorry Kelt, I can't hear your insults over my mad Robin Hood skillz)
-			player.createStatusAffect(StatusAffects.Kelt,100,0,0,0);
+			player.createStatusEffect(StatusEffects.Kelt,100,0,0,0);
 			player.createKeyItem("Bow", 0, 0, 0, 0);
 			
 			player.createKeyItem("Zetaz's Map", 0, 0, 0, 0);
@@ -1293,7 +1293,7 @@ package classes
 			player.createKeyItem("Equipment Rack - Armor",0,0,0,0);
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00255] = 1;
 			player.createKeyItem("Equipment Storage - Jewelry Box",0,0,0,0);
-			player.createStatusAffect(StatusAffects.KnowsWhitefire, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.KnowsWhitefire, 0, 0, 0, 0);
 			
 			player.createPerk(PerkLib.HistoryFighter, 		0, 0, 0, 0);
 			player.createPerk(PerkLib.Acclimation, 			0, 0, 0, 0);
@@ -1330,8 +1330,8 @@ package classes
 			player.itemSlot3.setItemAndQty(consumables.OVIELIX, 1);
 			player.itemSlot4.setItemAndQty(consumables.REPTLUM, 1);
 			
-			player.createStatusAffect(StatusAffects.TelAdre, 1, 0, 0, 0);
-			//player.createStatusAffect(StatusAffects.MetWhitney, 2, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.TelAdre, 1, 0, 0, 0);
+			//player.createStatusEffect(StatusEffects.MetWhitney, 2, 0, 0, 0);
 			
 			// Izma
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] = 1;
@@ -1506,7 +1506,7 @@ package classes
 			player.setWeapon(weapons.B_SWORD);
 			player.setArmor(armors.SSARMOR);
 			//Bow skill 100 (Sorry Kelt, I can't hear your insults over my mad Robin Hood skillz)
-			player.createStatusAffect(StatusAffects.Kelt,100,0,0,0);
+			player.createStatusEffect(StatusEffects.Kelt,100,0,0,0);
 			//player.createKeyItem("Bow",0,0,0,0);
 			player.setWeaponRange(weaponsrange.BOWOLD_);
 			inventory.createStorage();
@@ -1581,11 +1581,11 @@ package classes
 			player.createPerk(PerkLib.BlackHeart, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Pervert, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Ambition, 0.2, 0.15, 0, 0);
-			player.createStatusAffect(StatusAffects.KnowsArouse,0,0,0,0);
-			player.createStatusAffect(StatusAffects.KnowsHeal,0,0,0,0);
-			player.createStatusAffect(StatusAffects.KnowsManyBirds,0,0,0,0);
-			player.createStatusAffect(StatusAffects.KnowsBlind,0,0,0,0);
-			player.createStatusAffect(StatusAffects.KnowsWhitefire,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsArouse,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsHeal,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsManyBirds,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsBlind,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsWhitefire,0,0,0,0);
 			player.inte = 40;
 			player.tou = 25;
 			player.spe = 20;
@@ -1617,7 +1617,7 @@ package classes
 			player.vaginas[0].vaginalLooseness = 0;
 			player.vaginas[0].vaginalWetness = 2; // wet
 			player.vaginas[0].virgin = false;
-			player.createStatusAffect(StatusAffects.BonusVCapacity, 8000, 0, 0, 0); // Vag of Holding kitsune trait
+			player.createStatusEffect(StatusEffects.BonusVCapacity, 8000, 0, 0, 0); // Vag of Holding kitsune trait
 			player.clitLength = 0.3;
 			player.fertility = 5;
 			
@@ -1631,7 +1631,7 @@ package classes
 
 			player.ass.analWetness = 2; // moist
 			player.ass.analLooseness = 1; // not virgin
-			player.createStatusAffect(StatusAffects.BonusACapacity, 100, 0, 0, 0);			
+			player.createStatusEffect(StatusEffects.BonusACapacity, 100, 0, 0, 0);
 
 			player.createCock(12, 1.6, CockTypesEnum.TENTACLE); // as most kitsune you love tentackles
 			player.createCock(12, 1.6, CockTypesEnum.TENTACLE); // and while they aren't really fitting your body...
@@ -1670,7 +1670,7 @@ package classes
 			if (player.weapon == WeaponLib.FISTS) player.setWeapon(weapons.SUCWHIP); // have succubus whip, to get corruption quickly when desired
 			//if (player.jewelry == JewelryLib.NOTHING) player.setJewelry(jewelries.PURERNG);
 			if (debug) {
-				if (!player.hasStatusAffect(StatusAffects.Kelt)) player.createStatusAffect(StatusAffects.Kelt, 100, 0, 0, 0); // Kelt, you are dick.
+				if (!player.hasStatusEffect(StatusEffects.Kelt)) player.createStatusEffect(StatusEffects.Kelt, 100, 0, 0, 0); // Kelt, you are dick.
 				player.setWeaponRange(weaponsrange.BOWOLD_);
 				flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 4; // Raphael is too picky, and also pretty much unfinished - you can't continue training after chase scene.			
 				if (player.teaseLevel < 3) player.teaseLevel = 3; }			
@@ -1729,9 +1729,9 @@ package classes
 			player.earsPLong = "Crimstone earrings";
 			player.createPerk(PerkLib.PiercedCrimstone, 5, 0, 0, 0); // with Omnibus' Gift it would give 50 min lust... perfect!
 			
-			player.createStatusAffect(StatusAffects.KnowsHeal, 0, 0, 0, 0); // to compliment history
+			player.createStatusEffect(StatusEffects.KnowsHeal, 0, 0, 0, 0); // to compliment history
 			
-			if (debug) { player.createStatusAffect(StatusAffects.TelAdre, 1, 1, 0, 0); flags[kFLAGS.BAZAAR_ENTERED] = 1; } // small straightforward cheating			
+			if (debug) { player.createStatusEffect(StatusEffects.TelAdre, 1, 1, 0, 0); flags[kFLAGS.BAZAAR_ENTERED] = 1; } // small straightforward cheating
 			
 			player.hoursSinceCum = 0;
 			player.fatigue = 0;
@@ -1966,9 +1966,9 @@ package classes
 			player.createPerk(PerkLib.SpellcastingAffinity, 50, 0, 0, 0);
 			
 			// and knows white magic
-			player.createStatusAffect(StatusAffects.KnowsCharge,0,0,0,0);
-			player.createStatusAffect(StatusAffects.KnowsBlind,0,0,0,0);
-			player.createStatusAffect(StatusAffects.KnowsWhitefire,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsCharge,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsBlind,0,0,0,0);
+			player.createStatusEffect(StatusEffects.KnowsWhitefire,0,0,0,0);
 
 			player.hoursSinceCum = 0;
 			player.fatigue = 0;

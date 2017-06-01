@@ -388,7 +388,7 @@ private function marbleIsPissyAndYourTooDumbToTalk():void {
 		//Silent -> PC has had kid(s) with Marble and is not addicted (A3)
 		outputText("Marble suddenly bursts into tears herself and, between sobs, yells \"<i>Why " + player.short + "?  Did none of our kids mean anything to you?</i>\"  In frustration she slams her hammer against the ground, causing a tremor that almost knocks you and Amily onto your asses.  However, at this point the two of them have broken down and collapsed on their knees sobbing.  You have no idea what you can say at this point, or what you should do.  After a few minutes pass, the two of them each give you a sad look in turn before collecting their things (and in Marble's case, her kids) and leaving the camp.  You doubt that you'll ever see either of them again.", false);
 		//end event, Amily and Marble leave the camp for good
-		player.removeStatusAffect(StatusAffects.CampMarble);
+		player.removeStatusEffect(StatusEffects.CampMarble);
 		flags[kFLAGS.AMILY_FOLLOWER] = 0;
 		flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
 	}
@@ -396,7 +396,7 @@ private function marbleIsPissyAndYourTooDumbToTalk():void {
 	else {
 		outputText("Turning to face you with her hammer raised, Marble says to you \"<i>So I guess that I'm nothing but a fuck to you then, hun?!  After all I sacrificed to help you get over your addiction, just so that you could be with someone else?!</i>\"  She swings her hammer at you and you barely dodge it in time and look back at the angry cowgirl.  \"<i>" + player.short + "!</i>\" Amily calls out to you while rushing to your side and wiping her tears.  \"<i>Fine!</i>\"  Marble yells at the two of you. \"<i>You two can be together and have as many kids with each other as you want!  I'm leaving " + player.short + ", don't come looking for me.</i>\" she declares before collecting her things and leaving the camp.  You doubt you'll see her again.", false);
 		//end event, Marble leaves the camp for good
-		player.removeStatusAffect(StatusAffects.CampMarble);
+		player.removeStatusEffect(StatusEffects.CampMarble);
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -439,7 +439,7 @@ private function srslyPimpinGuyz():void {
 	player.setWeapon(WeaponLib.FISTS);
 //	player.armor = armors.C_CLOTH;
 //	player.weapon.unequip(player,false,true);
-	player.removeStatusAffect(StatusAffects.CampMarble);
+	player.removeStatusEffect(StatusEffects.CampMarble);
 	outputText("\n\nNo doubt Amily ran back to the ruins.  Perhaps you could gather some appropriate drugs to teach her a lesson?", false);
 	if(player.inte >= 45) outputText("  Goblin ale and lust drafts might do the trick.", false);
 	//Follower off
@@ -491,9 +491,9 @@ public function BlameMarblezSweetVagoozle():void {
 	else if(flags[kFLAGS.MARBLE_KIDS] > 1) outputText("and her children", false);
 	outputText(" before slowly walking away from the camp without looking back.  \"<i>I'm going back to the farm, I guess I'll see you around.</i>\"\n\n", false);
 	//end event, Marble leaves the camp and returns to the farm, she can now be encountered if she had not joined you in the camp.
-	player.removeStatusAffect(StatusAffects.CampMarble);
+	player.removeStatusEffect(StatusEffects.CampMarble);
 	//Marble goes back to farm
-	player.removeStatusAffect(StatusAffects.NoMoreMarble);
+	player.removeStatusEffect(StatusEffects.NoMoreMarble);
 	doNext(camp.returnToCampUseOneHour);
 }
 

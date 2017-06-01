@@ -30,11 +30,11 @@ package classes.Scenes.Areas.GlacialRift
 			if (choice == 0) eAttack();
 			if (choice == 1) frostbite();
 			if (choice == 2) {
-				if (!player.hasStatusAffect(StatusAffects.WolfHold) && rand(2) == 0) wolfHold();
+				if (!player.hasStatusEffect(StatusEffects.WolfHold) && rand(2) == 0) wolfHold();
 				else frostbite();
 			}
 			if (choice == 3) {
-				if (!hasStatusAffect(StatusAffects.AbilityCooldown1)) paw();
+				if (!hasStatusEffect(StatusEffects.AbilityCooldown1)) paw();
 				else frostbite();
 			}
 		}
@@ -43,15 +43,15 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("The wolf lunge, biting viciously at your leg.", false);
 			var dmgtaken:Number = 0;
 			var damage:Number = 0;
-			if(!player.hasStatusAffect(StatusAffects.Frostbite)) {
+			if(!player.hasStatusEffect(StatusEffects.Frostbite)) {
 				outputText(" You feel the cold enter your body and shake you to the very core weakening your resolve just as much as slowing down your movement.", false);
 				if(player.str > 7) {
 					player.str -= 6;
 					showStatDown( 'str' );
-					player.createStatusAffect(StatusAffects.Frostbite,6,0,0,0);
+					player.createStatusEffect(StatusEffects.Frostbite,6,0,0,0);
 				}
 				else {
-					player.createStatusAffect(StatusAffects.Frostbite,0,0,0,0);
+					player.createStatusEffect(StatusEffects.Frostbite,0,0,0,0);
 					damage += 20 + Math.round(rand(str / 4));
 					player.takeDamage(damage);
 					dmgtaken += damage;
@@ -66,7 +66,7 @@ package classes.Scenes.Areas.GlacialRift
 				if(player.str > 6) {
 					player.str -= 5;
 					showStatDown( 'str' );
-					player.addStatusValue(StatusAffects.Frostbite,1,5);
+					player.addStatusValue(StatusEffects.Frostbite,1,5);
 				}
 				else {
 					damage += 20 + Math.round(rand(str / 4));
@@ -83,7 +83,7 @@ package classes.Scenes.Areas.GlacialRift
 		
 		protected function wolfHold():void {
 			outputText("The wolf suddenly grab you crushing you under its paw as it start tearing you apart with its maw.", false);
-			player.createStatusAffect(StatusAffects.WolfHold,0,0,0,0); 
+			player.createStatusEffect(StatusEffects.WolfHold,0,0,0,0); 
 			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
 				player.takeDamage(8+rand(10));
 			}
@@ -93,9 +93,9 @@ package classes.Scenes.Areas.GlacialRift
 		public function paw():void {
 			outputText("The wolf smash you with its enormous paw you rail at the impact as it sends you flying across the field.", false);
 			player.takeDamage(str);
-			player.createStatusAffect(StatusAffects.Stunned, 1, 0, 0, 0);
-			createStatusAffect(StatusAffects.AbilityCooldown1, 3, 0, 0, 0);
-			if (player.hasStatusAffect(StatusAffects.WolfHold)) player.removeStatusAffect(StatusAffects.WolfHold);
+			player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			createStatusEffect(StatusEffects.AbilityCooldown1, 3, 0, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.WolfHold)) player.removeStatusEffect(StatusEffects.WolfHold);
 			combatRoundOver();
 		}
 		
@@ -136,7 +136,7 @@ package classes.Scenes.Areas.GlacialRift
 			this.drop = new WeightedDrop()
 					.add(consumables.CHILLYP, 1)
 					.add(null, 2);
-			this.createStatusAffect(StatusAffects.GenericRunDisabled, 0, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.IceNature, 0, 0, 0, 0);

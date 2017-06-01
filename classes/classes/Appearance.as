@@ -328,7 +328,7 @@
 					"slippery "];
 				description += randomChoice(options);
 			}
-			if (!haveDescription && i_creature.hasStatusAffect(StatusAffects.BlackNipples)) {
+			if (!haveDescription && i_creature.hasStatusEffect(StatusEffects.BlackNipples)) {
 				options = ["black ",
 					"ebony ",
 					"sable "];
@@ -1370,7 +1370,7 @@
 			var description:String = "";
 			var options:Array;
 
-			if (i_plural && (!i_creature.hasStatusAffect(StatusAffects.Uniball))) {
+			if (i_plural && (!i_creature.hasStatusEffect(StatusEffects.Uniball))) {
 				if (i_creature.balls == 1) {
 					if (i_withArticle) {
 						options = ["a single",
@@ -1452,7 +1452,7 @@
 
 			}
 			//UNIBALL
-			if (i_creature.hasStatusAffect(StatusAffects.Uniball)) {
+			if (i_creature.hasStatusEffect(StatusEffects.Uniball)) {
 				if (description) description += " ";
 				options = ["tightly-compressed",
 					"snug",
@@ -1511,7 +1511,7 @@
 			description += randomChoice(options);
 			if (i_plural) description += "s";
 
-			if (i_creature.hasStatusAffect(StatusAffects.Uniball) && rand(2) == 0) {
+			if (i_creature.hasStatusEffect(StatusEffects.Uniball) && rand(2) == 0) {
 				if (rand(3) == 0)
 					description += " merged into a cute, spherical package";
 				else if (rand(2) == 0)

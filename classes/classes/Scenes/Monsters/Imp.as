@@ -12,7 +12,7 @@
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
-			if (hasStatusAffect(StatusAffects.KitsuneFight)) {
+			if (hasStatusEffect(StatusEffects.KitsuneFight)) {
 				game.forest.kitsuneScene.winKitsuneImpFight();
 			}
 			else if (flags[kFLAGS.EVANGELINE_AFFECTION] == 1) {
@@ -25,7 +25,7 @@
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (hasStatusAffect(StatusAffects.KitsuneFight)) {
+			if (hasStatusEffect(StatusEffects.KitsuneFight)) {
 				game.forest.kitsuneScene.loseKitsuneImpFight();
 			}
 			else if (pcCameWorms) {

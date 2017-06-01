@@ -20,7 +20,7 @@ package classes.Scenes
 			this.long = "You are currently fighting 18 feet tall Krakken.";
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_DROOLING, VAGINA_LOOSENESS_GAPING);
-			this.createStatusAffect(StatusAffects.BonusVCapacity, 200, 0, 0, 0);
+			this.createStatusEffect(StatusEffects.BonusVCapacity, 200, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("E"));
 			this.ass.analLooseness = ANAL_LOOSENESS_VIRGIN;
 			this.ass.analWetness = ANAL_WETNESS_NORMAL;

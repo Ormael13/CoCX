@@ -12,7 +12,7 @@ import classes.PerkLib;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.NPCs.Anemone;
-import classes.StatusAffects;
+import classes.StatusEffects;
 
 public class PhysicalSpecials extends BaseCombatContent{
 
@@ -24,7 +24,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 			kGAMECLASS.urtaQuest.urtaSpecials();
 			return;
 		}
-		if (inCombat && player.hasStatusAffect(StatusAffects.Sealed) && player.statusAffectv2(StatusAffects.Sealed) == 5) {
+		if (inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 5) {
 			clearOutput();
 			outputText("You try to ready a special attack, but wind up stumbling dizzily instead.  <b>Your ability to use physical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
 			enemyAI();
@@ -79,11 +79,11 @@ public class PhysicalSpecials extends BaseCombatContent{
 			addButton(button++, "Upheaval", upheavalAttack, null, null, null, "Send your foe flying with your dual nose mounted horns. \n\nFatigue Cost: " + physicalCost(15) + "");
 		}
 		//Infest if infested
-		if (player.hasStatusAffect(StatusAffects.Infested) && player.statusAffectv1(StatusAffects.Infested) == 5 && player.hasCock()) {
+		if (player.hasStatusEffect(StatusEffects.Infested) && player.statusEffectv1(StatusEffects.Infested) == 5 && player.hasCock()) {
 			addButton(button++, "Infest", kGAMECLASS.mountain.wormsScene.playerInfest, null, null, null, "The infest attack allows you to cum at will, launching a stream of semen and worms at your opponent in order to infest them.  Unless your foe is very aroused they are likely to simply avoid it.  Only works on males or herms. \n\nAlso great for reducing your lust.");
 		}
 		//Kiss supercedes bite.
-		if (player.hasStatusAffect(StatusAffects.LustStickApplied)) {
+		if (player.hasStatusEffect(StatusEffects.LustStickApplied)) {
 			addButton(button++, "Kiss", kissAttack, null, null, null, "Attempt to kiss your foe on the lips with drugged lipstick.  It has no effect on those without a penis.");
 		}
 		if (player.armType == ARM_TYPE_MANTIS && player.weapon == WeaponLib.FISTS) {
@@ -100,15 +100,15 @@ public class PhysicalSpecials extends BaseCombatContent{
 		if (player.tailType == TAIL_TYPE_SALAMANDER) addButton(button++, "Tail Slap", tailSlapAttack, null, null, null, "Set ablaze in red-hot flames your tail to whip your foe with it to hurt and burn them!  \n\n<b>AoE attack.</b>");
 		if (player.tailType == TAIL_TYPE_ORCA) {
 
-			if (!player.hasStatusAffect(StatusAffects.CooldownTailSmack)) {
+			if (!player.hasStatusEffect(StatusEffects.CooldownTailSmack)) {
 				addButton(button++, "Tail Smack", tailSmackAttack, null, null, null, "Smack your powerful tail at your opponent face.</b>");
 			}
-			else if (player.hasStatusAffect(StatusAffects.CooldownTailSmack)) {
+			else if (player.hasStatusEffect(StatusEffects.CooldownTailSmack)) {
 				outputText("<b>You need more time before you can perform Tail Smack again.</b>\n\n");
 			}
 		}
 		if (player.findPerk(PerkLib.InkSpray) >= 0) {
-			if (!player.hasStatusAffect(StatusAffects.CooldownInkSpray) && !monster.hasStatusAffect(StatusAffects.Blind)) {
+			if (!player.hasStatusEffect(StatusEffects.CooldownInkSpray) && !monster.hasStatusEffect(StatusEffects.Blind)) {
 				if (player.gender == 1) {
 					if (player.findPerk(PerkLib.ScyllaInkGlands) >= 0) {
 						addButton(button++, "Ink Spray", inkSpray, null, null, null, "Lift your cock and spray ink to the face of your foe surprising, arousing and blinding them (cooldown of 4 round before it can be used again)");
@@ -126,10 +126,10 @@ public class PhysicalSpecials extends BaseCombatContent{
 					}
 				}
 			}
-			else if (monster.hasStatusAffect(StatusAffects.Blind) || monster.hasStatusAffect(StatusAffects.InkBlind)) {
+			else if (monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind)) {
 				outputText("<b>" + monster.capitalA + monster.short + " is already affected by blind.</b>\n\n");
 			}
-			else if (player.hasStatusAffect(StatusAffects.CooldownInkSpray)) {
+			else if (player.hasStatusEffect(StatusEffects.CooldownInkSpray)) {
 				outputText("<b>You need more time before you can shoot ink again.</b>\n\n");
 			}
 		}
@@ -139,47 +139,47 @@ public class PhysicalSpecials extends BaseCombatContent{
 		if (player.shield != ShieldLib.NOTHING) {
 			addButton(button++, "Shield Bash", shieldBash, null, null, null, "Bash your opponent with a shield. Has a chance to stun. Bypasses stun immunity. \n\nThe more you stun your opponent, the harder it is to stun them again.");
 		}
-		if (player.weaponRangePerk == "Bow" && player.hasStatusAffect(StatusAffects.KnowsSidewinder)) {
+		if (player.weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.KnowsSidewinder)) {
 			addButton(button++, "Sidewinder", archerSidewinder, null, null, null, "The pinacle art of the hunter. Once per day draw on your fatigue to shoot a single heavily infused arrow at a beast or animal morph. This attack never miss.");
 		}
 		if (monster.plural) {
 			if (player.weapon == weapons.FLAIL || player.weapon == weapons.L_WHIP || player.weapon == weapons.SUCWHIP || player.weapon == weapons.WHIP || player.weapon == weapons.RIBBON || player.weapon == weapons.ERIBBON) addButton(button++, "Whipping", whipping, null, null, null, "Attack multiple opponent with your held weapon.  \n\n<b>AoE attack.</b>");
 			if (player.weapon == weapons.BFSWORD || player.weapon == weapons.CLAYMOR || player.weapon == weapons.URTAHLB || player.weapon == weapons.KIHAAXE || player.weapon == weapons.L__AXE || player.weapon == weapons.L_HAMMR || player.weapon == weapons.TRASAXE || player.weapon == weapons.WARHAMR || player.weapon == weapons.NODACHI || player.weapon == weapons.WGSWORD) addButton(button++, "Whirlwind", whirlwind, null, null, null, "Spin your weapon around to attack multiple enemies at once.  \n\n<b>AoE attack.</b>");
-			if (player.weaponRangePerk == "Bow" && player.hasStatusAffect(StatusAffects.KnowsBarrage)) {
+			if (player.weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.KnowsBarrage)) {
 				addButton(button++, "Barrage", archerBarrage, null, null, null, "Draw multiple arrow and shoot them all at the same time to hit several target.  \n\n<b>AoE attack.</b>");
 			}
 		}
 		if (player.lowerBody == LOWER_BODY_TYPE_PLANT_FLOWER) {
-			if (!player.hasStatusAffect(StatusAffects.AlraunePollen)) addButton(button++, "AlraunePollen", AlraunePollen, null, null, null, "Release a cloud of your pollen in the air to arouse your foe.");
-			else if (player.hasStatusAffect(StatusAffects.AlraunePollen)) outputText("<b>You already spread your pollen over battlefield.</b>\n\n");
-			if (!player.hasStatusAffect(StatusAffects.AlrauneEntangle)) addButton(button++, "Entangle", AlrauneEntangle, null, null, null, "Use your vines to hinder your opponent.");
-			else if (player.hasStatusAffect(StatusAffects.AlrauneEntangle)) outputText("<b>You already entangle your opponent.</b>\n\n");
+			if (!player.hasStatusEffect(StatusEffects.AlraunePollen)) addButton(button++, "AlraunePollen", AlraunePollen, null, null, null, "Release a cloud of your pollen in the air to arouse your foe.");
+			else if (player.hasStatusEffect(StatusEffects.AlraunePollen)) outputText("<b>You already spread your pollen over battlefield.</b>\n\n");
+			if (!player.hasStatusEffect(StatusEffects.AlrauneEntangle)) addButton(button++, "Entangle", AlrauneEntangle, null, null, null, "Use your vines to hinder your opponent.");
+			else if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) outputText("<b>You already entangle your opponent.</b>\n\n");
 		}
-		if (player.hasStatusAffect(StatusAffects.AlrauneEntangle)) {
+		if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) {
 			if (monster.tallness > 120 || monster.findPerk(PerkLib.EnemyGigantType) > 0) outputText("<b>Your opponent is too tall for Strangulate to have any effect on it.</b>\n\n");
 			else addButton(button++, "Strangulate", AlrauneStrangulate, null, null, null, "Strangle your opponent with your vines.");
 		}
 		if (player.armType == ARM_TYPE_GARGOYLE && player.shield == ShieldLib.NOTHING && player.weaponPerk != "Large") {
-			if (!player.hasStatusAffect(StatusAffects.CooldownStoneClaw)) {
+			if (!player.hasStatusEffect(StatusEffects.CooldownStoneClaw)) {
 				addButton(button++, "Stone Claw", StoneClawAttack, null, null, null, "Rend your foe using your sharp stone claw (available if you have no shield and use a one handed weapon).  \n\nWould go into cooldown after use for: 3 rounds");
 			}
-			else if (player.hasStatusAffect(StatusAffects.CooldownStoneClaw)) {
+			else if (player.hasStatusEffect(StatusEffects.CooldownStoneClaw)) {
 				outputText("<b>You need more time before you can perform Stone Claw again.</b>\n\n");
 			}
 		}
 		if (player.tailType == TAIL_TYPE_GARGOYLE) {
-			if (!player.hasStatusAffect(StatusAffects.CooldownTailSlam)) {
+			if (!player.hasStatusEffect(StatusEffects.CooldownTailSlam)) {
 				addButton(button++, "Tail Slam", TailSlamAttack, null, null, null, "Slam your mace like tail on your foes head dealing severe damage crushing its defence and stunning it.  \n\nWould go into cooldown after use for: 5 rounds");
 			}
-			else if (player.hasStatusAffect(StatusAffects.CooldownTailSlam)) {
+			else if (player.hasStatusEffect(StatusEffects.CooldownTailSlam)) {
 				outputText("<b>You need more time before you can perform Tail Slam again.</b>\n\n");
 			}
 		}
 		if (player.wingType == WING_TYPE_GARGOYLE_LIKE_LARGE) {
-			if (!player.hasStatusAffect(StatusAffects.CooldownWingBuffet)) {
+			if (!player.hasStatusEffect(StatusEffects.CooldownWingBuffet)) {
 				addButton(button++, "Wing Buffet", WingBuffetAttack, null, null, null, "Buffet your foe using your two massive stone wings staggering your foe.  \n\nWould go into cooldown after use for: 5 rounds");
 			}
-			else if (player.hasStatusAffect(StatusAffects.CooldownWingBuffet)) {
+			else if (player.hasStatusEffect(StatusEffects.CooldownWingBuffet)) {
 				outputText("<b>You need more time before you can perform Wing Buffet again.</b>\n\n");
 			}
 		}
@@ -195,7 +195,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 			return;
 		}
 		outputText("You ready your [weapon] and prepare to spin it around trying to hit as many " + monster.a + monster.short + " as possible.  ");
-		if ((player.hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > 80)) {
+		if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
 			if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
@@ -224,7 +224,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 			if (player.inte <= 100) critChance += (player.inte - 50) / 5;
 			if (player.inte > 100) critChance += 10;
 		}
-		if (player.hasStatusAffect(StatusAffects.Rage)) critChance += player.statusAffectv1(StatusAffects.Rage);
+		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
 		if (rand(100) < critChance) {
 			crit = true;
 			damage *= 1.75;
@@ -239,11 +239,11 @@ public class PhysicalSpecials extends BaseCombatContent{
 		outputText("Your [weapon] hits few of " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
 		if (crit == true) {
 			outputText(" <b>*Critical Hit!*</b>");
-			if (player.hasStatusAffect(StatusAffects.Rage)) player.removeStatusAffect(StatusAffects.Rage);
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
 		}
-		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusAffect(StatusAffects.Berzerking) || player.hasStatusAffect(StatusAffects.Lustzerking))) {
-			if (player.hasStatusAffect(StatusAffects.Rage) && player.statusAffectv1(StatusAffects.Rage) > 5 && player.statusAffectv1(StatusAffects.Rage) < 50) player.addStatusValue(StatusAffects.Rage, 1, 10);
-			else player.createStatusAffect(StatusAffects.Rage, 10, 0, 0, 0);
+		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
@@ -305,21 +305,21 @@ public class PhysicalSpecials extends BaseCombatContent{
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		//miss
-		if((player.hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
+		if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			outputText("Twirling like a top, you swing your tail, but connect with only empty air.");
 		}
 		else {
 			if(!monster.plural) outputText("Twirling like a top, you bat your opponent with your tail.  For a moment, " + monster.pronoun1 + " looks disbelieving, as if " + monster.pronoun3 + " world turned upside down, but " + monster.pronoun1 + " soon becomes irate and redoubles " + monster.pronoun3 + " offense, leaving large holes in " + monster.pronoun3 + " guard.  If you're going to take advantage, it had better be right away; " + monster.pronoun1 + "'ll probably cool off very quickly.");
 			else outputText("Twirling like a top, you bat your opponent with your tail.  For a moment, " + monster.pronoun1 + " look disbelieving, as if " + monster.pronoun3 + " world turned upside down, but " + monster.pronoun1 + " soon become irate and redouble " + monster.pronoun3 + " offense, leaving large holes in " + monster.pronoun3 + " guard.  If you're going to take advantage, it had better be right away; " + monster.pronoun1 + "'ll probably cool off very quickly.");
-			if(!monster.hasStatusAffect(StatusAffects.CoonWhip)) monster.createStatusAffect(StatusAffects.CoonWhip,0,0,0,0);
+			if(!monster.hasStatusEffect(StatusEffects.CoonWhip)) monster.createStatusEffect(StatusEffects.CoonWhip,0,0,0,0);
 			temp = Math.round(monster.armorDef * .75);
 			while(temp > 0 && monster.armorDef >= 1) {
 				monster.armorDef--;
-				monster.addStatusValue(StatusAffects.CoonWhip,1,1);
+				monster.addStatusValue(StatusEffects.CoonWhip,1,1);
 				temp--;
 			}
-			monster.addStatusValue(StatusAffects.CoonWhip,2,2);
-			if(player.tailType == TAIL_TYPE_RACCOON) monster.addStatusValue(StatusAffects.CoonWhip,2,2);
+			monster.addStatusValue(StatusEffects.CoonWhip,2,2);
+			if(player.tailType == TAIL_TYPE_RACCOON) monster.addStatusValue(StatusEffects.CoonWhip,2,2);
 		}
 		outputText("\n\n");
 		enemyAI();
@@ -331,7 +331,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		fatigue(40,2);
 		outputText("With a simple thought you set your tail ablaze.");
 		//miss
-		if((player.hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
+		if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			outputText("  Twirling like a top, you swing your tail, but connect with only empty air.");
 		}
 		else {
@@ -351,7 +351,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 			damage = Math.round(damage);
 			damage = doDamage(damage);
 			outputText("  Your tail slams against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
-			monster.createStatusAffect(StatusAffects.BurnDoT,10,0,0,0);
+			monster.createStatusEffect(StatusEffects.BurnDoT,10,0,0,0);
 			checkAchievementDamage(damage);
 		}
 		outputText("\n\n");
@@ -362,9 +362,9 @@ public class PhysicalSpecials extends BaseCombatContent{
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		fatigue(40,1);
-		player.createStatusAffect(StatusAffects.CooldownTailSmack,5,0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownTailSmack,5,0,0,0);
 		//miss
-		if((player.hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
+		if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			outputText("  You smash your tail at " + monster.a + monster.short + ", but connect with only empty air.");
 		}
 		else {
@@ -374,7 +374,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 			outputText(" reel ");
 			if (monster.findPerk(PerkLib.Resolute) < 0) {
 				outputText("dazed by the sheer strength of the hit. ");
-				monster.createStatusAffect(StatusAffects.Stunned,2,0,0,0);
+				monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
 			}
 			else outputText("back in pain but hold steady despite the impact.");
 		}
@@ -394,16 +394,16 @@ public class PhysicalSpecials extends BaseCombatContent{
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(30,1);
 		if (player.findPerk(PerkLib.ScyllaInkGlands) >= 0) {
-			player.createStatusAffect(StatusAffects.CooldownInkSpray,4,0,0,0);
+			player.createStatusEffect(StatusEffects.CooldownInkSpray,4,0,0,0);
 		}
-		else player.createStatusAffect(StatusAffects.CooldownInkSpray,8,0,0,0);
+		else player.createStatusEffect(StatusEffects.CooldownInkSpray,8,0,0,0);
 		outputText("You lift");
 		if (player.gender == 1) outputText(" your cock");
 		if (player.gender == 2 || player.gender == 3) outputText(" a few tentacle");
 		outputText(" spraying your foe face in ink.  It start trashing its arm about attempting to remove the ink.\n");
 		outputText(" <b>" + monster.capitalA + monster.short + " is blinded!</b>", false);
-		monster.createStatusAffect(StatusAffects.InkBlind, 2, 0, 0, 0);
-		monster.createStatusAffect(StatusAffects.Stunned, 2, 0, 0, 0);
+		monster.createStatusEffect(StatusEffects.InkBlind, 2, 0, 0, 0);
+		monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 		var lustDmg:Number = 2 + (3 * player.teaseLevel) + rand(5);
 		monster.teased(lustDmg);
 		outputText("\n\n", false);
@@ -415,12 +415,12 @@ public class PhysicalSpecials extends BaseCombatContent{
 	public function takeFlight():void {
 		clearOutput();
 		outputText("You open you wing taking flight.\n\n");
-		player.createStatusAffect(StatusAffects.Flying, 7, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.Flying, 7, 0, 0, 0);
 		if (player.findPerk(PerkLib.Resolute) < 0) {
-			player.createStatusAffect(StatusAffects.FlyingNoStun, 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.FlyingNoStun, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
 		}
-		monster.createStatusAffect(StatusAffects.MonsterAttacksDisabled, 0, 0, 0, 0);
+		monster.createStatusEffect(StatusEffects.MonsterAttacksDisabled, 0, 0, 0, 0);
 		enemyAI();
 	}
 
@@ -430,7 +430,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		var pollen:Number = monster.lustVuln * (2 + rand(4));
 		monster.lust += pollen;
 		outputText("You send a cloud of your pollen outward into the air, smiling lustfully at your opponent. Sneezing slightly as they inhale the potent pollen, they begin showing clear signs of arousal. Just how long can they resist coming to pollinate you now? Not for long, you hope. (" + pollen + ")\n\n");
-		player.createStatusAffect(StatusAffects.AlraunePollen,0,0,0,0);
+		player.createStatusEffect(StatusEffects.AlraunePollen,0,0,0,0);
 		enemyAI();
 	}
 
@@ -449,7 +449,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		monster.spe -= EntangleSpeNerf;
 		if(monster.str < 1) monster.str = 1;
 		if(monster.spe < 1) monster.spe = 1;
-		player.createStatusAffect(StatusAffects.AlrauneEntangle,EntangleStrNerf,EntangleSpeNerf,0,0);
+		player.createStatusEffect(StatusEffects.AlrauneEntangle,EntangleStrNerf,EntangleSpeNerf,0,0);
 		enemyAI();
 	}
 
@@ -482,7 +482,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(60,1);
-		player.createStatusAffect(StatusAffects.CooldownStoneClaw,3,0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownStoneClaw,3,0,0,0);
 		var damage:Number = 0;
 		//str bonuses
 		damage += player.str;
@@ -498,8 +498,8 @@ public class PhysicalSpecials extends BaseCombatContent{
 		if (player.findPerk(PerkLib.IronFistsV) >= 0) damage += 10;
 		if (player.findPerk(PerkLib.JobBrawler) >= 0) damage += (5 * (1 + player.newGamePlusMod()));
 		if (player.findPerk(PerkLib.JobMonk) >= 0) damage += (10 * (1 + player.newGamePlusMod()));
-		if (player.hasStatusAffect(StatusAffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
-		if (player.hasStatusAffect(StatusAffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
+		if (player.hasStatusEffect(StatusEffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
+		if (player.hasStatusEffect(StatusEffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 		//multiplicative bonuses
 		if (player.findPerk(PerkLib.HoldWithBothHands) >= 0) damage *= 1.2;
 		if (player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80) damage *= 1.2;
@@ -514,7 +514,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 			if (player.inte > 100) critChance += 10;
 		}
 		if (player.findPerk(PerkLib.Blademaster) >= 0) critChance += 5;
-		if (player.hasStatusAffect(StatusAffects.Rage)) critChance += player.statusAffectv1(StatusAffects.Rage);
+		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
 		if (rand(100) < critChance) {
 			crit = true;
 			damage *= 1.75;
@@ -524,11 +524,11 @@ public class PhysicalSpecials extends BaseCombatContent{
 		outputText("You slash your adversary with your sharp stone claw dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!", false);
 		if (crit == true) {
 			outputText(" <b>*Critical Hit!*</b>");
-			if (player.hasStatusAffect(StatusAffects.Rage)) player.removeStatusAffect(StatusAffects.Rage);
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
 		}
-		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusAffect(StatusAffects.Berzerking) || player.hasStatusAffect(StatusAffects.Lustzerking))) {
-			if (player.hasStatusAffect(StatusAffects.Rage) && player.statusAffectv1(StatusAffects.Rage) > 5 && player.statusAffectv1(StatusAffects.Rage) < 50) player.addStatusValue(StatusAffects.Rage, 1, 10);
-			else player.createStatusAffect(StatusAffects.Rage, 10, 0, 0, 0);
+		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n", false);
@@ -545,7 +545,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(30,1);
-		player.createStatusAffect(StatusAffects.CooldownTailSlam,5,0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownTailSlam,5,0,0,0);
 		var damage:Number = 0;
 		//str bonuses
 		damage += player.str;
@@ -561,8 +561,8 @@ public class PhysicalSpecials extends BaseCombatContent{
 		if (player.findPerk(PerkLib.IronFistsV) >= 0) damage += 10;
 		if (player.findPerk(PerkLib.JobBrawler) >= 0) damage += (5 * (1 + player.newGamePlusMod()));
 		if (player.findPerk(PerkLib.JobMonk) >= 0) damage += (10 * (1 + player.newGamePlusMod()));
-		if (player.hasStatusAffect(StatusAffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
-		if (player.hasStatusAffect(StatusAffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
+		if (player.hasStatusEffect(StatusEffects.Berzerking)) damage += (30 + (15 * player.newGamePlusMod()));
+		if (player.hasStatusEffect(StatusEffects.Lustzerking)) damage += (30 + (15 * player.newGamePlusMod()));
 		//multiplicative bonuses
 		if (player.findPerk(PerkLib.HoldWithBothHands) >= 0) damage *= 1.2;
 		if (player.findPerk(PerkLib.ThunderousStrikes) >= 0 && player.str >= 80) damage *= 1.2;
@@ -577,24 +577,24 @@ public class PhysicalSpecials extends BaseCombatContent{
 			if (player.inte > 100) critChance += 10;
 		}
 		if (player.findPerk(PerkLib.Blademaster) >= 0) critChance += 5;
-		if (player.hasStatusAffect(StatusAffects.Rage)) critChance += player.statusAffectv1(StatusAffects.Rage);
+		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
 		if (rand(100) < critChance) {
 			crit = true;
 			damage *= 1.75;
 		}
 		damage = Math.round(damage);
 		damage = doDamage(damage);
-		if (!monster.hasStatusAffect(StatusAffects.TailSlamWhip)) monster.createStatusAffect(StatusAffects.TailSlamWhip,monster.armorDef,5,0,0);
+		if (!monster.hasStatusEffect(StatusEffects.TailSlamWhip)) monster.createStatusEffect(StatusEffects.TailSlamWhip,monster.armorDef,5,0,0);
 		monster.armorDef == 0;
-		monster.createStatusAffect(StatusAffects.Stunned, 2, 0, 0, 0);
+		monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 		outputText("You slam your mace like tail on your foe dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! The attack is so devastating your target is stunned by the crushing blow!", false);
 		if (crit == true) {
 			outputText(" <b>*Critical Hit!*</b>");
-			if (player.hasStatusAffect(StatusAffects.Rage)) player.removeStatusAffect(StatusAffects.Rage);
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
 		}
-		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusAffect(StatusAffects.Berzerking) || player.hasStatusAffect(StatusAffects.Lustzerking))) {
-			if (player.hasStatusAffect(StatusAffects.Rage) && player.statusAffectv1(StatusAffects.Rage) > 5 && player.statusAffectv1(StatusAffects.Rage) < 50) player.addStatusValue(StatusAffects.Rage, 1, 10);
-			else player.createStatusAffect(StatusAffects.Rage, 10, 0, 0, 0);
+		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n", false);
@@ -611,7 +611,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		}
 //This is now automatic - newRound arg defaults to true:	menuLoc = 0;
 		fatigue(30,1);
-		player.createStatusAffect(StatusAffects.CooldownWingBuffet,5,0,0,0);
+		player.createStatusEffect(StatusEffects.CooldownWingBuffet,5,0,0,0);
 		var damage:Number = 0;
 		damage += player.str/5;
 		damage += player.tou/5;
@@ -629,7 +629,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 			if (player.inte > 100) critChance += 10;
 		}
 		if (player.findPerk(PerkLib.Blademaster) >= 0) critChance += 5;
-		if (player.hasStatusAffect(StatusAffects.Rage)) critChance += player.statusAffectv1(StatusAffects.Rage);
+		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
 		if (rand(100) < critChance) {
 			crit = true;
 			damage *= 1.75;
@@ -639,13 +639,13 @@ public class PhysicalSpecials extends BaseCombatContent{
 		outputText("You buffet your foe with your massive wings dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!", false);
 		if (crit == true) {
 			outputText(" <b>*Critical Hit!*</b>");
-			if (player.hasStatusAffect(StatusAffects.Rage)) player.removeStatusAffect(StatusAffects.Rage);
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
 		}
-		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusAffect(StatusAffects.Berzerking) || player.hasStatusAffect(StatusAffects.Lustzerking))) {
-			if (player.hasStatusAffect(StatusAffects.Rage) && player.statusAffectv1(StatusAffects.Rage) > 5 && player.statusAffectv1(StatusAffects.Rage) < 50) player.addStatusValue(StatusAffects.Rage, 1, 10);
-			else player.createStatusAffect(StatusAffects.Rage, 10, 0, 0, 0);
+		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
-		monster.createStatusAffect(StatusAffects.Stunned, 1, 0, 0, 0);
+		monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		checkAchievementDamage(damage);
 		outputText("\n\n", false);
 		enemyAI();
@@ -662,7 +662,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		}
 		fatigue(50,2);
 		outputText("You ready your [weapon] and prepare to spin it around trying to whip as many " + monster.a + monster.short + " as possible.  ");
-		if ((player.hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > 80)) {
+		if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
 			if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
@@ -690,7 +690,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 			if (player.inte <= 100) critChance += (player.inte - 50) / 5;
 			if (player.inte > 100) critChance += 10;
 		}
-		if (player.hasStatusAffect(StatusAffects.Rage)) critChance += player.statusAffectv1(StatusAffects.Rage);
+		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
 		if (rand(100) < critChance) {
 			crit = true;
 			damage *= 1.75;
@@ -712,11 +712,11 @@ public class PhysicalSpecials extends BaseCombatContent{
 		outputText("Your [weapon] whipped few of " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
 		if (crit == true) {
 			outputText(" <b>*Critical Hit!*</b>");
-			if (player.hasStatusAffect(StatusAffects.Rage)) player.removeStatusAffect(StatusAffects.Rage);
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
 		}
-		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusAffect(StatusAffects.Berzerking) || player.hasStatusAffect(StatusAffects.Lustzerking))) {
-			if (player.hasStatusAffect(StatusAffects.Rage) && player.statusAffectv1(StatusAffects.Rage) > 5 && player.statusAffectv1(StatusAffects.Rage) < 50) player.addStatusValue(StatusAffects.Rage, 1, 10);
-			else player.createStatusAffect(StatusAffects.Rage, 10, 0, 0, 0);
+		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		checkAchievementDamage(damage);
 		outputText("\n\n");
@@ -735,7 +735,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		player.tailVenom -= 30;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		//Amily!
-		if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n", true);
 			enemyAI();
 			return;
@@ -746,12 +746,12 @@ public class PhysicalSpecials extends BaseCombatContent{
 			return;
 		}
 		//Blind
-		if(player.hasStatusAffect(StatusAffects.Blind)) {
+		if(player.hasStatusEffect(StatusEffects.Blind)) {
 			outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
 		}
 		else outputText("Turning and clenching muscles that no human should have, you expel a spray of sticky webs at " + monster.a + monster.short + "!  ", false);
 		//Determine if dodged!
-		if((player.hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
+		if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			outputText("You miss " + monster.a + monster.short + " completely - ", false);
 			if(monster.plural) outputText("they", false);
 			else outputText(monster.mf("he","she") + " moved out of the way!\n\n", false);
@@ -794,7 +794,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		}
 		fatigue(10,2);
 		//Amily!
-		if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
 			enemyAI();
 			return;
@@ -807,7 +807,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 			else {
 				outputText("You grab your foe with your powerfull tentacle entangling legs and arms in order to immobilize it.", false);
 			}
-			monster.createStatusAffect(StatusAffects.ConstrictedScylla,3+rand(3),0,0,0);
+			monster.createStatusEffect(StatusEffects.ConstrictedScylla, 3 + rand(3),0,0,0);
 		}
 		//Failure
 		else {
@@ -842,7 +842,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		}
 		fatigue(10,2);
 		//Amily!
-		if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
 			enemyAI();
 			return;
@@ -851,7 +851,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		//WRAP IT UPPP
 		if(40 + rand(player.spe) > monster.spe) {
 			outputText("" + monster.capitalA + monster.short + " ends up encased in your fluid form kicking and screaming to get out.", false);
-			monster.createStatusAffect(StatusAffects.GooEngulf,3+rand(3),0,0,0);
+			monster.createStatusEffect(StatusEffects.GooEngulf, 3 + rand(3),0,0,0);
 		}
 		//Failure
 		else {
@@ -877,7 +877,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 			return;
 		}
 		//Amily!
-		if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
 			enemyAI();
 			return;
@@ -889,7 +889,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 			return;
 		}
 		//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
-		if(rand(player.spe/2 + 40) + 20 > monster.spe/1.5 || monster.hasStatusAffect(StatusAffects.Constricted)) {
+		if(rand(player.spe/2 + 40) + 20 > monster.spe/1.5 || monster.hasStatusEffect(StatusEffects.Constricted)) {
 			//(if monster = demons)
 			if(monster.short == "demons") outputText("You look at the crowd for a moment, wondering which of their number you should bite. Your glance lands upon the leader of the group, easily spotted due to his snakeskin cloak. You quickly dart through the demon crowd as it closes in around you and lunge towards the broad form of the leader. You catch the demon off guard and sink your needle-like fangs deep into his flesh. You quickly release your venom and retreat before he, or the rest of the group manage to react.", false);
 			//(Otherwise)
@@ -899,12 +899,12 @@ public class PhysicalSpecials extends BaseCombatContent{
 			monster.spe -= 2;
 			if(monster.str < 1) monster.str = 1;
 			if(monster.spe < 1) monster.spe = 1;
-			if(monster.hasStatusAffect(StatusAffects.NagaVenom))
+			if(monster.hasStatusEffect(StatusEffects.NagaVenom))
 			{
-				monster.addStatusValue(StatusAffects.NagaVenom,2,2);
-				monster.addStatusValue(StatusAffects.NagaVenom,1,2);
+				monster.addStatusValue(StatusEffects.NagaVenom,2,2);
+				monster.addStatusValue(StatusEffects.NagaVenom,1,2);
 			}
-			else monster.createStatusAffect(StatusAffects.NagaVenom,2,2,0,0);
+			else monster.createStatusEffect(StatusEffects.NagaVenom,2,2,0,0);
 		}
 		else {
 			outputText("You lunge headfirst, fangs bared. Your attempt fails horrendously, as " + monster.a + monster.short + " manages to counter your lunge, knocking your head away with enough force to make your ears ring.", false);
@@ -925,7 +925,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 			return;
 		}
 		//Amily!
-		if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
 			enemyAI();
 			return;
@@ -981,7 +981,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		}
 		fatigue(10,2);
 		//Amily!
-		if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.", true);
 			enemyAI();
 			return;
@@ -993,7 +993,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 			return;
 		}
 		//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
-		if(rand(player.spe/2 + 40) + 20 > monster.spe/1.5 || monster.hasStatusAffect(StatusAffects.Constricted)) {
+		if(rand(player.spe/2 + 40) + 20 > monster.spe/1.5 || monster.hasStatusEffect(StatusEffects.Constricted)) {
 			//(if monster = demons)
 			if(monster.short == "demons") outputText("You look at the crowd for a moment, wondering which of their number you should bite. Your glance lands upon the leader of the group, easily spotted due to his snakeskin cloak. You quickly dart through the demon crowd as it closes in around you and lunge towards the broad form of the leader. You manage to catch the demon off guard, biting it viciously. The merciless cold of your bite transfer to your foe weakening it as you retreat before he manages to react.", false);
 			//(Otherwise)
@@ -1003,11 +1003,11 @@ public class PhysicalSpecials extends BaseCombatContent{
 			monster.spe -= 5 + rand(5);
 			if(monster.str < 1) monster.str = 1;
 			if(monster.spe < 1) monster.spe = 1;
-			if(monster.hasStatusAffect(StatusAffects.Frostbite))
+			if(monster.hasStatusEffect(StatusEffects.Frostbite))
 			{
-				monster.addStatusValue(StatusAffects.Frostbite,1,1);
+				monster.addStatusValue(StatusEffects.Frostbite,1,1);
 			}
-			else monster.createStatusAffect(StatusAffects.Frostbite,1,0,0,0);
+			else monster.createStatusEffect(StatusEffects.Frostbite,1,0,0,0);
 		}
 		else {
 			outputText("You lunge headfirst, maw open for a bite. Your attempt fails horrendously, as " + monster.a + monster.short + " manages to counter your lunge, knocking your head away with enough force to make your ears ring.", false);
@@ -1039,13 +1039,13 @@ public class PhysicalSpecials extends BaseCombatContent{
 		}
 		else fatigue(24, 2);
 		//Amily!
-		if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attacks thanks to her complete concentration on your movements.\n\n");
 			enemyAI();
 			return;
 		}
 		outputText("You ready your wrists mounted scythes and prepare to sweep them towards " + monster.a + monster.short + ".\n\n");
-		if ((player.hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > 80)) {
+		if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attacks!\n\n", false);
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attacks with superior quickness!\n\n", false);
 			if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attacks.\n\n", false);
@@ -1082,7 +1082,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 			if (player.inte <= 100) critChance += (player.inte - 50) / 5;
 			if (player.inte > 100) critChance += 10;
 		}
-		if (player.hasStatusAffect(StatusAffects.Rage)) critChance += player.statusAffectv1(StatusAffects.Rage);
+		if (player.hasStatusEffect(StatusEffects.Rage)) critChance += player.statusEffectv1(StatusEffects.Rage);
 		if (rand(100) < critChance) {
 			crit = true;
 			damage *= 1.75;
@@ -1093,11 +1093,11 @@ public class PhysicalSpecials extends BaseCombatContent{
 		outputText("Your scythes swiftly sweeps against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
 		if (crit == true) {
 			outputText(" <b>*Critical Hit!*</b>");
-			if (player.hasStatusAffect(StatusAffects.Rage)) player.removeStatusAffect(StatusAffects.Rage);
+			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
 		}
-		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusAffect(StatusAffects.Berzerking) || player.hasStatusAffect(StatusAffects.Lustzerking))) {
-			if (player.hasStatusAffect(StatusAffects.Rage) && player.statusAffectv1(StatusAffects.Rage) > 5 && player.statusAffectv1(StatusAffects.Rage) < 50) player.addStatusValue(StatusAffects.Rage, 1, 10);
-			else player.createStatusAffect(StatusAffects.Rage, 10, 0, 0, 0);
+		if (crit == false && player.findPerk(PerkLib.Rage) >= 0 && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
 		outputText("\n");
 		checkAchievementDamage(damage);
@@ -1167,7 +1167,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		fatigue(15,2);
 		var damage:Number = 0;
 		//Amily!
-		if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
 			enemyAI();
 			return;
@@ -1287,7 +1287,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		fatigue(15,2);
 		var damage:Number = 0;
 		//Amily!
-		if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
 			enemyAI();
 			return;
@@ -1376,7 +1376,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		}
 		//Determine if dodged!
 		//Amily!
-		if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
 			enemyAI();
 			return;
@@ -1412,12 +1412,12 @@ public class PhysicalSpecials extends BaseCombatContent{
 			monster.spe -= 10;
 			if(monster.spe < 1) monster.spe = 1;
 		}
-		if(monster.hasStatusAffect(StatusAffects.NagaVenom))
+		if(monster.hasStatusEffect(StatusEffects.NagaVenom))
 		{
-			monster.addStatusValue(StatusAffects.NagaVenom,3,5);
+			monster.addStatusValue(StatusEffects.NagaVenom,3,5);
 		}
-		else monster.createStatusAffect(StatusAffects.NagaVenom, 0, 0, 5, 0);
-		/*	if(!monster.hasStatusAffect(StatusAffects.lustvenom)) monster.createStatusAffect(StatusAffects.lustvenom, 0, 0, 0, 0);
+		else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 5, 0);
+		/*	if(!monster.hasStatusEffect(StatusEffects.lustvenom)) monster.createStatusEffect(StatusEffects.lustvenom, 0, 0, 0, 0);
 		 IT used to paralyze 50% of the time, this is no longer the case!
 		 Paralise the other 50%!
 		 else {
@@ -1459,7 +1459,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		}
 		//Determine if dodged!
 		//Amily!
-		if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n");
 			enemyAI();
 			return;
@@ -1497,12 +1497,12 @@ public class PhysicalSpecials extends BaseCombatContent{
 		monster.teased(monster.lustVuln * lustdamage);
 		monster.spe -= 10;
 		if(monster.spe < 1) monster.spe = 1;
-		if(monster.hasStatusAffect(StatusAffects.NagaVenom))
+		if(monster.hasStatusEffect(StatusEffects.NagaVenom))
 		{
-			monster.addStatusValue(StatusAffects.NagaVenom,3,5);
+			monster.addStatusValue(StatusEffects.NagaVenom,3,5);
 		}
-		else monster.createStatusAffect(StatusAffects.NagaVenom, 0, 0, 5, 0);
-		//if (!monster.hasStatusAffect(StatusAffects.lustvenom)) monster.createStatusAffect(StatusAffects.lustvenom, 0, 0, 0, 0);
+		else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 5, 0);
+		//if (!monster.hasStatusEffect(StatusEffects.lustvenom)) monster.createStatusEffect(StatusEffects.lustvenom, 0, 0, 0, 0);
 		//New line before monster attack
 		outputText("\n\n");
 		monster.spe -= (2+rand(3));
@@ -1511,9 +1511,9 @@ public class PhysicalSpecials extends BaseCombatContent{
 		player.tailVenom -= 25;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		//Kick back to main if no damage occured!
-		if(player.hasStatusAffect(StatusAffects.FirstAttack)) player.removeStatusAffect(StatusAffects.FirstAttack);
+		if(player.hasStatusEffect(StatusEffects.FirstAttack)) player.removeStatusEffect(StatusEffects.FirstAttack);
 		else {
-			if (player.findPerk(PerkLib.ManticoreMetabolism) >= 0) player.createStatusAffect(StatusAffects.FirstAttack,0,0,0,0);
+			if (player.findPerk(PerkLib.ManticoreMetabolism) >= 0) player.createStatusEffect(StatusEffects.FirstAttack,0,0,0,0);
 			playerTailSpike();
 		}
 		if(monster.HP > 0 && monster.lust < monster.eMaxLust()) enemyAI();
@@ -1523,7 +1523,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 
 	public function kissAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
-		if(player.hasStatusAffect(StatusAffects.Blind)) {
+		if(player.hasStatusEffect(StatusEffects.Blind)) {
 			outputText("There's no way you'd be able to find their lips while you're blind!", true);
 //Pass false to combatMenu instead:		menuLoc = 3;
 			doNext(psMenu);
@@ -1614,9 +1614,9 @@ public class PhysicalSpecials extends BaseCombatContent{
 				break;
 		}
 		//Add status if not already drugged
-		if(!monster.hasStatusAffect(StatusAffects.LustStick)) monster.createStatusAffect(StatusAffects.LustStick,0,0,0,0);
+		if(!monster.hasStatusEffect(StatusEffects.LustStick)) monster.createStatusEffect(StatusEffects.LustStick,0,0,0,0);
 		//Else add bonus to round damage
-		else monster.addStatusValue(StatusAffects.LustStick,2,Math.round(damage/10));
+		else monster.addStatusValue(StatusEffects.LustStick,2,Math.round(damage / 10));
 		//Deal damage
 		monster.teased(monster.lustVuln * damage);
 		outputText("\n\n");
@@ -1643,7 +1643,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		}
 		fatigue(25,2);
 		//Amily!
-		if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n", true);
 			enemyAI();
 			return;
@@ -1652,10 +1652,10 @@ public class PhysicalSpecials extends BaseCombatContent{
 		if (player.faceType == FACE_SHARK_TEETH) outputText("shark teeth extending out");
 		if (player.faceType == FACE_ORCA) outputText("sharp orca teeth shining briefly");
 		outputText(". Snarling with hunger, you lunge at your opponent, set to bite right into them!  ", true);
-		if(player.hasStatusAffect(StatusAffects.Blind)) outputText("In hindsight, trying to bite someone while blind was probably a bad idea... ", false);
+		if(player.hasStatusEffect(StatusEffects.Blind)) outputText("In hindsight, trying to bite someone while blind was probably a bad idea... ", false);
 		var damage:Number = 0;
 		//Determine if dodged!
-		if((player.hasStatusAffect(StatusAffects.Blind) && rand(3) != 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
+		if((player.hasStatusEffect(StatusEffects.Blind) && rand(3) != 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
 			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
 			if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
@@ -1665,10 +1665,10 @@ public class PhysicalSpecials extends BaseCombatContent{
 		}
 		//Determine damage - str modified by enemy toughness!
 		damage = int((player.str + player.spe) * 3 * (monster.damagePercent() / 100));
-		if (!monster.hasStatusAffect(StatusAffects.SharkBiteBleed)) monster.createStatusAffect(StatusAffects.SharkBiteBleed,15,0,0,0);
+		if (!monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
 		else {
-			monster.removeStatusAffect(StatusAffects.SharkBiteBleed);
-			monster.createStatusAffect(StatusAffects.SharkBiteBleed,15,0,0,0);
+			monster.removeStatusEffect(StatusEffects.SharkBiteBleed);
+			monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
 		}
 
 		//Deal damage and update based on perks
@@ -1742,13 +1742,13 @@ public class PhysicalSpecials extends BaseCombatContent{
 			return;
 		}
 		//Amily!
-		if(monster.hasStatusAffect(StatusAffects.Concentration)) {
+		if(monster.hasStatusEffect(StatusEffects.Concentration)) {
 			outputText("Amily easily glides around your attack thanks to her complete concentration on your movements.\n\n", true);
 			enemyAI();
 			return;
 		}
 		//Blind
-		if(player.hasStatusAffect(StatusAffects.Blind)) {
+		if(player.hasStatusEffect(StatusEffects.Blind)) {
 			outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ", false);
 		}
 		//Worms are special
@@ -1774,7 +1774,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 		}
 		var damage:Number;
 		//Determine if dodged!
-		if((player.hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80)) {
+		if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			//Akbal dodges special education
 			if(monster.short == "Akbal") outputText("Akbal moves like lightning, weaving in and out of your furious attack with the speed and grace befitting his jaguar body.\n", false);
 			else {
@@ -1849,7 +1849,7 @@ public class PhysicalSpecials extends BaseCombatContent{
 			return;
 		}
 		outputText("You ready your [shield] and prepare to slam it towards " + monster.a + monster.short + ".  ");
-		if ((player.hasStatusAffect(StatusAffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe-player.spe) / 4) + 80)) > 80)) {
+		if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!", false);
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!", false);
 			if (monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.", false);
@@ -1860,15 +1860,15 @@ public class PhysicalSpecials extends BaseCombatContent{
 		if (player.findPerk(PerkLib.ShieldSlam) >= 0) damage *= 1.2;
 		if (player.findPerk(PerkLib.SteelImpact) >= 0) damage += ((player.tou - 50) * 0.3);
 		damage *= (monster.damagePercent() / 100);
-		var chance:int = Math.floor(monster.statusAffectv1(StatusAffects.TimesBashed) + 1);
+		var chance:int = Math.floor(monster.statusEffectv1(StatusEffects.TimesBashed) + 1);
 		if (chance > 10) chance = 10;
 		damage = doDamage(damage);
 		outputText("Your [shield] slams against " + monster.a + monster.short + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage! ");
-		if (!monster.hasStatusAffect(StatusAffects.Stunned) && rand(chance) == 0) {
+		if (!monster.hasStatusEffect(StatusEffects.Stunned) && rand(chance) == 0) {
 			outputText("<b>Your impact also manages to stun " + monster.a + monster.short + "!</b> ");
-			monster.createStatusAffect(StatusAffects.Stunned, 1, 0, 0, 0);
-			if (!monster.hasStatusAffect(StatusAffects.TimesBashed)) monster.createStatusAffect(StatusAffects.TimesBashed, player.findPerk(PerkLib.ShieldSlam) >= 0 ? 0.5 : 1, 0, 0, 0);
-			else monster.addStatusValue(StatusAffects.TimesBashed, 1, player.findPerk(PerkLib.ShieldSlam) >= 0 ? 0.5 : 1);
+			monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			if (!monster.hasStatusEffect(StatusEffects.TimesBashed)) monster.createStatusEffect(StatusEffects.TimesBashed, player.findPerk(PerkLib.ShieldSlam) >= 0 ? 0.5 : 1, 0, 0, 0);
+			else monster.addStatusValue(StatusEffects.TimesBashed, 1, player.findPerk(PerkLib.ShieldSlam) >= 0 ? 0.5 : 1);
 		}
 		checkAchievementDamage(damage);
 		fatigue(20,2);

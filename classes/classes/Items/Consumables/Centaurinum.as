@@ -7,7 +7,7 @@ import classes.CoC_Settings;
 import classes.CockTypesEnum;
 import classes.Items.Consumable;
 import classes.PerkLib;
-import classes.StatusAffects;
+import classes.StatusEffects;
 
 public class Centaurinum extends Consumable{
 	public function Centaurinum() {
@@ -236,7 +236,7 @@ public class Centaurinum extends Consumable{
 					changes++;
 				}
 			}
-			if (player.statusAffectv2(StatusAffects.Heat) < 30 && rand(2) == 0 && changes < changeLimit) {
+			if (player.statusEffectv2(StatusEffects.Heat) < 30 && rand(2) == 0 && changes < changeLimit) {
 				if (player.goIntoHeat(true)) {
 					changes++;
 				}

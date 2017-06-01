@@ -80,16 +80,16 @@ package classes.Scenes.NPCs
 				}
 			}
 			//Ember fuck cooldown
-			if (player.statusAffectv1(StatusAffects.EmberFuckCooldown) > 0) {
-				player.addStatusValue(StatusAffects.EmberFuckCooldown,1,-1);
-				if (player.statusAffectv1(StatusAffects.EmberFuckCooldown) < 1) player.removeStatusAffect(StatusAffects.EmberFuckCooldown);
+			if (player.statusEffectv1(StatusEffects.EmberFuckCooldown) > 0) {
+				player.addStatusValue(StatusEffects.EmberFuckCooldown,1,-1);
+				if (player.statusEffectv1(StatusEffects.EmberFuckCooldown) < 1) player.removeStatusEffect(StatusEffects.EmberFuckCooldown);
 			}
 			//Ember napping
-			if (player.hasStatusAffect(StatusAffects.EmberNapping)) {
-				player.addStatusValue(StatusAffects.EmberNapping,1,-1);
-				if (player.statusAffectv1(StatusAffects.EmberNapping) <= 0) player.removeStatusAffect(StatusAffects.EmberNapping);
+			if (player.hasStatusEffect(StatusEffects.EmberNapping)) {
+				player.addStatusValue(StatusEffects.EmberNapping,1,-1);
+				if (player.statusEffectv1(StatusEffects.EmberNapping) <= 0) player.removeStatusEffect(StatusEffects.EmberNapping);
 			}
-			if (followerEmber() && !player.hasStatusAffect(StatusAffects.EmberNapping)) {
+			if (followerEmber() && !player.hasStatusEffect(StatusEffects.EmberNapping)) {
 				//Mino cum freakout - PC partly addicted!
 				if (flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 1 && player.findPerk(PerkLib.MinotaurCumAddict) < 0 && flags[kFLAGS.EMBER_CURRENTLY_FREAKING_ABOUT_MINOCUM] == 0) {
 					minotaurJizzFreakout();
@@ -119,7 +119,7 @@ package classes.Scenes.NPCs
 		}
 	
 		public function timeChangeLarge():Boolean {
-			if (!player.hasStatusAffect(StatusAffects.EmberNapping) && followerEmber() && !player.hasStatusAffect(StatusAffects.EmberFuckCooldown)) {
+			if (!player.hasStatusEffect(StatusEffects.EmberNapping) && followerEmber() && !player.hasStatusEffect(StatusEffects.EmberFuckCooldown)) {
 				//Ember get's a whiff of fuckscent and knocks up PC!
 				if (player.hasVagina() && player.inHeat && player.pregnancyIncubation == 0 && rand(10) == 0 && (flags[kFLAGS.EMBER_GENDER] == 1 || flags[kFLAGS.EMBER_GENDER] == 3)) {
 					emberRapesYourHeatness();
@@ -1153,7 +1153,7 @@ package classes.Scenes.NPCs
 				else if (subChoice == 2) outputText("a pair of muscle-bound bull-men beating on each other with their bare fists. They spent over an hour smashing each other into a bloody pulp, and then the winner promptly started fucking the loser up the ass.  I had seen more than enough by that point, so I left.");
 				else if (subChoice == 3) outputText("this... creature... that looked kind of like a human woman, but with a big dick where her clit should be.  She was walking around stark naked, 'cept for a bunch of piercings, and leading this bull-man along like a pet by a chain attached to a ring anchored into his cockhead.");
 				else if (subChoice == 4) outputText("a couple of goblins sharpening scissors on some rocks outside of a cave with a door on it. Weird. Wonder what they could be doing in there?");
-				else if (!player.hasStatusAffect(StatusAffects.WormsOff) && rand(2) == 0) outputText("a horrible swarm of slimy white worms, clumped together into a mockery of a human form and squelching along.  It managed to latch onto this two-headed dog-creature and... ugh!  The worms started forcing their way into both of its cocks!  I've never seen anything so disgusting!");
+				else if (!player.hasStatusEffect(StatusEffects.WormsOff) && rand(2) == 0) outputText("a horrible swarm of slimy white worms, clumped together into a mockery of a human form and squelching along.  It managed to latch onto this two-headed dog-creature and... ugh!  The worms started forcing their way into both of its cocks!  I've never seen anything so disgusting!");
 				else if (subChoice == 5) outputText("this two-headed dog-morph loping around; it spotted an imp, dropped to all fours, then gave chase. Managed to catch the ugly little demon, whereupon it ass-raped it, then ate it.");
 			}
 			else if (choice == 1) { //Forest
@@ -1170,7 +1170,7 @@ package classes.Scenes.NPCs
 				//(If player has not yet impregnated Tamani)
 				else if (subChoice == 3 && !kGAMECLASS.forest.tamaniScene.pregnancy.isPregnant) outputText("one goblin being teased by a bunch of pregnant goblins for not being pregnant yet.  She just spat back that she wanted a 'better catch' to be her baby-maker than a mere imp and wandered off.");
 				//(If Jojo isn't in the camp & not corrupt)
-				else if (rand(2) == 0 && monk <= 1 && !player.hasStatusAffect(StatusAffects.PureCampJojo)) outputText("this mouse-morph monk, sitting in a glade and meditating. A goblin tried to proposition him; he just gave her a lecture and sent her running away in tears.  When an imp tried to attack him, he crushed its skull with a staff he had.  Not bad moves for such a weedy little thing...");
+				else if (rand(2) == 0 && monk <= 1 && !player.hasStatusEffect(StatusEffects.PureCampJojo)) outputText("this mouse-morph monk, sitting in a glade and meditating. A goblin tried to proposition him; he just gave her a lecture and sent her running away in tears.  When an imp tried to attack him, he crushed its skull with a staff he had.  Not bad moves for such a weedy little thing...");
 				else outputText("one glade I touched down in to catch myself a nice brace of plump coneys, when all of a sudden this... this thing made out of flailing vines and fruit attacks me.  It went up in a puff of smoke once I torched it, of course.");
 			}
 			else if (choice == 2) { //Lake
@@ -1183,12 +1183,12 @@ package classes.Scenes.NPCs
 				}
 				else {
 					//(If Whitney's Farm is not yet in the Places menu)
-					if (rand(3) == 0 && player.statusAffectv1(StatusAffects.MetWhitney) <= 1) outputText(" a big farm on the shoreline.  I saw some sort of cow-woman tending to fields of peppers, and a dog-woman herding cattle. They looked pretty fat and tasty, too... What?  I meant the cattle, stupid!  And I wouldn't have taken them - it's no fun snatching up livestock.  I prefer to chase down a deer or a wild auroch or something like that.");
+					if (rand(3) == 0 && player.statusEffectv1(StatusEffects.MetWhitney) <= 1) outputText(" a big farm on the shoreline.  I saw some sort of cow-woman tending to fields of peppers, and a dog-woman herding cattle. They looked pretty fat and tasty, too... What?  I meant the cattle, stupid!  And I wouldn't have taken them - it's no fun snatching up livestock.  I prefer to chase down a deer or a wild auroch or something like that.");
 					//(if Fetish Cult is encounterable)
-					else if (rand(3) == 0 && player.hasStatusAffect(StatusAffects.FetishOn)) outputText("a pair of humans, arguing about sex.  They both wanted it, but the guy said he wanted to do the 'naughty schoolboy and female teacher' routine, while the girl wanted to do the 'noblewoman and love-servant' routine.  Weird; their clothes kept changing back and forth as they argued.");
+					else if (rand(3) == 0 && player.hasStatusEffect(StatusEffects.FetishOn)) outputText("a pair of humans, arguing about sex.  They both wanted it, but the guy said he wanted to do the 'naughty schoolboy and female teacher' routine, while the girl wanted to do the 'noblewoman and love-servant' routine.  Weird; their clothes kept changing back and forth as they argued.");
 					//(If Beautiful Sword has not been acquired)
-					else if (rand(3) == 0 && !player.hasStatusAffect(StatusAffects.TookBlessedSword) && !player.hasStatusAffect(StatusAffects.BSwordBroken)) outputText("a sword jammed into a tree.  Weird; what kind of idiot would stick a weapon there like that?  And what kind of weakling wouldn't be able to take it out?");
-					else if (rand(3) == 0 && !player.hasStatusAffect(StatusAffects.CampRathazul)) outputText("a smelly rat-man moping around while some weird equipment bubbled and boiled.  I think maybe he was an alchemist.");
+					else if (rand(3) == 0 && !player.hasStatusEffect(StatusEffects.TookBlessedSword) && !player.hasStatusEffect(StatusEffects.BSwordBroken)) outputText("a sword jammed into a tree.  Weird; what kind of idiot would stick a weapon there like that?  And what kind of weakling wouldn't be able to take it out?");
+					else if (rand(3) == 0 && !player.hasStatusEffect(StatusEffects.CampRathazul)) outputText("a smelly rat-man moping around while some weird equipment bubbled and boiled.  I think maybe he was an alchemist.");
 					else outputText("a great blob of green goo, sliding along and minding its own business.  I could swear it looked up at me once, and grew a penis... that can't be right, though.");
 				}
 			}
@@ -1198,7 +1198,7 @@ package classes.Scenes.NPCs
 				if (subChoice == 0) outputText("a woman with four big breasts, squeezing milk out of her tits and into the sand.  I didn't know breasts could hold that much milk!");
 				else if (subChoice == 1) outputText("a whole tribe of demons, lounging around an oasis.  Would have been too much bother to kick the crap out of them, so I left them alone - well, alright, I did buzz them to make them scatter like scared sheep for fun.");
 				//(if player hasn't solved Marcus & Lucia's argument)
-				else if (rand(2) == 0 && !player.hasStatusAffect(StatusAffects.WandererDemon) && !player.hasStatusAffect(StatusAffects.WandererHuman)) outputText("a human with balls so big he had to carry them in a wheelbarrow, trundling through the wasteland with a succubus.  They were arguing about whether or not he should become an incubus.");
+				else if (rand(2) == 0 && !player.hasStatusEffect(StatusEffects.WandererDemon) && !player.hasStatusEffect(StatusEffects.WandererHuman)) outputText("a human with balls so big he had to carry them in a wheelbarrow, trundling through the wasteland with a succubus.  They were arguing about whether or not he should become an incubus.");
 				else {
 					outputText("this strange creature, like a woman with a snake's tail for legs, slithering through the sand.  ");
 					if (player.isNaga()) outputText("She looked a lot like you.");
@@ -1730,9 +1730,9 @@ package classes.Scenes.NPCs
 			//Arms
 			if (player.armType != ARM_TYPE_DRAGON && player.lowerBody == LOWER_BODY_TYPE_DRAGON && changes < changeLimit && rand(3) == 0) {
 				outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch.  After longer moment of ignoring it you finaly glancing down in irritation, only to discover that your arms former appearance changed into this of dragon one with leathery scales and short claws replacing your fingernails.  <b>You now have a dragon arms.</b>", false);
-			//	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusAffect(StatusAffects.UnlockedLizardArms)) {
+			//	if (player.findPerk(PerkLib.GeneticMemory) >= 0 && !player.hasStatusEffect(StatusEffects.UnlockedLizardArms)) {
 			//		outputText("\n\n<b>Genetic Memory: Lizard Arms - Memorized!</b>\n\n");
-			//		player.createStatusAffect(StatusAffects.UnlockedLizardArms, 0, 0, 0, 0);
+			//		player.createStatusEffect(StatusEffects.UnlockedLizardArms, 0, 0, 0, 0);
 			//	}
 				player.armType = ARM_TYPE_DRAGON;
 				changes++;
@@ -2083,8 +2083,8 @@ package classes.Scenes.NPCs
 				outputText("\n\nEmber flushes with embarrassment.  \"<i>I-I... That's it!  No more milk for you!</i>\" " + emberMF("he", "she") + " declares, hauling you upright and shooing you out of her den.");
 				outputText("\n\nYou shake your head with good temper.  Still, you got your fill of her milk, and you feel refreshed and renewed, new vitality flowing through your veins.");
 				//(PC's D.Breath timer = not ready: Your throat feels soothed as the scratching and soreness die down; you feel like you could shout to the mountaintops!)
-				if (player.hasStatusAffect(StatusAffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungs) < 0) {
-					player.removeStatusAffect(StatusAffects.DragonBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown) && player.findPerk(PerkLib.DraconicLungs) < 0) {
+					player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
 					outputText("  Your throat feels soothed as the scratching and soreness die down; you feel like you could shout to the mountaintops!");
 				}
 				player.refillHunger(25);
@@ -2146,8 +2146,8 @@ package classes.Scenes.NPCs
 				outputText("\n\nEmber can't hide the faintest of smiles that graces " + emberMF("his", "her") + " scaly face.  You yelp softly as you feel a sharp prick against your belly; when you feel it again, you jump out of Ember's lap to reveal the clawed finger prodding you.  \"<i>Payback for teasing me earlier.  And don't think I'll be feeding you my milk everytime you ask,</i>\" " + emberMF("he", "she") + " finishes, with a small puff of smoke.");
 				outputText("\n\nYou can't resist pointing out that " + emberMF("he", "she") + " certainly seemed eager to let you drink your fill, and you didn't hear any complaining over " + emberMF("his", "her") + " purring.  Before " + emberMF("he", "she") + " can rebut that, you turn and leave the dragon in " + emberMF("his", "her") + " den.");
 				outputText("\n\nThe drink you got did you plenty of good; you feel refreshed and renewed, new vitality flowing through your veins.");
-				if (player.hasStatusAffect(StatusAffects.DragonBreathCooldown)) {
-					player.removeStatusAffect(StatusAffects.DragonBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) {
+					player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
 					outputText("  Your throat feels soothed as the scratching and soreness die down; you feel like you could shout to the mountaintops!");
 				}
 				player.refillHunger(50);
@@ -2220,8 +2220,8 @@ package classes.Scenes.NPCs
 				outputText("\n\nThe soft purrs that accompany each suckle and the soft caresses on your body, bringing you ever closer to these two motherlodes of Ember-flavoured treasure, only serve to enhance the whole experience.");
 
 				outputText("\n\nEventually, your swallows of the rich, freely-flowing, creamy dragon-milk cease as your stomach fills up.");
-				if (player.hasStatusAffect(StatusAffects.DragonBreathCooldown)) {
-					player.removeStatusAffect(StatusAffects.DragonBreathCooldown);
+				if (player.hasStatusEffect(StatusEffects.DragonBreathCooldown)) {
+					player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
 					outputText("  Your throat feels soothed as the scratching and soreness die down; you feel like you could shout to the mountaintops!");
 				}
 				outputText("  You tell your dragon that you're finished.  You're up and turning to leave when a looping tail around your waist stops you.");
@@ -3459,7 +3459,7 @@ package classes.Scenes.NPCs
 			emberAffection(-10);
 			if (flags[kFLAGS.EMBER_AFFECTION] < 75 && flags[kFLAGS.SLEEP_WITH] == "Ember") flags[kFLAGS.SLEEP_WITH] = "";
 			//Set some cooldown so this doesn't proc all the goddamn time!
-			player.createStatusAffect(StatusAffects.EmberFuckCooldown, 12, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.EmberFuckCooldown, 12, 0, 0, 0);
 			doNext(playerMenu);
 		}
 
@@ -3587,7 +3587,7 @@ package classes.Scenes.NPCs
 			dynStats("sen", -2);
 			//Preg shit goez hurdur
 			player.knockUp(PregnancyStore.PREGNANCY_EMBER, PregnancyStore.INCUBATION_EMBER, 0); //Will always impregnate unless contraceptives are in use
-			player.createStatusAffect(StatusAffects.EmberFuckCooldown, 36, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.EmberFuckCooldown, 36, 0, 0, 0);
 			doNext(createCallBackFunction(emberBreedingAfterMathWatchOutForRadioactiveFallout,false));
 		}
 
@@ -3690,8 +3690,8 @@ package classes.Scenes.NPCs
 
 			//knock dat phat bitch up.
 			pregnancy.knockUp(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_EMBER);
-			player.createStatusAffect(StatusAffects.EmberFuckCooldown, 36, 0, 0, 0);
-			player.removeStatusAffect(StatusAffects.Rut);
+			player.createStatusEffect(StatusEffects.EmberFuckCooldown, 36, 0, 0, 0);
+			player.removeStatusEffect(StatusEffects.Rut);
 			player.orgasm();
 			dynStats("sen", -2);
 			doNext(createCallBackFunction(emberBreedingAfterMathWatchOutForRadioactiveFallout,true));
@@ -3936,7 +3936,7 @@ package classes.Scenes.NPCs
 				outputText("\n\nYou wake up a short while later.  Ember's breasts are completely drained of their milk, and your belly is bulging a bit from the amount you've drank.  Ember sleeps softly under you.  Gently you extract yourself from Ember's embrace - a difficult task, considering Ember's tail is intent on holding you like a boa constrictor.  Eventually though, you manage to withdraw yourself from its insistent grip and slowly sneak out of the den.\n");
 				flags[kFLAGS.EMBER_EGGS]++;
 			}
-			player.createStatusAffect(StatusAffects.EmberNapping, 12, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.EmberNapping, 12, 0, 0, 0);
 		}
 
 
@@ -4086,7 +4086,7 @@ package classes.Scenes.NPCs
 				outputText("scurries away, even as you pull yourself upright and get ready to go about your business.\n");
 				flags[kFLAGS.EMBER_EGGS]++;
 			}
-			player.createStatusAffect(StatusAffects.EmberNapping, 5, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.EmberNapping, 5, 0, 0, 0);
 		}
 
 //Requirements (Either)
@@ -4730,7 +4730,7 @@ package classes.Scenes.NPCs
 					outputText("\n\nYou've been at this for quite some time now... how many times have you drained Ember's breasts?  Four?  Five?  You don't know... and besides that, you're feeling rather tired yourself... plus all this milk sloshing inside your belly does not help keep you awake... still you must press on...");
 					outputText("\n\n<b>Even later...</b>");
 					outputText("\n\nWith a final powerful suckle, you finally drain the last of Ember's milk... for the 8th time you believe... tired and full... you don't even bother getting off the sleeping dragon.  You settle your head between Ember's soft, milky mounds, and surrounded by their soft " + (flags[kFLAGS.EMBER_ROUNDFACE] == 0 ? "scales" : "flesh") + ", you fall asleep right there...");
-					player.removeStatusAffect(StatusAffects.DragonBreathCooldown);
+					player.removeStatusEffect(StatusEffects.DragonBreathCooldown);
 					player.slimeFeed();
 					fatigue(-40);
 				}

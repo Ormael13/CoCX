@@ -1627,12 +1627,12 @@ import classes.Perks.*;
 		ElementalArrows.requireLevel(42)
 					   .requirePerk(PrestigeJobArcaneArcher)
 					   .requireCustomFunction(function(player: Player): Boolean {
-						   return player.hasStatusAffect(StatusAffects.KnowsWhitefire) || player.hasStatusAffect(StatusAffects.KnowsIceSpike)
+						   return player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasStatusEffect(StatusEffects.KnowsIceSpike)
 					   }, "Whitefire or Ice Spike spell");
 		//Tier 8 Speed Perks
 		Cupid.requireLevel(48)
 			 .requirePerk(PrestigeJobArcaneArcher)
-			 .requireStatusEffect(StatusAffects.KnowsArouse, "Arouse spell");
+			 .requireStatusEffect(StatusEffects.KnowsArouse, "Arouse spell");
 		//------------
 		// INTELLIGENCE
 		//------------
@@ -1702,7 +1702,7 @@ import classes.Perks.*;
 		RagingInferno.requirePerk(Archmage)
 					 .requirePerk(Channeling)
 					 .requireCustomFunction(function (player:Player):Boolean {
-						 return player.hasStatusAffect(StatusAffects.KnowsWhitefire)
+						 return player.hasStatusEffect(StatusEffects.KnowsWhitefire)
 								|| player.hasPerk(DragonFireBreath)
 								|| player.hasPerk(FireLord)
 								|| player.hasPerk(Hellfire)
@@ -1714,8 +1714,8 @@ import classes.Perks.*;
 		GlacialStorm.requirePerk(Archmage)
 					.requirePerk(Channeling)
 					.requireCustomFunction(function (player:Player):Boolean {
-						return player.hasStatusAffect(StatusAffects.KnowsIceSpike)
-							   || player.hasStatusAffect(StatusAffects.KnowsIceRain)
+						return player.hasStatusEffect(StatusEffects.KnowsIceSpike)
+							   || player.hasStatusEffect(StatusEffects.KnowsIceRain)
 							   || player.hasPerk(DragonIceBreath)
 					}, "Any ice spell")
 					.requireLevel(12)
@@ -1726,13 +1726,13 @@ import classes.Perks.*;
 				  .requirePerk(JobEnchanter)
 				  .requireInt(80)
 				  .requirePerk(Channeling)
-				  .requireStatusEffect(StatusAffects.KnowsMight, "Might spell");
+				  .requireStatusEffect(StatusEffects.KnowsMight, "Might spell");
 		// Spellsword: auto-use Charge Weapon
 		Spellsword.requireLevel(12)
 				  .requirePerk(JobEnchanter)
 				  .requirePerk(Channeling)
 				  .requireInt(80)
-				  .requireStatusEffect(StatusAffects.KnowsCharge, "Charge spell");
+				  .requireStatusEffect(StatusEffects.KnowsCharge, "Charge spell");
 		MindOverBodyIV.requirePerk(MindOverBodyIII)
 					  .requireInt(110)
 					  .requireNGPlus(3)
@@ -1749,12 +1749,12 @@ import classes.Perks.*;
 		Battleflash.requireLevel(18)
 				   .requirePerk(Battlemage)
 				   .requireInt(90)
-				   .requireStatusEffect(StatusAffects.KnowsBlink, "Blink spell");
+				   .requireStatusEffect(StatusEffects.KnowsBlink, "Blink spell");
 		// Spellarmor: auto-use Charge Armor
 		Spellarmor.requireLevel(18)
 				  .requirePerk(Spellsword)
 				  .requireInt(90)
-				  .requireStatusEffect(StatusAffects.KnowsChargeA, "Charge Armor spell");
+				  .requireStatusEffect(StatusEffects.KnowsChargeA, "Charge Armor spell");
 		//Tier 4 Intelligence perks
 		GreyMage.requirePerk(GrandArchmage)
 				.requirePerk(FocusedMind)
@@ -1869,7 +1869,7 @@ import classes.Perks.*;
 		Transference.requirePerk(JobEromancer)
 					.requireLevel(12)
 					.requireLib(50)
-					.requireStatusEffect(StatusAffects.KnowsArouse, "Arouse spell");
+					.requireStatusEffect(StatusEffects.KnowsArouse, "Arouse spell");
 		//Tier 3 Libido Perks
 		DemonicDesireIV.requirePerk(DemonicDesireIII)
 					   .requireLib(135)

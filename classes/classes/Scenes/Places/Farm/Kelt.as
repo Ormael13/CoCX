@@ -33,7 +33,7 @@ package classes.Scenes.Places.Farm
 
 		//Arrow Attack
 		private function keltShootBow():void {
-			createStatusAffect(StatusAffects.BowCooldown,3,0,0,0);
+			createStatusEffect(StatusEffects.BowCooldown,3,0,0,0);
 			outputText("Kelt knocks and fires an arrow almost faster than you can track.  He's lost none of his talent with a bow, even after everything you've put him through.  ");
 
 			//Miss:
@@ -88,9 +88,9 @@ package classes.Scenes.Places.Farm
 
 		override protected function performCombatAction():void
 		{
-			if (statusAffectv1(StatusAffects.BowCooldown) > 0) {
-				addStatusValue(StatusAffects.BowCooldown, 1, -1);
-				if (statusAffectv1(StatusAffects.BowCooldown) <= 0) removeStatusAffect(StatusAffects.BowCooldown);
+			if (statusEffectv1(StatusEffects.BowCooldown) > 0) {
+				addStatusValue(StatusEffects.BowCooldown, 1, -1);
+				if (statusEffectv1(StatusEffects.BowCooldown) <= 0) removeStatusEffect(StatusEffects.BowCooldown);
 			}
 			else {
 				if (rand(2) == 0 && flags[kFLAGS.KELT_BREAK_LEVEL] >= 2) dayDreamKelly();
@@ -143,7 +143,7 @@ package classes.Scenes.Places.Farm
 			this.createBreastRow(Appearance.breastCupInverse(breakLevel2?"B":"A"));
 			this.ass.analLooseness = ANAL_LOOSENESS_NORMAL;
 			this.ass.analWetness = ANAL_WETNESS_DRY;
-			this.createStatusAffect(StatusAffects.BonusACapacity,50,0,0,0);
+			this.createStatusEffect(StatusEffects.BonusACapacity,50,0,0,0);
 			this.tallness = 84;
 			this.hipRating = HIP_RATING_AVERAGE;
 			this.buttRating = BUTT_RATING_AVERAGE+1;

@@ -26,7 +26,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			var damage:Number = 5;
 			damage = player.takeDamage(damage, true);
 			if(player.findPerk(PerkLib.Resolute) >= 0) outputText("  Of course, your resolute posture prevents her from accomplishing much.");
-			else player.createStatusAffect(StatusAffects.Stunned,0,0,0,0);
+			else player.createStatusEffect(StatusEffects.Stunned,0,0,0,0);
 			game.combatRoundOver();
 		}
 
@@ -38,8 +38,8 @@ package classes.Scenes.Dungeons.HelDungeon
 		}
 		override protected function performCombatAction():void
 		{
-			if(player.hasStatusAffect(StatusAffects.Stunned)) {
-				player.removeStatusAffect(StatusAffects.Stunned);
+			if(player.hasStatusEffect(StatusEffects.Stunned)) {
+				player.removeStatusEffect(StatusEffects.Stunned);
 				if(rand(2) == 0) BrigidAssGrind();
 				else brigidPoke();
 				return;
@@ -69,7 +69,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			// this.plural = false;
 			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_LOOSE);
 			if (LOWER_BODY_TYPE_HARPY > 0) {
-				this.createStatusAffect(StatusAffects.BonusVCapacity, LOWER_BODY_TYPE_HARPY, 0, 0, 0);
+				this.createStatusEffect(StatusEffects.BonusVCapacity, LOWER_BODY_TYPE_HARPY, 0, 0, 0);
 			}
 			createBreastRow(Appearance.breastCupInverse("D"));
 			this.ass.analLooseness = ANAL_LOOSENESS_STRETCHED;

@@ -21,7 +21,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			//(Effect: Grab + Physical Damage)
 			var damage:int = 25 + rand(10);
 			damage = player.takeDamage(damage, true);
-			createStatusAffect(StatusAffects.QueenBind,0,0,0,0);
+			createStatusEffect(StatusEffects.QueenBind,0,0,0,0);
 			combatRoundOver();
 		}
 
@@ -36,7 +36,7 @@ package classes.Scenes.Dungeons.HelDungeon
 			}
 			else {
 				outputText("With supreme effort, you pull free of the magic ropes, causing the queen to tumble to her hands and knees.");
-				removeStatusAffect(StatusAffects.QueenBind);
+				removeStatusEffect(StatusEffects.QueenBind);
 			}
 			combatRoundOver();
 		}
@@ -64,8 +64,8 @@ package classes.Scenes.Dungeons.HelDungeon
 			var damage:int = inte + rand(50) * SpellMod();
 			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
 			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
-			if (player.hasStatusAffect(StatusAffects.Blizzard)) {
-			player.addStatusValue(StatusAffects.Blizzard, 1, -1);
+			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
+			player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 			outputText("Luckly protective ice maelstorm still surrounding you lessening amount of damage.  ");
 			damage *= 0.2;
 			}

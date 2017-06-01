@@ -47,20 +47,20 @@ package classes.Scenes.Explore {
 		}
 		
 		public function timeChangeLarge():Boolean {
-			if (checkedSuccubi++ == 0 && model.time.hours == 4 && player.hasStatusAffect(StatusAffects.SuccubiNight) && (player.hasCock() || player.gender == 0)) { //Call secksins!
-				if (player.hasStatusAffect(StatusAffects.RepeatSuccubi)) {
+			if (checkedSuccubi++ == 0 && model.time.hours == 4 && player.hasStatusEffect(StatusEffects.SuccubiNight) && (player.hasCock() || player.gender == 0)) { //Call secksins!
+				if (player.hasStatusEffect(StatusEffects.RepeatSuccubi)) {
 					if (getGame().vapula.vapulaSlave() && player.hasCock() && flags[kFLAGS.VAPULA_THREESOMES] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) //VapulaSurprise
 						getGame().vapula.vapulaAssistsCeruleanSuccubus();
 					else nightSuccubiRepeat(); //Normal night succubi shit
 				}
 				else {
 					nightSuccubiFirstTime();
-					player.createStatusAffect(StatusAffects.RepeatSuccubi, 0, 0, 0, 0);
+					player.createStatusEffect(StatusEffects.RepeatSuccubi, 0, 0, 0, 0);
 				}
 				//Lower count if multiples stacked up.
-				if (player.statusAffectv1(StatusAffects.SuccubiNight) > 1)
-					player.addStatusValue(StatusAffects.SuccubiNight, 1, -1);
-				else player.removeStatusAffect(StatusAffects.SuccubiNight);
+				if (player.statusEffectv1(StatusEffects.SuccubiNight) > 1)
+					player.addStatusValue(StatusEffects.SuccubiNight, 1, -1);
+				else player.removeStatusEffect(StatusEffects.SuccubiNight);
 				return true;
 			}
 			return false;
@@ -73,14 +73,14 @@ package classes.Scenes.Explore {
 			if (kGAMECLASS.giacomo == 0) {
 				firstEncounter();
 			}
-			else if (!player.hasStatusAffect(StatusAffects.WormOffer) && player.hasStatusAffect(StatusAffects.Infested)) { //If infested && no worm offer yet
+			else if (!player.hasStatusEffect(StatusEffects.WormOffer) && player.hasStatusEffect(StatusEffects.Infested)) { //If infested && no worm offer yet
 				outputText("Upon walking up to Giacomo's wagon, he turns to look at you and cocks an eyebrow in curiosity and mild amusement.\n\n");
 				outputText("\"<i>Been playing with creatures best left alone, I see</i>,\" he chuckles.  \"<i>Infestations of any kind are annoying, yet your plight is quite challenging given the magnitude of corrupt creatures around here.  It is not the first time I have seen one infested with THOSE worms.</i>\"\n\n");
 				outputText("You ask how he knows of your change and the merchant giggles heartily.\n\n");
 				outputText("\"<i>Do not look at me as if I am a mystic,</i>\" Giacomo heckles lightly.  \"<i>Your crotch is squirming.</i>\"\n\n");
 				outputText("Looking down, you realize how right he is and attempt to cover yourself in embarrassment.\n\n");
 				outputText("\"<i>Fear not!</i>\" the purveyor jingles.  \"<i>I have something that will cure you of those little bastards.  Of course, there is also a chance that it will purge your system in general.  This potion is not cheap.  I will trade it for 175 gems.</i>\"\n\n");
-				player.createStatusAffect(StatusAffects.WormOffer, 0, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.WormOffer, 0, 0, 0, 0);
 				if (player.gems < 175) { //Broke as a joke
 					outputText("You realize you don't have enough gems for such a pricey potion, but perhaps there is something else in his inventory you can buy.");
 				}
@@ -95,12 +95,12 @@ package classes.Scenes.Explore {
 				outputText("You spy the merchant Giacomo in the distance.  He makes a beeline for you, setting up his shop in moments.  ");
 				outputText("Giacomo's grin is nothing short of creepy as he offers his wares to you. What are you interested in?");
 			}
-			//var deworm:Function = (player.hasStatusAffect(StatusAffects.WormOffer) && player.hasStatusAffect(StatusAffects.Infested) ? wormRemovalOffer : null);
+			//var deworm:Function = (player.hasStatusEffect(StatusEffects.WormOffer) && player.hasStatusEffect(StatusEffects.Infested) ? wormRemovalOffer : null);
 			menu();
 			addButton(0, "Potions", potionMenu);
 			addButton(1, "Books", bookMenu);
 			addButton(2, "Erotica", eroticaMenu);
-			if (player.hasStatusAffect(StatusAffects.WormOffer) && player.hasStatusAffect(StatusAffects.Infested)) addButton(3, "Worm Cure", wormRemovalOffer);
+			if (player.hasStatusEffect(StatusEffects.WormOffer) && player.hasStatusEffect(StatusEffects.Infested)) addButton(3, "Worm Cure", wormRemovalOffer);
 			addButton(4, "Leave", camp.returnToCampUseOneHour);
 			statScreenRefresh();
 		}
@@ -642,7 +642,7 @@ package classes.Scenes.Explore {
 			if (player.HP > int(player.maxHP() * .15))
 				player.HP = int(player.maxHP() * .15);
 			//Maybe add a random chance of losing a random transformation with a smaller chance of losing ALL transformations except gender changes. This will probably be a bitch to implement.
-			player.removeStatusAffect(StatusAffects.Infested);
+			player.removeStatusEffect(StatusEffects.Infested);
 			dynStats("lib", -1, "lus", -99, "cor", -4);
 			player.gems -= 175;
 			statScreenRefresh();
@@ -890,7 +890,7 @@ package classes.Scenes.Explore {
 					//Clear out any queue'ed events if bad-end
 					//coming.  PC has to dig his own grave.
 					if(flags[kFLAGS.CERULEAN_POTION_BAD_END_FUTA_COUNTER] > 10) {
-						player.removeStatusAffect(StatusAffects.SuccubiNight);
+						player.removeStatusEffect(StatusEffects.SuccubiNight);
 					}
 					fatigue(20);
 					player.cumMultiplier++;

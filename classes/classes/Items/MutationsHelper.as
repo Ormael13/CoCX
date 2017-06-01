@@ -2,8 +2,8 @@ package classes.Items {
 	import classes.*;
 	import classes.BodyParts.Skin;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.StatusAffects;
-	import classes.StatusAffects;
+	import classes.StatusEffects;
+	import classes.StatusEffects;
 
 	/**
 	 * Helper class to get rid of the copy&paste-mess in classes.Items.Mutations
@@ -266,29 +266,29 @@ package classes.Items {
 		return setBodyPartType("antennae", METAMORPH_ANTENNAE, antennae);
 	}
 	private const METAMORPH_ANTENNAE:Object = createMapFromPairs([
-		[ANTENNAE_BEE, StatusAffects.UnlockedBeeAntennae],
+		[ANTENNAE_BEE, StatusEffects.UnlockedBeeAntennae],
 	]);
 	public function setArmType(armType:int):Boolean {
 		return setBodyPartType("armType", METAMORPH_ARMS, armType);
 	}
 	private const METAMORPH_ARMS:Object = createMapFromPairs([
-		[ARM_TYPE_BEE, StatusAffects.UnlockedBeeArms],
+		[ARM_TYPE_BEE, StatusEffects.UnlockedBeeArms],
 		[ARM_TYPE_DRAGON, null],
-		[ARM_TYPE_FOX, StatusAffects.UnlockedFoxArms],
+		[ARM_TYPE_FOX, StatusEffects.UnlockedFoxArms],
 		[ARM_TYPE_GARGOYLE, null],
-		[ARM_TYPE_HARPY, StatusAffects.UnlockedHarpyArms],
+		[ARM_TYPE_HARPY, StatusEffects.UnlockedHarpyArms],
 		[ARM_TYPE_HUMAN, null],
-		[ARM_TYPE_KITSUNE, StatusAffects.UnlockedKitsuneArms],
+		[ARM_TYPE_KITSUNE, StatusEffects.UnlockedKitsuneArms],
 		[ARM_TYPE_LION, null],
-		[ARM_TYPE_LIZARD, StatusAffects.UnlockedLizardArms],
+		[ARM_TYPE_LIZARD, StatusEffects.UnlockedLizardArms],
 		[ARM_TYPE_MANTIS, null],
 		[ARM_TYPE_ORCA, null],
 		[ARM_TYPE_PHOENIX, null],
 		[ARM_TYPE_PLANT, null],
 		[ARM_TYPE_PLANT2, null],
 		[ARM_TYPE_SALAMANDER, null],
-		[ARM_TYPE_SHARK, StatusAffects.UnlockedSharkArms],
-		[ARM_TYPE_SPIDER, StatusAffects.UnlockedSpiderArms],
+		[ARM_TYPE_SHARK, StatusEffects.UnlockedSharkArms],
+		[ARM_TYPE_SPIDER, StatusEffects.UnlockedSpiderArms],
 		[ARM_TYPE_WOLF, null],
 		[ARM_TYPE_YETI, null],
 	]);
@@ -304,14 +304,14 @@ package classes.Items {
 		[EARS_DOG, null],
 		[EARS_DRAGON, null],
 		[EARS_ECHIDNA, null],
-		[EARS_ELFIN, StatusAffects.UnlockedElfinEars],
+		[EARS_ELFIN, StatusEffects.UnlockedElfinEars],
 		[EARS_FERRET, null],
-		[EARS_FOX, StatusAffects.UnlockedFoxEars],
+		[EARS_FOX, StatusEffects.UnlockedFoxEars],
 		[EARS_HORSE, null],
 		[EARS_HUMAN, null],
 		[EARS_KANGAROO, null],
 		[EARS_LION, null],
-		[EARS_LIZARD, StatusAffects.UnlockedLizardEars],
+		[EARS_LIZARD, StatusEffects.UnlockedLizardEars],
 		[EARS_MOUSE, null],
 		[EARS_ORCA, null],
 		[EARS_PIG, null],
@@ -330,12 +330,12 @@ package classes.Items {
 		[EYES_CAT_SLITS, null],
 		[EYES_DRAGON, null],
 		[EYES_FENRIR, null],
-		[EYES_FOUR_SPIDER_EYES, StatusAffects.UnlockedSpiderFourEyes],
-		[EYES_FOX, StatusAffects.UnlockedFoxEyes],
+		[EYES_FOUR_SPIDER_EYES, StatusEffects.UnlockedSpiderFourEyes],
+		[EYES_FOX, StatusEffects.UnlockedFoxEyes],
 		[EYES_GORGON, null],
 		[EYES_HUMAN, null],
 		[EYES_MANTICORE, null],
-		[EYES_REPTILIAN, StatusAffects.UnlockedLizardEyes],
+		[EYES_REPTILIAN, StatusEffects.UnlockedLizardEyes],
 		[EYES_SNAKE, null],
 	]);
 
@@ -358,7 +358,7 @@ package classes.Items {
 		[FACE_HORSE, null],
 		[FACE_HUMAN, null],
 		[FACE_KANGAROO, null],
-		[FACE_LIZARD, StatusAffects.UnlockedLizardFace],
+		[FACE_LIZARD, StatusEffects.UnlockedLizardFace],
 		[FACE_MANTICORE, null],
 		[FACE_MOUSE, null],
 		[FACE_ORCA, null],
@@ -368,9 +368,9 @@ package classes.Items {
 		[FACE_RACCOON_MASK, null],
 		[FACE_RHINO, null],
 		[FACE_SALAMANDER_FANGS, null],
-		[FACE_SHARK_TEETH, StatusAffects.UnlockedSharkTeeth],
+		[FACE_SHARK_TEETH, StatusEffects.UnlockedSharkTeeth],
 		[FACE_SNAKE_FANGS, null],
-		[FACE_SPIDER_FANGS, StatusAffects.UnlockedSpiderFangs],
+		[FACE_SPIDER_FANGS, StatusEffects.UnlockedSpiderFangs],
 		[FACE_WOLF, null],
 		[FACE_YETI_FANGS, null],
 	]);
@@ -380,7 +380,7 @@ package classes.Items {
 	}
 	private const METAMORPH_GILLS:Object = createMapFromPairs([
 		[GILLS_ANEMONE, null],
-		[GILLS_FISH, StatusAffects.UnlockedFishGills],
+		[GILLS_FISH, StatusEffects.UnlockedFishGills],
 		[GILLS_IN_TENTACLE_LEGS, null],
 		[GILLS_NONE, null],
 	]);
@@ -390,7 +390,7 @@ package classes.Items {
 	}
 	private const METAMORPH_HAIR_TYPES:Object = createMapFromPairs([
 		[HAIR_ANEMONE, null],
-		[HAIR_FEATHER, StatusAffects.UnlockedHarpyHair],
+		[HAIR_FEATHER, StatusEffects.UnlockedHarpyHair],
 		[HAIR_FLUFFY, null],
 		[HAIR_GHOST, null],
 		[HAIR_GOO, null],
@@ -413,9 +413,9 @@ package classes.Items {
 	private const METAMORPH_HORNS:Object = createMapFromPairs([
 		[HORNS_ANTLERS, null],
 		[HORNS_COW_MINOTAUR, null],
-		[HORNS_DEMON, StatusAffects.UnlockedDemonHorns],
-		[HORNS_DRACONIC_X2, StatusAffects.UnlockedDraconicX2],
-		[HORNS_DRACONIC_X4_12_INCH_LONG, StatusAffects.UnlockedDraconicX4],
+		[HORNS_DEMON, StatusEffects.UnlockedDemonHorns],
+		[HORNS_DRACONIC_X2, StatusEffects.UnlockedDraconicX2],
+		[HORNS_DRACONIC_X4_12_INCH_LONG, StatusEffects.UnlockedDraconicX4],
 		[HORNS_GARGOYLE, null],
 		[HORNS_GOAT, null],
 		[HORNS_NONE, null],
@@ -429,29 +429,29 @@ package classes.Items {
 		return setBodyPartType("lowerBody", METAMORPH_LOWER_BODIES, lowerBody);
 	}
 	private const METAMORPH_LOWER_BODIES:Object = createMapFromPairs([
-		[LOWER_BODY_TYPE_BEE, StatusAffects.UnlockedBeeLegs],
+		[LOWER_BODY_TYPE_BEE, StatusEffects.UnlockedBeeLegs],
 		[LOWER_BODY_TYPE_BUNNY, null],
 		[LOWER_BODY_TYPE_CAT, null],
 		[LOWER_BODY_TYPE_CENTAUR, null],
-		[LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS, StatusAffects.UnlockedSpiderLegs],
+		[LOWER_BODY_TYPE_CHITINOUS_SPIDER_LEGS, StatusEffects.UnlockedSpiderLegs],
 		[LOWER_BODY_TYPE_CLOVEN_HOOFED, null],
 		[LOWER_BODY_TYPE_DEERTAUR, null],
-		[LOWER_BODY_TYPE_DEMONIC_CLAWS, StatusAffects.UnlockedDemonClawedLegs],
-		[LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS, StatusAffects.UnlockedDemonHighHeels],
+		[LOWER_BODY_TYPE_DEMONIC_CLAWS, StatusEffects.UnlockedDemonClawedLegs],
+		[LOWER_BODY_TYPE_DEMONIC_HIGH_HEELS, StatusEffects.UnlockedDemonHighHeels],
 		[LOWER_BODY_TYPE_DOG, null],
 		[LOWER_BODY_TYPE_DRAGON, null],
-		[LOWER_BODY_TYPE_DRIDER_LOWER_BODY, StatusAffects.UnlockedDriderLegs],
+		[LOWER_BODY_TYPE_DRIDER_LOWER_BODY, StatusEffects.UnlockedDriderLegs],
 		[LOWER_BODY_TYPE_ECHIDNA, null],
 		[LOWER_BODY_TYPE_FERRET, null],
-		[LOWER_BODY_TYPE_FOX, StatusAffects.UnlockedFoxLowerBody],
+		[LOWER_BODY_TYPE_FOX, StatusEffects.UnlockedFoxLowerBody],
 		[LOWER_BODY_TYPE_GARGOYLE, null],
 		[LOWER_BODY_TYPE_GOO, null],
-		[LOWER_BODY_TYPE_HARPY, StatusAffects.UnlockedHarpyLegs],
+		[LOWER_BODY_TYPE_HARPY, StatusEffects.UnlockedHarpyLegs],
 		[LOWER_BODY_TYPE_HOOFED, null],
 		[LOWER_BODY_TYPE_HUMAN, null],
 		[LOWER_BODY_TYPE_KANGAROO, null],
 		[LOWER_BODY_TYPE_LION, null],
-		[LOWER_BODY_TYPE_LIZARD, StatusAffects.UnlockedLizardLegs],
+		[LOWER_BODY_TYPE_LIZARD, StatusEffects.UnlockedLizardLegs],
 		[LOWER_BODY_TYPE_MANTIS, null],
 		[LOWER_BODY_TYPE_NAGA, null],
 		[LOWER_BODY_TYPE_ORCA, null],
@@ -462,7 +462,7 @@ package classes.Items {
 		[LOWER_BODY_TYPE_RACCOON, null],
 		[LOWER_BODY_TYPE_SALAMANDER, null],
 		[LOWER_BODY_TYPE_SCYLLA, null],
-		[LOWER_BODY_TYPE_SHARK, StatusAffects.UnlockedSharkLegs],
+		[LOWER_BODY_TYPE_SHARK, StatusEffects.UnlockedSharkLegs],
 		[LOWER_BODY_TYPE_WOLF, null],
 		[LOWER_BODY_TYPE_YETI, null],
 		[LOWER_BODY_TYPE_YGG_ROOT_CLAWS, null],
@@ -479,7 +479,7 @@ package classes.Items {
 		[REAR_BODY_LION_MANE, null],
 		[REAR_BODY_NONE, null],
 		[REAR_BODY_ORCA_BLOWHOLE, null],
-		[REAR_BODY_SHARK_FIN, StatusAffects.UnlockedSharkFin],
+		[REAR_BODY_SHARK_FIN, StatusEffects.UnlockedSharkFin],
 	]);
 
 	public function setTongueType(tongueType:int):Boolean {
@@ -489,7 +489,7 @@ package classes.Items {
 	// but changing that would break the saves
 	private const METAMORPH_TONGUES:Object = createMapFromPairs([
 		[TONUGE_CAT, [null, "Cat Tongue"]],
-		[TONUGE_DEMONIC, [StatusAffects.UnlockedDemonTonuge, "Demonic Tongue"]],
+		[TONUGE_DEMONIC, [StatusEffects.UnlockedDemonTonuge, "Demonic Tongue"]],
 		[TONUGE_DRACONIC, [null, "Draconic Tongue"]],
 		[TONUGE_ECHIDNA, [null, "Echidna Tongue"]],
 		[TONUGE_HUMAN, [null, "Human Tongue"]],
@@ -512,24 +512,24 @@ package classes.Items {
 		}
 	}
 	private const METAMORPH_TAILS:Object     = createMapFromPairs([
-		[TAIL_TYPE_BEE_ABDOMEN, StatusAffects.UnlockedBeeTail],
+		[TAIL_TYPE_BEE_ABDOMEN, StatusEffects.UnlockedBeeTail],
 		[TAIL_TYPE_BEHEMOTH, null],
 		[TAIL_TYPE_CAT, null],
 		[TAIL_TYPE_COW, null],
 		[TAIL_TYPE_DEER, null],
-		[TAIL_TYPE_DEMONIC, StatusAffects.UnlockedDemonTail],
+		[TAIL_TYPE_DEMONIC, StatusEffects.UnlockedDemonTail],
 		[TAIL_TYPE_DOG, null],
 		[TAIL_TYPE_DRACONIC, null],
 		[TAIL_TYPE_ECHIDNA, null],
 		[TAIL_TYPE_FERRET, null],
-		[TAIL_TYPE_FOX, StatusAffects.UnlockedFoxTail],
+		[TAIL_TYPE_FOX, StatusEffects.UnlockedFoxTail],
 		[TAIL_TYPE_GARGOYLE, null],
 		[TAIL_TYPE_GOAT, null],
-		[TAIL_TYPE_HARPY, StatusAffects.UnlockedHarpyTail],
+		[TAIL_TYPE_HARPY, StatusEffects.UnlockedHarpyTail],
 		[TAIL_TYPE_HORSE, null],
 		[TAIL_TYPE_KANGAROO, null],
 		[TAIL_TYPE_KITSHOO, null],
-		[TAIL_TYPE_LIZARD, StatusAffects.UnlockedLizardTail],
+		[TAIL_TYPE_LIZARD, StatusEffects.UnlockedLizardTail],
 		[TAIL_TYPE_MANTICORE_PUSSYTAIL, null],
 		[TAIL_TYPE_MANTIS_ABDOMEN, null],
 		[TAIL_TYPE_MOUSE, null],
@@ -541,18 +541,18 @@ package classes.Items {
 		[TAIL_TYPE_RHINO, null],
 		[TAIL_TYPE_SALAMANDER, null],
 		[TAIL_TYPE_SCORPION, null],
-		[TAIL_TYPE_SHARK, StatusAffects.UnlockedSharkTail],
-		[TAIL_TYPE_SPIDER_ADBOMEN, StatusAffects.UnlockedSpiderTail],
+		[TAIL_TYPE_SHARK, StatusEffects.UnlockedSharkTail],
+		[TAIL_TYPE_SPIDER_ADBOMEN, StatusEffects.UnlockedSpiderTail],
 		[TAIL_TYPE_WOLF, null],
 		[TAIL_TYPE_YGGDRASIL, null],
 	]);
 	private const METAMORPH_FOX_TAILS:Object = createMapFromPairs([
-		[1, StatusAffects.UnlockedFoxTail],
-		[2, StatusAffects.UnlockedFoxTail2nd],
-		[3, StatusAffects.UnlockedFoxTail3rd],
-		[4, StatusAffects.UnlockedFoxTail4th],
-		[5, StatusAffects.UnlockedFoxTail5th],
-		[6, StatusAffects.UnlockedFoxTail6th]
+		[1, StatusEffects.UnlockedFoxTail],
+		[2, StatusEffects.UnlockedFoxTail2nd],
+		[3, StatusEffects.UnlockedFoxTail3rd],
+		[4, StatusEffects.UnlockedFoxTail4th],
+		[5, StatusEffects.UnlockedFoxTail5th],
+		[6, StatusEffects.UnlockedFoxTail6th]
 	]);
 
 	public function setWingType(wingType:int, wingDesc:String):Boolean {
@@ -561,16 +561,16 @@ package classes.Items {
 		return a;
 	}
 	private const METAMORPH_WINGS:Object = createMapFromPairs([
-		[WING_TYPE_BAT_LIKE_LARGE, StatusAffects.UnlockedDemonLargeBatWings],
-		[WING_TYPE_BAT_LIKE_LARGE_2, StatusAffects.UnlockedDemonLargeBatWings2],
-		[WING_TYPE_BAT_LIKE_TINY, StatusAffects.UnlockedDemonTinyBatWings],
-		[WING_TYPE_BEE_LIKE_LARGE, StatusAffects.UnlockedBeeWingsLarge],
-		[WING_TYPE_BEE_LIKE_SMALL, StatusAffects.UnlockedBeeWingsSmall],
+		[WING_TYPE_BAT_LIKE_LARGE, StatusEffects.UnlockedDemonLargeBatWings],
+		[WING_TYPE_BAT_LIKE_LARGE_2, StatusEffects.UnlockedDemonLargeBatWings2],
+		[WING_TYPE_BAT_LIKE_TINY, StatusEffects.UnlockedDemonTinyBatWings],
+		[WING_TYPE_BEE_LIKE_LARGE, StatusEffects.UnlockedBeeWingsLarge],
+		[WING_TYPE_BEE_LIKE_SMALL, StatusEffects.UnlockedBeeWingsSmall],
 		[WING_TYPE_DRACONIC_HUGE, null],
 		[WING_TYPE_DRACONIC_LARGE, null],
 		[WING_TYPE_DRACONIC_SMALL, null],
 		[WING_TYPE_FEATHERED_ALICORN, null],
-		[WING_TYPE_FEATHERED_LARGE, StatusAffects.UnlockedHarpyWings],
+		[WING_TYPE_FEATHERED_LARGE, StatusEffects.UnlockedHarpyWings],
 		[WING_TYPE_FEATHERED_PHOENIX, null],
 		[WING_TYPE_GARGOYLE_LIKE_LARGE, null],
 		[WING_TYPE_GIANT_DRAGONFLY, null],
@@ -600,15 +600,15 @@ package classes.Items {
 		if (o is Array) {
 			return addGeneticMemory(o[0], o[1]);
 		} else if (o != null) {
-			var sat:StatusAffectType = o;
+			var sat:StatusEffectType = o;
 			return addGeneticMemory(sat, sat.id.replace("Unlocked ", ""));
 		} else return false;
 	}
-	public function addGeneticMemory(sat:StatusAffectType, name:String = null):Boolean {
+	public function addGeneticMemory(sat:StatusEffectType, name:String = null):Boolean {
 		if (player.findPerk(PerkLib.GeneticMemory) < 0) return false;
-		if (sat != null && !player.hasStatusAffect(sat)) {
+		if (sat != null && !player.hasStatusEffect(sat)) {
 			outputText("\n\n<b>Genetic Memory: " + name + " - Memorized!</b>\n\n");
-			player.createStatusAffect(sat, 0, 0, 0, 0);
+			player.createStatusEffect(sat, 0, 0, 0, 0);
 			return true;
 		}
 		return false;

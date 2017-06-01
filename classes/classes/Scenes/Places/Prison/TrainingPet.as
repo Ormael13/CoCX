@@ -84,11 +84,11 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorPetOptedOut():Boolean
 		{
 			var testVal:* = undefined;
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyPet))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyPet))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyPet,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyPet,0,0,0,0);
 			}
-			testVal = player.statusAffectv1(StatusAffects.PrisonCaptorEllyPet);
+			testVal = player.statusEffectv1(StatusEffects.PrisonCaptorEllyPet);
 			if(testVal < 0)
 			{
 				return true;
@@ -98,30 +98,30 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorPetScore():Number
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyPet))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyPet))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyPet,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyPet,0,0,0,0);
 			}
-			return player.statusAffectv1(StatusAffects.PrisonCaptorEllyPet);
+			return player.statusEffectv1(StatusEffects.PrisonCaptorEllyPet);
 		}
 		
 		public function prisonCaptorPetScoreSet(newVal:Number):void
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyPet))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyPet))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyPet,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyPet,0,0,0,0);
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyPet,1,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyPet,1,newVal);
 		}
 		
 		public function prisonCaptorPetScoreChange(changeVal:Number):void
 		{
 			var newVal:* = undefined;
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyPet))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyPet))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyPet,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyPet,0,0,0,0);
 			}
-			newVal = player.statusAffectv1(StatusAffects.PrisonCaptorEllyPet) + changeVal;
+			newVal = player.statusEffectv1(StatusEffects.PrisonCaptorEllyPet) + changeVal;
 			if(newVal < 0)
 			{
 				newVal = 0;
@@ -130,25 +130,25 @@ package classes.Scenes.Places.Prison
 			{
 				newVal = 100;
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyPet,1,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyPet,1,newVal);
 		}
 		
 		public function prisonCaptorPetTier():Number
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyPet))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyPet))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyPet,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyPet,0,0,0,0);
 			}
-			return player.statusAffectv2(StatusAffects.PrisonCaptorEllyPet);
+			return player.statusEffectv2(StatusEffects.PrisonCaptorEllyPet);
 		}
 		
 		public function prisonCaptorPetTierSet(newVal:Number):void
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyPet))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyPet))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyPet,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyPet,0,0,0,0);
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyPet,2,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyPet,2,newVal);
 		}
 		
 		public function prisonCaptorPetTierUpdate(forceUpdate:Boolean = false):void
@@ -189,30 +189,30 @@ package classes.Scenes.Places.Prison
 		
 		public function prisonCaptorPetEvent():Number
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyPet))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyPet))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyPet,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyPet,0,0,0,0);
 			}
-			return player.statusAffectv3(StatusAffects.PrisonCaptorEllyPet);
+			return player.statusEffectv3(StatusEffects.PrisonCaptorEllyPet);
 		}
 		
 		public function prisonCaptorPetEventSet(newVal:Number):void
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyPet))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyPet))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyPet,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyPet,0,0,0,0);
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyPet,3,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyPet,3,newVal);
 		}
 		
 		public function prisonCaptorPetEventChange(changeVal:Number):void
 		{
 			var newVal:* = undefined;
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyPet))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyPet))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyPet,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyPet,0,0,0,0);
 			}
-			newVal = player.statusAffectv3(StatusAffects.PrisonCaptorEllyPet) + changeVal;
+			newVal = player.statusEffectv3(StatusEffects.PrisonCaptorEllyPet) + changeVal;
 			if(newVal < 0)
 			{
 				newVal = 0;
@@ -221,35 +221,35 @@ package classes.Scenes.Places.Prison
 			{
 				newVal = 100;
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyPet,3,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyPet,3,newVal);
 		}
 		
 		public function prisonCaptorPetScratch():Number
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyPet))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyPet))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyPet,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyPet,0,0,0,0);
 			}
-			return player.statusAffectv4(StatusAffects.PrisonCaptorEllyPet);
+			return player.statusEffectv4(StatusEffects.PrisonCaptorEllyPet);
 		}
 		
 		public function prisonCaptorPetScratchSet(newVal:Number):void
 		{
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyPet))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyPet))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyPet,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyPet,0,0,0,0);
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyPet,4,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyPet,4,newVal);
 		}
 		
 		public function prisonCaptorPetScratchChange(changeVal:Number):void
 		{
 			var newVal:* = undefined;
-			if(!player.hasStatusAffect(StatusAffects.PrisonCaptorEllyPet))
+			if(!player.hasStatusEffect(StatusEffects.PrisonCaptorEllyPet))
 			{
-				player.createStatusAffect(StatusAffects.PrisonCaptorEllyPet,0,0,0,0);
+				player.createStatusEffect(StatusEffects.PrisonCaptorEllyPet,0,0,0,0);
 			}
-			newVal = player.statusAffectv4(StatusAffects.PrisonCaptorEllyPet) + changeVal;
+			newVal = player.statusEffectv4(StatusEffects.PrisonCaptorEllyPet) + changeVal;
 			if(newVal < 0)
 			{
 				newVal = 0;
@@ -258,7 +258,7 @@ package classes.Scenes.Places.Prison
 			{
 				newVal = 100;
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyPet,4,newVal);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyPet,4,newVal);
 		}
 		
 		public function prisonCaptorPetLickCumBowl(branchChoice:String, previousEvent:Function = null):void
@@ -895,12 +895,12 @@ package classes.Scenes.Places.Prison
 			clearOutput();
 			if(branchChoice == "choose")
 			{
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,4,0);
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,4,0);
 				prison.changeEsteem(20, prison.inPrison);
 			}
 			else
 			{
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,4,1);
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,4,1);
 			}
 			outputText("(Placeholder) (Training Crate Intro) PC opts-out -- oops too late. Elly laments that she needs to begin with such a harsh lesson, but tells the PC [he] needs to learn to behave if they're ever going to get anywhere.\n\n");
 			outputText("(Placeholder) (Training Crate Intro) Mistress Elly snaps her fingers, and within moments the door opens and two imps enter the room hauling a sizeable rectangular cage between them -- apparently she was well prepared for your resistance. Once the imps have set it up in the corner of your cell and departed, she hauls you roughly by your collar towards the open door on the cage's broad side. It appears as though it was designed to house a large dog, being roughly twice as long as it is wide and tall, and as she ushers you inside with a stern spank on your [ass] you find that there is only barely enough room for you to turn about, and space enough for you to rise to your hands and knees, but no higher. Thankfully the cage is furnished with a large, soft pad, allowing you to rest comfortably within. It is also equipped with a water dish and a food bowl, although the latter is notably empty.\n\n");
@@ -909,15 +909,15 @@ package classes.Scenes.Places.Prison
 			{
 				prisonCaptorPetTierUpdate(true);
 			}
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,3,0);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3,0);
 			if(player.hasKeyItem("Training Crate - Installed In Prison Cell") < 0)
 			{
 				player.createKeyItem("Training Crate - Installed In Prison Cell",0,0,0,0);
 			}
-			player.changeStatusValue(StatusAffects.PrisonRestraints,1,2);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,2,0);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,3,0);
-			player.changeStatusValue(StatusAffects.PrisonRestraints,4,0);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,1,2);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,2,0);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,3,0);
+			player.changeStatusValue(StatusEffects.PrisonRestraints,4,0);
 			flags[kFLAGS.PRISON_PUNISHMENT] = 4;
 			doNext(playerMenu);
 		}
@@ -925,7 +925,7 @@ package classes.Scenes.Places.Prison
 		public function prisonCaptorPetTrainingCrateBehave(branchChoice:String = "choose"):void
 		{
 			var behaviorCounter:int = 0;
-			behaviorCounter = player.statusAffectv3(StatusAffects.PrisonCaptorEllyStatus) + 1;
+			behaviorCounter = player.statusEffectv3(StatusEffects.PrisonCaptorEllyStatus) + 1;
 			if(player.fatigue > player.maxFatigue() - 20)
 			{
 				outputText("(Placeholder) (Training Crate Behave) You pass an hour trying to behave but are too cramped and fatigued to get comfortable, and end up wallowing and whining instead.\n\n");
@@ -951,7 +951,7 @@ package classes.Scenes.Places.Prison
 			
 			fatigue(7);
 			outputText("(Placeholder) new behavior value is " + behaviorCounter + "\n\n");
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,3,behaviorCounter);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3,behaviorCounter);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -971,9 +971,9 @@ package classes.Scenes.Places.Prison
 				prison.changeEsteem(2);
 			}
 			prison.changeWill(-10);
-			behaviorCounter = player.statusAffectv3(StatusAffects.PrisonCaptorEllyStatus) - 2;
+			behaviorCounter = player.statusEffectv3(StatusEffects.PrisonCaptorEllyStatus) - 2;
 			outputText("(Placeholder) new behavior value is " + behaviorCounter + "\n\n");
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,3,behaviorCounter);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3,behaviorCounter);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -982,9 +982,9 @@ package classes.Scenes.Places.Prison
 			var behaviorCounter:int = undefined;
 			outputText("(Placeholder) (Training Crate Masturbate) Overwhelmed with desire, you sheepishly masturbate, staining your bedding with your fluids.\n\n");
 			player.orgasm();
-			behaviorCounter = player.statusAffectv3(StatusAffects.PrisonCaptorEllyStatus) - 2;
+			behaviorCounter = player.statusEffectv3(StatusEffects.PrisonCaptorEllyStatus) - 2;
 			outputText("(Placeholder) new behavior value is " + behaviorCounter + "\n\n");
-			player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,3,behaviorCounter);
+			player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3,behaviorCounter);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -995,7 +995,7 @@ package classes.Scenes.Places.Prison
 			var behaviorCounter:* = undefined;
 			corChange = 0;
 			lustChange = 0;
-			behaviorCounter = player.statusAffectv3(StatusAffects.PrisonCaptorEllyStatus);
+			behaviorCounter = player.statusEffectv3(StatusEffects.PrisonCaptorEllyStatus);
 			if(branchChoice == "choose")
 			{
 				outputText("(Placeholder) (Training Crate Callout) Politely as you can, you call out for  Mistress Elly. She comes to see you, makes some comments about your current state of esteem, lust, hunger, and fatigue, as well as your recent behavior. She then asks \"<i>What's wrong [boy]?</i>\"\n\n");
@@ -1038,9 +1038,9 @@ package classes.Scenes.Places.Prison
 				else
 				{
 					outputText("(Placeholder) (Training Crate Callout) She feeds you, but probably with variations based on recent behavior.\n\n");
-					behaviorCounter = player.statusAffectv3(StatusAffects.PrisonCaptorEllyStatus) + 1;
+					behaviorCounter = player.statusEffectv3(StatusEffects.PrisonCaptorEllyStatus) + 1;
 					outputText("(Placeholder) new behavior value is " + behaviorCounter + "\n\n");
-					player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,3,behaviorCounter);
+					player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3,behaviorCounter);
 					prison.changeEsteem(-1, prison.inPrison);
 					player.refillHunger(50);
 				}
@@ -1070,9 +1070,9 @@ package classes.Scenes.Places.Prison
 					outputText("(Placeholder) (Training Crate Callout) You allow her to leash you, and she walks you around your cell so that you can stretch and work the cramps out of your muscles.\n\n");
 					prison.changeEsteem(-2, prison.inPrison);
 					fatigue(-50);
-					behaviorCounter = player.statusAffectv3(StatusAffects.PrisonCaptorEllyStatus) + 2;
+					behaviorCounter = player.statusEffectv3(StatusEffects.PrisonCaptorEllyStatus) + 2;
 					outputText("(Placeholder) new behavior value is " + behaviorCounter + "\n\n");
-					player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,3,behaviorCounter);
+					player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3,behaviorCounter);
 					corChange = -0.25;
 					dynStats("cor", corChange);
 				}
@@ -1081,9 +1081,9 @@ package classes.Scenes.Places.Prison
 					clearOutput();
 					outputText("(Placeholder) (Training Crate Callout) You decline her offer. She chastises you, and leaves you to continue to stew in your cage. \n\n");
 					prison.changeEsteem(1, prison.inPrison);
-					behaviorCounter = player.statusAffectv3(StatusAffects.PrisonCaptorEllyStatus) - 1;
+					behaviorCounter = player.statusEffectv3(StatusEffects.PrisonCaptorEllyStatus) - 1;
 					outputText("(Placeholder) new behavior value is " + behaviorCounter + "\n\n");
-					player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,3,behaviorCounter);
+					player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3,behaviorCounter);
 					corChange = -0.25;
 					dynStats("cor", corChange);
 				}
@@ -1100,9 +1100,9 @@ package classes.Scenes.Places.Prison
 						outputText("(Placeholder) (Training Crate Callout) She allows you to exit your cage and masturbate at her feet.\n\n");
 					}
 					prison.changeEsteem(-1, prison.inPrison);
-					behaviorCounter = player.statusAffectv3(StatusAffects.PrisonCaptorEllyStatus) + 1;
+					behaviorCounter = player.statusEffectv3(StatusEffects.PrisonCaptorEllyStatus) + 1;
 					outputText("(Placeholder) new behavior value is " + behaviorCounter + "\n\n");
-					player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,3,behaviorCounter);
+					player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3,behaviorCounter);
 					player.orgasm();
 					corChange = -0.25;
 					dynStats("cor", corChange);
@@ -1119,9 +1119,9 @@ package classes.Scenes.Places.Prison
 					{
 						outputText("(Placeholder) (Training Crate Callout) Aww, you just wanted to see me that badly, eh? Still, a good dog doesn't bother [his] owner.\n\n");
 					}
-					behaviorCounter = player.statusAffectv3(StatusAffects.PrisonCaptorEllyStatus) - 1;
+					behaviorCounter = player.statusEffectv3(StatusEffects.PrisonCaptorEllyStatus) - 1;
 					outputText("(Placeholder) new behavior value is " + behaviorCounter + "\n\n");
-					player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,3,behaviorCounter);
+					player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3,behaviorCounter);
 				}
 				
 				
@@ -1136,8 +1136,8 @@ package classes.Scenes.Places.Prison
 			var behaviorCounter:int = 0;
 			var trainingSource:int = 0;
 			var entryPath:Number = 0;
-			behaviorCounter = player.statusAffectv3(StatusAffects.PrisonCaptorEllyStatus);
-			trainingSource = player.statusAffectv4(StatusAffects.PrisonCaptorEllyStatus);
+			behaviorCounter = player.statusEffectv3(StatusEffects.PrisonCaptorEllyStatus);
+			trainingSource = player.statusEffectv4(StatusEffects.PrisonCaptorEllyStatus);
 			entryPath = prisonCaptorPetScratch();
 			if(!(entryPath == 1) && !(entryPath == 2))
 			{
@@ -1194,8 +1194,8 @@ package classes.Scenes.Places.Prison
 				clearOutput();
 				outputText("(Placeholder) (Training Crate Leash) You can't bring yourself to go any farther at the moment. Perhaps if you focus on behaving like a good dog, you might be able to get your ego in check enough to ask her to train you.\n\n");
 				prison.changeEsteem(0.5, prison.inPrison);
-				behaviorCounter = player.statusAffectv3(StatusAffects.PrisonCaptorEllyStatus) - 1;
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,3,behaviorCounter);
+				behaviorCounter = player.statusEffectv3(StatusEffects.PrisonCaptorEllyStatus) - 1;
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,3,behaviorCounter);
 			}
 			else
 			{
@@ -1264,10 +1264,10 @@ package classes.Scenes.Places.Prison
 					prisonCaptorPetScratchSet(0);
 					prison.prisonCaptor.updateNextWaitRandomEvent(model.time.hours, model.time.days);
 					prison.prisonCaptor.updateNextRoomRandomEvent(model.time.hours, model.time.days);
-					player.changeStatusValue(StatusAffects.PrisonRestraints,1,2);
-					player.changeStatusValue(StatusAffects.PrisonRestraints,2,0);
-					player.changeStatusValue(StatusAffects.PrisonRestraints,3,0);
-					player.changeStatusValue(StatusAffects.PrisonRestraints,4,0);
+					player.changeStatusValue(StatusEffects.PrisonRestraints,1,2);
+					player.changeStatusValue(StatusEffects.PrisonRestraints,2,0);
+					player.changeStatusValue(StatusEffects.PrisonRestraints,3,0);
+					player.changeStatusValue(StatusEffects.PrisonRestraints,4,0);
 					flags[kFLAGS.PRISON_PUNISHMENT] = 0;
 					flags[kFLAGS.PRISON_TRAINING_REFUSED] = 1;
 					menu();
@@ -1512,7 +1512,7 @@ package classes.Scenes.Places.Prison
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
 			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && player.obey > 25 + rand(3))
 			{
-				player.changeStatusValue(StatusAffects.PrisonCaptorEllyStatus,1,3);
+				player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,1,3);
 				flags[kFLAGS.PRISON_TRAINING_LEVEL] = 0;
 			}
 			inventory.takeItem(shortName, camp.returnToCampUseOneHour);
