@@ -76,19 +76,19 @@
 			//Lowlevel changes
 			if (rando < 50) {
 				if (player.cocks.length == 1) {
-					if (player.cocks[0].cockType != CockTypesEnum.DEMON) outputText("\n\nYour " + player.cockDescript(0) + " becomes shockingly hard.  It turns a shiny inhuman purple and spasms, dribbling hot demon-like cum as it begins to grow.");
-					else outputText("\n\nYour " + player.cockDescript(0) + " becomes shockingly hard.  It dribbles hot demon-like cum as it begins to grow.");
+					if (player.cocks[0].cockType != CockTypesEnum.DEMON) outputText("\n\nYour [cock] becomes shockingly hard.  It turns a shiny inhuman purple and spasms, dribbling hot demon-like cum as it begins to grow.");
+					else outputText("\n\nYour [cock] becomes shockingly hard.  It dribbles hot demon-like cum as it begins to grow.");
 					if (rand(4) == 0) temp = player.increaseCock(0, 3);
 					else temp = player.increaseCock(0, 1);
 					dynStats("int", 1, "lib", 2, "sen", 1, "lust", 5 + temp * 3, "cor", tainted ? 1 : 0);
 					if (temp < .5) outputText("  It stops almost as soon as it starts, growing only a tiny bit longer.");
 					if (temp >= .5 && temp < 1) outputText("  It grows slowly, stopping after roughly half an inch of growth.");
 					if (temp >= 1 && temp <= 2) outputText("  The sensation is incredible as more than an inch of lengthened dick-flesh grows in.");
-					if (temp > 2) outputText("  You smile and idly stroke your lengthening " + player.cockDescript(0) + " as a few more inches sprout.");
+					if (temp > 2) outputText("  You smile and idly stroke your lengthening [cock] as a few more inches sprout.");
 					if (tainted) dynStats("int", 1, "lib", 2, "sen", 1, "lus", 5 + temp * 3, "cor", 1);
 					else dynStats("int", 1, "lib", 2, "sen", 1, "lus", 5 + temp * 3);
-					if (player.cocks[0].cockType != CockTypesEnum.DEMON) outputText("  With the transformation complete, your " + player.cockDescript(0) + " returns to its normal coloration.");
-					else outputText("  With the transformation complete, your " + player.cockDescript(0) + " throbs in an almost happy way as it goes flaccid once more.");
+					if (player.cocks[0].cockType != CockTypesEnum.DEMON) outputText("  With the transformation complete, your [cock] returns to its normal coloration.");
+					else outputText("  With the transformation complete, your [cock] throbs in an almost happy way as it goes flaccid once more.");
 				}
 				if (player.cocks.length > 1) {
 					temp = player.cocks.length;
@@ -121,7 +121,7 @@
 					player.cocks[0].cockLength = rand(3) + 4;
 					player.cocks[0].cockThickness = 1;
 					outputText("\n\nYou shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
-					outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your " + player.cockDescript(0) + " fades to a more normal " + player.skinTone + " tone.");
+					outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinTone + " tone.");
 					if (tainted) dynStats("lib", 3, "sen", 5, "lus", 10, "cor", 5);
 					else dynStats("lib", 3, "sen", 5, "lus", 10);
 				}
@@ -188,7 +188,7 @@
 					player.cocks[0].cockLength = rand(3) + 4;
 					player.cocks[0].cockThickness = 1;
 					outputText("\n\nYou shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
-					outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your " + player.cockDescript(0) + " fades to a more normal " + player.skinTone + " tone.");
+					outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinTone + " tone.");
 					if (tainted) dynStats("lib", 3, "sen", 5, "lus", 10, "cor", 3);
 					else dynStats("lib", 3, "sen", 5, "lus", 10);
 				}
