@@ -1,7 +1,7 @@
 /**
  * Created by aimozg on 31.01.14.
  */
-package classes.StatusAffects
+package classes.StatusEffects
 {
 	import classes.StatusEffectType;
 

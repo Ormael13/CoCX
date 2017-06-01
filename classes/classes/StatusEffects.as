@@ -1,6 +1,6 @@
 package classes
 {
-	import classes.StatusAffects.CombatStatusEffect;
+	import classes.StatusEffects.CombatStatusEffect;
 
 	/**
 	 * IMPORTANT NOTE:
