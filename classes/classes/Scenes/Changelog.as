@@ -20,14 +20,6 @@ package classes.Scenes
 		
 		private function Changelog13():void {
 			clearOutput();
-			outputText("<b>Version 0.8c2 (Bugfixs and 4 new perks):</b>\n\n");
-			outputText("-New tier 4 speed lvl-up perk: Penta Attack. Req. perk Quadruple Attack and 125+ speed. Effects: adds toggle to use 5th melee attack at 80% power with same limitation as Double Attack.\n");
-			outputText("-New tier 5 speed lvl-up perk: Hexa Attack. Req. perk Penta Attack and 150+ speed. Effects: adds toggle to use 6th melee attack at 80% power with same limitation as Double Attack.\n");
-			outputText("-New tier 2 strength lvl-up perk: Double Attack (Large). Req. perk Job: Barbarian, 75+ strength and 50+ speed. Effects: adds toggle to use 2th melee attack with any Large type weapon at 95% power with same limitation as Double Attack.\n");
-			outputText("-New tier 4 strength lvl-up perk: Triple Attack (Large). Req. perk Double Attack (Large), 125+ strength and 100+ speed. Effects: adds toggle to use 3th melee attack with any Large type weapon at 90% power with same limitation as Double Attack.\n");
-			outputText("-Changed req. for accuring Magic Bolt m. special from having perk Staff Channeling to Job: Sorcerer perk. It dmg was been nerfed but it's also specila not using fatigue now.\n");
-			outputText("-Added fatigue req. for each misc. buliding options in tooltips.\n");
-			outputText("-Bugs fixed: Fire Affinity perk, Perm perks at ascension, additional attack when using multiattacks, building wood storage and kitsune shrine.\n\n");
 			outputText("<b>Version 0.8d:</b>\n\n");
 			outputText("-Added in current version race effects to Metamorph perk: Spider, Shark\n");
 			outputText("-New preset PC with short history: Zavos\n");
@@ -41,6 +33,7 @@ package classes.Scenes
 			outputText("-Aimozg made another change to buffs that I decided to put version of buffs before applying this change into debug mode so if anyone want to compare both would need to fight the same enemy with and without debug to compare buffs power. Then you all can post your reflections on this tests on forum or discord channel for mod.\n");
 			outputText("-Ceani affection meter added to stats page.\n");
 			outputText("-Surrender option: Rising lust to max and triggering lust defeat end of fight. Put in place of button used only to dispel one of Lethice special and free goblin option - in both fights losing isn’t a good solution anyway.\n");
+			outputText("-New option to use soulforce in Soulforce menu in camp: Adj. Corruption (now PC can rise or lower corruption - Req. Soul Apprentice perk to be unlocked).\n");
 			outputText("-New 6th stage of soul cultivation: Soul Overlord (req. lvl 36+ and Soul Exalt perk).\n");
 			outputText("-New core stat added: Wisdom. It can be raised using stat points from lvl-ups. Currently how high it’s can be checked in Soulforce menu only.\n");
 			outputText("-Each of perk with word Soul in name aside first of line Job: Soul Cultivator have now added min wisdom req. that is stage of cultivation x20 so newest one added cultivation stage Soul Overlord req. to have 120+ wisdom. Also job: Soul Cultivator similarly like other base job perks will be giving stat bonus now too: +5 to max Wis (scalable with NG tiers).\n");
@@ -94,7 +87,7 @@ package classes.Scenes
 			outputText("-New tier 7 toughness lvl-up perk: Steel Impact Req. Prestige Job: Sentinel perk Effect: add part of PC toughness to weapon and shield (Shield Bash special) damage similarly like Lightning Strikes.\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Arcane Archer Req. Job: Sorcerer, Job: Hunter perks, 150+ int and 200+ spe Effect: +40 to max spe and int (scalable with NG tiers), +600 to max Fatigue\n");
 			outputText("-New tier 7 intelligence lvl-up perk: Prestige Job: Seer Req. Grey Archmage, Soul Overlord perks and 200+ int Effect: +60 max int and +20 to max wis (scalable with NG tiers), +900 max Fatigue, +500 max Soulforce\n");
-			outputText("-New mutation perk: Nine-tails Kitsune of Balance. Req. to have both corrupted and enlighted 9 tails perks permed and having 9 fox tails. Effects: allow use Fused Foxfire, increase by 3 fatigue recover during combat, at 9 tails increase by 20% lust dmg and by 25% phys dmg from foxfire or by 40/50% for fused foxfire.\n");
+			outputText("-New mutation perk: Nine-tails Kitsune of Balance. Req. to have both corrupted and enlighted 9 tails perks permed and having 9 fox tails. Effects: allow use Fused Foxfire, increase by 3 fatigue recover during combat, at 9 tails increase by 20% lust dmg and by 25% phys dmg from foxfire or by 40/50% for fused foxfire. Genetic Memory can meorize 7th to 9th tail.\n");
 			outputText("-New enemy perk: Beast or Animal-morph enemy type. Some of PC attack will deal more dmg to such enemies that atm is 27 diff enemeis with this perk ingame.\n");
 			outputText("-New weapon perks: Strife-Warden (enable use of Beat of War soulskill), Blade-Warden (enable use of Blade Dance soulskill), Wild-Warden (enable use of Resonance Volley soulskill), Mage-Warden (enable use of Avatar of the Song soulskill).\n");
 			outputText("-New Soulskill: Beat of War (Req. Warden’s greatsword equiped) Effect: Boost PC str by 15% of base value with each use. Stackable with other buffs.\n");
@@ -103,14 +96,13 @@ package classes.Scenes
 			outputText("-New Soulskill: Avatar of the Song (Req. Warden’s staff equipped) Effect: Doublecast Charged Weapon and Might. Casts blind if charged weapon is already active. Casts Heal if Might is already active.\n");
 			outputText("-Hooked Gauntlets and Spiked Gauntlet weapons are removed from pool of weapons working with mutliattack due to been put in same group of weapons that would benefits from perks affecting fists attacks.\n");
 			outputText("-Perk Draconic Lungs changed to grant +5 max speed (scalable) and allow to reset dragon breath attacks cooldown from 'once a day' to 'after each fight'.\n");
-			outputText("-Perk Kitsune Thyroid Gland changed to reduce Terror/Illusion specials by 3 turns, increase fatigue regeneration in combat by 1 and giving +5 to max speed cap scalable)\n");
+			outputText("-Perk Kitsune Thyroid Gland changed to reduce Terror/Illusion specials by 3 turns, increase fatigue regeneration in combat by 1 and giving +5 to max speed cap scalable). Terror/Illusion specials have also soulforce cost added now (half of what cost to use foxfire).\n");
 			outputText("-Two new spells: Lightning Bolt for white magic and Darkness Shard for black. Both introduce new type of elemental spells that will soon have more uses (there is still no enemies weak to this two new types of element attacks).\n");
 			outputText("-Dragon-morphs got slight changed in regard to racial bonuses (full changelog of that race changes will be written down list of new things added in next version). Of more noticable things that can be already now noticed is that Dragons can’t gain two new elemental breath attacks to match element types of two new spells.\n");
 			outputText("-Lowered Slutt Seduction effect power on few armors: Arcane Bangle, tease type light armors (dragonscale, ebonweave, spider silk ones)\n");
 			outputText("-New hair type: Grass hair. Result of using Mara fruit. Hair TF for Mara fruit will be now have 50% to give leaf or grass hair.\n");
 			outputText("-Due to huge help form aimozg there is few items form Revamp ported to Xianixa: Samurai Armor (Tel’Adre) and three items at Rathazul (generally Rath menu was slightly changed so if you see any weirdness that still linger around let me know on discord or forum thread for mod).\n");
 			outputText("-Fixed bugs: Naming bug for demons, Too high normally Goo score, Corrupted Marae fight.\n\n\n\n\n\n");/*ostatni punkt changelogu
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -282,6 +274,14 @@ package classes.Scenes
 			outputText("-During Evangeline recruitment, if PC rejects her joining camp, text will be shown clearly stating that the PC has been cursed. When PC agrees to accepting Evangeline joining the camp, curse will be removed, instead of requiring Ezekiel Fruit.\n");
 			outputText("-In Benoit shop, option to buy Dragonscale was replaced with Sensitivity Potion and Spider Silk with Numb Rocks(so now even without finishing Deep Cave PC can obtain those two items).\n");
 			outputText("-Redemption ending after Lethice fight is no longer missing.\n");
+			outputText("<b>Version 0.8c2 (Bugfixs and 4 new perks):</b>\n\n");
+			outputText("-New tier 4 speed lvl-up perk: Penta Attack. Req. perk Quadruple Attack and 125+ speed. Effects: adds toggle to use 5th melee attack at 80% power with same limitation as Double Attack.\n");
+			outputText("-New tier 5 speed lvl-up perk: Hexa Attack. Req. perk Penta Attack and 150+ speed. Effects: adds toggle to use 6th melee attack at 80% power with same limitation as Double Attack.\n");
+			outputText("-New tier 2 strength lvl-up perk: Double Attack (Large). Req. perk Job: Barbarian, 75+ strength and 50+ speed. Effects: adds toggle to use 2th melee attack with any Large type weapon at 95% power with same limitation as Double Attack.\n");
+			outputText("-New tier 4 strength lvl-up perk: Triple Attack (Large). Req. perk Double Attack (Large), 125+ strength and 100+ speed. Effects: adds toggle to use 3th melee attack with any Large type weapon at 90% power with same limitation as Double Attack.\n");
+			outputText("-Changed req. for accuring Magic Bolt m. special from having perk Staff Channeling to Job: Sorcerer perk. It dmg was been nerfed but it's also specila not using fatigue now.\n");
+			outputText("-Added fatigue req. for each misc. buliding options in tooltips.\n");
+			outputText("-Bugs fixed: Fire Affinity perk, Perm perks at ascension, additional attack when using multiattacks, building wood storage and kitsune shrine.\n\n");
 			menu();
 			addButton(0, "Next", Changelog11);
 			addButton(1, "Back", playerMenu);

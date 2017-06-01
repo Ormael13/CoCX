@@ -159,25 +159,31 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.ENVENOMED_BOLTS] == 1) outputText("\n\nVenom effect added: <b>Yes</b>");
 		}
 		if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 0) addButton(0, "All Single", singleStrike);
-		if (player.findPerk(PerkLib.DoubleStrike) >= 0 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 1) {
-			if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow" || player.weaponRangePerk == "Throwing") addButton(1, "All Double", doubleStrike);
-			else addButtonDisabled(1, "All Double", "You current range weapon not allow to use this option");
+		var maxThrowingAttacks:int = combat.maxThrowingAttacks();
+		var maxCrossbowAttacks:int = combat.maxCrossbowAttacks();
+		var maxBowAttacks:int = combat.maxBowAttacks();
+		var maxCurrentRangeAttacks:int = combat.maxCurrentRangeAttacks();
+		var maxRangeAttacks:int = Math.max(maxThrowingAttacks, maxCrossbowAttacks, maxBowAttacks);
+		
+		if (maxRangeAttacks >= 2 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 1) {
+			if (maxCurrentRangeAttacks < 2) addButtonDisabled(1, "All Double", "You current range weapon not allow to use this option");
+			else addButton(1, "All Double", doubleStrike);
 		}
-		if (player.findPerk(PerkLib.TripleStrike) >= 0 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 2) {
-			if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow" || player.weaponRangePerk == "Throwing") addButton(2, "All Triple", tripleStrike);
-			else addButtonDisabled(2, "All Triple", "You current range weapon not allow to use this option");
+		if (maxRangeAttacks >= 3 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 2) {
+			if (maxCurrentRangeAttacks < 3) addButtonDisabled(2, "All Triple", "You current range weapon not allow to use this option");
+			else addButton(2, "All Triple", tripleStrike);
 		}
-		if (player.findPerk(PerkLib.Manyshot) >= 0 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 3) {
-			if (player.weaponRangePerk == "Bow") addButton(5, "All Quad", quadrupleStrike);
-			else addButtonDisabled(5, "All Quad", "You current range weapon not allow to use this option");
+		if (maxRangeAttacks >= 4 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 3) {
+			if (maxCurrentRangeAttacks < 4) addButtonDisabled(5, "All Quad", "You current range weapon not allow to use this option");
+			else addButton(5, "All Quad", quadrupleStrike);
 		}
-		if (player.findPerk(PerkLib.WildQuiver) >= 0 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 4) {
-			if (player.weaponRangePerk == "Bow") addButton(6, "All Penta", pentaStrike);
-			else addButtonDisabled(6, "All Penta", "You current range weapon not allow to use this option");
+		if (maxRangeAttacks >= 5 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 4) {
+			if (maxCurrentRangeAttacks < 5) addButtonDisabled(6, "All Penta", "You current range weapon not allow to use this option");
+			else addButton(6, "All Penta", pentaStrike);
 		}
-		if (player.findPerk(PerkLib.Multishot) >= 0 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 5) {
-			if (player.weaponRangePerk == "Bow") addButton(7, "All Hexa", hexaStrike);
-			else addButtonDisabled(7, "All Hexa", "You current range weapon not allow to use this option");
+		if (maxRangeAttacks >= 6 && flags[kFLAGS.DOUBLE_STRIKE_STYLE] != 5) {
+			if (maxCurrentRangeAttacks < 6) addButtonDisabled(7, "All Hexa", "You current range weapon not allow to use this option");
+			else addButton(7, "All Hexa", hexaStrike);
 		}
 		if (player.findPerk(PerkLib.ElementalArrows) >= 0 && flags[kFLAGS.ELEMENTAL_ARROWS] != 0) addButton(3, "None", normalArrows);
 		if (player.findPerk(PerkLib.ElementalArrows) >= 0 && player.hasStatusAffect(StatusAffects.KnowsWhitefire) && flags[kFLAGS.ELEMENTAL_ARROWS] != 1) addButton(8, "Fire", fireArrows);

@@ -109,6 +109,30 @@ public class Combat extends BaseContent {
 		else if (player.isFistOrFistWeapon()) return maxFistAttacks();
 		else return maxCommonAttacks();
 	}
+	public function maxBowAttacks():int {
+		if (player.hasPerk(PerkLib.Multishot)) return 6;
+		else if (player.hasPerk(PerkLib.WildQuiver)) return 5;
+		else if (player.hasPerk(PerkLib.Manyshot)) return 4;
+		else if (player.hasPerk(PerkLib.TripleStrike)) return 3;
+		else if (player.hasPerk(PerkLib.DoubleStrike)) return 2;
+		else return 1;
+	}
+	public function maxCrossbowAttacks():int {
+		if (player.hasPerk(PerkLib.TripleStrike)) return 3;
+		else if (player.hasPerk(PerkLib.DoubleStrike)) return 2;
+		else return 1;
+	}
+	public function maxThrowingAttacks():int {
+		if (player.hasPerk(PerkLib.TripleStrike)) return 3;
+		else if (player.hasPerk(PerkLib.DoubleStrike)) return 2;
+		else return 1;
+	}
+	public function maxCurrentRangeAttacks():int {
+		if (player.weaponRangePerk == "Throwing") return maxThrowingAttacks();
+		else if (player.weaponRangePerk == "Crossbow") return maxCrossbowAttacks();
+		else if (player.weaponRangePerk == "Bow") return maxBowAttacks();
+		else return 1;
+	}
 
 	public function endHpVictory():void
 {
@@ -563,7 +587,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	}
 	else if (monster.hasStatusAffect(StatusAffects.GooEngulf)) {
 		menu();
-		addButton(0, "Tease", GooTease, null, null, null, "Use a free limb to caress and pleasure your grappled foe (Liadri what your idea on new tooltip for this?). \n\nFatigue Cost: " + physicalCost(20) + "");
+		addButton(0, "Tease", GooTease, null, null, null, "Mold limb to caress and pleasure your grappled foe. \n\nFatigue Cost: " + physicalCost(20) + "");
 		addButton(4, "Release", GooLeggoMyEggo);
 	}
 }
