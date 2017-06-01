@@ -110,7 +110,7 @@ package classes.Items.Consumables
 			}
 			else { //First time
 				player.createStatusEffect(StatusEffects.PhoukaWhiskeyAffect, 8, 1, 256 * libidoChange + sensChange, 256 * speedChange + intChange);
-					//The four stats we’re affecting get paired together to save space. This way we don’t need a second StatusAffect to store more info.
+					//The four stats we’re affecting get paired together to save space. This way we don’t need a second StatusEffect to store more info.
 				game.dynStats("lib", libidoChange, "sens", -sensChange, "spe", -speedChange, "int", -intChange);
 			}
 			game.statScreenRefresh();

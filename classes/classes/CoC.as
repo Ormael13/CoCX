@@ -158,7 +158,7 @@ the text from being too boring.
 		
 		// /
 		private var _perkLib:PerkLib                 = new PerkLib();// to init the static
-		private var _statusAffects:StatusEffects     = new StatusEffects();// to init the static
+		private var _statusEffects:StatusEffects     = new StatusEffects();// to init the static
 		public var charCreation:CharCreation         = new CharCreation();
 		public var saves:Saves                       = new Saves(gameStateDirectGet, gameStateDirectSet);
 		public var playerAppearance:PlayerAppearance = new PlayerAppearance();

@@ -59,7 +59,7 @@ package classes.Scenes.Places.Prison
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScratch,0,0,0,0);
 			}
-			return player["statusAffectv" + String(valueNum)](StatusEffects.PrisonCaptorEllyScratch);
+			return player["statusEffectv" + String(valueNum)](StatusEffects.PrisonCaptorEllyScratch);
 		}
 		
 		public function prisonCaptorScratchSet(valueNum:Number, newVal:Number) : void
@@ -78,7 +78,7 @@ package classes.Scenes.Places.Prison
 			{
 				player.createStatusEffect(StatusEffects.PrisonCaptorEllyScratch,0,0,0,0);
 			}
-			newVal = player["statusAffectv" + String(valueNum)](StatusEffects.PrisonCaptorEllyScratch) + changeVal;
+			newVal = player["statusEffectv" + String(valueNum)](StatusEffects.PrisonCaptorEllyScratch) + changeVal;
 			player.changeStatusValue(StatusEffects.PrisonCaptorEllyScratch, valueNum, newVal);
 		}
 		

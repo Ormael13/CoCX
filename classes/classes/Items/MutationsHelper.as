@@ -485,7 +485,7 @@ package classes.Items {
 	public function setTongueType(tongueType:int):Boolean {
 		return setBodyPartType("tongueType", METAMORPH_TONGUES, tongueType);
 	}
-	// Here we override flavour text because it is 'tonuge' in StatusAffect id
+	// Here we override flavour text because it is 'tonuge' in StatusEffect id
 	// but changing that would break the saves
 	private const METAMORPH_TONGUES:Object = createMapFromPairs([
 		[TONUGE_CAT, [null, "Cat Tongue"]],

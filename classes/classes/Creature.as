@@ -823,8 +823,8 @@ package classes
 		//Create a status
 		public function createStatusEffect(stype:StatusEffectType, value1:Number, value2:Number, value3:Number, value4:Number):void
 		{
-			var newStatusAffect:StatusEffectClass = new StatusEffectClass(stype,value1,value2,value3,value4);
-			statusEffects.push(newStatusAffect);
+			var newStatusEffect:StatusEffectClass = new StatusEffectClass(stype,value1,value2,value3,value4);
+			statusEffects.push(newStatusEffect);
 			//trace("createStatusEffect -> "+statusEffects.join(","));
 			//trace("NEW STATUS APPLIED TO PLAYER!: " + statusName);
 		}
@@ -843,10 +843,6 @@ package classes
 					return counter;
 			}
 			return -1;
-		}
-		[Deprecated(replacement="indexOfStatusEffect(), statusEffectByType(), or hasStatusEffect() instead")]
-		public function findStatusAffect(stype:StatusEffectType):int {
-			return indexOfStatusEffect(stype);
 		}
 		public function statusEffectByType(stype:StatusEffectType):StatusEffectClass {
 			var idx:int = indexOfStatusEffect(stype);

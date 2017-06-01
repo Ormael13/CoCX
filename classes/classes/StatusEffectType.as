@@ -7,15 +7,15 @@ package classes
 
 	public class StatusEffectType
 	{
-			private static var STATUSAFFECT_LIBRARY:Dictionary = new Dictionary();
+			private static var STATUSEFFECT_LIBRARY:Dictionary = new Dictionary();
 
-			public static function lookupStatusAffect(id:String):StatusEffectType{
-				return STATUSAFFECT_LIBRARY[id];
+			public static function lookupStatusEffect(id:String):StatusEffectType{
+				return STATUSEFFECT_LIBRARY[id];
 			}
 
-			public static function getStatusAffectLibrary():Dictionary
+			public static function getStatusEffectLibrary():Dictionary
 			{
-				return STATUSAFFECT_LIBRARY;
+				return STATUSEFFECT_LIBRARY;
 			}
 
 			private var _id:String;
@@ -31,10 +31,10 @@ package classes
 			public function StatusEffectType(id:String)
 			{
 				this._id = id;
-				if (STATUSAFFECT_LIBRARY[id] != null) {
-					CoC_Settings.error("Duplicate status affect "+id);
+				if (STATUSEFFECT_LIBRARY[id] != null) {
+					CoC_Settings.error("Duplicate status effect "+id);
 				}
-				STATUSAFFECT_LIBRARY[id] = this;
+				STATUSEFFECT_LIBRARY[id] = this;
 			}
 
 

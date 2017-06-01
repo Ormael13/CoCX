@@ -2027,9 +2027,9 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		for (i = 0; i < saveFile.data.statusAffects.length; i++)
 		{
 			if (saveFile.data.statusAffects[i].statusAffectName == "Lactation EnNumbere") continue; // ugh...
-			var stype:StatusEffectType = StatusEffectType.lookupStatusAffect(saveFile.data.statusAffects[i].statusAffectName);
+			var stype:StatusEffectType = StatusEffectType.lookupStatusEffect(saveFile.data.statusAffects[i].statusAffectName);
 			if (stype == null){
-				CoC_Settings.error("Cannot find status affect '"+saveFile.data.statusAffects[i].statusAffectName+"'");
+				CoC_Settings.error("Cannot find status effect '"+saveFile.data.statusAffects[i].statusAffectName+"'");
 				continue;
 			}
 			player.createStatusEffect(stype,
