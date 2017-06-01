@@ -3,9 +3,11 @@
  */
 package classes
 {
-	import flash.utils.Dictionary;
+import classes.internals.Utils;
 
-	public class ItemType
+import flash.utils.Dictionary;
+
+	public class ItemType extends Utils
 	{
 		private static var ITEM_LIBRARY:Dictionary = new Dictionary();
 		private static var ITEM_SHORT_LIBRARY:Dictionary = new Dictionary();
