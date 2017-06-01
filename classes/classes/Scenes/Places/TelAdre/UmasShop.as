@@ -1932,7 +1932,7 @@
 				else outputText(" is");
 				outputText(" the perfect mate to your spare length");
 				if(player.cockTotal() > 2) outputText("s");
-				outputText(", and soon you are dribbling and dripping from all of your " + multiCockDescriptLight() + ".");
+				outputText(", and soon you are dribbling and dripping from all of your [cocks].");
 			}
 			
 			outputText("\n\nWhile the steady pleasure her mouth and tongue gives you has you feeling very, very good, it isn't quite bringing you towards the orgasm you came here craving.  You suggest she begin to bob up and down on you. \"<i>Cocks need to feel like they're fucking something,</i>\" you ");

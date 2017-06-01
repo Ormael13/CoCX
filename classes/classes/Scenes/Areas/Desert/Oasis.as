@@ -12,7 +12,7 @@
 	spriteSelect(46);
 	//Find oasis, sit there.
 			clearOutput();
-			outputText("You wander in the desert for what seems like hours, sweating profusely in the sweltering heat. Eventually you come across a small watering hole surrounded by scrappy trees and shrubs. It would be foolish not to take this opportunity to drink, freshen up and paddle your " + player.legs() + " in the cooling water, so you settle into what little shade you can find for a quick break.\n\n");
+			outputText("You wander in the desert for what seems like hours, sweating profusely in the sweltering heat. Eventually you come across a small watering hole surrounded by scrappy trees and shrubs. It would be foolish not to take this opportunity to drink, freshen up and paddle your [legs] in the cooling water, so you settle into what little shade you can find for a quick break.\n\n");
 	//Demons approach!
 	outputText("After a while sitting in the sparse shade provided by one of the bushes around the oasis you see figures shimmering into view across the desert sands.  As you watch the figures they grow more defined and more numerous until finally a group of vaguely humanoid shapes emerges from the heat haze.  The closer these figures become the more detail they take on, and as they near the edge of your small oasis you are able to make out most of their features.\n\n");
 	//Describe the demonic group in detail
@@ -88,20 +88,20 @@ internal function oasisSexing():void {
 	if(player.cocks.length > 0) {
 		outputText("You feel clawed hands grasp at ");
 		if(player.cockTotal() > 1) outputText("each of ");
-		outputText("your " + multiCockDescriptLight() + " and begin to slide up and down before another demon pushes them out of the way and you ");
-		if (player.cocks[0].cockLength > 25) outputText("feel your " + cockDescript(0) + " slide into a hell-girl's sloppy cunt. The demoness moans and pants in pleasure as your " + cockDescript(0) + " bottoms out in her gaping pussy and she begins to ride you like the motionless whore you momentarily are, her gigantic breasts threatening to concuss you as she slides the huge distance up and down your cock in her thirst to fill her cavelike cunt.  ");
+		outputText("your [cocks] and begin to slide up and down before another demon pushes them out of the way and you ");
+		if (player.cocks[0].cockLength > 25) outputText("feel your [cock] slide into a hell-girl's sloppy cunt. The demoness moans and pants in pleasure as your [cock] bottoms out in her gaping pussy and she begins to ride you like the motionless whore you momentarily are, her gigantic breasts threatening to concuss you as she slides the huge distance up and down your cock in her thirst to fill her cavelike cunt.  ");
 		else {
-			outputText("see a smaller and younger demon lowering her very tight pussy onto your " + cockDescript(0) + ". It's a tight fit, but her almost-virginal pussy is dripping wet. She bottoms her pussy out ");
+			outputText("see a smaller and younger demon lowering her very tight pussy onto your [cock]. It's a tight fit, but her almost-virginal pussy is dripping wet. She bottoms her pussy out ");
 			if(player.cocks[0].cockLength > 17) outputText("with hardly any of you inside her ");
-			else if(player.cocks[0].cockLength > 12) outputText("about halfway down your " + cockDescript(0) + " ");
+			else if(player.cocks[0].cockLength > 12) outputText("about halfway down your [cock] ");
 			else if(player.cocks[0].cockLength > 6) outputText("with almost all of you inside of her ");
-			else if(player.cocks[0].cockLength <= 6) outputText("as her pussy lips touch the base of your " + cockDescript(0) + " ");
+			else if(player.cocks[0].cockLength <= 6) outputText("as her pussy lips touch the base of your [cock] ");
 			outputText("and begins to slide herself up and down your shaft in complete ecstasy, moaning like a cheap whore. She seems relatively uncorrupted for a denizen of this realm and is firm, tight and free of fur. Only a pair of horns betrays her taint. The thought that you are perhaps one of her first cocks sends tingles down your spine.  ");
 			if(player.cocks[0].cockLength > 6) {
-				outputText("The realisation that her pussy is slowly stretching over your " + cockDescript(0) + " gives you a thrill that can only be described as positively evil.  ");
+				outputText("The realisation that her pussy is slowly stretching over your [cock] gives you a thrill that can only be described as positively evil.  ");
 				dynStats("cor", 1);
 			}
-			outputText("Soon the slender cock-whore begins to cum and she starts on what is about to be the first of several shuddering orgasms. You smile evilly as she cums around your " + cockDescript(0) + " and when her eyes roll back to the front of her head you know that there is more to come.  ");
+			outputText("Soon the slender cock-whore begins to cum and she starts on what is about to be the first of several shuddering orgasms. You smile evilly as she cums around your [cock] and when her eyes roll back to the front of her head you know that there is more to come.  ");
 		}
 		//Orgasmzzzzzzz
 		outputText("Soon you're shaking and pumping your seed deep into her pussy as she screams out one of her many orgasms and you cum deep inside her for the first time.  ");
@@ -149,7 +149,7 @@ internal function oasisSexing():void {
 	//Titzen!
 	if(player.breastRows.length > 0) {
 		if(player.biggestTitSize() > 1) {
-			outputText("  Demonic hands grab and squeeze at your " + allBreastsDescript() + " and lips fasten around your " + nippleDescript(0) + " and begin to lick and suck like there's no tomorrow.");
+			outputText("  Demonic hands grab and squeeze at your [allbreasts] and lips fasten around your " + nippleDescript(0) + " and begin to lick and suck like there's no tomorrow.");
 		}
 	}
 	//Newline for oral!
@@ -212,8 +212,8 @@ private function oasisBadEnd():void {
 	outputText("\"<i>There will no longer be any of that back talk, slave. As for what I'm talking about... After all of our encounters with you, my tribesmen and I have made a decision.</i>\" The leader's smirk widens as he reaches down and grips your face tightly, forcing you to look up at him. His eyes look you over appraisingly as he pulls out a black collar with a long chain attached and fastens it to your neck. His other hand reaches down to one of your " + nippleDescript(0) + "s and grabs it roughly, giving it a hard squeeze and causing you to let out a small moan of pain and pleasure. He relinquishes his grip and walks around you, continually looking you over and scrutinizing your body from every angle. \"<i>We have decided that you would make an excellent addition to our group, and have laid claim to you as our sex slave... to be used in any way that we want.</i>\" He stops in front of you and continues, \"<i>We were lucky to catch you while you were still unconscious, before you could sneak off on us. I will personally enjoy using you for my own purposes. Maybe I'll even use you to carry my children once you're properly broken in.</i>\"\n\n");
 	//[If herm] 
 	if(player.gender == 3) {
-		if(player.isTaur()) outputText("\"<i>Everyone will have a great time playing with you,</i>\" the leader says, smirking wider still as he stares at your centaur body. He reaches out and gives your " + buttDescript() + " a hard smack, causing you to yelp and quickly stand to your feet. You stagger a bit as your legs strain against the shackles as you stand. Without warning, he sticks his fingers inside of your " + assholeDescript() + " and stretches it out as his free hand reaches between your legs to play with both your " + vaginaDescript(0) + " and " + cockDescript(0) + ". You gasp and moan in pleasure as your cock becomes erect in his hand. He laughs as he lets go and moves back in front of you. \"<i>Plus we could use you to carry our heavy loads like a pack animal. You have the perfect body for it.</i>\"\n\n");
-		else outputText("His smirk widens even more as he stares down at your uncovered " + cockDescript(0) + " laying flaccidly between your legs against the hot desert sand. You gasp in surprise as he suddenly reaches down and takes a firm hold of your " + cockDescript(0) + ". He strokes it and gives it a rough squeeze, making you whimper sensually as it becomes fully erect in his hand. He laughs as he lets it go, \"<i>Our girls will definitely be having fun with you, slave.</i>\"\n\n");
+		if(player.isTaur()) outputText("\"<i>Everyone will have a great time playing with you,</i>\" the leader says, smirking wider still as he stares at your centaur body. He reaches out and gives your " + buttDescript() + " a hard smack, causing you to yelp and quickly stand to your feet. You stagger a bit as your legs strain against the shackles as you stand. Without warning, he sticks his fingers inside of your " + assholeDescript() + " and stretches it out as his free hand reaches between your legs to play with both your " + vaginaDescript(0) + " and [cock]. You gasp and moan in pleasure as your cock becomes erect in his hand. He laughs as he lets go and moves back in front of you. \"<i>Plus we could use you to carry our heavy loads like a pack animal. You have the perfect body for it.</i>\"\n\n");
+		else outputText("His smirk widens even more as he stares down at your uncovered [cock] laying flaccidly between your legs against the hot desert sand. You gasp in surprise as he suddenly reaches down and takes a firm hold of your [cock]. He strokes it and gives it a rough squeeze, making you whimper sensually as it becomes fully erect in his hand. He laughs as he lets it go, \"<i>Our girls will definitely be having fun with you, slave.</i>\"\n\n");
 	}
 	outputText("You stare up at the leader with dread, realizing that there is nothing you could do for the moment. You cannot run away because you are chained up, and fighting isn't possible considering you don't see your weapons anywhere in sight. With all of the demons here, you wouldn't be able to get very far anyway. But even as you consider your method of escape, a small part of you feels excited about staying with the tribe, being used and abused by them for as long as possible.\n\n");
 	outputText("\"<i>Get up and start walking, we're leaving now. Don't look so unhappy about your situation, slave,</i>\" the leader says, deepening his smirk as he stares down at you. ");

@@ -74,12 +74,12 @@ package classes.Scenes.Areas.Plains
 			if(damage <= 0) {
 				damage = 0;
 				//Due to toughness or amor...
-				if(rand(player.armorDef + player.tou) < player.armorDef) outputText("The gnoll before you suddenly charges, almost too fast to see.  Twin fists slam into your " + player.armorName + " with enough force to stagger you, but the force is absorbed without doing any real damage.  As jaws powerful enough to crush bone flash at your neck, you are able to twist to the side, letting the furious hyena slip by you.");
+				if(rand(player.armorDef + player.tou) < player.armorDef) outputText("The gnoll before you suddenly charges, almost too fast to see.  Twin fists slam into your [armor] with enough force to stagger you, but the force is absorbed without doing any real damage.  As jaws powerful enough to crush bone flash at your neck, you are able to twist to the side, letting the furious hyena slip by you.");
 				else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.");
 			}
 			else {
 				if(damage < 10) outputText("The gnoll runs forward, fury in her dark eyes as twin fists glance off your chest.  The glancing blow sends her off balance and the flashing ivory jaws barely miss your throat.  You push back, stumbling away from the furious hyena.");
-				else outputText("The gnoll rushes forward, almost too fast to detect before twin fists slam into your torso.  Before you can recover, ivory jaws flash before your eyes and you feel the sharp teeth start to clamp onto the " + player.skinDesc + " of your neck.  Blinding pain causes you to fling yourself backwards, away from the teeth and drawing angry scrapes as you escape the jaws.  You roll away before picking yourself up, the hyena moving confidently towards you as you try to shake off the pain from the blow.");
+				else outputText("The gnoll rushes forward, almost too fast to detect before twin fists slam into your torso.  Before you can recover, ivory jaws flash before your eyes and you feel the sharp teeth start to clamp onto the [skin.type] of your neck.  Blinding pain causes you to fling yourself backwards, away from the teeth and drawing angry scrapes as you escape the jaws.  You roll away before picking yourself up, the hyena moving confidently towards you as you try to shake off the pain from the blow.");
 			}
 			if(damage > 0) {
 				if(short == "fetish zealot") {
@@ -128,14 +128,14 @@ package classes.Scenes.Areas.Plains
 			}
 			//<Hyena Attack 2 – Javelin – Unsuccessful – Absorbed>
 			else if(player.armorDef > 10 && rand(2) == 0) {
-				outputText("The gnoll pulls a long, dark wooden javelin from over her shoulder.  Her spotted arm strikes forward, launching the missile through the air.  The spear flashes through the air but hits at an angle, sliding off your " + player.armorName + " without doing any damage.  It disappears into the grass.");
+				outputText("The gnoll pulls a long, dark wooden javelin from over her shoulder.  Her spotted arm strikes forward, launching the missile through the air.  The spear flashes through the air but hits at an angle, sliding off your [armor] without doing any damage.  It disappears into the grass.");
 			}
 			else if(player.findPerk(PerkLib.Resolute) >= 0 && player.tou >= 75) {
 				outputText("You resolutely ignore the spear, brushing the blunted tip away when it hits you.\n");
 			}
 			//<Hyena Attack 2 – Javelin – Successful – Player Entangled>
 			else if(rand(3) >= 1) {
-				outputText("The gnoll pulls a long, black javelin from over her shoulder.  Her spotted arm strikes forward, launching the missile through the air.  You attempt to dive to the side, but are too late.  The powerful shaft slams, hard, into your back.  Pain radiates from the powerful impact.  Instead of piercing you, however, the tip seems to explode into a sticky goo that instantly bonds with your " + player.armorName + ".  The four foot, heavy shaft pulls down on you awkwardly, catching at things and throwing your balance off.  You try to tug the javelin off of you but find that it has glued itself to you.  It will take time and effort to remove; making it impossible to do while a dominant hyena stalks you. ");
+				outputText("The gnoll pulls a long, black javelin from over her shoulder.  Her spotted arm strikes forward, launching the missile through the air.  You attempt to dive to the side, but are too late.  The powerful shaft slams, hard, into your back.  Pain radiates from the powerful impact.  Instead of piercing you, however, the tip seems to explode into a sticky goo that instantly bonds with your [armor].  The four foot, heavy shaft pulls down on you awkwardly, catching at things and throwing your balance off.  You try to tug the javelin off of you but find that it has glued itself to you.  It will take time and effort to remove; making it impossible to do while a dominant hyena stalks you. ");
 				if(!player.hasStatusEffect(StatusEffects.GnollSpear)) player.createStatusEffect(StatusEffects.GnollSpear,0,0,0,0);
 				slow = 15;
 				while(slow > 0 && player.spe > 2) {
@@ -282,12 +282,12 @@ package classes.Scenes.Areas.Plains
 			if (damage <= 0) {
 				damage = 0;
 				//Due to toughness or amor...
-				if (rand(player.armorDef + player.tou) < player.armorDef) outputText("The gnoll before you suddenly charges, almost too fast to see.  Twin fists slam into your " + player.armorName + " with enough force to stagger you, but the force is absorbed without doing any real damage.  As jaws powerful enough to crush bone flash at your neck, you are able to twist to the side, letting the furious hyena slip by you.");
+				if (rand(player.armorDef + player.tou) < player.armorDef) outputText("The gnoll before you suddenly charges, almost too fast to see.  Twin fists slam into your [armor] with enough force to stagger you, but the force is absorbed without doing any real damage.  As jaws powerful enough to crush bone flash at your neck, you are able to twist to the side, letting the furious hyena slip by you.");
 				else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.");
 			}
 			else {
 				if (damage < 10) outputText("The gnoll runs forward, fury in her dark eyes as twin fists glance off your chest.  The glancing blow sends her off balance and the flashing ivory jaws barely miss your throat.  You push back, stumbling away from the furious hyena.");
-				else outputText("The gnoll rushes forward, almost too fast to detect before twin fists slam into your torso.  Before you can recover, ivory jaws flash before your eyes and you feel the sharp teeth start to clamp onto the " + player.skinDesc + " of your neck.  Blinding pain causes you to fling yourself backwards, away from the teeth and drawing angry scrapes as you escape the jaws.  You roll away before picking yourself up, the hyena moving confidently towards you as you try to shake off the pain from the blow.");
+				else outputText("The gnoll rushes forward, almost too fast to detect before twin fists slam into your torso.  Before you can recover, ivory jaws flash before your eyes and you feel the sharp teeth start to clamp onto the [skin.type] of your neck.  Blinding pain causes you to fling yourself backwards, away from the teeth and drawing angry scrapes as you escape the jaws.  You roll away before picking yourself up, the hyena moving confidently towards you as you try to shake off the pain from the blow.");
 			}
 			if (damage > 0) {
 				if (short == "fetish zealot") {

@@ -47,12 +47,12 @@ package classes.Scenes.Areas.Mountain
 					if (player.cor < 33) outputText("In spite of your revulsion ");
 					else if (player.cor < 66) outputText("In spite of your better sense ");
 					else outputText("With a perverse sense of anticipation ");
-					outputText("you remove your " + player.armorName + " and roll onto your back, exposing your vulnerable groin to the beast.\n\n");
+					outputText("you remove your [armor] and roll onto your back, exposing your vulnerable groin to the beast.\n\n");
 				}
 				//(HP) 
-				else outputText("Too wounded to stand, you drop down to all fours in order to keep yourself off the ground.   Too late you realize your mistake – the snarling beast is behind you and its razor-sharp teeth easily sink into your " + player.armorName + " before tearing away the offending armor, exposing your " + assDescript() + " and " + multiCockDescriptLight() + ".  A cold mountain breeze blows across your now-exposed " + player.skinDesc + ", reminding you just how utterly vulnerable you are to the alien lusts of this symbiotic monstrosity. With a brutal lunge it knocks you off your " + player.feet() + " and onto your back.\n\n");
+				else outputText("Too wounded to stand, you drop down to all fours in order to keep yourself off the ground.   Too late you realize your mistake – the snarling beast is behind you and its razor-sharp teeth easily sink into your [armor] before tearing away the offending armor, exposing your " + assDescript() + " and [cocks].  A cold mountain breeze blows across your now-exposed [skin.type], reminding you just how utterly vulnerable you are to the alien lusts of this symbiotic monstrosity. With a brutal lunge it knocks you off your [feet] and onto your back.\n\n");
 
-				outputText("The beast takes a sniff at your groin, then backs away, looking confused.  You glance down and realize just how hard you've become.  A few of your worms are hanging from the " + player.cockHead() + " of your " + cockDescript(0) + ", starting to flow out in a steady stream.  It feels better than it has any right to.   A shadow falls across you as the hellhound moves over you, its imposing twin members hard and pulsating above you.  Hot splatters of jism drip onto your chest as the beast's worms begin escaping, forcing thick globules of dog-semen out along with them.\n\n");
+				outputText("The beast takes a sniff at your groin, then backs away, looking confused.  You glance down and realize just how hard you've become.  A few of your worms are hanging from the [cockhead] of your [cock], starting to flow out in a steady stream.  It feels better than it has any right to.   A shadow falls across you as the hellhound moves over you, its imposing twin members hard and pulsating above you.  Hot splatters of jism drip onto your chest as the beast's worms begin escaping, forcing thick globules of dog-semen out along with them.\n\n");
 
 				outputText("Overcome by the worms, both you and the beast begin orgasming, without external stimulation of any kind.  Worms and cum mix together on top of you, slowly building into a large mound that covers the better part of your torso.  Exhausted and drained, you both squirt weakly, emptying the last of your smallest worms into the pile.   Your eyes close as the beast lies down with you, and together the two of you lose consciousness as your newly birthed worm colony squirms away.");
 				player.orgasm();
@@ -68,20 +68,20 @@ package classes.Scenes.Areas.Mountain
 					if (player.cor < 33) outputText("In spite of your revulsion ");
 					else if (player.cor < 66) outputText("In spite of your better sense ");
 					else outputText("With a perverse sense of anticipation ");
-					outputText("you remove your " + player.armorName + " and roll onto your back, exposing your vulnerable groin to the beast.\n\n");
+					outputText("you remove your [armor] and roll onto your back, exposing your vulnerable groin to the beast.\n\n");
 				}
 				//(HP)
 				else {
-					outputText("Too wounded to stand, you drop down to all fours in order to keep yourself off the ground.   Too late you realize your mistake – the snarling beast is behind you and its razor-shark teeth easily sink into your " + player.armorName + " before tearing it off, exposing your " + assDescript() + " and " + multiCockDescriptLight() + ".  A cold mountain breeze blows across your now exposed " + player.skinDesc + ", reminding you just how utterly vulnerable you are to the alien lusts of this symbiotic monstrosity.  With a brutal lunge it knocks you off your " + player.feet() + " and onto your back.\n\n");
+					outputText("Too wounded to stand, you drop down to all fours in order to keep yourself off the ground.   Too late you realize your mistake – the snarling beast is behind you and its razor-shark teeth easily sink into your [armor] before tearing it off, exposing your " + assDescript() + " and [cocks].  A cold mountain breeze blows across your now exposed [skin.type], reminding you just how utterly vulnerable you are to the alien lusts of this symbiotic monstrosity.  With a brutal lunge it knocks you off your [feet] and onto your back.\n\n");
 				}
 				if (player.totalCocks() > 1) {
 					outputText("The infested hound repositions itself, blocking out the sun with its dark fur, leaving you with only the pale flames surrounding its fuzzy sack to look at.   The warm wetness of its smooth tongue starts sliding over ");
-					outputText("each of your " + multiCockDescriptLight() + ".  It feels good, better than it has any right to.  ");
-					outputText("Every single one of your " + multiCockDescriptLight() + " hardens under the stimulation, happy to be so well-treated.\n\n");
+					outputText("each of your [cocks].  It feels good, better than it has any right to.  ");
+					outputText("Every single one of your [cocks] hardens under the stimulation, happy to be so well-treated.\n\n");
 
 					outputText("Stopping its licking, the beast begins to shuffle forwards, pre-cum coated worms plopping out of its double-dicks onto your belly.  They crawl lamely around as the beast works to line itself up, though you're unsure what it could possibly be aiming for.  Your questions are answered as the slightly pointed tips of its twin members press forwards, bumping against the crowns of your own cocks.   It pushes forward with an intense sort of care, slowly forcing itself into your urethras, dribbling painfully hot cum directly into your cock-passages.\n\n");
 
-					outputText("Gods, it's shoving its infected cocks up your urethras!  It's trying to infect you with those worms!  The dog-demon keeps pushing further and further, sliding deep inside you, the outline of its members easily visible through the skin of your " + multiCockDescriptLight() + ".  It starts feeling good, the wriggling parasite-infested dicks begin sliding in and out, fucking your urethras in earnest and depositing their wormy cargo deep inside you.\n\n");
+					outputText("Gods, it's shoving its infected cocks up your urethras!  It's trying to infect you with those worms!  The dog-demon keeps pushing further and further, sliding deep inside you, the outline of its members easily visible through the skin of your [cocks].  It starts feeling good, the wriggling parasite-infested dicks begin sliding in and out, fucking your urethras in earnest and depositing their wormy cargo deep inside you.\n\n");
 
 					outputText("Your ");
 					if (player.balls > 0) outputText(ballsDescriptLight() + " shiver as hot doggie-cum and wiggling worms are pumped directly into them.  ");
@@ -92,12 +92,12 @@ package classes.Scenes.Areas.Mountain
 				}
 				else {
 					outputText("The infested hound repositions itself, blocking out the sun with its dark fur, leaving you with only the pale flames surrounding its fuzzy sack to look at.   The warm wetness of its smooth tongue starts sliding over ");
-					outputText("your " + multiCockDescriptLight() + ".  It feels good, better than it has any right to.  ");
-					outputText("Your " + multiCockDescriptLight() + " hardens under the stimulation, happy to be so well-treated.\n\n");
+					outputText("your [cocks].  It feels good, better than it has any right to.  ");
+					outputText("Your [cocks] hardens under the stimulation, happy to be so well-treated.\n\n");
 
-					outputText("Stopping its licking, the beast begins to shuffle forwards, pre-cum coated worms plopping out of its double-dicks onto your belly.  They crawl lamely around as the beast works to line itself up, though you're unsure what it could possibly be aiming for.  Your questions are answered as the slightly pointed tip of one of its twin-members presses forward, bumping against your " + player.cockHead() + ".   It pushes forward with an intense sort of care, slowly forcing itself into your urethra, dribbling painfully hot cum directly into your cock-passage and dripping the stuff all over your groin.\n\n");
+					outputText("Stopping its licking, the beast begins to shuffle forwards, pre-cum coated worms plopping out of its double-dicks onto your belly.  They crawl lamely around as the beast works to line itself up, though you're unsure what it could possibly be aiming for.  Your questions are answered as the slightly pointed tip of one of its twin-members presses forward, bumping against your [cockhead].   It pushes forward with an intense sort of care, slowly forcing itself into your urethra, dribbling painfully hot cum directly into your cock-passage and dripping the stuff all over your groin.\n\n");
 
-					outputText("Gods, it's shoving its infected cock up your urethra!  It's trying to infect you with those worms!  The dog-demon keeps pushing further and further, sliding deep inside you, the outline of its member easily visible through the skin of your " + multiCockDescriptLight() + ".  It starts feeling good, the wriggling parasite-infested dick begins sliding in and out, fucking your urethra in earnest and depositing its wormy cargo deep inside you.\n\n");
+					outputText("Gods, it's shoving its infected cock up your urethra!  It's trying to infect you with those worms!  The dog-demon keeps pushing further and further, sliding deep inside you, the outline of its member easily visible through the skin of your [cocks].  It starts feeling good, the wriggling parasite-infested dick begins sliding in and out, fucking your urethra in earnest and depositing its wormy cargo deep inside you.\n\n");
 
 					outputText("Your ");
 					if (player.balls > 0) outputText(ballsDescriptLight() + " shiver as hot doggie-cum and wiggling worms are pumped directly into them.");
@@ -125,11 +125,11 @@ package classes.Scenes.Areas.Mountain
 					if (player.cor < 33) outputText("In spite of your revulsion ");
 					else if (player.cor < 66) outputText("In spite of your better sense ");
 					else outputText("With a perverse sense of anticipation ");
-					outputText("you remove your " + player.armorName + " and drop to all fours, mimicking what you think a dog would do.\n\n");
+					outputText("you remove your [armor] and drop to all fours, mimicking what you think a dog would do.\n\n");
 				}
 				//(HP) 
 				else {
-					outputText("Too wounded to stand, you drop down to all fours in order to keep yourself off the ground.   Too late you realize your mistake – the snarling beast is behind you and its razor-shark teeth easily sink into your " + player.armorName + " before tearing it off, exposing your " + assDescript() + " and " + vaginaDescript(0) + ".  A cold mountain breeze blows across your now exposed " + player.skinDesc + ", reminding you just how utterly exposed you are to the alien lusts of this symbiotic monstrosity.\n\n");
+					outputText("Too wounded to stand, you drop down to all fours in order to keep yourself off the ground.   Too late you realize your mistake – the snarling beast is behind you and its razor-shark teeth easily sink into your [armor] before tearing it off, exposing your " + assDescript() + " and " + vaginaDescript(0) + ".  A cold mountain breeze blows across your now exposed [skin.type], reminding you just how utterly exposed you are to the alien lusts of this symbiotic monstrosity.\n\n");
 				}
 				outputText("The hell-hound rises up, looking nearly humanoid in shape for a moment before it drops down, planting its paws on your shoulders.  ");
 
@@ -168,11 +168,11 @@ package classes.Scenes.Areas.Mountain
 					if (player.cor < 33) outputText("In spite of your revulsion ");
 					else if (player.cor < 66) outputText("In spite of your better sense ");
 					else outputText("With a perverse sense of anticipation ");
-					outputText("you remove your " + player.armorName + " and drop to your elbows, mimicking what you think a dog would do.\n\n");
+					outputText("you remove your [armor] and drop to your elbows, mimicking what you think a dog would do.\n\n");
 				}
 				//(HP) 
 				else {
-					outputText("Too wounded to stand, you drop down to on your elbows in order to keep yourself off the ground.   Too late you realize your mistake – the snarling beast is behind you and its razor-shark teeth easily sink into your " + player.armorName + " before tearing it off, exposing your " + assDescript() + ".  A cold mountain breeze blows across your now exposed " + player.skinDesc + ", reminding you just how utterly exposed you are to the alien lusts of this symbiotic monstrosity.\n\n");
+					outputText("Too wounded to stand, you drop down to on your elbows in order to keep yourself off the ground.   Too late you realize your mistake – the snarling beast is behind you and its razor-shark teeth easily sink into your [armor] before tearing it off, exposing your " + assDescript() + ".  A cold mountain breeze blows across your now exposed [skin.type], reminding you just how utterly exposed you are to the alien lusts of this symbiotic monstrosity.\n\n");
 				}
 				outputText("The hell-hound rises up, looking nearly humanoid in shape for a moment before it drops down, planting its paws on your shoulders.  ");
 				if (player.cor < 80) outputText("You beg, \"<i>Please, no, no!  I don't want it... in me!</i>\"\n\n");

@@ -273,7 +273,7 @@ public function benoitIntro():void {
 		//Benoit reacts after fucking the PC.
 		else if(flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 1 && flags[kFLAGS.BENOIT_POST_FIRSTFUCK_TALK] == 0)
 			firstTimeAfterBoningEncounterBenoit();
-		else if(benoitAffection() < 35) outputText("Once again, you carefully enter the gloom of Benoit's salvage shop.  The proprietor sniffs the air as you enter, and then relaxes in " + benoitMF("his","her") + " seat.  \"<i>Allo again, " + player.short + ".  What brings you 'ere?</i>\"");
+		else if(benoitAffection() < 35) outputText("Once again, you carefully enter the gloom of Benoit's salvage shop.  The proprietor sniffs the air as you enter, and then relaxes in " + benoitMF("his","her") + " seat.  \"<i>Allo again, [name].  What brings you 'ere?</i>\"");
 		//Subsequent Visit, Affection 35+ but pre-lover/pre-fem: 
 		else
 		{
@@ -888,7 +888,7 @@ private function eggySuggest():void {
 		//Suggest: 
 		outputText("You reach your fingers across the counter and lightly touch " + benoitMF("Benoit","Benoite") + "'s hands, saying you don't mind working out a few natural urges, if " + benoitMF("he","she") + "'s in the mood.");
 		outputText("\n\n“You- I- what?” " + benoitMF("he","she") + " replies, looking slightly stunned. “You don't? Are you...I don't know if...” you reach across and squeeze " + benoitMF("Benoit","Benoite") + "'s hands until " + benoitMF("his","her") + " nervous babble dies out and hesitantly, " + benoitMF("he","she") + " squeezes back.  Still holding " + benoitMF("his","her") + " hand, you move behind the crates and then gently lead " + benoitMF("him","her") + " behind the stall's canopy.");
-		outputText("\n\nWhat passes for " + benoitMF("Benoit","Benoite") + "'s back office is perfect for your purposes; the two wagons between which " + benoitMF("his","her") + " stall is sandwiched close together here and the triangular space is filled with crates and unsorted salvage.  You carefully inch your blind charge to a clear cranny and push " + benoitMF("him","her") + " against a wooden wall, standing back to slowly peel off your " + player.armorName + ".  You grin as you ostentatiously drop each piece onto the packed earth, allowing " + benoitMF("him","her") + " to guess what it is by the sound it makes.  " + benoitMF("His","Her") + " breathing comes heavier as your undergarments make a feathery sound as they fall.");
+		outputText("\n\nWhat passes for " + benoitMF("Benoit","Benoite") + "'s back office is perfect for your purposes; the two wagons between which " + benoitMF("his","her") + " stall is sandwiched close together here and the triangular space is filled with crates and unsorted salvage.  You carefully inch your blind charge to a clear cranny and push " + benoitMF("him","her") + " against a wooden wall, standing back to slowly peel off your [armor].  You grin as you ostentatiously drop each piece onto the packed earth, allowing " + benoitMF("him","her") + " to guess what it is by the sound it makes.  " + benoitMF("His","Her") + " breathing comes heavier as your undergarments make a feathery sound as they fall.");
 		outputText("\n\n“Zis will sound strange,” says " + benoitMF("Benoit","Benoite") + " in a thick voice, “But- would you mind if I just touched you a bit first? All I know about you is ze sound of your voice.”  You acquiesce and draw close, taking " + benoitMF("his","her") + " hands once again and gently laying them upon you.  You sigh as, holding " + benoitMF("his","her") + " index claws back, " + benoitMF("he","she") + " begins to move them slowly up and down.");
 		outputText("\n\n" + benoitMF("His","Her") + " warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel like you're being read like a book in Braille.  “Good Gods,” " + benoitMF("he","she") + " murmurs as " + benoitMF("his","her") + " hands lead back onto your flanks.  “Good Gods!” " + benoitMF("he","she") + " cries out as " + benoitMF("he","she") + " follows you all the way back to your mighty, powerful rear.  “I knew you were a centaur because of all ze clip clopping,” " + benoitMF("he","she") + " says, rubbing your side back and forth in wonder.  “But to know it and actually feel it, zey are somesing very different.” " + benoitMF("He","She") + " sighs.  “I 'ope you do not mind zis being a bit... awkward, but I am guessing you are probably used to zat by now, yes?”");
 		// Herm: 
@@ -974,7 +974,7 @@ private function eggySuggest():void {
 		if(player.hasCock()) {
 			if(!player.isTaur()) outputText("  Stuck between your two burning bodies, y");
 			else outputText("Y");
-			outputText("our " + cockDescript(0) + " spurts in sympathy to your female high, soaking ");
+			outputText("our [cock] spurts in sympathy to your female high, soaking ");
 			if(!player.isTaur()) outputText("both of you");
 			else outputText("the dry dirt");
 			outputText(" with white.");
@@ -1155,7 +1155,7 @@ private function repeatBenoitFuckTakeCharge():void {
 			//[(not horse)
 			if(!player.isTaur()) outputText("  Stuck between your two burning bodies, y");
 			else outputText("Y");
-			outputText("our " + cockDescript(0) + " spurts in sympathy to your female high, soaking ");
+			outputText("our [cock] spurts in sympathy to your female high, soaking ");
 			if(!player.isTaur()) outputText("both of you");
 			else outputText("the dry dirt");
 			outputText(" with white.");

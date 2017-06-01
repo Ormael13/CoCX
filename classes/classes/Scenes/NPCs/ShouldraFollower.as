@@ -157,7 +157,7 @@ private function pureValaAndShouldraMacroMax():void {
 	outputText("\n\nSoon, your body is engulfed up to your lower [legs], mired in pussy and lubricant.  It's like taking a bath in slime, only the bathtub is giving you a whole-body embrace, slipping, sliding, and taking pleasure from every motion you make.");
 	if(player.gender > 0) {
 		outputText("  Inspired by this, your own body has long since responded");
-		if(player.hasCock()) outputText(", becoming firmly erect.  You happily piston your hips to grind your " + multiCockDescriptLight() + " along the pink-glossed walls, oozing your fluids in delight.");
+		if(player.hasCock()) outputText(", becoming firmly erect.  You happily piston your hips to grind your [cocks] along the pink-glossed walls, oozing your fluids in delight.");
 		else outputText(", growing wet, though in this slick fluid, your contribution is a mere drop in the ocean.");
 	}
 	outputText("  The warm fleshy dream is abruptly ended as Shouldra yanks you out by your [feet].  \"<i>I'm gonna put you the whole way in.  Do me a solid and get me off a few times, will ya?</i>\"");
@@ -1123,7 +1123,7 @@ private function shouldraMakesCocksDisappear():void {
 	flags[kFLAGS.SHOULDRA_MAGIC_COOLDOWN] = 72;
 	clearOutput();
 	spriteSelect(67);
-	outputText("Your hands dart for your " + multiCockDescriptLight() + " as if to protect your poor masculinity.  \"<i>You're kidding, right?  You can't mean to rob me of my pride and joy!</i>\"  You remind Shouldra just whose dick she's talking about; the eidolon is getting a little too accustomed to your [if (cocks = 1) dick][if (cocks > 1) dicks].  \"<i>Please, Champ.  Not the dick...</i>\"  You slowly remove your hands from your crotch, asking the ghost to proceed.  She complies with a frustrated sigh and a rather perturbed incantation.");
+	outputText("Your hands dart for your [cocks] as if to protect your poor masculinity.  \"<i>You're kidding, right?  You can't mean to rob me of my pride and joy!</i>\"  You remind Shouldra just whose dick she's talking about; the eidolon is getting a little too accustomed to your [if (cocks = 1) dick][if (cocks > 1) dicks].  \"<i>Please, Champ.  Not the dick...</i>\"  You slowly remove your hands from your crotch, asking the ghost to proceed.  She complies with a frustrated sigh and a rather perturbed incantation.");
 	if(player.cocks.length == 1) {
 		outputText("\n\nYour penis vibrates slightly as the magic starts to take effect.  Your eyes just about bulge out of your skull when your rod starts to smoke and twitch violently.  The panic immediately subsides when it starts yelling.  \"<i>You ");
 		var choice:Number = rand(10);

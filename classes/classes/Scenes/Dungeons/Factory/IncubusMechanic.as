@@ -92,22 +92,22 @@ package classes.Scenes.Dungeons.Factory
 				game.combatRoundOver();
 				return;
 			}
-			outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + game.buttDescript() + " and pull your " + player.legs() + " out from under you.");
+			outputText("The incubus lunges forward in a clumsy attack that you start to side-step, only to feel something grip behind your " + game.buttDescript() + " and pull your [legs] out from under you.");
 			if ((player.spe-30) > rand(60)) {
-				outputText("  You spin as you fall, twisting your " + player.legs() + " free and springing back to your " + player.feet() + " unharmed.");
+				outputText("  You spin as you fall, twisting your [legs] free and springing back to your [feet] unharmed.");
 			}
 			else { //Fall down go boom
-				outputText("  You land hard on your ass, momentarily stunned as the demonic cock-tentacle curls around your " + player.legs() + ", smearing them with oozing demonic fluids.");
+				outputText("  You land hard on your ass, momentarily stunned as the demonic cock-tentacle curls around your [legs], smearing them with oozing demonic fluids.");
 				if (player.lust >= 80 || player.cor >= 80) {
-					outputText("  Moaning with desire, you lick your lips as you slide your well-lubricated " + player.legs() + " free.  You gather a dollop of cum and lick it seductively, winking at the incubus and hoping to make him cave into his desire.");
+					outputText("  Moaning with desire, you lick your lips as you slide your well-lubricated [legs] free.  You gather a dollop of cum and lick it seductively, winking at the incubus and hoping to make him cave into his desire.");
 					game.dynStats("lus", 13, "cor", 1);
 				}
 				else if (player.lust >= 50 || player.cor >= 50) {
-					outputText("  Blushing at the scent and feel of cum on your " + player.legs() + ", you twist and pull free.  You find yourself wondering what this demon's dick would taste like.");
+					outputText("  Blushing at the scent and feel of cum on your [legs], you twist and pull free.  You find yourself wondering what this demon's dick would taste like.");
 					game.dynStats("lus", 8 + player.cor / 20);
 				}
 				else {
-					outputText("  Disgusted, you pull away from the purplish monstrosity, the act made easier by your well-slimed " + player.legs() + ".");
+					outputText("  Disgusted, you pull away from the purplish monstrosity, the act made easier by your well-slimed [legs].");
 					game.dynStats("lus", 5 + player.cor / 20);
 				}
 				game.combat.takeDamage(5);
@@ -152,7 +152,7 @@ package classes.Scenes.Dungeons.Factory
 					break;
 				default: //Crotch
 					if (player.vaginas.length > 0) {
-						outputText("crotch.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way past your " + player.armorName + " and into your " + player.vaginaDescript(0) + ".  You can feel it moving around inside you, doing its best to prepare you for its master.");
+						outputText("crotch.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way past your [armor] and into your " + player.vaginaDescript(0) + ".  You can feel it moving around inside you, doing its best to prepare you for its master.");
 						game.dynStats("lus", 3);
 						if (!player.hasStatusEffect(StatusEffects.DemonSeed))
 							player.createStatusEffect(StatusEffects.DemonSeed, 5, 0, 0, 0);

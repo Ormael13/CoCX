@@ -59,7 +59,7 @@ public class ManticoreVenom extends Consumable {
 		if (player.lowerBody != LOWER_BODY_TYPE_LION && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
 			if (player.lowerBody != LOWER_BODY_TYPE_HUMAN) outputText("You watch, spellbound, while your legs gradually change its entire outer structure into a plain human-like form. ");
-			outputText("Your legs suddenly shift, painfully forcing you down on all fours as the bone of your feet changes shape into something entirely different. You feel hairs growing at a rapid rate all over your legs. Something juts out of your toe as they clench into the ground. As you feel the pain recede, you sit and take a look at your " + player.feet() + "; or rather, your large leonine hind paws, now armed with sharp, retractable claws. <b>You now have leonine paws.</b>");
+			outputText("Your legs suddenly shift, painfully forcing you down on all fours as the bone of your feet changes shape into something entirely different. You feel hairs growing at a rapid rate all over your legs. Something juts out of your toe as they clench into the ground. As you feel the pain recede, you sit and take a look at your [feet]; or rather, your large leonine hind paws, now armed with sharp, retractable claws. <b>You now have leonine paws.</b>");
 			mutations.setLowerBody(LOWER_BODY_TYPE_LION);
 			player.legCount = 2;
 			changes++;

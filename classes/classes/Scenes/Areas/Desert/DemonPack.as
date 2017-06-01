@@ -19,7 +19,7 @@
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (hpVictory) {
-				outputText("You strike out and the last of the demons tumbles to the ground with a thud. You stand there for a second surrounded by dead or unconscious demons feeling like a god of battle. Then you realize that if a god of battle does exist he lives on a demonic plane like this, so to avoid insulting him you take your hands off your hips and your " + player.legs() + " off the head of the demon leader before you start to search the bodies.", true);
+				outputText("You strike out and the last of the demons tumbles to the ground with a thud. You stand there for a second surrounded by dead or unconscious demons feeling like a god of battle. Then you realize that if a god of battle does exist he lives on a demonic plane like this, so to avoid insulting him you take your hands off your hips and your [legs] off the head of the demon leader before you start to search the bodies.", true);
 				game.dynStats("lus", 1);
 			} else {
 				outputText("The demons stop attacking, and reach out to touch your body. Some are already masturbating like it's the only thing in the world and you know that right now, if you wanted to, you could make each and every one of them fuck you.");
@@ -62,7 +62,7 @@
 				if(player.cocks.length > 0) {
 					if(player.cockTotal() > 1) outputText("Each of y");
 					else outputText("Y");
-					outputText("our " + player.multiCockDescriptLight() + " throbs ");
+					outputText("our [cocks] throbs ");
 					if(player.hasVagina()) outputText(" and your ");
 				}
 				if(player.vaginas.length > 0) {

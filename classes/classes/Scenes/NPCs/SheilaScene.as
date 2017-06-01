@@ -323,7 +323,7 @@ private function sheila1ndEncLookCloserPtII():void {
 	//[(libido>=50)
 	if(player.lib >= 50) outputText("  Noting you still checking out her body, she smirks and says, \"<i>Enjoying your lookie, then?  Up here, cobber,</i>\" causing you to snap your head up sheepishly.");
 	outputText("  You nod at the strange woman and introduce yourself.");
-	if(player.short != "Sheila") outputText("  \"<i>" + player.short + ", eh?  My mates just call me Sheila.  Bunch of jokers, the bastards.</i>\"");
+	if(player.short != "Sheila") outputText("  \"<i>[name], eh?  My mates just call me Sheila.  Bunch of jokers, the bastards.</i>\"");
 	else outputText("  \"<i>You too, eh?  Sheila's what my mates call me for a nickname.  Don't suppose you got yours from a bunch of adolescent-minded wankers, though.</i>\"");
 	
 	outputText("\n\nStrange to see another person so far from anywhere, and a friendly one at that.  Sheila smiles a tight-lipped smile at you and tells you she felt the same herself.  \"<i>Right dangerous out here, with all the bloody gnolls and belligerent cows about.  Of course they've always been whackers.  I was just hunting a bit of tucker, but it's got clean away.</i>\"  She gestures toward the ground.  Next to her feet is a trap cleverly hidden in the brush, though it looks like her quarry broke the snare.");
@@ -1911,7 +1911,7 @@ private function consensualSheila69(cock:Boolean = true):void {
 		outputText("What you see manages to pull an explosive laugh from you, tired as you are.  Sheila gives you the stink-eye until you've recovered enough to explain the source of your mirth: on her forehead, making a perfect ");
 		if(player.balls == 2) outputText("infinity");
 		else outputText("double infinity");
-		outputText(" shape against the rest of her skin, is an imprint of your " + ballsDescriptLight() + ".  The kangaroo girl rolls her eyes at the juvenile display and resumes her harangue.  ");
+		outputText(" shape against the rest of her skin, is an imprint of your [balls].  The kangaroo girl rolls her eyes at the juvenile display and resumes her harangue.  ");
 	}
 	outputText("\"<i>You could give a girl a bloody warning before that sort of behavior.  I thought you were going to kill me!</i>\"");
 	
@@ -2901,7 +2901,7 @@ private function sheilaCowgirlRapesYou():void {
 	outputText("\n\nEager to see anything but your curious face, Sheila pushes your hands away from her breasts and turns to your crotch.  She ");
 	if(player.isTaur()) outputText("pulls your legs apart");
 	else outputText("unfastens and strips off your [armor]");
-	outputText(", revealing your " + multiCockDescriptLight() + "; ");
+	outputText(", revealing your [cocks]; ");
 	//[(if no cock fit 32)
 	if(player.cockThatFits(32) < 0) {
 		outputText("her eyes widen as " + sMultiCockDesc() + " bobs free, half-erect monster meat that fills her with frustration.");
@@ -4074,7 +4074,7 @@ private function loseToNormalSheilaAndGetRidden():void {
 	outputText("Sheila pushes you onto the ground");
 	if(player.isTaur()) outputText(" and you're forced to put your forelegs down for support as you come to rest on your haunches");
 	else outputText(", spreading your legs.  The demon unfastens your [armor] and strips it from your bottoms easily");
-	outputText(", exposing your " + multiCockDescriptLight() + ".");
+	outputText(", exposing your [cocks].");
 	
 	outputText("\n\n");
 	//[(multi)
@@ -4147,7 +4147,7 @@ private function loseToNormalSheilaAndGetRidden():void {
 		else outputText("You grab her hips and");
 		outputText(" help her impale herself on your tool.");
 		
-		outputText("\n\nThe demon shudders as your [sheath] bumps up against her vulva.  \"<i>Y-yeah, but I never paid attention to growing dongers without balls and that kinda arcane stuff, mate... didn't think I'd end up fucking a strange " + player.race() + " like you until you stuck it in me.  I always wanted to marry a normal bloke like my dad.</i>\"");
+		outputText("\n\nThe demon shudders as your [sheath] bumps up against her vulva.  \"<i>Y-yeah, but I never paid attention to growing dongers without balls and that kinda arcane stuff, mate... didn't think I'd end up fucking a strange [race] like you until you stuck it in me.  I always wanted to marry a normal bloke like my dad.</i>\"");
 		
 		outputText("\n\n\"<i>Pardon,</i>\" you interrupt irritably, pushing her back up, \"<i>but </i>you're<i> the one who's sticking it in you.  And if you want to fuck your father so badly, go find him and leave me alone.</i>\"");
 		
@@ -4593,7 +4593,7 @@ private function sheilaAnalHateFuckAGoGo():void {
 	clearOutput();
 	outputText("Your [cockFit 56] gets hard in your [armor] as you watch her diddle her pussy, but you set your jaw to resist giving her what she wants - a better idea is taking shape in your head.  \"<i>Turn around,</i>\" you demand.");
 	
-	outputText("\n\nSheila bites her lip and blushes, then turns her back to you, pressing her chest into the ground and waving her ass in the air, twin tails bobbing over her round cheeks and drooling, eager cunt.  \"<i>Heehee, I'm ready for you, mate... look how wet I am!</i>\"  You strip, releasing your " + multiCockDescriptLight() + ", and approach.  She hums in anticipation as you rub against her smooth labia, smearing her moisture onto your [cockHeadFit 56].  \"<i>Come on; time to put it in already!  Don't tease me!</i>\"");
+	outputText("\n\nSheila bites her lip and blushes, then turns her back to you, pressing her chest into the ground and waving her ass in the air, twin tails bobbing over her round cheeks and drooling, eager cunt.  \"<i>Heehee, I'm ready for you, mate... look how wet I am!</i>\"  You strip, releasing your [cocks], and approach.  She hums in anticipation as you rub against her smooth labia, smearing her moisture onto your [cockHeadFit 56].  \"<i>Come on; time to put it in already!  Don't tease me!</i>\"");
 	
 	outputText("\n\nYour smile widens, unseen, as you silently agree.  ");
 	if(!player.isTaur()) outputText("Slipping one hand around your [cockFit 32]");
@@ -4823,7 +4823,7 @@ private function bigDickAndThighs():void {
 	}
 	//(horse)
 	else {
-		outputText("slowly draw nearer to her, your " + multiCockDescriptLight() + " bobbing with each step.");
+		outputText("slowly draw nearer to her, your [cocks] bobbing with each step.");
 	}
 	outputText("\n\n\"<i>Oh no...</i>\" she says, blushing.  \"<i>[name], you're massive... are you really going to try to put something like that in my poor little pussy?</i>\"");
 	
@@ -4855,7 +4855,7 @@ private function bigDickAndThighs():void {
 		if(player.isTaur()) outputText(", unseen");
 		outputText(".");
 		
-		outputText("\n\n\"<i>We'll see who finishes first.</i>\"  Resting herself against your " + multiCockDescriptLight() + " for support, she brings her other hand up and touches you; almost the full sensation is there this time, and you sign in happiness.  Sheila begins stroking with the new hand as well as the old, grabbing ");
+		outputText("\n\n\"<i>We'll see who finishes first.</i>\"  Resting herself against your [cocks] for support, she brings her other hand up and touches you; almost the full sensation is there this time, and you sign in happiness.  Sheila begins stroking with the new hand as well as the old, grabbing ");
 		if(player.cockTotal() == 1) outputText("your dick with both");
 		else outputText("a prick in each");
 		outputText(" and angling upward so the precum drools downward and lubes her fingers.");
@@ -4881,7 +4881,7 @@ private function bigDickAndThighs():void {
 		else outputText("\n\n");
 		outputText("Sheila scoots backward, choking up on monster cock until her ass is pressed against your crotch, and then wraps her hands around and begins to masturbate you, using your drooling fluid and her own wetness for lubrication.");
 		
-		outputText("\n\nShe seems to get off on it as much as you do; as she strokes, her tongue hangs out slightly and she begins rubbing your " + multiCockDescriptLight() + " between her " + sheilaCup() + " breasts, smearing your secretions down her entire torso.  Her skin is hot and feels good, but not as vivid as you'd expect.  The demon's pussy contracts wildly again, despite being at rest against your shaft, and you come to a realization: she's actually siphoning the pleasure from you!");
+		outputText("\n\nShe seems to get off on it as much as you do; as she strokes, her tongue hangs out slightly and she begins rubbing your [cocks] between her " + sheilaCup() + " breasts, smearing your secretions down her entire torso.  Her skin is hot and feels good, but not as vivid as you'd expect.  The demon's pussy contracts wildly again, despite being at rest against your shaft, and you come to a realization: she's actually siphoning the pleasure from you!");
 	}
 	//end corr split
 	outputText("\n\nThe woman quickly becomes lost in her own little world, searching out the nerves on your prick");
@@ -4891,7 +4891,7 @@ private function bigDickAndThighs():void {
 	if(player.cockTotal() == 2) outputText("relinquish your other prick and ");
 	outputText("focus on squeezing more drops out of you.  She fairly coats her lips with it, rubbing your hole against them before popping the whole [cockHead biggest] back into her mouth.  A moan escapes you just as another one returns from Sheila's throat, transmitted through your [cock biggest].");
 	
-	outputText("\n\nAs her attentions refocus on your [cockHead biggest], a pang of loss arises from the middle of your " + multiCockDescriptLight() + " - and is quickly smothered with her chest.");
+	outputText("\n\nAs her attentions refocus on your [cockHead biggest], a pang of loss arises from the middle of your [cocks] - and is quickly smothered with her chest.");
 	//[(sheila corruption < 50)
 	if(sheilaCorruption() < 50) outputText("  Though her modest breasts can't even begin to encompass your girth, Sheila rubs her cleavage along your skin with gusto while she works your tip with her tongue.");
 	else if(sheilaCorruption() < 150) outputText("  Her large " + sheilaCup() + " breasts encompass your girth easily, and she pushes the soft, flushed skin together as she slides it up and down your cock.");

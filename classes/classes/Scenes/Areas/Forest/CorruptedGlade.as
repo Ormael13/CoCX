@@ -75,24 +75,24 @@ package classes.Scenes.Areas.Forest {
 			spriteSelect(92);
 			if (player.hasCock()) { //Sex scenes for those with cawks
 				if (player.cocks.length == 1) { //Single Cawk
-					outputText("You grin to yourself as you decide to see just how close to a pussy these perverted little flowers are.  The thick stem bends with ease as you grasp it and bend it towards your groin, your other hand fumbling to open your " + player.armorName + ".  In seconds you free yourself and gingerly bring the folds closer, the musky scent that fills the air rapidly bringing you to a full, throbbing hardness.  The first touch of petals to your skin slicks you with the flower's silky secretions, allowing you to easily slip between the petals.  Though the flower looks fairly deep, you quickly feel yourself bottom out inside the petal's slippery grip.  Shrugging, you decide to make the best of it and begin thrusting into the plant, enjoying the unusual sensations along the front-most parts of your " + cockDescript(0) + ".  As you pound away, you begin to notice a change in the rear of the flower.\n\n");
+					outputText("You grin to yourself as you decide to see just how close to a pussy these perverted little flowers are.  The thick stem bends with ease as you grasp it and bend it towards your groin, your other hand fumbling to open your [armor].  In seconds you free yourself and gingerly bring the folds closer, the musky scent that fills the air rapidly bringing you to a full, throbbing hardness.  The first touch of petals to your skin slicks you with the flower's silky secretions, allowing you to easily slip between the petals.  Though the flower looks fairly deep, you quickly feel yourself bottom out inside the petal's slippery grip.  Shrugging, you decide to make the best of it and begin thrusting into the plant, enjoying the unusual sensations along the front-most parts of your [cock].  As you pound away, you begin to notice a change in the rear of the flower.\n\n");
 
-					outputText("It feels as if something is opening up, and the tip of your cock begins slipping through a tight ring, bulging the plant's stem noticeably.  The sudden change worries you enough to pull back for a moment, your " + cockDescript(0) + " nearly clearing the opening before dozens of tiny whip-like tendrils burst from the flower, wrapping your maleness with painful tightness.  They constrict further and with a burst of movement, slam the flower down onto your " + cockDescript(0) + ", pulling you further and further into the stem with painful force.  You struggle briefly but the pain it causes your over-stimulated member is too much, so you just give up, letting the pussy-like plant draw the last of you inside its stem, the silken flowers cupping around your ");
+					outputText("It feels as if something is opening up, and the tip of your cock begins slipping through a tight ring, bulging the plant's stem noticeably.  The sudden change worries you enough to pull back for a moment, your [cock] nearly clearing the opening before dozens of tiny whip-like tendrils burst from the flower, wrapping your maleness with painful tightness.  They constrict further and with a burst of movement, slam the flower down onto your [cock], pulling you further and further into the stem with painful force.  You struggle briefly but the pain it causes your over-stimulated member is too much, so you just give up, letting the pussy-like plant draw the last of you inside its stem, the silken flowers cupping around your ");
 					if (player.balls > 0)
 						outputText("balls and gently squeezing them.\n\n");
 					else
 						outputText("groin and gently squeezing your taint.\n\n");
 						
-					outputText("You feel a flood of wetness surge up from the depths of the plant, surrounding your member with even more fluid as the stem begins constricting and squeezing.  Gently at first, and then with increasing insistence, a suction builds inside the stem, drawing more and more blood into your " + cockDescript(0) + ".  The stem, now heavily distended by your massive member, continues rippling, squeezing, and sucking your over-engorged meat-pole, overwhelming your mind with sensation far beyond normal.  You'd wonder just what kind of tactile-enhancing fluids that plant excretes, if you weren't already mindlessly pistoning against the tainted plant, still locked inside it by tight little tentacles.\n\n");
+					outputText("You feel a flood of wetness surge up from the depths of the plant, surrounding your member with even more fluid as the stem begins constricting and squeezing.  Gently at first, and then with increasing insistence, a suction builds inside the stem, drawing more and more blood into your [cock].  The stem, now heavily distended by your massive member, continues rippling, squeezing, and sucking your over-engorged meat-pole, overwhelming your mind with sensation far beyond normal.  You'd wonder just what kind of tactile-enhancing fluids that plant excretes, if you weren't already mindlessly pistoning against the tainted plant, still locked inside it by tight little tentacles.\n\n");
 				}
 				else { //Multicock
-					outputText("You grin to yourself as you decide to see just how close to a pussy these perverted little flowers are.  The thick stems bend with ease as you grab a few with your hand and pull them towards your groin, your other hand fumbling to open your " + player.armorName + ".  In seconds you free yourself, and gingerly bring the folds closer.  The musky scent filling the air rapidly brings your " + multiCockDescriptLight() + " to a full, throbbing hardness.  The first touch of petals to your skin slicks you with the flower's silky secretions, allowing you to easily slip between the petals.  Though the flowers look fairly deep, you quickly feel yourself bottom out inside the petals' slippery grip.  Shrugging, you decide to make the best of it and begin thrusting into the plant, enjoying the unusual sensations along the front-most parts of your " + multiCockDescriptLight() + ".  As you pound away, you begin to notice a change in the rear of the flowers.\n\n");
+					outputText("You grin to yourself as you decide to see just how close to a pussy these perverted little flowers are.  The thick stems bend with ease as you grab a few with your hand and pull them towards your groin, your other hand fumbling to open your [armor].  In seconds you free yourself, and gingerly bring the folds closer.  The musky scent filling the air rapidly brings your [cocks] to a full, throbbing hardness.  The first touch of petals to your skin slicks you with the flower's silky secretions, allowing you to easily slip between the petals.  Though the flowers look fairly deep, you quickly feel yourself bottom out inside the petals' slippery grip.  Shrugging, you decide to make the best of it and begin thrusting into the plant, enjoying the unusual sensations along the front-most parts of your [cocks].  As you pound away, you begin to notice a change in the rear of the flowers.\n\n");
 
-					outputText("They seem to be gradually opening up, allowing the smallest of your cock-tips to begin slipping through an opening in the backs of the flowers and into the stems.  Shocked by this unexpected development, you pull the bundle of flowers from your " + multiCockDescriptLight() + ", but whiplike tendrils shoot forth from deep within the flowers, wrapping tightly around your manhoods, painfully squeezing as they drag your " + multiCockDescriptLight() + " back into the tight vaginal openings.  They pull tighter as they force you deeper inside the plant, pulling the full length of each of your members into the constricting stalks.   Wrapped tightly around your base, the tendrils form effective cock-rings, making each of your " + multiCockDescriptLight() + " overfill with blood.\n\n");
+					outputText("They seem to be gradually opening up, allowing the smallest of your cock-tips to begin slipping through an opening in the backs of the flowers and into the stems.  Shocked by this unexpected development, you pull the bundle of flowers from your [cocks], but whiplike tendrils shoot forth from deep within the flowers, wrapping tightly around your manhoods, painfully squeezing as they drag your [cocks] back into the tight vaginal openings.  They pull tighter as they force you deeper inside the plant, pulling the full length of each of your members into the constricting stalks.   Wrapped tightly around your base, the tendrils form effective cock-rings, making each of your [cocks] overfill with blood.\n\n");
 					
 					outputText("You briefly try to free yourself but the pain it causes your groin overwhelms you.  Resigned to your fate, you allow the plants to wrap their petals fully around your groin, encapsulating all of your maleness.  With surprising gentleness, you feel a suction and squeezing building around each and every one of your dicks.  You feel a flood of fluids around each over-engorged member, making them tingle with unnatural sensitivity.  The squeezing and sucking of the plant's stalks, combined with the sudden onset of strange sensation, is too much to bear.  You feel a churning pressure at the base of your groin, liquid heat filling every member as your body makes ready to give these plants what they want.\n\n");
 				}
-				outputText("You cum, and cum, and cum, the evidence of your pleasure devoured by the plant's sucking, squeezing gullet.  The orgasm drags on for what feels like forever, your " + player.legs() + " eventually giving out, your hips the only muscle that seems to work as they twitch into the air, as if begging for more.  You are milked of a few last big spurts, at last collapsing.\n\n");
+				outputText("You cum, and cum, and cum, the evidence of your pleasure devoured by the plant's sucking, squeezing gullet.  The orgasm drags on for what feels like forever, your [legs] eventually giving out, your hips the only muscle that seems to work as they twitch into the air, as if begging for more.  You are milked of a few last big spurts, at last collapsing.\n\n");
 				
 				outputText("The tendrils encircling your genitals do not release; instead they pull tighter, one of " + (player.cocks.length > 1 ? "each plant's tiny" : "the tiny plant's") + " appendages penetrating your urethra" + (player.cocks.length > 1 ? "s" : "") + ", squirming up your cum slicked passage" + (player.cocks.length > 1 ? "s" : "") + " with uncomfortable slowness.  You lay there, too weak to resist it or fight, hoping that whatever the plants are doing won't hurt much.  You feel it twisting and coiling inside you... until it stops.  You feel a sharp pinch, and then it withdraws, seemingly satisfied.  The tendrils unwrap, allowing the plants to spring back up, exposing your still over-engorged and sensitive member" + (player.cocks.length > 1 ? "s" : "") + ".\n\n");
 				
@@ -134,7 +134,7 @@ package classes.Scenes.Areas.Forest {
 			clearOutput();
 			spriteSelect(92);
 			if (player.vaginas.length > 0 && rand(2) == 0) { //Vaginal Variant 50% of the time
-				outputText("You saunter over to a dangling group of perverted looking vines, discarding your " + player.armorName + " along the way. Running your fingertips along the bulbous-tipped tentacle-like vines, you find one that looks ");
+				outputText("You saunter over to a dangling group of perverted looking vines, discarding your [armor] along the way. Running your fingertips along the bulbous-tipped tentacle-like vines, you find one that looks ");
 				var tentacle:int = rand(3); //Big, medium or small size tentacle
 				var tentacleSize:int = 0;
 				if (tentacle == 0) { //Small
@@ -193,7 +193,7 @@ package classes.Scenes.Areas.Forest {
 					player.hairColor = "green";
 				}
 				if (rand(4) == 0 && player.hipRating <= 10) { //+hip up to 10
-					outputText("A strange shifting occurs below your waist, making your " + player.armorName + " feel tight.  <b>Your hips have grown larger</b>, becoming " + hipDescript() + ".  ");
+					outputText("A strange shifting occurs below your waist, making your [armor] feel tight.  <b>Your hips have grown larger</b>, becoming " + hipDescript() + ".  ");
 					player.hipRating += rand(3) + 1;
 					player.fertility++;
 				}
@@ -227,19 +227,19 @@ package classes.Scenes.Areas.Forest {
 				}
 				//+butt up to 10
 				if (rand(4) == 0 && player.buttRating <= 10) {
-					outputText("A strange shifting occurs on your backside, making your " + player.armorName + " feel tight.  <b>Your butt has grown larger</b>, becoming a " + buttDescript() + ".  ");
+					outputText("A strange shifting occurs on your backside, making your [armor] feel tight.  <b>Your butt has grown larger</b>, becoming a " + buttDescript() + ".  ");
 					player.buttRating += rand(3) + 1;
 				}
 				//Rarely change one prick to a vine-like tentacle cock. 
 				if (rand(3) == 0 && player.cocks.length > 0 && player.hairColor == "green") {
 					if (player.tentacleCocks() < player.cockTotal()) {
 						if (player.cocks.length == 1) { //Single cawks
-							outputText("Your feel your " + cockDescript(0) + " bending and flexing of its own volition... looking down, you see it morph into a green vine-like shape.  <b>You now have a tentacle cock!</b>  ");
+							outputText("Your feel your [cock] bending and flexing of its own volition... looking down, you see it morph into a green vine-like shape.  <b>You now have a tentacle cock!</b>  ");
 							//Set primary cock flag
 							player.cocks[0].cockType = CockTypesEnum.TENTACLE;
 						}
 						if (player.cockTotal() > 1) { //multi
-							outputText("Your feel your " + multiCockDescriptLight() + " bending and flexing of their own volition... looking down, you watch them morph into flexible vine-like shapes.  <b>You now have green tentacle cocks!</b>  ");
+							outputText("Your feel your [cocks] bending and flexing of their own volition... looking down, you watch them morph into flexible vine-like shapes.  <b>You now have green tentacle cocks!</b>  ");
 							for (var x:int = 0; x < player.cocks.length; x++) player.cocks[x].cockType = CockTypesEnum.TENTACLE;
 						}
 					}

@@ -16,7 +16,7 @@
 			}
 			//(½ chance during any round):
 			if(rand(2) == 0) {
-				outputText("\nOne of the tiny demons latches onto one of your " + player.legs() + " and starts humping it.  You shake the little bastard off and keep fighting!");
+				outputText("\nOne of the tiny demons latches onto one of your [legs] and starts humping it.  You shake the little bastard off and keep fighting!");
 				game.dynStats("lus", 1);
 			}
 			combatRoundOver();
@@ -103,11 +103,11 @@
 				else {
 					damage = rand(6);
 					if(damage == 0) outputText("A squirt of hot demonic cum splatters into your face!\n");
-					if(damage == 1) outputText("Your " + player.allBreastsDescript() + " are coated with thick demonic spunk!\n");
-					if(damage == 2) outputText("Some of the fluid splatters into your midriff and drools down to your waist, making your " + player.armorName + " slimy and wet.\n");
-					if(damage == 3) outputText("Seed lands in your " + player.hairDescript() + ", slicking you with demonic fluid.\n");
+					if(damage == 1) outputText("Your [allbreasts] are coated with thick demonic spunk!\n");
+					if(damage == 2) outputText("Some of the fluid splatters into your midriff and drools down to your waist, making your [armor] slimy and wet.\n");
+					if(damage == 3) outputText("Seed lands in your [hair], slicking you with demonic fluid.\n");
 					if(damage == 4) outputText("Another blast of jizz splatters against your face, coating your lips and forcing a slight taste of it into your mouth.\n");
-					if(damage == 5) outputText("The last eruption of cum soaks your thighs and the lower portions of your " + player.armorName + ", turning it a sticky white.\n");
+					if(damage == 5) outputText("The last eruption of cum soaks your thighs and the lower portions of your [armor], turning it a sticky white.\n");
 					game.dynStats("lus", (7+int(player.lib/40+player.cor/40)));
 				}
 				lust -= 5;

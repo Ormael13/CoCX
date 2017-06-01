@@ -58,7 +58,7 @@ package classes.Items.Consumables
 				outputText(" begins to feel duller, almost... thicker.  You pinch yourself and find that your epidermis feels more resistant to damage, almost like natural armor!\n<b>(Thick Skin - Perk Gained!)</b>");
 				player.createPerk(PerkLib.ThickSkin, 0, 0, 0, 0);
 			}
-			outputText("\n\nAfter the sensations pass, your " + player.skinDesc + " feels a little less receptive to touch.");
+			outputText("\n\nAfter the sensations pass, your [skin.type] feels a little less receptive to touch.");
 			dynStats("sen", -3);
 			if (player.sens < 1) player.sens = 1;
 			player.refillHunger(20);

@@ -25,7 +25,7 @@ package classes.Scenes.Areas.GlacialRift
 					combatRoundOver();
 					return;
 				}
-				outputText("Like a white blur the yeti charges you, striking at you with his claws and slashing over your " + player.armorName + " before a fist collides with your side, sending you sliding over the icy floor. ")
+				outputText("Like a white blur the yeti charges you, striking at you with his claws and slashing over your [armor] before a fist collides with your side, sending you sliding over the icy floor. ")
 				var damage:Number = str + 25 + rand(50);
 				damage = player.reduceDamage(damage);
 				player.takeDamage(damage, true);
@@ -59,7 +59,7 @@ package classes.Scenes.Areas.GlacialRift
 					combatRoundOver();
 					return;
 				}
-				outputText("The beast takes a step back, mist forming into a ball in his clenched fist. It condenses into a ball before your eyes, and with a growl the beast whips it at you. The ball slams into your " + player.armorName + " and explodes into frost, you hiss at the sting. The frost is also restricting your movement. ");
+				outputText("The beast takes a step back, mist forming into a ball in his clenched fist. It condenses into a ball before your eyes, and with a growl the beast whips it at you. The ball slams into your [armor] and explodes into frost, you hiss at the sting. The frost is also restricting your movement. ");
 				var damage:Number = (str / 2) + rand(20);
 				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.1;
 				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;

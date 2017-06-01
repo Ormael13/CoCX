@@ -41,7 +41,7 @@
 					}
 					//(AUTO-LOSE)
 					else {
-						outputText("She throws her hands out, palms facing you, and a rush of pink flame washes towards you.  Too busy with your own attack to effectively dodge, you're hit full on by the pink fire.  Incredibly, it doesn't burn.  The fire actually seems to flow inside you, disappearing into your skin.  You stumble, confused for a second, but then it hits you.  Every inch of your body is buzzing with pleasure, practically squirming and convulsing with sexual delight.  You collapse, twitching and heaving, feeling the constant sensation of sexual release running from your head to your " + player.feet() + ".  Too horny and pleasured to resist, you lie down and tremble, occasionally rubbing yourself to enhance the bliss.");
+						outputText("She throws her hands out, palms facing you, and a rush of pink flame washes towards you.  Too busy with your own attack to effectively dodge, you're hit full on by the pink fire.  Incredibly, it doesn't burn.  The fire actually seems to flow inside you, disappearing into your skin.  You stumble, confused for a second, but then it hits you.  Every inch of your body is buzzing with pleasure, practically squirming and convulsing with sexual delight.  You collapse, twitching and heaving, feeling the constant sensation of sexual release running from your head to your [feet].  Too horny and pleasured to resist, you lie down and tremble, occasionally rubbing yourself to enhance the bliss.");
 						game.dynStats("lus", 1000);
 					}
 				}
@@ -63,7 +63,7 @@
 			//[SPECIAL WHILE PC RESTRAINED]
 			else {
 				if (rand(2) == 0) {
-					outputText("Ceraph cuddles up against you, embracing you tenderly.  Her more-than-ample bosom crushes against your flank, and her demonic prick grinds and rubs against your " + player.skinDesc + ", smearing it with her juices.  Her hands slide over your bound form, sneaking underneath your " + player.armorName + " to caress you more intimately while you're at her mercy.");
+					outputText("Ceraph cuddles up against you, embracing you tenderly.  Her more-than-ample bosom crushes against your flank, and her demonic prick grinds and rubs against your [skin.type], smearing it with her juices.  Her hands slide over your bound form, sneaking underneath your [armor] to caress you more intimately while you're at her mercy.");
 					game.dynStats("lus", 9 + player.sens / 10);
 				}
 				//[SPECIAL 2 WHILE PC RESTRAINED]
@@ -114,7 +114,7 @@
 		public function ceraphBoundWait():void
 		{
 			clearOutput();
-			outputText("Why bother resisting?  The feeling of the leather wrapped tightly around you, digging into your " + player.skinDesc + ", is intoxicating.");
+			outputText("Why bother resisting?  The feeling of the leather wrapped tightly around you, digging into your [skin.type], is intoxicating.");
 			if (flags[kFLAGS.PC_FETISH] >= 2) {
 				outputText("  You squirm inside the bindings as you get more and more turned on, hoping that Ceraph will strip away your armor and force you to parade around as her bound, naked pet.");
 				game.dynStats("lus", 5);
@@ -174,7 +174,7 @@
 				if (damage <= 0) {
 					damage = 0;
 					//Due to toughness or amor...
-					if (rand(player.armorDef + player.tou) < player.armorDef) outputText("Your " + player.armorName + " absorb and deflect every " + weaponVerb + " from " + a + short + ".");
+					if (rand(player.armorDef + player.tou) < player.armorDef) outputText("Your [armor] absorb and deflect every " + weaponVerb + " from " + a + short + ".");
 					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.");
 				}
 				if (damage > 0 && damage < 6) {
@@ -221,7 +221,7 @@
 				if (damage <= 0) {
 					damage = 0;
 					//Due to toughness or amor...
-					if (rand(player.armorDef + player.tou) < player.armorDef) outputText("Your " + player.armorName + " absorb and deflect every " + weaponVerb + " from " + a + short + ".");
+					if (rand(player.armorDef + player.tou) < player.armorDef) outputText("Your [armor] absorb and deflect every " + weaponVerb + " from " + a + short + ".");
 					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.");
 				}
 				if (damage > 0 && damage < 6) {

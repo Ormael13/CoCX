@@ -97,10 +97,10 @@
 				outputText("Her eyes glaze over and you feel your mind suddenly becoming filled with a blur of every sexual perversion you could possibly think of, and then some.");
 				if(player.vaginas.length > 0) {
 					outputText("  You feel your " + vaginaDescript(0) + " soaking itself in a sudden burst");
-					if(player.cockTotal() > 0)  outputText(", while a sudden influx of pre-cum blurts out and streams down your " + player.multiCockDescriptLight() + ", painfully hardened by a vast amount of blood rushing to your groin");
+					if(player.cockTotal() > 0)  outputText(", while a sudden influx of pre-cum blurts out and streams down your [cocks], painfully hardened by a vast amount of blood rushing to your groin");
 					outputText(".");
 				}
-				else if(player.cockTotal() > 0) outputText("  A sudden influx of pre-cum blurts out and streams down your " + player.multiCockDescriptLight() + ", painfully hardened by a vast amount of blood rushing to your groin.");
+				else if(player.cockTotal() > 0) outputText("  A sudden influx of pre-cum blurts out and streams down your [cocks], painfully hardened by a vast amount of blood rushing to your groin.");
 				if(player.gender == 0) outputText("  Your genderless body is suddenly filled by a perverted warmth.");
 				outputText("\n\nYou notice that the young woman seems to have calmed down some.");
 				game.dynStats("lus", (lust/3 * (1 + player.cor/300)));

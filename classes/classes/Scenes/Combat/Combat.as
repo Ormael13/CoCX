@@ -380,29 +380,29 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	if (!kGAMECLASS.urtaQuest.isUrta() && !player.hasStatusEffect(StatusEffects.ChanneledAttack)) {
 		//Standard menu before modifications.
 		if(!player.hasStatusEffect(StatusEffects.Flying) && !monster.hasStatusEffect(StatusEffects.Flying))
-			addButton(0, "Attack", basemeleeattacks, null, null, null, "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.");
+			addButton(0, "Attack", basemeleeattacks, null, null, null, "Attempt to attack the enemy with your [weapon].  Damage done is determined by your strength and weapon.");
 		else if(!player.hasStatusEffect(StatusEffects.Flying) && monster.hasStatusEffect(StatusEffects.Flying))
 			addButtonDisabled(0, "Attack", "No way you could reach enemy in air with melee attacks.");
 		else if (player.hasStatusEffect(StatusEffects.Flying))
 		{
 			if (player.weapon != weapons.SPEAR) addButtonDisabled(0, "Attack", "No way you could reach enemy with melee attacks while flying.");
-			else addButton(0, "Attack", basemeleeattacks, null, null, null, "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.");
+			else addButton(0, "Attack", basemeleeattacks, null, null, null, "Attempt to attack the enemy with your [weapon].  Damage done is determined by your strength and weapon.");
 		}
 		//Bow attack
 		if (player.weaponRangePerk == "Bow")
-			addButton(1, "Bow", fireBow, null, null, null, "Attempt to attack the enemy with your " + player.weaponRangeName + ".  Damage done is determined by your speed and weapon.");
+			addButton(1, "Bow", fireBow, null, null, null, "Attempt to attack the enemy with your [weaponrangename].  Damage done is determined by your speed and weapon.");
 		//Crossbow attack
 		if (player.weaponRangePerk == "Crossbow")
-			addButton(1, "Crossbow", fireBow, null, null, null, "Attempt to attack the enemy with your " + player.weaponRangeName + ".  Damage done is determined only by your weapon.");
+			addButton(1, "Crossbow", fireBow, null, null, null, "Attempt to attack the enemy with your [weaponrangename].  Damage done is determined only by your weapon.");
 		if (player.weaponRangePerk == "Throwing") {
 			if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0 && player.weaponRange != weaponsrange.SHUNHAR) addButtonDisabled(1, "Throw", "You have used all your throwing weapons in this fight.");
-			else addButton(1, "Throw", fireBow, null, null, null, "Attempt to throw " + player.weaponRangeName + " at enemy.  Damage done is determined by your strength and weapon.");
+			else addButton(1, "Throw", fireBow, null, null, null, "Attempt to throw [weaponrangename] at enemy.  Damage done is determined by your strength and weapon.");
 		}
 		if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle") {
 			if (flags[kFLAGS.FLINTLOCK_PISTOL_AMMO] <= 0)
-				addButton(1, "Reload", reloadWeapon, null, null, null, "Your " + player.weaponRangeName + " is out of ammo.  You'll have to reload it before attack.");
+				addButton(1, "Reload", reloadWeapon, null, null, null, "Your [weaponrangename] is out of ammo.  You'll have to reload it before attack.");
 			else
-				addButton(1, "Shoot", fireBow, null, null, null, "Fire a round at your opponent with your " + player.weaponRangeName + "!  Damage done is determined only by your weapon.");
+				addButton(1, "Shoot", fireBow, null, null, null, "Fire a round at your opponent with your [weaponrangename]!  Damage done is determined only by your weapon.");
 		}
 		addButton(2, "Items", inventory.inventoryMenu, null, null, null, "The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 		if (canUseMagic()) addButton(3, "Spells", magic.magicMenu, null, null, null, "Opens your spells menu, where you can cast any spells you have learned.  Beware, casting spells increases your fatigue, and if you become exhausted you will be easier to defeat.");
@@ -454,7 +454,7 @@ public function combatMenu(newRound:Boolean = true):void { //If returning from a
 	}
 	//Modify menus.
 	if (kGAMECLASS.urtaQuest.isUrta()) {
-		addButton(0, "Attack", basemeleeattacks, null, null, null, "Attempt to attack the enemy with your " + player.weaponName + ".  Damage done is determined by your strength and weapon.");
+		addButton(0, "Attack", basemeleeattacks, null, null, null, "Attempt to attack the enemy with your [weapon].  Damage done is determined by your strength and weapon.");
 		addButton(1, "P. Specials", pspecials.psMenu, null, null, null, "Physical special attack menu.", "Physical Specials");
 		addButton(2, "M. Specials", mspecials.msMenu, null, null, null, "Mental and supernatural special attack menu.", "Magical Specials");
 		addButton(3, "Tease", teaseAttack);
@@ -1041,7 +1041,7 @@ private function struggle():void {
 		outputText("You struggle with all of your might to free yourself from the tentacles before the creature can fulfill whatever unholy desire it has for you.\n");
 		//33% chance to break free + up to 50% chance for strength
 		if (rand(3) == 0 || rand(80) < player.str / 2) {
-			outputText("As the creature attempts to adjust your position in its grip, you free one of your " + player.legs() + " and hit the beast in its beak, causing it to let out an inhuman cry and drop you to the ground smartly.\n\n");
+			outputText("As the creature attempts to adjust your position in its grip, you free one of your [legs] and hit the beast in its beak, causing it to let out an inhuman cry and drop you to the ground smartly.\n\n");
 			player.removeStatusEffect(StatusEffects.TentacleBind);
 			monster.createStatusEffect(StatusEffects.TentacleCoolDown, 3, 0, 0, 0);
 			enemyAI();
@@ -1303,7 +1303,7 @@ public function fireBow():void {
 	if (player.weaponRangePerk == "Throwing") {
 		var fc:Number       = oneThrowTotalCost();
 		if (player.fatigue + fc > player.maxFatigue()) {
-			outputText("You're too fatigued to throw the "+player.weaponRangeName+"!");
+			outputText("You're too fatigued to throw the [weaponrangename]!");
 			menu();
 			addButton(0, "Next", combatMenu, false);
 			return;
@@ -1703,43 +1703,43 @@ public function throwWeapon():void {
 		else damage *= (5.5 + ((player.weaponRangeAttack - 200) * 0.01));
 		if (damage == 0) {
 			if (monster.inte > 0) {
-				outputText(monster.capitalA + monster.short + " shrugs as the " + player.weaponRangeName + " bounces off them harmlessly.\n\n");
+				outputText(monster.capitalA + monster.short + " shrugs as the [weaponrangename] bounces off them harmlessly.\n\n");
 			}
 			else {
-				outputText("The " + player.weaponRangeName + " bounces harmlessly off " + monster.a + monster.short + ".\n\n");
+				outputText("The [weaponrangename] bounces harmlessly off " + monster.a + monster.short + ".\n\n");
 			}
 		}
 		if (monster.short == "pod") {
-			outputText("The " + player.weaponRangeName + " lodges deep into the pod's fleshy wall");
+			outputText("The [weaponrangename] lodges deep into the pod's fleshy wall");
 		}
 		else if (monster.plural) {
 			var textChooser1:int = rand(12);
 			if (textChooser1 >= 9) {
-				outputText(monster.capitalA + monster.short + " look down at the mark left by the " + player.weaponRangeName + " on one of their bodies");
+				outputText(monster.capitalA + monster.short + " look down at the mark left by the [weaponrangename] on one of their bodies");
 			}
 			else if (textChooser1 >= 6 && textChooser1 < 9) {
-				outputText("You grasps firmly " + player.weaponRangeName + " and then throws it at one of " + monster.a + monster.short + "");
+				outputText("You grasps firmly [weaponrangename] and then throws it at one of " + monster.a + monster.short + "");
 			}
 			else if (textChooser1 >= 3 && textChooser1 < 6) {
-				outputText("With one smooth motion you aim and throws your " + player.weaponRangeName + " at one of your opponents");
+				outputText("With one smooth motion you aim and throws your [weaponrangename] at one of your opponents");
 			}
 			else {
-				outputText("You casually throws " + player.weaponRangeName + " at one of " + monster.a + monster.short + " with supreme skill");
+				outputText("You casually throws [weaponrangename] at one of " + monster.a + monster.short + " with supreme skill");
 			}
 		}
 		else {
 			var textChooser2:int = rand(12);
 			if (textChooser2 >= 9) {
-				outputText(monster.capitalA + monster.short + " looks down at the mark left by the " + player.weaponRangeName + " on it body");
+				outputText(monster.capitalA + monster.short + " looks down at the mark left by the [weaponrangename] on it body");
 			}
 			else if (textChooser2 >= 6) {
-				outputText("You grasps firmly " + player.weaponRangeName + " and then throws it at " + monster.a + monster.short + "");
+				outputText("You grasps firmly [weaponrangename] and then throws it at " + monster.a + monster.short + "");
 			}
 			else if (textChooser2 >= 3) {
-				outputText("With one smooth motion you aim and throw your " + player.weaponRangeName + " at your opponent");
+				outputText("With one smooth motion you aim and throw your [weaponrangename] at your opponent");
 			}
 			else {
-				outputText("You casually throws " + player.weaponRangeName + " at " + monster.a + monster.short + " with supreme skill");
+				outputText("You casually throws [weaponrangename] at " + monster.a + monster.short + " with supreme skill");
 			}
 		}
 		//Determine if critical hit!
@@ -1804,7 +1804,7 @@ public function throwWeapon():void {
 		checkAchievementDamage(damage);
 	}
 	else {
-		outputText("The " + player.weaponRangeName + " goes wide, disappearing behind your foe");
+		outputText("The [weaponrangename] goes wide, disappearing behind your foe");
 		if (monster.plural) outputText("s");
 		outputText(".\n\n");
 	}
@@ -1997,7 +1997,7 @@ public function fantasize():void {
 	else if(player.balls > 0 && player.ballSize >= 10 && rand(2) == 0) {
 		outputText("You daydream about fucking " + monster.a + monster.short + ", feeling your balls swell with seed as you prepare to fuck " + monster.pronoun2 + " full of cum.\n");
 		temp2 = 5 + rand(player.lib/8+player.cor/8);
-		outputText("You aren't sure if it's just the fantasy, but your " + ballsDescriptLight() + " do feel fuller than before...\n");
+		outputText("You aren't sure if it's just the fantasy, but your [balls] do feel fuller than before...\n");
 		player.hoursSinceCum += 50;
 	}
 	else if(player.biggestTitSize() >= 6 && rand(2) == 0) {
@@ -2211,7 +2211,7 @@ public function attack():void {
 		}
 		//Counter attack fails: (random chance if PC int > 50 spd > 60; PC takes small physical damage but no block or spd penalty)
 		else {
-			outputText("Holding the basilisk in your peripheral vision, you charge forward to strike it.  Before the moment of impact, the reptile shifts its posture, dodging and flowing backward skillfully with your movements, trying to make eye contact with you. You twist unexpectedly, bringing your " + player.weaponName + " up at an oblique angle; the basilisk doesn't anticipate this attack!  ");
+			outputText("Holding the basilisk in your peripheral vision, you charge forward to strike it.  Before the moment of impact, the reptile shifts its posture, dodging and flowing backward skillfully with your movements, trying to make eye contact with you. You twist unexpectedly, bringing your [weapon] up at an oblique angle; the basilisk doesn't anticipate this attack!  ");
 		}
 	}
 	if (monster is FrostGiant && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
@@ -2249,7 +2249,7 @@ public function attack():void {
 	if ((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 		//Akbal dodges special education
 		if(monster.short == "Akbal") outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
-		else if(monster.short == "plain girl") outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your " + player.weaponName + " against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your " + player.weaponName + " as if betrayed.\n");
+		else if(monster.short == "plain girl") outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your [weapon] against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your [weapon] as if betrayed.\n");
 		else if(monster.short == "kitsune") {
 			//Player Miss:
 			outputText("You swing your [weapon] ferociously, confident that you can strike a crushing blow.  To your surprise, you stumble awkwardly as the attack passes straight through her - a mirage!  You curse as you hear a giggle behind you, turning to face her once again.\n\n");
@@ -2360,7 +2360,7 @@ public function attack():void {
 		//hit successful:
 		//special event, block (no more than 10-20% of turns, also fails if PC has >75 corruption):
 		if(rand(10) <= 1) {
-			outputText("Seeing your " + player.weaponName + " raised, the anemone looks down at the water, angles her eyes up at you, and puts out a trembling lip.  ");
+			outputText("Seeing your [weapon] raised, the anemone looks down at the water, angles her eyes up at you, and puts out a trembling lip.  ");
 			if(player.cor < 75) {
 				outputText("You stare into her hangdog expression and lose most of the killing intensity you had summoned up for your attack, stopping a few feet short of hitting her.\n");
 				damage = 0;
@@ -2385,7 +2385,7 @@ public function attack():void {
 		//hit successful:
 		//special event, block (no more than 10-20% of turns, also fails if PC has >75 corruption):
 		if(rand(10) <= 1) {
-			outputText("Seeing your " + player.weaponName + " raised, the anemone looks down at the water, angles her eyes up at you, and puts out a trembling lip.  ");
+			outputText("Seeing your [weapon] raised, the anemone looks down at the water, angles her eyes up at you, and puts out a trembling lip.  ");
 			if(player.cor < 75) {
 				outputText("You stare into her hangdog expression and lose most of the killing intensity you had summoned up for your attack, stopping a few feet short of hitting her.\n");
 				damage = 0;
@@ -3398,8 +3398,8 @@ private function combatStatusesUpdate():void {
 			player.removeStatusEffect(StatusEffects.Luststick);
 		}		
 		else if(rand(5) == 0) {
-			if(rand(2) == 0) outputText("A fantasy springs up from nowhere, dominating your thoughts for a few moments.  In it, you're lying down in a soft nest.  Gold-rimmed lips are noisily slurping around your " + player.cockDescript(0) + ", smearing it with her messy aphrodisiac until you're completely coated in it.  She looks up at you knowingly as the two of you get ready to breed the night away...\n\n");
-			else outputText("An idle daydream flutters into your mind.  In it, you're fucking a harpy's asshole, clutching tightly to her wide, feathery flanks as the tight ring of her pucker massages your " + player.cockDescript(0) + ".  She moans and turns around to kiss you on the lips, ensuring your hardness.  Before long her feverish grunts of pleasure intensify, and you feel the egg she's birthing squeezing against you through her internal walls...\n\n");
+			if(rand(2) == 0) outputText("A fantasy springs up from nowhere, dominating your thoughts for a few moments.  In it, you're lying down in a soft nest.  Gold-rimmed lips are noisily slurping around your [cock], smearing it with her messy aphrodisiac until you're completely coated in it.  She looks up at you knowingly as the two of you get ready to breed the night away...\n\n");
+			else outputText("An idle daydream flutters into your mind.  In it, you're fucking a harpy's asshole, clutching tightly to her wide, feathery flanks as the tight ring of her pucker massages your [cock].  She moans and turns around to kiss you on the lips, ensuring your hardness.  Before long her feverish grunts of pleasure intensify, and you feel the egg she's birthing squeezing against you through her internal walls...\n\n");
 			dynStats("lus", 20);
 		}
 	}
@@ -3434,8 +3434,8 @@ private function combatStatusesUpdate():void {
 		dynStats("lus", (rand(player.lib/5) + 3 + rand(5)));
 		if(player.totalCocks() > 1) outputText("Each of y");
 		else outputText("Y");
-		if(monster.plural) outputText("our " + player.multiCockDescriptLight() + " dribbles pre-cum as you think about plowing " + monster.a + monster.short + " right here and now, fucking " + monster.pronoun3 + " " + monster.vaginaDescript() + "s until they're totally fertilized and pregnant.\n\n");
-		else outputText("our " + player.multiCockDescriptLight() + " dribbles pre-cum as you think about plowing " + monster.a + monster.short + " right here and now, fucking " + monster.pronoun3 + " " + monster.vaginaDescript() + " until it's totally fertilized and pregnant.\n\n");
+		if(monster.plural) outputText("our [cocks] dribbles pre-cum as you think about plowing " + monster.a + monster.short + " right here and now, fucking " + monster.pronoun3 + " " + monster.vaginaDescript() + "s until they're totally fertilized and pregnant.\n\n");
+		else outputText("our [cocks] dribbles pre-cum as you think about plowing " + monster.a + monster.short + " right here and now, fucking " + monster.pronoun3 + " " + monster.vaginaDescript() + " until it's totally fertilized and pregnant.\n\n");
 	}
 	if(player.hasStatusEffect(StatusEffects.NagaVenom)) {
 		//Chance to cleanse!
@@ -3504,7 +3504,7 @@ private function combatStatusesUpdate():void {
 				outputText("Your " + vaginaDescript(0) + " clenches with an instinctual desire to be touched and filled.  ");
 			}
 			else if(player.totalCocks() > 0) {
-				outputText("Your " + player.cockDescript(0) + " pulses and twitches, overwhelmed with the desire to breed.  ");
+				outputText("Your [cock] pulses and twitches, overwhelmed with the desire to breed.  ");
 			}
 			if(player.gender == 0) {
 				outputText("You feel a tingle in your " + assholeDescript() + ", and the need to touch and fill it nearly overwhelms you.  ");
@@ -4014,13 +4014,13 @@ public function display():void {
 				else if(temp == 3) outputText("The sand sinking beneath your feet has carried you almost halfway into the creature's pit.");
 				else outputText("The dunes tower above you and the hissing of sand fills your ears.  <b>The leering sandtrap is almost on top of you!</b>");
 				//no new PG)
-				outputText("  You could try attacking it with your " + player.weaponName + ", but that will carry you straight to the bottom.  Alternately, you could try to tease it or hit it at range, or wait and maintain your footing until you can clamber up higher.");
+				outputText("  You could try attacking it with your [weapon], but that will carry you straight to the bottom.  Alternately, you could try to tease it or hit it at range, or wait and maintain your footing until you can clamber up higher.");
 			}
 			if (monster is Alraune) {
 				if (temp == 4) outputText("The " + monster.short + " keeps pulling you ever closer. You are a fair distance from her for now but she keeps drawing you in.");
 				else if(temp == 3) outputText("The " + monster.short + " keeps pulling you ever closer. You are getting dangerously close to her.");
 				else outputText("The " + monster.short + " keeps pulling you ever closer. You are almost in the pitcher, the plant woman smiling and waiting with open arms to help you in.  <b>You need to get some distance or you will be grabbed and drawn inside her flower!</b>");
-				outputText("  You could try attacking it with your " + player.weaponName + ", but that will carry you straight to the pitcher.  Alternately, you could try to tease it or hit it at range.");
+				outputText("  You could try attacking it with your [weapon], but that will carry you straight to the pitcher.  Alternately, you could try to tease it or hit it at range.");
 			}
 			outputText("\n\n");
 		}
@@ -4779,7 +4779,7 @@ public function runAway(callHook:Boolean = true):void {
 	if(monster.short == "Marae") {
 		outputText("Your boat is blocked by tentacles! ");
 		if(!player.canFly()) outputText("You may not be able to swim fast enough. ");
-		else outputText("You grit your teeth with effort as you try to fly away but the tentacles suddenly grab your " + player.legs() + " and pull you down. ");
+		else outputText("You grit your teeth with effort as you try to fly away but the tentacles suddenly grab your [legs] and pull you down. ");
 		outputText("It looks like you cannot escape. ");
 		enemyAI();
 		return;
@@ -4857,7 +4857,7 @@ public function runAway(callHook:Boolean = true):void {
 			}
 			//Run failed:
 			else {
-				outputText("You try to shake off the fog and run but the anemone slinks over to you and her tentacles wrap around your waist.  <i>\"Stay?\"</i> she asks, pressing her small breasts into you as a tentacle slides inside your " + player.armorName + " and down to your nethers.  The combined stimulation of the rubbing and the tingling venom causes your knees to buckle, hampering your resolve and ending your escape attempt.");
+				outputText("You try to shake off the fog and run but the anemone slinks over to you and her tentacles wrap around your waist.  <i>\"Stay?\"</i> she asks, pressing her small breasts into you as a tentacle slides inside your [armor] and down to your nethers.  The combined stimulation of the rubbing and the tingling venom causes your knees to buckle, hampering your resolve and ending your escape attempt.");
 				//(gain lust, temp lose spd/str)
 				(monster as Anemone).applyVenom((4+player.sens/20));
 				combatRoundOver();
@@ -4889,7 +4889,7 @@ public function runAway(callHook:Boolean = true):void {
 			}
 			//Run failed:
 			else {
-				outputText("You try to shake off the fog and run but the anemone slinks over to you and her tentacles wrap around your waist.  <i>\"Stay?\"</i> she asks, pressing her small breasts into you as a tentacle slides inside your " + player.armorName + " and down to your nethers.  The combined stimulation of the rubbing and the tingling venom causes your knees to buckle, hampering your resolve and ending your escape attempt.");
+				outputText("You try to shake off the fog and run but the anemone slinks over to you and her tentacles wrap around your waist.  <i>\"Stay?\"</i> she asks, pressing her small breasts into you as a tentacle slides inside your [armor] and down to your nethers.  The combined stimulation of the rubbing and the tingling venom causes your knees to buckle, hampering your resolve and ending your escape attempt.");
 				//(gain lust, temp lose spd/str)
 				(monster as SeaAnemone).applyVenom((4+player.sens/20));
 				combatRoundOver();
@@ -4962,8 +4962,8 @@ public function runAway(callHook:Boolean = true):void {
 		}
 		//Flyers get special failure message.
 		if(player.canFly()) {
-			if(monster.plural) outputText(monster.capitalA + monster.short + " manage to grab your " + player.legs() + " and drag you back to the ground before you can fly away!");
-			else outputText(monster.capitalA + monster.short + " manages to grab your " + player.legs() + " and drag you back to the ground before you can fly away!");
+			if(monster.plural) outputText(monster.capitalA + monster.short + " manage to grab your [legs] and drag you back to the ground before you can fly away!");
+			else outputText(monster.capitalA + monster.short + " manages to grab your [legs] and drag you back to the ground before you can fly away!");
 		}
 		//fail
 		else if(player.tailType == TAIL_TYPE_RACCOON && player.earType == EARS_RACCOON && player.findPerk(PerkLib.Runner) >= 0) outputText("Using your running skill, you build up a head of steam and jump, but before you can clear the ground more than a foot, your opponent latches onto you and drags you back down with a thud!");
@@ -4971,8 +4971,8 @@ public function runAway(callHook:Boolean = true):void {
 		else {
 			//Huge balls messages
 			if(player.balls > 0 && player.ballSize >= 24) {
-				if(player.ballSize < 48) outputText("With your " + ballsDescriptLight() + " swinging ponderously beneath you, getting away is far harder than it should be.  ");
-				else outputText("With your " + ballsDescriptLight() + " dragging along the ground, getting away is far harder than it should be.  ");
+				if(player.ballSize < 48) outputText("With your [balls] swinging ponderously beneath you, getting away is far harder than it should be.  ");
+				else outputText("With your [balls] dragging along the ground, getting away is far harder than it should be.  ");
 			}
 			//FATASS BODY MESSAGES
 			if(player.biggestTitSize() >= 35 || player.buttRating >= 20 || player.hipRating >= 20)

@@ -1568,7 +1568,7 @@ private function sleepWithMinerva():void {
 	outputText("You walk over to the siren and give her a hug. You tell her that you want to sleep with her. \"<i>Oh, really? You want to sleep with me?</i>\" she says. You nod.\n\n");
 	outputText("Minerva guides you to the most comfortable spot.  She takes off her tube top, exposing her breasts completely.\n\n");
 	if (player.armorName == "goo armor") outputText("You take your time to get the metal platebody off until you're completely naked save for the goo-girl covering you.  ");
-	else outputText("You take your time to get your " + player.armorName + " off until you're completely naked.  ");
+	else outputText("You take your time to get your [armor] off until you're completely naked.  ");
 	outputText("You lay next to Minerva while you rest your head on her soft breasts.  ");
 	if (player.armorName == "goo armor") outputText("Valeria, your goo-girl companion, envelopes you and Minerva, helping to keep you and Minerva warm.  ");
 	outputText("\"<i>Sweet dreams,</i>\" she says as you finally close your eyes.  ");
@@ -1580,7 +1580,7 @@ private function sleepWithMinervaII():void {
 	outputText("<b>Ten hours pass...</b>\n\n");
 	outputText("You wake up, feeling refreshed. You thank Minerva for letting you sleep with her and you hug her, making sure to give her a good kiss. \"<i>Ohhhhh,</i>\" she moans and even blushes! You break the kiss. \"<i>Darling, come back anytime, ok?</i>\" she says. \n\n");
 	if (player.armorName == "goo armor") outputText("Valeria encases you once more and you get suited up ");
-	else outputText("You get re-dressed in your " + player.armorName + " ");
+	else outputText("You get re-dressed in your [armor] ");
 	outputText("and you leave the tower to return to your camp. \n\n");
 	awardAchievement("Getaway", kACHIEVEMENTS.GENERAL_GETAWAY);
 	sleepWithMinervaHeal();

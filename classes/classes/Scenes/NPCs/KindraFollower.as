@@ -62,7 +62,7 @@ public function thirdWonFightWithKindra():void {
 	outputText("\"<i>A hunter has to defend its territory lest it be taken by others. You won it fair and square also the game was becoming scarce in the area anyway it’s time for me to move.</i>\"\n\n");
 	outputText("You tell her she don’t have to go this far just for you not to mention the area around your camp is ripe for hunting.\n\n");
 	outputText("\"<i>Bah I stuck next to these coward up to now because I need supplies but truth be told you look like you can handle yourself so I'll come with you. Names Kindra by the way make sure you remember it.</i>\"\n\n");
-	outputText("You tell her your name is " + player.short + " and that she's free to hunt around your camp. She grunt in approval then follow you back to camp.\n\n");
+	outputText("You tell her your name is [name] and that she's free to hunt around your camp. She grunt in approval then follow you back to camp.\n\n");
 	outputText("(<b>Kindra has been added to the Followers menu!</b>)\n\n");
 	flags[kFLAGS.KINDRA_AFFECTION]++;
 	flags[kFLAGS.KINDRA_FOLLOWER] = 1;
@@ -73,7 +73,7 @@ public function thirdWonFightWithKindra():void {
 public function wonFightWithKindra():void {
 	clearOutput();
 	outputText("Kindra put a knee down defeated.\n\n");
-	outputText("\"<i>That was a good skirmish " + player.short + " as much as I hate to admit it your the greater hunter in these grounds.</i>\"\n\n");
+	outputText("\"<i>That was a good skirmish [name] as much as I hate to admit it your the greater hunter in these grounds.</i>\"\n\n");
 	outputText("You tell her she don’t have to worry about her talent as an huntress either.\n\n");
 	outputText("\"<i>You don’t really get my point but it's fine perhaps you will get it eventually.</i>\"\n\n");
 	outputText("The both of you head back to camp.");
@@ -84,7 +84,7 @@ public function wonFightWithKindra():void {
 public function lostFightWithKindra():void {
 	clearOutput();
 	outputText("As you fall down to the ground Kindra move to you.\n\n");
-	outputText("\"<i>Losing isn’t in your habits " + player.short + " I trust you just got distracted and got yourself hurt as a result. Focus your mind on the prey not the horizon and you should be fine.</i>\"\n\n");
+	outputText("\"<i>Losing isn’t in your habits [name] I trust you just got distracted and got yourself hurt as a result. Focus your mind on the prey not the horizon and you should be fine.</i>\"\n\n");
 	outputText("You thank her for this advice as she help you stand back up the both of you heading back to camp.");
 	cleanupAfterCombat();
 	return;
@@ -93,7 +93,7 @@ public function lostFightWithKindra():void {
 public function meet2Kindra():void {
 	clearOutput();
 	outputText("You find Kindra hunting for food in the vicinity. She notice you're there grumble about an escaped target then address you.\n\n");
-	outputText("\"<i>What is it you wanted exactly " + player.short + "?</i>\"\n\n");
+	outputText("\"<i>What is it you wanted exactly [name]?</i>\"\n\n");
 	menu();
 	addButton(0, "Appearance", kindraAppearance, null, null, null, "Examine Kindra's detailed appearance.");
 	addButton(1, "Fight", fight2Kindra, null, null, null, "Fight her");
@@ -116,7 +116,7 @@ public function kindraAppearance():void
 
 public function fight2Kindra():void {
 	clearOutput();
-	outputText("Kindra adjusts her clothes and after stretching a few times she’s finished her warm up.  You raise your " + player.weaponName + " and prepare to fight.  It's on!");
+	outputText("Kindra adjusts her clothes and after stretching a few times she’s finished her warm up.  You raise your [weapon] and prepare to fight.  It's on!");
 	startCombat(new Kindra());
 }
 

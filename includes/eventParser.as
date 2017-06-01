@@ -635,7 +635,7 @@ private function goNextWrapped(time:Number, needNext:Boolean):Boolean  {
 //	}
 	//Drop beautiful sword if corrupted!
 	if (player.weaponPerk == "holySword" && player.cor >= (33 + player.corruptionTolerance())) {
-		outputText("<b>\nThe <u>" + player.weaponName + "</u> grows hot in your hand, until you are forced to drop it.  Whatever power inhabits this blade appears to be unhappy with you.  Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the hilt, it nearly burns you.\n\nYou realize you won't be able to use it right now, but you could probably keep it in your inventory.</b>\n\n");
+		outputText("<b>\nThe <u>[weapon]</u> grows hot in your hand, until you are forced to drop it.  Whatever power inhabits this blade appears to be unhappy with you.  Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the hilt, it nearly burns you.\n\nYou realize you won't be able to use it right now, but you could probably keep it in your inventory.</b>\n\n");
 		inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
 		return true;
 	}
@@ -676,7 +676,7 @@ private function goNextWrapped(time:Number, needNext:Boolean):Boolean  {
 	//Unequip undergarment if you have bizarre lower body.
 	if (player.lowerGarment != UndergarmentLib.NOTHING) {
 		if (player.isTaur() || player.isDrider() || player.isScylla() || (player.isNaga() && player.lowerGarmentPerk != "NagaWearable")) {
-			outputText("You feel something slipping off as if by magic. Looking down on the ground, you realize it's your " + player.lowerGarmentName + ". Looking down at your lower body, you let out a sigh and pick up your " + player.lowerGarmentName + ". ");
+			outputText("You feel something slipping off as if by magic. Looking down on the ground, you realize it's your [lowergarment]. Looking down at your lower body, you let out a sigh and pick up your [lowergarment]. ");
 			inventory.takeItem(player.setUndergarment(UndergarmentLib.NOTHING, 1), playerMenu);
 			return true;
 		}

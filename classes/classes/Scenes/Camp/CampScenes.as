@@ -130,9 +130,9 @@ public function PeepingTom3():void {
 	outputText("The girls are discussing womanly topics giving you a nice display of their assets.\n\n");
 	if (emberScene.followerEmber() && (flags[kFLAGS.EMBER_GENDER] == 2 || flags[kFLAGS.EMBER_GENDER] == 3)) {
 		outputText("Something suddenly grabs you and lifts you by the leg. Turns out it’s Ember and she’s angry.\n\n");
-		outputText("\"<i>Hey! What the hell are you doing " + player.short + "! I saw all of it, you were peeping!</i>\"\n\n");
+		outputText("\"<i>Hey! What the hell are you doing [name]! I saw all of it, you were peeping!</i>\"\n\n");
 		outputText("All the girls leap out of the hot spring and rush toward you, calling you a jerk and a voyeur as they glare. One of them craftily suggests you deserve a proper punishment.\n\n");
-		outputText("\"<i>Since " + player.short + " wants to see us naked that badly, let’s offer him a show he won’t forget!</i>\"\n\n");
+		outputText("\"<i>Since [name] wants to see us naked that badly, let’s offer him a show he won’t forget!</i>\"\n\n");
 		outputText("You are shoved to the ground, each of your angry lovers taking turns to rape you. It’s gonna take a full day for your cock to stop burning from the abuse your lovers gave it.\n\n");
 		player.orgasm();
 		if (player.statusEffectv1(StatusEffects.Dysfunction) < 25) {

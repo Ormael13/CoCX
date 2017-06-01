@@ -78,8 +78,8 @@ package classes.Scenes.Areas.Plains
 			//<Lust Defeat>
 			else outputText("arousal coursing through your veins, unable to think clearly enough to stand.");
 			outputText("  A jolt of fear passes through you as the hyena woman draws a long javelin from her back.  Her dark eyes glint gleefully as she plunges the javelin down, slamming it down into the ground in front of you.  You gasp with relief, glad for your life as she slams two more down, forming a rough pyramid in front of you.  ");
-			if (player.weaponName != "fists") outputText("Before you can recover, she tosses your " + player.weaponName + " into the long grass.  She roughly pulls the " + player.armorName + " from your body and it, too, is tossed into the high grass, leaving you naked before this amazon.");
-			else outputText("She roughly pulls the " + player.armorName + " from your body and it's tossed into the high grass, leaving you naked before this amazon.");
+			if (player.weaponName != "fists") outputText("Before you can recover, she tosses your [weapon] into the long grass.  She roughly pulls the [armor] from your body and it, too, is tossed into the high grass, leaving you naked before this amazon.");
+			else outputText("She roughly pulls the [armor] from your body and it's tossed into the high grass, leaving you naked before this amazon.");
 			outputText("\n\n");
 
 			outputText("The warrior's spotted paws slide to her shapely waist, mocking laughter reaching your ears.  You find your eyes fixed on the paws that slide along the leather band holding her loincloth up.  With deft hands, the knot holding them parts, letting the rough leather swing out of the way.  You catch your breath as you finally gaze upon her.  A firm, black shaft, a good 15 inches long and 2 inches thick, stands before you.  What at first appeared to be a penis seems different in some way.  As your gaze slides along the dark shaft, you realize that the tip of the barrel-like member isn't that of a cock, but is instead the tight entrance of a massive clit.  You are shocked to realize that the flesh before you is a cunt unlike any you've seen on a creature before.  She lets you gaze in wonder for several moments as her powerful musk fills your mind.\n\n");
@@ -135,7 +135,7 @@ package classes.Scenes.Areas.Plains
 
 			outputText("A warm weight starts to grow deep within your abused core.  A soft, needy whimpering fills the air and it takes some time before you realize it is being dragged from your mouth each time the thick shaft plows into you.  Suddenly, pleasure crashes through your body and mind as orgasm suddenly explodes within you.  ");
 			//<Male> 
-			if (player.hasCock()) outputText("Your cum spurts from your " + multiCockDescriptLight() + ", spraying your seed over the dry ground, giving life to the savanna.");
+			if (player.hasCock()) outputText("Your cum spurts from your [cocks], spraying your seed over the dry ground, giving life to the savanna.");
 			//<Females>
 			else if (player.hasVagina()) outputText("Your own juices flow freely from your " + vaginaDescript() + ", coating your thighs and dripping onto the dry grass below you.");
 			outputText("  Muscles deep within you ripple, spasming around the strange intruder buried deep within you.  The hyena roars her pleasure, slamming deep into your " + assholeDescript() + " as your body milks her hard cunt for the juices flowing from her.\n\n");
@@ -186,7 +186,7 @@ package classes.Scenes.Areas.Plains
 			clearOutput();
 			outputText("Sensing the gnoll's will has broken, you impulsively order her to strip.  Tawny, spotted paws fall to the leather band around her waist, deftly untying the loincloth.  The material falls away from her groin, exposing a long, black shaft slipping free from a furred sheath.  You gaze in wonder, realizing that this hardening member is not a cock, but instead a long, thick clit.  The barrel-like tip of her pseudopenis is actually the entrance to her pussy.  You begin to understand why bondage and dominance are so ingrained in the culture of this savage race.\n\n");
 
-			outputText("Dark brown eyes watch your hands as you slowly slip out of your " + player.armorName + ".  The potent smell of hyena musk starts to fill the air as the dark shaft of the gnoll's pseudopenis slides from her sheath.  Eyes of brown fire fix on your now exposed " + multiCockDescriptLight() + ".  Her pink tongue slides along her powerful teeth and dark lips, giving you pause, but her gaze is filled with nothing but lust and need.  Soft whines escape from her lips as she all but strains towards your " + cockDescript(x) + ".  Her spotted paws slide up to her heavy breasts, squeezing the orbs as the now submissive amazon tries to tempt you.\n\n");
+			outputText("Dark brown eyes watch your hands as you slowly slip out of your [armor].  The potent smell of hyena musk starts to fill the air as the dark shaft of the gnoll's pseudopenis slides from her sheath.  Eyes of brown fire fix on your now exposed [cocks].  Her pink tongue slides along her powerful teeth and dark lips, giving you pause, but her gaze is filled with nothing but lust and need.  Soft whines escape from her lips as she all but strains towards your " + cockDescript(x) + ".  Her spotted paws slide up to her heavy breasts, squeezing the orbs as the now submissive amazon tries to tempt you.\n\n");
 
 			outputText("With a start, you realize that she is actually begging your permission.  Several moments pass as you let the warrior wait, watching her shift and squirm in anticipation.  A slight movement rests your " + cockDescript(x) + " on her warm nose, forcing the gnoll to breathe in your distinctive scent.  You can't hide your smile as you finally give her permission.  Instantly, the hyena's dark muzzle darts forward, burying her nose against the very base of your shaft, breathing deeply.  As she pulls back, that pink tongue darts out, feeling wet and velvety along your shaft until her dark lips press against your very tip.\n\n");
 
@@ -203,7 +203,7 @@ package classes.Scenes.Areas.Plains
 			else if (player.cockTotal() == 2) {
 				outputText("Even as the most incredible sensations flow through you from the feel of her muzzle, a spotted hand leaves one pendulous breast to wrap around your unattended " + cockDescript(y) + ".  Her powerful grip feels like a vice as she begins to slide the paw along the length.  Moving in time to the rippling of her throat, the hand tries hard to match the flood of sensations radiating from her muzzle.");
 				//<If character has Scrotum> 
-				if (player.balls > 0) outputText("  Her second paw finally cups your " + ballsDescriptLight() + ", squeezing and massaging to add to the powerful sensations.");
+				if (player.balls > 0) outputText("  Her second paw finally cups your [balls], squeezing and massaging to add to the powerful sensations.");
 				outputText("\n\n");
 			}
 			//Three or More Cocks>
@@ -225,7 +225,7 @@ package classes.Scenes.Areas.Plains
 				//<Two Cocks> 
 				if (player.cockTotal() == 2) outputText("  Your second " + cockDescript(y) + " throbs in her hand, spraying her face and throat with thick ropes of cum.");
 				//<Three or More Cocks>
-				if (player.cockTotal() >= 3) outputText("  Your " + multiCockDescriptLight() + " throb in her paws, coating her muzzle, neck, and breasts with thick ropes of cum.");
+				if (player.cockTotal() >= 3) outputText("  Your [cocks] throb in her paws, coating her muzzle, neck, and breasts with thick ropes of cum.");
 				outputText("  You feel your knees weaken as her muzzle works harder and faster, trying to drain you of every drop.  Her paws wrap around your waist and powerful arms lift you and lay you on the ground as that talented muzzle continues to milk you dry.\n\n");
 			}
 			//<Cock 0 is less than 7\"> 
@@ -234,10 +234,10 @@ package classes.Scenes.Areas.Plains
 				//<Two Cocks> 
 				if (player.totalCocks() == 2) outputText("  Your " + cockDescript(y) + " throbs in her hand, spraying her face and throat with thick ropes of cum.");
 				//<Three or More Cocks>
-				if (player.cockTotal() >= 3) outputText("  Your " + multiCockDescriptLight() + " throb in her paws, coating her muzzle, neck, and breasts with thick ropes of cum.");
+				if (player.cockTotal() >= 3) outputText("  Your [cocks] throb in her paws, coating her muzzle, neck, and breasts with thick ropes of cum.");
 				outputText("  You feel your knees weaken as her muzzle works harder and faster, trying to drain you of every drop.  He paws wrap around your waist and powerful arms lift you and lay you on the ground as that talented muzzle continues to milk you dry.\n\n");
 			}
-			outputText("The world goes gray and fuzzy as your lose yourself in the afterglow of the powerful orgasm.  When you last sit up, dizzy, you find that the hyena has disappeared.  You find your " + player.armorName + " neatly folded next to you, but absolutely coated in the juices of the departed amazon.  Next to this musky pile is a small bag containing her gift to you.");
+			outputText("The world goes gray and fuzzy as your lose yourself in the afterglow of the powerful orgasm.  When you last sit up, dizzy, you find that the hyena has disappeared.  You find your [armor] neatly folded next to you, but absolutely coated in the juices of the departed amazon.  Next to this musky pile is a small bag containing her gift to you.");
 			player.orgasm();
 			cleanupAfterCombat();
 		}
@@ -253,7 +253,7 @@ package classes.Scenes.Areas.Plains
 
 			outputText("Pulling away from the beautiful gnoll, you decide to try another command.  Your heart pounds in your chest in anticipation as you order the hyena to drop her loincloth.  The leather garment falls away from her groin, exposing a 15 inch long and 2 inch thick shaft of dark flesh already slipping free from a furred sheath.  You gaze in wonder, realizing that this hardening member is not a cock, but instead a long, thick clit.  The barrel-like tip of her pseudopenis is actually her pussy.  You begin to understand why bondage and dominance are so ingrained in the culture of this savage race.\n\n");
 
-			outputText("A heady musk fills the air from the warrior's arousal, leaving you feeling light headed.  The scent alone causes juices to flow in your " + vaginaDescript(0) + ".  At another command, the hyena's deft paws slide along your form, roving about as they slowly remove your " + player.armorName + ", letting your bare skin warm in the air.  The strong, tawny paws linger even after you stand nude in the soft breeze.\n\n");
+			outputText("A heady musk fills the air from the warrior's arousal, leaving you feeling light headed.  The scent alone causes juices to flow in your " + vaginaDescript(0) + ".  At another command, the hyena's deft paws slide along your form, roving about as they slowly remove your [armor], letting your bare skin warm in the air.  The strong, tawny paws linger even after you stand nude in the soft breeze.\n\n");
 
 			outputText("On impulse, you command the hyena to use that eager muzzle on you.  Instantly, her paws clutch you around the waist and lift, hefting you high into the air.  A girlish squeal escapes your lips as you find yourself dangling above the warrior.  The gnoll's powerful arms hold you steady as you squirm almost ten feet off the ground.  The amazon ignores all further commands as she lowers your vulnerable slit directly above her nose.\n\n");
 
@@ -269,7 +269,7 @@ package classes.Scenes.Areas.Plains
 
 			outputText("That final action is too much for your abused body.  Pure ecstasy floods through your mind as your " + vaginaDescript(0) + " spasms wildly.  Your honey splashes out of you, the hyena trying to catch the juices on her tongue, though much splatters over her tawny throat and breasts.  Her deft tongue delves inside of you, twisting and heightening your orgasm.  The world fades to nothing but pleasure.\n\n");
 
-			outputText("When you awake some time later, still heady with pleasure, you find your " + player.armorName + " piled neatly next to you, along with what appears to be a thank you gift from the now-absent gnoll.  The memory of the amazon's incredible strength and lithe form brings a smile to your lips as you prepare to leave.");
+			outputText("When you awake some time later, still heady with pleasure, you find your [armor] piled neatly next to you, along with what appears to be a thank you gift from the now-absent gnoll.  The memory of the amazon's incredible strength and lithe form brings a smile to your lips as you prepare to leave.");
 			player.orgasm();
 			cleanupAfterCombat();
 		}

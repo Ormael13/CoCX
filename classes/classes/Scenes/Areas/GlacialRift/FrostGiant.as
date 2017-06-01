@@ -15,7 +15,7 @@ package classes.Scenes.Areas.GlacialRift
 			var damage:int = 0;
 			outputText("The giant strides toward you, closing the distance faster than you can run. He rears back and strikes at you!  ");
 			if (player.getEvasionRoll()) {
-				outputText("You deftly dodge the jumbo Jotun's paltry punch, spinning swiftly to charge your " + player.weaponName + " at his hand, leaving what looks like a crack. The giant roars in outrage, shaking snow from trees and making your " + player.armorName + " vibrate. He appears angrier than before.");
+				outputText("You deftly dodge the jumbo Jotun's paltry punch, spinning swiftly to charge your [weapon] at his hand, leaving what looks like a crack. The giant roars in outrage, shaking snow from trees and making your [armor] vibrate. He appears angrier than before.");
 			}
 			else {
 				if (rand(player.spe + 40) < spe) {
@@ -103,7 +103,7 @@ package classes.Scenes.Areas.GlacialRift
 				case 0:
 				case 1:
 				case 2: //Taunt
-					outputText("\"<i>Ha, ha, ha! Puny little " + player.race() + "! You cannot escape my grasp!</i>\" He flicks your head, nearly snapping your neck, and you see stars for a moment. ")
+					outputText("\"<i>Ha, ha, ha! Puny little [race]! You cannot escape my grasp!</i>\" He flicks your head, nearly snapping your neck, and you see stars for a moment. ")
 					player.removeStatusEffect(StatusEffects.GiantGrabbed);
 					damage = 50 + rand(str * 0.4);
 					damage = player.reduceDamage(damage);
@@ -121,7 +121,7 @@ package classes.Scenes.Areas.GlacialRift
 					combatRoundOver();
 					break;
 				case 5: //Throw
-					outputText("\"<i>Oh, little " + player.race() + " wants to be let go? Ha! Then GO!</i>\" He rears back and chucks you as hard as he can against the nearest rock face. Fortunately, his aim is off and he throws you into a patch of snow. The snow helps cushion the impact, but you're still very disoriented. ");
+					outputText("\"<i>Oh, little [race] wants to be let go? Ha! Then GO!</i>\" He rears back and chucks you as hard as he can against the nearest rock face. Fortunately, his aim is off and he throws you into a patch of snow. The snow helps cushion the impact, but you're still very disoriented. ");
 					player.removeStatusEffect(StatusEffects.GiantGrabbed);
 					player.createStatusEffect(StatusEffects.Stunned, 1 + rand(3), 0, 0, 0);
 					damage = 50 + rand(str * 0.8);

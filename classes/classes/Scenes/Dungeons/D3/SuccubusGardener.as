@@ -339,7 +339,7 @@
 			}
 			else if (player.lust < 80)
 			{
-				outputText("You whimper as the insidious plant-sperm works on your vulnerable " + player.skinDesc + ", building pernicious desires in tiny, insistent increments. It's getting harder to focus... harder not to think about how good all those tentacles would feel in you and on you, caressing your most intimate places.\n\n");
+				outputText("You whimper as the insidious plant-sperm works on your vulnerable [skin.type], building pernicious desires in tiny, insistent increments. It's getting harder to focus... harder not to think about how good all those tentacles would feel in you and on you, caressing your most intimate places.\n\n");
 			}
 			else if (player.lust < 90)
 			{

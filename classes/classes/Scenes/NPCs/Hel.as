@@ -39,7 +39,7 @@ package classes.Scenes.NPCs
 				if(damage <= 0) {
 					damage = 0;
 					//Due to toughness or amor...
-					if(rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + player.armorName + ".");
+					if(rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your [armor].");
 					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.");
 				}
 				//Take Damage

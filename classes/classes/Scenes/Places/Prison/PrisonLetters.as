@@ -40,7 +40,7 @@ package classes.Scenes.Places.Prison
 			//Post-birthing
 			if(player.hipRating < 10) {
 				player.hipRating++;
-				outputText("\n\nAfter the birth your " + player.armorName + " fits a bit more snugly about your " + hipDescript() + ".");
+				outputText("\n\nAfter the birth your [armor] fits a bit more snugly about your " + hipDescript() + ".");
 			}
 			player.knockUpForce(); //CLEAR!
 			return true;

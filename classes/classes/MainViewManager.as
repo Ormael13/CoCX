@@ -526,7 +526,7 @@ import flash.display.Shape;
 			}*/
 
 			//Headers
-			mainView.nameText.htmlText = "<b>Name: " + player.short + "</b>";
+			mainView.nameText.htmlText = "<b>Name: [name]</b>";
 			if (prison.inPrison) mainView.advancementText.htmlText = "<b>Prison Stats</b>";
 			else mainView.advancementText.htmlText = "<b>Advancement</b>";
 			

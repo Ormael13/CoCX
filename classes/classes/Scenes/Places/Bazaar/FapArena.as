@@ -44,7 +44,7 @@ public function fapArenaGOOOO():void {
 	else if(flags[kFLAGS.FAP_ARENA_RULES_EXPLAINED] == 0) {
 		flags[kFLAGS.FAP_ARENA_RULES_EXPLAINED]++;
 		outputText("\"<i>You must be new here.  Go to the backroom on the left, undress yourself and wait with the others in the main room; the session will start soon.</i>\"\n\n");
-		outputText("Meekly following the others into the backroom, you start removing your " + player.armorName + ".  You watch other people, fully clothed when they step in, completely naked when they go out.  The sensation of something out of place continues to bother you with all these people casually speaking and laughing with their raging erections showing, and then you finally get it: everyone in here has a dick. Even the feminine-looking ones with ample breasts and a generous ass are actually herms, as their huge boners attest.\n\n");
+		outputText("Meekly following the others into the backroom, you start removing your [armor].  You watch other people, fully clothed when they step in, completely naked when they go out.  The sensation of something out of place continues to bother you with all these people casually speaking and laughing with their raging erections showing, and then you finally get it: everyone in here has a dick. Even the feminine-looking ones with ample breasts and a generous ass are actually herms, as their huge boners attest.\n\n");
 		
 		outputText("A bit puzzled, you decide to follow everyone else.  They are all gathering in the main circular room, forming a very large ring.  Approximately 30 people and their peckers are standing here naked, and you place yourself to fit in the circle.  Once everyone is aligned, the conversations gradually stop and a red-skinned succubus with pornstar-like tits steps in.  She is completely nude and, if the sight of thirty naked people with horse-length boners wasn't arousing enough, her dripping cunt seems to be attracting your " + cockDescript(x) + " like a magnet.  Wait... she doesn't have a dick?\n\n");
 		
@@ -76,7 +76,7 @@ public function fapArenaGOOOO():void {
 	//[if dick size > 8 inches: after first time] 
 	else {
 		outputText("\"<i>Welcome back.  Please undress yourself in the backroom and wait with the others in the main room.</i>\"\n\n");
-		outputText("You do as you are told, quickly removing your " + player.armorName + " and placing your naked self in the main room, waiting in circle with the others.  You have a pleasant and casual chat with other people, trying to recognize some faces.  You try your best to place yourself between people you don't know yet, in order to feel varied pleasures from one time to the next.  After a few minutes during which " + sMultiCockDesc() + " stands fully erect at the sight of so many naked people, the sexy referee walks in, naked as usual.\n\n");
+		outputText("You do as you are told, quickly removing your [armor] and placing your naked self in the main room, waiting in circle with the others.  You have a pleasant and casual chat with other people, trying to recognize some faces.  You try your best to place yourself between people you don't know yet, in order to feel varied pleasures from one time to the next.  After a few minutes during which " + sMultiCockDesc() + " stands fully erect at the sight of so many naked people, the sexy referee walks in, naked as usual.\n\n");
 		
 		outputText("\"<i>Alright.  Welcome everyone; I see no new faces here, so I'll assume everyone knows the rules and we'll directly proceed to the masturbatory game, which I am sure you are all eager to play.  Remember: using alternative methods of stimulation is NOT allowed.  Do you studs understand?</i>\"\n\n");
 		
@@ -102,7 +102,7 @@ private function fapArenaPageII():void {
 		outputText("You can't help but start as your left neighbor grabs " + oMultiCockDesc() + " with an unsettling expertise.  Other players are also nervous, but none as much as you.  The sight of all these trembling dicks makes you shiver.\n\n");
 	}
 	//end of global condition about PC's corr, display the following
-	outputText("You firmly settle your " +  player.legs()  + " on the ground, bracing yourself to the imminent handjob you're going to receive, and the one you're going to give.  Your old warrior reflexes start kicking in and you ease your grasp on the cock in your right hand and start calming yourself.  You feel ready when - ");
+	outputText("You firmly settle your [legs] on the ground, bracing yourself to the imminent handjob you're going to receive, and the one you're going to give.  Your old warrior reflexes start kicking in and you ease your grasp on the cock in your right hand and start calming yourself.  You feel ready when - ");
 	outputText("\"<i>GO!</i>\"\n\n");
 
 	outputText("You instantly wince a little as the hand holding your " + cockDescript(x) + " starts rocking up and down energetically.  By the gods, he's good at this, whatever he is.  You suddenly remember your own hand has a job to do and you proceed to rub the shaft on your right, slowly at first and gaining more and more pace as you get more confident.  Soon you're furiously stroking it, trying to match your left partner's rhythm in intensity.  Since there wasn't any handjob stamina contest organized in Ingam, you're fairly inexperienced at this and try to imitate your left partner as best as you can, using the pleasure he's inflicting on you as a suggestion for how to treat your own victim.  You rub the sensitive points, you tickle the urethra and give gentle squeezes with your palm as your hand slowly works its way up and down the massive cock it's stroking.  Your best effort, however, goes into ignoring the hand expertly working your own " +  cockDescript(x)  + ", massaging it viciously in order to pump the semen up in your urethra.  Your erection gets bigger, if that is even possible; but you manage to hold off the incoming orgasm.\n\n");
@@ -172,10 +172,10 @@ private function fapResults(place:Number = 3):void {
 			outputText(" of girl-jizz on the floor.");
 		}
 		//[if player lactates]
-		if(player.biggestLactation() > 1.5) outputText("  Your " + allBreastsDescript() + " also release a milky flood of their own, the soft feeling of cream teasing your nipple only prolonging your orgasm.");
+		if(player.biggestLactation() > 1.5) outputText("  Your [allbreasts] also release a milky flood of their own, the soft feeling of cream teasing your nipple only prolonging your orgasm.");
 		outputText("\n\n");
 		
-		outputText("The cute referee nods in acknowledgement.  Her eyes seem to be filled with longing for your cum-spilling " + multiCockDescriptLight() + ", and you know she'd eagerly finish you off if it weren't for her professionalism.\n\n");
+		outputText("The cute referee nods in acknowledgement.  Her eyes seem to be filled with longing for your cum-spilling [cocks], and you know she'd eagerly finish you off if it weren't for her professionalism.\n\n");
 		
 		//[1/2 chance of this paragraph appearing]
 		if(rand(2) == 0) outputText("As soon as your semen starts flying up in the air, you feel pressure being released in your hand.  Exhausted by your ministrations and now that he doesn't have to fear losing anymore, your right neighbor also starts cumming, blowing his load toward the referee.  She fails to dodge the shot but nods when you angrily yell: \"<i>NUMBER " + (num) + " SCORING!</i>\", almost immediately followed by \"<i>NUMBER " + (num+1) + " CUMMING!</i>\" from your neighbor.  Annoyed that he profited from your lack of stamina and came just after you, you give his member a raging twist for good measure. It makes him scream in pain and pleasure and spills cum all the more abundantly.\n\n");
@@ -211,7 +211,7 @@ private function fapResults(place:Number = 3):void {
 			else outputText("smear");
 			outputText(" of girl-jizz on the floor.");
 		}
-		if(player.biggestLactation() > 1.5) outputText("  Your " + allBreastsDescript() + " also release a milky flood of their own, the soft feeling of cream teasing your nipple only prolonging your orgasm.");
+		if(player.biggestLactation() > 1.5) outputText("  Your [allbreasts] also release a milky flood of their own, the soft feeling of cream teasing your nipple only prolonging your orgasm.");
 		outputText("\n\n");
 		
 		outputText("Quite satisfied, your left partner decides to stop torturing himself; he must have had a rough handjob too.  You watch in amazement as his cum-tube starts shooting globs of sticky goo, aiming at the referee with an expert's precision. He grins lewdly and yells: \"<i>NUMBER " + (num+3) + " CUMMING!</i>\"\n\n");
@@ -248,7 +248,7 @@ private function fapResults(place:Number = 3):void {
 			else outputText("smear");
 			outputText(" of girl-jizz on the floor.");
 		}
-		if(player.biggestLactation() > 1.5) outputText("  Your " + allBreastsDescript() + " also release a milky flood of their own, the soft feeling of cream teasing your nipple only prolonging your orgasm.\n\n");
+		if(player.biggestLactation() > 1.5) outputText("  Your [allbreasts] also release a milky flood of their own, the soft feeling of cream teasing your nipple only prolonging your orgasm.\n\n");
 	}
 	//Post fap
 	outputText("You pant and relax, exhausted.  Your right arm is cramped and your " + cockDescript(x) + " is sore.  People around you look similarly tired and are slowly recovering from this rough collective dick-stroking session.  Someone gently taps your shoulder.  It is your left neighbor: \"<i>Well played. I didn't expect you would be so... resistant.  Few players last that long with me, because their rods generally don't endure my handjobs.</i>\"  He proceeds to shake hands; both you are smeared with pre-cum and various cock juices, but you don't care.  You smile and thank him for the good game and the orgasm.  It comes as something of a relief that everyone seems to show good sportsmanship.  Everyone is congratulating each other; various comments reach your ears about the game they just had and how well their opponents did.  Your right partner stands before you.  \"<i>Whoa, you sure know how to give a handjob!  That was amazing, and you know what?  I don't care if I haven't won!</i>\"  You tell him that you're glad that he enjoyed your efforts.  Everyone is now laughing and chatting casually, as if their still erect cocks weren't dripping semen and they weren't busy giving furious handjobs a few minutes ago.  ");

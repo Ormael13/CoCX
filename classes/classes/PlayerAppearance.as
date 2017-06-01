@@ -354,7 +354,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		//Worm flavor
 		if(player.hasStatusEffect(StatusEffects.Infested))
-			outputText("  Every now and again a slimy worm coated in spunk slips partway out of your " + player.cockDescript(0) + ", tasting the air like a snake's tongue.");
+			outputText("  Every now and again a slimy worm coated in spunk slips partway out of your [cock], tasting the air like a snake's tongue.");
 		if(player.cocks[temp].sock)
 			sockDescript(temp);
 		//DONE WITH COCKS, moving on!
@@ -525,7 +525,7 @@ public class PlayerAppearance extends BaseContent {
 		}
 		//Worm flavor
 		if(player.hasStatusEffect(StatusEffects.Infested))
-			outputText("Every now and again slimy worms coated in spunk slip partway out of your " + player.multiCockDescriptLight() + ", tasting the air like tongues of snakes.\n");
+			outputText("Every now and again slimy worms coated in spunk slip partway out of your [cocks], tasting the air like tongues of snakes.\n");
 		//DONE WITH COCKS, moving on!
 	}
 	//Of Balls and Sacks!
@@ -558,19 +558,19 @@ public class PlayerAppearance extends BaseContent {
 		else
 		{
 			if(player.skin.hasMagicalTattoo())
-				outputText("A " + sackDescript() + " covered by magical tattoo with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".");
+				outputText("A " + sackDescript() + " covered by magical tattoo with " + ballsDescript() + " swings heavily beneath your [cocks].");
 			else if(player.skinType == SKIN_TYPE_PLAIN)
-				outputText("A " + sackDescript() + " with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".");
+				outputText("A " + sackDescript() + " with " + ballsDescript() + " swings heavily beneath your [cocks].");
 			else if(player.hasFur())
-				outputText("A fuzzy " + sackDescript() + " filled with " + ballsDescript() + " swings low under your " + player.multiCockDescriptLight() + ".");
+				outputText("A fuzzy " + sackDescript() + " filled with " + ballsDescript() + " swings low under your [cocks].");
 			else if(player.hasCoatOfType(SKIN_COAT_CHITIN))
 				outputText("A chitin " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.");
 			else if(player.hasScales())
 				outputText("A scaley " + sackDescript() + " hugs your " + ballsDescript() + " tightly against your body.");
 			else if(player.skinType == SKIN_TYPE_STONE)
-				outputText("A stone-solid sack with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".");
+				outputText("A stone-solid sack with " + ballsDescript() + " swings heavily beneath your [cocks].");
 			else if(player.skinType == SKIN_TYPE_GOO)
-				outputText("An oozing, semi-solid sack with " + ballsDescript() + " swings heavily beneath your " + player.multiCockDescriptLight() + ".");
+				outputText("An oozing, semi-solid sack with " + ballsDescript() + " swings heavily beneath your [cocks].");
 		}
 		outputText("  You estimate each of them to be about " + num2Text(Math.round(player.ballSize)) + " ");
 		if(Math.round(player.ballSize) == 1)
@@ -704,7 +704,7 @@ public class PlayerAppearance extends BaseContent {
 	{
 		if(player.cocks[0].pierced > 0)
 		{
-			outputText("\nLooking positively perverse, a " + player.cocks[0].pShortDesc + " adorns your " + player.cockDescript(0) + ".");
+			outputText("\nLooking positively perverse, a " + player.cocks[0].pShortDesc + " adorns your [cock].");
 		}
 	}
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00286] == 1)
@@ -739,11 +739,11 @@ public class PlayerAppearance extends BaseContent {
 		if (player.skinType == SKIN_TYPE_PLAIN && player.skinAdj == "glossy" && player.skinTone == "white and black") outputText(" However your skin is pitch black with a white underbelly that runs on the underside of your limbs and has a glossy shine, similar to that of an orca.");
 	}
 	public function describeGear():void {
-		outputText("  <b>You are currently " + (player.armorDescript() != "gear" ? "wearing your " + player.armorDescript() : "naked") + "" + " and using your " + player.weaponName + " as a melee weapon");
+		outputText("  <b>You are currently " + (player.armorDescript() != "gear" ? "wearing your " + player.armorDescript() : "naked") + "" + " and using your [weapon] as a melee weapon");
 		if (player.weaponRangeName != "nothing")
-			outputText(",  " + player.weaponRangeName + " as range weapon");
+			outputText(",  [weaponrangename] as range weapon");
 		if (player.shieldName != "nothing")
-			outputText("  and " + player.shieldName + " as your shield");
+			outputText("  and [shield] as your shield");
 		outputText(".");
 		if (player.jewelryName != "nothing" && player.jewelryName != "fox hairpin")
 			outputText("  Girding one of your fingers is " + player.jewelryName + ".");
@@ -938,7 +938,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.lowerBody == LOWER_BODY_TYPE_BEE)
 			outputText("  Your " + num2Text(player.legCount) + " legs are covered in a shimmering insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than exoskeleton.  A bit of downy yellow and black fur fuzzes your upper thighs, just like a bee.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_GOO)
-			outputText("  In place of legs you have a shifting amorphous blob.  Thankfully it's quite easy to propel yourself around on.  The lowest portions of your " + player.armorName + " float around inside you, bringing you no discomfort.");
+			outputText("  In place of legs you have a shifting amorphous blob.  Thankfully it's quite easy to propel yourself around on.  The lowest portions of your [armor] float around inside you, bringing you no discomfort.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_CAT)
 			outputText("  " + Num2Text(player.legCount) + " digitigrade legs grow downwards from your waist, ending in soft, padded cat-paws.");
 		else if (player.lowerBody == LOWER_BODY_TYPE_LIZARD)
@@ -986,7 +986,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.lowerBody == LOWER_BODY_TYPE_YGG_ROOT_CLAWS)
 			outputText("  Your " + num2Text(player.legCount) + " legs looks quite normal until your feet. Your roots have condensed into a self-contained shape of three clawed toes on the front, and a small hind-claw in the back. You doubt they can gather moisture very well like this, but at least you have an excellent grip.");
 		if (player.findPerk(PerkLib.Incorporeality) >= 0)
-			outputText("  Of course, your " + player.legs() + " are partially transparent due to their ghostly nature."); // isn't goo transparent anyway?
+			outputText("  Of course, your [legs] are partially transparent due to their ghostly nature."); // isn't goo transparent anyway?
 	}
 	public function describeTail():void {
 		if (player.tailType == TAIL_TYPE_HORSE)
@@ -996,7 +996,7 @@ public class PlayerAppearance extends BaseContent {
 		if (player.tailType == TAIL_TYPE_DOG)
 			outputText("  A fuzzy [skin coat.color] dogtail sprouts just above your " + buttDescript() + ", wagging to and fro whenever you are happy.");
 		if (player.tailType == TAIL_TYPE_DEMONIC)
-			outputText("  A narrow tail ending in a spaded tip curls down from your " + buttDescript() + ", wrapping around your " + player.leg() + " sensually at every opportunity.");
+			outputText("  A narrow tail ending in a spaded tip curls down from your " + buttDescript() + ", wrapping around your [leg] sensually at every opportunity.");
 		if (player.tailType == TAIL_TYPE_COW)
 			outputText("  A long cowtail with a puffy tip swishes back and forth as if swatting at flies.");
 		if (player.tailType == TAIL_TYPE_SPIDER_ADBOMEN) {
@@ -1205,13 +1205,13 @@ public class PlayerAppearance extends BaseContent {
 		//Demonic horns
 		if (player.hornType == HORNS_DEMON) {
 			if (player.horns == 2)
-				outputText("  A small pair of pointed horns has broken through the " + player.skinDesc + " on your forehead, proclaiming some demonic taint to any who see them.");
+				outputText("  A small pair of pointed horns has broken through the [skin.type] on your forehead, proclaiming some demonic taint to any who see them.");
 			if (player.horns == 4)
-				outputText("  A quartet of prominent horns has broken through your " + player.skinDesc + ".  The back pair are longer, and curve back along your head.  The front pair protrude forward demonically.");
+				outputText("  A quartet of prominent horns has broken through your [skin.type].  The back pair are longer, and curve back along your head.  The front pair protrude forward demonically.");
 			if (player.horns == 6)
-				outputText("  Six horns have sprouted through your " + player.skinDesc + ", the back two pairs curve backwards over your head and down towards your neck, while the front two horns stand almost eight inches long upwards and a little forward.");
+				outputText("  Six horns have sprouted through your [skin.type], the back two pairs curve backwards over your head and down towards your neck, while the front two horns stand almost eight inches long upwards and a little forward.");
 			if (player.horns >= 8)
-				outputText("  A large number of thick demonic horns sprout through your " + player.skinDesc + ", each pair sprouting behind the ones before.  The front jut forwards nearly ten inches while the rest curve back over your head, some of the points ending just below your ears.  You estimate you have a total of " + num2Text(player.horns) + " horns.");
+				outputText("  A large number of thick demonic horns sprout through your [skin.type], each pair sprouting behind the ones before.  The front jut forwards nearly ten inches while the rest curve back over your head, some of the points ending just below your ears.  You estimate you have a total of " + num2Text(player.horns) + " horns.");
 		}
 		//Minotaur horns
 		if (player.hornType == HORNS_COW_MINOTAUR) {
@@ -1340,7 +1340,7 @@ public class PlayerAppearance extends BaseContent {
 			if(player.skinType == SKIN_TYPE_FUR)
 				outputText("  You have no hair, only a thin layer of fur atop of your head.  ");
 			else {
-				outputText("  You are totally bald, showing only shiny " + player.skinTone + " " + player.skinDesc + "");
+				outputText("  You are totally bald, showing only shiny " + player.skinTone + " [skin.type]");
 				if(player.skin.hasMagicalTattoo()) outputText(" covered with magical tattoo");
 				outputText(" where your hair should be.");
 			}

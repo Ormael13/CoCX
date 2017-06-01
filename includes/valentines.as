@@ -546,7 +546,7 @@ public function rubPastieOnYourWangDawg():void {
 	
 	outputText("\n\nPolishing your mast with the amorous drunk has been fun, but you think you've teased her enough. Raising the tempo of your fey massage, you can feel your release building up just behind your [cock biggest] in a heavy pressure that floods your loins with urgency.  Gritting your teeth, you wrap your other hand around the first and bounce her faster and faster along your meat.  Eager caresses become frantic friction as Pastie feels your flesh swelling against her.");
 	if(player.balls > 0) outputText("  Your [balls] lurch, [skin] contracting as liquid passion rises within you.");
-	outputText("  Your [ass] clenches in anticipation, heralding your climax, so you slide the fairy up your shaft, pulling free from the grip of her arms and legs, holding the confused girl directly in front of your " + player.multiCockDescriptLight() + " while loosing your grasp to bear her entire, curvaceous form to the open air.  With a shuddering gasp, you erupt your intoxicating cream directly into the fey girl, your orgasm");
+	outputText("  Your [ass] clenches in anticipation, heralding your climax, so you slide the fairy up your shaft, pulling free from the grip of her arms and legs, holding the confused girl directly in front of your [cocks] while loosing your grasp to bear her entire, curvaceous form to the open air.  With a shuddering gasp, you erupt your intoxicating cream directly into the fey girl, your orgasm");
 	//low cum production:
 	if(player.cumQ() < 250) outputText(" easily drenching the tiny fairy, in plump pearls up and down her naked flesh.");
 	else if(player.cumQ() < 750) outputText(" leaving her and the arm you're holding her in dripping with a sticky alabaster lacquer.");

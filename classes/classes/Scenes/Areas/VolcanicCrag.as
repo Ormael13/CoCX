@@ -71,7 +71,7 @@ package classes.Scenes.Areas
 					break;
 				case 3: //True Fire Golems
 					clearOutput();
-					outputText("As you take a stroll, from nearby cracks emerge group of golems. Looks like you have encountered some true fire golems! You ready your " + player.weaponName + " for a fight!");
+					outputText("As you take a stroll, from nearby cracks emerge group of golems. Looks like you have encountered some true fire golems! You ready your [weapon] for a fight!");
 					startCombat(new GolemsTrueFire());
 					break;
 				default:

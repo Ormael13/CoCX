@@ -29,14 +29,14 @@ package classes.Items.Consumables
 				else if (player.skinType == 2)
 					outputText("\n\nYour scales itch incessantly, so you scratch at them.  They start falling off wholesale, leaving you standing in a pile of scales after only a few moments. <b>You've lost your scales!</b>");
 				else if (player.skinType > 2)
-					outputText("\n\nYour " + player.skinDesc + " itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin. <b>Your skin is once again normal!</b>");
+					outputText("\n\nYour [skin.type] itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin. <b>Your skin is once again normal!</b>");
 				player.skin.restore();
 				changes += 2;
 			}
 			if ((changes < changeLimit) && (player.earType != 4) && (Utils.rand(4) == 0)){
 				player.earType = 4;
 				changes++;
-				outputText("\n\nA weird tingling runs through your scalp as your " + player.hairDescript() + " shifts slightly.  You reach up and your hand bumps against <b>your new pointed elfin ears</b>.  You bet they look cute!");
+				outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up and your hand bumps against <b>your new pointed elfin ears</b>.  You bet they look cute!");
 			}
 			if ((changes < changeLimit) && (player.tallness < 108)){
 				player.tallness += changeLimit - changes + Utils.rand(2); //Add remaining changes as additional height

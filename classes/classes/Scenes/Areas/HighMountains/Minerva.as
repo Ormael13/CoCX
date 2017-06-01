@@ -17,7 +17,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText("  You get out of the way just in time, Minerva making a loud chomping sound as she only catches the air.");
 			}
 			else if (combatBlock(true)) {
-				outputText("  You raise your " + player.shieldName + " just in time, deflecting her bite.");
+				outputText("  You raise your [shield] just in time, deflecting her bite.");
 			}
 			//[else block]
 			else if (damage <= 0) outputText("  Your hands lash out, knocking her head to the side as she tries to bite you.  With the bite deflected, Minerva makes a loud chomping sound as she only bites the air.");

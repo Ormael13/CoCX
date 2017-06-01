@@ -13,7 +13,7 @@ package classes.Scenes.Areas.HighMountains
 				outputText("You are able to parry one of her blows with enough force to push her back, giving you a little more breathing room.");
 			}
 			if (combatBlock(true)) {
-				outputText("You are able to raise your " + player.shieldName + " in time to block the phoenix's blows.");
+				outputText("You are able to raise your [shield] in time to block the phoenix's blows.");
 			}
 			else {
 				outputText("Seeing an opening, the phoenix forces her way through your guard with a quick pair of powerful strikes. ");
@@ -46,11 +46,11 @@ package classes.Scenes.Areas.HighMountains
 					damage = Math.round(damage);
 					if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 						player.addStatusValue(StatusEffects.Blizzard, 1, -1);
-						outputText("As she zooms over you a great gout of flame erupts from the phoenix’s mouth! You dive out of the way, but all too late. The wall of fire rolls over covering you blizzard you as you leap through it, the brief contact with the inferno searing both you and your " + player.armorName + " slightly due to still swirling around you ice shards. ");
+						outputText("As she zooms over you a great gout of flame erupts from the phoenix’s mouth! You dive out of the way, but all too late. The wall of fire rolls over covering you blizzard you as you leap through it, the brief contact with the inferno searing both you and your [armor] slightly due to still swirling around you ice shards. ");
 						damage *= 0.2;
 					}
 					else {
-						outputText("As she zooms over you a great gout of flame erupts from the phoenix’s mouth! You dive out of the way, but all too late. The wall of fire rolls over you as you leap through it, the brief contact with the inferno searing both you and your " + player.armorName + " badly. ");
+						outputText("As she zooms over you a great gout of flame erupts from the phoenix’s mouth! You dive out of the way, but all too late. The wall of fire rolls over you as you leap through it, the brief contact with the inferno searing both you and your [armor] badly. ");
 					}
 					damage = Math.round(damage);
 					damage = player.reduceDamage(damage);

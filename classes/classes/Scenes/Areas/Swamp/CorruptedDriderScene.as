@@ -42,7 +42,7 @@ package classes.Scenes.Areas.Swamp
 			else {
 				outputText("Bushwhacking your way through the dense foliage of the swamp, it soon becomes clear that you've wandered into spider territory.  Webbing hangs from trees and the dark, dank air hides ambushes well.  Diligence and wariness pay off, for you become aware of a skittering too near to be simple background noise.\n\n");
 
-				outputText("As far as you're aware, it's unlikely you'll be able to scare your stalker off, and so you simply wait for them to show themselves.  You search with your eyes and, noisily clearing your throat, make it clear you're aware of their presence.  Soft chuckling chimes around you, seeming to originate from several places in the scrub, but nothing appears.  You turn about and call again, raising your " + player.weaponName + ".  A gentle tap on the shoulder answers you, but when you look the vista is equally as desolate as the first time.  And where the hell is that laughing coming from?\n\n");
+				outputText("As far as you're aware, it's unlikely you'll be able to scare your stalker off, and so you simply wait for them to show themselves.  You search with your eyes and, noisily clearing your throat, make it clear you're aware of their presence.  Soft chuckling chimes around you, seeming to originate from several places in the scrub, but nothing appears.  You turn about and call again, raising your [weapon].  A gentle tap on the shoulder answers you, but when you look the vista is equally as desolate as the first time.  And where the hell is that laughing coming from?\n\n");
 
 				outputText("Spinning again, you lose your patience and loudly demand your ambusher present itself.  A soft tug on your ");
 				if (player.tailType > TAIL_TYPE_NONE) outputText("tail ");
@@ -153,7 +153,7 @@ package classes.Scenes.Areas.Swamp
 			//*Summary: Fuck her cunt with a wang that fits it, lose control of the 
 			//situation when she kisses you with potent, envenomed lips.  Get 
 			//moderately hypno'ed into cumming into her over and over again?
-			outputText("Eager to plumb the depths of this greedy spider's snatch, you practically tear your way out of your " + player.armorName + " in your hurry to get naked.  Through it all ");
+			outputText("Eager to plumb the depths of this greedy spider's snatch, you practically tear your way out of your [armor] in your hurry to get naked.  Through it all ");
 			if (monster.lust >= monster.eMaxLust()) {
 				outputText("she looks ");
 				if (player.tallness > 72) outputText("up ");
@@ -298,7 +298,7 @@ package classes.Scenes.Areas.Swamp
 
 			outputText("<b>Even later...</b>\n");
 
-			outputText("You collapse into the dirt, not even caring that it stinks of dried cum and girl-jizz.  You've completely emptied out every speck of sperm from your " + ballsDescriptLight() + ", and you even kept going for a while after that.  It wasn't until " + sMultiCockDesc() + " went soft at last that you found enough peace to lie down.  ");
+			outputText("You collapse into the dirt, not even caring that it stinks of dried cum and girl-jizz.  You've completely emptied out every speck of sperm from your [balls], and you even kept going for a while after that.  It wasn't until " + sMultiCockDesc() + " went soft at last that you found enough peace to lie down.  ");
 			if (player.cor > 80 && player.lib > 50) outputText("The longer you sit there, the more your strength returns to you, and the more the submissiveness placed into you by her venom recedes. Still, you've tired yourself out too much to leave at the moment.");
 			else outputText("The longer you sit there, the more you remember of yourself, and the more you forget the animal, the rut-beast that the spider-woman placed inside you.");
 			outputText("  You shiver and wrap your arms around her, snuggling against her while a primal, buried part of your brain insists that she's YOURS.  You fall asleep like that, resting dreamlessly even through your mate's waking and departure.");
@@ -356,7 +356,7 @@ package classes.Scenes.Areas.Swamp
 			clearOutput();
 			//*Summary:  Roll the drider over and squat on an ovipositor - reuse anal intro? (fuck you bitch, i'm taking your shitty kids to the lake and turning them pink)	
 			player.slimeFeed();
-			outputText("Eyeing the small lump of the spider's retracted ovipositor, you resolve to have a little fun with it, even if it means giving the spider exactly what she wants in a way that she doesn't.  You tear off your " + player.armorName + " while the drider watches with ");
+			outputText("Eyeing the small lump of the spider's retracted ovipositor, you resolve to have a little fun with it, even if it means giving the spider exactly what she wants in a way that she doesn't.  You tear off your [armor] while the drider watches with ");
 			if (monster.HP < 1) outputText("hate");
 			else outputText("lust");
 			outputText(" pouring from all four of her eyes.  Now nude, you saunter over with a gleam in your eyes and a telltale tingling in your loins.  You move around some of the eight, sprawled-out legs and close in on her side.  With a mighty heave, you help to lift her up onto her shaking legs, then keep pushing, tipping her dangerously to the side.  She cries out in surprise as she flips over, rolling onto her back while her spindly, chitinous legs flail uselessly at the muggy air.\n\n");
@@ -397,7 +397,7 @@ package classes.Scenes.Areas.Swamp
 
 			outputText("There's a moment of terrific, agonizing pain that forces you farther onto your back, and then it vanishes, the only signal of its passage a muffled slosh coming from your belly.  You shiver, feeling strange, unexpected bliss welling up from your loins, just in time for the next egg to traverse your ovipositor-gaped, goo-spewing cunny.  Even before this one can squeeze through your abused cervix, another backs up behind... and another... and another.  Your poor, stretched-out pussy clenches, shooting spasms of pleasure through your whole body that make you grunt and moan.  Lost in your orgasm, you throw your head back to howl, only to find the drider's cock, graduated from its larval clitoris, twitching and spewing its foul steaming load directly where you just laid your head.  Several ropes of the demonic jizz land in your " + hairDescript() + " and even patter on your forehead, but you can't be put out to care right now.");
 			if (player.hasCock()) {
-				outputText("  Your own " + multiCockDescriptLight() + " retaliate");
+				outputText("  Your own [cocks] retaliate");
 				if (player.cockTotal() == 1) outputText("s");
 				outputText(" automatically, dumping ");
 				if (player.cumQ() < 500) outputText("scores of");
@@ -427,7 +427,7 @@ package classes.Scenes.Areas.Swamp
 			spriteSelect(77);
 			//*Summary: Force the drider onto her back and then fish out her ovipositor, jerk it off, then climb on top for some egg-based buttlovin'
 			clearOutput();
-			outputText("Eyeing the small lump of the spider's retracted ovipositor, you resolve to have a little fun with it, even if it means giving the spider exactly what she wants in a way that she doesn't.  You tear off your " + player.armorName + " while the drider watches with ");
+			outputText("Eyeing the small lump of the spider's retracted ovipositor, you resolve to have a little fun with it, even if it means giving the spider exactly what she wants in a way that she doesn't.  You tear off your [armor] while the drider watches with ");
 			if (monster.HP < 1) outputText("hate");
 			else outputText("lust");
 			outputText(" pouring from all four of her eyes.  Now nude, you saunter over with a gleam in your eyes and a telltale tingling in your loins.  You move around some of the eight, sprawled-out legs and close in on her side.  With a mighty heave, you help to lift her up onto her shaking legs, then keep pushing, tipping her dangerously to the side.  She cries out in surprise as she flips over, rolling onto her back while her spindly, chitinous legs flail uselessly at the muggy air.\n\n");
@@ -468,7 +468,7 @@ package classes.Scenes.Areas.Swamp
 				if (player.wetness() >= 3) outputText(" and drips");
 				outputText(" sympathetically with the sensation, and your " + clitDescript() + " peeks from the wet lips.");
 			}
-			outputText("  Yet you are not denied the anal pleasure you crave, as the widening bands now filling you are each pushing out harder than the one before.  At the stimulation, her own demonic clit swells as if posessed, nodulates, and hardens into dick form, poking up from her pussy and drooling a slime of pre-cum onto her abdomen.  The second ring rolls over your anal g-spot and you gasp, nearly losing your grip.  The third knocks your " + player.legs() + " out from under you, and you collapse atop your partner, squeezing oozing dick");
+			outputText("  Yet you are not denied the anal pleasure you crave, as the widening bands now filling you are each pushing out harder than the one before.  At the stimulation, her own demonic clit swells as if posessed, nodulates, and hardens into dick form, poking up from her pussy and drooling a slime of pre-cum onto her abdomen.  The second ring rolls over your anal g-spot and you gasp, nearly losing your grip.  The third knocks your [legs] out from under you, and you collapse atop your partner, squeezing oozing dick");
 			if (player.hasCock()) outputText("s");
 			outputText(" between you");
 			if (player.clitLength >= 4 && player.hasVagina()) outputText(", and pressing your monster chick-stick into it; the gooey heat sends a tingle of shock up your spine and your pussy convulses");
@@ -489,7 +489,7 @@ package classes.Scenes.Areas.Swamp
 			if (!player.hasCock() && player.hasVagina()) outputText("You gasp and dribble a few strands of girl-goo, the contractions of your achingly empty pussy intensifying.  ");
 			if (player.hasCock()) outputText("You gasp and squirt a few weak ropes of cum, having a miniature orgasm on the spot.  ");
 			outputText("Writhing happily, you sigh ");
-			if (player.hasCock()) outputText("while your " + multiCockDescriptLight() + " dribbles white, wasted goo onto the black and " + monster.hairColor + " striped carapace below");
+			if (player.hasCock()) outputText("while your [cocks] dribbles white, wasted goo onto the black and " + monster.hairColor + " striped carapace below");
 			else if (player.hasVagina()) outputText("while your " + vaginaDescript(0) + " dribbles fem-slime onto the black and " + monster.hairColor + " striped carapace below");
 			else outputText("while your fingers tweak your " + nippleDescript(0) + "s and your starved sphincter sucks at its slimy, squirming stuffing");
 			outputText(".  Without warning, the ovipositor dilates, pulling your " + assholeDescript() + " even wider.  An explosion of warmth goes off in your guts, and you realize that your term as an incubator has begun with a sense of perverse delight.\n\n");
@@ -530,7 +530,7 @@ package classes.Scenes.Areas.Swamp
 			spriteSelect(77);
 			clearOutput();
 			var x:Number = player.smallestCockIndex();
-			outputText("Quickly shedding your " + player.armorName + ", you eye up the incapacitated drider, wondering how best to take advantage of your successes.  A remarkably nasty thought strikes you, and your lips nearly curl into a devious grin then and there.  You stride toward your trophy, taking pleasure in the simmering hatred in her eyes as she glares up at you.  A sudden bout of mocking laughter stops your progress; the drider seems to have noticed ");
+			outputText("Quickly shedding your [armor], you eye up the incapacitated drider, wondering how best to take advantage of your successes.  A remarkably nasty thought strikes you, and your lips nearly curl into a devious grin then and there.  You stride toward your trophy, taking pleasure in the simmering hatred in her eyes as she glares up at you.  A sudden bout of mocking laughter stops your progress; the drider seems to have noticed ");
 			if (player.cockTotal() == 1) outputText("your");
 			else outputText("one of your");
 			outputText(" sub-par (by Marethian standards at least) cock");
@@ -551,11 +551,11 @@ package classes.Scenes.Areas.Swamp
 			outputText("Fem-spunk, at this point, is openly leaking from her similarly unattended nether-lips.  The drider tries her best to curse at you, and the mixture of aroused moans and furious swearing entertains you more than it should.  Her words catch in her throat, however, when you reach down and begin lightly caressing and tickling the impaled spinerette.  Her screams reach an even higher octave, her entire body going into a frenzied spasm under your excruciatingly gentle touch.  She quickly cums again, her backlog of silk puffing her poor silk-maker up even further.\n\n");
 
 			outputText("Finally, on a merciful whim, you uncork her pent-up organ and lean back against the inevitable geyser of silk-spunk.  With a final, near-ear-splitting screech, both the spinneret and her still-erect penis gush huge globs of alabaster fluid in brain-scrambling pulses of pleasure.  \"<i>Son of a-a... bitch...</i>\" she groans, her hands idly gnashing her bosom against itself in a forced orgasm-induced fit.  \"<i>Bastard!</i>\"  You merely chuckle and give her spewing stiffy a little slap, watching gleefully at the wiggling pattern of her ejaculatory fluids.  However, while her maleness's flow eventually slows, the spinneret doesn't let up.  Like a minotaur who's taken one too many lust drafts, the drider throws her half-formed web all over the trees, undergrowth, ground, and, of course, your entire front.");
-			if (player.biggestTitSize() >= 3) outputText("  The semi-sticky stuff soaks into the cleavage of your " + player.allBreastsDescript() + ", the feeling surprisingly enjoyable.  You even knead the web in a bit, biting your bottom lip from the sensation.");
+			if (player.biggestTitSize() >= 3) outputText("  The semi-sticky stuff soaks into the cleavage of your [allbreasts], the feeling surprisingly enjoyable.  You even knead the web in a bit, biting your bottom lip from the sensation.");
 			outputText("  She actually slips into unconsciousness from the huge release, falling limp under you and even beginning to snore.  It dawns on you at that moment; you haven't even gotten to climax!  Cursing yourself for such a silly oversight, you cast around for something fuckable.  Eventually, you find the perfect receptacle for your lust; her slightly-gaping, purple-lipped mouth.\n\n");
 
 			outputText("As gently as you can, you slide off of the drider's body and move around in front of her, falling to a kneel next to her head.  No sense in foreplay, you figure - she's asleep and you're ridiculously horny. Leaving her upside-down, you slide your " + cockDescript(x) + " between her lips slowly, like a baker making a delicious crème brûlée.  Upon entry, however, caution is scattered in the wind, abandoned because of the feeling of her glorious gob, enveloping, envenomating, lubricating, and teasing the shaft.  Although aware of how bad of an idea it is, you're compelled to thrust as deep as you can into your knocked-out sex aid.  Happily, she's too out of it to react to the face-fucking");
-			if (player.balls > 0) outputText(", even giggling a little as your " + ballsDescriptLight() + " slap against her nose");
+			if (player.balls > 0) outputText(", even giggling a little as your [balls] slap against her nose");
 			outputText(".\n\n");
 
 			outputText("Her tongue idly licks and teases your " + cockDescript(x) + ", each passionate thrust jiggling her hefty tits.  It's not long before your limit is reached.  Planting a hand on each side of her head, you slam your groin into her chin.  She gurgles in pleasure from your continuing rough treatment, and her pleasured sounds only increase when your first load is shot down her throat.");
@@ -646,7 +646,7 @@ package classes.Scenes.Areas.Swamp
 			if (player.isBiped() || player.isGoo()) outputText("down onto your back");
 			else outputText("over, onto your side and then to your back");
 			outputText(".  It seems that, regardless of their slenderness, she can still put an impressive amount of weight behind her legs.  They ");
-			if (!player.isNaga()) outputText("pull your own " + player.feet() + " apart");
+			if (!player.isNaga()) outputText("pull your own [feet] apart");
 			else outputText("scrape inquisitively at your scales");
 			outputText(", her body climbing atop you.  Before you can realize her plans her spinneret is at work, ");
 			if (!player.isNaga()) {
@@ -664,7 +664,7 @@ package classes.Scenes.Areas.Swamp
 			if (!player.isTaur()) outputText("Her fingers then move to the sides of your head, lacing webbing through your hair and sticking it firmly to the ground. More vulnerable than ever, you can't lift your head without ripping your hair from your scalp in chunks.");
 			else {
 				outputText("Her fingers then reach behind your head, pulling your upper body off of the damp dirt and stretching sticky strands between your skull and your immobile forelegs.  ");
-				if (player.biggestTitSize() > 4) outputText("With pain and then a pop, your " + player.allBreastsDescript() + " squash out to the sides as she presses your torso into your knees.  ");
+				if (player.biggestTitSize() > 4) outputText("With pain and then a pop, your [allbreasts] squash out to the sides as she presses your torso into your knees.  ");
 				outputText("Reaching back for more webbing, she ties your arms behind your back in a bundle of white thread.  Now pretzeled into an uncomfortable curled shape, you can't pull your torso away from your forelegs without wrenching your head off of your neck.  You feel completely helpless.");
 			}
 			outputText("  \"<i>Now, isn't that just precious,</i>\" the drider chuckles again.  She leans in low, her fingers trickling over your thighs like the steps of... well, of small spiders.  You gurgle in response, mouth held open uncomfortably.  She roams slowly up your body.");
@@ -686,7 +686,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("  With her body in the way, you cannot clearly see what transpires in your loins, yet a sight emerges before your eyes that dominates your mind. Her clit has finished growing, and is no longer a clit.\n\n");
 
 			outputText("From her crotch a cock has erupted, demonic and terrible.  It drips with sweat and musk, dribbling onto your collarbone.  The position you're in has never seemed more ominous - or more exciting.  Her cockhead smacks against your lower lip, pre-cum bouncing off and lightly spattering on your forehead.  Venom-addled, breathing in her fragrant spunk sends a quake up your body.  Inadvertently your hips start to seize, your " + vaginaDescript() + " shuddering in surprising pleasure.");
-			if (player.hasCock()) outputText("  Even your " + cockDescript(0) + " spurts some pre-cum of its own.");
+			if (player.hasCock()) outputText("  Even your [cock] spurts some pre-cum of its own.");
 			outputText("  There's some shame in having a small orgasm from nothing more than the scent of sperm, but you place the blame solely on your intoxicated state.\n\n");
 			//It would take a creature with truly fucked up biology to evoke such a reaction otherwise.
 
@@ -734,9 +734,9 @@ package classes.Scenes.Areas.Swamp
 			spriteSelect(77);
 			//Poor males.  All the buttsexes. (yo this is an actual paragraph of the game text right)
 			clearOutput();
-			if (player.lust >= player.maxLust()) outputText("Unable to resist the desire coursing through your body, you strip off your " + player.armorName + " and start stroking " + sMultiCockDesc() + ", displaying it in the hope that it will draw the drider's attention, while at the same time just trying to get yourself off and attain release.");
+			if (player.lust >= player.maxLust()) outputText("Unable to resist the desire coursing through your body, you strip off your [armor] and start stroking " + sMultiCockDesc() + ", displaying it in the hope that it will draw the drider's attention, while at the same time just trying to get yourself off and attain release.");
 			else {
-				outputText("You slump down, too beat up to mount an effective defense, let alone stay up on your " + player.feet() + ".  The drider skitters over to you and effortlessly peels you out of your " + player.armorName + ", exposing your ");
+				outputText("You slump down, too beat up to mount an effective defense, let alone stay up on your [feet].  The drider skitters over to you and effortlessly peels you out of your [armor], exposing your ");
 				if (player.lust < 50) outputText("soft");
 				else outputText("hard");
 				outputText("member");
@@ -857,7 +857,7 @@ package classes.Scenes.Areas.Swamp
 			clearOutput();
 			outputText("As soon as the drider-girl goes down, you leap into action.  Before she has a chance to recover, you run over and leap onto her back, balancing shakily as the drider stumbles back up onto her many legs, trying to shake you off.  You grab onto the drider's hair for support, pulling tight each time you're nearly displaced.  Yelping in agony, she soon learns her lesson and settles down, submitting to your dominance.\n\n");
 
-			outputText("Now that she's calmed down, you give her a hard shove, putting her on her drider-belly so you're not nearly thrown off her every other moment.  With that done, you put your hands on her human back, pushing her forward and exposing her human-like bubble-butt, seated just above where woman meets spider. Greedily, you pull her cheeks apart, revealing the tiny star of her puckered asshole.  You pull your " + cockDescript(x) + " out of your " + player.armorName + ", already hardening from the thought of you pounding her tight little backdoor.\n\n");
+			outputText("Now that she's calmed down, you give her a hard shove, putting her on her drider-belly so you're not nearly thrown off her every other moment.  With that done, you put your hands on her human back, pushing her forward and exposing her human-like bubble-butt, seated just above where woman meets spider. Greedily, you pull her cheeks apart, revealing the tiny star of her puckered asshole.  You pull your " + cockDescript(x) + " out of your [armor], already hardening from the thought of you pounding her tight little backdoor.\n\n");
 
 			outputText("\"<i>Oh, you want that hole, do you? How very kinky,</i>\" the drider chides, but you aren't fooled by her tone – you can see her anus relaxing, preparing itself for your arrival.  With a grin, you grab your " + cockDescript(x) + " and push it against her tight hole, leaning into the penetration until you feel it slip past her sphincter and into her hot, snug passage.  As you slide more and more of your cockmeat into her, you reach up from her cheeks and grope her breasts, squeezing her pert nipples between your fingers as you finally bottom out.  Since you can go no further up her butt, you start to piston your hips forward, slapping your hips to her ass with short, forceful strokes.\n\n");
 
@@ -878,7 +878,7 @@ package classes.Scenes.Areas.Swamp
 			}
 			outputText(".\n\n");
 
-			outputText("Finally done, you pull out of the drider, collapsing on her spider-back with a contented sigh.  Completely insensate after the anal ravaging you just gave her, the drider poses no threat as you leisurely gather " + sMultiCockDesc() + " back into your " + player.armorName + " and lower yourself off her cum-soaked abdomen.  You give her a final, playful ass slap as you dismount before heading back to camp.");
+			outputText("Finally done, you pull out of the drider, collapsing on her spider-back with a contented sigh.  Completely insensate after the anal ravaging you just gave her, the drider poses no threat as you leisurely gather " + sMultiCockDesc() + " back into your [armor] and lower yourself off her cum-soaked abdomen.  You give her a final, playful ass slap as you dismount before heading back to camp.");
 			if (silly()) outputText("\n\n(Driders butt-sex is awesome.)");
 			player.orgasm();
 			cleanupAfterCombat();

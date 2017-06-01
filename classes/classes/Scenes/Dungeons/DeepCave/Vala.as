@@ -34,7 +34,7 @@ package classes.Scenes.Dungeons.DeepCave
 
 			if(hasStatusEffect(StatusEffects.Milk)) {
 				addStatusValue(StatusEffects.Milk,1,5);
-				outputText("Your " + player.skinDesc + " tingles pleasantly, making you feel sexy and exposed.  Oh no!  It seems each coating of milk and glitter is stronger than the last!");
+				outputText("Your [skin.type] tingles pleasantly, making you feel sexy and exposed.  Oh no!  It seems each coating of milk and glitter is stronger than the last!");
 			}
 			else {
 				createStatusEffect(StatusEffects.Milk,5,0,0,0);

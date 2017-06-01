@@ -73,7 +73,7 @@ package classes.Scenes.Areas
 				case 0: //Valkyrie
 					clearOutput();
 					outputText("Making your way across the hard-packed ice of the Rift, you’re surprised to see the thick gray clouds part overhead.  You see a beautiful woman descend from on high, her snow-white wings flapping powerfully behind her back.  Armed with a long spear and shield, and clad in a bronze cuirass and a winged helm, she looks every bit the part of a mighty warrior.\n\n");
-					outputText("She touches down gently a few feet before you, her shield and spear raised.  \"<i>You seem a worthy sort to test my skills against, wanderer.  Prepare yourself!</i>\" she shouts, bearing down on you.  She doesn’t look like she’s going to back down -- you ready your " + player.weaponName + " for a fight!");
+					outputText("She touches down gently a few feet before you, her shield and spear raised.  \"<i>You seem a worthy sort to test my skills against, wanderer.  Prepare yourself!</i>\" she shouts, bearing down on you.  She doesn’t look like she’s going to back down -- you ready your [weapon] for a fight!");
 					startCombat(new Valkyrie());
 					break;
 				case 1: //Yeti
@@ -91,13 +91,13 @@ package classes.Scenes.Areas
 						outputText("Taking in the familiar surroundings, you realize you must have fallen through one of those chutes again. You begin to wonder if they are for the Yeti’s use, or if they are meant to bring in unsuspecting travelers. A meal delivery service set up with their limited ice magic? You shake off the snow on you and get to your feet. Looking to the passage, sure enough shadows dance along the walls as the thumps reach your ears.\n\n")
 					}
 					outputText("Hearing a thunderous roar, you ready yourself for a fight");
-					if (player.weaponName != "fists") outputText(", holding your " + player.weaponName + " at the ready");
+					if (player.weaponName != "fists") outputText(", holding your [weapon] at the ready");
 					outputText(". A massive hulking creature barrels around the corner and sets its gaze on you, its clawed hands and feet launching its body over the iced caverns with ease as you stare the beast down. The white blur of an ice yeti attacks you!");
 					startCombat(new Yeti());
 					break;
 				case 2: //Frost Giant
 					clearOutput();
-					outputText("You wander the frozen landscape of the Rift, frozen rocks, frosted hills and forested mountains your only landmarks. As you cross the peak of a rather large, lightly forested hill, you come face to gigantic face with a Frost Giant! He belches fiercely at you and you tumble back down the hill. He mostly steps over it as you come to your senses. You quickly draw your " + player.weaponName + " and withdraw from the hill to prepare for battle.\n\n");
+					outputText("You wander the frozen landscape of the Rift, frozen rocks, frosted hills and forested mountains your only landmarks. As you cross the peak of a rather large, lightly forested hill, you come face to gigantic face with a Frost Giant! He belches fiercely at you and you tumble back down the hill. He mostly steps over it as you come to your senses. You quickly draw your [weapon] and withdraw from the hill to prepare for battle.\n\n");
 					startCombat(new FrostGiant());
 					break;
 				case 3: //Winter Wolf
@@ -165,7 +165,7 @@ package classes.Scenes.Areas
 					break;
 				case 8: //True Ice Golems
 					clearOutput();
-					outputText("As you take a stroll, out of the nearby glaciers emerge a group of golems. Looks like you have encountered some true ice golems! You ready your " + player.weaponName + " for a fight!");
+					outputText("As you take a stroll, out of the nearby glaciers emerge a group of golems. Looks like you have encountered some true ice golems! You ready your [weapon] for a fight!");
 					startCombat(new GolemsTrueIce());
 					break;
 				default:
@@ -178,7 +178,7 @@ package classes.Scenes.Areas
 		
 		private function fightValeria():void {
 			clearOutput();
-			outputText("You ready your " + player.weaponName + " for a fight!");
+			outputText("You ready your [weapon] for a fight!");
 			startCombat(new GooArmor());
 		}
 		

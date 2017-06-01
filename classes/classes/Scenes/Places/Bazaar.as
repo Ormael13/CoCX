@@ -30,7 +30,7 @@ public function findBazaar():void {
 		flags[kFLAGS.BAZAAR_ENCOUNTERED]++;
 		outputText("Warm, earthy breezes drift by as you explore the wind-blown grasses of the plains.  Though it seems you can see for miles, with the grasses subtly shifting between a few feet and over a dozen feet tall, it's impossible to tell what you'll stumble into next.  You trust your ears and your nose as much as your oft-blocked vision at this point, and before long you catch a whiff of blackened meat and aromatic spices.  There's some kind of camp not far away!\n\n");
 		
-		outputText("You raise your " + player.weaponName + " and cautiously creep through the towering vegetation, trying not to give your position away until you've ascertained just what type of people inhabit this camp.  Bright light flickers through the grass in front of you, and you part it to peek from between the blowing stalks.  There's a ring of brightly colored wagons set up here, with a tall, picketed fence erected around them.  Smoke curls up from the camp's center, twisting in the air like a viper in the grass.  Each of the wagons appears to be expanded, deployed into a small, self-contained structure.  Clearly this is some kind of traveling caravan or bazaar.\n\n");
+		outputText("You raise your [weapon] and cautiously creep through the towering vegetation, trying not to give your position away until you've ascertained just what type of people inhabit this camp.  Bright light flickers through the grass in front of you, and you part it to peek from between the blowing stalks.  There's a ring of brightly colored wagons set up here, with a tall, picketed fence erected around them.  Smoke curls up from the camp's center, twisting in the air like a viper in the grass.  Each of the wagons appears to be expanded, deployed into a small, self-contained structure.  Clearly this is some kind of traveling caravan or bazaar.\n\n");
 		
 		outputText("There's only one gap in the fence – a narrow gate watched by a ten-foot tall man with red skin and a pale, almost sky-blue turban.  He has a pair of scimitars that hang from a simple, leather belt.  The crimson-skinned man's clothing is a simple tunic and loose-fitting pants, but neither can conceal his obviously well-muscled frame.  He looks alert and attentive – a good sign since demons would have little need to post guards.");
 	}
@@ -69,7 +69,7 @@ public function enterTheBazaar():void {
 //Pure? You'll have to fight!
 public function initiateFightGuard():void {
 	clearOutput();
-	outputText("You ready your " + player.weaponName + " and assume a combat stance! He grabs his dual scimitars! It's a fight!");
+	outputText("You ready your [weapon] and assume a combat stance! He grabs his dual scimitars! It's a fight!");
 	startCombat(new BazaarGatekeeper());
 }	
 
@@ -142,7 +142,7 @@ private function shopMenu():void {
 //[The Slippery Squeeze!]
 private function theSlipperySqueeze():void {
 	clearOutput();
-	outputText("You walk into one wagon whose sign clearly denotes it as 'The Slippery Squeeze'.  It's one of the largest contraptions in the bazaar, and with your first step inside you can see why.  It's built like a regular business, with a lobby in the front and numerous oak doors that lead to back rooms.  The walls are painted a soothing salmon color and a purple, fringed rug covers the wood floor.  It feels soft under your " + player.feet() + " after so much walking, letting you loosen up and relax.  Incense burns on the counter, filling the air with strange, fragrant aromas that tickle at your nose.\n\n");
+	outputText("You walk into one wagon whose sign clearly denotes it as 'The Slippery Squeeze'.  It's one of the largest contraptions in the bazaar, and with your first step inside you can see why.  It's built like a regular business, with a lobby in the front and numerous oak doors that lead to back rooms.  The walls are painted a soothing salmon color and a purple, fringed rug covers the wood floor.  It feels soft under your [feet] after so much walking, letting you loosen up and relax.  Incense burns on the counter, filling the air with strange, fragrant aromas that tickle at your nose.\n\n");
 	var androgyny:Function = null;
 	var milker:Function = null;
 	//(First time desc:
@@ -166,7 +166,7 @@ private function theSlipperySqueeze():void {
 	}
 	//(Repeat visit: 
 	else {
-		outputText("Joey purses his glossed lips when you enter and coyly cocks one of his ears as he says, \"<i>Welcome back to 'The Slippery Squeeze', " + player.short + ".  Would you like me to give you a nice, salty rub-down?  Or would you prefer Sara do it?  Just remember, she can't make her own 'oil' like I can.</i>\"\n\n");
+		outputText("Joey purses his glossed lips when you enter and coyly cocks one of his ears as he says, \"<i>Welcome back to 'The Slippery Squeeze', [name].  Would you like me to give you a nice, salty rub-down?  Or would you prefer Sara do it?  Just remember, she can't make her own 'oil' like I can.</i>\"\n\n");
 		//No scenes for Sara yet!
 		outputText("\"<i>I told you I'm not working until you give me a raise!  Do the damned massages yourself!</i>\"\n\nJoey blushes and apologies.  \"<i>I guess I'm the only one available for now.</i>\"\n\n");
 		outputText("The price list indicate it's 10 gems for a massage, though the gleefully illustrated 'oil' reminds you just what they plan to use on you.\n\n");
@@ -243,7 +243,7 @@ private function joeyAndrogyny():void {
 	else outputText("you'll be able to be as cute as me or as masculine as you want!");
 	outputText("</i>\" explains the bunny-eared fem-boy.   You allow yourself to be lead into a small back room, where you're guided into a soft, padded chair.  Joey turns about in the cramped interior, his shapely ass mere inches from your face, tail tickling your nose.  You struggle not to sneeze or stare too deeply at the curvy fem-boy's butt-cheeks, but it's hard to focus with that delicious target waggling in front of you.\n\n");
 	
-	outputText("At last he turns back around, holding a cork-stoppered vial of pink-hued liquid in his manicured finger-tips.  \"<i>This is the stuff!  Now just close your eyes, we gotta get this worked into your skin and it stings worse than an angry wasp-girl if it gets in your eyes,</i>\" says Joey.  You blink your eyelids closed, as instructed, and you feel the soft skin of the feminine bunny rubbing over your " + player.face() + ", working something wet and tingly into your " + player.skinDesc + ".  The delicate facial massage takes roughly an hour, but you feel fresh and relaxed once it's finished.\n\n");
+	outputText("At last he turns back around, holding a cork-stoppered vial of pink-hued liquid in his manicured finger-tips.  \"<i>This is the stuff!  Now just close your eyes, we gotta get this worked into your skin and it stings worse than an angry wasp-girl if it gets in your eyes,</i>\" says Joey.  You blink your eyelids closed, as instructed, and you feel the soft skin of the feminine bunny rubbing over your [face], working something wet and tingly into your [skin.type].  The delicate facial massage takes roughly an hour, but you feel fresh and relaxed once it's finished.\n\n");
 	
 	outputText("You ask for a mirror, but Joey just titters with a knowing smile on his succulent lips as he replies, \"<i>Oh, you haven't changed at all " + player.mf("handsome","dear") + ".  This will let you change it to whatever extreme you like, but those kinds of facials aren't a service we currently offer.  I do hear that there's a goblin salon in the mountains that might be able to help you finish up your look though!</i>\"\n\n");
 	
@@ -256,7 +256,7 @@ private function joeyAndrogyny():void {
 private function joeyMassage():void {
 	clearOutput();
 	if(player.gems < 10) {
-		outputText("Joey frowns when you realize you don't have the 10 gems.  He apologizes, \"<i>I'm sorry, " + player.short + " but I can't give freebies - our special potions cost us plenty.");
+		outputText("Joey frowns when you realize you don't have the 10 gems.  He apologizes, \"<i>I'm sorry, [name] but I can't give freebies - our special potions cost us plenty.");
 		doNext(enterTheBazaar);
 		return;
 	}
@@ -280,7 +280,7 @@ private function joeyMassage():void {
 private function joeysMassageWifNoExtraJizz():void {
 	clearOutput();
 	//(Continue as NoWang)
-	outputText("The rabbit-eared fem-boy climbs back onto the table and strokes himself a few times over your " + assDescript() + "; the first drops of his 'special oil' feel hot as they land on the curves of your butt cheeks.  He climbs over you, touching himself just enough to stay hard while his cum-drooling cock stops dripping and starts genuinely leaking.  A long trail of bunny-spunk is dripped onto your " + assDescript() + " until you're glazed with thick ropes of it.  You spot his discarded thong on the floor and giggle as you feel him flip around to put his cute bunny-butt on your shoulders.  His spunk immediately runs down your spine, even as his hands smear it all over your " + player.skinDesc + ".\n\n");
+	outputText("The rabbit-eared fem-boy climbs back onto the table and strokes himself a few times over your " + assDescript() + "; the first drops of his 'special oil' feel hot as they land on the curves of your butt cheeks.  He climbs over you, touching himself just enough to stay hard while his cum-drooling cock stops dripping and starts genuinely leaking.  A long trail of bunny-spunk is dripped onto your " + assDescript() + " until you're glazed with thick ropes of it.  You spot his discarded thong on the floor and giggle as you feel him flip around to put his cute bunny-butt on your shoulders.  His spunk immediately runs down your spine, even as his hands smear it all over your [skin.type].\n\n");
 	outputText("The massage heads back towards your " + buttDescript() + "; Joey's hands fill with your flesh as he fondles and strokes, spreading the jism into every nook and cranny, even your " + assholeDescript());
 	if(player.hasVagina()) outputText(" and " + vaginaDescript(0));
 	outputText(".  The strange, slippery feeling would've made you jump if you weren't so thoroughly relaxed, but the warmth of the room and sureness of your masseuse's touch only serve to stoke your lust as effectively as he had the oven's fire.  You mewl happily when he slides his cum-soaked fingers up your back, spreading the sloppy mess over you like icing on a cake.\n\n");
@@ -292,11 +292,11 @@ private function joeysMassageWifNoExtraJizz():void {
 	else outputText("sinks a finger deep inside");
 	outputText(" your " + nippleDescript(0) + ", and you raise your other to match it.  Joey smiles and pants, \"<i>Yes, we need to get out allll your tension, even that... uh... naughty... ah... sexual tension.  Mmmmm, now just lie your head back.  I'm almost done, and we always give our clients a facial treatment while we ease their worries.</i>\"\n\n");
 	
-	outputText("The bed cradles you as you close your eyes and lie back, noting the slight change in darkness beyond your eyelids from Joey's new position.  Spunk begins to rain over your " + player.face() + ", puddling seed around your eyes and forehead before it drips down your cheeks and bubbles on your lips.  You're quickly distracted from the salty, cummy facial when your personal leporid lotion-dispenser ");
+	outputText("The bed cradles you as you close your eyes and lie back, noting the slight change in darkness beyond your eyelids from Joey's new position.  Spunk begins to rain over your [face], puddling seed around your eyes and forehead before it drips down your cheeks and bubbles on your lips.  You're quickly distracted from the salty, cummy facial when your personal leporid lotion-dispenser ");
 	//(fork to male or genderless, no new PG)
 	//(MALE)
 	if(player.hasCock()) {
-		outputText("slides his warm, ruby lips over your " + cockDescript(0) + ", licking and slurping the " + player.cockHead() + " like a treasured candy.  That hot, breathy embrace hugs tight to your urethral bulge, slobbering up the cock-tip.  The flexible, thin rabbit tongue swirls over your cum-slit to lap at the bubbling pre-cum, even as his quaking balls continue to bury your face in bunny-semen.");
+		outputText("slides his warm, ruby lips over your [cock], licking and slurping the [cockhead] like a treasured candy.  That hot, breathy embrace hugs tight to your urethral bulge, slobbering up the cock-tip.  The flexible, thin rabbit tongue swirls over your cum-slit to lap at the bubbling pre-cum, even as his quaking balls continue to bury your face in bunny-semen.");
 		if(player.totalCocks() > 1) {
 			outputText("  He takes your " + cockDescript(1) + " with his free hand and pulls it over, giving it an affectionate, loving smooch.");
 			if(player.totalCocks() > 2) {
@@ -331,11 +331,11 @@ private function joeysMassageWifNoExtraJizz():void {
 	}
 	//(Dickgasms
 	else {
-		outputText("Though Joey's mouth is making you burn with passion, it's the feeling of a single, intruding fingertip against your " + assholeDescript() + " that puts you on edge.  His warm jism slides down his finger, dripping into your violated backside with each slow pump.  Once you've adjusted, he continues the rectal massage, gently caressing the sides of your prostate while his mouth stays busy with your " + cockDescript(0) + ".  The bunny's tongue thrashes, twisting like a slippery eel over your length, his cheeks hollowing from the suction he's applying.  A moment later, Joey curls the digit inside you to press firmly against your prostate, squeezing the sensitive organ tightly enough to make your hips pump into the air.\n\n");
+		outputText("Though Joey's mouth is making you burn with passion, it's the feeling of a single, intruding fingertip against your " + assholeDescript() + " that puts you on edge.  His warm jism slides down his finger, dripping into your violated backside with each slow pump.  Once you've adjusted, he continues the rectal massage, gently caressing the sides of your prostate while his mouth stays busy with your [cock].  The bunny's tongue thrashes, twisting like a slippery eel over your length, his cheeks hollowing from the suction he's applying.  A moment later, Joey curls the digit inside you to press firmly against your prostate, squeezing the sensitive organ tightly enough to make your hips pump into the air.\n\n");
 		outputText("Globules of spooge squirt in time to your motions, feeding those ruby lips the treat them seem to ache for.  The rain of slick, syrupy cum on your face intensifies, spurting heavier ropes of bunny-cream each time you make the poof-tailed fem-boy swallow.  He gasps hard in between each semen-sucking gulp, all while giving you an impressive facial.  If you could see yourself, you would probably look like you're wearing enough boy-sludge to knock up an entire village.  The perverse mental image sets off a whole new set of contractions, releasing a few more waves of bliss and 'tension'.\n\n");
 		outputText("Joey climbs off once you've wound down and laps at the cum over your eyes, nose, and mouth, cleaning you enough to see properly.  The first thing you see is a girlish, cum-stained face.  He makes a show of cleaning the spunk from himself, but throws you a towel as he does so. You lick the last of his flavorful cum from your mouth, noting that while he's already put his thong back on, it's bulging obscenely and he's still squirting inside!");
 		if(player.cumQ() >= 700) {
-			outputText("  A smile widens your " + player.face() + " when you see the ");
+			outputText("  A smile widens your [face] when you see the ");
 			if(player.cumQ() >= 2000) outputText("massive, jiggling belly you've given him.");
 			else outputText("little paunch on his belly jiggle.");
 			outputText("  He won't be hungry for some time.");
@@ -364,7 +364,7 @@ private function joeysMassageWithEXTRASpooge():void {
 	outputText("Joey's fingertips brush along your shaft, squeezing it with tender touches that make it stiffen and thicken.  He starts slowly jacking you off while his other hand traces one of your nipples.  \"<i>We've got to get you nice and hard now so that you can let out all that nice, creamy lotion,</i>\" explains the fem-boy.  You nod in understanding, blushing hard while he fondles " + sMultiCockDesc() + " with soft caresses.  He plays your manhood");
 	if(player.cockTotal() > 1) outputText("s like fiddles");
 	else outputText(" like a fiddle");
-	outputText(", expertly running his fingertip around the sensitive " + player.cockHead() + " before tracing down along your rapidly filling urethra.  It feels good – better than it should, and the warmth inside you begins to leak into the bunny-boy's waiting hand in moments.\n\n");
+	outputText(", expertly running his fingertip around the sensitive [cockhead] before tracing down along your rapidly filling urethra.  It feels good – better than it should, and the warmth inside you begins to leak into the bunny-boy's waiting hand in moments.\n\n");
 	
 	outputText("You're rolled back on to your front, crushing " + sMultiCockDesc() + " between you and the sheets.  Joey leaps back atop you, straddling your back and facing your " + assDescript() + ", his hands locking onto the steam-moistened cheeks.   He slides forward slightly, placing his hardness between them, and it's then that you notice his discarded thong on the floor.  A moment later the first drops of Joey's own hot seed are dripping over your exposed derriere.  He slides himself through your buns, hotdogging the rapidly-slickening surface of your ass while his hands massage the tense flesh a little more enthusiastically than they ought to.\n\n");
 	
@@ -376,11 +376,11 @@ private function joeysMassageWithEXTRASpooge():void {
 	if(player.cumQ() >= 1500) outputText(".  The sound of your rivers of spooge splattering against the floor barely registers, but a part of you is proud to be so incredibly fertile");
 	outputText(".\n\n");
 	
-	outputText("You're prodded insistently, the masseuse saying, \"<i>Come on, we've got so much more of your body to work on before you're completely emptied of all that nasty stress.  Now roll over, don't be shy about the mess.  I'll be making it messier.</i>\"  True to his word, Joey is still drooling his 'special lotion' over your " + player.legs() + ".  You oblige and gingerly roll over, the cummy sheets squishing lewdly under you as your slime-slicked belly and cum-drooling crotch are revealed.");
+	outputText("You're prodded insistently, the masseuse saying, \"<i>Come on, we've got so much more of your body to work on before you're completely emptied of all that nasty stress.  Now roll over, don't be shy about the mess.  I'll be making it messier.</i>\"  True to his word, Joey is still drooling his 'special lotion' over your [legs].  You oblige and gingerly roll over, the cummy sheets squishing lewdly under you as your slime-slicked belly and cum-drooling crotch are revealed.");
 	if(player.cumQ() >= 1500) outputText("  Joey's jaw drops from the unexpectedly large volume you're producing, and he watches in awe as each huge globule of cum rolls off you towards the floor.");
 	outputText("\n\n");
 	
-	outputText("The bunny-boy springs back atop you, landing hard just below your hips.  His dripping seed washes over " + sMultiCockDesc() + ", and the sudden onslaught of fresh, liquid warmth on your groin sets off a small explosion of jism that splatters into your chin, leaving a long trail of slime behind like a snail.  The long-eared girly-boy smiles and shifts to rub his small cock against your " + cockDescript(0) + ", frotting you aggressively while you both spray cum like faucets with the knobs torn off.  You don't mind that he seems to have forgotten the massage, and you run your hands up and down your " + chestDesc() + " to smear the heavy loads ");
+	outputText("The bunny-boy springs back atop you, landing hard just below your hips.  His dripping seed washes over " + sMultiCockDesc() + ", and the sudden onslaught of fresh, liquid warmth on your groin sets off a small explosion of jism that splatters into your chin, leaving a long trail of slime behind like a snail.  The long-eared girly-boy smiles and shifts to rub his small cock against your [cock], frotting you aggressively while you both spray cum like faucets with the knobs torn off.  You don't mind that he seems to have forgotten the massage, and you run your hands up and down your " + chestDesc() + " to smear the heavy loads ");
 	if (player.hasFur()) outputText("through your fur");
 	else outputText("over your [skin]");
 	outputText(".\n\n");
@@ -388,10 +388,10 @@ private function joeysMassageWithEXTRASpooge():void {
 	outputText("The special potion makes it so your orgasm is long and languid, oozing out for minutes instead of seconds, and the small chamber is filled with breathy, exultant cries of passion.  Joey leans forward and grabs hold of your " + nippleDescript(0) + "s, ");
 	if(!player.hasFuckableNipples()) outputText("squeezing and tugging on them");
 	else outputText("sliding cum-coated fingers into their slippery depths");
-	outputText(" while he grinds and cums on your " + cockDescript(0) + ".  \"<i>Ungg... yes... gotta... squeeze... allofitooooouuuuut!</i>\" he pants.  He lets go of one tender nipple to reach underneath you, and before you can react, his cum-soaked finger is inside your " + assholeDescript() + ", pressing on your prostate.\n\n");
-	outputText("Your eyes cross and you black out, twitching weakly as a regular orgasm bursts on top of your already-protracted potion-gasm.  A pleasant, heavily sexualized dream is interrupted by a finger poking your lotion-lubricated cheek and the best you can manage is an utterly contented \"<i>mmmm.</i>\"  A warm, moist towel is rubbed over your " + player.face() + ", wiping away the spooge you blasted over it, and now that you can see him, Joey says, \"<i>You had me worried for a minute there!  Keep the towel, it's on the house, and if you need to clean up, there's a shower in the back!");
+	outputText(" while he grinds and cums on your [cock].  \"<i>Ungg... yes... gotta... squeeze... allofitooooouuuuut!</i>\" he pants.  He lets go of one tender nipple to reach underneath you, and before you can react, his cum-soaked finger is inside your " + assholeDescript() + ", pressing on your prostate.\n\n");
+	outputText("Your eyes cross and you black out, twitching weakly as a regular orgasm bursts on top of your already-protracted potion-gasm.  A pleasant, heavily sexualized dream is interrupted by a finger poking your lotion-lubricated cheek and the best you can manage is an utterly contented \"<i>mmmm.</i>\"  A warm, moist towel is rubbed over your [face], wiping away the spooge you blasted over it, and now that you can see him, Joey says, \"<i>You had me worried for a minute there!  Keep the towel, it's on the house, and if you need to clean up, there's a shower in the back!");
 	if(player.cumQ() >= 1500) outputText("  You really flooded the room though, so you'd best walk on your tip-toes until we can get a succubi or a goblin in here to clean up.");
-	outputText("  Come back ANY time, " + player.short + ".  I'd love to help you release again.</i>\"\n\n");
+	outputText("  Come back ANY time, [name].  I'd love to help you release again.</i>\"\n\n");
 	
 	outputText("Joey leaves, his poofy tail bobbing back and forth.  You can see his thong is distended, virtually packed with his own still-pumping spooge, and you marvel at his perverse ingenuity when you realize his thong is waterproofed and shaped to guide all the jizz between his thighs and into his back-door.  Kinky.");
 	player.cumMultiplier += 2;
@@ -406,7 +406,7 @@ private function joeyBigBalls():void {
 	clearOutput();
 	//(FIRST TIME) 
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00348] == 0) {
-		outputText("Before you can even clear the door-frame, Joey the bunny-boy masseuse launches himself into you, his hands clutching wildly at your " + player.armorName + ".  You look down at him, and his wide, open eyes stare back with panic; namely, the look of someone in over their head with no idea how to save themselves.  Worse still, his trademark thong is bulging out obscenely, cum spilling down the sides while his immensely swollen gonads threaten to burst free of the garment's fraying threads.  Joey babbles, \"<i>Help!  I was testing the potions, and-and-and... I dunno what went wrong, b-b-but my balls are backing up faster than it dribbles out.  They feel like they're going to burst!!  Help meeeeee!</i>\"\n\n");
+		outputText("Before you can even clear the door-frame, Joey the bunny-boy masseuse launches himself into you, his hands clutching wildly at your [armor].  You look down at him, and his wide, open eyes stare back with panic; namely, the look of someone in over their head with no idea how to save themselves.  Worse still, his trademark thong is bulging out obscenely, cum spilling down the sides while his immensely swollen gonads threaten to burst free of the garment's fraying threads.  Joey babbles, \"<i>Help!  I was testing the potions, and-and-and... I dunno what went wrong, b-b-but my balls are backing up faster than it dribbles out.  They feel like they're going to burst!!  Help meeeeee!</i>\"\n\n");
 		outputText("You push the panicked lagomorph back a pace so that you can breathe and appraise the situation.  Joey's legs are drenched, soaked with sloppy spooge.  His thong is on the verge of bursting.  Most notable, his bloated balls look more like cantaloupes than testicles, and these melons are ripening to an unseen Demeter's power, swelling ever-so-slightly larger with each passing second.  You estimate that there's precious little time.\n\n");
 		
 		outputText("Why is it that no one ever desperately requires your assistance with a mundane task?  Sighing, you judge");
@@ -448,10 +448,10 @@ private function suckOffJoeysGardenHose():void {
 	else outputText(" and keep at it.  The knowledge that you're helping a friend is almost as filling as his delicious cum.");
 	outputText("  White goo drips down your chin towards the floor, but you note that his balls are now back down to the size of grapefruits.  You're making progress!\n\n");
 	
-	outputText("Giving the girly-boy a semen-leaking smile, you milk his cock with determination and enthusiasm, only letting dribbles escape from your mouth when you do too good a job.  Your belly gurgles unhappily as if you've just eaten a huge meal, but you've got to press on!  Lick and swallow, suck and slurp - you fall into a practiced rhythm as you accommodate the bunny's chemically-induced virility.  Soon, your bulging midsection forces you to abandon swallowing and alternate between sucking at Joey's shaft and spitting out his ungodly eruptions of cum.  It runs down your " + allChestDesc() + ", makes a mess of your belly, glazes your " + player.legs() + ", and eventually comes to rest in the growing, three foot wide spunk-puddle on the floor.\n\n");
+	outputText("Giving the girly-boy a semen-leaking smile, you milk his cock with determination and enthusiasm, only letting dribbles escape from your mouth when you do too good a job.  Your belly gurgles unhappily as if you've just eaten a huge meal, but you've got to press on!  Lick and swallow, suck and slurp - you fall into a practiced rhythm as you accommodate the bunny's chemically-induced virility.  Soon, your bulging midsection forces you to abandon swallowing and alternate between sucking at Joey's shaft and spitting out his ungodly eruptions of cum.  It runs down your " + allChestDesc() + ", makes a mess of your belly, glazes your [legs], and eventually comes to rest in the growing, three foot wide spunk-puddle on the floor.\n\n");
 	
 	outputText("Joey moans, \"<i>You're so good at this!  B-but I still feel so pent up... so full.  I don't think it's slowing down yet!</i>\"\n\n");
-	outputText("You pull back and gasp for air, ignoring the ropes of spooge splattering across your face and into your " + hairDescript() + ".  Determined not to lose your progress, you take his none-too-impressive cock in your hand and jack it, spurring his body to take over and propel even more eruptions of slick seed onto your " + player.face() + ".  It's so messy, so decadent, but it's ");
+	outputText("You pull back and gasp for air, ignoring the ropes of spooge splattering across your face and into your " + hairDescript() + ".  Determined not to lose your progress, you take his none-too-impressive cock in your hand and jack it, spurring his body to take over and propel even more eruptions of slick seed onto your [face].  It's so messy, so decadent, but it's ");
 	if(player.cor < 33) outputText("all for a good cause, right?");
 	else if(player.cor < 66) outputText("also kind of fun, in a naughty way.");
 	else outputText("exactly the kind of nasty stuff that gets your blood pumping.");
@@ -1065,17 +1065,17 @@ private function abuseHisAss():void {
 		return;
 	}
 	//[[[(If player does have cock)
-	outputText("\n\nYou decide to have a little fun with the muscular ass in front of you.  You hold the struggling tiger's wrists with one hand and fish out your " + multiCockDescriptLight()  + " free from your [armor].  Your eyes drink in how the burly tiger man writhes under you.  He's completely at your mercy.");
+	outputText("\n\nYou decide to have a little fun with the muscular ass in front of you.  You hold the struggling tiger's wrists with one hand and fish out your [cocks] free from your [armor].  Your eyes drink in how the burly tiger man writhes under you.  He's completely at your mercy.");
 	//[(If multicock)
-	if(player.cockTotal() > 1) outputText("  Your hand strokes along your " + multiCockDescriptLight()  + " and press them to the warm cheeks exposed before you.");
-	else outputText("  You pump your " + multiCockDescriptLight() + " and milk a pearl of pre-cum out to drip onto the enticing ass before you.");
+	if(player.cockTotal() > 1) outputText("  Your hand strokes along your [cocks] and press them to the warm cheeks exposed before you.");
+	else outputText("  You pump your [cocks] and milk a pearl of pre-cum out to drip onto the enticing ass before you.");
 	outputText("  \"<i>O-OI!</i>\"  The tiger man shouts out, his head turning to try to see behind him.  With a grin on your lips you grip the hilt of [oneCock] and slap its length over the tiger's rump.  You can see the tint to the tiger man's cheek as he hears and feels your dick smacking his exposed ass.  Pre-cum drips down [oneCock] as you line yourself up, jamming it between the tiger's lovely mounds. He gives a surprised shout as your cockhead presses to his tiny, puckered hole.");
 	
 	//Cocksize check
 	//[[If smallest cock is over 16 inches)
 	if(player.smallestCockLength() >= 16) {
 		outputText("\n\nYour lips part to let out a grunt of frustration.  Your cockhead is unable to break through the tiger man's tight resistance.  His struggles start to die down as [eachCock] continues to drool over his muscled rear.");
-		if(player.totalCocks() == 1) outputText("  You squeeze your " + multiCockDescriptLight() + " between his warm ass cheeks, stroking yourself with his exposed bottom.  The tiger whimpers meekly under you.");
+		if(player.totalCocks() == 1) outputText("  You squeeze your [cocks] between his warm ass cheeks, stroking yourself with his exposed bottom.  The tiger whimpers meekly under you.");
 		else outputText("  Your fattest cock grinds between the tiger man's rear, dripping spunk over his back and clothing while your other cocks make a sloppy mess of his ass.");
 		outputText("  The tiger man's muscled butt is soon glazed with your pre-cum.  Wet, slapping noises echo out into the alley as you grind your hips into his rear.  You can't help but think in the back of your head that the noise is stirring people inside the tent he came out of.");
 	}
@@ -1084,19 +1084,19 @@ private function abuseHisAss():void {
 		outputText("\n\nYou jam your cockhead into the tiger man's tight ring.  He groans in displeasure under you as your persistent force pushes past his resistance.");
 		//[(If multicock)
 		if(player.cockTotal() > 1) outputText("  One of your cocks slips into his hot, constricting confines, the remaining lengths pressed fast to the tiger man's rear and leaving glistening trails of eager fluids like markings on a bitch's ass.");
-		else outputText("  Your " + multiCockDescriptLight()  + " pushes in, your pre-cum-slicked length sliding in with a wet noise.");
+		else outputText("  Your [cocks] pushes in, your pre-cum-slicked length sliding in with a wet noise.");
 		outputText("  The burly man under you whimpers in protest as you begin to rock against his fine ass.  His firm rear dimples and twitches under your hips, each slam");
-		if(player.balls > 0) outputText(" swatting your " + ballsDescriptLight()  + " against him,");
-		outputText(" making him shout out in discomfort.  Your " + multiCockDescriptLight()  + " stretching him out");
+		if(player.balls > 0) outputText(" swatting your [balls] against him,");
+		outputText(" making him shout out in discomfort.  Your [cocks] stretching him out");
 		if(player.cockTotal() > 1) outputText(" while beating his rear");
 		outputText(".  All his shouting stirs whoever resides in the tent he came out of.");
 	}
 	//(combine cock size paths)
 	outputText("\n\nAs you continue to use the burly tiger man pinned beneath you, three figures exit from the tent.  Two of the figures are large and bulky and are joined by a third, slender man.  They watch as you abuse the tiger under you.  You glance over at them and can't help but notice smiles on their faces.");
 	
-	outputText("\n\n\"<i>Good for you, mate, making friends while getting us booze.</i>\"  One of them calls out.  The three of them laugh out loud at the joke, and as they laugh your senses are assaulted with the aroma of alcohol wafting from them.  From the way the trio sways you can tell they've been hitting the bottle hard.  They make no movement to stop you, though, so you ignore them.  The tiger under you stares in their direction, embarrassment burning crimson in his cheeks while you use and abuse him.  The scene is proving too much for you, though, and soon your " + multiCockDescriptLight()  + " unloads your pent up spunk over the tiger and coats him in thick, musky spooge in front of his 'friends'.");
+	outputText("\n\n\"<i>Good for you, mate, making friends while getting us booze.</i>\"  One of them calls out.  The three of them laugh out loud at the joke, and as they laugh your senses are assaulted with the aroma of alcohol wafting from them.  From the way the trio sways you can tell they've been hitting the bottle hard.  They make no movement to stop you, though, so you ignore them.  The tiger under you stares in their direction, embarrassment burning crimson in his cheeks while you use and abuse him.  The scene is proving too much for you, though, and soon your [cocks] unloads your pent up spunk over the tiger and coats him in thick, musky spooge in front of his 'friends'.");
 	
-	outputText("\n\n\"<i>He's even enjoying himself!</i>\"  One of the figures bellows out.  You tilt your head to peer between the tiger's spread legs and, sure enough, the barbed cock throbs between his legs with each beat of his heart.  Without further ceremony you roll the abused tiger man on his cum-soaked back and tuck your " + multiCockDescriptLight()  + " back into your [armor].  The trio are too drunk to stop you as you leave.  Turning your head back to glance at the tiger, you see the three figures surrounding the victim and your lips curl into a pleased smile.  Within moments you return to the lights of the Bazaar.");
+	outputText("\n\n\"<i>He's even enjoying himself!</i>\"  One of the figures bellows out.  You tilt your head to peer between the tiger's spread legs and, sure enough, the barbed cock throbs between his legs with each beat of his heart.  Without further ceremony you roll the abused tiger man on his cum-soaked back and tuck your [cocks] back into your [armor].  The trio are too drunk to stop you as you leave.  Turning your head back to glance at the tiger, you see the three figures surrounding the victim and your lips curl into a pleased smile.  Within moments you return to the lights of the Bazaar.");
 	//gtfo
 	menu();
 	addButton(0,"Next", enterTheBazaarAndMenu);
@@ -1133,7 +1133,7 @@ private function collectSomeButtSmex():void {
 	if(player.hasVagina()) outputText("  Your " + vaginaDescript(0)  + " grows slick in your excitement.");
 	if(player.gender == 0) outputText("  Your skin heats and tingles, sweat wetting its surface.");
 	outputText("  The satyr runs his hand along your body and sizes you up with a lewd gaze and gentle touch, making you shudder under his fingertips from the effects of the draft.  \"<i>Not bad I suppose.  You could have done better, though.</i>\"  The satyr turns his head to the tiger man as the satyr's words strike at your pride, though the rebuttal on your lips is quickly silenced as his fingers");
-	if(player.hasCock()) outputText(" wrap around your " + multiCockDescriptLight()  + ".");
+	if(player.hasCock()) outputText(" wrap around your [cocks].");
 	else outputText(" rub over your " + assholeDescript()  + ".");
 	outputText("  His hand teases your body as the pair of muscled men holds you down in place.  You can only gasp out and wiggle your hips at the touch.  You turn your head and look pleadingly at your captors.  The large green man holding your wrists looks like an oversized goblin with yellow eyes.  His olive skin is stretched tight over his bulging muscles.  His bulky frame looks as powerful as he is tall, standing perhaps seven feet tall.  The equally built man holding down your lower body looks much like a bear man with piercing green eyes, shorter and stockier than the green orc by far.  The pair of 'gym bunnies' have matching bulges swelling in their pants as their eyes fix over your nude body");
 	if(player.hasCock()) outputText(" and hard shaft");
@@ -1141,13 +1141,13 @@ private function collectSomeButtSmex():void {
 	outputText(".");
 	
 	//[(If muticock 3 or more)
-	if(player.cockTotal() >= 3) outputText("\n\nNot to be left out, each of the two men take a hand off of your limbs and grip one of your " + multiCockDescriptLight()  + ".  Your head swings back onto the table you're laid out on, mouth open wide as you moan and arch your back.  Each hand goes at an individual rhythm as sex overwhelms your thoughts.  The hands pinning you down are gone, though you're unable to focus on escaping.");
+	if(player.cockTotal() >= 3) outputText("\n\nNot to be left out, each of the two men take a hand off of your limbs and grip one of your [cocks].  Your head swings back onto the table you're laid out on, mouth open wide as you moan and arch your back.  Each hand goes at an individual rhythm as sex overwhelms your thoughts.  The hands pinning you down are gone, though you're unable to focus on escaping.");
 	
 	//(if cock(s)
 	if(player.hasCock()) outputText("\n\nThe satyr pumps your length in his hand.  Your hips buck madly as the hand spreads your own pre-cum over your shaft with lewd schlicking noises.");
 	else outputText("\n\nHis fingers slip past your puckered flesh and dip into your " + assholeDescript()  + " and spread apart, loosening you for what feels like ages.");
 	outputText("  Without warning the hand is gone");
-	if(player.cockTotal() > 1) outputText(" and your " + multiCockDescriptLight()  + " wetly slaps your stomach with need");
+	if(player.cockTotal() > 1) outputText(" and your [cocks] wetly slaps your stomach with need");
 	outputText(".  A whimper escapes your lips.  \"<i>This should be fine...</i>\"  The cool, collected voice of the satyr murmurs.");
 	
 	outputText("\n\n\"<i>I'm going to use the hole.</i>\"  The gruff voice behind you grunts out.  You turn to see the burly orc fumbling with his pants.  The size of his bulge sends a chill down your spine of ");
@@ -1220,7 +1220,7 @@ private function finalGayFinallee(road:int = 0):void {
 		outputText("\n\nYou are hardly able to focus on the barbed cock in your mouth, moaning around the hard cock as you look at the small bump on your belly.  With your hands servicing the bear as the tiger fills your mouth, the two men haven't left either side of your head.  With a wet pop, the tiger man pulls his saliva-coated prick from your mouth and he moves to the orc, shoving him aside with a grunt.  \"<i>My turn now.</i>\"  He grins impishly as he lines himself up with your hole, your " + assholeDescript()  + " looking like a well-used cum dump.  He rams in with ease and begins to pound away inside of you, making you moan with your mouth open wide.");
 		outputText("\n\nThe bear takes advantage of this, shoving his impossibly thick cock between your open lips.  Your lips vibrate around his shaft as you moan.  The bear climbs onto the table and begins to fuck your face while your " + assholeDescript()  + " is used for the third time in a row.  Your jaw stretches painfully around the girth of the bear's pride, your hands gripping at his legs as you look up at him with pleading eyes.  He only grins down at you as he watches his fat length slipping past your lips and bulging inside your throat.  Your throat constricts with gags and vibrates with moans as you involuntarily milk the bear's cock.  Each time the feline cock drills into you, the barbs leave you whimpering and gagging around the bearcock throatfucking you.  The barbs in your ass seem to bring a new sensation to the abuse as wet slapping noises echo in the tent.  Your " + buttDescript()  + " is wet with the combined cum of three males in a row, their cum and pre-cum dripping from your upturned " + buttDescript()  + " to form a growing puddle of lust on the floor and table.");
 		outputText("\n\nThe bear and tiger don't last long.  The bear finishes first as he pins your head between his hips and the table.  Your fingers clench over his furred legs as a deep groan rumbles from his belly.  You can feel his load shooting directly down your throat to fill your stomach.  The bear pulls out as the last lurch of his cock spits a rope of cum over your face, causing you to shut your eyes and wince as the hot liquid oozes down your cheeks.  With an amused grunt, the bear gets off the table to leave you with the tiger man.  With a raspy hiss the tiger is last, his flared barbs quivering over your cum soaked walls as he grows closer to adding his own spunk to your collection. He leans down over your laying form and gives you a wink.  ");
-		if(player.hasCock()) outputText("His hand dips down to play with your " + multiCockDescriptLight()  + ", stroking you off as he gives a few more brutal pounds of his hips.  ");
+		if(player.hasCock()) outputText("His hand dips down to play with your [cocks], stroking you off as he gives a few more brutal pounds of his hips.  ");
 		else if(player.hasVagina()) outputText("Fingers ram into your " + vaginaDescript(0)  + ", thrusting into you as he fucks your other hole.  ");
 		outputText("His face near yours, he licks your cheek and plants a brief kiss on your lips. You give him a confused look at the affection and he meets it with a wide grin.  \"<i>You're cute for a cocksucker.  Knew I had it made when I found you.</i>\" he snickers, causing you to blush.");
 		if(player.gender > 0) outputText("  Your lips part as you moan, feeling your climax building before coating the tiger's hand and your lower body in your sex.  The tiger man just brings his hand up to his lips to taste your juices before hilting into you one last time.");
@@ -1252,7 +1252,7 @@ private function finalGayFinallee(road:int = 0):void {
 		
 		outputText("\n\nWith a raspy growl the bear is last, his thick dick spasming as he grinds his fat cock over your cum soaked walls while he grows closer and closer to adding his own spunk to your collection.  He leans down over your laying form and gives you a wink.  ");
 		//[(If cock(s))
-		if(player.hasCock()) outputText("His hand dips down to play with your " + multiCockDescriptLight()  + ", stroking you off as he gives a few more brutal pounds of his hips.");
+		if(player.hasCock()) outputText("His hand dips down to play with your [cocks], stroking you off as he gives a few more brutal pounds of his hips.");
 		else if(player.hasVagina()) outputText("Fingers ram into your " + vaginaDescript(0)  + ", thrusting into you as he fucks your other hole.");
 		outputText("  His face near yours, he licks your cheek and plants a brief kiss on your lips.  You give him a confused look at the affection and he meets it with a wide grin.  \"<i>You're cute for a cocksucker.  Loved the way you went right for my dick.</i>\"  He snickers, causing you to blush.");
 		if(player.gender > 0) outputText("  Your lips part as you moan, feeling your climax building before coating the bear's hand and your lower body in your sex.  The bear just brings his hand up to his lips to taste your honey before hilting into you one last time.");
@@ -1281,7 +1281,7 @@ private function finalGayFinallee(road:int = 0):void {
 		outputText("\n\nYour hands frantically work over their shafts, squeezing and tugging at their hard erections while your nimble fingers dance over the stiff flesh.  Your efforts bear fruit as the two men groan out, one cumming and the other soon after, shooting into your mouth with twin streams of cum.  They shoot into your mouth and sloppily coat your lips and chin, pulling out to let a few ropes coat your face.  Your eyes shut as the two continue to give you a sperm facial.  Each new, hot rope of cum clings over your cheeks and warms your skin.  The tiger and bear move away as you reach up to clean the mess from your eyes and, as soon as you open them you're greeted with the sight of the large orc looming over you.  He grins oddly at you as his head leans down to lick the cum from your face, instead covering you in his saliva.  \"<i>Zug like you.  Zug know you love big orc cock.</i>\" His speech is simple and grunted, though the words make you feel a hot blush rise in your cheeks.");
 		
 		outputText("\n\nHe shouts out a war cry and starts brutally fucking you senseless.");
-		if(player.hasCock()) outputText("  His hand drips down to clumsily play with your " + multiCockDescriptLight()  + ", stroking you off as he gives you a few more brutal pounds of his hips.");
+		if(player.hasCock()) outputText("  His hand drips down to clumsily play with your [cocks], stroking you off as he gives you a few more brutal pounds of his hips.");
 		else if(player.hasVagina()) outputText("  Fingers dip into your " + vaginaDescript(0)  + ", ramming into you as he fucks your other hole.");
 		if(player.gender > 0) outputText("  Your lips part as you feel your climax building, and soon you coat the orc's hand and your lower body in your lust.  The orc just brings his hand up to taste your juices before hilting into you one last time.");
 		outputText("  A third wave of warmth floods you and the pressure grows even higher as you resemble an overstuffed breeding bitch.  Exhaustion catches up with you and your eyes begin to grow heavy.  The last thing you see is the orc's face twisted in orgasmic pleasure before you pass out.");

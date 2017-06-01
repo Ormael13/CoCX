@@ -118,7 +118,7 @@ public function edrynBarTalk():void {
 		//(WANG FITS)
 		if(player.cockArea(x) < 300 && player.cockArea(x) > 24) {
 			outputText("She winks at you as she gets up and trots off, giving her butt a sensual sway to draw your eyes.  Her potent scent hangs in the air, and your body reacts immediately and intensely, flooding you with arousal.  ");
-			outputText("You look down at your " + multiCockDescriptLight() + " and curse, irritated at how easily she can affect you.  There's no way you'll be turning her down this time.  You get up and follow her back to her room, intent on taking care of the need between your legs.\n\n");
+			outputText("You look down at your [cocks] and curse, irritated at how easily she can affect you.  There's no way you'll be turning her down this time.  You get up and follow her back to her room, intent on taking care of the need between your legs.\n\n");
 			//Sex
 			doNext(pregdrynOffer);
 			return;
@@ -173,12 +173,12 @@ public function edrynBarTalk():void {
 	//New PG
 	outputText("You take a close look at your dinner companion, trying to puzzle out what you're picking up on, but you just can't place it.  Edryn burps quietly, apologizing for her rudeness, and excuses herself to the girl's room.  As she turns away to leave, you get a good look at her backside.  Her horse-like sex is huge and puffy, and glistening with moisture.  The gentle flicking of her tail from side to side pushes her musky scent into you like a wave, ");
 	if(player.isTaur() && player.totalCocks() > 0) {
-		outputText("and the potent female scent works its way into your blood, making you dizzy as your " + cockDescript(0) + " ");
+		outputText("and the potent female scent works its way into your blood, making you dizzy as your [cock] ");
 		if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("pours out of its sheath");
 		else outputText("fills near instantaneously");
-		outputText(", now rock-hard.  You breathe deeply, your mind subsumed in a sea of feral instincts.  The hard floor squeezes your " + cockDescript(0) + " painfully underneath you, forcing you to rise up.  You can feel more than a few curious gazes sliding along your now fully exposed maleness, and it twitches as if it were happy for the attention.\n\n");
-		outputText("Swaying back and forth, alternatively snorting and breathing deeply of the female's scent, your gaze immediately locks onto the returning mare.  Your " + cockDescript(0) + " jumps and bounces underneath you, painfully hard and swollen.  A thick dollop of pre beads on your " + player.cockHead() + ", as if the bar needed your display to be any more overtly sexual.  Edryn looks you over, walking alongside you she talks, \"<i>My my, someone liked what they saw.  Or was it smelled?  I can never tell what it is that gets you " + player.mf("studs","hotties") + " so worked up about me.</i>\"\n\n");
-		outputText("A soft hand slides under your belly, hefting your " + cockDescript(0) + " and smearing the bead of pre over it with long slick strokes.  She coos, \"<i>");
+		outputText(", now rock-hard.  You breathe deeply, your mind subsumed in a sea of feral instincts.  The hard floor squeezes your [cock] painfully underneath you, forcing you to rise up.  You can feel more than a few curious gazes sliding along your now fully exposed maleness, and it twitches as if it were happy for the attention.\n\n");
+		outputText("Swaying back and forth, alternatively snorting and breathing deeply of the female's scent, your gaze immediately locks onto the returning mare.  Your [cock] jumps and bounces underneath you, painfully hard and swollen.  A thick dollop of pre beads on your [cockhead], as if the bar needed your display to be any more overtly sexual.  Edryn looks you over, walking alongside you she talks, \"<i>My my, someone liked what they saw.  Or was it smelled?  I can never tell what it is that gets you " + player.mf("studs","hotties") + " so worked up about me.</i>\"\n\n");
+		outputText("A soft hand slides under your belly, hefting your [cock] and smearing the bead of pre over it with long slick strokes.  She coos, \"<i>");
 		dynStats("lus", 70);
 		edrynOffer();
 		return;
@@ -187,8 +187,8 @@ public function edrynBarTalk():void {
 		if(player.horseCocks() > 0) {
 			outputText("and the potent female scent makes you feel a bit dizzy and dazed.  ");
 			if(player.cocks[0].cockLength > 16) outputText("You barely register the thump of your hardening " + Appearance.cockNoun(CockTypesEnum.HORSE) + " as it smacks into the underside of the table.\n\n");
-			else outputText("You squirm uncomfortably, feeling constrained by your " + player.armorName + " as you surge to erectness.\n\n");
-			outputText("Swaying back and forth in a scent induced haze, you fail to notice Edryn's return.  She coughs noisily, drawing you back to the real world and pushing away the memory of her glistening snatch.  You start to fumble for words until you realize she's smiling knowingly at you.  Unexpectedly, caresses slide against your groin, hefting and measuring you through your " + player.armorName + ".\n\n");
+			else outputText("You squirm uncomfortably, feeling constrained by your [armor] as you surge to erectness.\n\n");
+			outputText("Swaying back and forth in a scent induced haze, you fail to notice Edryn's return.  She coughs noisily, drawing you back to the real world and pushing away the memory of her glistening snatch.  You start to fumble for words until you realize she's smiling knowingly at you.  Unexpectedly, caresses slide against your groin, hefting and measuring you through your [armor].\n\n");
 			dynStats("lus", 60);
 			edrynOffer();
 			return;
@@ -197,11 +197,11 @@ public function edrynBarTalk():void {
 		else {
 			outputText("but the potent musky scent only reminds you of how different things are here.");
 			if(player.cor > 50 || player.statusEffectv1(StatusEffects.Edryn) > 0 || flags[kFLAGS.LOW_STANDARDS_FOR_ALL]) {
-				outputText("  Unbidden, your mind wonders what her juicy horse-snatch would feel like, and your " + cockDescript(0) + " responds immediately, thickening with readiness.  You squirm uncomfortably from how constricting your " + player.armorName + " feels.\n\n");
+				outputText("  Unbidden, your mind wonders what her juicy horse-snatch would feel like, and your [cock] responds immediately, thickening with readiness.  You squirm uncomfortably from how constricting your [armor] feels.\n\n");
 				outputText("You give the rapidly dissipating scent a sniff and note that it isn't unpleasant, just strong, and once again you find yourself imagining standing ");
 				if(player.tallness < 60) outputText("on a stool ");
 				outputText("behind her, fucking her like the beast-woman she is.  Lost in your thoughts, you fail to notice Edryn's return.  She coughs noisily, rousing you from the impromptu fantasy as she gives you a knowing smile.  An unexpected caress slides against you groin, rubbing and hefting you carefully.");
-				if(player.cocks[0].cockType == CockTypesEnum.TENTACLE) outputText("  She smiles coyly when your " + cockDescript(0) + " wriggles, wrapping around her arm.");
+				if(player.cocks[0].cockType == CockTypesEnum.TENTACLE) outputText("  She smiles coyly when your [cock] wriggles, wrapping around her arm.");
 				outputText("\n\n");
 				dynStats("lus", 40);
 				edrynOffer();
@@ -336,10 +336,10 @@ private function edrynOffer():void {
 			if(player.cockArea(x) >= 24) {
 				outputText("\"<i>Was the sight of my backside that entrancing to you?</i>\" she teases, \"<i>Normally only the horsey-boys get this hard for me, but you... you want to take a ride on the wild side, don't you?</i>\"\n\n");
 				outputText("Her words ring true, and a quick fuck to tamp down your rising lust wouldn't hurt would it?\n\n");
-				outputText("Edryn keeps talking, \"<i>I do ALL kinds of mercenary work, even the sloppy wet kind, and lucky for you, I'm more than wet enough to let you satisfy your " + cockDescript(0) + " in me.  ");
+				outputText("Edryn keeps talking, \"<i>I do ALL kinds of mercenary work, even the sloppy wet kind, and lucky for you, I'm more than wet enough to let you satisfy your [cock] in me.  ");
 				if(cost > 0) outputText(Num2Text(cost) + " gems ");
 				else outputText("An hour of your time ");
-				outputText("gets you the ride of a lifetime.  So what do you say " + player.short + "?  Do you want to be my sex-toy?</i>\"\n\n");
+				outputText("gets you the ride of a lifetime.  So what do you say [name]?  Do you want to be my sex-toy?</i>\"\n\n");
 				outputText("She stands up and turns, exposing her exotic hind-end to you.  A drop of fluid slips from her folds and splatters under the table, reminding you just how wet this trick would be.  Do you really want to do her?");
 				if(cost > 0) outputText("\n\n(Do you pay " + num2Text(cost) + " gems to fuck her?)");
 				doYesNo(edrynSexSelecter,telAdre.barTelAdre);
@@ -413,7 +413,7 @@ private function fuckEdrynTaur():void {
 	outputText("\n\nShe twists around to look you in the eye as you work her drooling horse-cunt over.  You can hear her copious fluids splattering the floor and feel them dripping down your hind legs as she moans, leaning back into you and planting a sloppy kiss on your lips.  One of her hands ");
 	if(player.biggestTitSize() <= 1) outputText("strokes your chest");
 	else outputText("caresses a breast");
-	outputText(" while she caresses the side of your " + player.face() + " with the other.  Your body pumps away while your tongues entwine, tracing saliva over each other's lips.  She pulls back and moans out again, trailing off into a whinny as she orgasms underneath you.\n\n");
+	outputText(" while she caresses the side of your [face] with the other.  Your body pumps away while your tongues entwine, tracing saliva over each other's lips.  She pulls back and moans out again, trailing off into a whinny as she orgasms underneath you.\n\n");
 
 	outputText("Her cunt locks tightly around you once again, clamping down in a series of rings from the base all the way to your " + player.cockHead(x) + ".  At once, they start sliding from the base towards the tip, new ones forming along the bottom of the shaft as her pussy milks your " + cockDescript(x) + " hard.  Trapped inside her, all you can do is groan and cum in response to her climax.  You throw back your head as you feel the warmth of your release building in your ");
 	if(player.balls > 0) outputText(ballsDescriptLight());
@@ -430,7 +430,7 @@ private function fuckEdrynTaur():void {
 	}
 
 	if(player.statusEffectv1(StatusEffects.Edryn) <= 1) outputText("\n\nYou pull out with a wet pop, and watch the mixed centaur-cum pour from her puffy lips in a waterfall.  It splatters onto the floor wetly as Edryn at last relaxes, dropping herself heavily onto a pile of pillows.  She shakes her head and puts her palms on the floor alongside her body, steadying herself as she attempts to regain her balance.  Edryn gives you a tired smile and says, \"<i>Ohhhh that was nice.  Most of my customers can't get me off like that.  Don't worry about filling me full of fillies either, I take some herbs to prevent that.  You should come back sometime, okay?</i>\"");
-	else if(player.statusEffectv1(StatusEffects.Edryn) <= 3) outputText("\n\nShe sighs happily and looks down at you, \"<i>Ooh " + player.short + ", you're the best.  We should do this again soon.  Oh goddess, I can feel my juices starting just thinking about it.</i>\"");
+	else if(player.statusEffectv1(StatusEffects.Edryn) <= 3) outputText("\n\nShe sighs happily and looks down at you, \"<i>Ooh [name], you're the best.  We should do this again soon.  Oh goddess, I can feel my juices starting just thinking about it.</i>\"");
 	else if(player.statusEffectv1(StatusEffects.Edryn) == 4) outputText("\n\nShe sighs happily and says, \"<i>Oh baby, you know what?  I'm never charging you again.  Just keep getting me off like that and we can do it anytime.</i>\"");
 	else outputText("\n\nShe sighs contentedly and says, \"<i>Mmm, never stop visiting, okay?</i>\"");
 	outputText("\n\nThe two of you wipe up as best you can, redress, and head back out to the bar.  You're consciously aware of how strongly your groin reeks of centaur-slut.  Your body, happy with the scent and scrutiny of the bar's patrons, refuses to go soft, providing a wonderful view of your cum-slicked member.  Giggles and laughter break out around you as you leave, though more than a few of those taking notice have hard nipples or tents of their own.");
@@ -451,7 +451,7 @@ private function fuckEdrynNonTaur():void {
 	else outputText("body");
 	outputText(".  She looks over her shoulder and says, \"<i>If you don't want your gear to smell like a horny centaur, you ought to shed it and get me warmed up with your tongue.</i>\"  You hastily remove it");
 	if(player.tallness > 72) outputText(" and drop down to your knees to better level yourself with her");
-	outputText(", pressing your " + player.face() + " into her slick folds and tasting her flavor.  Your nose easily slips into her gash as your tongue explores it, testing and tasting thick, liquid centaur lust.  It's tangy and sweet, surprisingly unlike the scent it gives off.  You easily find her large clit and suckle on it, listening to the wet squelches and whinnies of pleasure.\n\n");
+	outputText(", pressing your [face] into her slick folds and tasting her flavor.  Your nose easily slips into her gash as your tongue explores it, testing and tasting thick, liquid centaur lust.  It's tangy and sweet, surprisingly unlike the scent it gives off.  You easily find her large clit and suckle on it, listening to the wet squelches and whinnies of pleasure.\n\n");
 
 	outputText("With a gasp you pull back, a thin coating of female slime clinging wetly to your face.  She leans over her hindquarters, her human-half rosy with the heat of her arousal as she hands you a towel.  You wipe off, and listen to the 'splat-splat-splat' of her animalistic pussy-juice as it drips to the floor.  She's completely soaked in a way that you doubt even a succubus could replicate.  She crooks a finger and waggles back and forth, making her puffy, black cunt-lips jiggle ever-so-slightly.  You don't need any more encouragement.\n\n");
 	if(player.tallness < 60) outputText("You grab a stool so you'll be tall enough to fuck her properly and climb onto it.  ");
@@ -463,7 +463,7 @@ private function fuckEdrynNonTaur():void {
 	else outputText("squirting a little bit of fluid on the floor.  ");
 	outputText("The further you push inside, the more aware of her warmth you become.  Her body temperature is higher than a human's, and it feels almost good enough to make you melt.\n\n");
 
-	outputText("She whinnies and pushes back against you, forcing your entire " + cockDescript(x) + " to slip up her well-lubed passage.  You slap her ass, watching the furred flanks jiggle slightly.  Edryn looks over her shoulder again to and gives you a sultry look.  Before you can puzzle out what she's trying to tell you, her entire cunt contracts tightly, like a silken vise.  It wrings your " + cockDescript(x) + " tightly, immobilizing you inside the powerful centauress and making your " + player.legs() + " feel wobbly and weak.\n\n");
+	outputText("She whinnies and pushes back against you, forcing your entire " + cockDescript(x) + " to slip up her well-lubed passage.  You slap her ass, watching the furred flanks jiggle slightly.  Edryn looks over her shoulder again to and gives you a sultry look.  Before you can puzzle out what she's trying to tell you, her entire cunt contracts tightly, like a silken vise.  It wrings your " + cockDescript(x) + " tightly, immobilizing you inside the powerful centauress and making your [legs] feel wobbly and weak.\n\n");
 
 	outputText("Edryn relaxes slightly, enough to allow you movement, and you happily begin fucking her hindquarters, grabbing her tail for leverage as you pound against her.  Her entire body sways with your motions, even jiggling her breasts.  She matches you, pushing back with equal fervor until her copious cunt-juice is all over your belly and thighs as every thrust is announced with a loud SLAP.  She whinnies happily, fucking harder and harder until you're struggling not to be knocked over by the overenthusiastic woman.\n\n");
 
@@ -487,7 +487,7 @@ private function fuckEdrynNonTaur():void {
 	outputText("and like a dam being broken, a wave of mixed sexual fluids dumps from her puffy lips onto you.  Edryn sighs happily, and you realize her tongue is hanging from her mouth with her eyes slightly rolled back.  You realize that though she endeavors to act restrained, her body is determined to be a wanton slut.\n\n");
 
 	if(player.statusEffectv1(StatusEffects.Edryn) <= 1) outputText("She sighs happily and looks down at you, \"<i>Ohhhh that was nice.  Most of my customers can't get me off like that.  I hope you're ok!  Don't worry about me getting pregnant either, I take some herbs to prevent that sort of thing until I'm ready for it.</i>\"\n\n");
-	else if(player.statusEffectv1(StatusEffects.Edryn) <= 3) outputText("She sighs happily and looks down at you, \"<i>Ooh " + player.short + ", you're the best.  We should do this again soon.  Oh goddess, I can feel my juices starting just thinking about it.</i>\"\n\n");
+	else if(player.statusEffectv1(StatusEffects.Edryn) <= 3) outputText("She sighs happily and looks down at you, \"<i>Ooh [name], you're the best.  We should do this again soon.  Oh goddess, I can feel my juices starting just thinking about it.</i>\"\n\n");
 	else if(player.statusEffectv1(StatusEffects.Edryn) == 4) outputText("She sighs happily and says, \"<i>Oh baby, you know what?  I'm never charging you again.  Just keep getting me off like that and we can do it anytime.</i>\"\n\n");
 	else outputText("She sighs contentedly and says, \"<i>Mmm, never stop visiting ok?</i>\"\n\n");
 	outputText("The two of you clean up as best you can, redress, and head back out to the bar.  You're consciously aware of how strongly you reek of centaur-slut.  Your body, happy with the scent and the scrutiny of the bar's patrons, refuses to go soft, providing a more-than-ample tent.  Giggles and laughter break out around you as you leave, though more than a few of those taking notice have hard nipples or tents of their own.");
@@ -532,7 +532,7 @@ public function edrynHeliaThreesomePossible():Boolean {
 }
 
 public function helAppearance():void {
-	outputText("\n\nTo your surprise, you see Hel the salamander sitting in a corner table, a pair of foxy fox-morph girls sitting on her lap.  When she sees you enter, the pretty reptile lifts her tankard and shouts, \"<i>Hey! " + player.short + "! Over here!</i>\" over the loud noises of the bar.");
+	outputText("\n\nTo your surprise, you see Hel the salamander sitting in a corner table, a pair of foxy fox-morph girls sitting on her lap.  When she sees you enter, the pretty reptile lifts her tankard and shouts, \"<i>Hey! [name]! Over here!</i>\" over the loud noises of the bar.");
 	//(\"<i>Hel</i>\" button added to the Wet Bitch menu)
 }
 
@@ -595,11 +595,11 @@ public function helEdrynThreeSomeStartYerEngines():void {
 
 		outputText("\"<i>Wh-- Really?</i>\" she gasps, eyebrows arching.  Her tail starts wagging excitedly in your lap until you stand, taking Hel's hand in yours and leading her over to Edryn's table.  The centauress waves amicably as your approach, though she cocks her head to the side as she notices the other girl on your arm.\n\n");
 
-		outputText("\"<i>Hey, " + player.short + ",</i>\" Edryn says with a half-smile. \"<i>Who's your friend?</i>\"\n\n");
+		outputText("\"<i>Hey, [name],</i>\" Edryn says with a half-smile. \"<i>Who's your friend?</i>\"\n\n");
 
 		outputText("You introduce the girls, and with a nod from Edryn, you both sit at the centauress's table.  You spend a few minutes chatting amicably, and are gratified to see how wonderfully Hel and Edryn are getting on.  Within minutes they're comparing stories of Edryn's guard duty against Hel's adventures as a wandering berzerker.  You let them talk for a little while, but eventually you bring up your reason for bringing Hel over to meet the centauress.\n\n");
 
-		outputText("Surprisingly for the salamander, Hel blushes brightly when you mention her little crush on Edryn.  The centauress gives a girlish giggle at the sight of Hel turning bright red, but quickly waves it off.  \"<i>Don't worry about it, cutie,</i>\" Edryn says, taking Helia's hand in hers.  \"<i>Looks like " + player.short + " forgot to mention: I do a little 'wet work' on the side.  " + player.mf("He","She") + " and I have a little understanding, and since I'm horny and you're cute... What do you say we make your wish come true?</i>\"\n\n");
+		outputText("Surprisingly for the salamander, Hel blushes brightly when you mention her little crush on Edryn.  The centauress gives a girlish giggle at the sight of Hel turning bright red, but quickly waves it off.  \"<i>Don't worry about it, cutie,</i>\" Edryn says, taking Helia's hand in hers.  \"<i>Looks like [name] forgot to mention: I do a little 'wet work' on the side.  " + player.mf("He","She") + " and I have a little understanding, and since I'm horny and you're cute... What do you say we make your wish come true?</i>\"\n\n");
 
 		outputText("Hel just about squeals with delight.  She nods her head emphatically, making both you and Edryn laugh.  With a knowing look, Edryn takes you and Hel by the hand and leads you into her private room.");
 	}
@@ -626,7 +626,7 @@ private function threesomeEdrynAndHel():void {
 
 	outputText("Alright, alright.  You break the girls up before Edryn cums just from the oral assault.  It takes a moment of thought to figure out how to make this threeway work with Edryn's massive horse body.  You give Hel a leg up, getting her mounted on Edryn's back, and take up position behind the centauress.\n\n");
 
-	outputText("Hel rolls over on her back, using her legs to steady on Edryn's back as you rub your " + cockDescript(x) + " against Edryn's gaping horsecunt, making the centauress shudder.  The shudder nearly throws Hel off her back, causing the salamander to dig her claws painfully into Edryn's sides.  She bucks back in surprise, impaling herself right on your " + cockDescript(0) + ".\n\n");
+	outputText("Hel rolls over on her back, using her legs to steady on Edryn's back as you rub your " + cockDescript(x) + " against Edryn's gaping horsecunt, making the centauress shudder.  The shudder nearly throws Hel off her back, causing the salamander to dig her claws painfully into Edryn's sides.  She bucks back in surprise, impaling herself right on your [cock].\n\n");
 
 	outputText("Edryn clops back, forcing you to stumble until Edryn has taken your cock up to the hilt inside her.  Your back slams against the wall and your hips buck into the centauress's slick fuckhole.  The horse-girl's cunt contracts around your shaft like a hot, silken vice, already starting to milk you.  You start to pump into her, withdrawing until your cock's only just parting her vaginal lips before thrusting hard up to the hilt");
 	if(player.balls > 0) outputText(", your sack slapping wetly against the bottom of her cunny");
@@ -644,7 +644,7 @@ private function threesomeEdrynAndHel():void {
 
 	outputText("When you're satisfied, you stumble and collapse against her horsebody, barely fighting off an intense urge to sleep.  The centauress moans contentedly, \"<i>Mmm, we should do this again sometime. You two were amazing.</i>\"\n\n");
 
-	outputText("\"<i>Oh yeah. We... We gotta go again sometime,</i>\" Hel agrees, nearly falling off Edryn's back.  You give each of the girls a long kiss before collecting your " + player.armorName + " and walking off back to camp.\n\n");
+	outputText("\"<i>Oh yeah. We... We gotta go again sometime,</i>\" Hel agrees, nearly falling off Edryn's back.  You give each of the girls a long kiss before collecting your [armor] and walking off back to camp.\n\n");
 	player.orgasm();
 	kGAMECLASS.helFollower.helAffection(5);
 	doNext(camp.returnToCampUseOneHour);
@@ -738,10 +738,10 @@ private function pregdrynOffer(cs:Boolean = true):void {
 	//VERY Pregnant Offer
 	if (pregnancy.incubation < 250) {
 		outputText("Edryn struggles to move, practically waddling thanks to her swollen, pregnant belly.  As usual, the glistening black lips of her sex are on display, and with the hormones pouring through her, she's leaking a steady trail of slime.  The scent coming off her is unreal!  It's like it's reaching right into your brain and cranking the 'fuck' dial up to maximum.  ");
-		if(player.cockTotal() > 1) outputText("All of your " + multiCockDescriptLight() + " fill in seconds, growing rock hard and actually aching with their need.  ");
-		else if(player.cockTotal() == 1) outputText("Your " + cockDescript(0) + " fills in seconds, growing rock hard and actually aching with need.  ");
+		if(player.cockTotal() > 1) outputText("All of your [cocks] fill in seconds, growing rock hard and actually aching with their need.  ");
+		else if(player.cockTotal() == 1) outputText("Your [cock] fills in seconds, growing rock hard and actually aching with need.  ");
 		outputText("You're totally dazed by the massive spike in arousal, and ");
-		if(player.cor + player.lib < 100 || player.cockTotal() < 1) outputText("you struggle not to reach into your " + player.armorName + " to touch yourself.");
+		if(player.cor + player.lib < 100 || player.cockTotal() < 1) outputText("you struggle not to reach into your [armor] to touch yourself.");
 		else {
 			outputText("you can't stop yourself from grabbing ");
 			if(player.cockTotal() == 1) outputText("your ");
@@ -760,10 +760,10 @@ private function pregdrynOffer(cs:Boolean = true):void {
 	//Mildly pregnant offer
 	else {
 		outputText("As usual, when Edryn pivots to leave, she gives you a perfect view of her unusual vagina.  The glistening black lips of her sex practically ooze moisture, and the scent coming off her seems even more potent than usual, making your head swim.  ");
-		if(player.cockTotal() > 1) outputText("All of your " + multiCockDescriptLight() + " fill in seconds, growing rock hard and actually aching with their need.  ");
-		else if(player.cockTotal() == 1) outputText("Your " + cockDescript(0) + " fills in seconds, growing rock hard and actually aching with need.  ");
+		if(player.cockTotal() > 1) outputText("All of your [cocks] fill in seconds, growing rock hard and actually aching with their need.  ");
+		else if(player.cockTotal() == 1) outputText("Your [cock] fills in seconds, growing rock hard and actually aching with need.  ");
 		outputText("You're a little bit dazed by the sudden spike in arousal, and ");
-		if(player.cor + player.lib < 100 || player.cockTotal() < 1) outputText("you struggle not to reach into your " + player.armorName + " to touch yourself.");
+		if(player.cor + player.lib < 100 || player.cockTotal() < 1) outputText("you struggle not to reach into your [armor] to touch yourself.");
 		else {
 			outputText("you can't stop yourself from grabbing ");
 			if(player.cockTotal() == 1) outputText("your ");
@@ -815,7 +815,7 @@ private function pregdrynOffer(cs:Boolean = true):void {
 	}
 	//(PC TOO BIG)
 	else if(player.cockArea(x) > 300) {
-		outputText("Edryn brushes her hand over ALL of your " + cockDescript(0) + " then jerks it back, startled.  She sighs, \"<i>Dear, that thing is a BEAST.  I mean, there's no doubt I'd love to get it inside me, but I promise it won't fit me.</i>\"\n\n");
+		outputText("Edryn brushes her hand over ALL of your [cock] then jerks it back, startled.  She sighs, \"<i>Dear, that thing is a BEAST.  I mean, there's no doubt I'd love to get it inside me, but I promise it won't fit me.</i>\"\n\n");
 
 		outputText("She looks at you pleadingly and practically begs, \"<i>Please, find a way to fit me.</i>\"  Edryn grabs you by the shoulders and whispers in your ear, \"<i>Being pregnant makes me so turned on ALL THE TIME.  I need you inside me.</i>\"\n\n");
 
@@ -856,9 +856,9 @@ public function fuckPregEdryn():void {
 		if(player.tallness < 60) outputText("bouncing against the top of your head");
 		else if(player.tallness < 84) outputText("battering your face");
 		else outputText("crushed against your chest");
-		outputText(" was totally worth the bruise-inducing impact.  Edryn pivots about, her hooves clattering noisily against the room's floorboards until she's presenting her hind end to you.  Her tail lifts of its own accord and displays the swollen, black lips of her sex.  A potent glaze of centaur-fluid drips from the gash in a steady trickle, splattering over your " + player.feet() + " as your equine lover closes in.\n\n");
+		outputText(" was totally worth the bruise-inducing impact.  Edryn pivots about, her hooves clattering noisily against the room's floorboards until she's presenting her hind end to you.  Her tail lifts of its own accord and displays the swollen, black lips of her sex.  A potent glaze of centaur-fluid drips from the gash in a steady trickle, splattering over your [feet] as your equine lover closes in.\n\n");
 
-		outputText("You tear off your " + player.armorName + " in a flash, fully exposing your ");
+		outputText("You tear off your [armor] in a flash, fully exposing your ");
 		if(player.cockTotal() > 1) outputText("chosen ");
 		outputText(cockDescript(x) + ".  It drips with anticipation, leaking drops of pre-cum with each inhalation of your mate's over-sexualized slit's scent.  Edryn looks over her shoulder to gauge the distance, but when she sees your state her face breaks into a happy smile.  She says, \"<i>Steady now, we wouldn't want you to miss your target, would we?</i>\" as her backside slowly descends, splattering hot sexual fluids over your length.\n\n");
 
@@ -945,18 +945,18 @@ private function jizzFromEatingPregdrynOut():void {
 	else outputText("mammoth cock drags the ground, leaking pre-cum.");
 	outputText("  The urge to find the juicy, potent pussy at the center of the musk-cloud overrides your thoughts.  Stalking forwards in a haze of desire, you take deeper and deeper breaths, inhaling ever-greater quantities of Edryn's heavenly scent.  You know you're almost there – you can hear her quiet breathing.\n\n");
 
-	outputText("You're so lost in desperate need that your hurried steps get you in trouble.  Your " + player.foot() + " catches on something, and you fall inexorably forwards.  In a panic, you windmill your arms.  One slaps into fur-covered flesh with a loud 'SLAP', the other disappears into a mass of soft, yielding fabrics.  The pillows catch you, absorbing the fall, but your face splats directly into something warm, wet and aroused.  Edryn gasps and exclaims, \"<i>No need to be so rough about it!  I thought you might like some hide and seek... your dick seemed to like it, and I needed a moment to catch my breath.  It's not easy carrying your child around!</i>\"\n\n");
+	outputText("You're so lost in desperate need that your hurried steps get you in trouble.  Your [foot] catches on something, and you fall inexorably forwards.  In a panic, you windmill your arms.  One slaps into fur-covered flesh with a loud 'SLAP', the other disappears into a mass of soft, yielding fabrics.  The pillows catch you, absorbing the fall, but your face splats directly into something warm, wet and aroused.  Edryn gasps and exclaims, \"<i>No need to be so rough about it!  I thought you might like some hide and seek... your dick seemed to like it, and I needed a moment to catch my breath.  It's not easy carrying your child around!</i>\"\n\n");
 
 	outputText("Her words fall on deaf ears.  You push yourself up onto your elbows and lean forward, feeling strands of female lubricant hanging from your face as you inhale deep lungfuls of her scent.  ");
 	if(player.totalCocks() > 1) outputText("Each of y");
 	else outputText("Y");
-	outputText("our " + multiCockDescriptLight() + " ");
+	outputText("our [cocks] ");
 	if(player.cumQ() < 100) outputText("drips pre-cum onto the pillows.");
 	else if(player.cumQ() < 500) outputText("leaks pre-cum in a steady stream, quickly soaking a few pillows.");
 	else outputText("pours out enough pre-cum to soak a pillow, and in no time your overenthusiastic dick is doing its damnedest to dribble over everything.");
 	outputText("  It's a powerful smell.  The centaur's heady musk already has you on the edge, and you haven't even tasted her slit yet!  Your heart beats hard, as you grab onto her flanks with each hand and prepare to service your pregnant lover.\n\n");
 
-	outputText("After being in the dark room for so long, your eyes have adjusted to the dim light.  Mere inches in front of you is Edryn's massive slit.  Its black folds are coated in a thick layer of slime that trails down to her bulbous clit, collecting before dripping off.  You lean forward, take a long, deep breath, and then smash your face into the gash.  Your tongue darts out, practically of its own accord, lapping at her inner folds and tasting the sweet, tangy nectar she drips.  The warmth is palpable, and the air is practically steaming with the heat of Edryn's desire as  you rub your face up and down the slit.  You lick and slurp at the slippery sweetness of her desire, but it never seems to be enough for you or your drooling " + multiCockDescriptLight() + ".\n\n");
+	outputText("After being in the dark room for so long, your eyes have adjusted to the dim light.  Mere inches in front of you is Edryn's massive slit.  Its black folds are coated in a thick layer of slime that trails down to her bulbous clit, collecting before dripping off.  You lean forward, take a long, deep breath, and then smash your face into the gash.  Your tongue darts out, practically of its own accord, lapping at her inner folds and tasting the sweet, tangy nectar she drips.  The warmth is palpable, and the air is practically steaming with the heat of Edryn's desire as  you rub your face up and down the slit.  You lick and slurp at the slippery sweetness of her desire, but it never seems to be enough for you or your drooling [cocks].\n\n");
 
 	outputText("Squirming and writhing, Edryn moans, \"<i>Yessssss... right-ahhh-there.  Mmmm... I think you're hooked on my cunt, aren't you?</i>\"  She stretches back to pat your head and coos, \"<i>Yes that's a good " + player.mf("boy","girl") + ", lap it allll up.  Oh my, you're dripping like a sieve just from eating me out!  Oooh yeah, lower, lick my cliiiiit-yes yes-ooooh... Mmm I bet the smell is just overwhelming you isn't it?  Why don't you suckle my clit and take a quick breather.  I bet you'll be spurting helplessly in no time.</i>\"\n\n");
 
@@ -978,7 +978,7 @@ private function jizzFromEatingPregdrynOut():void {
 
 	outputText("Cum begins to ooze from ");
 	if(player.totalCocks() > 1) outputText("each of ");
-	outputText("your " + multiCockDescriptLight() + " in a steady stream.  Your urethra bulges and flexes, forcing you to waste your seed all over Edryn's pillows.");
+	outputText("your [cocks] in a steady stream.  Your urethra bulges and flexes, forcing you to waste your seed all over Edryn's pillows.");
 	if(player.cumQ() < 1000) {
 		outputText("  The flow gets thicker and thicker.  Edryn even remarks, \"<i>Oh my, my baby's daddy is just full of cum!  Let it all out for me dear, you did such a good job on my clit that you deserve release.</i>\" You squirt and dribble, breathing airborne orgasm and squirting ");
 		if(player.cumQ() < 3000) outputText("out the last of your liquid pleasure.");
@@ -1064,8 +1064,8 @@ private function edrynFucktroduction():void {
 			break;
 	}
 	if(!player.isTaur()) {
-		if(cost > 0) outputText("Coins exchange hands and her arm finds its way back inside your " + player.armorName + ", pulling you towards a back room.  A round of chuckles chases you through the bar room until they're silenced by the heavy thud of a door closing behind you.  You're pushed against the wall hard enough to make your teeth click.  The stars gradually clear from your view, revealing a massive gash, drooling with clear feminine slime.  The scent assails you, ");
-		else if(flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] == 0) outputText("Her arm finds its way back inside your " + player.armorName + ", pulling you towards a back room.  A round of chuckles chases you through the bar room until they're silenced by the heavy thud of a door closing behind you.  You're pushed against the wall hard enough to make your teeth click.  The stars gradually clear from your view, revealing a massive gash, drooling with clear feminine slime.  The scent assails you, ");
+		if(cost > 0) outputText("Coins exchange hands and her arm finds its way back inside your [armor], pulling you towards a back room.  A round of chuckles chases you through the bar room until they're silenced by the heavy thud of a door closing behind you.  You're pushed against the wall hard enough to make your teeth click.  The stars gradually clear from your view, revealing a massive gash, drooling with clear feminine slime.  The scent assails you, ");
+		else if(flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] == 0) outputText("Her arm finds its way back inside your [armor], pulling you towards a back room.  A round of chuckles chases you through the bar room until they're silenced by the heavy thud of a door closing behind you.  You're pushed against the wall hard enough to make your teeth click.  The stars gradually clear from your view, revealing a massive gash, drooling with clear feminine slime.  The scent assails you, ");
 		else outputText("A round of chuckles chases you through the bar room until they're silenced by the heavy thud of a door closing behind you.  You're pushed against the wall hard enough to make your teeth click.  The stars gradually clear from your view, revealing a massive gash, drooling with clear feminine slime.  The scent assails you, ");
 		if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("making your " + cockDescript(x) + " twitch and ache.  It floods your body with animalistic desires, overpowering any sense of propriety you might have once had.");
 		else outputText("overpowering you with strange lust.  As turned on as you are, it's difficult not to enjoy this.");
@@ -1093,7 +1093,7 @@ public function eatEdrynPussyLikeABawss():void {
 	var x:int = player.cockThatFits(300);
 	if(x < 0) x = player.smallestCockIndex();
 	var y:int = player.cockThatFits2(300);
-	outputText("Edryn starts to say something, but you strip out of your [armor] before she gets more than a half-dozen words out, your " + multiCockDescriptLight() + " jutting proud and erect, leaking clear streams of pre-cum down ");
+	outputText("Edryn starts to say something, but you strip out of your [armor] before she gets more than a half-dozen words out, your [cocks] jutting proud and erect, leaking clear streams of pre-cum down ");
 	if(player.cockTotal() == 1) outputText("its underside");
 	else outputText("their underside");
 	outputText(".  You smile mirthfully when you realize Edryn is actually blushing, and beet red at that!  Her hindlegs prance nervously around as she studies you over her shoulder, and her tail won't stop the steady back-and-forth swish that sends more of the boner-fueling musk towards your nose.");

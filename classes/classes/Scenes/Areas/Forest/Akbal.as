@@ -46,7 +46,7 @@
 				if (damage <= 0) {
 					outputText("Akbal lunges forwards but with your toughness");
 					if (player.armorDef > 0)
-						outputText(" and " + player.armorName + ", he fails to deal any damage.");
+						outputText(" and [armor], he fails to deal any damage.");
 					else
 						outputText(" he fails to deal any damage.");
 				}
@@ -60,7 +60,7 @@
 				if (damage == 0) {
 					outputText("Akbal lunges forwards but between your toughness ");
 					if (player.armorDef > 0)
-						outputText("and " + player.armorName + ", he fails to deal any damage.");
+						outputText("and [armor], he fails to deal any damage.");
 				}
 				else {
 					outputText("Akbal snarls as he flies towards you, snapping his ivory teeth on your arm. You scream out in pain as you throw him off.");

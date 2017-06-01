@@ -32,7 +32,7 @@ package classes.Items.Consumables
 				if (player.statusEffectv1(StatusEffects.BonusACapacity) < 80) {
 					if (!player.hasStatusEffect(StatusEffects.BonusACapacity)) player.createStatusEffect(StatusEffects.BonusACapacity, 0, 0, 0, 0);
 					player.addStatusValue(StatusEffects.BonusACapacity, 1, 5);
-					outputText("\n\nYou feel... more accommodating somehow.  Your " + player.assholeDescript() + " is tingling a bit, and though it doesn't seem to have loosened, it has grown more elastic.");
+					outputText("\n\nYou feel... more accommodating somehow.  Your [asshole] is tingling a bit, and though it doesn't seem to have loosened, it has grown more elastic.");
 					changes++;
 				}
 				else {

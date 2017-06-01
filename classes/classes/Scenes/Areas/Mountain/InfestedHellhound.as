@@ -22,8 +22,8 @@
 				game.dynStats("lus", 5 + player.lib / 20);
 				outputText("Taken off-guard by the unexpected sexual display, you fail to move out of the way, and the wormy jism splatters you from the chest down.");
 				if (player.hasStatusEffect(StatusEffects.Infested) && player.totalCocks() > 0) {
-					outputText("  The worms inside you begin moving and squirming. A few of your cum-soaked parasites crawl out from your shivering " + multiCockDescriptLight() + " as if attempting to meet the new arrivals.  You desperately want to brush them away, but the pleasure in your crotch is too good to fight, and you find yourself staying your hand as each and every one of the new worms makes it way into your " + multiCockDescriptLight() + ".");
-					if (player.balls > 0) outputText("  Your " + ballsDescriptLight() + " grow weightier as the worms settle into their new home, arousing you beyond measure.");
+					outputText("  The worms inside you begin moving and squirming. A few of your cum-soaked parasites crawl out from your shivering [cocks] as if attempting to meet the new arrivals.  You desperately want to brush them away, but the pleasure in your crotch is too good to fight, and you find yourself staying your hand as each and every one of the new worms makes it way into your [cocks].");
+					if (player.balls > 0) outputText("  Your [balls] grow weightier as the worms settle into their new home, arousing you beyond measure.");
 					else outputText("  You can feel them shifting around inside you as they adjust to their new home, arousing you beyond measure.");
 					game.dynStats("lus", 10);
 				}

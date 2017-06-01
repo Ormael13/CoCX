@@ -183,12 +183,12 @@ package classes.Scenes
 					//Improved dummy golem or golems
 					if (golemChooser >= 10 && golemChooser < 20) {
 						if (rand(4) < 2) {
-							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered improved dummy golems! You ready your " + player.weaponName + " for a fight!");
+							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered improved dummy golems! You ready your [weapon] for a fight!");
 							startCombat(new GolemsDummyImproved());
 							return;
 						}
 						else {
-							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved dummy golem! You ready your " + player.weaponName + " for a fight!");
+							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved dummy golem! You ready your [weapon] for a fight!");
 							startCombat(new GolemDummyImproved());
 							return;
 						}
@@ -196,12 +196,12 @@ package classes.Scenes
 					//Advanced dummy golem or golems
 					if (golemChooser >= 20 && golemChooser < 30) {
 						if (rand(4) < 2) {
-							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered advanced dummy golems! You ready your " + player.weaponName + " for a fight!");
+							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered advanced dummy golems! You ready your [weapon] for a fight!");
 							startCombat(new GolemsDummyAdvanced());
 							return;
 						}
 						else {
-							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered advanced dummy golem! You ready your " + player.weaponName + " for a fight!");
+							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered advanced dummy golem! You ready your [weapon] for a fight!");
 							startCombat(new GolemDummyAdvanced());
 							return;
 						}
@@ -209,12 +209,12 @@ package classes.Scenes
 					//Superior dummy golem or golems
 					if (golemChooser >= 30 && golemChooser < 40) {
 						if (rand(4) < 2) {
-							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered superior dummy golems! You ready your " + player.weaponName + " for a fight!");
+							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered superior dummy golems! You ready your [weapon] for a fight!");
 							startCombat(new GolemsDummySuperior());
 							return;
 						}
 						else {
-							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered superior dummy golem! You ready your " + player.weaponName + " for a fight!");
+							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered superior dummy golem! You ready your [weapon] for a fight!");
 							startCombat(new GolemDummySuperior());
 							return;
 						}
@@ -222,12 +222,12 @@ package classes.Scenes
 					//Basic true golem or golems
 					if (golemChooser >= 40 && golemChooser < 50) {
 						if (rand(4) < 2) {
-							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered basic true golems! You ready your " + player.weaponName + " for a fight!");
+							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered basic true golems! You ready your [weapon] for a fight!");
 							startCombat(new GolemsTrueBasic());
 							return;
 						}
 						else {
-							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered basic true golem! You ready your " + player.weaponName + " for a fight!");
+							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered basic true golem! You ready your [weapon] for a fight!");
 							startCombat(new GolemTrueBasic());
 							return;
 						}
@@ -235,12 +235,12 @@ package classes.Scenes
 					//Improved true golem or golems
 					if (golemChooser >= 50 && golemChooser < 60) {
 						if (rand(4) < 2) {
-							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered improved true golems! You ready your " + player.weaponName + " for a fight!");
+							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered improved true golems! You ready your [weapon] for a fight!");
 							startCombat(new GolemsTrueImproved());
 							return;
 						}
 						else {
-							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved true golem! You ready your " + player.weaponName + " for a fight!");
+							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered improved true golem! You ready your [weapon] for a fight!");
 							startCombat(new GolemTrueImproved());
 							return;
 						}
@@ -248,12 +248,12 @@ package classes.Scenes
 					//Advanced true golem or golems
 					if (golemChooser >= 60) {
 						if (rand(4) < 2) {
-							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered advanced true golems! You ready your " + player.weaponName + " for a fight!");
+							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered advanced true golems! You ready your [weapon] for a fight!");
 							startCombat(new GolemsTrueAdvanced());
 							return;
 						}
 						else {
-							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered advanced true golem! You ready your " + player.weaponName + " for a fight!");
+							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered advanced true golem! You ready your [weapon] for a fight!");
 							startCombat(new GolemTrueAdvanced());
 							return;
 						}
@@ -261,7 +261,7 @@ package classes.Scenes
 					//Dummy golem or golems
 					else {
 						if (rand(4) < 2) {
-							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered dummy golems! You ready your " + player.weaponName + " for a fight!");
+							outputText("As you take a stroll, out of nearby bushes emerge group of golems. Looks like you have encountered dummy golems! You ready your [weapon] for a fight!");
 							if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] <= 0) {
 								flags[kFLAGS.CODEX_ENTRY_GOLEMS] = 1;
 								outputText("\n\n<b>New codex entry unlocked: Golems!</b>")
@@ -270,7 +270,7 @@ package classes.Scenes
 							return;
 						}
 						else {
-							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered dummy golem! You ready your " + player.weaponName + " for a fight!");
+							outputText("As you take a stroll, out of nearby bushes emerge golem. Looks like you have encountered dummy golem! You ready your [weapon] for a fight!");
 							if (flags[kFLAGS.CODEX_ENTRY_GOLEMS] <= 0) {
 								flags[kFLAGS.CODEX_ENTRY_GOLEMS] = 1;
 								outputText("\n\n<b>New codex entry unlocked: Golems!</b>")
@@ -665,19 +665,19 @@ package classes.Scenes
 			outputText("Walking along the sandy dunes of the desert you find yourself increasingly impeded by the bulk of your " + cockDescript(x) + " dragging along the sandscape behind you.  The incredibly hot surface of the desert causes your loins to sweat heavily and fills them with relentless heat.");
 
 			if (player.cocks.length == 1) outputText("  As it drags along the dunes, the sensation forces you to imagine the rough textured tongue of a monstrous animal sliding along the head of your " + Appearance.cockNoun(player.cocks[x].cockType) + ".");
-			else if (player.cocks.length >= 2) outputText("  With all of your " + multiCockDescriptLight() + " dragging through the sands they begin feeling as if the rough textured tongues of " + num2Text(player.cockTotal()) + " different monstrous animals were slobbering over each one.");
+			else if (player.cocks.length >= 2) outputText("  With all of your [cocks] dragging through the sands they begin feeling as if the rough textured tongues of " + num2Text(player.cockTotal()) + " different monstrous animals were slobbering over each one.");
 			outputText("\n\n");
 
 			//PARAGRAPH 2
 
 			//FOR NON-CENTAURS]
 			if (!player.isTaur()) {
-				outputText("The impending erection can't seem to be stopped.  Your sexual frustration forces stiffness into your " + multiCockDescriptLight() + ", which forces your torso to the ground.  Normally your erection would merely raise itself skyward but your genitals have grown too large and heavy for your " + hipDescript() + " to hold them aloft.  Instead you feel your body forcibly pivoting at the hips until your torso is compelled to rest face down on top of your obscene " + multiCockDescriptLight() + ".");
+				outputText("The impending erection can't seem to be stopped.  Your sexual frustration forces stiffness into your [cocks], which forces your torso to the ground.  Normally your erection would merely raise itself skyward but your genitals have grown too large and heavy for your " + hipDescript() + " to hold them aloft.  Instead you feel your body forcibly pivoting at the hips until your torso is compelled to rest face down on top of your obscene [cocks].");
 
 				//IF CHARACTER HAS GIANT BREASTS ADD SENTENCE
 				if (player.biggestTitSize() >= 35)  outputText("  Your " + kGAMECLASS.allBreastsDescript() + " hang lewdly off your torso to rest on the desert sands, seeming to bury the dunes on either side of you.  Their immense weight anchors your body, further preventing your torso from lifting itself up.  The burning heat of the desert teases your " + nippleDescript(0) + "s mercilessly as they grind in the sand.");
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
-				if (player.balls > 0) outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised " + buttDescript() + ".  The fiery warmth of the desert caresses it, causing your " + ballsDescriptLight() + " to pulse with the need to release their sperm through your " + multiCockDescriptLight() + ".");
+				if (player.balls > 0) outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised " + buttDescript() + ".  The fiery warmth of the desert caresses it, causing your [balls] to pulse with the need to release their sperm through your [cocks].");
 				//IF CHARACTER HAS A VAGINA ADD SENTENCE
 				if (player.vaginas.length >= 1) {
 					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.");
@@ -687,11 +687,11 @@ package classes.Scenes
 			}
 			//FOR CENTAURS
 			else {
-				outputText("The impending erection can't seem to be stopped.  Your sexual frustration forces stiffness into your " + multiCockDescriptLight() + ", which forces the barrel of your horse-like torso to the ground.  Normally your erection would merely hover above the ground in between your centaurian legs, but your genitals have grown too large and heavy for your " + hipDescript() + " to hold them aloft.  Instead, you feel your body being forcibly pulled down at your hindquarters until you rest atop your " + multiCockDescriptLight() + ".");
+				outputText("The impending erection can't seem to be stopped.  Your sexual frustration forces stiffness into your [cocks], which forces the barrel of your horse-like torso to the ground.  Normally your erection would merely hover above the ground in between your centaurian legs, but your genitals have grown too large and heavy for your " + hipDescript() + " to hold them aloft.  Instead, you feel your body being forcibly pulled down at your hindquarters until you rest atop your [cocks].");
 				//IF CHARACTER HAS GIANT BREASTS ADD SENTENCE
 				if (player.biggestTitSize() >= 35)  outputText("  Your " + kGAMECLASS.allBreastsDescript() + " pull your human torso forward until it also is forced to rest facedown, just like your horse half.  Your tits rest, pinned on the desert sand to either side of you.  Their immense weight anchors you, further preventing any part of your equine body from lifting itself up.  The burning heat of the desert teases your " + nippleDescript(0) + "s incessantly.");
 				//IF CHARACTER HAS A BALLS ADD SENTENCE
-				if (player.balls > 0) outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised " + buttDescript() + ".  The airy warmth of the desert teases it, causing your " + ballsDescriptLight() + " pulse with the need to release their sperm through your " + multiCockDescriptLight() + ".");
+				if (player.balls > 0) outputText("  Your " + player.skinTone + sackDescript() + " rests beneath your raised " + buttDescript() + ".  The airy warmth of the desert teases it, causing your [balls] pulse with the need to release their sperm through your [cocks].");
 				//IF CHARACTER HAS A VAGINA ADD SENTENCE
 				if (player.vaginas.length >= 1) {
 					outputText("  Your " + vaginaDescript() + " and " + clitDescript() + " are thoroughly squashed between the bulky flesh where your male genitals protrude from between your hips and the " + buttDescript() + " above.");
@@ -710,9 +710,9 @@ package classes.Scenes
 			//SCENE END = IF CHARACTER HAS FULL WINGS ADD SENTENCE
 			if (player.canFly()) outputText("  You extend your wings and flap as hard as you can, until at last you manage to lighten the bulk of your body somewhat - enough to allow yourself to drag your genitals across the hot sands and back to camp.  The ordeal takes nearly an hour.");
 			//SCENE END IF CHARACTER HAS CENTAUR BODY
-			else if (player.isTaur()) outputText("  You struggle and work your equine legs against the surface of the dune you are trapped on.  Your " + player.feet() + " have consistent trouble finding footing, the soft sand failing to provide enough leverage to lift your bulk.  You breath in deeply and lean from side to side, trying to find some easier vertical leverage.  Eventually, with a crude crawl, your legs manage to push the bulk of your body onto more solid ground.  With great difficulty, you spend the next hour shuffling your genitals across the sandscape and back to camp.");
+			else if (player.isTaur()) outputText("  You struggle and work your equine legs against the surface of the dune you are trapped on.  Your [feet] have consistent trouble finding footing, the soft sand failing to provide enough leverage to lift your bulk.  You breath in deeply and lean from side to side, trying to find some easier vertical leverage.  Eventually, with a crude crawl, your legs manage to push the bulk of your body onto more solid ground.  With great difficulty, you spend the next hour shuffling your genitals across the sandscape and back to camp.");
 			//SCENE END = FOR ALL OTHER CHARACTERS
-			else outputText("  You struggle and push with your " + player.legs() + " as hard as you can, but it's no use.  You do the only thing you can and begin stroking your " + multiCockDescriptLight() + " with as much vigor as you can muster.  Eventually your body tenses and a light load of jizz erupts from your body, but the orgasm is truly mild compared to what you need.  You're simply too weary from struggling to give yourself the masturbation you truly need, but you continue to try.  Nearly an hour later " + sMultiCockDesc() + " softens enough to allow you to stand again, and you make your way back to camp, still dragging your genitals across the warm sand.");
+			else outputText("  You struggle and push with your [legs] as hard as you can, but it's no use.  You do the only thing you can and begin stroking your [cocks] with as much vigor as you can muster.  Eventually your body tenses and a light load of jizz erupts from your body, but the orgasm is truly mild compared to what you need.  You're simply too weary from struggling to give yourself the masturbation you truly need, but you continue to try.  Nearly an hour later " + sMultiCockDesc() + " softens enough to allow you to stand again, and you make your way back to camp, still dragging your genitals across the warm sand.");
 			dynStats("lus", 25 + rand(player.cor / 5), "resisted", false);
 			fatigue(5);
 			doNext(camp.returnToCampUseOneHour);

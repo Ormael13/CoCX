@@ -1484,7 +1484,7 @@ public function spellHealcamp():void {
 			else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
 		}
 		if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
-		if(player.gender == 3) outputText(vaginaDescript(0) + " and " + player.multiCockDescriptLight() + " overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
+		if(player.gender == 3) outputText(vaginaDescript(0) + " and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
 		dynStats("lib", .25, "lus", 15);
 	}
 	else {
@@ -1839,7 +1839,7 @@ public function rest():void {
 		}
 		//Bee cock
 		if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) {
-			outputText("\nThe desire to find the bee girl that gave you this cursed " + player.cockDescript(0) + " and have her spread honey all over it grows with each passing minute\n");
+			outputText("\nThe desire to find the bee girl that gave you this cursed [cock] and have her spread honey all over it grows with each passing minute\n");
 		}
 		//Starved goo armor
 		if (player.armor == armors.GOOARMR && flags[kFLAGS.VALERIA_FLUIDS] <= 0 && valeria.valeriaFluidsEnabled()) {
@@ -1885,7 +1885,7 @@ public function doWait():void {
 		}
 		//Bee cock
 		if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) {
-			outputText("\nThe desire to find the bee girl that gave you this cursed " + player.cockDescript(0) + " and have her spread honey all over it grows with each passing minute\n");
+			outputText("\nThe desire to find the bee girl that gave you this cursed [cock] and have her spread honey all over it grows with each passing minute\n");
 		}
 		//Starved goo armor
 		if (player.armor == armors.GOOARMR && flags[kFLAGS.VALERIA_FLUIDS] <= 0) {
@@ -2108,7 +2108,7 @@ public function sleepRecovery(display:Boolean = false):void {
 	}
 	//Bee cock
 	if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) {
-		outputText("\nThe desire to find the bee girl that gave you this cursed " + player.cockDescript(0) + " and have her spread honey all over it grows with each passing minute\n");
+		outputText("\nThe desire to find the bee girl that gave you this cursed [cock] and have her spread honey all over it grows with each passing minute\n");
 	}
 	//Starved goo armor
 	if (player.armor == armors.GOOARMR && flags[kFLAGS.VALERIA_FLUIDS] <= 0) {
@@ -2126,7 +2126,7 @@ public function sleepRecovery(display:Boolean = false):void {
 //Bad End if your balls are too big. Only happens in Realistic Mode.
 public function badEndGIANTBALLZ():void {
 	clearOutput();
-	outputText("You suddenly fall over due to your extremely large " + player.ballsDescriptLight() + ".  You struggle to get back up but the size made it impossible.  Panic spreads throughout your mind and your heart races.\n\n");
+	outputText("You suddenly fall over due to your extremely large [balls].  You struggle to get back up but the size made it impossible.  Panic spreads throughout your mind and your heart races.\n\n");
 	outputText("You know that you can't move and you're aware that you're going to eventually starve to death.");
 	menu();
 	if (player.hasItem(consumables.REDUCTO, 1)) {
@@ -2145,7 +2145,7 @@ private function applyReductoAndEscapeBadEnd():void {
 	player.ballSize -= (4 + rand(6));
 	if (player.ballSize < 1) player.ballSize = 1;
 	if (player.ballSize > 18 + (player.str / 2) + (player.tallness / 4)) player.ballSize = 17 + (player.str / 2) + (player.tallness / 4);
-	outputText("You feel your scrotum shift, shrinking down along with your " + ballsDescriptLight() + ".  ");
+	outputText("You feel your scrotum shift, shrinking down along with your [balls].  ");
 	outputText("Within a few seconds the paste has been totally absorbed and the shrinking stops.  ");
 	dynStats("lib", -2, "lus", -10);
 	player.consumeItem(consumables.REDUCTO, 1);
@@ -2159,7 +2159,7 @@ private function callRathazulAndEscapeBadEnd():void {
 	player.ballSize -= (4 + rand(6));
 	if (player.ballSize < 1) player.ballSize = 1;
 	if (player.ballSize > 18 + (player.str/2) + (player.tallness / 4)) player.ballSize = 16 + (player.str/2) + (player.tallness / 4);
-	outputText("You feel your scrotum shift, shrinking down along with your " + ballsDescriptLight() + ".  ");
+	outputText("You feel your scrotum shift, shrinking down along with your [balls].  ");
 	outputText("Within a few seconds the paste has been totally absorbed and the shrinking stops.  ");
 	outputText("\"<i>Try not to make your balls bigger. If it happens, make sure you have Reducto,</i>\" he says.  He returns to his alchemy equipment, working on who knows what.\n\n");
 	doNext(camp.returnToCampUseOneHour);
@@ -2186,7 +2186,7 @@ public function badEndHunger():void {
 //Bad End if you have 100 min lust.
 public function badEndMinLust():void {
 	clearOutput();
-	outputText("The thought of release overwhelms you. You frantically remove your " + player.armorName + " and begin masturbating furiously.  The first orgasm hits you but the desire persists.  You continue to masturbate but unfortunately, no matter how hard or how many times you orgasm, your desires will not go away.  Frustrated, you keep masturbating furiously but you are unable to stop.  Your minimum lust is too high.  No matter how hard you try, you cannot even satisfy your desires.");
+	outputText("The thought of release overwhelms you. You frantically remove your [armor] and begin masturbating furiously.  The first orgasm hits you but the desire persists.  You continue to masturbate but unfortunately, no matter how hard or how many times you orgasm, your desires will not go away.  Frustrated, you keep masturbating furiously but you are unable to stop.  Your minimum lust is too high.  No matter how hard you try, you cannot even satisfy your desires.");
 	outputText("\n\nYou spend the rest of your life masturbating, unable to stop.");
 	player.orgasm();
 	getGame().gameOver();

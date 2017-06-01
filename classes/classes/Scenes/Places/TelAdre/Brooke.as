@@ -1244,7 +1244,7 @@ public function submitHeckelXBrookeThreesome():void {
 	outputText(", too out of it from the sudden penetration to do as Heckel said.  In response, Heckel thrusts forward much harder, roughly shoving a good third of her dick into Brooke's cunt.  <i>\"<b>Now!</b>\"</i> she demands, pushing her skull forward into your crotch, and finally, Brooke gets the sense to obey.");
 
 	outputText("\n\nResting her forearms on the bench for support, Brooke lunges forward, ");
-	if(player.hasCock()) outputText("engulfing your " + cockDescript(0) + " into her warm, busy mouth");
+	if(player.hasCock()) outputText("engulfing your [cock] into her warm, busy mouth");
 	if(player.cockTotal() == 2) outputText(" while she strokes your second dick with a free hand, wobbly balancing herself on her other, tired arm");
 	if(player.cockTotal() >= 3) outputText(" while she does her best to please your [eachCock], massaging one with her fingers and shoving the others in her mouth, sometimes at once");
 	if(player.hasCock()) outputText(".  Brooke and Heckel move at the same pace: the Shepherd girl, eager to please, does all she can with her mouth, sucking, bathing, and worshiping your tool, ");

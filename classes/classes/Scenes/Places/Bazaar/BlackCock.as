@@ -1611,10 +1611,10 @@ import classes.GlobalFlags.*;
 			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LOWER_BODY_TYPE_GARGOYLE && player.armType != ARM_TYPE_HUMAN) {
 				switch(player.armType) {
 					case ARM_TYPE_HARPY:
-						outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating. The wing-like shape your arms once had is gone in a matter of moments, leaving " + player.skinDesc + " behind.");
+						outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your feathery arms are shedding their feathery coating. The wing-like shape your arms once had is gone in a matter of moments, leaving [skin.type] behind.");
 						break;
 					case ARM_TYPE_SPIDER:
-						outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' chitinous covering is flaking away. The glossy black coating is soon gone, leaving " + player.skinDesc + " behind.");
+						outputText("\n\nYou scratch at your biceps absentmindedly, but no matter how much you scratch, it isn't getting rid of the itch. Glancing down in irritation, you discover that your arms' chitinous covering is flaking away. The glossy black coating is soon gone, leaving [skin.type] behind.");
 						break;
 					default:
 				}
@@ -2042,8 +2042,8 @@ import classes.GlobalFlags.*;
 				player.cumMultiplier += temp;
 				//Flavor text
 				if (player.balls == 0) outputText("\n\nYou feel a churning inside your gut as something inside you changes.");
-				if (player.balls > 0) outputText("\n\nYou feel a churning in your " + ballsDescriptLight() + ". It quickly settles, leaving them feeling somewhat more dense.");
-				outputText(" A bit of milky pre dribbles from your " + multiCockDescriptLight() + ", pushed out by the change.");
+				if (player.balls > 0) outputText("\n\nYou feel a churning in your [balls]. It quickly settles, leaving them feeling somewhat more dense.");
+				outputText(" A bit of milky pre dribbles from your [cocks], pushed out by the change.");
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.gender == GENDER_MALE && player.averageBreastSize() > 2 && flags[kFLAGS.HYPER_HAPPY] == 0) {

@@ -10,7 +10,7 @@ package classes.Scenes.Areas.Forest
 		private function midRoundMadness():void {
 			var selector:Number = rand(4);
 			if(selector == 0) {
-				outputText("A slender hand reaches inside your " + player.armorName + " and gives your ");
+				outputText("A slender hand reaches inside your [armor] and gives your ");
 				if(player.balls > 0) {
 					if(rand(2) == 0) outputText(player.multiCockDescriptLight());
 					else outputText(player.ballsDescriptLight());
@@ -19,13 +19,13 @@ package classes.Scenes.Areas.Forest
 				outputText(" a gentle squeeze.  You twist away but your breathing gets a little heavier.\n\n");
 			}
 			else if(selector == 1) {
-				outputText("A girl latches onto your " + player.legs() + " and begins caressing your body lovingly, humming happily.  You quickly shake her loose but the attention makes you blush a little more.\n\n");
+				outputText("A girl latches onto your [legs] and begins caressing your body lovingly, humming happily.  You quickly shake her loose but the attention makes you blush a little more.\n\n");
 			}
 			else if(selector == 2) {
 				outputText("One of your daughters launches onto your back and presses her hard, pierced nipples against your neck.  She whispers in your ear, \"<i>Twist my nipples dad!</i>\"\n\n");
 				outputText("You reach back and throw her off, but her perverted taunts still leave you feeling a little hot under the collar.\n\n");
 			}
-			else outputText("A daughter lays down in front of you and starts jilling herself on the spot.  It's impossible to not glance down and see her or hear her pleasured moans.  You step away to remove the distraction but it definitely causes some discomfort in your " + player.armorName + ".\n\n");
+			else outputText("A daughter lays down in front of you and starts jilling herself on the spot.  It's impossible to not glance down and see her or hear her pleasured moans.  You step away to remove the distraction but it definitely causes some discomfort in your [armor].\n\n");
 			game.dynStats("lus", 1 + player.lib/15+rand(player.cor/30));
 		}
 

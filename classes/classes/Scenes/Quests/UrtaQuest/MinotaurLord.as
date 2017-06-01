@@ -57,7 +57,7 @@ package classes.Scenes.Quests.UrtaQuest
 			else {
 				outputText("The giant of a minotaur raises his chain threateningly into the air, clearly intent on striking you down.  With your trained reflexes, you quickly move to block his blow with your [weapon].  You recoil as the chain impacts your [weapon] with a loud clang, wrapping around it.  You smile triumphantly at the minotaur, only to glance at his smirk.  ");
 				if (player.weaponName != "fists") {
-					outputText("With a strong pull, he yanks your " + player.weaponName + " off your hands and into a corner of the room. Shit!");
+					outputText("With a strong pull, he yanks your [weapon] off your hands and into a corner of the room. Shit!");
 				//	flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
 				//	flags[kFLAGS.PLAYER_DISARMED_WEAPON_ATTACK] = player.weaponAttack;
 				//	player.setWeapon(WeaponLib.FISTS);

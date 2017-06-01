@@ -92,8 +92,8 @@ package classes.Scenes.Areas.Swamp
 					if (player.hasVagina()) outputText(" along with your " + player.vaginaDescript());
 					outputText(".  ");
 				}
-				else if (player.hasVagina()) outputText("Your " + player.vaginaDescript() + " grows wet as hell and so sensitive that every step and movement reminds you of the powerful need for something between your sopping nether-lips.  ");
-				outputText("While " + mf("his", "her") + " venom pours into you, the spider-" + mf("boy", "girl") + " reaches into your gear to play with your " + player.nippleDescript(0) + ", and you moan like a whore from the dual stimulation of " + mf("his", "her") + " venom and nipple-play.\n\n");
+				else if (player.hasVagina()) outputText("Your [vagina] grows wet as hell and so sensitive that every step and movement reminds you of the powerful need for something between your sopping nether-lips.  ");
+				outputText("While " + mf("his", "her") + " venom pours into you, the spider-" + mf("boy", "girl") + " reaches into your gear to play with your [nipple], and you moan like a whore from the dual stimulation of " + mf("his", "her") + " venom and nipple-play.\n\n");
 				if (hasVagina()) outputText("The saucy dominatrix exhausts her supply of aphrodisiac toxin for the moment and finally steps back, admiring her work and giving you a lewd wink.  You ");
 				else outputText("The confident male exhausts his supply of aphrodisiac toxin for the moment and finally steps back, admiring his work and giving you a lewd wink.  You ");
 				game.dynStats("lus", 60);
@@ -143,7 +143,7 @@ package classes.Scenes.Areas.Swamp
 		 nearby tree, reducing PC's attack to 0 for the rest of the fight.*/
 		public function spiderDisarm():void
 		{
-			outputText(capitalA + short + " shifts and sprays webbing, aiming a tight strand of it at your " + player.weaponName + ".  ");
+			outputText(capitalA + short + " shifts and sprays webbing, aiming a tight strand of it at your [weapon].  ");
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText("The blind web-shot goes horribly wide, missing you entirely.");
@@ -170,7 +170,7 @@ package classes.Scenes.Areas.Swamp
 				else outputText("gauntlets, but they're so effectively fastened to your hands that the attack fails to disarm you.\n");
 			}
 			else {
-				outputText("You don't react fast enough and the sticky webbing pulls your " + player.weaponName + " out of your grip, gluing it to a nearby tree.  There's no way to get it back right now, you'll have to fight bare-handed!");
+				outputText("You don't react fast enough and the sticky webbing pulls your [weapon] out of your grip, gluing it to a nearby tree.  There's no way to get it back right now, you'll have to fight bare-handed!");
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
 				player.setWeapon(WeaponLib.FISTS);
 //No longer appears to be used				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ATTACK] = player.weaponAttack;

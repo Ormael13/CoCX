@@ -74,7 +74,7 @@ package classes.Items {
 				outputText("\n\nYou feel a twinge in your eyes and you blink.  It feels like black cataracts have just fallen away from you, and you know without needing to see your reflection that your eyes have gone back to looking human.");
 			}
 			else {
-				outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your " + player.feet() + " from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.");
+				outputText("\n\nYou blink and stumble, a wave of vertigo threatening to pull your [feet] from under you.  As you steady and open your eyes, you realize something seems different.  Your vision is changed somehow.");
 				if (player.eyeType == EYES_FOUR_SPIDER_EYES) outputText("  Your multiple, arachnid eyes are gone!</b>");
 				outputText("  <b>You have normal, humanoid eyes again.</b>");
 			}
@@ -181,7 +181,7 @@ package classes.Items {
 					} else { // if no gills
 						outputText("\n\nYou feel a pressure in your lower esophageal region and pull your garments down to check the area."
 						           +" Before your eyes a pair of feathery gills start to push out of the center of your chest,"
-						           +" just below your neckline, parting sideways and draping over your " + player.nippleDescript(0) + "s."
+						           +" just below your neckline, parting sideways and draping over your [nipple]s."
 						           +" They feel a bit uncomfortable in the open air at first, but soon a thin film of mucus covers them and you"
 						           +" hardly notice anything at all. You redress carefully.");
 					}

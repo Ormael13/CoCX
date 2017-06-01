@@ -35,7 +35,7 @@ public class Centaurinum extends Consumable{
 		//Toughness up to 80!
 		if (changes < changeLimit && player.tou < 80 && rand(3) == 0) {
 			dynStats("tou", 2);
-			outputText("\n\nYour body and skin both thicken noticeably.  You pinch your " + player.skinDesc + " experimentally and marvel at how much tougher it has gotten.");
+			outputText("\n\nYour body and skin both thicken noticeably.  You pinch your [skin.type] experimentally and marvel at how much tougher it has gotten.");
 			changes++;
 		}
 		//Increase player's breast size, if they are big FF or smaller
@@ -288,7 +288,7 @@ public class Centaurinum extends Consumable{
 		if (player.lowerBody == LOWER_BODY_TYPE_HOOFED && player.tailType != TAIL_TYPE_GARGOYLE && player.tailType != TAIL_TYPE_HORSE && changes < changeLimit && rand(3) == 0) {
 			//no tail
 			if (player.tailType == 0) {
-				outputText("\n\nThere is a sudden tickling on your ass, and you notice you have sprouted a long shiny horsetail of the same " + player.hairColor + " color as your hair.");
+				outputText("\n\nThere is a sudden tickling on your ass, and you notice you have sprouted a long shiny horsetail of the same [haircolor] color as your hair.");
 			}
 			//if other animal tail
 			if (player.tailType > TAIL_TYPE_HORSE && player.tailType <= TAIL_TYPE_COW) {

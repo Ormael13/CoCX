@@ -1456,7 +1456,7 @@ package classes.Scenes.Places
 			}
 			else if(player.tou < 60)
 			{
-				outputText("and you do quite well.  You jog around for nearly an hour, working up a healthy lather of sweat, then run though an exhaustive regimen of calisthenics.  Even your " + player.legs() + " tingle and burn with exhaustion.");
+				outputText("and you do quite well.  You jog around for nearly an hour, working up a healthy lather of sweat, then run though an exhaustive regimen of calisthenics.  Even your [legs] tingle and burn with exhaustion.");
 			}
 			else if(player.tou < 80)
 			{

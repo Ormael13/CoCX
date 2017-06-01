@@ -34,10 +34,10 @@ package classes.Scenes.Areas.VolcanicCrag
 			clearOutput();
 			if (flags[kFLAGS.MET_BEHEMOTH] <= 0) {
 				outputText("As you're exploring the infernal landscape, you are drawn to the sight of a creature you've never seen before: a muscular male bipedal purple-skinned horned creature with spikes on his back. You guess he is sentient as he's wearing a loincloth. Underneath his loincloth is a large cock and a duo of balls; you estimate his cock to be 18 inches long and 2½ inches thick but it's hard for sure as his cock is flaccid. You estimate his balls to be three inches across. You approach the creature and he says to your surprise, \"<i>Hello there. Not many even dared to approach me. Either it's me or it's the landscape.</i>\"");
-				outputText("\n\nYou introduce yourself and the creature says, \"<i>" + player.short + ", eh? I'm the mighty Behemoth. It's good to see someone like you; I was so lonely. So what do you want?</i>\" He smiles.");
+				outputText("\n\nYou introduce yourself and the creature says, \"<i>[name], eh? I'm the mighty Behemoth. It's good to see someone like you; I was so lonely. So what do you want?</i>\" He smiles.");
 			}
 			else {
-				outputText("As you're exploring the infernal landscape, you spot the familiar purple-skinned creature. The behemoth approaches you with a smile and says, \"<i>Hello again, " + player.short + ". So feeling up for fighting? Or want to have sex?</i>\"");
+				outputText("As you're exploring the infernal landscape, you spot the familiar purple-skinned creature. The behemoth approaches you with a smile and says, \"<i>Hello again, [name]. So feeling up for fighting? Or want to have sex?</i>\"");
 			}
 			flags[kFLAGS.MET_BEHEMOTH]++;
 			behemothMenu();
@@ -277,7 +277,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			var x:int = player.cockThatFits(48);
 			clearOutput();
 			outputText(images.showImage("behemoth-anal-pitch"));
-			outputText("You tell the behemoth that you're going to take him from behind. \"<i>All right, let's get this started,</i>\" he says. " + player.clothedOrNaked("The two of you strip yourselves naked. You toss your " + player.armorName + " into a neat pile. ") + "The behemoth removes his loincloth, revealing his large cock.");
+			outputText("You tell the behemoth that you're going to take him from behind. \"<i>All right, let's get this started,</i>\" he says. " + player.clothedOrNaked("The two of you strip yourselves naked. You toss your [armor] into a neat pile. ") + "The behemoth removes his loincloth, revealing his large cock.");
 			outputText("\n\n\"<i>Bend over,</i>\" you instruct the behemoth with a smirk. He gives you a nod as he gets down into a doggy position.");
 			outputText("\n\nYou give his butt-cheeks a gentle caress" + (player.cor >= 30 ? " followed by a sudden spank which causes him to yelp in surprise": " to assure him that you're going to be gentle.") + ".");
 			outputText("\n\nHe lifts his spiked tail to give you a good look at his entire backside. You spit on your hands and apply the saliva all over your " + player.cockDescript(x) + " to get it well-lubricated.");
@@ -322,7 +322,7 @@ package classes.Scenes.Areas.VolcanicCrag
 			outputText("\n\nEven though his cock is large, you don't feel any sign of discomfort. The behemoth slides his cock back and forth with your [ass] clamping down. ");
 			if (player.hasCock()) outputText("Your " + (player.cocks.length == 1 ? "cock": "cocks") + " springs to full erectness and precum leaks from your " + player.multiCockDescript() + ". ");
 			if (player.hasCock() && player.hasVagina()) outputText("At the same time, ");
-			if (player.hasVagina()) outputText("" + (player.hasCock() ? "femspunk": "Femspunk") + " leaks from your " + player.vaginaDescript() + "."); 
+			if (player.hasVagina()) outputText("" + (player.hasCock() ? "femspunk": "Femspunk") + " leaks from your [vagina].");
 			outputText("\n\n\"<i>I'm going to pace up a bit,</i>\" the behemoth announces. He gradually increases his thrusting pace. With each thrust, you moan in pleasure and enjoy every moment of being fucked. ");
 			if (flags[kFLAGS.BEHEMOTH_ANAL_CATCH] <= 0) outputText("He says, \"<i>I'm sure you've never known about how much a behemoth can cum. In fact, I'm capable of producing a lot of cum, far beyond what a minotaur can produce. Or even that fox-herm in Tel'Adre! Don't let the size of my balls deceive you,</i>\" he says with a chuckle. You recall his balls being three inches in length.");
 			outputText("\n\nIt seems take forever but all good things must come to an end. \"<i>I'm going to cum!</i>\" The behemoth announces. With a cry of pleasure and glee, he unleashes a huge amount of cum into your bowels. His cum surges through your intestines and up to your belly. By the gods, you feel so full! You look down to notice that your belly definitely got swollen. ");
@@ -338,8 +338,8 @@ package classes.Scenes.Areas.VolcanicCrag
 			}
 			if (player.hasCock() && player.hasVagina()) outputText("At the same time, ");
 			if (player.hasVagina()) {
-				if (player.averageVaginalWetness() < 4) outputText("" + (player.hasCock() ? "femspunk": "Femspunk") + " bursts from your " + player.vaginaDescript() + " and seeps down your [legs].");
-				else outputText("" + (player.hasCock() ? "femspunk": "Femspunk") + " gushes from your " + player.vaginaDescript() + " and splashes onto the ground."); 
+				if (player.averageVaginalWetness() < 4) outputText("" + (player.hasCock() ? "femspunk": "Femspunk") + " bursts from your [vagina] and seeps down your [legs].");
+				else outputText("" + (player.hasCock() ? "femspunk": "Femspunk") + " gushes from your [vagina] and splashes onto the ground.");
 			}
 			if (player.gender == 0) outputText("Your entire body rocks from the overwhelming pleasure.");
 			outputText(" You finally recover from your orgasmic high and fall down, exhausted. The behemoth finally slides his cock out of your cum-stuffed [ass] and lays next to you. \"<i>It feels great to have someone to fuck,</i>\" the behemoth says.");
@@ -394,7 +394,7 @@ package classes.Scenes.Areas.VolcanicCrag
 				outputText("Your body tingles with arousal as your " + tongueDescript() + " makes contact with your lips. ");
 				dynStats("lus", 30);
 			}
-			outputText("The behemoth looks at you with a grin and says, \"<i>See something you want, " + player.short + "?</i>\" You give him a nod and smile.");
+			outputText("The behemoth looks at you with a grin and says, \"<i>See something you want, [name]?</i>\" You give him a nod and smile.");
 			outputText("\n\nYou move his loincloth aside to reveal his monster cock. Now that's a " + (silly() ? "dig bick": "big dick") + "! Time for a little foreplay; you stroke his cock and the behemoth lets out a moan. \"<i>I love it when you do this! It gets my dick really nice and hard,</i>\" he says. You give his balls a caress and you swirl your finger around his cockhead. Precum leaks from his cock.");
 			outputText("\n\nSatisfied with the precum leaking, you slowly slide his cock into your mouth, trying to suppress your gag reflex. His cock slides in inch by inch until it reaches the back of your mouth. \"<i>Whoa, ease up, " + player.mf("boy", "girl") + ". I don't want you to choke on my cock. You know you don't have to swallow my entire cock length,</i>\" he says with a smile.");
 			outputText("\n\nYour " + tongueDescript() + " swirls around his cock and you bob your head up and down eagerly; the behemoth lets out a purr and moan happily as you're giving his cock a good sucking.");

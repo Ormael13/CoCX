@@ -20,7 +20,7 @@ package classes.Scenes.Areas.Lake
 			//return to combat menu when finished
 			doNext(game.playerMenu);
 			if (findPerk(PerkLib.Acid) >= 0) outputText("Her body quivering from your flames, the goo-girl ");
-			else outputText("The slime holds its hands up and they morph into a replica of your " + player.weaponName + ".  Happily, she swings at you");
+			else outputText("The slime holds its hands up and they morph into a replica of your [weapon].  Happily, she swings at you");
 			//Determine if dodged!
 			if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
 				if (findPerk(PerkLib.Acid) >= 0) outputText("tries to slap you, but you dodge her attack.");
@@ -52,12 +52,12 @@ package classes.Scenes.Areas.Lake
 			if (damage <= 0) {
 				damage = 0;
 				if (findPerk(PerkLib.Acid) >= 0) {
-					if (rand(player.armorDef + player.tou) < player.armorDef) outputText("tries to slap you, but the acid-bearing slap spatters weakly off your " + player.armorName + ". ");
+					if (rand(player.armorDef + player.tou) < player.armorDef) outputText("tries to slap you, but the acid-bearing slap spatters weakly off your [armor]. ");
 					else outputText("tries to slap you with an acid-loaded hand, but it splatters off you ineffectually. ");
 				}
 				else {
 					//Due to toughness or amor...
-					if (rand(player.armorDef + player.tou) < player.armorDef) outputText(", her attack slapping fruitlessly against your " + player.armorName + ". ");
+					if (rand(player.armorDef + player.tou) < player.armorDef) outputText(", her attack slapping fruitlessly against your [armor]. ");
 					else outputText(", her attack splattering ineffectually against you. ");
 				}
 			}
@@ -67,7 +67,7 @@ package classes.Scenes.Areas.Lake
 					outputText("delivers a painful slap across your cheek.  You gasp when the light stinging becomes a searing burn that seems to get worse as time goes on! ");
 					if (!player.hasStatusEffect(StatusEffects.AcidSlap)) player.createStatusEffect(StatusEffects.AcidSlap, 0, 0, 0, 0);
 				}
-				else outputText(", painfully smacking her gooey limbs against your head.  You shake your " + player.hairDescript() + ", clearing your head of the dazing slap. ");
+				else outputText(", painfully smacking her gooey limbs against your head.  You shake your [hair], clearing your head of the dazing slap. ");
 			}
 			if (damage > 0) {
 				if (lustVuln > 0 && player.armorName == "barely-decent bondage straps") {
@@ -93,7 +93,7 @@ package classes.Scenes.Areas.Lake
 //Throw – 
 		private function gooThrow():void
 		{
-			outputText("The girl reaches into her torso, pulls a large clump of goo out, and chucks it at you like a child throwing mud. The slime splatters on your chest and creeps under your " + player.armorName + ", tickling your skin like fingers dancing across your body. ");
+			outputText("The girl reaches into her torso, pulls a large clump of goo out, and chucks it at you like a child throwing mud. The slime splatters on your chest and creeps under your [armor], tickling your skin like fingers dancing across your body. ");
 			var damage:Number = 1;
 			player.takeDamage(damage, true);
 			game.dynStats("lus", 5 + rand(3) + player.sens / 10);
@@ -151,7 +151,7 @@ package classes.Scenes.Areas.Lake
 			this.a = "the ";
 			this.short = "goo-girl";
 			this.imageName = "googirl";
-			this.long = "The goo-girl has a curious expression on her youthful, shimmering face. Her body is slender and globs of slime regularly drip from her limbs, splattering into the goo puddle pooling beneath her hips. A small, heart-shaped nucleus pulses in her chest with a red glow." + (playerHasBigBoobs ? ("  She has apparently made herself a bit more like you, as her chest appears to be a perfect copy of your " + player.chestDesc() + ".") : "");
+			this.long = "The goo-girl has a curious expression on her youthful, shimmering face. Her body is slender and globs of slime regularly drip from her limbs, splattering into the goo puddle pooling beneath her hips. A small, heart-shaped nucleus pulses in her chest with a red glow." + (playerHasBigBoobs ? ("  She has apparently made herself a bit more like you, as her chest appears to be a perfect copy of your [chest].") : "");
 			// this.long = false;
 			this.createVagina(false, VAGINA_WETNESS_SLAVERING, VAGINA_LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 9001, 0, 0, 0);

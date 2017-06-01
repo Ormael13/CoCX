@@ -31,7 +31,7 @@ package classes.Items.Consumables
 			{
 				if (rand(5) == 0)
 				{
-					outputText("A slight tingle across your scalp draws your attention to your hair.  It seems your " + player.hairColor + " is rapidly gaining a distinctly pink hue, growing in from the roots!\n\n");
+					outputText("A slight tingle across your scalp draws your attention to your hair.  It seems your [haircolor] is rapidly gaining a distinctly pink hue, growing in from the roots!\n\n");
 					player.hairColor = "pink";
 				}
 			}

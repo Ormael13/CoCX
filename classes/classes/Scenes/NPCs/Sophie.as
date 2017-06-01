@@ -52,14 +52,14 @@
 			
 			//Already affected by it
 			if(player.hasStatusEffect(StatusEffects.Luststick)) {
-				outputText("  Blood rushes to " + player.sMultiCockDesc() + " as you grow so hard so fast that it hurts.  ");
+				outputText("  Blood rushes to [eachcock] as you grow so hard so fast that it hurts.  ");
 				game.sophieScene.luststickApplication(2);
 				game.dynStats("lus", (12+player.lib/10));
 				if(player.lust < 70) outputText("The drugged lip-gloss is starting to get to you!\n");
 				else if(player.lust < 80) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n");
-				else if(player.lust < 90) outputText("A trickle of pre-cum leaks from " + player.sMultiCockDesc() + ".  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n");
+				else if(player.lust < 90) outputText("A trickle of pre-cum leaks from [eachcock].  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n");
 				else if(player.lust < 100) outputText(player.SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n");
-				else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your " + player.cockDescript(0) + " and you swoon, pumping your hips lewdly as you submit.\n");
+				else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your [cock] and you swoon, pumping your hips lewdly as you submit.\n");
 			}
 			else {
 				outputText("  Your whole body blushes as your lips tingle with some unnatural sensation.  Her lips were drugged!  Your whole body flushes as arousal begins to course through your veins.  ");
@@ -67,9 +67,9 @@
 				game.dynStats("lus", 8+player.lib/10);
 				if(player.lust < 70) outputText("The drugged lip-gloss is starting to get to you!\n");
 				else if(player.lust < 80) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n");
-				else if(player.lust < 90) outputText("A trickle of pre-cum leaks from " + player.sMultiCockDesc() + ".  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n");
+				else if(player.lust < 90) outputText("A trickle of pre-cum leaks from [eachcock].  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n");
 				else if(player.lust < 100) outputText(player.SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n");
-				else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your " + player.cockDescript(0) + " and you swoon, pumping your hips lewdly as you submit.\n");
+				else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your [cock] and you swoon, pumping your hips lewdly as you submit.\n");
 			}
 		}
 		
@@ -121,7 +121,7 @@
 			//autofails if player inte > 80
 			//Player fails:
 			if(player.inte < 40 || (player.inte < 80 && rand(40) > (player.inte - 40))) {
-				outputText("You moan out loud as your arms move of their own volition.  They reach inside your " + player.armorName + " and stroke " + player.sMultiCockDesc() + ", caress the tip, and continue to fondle you a few moments.");
+				outputText("You moan out loud as your arms move of their own volition.  They reach inside your [armor] and stroke [eachcock], caress the tip, and continue to fondle you a few moments.");
 				outputText("Even after regaining control of your limbs, you're left far more turned on by the ordeal.");
 				game.dynStats("lus", (15 + player.cor/20 + player.lib/20));
 			}
@@ -163,7 +163,7 @@
 				outputText("'s attack.\n");
 				return;
 			}
-			outputText("Her leg lashes forwards, lightning-quick, and tears bloody gashes into your " + player.skinDesc + " with her razor-sharp talons! ");
+			outputText("Her leg lashes forwards, lightning-quick, and tears bloody gashes into your [skin.type] with her razor-sharp talons! ");
 			//Determine damage - str modified by enemy toughness!
 			damage = int((str + weaponAttack) - Math.random()*(player.tou) - player.armorDef);
 			if(damage < 0) damage = 0;

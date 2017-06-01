@@ -106,7 +106,7 @@ package classes.Scenes.Areas.Swamp
 			if (player.gender == 0) {
 				spriteSelect(74);
 				clearOutput();
-				outputText("The raven-haired spider-guy tears off your " + player.armorName + ", and disgusted by what he finds, he kicks you in the head, knocking you out.");
+				outputText("The raven-haired spider-guy tears off your [armor], and disgusted by what he finds, he kicks you in the head, knocking you out.");
 				player.HP = 1;
 				cleanupAfterCombat();
 				return;
@@ -129,7 +129,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("  With a wide smile on your face, you grab a handful of his pale butt-cheek and squeeze your fingers into the soft flesh.  It spreads his dainty derriere just wide enough for you to see the puckered star of his rectum.  " + SMultiCockDesc() + " ");
 			if (player.lust < (player.maxLust() * 0.7)) outputText("hardens to full size");
 			else outputText("bobs happily");
-			outputText(" against your " + player.armorName + ", eager to take the dark hole.\n\n");
+			outputText(" against your [armor], eager to take the dark hole.\n\n");
 
 			outputText("The arachnid finally realizes what you intend to do, and he whimpers plaintively, \"<i>P-please... don't put it there.  ");
 			if (rand(3) == 0) outputText("I-I've never had anything in there...");
@@ -185,23 +185,23 @@ package classes.Scenes.Areas.Swamp
 			outputText("You push the ");
 			if (monster.lust >= monster.eMaxLust()) outputText("masturbating");
 			else outputText("injured");
-			outputText(" spider-morph over onto his back and laugh at his relatively tiny dick.  It's no wonder he jumped you wanting sex - the girls probably took one look at the unimpressive member and took off running.  You take off your " + player.armorName + " and let " + sMultiCockDesc() + " flop free.  ");
+			outputText(" spider-morph over onto his back and laugh at his relatively tiny dick.  It's no wonder he jumped you wanting sex - the girls probably took one look at the unimpressive member and took off running.  You take off your [armor] and let " + sMultiCockDesc() + " flop free.  ");
 			if (player.cockTotal() == 1) outputText("Dropping it squarely ");
 			else outputText("Dropping the largest ");
 			outputText("atop his miniature cock, you virtually bury it in a superior male's heavy penile flesh.  ");
 			if (monster.lust >= monster.eMaxLust()) outputText("He pants in surprise and pleasure, clearly enjoying the weighty shaft rubbing against his drooping dick-skin");
 			else outputText("He gasps in surprise and slowly growing pleasure, clearly enjoying the weighty shaft rubbing against his drooping dick-skin");
-			outputText(".  You sway your " + hipDescript() + " to drag your " + cockDescript(0) + " all over his body, and the defeated boy's pale white skin slowly colors pink with a full-body blush.\n\n");
+			outputText(".  You sway your " + hipDescript() + " to drag your [cock] all over his body, and the defeated boy's pale white skin slowly colors pink with a full-body blush.\n\n");
 
 			outputText("Trapped below your sizable weight, the turgid spider-shaft slowly leaks pre-cum from its tiny cum-slit.  The added moisture proves to be just the lubrication you needed, and you begin to sway your body back and forth, letting your incredible endowment rub over the spider's balls, flat chest, and fat little pecker.  Each time you let it get a little closer to his face, but as his pre-cum lubricates more and more of your mighty member, you stop measuring your strokes so modestly.\n\n");
 
-			outputText("You hump forward and smash your " + player.cockHead() + " against the spider-boy's face, popping a bubble of pre-cum on his lips before you pull back far enough to reveal the soaked foreskin that hides his cock-tip.  He's probably filled the entirety of that little flesh-balloon with his leavings, and as you slide back up you feel more of his pre-cum bursting out, confirming your suspicions.  A pair of hard, chitinous arms encircle your " + cockDescript(0) + " in a tight hug, squeezing into a slippery pleasure-vice for your penis.\n\n");
+			outputText("You hump forward and smash your [cockhead] against the spider-boy's face, popping a bubble of pre-cum on his lips before you pull back far enough to reveal the soaked foreskin that hides his cock-tip.  He's probably filled the entirety of that little flesh-balloon with his leavings, and as you slide back up you feel more of his pre-cum bursting out, confirming your suspicions.  A pair of hard, chitinous arms encircle your [cock] in a tight hug, squeezing into a slippery pleasure-vice for your penis.\n\n");
 
 			outputText("The enthusiastic spider-bitch looks up at you with a twinkle in his purple eyes, and the next time you push forward, he bites your cock-tip.  You scream in surprise and pain, throwing your head back and howling from the abuse of your most tender part.  Before you can finish your scream, the pain vanishes, replaced by a heat and... need - a warm command that rolls through your body to your brain and balls, ordering them to cum over and over until every drop of spooge has been spilled.  With newfound desire coursing through you, you glare down at the bitch.  He rapidly retracts his fangs and gives you a long, apologetic lick that somehow feels almost as good as fucking a tight pussy.\n\n");
 
 			outputText("Driven by the unquenchable desire coursing through your cock, you unleash a series of rapid-fire thrusts through the sneaky spider's arms, smashing his cock so hard into his belly that you wonder if he can even keep it up under all that pressure.  His whole body is little more than your personal onahole, and you fuck it like a disposable object, not caring in the slightest if you damage him.  Every time you smear another bubble of pre-cum on the spider's face he gives a gentle kiss, lick, or even a cruel, cum-slurping suckle.\n\n");
 
-			outputText("Without the slightest shred of decency, you keep humping the spider-boy's body like an animal.  No matter how hard you grind your " + cockDescript(0) + " against him or how forcefully you slide your girthy penis through the ring he's made from his arms, it isn't enough for you.  You let go of him completely and wrap both your hands around your own swollen mass, completely giving in to the artificial desire.  Immediately, your hands start to pump up and down, providing a cacophony of pleasure that makes your eyes cross and your tongue hang out.\n\n");
+			outputText("Without the slightest shred of decency, you keep humping the spider-boy's body like an animal.  No matter how hard you grind your [cock] against him or how forcefully you slide your girthy penis through the ring he's made from his arms, it isn't enough for you.  You let go of him completely and wrap both your hands around your own swollen mass, completely giving in to the artificial desire.  Immediately, your hands start to pump up and down, providing a cacophony of pleasure that makes your eyes cross and your tongue hang out.\n\n");
 
 			outputText("A spasm of pleasure sparks in your loins, slowly building into a knot of warm, liquid heat, and you know it's finally time to claim the release you so desperately crave.  You push as far forward as you can, grinding the slippery tip of your cock's cum-slit into the spider-boy's face while your urethra bulges wide at the base, distended by the building cum-bubble slowly pushing through your huge prick.  Climax arrives, and as your body expels the gush of creamy goo directly into the spider-boy's face, another two deliveries of spunk push their way up, squeezing the boy-slut's tiny dick even tighter between the two of you.  He loses it and squirts, adding his own lubricants to the mess while you paint his face a whorish, glistening white.  You shake from stem to stern, body clenching while you pump out the last of your spooge onto his well-bukkake'd face.");
 			if (player.cumQ() >= 750) {
@@ -222,10 +222,10 @@ package classes.Scenes.Areas.Swamp
 			//*Summary: Throw him on his back and mount up on that throbbing, ebon piece of uncut spidercock as he looks to you meekly, panting, needing something to tend to his foreskinned dick so badly...
 			clearOutput();
 			spriteSelect(74);
-			outputText("You hastily remove your " + player.armorName + " to bare yourself in preparation for the coming pleasure.  Throughout it all, the spider-boy doesn't react.  He's too busy ");
+			outputText("You hastily remove your [armor] to bare yourself in preparation for the coming pleasure.  Throughout it all, the spider-boy doesn't react.  He's too busy ");
 			if (monster.HP < 1) outputText("trying to stay upright");
 			else outputText("trying to drown himself in pleasure");
-			outputText(" to summon a response.  How irritating.  You push him over with your " + player.foot() + " to roll him onto his back, giving you the access you need to get at his ");
+			outputText(" to summon a response.  How irritating.  You push him over with your [foot] to roll him onto his back, giving you the access you need to get at his ");
 			if (monster.HP < 1) outputText("dripping dick");
 			else outputText("gradually stiffening dick");
 			outputText(".  Gently exploring his body, you run your hands over his chest, circle his tight, stiff nipples, and slide all ten fingers down his smooth skin toward his loins.  The effect of your touches soon becomes apparent, ");
@@ -258,7 +258,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("It takes some time to regain your strength with all the orgasmic aftershocks rolling through your " + vaginaDescript() + ".  Once you've mastered yourself, you climb off your conquest and get dressed, ");
 			if (player.cor < 33) outputText("taking the time to clean the dripping spunk from your body.");
 			else if (player.cor < 66) outputText("casually wiping away the worst of the dripping spunk.");
-			else outputText("paying no heed to the thick flows of spunk that drip down your " + player.legs() + ".");
+			else outputText("paying no heed to the thick flows of spunk that drip down your [legs].");
 			player.slimeFeed();
 			//Pregnancy Goes Here
 			player.knockUp(PregnancyStore.PREGNANCY_SPIDER, PregnancyStore.INCUBATION_SPIDER, 151);
@@ -336,8 +336,8 @@ package classes.Scenes.Areas.Swamp
 			outputText("You begin to mumble, \"<i>fuckmefuckmefuckmefuckme,</i>\" like some kind of religious mantra.\n\n");
 
 			outputText("The spider smiles and groans, \"<i>Oh fuck yeah, you little bitch, I'm gonna... gonna... hnnnggg.</i>\"  Hot blooms of spunk splatter through your rectum, soaking your guts and washing over your prostate.  The explosion of perfect enjoyment locks every muscle in your body at once, forcing your sphincter to squeeze down on the still-pulsing penis.  ");
-			if (player.cumQ() < 500) outputText(SMultiCockDesc() + " bounces on your belly, leaking one last drop from its tip, utterly draining every drop from your " + ballsDescriptLight() + ".");
-			else outputText(SMultiCockDesc() + " explodes again, dumping every remaining drop from your " + ballsDescriptLight() + " directly onto your " + chestDesc() + " and belly.");
+			if (player.cumQ() < 500) outputText(SMultiCockDesc() + " bounces on your belly, leaking one last drop from its tip, utterly draining every drop from your [balls].");
+			else outputText(SMultiCockDesc() + " explodes again, dumping every remaining drop from your [balls] directly onto your " + chestDesc() + " and belly.");
 			outputText("  Your eyelids flutter and droop, your tongue lolls out of your mouth, and you start drooling all over yourself.  Zombie-like, your body keeps shaking, locked in orgasm, even after the spider dumps you in the dirt and walks away.");
 			player.slimeFeed();
 			player.orgasm();
@@ -353,7 +353,7 @@ package classes.Scenes.Areas.Swamp
 			outputText("As your ");
 			if (player.HP < 1) outputText("wounds overwhelm");
 			else outputText("lust overwhelms");
-			outputText(" you, your " + player.legs() + " grow shaky, then give out entirely.  You flop down on your back");
+			outputText(" you, your [legs] grow shaky, then give out entirely.  You flop down on your back");
 			if (player.lust >= player.maxLust()) outputText(", caressing yourself with reckless abandon while praying the sexy spider-boy will come violate you with his thick-skinned prick.");
 			else outputText(", clearly too injured and fatigued by the battle to make more than a few token movements.");
 			outputText("  He pounces you, lightning fast, quick enough that you don't even react until he's on top of you.  Chitin-clad legs brush your " + hipDescript() + ", the hard knees sinking deep into the swampy loam.  Grinning happily, the spider-boy leans over you and sucks a " + nippleDescript(0) + " ");

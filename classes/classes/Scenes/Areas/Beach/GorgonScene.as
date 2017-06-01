@@ -24,7 +24,7 @@ public function gorgonEncounter():void {
 		if(player.statusEffectv2(StatusEffects.Naga) == 0) {
 			player.changeStatusValue(StatusEffects.Naga,2,1);
 			outputText("You wander into the beach, noting how good the sand feels on your underbelly compared to rocks and dirt. You are wondering to yourself if maybe it wouldn't be a bad idea to come out here more often when you spot something moving a little farther ahead of you.\n\n");
-			outputText("As you get closer, you see that it is the gorgon that inhabits this dry beach. You stop in your tracks, wondering if it isn't too late to turn and run, when she turns her head and looks straight at you. You slowly tense your hands, ready to raise your " + player.weaponName + " as the gorgon eyes your new snake-like body hungrily. Just before you can ready yourself, the gorgon opens her mouth. But instead of hissing, you find that you can understand her speech. \"<i>Your new body looks so much better than it did before,</i>\" she says, \"<i>It looks far more... delectable now.</i>\"\n\n");
+			outputText("As you get closer, you see that it is the gorgon that inhabits this dry beach. You stop in your tracks, wondering if it isn't too late to turn and run, when she turns her head and looks straight at you. You slowly tense your hands, ready to raise your [weapon] as the gorgon eyes your new snake-like body hungrily. Just before you can ready yourself, the gorgon opens her mouth. But instead of hissing, you find that you can understand her speech. \"<i>Your new body looks so much better than it did before,</i>\" she says, \"<i>It looks far more... delectable now.</i>\"\n\n");
 		//	if (flags[kFLAGS.CODEX_ENTRY_GORGONS] <= 0) {
 		//		flags[kFLAGS.CODEX_ENTRY_GORGONS] = 1;
 		//		outputText("<b>New codex entry unlocked: Gorgons!</b>\n\n")
@@ -50,9 +50,9 @@ public function gorgonEncounter():void {
 		if(player.gender == 1 || (player.gender == 3 && rand(2) == 0)) {
 			//[Player cock is too big]
 			if(player.cockArea(0) > 35) {
-				outputText("The kiss continues as both of your bodies rub together sensually, your tails continuing to wrap around one another. There is a pulsing in your " + cockDescript(0) + " as it starts to grow hard against the gorgon's soft belly. Feeling this, the gorgon gently pulls away, slowly letting your tongue out of her mouth as she does so. Her hands make their way over your shoulders, down your abs, and stop at your " + multiCockDescriptLight() +".\n\n"); 
-				outputText("\"<i>You're quite the big boy, aren't you?</i>\" she says as she wraps both of her hands around your now throbbing " + cockDescript(0) + ". She starts to slide her hands up and down your length. Sticking out her tongue, she wraps it around the tip and licks at the pre that is starting to leak out.\n\n");
-				outputText("A hiss of pleasure escapes your lips as the gorgon strokes and licks at your " + cockDescript(0) + ", her talented fingers and tongue bringing you into a further state of arousal. The gorgon stops her caressing and brings your " + cockDescript(0) + " to her chest, pressing her breasts around it. She slowly starts to slide her body up and down your shaft, using her tongue to bring some of your pre and lubricate her body. Once she is satisfied with her body's slickness, she quickens her pace.\n\n");
+				outputText("The kiss continues as both of your bodies rub together sensually, your tails continuing to wrap around one another. There is a pulsing in your [cock] as it starts to grow hard against the gorgon's soft belly. Feeling this, the gorgon gently pulls away, slowly letting your tongue out of her mouth as she does so. Her hands make their way over your shoulders, down your abs, and stop at your [cocks].\n\n"); 
+				outputText("\"<i>You're quite the big boy, aren't you?</i>\" she says as she wraps both of her hands around your now throbbing [cock]. She starts to slide her hands up and down your length. Sticking out her tongue, she wraps it around the tip and licks at the pre that is starting to leak out.\n\n");
+				outputText("A hiss of pleasure escapes your lips as the gorgon strokes and licks at your [cock], her talented fingers and tongue bringing you into a further state of arousal. The gorgon stops her caressing and brings your [cock] to her chest, pressing her breasts around it. She slowly starts to slide her body up and down your shaft, using her tongue to bring some of your pre and lubricate her body. Once she is satisfied with her body's slickness, she quickens her pace.\n\n");
 				outputText("You moan in pleasure as the gorgon takes the tip of your member into her mouth and starts to suck. You can feel her deft tongue licking every inch of your cock head.\n\n");
 				outputText("At your limit, you let out a yell as you cum into her mouth. ");
 				//[lots of jizz]
@@ -64,17 +64,17 @@ public function gorgonEncounter():void {
 			}
 			//[Cock isn't too big]
 			else {
-				outputText("The kiss continues and both of your bodies rub together sensually, your tails continuing to wrap around one another. There is a pulsing in your " + multiCockDescriptLight() + " as ");
+				outputText("The kiss continues and both of your bodies rub together sensually, your tails continuing to wrap around one another. There is a pulsing in your [cocks] as ");
 				if(player.cockTotal() == 1) outputText("it starts ");
 				else outputText("they start ");
-				outputText("to grow hard against the gorgon's soft belly. Feeling this, the gorgon gently pulls away, slowly letting your tongue out of her mouth as she does so. Her hands make their way over your shoulders, down your abs, and stop at your " + multiCockDescriptLight() + ".\n\n");
+				outputText("to grow hard against the gorgon's soft belly. Feeling this, the gorgon gently pulls away, slowly letting your tongue out of her mouth as she does so. Her hands make their way over your shoulders, down your abs, and stop at your [cocks].\n\n");
 				//[player has one dick]
-				if(player.totalCocks() == 1) outputText("Gently she starts to stroke the length of your " + cockDescript(0) + " with one hand while circling the tip with the other. ");
+				if(player.totalCocks() == 1) outputText("Gently she starts to stroke the length of your [cock] with one hand while circling the tip with the other. ");
 				//[player has two dicks]
 				if(player.totalCocks() == 2) outputText("She takes one in each of her hands and gently strokes them up and down. Every few seconds she stops at the tip to rub her palms over them. ");
 				//[player has three or more dicks]
 				if(player.totalCocks() >= 3) outputText("She takes one in each hand, stroking them slowly and making sure to pay attention to the tip. Every so often she switches to a different dick to make sure that each and every one of your throbbing cocks has some love given to them. ");
-				outputText("A hiss of pleasure escapes your lips as the gorgon strokes your " + multiCockDescriptLight() + ", her talented fingers bringing you further into a state of arousal. She stops her caress and brings her hand to a scaly covering at her crotch, spreading it wide to reveal her soft pussy.\n\n");
+				outputText("A hiss of pleasure escapes your lips as the gorgon strokes your [cocks], her talented fingers bringing you further into a state of arousal. She stops her caress and brings her hand to a scaly covering at her crotch, spreading it wide to reveal her soft pussy.\n\n");
 				
 				//[player has one dick] 
 				if(player.totalCocks() == 1) outputText("She carefully lines it up with your member and starts to tease the tip before gently inserting the first few inches. ");

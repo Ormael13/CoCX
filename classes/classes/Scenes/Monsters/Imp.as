@@ -50,11 +50,11 @@
 			if (player.lust >= (player.maxLust() * 0.6)) outputText("Images of yourself fellating and fucking the imp assault your mind, unnaturally arousing you.  ");
 			if (player.cocks.length > 0) {
 				if (player.lust >= (player.maxLust() * 0.6))
-					outputText("You feel your " + player.multiCockDescriptLight() + " dribble pre-cum.");
+					outputText("You feel your [cocks] dribble pre-cum.");
 				else if (player.lust >= (player.maxLust() * 0.3) && player.cocks.length == 1)
-					outputText("Your " + player.cockDescript(0) + " hardens, distracting you further.");
+					outputText("Your [cock] hardens, distracting you further.");
 				else if (player.lust >= (player.maxLust() * 0.3) && player.cocks.length > 1)
-					outputText("Your " + player.multiCockDescriptLight() + " harden uncomfortably.");
+					outputText("Your [cocks] harden uncomfortably.");
 				if (player.hasVagina()) outputText("  ");
 			}
 			if (player.lust >= (player.maxLust() * 0.6) && player.hasVagina()) {
@@ -91,11 +91,11 @@
 			if (player.lust >= (player.maxLust() * 0.6)) outputText("Images of yourself fellating and fucking the imp assault your mind, unnaturally arousing you.  ");
 			if (player.cocks.length > 0) {
 				if (player.lust >= (player.maxLust() * 0.6))
-					outputText("You feel your " + player.multiCockDescriptLight() + " dribble pre-cum.");
+					outputText("You feel your [cocks] dribble pre-cum.");
 				else if (player.lust >= (player.maxLust() * 0.3) && player.cocks.length == 1)
-					outputText("Your " + player.cockDescript(0) + " hardens, distracting you further.");
+					outputText("Your [cock] hardens, distracting you further.");
 				else if (player.lust >= (player.maxLust() * 0.3) && player.cocks.length > 1)
-					outputText("Your " + player.multiCockDescriptLight() + " harden uncomfortably.");
+					outputText("Your [cocks] harden uncomfortably.");
 				if (player.hasVagina()) outputText("  ");
 			}
 			if (player.lust >= (player.maxLust() * 0.6) && player.hasVagina()) {

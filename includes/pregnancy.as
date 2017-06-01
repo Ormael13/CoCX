@@ -516,14 +516,14 @@ public function updatePregnancy():Boolean {
 					outputText("\nYou're mildly annoyed at your squirming tummy, it seems your children have taken a liking to scurrying about inside you. The other mildly annoying thing, is Joy's attachment to your huge pregnant belly. It would seem that the bimbo mouse is as eager to see the children as the children inside you are eager to come out and play.\n");
 					outputText("\n\"<i>Like, [name], when are the babies gonna come out and play? I wanna hold my cute little squeakies already!</i>\" Joy pouts, stamping her foot in irritation at the wait for you to give birth.\n");
 					outputText("\nYou tell her that she'll just have to wait, you want them out too. It's getting heavy.\n");
-					outputText("\nJoy pouts, \"<i>But I want them to come out now!</i>\" She whines, then she heaves a heavy sigh. \"<i>Alright, I guess it'll be, like, worth the wait...</i>\" She looks at your " + player.breastDescript(0) + " and develops a sly expression. \"<i>Like... some nice creamy milk would make me feel better...</i>\" She wheedles.\n");
+					outputText("\nJoy pouts, \"<i>But I want them to come out now!</i>\" She whines, then she heaves a heavy sigh. \"<i>Alright, I guess it'll be, like, worth the wait...</i>\" She looks at your [breasts] and develops a sly expression. \"<i>Like... some nice creamy milk would make me feel better...</i>\" She wheedles.\n");
 					outputText("\n");
 					if (player.findPerk(PerkLib.Feeder) >= 0) outputText("You grin at Joy's idea, but you can't simply mash her against your breasts and nurse her without some teasing first.");
 					outputText("You tell Joy that she can have some, but she has to ask nicely, like a good girl.\n");
-					outputText("\nThe bimbo mouse presses her hands together and gives you a winning smile, eyes wide with an uncharacteristic innocence. \"<i>Like, [name], will you please let your little Joyjoy suck on your " + player.breastDescript(0) + " and drink all the yummy mommy-milk she can hold? Puh-lease?</i>\" She begs.\n");
+					outputText("\nThe bimbo mouse presses her hands together and gives you a winning smile, eyes wide with an uncharacteristic innocence. \"<i>Like, [name], will you please let your little Joyjoy suck on your [breasts] and drink all the yummy mommy-milk she can hold? Puh-lease?</i>\" She begs.\n");
 					outputText("\nYou expose your breasts and open your arms in invitation.\n");
 					outputText("\nJoy squeaks in glee and rushes into your embrace, rubbing her " + (jojoScene.pregnancy.isPregnant ? "swollen " : "") + "belly against your baby-filled stomach and nuzzling your breastdescript excitedly. She wastes no time in slurping on your nipplesdescript until they are painfully erect, then sucks the closest one into her mouth and starts suckling as if her life depends on it.\n");
-					outputText("\nBy the time Joy's had her fill, your babies have calmed down a little. It seems like being close to Joy might have actually helped calm the little mice down. Joy yawns and nuzzles your " + player.breastDescript(0) + ".\n");
+					outputText("\nBy the time Joy's had her fill, your babies have calmed down a little. It seems like being close to Joy might have actually helped calm the little mice down. Joy yawns and nuzzles your [breasts].\n");
 					outputText("\n\"<i>Mmm... Sooo good.</i>\" Joy murmurs, then burps softly. \"<i>I feel, like, so sleepy now...</i>\" She mumbles, yawning hugely, then reluctantly she pushes herself off of you and starts stumbling away in the direction of her bed" + (player.lactationQ() >= 750 || player.findPerk(PerkLib.Feeder) >= 0 ? ", her belly audibly sloshing from all the milk you let her stuff herself with" : "") + ".\n");
 					outputText("\nYou sigh, glad to finally have a moment to rest.\n");
 				}
@@ -638,7 +638,7 @@ public function updatePregnancy():Boolean {
 		//Shark Pregnancy!
 		if (player.pregnancyType == PregnancyStore.PREGNANCY_IZMA) {
 			if(player.pregnancyIncubation == 275) {
-				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>You wake up feeling kind of nauseous.  Izma insists that you stay in bed and won't hear a word otherwise, tending to you in your sickened state.  When you finally feel better, she helps you up.  \"<i>You know, " + player.short + "... I think you might be pregnant.</i>\" Izma says, sounding very pleased at the idea. You have to admit, you do seem to have gained some weight...</b>\n");
+				if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00238] == 1) outputText("\n<b>You wake up feeling kind of nauseous.  Izma insists that you stay in bed and won't hear a word otherwise, tending to you in your sickened state.  When you finally feel better, she helps you up.  \"<i>You know, [name]... I think you might be pregnant.</i>\" Izma says, sounding very pleased at the idea. You have to admit, you do seem to have gained some weight...</b>\n");
 				else outputText("\n<b>You wake up feeling bloated, and your belly is actually looking a little puffy. At the same time, though, you have the oddest cravings... you could really go for some fish.</b>\n");
 				displayedUpdate = true;
 			}
@@ -1263,7 +1263,7 @@ public function updatePregnancy():Boolean {
 				//[balls:
 				else if(player.balls > 0) outputText("  Slathered in hallucinogenic frog slime, your balls tingle, sending warm pulses of pleasure all the way up into your brain.");
 				//[cock:
-				else if(player.hasCock()) outputText("  Splashing against the underside of your " + player.multiCockDescriptLight() + ", the slime leaves a warm, oozy sensation that makes you just want to rub [eachCock] over and over and over again.");
+				else if(player.hasCock()) outputText("  Splashing against the underside of your [cocks], the slime leaves a warm, oozy sensation that makes you just want to rub [eachCock] over and over and over again.");
 				//genderless: 
 				else outputText("  Your asshole begins twitching, aching for something to push through it over and over again.");
 				outputText("  Seated in your own slime, you moan softly, unable to keep your hands off yourself.");
@@ -1318,7 +1318,7 @@ public function updatePregnancy():Boolean {
 				displayedUpdate = true;				
 			}
 			if(player.buttPregnancyIncubation == 120) {
- 				outputText("\n<b>Your belly is bulging from the size of the eggs growing inside you and gurgling just about any time you walk.  Green goo runs down your " + player.legs() + " frequently, drooling out of your pregnant asshole.</b>\n");
+ 				outputText("\n<b>Your belly is bulging from the size of the eggs growing inside you and gurgling just about any time you walk.  Green goo runs down your [legs] frequently, drooling out of your pregnant asshole.</b>\n");
 				displayedUpdate = true;
 			}
 			if(player.buttPregnancyIncubation == 72) {
@@ -1338,13 +1338,13 @@ public function updatePregnancy():Boolean {
 				if(player.cockTotal() > 0) outputText("The aroma seems to permeate your very being, slowly congregating in your ");
 				if(player.cockTotal() == 1) {
 					outputText(cockDescript(0));
-					if(player.horseCocks() == 1) outputText(", each inhalation making it bigger, harder, and firmer.  You suck in huge lungfuls of air, until your " + cockDescript(0) + " is twitching and dripping, the flare swollen and purple.  ");
-					if(player.dogCocks() == 1) outputText(", each inhalation making it thicker, harder, and firmer.  You suck in huge lungfuls of air, desperate for more, until your " + cockDescript(0) + " is twitching and dripping, its knot swollen to the max.  ");
-					if(player.normalCocks() == 1) outputText(", each inhalation making it bigger, harder, and firmer.  You suck in huge lungfuls of air, until your " + cockDescript(0) + " is twitching and dripping, the head swollen and purple.  ");
+					if(player.horseCocks() == 1) outputText(", each inhalation making it bigger, harder, and firmer.  You suck in huge lungfuls of air, until your [cock] is twitching and dripping, the flare swollen and purple.  ");
+					if(player.dogCocks() == 1) outputText(", each inhalation making it thicker, harder, and firmer.  You suck in huge lungfuls of air, desperate for more, until your [cock] is twitching and dripping, its knot swollen to the max.  ");
+					if(player.normalCocks() == 1) outputText(", each inhalation making it bigger, harder, and firmer.  You suck in huge lungfuls of air, until your [cock] is twitching and dripping, the head swollen and purple.  ");
 					//FAILSAFE FOR NEW COCKS
-					if(player.normalCocks() == 0 && player.dogCocks() == 0 && player.horseCocks() == 0) outputText(", each inhalation making it bigger, harder, and firmer.  You suck in huge lungfuls of air until your " + cockDescript(0) + " is twitching and dripping.  ");
+					if(player.normalCocks() == 0 && player.dogCocks() == 0 && player.horseCocks() == 0) outputText(", each inhalation making it bigger, harder, and firmer.  You suck in huge lungfuls of air until your [cock] is twitching and dripping.  ");
 				}
-				if(player.cockTotal() > 1) outputText("groin.  Your " + player.multiCockDescriptLight() + " fill and grow with every lungful of the stuff you breathe in.  You suck in great lungfuls of the tainted air, desperate for more, your cocks twitching and dripping with need.  ");
+				if(player.cockTotal() > 1) outputText("groin.  Your [cocks] fill and grow with every lungful of the stuff you breathe in.  You suck in great lungfuls of the tainted air, desperate for more, your cocks twitching and dripping with need.  ");
 				outputText("You smile knowing you couldn't stop from masturbating if you wanted to.\n");
 				dynStats("int", -.5, "lus", 500);
 				displayedUpdate = true;
@@ -1554,7 +1554,7 @@ public function updatePregnancy():Boolean {
 			outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ");
 			player.createVagina();
 		}
-		outputText("A dangerous rumble comes from your womb, signaling that it's time to birth your body's cargo at last.  Your " + player.legs() + " wobble unsteadily as your strength ebbs with every gush that erupts  from your now-broken water until you collapse on your " + buttDescript() + ", grunting and groaning.  At first it goes slow – there's just a few small contractions that are more strange than anything else, rippling down your " + vaginaDescript(0) + " and squirting out more of your pregnancy's fluid.  All too soon the tempo kicks up, and you feel something starting to stretch you wider and wider.\n\n");
+		outputText("A dangerous rumble comes from your womb, signaling that it's time to birth your body's cargo at last.  Your [legs] wobble unsteadily as your strength ebbs with every gush that erupts  from your now-broken water until you collapse on your " + buttDescript() + ", grunting and groaning.  At first it goes slow – there's just a few small contractions that are more strange than anything else, rippling down your " + vaginaDescript(0) + " and squirting out more of your pregnancy's fluid.  All too soon the tempo kicks up, and you feel something starting to stretch you wider and wider.\n\n");
 		
 		outputText("You heave and push, instinctively driven to flex muscles you didn't even know you had to speed the super human labor you've entered into.  ");
 		if(player.vaginalCapacity() < 60) outputText("It hurts a little as your cervix starts to stretch wide");
@@ -1586,7 +1586,7 @@ public function updatePregnancy():Boolean {
 			outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ");
 			player.createVagina();
 		}
-		outputText("Your " + player.armorName + " feels damp around the groin and you reach down to check the area.  The  " + vaginaDescript(0) + " you feel is dilated and slick with unusual wetness; your water must have broken!\n\n");
+		outputText("Your [armor] feels damp around the groin and you reach down to check the area.  The  " + vaginaDescript(0) + " you feel is dilated and slick with unusual wetness; your water must have broken!\n\n");
 		
 		outputText("Hurriedly you strip off your gear and sit down with your back against a rock.  Focusing yourself, you attempt to prepare for labor; you try to remember your recent partners and worry about what kind of monstrous infant you might have to force out of your " + vaginaDescript(0) + ".  The first contraction comes and you push as hard as you can, to be rewarded with the feeling of something sliding out between your labia.  You attempt a few more pushes but nothing further seems forthcoming; curious, you look down at your crotch only to discover a blue stalk sticking proudly out of your vagina!\n\n");
 		
@@ -1621,7 +1621,7 @@ public function updatePregnancy():Boolean {
 			else outputText("  The tentacles curl inwards, rubbing on the head of your new blue pecker");
 			player.createCock((4+rand(3)),1.2);
 			player.cocks[player.cockTotal()-1].cockType = CockTypesEnum.ANEMONE;
-			outputText(" and you quickly become fully erect from the aphrodisiac they inject.  Over and over the tentacles caress " + player.sMultiCockDesc() + " sensually, leaving behind a tingling trail of vibrant pleasure");
+			outputText(" and you quickly become fully erect from the aphrodisiac they inject.  Over and over the tentacles caress [eachcock] sensually, leaving behind a tingling trail of vibrant pleasure");
 			//[(if no dick1 and no balls)
 			if(player.totalCocks() == 1 && player.balls == 0) outputText("; you feel a pressure build below the shaft, near your asshole");
 			outputText(".  As the venom and the rubbing work you to the edge of climax, your muscles clench and a ");
@@ -1633,7 +1633,7 @@ public function updatePregnancy():Boolean {
 			if(player.biggestTitSize() >= 1) outputText(allBreastsDescript() + " and ");
 			outputText("stomach");
 			//[(dick1 exists)
-			if(player.cockTotal() > 1) outputText(", followed in short order by white squirts from " + player.sMultiCockDesc() + " remaining");
+			if(player.cockTotal() > 1) outputText(", followed in short order by white squirts from [eachcock] remaining");
 			outputText(".  Your " + vaginaDescript(0) + " quivers and pulses as well, adding ");
 			if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLICK) outputText("a trickle");
 			else if(player.vaginas[0].vaginalWetness < VAGINA_WETNESS_SLAVERING) outputText("a squirt");
@@ -1650,7 +1650,7 @@ public function updatePregnancy():Boolean {
 						
 			//OLD TXToutputText("The anemone writhes and slips out of your pain-wracked grip, leaving your hands tingling.  As you lie there, stunned, it begins to inch back into your " + vaginaDescript(0)+ ".  As the tentacled crown brushes past your lips a venomous heat fills your crotch - you feel the thing shift and flatten itself against your insides, then a pinch on your vaginal walls where the little anemone was pressing on them.  This can't be good.\n\n", false);
 
-			outputText("\n\nPush as you might, you can't get it to peek back out even the slightest bit.  What's worse, the heat isn't subsiding, as the tentacles are now lodged inside your pussy!  Prodding and pulling at your " + vaginaDescript(0) + " is only worsening the effect; " + player.sMultiCockDesc() + " and your clitoris harden as you attempt to retrieve your invader.  Your probes get weaker and weaker as your vagina spasms to each stroke of your insides; each time you touch the creature, the sensation is being transmitted right back to your nerves.  Eventually you push yourself to accidental orgasm; your " + vaginaDescript(0) + " quivers around your fingers and your " + player.multiCockDescriptLight() + " does the best ejaculation it can manage with hardly any warmup time and no direct stimulation.  Even after the orgasm ends, the tentacles continue to torment your groin.  <b>You are VERY horny with this thing inside you... though you can't reach it, maybe there's a way to crowd it out?</b>\n\n");
+			outputText("\n\nPush as you might, you can't get it to peek back out even the slightest bit.  What's worse, the heat isn't subsiding, as the tentacles are now lodged inside your pussy!  Prodding and pulling at your " + vaginaDescript(0) + " is only worsening the effect; [eachcock] and your clitoris harden as you attempt to retrieve your invader.  Your probes get weaker and weaker as your vagina spasms to each stroke of your insides; each time you touch the creature, the sensation is being transmitted right back to your nerves.  Eventually you push yourself to accidental orgasm; your " + vaginaDescript(0) + " quivers around your fingers and your [cocks] does the best ejaculation it can manage with hardly any warmup time and no direct stimulation.  Even after the orgasm ends, the tentacles continue to torment your groin.  <b>You are VERY horny with this thing inside you... though you can't reach it, maybe there's a way to crowd it out?</b>\n\n");
 			//(reduce lust to min, increased minimum lust by 30 until halfway through PC's next pregnancy)]
 			player.orgasm();
 			dynStats("lib", 2, "sen", 5);
@@ -1712,7 +1712,7 @@ public function updatePregnancy():Boolean {
 		}
 		else if(player.hipRating < 10) {
 			player.hipRating++;
-			outputText("\n\nAfter the birth your " + player.armorName + " fits a bit more snugly about your " + hipDescript() + ".");
+			outputText("\n\nAfter the birth your [armor] fits a bit more snugly about your " + hipDescript() + ".");
 		}
 		outputText("\n");
 		displayedUpdate = true;
@@ -1730,7 +1730,7 @@ public function updatePregnancy():Boolean {
 		if(flags[kFLAGS.MARBLE_NURSERY_CONSTRUCTION] < 100) {
 			outputText("\nYou feel a clenching sensation in your belly and something shifts inside.  Your contractions start a few moments later and you realize that it's time for your child to be born.  You cry out mildly in pain and lie down, letting your body start to push the baby out.  Marble doesn't seem to be around right now, so you can do nothing but push.\n\n");
 
-			outputText("You push and heave with all your might, little else going through your mind. You somehow register when the head comes out, and soon the shoulders along with the rest of the body follow.  You lean back and pant for a while before feeling a pair of hands grab a hold of you. They slowly and clumsily feel up your body before finding your " + player.chestDesc() + " and a mouth quickly closes down on a " + nippleDescript(0) + ".  You sigh softly, and drift off to sleep.");
+			outputText("You push and heave with all your might, little else going through your mind. You somehow register when the head comes out, and soon the shoulders along with the rest of the body follow.  You lean back and pant for a while before feeling a pair of hands grab a hold of you. They slowly and clumsily feel up your body before finding your [chest] and a mouth quickly closes down on a " + nippleDescript(0) + ".  You sigh softly, and drift off to sleep.");
 			player.cuntChange(20,true,true,false);
 			
 			outputText("\n\nEventually you feel a hand on your face, and open your eyes to see Marble looking down at you.  \"<i>Sweetie, are you all right?  Why aren't you pregnant anymore?  Where is our child?</i>\" You stand up and look around.  There is no sign of the baby you were carrying; the child seems to have left after finishing its drink. You never even got to see its face...\n\n");
@@ -1754,7 +1754,7 @@ public function updatePregnancy():Boolean {
 				//Increase the size of the PC’s hips, as per normal for pregnancies, increase birth counter
 				if(player.hipRating < 10) {
 					player.hipRating++;
-					outputText("After the birth your " + player.armorName + " fits a bit more snugly about your " + hipDescript() + ".");
+					outputText("After the birth your [armor] fits a bit more snugly about your " + hipDescript() + ".");
 				}
 				if (flags[kFLAGS.MARBLE_BOYS] == 0)
 				//has Marble had male kids before?
@@ -1785,7 +1785,7 @@ public function updatePregnancy():Boolean {
 			//Increase the size of the PC's hips, as per normal for pregnancies, increase birth counter
 			if(player.hipRating < 10) {
 				player.hipRating++;
-				outputText("\n\nAfter the birth your " + player.armorName + " fits a bit more snugly about your " + hipDescript() + ".");
+				outputText("\n\nAfter the birth your [armor] fits a bit more snugly about your " + hipDescript() + ".");
 			}
 		}
 		outputText("\n");
@@ -1818,7 +1818,7 @@ public function updatePregnancy():Boolean {
 		}
 		else if(player.hipRating < 15) {
 			player.hipRating++;
-			outputText("\n\nAfter the birth your " + player.armorName + " fits a bit more snugly about your " + hipDescript() + ".");
+			outputText("\n\nAfter the birth your [armor] fits a bit more snugly about your " + hipDescript() + ".");
 		}
 		player.knockUpForce(); //Clear Pregnancy
 		outputText("\n");
@@ -1922,7 +1922,7 @@ public function updatePregnancy():Boolean {
 		outputText("By the time she is finished, the centaur girl is obviously stronger, able to stand and move about on her own. She explores her new body, jumping and prancing happily, while you lay back and watch, too exhausted to join her. Suddenly, though, her ears perk up, as she looks towards the horizon urgently. She hesitates just long enough to plant a sweet kiss on your cheek, then dashes off, smiling broadly. Exhausted, you are unable to follow... but that comforting sensation returns.  Somehow, you sense she will be all right.");
 		player.knockUpForce(); //Clear Pregnancy
 		if(player.averageLactation() > 0 && player.averageLactation() < 5) {
-			outputText("  Your " + allBreastsDescript() + " won't seem to stop dribbling milk, lactating more heavily than before.");
+			outputText("  Your [allbreasts] won't seem to stop dribbling milk, lactating more heavily than before.");
 			player.boostLactation(.5);
 		}
 		outputText("  ");
@@ -1992,7 +1992,7 @@ public function updatePregnancy():Boolean {
 		kGAMECLASS.highMountains.minervaScene.minervaPurification.playerGivesBirth();
 		if(player.hipRating < 10) {
 			player.hipRating++;
-			outputText("\n\nAfter the birth your " + player.armorName + " fits a bit more snugly about your " + hipDescript() + ".");
+			outputText("\n\nAfter the birth your [armor] fits a bit more snugly about your " + hipDescript() + ".");
 		}
 		player.knockUpForce(); //Clear Pregnancy
 		outputText("\n");
@@ -2021,7 +2021,7 @@ public function updatePregnancy():Boolean {
 		kGAMECLASS.volcanicCrag.behemothScene.giveBirthToBehemoth();
 		if(player.hipRating < 10) {
 			player.hipRating++;
-			outputText("\n\nAfter the birth your " + player.armorName + " fits a bit more snugly about your " + hipDescript() + ".");
+			outputText("\n\nAfter the birth your [armor] fits a bit more snugly about your " + hipDescript() + ".");
 		}
 		player.knockUpForce(); //Clear Pregnancy
 		outputText("\n");
@@ -2052,7 +2052,7 @@ public function updatePregnancy():Boolean {
   				}
 				//High quantity
 				else {
-					outputText("A strange desire overwhelms your sensibilities, forcing you to shed your " + player.armorName + " and drop to your hands and knees.   You manage to roll over and prop yourself up against a smooth rock, looking down over your pregnant-looking belly as green fluids leak from you, soaking into the ground.   A powerful contraction rips through you and your legs spread instinctively, opening your " + vaginaDescript(0) + " to better deposit your precious cargo.   You see the rounded surface of an egg peek through your lips, mottled with strange colors.   You push hard and it drops free with an abrupt violent motion.  The friction and slimy fluids begin to arouse you, flooding your groin with heat as you feel the second egg pushing down.  It slips free with greater ease than the first, arousing you further as you bleat out a moan from the unexpected pleasure.  Before it stops rolling on the ground, you feel the next egg sliding down your slime-slicked passage, rubbing you perfectly as it slides free.  You lose count of the eggs and begin to masturbate, ");
+					outputText("A strange desire overwhelms your sensibilities, forcing you to shed your [armor] and drop to your hands and knees.   You manage to roll over and prop yourself up against a smooth rock, looking down over your pregnant-looking belly as green fluids leak from you, soaking into the ground.   A powerful contraction rips through you and your legs spread instinctively, opening your " + vaginaDescript(0) + " to better deposit your precious cargo.   You see the rounded surface of an egg peek through your lips, mottled with strange colors.   You push hard and it drops free with an abrupt violent motion.  The friction and slimy fluids begin to arouse you, flooding your groin with heat as you feel the second egg pushing down.  It slips free with greater ease than the first, arousing you further as you bleat out a moan from the unexpected pleasure.  Before it stops rolling on the ground, you feel the next egg sliding down your slime-slicked passage, rubbing you perfectly as it slides free.  You lose count of the eggs and begin to masturbate, ");
 					if(player.clitLength > 5) outputText("jerking on your huge clitty as if it were a cock, moaning and panting as each egg slides free of your diminishing belly.  You lubricate it with a mix of your juices and the slime until ");
 					if(player.clitLength > 2 && player.clitLength <= 5) outputText("playing with your over-large clit as if it were a small cock, moaning and panting as the eggs slide free of your diminishing belly.  You spread the slime and cunt juice over it as you tease and stroke until ");
 					if(player.clitLength <= 2) outputText("pulling your folds wide and playing with your clit as another egg pops free from your diminishing belly.  You make wet 'schlick'ing sounds as you spread the slime around, vigorously frigging yourself until "); 
@@ -2063,7 +2063,7 @@ public function updatePregnancy():Boolean {
 			}
 			//Large egg scene
 			else {
-				outputText("A sudden shift in the weight of your pregnant belly staggers you, dropping you to your knees.  You realize something is about to be birthed, and you shed your " + player.armorName + " before it can be ruined by what's coming.  A contraction pushes violently through your midsection, ");
+				outputText("A sudden shift in the weight of your pregnant belly staggers you, dropping you to your knees.  You realize something is about to be birthed, and you shed your [armor] before it can be ruined by what's coming.  A contraction pushes violently through your midsection, ");
 				if(player.vaginas[0].vaginalLooseness < VAGINA_LOOSENESS_LOOSE) outputText("stretching your tight cunt painfully, the lips opening wide ");
 				if(player.vaginas[0].vaginalLooseness >= VAGINA_LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness <= VAGINA_LOOSENESS_GAPING_WIDE) outputText("temporarily stretching your cunt-lips wide-open ");
 				if(player.vaginas[0].vaginalLooseness > VAGINA_LOOSENESS_GAPING_WIDE) outputText("parting your already gaping lips wide ");

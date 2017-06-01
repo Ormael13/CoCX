@@ -34,7 +34,7 @@ import classes.internals.Utils;
 				//(Lustytongue status)
 				player.createStatusEffect(StatusEffects.LustyTongue, 25, 0, 0, 0);
 			}
-			outputText("\n\nAfter the wave of sensation passes, your " + player.skinDesc + " feels a little more receptive to touch.  ");
+			outputText("\n\nAfter the wave of sensation passes, your [skin.type] feels a little more receptive to touch.  ");
 			if (player.lust > 70 || player.lib > 70) {
 				outputText("You shiver and think of how much better it'll make sex and masturbation.");
 			}

@@ -28,7 +28,7 @@ package classes.Items.Consumables
 			//Player doesn't lactate
 			if (player.biggestLactation() < 1) {
 				outputText("\n\n");
-				outputText("You feel your " + player.nippleDescript(0) + "s become tight and engorged.  A single droplet of milk escapes each, rolling down the curves of your breasts.  <b>You are now lactating!</b>");
+				outputText("You feel your [nipple]s become tight and engorged.  A single droplet of milk escapes each, rolling down the curves of your breasts.  <b>You are now lactating!</b>");
 				for (i = 0; i < player.breastRows.length; i++) {
 					player.breastRows[i].lactationMultiplier += 2;
 				}
@@ -36,7 +36,7 @@ package classes.Items.Consumables
 			//Boost lactation
 			else {
 				outputText("\n\n");
-				outputText("Milk leaks from your " + player.nippleDescript(0) + "s in thick streams.  You're lactating even more!");
+				outputText("Milk leaks from your [nipple]s in thick streams.  You're lactating even more!");
 				for (i = 0; i < player.breastRows.length; i++) {
 					player.breastRows[i].lactationMultiplier += 1 + rand(10) / 10;
 				}

@@ -70,7 +70,7 @@ public class AbstractEquinum extends Consumable {
 							if (player.gender == 0 || player.gender == 3) outputText("horse ");
 							if (player.gender == 1) outputText("stallion ");
 							if (player.gender == 2) outputText("mare ");
-							outputText(" with beautiful " + player.hairColor + " " + player.skinDesc + " covering its body gazes back up at you.  That's you, and yet the doubt in your mind remains. Strange images fill your mind, and you feel as if you have not always been a horse, but some kind of funny fur-less creature standing on two legs. Your equine mind rapidly dismisses that doubt as a daydream however, and you trot away, oblivious to who you once were.\n\n");
+							outputText(" with beautiful [haircolor] [skin.type] covering its body gazes back up at you.  That's you, and yet the doubt in your mind remains. Strange images fill your mind, and you feel as if you have not always been a horse, but some kind of funny fur-less creature standing on two legs. Your equine mind rapidly dismisses that doubt as a daydream however, and you trot away, oblivious to who you once were.\n\n");
 							outputText("<b>One year later...</b>\n\nAs you graze upon the small plants that coat the open plains of your home, you hear a noise on your right side. As you raise your head to check where the noise comes from, preparing to run from a potential predator, you see a strange creature. It stands on its two feet, its furless pink skin appearing beneath its clothes.  With a start, you realize you can identify the strange creatures gender.  ");
 							if (player.gender == 0 || player.gender == 1) outputText("He is clearly a male, but you are somewhat confused as you can see not one but three bulges where his manhood would be.\n\n");
 							if (player.gender == 2) outputText("She is clearly a female, as you can see her six breasts jiggle as she walks towards you, small stains appearing on her shirt where her nipples are.\n\n");
@@ -86,7 +86,7 @@ public class AbstractEquinum extends Consumable {
 						if (player.gender == 0 || player.gender == 3) outputText("horse ");
 						if (player.gender == 1) outputText("stallion ");
 						if (player.gender == 2) outputText("mare ");
-						outputText("with beautiful " + player.hairColor + " " + player.skinDesc + " covering its body looks back at you.  That's you, and yet the doubt in your mind remains. Strange mental images fill your mind.  You feel as if you have not always been a horse, but some kind of funny fur-less creature standing on two legs. But your equine mind rapidly dismisses that doubt as a daydream, and you trot away, oblivious to who you once were.\n\n");
+						outputText("with beautiful [haircolor] [skin.type] covering its body looks back at you.  That's you, and yet the doubt in your mind remains. Strange mental images fill your mind.  You feel as if you have not always been a horse, but some kind of funny fur-less creature standing on two legs. But your equine mind rapidly dismisses that doubt as a daydream, and you trot away, oblivious to who you once were.\n\n");
 						outputText("<b>One year after...</b>\n\nAs you graze small plants in the open plains that became your home, you hear a noise on your right side. As you raise your head to check where the noise comes from, preparing to run from a potential predator, you see a strange creature. It stands on two feet, its furless pink skin appearing beneath its clothes.  ");
 						if (player.gender == 0 || player.gender == 1) outputText("He is clearly a male, but you are somewhat confused as you can see not one but three bulges where his manhood would be.\n\n");
 						if (player.gender == 2) outputText("She is clearly a female, as you can see her six breasts jiggle as she walks towards you, small stains appearing on her shirt where her nipples are.\n\n");
@@ -473,14 +473,14 @@ public class AbstractEquinum extends Consumable {
 		if (!player.hasFur() && !player.isGargoyle() && changes < changeLimit && rand(4) == 0 && player.tailType == TAIL_TYPE_HORSE) {
 			if (!player.hasScales()) {
 				outputText("\n\nAn itchy feeling springs up over every inch of your [skin base].  As you scratch yourself madly, you feel fur grow out of your [skin base] until <b>you have a fine coat of ");
-				if (type == 0) outputText("" + player.hairColor + "-colored fur.</b>");
+				if (type == 0) outputText("[haircolor]-colored fur.</b>");
 				else outputText("white-colored fur.</b>");
 			} else {
 				player.skinDesc = "fur";
 				outputText("\n\nYour " + player.skinTone + " scales begin to itch insufferably.  You reflexively scratch yourself, setting off an avalanche of discarded scales.  The itching intensifies as you madly scratch and tear at yourself, revealing a coat of ");
-				if (type == 0) outputText("" + player.hairColor + "");
+				if (type == 0) outputText("[haircolor]");
 				else outputText("white");
-				outputText(" " + player.skinDesc + ".  At last the itching stops as <b>you brush a few more loose scales from your new coat of fur.</b>");
+				outputText(" [skin.type].  At last the itching stops as <b>you brush a few more loose scales from your new coat of fur.</b>");
 			}
 			changes++;
 			if (type == 0) player.skin.growCoat(SKIN_COAT_FUR, {color: randomChoice(["brown", "chocolate", "auburn", "sandy brown", "caramel", "peach", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "brown and white", "black and white"])});
@@ -501,7 +501,7 @@ public class AbstractEquinum extends Consumable {
 		if (player.tailType != TAIL_TYPE_HORSE && player.tailType != TAIL_TYPE_GARGOYLE && player.lowerBody == LOWER_BODY_TYPE_HOOFED && rand(2) == 0 && changes < changeLimit) {
 			//no tail
 			if (player.tailType == 0) {
-				outputText("\n\nThere is a sudden tickling on your ass, and you notice you have sprouted a long shiny horsetail of the same " + player.hairColor + " color as your hair.");
+				outputText("\n\nThere is a sudden tickling on your ass, and you notice you have sprouted a long shiny horsetail of the same [haircolor] color as your hair.");
 			}
 			//if other animal tail
 			if (player.tailType > TAIL_TYPE_HORSE && player.tailType <= TAIL_TYPE_COW) {
@@ -560,7 +560,7 @@ public class AbstractEquinum extends Consumable {
 		}
 		//Alicorn wings
 		if (type == 2 && player.wingType == WING_TYPE_NONE && changes < changeLimit && player.hornType == HORNS_UNICORN && rand(4) == 0) {
-			outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your " + player.skinDesc + ". It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, white wings.</b>");
+			outputText("\n\nPain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, white wings.</b>");
 			mutations.setWingType(WING_TYPE_FEATHERED_ALICORN, "large white feathered");
 			changes++;
 		}

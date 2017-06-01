@@ -695,7 +695,7 @@ private function sellYourBooze():void {
 		outputText("\n\nNiamh notices your condition, as does several other patrons in the bar.  ");
 		if(player.hasVagina()) outputText("You can feel your labia dripping with need.  ");
 		if(player.hasCock()) {
-			outputText("pre-cum drizzles down your " + multiCockDescriptLight() + " as the need to fuck a pussy grows stronger.  A few wandering hands reveals some apparent interest amongst the folks in the bar in seeing your genitals as active as your nipples.");
+			outputText("pre-cum drizzles down your [cocks] as the need to fuck a pussy grows stronger.  A few wandering hands reveals some apparent interest amongst the folks in the bar in seeing your genitals as active as your nipples.");
 		}
 		//[FUCK THE BAR] [LEAVE]
 		simpleChoices("Fuck Bar", barBeerOrgyTits, "", null, "", null, "", null, "Leave", leaveWithBeerTits);
@@ -803,7 +803,7 @@ private function barBeerOrgyTits():void {
 		// IF [player has a single cock]
 		if(player.cockTotal() == 1) outputText("  Edryn moans out loud in ecstasy as your [cock] fills her up.");
 		// If [player has multiple cocks]
-		else if(player.cockTotal() > 1) outputText("  The heads of your cocks press in between Edryn's labia causing her to cry out, \"<i>Oh gawd!  How many dicks are y-you f-f-fucking meeee with???</i>\"  Edryn's orgasm cuts her voice off and every muscle in her cunt contracts around your " + multiCockDescriptLight() + ".");
+		else if(player.cockTotal() > 1) outputText("  The heads of your cocks press in between Edryn's labia causing her to cry out, \"<i>Oh gawd!  How many dicks are y-you f-f-fucking meeee with???</i>\"  Edryn's orgasm cuts her voice off and every muscle in her cunt contracts around your [cocks].");
 		outputText("\n\nAs Edryn's cunt literally sucks you in deeper you feel Urta move up behind you.  As her horse-cock pokes against your pussy lips you realize just before the first thrust what is about to happen.  Tel'Adre's finest guard rams her massive member inside you, making you the center of a fuck sandwich.");
 		// IF[player is pregnant]
 		if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 200) outputText("  Your pregnant belly presses up against Edryn's ass as both Urta's cock and Edryn's pussy keeps you pinned in place between them.");

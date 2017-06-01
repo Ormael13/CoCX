@@ -80,7 +80,7 @@ internal function approachSoberUrtaHeatRutProc():void {
 	//Player in rut:
 	else if(player.inRut && player.hasCock()) {
 		outputText("\n\nYou roughly shove your fingers into her mouth as your hand moves lower, between her thighs. The naughty slut isn't even wearing proper underwear, and you quickly begin to molest her black pussy lips before slipping a finger inside.");
-		if(player.hasVagina()) outputText("  Your " + multiCockDescriptLight() + " and [vagina] are filling your clothes with mixed juices");
+		if(player.hasVagina()) outputText("  Your [cocks] and [vagina] are filling your clothes with mixed juices");
 		else outputText("  Your [cock biggest] begins to seep precum into your clothes");
 		outputText(", so you decide to dispose of them as you force Urta against a wall.");
 
@@ -141,7 +141,7 @@ private function notInterestedInUburDrunkUrtaRuts():void {
 	//[If the PC has a snake tongue]
 	if(player.tongueType == TONUGE_SNAKE) outputText("You instinctively taste the air, and Urta suddenly seems utterly delicious. ");
 	//Rut: 
-	if(player.inRut && player.hasCock()) outputText("Your " + multiCockDescriptLight() + " hardens in your pants as you still force yourself to leave.");
+	if(player.inRut && player.hasCock()) outputText("Your [cocks] hardens in your pants as you still force yourself to leave.");
 	//[Medium lust increase]
 	else outputText("Your condition does seem kind of protesting against leaving such a willing lay behind, but it isn't time to be indulging it.");
 
@@ -246,7 +246,7 @@ private function watchDrunkRuturtaJerkoff():void {
 
 	outputText("\n\nYou surpress a giggle of amusement at the sight and begin to flaunt yourself, seeking to tease the poor herm - you have no doubts that she's secretly loving this.  After all, even though the whole bar seems to be staring right at her now, she's not even blushing.  Indeed, her posture changes; she starts holding herself firmer upright, more pride evident in her bearings, and from the way her cock just keeps rising up and up, a great puddle of herm pre-cum forming on the floor underneath her, it seems their attention is actually getting her off even more.");
 
-	outputText("\n\nAs you slowly, languidly start to posture yourself for Urta's private delight, holding your clothes so they outline the hidden delights of your [chest], " + multiCockDescriptLight() + " and [vagina], bending over to let her stare longingly at your [butt], the fox-herm whimpers and moans.  By this point, her cock is standing practically straight up, and she releases it with one hand.  This now-freed hand slips between her legs to tend to her neglected slit, the fingers dancing artfully with audible squelches as they probe and fiddle.  Her other hand maneuvers her cock so that it lies squarely between her ample, soft breasts, clumseily trying to alternate between stroking her cock, fiddling with her black nipples, and mashing her tits together to give herself a tit fuck.  She awkwardly thrusts and humps into her own cleavage, pre-cum pouring down her front, bending down to lap at the flared head of her mare-dick.");
+	outputText("\n\nAs you slowly, languidly start to posture yourself for Urta's private delight, holding your clothes so they outline the hidden delights of your [chest], [cocks] and [vagina], bending over to let her stare longingly at your [butt], the fox-herm whimpers and moans.  By this point, her cock is standing practically straight up, and she releases it with one hand.  This now-freed hand slips between her legs to tend to her neglected slit, the fingers dancing artfully with audible squelches as they probe and fiddle.  Her other hand maneuvers her cock so that it lies squarely between her ample, soft breasts, clumseily trying to alternate between stroking her cock, fiddling with her black nipples, and mashing her tits together to give herself a tit fuck.  She awkwardly thrusts and humps into her own cleavage, pre-cum pouring down her front, bending down to lap at the flared head of her mare-dick.");
 
 	outputText("\n\nYou take a glance away from Urta and realize that the combination of your pheremones, her little show and your own efforts at teasing her have got the other customers very excited indeed.  Pairs and even trios are starting to make out all over, singletons are beginning to fiddle with themselves, and there's a couple of very interested-looking herms, all playing with their cocks, that are giving lustful looks your way and heading towards you with an inept attempt at stealth.  Things could get pretty wild if you keep teasing Urta; maybe you should knock it off?");
 	//[Stop Teasing] [Keep Teasing]
@@ -275,7 +275,7 @@ private function keepTeasingDatHornyFawkes():void {
 	urta.urtaSprite();
 	outputText("You smirk; things are just starting to get fun around here, why would you stop now?  You start to amp up your routine even more, flaunting your scents and your goods for all the bar's occupants, not just the drunken fox-herm feverishly jerking herself off in front of you.  You can't recall if you've ever danced before coming to Mareth, but you don't think you do too bad as you perform an amateur strip-dance for the audience around you, slowly peeling off your [armor] and sensuously discarding them, bending over to let Urta and any other cock-bearing character present in the bar get a good look at your [vagina], ");
 	if(player.balls > 0) outputText("lewdly cupping and fondling your [balls], ");
-	outputText("slowly beginning to stroke and caress your " + multiCockDescriptLight() + " for the benefit of those who bear vaginas.");
+	outputText("slowly beginning to stroke and caress your [cocks] for the benefit of those who bear vaginas.");
 
 	outputText("\n\nAs you seductively twirl around to face Urta again, you notice with surprise that she has stopped playing with her parts; instead, both of her hands are fiercely gripping her cock, just above her sheathe.  Putting an exaggeratedly disappointed expression on your face, you saunter confidently over to Urta, teasing her about what the matter is; doesn't she want to cum?  Her balls - you pause to jiggle them playfully - are so full of cum; surely it's time to cut loose and let it all out?");
 
@@ -374,7 +374,7 @@ private function soberUrtaSatingPCHeat():void {
 	outputText("\n\nUrta groans as she rams the rest of her cock into you, filling you with her extraordinary, equine breeder once again.  Then, she begins to hump you from behind, smacking her groin against your [butt] as her member stretches you.");
 
 	outputText("\n\nYou reach down to play with yourself, your [clit] ");
-	if(player.hasCock()) outputText("and " + multiCockDescriptLight() + " ");
+	if(player.hasCock()) outputText("and [cocks] ");
 	outputText("hardening again in response to the act.  Urta continues to slam into your backside, delivering a small smack to your [butt].");
 
 	//Regular Urta]

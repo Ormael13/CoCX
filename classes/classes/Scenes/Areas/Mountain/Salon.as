@@ -309,11 +309,11 @@ private function gloryholeMinotaur(): void {
 	clearOutput();
 	outputText("Your eyes are drawn to the huge minotaur cock, and you instinctively kneel down in front of it.\n\n");
 	outputText("It's the largest available member in the room by a considerable margin, and from your position on your knees, it looks even more massive; it's over two feet long, and has three rings of prepuce spaced around its length. You can just barely span your entire hand around its thickness. You open your mouth wide and lean forward, taking the thick, spongy head into your mouth. The taste is incredibly strong, and its musk is as thick as the minotaur's dick itself. You moan in pleasure, and start bobbing your head back and forth, taking more and more of the dick into your mouth. You stroke the rest of the cock in time with your sucking. You can hear muffled grunting and snorting coming from the other side of the wall, obvious sounds of approval from your partner.\n\n");
-	outputText("Driven on by the minotaur's reactions, you take more and more of the minotaur cock into your mouth. As you work your mouth around the first ring, you open up the top section of your " + player.armorName + ", freeing up your " + allBreastsDescript() + ". With each pass, you're able to take more and more of the bull dick down your throat. You caress your " + biggestBreastSizeDescript() + " while moaning around the dick. When you get your mouth around the second ring, the minotaur's cock throbs sharply, and his cum explodes in your mouth. Your eyes bulge in shock, and you pull off the cock as quickly as you can. You swallow the first several shots of thick, rich minotaur cum, while the rest shoots all over your face and tits. You ");
+	outputText("Driven on by the minotaur's reactions, you take more and more of the minotaur cock into your mouth. As you work your mouth around the first ring, you open up the top section of your [armor], freeing up your [allbreasts]. With each pass, you're able to take more and more of the bull dick down your throat. You caress your " + biggestBreastSizeDescript() + " while moaning around the dick. When you get your mouth around the second ring, the minotaur's cock throbs sharply, and his cum explodes in your mouth. Your eyes bulge in shock, and you pull off the cock as quickly as you can. You swallow the first several shots of thick, rich minotaur cum, while the rest shoots all over your face and tits. You ");
 	if(player.biggestTitSize() > 1) outputText("hold up ");
 	else outputText("arch your back to expose ");
 	outputText("your [chest] as cum rains down upon you. By the time his orgasm stops and his dick goes limp, your face and [chest] are covered in a thick layer of spooge.\n\n");
-	outputText("Your head spins from the minotaur's musk, and you idly mop up and swallow the cum on your " + player.face() + ". A goblin aide comes in with a bowl, and gently scrapes the cum off your tits with a smooth, flat rock. Once you're cleaned up and you're dressed, the aide leads you back to Lynnette.\n\n");
+	outputText("Your head spins from the minotaur's musk, and you idly mop up and swallow the cum on your [face]. A goblin aide comes in with a bowl, and gently scrapes the cum off your tits with a smooth, flat rock. Once you're cleaned up and you're dressed, the aide leads you back to Lynnette.\n\n");
 	dynStats("lus", 33, "cor", 1);
 	player.refillHunger(30);
 	player.minoCumAddiction(10);
@@ -324,7 +324,7 @@ private function goblinHairDresserFacefuck():void {
 	clearOutput();
 	spriteSelect(38);
 	outputText(images.showImage("lynnette-blowjob"));
-	outputText("Lynnette licks her lips and practically tears her way into your " + player.armorName + ", having your crotch exposed in seconds.  Your " + cockDescript(0) + " flops out immediately, slapping her on the nose as it grows hard.  She wraps both hands around you and begins pumping with practiced ease, flicking her tongue over your crown and wrapping her lips ");
+	outputText("Lynnette licks her lips and practically tears her way into your [armor], having your crotch exposed in seconds.  Your [cock] flops out immediately, slapping her on the nose as it grows hard.  She wraps both hands around you and begins pumping with practiced ease, flicking her tongue over your crown and wrapping her lips ");
 	if(player.cocks[0].cockThickness >= 4) outputText("around as much of you as she can");
 	else outputText("around your first few inches");
 	outputText(".  She slips her tongue down your urethra, and arches her back, popping the straps on her dress and letting her oversized tits engulf your shaft.  Milk sputters and dribbles from the lactating goblin, lubricating her breasts and hands as she pleasures every inch of you.\n\n");
@@ -399,14 +399,14 @@ private function hairGrow():void {
 	temp = rand(3) + 3;
 	flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
 	player.hairLength += temp;
-	outputText(num2Text(temp) + " more inches of " + player.hairColor + " hair.");
+	outputText(num2Text(temp) + " more inches of [haircolor] hair.");
 	doNext(camp.returnToCampUseOneHour);
 }
 
 private function removeHair():void {
 	clearOutput();
 	outputText("You tell Lynnette that you'd like to have your hair removed.\n\n");
-	outputText("Lynnette instructs you to take a seat and instructs her daughters to pare down your hair down to short length. They effortlessly cut your hair to short length. Next, Lynnette applies a special cream all over your " + player.hairDescript() +".  Your hair starts to stiffen and falls out.  She gives your head a good cleaning afterwards.\n\n");
+	outputText("Lynnette instructs you to take a seat and instructs her daughters to pare down your hair down to short length. They effortlessly cut your hair to short length. Next, Lynnette applies a special cream all over your [hair].  Your hair starts to stiffen and falls out.  She gives your head a good cleaning afterwards.\n\n");
 	outputText("<b>You no longer have a hair!</b>");
 	player.hairLength = 0;
 	doNext(camp.returnToCampUseOneHour);
@@ -468,7 +468,7 @@ private function growBeard(mode:int = 0):void {
 			outputText("Lynnette grabs a bottle and squirts a white fluid onto your chin and cheeks.  You really hope it isn't your payment.  But it must not be, as within short order your new beard sprouts! ");
 			player.beardLength = 0.2;
 			if (temp >= 2) outputText("es");
-			outputText(" of " + player.hairColor + " beard.\n\n");
+			outputText(" of [haircolor] beard.\n\n");
 			outputText("\"<i>I'll let you choose your style before you leave,</i>\" she says.\n\n");
 			changeBeardStyle();
 			return;
@@ -488,7 +488,7 @@ private function growBeard(mode:int = 0):void {
 			player.beardLength += temp;
 			outputText(num2Text(temp) + " more inch");
 			if (temp >= 2) outputText("es");
-			outputText(" of " + player.hairColor + " beard.");
+			outputText(" of [haircolor] beard.");
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -532,7 +532,7 @@ private function minotaurCumBukkakeInSalon():void {
 	else if(player.hasCock()) outputText(" and turning " + sMultiCockDesc() + " into a turgid, pulsating mass.\n\n");
 	else outputText("\n\n");
 	
-	outputText("You push your way past a few more staring goblin sluts, tearing off your " + player.armorName + " as you go.  The animal part of your brain recognizes that such needless trapping would just get in the way of all the thick, dripping, minotaur spunk just waiting to pump inside you.  Another door swings closed behind you while the scent drags you heedlessly deeper into the salon, closing in on the secluded glory-holes the goblins keep hidden away in the back.  You drool spittle down your neck while you lose yourself in the memory of that taste on your tongue, letting your body seek it out on autopilot.");
+	outputText("You push your way past a few more staring goblin sluts, tearing off your [armor] as you go.  The animal part of your brain recognizes that such needless trapping would just get in the way of all the thick, dripping, minotaur spunk just waiting to pump inside you.  Another door swings closed behind you while the scent drags you heedlessly deeper into the salon, closing in on the secluded glory-holes the goblins keep hidden away in the back.  You drool spittle down your neck while you lose yourself in the memory of that taste on your tongue, letting your body seek it out on autopilot.");
 	if(player.hasVagina() || player.hasCock()) {
 		outputText("  A trail of ");
 		if(player.hasVagina()) {
@@ -558,13 +558,13 @@ private function minotaurCumBukkakeInSalon():void {
 	
 	outputText("You let your eyes drift closed and lash your tongue back and forth across the minotaur's lowest medial ring, feeling his flare bulge larger inside you in response.  The beast-man batters at the wall, grunting in equal measures of passion and pent-up desire as his cock's tip stretches wide and locks itself inside you.  His urethra bulges in rhythmic contractions, stretching your lips around the already swollen shaft and signaling to your musk-addled mind that you're about to get what you desire.  You hum with blissful delight as your belly begins to gurgle, accepting long bursts of sticky minotaur drug.\n\n");
 	
-	outputText("Tied down by the cum-spurting flare locked in your gullet, you pump on the other two dicks with feverish speed and sway on your " + player.feet() + " as the narcotic spooge intoxicates your already-addled mind.  You can feel each muscular contraction pulsing through the bestial shaft while it finishes depositing the heavy, sticky load, and your eyes cross from the viscous inebriation that's pooling in your belly.  Drizzles of pre-cum soak into your arms and palms, drawn out from the frenzied pumping of your fists.  They won't come from just a hand though.  They need something... tighter.\n\n");
+	outputText("Tied down by the cum-spurting flare locked in your gullet, you pump on the other two dicks with feverish speed and sway on your [feet] as the narcotic spooge intoxicates your already-addled mind.  You can feel each muscular contraction pulsing through the bestial shaft while it finishes depositing the heavy, sticky load, and your eyes cross from the viscous inebriation that's pooling in your belly.  Drizzles of pre-cum soak into your arms and palms, drawn out from the frenzied pumping of your fists.  They won't come from just a hand though.  They need something... tighter.\n\n");
 	
 	outputText("You start moaning in drug-induced bliss, but your vocalized pleasure is interrupted by the squelching slurp of the softening shaft being pulled from your dick-puckered lips.  It drips a rope of cum over your mouth and chin as it pulls free from the wall, leaving behind one vacancy among the swarm of ready minotaur dicks.  You lick up your stud's leavings and purr in bliss, reaching through the hole to cup the departing minotaur's balls teasingly.  He grunts and walks out of your grip – sated for now.  You curl your fingers into a come-hither gesture, retract your arm through the sweat-lubricated glory-hole, and wait for one of the other minotaurs to come over.\n\n");
 	
 	outputText("The beast who kept your left hand so busy repositions himself at the now-vacant opening, and you decide to reward him for moving so quickly.  You lick the last of the salty cream from your lips and muse that he isn't the only one getting a reward, but the monstrous cow-man doesn't need to know that.");
 	if(player.biggestTitSize() >= 2) {
-		outputText("  You wrap the pillowy flesh of your " + allBreastsDescript() + " around the new member, pleasantly surprised by its girth and wide, already-flared tip.  Maybe you could have gotten him off with your hands after all?  ");
+		outputText("  You wrap the pillowy flesh of your [allbreasts] around the new member, pleasantly surprised by its girth and wide, already-flared tip.  Maybe you could have gotten him off with your hands after all?  ");
 		if(player.biggestTitSize() < 6) outputText("Even so, you can't quite get your breasts the entire way around him, so you make up for it by pressing it harder into you with your busy hands.  ");
 		outputText("Runnels of pre cover the shaft and squish wetly between your tits, turning your body into a slip-n-slide that reeks of hot, sticky minotaur sex.");
 	}
@@ -573,11 +573,11 @@ private function minotaurCumBukkakeInSalon():void {
 	}
 	outputText("\n\n");
 	
-	outputText("You lower and raise yourself, bouncing up and down on your " + player.legs() + " to enhance the ");
+	outputText("You lower and raise yourself, bouncing up and down on your [legs] to enhance the ");
 	if(player.biggestTitSize() >= 2) outputText("tit-fucking ");
 	else outputText("full-body handjob ");
 	outputText("you're giving out.  In such a position, you're given the perfect view to watch as your strokes draw forth large bubbles of pre, and before you can lose your high, you latch onto the minotaur's vulnerable urethra and suck, tonguing in wide circles around it since you can't open wide enough to accommodate his flare.  Of course, all the attention just makes him flare wider, not just at the tip, but through the whole shaft.  ");
-	if(player.biggestTitSize() >= 2) outputText("The sudden girth change sends an enticing ripple through your " + allBreastsDescript() + " that's pleasurable enough to make you moan into his steadily-widening urethra.  ");
+	if(player.biggestTitSize() >= 2) outputText("The sudden girth change sends an enticing ripple through your [allbreasts] that's pleasurable enough to make you moan into his steadily-widening urethra.  ");
 	outputText("You pull off and bounce faster, lost to your lust and the haze of sex-musk permeating the air, intent on seeing just how much this huge stud can spray onto you.\n\n");
 
 	outputText("The minotaur does not disappoint.  His hole dilates from the size of the approaching cum-blast, and you sink down his shaft slowly until it's aimed directly at your face.  You close your eyes and feel the first explosion splatter over your " + hairDescript() + " and forehead.  The next takes you full in the face, making it difficult to breathe through the mask of drug-like goo, but a few quick licks gives you a fix and makes it easy to breathe again.  On and on, the minotaur pumps fat ropes of spooge over your body until you're a syrupy, sticky mess that reeks of minotaur pheromones so strongly that dizziness overwhelms you and you fall free of the still-orgasming mino-cock, taking a few final blasts of seed on your " + chestDesc() + " and crotch.  Your hands instinctively shovel a few loads into your " + assholeOrPussy());
@@ -601,7 +601,7 @@ private function minotaurCumBukkakeInSalon():void {
 	else outputText("presses on your prostate as it squeezes by, making " + sMultiCockDesc() + " drip and spurt freely until you can bear it no longer and cum, shaking and shuddering like a wanton whore.  Jizz drips and pours from " + sMultiCockDesc() + " in a steady stream that pools on the floor, slowly rolling towards a drain that doubtless empties into a tank or greedy goblin cunt.");
 	outputText("\n\n");
 	
-	outputText("The strength goes completely out of your " + player.legs() + ", but you manage to hold yourself up long enough for your stud to flex his cock inside you and fill up your backdoor with more potent addiction.  You slide off, nerveless and still orgasming as jizz rains on your back from the abandoned cock, rolling off you to add to the ever-widening puddle of fluids on the floor.  Smiling vacantly and addled on more minotaur-cum than any one person has reason to handle, you stumble up on all fours and crawl to the next one.  More...");
+	outputText("The strength goes completely out of your [legs], but you manage to hold yourself up long enough for your stud to flex his cock inside you and fill up your backdoor with more potent addiction.  You slide off, nerveless and still orgasming as jizz rains on your back from the abandoned cock, rolling off you to add to the ever-widening puddle of fluids on the floor.  Smiling vacantly and addled on more minotaur-cum than any one person has reason to handle, you stumble up on all fours and crawl to the next one.  More...");
 	//[NEXT]
 	player.orgasm();
 	dynStats("lib", 2, "sen", 2, "cor", 2);
@@ -618,7 +618,7 @@ private function minotaurSalonFollowUp():void {
 		outputText("The goblin answers before you can vocalize your query, \"<i>Baby, you're so cum-hungry you make my daughters look like chaste virgins!  I haven't seen anyone go to town on minotaurs like that since my mother passed away, Marae guide her soul.  Normally we don't have that much use for the minotaurs outside of a bit of recreational drug-play, but you milked out so much cum that we can start selling it!  Isn't that great!?</i>\"\n\n");
 		outputText("You nod, a little shocked by your behavior, but already licking your lips in anticipation.  Lynnette smiles and says, \"<i>You can buy some for the usual price, plus 60 gems, but for right now, how about some hair service?  It's on the house!</i>\"");
 	}
-	else outputText("You're woken up with a slap to the face, and still muzzy from your cum-induced glory-hole orgy, you stagger up to your " + player.feet() + ".  Lynnette shakes her stinging palm and apologizes, \"<i>Sorry I have to keep doing that, but you're damned hard to wake after you go on these binges!  Anyways, you've earned some hair treatment if you want it.  Of course you could always buy more of your favorite fluid...</i>\"\n\n");
+	else outputText("You're woken up with a slap to the face, and still muzzy from your cum-induced glory-hole orgy, you stagger up to your [feet].  Lynnette shakes her stinging palm and apologizes, \"<i>Sorry I have to keep doing that, but you're damned hard to wake after you go on these binges!  Anyways, you've earned some hair treatment if you want it.  Of course you could always buy more of your favorite fluid...</i>\"\n\n");
 	//Menu
 	outputText("Lynnette offers and explains their options, \"<i>So what'll it be hun?  We could cut it down or give you a lengthening treatment. Or you can get a hair-dye to use on your own.  Just remember to come back in a few days for a touchup.</i>\"");
 	salonPurchaseMenu();
@@ -627,7 +627,7 @@ private function minotaurSalonFollowUp():void {
 private function mudFacial():void {
 	spriteSelect(38);
 	clearOutput();
-	outputText("You sit back in a comfortable chair and pull on a lever to recline it.  The goblins buzz around you, gathering up 'special mud'.  You close your eyes, letting them plaster your " + player.face() + " with the stuff in hopes that it will improve your complexion as much as you've been promised.  A pair of cucumber slices are laid out on your eyes, obscuring your view.\n\n");
+	outputText("You sit back in a comfortable chair and pull on a lever to recline it.  The goblins buzz around you, gathering up 'special mud'.  You close your eyes, letting them plaster your [face] with the stuff in hopes that it will improve your complexion as much as you've been promised.  A pair of cucumber slices are laid out on your eyes, obscuring your view.\n\n");
 
 	outputText("With that finished, the crowd of busty, green-skinned women disperses to leave you in peace.  Time drags on, but eventually the mud hardens and cracks.  As if on cue, tiny hands emerge with wet rags to scrub your face clean.  Once they've finished, you feel like a whole new you! (+10 femininity)");
 	player.modFem(100,10);
@@ -637,7 +637,7 @@ private function mudFacial():void {
 private function sandFacial():void {
 	spriteSelect(38);
 	clearOutput();
-	outputText("You sit back in a comfortable chair and pull on a lever to recline it.  The goblins buzz around you, gathering up 'special sand'.  You close your eyes, letting them splatter your " + player.face() + " with the rough, textured goop.  It doesn't feel very good, but that won't matter if it makes you as handsome as it's supposed to.\n\n");
+	outputText("You sit back in a comfortable chair and pull on a lever to recline it.  The goblins buzz around you, gathering up 'special sand'.  You close your eyes, letting them splatter your [face] with the rough, textured goop.  It doesn't feel very good, but that won't matter if it makes you as handsome as it's supposed to.\n\n");
 
 	outputText("After a while the goblin girls come back and clean the stuff from your face. (+10 masculinity)");
 	player.modFem(0,10);

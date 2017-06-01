@@ -926,12 +926,12 @@
 				outputText("You manage to block " + a + short + "");
 				if (plural) outputText("' attacks ");
 				else outputText("'s attack ");
-				outputText("with your " + player.weaponName + ".\n");
+				outputText("with your [weapon].\n");
 				return true;
 			}
 			//Block with shield
 			if (combatBlock(true)) {
-				outputText("You block " + a + short + "'s " + weaponVerb + " with your " + player.shieldName + "! ");
+				outputText("You block " + a + short + "'s " + weaponVerb + " with your [shield]! ");
 				return true;
 			}
 			return false;

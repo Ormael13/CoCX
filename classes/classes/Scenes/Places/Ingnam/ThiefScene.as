@@ -62,7 +62,7 @@ package classes.Scenes.Places.Ingnam
 			var x:int = player.cockThatFits(monster.analCapacity());
 			clearOutput();
 			outputText("You drag the unconscious thief into one of the alleys and remove his leather pants so he's naked from the waist down. The thief wakes up, realizing what you're doing and says with a whimper, \"<i>Please don't put that in there. I've never had anything in there.</i>\"");
-			outputText("\n\nYou " + (player.armor != ArmorLib.NOTHING || player.lowerGarment != UndergarmentLib.NOTHING ? "remove your " + player.armorName + ", " : "") + "get the thief into position and you slowly slide your " + cockDescript(x) + " into his rear hole. Despite the thief's protestations, he seems to find pleasure.");
+			outputText("\n\nYou " + (player.armor != ArmorLib.NOTHING || player.lowerGarment != UndergarmentLib.NOTHING ? "remove your [armor], " : "") + "get the thief into position and you slowly slide your " + cockDescript(x) + " into his rear hole. Despite the thief's protestations, he seems to find pleasure.");
 			outputText("\n\n\"<i>Yes, fuck me! Please fuck me!</i>\" The thief yells. That's the only encouragement you need as you thrust back and forth, abusing his ass. You grab his shoulders to get more leverage and you continue to pound with reckless abandon.");
 			outputText("\n\nEventually, you can hold back no more and you unload your seed into his depths. The thief achieves orgasm as well, cumming all over the ground before falling on ground, dazed. You slide your " + player.cockDescript(x) + " out with a pop" + player.clothedOrNaked(", redress yourself") + " and leave the ravaged thief to recover.");
 			player.orgasm();
@@ -71,7 +71,7 @@ package classes.Scenes.Places.Ingnam
 		
 		private function getLicked():void {
 			clearOutput();
-			outputText("You drag the unconscious thief into one of the alleys. The thief wakes up and realize what you're going to do. You " + (player.armor != ArmorLib.NOTHING || player.lowerGarment != UndergarmentLib.NOTHING ? "remove the bottom half of your " + player.armorName + "" : "") + " to reveal your " + player.vaginaDescript() + (player.hasCock() ? " and " + player.cockDescript(): "") + ".");
+			outputText("You drag the unconscious thief into one of the alleys. The thief wakes up and realize what you're going to do. You " + (player.armor != ArmorLib.NOTHING || player.lowerGarment != UndergarmentLib.NOTHING ? "remove the bottom half of your [armor]" : "") + " to reveal your " + player.vaginaDescript() + (player.hasCock() ? " and " + player.cockDescript(): "") + ".");
 			outputText("\n\n\"<i>Now lick. I want it licked good!</i>\" you tell the thief. The thief lets out a sigh as he licks your [pussy]. You let out a moan in pleasure while he's tongue-fucking your [pussy].");
 			outputText("\n\nEventually, you can hold back no more and your [pussy] spasms, launching femcum");
 			if (player.hasCock()) outputText(" while your [cock] fires ropes of jism");

@@ -48,7 +48,7 @@ package classes.Scenes.Areas.HighMountains
 		public function repeatvisitintro():void {
 			clearOutput();
 			outputText("You decide to make a trip to the temple. As soon as you enter the sacred ground, Sapphire screeches and takes flight, spear at the ready. She calms down once she recognizes you, assuming a relaxed pose in the middle of the temple.");			
-			outputText("\n\n\"<i>Well hello there! Nice to see you again " + player.short + ". You're welcome here, as usual... So are you here to pray?");
+			outputText("\n\n\"<i>Well hello there! Nice to see you again [name]. You're welcome here, as usual... So are you here to pray?");
 			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 99) outputText(" Perhaps you're here for something more... mutually agreeable, instead?");
 			outputText("</i>\"");
 			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 99) outputText(" She says, winking with a lusty smile.");
@@ -87,7 +87,7 @@ package classes.Scenes.Areas.HighMountains
 		public function sapphiremenu():void {
 			clearOutput();
 			outputText("You actually admit you were looking for her to which she casually sit next to you engaging discussion.\n\n");
-			outputText("\n\n\"<i>So " + player.short + " what did you want to talk about?</i>\"");
+			outputText("\n\n\"<i>So [name] what did you want to talk about?</i>\"");
 			menu();
 		//	addButton(0,"Back", templemainmenu);
 			addButton(1,"Her", TalkHer, null, null, null, "Cummin Sooooon!");

@@ -530,7 +530,7 @@ public class CombatMagic extends BaseCombatContent {
 				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
 			}
 			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
-			if(player.gender == 3) outputText(vaginaDescript(0) + " and " + player.multiCockDescriptLight() + " overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
+			if(player.gender == 3) outputText(vaginaDescript(0) + " and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
 			dynStats("lib", .25, "lus", 15);
 		}
 		else spellHealEffect();
@@ -665,7 +665,7 @@ public class CombatMagic extends BaseCombatContent {
 				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
 			}
 			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
-			if(player.gender == 3) outputText(vaginaDescript(0) + " and " + player.multiCockDescriptLight() + " overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
+			if(player.gender == 3) outputText(vaginaDescript(0) + " and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
 			dynStats("lib", .25, "lus", 15);
 		}
 		else {
@@ -772,7 +772,7 @@ public class CombatMagic extends BaseCombatContent {
 				else outputText(player.multiCockDescriptLight() + " twitch obscenely and drip with pre-cum as your libido spins out of control.");
 			}
 			if(player.gender == 2) outputText(vaginaDescript(0) + " becomes puffy, hot, and ready to be touched as the magic diverts into it.");
-			if(player.gender == 3) outputText(vaginaDescript(0) + " and " + player.multiCockDescriptLight() + " overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
+			if(player.gender == 3) outputText(vaginaDescript(0) + " and [cocks] overfill with blood, becoming puffy and incredibly sensitive as the magic focuses on them.");
 			dynStats("lib", .25, "lus", 15);
 		}
 		else {
@@ -1165,7 +1165,7 @@ public class CombatMagic extends BaseCombatContent {
 			return;
 		}
 		clearOutput();
-		outputText("You utter words of power, summoning an electrical charge around your " + player.weaponName + ".  It crackles loudly, ensuring you'll do more damage with it for the rest of the fight.\n\n");
+		outputText("You utter words of power, summoning an electrical charge around your [weapon].  It crackles loudly, ensuring you'll do more damage with it for the rest of the fight.\n\n");
 		player.createStatusEffect(StatusEffects.ChargeWeapon,ChargeWeaponBoost,0,0,0);
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -1236,7 +1236,7 @@ public class CombatMagic extends BaseCombatContent {
 			return;
 		}
 		clearOutput();
-		outputText("You utter words of power, summoning an electrical charge around your " + player.armorName + ".  It crackles loudly, ensuring you'll have more protection for the rest of the fight.\n\n");
+		outputText("You utter words of power, summoning an electrical charge around your [armor].  It crackles loudly, ensuring you'll have more protection for the rest of the fight.\n\n");
 		player.createStatusEffect(StatusEffects.ChargeArmor,ChargeArmorBoost,0,0,0);
 		statScreenRefresh();
 		flags[kFLAGS.SPELLS_CAST]++;

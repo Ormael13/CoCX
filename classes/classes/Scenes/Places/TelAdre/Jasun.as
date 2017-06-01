@@ -119,7 +119,7 @@ private function meetJasun():void {
 		if(player.tone < 75 || player.armorName != "slutty swimwear") {
 			outputText("Jasun walks out of a stall, his thick and muscular figure still as glorious as the last time you set eyes upon it. As he turns to greet you, though, you notice that his smirk suddenly turns around to a sense of shock. He's noticed that you're not quite the same as you were before, and you know it. He pauses a moment before turning back toward the mirror and addressing you without eye contact.\n\n");
 			
-			outputText("\"<i>" + player.short + ", you know, I still don't think you're quite ready to swim with me. That's fine, and it's entirely up to you, but I think today I should probably swim alone. You can come and visit me anytime, of course, maybe when you're ");
+			outputText("\"<i>[name], you know, I still don't think you're quite ready to swim with me. That's fine, and it's entirely up to you, but I think today I should probably swim alone. You can come and visit me anytime, of course, maybe when you're ");
 			if(player.tone < 75) outputText("fit enough");
 			else if(player.armorName != "slutty swimwear") outputText("properly attired");
 			else outputText("a little more compatible with me");
@@ -147,7 +147,7 @@ private function meetJasun():void {
 		if(player.tone < 75 || player.armorName != "slutty swimwear") {
 			outputText("Jasun walks out of a stall, his thick and muscular figure still as glorious as the last time you set eyes upon it. As he turns to greet you, though, you notice that his smirk suddenly turns around to a sense of shock. He's noticed that you're not quite the same as you were before, and you know it. He pauses a moment before turning back toward the mirror and addressing you without eye contact.\n\n");
 			
-			outputText("\"<i>" + player.short + ", you know, I see that a lot has changed with you. That's fine, and it's entirely up to you, but I think today I should probably swim alone. You can come and visit me anytime, of course, maybe things will be like they were before in time.</i>\" He hesitates for a moment at the mirror, and then walks past you quickly without making eye contact. Feeling dejected and suddenly very alone, you ignore the sensation caused by his skin brushing against yours and walk back to the gym's entrance. Maybe you can work yourself back into Jasun's graces with time.\n\n");
+			outputText("\"<i>[name], you know, I see that a lot has changed with you. That's fine, and it's entirely up to you, but I think today I should probably swim alone. You can come and visit me anytime, of course, maybe things will be like they were before in time.</i>\" He hesitates for a moment at the mirror, and then walks past you quickly without making eye contact. Feeling dejected and suddenly very alone, you ignore the sensation caused by his skin brushing against yours and walk back to the gym's entrance. Maybe you can work yourself back into Jasun's graces with time.\n\n");
 			//(-15 Lust, back to gym entrance)
 			dynStats("lus", -15);
 			doNext(camp.returnToCampUseOneHour);
@@ -170,7 +170,7 @@ private function meetJasun2():void {
 	if(player.str < 50) outputText("that you're pretty sure you couldn't have moved on your own at all ");
 	outputText("and then suddenly stops. The light in the room blinds you for a moment, but then your eyes adjust and what you see makes you gasp. There's an entire swimming pool in here, and it's absolutely gargantuan! You pull away from the shark-man and walk up to the water, running your hand through it and looking about like a kid who just walked into a toy store. He walks up behind you slowly and sits down on the ledge into the pool beside you.\n\n");
 
-	outputText("\"<i>My name is Jasun, " + player.short + ". My people love the water, but most of them are ferocious and have lost their way. Seeing as I could no longer stay with them without risking my own life constantly, I came to Tel'Adre and set about working with the gym here to set up this wondrous pool. I spend most of my time here. Not many people get to use it, but I think you are ready.</i>\" He smiles at you without baring his teeth and you're flattered, knowing how difficult that must be for something with his jaw structure. \"<i>Come, let's swim.</i>\" He puts out his hand, palm up, literally asking for your hand for him to take you into the water.\n\n");
+	outputText("\"<i>My name is Jasun, [name]. My people love the water, but most of them are ferocious and have lost their way. Seeing as I could no longer stay with them without risking my own life constantly, I came to Tel'Adre and set about working with the gym here to set up this wondrous pool. I spend most of my time here. Not many people get to use it, but I think you are ready.</i>\" He smiles at you without baring his teeth and you're flattered, knowing how difficult that must be for something with his jaw structure. \"<i>Come, let's swim.</i>\" He puts out his hand, palm up, literally asking for your hand for him to take you into the water.\n\n");
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00181] = 1;
 	//[Accept] [Turn Away]
 	simpleChoices("Accept", acceptJasunsAdvances, "Turn Away", turnAwayFromAdj, "", null, "", null, "", null);

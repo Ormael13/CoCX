@@ -28,7 +28,7 @@ public class MagicSpecials extends BaseCombatContent {
 		menu();
 		var button:int = 0;
 		if (player.findPerk(PerkLib.JobSorcerer) >= 0) {
-			if (player.findPerk(PerkLib.StaffChanneling) >= 0 && player.weaponPerk == "Staff") addButton(button++, "M.Bolt", magicbolt, null, null, null, "Attempt to attack the enemy with magic bolt from your " + player.weaponName + ".  Damage done is determined by your intelligence and weapon.", "Magic Bolt");
+			if (player.findPerk(PerkLib.StaffChanneling) >= 0 && player.weaponPerk == "Staff") addButton(button++, "M.Bolt", magicbolt, null, null, null, "Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Magic Bolt");
 			else addButton(button++, "M.Bolt", magicbolt, null, null, null, "Attempt to attack the enemy with magic bolt.  Damage done is determined by your intelligence.", "Magic Bolt");
 		}
 		if(player.findPerk(PerkLib.Berzerker) >= 0) {
@@ -267,7 +267,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			//Determine if blocked!
 			else if (combatBlock(true)) {
-				outputText("You manage to block your own ice wave with your " + player.shieldName + "!");
+				outputText("You manage to block your own ice wave with your [shield]!");
 			}
 			else {
 				damage = takeDamage(damage);
@@ -376,7 +376,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			//Determine if blocked!
 			else if (combatBlock(true)) {
-				outputText("You manage to block your own ice wave with your " + player.shieldName + "!");
+				outputText("You manage to block your own ice wave with your [shield]!");
 			}
 			else {
 				damage = takeDamage(damage);
@@ -556,7 +556,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			//Determine if blocked!
 			else if (combatBlock(true)) {
-				outputText("You manage to block your own fire with your " + player.shieldName + "!");
+				outputText("You manage to block your own fire with your [shield]!");
 			}
 			else {
 				damage = takeDamage(damage);
@@ -698,7 +698,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			//Determine if blocked!
 			else if (combatBlock(true)) {
-				outputText("You manage to block your own fire with your " + player.shieldName + "!");
+				outputText("You manage to block your own fire with your [shield]!");
 			}
 			else {
 				damage = takeDamage(damage);
@@ -812,7 +812,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			//Determine if blocked!
 			else if (combatBlock(true)) {
-				outputText("You manage to block your own ice with your " + player.shieldName + "!");
+				outputText("You manage to block your own ice with your [shield]!");
 			}
 			else {
 				damage = takeDamage(damage);
@@ -916,7 +916,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			//Determine if blocked!
 			else if (combatBlock(true)) {
-				outputText("You manage to block your own lightning with your " + player.shieldName + "!");
+				outputText("You manage to block your own lightning with your [shield]!");
 			}
 			else {
 				damage = takeDamage(damage);
@@ -1019,7 +1019,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			//Determine if blocked!
 			else if (combatBlock(true)) {
-				outputText("You manage to block your own darkness with your " + player.shieldName + "!");
+				outputText("You manage to block your own darkness with your [shield]!");
 			}
 			else {
 				damage = takeDamage(damage);
@@ -1143,7 +1143,7 @@ public class MagicSpecials extends BaseCombatContent {
 			else {
 				//Determine if blocked!
 				if (combatBlock(true)) {
-					outputText("You manage to block your own fire with your " + player.shieldName + "!");
+					outputText("You manage to block your own fire with your [shield]!");
 					combatRoundOver();
 					return;
 				}

@@ -22,7 +22,7 @@ package classes.Scenes.Areas.Swamp
 				if(damage > 0) damage = player.takeDamage(damage);
 				if(damage <= 0) {
 					damage = 0;
-					if(rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your " + player.armorName + ".");
+					if(rand(player.armorDef + player.tou) < player.armorDef) outputText("You absorb and deflect every " + weaponVerb + " with your [armor].");
 					else outputText("You deflect and block every " + weaponVerb + " " + a + short + " throws at you.");
 				}
 				else if(damage < 6) outputText("You are struck a glancing blow by " + a + short + "! ");

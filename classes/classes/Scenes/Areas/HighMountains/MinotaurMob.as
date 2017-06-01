@@ -62,7 +62,7 @@ package classes.Scenes.Areas.HighMountains
 			}
 			//(Medium damage taken)
 			else if(damage <= 14) {
-				outputText("The powerful pheromones and scents hanging in the air around you make your body flush hotly.  Your " + player.nippleDescript(0) + "s grow harder");
+				outputText("The powerful pheromones and scents hanging in the air around you make your body flush hotly.  Your [nipple]s grow harder");
 				if(player.lust > 70) outputText(", though you didn't think such a thing was possible");
 				else outputText(", feeling like two bullets scraping along the inside of your " + player.armorName);
 				outputText(", but it... it could have been worse.  You shudder as a little fantasy of letting them dribble it all over your body works through your mind.");
@@ -104,7 +104,7 @@ package classes.Scenes.Areas.HighMountains
 		//Gang Grope
 		private function minotaurGangGangGropeAttack():void {
 			game.spriteSelect(94);
-			outputText("Before you can react, hands reach out from multiple angles and latch onto your body.  One pair squeezes at your " + game.buttDescript() + ", the strong grip massaging your cheeks with loving touches.  Another set of hands are sliding along your tummy, reaching down for, but not quite touching, the juicy delta below.  Palms encircle your " + player.chestDesc() + " and caress them, gently squeezing in spite of the brutish hands holding you.  You wriggle and squirm in the collective grip of the many minotaurs for a few moments, growing more and more turned on by the treatment.  At last, you shake out of their hold and stand free, panting hard from exertion and desire.");
+			outputText("Before you can react, hands reach out from multiple angles and latch onto your body.  One pair squeezes at your " + game.buttDescript() + ", the strong grip massaging your cheeks with loving touches.  Another set of hands are sliding along your tummy, reaching down for, but not quite touching, the juicy delta below.  Palms encircle your [chest] and caress them, gently squeezing in spite of the brutish hands holding you.  You wriggle and squirm in the collective grip of the many minotaurs for a few moments, growing more and more turned on by the treatment.  At last, you shake out of their hold and stand free, panting hard from exertion and desire.");
 			game.dynStats("lus", (15 + player.sens/10));
 			combatRoundOver();
 		}

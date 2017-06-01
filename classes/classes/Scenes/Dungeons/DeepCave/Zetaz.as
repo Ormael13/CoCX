@@ -66,7 +66,7 @@ package classes.Scenes.Dungeons.DeepCave
 						outputText("You sidestep it a moment before it shatters on the wall, soaking the tapestries with red fluid!");
 					}
 					else {
-						outputText("You try to avoid it, but the fragile glass shatters against you, coating you in sticky red liquid.  It seeps into your " + player.skinDesc + " and leaves a pleasant, residual tingle in its wake.  Oh no...");
+						outputText("You try to avoid it, but the fragile glass shatters against you, coating you in sticky red liquid.  It seeps into your [skin.type] and leaves a pleasant, residual tingle in its wake.  Oh no...");
 						//[Applies: "Temporary Heat" status]
 						if(!player.hasStatusEffect(StatusEffects.TemporaryHeat)) player.createStatusEffect(StatusEffects.TemporaryHeat,0,0,0,0);
 					}
@@ -103,15 +103,15 @@ package classes.Scenes.Dungeons.DeepCave
 			if(player.lust >= 30 && player.lust < 60) outputText("Blood rushes to your groin in a rush as your body is hit by a tidal-wave of arousal.  ");
 			if(player.lust >= 60) outputText("Your mouth begins to drool as you close your eyes and imagine yourself sucking off Zetaz, then riding him, letting him sate his desires in your inviting flesh.  The unnatural visions send pulses of lust through you so strongly that your body shivers.  ");
 			if(player.cocks.length > 0) {
-				if(player.lust >= 60 && player.cocks.length > 0) outputText("You feel " + player.SMultiCockDesc() + " dribble pre-cum, bouncing with each beat of your heart and aching to be touched.  ");
+				if(player.lust >= 60 && player.cocks.length > 0) outputText("You feel [eachcock] dribble pre-cum, bouncing with each beat of your heart and aching to be touched.  ");
 				if(player.lust >= 30 && player.lust < 60 && player.cocks.length == 1) outputText(player.SMultiCockDesc() + " hardens and twitches, distracting you further.  ");
 			}
 			if(player.vaginas.length > 0) {
-				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL && player.vaginas.length == 1) outputText("Your " + player.vaginaDescript() + " dampens perceptibly, feeling very empty.  ");
+				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_NORMAL && player.vaginas.length == 1) outputText("Your [vagina] dampens perceptibly, feeling very empty.  ");
 				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_WET && player.vaginas.length > 0) outputText("Your crotch becomes sticky with girl-lust, making it clear to " + a + short + " just how welcome your body finds the spell.  ");
-				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK && player.vaginas.length == 1) outputText("Your " + player.vaginaDescript() + " becomes sloppy and wet, dribbling with desire to be mounted and fucked.  ");
+				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLICK && player.vaginas.length == 1) outputText("Your [vagina] becomes sloppy and wet, dribbling with desire to be mounted and fucked.  ");
 				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_DROOLING && player.vaginas.length > 0) outputText("Thick runners of girl-lube stream down the insides of your thighs as your crotch gives into the demonic magics.  You wonder what " + a + short + "'s cock would feel like inside you?  ");
-				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your " + player.vaginaDescript() + " instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + a + short + "'s dick when it's rammed inside you?  ");
+				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == VAGINA_WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your [vagina] instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + a + short + "'s dick when it's rammed inside you?  ");
 			}
 			if(player.lust >= player.maxLust()) doNext(game.endLustLoss)
 			else combatRoundOver();

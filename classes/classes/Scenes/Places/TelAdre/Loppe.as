@@ -895,7 +895,7 @@ private function loppeRidesCocks():void {
 	else outputText("cumbersomely on the floor, rolling over and spreading your hindlegs to expose yourself");
 	outputText(".  Quietly, you ask Loppe how she would feel about indulging her feminine half.");
 
-	outputText("\n\n\"<i>I would love to, sugar!</i>\"  Loppe gazes at your " + multiCockDescriptLight() + ".");
+	outputText("\n\n\"<i>I would love to, sugar!</i>\"  Loppe gazes at your [cocks].");
 	//[(2 fit cocks)
 	var x:int = player.cockThatFits(loppeCapacity());
 	var y:int = player.cockThatFits2(loppeCapacity());
@@ -1051,7 +1051,7 @@ private function loppeRidesPCCockFinal():void {
 	else outputText("fur");
 	outputText(" give you the impression of being wrapped in the moist folds of a woman's sex.  As Loppe slides further down you feel her teasingly licking at the tip");
 	if(y >= 0) outputText("s");
-	outputText(" of your " + multiCockDescriptLight() + ".");
+	outputText(" of your [cocks].");
 
 	outputText("\n\nThe skillful dance of her warm, wet tongue on the sensitive skin of your post-orgasmic member");
 	if(y >= 0) outputText("s");

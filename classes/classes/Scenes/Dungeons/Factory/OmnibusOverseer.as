@@ -50,9 +50,9 @@ package classes.Scenes.Dungeons.Factory
 					outputText("The milk splatters across your face and chest, soaking you with demonic cream.  Some managed to get into your mouth, and you swallow without thinking.  It makes you tingle with warmth.  ");
 				}
 				else {
-					outputText("The milk splashes into your " + player.armorName + ", soaking you effectively.  ");
+					outputText("The milk splashes into your [armor], soaking you effectively.  ");
 					if (player.cocks.length > 0) {
-						outputText("Your " + cockDescript(0) + " gets hard as the milk lubricates and stimulates it.  ");
+						outputText("Your [cock] gets hard as the milk lubricates and stimulates it.  ");
 						game.dynStats("lus", 5);
 					}
 					if (player.vaginas.length > 0) {
@@ -61,7 +61,7 @@ package classes.Scenes.Dungeons.Factory
 					}
 				}
 				game.dynStats("lus", 7 + player.sens / 20);
-				if (player.biggestLactation() > 1) outputText("Milk dribbles from your " + allBreastsDescript() + " in sympathy.");
+				if (player.biggestLactation() > 1) outputText("Milk dribbles from your [allbreasts] in sympathy.");
 			}
 			game.combatRoundOver();
 		}

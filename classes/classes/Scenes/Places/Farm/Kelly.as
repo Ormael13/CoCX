@@ -101,7 +101,7 @@ public function breakingKeltOptions():void {
 
 public function fightToBeatKelt():void {
 	clearOutput();
-	outputText("Deciding you've had enough with Kelt, you ready your " + player.weaponName + ". Kelt readies his bow. \"<i>Do you really think you can beat me, slut?</i>\"");
+	outputText("Deciding you've had enough with Kelt, you ready your [weapon]. Kelt readies his bow. \"<i>Do you really think you can beat me, slut?</i>\"");
 	flags[kFLAGS.KELT_KILL_PLAN] = 1;
 	startCombat(new Kelt());
 }
@@ -235,7 +235,7 @@ private function breakKeltGo():void {
 	
 	if(player.isTaur()) outputText("\n\nAs you masturbate the way only a half-horse can,");
 	else outputText("\n\nAs you touch yourself,");
-	outputText(" small droplets of pre-cum begin dripping out of your " + multiCockDescriptLight() + " before being swallowed by the potent, feminine mixture down below.  The white spots are drowning in that milky goo, but you're confident that Kelt will be able to recognize the taste.");
+	outputText(" small droplets of pre-cum begin dripping out of your [cocks] before being swallowed by the potent, feminine mixture down below.  The white spots are drowning in that milky goo, but you're confident that Kelt will be able to recognize the taste.");
 	
 	outputText("\n\n\"<i>Hey dipshit - I have a job here, and if you do this, you're going to fuck shit up for everybody.  Not to mention, I'm gonna come back and kick your ass once I get loose!  Besides, I've got a few sluts that need tending to.</i>\"");
 	
@@ -390,7 +390,7 @@ internal function defeatKellyNDBREAKHIM():void {
 	outputText("\n\nWith a smile, you grab her head and ");
 	if(player.isTaur()) outputText("push her underneath you towards");
 	else outputText("pull her close to");
-	outputText(" your erect " + multiCockDescriptLight() + ".");
+	outputText(" your erect [cocks].");
 	
 	outputText("\n\n\"<i>The first time I let you get accustomed to the taste, now you know how it's done.  Get to work, bitch.</i>\"");
 	
@@ -502,7 +502,7 @@ outputText("\n\nKelly remains quiet for a couple of seconds before slowly mutter
 	outputText(" convulsively as you feel your lust rise.  ");
 	if(!player.isTaur()) outputText("Soon one breast isn't enough to contain your lust-driven energy and you reach for the other one with your free hand.  Your constant nipple-teasing has an effect on");
 	else outputText("Soon, you cannot contain your lust, and you begin to buck against her hands, whinnying with delight.  The rigid, pulsing dick-flesh in her mouth has an effect on");
-	outputText(" Kelly at last: you can hear her moan and sigh, and her hands move erratically on your " + multiCockDescriptLight() + ", sometimes violently yanking it as she loses control.  This brings all kinds of painful yet pleasurable tingles to your body, and only entices you to feel her up even more.");
+	outputText(" Kelly at last: you can hear her moan and sigh, and her hands move erratically on your [cocks], sometimes violently yanking it as she loses control.  This brings all kinds of painful yet pleasurable tingles to your body, and only entices you to feel her up even more.");
 	
 	outputText("\n\nA familiar warmth builds in your loins ");
 	if(player.balls > 0) outputText("and your [balls] churn ");
@@ -542,7 +542,7 @@ private function finalKeltBreaking():void {
 	
 	outputText("\n\n\"<i>I want... I want your cum!  When you made me drink that potion, it felt like the most wonderful thing in the world, and I'd rather die than not be allowed to taste it ever again.  Please let me drink from you.  Fuck, I want your dick so bad!  Let me suck it, I promise I'll make you feel so good you'll give it all to me.</i>\"");
 	
-	outputText("\n\nYou laugh triumphantly as you whip your " + multiCockDescriptLight() + " out of your [armor]; the slut is more than ready!");
+	outputText("\n\nYou laugh triumphantly as you whip your [cocks] out of your [armor]; the slut is more than ready!");
 	
 	outputText("\n\n\"<i>While you were busy whining like a whore my junk has been aching for a good blowjob; how about you stop talking and start sucking?</i>\"");
 	
@@ -583,7 +583,7 @@ private function finalKeltBreaking():void {
 	
 	outputText("\n\nA mighty fountain of spunk erupts from [eachCock].  Powered by your corruption, it rains down on Kelly's body and finds its way through every pore of her body.  You find yourself spraying more spooge jets than you thought yourself capable of, and somehow the entirety of Kelly is soon painted white and sticky with goo.  The slut raises her hands as if she wanted to gather some more, smiling beatifically as you baptize her.  You cum and cum, not even feeling the flow of seed at this point; you only ride out the endless orgasm as you turn the former archer into your eager personal slut.  Kelly lets out a very high-pitched screech, ecstasy taking over her body as it fully distorts into that of a female, utterly submissive creature.  You can actually feel the creature's already weakened aura shriveling and disappearing into oblivion.  The old Kelt is thoroughly erased from her; perhaps that cry was an ultimate protest against an unavoidable fate?  There's no way to know, as the newborn Kelly is now totally in control and screaming to the world how much she enjoys her orgasm.  The only thing you see is a busty centauress covered in ever-flowing white spunk; the only thing you hear is her loud and constant moaning.");
 	
-	outputText("\n\nThe cum-flow eventually starts to ebb; less and less goo pours from your " + multiCockDescriptLight() + " and your orgasm gradually fades out.  When your euphoric pleasure wears off, you finally get a good look at the creature standing before you.");
+	outputText("\n\nThe cum-flow eventually starts to ebb; less and less goo pours from your [cocks] and your orgasm gradually fades out.  When your euphoric pleasure wears off, you finally get a good look at the creature standing before you.");
 
 	outputText("\n\nShe doesn't seem to have changed much in appearance: she still sports the same nice pair of bouncy tits that seem to ask you to cup them with your hands, and her face is even more cutely feminine than ever.  Nevertheless, you can tell by subtle modifications of her body language that corruption has taken a good hold in her: the way her eyes glow with craving need, her moist pussy that drips seemingly unnatural amounts of juices, and her tail adopts shapes that remind you that of a demon.  Even the way she smiles shows that she feels more than meek pleasure in serving you.");
 	
@@ -925,7 +925,7 @@ private function taurOnTaurSexKelly():void {
 
 private function tentaFuckKelly():void {
 	clearOutput();
-	outputText("With a mischievous grin, you remove your [armor], fully revealing your " + multiCockDescriptLight() + ".  The plant-like appendages wriggle around the horny centauress, inspecting her body from every angle.  You feel your own lust rising as the tentacle peckers grow harder, their green heads turning pink in arousal.  Kelly stammers, confused: \"<i>W-what are you-</i>\"");
+	outputText("With a mischievous grin, you remove your [armor], fully revealing your [cocks].  The plant-like appendages wriggle around the horny centauress, inspecting her body from every angle.  You feel your own lust rising as the tentacle peckers grow harder, their green heads turning pink in arousal.  Kelly stammers, confused: \"<i>W-what are you-</i>\"");
 	
 	var one:int = -1;
 	var two:int = -2;
@@ -1269,7 +1269,7 @@ private function rideKellyForPunishment():void {
 			
 			outputText("\n\n\"<i>Don't worry about her,</i>\" you call up casually. \"<i>She's just learning a lesson.</i>\" You have no idea how this works as a valid explanation, but already knowing your face and having seen all manner of centaur entering and leaving all day long, the cat and hare let her pass after a cursory magical examination.  The crystal glows, but not enough to straight-up deny Kelly entrance.");
 			
-			outputText("\n\nUpon the close streets though everyone stares; even for as liberal a place as Tel'Adre the sight of a " + player.race() + " riding a practically naked, bound and gagged centauress draws a slight hush and open mouths.  The centaur you canter past in particular look absolutely gobsmacked; by turns unbelieving, disgusted, or shocked into laughter.  Nobody attempts to stop you though and you affect to be completely unaware of the attention; you after all are a champion upon an important errand.  But you know the attention and pure humiliation are soaking into Kelly when she makes a sobbing, muffled moan.");
+			outputText("\n\nUpon the close streets though everyone stares; even for as liberal a place as Tel'Adre the sight of a [race] riding a practically naked, bound and gagged centauress draws a slight hush and open mouths.  The centaur you canter past in particular look absolutely gobsmacked; by turns unbelieving, disgusted, or shocked into laughter.  Nobody attempts to stop you though and you affect to be completely unaware of the attention; you after all are a champion upon an important errand.  But you know the attention and pure humiliation are soaking into Kelly when she makes a sobbing, muffled moan.");
 			
 			outputText("\n\n\"<i>Did you come here before I owned you, ass?</i>\" you wonder aloud.  \"<i>You know, before I gave you those big bouncing tits everyone is staring at, or that nice succulent hole I replaced your dick with.   I bet you did- you knew exactly where I wanted you to go.  Perhaps you even found some of your \"<i>wives</i>\" here, back in the day.  Probably strode these cobbles like you owned them.  I bet you were kicked out for being that much of an asshole, or for raping the wrong person.  Awww, don't be upset!</i>\" You kindly reach around her blinkers and wipe her tears away.  \"<i>You're a different person now, and you're learning to be better, bit by bit.  Isn't that right?</i>\" Kelly manages a choked \"<i>uh huh</i>\" and you grin.");
 			
@@ -1288,7 +1288,7 @@ private function rideKellyForPunishment():void {
 			
 			outputText("\n\n\"<i>Don't worry about her,</i>\" you call up casually.  \"<i>She's just learning a lesson.</i>\"  You have no idea how this works as a valid explanation, but already knowing you and having seen all manner of centaur entering and leaving all day long, the cat and hare morph turn away.");
 			
-			outputText("\n\nUpon the close streets though everyone stares; even for as liberal a place as Tel'Adre the sight of a " + player.race() + " leading a practically naked bound and gagged centauress draws a slight hush and open mouths.  The centaurs you canter past in particular look absolutely gobsmacked; by turns unbelieving, disgusted, or shocked into laughter.  Nobody attempts to stop you though and you affect to be completely unaware of the attention; you after all are a champion upon an important errand.  But you know the attention and pure humiliation is soaking into Kelly when she makes a sobbing, muffled moan.");
+			outputText("\n\nUpon the close streets though everyone stares; even for as liberal a place as Tel'Adre the sight of a [race] leading a practically naked bound and gagged centauress draws a slight hush and open mouths.  The centaurs you canter past in particular look absolutely gobsmacked; by turns unbelieving, disgusted, or shocked into laughter.  Nobody attempts to stop you though and you affect to be completely unaware of the attention; you after all are a champion upon an important errand.  But you know the attention and pure humiliation is soaking into Kelly when she makes a sobbing, muffled moan.");
 			
 			outputText("\n\n\"<i>Did you come here before I owned you, ass?</i>\" you wonder aloud.  \"<i>You know, before I gave you those big bouncing tits everyone is staring at, or that nice succulent hole I replaced your dick with.  I bet you did - you knew exactly where I wanted you to go.  Perhaps you even found some of your \"<i>wives</i>\" here, back in the day.  Probably strode these cobbles like you owned them.  I bet you were kicked out for being that much of an asshole, or for raping the wrong person.  Awww, don't be upset!</i>\"  You kindly reach around her blinkers and wipe her tears away.  \"<i>You're a different person now, and you're learning to be better, bit by bit.  Isn't that right?</i>\"  Kelly manages a choked \"<i>uh huh</i>\" and you grin.");
 			
@@ -1326,7 +1326,7 @@ private function rideKellyForPunishment():void {
 			
 			outputText("\n\nThanks to Mareth's warped geography it doesn't take you long to arrive at the gates of Tel'Adre.  The guards on duty look at you, then look away.  Evidently word is getting around.");
 			
-			outputText("\n\nUpon the close streets though everyone stares; even for as liberal a place as Tel'Adre the sight of a " + player.race() + " riding a practically naked bound and gagged centauress draws a slight hush and open mouths, even among the ones who have already seen this display.  The centaur you canter past in particular look absolutely gobsmacked; by turns unbelieving, disgusted, or shocked into laughter.  Nobody attempts to stop you though and you affect to be completely unaware of the attention; you after all are a champion upon an important errand.  But you know the attention and pure humiliation are soaking into Kelly when she makes a sobbing, muffled moan.");
+			outputText("\n\nUpon the close streets though everyone stares; even for as liberal a place as Tel'Adre the sight of a [race] riding a practically naked bound and gagged centauress draws a slight hush and open mouths, even among the ones who have already seen this display.  The centaur you canter past in particular look absolutely gobsmacked; by turns unbelieving, disgusted, or shocked into laughter.  Nobody attempts to stop you though and you affect to be completely unaware of the attention; you after all are a champion upon an important errand.  But you know the attention and pure humiliation are soaking into Kelly when she makes a sobbing, muffled moan.");
 			
 			outputText("\n\n\"<i>Awww, don't be upset!</i>\"  You kindly reach around her blinkers and wipe her tears away.  \"<i>Everyone might be able to see you're an owned little cocksleeve, you might see faces from back when you had things like dignity and respect, but this is how you'll learn to be better, bit by bit.  Isn't that right?</i>\" Kelly manages a choked \"<i>uh huh</i>\" and you grin.");
 			
@@ -1345,7 +1345,7 @@ private function rideKellyForPunishment():void {
 			outputText("\n\nWithout another word you grab hold of the reigns and jerk them.  \"<i>You know where you're going,</i>\" you breathe into her ear.  Kelly whimpers, and then sets off behind you at a trot.");
 			outputText("\n\nThanks to Mareth's warped geography it doesn't take you long to arrive at the gates of Tel'Adre.  The guards on duty look at you, then look away.  Evidently word is getting around.");
 			
-			outputText("\n\nUpon the close streets though everyone stares; even for as liberal a place as Tel'Adre the sight of a " + player.race() + " leading a practically naked bound and gagged centauress around like a show horse draws a slight hush and open mouths, even among the ones who have already seen this display.  The centaur you canter past in particular look absolutely gobsmacked; by turns unbelieving, disgusted, or shocked into laughter.  Nobody attempts to stop you though and you affect to be completely unaware of the attention; you after all are a champion upon an important errand.  But you know the attention and pure humiliation are soaking into Kelly when she makes a sobbing, muffled moan.");
+			outputText("\n\nUpon the close streets though everyone stares; even for as liberal a place as Tel'Adre the sight of a [race] leading a practically naked bound and gagged centauress around like a show horse draws a slight hush and open mouths, even among the ones who have already seen this display.  The centaur you canter past in particular look absolutely gobsmacked; by turns unbelieving, disgusted, or shocked into laughter.  Nobody attempts to stop you though and you affect to be completely unaware of the attention; you after all are a champion upon an important errand.  But you know the attention and pure humiliation are soaking into Kelly when she makes a sobbing, muffled moan.");
 			
 			outputText("\n\n\"<i>Awww, don't be upset!</i>\" You kindly reach around her blinkers and wipe her tears away.  \"<i>Everyone might be able to see you're an owned little cocksleeve, you might see faces from back when you had things like dignity and respect, but this is how you'll learn to be better, bit by bit.  Isn't that right?</i>\" Kelly manages a choked \"<i>uh huh</i>\" and you grin.");
 			
@@ -1572,7 +1572,7 @@ private function kellyPregSex():void {
 	else x = player.cockThatFits(300);
 	if(x < 0) x = player.smallestCockIndex();
 	outputText("Maybe because of her pregnancy, the slut seems to release even more powerful scents out of her slick pussy; you actually have a clear view of her wide, parted lips exuding sexual musk.  You want to take her right now, right there, and deposit on her unborn offspring the load they truly deserve.  As if it weren't enough, Kelly is releasing copious amount of juices and whinnies meekly from time to time, as if her pregnancy makes her uneasy and she needs a big fat cock to release her tension.");
-	outputText("\n\nYou remove your [armor] and watch your " + multiCockDescriptLight() + " grow into a rock-hard erect state under the aphrodisiac scent; you're ready to stuff the breeding mare before you.  Driven mad with lust, you jump the centaur's behind and slap her angrily, making her moan and snort in submissive pleasure.  You can't take it anymore and with feverish excitement, you grab hold of [oneCock] and plunge it deep into Kelly's dark recesses.");
+	outputText("\n\nYou remove your [armor] and watch your [cocks] grow into a rock-hard erect state under the aphrodisiac scent; you're ready to stuff the breeding mare before you.  Driven mad with lust, you jump the centaur's behind and slap her angrily, making her moan and snort in submissive pleasure.  You can't take it anymore and with feverish excitement, you grab hold of [oneCock] and plunge it deep into Kelly's dark recesses.");
  	
 	outputText("\n\nThe centauress moans, screams and arches her back, but you firmly slap her ass to keep her in control.  Grasping her motherly hips for leverage, you begin to thrust in and out of her unbelievably wide love-tunnel, knowing that its boiling warmth and size are made to accustom monstrous equine members.");
 	
@@ -1669,7 +1669,7 @@ private function talkNHandToKelly():void {
 		if(player.cockTotal() > 1) outputText("imagining thrusting every single one of your cocks into a wet, willing hole, ");
 		//vagina:
 		else if(player.hasVagina()) outputText("imagining one of them tongue-fucking your [vagina] as you buck into another's tight cunt, ");
-		outputText("imagining the symphony of feminine squeals and moans as you cum....  Kelly coos as you bark wordlessly, jizz surging powerfully out of your " + multiCockDescriptLight() + ".  She keeps masturbating you, pumping you with gentle, insistent pressure until you are spent.  Once you're done, she bends in and licks you clean, humming happily as she laps at your [cockHead] with her soothing, seeking tongue.");
+		outputText("imagining the symphony of feminine squeals and moans as you cum....  Kelly coos as you bark wordlessly, jizz surging powerfully out of your [cocks].  She keeps masturbating you, pumping you with gentle, insistent pressure until you are spent.  Once you're done, she bends in and licks you clean, humming happily as she laps at your [cockHead] with her soothing, seeking tongue.");
 		
 		outputText("\n\nAble to think slightly clearer with your blood settled, you decide against telling Kelly to go fetch her erstwhile harem - it's dangerous to send such a vulnerable slave wandering around in the wilderness for something that's probably long gone, and taking care of just one centaur cumslut is draining enough as it is.");
 		if(player.cor < 70) outputText("  Plus, the thought of making Kelt's victims pay the price for his own crimes makes you feel uncomfortable.");

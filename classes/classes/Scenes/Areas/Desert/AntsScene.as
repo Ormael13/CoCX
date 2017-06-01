@@ -146,8 +146,8 @@ package classes.Scenes.Areas.Desert
 			//►(If Over 41 - Male)
 			else if (player.hasCock()) {
 				outputText(images.showImage("ants-desert-male-firstencounter"));
-				outputText("You know exactly what's going to happen once the demons 'subdue' their prey.  The growing throbbing in your loins begs for release, and you quickly and quietly take off your " + player.armorName + ", making sure the demons don't notice you.  You might as well watch the show as you're not gonna be able to leave unnoticed until the demons are done anyways.");
-				outputText("\n\nWatching from your hiding spot you start to stroke your " + cockDescript(0) + ".");
+				outputText("You know exactly what's going to happen once the demons 'subdue' their prey.  The growing throbbing in your loins begs for release, and you quickly and quietly take off your [armor], making sure the demons don't notice you.  You might as well watch the show as you're not gonna be able to leave unnoticed until the demons are done anyways.");
+				outputText("\n\nWatching from your hiding spot you start to stroke your [cock].");
 				//Start Dick Size Check
 				var x:Number = player.biggestCockIndex();
 				//If player can auto-fallatio:
@@ -519,21 +519,21 @@ package classes.Scenes.Areas.Desert
 			if (player.cockArea(x) < 36) {
 				outputText("\n\nHer delicate face wears an expression of utmost curiosity.  She seems to be interested in your outline but unsure of what to do with it. As if she's never... then you recall her saying it's her first time; she's a virgin!");
 				//PC has more than one dick:
-				if (player.cockTotal() > 1) outputText("\n\nShe probably won't be able to handle ONE, let alone all of your " + multiCockDescriptLight() + "!");
+				if (player.cockTotal() > 1) outputText("\n\nShe probably won't be able to handle ONE, let alone all of your [cocks]!");
 			}
 			//***Dick(s) size more than 36 inches, but less than 72 inches:
 			else if (player.cockArea(x) < 72) {
-				outputText("\n\nThe constant bobbing and twitching of your " + multiCockDescriptLight() + " is apparently not obvious enough to her that your trousers aren't built to accommodate the size of your loins.  You grimace in response as the fabric of your pants become painfully constrictive and unyielding. Snapping out of her inexperienced musings, the Ant Morph sees your obvious predicament.");
-				outputText("\n\nIn an effort to get your loins free she rushes in, all four of her arms working feverishly to help spring you free.  After a quick flurry of motions, your " + multiCockDescriptLight() + " snap out of your britches; the size of which apparently intimidates the Ant Morph, whose eyes go wide.  \"<i>H-Ho- How am I... wow...</i>\"");
+				outputText("\n\nThe constant bobbing and twitching of your [cocks] is apparently not obvious enough to her that your trousers aren't built to accommodate the size of your loins.  You grimace in response as the fabric of your pants become painfully constrictive and unyielding. Snapping out of her inexperienced musings, the Ant Morph sees your obvious predicament.");
+				outputText("\n\nIn an effort to get your loins free she rushes in, all four of her arms working feverishly to help spring you free.  After a quick flurry of motions, your [cocks] snap out of your britches; the size of which apparently intimidates the Ant Morph, whose eyes go wide.  \"<i>H-Ho- How am I... wow...</i>\"");
 				//PC has more than one dick:
-				if (player.cockTotal() > 1) outputText("\n\nShe probably won't be able to handle ONE, let alone all of your " + multiCockDescriptLight() + "!");
+				if (player.cockTotal() > 1) outputText("\n\nShe probably won't be able to handle ONE, let alone all of your [cocks]!");
 			}
 			//***Dick(s) size more than 72 inches:
 			else {
-				outputText("\n\nThe fabric of your pants simply cannot contain your " + multiCockDescriptLight() + " any longer as you frantically tug and yank at the button, trying to get your loins free before you injure yourself or ruin a good pair of trousers. Phylla's absent mindedness comes to an abrupt end when she sees your face flush with red and fury as you desperately work to free yourself.");
+				outputText("\n\nThe fabric of your pants simply cannot contain your [cocks] any longer as you frantically tug and yank at the button, trying to get your loins free before you injure yourself or ruin a good pair of trousers. Phylla's absent mindedness comes to an abrupt end when she sees your face flush with red and fury as you desperately work to free yourself.");
 				outputText("\n\n\"<i>I-I've never... is that... your...  I mean...</i>\"  You give her a quick, serious look as you continue to fidget with your trousers.  \"<i>Eeep! Let me help you!</i>\"");
 			}
-			outputText("\n\nToo late!  With a final groan and a rip, your pants give way to the force and power of your quickly hardening " + multiCockDescriptLight() + ", sending a cursed button flying asunder from your waistline. The button connects with Phylla's forehead with a mighty 'thwack' and careens off her skull.  Fortunately for you, and her, she's more fixated on what's coming out of your pants rather than the pants themselves.");
+			outputText("\n\nToo late!  With a final groan and a rip, your pants give way to the force and power of your quickly hardening [cocks], sending a cursed button flying asunder from your waistline. The button connects with Phylla's forehead with a mighty 'thwack' and careens off her skull.  Fortunately for you, and her, she's more fixated on what's coming out of your pants rather than the pants themselves.");
 			//Dick Size huge:
 			if (player.cockArea(x) >= 72) {
 				outputText("\n\nDespite the early warning, [eachCock] bursts outward and slams into her shoulder blade. \"<i>Ahh~tk!</i>\" She clicks, more in surprise than pain.  She rubs at her bruised shoulder, somewhat shocked that someone could possess THAT kind of ability.  \"<i>Oops</i>\", you playfully apologize.  Phylla looks completely awestruck and doesn't seem hear you as her large eyes are fixated on your enormous member");
@@ -543,7 +543,7 @@ package classes.Scenes.Areas.Desert
 				//Dick Size massive (first time male fuck, LF1): (It/They) swing downwards at her,
 				//causing her to unleash a surprised scream as she scrambles out of the way. Narrowly avoiding being smashed by the brutish, fleshy cudgel that is your loins as it swings downward in what arguably could have been a debilitating injury for Phylla.
 				//PC has more than one dick:
-				if (player.cockTotal() > 1) outputText("\n\nOverwhelmed by the sight of ONE of your members, Phylla arguably goes catatonic when she sees all of what your packing.  She probably won't be able to handle the one, let alone all of your " + multiCockDescriptLight() + "!");
+				if (player.cockTotal() > 1) outputText("\n\nOverwhelmed by the sight of ONE of your members, Phylla arguably goes catatonic when she sees all of what your packing.  She probably won't be able to handle the one, let alone all of your [cocks]!");
 				//Tentacle dick check for Dick Size Huge and Massive
 				//One penis longer than 8 feet, or two or more dicks that are 5 feet long:
 				if (player.tentacleCocks() > 0 || player.stamenCocks() > 0) {
@@ -579,7 +579,7 @@ package classes.Scenes.Areas.Desert
 		private function malePhyllaContinuation(x:int):void
 		{
 			clearOutput();
-			outputText("Phylla stares down at your " + multiCockDescriptLight() + " and starts nervously rubbing her hands together.  \"<i>It's my first time... I mean, I hope it isn't going to be bad for you...</i>\" she says, before trailing off; uncertain of her sexual prowess.");
+			outputText("Phylla stares down at your [cocks] and starts nervously rubbing her hands together.  \"<i>It's my first time... I mean, I hope it isn't going to be bad for you...</i>\" she says, before trailing off; uncertain of her sexual prowess.");
 			//Corruption less than 75:
 			if (player.cor < 75) outputText("\n\nYou assure her that she shouldn't worry so much about her first time.");
 			//Corruption more than 75:
@@ -606,7 +606,7 @@ package classes.Scenes.Areas.Desert
 
 			outputText("\n\nTrembling ever so slightly, her dripping ");
 			if (flags[kFLAGS.PHYLLA_EGG_LAYING] > 0) outputText("nipples and ");
-			outputText("wet vagina betray her timidness.  You move up along the bedding and brush your " + player.skinDesc + " against her own tender flesh.  Finally, you come to rest in the perfect position for penetration, Phylla looking over her shoulder at you with longing eyes and eager lips.  As you slide your tongue inside her mouth, you feel her twitch at the foreign sensation.  Closing her eyes, Phylla instantly melts like butter as your tongue finds hers of its own volition; clearly a turn for the better for you.  Phylla finally relaxes her legs and spreads them apart; the foreign sense of humid heat from her genitals registering as it warms your nethers.");
+			outputText("wet vagina betray her timidness.  You move up along the bedding and brush your [skin.type] against her own tender flesh.  Finally, you come to rest in the perfect position for penetration, Phylla looking over her shoulder at you with longing eyes and eager lips.  As you slide your tongue inside her mouth, you feel her twitch at the foreign sensation.  Closing her eyes, Phylla instantly melts like butter as your tongue finds hers of its own volition; clearly a turn for the better for you.  Phylla finally relaxes her legs and spreads them apart; the foreign sense of humid heat from her genitals registering as it warms your nethers.");
 			//(Radar note:
 			//Because Phylla is a virgin, I wouldn't go past 2 inches total width for two dick penetration; you're taking her virginity, so that will be painful enough.
 			//@FEN: Please note the following coding calls for two dicks that are less than two inches in total width.)
@@ -757,11 +757,11 @@ package classes.Scenes.Areas.Desert
 		private function cuntmuffinLingusPhyllaDickBig():void
 		{
 			clearOutput();
-			outputText("Sadly, as you gaze down at your " + multiCockDescriptLight() + ", you realize that trying to penetrate Phylla with your freakishly large prick");
+			outputText("Sadly, as you gaze down at your [cocks], you realize that trying to penetrate Phylla with your freakishly large prick");
 			if (player.cockTotal() > 1) outputText("s");
 			outputText(" isn't going to work.  Phylla's eyes begin to tear up as she also comes to the realization that her first time is a non-starter.");
 			outputText("\n\nNot wanting to leave her virgin night a bust you playfully push her back onto the cushioned floor, causing her to land bottom first.  Confusion washes over her as she struggles to understand what you are planning to do; something that's further exacerbated when you lay down next to her.  Awkwardly you roll over on your back, doing your best not to knock over any furniture in the process.");
-			outputText("\n\n\"<i>W-What are you doing?</i>\" she asks, somewhat upset that she won't be getting the traditional first time sex.  Arcing your " + multiCockDescriptLight() + ", you ");
+			outputText("\n\n\"<i>W-What are you doing?</i>\" she asks, somewhat upset that she won't be getting the traditional first time sex.  Arcing your [cocks], you ");
 			//Dick Size Over 48 but Under 69 inches:
 			if (player.longestCockLength() < 69) {
 				outputText("angle your hips so that ");
@@ -869,8 +869,8 @@ package classes.Scenes.Areas.Desert
 			outputText(" has taken");
 			outputText(" hold of ");
 			//One dick only:
-			if (player.cockTotal() == 1) outputText("your " + cockDescript(0) + ".");
-			else outputText("your " + cockDescript(0) + " leaving the lucky member to bask in affectionate glory as the rest of your manhood laments being left out.  \"<i>Don't worry, I have four hands...</i>\" Phylla coos as she works your shaft.");
+			if (player.cockTotal() == 1) outputText("your [cock].");
+			else outputText("your [cock] leaving the lucky member to bask in affectionate glory as the rest of your manhood laments being left out.  \"<i>Don't worry, I have four hands...</i>\" Phylla coos as she works your shaft.");
 			outputText("\n\nYour body is moving on its own as you writhe in pleasure, Phylla continuing her loving, unending assault on your nethers.  In a moment of clarity your mind snaps into focus.  Your move!");
 			outputText("\n\nYou thrust your head between her legs and, pursing your lips, grasp her clit. You can guess it's almost two or three inches in length.  As you start sucking it you can feel the surge of pleasure crash into Phylla's mind, and a loud vocalization that sounds like a mix between a moan and an 'Eeep!'.  She momentarily stops her work on you and just starts moaning loudly.  You move your fingers and spread her open, just as she did to you.  Gently, the index finger currently on her sex maneuvers over the threshold of her lips, running it up and down, whilst you continue to suck on her long clit.  The mental directive from your lover to penetrate her registers in your mind, and you happily oblige.  Quickly and expertly you move your finger along the sensitive insides of her love canal, feeling the mounting pleasure filling her in your mind.");
 			outputText("\n\nYour tongue runs up, down and all around her tender clit as you continue to suckle it.  The sensation of being out of your body almost takes control for a moment as you lovingly bite down on her clit and shove your fingers deep into her, realizing that Phylla exerted a momentary degree of control over your own actions.  Getting the general idea,you start to thrust your fingers deeper and deeper as you suck her clit harder and harder, your hands moving at blinding speed as you finger your new lover.");
@@ -879,18 +879,18 @@ package classes.Scenes.Areas.Desert
 			//(If dick(s) (is/are) huge, length unknown - Jump to - Dick(s) too Big)
 			if (player.smallestCockArea() > phyllaCapacity()) {
 				//Dicks too Big:
-				outputText("\n\nDespite your best efforts to try and get into a comfortable position to scissor, your painfully erect  " + multiCockDescriptLight() + " prevent you from doing so, given that they are now compressed against the ceiling.  While the display of rainbows is pretty to watch on your " + multiCockDescriptLight() + ", the crushing pain and the unyielding nature of your " + multiCockDescriptLight() + " is too much.  ");
+				outputText("\n\nDespite your best efforts to try and get into a comfortable position to scissor, your painfully erect  [cocks] prevent you from doing so, given that they are now compressed against the ceiling.  While the display of rainbows is pretty to watch on your [cocks], the crushing pain and the unyielding nature of your [cocks] is too much.  ");
 
 				//Horse: (Cont from ...is too much.)
 				if (player.isTaur()) outputText("Seeing your impending predicament, Phylla quickly scrambles with all four of her arms to collect a bunch of cushions.  She stacks them in a makeshift 'resting place' and helps you into a comfortable position as your cocks precede to grow uncontrollably.");
 				//Drider body:
-				else if (player.isDrider()) outputText("Phylla immediately realizes this, and flips you over so that you are resting on your head and neck, ducking in past your " + multiCockDescriptLight() + " and coming to rest on the border between your spider carapace and soft clit.");
+				else if (player.isDrider()) outputText("Phylla immediately realizes this, and flips you over so that you are resting on your head and neck, ducking in past your [cocks] and coming to rest on the border between your spider carapace and soft clit.");
 				//Goo body:
 				else if (player.isGoo()) outputText("Phylla immediately realizes this, and flips you over so that you are resting on your head and neck, and she works her way through your goopy mass, connecting her clit with yours in little time or effort. \"<i>This is a little weird... but I like it...</i>\" she flirts. Hardening your mass slightly, you snugly secure Phylla against your body, telling her that things \"might\" get rough.");
 				//Human/Harpy/Naga legs:
 				else outputText("Phylla immediately realizes this, and flips you over so that you are resting on your head and neck, and curls your [legs] towards her.");
 
-				outputText("  Your " + multiCockDescriptLight() + " now resting comfortably out of the open room, Phylla positions herself to scissor your pussy.");
+				outputText("  Your [cocks] now resting comfortably out of the open room, Phylla positions herself to scissor your pussy.");
 				outputText("\n\n\"<i>Y-you had me worried for a second. I mean, I've never seen something... So <b>big!</b></i>\" she teases.");
 				//(Transitions to Freakishly huge dick(s):)
 			}
@@ -909,7 +909,7 @@ package classes.Scenes.Areas.Desert
 			//If PC does not have an appropriately sized dick(s): Ignore following section and proceed to Scissoring Continuation, below.
 			//If PC has an appropriately sized dick(s):
 			else {
-				outputText("\n\n[EachCock] hungers for attention, having been let go by Phylla when you shifted into a scissoring position.  Reaching down to start taking care of yourself; Phylla interrupts you abruptly.  \"<i>Oh, I'm sorry! I mean... I forgot... just feels... so gooood,</i>\" she coos between moans of ecstasy.  After a moment she seems to forget as waves of pleasure wash over her.  You make a playful throat clearing noise and gesture to your " + multiCockDescriptLight() + ".  Phylla quickly snaps back into reality and takes hold of ");
+				outputText("\n\n[EachCock] hungers for attention, having been let go by Phylla when you shifted into a scissoring position.  Reaching down to start taking care of yourself; Phylla interrupts you abruptly.  \"<i>Oh, I'm sorry! I mean... I forgot... just feels... so gooood,</i>\" she coos between moans of ecstasy.  After a moment she seems to forget as waves of pleasure wash over her.  You make a playful throat clearing noise and gesture to your [cocks].  Phylla quickly snaps back into reality and takes hold of ");
 				//Tentacle dick check
 				if (player.tentacleCocks() > 0 || player.stamenCocks() > 0) {
 					//PC has (a) Tentacle dick(s):
@@ -934,7 +934,7 @@ package classes.Scenes.Areas.Desert
 				else {
 					//PC has one/two dick(s) not exceeding 4 inches in width total:
 					if (player.cockTotal() == 2 && (player.cockArea(player.smallestCockIndex2()) + player.cockArea(player.smallestCockIndex()) <= phyllaCapacity()))
-						outputText("two of your " + multiCockDescriptLight() + ", stroking them apologetically as she scissors you.  You feel her almost insatiable appetite for all parts of your body.  You feel Phylla's mind slowly becoming lost in pleasure.");
+						outputText("two of your [cocks], stroking them apologetically as she scissors you.  You feel her almost insatiable appetite for all parts of your body.  You feel Phylla's mind slowly becoming lost in pleasure.");
 					//TODO: "player.cocks[player.smallestCockIndex()] < 4" changed to cockLength. Not sure if it is the appropriate attribute.
 					else if (player.cocks[player.smallestCockIndex()].cockLength < 4) outputText("your " + cockDescript(player.smallestCockIndex()) + ", stroking it apologetically as she scissors you.  You feel her almost insatiable appetite for all parts of your body.  You feel Phylla's mind slowly becoming lost in pleasure.");
 					//PC only has a dick(s) that('s) (are) more than 4 inches in width:
@@ -1417,12 +1417,12 @@ package classes.Scenes.Areas.Desert
 			var x:int = player.smallestCockIndex();
 			//Dick size less than 60 inches:
 			if (player.cockArea(x) < 60) {
-				outputText("\n\nWithout even having to utter a word, Phylla jumps right in and starts to work your " + multiCockDescriptLight() + " free of ");
+				outputText("\n\nWithout even having to utter a word, Phylla jumps right in and starts to work your [cocks] free of ");
 				if (player.cockTotal() == 1) outputText("its");
 				else outputText("their");
 				outputText(" oppressive trappings. You can feel her undoing the straps of your clothes before gazing at the significantly larger bulge that is held behind the fabric of underwear.  \"<i>How many layers of wrapping do you have on this thing?</i>\"  Phylla jokingly teases, hints of her shy and nervous nature can be heard as she fools around with you.");
 
-				outputText("\n\nWith both sets of fingers placed in the fabric band of your undergarments, Phylla pulls downward and releases your " + multiCockDescriptLight() + ", ");
+				outputText("\n\nWith both sets of fingers placed in the fabric band of your undergarments, Phylla pulls downward and releases your [cocks], ");
 				if (player.cockTotal() > 1) outputText("all ");
 				outputText("bobbing up");
 				//Dick size less than 5 inches:
@@ -1442,17 +1442,17 @@ package classes.Scenes.Areas.Desert
 					outputText(" can get.  Chuckling at her ignorance, you tell Phylla she'd better back up.  Phylla rolls her eyes and looks up at you, giving you an unamused look.");
 
 					outputText("\n\n\"<i>I-It can't be THAT big, [name]...</i>\"  She chiddingly remarks, causing you to raise an eyebrow in eager amusement.  You know she's not ready to meet the challenge you're about to unleash upon her.");
-					outputText("\n\nYou work to release yourself from your clothing.  Once you're completely free you watch as Phylla's eyes widen in horror.  Smiling, you start to stroke your " + multiCockDescriptLight() + " and work ");
+					outputText("\n\nYou work to release yourself from your clothing.  Once you're completely free you watch as Phylla's eyes widen in horror.  Smiling, you start to stroke your [cocks] and work ");
 					if (player.cockTotal() == 1) outputText("it");
 					else outputText("them");
 					outputText(" up to a full raging erection, achieving your maximum state of \"<i>readiness</i>\" in no time at all.");
 
-					outputText("\n\nDumbfounded, Phylla stares in awe at how big your " + multiCockDescriptLight() + " can really get; you can see the look of complete intimidation on her face and who could blame her?  You've seen ship cannons that pale in comparison to your man meat.");
+					outputText("\n\nDumbfounded, Phylla stares in awe at how big your [cocks] can really get; you can see the look of complete intimidation on her face and who could blame her?  You've seen ship cannons that pale in comparison to your man meat.");
 					//If multiple cocks:
 					if (player.cockTotal() > 1) {
 						outputText("\n\nShe's staring down a mighty series of threatening fleshy spears.");
 					}
-					outputText("\n\n\"<i>I don't know if I can... wow...</i>\" She sputters out.  Laughing out loud, you grin down at her and inform her that, in this instance, her slight ignorance IS bliss.  Twitching the muscles in your " + multiCockDescriptLight() + " to bob a bit in her face you let her know that you rose to the challenge; now it's time for her to \"<i>fulfill</i>\" her end of the bargain: the cock end that is.");
+					outputText("\n\n\"<i>I don't know if I can... wow...</i>\" She sputters out.  Laughing out loud, you grin down at her and inform her that, in this instance, her slight ignorance IS bliss.  Twitching the muscles in your [cocks] to bob a bit in her face you let her know that you rose to the challenge; now it's time for her to \"<i>fulfill</i>\" her end of the bargain: the cock end that is.");
 				}
 				//Dick size more than 60 inches (subsequent blowjobs):
 				else {
@@ -1463,7 +1463,7 @@ package classes.Scenes.Areas.Desert
 					if (player.cockTotal() == 1) outputText("that monster");
 					else outputText("those monsters");
 					outputText(", but p-please be careful about my valuables.</i>\"  Phylla asks nervously.");
-					outputText("\n\nYou tell her that as long as she's helping, there shouldn't be any \"<i>accidents.</i>\"  With synchronous effort, your hulking " + multiCockDescriptLight() + " ");
+					outputText("\n\nYou tell her that as long as she's helping, there shouldn't be any \"<i>accidents.</i>\"  With synchronous effort, your hulking [cocks] ");
 					if (player.cockTotal() == 1) outputText("is");
 					else outputText("are");
 					outputText(" freed once more, ready and raring to \"re-acquaint\" with Phylla.  Taking the hint, Phylla closes in and takes the ");
@@ -1735,7 +1735,7 @@ package classes.Scenes.Areas.Desert
 					//(Transitions to Vagina Dialog)
 				}
 				else {
-					outputText("\n\nYou look at Phylla and shrug at her, telling her you aren't sure if you can do that, given that you have some... 'members' that are feeling a little left out.  With a flirty yet annoyed expression,  your lover reaches down and takes hold of your unloved  " + multiCockDescriptLight() + ".  She coos as she starts to pump ");
+					outputText("\n\nYou look at Phylla and shrug at her, telling her you aren't sure if you can do that, given that you have some... 'members' that are feeling a little left out.  With a flirty yet annoyed expression,  your lover reaches down and takes hold of your unloved  [cocks].  She coos as she starts to pump ");
 					if (player.cockTotal() == 2) outputText("it");
 					else outputText("them");
 					outputText("slowly.");
@@ -2065,7 +2065,7 @@ package classes.Scenes.Areas.Desert
 			outputText("\n\nYour " + clitDescript() + " comes to rest on her lips again as her head starts to bob between her own strong legs.  Returning the sentiment, you dart in-between her legs, tongue first.  You hit that sweet tasting little pussy of hers with force.  Phylla moans, your intentions crystal clear as she bears down on your pussy hard, intently working for your sexual release.  She reaches up with her lower set of arms and gives both your " + nippleDescript(0) + "s a firm squeeze, the twist of which is nothing short of exquisite.  Muffled moans of bliss are unintelligible, but in your shared mind-state, you can hear one another screaming words of encouragement and direction.");
 
 			//If PC has (a) Dick(s), that are less than 42 inches:
-			if (player.cockTotal() > 0 && player.cockThatFits(42) >= 0) outputText("\n\nWithout warning, Phylla begins to alternate between giving your " + clitDescript() + " oral and sucking your " + multiCockDescriptLight() + "; the dual stimulation overwhelms you as she devilishly teases your sexes.");
+			if (player.cockTotal() > 0 && player.cockThatFits(42) >= 0) outputText("\n\nWithout warning, Phylla begins to alternate between giving your " + clitDescript() + " oral and sucking your [cocks]; the dual stimulation overwhelms you as she devilishly teases your sexes.");
 			outputText("\n\nYou recall the tip of her abdomen being particularly sensitive as you reach up overhead. Your arm can barely reach it, but as if she knew what you were trying accomplish, Phylla curls her abdomen just enough so you can start to stroke her birthing slit.  At your caress, Phylla shudders and deeply exhales into your cunt, sending a shiver up your spine. Continuing like this, you both quickly build up orgasms.");
 
 			outputText("\n\nHowling in delight, both of you twitch and writhe as the pure bliss of climax seizes your bodies, drooling and squirting lady fluids against each other's faces.");
@@ -2074,16 +2074,16 @@ package classes.Scenes.Areas.Desert
 			if (player.cockTotal() > 0 && player.cockThatFits(42) >= 0) {
 				outputText("\n\nMoaning savagely, Phylla pops ");
 				if (player.cockThatFits2(42) >= 0) outputText("two of ");
-				outputText("your " + multiCockDescriptLight() + " into her mouth and mashes ");
+				outputText("your [cocks] into her mouth and mashes ");
 				if (player.cockThatFits2(42) >= 0) outputText("them");
 				else outputText("it");
 				outputText(" against the back of her throat.  Unable to contain the pleasure from this, you howl and blow your hot load into her throat.");
 			}
-			else if (player.hasCock()) outputText("\n\nFeeling your own " + multiCockDescriptLight() + " about to erupt, you quickly roll off your lover.  Just in time, too - you fire your jizzum up at the ceiling, coating it quite well before your salty load falls back down on top of the two of you.");
+			else if (player.hasCock()) outputText("\n\nFeeling your own [cocks] about to erupt, you quickly roll off your lover.  Just in time, too - you fire your jizzum up at the ceiling, coating it quite well before your salty load falls back down on top of the two of you.");
 
 			//PC dick is out in the hallway:
 			if (player.biggestCockArea() >= 500) {
-				outputText("\n\nYour " + multiCockDescriptLight() + " twitches with orgasmic release, bulging as your load works its way through your urethra");
+				outputText("\n\nYour [cocks] twitches with orgasmic release, bulging as your load works its way through your urethra");
 				if (player.cockTotal() > 1) outputText("s");
 				outputText(".  With a heavy heave, you feel the hot and sticky ejaculate launch from your dick, hitting the interior decorations as you do so; what exactly you hit, you can't say... but you'll likely be tripping over your mess on the way out.");
 			}
@@ -2176,7 +2176,7 @@ package classes.Scenes.Areas.Desert
 
 			outputText("\n\nHaving his kiss stolen from him, the ant who was kissing Phylla grabs his nearest brother and shoves his tongue into his mouth.  The two ants who were being jacked off by their mother's smaller hands now find themselves neglected since she's using them to pleasure their brother as he thrusts between her breasts.  Having their own needs, the larger of the two lies down so his brother can lie down reverse on top of him; they immediately start to suck one another off in a sixty-nine position.");
 
-			outputText("\n\nIt's then that you realize you're still completely clothed!  How inconsiderate of you.  You quickly shed your " + player.armorName + ".  Finding your own cock");
+			outputText("\n\nIt's then that you realize you're still completely clothed!  How inconsiderate of you.  You quickly shed your [armor].  Finding your own cock");
 			if (player.cockTotal() > 1) outputText("s");
 			outputText(" stiff and longing for immersion into this orgy, you just need to find an opening.  Walking over to Phylla, you tap the ant getting a tit fuck on the shoulder.  Without a second thought, he stands aside for you, letting his balls slip out of Phylla's mouth with an audible pop.  You grin down at Phylla, seeing that she's now completely lost and just enjoying herself.  It's at this moment that you feel shadows looming behind you.  Before you can react, hands reach down and start lovingly stroking [oneCock].");
 

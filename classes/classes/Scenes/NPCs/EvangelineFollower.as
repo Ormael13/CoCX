@@ -118,7 +118,7 @@ public function Nie2():void
 public function meetEvangeline():void {
 	clearOutput()
 	outputText("Deciding to visit your camp transformation expert you called Evangeline. Shortly after that she slowly walks toward you.\n\n");
-	outputText("\"<i>Hi " + player.short + "!  Anything I can help you with?</i>\"");
+	outputText("\"<i>Hi [name]!  Anything I can help you with?</i>\"");
 	menu();
 	addButton(0, "Appearance", evangelineAppearance, null, null, null, "Examine Evangeline's detailed appearance.");
 	addButton(1, "Talk", evangelineTalkMenu, null, null, null, "Ask Evangeline about something.");
@@ -273,7 +273,7 @@ private function LightSpar():void {
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 8) outputText("Evangeline adjusts her lusty maiden's armor");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5 && flags[kFLAGS.EVANGELINE_LVL_UP] < 8) outputText("Evangeline adjusts her practically indecent steel armor");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] < 5) outputText("Evangeline adjusts her rags");
-	outputText(" and after stretching a few times she’s finished her warm up.  You raise your " + player.weaponName + " and prepare to fight.  It's on!");
+	outputText(" and after stretching a few times she’s finished her warm up.  You raise your [weapon] and prepare to fight.  It's on!");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] < 7) startCombat(new Evangeline1());
 	else if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 7 && flags[kFLAGS.EVANGELINE_LVL_UP] < 12) startCombat(new Evangeline2())
 	else startCombat(new Evangeline3());
@@ -283,7 +283,7 @@ private function LightSpar():void {
 }
 //może jak bedzie mieć bimbo body to uaktywnić hard spar a w light spar zmienić odnośnik na Evangeline2?
 private function HardSpar():void {
-	outputText("Evangeline adjusts her lusty maiden's armor and after stretching few times she finished her warm up.  You raise your " + player.weaponName + " and prepare to fight.  It's on!");
+	outputText("Evangeline adjusts her lusty maiden's armor and after stretching few times she finished her warm up.  You raise your [weapon] and prepare to fight.  It's on!");
 	if (flags[kFLAGS.EVANGELINE_LVL_UP] < 12) startCombat(new Evangeline2());
 	else startCombat(new Evangeline3());
 	evangelineAffection(10);
@@ -516,7 +516,7 @@ private function MakingWhiteInkPotion():void {
 
 private function LvLUp():void {
 	clearOutput();
-	outputText("\"<i>So " + player.short + " how much gems will you give me this time for my recovery or new experiments?</i>\" Asks Evangeline waiting for your decision.");
+	outputText("\"<i>So [name] how much gems will you give me this time for my recovery or new experiments?</i>\" Asks Evangeline waiting for your decision.");
 	outputText("\n\nEvangeline gem purse: " + flags[kFLAGS.EVANGELINE_GEMS_PURSE] + " gems");
 	menu();
 	if (player.gems > 1) addButton(0, "1 gem", Give1Gem, null, null, null, "Give Evangeline 1 gem.");

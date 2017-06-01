@@ -397,7 +397,7 @@
 			player.short = mainView.nameBox.text;
 			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) { //Dirty checking as the NG+ flag is incremented after reincarnating.
 				clearOutput();
-				outputText("You shall be known as " + player.short + " now.");
+				outputText("You shall be known as [name] now.");
 				ascensionMenu();
 				return;
 			}
@@ -757,7 +757,7 @@
 			outputText("You can finalize your appearance customization before you proceed to perk selection. You will be able to alter your appearance through the usage of certain items.\n\n");
 			outputText("Height: " + Math.floor(player.tallness / 12) + "'" + player.tallness % 12 + "\"\n");
 			outputText("Skin tone: " + player.skinTone + "\n");
-			outputText("Hair color: " + player.hairColor + "\n");
+			outputText("Hair color: [haircolor]\n");
 			if (player.hasCock()) {
 				outputText("Cock size: " + player.cocks[0].cockLength + "\" long, " + player.cocks[0].cockThickness + "\" thick\n");
 			}
